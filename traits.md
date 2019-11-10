@@ -38,6 +38,7 @@
         - [`accumulate_until_1`](#accumulate_until_1)
         - [`accumulate_until_2`](#accumulate_until_2)
   - [Code smells](#code-smells)
+    - [`suggest_conditional_expression`](#suggest_conditional_expression)
 - [Contributing](#contributing)
 
 # Introduction
@@ -860,6 +861,44 @@ accumulate_until_2: 3-7
 ```
 
 ## Code smells
+
+##### `suggest_conditional_expression`
+
+When a conditional consists solely in assigning different values to the same variable, it may be rewritten as a conditional expression.
+
+###### Regex
+
+```re
+        ^(.*)/_type='If'
+\n(?:.+\n)*\1/lineno=(?P<LINE>\d+)
+\n(?:.+\n)*\1/orelse/length=1
+\n(?:.+\n)*\1/orelse/0/_type='Assign'
+\n(?:.+\n)*\1/orelse/0/lineno=(?P<LINE>\d+)
+\n(?:.+\n)*\1/orelse/0/targets/hash=(?P<HASH>.+)
+\n(?:.+\n)*\1/body/0/_type='Assign'
+\n(?:.+\n)*\1/body/0/targets/hash=(?P=HASH)
+```
+
+###### Example
+
+```python
+1   if condition:
+2       a = 1
+3   else:
+4       a = 2
+```
+
+May be rewritten as:
+
+```python
+1   a = (1 if condition else 2)
+```
+
+###### Matches
+
+```markdown
+suggest_conditional_expression: 1-4
+```
 
 # Contributing
 
