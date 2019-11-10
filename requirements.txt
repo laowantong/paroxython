@@ -1,0 +1,4 @@
+ast2json==0.2.1
+md-toc==6.0.0
+pytest==5.2.1
+regex==2019.6.8
