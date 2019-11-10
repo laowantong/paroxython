@@ -76,7 +76,7 @@ class Parser:
                 for suffix in d.get("SUFFIX", [""]):
                     if suffix:
                         suffix = f"-{suffix}"
-                    lines = "-".join(sorted(d["LINE"]))
+                    lines = "-".join(map(str, sorted(map(int, d["LINE"]))))
                     result[label + suffix].append(lines)
         for label in result:
             result[label] = ", ".join(result[label])
