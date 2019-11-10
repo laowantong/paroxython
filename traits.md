@@ -39,6 +39,7 @@
         - [`accumulate_until_2`](#accumulate_until_2)
   - [Code smells](#code-smells)
     - [`suggest_conditional_expression`](#suggest_conditional_expression)
+    - [`suggest_condition_return`](#suggest_condition_return)
 - [Contributing](#contributing)
 
 # Introduction
@@ -875,6 +876,7 @@ When a conditional consists solely in assigning different values to the same var
 \n(?:.+\n)*\1/orelse/0/_type='Assign'
 \n(?:.+\n)*\1/orelse/0/lineno=(?P<LINE>\d+)
 \n(?:.+\n)*\1/orelse/0/targets/hash=(?P<HASH>.+)
+\n(?:.+\n)*\1/body/length=1
 \n(?:.+\n)*\1/body/0/_type='Assign'
 \n(?:.+\n)*\1/body/0/targets/hash=(?P=HASH)
 ```
@@ -886,9 +888,21 @@ When a conditional consists solely in assigning different values to the same var
 2       a = 1
 3   else:
 4       a = 2
+5
+6   if condition:
+7       a = 1
+8       b = 0
+9   else:
+10      a = 2
+11
+12  if condition:
+13      a = 1
+14  else:
+15      b = 0
+16      a = 2
 ```
 
-May be rewritten as:
+The first conditional (only) may be rewritten as:
 
 ```python
 1   a = (1 if condition else 2)
@@ -898,6 +912,54 @@ May be rewritten as:
 
 ```markdown
 suggest_conditional_expression: 1-4
+```
+
+##### `suggest_condition_return`
+
+When a predicate ends with a conditional whose sole purpose is returning `True` or `False`, it is enough to return the condition.
+
+###### Regex
+
+```re
+        ^(.*)/_type='If'
+\n(?:.+\n)*\1/lineno=(?P<LINE>\d+)
+\n(?:.+\n)*\1/orelse/0/_type='Return'
+\n(?:.+\n)*\1/orelse/0/lineno=(?P<LINE>\d+)
+\n(?:.+\n)*\1/orelse/0/value/value=(?P<BOOL>True|False) # name BOOL the value used here
+\n(?:.+\n)*\1/body/0/_type='Return'
+\n(?:.+\n)*\1/body/0/value/value=(True|False)(?<!(?P=BOOL)) # and check not BOOL is used there
+```
+
+###### Example
+
+```python
+1   def foo():
+2       if condition:
+3           return True
+4       else:
+5           return False
+6
+7   def bar():
+8       if condition:
+9           return True
+10      else:
+11          return False
+```
+
+May be rewritten as:
+
+```python
+1   def foo():
+2       return condition
+3
+4   def bar():
+5       return not condition
+```
+
+###### Matches
+
+```markdown
+suggest_condition_return: 2-5, 8-11
 ```
 
 # Contributing
