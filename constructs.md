@@ -3,7 +3,7 @@
   - [Expressions](#expressions)
     - [Construct `builtin_function_call`](#construct-builtin_function_call)
     - [Construct `unary_substraction`](#construct-unary_substraction)
-    - [Construct `nested_calls`](#construct-nested_calls)
+    - [Construct `function_composition`](#construct-function_composition)
   - [Statements](#statements)
     - [Assignments](#assignments)
       - [Construct `global_constant_definition`](#construct-global_constant_definition)
@@ -97,7 +97,9 @@ builtin_function_call-print: 1, 2
 unary_substraction: 1, 2
 ```
 
-##### Construct `nested_calls`
+##### Construct `function_composition`
+
+Apply a function to an expression involving the result of another function application, without using an intermediate variable.
 
 ###### Regex
 
@@ -118,7 +120,7 @@ unary_substraction: 1, 2
 ###### Matches
 
 ```markdown
-nested_calls: 1, 3
+function_composition: 1, 3
 ```
 
 ## Statements
