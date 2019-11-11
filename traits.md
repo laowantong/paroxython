@@ -21,7 +21,7 @@
       - [`if_else`](#if_else)
     - [Iterations](#iterations)
       - [`for_each`](#for_each)
-      - [`for_range_stop` ](#for_range_stop )
+      - [`for_range_stop`](#for_range_stop)
       - [`for_range_start`](#for_range_start)
       - [`for_range_step`](#for_range_step)
       - [`for_range_backwards`](#for_range_backwards)
@@ -453,7 +453,7 @@ Iterate over the elements of a (named) collection.
 for_each: 1, 4
 ```
 
-##### `for_range_stop` 
+##### `for_range_stop`
 
 Iterate over a range with exactly 1 argument (stop).
 
