@@ -10,8 +10,12 @@ def reformat_file(construct_path):
     with open("constructs.md") as f:
         text = f.read()
     toc = build_toc("constructs.md", keep_header_levels=5, no_list_coherence=True)
+    rule = "-" * 80 + "\n"
+    text = regex.sub(r"(?m)^---+\n", "", text)
     text = regex.sub(r"(?ms).*?^(?=# )", fr"{toc}\n\n", text, count=1)
     text = regex.sub(r"(?m)\s+^(#+ .+)\s+", fr"\n\n\1\n\n", text)
+    text = regex.sub(r"(?ms)(```markdown.+?```.+?)(^\#{1,4} )", fr"\1{rule}\n\2", text)
+    text = regex.sub(r"(?=\n\#{5} )", fr"\n{rule}", text)
     with open("constructs.md", "w") as f:
         f.write(text)
 

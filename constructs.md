@@ -50,6 +50,8 @@
 
 ## Expressions
 
+--------------------------------------------------------------------------------
+
 ##### Construct `builtin_function_call`
 
 ###### Regex
@@ -74,6 +76,8 @@ builtin_function_call-len: 1
 builtin_function_call-print: 1, 2
 ```
 
+--------------------------------------------------------------------------------
+
 ##### Construct `unary_substraction`
 
 ###### Regex
@@ -96,6 +100,8 @@ builtin_function_call-print: 1, 2
 ```markdown
 unary_substraction: 1, 2
 ```
+
+--------------------------------------------------------------------------------
 
 ##### Construct `function_composition`
 
@@ -123,9 +129,13 @@ Apply a function to an expression involving the result of another function appli
 function_composition: 1, 3
 ```
 
+--------------------------------------------------------------------------------
+
 ## Statements
 
 ### Assignments
+
+--------------------------------------------------------------------------------
 
 ##### Construct `global_constant_definition`
 
@@ -152,6 +162,8 @@ function_composition: 1, 3
 ```markdown
 global_constant_definition: 1, 2, 3
 ```
+
+--------------------------------------------------------------------------------
 
 ##### Construct `global_variable_definition`
 
@@ -181,6 +193,8 @@ global_constant_definition: 1, 2, 3
 global_variable_definition: 2, 3, 6, 7
 ```
 
+--------------------------------------------------------------------------------
+
 ##### Construct `assignment`
 
 ###### Regex
@@ -204,6 +218,8 @@ global_variable_definition: 2, 3, 6, 7
 assignment: 1, 2, 3
 ```
 
+--------------------------------------------------------------------------------
+
 ##### Construct `augmented_assignment`
 
 ###### Regex
@@ -225,6 +241,8 @@ assignment: 1, 2, 3
 ```markdown
 augmented_assignment: 1
 ```
+
+--------------------------------------------------------------------------------
 
 ##### Construct `swapping`
 
@@ -258,6 +276,8 @@ Swap two variables or two elements of an array with a 2-element tuple or list.
 swapping: 1, 2, 3, 4
 ```
 
+--------------------------------------------------------------------------------
+
 ##### Construct `negation`
 
 Update a variable by negating it.
@@ -288,7 +308,11 @@ Update a variable by negating it.
 negation: 1, 2
 ```
 
+--------------------------------------------------------------------------------
+
 ### Function definitions
+
+--------------------------------------------------------------------------------
 
 ##### Construct `function_definition`
 
@@ -311,6 +335,8 @@ negation: 1, 2
 ```markdown
 function_definition: 1
 ```
+
+--------------------------------------------------------------------------------
 
 ##### Construct `recursive_function_definition`
 
@@ -338,6 +364,8 @@ function_definition: 1
 ```markdown
 recursive_function_definition: 1-3
 ```
+
+--------------------------------------------------------------------------------
 
 ##### Construct `deeply_recursive_function_definition`
 
@@ -370,7 +398,11 @@ Any function `f` which contains a nested call to itself (`f(..., f(...), ...)`),
 deeply_recursive_function_definition: 1-3
 ```
 
+--------------------------------------------------------------------------------
+
 ### Conditionals
+
+--------------------------------------------------------------------------------
 
 ##### Construct `if`
 
@@ -397,6 +429,8 @@ deeply_recursive_function_definition: 1-3
 ```markdown
 if: 1, 2
 ```
+
+--------------------------------------------------------------------------------
 
 ##### Construct `if_else`
 
@@ -426,7 +460,11 @@ if: 1, 2
 if_else: 1
 ```
 
+--------------------------------------------------------------------------------
+
 ### Iterations
+
+--------------------------------------------------------------------------------
 
 ##### Construct `for_each`
 Iterate over the elements of a (named) collection.
@@ -454,6 +492,8 @@ Iterate over the elements of a (named) collection.
 ```markdown
 for_each: 1, 4
 ```
+
+--------------------------------------------------------------------------------
 
 ##### Construct `for_range_stop`
 
@@ -487,6 +527,8 @@ Iterate over a range with exactly 1 argument (stop).
 for_range_stop: 1
 ```
 
+--------------------------------------------------------------------------------
+
 ##### Construct `for_range_start`
 
 Iterate over a range with exactly 2 arguments (start, stop).
@@ -519,6 +561,8 @@ Iterate over a range with exactly 2 arguments (start, stop).
 for_range_start: 3
 ```
 
+--------------------------------------------------------------------------------
+
 ##### Construct `for_range_step`
 
 Iterate over a range with 3 arguments (start, stop, step).
@@ -550,6 +594,8 @@ Iterate over a range with 3 arguments (start, stop, step).
 ```markdown
 for_range_step: 5, 7
 ```
+
+--------------------------------------------------------------------------------
 
 ##### Construct `for_range_backwards`
 
@@ -585,6 +631,8 @@ Iterate over a range with a negative step.
 for_range_backwards: 8
 ```
 
+--------------------------------------------------------------------------------
+
 ##### Construct `for_index_values`
 
 Iterate over index numbers and elements of a collection.
@@ -610,11 +658,15 @@ Iterate over index numbers and elements of a collection.
 for_index_values: 1
 ```
 
+--------------------------------------------------------------------------------
+
 ## Code patterns
 
 ### Iterative patterns
 
 #### Sequential loops
+
+--------------------------------------------------------------------------------
 
 ##### Construct `accumulate_for_1`
 
@@ -649,6 +701,8 @@ An accumulation pattern where an augmented assignment is used to update the accu
 ```markdown
 accumulate_for_1: 3-4, 6-7
 ```
+
+--------------------------------------------------------------------------------
 
 ##### Construct `accumulate_for_2`
 
@@ -686,6 +740,8 @@ An accumulation pattern with an assignment whose RHS contains both the accumulat
 accumulate_for_2: 3-4, 6-7
 ```
 
+--------------------------------------------------------------------------------
+
 ##### Construct `universal_quantifier`
 
 Check if all the elements of a collection satisfy a predicate.
@@ -718,6 +774,8 @@ Check if all the elements of a collection satisfy a predicate.
 ```markdown
 universal_quantifier: 2-5
 ```
+
+--------------------------------------------------------------------------------
 
 ##### Construct `existential_quantifier`
 
@@ -752,6 +810,8 @@ Check if any element of a collection satisfies a predicate.
 existential_quantifier: 2-5
 ```
 
+--------------------------------------------------------------------------------
+
 ##### Construct `find_first_element`
 
 Linear search. Return the first element of a sequence satisfying a predicate.
@@ -785,7 +845,11 @@ Linear search. Return the first element of a sequence satisfying a predicate.
 find_first_element: 2-4
 ```
 
+--------------------------------------------------------------------------------
+
 #### Non sequential loops
+
+--------------------------------------------------------------------------------
 
 ##### Construct `accumulate_until_1`
 
@@ -826,6 +890,8 @@ Accumulate the inputs until a sentinel value is encountered (accumulation expres
 accumulate_until_1: 3-7
 ```
 
+--------------------------------------------------------------------------------
+
 ##### Construct `accumulate_until_2`
 
 Accumulate the inputs until a sentinel value is encountered (accumulation expressed by: `acc += x`).
@@ -865,11 +931,15 @@ Accumulate the inputs until a sentinel value is encountered (accumulation expres
 accumulate_until_2: 3-7
 ```
 
+--------------------------------------------------------------------------------
+
 ## Suggestions
 
 These patterns match some constructions which could be rewritten in a more elegant or idiomatic way.
 
 ### Assignments
+
+--------------------------------------------------------------------------------
 
 ##### Construct `suggest_conditional_expression`
 
@@ -922,6 +992,8 @@ The first conditional (only) may be rewritten as:
 suggest_conditional_expression: 1-4
 ```
 
+--------------------------------------------------------------------------------
+
 ##### Construct `suggest_augmented_assignment`
 
 When the RHS of an assignment consists in a binary operation whose left operand is the target (`a = a op expr`), the statement can be shortened as `a op= expr`.
@@ -962,7 +1034,11 @@ May be rewritten as:
 suggest_augmented_assignment: 1, 2
 ```
 
+--------------------------------------------------------------------------------
+
 ### Subroutines
+
+--------------------------------------------------------------------------------
 
 ##### Construct `suggest_condition_return`
 
