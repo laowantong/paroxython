@@ -1,46 +1,30 @@
 import ast
-import ast2json
+from _ast import AST
 import regex
 from collections import defaultdict
-import json
 
 
 def flatten(tree):
-    metadata_rex = regex.compile(
-        r"""(?mx), (             # These keys always follow another one.
-        "col_offset":\d+ |       # The column is not relevant for the structure.
-        "lineno":\d+ |           # The line number already appears above in the tree.
-        "ctx":{"_type":".+?"}    # The context information is external to the node.
-    )"""
-    )
-
-    def suppress_metadata(node):
-        """ Delete any information depending on the position of the node in the source. """
-        return metadata_rex.sub("", json.dumps(node, separators=(",", ":")))
+    def dump_without_context(node):
+        return regex.sub(r", ctx=.+\(\)", "", ast.dump(node))
 
     def node_hash(node):
-        """ Calculate a unique identifier for a given node. """
-        return hex(hash(suppress_metadata(node)))
-
-    def item_order(item):
-        """ build a key to sort the nodes from the simplest to the most complex. """
-        return (
-            item[0] == "body",  # Relegate nested lines to the end,
-            isinstance(item[1], (dict, list)),  # after other collections,
-            item[0],  # and start with elementary types
-        )
+        return hex(hash(dump_without_context(node)) & 0xFFFFFFFF)
 
     def walk(node, prefix=""):
-        if isinstance(node, (dict, list)):
-            acc = [f"{prefix}/hash={node_hash(node)}\n"]
-            if isinstance(node, dict):
-                acc.extend(
-                    walk(v, f"{prefix}/{k}")
-                    for (k, v) in sorted(node.items(), key=item_order)
-                )
+        if isinstance(node, (ast.AST, list)):
+            acc = []
+            if isinstance(node, ast.AST):
+                acc.append(f"{prefix}/_type='{type(node).__name__}'\n")
+                acc.append(f"{prefix}/hash={node_hash(node)}\n")
+                if "lineno" in node._attributes:
+                    acc.append(f"{prefix}/lineno={node.lineno}\n")
+                for (name, x) in ast.iter_fields(node):
+                    acc.append(walk(x, f"{prefix}/{name}"))
             else:
                 acc.append(f"{prefix}/length={len(node)}\n")
-                acc.extend(walk(x, f"{prefix}/{i}") for (i, x) in enumerate(node))
+                for (i, x) in enumerate(node):
+                    acc.append(walk(x, f"{prefix}/{i}"))
             return "".join(acc)
         else:
             return f"{prefix}={node!r}\n"
@@ -66,8 +50,7 @@ class Parser:
             self.constructs[label] = regex.compile(f"(?mx){pattern}")
 
     def __call__(self, source):
-        tree = ast2json.ast2json(ast.parse(source))
-        code = flatten(tree)
+        code = flatten(ast.parse(source))
         open("logs/draft.txt", "w").write(code)
         result = defaultdict(list)
         for (label, rex) in self.constructs.items():

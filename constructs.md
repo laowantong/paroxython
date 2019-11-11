@@ -374,8 +374,8 @@ function_definition: 1
 \n(?:.+\n)*\1/lineno=(?P<LINE>\d+)
 \n(?:.+\n)*\1/name=(?P<NAME>.+) # capture the name of the function
 \n(?:.+\n)*\1/body/(?P<LEVEL_2>.*)/_type='Call'
-\n(?:.+\n)*\1/body/(?P=LEVEL_2)/func/id=(?P=NAME) # ensure it is called inside its own body
 \n(?:.+\n)*\1/body/(?P=LEVEL_2)/func/lineno=(?P<LINE>\d+)
+\n(?:.+\n)*\1/body/(?P=LEVEL_2)/func/id=(?P=NAME) # ensure it is called inside its own body
 ```
 
 ###### Example
@@ -405,10 +405,10 @@ Any function `f` which contains a nested call to itself (`f(..., f(...), ...)`),
 \n(?:.+\n)*\1/lineno=(?P<LINE>\d+)
 \n(?:.+\n)*\1/name=(?P<NAME>.+) # capture the name of the function
 \n(?:.+\n)*\1/body/(?P<LEVEL_2>.*)/_type='Call'
+\n(?:.+\n)*\1/body/(?P=LEVEL_2)/func/lineno=(?P<LINE>\d+)
+\n(?:.+\n)*\1/body/(?P=LEVEL_2)/func/id=(?P=NAME) # ensure it is called inside its own body
 \n(?:.+\n)*\1/body/(?P=LEVEL_2)/(?P<LEVEL_3>args/.*)/_type='Call'
 \n(?:.+\n)*\1/body/(?P=LEVEL_2)/(?P=LEVEL_3)/func/id=(?P=NAME)
-\n(?:.+\n)*\1/body/(?P=LEVEL_2)/func/id=(?P=NAME) # ensure it is called inside its own body
-\n(?:.+\n)*\1/body/(?P=LEVEL_2)/func/lineno=(?P<LINE>\d+)
 ```
 
 ###### Example
@@ -531,8 +531,8 @@ Iterate over a range with exactly 1 argument (stop).
 ```re
         ^(.*)/_type='For'
 \n(?:.+\n)*\1/iter/lineno=(?P<LINE>\d+)
-\n(?:.+\n)*\1/iter/args/length=1
 \n(?:.+\n)*\1/iter/func/id='range'
+\n(?:.+\n)*\1/iter/args/length=1
 ```
 
 ###### Example
@@ -565,8 +565,8 @@ Iterate over a range with exactly 2 arguments (start, stop).
 ```re
         ^(.*)/_type='For'
 \n(?:.+\n)*\1/iter/lineno=(?P<LINE>\d+)
-\n(?:.+\n)*\1/iter/args/length=2
 \n(?:.+\n)*\1/iter/func/id='range'
+\n(?:.+\n)*\1/iter/args/length=2
 ```
 
 ###### Example
@@ -599,8 +599,8 @@ Iterate over a range with 3 arguments (start, stop, step).
 ```re
         ^(.*)/_type='For'
 \n(?:.+\n)*\1/iter/lineno=(?P<LINE>\d+)
-\n(?:.+\n)*\1/iter/args/length=3
 \n(?:.+\n)*\1/iter/func/id='range'
+\n(?:.+\n)*\1/iter/args/length=3
 ```
 
 ###### Example
@@ -633,9 +633,9 @@ Iterate over a range with a negative step.
 ```re
         ^(.*)/_type='For'
 \n(?:.+\n)*\1/iter/lineno=(?P<LINE>\d+)
+\n(?:.+\n)*\1/iter/func/id='range'
 \n(?:.+\n)*\1/iter/args/length=3
 \n(?:.+\n)*\1/iter/args/2/op/_type='USub'
-\n(?:.+\n)*\1/iter/func/id='range'
 ```
 
 ###### Example
@@ -707,8 +707,8 @@ An accumulation pattern where an augmented assignment is used to update the accu
 \n(?:.+\n)*\1/target/_type='Name'
 \n(?:.+\n)*\1/target/id=(?P<ITER_VAR>.+)
 \n(?:.+\n)*\1/(?P<LEVEL_2>body/\d+)/_type='AugAssign'
-\n(?:.+\n)*\1/(?P=LEVEL_2)/(?P<LEVEL_3>value.*)/id=(?P=ITER_VAR)
-\n(?:.+\n)*\1/(?P=LEVEL_2)/(?P=LEVEL_3)/lineno=(?P<LINE>\d+)
+\n(?:.+\n)*\1/(?P=LEVEL_2)/(?P<LEVEL_3>value.*)/lineno=(?P<LINE>\d+)
+\n(?:.+\n)*\1/(?P=LEVEL_2)/(?P=LEVEL_3)/id=(?P=ITER_VAR)
 ```
 
 ###### Example
@@ -978,13 +978,13 @@ When a conditional consists solely in assigning different values to the same var
 ```re
         ^(.*)/_type='If'
 \n(?:.+\n)*\1/lineno=(?P<LINE>\d+)
+\n(?:.+\n)*\1/body/length=1
+\n(?:.+\n)*\1/body/0/_type='Assign'
+\n(?:.+\n)*\1/body/0/targets/0/hash=(?P<HASH>.+)
 \n(?:.+\n)*\1/orelse/length=1
 \n(?:.+\n)*\1/orelse/0/_type='Assign'
 \n(?:.+\n)*\1/orelse/0/lineno=(?P<LINE>\d+)
-\n(?:.+\n)*\1/orelse/0/targets/hash=(?P<HASH>.+)
-\n(?:.+\n)*\1/body/length=1
-\n(?:.+\n)*\1/body/0/_type='Assign'
-\n(?:.+\n)*\1/body/0/targets/hash=(?P=HASH)
+\n(?:.+\n)*\1/orelse/0/targets/0/hash=(?P=HASH)
 ```
 
 ###### Example
@@ -1077,11 +1077,11 @@ When a predicate ends with a conditional whose sole purpose is to return `True` 
 ```re
         ^(.*)/_type='If'
 \n(?:.+\n)*\1/lineno=(?P<LINE>\d+)
+\n(?:.+\n)*\1/body/0/_type='Return'
+\n(?:.+\n)*\1/body/0/value/value=(?P<BOOL>True|False) # name BOOL the value used here
 \n(?:.+\n)*\1/orelse/0/_type='Return'
 \n(?:.+\n)*\1/orelse/0/lineno=(?P<LINE>\d+)
-\n(?:.+\n)*\1/orelse/0/value/value=(?P<BOOL>True|False) # name BOOL the value used here
-\n(?:.+\n)*\1/body/0/_type='Return'
-\n(?:.+\n)*\1/body/0/value/value=(True|False)(?<!(?P=BOOL)) # and check not BOOL is used there
+\n(?:.+\n)*\1/orelse/0/value/value=(True|False)(?<!(?P=BOOL)) # and check not BOOL is used there
 ```
 
 ###### Example
