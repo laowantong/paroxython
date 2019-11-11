@@ -2,7 +2,8 @@
 - [Specifications](#specifications)
   - [Expressions](#expressions)
     - [Construct `builtin_function_call`](#construct-builtin_function_call)
-    - [Construct `unary_substraction`](#construct-unary_substraction)
+    - [Construct `binary_operator`](#construct-binary_operator)
+    - [Construct `unary_operator`](#construct-unary_operator)
     - [Construct `function_composition`](#construct-function_composition)
   - [Statements](#statements)
     - [Assignments](#assignments)
@@ -78,27 +79,53 @@ builtin_function_call-print: 1, 2
 
 --------------------------------------------------------------------------------
 
-##### Construct `unary_substraction`
+##### Construct `binary_operator`
+
+###### Regex
+
+```re
+        ^(.*)/_type='BinOp'
+\n(?:.+\n)*\1/lineno=(?P<LINE>\d+)
+\n(?:.+\n)*\1/op/_type='(?P<SUFFIX>.+)(?<=Add|Sub|Mult|MatMult|Div|Mod|Pow|LShift|RShift|BitOr|BitXor|BitAnd|FloorDiv)'
+```
+
+###### Example
+
+```python
+1   2**32768 - 1
+```
+
+###### Matches
+
+```markdown
+binary_operator-Pow: 1
+binary_operator-Sub: 1
+```
+
+--------------------------------------------------------------------------------
+
+##### Construct `unary_operator`
 
 ###### Regex
 
 ```re
         ^(.*)/_type='UnaryOp'
 \n(?:.+\n)*\1/lineno=(?P<LINE>\d+)
-\n(?:.+\n)*\1/op/_type='USub'
+\n(?:.+\n)*\1/op/_type='(?P<SUFFIX>.+)(?<=Invert|Not|UAdd|USub)'
 ```
 
 ###### Example
 
 ```python
 1   a = -1
-2   b = -a
+2   b = not c
 ```
 
 ###### Matches
 
 ```markdown
-unary_substraction: 1, 2
+unary_operator-USub: 1
+unary_operator-Not: 2
 ```
 
 --------------------------------------------------------------------------------
@@ -935,7 +962,8 @@ accumulate_until_2: 3-7
 
 ## Suggestions
 
-These patterns match some constructions which could be rewritten in a more elegant or idiomatic way.
+These patterns match constructs that can be shortened.
+It's up to you to decide if a rewriting would make the code clearer.
 
 ### Assignments
 
@@ -1042,7 +1070,7 @@ suggest_augmented_assignment: 1, 2
 
 ##### Construct `suggest_condition_return`
 
-When a predicate ends with a conditional whose sole purpose is returning `True` or `False`, it is enough to return the condition.
+When a predicate ends with a conditional whose sole purpose is to return `True` or `False`, it is enough to return the condition.
 
 ###### Regex
 
