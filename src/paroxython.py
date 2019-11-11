@@ -1,5 +1,4 @@
 import ast
-from _ast import AST
 import regex
 from collections import defaultdict
 
@@ -45,11 +44,10 @@ class Parser:
             self.constructs[label] = regex.compile(f"(?mx){pattern}")
 
     def __call__(self, source):
-        code = flatten(ast.parse(source))
-        open("logs/draft.txt", "w").write(code)
+        self.code = flatten(ast.parse(source))
         result = defaultdict(list)
         for (label, rex) in self.constructs.items():
-            for match in rex.finditer(code, overlapped=True):
+            for match in rex.finditer(self.code, overlapped=True):
                 d = match.capturesdict()
                 for suffix in d.get("SUFFIX", [""]):
                     if suffix:
@@ -68,5 +66,7 @@ if __name__ == "__main__":
     for (i, line) in enumerate(source.splitlines(), 1):
         print(f"{i:2}  {line}")
     result = parse(source)
+    with open("logs/draft.txt", "w") as f:
+        f.write(parse.code)
     for (label, lines) in sorted(result.items()):
         print(f"{label}: {lines}")
