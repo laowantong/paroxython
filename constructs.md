@@ -1,48 +1,48 @@
 - [Introduction](#introduction)
 - [Specifications](#specifications)
   - [Expressions](#expressions)
-    - [`builtin_function_call`](#builtin_function_call)
-    - [`unary_substraction`](#unary_substraction)
-    - [`nested_calls`](#nested_calls)
+    - [Construct `builtin_function_call`](#construct-builtin_function_call)
+    - [Construct `unary_substraction`](#construct-unary_substraction)
+    - [Construct `nested_calls`](#construct-nested_calls)
   - [Statements](#statements)
     - [Assignments](#assignments)
-      - [`global_constant_definition`](#global_constant_definition)
-      - [`global_variable_definition`](#global_variable_definition)
-      - [`assignment`](#assignment)
-      - [`augmented_assignment`](#augmented_assignment)
-      - [`swapping`](#swapping)
-      - [`negation`](#negation)
+      - [Construct `global_constant_definition`](#construct-global_constant_definition)
+      - [Construct `global_variable_definition`](#construct-global_variable_definition)
+      - [Construct `assignment`](#construct-assignment)
+      - [Construct `augmented_assignment`](#construct-augmented_assignment)
+      - [Construct `swapping`](#construct-swapping)
+      - [Construct `negation`](#construct-negation)
     - [Function definitions](#function-definitions)
-      - [`function_definition`](#function_definition)
-      - [`recursive_function_definition`](#recursive_function_definition)
-      - [`deeply_recursive_function_definition`](#deeply_recursive_function_definition)
+      - [Construct `function_definition`](#construct-function_definition)
+      - [Construct `recursive_function_definition`](#construct-recursive_function_definition)
+      - [Construct `deeply_recursive_function_definition`](#construct-deeply_recursive_function_definition)
     - [Conditionals](#conditionals)
-      - [`if`](#if)
-      - [`if_else`](#if_else)
+      - [Construct `if`](#construct-if)
+      - [Construct `if_else`](#construct-if_else)
     - [Iterations](#iterations)
-      - [`for_each`](#for_each)
-      - [`for_range_stop`](#for_range_stop)
-      - [`for_range_start`](#for_range_start)
-      - [`for_range_step`](#for_range_step)
-      - [`for_range_backwards`](#for_range_backwards)
-      - [`for_index_values`](#for_index_values)
+      - [Construct `for_each`](#construct-for_each)
+      - [Construct `for_range_stop`](#construct-for_range_stop)
+      - [Construct `for_range_start`](#construct-for_range_start)
+      - [Construct `for_range_step`](#construct-for_range_step)
+      - [Construct `for_range_backwards`](#construct-for_range_backwards)
+      - [Construct `for_index_values`](#construct-for_index_values)
   - [Code patterns](#code-patterns)
     - [Iterative patterns](#iterative-patterns)
       - [Sequential loops](#sequential-loops)
-        - [`accumulate_for_1`](#accumulate_for_1)
-        - [`accumulate_for_2`](#accumulate_for_2)
-        - [`universal_quantifier`](#universal_quantifier)
-        - [`existential_quantifier`](#existential_quantifier)
-        - [`find_first_element`](#find_first_element)
+        - [Construct `accumulate_for_1`](#construct-accumulate_for_1)
+        - [Construct `accumulate_for_2`](#construct-accumulate_for_2)
+        - [Construct `universal_quantifier`](#construct-universal_quantifier)
+        - [Construct `existential_quantifier`](#construct-existential_quantifier)
+        - [Construct `find_first_element`](#construct-find_first_element)
       - [Non sequential loops](#non-sequential-loops)
-        - [`accumulate_until_1`](#accumulate_until_1)
-        - [`accumulate_until_2`](#accumulate_until_2)
+        - [Construct `accumulate_until_1`](#construct-accumulate_until_1)
+        - [Construct `accumulate_until_2`](#construct-accumulate_until_2)
   - [Suggestions](#suggestions)
     - [Assignments](#assignments-1)
-      - [`suggest_conditional_expression`](#suggest_conditional_expression)
-      - [`suggest_augmented_assignment`](#suggest_augmented_assignment)
+      - [Construct `suggest_conditional_expression`](#construct-suggest_conditional_expression)
+      - [Construct `suggest_augmented_assignment`](#construct-suggest_augmented_assignment)
     - [Subroutines](#subroutines)
-      - [`suggest_condition_return`](#suggest_condition_return)
+      - [Construct `suggest_condition_return`](#construct-suggest_condition_return)
 
 # Introduction
 
@@ -50,7 +50,7 @@
 
 ## Expressions
 
-##### `builtin_function_call`
+##### Construct `builtin_function_call`
 
 ###### Regex
 
@@ -74,7 +74,7 @@ builtin_function_call-len: 1
 builtin_function_call-print: 1, 2
 ```
 
-##### `unary_substraction`
+##### Construct `unary_substraction`
 
 ###### Regex
 
@@ -97,7 +97,7 @@ builtin_function_call-print: 1, 2
 unary_substraction: 1, 2
 ```
 
-##### `nested_calls`
+##### Construct `nested_calls`
 
 ###### Regex
 
@@ -125,7 +125,7 @@ nested_calls: 1, 3
 
 ### Assignments
 
-##### `global_constant_definition`
+##### Construct `global_constant_definition`
 
 ###### Regex
 
@@ -151,7 +151,7 @@ nested_calls: 1, 3
 global_constant_definition: 1, 2, 3
 ```
 
-##### `global_variable_definition`
+##### Construct `global_variable_definition`
 
 ###### Regex
 
@@ -179,7 +179,7 @@ global_constant_definition: 1, 2, 3
 global_variable_definition: 2, 3, 6, 7
 ```
 
-##### `assignment`
+##### Construct `assignment`
 
 ###### Regex
 
@@ -202,7 +202,7 @@ global_variable_definition: 2, 3, 6, 7
 assignment: 1, 2, 3
 ```
 
-##### `augmented_assignment`
+##### Construct `augmented_assignment`
 
 ###### Regex
 
@@ -224,7 +224,7 @@ assignment: 1, 2, 3
 augmented_assignment: 1
 ```
 
-##### `swapping`
+##### Construct `swapping`
 
 Swap two variables or two elements of an array with a 2-element tuple or list.
 
@@ -256,7 +256,7 @@ Swap two variables or two elements of an array with a 2-element tuple or list.
 swapping: 1, 2, 3, 4
 ```
 
-##### `negation`
+##### Construct `negation`
 
 Update a variable by negating it.
 
@@ -288,7 +288,7 @@ negation: 1, 2
 
 ### Function definitions
 
-##### `function_definition`
+##### Construct `function_definition`
 
 ###### Regex
 
@@ -310,7 +310,7 @@ negation: 1, 2
 function_definition: 1
 ```
 
-##### `recursive_function_definition`
+##### Construct `recursive_function_definition`
 
 ###### Regex
 
@@ -337,7 +337,7 @@ function_definition: 1
 recursive_function_definition: 1-3
 ```
 
-##### `deeply_recursive_function_definition`
+##### Construct `deeply_recursive_function_definition`
 
 Any function `f` which contains a nested call to itself (`f(..., f(...), ...)`), e.g. the [Ackermann function](https://en.wikipedia.org/wiki/Ackermann_function).
 
@@ -370,7 +370,7 @@ deeply_recursive_function_definition: 1-3
 
 ### Conditionals
 
-##### `if`
+##### Construct `if`
 
 ###### Regex
 
@@ -396,7 +396,7 @@ deeply_recursive_function_definition: 1-3
 if: 1, 2
 ```
 
-##### `if_else`
+##### Construct `if_else`
 
 `if` statement with `else`.
 
@@ -426,7 +426,7 @@ if_else: 1
 
 ### Iterations
 
-##### `for_each`
+##### Construct `for_each`
 Iterate over the elements of a (named) collection.
 
 ###### Regex
@@ -453,7 +453,7 @@ Iterate over the elements of a (named) collection.
 for_each: 1, 4
 ```
 
-##### `for_range_stop`
+##### Construct `for_range_stop`
 
 Iterate over a range with exactly 1 argument (stop).
 
@@ -485,7 +485,7 @@ Iterate over a range with exactly 1 argument (stop).
 for_range_stop: 1
 ```
 
-##### `for_range_start`
+##### Construct `for_range_start`
 
 Iterate over a range with exactly 2 arguments (start, stop).
 
@@ -517,7 +517,7 @@ Iterate over a range with exactly 2 arguments (start, stop).
 for_range_start: 3
 ```
 
-##### `for_range_step`
+##### Construct `for_range_step`
 
 Iterate over a range with 3 arguments (start, stop, step).
 
@@ -549,7 +549,7 @@ Iterate over a range with 3 arguments (start, stop, step).
 for_range_step: 5, 7
 ```
 
-##### `for_range_backwards`
+##### Construct `for_range_backwards`
 
 Iterate over a range with a negative step.
 
@@ -583,7 +583,7 @@ Iterate over a range with a negative step.
 for_range_backwards: 8
 ```
 
-##### `for_index_values`
+##### Construct `for_index_values`
 
 Iterate over index numbers and elements of a collection.
 
@@ -614,7 +614,7 @@ for_index_values: 1
 
 #### Sequential loops
 
-##### `accumulate_for_1`
+##### Construct `accumulate_for_1`
 
 An accumulation pattern where an augmented assignment is used to update the accumulator.
 
@@ -648,7 +648,7 @@ An accumulation pattern where an augmented assignment is used to update the accu
 accumulate_for_1: 3-4, 6-7
 ```
 
-##### `accumulate_for_2`
+##### Construct `accumulate_for_2`
 
 An accumulation pattern with an assignment whose RHS contains both the accumulator and the iteration variable.
 
@@ -684,7 +684,7 @@ An accumulation pattern with an assignment whose RHS contains both the accumulat
 accumulate_for_2: 3-4, 6-7
 ```
 
-##### `universal_quantifier`
+##### Construct `universal_quantifier`
 
 Check if all the elements of a collection satisfy a predicate.
 
@@ -717,7 +717,7 @@ Check if all the elements of a collection satisfy a predicate.
 universal_quantifier: 2-5
 ```
 
-##### `existential_quantifier`
+##### Construct `existential_quantifier`
 
 Check if any element of a collection satisfies a predicate.
 
@@ -750,7 +750,7 @@ Check if any element of a collection satisfies a predicate.
 existential_quantifier: 2-5
 ```
 
-##### `find_first_element`
+##### Construct `find_first_element`
 
 Linear search. Return the first element of a sequence satisfying a predicate.
 
@@ -785,7 +785,7 @@ find_first_element: 2-4
 
 #### Non sequential loops
 
-##### `accumulate_until_1`
+##### Construct `accumulate_until_1`
 
 Accumulate the inputs until a sentinel value is encountered (accumulation expressed by: `acc = combine(x, acc)`).
 
@@ -824,7 +824,7 @@ Accumulate the inputs until a sentinel value is encountered (accumulation expres
 accumulate_until_1: 3-7
 ```
 
-##### `accumulate_until_2`
+##### Construct `accumulate_until_2`
 
 Accumulate the inputs until a sentinel value is encountered (accumulation expressed by: `acc += x`).
 
@@ -869,7 +869,7 @@ These patterns match some constructions which could be rewritten in a more elega
 
 ### Assignments
 
-##### `suggest_conditional_expression`
+##### Construct `suggest_conditional_expression`
 
 When a conditional consists solely in assigning different values to the same variable, it may be rewritten as a conditional expression.
 
@@ -920,7 +920,7 @@ The first conditional (only) may be rewritten as:
 suggest_conditional_expression: 1-4
 ```
 
-##### `suggest_augmented_assignment`
+##### Construct `suggest_augmented_assignment`
 
 When the RHS of an assignment consists in a binary operation whose left operand is the target (`a = a op expr`), the statement can be shortened as `a op= expr`.
 
@@ -962,7 +962,7 @@ suggest_augmented_assignment: 1, 2
 
 ### Subroutines
 
-##### `suggest_condition_return`
+##### Construct `suggest_condition_return`
 
 When a predicate ends with a conditional whose sole purpose is returning `True` or `False`, it is enough to return the condition.
 

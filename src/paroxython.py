@@ -49,28 +49,28 @@ def flatten(tree):
 
 
 class Parser:
-    def __init__(self, trait_path):
-        with open(trait_path) as f:
+    def __init__(self, construct_path):
+        with open(construct_path) as f:
             text = f.read()
         rex = r"""(?msx)
-            ^\#{5}\s+`(.+?)` # capture the label
+            ^\#{5}\s+Construct\s+`(.+?)` # capture the label
             .+?
             \#{6}\s+Regex # ensure the next pattern is in the Regex section
             .+?
             ```re\n+(.+?)\n``` # capture this pattern
         """
-        self.traits = {}
+        self.constructs = {}
         for (label, pattern) in regex.findall(rex, text):
-            if label in self.traits:
+            if label in self.constructs:
                 raise ValueError(f"Duplicated label '{label}'!")
-            self.traits[label] = regex.compile(f"(?mx){pattern}")
+            self.constructs[label] = regex.compile(f"(?mx){pattern}")
 
     def __call__(self, source):
         tree = ast2json.ast2json(ast.parse(source))
         code = flatten(tree)
         open("logs/draft.txt", "w").write(code)
         result = defaultdict(list)
-        for (label, rex) in self.traits.items():
+        for (label, rex) in self.constructs.items():
             for match in rex.finditer(code, overlapped=True):
                 d = match.capturesdict()
                 for suffix in d.get("SUFFIX", [""]):
@@ -84,7 +84,7 @@ class Parser:
 
 
 if __name__ == "__main__":
-    parse = Parser("traits.md")
+    parse = Parser("constructs.md")
     with open("draft.py") as f:
         source = f.read()
     for (i, line) in enumerate(source.splitlines(), 1):
