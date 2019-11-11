@@ -37,10 +37,12 @@
       - [Non sequential loops](#non-sequential-loops)
         - [`accumulate_until_1`](#accumulate_until_1)
         - [`accumulate_until_2`](#accumulate_until_2)
-  - [Code smells](#code-smells)
-    - [`suggest_conditional_expression`](#suggest_conditional_expression)
-    - [`suggest_condition_return`](#suggest_condition_return)
-- [Contributing](#contributing)
+  - [Suggestions](#suggestions)
+    - [Assignments](#assignments-1)
+      - [`suggest_conditional_expression`](#suggest_conditional_expression)
+      - [`suggest_augmented_assignment`](#suggest_augmented_assignment)
+    - [Subroutines](#subroutines)
+      - [`suggest_condition_return`](#suggest_condition_return)
 
 # Introduction
 
@@ -861,7 +863,11 @@ Accumulate the inputs until a sentinel value is encountered (accumulation expres
 accumulate_until_2: 3-7
 ```
 
-## Code smells
+## Suggestions
+
+These patterns match some constructions which could be rewritten in a more elegant or idiomatic way.
+
+### Assignments
 
 ##### `suggest_conditional_expression`
 
@@ -914,6 +920,48 @@ The first conditional (only) may be rewritten as:
 suggest_conditional_expression: 1-4
 ```
 
+##### `suggest_augmented_assignment`
+
+When the RHS of an assignment consists in a binary operation whose left operand is the target (`a = a op expr`), the statement can be shortened as `a op= expr`.
+
+###### Regex
+
+```re
+        ^(.*)/_type='Assign'
+\n(?:.+\n)*\1/lineno=(?P<LINE>\d+)
+\n(?:.+\n)*\1/targets/length=1
+\n(?:.+\n)*\1/targets/0/id=(?P<TARGET>.+)
+\n(?:.+\n)*\1/value/_type='BinOp'
+\n(?:.+\n)*\1/value/left/id=(?P=TARGET)
+```
+
+###### Example
+
+```python
+1   a = a + b
+2   a = a + (b + c)
+3   a = b + a
+4   a = a + b + c # FIXME
+```
+
+May be rewritten as:
+
+```python
+1   a += b
+2   a += b + c
+```
+
+- Line 3, note that the `+` binary operator is not necessarily commutative, e.g. on strings.
+- Some cases like line 4 should be matched, check the associativity rules.
+
+###### Matches
+
+```markdown
+suggest_augmented_assignment: 1, 2
+```
+
+### Subroutines
+
 ##### `suggest_condition_return`
 
 When a predicate ends with a conditional whose sole purpose is returning `True` or `False`, it is enough to return the condition.
@@ -961,6 +1009,3 @@ May be rewritten as:
 ```markdown
 suggest_condition_return: 2-5, 8-11
 ```
-
-# Contributing
-
