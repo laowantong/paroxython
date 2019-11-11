@@ -4,32 +4,27 @@ import regex
 from collections import defaultdict
 
 
-def flatten(tree):
-    def dump_without_context(node):
-        return regex.sub(r", ctx=.+\(\)", "", ast.dump(node))
+REMOVE_CONTEXT = regex.compile(r", ctx=.+?\(\)").sub
 
-    def node_hash(node):
-        return hex(hash(dump_without_context(node)) & 0xFFFFFFFF)
 
-    def walk(node, prefix=""):
-        if isinstance(node, (ast.AST, list)):
-            acc = []
-            if isinstance(node, ast.AST):
-                acc.append(f"{prefix}/_type='{type(node).__name__}'\n")
-                acc.append(f"{prefix}/hash={node_hash(node)}\n")
-                if "lineno" in node._attributes:
-                    acc.append(f"{prefix}/lineno={node.lineno}\n")
-                for (name, x) in ast.iter_fields(node):
-                    acc.append(walk(x, f"{prefix}/{name}"))
-            else:
-                acc.append(f"{prefix}/length={len(node)}\n")
-                for (i, x) in enumerate(node):
-                    acc.append(walk(x, f"{prefix}/{i}"))
-            return "".join(acc)
-        else:
-            return f"{prefix}={node!r}\n"
-
-    return walk(tree)
+def flatten(node, prefix=""):
+    if isinstance(node, ast.AST):
+        acc = [f"{prefix}/_type='{type(node).__name__}'\n"]
+        node_repr = REMOVE_CONTEXT("", ast.dump(node))
+        node_hash = hex(hash(node_repr) & 0xFFFFFFFF)
+        acc.append(f"{prefix}/hash={node_hash}\n")
+        if "lineno" in node._attributes:
+            acc.append(f"{prefix}/lineno={node.lineno}\n")
+        for (name, x) in ast.iter_fields(node):
+            acc.append(flatten(x, f"{prefix}/{name}"))
+        return "".join(acc)
+    elif isinstance(node, list):
+        acc = [f"{prefix}/length={len(node)}\n"]
+        for (i, x) in enumerate(node):
+            acc.append(flatten(x, f"{prefix}/{i}"))
+        return "".join(acc)
+    else:
+        return f"{prefix}={node!r}\n"
 
 
 class Parser:
