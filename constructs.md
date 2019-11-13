@@ -52,6 +52,8 @@
       - [Construct `suggest_augmented_assignment`](#construct-suggest_augmented_assignment)
     - [Conditionals](#conditionals-1)
       - [Construct `suggest_elif`](#construct-suggest_elif)
+    - [Expressions](#expressions-1)
+      - [Construct `suggest_comparison_chaining`](#construct-suggest_comparison_chaining)
     - [Subroutines](#subroutines)
       - [Construct `suggest_condition_return`](#construct-suggest_condition_return)
 
@@ -1247,7 +1249,7 @@ suggest_augmented_assignment: 1, 2
 
 ##### Construct `suggest_elif`
 
-When the `else` branch of a conditional is an other conditional, it can be rewritten with an `elif` branch.
+When the `else` branch of a conditional is another conditional, it can be rewritten with an `elif` branch.
 
 ###### Regex
 
@@ -1294,6 +1296,54 @@ The first conditional (only) may be rewritten as:
 
 ```markdown
 suggest_elif: 4
+```
+
+--------------------------------------------------------------------------------
+
+### Expressions
+
+--------------------------------------------------------------------------------
+
+##### Construct `suggest_comparison_chaining`
+
+When the `else` branch of a conditional is another conditional, it can be rewritten with an `elif` branch.
+
+###### Regex
+
+```re
+        ^(.*)/_type='BoolOp'
+\n(?:.+\n)*\1/lineno=(?P<LINE>\d+)
+\n(?:.+\n)*\1/op/_type='And'
+\n(?:.+\n)*\1/(?P<_1>values/0)/_type='Compare'
+\n(?:.+\n)*\1/(?P=_1)         /comparators/0/hash=(?P<HASH_1>.+) # capture the right operand of the left comparison
+\n(?:.+\n)*\1/(?P<_2>values/1)/_type='Compare'
+\n(?:.+\n)*\1/(?P=_2)         /left/hash=(?P=HASH_1) # match the left operand of the right comparison
+```
+
+###### Example
+
+```python
+1   a < b and b < c
+2   a <= b and b < c
+3   a == b and b == c
+4   a != b and b != c
+```
+
+May be rewritten as:
+
+```python
+1   a < b < c
+2   a <= b < c
+3   a == b == c
+4   a != b != c
+```
+
+Note that the last simplification is rather confusing and should be avoided.
+
+###### Matches
+
+```markdown
+suggest_comparison_chaining: 1, 2, 3, 4
 ```
 
 --------------------------------------------------------------------------------
