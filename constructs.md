@@ -373,9 +373,9 @@ function_definition: 1
         ^(.*)/_type='FunctionDef'
 \n(?:.+\n)*\1/lineno=(?P<LINE>\d+)
 \n(?:.+\n)*\1/name=(?P<NAME>.+) # capture the name of the function
-\n(?:.+\n)*\1/body/(?P<LEVEL_2>.*)/_type='Call'
-\n(?:.+\n)*\1/body/(?P=LEVEL_2)/func/lineno=(?P<LINE>\d+)
-\n(?:.+\n)*\1/body/(?P=LEVEL_2)/func/id=(?P=NAME) # ensure it is called inside its own body
+\n(?:.+\n)*\1/body/(?P<_1>.*)/_type='Call'
+\n(?:.+\n)*\1/body/(?P=_1)   /func/lineno=(?P<LINE>\d+)
+\n(?:.+\n)*\1/body/(?P=_1)   /func/id=(?P=NAME) # ensure it is called inside its own body
 ```
 
 ###### Example
@@ -404,11 +404,11 @@ Any function `f` which contains a nested call to itself (`f(..., f(...), ...)`),
         ^(.*)/_type='FunctionDef'
 \n(?:.+\n)*\1/lineno=(?P<LINE>\d+)
 \n(?:.+\n)*\1/name=(?P<NAME>.+) # capture the name of the function
-\n(?:.+\n)*\1/body/(?P<LEVEL_2>.*)/_type='Call'
-\n(?:.+\n)*\1/body/(?P=LEVEL_2)/func/lineno=(?P<LINE>\d+)
-\n(?:.+\n)*\1/body/(?P=LEVEL_2)/func/id=(?P=NAME) # ensure it is called inside its own body
-\n(?:.+\n)*\1/body/(?P=LEVEL_2)/(?P<LEVEL_3>args/.*)/_type='Call'
-\n(?:.+\n)*\1/body/(?P=LEVEL_2)/(?P=LEVEL_3)/func/id=(?P=NAME)
+\n(?:.+\n)*\1/body/(?P<_1>.*)/_type='Call'
+\n(?:.+\n)*\1/body/(?P=_1)   /func/lineno=(?P<LINE>\d+)
+\n(?:.+\n)*\1/body/(?P=_1)   /func/id=(?P=NAME) # ensure it is called inside its own body
+\n(?:.+\n)*\1/body/(?P=_1)   /(?P<_2>args/.*)/_type='Call'
+\n(?:.+\n)*\1/body/(?P=_1)   /(?P=_2)        /func/id=(?P=NAME)
 ```
 
 ###### Example
@@ -706,9 +706,9 @@ An accumulation pattern where an augmented assignment is used to update the accu
 \n(?:.+\n)*\1/lineno=(?P<LINE>\d+)
 \n(?:.+\n)*\1/target/_type='Name'
 \n(?:.+\n)*\1/target/id=(?P<ITER_VAR>.+)
-\n(?:.+\n)*\1/(?P<LEVEL_2>body/\d+)/_type='AugAssign'
-\n(?:.+\n)*\1/(?P=LEVEL_2)/(?P<LEVEL_3>value.*)/lineno=(?P<LINE>\d+)
-\n(?:.+\n)*\1/(?P=LEVEL_2)/(?P=LEVEL_3)/id=(?P=ITER_VAR)
+\n(?:.+\n)*\1/(?P<_1>body/\d+)/_type='AugAssign'
+\n(?:.+\n)*\1/(?P=_1)         /(?P<_2>value.*)/lineno=(?P<LINE>\d+)
+\n(?:.+\n)*\1/(?P=_1)         /(?P=_2)        /id=(?P=ITER_VAR)
 ```
 
 ###### Example
@@ -742,11 +742,11 @@ An accumulation pattern with an assignment whose RHS contains both the accumulat
 \n(?:.+\n)*\1/lineno=(?P<LINE>\d+)
 \n(?:.+\n)*\1/target/_type='Name'
 \n(?:.+\n)*\1/target/id=(?P<ITER_VAR>.+) # capture the name of the iteration variable
-\n(?:.+\n)*\1/(?P<LEVEL_2>body/\d+)/_type='Assign'
-\n(?:.+\n)*\1/(?P=LEVEL_2)/lineno=(?P<LINE>\d+)
-\n(?:.+\n)*\1/(?P=LEVEL_2)/targets/.*/id=(?P<ACC>.+) # capture the name of the accumulator
-\n(?:.+\n)*\1/(?P=LEVEL_2)/value/.*/id=(?P<VAR>((?P=ITER_VAR)|(?P=ACC))) # name VAR the variable used here
-\n(?:.+\n)*\1/(?P=LEVEL_2)/value/.*/id=((?P=ITER_VAR)|(?P=ACC))(?<!(?P=VAR)) # and check the other one is used there
+\n(?:.+\n)*\1/(?P<_1>body/\d+)/_type='Assign'
+\n(?:.+\n)*\1/(?P=_1)         /lineno=(?P<LINE>\d+)
+\n(?:.+\n)*\1/(?P=_1)         /targets/.*/id=(?P<ACC>.+) # capture the name of the accumulator
+\n(?:.+\n)*\1/(?P=_1)         /value/.*/id=(?P<VAR>((?P=ITER_VAR)|(?P=ACC))) # name VAR the variable used here
+\n(?:.+\n)*\1/(?P=_1)         /value/.*/id=((?P=ITER_VAR)|(?P=ACC))(?<!(?P=VAR)) # and check the other one is used there
 ```
 
 ###### Example
@@ -776,14 +776,14 @@ Check if all the elements of a collection satisfy a predicate.
 ###### Regex
 
 ```re
-        ^(.*)/(?P<LEVEL_2_1>body/\d+)/_type='For'
-\n(?:.+\n)*\1/(?P=LEVEL_2_1)/lineno=(?P<LINE>\d+)
-\n(?:.+\n)*\1/(?P=LEVEL_2_1)/(?P<LEVEL_3>body/\d+)/_type='If'
-\n(?:.+\n)*\1/(?P=LEVEL_2_1)/(?P=LEVEL_3)/(?P<LEVEL_4>body/\d+)/_type='Return'
-\n(?:.+\n)*\1/(?P=LEVEL_2_1)/(?P=LEVEL_3)/(?P=LEVEL_4)/value/value=False
-\n(?:.+\n)*\1/(?P<LEVEL_2_2>body/\d+)/_type='Return'
-\n(?:.+\n)*\1/(?P=LEVEL_2_2)/lineno=(?P<LINE>\d+)
-\n(?:.+\n)*\1/(?P=LEVEL_2_2)/value/value=True
+        ^(.*)/(?P<_1>body/\d+)/_type='For'
+\n(?:.+\n)*\1/(?P=_1)         /lineno=(?P<LINE>\d+)
+\n(?:.+\n)*\1/(?P=_1)         /(?P<_2>body/\d+)/_type='If'
+\n(?:.+\n)*\1/(?P=_1)         /(?P=_2)         /(?P<_3>body/\d+)/_type='Return'
+\n(?:.+\n)*\1/(?P=_1)         /(?P=_2)         /(?P=_3)/value/value=False
+\n(?:.+\n)*\1/(?P<_4_>body/\d+)/_type='Return'
+\n(?:.+\n)*\1/(?P=_4_)         /lineno=(?P<LINE>\d+)
+\n(?:.+\n)*\1/(?P=_4_)         /value/value=True
 ```
 
 ###### Example
@@ -811,14 +811,14 @@ Check if any element of a collection satisfies a predicate.
 ###### Regex
 
 ```re
-        ^(.*)/(?P<LEVEL_2_1>body/\d+)/_type='For'
-\n(?:.+\n)*\1/(?P=LEVEL_2_1)/lineno=(?P<LINE>\d+)
-\n(?:.+\n)*\1/(?P=LEVEL_2_1)/(?P<LEVEL_3>body/\d+)/_type='If'
-\n(?:.+\n)*\1/(?P=LEVEL_2_1)/(?P=LEVEL_3)/(?P<LEVEL_4>body/\d+)/_type='Return'
-\n(?:.+\n)*\1/(?P=LEVEL_2_1)/(?P=LEVEL_3)/(?P=LEVEL_4)/value/value=True
-\n(?:.+\n)*\1/(?P<LEVEL_2_2>body/\d+)/_type='Return'
-\n(?:.+\n)*\1/(?P=LEVEL_2_2)/lineno=(?P<LINE>\d+)
-\n(?:.+\n)*\1/(?P=LEVEL_2_2)/value/value=False
+        ^(.*)/(?P<_1>body/\d+)/_type='For'
+\n(?:.+\n)*\1/(?P=_1)         /lineno=(?P<LINE>\d+)
+\n(?:.+\n)*\1/(?P=_1)         /(?P<_2>body/\d+)/_type='If'
+\n(?:.+\n)*\1/(?P=_1)         /(?P=_2)         /(?P<_3>body/\d+)/_type='Return'
+\n(?:.+\n)*\1/(?P=_1)         /(?P=_2)         /(?P=_3)/value/value=True
+\n(?:.+\n)*\1/(?P<_4>body/\d+)/_type='Return'
+\n(?:.+\n)*\1/(?P=_4)         /lineno=(?P<LINE>\d+)
+\n(?:.+\n)*\1/(?P=_4)         /value/value=False
 ```
 
 ###### Example
@@ -849,11 +849,11 @@ Linear search. Return the first element of a sequence satisfying a predicate.
         ^(.*)/_type='For'
 \n(?:.+\n)*\1/lineno=(?P<LINE>\d+)
 \n(?:.+\n)*\1/target/id=(?P<ITER_VAR>.+) # capture the name of the iteration variable
-\n(?:.+\n)*\1/(?P<LEVEL_2>body/.+)/_type='If' # The If appears at any depth in the loop
-\n(?:.+\n)*\1/(?P=LEVEL_2)/test/.+/id=(?P=ITER_VAR) # The variable appears at any depth inside the condition
-\n(?:.+\n)*\1/(?P=LEVEL_2)/(?P<LEVEL_3>body/\d+)/_type='Return'
-\n(?:.+\n)*\1/(?P=LEVEL_2)/(?P=LEVEL_3)/lineno=(?P<LINE>\d+)
-\n(?:.+\n)*\1/(?P=LEVEL_2)/(?P=LEVEL_3)/value/id=(?P=ITER_VAR) # ... and is returned
+\n(?:.+\n)*\1/(?P<_1>body/.+)/_type='If' # The If appears at any depth in the loop
+\n(?:.+\n)*\1/(?P=_1)        /test/.+/id=(?P=ITER_VAR) # The variable appears at any depth inside the condition
+\n(?:.+\n)*\1/(?P=_1)        /(?P<_2>body/\d+)/_type='Return'
+\n(?:.+\n)*\1/(?P=_1)        /(?P=_2)         /lineno=(?P<LINE>\d+)
+\n(?:.+\n)*\1/(?P=_1)        /(?P=_2)         /value/id=(?P=ITER_VAR) # ... and is returned
 ```
 
 ###### Example
@@ -889,14 +889,14 @@ Accumulate the inputs until a sentinel value is encountered (accumulation expres
 \n(?:.+\n)*\1/lineno=(?P<LINE>\d+)
 \n(?:.+\n)*\1/test/value=True
 \n(?:.+\n)*\1/body/\d+/targets/.+/id=(?P<INPUT>.+) # capture the name of the input
-\n(?:.+\n)*\1/(?P<LEVEL_2_1>body/\d+)/_type='If'
-\n(?:.+\n)*\1/(?P=LEVEL_2_1)/test/args/0/id=(?P=INPUT)
-\n(?:.+\n)*\1/(?P=LEVEL_2_1)/(?P<LEVEL_3>body/\d+)/_type='Return'
-\n(?:.+\n)*\1/(?P=LEVEL_2_1)/(?P=LEVEL_3)/value/id=(?P<ACC>.+) # capture the name of the accumulator
-\n(?:.+\n)*\1/(?P<LEVEL_2_2>body/\d+)/lineno=(?P<LINE>\d+)
-\n(?:.+\n)*\1/(?P=LEVEL_2_2)/targets/.*/id=(?P=ACC)
-\n(?:.+\n)*\1/(?P=LEVEL_2_2)/value.*/id=(?P<VAR>((?P=INPUT)|(?P=ACC))) # name VAR the variable used here
-\n(?:.+\n)*\1/(?P=LEVEL_2_2)/value.*/id=((?P=INPUT)|(?P=ACC))(?<!(?P=VAR)) # and check the other one is used there
+\n(?:.+\n)*\1/(?P<_1>body/\d+)/_type='If'
+\n(?:.+\n)*\1/(?P=_1)         /test/args/0/id=(?P=INPUT)
+\n(?:.+\n)*\1/(?P=_1)         /(?P<_2>body/\d+)/_type='Return'
+\n(?:.+\n)*\1/(?P=_1)         /(?P=_2)         /value/id=(?P<ACC>.+) # capture the name of the accumulator
+\n(?:.+\n)*\1/(?P<_3>body/\d+)/lineno=(?P<LINE>\d+)
+\n(?:.+\n)*\1/(?P=_3)         /targets/.*/id=(?P=ACC)
+\n(?:.+\n)*\1/(?P=_3)         /value.*/id=(?P<VAR>((?P=INPUT)|(?P=ACC))) # name VAR the variable used here
+\n(?:.+\n)*\1/(?P=_3)         /value.*/id=((?P=INPUT)|(?P=ACC))(?<!(?P=VAR)) # and check the other one is used there
 ```
 
 ###### Example
@@ -930,14 +930,14 @@ Accumulate the inputs until a sentinel value is encountered (accumulation expres
 \n(?:.+\n)*\1/lineno=(?P<LINE>\d+)
 \n(?:.+\n)*\1/test/value=True
 \n(?:.+\n)*\1/body/\d+/targets/.+/id=(?P<INPUT>.+) # capture the name of the input
-\n(?:.+\n)*\1/(?P<LEVEL_2_1>body/\d+)/_type='If'
-\n(?:.+\n)*\1/(?P=LEVEL_2_1)/test/args/0/id=(?P=INPUT)
-\n(?:.+\n)*\1/(?P=LEVEL_2_1)/(?P<LEVEL_3>body/\d+)/_type='Return'
-\n(?:.+\n)*\1/(?P=LEVEL_2_1)/(?P=LEVEL_3)/value/id=(?P<ACC>.+) # capture the name of the accumulator
-\n(?:.+\n)*\1/(?P<LEVEL_2_2>body/\d+)/_type='AugAssign'
-\n(?:.+\n)*\1/(?P=LEVEL_2_2)/lineno=(?P<LINE>\d+)
-\n(?:.+\n)*\1/(?P=LEVEL_2_2)/target/id=(?P=ACC)
-\n(?:.+\n)*\1/(?P=LEVEL_2_2)/value.*/id=(?P=INPUT)
+\n(?:.+\n)*\1/(?P<_1>body/\d+)/_type='If'
+\n(?:.+\n)*\1/(?P=_1)         /test/args/0/id=(?P=INPUT)
+\n(?:.+\n)*\1/(?P=_1)         /(?P<_2>body/\d+)/_type='Return'
+\n(?:.+\n)*\1/(?P=_1)         /(?P=_2)         /value/id=(?P<ACC>.+) # capture the name of the accumulator
+\n(?:.+\n)*\1/(?P<_3>body/\d+)/_type='AugAssign'
+\n(?:.+\n)*\1/(?P=_3)         /lineno=(?P<LINE>\d+)
+\n(?:.+\n)*\1/(?P=_3)         /target/id=(?P=ACC)
+\n(?:.+\n)*\1/(?P=_3)         /value.*/id=(?P=INPUT)
 ```
 
 ###### Example
