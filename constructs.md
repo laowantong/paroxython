@@ -1,10 +1,16 @@
 - [Introduction](#introduction)
 - [Specifications](#specifications)
   - [Expressions](#expressions)
-    - [Construct `builtin_function_call`](#construct-builtin_function_call)
-    - [Construct `binary_operator`](#construct-binary_operator)
-    - [Construct `unary_operator`](#construct-unary_operator)
-    - [Construct `function_composition`](#construct-function_composition)
+    - [Arithmetic operators](#arithmetic-operators)
+      - [Construct `binary_operator`](#construct-binary_operator)
+      - [Construct `unary_operator`](#construct-unary_operator)
+    - [Comparisons](#comparisons)
+      - [Construct `comparison_operator`](#construct-comparison_operator)
+      - [Construct `divisibility_test`](#construct-divisibility_test)
+      - [Construct `parity_test`](#construct-parity_test)
+    - [Function calls](#function-calls)
+      - [Construct `builtin_function_call`](#construct-builtin_function_call)
+      - [Construct `function_composition`](#construct-function_composition)
   - [Statements](#statements)
     - [Assignments](#assignments)
       - [Construct `global_constant_definition`](#construct-global_constant_definition)
@@ -55,31 +61,7 @@
 
 ## Expressions
 
---------------------------------------------------------------------------------
-
-##### Construct `builtin_function_call`
-
-###### Regex
-
-```re
-        ^(.*)/_type='Call'
-\n(?:.+\n)*\1/lineno=(?P<LINE>\d+)
-\n(?:.+\n)*\1/func/id='(?P<SUFFIX>.+)(?<=abs|delattr|hash|memoryview|set|all|dict|help|min|setattr|any|dir|hex|next|slice|ascii|divmod|id|object|sorted|bin|enumerate|input|oct|staticmethod|bool|eval|int|open|str|breakpoint|exec|isinstance|ord|sum|bytearray|filter|issubclass|pow|super|bytes|float|iter|print|tuple|callable|format|len|property|type|chr|frozenset|list|range|vars|classmethod|getattr|locals|repr|zip|compile|globals|map|reversed|__import__|complex|hasattr|max|round)'
-```
-
-###### Example
-
-```python
-1   print(len("hello, world"))
-2   print(foobar((42)))
-```
-
-###### Matches
-
-```markdown
-builtin_function_call-len: 1
-builtin_function_call-print: 1, 2
-```
+### Arithmetic operators
 
 --------------------------------------------------------------------------------
 
@@ -130,6 +112,129 @@ binary_operator-Sub: 1
 ```markdown
 unary_operator-USub: 1
 unary_operator-Not: 2
+```
+
+--------------------------------------------------------------------------------
+
+### Comparisons
+
+--------------------------------------------------------------------------------
+
+##### Construct `comparison_operator`
+
+###### Regex
+
+```re
+        ^(.*)/_type='Compare'
+\n(?:.+\n)*\1/ops/0/_type='(?P<SUFFIX>.+)(?<=Eq|NotEq|Lt|LtE|Gt|GtE|Is|IsNot|In|NotIn)'
+\n(?:.+\n)*\1/comparators/0/lineno=(?P<LINE>\d+)
+```
+
+###### Example
+
+```python
+1   print(a == 3)
+2   if a == b == c:
+3       pass
+4   needle in haystack
+5   3 + 4
+```
+
+###### Matches
+
+```markdown
+comparison_operator-Eq: 1, 2
+comparison_operator-In: 4
+```
+
+--------------------------------------------------------------------------------
+
+##### Construct `divisibility_test`
+
+###### Regex
+
+```re
+        ^(.*)/_type='Compare'
+\n(?:.+\n)*\1/lineno=(?P<LINE>\d+)
+\n(?:.+\n)*\1/left/op/_type='Mod'
+\n(?:.+\n)*\1/(?P<_1>ops)/length=1
+\n(?:.+\n)*\1/(?P=_1)    /0/_type='Eq'
+\n(?:.+\n)*\1/(?P<_2>comparators)/length=1
+\n(?:.+\n)*\1/(?P=_2)            /0/n=0
+```
+
+###### Example
+
+```python
+1   a % b == 0
+```
+
+###### Matches
+
+```markdown
+divisibility_test: 1
+```
+
+--------------------------------------------------------------------------------
+
+##### Construct `parity_test`
+
+###### Regex
+
+```re
+        ^(.*)/_type='Compare'
+\n(?:.+\n)*\1/lineno=(?P<LINE>\d+)
+\n(?:.+\n)*\1/(?P<_1>left)/op/_type='Mod'
+\n(?:.+\n)*\1/(?P=_1)     /right/n=2
+\n(?:.+\n)*\1/(?P<_2>ops)/length=1
+\n(?:.+\n)*\1/(?P=_2)    /0/_type='(Eq|NotEq)'
+\n(?:.+\n)*\1/(?P<_3>comparators)/length=1
+\n(?:.+\n)*\1/(?P=_3)            /0/n=[01]
+```
+
+###### Example
+
+```python
+1   a % 2 == 0
+2   a % 2 != 0
+3   a % 2 == 1
+4   a % 2 != 1
+```
+
+###### Matches
+
+```markdown
+parity_test: 1, 2, 3, 4
+```
+
+--------------------------------------------------------------------------------
+
+### Function calls
+
+--------------------------------------------------------------------------------
+
+##### Construct `builtin_function_call`
+
+###### Regex
+
+```re
+        ^(.*)/_type='Call'
+\n(?:.+\n)*\1/lineno=(?P<LINE>\d+)
+\n(?:.+\n)*\1/func/id='(?P<SUFFIX>.+)(?<=abs|delattr|hash|memoryview|set|all|dict|help|min|setattr|any|dir|hex|next|slice|ascii|divmod|id|object|sorted|bin|enumerate|input|oct|staticmethod|bool|eval|int|open|str|breakpoint|exec|isinstance|ord|sum|bytearray|filter|issubclass|pow|super|bytes|float|iter|print|tuple|callable|format|len|property|type|chr|frozenset|list|range|vars|classmethod|getattr|locals|repr|zip|compile|globals|map|reversed|__import__|complex|hasattr|max|round)'
+```
+
+###### Example
+
+```python
+1   print(len("hello, world"))
+2   print(foobar((42)))
+```
+
+###### Matches
+
+```markdown
+builtin_function_call-len: 1
+builtin_function_call-print: 1, 2
 ```
 
 --------------------------------------------------------------------------------
