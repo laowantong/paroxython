@@ -35,6 +35,7 @@
       - [Construct `for_range_backwards`](#construct-for_range_backwards)
       - [Construct `for_indexes_values`](#construct-for_indexes_values)
       - [Construct `for_indexes`](#construct-for_indexes)
+      - [Construct `nested_for`](#construct-nested_for)
   - [Code patterns](#code-patterns)
     - [Iterative patterns](#iterative-patterns)
       - [Sequential loops](#sequential-loops)
@@ -866,6 +867,32 @@ for_indexes: 1
 
 --------------------------------------------------------------------------------
 
+##### Construct `nested_for`
+
+###### Regex
+
+```re
+        ^(.*)/_type='For'
+\n(?:.+\n)*\1/lineno=(?P<LINE>\d+)
+\n(?:.+\n)*\1/body/0/_type='For'
+```
+
+###### Example
+
+```python
+1   for x_1 in seq_1:
+2       for x_2 in seq_2:
+3           pass
+```
+
+###### Matches
+
+```markdown
+nested_for: 1
+```
+
+--------------------------------------------------------------------------------
+
 ## Code patterns
 
 ### Iterative patterns
@@ -1150,7 +1177,7 @@ It's up to you to decide if a rewriting would make the code clearer.
 
 ##### Construct `suggest_conditional_expression`
 
-When a conditional consists solely in assigning different values to the same variable, it may be rewritten as a conditional expression.
+When a conditional simply assigns different values to the same variable, it may be rewritten as a conditional expression.
 
 ###### Regex
 
