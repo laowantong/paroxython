@@ -27,7 +27,8 @@
       - [Construct `for_range_start`](#construct-for_range_start)
       - [Construct `for_range_step`](#construct-for_range_step)
       - [Construct `for_range_backwards`](#construct-for_range_backwards)
-      - [Construct `for_index_values`](#construct-for_index_values)
+      - [Construct `for_indexes_values`](#construct-for_indexes_values)
+      - [Construct `for_indexes`](#construct-for_indexes)
   - [Code patterns](#code-patterns)
     - [Iterative patterns](#iterative-patterns)
       - [Sequential loops](#sequential-loops)
@@ -699,7 +700,7 @@ for_range_backwards: 8
 
 --------------------------------------------------------------------------------
 
-##### Construct `for_index_values`
+##### Construct `for_indexes_values`
 
 Iterate over index numbers and elements of a collection.
 
@@ -721,7 +722,39 @@ Iterate over index numbers and elements of a collection.
 ###### Matches
 
 ```markdown
-for_index_values: 1
+for_indexes_values: 1
+```
+
+--------------------------------------------------------------------------------
+
+##### Construct `for_indexes`
+
+Iterate over index numbers of a collection.
+
+###### Regex
+
+```re
+        ^(.*)/_type='For'
+\n(?:.+\n)*\1/lineno=(?P<LINE>\d+)
+\n(?:.+\n)*\1/(?P<_1>iter)/_type='Call'
+\n(?:.+\n)*\1/(?P=_1)     /func/id='range'
+\n(?:.+\n)*\1/(?P=_1)     /(?P<_2>args)/length=1
+\n(?:.+\n)*\1/(?P=_1)     /(?P=_2)     /(?P<_3>0)/_type='Call'
+\n(?:.+\n)*\1/(?P=_1)     /(?P=_2)     /(?P=_3)  /func/id='len'
+\n(?:.+\n)*\1/(?P=_1)     /keywords/length=0
+```
+
+###### Example
+
+```python
+1   for i in range(len(elements)):
+2       pass
+```
+
+###### Matches
+
+```markdown
+for_indexes: 1
 ```
 
 --------------------------------------------------------------------------------
