@@ -72,7 +72,7 @@
 ```re
         ^(.*)/_type='BinOp'
 \n(?:.+\n)*\1/lineno=(?P<LINE>\d+)
-\n(?:.+\n)*\1/op/_type='(?P<SUFFIX>.+)(?<=Add|Sub|Mult|MatMult|Div|Mod|Pow|LShift|RShift|BitOr|BitXor|BitAnd|FloorDiv)'
+\n(?:.+\n)*\1/op/_type='(?P<SUFFIX>(?=Add|Sub|Mult|MatMult|Div|Mod|Pow|LShift|RShift|BitOr|BitXor|BitAnd|FloorDiv).+)'
 ```
 
 ###### Example
@@ -97,7 +97,7 @@ binary_operator-Sub: 1
 ```re
         ^(.*)/_type='UnaryOp'
 \n(?:.+\n)*\1/lineno=(?P<LINE>\d+)
-\n(?:.+\n)*\1/op/_type='(?P<SUFFIX>.+)(?<=Invert|Not|UAdd|USub)'
+\n(?:.+\n)*\1/op/_type='(?P<SUFFIX>(?=Invert|Not|UAdd|USub).+)'
 ```
 
 ###### Example
@@ -126,7 +126,7 @@ unary_operator-Not: 2
 
 ```re
         ^(.*)/_type='Compare'
-\n(?:.+\n)*\1/ops/0/_type='(?P<SUFFIX>.+)(?<=Eq|NotEq|Lt|LtE|Gt|GtE|Is|IsNot|In|NotIn)'
+\n(?:.+\n)*\1/ops/0/_type='(?P<SUFFIX>(?=Eq|NotEq|Lt|LtE|Gt|GtE|Is|IsNot|In|NotIn).+)'
 \n(?:.+\n)*\1/comparators/0/lineno=(?P<LINE>\d+)
 ```
 
@@ -220,7 +220,7 @@ parity_test: 1, 2, 3, 4
 ```re
         ^(.*)/_type='Call'
 \n(?:.+\n)*\1/lineno=(?P<LINE>\d+)
-\n(?:.+\n)*\1/func/id='(?P<SUFFIX>.+)(?<=abs|delattr|hash|memoryview|set|all|dict|help|min|setattr|any|dir|hex|next|slice|ascii|divmod|id|object|sorted|bin|enumerate|input|oct|staticmethod|bool|eval|int|open|str|breakpoint|exec|isinstance|ord|sum|bytearray|filter|issubclass|pow|super|bytes|float|iter|print|tuple|callable|format|len|property|type|chr|frozenset|list|range|vars|classmethod|getattr|locals|repr|zip|compile|globals|map|reversed|__import__|complex|hasattr|max|round)'
+\n(?:.+\n)*\1/func/id='(?P<SUFFIX>(?=abs|delattr|hash|memoryview|set|all|dict|help|min|setattr|any|dir|hex|next|slice|ascii|divmod|id|object|sorted|bin|enumerate|input|oct|staticmethod|bool|eval|int|open|str|breakpoint|exec|isinstance|ord|sum|bytearray|filter|issubclass|pow|super|bytes|float|iter|print|tuple|callable|format|len|property|type|chr|frozenset|list|range|vars|classmethod|getattr|locals|repr|zip|compile|globals|map|reversed|__import__|complex|hasattr|max|round).+)'
 ```
 
 ###### Example
