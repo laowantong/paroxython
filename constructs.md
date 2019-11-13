@@ -20,6 +20,7 @@
     - [Conditionals](#conditionals)
       - [Construct `if`](#construct-if)
       - [Construct `if_else`](#construct-if_else)
+      - [Construct `if_elif`](#construct-if_elif)
     - [Iterations](#iterations)
       - [Construct `for_each`](#construct-for_each)
       - [Construct `for_range_stop`](#construct-for_range_stop)
@@ -487,6 +488,42 @@ if: 1, 2
 
 ```markdown
 if_else: 1
+```
+
+--------------------------------------------------------------------------------
+
+##### Construct `if_elif`
+
+`if` statement with `elif`.
+
+###### Regex
+
+```re
+        ^(.*)/_type='If'
+\n(?:.+\n)*\1/lineno=(?P<LINE>\d+)
+\n(?:.+\n)*\1/orelse/0/_type='If'
+```
+
+###### Example
+
+```python
+1   if condition_1:
+2       pass
+3   elif condition_2:
+4       pass
+5   
+6   if condition_3:
+7       pass
+8   elif condition_4:
+9       pass
+10  else:
+11      pass
+```
+
+###### Matches
+
+```markdown
+if_elif: 1, 6
 ```
 
 --------------------------------------------------------------------------------
