@@ -42,6 +42,8 @@
     - [Assignments](#assignments-1)
       - [Construct `suggest_conditional_expression`](#construct-suggest_conditional_expression)
       - [Construct `suggest_augmented_assignment`](#construct-suggest_augmented_assignment)
+    - [Conditionals](#conditionals-1)
+      - [Construct `suggest_elif`](#construct-suggest_elif)
     - [Subroutines](#subroutines)
       - [Construct `suggest_condition_return`](#construct-suggest_condition_return)
 
@@ -1060,6 +1062,63 @@ May be rewritten as:
 
 ```markdown
 suggest_augmented_assignment: 1, 2
+```
+
+--------------------------------------------------------------------------------
+
+### Conditionals
+
+--------------------------------------------------------------------------------
+
+##### Construct `suggest_elif`
+
+When the `else` branch of a conditional is an other conditional, it can be rewritten with an `elif` branch.
+
+###### Regex
+
+```re
+        ^(.*)/_type='If'
+\n(?:.+\n)*\1/(?P<_1>orelse)/length=1
+\n(?:.+\n)*\1/(?P=_1)       /(?P<_2>0)/_type='If'
+\n(?:.+\n)*\1/(?P=_1)       /(?P=_2)  /lineno=(?P<LINE>\d+)
+```
+
+###### Example
+
+```python
+1   if condition_1:
+2       pass
+3   else:
+4       if condition_2:
+5           pass
+6       else:
+7           pass
+8   
+9   if condition_1:
+10      pass
+11  else:
+12      if condition_2:
+13          pass
+14      else:
+15          pass
+16      print("hello, world")
+```
+
+The first conditional (only) may be rewritten as:
+
+```python
+1   if condition_1:
+2       pass
+3   elif condition_2:
+4       pass
+5   else:
+6       pass
+```
+
+###### Matches
+
+```markdown
+suggest_elif: 4
 ```
 
 --------------------------------------------------------------------------------
