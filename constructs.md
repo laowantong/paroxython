@@ -1,10 +1,14 @@
 - [Introduction](#introduction)
 - [Specifications](#specifications)
   - [Expressions](#expressions)
-    - [Values](#values)
+    - [Literals](#literals)
       - [Construct `literal`](#construct-literal)
       - [Construct `literal_none`](#construct-literal_none)
       - [Construct `literal_bool`](#construct-literal_bool)
+    - [Subscripts](#subscripts)
+      - [Construct `index`](#construct-index)
+      - [Construct `slice`](#construct-slice)
+      - [Construct `slice_step`](#construct-slice_step)
     - [Arithmetic operators](#arithmetic-operators)
       - [Construct `binary_operator`](#construct-binary_operator)
       - [Construct `unary_operator`](#construct-unary_operator)
@@ -72,7 +76,7 @@
 
 ## Expressions
 
-### Values
+### Literals
 
 --------------------------------------------------------------------------------
 
@@ -155,6 +159,89 @@ literal_none: 1
 
 ```markdown
 literal_bool: 1, 2
+```
+
+--------------------------------------------------------------------------------
+
+### Subscripts
+
+--------------------------------------------------------------------------------
+
+##### Construct `index`
+
+###### Regex
+
+```re
+        ^(.*)/_type='Subscript'
+\n(?:.+\n)*\1/lineno=(?P<LINE>\d+)
+\n(?:.+\n)*\1/slice/_type='Index'
+```
+
+###### Example
+
+```python
+1   a[42]
+2   dictionary[key]
+3   a[42:-1] # no match
+```
+
+###### Matches
+
+```markdown
+index: 1, 2
+```
+
+--------------------------------------------------------------------------------
+
+##### Construct `slice`
+
+###### Regex
+
+```re
+        ^(.*)/_type='Subscript'
+\n(?:.+\n)*\1/lineno=(?P<LINE>\d+)
+\n(?:.+\n)*\1/(?P<_1>slice)/_type='Slice'
+\n(?:.+\n)*\1/(?P=_1)      /step=None
+```
+
+###### Example
+
+```python
+1   a[1] # no match
+2   a[1:-1]
+3   a[1:-1:2] # no match
+```
+
+###### Matches
+
+```markdown
+slice: 2
+```
+
+--------------------------------------------------------------------------------
+
+##### Construct `slice_step`
+
+###### Regex
+
+```re
+        ^(.*)/_type='Subscript'
+\n(?:.+\n)*\1/(?P<_1>slice)/_type='Slice'
+\n(?:.+\n)*\1/(?P=_1)      /step/lineno=(?P<LINE>\d+)
+```
+
+###### Example
+
+```python
+1   a[1] # no match
+2   a[1:-1] # no match
+3   a[1:-1:2]
+```
+
+###### Matches
+
+```markdown
+slice_step: 3
 ```
 
 --------------------------------------------------------------------------------
