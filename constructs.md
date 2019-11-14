@@ -53,6 +53,7 @@
         - [Construct `accumulate_for_1`](#construct-accumulate_for_1)
         - [Construct `accumulate_for_2`](#construct-accumulate_for_2)
         - [Construct `filter_for`](#construct-filter_for)
+        - [Construct `find_best`](#construct-find_best)
         - [Construct `universal_quantifier`](#construct-universal_quantifier)
         - [Construct `existential_quantifier`](#construct-existential_quantifier)
         - [Construct `find_first_element`](#construct-find_first_element)
@@ -1292,6 +1293,46 @@ An accumulation pattern that, from a given collection, returns a list containing
 
 ```markdown
 filter_for: 1-5
+```
+
+--------------------------------------------------------------------------------
+
+##### Construct `find_best`
+
+An accumulation pattern that, from a given collection, returns the best element verifying a certain condition.
+
+###### Regex
+
+```re
+        ^(.*)/_type='For'
+\n(?:.+\n)*\1/lineno=(?P<LINE>\d+)
+\n(?:.+\n)*\1/target/id=(?P<ID_1>.+) # capture iteration variable
+\n(?:.+\n)*\1/(?P<_1>body/\d+)/_type='If'
+\n(?:.+\n)*\1/(?P=_1)         /(?P<_2>test/args)/0/id=(?P=ID_1) # match iteration variable
+\n(?:.+\n)*\1/(?P=_1)         /(?P=_2)          /1/id=(?P<ID_2>.+) # capture candidate
+\n(?:.+\n)*\1/(?P=_1)         /(?P<_3>body/\d+)/_type='Assign'
+\n(?:.+\n)*\1/(?P=_1)         /(?P=_3)         /targets/0/id=(?P=ID_2) # match candidate
+\n(?:.+\n)*\1/(?P=_1)         /(?P=_3)         /value/id=(?P=ID_1) # match iteration variable
+\n(?:.+\n)*/body/(?P<_4>\d+/body/\d+)/_type='Return'
+\n(?:.+\n)*/body/(?P=_4)             /(?P<_5>value)/lineno=(?P<LINE>\d+)
+\n(?:.+\n)*/body/(?P=_4)             /(?P=_5)      /id=(?P=ID_2) # match candidate
+```
+
+###### Example
+
+```python
+1   def find_best_element(elements):
+2       candidate = bad_value
+3       for element in elements:
+4           if is_better(element, candidate):
+5               candidate = element
+6       return candidate
+```
+
+###### Matches
+
+```markdown
+find_best: 3-6
 ```
 
 --------------------------------------------------------------------------------
