@@ -43,6 +43,7 @@
       - [Sequential loops](#sequential-loops)
         - [Construct `accumulate_for_1`](#construct-accumulate_for_1)
         - [Construct `accumulate_for_2`](#construct-accumulate_for_2)
+        - [Construct `filter_for`](#construct-filter_for)
         - [Construct `universal_quantifier`](#construct-universal_quantifier)
         - [Construct `existential_quantifier`](#construct-existential_quantifier)
         - [Construct `find_first_element`](#construct-find_first_element)
@@ -1046,6 +1047,43 @@ An accumulation pattern with an assignment whose RHS contains both the accumulat
 
 ```markdown
 accumulate_for_2: 3-4, 6-7
+```
+
+--------------------------------------------------------------------------------
+
+##### Construct `filter_for`
+
+An accumulation pattern that, from a given sequence, returns a copy containing only those elements that verify a certain condition.
+
+###### Regex
+
+```re
+        ^(.*)/_type='For'
+\n(?:.+\n)*\1/lineno=(?P<LINE>\d+)
+\n(?:.+\n)*\1/target/id=(?P<ID_1>.+) # capture the iteration variable
+\n(?:.+\n)*\1/(?P<_1>body/\d+)/_type='If'
+\n(?:.+\n)*\1/(?P=_1)         /test/args/\d+/id=(?P=ID_1) # match it in a inner conditional test
+\n(?:.+\n)*\1/(?P=_1)         /(?P<_2>body/\d+)/lineno=(?P<LINE>\d+)
+\n(?:.+\n)*\1/(?P=_1)         /(?P=_2)         /(?P<_3>value)/_type='Call'
+\n(?:.+\n)*\1/(?P=_1)         /(?P=_2)         /(?P=_3)      /func/attr='append'
+\n(?:.+\n)*\1/(?P=_1)         /(?P=_2)         /(?P=_3)      /args/0/id=(?P=ID_1) # match it in an append()
+```
+
+###### Example
+
+```python
+1   for element in elements:
+2       print("foo")
+3       if predicate(element):
+4           print("bar")
+5           acc.append(element)
+6       print("fiz")
+```
+
+###### Matches
+
+```markdown
+filter_for: 1-5
 ```
 
 --------------------------------------------------------------------------------
