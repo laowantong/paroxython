@@ -1,7 +1,7 @@
 - [Introduction](#introduction)
 - [Specifications](#specifications)
   - [Expressions](#expressions)
-    - [Literals](#literals)
+    - [Values](#values)
       - [Construct `literal`](#construct-literal)
       - [Construct `literal_none`](#construct-literal_none)
       - [Construct `literal_bool`](#construct-literal_bool)
@@ -14,6 +14,7 @@
       - [Construct `parity_test`](#construct-parity_test)
     - [Function calls](#function-calls)
       - [Construct `builtin_function_call`](#construct-builtin_function_call)
+      - [Construct `cast_function_call`](#construct-cast_function_call)
       - [Construct `function_composition`](#construct-function_composition)
   - [Statements](#statements)
     - [Assignments](#assignments)
@@ -71,7 +72,7 @@
 
 ## Expressions
 
-### Literals
+### Values
 
 --------------------------------------------------------------------------------
 
@@ -332,6 +333,35 @@ parity_test: 1, 2, 3, 4
 ```markdown
 builtin_function_call-len: 1
 builtin_function_call-print: 1, 2
+```
+
+--------------------------------------------------------------------------------
+
+##### Construct `cast_function_call`
+
+###### Regex
+
+```re
+        ^(.*)/func/lineno=(?P<LINE>\d+)
+\n(?:.+\n)*\1/func/id='(?P<SUFFIX>dict|set|list|tuple|int|bool|str|bytes)'
+```
+
+###### Example
+
+```python
+1   dict()
+2   list()
+3   set()
+4   int('42')
+```
+
+###### Matches
+
+```markdown
+cast_function_call-dict: 1
+cast_function_call-list: 2
+cast_function_call-set: 3
+cast_function_call-int: 4
 ```
 
 --------------------------------------------------------------------------------
