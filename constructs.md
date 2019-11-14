@@ -1,6 +1,10 @@
 - [Introduction](#introduction)
 - [Specifications](#specifications)
   - [Expressions](#expressions)
+    - [Literals](#literals)
+      - [Construct `literal`](#construct-literal)
+      - [Construct `literal_none`](#construct-literal_none)
+      - [Construct `literal_bool`](#construct-literal_bool)
     - [Arithmetic operators](#arithmetic-operators)
       - [Construct `binary_operator`](#construct-binary_operator)
       - [Construct `unary_operator`](#construct-unary_operator)
@@ -66,6 +70,93 @@
 # Specifications
 
 ## Expressions
+
+### Literals
+
+--------------------------------------------------------------------------------
+
+##### Construct `literal`
+
+###### Regex
+
+```re
+        ^(.*)/_type='(?P<SUFFIX>Str|Num|Tuple|Dict|Set)'
+\n(?:.+\n)*\1/lineno=(?P<LINE>\d+)
+```
+
+###### Example
+
+```python
+1   
+1   42
+2   42.0
+3   ""
+4   (1, 1)
+5   []
+6   {}
+7   {1, 2, 3}
+```
+
+###### Matches
+
+```markdown
+literal-Num: 2, 3, 5, 5, 8, 8, 8
+literal-Str: 4
+literal-Tuple: 5
+literal-Dict: 7
+literal-Set: 8
+```
+
+--------------------------------------------------------------------------------
+
+##### Construct `literal_none`
+
+###### Regex
+
+```re
+        ^(.*)/_type='NameConstant'
+\n(?:.+\n)*\1/lineno=(?P<LINE>\d+)
+\n(?:.+\n)*\1/value=None
+```
+
+###### Example
+
+```python
+1   None
+```
+
+###### Matches
+
+```markdown
+literal_none: 1
+```
+
+--------------------------------------------------------------------------------
+
+##### Construct `literal_bool`
+
+###### Regex
+
+```re
+        ^(.*)/_type='NameConstant'
+\n(?:.+\n)*\1/lineno=(?P<LINE>\d+)
+\n(?:.+\n)*\1/value=(True|False)
+```
+
+###### Example
+
+```python
+1   True
+2   False
+```
+
+###### Matches
+
+```markdown
+literal_bool: 1, 2
+```
+
+--------------------------------------------------------------------------------
 
 ### Arithmetic operators
 
@@ -1053,7 +1144,7 @@ accumulate_for_2: 3-4, 6-7
 
 ##### Construct `filter_for`
 
-An accumulation pattern that, from a given sequence, returns a copy containing only those elements that verify a certain condition.
+An accumulation pattern that, from a given collection, returns a list containing only those elements that verify a certain condition.
 
 ###### Regex
 
