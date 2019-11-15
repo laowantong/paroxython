@@ -1872,10 +1872,10 @@ Match magic numbers (unnamed numerical constants) other than -1, 0, 1 and 2. A n
 
 ```python
 1   NUMBER_OF_TEETH_OF_A_DOG = 42 # not a magic number
-2   for a in s[::-1]:
-3       if a == 42 and b % 2 == 0: # 42 is a magic number
-4           pass
-5   shoe_size = 42 # magic number
+2   shoe_size = 42 # magic number
+3   for a in s[::-1]:
+4       if a == 42 and b % 2 == 0: # 42 is a magic number
+5           pass
 ```
 
 May be rewritten as:
@@ -1883,16 +1883,16 @@ May be rewritten as:
 ```python
 1   NUMBER_OF_TEETH_OF_A_DOG = 42
 2   ANSWER_TO_THE_ULTIMATE_QUESTION_OF_LIFE_THE_UNIVERSE_AND_EVERYTHING = 42
-3   for a in s[::-1]:
-4       if a == ANSWER_TO_THE_ULTIMATE_QUESTION_OF_LIFE_THE_UNIVERSE_AND_EVERYTHING and b % 2 == 0:
-5           pass
-6   shoe_size = ANSWER_TO_THE_ULTIMATE_QUESTION_OF_LIFE_THE_UNIVERSE_AND_EVERYTHING
+3   shoe_size = ANSWER_TO_THE_ULTIMATE_QUESTION_OF_LIFE_THE_UNIVERSE_AND_EVERYTHING
+4   for a in s[::-1]:
+5       if a == ANSWER_TO_THE_ULTIMATE_QUESTION_OF_LIFE_THE_UNIVERSE_AND_EVERYTHING and b % 2 == 0:
+6           pass   
 ```
 
 ###### Matches
 
 ```markdown
-suggest_constant_definition: 3, 5
+suggest_constant_definition: 2, 4
 ```
 
 --------------------------------------------------------------------------------
