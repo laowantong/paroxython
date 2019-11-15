@@ -258,8 +258,6 @@ slice_step: 3
 
 ##### Construct `boolean_operator`
 
-Remark that `Not` is not a boolean operator in Python. To match it, use the construct `unary_operator-Not`.
-
 ###### Regex
 
 ```re
@@ -282,6 +280,8 @@ Remark that `Not` is not a boolean operator in Python. To match it, use the cons
 boolean_operator-And: 1
 boolean_operator-Or: 2
 ```
+
+**Remark.** `Not` is not a boolean operator in Python. To match it, use the [construct `unary_operator-Not`](#construct-unary_operator).
 
 --------------------------------------------------------------------------------
 
