@@ -1236,7 +1236,7 @@ An accumulation pattern with an assignment whose RHS contains both the accumulat
 \n(?:.+\n)*\1/(?P<_1>body/\d+)/_type='Assign'
 \n(?:.+\n)*\1/(?P=_1)         /lineno=(?P<LINE>\d+)
 \n(?:.+\n)*\1/(?P=_1)         /targets/.*/id=(?P<ACC>.+) # capture the name of the accumulator
-\n(?:.+\n)*\1/(?P=_1)         /value/_ids=(?=.*(?P=ACC).*)(?=.*(?P=ITER_VAR).*).+ # both appear in RHS
+\n(?:.+\n)*\1/(?P=_1)         /value/_ids=(?=.*?(?P=ACC))(?=.*?(?P=ITER_VAR)) # both appear in RHS
 ```
 
 ###### Example
@@ -1303,18 +1303,17 @@ An accumulation pattern that, from a given collection, returns the best element 
 ###### Regex
 
 ```re
-        ^(.*)/_type='For'
-\n(?:.+\n)*\1/lineno=(?P<LINE>\d+)
-\n(?:.+\n)*\1/target/id=(?P<ID_1>.+) # capture iteration variable
-\n(?:.+\n)*\1/(?P<_1>body/\d+)/_type='If'
-\n(?:.+\n)*\1/(?P=_1)         /(?P<_2>test/args)/0/id=(?P=ID_1) # match iteration variable
-\n(?:.+\n)*\1/(?P=_1)         /(?P=_2)          /1/id=(?P<ID_2>.+) # capture candidate
-\n(?:.+\n)*\1/(?P=_1)         /(?P<_3>body/\d+)/_type='Assign'
-\n(?:.+\n)*\1/(?P=_1)         /(?P=_3)         /targets/0/id=(?P=ID_2) # match candidate
-\n(?:.+\n)*\1/(?P=_1)         /(?P=_3)         /value/id=(?P=ID_1) # match iteration variable
-\n(?:.+\n)*/body/(?P<_4>\d+/body/\d+)/_type='Return'
-\n(?:.+\n)*/body/(?P=_4)             /(?P<_5>value)/lineno=(?P<LINE>\d+)
-\n(?:.+\n)*/body/(?P=_4)             /(?P=_5)      /id=(?P=ID_2) # match candidate
+        ^(.*)/(?P<_1>body/\d+)/_type='For'
+\n(?:.+\n)*\1/(?P=_1)         /lineno=(?P<LINE>\d+)
+\n(?:.+\n)*\1/(?P=_1)         /target/id=(?P<ID_1>.+) # capture iteration variable
+\n(?:.+\n)*\1/(?P=_1)         /(?P<_2>body/\d+)/_type='If'
+\n(?:.+\n)*\1/(?P=_1)         /(?P=_2)         /test/_ids=(?=.*?(?P=ID_1)).*?(?P<ID_2>'.+?').* # capture candidate and match iteration variable
+\n(?:.+\n)*\1/(?P=_1)         /(?P=_2)         /(?P<_3>body/\d+)/_type='Assign'
+\n(?:.+\n)*\1/(?P=_1)         /(?P=_2)         /(?P=_3)         /targets/0/id=(?P=ID_2) # match candidate
+\n(?:.+\n)*\1/(?P=_1)         /(?P=_2)         /(?P=_3)         /value/id=(?P=ID_1) # match iteration variable
+\n(?:.+\n)*\1/(?P<_4>body/\d+)/_type='Return'
+\n(?:.+\n)*\1/(?P=_4)         /lineno=(?P<LINE>\d+)
+\n(?:.+\n)*\1/(?P=_4)         /value/id=(?P=ID_2) # match id 2
 ```
 
 ###### Example
@@ -1326,12 +1325,19 @@ An accumulation pattern that, from a given collection, returns the best element 
 4           if is_better(element, candidate):
 5               candidate = element
 6       return candidate
+7
+8   def find_maximum_element(elements):
+9       candidate = element[0]
+10      for element in elements:
+11          if candidate > element:
+12              candidate = element
+13      return candidate
 ```
 
 ###### Matches
 
 ```markdown
-find_best_element: 3-6
+find_best_element: 3-6, 10-13
 ```
 
 --------------------------------------------------------------------------------
@@ -1462,7 +1468,7 @@ Accumulate the inputs until a sentinel value is encountered (accumulation expres
 \n(?:.+\n)*\1/(?P=_1)         /(?P=_2)         /value/id=(?P<ACC>.+) # capture the name of the accumulator
 \n(?:.+\n)*\1/(?P<_3>body/\d+)/lineno=(?P<LINE>\d+)
 \n(?:.+\n)*\1/(?P=_3)         /targets/.*/id=(?P=ACC)
-\n(?:.+\n)*\1/(?P=_3)         /value/_ids=(?=.*(?P=INPUT).*)(?=.*(?P=ACC).*).+ # both appear in RHS
+\n(?:.+\n)*\1/(?P=_3)         /value/_ids=(?=.*(?P=INPUT))(?=.*(?P=ACC)) # both appear in RHS
 ```
 
 ###### Example
