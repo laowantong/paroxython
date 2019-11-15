@@ -9,6 +9,8 @@
       - [Construct `index`](#construct-index)
       - [Construct `slice`](#construct-slice)
       - [Construct `slice_step`](#construct-slice_step)
+    - [Boolean operators](#boolean-operators)
+      - [Construct `boolean_operator`](#construct-boolean_operator)
     - [Arithmetic operators](#arithmetic-operators)
       - [Construct `binary_operator`](#construct-binary_operator)
       - [Construct `unary_operator`](#construct-unary_operator)
@@ -246,6 +248,39 @@ slice: 2
 
 ```markdown
 slice_step: 3
+```
+
+--------------------------------------------------------------------------------
+
+### Boolean operators
+
+--------------------------------------------------------------------------------
+
+##### Construct `boolean_operator`
+
+Remark that `Not` is not a boolean operator in Python. To match it, use the construct `unary_operator-Not`.
+
+###### Regex
+
+```re
+        ^(.*)/_type='BoolOp'
+\n(?:.+\n)*\1/lineno=(?P<LINE>\d+)
+\n(?:.+\n)*\1/op/_type='(?P<SUFFIX>And|Or)'
+```
+
+###### Example
+
+```python
+1   a and b
+2   a or c
+3   not x
+```
+
+###### Matches
+
+```markdown
+boolean_operator-And: 1
+boolean_operator-Or: 2
 ```
 
 --------------------------------------------------------------------------------
