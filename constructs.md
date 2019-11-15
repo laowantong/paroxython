@@ -58,9 +58,7 @@
         - [Construct `existential_quantifier`](#construct-existential_quantifier)
         - [Construct `find_first_element`](#construct-find_first_element)
       - [Non sequential finite loops](#non-sequential-finite-loops)
-        - [Construct `evolve_state_1`](#construct-evolve_state_1)
-        - [Construct `evolve_state_2`](#construct-evolve_state_2)
-        - [Construct `evolve_state_3`](#construct-evolve_state_3)
+        - [Construct `evolve_state`](#construct-evolve_state)
       - [Non sequential infinite loops](#non-sequential-infinite-loops)
         - [Construct `accumulate_until_1`](#construct-accumulate_until_1)
         - [Construct `accumulate_until_2`](#construct-accumulate_until_2)
@@ -1460,7 +1458,7 @@ find_first_element: 2-4
 
 --------------------------------------------------------------------------------
 
-##### Construct `evolve_state_1`
+##### Construct `evolve_state`
 
 Evolve the value of a variable until it reaches a desired state.
 
@@ -1470,10 +1468,21 @@ Evolve the value of a variable until it reaches a desired state.
         ^(.*)/_type='While'
 \n(?:.+\n)*\1/lineno=(?P<LINE>\d+)
 \n(?:.+\n)*\1/test/_ids=.*(?P<ID_1>'.+').* # capture state variable
+(   # the state variable either appears on both sides of a simple assignment
 \n(?:.+\n)*\1/(?P<_1>body/.*)/_type='Assign'
 \n(?:.+\n)*\1/(?P=_1)        /lineno=(?P<LINE>\d+)
 \n(?:.+\n)*\1/(?P=_1)        /targets/0/id=(?P=ID_1) # it is updated somewhere in the loop
 \n(?:.+\n)*\1/(?P=_1)        /value/_ids=.*(?P=ID_1) # from its current value
+|   # or appears on LHS of an augmented assignement
+\n(?:.+\n)*\1/(?P<_1>body/.*)/_type='AugAssign'
+\n(?:.+\n)*\1/(?P=_1)        /lineno=(?P<LINE>\d+)
+\n(?:.+\n)*\1/(?P=_1)        /target/id=(?P=ID_1) # it is augmented somewhere in the loop
+|   # or is mutated by calling a function or a method of this variable
+\n(?:.+\n)*\1/(?P<_1>body/.*)/_type='Expr'
+\n(?:.+\n)*\1/(?P=_1)        /lineno=(?P<LINE>\d+)
+\n(?:.+\n)*\1/(?P=_1)        /(?P<_2>value)/_type='Call'
+\n(?:.+\n)*\1/(?P=_1)        /(?P=_2)      /.*/id=(?P=ID_1) # it is mutated somewhere in the loop
+)
 ```
 
 ###### Example
@@ -1483,75 +1492,19 @@ Evolve the value of a variable until it reaches a desired state.
 2       while n != 1 and n != 89:
 3           n = square_digit_sum(n)
 4       return n
+5
+6   while predicate(x):
+7       x += foo(bar)
+8   while predicate(x):
+9       x.foo(bar)
+10  while predicate(x):
+11      foo(x, bar)
 ```
 
 ###### Matches
 
 ```markdown
-evolve_state_1: 2-3
-```
-
---------------------------------------------------------------------------------
-
-##### Construct `evolve_state_2`
-
-Evolve the value of a variable until it reaches a desired state. Version with an augmented assignment.
-
-###### Regex
-
-```re
-        ^(.*)/_type='While'
-\n(?:.+\n)*\1/lineno=(?P<LINE>\d+)
-\n(?:.+\n)*\1/test/_ids=.*(?P<ID_1>'.+').* # capture state variable
-\n(?:.+\n)*\1/(?P<_1>body/.*)/_type='AugAssign'
-\n(?:.+\n)*\1/(?P=_1)        /lineno=(?P<LINE>\d+)
-\n(?:.+\n)*\1/(?P=_1)        /target/id=(?P=ID_1) # it is augmented somewhere in the loop
-```
-
-###### Example
-
-```python
-1   while predicate(x):
-2       x += foo(bar)
-```
-
-###### Matches
-
-```markdown
-evolve_state_2: 1-2
-```
-
---------------------------------------------------------------------------------
-
-##### Construct `evolve_state_3`
-
-Mutate a variable until it reaches a desired state, by calling a function or a method of this variable.
-
-###### Regex
-
-```re
-        ^(.*)/_type='While'
-\n(?:.+\n)*\1/lineno=(?P<LINE>\d+)
-\n(?:.+\n)*\1/test/_ids=.*(?P<ID_1>'.+').* # capture state variable
-\n(?:.+\n)*\1/(?P<_1>body/.*)/_type='Expr'
-\n(?:.+\n)*\1/(?P=_1)        /lineno=(?P<LINE>\d+)
-\n(?:.+\n)*\1/(?P=_1)        /(?P<_2>value)/_type='Call'
-\n(?:.+\n)*\1/(?P=_1)        /(?P=_2)      /.*/id=(?P=ID_1) # it is mutated somewhere in the loop
-```
-
-###### Example
-
-```python
-1   while predicate(x):
-2       x.foo(bar)
-1   while predicate(x):
-2       foo(x, bar)
-```
-
-###### Matches
-
-```markdown
-evolve_state_3: 1-2, 3-4
+evolve_state: 2-3, 6-7, 8-9, 10-11
 ```
 
 --------------------------------------------------------------------------------
