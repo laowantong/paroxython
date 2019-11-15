@@ -1,14 +1,13 @@
-from md_toc import build_toc
 import pytest
 import regex
+from md_toc import build_toc
 
 from context import paroxython
 
 
 def reformat_file(construct_path):
     """ Update TOC and vertical spaces in the definition file. """
-    with open("constructs.md") as f:
-        text = f.read()
+    text = construct_path.read_text()
     toc = build_toc("constructs.md", keep_header_levels=5, no_list_coherence=True)
     rule = "-" * 80 + "\n"
     text = regex.sub(r"(?m)^---+\n", "", text)
@@ -16,16 +15,14 @@ def reformat_file(construct_path):
     text = regex.sub(r"(?m)\s+^(#+ .+)\s+", fr"\n\n\1\n\n", text)
     text = regex.sub(r"(?ms)(```markdown.+?```.+?)(^\#{1,4} )", fr"\1{rule}\n\2", text)
     text = regex.sub(r"(?=\n\#{5} )", fr"\n{rule}", text)
-    with open("constructs.md", "w") as f:
-        f.write(text)
+    construct_path.write_text(text)
 
 
-reformat_file("constructs.md")
+reformat_file(paroxython.CONSTRUCT_PATH)
 
 
 def extract_examples(construct_path):
-    with open(construct_path) as f:
-        text = f.read()
+    text = construct_path.read_text()
     rex = r"""(?msx)
         ^\#{5}\s+Construct\s+`(.+?)` # capture the label
         .+?
@@ -40,7 +37,7 @@ def extract_examples(construct_path):
     return regex.findall(rex, text)
 
 
-examples = extract_examples("constructs.md")
+examples = extract_examples(paroxython.CONSTRUCT_PATH)
 
 
 @pytest.mark.parametrize("label, source, results", examples)
@@ -58,5 +55,5 @@ def test_at_least_one_example_is_provided_for_each_construct():
     assert actual == expected
 
 
-parse = paroxython.Parser("constructs.md")
+parse = paroxython.Parser(paroxython.CONSTRUCT_PATH)
 pytest.main(args=["-q"])

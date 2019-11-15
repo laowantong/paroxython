@@ -1,8 +1,10 @@
 import ast
-import regex
 from collections import defaultdict
+from pathlib import Path
 
+import regex
 
+CONSTRUCT_PATH = Path("constructs.md")
 REMOVE_CONTEXT = regex.compile(r", ctx=.+?\(\)").sub
 
 
@@ -28,8 +30,7 @@ def flatten(node, prefix=""):
 
 class Parser:
     def __init__(self, construct_path):
-        with open(construct_path) as f:
-            text = f.read()
+        text = construct_path.read_text()
         rex = r"""(?msx)
             ^\#{5}\s+Construct\s+`(.+?)` # capture the label
             .+?
@@ -60,13 +61,11 @@ class Parser:
 
 
 if __name__ == "__main__":
-    parse = Parser("constructs.md")
-    with open("draft.py") as f:
-        source = f.read()
+    parse = Parser(CONSTRUCT_PATH)
+    source = Path("draft.py").read_text()
     for (i, line) in enumerate(source.splitlines(), 1):
         print(f"{i:2}  {line}")
     result = parse(source)
-    with open("logs/draft.txt", "w") as f:
-        f.write(parse.code)
+    Path("logs/draft.txt").write_text(parse.code)
     for (label, lines) in sorted(result.items()):
         print(f"{label}: {lines}")
