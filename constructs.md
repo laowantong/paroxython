@@ -3,18 +3,15 @@
   - [Expressions](#expressions)
     - [Literals](#literals)
       - [Construct `literal`](#construct-literal)
-      - [Construct `literal_none`](#construct-literal_none)
-      - [Construct `literal_bool`](#construct-literal_bool)
     - [Subscripts](#subscripts)
       - [Construct `index`](#construct-index)
       - [Construct `slice`](#construct-slice)
       - [Construct `slice_step`](#construct-slice_step)
-    - [Boolean operators](#boolean-operators)
-      - [Construct `boolean_operator`](#construct-boolean_operator)
     - [Arithmetic operators](#arithmetic-operators)
       - [Construct `binary_operator`](#construct-binary_operator)
       - [Construct `unary_operator`](#construct-unary_operator)
-    - [Comparisons](#comparisons)
+    - [Boolean expressions](#boolean-expressions)
+      - [Construct `boolean_operator`](#construct-boolean_operator)
       - [Construct `comparison_operator`](#construct-comparison_operator)
       - [Construct `divisibility_test`](#construct-divisibility_test)
       - [Construct `parity_test`](#construct-parity_test)
@@ -91,14 +88,20 @@
 ###### Regex
 
 ```re
-        ^(.*)/_type='(?P<SUFFIX>Str|Num|Tuple|Dict|Set)'
+^(.*)
+(   # match None, True and False
+             /_type='NameConstant'
 \n(?:.+\n)*\1/lineno=(?P<LINE>\d+)
+\n(?:.+\n)*\1/value=(?P<SUFFIX>None|True|False)
+|   # match any other constant
+             /_type='(?P<SUFFIX>Str|Num|Tuple|Dict|Set)'
+\n(?:.+\n)*\1/lineno=(?P<LINE>\d+)
+)
 ```
 
 ###### Example
 
 ```python
-1   
 1   42
 2   42.0
 3   ""
@@ -106,65 +109,21 @@
 5   []
 6   {}
 7   {1, 2, 3}
+8   True and False
+9   None
 ```
 
 ###### Matches
 
 ```markdown
-literal-Num: 2, 3, 5, 5, 8, 8, 8
-literal-Str: 4
-literal-Tuple: 5
-literal-Dict: 7
-literal-Set: 8
-```
-
---------------------------------------------------------------------------------
-
-##### Construct `literal_none`
-
-###### Regex
-
-```re
-        ^(.*)/_type='NameConstant'
-\n(?:.+\n)*\1/lineno=(?P<LINE>\d+)
-\n(?:.+\n)*\1/value=None
-```
-
-###### Example
-
-```python
-1   None
-```
-
-###### Matches
-
-```markdown
-literal_none: 1
-```
-
---------------------------------------------------------------------------------
-
-##### Construct `literal_bool`
-
-###### Regex
-
-```re
-        ^(.*)/_type='NameConstant'
-\n(?:.+\n)*\1/lineno=(?P<LINE>\d+)
-\n(?:.+\n)*\1/value=(True|False)
-```
-
-###### Example
-
-```python
-1   True
-2   False
-```
-
-###### Matches
-
-```markdown
-literal_bool: 1, 2
+literal-Dict: 6
+literal-False: 8
+literal-None: 9
+literal-Num: 1, 2, 4, 4, 7, 7, 7
+literal-Set: 7
+literal-Str: 3
+literal-True: 8
+literal-Tuple: 4
 ```
 
 --------------------------------------------------------------------------------
@@ -252,39 +211,6 @@ slice_step: 3
 
 --------------------------------------------------------------------------------
 
-### Boolean operators
-
---------------------------------------------------------------------------------
-
-##### Construct `boolean_operator`
-
-###### Regex
-
-```re
-        ^(.*)/_type='BoolOp'
-\n(?:.+\n)*\1/lineno=(?P<LINE>\d+)
-\n(?:.+\n)*\1/op/_type='(?P<SUFFIX>And|Or)'
-```
-
-###### Example
-
-```python
-1   a and b
-2   a or c
-3   not x
-```
-
-###### Matches
-
-```markdown
-boolean_operator-And: 1
-boolean_operator-Or: 2
-```
-
-**Remark.** `Not` is not a boolean operator in Python. To match it, use the [construct `unary_operator-Not`](#construct-unary_operator).
-
---------------------------------------------------------------------------------
-
 ### Arithmetic operators
 
 --------------------------------------------------------------------------------
@@ -340,7 +266,36 @@ unary_operator-Not: 2
 
 --------------------------------------------------------------------------------
 
-### Comparisons
+### Boolean expressions
+
+--------------------------------------------------------------------------------
+
+##### Construct `boolean_operator`
+
+###### Regex
+
+```re
+        ^(.*)/_type='BoolOp'
+\n(?:.+\n)*\1/lineno=(?P<LINE>\d+)
+\n(?:.+\n)*\1/op/_type='(?P<SUFFIX>And|Or)'
+```
+
+###### Example
+
+```python
+1   a and b
+2   a or c
+3   not x
+```
+
+###### Matches
+
+```markdown
+boolean_operator-And: 1
+boolean_operator-Or: 2
+```
+
+**Remark.** `Not` is not a boolean operator in Python. To match it, use the [construct `unary_operator-Not`](#construct-unary_operator).
 
 --------------------------------------------------------------------------------
 
