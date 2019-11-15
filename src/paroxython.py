@@ -5,15 +5,19 @@ from pathlib import Path
 import regex
 
 CONSTRUCT_PATH = Path("constructs.md")
+EXTRACT_IDS = regex.compile(r"Name\(id='(.+?)'\)").findall
 REMOVE_CONTEXT = regex.compile(r", ctx=.+?\(\)").sub
 
 
 def flatten(node, prefix=""):
     if isinstance(node, ast.AST):
         acc = [f"{prefix}/_type='{type(node).__name__}'\n"]
-        node_repr = REMOVE_CONTEXT("", ast.dump(node))
-        node_hash = hex(hash(node_repr) & 0xFFFFFFFF)
-        acc.append(f"{prefix}/hash={node_hash}\n")
+        if isinstance(node, ast.expr):
+            node_repr = REMOVE_CONTEXT("", ast.dump(node))
+            ids = "''".join(sorted(set(EXTRACT_IDS(node_repr))))
+            acc.append(f"{prefix}/_ids='{ids}'\n")
+            expr_hash = hex(hash(node_repr) & 0xFFFFFFFF)
+            acc.append(f"{prefix}/_hash={expr_hash}\n")
         if "lineno" in node._attributes:
             acc.append(f"{prefix}/lineno={node.lineno}\n")
         for (name, x) in ast.iter_fields(node):

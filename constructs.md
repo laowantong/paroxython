@@ -53,7 +53,7 @@
         - [Construct `accumulate_for_1`](#construct-accumulate_for_1)
         - [Construct `accumulate_for_2`](#construct-accumulate_for_2)
         - [Construct `filter_for`](#construct-filter_for)
-        - [Construct `find_best`](#construct-find_best)
+        - [Construct `find_best_element`](#construct-find_best_element)
         - [Construct `universal_quantifier`](#construct-universal_quantifier)
         - [Construct `existential_quantifier`](#construct-existential_quantifier)
         - [Construct `find_first_element`](#construct-find_first_element)
@@ -605,11 +605,11 @@ Swap two variables or two elements of an array with a 2-element tuple or list.
         ^(.*)/_type='Assign'
 \n(?:.+\n)*\1/lineno=(?P<LINE>\d+)
 \n(?:.+\n)*\1/targets/0/elts/length=2
-\n(?:.+\n)*\1/targets/0/elts/0/hash=(?P<HASH_A>.+)
-\n(?:.+\n)*\1/targets/0/elts/1/hash=(?P<HASH_B>.+)
+\n(?:.+\n)*\1/targets/0/elts/0/_hash=(?P<HASH_A>.+)
+\n(?:.+\n)*\1/targets/0/elts/1/_hash=(?P<HASH_B>.+)
 \n(?:.+\n)*\1/value/elts/length=2
-\n(?:.+\n)*\1/value/elts/0/hash=(?P=HASH_B)
-\n(?:.+\n)*\1/value/elts/1/hash=(?P=HASH_A)
+\n(?:.+\n)*\1/value/elts/0/_hash=(?P=HASH_B)
+\n(?:.+\n)*\1/value/elts/1/_hash=(?P=HASH_A)
 ```
 
 ###### Example
@@ -638,10 +638,10 @@ Update a variable by negating it.
 ```re
         ^(.*)/_type='Assign'
 \n(?:.+\n)*\1/lineno=(?P<LINE>\d+)
-\n(?:.+\n)*\1/targets/0/hash=(?P<HASH>.+)
+\n(?:.+\n)*\1/targets/0/_ids=(?P<IDS>.+)
 \n(?:.+\n)*\1/value/_type='UnaryOp'
 \n(?:.+\n)*\1/value/op/_type='USub'
-\n(?:.+\n)*\1/value/operand/hash=(?P=HASH)
+\n(?:.+\n)*\1/value/operand/_ids=(?P=IDS)
 ```
 
 ###### Example
@@ -1153,13 +1153,13 @@ triangular_nested_for_1: 1
 \n(?:.+\n)*\1/(?P<_1>iter)/_type='Call'
 \n(?:.+\n)*\1/(?P=_1)     /func/id='range'
 \n(?:.+\n)*\1/(?P=_1)     /args/length=1 # only range(arg1)
-\n(?:.+\n)*\1/(?P=_1)     /args/0/hash=(?P<STOP>.+) # capture stop expression
+\n(?:.+\n)*\1/(?P=_1)     /args/0/_hash=(?P<STOP>.+) # capture stop expression
 \n(?:.+\n)*\1/(?P<_2>body/\d+)/_type='For'
 \n(?:.+\n)*\1/(?P=_2)         /(?P<_3>iter)/_type='Call'
 \n(?:.+\n)*\1/(?P=_2)         /(?P=_3)     /(?P<_4>func)/id='range'
 \n(?:.+\n)*\1/(?P=_2)         /(?P=_3)     /(?P<_5>args)/length=2 # only range(arg1, arg2)
 \n(?:.+\n)*\1/(?P=_2)         /(?P=_3)     /(?P=_5)     /0(/.+)*/id=(?P=VAR) # match iteration variable
-\n(?:.+\n)*\1/(?P=_2)         /(?P=_3)     /(?P=_5)     /1(/.+)*/hash=(?P=STOP) # match stop expression
+\n(?:.+\n)*\1/(?P=_2)         /(?P=_3)     /(?P=_5)     /1(/.+)*/_hash=(?P=STOP) # match stop expression
 ```
 
 ###### Example
@@ -1236,8 +1236,7 @@ An accumulation pattern with an assignment whose RHS contains both the accumulat
 \n(?:.+\n)*\1/(?P<_1>body/\d+)/_type='Assign'
 \n(?:.+\n)*\1/(?P=_1)         /lineno=(?P<LINE>\d+)
 \n(?:.+\n)*\1/(?P=_1)         /targets/.*/id=(?P<ACC>.+) # capture the name of the accumulator
-\n(?:.+\n)*\1/(?P=_1)         /value/.*/id=(?P<VAR>((?P=ITER_VAR)|(?P=ACC))) # name VAR the variable used here
-\n(?:.+\n)*\1/(?P=_1)         /value/.*/id=((?P=ITER_VAR)|(?P=ACC))(?<!(?P=VAR)) # and check the other one is used there
+\n(?:.+\n)*\1/(?P=_1)         /value/_ids=(?=.*(?P=ACC).*)(?=.*(?P=ITER_VAR).*).+ # both appear in RHS
 ```
 
 ###### Example
@@ -1249,7 +1248,7 @@ An accumulation pattern with an assignment whose RHS contains both the accumulat
 4           acc = combine(element, acc)
 5       return acc
 6   for i in range(10):
-7       acc = combine(i, acc)
+7       acc = combine(acc, i)
 ```
 
 ###### Matches
@@ -1297,7 +1296,7 @@ filter_for: 1-5
 
 --------------------------------------------------------------------------------
 
-##### Construct `find_best`
+##### Construct `find_best_element`
 
 An accumulation pattern that, from a given collection, returns the best element verifying a certain condition.
 
@@ -1332,7 +1331,7 @@ An accumulation pattern that, from a given collection, returns the best element 
 ###### Matches
 
 ```markdown
-find_best: 3-6
+find_best_element: 3-6
 ```
 
 --------------------------------------------------------------------------------
@@ -1463,8 +1462,7 @@ Accumulate the inputs until a sentinel value is encountered (accumulation expres
 \n(?:.+\n)*\1/(?P=_1)         /(?P=_2)         /value/id=(?P<ACC>.+) # capture the name of the accumulator
 \n(?:.+\n)*\1/(?P<_3>body/\d+)/lineno=(?P<LINE>\d+)
 \n(?:.+\n)*\1/(?P=_3)         /targets/.*/id=(?P=ACC)
-\n(?:.+\n)*\1/(?P=_3)         /value.*/id=(?P<VAR>((?P=INPUT)|(?P=ACC))) # name VAR the variable used here
-\n(?:.+\n)*\1/(?P=_3)         /value.*/id=((?P=INPUT)|(?P=ACC))(?<!(?P=VAR)) # and check the other one is used there
+\n(?:.+\n)*\1/(?P=_3)         /value/_ids=(?=.*(?P=INPUT).*)(?=.*(?P=ACC).*).+ # both appear in RHS
 ```
 
 ###### Example
@@ -1548,11 +1546,11 @@ When a conditional simply assigns different values to the same variable, it may 
 \n(?:.+\n)*\1/lineno=(?P<LINE>\d+)
 \n(?:.+\n)*\1/body/length=1
 \n(?:.+\n)*\1/body/0/_type='Assign'
-\n(?:.+\n)*\1/body/0/targets/0/hash=(?P<HASH>.+)
+\n(?:.+\n)*\1/body/0/targets/0/_hash=(?P<HASH>.+)
 \n(?:.+\n)*\1/orelse/length=1
 \n(?:.+\n)*\1/orelse/0/_type='Assign'
 \n(?:.+\n)*\1/orelse/0/lineno=(?P<LINE>\d+)
-\n(?:.+\n)*\1/orelse/0/targets/0/hash=(?P=HASH)
+\n(?:.+\n)*\1/orelse/0/targets/0/_hash=(?P=HASH)
 ```
 
 ###### Example
@@ -1704,9 +1702,9 @@ When the `else` branch of a conditional is another conditional, it can be rewrit
 \n(?:.+\n)*\1/lineno=(?P<LINE>\d+)
 \n(?:.+\n)*\1/op/_type='And'
 \n(?:.+\n)*\1/(?P<_1>values/0)/_type='Compare'
-\n(?:.+\n)*\1/(?P=_1)         /comparators/0/hash=(?P<HASH_1>.+) # capture the right operand of the left comparison
+\n(?:.+\n)*\1/(?P=_1)         /comparators/0/_hash=(?P<HASH_1>.+) # capture the right operand of the left comparison
 \n(?:.+\n)*\1/(?P<_2>values/1)/_type='Compare'
-\n(?:.+\n)*\1/(?P=_2)         /left/hash=(?P=HASH_1) # match the left operand of the right comparison
+\n(?:.+\n)*\1/(?P=_2)         /left/_hash=(?P=HASH_1) # match the left operand of the right comparison
 ```
 
 ###### Example
