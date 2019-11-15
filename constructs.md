@@ -1463,7 +1463,7 @@ Accumulate the inputs until a sentinel value is encountered (accumulation expres
 \n(?:.+\n)*\1/test/value=True
 \n(?:.+\n)*\1/body/\d+/targets/.+/id=(?P<INPUT>.+) # capture the name of the input
 \n(?:.+\n)*\1/(?P<_1>body/\d+)/_type='If'
-\n(?:.+\n)*\1/(?P=_1)         /test/args/0/id=(?P=INPUT)
+\n(?:.+\n)*\1/(?P=_1)         /test/_ids=.*?(?P=INPUT).* # the input is tested
 \n(?:.+\n)*\1/(?P=_1)         /(?P<_2>body/\d+)/_type='Return'
 \n(?:.+\n)*\1/(?P=_1)         /(?P=_2)         /value/id=(?P<ACC>.+) # capture the name of the accumulator
 \n(?:.+\n)*\1/(?P<_3>body/\d+)/lineno=(?P<LINE>\d+)
@@ -1478,7 +1478,7 @@ Accumulate the inputs until a sentinel value is encountered (accumulation expres
 2       acc = neutral
 3       while True:
 4           x = read()
-5           if is_sentinel(x):
+5           if is_sentinel(x, y):
 6               return acc
 7           acc = combine(x, acc)
 ```
@@ -1503,7 +1503,7 @@ Accumulate the inputs until a sentinel value is encountered (accumulation expres
 \n(?:.+\n)*\1/test/value=True
 \n(?:.+\n)*\1/body/\d+/targets/.+/id=(?P<INPUT>.+) # capture the name of the input
 \n(?:.+\n)*\1/(?P<_1>body/\d+)/_type='If'
-\n(?:.+\n)*\1/(?P=_1)         /test/args/0/id=(?P=INPUT)
+\n(?:.+\n)*\1/(?P=_1)         /test/_ids=.*?(?P=INPUT).* # the input is tested
 \n(?:.+\n)*\1/(?P=_1)         /(?P<_2>body/\d+)/_type='Return'
 \n(?:.+\n)*\1/(?P=_1)         /(?P=_2)         /value/id=(?P<ACC>.+) # capture the name of the accumulator
 \n(?:.+\n)*\1/(?P<_3>body/\d+)/_type='AugAssign'
@@ -1519,7 +1519,7 @@ Accumulate the inputs until a sentinel value is encountered (accumulation expres
 2       acc = neutral
 3       while True:
 4           x = read()
-5           if is_sentinel(x):
+5           if x > y:
 6               return acc
 7           acc += abs(x)
 ```
