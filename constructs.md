@@ -44,8 +44,7 @@
       - [Construct `for_indexes_values`](#construct-for_indexes_values)
       - [Construct `for_indexes`](#construct-for_indexes)
       - [Construct `nested_for`](#construct-nested_for)
-      - [Construct `triangular_nested_for_1`](#construct-triangular_nested_for_1)
-      - [Construct `triangular_nested_for_2`](#construct-triangular_nested_for_2)
+      - [Construct `triangular_nested_for`](#construct-triangular_nested_for)
   - [Code patterns](#code-patterns)
     - [Iterative patterns](#iterative-patterns)
       - [Sequential loops](#sequential-loops)
@@ -1102,10 +1101,9 @@ nested_for: 1
 
 --------------------------------------------------------------------------------
 
-##### Construct `triangular_nested_for_1`
+##### Construct `triangular_nested_for`
 
-In two nested for loop, the first iteration variable (`i`) goes from `0` to `n`,
-and the second one from `0` to `i`.
+A `for` loop with counter `i` and a nested `for` loop which makes `i` iterations.
 
 ###### Regex
 
@@ -1116,11 +1114,21 @@ and the second one from `0` to `i`.
 \n(?:.+\n)*\1/(?P<_1>iter)/_type='Call'
 \n(?:.+\n)*\1/(?P=_1)     /func/id='range'
 \n(?:.+\n)*\1/(?P=_1)     /args/length=1 # only range(arg1)
+(   # i goes from 0 to n, and j from 0 to i
 \n(?:.+\n)*\1/(?P<_2>body/0)/_type='For'
 \n(?:.+\n)*\1/(?P=_2)       /(?P<_3>iter)/_type='Call'
 \n(?:.+\n)*\1/(?P=_2)       /(?P=_3)     /func/id='range'
 \n(?:.+\n)*\1/(?P=_2)       /(?P=_3)     /(?P<_4>args)/length=1 # only range(arg1)
 \n(?:.+\n)*\1/(?P=_2)       /(?P=_3)     /(?P=_4)     /0(/.+)*/id=(?P=VAR) # match iteration variable
+|   # i goes from 0 to n, and j from i to n
+\n(?:.+\n)*\1/(?P=_1)     /args/0/_hash=(?P<STOP>.+) # capture stop expression
+\n(?:.+\n)*\1/(?P<_2>body/\d+)/_type='For'
+\n(?:.+\n)*\1/(?P=_2)         /(?P<_3>iter)/_type='Call'
+\n(?:.+\n)*\1/(?P=_2)         /(?P=_3)     /(?P<_4>func)/id='range'
+\n(?:.+\n)*\1/(?P=_2)         /(?P=_3)     /(?P<_5>args)/length=2 # only range(arg1, arg2)
+\n(?:.+\n)*\1/(?P=_2)         /(?P=_3)     /(?P=_5)     /0(/.+)*/id=(?P=VAR) # match iteration variable
+\n(?:.+\n)*\1/(?P=_2)         /(?P=_3)     /(?P=_5)     /1(/.+)*/_hash=(?P=STOP) # match stop expression
+)
 ```
 
 ###### Example
@@ -1129,48 +1137,16 @@ and the second one from `0` to `i`.
 1   for i in range(n):
 2       for j in range(i - 1):
 3           pass
+4   
+5   for i in range(n):
+6       for j in range(i+1, n):
+7           pass
 ```
 
 ###### Matches
 
 ```markdown
-triangular_nested_for_1: 1
-```
-
---------------------------------------------------------------------------------
-
-##### Construct `triangular_nested_for_2`
-
-###### Regex
-
-```re
-        ^(.*)/_type='For'
-\n(?:.+\n)*\1/lineno=(?P<LINE>\d+)
-\n(?:.+\n)*\1/target/id=(?P<VAR>.+) # capture iteration variable
-\n(?:.+\n)*\1/(?P<_1>iter)/_type='Call'
-\n(?:.+\n)*\1/(?P=_1)     /func/id='range'
-\n(?:.+\n)*\1/(?P=_1)     /args/length=1 # only range(arg1)
-\n(?:.+\n)*\1/(?P=_1)     /args/0/_hash=(?P<STOP>.+) # capture stop expression
-\n(?:.+\n)*\1/(?P<_2>body/\d+)/_type='For'
-\n(?:.+\n)*\1/(?P=_2)         /(?P<_3>iter)/_type='Call'
-\n(?:.+\n)*\1/(?P=_2)         /(?P=_3)     /(?P<_4>func)/id='range'
-\n(?:.+\n)*\1/(?P=_2)         /(?P=_3)     /(?P<_5>args)/length=2 # only range(arg1, arg2)
-\n(?:.+\n)*\1/(?P=_2)         /(?P=_3)     /(?P=_5)     /0(/.+)*/id=(?P=VAR) # match iteration variable
-\n(?:.+\n)*\1/(?P=_2)         /(?P=_3)     /(?P=_5)     /1(/.+)*/_hash=(?P=STOP) # match stop expression
-```
-
-###### Example
-
-```python
-1   for i in range(n):
-2       for j in range(i+1, n):
-3           pass
-```
-
-###### Matches
-
-```markdown
-triangular_nested_for_2: 1
+triangular_nested_for: 1, 5
 ```
 
 --------------------------------------------------------------------------------
