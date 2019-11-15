@@ -57,7 +57,9 @@
         - [Construct `universal_quantifier`](#construct-universal_quantifier)
         - [Construct `existential_quantifier`](#construct-existential_quantifier)
         - [Construct `find_first_element`](#construct-find_first_element)
-      - [Non sequential loops](#non-sequential-loops)
+      - [Non sequential finite loops](#non-sequential-finite-loops)
+        - [Construct `evolve_state`](#construct-evolve_state)
+      - [Non sequential infinite loops](#non-sequential-infinite-loops)
         - [Construct `accumulate_until_1`](#construct-accumulate_until_1)
         - [Construct `accumulate_until_2`](#construct-accumulate_until_2)
   - [Suggestions](#suggestions)
@@ -1451,7 +1453,44 @@ find_first_element: 2-4
 
 --------------------------------------------------------------------------------
 
-#### Non sequential loops
+#### Non sequential finite loops
+
+--------------------------------------------------------------------------------
+
+##### Construct `evolve_state`
+
+Evolve the value of a variable until it reaches a certain state.
+
+###### Regex
+
+```re
+        ^(.*)/_type='While'
+\n(?:.+\n)*\1/lineno=(?P<LINE>\d+)
+\n(?:.+\n)*\1/test/_ids=.*(?P<ID_1>'.+').* # capture state variable
+\n(?:.+\n)*\1/(?P<_1>body/.*)/_type='Assign'
+\n(?:.+\n)*\1/(?P=_1)        /lineno=(?P<LINE>\d+)
+\n(?:.+\n)*\1/(?P=_1)        /targets/0/id=(?P=ID_1) # it is updated somewhere in the loop
+\n(?:.+\n)*\1/(?P=_1)        /value/_ids=.*(?P=ID_1) # from its current value
+```
+
+###### Example
+
+```python
+1   def square_digit_attractor(n):
+2       while n != 1 and n != 89:
+3           n = square_digit_sum(n)
+4       return n
+```
+
+###### Matches
+
+```markdown
+evolve_state: 2-3
+```
+
+--------------------------------------------------------------------------------
+
+#### Non sequential infinite loops
 
 --------------------------------------------------------------------------------
 
