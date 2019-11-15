@@ -72,6 +72,7 @@
       - [Construct `suggest_elif`](#construct-suggest_elif)
     - [Expressions](#expressions-1)
       - [Construct `suggest_comparison_chaining`](#construct-suggest_comparison_chaining)
+      - [Construct `suggest_constant_definition`](#construct-suggest_constant_definition)
     - [Subroutines](#subroutines)
       - [Construct `suggest_condition_return`](#construct-suggest_condition_return)
 
@@ -1845,6 +1846,53 @@ Note that the last simplification is rather confusing and should be avoided.
 
 ```markdown
 suggest_comparison_chaining: 1, 2, 3, 4
+```
+
+--------------------------------------------------------------------------------
+
+##### Construct `suggest_constant_definition`
+
+Match magic numbers (unnamed numerical constants) other than -1, 0, 1 and 2. A number in the RHS of an assignment to a constant is of course ignored.
+
+###### Regex
+
+```re
+    # indented lines
+^(?P<_1>/body/\d+/body/\d+.*)/lineno=(?P<LINE>\d+)
+\n(?:.+\n)*(?P=_1)           /n=(?!(-1|0|1|2)\n)
+|
+    # non indented lines
+^(?P<_1>/body/\d+)/_type='Assign'
+\n(?:.+\n)*(?P=_1)/lineno=(?P<LINE>\d+)
+\n(?:.+\n)*(?P=_1)/targets/0/id='.*?[a-z].*' # at least one lowercase letter
+\n(?:.+\n)*(?P=_1)/value/n=(?!(-1|0|1|2)\n)
+```
+
+###### Example
+
+```python
+1   NUMBER_OF_TEETH_OF_A_DOG = 42 # not a magic number
+2   for a in s[::-1]:
+3       if a == 42 and b % 2 == 0: # 42 is a magic number
+4           pass
+5   shoe_size = 42 # magic number
+```
+
+May be rewritten as:
+
+```python
+1   NUMBER_OF_TEETH_OF_A_DOG = 42
+2   ANSWER_TO_THE_ULTIMATE_QUESTION_OF_LIFE_THE_UNIVERSE_AND_EVERYTHING = 42
+3   for a in s[::-1]:
+4       if a == ANSWER_TO_THE_ULTIMATE_QUESTION_OF_LIFE_THE_UNIVERSE_AND_EVERYTHING and b % 2 == 0:
+5           pass
+6   shoe_size = ANSWER_TO_THE_ULTIMATE_QUESTION_OF_LIFE_THE_UNIVERSE_AND_EVERYTHING
+```
+
+###### Matches
+
+```markdown
+suggest_constant_definition: 3, 5
 ```
 
 --------------------------------------------------------------------------------
