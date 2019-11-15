@@ -792,7 +792,7 @@ if: 1, 2
 ```re
         ^(.*)/_type='If'
 \n(?:.+\n)*\1/lineno=(?P<LINE>\d+)
-\n(?:.+\n)*\1/orelse/0/_type=.*
+\n(?:.+\n)*\1/orelse/0/_type=(?!'If')
 ```
 
 ###### Example
@@ -803,6 +803,10 @@ if: 1, 2
 3           pass
 4   else:
 5       pass
+6   if condition_2:
+7       pass
+8   elif condition_3:
+9       pass
 ```
 
 ###### Matches
