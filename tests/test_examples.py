@@ -44,9 +44,10 @@ examples = extract_examples(paroxython.CONSTRUCT_PATH)
 def test_example(label, source, results):
     source = regex.sub(r"(?m)^.{4}", "", source)
     results = (line.partition(": ")[0::2] for line in results.split("\n"))
-    actual = set(parse(source).items())
+    actual = parse(source)
     for (label, expected) in results:
-        assert (label, expected) in actual
+        assert label in actual
+        assert actual[label] == expected
 
 
 def test_at_least_one_example_is_provided_for_each_construct():
