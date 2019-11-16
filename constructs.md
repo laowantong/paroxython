@@ -57,8 +57,7 @@
       - [Non sequential finite loops](#non-sequential-finite-loops)
         - [Construct `evolve_state`](#construct-evolve_state)
       - [Non sequential infinite loops](#non-sequential-infinite-loops)
-        - [Construct `accumulate_until_1`](#construct-accumulate_until_1)
-        - [Construct `accumulate_until_2`](#construct-accumulate_until_2)
+        - [Construct `accumulate_stream`](#construct-accumulate_stream)
   - [Suggestions](#suggestions)
     - [Assignments](#assignments-1)
       - [Construct `suggest_conditional_expression`](#construct-suggest_conditional_expression)
@@ -1191,8 +1190,7 @@ An accumulation pattern where a variable (the acumulator) is updated from its pr
 \n(?:.+\n)*\1/(?P=_1)              /lineno=(?P<LINE>\d+)
 \n(?:.+\n)*\1/(?P=_1)              /value/_type='Call'
 \n(?:.+\n)*\1/(?P=_1)              /value/func/_type='(?P<SUFFIX>Attribute)'
-\n(?:.+\n)*\1/(?P=_1)              /value/args/length=(?!0\n)\d+ # the method has one or more arguments
-\n(?:.+\n)*\1/(?P=_1)              /value/args/\d+/id=(?P=ITER_VAR) # which include the iteration variable
+\n(?:.+\n)*\1/(?P=_1)              /value/args/\d+/id=(?P=ITER_VAR) # the arguments include the iteration variable
 )
 ```
 
@@ -1481,7 +1479,7 @@ evolve_state: 2-3, 6-7, 8-9, 10-11
 
 --------------------------------------------------------------------------------
 
-##### Construct `accumulate_until_1`
+##### Construct `accumulate_stream`
 
 Accumulate the inputs until a sentinel value is encountered (accumulation expressed by: `acc = combine(x, acc)`).
 
@@ -1496,9 +1494,31 @@ Accumulate the inputs until a sentinel value is encountered (accumulation expres
 \n(?:.+\n)*\1/(?P=_1)         /test/_ids=.*?(?P=INPUT).* # the input is tested
 \n(?:.+\n)*\1/(?P=_1)         /(?P<_2>body/\d+)/_type='Return'
 \n(?:.+\n)*\1/(?P=_1)         /(?P=_2)         /value/id=(?P<ACC>.+) # capture the name of the accumulator
-\n(?:.+\n)*\1/(?P<_3>body/\d+)/lineno=(?P<LINE>\d+)
+(   # the accumulator either appears on both sides of a simple assignment with the input
+\n(?:.+\n)*\1/(?P<_3>body/\d+)/_type='(?P<SUFFIX>Assign)'
+\n(?:.+\n)*\1/(?P=_3)         /lineno=(?P<LINE>\d+)
 \n(?:.+\n)*\1/(?P=_3)         /targets/.*/id=(?P=ACC)
 \n(?:.+\n)*\1/(?P=_3)         /value/_ids=(?=.*(?P=INPUT))(?=.*(?P=ACC)) # both appear in RHS
+|   # or is on LHS of an augmented assignement with the input
+\n(?:.+\n)*\1/(?P<_3>body/\d+)/_type='(?P<SUFFIX>AugAssign)'
+\n(?:.+\n)*\1/(?P=_3)         /lineno=(?P<LINE>\d+)
+\n(?:.+\n)*\1/(?P=_3)         /target/id=(?P=ACC)
+\n(?:.+\n)*\1/(?P=_3)         /value.*/id=(?P=INPUT)
+|   # or should be mutated by calling a function on this accumulator and the iteration variable
+\n(?:.+\n)*\1/(?P<_3>body/\d+)/_type='Expr' # the whole line consists in an expression
+\n(?:.+\n)*\1/(?P=_3)         /lineno=(?P<LINE>\d+)
+\n(?:.+\n)*\1/(?P=_3)         /value/_type='Call'
+\n(?:.+\n)*\1/(?P=_3)         /value/_ids=(?=.*(?P=INPUT))(?=.*(?P=ACC)).+ # both appear in RHS
+\n(?:.+\n)*\1/(?P=_3)         /value/func/_type='(?P<SUFFIX>Name)'
+\n(?:.+\n)*\1/(?P=_3)         /value/func/id='(?!(?P=ACC)|(?P=INPUT)|breakpoint|delattr|eval|exec|help|input|open|print|setattr|super).+'
+|   # or should be mutated by calling a method of this accumulator, again on the iteration variable
+\n(?:.+\n)*\1/(?P<_3>body/\d+)/_type='Expr' # the whole line consists in an expression
+\n(?:.+\n)*\1/(?P=_3)         /lineno=(?P<LINE>\d+)
+\n(?:.+\n)*\1/(?P=_3)         /value/_type='Call'
+\n(?:.+\n)*\1/(?P=_3)         /value/func/_type='(?P<SUFFIX>Attribute)'
+\n(?:.+\n)*\1/(?P=_3)         /value/func/value/id=(?P=ACC) # a method of acc is called on...
+\n(?:.+\n)*\1/(?P=_3)         /value/args/\d+/id=(?P=INPUT) # the iteration variable
+)
 ```
 
 ###### Example
@@ -1511,53 +1531,39 @@ Accumulate the inputs until a sentinel value is encountered (accumulation expres
 5           if is_sentinel(x, y):
 6               return acc
 7           acc = combine(x, acc)
+8
+9   def accumulate_inputs():
+10      acc = neutral
+11      while True:
+12          x = read()
+13          if x > y:
+14              return acc
+15          acc += abs(x)
+16
+17  def accumulate_inputs():
+18      acc = neutral
+19      while True:
+20          x = read()
+21          if x > y:
+22              return acc
+23          foobar(acc, x)
+24
+25  def accumulate_inputs():
+26      acc = neutral
+27      while True:
+28          x = read()
+29          if x > y:
+30              return acc
+31          acc.foobar(x)
 ```
 
 ###### Matches
 
 ```markdown
-accumulate_until_1: 3-7
-```
-
---------------------------------------------------------------------------------
-
-##### Construct `accumulate_until_2`
-
-Accumulate the inputs until a sentinel value is encountered (accumulation expressed by: `acc += x`).
-
-###### Regex
-
-```re
-        ^(.*)/_type='While'
-\n(?:.+\n)*\1/lineno=(?P<LINE>\d+)
-\n(?:.+\n)*\1/test/value=True
-\n(?:.+\n)*\1/body/\d+/targets/.+/id=(?P<INPUT>.+) # capture the name of the input
-\n(?:.+\n)*\1/(?P<_1>body/\d+)/_type='If'
-\n(?:.+\n)*\1/(?P=_1)         /test/_ids=.*?(?P=INPUT).* # the input is tested
-\n(?:.+\n)*\1/(?P=_1)         /(?P<_2>body/\d+)/_type='Return'
-\n(?:.+\n)*\1/(?P=_1)         /(?P=_2)         /value/id=(?P<ACC>.+) # capture the name of the accumulator
-\n(?:.+\n)*\1/(?P<_3>body/\d+)/_type='AugAssign'
-\n(?:.+\n)*\1/(?P=_3)         /lineno=(?P<LINE>\d+)
-\n(?:.+\n)*\1/(?P=_3)         /target/id=(?P=ACC)
-\n(?:.+\n)*\1/(?P=_3)         /value.*/id=(?P=INPUT)
-```
-
-###### Example
-
-```python
-1   def accumulate_inputs():
-2       acc = neutral
-3       while True:
-4           x = read()
-5           if x > y:
-6               return acc
-7           acc += abs(x)
-```
-
-###### Matches
-
-```markdown
-accumulate_until_2: 3-7
+accumulate_stream-Assign: 3-7
+accumulate_stream-AugAssign: 11-15
+accumulate_stream-Name: 19-23
+accumulate_stream-Attribute: 27-31
 ```
 
 --------------------------------------------------------------------------------
