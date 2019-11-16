@@ -48,8 +48,7 @@
   - [Code patterns](#code-patterns)
     - [Iterative patterns](#iterative-patterns)
       - [Sequential loops](#sequential-loops)
-        - [Construct `accumulate_for_1`](#construct-accumulate_for_1)
-        - [Construct `accumulate_for_2`](#construct-accumulate_for_2)
+        - [Construct `accumulate_for`](#construct-accumulate_for)
         - [Construct `filter_for`](#construct-filter_for)
         - [Construct `find_best_element`](#construct-find_best_element)
         - [Construct `universal_quantifier`](#construct-universal_quantifier)
@@ -1159,9 +1158,9 @@ triangular_nested_for: 1, 5
 
 --------------------------------------------------------------------------------
 
-##### Construct `accumulate_for_1`
+##### Construct `accumulate_for`
 
-An accumulation pattern where an augmented assignment is used to update the accumulator.
+An accumulation pattern where a variable (the acumulator) is updated from its previous value and the value of the iteration variable.
 
 ###### Regex
 
@@ -1170,9 +1169,31 @@ An accumulation pattern where an augmented assignment is used to update the accu
 \n(?:.+\n)*\1/lineno=(?P<LINE>\d+)
 \n(?:.+\n)*\1/target/_type='Name'
 \n(?:.+\n)*\1/target/id=(?P<ITER_VAR>.+)
-\n(?:.+\n)*\1/(?P<_1>body/\d+)/_type='AugAssign'
-\n(?:.+\n)*\1/(?P=_1)         /(?P<_2>value.*)/lineno=(?P<LINE>\d+)
-\n(?:.+\n)*\1/(?P=_1)         /(?P=_2)        /id=(?P=ITER_VAR)
+(   # the accumulator either appears on both sides of a simple assignment with the iteration variable
+\n(?:.+\n)*\1/(?P<_1>(body/\d+/?)*)/_type='Assign'
+\n(?:.+\n)*\1/(?P=_1)              /lineno=(?P<LINE>\d+)
+\n(?:.+\n)*\1/(?P=_1)              /targets/.*/id=(?P<ACC>.+) # capture the name of the accumulator
+\n(?:.+\n)*\1/(?P=_1)              /value/_ids=(?=.*?(?P=ACC))(?=.*?(?P=ITER_VAR)) # both appear in RHS
+|   # or should be on LHS of an augmented assignement with the iteration variable
+\n(?:.+\n)*\1/(?P<_1>(body/\d+/?)*)/_type='AugAssign'
+\n(?:.+\n)*\1/(?P=_1)              /lineno=(?P<LINE>\d+)
+\n(?:.+\n)*\1/(?P=_1)              /value.*/id=(?P=ITER_VAR)
+|   # or should be mutated by calling a function on this accumulator and the iteration variable
+\n(?:.+\n)*\1/(?P<_1>(body/\d+/?)*)/_type='Expr' # the whole line consists in an expression
+\n(?:.+\n)*\1/(?P=_1)              /lineno=(?P<LINE>\d+)
+\n(?:.+\n)*\1/(?P=_1)              /value/_type='Call'
+\n(?:.+\n)*\1/(?P=_1)              /value/func/_type='Name'
+\n(?:.+\n)*\1/(?P=_1)              /value/func/id='(?!breakpoint|delattr|eval|exec|help|input|open|print|setattr|super).+'
+\n(?:.+\n)*\1/(?P=_1)              /value/args/length=(?![01]\n)\d+ # the function has several arguments
+\n(?:.+\n)*\1/(?P=_1)              /value/args/\d+/id=(?P=ITER_VAR) # which include the iteration variable
+|   # or should be mutated by calling a method of this accumulator, again on the iteration variable
+\n(?:.+\n)*\1/(?P<_1>(body/\d+/?)*)/_type='Expr' # the whole line consists in an expression
+\n(?:.+\n)*\1/(?P=_1)              /lineno=(?P<LINE>\d+)
+\n(?:.+\n)*\1/(?P=_1)              /value/_type='Call'
+\n(?:.+\n)*\1/(?P=_1)              /value/func/_type='Attribute'
+\n(?:.+\n)*\1/(?P=_1)              /value/args/length=(?!0\n)\d+ # the method has one or more arguments
+\n(?:.+\n)*\1/(?P=_1)              /value/args/\d+/id=(?P=ITER_VAR) # which include the iteration variable
+)
 ```
 
 ###### Example
@@ -1181,53 +1202,31 @@ An accumulation pattern where an augmented assignment is used to update the accu
 1   def accumulate_elements(elements):
 2       acc = seed
 3       for element in elements:
-4           acc += element
+4           acc = element + acc
 5       return acc
-6   for i in range(10):
-7       acc += i
+6
+7   for i in range(10):
+8       acc = combine(acc, i)
+9   for i in range(10):
+10      if condition:
+11           acc += i
+12  for i in range(10):
+13      acc += foo(bar, i)
+14  for i in range(10):
+15      foo(acc, bar, i)
+16  for i in range(10):
+17      acc.foo(bar, i)
+18  for i in range(10): # no match (cf. remark)
+19      print(foobar, i)
 ```
+
+**Remark.**
+The third alternative of the regex is experimental. It matches any one-line function call on the iteration variable and another argument, not only those which mutate one of their arguments (hopefully the accumulator). The built-in functions with side effects (such as `print()`) are explicitely excluded, but this may not be enough. The fourth alternative, too, is certainly broader than necessary. Handle with care.
 
 ###### Matches
 
 ```markdown
-accumulate_for_1: 3-4, 6-7
-```
-
---------------------------------------------------------------------------------
-
-##### Construct `accumulate_for_2`
-
-An accumulation pattern with an assignment whose RHS contains both the accumulator and the iteration variable.
-
-###### Regex
-
-```re
-        ^(.*)/_type='For'
-\n(?:.+\n)*\1/lineno=(?P<LINE>\d+)
-\n(?:.+\n)*\1/target/_type='Name'
-\n(?:.+\n)*\1/target/id=(?P<ITER_VAR>.+) # capture the name of the iteration variable
-\n(?:.+\n)*\1/(?P<_1>body/\d+)/_type='Assign'
-\n(?:.+\n)*\1/(?P=_1)         /lineno=(?P<LINE>\d+)
-\n(?:.+\n)*\1/(?P=_1)         /targets/.*/id=(?P<ACC>.+) # capture the name of the accumulator
-\n(?:.+\n)*\1/(?P=_1)         /value/_ids=(?=.*?(?P=ACC))(?=.*?(?P=ITER_VAR)) # both appear in RHS
-```
-
-###### Example
-
-```python
-1   def accumulate_elements(elements):
-2       acc = seed
-3       for element in elements:
-4           acc = combine(element, acc)
-5       return acc
-6   for i in range(10):
-7       acc = combine(acc, i)
-```
-
-###### Matches
-
-```markdown
-accumulate_for_2: 3-4, 6-7
+accumulate_for: 3-4, 7-8, 9-11, 12-13, 14-15, 16-17
 ```
 
 --------------------------------------------------------------------------------
@@ -1243,7 +1242,7 @@ An accumulation pattern that, from a given collection, returns a list containing
 \n(?:.+\n)*\1/lineno=(?P<LINE>\d+)
 \n(?:.+\n)*\1/target/id=(?P<ID_1>.+) # capture the iteration variable
 \n(?:.+\n)*\1/(?P<_1>body/\d+)/_type='If'
-\n(?:.+\n)*\1/(?P=_1)         /test/args/\d+/id=(?P=ID_1) # match it in a inner conditional test
+\n(?:.+\n)*\1/(?P=_1)         /test/args/\d+/id=(?P=ID_1) # match it in an inner conditional test
 \n(?:.+\n)*\1/(?P=_1)         /(?P<_2>body/\d+)/lineno=(?P<LINE>\d+)
 \n(?:.+\n)*\1/(?P=_1)         /(?P=_2)         /(?P<_3>value)/_type='Call'
 \n(?:.+\n)*\1/(?P=_1)         /(?P=_2)         /(?P=_3)      /func/attr='append'
@@ -1433,21 +1432,21 @@ Evolve the value of a variable until it reaches a desired state.
 ```re
         ^(.*)/_type='While'
 \n(?:.+\n)*\1/lineno=(?P<LINE>\d+)
-\n(?:.+\n)*\1/test/_ids=.*(?P<ID_1>'.+').* # capture state variable
+\n(?:.+\n)*\1/test/_ids=.*(?P<STATE>'.+').* # capture state variable
 (   # the state variable either appears on both sides of a simple assignment
 \n(?:.+\n)*\1/(?P<_1>body/.*)/_type='Assign'
 \n(?:.+\n)*\1/(?P=_1)        /lineno=(?P<LINE>\d+)
-\n(?:.+\n)*\1/(?P=_1)        /targets/0/id=(?P=ID_1) # it is updated somewhere in the loop
-\n(?:.+\n)*\1/(?P=_1)        /value/_ids=.*(?P=ID_1) # from its current value
+\n(?:.+\n)*\1/(?P=_1)        /targets/0/id=(?P=STATE) # it is updated somewhere in the loop
+\n(?:.+\n)*\1/(?P=_1)        /value/_ids=.*(?P=STATE) # from its current value
 |   # or appears on LHS of an augmented assignement
 \n(?:.+\n)*\1/(?P<_1>body/.*)/_type='AugAssign'
 \n(?:.+\n)*\1/(?P=_1)        /lineno=(?P<LINE>\d+)
-\n(?:.+\n)*\1/(?P=_1)        /target/id=(?P=ID_1) # it is augmented somewhere in the loop
+\n(?:.+\n)*\1/(?P=_1)        /target/id=(?P=STATE) # it is augmented somewhere in the loop
 |   # or is mutated by calling a function or a method of this variable
 \n(?:.+\n)*\1/(?P<_1>body/.*)/_type='Expr'
 \n(?:.+\n)*\1/(?P=_1)        /lineno=(?P<LINE>\d+)
-\n(?:.+\n)*\1/(?P=_1)        /(?P<_2>value)/_type='Call'
-\n(?:.+\n)*\1/(?P=_1)        /(?P=_2)      /.*/id=(?P=ID_1) # it is mutated somewhere in the loop
+\n(?:.+\n)*\1/(?P=_1)        /value/_type='Call'
+\n(?:.+\n)*\1/(?P=_1)        /value/.*/id=(?P=STATE) # it is mutated somewhere in the loop
 )
 ```
 
