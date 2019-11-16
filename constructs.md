@@ -92,6 +92,7 @@
 \n(?:.+\n)*\1/value=(?P<SUFFIX>None|True|False)
 |   # match any other constant
              /_type='(?P<SUFFIX>Str|Num|Tuple|Dict|Set)'
+\n(?:.+\n)*\1/_ids=''
 \n(?:.+\n)*\1/lineno=(?P<LINE>\d+)
 )
 ```
@@ -108,6 +109,7 @@
 7   {1, 2, 3}
 8   True and False
 9   None
+10  {a, b, c} # no match
 ```
 
 ###### Matches
