@@ -48,7 +48,7 @@
   - [Code patterns](#code-patterns)
     - [Iterative patterns](#iterative-patterns)
       - [Sequential loops](#sequential-loops)
-        - [Construct `accumulate_for`](#construct-accumulate_for)
+        - [Construct `accumulate_elements`](#construct-accumulate_elements)
         - [Construct `filter_for`](#construct-filter_for)
         - [Construct `find_best_element`](#construct-find_best_element)
         - [Construct `universal_quantifier`](#construct-universal_quantifier)
@@ -1158,7 +1158,7 @@ triangular_nested_for: 1, 5
 
 --------------------------------------------------------------------------------
 
-##### Construct `accumulate_for`
+##### Construct `accumulate_elements`
 
 An accumulation pattern where a variable (the acumulator) is updated from its previous value and the value of the iteration variable.
 
@@ -1170,19 +1170,19 @@ An accumulation pattern where a variable (the acumulator) is updated from its pr
 \n(?:.+\n)*\1/target/_type='Name'
 \n(?:.+\n)*\1/target/id=(?P<ITER_VAR>.+)
 (   # the accumulator either appears on both sides of a simple assignment with the iteration variable
-\n(?:.+\n)*\1/(?P<_1>(body/\d+/?)*)/_type='Assign'
+\n(?:.+\n)*\1/(?P<_1>(body/\d+/?)*)/_type='(?P<SUFFIX>Assign)'
 \n(?:.+\n)*\1/(?P=_1)              /lineno=(?P<LINE>\d+)
 \n(?:.+\n)*\1/(?P=_1)              /targets/.*/id=(?P<ACC>.+) # capture the name of the accumulator
 \n(?:.+\n)*\1/(?P=_1)              /value/_ids=(?=.*?(?P=ACC))(?=.*?(?P=ITER_VAR)) # both appear in RHS
 |   # or should be on LHS of an augmented assignement with the iteration variable
-\n(?:.+\n)*\1/(?P<_1>(body/\d+/?)*)/_type='AugAssign'
+\n(?:.+\n)*\1/(?P<_1>(body/\d+/?)*)/_type='(?P<SUFFIX>AugAssign)'
 \n(?:.+\n)*\1/(?P=_1)              /lineno=(?P<LINE>\d+)
 \n(?:.+\n)*\1/(?P=_1)              /value.*/id=(?P=ITER_VAR)
 |   # or should be mutated by calling a function on this accumulator and the iteration variable
 \n(?:.+\n)*\1/(?P<_1>(body/\d+/?)*)/_type='Expr' # the whole line consists in an expression
 \n(?:.+\n)*\1/(?P=_1)              /lineno=(?P<LINE>\d+)
 \n(?:.+\n)*\1/(?P=_1)              /value/_type='Call'
-\n(?:.+\n)*\1/(?P=_1)              /value/func/_type='Name'
+\n(?:.+\n)*\1/(?P=_1)              /value/func/_type='(?P<SUFFIX>Name)'
 \n(?:.+\n)*\1/(?P=_1)              /value/func/id='(?!breakpoint|delattr|eval|exec|help|input|open|print|setattr|super).+'
 \n(?:.+\n)*\1/(?P=_1)              /value/args/length=(?![01]\n)\d+ # the function has several arguments
 \n(?:.+\n)*\1/(?P=_1)              /value/args/\d+/id=(?P=ITER_VAR) # which include the iteration variable
@@ -1190,7 +1190,7 @@ An accumulation pattern where a variable (the acumulator) is updated from its pr
 \n(?:.+\n)*\1/(?P<_1>(body/\d+/?)*)/_type='Expr' # the whole line consists in an expression
 \n(?:.+\n)*\1/(?P=_1)              /lineno=(?P<LINE>\d+)
 \n(?:.+\n)*\1/(?P=_1)              /value/_type='Call'
-\n(?:.+\n)*\1/(?P=_1)              /value/func/_type='Attribute'
+\n(?:.+\n)*\1/(?P=_1)              /value/func/_type='(?P<SUFFIX>Attribute)'
 \n(?:.+\n)*\1/(?P=_1)              /value/args/length=(?!0\n)\d+ # the method has one or more arguments
 \n(?:.+\n)*\1/(?P=_1)              /value/args/\d+/id=(?P=ITER_VAR) # which include the iteration variable
 )
@@ -1226,7 +1226,10 @@ The third alternative of the regex is experimental. It matches any one-line func
 ###### Matches
 
 ```markdown
-accumulate_for: 3-4, 7-8, 9-11, 12-13, 14-15, 16-17
+accumulate_elements-Assign: 3-4, 7-8
+accumulate_elements-AugAssign: 9-11, 12-13
+accumulate_elements-Name: 14-15
+accumulate_elements-Attribute: 16-17
 ```
 
 --------------------------------------------------------------------------------
