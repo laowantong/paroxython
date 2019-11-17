@@ -89,7 +89,7 @@
 \n(?:.+\n)*\1/lineno=(?P<LINE>\d+)
 \n(?:.+\n)*\1/value=(?P<SUFFIX>None|True|False)
 |   # match any other constant
-             /_type='(?P<SUFFIX>Str|Num|Tuple|Dict|Set)'
+             /_type='(?P<SUFFIX>Str|Num|Tuple|Dict|Set|List)'
 \n(?:.+\n)*\1/_ids=''
 \n(?:.+\n)*\1/lineno=(?P<LINE>\d+)
 )
@@ -108,19 +108,21 @@
 8   True and False
 9   None
 10  {a, b, c} # no match
+11  [1, 2, 3]
 ```
 
 ###### Matches
 
 ```markdown
-literal-Dict: 6
-literal-False: 8
-literal-None: 9
-literal-Num: 1, 2, 4, 4, 7, 7, 7
-literal-Set: 7
+literal-Num: 1, 2, 4, 4, 7, 7, 7, 11, 11, 11
 literal-Str: 3
-literal-True: 8
 literal-Tuple: 4
+literal-List: 5, 11
+literal-Dict: 6
+literal-Set: 7
+literal-False: 8
+literal-True: 8
+literal-None: 9
 ```
 
 --------------------------------------------------------------------------------

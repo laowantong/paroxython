@@ -42,7 +42,7 @@ def test_example(label, source, results):
     results = (line.partition(": ")[0::2] for line in results.split("\n"))
     actual = parse(source)
     for (label, expected) in results:
-        assert label in actual
+        assert label in list(actual.keys())
         assert ", ".join(actual[label]) == expected
 
 
