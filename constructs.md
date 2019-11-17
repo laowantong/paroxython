@@ -1276,17 +1276,18 @@ An accumulation pattern that, from a given collection, returns the best element 
 ###### Regex
 
 ```re
-        ^(.*)/(?P<_1>body/\d+)/_type='For'
-\n(?:.+\n)*\1/(?P=_1)         /lineno=(?P<LINE>\d+)
-\n(?:.+\n)*\1/(?P=_1)         /target/id=(?P<ID_1>.+) # capture iteration variable
-\n(?:.+\n)*\1/(?P=_1)         /(?P<_2>body/\d+)/_type='If'
-\n(?:.+\n)*\1/(?P=_1)         /(?P=_2)         /test/_ids=(?=.*?(?P=ID_1)).*?(?P<ID_2>'.+?').* # capture candidate and match iteration variable
-\n(?:.+\n)*\1/(?P=_1)         /(?P=_2)         /(?P<_3>body/\d+)/_type='Assign'
-\n(?:.+\n)*\1/(?P=_1)         /(?P=_2)         /(?P=_3)         /targets/0/id=(?P=ID_2) # match candidate
-\n(?:.+\n)*\1/(?P=_1)         /(?P=_2)         /(?P=_3)         /value/id=(?P=ID_1) # match iteration variable
-\n(?:.+\n)*\1/(?P<_4>body/\d+)/_type='Return'
-\n(?:.+\n)*\1/(?P=_4)         /lineno=(?P<LINE>\d+)
-\n(?:.+\n)*\1/(?P=_4)         /value/id=(?P=ID_2) # match id 2
+        ^(.*)/(?P<_1>body/\d+)/_type='Assign'
+\n(?:.+\n)*\1/(?P=_1)         /targets/0/id=(?P<CANDIDATE>.+) # capture candidate
+\n(?:.+\n)*\1/(?P<_2>body/\d+)/_type='For'
+\n(?:.+\n)*\1/(?P=_2)         /lineno=(?P<LINE>\d+)
+\n(?:.+\n)*\1/(?P=_2)         /target/id=(?P<ITER_VAR>.+) # capture iteration variable
+\n(?:.+\n)*\1/(?P=_2)         /(?P<_3>body/\d+)/_type='If'
+\n(?:.+\n)*\1/(?P=_2)         /(?P=_3)         /test/_ids=(?=.*?(?P=ITER_VAR))(?=.*?(?P=CANDIDATE)).* # match both
+\n(?:.+\n)*\1/(?P=_2)         /(?P=_3)         /test/.*/id=(?P=CANDIDATE) # match candidate
+\n(?:.+\n)*\1/(?P=_2)         /(?P=_3)         /(?P<_4>body/\d+)/_type='Assign'
+\n(?:.+\n)*\1/(?P=_2)         /(?P=_3)         /(?P=_4)         /lineno=(?P<LINE>\d+)
+\n(?:.+\n)*\1/(?P=_2)         /(?P=_3)         /(?P=_4)         /targets/0/id=(?P=CANDIDATE) # match candidate
+\n(?:.+\n)*\1/(?P=_2)         /(?P=_3)         /(?P=_4)         /value/id=(?P=ITER_VAR) # match iteration variable
 ```
 
 ###### Example
@@ -1310,7 +1311,7 @@ An accumulation pattern that, from a given collection, returns the best element 
 ###### Matches
 
 ```markdown
-find_best_element: 3-6, 10-13
+find_best_element: 3-5, 10-12
 ```
 
 --------------------------------------------------------------------------------
@@ -1433,7 +1434,7 @@ Evolve the value of a variable until it reaches a desired state.
 ```re
         ^(.*)/_type='While'
 \n(?:.+\n)*\1/lineno=(?P<LINE>\d+)
-\n(?:.+\n)*\1/test/_ids=.*(?P<STATE>'.+').* # capture state variable
+\n(?:.+\n)*\1/test/.*/id=(?P<STATE>'.+') # capture state variable
 (   # the state variable either appears on both sides of a simple assignment
 \n(?:.+\n)*\1/(?P<_1>body/.*)/_type='Assign'
 \n(?:.+\n)*\1/(?P=_1)        /lineno=(?P<LINE>\d+)
