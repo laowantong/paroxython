@@ -31,7 +31,7 @@ def scan(path, sloc_only=True):
         print(path)
         sloc = source.splitlines()
         comments = [[] for _ in sloc]
-        for (label, lines) in sorted(parse(source).items()):
+        for (label, lines) in sorted(parse(source)):
             for line in set(lines):
                 (start, suffix) = line.partition("-")[::2]
                 start = int(start)

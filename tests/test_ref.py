@@ -40,7 +40,7 @@ pytest.main(args=["-q"])
 def test_example(label, source, results):
     source = regex.sub(r"(?m)^.{4}", "", source)
     results = (line.partition(": ")[0::2] for line in results.split("\n"))
-    actual = parse(source)
+    actual = dict(parse(source))
     for (label, expected) in results:
         assert label in list(actual.keys())
         assert ", ".join(actual[label]) == expected

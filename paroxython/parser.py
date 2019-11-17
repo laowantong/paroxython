@@ -26,15 +26,16 @@ class Parser:
                 raise ValueError(f"Duplicated label '{label}'!")
             self.constructs[label] = regex.compile(f"(?mx){pattern}")
 
-    def __call__(self, source):
+    def __call__(self, source, yield_failed_matches=False):
         try:
             tree = ast.parse(source)
         except:
             print("Warning: unable to construct the AST")
             return {}
         self.flat_ast = flatten(tree)
-        result = defaultdict(list)
         for (label, rex) in self.constructs.items():
+            result = defaultdict(list)
+            d = None
             for match in rex.finditer(self.flat_ast, overlapped=True):
                 d = match.capturesdict()
                 for suffix in d.get("SUFFIX", [""]):
@@ -42,15 +43,24 @@ class Parser:
                         suffix = f"-{suffix}"
                     lines = "-".join(map(str, sorted(map(int, d["LINE"]))))
                     result[label + suffix].append(lines)
-        return result
+            if yield_failed_matches and not d:
+                yield (label, [])
+            else:
+                yield from result.items()
 
 
 if __name__ == "__main__":
+    import time
     source = Path("sandbox/source.py").read_text()
     for (i, line) in enumerate(source.splitlines(), 1):
         print(f"{i: 3} {line}")
     print()
     parse = Parser()
-    for (label, lines) in parse(source).items():
-        print(f"{label}: {' '.join(lines)}")
+    start = time.perf_counter()
+    acc = []
+    for (label, lines) in parse(source, yield_failed_matches=True):
+        stop = time.perf_counter()
+        acc.append(f"{stop - start:7.4f} s.: {label}: {', '.join(lines)}")
+        start = stop
+    print("\n".join(sorted(acc, reverse=True)))
     Path("sandbox/flat_ast.txt").write_text(parse.flat_ast)
