@@ -2,13 +2,13 @@ import pytest
 import regex
 from md_toc import build_toc
 
-from context import paroxython
+import context
+from paroxython import parser
 
 
 def reformat_file(construct_path):
-    """ Update TOC and vertical spaces in the definition file. """
     text = construct_path.read_text()
-    toc = build_toc("constructs.md", keep_header_levels=5, no_list_coherence=True)
+    toc = build_toc(construct_path, keep_header_levels=5, no_list_coherence=True)
     rule = "-" * 80 + "\n"
     text = regex.sub(r"(?m)^---+\n", "", text)
     text = regex.sub(r"(?ms).*?^(?=# )", fr"{toc}\n\n", text, count=1)
@@ -18,26 +18,22 @@ def reformat_file(construct_path):
     construct_path.write_text(text)
 
 
-reformat_file(paroxython.CONSTRUCT_PATH)
-
-
 def extract_examples(construct_path):
     text = construct_path.read_text()
     rex = r"""(?msx)
         ^\#{5}\s+Construct\s+`(.+?)` # capture the label
-        .+?
-        \#{6}\s+Example # ensure the next code is in the Example section
-        .+?
-        ```python\n+(.+?)\n``` # capture the source-code
-        .+?
-        \#{6}\s+Matches # ensure the next results are in the Example section
-        .+?
-        ```markdown\n+(.+?)\n``` # capture the expected results
+        .+?\#{6}\s+Example # ensure the next code is in the Example section
+        .+?```python\n+(.+?)\n``` # capture the source-code
+        .+?\#{6}\s+Matches # ensure the next results are in the Example section
+        .+?```markdown\n+(.+?)\n``` # capture the expected results
     """
     return regex.findall(rex, text)
 
 
-examples = extract_examples(paroxython.CONSTRUCT_PATH)
+parse = parser.Parser()
+reformat_file(parse.ref_path)
+examples = extract_examples(parse.ref_path)
+pytest.main(args=["-q"])
 
 
 @pytest.mark.parametrize("label, source, results", examples)
@@ -47,7 +43,7 @@ def test_example(label, source, results):
     actual = parse(source)
     for (label, expected) in results:
         assert label in actual
-        assert actual[label] == expected
+        assert ", ".join(actual[label]) == expected
 
 
 def test_at_least_one_example_is_provided_for_each_construct():
@@ -55,6 +51,3 @@ def test_at_least_one_example_is_provided_for_each_construct():
     actual = set(label.partition("-")[0] for (label, _, _) in examples)
     assert actual == expected
 
-
-parse = paroxython.Parser(paroxython.CONSTRUCT_PATH)
-pytest.main(args=["-q"])
