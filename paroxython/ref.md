@@ -1226,7 +1226,8 @@ for_indexes: 1
 ```re
         ^(.*?)/_type='For'
 \n(?:.+\n)*?\1/lineno=(?P<LINE>\d+)
-\n(?:.+\n)*?\1/body/0/_type='For'
+\n(?:.+\n)* \1/(?P<_1>body/\d+)/_type='For'
+\n(?:.+\n)*?\1/(?P=_1)         /lineno=(?P<LINE>\d+)
 ```
 
 ###### Example
@@ -1240,14 +1241,14 @@ for_indexes: 1
 ###### Matches
 
 ```markdown
-nested_for: 1
+nested_for: 1-2
 ```
 
 --------------------------------------------------------------------------------
 
 ##### Construct `triangular_nested_for`
 
-A `for` loop with counter `i` and a nested `for` loop which makes `i` iterations.
+A `for` loop with a counter `i` and a nested `for` loop which makes `i` iterations.
 
 ###### Regex
 

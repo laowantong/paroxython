@@ -290,7 +290,7 @@ def solution(n): # function_definition
 # ----------------------------------------------------------------------------------------
 def solution(n): # function_definition
     answer = 0 # assignment, literal-Num
-    for i in range(999, 99, -1):  # 3 digit nimbers range from 999 down to 100 # accumulate_elements-Assign (-> +4), builtin_function_call-range, for_range_backwards, for_range_step, literal-Num, nested_for, suggest_constant_definition, unary_operator-USub
+    for i in range(999, 99, -1):  # 3 digit nimbers range from 999 down to 100 # accumulate_elements-Assign (-> +4), builtin_function_call-range, for_range_backwards, for_range_step, literal-Num, nested_for (-> +1), suggest_constant_definition, unary_operator-USub
         for j in range(999, 99, -1): # accumulate_elements-Assign (-> +3), builtin_function_call-range, for_range_backwards, for_range_step, literal-Num, suggest_constant_definition, unary_operator-USub
             t = str(i * j) # assignment, binary_operator-Mult, builtin_function_call-str
             if t == t[::-1] and i * j < n: # binary_operator-Mult, boolean_operator-And, comparison_operator-Eq, comparison_operator-Lt, if, literal-Num, slice_step, unary_operator-USub
@@ -468,7 +468,7 @@ N = """73167176531330624919225119674426574742355349194934\ # assignment, global_
 71636269561882670428252483600823257530420752963450""" # literal-Str
 def solution(n): # function_definition
     LargestProduct = -sys.maxsize - 1 # assignment, binary_operator-Sub, literal-Num, unary_operator-USub
-    for i in range(len(n) - 12): # accumulate_elements-AugAssign (-> +3), binary_operator-Sub, builtin_function_call-len, builtin_function_call-range, composition, for_range_stop, literal-Num, suggest_constant_definition
+    for i in range(len(n) - 12): # accumulate_elements-AugAssign (-> +3), binary_operator-Sub, builtin_function_call-len, builtin_function_call-range, composition, for_range_stop, literal-Num, nested_for (-> +2), suggest_constant_definition
         product = 1 # assignment, literal-Num
         for j in range(13): # accumulate_elements-AugAssign (-> +1), builtin_function_call-range, for_range_stop, literal-Num, suggest_constant_definition
             product *= int(n[i + j]) # augmented_assignment, binary_operator-Add, builtin_function_call-int, index
@@ -557,8 +557,8 @@ def solution(n: str) -> int: # function_definition
 # ../Python/project_euler/problem_09/sol1.py
 # ----------------------------------------------------------------------------------------
 def solution(): # function_definition
-    for a in range(300): # builtin_function_call-range, for_range_stop, literal-Num, nested_for, suggest_constant_definition
-        for b in range(400): # builtin_function_call-range, for_range_stop, literal-Num, nested_for, suggest_constant_definition
+    for a in range(300): # builtin_function_call-range, for_range_stop, literal-Num, nested_for (-> +1), suggest_constant_definition
+        for b in range(400): # builtin_function_call-range, for_range_stop, literal-Num, nested_for (-> +1), suggest_constant_definition
             for c in range(500): # builtin_function_call-range, for_range_stop, literal-Num, suggest_constant_definition
                 if a < b < c: # comparison_operator-Lt, if
                     if (a ** 2) + (b ** 2) == (c ** 2): # binary_operator-Add, binary_operator-Pow, comparison_operator-Eq, if, literal-Num
@@ -658,7 +658,7 @@ def largest_product(grid): # function_definition
     largest = 0 # assignment, literal-Num
     lrDiagProduct = 0 # assignment, literal-Num
     rlDiagProduct = 0 # assignment, literal-Num
-    for i in range(nColumns): # builtin_function_call-range, for_range_stop, nested_for
+    for i in range(nColumns): # builtin_function_call-range, for_range_stop, nested_for (-> +1)
         for j in range(nRows - 3): # binary_operator-Sub, builtin_function_call-range, for_range_stop, literal-Num, suggest_constant_definition
             vertProduct = grid[j][i] * grid[j + 1][i] * grid[j + 2][i] * grid[j + 3][i] # assignment, binary_operator-Add, binary_operator-Mult, index, literal-Num, suggest_constant_definition
             horzProduct = grid[i][j] * grid[i][j + 1] * grid[i][j + 2] * grid[i][j + 3] # assignment, binary_operator-Add, binary_operator-Mult, index, literal-Num, suggest_constant_definition
@@ -698,22 +698,22 @@ def solution(): # function_definition
         for i in range(20): # builtin_function_call-range, for_range_stop, literal-Num, suggest_constant_definition
             l.append([int(x) for x in f.readline().split()]) # builtin_function_call-int, composition, method_chaining, mutable_sequence_method_call-append
         maximum = 0 # assignment, literal-Num
-        for i in range(20): # builtin_function_call-range, for_range_stop, literal-Num, nested_for, suggest_constant_definition
+        for i in range(20): # builtin_function_call-range, for_range_stop, literal-Num, nested_for (-> +1), suggest_constant_definition
             for j in range(17): # builtin_function_call-range, for_range_stop, literal-Num, suggest_constant_definition
                 temp = l[i][j] * l[i][j + 1] * l[i][j + 2] * l[i][j + 3] # assignment, binary_operator-Add, binary_operator-Mult, index, literal-Num, suggest_constant_definition
                 if temp > maximum: # comparison_operator-Gt, if
                     maximum = temp # assignment
-        for i in range(17): # builtin_function_call-range, for_range_stop, literal-Num, nested_for, suggest_constant_definition
+        for i in range(17): # builtin_function_call-range, for_range_stop, literal-Num, nested_for (-> +1), suggest_constant_definition
             for j in range(20): # builtin_function_call-range, for_range_stop, literal-Num, suggest_constant_definition
                 temp = l[i][j] * l[i + 1][j] * l[i + 2][j] * l[i + 3][j] # assignment, binary_operator-Add, binary_operator-Mult, index, literal-Num, suggest_constant_definition
                 if temp > maximum: # comparison_operator-Gt, if
                     maximum = temp # assignment
-        for i in range(17): # builtin_function_call-range, for_range_stop, literal-Num, nested_for, suggest_constant_definition
+        for i in range(17): # builtin_function_call-range, for_range_stop, literal-Num, nested_for (-> +1), suggest_constant_definition
             for j in range(17): # builtin_function_call-range, for_range_stop, literal-Num, suggest_constant_definition
                 temp = l[i][j] * l[i + 1][j + 1] * l[i + 2][j + 2] * l[i + 3][j + 3] # assignment, binary_operator-Add, binary_operator-Mult, index, literal-Num, suggest_constant_definition
                 if temp > maximum: # comparison_operator-Gt, if
                     maximum = temp # assignment
-        for i in range(17): # builtin_function_call-range, for_range_stop, literal-Num, nested_for, suggest_constant_definition
+        for i in range(17): # builtin_function_call-range, for_range_stop, literal-Num, nested_for (-> +1), suggest_constant_definition
             for j in range(3, 20): # builtin_function_call-range, for_range_start, literal-Num, suggest_constant_definition
                 temp = l[i][j] * l[i + 1][j - 1] * l[i + 2][j - 2] * l[i + 3][j - 3] # assignment, binary_operator-Add, binary_operator-Mult, binary_operator-Sub, index, literal-Num, suggest_constant_definition
                 if temp > maximum: # comparison_operator-Gt, if
@@ -859,7 +859,7 @@ def solution(): # function_definition
     with open(triangle, "r") as f: # builtin_function_call-open, literal-Str
         triangle = f.readlines() # assignment
     a = [[int(y) for y in x.rstrip("\r\n").split(" ")] for x in triangle] # assignment, builtin_function_call-int, literal-Str, method_chaining, string_method_call-rstrip
-    for i in range(1, len(a)): # builtin_function_call-len, builtin_function_call-range, composition, for_range_start, literal-Num, nested_for
+    for i in range(1, len(a)): # builtin_function_call-len, builtin_function_call-range, composition, for_range_start, literal-Num, nested_for (-> +1)
         for j in range(len(a[i])): # builtin_function_call-len, builtin_function_call-range, composition, for_indexes, for_range_stop, index
             if j != len(a[i - 1]): # binary_operator-Sub, builtin_function_call-len, comparison_operator-NotEq, if, if_else, index, literal-Num, suggest_conditional_expression (-> +3)
                 number1 = a[i - 1][j] # assignment, binary_operator-Sub, index, literal-Num
@@ -980,7 +980,7 @@ def solution(): # function_definition
     names.sort() # list_method_call-sort
     name_score = 0 # assignment, literal-Num
     total_score = 0 # assignment, literal-Num
-    for i, name in enumerate(names): # builtin_function_call-enumerate, for_indexes_values, nested_for
+    for i, name in enumerate(names): # builtin_function_call-enumerate, for_indexes_values, nested_for (-> +1)
         for letter in name: # accumulate_elements-AugAssign (-> +1), for_each
             name_score += ord(letter) - 64 # augmented_assignment, binary_operator-Sub, builtin_function_call-ord, literal-Num, suggest_constant_definition
         total_score += (i + 1) * name_score # augmented_assignment, binary_operator-Add, binary_operator-Mult, literal-Num
@@ -998,7 +998,7 @@ def solution(): # function_definition
         name = str(file.readlines()[0]) # assignment, builtin_function_call-str, composition, index, literal-Num
         name = name.replace('"', "").split(",") # assignment, literal-Str, method_chaining, string_method_call-replace
     name.sort() # list_method_call-sort
-    for i in range(len(name)): # accumulate_elements-AugAssign (-> +3), builtin_function_call-len, builtin_function_call-range, composition, for_indexes, for_range_stop, nested_for
+    for i in range(len(name)): # accumulate_elements-AugAssign (-> +3), builtin_function_call-len, builtin_function_call-range, composition, for_indexes, for_range_stop, nested_for (-> +1)
         for j in name[i]: # accumulate_elements-AugAssign (-> +1), index
             temp_sum += ord(j) - ord("A") + 1 # augmented_assignment, binary_operator-Add, binary_operator-Sub, builtin_function_call-ord, literal-Num, literal-Str
         total_sum += (i + 1) * temp_sum # augmented_assignment, binary_operator-Add, binary_operator-Mult, literal-Num
@@ -1010,7 +1010,7 @@ def solution(): # function_definition
 # ----------------------------------------------------------------------------------------
 def solution(limit=28123): # function_definition, literal-Num
     sumDivs = [1] * (limit + 1) # assignment, binary_operator-Add, binary_operator-Mult, literal-List, literal-Num
-    for i in range(2, int(limit ** 0.5) + 1): # accumulate_elements-AugAssign (-> +3), binary_operator-Add, binary_operator-Pow, builtin_function_call-int, builtin_function_call-range, composition, for_range_start, literal-Num, suggest_constant_definition
+    for i in range(2, int(limit ** 0.5) + 1): # accumulate_elements-AugAssign (-> +3), binary_operator-Add, binary_operator-Pow, builtin_function_call-int, builtin_function_call-range, composition, for_range_start, literal-Num, nested_for (-> +2), suggest_constant_definition
         sumDivs[i * i] += i # augmented_assignment, binary_operator-Mult, index
         for k in range(i + 1, limit // i + 1): # accumulate_elements-AugAssign (-> +1), binary_operator-Add, binary_operator-FloorDiv, builtin_function_call-range, for_range_start, literal-Num
             sumDivs[k * i] += k + i # augmented_assignment, binary_operator-Add, binary_operator-Mult, index
@@ -1132,7 +1132,7 @@ def is_prime(k: int) -> bool: # function_definition
     return True # literal-True
 def solution(a_limit: int, b_limit: int) -> int: # function_definition
     longest = [0, 0, 0]  # length, a, b # assignment, literal-List, literal-Num
-    for a in range((a_limit * -1) + 1, a_limit): # binary_operator-Add, binary_operator-Mult, builtin_function_call-range, for_range_start, literal-Num, nested_for, unary_operator-USub
+    for a in range((a_limit * -1) + 1, a_limit): # binary_operator-Add, binary_operator-Mult, builtin_function_call-range, for_range_start, literal-Num, nested_for (-> +1), unary_operator-USub
         for b in range(2, b_limit): # builtin_function_call-range, for_range_start, literal-Num
             if is_prime(b): # if
                 count = 0 # assignment, literal-Num
@@ -1164,7 +1164,7 @@ def solution(n): # function_definition
     collectPowers = set() # assignment, builtin_function_call-set
     currentPow = 0 # assignment, literal-Num
     N = n + 1  # maximum limit # assignment, binary_operator-Add, literal-Num
-    for a in range(2, N): # builtin_function_call-range, for_range_start, literal-Num, nested_for
+    for a in range(2, N): # builtin_function_call-range, for_range_start, literal-Num, nested_for (-> +1)
         for b in range(2, N): # builtin_function_call-range, for_range_start, literal-Num
             currentPow = a ** b  # calculates the current power # assignment, binary_operator-Pow
             collectPowers.add(currentPow)  # adds the result to the set # set_method_call-add
@@ -1328,7 +1328,7 @@ def combinations(n, r): # function_definition
     return factorial(n) / (factorial(r) * factorial(n - r)) # binary_operator-Div, binary_operator-Mult, binary_operator-Sub
 def solution(): # function_definition
     total = 0 # assignment, literal-Num
-    for i in range(1, 101): # builtin_function_call-range, for_range_start, literal-Num, nested_for, suggest_constant_definition
+    for i in range(1, 101): # builtin_function_call-range, for_range_start, literal-Num, nested_for (-> +1), suggest_constant_definition
         for j in range(1, i + 1): # binary_operator-Add, builtin_function_call-range, for_range_start, literal-Num
             if combinations(i, j) > 1e6: # comparison_operator-Gt, if, literal-Num, suggest_constant_definition
                 total += 1 # augmented_assignment, literal-Num
@@ -1468,7 +1468,7 @@ def solution(): # function_definition
         triangle = f.readlines() # assignment
     a = map(lambda x: x.rstrip("\r\n").split(" "), triangle) # assignment, builtin_function_call-map, composition, literal-Str, method_chaining, string_method_call-rstrip
     a = list(map(lambda x: list(map(lambda y: int(y), x)), a)) # assignment, builtin_function_call-int, builtin_function_call-list, builtin_function_call-map, composition
-    for i in range(1, len(a)): # builtin_function_call-len, builtin_function_call-range, composition, for_range_start, literal-Num, nested_for
+    for i in range(1, len(a)): # builtin_function_call-len, builtin_function_call-range, composition, for_range_start, literal-Num, nested_for (-> +1)
         for j in range(len(a[i])): # builtin_function_call-len, builtin_function_call-range, composition, for_indexes, for_range_stop, index
             if j != len(a[i - 1]): # binary_operator-Sub, builtin_function_call-len, comparison_operator-NotEq, if, if_else, index, literal-Num, suggest_conditional_expression (-> +3)
                 number1 = a[i - 1][j] # assignment, binary_operator-Sub, index, literal-Num
@@ -1488,7 +1488,7 @@ def partition(m): # function_definition
     memo = [[0 for _ in range(m)] for _ in range(m + 1)] # assignment, binary_operator-Add, builtin_function_call-range, literal-Num
     for i in range(m + 1): # binary_operator-Add, builtin_function_call-range, for_range_stop, literal-Num
         memo[i][0] = 1 # assignment, index, literal-Num
-    for n in range(m + 1): # accumulate_elements-AugAssign (-> +4), binary_operator-Add, builtin_function_call-range, for_range_stop, literal-Num, nested_for
+    for n in range(m + 1): # accumulate_elements-AugAssign (-> +4), binary_operator-Add, builtin_function_call-range, for_range_stop, literal-Num, nested_for (-> +1)
         for k in range(1, m): # accumulate_elements-AugAssign (-> +3), builtin_function_call-range, for_range_start, literal-Num
             memo[n][k] += memo[n][k - 1] # augmented_assignment, binary_operator-Sub, index, literal-Num
             if n > k: # comparison_operator-Gt, if

@@ -739,8 +739,8 @@ class Matrix(object):
             self.t = [[0 for _ in range(self.n)] for _ in range(self.n)] # assignment, builtin_function_call-range, literal-Num
     def __mul__(self, b): # function_definition
         matrix = Matrix(self.n) # assignment
-        for i in range(self.n): # accumulate_elements-AugAssign (-> +3), builtin_function_call-range, for_range_stop, nested_for
-            for j in range(self.n): # accumulate_elements-AugAssign (-> +2), builtin_function_call-range, for_range_stop, nested_for
+        for i in range(self.n): # accumulate_elements-AugAssign (-> +3), builtin_function_call-range, for_range_stop, nested_for (-> +1)
+            for j in range(self.n): # accumulate_elements-AugAssign (-> +2), builtin_function_call-range, for_range_stop, nested_for (-> +1)
                 for k in range(self.n): # accumulate_elements-AugAssign (-> +1), builtin_function_call-range, for_range_stop
                     matrix.t[i][j] += self.t[i][k] * b.t[k][j] # augmented_assignment, binary_operator-Mult, index
         return matrix
@@ -1026,12 +1026,12 @@ class FFT:
             new_dft = [[] for i in range(next_ncol)] # assignment, builtin_function_call-range, literal-List
             root = self.root ** next_ncol # assignment, binary_operator-Pow
             current_root = 1 # assignment, literal-Num
-            for j in range(self.C_max_length // (next_ncol * 2)): # binary_operator-FloorDiv, binary_operator-Mult, builtin_function_call-range, for_range_stop, literal-Num, nested_for
+            for j in range(self.C_max_length // (next_ncol * 2)): # binary_operator-FloorDiv, binary_operator-Mult, builtin_function_call-range, for_range_stop, literal-Num, nested_for (-> +1)
                 for i in range(next_ncol): # builtin_function_call-range, for_range_stop
                     new_dft[i].append(dft[i][j] + current_root * dft[i + next_ncol][j]) # binary_operator-Add, binary_operator-Mult, index, mutable_sequence_method_call-append
                 current_root *= root # augmented_assignment
             current_root = 1 # assignment, literal-Num
-            for j in range(self.C_max_length // (next_ncol * 2)): # binary_operator-FloorDiv, binary_operator-Mult, builtin_function_call-range, for_range_stop, literal-Num, nested_for
+            for j in range(self.C_max_length // (next_ncol * 2)): # binary_operator-FloorDiv, binary_operator-Mult, builtin_function_call-range, for_range_stop, literal-Num, nested_for (-> +1)
                 for i in range(next_ncol): # builtin_function_call-range, for_range_stop
                     new_dft[i].append(dft[i][j] - current_root * dft[i + next_ncol][j]) # binary_operator-Add, binary_operator-Mult, binary_operator-Sub, index, mutable_sequence_method_call-append
                 current_root *= root # augmented_assignment
@@ -1051,7 +1051,7 @@ class FFT:
             new_inverseC = [[] for i in range(next_ncol)] # assignment, builtin_function_call-range, literal-List
             root = self.root ** (next_ncol // 2) # assignment, binary_operator-FloorDiv, binary_operator-Pow, literal-Num
             current_root = 1 # assignment, literal-Num
-            for j in range(self.C_max_length // next_ncol): # binary_operator-FloorDiv, builtin_function_call-range, for_range_stop, nested_for
+            for j in range(self.C_max_length // next_ncol): # binary_operator-FloorDiv, builtin_function_call-range, for_range_stop, nested_for (-> +1)
                 for i in range(next_ncol // 2): # binary_operator-FloorDiv, builtin_function_call-range, for_range_stop, literal-Num
                     new_inverseC[i].append( # index, mutable_sequence_method_call-append
                         ( # binary_operator-Div
@@ -1128,7 +1128,7 @@ def sieve(n): # function_definition
         high = n # assignment
     while low <= n: # comparison_operator-LtE
         temp = [True] * (high - low + 1) # assignment, binary_operator-Add, binary_operator-Mult, binary_operator-Sub, literal-List, literal-Num, literal-True
-        for each in in_prime: # accumulate_elements-AugAssign (-> +3), for_each
+        for each in in_prime: # accumulate_elements-AugAssign (-> +3), for_each, nested_for (-> +4)
             t = math.floor(low / each) * each # assignment, binary_operator-Div, binary_operator-Mult
             if t < low: # comparison_operator-Lt, if
                 t += each # augmented_assignment
