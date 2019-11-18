@@ -1,5 +1,5 @@
 - [Introduction](#introduction)
-- [Référence](#référence)
+- [Reference](#reference)
   - [Expressions](#expressions)
     - [Literals](#literals)
       - [Construct `literal`](#construct-literal)
@@ -16,7 +16,6 @@
       - [Construct `divisibility_test`](#construct-divisibility_test)
     - [Calls](#calls)
       - [Construct `builtin_function_call`](#construct-builtin_function_call)
-      - [Construct `cast_function_call`](#construct-cast_function_call)
       - [Construct `sequence_method_call`](#construct-sequence_method_call)
       - [Construct `string_method_call`](#construct-string_method_call)
       - [Construct `mutable_sequence_method_call`](#construct-mutable_sequence_method_call)
@@ -75,7 +74,7 @@
 
 # Introduction
 
-# Référence
+# Reference
 
 ## Expressions
 
@@ -397,7 +396,6 @@ divisibility_test-5: 5
 builtin_function_call-len: 1
 builtin_function_call-print: 1, 2
 ```
-
 
 --------------------------------------------------------------------------------
 
