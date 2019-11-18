@@ -867,7 +867,7 @@ Any function `f` which contains a nested call to itself (`f(..., f(...), ...)`),
 \n(?:.+\n)* \1/body/(?P<_1>.*)/_type='Call'
 \n(?:.+\n)*?\1/body/(?P=_1)   /func/lineno=(?P<LINE>\d+)
 \n(?:.+\n)*?\1/body/(?P=_1)   /func/id=(?P=NAME) # ensure it is called inside its own body
-\n(?:.+\n)*?\1/body/(?P=_1)   /(?P<_2>args/.*)/_type='Call'
+\n(?:.+\n)* \1/body/(?P=_1)   /(?P<_2>args/.*)/_type='Call'
 \n(?:.+\n)*?\1/body/(?P=_1)   /(?P=_2)        /func/id=(?P=NAME)
 ```
 
@@ -1198,9 +1198,9 @@ Iterate over index numbers of a collection.
 \n(?:.+\n)*?\1/lineno=(?P<LINE>\d+)
 \n(?:.+\n)*?\1/(?P<_1>iter)/_type='Call'
 \n(?:.+\n)*?\1/(?P=_1)     /func/id='range'
-\n(?:.+\n)*?\1/(?P=_1)     /(?P<_2>args)/length=1
-\n(?:.+\n)*?\1/(?P=_1)     /(?P=_2)     /(?P<_3>0)/_type='Call'
-\n(?:.+\n)*?\1/(?P=_1)     /(?P=_2)     /(?P=_3)  /func/id='len'
+\n(?:.+\n)*?\1/(?P=_1)     /args/length=1
+\n(?:.+\n)*?\1/(?P=_1)     /args/0/_type='Call'
+\n(?:.+\n)*?\1/(?P=_1)     /args/0/func/id='len'
 \n(?:.+\n)*?\1/(?P=_1)     /keywords/length=0
 ```
 
@@ -1394,9 +1394,9 @@ An accumulation pattern that, from a given collection, returns a list containing
 \n(?:.+\n)*?\1/(?P<_1>body/\d+)/_type='If'
 \n(?:.+\n)* \1/(?P=_1)         /test/args/\d+/id=(?P=ID_1) # match it in an inner conditional test
 \n(?:.+\n)* \1/(?P=_1)         /(?P<_2>body/\d+)/lineno=(?P<LINE>\d+)
-\n(?:.+\n)*?\1/(?P=_1)         /(?P=_2)         /(?P<_3>value)/_type='Call'
-\n(?:.+\n)*?\1/(?P=_1)         /(?P=_2)         /(?P=_3)      /func/attr='append'
-\n(?:.+\n)*?\1/(?P=_1)         /(?P=_2)         /(?P=_3)      /args/0/id=(?P=ID_1) # match it in an append()
+\n(?:.+\n)*?\1/(?P=_1)         /(?P=_2)         /value/_type='Call'
+\n(?:.+\n)*?\1/(?P=_1)         /(?P=_2)         /value/func/attr='append'
+\n(?:.+\n)*?\1/(?P=_1)         /(?P=_2)         /value/args/0/id=(?P=ID_1) # match it in an append()
 ```
 
 ###### Example
@@ -1476,7 +1476,7 @@ Check if all the elements of a collection satisfy a predicate.
 \n(?:.+\n)*?\1/(?P=_1)         /lineno=(?P<LINE>\d+)
 \n(?:.+\n)* \1/(?P=_1)         /(?P<_2>body/\d+)/_type='If'
 \n(?:.+\n)* \1/(?P=_1)         /(?P=_2)         /(?P<_3>body/\d+)/_type='Return'
-\n(?:.+\n)*?\1/(?P=_1)         /(?P=_2)         /(?P=_3)/value/value=False
+\n(?:.+\n)*?\1/(?P=_1)         /(?P=_2)         /(?P=_3)         /value/value=False
 \n(?:.+\n)* \1/(?P<_4_>body/\d+)/_type='Return'
 \n(?:.+\n)*?\1/(?P=_4_)         /lineno=(?P<LINE>\d+)
 \n(?:.+\n)*?\1/(?P=_4_)         /value/value=True
@@ -1511,7 +1511,7 @@ Check if any element of a collection satisfies a predicate.
 \n(?:.+\n)*?\1/(?P=_1)         /lineno=(?P<LINE>\d+)
 \n(?:.+\n)* \1/(?P=_1)         /(?P<_2>body/\d+)/_type='If'
 \n(?:.+\n)* \1/(?P=_1)         /(?P=_2)         /(?P<_3>body/\d+)/_type='Return'
-\n(?:.+\n)*?\1/(?P=_1)         /(?P=_2)         /(?P=_3)/value/value=True
+\n(?:.+\n)*?\1/(?P=_1)         /(?P=_2)         /(?P=_3)         /value/value=True
 \n(?:.+\n)* \1/(?P<_4>body/\d+)/_type='Return'
 \n(?:.+\n)*?\1/(?P=_4)         /lineno=(?P<LINE>\d+)
 \n(?:.+\n)*?\1/(?P=_4)         /value/value=False
@@ -1836,10 +1836,10 @@ When the `else` branch of a conditional is another conditional, it can be rewrit
         ^(.*?)/_type='BoolOp'
 \n(?:.+\n)*?\1/lineno=(?P<LINE>\d+)
 \n(?:.+\n)*?\1/op/_type='And'
-\n(?:.+\n)*?\1/(?P<_1>values/0)/_type='Compare'
-\n(?:.+\n)*?\1/(?P=_1)         /comparators/0/_hash=(?P<HASH_1>.+) # capture the right operand of the left comparison
-\n(?:.+\n)*?\1/(?P<_2>values/1)/_type='Compare'
-\n(?:.+\n)*?\1/(?P=_2)         /left/_hash=(?P=HASH_1) # match the left operand of the right comparison
+\n(?:.+\n)*?\1/values/0/_type='Compare'
+\n(?:.+\n)*?\1/values/0/comparators/0/_hash=(?P<HASH_1>.+) # capture the right operand of the left comparison
+\n(?:.+\n)*?\1/values/1/_type='Compare'
+\n(?:.+\n)*?\1/values/1/left/_hash=(?P=HASH_1) # match the left operand of the right comparison
 ```
 
 ###### Example
