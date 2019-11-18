@@ -9,7 +9,7 @@ def n31(a: int) -> Tuple[List[int], int]: # function_definition, index
         raise ValueError("Given integer must be greater than 1, not {0}".format(a)) # function_composition, literal-Str
     path = [a] # assignment
     while a != 1: # comparison_operator-NotEq, evolve_state (-> +4), literal-Num
-        if a % 2 == 0: # binary_operator-Mod, comparison_operator-Eq, divisibility_test, if, if_else, literal-Num, parity_test, suggest_conditional_expression (-> +3)
+        if a % 2 == 0: # binary_operator-Mod, comparison_operator-Eq, divisibility_test-2, if, if_else, literal-Num, suggest_conditional_expression (-> +3)
             a = a // 2 # assignment, binary_operator-FloorDiv, literal-Num, suggest_augmented_assignment
         else:
             a = 3 * a + 1 # assignment, binary_operator-Add, binary_operator-Mult, literal-Num, suggest_constant_definition
@@ -188,7 +188,7 @@ def test_average(): # function_definition
 def median(nums): # function_definition
     sorted_list = sorted(nums) # assignment, builtin_function_call-sorted
     med = None # assignment, literal-None
-    if len(sorted_list) % 2 == 0: # binary_operator-Mod, builtin_function_call-len, comparison_operator-Eq, divisibility_test, if, if_else, literal-Num, parity_test
+    if len(sorted_list) % 2 == 0: # binary_operator-Mod, builtin_function_call-len, comparison_operator-Eq, divisibility_test-2, if, if_else, literal-Num
         mid_index_1 = len(sorted_list) // 2 # assignment, binary_operator-FloorDiv, builtin_function_call-len, literal-Num
         mid_index_2 = (len(sorted_list) // 2) - 1 # assignment, binary_operator-FloorDiv, binary_operator-Sub, builtin_function_call-len, literal-Num
         med = (sorted_list[mid_index_1] + sorted_list[mid_index_2]) / float(2) # assignment, binary_operator-Add, binary_operator-Div, builtin_function_call-float, index, literal-Num
@@ -221,7 +221,7 @@ def mode(input_list):  # Defining function "mode." # function_definition
 import math
 def prime_factors(n: int) -> list: # function_definition
     pf = [] # assignment, literal-List
-    while n % 2 == 0: # binary_operator-Mod, comparison_operator-Eq, divisibility_test, evolve_state (-> +2), literal-Num, parity_test
+    while n % 2 == 0: # binary_operator-Mod, comparison_operator-Eq, divisibility_test-2, evolve_state (-> +2), literal-Num
         pf.append(2) # literal-Num
         n = int(n / 2) # assignment, binary_operator-Div, builtin_function_call-int, cast_function_call-int, literal-Num
     for i in range(3, int(math.sqrt(n)) + 1, 2): # accumulate_elements-Assign (-> +3), binary_operator-Add, builtin_function_call-int, builtin_function_call-range, cast_function_call-int, for_range_step, function_composition, literal-Num, suggest_constant_definition
@@ -234,7 +234,7 @@ def prime_factors(n: int) -> list: # function_definition
 def number_of_divisors(n: int) -> int: # function_definition
     div = 1 # assignment, literal-Num
     temp = 1 # assignment, literal-Num
-    while n % 2 == 0: # binary_operator-Mod, comparison_operator-Eq, divisibility_test, evolve_state (-> +2), literal-Num, parity_test
+    while n % 2 == 0: # binary_operator-Mod, comparison_operator-Eq, divisibility_test-2, evolve_state (-> +2), literal-Num
         temp += 1 # augmented_assignment, literal-Num
         n = int(n / 2) # assignment, binary_operator-Div, builtin_function_call-int, cast_function_call-int, literal-Num
     div *= temp # augmented_assignment
@@ -248,7 +248,7 @@ def number_of_divisors(n: int) -> int: # function_definition
 def sum_of_divisors(n: int) -> int: # function_definition
     s = 1 # assignment, literal-Num
     temp = 1 # assignment, literal-Num
-    while n % 2 == 0: # binary_operator-Mod, comparison_operator-Eq, divisibility_test, evolve_state (-> +2), literal-Num, parity_test
+    while n % 2 == 0: # binary_operator-Mod, comparison_operator-Eq, divisibility_test-2, evolve_state (-> +2), literal-Num
         temp += 1 # augmented_assignment, literal-Num
         n = int(n / 2) # assignment, binary_operator-Div, builtin_function_call-int, cast_function_call-int, literal-Num
     if temp > 1: # comparison_operator-Gt, if, literal-Num
@@ -273,7 +273,7 @@ def euler_phi(n: int) -> int: # function_definition
 def binary_exponentiation(a, n): # function_definition, recursive_function_definition (-> +6)
     if n == 0: # comparison_operator-Eq, if, if_elif, literal-Num
         return 1 # literal-Num
-    elif n % 2 == 1: # binary_operator-Mod, comparison_operator-Eq, if, if_else, literal-Num, parity_test
+    elif n % 2 == 1: # binary_operator-Mod, comparison_operator-Eq, divisibility_test-2, if, if_else, literal-Num
         return binary_exponentiation(a, n - 1) * a # binary_operator-Mult, binary_operator-Sub, literal-Num
     else:
         b = binary_exponentiation(a, n / 2) # assignment, binary_operator-Div, literal-Num
@@ -307,7 +307,7 @@ def ceil(x) -> int: # function_definition
 def collatz_sequence(n): # function_definition
     sequence = [n] # assignment
     while n != 1: # comparison_operator-NotEq, evolve_state (-> +4), literal-Num
-        if n % 2 == 0:  # even number condition # binary_operator-Mod, comparison_operator-Eq, divisibility_test, if, if_else, literal-Num, parity_test
+        if n % 2 == 0:  # even number condition # binary_operator-Mod, comparison_operator-Eq, divisibility_test-2, if, if_else, literal-Num
             n //= 2 # augmented_assignment, literal-Num
         else:
             n = 3 * n + 1 # assignment, binary_operator-Add, binary_operator-Mult, literal-Num, suggest_constant_definition
@@ -412,7 +412,7 @@ def factors_of_a_number(num: int) -> list: # function_definition
 def binary_exponentiation(a, n, mod): # function_definition, recursive_function_definition (-> +6)
     if n == 0: # comparison_operator-Eq, if, if_elif, literal-Num
         return 1 # literal-Num
-    elif n % 2 == 1: # binary_operator-Mod, comparison_operator-Eq, if, if_else, literal-Num, parity_test
+    elif n % 2 == 1: # binary_operator-Mod, comparison_operator-Eq, divisibility_test-2, if, if_else, literal-Num
         return (binary_exponentiation(a, n - 1, mod) * a) % mod # binary_operator-Mod, binary_operator-Mult, binary_operator-Sub, literal-Num
     else:
         b = binary_exponentiation(a, n / 2, mod) # assignment, binary_operator-Div, literal-Num
@@ -420,8 +420,8 @@ def binary_exponentiation(a, n, mod): # function_definition, recursive_function_
 p = 701 # assignment, global_variable_definition, literal-Num, suggest_constant_definition
 a = 1000000000 # assignment, global_variable_definition, literal-Num, suggest_constant_definition
 b = 10 # assignment, global_variable_definition, literal-Num, suggest_constant_definition
-print((a / b) % p == (a * binary_exponentiation(b, p - 2, p)) % p) # binary_operator-Div, binary_operator-Mod, binary_operator-Mult, binary_operator-Sub, builtin_function_call-print, comparison_operator-Eq, function_composition, literal-Num
-print((a / b) % p == (a * b ** (p - 2)) % p) # binary_operator-Div, binary_operator-Mod, binary_operator-Mult, binary_operator-Pow, binary_operator-Sub, builtin_function_call-print, comparison_operator-Eq, literal-Num
+print((a / b) % p == (a * binary_exponentiation(b, p - 2, p)) % p) # binary_operator-Div, binary_operator-Mod, binary_operator-Mult, binary_operator-Sub, builtin_function_call-print, comparison_operator-Eq, divisibility_test, function_composition, literal-Num
+print((a / b) % p == (a * b ** (p - 2)) % p) # binary_operator-Div, binary_operator-Mod, binary_operator-Mult, binary_operator-Pow, binary_operator-Sub, builtin_function_call-print, comparison_operator-Eq, divisibility_test, literal-Num
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/fibonacci.py
@@ -596,9 +596,9 @@ def main(): # function_definition
 import math
 def exactPrimeFactorCount(n): # function_definition
     count = 0 # assignment, literal-Num
-    if n % 2 == 0: # binary_operator-Mod, comparison_operator-Eq, divisibility_test, if, literal-Num, parity_test
+    if n % 2 == 0: # binary_operator-Mod, comparison_operator-Eq, divisibility_test-2, if, literal-Num
         count += 1 # augmented_assignment, literal-Num
-        while n % 2 == 0: # binary_operator-Mod, comparison_operator-Eq, divisibility_test, evolve_state (-> +1), literal-Num, parity_test
+        while n % 2 == 0: # binary_operator-Mod, comparison_operator-Eq, divisibility_test-2, evolve_state (-> +1), literal-Num
             n = int(n / 2) # assignment, binary_operator-Div, builtin_function_call-int, cast_function_call-int, literal-Num
     i = 3 # assignment, literal-Num, suggest_constant_definition
     while i <= int(math.sqrt(n)): # builtin_function_call-int, cast_function_call-int, comparison_operator-LtE, evolve_state (-> +4), function_composition
@@ -714,20 +714,6 @@ class TestLeastCommonMultiple(unittest.TestCase):
             actual_result = find_lcm(first_num, second_num) # assignment
             with self.subTest(i=i):
                 self.assertEqual(actual_result, self.expected_results[i]) # index
-
-# ----------------------------------------------------------------------------------------
-# ../Python/maths/lucas_lehmer_primality_test.py
-# ----------------------------------------------------------------------------------------
-def lucas_lehmer_test(p: int) -> bool: # function_definition
-    if p < 2: # comparison_operator-Lt, if, if_elif, literal-Num
-        raise ValueError("p should not be less than 2!") # literal-Str
-    elif p == 2: # comparison_operator-Eq, if, literal-Num
-        return True # literal-True
-    s = 4 # assignment, literal-Num, suggest_constant_definition
-    M = (1 << p) - 1 # assignment, binary_operator-LShift, binary_operator-Sub, literal-Num
-    for i in range(p - 2): # binary_operator-Sub, builtin_function_call-range, for_range_stop, literal-Num
-        s = ((s * s) - 2) % M # assignment, binary_operator-Mod, binary_operator-Mult, binary_operator-Sub, literal-Num
-    return s == 0 # comparison_operator-Eq, literal-Num
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/lucas_series.py
@@ -885,7 +871,7 @@ def prime_check(number): # function_definition
         return False # literal-False
     if number < 4: # comparison_operator-Lt, if, literal-Num, suggest_constant_definition
         return True # literal-True
-    if number % 2 == 0: # binary_operator-Mod, comparison_operator-Eq, divisibility_test, if, literal-Num, parity_test
+    if number % 2 == 0: # binary_operator-Mod, comparison_operator-Eq, divisibility_test-2, if, literal-Num
         return False # literal-False
     odd_numbers = range(3, int(math.sqrt(number)) + 1, 2) # assignment, binary_operator-Add, builtin_function_call-int, builtin_function_call-range, cast_function_call-int, function_composition, literal-Num, suggest_constant_definition
     return not any(number % i == 0 for i in odd_numbers) # binary_operator-Mod, builtin_function_call-any, comparison_operator-Eq, divisibility_test, literal-Num, unary_operator-Not
@@ -998,7 +984,7 @@ def QuadraticEquation(a: int, b: int, c: int) -> Tuple[str, str]: # function_def
     snd = sqrt(-delta) # assignment, unary_operator-USub
     if b == 0: # comparison_operator-Eq, if, literal-Num
         return f"({snd} * i) / 2", f"({snd} * i) / {2 * a}" # binary_operator-Mult, literal-Num, literal-Str
-    b = -abs(b) # assignment, builtin_function_call-abs, negation, unary_operator-USub
+    b = -abs(b) # assignment, builtin_function_call-abs, unary_operator-USub
     return f"({b}+{snd} * i) / 2", f"({b}+{snd} * i) / {2 * a}" # binary_operator-Mult, literal-Num, literal-Str
 def main(): # function_definition
     solutions = QuadraticEquation(a=5, b=6, c=1) # assignment, literal-Num, suggest_constant_definition

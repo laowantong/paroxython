@@ -11,6 +11,7 @@ def reformat_file(construct_path):
     toc = build_toc(construct_path, keep_header_levels=5, no_list_coherence=True)
     rule = "-" * 80 + "\n"
     text = regex.sub(r"(?m)^---+\n", "", text)
+    text = regex.sub(r"(?m)^ +```", "```", text)
     text = regex.sub(r"(?ms).*?^(?=# )", fr"{toc}\n\n", text, count=1)
     text = regex.sub(r"(?m)\s+^(#+ .+)\s+", fr"\n\n\1\n\n", text)
     text = regex.sub(r"(?ms)(```markdown.+?```.+?)(^\#{1,4} )", fr"\1{rule}\n\2", text)
@@ -42,8 +43,10 @@ def test_example(label, source, results):
     results = (line.partition(": ")[0::2] for line in results.split("\n"))
     actual = dict(parse(source))
     for (label, expected) in results:
-        assert label in list(actual.keys())
-        assert ", ".join(actual[label]) == expected
+        keys = list(actual.keys())
+        assert label in keys
+        actual_label = ", ".join(actual[label])
+        assert actual_label == expected
 
 
 def test_at_least_one_example_is_provided_for_each_construct():

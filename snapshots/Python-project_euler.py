@@ -2,7 +2,7 @@
 # ../Python/project_euler/problem_01/sol1.py
 # ----------------------------------------------------------------------------------------
 def solution(n): # function_definition
-    return sum([e for e in range(3, n) if e % 3 == 0 or e % 5 == 0]) # binary_operator-Mod, boolean_operator-Or, builtin_function_call-range, builtin_function_call-sum, comparison_operator-Eq, divisibility_test, function_composition, literal-Num, suggest_constant_definition
+    return sum([e for e in range(3, n) if e % 3 == 0 or e % 5 == 0]) # binary_operator-Mod, boolean_operator-Or, builtin_function_call-range, builtin_function_call-sum, comparison_operator-Eq, divisibility_test-3, divisibility_test-5, function_composition, literal-Num, suggest_constant_definition
 
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_01/sol2.py
@@ -85,7 +85,7 @@ def solution(n): # function_definition
 # ../Python/project_euler/problem_01/sol5.py
 # ----------------------------------------------------------------------------------------
 def solution(n): # function_definition
-    return sum([i for i in range(n) if i % 3 == 0 or i % 5 == 0]) # binary_operator-Mod, boolean_operator-Or, builtin_function_call-range, builtin_function_call-sum, comparison_operator-Eq, divisibility_test, function_composition, literal-Num, suggest_constant_definition
+    return sum([i for i in range(n) if i % 3 == 0 or i % 5 == 0]) # binary_operator-Mod, boolean_operator-Or, builtin_function_call-range, builtin_function_call-sum, comparison_operator-Eq, divisibility_test-3, divisibility_test-5, function_composition, literal-Num, suggest_constant_definition
 
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_01/sol6.py
@@ -94,9 +94,9 @@ def solution(n): # function_definition
     a = 3 # assignment, literal-Num, suggest_constant_definition
     result = 0 # assignment, literal-Num
     while a < n: # comparison_operator-Lt
-        if a % 3 == 0 or a % 5 == 0: # binary_operator-Mod, boolean_operator-Or, comparison_operator-Eq, divisibility_test, if, if_elif, literal-Num, suggest_constant_definition
+        if a % 3 == 0 or a % 5 == 0: # binary_operator-Mod, boolean_operator-Or, comparison_operator-Eq, divisibility_test-3, divisibility_test-5, if, if_elif, literal-Num, suggest_constant_definition
             result += a # augmented_assignment
-        elif a % 15 == 0: # binary_operator-Mod, comparison_operator-Eq, divisibility_test, if, literal-Num, suggest_constant_definition
+        elif a % 15 == 0: # binary_operator-Mod, comparison_operator-Eq, divisibility_test-15, if, literal-Num, suggest_constant_definition
             result -= a # augmented_assignment
         a += 1 # augmented_assignment, literal-Num
     return result
@@ -107,9 +107,9 @@ def solution(n): # function_definition
 def solution(n): # function_definition
     result = 0 # assignment, literal-Num
     for i in range(n): # accumulate_elements-AugAssign (-> +2), builtin_function_call-range, for_range_stop
-        if i % 3 == 0: # binary_operator-Mod, comparison_operator-Eq, divisibility_test, if, if_elif, literal-Num, suggest_constant_definition
+        if i % 3 == 0: # binary_operator-Mod, comparison_operator-Eq, divisibility_test-3, if, if_elif, literal-Num, suggest_constant_definition
             result += i # augmented_assignment
-        elif i % 5 == 0: # binary_operator-Mod, comparison_operator-Eq, divisibility_test, if, literal-Num, suggest_constant_definition
+        elif i % 5 == 0: # binary_operator-Mod, comparison_operator-Eq, divisibility_test-5, if, literal-Num, suggest_constant_definition
             result += i # augmented_assignment
     return result
 
@@ -121,7 +121,7 @@ def solution(n): # function_definition
     j = 2 # assignment, literal-Num
     sum = 0 # assignment, literal-Num
     while j <= n: # comparison_operator-LtE
-        if j % 2 == 0: # binary_operator-Mod, comparison_operator-Eq, divisibility_test, if, literal-Num, parity_test
+        if j % 2 == 0: # binary_operator-Mod, comparison_operator-Eq, divisibility_test-2, if, literal-Num
             sum += j # augmented_assignment
         i, j = j, i + j # assignment, binary_operator-Add
     return sum
@@ -133,7 +133,7 @@ def solution(n): # function_definition
     ls = [] # assignment, literal-List
     a, b = 0, 1 # assignment, literal-Num, literal-Tuple
     while b <= n: # comparison_operator-LtE
-        if b % 2 == 0: # binary_operator-Mod, comparison_operator-Eq, divisibility_test, if, literal-Num, parity_test
+        if b % 2 == 0: # binary_operator-Mod, comparison_operator-Eq, divisibility_test-2, if, literal-Num
             ls.append(b)
         a, b = b, a + b # assignment, binary_operator-Add
     return ls
@@ -184,7 +184,7 @@ def solution(n): # function_definition
         i += 1 # augmented_assignment, literal-Num
     sum = 0 # assignment, literal-Num
     for j in range(len(a) - 1): # accumulate_elements-AugAssign (-> +2), binary_operator-Sub, builtin_function_call-len, builtin_function_call-range, for_range_stop, function_composition, literal-Num
-        if a[j] % 2 == 0: # binary_operator-Mod, comparison_operator-Eq, divisibility_test, if, index, literal-Num, parity_test
+        if a[j] % 2 == 0: # binary_operator-Mod, comparison_operator-Eq, divisibility_test-2, if, index, literal-Num
             sum += a[j] # augmented_assignment, index
     return sum
 
@@ -195,7 +195,7 @@ import math
 def isprime(no): # function_definition
     if no == 2: # comparison_operator-Eq, if, if_elif, literal-Num
         return True # literal-True
-    elif no % 2 == 0: # binary_operator-Mod, comparison_operator-Eq, divisibility_test, if, literal-Num, parity_test
+    elif no % 2 == 0: # binary_operator-Mod, comparison_operator-Eq, divisibility_test-2, if, literal-Num
         return False # literal-False
     sq = int(math.sqrt(no)) + 1 # assignment, binary_operator-Add, builtin_function_call-int, cast_function_call-int, function_composition, literal-Num
     for i in range(3, sq, 2): # builtin_function_call-range, for_range_step, literal-Num, suggest_constant_definition, universal_quantifier (-> +3)
@@ -213,7 +213,7 @@ def solution(n): # function_definition
     if isprime(n): # if, if_else
         return n
     else:
-        while n % 2 == 0: # binary_operator-Mod, comparison_operator-Eq, divisibility_test, evolve_state (-> +1), literal-Num, parity_test
+        while n % 2 == 0: # binary_operator-Mod, comparison_operator-Eq, divisibility_test-2, evolve_state (-> +1), literal-Num
             n = n / 2 # assignment, binary_operator-Div, literal-Num, suggest_augmented_assignment
         if isprime(n): # if, if_else
             return int(n) # builtin_function_call-int, cast_function_call-int
@@ -264,7 +264,7 @@ def solution(n: int) -> int: # function_definition
     if n == 2: # comparison_operator-Eq, if, literal-Num
         return 2 # literal-Num
     while n > 2: # comparison_operator-Gt, evolve_state (-> +5), literal-Num
-        while n % i != 0: # binary_operator-Mod, comparison_operator-NotEq, evolve_state (-> +1), literal-Num
+        while n % i != 0: # binary_operator-Mod, comparison_operator-NotEq, divisibility_test, evolve_state (-> +1), literal-Num
             i += 1 # augmented_assignment, literal-Num
         ans = i # assignment
         while n % i == 0: # binary_operator-Mod, comparison_operator-Eq, divisibility_test, literal-Num
@@ -312,7 +312,7 @@ def solution(n): # function_definition
         i += n * (n - 1) # augmented_assignment, binary_operator-Mult, binary_operator-Sub, literal-Num
         nfound = 0 # assignment, literal-Num
         for j in range(2, n): # builtin_function_call-range, for_range_start, literal-Num
-            if i % j != 0: # binary_operator-Mod, comparison_operator-NotEq, if, literal-Num
+            if i % j != 0: # binary_operator-Mod, comparison_operator-NotEq, divisibility_test, if, literal-Num
                 nfound = 1 # assignment, literal-Num
                 break
         if nfound == 0: # comparison_operator-Eq, if, literal-Num
@@ -378,7 +378,7 @@ from math import sqrt
 def isprime(n): # function_definition
     if n == 2: # comparison_operator-Eq, if, if_elif, literal-Num
         return True # literal-True
-    elif n % 2 == 0: # binary_operator-Mod, comparison_operator-Eq, divisibility_test, if, if_else, literal-Num, parity_test
+    elif n % 2 == 0: # binary_operator-Mod, comparison_operator-Eq, divisibility_test-2, if, if_else, literal-Num
         return False # literal-False
     else:
         sq = int(sqrt(n)) + 1 # assignment, binary_operator-Add, builtin_function_call-int, cast_function_call-int, function_composition, literal-Num
@@ -430,7 +430,7 @@ def solution(n): # function_definition
 import math
 import itertools
 def primeCheck(number): # function_definition
-    if number % 2 == 0 and number > 2: # binary_operator-Mod, boolean_operator-And, comparison_operator-Eq, comparison_operator-Gt, divisibility_test, if, literal-Num, parity_test
+    if number % 2 == 0 and number > 2: # binary_operator-Mod, boolean_operator-And, comparison_operator-Eq, comparison_operator-Gt, divisibility_test-2, if, literal-Num
         return False # literal-False
     return all(number % i for i in range(3, int(math.sqrt(number)) + 1, 2)) # binary_operator-Add, binary_operator-Mod, builtin_function_call-all, builtin_function_call-int, builtin_function_call-range, cast_function_call-int, function_composition, literal-Num, suggest_constant_definition
 def prime_generator(): # function_definition
@@ -619,7 +619,7 @@ def solution(n): # function_definition
 import math
 from itertools import takewhile
 def primeCheck(number): # function_definition
-    if number % 2 == 0 and number > 2: # binary_operator-Mod, boolean_operator-And, comparison_operator-Eq, comparison_operator-Gt, divisibility_test, if, literal-Num, parity_test
+    if number % 2 == 0 and number > 2: # binary_operator-Mod, boolean_operator-And, comparison_operator-Eq, comparison_operator-Gt, divisibility_test-2, if, literal-Num
         return False # literal-False
     return all(number % i for i in range(3, int(math.sqrt(number)) + 1, 2)) # binary_operator-Add, binary_operator-Mod, builtin_function_call-all, builtin_function_call-int, builtin_function_call-range, cast_function_call-int, function_composition, literal-Num, suggest_constant_definition
 def prime_generator(): # function_definition
@@ -769,7 +769,7 @@ def solution(n): # function_definition
         counter = 1 # assignment, literal-Num
         number = input1 # assignment
         while number > 1: # comparison_operator-Gt, evolve_state (-> +5), literal-Num
-            if number % 2 == 0: # binary_operator-Mod, comparison_operator-Eq, divisibility_test, if, if_else, literal-Num, parity_test
+            if number % 2 == 0: # binary_operator-Mod, comparison_operator-Eq, divisibility_test-2, if, if_else, literal-Num
                 number /= 2 # augmented_assignment, literal-Num
                 counter += 1 # augmented_assignment, literal-Num
             else:
@@ -786,7 +786,7 @@ def solution(n): # function_definition
 def collatz_sequence(n): # function_definition
     sequence = [n] # assignment
     while n != 1: # comparison_operator-NotEq, evolve_state (-> +4), literal-Num
-        if n % 2 == 0: # binary_operator-Mod, comparison_operator-Eq, divisibility_test, if, if_else, literal-Num, parity_test
+        if n % 2 == 0: # binary_operator-Mod, comparison_operator-Eq, divisibility_test-2, if, if_else, literal-Num
             n //= 2 # augmented_assignment, literal-Num
         else:
             n = 3 * n + 1 # assignment, binary_operator-Add, binary_operator-Mult, literal-Num, suggest_constant_definition
@@ -838,7 +838,7 @@ def solution(n): # function_definition
         if i < 1000: # comparison_operator-Lt, if, if_else, literal-Num, suggest_constant_definition
             if i >= 100: # comparison_operator-GtE, if, literal-Num, suggest_constant_definition
                 count += ones_counts[i // 100] + 7 # augmented_assignment, binary_operator-Add, binary_operator-FloorDiv, index, literal-Num, suggest_constant_definition
-                if i % 100 != 0: # binary_operator-Mod, comparison_operator-NotEq, if, literal-Num, suggest_constant_definition
+                if i % 100 != 0: # binary_operator-Mod, comparison_operator-NotEq, divisibility_test-100, if, literal-Num, suggest_constant_definition
                     count += 3 # augmented_assignment, literal-Num, suggest_constant_definition
             if 0 < i % 100 < 20: # binary_operator-Mod, comparison_operator-Lt, if, if_else, literal-Num, suggest_constant_definition
                 count += ones_counts[i % 100] # augmented_assignment, binary_operator-Mod, index, literal-Num, suggest_constant_definition
@@ -883,7 +883,7 @@ def solution(): # function_definition
     sundays = 0 # assignment, literal-Num
     while year < 2001: # comparison_operator-Lt, evolve_state (-> +14), literal-Num, suggest_constant_definition
         day += 7 # augmented_assignment, literal-Num, suggest_constant_definition
-        if (year % 4 == 0 and not year % 100 == 0) or (year % 400 == 0): # binary_operator-Mod, boolean_operator-And, boolean_operator-Or, comparison_operator-Eq, divisibility_test, if, if_elif, literal-Num, suggest_constant_definition, unary_operator-Not
+        if (year % 4 == 0 and not year % 100 == 0) or (year % 400 == 0): # binary_operator-Mod, boolean_operator-And, boolean_operator-Or, comparison_operator-Eq, divisibility_test-100, divisibility_test-4, divisibility_test-400, if, if_elif, literal-Num, suggest_constant_definition, unary_operator-Not
             if day > days_per_month[month - 1] and month != 2: # binary_operator-Sub, boolean_operator-And, comparison_operator-Gt, comparison_operator-NotEq, if, if_elif, index, literal-Num
                 month += 1 # augmented_assignment, literal-Num
                 day = day - days_per_month[month - 2] # assignment, binary_operator-Sub, index, literal-Num, suggest_augmented_assignment
@@ -1121,7 +1121,7 @@ def solution(n): # function_definition
 # ----------------------------------------------------------------------------------------
 import math
 def is_prime(k: int) -> bool: # function_definition
-    if k < 2 or k % 2 == 0: # binary_operator-Mod, boolean_operator-Or, comparison_operator-Eq, comparison_operator-Lt, divisibility_test, if, if_elif, literal-Num, parity_test
+    if k < 2 or k % 2 == 0: # binary_operator-Mod, boolean_operator-Or, comparison_operator-Eq, comparison_operator-Lt, divisibility_test-2, if, if_elif, literal-Num
         return False # literal-False
     elif k == 2: # comparison_operator-Eq, if, if_else, literal-Num
         return True # literal-True
@@ -1220,7 +1220,7 @@ def solution(): # function_definition
 # ----------------------------------------------------------------------------------------
 def isDigitCancelling(num, den): # function_definition
     if num != den: # comparison_operator-NotEq, if
-        if num % 10 == den // 10: # binary_operator-FloorDiv, binary_operator-Mod, comparison_operator-Eq, if, literal-Num, suggest_constant_definition
+        if num % 10 == den // 10: # binary_operator-FloorDiv, binary_operator-Mod, comparison_operator-Eq, divisibility_test-10, if, literal-Num, suggest_constant_definition
             if (num // 10) / (den % 10) == num / den: # binary_operator-Div, binary_operator-FloorDiv, binary_operator-Mod, comparison_operator-Eq, if, literal-Num, suggest_constant_definition
                 return True # literal-True
 def solve(digit_len: int) -> str: # function_definition
@@ -1229,7 +1229,7 @@ def solve(digit_len: int) -> str: # function_definition
     last_digit = int("1" + "0" * digit_len) # assignment, binary_operator-Add, binary_operator-Mult, builtin_function_call-int, cast_function_call-int, literal-Str
     for num in range(den, last_digit): # builtin_function_call-range, for_range_start
         while den <= 99: # comparison_operator-LtE, evolve_state (-> +4), literal-Num, suggest_constant_definition
-            if (num != den) and (num % 10 == den // 10) and (den % 10 != 0): # binary_operator-FloorDiv, binary_operator-Mod, boolean_operator-And, comparison_operator-Eq, comparison_operator-NotEq, if, literal-Num, suggest_constant_definition
+            if (num != den) and (num % 10 == den // 10) and (den % 10 != 0): # binary_operator-FloorDiv, binary_operator-Mod, boolean_operator-And, comparison_operator-Eq, comparison_operator-NotEq, divisibility_test-10, if, literal-Num, suggest_constant_definition
                 if isDigitCancelling(num, den): # if
                     solutions.append("{}/{}".format(num, den)) # function_composition, literal-Str
             den += 1 # augmented_assignment, literal-Num

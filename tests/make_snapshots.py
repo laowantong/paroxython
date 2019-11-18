@@ -6,7 +6,7 @@ from paroxython import scanner
 DIRECTORIES = [
     "../Python/project_euler",
     "../Python/maths",
-    # "../Algo/programs",
+    "../Algo/programs",
 ]
 
 for directory in DIRECTORIES:

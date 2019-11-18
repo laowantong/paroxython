@@ -6,9 +6,9 @@ sys.path[0:0] = [str(Path(__file__).parent)]
 
 from parser import Parser
 
-EXCLUDE_NAMES = {"__init__.py", "setup.py"}
 SEPARATOR = "-" * 88
 
+match_exclude_file = regex.compile(r"__init__\.py|setup\.py|.*[-_]tests?\.py").match
 sub_docstrings = regex.compile(r'(?ms)^ *r?""".+?""" *\n').sub
 sub_comment_lines = regex.compile(r"(?m)^ *#.*\n").sub
 sub_main = regex.compile(r"""(?ms)^if __name__ *== *[\"']__main__[\"'] *:.+""").sub
@@ -19,7 +19,7 @@ def scan(path, sloc_only=True):
     parse = Parser()
     paths = sorted(path.rglob("*.py"))
     for path in paths:
-        if path.name in EXCLUDE_NAMES:
+        if match_exclude_file(path.name):
             continue
         source = path.read_text()
         if sloc_only:
