@@ -2,7 +2,7 @@
 # ../Python/project_euler/problem_01/sol1.py
 # ----------------------------------------------------------------------------------------
 def solution(n): # function_definition
-    return sum([e for e in range(3, n) if e % 3 == 0 or e % 5 == 0]) # binary_operator-Mod, boolean_operator-Or, builtin_function_call-range, builtin_function_call-sum, comparison_operator-Eq, divisibility_test-3, divisibility_test-5, function_composition, literal-Num, suggest_constant_definition
+    return sum([e for e in range(3, n) if e % 3 == 0 or e % 5 == 0]) # binary_operator-Mod, boolean_operator-Or, builtin_function_call-range, builtin_function_call-sum, comparison_operator-Eq, composition, divisibility_test-3, divisibility_test-5, literal-Num, suggest_constant_definition
 
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_01/sol2.py
@@ -78,14 +78,14 @@ def solution(n): # function_definition
             temp += 1 # augmented_assignment, literal-Num
         else:
             break
-    collection = list(set(xmulti + zmulti)) # assignment, binary_operator-Add, builtin_function_call-list, builtin_function_call-set, function_composition
+    collection = list(set(xmulti + zmulti)) # assignment, binary_operator-Add, builtin_function_call-list, builtin_function_call-set, composition
     return sum(collection) # builtin_function_call-sum
 
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_01/sol5.py
 # ----------------------------------------------------------------------------------------
 def solution(n): # function_definition
-    return sum([i for i in range(n) if i % 3 == 0 or i % 5 == 0]) # binary_operator-Mod, boolean_operator-Or, builtin_function_call-range, builtin_function_call-sum, comparison_operator-Eq, divisibility_test-3, divisibility_test-5, function_composition, literal-Num, suggest_constant_definition
+    return sum([i for i in range(n) if i % 3 == 0 or i % 5 == 0]) # binary_operator-Mod, boolean_operator-Or, builtin_function_call-range, builtin_function_call-sum, comparison_operator-Eq, composition, divisibility_test-3, divisibility_test-5, literal-Num, suggest_constant_definition
 
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_01/sol6.py
@@ -166,8 +166,8 @@ def solution(n): # function_definition
         raise ValueError("Parameter n must be greater or equal to one.") # literal-Str
     getcontext().prec = 100 # assignment, literal-Num, suggest_constant_definition
     phi = (Decimal(5) ** Decimal(0.5) + 1) / Decimal(2) # assignment, binary_operator-Add, binary_operator-Div, binary_operator-Pow, literal-Num, suggest_constant_definition
-    index = (math.floor(math.log(n * (phi + 2), phi) - 1) // 3) * 3 + 2 # assignment, binary_operator-Add, binary_operator-FloorDiv, binary_operator-Mult, binary_operator-Sub, function_composition, literal-Num, suggest_constant_definition
-    num = Decimal(round(phi ** Decimal(index + 1))) / (phi + 2) # assignment, binary_operator-Add, binary_operator-Div, binary_operator-Pow, builtin_function_call-round, function_composition, literal-Num
+    index = (math.floor(math.log(n * (phi + 2), phi) - 1) // 3) * 3 + 2 # assignment, binary_operator-Add, binary_operator-FloorDiv, binary_operator-Mult, binary_operator-Sub, composition, literal-Num, suggest_constant_definition
+    num = Decimal(round(phi ** Decimal(index + 1))) / (phi + 2) # assignment, binary_operator-Add, binary_operator-Div, binary_operator-Pow, builtin_function_call-round, composition, literal-Num
     sum = num // 2 # assignment, binary_operator-FloorDiv, literal-Num
     return int(sum) # builtin_function_call-int
 
@@ -183,7 +183,7 @@ def solution(n): # function_definition
             break
         i += 1 # augmented_assignment, literal-Num
     sum = 0 # assignment, literal-Num
-    for j in range(len(a) - 1): # accumulate_elements-AugAssign (-> +2), binary_operator-Sub, builtin_function_call-len, builtin_function_call-range, for_range_stop, function_composition, literal-Num
+    for j in range(len(a) - 1): # accumulate_elements-AugAssign (-> +2), binary_operator-Sub, builtin_function_call-len, builtin_function_call-range, composition, for_range_stop, literal-Num
         if a[j] % 2 == 0: # binary_operator-Mod, comparison_operator-Eq, divisibility_test-2, if, index, literal-Num
             sum += a[j] # augmented_assignment, index
     return sum
@@ -197,7 +197,7 @@ def isprime(no): # function_definition
         return True # literal-True
     elif no % 2 == 0: # binary_operator-Mod, comparison_operator-Eq, divisibility_test-2, if, literal-Num
         return False # literal-False
-    sq = int(math.sqrt(no)) + 1 # assignment, binary_operator-Add, builtin_function_call-int, function_composition, literal-Num
+    sq = int(math.sqrt(no)) + 1 # assignment, binary_operator-Add, builtin_function_call-int, composition, literal-Num
     for i in range(3, sq, 2): # builtin_function_call-range, for_range_step, literal-Num, suggest_constant_definition, universal_quantifier (-> +3)
         if no % i == 0: # binary_operator-Mod, comparison_operator-Eq, divisibility_test, if, literal-Num
             return False # literal-False
@@ -218,7 +218,7 @@ def solution(n): # function_definition
         if isprime(n): # if, if_else
             return int(n) # builtin_function_call-int
         else:
-            n1 = int(math.sqrt(n)) + 1 # assignment, binary_operator-Add, builtin_function_call-int, function_composition, literal-Num
+            n1 = int(math.sqrt(n)) + 1 # assignment, binary_operator-Add, builtin_function_call-int, composition, literal-Num
             for i in range(3, n1, 2): # builtin_function_call-range, for_range_step, literal-Num, suggest_constant_definition
                 if n % i == 0: # binary_operator-Mod, comparison_operator-Eq, divisibility_test, if, literal-Num
                     if isprime(n / i): # binary_operator-Div, if, if_elif
@@ -281,7 +281,7 @@ def solution(n): # function_definition
         if strNumber == strNumber[::-1]: # comparison_operator-Eq, if, literal-Num, slice_step, unary_operator-USub
             divisor = 999 # assignment, literal-Num, suggest_constant_definition
             while divisor != 99: # comparison_operator-NotEq, evolve_state (-> +3), literal-Num, suggest_constant_definition
-                if (number % divisor == 0) and (len(str(int(number / divisor))) == 3): # binary_operator-Div, binary_operator-Mod, boolean_operator-And, builtin_function_call-int, builtin_function_call-len, builtin_function_call-str, comparison_operator-Eq, divisibility_test, function_composition, if, literal-Num, suggest_constant_definition
+                if (number % divisor == 0) and (len(str(int(number / divisor))) == 3): # binary_operator-Div, binary_operator-Mod, boolean_operator-And, builtin_function_call-int, builtin_function_call-len, builtin_function_call-str, comparison_operator-Eq, composition, divisibility_test, if, literal-Num, suggest_constant_definition
                     return number
                 divisor -= 1 # augmented_assignment, literal-Num
 
@@ -359,8 +359,8 @@ def solution(n): # function_definition
 # ----------------------------------------------------------------------------------------
 import math
 def solution(n): # function_definition
-    sum_of_squares = sum([i * i for i in range(1, n + 1)]) # assignment, binary_operator-Add, binary_operator-Mult, builtin_function_call-range, builtin_function_call-sum, function_composition, literal-Num
-    square_of_sum = int(math.pow(sum(range(1, n + 1)), 2)) # assignment, binary_operator-Add, builtin_function_call-int, builtin_function_call-range, builtin_function_call-sum, function_composition, literal-Num
+    sum_of_squares = sum([i * i for i in range(1, n + 1)]) # assignment, binary_operator-Add, binary_operator-Mult, builtin_function_call-range, builtin_function_call-sum, composition, literal-Num
+    square_of_sum = int(math.pow(sum(range(1, n + 1)), 2)) # assignment, binary_operator-Add, builtin_function_call-int, builtin_function_call-range, builtin_function_call-sum, composition, literal-Num
     return square_of_sum - sum_of_squares # binary_operator-Sub
 
 # ----------------------------------------------------------------------------------------
@@ -381,7 +381,7 @@ def isprime(n): # function_definition
     elif n % 2 == 0: # binary_operator-Mod, comparison_operator-Eq, divisibility_test-2, if, if_else, literal-Num
         return False # literal-False
     else:
-        sq = int(sqrt(n)) + 1 # assignment, binary_operator-Add, builtin_function_call-int, function_composition, literal-Num
+        sq = int(sqrt(n)) + 1 # assignment, binary_operator-Add, builtin_function_call-int, composition, literal-Num
         for i in range(3, sq, 2): # builtin_function_call-range, for_range_step, literal-Num, suggest_constant_definition
             if n % i == 0: # binary_operator-Mod, comparison_operator-Eq, divisibility_test, if, literal-Num
                 return False # literal-False
@@ -403,7 +403,7 @@ def solution(n): # function_definition
 # ../Python/project_euler/problem_07/sol2.py
 # ----------------------------------------------------------------------------------------
 def isprime(number): # function_definition
-    for i in range(2, int(number ** 0.5) + 1): # binary_operator-Add, binary_operator-Pow, builtin_function_call-int, builtin_function_call-range, for_range_start, function_composition, literal-Num, suggest_constant_definition, universal_quantifier (-> +3)
+    for i in range(2, int(number ** 0.5) + 1): # binary_operator-Add, binary_operator-Pow, builtin_function_call-int, builtin_function_call-range, composition, for_range_start, literal-Num, suggest_constant_definition, universal_quantifier (-> +3)
         if number % i == 0: # binary_operator-Mod, comparison_operator-Eq, divisibility_test, if, literal-Num
             return False # literal-False
     return True # literal-True
@@ -432,7 +432,7 @@ import itertools
 def primeCheck(number): # function_definition
     if number % 2 == 0 and number > 2: # binary_operator-Mod, boolean_operator-And, comparison_operator-Eq, comparison_operator-Gt, divisibility_test-2, if, literal-Num
         return False # literal-False
-    return all(number % i for i in range(3, int(math.sqrt(number)) + 1, 2)) # binary_operator-Add, binary_operator-Mod, builtin_function_call-all, builtin_function_call-int, builtin_function_call-range, function_composition, literal-Num, suggest_constant_definition
+    return all(number % i for i in range(3, int(math.sqrt(number)) + 1, 2)) # binary_operator-Add, binary_operator-Mod, builtin_function_call-all, builtin_function_call-int, builtin_function_call-range, composition, literal-Num, suggest_constant_definition
 def prime_generator(): # function_definition
     num = 2 # assignment, literal-Num
     while True: # literal-True
@@ -440,7 +440,7 @@ def prime_generator(): # function_definition
             yield num
         num += 1 # augmented_assignment, literal-Num
 def solution(n): # function_definition
-    return next(itertools.islice(prime_generator(), n - 1, n)) # binary_operator-Sub, builtin_function_call-next, function_composition, literal-Num
+    return next(itertools.islice(prime_generator(), n - 1, n)) # binary_operator-Sub, builtin_function_call-next, composition, literal-Num
 
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_08/sol1.py
@@ -468,7 +468,7 @@ N = """73167176531330624919225119674426574742355349194934\ # assignment, global_
 71636269561882670428252483600823257530420752963450""" # literal-Str
 def solution(n): # function_definition
     LargestProduct = -sys.maxsize - 1 # assignment, binary_operator-Sub, literal-Num, unary_operator-USub
-    for i in range(len(n) - 12): # accumulate_elements-AugAssign (-> +3), binary_operator-Sub, builtin_function_call-len, builtin_function_call-range, for_range_stop, function_composition, literal-Num, suggest_constant_definition
+    for i in range(len(n) - 12): # accumulate_elements-AugAssign (-> +3), binary_operator-Sub, builtin_function_call-len, builtin_function_call-range, composition, for_range_stop, literal-Num, suggest_constant_definition
         product = 1 # assignment, literal-Num
         for j in range(13): # accumulate_elements-AugAssign (-> +1), builtin_function_call-range, for_range_stop, literal-Num, suggest_constant_definition
             product *= int(n[i + j]) # augmented_assignment, binary_operator-Add, builtin_function_call-int, index
@@ -503,10 +503,10 @@ N = ( # assignment, global_constant_definition
     "71636269561882670428252483600823257530420752963450"
 )
 def solution(n): # function_definition
-    return max( # builtin_function_call-max, function_composition
+    return max( # builtin_function_call-max, composition
         [
-            reduce(lambda x, y: int(x) * int(y), n[i : i + 13]) # binary_operator-Add, binary_operator-Mult, builtin_function_call-int, function_composition, literal-Num, slice, suggest_constant_definition
-            for i in range(len(n) - 12) # binary_operator-Sub, builtin_function_call-len, builtin_function_call-range, function_composition, literal-Num, suggest_constant_definition
+            reduce(lambda x, y: int(x) * int(y), n[i : i + 13]) # binary_operator-Add, binary_operator-Mult, builtin_function_call-int, composition, literal-Num, slice, suggest_constant_definition
+            for i in range(len(n) - 12) # binary_operator-Sub, builtin_function_call-len, builtin_function_call-range, composition, literal-Num, suggest_constant_definition
         ]
     )
 
@@ -548,7 +548,7 @@ def solution(n: str) -> int: # function_definition
             substr = substr[1:] + n[cur_index] # assignment, binary_operator-Add, index, literal-Num, slice
             cur_index += 1 # augmented_assignment, literal-Num
         else:
-            LargestProduct = max(LargestProduct, streval(substr)) # assignment, builtin_function_call-max, function_composition
+            LargestProduct = max(LargestProduct, streval(substr)) # assignment, builtin_function_call-max, composition
             substr = n[cur_index : cur_index + 13] # assignment, binary_operator-Add, literal-Num, slice, suggest_constant_definition
             cur_index += 13 # augmented_assignment, literal-Num, suggest_constant_definition
     return LargestProduct
@@ -597,7 +597,7 @@ def solution(): # function_definition
 # ----------------------------------------------------------------------------------------
 from math import sqrt
 def is_prime(n): # function_definition
-    for i in range(2, int(sqrt(n)) + 1): # binary_operator-Add, builtin_function_call-int, builtin_function_call-range, for_range_start, function_composition, literal-Num, universal_quantifier (-> +3)
+    for i in range(2, int(sqrt(n)) + 1): # binary_operator-Add, builtin_function_call-int, builtin_function_call-range, composition, for_range_start, literal-Num, universal_quantifier (-> +3)
         if n % i == 0: # binary_operator-Mod, comparison_operator-Eq, divisibility_test, if, literal-Num
             return False # literal-False
     return True # literal-True
@@ -621,7 +621,7 @@ from itertools import takewhile
 def primeCheck(number): # function_definition
     if number % 2 == 0 and number > 2: # binary_operator-Mod, boolean_operator-And, comparison_operator-Eq, comparison_operator-Gt, divisibility_test-2, if, literal-Num
         return False # literal-False
-    return all(number % i for i in range(3, int(math.sqrt(number)) + 1, 2)) # binary_operator-Add, binary_operator-Mod, builtin_function_call-all, builtin_function_call-int, builtin_function_call-range, function_composition, literal-Num, suggest_constant_definition
+    return all(number % i for i in range(3, int(math.sqrt(number)) + 1, 2)) # binary_operator-Add, binary_operator-Mod, builtin_function_call-all, builtin_function_call-int, builtin_function_call-range, composition, literal-Num, suggest_constant_definition
 def prime_generator(): # function_definition
     num = 2 # assignment, literal-Num
     while True: # literal-True
@@ -629,7 +629,7 @@ def prime_generator(): # function_definition
             yield num
         num += 1 # augmented_assignment, literal-Num
 def solution(n): # function_definition
-    return sum(takewhile(lambda x: x < n, prime_generator())) # builtin_function_call-sum, comparison_operator-Lt, function_composition
+    return sum(takewhile(lambda x: x < n, prime_generator())) # builtin_function_call-sum, comparison_operator-Lt, composition
 
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_10/sol3.py
@@ -638,7 +638,7 @@ def prime_sum(n: int) -> int: # function_definition
     list_ = [0 for i in range(n + 1)] # assignment, binary_operator-Add, builtin_function_call-range, literal-Num
     list_[0] = 1 # assignment, index, literal-Num
     list_[1] = 1 # assignment, index, literal-Num
-    for i in range(2, int(n ** 0.5) + 1): # binary_operator-Add, binary_operator-Pow, builtin_function_call-int, builtin_function_call-range, for_range_start, function_composition, literal-Num, suggest_constant_definition
+    for i in range(2, int(n ** 0.5) + 1): # binary_operator-Add, binary_operator-Pow, builtin_function_call-int, builtin_function_call-range, composition, for_range_start, literal-Num, suggest_constant_definition
         if list_[i] == 0: # comparison_operator-Eq, if, index, literal-Num
             for j in range(i * i, n + 1, i): # binary_operator-Add, binary_operator-Mult, builtin_function_call-range, for_range_step, literal-Num
                 list_[j] = 1 # assignment, index, literal-Num
@@ -682,10 +682,10 @@ def largest_product(grid): # function_definition
     return largest
 def solution(): # function_definition
     grid = [] # assignment, literal-List
-    with open(os.path.dirname(__file__) + "/grid.txt") as file: # binary_operator-Add, builtin_function_call-open, function_composition, literal-Str
+    with open(os.path.dirname(__file__) + "/grid.txt") as file: # binary_operator-Add, builtin_function_call-open, composition, literal-Str
         for line in file: # for_each
-            grid.append(line.strip("\n").split(" ")) # function_composition, literal-Str, mutable_sequence_method_call-append, string_method_call-strip
-    grid = [[int(i) for i in grid[j]] for j in range(len(grid))] # assignment, builtin_function_call-int, builtin_function_call-len, builtin_function_call-range, function_composition, index
+            grid.append(line.strip("\n").split(" ")) # composition, literal-Str, method_chaining, mutable_sequence_method_call-append, string_method_call-strip
+    grid = [[int(i) for i in grid[j]] for j in range(len(grid))] # assignment, builtin_function_call-int, builtin_function_call-len, builtin_function_call-range, composition, index
     return largest_product(grid)
 
 # ----------------------------------------------------------------------------------------
@@ -693,10 +693,10 @@ def solution(): # function_definition
 # ----------------------------------------------------------------------------------------
 import os
 def solution(): # function_definition
-    with open(os.path.dirname(__file__) + "/grid.txt") as f: # binary_operator-Add, builtin_function_call-open, function_composition, literal-Str
+    with open(os.path.dirname(__file__) + "/grid.txt") as f: # binary_operator-Add, builtin_function_call-open, composition, literal-Str
         l = [] # assignment, literal-List
         for i in range(20): # builtin_function_call-range, for_range_stop, literal-Num, suggest_constant_definition
-            l.append([int(x) for x in f.readline().split()]) # builtin_function_call-int, function_composition, mutable_sequence_method_call-append
+            l.append([int(x) for x in f.readline().split()]) # builtin_function_call-int, composition, method_chaining, mutable_sequence_method_call-append
         maximum = 0 # assignment, literal-Num
         for i in range(20): # builtin_function_call-range, for_range_stop, literal-Num, nested_for, suggest_constant_definition
             for j in range(17): # builtin_function_call-range, for_range_stop, literal-Num, suggest_constant_definition
@@ -726,7 +726,7 @@ def solution(): # function_definition
 from math import sqrt
 def count_divisors(n): # function_definition
     nDivisors = 0 # assignment, literal-Num
-    for i in range(1, int(sqrt(n)) + 1): # binary_operator-Add, builtin_function_call-int, builtin_function_call-range, for_range_start, function_composition, literal-Num
+    for i in range(1, int(sqrt(n)) + 1): # binary_operator-Add, builtin_function_call-int, builtin_function_call-range, composition, for_range_start, literal-Num
         if n % i == 0: # binary_operator-Mod, comparison_operator-Eq, divisibility_test, if, literal-Num
             nDivisors += 2 # augmented_assignment, literal-Num
     if n ** 0.5 == int(n ** 0.5): # binary_operator-Pow, builtin_function_call-int, comparison_operator-Eq, if, literal-Num, suggest_constant_definition
@@ -749,15 +749,15 @@ def triangle_number_generator(): # function_definition
     for n in range(1, 1000000): # builtin_function_call-range, for_range_start, literal-Num, suggest_constant_definition
         yield n * (n + 1) // 2 # binary_operator-Add, binary_operator-FloorDiv, binary_operator-Mult, literal-Num
 def count_divisors(n): # function_definition
-    return sum([2 for i in range(1, int(n ** 0.5) + 1) if n % i == 0 and i * i != n]) # binary_operator-Add, binary_operator-Mod, binary_operator-Mult, binary_operator-Pow, boolean_operator-And, builtin_function_call-int, builtin_function_call-range, builtin_function_call-sum, comparison_operator-Eq, comparison_operator-NotEq, divisibility_test, function_composition, literal-Num, suggest_constant_definition
+    return sum([2 for i in range(1, int(n ** 0.5) + 1) if n % i == 0 and i * i != n]) # binary_operator-Add, binary_operator-Mod, binary_operator-Mult, binary_operator-Pow, boolean_operator-And, builtin_function_call-int, builtin_function_call-range, builtin_function_call-sum, comparison_operator-Eq, comparison_operator-NotEq, composition, divisibility_test, literal-Num, suggest_constant_definition
 def solution(): # function_definition
-    return next(i for i in triangle_number_generator() if count_divisors(i) > 500) # builtin_function_call-next, comparison_operator-Gt, function_composition, literal-Num, suggest_constant_definition
+    return next(i for i in triangle_number_generator() if count_divisors(i) > 500) # builtin_function_call-next, comparison_operator-Gt, composition, literal-Num, suggest_constant_definition
 
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_13/sol1.py
 # ----------------------------------------------------------------------------------------
 def solution(array): # function_definition
-    return str(sum(array))[:10] # builtin_function_call-str, builtin_function_call-sum, function_composition, literal-Num, slice, suggest_constant_definition
+    return str(sum(array))[:10] # builtin_function_call-str, builtin_function_call-sum, composition, literal-Num, slice, suggest_constant_definition
 
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_14/sol1.py
@@ -793,7 +793,7 @@ def collatz_sequence(n): # function_definition
         sequence.append(n) # mutable_sequence_method_call-append
     return sequence
 def solution(n): # function_definition
-    result = max([(len(collatz_sequence(i)), i) for i in range(1, n)]) # assignment, builtin_function_call-len, builtin_function_call-max, builtin_function_call-range, function_composition, literal-Num
+    result = max([(len(collatz_sequence(i)), i) for i in range(1, n)]) # assignment, builtin_function_call-len, builtin_function_call-max, builtin_function_call-range, composition, literal-Num
     return {"counter": result[0], "largest_number": result[1]} # index, literal-Num, literal-Str
 
 # ----------------------------------------------------------------------------------------
@@ -803,7 +803,7 @@ from math import factorial
 def lattice_paths(n): # function_definition
     n = 2 * n  # middle entry of odd rows starting at row 3 is the solution for n = 1, # assignment, binary_operator-Mult, literal-Num
     k = n / 2 # assignment, binary_operator-Div, literal-Num
-    return int(factorial(n) / (factorial(k) * factorial(n - k))) # binary_operator-Div, binary_operator-Mult, binary_operator-Sub, builtin_function_call-int, function_composition
+    return int(factorial(n) / (factorial(k) * factorial(n - k))) # binary_operator-Div, binary_operator-Mult, binary_operator-Sub, builtin_function_call-int, composition
 
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_16/sol1.py
@@ -854,13 +854,13 @@ def solution(n): # function_definition
 # ----------------------------------------------------------------------------------------
 import os
 def solution(): # function_definition
-    script_dir = os.path.dirname(os.path.realpath(__file__)) # assignment, function_composition
+    script_dir = os.path.dirname(os.path.realpath(__file__)) # assignment, composition
     triangle = os.path.join(script_dir, "triangle.txt") # assignment, literal-Str, string_method_call-join
     with open(triangle, "r") as f: # builtin_function_call-open, literal-Str
         triangle = f.readlines() # assignment
-    a = [[int(y) for y in x.rstrip("\r\n").split(" ")] for x in triangle] # assignment, builtin_function_call-int, literal-Str, string_method_call-rstrip
-    for i in range(1, len(a)): # builtin_function_call-len, builtin_function_call-range, for_range_start, function_composition, literal-Num, nested_for
-        for j in range(len(a[i])): # builtin_function_call-len, builtin_function_call-range, for_indexes, for_range_stop, function_composition, index
+    a = [[int(y) for y in x.rstrip("\r\n").split(" ")] for x in triangle] # assignment, builtin_function_call-int, literal-Str, method_chaining, string_method_call-rstrip
+    for i in range(1, len(a)): # builtin_function_call-len, builtin_function_call-range, composition, for_range_start, literal-Num, nested_for
+        for j in range(len(a[i])): # builtin_function_call-len, builtin_function_call-range, composition, for_indexes, for_range_stop, index
             if j != len(a[i - 1]): # binary_operator-Sub, builtin_function_call-len, comparison_operator-NotEq, if, if_else, index, literal-Num, suggest_conditional_expression (-> +3)
                 number1 = a[i - 1][j] # assignment, binary_operator-Sub, index, literal-Num
             else:
@@ -926,14 +926,14 @@ def solution(n): # function_definition
 # ----------------------------------------------------------------------------------------
 from math import factorial
 def solution(n): # function_definition
-    return sum([int(x) for x in str(factorial(n))]) # builtin_function_call-int, builtin_function_call-str, builtin_function_call-sum, function_composition
+    return sum([int(x) for x in str(factorial(n))]) # builtin_function_call-int, builtin_function_call-str, builtin_function_call-sum, composition
 
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_20/sol3.py
 # ----------------------------------------------------------------------------------------
 from math import factorial
 def solution(n): # function_definition
-    return sum(map(int, str(factorial(n)))) # builtin_function_call-map, builtin_function_call-str, builtin_function_call-sum, function_composition
+    return sum(map(int, str(factorial(n)))) # builtin_function_call-map, builtin_function_call-str, builtin_function_call-sum, composition
 
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_20/sol4.py
@@ -953,18 +953,18 @@ def solution(n): # function_definition
 from math import sqrt
 def sum_of_divisors(n): # function_definition
     total = 0 # assignment, literal-Num
-    for i in range(1, int(sqrt(n) + 1)): # accumulate_elements-AugAssign (-> +2), binary_operator-Add, builtin_function_call-int, builtin_function_call-range, for_range_start, function_composition, literal-Num
+    for i in range(1, int(sqrt(n) + 1)): # accumulate_elements-AugAssign (-> +2), binary_operator-Add, builtin_function_call-int, builtin_function_call-range, composition, for_range_start, literal-Num
         if n % i == 0 and i != sqrt(n): # binary_operator-Mod, boolean_operator-And, comparison_operator-Eq, comparison_operator-NotEq, divisibility_test, if, if_elif, literal-Num
             total += i + n // i # augmented_assignment, binary_operator-Add, binary_operator-FloorDiv
         elif i == sqrt(n): # comparison_operator-Eq, if
             total += i # augmented_assignment
     return total - n # binary_operator-Sub
 def solution(n): # function_definition
-    total = sum( # assignment, builtin_function_call-sum, function_composition
+    total = sum( # assignment, builtin_function_call-sum, composition
         [
             i
             for i in range(1, n) # builtin_function_call-range, literal-Num
-            if sum_of_divisors(sum_of_divisors(i)) == i and sum_of_divisors(i) != i # boolean_operator-And, comparison_operator-Eq, comparison_operator-NotEq, function_composition
+            if sum_of_divisors(sum_of_divisors(i)) == i and sum_of_divisors(i) != i # boolean_operator-And, comparison_operator-Eq, comparison_operator-NotEq, composition
         ]
     )
     return total
@@ -974,9 +974,9 @@ def solution(n): # function_definition
 # ----------------------------------------------------------------------------------------
 import os
 def solution(): # function_definition
-    with open(os.path.dirname(__file__) + "/p022_names.txt") as file: # binary_operator-Add, builtin_function_call-open, function_composition, literal-Str
-        names = str(file.readlines()[0]) # assignment, builtin_function_call-str, function_composition, index, literal-Num
-        names = names.replace('"', "").split(",") # assignment, literal-Str, string_method_call-replace
+    with open(os.path.dirname(__file__) + "/p022_names.txt") as file: # binary_operator-Add, builtin_function_call-open, composition, literal-Str
+        names = str(file.readlines()[0]) # assignment, builtin_function_call-str, composition, index, literal-Num
+        names = names.replace('"', "").split(",") # assignment, literal-Str, method_chaining, string_method_call-replace
     names.sort() # list_method_call-sort
     name_score = 0 # assignment, literal-Num
     total_score = 0 # assignment, literal-Num
@@ -994,11 +994,11 @@ import os
 def solution(): # function_definition
     total_sum = 0 # assignment, literal-Num
     temp_sum = 0 # assignment, literal-Num
-    with open(os.path.dirname(__file__) + "/p022_names.txt") as file: # binary_operator-Add, builtin_function_call-open, function_composition, literal-Str
-        name = str(file.readlines()[0]) # assignment, builtin_function_call-str, function_composition, index, literal-Num
-        name = name.replace('"', "").split(",") # assignment, literal-Str, string_method_call-replace
+    with open(os.path.dirname(__file__) + "/p022_names.txt") as file: # binary_operator-Add, builtin_function_call-open, composition, literal-Str
+        name = str(file.readlines()[0]) # assignment, builtin_function_call-str, composition, index, literal-Num
+        name = name.replace('"', "").split(",") # assignment, literal-Str, method_chaining, string_method_call-replace
     name.sort() # list_method_call-sort
-    for i in range(len(name)): # accumulate_elements-AugAssign (-> +3), builtin_function_call-len, builtin_function_call-range, for_indexes, for_range_stop, function_composition, nested_for
+    for i in range(len(name)): # accumulate_elements-AugAssign (-> +3), builtin_function_call-len, builtin_function_call-range, composition, for_indexes, for_range_stop, nested_for
         for j in name[i]: # accumulate_elements-AugAssign (-> +1), index
             temp_sum += ord(j) - ord("A") + 1 # augmented_assignment, binary_operator-Add, binary_operator-Sub, builtin_function_call-ord, literal-Num, literal-Str
         total_sum += (i + 1) * temp_sum # augmented_assignment, binary_operator-Add, binary_operator-Mult, literal-Num
@@ -1010,7 +1010,7 @@ def solution(): # function_definition
 # ----------------------------------------------------------------------------------------
 def solution(limit=28123): # function_definition, literal-Num
     sumDivs = [1] * (limit + 1) # assignment, binary_operator-Add, binary_operator-Mult, literal-List, literal-Num
-    for i in range(2, int(limit ** 0.5) + 1): # accumulate_elements-AugAssign (-> +3), binary_operator-Add, binary_operator-Pow, builtin_function_call-int, builtin_function_call-range, for_range_start, function_composition, literal-Num, suggest_constant_definition
+    for i in range(2, int(limit ** 0.5) + 1): # accumulate_elements-AugAssign (-> +3), binary_operator-Add, binary_operator-Pow, builtin_function_call-int, builtin_function_call-range, composition, for_range_start, literal-Num, suggest_constant_definition
         sumDivs[i * i] += i # augmented_assignment, binary_operator-Mult, index
         for k in range(i + 1, limit // i + 1): # accumulate_elements-AugAssign (-> +1), binary_operator-Add, binary_operator-FloorDiv, builtin_function_call-range, for_range_start, literal-Num
             sumDivs[k * i] += k + i # augmented_assignment, binary_operator-Add, binary_operator-Mult, index
@@ -1046,11 +1046,11 @@ def solution(n): # function_definition
         l = [i for i in input().split()] # assignment, builtin_function_call-input
         c2 = 1 # assignment, literal-Num
         while 1: # literal-Num
-            if len(fib(l[0], l[1], c2)) < int(l[2]): # builtin_function_call-int, builtin_function_call-len, comparison_operator-Lt, function_composition, if, if_else, index, literal-Num
+            if len(fib(l[0], l[1], c2)) < int(l[2]): # builtin_function_call-int, builtin_function_call-len, comparison_operator-Lt, composition, if, if_else, index, literal-Num
                 c2 += 1 # augmented_assignment, literal-Num
             else:
                 break
-        semidivisible.append(fib(l[0], l[1], c2 + 1)[int(l[2]) - 1]) # binary_operator-Add, binary_operator-Sub, builtin_function_call-int, function_composition, index, literal-Num, mutable_sequence_method_call-append
+        semidivisible.append(fib(l[0], l[1], c2 + 1)[int(l[2]) - 1]) # binary_operator-Add, binary_operator-Sub, builtin_function_call-int, composition, index, literal-Num, mutable_sequence_method_call-append
     return semidivisible
 
 # ----------------------------------------------------------------------------------------
@@ -1058,7 +1058,7 @@ def solution(n): # function_definition
 # ----------------------------------------------------------------------------------------
 from itertools import permutations
 def solution(): # function_definition
-    result = list(map("".join, permutations("0123456789"))) # assignment, builtin_function_call-list, builtin_function_call-map, function_composition, literal-Str
+    result = list(map("".join, permutations("0123456789"))) # assignment, builtin_function_call-list, builtin_function_call-map, composition, literal-Str
     return result[999999] # index, literal-Num, suggest_constant_definition
 
 # ----------------------------------------------------------------------------------------
@@ -1079,7 +1079,7 @@ def fibonacci_digits_index(n): # function_definition
     index = 2 # assignment, literal-Num
     while digits < n: # comparison_operator-Lt
         index += 1 # augmented_assignment, literal-Num
-        digits = len(str(fibonacci(index))) # assignment, builtin_function_call-len, builtin_function_call-str, function_composition
+        digits = len(str(fibonacci(index))) # assignment, builtin_function_call-len, builtin_function_call-str, composition
     return index
 def solution(n): # function_definition
     return fibonacci_digits_index(n)
@@ -1095,7 +1095,7 @@ def fibonacci_generator(): # function_definition
 def solution(n): # function_definition
     answer = 1 # assignment, literal-Num
     gen = fibonacci_generator() # assignment
-    while len(str(next(gen))) < n: # builtin_function_call-len, builtin_function_call-next, builtin_function_call-str, comparison_operator-Lt, function_composition
+    while len(str(next(gen))) < n: # builtin_function_call-len, builtin_function_call-next, builtin_function_call-str, comparison_operator-Lt, composition
         answer += 1 # augmented_assignment, literal-Num
     return answer + 1 # binary_operator-Add, literal-Num
 
@@ -1126,7 +1126,7 @@ def is_prime(k: int) -> bool: # function_definition
     elif k == 2: # comparison_operator-Eq, if, if_else, literal-Num
         return True # literal-True
     else:
-        for x in range(3, int(math.sqrt(k) + 1), 2): # binary_operator-Add, builtin_function_call-int, builtin_function_call-range, for_range_step, function_composition, literal-Num, suggest_constant_definition
+        for x in range(3, int(math.sqrt(k) + 1), 2): # binary_operator-Add, builtin_function_call-int, builtin_function_call-range, composition, for_range_step, literal-Num, suggest_constant_definition
             if k % x == 0: # binary_operator-Mod, comparison_operator-Eq, divisibility_test, if, literal-Num
                 return False # literal-False
     return True # literal-True
@@ -1151,7 +1151,7 @@ def solution(a_limit: int, b_limit: int) -> int: # function_definition
 from math import ceil
 def diagonal_sum(n): # function_definition
     total = 1 # assignment, literal-Num
-    for i in range(1, int(ceil(n / 2.0))): # binary_operator-Div, builtin_function_call-int, builtin_function_call-range, for_range_start, function_composition, literal-Num, suggest_constant_definition
+    for i in range(1, int(ceil(n / 2.0))): # binary_operator-Div, builtin_function_call-int, builtin_function_call-range, composition, for_range_start, literal-Num, suggest_constant_definition
         odd = 2 * i + 1 # assignment, binary_operator-Add, binary_operator-Mult, literal-Num
         even = 2 * i # assignment, binary_operator-Mult, literal-Num
         total = total + 4 * odd ** 2 - 6 * even # assignment, binary_operator-Add, binary_operator-Mult, binary_operator-Pow, binary_operator-Sub, literal-Num, suggest_constant_definition
@@ -1198,17 +1198,17 @@ def solution(n): # function_definition
 import itertools
 def isCombinationValid(combination): # function_definition
     return ( # boolean_operator-Or
-        int("".join(combination[0:2])) * int("".join(combination[2:5])) # binary_operator-Mult, builtin_function_call-int, function_composition, literal-Num, literal-Str, slice, string_method_call-join, suggest_constant_definition
-        == int("".join(combination[5:9])) # builtin_function_call-int, comparison_operator-Eq, function_composition, literal-Num, literal-Str, slice, string_method_call-join, suggest_constant_definition
+        int("".join(combination[0:2])) * int("".join(combination[2:5])) # binary_operator-Mult, builtin_function_call-int, composition, literal-Num, literal-Str, slice, string_method_call-join, suggest_constant_definition
+        == int("".join(combination[5:9])) # builtin_function_call-int, comparison_operator-Eq, composition, literal-Num, literal-Str, slice, string_method_call-join, suggest_constant_definition
     ) or (
-        int("".join(combination[0])) * int("".join(combination[1:5])) # binary_operator-Mult, builtin_function_call-int, function_composition, index, literal-Num, literal-Str, slice, string_method_call-join, suggest_constant_definition
-        == int("".join(combination[5:9])) # builtin_function_call-int, comparison_operator-Eq, function_composition, literal-Num, literal-Str, slice, string_method_call-join, suggest_constant_definition
+        int("".join(combination[0])) * int("".join(combination[1:5])) # binary_operator-Mult, builtin_function_call-int, composition, index, literal-Num, literal-Str, slice, string_method_call-join, suggest_constant_definition
+        == int("".join(combination[5:9])) # builtin_function_call-int, comparison_operator-Eq, composition, literal-Num, literal-Str, slice, string_method_call-join, suggest_constant_definition
     )
 def solution(): # function_definition
-    return sum( # builtin_function_call-sum, function_composition
-        set( # builtin_function_call-set, function_composition
+    return sum( # builtin_function_call-sum, composition
+        set( # builtin_function_call-set, composition
             [
-                int("".join(pandigital[5:9])) # builtin_function_call-int, function_composition, literal-Num, literal-Str, slice, string_method_call-join, suggest_constant_definition
+                int("".join(pandigital[5:9])) # builtin_function_call-int, composition, literal-Num, literal-Str, slice, string_method_call-join, suggest_constant_definition
                 for pandigital in itertools.permutations("123456789") # literal-Str
                 if isCombinationValid(pandigital)
             ]
@@ -1231,7 +1231,7 @@ def solve(digit_len: int) -> str: # function_definition
         while den <= 99: # comparison_operator-LtE, evolve_state (-> +4), literal-Num, suggest_constant_definition
             if (num != den) and (num % 10 == den // 10) and (den % 10 != 0): # binary_operator-FloorDiv, binary_operator-Mod, boolean_operator-And, comparison_operator-Eq, comparison_operator-NotEq, divisibility_test-10, if, literal-Num, suggest_constant_definition
                 if isDigitCancelling(num, den): # if
-                    solutions.append("{}/{}".format(num, den)) # function_composition, literal-Str, mutable_sequence_method_call-append
+                    solutions.append("{}/{}".format(num, den)) # composition, literal-Str, mutable_sequence_method_call-append
             den += 1 # augmented_assignment, literal-Num
         num += 1 # augmented_assignment, literal-Num
         den = 10 # assignment, literal-Num, suggest_constant_definition
@@ -1250,7 +1250,7 @@ def is_palindrome(n): # function_definition
 def solution(n): # function_definition
     total = 0 # assignment, literal-Num
     for i in range(1, n): # accumulate_elements-AugAssign (-> +2), builtin_function_call-range, for_range_start, literal-Num
-        if is_palindrome(i) and is_palindrome(bin(i).split("b")[1]): # boolean_operator-And, builtin_function_call-bin, function_composition, if, index, literal-Num, literal-Str
+        if is_palindrome(i) and is_palindrome(bin(i).split("b")[1]): # boolean_operator-And, builtin_function_call-bin, composition, if, index, literal-Num, literal-Str
             total += i # augmented_assignment
     return total
 
@@ -1261,7 +1261,7 @@ def solution(): # function_definition
     constant = [] # assignment, literal-List
     i = 1 # assignment, literal-Num
     while len(constant) < 1e6: # builtin_function_call-len, comparison_operator-Lt, evolve_state (-> +1), literal-Num, suggest_constant_definition
-        constant.append(str(i)) # builtin_function_call-str, function_composition, mutable_sequence_method_call-append
+        constant.append(str(i)) # builtin_function_call-str, composition, mutable_sequence_method_call-append
         i += 1 # augmented_assignment, literal-Num
     constant = "".join(constant) # assignment, literal-Str, string_method_call-join
     return (
@@ -1280,16 +1280,16 @@ def solution(): # function_definition
 import os
 TRIANGULAR_NUMBERS = [int(0.5 * n * (n + 1)) for n in range(1, 101)] # assignment, binary_operator-Add, binary_operator-Mult, builtin_function_call-int, builtin_function_call-range, global_constant_definition, literal-Num
 def solution(): # function_definition
-    script_dir = os.path.dirname(os.path.realpath(__file__)) # assignment, function_composition
+    script_dir = os.path.dirname(os.path.realpath(__file__)) # assignment, composition
     wordsFilePath = os.path.join(script_dir, "words.txt") # assignment, literal-Str, string_method_call-join
     words = "" # assignment, literal-Str
     with open(wordsFilePath, "r") as f: # builtin_function_call-open, literal-Str
         words = f.readline() # assignment
-    words = list(map(lambda word: word.strip('"'), words.strip("\r\n").split(","))) # assignment, builtin_function_call-list, builtin_function_call-map, function_composition, literal-Str, string_method_call-strip
-    words = list( # assignment, builtin_function_call-list, function_composition
-        filter( # builtin_function_call-filter, function_composition
+    words = list(map(lambda word: word.strip('"'), words.strip("\r\n").split(","))) # assignment, builtin_function_call-list, builtin_function_call-map, composition, literal-Str, method_chaining, string_method_call-strip
+    words = list( # assignment, builtin_function_call-list, composition
+        filter( # builtin_function_call-filter, composition
             lambda word: word in TRIANGULAR_NUMBERS, # comparison_operator-In
-            map(lambda word: sum(map(lambda x: ord(x) - 64, word)), words), # binary_operator-Sub, builtin_function_call-map, builtin_function_call-ord, builtin_function_call-sum, function_composition, literal-Num, suggest_constant_definition
+            map(lambda word: sum(map(lambda x: ord(x) - 64, word)), words), # binary_operator-Sub, builtin_function_call-map, builtin_function_call-ord, builtin_function_call-sum, composition, literal-Num, suggest_constant_definition
         )
     )
     return len(words) # builtin_function_call-len
@@ -1310,12 +1310,12 @@ def solution(): # function_definition
     i = 1 # assignment, literal-Num
     while True: # literal-True
         if ( # if
-            sorted(list(str(i))) # builtin_function_call-list, builtin_function_call-sorted, builtin_function_call-str, function_composition
-            == sorted(list(str(2 * i))) # binary_operator-Mult, builtin_function_call-list, builtin_function_call-sorted, builtin_function_call-str, comparison_operator-Eq, function_composition, literal-Num
-            == sorted(list(str(3 * i))) # binary_operator-Mult, builtin_function_call-list, builtin_function_call-sorted, builtin_function_call-str, function_composition, literal-Num, suggest_constant_definition
-            == sorted(list(str(4 * i))) # binary_operator-Mult, builtin_function_call-list, builtin_function_call-sorted, builtin_function_call-str, function_composition, literal-Num, suggest_constant_definition
-            == sorted(list(str(5 * i))) # binary_operator-Mult, builtin_function_call-list, builtin_function_call-sorted, builtin_function_call-str, function_composition, literal-Num, suggest_constant_definition
-            == sorted(list(str(6 * i))) # binary_operator-Mult, builtin_function_call-list, builtin_function_call-sorted, builtin_function_call-str, function_composition, literal-Num, suggest_constant_definition
+            sorted(list(str(i))) # builtin_function_call-list, builtin_function_call-sorted, builtin_function_call-str, composition
+            == sorted(list(str(2 * i))) # binary_operator-Mult, builtin_function_call-list, builtin_function_call-sorted, builtin_function_call-str, comparison_operator-Eq, composition, literal-Num
+            == sorted(list(str(3 * i))) # binary_operator-Mult, builtin_function_call-list, builtin_function_call-sorted, builtin_function_call-str, composition, literal-Num, suggest_constant_definition
+            == sorted(list(str(4 * i))) # binary_operator-Mult, builtin_function_call-list, builtin_function_call-sorted, builtin_function_call-str, composition, literal-Num, suggest_constant_definition
+            == sorted(list(str(5 * i))) # binary_operator-Mult, builtin_function_call-list, builtin_function_call-sorted, builtin_function_call-str, composition, literal-Num, suggest_constant_definition
+            == sorted(list(str(6 * i))) # binary_operator-Mult, builtin_function_call-list, builtin_function_call-sorted, builtin_function_call-str, composition, literal-Num, suggest_constant_definition
         ):
             return i
         i += 1 # augmented_assignment, literal-Num
@@ -1342,10 +1342,10 @@ base = [10 ** k for k in range(ks[-1] + 1)] # assignment, binary_operator-Add, b
 memo = {} # assignment, global_variable_definition, literal-Dict
 def next_term(a_i, k, i, n): # function_definition, recursive_function_definition (-> +34)
     ds_b = 0 # assignment, literal-Num
-    for j in range(k, len(a_i)): # accumulate_elements-AugAssign (-> +1), builtin_function_call-len, builtin_function_call-range, for_range_start, function_composition
+    for j in range(k, len(a_i)): # accumulate_elements-AugAssign (-> +1), builtin_function_call-len, builtin_function_call-range, composition, for_range_start
         ds_b += a_i[j] # augmented_assignment, index
     c = 0 # assignment, literal-Num
-    for j in range(min(len(a_i), k)): # accumulate_elements-AugAssign (-> +1), builtin_function_call-len, builtin_function_call-min, builtin_function_call-range, for_range_stop, function_composition
+    for j in range(min(len(a_i), k)): # accumulate_elements-AugAssign (-> +1), builtin_function_call-len, builtin_function_call-min, builtin_function_call-range, composition, for_range_stop
         c += a_i[j] * base[j] # augmented_assignment, binary_operator-Mult, index
     diff, dn = 0, 0 # assignment, literal-Num, literal-Tuple
     max_dn = n - i # assignment, binary_operator-Sub
@@ -1354,14 +1354,14 @@ def next_term(a_i, k, i, n): # function_definition, recursive_function_definitio
         jumps = sub_memo.get(c) # assignment, dict_method_call-get
         if jumps != None and len(jumps) > 0: # boolean_operator-And, builtin_function_call-len, comparison_operator-Gt, comparison_operator-NotEq, if, if_else, literal-None, literal-Num
             max_jump = -1 # assignment, literal-Num, unary_operator-USub
-            for _k in range(len(jumps) - 1, -1, -1): # binary_operator-Sub, builtin_function_call-len, builtin_function_call-range, for_range_backwards, for_range_step, function_composition, literal-Num, unary_operator-USub
+            for _k in range(len(jumps) - 1, -1, -1): # binary_operator-Sub, builtin_function_call-len, builtin_function_call-range, composition, for_range_backwards, for_range_step, literal-Num, unary_operator-USub
                 if jumps[_k][2] <= k and jumps[_k][1] <= max_dn: # boolean_operator-And, comparison_operator-LtE, if, index, literal-Num
                     max_jump = _k # assignment
                     break
             if max_jump >= 0: # comparison_operator-GtE, if, literal-Num
                 diff, dn, _kk = jumps[max_jump] # assignment, index
                 new_c = diff + c # assignment, binary_operator-Add
-                for j in range(min(k, len(a_i))): # builtin_function_call-len, builtin_function_call-min, builtin_function_call-range, for_range_stop, function_composition
+                for j in range(min(k, len(a_i))): # builtin_function_call-len, builtin_function_call-min, builtin_function_call-range, composition, for_range_stop
                     new_c, a_i[j] = divmod(new_c, 10) # assignment, builtin_function_call-divmod, index, literal-Num, suggest_constant_definition
                 if new_c > 0: # comparison_operator-Gt, if, literal-Num
                     add(a_i, k, new_c)
@@ -1395,10 +1395,10 @@ def compute(a_i, k, i, n): # function_definition
     if i >= n: # comparison_operator-GtE, if
         return 0, i # literal-Num
     if k > len(a_i): # builtin_function_call-len, comparison_operator-Gt, if
-        a_i.extend([0 for _ in range(k - len(a_i))]) # binary_operator-Sub, builtin_function_call-len, builtin_function_call-range, function_composition, literal-Num, mutable_sequence_method_call-extend
+        a_i.extend([0 for _ in range(k - len(a_i))]) # binary_operator-Sub, builtin_function_call-len, builtin_function_call-range, composition, literal-Num, mutable_sequence_method_call-extend
     start_i = i # assignment
     ds_b, ds_c, diff = 0, 0, 0 # assignment, literal-Num, literal-Tuple
-    for j in range(len(a_i)): # accumulate_elements-AugAssign (-> +2), builtin_function_call-len, builtin_function_call-range, for_indexes, for_range_stop, function_composition
+    for j in range(len(a_i)): # accumulate_elements-AugAssign (-> +2), builtin_function_call-len, builtin_function_call-range, composition, for_indexes, for_range_stop
         if j >= k: # comparison_operator-GtE, if, if_else
             ds_b += a_i[j] # augmented_assignment, index
         else:
@@ -1418,7 +1418,7 @@ def compute(a_i, k, i, n): # function_definition
         add(a_i, k, addend)
     return diff, i - start_i # binary_operator-Sub
 def add(digits, k, addend): # function_definition
-    for j in range(k, len(digits)): # builtin_function_call-len, builtin_function_call-range, for_range_start, function_composition
+    for j in range(k, len(digits)): # builtin_function_call-len, builtin_function_call-range, composition, for_range_start
         s = digits[j] + addend # assignment, binary_operator-Add, index
         if s >= 10: # comparison_operator-GtE, if, if_else, literal-Num, suggest_constant_definition
             quotient, digits[j] = divmod(s, 10) # assignment, builtin_function_call-divmod, index, literal-Num, suggest_constant_definition
@@ -1441,7 +1441,7 @@ def solution(n): # function_definition
         if dn == n - i: # binary_operator-Sub, comparison_operator-Eq, if
             break
     a_n = 0 # assignment, literal-Num
-    for j in range(len(digits)): # accumulate_elements-AugAssign (-> +1), builtin_function_call-len, builtin_function_call-range, for_indexes, for_range_stop, function_composition
+    for j in range(len(digits)): # accumulate_elements-AugAssign (-> +1), builtin_function_call-len, builtin_function_call-range, composition, for_indexes, for_range_stop
         a_n += digits[j] * 10 ** j # augmented_assignment, binary_operator-Mult, binary_operator-Pow, index, literal-Num, suggest_constant_definition
     return a_n
 
@@ -1449,9 +1449,9 @@ def solution(n): # function_definition
 # ../Python/project_euler/problem_56/sol1.py
 # ----------------------------------------------------------------------------------------
 def maximum_digital_sum(a: int, b: int) -> int: # function_definition
-    return max( # builtin_function_call-max, function_composition
+    return max( # builtin_function_call-max, composition
         [
-            sum([int(x) for x in str(base ** power)]) # binary_operator-Pow, builtin_function_call-int, builtin_function_call-str, builtin_function_call-sum, function_composition
+            sum([int(x) for x in str(base ** power)]) # binary_operator-Pow, builtin_function_call-int, builtin_function_call-str, builtin_function_call-sum, composition
             for base in range(a) # builtin_function_call-range
             for power in range(b) # builtin_function_call-range
         ]
@@ -1462,14 +1462,14 @@ def maximum_digital_sum(a: int, b: int) -> int: # function_definition
 # ----------------------------------------------------------------------------------------
 import os
 def solution(): # function_definition
-    script_dir = os.path.dirname(os.path.realpath(__file__)) # assignment, function_composition
+    script_dir = os.path.dirname(os.path.realpath(__file__)) # assignment, composition
     triangle = os.path.join(script_dir, "triangle.txt") # assignment, literal-Str, string_method_call-join
     with open(triangle, "r") as f: # builtin_function_call-open, literal-Str
         triangle = f.readlines() # assignment
-    a = map(lambda x: x.rstrip("\r\n").split(" "), triangle) # assignment, builtin_function_call-map, function_composition, literal-Str, string_method_call-rstrip
-    a = list(map(lambda x: list(map(lambda y: int(y), x)), a)) # assignment, builtin_function_call-int, builtin_function_call-list, builtin_function_call-map, function_composition
-    for i in range(1, len(a)): # builtin_function_call-len, builtin_function_call-range, for_range_start, function_composition, literal-Num, nested_for
-        for j in range(len(a[i])): # builtin_function_call-len, builtin_function_call-range, for_indexes, for_range_stop, function_composition, index
+    a = map(lambda x: x.rstrip("\r\n").split(" "), triangle) # assignment, builtin_function_call-map, composition, literal-Str, method_chaining, string_method_call-rstrip
+    a = list(map(lambda x: list(map(lambda y: int(y), x)), a)) # assignment, builtin_function_call-int, builtin_function_call-list, builtin_function_call-map, composition
+    for i in range(1, len(a)): # builtin_function_call-len, builtin_function_call-range, composition, for_range_start, literal-Num, nested_for
+        for j in range(len(a[i])): # builtin_function_call-len, builtin_function_call-range, composition, for_indexes, for_range_stop, index
             if j != len(a[i - 1]): # binary_operator-Sub, builtin_function_call-len, comparison_operator-NotEq, if, if_else, index, literal-Num, suggest_conditional_expression (-> +3)
                 number1 = a[i - 1][j] # assignment, binary_operator-Sub, index, literal-Num
             else:
@@ -1502,8 +1502,8 @@ import os
 from math import log10
 def find_largest(data_file: str = "base_exp.txt") -> int: # function_definition, literal-Str
     largest = [0, 0] # assignment, literal-List, literal-Num
-    for i, line in enumerate(open(os.path.join(os.path.dirname(__file__), data_file))): # builtin_function_call-enumerate, builtin_function_call-open, for_indexes_values, function_composition, string_method_call-join
-        a, x = list(map(int, line.split(","))) # assignment, builtin_function_call-list, builtin_function_call-map, function_composition, literal-Str
+    for i, line in enumerate(open(os.path.join(os.path.dirname(__file__), data_file))): # builtin_function_call-enumerate, builtin_function_call-open, composition, for_indexes_values, string_method_call-join
+        a, x = list(map(int, line.split(","))) # assignment, builtin_function_call-list, builtin_function_call-map, composition, literal-Str
         if x * log10(a) > largest[0]: # binary_operator-Mult, comparison_operator-Gt, if, index, literal-Num
             largest = [x * log10(a), i + 1] # assignment, binary_operator-Add, binary_operator-Mult, literal-Num
     return largest[1] # index, literal-Num

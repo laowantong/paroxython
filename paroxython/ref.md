@@ -22,7 +22,8 @@
       - [Construct `list_method_call`](#construct-list_method_call)
       - [Construct `set_method_call`](#construct-set_method_call)
       - [Construct `dict_method_call`](#construct-dict_method_call)
-      - [Construct `function_composition`](#construct-function_composition)
+      - [Construct `method_chaining`](#construct-method_chaining)
+      - [Construct `composition`](#construct-composition)
   - [Statements](#statements)
     - [Assignments](#assignments)
       - [Construct `global_constant_definition`](#construct-global_constant_definition)
@@ -561,9 +562,35 @@ dict_method_call-items: 1
 
 --------------------------------------------------------------------------------
 
-##### Construct `function_composition`
+##### Construct `method_chaining`
 
-Apply a function to an expression involving the result of another function application, without using an intermediate variable.
+###### Regex
+
+```re
+        ^(.*?)/_type='Call'
+\n(?:.+\n)*?\1/lineno=(?P<LINE>\d+)
+\n(?:.+\n)*?\1/func/_type='Attribute'
+\n(?:.+\n)*?\1/func/value/_type='Call'
+\n(?:.+\n)*?\1/func/value/func/_type='Attribute'
+```
+
+###### Example
+
+```python
+1   s.strip().split()
+```
+
+###### Matches
+
+```markdown
+method_chaining: 1
+```
+
+--------------------------------------------------------------------------------
+
+##### Construct `composition`
+
+Apply a function or a method to an expression involving the result of another function or method application, without using an intermediate variable.
 
 ###### Regex
 
@@ -579,12 +606,13 @@ Apply a function to an expression involving the result of another function appli
 1   print(len("hello, world"))
 2   print("hello, world")
 3   print(a + abs(b))
+4.  print(s.upper())
 ```
 
 ###### Matches
 
 ```markdown
-function_composition: 1, 3
+composition: 1, 3, 4
 ```
 
 --------------------------------------------------------------------------------

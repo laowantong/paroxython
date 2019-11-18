@@ -4,9 +4,9 @@
 from typing import Tuple, List
 def n31(a: int) -> Tuple[List[int], int]: # function_definition, index
     if not isinstance(a, int): # builtin_function_call-isinstance, if, unary_operator-Not
-        raise TypeError("Must be int, not {0}".format(type(a).__name__)) # builtin_function_call-type, function_composition, literal-Str
+        raise TypeError("Must be int, not {0}".format(type(a).__name__)) # builtin_function_call-type, composition, literal-Str
     if a < 1: # comparison_operator-Lt, if, literal-Num
-        raise ValueError("Given integer must be greater than 1, not {0}".format(a)) # function_composition, literal-Str
+        raise ValueError("Given integer must be greater than 1, not {0}".format(a)) # composition, literal-Str
     path = [a] # assignment
     while a != 1: # comparison_operator-NotEq, evolve_state (-> +4), literal-Num
         if a % 2 == 0: # binary_operator-Mod, comparison_operator-Eq, divisibility_test-2, if, if_else, literal-Num, suggest_conditional_expression (-> +3)
@@ -170,7 +170,7 @@ def absMin(x): # function_definition
     return j
 def main(): # function_definition
     a = [-3, -1, 2, -11] # assignment, literal-List, literal-Num, suggest_constant_definition, unary_operator-USub
-    print(absMin(a))  # = -1 # builtin_function_call-print, function_composition
+    print(absMin(a))  # = -1 # builtin_function_call-print, composition
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/average_mean.py
@@ -198,9 +198,9 @@ def median(nums): # function_definition
     return med
 def main(): # function_definition
     print("Odd number of numbers:") # builtin_function_call-print, literal-Str
-    print(median([2, 4, 6, 8, 20, 50, 70])) # builtin_function_call-print, function_composition, literal-List, literal-Num, suggest_constant_definition
+    print(median([2, 4, 6, 8, 20, 50, 70])) # builtin_function_call-print, composition, literal-List, literal-Num, suggest_constant_definition
     print("Even number of numbers:") # builtin_function_call-print, literal-Str
-    print(median([2, 4, 6, 8, 20, 50])) # builtin_function_call-print, function_composition, literal-List, literal-Num, suggest_constant_definition
+    print(median([2, 4, 6, 8, 20, 50])) # builtin_function_call-print, composition, literal-List, literal-Num, suggest_constant_definition
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/average_mode.py
@@ -210,7 +210,7 @@ def mode(input_list):  # Defining function "mode." # function_definition
     check_list = input_list.copy() # assignment, dict_method_call-copy, mutable_sequence_method_call-copy, set_method_call-copy
     result = list()  # Empty list to store the counts of elements in input_list # assignment, builtin_function_call-list
     for x in input_list: # accumulate_elements-Attribute (-> +2), for_each
-        result.append(input_list.count(x)) # function_composition, mutable_sequence_method_call-append, sequence_method_call-count, string_method_call-count
+        result.append(input_list.count(x)) # composition, mutable_sequence_method_call-append, sequence_method_call-count, string_method_call-count
         input_list.remove(x) # mutable_sequence_method_call-remove, set_method_call-remove
         y = max(result)  # Gets the maximum value in the result list. # assignment, builtin_function_call-max
         return check_list[result.index(y)] # index, sequence_method_call-index, string_method_call-index
@@ -224,7 +224,7 @@ def prime_factors(n: int) -> list: # function_definition
     while n % 2 == 0: # binary_operator-Mod, comparison_operator-Eq, divisibility_test-2, evolve_state (-> +2), literal-Num
         pf.append(2) # literal-Num, mutable_sequence_method_call-append
         n = int(n / 2) # assignment, binary_operator-Div, builtin_function_call-int, literal-Num
-    for i in range(3, int(math.sqrt(n)) + 1, 2): # accumulate_elements-Assign (-> +3), binary_operator-Add, builtin_function_call-int, builtin_function_call-range, for_range_step, function_composition, literal-Num, suggest_constant_definition
+    for i in range(3, int(math.sqrt(n)) + 1, 2): # accumulate_elements-Assign (-> +3), binary_operator-Add, builtin_function_call-int, builtin_function_call-range, composition, for_range_step, literal-Num, suggest_constant_definition
         while n % i == 0: # binary_operator-Mod, comparison_operator-Eq, divisibility_test, evolve_state (-> +1), literal-Num
             pf.append(i) # mutable_sequence_method_call-append
             n = int(n / i) # assignment, binary_operator-Div, builtin_function_call-int
@@ -238,7 +238,7 @@ def number_of_divisors(n: int) -> int: # function_definition
         temp += 1 # augmented_assignment, literal-Num
         n = int(n / 2) # assignment, binary_operator-Div, builtin_function_call-int, literal-Num
     div *= temp # augmented_assignment
-    for i in range(3, int(math.sqrt(n)) + 1, 2): # accumulate_elements-Assign (-> +4), binary_operator-Add, builtin_function_call-int, builtin_function_call-range, for_range_step, function_composition, literal-Num, suggest_constant_definition
+    for i in range(3, int(math.sqrt(n)) + 1, 2): # accumulate_elements-Assign (-> +4), binary_operator-Add, builtin_function_call-int, builtin_function_call-range, composition, for_range_step, literal-Num, suggest_constant_definition
         temp = 1 # assignment, literal-Num
         while n % i == 0: # binary_operator-Mod, comparison_operator-Eq, divisibility_test, literal-Num
             temp += 1 # augmented_assignment, literal-Num
@@ -253,7 +253,7 @@ def sum_of_divisors(n: int) -> int: # function_definition
         n = int(n / 2) # assignment, binary_operator-Div, builtin_function_call-int, literal-Num
     if temp > 1: # comparison_operator-Gt, if, literal-Num
         s *= (2 ** temp - 1) / (2 - 1) # augmented_assignment, binary_operator-Div, binary_operator-Pow, binary_operator-Sub, literal-Num
-    for i in range(3, int(math.sqrt(n)) + 1, 2): # accumulate_elements-Assign (-> +4), binary_operator-Add, builtin_function_call-int, builtin_function_call-range, for_range_step, function_composition, literal-Num, suggest_constant_definition
+    for i in range(3, int(math.sqrt(n)) + 1, 2): # accumulate_elements-Assign (-> +4), binary_operator-Add, builtin_function_call-int, builtin_function_call-range, composition, for_range_step, literal-Num, suggest_constant_definition
         temp = 1 # assignment, literal-Num
         while n % i == 0: # binary_operator-Mod, comparison_operator-Eq, divisibility_test, literal-Num
             temp += 1 # augmented_assignment, literal-Num
@@ -263,7 +263,7 @@ def sum_of_divisors(n: int) -> int: # function_definition
     return int(s) # builtin_function_call-int
 def euler_phi(n: int) -> int: # function_definition
     s = n # assignment
-    for x in set(prime_factors(n)): # accumulate_elements-AugAssign (-> +1), builtin_function_call-set, function_composition
+    for x in set(prime_factors(n)): # accumulate_elements-AugAssign (-> +1), builtin_function_call-set, composition
         s *= (x - 1) / x # augmented_assignment, binary_operator-Div, binary_operator-Sub, literal-Num
     return int(s) # builtin_function_call-int
 
@@ -291,7 +291,7 @@ def binomial_coefficient(n, r): # function_definition
             C[j] += C[j - 1] # augmented_assignment, binary_operator-Sub, index, literal-Num
             j -= 1 # augmented_assignment, literal-Num
     return C[r] # index
-print(binomial_coefficient(n=10, r=5)) # builtin_function_call-print, function_composition, literal-Num
+print(binomial_coefficient(n=10, r=5)) # builtin_function_call-print, composition, literal-Num
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/ceil.py
@@ -317,14 +317,14 @@ def main(): # function_definition
     n = 43 # assignment, literal-Num, suggest_constant_definition
     sequence = collatz_sequence(n) # assignment
     print(sequence) # builtin_function_call-print
-    print("collatz sequence from %d took %d steps." % (n, len(sequence))) # binary_operator-Mod, builtin_function_call-len, builtin_function_call-print, function_composition, literal-Str
+    print("collatz sequence from %d took %d steps." % (n, len(sequence))) # binary_operator-Mod, builtin_function_call-len, builtin_function_call-print, composition, literal-Str
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/explicit_euler.py
 # ----------------------------------------------------------------------------------------
 import numpy as np
 def explicit_euler(ode_func, y0, x0, stepsize, x_end): # function_definition
-    N = int(np.ceil((x_end - x0) / stepsize)) # assignment, binary_operator-Div, binary_operator-Sub, builtin_function_call-int, function_composition
+    N = int(np.ceil((x_end - x0) / stepsize)) # assignment, binary_operator-Div, binary_operator-Sub, builtin_function_call-int, composition
     y = np.zeros((N + 1,)) # assignment, binary_operator-Add, literal-Num
     y[0] = y0 # assignment, index, literal-Num
     x = x0 # assignment
@@ -375,7 +375,7 @@ def main(): # function_definition
         exit(1) # literal-Num
     m = int(sys.argv[1]) # assignment, builtin_function_call-int, index, literal-Num
     n = int(sys.argv[2]) # assignment, builtin_function_call-int, index, literal-Num
-    print(extended_euclidean_algorithm(m, n)) # builtin_function_call-print, function_composition
+    print(extended_euclidean_algorithm(m, n)) # builtin_function_call-print, composition
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/factorial_python.py
@@ -420,7 +420,7 @@ def binary_exponentiation(a, n, mod): # function_definition, recursive_function_
 p = 701 # assignment, global_variable_definition, literal-Num, suggest_constant_definition
 a = 1000000000 # assignment, global_variable_definition, literal-Num, suggest_constant_definition
 b = 10 # assignment, global_variable_definition, literal-Num, suggest_constant_definition
-print((a / b) % p == (a * binary_exponentiation(b, p - 2, p)) % p) # binary_operator-Div, binary_operator-Mod, binary_operator-Mult, binary_operator-Sub, builtin_function_call-print, comparison_operator-Eq, divisibility_test, function_composition, literal-Num
+print((a / b) % p == (a * binary_exponentiation(b, p - 2, p)) % p) # binary_operator-Div, binary_operator-Mod, binary_operator-Mult, binary_operator-Sub, builtin_function_call-print, comparison_operator-Eq, composition, divisibility_test, literal-Num
 print((a / b) % p == (a * b ** (p - 2)) % p) # binary_operator-Div, binary_operator-Mod, binary_operator-Mult, binary_operator-Pow, binary_operator-Sub, builtin_function_call-print, comparison_operator-Eq, divisibility_test, literal-Num
 
 # ----------------------------------------------------------------------------------------
@@ -501,10 +501,10 @@ def fib_formula(n):
 def recur_fibo(n): # function_definition, recursive_function_definition (-> +1)
     return n if n <= 1 else recur_fibo(n - 1) + recur_fibo(n - 2) # binary_operator-Add, binary_operator-Sub, comparison_operator-LtE, literal-Num
 def main(): # function_definition
-    limit = int(input("How many terms to include in fibonacci series: ")) # assignment, builtin_function_call-input, builtin_function_call-int, function_composition, literal-Str
+    limit = int(input("How many terms to include in fibonacci series: ")) # assignment, builtin_function_call-input, builtin_function_call-int, composition, literal-Str
     if limit > 0: # comparison_operator-Gt, if, if_else, literal-Num
         print(f"The first {limit} terms of the fibonacci series are as follows:") # builtin_function_call-print, literal-Str
-        print([recur_fibo(n) for n in range(limit)]) # builtin_function_call-print, builtin_function_call-range, function_composition
+        print([recur_fibo(n) for n in range(limit)]) # builtin_function_call-print, builtin_function_call-range, composition
     else:
         print("Please enter a positive integer: ") # builtin_function_call-print, literal-Str
 
@@ -518,7 +518,7 @@ def find_max(nums): # function_definition
             max_num = x # assignment
     return max_num
 def main(): # function_definition
-    print(find_max([2, 4, 9, 7, 19, 94, 5]))  # 94 # builtin_function_call-print, function_composition, literal-List, literal-Num, suggest_constant_definition
+    print(find_max([2, 4, 9, 7, 19, 94, 5]))  # 94 # builtin_function_call-print, composition, literal-List, literal-Num, suggest_constant_definition
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/find_max_recursion.py
@@ -583,10 +583,10 @@ def main(): # function_definition
         nums = input("Enter two integers separated by comma (,): ").split(",") # assignment, builtin_function_call-input, literal-Str
         num_1 = int(nums[0]) # assignment, builtin_function_call-int, index, literal-Num
         num_2 = int(nums[1]) # assignment, builtin_function_call-int, index, literal-Num
-        print( # builtin_function_call-print, function_composition
+        print( # builtin_function_call-print, composition
             f"greatest_common_divisor({num_1}, {num_2}) = {greatest_common_divisor(num_1, num_2)}" # literal-Str
         )
-        print(f"By iterative gcd({num_1}, {num_2}) = {gcd_by_iterative(num_1, num_2)}") # builtin_function_call-print, function_composition, literal-Str
+        print(f"By iterative gcd({num_1}, {num_2}) = {gcd_by_iterative(num_1, num_2)}") # builtin_function_call-print, composition, literal-Str
     except (IndexError, UnboundLocalError, ValueError):
         print("Wrong input") # builtin_function_call-print, literal-Str
 
@@ -601,7 +601,7 @@ def exactPrimeFactorCount(n): # function_definition
         while n % 2 == 0: # binary_operator-Mod, comparison_operator-Eq, divisibility_test-2, evolve_state (-> +1), literal-Num
             n = int(n / 2) # assignment, binary_operator-Div, builtin_function_call-int, literal-Num
     i = 3 # assignment, literal-Num, suggest_constant_definition
-    while i <= int(math.sqrt(n)): # builtin_function_call-int, comparison_operator-LtE, evolve_state (-> +4), function_composition
+    while i <= int(math.sqrt(n)): # builtin_function_call-int, comparison_operator-LtE, composition, evolve_state (-> +4)
         if n % i == 0: # binary_operator-Mod, comparison_operator-Eq, divisibility_test, if, literal-Num
             count += 1 # augmented_assignment, literal-Num
             while n % i == 0: # binary_operator-Mod, comparison_operator-Eq, divisibility_test, literal-Num
@@ -616,18 +616,18 @@ def exactPrimeFactorCount(n): # function_definition
 # ----------------------------------------------------------------------------------------
 from typing import List
 def is_square_free(factors: List[int]) -> bool: # function_definition, index
-    return len(set(factors)) == len(factors) # builtin_function_call-len, builtin_function_call-set, comparison_operator-Eq, function_composition
+    return len(set(factors)) == len(factors) # builtin_function_call-len, builtin_function_call-set, comparison_operator-Eq, composition
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/jaccard_similarity.py
 # ----------------------------------------------------------------------------------------
 def jaccard_similariy(setA, setB, alternativeUnion=False): # function_definition, literal-False
     if isinstance(setA, set) and isinstance(setB, set): # boolean_operator-And, builtin_function_call-isinstance, if
-        intersection = len(setA.intersection(setB)) # assignment, builtin_function_call-len, function_composition, set_method_call-intersection
+        intersection = len(setA.intersection(setB)) # assignment, builtin_function_call-len, composition, set_method_call-intersection
         if alternativeUnion: # if, if_else, suggest_conditional_expression (-> +3)
             union = len(setA) + len(setB) # assignment, binary_operator-Add, builtin_function_call-len
         else:
-            union = len(setA.union(setB)) # assignment, builtin_function_call-len, function_composition, set_method_call-union
+            union = len(setA.union(setB)) # assignment, builtin_function_call-len, composition, set_method_call-union
         return intersection / union # binary_operator-Div
     if isinstance(setA, (list, tuple)) and isinstance(setB, (list, tuple)): # boolean_operator-And, builtin_function_call-isinstance, if
         intersection = [element for element in setA if element in setB] # assignment, comparison_operator-In
@@ -641,10 +641,10 @@ def jaccard_similariy(setA, setB, alternativeUnion=False): # function_definition
 # ../Python/maths/karatsuba.py
 # ----------------------------------------------------------------------------------------
 def karatsuba(a, b): # function_definition, recursive_function_definition (-> +10)
-    if len(str(a)) == 1 or len(str(b)) == 1: # boolean_operator-Or, builtin_function_call-len, builtin_function_call-str, comparison_operator-Eq, function_composition, if, if_else, literal-Num
+    if len(str(a)) == 1 or len(str(b)) == 1: # boolean_operator-Or, builtin_function_call-len, builtin_function_call-str, comparison_operator-Eq, composition, if, if_else, literal-Num
         return a * b # binary_operator-Mult
     else:
-        m1 = max(len(str(a)), len(str(b))) # assignment, builtin_function_call-len, builtin_function_call-max, builtin_function_call-str, function_composition
+        m1 = max(len(str(a)), len(str(b))) # assignment, builtin_function_call-len, builtin_function_call-max, builtin_function_call-str, composition
         m2 = m1 // 2 # assignment, binary_operator-FloorDiv, literal-Num
         a1, a2 = divmod(a, 10 ** m2) # assignment, binary_operator-Pow, builtin_function_call-divmod, literal-Num, suggest_constant_definition
         b1, b2 = divmod(b, 10 ** m2) # assignment, binary_operator-Pow, builtin_function_call-divmod, literal-Num, suggest_constant_definition
@@ -653,7 +653,7 @@ def karatsuba(a, b): # function_definition, recursive_function_definition (-> +1
         z = karatsuba(a1, b1) # assignment
         return (z * 10 ** (2 * m2)) + ((y - z - x) * 10 ** (m2)) + (x) # binary_operator-Add, binary_operator-Mult, binary_operator-Pow, binary_operator-Sub, literal-Num, suggest_constant_definition
 def main(): # function_definition
-    print(karatsuba(15463, 23489)) # builtin_function_call-print, function_composition, literal-Num, suggest_constant_definition
+    print(karatsuba(15463, 23489)) # builtin_function_call-print, composition, literal-Num, suggest_constant_definition
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/kth_lexicographic_permutation.py
@@ -664,7 +664,7 @@ def kthPermutation(k, n): # function_definition
         factorials.append(factorials[-1] * i) # binary_operator-Mult, index, literal-Num, mutable_sequence_method_call-append, unary_operator-USub
     assert 0 <= k < factorials[-1] * n, "k out of bounds" # binary_operator-Mult, comparison_operator-LtE, index, literal-Num, literal-Str, unary_operator-USub
     permutation = [] # assignment, literal-List
-    elements = list(range(n)) # assignment, builtin_function_call-list, builtin_function_call-range, function_composition
+    elements = list(range(n)) # assignment, builtin_function_call-list, builtin_function_call-range, composition
     while factorials:
         factorial = factorials.pop() # assignment, dict_method_call-pop, mutable_sequence_method_call-pop, set_method_call-pop
         number, k = divmod(k, factorial) # assignment, builtin_function_call-divmod
@@ -815,7 +815,7 @@ def modular_exponential(base, power, mod): # function_definition
         base = (base * base) % mod # assignment, binary_operator-Mod, binary_operator-Mult
     return result
 def main(): # function_definition
-    print(modular_exponential(3, 200, 13)) # builtin_function_call-print, function_composition, literal-Num, suggest_constant_definition
+    print(modular_exponential(3, 200, 13)) # builtin_function_call-print, composition, literal-Num, suggest_constant_definition
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/newton_raphson.py
@@ -826,7 +826,7 @@ def calc_derivative(f, a, h=0.001): # function_definition, literal-Num
 def newton_raphson(f, x0=0, maxiter=100, step=0.0001, maxerror=1e-6, logsteps=False): # function_definition, literal-False, literal-Num
     a = x0  # set the initial guess # assignment
     steps = [a] # assignment
-    error = abs(f(a)) # assignment, builtin_function_call-abs, function_composition
+    error = abs(f(a)) # assignment, builtin_function_call-abs, composition
     f1 = lambda x: calc_derivative(f, x, h=step)  # Derivative of f(x) # assignment
     for _ in range(maxiter): # builtin_function_call-range, for_range_stop
         if f1(a) == 0: # comparison_operator-Eq, if, literal-Num
@@ -854,7 +854,7 @@ def perfect_square(num: int) -> bool: # function_definition
 # ----------------------------------------------------------------------------------------
 from typing import Sequence
 def evaluate_poly(poly: Sequence[float], x: float) -> float: # function_definition, index
-    return sum(c * (x ** i) for i, c in enumerate(poly)) # binary_operator-Mult, binary_operator-Pow, builtin_function_call-enumerate, builtin_function_call-sum, function_composition
+    return sum(c * (x ** i) for i, c in enumerate(poly)) # binary_operator-Mult, binary_operator-Pow, builtin_function_call-enumerate, builtin_function_call-sum, composition
 def horner(poly: Sequence[float], x: float) -> float: # function_definition, index
     result = 0.0 # assignment, literal-Num, suggest_constant_definition
     for coeff in reversed(poly): # accumulate_elements-Assign (-> +1), builtin_function_call-reversed
@@ -873,33 +873,33 @@ def prime_check(number): # function_definition
         return True # literal-True
     if number % 2 == 0: # binary_operator-Mod, comparison_operator-Eq, divisibility_test-2, if, literal-Num
         return False # literal-False
-    odd_numbers = range(3, int(math.sqrt(number)) + 1, 2) # assignment, binary_operator-Add, builtin_function_call-int, builtin_function_call-range, function_composition, literal-Num, suggest_constant_definition
+    odd_numbers = range(3, int(math.sqrt(number)) + 1, 2) # assignment, binary_operator-Add, builtin_function_call-int, builtin_function_call-range, composition, literal-Num, suggest_constant_definition
     return not any(number % i == 0 for i in odd_numbers) # binary_operator-Mod, builtin_function_call-any, comparison_operator-Eq, divisibility_test, literal-Num, unary_operator-Not
 class Test(unittest.TestCase):
     def test_primes(self): # function_definition
-        self.assertTrue(prime_check(2)) # function_composition, literal-Num
-        self.assertTrue(prime_check(3)) # function_composition, literal-Num, suggest_constant_definition
-        self.assertTrue(prime_check(5)) # function_composition, literal-Num, suggest_constant_definition
-        self.assertTrue(prime_check(7)) # function_composition, literal-Num, suggest_constant_definition
-        self.assertTrue(prime_check(11)) # function_composition, literal-Num, suggest_constant_definition
-        self.assertTrue(prime_check(13)) # function_composition, literal-Num, suggest_constant_definition
-        self.assertTrue(prime_check(17)) # function_composition, literal-Num, suggest_constant_definition
-        self.assertTrue(prime_check(19)) # function_composition, literal-Num, suggest_constant_definition
-        self.assertTrue(prime_check(23)) # function_composition, literal-Num, suggest_constant_definition
-        self.assertTrue(prime_check(29)) # function_composition, literal-Num, suggest_constant_definition
+        self.assertTrue(prime_check(2)) # composition, literal-Num
+        self.assertTrue(prime_check(3)) # composition, literal-Num, suggest_constant_definition
+        self.assertTrue(prime_check(5)) # composition, literal-Num, suggest_constant_definition
+        self.assertTrue(prime_check(7)) # composition, literal-Num, suggest_constant_definition
+        self.assertTrue(prime_check(11)) # composition, literal-Num, suggest_constant_definition
+        self.assertTrue(prime_check(13)) # composition, literal-Num, suggest_constant_definition
+        self.assertTrue(prime_check(17)) # composition, literal-Num, suggest_constant_definition
+        self.assertTrue(prime_check(19)) # composition, literal-Num, suggest_constant_definition
+        self.assertTrue(prime_check(23)) # composition, literal-Num, suggest_constant_definition
+        self.assertTrue(prime_check(29)) # composition, literal-Num, suggest_constant_definition
     def test_not_primes(self): # function_definition
-        self.assertFalse(prime_check(-19), "Negative numbers are not prime.") # function_composition, literal-Num, literal-Str, suggest_constant_definition, unary_operator-USub
-        self.assertFalse( # function_composition
+        self.assertFalse(prime_check(-19), "Negative numbers are not prime.") # composition, literal-Num, literal-Str, suggest_constant_definition, unary_operator-USub
+        self.assertFalse( # composition
             prime_check(0), "Zero doesn't have any divider, primes must have two" # literal-Num, literal-Str
         )
-        self.assertFalse( # function_composition
+        self.assertFalse( # composition
             prime_check(1), "One just have 1 divider, primes must have two." # literal-Num, literal-Str
         )
-        self.assertFalse(prime_check(2 * 2)) # binary_operator-Mult, function_composition, literal-Num
-        self.assertFalse(prime_check(2 * 3)) # binary_operator-Mult, function_composition, literal-Num, suggest_constant_definition
-        self.assertFalse(prime_check(3 * 3)) # binary_operator-Mult, function_composition, literal-Num, suggest_constant_definition
-        self.assertFalse(prime_check(3 * 5)) # binary_operator-Mult, function_composition, literal-Num, suggest_constant_definition
-        self.assertFalse(prime_check(3 * 5 * 7)) # binary_operator-Mult, function_composition, literal-Num, suggest_constant_definition
+        self.assertFalse(prime_check(2 * 2)) # binary_operator-Mult, composition, literal-Num
+        self.assertFalse(prime_check(2 * 3)) # binary_operator-Mult, composition, literal-Num, suggest_constant_definition
+        self.assertFalse(prime_check(3 * 3)) # binary_operator-Mult, composition, literal-Num, suggest_constant_definition
+        self.assertFalse(prime_check(3 * 5)) # binary_operator-Mult, composition, literal-Num, suggest_constant_definition
+        self.assertFalse(prime_check(3 * 5 * 7)) # binary_operator-Mult, composition, literal-Num, suggest_constant_definition
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/prime_factors.py
@@ -965,7 +965,7 @@ def qr_householder(A): # function_definition
         v = x + np.sign(x[0]) * alpha * e1 # assignment, binary_operator-Add, binary_operator-Mult, index, literal-Num
         v /= np.linalg.norm(v) # augmented_assignment
         Q_k = np.eye(m - k) - 2.0 * v @ v.T # assignment, binary_operator-MatMult, binary_operator-Mult, binary_operator-Sub, literal-Num, suggest_constant_definition
-        Q_k = np.block([[np.eye(k), np.zeros((k, m - k))], [np.zeros((m - k, k)), Q_k]]) # assignment, binary_operator-Sub, function_composition
+        Q_k = np.block([[np.eye(k), np.zeros((k, m - k))], [np.zeros((m - k, k)), Q_k]]) # assignment, binary_operator-Sub, composition
         Q = Q @ Q_k.T # assignment, binary_operator-MatMult, suggest_augmented_assignment
         R = Q_k @ R # assignment, binary_operator-MatMult
     return Q, R
@@ -980,7 +980,7 @@ def QuadraticEquation(a: int, b: int, c: int) -> Tuple[str, str]: # function_def
         raise ValueError("Coefficient 'a' must not be zero for quadratic equations.") # literal-Str
     delta = b * b - 4 * a * c # assignment, binary_operator-Mult, binary_operator-Sub, literal-Num, suggest_constant_definition
     if delta >= 0: # comparison_operator-GtE, if, literal-Num
-        return str((-b + sqrt(delta)) / (2 * a)), str((-b - sqrt(delta)) / (2 * a)) # binary_operator-Add, binary_operator-Div, binary_operator-Mult, binary_operator-Sub, builtin_function_call-str, function_composition, literal-Num, unary_operator-USub
+        return str((-b + sqrt(delta)) / (2 * a)), str((-b - sqrt(delta)) / (2 * a)) # binary_operator-Add, binary_operator-Div, binary_operator-Mult, binary_operator-Sub, builtin_function_call-str, composition, literal-Num, unary_operator-USub
     snd = sqrt(-delta) # assignment, unary_operator-USub
     if b == 0: # comparison_operator-Eq, if, literal-Num
         return f"({snd} * i) / 2", f"({snd} * i) / {2 * a}" # binary_operator-Mult, literal-Num, literal-Str
@@ -988,7 +988,7 @@ def QuadraticEquation(a: int, b: int, c: int) -> Tuple[str, str]: # function_def
     return f"({b}+{snd} * i) / 2", f"({b}+{snd} * i) / {2 * a}" # binary_operator-Mult, literal-Num, literal-Str
 def main(): # function_definition
     solutions = QuadraticEquation(a=5, b=6, c=1) # assignment, literal-Num, suggest_constant_definition
-    print("The equation solutions are: {} and {}".format(*solutions)) # builtin_function_call-print, function_composition, literal-Str
+    print("The equation solutions are: {} and {}".format(*solutions)) # builtin_function_call-print, composition, literal-Str
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/radix2_fft.py
@@ -1005,14 +1005,14 @@ class FFT:
         while self.polyB[-1] == 0: # comparison_operator-Eq, evolve_state (-> +1), index, literal-Num, unary_operator-USub
             self.polyB.pop() # dict_method_call-pop, mutable_sequence_method_call-pop, set_method_call-pop
         self.len_B = len(self.polyB) # assignment, builtin_function_call-len
-        self.C_max_length = int( # assignment, builtin_function_call-int, function_composition
-            2 ** np.ceil(np.log2(len(self.polyA) + len(self.polyB) - 1)) # binary_operator-Add, binary_operator-Pow, binary_operator-Sub, builtin_function_call-len, function_composition, literal-Num
+        self.C_max_length = int( # assignment, builtin_function_call-int, composition
+            2 ** np.ceil(np.log2(len(self.polyA) + len(self.polyB) - 1)) # binary_operator-Add, binary_operator-Pow, binary_operator-Sub, builtin_function_call-len, composition, literal-Num
         )
         while len(self.polyA) < self.C_max_length: # builtin_function_call-len, comparison_operator-Lt, evolve_state (-> +1)
             self.polyA.append(0) # literal-Num, mutable_sequence_method_call-append
         while len(self.polyB) < self.C_max_length: # builtin_function_call-len, comparison_operator-Lt, evolve_state (-> +1)
             self.polyB.append(0) # literal-Num, mutable_sequence_method_call-append
-        self.root = complex(mpmath.root(x=1, n=self.C_max_length, k=1)) # assignment, builtin_function_call-complex, function_composition, literal-Num
+        self.root = complex(mpmath.root(x=1, n=self.C_max_length, k=1)) # assignment, builtin_function_call-complex, composition, literal-Num
         self.product = self.__multiply() # assignment
     def __DFT(self, which): # function_definition
         if which == "A": # comparison_operator-Eq, if, if_else, literal-Str, suggest_conditional_expression (-> +3)
@@ -1075,13 +1075,13 @@ class FFT:
             inverseC.pop() # dict_method_call-pop, mutable_sequence_method_call-pop, set_method_call-pop
         return inverseC
     def __str__(self): # function_definition
-        A = "A = " + " + ".join( # assignment, binary_operator-Add, function_composition, literal-Str, string_method_call-join
+        A = "A = " + " + ".join( # assignment, binary_operator-Add, composition, literal-Str, string_method_call-join
             f"{coef}*x^{i}" for coef, i in enumerate(self.polyA[: self.len_A]) # builtin_function_call-enumerate, literal-Str, slice
         )
-        B = "B = " + " + ".join( # assignment, binary_operator-Add, function_composition, literal-Str, string_method_call-join
+        B = "B = " + " + ".join( # assignment, binary_operator-Add, composition, literal-Str, string_method_call-join
             f"{coef}*x^{i}" for coef, i in enumerate(self.polyB[: self.len_B]) # builtin_function_call-enumerate, literal-Str, slice
         )
-        C = "A*B = " + " + ".join( # assignment, binary_operator-Add, function_composition, literal-Str, string_method_call-join
+        C = "A*B = " + " + ".join( # assignment, binary_operator-Add, composition, literal-Str, string_method_call-join
             f"{coef}*x^{i}" for coef, i in enumerate(self.product) # builtin_function_call-enumerate, literal-Str
         )
         return "\n".join((A, B, C)) # literal-Str, string_method_call-join
@@ -1091,7 +1091,7 @@ class FFT:
 # ----------------------------------------------------------------------------------------
 import numpy as np
 def runge_kutta(f, y0, x0, h, x_end): # function_definition
-    N = int(np.ceil((x_end - x0) / h)) # assignment, binary_operator-Div, binary_operator-Sub, builtin_function_call-int, function_composition
+    N = int(np.ceil((x_end - x0) / h)) # assignment, binary_operator-Div, binary_operator-Sub, builtin_function_call-int, composition
     y = np.zeros((N + 1,)) # assignment, binary_operator-Add, literal-Num
     y[0] = y0 # assignment, index, literal-Num
     x = x0 # assignment
@@ -1111,7 +1111,7 @@ import math
 def sieve(n): # function_definition
     in_prime = [] # assignment, literal-List
     start = 2 # assignment, literal-Num
-    end = int(math.sqrt(n))  # Size of every segment # assignment, builtin_function_call-int, function_composition
+    end = int(math.sqrt(n))  # Size of every segment # assignment, builtin_function_call-int, composition
     temp = [True] * (end + 1) # assignment, binary_operator-Add, binary_operator-Mult, literal-List, literal-Num, literal-True
     prime = [] # assignment, literal-List
     while start <= end: # comparison_operator-LtE
@@ -1134,7 +1134,7 @@ def sieve(n): # function_definition
                 t += each # augmented_assignment
             for j in range(t, high + 1, each): # binary_operator-Add, builtin_function_call-range, for_range_step, literal-Num
                 temp[j - low] = False # assignment, binary_operator-Sub, index, literal-False
-        for j in range(len(temp)): # builtin_function_call-len, builtin_function_call-range, for_indexes, for_range_stop, function_composition
+        for j in range(len(temp)): # builtin_function_call-len, builtin_function_call-range, composition, for_indexes, for_range_stop
             if temp[j] is True: # comparison_operator-Is, if, index, literal-True
                 prime.append(j + low) # binary_operator-Add, mutable_sequence_method_call-append
         low = high + 1 # assignment, binary_operator-Add, literal-Num
@@ -1142,7 +1142,7 @@ def sieve(n): # function_definition
         if high > n: # comparison_operator-Gt, if
             high = n # assignment
     return prime
-print(sieve(10 ** 6)) # binary_operator-Pow, builtin_function_call-print, function_composition, literal-Num
+print(sieve(10 ** 6)) # binary_operator-Pow, builtin_function_call-print, composition, literal-Num
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/sieve_of_eratosthenes.py
@@ -1152,7 +1152,7 @@ def sieve(n): # function_definition
     l = [True] * (n + 1) # assignment, binary_operator-Add, binary_operator-Mult, literal-List, literal-Num, literal-True
     prime = [] # assignment, literal-List
     start = 2 # assignment, literal-Num
-    end = int(math.sqrt(n)) # assignment, builtin_function_call-int, function_composition
+    end = int(math.sqrt(n)) # assignment, builtin_function_call-int, composition
     while start <= end: # comparison_operator-LtE
         if l[start] is True: # comparison_operator-Is, if, index, literal-True
             prime.append(start) # mutable_sequence_method_call-append
@@ -1195,7 +1195,7 @@ def main(): # function_definition
     steps = 10.0  # define number of steps or resolution # assignment, literal-Num, suggest_constant_definition
     boundary = [a, b]  # define boundary of integration # assignment
     y = method_2(boundary, steps) # assignment
-    print("y = {0}".format(y)) # builtin_function_call-print, function_composition, literal-Str
+    print("y = {0}".format(y)) # builtin_function_call-print, composition, literal-Str
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/softmax.py
@@ -1214,7 +1214,7 @@ def sum_of_series(first_term, common_diff, num_of_terms): # function_definition
     sum = (num_of_terms / 2) * (2 * first_term + (num_of_terms - 1) * common_diff) # assignment, binary_operator-Add, binary_operator-Div, binary_operator-Mult, binary_operator-Sub, literal-Num
     return sum
 def main(): # function_definition
-    print(sum_of_series(1, 1, 10)) # builtin_function_call-print, function_composition, literal-Num, suggest_constant_definition
+    print(sum_of_series(1, 1, 10)) # builtin_function_call-print, composition, literal-Num, suggest_constant_definition
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/test_prime_check.py
@@ -1250,7 +1250,7 @@ def main(): # function_definition
     steps = 10.0  # define number of steps or resolution # assignment, literal-Num, suggest_constant_definition
     boundary = [a, b]  # define boundary of integration # assignment
     y = method_1(boundary, steps) # assignment
-    print("y = {0}".format(y)) # builtin_function_call-print, function_composition, literal-Str
+    print("y = {0}".format(y)) # builtin_function_call-print, composition, literal-Str
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/volume.py
@@ -1274,14 +1274,14 @@ def vol_circular_cylinder(radius, height): # function_definition
     return pi * radius ** 2 * height # binary_operator-Mult, binary_operator-Pow, literal-Num
 def main(): # function_definition
     print("Volumes:") # builtin_function_call-print, literal-Str
-    print("Cube: " + str(vol_cube(2)))  # = 8 # binary_operator-Add, builtin_function_call-print, builtin_function_call-str, function_composition, literal-Num, literal-Str
-    print("Cuboid: " + str(vol_cuboid(2, 2, 2)))  # = 8 # binary_operator-Add, builtin_function_call-print, builtin_function_call-str, function_composition, literal-Num, literal-Str
-    print("Cone: " + str(vol_cone(2, 2)))  # ~= 1.33 # binary_operator-Add, builtin_function_call-print, builtin_function_call-str, function_composition, literal-Num, literal-Str
-    print("Right Circular Cone: " + str(vol_right_circ_cone(2, 2)))  # ~= 8.38 # binary_operator-Add, builtin_function_call-print, builtin_function_call-str, function_composition, literal-Num, literal-Str
-    print("Prism: " + str(vol_prism(2, 2)))  # = 4 # binary_operator-Add, builtin_function_call-print, builtin_function_call-str, function_composition, literal-Num, literal-Str
-    print("Pyramid: " + str(vol_pyramid(2, 2)))  # ~= 1.33 # binary_operator-Add, builtin_function_call-print, builtin_function_call-str, function_composition, literal-Num, literal-Str
-    print("Sphere: " + str(vol_sphere(2)))  # ~= 33.5 # binary_operator-Add, builtin_function_call-print, builtin_function_call-str, function_composition, literal-Num, literal-Str
-    print("Circular Cylinder: " + str(vol_circular_cylinder(2, 2)))  # ~= 25.1 # binary_operator-Add, builtin_function_call-print, builtin_function_call-str, function_composition, literal-Num, literal-Str
+    print("Cube: " + str(vol_cube(2)))  # = 8 # binary_operator-Add, builtin_function_call-print, builtin_function_call-str, composition, literal-Num, literal-Str
+    print("Cuboid: " + str(vol_cuboid(2, 2, 2)))  # = 8 # binary_operator-Add, builtin_function_call-print, builtin_function_call-str, composition, literal-Num, literal-Str
+    print("Cone: " + str(vol_cone(2, 2)))  # ~= 1.33 # binary_operator-Add, builtin_function_call-print, builtin_function_call-str, composition, literal-Num, literal-Str
+    print("Right Circular Cone: " + str(vol_right_circ_cone(2, 2)))  # ~= 8.38 # binary_operator-Add, builtin_function_call-print, builtin_function_call-str, composition, literal-Num, literal-Str
+    print("Prism: " + str(vol_prism(2, 2)))  # = 4 # binary_operator-Add, builtin_function_call-print, builtin_function_call-str, composition, literal-Num, literal-Str
+    print("Pyramid: " + str(vol_pyramid(2, 2)))  # ~= 1.33 # binary_operator-Add, builtin_function_call-print, builtin_function_call-str, composition, literal-Num, literal-Str
+    print("Sphere: " + str(vol_sphere(2)))  # ~= 33.5 # binary_operator-Add, builtin_function_call-print, builtin_function_call-str, composition, literal-Num, literal-Str
+    print("Circular Cylinder: " + str(vol_circular_cylinder(2, 2)))  # ~= 25.1 # binary_operator-Add, builtin_function_call-print, builtin_function_call-str, composition, literal-Num, literal-Str
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/zellers_congruence.py
@@ -1318,12 +1318,12 @@ def zeller(date_input: str) -> str: # function_definition
         raise ValueError(
             "Year out of range. There has to be some sort of limit...right?" # literal-Str
         )
-    dt_ck = datetime.date(int(y), int(m), int(d)) # assignment, builtin_function_call-int, function_composition
+    dt_ck = datetime.date(int(y), int(m), int(d)) # assignment, builtin_function_call-int, composition
     if m <= 2: # comparison_operator-LtE, if, literal-Num
         y = y - 1 # assignment, binary_operator-Sub, literal-Num, suggest_augmented_assignment
         m = m + 12 # assignment, binary_operator-Add, literal-Num, suggest_augmented_assignment, suggest_constant_definition
-    c: int = int(str(y)[:2]) # builtin_function_call-int, builtin_function_call-str, function_composition, literal-Num, slice
-    k: int = int(str(y)[2:]) # builtin_function_call-int, builtin_function_call-str, function_composition, literal-Num, slice
+    c: int = int(str(y)[:2]) # builtin_function_call-int, builtin_function_call-str, composition, literal-Num, slice
+    k: int = int(str(y)[2:]) # builtin_function_call-int, builtin_function_call-str, composition, literal-Num, slice
     t: int = int(2.6 * m - 5.39) # binary_operator-Mult, binary_operator-Sub, builtin_function_call-int, literal-Num, suggest_constant_definition
     u: int = int(c / 4) # binary_operator-Div, builtin_function_call-int, literal-Num, suggest_constant_definition
     v: int = int(k / 4) # binary_operator-Div, builtin_function_call-int, literal-Num, suggest_constant_definition
