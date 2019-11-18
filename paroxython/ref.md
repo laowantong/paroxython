@@ -1255,23 +1255,25 @@ A `for` loop with counter `i` and a nested `for` loop which makes `i` iterations
         ^(.*?)/_type='For'
 \n(?:.+\n)*?\1/lineno=(?P<LINE>\d+)
 \n(?:.+\n)*?\1/target/id=(?P<VAR>.+) # capture iteration variable
-\n(?:.+\n)*?\1/(?P<_1>iter)/_type='Call'
-\n(?:.+\n)*?\1/(?P=_1)     /func/id='range'
-\n(?:.+\n)*?\1/(?P=_1)     /args/length=1 # only range(arg1)
+\n(?:.+\n)*?\1/iter/_type='Call'
+\n(?:.+\n)*?\1/iter/func/id='range'
+\n(?:.+\n)*?\1/iter/args/length=1 # only range(arg1)
 (   # i goes from 0 to n, and j from 0 to i
-\n(?:.+\n)*?\1/(?P<_2>body/0)/_type='For'
-\n(?:.+\n)*?\1/(?P=_2)       /(?P<_3>iter)/_type='Call'
-\n(?:.+\n)*?\1/(?P=_2)       /(?P=_3)     /func/id='range'
-\n(?:.+\n)*?\1/(?P=_2)       /(?P=_3)     /(?P<_4>args)/length=1 # only range(arg1)
-\n(?:.+\n)*?\1/(?P=_2)       /(?P=_3)     /(?P=_4)     /0(/.+)*/id=(?P=VAR) # match iteration variable
+\n(?:.+\n)* \1/(?P<_1>body/\d+)/_type='For'
+\n(?:.+\n)*?\1/(?P=_1)         /lineno=(?P<LINE>\d+)
+\n(?:.+\n)*?\1/(?P=_1)         /iter/_type='Call'
+\n(?:.+\n)*?\1/(?P=_1)         /iter/func/id='range'
+\n(?:.+\n)*?\1/(?P=_1)         /iter/args/length=1 # only range(arg1)
+\n(?:.+\n)* \1/(?P=_1)         /iter/args/0.*/id=(?P=VAR) # match iteration variable
 |   # i goes from 0 to n, and j from i to n
-\n(?:.+\n)*?\1/(?P=_1)     /args/0/_hash=(?P<STOP>.+) # capture stop expression
-\n(?:.+\n)*?\1/(?P<_2>body/\d+)/_type='For'
-\n(?:.+\n)*?\1/(?P=_2)         /(?P<_3>iter)/_type='Call'
-\n(?:.+\n)*?\1/(?P=_2)         /(?P=_3)     /(?P<_4>func)/id='range'
-\n(?:.+\n)*?\1/(?P=_2)         /(?P=_3)     /(?P<_5>args)/length=2 # only range(arg1, arg2)
-\n(?:.+\n)*?\1/(?P=_2)         /(?P=_3)     /(?P=_5)     /0(/.+)*/id=(?P=VAR) # match iteration variable
-\n(?:.+\n)*?\1/(?P=_2)         /(?P=_3)     /(?P=_5)     /1(/.+)*/_hash=(?P=STOP) # match stop expression
+\n(?:.+\n)*?\1/iter/args/0/_hash=(?P<STOP>.+) # capture stop expression
+\n(?:.+\n)* \1/(?P<_1>body/\d+)/_type='For'
+\n(?:.+\n)*?\1/(?P=_1)         /lineno=(?P<LINE>\d+)
+\n(?:.+\n)*?\1/(?P=_1)         /iter/_type='Call'
+\n(?:.+\n)*?\1/(?P=_1)         /iter/func/id='range'
+\n(?:.+\n)*?\1/(?P=_1)         /iter/args/length=2 # only range(arg1, arg2)
+\n(?:.+\n)* \1/(?P=_1)         /iter/args/0(/.+)*/id=(?P=VAR) # match iteration variable
+\n(?:.+\n)* \1/(?P=_1)         /iter/args/1(/.+)*/_hash=(?P=STOP) # match stop expression
 )
 ```
 
@@ -1290,7 +1292,7 @@ A `for` loop with counter `i` and a nested `for` loop which makes `i` iterations
 ###### Matches
 
 ```markdown
-triangular_nested_for: 1, 5
+triangular_nested_for: 1-2, 5-6
 ```
 
 --------------------------------------------------------------------------------
