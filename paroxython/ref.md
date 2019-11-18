@@ -339,12 +339,12 @@ comparison_operator-In: 4
 ```re
         ^(.*?)/_type='Compare'
 \n(?:.+\n)*?\1/lineno=(?P<LINE>\d+)
-\n(?:.+\n)*?\1/(?P<_1>left)/op/_type='Mod'
+\n(?:.+\n)*?\1/left/op/_type='Mod'
 (   # try to match the % right operand with a number
-\n(?:.+\n)*?\1/(?P=_1)     /right/n=(?P<SUFFIX>.+)
+\n(?:.+\n)*?\1/left/right/n=(?P<SUFFIX>.+)
 )?
-\n(?:.+\n)*?\1/(?P<_2>ops)/length=1
-\n(?:.+\n)*?\1/(?P=_2)    /0/_type='(Eq|NotEq)'
+\n(?:.+\n)*?\1/ops/length=1
+\n(?:.+\n)*?\1/ops/0/_type='(Eq|NotEq)'
 ```
 
 ###### Example
