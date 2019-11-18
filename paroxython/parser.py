@@ -38,11 +38,13 @@ class Parser:
             d = None
             for match in rex.finditer(self.flat_ast, overlapped=True):
                 d = match.capturesdict()
-                for suffix in d.get("SUFFIX", [""]):
-                    if suffix:
-                        suffix = f"-{suffix}"
+                if d.get("SUFFIX"): # there is a "SUFFIX" key and its value is not []
+                    for suffix in d["SUFFIX"]:
+                        lines = "-".join(map(str, sorted(map(int, d["LINE"]))))
+                        result[f"{label}-{suffix}"].append(lines)
+                else:
                     lines = "-".join(map(str, sorted(map(int, d["LINE"]))))
-                    result[label + suffix].append(lines)
+                    result[label].append(lines)
             if yield_failed_matches and not d:
                 yield (label, [])
             else:
@@ -58,7 +60,7 @@ if __name__ == "__main__":
     parse = Parser()
     start = time.perf_counter()
     acc = []
-    for (label, lines) in parse(source, yield_failed_matches=True):
+    for (label, lines) in parse(source, yield_failed_matches=False):
         stop = time.perf_counter()
         acc.append(f"{stop - start:7.4f} s.: {label}: {', '.join(lines)}")
         start = stop

@@ -14,7 +14,6 @@
       - [Construct `boolean_operator`](#construct-boolean_operator)
       - [Construct `comparison_operator`](#construct-comparison_operator)
       - [Construct `divisibility_test`](#construct-divisibility_test)
-      - [Construct `parity_test`](#construct-parity_test)
     - [Function calls](#function-calls)
       - [Construct `builtin_function_call`](#construct-builtin_function_call)
       - [Construct `cast_function_call`](#construct-cast_function_call)
@@ -334,55 +333,32 @@ comparison_operator-In: 4
 ```re
         ^(.*)/_type='Compare'
 \n(?:.+\n)*\1/lineno=(?P<LINE>\d+)
-\n(?:.+\n)*\1/left/op/_type='Mod'
-\n(?:.+\n)*\1/(?P<_1>ops)/length=1
-\n(?:.+\n)*\1/(?P=_1)    /0/_type='Eq'
-\n(?:.+\n)*\1/(?P<_2>comparators)/length=1
-\n(?:.+\n)*\1/(?P=_2)            /0/n=0
+\n(?:.+\n)*\1/(?P<_1>left)/op/_type='Mod'
+(   # try to match the % right operand with a number
+\n(?:.+\n)*\1/(?P=_1)     /right/n=(?P<SUFFIX>.+)
+)?
+\n(?:.+\n)*\1/(?P<_2>ops)/length=1
+\n(?:.+\n)*\1/(?P=_2)    /0/_type='(Eq|NotEq)'
 ```
 
 ###### Example
 
 ```python
 1   a % b == 0
+2   a % 2 == 0
+3   a % 3 != 0
+4   a % 4 == 1
+5   a % 5 != 1
 ```
 
 ###### Matches
 
 ```markdown
 divisibility_test: 1
-```
-
---------------------------------------------------------------------------------
-
-##### Construct `parity_test`
-
-###### Regex
-
-```re
-        ^(.*)/_type='Compare'
-\n(?:.+\n)*\1/lineno=(?P<LINE>\d+)
-\n(?:.+\n)*\1/(?P<_1>left)/op/_type='Mod'
-\n(?:.+\n)*\1/(?P=_1)     /right/n=2
-\n(?:.+\n)*\1/(?P<_2>ops)/length=1
-\n(?:.+\n)*\1/(?P=_2)    /0/_type='(Eq|NotEq)'
-\n(?:.+\n)*\1/(?P<_3>comparators)/length=1
-\n(?:.+\n)*\1/(?P=_3)            /0/n=[01]
-```
-
-###### Example
-
-```python
-1   a % 2 == 0
-2   a % 2 != 0
-3   a % 2 == 1
-4   a % 2 != 1
-```
-
-###### Matches
-
-```markdown
-parity_test: 1, 2, 3, 4
+divisibility_test-2: 2
+divisibility_test-3: 3
+divisibility_test-4: 4
+divisibility_test-5: 5
 ```
 
 --------------------------------------------------------------------------------
