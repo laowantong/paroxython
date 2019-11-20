@@ -15,13 +15,8 @@
       - [Construct `comparison_operator`](#construct-comparison_operator)
       - [Construct `divisibility_test`](#construct-divisibility_test)
     - [Calls](#calls)
-      - [Construct `builtin_function_call`](#construct-builtin_function_call)
-      - [Construct `sequence_method_call`](#construct-sequence_method_call)
-      - [Construct `string_method_call`](#construct-string_method_call)
-      - [Construct `mutable_sequence_method_call`](#construct-mutable_sequence_method_call)
-      - [Construct `list_method_call`](#construct-list_method_call)
-      - [Construct `set_method_call`](#construct-set_method_call)
-      - [Construct `dict_method_call`](#construct-dict_method_call)
+      - [Construct `function_call`](#construct-function_call)
+      - [Construct `method_call`](#construct-method_call)
       - [Construct `method_chaining`](#construct-method_chaining)
       - [Construct `composition`](#construct-composition)
   - [Statements](#statements)
@@ -289,7 +284,7 @@ unary_operator-Not: 2
 ```python
 1   a and b
 2   a or c
-3   not x
+3   not x # no match
 ```
 
 ###### Matches
@@ -373,7 +368,7 @@ divisibility_test-5: 5
 
 --------------------------------------------------------------------------------
 
-##### Construct `builtin_function_call`
+##### Construct `function_call`
 
 ###### Regex
 
@@ -381,7 +376,7 @@ divisibility_test-5: 5
         ^(.*?)/_type='Call'
 \n(?:.+\n)*?\1/lineno=(?P<LINE>\d+)
 \n(?:.+\n)*?\1/func/_type='Name'
-\n(?:.+\n)*?\1/func/id='(?P<SUFFIX>abs|delattr|hash|memoryview|set|all|dict|help|min|setattr|any|dir|hex|next|slice|ascii|divmod|id|object|sorted|bin|enumerate|input|oct|staticmethod|bool|eval|int|open|str|breakpoint|exec|isinstance|ord|sum|bytearray|filter|issubclass|pow|super|bytes|float|iter|print|tuple|callable|format|len|property|type|chr|frozenset|list|range|vars|classmethod|getattr|locals|repr|zip|compile|globals|map|reversed|__import__|complex|hasattr|max|round)'
+\n(?:.+\n)*?\1/func/id='(?P<SUFFIX>.+)'
 ```
 
 ###### Example
@@ -394,13 +389,14 @@ divisibility_test-5: 5
 ###### Matches
 
 ```markdown
-builtin_function_call-len: 1
-builtin_function_call-print: 1, 2
+function_call-len: 1
+function_call-print: 1, 2
+function_call-foobar: 2
 ```
 
 --------------------------------------------------------------------------------
 
-##### Construct `sequence_method_call`
+##### Construct `method_call`
 
 ###### Regex
 
@@ -408,156 +404,21 @@ builtin_function_call-print: 1, 2
         ^(.*?)/_type='Call'
 \n(?:.+\n)*?\1/lineno=(?P<LINE>\d+)
 \n(?:.+\n)*?\1/func/_type='Attribute'
-\n(?:.+\n)*?\1/func/attr='(?P<SUFFIX>count|index)'
+\n(?:.+\n)*?\1/func/attr='(?P<SUFFIX>.+)'
 ```
 
 ###### Example
 
 ```python
 1   seq.index(42)
-2   seq.count(42)
+2   foo.bar(42)
 ```
 
 ###### Matches
 
 ```markdown
-sequence_method_call-index: 1
-sequence_method_call-count: 2
-```
-
---------------------------------------------------------------------------------
-
-##### Construct `string_method_call`
-
-###### Regex
-
-```re
-        ^(.*?)/_type='Call'
-\n(?:.+\n)*?\1/lineno=(?P<LINE>\d+)
-\n(?:.+\n)*?\1/func/_type='Attribute'
-\n(?:.+\n)*?\1/func/attr='(?P<SUFFIX>casefold|center|count|encode|endswith|expandtabs|format_map|index|isalnum|isalpha|isascii|isdecimal|isdigit|isidentifier|isnumeric|isprintable|isspace|istitle|isupper|join|ljust|lower|lstrip|partition|replace|rfind|rindex|rjust|rpartition|rsplit|rstrip|strip|title|upper|zfill)'
-```
-
-**Remark.** `s.count()` and `s.index()` are parts of the [common sequence operations](https://docs.python.org/3/library/stdtypes.html#typesseq-common).
-
-###### Example
-
-```python
-1   s.isalpha("foobar")
-```
-
-###### Matches
-
-```markdown
-string_method_call-isalpha: 1
-```
-
---------------------------------------------------------------------------------
-
-##### Construct `mutable_sequence_method_call`
-
-###### Regex
-
-```re
-        ^(.*?)/_type='Call'
-\n(?:.+\n)*?\1/lineno=(?P<LINE>\d+)
-\n(?:.+\n)*?\1/func/_type='Attribute'
-\n(?:.+\n)*?\1/func/attr='(?P<SUFFIX>append|clear|copy|extend|insert|pop|remove|reverse)'
-```
-
-###### Example
-
-```python
-1   seq.append(42)
-2   seq.pop(42)
-```
-
-###### Matches
-
-```markdown
-mutable_sequence_method_call-append: 1
-mutable_sequence_method_call-pop: 2
-```
-
---------------------------------------------------------------------------------
-
-##### Construct `list_method_call`
-
-###### Regex
-
-```re
-        ^(.*?)/_type='Call'
-\n(?:.+\n)*?\1/lineno=(?P<LINE>\d+)
-\n(?:.+\n)*?\1/func/_type='Attribute'
-\n(?:.+\n)*?\1/func/attr='(?P<SUFFIX>sort)'
-```
-
-###### Example
-
-```python
-1   seq.sort()
-```
-
-###### Matches
-
-```markdown
-list_method_call-sort: 1
-```
-
---------------------------------------------------------------------------------
-
-##### Construct `set_method_call`
-
-Methods of the [set types (`set` and `frozenset`)](https://docs.python.org/3/library/stdtypes.html#set-types-set-frozenset). Note that `s.add()`, `s.difference_update()`, `s.discard()`, `s.clear()`, `s.intersection_update()`, `s.pop()`, `s.remove()`, `s.symmetric_difference_update()` and `s.update()` do not apply to immutable instances of `frozenset`.
-
-###### Regex
-
-```re
-        ^(.*?)/_type='Call'
-\n(?:.+\n)*?\1/lineno=(?P<LINE>\d+)
-\n(?:.+\n)*?\1/func/_type='Attribute'
-\n(?:.+\n)*?\1/func/attr='(?P<SUFFIX>add|clear|copy|difference_update|difference|discard|intersection_update|intersection|isdisjoint|issubset|issuperset|pop|remove|symmetric_difference_update|symmetric_difference|union|update)'
-```
-
-**Remark.** `s.clear()`, `s.copy()`, `s.pop()` and `s.remove()` are supported by the [mutable sequence types](https://docs.python.org/3/library/stdtypes.html#mutable-sequence-types) too. `s.update()` is supported by the [mapping types (`dict`)](https://docs.python.org/3/library/stdtypes.html#mapping-types-dict) too.
-
-###### Example
-
-```python
-1   s.union(t)
-```
-
-###### Matches
-
-```markdown
-set_method_call-union: 1
-```
-
---------------------------------------------------------------------------------
-
-##### Construct `dict_method_call`
-
-###### Regex
-
-```re
-        ^(.*?)/_type='Call'
-\n(?:.+\n)*?\1/lineno=(?P<LINE>\d+)
-\n(?:.+\n)*?\1/func/_type='Attribute'
-\n(?:.+\n)*?\1/func/attr='(?P<SUFFIX>clear|copy|fromkeys|fromkeys|get|items|keys|pop|popitem|reversed|setdefault|update|values)'
-```
-
-**Remark.** `d.clear()`, `d.copy()` and `d.pop()` are supported by the [mutable sequence types](https://docs.python.org/3/library/stdtypes.html#mutable-sequence-types) too. `s.update()` is supported by the [`set` type](https://docs.python.org/3/library/stdtypes.html#set-types-set-frozenset) too.
-
-###### Example
-
-```python
-1   d.items()
-```
-
-###### Matches
-
-```markdown
-dict_method_call-items: 1
+method_call-index: 1
+method_call-bar: 2
 ```
 
 --------------------------------------------------------------------------------
