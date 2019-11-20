@@ -41,7 +41,7 @@ class Parser:
                 if d.get("SUFFIX"): # there is a "SUFFIX" key and its value is not []
                     for suffix in d["SUFFIX"]:
                         lines = "-".join(map(str, sorted(map(int, d["LINE"]))))
-                        result[f"{label}-{suffix}"].append(lines)
+                        result[f"{label}={suffix}"].append(lines)
                 else:
                     lines = "-".join(map(str, sorted(map(int, d["LINE"]))))
                     result[label].append(lines)

@@ -51,6 +51,6 @@ def test_example(label, source, results):
 
 def test_at_least_one_example_is_provided_for_each_construct():
     expected = set(parse.constructs)
-    actual = set(label.partition("-")[0] for (label, _, _) in examples)
+    actual = set(label.partition("=")[0] for (label, _, _) in examples)
     assert actual == expected
 

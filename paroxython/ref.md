@@ -114,15 +114,15 @@
 ###### Matches
 
 ```markdown
-literal-Num: 1, 2, 4, 4, 7, 7, 7, 11, 11, 11
-literal-Str: 3
-literal-Tuple: 4
-literal-List: 5, 11
-literal-Dict: 6
-literal-Set: 7
-literal-False: 8
-literal-True: 8
-literal-None: 9
+literal=Num: 1, 2, 4, 4, 7, 7, 7, 11, 11, 11
+literal=Str: 3
+literal=Tuple: 4
+literal=List: 5, 11
+literal=Dict: 6
+literal=Set: 7
+literal=False: 8
+literal=True: 8
+literal=None: 9
 ```
 
 --------------------------------------------------------------------------------
@@ -233,8 +233,8 @@ slice_step: 3
 ###### Matches
 
 ```markdown
-binary_operator-Pow: 1
-binary_operator-Sub: 1
+binary_operator=Pow: 1
+binary_operator=Sub: 1
 ```
 
 --------------------------------------------------------------------------------
@@ -259,8 +259,8 @@ binary_operator-Sub: 1
 ###### Matches
 
 ```markdown
-unary_operator-USub: 1
-unary_operator-Not: 2
+unary_operator=USub: 1
+unary_operator=Not: 2
 ```
 
 --------------------------------------------------------------------------------
@@ -290,8 +290,8 @@ unary_operator-Not: 2
 ###### Matches
 
 ```markdown
-boolean_operator-And: 1
-boolean_operator-Or: 2
+boolean_operator=And: 1
+boolean_operator=Or: 2
 ```
 
 **Remark.** `Not` is not a boolean operator in Python. To match it, use the [construct `unary_operator-Not`](#construct-unary_operator).
@@ -321,8 +321,8 @@ boolean_operator-Or: 2
 ###### Matches
 
 ```markdown
-comparison_operator-Eq: 1, 2
-comparison_operator-In: 4
+comparison_operator=Eq: 1, 2
+comparison_operator=In: 4
 ```
 
 --------------------------------------------------------------------------------
@@ -356,10 +356,10 @@ comparison_operator-In: 4
 
 ```markdown
 divisibility_test: 1
-divisibility_test-2: 2
-divisibility_test-3: 3
-divisibility_test-4: 4
-divisibility_test-5: 5
+divisibility_test=2: 2
+divisibility_test=3: 3
+divisibility_test=4: 4
+divisibility_test=5: 5
 ```
 
 --------------------------------------------------------------------------------
@@ -389,9 +389,9 @@ divisibility_test-5: 5
 ###### Matches
 
 ```markdown
-function_call-len: 1
-function_call-print: 1, 2
-function_call-foobar: 2
+function_call=len: 1
+function_call=print: 1, 2
+function_call=foobar: 2
 ```
 
 --------------------------------------------------------------------------------
@@ -417,8 +417,8 @@ function_call-foobar: 2
 ###### Matches
 
 ```markdown
-method_call-index: 1
-method_call-bar: 2
+method_call=index: 1
+method_call=bar: 2
 ```
 
 --------------------------------------------------------------------------------
@@ -1234,10 +1234,10 @@ The third alternative of the regex is experimental. It matches any one-line func
 ###### Matches
 
 ```markdown
-accumulate_elements-Assign: 3-4, 7-8
-accumulate_elements-AugAssign: 9-11, 12-13
-accumulate_elements-Name: 14-15
-accumulate_elements-Attribute: 16-17
+accumulate_elements=Assign: 3-4, 7-8
+accumulate_elements=AugAssign: 9-11, 12-13
+accumulate_elements=Name: 14-15
+accumulate_elements=Attribute: 16-17
 ```
 
 --------------------------------------------------------------------------------
@@ -1571,10 +1571,10 @@ Accumulate the inputs until a sentinel value is encountered (accumulation expres
 ###### Matches
 
 ```markdown
-accumulate_stream-Assign: 3-7
-accumulate_stream-AugAssign: 11-15
-accumulate_stream-Name: 19-23
-accumulate_stream-Attribute: 27-31
+accumulate_stream=Assign: 3-7
+accumulate_stream=AugAssign: 11-15
+accumulate_stream=Name: 19-23
+accumulate_stream=Attribute: 27-31
 ```
 
 --------------------------------------------------------------------------------
