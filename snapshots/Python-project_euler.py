@@ -485,7 +485,7 @@ N = ( # assignment, global_constant_definition, literal=Tuple
 def solution(n): # function_definition
     return max( # composition, function_call=max
     [
-    reduce(lambda x, y: int(x) * int(y), n[i : i + 13]) # binary_operator=Add, binary_operator=Mult, composition, function_call=int, function_call=reduce, literal=Num, slice, suggest_constant_definition
+    reduce(lambda x, y: int(x) * int(y), n[i : i + 13]) # binary_operator=Add, binary_operator=Mult, composition, function_call=int, function_call=reduce, lambda_function, literal=Num, slice, suggest_constant_definition
     for i in range(len(n) - 12) # binary_operator=Sub, composition, function_call=len, function_call=range, literal=Num, suggest_constant_definition
     ]
     )
@@ -609,7 +609,7 @@ def prime_generator(): # function_definition
             yield num
         num += 1 # augmented_assignment, literal=Num
 def solution(n): # function_definition
-    return sum(takewhile(lambda x: x < n, prime_generator())) # comparison_operator=Lt, composition, function_call=prime_generator, function_call=sum, function_call=takewhile
+    return sum(takewhile(lambda x: x < n, prime_generator())) # comparison_operator=Lt, composition, function_call=prime_generator, function_call=sum, function_call=takewhile, lambda_function
 
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_10/sol3.py
@@ -1265,11 +1265,11 @@ def solution(): # function_definition
     words = "" # assignment, literal=Str
     with open(wordsFilePath, "r") as f: # function_call=open, literal=Str
         words = f.readline() # assignment, method_call=readline
-    words = list(map(lambda word: word.strip('"'), words.strip("\r\n").split(","))) # assignment, composition, function_call=list, function_call=map, literal=Str, method_call=split, method_call=strip, method_chaining
+    words = list(map(lambda word: word.strip('"'), words.strip("\r\n").split(","))) # assignment, composition, function_call=list, function_call=map, lambda_function, literal=Str, method_call=split, method_call=strip, method_chaining
     words = list( # assignment, composition, function_call=list
     filter( # composition, function_call=filter
-    lambda word: word in TRIANGULAR_NUMBERS, # comparison_operator=In
-    map(lambda word: sum(map(lambda x: ord(x) - 64, word)), words), # binary_operator=Sub, composition, function_call=map, function_call=ord, function_call=sum, literal=Num, suggest_constant_definition
+    lambda word: word in TRIANGULAR_NUMBERS, # comparison_operator=In, lambda_function
+    map(lambda word: sum(map(lambda x: ord(x) - 64, word)), words), # binary_operator=Sub, composition, function_call=map, function_call=ord, function_call=sum, lambda_function, literal=Num, suggest_constant_definition
     )
     )
     return len(words) # function_call=len
@@ -1446,8 +1446,8 @@ def solution(): # function_definition
     triangle = os.path.join(script_dir, "triangle.txt") # assignment, literal=Str, method_call=join
     with open(triangle, "r") as f: # function_call=open, literal=Str
         triangle = f.readlines() # assignment, method_call=readlines
-    a = map(lambda x: x.rstrip("\r\n").split(" "), triangle) # assignment, composition, function_call=map, literal=Str, method_call=rstrip, method_call=split, method_chaining
-    a = list(map(lambda x: list(map(lambda y: int(y), x)), a)) # assignment, composition, function_call=int, function_call=list, function_call=map
+    a = map(lambda x: x.rstrip("\r\n").split(" "), triangle) # assignment, composition, function_call=map, lambda_function, literal=Str, method_call=rstrip, method_call=split, method_chaining
+    a = list(map(lambda x: list(map(lambda y: int(y), x)), a)) # assignment, composition, function_call=int, function_call=list, function_call=map, lambda_function
     for i in range(1, len(a)): # composition, for_range_start, function_call=len, function_call=range, literal=Num, nested_for (-> +1)
         for j in range(len(a[i])): # composition, for_indexes, for_range_stop, function_call=len, function_call=range, index
             if j != len(a[i - 1]): # binary_operator=Sub, comparison_operator=NotEq, function_call=len, if, if_else, index, index_arithmetic, literal=Num, suggest_conditional_expression (-> +3)

@@ -831,7 +831,7 @@ def newton_raphson(f, x0=0, maxiter=100, step=0.0001, maxerror=1e-6, logsteps=Fa
     a = x0 # assignment
     steps = [a] # assignment
     error = abs(f(a)) # assignment, composition, function_call=abs, function_call=f
-    f1 = lambda x: calc_derivative(f, x, h=step) # assignment, function_call=calc_derivative
+    f1 = lambda x: calc_derivative(f, x, h=step) # assignment, function_call=calc_derivative, lambda_function
     for _ in range(maxiter): # for_range_stop, function_call=range
         if f1(a) == 0: # comparison_operator=Eq, function_call=f1, if, literal=Num
             raise ValueError("No converging solution found") # function_call=ValueError, literal=Str

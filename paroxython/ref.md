@@ -20,6 +20,7 @@
       - [Construct `method_call`](#construct-method_call)
       - [Construct `method_chaining`](#construct-method_chaining)
       - [Construct `composition`](#construct-composition)
+      - [Construct `lambda_function`](#construct-lambda_function)
   - [Statements](#statements)
     - [Assignments](#assignments)
       - [Construct `global_constant_definition`](#construct-global_constant_definition)
@@ -505,6 +506,29 @@ Apply a function or a method to an expression involving the result of another fu
 
 ```markdown
 composition: 1, 3, 4
+```
+
+--------------------------------------------------------------------------------
+
+##### Construct `lambda_function`
+
+###### Regex
+
+```re
+          ^(.*?)/_type='Lambda'
+\n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
+```
+
+###### Example
+
+```python
+1   lambda x: x + 1
+```
+
+###### Matches
+
+```markdown
+lambda_function: 1
 ```
 
 --------------------------------------------------------------------------------
