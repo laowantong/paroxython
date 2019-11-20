@@ -40,7 +40,6 @@
       - [Construct `for_range_stop`](#construct-for_range_stop)
       - [Construct `for_range_start`](#construct-for_range_start)
       - [Construct `for_range_step`](#construct-for_range_step)
-      - [Construct `for_range_backwards`](#construct-for_range_backwards)
       - [Construct `for_indexes_values`](#construct-for_indexes_values)
       - [Construct `for_indexes`](#construct-for_indexes)
       - [Construct `nested_for`](#construct-nested_for)
@@ -109,12 +108,13 @@
 9   None
 10  {a, b, c} # no match
 11  [1, 2, 3]
+12  -42
 ```
 
 ###### Matches
 
 ```markdown
-literal=Num: 1, 2, 4, 4, 7, 7, 7, 11, 11, 11
+literal=Num: 1, 2, 4, 4, 7, 7, 7, 11, 11, 11, 12
 literal=Str: 3
 literal=Tuple: 4
 literal=List: 5, 11
@@ -252,9 +252,12 @@ binary_operator=Sub: 1
 ###### Example
 
 ```python
-1   a = -1
+1   a = -b
 2   b = not c
+3   c = -1 # no match
 ```
+
+**Remark.** Normally, a negative litteral is represented in the AST by a node `UnaryOp` with `USub` and `Num` children and a positive value for `n`. This is simplified into a node `Num` and a negative value for `n`.
 
 ###### Matches
 
@@ -962,6 +965,10 @@ Iterate over a range with 3 arguments (start, stop, step).
 \n(?:.+\n)*?\1/iter/lineno=(?P<LINE>\d+)
 \n(?:.+\n)*?\1/iter/func/id='range'
 \n(?:.+\n)*?\1/iter/args/length=3
+(   # If the step is a number, capture it as a suffix
+\n(?:.+\n)*?\1/iter/args/2/_type='Num'
+\n(?:.+\n)*?\1/iter/args/2/n=(?<SUFFIX>.+)
+)?
 ```
 
 ###### Example
@@ -975,48 +982,16 @@ Iterate over a range with 3 arguments (start, stop, step).
 6       pass
 7   for i in range(start, stop, -1):
 8       pass
+9   for i in range(start, stop, 2):
+10      pass
 ```
 
 ###### Matches
 
 ```markdown
-for_range_step: 5, 7
-```
-
---------------------------------------------------------------------------------
-
-##### Construct `for_range_backwards`
-
-Iterate over a range with a negative step.
-
-###### Regex
-
-```re
-        ^(.*?)/_type='For'
-\n(?:.+\n)*?\1/iter/lineno=(?P<LINE>\d+)
-\n(?:.+\n)*?\1/iter/func/id='range'
-\n(?:.+\n)*?\1/iter/args/length=3
-\n(?:.+\n)*?\1/iter/args/2/op/_type='USub'
-```
-
-###### Example
-
-```python
-1   for i in range(stop):
-2       pass
-3   for i in range(start, stop):
-4       pass
-5   step = -1
-6   for i in range(start, stop, step): # LIMITATION: the step must be a negative literal
-7       pass
-8   for i in range(start, stop, -1):
-9       pass
-```
-
-###### Matches
-
-```markdown
-for_range_backwards: 8
+for_range_step: 5
+for_range_step=-1: 7
+for_range_step=2: 9
 ```
 
 --------------------------------------------------------------------------------
@@ -1758,6 +1733,7 @@ Match magic numbers (unnamed numerical constants) other than -1, 0, 1 and 2. A n
 3   for a in s[::-1]:
 4       if a == 42 and b % 2 == 0: # 42 is a magic number
 5           pass
+6   negative_number = -42
 ```
 
 May be rewritten as:
@@ -1768,13 +1744,14 @@ May be rewritten as:
 3   shoe_size = ANSWER_TO_THE_ULTIMATE_QUESTION_OF_LIFE_THE_UNIVERSE_AND_EVERYTHING
 4   for a in s[::-1]:
 5       if a == ANSWER_TO_THE_ULTIMATE_QUESTION_OF_LIFE_THE_UNIVERSE_AND_EVERYTHING and b % 2 == 0:
-6           pass   
+6           pass
+7   NEGATIVE_NUMBER = -42
 ```
 
 ###### Matches
 
 ```markdown
-suggest_constant_definition: 2, 4
+suggest_constant_definition: 2, 4, 6
 ```
 
 --------------------------------------------------------------------------------

@@ -139,7 +139,7 @@ def abs_val(num): # function_definition
 def test_abs_val(): # function_definition
     assert 0 == abs_val(0) # comparison_operator=Eq, function_call=abs_val, literal=Num
     assert 34 == abs_val(34) # comparison_operator=Eq, function_call=abs_val, literal=Num, suggest_constant_definition
-    assert 100000000000 == abs_val(-100000000000) # comparison_operator=Eq, function_call=abs_val, literal=Num, suggest_constant_definition, unary_operator=USub
+    assert 100000000000 == abs_val(-100000000000) # comparison_operator=Eq, function_call=abs_val, literal=Num, suggest_constant_definition
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/abs_max.py
@@ -152,11 +152,11 @@ def abs_max(x: List[int]) -> int: # function_definition, index
             j = i # assignment
     return j
 def abs_max_sort(x): # function_definition
-    return sorted(x, key=abs)[-1] # function_call=sorted, index, literal=Num, unary_operator=USub
+    return sorted(x, key=abs)[-1] # function_call=sorted, index, literal=Num
 def main(): # function_definition
-    a = [1, 2, -11] # assignment, literal=List, literal=Num, suggest_constant_definition, unary_operator=USub
-    assert abs_max(a) == -11 # comparison_operator=Eq, function_call=abs_max, literal=Num, suggest_constant_definition, unary_operator=USub
-    assert abs_max_sort(a) == -11 # comparison_operator=Eq, function_call=abs_max_sort, literal=Num, suggest_constant_definition, unary_operator=USub
+    a = [1, 2, -11] # assignment, literal=List, literal=Num, suggest_constant_definition
+    assert abs_max(a) == -11 # comparison_operator=Eq, function_call=abs_max, literal=Num, suggest_constant_definition
+    assert abs_max_sort(a) == -11 # comparison_operator=Eq, function_call=abs_max_sort, literal=Num, suggest_constant_definition
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/abs_min.py
@@ -169,7 +169,7 @@ def absMin(x): # function_definition
             j = i # assignment
     return j
 def main(): # function_definition
-    a = [-3, -1, 2, -11] # assignment, literal=List, literal=Num, suggest_constant_definition, unary_operator=USub
+    a = [-3, -1, 2, -11] # assignment, literal=List, literal=Num, suggest_constant_definition
     print(absMin(a))  # = -1 # composition, function_call=absMin, function_call=print
 
 # ----------------------------------------------------------------------------------------
@@ -224,7 +224,7 @@ def prime_factors(n: int) -> list: # function_definition
     while n % 2 == 0: # binary_operator=Mod, comparison_operator=Eq, divisibility_test=2, evolve_state (-> +2), literal=Num
         pf.append(2) # literal=Num, method_call=append
         n = int(n / 2) # assignment, binary_operator=Div, function_call=int, literal=Num
-    for i in range(3, int(math.sqrt(n)) + 1, 2): # accumulate_elements=Assign (-> +3), binary_operator=Add, composition, for_range_step, function_call=int, function_call=range, literal=Num, method_call=sqrt, suggest_constant_definition
+    for i in range(3, int(math.sqrt(n)) + 1, 2): # accumulate_elements=Assign (-> +3), binary_operator=Add, composition, for_range_step=2, function_call=int, function_call=range, literal=Num, method_call=sqrt, suggest_constant_definition
         while n % i == 0: # binary_operator=Mod, comparison_operator=Eq, divisibility_test, evolve_state (-> +1), literal=Num
             pf.append(i) # method_call=append
             n = int(n / i) # assignment, binary_operator=Div, function_call=int
@@ -238,7 +238,7 @@ def number_of_divisors(n: int) -> int: # function_definition
         temp += 1 # augmented_assignment, literal=Num
         n = int(n / 2) # assignment, binary_operator=Div, function_call=int, literal=Num
     div *= temp # augmented_assignment
-    for i in range(3, int(math.sqrt(n)) + 1, 2): # accumulate_elements=Assign (-> +4), binary_operator=Add, composition, for_range_step, function_call=int, function_call=range, literal=Num, method_call=sqrt, suggest_constant_definition
+    for i in range(3, int(math.sqrt(n)) + 1, 2): # accumulate_elements=Assign (-> +4), binary_operator=Add, composition, for_range_step=2, function_call=int, function_call=range, literal=Num, method_call=sqrt, suggest_constant_definition
         temp = 1 # assignment, literal=Num
         while n % i == 0: # binary_operator=Mod, comparison_operator=Eq, divisibility_test, literal=Num
             temp += 1 # augmented_assignment, literal=Num
@@ -253,7 +253,7 @@ def sum_of_divisors(n: int) -> int: # function_definition
         n = int(n / 2) # assignment, binary_operator=Div, function_call=int, literal=Num
     if temp > 1: # comparison_operator=Gt, if, literal=Num
         s *= (2 ** temp - 1) / (2 - 1) # augmented_assignment, binary_operator=Div, binary_operator=Pow, binary_operator=Sub, literal=Num
-    for i in range(3, int(math.sqrt(n)) + 1, 2): # accumulate_elements=Assign (-> +4), binary_operator=Add, composition, for_range_step, function_call=int, function_call=range, literal=Num, method_call=sqrt, suggest_constant_definition
+    for i in range(3, int(math.sqrt(n)) + 1, 2): # accumulate_elements=Assign (-> +4), binary_operator=Add, composition, for_range_step=2, function_call=int, function_call=range, literal=Num, method_call=sqrt, suggest_constant_definition
         temp = 1 # assignment, literal=Num
         while n % i == 0: # binary_operator=Mod, comparison_operator=Eq, divisibility_test, literal=Num
             temp += 1 # augmented_assignment, literal=Num
@@ -541,7 +541,7 @@ def find_min(nums): # function_definition
             min_num = num # assignment
     return min_num
 def main(): # function_definition
-    assert find_min([0, 1, 2, 3, 4, 5, -3, 24, -56]) == -56 # comparison_operator=Eq, function_call=find_min, literal=List, literal=Num, suggest_constant_definition, unary_operator=USub
+    assert find_min([0, 1, 2, 3, 4, 5, -3, 24, -56]) == -56 # comparison_operator=Eq, function_call=find_min, literal=List, literal=Num, suggest_constant_definition
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/find_min_recursion.py
@@ -661,8 +661,8 @@ def main(): # function_definition
 def kthPermutation(k, n): # function_definition
     factorials = [1] # assignment, literal=List, literal=Num
     for i in range(2, n): # for_range_start, function_call=range, literal=Num
-        factorials.append(factorials[-1] * i) # binary_operator=Mult, index, literal=Num, method_call=append, unary_operator=USub
-    assert 0 <= k < factorials[-1] * n, "k out of bounds" # binary_operator=Mult, comparison_operator=LtE, index, literal=Num, literal=Str, unary_operator=USub
+        factorials.append(factorials[-1] * i) # binary_operator=Mult, index, literal=Num, method_call=append
+    assert 0 <= k < factorials[-1] * n, "k out of bounds" # binary_operator=Mult, comparison_operator=LtE, index, literal=Num, literal=Str
     permutation = [] # assignment, literal=List
     elements = list(range(n)) # assignment, composition, function_call=list, function_call=range
     while factorials:
@@ -797,7 +797,7 @@ from maths.is_square_free import is_square_free
 def mobius(n: int) -> int: # function_definition
     factors = prime_factors(n) # assignment, function_call=prime_factors
     if is_square_free(factors): # function_call=is_square_free, if
-        return -1 if len(factors) % 2 else 1 # binary_operator=Mod, function_call=len, literal=Num, unary_operator=USub
+        return -1 if len(factors) % 2 else 1 # binary_operator=Mod, function_call=len, literal=Num
     return 0 # literal=Num
 
 # ----------------------------------------------------------------------------------------
@@ -805,7 +805,7 @@ def mobius(n: int) -> int: # function_definition
 # ----------------------------------------------------------------------------------------
 def modular_exponential(base, power, mod): # function_definition
     if power < 0: # comparison_operator=Lt, if, literal=Num
-        return -1 # literal=Num, unary_operator=USub
+        return -1 # literal=Num
     base %= mod # augmented_assignment
     result = 1 # assignment, literal=Num
     while power > 0: # comparison_operator=Gt, evolve_state (-> +3), literal=Num
@@ -888,7 +888,7 @@ class Test(unittest.TestCase):
         self.assertTrue(prime_check(23)) # composition, function_call=prime_check, literal=Num, method_call=assertTrue, suggest_constant_definition
         self.assertTrue(prime_check(29)) # composition, function_call=prime_check, literal=Num, method_call=assertTrue, suggest_constant_definition
     def test_not_primes(self): # function_definition
-        self.assertFalse(prime_check(-19), "Negative numbers are not prime.") # composition, function_call=prime_check, literal=Num, literal=Str, method_call=assertFalse, suggest_constant_definition, unary_operator=USub
+        self.assertFalse(prime_check(-19), "Negative numbers are not prime.") # composition, function_call=prime_check, literal=Num, literal=Str, method_call=assertFalse, suggest_constant_definition
         self.assertFalse( # composition, method_call=assertFalse
             prime_check(0), "Zero doesn't have any divider, primes must have two" # function_call=prime_check, literal=Num, literal=Str
         )
@@ -999,10 +999,10 @@ class FFT:
     def __init__(self, polyA=[0], polyB=[0]): # function_definition, literal=List, literal=Num
         self.polyA = list(polyA)[:] # assignment, function_call=list, slice
         self.polyB = list(polyB)[:] # assignment, function_call=list, slice
-        while self.polyA[-1] == 0: # comparison_operator=Eq, evolve_state (-> +1), index, literal=Num, unary_operator=USub
+        while self.polyA[-1] == 0: # comparison_operator=Eq, evolve_state (-> +1), index, literal=Num
             self.polyA.pop() # method_call=pop
         self.len_A = len(self.polyA) # assignment, function_call=len
-        while self.polyB[-1] == 0: # comparison_operator=Eq, evolve_state (-> +1), index, literal=Num, unary_operator=USub
+        while self.polyB[-1] == 0: # comparison_operator=Eq, evolve_state (-> +1), index, literal=Num
             self.polyB.pop() # method_call=pop
         self.len_B = len(self.polyB) # assignment, function_call=len
         self.C_max_length = int( # assignment, composition, function_call=int
@@ -1071,7 +1071,7 @@ class FFT:
             inverseC = new_inverseC # assignment
             next_ncol *= 2 # augmented_assignment, literal=Num
         inverseC = [round(x[0].real, 8) + round(x[0].imag, 8) * 1j for x in inverseC] # assignment, binary_operator=Add, binary_operator=Mult, function_call=round, index, literal=Num, suggest_constant_definition
-        while inverseC[-1] == 0: # comparison_operator=Eq, evolve_state (-> +1), index, literal=Num, unary_operator=USub
+        while inverseC[-1] == 0: # comparison_operator=Eq, evolve_state (-> +1), index, literal=Num
             inverseC.pop() # method_call=pop
         return inverseC
     def __str__(self): # function_definition

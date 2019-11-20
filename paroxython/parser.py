@@ -12,19 +12,27 @@ from flatten import flatten
 class Parser:
 
     ref_path = Path("paroxython/ref.md")
-
-    def __init__(self):
-        text = Parser.ref_path.read_text()
-        rex = r"""(?msx)
+    find_all_constructs = regex.compile(r"""(?msx)
             ^\#{5}\s+Construct\s+`(.+?)` # capture the label
             .+?\#{6}\s+Regex # ensure the next pattern is in the Regex section
             .+?```re\n+(.+?)\n``` # capture this pattern
-        """
+        """).findall
+    sub_negative_litterals = regex.compile(r"""(?mx)
+                    ^(.*?)/_type='UnaryOp'
+            (\n(?:.+\n)*?)\1/op/_type='USub'
+             \n(?:.+\n)*? \1/operand/n=(.+)
+        """).sub
+
+    def __init__(self):
+        text = Parser.ref_path.read_text()
         self.constructs = {}
-        for (label, pattern) in regex.findall(rex, text):
+        for (label, pattern) in Parser.find_all_constructs(text):
             if label in self.constructs:
                 raise ValueError(f"Duplicated label '{label}'!")
             self.constructs[label] = regex.compile(f"(?mx){pattern}")
+
+    def simplify_negative_litterals(self, flat_ast):
+        return Parser.sub_negative_litterals(r"\1/_type='Num'\2\1/n=-\3", flat_ast)
 
     def __call__(self, source, yield_failed_matches=False):
         try:
@@ -32,7 +40,7 @@ class Parser:
         except:
             print("Warning: unable to construct the AST")
             return {}
-        self.flat_ast = flatten(tree)
+        self.flat_ast = self.simplify_negative_litterals(flatten(tree))
         for (label, rex) in self.constructs.items():
             result = defaultdict(list)
             d = None

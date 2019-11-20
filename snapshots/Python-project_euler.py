@@ -198,7 +198,7 @@ def isprime(no): # function_definition
     elif no % 2 == 0: # binary_operator=Mod, comparison_operator=Eq, divisibility_test=2, if, literal=Num
         return False # literal=False
     sq = int(math.sqrt(no)) + 1 # assignment, binary_operator=Add, composition, function_call=int, literal=Num, method_call=sqrt
-    for i in range(3, sq, 2): # for_range_step, function_call=range, literal=Num, suggest_constant_definition, universal_quantifier (-> +3)
+    for i in range(3, sq, 2): # for_range_step=2, function_call=range, literal=Num, suggest_constant_definition, universal_quantifier (-> +3)
         if no % i == 0: # binary_operator=Mod, comparison_operator=Eq, divisibility_test, if, literal=Num
             return False # literal=False
     return True # literal=True
@@ -219,7 +219,7 @@ def solution(n): # function_definition
             return int(n) # function_call=int
         else:
             n1 = int(math.sqrt(n)) + 1 # assignment, binary_operator=Add, composition, function_call=int, literal=Num, method_call=sqrt
-            for i in range(3, n1, 2): # for_range_step, function_call=range, literal=Num, suggest_constant_definition
+            for i in range(3, n1, 2): # for_range_step=2, function_call=range, literal=Num, suggest_constant_definition
                 if n % i == 0: # binary_operator=Mod, comparison_operator=Eq, divisibility_test, if, literal=Num
                     if isprime(n / i): # binary_operator=Div, function_call=isprime, if, if_elif
                         maxNumber = n / i # assignment, binary_operator=Div
@@ -276,9 +276,9 @@ def solution(n: int) -> int: # function_definition
 # ../Python/project_euler/problem_04/sol1.py
 # ----------------------------------------------------------------------------------------
 def solution(n): # function_definition
-    for number in range(n - 1, 10000, -1): # binary_operator=Sub, find_first_element (-> +6), for_range_backwards, for_range_step, function_call=range, literal=Num, suggest_constant_definition, unary_operator=USub
+    for number in range(n - 1, 10000, -1): # binary_operator=Sub, find_first_element (-> +6), for_range_step=-1, function_call=range, literal=Num, suggest_constant_definition
         strNumber = str(number) # assignment, function_call=str
-        if strNumber == strNumber[::-1]: # comparison_operator=Eq, if, literal=Num, slice_step, unary_operator=USub
+        if strNumber == strNumber[::-1]: # comparison_operator=Eq, if, literal=Num, slice_step
             divisor = 999 # assignment, literal=Num, suggest_constant_definition
             while divisor != 99: # comparison_operator=NotEq, evolve_state (-> +3), literal=Num, suggest_constant_definition
                 if (number % divisor == 0) and (len(str(int(number / divisor))) == 3): # binary_operator=Div, binary_operator=Mod, boolean_operator=And, comparison_operator=Eq, composition, divisibility_test, function_call=int, function_call=len, function_call=str, if, literal=Num, suggest_constant_definition
@@ -290,10 +290,10 @@ def solution(n): # function_definition
 # ----------------------------------------------------------------------------------------
 def solution(n): # function_definition
     answer = 0 # assignment, literal=Num
-    for i in range(999, 99, -1):  # 3 digit nimbers range from 999 down to 100 # accumulate_elements=Assign (-> +4), for_range_backwards, for_range_step, function_call=range, literal=Num, nested_for (-> +1), suggest_constant_definition, unary_operator=USub
-        for j in range(999, 99, -1): # accumulate_elements=Assign (-> +3), for_range_backwards, for_range_step, function_call=range, literal=Num, suggest_constant_definition, unary_operator=USub
+    for i in range(999, 99, -1):  # 3 digit nimbers range from 999 down to 100 # accumulate_elements=Assign (-> +4), for_range_step=-1, function_call=range, literal=Num, nested_for (-> +1), suggest_constant_definition
+        for j in range(999, 99, -1): # accumulate_elements=Assign (-> +3), for_range_step=-1, function_call=range, literal=Num, suggest_constant_definition
             t = str(i * j) # assignment, binary_operator=Mult, function_call=str
-            if t == t[::-1] and i * j < n: # binary_operator=Mult, boolean_operator=And, comparison_operator=Eq, comparison_operator=Lt, if, literal=Num, slice_step, unary_operator=USub
+            if t == t[::-1] and i * j < n: # binary_operator=Mult, boolean_operator=And, comparison_operator=Eq, comparison_operator=Lt, if, literal=Num, slice_step
                 answer = max(answer, i * j) # assignment, binary_operator=Mult, function_call=max
     return answer
 
@@ -382,7 +382,7 @@ def isprime(n): # function_definition
         return False # literal=False
     else:
         sq = int(sqrt(n)) + 1 # assignment, binary_operator=Add, composition, function_call=int, function_call=sqrt, literal=Num
-        for i in range(3, sq, 2): # for_range_step, function_call=range, literal=Num, suggest_constant_definition
+        for i in range(3, sq, 2): # for_range_step=2, function_call=range, literal=Num, suggest_constant_definition
             if n % i == 0: # binary_operator=Mod, comparison_operator=Eq, divisibility_test, if, literal=Num
                 return False # literal=False
     return True # literal=True
@@ -569,7 +569,7 @@ def solution(): # function_definition
 # ../Python/project_euler/problem_09/sol2.py
 # ----------------------------------------------------------------------------------------
 def solution(n): # function_definition
-    product = -1 # assignment, literal=Num, unary_operator=USub
+    product = -1 # assignment, literal=Num
     d = 0 # assignment, literal=Num
     for a in range(1, n // 3): # binary_operator=FloorDiv, for_range_start, function_call=range, literal=Num, suggest_constant_definition
         b = (n * n - 2 * a * n) // (2 * n - 2 * a) # assignment, binary_operator=FloorDiv, binary_operator=Mult, binary_operator=Sub, literal=Num
@@ -606,7 +606,7 @@ def sum_of_primes(n): # function_definition
         sumOfPrimes = 2 # assignment, literal=Num
     else:
         return 0 # literal=Num
-    for i in range(3, n, 2): # accumulate_elements=AugAssign (-> +2), for_range_step, function_call=range, literal=Num, suggest_constant_definition
+    for i in range(3, n, 2): # accumulate_elements=AugAssign (-> +2), for_range_step=2, function_call=range, literal=Num, suggest_constant_definition
         if is_prime(i): # function_call=is_prime, if
             sumOfPrimes += i # augmented_assignment
     return sumOfPrimes
@@ -870,7 +870,7 @@ def solution(): # function_definition
             else:
                 number2 = 0 # assignment, literal=Num
             a[i][j] += max(number1, number2) # augmented_assignment, function_call=max, index
-    return max(a[-1]) # function_call=max, index, literal=Num, unary_operator=USub
+    return max(a[-1]) # function_call=max, index, literal=Num
 
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_19/sol1.py
@@ -1126,13 +1126,13 @@ def is_prime(k: int) -> bool: # function_definition
     elif k == 2: # comparison_operator=Eq, if, if_else, literal=Num
         return True # literal=True
     else:
-        for x in range(3, int(math.sqrt(k) + 1), 2): # binary_operator=Add, composition, for_range_step, function_call=int, function_call=range, literal=Num, method_call=sqrt, suggest_constant_definition
+        for x in range(3, int(math.sqrt(k) + 1), 2): # binary_operator=Add, composition, for_range_step=2, function_call=int, function_call=range, literal=Num, method_call=sqrt, suggest_constant_definition
             if k % x == 0: # binary_operator=Mod, comparison_operator=Eq, divisibility_test, if, literal=Num
                 return False # literal=False
     return True # literal=True
 def solution(a_limit: int, b_limit: int) -> int: # function_definition
     longest = [0, 0, 0]  # length, a, b # assignment, literal=List, literal=Num
-    for a in range((a_limit * -1) + 1, a_limit): # binary_operator=Add, binary_operator=Mult, for_range_start, function_call=range, literal=Num, nested_for (-> +1), unary_operator=USub
+    for a in range((a_limit * -1) + 1, a_limit): # binary_operator=Add, binary_operator=Mult, for_range_start, function_call=range, literal=Num, nested_for (-> +1)
         for b in range(2, b_limit): # for_range_start, function_call=range, literal=Num
             if is_prime(b): # function_call=is_prime, if
                 count = 0 # assignment, literal=Num
@@ -1243,7 +1243,7 @@ def solve(digit_len: int) -> str: # function_definition
 # ----------------------------------------------------------------------------------------
 def is_palindrome(n): # function_definition
     n = str(n) # assignment, function_call=str
-    if n == n[::-1]: # comparison_operator=Eq, if, if_else, literal=Num, slice_step, suggest_condition_return (-> +3), unary_operator=USub
+    if n == n[::-1]: # comparison_operator=Eq, if, if_else, literal=Num, slice_step, suggest_condition_return (-> +3)
         return True # literal=True
     else:
         return False # literal=False
@@ -1301,7 +1301,7 @@ def solution(): # function_definition
     total = 0 # assignment, literal=Num
     for i in range(1, 1001): # accumulate_elements=AugAssign (-> +1), for_range_start, function_call=range, literal=Num, suggest_constant_definition
         total += i ** i # augmented_assignment, binary_operator=Pow
-    return str(total)[-10:] # function_call=str, literal=Num, slice, suggest_constant_definition, unary_operator=USub
+    return str(total)[-10:] # function_call=str, literal=Num, slice, suggest_constant_definition
 
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_52/sol1.py
@@ -1338,7 +1338,7 @@ def solution(): # function_definition
 # ../Python/project_euler/problem_551/sol1.py
 # ----------------------------------------------------------------------------------------
 ks = [k for k in range(2, 20 + 1)] # assignment, binary_operator=Add, function_call=range, global_variable_definition, literal=Num
-base = [10 ** k for k in range(ks[-1] + 1)] # assignment, binary_operator=Add, binary_operator=Pow, function_call=range, global_variable_definition, index, literal=Num, unary_operator=USub
+base = [10 ** k for k in range(ks[-1] + 1)] # assignment, binary_operator=Add, binary_operator=Pow, function_call=range, global_variable_definition, index, literal=Num
 memo = {} # assignment, global_variable_definition, literal=Dict
 def next_term(a_i, k, i, n): # function_definition, recursive_function_definition (-> +34)
     ds_b = 0 # assignment, literal=Num
@@ -1353,8 +1353,8 @@ def next_term(a_i, k, i, n): # function_definition, recursive_function_definitio
     if sub_memo != None: # comparison_operator=NotEq, if, if_else, literal=None
         jumps = sub_memo.get(c) # assignment, method_call=get
         if jumps != None and len(jumps) > 0: # boolean_operator=And, comparison_operator=Gt, comparison_operator=NotEq, function_call=len, if, if_else, literal=None, literal=Num
-            max_jump = -1 # assignment, literal=Num, unary_operator=USub
-            for _k in range(len(jumps) - 1, -1, -1): # binary_operator=Sub, composition, for_range_backwards, for_range_step, function_call=len, function_call=range, literal=Num, unary_operator=USub
+            max_jump = -1 # assignment, literal=Num
+            for _k in range(len(jumps) - 1, -1, -1): # binary_operator=Sub, composition, for_range_step=-1, function_call=len, function_call=range, literal=Num
                 if jumps[_k][2] <= k and jumps[_k][1] <= max_dn: # boolean_operator=And, comparison_operator=LtE, if, index, literal=Num
                     max_jump = _k # assignment
                     break
@@ -1479,7 +1479,7 @@ def solution(): # function_definition
             else:
                 number2 = 0 # assignment, literal=Num
             a[i][j] += max(number1, number2) # augmented_assignment, function_call=max, index
-    return max(a[-1]) # function_call=max, index, literal=Num, unary_operator=USub
+    return max(a[-1]) # function_call=max, index, literal=Num
 
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_76/sol1.py
