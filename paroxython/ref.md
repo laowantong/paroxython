@@ -8,9 +8,10 @@
       - [Construct `index_arithmetic`](#construct-index_arithmetic)
       - [Construct `slice`](#construct-slice)
       - [Construct `slice_step`](#construct-slice_step)
-    - [Arithmetic operators](#arithmetic-operators)
-      - [Construct `binary_operator`](#construct-binary_operator)
+    - [Operators](#operators)
       - [Construct `unary_operator`](#construct-unary_operator)
+      - [Construct `binary_operator`](#construct-binary_operator)
+      - [Construct `conditional_expression`](#construct-conditional_expression)
     - [Boolean expressions](#boolean-expressions)
       - [Construct `boolean_operator`](#construct-boolean_operator)
       - [Construct `comparison_operator`](#construct-comparison_operator)
@@ -241,32 +242,7 @@ slice_step: 3
 
 --------------------------------------------------------------------------------
 
-### Arithmetic operators
-
---------------------------------------------------------------------------------
-
-##### Construct `binary_operator`
-
-###### Regex
-
-```re
-          ^(.*?)/_type='BinOp'
-\n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
-\n(?:\1.+\n)*?\1/op/_type='(?P<SUFFIX>.+)'
-```
-
-###### Example
-
-```python
-1   2**32768 - 1
-```
-
-###### Matches
-
-```markdown
-binary_operator=Pow: 1
-binary_operator=Sub: 1
-```
+### Operators
 
 --------------------------------------------------------------------------------
 
@@ -295,6 +271,54 @@ binary_operator=Sub: 1
 ```markdown
 unary_operator=USub: 1
 unary_operator=Not: 2
+```
+
+--------------------------------------------------------------------------------
+
+##### Construct `binary_operator`
+
+###### Regex
+
+```re
+          ^(.*?)/_type='BinOp'
+\n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
+\n(?:\1.+\n)*?\1/op/_type='(?P<SUFFIX>.+)'
+```
+
+###### Example
+
+```python
+1   2**32768 - 1
+```
+
+###### Matches
+
+```markdown
+binary_operator=Pow: 1
+binary_operator=Sub: 1
+```
+
+--------------------------------------------------------------------------------
+
+##### Construct `conditional_expression`
+
+###### Regex
+
+```re
+          ^(.*?)/_type='IfExp'
+\n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
+```
+
+###### Example
+
+```python
+1   foo if c else bar
+```
+
+###### Matches
+
+```markdown
+conditional_expression: 1
 ```
 
 --------------------------------------------------------------------------------
