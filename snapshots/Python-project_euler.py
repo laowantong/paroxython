@@ -178,8 +178,8 @@ def solution(n): # function_definition
     a = [0, 1] # assignment, literal=List, literal=Num
     i = 0 # assignment, literal=Num
     while a[i] <= n: # comparison_operator=LtE, index
-        a.append(a[i] + a[i + 1]) # binary_operator=Add, index, literal=Num, method_call=append
-        if a[i + 2] > n: # binary_operator=Add, comparison_operator=Gt, if, index, literal=Num
+        a.append(a[i] + a[i + 1]) # binary_operator=Add, index, index_arithmetic, literal=Num, method_call=append
+        if a[i + 2] > n: # binary_operator=Add, comparison_operator=Gt, if, index, index_arithmetic, literal=Num
             break
         i += 1 # augmented_assignment, literal=Num
     sum = 0 # assignment, literal=Num
@@ -422,7 +422,7 @@ def solution(n): # function_definition
             num += 1 # augmented_assignment, literal=Num
         else:
             num += 1 # augmented_assignment, literal=Num
-    return primes[len(primes) - 1] # binary_operator=Sub, function_call=len, index, literal=Num
+    return primes[len(primes) - 1] # binary_operator=Sub, function_call=len, index, index_arithmetic, literal=Num
 
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_07/sol3.py
@@ -471,7 +471,7 @@ def solution(n): # function_definition
     for i in range(len(n) - 12): # accumulate_elements=AugAssign (-> +3), binary_operator=Sub, composition, for_range_stop, function_call=len, function_call=range, literal=Num, nested_for (-> +2), suggest_constant_definition
         product = 1 # assignment, literal=Num
         for j in range(13): # accumulate_elements=AugAssign (-> +1), for_range_stop, function_call=range, literal=Num, suggest_constant_definition
-            product *= int(n[i + j]) # augmented_assignment, binary_operator=Add, function_call=int, index
+            product *= int(n[i + j]) # augmented_assignment, binary_operator=Add, function_call=int, index, index_arithmetic
         if product > LargestProduct: # comparison_operator=Gt, if
             LargestProduct = product # assignment
     return LargestProduct
@@ -640,21 +640,21 @@ def largest_product(grid): # function_definition
     rlDiagProduct = 0 # assignment, literal=Num
     for i in range(nColumns): # for_range_stop, function_call=range, nested_for (-> +1)
         for j in range(nRows - 3): # binary_operator=Sub, for_range_stop, function_call=range, literal=Num, suggest_constant_definition
-            vertProduct = grid[j][i] * grid[j + 1][i] * grid[j + 2][i] * grid[j + 3][i] # assignment, binary_operator=Add, binary_operator=Mult, index, literal=Num, suggest_constant_definition
-            horzProduct = grid[i][j] * grid[i][j + 1] * grid[i][j + 2] * grid[i][j + 3] # assignment, binary_operator=Add, binary_operator=Mult, index, literal=Num, suggest_constant_definition
+            vertProduct = grid[j][i] * grid[j + 1][i] * grid[j + 2][i] * grid[j + 3][i] # assignment, binary_operator=Add, binary_operator=Mult, index, index_arithmetic, literal=Num, suggest_constant_definition
+            horzProduct = grid[i][j] * grid[i][j + 1] * grid[i][j + 2] * grid[i][j + 3] # assignment, binary_operator=Add, binary_operator=Mult, index, index_arithmetic, literal=Num, suggest_constant_definition
             if i < nColumns - 3: # binary_operator=Sub, comparison_operator=Lt, if, literal=Num, suggest_constant_definition
                 lrDiagProduct = ( # assignment
                 grid[i][j] # binary_operator=Mult, index
-                * grid[i + 1][j + 1] # binary_operator=Add, index, literal=Num
-                * grid[i + 2][j + 2] # binary_operator=Add, binary_operator=Mult, index, literal=Num
-                * grid[i + 3][j + 3] # binary_operator=Add, binary_operator=Mult, index, literal=Num, suggest_constant_definition
+                * grid[i + 1][j + 1] # binary_operator=Add, index, index_arithmetic, literal=Num
+                * grid[i + 2][j + 2] # binary_operator=Add, binary_operator=Mult, index, index_arithmetic, literal=Num
+                * grid[i + 3][j + 3] # binary_operator=Add, binary_operator=Mult, index, index_arithmetic, literal=Num, suggest_constant_definition
                 )
             if i > 2: # comparison_operator=Gt, if, literal=Num
                 rlDiagProduct = ( # assignment
                 grid[i][j] # binary_operator=Mult, index
-                * grid[i - 1][j + 1] # binary_operator=Add, binary_operator=Sub, index, literal=Num
-                * grid[i - 2][j + 2] # binary_operator=Add, binary_operator=Mult, binary_operator=Sub, index, literal=Num
-                * grid[i - 3][j + 3] # binary_operator=Add, binary_operator=Mult, binary_operator=Sub, index, literal=Num, suggest_constant_definition
+                * grid[i - 1][j + 1] # binary_operator=Add, binary_operator=Sub, index, index_arithmetic, literal=Num
+                * grid[i - 2][j + 2] # binary_operator=Add, binary_operator=Mult, binary_operator=Sub, index, index_arithmetic, literal=Num
+                * grid[i - 3][j + 3] # binary_operator=Add, binary_operator=Mult, binary_operator=Sub, index, index_arithmetic, literal=Num, suggest_constant_definition
                 )
             maxProduct = max(vertProduct, horzProduct, lrDiagProduct, rlDiagProduct) # assignment, function_call=max
             if maxProduct > largest: # comparison_operator=Gt, if
@@ -680,22 +680,22 @@ def solution(): # function_definition
         maximum = 0 # assignment, literal=Num
         for i in range(20): # for_range_stop, function_call=range, literal=Num, nested_for (-> +1), suggest_constant_definition
             for j in range(17): # for_range_stop, function_call=range, literal=Num, suggest_constant_definition
-                temp = l[i][j] * l[i][j + 1] * l[i][j + 2] * l[i][j + 3] # assignment, binary_operator=Add, binary_operator=Mult, index, literal=Num, suggest_constant_definition
+                temp = l[i][j] * l[i][j + 1] * l[i][j + 2] * l[i][j + 3] # assignment, binary_operator=Add, binary_operator=Mult, index, index_arithmetic, literal=Num, suggest_constant_definition
                 if temp > maximum: # comparison_operator=Gt, if
                     maximum = temp # assignment
         for i in range(17): # for_range_stop, function_call=range, literal=Num, nested_for (-> +1), suggest_constant_definition
             for j in range(20): # for_range_stop, function_call=range, literal=Num, suggest_constant_definition
-                temp = l[i][j] * l[i + 1][j] * l[i + 2][j] * l[i + 3][j] # assignment, binary_operator=Add, binary_operator=Mult, index, literal=Num, suggest_constant_definition
+                temp = l[i][j] * l[i + 1][j] * l[i + 2][j] * l[i + 3][j] # assignment, binary_operator=Add, binary_operator=Mult, index, index_arithmetic, literal=Num, suggest_constant_definition
                 if temp > maximum: # comparison_operator=Gt, if
                     maximum = temp # assignment
         for i in range(17): # for_range_stop, function_call=range, literal=Num, nested_for (-> +1), suggest_constant_definition
             for j in range(17): # for_range_stop, function_call=range, literal=Num, suggest_constant_definition
-                temp = l[i][j] * l[i + 1][j + 1] * l[i + 2][j + 2] * l[i + 3][j + 3] # assignment, binary_operator=Add, binary_operator=Mult, index, literal=Num, suggest_constant_definition
+                temp = l[i][j] * l[i + 1][j + 1] * l[i + 2][j + 2] * l[i + 3][j + 3] # assignment, binary_operator=Add, binary_operator=Mult, index, index_arithmetic, literal=Num, suggest_constant_definition
                 if temp > maximum: # comparison_operator=Gt, if
                     maximum = temp # assignment
         for i in range(17): # for_range_stop, function_call=range, literal=Num, nested_for (-> +1), suggest_constant_definition
             for j in range(3, 20): # for_range_start, function_call=range, literal=Num, suggest_constant_definition
-                temp = l[i][j] * l[i + 1][j - 1] * l[i + 2][j - 2] * l[i + 3][j - 3] # assignment, binary_operator=Add, binary_operator=Mult, binary_operator=Sub, index, literal=Num, suggest_constant_definition
+                temp = l[i][j] * l[i + 1][j - 1] * l[i + 2][j - 2] * l[i + 3][j - 3] # assignment, binary_operator=Add, binary_operator=Mult, binary_operator=Sub, index, index_arithmetic, literal=Num, suggest_constant_definition
                 if temp > maximum: # comparison_operator=Gt, if
                     maximum = temp # assignment
         return maximum
@@ -817,16 +817,16 @@ def solution(n): # function_definition
     for i in range(1, n + 1): # accumulate_elements=AugAssign (-> +7), binary_operator=Add, for_range_start, function_call=range, literal=Num
         if i < 1000: # comparison_operator=Lt, if, if_else, literal=Num, suggest_constant_definition
             if i >= 100: # comparison_operator=GtE, if, literal=Num, suggest_constant_definition
-                count += ones_counts[i // 100] + 7 # augmented_assignment, binary_operator=Add, binary_operator=FloorDiv, index, literal=Num, suggest_constant_definition
+                count += ones_counts[i // 100] + 7 # augmented_assignment, binary_operator=Add, binary_operator=FloorDiv, index, index_arithmetic, literal=Num, suggest_constant_definition
                 if i % 100 != 0: # binary_operator=Mod, comparison_operator=NotEq, divisibility_test=100, if, literal=Num, suggest_constant_definition
                     count += 3 # augmented_assignment, literal=Num, suggest_constant_definition
             if 0 < i % 100 < 20: # binary_operator=Mod, comparison_operator=Lt, if, if_else, literal=Num, suggest_constant_definition
-                count += ones_counts[i % 100] # augmented_assignment, binary_operator=Mod, index, literal=Num, suggest_constant_definition
+                count += ones_counts[i % 100] # augmented_assignment, binary_operator=Mod, index, index_arithmetic, literal=Num, suggest_constant_definition
             else:
-                count += ones_counts[i % 10] # augmented_assignment, binary_operator=Mod, index, literal=Num, suggest_constant_definition
-                count += tens_counts[(i % 100 - i % 10) // 10] # augmented_assignment, binary_operator=FloorDiv, binary_operator=Mod, binary_operator=Sub, index, literal=Num, suggest_constant_definition
+                count += ones_counts[i % 10] # augmented_assignment, binary_operator=Mod, index, index_arithmetic, literal=Num, suggest_constant_definition
+                count += tens_counts[(i % 100 - i % 10) // 10] # augmented_assignment, binary_operator=FloorDiv, binary_operator=Mod, binary_operator=Sub, index, index_arithmetic, literal=Num, suggest_constant_definition
         else:
-            count += ones_counts[i // 1000] + 8 # augmented_assignment, binary_operator=Add, binary_operator=FloorDiv, index, literal=Num, suggest_constant_definition
+            count += ones_counts[i // 1000] + 8 # augmented_assignment, binary_operator=Add, binary_operator=FloorDiv, index, index_arithmetic, literal=Num, suggest_constant_definition
     return count
 
 # ----------------------------------------------------------------------------------------
@@ -841,12 +841,12 @@ def solution(): # function_definition
     a = [[int(y) for y in x.rstrip("\r\n").split(" ")] for x in triangle] # assignment, function_call=int, literal=Str, method_call=rstrip, method_call=split, method_chaining
     for i in range(1, len(a)): # composition, for_range_start, function_call=len, function_call=range, literal=Num, nested_for (-> +1)
         for j in range(len(a[i])): # composition, for_indexes, for_range_stop, function_call=len, function_call=range, index
-            if j != len(a[i - 1]): # binary_operator=Sub, comparison_operator=NotEq, function_call=len, if, if_else, index, literal=Num, suggest_conditional_expression (-> +3)
-                number1 = a[i - 1][j] # assignment, binary_operator=Sub, index, literal=Num
+            if j != len(a[i - 1]): # binary_operator=Sub, comparison_operator=NotEq, function_call=len, if, if_else, index, index_arithmetic, literal=Num, suggest_conditional_expression (-> +3)
+                number1 = a[i - 1][j] # assignment, binary_operator=Sub, index, index_arithmetic, literal=Num
             else:
                 number1 = 0 # assignment, literal=Num
             if j > 0: # comparison_operator=Gt, if, if_else, literal=Num, suggest_conditional_expression (-> +3)
-                number2 = a[i - 1][j - 1] # assignment, binary_operator=Sub, index, literal=Num
+                number2 = a[i - 1][j - 1] # assignment, binary_operator=Sub, index, index_arithmetic, literal=Num
             else:
                 number2 = 0 # assignment, literal=Num
             a[i][j] += max(number1, number2) # augmented_assignment, function_call=max, index
@@ -864,16 +864,16 @@ def solution(): # function_definition
     while year < 2001: # comparison_operator=Lt, evolve_state (-> +14), literal=Num, suggest_constant_definition
         day += 7 # augmented_assignment, literal=Num, suggest_constant_definition
         if (year % 4 == 0 and not year % 100 == 0) or (year % 400 == 0): # binary_operator=Mod, boolean_operator=And, boolean_operator=Or, comparison_operator=Eq, divisibility_test=100, divisibility_test=4, divisibility_test=400, if, if_elif, literal=Num, suggest_constant_definition, unary_operator=Not
-            if day > days_per_month[month - 1] and month != 2: # binary_operator=Sub, boolean_operator=And, comparison_operator=Gt, comparison_operator=NotEq, if, if_elif, index, literal=Num
+            if day > days_per_month[month - 1] and month != 2: # binary_operator=Sub, boolean_operator=And, comparison_operator=Gt, comparison_operator=NotEq, if, if_elif, index, index_arithmetic, literal=Num
                 month += 1 # augmented_assignment, literal=Num
-                day = day - days_per_month[month - 2] # assignment, binary_operator=Sub, index, literal=Num, suggest_augmented_assignment
+                day = day - days_per_month[month - 2] # assignment, binary_operator=Sub, index, index_arithmetic, literal=Num, suggest_augmented_assignment
             elif day > 29 and month == 2: # boolean_operator=And, comparison_operator=Eq, comparison_operator=Gt, if, literal=Num, suggest_constant_definition
                 month += 1 # augmented_assignment, literal=Num
                 day = day - 29 # assignment, binary_operator=Sub, literal=Num, suggest_augmented_assignment, suggest_constant_definition
         else:
-            if day > days_per_month[month - 1]: # binary_operator=Sub, comparison_operator=Gt, if, index, literal=Num
+            if day > days_per_month[month - 1]: # binary_operator=Sub, comparison_operator=Gt, if, index, index_arithmetic, literal=Num
                 month += 1 # augmented_assignment, literal=Num
-                day = day - days_per_month[month - 2] # assignment, binary_operator=Sub, index, literal=Num, suggest_augmented_assignment
+                day = day - days_per_month[month - 2] # assignment, binary_operator=Sub, index, index_arithmetic, literal=Num, suggest_augmented_assignment
         if month > 12: # comparison_operator=Gt, if, literal=Num, suggest_constant_definition
             year += 1 # augmented_assignment, literal=Num
             month = 1 # assignment, literal=Num
@@ -991,9 +991,9 @@ def solution(): # function_definition
 def solution(limit=28123): # function_definition, literal=Num
     sumDivs = [1] * (limit + 1) # assignment, binary_operator=Add, binary_operator=Mult, literal=List, literal=Num
     for i in range(2, int(limit ** 0.5) + 1): # accumulate_elements=AugAssign (-> +3), binary_operator=Add, binary_operator=Pow, composition, for_range_start, function_call=int, function_call=range, literal=Num, nested_for (-> +2), suggest_constant_definition
-        sumDivs[i * i] += i # augmented_assignment, binary_operator=Mult, index
+        sumDivs[i * i] += i # augmented_assignment, binary_operator=Mult, index, index_arithmetic
         for k in range(i + 1, limit // i + 1): # accumulate_elements=AugAssign (-> +1), binary_operator=Add, binary_operator=FloorDiv, for_range_start, function_call=range, literal=Num
-            sumDivs[k * i] += k + i # augmented_assignment, binary_operator=Add, binary_operator=Mult, index
+            sumDivs[k * i] += k + i # augmented_assignment, binary_operator=Add, binary_operator=Mult, index, index_arithmetic
     abundants = set() # assignment, function_call=set
     res = 0 # assignment, literal=Num
     for n in range(1, limit + 1): # accumulate_elements=AugAssign (-> +4), binary_operator=Add, for_range_start, function_call=range, literal=Num
@@ -1030,7 +1030,7 @@ def solution(n): # function_definition
                 c2 += 1 # augmented_assignment, literal=Num
             else:
                 break
-        semidivisible.append(fib(l[0], l[1], c2 + 1)[int(l[2]) - 1]) # binary_operator=Add, binary_operator=Sub, composition, function_call=fib, function_call=int, index, literal=Num, method_call=append
+        semidivisible.append(fib(l[0], l[1], c2 + 1)[int(l[2]) - 1]) # binary_operator=Add, binary_operator=Sub, composition, function_call=fib, function_call=int, index, index_arithmetic, literal=Num, method_call=append
     return semidivisible
 
 # ----------------------------------------------------------------------------------------
@@ -1052,7 +1052,7 @@ def fibonacci(n): # function_definition
     else:
         sequence = [0, 1] # assignment, literal=List, literal=Num
         for i in range(2, n + 1): # binary_operator=Add, for_range_start, function_call=range, literal=Num
-            sequence.append(sequence[i - 1] + sequence[i - 2]) # binary_operator=Add, binary_operator=Sub, index, literal=Num, method_call=append
+            sequence.append(sequence[i - 1] + sequence[i - 2]) # binary_operator=Add, binary_operator=Sub, index, index_arithmetic, literal=Num, method_call=append
         return sequence[n] # index
 def fibonacci_digits_index(n): # function_definition
     digits = 0 # assignment, literal=Num
@@ -1450,12 +1450,12 @@ def solution(): # function_definition
     a = list(map(lambda x: list(map(lambda y: int(y), x)), a)) # assignment, composition, function_call=int, function_call=list, function_call=map
     for i in range(1, len(a)): # composition, for_range_start, function_call=len, function_call=range, literal=Num, nested_for (-> +1)
         for j in range(len(a[i])): # composition, for_indexes, for_range_stop, function_call=len, function_call=range, index
-            if j != len(a[i - 1]): # binary_operator=Sub, comparison_operator=NotEq, function_call=len, if, if_else, index, literal=Num, suggest_conditional_expression (-> +3)
-                number1 = a[i - 1][j] # assignment, binary_operator=Sub, index, literal=Num
+            if j != len(a[i - 1]): # binary_operator=Sub, comparison_operator=NotEq, function_call=len, if, if_else, index, index_arithmetic, literal=Num, suggest_conditional_expression (-> +3)
+                number1 = a[i - 1][j] # assignment, binary_operator=Sub, index, index_arithmetic, literal=Num
             else:
                 number1 = 0 # assignment, literal=Num
             if j > 0: # comparison_operator=Gt, if, if_else, literal=Num, suggest_conditional_expression (-> +3)
-                number2 = a[i - 1][j - 1] # assignment, binary_operator=Sub, index, literal=Num
+                number2 = a[i - 1][j - 1] # assignment, binary_operator=Sub, index, index_arithmetic, literal=Num
             else:
                 number2 = 0 # assignment, literal=Num
             a[i][j] += max(number1, number2) # augmented_assignment, function_call=max, index
@@ -1470,10 +1470,10 @@ def partition(m): # function_definition
         memo[i][0] = 1 # assignment, index, literal=Num
     for n in range(m + 1): # accumulate_elements=AugAssign (-> +4), binary_operator=Add, for_range_stop, function_call=range, literal=Num, nested_for (-> +1)
         for k in range(1, m): # accumulate_elements=AugAssign (-> +3), for_range_start, function_call=range, literal=Num
-            memo[n][k] += memo[n][k - 1] # augmented_assignment, binary_operator=Sub, index, literal=Num
+            memo[n][k] += memo[n][k - 1] # augmented_assignment, binary_operator=Sub, index, index_arithmetic, literal=Num
             if n > k: # comparison_operator=Gt, if
-                memo[n][k] += memo[n - k - 1][k] # augmented_assignment, binary_operator=Sub, index, literal=Num
-    return memo[m][m - 1] - 1 # binary_operator=Sub, index, literal=Num
+                memo[n][k] += memo[n - k - 1][k] # augmented_assignment, binary_operator=Sub, index, index_arithmetic, literal=Num
+    return memo[m][m - 1] - 1 # binary_operator=Sub, index, index_arithmetic, literal=Num
 
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_99/sol1.py

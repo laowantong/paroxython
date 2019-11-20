@@ -5,6 +5,7 @@
       - [Construct `literal`](#construct-literal)
     - [Subscripts](#subscripts)
       - [Construct `index`](#construct-index)
+      - [Construct `index_arithmetic`](#construct-index_arithmetic)
       - [Construct `slice`](#construct-slice)
       - [Construct `slice_step`](#construct-slice_step)
     - [Arithmetic operators](#arithmetic-operators)
@@ -154,6 +155,32 @@ literal=None: 9
 
 ```markdown
 index: 1, 2
+```
+
+--------------------------------------------------------------------------------
+
+##### Construct `index_arithmetic`
+
+###### Regex
+
+```re
+          ^(.*?)/_type='Subscript'
+\n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
+\n(?:\1.+\n)*?\1/slice/_type='Index'
+\n(?:\1.+\n)*?\1/slice/value/_type='BinOp'
+```
+
+###### Example
+
+```python
+1   a[i + j]
+2   a[i]
+```
+
+###### Matches
+
+```markdown
+index_arithmetic: 1
 ```
 
 --------------------------------------------------------------------------------

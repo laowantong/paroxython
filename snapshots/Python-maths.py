@@ -288,7 +288,7 @@ def binomial_coefficient(n, r): # function_definition
     for i in range(1, n + 1): # binary_operator=Add, for_range_start, function_call=range, literal=Num
         j = min(i, r) # assignment, function_call=min
         while j > 0: # comparison_operator=Gt, evolve_state (-> +2), literal=Num
-            C[j] += C[j - 1] # augmented_assignment, binary_operator=Sub, index, literal=Num
+            C[j] += C[j - 1] # augmented_assignment, binary_operator=Sub, index, index_arithmetic, literal=Num
             j -= 1 # augmented_assignment, literal=Num
     return C[r] # index
 print(binomial_coefficient(n=10, r=5)) # composition, function_call=binomial_coefficient, function_call=print, literal=Num
@@ -329,7 +329,7 @@ def explicit_euler(ode_func, y0, x0, stepsize, x_end): # function_definition
     y[0] = y0 # assignment, index, literal=Num
     x = x0 # assignment
     for k in range(N): # accumulate_elements=Assign (-> +1), for_range_stop, function_call=range
-        y[k + 1] = y[k] + stepsize * ode_func(x, y[k]) # assignment, binary_operator=Add, binary_operator=Mult, function_call=ode_func, index, literal=Num
+        y[k + 1] = y[k] + stepsize * ode_func(x, y[k]) # assignment, binary_operator=Add, binary_operator=Mult, function_call=ode_func, index, index_arithmetic, literal=Num
         x += stepsize # augmented_assignment
     return y
 
@@ -1032,12 +1032,12 @@ class FFT:
             current_root = 1 # assignment, literal=Num
             for j in range(self.C_max_length // (next_ncol * 2)): # binary_operator=FloorDiv, binary_operator=Mult, for_range_stop, function_call=range, literal=Num, nested_for (-> +1)
                 for i in range(next_ncol): # for_range_stop, function_call=range
-                    new_dft[i].append(dft[i][j] + current_root * dft[i + next_ncol][j]) # binary_operator=Add, binary_operator=Mult, index, method_call=append
+                    new_dft[i].append(dft[i][j] + current_root * dft[i + next_ncol][j]) # binary_operator=Add, binary_operator=Mult, index, index_arithmetic, method_call=append
                 current_root *= root # augmented_assignment
             current_root = 1 # assignment, literal=Num
             for j in range(self.C_max_length // (next_ncol * 2)): # binary_operator=FloorDiv, binary_operator=Mult, for_range_stop, function_call=range, literal=Num, nested_for (-> +1)
                 for i in range(next_ncol): # for_range_stop, function_call=range
-                    new_dft[i].append(dft[i][j] - current_root * dft[i + next_ncol][j]) # binary_operator=Add, binary_operator=Mult, binary_operator=Sub, index, method_call=append
+                    new_dft[i].append(dft[i][j] - current_root * dft[i + next_ncol][j]) # binary_operator=Add, binary_operator=Mult, binary_operator=Sub, index, index_arithmetic, method_call=append
                 current_root *= root # augmented_assignment
             dft = new_dft # assignment
             next_ncol = next_ncol // 2 # assignment, binary_operator=FloorDiv, literal=Num, suggest_augmented_assignment
@@ -1060,14 +1060,14 @@ class FFT:
                     new_inverseC[i].append( # index, method_call=append
                     ( # binary_operator=Div
                     inverseC[i][j] # binary_operator=Add, index
-                    + inverseC[i][j + self.C_max_length // next_ncol] # binary_operator=Add, binary_operator=FloorDiv, index
+                    + inverseC[i][j + self.C_max_length // next_ncol] # binary_operator=Add, binary_operator=FloorDiv, index, index_arithmetic
                     )
                     / 2 # literal=Num
                     )
-                    new_inverseC[i + next_ncol // 2].append( # binary_operator=Add, binary_operator=FloorDiv, index, literal=Num, method_call=append
+                    new_inverseC[i + next_ncol // 2].append( # binary_operator=Add, binary_operator=FloorDiv, index, index_arithmetic, literal=Num, method_call=append
                     ( # binary_operator=Div
                     inverseC[i][j] # binary_operator=Sub, index
-                    - inverseC[i][j + self.C_max_length // next_ncol] # binary_operator=Add, binary_operator=FloorDiv, index
+                    - inverseC[i][j + self.C_max_length // next_ncol] # binary_operator=Add, binary_operator=FloorDiv, index, index_arithmetic
                     )
                     / (2 * current_root) # binary_operator=Mult, literal=Num
                     )
@@ -1104,7 +1104,7 @@ def runge_kutta(f, y0, x0, h, x_end): # function_definition
         k2 = f(x + 0.5 * h, y[k] + 0.5 * h * k1) # assignment, binary_operator=Add, binary_operator=Mult, function_call=f, index, literal=Num, suggest_constant_definition
         k3 = f(x + 0.5 * h, y[k] + 0.5 * h * k2) # assignment, binary_operator=Add, binary_operator=Mult, function_call=f, index, literal=Num, suggest_constant_definition
         k4 = f(x + h, y[k] + h * k3) # assignment, binary_operator=Add, binary_operator=Mult, function_call=f, index
-        y[k + 1] = y[k] + (1 / 6) * h * (k1 + 2 * k2 + 2 * k3 + k4) # assignment, binary_operator=Add, binary_operator=Div, binary_operator=Mult, index, literal=Num, suggest_constant_definition
+        y[k + 1] = y[k] + (1 / 6) * h * (k1 + 2 * k2 + 2 * k3 + k4) # assignment, binary_operator=Add, binary_operator=Div, binary_operator=Mult, index, index_arithmetic, literal=Num, suggest_constant_definition
         x += h # augmented_assignment
     return y
 
@@ -1137,7 +1137,7 @@ def sieve(n): # function_definition
             if t < low: # comparison_operator=Lt, if
                 t += each # augmented_assignment
             for j in range(t, high + 1, each): # binary_operator=Add, for_range_step, function_call=range, literal=Num
-                temp[j - low] = False # assignment, binary_operator=Sub, index, literal=False
+                temp[j - low] = False # assignment, binary_operator=Sub, index, index_arithmetic, literal=False
         for j in range(len(temp)): # composition, for_indexes, for_range_stop, function_call=len, function_call=range
             if temp[j] is True: # comparison_operator=Is, if, index, literal=True
                 prime.append(j + low) # binary_operator=Add, method_call=append
