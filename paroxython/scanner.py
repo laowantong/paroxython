@@ -5,14 +5,12 @@ from pathlib import Path
 sys.path[0:0] = [str(Path(__file__).parent)]
 
 from parser import Parser
+from minimizer import minimize
 
 SEPARATOR = "-" * 88
 
 match_exclude_file = regex.compile(r"__init__\.py|setup\.py|.*[-_]tests?\.py").match
-sub_docstrings = regex.compile(r'(?ms)^ *r?""".+?""" *\n').sub
-sub_comment_lines = regex.compile(r"(?m)^ *#.*\n").sub
 sub_main = regex.compile(r"""(?ms)^if __name__ *== *[\"']__main__[\"'] *:.+""").sub
-sub_blank_lines = regex.compile(r"( *\n)( *\n)+").sub
 
 
 def scan(path, sloc_only=True):
@@ -23,10 +21,8 @@ def scan(path, sloc_only=True):
             continue
         source = path.read_text()
         if sloc_only:
-            source = sub_docstrings("", source)
-            source = sub_comment_lines("", source)
+            source = minimize(source)
             source = sub_main("", source)
-            source = sub_blank_lines("\n", source.strip())
         yield f"# {SEPARATOR}\n# {path}\n# {SEPARATOR}"
         print(path)
         sloc = source.splitlines()

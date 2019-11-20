@@ -19,116 +19,116 @@ def test_n31(): # function_definition
     assert n31(4) == ([4, 2, 1], 3) # comparison_operator=Eq, function_call=n31, literal=List, literal=Num, literal=Tuple, suggest_constant_definition
     assert n31(11) == ([11, 34, 17, 52, 26, 13, 40, 20, 10, 5, 16, 8, 4, 2, 1], 15) # comparison_operator=Eq, function_call=n31, literal=List, literal=Num, literal=Tuple, suggest_constant_definition
     assert n31(31) == ( # function_call=n31, literal=Num, suggest_constant_definition
-        [ # comparison_operator=Eq, literal=List, literal=Tuple
-            31, # literal=Num, suggest_constant_definition
-            94, # literal=Num, suggest_constant_definition
-            47, # literal=Num, suggest_constant_definition
-            142, # literal=Num, suggest_constant_definition
-            71, # literal=Num, suggest_constant_definition
-            214, # literal=Num, suggest_constant_definition
-            107, # literal=Num, suggest_constant_definition
-            322, # literal=Num, suggest_constant_definition
-            161, # literal=Num, suggest_constant_definition
-            484, # literal=Num, suggest_constant_definition
-            242, # literal=Num, suggest_constant_definition
-            121, # literal=Num, suggest_constant_definition
-            364, # literal=Num, suggest_constant_definition
-            182, # literal=Num, suggest_constant_definition
-            91, # literal=Num, suggest_constant_definition
-            274, # literal=Num, suggest_constant_definition
-            137, # literal=Num, suggest_constant_definition
-            412, # literal=Num, suggest_constant_definition
-            206, # literal=Num, suggest_constant_definition
-            103, # literal=Num, suggest_constant_definition
-            310, # literal=Num, suggest_constant_definition
-            155, # literal=Num, suggest_constant_definition
-            466, # literal=Num, suggest_constant_definition
-            233, # literal=Num, suggest_constant_definition
-            700, # literal=Num, suggest_constant_definition
-            350, # literal=Num, suggest_constant_definition
-            175, # literal=Num, suggest_constant_definition
-            526, # literal=Num, suggest_constant_definition
-            263, # literal=Num, suggest_constant_definition
-            790, # literal=Num, suggest_constant_definition
-            395, # literal=Num, suggest_constant_definition
-            1186, # literal=Num, suggest_constant_definition
-            593, # literal=Num, suggest_constant_definition
-            1780, # literal=Num, suggest_constant_definition
-            890, # literal=Num, suggest_constant_definition
-            445, # literal=Num, suggest_constant_definition
-            1336, # literal=Num, suggest_constant_definition
-            668, # literal=Num, suggest_constant_definition
-            334, # literal=Num, suggest_constant_definition
-            167, # literal=Num, suggest_constant_definition
-            502, # literal=Num, suggest_constant_definition
-            251, # literal=Num, suggest_constant_definition
-            754, # literal=Num, suggest_constant_definition
-            377, # literal=Num, suggest_constant_definition
-            1132, # literal=Num, suggest_constant_definition
-            566, # literal=Num, suggest_constant_definition
-            283, # literal=Num, suggest_constant_definition
-            850, # literal=Num, suggest_constant_definition
-            425, # literal=Num, suggest_constant_definition
-            1276, # literal=Num, suggest_constant_definition
-            638, # literal=Num, suggest_constant_definition
-            319, # literal=Num, suggest_constant_definition
-            958, # literal=Num, suggest_constant_definition
-            479, # literal=Num, suggest_constant_definition
-            1438, # literal=Num, suggest_constant_definition
-            719, # literal=Num, suggest_constant_definition
-            2158, # literal=Num, suggest_constant_definition
-            1079, # literal=Num, suggest_constant_definition
-            3238, # literal=Num, suggest_constant_definition
-            1619, # literal=Num, suggest_constant_definition
-            4858, # literal=Num, suggest_constant_definition
-            2429, # literal=Num, suggest_constant_definition
-            7288, # literal=Num, suggest_constant_definition
-            3644, # literal=Num, suggest_constant_definition
-            1822, # literal=Num, suggest_constant_definition
-            911, # literal=Num, suggest_constant_definition
-            2734, # literal=Num, suggest_constant_definition
-            1367, # literal=Num, suggest_constant_definition
-            4102, # literal=Num, suggest_constant_definition
-            2051, # literal=Num, suggest_constant_definition
-            6154, # literal=Num, suggest_constant_definition
-            3077, # literal=Num, suggest_constant_definition
-            9232, # literal=Num, suggest_constant_definition
-            4616, # literal=Num, suggest_constant_definition
-            2308, # literal=Num, suggest_constant_definition
-            1154, # literal=Num, suggest_constant_definition
-            577, # literal=Num, suggest_constant_definition
-            1732, # literal=Num, suggest_constant_definition
-            866, # literal=Num, suggest_constant_definition
-            433, # literal=Num, suggest_constant_definition
-            1300, # literal=Num, suggest_constant_definition
-            650, # literal=Num, suggest_constant_definition
-            325, # literal=Num, suggest_constant_definition
-            976, # literal=Num, suggest_constant_definition
-            488, # literal=Num, suggest_constant_definition
-            244, # literal=Num, suggest_constant_definition
-            122, # literal=Num, suggest_constant_definition
-            61, # literal=Num, suggest_constant_definition
-            184, # literal=Num, suggest_constant_definition
-            92, # literal=Num, suggest_constant_definition
-            46, # literal=Num, suggest_constant_definition
-            23, # literal=Num, suggest_constant_definition
-            70, # literal=Num, suggest_constant_definition
-            35, # literal=Num, suggest_constant_definition
-            106, # literal=Num, suggest_constant_definition
-            53, # literal=Num, suggest_constant_definition
-            160, # literal=Num, suggest_constant_definition
-            80, # literal=Num, suggest_constant_definition
-            40, # literal=Num, suggest_constant_definition
-            20, # literal=Num, suggest_constant_definition
-            10, # literal=Num, suggest_constant_definition
-            5, # literal=Num, suggest_constant_definition
-            16, # literal=Num, suggest_constant_definition
-            8, # literal=Num, suggest_constant_definition
-            4, # literal=Num, suggest_constant_definition
-            2, # literal=Num
-            1, # literal=Num
-        ],
-        107, # literal=Num, suggest_constant_definition
+    [ # comparison_operator=Eq, literal=List, literal=Tuple
+    31, # literal=Num, suggest_constant_definition
+    94, # literal=Num, suggest_constant_definition
+    47, # literal=Num, suggest_constant_definition
+    142, # literal=Num, suggest_constant_definition
+    71, # literal=Num, suggest_constant_definition
+    214, # literal=Num, suggest_constant_definition
+    107, # literal=Num, suggest_constant_definition
+    322, # literal=Num, suggest_constant_definition
+    161, # literal=Num, suggest_constant_definition
+    484, # literal=Num, suggest_constant_definition
+    242, # literal=Num, suggest_constant_definition
+    121, # literal=Num, suggest_constant_definition
+    364, # literal=Num, suggest_constant_definition
+    182, # literal=Num, suggest_constant_definition
+    91, # literal=Num, suggest_constant_definition
+    274, # literal=Num, suggest_constant_definition
+    137, # literal=Num, suggest_constant_definition
+    412, # literal=Num, suggest_constant_definition
+    206, # literal=Num, suggest_constant_definition
+    103, # literal=Num, suggest_constant_definition
+    310, # literal=Num, suggest_constant_definition
+    155, # literal=Num, suggest_constant_definition
+    466, # literal=Num, suggest_constant_definition
+    233, # literal=Num, suggest_constant_definition
+    700, # literal=Num, suggest_constant_definition
+    350, # literal=Num, suggest_constant_definition
+    175, # literal=Num, suggest_constant_definition
+    526, # literal=Num, suggest_constant_definition
+    263, # literal=Num, suggest_constant_definition
+    790, # literal=Num, suggest_constant_definition
+    395, # literal=Num, suggest_constant_definition
+    1186, # literal=Num, suggest_constant_definition
+    593, # literal=Num, suggest_constant_definition
+    1780, # literal=Num, suggest_constant_definition
+    890, # literal=Num, suggest_constant_definition
+    445, # literal=Num, suggest_constant_definition
+    1336, # literal=Num, suggest_constant_definition
+    668, # literal=Num, suggest_constant_definition
+    334, # literal=Num, suggest_constant_definition
+    167, # literal=Num, suggest_constant_definition
+    502, # literal=Num, suggest_constant_definition
+    251, # literal=Num, suggest_constant_definition
+    754, # literal=Num, suggest_constant_definition
+    377, # literal=Num, suggest_constant_definition
+    1132, # literal=Num, suggest_constant_definition
+    566, # literal=Num, suggest_constant_definition
+    283, # literal=Num, suggest_constant_definition
+    850, # literal=Num, suggest_constant_definition
+    425, # literal=Num, suggest_constant_definition
+    1276, # literal=Num, suggest_constant_definition
+    638, # literal=Num, suggest_constant_definition
+    319, # literal=Num, suggest_constant_definition
+    958, # literal=Num, suggest_constant_definition
+    479, # literal=Num, suggest_constant_definition
+    1438, # literal=Num, suggest_constant_definition
+    719, # literal=Num, suggest_constant_definition
+    2158, # literal=Num, suggest_constant_definition
+    1079, # literal=Num, suggest_constant_definition
+    3238, # literal=Num, suggest_constant_definition
+    1619, # literal=Num, suggest_constant_definition
+    4858, # literal=Num, suggest_constant_definition
+    2429, # literal=Num, suggest_constant_definition
+    7288, # literal=Num, suggest_constant_definition
+    3644, # literal=Num, suggest_constant_definition
+    1822, # literal=Num, suggest_constant_definition
+    911, # literal=Num, suggest_constant_definition
+    2734, # literal=Num, suggest_constant_definition
+    1367, # literal=Num, suggest_constant_definition
+    4102, # literal=Num, suggest_constant_definition
+    2051, # literal=Num, suggest_constant_definition
+    6154, # literal=Num, suggest_constant_definition
+    3077, # literal=Num, suggest_constant_definition
+    9232, # literal=Num, suggest_constant_definition
+    4616, # literal=Num, suggest_constant_definition
+    2308, # literal=Num, suggest_constant_definition
+    1154, # literal=Num, suggest_constant_definition
+    577, # literal=Num, suggest_constant_definition
+    1732, # literal=Num, suggest_constant_definition
+    866, # literal=Num, suggest_constant_definition
+    433, # literal=Num, suggest_constant_definition
+    1300, # literal=Num, suggest_constant_definition
+    650, # literal=Num, suggest_constant_definition
+    325, # literal=Num, suggest_constant_definition
+    976, # literal=Num, suggest_constant_definition
+    488, # literal=Num, suggest_constant_definition
+    244, # literal=Num, suggest_constant_definition
+    122, # literal=Num, suggest_constant_definition
+    61, # literal=Num, suggest_constant_definition
+    184, # literal=Num, suggest_constant_definition
+    92, # literal=Num, suggest_constant_definition
+    46, # literal=Num, suggest_constant_definition
+    23, # literal=Num, suggest_constant_definition
+    70, # literal=Num, suggest_constant_definition
+    35, # literal=Num, suggest_constant_definition
+    106, # literal=Num, suggest_constant_definition
+    53, # literal=Num, suggest_constant_definition
+    160, # literal=Num, suggest_constant_definition
+    80, # literal=Num, suggest_constant_definition
+    40, # literal=Num, suggest_constant_definition
+    20, # literal=Num, suggest_constant_definition
+    10, # literal=Num, suggest_constant_definition
+    5, # literal=Num, suggest_constant_definition
+    16, # literal=Num, suggest_constant_definition
+    8, # literal=Num, suggest_constant_definition
+    4, # literal=Num, suggest_constant_definition
+    2, # literal=Num
+    1, # literal=Num
+    ],
+    107, # literal=Num, suggest_constant_definition
     )
 
 # ----------------------------------------------------------------------------------------
@@ -170,7 +170,7 @@ def absMin(x): # function_definition
     return j
 def main(): # function_definition
     a = [-3, -1, 2, -11] # assignment, literal=List, literal=Num, suggest_constant_definition
-    print(absMin(a))  # = -1 # composition, function_call=absMin, function_call=print
+    print(absMin(a)) # composition, function_call=absMin, function_call=print
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/average_mean.py
@@ -206,13 +206,13 @@ def main(): # function_definition
 # ../Python/maths/average_mode.py
 # ----------------------------------------------------------------------------------------
 import statistics
-def mode(input_list):  # Defining function "mode." # function_definition
+def mode(input_list): # function_definition
     check_list = input_list.copy() # assignment, method_call=copy
-    result = list()  # Empty list to store the counts of elements in input_list # assignment, function_call=list
+    result = list() # assignment, function_call=list
     for x in input_list: # accumulate_elements=Attribute (-> +2), for_each
         result.append(input_list.count(x)) # composition, method_call=append, method_call=count
         input_list.remove(x) # method_call=remove
-        y = max(result)  # Gets the maximum value in the result list. # assignment, function_call=max
+        y = max(result) # assignment, function_call=max
         return check_list[result.index(y)] # index, method_call=index
 
 # ----------------------------------------------------------------------------------------
@@ -298,7 +298,7 @@ print(binomial_coefficient(n=10, r=5)) # composition, function_call=binomial_coe
 # ----------------------------------------------------------------------------------------
 def ceil(x) -> int: # function_definition
     return (
-        x if isinstance(x, int) or x - int(x) == 0 else int(x + 1) if x > 0 else int(x) # binary_operator=Add, binary_operator=Sub, boolean_operator=Or, comparison_operator=Eq, comparison_operator=Gt, function_call=int, function_call=isinstance, literal=Num
+    x if isinstance(x, int) or x - int(x) == 0 else int(x + 1) if x > 0 else int(x) # binary_operator=Add, binary_operator=Sub, boolean_operator=Or, comparison_operator=Eq, comparison_operator=Gt, function_call=int, function_call=isinstance, literal=Num
     )
 
 # ----------------------------------------------------------------------------------------
@@ -307,7 +307,7 @@ def ceil(x) -> int: # function_definition
 def collatz_sequence(n): # function_definition
     sequence = [n] # assignment
     while n != 1: # comparison_operator=NotEq, evolve_state (-> +4), literal=Num
-        if n % 2 == 0:  # even number condition # binary_operator=Mod, comparison_operator=Eq, divisibility_test=2, if, if_else, literal=Num
+        if n % 2 == 0: # binary_operator=Mod, comparison_operator=Eq, divisibility_test=2, if, if_else, literal=Num
             n //= 2 # augmented_assignment, literal=Num
         else:
             n = 3 * n + 1 # assignment, binary_operator=Add, binary_operator=Mult, literal=Num, suggest_constant_definition
@@ -463,11 +463,9 @@ def _check_number_input(n, min_thresh, max_thresh=None):
         print("Incorrect Input: number must not be less than 0")
     except ValueTooSmallError:
         print(
-            f"Incorrect Input: input number must be > {min_thresh} for the recursive calculation"
         )
     except ValueTooLargeError:
         print(
-            f"Incorrect Input: input number must be < {max_thresh} for the recursive calculation"
         )
     return False
 @timer_decorator
@@ -490,7 +488,7 @@ def fib_formula(n):
         phi_2 = Decimal(1 - sqrt) / Decimal(2)
         for i in range(2, n):
             temp_out = ((phi_1 ** Decimal(i)) - (phi_2 ** Decimal(i))) * (
-                Decimal(sqrt) ** Decimal(-1)
+            Decimal(sqrt) ** Decimal(-1)
             )
             seq_out.append(int(temp_out))
         return seq_out
@@ -518,7 +516,7 @@ def find_max(nums): # function_definition
             max_num = x # assignment
     return max_num
 def main(): # function_definition
-    print(find_max([2, 4, 9, 7, 19, 94, 5]))  # 94 # composition, function_call=find_max, function_call=print, literal=List, literal=Num, suggest_constant_definition
+    print(find_max([2, 4, 9, 7, 19, 94, 5])) # composition, function_call=find_max, function_call=print, literal=List, literal=Num, suggest_constant_definition
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/find_max_recursion.py
@@ -526,9 +524,9 @@ def main(): # function_definition
 def find_max(nums, left, right): # function_definition, recursive_function_definition (-> +5)
     if left == right: # comparison_operator=Eq, if
         return nums[left] # index
-    mid = (left + right) >> 1  # the middle # assignment, binary_operator=Add, binary_operator=RShift, literal=Num
-    left_max = find_max(nums, left, mid)  # find max in range[left, mid] # assignment, function_call=find_max
-    right_max = find_max(nums, mid + 1, right)  # find max in range[mid + 1, right] # assignment, binary_operator=Add, function_call=find_max, literal=Num
+    mid = (left + right) >> 1 # assignment, binary_operator=Add, binary_operator=RShift, literal=Num
+    left_max = find_max(nums, left, mid) # assignment, function_call=find_max
+    right_max = find_max(nums, mid + 1, right) # assignment, binary_operator=Add, function_call=find_max, literal=Num
     return left_max if left_max >= right_max else right_max # comparison_operator=GtE
 
 # ----------------------------------------------------------------------------------------
@@ -549,9 +547,9 @@ def main(): # function_definition
 def find_min(nums, left, right): # function_definition, recursive_function_definition (-> +5)
     if left == right: # comparison_operator=Eq, if
         return nums[left] # index
-    mid = (left + right) >> 1  # the middle # assignment, binary_operator=Add, binary_operator=RShift, literal=Num
-    left_min = find_min(nums, left, mid)  # find min in range[left, mid] # assignment, function_call=find_min
-    right_min = find_min(nums, mid + 1, right)  # find min in range[mid + 1, right] # assignment, binary_operator=Add, function_call=find_min, literal=Num
+    mid = (left + right) >> 1 # assignment, binary_operator=Add, binary_operator=RShift, literal=Num
+    left_min = find_min(nums, left, mid) # assignment, function_call=find_min
+    right_min = find_min(nums, mid + 1, right) # assignment, binary_operator=Add, function_call=find_min, literal=Num
     return left_min if left_min <= right_min else right_min # comparison_operator=LtE
 
 # ----------------------------------------------------------------------------------------
@@ -559,7 +557,7 @@ def find_min(nums, left, right): # function_definition, recursive_function_defin
 # ----------------------------------------------------------------------------------------
 def floor(x) -> int: # function_definition
     return (
-        x if isinstance(x, int) or x - int(x) == 0 else int(x) if x > 0 else int(x - 1) # binary_operator=Sub, boolean_operator=Or, comparison_operator=Eq, comparison_operator=Gt, function_call=int, function_call=isinstance, literal=Num
+    x if isinstance(x, int) or x - int(x) == 0 else int(x) if x > 0 else int(x - 1) # binary_operator=Sub, boolean_operator=Or, comparison_operator=Eq, comparison_operator=Gt, function_call=int, function_call=isinstance, literal=Num
     )
 
 # ----------------------------------------------------------------------------------------
@@ -575,7 +573,7 @@ def gaussian(x, mu: float = 0.0, sigma: float = 1.0) -> int: # function_definiti
 def greatest_common_divisor(a, b): # function_definition, recursive_function_definition (-> +1)
     return b if a == 0 else greatest_common_divisor(b % a, a) # binary_operator=Mod, comparison_operator=Eq, function_call=greatest_common_divisor, literal=Num
 def gcd_by_iterative(x, y): # function_definition
-    while y:  # --> when y=0 then loop will terminate and return x as final GCD.
+    while y:
         x, y = y, x % y # assignment, binary_operator=Mod
     return x
 def main(): # function_definition
@@ -583,8 +581,7 @@ def main(): # function_definition
         nums = input("Enter two integers separated by comma (,): ").split(",") # assignment, function_call=input, literal=Str, method_call=split
         num_1 = int(nums[0]) # assignment, function_call=int, index, literal=Num
         num_2 = int(nums[1]) # assignment, function_call=int, index, literal=Num
-        print( # composition, function_call=print
-            f"greatest_common_divisor({num_1}, {num_2}) = {greatest_common_divisor(num_1, num_2)}" # function_call=greatest_common_divisor, literal=Str
+        print( # function_call=print
         )
         print(f"By iterative gcd({num_1}, {num_2}) = {gcd_by_iterative(num_1, num_2)}") # composition, function_call=gcd_by_iterative, function_call=print, literal=Str
     except (IndexError, UnboundLocalError, ValueError):
@@ -681,10 +678,10 @@ def res(x, y): # function_definition
     if 0 not in (x, y): # comparison_operator=NotIn, if, if_elif, literal=Num
         return y * math.log10(x) # binary_operator=Mult, method_call=log10
     else:
-        if x == 0:  # 0 raised to any number is 0 # comparison_operator=Eq, if, if_elif, literal=Num
+        if x == 0: # comparison_operator=Eq, if, if_elif, literal=Num
             return 0 # literal=Num
         elif y == 0: # comparison_operator=Eq, if, literal=Num
-            return 1  # any number raised to 0 is 1 # literal=Num
+            return 1 # literal=Num
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/least_common_multiple.py
@@ -698,15 +695,15 @@ def find_lcm(first_num: int, second_num: int) -> int: # function_definition
     return common_mult
 class TestLeastCommonMultiple(unittest.TestCase):
     test_inputs = [ # assignment, literal=List
-        (10, 20), # literal=Num, literal=Tuple, suggest_constant_definition
-        (13, 15), # literal=Num, literal=Tuple, suggest_constant_definition
-        (4, 31), # literal=Num, literal=Tuple, suggest_constant_definition
-        (10, 42), # literal=Num, literal=Tuple, suggest_constant_definition
-        (43, 34), # literal=Num, literal=Tuple, suggest_constant_definition
-        (5, 12), # literal=Num, literal=Tuple, suggest_constant_definition
-        (12, 25), # literal=Num, literal=Tuple, suggest_constant_definition
-        (10, 25), # literal=Num, literal=Tuple, suggest_constant_definition
-        (6, 9), # literal=Num, literal=Tuple, suggest_constant_definition
+    (10, 20), # literal=Num, literal=Tuple, suggest_constant_definition
+    (13, 15), # literal=Num, literal=Tuple, suggest_constant_definition
+    (4, 31), # literal=Num, literal=Tuple, suggest_constant_definition
+    (10, 42), # literal=Num, literal=Tuple, suggest_constant_definition
+    (43, 34), # literal=Num, literal=Tuple, suggest_constant_definition
+    (5, 12), # literal=Num, literal=Tuple, suggest_constant_definition
+    (12, 25), # literal=Num, literal=Tuple, suggest_constant_definition
+    (10, 25), # literal=Num, literal=Tuple, suggest_constant_definition
+    (6, 9), # literal=Num, literal=Tuple, suggest_constant_definition
     ]
     expected_results = [20, 195, 124, 210, 1462, 60, 300, 50, 18] # assignment, literal=List, literal=Num, suggest_constant_definition
     def test_lcm_function(self): # function_definition
@@ -731,10 +728,10 @@ def recur_luc(n): # function_definition, recursive_function_definition (-> +5)
 import timeit
 class Matrix(object):
     def __init__(self, arg): # function_definition
-        if isinstance(arg, list):  # Initialzes a matrix identical to the one provided. # function_call=isinstance, if, if_else
+        if isinstance(arg, list): # function_call=isinstance, if, if_else
             self.t = arg # assignment
             self.n = len(arg) # assignment, function_call=len
-        else:  # Initializes a square matrix of the given size and set the values to zero.
+        else:
             self.n = arg # assignment
             self.t = [[0 for _ in range(self.n)] for _ in range(self.n)] # assignment, function_call=range, literal=Num
     def __mul__(self, b): # function_definition
@@ -776,13 +773,20 @@ def matrix_exponentiation_time(): # function_definition
     setup = """ # assignment
 from random import randint
 from __main__ import fibonacci_with_matrix_exponentiation
+""" # literal=Str
+    code = "fibonacci_with_matrix_exponentiation(randint(1,70000), 1, 1)" # assignment, literal=Str
+    exec_time = timeit.timeit(setup=setup, stmt=code, number=100) # assignment, literal=Num, method_call=timeit, suggest_constant_definition
+    print("With matrix exponentiation the average execution time is ", exec_time / 100) # binary_operator=Div, function_call=print, literal=Num, literal=Str, suggest_constant_definition
+    return exec_time
+def simple_fibonacci_time(): # function_definition
+    setup = """ # assignment
 from random import randint
 from __main__ import simple_fibonacci
 """ # literal=Str
     code = "simple_fibonacci(randint(1,70000), 1, 1)" # assignment, literal=Str
     exec_time = timeit.timeit(setup=setup, stmt=code, number=100) # assignment, literal=Num, method_call=timeit, suggest_constant_definition
     print( # function_call=print
-        "Without matrix exponentiation the average execution time is ", exec_time / 100 # binary_operator=Div, literal=Num, literal=Str, suggest_constant_definition
+    "Without matrix exponentiation the average execution time is ", exec_time / 100 # binary_operator=Div, literal=Num, literal=Str, suggest_constant_definition
     )
     return exec_time
 def main(): # function_definition
@@ -824,14 +828,14 @@ import math as m
 def calc_derivative(f, a, h=0.001): # function_definition, literal=Num
     return (f(a + h) - f(a - h)) / (2 * h) # binary_operator=Add, binary_operator=Div, binary_operator=Mult, binary_operator=Sub, function_call=f, literal=Num
 def newton_raphson(f, x0=0, maxiter=100, step=0.0001, maxerror=1e-6, logsteps=False): # function_definition, literal=False, literal=Num
-    a = x0  # set the initial guess # assignment
+    a = x0 # assignment
     steps = [a] # assignment
     error = abs(f(a)) # assignment, composition, function_call=abs, function_call=f
-    f1 = lambda x: calc_derivative(f, x, h=step)  # Derivative of f(x) # assignment, function_call=calc_derivative
+    f1 = lambda x: calc_derivative(f, x, h=step) # assignment, function_call=calc_derivative
     for _ in range(maxiter): # for_range_stop, function_call=range
         if f1(a) == 0: # comparison_operator=Eq, function_call=f1, if, literal=Num
             raise ValueError("No converging solution found") # function_call=ValueError, literal=Str
-        a = a - f(a) / f1(a)  # Calculate the next estimate # assignment, binary_operator=Div, binary_operator=Sub, function_call=f, function_call=f1, suggest_augmented_assignment
+        a = a - f(a) / f1(a) # assignment, binary_operator=Div, binary_operator=Sub, function_call=f, function_call=f1, suggest_augmented_assignment
         if logsteps: # if
             steps.append(a) # method_call=append
         if error < maxerror: # comparison_operator=Lt, if
@@ -890,10 +894,10 @@ class Test(unittest.TestCase):
     def test_not_primes(self): # function_definition
         self.assertFalse(prime_check(-19), "Negative numbers are not prime.") # composition, function_call=prime_check, literal=Num, literal=Str, method_call=assertFalse, suggest_constant_definition
         self.assertFalse( # composition, method_call=assertFalse
-            prime_check(0), "Zero doesn't have any divider, primes must have two" # function_call=prime_check, literal=Num, literal=Str
+        prime_check(0), "Zero doesn't have any divider, primes must have two" # function_call=prime_check, literal=Num, literal=Str
         )
         self.assertFalse( # composition, method_call=assertFalse
-            prime_check(1), "One just have 1 divider, primes must have two." # function_call=prime_check, literal=Num, literal=Str
+        prime_check(1), "One just have 1 divider, primes must have two." # function_call=prime_check, literal=Num, literal=Str
         )
         self.assertFalse(prime_check(2 * 2)) # binary_operator=Mult, composition, function_call=prime_check, literal=Num, method_call=assertFalse
         self.assertFalse(prime_check(2 * 3)) # binary_operator=Mult, composition, function_call=prime_check, literal=Num, method_call=assertFalse, suggest_constant_definition
@@ -993,7 +997,7 @@ def main(): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/radix2_fft.py
 # ----------------------------------------------------------------------------------------
-import mpmath  # for roots of unity
+import mpmath
 import numpy as np
 class FFT:
     def __init__(self, polyA=[0], polyB=[0]): # function_definition, literal=List, literal=Num
@@ -1006,7 +1010,7 @@ class FFT:
             self.polyB.pop() # method_call=pop
         self.len_B = len(self.polyB) # assignment, function_call=len
         self.C_max_length = int( # assignment, composition, function_call=int
-            2 ** np.ceil(np.log2(len(self.polyA) + len(self.polyB) - 1)) # binary_operator=Add, binary_operator=Pow, binary_operator=Sub, composition, function_call=len, literal=Num, method_call=ceil, method_call=log2
+        2 ** np.ceil(np.log2(len(self.polyA) + len(self.polyB) - 1)) # binary_operator=Add, binary_operator=Pow, binary_operator=Sub, composition, function_call=len, literal=Num, method_call=ceil, method_call=log2
         )
         while len(self.polyA) < self.C_max_length: # comparison_operator=Lt, evolve_state (-> +1), function_call=len
             self.polyA.append(0) # literal=Num, method_call=append
@@ -1054,18 +1058,18 @@ class FFT:
             for j in range(self.C_max_length // next_ncol): # binary_operator=FloorDiv, for_range_stop, function_call=range, nested_for (-> +1)
                 for i in range(next_ncol // 2): # binary_operator=FloorDiv, for_range_stop, function_call=range, literal=Num
                     new_inverseC[i].append( # index, method_call=append
-                        ( # binary_operator=Div
-                            inverseC[i][j] # binary_operator=Add, index
-                            + inverseC[i][j + self.C_max_length // next_ncol] # binary_operator=Add, binary_operator=FloorDiv, index
-                        )
-                        / 2 # literal=Num
+                    ( # binary_operator=Div
+                    inverseC[i][j] # binary_operator=Add, index
+                    + inverseC[i][j + self.C_max_length // next_ncol] # binary_operator=Add, binary_operator=FloorDiv, index
+                    )
+                    / 2 # literal=Num
                     )
                     new_inverseC[i + next_ncol // 2].append( # binary_operator=Add, binary_operator=FloorDiv, index, literal=Num, method_call=append
-                        ( # binary_operator=Div
-                            inverseC[i][j] # binary_operator=Sub, index
-                            - inverseC[i][j + self.C_max_length // next_ncol] # binary_operator=Add, binary_operator=FloorDiv, index
-                        )
-                        / (2 * current_root) # binary_operator=Mult, literal=Num
+                    ( # binary_operator=Div
+                    inverseC[i][j] # binary_operator=Sub, index
+                    - inverseC[i][j + self.C_max_length // next_ncol] # binary_operator=Add, binary_operator=FloorDiv, index
+                    )
+                    / (2 * current_root) # binary_operator=Mult, literal=Num
                     )
                 current_root *= root # augmented_assignment
             inverseC = new_inverseC # assignment
@@ -1076,13 +1080,13 @@ class FFT:
         return inverseC
     def __str__(self): # function_definition
         A = "A = " + " + ".join( # assignment, binary_operator=Add, composition, literal=Str, method_call=join
-            f"{coef}*x^{i}" for coef, i in enumerate(self.polyA[: self.len_A]) # function_call=enumerate, literal=Str, slice
+        f"{coef}*x^{i}" for coef, i in enumerate(self.polyA[: self.len_A]) # function_call=enumerate, literal=Str, slice
         )
         B = "B = " + " + ".join( # assignment, binary_operator=Add, composition, literal=Str, method_call=join
-            f"{coef}*x^{i}" for coef, i in enumerate(self.polyB[: self.len_B]) # function_call=enumerate, literal=Str, slice
+        f"{coef}*x^{i}" for coef, i in enumerate(self.polyB[: self.len_B]) # function_call=enumerate, literal=Str, slice
         )
         C = "A*B = " + " + ".join( # assignment, binary_operator=Add, composition, literal=Str, method_call=join
-            f"{coef}*x^{i}" for coef, i in enumerate(self.product) # function_call=enumerate, literal=Str
+        f"{coef}*x^{i}" for coef, i in enumerate(self.product) # function_call=enumerate, literal=Str
         )
         return "\n".join((A, B, C)) # literal=Str, method_call=join
 
@@ -1111,7 +1115,7 @@ import math
 def sieve(n): # function_definition
     in_prime = [] # assignment, literal=List
     start = 2 # assignment, literal=Num
-    end = int(math.sqrt(n))  # Size of every segment # assignment, composition, function_call=int, method_call=sqrt
+    end = int(math.sqrt(n)) # assignment, composition, function_call=int, method_call=sqrt
     temp = [True] * (end + 1) # assignment, binary_operator=Add, binary_operator=Mult, literal=List, literal=Num, literal=True
     prime = [] # assignment, literal=List
     while start <= end: # comparison_operator=LtE
@@ -1186,14 +1190,14 @@ def make_points(a, b, h): # function_definition
     while x < (b - h): # binary_operator=Sub, comparison_operator=Lt
         yield x
         x = x + h # assignment, binary_operator=Add, suggest_augmented_assignment
-def f(x):  # enter your function here # function_definition
+def f(x): # function_definition
     y = (x - 0) * (x - 0) # assignment, binary_operator=Mult, binary_operator=Sub, literal=Num
     return y
 def main(): # function_definition
-    a = 0.0  # Lower bound of integration # assignment, literal=Num, suggest_constant_definition
-    b = 1.0  # Upper bound of integration # assignment, literal=Num, suggest_constant_definition
-    steps = 10.0  # define number of steps or resolution # assignment, literal=Num, suggest_constant_definition
-    boundary = [a, b]  # define boundary of integration # assignment
+    a = 0.0 # assignment, literal=Num, suggest_constant_definition
+    b = 1.0 # assignment, literal=Num, suggest_constant_definition
+    steps = 10.0 # assignment, literal=Num, suggest_constant_definition
+    boundary = [a, b] # assignment
     y = method_2(boundary, steps) # assignment, function_call=method_2
     print("y = {0}".format(y)) # composition, function_call=print, literal=Str, method_call=format
 
@@ -1241,14 +1245,14 @@ def make_points(a, b, h): # function_definition
     while x < (b - h): # binary_operator=Sub, comparison_operator=Lt
         yield x
         x = x + h # assignment, binary_operator=Add, suggest_augmented_assignment
-def f(x):  # enter your function here # function_definition
+def f(x): # function_definition
     y = (x - 0) * (x - 0) # assignment, binary_operator=Mult, binary_operator=Sub, literal=Num
     return y
 def main(): # function_definition
-    a = 0.0  # Lower bound of integration # assignment, literal=Num, suggest_constant_definition
-    b = 1.0  # Upper bound of integration # assignment, literal=Num, suggest_constant_definition
-    steps = 10.0  # define number of steps or resolution # assignment, literal=Num, suggest_constant_definition
-    boundary = [a, b]  # define boundary of integration # assignment
+    a = 0.0 # assignment, literal=Num, suggest_constant_definition
+    b = 1.0 # assignment, literal=Num, suggest_constant_definition
+    steps = 10.0 # assignment, literal=Num, suggest_constant_definition
+    boundary = [a, b] # assignment
     y = method_1(boundary, steps) # assignment, function_call=method_1
     print("y = {0}".format(y)) # composition, function_call=print, literal=Str, method_call=format
 
@@ -1274,14 +1278,14 @@ def vol_circular_cylinder(radius, height): # function_definition
     return pi * radius ** 2 * height # binary_operator=Mult, binary_operator=Pow, literal=Num
 def main(): # function_definition
     print("Volumes:") # function_call=print, literal=Str
-    print("Cube: " + str(vol_cube(2)))  # = 8 # binary_operator=Add, composition, function_call=print, function_call=str, function_call=vol_cube, literal=Num, literal=Str
-    print("Cuboid: " + str(vol_cuboid(2, 2, 2)))  # = 8 # binary_operator=Add, composition, function_call=print, function_call=str, function_call=vol_cuboid, literal=Num, literal=Str
-    print("Cone: " + str(vol_cone(2, 2)))  # ~= 1.33 # binary_operator=Add, composition, function_call=print, function_call=str, function_call=vol_cone, literal=Num, literal=Str
-    print("Right Circular Cone: " + str(vol_right_circ_cone(2, 2)))  # ~= 8.38 # binary_operator=Add, composition, function_call=print, function_call=str, function_call=vol_right_circ_cone, literal=Num, literal=Str
-    print("Prism: " + str(vol_prism(2, 2)))  # = 4 # binary_operator=Add, composition, function_call=print, function_call=str, function_call=vol_prism, literal=Num, literal=Str
-    print("Pyramid: " + str(vol_pyramid(2, 2)))  # ~= 1.33 # binary_operator=Add, composition, function_call=print, function_call=str, function_call=vol_pyramid, literal=Num, literal=Str
-    print("Sphere: " + str(vol_sphere(2)))  # ~= 33.5 # binary_operator=Add, composition, function_call=print, function_call=str, function_call=vol_sphere, literal=Num, literal=Str
-    print("Circular Cylinder: " + str(vol_circular_cylinder(2, 2)))  # ~= 25.1 # binary_operator=Add, composition, function_call=print, function_call=str, function_call=vol_circular_cylinder, literal=Num, literal=Str
+    print("Cube: " + str(vol_cube(2))) # binary_operator=Add, composition, function_call=print, function_call=str, function_call=vol_cube, literal=Num, literal=Str
+    print("Cuboid: " + str(vol_cuboid(2, 2, 2))) # binary_operator=Add, composition, function_call=print, function_call=str, function_call=vol_cuboid, literal=Num, literal=Str
+    print("Cone: " + str(vol_cone(2, 2))) # binary_operator=Add, composition, function_call=print, function_call=str, function_call=vol_cone, literal=Num, literal=Str
+    print("Right Circular Cone: " + str(vol_right_circ_cone(2, 2))) # binary_operator=Add, composition, function_call=print, function_call=str, function_call=vol_right_circ_cone, literal=Num, literal=Str
+    print("Prism: " + str(vol_prism(2, 2))) # binary_operator=Add, composition, function_call=print, function_call=str, function_call=vol_prism, literal=Num, literal=Str
+    print("Pyramid: " + str(vol_pyramid(2, 2))) # binary_operator=Add, composition, function_call=print, function_call=str, function_call=vol_pyramid, literal=Num, literal=Str
+    print("Sphere: " + str(vol_sphere(2))) # binary_operator=Add, composition, function_call=print, function_call=str, function_call=vol_sphere, literal=Num, literal=Str
+    print("Circular Cylinder: " + str(vol_circular_cylinder(2, 2))) # binary_operator=Add, composition, function_call=print, function_call=str, function_call=vol_circular_cylinder, literal=Num, literal=Str
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/zellers_congruence.py
@@ -1290,13 +1294,13 @@ import datetime
 import argparse
 def zeller(date_input: str) -> str: # function_definition
     days = { # assignment, literal=Dict
-        "0": "Sunday", # literal=Str
-        "1": "Monday", # literal=Str
-        "2": "Tuesday", # literal=Str
-        "3": "Wednesday", # literal=Str
-        "4": "Thursday", # literal=Str
-        "5": "Friday", # literal=Str
-        "6": "Saturday", # literal=Str
+    "0": "Sunday", # literal=Str
+    "1": "Monday", # literal=Str
+    "2": "Tuesday", # literal=Str
+    "3": "Wednesday", # literal=Str
+    "4": "Thursday", # literal=Str
+    "5": "Friday", # literal=Str
+    "6": "Saturday", # literal=Str
     }
     convert_datetime_days = {0: 1, 1: 2, 2: 3, 3: 4, 4: 5, 5: 6, 6: 0} # assignment, literal=Dict, literal=Num, suggest_constant_definition
     if not 0 < len(date_input) < 11: # comparison_operator=Lt, function_call=len, if, literal=Num, suggest_constant_definition, unary_operator=Not
@@ -1316,7 +1320,6 @@ def zeller(date_input: str) -> str: # function_definition
     y: int = int(date_input[6] + date_input[7] + date_input[8] + date_input[9]) # binary_operator=Add, function_call=int, index, literal=Num, suggest_constant_definition
     if not 45 < y < 8500: # comparison_operator=Lt, if, literal=Num, suggest_constant_definition, unary_operator=Not
         raise ValueError( # function_call=ValueError
-            "Year out of range. There has to be some sort of limit...right?" # literal=Str
         )
     dt_ck = datetime.date(int(y), int(m), int(d)) # assignment, composition, function_call=int, method_call=date
     if m <= 2: # comparison_operator=LtE, if, literal=Num
