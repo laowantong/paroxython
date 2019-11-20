@@ -25,6 +25,7 @@
       - [Construct `global_variable_definition`](#construct-global_variable_definition)
       - [Construct `assignment`](#construct-assignment)
       - [Construct `augmented_assignment`](#construct-augmented_assignment)
+      - [Construct `chained_assignment`](#construct-chained_assignment)
       - [Construct `swapping`](#construct-swapping)
       - [Construct `negation`](#construct-negation)
     - [Function definitions](#function-definitions)
@@ -590,6 +591,32 @@ assignment: 1, 2, 3
 
 ```markdown
 augmented_assignment: 1
+```
+
+--------------------------------------------------------------------------------
+
+##### Construct `chained_assignment`
+
+###### Regex
+
+```re
+          ^(.*?)/_type='Assign'
+\n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
+\n(?:\1.+\n)*?\1/targets/length=(?!1\n).+
+```
+
+###### Example
+
+```python
+1   a = 42
+2   a = b = 42
+3   a = b = c = 42
+```
+
+###### Matches
+
+```markdown
+chained_assignment: 2, 3
 ```
 
 --------------------------------------------------------------------------------
