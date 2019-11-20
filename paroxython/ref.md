@@ -221,7 +221,7 @@ slice_step: 3
 ```re
           ^(.*?)/_type='BinOp'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
-\n(?:\1.+\n)*?\1/op/_type='(?P<SUFFIX>Add|Sub|Mult|MatMult|Div|Mod|Pow|LShift|RShift|BitOr|BitXor|BitAnd|FloorDiv)'
+\n(?:\1.+\n)*?\1/op/_type='(?P<SUFFIX>.+)'
 ```
 
 ###### Example
@@ -246,7 +246,7 @@ binary_operator=Sub: 1
 ```re
           ^(.*?)/_type='UnaryOp'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
-\n(?:\1.+\n)*?\1/op/_type='(?P<SUFFIX>Invert|Not|UAdd|USub)'
+\n(?:\1.+\n)*?\1/op/_type='(?P<SUFFIX>.+)'
 ```
 
 ###### Example
@@ -279,7 +279,7 @@ unary_operator=Not: 2
 ```re
           ^(.*?)/_type='BoolOp'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
-\n(?:\1.+\n)*?\1/op/_type='(?P<SUFFIX>And|Or)'
+\n(?:\1.+\n)*?\1/op/_type='(?P<SUFFIX>.+)'
 ```
 
 ###### Example
@@ -307,7 +307,7 @@ boolean_operator=Or: 2
 
 ```re
           ^(.*?)/_type='Compare'
-\n(?:\1.+\n)*?\1/ops/0/_type='(?P<SUFFIX>Eq|NotEq|Lt|LtE|Gt|GtE|Is|IsNot|In|NotIn)'
+\n(?:\1.+\n)*?\1/ops/0/_type='(?P<SUFFIX>.+)'
 \n(?:\1.+\n)*?\1/comparators/0/lineno=(?P<LINE>\d+)
 ```
 
