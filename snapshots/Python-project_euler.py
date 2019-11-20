@@ -324,7 +324,7 @@ def solution(n): # function_definition
 # ../Python/project_euler/problem_05/sol2.py
 # ----------------------------------------------------------------------------------------
 def gcd(x, y): # function_definition, recursive_function_definition (-> +1)
-    return x if y == 0 else gcd(y, x % y) # binary_operator=Mod, comparison_operator=Eq, function_call=gcd, literal=Num
+    return x if y == 0 else gcd(y, x % y) # binary_operator=Mod, comparison_operator=Eq, conditional_expression, function_call=gcd, literal=Num
 def lcm(x, y): # function_definition
     return (x * y) // gcd(x, y) # binary_operator=FloorDiv, binary_operator=Mult, function_call=gcd
 def solution(n): # function_definition
@@ -540,7 +540,7 @@ def solution(): # function_definition
     for a in range(300): # for_range_stop, function_call=range, literal=Num, nested_for (-> +1), suggest_constant_definition
         for b in range(400): # for_range_stop, function_call=range, literal=Num, nested_for (-> +1), suggest_constant_definition
             for c in range(500): # for_range_stop, function_call=range, literal=Num, suggest_constant_definition
-                if a < b < c: # comparison_operator=Lt, if
+                if a < b < c: # chained_comparison=2, comparison_operator=Lt, if
                     if (a ** 2) + (b ** 2) == (c ** 2): # binary_operator=Add, binary_operator=Pow, comparison_operator=Eq, if, literal=Num
                         if (a + b + c) == 1000: # binary_operator=Add, comparison_operator=Eq, if, literal=Num, suggest_constant_definition
                             return a * b * c # binary_operator=Mult
@@ -820,7 +820,7 @@ def solution(n): # function_definition
                 count += ones_counts[i // 100] + 7 # augmented_assignment, binary_operator=Add, binary_operator=FloorDiv, index, index_arithmetic, literal=Num, suggest_constant_definition
                 if i % 100 != 0: # binary_operator=Mod, comparison_operator=NotEq, divisibility_test=100, if, literal=Num, suggest_constant_definition
                     count += 3 # augmented_assignment, literal=Num, suggest_constant_definition
-            if 0 < i % 100 < 20: # binary_operator=Mod, comparison_operator=Lt, if, if_else, literal=Num, suggest_constant_definition
+            if 0 < i % 100 < 20: # binary_operator=Mod, chained_comparison=2, comparison_operator=Lt, if, if_else, literal=Num, suggest_constant_definition
                 count += ones_counts[i % 100] # augmented_assignment, binary_operator=Mod, index, index_arithmetic, literal=Num, suggest_constant_definition
             else:
                 count += ones_counts[i % 10] # augmented_assignment, binary_operator=Mod, index, index_arithmetic, literal=Num, suggest_constant_definition
@@ -1156,19 +1156,19 @@ def solution(n): # function_definition
 def one_pence(): # function_definition
     return 1 # literal=Num
 def two_pence(x): # function_definition, recursive_function_definition (-> +1)
-    return 0 if x < 0 else two_pence(x - 2) + one_pence() # binary_operator=Add, binary_operator=Sub, comparison_operator=Lt, function_call=one_pence, function_call=two_pence, literal=Num
+    return 0 if x < 0 else two_pence(x - 2) + one_pence() # binary_operator=Add, binary_operator=Sub, comparison_operator=Lt, conditional_expression, function_call=one_pence, function_call=two_pence, literal=Num
 def five_pence(x): # function_definition, recursive_function_definition (-> +1)
-    return 0 if x < 0 else five_pence(x - 5) + two_pence(x) # binary_operator=Add, binary_operator=Sub, comparison_operator=Lt, function_call=five_pence, function_call=two_pence, literal=Num, suggest_constant_definition
+    return 0 if x < 0 else five_pence(x - 5) + two_pence(x) # binary_operator=Add, binary_operator=Sub, comparison_operator=Lt, conditional_expression, function_call=five_pence, function_call=two_pence, literal=Num, suggest_constant_definition
 def ten_pence(x): # function_definition, recursive_function_definition (-> +1)
-    return 0 if x < 0 else ten_pence(x - 10) + five_pence(x) # binary_operator=Add, binary_operator=Sub, comparison_operator=Lt, function_call=five_pence, function_call=ten_pence, literal=Num, suggest_constant_definition
+    return 0 if x < 0 else ten_pence(x - 10) + five_pence(x) # binary_operator=Add, binary_operator=Sub, comparison_operator=Lt, conditional_expression, function_call=five_pence, function_call=ten_pence, literal=Num, suggest_constant_definition
 def twenty_pence(x): # function_definition, recursive_function_definition (-> +1)
-    return 0 if x < 0 else twenty_pence(x - 20) + ten_pence(x) # binary_operator=Add, binary_operator=Sub, comparison_operator=Lt, function_call=ten_pence, function_call=twenty_pence, literal=Num, suggest_constant_definition
+    return 0 if x < 0 else twenty_pence(x - 20) + ten_pence(x) # binary_operator=Add, binary_operator=Sub, comparison_operator=Lt, conditional_expression, function_call=ten_pence, function_call=twenty_pence, literal=Num, suggest_constant_definition
 def fifty_pence(x): # function_definition, recursive_function_definition (-> +1)
-    return 0 if x < 0 else fifty_pence(x - 50) + twenty_pence(x) # binary_operator=Add, binary_operator=Sub, comparison_operator=Lt, function_call=fifty_pence, function_call=twenty_pence, literal=Num, suggest_constant_definition
+    return 0 if x < 0 else fifty_pence(x - 50) + twenty_pence(x) # binary_operator=Add, binary_operator=Sub, comparison_operator=Lt, conditional_expression, function_call=fifty_pence, function_call=twenty_pence, literal=Num, suggest_constant_definition
 def one_pound(x): # function_definition, recursive_function_definition (-> +1)
-    return 0 if x < 0 else one_pound(x - 100) + fifty_pence(x) # binary_operator=Add, binary_operator=Sub, comparison_operator=Lt, function_call=fifty_pence, function_call=one_pound, literal=Num, suggest_constant_definition
+    return 0 if x < 0 else one_pound(x - 100) + fifty_pence(x) # binary_operator=Add, binary_operator=Sub, comparison_operator=Lt, conditional_expression, function_call=fifty_pence, function_call=one_pound, literal=Num, suggest_constant_definition
 def two_pound(x): # function_definition, recursive_function_definition (-> +1)
-    return 0 if x < 0 else two_pound(x - 200) + one_pound(x) # binary_operator=Add, binary_operator=Sub, comparison_operator=Lt, function_call=one_pound, function_call=two_pound, literal=Num, suggest_constant_definition
+    return 0 if x < 0 else two_pound(x - 200) + one_pound(x) # binary_operator=Add, binary_operator=Sub, comparison_operator=Lt, conditional_expression, function_call=one_pound, function_call=two_pound, literal=Num, suggest_constant_definition
 def solution(n): # function_definition
     return two_pound(n) # function_call=two_pound
 
@@ -1290,7 +1290,7 @@ def solution(): # function_definition
     i = 1 # assignment, literal=Num
     while True: # literal=True
         if ( # if
-        sorted(list(str(i))) # composition, function_call=list, function_call=sorted, function_call=str
+        sorted(list(str(i))) # chained_comparison=5, composition, function_call=list, function_call=sorted, function_call=str
         == sorted(list(str(2 * i))) # binary_operator=Mult, comparison_operator=Eq, composition, function_call=list, function_call=sorted, function_call=str, literal=Num
         == sorted(list(str(3 * i))) # binary_operator=Mult, composition, function_call=list, function_call=sorted, function_call=str, literal=Num, suggest_constant_definition
         == sorted(list(str(4 * i))) # binary_operator=Mult, composition, function_call=list, function_call=sorted, function_call=str, literal=Num, suggest_constant_definition

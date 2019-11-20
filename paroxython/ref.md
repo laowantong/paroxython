@@ -15,6 +15,7 @@
     - [Boolean expressions](#boolean-expressions)
       - [Construct `boolean_operator`](#construct-boolean_operator)
       - [Construct `comparison_operator`](#construct-comparison_operator)
+      - [Construct `chained_comparison`](#construct-chained_comparison)
       - [Construct `divisibility_test`](#construct-divisibility_test)
     - [Calls](#calls)
       - [Construct `function_call`](#construct-function_call)
@@ -381,6 +382,33 @@ boolean_operator=Or: 2
 ```markdown
 comparison_operator=Eq: 1, 2
 comparison_operator=In: 4
+```
+
+--------------------------------------------------------------------------------
+
+##### Construct `chained_comparison`
+
+###### Regex
+
+```re
+          ^(.*?)/_type='Compare'
+\n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
+\n(?:\1.+\n)*?\1/comparators/length=(?!1\n)(?P<SUFFIX>.+)
+```
+
+###### Example
+
+```python
+1   a == 1
+2   a == b == c
+3   a < b < c < d
+```
+
+###### Matches
+
+```markdown
+chained_comparison=2: 2
+chained_comparison=3: 3
 ```
 
 --------------------------------------------------------------------------------

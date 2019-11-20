@@ -135,7 +135,7 @@ def test_n31(): # function_definition
 # ../Python/maths/abs.py
 # ----------------------------------------------------------------------------------------
 def abs_val(num): # function_definition
-    return -num if num < 0 else num # comparison_operator=Lt, literal=Num, unary_operator=USub
+    return -num if num < 0 else num # comparison_operator=Lt, conditional_expression, literal=Num, unary_operator=USub
 def test_abs_val(): # function_definition
     assert 0 == abs_val(0) # comparison_operator=Eq, function_call=abs_val, literal=Num
     assert 34 == abs_val(34) # comparison_operator=Eq, function_call=abs_val, literal=Num, suggest_constant_definition
@@ -298,7 +298,7 @@ print(binomial_coefficient(n=10, r=5)) # composition, function_call=binomial_coe
 # ----------------------------------------------------------------------------------------
 def ceil(x) -> int: # function_definition
     return (
-    x if isinstance(x, int) or x - int(x) == 0 else int(x + 1) if x > 0 else int(x) # binary_operator=Add, binary_operator=Sub, boolean_operator=Or, comparison_operator=Eq, comparison_operator=Gt, function_call=int, function_call=isinstance, literal=Num
+    x if isinstance(x, int) or x - int(x) == 0 else int(x + 1) if x > 0 else int(x) # binary_operator=Add, binary_operator=Sub, boolean_operator=Or, comparison_operator=Eq, comparison_operator=Gt, conditional_expression, function_call=int, function_call=isinstance, literal=Num
     )
 
 # ----------------------------------------------------------------------------------------
@@ -398,7 +398,7 @@ def factorial(n: int) -> int: # function_definition, recursive_function_definiti
         raise ValueError("factorial() not defined for negative values") # function_call=ValueError, literal=Str
     if not isinstance(n, int): # function_call=isinstance, if, unary_operator=Not
         raise ValueError("factorial() only accepts integral values") # function_call=ValueError, literal=Str
-    return 1 if n == 0 or n == 1 else n * factorial(n - 1) # binary_operator=Mult, binary_operator=Sub, boolean_operator=Or, comparison_operator=Eq, function_call=factorial, literal=Num
+    return 1 if n == 0 or n == 1 else n * factorial(n - 1) # binary_operator=Mult, binary_operator=Sub, boolean_operator=Or, comparison_operator=Eq, conditional_expression, function_call=factorial, literal=Num
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/factors.py
@@ -497,7 +497,7 @@ def fib_formula(n):
 # ../Python/maths/fibonacci_sequence_recursion.py
 # ----------------------------------------------------------------------------------------
 def recur_fibo(n): # function_definition, recursive_function_definition (-> +1)
-    return n if n <= 1 else recur_fibo(n - 1) + recur_fibo(n - 2) # binary_operator=Add, binary_operator=Sub, comparison_operator=LtE, function_call=recur_fibo, literal=Num
+    return n if n <= 1 else recur_fibo(n - 1) + recur_fibo(n - 2) # binary_operator=Add, binary_operator=Sub, comparison_operator=LtE, conditional_expression, function_call=recur_fibo, literal=Num
 def main(): # function_definition
     limit = int(input("How many terms to include in fibonacci series: ")) # assignment, composition, function_call=input, function_call=int, literal=Str
     if limit > 0: # comparison_operator=Gt, if, if_else, literal=Num
@@ -527,7 +527,7 @@ def find_max(nums, left, right): # function_definition, recursive_function_defin
     mid = (left + right) >> 1 # assignment, binary_operator=Add, binary_operator=RShift, literal=Num
     left_max = find_max(nums, left, mid) # assignment, function_call=find_max
     right_max = find_max(nums, mid + 1, right) # assignment, binary_operator=Add, function_call=find_max, literal=Num
-    return left_max if left_max >= right_max else right_max # comparison_operator=GtE
+    return left_max if left_max >= right_max else right_max # comparison_operator=GtE, conditional_expression
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/find_min.py
@@ -550,14 +550,14 @@ def find_min(nums, left, right): # function_definition, recursive_function_defin
     mid = (left + right) >> 1 # assignment, binary_operator=Add, binary_operator=RShift, literal=Num
     left_min = find_min(nums, left, mid) # assignment, function_call=find_min
     right_min = find_min(nums, mid + 1, right) # assignment, binary_operator=Add, function_call=find_min, literal=Num
-    return left_min if left_min <= right_min else right_min # comparison_operator=LtE
+    return left_min if left_min <= right_min else right_min # comparison_operator=LtE, conditional_expression
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/floor.py
 # ----------------------------------------------------------------------------------------
 def floor(x) -> int: # function_definition
     return (
-    x if isinstance(x, int) or x - int(x) == 0 else int(x) if x > 0 else int(x - 1) # binary_operator=Sub, boolean_operator=Or, comparison_operator=Eq, comparison_operator=Gt, function_call=int, function_call=isinstance, literal=Num
+    x if isinstance(x, int) or x - int(x) == 0 else int(x) if x > 0 else int(x - 1) # binary_operator=Sub, boolean_operator=Or, comparison_operator=Eq, comparison_operator=Gt, conditional_expression, function_call=int, function_call=isinstance, literal=Num
     )
 
 # ----------------------------------------------------------------------------------------
@@ -571,7 +571,7 @@ def gaussian(x, mu: float = 0.0, sigma: float = 1.0) -> int: # function_definiti
 # ../Python/maths/greatest_common_divisor.py
 # ----------------------------------------------------------------------------------------
 def greatest_common_divisor(a, b): # function_definition, recursive_function_definition (-> +1)
-    return b if a == 0 else greatest_common_divisor(b % a, a) # binary_operator=Mod, comparison_operator=Eq, function_call=greatest_common_divisor, literal=Num
+    return b if a == 0 else greatest_common_divisor(b % a, a) # binary_operator=Mod, comparison_operator=Eq, conditional_expression, function_call=greatest_common_divisor, literal=Num
 def gcd_by_iterative(x, y): # function_definition
     while y:
         x, y = y, x % y # assignment, binary_operator=Mod
@@ -659,7 +659,7 @@ def kthPermutation(k, n): # function_definition
     factorials = [1] # assignment, literal=List, literal=Num
     for i in range(2, n): # for_range_start, function_call=range, literal=Num
         factorials.append(factorials[-1] * i) # binary_operator=Mult, index, literal=Num, method_call=append
-    assert 0 <= k < factorials[-1] * n, "k out of bounds" # binary_operator=Mult, comparison_operator=LtE, index, literal=Num, literal=Str
+    assert 0 <= k < factorials[-1] * n, "k out of bounds" # binary_operator=Mult, chained_comparison=2, comparison_operator=LtE, index, literal=Num, literal=Str
     permutation = [] # assignment, literal=List
     elements = list(range(n)) # assignment, composition, function_call=list, function_call=range
     while factorials:
@@ -688,7 +688,7 @@ def res(x, y): # function_definition
 # ----------------------------------------------------------------------------------------
 import unittest
 def find_lcm(first_num: int, second_num: int) -> int: # function_definition
-    max_num = first_num if first_num >= second_num else second_num # assignment, comparison_operator=GtE
+    max_num = first_num if first_num >= second_num else second_num # assignment, comparison_operator=GtE, conditional_expression
     common_mult = max_num # assignment
     while (common_mult % first_num > 0) or (common_mult % second_num > 0): # binary_operator=Mod, boolean_operator=Or, comparison_operator=Gt, literal=Num
         common_mult += max_num # augmented_assignment
@@ -801,7 +801,7 @@ from maths.is_square_free import is_square_free
 def mobius(n: int) -> int: # function_definition
     factors = prime_factors(n) # assignment, function_call=prime_factors
     if is_square_free(factors): # function_call=is_square_free, if
-        return -1 if len(factors) % 2 else 1 # binary_operator=Mod, function_call=len, literal=Num
+        return -1 if len(factors) % 2 else 1 # binary_operator=Mod, conditional_expression, function_call=len, literal=Num
     return 0 # literal=Num
 
 # ----------------------------------------------------------------------------------------
@@ -1303,22 +1303,22 @@ def zeller(date_input: str) -> str: # function_definition
     "6": "Saturday", # literal=Str
     }
     convert_datetime_days = {0: 1, 1: 2, 2: 3, 3: 4, 4: 5, 5: 6, 6: 0} # assignment, literal=Dict, literal=Num, suggest_constant_definition
-    if not 0 < len(date_input) < 11: # comparison_operator=Lt, function_call=len, if, literal=Num, suggest_constant_definition, unary_operator=Not
+    if not 0 < len(date_input) < 11: # chained_comparison=2, comparison_operator=Lt, function_call=len, if, literal=Num, suggest_constant_definition, unary_operator=Not
         raise ValueError("Must be 10 characters long") # function_call=ValueError, literal=Str
     m: int = int(date_input[0] + date_input[1]) # binary_operator=Add, function_call=int, index, literal=Num
-    if not 0 < m < 13: # comparison_operator=Lt, if, literal=Num, suggest_constant_definition, unary_operator=Not
+    if not 0 < m < 13: # chained_comparison=2, comparison_operator=Lt, if, literal=Num, suggest_constant_definition, unary_operator=Not
         raise ValueError("Month must be between 1 - 12") # function_call=ValueError, literal=Str
     sep_1: str = date_input[2] # index, literal=Num
     if sep_1 not in ["-", "/"]: # comparison_operator=NotIn, if, literal=List, literal=Str
         raise ValueError("Date seperator must be '-' or '/'") # function_call=ValueError, literal=Str
     d: int = int(date_input[3] + date_input[4]) # binary_operator=Add, function_call=int, index, literal=Num, suggest_constant_definition
-    if not 0 < d < 32: # comparison_operator=Lt, if, literal=Num, suggest_constant_definition, unary_operator=Not
+    if not 0 < d < 32: # chained_comparison=2, comparison_operator=Lt, if, literal=Num, suggest_constant_definition, unary_operator=Not
         raise ValueError("Date must be between 1 - 31") # function_call=ValueError, literal=Str
     sep_2: str = date_input[5] # index, literal=Num, suggest_constant_definition
     if sep_2 not in ["-", "/"]: # comparison_operator=NotIn, if, literal=List, literal=Str
         raise ValueError("Date seperator must be '-' or '/'") # function_call=ValueError, literal=Str
     y: int = int(date_input[6] + date_input[7] + date_input[8] + date_input[9]) # binary_operator=Add, function_call=int, index, literal=Num, suggest_constant_definition
-    if not 45 < y < 8500: # comparison_operator=Lt, if, literal=Num, suggest_constant_definition, unary_operator=Not
+    if not 45 < y < 8500: # chained_comparison=2, comparison_operator=Lt, if, literal=Num, suggest_constant_definition, unary_operator=Not
         raise ValueError( # function_call=ValueError
         )
     dt_ck = datetime.date(int(y), int(m), int(d)) # assignment, composition, function_call=int, method_call=date
