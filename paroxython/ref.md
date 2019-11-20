@@ -20,6 +20,7 @@
       - [Construct `method_call`](#construct-method_call)
       - [Construct `method_chaining`](#construct-method_chaining)
       - [Construct `composition`](#construct-composition)
+    - [Anonymous functions](#anonymous-functions)
       - [Construct `lambda_function`](#construct-lambda_function)
   - [Statements](#statements)
     - [Assignments](#assignments)
@@ -34,6 +35,7 @@
       - [Construct `function_definition`](#construct-function_definition)
       - [Construct `recursive_function_definition`](#construct-recursive_function_definition)
       - [Construct `deeply_recursive_function_definition`](#construct-deeply_recursive_function_definition)
+      - [Construct `generator_definition`](#construct-generator_definition)
     - [Conditionals](#conditionals)
       - [Construct `if`](#construct-if)
       - [Construct `if_else`](#construct-if_else)
@@ -510,6 +512,10 @@ composition: 1, 3, 4
 
 --------------------------------------------------------------------------------
 
+### Anonymous functions
+
+--------------------------------------------------------------------------------
+
 ##### Construct `lambda_function`
 
 ###### Regex
@@ -825,6 +831,35 @@ Any function `f` which contains a nested call to itself (`f(..., f(...), ...)`),
 
 ```markdown
 deeply_recursive_function_definition: 1-3
+```
+
+--------------------------------------------------------------------------------
+
+##### Construct `generator_definition`
+
+###### Regex
+
+```re
+          ^(.*?)/_type='FunctionDef'
+\n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
+\n(?:\1.+\n)* \1/body/\d+/value/_type='(?P<SUFFIX>Yield(From)?)'
+```
+
+###### Example
+
+```python
+1   def foo():
+2       yield bar
+3
+4   def energy():
+5       yield from waste
+```
+
+###### Matches
+
+```markdown
+generator_definition=Yield: 1
+generator_definition=YieldFrom: 4
 ```
 
 --------------------------------------------------------------------------------
