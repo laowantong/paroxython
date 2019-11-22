@@ -564,7 +564,7 @@ def floor(x) -> int: # function_definition
 # ../Python/maths/gaussian.py
 # ----------------------------------------------------------------------------------------
 from numpy import pi, sqrt, exp
-def gaussian(x, mu: float = 0.0, sigma: float = 1.0) -> int: # function_definition, literal=Num
+def gaussian(x, mu: float = 0.0, sigma: float = 1.0) -> int: # function_definition, function_with_default_positional_arguments_definition, literal=Num
     return 1 / sqrt(2 * pi * sigma ** 2) * exp(-((x - mu) ** 2) / 2 * sigma ** 2) # binary_operator=Div, binary_operator=Mult, binary_operator=Pow, binary_operator=Sub, function_call=exp, function_call=sqrt, literal=Num, unary_operator=USub
 
 # ----------------------------------------------------------------------------------------
@@ -618,7 +618,7 @@ def is_square_free(factors: List[int]) -> bool: # function_definition, index
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/jaccard_similarity.py
 # ----------------------------------------------------------------------------------------
-def jaccard_similariy(setA, setB, alternativeUnion=False): # function_definition, literal=False
+def jaccard_similariy(setA, setB, alternativeUnion=False): # function_definition, function_with_default_positional_arguments_definition, literal=False
     if isinstance(setA, set) and isinstance(setB, set): # boolean_operator=And, function_call=isinstance, if
         intersection = len(setA.intersection(setB)) # assignment, composition, function_call=len, method_call=intersection
         if alternativeUnion: # if, if_else, suggest_conditional_expression (-> +3)
@@ -825,9 +825,9 @@ def main(): # function_definition
 # ../Python/maths/newton_raphson.py
 # ----------------------------------------------------------------------------------------
 import math as m
-def calc_derivative(f, a, h=0.001): # function_definition, literal=Num
+def calc_derivative(f, a, h=0.001): # function_definition, function_with_default_positional_arguments_definition, literal=Num
     return (f(a + h) - f(a - h)) / (2 * h) # binary_operator=Add, binary_operator=Div, binary_operator=Mult, binary_operator=Sub, function_call=f, literal=Num
-def newton_raphson(f, x0=0, maxiter=100, step=0.0001, maxerror=1e-6, logsteps=False): # function_definition, literal=False, literal=Num
+def newton_raphson(f, x0=0, maxiter=100, step=0.0001, maxerror=1e-6, logsteps=False): # function_definition, function_with_default_positional_arguments_definition, literal=False, literal=Num
     a = x0 # assignment
     steps = [a] # assignment
     error = abs(f(a)) # assignment, composition, function_call=abs, function_call=f
@@ -1000,7 +1000,7 @@ def main(): # function_definition
 import mpmath
 import numpy as np
 class FFT:
-    def __init__(self, polyA=[0], polyB=[0]): # function_definition, literal=List, literal=Num
+    def __init__(self, polyA=[0], polyB=[0]): # function_definition, function_with_default_positional_arguments_definition, literal=List, literal=Num
         self.polyA = list(polyA)[:] # assignment, function_call=list, slice
         self.polyB = list(polyB)[:] # assignment, function_call=list, slice
         while self.polyA[-1] == 0: # comparison_operator=Eq, evolve_state (-> +1), index, literal=Num

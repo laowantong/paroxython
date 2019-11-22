@@ -35,6 +35,7 @@
       - [Construct `negation`](#construct-negation)
     - [Function definitions](#function-definitions)
       - [Construct `function_definition`](#construct-function_definition)
+      - [Construct `function_with_default_positional_arguments_definition`](#construct-function_with_default_positional_arguments_definition)
       - [Construct `recursive_function_definition`](#construct-recursive_function_definition)
       - [Construct `deeply_recursive_function_definition`](#construct-deeply_recursive_function_definition)
       - [Construct `generator_definition`](#construct-generator_definition)
@@ -821,6 +822,31 @@ negation: 1, 2
 
 ```markdown
 function_definition: 1
+```
+
+--------------------------------------------------------------------------------
+
+##### Construct `function_with_default_positional_arguments_definition`
+
+###### Regex
+
+```re
+          ^(.*?)/_type='FunctionDef'
+\n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
+\n(?:\1.+\n)*?\1/args/defaults/length=(?!0\n).+
+```
+
+###### Example
+
+```python
+1   def foobar(a, b="c"):
+2       pass
+```
+
+###### Matches
+
+```markdown
+function_with_default_positional_arguments_definition: 1
 ```
 
 --------------------------------------------------------------------------------

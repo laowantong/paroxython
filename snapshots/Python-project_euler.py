@@ -988,7 +988,7 @@ def solution(): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_23/sol1.py
 # ----------------------------------------------------------------------------------------
-def solution(limit=28123): # function_definition, literal=Num
+def solution(limit=28123): # function_definition, function_with_default_positional_arguments_definition, literal=Num
     sumDivs = [1] * (limit + 1) # assignment, binary_operator=Add, binary_operator=Mult, literal=List, literal=Num
     for i in range(2, int(limit ** 0.5) + 1): # accumulate_elements=AugAssign (-> +3), binary_operator=Add, binary_operator=Pow, composition, for_range_start, function_call=int, function_call=range, literal=Num, nested_for (-> +2), suggest_constant_definition
         sumDivs[i * i] += i # augmented_assignment, binary_operator=Mult, index, index_arithmetic
@@ -1480,7 +1480,7 @@ def partition(m): # function_definition
 # ----------------------------------------------------------------------------------------
 import os
 from math import log10
-def find_largest(data_file: str = "base_exp.txt") -> int: # function_definition, literal=Str
+def find_largest(data_file: str = "base_exp.txt") -> int: # function_definition, function_with_default_positional_arguments_definition, literal=Str
     largest = [0, 0] # assignment, literal=List, literal=Num
     for i, line in enumerate(open(os.path.join(os.path.dirname(__file__), data_file))): # composition, for_indexes_values, function_call=enumerate, function_call=open, method_call=dirname, method_call=join
         a, x = list(map(int, line.split(","))) # assignment, composition, function_call=list, function_call=map, literal=Str, method_call=split
