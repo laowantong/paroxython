@@ -52,10 +52,10 @@
       - [Construct `for_indexes`](#construct-for_indexes)
       - [Construct `nested_for`](#construct-nested_for)
       - [Construct `triangular_nested_for`](#construct-triangular_nested_for)
-- [Modules](#modules)
-  - [Construct `import`](#construct-import)
-  - [Construct `import_from`](#construct-import_from)
-  - [Construct `import_by_call`](#construct-import_by_call)
+    - [Modules](#modules)
+      - [Construct `import`](#construct-import)
+      - [Construct `import_from`](#construct-import_from)
+      - [Construct `import_by_call`](#construct-import_by_call)
   - [Code patterns](#code-patterns)
     - [Iterative patterns](#iterative-patterns)
       - [Sequential loops](#sequential-loops)
@@ -1329,7 +1329,7 @@ triangular_nested_for: 1-2, 5-6
 
 --------------------------------------------------------------------------------
 
-#### Modules
+### Modules
 
 --------------------------------------------------------------------------------
 
