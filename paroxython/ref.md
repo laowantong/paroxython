@@ -46,10 +46,11 @@
     - [Construct `for_range_stop`](#construct-for_range_stop)
     - [Construct `for_range_start`](#construct-for_range_start)
     - [Construct `for_range_step`](#construct-for_range_step)
-    - [Construct `for_indexes_values`](#construct-for_indexes_values)
+    - [Construct `for_indexes_elements`](#construct-for_indexes_elements)
     - [Construct `for_indexes`](#construct-for_indexes)
     - [Construct `nested_for`](#construct-nested_for)
     - [Construct `triangular_nested_for`](#construct-triangular_nested_for)
+    - [Construct `square_nested_for`](#construct-square_nested_for)
   - [Modules](#modules)
     - [Construct `import`](#construct-import)
     - [Construct `import_from`](#construct-import_from)
@@ -807,6 +808,7 @@ Update a variable by negating it.
 ```re
           ^(.*?)/_type='FunctionDef'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
+\n(?:\1.+\n)*?\1/name='(?P<SUFFIX>.+)'
 ```
 
 ##### Example
@@ -820,7 +822,7 @@ Update a variable by negating it.
 
 | Label | Lines |
 |:--|:--|
-| `function_definition` | 1 |
+| `function_definition:foo` | 1 |
 
 --------------------------------------------------------------------------------
 
@@ -1185,7 +1187,7 @@ Iterate over a range with 3 arguments (start, stop, step).
 
 --------------------------------------------------------------------------------
 
-#### Construct `for_indexes_values`
+#### Construct `for_indexes_elements`
 
 Iterate over index numbers and elements of a collection.
 
@@ -1208,7 +1210,7 @@ Iterate over index numbers and elements of a collection.
 
 | Label | Lines |
 |:--|:--|
-| `for_indexes_values` | 1 |
+| `for_indexes_elements` | 1 |
 
 --------------------------------------------------------------------------------
 
@@ -1320,6 +1322,41 @@ A `for` loop with a counter `i` and a nested `for` loop which makes `i` iteratio
 | Label | Lines |
 |:--|:--|
 | `triangular_nested_for` | 1-2, 5-6 |
+
+--------------------------------------------------------------------------------
+
+#### Construct `square_nested_for`
+
+A `for` loop with a counter `i` and a nested `for` loop which makes `i` iterations.
+
+##### Regex
+
+```re
+           ^(.*)/_type='For'
+\n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
+\n(?:\1.+\n)*?\1/iter/_hash=(?P<_HASH>.+) # capture iterable
+\n(?:\1.+\n)* \1/(?P<_1>body/\d+)/_type='For'
+\n(?:\1.+\n)*?\1/(?P=_1)         /lineno=(?P<LINE>\d+)
+\n(?:\1.+\n)*?\1/(?P=_1)         /iter/_hash=(?P=_HASH) # match iterable
+```
+
+##### Example
+
+```python
+1   for i in range(1, 2 * n, step):
+2       for j in range(1, 2 * n, step):
+3           pass
+4
+5   for x in seq:
+6       for y in seq:
+7           pass
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `square_nested_for` | 1-2, 5-6 |
 
 --------------------------------------------------------------------------------
 

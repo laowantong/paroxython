@@ -1,13 +1,13 @@
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_01/sol1.py
 # ----------------------------------------------------------------------------------------
-def solution(n): # function_definition
+def solution(n): # function_definition:solution
     return sum([e for e in range(3, n) if e % 3 == 0 or e % 5 == 0]) # binary_operator:Mod, boolean_operator:Or, comparison_operator:Eq, composition, divisibility_test:3, divisibility_test:5, function_call:range, function_call:sum, literal:Num, suggest_constant_definition
 
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_01/sol2.py
 # ----------------------------------------------------------------------------------------
-def solution(n): # function_definition
+def solution(n): # function_definition:solution
     sum = 0 # assignment, literal:Num
     terms = (n - 1) // 3 # assignment, binary_operator:FloorDiv, binary_operator:Sub, literal:Num, suggest_constant_definition
     sum += ((terms) * (6 + (terms - 1) * 3)) // 2 # augmented_assignment, binary_operator:Add, binary_operator:FloorDiv, binary_operator:Mult, binary_operator:Sub, literal:Num, suggest_constant_definition
@@ -20,7 +20,7 @@ def solution(n): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_01/sol3.py
 # ----------------------------------------------------------------------------------------
-def solution(n): # function_definition
+def solution(n): # function_definition:solution
     sum = 0 # assignment, literal:Num
     num = 0 # assignment, literal:Num
     while 1: # literal:Num
@@ -57,7 +57,7 @@ def solution(n): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_01/sol4.py
 # ----------------------------------------------------------------------------------------
-def solution(n): # function_definition
+def solution(n): # function_definition:solution
     xmulti = [] # assignment, literal:List
     zmulti = [] # assignment, literal:List
     z = 3 # assignment, literal:Num, suggest_constant_definition
@@ -84,13 +84,13 @@ def solution(n): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_01/sol5.py
 # ----------------------------------------------------------------------------------------
-def solution(n): # function_definition
+def solution(n): # function_definition:solution
     return sum([i for i in range(n) if i % 3 == 0 or i % 5 == 0]) # binary_operator:Mod, boolean_operator:Or, comparison_operator:Eq, composition, divisibility_test:3, divisibility_test:5, function_call:range, function_call:sum, literal:Num, suggest_constant_definition
 
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_01/sol6.py
 # ----------------------------------------------------------------------------------------
-def solution(n): # function_definition
+def solution(n): # function_definition:solution
     a = 3 # assignment, literal:Num, suggest_constant_definition
     result = 0 # assignment, literal:Num
     while a < n: # comparison_operator:Lt
@@ -104,7 +104,7 @@ def solution(n): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_01/sol7.py
 # ----------------------------------------------------------------------------------------
-def solution(n): # function_definition
+def solution(n): # function_definition:solution
     result = 0 # assignment, literal:Num
     for i in range(n): # accumulate_elements:AugAssign (-> +2), for_range_stop, function_call:range
         if i % 3 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:3, if, if_elif, literal:Num, suggest_constant_definition
@@ -116,7 +116,7 @@ def solution(n): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_02/sol1.py
 # ----------------------------------------------------------------------------------------
-def solution(n): # function_definition
+def solution(n): # function_definition:solution
     i = 1 # assignment, literal:Num
     j = 2 # assignment, literal:Num
     sum = 0 # assignment, literal:Num
@@ -129,7 +129,7 @@ def solution(n): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_02/sol2.py
 # ----------------------------------------------------------------------------------------
-def solution(n): # function_definition
+def solution(n): # function_definition:solution
     ls = [] # assignment, literal:List
     a, b = 0, 1 # assignment, literal:Num, literal:Tuple
     while b <= n: # comparison_operator:LtE
@@ -141,7 +141,7 @@ def solution(n): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_02/sol3.py
 # ----------------------------------------------------------------------------------------
-def solution(n): # function_definition
+def solution(n): # function_definition:solution
     if n <= 1: # comparison_operator:LtE, if, literal:Num
         return 0 # literal:Num
     a = 0 # assignment, literal:Num
@@ -157,7 +157,7 @@ def solution(n): # function_definition
 # ----------------------------------------------------------------------------------------
 import math # import:math
 from decimal import Decimal, getcontext # import_from:decimal
-def solution(n): # function_definition
+def solution(n): # function_definition:solution
     try:
         n = int(n) # assignment, function_call:int
     except (TypeError, ValueError) as e:
@@ -174,7 +174,7 @@ def solution(n): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_02/sol5.py
 # ----------------------------------------------------------------------------------------
-def solution(n): # function_definition
+def solution(n): # function_definition:solution
     a = [0, 1] # assignment, literal:List, literal:Num
     i = 0 # assignment, literal:Num
     while a[i] <= n: # comparison_operator:LtE, index
@@ -192,7 +192,7 @@ def solution(n): # function_definition
 # ../Python/project_euler/problem_03/sol1.py
 # ----------------------------------------------------------------------------------------
 import math # import:math
-def isprime(no): # function_definition
+def isprime(no): # function_definition:isprime
     if no == 2: # comparison_operator:Eq, if, if_elif, literal:Num
         return True # literal:True
     elif no % 2 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, if, literal:Num
@@ -202,7 +202,7 @@ def isprime(no): # function_definition
         if no % i == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test, if, literal:Num
             return False # literal:False
     return True # literal:True
-def solution(n): # function_definition
+def solution(n): # function_definition:solution
     try:
         n = int(n) # assignment, function_call:int
     except (TypeError, ValueError) as e:
@@ -231,7 +231,7 @@ def solution(n): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_03/sol2.py
 # ----------------------------------------------------------------------------------------
-def solution(n): # function_definition
+def solution(n): # function_definition:solution
     try:
         n = int(n) # assignment, function_call:int
     except (TypeError, ValueError) as e:
@@ -252,7 +252,7 @@ def solution(n): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_03/sol3.py
 # ----------------------------------------------------------------------------------------
-def solution(n: int) -> int: # function_definition
+def solution(n: int) -> int: # function_definition:solution
     try:
         n = int(n) # assignment, function_call:int
     except (TypeError, ValueError):
@@ -275,7 +275,7 @@ def solution(n: int) -> int: # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_04/sol1.py
 # ----------------------------------------------------------------------------------------
-def solution(n): # function_definition
+def solution(n): # function_definition:solution
     for number in range(n - 1, 10000, -1): # binary_operator:Sub, find_first_element (-> +6), for_range_step:-1, function_call:range, literal:Num, suggest_constant_definition
         strNumber = str(number) # assignment, function_call:str
         if strNumber == strNumber[::-1]: # comparison_operator:Eq, if, literal:Num, slice_step
@@ -288,9 +288,9 @@ def solution(n): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_04/sol2.py
 # ----------------------------------------------------------------------------------------
-def solution(n): # function_definition
+def solution(n): # function_definition:solution
     answer = 0 # assignment, literal:Num
-    for i in range(999, 99, -1): # accumulate_elements:Assign (-> +4), for_range_step:-1, function_call:range, literal:Num, nested_for (-> +1), suggest_constant_definition
+    for i in range(999, 99, -1): # accumulate_elements:Assign (-> +4), for_range_step:-1, function_call:range, literal:Num, nested_for (-> +1), square_nested_for (-> +1), suggest_constant_definition
         for j in range(999, 99, -1): # accumulate_elements:Assign (-> +3), for_range_step:-1, function_call:range, literal:Num, suggest_constant_definition
             t = str(i * j) # assignment, binary_operator:Mult, function_call:str
             if t == t[::-1] and i * j < n: # binary_operator:Mult, boolean_operator:And, comparison_operator:Eq, comparison_operator:Lt, if, literal:Num, slice_step
@@ -300,7 +300,7 @@ def solution(n): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_05/sol1.py
 # ----------------------------------------------------------------------------------------
-def solution(n): # function_definition
+def solution(n): # function_definition:solution
     try:
         n = int(n) # assignment, function_call:int
     except (TypeError, ValueError) as e:
@@ -323,11 +323,11 @@ def solution(n): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_05/sol2.py
 # ----------------------------------------------------------------------------------------
-def gcd(x, y): # function_definition, recursive_function_definition (-> +1)
+def gcd(x, y): # function_definition:gcd, recursive_function_definition (-> +1)
     return x if y == 0 else gcd(y, x % y) # binary_operator:Mod, comparison_operator:Eq, conditional_expression, function_call:gcd, literal:Num
-def lcm(x, y): # function_definition
+def lcm(x, y): # function_definition:lcm
     return (x * y) // gcd(x, y) # binary_operator:FloorDiv, binary_operator:Mult, function_call:gcd
-def solution(n): # function_definition
+def solution(n): # function_definition:solution
     g = 1 # assignment, literal:Num
     for i in range(1, n + 1): # accumulate_elements:Assign (-> +1), binary_operator:Add, for_range_start, function_call:range, literal:Num
         g = lcm(g, i) # assignment, function_call:lcm
@@ -336,7 +336,7 @@ def solution(n): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_06/sol1.py
 # ----------------------------------------------------------------------------------------
-def solution(n): # function_definition
+def solution(n): # function_definition:solution
     suma = 0 # assignment, literal:Num
     sumb = 0 # assignment, literal:Num
     for i in range(1, n + 1): # accumulate_elements:AugAssign (-> +2), binary_operator:Add, for_range_start, function_call:range, literal:Num
@@ -348,7 +348,7 @@ def solution(n): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_06/sol2.py
 # ----------------------------------------------------------------------------------------
-def solution(n): # function_definition
+def solution(n): # function_definition:solution
     suma = n * (n + 1) / 2 # assignment, binary_operator:Add, binary_operator:Div, binary_operator:Mult, literal:Num
     suma **= 2 # augmented_assignment, literal:Num
     sumb = n * (n + 1) * (2 * n + 1) / 6 # assignment, binary_operator:Add, binary_operator:Div, binary_operator:Mult, literal:Num, suggest_constant_definition
@@ -358,7 +358,7 @@ def solution(n): # function_definition
 # ../Python/project_euler/problem_06/sol3.py
 # ----------------------------------------------------------------------------------------
 import math # import:math
-def solution(n): # function_definition
+def solution(n): # function_definition:solution
     sum_of_squares = sum([i * i for i in range(1, n + 1)]) # assignment, binary_operator:Add, binary_operator:Mult, composition, function_call:range, function_call:sum, literal:Num
     square_of_sum = int(math.pow(sum(range(1, n + 1)), 2)) # assignment, binary_operator:Add, composition, function_call:int, function_call:range, function_call:sum, literal:Num, method_call:pow
     return square_of_sum - sum_of_squares # binary_operator:Sub
@@ -366,7 +366,7 @@ def solution(n): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_06/sol4.py
 # ----------------------------------------------------------------------------------------
-def solution(n): # function_definition
+def solution(n): # function_definition:solution
     sum_of_squares = n * (n + 1) * (2 * n + 1) / 6 # assignment, binary_operator:Add, binary_operator:Div, binary_operator:Mult, literal:Num, suggest_constant_definition
     square_of_sum = (n * (n + 1) / 2) ** 2 # assignment, binary_operator:Add, binary_operator:Div, binary_operator:Mult, binary_operator:Pow, literal:Num
     return int(square_of_sum - sum_of_squares) # binary_operator:Sub, function_call:int
@@ -375,7 +375,7 @@ def solution(n): # function_definition
 # ../Python/project_euler/problem_07/sol1.py
 # ----------------------------------------------------------------------------------------
 from math import sqrt # import_from:math
-def isprime(n): # function_definition
+def isprime(n): # function_definition:isprime
     if n == 2: # comparison_operator:Eq, if, if_elif, literal:Num
         return True # literal:True
     elif n % 2 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, if, if_else, literal:Num
@@ -386,7 +386,7 @@ def isprime(n): # function_definition
             if n % i == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test, if, literal:Num
                 return False # literal:False
     return True # literal:True
-def solution(n): # function_definition
+def solution(n): # function_definition:solution
     i = 0 # assignment, literal:Num
     j = 1 # assignment, literal:Num
     while i != n and j < 3: # boolean_operator:And, comparison_operator:Lt, comparison_operator:NotEq, evolve_state (-> +1), literal:Num, suggest_constant_definition
@@ -402,12 +402,12 @@ def solution(n): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_07/sol2.py
 # ----------------------------------------------------------------------------------------
-def isprime(number): # function_definition
+def isprime(number): # function_definition:isprime
     for i in range(2, int(number ** 0.5) + 1): # binary_operator:Add, binary_operator:Pow, composition, for_range_start, function_call:int, function_call:range, literal:Num, suggest_constant_definition, universal_quantifier (-> +3)
         if number % i == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test, if, literal:Num
             return False # literal:False
     return True # literal:True
-def solution(n): # function_definition
+def solution(n): # function_definition:solution
     try:
         n = int(n) # assignment, function_call:int
     except (TypeError, ValueError) as e:
@@ -429,17 +429,17 @@ def solution(n): # function_definition
 # ----------------------------------------------------------------------------------------
 import math # import:math
 import itertools # import:itertools
-def primeCheck(number): # function_definition
+def primeCheck(number): # function_definition:primeCheck
     if number % 2 == 0 and number > 2: # binary_operator:Mod, boolean_operator:And, comparison_operator:Eq, comparison_operator:Gt, divisibility_test:2, if, literal:Num
         return False # literal:False
     return all(number % i for i in range(3, int(math.sqrt(number)) + 1, 2)) # binary_operator:Add, binary_operator:Mod, composition, function_call:all, function_call:int, function_call:range, literal:Num, method_call:sqrt, suggest_constant_definition
-def prime_generator(): # function_definition
+def prime_generator(): # function_definition:prime_generator
     num = 2 # assignment, literal:Num
     while True: # literal:True
         if primeCheck(num): # function_call:primeCheck, if
             yield num
         num += 1 # augmented_assignment, literal:Num
-def solution(n): # function_definition
+def solution(n): # function_definition:solution
     return next(itertools.islice(prime_generator(), n - 1, n)) # binary_operator:Sub, composition, function_call:next, function_call:prime_generator, literal:Num, method_call:islice
 
 # ----------------------------------------------------------------------------------------
@@ -466,7 +466,7 @@ N = """73167176531330624919225119674426574742355349194934\ # assignment, global_
 84580156166097919133875499200524063689912560717606\
 05886116467109405077541002256983155200055935729725\
 71636269561882670428252483600823257530420752963450""" # literal:Str
-def solution(n): # function_definition
+def solution(n): # function_definition:solution
     LargestProduct = -sys.maxsize - 1 # assignment, binary_operator:Sub, literal:Num, unary_operator:USub
     for i in range(len(n) - 12): # accumulate_elements:AugAssign (-> +3), binary_operator:Sub, composition, for_range_stop, function_call:len, function_call:range, literal:Num, nested_for (-> +2), suggest_constant_definition
         product = 1 # assignment, literal:Num
@@ -482,7 +482,7 @@ def solution(n): # function_definition
 from functools import reduce # import_from:functools
 N = ( # assignment, global_constant_definition, literal:Tuple
 )
-def solution(n): # function_definition
+def solution(n): # function_definition:solution
     return max( # composition, function_call:max
     [
     reduce(lambda x, y: int(x) * int(y), n[i : i + 13]) # binary_operator:Add, binary_operator:Mult, composition, function_call:int, function_call:reduce, lambda_function, literal:Num, slice, suggest_constant_definition
@@ -514,12 +514,12 @@ N = """73167176531330624919225119674426574742355349194934\ # assignment, global_
 84580156166097919133875499200524063689912560717606\
 05886116467109405077541002256983155200055935729725\
 71636269561882670428252483600823257530420752963450""" # literal:Str
-def streval(s: str) -> int: # function_definition
+def streval(s: str) -> int: # function_definition:streval
     ret = 1 # assignment, literal:Num
     for it in s: # accumulate_elements:AugAssign (-> +1), for_each
         ret *= int(it) # augmented_assignment, function_call:int
     return ret
-def solution(n: str) -> int: # function_definition
+def solution(n: str) -> int: # function_definition:solution
     LargestProduct = -sys.maxsize - 1 # assignment, binary_operator:Sub, literal:Num, unary_operator:USub
     substr = n[:13] # assignment, literal:Num, slice, suggest_constant_definition
     cur_index = 13 # assignment, literal:Num, suggest_constant_definition
@@ -536,7 +536,7 @@ def solution(n: str) -> int: # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_09/sol1.py
 # ----------------------------------------------------------------------------------------
-def solution(): # function_definition
+def solution(): # function_definition:solution
     for a in range(300): # for_range_stop, function_call:range, literal:Num, nested_for (-> +1), suggest_constant_definition
         for b in range(400): # for_range_stop, function_call:range, literal:Num, nested_for (-> +1), suggest_constant_definition
             for c in range(500): # for_range_stop, function_call:range, literal:Num, suggest_constant_definition
@@ -548,7 +548,7 @@ def solution(): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_09/sol2.py
 # ----------------------------------------------------------------------------------------
-def solution(n): # function_definition
+def solution(n): # function_definition:solution
     product = -1 # assignment, literal:Num
     d = 0 # assignment, literal:Num
     for a in range(1, n // 3): # binary_operator:FloorDiv, for_range_start, function_call:range, literal:Num, suggest_constant_definition
@@ -563,7 +563,7 @@ def solution(n): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_09/sol3.py
 # ----------------------------------------------------------------------------------------
-def solution(): # function_definition
+def solution(): # function_definition:solution
     return [
     a * b * c # binary_operator:Mult, index
     for a in range(1, 999) # function_call:range, literal:Num, suggest_constant_definition
@@ -576,12 +576,12 @@ def solution(): # function_definition
 # ../Python/project_euler/problem_10/sol1.py
 # ----------------------------------------------------------------------------------------
 from math import sqrt # import_from:math
-def is_prime(n): # function_definition
+def is_prime(n): # function_definition:is_prime
     for i in range(2, int(sqrt(n)) + 1): # binary_operator:Add, composition, for_range_start, function_call:int, function_call:range, function_call:sqrt, literal:Num, universal_quantifier (-> +3)
         if n % i == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test, if, literal:Num
             return False # literal:False
     return True # literal:True
-def sum_of_primes(n): # function_definition
+def sum_of_primes(n): # function_definition:sum_of_primes
     if n > 2: # comparison_operator:Gt, if, if_else, literal:Num
         sumOfPrimes = 2 # assignment, literal:Num
     else:
@@ -590,7 +590,7 @@ def sum_of_primes(n): # function_definition
         if is_prime(i): # function_call:is_prime, if
             sumOfPrimes += i # augmented_assignment
     return sumOfPrimes
-def solution(n): # function_definition
+def solution(n): # function_definition:solution
     return sum_of_primes(n) # function_call:sum_of_primes
 
 # ----------------------------------------------------------------------------------------
@@ -598,23 +598,23 @@ def solution(n): # function_definition
 # ----------------------------------------------------------------------------------------
 import math # import:math
 from itertools import takewhile # import_from:itertools
-def primeCheck(number): # function_definition
+def primeCheck(number): # function_definition:primeCheck
     if number % 2 == 0 and number > 2: # binary_operator:Mod, boolean_operator:And, comparison_operator:Eq, comparison_operator:Gt, divisibility_test:2, if, literal:Num
         return False # literal:False
     return all(number % i for i in range(3, int(math.sqrt(number)) + 1, 2)) # binary_operator:Add, binary_operator:Mod, composition, function_call:all, function_call:int, function_call:range, literal:Num, method_call:sqrt, suggest_constant_definition
-def prime_generator(): # function_definition
+def prime_generator(): # function_definition:prime_generator
     num = 2 # assignment, literal:Num
     while True: # literal:True
         if primeCheck(num): # function_call:primeCheck, if
             yield num
         num += 1 # augmented_assignment, literal:Num
-def solution(n): # function_definition
+def solution(n): # function_definition:solution
     return sum(takewhile(lambda x: x < n, prime_generator())) # comparison_operator:Lt, composition, function_call:prime_generator, function_call:sum, function_call:takewhile, lambda_function
 
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_10/sol3.py
 # ----------------------------------------------------------------------------------------
-def prime_sum(n: int) -> int: # function_definition
+def prime_sum(n: int) -> int: # function_definition:prime_sum
     list_ = [0 for i in range(n + 1)] # assignment, binary_operator:Add, function_call:range, literal:Num
     list_[0] = 1 # assignment, index, literal:Num
     list_[1] = 1 # assignment, index, literal:Num
@@ -632,7 +632,7 @@ def prime_sum(n: int) -> int: # function_definition
 # ../Python/project_euler/problem_11/sol1.py
 # ----------------------------------------------------------------------------------------
 import os # import:os
-def largest_product(grid): # function_definition
+def largest_product(grid): # function_definition:largest_product
     nColumns = len(grid[0]) # assignment, function_call:len, index, literal:Num
     nRows = len(grid) # assignment, function_call:len
     largest = 0 # assignment, literal:Num
@@ -660,7 +660,7 @@ def largest_product(grid): # function_definition
             if maxProduct > largest: # comparison_operator:Gt, if
                 largest = maxProduct # assignment
     return largest
-def solution(): # function_definition
+def solution(): # function_definition:solution
     grid = [] # assignment, literal:List
     with open(os.path.dirname(__file__) + "/grid.txt") as file: # binary_operator:Add, composition, function_call:open, literal:Str, method_call:dirname
         for line in file: # for_each
@@ -672,7 +672,7 @@ def solution(): # function_definition
 # ../Python/project_euler/problem_11/sol2.py
 # ----------------------------------------------------------------------------------------
 import os # import:os
-def solution(): # function_definition
+def solution(): # function_definition:solution
     with open(os.path.dirname(__file__) + "/grid.txt") as f: # binary_operator:Add, composition, function_call:open, literal:Str, method_call:dirname
         l = [] # assignment, literal:List
         for i in range(20): # for_range_stop, function_call:range, literal:Num, suggest_constant_definition
@@ -688,7 +688,7 @@ def solution(): # function_definition
                 temp = l[i][j] * l[i + 1][j] * l[i + 2][j] * l[i + 3][j] # assignment, binary_operator:Add, binary_operator:Mult, index, index_arithmetic, literal:Num, suggest_constant_definition
                 if temp > maximum: # comparison_operator:Gt, if
                     maximum = temp # assignment
-        for i in range(17): # for_range_stop, function_call:range, literal:Num, nested_for (-> +1), suggest_constant_definition
+        for i in range(17): # for_range_stop, function_call:range, literal:Num, nested_for (-> +1), square_nested_for (-> +1), suggest_constant_definition
             for j in range(17): # for_range_stop, function_call:range, literal:Num, suggest_constant_definition
                 temp = l[i][j] * l[i + 1][j + 1] * l[i + 2][j + 2] * l[i + 3][j + 3] # assignment, binary_operator:Add, binary_operator:Mult, index, index_arithmetic, literal:Num, suggest_constant_definition
                 if temp > maximum: # comparison_operator:Gt, if
@@ -704,7 +704,7 @@ def solution(): # function_definition
 # ../Python/project_euler/problem_12/sol1.py
 # ----------------------------------------------------------------------------------------
 from math import sqrt # import_from:math
-def count_divisors(n): # function_definition
+def count_divisors(n): # function_definition:count_divisors
     nDivisors = 0 # assignment, literal:Num
     for i in range(1, int(sqrt(n)) + 1): # binary_operator:Add, composition, for_range_start, function_call:int, function_call:range, function_call:sqrt, literal:Num
         if n % i == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test, if, literal:Num
@@ -712,7 +712,7 @@ def count_divisors(n): # function_definition
     if n ** 0.5 == int(n ** 0.5): # binary_operator:Pow, comparison_operator:Eq, function_call:int, if, literal:Num, suggest_constant_definition
         nDivisors -= 1 # augmented_assignment, literal:Num
     return nDivisors
-def solution(): # function_definition
+def solution(): # function_definition:solution
     tNum = 1 # assignment, literal:Num
     i = 1 # assignment, literal:Num
     while True: # literal:True
@@ -725,24 +725,24 @@ def solution(): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_12/sol2.py
 # ----------------------------------------------------------------------------------------
-def triangle_number_generator(): # function_definition
+def triangle_number_generator(): # function_definition:triangle_number_generator
     for n in range(1, 1000000): # for_range_start, function_call:range, literal:Num, suggest_constant_definition
         yield n * (n + 1) // 2 # binary_operator:Add, binary_operator:FloorDiv, binary_operator:Mult, literal:Num
-def count_divisors(n): # function_definition
+def count_divisors(n): # function_definition:count_divisors
     return sum([2 for i in range(1, int(n ** 0.5) + 1) if n % i == 0 and i * i != n]) # binary_operator:Add, binary_operator:Mod, binary_operator:Mult, binary_operator:Pow, boolean_operator:And, comparison_operator:Eq, comparison_operator:NotEq, composition, divisibility_test, function_call:int, function_call:range, function_call:sum, literal:Num, suggest_constant_definition
-def solution(): # function_definition
+def solution(): # function_definition:solution
     return next(i for i in triangle_number_generator() if count_divisors(i) > 500) # comparison_operator:Gt, composition, function_call:count_divisors, function_call:next, function_call:triangle_number_generator, literal:Num, suggest_constant_definition
 
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_13/sol1.py
 # ----------------------------------------------------------------------------------------
-def solution(array): # function_definition
+def solution(array): # function_definition:solution
     return str(sum(array))[:10] # composition, function_call:str, function_call:sum, literal:Num, slice, suggest_constant_definition
 
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_14/sol1.py
 # ----------------------------------------------------------------------------------------
-def solution(n): # function_definition
+def solution(n): # function_definition:solution
     largest_number = 0 # assignment, literal:Num
     pre_counter = 0 # assignment, literal:Num
     for input1 in range(n): # for_range_stop, function_call:range
@@ -763,7 +763,7 @@ def solution(n): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_14/sol2.py
 # ----------------------------------------------------------------------------------------
-def collatz_sequence(n): # function_definition
+def collatz_sequence(n): # function_definition:collatz_sequence
     sequence = [n] # assignment
     while n != 1: # comparison_operator:NotEq, evolve_state (-> +4), literal:Num
         if n % 2 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, if, if_else, literal:Num
@@ -772,7 +772,7 @@ def collatz_sequence(n): # function_definition
             n = 3 * n + 1 # assignment, binary_operator:Add, binary_operator:Mult, literal:Num, suggest_constant_definition
         sequence.append(n) # method_call:append
     return sequence
-def solution(n): # function_definition
+def solution(n): # function_definition:solution
     result = max([(len(collatz_sequence(i)), i) for i in range(1, n)]) # assignment, composition, function_call:collatz_sequence, function_call:len, function_call:max, function_call:range, literal:Num
     return {"counter": result[0], "largest_number": result[1]} # index, literal:Num, literal:Str
 
@@ -780,7 +780,7 @@ def solution(n): # function_definition
 # ../Python/project_euler/problem_15/sol1.py
 # ----------------------------------------------------------------------------------------
 from math import factorial # import_from:math
-def lattice_paths(n): # function_definition
+def lattice_paths(n): # function_definition:lattice_paths
     n = 2 * n # assignment, binary_operator:Mult, literal:Num
     k = n / 2 # assignment, binary_operator:Div, literal:Num
     return int(factorial(n) / (factorial(k) * factorial(n - k))) # binary_operator:Div, binary_operator:Mult, binary_operator:Sub, composition, function_call:factorial, function_call:int
@@ -788,7 +788,7 @@ def lattice_paths(n): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_16/sol1.py
 # ----------------------------------------------------------------------------------------
-def solution(power): # function_definition
+def solution(power): # function_definition:solution
     num = 2 ** power # assignment, binary_operator:Pow, literal:Num
     string_num = str(num) # assignment, function_call:str
     list_num = list(string_num) # assignment, function_call:list
@@ -800,7 +800,7 @@ def solution(power): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_16/sol2.py
 # ----------------------------------------------------------------------------------------
-def solution(power): # function_definition
+def solution(power): # function_definition:solution
     n = 2 ** power # assignment, binary_operator:Pow, literal:Num
     r = 0 # assignment, literal:Num
     while n:
@@ -810,7 +810,7 @@ def solution(power): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_17/sol1.py
 # ----------------------------------------------------------------------------------------
-def solution(n): # function_definition
+def solution(n): # function_definition:solution
     ones_counts = [0, 3, 3, 5, 4, 4, 3, 5, 5, 4, 3, 6, 6, 8, 8, 7, 7, 9, 8, 8] # assignment, literal:List, literal:Num, suggest_constant_definition
     tens_counts = [0, 0, 6, 6, 5, 5, 5, 7, 6, 6] # assignment, literal:List, literal:Num, suggest_constant_definition
     count = 0 # assignment, literal:Num
@@ -833,7 +833,7 @@ def solution(n): # function_definition
 # ../Python/project_euler/problem_18/solution.py
 # ----------------------------------------------------------------------------------------
 import os # import:os
-def solution(): # function_definition
+def solution(): # function_definition:solution
     script_dir = os.path.dirname(os.path.realpath(__file__)) # assignment, composition, method_call:dirname, method_call:realpath
     triangle = os.path.join(script_dir, "triangle.txt") # assignment, literal:Str, method_call:join
     with open(triangle, "r") as f: # function_call:open, literal:Str
@@ -855,7 +855,7 @@ def solution(): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_19/sol1.py
 # ----------------------------------------------------------------------------------------
-def solution(): # function_definition
+def solution(): # function_definition:solution
     days_per_month = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31] # assignment, literal:List, literal:Num, suggest_constant_definition
     day = 6 # assignment, literal:Num, suggest_constant_definition
     month = 1 # assignment, literal:Num
@@ -884,19 +884,19 @@ def solution(): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_20/sol1.py
 # ----------------------------------------------------------------------------------------
-def factorial(n): # function_definition
+def factorial(n): # function_definition:factorial
     fact = 1 # assignment, literal:Num
     for i in range(1, n + 1): # accumulate_elements:AugAssign (-> +1), binary_operator:Add, for_range_start, function_call:range, literal:Num
         fact *= i # augmented_assignment
     return fact
-def split_and_add(number): # function_definition
+def split_and_add(number): # function_definition:split_and_add
     sum_of_digits = 0 # assignment, literal:Num
     while number > 0: # comparison_operator:Gt, evolve_state (-> +3), literal:Num
         last_digit = number % 10 # assignment, binary_operator:Mod, literal:Num, suggest_constant_definition
         sum_of_digits += last_digit # augmented_assignment
         number = number // 10 # assignment, binary_operator:FloorDiv, literal:Num, suggest_augmented_assignment, suggest_constant_definition
     return sum_of_digits
-def solution(n): # function_definition
+def solution(n): # function_definition:solution
     f = factorial(n) # assignment, function_call:factorial
     result = split_and_add(f) # assignment, function_call:split_and_add
     return result
@@ -905,20 +905,20 @@ def solution(n): # function_definition
 # ../Python/project_euler/problem_20/sol2.py
 # ----------------------------------------------------------------------------------------
 from math import factorial # import_from:math
-def solution(n): # function_definition
+def solution(n): # function_definition:solution
     return sum([int(x) for x in str(factorial(n))]) # composition, function_call:factorial, function_call:int, function_call:str, function_call:sum
 
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_20/sol3.py
 # ----------------------------------------------------------------------------------------
 from math import factorial # import_from:math
-def solution(n): # function_definition
+def solution(n): # function_definition:solution
     return sum(map(int, str(factorial(n)))) # composition, function_call:factorial, function_call:map, function_call:str, function_call:sum
 
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_20/sol4.py
 # ----------------------------------------------------------------------------------------
-def solution(n): # function_definition
+def solution(n): # function_definition:solution
     fact = 1 # assignment, literal:Num
     result = 0 # assignment, literal:Num
     for i in range(1, n + 1): # accumulate_elements:AugAssign (-> +1), binary_operator:Add, for_range_start, function_call:range, literal:Num
@@ -931,7 +931,7 @@ def solution(n): # function_definition
 # ../Python/project_euler/problem_21/sol1.py
 # ----------------------------------------------------------------------------------------
 from math import sqrt # import_from:math
-def sum_of_divisors(n): # function_definition
+def sum_of_divisors(n): # function_definition:sum_of_divisors
     total = 0 # assignment, literal:Num
     for i in range(1, int(sqrt(n) + 1)): # accumulate_elements:AugAssign (-> +2), binary_operator:Add, composition, for_range_start, function_call:int, function_call:range, function_call:sqrt, literal:Num
         if n % i == 0 and i != sqrt(n): # binary_operator:Mod, boolean_operator:And, comparison_operator:Eq, comparison_operator:NotEq, divisibility_test, function_call:sqrt, if, if_elif, literal:Num
@@ -939,7 +939,7 @@ def sum_of_divisors(n): # function_definition
         elif i == sqrt(n): # comparison_operator:Eq, function_call:sqrt, if
             total += i # augmented_assignment
     return total - n # binary_operator:Sub
-def solution(n): # function_definition
+def solution(n): # function_definition:solution
     total = sum( # assignment, composition, function_call:sum
     [
     i
@@ -953,14 +953,14 @@ def solution(n): # function_definition
 # ../Python/project_euler/problem_22/sol1.py
 # ----------------------------------------------------------------------------------------
 import os # import:os
-def solution(): # function_definition
+def solution(): # function_definition:solution
     with open(os.path.dirname(__file__) + "/p022_names.txt") as file: # binary_operator:Add, composition, function_call:open, literal:Str, method_call:dirname
         names = str(file.readlines()[0]) # assignment, composition, function_call:str, index, literal:Num, method_call:readlines
         names = names.replace('"', "").split(",") # assignment, literal:Str, method_call:replace, method_call:split, method_chaining
     names.sort() # method_call:sort
     name_score = 0 # assignment, literal:Num
     total_score = 0 # assignment, literal:Num
-    for i, name in enumerate(names): # for_indexes_values, function_call:enumerate, nested_for (-> +1)
+    for i, name in enumerate(names): # for_indexes_elements, function_call:enumerate, nested_for (-> +1)
         for letter in name: # accumulate_elements:AugAssign (-> +1), for_each
             name_score += ord(letter) - 64 # augmented_assignment, binary_operator:Sub, function_call:ord, literal:Num, suggest_constant_definition
         total_score += (i + 1) * name_score # augmented_assignment, binary_operator:Add, binary_operator:Mult, literal:Num
@@ -971,7 +971,7 @@ def solution(): # function_definition
 # ../Python/project_euler/problem_22/sol2.py
 # ----------------------------------------------------------------------------------------
 import os # import:os
-def solution(): # function_definition
+def solution(): # function_definition:solution
     total_sum = 0 # assignment, literal:Num
     temp_sum = 0 # assignment, literal:Num
     with open(os.path.dirname(__file__) + "/p022_names.txt") as file: # binary_operator:Add, composition, function_call:open, literal:Str, method_call:dirname
@@ -988,7 +988,7 @@ def solution(): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_23/sol1.py
 # ----------------------------------------------------------------------------------------
-def solution(limit=28123): # function_definition, function_with_default_positional_arguments_definition, literal:Num
+def solution(limit=28123): # function_definition:solution, function_with_default_positional_arguments_definition, literal:Num
     sumDivs = [1] * (limit + 1) # assignment, binary_operator:Add, binary_operator:Mult, literal:List, literal:Num
     for i in range(2, int(limit ** 0.5) + 1): # accumulate_elements:AugAssign (-> +3), binary_operator:Add, binary_operator:Pow, composition, for_range_start, function_call:int, function_call:range, literal:Num, nested_for (-> +2), suggest_constant_definition
         sumDivs[i * i] += i # augmented_assignment, binary_operator:Mult, index, index_arithmetic
@@ -1006,7 +1006,7 @@ def solution(limit=28123): # function_definition, function_with_default_position
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_234/sol1.py
 # ----------------------------------------------------------------------------------------
-def fib(a, b, n): # function_definition
+def fib(a, b, n): # function_definition:fib
     if n == 1: # comparison_operator:Eq, if, if_elif, literal:Num
         return a
     elif n == 2: # comparison_operator:Eq, if, if_elif, literal:Num
@@ -1020,7 +1020,7 @@ def fib(a, b, n): # function_definition
         b = c # assignment
         a = temp # assignment
     return c
-def solution(n): # function_definition
+def solution(n): # function_definition:solution
     semidivisible = [] # assignment, literal:List
     for x in range(n): # for_range_stop, function_call:range
         l = [i for i in input().split()] # assignment, function_call:input, method_call:split
@@ -1037,14 +1037,14 @@ def solution(n): # function_definition
 # ../Python/project_euler/problem_24/sol1.py
 # ----------------------------------------------------------------------------------------
 from itertools import permutations # import_from:itertools
-def solution(): # function_definition
+def solution(): # function_definition:solution
     result = list(map("".join, permutations("0123456789"))) # assignment, composition, function_call:list, function_call:map, function_call:permutations, literal:Str
     return result[999999] # index, literal:Num, suggest_constant_definition
 
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_25/sol1.py
 # ----------------------------------------------------------------------------------------
-def fibonacci(n): # function_definition
+def fibonacci(n): # function_definition:fibonacci
     if n == 1 or type(n) is not int: # boolean_operator:Or, comparison_operator:Eq, comparison_operator:IsNot, function_call:type, if, if_elif, literal:Num
         return 0 # literal:Num
     elif n == 2: # comparison_operator:Eq, if, if_else, literal:Num
@@ -1054,25 +1054,25 @@ def fibonacci(n): # function_definition
         for i in range(2, n + 1): # binary_operator:Add, for_range_start, function_call:range, literal:Num
             sequence.append(sequence[i - 1] + sequence[i - 2]) # binary_operator:Add, binary_operator:Sub, index, index_arithmetic, literal:Num, method_call:append
         return sequence[n] # index
-def fibonacci_digits_index(n): # function_definition
+def fibonacci_digits_index(n): # function_definition:fibonacci_digits_index
     digits = 0 # assignment, literal:Num
     index = 2 # assignment, literal:Num
     while digits < n: # comparison_operator:Lt
         index += 1 # augmented_assignment, literal:Num
         digits = len(str(fibonacci(index))) # assignment, composition, function_call:fibonacci, function_call:len, function_call:str
     return index
-def solution(n): # function_definition
+def solution(n): # function_definition:solution
     return fibonacci_digits_index(n) # function_call:fibonacci_digits_index
 
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_25/sol2.py
 # ----------------------------------------------------------------------------------------
-def fibonacci_generator(): # function_definition
+def fibonacci_generator(): # function_definition:fibonacci_generator
     a, b = 0, 1 # assignment, literal:Num, literal:Tuple
     while True: # literal:True
         a, b = b, a + b # assignment, binary_operator:Add
         yield b
-def solution(n): # function_definition
+def solution(n): # function_definition:solution
     answer = 1 # assignment, literal:Num
     gen = fibonacci_generator() # assignment, function_call:fibonacci_generator
     while len(str(next(gen))) < n: # comparison_operator:Lt, composition, function_call:len, function_call:next, function_call:str
@@ -1082,7 +1082,7 @@ def solution(n): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_25/sol3.py
 # ----------------------------------------------------------------------------------------
-def solution(n): # function_definition
+def solution(n): # function_definition:solution
     f1, f2 = 1, 1 # assignment, literal:Num, literal:Tuple
     index = 2 # assignment, literal:Num
     while True: # literal:True
@@ -1100,7 +1100,7 @@ def solution(n): # function_definition
 # ../Python/project_euler/problem_27/problem_27_sol1.py
 # ----------------------------------------------------------------------------------------
 import math # import:math
-def is_prime(k: int) -> bool: # function_definition
+def is_prime(k: int) -> bool: # function_definition:is_prime
     if k < 2 or k % 2 == 0: # binary_operator:Mod, boolean_operator:Or, comparison_operator:Eq, comparison_operator:Lt, divisibility_test:2, if, if_elif, literal:Num
         return False # literal:False
     elif k == 2: # comparison_operator:Eq, if, if_else, literal:Num
@@ -1110,7 +1110,7 @@ def is_prime(k: int) -> bool: # function_definition
             if k % x == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test, if, literal:Num
                 return False # literal:False
     return True # literal:True
-def solution(a_limit: int, b_limit: int) -> int: # function_definition
+def solution(a_limit: int, b_limit: int) -> int: # function_definition:solution
     longest = [0, 0, 0] # assignment, literal:List, literal:Num
     for a in range((a_limit * -1) + 1, a_limit): # binary_operator:Add, binary_operator:Mult, for_range_start, function_call:range, literal:Num, nested_for (-> +1)
         for b in range(2, b_limit): # for_range_start, function_call:range, literal:Num
@@ -1129,7 +1129,7 @@ def solution(a_limit: int, b_limit: int) -> int: # function_definition
 # ../Python/project_euler/problem_28/sol1.py
 # ----------------------------------------------------------------------------------------
 from math import ceil # import_from:math
-def diagonal_sum(n): # function_definition
+def diagonal_sum(n): # function_definition:diagonal_sum
     total = 1 # assignment, literal:Num
     for i in range(1, int(ceil(n / 2.0))): # binary_operator:Div, composition, for_range_start, function_call:ceil, function_call:int, function_call:range, literal:Num, suggest_constant_definition
         odd = 2 * i + 1 # assignment, binary_operator:Add, binary_operator:Mult, literal:Num
@@ -1140,11 +1140,11 @@ def diagonal_sum(n): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_29/solution.py
 # ----------------------------------------------------------------------------------------
-def solution(n): # function_definition
+def solution(n): # function_definition:solution
     collectPowers = set() # assignment, function_call:set
     currentPow = 0 # assignment, literal:Num
     N = n + 1 # assignment, binary_operator:Add, literal:Num
-    for a in range(2, N): # for_range_start, function_call:range, literal:Num, nested_for (-> +1)
+    for a in range(2, N): # for_range_start, function_call:range, literal:Num, nested_for (-> +1), square_nested_for (-> +1)
         for b in range(2, N): # for_range_start, function_call:range, literal:Num
             currentPow = a ** b # assignment, binary_operator:Pow
             collectPowers.add(currentPow) # method_call:add
@@ -1153,30 +1153,30 @@ def solution(n): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_31/sol1.py
 # ----------------------------------------------------------------------------------------
-def one_pence(): # function_definition
+def one_pence(): # function_definition:one_pence
     return 1 # literal:Num
-def two_pence(x): # function_definition, recursive_function_definition (-> +1)
+def two_pence(x): # function_definition:two_pence, recursive_function_definition (-> +1)
     return 0 if x < 0 else two_pence(x - 2) + one_pence() # binary_operator:Add, binary_operator:Sub, comparison_operator:Lt, conditional_expression, function_call:one_pence, function_call:two_pence, literal:Num
-def five_pence(x): # function_definition, recursive_function_definition (-> +1)
+def five_pence(x): # function_definition:five_pence, recursive_function_definition (-> +1)
     return 0 if x < 0 else five_pence(x - 5) + two_pence(x) # binary_operator:Add, binary_operator:Sub, comparison_operator:Lt, conditional_expression, function_call:five_pence, function_call:two_pence, literal:Num, suggest_constant_definition
-def ten_pence(x): # function_definition, recursive_function_definition (-> +1)
+def ten_pence(x): # function_definition:ten_pence, recursive_function_definition (-> +1)
     return 0 if x < 0 else ten_pence(x - 10) + five_pence(x) # binary_operator:Add, binary_operator:Sub, comparison_operator:Lt, conditional_expression, function_call:five_pence, function_call:ten_pence, literal:Num, suggest_constant_definition
-def twenty_pence(x): # function_definition, recursive_function_definition (-> +1)
+def twenty_pence(x): # function_definition:twenty_pence, recursive_function_definition (-> +1)
     return 0 if x < 0 else twenty_pence(x - 20) + ten_pence(x) # binary_operator:Add, binary_operator:Sub, comparison_operator:Lt, conditional_expression, function_call:ten_pence, function_call:twenty_pence, literal:Num, suggest_constant_definition
-def fifty_pence(x): # function_definition, recursive_function_definition (-> +1)
+def fifty_pence(x): # function_definition:fifty_pence, recursive_function_definition (-> +1)
     return 0 if x < 0 else fifty_pence(x - 50) + twenty_pence(x) # binary_operator:Add, binary_operator:Sub, comparison_operator:Lt, conditional_expression, function_call:fifty_pence, function_call:twenty_pence, literal:Num, suggest_constant_definition
-def one_pound(x): # function_definition, recursive_function_definition (-> +1)
+def one_pound(x): # function_definition:one_pound, recursive_function_definition (-> +1)
     return 0 if x < 0 else one_pound(x - 100) + fifty_pence(x) # binary_operator:Add, binary_operator:Sub, comparison_operator:Lt, conditional_expression, function_call:fifty_pence, function_call:one_pound, literal:Num, suggest_constant_definition
-def two_pound(x): # function_definition, recursive_function_definition (-> +1)
+def two_pound(x): # function_definition:two_pound, recursive_function_definition (-> +1)
     return 0 if x < 0 else two_pound(x - 200) + one_pound(x) # binary_operator:Add, binary_operator:Sub, comparison_operator:Lt, conditional_expression, function_call:one_pound, function_call:two_pound, literal:Num, suggest_constant_definition
-def solution(n): # function_definition
+def solution(n): # function_definition:solution
     return two_pound(n) # function_call:two_pound
 
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_32/sol32.py
 # ----------------------------------------------------------------------------------------
 import itertools # import:itertools
-def isCombinationValid(combination): # function_definition
+def isCombinationValid(combination): # function_definition:isCombinationValid
     return ( # boolean_operator:Or
     int("".join(combination[0:2])) * int("".join(combination[2:5])) # binary_operator:Mult, composition, function_call:int, literal:Num, literal:Str, method_call:join, slice, suggest_constant_definition
     == int("".join(combination[5:9])) # comparison_operator:Eq, composition, function_call:int, literal:Num, literal:Str, method_call:join, slice, suggest_constant_definition
@@ -1184,7 +1184,7 @@ def isCombinationValid(combination): # function_definition
     int("".join(combination[0])) * int("".join(combination[1:5])) # binary_operator:Mult, composition, function_call:int, index, literal:Num, literal:Str, method_call:join, slice, suggest_constant_definition
     == int("".join(combination[5:9])) # comparison_operator:Eq, composition, function_call:int, literal:Num, literal:Str, method_call:join, slice, suggest_constant_definition
     )
-def solution(): # function_definition
+def solution(): # function_definition:solution
     return sum( # composition, function_call:sum
     set( # composition, function_call:set
     [
@@ -1198,12 +1198,12 @@ def solution(): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_33/sol1.py
 # ----------------------------------------------------------------------------------------
-def isDigitCancelling(num, den): # function_definition
+def isDigitCancelling(num, den): # function_definition:isDigitCancelling
     if num != den: # comparison_operator:NotEq, if
         if num % 10 == den // 10: # binary_operator:FloorDiv, binary_operator:Mod, comparison_operator:Eq, divisibility_test:10, if, literal:Num, suggest_constant_definition
             if (num // 10) / (den % 10) == num / den: # binary_operator:Div, binary_operator:FloorDiv, binary_operator:Mod, comparison_operator:Eq, if, literal:Num, suggest_constant_definition
                 return True # literal:True
-def solve(digit_len: int) -> str: # function_definition
+def solve(digit_len: int) -> str: # function_definition:solve
     solutions = [] # assignment, literal:List
     den = 11 # assignment, literal:Num, suggest_constant_definition
     last_digit = int("1" + "0" * digit_len) # assignment, binary_operator:Add, binary_operator:Mult, function_call:int, literal:Str
@@ -1221,13 +1221,13 @@ def solve(digit_len: int) -> str: # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_36/sol1.py
 # ----------------------------------------------------------------------------------------
-def is_palindrome(n): # function_definition
+def is_palindrome(n): # function_definition:is_palindrome
     n = str(n) # assignment, function_call:str
     if n == n[::-1]: # comparison_operator:Eq, if, if_else, literal:Num, slice_step, suggest_condition_return (-> +3)
         return True # literal:True
     else:
         return False # literal:False
-def solution(n): # function_definition
+def solution(n): # function_definition:solution
     total = 0 # assignment, literal:Num
     for i in range(1, n): # accumulate_elements:AugAssign (-> +2), for_range_start, function_call:range, literal:Num
         if is_palindrome(i) and is_palindrome(bin(i).split("b")[1]): # boolean_operator:And, composition, function_call:bin, function_call:is_palindrome, if, index, literal:Num, literal:Str, method_call:split
@@ -1237,7 +1237,7 @@ def solution(n): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_40/sol1.py
 # ----------------------------------------------------------------------------------------
-def solution(): # function_definition
+def solution(): # function_definition:solution
     constant = [] # assignment, literal:List
     i = 1 # assignment, literal:Num
     while len(constant) < 1e6: # comparison_operator:Lt, evolve_state (-> +1), function_call:len, literal:Num, suggest_constant_definition
@@ -1259,7 +1259,7 @@ def solution(): # function_definition
 # ----------------------------------------------------------------------------------------
 import os # import:os
 TRIANGULAR_NUMBERS = [int(0.5 * n * (n + 1)) for n in range(1, 101)] # assignment, binary_operator:Add, binary_operator:Mult, function_call:int, function_call:range, global_constant_definition, literal:Num
-def solution(): # function_definition
+def solution(): # function_definition:solution
     script_dir = os.path.dirname(os.path.realpath(__file__)) # assignment, composition, method_call:dirname, method_call:realpath
     wordsFilePath = os.path.join(script_dir, "words.txt") # assignment, literal:Str, method_call:join
     words = "" # assignment, literal:Str
@@ -1277,7 +1277,7 @@ def solution(): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_48/sol1.py
 # ----------------------------------------------------------------------------------------
-def solution(): # function_definition
+def solution(): # function_definition:solution
     total = 0 # assignment, literal:Num
     for i in range(1, 1001): # accumulate_elements:AugAssign (-> +1), for_range_start, function_call:range, literal:Num, suggest_constant_definition
         total += i ** i # augmented_assignment, binary_operator:Pow
@@ -1286,7 +1286,7 @@ def solution(): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_52/sol1.py
 # ----------------------------------------------------------------------------------------
-def solution(): # function_definition
+def solution(): # function_definition:solution
     i = 1 # assignment, literal:Num
     while True: # literal:True
         if ( # if
@@ -1304,9 +1304,9 @@ def solution(): # function_definition
 # ../Python/project_euler/problem_53/sol1.py
 # ----------------------------------------------------------------------------------------
 from math import factorial # import_from:math
-def combinations(n, r): # function_definition
+def combinations(n, r): # function_definition:combinations
     return factorial(n) / (factorial(r) * factorial(n - r)) # binary_operator:Div, binary_operator:Mult, binary_operator:Sub, function_call:factorial
-def solution(): # function_definition
+def solution(): # function_definition:solution
     total = 0 # assignment, literal:Num
     for i in range(1, 101): # for_range_start, function_call:range, literal:Num, nested_for (-> +1), suggest_constant_definition
         for j in range(1, i + 1): # binary_operator:Add, for_range_start, function_call:range, literal:Num
@@ -1320,7 +1320,7 @@ def solution(): # function_definition
 ks = [k for k in range(2, 20 + 1)] # assignment, binary_operator:Add, function_call:range, global_variable_definition, literal:Num
 base = [10 ** k for k in range(ks[-1] + 1)] # assignment, binary_operator:Add, binary_operator:Pow, function_call:range, global_variable_definition, index, literal:Num
 memo = {} # assignment, global_variable_definition, literal:Dict
-def next_term(a_i, k, i, n): # function_definition, recursive_function_definition (-> +34)
+def next_term(a_i, k, i, n): # function_definition:next_term, recursive_function_definition (-> +34)
     ds_b = 0 # assignment, literal:Num
     for j in range(k, len(a_i)): # accumulate_elements:AugAssign (-> +1), composition, for_range_start, function_call:len, function_call:range
         ds_b += a_i[j] # augmented_assignment, index
@@ -1371,7 +1371,7 @@ def next_term(a_i, k, i, n): # function_definition, recursive_function_definitio
         j += 1 # augmented_assignment, literal:Num
     sub_memo[c].insert(j, (diff, dn, k)) # index, method_call:insert
     return (diff, dn)
-def compute(a_i, k, i, n): # function_definition
+def compute(a_i, k, i, n): # function_definition:compute
     if i >= n: # comparison_operator:GtE, if
         return 0, i # literal:Num
     if k > len(a_i): # comparison_operator:Gt, function_call:len, if
@@ -1397,7 +1397,7 @@ def compute(a_i, k, i, n): # function_definition
     if addend > 0: # comparison_operator:Gt, if, literal:Num
         add(a_i, k, addend) # function_call:add
     return diff, i - start_i # binary_operator:Sub
-def add(digits, k, addend): # function_definition
+def add(digits, k, addend): # function_definition:add
     for j in range(k, len(digits)): # composition, for_range_start, function_call:len, function_call:range
         s = digits[j] + addend # assignment, binary_operator:Add, index
         if s >= 10: # comparison_operator:GtE, if, if_else, literal:Num, suggest_constant_definition
@@ -1411,7 +1411,7 @@ def add(digits, k, addend): # function_definition
     while addend > 0: # comparison_operator:Gt, literal:Num
         addend, digit = divmod(addend, 10) # assignment, function_call:divmod, literal:Num, suggest_constant_definition
         digits.append(digit) # method_call:append
-def solution(n): # function_definition
+def solution(n): # function_definition:solution
     digits = [1] # assignment, literal:List, literal:Num
     i = 1 # assignment, literal:Num
     dn = 0 # assignment, literal:Num
@@ -1428,7 +1428,7 @@ def solution(n): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_56/sol1.py
 # ----------------------------------------------------------------------------------------
-def maximum_digital_sum(a: int, b: int) -> int: # function_definition
+def maximum_digital_sum(a: int, b: int) -> int: # function_definition:maximum_digital_sum
     return max( # composition, function_call:max
     [
     sum([int(x) for x in str(base ** power)]) # binary_operator:Pow, composition, function_call:int, function_call:str, function_call:sum
@@ -1441,7 +1441,7 @@ def maximum_digital_sum(a: int, b: int) -> int: # function_definition
 # ../Python/project_euler/problem_67/sol1.py
 # ----------------------------------------------------------------------------------------
 import os # import:os
-def solution(): # function_definition
+def solution(): # function_definition:solution
     script_dir = os.path.dirname(os.path.realpath(__file__)) # assignment, composition, method_call:dirname, method_call:realpath
     triangle = os.path.join(script_dir, "triangle.txt") # assignment, literal:Str, method_call:join
     with open(triangle, "r") as f: # function_call:open, literal:Str
@@ -1464,7 +1464,7 @@ def solution(): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_76/sol1.py
 # ----------------------------------------------------------------------------------------
-def partition(m): # function_definition
+def partition(m): # function_definition:partition
     memo = [[0 for _ in range(m)] for _ in range(m + 1)] # assignment, binary_operator:Add, function_call:range, literal:Num
     for i in range(m + 1): # binary_operator:Add, for_range_stop, function_call:range, literal:Num
         memo[i][0] = 1 # assignment, index, literal:Num
@@ -1480,9 +1480,9 @@ def partition(m): # function_definition
 # ----------------------------------------------------------------------------------------
 import os # import:os
 from math import log10 # import_from:math
-def find_largest(data_file: str = "base_exp.txt") -> int: # function_definition, function_with_default_positional_arguments_definition, literal:Str
+def find_largest(data_file: str = "base_exp.txt") -> int: # function_definition:find_largest, function_with_default_positional_arguments_definition, literal:Str
     largest = [0, 0] # assignment, literal:List, literal:Num
-    for i, line in enumerate(open(os.path.join(os.path.dirname(__file__), data_file))): # composition, for_indexes_values, function_call:enumerate, function_call:open, method_call:dirname, method_call:join
+    for i, line in enumerate(open(os.path.join(os.path.dirname(__file__), data_file))): # composition, for_indexes_elements, function_call:enumerate, function_call:open, method_call:dirname, method_call:join
         a, x = list(map(int, line.split(","))) # assignment, composition, function_call:list, function_call:map, literal:Str, method_call:split
         if x * log10(a) > largest[0]: # binary_operator:Mult, comparison_operator:Gt, function_call:log10, if, index, literal:Num
             largest = [x * log10(a), i + 1] # assignment, binary_operator:Add, binary_operator:Mult, function_call:log10, literal:Num
