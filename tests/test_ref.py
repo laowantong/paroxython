@@ -8,7 +8,7 @@ from paroxython import parser
 
 def reformat_file(construct_path):
     text = construct_path.read_text()
-    toc = build_toc(construct_path, keep_header_levels=5, no_list_coherence=True)
+    toc = build_toc(construct_path, keep_header_levels=4, no_list_coherence=True)
     rule = "-" * 80 + "\n"
     text = regex.sub(r"(?m)^---+\n", "", text)
     text = regex.sub(r"(?m)^ +```", "```", text)
