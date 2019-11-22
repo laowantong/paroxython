@@ -6,10 +6,8 @@
 
 
 from io import StringIO
-from token import (COMMENT, DEDENT, ENDMARKER, INDENT, NAME, NEWLINE, NL, OP,
-                   STRING)
+from token import COMMENT, DEDENT, ENDMARKER, INDENT, NAME, NEWLINE, NL, OP, STRING
 from tokenize import generate_tokens
-
 
 
 # classes / helpers ############################################################
@@ -214,7 +212,9 @@ def minimize(
         grps = remove_docstrings(grps)
     return untokenize(grps, rm_whitespace, whitespace_char, indent_char)
 
+
 if __name__ == "__main__":
     from pathlib import Path
+
     source = Path("../Algo/programs/damm_checksum_0.py").read_text()
     print(minimize(source))

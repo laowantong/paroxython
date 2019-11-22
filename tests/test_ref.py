@@ -14,33 +14,37 @@ def reformat_file(construct_path):
     text = regex.sub(r"(?m)^ +```", "```", text)
     text = regex.sub(r"(?ms).*?^(?=# )", fr"{toc}\n\n", text, count=1)
     text = regex.sub(r"(?m)\s+^(#+ .+)\s+", fr"\n\n\1\n\n", text)
-    text = regex.sub(r"(?ms)(```markdown.+?```.+?)(^\#{1,4} )", fr"\1{rule}\n\2", text)
-    text = regex.sub(r"(?=\n\#{5} )", fr"\n{rule}", text)
+    text = regex.sub(r"(?ms)^(\| Label \| .+?)(^\#{1,3} )", fr"\1{rule}\n\2", text)
+    text = regex.sub(r"(?=\n\#{4} )", fr"\n{rule}", text)
     construct_path.write_text(text)
 
 
 def extract_examples(construct_path):
     text = construct_path.read_text()
     rex = r"""(?msx)
-        ^\#{5}\s+Construct\s+`(.+?)` # capture the label
-        .+?\#{6}\s+Example # ensure the next code is in the Example section
+        ^\#{4}\s+Construct\s+`(.+?)` # capture the label
+        .+?\#{5}\s+Example # ensure the next code is in the Example section
         .+?```python\n+(.+?)\n``` # capture the source-code
-        .+?\#{6}\s+Matches # ensure the next results are in the Example section
-        .+?```markdown\n+(.+?)\n``` # capture the expected results
+        .+?\#{5}\s+Matches.+?^\|:--\|:--\| # ensure the table is in the Matches section
+        (\n\|\s`(?P<LABELS>[^\|]+)`\s\|\s(?P<LINES>[^\|]+)\s\|)+ # capture the expected results
     """
-    return regex.findall(rex, text)
+    return regex.finditer(rex, text)
 
 
 parse = parser.Parser()
 reformat_file(parse.ref_path)
-examples = extract_examples(parse.ref_path)
+examples = []
+for match in extract_examples(parse.ref_path):
+    label = match.group(1)
+    source = match.group(2)
+    results = zip(match.captures("LABELS"), match.captures("LINES"))
+    examples.append((label, source, results))
 pytest.main(args=["-q"])
 
 
 @pytest.mark.parametrize("label, source, results", examples)
 def test_example(label, source, results):
     source = regex.sub(r"(?m)^.{4}", "", source)
-    results = (line.partition(": ")[0::2] for line in results.split("\n"))
     actual = dict(parse(source))
     for (label, expected) in results:
         keys = list(actual.keys())
@@ -51,6 +55,6 @@ def test_example(label, source, results):
 
 def test_at_least_one_example_is_provided_for_each_construct():
     expected = set(parse.constructs)
-    actual = set(label.partition("=")[0] for (label, _, _) in examples)
+    actual = set(label.partition(":")[0] for (label, _, _) in examples)
     assert actual == expected
 

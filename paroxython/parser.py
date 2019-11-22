@@ -25,8 +25,8 @@ simplify_negative_litterals = simplify_negative_litterals()
 
 find_all_constructs = regex.compile(
     r"""(?msx)
-            ^\#{5}\s+Construct\s+`(.+?)` # capture the label
-            .+?\#{6}\s+Regex # ensure the next pattern is in the Regex section
+            ^\#{4}\s+Construct\s+`(.+?)` # capture the label
+            .+?\#{5}\s+Regex # ensure the next pattern is in the Regex section
             .+?```re\n+(.+?)\n``` # capture this pattern
         """
 ).findall
@@ -56,7 +56,7 @@ class Parser:
                 if d.get("SUFFIX"):  # there is a "SUFFIX" key and its value is not []
                     for suffix in d["SUFFIX"]:
                         lines = "-".join(map(str, sorted(map(int, d["LINE"]))))
-                        result[f"{label}={suffix}"].append(lines)
+                        result[f"{label}:{suffix}"].append(lines)
                 else:
                     lines = "-".join(map(str, sorted(map(int, d["LINE"]))))
                     result[label].append(lines)
@@ -77,7 +77,8 @@ if __name__ == "__main__":
     acc = []
     for (label, lines) in parse(source, yield_failed_matches=False):
         stop = time.perf_counter()
-        acc.append(f"{stop - start:7.4f} s.: {label}: {', '.join(lines)}")
+        lines = ', '.join(lines)
+        acc.append(f"{stop - start:7.4f} s.: | `{label}` | {lines} |")
         start = stop
     print("\n".join(sorted(acc, reverse=True)))
     Path("sandbox/flat_ast.txt").write_text(parse.flat_ast)

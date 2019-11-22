@@ -1,97 +1,259 @@
-- [Introduction](#introduction)
-- [Reference](#reference)
-  - [Expressions](#expressions)
-    - [Literals](#literals)
-      - [Construct `literal`](#construct-literal)
-    - [Subscripts](#subscripts)
-      - [Construct `index`](#construct-index)
-      - [Construct `index_arithmetic`](#construct-index_arithmetic)
-      - [Construct `slice`](#construct-slice)
-      - [Construct `slice_step`](#construct-slice_step)
-    - [Operators](#operators)
-      - [Construct `unary_operator`](#construct-unary_operator)
-      - [Construct `binary_operator`](#construct-binary_operator)
-      - [Construct `conditional_expression`](#construct-conditional_expression)
-    - [Boolean expressions](#boolean-expressions)
-      - [Construct `boolean_operator`](#construct-boolean_operator)
-      - [Construct `comparison_operator`](#construct-comparison_operator)
-      - [Construct `chained_comparison`](#construct-chained_comparison)
-      - [Construct `divisibility_test`](#construct-divisibility_test)
-    - [Calls](#calls)
-      - [Construct `function_call`](#construct-function_call)
-      - [Construct `method_call`](#construct-method_call)
-      - [Construct `method_chaining`](#construct-method_chaining)
-      - [Construct `composition`](#construct-composition)
-    - [Anonymous functions](#anonymous-functions)
-      - [Construct `lambda_function`](#construct-lambda_function)
-  - [Statements](#statements)
-    - [Assignments](#assignments)
-      - [Construct `global_constant_definition`](#construct-global_constant_definition)
-      - [Construct `global_variable_definition`](#construct-global_variable_definition)
-      - [Construct `assignment`](#construct-assignment)
-      - [Construct `augmented_assignment`](#construct-augmented_assignment)
-      - [Construct `chained_assignment`](#construct-chained_assignment)
-      - [Construct `swapping`](#construct-swapping)
-      - [Construct `negation`](#construct-negation)
-    - [Function definitions](#function-definitions)
-      - [Construct `function_definition`](#construct-function_definition)
-      - [Construct `function_with_default_positional_arguments_definition`](#construct-function_with_default_positional_arguments_definition)
-      - [Construct `recursive_function_definition`](#construct-recursive_function_definition)
-      - [Construct `deeply_recursive_function_definition`](#construct-deeply_recursive_function_definition)
-      - [Construct `generator_definition`](#construct-generator_definition)
-    - [Conditionals](#conditionals)
-      - [Construct `if`](#construct-if)
-      - [Construct `if_else`](#construct-if_else)
-      - [Construct `if_elif`](#construct-if_elif)
-    - [Iterations](#iterations)
-      - [Construct `for_each`](#construct-for_each)
-      - [Construct `for_range_stop`](#construct-for_range_stop)
-      - [Construct `for_range_start`](#construct-for_range_start)
-      - [Construct `for_range_step`](#construct-for_range_step)
-      - [Construct `for_indexes_values`](#construct-for_indexes_values)
-      - [Construct `for_indexes`](#construct-for_indexes)
-      - [Construct `nested_for`](#construct-nested_for)
-      - [Construct `triangular_nested_for`](#construct-triangular_nested_for)
-    - [Modules](#modules)
-      - [Construct `import`](#construct-import)
-      - [Construct `import_from`](#construct-import_from)
-      - [Construct `import_by_call`](#construct-import_by_call)
-  - [Code patterns](#code-patterns)
-    - [Iterative patterns](#iterative-patterns)
-      - [Sequential loops](#sequential-loops)
-        - [Construct `accumulate_elements`](#construct-accumulate_elements)
-        - [Construct `filter_for`](#construct-filter_for)
-        - [Construct `find_best_element`](#construct-find_best_element)
-        - [Construct `universal_quantifier`](#construct-universal_quantifier)
-        - [Construct `existential_quantifier`](#construct-existential_quantifier)
-        - [Construct `find_first_element`](#construct-find_first_element)
-      - [Non sequential finite loops](#non-sequential-finite-loops)
-        - [Construct `evolve_state`](#construct-evolve_state)
-      - [Non sequential infinite loops](#non-sequential-infinite-loops)
-        - [Construct `accumulate_stream`](#construct-accumulate_stream)
-  - [Suggestions](#suggestions)
-    - [Assignments](#assignments-1)
-      - [Construct `suggest_conditional_expression`](#construct-suggest_conditional_expression)
-      - [Construct `suggest_augmented_assignment`](#construct-suggest_augmented_assignment)
-    - [Expressions](#expressions-1)
-      - [Construct `suggest_comparison_chaining`](#construct-suggest_comparison_chaining)
-      - [Construct `suggest_constant_definition`](#construct-suggest_constant_definition)
-    - [Subroutines](#subroutines)
-      - [Construct `suggest_condition_return`](#construct-suggest_condition_return)
+- [Expressions](#expressions)
+  - [Literals](#literals)
+    - [Construct `literal`](#construct-literal)
+      - [Regex](#regex)
+      - [Example](#example)
+      - [Matches](#matches)
+  - [Subscripts](#subscripts)
+    - [Construct `index`](#construct-index)
+      - [Regex](#regex-1)
+      - [Example](#example-1)
+      - [Matches](#matches-1)
+    - [Construct `index_arithmetic`](#construct-index_arithmetic)
+      - [Regex](#regex-2)
+      - [Example](#example-2)
+      - [Matches](#matches-2)
+    - [Construct `slice`](#construct-slice)
+      - [Regex](#regex-3)
+      - [Example](#example-3)
+      - [Matches](#matches-3)
+    - [Construct `slice_step`](#construct-slice_step)
+      - [Regex](#regex-4)
+      - [Example](#example-4)
+      - [Matches](#matches-4)
+  - [Operators](#operators)
+    - [Construct `unary_operator`](#construct-unary_operator)
+      - [Regex](#regex-5)
+      - [Example](#example-5)
+      - [Matches](#matches-5)
+    - [Construct `binary_operator`](#construct-binary_operator)
+      - [Regex](#regex-6)
+      - [Example](#example-6)
+      - [Matches](#matches-6)
+    - [Construct `conditional_expression`](#construct-conditional_expression)
+      - [Regex](#regex-7)
+      - [Example](#example-7)
+      - [Matches](#matches-7)
+  - [Boolean expressions](#boolean-expressions)
+    - [Construct `boolean_operator`](#construct-boolean_operator)
+      - [Regex](#regex-8)
+      - [Example](#example-8)
+      - [Matches](#matches-8)
+    - [Construct `comparison_operator`](#construct-comparison_operator)
+      - [Regex](#regex-9)
+      - [Example](#example-9)
+      - [Matches](#matches-9)
+    - [Construct `chained_comparison`](#construct-chained_comparison)
+      - [Regex](#regex-10)
+      - [Example](#example-10)
+      - [Matches](#matches-10)
+    - [Construct `divisibility_test`](#construct-divisibility_test)
+      - [Regex](#regex-11)
+      - [Example](#example-11)
+      - [Matches](#matches-11)
+  - [Calls](#calls)
+    - [Construct `function_call`](#construct-function_call)
+      - [Regex](#regex-12)
+      - [Example](#example-12)
+      - [Matches](#matches-12)
+    - [Construct `method_call`](#construct-method_call)
+      - [Regex](#regex-13)
+      - [Example](#example-13)
+      - [Matches](#matches-13)
+    - [Construct `method_chaining`](#construct-method_chaining)
+      - [Regex](#regex-14)
+      - [Example](#example-14)
+      - [Matches](#matches-14)
+    - [Construct `composition`](#construct-composition)
+      - [Regex](#regex-15)
+      - [Example](#example-15)
+      - [Matches](#matches-15)
+  - [Anonymous functions](#anonymous-functions)
+    - [Construct `lambda_function`](#construct-lambda_function)
+      - [Regex](#regex-16)
+      - [Example](#example-16)
+      - [Matches](#matches-16)
+- [Statements](#statements)
+  - [Assignments](#assignments)
+    - [Construct `global_constant_definition`](#construct-global_constant_definition)
+      - [Regex](#regex-17)
+      - [Example](#example-17)
+      - [Matches](#matches-17)
+    - [Construct `global_variable_definition`](#construct-global_variable_definition)
+      - [Regex](#regex-18)
+      - [Example](#example-18)
+      - [Matches](#matches-18)
+    - [Construct `assignment`](#construct-assignment)
+      - [Regex](#regex-19)
+      - [Example](#example-19)
+      - [Matches](#matches-19)
+    - [Construct `augmented_assignment`](#construct-augmented_assignment)
+      - [Regex](#regex-20)
+      - [Example](#example-20)
+      - [Matches](#matches-20)
+    - [Construct `chained_assignment`](#construct-chained_assignment)
+      - [Regex](#regex-21)
+      - [Example](#example-21)
+      - [Matches](#matches-21)
+    - [Construct `swapping`](#construct-swapping)
+      - [Regex](#regex-22)
+      - [Example](#example-22)
+      - [Matches](#matches-22)
+    - [Construct `negation`](#construct-negation)
+      - [Regex](#regex-23)
+      - [Example](#example-23)
+      - [Matches](#matches-23)
+  - [Function definitions](#function-definitions)
+    - [Construct `function_definition`](#construct-function_definition)
+      - [Regex](#regex-24)
+      - [Example](#example-24)
+      - [Matches](#matches-24)
+    - [Construct `function_with_default_positional_arguments_definition`](#construct-function_with_default_positional_arguments_definition)
+      - [Regex](#regex-25)
+      - [Example](#example-25)
+      - [Matches](#matches-25)
+    - [Construct `recursive_function_definition`](#construct-recursive_function_definition)
+      - [Regex](#regex-26)
+      - [Example](#example-26)
+      - [Matches](#matches-26)
+    - [Construct `deeply_recursive_function_definition`](#construct-deeply_recursive_function_definition)
+      - [Regex](#regex-27)
+      - [Example](#example-27)
+      - [Matches](#matches-27)
+    - [Construct `generator_definition`](#construct-generator_definition)
+      - [Regex](#regex-28)
+      - [Example](#example-28)
+      - [Matches](#matches-28)
+  - [Conditionals](#conditionals)
+    - [Construct `if`](#construct-if)
+      - [Regex](#regex-29)
+      - [Example](#example-29)
+      - [Matches](#matches-29)
+    - [Construct `if_else`](#construct-if_else)
+      - [Regex](#regex-30)
+      - [Example](#example-30)
+      - [Matches](#matches-30)
+    - [Construct `if_elif`](#construct-if_elif)
+      - [Regex](#regex-31)
+      - [Example](#example-31)
+      - [Matches](#matches-31)
+  - [Iterations](#iterations)
+    - [Construct `for_each`](#construct-for_each)
+      - [Regex](#regex-32)
+      - [Example](#example-32)
+      - [Matches](#matches-32)
+    - [Construct `for_range_stop`](#construct-for_range_stop)
+      - [Regex](#regex-33)
+      - [Example](#example-33)
+      - [Matches](#matches-33)
+    - [Construct `for_range_start`](#construct-for_range_start)
+      - [Regex](#regex-34)
+      - [Example](#example-34)
+      - [Matches](#matches-34)
+    - [Construct `for_range_step`](#construct-for_range_step)
+      - [Regex](#regex-35)
+      - [Example](#example-35)
+      - [Matches](#matches-35)
+    - [Construct `for_indexes_values`](#construct-for_indexes_values)
+      - [Regex](#regex-36)
+      - [Example](#example-36)
+      - [Matches](#matches-36)
+    - [Construct `for_indexes`](#construct-for_indexes)
+      - [Regex](#regex-37)
+      - [Example](#example-37)
+      - [Matches](#matches-37)
+    - [Construct `nested_for`](#construct-nested_for)
+      - [Regex](#regex-38)
+      - [Example](#example-38)
+      - [Matches](#matches-38)
+    - [Construct `triangular_nested_for`](#construct-triangular_nested_for)
+      - [Regex](#regex-39)
+      - [Example](#example-39)
+      - [Matches](#matches-39)
+  - [Modules](#modules)
+    - [Construct `import`](#construct-import)
+      - [Regex](#regex-40)
+      - [Example](#example-40)
+      - [Matches](#matches-40)
+    - [Construct `import_from`](#construct-import_from)
+      - [Regex](#regex-41)
+      - [Example](#example-41)
+      - [Matches](#matches-41)
+    - [Construct `import_by_call`](#construct-import_by_call)
+      - [Regex](#regex-42)
+      - [Example](#example-42)
+      - [Matches](#matches-42)
+- [Code patterns](#code-patterns)
+  - [Iterative patterns](#iterative-patterns)
+    - [Sequential loops](#sequential-loops)
+      - [Construct `accumulate_elements`](#construct-accumulate_elements)
+        - [Regex](#regex-43)
+        - [Example](#example-43)
+        - [Matches](#matches-43)
+      - [Construct `filter_for`](#construct-filter_for)
+        - [Regex](#regex-44)
+        - [Example](#example-44)
+        - [Matches](#matches-44)
+      - [Construct `find_best_element`](#construct-find_best_element)
+        - [Regex](#regex-45)
+        - [Example](#example-45)
+        - [Matches](#matches-45)
+      - [Construct `universal_quantifier`](#construct-universal_quantifier)
+        - [Regex](#regex-46)
+        - [Example](#example-46)
+        - [Matches](#matches-46)
+      - [Construct `existential_quantifier`](#construct-existential_quantifier)
+        - [Regex](#regex-47)
+        - [Example](#example-47)
+        - [Matches](#matches-47)
+      - [Construct `find_first_element`](#construct-find_first_element)
+        - [Regex](#regex-48)
+        - [Example](#example-48)
+        - [Matches](#matches-48)
+    - [Non sequential finite loops](#non-sequential-finite-loops)
+      - [Construct `evolve_state`](#construct-evolve_state)
+        - [Regex](#regex-49)
+        - [Example](#example-49)
+        - [Matches](#matches-49)
+    - [Non sequential infinite loops](#non-sequential-infinite-loops)
+      - [Construct `accumulate_stream`](#construct-accumulate_stream)
+        - [Regex](#regex-50)
+        - [Example](#example-50)
+        - [Matches](#matches-50)
+- [Suggestions](#suggestions)
+  - [Assignments](#assignments-1)
+    - [Construct `suggest_conditional_expression`](#construct-suggest_conditional_expression)
+      - [Regex](#regex-51)
+      - [Example](#example-51)
+      - [Matches](#matches-51)
+    - [Construct `suggest_augmented_assignment`](#construct-suggest_augmented_assignment)
+      - [Regex](#regex-52)
+      - [Example](#example-52)
+      - [Matches](#matches-52)
+  - [Expressions](#expressions-1)
+    - [Construct `suggest_comparison_chaining`](#construct-suggest_comparison_chaining)
+      - [Regex](#regex-53)
+      - [Example](#example-53)
+      - [Matches](#matches-53)
+    - [Construct `suggest_constant_definition`](#construct-suggest_constant_definition)
+      - [Regex](#regex-54)
+      - [Example](#example-54)
+      - [Matches](#matches-54)
+  - [Subroutines](#subroutines)
+    - [Construct `suggest_condition_return`](#construct-suggest_condition_return)
+      - [Regex](#regex-55)
+      - [Example](#example-55)
+      - [Matches](#matches-55)
 
-# Introduction
+# Expressions
 
-# Reference
-
-## Expressions
-
-### Literals
+## Literals
 
 --------------------------------------------------------------------------------
 
-##### Construct `literal`
+#### Construct `literal`
 
-###### Regex
+##### Regex
 
 ```re
 ^(.*)
@@ -106,7 +268,7 @@
 )
 ```
 
-###### Example
+##### Example
 
 ```python
 1   42
@@ -123,29 +285,29 @@
 12  -42
 ```
 
-###### Matches
+##### Matches
 
-```markdown
-literal=Num: 1, 2, 4, 4, 7, 7, 7, 11, 11, 11, 12
-literal=Str: 3
-literal=Tuple: 4
-literal=List: 5, 11
-literal=Dict: 6
-literal=Set: 7
-literal=False: 8
-literal=True: 8
-literal=None: 9
-```
-
---------------------------------------------------------------------------------
-
-### Subscripts
+| Label | Lines |
+|:--|:--|
+| `literal:Num` | 1, 2, 4, 4, 7, 7, 7, 11, 11, 11, 12 |
+| `literal:Str` | 3 |
+| `literal:Tuple` | 4 |
+| `literal:List` | 5, 11 |
+| `literal:Dict` | 6 |
+| `literal:Set` | 7 |
+| `literal:False` | 8 |
+| `literal:True` | 8 |
+| `literal:None` | 9 |
 
 --------------------------------------------------------------------------------
 
-##### Construct `index`
+## Subscripts
 
-###### Regex
+--------------------------------------------------------------------------------
+
+#### Construct `index`
+
+##### Regex
 
 ```re
           ^(.*?)/_type='Subscript'
@@ -153,7 +315,7 @@ literal=None: 9
 \n(?:\1.+\n)*?\1/slice/_type='Index'
 ```
 
-###### Example
+##### Example
 
 ```python
 1   a[42]
@@ -161,17 +323,17 @@ literal=None: 9
 3   a[42:-1] # no match
 ```
 
-###### Matches
+##### Matches
 
-```markdown
-index: 1, 2
-```
+| Label | Lines |
+|:--|:--|
+| `index` | 1, 2 |
 
 --------------------------------------------------------------------------------
 
-##### Construct `index_arithmetic`
+#### Construct `index_arithmetic`
 
-###### Regex
+##### Regex
 
 ```re
           ^(.*?)/_type='Subscript'
@@ -180,24 +342,24 @@ index: 1, 2
 \n(?:\1.+\n)*?\1/slice/value/_type='BinOp'
 ```
 
-###### Example
+##### Example
 
 ```python
 1   a[i + j]
 2   a[i]
 ```
 
-###### Matches
+##### Matches
 
-```markdown
-index_arithmetic: 1
-```
+| Label | Lines |
+|:--|:--|
+| `index_arithmetic` | 1 |
 
 --------------------------------------------------------------------------------
 
-##### Construct `slice`
+#### Construct `slice`
 
-###### Regex
+##### Regex
 
 ```re
           ^(.*?)/_type='Subscript'
@@ -206,7 +368,7 @@ index_arithmetic: 1
 \n(?:\1.+\n)*?\1/(?P=_1)      /step=None
 ```
 
-###### Example
+##### Example
 
 ```python
 1   a[1] # no match
@@ -214,17 +376,17 @@ index_arithmetic: 1
 3   a[1:-1:2] # no match
 ```
 
-###### Matches
+##### Matches
 
-```markdown
-slice: 2
-```
+| Label | Lines |
+|:--|:--|
+| `slice` | 2 |
 
 --------------------------------------------------------------------------------
 
-##### Construct `slice_step`
+#### Construct `slice_step`
 
-###### Regex
+##### Regex
 
 ```re
           ^(.*?)/_type='Subscript'
@@ -232,7 +394,7 @@ slice: 2
 \n(?:\1.+\n)*?\1/(?P=_1)      /step/lineno=(?P<LINE>\d+)
 ```
 
-###### Example
+##### Example
 
 ```python
 1   a[1] # no match
@@ -240,21 +402,21 @@ slice: 2
 3   a[1:-1:2]
 ```
 
-###### Matches
+##### Matches
 
-```markdown
-slice_step: 3
-```
-
---------------------------------------------------------------------------------
-
-### Operators
+| Label | Lines |
+|:--|:--|
+| `slice_step` | 3 |
 
 --------------------------------------------------------------------------------
 
-##### Construct `unary_operator`
+## Operators
 
-###### Regex
+--------------------------------------------------------------------------------
+
+#### Construct `unary_operator`
+
+##### Regex
 
 ```re
           ^(.*?)/_type='UnaryOp'
@@ -262,7 +424,7 @@ slice_step: 3
 \n(?:\1.+\n)*?\1/op/_type='(?P<SUFFIX>.+)'
 ```
 
-###### Example
+##### Example
 
 ```python
 1   a = -b
@@ -272,18 +434,18 @@ slice_step: 3
 
 **Remark.** Normally, a negative litteral is represented in the AST by a node `UnaryOp` with `USub` and `Num` children and a positive value for `n`. This is simplified into a node `Num` and a negative value for `n`.
 
-###### Matches
+##### Matches
 
-```markdown
-unary_operator=USub: 1
-unary_operator=Not: 2
-```
+| Label | Lines |
+|:--|:--|
+| `unary_operator:USub` | 1 |
+| `unary_operator:Not` | 2 |
 
 --------------------------------------------------------------------------------
 
-##### Construct `binary_operator`
+#### Construct `binary_operator`
 
-###### Regex
+##### Regex
 
 ```re
           ^(.*?)/_type='BinOp'
@@ -291,51 +453,51 @@ unary_operator=Not: 2
 \n(?:\1.+\n)*?\1/op/_type='(?P<SUFFIX>.+)'
 ```
 
-###### Example
+##### Example
 
 ```python
 1   2**32768 - 1
 ```
 
-###### Matches
+##### Matches
 
-```markdown
-binary_operator=Pow: 1
-binary_operator=Sub: 1
-```
+| Label | Lines |
+|:--|:--|
+| `binary_operator:Pow` | 1 |
+| `binary_operator:Sub` | 1 |
 
 --------------------------------------------------------------------------------
 
-##### Construct `conditional_expression`
+#### Construct `conditional_expression`
 
-###### Regex
+##### Regex
 
 ```re
           ^(.*?)/_type='IfExp'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
 ```
 
-###### Example
+##### Example
 
 ```python
 1   foo if c else bar
 ```
 
-###### Matches
+##### Matches
 
-```markdown
-conditional_expression: 1
-```
-
---------------------------------------------------------------------------------
-
-### Boolean expressions
+| Label | Lines |
+|:--|:--|
+| `conditional_expression` | 1 |
 
 --------------------------------------------------------------------------------
 
-##### Construct `boolean_operator`
+## Boolean expressions
 
-###### Regex
+--------------------------------------------------------------------------------
+
+#### Construct `boolean_operator`
+
+##### Regex
 
 ```re
           ^(.*?)/_type='BoolOp'
@@ -343,7 +505,7 @@ conditional_expression: 1
 \n(?:\1.+\n)*?\1/op/_type='(?P<SUFFIX>.+)'
 ```
 
-###### Example
+##### Example
 
 ```python
 1   a and b
@@ -351,20 +513,20 @@ conditional_expression: 1
 3   not x # no match
 ```
 
-###### Matches
+##### Matches
 
-```markdown
-boolean_operator=And: 1
-boolean_operator=Or: 2
-```
+| Label | Lines |
+|:--|:--|
+| `boolean_operator:And` | 1 |
+| `boolean_operator:Or` | 2 |
 
 **Remark.** `Not` is not a boolean operator in Python. To match it, use the [construct `unary_operator-Not`](#construct-unary_operator).
 
 --------------------------------------------------------------------------------
 
-##### Construct `comparison_operator`
+#### Construct `comparison_operator`
 
-###### Regex
+##### Regex
 
 ```re
           ^(.*?)/_type='Compare'
@@ -372,7 +534,7 @@ boolean_operator=Or: 2
 \n(?:\1.+\n)*?\1/comparators/0/lineno=(?P<LINE>\d+)
 ```
 
-###### Example
+##### Example
 
 ```python
 1   print(a == 3)
@@ -382,18 +544,18 @@ boolean_operator=Or: 2
 5   3 + 4
 ```
 
-###### Matches
+##### Matches
 
-```markdown
-comparison_operator=Eq: 1, 2
-comparison_operator=In: 4
-```
+| Label | Lines |
+|:--|:--|
+| `comparison_operator:Eq` | 1, 2 |
+| `comparison_operator:In` | 4 |
 
 --------------------------------------------------------------------------------
 
-##### Construct `chained_comparison`
+#### Construct `chained_comparison`
 
-###### Regex
+##### Regex
 
 ```re
           ^(.*?)/_type='Compare'
@@ -401,7 +563,7 @@ comparison_operator=In: 4
 \n(?:\1.+\n)*?\1/comparators/length=(?!1\n)(?P<SUFFIX>.+)
 ```
 
-###### Example
+##### Example
 
 ```python
 1   a == 1
@@ -409,18 +571,18 @@ comparison_operator=In: 4
 3   a < b < c < d
 ```
 
-###### Matches
+##### Matches
 
-```markdown
-chained_comparison=2: 2
-chained_comparison=3: 3
-```
+| Label | Lines |
+|:--|:--|
+| `chained_comparison:2` | 2 |
+| `chained_comparison:3` | 3 |
 
 --------------------------------------------------------------------------------
 
-##### Construct `divisibility_test`
+#### Construct `divisibility_test`
 
-###### Regex
+##### Regex
 
 ```re
           ^(.*?)/_type='Compare'
@@ -433,7 +595,7 @@ chained_comparison=3: 3
 \n(?:\1.+\n)*?\1/ops/0/_type='(Eq|NotEq)'
 ```
 
-###### Example
+##### Example
 
 ```python
 1   a % b == 0
@@ -443,25 +605,25 @@ chained_comparison=3: 3
 5   a % 5 != 1
 ```
 
-###### Matches
+##### Matches
 
-```markdown
-divisibility_test: 1
-divisibility_test=2: 2
-divisibility_test=3: 3
-divisibility_test=4: 4
-divisibility_test=5: 5
-```
-
---------------------------------------------------------------------------------
-
-### Calls
+| Label | Lines |
+|:--|:--|
+| `divisibility_test` | 1 |
+| `divisibility_test:2` | 2 |
+| `divisibility_test:3` | 3 |
+| `divisibility_test:4` | 4 |
+| `divisibility_test:5` | 5 |
 
 --------------------------------------------------------------------------------
 
-##### Construct `function_call`
+## Calls
 
-###### Regex
+--------------------------------------------------------------------------------
+
+#### Construct `function_call`
+
+##### Regex
 
 ```re
           ^(.*?)/_type='Call'
@@ -470,26 +632,26 @@ divisibility_test=5: 5
 \n(?:\1.+\n)*?\1/func/id='(?P<SUFFIX>.+)'
 ```
 
-###### Example
+##### Example
 
 ```python
 1   print(len("hello, world"))
 2   print(foobar((42)))
 ```
 
-###### Matches
+##### Matches
 
-```markdown
-function_call=len: 1
-function_call=print: 1, 2
-function_call=foobar: 2
-```
+| Label | Lines |
+|:--|:--|
+| `function_call:len` | 1 |
+| `function_call:print` | 1, 2 |
+| `function_call:foobar` | 2 |
 
 --------------------------------------------------------------------------------
 
-##### Construct `method_call`
+#### Construct `method_call`
 
-###### Regex
+##### Regex
 
 ```re
           ^(.*?)/_type='Call'
@@ -498,25 +660,25 @@ function_call=foobar: 2
 \n(?:\1.+\n)*?\1/func/attr='(?P<SUFFIX>.+)'
 ```
 
-###### Example
+##### Example
 
 ```python
 1   seq.index(42)
 2   foo.bar(42)
 ```
 
-###### Matches
+##### Matches
 
-```markdown
-method_call=index: 1
-method_call=bar: 2
-```
+| Label | Lines |
+|:--|:--|
+| `method_call:index` | 1 |
+| `method_call:bar` | 2 |
 
 --------------------------------------------------------------------------------
 
-##### Construct `method_chaining`
+#### Construct `method_chaining`
 
-###### Regex
+##### Regex
 
 ```re
           ^(.*?)/_type='Call'
@@ -526,25 +688,25 @@ method_call=bar: 2
 \n(?:\1.+\n)*?\1/func/value/func/_type='Attribute'
 ```
 
-###### Example
+##### Example
 
 ```python
 1   s.strip().split()
 ```
 
-###### Matches
+##### Matches
 
-```markdown
-method_chaining: 1
-```
+| Label | Lines |
+|:--|:--|
+| `method_chaining` | 1 |
 
 --------------------------------------------------------------------------------
 
-##### Construct `composition`
+#### Construct `composition`
 
 Apply a function or a method to an expression involving the result of another function or method application, without using an intermediate variable.
 
-###### Regex
+##### Regex
 
 ```re
           ^(.*?)/_type='Call'
@@ -552,7 +714,7 @@ Apply a function or a method to an expression involving the result of another fu
 \n(?:\1.+\n)* \1/args/.*/_type='Call'
 ```
 
-###### Example
+##### Example
 
 ```python
 1   print(len("hello, world"))
@@ -561,50 +723,50 @@ Apply a function or a method to an expression involving the result of another fu
 4.  print(s.upper())
 ```
 
-###### Matches
+##### Matches
 
-```markdown
-composition: 1, 3, 4
-```
-
---------------------------------------------------------------------------------
-
-### Anonymous functions
+| Label | Lines |
+|:--|:--|
+| `composition` | 1, 3, 4 |
 
 --------------------------------------------------------------------------------
 
-##### Construct `lambda_function`
+## Anonymous functions
 
-###### Regex
+--------------------------------------------------------------------------------
+
+#### Construct `lambda_function`
+
+##### Regex
 
 ```re
           ^(.*?)/_type='Lambda'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
 ```
 
-###### Example
+##### Example
 
 ```python
 1   lambda x: x + 1
 ```
 
-###### Matches
+##### Matches
 
-```markdown
-lambda_function: 1
-```
-
---------------------------------------------------------------------------------
-
-## Statements
-
-### Assignments
+| Label | Lines |
+|:--|:--|
+| `lambda_function` | 1 |
 
 --------------------------------------------------------------------------------
 
-##### Construct `global_constant_definition`
+# Statements
 
-###### Regex
+## Assignments
+
+--------------------------------------------------------------------------------
+
+#### Construct `global_constant_definition`
+
+##### Regex
 
 ```re
  ^(/body/\d+)/_type='Assign' # no indentation
@@ -612,7 +774,7 @@ lambda_function: 1
 \n(?:\1.+\n)*?\1/targets/.+/id='[A-Z0-9_]+' # all caps
 ```
 
-###### Example
+##### Example
 
 ```python
 1   PATH = "foo/bar"
@@ -622,17 +784,17 @@ lambda_function: 1
 5       PATH = "foo/bar" # BUG: no match
 ```
 
-###### Matches
+##### Matches
 
-```markdown
-global_constant_definition: 1, 2, 3
-```
+| Label | Lines |
+|:--|:--|
+| `global_constant_definition` | 1, 2, 3 |
 
 --------------------------------------------------------------------------------
 
-##### Construct `global_variable_definition`
+#### Construct `global_variable_definition`
 
-###### Regex
+##### Regex
 
 ```re
   ^(/body/\d+)/_type='Assign' # no indentation
@@ -640,7 +802,7 @@ global_constant_definition: 1, 2, 3
 \n(?:\1.+\n)*?\1/targets/.+/id='.*?[a-z] # at least one lowercase letter
 ```
 
-###### Example
+##### Example
 
 ```python
 1   PATH = "foo/bar"
@@ -652,24 +814,24 @@ global_constant_definition: 1, 2, 3
 7   MyPath = "foo/bar"
 ```
 
-###### Matches
+##### Matches
 
-```markdown
-global_variable_definition: 2, 3, 6, 7
-```
+| Label | Lines |
+|:--|:--|
+| `global_variable_definition` | 2, 3, 6, 7 |
 
 --------------------------------------------------------------------------------
 
-##### Construct `assignment`
+#### Construct `assignment`
 
-###### Regex
+##### Regex
 
 ```re
           ^(.*?)/_type='Assign'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
 ```
 
-###### Example
+##### Example
 
 ```python
 1   a = 42
@@ -677,41 +839,41 @@ global_variable_definition: 2, 3, 6, 7
 3   a[0] = b[0]
 ```
 
-###### Matches
+##### Matches
 
-```markdown
-assignment: 1, 2, 3
-```
+| Label | Lines |
+|:--|:--|
+| `assignment` | 1, 2, 3 |
 
 --------------------------------------------------------------------------------
 
-##### Construct `augmented_assignment`
+#### Construct `augmented_assignment`
 
-###### Regex
+##### Regex
 
 ```re
           ^(.*?)/_type='AugAssign'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
 ```
 
-###### Example
+##### Example
 
 ```python
 1   a += 1
 2   a = a + 1
 ```
 
-###### Matches
+##### Matches
 
-```markdown
-augmented_assignment: 1
-```
+| Label | Lines |
+|:--|:--|
+| `augmented_assignment` | 1 |
 
 --------------------------------------------------------------------------------
 
-##### Construct `chained_assignment`
+#### Construct `chained_assignment`
 
-###### Regex
+##### Regex
 
 ```re
           ^(.*?)/_type='Assign'
@@ -719,7 +881,7 @@ augmented_assignment: 1
 \n(?:\1.+\n)*?\1/targets/length=(?!1\n).+
 ```
 
-###### Example
+##### Example
 
 ```python
 1   a = 42
@@ -727,19 +889,19 @@ augmented_assignment: 1
 3   a = b = c = 42
 ```
 
-###### Matches
+##### Matches
 
-```markdown
-chained_assignment: 2, 3
-```
+| Label | Lines |
+|:--|:--|
+| `chained_assignment` | 2, 3 |
 
 --------------------------------------------------------------------------------
 
-##### Construct `swapping`
+#### Construct `swapping`
 
 Swap two variables or two elements of an array with a 2-element tuple or list.
 
-###### Regex
+##### Regex
 
 ```re
           ^(.*?)/_type='Assign'
@@ -752,7 +914,7 @@ Swap two variables or two elements of an array with a 2-element tuple or list.
 \n(?:\1.+\n)*?\1/value/elts/1/_hash=(?P=HASH_A)
 ```
 
-###### Example
+##### Example
 
 ```python
 1   (a, b) = (b, a)
@@ -761,19 +923,19 @@ Swap two variables or two elements of an array with a 2-element tuple or list.
 4   (a[i], a[i + 1]) = (a[i + 1], a[i])
 ```
 
-###### Matches
+##### Matches
 
-```markdown
-swapping: 1, 2, 3, 4
-```
+| Label | Lines |
+|:--|:--|
+| `swapping` | 1, 2, 3, 4 |
 
 --------------------------------------------------------------------------------
 
-##### Construct `negation`
+#### Construct `negation`
 
 Update a variable by negating it.
 
-###### Regex
+##### Regex
 
 ```re
           ^(.*?)/_type='Assign'
@@ -784,7 +946,7 @@ Update a variable by negating it.
 \n(?:\1.+\n)*?\1/value/operand/_hash=(?P=HASH) # match hash
 ```
 
-###### Example
+##### Example
 
 ```python
 1   a = -a
@@ -794,45 +956,45 @@ Update a variable by negating it.
 5   a = -abs(a) # no match
 ```
 
-###### Matches
+##### Matches
 
-```markdown
-negation: 1, 2
-```
-
---------------------------------------------------------------------------------
-
-### Function definitions
+| Label | Lines |
+|:--|:--|
+| `negation` | 1, 2 |
 
 --------------------------------------------------------------------------------
 
-##### Construct `function_definition`
+## Function definitions
 
-###### Regex
+--------------------------------------------------------------------------------
+
+#### Construct `function_definition`
+
+##### Regex
 
 ```re
           ^(.*?)/_type='FunctionDef'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
 ```
 
-###### Example
+##### Example
 
 ```python
 1   def foo(bar):
 2       pass
 ```
 
-###### Matches
+##### Matches
 
-```markdown
-function_definition: 1
-```
+| Label | Lines |
+|:--|:--|
+| `function_definition` | 1 |
 
 --------------------------------------------------------------------------------
 
-##### Construct `function_with_default_positional_arguments_definition`
+#### Construct `function_with_default_positional_arguments_definition`
 
-###### Regex
+##### Regex
 
 ```re
           ^(.*?)/_type='FunctionDef'
@@ -840,24 +1002,24 @@ function_definition: 1
 \n(?:\1.+\n)*?\1/args/defaults/length=(?!0\n).+
 ```
 
-###### Example
+##### Example
 
 ```python
 1   def foobar(a, b="c"):
 2       pass
 ```
 
-###### Matches
+##### Matches
 
-```markdown
-function_with_default_positional_arguments_definition: 1
-```
+| Label | Lines |
+|:--|:--|
+| `function_with_default_positional_arguments_definition` | 1 |
 
 --------------------------------------------------------------------------------
 
-##### Construct `recursive_function_definition`
+#### Construct `recursive_function_definition`
 
-###### Regex
+##### Regex
 
 ```re
           ^(.*?)/_type='FunctionDef'
@@ -868,7 +1030,7 @@ function_with_default_positional_arguments_definition: 1
 \n(?:\1.+\n)*?\1/body/(?P=_1)   /func/id=(?P=NAME) # ensure it is called inside its own body
 ```
 
-###### Example
+##### Example
 
 ```python
 1   def gob_program():
@@ -876,19 +1038,19 @@ function_with_default_positional_arguments_definition: 1
 3       gob_program()
 ```
 
-###### Matches
+##### Matches
 
-```markdown
-recursive_function_definition: 1-3
-```
+| Label | Lines |
+|:--|:--|
+| `recursive_function_definition` | 1-3 |
 
 --------------------------------------------------------------------------------
 
-##### Construct `deeply_recursive_function_definition`
+#### Construct `deeply_recursive_function_definition`
 
 Any function `f` which contains a nested call to itself (`f(..., f(...), ...)`), e.g. the [Ackermann function](https://en.wikipedia.org/wiki/Ackermann_function).
 
-###### Regex
+##### Regex
 
 ```re
           ^(.*?)/_type='FunctionDef'
@@ -901,7 +1063,7 @@ Any function `f` which contains a nested call to itself (`f(..., f(...), ...)`),
 \n(?:\1.+\n)*?\1/body/(?P=_1)   /(?P=_2)        /func/id=(?P=NAME)
 ```
 
-###### Example
+##### Example
 
 ```python
 1   def gob_program():
@@ -909,17 +1071,17 @@ Any function `f` which contains a nested call to itself (`f(..., f(...), ...)`),
 3       gob_program(gob_program())
 ```
 
-###### Matches
+##### Matches
 
-```markdown
-deeply_recursive_function_definition: 1-3
-```
+| Label | Lines |
+|:--|:--|
+| `deeply_recursive_function_definition` | 1-3 |
 
 --------------------------------------------------------------------------------
 
-##### Construct `generator_definition`
+#### Construct `generator_definition`
 
-###### Regex
+##### Regex
 
 ```re
           ^(.*?)/_type='FunctionDef'
@@ -927,7 +1089,7 @@ deeply_recursive_function_definition: 1-3
 \n(?:\1.+\n)* \1/body/\d+/value/_type='(?P<SUFFIX>Yield(From)?)'
 ```
 
-###### Example
+##### Example
 
 ```python
 1   def foo():
@@ -937,22 +1099,22 @@ deeply_recursive_function_definition: 1-3
 5       yield from waste
 ```
 
-###### Matches
+##### Matches
 
-```markdown
-generator_definition=Yield: 1
-generator_definition=YieldFrom: 4
-```
-
---------------------------------------------------------------------------------
-
-### Conditionals
+| Label | Lines |
+|:--|:--|
+| `generator_definition:Yield` | 1 |
+| `generator_definition:YieldFrom` | 4 |
 
 --------------------------------------------------------------------------------
 
-##### Construct `if`
+## Conditionals
 
-###### Regex
+--------------------------------------------------------------------------------
+
+#### Construct `if`
+
+##### Regex
 
 ```re
           ^(.*?)/_type='If'
@@ -960,7 +1122,7 @@ generator_definition=YieldFrom: 4
 \n(?:\1.+\n)*?\1/orelse/.*
 ```
 
-###### Example
+##### Example
 
 ```python
 1   if condition_1:
@@ -970,19 +1132,19 @@ generator_definition=YieldFrom: 4
 5       pass
 ```
 
-###### Matches
+##### Matches
 
-```markdown
-if: 1, 2
-```
+| Label | Lines |
+|:--|:--|
+| `if` | 1, 2 |
 
 --------------------------------------------------------------------------------
 
-##### Construct `if_else`
+#### Construct `if_else`
 
 `if` statement with `else`.
 
-###### Regex
+##### Regex
 
 ```re
           ^(.*?)/_type='If'
@@ -990,7 +1152,7 @@ if: 1, 2
 \n(?:\1.+\n)*?\1/orelse/0/_type=(?!'If')
 ```
 
-###### Example
+##### Example
 
 ```python
 1   if condition_1:
@@ -1004,19 +1166,19 @@ if: 1, 2
 9       pass
 ```
 
-###### Matches
+##### Matches
 
-```markdown
-if_else: 1
-```
+| Label | Lines |
+|:--|:--|
+| `if_else` | 1 |
 
 --------------------------------------------------------------------------------
 
-##### Construct `if_elif`
+#### Construct `if_elif`
 
 `if` statement with `elif`.
 
-###### Regex
+##### Regex
 
 ```re
           ^(.*?)/_type='If'
@@ -1024,7 +1186,7 @@ if_else: 1
 \n(?:\1.+\n)*?\1/orelse/0/_type='If'
 ```
 
-###### Example
+##### Example
 
 ```python
 1   if condition_1:
@@ -1040,22 +1202,22 @@ if_else: 1
 11      pass
 ```
 
-###### Matches
+##### Matches
 
-```markdown
-if_elif: 1, 6
-```
-
---------------------------------------------------------------------------------
-
-### Iterations
+| Label | Lines |
+|:--|:--|
+| `if_elif` | 1, 6 |
 
 --------------------------------------------------------------------------------
 
-##### Construct `for_each`
+## Iterations
+
+--------------------------------------------------------------------------------
+
+#### Construct `for_each`
 Iterate over the elements of a (named) collection.
 
-###### Regex
+##### Regex
 
 ```re
           ^(.*?)/_type='For'
@@ -1063,7 +1225,7 @@ Iterate over the elements of a (named) collection.
 \n(?:\1.+\n)*?\1/iter/lineno=(?P<LINE>\d+)
 ```
 
-###### Example
+##### Example
 
 ```python
 1   for x in seq_1:
@@ -1073,19 +1235,19 @@ Iterate over the elements of a (named) collection.
 5           pass
 ```
 
-###### Matches
+##### Matches
 
-```markdown
-for_each: 1, 4
-```
+| Label | Lines |
+|:--|:--|
+| `for_each` | 1, 4 |
 
 --------------------------------------------------------------------------------
 
-##### Construct `for_range_stop`
+#### Construct `for_range_stop`
 
 Iterate over a range with exactly 1 argument (stop).
 
-###### Regex
+##### Regex
 
 ```re
           ^(.*?)/_type='For'
@@ -1094,7 +1256,7 @@ Iterate over a range with exactly 1 argument (stop).
 \n(?:\1.+\n)*?\1/iter/args/length=1
 ```
 
-###### Example
+##### Example
 
 ```python
 1   for i in range(stop):
@@ -1107,19 +1269,19 @@ Iterate over a range with exactly 1 argument (stop).
 8       pass
 ```
 
-###### Matches
+##### Matches
 
-```markdown
-for_range_stop: 1
-```
+| Label | Lines |
+|:--|:--|
+| `for_range_stop` | 1 |
 
 --------------------------------------------------------------------------------
 
-##### Construct `for_range_start`
+#### Construct `for_range_start`
 
 Iterate over a range with exactly 2 arguments (start, stop).
 
-###### Regex
+##### Regex
 
 ```re
           ^(.*?)/_type='For'
@@ -1128,7 +1290,7 @@ Iterate over a range with exactly 2 arguments (start, stop).
 \n(?:\1.+\n)*?\1/iter/args/length=2
 ```
 
-###### Example
+##### Example
 
 ```python
 1   for i in range(stop):
@@ -1141,19 +1303,19 @@ Iterate over a range with exactly 2 arguments (start, stop).
 8       pass
 ```
 
-###### Matches
+##### Matches
 
-```markdown
-for_range_start: 3
-```
+| Label | Lines |
+|:--|:--|
+| `for_range_start` | 3 |
 
 --------------------------------------------------------------------------------
 
-##### Construct `for_range_step`
+#### Construct `for_range_step`
 
 Iterate over a range with 3 arguments (start, stop, step).
 
-###### Regex
+##### Regex
 
 ```re
           ^(.*?)/_type='For'
@@ -1166,7 +1328,7 @@ Iterate over a range with 3 arguments (start, stop, step).
 )?
 ```
 
-###### Example
+##### Example
 
 ```python
 1   for i in range(stop):
@@ -1181,21 +1343,21 @@ Iterate over a range with 3 arguments (start, stop, step).
 10      pass
 ```
 
-###### Matches
+##### Matches
 
-```markdown
-for_range_step: 5
-for_range_step=-1: 7
-for_range_step=2: 9
-```
+| Label | Lines |
+|:--|:--|
+| `for_range_step` | 5 |
+| `for_range_step:-1` | 7 |
+| `for_range_step:2` | 9 |
 
 --------------------------------------------------------------------------------
 
-##### Construct `for_indexes_values`
+#### Construct `for_indexes_values`
 
 Iterate over index numbers and elements of a collection.
 
-###### Regex
+##### Regex
 
 ```re
           ^(.*?)/_type='For'
@@ -1203,26 +1365,26 @@ Iterate over index numbers and elements of a collection.
 \n(?:\1.+\n)*?\1/iter/func/id='enumerate'
 ```
 
-###### Example
+##### Example
 
 ```python
 1   for (i, element) in enumerate(elements):
 2       pass
 ```
 
-###### Matches
+##### Matches
 
-```markdown
-for_indexes_values: 1
-```
+| Label | Lines |
+|:--|:--|
+| `for_indexes_values` | 1 |
 
 --------------------------------------------------------------------------------
 
-##### Construct `for_indexes`
+#### Construct `for_indexes`
 
 Iterate over index numbers of a collection.
 
-###### Regex
+##### Regex
 
 ```re
           ^(.*?)/_type='For'
@@ -1235,24 +1397,24 @@ Iterate over index numbers of a collection.
 \n(?:\1.+\n)*?\1/(?P=_1)     /keywords/length=0
 ```
 
-###### Example
+##### Example
 
 ```python
 1   for i in range(len(elements)):
 2       pass
 ```
 
-###### Matches
+##### Matches
 
-```markdown
-for_indexes: 1
-```
+| Label | Lines |
+|:--|:--|
+| `for_indexes` | 1 |
 
 --------------------------------------------------------------------------------
 
-##### Construct `nested_for`
+#### Construct `nested_for`
 
-###### Regex
+##### Regex
 
 ```re
           ^(.*?)/_type='For'
@@ -1261,7 +1423,7 @@ for_indexes: 1
 \n(?:\1.+\n)*?\1/(?P=_1)         /lineno=(?P<LINE>\d+)
 ```
 
-###### Example
+##### Example
 
 ```python
 1   for x_1 in seq_1:
@@ -1269,19 +1431,19 @@ for_indexes: 1
 3           pass
 ```
 
-###### Matches
+##### Matches
 
-```markdown
-nested_for: 1-2
-```
+| Label | Lines |
+|:--|:--|
+| `nested_for` | 1-2 |
 
 --------------------------------------------------------------------------------
 
-##### Construct `triangular_nested_for`
+#### Construct `triangular_nested_for`
 
 A `for` loop with a counter `i` and a nested `for` loop which makes `i` iterations.
 
-###### Regex
+##### Regex
 
 ```re
           ^(.*?)/_type='For'
@@ -1309,7 +1471,7 @@ A `for` loop with a counter `i` and a nested `for` loop which makes `i` iteratio
 )
 ```
 
-###### Example
+##### Example
 
 ```python
 1   for i in range(n):
@@ -1321,21 +1483,21 @@ A `for` loop with a counter `i` and a nested `for` loop which makes `i` iteratio
 7           pass
 ```
 
-###### Matches
+##### Matches
 
-```markdown
-triangular_nested_for: 1-2, 5-6
-```
-
---------------------------------------------------------------------------------
-
-### Modules
+| Label | Lines |
+|:--|:--|
+| `triangular_nested_for` | 1-2, 5-6 |
 
 --------------------------------------------------------------------------------
 
-##### Construct `import`
+## Modules
 
-###### Regex
+--------------------------------------------------------------------------------
+
+#### Construct `import`
+
+##### Regex
 
 ```re
            ^(.*)/_type='Import'
@@ -1345,27 +1507,27 @@ triangular_nested_for: 1-2, 5-6
 )+
 ```
 
-###### Example
+##### Example
 
 ```python
 1   import a, b, c
 2   import d
 ```
 
-###### Matches
+##### Matches
 
-```markdown
-import=a: 1
-import=c: 1
-import=b: 1
-import=d: 2
-```
+| Label | Lines |
+|:--|:--|
+| `import:a` | 1 |
+| `import:c` | 1 |
+| `import:b` | 1 |
+| `import:d` | 2 |
 
 --------------------------------------------------------------------------------
 
-##### Construct `import_from`
+#### Construct `import_from`
 
-###### Regex
+##### Regex
 
 ```re
            ^(.*)/_type='ImportFrom'
@@ -1373,25 +1535,25 @@ import=d: 2
 \n(?:\1.+\n)*?\1/module='(?P<SUFFIX>.+)'
 ```
 
-###### Example
+##### Example
 
 ```python
 1   from a import b, c
 2   from d import e
 ```
 
-###### Matches
+##### Matches
 
-```markdown
-import_from=a: 1
-import_from=d: 2
-```
+| Label | Lines |
+|:--|:--|
+| `import_from:a` | 1 |
+| `import_from:d` | 2 |
 
 --------------------------------------------------------------------------------
 
-##### Construct `import_by_call`
+#### Construct `import_by_call`
 
-###### Regex
+##### Regex
 
 ```re
            ^(.*)/_type='Call'
@@ -1402,34 +1564,34 @@ import_from=d: 2
 )+
 ```
 
-###### Example
+##### Example
 
 ```python
 1   foo, bar = __import__("a", "b")
 ```
 
-###### Matches
+##### Matches
 
-```markdown
-import_by_call=a: 1
-import_by_call=b: 1
-```
-
---------------------------------------------------------------------------------
-
-## Code patterns
-
-### Iterative patterns
-
-#### Sequential loops
+| Label | Lines |
+|:--|:--|
+| `import_by_call:a` | 1 |
+| `import_by_call:b` | 1 |
 
 --------------------------------------------------------------------------------
 
-##### Construct `accumulate_elements`
+# Code patterns
+
+## Iterative patterns
+
+### Sequential loops
+
+--------------------------------------------------------------------------------
+
+#### Construct `accumulate_elements`
 
 An accumulator is iteratively updated from its previous value and the value of the iteration variable.
 
-###### Regex
+##### Regex
 
 ```re
           ^(.*?)/_type='For'
@@ -1462,7 +1624,7 @@ An accumulator is iteratively updated from its previous value and the value of t
 )
 ```
 
-###### Example
+##### Example
 
 ```python
 1   def accumulate_elements(elements):
@@ -1489,22 +1651,22 @@ An accumulator is iteratively updated from its previous value and the value of t
 **Remark.**
 The third alternative of the regex is experimental. It matches any one-line function call on the iteration variable and another argument, not only those which mutate one of their arguments (hopefully the accumulator). The built-in functions with side effects (such as `print()`) are explicitely excluded, but this may not be enough. The fourth alternative, too, is certainly broader than necessary. Handle with care.
 
-###### Matches
+##### Matches
 
-```markdown
-accumulate_elements=Assign: 3-4, 7-8
-accumulate_elements=AugAssign: 9-11, 12-13
-accumulate_elements=Name: 14-15
-accumulate_elements=Attribute: 16-17
-```
+| Label | Lines |
+|:--|:--|
+| `accumulate_elements:Assign` | 3-4, 7-8 |
+| `accumulate_elements:AugAssign` | 9-11, 12-13 |
+| `accumulate_elements:Name` | 14-15 |
+| `accumulate_elements:Attribute` | 16-17 |
 
 --------------------------------------------------------------------------------
 
-##### Construct `filter_for`
+#### Construct `filter_for`
 
 An accumulation pattern that, from a given collection, returns a list containing only those elements that verify a certain condition.
 
-###### Regex
+##### Regex
 
 ```re
           ^(.*?)/_type='For'
@@ -1518,7 +1680,7 @@ An accumulation pattern that, from a given collection, returns a list containing
 \n(?:\1.+\n)*?\1/(?P=_1)         /(?P=_2)         /value/args/0/id=(?P=ID_1) # match it in an append()
 ```
 
-###### Example
+##### Example
 
 ```python
 1   for element in elements:
@@ -1529,19 +1691,19 @@ An accumulation pattern that, from a given collection, returns a list containing
 6       print("fiz")
 ```
 
-###### Matches
+##### Matches
 
-```markdown
-filter_for: 1-5
-```
+| Label | Lines |
+|:--|:--|
+| `filter_for` | 1-5 |
 
 --------------------------------------------------------------------------------
 
-##### Construct `find_best_element`
+#### Construct `find_best_element`
 
 An accumulation pattern that, from a given collection, returns the best element verifying a certain condition.
 
-###### Regex
+##### Regex
 
 ```re
       ^(.*?)/(?P<_1>body/\d+)/_type='Assign'
@@ -1558,7 +1720,7 @@ An accumulation pattern that, from a given collection, returns the best element 
 \n(?:\1.+\n)*?\1/(?P=_2)         /(?P=_3)         /(?P=_4)         /value/id=(?P=ITER_VAR) # match iteration variable
 ```
 
-###### Example
+##### Example
 
 ```python
 1   def find_best_element(elements):
@@ -1576,19 +1738,19 @@ An accumulation pattern that, from a given collection, returns the best element 
 13      return candidate
 ```
 
-###### Matches
+##### Matches
 
-```markdown
-find_best_element: 3-5, 10-12
-```
+| Label | Lines |
+|:--|:--|
+| `find_best_element` | 3-5, 10-12 |
 
 --------------------------------------------------------------------------------
 
-##### Construct `universal_quantifier`
+#### Construct `universal_quantifier`
 
 Check if all the elements of a collection satisfy a predicate.
 
-###### Regex
+##### Regex
 
 ```re
       ^(.*?)/(?P<_1>body/\d+)/_type='For'
@@ -1601,7 +1763,7 @@ Check if all the elements of a collection satisfy a predicate.
 \n(?:\1.+\n)*?\1/(?P=_4_)         /value/value=True
 ```
 
-###### Example
+##### Example
 
 ```python
 1   def all_elements_satisfy(elements):
@@ -1611,19 +1773,19 @@ Check if all the elements of a collection satisfy a predicate.
 5       return True
 ```
 
-###### Matches
+##### Matches
 
-```markdown
-universal_quantifier: 2-5
-```
+| Label | Lines |
+|:--|:--|
+| `universal_quantifier` | 2-5 |
 
 --------------------------------------------------------------------------------
 
-##### Construct `existential_quantifier`
+#### Construct `existential_quantifier`
 
 Check if any element of a collection satisfies a predicate.
 
-###### Regex
+##### Regex
 
 ```re
       ^(.*?)/(?P<_1>body/\d+)/_type='For'
@@ -1636,7 +1798,7 @@ Check if any element of a collection satisfies a predicate.
 \n(?:\1.+\n)*?\1/(?P=_4)         /value/value=False
 ```
 
-###### Example
+##### Example
 
 ```python
 2   def some_elements_satisfy(elements):
@@ -1646,19 +1808,19 @@ Check if any element of a collection satisfies a predicate.
 5       return False
 ```
 
-###### Matches
+##### Matches
 
-```markdown
-existential_quantifier: 2-5
-```
+| Label | Lines |
+|:--|:--|
+| `existential_quantifier` | 2-5 |
 
 --------------------------------------------------------------------------------
 
-##### Construct `find_first_element`
+#### Construct `find_first_element`
 
 Linear search. Return the first element of a sequence satisfying a predicate.
 
-###### Regex
+##### Regex
 
 ```re
           ^(.*?)/_type='For'
@@ -1671,7 +1833,7 @@ Linear search. Return the first element of a sequence satisfying a predicate.
 \n(?:\1.+\n)*?\1/(?P=_1)        /(?P=_2)         /value/id=(?P=ITER_VAR) # ... and is returned
 ```
 
-###### Example
+##### Example
 
 ```python
 1   def search(seq, x):
@@ -1681,23 +1843,23 @@ Linear search. Return the first element of a sequence satisfying a predicate.
 5       return None
 ```
 
-###### Matches
+##### Matches
 
-```markdown
-find_first_element: 2-4
-```
-
---------------------------------------------------------------------------------
-
-#### Non sequential finite loops
+| Label | Lines |
+|:--|:--|
+| `find_first_element` | 2-4 |
 
 --------------------------------------------------------------------------------
 
-##### Construct `evolve_state`
+### Non sequential finite loops
+
+--------------------------------------------------------------------------------
+
+#### Construct `evolve_state`
 
 Evolve the value of a variable until it reaches a desired state.
 
-###### Regex
+##### Regex
 
 ```re
           ^(.*?)/_type='While'
@@ -1720,7 +1882,7 @@ Evolve the value of a variable until it reaches a desired state.
 )
 ```
 
-###### Example
+##### Example
 
 ```python
 1   def square_digit_attractor(n):
@@ -1736,23 +1898,23 @@ Evolve the value of a variable until it reaches a desired state.
 11      foo(x, bar)
 ```
 
-###### Matches
+##### Matches
 
-```markdown
-evolve_state: 2-3, 6-7, 8-9, 10-11
-```
-
---------------------------------------------------------------------------------
-
-#### Non sequential infinite loops
+| Label | Lines |
+|:--|:--|
+| `evolve_state` | 2-3, 6-7, 8-9, 10-11 |
 
 --------------------------------------------------------------------------------
 
-##### Construct `accumulate_stream`
+### Non sequential infinite loops
+
+--------------------------------------------------------------------------------
+
+#### Construct `accumulate_stream`
 
 Accumulate the inputs until a sentinel value is encountered (accumulation expressed by: `acc = combine(x, acc)`).
 
-###### Regex
+##### Regex
 
 ```re
           ^(.*?)/_type='While'
@@ -1790,7 +1952,7 @@ Accumulate the inputs until a sentinel value is encountered (accumulation expres
 )
 ```
 
-###### Example
+##### Example
 
 ```python
 1   def accumulate_inputs():
@@ -1826,31 +1988,31 @@ Accumulate the inputs until a sentinel value is encountered (accumulation expres
 31          acc.foobar(x)
 ```
 
-###### Matches
+##### Matches
 
-```markdown
-accumulate_stream=Assign: 3-7
-accumulate_stream=AugAssign: 11-15
-accumulate_stream=Name: 19-23
-accumulate_stream=Attribute: 27-31
-```
+| Label | Lines |
+|:--|:--|
+| `accumulate_stream:Assign` | 3-7 |
+| `accumulate_stream:AugAssign` | 11-15 |
+| `accumulate_stream:Name` | 19-23 |
+| `accumulate_stream:Attribute` | 27-31 |
 
 --------------------------------------------------------------------------------
 
-## Suggestions
+# Suggestions
 
 These patterns match constructs that can be shortened.
 It's up to you to decide if a rewriting would make the code clearer.
 
-### Assignments
+## Assignments
 
 --------------------------------------------------------------------------------
 
-##### Construct `suggest_conditional_expression`
+#### Construct `suggest_conditional_expression`
 
 When a conditional simply assigns different values to the same variable, it may be rewritten as a conditional expression.
 
-###### Regex
+##### Regex
 
 ```re
           ^(.*?)/_type='If'
@@ -1864,7 +2026,7 @@ When a conditional simply assigns different values to the same variable, it may 
 \n(?:\1.+\n)*?\1/orelse/0/targets/0/_hash=(?P=HASH)
 ```
 
-###### Example
+##### Example
 
 ```python
 1   if condition:
@@ -1891,19 +2053,19 @@ The first conditional (only) may be rewritten as:
 1   a = (1 if condition else 2)
 ```
 
-###### Matches
+##### Matches
 
-```markdown
-suggest_conditional_expression: 1-4
-```
+| Label | Lines |
+|:--|:--|
+| `suggest_conditional_expression` | 1-4 |
 
 --------------------------------------------------------------------------------
 
-##### Construct `suggest_augmented_assignment`
+#### Construct `suggest_augmented_assignment`
 
 When the RHS of an assignment consists in a binary operation whose left operand is the target (`a = a op expr`), the statement can be shortened as `a op= expr`.
 
-###### Regex
+##### Regex
 
 ```re
           ^(.*?)/_type='Assign'
@@ -1914,7 +2076,7 @@ When the RHS of an assignment consists in a binary operation whose left operand 
 \n(?:\1.+\n)*?\1/value/left/id=(?P=TARGET)
 ```
 
-###### Example
+##### Example
 
 ```python
 1   a = a + b
@@ -1933,23 +2095,23 @@ May be rewritten as:
 - Line 3, note that the `+` binary operator is not necessarily commutative, e.g. on strings.
 - Some cases like line 4 should be matched, check the associativity rules.
 
-###### Matches
+##### Matches
 
-```markdown
-suggest_augmented_assignment: 1, 2
-```
-
---------------------------------------------------------------------------------
-
-### Expressions
+| Label | Lines |
+|:--|:--|
+| `suggest_augmented_assignment` | 1, 2 |
 
 --------------------------------------------------------------------------------
 
-##### Construct `suggest_comparison_chaining`
+## Expressions
+
+--------------------------------------------------------------------------------
+
+#### Construct `suggest_comparison_chaining`
 
 When the `else` branch of a conditional is another conditional, it can be rewritten with an `elif` branch.
 
-###### Regex
+##### Regex
 
 ```re
           ^(.*?)/_type='BoolOp'
@@ -1961,7 +2123,7 @@ When the `else` branch of a conditional is another conditional, it can be rewrit
 \n(?:\1.+\n)*?\1/values/1/left/_hash=(?P=HASH_1) # match the left operand of the right comparison
 ```
 
-###### Example
+##### Example
 
 ```python
 1   a < b and b < c
@@ -1981,19 +2143,19 @@ May be rewritten as:
 
 Note that the last simplification is rather confusing and should be avoided.
 
-###### Matches
+##### Matches
 
-```markdown
-suggest_comparison_chaining: 1, 2, 3, 4
-```
+| Label | Lines |
+|:--|:--|
+| `suggest_comparison_chaining` | 1, 2, 3, 4 |
 
 --------------------------------------------------------------------------------
 
-##### Construct `suggest_constant_definition`
+#### Construct `suggest_constant_definition`
 
 Match magic numbers (unnamed numerical constants) other than -1, 0, 1 and 2. A number in the RHS of an assignment to a constant is of course ignored.
 
-###### Regex
+##### Regex
 
 ```re
   ^(/body/\d+)
@@ -2008,7 +2170,7 @@ Match magic numbers (unnamed numerical constants) other than -1, 0, 1 and 2. A n
 )
 ```
 
-###### Example
+##### Example
 
 ```python
 1   NUMBER_OF_TEETH_OF_A_DOG = 42 # not a magic number
@@ -2031,23 +2193,23 @@ May be rewritten as:
 7   NEGATIVE_NUMBER = -42
 ```
 
-###### Matches
+##### Matches
 
-```markdown
-suggest_constant_definition: 2, 4, 6
-```
-
---------------------------------------------------------------------------------
-
-### Subroutines
+| Label | Lines |
+|:--|:--|
+| `suggest_constant_definition` | 2, 4, 6 |
 
 --------------------------------------------------------------------------------
 
-##### Construct `suggest_condition_return`
+## Subroutines
+
+--------------------------------------------------------------------------------
+
+#### Construct `suggest_condition_return`
 
 When a predicate ends with a conditional whose sole purpose is to return `True` or `False`, it is enough to return the condition.
 
-###### Regex
+##### Regex
 
 ```re
           ^(.*?)/_type='If'
@@ -2059,7 +2221,7 @@ When a predicate ends with a conditional whose sole purpose is to return `True` 
 \n(?:\1.+\n)*?\1/orelse/0/value/value=(True|False)(?<!(?P=BOOL)) # and check not BOOL is used there
 ```
 
-###### Example
+##### Example
 
 ```python
 1   def foo():
@@ -2085,8 +2247,8 @@ May be rewritten as:
 5       return not condition
 ```
 
-###### Matches
+##### Matches
 
-```markdown
-suggest_condition_return: 2-5, 8-11
-```
+| Label | Lines |
+|:--|:--|
+| `suggest_condition_return` | 2-5, 8-11 |
