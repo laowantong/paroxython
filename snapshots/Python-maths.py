@@ -1,7 +1,7 @@
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/3n+1.py
 # ----------------------------------------------------------------------------------------
-from typing import Tuple, List
+from typing import Tuple, List # import_from=typing
 def n31(a: int) -> Tuple[List[int], int]: # function_definition, index
     if not isinstance(a, int): # function_call=isinstance, if, unary_operator=Not
         raise TypeError("Must be int, not {0}".format(type(a).__name__)) # composition, function_call=TypeError, function_call=type, literal=Str, method_call=format
@@ -144,7 +144,7 @@ def test_abs_val(): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/abs_max.py
 # ----------------------------------------------------------------------------------------
-from typing import List
+from typing import List # import_from=typing
 def abs_max(x: List[int]) -> int: # function_definition, index
     j = x[0] # assignment, index, literal=Num
     for i in x: # find_best_element (-> +2), for_each
@@ -161,7 +161,7 @@ def main(): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/abs_min.py
 # ----------------------------------------------------------------------------------------
-from .abs import abs_val
+from .abs import abs_val # import_from=abs
 def absMin(x): # function_definition
     j = x[0] # assignment, index, literal=Num
     for i in x: # find_best_element (-> +2), for_each
@@ -205,7 +205,7 @@ def main(): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/average_mode.py
 # ----------------------------------------------------------------------------------------
-import statistics
+import statistics # import=statistics
 def mode(input_list): # function_definition
     check_list = input_list.copy() # assignment, method_call=copy
     result = list() # assignment, function_call=list
@@ -218,7 +218,7 @@ def mode(input_list): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/basic_maths.py
 # ----------------------------------------------------------------------------------------
-import math
+import math # import=math
 def prime_factors(n: int) -> list: # function_definition
     pf = [] # assignment, literal=List
     while n % 2 == 0: # binary_operator=Mod, comparison_operator=Eq, divisibility_test=2, evolve_state (-> +2), literal=Num
@@ -322,7 +322,7 @@ def main(): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/explicit_euler.py
 # ----------------------------------------------------------------------------------------
-import numpy as np
+import numpy as np # import=numpy
 def explicit_euler(ode_func, y0, x0, stepsize, x_end): # function_definition
     N = int(np.ceil((x_end - x0) / stepsize)) # assignment, binary_operator=Div, binary_operator=Sub, composition, function_call=int, method_call=ceil
     y = np.zeros((N + 1,)) # assignment, binary_operator=Add, literal=Num, method_call=zeros
@@ -336,7 +336,7 @@ def explicit_euler(ode_func, y0, x0, stepsize, x_end): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/extended_euclidean_algorithm.py
 # ----------------------------------------------------------------------------------------
-import sys
+import sys # import=sys
 def extended_euclidean_algorithm(m, n): # function_definition
     a = 0 # assignment, literal=Num
     a_prime = 1 # assignment, literal=Num
@@ -563,7 +563,7 @@ def floor(x) -> int: # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/gaussian.py
 # ----------------------------------------------------------------------------------------
-from numpy import pi, sqrt, exp
+from numpy import pi, sqrt, exp # import_from=numpy
 def gaussian(x, mu: float = 0.0, sigma: float = 1.0) -> int: # function_definition, function_with_default_positional_arguments_definition, literal=Num
     return 1 / sqrt(2 * pi * sigma ** 2) * exp(-((x - mu) ** 2) / 2 * sigma ** 2) # binary_operator=Div, binary_operator=Mult, binary_operator=Pow, binary_operator=Sub, function_call=exp, function_call=sqrt, literal=Num, unary_operator=USub
 
@@ -590,7 +590,7 @@ def main(): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/hardy_ramanujanalgo.py
 # ----------------------------------------------------------------------------------------
-import math
+import math # import=math
 def exactPrimeFactorCount(n): # function_definition
     count = 0 # assignment, literal=Num
     if n % 2 == 0: # binary_operator=Mod, comparison_operator=Eq, divisibility_test=2, if, literal=Num
@@ -611,7 +611,7 @@ def exactPrimeFactorCount(n): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/is_square_free.py
 # ----------------------------------------------------------------------------------------
-from typing import List
+from typing import List # import_from=typing
 def is_square_free(factors: List[int]) -> bool: # function_definition, index
     return len(set(factors)) == len(factors) # comparison_operator=Eq, composition, function_call=len, function_call=set
 
@@ -673,7 +673,7 @@ def kthPermutation(k, n): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/largest_of_very_large_numbers.py
 # ----------------------------------------------------------------------------------------
-import math
+import math # import=math
 def res(x, y): # function_definition
     if 0 not in (x, y): # comparison_operator=NotIn, if, if_elif, literal=Num
         return y * math.log10(x) # binary_operator=Mult, method_call=log10
@@ -686,7 +686,7 @@ def res(x, y): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/least_common_multiple.py
 # ----------------------------------------------------------------------------------------
-import unittest
+import unittest # import=unittest
 def find_lcm(first_num: int, second_num: int) -> int: # function_definition
     max_num = first_num if first_num >= second_num else second_num # assignment, comparison_operator=GtE, conditional_expression
     common_mult = max_num # assignment
@@ -725,7 +725,7 @@ def recur_luc(n): # function_definition, recursive_function_definition (-> +5)
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/matrix_exponentiation.py
 # ----------------------------------------------------------------------------------------
-import timeit
+import timeit # import=timeit
 class Matrix(object):
     def __init__(self, arg): # function_definition
         if isinstance(arg, list): # function_call=isinstance, if, if_else
@@ -796,8 +796,8 @@ def main(): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/mobius_function.py
 # ----------------------------------------------------------------------------------------
-from maths.prime_factors import prime_factors
-from maths.is_square_free import is_square_free
+from maths.prime_factors import prime_factors # import_from=maths.prime_factors
+from maths.is_square_free import is_square_free # import_from=maths.is_square_free
 def mobius(n: int) -> int: # function_definition
     factors = prime_factors(n) # assignment, function_call=prime_factors
     if is_square_free(factors): # function_call=is_square_free, if
@@ -824,7 +824,7 @@ def main(): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/newton_raphson.py
 # ----------------------------------------------------------------------------------------
-import math as m
+import math as m # import=math
 def calc_derivative(f, a, h=0.001): # function_definition, function_with_default_positional_arguments_definition, literal=Num
     return (f(a + h) - f(a - h)) / (2 * h) # binary_operator=Add, binary_operator=Div, binary_operator=Mult, binary_operator=Sub, function_call=f, literal=Num
 def newton_raphson(f, x0=0, maxiter=100, step=0.0001, maxerror=1e-6, logsteps=False): # function_definition, function_with_default_positional_arguments_definition, literal=False, literal=Num
@@ -849,14 +849,14 @@ def newton_raphson(f, x0=0, maxiter=100, step=0.0001, maxerror=1e-6, logsteps=Fa
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/perfect_square.py
 # ----------------------------------------------------------------------------------------
-import math
+import math # import=math
 def perfect_square(num: int) -> bool: # function_definition
     return math.sqrt(num) * math.sqrt(num) == num # binary_operator=Mult, comparison_operator=Eq, method_call=sqrt
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/polynomial_evaluation.py
 # ----------------------------------------------------------------------------------------
-from typing import Sequence
+from typing import Sequence # import_from=typing
 def evaluate_poly(poly: Sequence[float], x: float) -> float: # function_definition, index
     return sum(c * (x ** i) for i, c in enumerate(poly)) # binary_operator=Mult, binary_operator=Pow, composition, function_call=enumerate, function_call=sum
 def horner(poly: Sequence[float], x: float) -> float: # function_definition, index
@@ -868,8 +868,8 @@ def horner(poly: Sequence[float], x: float) -> float: # function_definition, ind
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/prime_check.py
 # ----------------------------------------------------------------------------------------
-import math
-import unittest
+import math # import=math
+import unittest # import=unittest
 def prime_check(number): # function_definition
     if number < 2: # comparison_operator=Lt, if, literal=Num
         return False # literal=False
@@ -908,7 +908,7 @@ class Test(unittest.TestCase):
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/prime_factors.py
 # ----------------------------------------------------------------------------------------
-from typing import List
+from typing import List # import_from=typing
 def prime_factors(n: int) -> List[int]: # function_definition, index
     i = 2 # assignment, literal=Num
     factors = [] # assignment, literal=List
@@ -925,7 +925,7 @@ def prime_factors(n: int) -> List[int]: # function_definition, index
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/prime_numbers.py
 # ----------------------------------------------------------------------------------------
-from typing import List
+from typing import List # import_from=typing
 def primes(max: int) -> List[int]: # function_definition, index
     max += 1 # augmented_assignment, literal=Num
     numbers = [False] * max # assignment, binary_operator=Mult, literal=False, literal=List
@@ -955,7 +955,7 @@ def prime_sieve_eratosthenes(num): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/qr_decomposition.py
 # ----------------------------------------------------------------------------------------
-import numpy as np
+import numpy as np # import=numpy
 def qr_householder(A): # function_definition
     m, n = A.shape # assignment
     t = min(m, n) # assignment, function_call=min
@@ -977,8 +977,8 @@ def qr_householder(A): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/quadratic_equations_complex_numbers.py
 # ----------------------------------------------------------------------------------------
-from math import sqrt
-from typing import Tuple
+from math import sqrt # import_from=math
+from typing import Tuple # import_from=typing
 def QuadraticEquation(a: int, b: int, c: int) -> Tuple[str, str]: # function_definition, index
     if a == 0: # comparison_operator=Eq, if, literal=Num
         raise ValueError("Coefficient 'a' must not be zero for quadratic equations.") # function_call=ValueError, literal=Str
@@ -997,8 +997,8 @@ def main(): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/radix2_fft.py
 # ----------------------------------------------------------------------------------------
-import mpmath
-import numpy as np
+import mpmath # import=mpmath
+import numpy as np # import=numpy
 class FFT:
     def __init__(self, polyA=[0], polyB=[0]): # function_definition, function_with_default_positional_arguments_definition, literal=List, literal=Num
         self.polyA = list(polyA)[:] # assignment, function_call=list, slice
@@ -1093,7 +1093,7 @@ class FFT:
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/runge_kutta.py
 # ----------------------------------------------------------------------------------------
-import numpy as np
+import numpy as np # import=numpy
 def runge_kutta(f, y0, x0, h, x_end): # function_definition
     N = int(np.ceil((x_end - x0) / h)) # assignment, binary_operator=Div, binary_operator=Sub, composition, function_call=int, method_call=ceil
     y = np.zeros((N + 1,)) # assignment, binary_operator=Add, literal=Num, method_call=zeros
@@ -1111,7 +1111,7 @@ def runge_kutta(f, y0, x0, h, x_end): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/segmented_sieve.py
 # ----------------------------------------------------------------------------------------
-import math
+import math # import=math
 def sieve(n): # function_definition
     in_prime = [] # assignment, literal=List
     start = 2 # assignment, literal=Num
@@ -1151,7 +1151,7 @@ print(sieve(10 ** 6)) # binary_operator=Pow, composition, function_call=print, f
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/sieve_of_eratosthenes.py
 # ----------------------------------------------------------------------------------------
-import math
+import math # import=math
 def sieve(n): # function_definition
     l = [True] * (n + 1) # assignment, binary_operator=Add, binary_operator=Mult, literal=List, literal=Num, literal=True
     prime = [] # assignment, literal=List
@@ -1204,7 +1204,7 @@ def main(): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/softmax.py
 # ----------------------------------------------------------------------------------------
-import numpy as np
+import numpy as np # import=numpy
 def softmax(vector): # function_definition
     exponentVector = np.exp(vector) # assignment, method_call=exp
     sumOfExponents = np.sum(exponentVector) # assignment, method_call=sum
@@ -1223,7 +1223,7 @@ def main(): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/test_prime_check.py
 # ----------------------------------------------------------------------------------------
-from .prime_check import Test
+from .prime_check import Test # import_from=prime_check
 Test() # function_call=Test
 
 # ----------------------------------------------------------------------------------------
@@ -1259,7 +1259,7 @@ def main(): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/volume.py
 # ----------------------------------------------------------------------------------------
-from math import pi
+from math import pi # import_from=math
 def vol_cube(side_length): # function_definition
     return float(side_length ** 3) # binary_operator=Pow, function_call=float, literal=Num, suggest_constant_definition
 def vol_cuboid(width, height, length): # function_definition
@@ -1290,8 +1290,8 @@ def main(): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/zellers_congruence.py
 # ----------------------------------------------------------------------------------------
-import datetime
-import argparse
+import datetime # import=datetime
+import argparse # import=argparse
 def zeller(date_input: str) -> str: # function_definition
     days = { # assignment, literal=Dict
     "0": "Sunday", # literal=Str

@@ -155,8 +155,8 @@ def solution(n): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_02/sol4.py
 # ----------------------------------------------------------------------------------------
-import math
-from decimal import Decimal, getcontext
+import math # import=math
+from decimal import Decimal, getcontext # import_from=decimal
 def solution(n): # function_definition
     try:
         n = int(n) # assignment, function_call=int
@@ -191,7 +191,7 @@ def solution(n): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_03/sol1.py
 # ----------------------------------------------------------------------------------------
-import math
+import math # import=math
 def isprime(no): # function_definition
     if no == 2: # comparison_operator=Eq, if, if_elif, literal=Num
         return True # literal=True
@@ -357,7 +357,7 @@ def solution(n): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_06/sol3.py
 # ----------------------------------------------------------------------------------------
-import math
+import math # import=math
 def solution(n): # function_definition
     sum_of_squares = sum([i * i for i in range(1, n + 1)]) # assignment, binary_operator=Add, binary_operator=Mult, composition, function_call=range, function_call=sum, literal=Num
     square_of_sum = int(math.pow(sum(range(1, n + 1)), 2)) # assignment, binary_operator=Add, composition, function_call=int, function_call=range, function_call=sum, literal=Num, method_call=pow
@@ -374,7 +374,7 @@ def solution(n): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_07/sol1.py
 # ----------------------------------------------------------------------------------------
-from math import sqrt
+from math import sqrt # import_from=math
 def isprime(n): # function_definition
     if n == 2: # comparison_operator=Eq, if, if_elif, literal=Num
         return True # literal=True
@@ -427,8 +427,8 @@ def solution(n): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_07/sol3.py
 # ----------------------------------------------------------------------------------------
-import math
-import itertools
+import math # import=math
+import itertools # import=itertools
 def primeCheck(number): # function_definition
     if number % 2 == 0 and number > 2: # binary_operator=Mod, boolean_operator=And, comparison_operator=Eq, comparison_operator=Gt, divisibility_test=2, if, literal=Num
         return False # literal=False
@@ -445,7 +445,7 @@ def solution(n): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_08/sol1.py
 # ----------------------------------------------------------------------------------------
-import sys
+import sys # import=sys
 N = """73167176531330624919225119674426574742355349194934\ # assignment, global_constant_definition
 96983520312774506326239578318016984801869478851843\
 85861560789112949495459501737958331952853208805511\
@@ -479,7 +479,7 @@ def solution(n): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_08/sol2.py
 # ----------------------------------------------------------------------------------------
-from functools import reduce
+from functools import reduce # import_from=functools
 N = ( # assignment, global_constant_definition, literal=Tuple
 )
 def solution(n): # function_definition
@@ -493,7 +493,7 @@ def solution(n): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_08/sol3.py
 # ----------------------------------------------------------------------------------------
-import sys
+import sys # import=sys
 N = """73167176531330624919225119674426574742355349194934\ # assignment, global_constant_definition
 96983520312774506326239578318016984801869478851843\
 85861560789112949495459501737958331952853208805511\
@@ -575,7 +575,7 @@ def solution(): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_10/sol1.py
 # ----------------------------------------------------------------------------------------
-from math import sqrt
+from math import sqrt # import_from=math
 def is_prime(n): # function_definition
     for i in range(2, int(sqrt(n)) + 1): # binary_operator=Add, composition, for_range_start, function_call=int, function_call=range, function_call=sqrt, literal=Num, universal_quantifier (-> +3)
         if n % i == 0: # binary_operator=Mod, comparison_operator=Eq, divisibility_test, if, literal=Num
@@ -596,8 +596,8 @@ def solution(n): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_10/sol2.py
 # ----------------------------------------------------------------------------------------
-import math
-from itertools import takewhile
+import math # import=math
+from itertools import takewhile # import_from=itertools
 def primeCheck(number): # function_definition
     if number % 2 == 0 and number > 2: # binary_operator=Mod, boolean_operator=And, comparison_operator=Eq, comparison_operator=Gt, divisibility_test=2, if, literal=Num
         return False # literal=False
@@ -631,7 +631,7 @@ def prime_sum(n: int) -> int: # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_11/sol1.py
 # ----------------------------------------------------------------------------------------
-import os
+import os # import=os
 def largest_product(grid): # function_definition
     nColumns = len(grid[0]) # assignment, function_call=len, index, literal=Num
     nRows = len(grid) # assignment, function_call=len
@@ -671,7 +671,7 @@ def solution(): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_11/sol2.py
 # ----------------------------------------------------------------------------------------
-import os
+import os # import=os
 def solution(): # function_definition
     with open(os.path.dirname(__file__) + "/grid.txt") as f: # binary_operator=Add, composition, function_call=open, literal=Str, method_call=dirname
         l = [] # assignment, literal=List
@@ -703,7 +703,7 @@ def solution(): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_12/sol1.py
 # ----------------------------------------------------------------------------------------
-from math import sqrt
+from math import sqrt # import_from=math
 def count_divisors(n): # function_definition
     nDivisors = 0 # assignment, literal=Num
     for i in range(1, int(sqrt(n)) + 1): # binary_operator=Add, composition, for_range_start, function_call=int, function_call=range, function_call=sqrt, literal=Num
@@ -779,7 +779,7 @@ def solution(n): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_15/sol1.py
 # ----------------------------------------------------------------------------------------
-from math import factorial
+from math import factorial # import_from=math
 def lattice_paths(n): # function_definition
     n = 2 * n # assignment, binary_operator=Mult, literal=Num
     k = n / 2 # assignment, binary_operator=Div, literal=Num
@@ -832,7 +832,7 @@ def solution(n): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_18/solution.py
 # ----------------------------------------------------------------------------------------
-import os
+import os # import=os
 def solution(): # function_definition
     script_dir = os.path.dirname(os.path.realpath(__file__)) # assignment, composition, method_call=dirname, method_call=realpath
     triangle = os.path.join(script_dir, "triangle.txt") # assignment, literal=Str, method_call=join
@@ -904,14 +904,14 @@ def solution(n): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_20/sol2.py
 # ----------------------------------------------------------------------------------------
-from math import factorial
+from math import factorial # import_from=math
 def solution(n): # function_definition
     return sum([int(x) for x in str(factorial(n))]) # composition, function_call=factorial, function_call=int, function_call=str, function_call=sum
 
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_20/sol3.py
 # ----------------------------------------------------------------------------------------
-from math import factorial
+from math import factorial # import_from=math
 def solution(n): # function_definition
     return sum(map(int, str(factorial(n)))) # composition, function_call=factorial, function_call=map, function_call=str, function_call=sum
 
@@ -930,7 +930,7 @@ def solution(n): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_21/sol1.py
 # ----------------------------------------------------------------------------------------
-from math import sqrt
+from math import sqrt # import_from=math
 def sum_of_divisors(n): # function_definition
     total = 0 # assignment, literal=Num
     for i in range(1, int(sqrt(n) + 1)): # accumulate_elements=AugAssign (-> +2), binary_operator=Add, composition, for_range_start, function_call=int, function_call=range, function_call=sqrt, literal=Num
@@ -952,7 +952,7 @@ def solution(n): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_22/sol1.py
 # ----------------------------------------------------------------------------------------
-import os
+import os # import=os
 def solution(): # function_definition
     with open(os.path.dirname(__file__) + "/p022_names.txt") as file: # binary_operator=Add, composition, function_call=open, literal=Str, method_call=dirname
         names = str(file.readlines()[0]) # assignment, composition, function_call=str, index, literal=Num, method_call=readlines
@@ -970,7 +970,7 @@ def solution(): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_22/sol2.py
 # ----------------------------------------------------------------------------------------
-import os
+import os # import=os
 def solution(): # function_definition
     total_sum = 0 # assignment, literal=Num
     temp_sum = 0 # assignment, literal=Num
@@ -1036,7 +1036,7 @@ def solution(n): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_24/sol1.py
 # ----------------------------------------------------------------------------------------
-from itertools import permutations
+from itertools import permutations # import_from=itertools
 def solution(): # function_definition
     result = list(map("".join, permutations("0123456789"))) # assignment, composition, function_call=list, function_call=map, function_call=permutations, literal=Str
     return result[999999] # index, literal=Num, suggest_constant_definition
@@ -1099,7 +1099,7 @@ def solution(n): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_27/problem_27_sol1.py
 # ----------------------------------------------------------------------------------------
-import math
+import math # import=math
 def is_prime(k: int) -> bool: # function_definition
     if k < 2 or k % 2 == 0: # binary_operator=Mod, boolean_operator=Or, comparison_operator=Eq, comparison_operator=Lt, divisibility_test=2, if, if_elif, literal=Num
         return False # literal=False
@@ -1128,7 +1128,7 @@ def solution(a_limit: int, b_limit: int) -> int: # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_28/sol1.py
 # ----------------------------------------------------------------------------------------
-from math import ceil
+from math import ceil # import_from=math
 def diagonal_sum(n): # function_definition
     total = 1 # assignment, literal=Num
     for i in range(1, int(ceil(n / 2.0))): # binary_operator=Div, composition, for_range_start, function_call=ceil, function_call=int, function_call=range, literal=Num, suggest_constant_definition
@@ -1175,7 +1175,7 @@ def solution(n): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_32/sol32.py
 # ----------------------------------------------------------------------------------------
-import itertools
+import itertools # import=itertools
 def isCombinationValid(combination): # function_definition
     return ( # boolean_operator=Or
     int("".join(combination[0:2])) * int("".join(combination[2:5])) # binary_operator=Mult, composition, function_call=int, literal=Num, literal=Str, method_call=join, slice, suggest_constant_definition
@@ -1257,7 +1257,7 @@ def solution(): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_42/solution42.py
 # ----------------------------------------------------------------------------------------
-import os
+import os # import=os
 TRIANGULAR_NUMBERS = [int(0.5 * n * (n + 1)) for n in range(1, 101)] # assignment, binary_operator=Add, binary_operator=Mult, function_call=int, function_call=range, global_constant_definition, literal=Num
 def solution(): # function_definition
     script_dir = os.path.dirname(os.path.realpath(__file__)) # assignment, composition, method_call=dirname, method_call=realpath
@@ -1303,7 +1303,7 @@ def solution(): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_53/sol1.py
 # ----------------------------------------------------------------------------------------
-from math import factorial
+from math import factorial # import_from=math
 def combinations(n, r): # function_definition
     return factorial(n) / (factorial(r) * factorial(n - r)) # binary_operator=Div, binary_operator=Mult, binary_operator=Sub, function_call=factorial
 def solution(): # function_definition
@@ -1440,7 +1440,7 @@ def maximum_digital_sum(a: int, b: int) -> int: # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_67/sol1.py
 # ----------------------------------------------------------------------------------------
-import os
+import os # import=os
 def solution(): # function_definition
     script_dir = os.path.dirname(os.path.realpath(__file__)) # assignment, composition, method_call=dirname, method_call=realpath
     triangle = os.path.join(script_dir, "triangle.txt") # assignment, literal=Str, method_call=join
@@ -1478,8 +1478,8 @@ def partition(m): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_99/sol1.py
 # ----------------------------------------------------------------------------------------
-import os
-from math import log10
+import os # import=os
+from math import log10 # import_from=math
 def find_largest(data_file: str = "base_exp.txt") -> int: # function_definition, function_with_default_positional_arguments_definition, literal=Str
     largest = [0, 0] # assignment, literal=List, literal=Num
     for i, line in enumerate(open(os.path.join(os.path.dirname(__file__), data_file))): # composition, for_indexes_values, function_call=enumerate, function_call=open, method_call=dirname, method_call=join

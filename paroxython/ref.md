@@ -52,6 +52,10 @@
       - [Construct `for_indexes`](#construct-for_indexes)
       - [Construct `nested_for`](#construct-nested_for)
       - [Construct `triangular_nested_for`](#construct-triangular_nested_for)
+- [Modules](#modules)
+  - [Construct `import`](#construct-import)
+  - [Construct `import_from`](#construct-import_from)
+  - [Construct `import_by_call`](#construct-import_by_call)
   - [Code patterns](#code-patterns)
     - [Iterative patterns](#iterative-patterns)
       - [Sequential loops](#sequential-loops)
@@ -1325,6 +1329,94 @@ triangular_nested_for: 1-2, 5-6
 
 --------------------------------------------------------------------------------
 
+#### Modules
+
+--------------------------------------------------------------------------------
+
+##### Construct `import`
+
+###### Regex
+
+```re
+           ^(.*)/_type='Import'
+\n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
+(
+\n(?:\1.+\n)*?\1/names/\d+/name='(?P<SUFFIX>.+)'
+)+
+```
+
+###### Example
+
+```python
+1   import a, b, c
+2   import d
+```
+
+###### Matches
+
+```markdown
+import=a: 1
+import=c: 1
+import=b: 1
+import=d: 2
+```
+
+--------------------------------------------------------------------------------
+
+##### Construct `import_from`
+
+###### Regex
+
+```re
+           ^(.*)/_type='ImportFrom'
+\n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
+\n(?:\1.+\n)*?\1/module='(?P<SUFFIX>.+)'
+```
+
+###### Example
+
+```python
+1   from a import b, c
+2   from d import e
+```
+
+###### Matches
+
+```markdown
+import_from=a: 1
+import_from=d: 2
+```
+
+--------------------------------------------------------------------------------
+
+##### Construct `import_by_call`
+
+###### Regex
+
+```re
+           ^(.*)/_type='Call'
+\n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
+\n(?:\1.+\n)*?\1/func/id='__import__'
+(
+\n(?:\1.+\n)*?\1/args/\d+/s='(?P<SUFFIX>.+)'
+)+
+```
+
+###### Example
+
+```python
+1   foo, bar = __import__("a", "b")
+```
+
+###### Matches
+
+```markdown
+import_by_call=a: 1
+import_by_call=b: 1
+```
+
+--------------------------------------------------------------------------------
+
 ## Code patterns
 
 ### Iterative patterns
@@ -1335,7 +1427,7 @@ triangular_nested_for: 1-2, 5-6
 
 ##### Construct `accumulate_elements`
 
-An accumulation pattern where a variable (the acumulator) is updated from its previous value and the value of the iteration variable.
+An accumulator is iteratively updated from its previous value and the value of the iteration variable.
 
 ###### Regex
 
