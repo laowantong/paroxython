@@ -42,7 +42,6 @@ def scan(path, sloc_only=True):
 
 
 if __name__ == "__main__":
-    from pathlib import Path
-
+    Path = __import__("pathlib").Path
     for result in scan(Path("../Python/project_euler")):
         print(result)

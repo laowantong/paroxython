@@ -1,3 +1,4 @@
+import time
 from pathlib import Path
 
 import context
@@ -11,7 +12,6 @@ DIRECTORIES = [
 
 total_elapsed_time = 0
 for directory in DIRECTORIES:
-    import time
     path = Path(directory)
     if (path / "__is_private_directory").exists():
         output_path = Path(path.parent, "snapshot_" + path.parts[-1] + ".py")

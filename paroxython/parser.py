@@ -9,44 +9,51 @@ sys.path[0:0] = [str(Path(__file__).parent)]
 from flatten import flatten
 
 
-class Parser:
-
-    ref_path = Path("paroxython/ref.md")
-    find_all_constructs = regex.compile(r"""(?msx)
-            ^\#{5}\s+Construct\s+`(.+?)` # capture the label
-            .+?\#{6}\s+Regex # ensure the next pattern is in the Regex section
-            .+?```re\n+(.+?)\n``` # capture this pattern
-        """).findall
-    sub_negative_litterals = regex.compile(r"""(?mx)
+def simplify_negative_litterals():
+    sub = regex.compile(
+        r"""(?mx)
                     ^(.*?)/_type='UnaryOp'
             (\n(?:.+\n)*?)\1/op/_type='USub'
              \n(?:.+\n)*? \1/operand/n=(.+)
-        """).sub
+        """
+    ).sub
+    return lambda flat_ast: sub(r"\1/_type='Num'\2\1/n=-\3", flat_ast)
 
-    def __init__(self):
-        text = Parser.ref_path.read_text()
+
+simplify_negative_litterals = simplify_negative_litterals()
+
+
+find_all_constructs = regex.compile(
+    r"""(?msx)
+            ^\#{5}\s+Construct\s+`(.+?)` # capture the label
+            .+?\#{6}\s+Regex # ensure the next pattern is in the Regex section
+            .+?```re\n+(.+?)\n``` # capture this pattern
+        """
+).findall
+
+
+class Parser:
+    def __init__(self, ref_path="paroxython/ref.md"):
+        self.ref_path = Path(ref_path)
+        text = self.ref_path.read_text()
         self.constructs = {}
-        for (label, pattern) in Parser.find_all_constructs(text):
+        for (label, pattern) in find_all_constructs(text):
             if label in self.constructs:
                 raise ValueError(f"Duplicated label '{label}'!")
             self.constructs[label] = regex.compile(f"(?mx){pattern}")
-
-    def simplify_negative_litterals(self, flat_ast):
-        return Parser.sub_negative_litterals(r"\1/_type='Num'\2\1/n=-\3", flat_ast)
 
     def __call__(self, source, yield_failed_matches=False):
         try:
             tree = ast.parse(source)
         except:
-            print("Warning: unable to construct the AST")
-            return {}
-        self.flat_ast = self.simplify_negative_litterals(flatten(tree))
+            return print("Warning: unable to construct the AST")
+        self.flat_ast = simplify_negative_litterals(flatten(tree))
         for (label, rex) in self.constructs.items():
             result = defaultdict(list)
             d = None
             for match in rex.finditer(self.flat_ast, overlapped=True):
                 d = match.capturesdict()
-                if d.get("SUFFIX"): # there is a "SUFFIX" key and its value is not []
+                if d.get("SUFFIX"):  # there is a "SUFFIX" key and its value is not []
                     for suffix in d["SUFFIX"]:
                         lines = "-".join(map(str, sorted(map(int, d["LINE"]))))
                         result[f"{label}={suffix}"].append(lines)
@@ -60,7 +67,7 @@ class Parser:
 
 
 if __name__ == "__main__":
-    import time
+    time = __import__("time")
     source = Path("sandbox/source.py").read_text()
     for (i, line) in enumerate(source.splitlines(), 1):
         print(f"{i: 3} {line}")

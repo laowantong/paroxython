@@ -30,7 +30,6 @@ def flatten(node, prefix=""):
 
 
 if __name__ == "__main__":
-    from pathlib import Path
-
+    Path = __import__("pathlib").Path
     source = Path("sandbox/source.py").read_text()
     print(flatten(ast.parse(source)))
