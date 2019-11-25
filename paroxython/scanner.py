@@ -7,7 +7,6 @@ sys.path[0:0] = [str(Path(__file__).parent)]
 
 from parser import Parser
 
-        
 
 class AbstractScanner:
     """Tag the Python programs of a given directory.
@@ -17,18 +16,19 @@ class AbstractScanner:
     line numbers delimiting the start and the end of the construct.
     """
 
-    def __init__(self, cleanup_source_strategy="minimize"):
+    def __init__(self, cleanup_strategy="minimize"):
         self.parse = Parser()
-        self.set_cleanup_source_strategy(cleanup_source_strategy)
+        self.set_cleanup_strategy(cleanup_strategy)
 
-    def set_cleanup_source_strategy(self, strategy):
+    def set_cleanup_strategy(self, strategy):
         """Select the pre-processing method to apply to the source-code."""
         if strategy == "minimize":
             minimize = __import__("minimizer").minimize
-            main = regex.compile(r"(?ms)^if +__name__ *== *.__main__. *:.+")
-            self.cleanup_source = lambda source: main.sub("", minimize(source))
+            main = regex.compile(r"(?ms)^if +__name__ *== *.__main__. *:.+").sub
+            decorator = regex.compile(r"(?m)^\s*@.+\n").sub
+            self.cleanup = lambda source: decorator("", main("", minimize(source)))
         else:
-            self.cleanup_source = lambda source: source
+            self.cleanup = lambda source: source
 
     def generate_paths(self, directory: Path):
         """Find and yield the Python programs included in a given directory."""
@@ -51,7 +51,7 @@ class ScannerForStrings(AbstractScanner):
     def __call__(self, path):
         separator = "-" * 88
         for path in self.generate_paths(path):
-            source = self.cleanup_source(path.read_text())
+            source = self.cleanup(path.read_text())
             yield f"# {separator}\n# {path}\n# {separator}"
             sloc = source.splitlines()
             comments = [set() for _ in sloc]
@@ -69,7 +69,7 @@ class ScannerForDatabase(AbstractScanner):
         tag_labels = set()
         algos = {}
         for path in self.generate_paths(path):
-            source = self.cleanup_source(path.read_text())
+            source = self.cleanup(path.read_text())
             tags = defaultdict(list)
             for (tag_label, spot) in self.generate_parse_results(source):
                 tags[tag_label].append(spot)
@@ -84,5 +84,5 @@ class ScannerForDatabase(AbstractScanner):
 if __name__ == "__main__":
     Path = __import__("pathlib").Path
     scan = ScannerForStrings()
-    for result in scan(Path("../Python/project_euler")):
+    for result in scan(Path("../Algo/programs/")):
         print(result)

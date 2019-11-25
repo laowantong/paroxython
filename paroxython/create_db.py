@@ -8,8 +8,6 @@ import regex
 
 from scanner import ScannerForDatabase
 
-# sys.path[0:0] = [str(Path(__file__).parent)]
-
 
 DIRECTORIES = [
     # "../Python/project_euler",

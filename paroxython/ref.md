@@ -854,20 +854,31 @@ Update a variable by negating it.
           ^(.*?)/_type='FunctionDef'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
 \n(?:\1.+\n)*?\1/name='(?P<SUFFIX>.+)'
+\n(?:\1.+\n)* \1/.+/lineno=(?P<LINE>\d+)
 ```
 
 ##### Example
 
 ```python
 1   def foo(bar):
-2       pass
+2       def fizz(buzz):
+3           a += 1
+4           print(a)
+5   
+6       bar += 1
+7       print(bar)
+8   
+9   foo(42)
 ```
+
+**Bug.** This regex and the following do not work properly when the function is decorated or has type hints ([#4](https://github.com/laowantong/paroxython/issues/4)).
 
 ##### Matches
 
 | Label | Lines |
 |:--|:--|
-| `function_definition:foo` | 1 |
+| `function_definition:foo` | 1-7 |
+| `function_definition:fizz` | 2-4 |
 
 --------------------------------------------------------------------------------
 
@@ -878,21 +889,24 @@ Update a variable by negating it.
 ```re
           ^(.*?)/_type='FunctionDef'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
+\n(?:\1.+\n)*?\1/name='(?P<SUFFIX>.+)'
 \n(?:\1.+\n)*?\1/args/defaults/length=(?!0\n).+
+\n(?:\1.+\n)* \1/.+/lineno=(?P<LINE>\d+)
 ```
 
 ##### Example
 
 ```python
 1   def foobar(a, b="c"):
-2       pass
+2       c = a + b
+3       print(c)
 ```
 
 ##### Matches
 
 | Label | Lines |
 |:--|:--|
-| `function_with_default_positional_arguments_definition` | 1 |
+| `function_with_default_positional_arguments_definition:foobar` | 1-3 |
 
 --------------------------------------------------------------------------------
 
@@ -903,10 +917,13 @@ Update a variable by negating it.
 ```re
           ^(.*?)/_type='FunctionDef'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
-\n(?:\1.+\n)*?\1/name=(?P<NAME>.+) # capture the name of the function
-\n(?:\1.+\n)* \1/body/(?P<_1>.*)/_type='Call'
-\n(?:\1.+\n)*?\1/body/(?P=_1)   /func/lineno=(?P<LINE>\d+)
-\n(?:\1.+\n)*?\1/body/(?P=_1)   /func/id=(?P=NAME) # ensure it is called inside its own body
+\n(?:\1.+\n)*?\1/name='(?P<SUFFIX>.+)' # capture the name of the function
+\n(?:\1.+\n)* \1/(?P<_1>body/\d+)/lineno=(?P<LINE>\d+)
+\n(?:\1.+\n)* \1/(?P=_1)         (?P<_2>.*)/_type='Call'
+\n(?:\1.+\n)*?\1/(?P=_1)         (?P=_2)   /func/id='(?P=SUFFIX)' # ensure it is called inside its own body
+(   # capture the line number of the last line of the function (it may appear before Call)
+\n(?:\1.+\n)* \1.+/lineno=(?P<LINE>\d+)
+)*
 ```
 
 ##### Example
@@ -921,7 +938,7 @@ Update a variable by negating it.
 
 | Label | Lines |
 |:--|:--|
-| `recursive_function_definition` | 1-3 |
+| `recursive_function_definition:gob_program` | 1-3 |
 
 --------------------------------------------------------------------------------
 
@@ -934,12 +951,16 @@ Any function `f` which contains a nested call to itself (`f(..., f(...), ...)`),
 ```re
           ^(.*?)/_type='FunctionDef'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
-\n(?:\1.+\n)*?\1/name=(?P<NAME>.+) # capture the name of the function
-\n(?:\1.+\n)* \1/body/(?P<_1>.*)/_type='Call'
-\n(?:\1.+\n)*?\1/body/(?P=_1)   /func/lineno=(?P<LINE>\d+)
-\n(?:\1.+\n)*?\1/body/(?P=_1)   /func/id=(?P=NAME) # ensure it is called inside its own body
-\n(?:\1.+\n)* \1/body/(?P=_1)   /(?P<_2>args/.*)/_type='Call'
-\n(?:\1.+\n)*?\1/body/(?P=_1)   /(?P=_2)        /func/id=(?P=NAME)
+\n(?:\1.+\n)*?\1/name='(?P<SUFFIX>.+)' # capture the name of the function
+\n(?:\1.+\n)* \1/(?P<_1>body/\d+)/lineno=(?P<LINE>\d+)
+\n(?:\1.+\n)* \1/(?P=_1)         (?P<_2>.*)/_type='Call'
+\n(?:\1.+\n)*?\1/(?P=_1)         (?P=_2)   /func/lineno=(?P<LINE>\d+)
+\n(?:\1.+\n)*?\1/(?P=_1)         (?P=_2)   /func/id='(?P=SUFFIX)' # ensure it is called inside its own body
+\n(?:\1.+\n)* \1/(?P=_1)         (?P=_2)   /(?P<_3>args/.*)/_type='Call'
+\n(?:\1.+\n)*?\1/(?P=_1)         (?P=_2)   /(?P=_3)        /func/id='(?P=SUFFIX)'
+(   # capture the line number of the last line of the function (it may appear before Call)
+\n(?:\1.+\n)* \1/.+/lineno=(?P<LINE>\d+)
+)*
 ```
 
 ##### Example
@@ -948,13 +969,18 @@ Any function `f` which contains a nested call to itself (`f(..., f(...), ...)`),
 1   def gob_program():
 2       print("PENUS")
 3       gob_program(gob_program())
+4
+5   def gob_program_2():
+6       gob_program_2(gob_program_2())
+7       print("PENUS")
 ```
 
 ##### Matches
 
 | Label | Lines |
 |:--|:--|
-| `deeply_recursive_function_definition` | 1-3 |
+| `deeply_recursive_function_definition:gob_program` | 1-3 |
+| `deeply_recursive_function_definition:gob_program_2` | 5-7 |
 
 --------------------------------------------------------------------------------
 
@@ -965,25 +991,31 @@ Any function `f` which contains a nested call to itself (`f(..., f(...), ...)`),
 ```re
           ^(.*?)/_type='FunctionDef'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
-\n(?:\1.+\n)* \1/body/\d+/value/_type='(?P<SUFFIX>Yield(From)?)'
+\n(?:\1.+\n)*?\1/name='(?P<SUFFIX>.+)'
+\n(?:\1.+\n)* \1/body/\d+/lineno=(?P<LINE>\d+)
+\n(?:\1.+\n)* \1/.+/value/_type='Yield(From)?'
+(   # capture the line number of the last line of the function (it may appear before Call)
+\n(?:\1.+\n)* \1/.+/lineno=(?P<LINE>\d+)
+)*
 ```
 
 ##### Example
 
 ```python
 1   def foo():
-2       yield bar
-3
-4   def energy():
-5       yield from waste
+2       for x in s:
+3           yield bar
+4
+5   def energy():
+6       yield from waste
 ```
 
 ##### Matches
 
 | Label | Lines |
 |:--|:--|
-| `generator_definition:Yield` | 1 |
-| `generator_definition:YieldFrom` | 4 |
+| `generator_definition:foo` | 1-3 |
+| `generator_definition:energy` | 5-6 |
 
 --------------------------------------------------------------------------------
 
