@@ -598,7 +598,7 @@ Apply a function or a method to an expression involving the result of another fu
 1   print(len("hello, world"))
 2   print("hello, world")
 3   print(a + abs(b))
-4.  print(s.upper())
+4   print(s.upper())
 ```
 
 ##### Matches
@@ -1320,7 +1320,7 @@ Iterate over index numbers of a collection.
 
 #### Construct `triangular_nested_for`
 
-A `for` loop with a counter `i` and a nested `for` loop which makes `i` iterations.
+A `for` loop with a counter `i` and a nested `for` loop which makes `i` iterations. The total number of iterations is a [triangular number](https://en.wikipedia.org/wiki/Triangular_number).
 
 ##### Regex
 
@@ -1372,7 +1372,7 @@ A `for` loop with a counter `i` and a nested `for` loop which makes `i` iteratio
 
 #### Construct `square_nested_for`
 
-A `for` loop with a counter `i` and a nested `for` loop which makes `i` iterations.
+Two nested `for` loops doing the same number of iterations.
 
 ##### Regex
 
