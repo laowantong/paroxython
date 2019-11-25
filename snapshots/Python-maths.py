@@ -152,7 +152,7 @@ def abs_max(x: List[int]) -> int: # function_definition:abs_max, index
             j = i # assignment
     return j
 def abs_max_sort(x): # function_definition:abs_max_sort
-    return sorted(x, key=abs)[-1] # function_call:sorted, index, literal:Num
+    return sorted(x, key=abs)[-1] # function_call:sorted, index, literal:Num, negative_index:-1
 def main(): # function_definition:main
     a = [1, 2, -11] # assignment, literal:List, literal:Num, suggest_constant_definition
     assert abs_max(a) == -11 # comparison_operator:Eq, function_call:abs_max, literal:Num, suggest_constant_definition
@@ -658,8 +658,8 @@ def main(): # function_definition:main
 def kthPermutation(k, n): # function_definition:kthPermutation
     factorials = [1] # assignment, literal:List, literal:Num
     for i in range(2, n): # for_range_start, function_call:range, literal:Num
-        factorials.append(factorials[-1] * i) # binary_operator:Mult, index, literal:Num, method_call:append
-    assert 0 <= k < factorials[-1] * n, "k out of bounds" # binary_operator:Mult, chained_comparison:2, comparison_operator:LtE, index, literal:Num, literal:Str
+        factorials.append(factorials[-1] * i) # binary_operator:Mult, index, literal:Num, method_call:append, negative_index:-1
+    assert 0 <= k < factorials[-1] * n, "k out of bounds" # binary_operator:Mult, chained_comparison:2, comparison_operator:LtE, index, literal:Num, literal:Str, negative_index:-1
     permutation = [] # assignment, literal:List
     elements = list(range(n)) # assignment, composition, function_call:list, function_call:range
     while factorials:
@@ -1003,10 +1003,10 @@ class FFT:
     def __init__(self, polyA=[0], polyB=[0]): # function_definition:__init__, function_with_default_positional_arguments_definition, literal:List, literal:Num
         self.polyA = list(polyA)[:] # assignment, function_call:list, slice
         self.polyB = list(polyB)[:] # assignment, function_call:list, slice
-        while self.polyA[-1] == 0: # comparison_operator:Eq, evolve_state (-> +1), index, literal:Num
+        while self.polyA[-1] == 0: # comparison_operator:Eq, evolve_state (-> +1), index, literal:Num, negative_index:-1
             self.polyA.pop() # method_call:pop
         self.len_A = len(self.polyA) # assignment, function_call:len
-        while self.polyB[-1] == 0: # comparison_operator:Eq, evolve_state (-> +1), index, literal:Num
+        while self.polyB[-1] == 0: # comparison_operator:Eq, evolve_state (-> +1), index, literal:Num, negative_index:-1
             self.polyB.pop() # method_call:pop
         self.len_B = len(self.polyB) # assignment, function_call:len
         self.C_max_length = int( # assignment, composition, function_call:int
@@ -1075,7 +1075,7 @@ class FFT:
             inverseC = new_inverseC # assignment
             next_ncol *= 2 # augmented_assignment, literal:Num
         inverseC = [round(x[0].real, 8) + round(x[0].imag, 8) * 1j for x in inverseC] # assignment, binary_operator:Add, binary_operator:Mult, function_call:round, index, literal:Num, suggest_constant_definition
-        while inverseC[-1] == 0: # comparison_operator:Eq, evolve_state (-> +1), index, literal:Num
+        while inverseC[-1] == 0: # comparison_operator:Eq, evolve_state (-> +1), index, literal:Num, negative_index:-1
             inverseC.pop() # method_call:pop
         return inverseC
     def __str__(self): # function_definition:__str__

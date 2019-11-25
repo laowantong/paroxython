@@ -4,6 +4,7 @@
   - [Subscripts](#subscripts)
     - [Construct `index`](#construct-index)
     - [Construct `index_arithmetic`](#construct-index_arithmetic)
+    - [Construct `negative_index`](#construct-negative_index)
     - [Construct `slice`](#construct-slice)
     - [Construct `slice_step`](#construct-slice_step)
   - [Operators](#operators)
@@ -190,6 +191,50 @@
 
 --------------------------------------------------------------------------------
 
+#### Construct `negative_index`
+
+##### Regex
+
+```re
+          ^(.*?)/_type='Subscript'
+\n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
+\n(?:\1.+\n)*?\1/slice/_type='Index'
+(   # A negative number
+\n(?:\1.+\n)*?\1/slice/value/_type='Num'
+\n(?:\1.+\n)*?\1/slice/value/n=(?P<SUFFIX>-\d+)
+|   # A negated non-litteral expression
+\n(?:\1.+\n)*?\1/slice/value/op/_type='USub'
+|   # A binary operation whose left operand is negated
+\n(?:\1.+\n)*?\1/slice/value/_type='BinOp'
+\n(?:\1.+\n)*?\1/slice/value/left/_type='UnaryOp'
+\n(?:\1.+\n)*?\1/slice/value/left/op/_type='USub'
+|   # A complemented expression
+\n(?:\1.+\n)*?\1/slice/value/_type='UnaryOp'
+\n(?:\1.+\n)*?\1/slice/value/op/_type='Invert'
+)
+```
+
+##### Example
+
+```python
+1   a[-1]
+2   a[-i]
+3   a[len(a) - i] # LIMITATION: no match
+4   a[-i - 1]
+5   a[~i]
+```
+
+**Remark.** In line 4, `~i` evaluates to `-i - 1` (bitwise complement of `i`). Line 3 could be rewritten as `a[-i]`.
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `negative_index:-1` | 1 |
+| `negative_index` | 2, 4, 5 |
+
+--------------------------------------------------------------------------------
+
 #### Construct `slice`
 
 ##### Regex
@@ -265,7 +310,7 @@
 3   c = -1 # no match
 ```
 
-**Remark.** Normally, a negative litteral is represented in the AST by a node `UnaryOp` with `USub` and `Num` children and a positive value for `n`. This is simplified into a node `Num` and a negative value for `n`.
+**Remark.** Normally, a negative litteral is represented in the AST by a node `UnaryOp` with `USub` and `Num` children and a positive value for `n`. During the pre-processing of the AST, this has been simplified into a node `Num` and a negative value for `n`.
 
 ##### Matches
 
@@ -353,7 +398,7 @@
 | `boolean_operator:And` | 1 |
 | `boolean_operator:Or` | 2 |
 
-**Remark.** `Not` is not a boolean operator in Python. To match it, use the [construct `unary_operator-Not`](#construct-unary_operator).
+**Remark.** `Not` is not a boolean operator in Python. To match it, use the construct [`unary_operator-Not`](#construct-unary_operator).
 
 --------------------------------------------------------------------------------
 

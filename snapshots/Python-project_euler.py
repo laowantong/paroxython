@@ -850,7 +850,7 @@ def solution(): # function_definition:solution
             else:
                 number2 = 0 # assignment, literal:Num
             a[i][j] += max(number1, number2) # augmented_assignment, function_call:max, index
-    return max(a[-1]) # function_call:max, index, literal:Num
+    return max(a[-1]) # function_call:max, index, literal:Num, negative_index:-1
 
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_19/sol1.py
@@ -1318,7 +1318,7 @@ def solution(): # function_definition:solution
 # ../Python/project_euler/problem_551/sol1.py
 # ----------------------------------------------------------------------------------------
 ks = [k for k in range(2, 20 + 1)] # assignment, binary_operator:Add, function_call:range, global_variable_definition, literal:Num
-base = [10 ** k for k in range(ks[-1] + 1)] # assignment, binary_operator:Add, binary_operator:Pow, function_call:range, global_variable_definition, index, literal:Num
+base = [10 ** k for k in range(ks[-1] + 1)] # assignment, binary_operator:Add, binary_operator:Pow, function_call:range, global_variable_definition, index, literal:Num, negative_index:-1
 memo = {} # assignment, global_variable_definition, literal:Dict
 def next_term(a_i, k, i, n): # function_definition:next_term, recursive_function_definition (-> +34)
     ds_b = 0 # assignment, literal:Num
@@ -1459,7 +1459,7 @@ def solution(): # function_definition:solution
             else:
                 number2 = 0 # assignment, literal:Num
             a[i][j] += max(number1, number2) # augmented_assignment, function_call:max, index
-    return max(a[-1]) # function_call:max, index, literal:Num
+    return max(a[-1]) # function_call:max, index, literal:Num, negative_index:-1
 
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_76/sol1.py
