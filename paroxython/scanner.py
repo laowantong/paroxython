@@ -1,47 +1,88 @@
 import regex
 import sys
 from pathlib import Path
+from collections import defaultdict
 
 sys.path[0:0] = [str(Path(__file__).parent)]
 
 from parser import Parser
-from minimizer import minimize
 
-SEPARATOR = "-" * 88
+        
 
-match_exclude_file = regex.compile(r"__init__\.py|setup\.py|.*[-_]tests?\.py").match
-sub_main = regex.compile(r"""(?ms)^if __name__ *== *[\"']__main__[\"'] *:.+""").sub
+class AbstractScanner:
+    """Tag the Python programs of a given directory.
+
+    For each program, produce its path and its tags, each one of the latter being
+    accompanied by its spots. A spot is currently defined as a couple of
+    line numbers delimiting the start and the end of the construct.
+    """
+
+    def __init__(self, cleanup_source_strategy="minimize"):
+        self.parse = Parser()
+        self.set_cleanup_source_strategy(cleanup_source_strategy)
+
+    def set_cleanup_source_strategy(self, strategy):
+        """Select the pre-processing method to apply to the source-code."""
+        if strategy == "minimize":
+            minimize = __import__("minimizer").minimize
+            main = regex.compile(r"(?ms)^if +__name__ *== *.__main__. *:.+")
+            self.cleanup_source = lambda source: main.sub("", minimize(source))
+        else:
+            self.cleanup_source = lambda source: source
+
+    def generate_paths(self, directory: Path):
+        """Find and yield the Python programs included in a given directory."""
+        exclude_file = regex.compile(r"__init__\.py|setup\.py|.*[-_]tests?\.py")
+        for path in sorted(directory.rglob("*.py")):
+            if not exclude_file.match(path.name):
+                print(path)
+                yield path
+
+    def generate_parse_results(self, source):
+        for (tag, spots) in sorted(self.parse(source)):
+            for spot in spots:
+                yield (tag, spot)
+
+    def __call__(self, path):
+        raise NotImplementedError("Subclasses must override __call__()!")
 
 
-def scan(path, sloc_only=True):
-    parse = Parser()
-    paths = sorted(path.rglob("*.py"))
-    for path in paths:
-        if match_exclude_file(path.name):
-            continue
-        source = path.read_text()
-        if sloc_only:
-            source = minimize(source)
-            source = sub_main("", source)
-        yield f"# {SEPARATOR}\n# {path}\n# {SEPARATOR}"
-        print(path)
-        sloc = source.splitlines()
-        comments = [[] for _ in sloc]
-        for (label, lines) in sorted(parse(source)):
-            for line in set(lines):
-                (start, suffix) = line.partition("-")[::2]
-                start = int(start)
-                if suffix:
-                    suffix = f" (-> +{int(suffix) - start})"
-                comments[start - 1].append(f"{label}{suffix}")
-        for (i, comment) in enumerate(comments):
-            if comment:
-                sloc[i] += " # " + ", ".join(comment)
-        sloc.append("")
-        yield "\n".join(sloc)
+class ScannerForStrings(AbstractScanner):
+    def __call__(self, path):
+        separator = "-" * 88
+        for path in self.generate_paths(path):
+            source = self.cleanup_source(path.read_text())
+            yield f"# {separator}\n# {path}\n# {separator}"
+            sloc = source.splitlines()
+            comments = [set() for _ in sloc]
+            for (tag, spot) in self.generate_parse_results(source):
+                comments[spot.start - 1].add(f"{tag}{spot.suffix}")
+            for (i, comment) in enumerate(comments):
+                if comment:
+                    sloc[i] += " # " + ", ".join(sorted(comment))
+            sloc.append("")
+            yield "\n".join(sloc)
+
+
+class ScannerForDatabase(AbstractScanner):
+    def __call__(self, path):
+        tag_labels = set()
+        algos = {}
+        for path in self.generate_paths(path):
+            source = self.cleanup_source(path.read_text())
+            tags = defaultdict(list)
+            for (tag_label, spot) in self.generate_parse_results(source):
+                tags[tag_label].append(spot)
+                tag_labels.add(tag_label)
+            for (tag_label, spots) in tags.items():
+                tags[tag_label] = sorted(spots)
+            tag_labels.update(tags.keys())
+            algos[str(path)] = {"source": source, "tags": tags}
+        return {"tag_labels": sorted(tag_labels), "algos": algos}
 
 
 if __name__ == "__main__":
     Path = __import__("pathlib").Path
+    scan = ScannerForStrings()
     for result in scan(Path("../Python/project_euler")):
         print(result)

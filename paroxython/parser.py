@@ -7,6 +7,7 @@ import sys
 sys.path[0:0] = [str(Path(__file__).parent)]
 
 from flatten import flatten
+from spot import Spot
 
 
 def simplify_negative_litterals():
@@ -53,13 +54,12 @@ class Parser:
             d = None
             for match in rex.finditer(self.flat_ast, overlapped=True):
                 d = match.capturesdict()
+                spot = Spot(d["LINE"])
                 if d.get("SUFFIX"):  # there is a "SUFFIX" key and its value is not []
                     for suffix in d["SUFFIX"]:
-                        lines = "-".join(map(str, sorted(map(int, d["LINE"]))))
-                        result[f"{label}:{suffix}"].append(lines)
+                        result[f"{label}:{suffix}"].append(spot)
                 else:
-                    lines = "-".join(map(str, sorted(map(int, d["LINE"]))))
-                    result[label].append(lines)
+                    result[label].append(spot)
             if yield_failed_matches and not d:
                 yield (label, [])
             else:
@@ -75,10 +75,10 @@ if __name__ == "__main__":
     parse = Parser()
     start = time.perf_counter()
     acc = []
-    for (label, lines) in parse(source, yield_failed_matches=False):
+    for (label, spots) in parse(source, yield_failed_matches=False):
         stop = time.perf_counter()
-        lines = ', '.join(lines)
-        acc.append(f"{stop - start:7.4f} s.: | `{label}` | {lines} |")
+        spots = ", ".join(map(str, spots))
+        acc.append(f"{stop - start:7.4f} s.: | `{label}` | {spots} |")
         start = stop
     print("\n".join(sorted(acc, reverse=True)))
     Path("sandbox/flat_ast.txt").write_text(parse.flat_ast)

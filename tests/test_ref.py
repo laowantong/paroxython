@@ -46,11 +46,11 @@ pytest.main(args=["-q"])
 def test_example(label, source, results):
     source = regex.sub(r"(?m)^.{4}", "", source)
     actual = dict(parse(source))
-    for (label, expected) in results:
+    for (label, expected_spots) in results:
         keys = list(actual.keys())
         assert label in keys
-        actual_label = ", ".join(actual[label])
-        assert actual_label == expected
+        actual_spots = ", ".join(map(str, actual[label]))
+        assert actual_spots == expected_spots
 
 
 def test_at_least_one_example_is_provided_for_each_construct():
