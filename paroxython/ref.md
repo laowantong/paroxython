@@ -38,6 +38,8 @@
     - [Construct `recursive_function_definition`](#construct-recursive_function_definition)
     - [Construct `deeply_recursive_function_definition`](#construct-deeply_recursive_function_definition)
     - [Construct `generator_definition`](#construct-generator_definition)
+    - [Construct `nested_function_definition`](#construct-nested_function_definition)
+    - [Construct `closure_definition`](#construct-closure_definition)
   - [Conditionals](#conditionals)
     - [Construct `if`](#construct-if)
     - [Construct `if_else`](#construct-if_else)
@@ -1016,6 +1018,72 @@ Any function `f` which contains a nested call to itself (`f(..., f(...), ...)`),
 |:--|:--|
 | `generator_definition:foo` | 1-3 |
 | `generator_definition:energy` | 5-6 |
+
+--------------------------------------------------------------------------------
+
+#### Construct `nested_function_definition`
+
+##### Regex
+
+```re
+          ^(.*?)/_type='FunctionDef'
+\n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
+\n(?:\1.+\n)*?\1/name='(?P<SUFFIX>.+)'
+\n(?:\1.+\n)*?\1/.+/_type='FunctionDef'
+\n(?:\1.+\n)* \1/.+/lineno=(?P<LINE>\d+)
+```
+
+##### Example
+
+```python
+1   def outer_function(a, b): 
+2   	c = a + b
+3   	def inner_function(c): 
+4   		print(c) 
+5   	return inner_function(c)
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `nested_function_definition:outer_function` | 1-5 |
+
+--------------------------------------------------------------------------------
+
+#### Construct `closure_definition`
+
+Recognize functions which include the definition of an inner function and return this inner function. Normally, the inner function must refer to a variable defined in the enclosing function, but this is not checked.
+
+##### Regex
+
+```re
+          ^(.*?)/_type='FunctionDef'
+\n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
+\n(?:\1.+\n)*?\1/name='(?P<SUFFIX>.+)'
+\n(?:\1.+\n)* \1/(?P<_1>body/\d+)/_type='FunctionDef'
+\n(?:\1.+\n)*?\1/(?P=_1)         /name=(?P<NAME>.+) # capture inner function name
+\n(?:\1.+\n)* \1/(?P<_2>body/\d+)/_type='Return'
+\n(?:\1.+\n)*?\1/(?P=_2)         /lineno=(?P<LINE>\d+)
+\n(?:\1.+\n)*?\1/(?P=_2)         /value/_type='Name'
+\n(?:\1.+\n)*?\1/(?P=_2)         /value/id=(?P=NAME) # match inner function name
+```
+
+##### Example
+
+```python
+1   def outer_function(a, b): 
+2   	c = a + b
+3   	def inner_function(): 
+4   		print(c) 
+5   	return inner_function
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `closure_definition:outer_function` | 1-5 |
 
 --------------------------------------------------------------------------------
 
