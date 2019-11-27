@@ -24,17 +24,21 @@ control_flow/loop/sequential/indexes	for_indexes
 control_flow/loop/sequential/nested	nested_for
 control_flow/loop/sequential/nested/square	square_nested_for
 control_flow/loop/sequential/nested/triangular	triangular_nested_for
+exception/raise	raise_exception:.+
+exception/raise/\1	raise_exception:(BaseException|SystemExit|KeyboardInterrupt|GeneratorExit|Exception|StopIteration|StopAsyncIteration|ArithmeticError|FloatingPointError|OverflowError|ZeroDivisionError|AssertionError|AttributeError|BufferError|EOFError|ImportError|ModuleNotFoundError|LookupError|IndexError|KeyError|MemoryError|NameError|UnboundLocalError|OSError|BlockingIOError|ChildProcessError|ConnectionError|BrokenPipeError|ConnectionAbortedError|ConnectionRefusedError|ConnectionResetError|FileExistsError|FileNotFoundError|InterruptedError|IsADirectoryError|NotADirectoryError|PermissionError|ProcessLookupError|TimeoutError|ReferenceError|RuntimeError|NotImplementedError|RecursionError|SyntaxError|IndentationError|TabError|SystemError|TypeError|ValueError|UnicodeError|UnicodeDecodeError|UnicodeEncodeError|UnicodeTranslateError|Warning|DeprecationWarning|PendingDeprecationWarning|RuntimeWarning|SyntaxWarning|UserWarning|FutureWarning|ImportWarning|UnicodeWarning|BytesWarning|ResourceWarning)
+exception/catch	catch_exception:.+
+exception/catch/\1	catch_exception:(BaseException|SystemExit|KeyboardInterrupt|GeneratorExit|Exception|StopIteration|StopAsyncIteration|ArithmeticError|FloatingPointError|OverflowError|ZeroDivisionError|AssertionError|AttributeError|BufferError|EOFError|ImportError|ModuleNotFoundError|LookupError|IndexError|KeyError|MemoryError|NameError|UnboundLocalError|OSError|BlockingIOError|ChildProcessError|ConnectionError|BrokenPipeError|ConnectionAbortedError|ConnectionRefusedError|ConnectionResetError|FileExistsError|FileNotFoundError|InterruptedError|IsADirectoryError|NotADirectoryError|PermissionError|ProcessLookupError|TimeoutError|ReferenceError|RuntimeError|NotImplementedError|RecursionError|SyntaxError|IndentationError|TabError|SystemError|TypeError|ValueError|UnicodeError|UnicodeDecodeError|UnicodeEncodeError|UnicodeTranslateError|Warning|DeprecationWarning|PendingDeprecationWarning|RuntimeWarning|SyntaxWarning|UserWarning|FutureWarning|ImportWarning|UnicodeWarning|BytesWarning|ResourceWarning)
 function_definition/method/avoid_conflict	function_definition:.+_(?>!_)
 function_definition/method/internal_use	function_definition:_(?!_).+
 function_definition/method/internal_use/name_mangling	function_definition:__.+(?<!__)
 function_definition/method/magic	function_definition:__.+__
+function_definition/nested	nested_function_definition:.+
+function_definition/nested/closure	closure_definition:.+
 function_definition/predicate	function_definition:(is|can|has|are|have)_.+
 function_definition/recursive	recursive_function_definition
 function_definition/recursive/deep	deeply_recursive_function_definition
 function_definition/test	function_definition:.+_tests?
 function_definition/test	function_definition:test_.+
-function_definition/nested	nested_function_definition:.+
-function_definition/nested/closure	closure_definition:.+
 library	import(_from|_by_call)?:.+
 library/standard/\1	import(?:_from|_by_call)?:(string|re|difflib|textwrap|unicodedata|stringprep|readline|rlcompleter|struct|codecs|datetime|calendar|collections|collections\.abc|heapq|bisect|array|weakref|types|copy|pprint|reprlib|enum|numbers|math|cmath|decimal|fractions|random|statistics|itertools|functools|operator|pathlib|os\.path|fileinput|stat|filecmp|tempfile|glob|fnmatch|linecache|shutil|pickle|copyreg|shelve|marshal|dbm|sqlite3|zlib|gzip|bz2|lzma|zipfile|tarfile|csv|configparser|netrc|xdrlib|plistlib|hashlib|hmac|secrets|os|io|time|argparse|getopt|logging|logging\.config|logging\.handlers|getpass|curses|curses\.textpad|curses\.ascii|curses\.panel|platform|errno|ctypes|threading|multiprocessing|multiprocessing\.shared_memory|concurrent\.futures|subprocess|sched|queue|_thread|_dummy_thread|dummy_threading|contextvars|asyncio|socket|ssl|select|selectors|asyncore|asynchat|signal|mmap|email|json|mailcap|mailbox|mimetypes|base64|binhex|binascii|quopri|uu|html|html\.parser|html\.entities|xml\.etree\.ElementTree|xml\.dom|xml\.dom\.minidom|xml\.dom\.pulldom|xml\.sax|xml\.sax\.handler|xml\.sax\.saxutils|xml\.sax\.xmlreader|xml\.parsers\.expat|webbrowser|cgi|cgitb|wsgiref|urllib|urllib\.request|urllib\.response|urllib\.parse|urllib\.error|urllib\.robotparser|http|http\.client|ftplib|poplib|imaplib|nntplib|smtplib|smtpd|telnetlib|uuid|socketserver|http\.server|http\.cookies|http\.cookiejar|xmlrpc|xmlrpc\.client|xmlrpc\.server|ipaddress|audioop|aifc|sunau|wave|chunk|colorsys|imghdr|sndhdr|ossaudiodev|gettext|locale|turtle|cmd|shlex|tkinter|tkinter\.ttk|tkinter\.tix|tkinter\.scrolledtext|typing|pydoc|doctest|unittest|unittest\.mock|unittest\.mock|test|test\.support|test\.support\.script_helper|bdb|faulthandler|pdb|timeit|trace|tracemalloc|distutils|ensurepip|venv|zipapp|sys|sysconfig|builtins|__main__|warnings|dataclasses|contextlib|abc|atexit|traceback|__future__|gc|inspect|site|code|codeop|zipimport|pkgutil|modulefinder|runpy|importlib|parser|ast|symtable|symbol|token|keyword|tokenize|tabnanny|pyclbr|py_compile|compileall|dis|pickletools|formatter|msilib|msvcrt|winreg|winsound|posix|pwd|spwd|grp|crypt|termios|tty|pty|fcntl|pipes|resource|nis|syslog|optparse|imp)
 operator/addition	binary_operator:Add
@@ -62,6 +66,10 @@ pattern/elements/find/best	find_best_element
 pattern/elements/find/first	find_first_element
 pattern/elements/satisfy/all	universal_quantifier
 pattern/elements/satisfy/some	existential_quantifier
+subscript/index	index
+subscript/index/arithmetic	index_arithmetic
+subscript/index/backwards	negative_index
+subscript/index/backwards/last	negative_index:-1
 test/belonging	comparison_operator:In
 test/belonging/not	comparison_operator:NotIn
 test/divisibility	divisibility_test
@@ -82,10 +90,6 @@ type/elementary/number	literal:Num
 type/elementary/string	literal:Str
 variable/assignment/augmented	augmented_assignment
 variable/assignment/chained	chained_assignment
-subscript/index	index
-subscript/index/arithmetic	index_arithmetic
-subscript/index/backwards	negative_index
-subscript/index/backwards/last	negative_index:-1
 
 -- EOF
 

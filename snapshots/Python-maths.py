@@ -4,9 +4,9 @@
 from typing import Tuple, List # import_from:typing
 def n31(a: int) -> Tuple[List[int], int]: # function_definition:n31 (-> +0), index
     if not isinstance(a, int): # function_call:isinstance, if, unary_operator:Not
-        raise TypeError("Must be int, not {0}".format(type(a).__name__)) # composition, function_call:TypeError, function_call:type, literal:Str, method_call:format
+        raise TypeError("Must be int, not {0}".format(type(a).__name__)) # composition, function_call:TypeError, function_call:type, literal:Str, method_call:format, raise_exception:TypeError
     if a < 1: # comparison_operator:Lt, if, literal:Num
-        raise ValueError("Given integer must be greater than 1, not {0}".format(a)) # composition, function_call:ValueError, literal:Str, method_call:format
+        raise ValueError("Given integer must be greater than 1, not {0}".format(a)) # composition, function_call:ValueError, literal:Str, method_call:format, raise_exception:ValueError
     path = [a] # assignment
     while a != 1: # comparison_operator:NotEq, evolve_state (-> +4), literal:Num
         if a % 2 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, if, if_else, literal:Num, suggest_conditional_expression (-> +3)
@@ -16,9 +16,9 @@ def n31(a: int) -> Tuple[List[int], int]: # function_definition:n31 (-> +0), ind
         path += [a] # augmented_assignment
     return path, len(path) # function_call:len
 def test_n31(): # function_definition:test_n31 (-> +113)
-    assert n31(4) == ([4, 2, 1], 3) # comparison_operator:Eq, function_call:n31, literal:List, literal:Num, literal:Tuple, suggest_constant_definition
-    assert n31(11) == ([11, 34, 17, 52, 26, 13, 40, 20, 10, 5, 16, 8, 4, 2, 1], 15) # comparison_operator:Eq, function_call:n31, literal:List, literal:Num, literal:Tuple, suggest_constant_definition
-    assert n31(31) == ( # function_call:n31, literal:Num, suggest_constant_definition
+    assert n31(4) == ([4, 2, 1], 3) # assertion, comparison_operator:Eq, function_call:n31, literal:List, literal:Num, literal:Tuple, suggest_constant_definition
+    assert n31(11) == ([11, 34, 17, 52, 26, 13, 40, 20, 10, 5, 16, 8, 4, 2, 1], 15) # assertion, comparison_operator:Eq, function_call:n31, literal:List, literal:Num, literal:Tuple, suggest_constant_definition
+    assert n31(31) == ( # assertion, function_call:n31, literal:Num, suggest_constant_definition
     [ # comparison_operator:Eq, literal:List, literal:Tuple
     31, # literal:Num, suggest_constant_definition
     94, # literal:Num, suggest_constant_definition
@@ -137,9 +137,9 @@ def test_n31(): # function_definition:test_n31 (-> +113)
 def abs_val(num): # function_definition:abs_val (-> +1)
     return -num if num < 0 else num # comparison_operator:Lt, conditional_expression, literal:Num, unary_operator:USub
 def test_abs_val(): # function_definition:test_abs_val (-> +3)
-    assert 0 == abs_val(0) # comparison_operator:Eq, function_call:abs_val, literal:Num
-    assert 34 == abs_val(34) # comparison_operator:Eq, function_call:abs_val, literal:Num, suggest_constant_definition
-    assert 100000000000 == abs_val(-100000000000) # comparison_operator:Eq, function_call:abs_val, literal:Num, suggest_constant_definition
+    assert 0 == abs_val(0) # assertion, comparison_operator:Eq, function_call:abs_val, literal:Num
+    assert 34 == abs_val(34) # assertion, comparison_operator:Eq, function_call:abs_val, literal:Num, suggest_constant_definition
+    assert 100000000000 == abs_val(-100000000000) # assertion, comparison_operator:Eq, function_call:abs_val, literal:Num, suggest_constant_definition
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/abs_max.py
@@ -155,8 +155,8 @@ def abs_max_sort(x): # function_definition:abs_max_sort (-> +1)
     return sorted(x, key=abs)[-1] # function_call:sorted, index, literal:Num, negative_index:-1
 def main(): # function_definition:main (-> +3)
     a = [1, 2, -11] # assignment, literal:List, literal:Num, suggest_constant_definition
-    assert abs_max(a) == -11 # comparison_operator:Eq, function_call:abs_max, literal:Num, suggest_constant_definition
-    assert abs_max_sort(a) == -11 # comparison_operator:Eq, function_call:abs_max_sort, literal:Num, suggest_constant_definition
+    assert abs_max(a) == -11 # assertion, comparison_operator:Eq, function_call:abs_max, literal:Num, suggest_constant_definition
+    assert abs_max_sort(a) == -11 # assertion, comparison_operator:Eq, function_call:abs_max_sort, literal:Num, suggest_constant_definition
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/abs_min.py
@@ -178,9 +178,9 @@ def main(): # function_definition:main (-> +2)
 def average(nums): # function_definition:average (-> +1)
     return sum(nums) / len(nums) # binary_operator:Div, function_call:len, function_call:sum
 def test_average(): # function_definition:test_average (-> +3)
-    assert 12.0 == average([3, 6, 9, 12, 15, 18, 21]) # comparison_operator:Eq, function_call:average, literal:List, literal:Num, suggest_constant_definition
-    assert 20 == average([5, 10, 15, 20, 25, 30, 35]) # comparison_operator:Eq, function_call:average, literal:List, literal:Num, suggest_constant_definition
-    assert 4.5 == average([1, 2, 3, 4, 5, 6, 7, 8]) # comparison_operator:Eq, function_call:average, literal:List, literal:Num, suggest_constant_definition
+    assert 12.0 == average([3, 6, 9, 12, 15, 18, 21]) # assertion, comparison_operator:Eq, function_call:average, literal:List, literal:Num, suggest_constant_definition
+    assert 20 == average([5, 10, 15, 20, 25, 30, 35]) # assertion, comparison_operator:Eq, function_call:average, literal:List, literal:Num, suggest_constant_definition
+    assert 4.5 == average([1, 2, 3, 4, 5, 6, 7, 8]) # assertion, comparison_operator:Eq, function_call:average, literal:List, literal:Num, suggest_constant_definition
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/average_median.py
@@ -382,9 +382,9 @@ def main(): # function_definition:main (-> +6)
 # ----------------------------------------------------------------------------------------
 def factorial(input_number: int) -> int: # function_definition:factorial (-> +0)
     if input_number < 0: # comparison_operator:Lt, if, literal:Num
-        raise ValueError("factorial() not defined for negative values") # function_call:ValueError, literal:Str
+        raise ValueError("factorial() not defined for negative values") # function_call:ValueError, literal:Str, raise_exception:ValueError
     if not isinstance(input_number, int): # function_call:isinstance, if, unary_operator:Not
-        raise ValueError("factorial() only accepts integral values") # function_call:ValueError, literal:Str
+        raise ValueError("factorial() only accepts integral values") # function_call:ValueError, literal:Str, raise_exception:ValueError
     result = 1 # assignment, literal:Num
     for i in range(1, input_number): # accumulate_elements:Assign (-> +1), for_range_start, function_call:range, literal:Num
         result = result * (i + 1) # assignment, binary_operator:Add, binary_operator:Mult, literal:Num, suggest_augmented_assignment
@@ -395,9 +395,9 @@ def factorial(input_number: int) -> int: # function_definition:factorial (-> +0)
 # ----------------------------------------------------------------------------------------
 def factorial(n: int) -> int: # function_definition:factorial (-> +0), recursive_function_definition:factorial (-> +5)
     if n < 0: # comparison_operator:Lt, if, literal:Num
-        raise ValueError("factorial() not defined for negative values") # function_call:ValueError, literal:Str
+        raise ValueError("factorial() not defined for negative values") # function_call:ValueError, literal:Str, raise_exception:ValueError
     if not isinstance(n, int): # function_call:isinstance, if, unary_operator:Not
-        raise ValueError("factorial() only accepts integral values") # function_call:ValueError, literal:Str
+        raise ValueError("factorial() only accepts integral values") # function_call:ValueError, literal:Str, raise_exception:ValueError
     return 1 if n == 0 or n == 1 else n * factorial(n - 1) # binary_operator:Mult, binary_operator:Sub, boolean_operator:Or, comparison_operator:Eq, conditional_expression, function_call:factorial, literal:Num
 
 # ----------------------------------------------------------------------------------------
@@ -536,7 +536,7 @@ def find_min(nums): # function_definition:find_min (-> +5)
             min_num = num # assignment
     return min_num
 def main(): # function_definition:main (-> +1)
-    assert find_min([0, 1, 2, 3, 4, 5, -3, 24, -56]) == -56 # comparison_operator:Eq, function_call:find_min, literal:List, literal:Num, suggest_constant_definition
+    assert find_min([0, 1, 2, 3, 4, 5, -3, 24, -56]) == -56 # assertion, comparison_operator:Eq, function_call:find_min, literal:List, literal:Num, suggest_constant_definition
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/find_min_recursion.py
@@ -574,7 +574,7 @@ def gcd_by_iterative(x, y): # function_definition:gcd_by_iterative (-> +3)
         x, y = y, x % y # assignment, binary_operator:Mod
     return x
 def main(): # function_definition:main (-> +9)
-    try:
+    try: # catch_exception (-> +8)
         nums = input("Enter two integers separated by comma (,): ").split(",") # assignment, function_call:input, literal:Str, method_call:split
         num_1 = int(nums[0]) # assignment, function_call:int, index, literal:Num
         num_2 = int(nums[1]) # assignment, function_call:int, index, literal:Num
@@ -656,7 +656,7 @@ def kthPermutation(k, n): # function_definition:kthPermutation (-> +13)
     factorials = [1] # assignment, literal:List, literal:Num
     for i in range(2, n): # for_range_start, function_call:range, literal:Num
         factorials.append(factorials[-1] * i) # binary_operator:Mult, index, literal:Num, method_call:append, negative_index:-1
-    assert 0 <= k < factorials[-1] * n, "k out of bounds" # binary_operator:Mult, chained_comparison:2, comparison_operator:LtE, index, literal:Num, literal:Str, negative_index:-1
+    assert 0 <= k < factorials[-1] * n, "k out of bounds" # assertion, binary_operator:Mult, chained_comparison:2, comparison_operator:LtE, index, literal:Num, literal:Str, negative_index:-1
     permutation = [] # assignment, literal:List
     elements = list(range(n)) # assignment, composition, function_call:list, function_call:range
     while factorials:
@@ -831,14 +831,14 @@ def newton_raphson(f, x0=0, maxiter=100, step=0.0001, maxerror=1e-6, logsteps=Fa
     f1 = lambda x: calc_derivative(f, x, h=step) # assignment, function_call:calc_derivative, lambda_function
     for _ in range(maxiter): # for_range_stop, function_call:range
         if f1(a) == 0: # comparison_operator:Eq, function_call:f1, if, literal:Num
-            raise ValueError("No converging solution found") # function_call:ValueError, literal:Str
+            raise ValueError("No converging solution found") # function_call:ValueError, literal:Str, raise_exception:ValueError
         a = a - f(a) / f1(a) # assignment, binary_operator:Div, binary_operator:Sub, function_call:f, function_call:f1, suggest_augmented_assignment
         if logsteps: # if
             steps.append(a) # method_call:append
         if error < maxerror: # comparison_operator:Lt, if
             break
     else:
-        raise ValueError("Iteration limit reached, no converging solution found") # function_call:ValueError, literal:Str
+        raise ValueError("Iteration limit reached, no converging solution found") # function_call:ValueError, literal:Str, raise_exception:ValueError
     if logsteps: # if
         return a, error, steps
     return a, error
@@ -978,7 +978,7 @@ from math import sqrt # import_from:math
 from typing import Tuple # import_from:typing
 def QuadraticEquation(a: int, b: int, c: int) -> Tuple[str, str]: # function_definition:QuadraticEquation (-> +0), index
     if a == 0: # comparison_operator:Eq, if, literal:Num
-        raise ValueError("Coefficient 'a' must not be zero for quadratic equations.") # function_call:ValueError, literal:Str
+        raise ValueError("Coefficient 'a' must not be zero for quadratic equations.") # function_call:ValueError, literal:Str, raise_exception:ValueError
     delta = b * b - 4 * a * c # assignment, binary_operator:Mult, binary_operator:Sub, literal:Num, suggest_constant_definition
     if delta >= 0: # comparison_operator:GtE, if, literal:Num
         return str((-b + sqrt(delta)) / (2 * a)), str((-b - sqrt(delta)) / (2 * a)) # binary_operator:Add, binary_operator:Div, binary_operator:Mult, binary_operator:Sub, composition, function_call:sqrt, function_call:str, literal:Num, unary_operator:USub
@@ -1301,22 +1301,22 @@ def zeller(date_input: str) -> str: # function_definition:zeller (-> +0)
     }
     convert_datetime_days = {0: 1, 1: 2, 2: 3, 3: 4, 4: 5, 5: 6, 6: 0} # assignment, literal:Dict, literal:Num, suggest_constant_definition
     if not 0 < len(date_input) < 11: # chained_comparison:2, comparison_operator:Lt, function_call:len, if, literal:Num, suggest_constant_definition, unary_operator:Not
-        raise ValueError("Must be 10 characters long") # function_call:ValueError, literal:Str
+        raise ValueError("Must be 10 characters long") # function_call:ValueError, literal:Str, raise_exception:ValueError
     m: int = int(date_input[0] + date_input[1]) # binary_operator:Add, function_call:int, index, literal:Num
     if not 0 < m < 13: # chained_comparison:2, comparison_operator:Lt, if, literal:Num, suggest_constant_definition, unary_operator:Not
-        raise ValueError("Month must be between 1 - 12") # function_call:ValueError, literal:Str
+        raise ValueError("Month must be between 1 - 12") # function_call:ValueError, literal:Str, raise_exception:ValueError
     sep_1: str = date_input[2] # index, literal:Num
     if sep_1 not in ["-", "/"]: # comparison_operator:NotIn, if, literal:List, literal:Str
-        raise ValueError("Date seperator must be '-' or '/'") # function_call:ValueError, literal:Str
+        raise ValueError("Date seperator must be '-' or '/'") # function_call:ValueError, literal:Str, raise_exception:ValueError
     d: int = int(date_input[3] + date_input[4]) # binary_operator:Add, function_call:int, index, literal:Num, suggest_constant_definition
     if not 0 < d < 32: # chained_comparison:2, comparison_operator:Lt, if, literal:Num, suggest_constant_definition, unary_operator:Not
-        raise ValueError("Date must be between 1 - 31") # function_call:ValueError, literal:Str
+        raise ValueError("Date must be between 1 - 31") # function_call:ValueError, literal:Str, raise_exception:ValueError
     sep_2: str = date_input[5] # index, literal:Num, suggest_constant_definition
     if sep_2 not in ["-", "/"]: # comparison_operator:NotIn, if, literal:List, literal:Str
-        raise ValueError("Date seperator must be '-' or '/'") # function_call:ValueError, literal:Str
+        raise ValueError("Date seperator must be '-' or '/'") # function_call:ValueError, literal:Str, raise_exception:ValueError
     y: int = int(date_input[6] + date_input[7] + date_input[8] + date_input[9]) # binary_operator:Add, function_call:int, index, literal:Num, suggest_constant_definition
     if not 45 < y < 8500: # chained_comparison:2, comparison_operator:Lt, if, literal:Num, suggest_constant_definition, unary_operator:Not
-        raise ValueError( # function_call:ValueError
+        raise ValueError( # function_call:ValueError, raise_exception:ValueError
         )
     dt_ck = datetime.date(int(y), int(m), int(d)) # assignment, composition, function_call:int, method_call:date
     if m <= 2: # comparison_operator:LtE, if, literal:Num
@@ -1332,6 +1332,6 @@ def zeller(date_input: str) -> str: # function_definition:zeller (-> +0)
     w: int = int(z - (2 * c)) # binary_operator:Mult, binary_operator:Sub, function_call:int, literal:Num
     f: int = round(w % 7) # binary_operator:Mod, function_call:round, literal:Num, suggest_constant_definition
     if f != convert_datetime_days[dt_ck.weekday()]: # comparison_operator:NotEq, if, index, method_call:weekday
-        raise AssertionError("The date was evaluated incorrectly. Contact developer.") # function_call:AssertionError, literal:Str
+        raise AssertionError("The date was evaluated incorrectly. Contact developer.") # function_call:AssertionError, literal:Str, raise_exception:AssertionError
     response: str = f"Your date {date_input}, is a {days[str(f)]}!" # function_call:str, index, literal:Str
     return response

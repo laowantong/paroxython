@@ -54,6 +54,10 @@
     - [Construct `nested_for`](#construct-nested_for)
     - [Construct `triangular_nested_for`](#construct-triangular_nested_for)
     - [Construct `square_nested_for`](#construct-square_nested_for)
+  - [Exceptions](#exceptions)
+    - [Construct `assertion`](#construct-assertion)
+    - [Construct `raise_exception`](#construct-raise_exception)
+    - [Construct `catch_exception`](#construct-catch_exception)
   - [Modules](#modules)
     - [Construct `import`](#construct-import)
     - [Construct `import_from`](#construct-import_from)
@@ -873,7 +877,7 @@ Update a variable by negating it.
 9   foo(42)
 ```
 
-**Bug.** This regex and the following do not work properly when the function is decorated or has type hints ([#4](https://github.com/laowantong/paroxython/issues/4)).
+**Limitation.** This regex and the following do not work properly when the function is decorated or has type hints ([#4](https://github.com/laowantong/paroxython/issues/4)).
 
 ##### Matches
 
@@ -1053,7 +1057,7 @@ Any function `f` which contains a nested call to itself (`f(..., f(...), ...)`),
 
 #### Construct `closure_definition`
 
-Recognize functions which include the definition of an inner function and return this inner function. Normally, the inner function must refer to a variable defined in the enclosing function, but this is not checked.
+Function enclosing the definition of an inner function and returning it. Beware that the current regex does not check whether the inner function refers to a variable defined in the enclosing function.
 
 ##### Regex
 
@@ -1073,10 +1077,10 @@ Recognize functions which include the definition of an inner function and return
 
 ```python
 1   def outer_function(a, b): 
-2   	c = a + b
-3   	def inner_function(): 
-4   		print(c) 
-5   	return inner_function
+2       c = a + b
+3       def inner_function(): 
+4           print(c) 
+5       return inner_function
 ```
 
 ##### Matches
@@ -1502,6 +1506,105 @@ Two nested `for` loops doing the same number of iterations.
 | Label | Lines |
 |:--|:--|
 | `square_nested_for` | 1-2, 5-6 |
+
+--------------------------------------------------------------------------------
+
+## Exceptions
+
+--------------------------------------------------------------------------------
+
+#### Construct `assertion`
+
+##### Regex
+
+```re
+           ^(.*)/_type='Assert'
+\n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
+```
+
+##### Example
+
+```python
+1   assert a == 42
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `assertion` | 1 |
+
+--------------------------------------------------------------------------------
+
+#### Construct `raise_exception`
+
+##### Regex
+
+```re
+           ^(.*)/_type='Raise'
+\n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
+\n(?:\1.+\n)*?\1/exc/_type='Call'
+\n(?:\1.+\n)*?\1/exc/func/_type='Name'
+\n(?:\1.+\n)*?\1/exc/func/id='(?P<SUFFIX>.+)'
+```
+
+##### Example
+
+```python
+1   x = input("Answer? ")
+2   if x != 42:
+3       raise Exception("Wrong answer!")
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `raise_exception:Exception` | 3 |
+
+--------------------------------------------------------------------------------
+
+#### Construct `catch_exception`
+
+##### Regex
+
+```re
+           ^(.*)/_type='Try'
+\n(?:\1.+\n)* \1/lineno=(?P<LINE>\d+)
+\n(?:\1.+\n)* \1/(?P<_1>handlers/\d+)/_type='ExceptHandler'
+(   # is the exception type specified ?
+\n(?:\1.+\n)*?\1/(?P=_1)             /type/_type='Name'
+\n(?:\1.+\n)*?\1/(?P=_1)             /type/id='(?P<SUFFIX>.+)'
+)?
+\n(?:\1.+\n)* \1/(?P=_1)             .*/lineno=(?P<LINE>\d+)
+```
+
+##### Example
+
+```python
+1   try:
+2       with open(path) as opened_file:
+3           data = opened_file.read()
+4   except:
+5       print(f"Could not open {path}")
+6   try:
+7       with open(path) as opened_file:
+8           data = opened_file.read()
+9   except FileNotFoundError:
+10      print(f"Could not open {path}")
+11  try:
+12      with open(path) as opened_file:
+13          data = opened_file.read()
+14  except (IndexError, UnboundLocalError, ValueError): # BUG: no match
+15      print(f"Could not open {path}")
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `catch_exception` | 1-5, 11-15 |
+| `catch_exception:FileNotFoundError` | 6-10 |
 
 --------------------------------------------------------------------------------
 
