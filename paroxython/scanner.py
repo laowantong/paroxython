@@ -1,23 +1,25 @@
-import regex
 import sys
-from pathlib import Path
+from bisect import insort
 from collections import defaultdict
+from pathlib import Path
+import regex
 
 sys.path[0:0] = [str(Path(__file__).parent)]
 
 from parser import Parser
 
 
-class AbstractScanner:
+class Scanner:
     """Tag the Python programs of a given directory.
 
-    For each program, produce its path and its tags, each one of the latter being
-    accompanied by its spots. A spot is currently defined as a couple of
-    line numbers delimiting the start and the end of the construct.
+    For each program, produce its path and its tags. Here, a tag is intended
+    as a label accompanied by a list of spots. A spot is currently defined as
+    a couple of line numbers delimiting the start and the end of the construct.
     """
 
-    def __init__(self, cleanup_strategy="minimize"):
+    def __init__(self, directory, cleanup_strategy="minimize"):
         self.parse = Parser()
+        self.directory = Path(directory)
         self.set_cleanup_strategy(cleanup_strategy)
 
     def set_cleanup_strategy(self, strategy):
@@ -30,59 +32,42 @@ class AbstractScanner:
         else:
             self.cleanup = lambda source: source
 
-    def generate_paths(self, directory: Path):
+    def generate_paths(self):
         """Find and yield the Python programs included in a given directory."""
         exclude_file = regex.compile(r"__init__\.py|setup\.py|.*[-_]tests?\.py")
-        for path in sorted(directory.rglob("*.py")):
+        for path in sorted(self.directory.rglob("*.py")):
             if not exclude_file.match(path.name):
                 print(path)
                 yield path
 
-    def generate_parse_results(self, source):
-        for (tag, spots) in sorted(self.parse(source)):
-            for spot in spots:
-                yield (tag, spot)
-
-    def __call__(self, path):
-        raise NotImplementedError("Subclasses must override __call__()!")
-
-
-class ScannerForStrings(AbstractScanner):
-    def __call__(self, path):
+    def generate_tagged_source_codes(self):
+        """For each program of a given directory, yield its tagged source-code."""
         separator = "-" * 88
-        for path in self.generate_paths(path):
-            source = self.cleanup(path.read_text())
+        for path in self.generate_paths():
             yield f"# {separator}\n# {path}\n# {separator}"
+            source = self.cleanup(path.read_text())
             sloc = source.splitlines()
             comments = [set() for _ in sloc]
-            for (tag, spot) in self.generate_parse_results(source):
-                comments[spot.start - 1].add(f"{tag}{spot.suffix}")
+            for (label, spots) in sorted(self.parse(source)):
+                for spot in spots:
+                    comments[spot.start - 1].add(f"{label}{spot.suffix}")
             for (i, comment) in enumerate(comments):
                 if comment:
                     sloc[i] += " # " + ", ".join(sorted(comment))
-            sloc.append("")
-            yield "\n".join(sloc)
+            yield "\n".join(sloc + [""])
 
-
-class ScannerForDatabase(AbstractScanner):
-    def __call__(self, path):
-        tag_labels = set()
-        algos = {}
-        for path in self.generate_paths(path):
+    def generate_lists_of_tags(self):
+        """For each program of a given directory, yield its tag list."""
+        for path in self.generate_paths():
             source = self.cleanup(path.read_text())
             tags = defaultdict(list)
-            for (tag_label, spot) in self.generate_parse_results(source):
-                tags[tag_label].append(spot)
-                tag_labels.add(tag_label)
-            for (tag_label, spots) in tags.items():
-                tags[tag_label] = sorted(spots)
-            tag_labels.update(tags.keys())
-            algos[str(path)] = {"source": source, "tags": tags}
-        return {"tag_labels": sorted(tag_labels), "algos": algos}
+            for (label, spots) in sorted(self.parse(source)):
+                for spot in spots:
+                    insort(tags[label], spot)
+            yield (str(path), tags)
 
 
 if __name__ == "__main__":
-    Path = __import__("pathlib").Path
-    scan = ScannerForStrings()
-    for result in scan(Path("../Algo/programs/")):
+    scan = Scanner("../Algo/programs/")
+    for result in scan.generate_tagged_source_codes():
         print(result)

@@ -252,7 +252,7 @@ def solution(n): # function_definition:solution (-> +16)
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_03/sol3.py
 # ----------------------------------------------------------------------------------------
-def solution(n: int) -> int: # function_definition:solution (-> +0)
+def solution(n: int) -> int: # function_definition:solution
     try: # catch_exception (-> +3)
         n = int(n) # assignment, function_call:int
     except (TypeError, ValueError):
@@ -514,12 +514,12 @@ N = """73167176531330624919225119674426574742355349194934\ # assignment, global_
 84580156166097919133875499200524063689912560717606\
 05886116467109405077541002256983155200055935729725\
 71636269561882670428252483600823257530420752963450""" # literal:Str
-def streval(s: str) -> int: # function_definition:streval (-> +0)
+def streval(s: str) -> int: # function_definition:streval
     ret = 1 # assignment, literal:Num
     for it in s: # accumulate_elements:AugAssign (-> +1), for_each
         ret *= int(it) # augmented_assignment, function_call:int
     return ret
-def solution(n: str) -> int: # function_definition:solution (-> +0)
+def solution(n: str) -> int: # function_definition:solution
     LargestProduct = -sys.maxsize - 1 # assignment, binary_operator:Sub, literal:Num, unary_operator:USub
     substr = n[:13] # assignment, literal:Num, slice, suggest_constant_definition
     cur_index = 13 # assignment, literal:Num, suggest_constant_definition
@@ -614,7 +614,7 @@ def solution(n): # function_definition:solution (-> +1)
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_10/sol3.py
 # ----------------------------------------------------------------------------------------
-def prime_sum(n: int) -> int: # function_definition:prime_sum (-> +0)
+def prime_sum(n: int) -> int: # function_definition:prime_sum
     list_ = [0 for i in range(n + 1)] # assignment, binary_operator:Add, function_call:range, literal:Num
     list_[0] = 1 # assignment, index, literal:Num
     list_[1] = 1 # assignment, index, literal:Num
@@ -1100,7 +1100,7 @@ def solution(n): # function_definition:solution (-> +12)
 # ../Python/project_euler/problem_27/problem_27_sol1.py
 # ----------------------------------------------------------------------------------------
 import math # import:math
-def is_prime(k: int) -> bool: # function_definition:is_prime (-> +0)
+def is_prime(k: int) -> bool: # function_definition:is_prime
     if k < 2 or k % 2 == 0: # binary_operator:Mod, boolean_operator:Or, comparison_operator:Eq, comparison_operator:Lt, divisibility_test:2, if, if_elif, literal:Num
         return False # literal:False
     elif k == 2: # comparison_operator:Eq, if, if_else, literal:Num
@@ -1110,7 +1110,7 @@ def is_prime(k: int) -> bool: # function_definition:is_prime (-> +0)
             if k % x == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test, if, literal:Num
                 return False # literal:False
     return True # literal:True
-def solution(a_limit: int, b_limit: int) -> int: # function_definition:solution (-> +0)
+def solution(a_limit: int, b_limit: int) -> int: # function_definition:solution
     longest = [0, 0, 0] # assignment, literal:List, literal:Num
     for a in range((a_limit * -1) + 1, a_limit): # binary_operator:Add, binary_operator:Mult, for_range_start, function_call:range, literal:Num, nested_for (-> +1)
         for b in range(2, b_limit): # for_range_start, function_call:range, literal:Num
@@ -1203,7 +1203,7 @@ def isDigitCancelling(num, den): # function_definition:isDigitCancelling (-> +4)
         if num % 10 == den // 10: # binary_operator:FloorDiv, binary_operator:Mod, comparison_operator:Eq, divisibility_test:10, if, literal:Num, suggest_constant_definition
             if (num // 10) / (den % 10) == num / den: # binary_operator:Div, binary_operator:FloorDiv, binary_operator:Mod, comparison_operator:Eq, if, literal:Num, suggest_constant_definition
                 return True # literal:True
-def solve(digit_len: int) -> str: # function_definition:solve (-> +0)
+def solve(digit_len: int) -> str: # function_definition:solve
     solutions = [] # assignment, literal:List
     den = 11 # assignment, literal:Num, suggest_constant_definition
     last_digit = int("1" + "0" * digit_len) # assignment, binary_operator:Add, binary_operator:Mult, function_call:int, literal:Str
@@ -1428,7 +1428,7 @@ def solution(n): # function_definition:solution (-> +12)
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_56/sol1.py
 # ----------------------------------------------------------------------------------------
-def maximum_digital_sum(a: int, b: int) -> int: # function_definition:maximum_digital_sum (-> +0)
+def maximum_digital_sum(a: int, b: int) -> int: # function_definition:maximum_digital_sum
     return max( # composition, function_call:max
     [
     sum([int(x) for x in str(base ** power)]) # binary_operator:Pow, composition, function_call:int, function_call:str, function_call:sum
@@ -1480,7 +1480,7 @@ def partition(m): # function_definition:partition (-> +9)
 # ----------------------------------------------------------------------------------------
 import os # import:os
 from math import log10 # import_from:math
-def find_largest(data_file: str = "base_exp.txt") -> int: # function_definition:find_largest (-> +0), function_with_default_positional_arguments_definition:find_largest (-> +0), literal:Str
+def find_largest(data_file: str = "base_exp.txt") -> int: # function_definition:find_largest, function_with_default_positional_arguments_definition:find_largest, literal:Str
     largest = [0, 0] # assignment, literal:List, literal:Num
     for i, line in enumerate(open(os.path.join(os.path.dirname(__file__), data_file))): # composition, for_indexes_elements, function_call:enumerate, function_call:open, method_call:dirname, method_call:join
         a, x = list(map(int, line.split(","))) # assignment, composition, function_call:list, function_call:map, literal:Str, method_call:split

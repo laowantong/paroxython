@@ -1,0 +1,6 @@
+control_flow/conditional	if
+control_flow/conditional/else	if_else
+type/set	method_call:difference_update
+type/set	literal:Set
+call/function/builtin/casting/set	literal:Set
+test/inequality	comparison_operator:(Lt|LtE|Gt|GtE)
