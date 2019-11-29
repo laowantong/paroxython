@@ -7,7 +7,8 @@ import regex
 
 sys.path[0:0] = [str(Path(__file__).parent)]
 
-from scanner import Scanner
+from program_generator import generate_programs
+from tag_generators import generate_lists_of_tags
 
 DIRECTORIES = [
     "../Python/project_euler",
@@ -17,7 +18,7 @@ DIRECTORIES = [
 
 
 class Taxonomy:
-    """Make a taxonomy from a list of maps associating programs with tags."""
+    """Make a taxonomy from a list of maps associating program paths with tags."""
 
     def __init__(self, taxonomy_path="taxonomies/default.tsv"):
         """Read the taxonomy specifications, and make some pre-processing."""
@@ -71,22 +72,22 @@ class Taxonomy:
 
     def __call__(self, tag_dict):
         """Translate a map of lists of tags into a list of lists of taxons."""
-        for (algo_path, tags) in tag_dict.items():
+        for (program_path, tags) in tag_dict.items():
             taxons = self.to_taxons(tags)
             taxons = self.deduplicated_taxons(taxons)
-            yield (algo_path, taxons)
+            yield (program_path, taxons)
 
 
 if __name__ == "__main__":
     tag_dict = {}
     for directory in DIRECTORIES:
-        scan = Scanner(directory)
-        tag_dict.update(scan.generate_lists_of_tags())
+        programs = generate_programs(directory)
+        tag_dict.update(generate_lists_of_tags(programs))
     taxonomy = Taxonomy()
     taxon_dict = {}
-    for (algo_path, taxons) in taxonomy(tag_dict):
+    for (program_path, taxons) in taxonomy(tag_dict):
         for (i, (label, spots)) in enumerate(taxons):
             taxons[i] = (label, " ".join(map(str, sorted(set(spots)))))
-        taxon_dict[algo_path] = dict(taxons)
+        taxon_dict[str(program_path)] = dict(taxons)
     output_path = Path("taxon_db.json")
     output_path.write_text(json.dumps(taxon_dict, indent=2))

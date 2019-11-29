@@ -1,11 +1,14 @@
 
 class Spot:
+    """Metadata associated with a tag or a taxon.
+    Currently, a spot is a couple of line numbers delimiting a construct in a source.
+    Implemented as a Registry of singletons (GoF's Design Patterns), or Multiton.
+    """
 
     existing_instances = {}
 
     def __new__(cls, line_numbers):
         """Prevent the creation of distinct instances for identical spots.
-        
         It avoids wasting memory and facilitates the deduplication of a list of spots.
         Reference: https://stackoverflow.com/a/50820933
         """
@@ -14,8 +17,7 @@ class Spot:
             return cls.existing_instances[key]
         self = super().__new__(cls)
         # __init__ logic goes here  -- will only run once
-        self.line_numbers = key
-        (self.start, self.end) = self.line_numbers
+        (self.start, self.end) = self.line_numbers = key
         self.length = self.end - self.start
         if self.length == 0:
             self.string = f"{self.start}"
