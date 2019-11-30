@@ -37,3 +37,6 @@ class Spot:
         
     def __lt__(self, other):
         return (self.start, self.end) < (other.start, other.end)
+    
+    def to_couple(self):
+        return (self.start, self.end)
