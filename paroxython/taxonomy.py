@@ -1,20 +1,8 @@
 import json
-import sys
 from collections import Counter, defaultdict
 from pathlib import Path
 
 import regex
-
-sys.path[0:0] = [str(Path(__file__).parent)]
-
-from program_generator import generate_programs
-from tag_generators import generate_lists_of_tags
-
-DIRECTORIES = [
-    "../Python/project_euler",
-    # "../Python/maths",
-    # "../Algo/programs"
-]
 
 
 class Taxonomy:
@@ -37,19 +25,21 @@ class Taxonomy:
                 rex = regex.compile(tag_pattern + "$")
                 self.compiled_tag_labels.append((rex, taxon_label))
 
-    memo = {}
+    cache = {}
 
     def get_taxon_label_list(self, tag_label):
         """Translate a tag label into a list of taxon labels."""
-        if tag_label not in Taxonomy.memo:
+        if tag_label not in Taxonomy.cache:
             if tag_label in self.literal_tag_labels:
-                Taxonomy.memo[tag_label] = self.literal_tag_labels[tag_label]
+                Taxonomy.cache[tag_label] = self.literal_tag_labels[tag_label]
             else:
-                Taxonomy.memo[tag_label] = []
+                Taxonomy.cache[tag_label] = []
                 for (rex, taxon_label) in self.compiled_tag_labels:
                     if rex.match(tag_label):
-                        Taxonomy.memo[tag_label].append(rex.sub(taxon_label, tag_label))
-        return Taxonomy.memo[tag_label]
+                        Taxonomy.cache[tag_label].append(
+                            rex.sub(taxon_label, tag_label)
+                        )
+        return Taxonomy.cache[tag_label]
 
     def to_taxons(self, tags):
         """Translate a dict of tags to a list of taxons with their spots in a bag."""
@@ -68,7 +58,12 @@ class Taxonomy:
             else:
                 previous_label = label
                 previous_spot_bag = spot_bag
-        return [(label, +spot_bag) for (label, spot_bag) in taxons if +spot_bag]
+        result = []
+        for (label, spot_bag) in taxons:
+            cleaned_bag = +spot_bag  # suppress items whose count == 0
+            if cleaned_bag:  # if there remains any item
+                result.append((label, cleaned_bag))
+        return result
 
     def __call__(self, tag_dict):
         """Translate a map of lists of tags into a list of lists of taxons."""
@@ -79,7 +74,14 @@ class Taxonomy:
 
 
 if __name__ == "__main__":
+    generate_programs = __import__("program_generator").generate_programs
+    generate_lists_of_tags = __import__("tag_generators").generate_lists_of_tags
     tag_dict = {}
+    DIRECTORIES = [
+        "../Python/project_euler",
+        # "../Python/maths",
+        # "../Algo/programs"
+    ]
     for directory in DIRECTORIES:
         programs = generate_programs(directory)
         tag_dict.update(generate_lists_of_tags(programs))
