@@ -26,7 +26,7 @@ simplify_negative_litterals = simplify_negative_litterals()
 
 find_all_constructs = regex.compile(
     r"""(?msx)
-            ^\#{4}\s+Construct\s+`(.+?)` # capture the label
+            ^\#{4}\s+Construct\s+`(.+?)` # capture the label's name
             .+?\#{5}\s+Regex # ensure the next pattern is in the Regex section
             .+?```re\n+(.+?)\n``` # capture this pattern
         """
@@ -38,10 +38,10 @@ class Parser:
         self.ref_path = Path(ref_path)
         text = self.ref_path.read_text()
         self.constructs = {}
-        for (label, pattern) in find_all_constructs(text):
-            if label in self.constructs:
-                raise ValueError(f"Duplicated label '{label}'!")
-            self.constructs[label] = regex.compile(f"(?mx){pattern}")
+        for (label_name, pattern) in find_all_constructs(text):
+            if label_name in self.constructs:
+                raise ValueError(f"Duplicated name '{label_name}'!")
+            self.constructs[label_name] = regex.compile(f"(?mx){pattern}")
 
     def __call__(self, source, yield_failed_matches=False):
         try:
@@ -49,7 +49,7 @@ class Parser:
         except:
             return print("Warning: unable to construct the AST")
         self.flat_ast = simplify_negative_litterals(flatten(tree))
-        for (label, rex) in self.constructs.items():
+        for (label_name, rex) in self.constructs.items():
             result = defaultdict(list)
             d = None
             for match in rex.finditer(self.flat_ast, overlapped=True):
@@ -57,11 +57,11 @@ class Parser:
                 spot = Spot(d["LINE"])
                 if d.get("SUFFIX"):  # there is a "SUFFIX" key and its value is not []
                     for suffix in d["SUFFIX"]:
-                        result[f"{label}:{suffix}"].append(spot)
+                        result[f"{label_name}:{suffix}"].append(spot)
                 else:
-                    result[label].append(spot)
+                    result[label_name].append(spot)
             if yield_failed_matches and not d:
-                yield (label, [])
+                yield (label_name, [])
             else:
                 yield from result.items()
 
@@ -75,10 +75,10 @@ if __name__ == "__main__":
     parse = Parser()
     start = time.perf_counter()
     acc = []
-    for (label, spots) in parse(source, yield_failed_matches=False):
+    for (name, spots) in parse(source, yield_failed_matches=False):
         stop = time.perf_counter()
         spots = ", ".join(map(str, spots))
-        acc.append(f"{stop - start:7.4f} s.: | `{label}` | {spots} |")
+        acc.append(f"{stop - start:7.4f} s.: | `{name}` | {spots} |")
         start = stop
     print("\n".join(sorted(acc, reverse=True)))
     Path("sandbox/flat_ast.txt").write_text(parse.flat_ast)

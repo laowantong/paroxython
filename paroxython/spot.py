@@ -1,6 +1,6 @@
 
 class Spot:
-    """Metadata associated with a tag or a taxon.
+    """Metadata associated with a tag (i.e., a label or a taxon).
     Currently, a spot is a couple of line numbers delimiting a construct in a source.
     Implemented as a Registry of singletons (GoF's Design Patterns), or Multiton.
     """

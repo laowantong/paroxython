@@ -22,7 +22,7 @@ def reformat_file(construct_path):
 def extract_examples(construct_path):
     text = construct_path.read_text()
     rex = r"""(?msx)
-        ^\#{4}\s+Construct\s+`(.+?)` # capture the label
+        ^\#{4}\s+Construct\s+`(.+?)` # capture the label's name
         .+?\#{5}\s+Example # ensure the next code is in the Example section
         .+?```python\n+(.+?)\n``` # capture the source-code
         .+?\#{5}\s+Matches.+?^\|:--\|:--\| # ensure the table is in the Matches section
@@ -35,26 +35,26 @@ parse = parser.Parser()
 reformat_file(parse.ref_path)
 examples = []
 for match in extract_examples(parse.ref_path):
-    label = match.group(1)
+    label_name = match.group(1)
     source = match.group(2)
     results = zip(match.captures("LABELS"), match.captures("LINES"))
-    examples.append((label, source, results))
+    examples.append((label_name, source, results))
 pytest.main(args=["-q"])
 
 
-@pytest.mark.parametrize("label, source, results", examples)
-def test_example(label, source, results):
+@pytest.mark.parametrize("label_name, source, results", examples)
+def test_example(label_name, source, results):
     source = regex.sub(r"(?m)^.{4}", "", source)
     actual = dict(parse(source))
-    for (label, expected_spots) in results:
-        keys = list(actual.keys())
-        assert label in keys
-        actual_spots = ", ".join(map(str, actual[label]))
+    keys = set(actual.keys())
+    for (label_name, expected_spots) in results:
+        assert label_name in keys
+        actual_spots = ", ".join(map(str, actual[label_name]))
         assert actual_spots == expected_spots
 
 
 def test_at_least_one_example_is_provided_for_each_construct():
     expected = set(parse.constructs)
-    actual = set(label.partition(":")[0] for (label, _, _) in examples)
+    actual = set(label_name.partition(":")[0] for (label_name, _, _) in examples)
     assert actual == expected
 

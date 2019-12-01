@@ -8,25 +8,25 @@ class FilterByTaxons:
         """The expected db is a JSON object with the following schema:
         {
             "programs": {
-                "program_1_label": {
+                "program_1_name": {
                     "timestamp": "...", # not required here
                     "source": "...",
-                    "tags": {
-                        "tag_1_label": [spot_1, spot_2, ...],
+                    "labels": {
+                        "label_1_name": [spot_1, spot_2, ...],
                         ...
                     }
                     "taxons: {
-                        "taxon_1_label": [spot_1, spot_2, ...],
+                        "taxon_1_name": [spot_1, spot_2, ...],
                     }
                 },
                 ...
             },
-            "tags": { # not required here
-                "tag_1_label": [program_1_label, program_2_label, ...],
+            "labels": { # not required here
+                "label_1_name": [program_1_name, program_2_name, ...],
                 ...
             },
             "taxons": {
-                "taxon_1_label": [program_1_label, program_2_label, ...],
+                "taxon_1_name": [program_1_name, program_2_name, ...],
                 ...
             }
         }
@@ -45,8 +45,8 @@ class FilterByTaxons:
                 """Suppress from self.result all programs using any forbidden
                 taxon, and return the number of suppressed programs."""
                 count = len(self.result)
-                for (label, program_names) in self.taxons.items():
-                    if match_taxon(label):  # this taxon is forbidden
+                for (taxon_name, program_names) in self.taxons.items():
+                    if match_taxon(taxon_name):  # this taxon is forbidden
                         self.result.difference_update(program_names)
                 return count - len(self.result)
 
@@ -66,8 +66,8 @@ class FilterByTaxons:
                 for program_name in list(self.result):
                     program = self.programs[program_name]
                     for mandatory_taxon in mandatory_taxons:
-                        for label in program["taxons"]:
-                            if mandatory_taxon(label):  # this mandatory taxon is used
+                        for taxon_name in program["taxons"]:
+                            if mandatory_taxon(taxon_name):  # this mandatory taxon is used
                                 break  # no need to test the other taxons of this program
                         else:  # this mandatory taxon is not used by this program
                             self.result.discard(program_name)
@@ -87,8 +87,8 @@ class FilterByTaxons:
             print("-" * 80)
             print(program["source"])
             print()
-            for (other_label, spots) in program["taxons"].items():
-                print(f"{len(spots):3}: {other_label}")
+            for (other_name, spots) in program["taxons"].items():
+                print(f"{len(spots):3}: {other_name}")
         print()
         print(self.initial_count, "programs analyzed")
         print(self.forbidden_count, "programs forbidden")
