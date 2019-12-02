@@ -14,6 +14,45 @@ from label_generators import generate_paths_and_labels
 from taxonomy import Taxonomy
 
 
+def make_database(directories):
+    """Construct a JSON object with the following schema:
+    {
+        "programs": {
+            program_1_name: {
+                "timestamp": "...",
+                "source": "...",
+                "labels": {
+                    label_1_name: [spot_1, spot_2, ...],
+                    ...
+                }
+                "taxons: {
+                    taxon_1_name: [spot_1, spot_2, ...],
+                }
+            },
+            ...
+        },
+        "labels": {
+            label_1_name: [program_1_name, program_2_name, ...],
+            ...
+        },
+        "taxons": {
+            taxon_1_name: [program_1_name, program_2_name, ...],
+            ...
+        }
+    }
+    """
+    programs = list(chain.from_iterable(generate_programs(d) for d in directories))
+    paths_and_labels = list(generate_paths_and_labels(programs))
+    taxonomy = list(Taxonomy()(paths_and_labels))
+    db = {
+        "programs": get_program_infos(programs),
+        "labels": get_label_infos(paths_and_labels),
+        "taxons": get_taxon_infos(taxonomy),
+    }
+    inject_labels(db, paths_and_labels)
+    inject_taxons(db, taxonomy)
+    return to_Json(db)
+
 
 def serialize_tags(tags):
     result = {}
@@ -65,24 +104,11 @@ def to_Json(db):
     return text
 
 
-def make_database(directories):
-    programs = list(chain.from_iterable(generate_programs(d) for d in directories))
-    paths_and_labels = list(generate_paths_and_labels(programs))
-    taxonomy = list(Taxonomy()(paths_and_labels))
-    db = {
-        "programs": get_program_infos(programs),
-        "labels": get_label_infos(paths_and_labels),
-        "taxons": get_taxon_infos(taxonomy),
-    }
-    inject_labels(db, paths_and_labels)
-    inject_taxons(db, taxonomy)
-    return to_Json(db)
-
-
 if __name__ == "__main__":
     directories = [
         "../Python/project_euler",
         # "../Python/maths",
         # "../Algo/programs"
     ]
-    Path("db.json").write_text(make_database(directories))
+    db = make_database(directories)
+    Path("db.json").write_text(db)
