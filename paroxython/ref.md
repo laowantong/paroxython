@@ -316,7 +316,7 @@
 3   c = -1 # no match
 ```
 
-**Remark.** Normally, a negative litteral is represented in the AST by a node `UnaryOp` with `USub` and `Num` children and a positive value for `n`. During the pre-processing of the AST, this has been simplified into a node `Num` and a negative value for `n`.
+**Remark.** A negative litteral is represented in the AST by a node `UnaryOp` with `USub` and `Num` children, and a _positive_ value for `n`. Our pre-processing of the AST simplifies this into a node `Num` and a _negative_ value for `n`.
 
 ##### Matches
 
@@ -404,7 +404,7 @@
 | `boolean_operator:And` | 1 |
 | `boolean_operator:Or` | 2 |
 
-**Remark.** `Not` is not a boolean operator in Python. To match it, use the construct [`unary_operator-Not`](#construct-unary_operator).
+**Remark.** `Not` is not a boolean operator in Python. To match it, use the construct [`unary_operator:Not`](#construct-unary_operator).
 
 --------------------------------------------------------------------------------
 
