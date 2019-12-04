@@ -1,15 +1,15 @@
 
-class Spot:
+class Span:
     """Metadata associated with a tag (i.e., a label or a taxon).
-    Currently, a spot is a couple of line numbers delimiting a construct in a source.
+    Currently, a span is a couple of line numbers delimiting a construct in a source.
     Implemented as a Registry of singletons (GoF's Design Patterns), or Multiton.
     """
 
     existing_instances = {}
 
     def __new__(cls, line_numbers):
-        """Prevent the creation of distinct instances for identical spots.
-        It avoids wasting memory and facilitates the deduplication of a list of spots.
+        """Prevent the creation of distinct instances for identical spans.
+        It avoids wasting memory and facilitates the deduplication of a list of spans.
         Reference: https://stackoverflow.com/a/50820933
         """
         key = (int(line_numbers[0]), int(line_numbers[-1]))

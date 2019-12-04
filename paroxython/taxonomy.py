@@ -42,25 +42,25 @@ class Taxonomy:
         return Taxonomy.cache[label_name]
 
     def to_taxons(self, labels):
-        """Translate a dict of labels to a list of taxons with their spots in a bag."""
+        """Translate a dict of labels to a list of taxons with their spans in a bag."""
         result = defaultdict(Counter)
-        for (label_name, spots) in labels.items():
+        for (label_name, spans) in labels.items():
             for taxon_name in self.get_taxon_name_list(label_name):
-                result[taxon_name].update(Counter(spots))
+                result[taxon_name].update(Counter(spans))
         return sorted(result.items())
 
     def deduplicated_taxons(self, taxons):
-        """For taxons t2 having a taxon t1 as a prefix, remove the common spots in t1."""
+        """For taxons t2 having a taxon t1 as a prefix, remove the common spans in t1."""
         previous_name = "dummy"
-        for (name, spot_bag) in taxons:
+        for (name, span_bag) in taxons:
             if name.startswith(previous_name):
-                previous_spot_bag.subtract(spot_bag)
+                previous_span_bag.subtract(span_bag)
             else:
                 previous_name = name
-                previous_spot_bag = spot_bag
+                previous_span_bag = span_bag
         result = []
-        for (name, spot_bag) in taxons:
-            cleaned_bag = +spot_bag  # suppress items whose count == 0
+        for (name, span_bag) in taxons:
+            cleaned_bag = +span_bag  # suppress items whose count == 0
             if cleaned_bag:  # if any item remains in the bag
                 result.append((name, cleaned_bag))
         return result
@@ -71,22 +71,22 @@ class Taxonomy:
         Input: an iterator on label lists: 
 
             (path_1, [
-                (label_name_1, label_spots_1),
-                (label_name_2, label_spots_2),
+                (label_name_1, label_spans_1),
+                (label_name_2, label_spans_2),
                 ...
             ]), ...
 
-        Output: an iterator of (program_path, taxons with their spot bag)
+        Output: an iterator of (program_path, taxons with their span bag)
 
-                (program_1_path, [(taxon_1: spot_bag_1), (taxon_2: spot_bag_2), ...]),
-                (program_2_path, [(taxon_1: spot_bag_1), (taxon_2: spot_bag_2), ...]),
+                (program_1_path, [(taxon_1: span_bag_1), (taxon_2: span_bag_2), ...]),
+                (program_2_path, [(taxon_1: span_bag_1), (taxon_2: span_bag_2), ...]),
                 ...
 
-            where each spot bag is a collections.Counter of spots:
+            where each span bag is a collections.Counter of spans:
 
                 {
-                    spot_1: count_1,
-                    spot_2: count_2,
+                    span_1: count_1,
+                    span_2: count_2,
                     ...
                 }
         """
@@ -112,8 +112,8 @@ if __name__ == "__main__":
     taxonomy = Taxonomy()
     taxon_dict = {}
     for (program_path, taxons) in taxonomy(paths_and_labels):
-        for (i, (name, spots)) in enumerate(taxons):
-            taxons[i] = (name, " ".join(map(str, sorted(set(spots)))))
+        for (i, (name, spans)) in enumerate(taxons):
+            taxons[i] = (name, " ".join(map(str, sorted(set(spans)))))
         taxon_dict[str(program_path)] = dict(taxons)
     output_path = Path("snapshots/taxon_db.json")
     output_path.write_text(json.dumps(taxon_dict, indent=2))

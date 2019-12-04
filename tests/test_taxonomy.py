@@ -4,10 +4,10 @@ from collections import Counter
 
 import context
 from paroxython import taxonomy
-from paroxython import spot
+from paroxython import span
 
 t = taxonomy.Taxonomy("tests/data/test_taxonomy.tsv")
-S = lambda i, j: spot.Spot([i, j])  # shorten Spot([i, j])
+S = lambda i, j: span.Span([i, j])  # shorten Span([i, j])
 pytest.main(args=["-q"])
 
 

@@ -22,11 +22,11 @@ def make_database(directories):
                 "timestamp": "...",
                 "source": "...",
                 "labels": {
-                    label_1_name: [spot_1, spot_2, ...],
+                    label_1_name: [span_1, span_2, ...],
                     ...
                 }
                 "taxons: {
-                    taxon_1_name: [spot_1, spot_2, ...],
+                    taxon_1_name: [span_1, span_2, ...],
                 }
             },
             ...
@@ -56,8 +56,8 @@ def make_database(directories):
 
 def serialize_tags(tags):
     result = {}
-    for (tag_name, spots) in tags:
-        result[tag_name] = [spot.to_couple() for spot in sorted(set(spots))]
+    for (tag_name, spans) in tags:
+        result[tag_name] = [span.to_couple() for span in sorted(set(spans))]
     return result
 
 
@@ -98,7 +98,7 @@ def inject_taxons(db, taxonomy):
 
 
 def to_Json(db):
-    """Convert the DB into JSON and reduce to one line each list of spots."""
+    """Convert the DB into JSON and reduce to one line each list of spans."""
     text = json.dumps(db, indent=2)
     text = regex.sub(r"\s*\[\s+(\d+),\s+(\d+)\s+\](,?)\s+", r"[\1,\2]\3", text)
     return text

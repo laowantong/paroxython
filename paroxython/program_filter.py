@@ -138,8 +138,8 @@ class ProgramFilter:
             print("-" * 80)
             print(program["source"])
             print()
-            for (other_name, spots) in program["taxons"].items():
-                print(f"{len(spots):3}: {other_name}")
+            for (other_name, spans) in program["taxons"].items():
+                print(f"{len(spans):3}: {other_name}")
         print("-" * 80)
         self.counts["remaining"] = len(self.result)
         for (description, count) in self.counts.items():

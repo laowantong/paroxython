@@ -18,9 +18,9 @@ def generate_labeled_sources(programs):
         yield f"# {separator}\n# {path}\n# {separator}"
         sloc = source.splitlines()
         comments = [set() for _ in sloc]
-        for (label_name, spots) in sorted(parse(source)):
-            for spot in spots:
-                comments[spot.start - 1].add(f"{label_name}{spot.suffix}")
+        for (label_name, spans) in sorted(parse(source)):
+            for span in spans:
+                comments[span.start - 1].add(f"{label_name}{span.suffix}")
         for (i, comment) in enumerate(comments):
             if comment:
                 sloc[i] += " # " + ", ".join(sorted(comment))
@@ -35,17 +35,17 @@ def generate_paths_and_labels(programs):
     
     Output: an iterator on label lists: 
         (path_1, [
-            (label_name_1, label_spots_1),
-            (label_name_2, label_spots_2),
+            (label_name_1, label_spans_1),
+            (label_name_2, label_spans_2),
             ...
         ]), ...
     """
     parse = Parser()
     for (path, source) in programs:
         labels = defaultdict(list)
-        for (label_name, spots) in sorted(parse(source)):
-            for spot in spots:
-                insort(labels[label_name], spot)
+        for (label_name, spans) in sorted(parse(source)):
+            for span in spans:
+                insort(labels[label_name], span)
         yield (path, labels)
 
 

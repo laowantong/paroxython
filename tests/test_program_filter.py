@@ -27,8 +27,8 @@ for (program_name, source) in programs:
         i = int(i)
         for taxon in taxons:
             (taxon_name, _, length) = taxon.partition("+")
-            spot = (i, i + int(length)) if length else (i, i)
-            program["taxons"][taxon_name].append(spot)
+            span = (i, i + int(length)) if length else (i, i)
+            program["taxons"][taxon_name].append(span)
             db["taxons"][taxon_name].add(program_name)
 
 # from pprint import pprint

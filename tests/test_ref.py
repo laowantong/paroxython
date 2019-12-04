@@ -47,10 +47,10 @@ def test_example(label_name, source, results):
     source = regex.sub(r"(?m)^.{4}", "", source)
     actual = dict(parse(source))
     keys = set(actual.keys())
-    for (label_name, expected_spots) in results:
+    for (label_name, expected_spans) in results:
         assert label_name in keys
-        actual_spots = ", ".join(map(str, actual[label_name]))
-        assert actual_spots == expected_spots
+        actual_spans = ", ".join(map(str, actual[label_name]))
+        assert actual_spans == expected_spans
 
 
 def test_at_least_one_example_is_provided_for_each_construct():
