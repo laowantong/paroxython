@@ -13,15 +13,15 @@ class SetList(UserList):
         if isinstance(values, (set, frozenset, type(dict().keys()))):
             self.data.sort()
 
-    def __setitem__(self, key, value):
-        if value in self.data:
-            self.lastSIOutcome = False
-        else:
-            if key == len(self.data):
-                self.data.append(value)
-            else:
-                self.data[key] = value
-            self.lastSIOutcome = True
+    # def __setitem__(self, key, value):
+    #     if value in self.data:
+    #         self.lastSIOutcome = False
+    #     else:
+    #         if key == len(self.data):
+    #             self.data.append(value)
+    #         else:
+    #             self.data[key] = value
+    #         self.lastSIOutcome = True
 
     def append(self, value):
         if value in self.data:
@@ -33,8 +33,8 @@ class SetList(UserList):
     def extend(self, values):
         return self.update(values)
 
-    def add(self, value):
-        return self.append(value)
+    # def add(self, value):
+    #     return self.append(value)
 
     def discard(self, value):
         if value in self.data:
@@ -43,26 +43,26 @@ class SetList(UserList):
         else:
             return False
 
-    def pop(self, *, value=None, index=None):
-        if index is not None and not isinstance(index, int):
-            raise KeyError("Index must be specified as an integer.", index)
-        if value is not None and index is not None:
-            raise KeyError(
-                "Pop can remove an item by index or value but not"
-                " both.  Value specified: %s, index specified: %d." % (value, index)
-            )
-        if index is not None:
-            return self.data.pop(index)
-        elif value is not None:
-            if value not in self.data:
-                raise KeyError(f"`{value}` not in {self}.")
-            i = self.data.index(value)
-            return self.data.pop(i)
-        else:
-            raise KeyError(
-                "One of `index` or `value` must be specified by "
-                "keyword arguement when calling SetList.pop( )."
-            )
+    # def pop(self, *, value=None, index=None):
+    #     if index is not None and not isinstance(index, int):
+    #         raise KeyError("Index must be specified as an integer.", index)
+    #     if value is not None and index is not None:
+    #         raise KeyError(
+    #             "Pop can remove an item by index or value but not"
+    #             " both.  Value specified: %s, index specified: %d." % (value, index)
+    #         )
+    #     if index is not None:
+    #         return self.data.pop(index)
+    #     elif value is not None:
+    #         if value not in self.data:
+    #             raise KeyError(f"`{value}` not in {self}.")
+    #         i = self.data.index(value)
+    #         return self.data.pop(i)
+    #     else:
+    #         raise KeyError(
+    #             "One of `index` or `value` must be specified by "
+    #             "keyword arguement when calling SetList.pop( )."
+    #         )
 
     def update(self, values):
         if isinstance(values, (set, frozenset, type(dict().keys()))):
@@ -81,50 +81,50 @@ class SetList(UserList):
                 new.append(value)
         return new
 
-    def union(self, other):
-        new = SetList()
-        new.update(self)
-        new.update(other)
-        return new
+    # def union(self, other):
+    #     new = SetList()
+    #     new.update(self)
+    #     new.update(other)
+    #     return new
 
-    def intersection(self, other):
-        new = SetList()
-        for value in self:
-            if value in other:
-                new.append(value)
-        return new
+    # def intersection(self, other):
+    #     new = SetList()
+    #     for value in self:
+    #         if value in other:
+    #             new.append(value)
+    #     return new
 
-    def issubset(self, other):
-        for value in self:
-            if value not in other:
-                return False
-        return True
+    # def issubset(self, other):
+    #     for value in self:
+    #         if value not in other:
+    #             return False
+    #     return True
 
-    def issuperset(self, other):
-        for value in other:
-            if value not in self:
-                return False
-        return True
+    # def issuperset(self, other):
+    #     for value in other:
+    #         if value not in self:
+    #             return False
+    #     return True
 
-    def symmetric_difference(self, other):
-        new = self.difference(other)
-        for value in other:
-            if value not in self:
-                new.append(value)
-        return new
+    # def symmetric_difference(self, other):
+    #     new = self.difference(other)
+    #     for value in other:
+    #         if value not in self:
+    #             new.append(value)
+    #     return new
 
-    @staticmethod
-    def _re_sort(item):
-        # Exists so that it can be replaced by assignment on specific instances.
-        return item
+    # @staticmethod
+    # def _re_sort(item):
+    #     # Exists so that it can be replaced by assignment on specific instances.
+    #     return item
 
-    @property
-    def as_fsets(self):
-        """set( ) of frozenset( )s of the items in each SetList( ) member.  The
-        use of frozenset( )s enables the set( ) to contain otherwise non-
-        hashable objects.  Useful for order-insensitive equality testing.
-        """
-        ret = set()
-        for item in self.data:
-            ret.add(frozenset(self._re_sort(item)))
-        return ret
+    # @property
+    # def as_fsets(self):
+    #     """set( ) of frozenset( )s of the items in each SetList( ) member.  The
+    #     use of frozenset( )s enables the set( ) to contain otherwise non-
+    #     hashable objects.  Useful for order-insensitive equality testing.
+    #     """
+    #     ret = set()
+    #     for item in self.data:
+    #         ret.add(frozenset(self._re_sort(item)))
+    #     return ret
