@@ -1,0 +1,2 @@
+while input():
+    print("foobar")

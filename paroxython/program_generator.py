@@ -5,6 +5,12 @@ match_excluded = regex.compile(r"__init__\.py|setup\.py|.*[-_]tests?\.py").match
 
 
 def generate_programs(directory, cleanup_strategy="minimize"):
+    """Yield the path and the cleaned up source of all programs in a given directory.
+
+    Input: a string or a pathlib.Path representing the directory path.
+
+    Output: couples of Python programs' `pathlib.Path`s and their contents.
+    """
 
     if cleanup_strategy == "minimize":
         minimize = __import__("minimizer").minimize
