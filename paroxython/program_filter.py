@@ -100,34 +100,33 @@ class ProgramFilter:
                     lacking_taxons[program_name].append(wanted_taxon_name)
         return lacking_taxons
 
+    def sort(self, key, reverse):
+        """Generic sort. Use the following helpers instead."""
+        self.result.sort(key=key, reverse=reverse)
+
     def sort_by_taxon_count(self, reverse=False):
         """Sort the programs by number of distinct taxons."""
-        key = lambda p: len(self.programs[p]["taxons"])
-        self.result.sort(key=key, reverse=reverse)
+        self.sort(lambda p: len(self.programs[p]["taxons"]), reverse)
 
     def sort_by_line_count(self, reverse=False):
         """Sort the programs by SLOC count."""
-        key = lambda p: self.programs[p]["source"].count("\n")
-        self.result.sort(key=key, reverse=reverse)
+        self.sort(lambda p: self.programs[p]["source"].count("\n"), reverse)
 
     def sort_by_extra_taxon_count(self, taxon_names, reverse=False):
         """Sort the programs by number of extra taxons wrt a given list."""
         extra_taxons = self.get_extra_taxons(taxon_names)
-        key = lambda p: len(extra_taxons[p])
-        self.result.sort(key=key, reverse=reverse)
+        self.sort(lambda p: len(extra_taxons[p]), reverse)
 
     def sort_by_lacking_taxon_count(self, taxon_names, reverse=False):
         """Sort the programs by number of lacking taxons wrt a given list."""
         lacking_taxons = self.get_lacking_taxons(taxon_names)
-        key = lambda p: len(lacking_taxons[p])
-        self.result.sort(key=key, reverse=reverse)
+        self.sort(lambda p: len(lacking_taxons[p]), reverse)
 
     def sort_by_distance(self, taxon_names, reverse=False):
         """Sort the programs by number of exta and lacking taxons wrt a given list."""
         extra_taxons = self.get_extra_taxons(taxon_names)
         lacking_taxons = self.get_lacking_taxons(taxon_names)
-        key = lambda p: len(extra_taxons[p]) + len(lacking_taxons[p])
-        self.result.sort(key=key, reverse=reverse)
+        self.sort(lambda p: len(extra_taxons[p]) + len(lacking_taxons[p]), reverse)
 
     def __repr__(self):
         result = []
