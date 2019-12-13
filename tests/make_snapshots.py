@@ -5,11 +5,13 @@ import context
 from paroxython.program_generator import generate_programs
 from paroxython.label_generators import generate_labeled_sources
 
+# fmt: off
 DIRECTORIES = [
     "../Python/project_euler",
     "../Python/maths",
     "../Algo/programs",
 ]
+# fmt: on
 
 total_elapsed_time = 0
 for directory in DIRECTORIES:

@@ -41,8 +41,8 @@ program_2
 1   O/N/P/  Y/T/Q/  Y/
 2   X/S/M/L/R/D/  O/
 3   O/C/H/B/  X/S/M/L/R/D/
-4   
-5   
+4
+5
 6   X/S/M/  O/
 7   X/S/M/L/R/  Y/T/  O/C/
 8   X/G/  X/S/M/L/V/+1
@@ -84,7 +84,7 @@ program_5
 program_6
 1   X/
 2   O/N/  Y/T/Q/  X/W/
-3   
+3
 4   O/J/  X/K/  X/
 5   Y/T/
 6   O/C/F/U/  O/C/+1  X/S/M/L/V/  O/N/  X/S/M/L/R/D/A/
@@ -110,7 +110,7 @@ program_8
 4   X/S/M/L/+2  O/J/  Y/E/  O/C/
 5   X/K/  O/N/P/
 6   X/S/M/L/R/D/  O/C/H/B/
-7   
+7
 8   Y/
 9   X/
 
@@ -118,10 +118,9 @@ program_9
 1   X/W/
 2   O/N/  Y/
 3   O/C/H/  Y/T/Q/
-4   
+4
 5   O/J/  O/C/H/B/I/  O/C/H/
 6   X/S/M/
 7   O/C/H/B/I/+2  Y/E/  X/S/M/L/R/  X/K/  X/S/M/L/V/
 8   O/J/  O/C/H/B/I/
 9   Y/T/  O/C/F/  O/  X/S/M/
-

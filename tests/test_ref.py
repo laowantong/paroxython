@@ -57,4 +57,3 @@ def test_at_least_one_example_is_provided_for_each_construct():
     expected = set(parse.constructs)
     actual = set(label_name.partition(":")[0] for (label_name, _, _) in examples)
     assert actual == expected
-

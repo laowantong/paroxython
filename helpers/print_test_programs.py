@@ -9,10 +9,11 @@ taxons = []
 for path in paths:
     taxons.append("/".join(chr(64 + i) for i in path[1:]) + "/")
 taxons.sort()
-del(taxons[0]) # suppress root to get a forest
+del taxons[0]  # suppress root to get a forest
 print("TAXONS")
 print("\n".join(taxons))
 print()
+
 
 def create_program(line_count=9, iterations=20):
     result = [[] for _ in range(line_count)]
@@ -28,6 +29,7 @@ def create_program(line_count=9, iterations=20):
                 candidate = f"{candidate}+{scope}"
             result[line].append(candidate)
     return ["  ".join(x) for x in result]
+
 
 print("PROGRAMS")
 for i in range(1, 10):

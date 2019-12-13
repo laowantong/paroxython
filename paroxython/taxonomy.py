@@ -67,8 +67,8 @@ class Taxonomy:
 
     def __call__(self, paths_and_labels):
         """Translate labels into taxons on a list of program paths.
-        
-        Input: an iterator on label lists: 
+
+        Input: an iterator on label lists:
 
             (path_1, [
                 (label_name_1, label_spans_1),

@@ -1,7 +1,7 @@
 from pathlib import Path
 import json
 from regex import compile
-import sys 
+import sys
 
 sys.path[0:0] = [str(Path(__file__).parent)]
 
@@ -13,7 +13,7 @@ class ProgramFilter:
         self.programs = db["programs"]
         self.taxons = db["taxons"]
         self.reset()
-    
+
     def reset(self):
         self.result = SetList(self.programs.keys())
         self.counts = {"initially": len(self.result)}

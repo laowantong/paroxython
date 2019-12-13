@@ -24,8 +24,8 @@ def enum(*sequential, **named):
 
 class TokenGroup(object):
     """A class for keeping track of a group of tokens.
-	Token groups are meant to be a collection of tokens that are lexicographically 
-	adjacent on a line. This helps to easily remove comments, docstrings, and 
+	Token groups are meant to be a collection of tokens that are lexicographically
+	adjacent on a line. This helps to easily remove comments, docstrings, and
 	blank lines.
 	"""
 

@@ -29,11 +29,11 @@ def generate_labeled_sources(programs):
 
 def generate_paths_and_labels(programs):
     """For each program, yield its label list, lexicographically sorted.
-    
+
     Input: an iterator on programs:
         (path_1, source_1), (path_2, source_2), ...
-    
-    Output: an iterator on label lists: 
+
+    Output: an iterator on label lists:
         (path_1, [
             (label_name_1, label_spans_1),
             (label_name_2, label_spans_2),

@@ -870,10 +870,10 @@ Update a variable by negating it.
 2       def fizz(buzz):
 3           a += 1
 4           print(a)
-5   
+5
 6       bar += 1
 7       print(bar)
-8   
+8
 9   foo(42)
 ```
 
@@ -1040,10 +1040,10 @@ Any function `f` which contains a nested call to itself (`f(..., f(...), ...)`),
 ##### Example
 
 ```python
-1   def outer_function(a, b): 
+1   def outer_function(a, b):
 2   	c = a + b
-3   	def inner_function(c): 
-4   		print(c) 
+3   	def inner_function(c):
+4   		print(c)
 5   	return inner_function(c)
 ```
 
@@ -1076,10 +1076,10 @@ Function enclosing the definition of an inner function and returning it. Beware 
 ##### Example
 
 ```python
-1   def outer_function(a, b): 
+1   def outer_function(a, b):
 2       c = a + b
-3       def inner_function(): 
-4           print(c) 
+3       def inner_function():
+4           print(c)
 5       return inner_function
 ```
 
@@ -1176,7 +1176,7 @@ Function enclosing the definition of an inner function and returning it. Beware 
 2       pass
 3   elif condition_2:
 4       pass
-5   
+5
 6   if condition_3:
 7       pass
 8   elif condition_4:
@@ -1460,7 +1460,7 @@ A `for` loop with a counter `i` and a nested `for` loop which makes `i` iteratio
 1   for i in range(n):
 2       for j in range(i - 1):
 3           pass
-4   
+4
 5   for i in range(n):
 6       for j in range(i+1, n):
 7           pass

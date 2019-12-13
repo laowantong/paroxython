@@ -2,5 +2,5 @@
 [![codecov](https://codecov.io/gh/laowantong/paroxython/branch/master/graph/badge.svg)](https://codecov.io/gh/laowantong/paroxython)
 
 # Paroxython
- 
+
 Coming soon.

@@ -1,4 +1,3 @@
-
 class Span:
     """Metadata associated with a tag (i.e., a label or a taxon).
     Currently, a span is a couple of line numbers delimiting a construct in a source.
@@ -34,9 +33,9 @@ class Span:
 
     def __repr__(self):
         return self.string
-        
+
     def __lt__(self, other):
         return (self.start, self.end) < (other.start, other.end)
-    
+
     def to_couple(self):
         return (self.start, self.end)

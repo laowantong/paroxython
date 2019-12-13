@@ -1,5 +1,6 @@
 from collections import UserList
 
+
 class SetList(UserList):
     """List that eliminates redundant list items and implements set comparison methods.
     Adapted from ParallelRegression: https://github.com/rcbellamy/ParallelRegression
@@ -128,4 +129,3 @@ class SetList(UserList):
         for item in self.data:
             ret.add(frozenset(self._re_sort(item)))
         return ret
-

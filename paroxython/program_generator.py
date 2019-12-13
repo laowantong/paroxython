@@ -27,4 +27,3 @@ if __name__ == "__main__":
         print(datetime.fromtimestamp(path.stat().st_mtime))
         print(source)
         print("-" * 80)
-
