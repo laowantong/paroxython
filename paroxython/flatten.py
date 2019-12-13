@@ -29,7 +29,7 @@ def flatten(node, prefix=""):
         return f"{prefix}={node!r}\n"
 
 
-if __name__ == "__main__": # pragma: no cover
+if __name__ == "__main__":
     Path = __import__("pathlib").Path
     source = Path("sandbox/source.py").read_text()
     print(flatten(ast.parse(source)))

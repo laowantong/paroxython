@@ -49,7 +49,7 @@ def generate_paths_and_labels(programs):
         yield (path, labels)
 
 
-if __name__ == "__main__": # pragma: no cover
+if __name__ == "__main__":
     generate_programs = __import__("program_generator").generate_programs
     programs = generate_programs("../Python/project_euler")
     for result in generate_labeled_sources(programs):

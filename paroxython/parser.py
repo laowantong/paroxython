@@ -66,7 +66,7 @@ class Parser:
                 yield from result.items()
 
 
-if __name__ == "__main__": # pragma: no cover
+if __name__ == "__main__":
     time = __import__("time")
     source = Path("sandbox/source.py").read_text()
     for (i, line) in enumerate(source.splitlines(), 1):

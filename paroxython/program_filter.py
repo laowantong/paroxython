@@ -123,7 +123,7 @@ class ProgramFilter:
         self.result.sort(key=key, reverse=reverse)
 
     def sort_by_distance(self, taxon_names, reverse=False):
-        """Sort the programs by number of extra and lacking taxons wrt a given list."""
+        """Sort the programs by number of exta and lacking taxons wrt a given list."""
         extra_taxons = self.get_extra_taxons(taxon_names)
         lacking_taxons = self.get_lacking_taxons(taxon_names)
         key = lambda p: len(extra_taxons[p]) + len(lacking_taxons[p])
@@ -147,7 +147,7 @@ class ProgramFilter:
             print(f"{count:3} program{plural} {description}")
 
 
-if __name__ == "__main__": # pragma: no cover
+if __name__ == "__main__":
 
     forbidden_patterns = r"""
         call/method/.*

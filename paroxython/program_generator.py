@@ -21,7 +21,7 @@ def generate_programs(directory, cleanup_strategy="minimize"):
             yield (path, cleanup(path.read_text()))
 
 
-if __name__ == "__main__": # pragma: no cover
+if __name__ == "__main__":
     datetime = __import__("datetime").datetime
     for (path, source) in generate_programs("../Algo/programs/"):
         print(datetime.fromtimestamp(path.stat().st_mtime))

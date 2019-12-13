@@ -213,7 +213,7 @@ def minimize(
     return untokenize(grps, rm_whitespace, whitespace_char, indent_char)
 
 
-if __name__ == "__main__": # pragma: no cover
+if __name__ == "__main__":
     from pathlib import Path
 
     source = Path("../Algo/programs/damm_checksum_0.py").read_text()

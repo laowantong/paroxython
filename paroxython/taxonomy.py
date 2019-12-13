@@ -96,7 +96,7 @@ class Taxonomy:
             yield (program_path, taxons)
 
 
-if __name__ == "__main__": # pragma: no cover
+if __name__ == "__main__":
     generate_programs = __import__("program_generator").generate_programs
     generate_paths_and_labels = __import__("label_generators").generate_paths_and_labels
     chain = __import__("itertools").chain
