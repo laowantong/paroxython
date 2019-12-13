@@ -44,7 +44,7 @@ pytest.main(args=["-q"])
 
 @pytest.mark.parametrize("label_name, source, results", examples)
 def test_example(label_name, source, results):
-    source = regex.sub(r"(?m)^.{4}", "", source)
+    source = regex.sub(r"(?m)^.{1,4}", "", source)
     actual = dict(parse(source))
     keys = set(actual.keys())
     for (label_name, expected_spans) in results:
