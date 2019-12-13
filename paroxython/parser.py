@@ -46,7 +46,7 @@ class Parser:
     def __call__(self, source, yield_failed_matches=False):
         try:
             tree = ast.parse(source)
-        except:
+        except (SyntaxError, ValueError):
             return print("Warning: unable to construct the AST")
         self.flat_ast = simplify_negative_litterals(flatten(tree))
         for (label_name, rex) in self.constructs.items():

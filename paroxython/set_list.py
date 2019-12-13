@@ -8,7 +8,7 @@ class SetList(UserList):
 
     def __init__(self, values=None):
         UserList.__init__(self)
-        if values != None:
+        if values is not None:
             self.extend(values)
         if isinstance(values, (set, frozenset, type(dict().keys()))):
             self.data.sort()
@@ -44,17 +44,17 @@ class SetList(UserList):
             return False
 
     def pop(self, *, value=None, index=None):
-        if index != None and not isinstance(index, int):
+        if index is not None and not isinstance(index, int):
             raise KeyError("Index must be specified as an integer.", index)
-        if value != None and index != None:
+        if value is not None and index is not None:
             raise KeyError(
                 "Pop can remove an item by index or value but not"
                 " both.  Value specified: %s, index specified: %d." % (value, index)
             )
-        if index != None:
+        if index is not None:
             return self.data.pop(index)
-        elif value != None:
-            if not value in self.data:
+        elif value is not None:
+            if value not in self.data:
                 raise KeyError(f"`{value}` not in {self}.")
             i = self.data.index(value)
             return self.data.pop(i)
@@ -70,14 +70,14 @@ class SetList(UserList):
             values.sort()
         counter = 0
         for v in values:
-            if self.append(v) == True:
+            if self.append(v):
                 counter += 1
         return counter
 
     def difference(self, other):
         new = SetList()
         for value in self:
-            if not value in other:
+            if value not in other:
                 new.append(value)
         return new
 
@@ -96,27 +96,26 @@ class SetList(UserList):
 
     def issubset(self, other):
         for value in self:
-            if not value in other:
+            if value not in other:
                 return False
         return True
 
     def issuperset(self, other):
         for value in other:
-            if not value in self:
+            if value not in self:
                 return False
         return True
 
     def symmetric_difference(self, other):
         new = self.difference(other)
         for value in other:
-            if not value in self:
+            if value not in self:
                 new.append(value)
         return new
 
     @staticmethod
     def _re_sort(item):
-        ## Exists so that it can be replaced by assignment on specific
-        ## instances.
+        # Exists so that it can be replaced by assignment on specific instances.
         return item
 
     @property

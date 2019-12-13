@@ -1,21 +1,32 @@
 """
 .. module:: minimizer
-	:author: Alexander S. Groden (adaptated for Paroxython by Aristide Grange)
-	:synopsis: Minimizes Python code using Python's lexical scanning tokenize module.
+    :author: Alexander S. Groden (adaptated for Paroxython by Aristide Grange)
+    :synopsis: Minimizes Python code using Python's lexical scanning tokenize module.
 """
 
 
 from io import StringIO
-from token import COMMENT, DEDENT, ENDMARKER, INDENT, NAME, NEWLINE, NL, OP, STRING
+from token import (
+    COMMENT,
+    DEDENT,
+    ENDMARKER,
+    INDENT,
+    NAME,
+    NEWLINE,
+    NL,
+    OP,
+    STRING,
+    NUMBER,
+)
 from tokenize import generate_tokens
 
 
 # classes / helpers ############################################################
 def enum(*sequential, **named):
     """Makes an enum type with a reverse mapping for lookup of the enum string.
-	Included for portability sake.
-	Taken from: https://stackoverflow.com/a/1695250
-	"""
+    Included for portability sake.
+    Taken from: https://stackoverflow.com/a/1695250
+    """
     enums = dict(zip(sequential, range(len(sequential))), **named)
     reverse = {value: key for key, value in enums.items()}
     enums["reverse_mapping"] = reverse
@@ -24,10 +35,10 @@ def enum(*sequential, **named):
 
 class TokenGroup(object):
     """A class for keeping track of a group of tokens.
-	Token groups are meant to be a collection of tokens that are lexicographically
-	adjacent on a line. This helps to easily remove comments, docstrings, and
-	blank lines.
-	"""
+    Token groups are meant to be a collection of tokens that are lexicographically
+    adjacent on a line. This helps to easily remove comments, docstrings, and
+    blank lines.
+    """
 
     Type = enum(
         "UNKNOWN",
@@ -51,7 +62,7 @@ class TokenGroup(object):
 
     def untokenize(self, rmwspace=False, wspace_char=" "):
         """Untokenize this group.
-		"""
+        """
         ret = ""
         prev = None
         for tok in self._tokens:
@@ -75,7 +86,7 @@ class TokenGroup(object):
 
     def append(self, tok):
         """Append a token to this group. Will update the group type as needed.
-		"""
+        """
 
         def get_type(t):
             if t[0] == NAME or tok[0] == OP:
@@ -106,30 +117,14 @@ class TokenGroup(object):
         elif self.type == TokenGroup.Type.DOCSTRING and tok[0] not in (STRING, NEWLINE):
             self.type = get_type(tok)
 
-    def __str__(self):
-        """Prints TokenGroup information for easier debugging.
-		"""
-
-        def readable_token(tok):
-            return "({}, {}, {}, {}, {})".format(
-                tok_name[tok[0]], repr(tok[1]), tok[2], tok[3], repr(tok[4])
-            )
-
-        # function body #
-        return "TokenGroup {{ type: {}, tokens: [{}] }}".format(
-            TokenGroup.Type.reverse_mapping[self.type],
-            ", ".join([readable_token(tok) for tok in self._tokens]),
-        )
-
 
 # module functions #############################################################
 def group_tokens(sbuf):
     """Groups tokens by line. Splits indents and dedents into their own group.
-	"""
+    """
     io_wrapper = StringIO(sbuf)
     groups = []
     group = TokenGroup()
-    bracket_ctr = 0
     for tok in generate_tokens(io_wrapper.readline):
         if tok[0] in (NEWLINE, NL, ENDMARKER, INDENT, DEDENT):
             group.append(tok)
@@ -142,8 +137,8 @@ def group_tokens(sbuf):
 
 def untokenize(tgroups, rmwspace=False, wspace_char=" ", indent_char="\t"):
     """Untokenizes groups of tokens into a string.
-	Can optionally remove whitespace and change the whitespace and indent character.
-	"""
+    Can optionally remove whitespace and change the whitespace and indent character.
+    """
     ret = []
     indent_lvl = 0
     for grp in tgroups:
@@ -163,19 +158,19 @@ def untokenize(tgroups, rmwspace=False, wspace_char=" ", indent_char="\t"):
 
 def remove_blank_lines(token_groups):
     """Removes blank lines from the token groups.
-	"""
+    """
     return [grp for grp in token_groups if grp.type != TokenGroup.Type.BLANK_LINE]
 
 
 def remove_docstrings(token_groups):
     """Removes docstrings from the token groups.
-	"""
+    """
     return [grp for grp in token_groups if grp.type != TokenGroup.Type.DOCSTRING]
 
 
 def remove_comments(token_groups):
     """Removes comment lines and inline comments from the token groups.
-	"""
+    """
     inline_comment_ctr = 0
     tmp = []
     for grp in token_groups:
@@ -202,7 +197,7 @@ def minimize(
     indent_char=" " * 4,
 ):
     """Convenience function for performing all the possible minimization functions.
-	"""
+    """
     grps = group_tokens(sbuf)
     if rm_blank_lines:
         grps = remove_blank_lines(grps)

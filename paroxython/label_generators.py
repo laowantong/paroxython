@@ -3,8 +3,6 @@ from bisect import insort
 from collections import defaultdict
 from pathlib import Path
 
-import regex
-
 sys.path[0:0] = [str(Path(__file__).parent)]
 
 from parser import Parser
