@@ -1,4 +1,5 @@
-https://travis-ci.com/laowantong/paroxython.svg?branch=master
+[![Build Status](https://travis-ci.com/laowantong/paroxython.svg?branch=master)](https://travis-ci.com/laowantong/paroxython)
 
-# paroxython
+# Paroxython
  
+Coming soon.
