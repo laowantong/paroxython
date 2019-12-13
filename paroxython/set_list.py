@@ -55,7 +55,7 @@ class SetList(UserList):
             return self.data.pop(index)
         elif value != None:
             if not value in self.data:
-                raise KeyError("`%s` not in %s." % (value, self))
+                raise KeyError(f"`{value}` not in {self}.")
             i = self.data.index(value)
             return self.data.pop(i)
         else:

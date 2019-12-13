@@ -17,7 +17,7 @@ def enum(*sequential, **named):
 	Taken from: https://stackoverflow.com/a/1695250
 	"""
     enums = dict(zip(sequential, range(len(sequential))), **named)
-    reverse = dict((value, key) for key, value in enums.items())
+    reverse = {value: key for key, value in enums.items()}
     enums["reverse_mapping"] = reverse
     return type("Enum", (), enums)
 

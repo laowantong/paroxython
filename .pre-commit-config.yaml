@@ -5,11 +5,18 @@ repos:
     rev: v2.4.0
     hooks:
     -   id: trailing-whitespace
-        exclude: snapshots/*|tests/data/taxons_and_programs\.txt
+        exclude: snapshots/*|tests/data/taxons_and_programs\.txt|taxonomies/*
     -   id: end-of-file-fixer
         exclude: snapshots/*|tests/data/taxons_and_programs\.txt
     -   id: check-yaml
     -   id: check-added-large-files
+    -   id: check-json
+    -   id: requirements-txt-fixer
+-   repo: https://github.com/asottile/pyupgrade
+    rev: v1.25.2
+    hooks:
+    -   id: pyupgrade
+        exclude: snapshots/*
 -   repo: https://github.com/psf/black
     rev: 19.3b0
     hooks:
