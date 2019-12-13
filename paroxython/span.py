@@ -17,7 +17,7 @@ class Span:
             return cls.existing_instances[key]
         self = super().__new__(cls)
         # __init__ logic goes here  -- will only run once
-        (self.start, self.end) = self.line_numbers = key
+        (self.start, self.end) = key
         self.length = self.end - self.start
         if self.length == 0:
             self.string = f"{self.start}"
