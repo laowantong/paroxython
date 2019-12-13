@@ -55,7 +55,7 @@ class Taxonomy:
         for (name, span_bag) in taxons:
             if name.startswith(previous_name):
                 previous_span_bag.subtract(span_bag)
-            else:
+            else:  # This is necessarily executed on the first iteration, if any.
                 previous_name = name
                 previous_span_bag = span_bag
         result = []
