@@ -129,22 +129,24 @@ class ProgramFilter:
         key = lambda p: len(extra_taxons[p]) + len(lacking_taxons[p])
         self.result.sort(key=key, reverse=reverse)
 
-    def print_results(self):
+    def __repr__(self):
+        result = []
         for program_name in self.result:
             program = self.programs[program_name]
-            print()
-            print("-" * 80)
-            print(program_name)
-            print("-" * 80)
-            print(program["source"])
-            print()
+            result.append("")
+            result.append("-" * 80)
+            result.append(program_name)
+            result.append("-" * 80)
+            result.append(program["source"])
+            result.append("")
             for (other_name, spans) in program["taxons"].items():
-                print(f"{len(spans):3}: {other_name}")
-        print("-" * 80)
+                result.append(f"{len(spans):3}: {other_name}")
+        result.append("-" * 80)
         self.counts["remaining"] = len(self.result)
         for (description, count) in self.counts.items():
             plural = "" if count == 1 else "s"
-            print(f"{count:3} program{plural} {description}")
+            result.append(f"{count:3} program{plural} {description}")
+        return "\n".join(result)
 
 
 if __name__ == "__main__":
@@ -168,4 +170,4 @@ if __name__ == "__main__":
     f.filter_mandatory_taxons(mandatory_patterns)
     f.filter_blacklisted_programs(blacklisted_patterns)
     f.sort_by_taxon_count()
-    f.print_results()
+    print(f)
