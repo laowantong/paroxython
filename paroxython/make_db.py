@@ -104,7 +104,7 @@ def to_Json(db):
     return text
 
 
-if __name__ == "__main__":
+if __name__ == "__main__": # pragma: no cover
     directories = [
         "../Python/project_euler",
         # "../Python/maths",
