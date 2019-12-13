@@ -5,6 +5,9 @@ python:
 install:
   - pip install -r requirements.txt
   - pip install pytest pytest-cov
+  - pip install coverage
 # command to run tests
 script:
   - pytest --cov=./
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
