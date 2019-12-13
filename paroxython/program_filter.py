@@ -3,10 +3,6 @@ import json
 from regex import compile
 import sys
 
-sys.path[0:0] = [str(Path(__file__).parent)]
-
-from set_list import SetList
-
 
 class ProgramFilter:
     def __init__(self, db):
@@ -15,8 +11,18 @@ class ProgramFilter:
         self.reset()
 
     def reset(self):
-        self.result = SetList(self.programs.keys())
+        self.result = list(self.programs.keys())
         self.counts = {"initially": len(self.result)}
+
+    def remove_from_result(self, elements):
+        """Functionally equivalent to self.result.difference_update(elements).
+        Complexity:
+            O(1) when elements is empty
+            O(len(self.result)) when elements is a set
+            O(len(self.result) * len(elements)) otherwise (should not happen)
+        """
+        if elements:
+            self.result[:] = [x for x in self.result if x not in elements]
 
     def filter_blacklisted_programs(self, program_names):
         """Suppress from self.result all programs whose name matches any
@@ -24,9 +30,11 @@ class ProgramFilter:
         count = len(self.result)
         if program_names:
             match_program = compile("|".join(program_names)).match
+            acc = set()
             for program_name in list(self.result):
                 if match_program(program_name):
-                    self.result.discard(program_name)
+                    acc.add(program_name)
+            self.remove_from_result(acc)
         self.counts["blacklisted"] = count - len(self.result)
 
     def filter_forbidden_taxons(self, taxon_names):
@@ -34,9 +42,11 @@ class ProgramFilter:
         count = len(self.result)
         if taxon_names:
             match_taxon = compile("|".join(taxon_names)).match
+            acc = set()
             for (taxon_name, program_names) in self.taxons.items():
                 if match_taxon(taxon_name):  # this taxon is forbidden
-                    self.result = self.result.difference(program_names)
+                    acc.update(program_names)
+            self.remove_from_result(acc)
         self.counts["tagged with a forbidden taxon"] = count - len(self.result)
 
     def filter_mandatory_taxons(self, taxon_names):
@@ -45,14 +55,16 @@ class ProgramFilter:
         count = len(self.result)
         if taxon_names:
             match_taxons = [compile(row).match for row in taxon_names]
+            acc = set()
             for program_name in list(self.result):
                 for match_taxon in match_taxons:
                     for taxon_name in self.programs[program_name]["taxons"]:
                         if match_taxon(taxon_name):  # this mandatory taxon is used
                             break  # no need to test the other taxons of this program
                     else:  # this mandatory taxon is not used by this program
-                        self.result.discard(program_name)
+                        acc.add(program_name)
                         break  # no need to test the other mandatory taxons
+            self.remove_from_result(acc)
         self.counts["not tagged with a mandatory taxon"] = count - len(self.result)
 
     def get_taxons_in_programs(self, program_names):
