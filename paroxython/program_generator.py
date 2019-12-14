@@ -4,7 +4,7 @@ import regex
 match_excluded = regex.compile(r"__init__\.py|setup\.py|.*[-_]tests?\.py").match
 
 
-def generate_programs(directory, cleanup_strategy="minimize"):
+def generate_programs(directory, cleanup_strategy="strip_docs"):
     """Yield the path and the cleaned up source of all programs in a given directory.
 
     Input: a string or a pathlib.Path representing the directory path.
@@ -12,11 +12,11 @@ def generate_programs(directory, cleanup_strategy="minimize"):
     Output: couples of Python programs' `pathlib.Path`s and their contents.
     """
 
-    if cleanup_strategy == "minimize":
-        minimize = __import__("minimizer").minimize
+    if cleanup_strategy == "strip_docs":
+        strip_docs = __import__("strip_docs").strip_docs
         main = regex.compile(r"(?ms)^if +__name__ *== *.__main__. *:.+").sub
         decorator = regex.compile(r"(?m)^\s*@.+\n").sub
-        cleanup = lambda source: decorator("", main("", minimize(source)))
+        cleanup = lambda source: decorator("", main("", strip_docs(source)))
     else:
         cleanup = lambda source: source
 

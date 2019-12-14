@@ -480,14 +480,34 @@ def solution(n): # function_definition:solution (-> +8)
 # ../Python/project_euler/problem_08/sol2.py
 # ----------------------------------------------------------------------------------------
 from functools import reduce # import_from:functools
-N = ( # assignment, global_constant_definition, literal:Tuple
+N = ( # assignment, global_constant_definition
+    "73167176531330624919225119674426574742355349194934" # literal:Str
+    "96983520312774506326239578318016984801869478851843"
+    "85861560789112949495459501737958331952853208805511"
+    "12540698747158523863050715693290963295227443043557"
+    "66896648950445244523161731856403098711121722383113"
+    "62229893423380308135336276614282806444486645238749"
+    "30358907296290491560440772390713810515859307960866"
+    "70172427121883998797908792274921901699720888093776"
+    "65727333001053367881220235421809751254540594752243"
+    "52584907711670556013604839586446706324415722155397"
+    "53697817977846174064955149290862569321978468622482"
+    "83972241375657056057490261407972968652414535100474"
+    "82166370484403199890008895243450658541227588666881"
+    "16427171479924442928230863465674813919123162824586"
+    "17866458359124566529476545682848912883142607690042"
+    "24219022671055626321111109370544217506941658960408"
+    "07198403850962455444362981230987879927244284909188"
+    "84580156166097919133875499200524063689912560717606"
+    "05886116467109405077541002256983155200055935729725"
+    "71636269561882670428252483600823257530420752963450"
 )
 def solution(n): # function_definition:solution (-> +4)
     return max( # composition, function_call:max
-    [
-    reduce(lambda x, y: int(x) * int(y), n[i : i + 13]) # binary_operator:Add, binary_operator:Mult, composition, function_call:int, function_call:reduce, lambda_function, literal:Num, slice, suggest_constant_definition
-    for i in range(len(n) - 12) # binary_operator:Sub, composition, function_call:len, function_call:range, literal:Num, suggest_constant_definition
-    ]
+        [
+            reduce(lambda x, y: int(x) * int(y), n[i : i + 13]) # binary_operator:Add, binary_operator:Mult, composition, function_call:int, function_call:reduce, lambda_function, literal:Num, slice, suggest_constant_definition
+            for i in range(len(n) - 12) # binary_operator:Sub, composition, function_call:len, function_call:range, literal:Num, suggest_constant_definition
+        ]
     )
 
 # ----------------------------------------------------------------------------------------
@@ -565,11 +585,11 @@ def solution(n): # function_definition:solution (-> +10)
 # ----------------------------------------------------------------------------------------
 def solution(): # function_definition:solution (-> +7)
     return [
-    a * b * c # binary_operator:Mult, index
-    for a in range(1, 999) # function_call:range, literal:Num, suggest_constant_definition
-    for b in range(a, 999) # function_call:range, literal:Num, suggest_constant_definition
-    for c in range(b, 999) # function_call:range, literal:Num, suggest_constant_definition
-    if (a * a + b * b == c * c) and (a + b + c == 1000) # binary_operator:Add, binary_operator:Mult, boolean_operator:And, comparison_operator:Eq, literal:Num, suggest_constant_definition
+        a * b * c # binary_operator:Mult, index
+        for a in range(1, 999) # function_call:range, literal:Num, suggest_constant_definition
+        for b in range(a, 999) # function_call:range, literal:Num, suggest_constant_definition
+        for c in range(b, 999) # function_call:range, literal:Num, suggest_constant_definition
+        if (a * a + b * b == c * c) and (a + b + c == 1000) # binary_operator:Add, binary_operator:Mult, boolean_operator:And, comparison_operator:Eq, literal:Num, suggest_constant_definition
     ][0] # literal:Num
 
 # ----------------------------------------------------------------------------------------
@@ -644,17 +664,17 @@ def largest_product(grid): # function_definition:largest_product (-> +27)
             horzProduct = grid[i][j] * grid[i][j + 1] * grid[i][j + 2] * grid[i][j + 3] # assignment, binary_operator:Add, binary_operator:Mult, index, index_arithmetic, literal:Num, suggest_constant_definition
             if i < nColumns - 3: # binary_operator:Sub, comparison_operator:Lt, if, literal:Num, suggest_constant_definition
                 lrDiagProduct = ( # assignment
-                grid[i][j] # binary_operator:Mult, index
-                * grid[i + 1][j + 1] # binary_operator:Add, index, index_arithmetic, literal:Num
-                * grid[i + 2][j + 2] # binary_operator:Add, binary_operator:Mult, index, index_arithmetic, literal:Num
-                * grid[i + 3][j + 3] # binary_operator:Add, binary_operator:Mult, index, index_arithmetic, literal:Num, suggest_constant_definition
+                    grid[i][j] # binary_operator:Mult, index
+                    * grid[i + 1][j + 1] # binary_operator:Add, index, index_arithmetic, literal:Num
+                    * grid[i + 2][j + 2] # binary_operator:Add, binary_operator:Mult, index, index_arithmetic, literal:Num
+                    * grid[i + 3][j + 3] # binary_operator:Add, binary_operator:Mult, index, index_arithmetic, literal:Num, suggest_constant_definition
                 )
             if i > 2: # comparison_operator:Gt, if, literal:Num
                 rlDiagProduct = ( # assignment
-                grid[i][j] # binary_operator:Mult, index
-                * grid[i - 1][j + 1] # binary_operator:Add, binary_operator:Sub, index, index_arithmetic, literal:Num
-                * grid[i - 2][j + 2] # binary_operator:Add, binary_operator:Mult, binary_operator:Sub, index, index_arithmetic, literal:Num
-                * grid[i - 3][j + 3] # binary_operator:Add, binary_operator:Mult, binary_operator:Sub, index, index_arithmetic, literal:Num, suggest_constant_definition
+                    grid[i][j] # binary_operator:Mult, index
+                    * grid[i - 1][j + 1] # binary_operator:Add, binary_operator:Sub, index, index_arithmetic, literal:Num
+                    * grid[i - 2][j + 2] # binary_operator:Add, binary_operator:Mult, binary_operator:Sub, index, index_arithmetic, literal:Num
+                    * grid[i - 3][j + 3] # binary_operator:Add, binary_operator:Mult, binary_operator:Sub, index, index_arithmetic, literal:Num, suggest_constant_definition
                 )
             maxProduct = max(vertProduct, horzProduct, lrDiagProduct, rlDiagProduct) # assignment, function_call:max
             if maxProduct > largest: # comparison_operator:Gt, if
@@ -941,11 +961,11 @@ def sum_of_divisors(n): # function_definition:sum_of_divisors (-> +7)
     return total - n # binary_operator:Sub
 def solution(n): # function_definition:solution (-> +8)
     total = sum( # assignment, composition, function_call:sum
-    [
-    i
-    for i in range(1, n) # function_call:range, literal:Num
-    if sum_of_divisors(sum_of_divisors(i)) == i and sum_of_divisors(i) != i # boolean_operator:And, comparison_operator:Eq, comparison_operator:NotEq, composition, function_call:sum_of_divisors
-    ]
+        [
+            i
+            for i in range(1, n) # function_call:range, literal:Num
+            if sum_of_divisors(sum_of_divisors(i)) == i and sum_of_divisors(i) != i # boolean_operator:And, comparison_operator:Eq, comparison_operator:NotEq, composition, function_call:sum_of_divisors
+        ]
     )
     return total
 
@@ -1178,21 +1198,21 @@ def solution(n): # function_definition:solution (-> +1)
 import itertools # import:itertools
 def isCombinationValid(combination): # function_definition:isCombinationValid (-> +6)
     return ( # boolean_operator:Or
-    int("".join(combination[0:2])) * int("".join(combination[2:5])) # binary_operator:Mult, composition, function_call:int, literal:Num, literal:Str, method_call:join, slice, suggest_constant_definition
-    == int("".join(combination[5:9])) # comparison_operator:Eq, composition, function_call:int, literal:Num, literal:Str, method_call:join, slice, suggest_constant_definition
+        int("".join(combination[0:2])) * int("".join(combination[2:5])) # binary_operator:Mult, composition, function_call:int, literal:Num, literal:Str, method_call:join, slice, suggest_constant_definition
+        == int("".join(combination[5:9])) # comparison_operator:Eq, composition, function_call:int, literal:Num, literal:Str, method_call:join, slice, suggest_constant_definition
     ) or (
-    int("".join(combination[0])) * int("".join(combination[1:5])) # binary_operator:Mult, composition, function_call:int, index, literal:Num, literal:Str, method_call:join, slice, suggest_constant_definition
-    == int("".join(combination[5:9])) # comparison_operator:Eq, composition, function_call:int, literal:Num, literal:Str, method_call:join, slice, suggest_constant_definition
+        int("".join(combination[0])) * int("".join(combination[1:5])) # binary_operator:Mult, composition, function_call:int, index, literal:Num, literal:Str, method_call:join, slice, suggest_constant_definition
+        == int("".join(combination[5:9])) # comparison_operator:Eq, composition, function_call:int, literal:Num, literal:Str, method_call:join, slice, suggest_constant_definition
     )
 def solution(): # function_definition:solution (-> +6)
     return sum( # composition, function_call:sum
-    set( # composition, function_call:set
-    [
-    int("".join(pandigital[5:9])) # composition, function_call:int, literal:Num, literal:Str, method_call:join, slice, suggest_constant_definition
-    for pandigital in itertools.permutations("123456789") # literal:Str, method_call:permutations
-    if isCombinationValid(pandigital) # function_call:isCombinationValid
-    ]
-    )
+        set( # composition, function_call:set
+            [
+                int("".join(pandigital[5:9])) # composition, function_call:int, literal:Num, literal:Str, method_call:join, slice, suggest_constant_definition
+                for pandigital in itertools.permutations("123456789") # literal:Str, method_call:permutations
+                if isCombinationValid(pandigital) # function_call:isCombinationValid
+            ]
+        )
     )
 
 # ----------------------------------------------------------------------------------------
@@ -1245,13 +1265,13 @@ def solution(): # function_definition:solution (-> +14)
         i += 1 # augmented_assignment, literal:Num
     constant = "".join(constant) # assignment, literal:Str, method_call:join
     return (
-    int(constant[0]) # binary_operator:Mult, function_call:int, index, literal:Num
-    * int(constant[9]) # function_call:int, index, literal:Num, suggest_constant_definition
-    * int(constant[99]) # binary_operator:Mult, function_call:int, index, literal:Num, suggest_constant_definition
-    * int(constant[999]) # binary_operator:Mult, function_call:int, index, literal:Num, suggest_constant_definition
-    * int(constant[9999]) # binary_operator:Mult, function_call:int, index, literal:Num, suggest_constant_definition
-    * int(constant[99999]) # binary_operator:Mult, function_call:int, index, literal:Num, suggest_constant_definition
-    * int(constant[999999]) # binary_operator:Mult, function_call:int, index, literal:Num, suggest_constant_definition
+        int(constant[0]) # binary_operator:Mult, function_call:int, index, literal:Num
+        * int(constant[9]) # function_call:int, index, literal:Num, suggest_constant_definition
+        * int(constant[99]) # binary_operator:Mult, function_call:int, index, literal:Num, suggest_constant_definition
+        * int(constant[999]) # binary_operator:Mult, function_call:int, index, literal:Num, suggest_constant_definition
+        * int(constant[9999]) # binary_operator:Mult, function_call:int, index, literal:Num, suggest_constant_definition
+        * int(constant[99999]) # binary_operator:Mult, function_call:int, index, literal:Num, suggest_constant_definition
+        * int(constant[999999]) # binary_operator:Mult, function_call:int, index, literal:Num, suggest_constant_definition
     )
 
 # ----------------------------------------------------------------------------------------
@@ -1267,10 +1287,10 @@ def solution(): # function_definition:solution (-> +13)
         words = f.readline() # assignment, method_call:readline
     words = list(map(lambda word: word.strip('"'), words.strip("\r\n").split(","))) # assignment, composition, function_call:list, function_call:map, lambda_function, literal:Str, method_call:split, method_call:strip, method_chaining
     words = list( # assignment, composition, function_call:list
-    filter( # composition, function_call:filter
-    lambda word: word in TRIANGULAR_NUMBERS, # comparison_operator:In, lambda_function
-    map(lambda word: sum(map(lambda x: ord(x) - 64, word)), words), # binary_operator:Sub, composition, function_call:map, function_call:ord, function_call:sum, lambda_function, literal:Num, suggest_constant_definition
-    )
+        filter( # composition, function_call:filter
+            lambda word: word in TRIANGULAR_NUMBERS, # comparison_operator:In, lambda_function
+            map(lambda word: sum(map(lambda x: ord(x) - 64, word)), words), # binary_operator:Sub, composition, function_call:map, function_call:ord, function_call:sum, lambda_function, literal:Num, suggest_constant_definition
+        )
     )
     return len(words) # function_call:len
 
@@ -1290,12 +1310,12 @@ def solution(): # function_definition:solution (-> +12)
     i = 1 # assignment, literal:Num
     while True: # literal:True
         if ( # if
-        sorted(list(str(i))) # chained_comparison:5, composition, function_call:list, function_call:sorted, function_call:str
-        == sorted(list(str(2 * i))) # binary_operator:Mult, comparison_operator:Eq, composition, function_call:list, function_call:sorted, function_call:str, literal:Num
-        == sorted(list(str(3 * i))) # binary_operator:Mult, composition, function_call:list, function_call:sorted, function_call:str, literal:Num, suggest_constant_definition
-        == sorted(list(str(4 * i))) # binary_operator:Mult, composition, function_call:list, function_call:sorted, function_call:str, literal:Num, suggest_constant_definition
-        == sorted(list(str(5 * i))) # binary_operator:Mult, composition, function_call:list, function_call:sorted, function_call:str, literal:Num, suggest_constant_definition
-        == sorted(list(str(6 * i))) # binary_operator:Mult, composition, function_call:list, function_call:sorted, function_call:str, literal:Num, suggest_constant_definition
+            sorted(list(str(i))) # chained_comparison:5, composition, function_call:list, function_call:sorted, function_call:str
+            == sorted(list(str(2 * i))) # binary_operator:Mult, comparison_operator:Eq, composition, function_call:list, function_call:sorted, function_call:str, literal:Num
+            == sorted(list(str(3 * i))) # binary_operator:Mult, composition, function_call:list, function_call:sorted, function_call:str, literal:Num, suggest_constant_definition
+            == sorted(list(str(4 * i))) # binary_operator:Mult, composition, function_call:list, function_call:sorted, function_call:str, literal:Num, suggest_constant_definition
+            == sorted(list(str(5 * i))) # binary_operator:Mult, composition, function_call:list, function_call:sorted, function_call:str, literal:Num, suggest_constant_definition
+            == sorted(list(str(6 * i))) # binary_operator:Mult, composition, function_call:list, function_call:sorted, function_call:str, literal:Num, suggest_constant_definition
         ):
             return i
         i += 1 # augmented_assignment, literal:Num
@@ -1430,11 +1450,11 @@ def solution(n): # function_definition:solution (-> +12)
 # ----------------------------------------------------------------------------------------
 def maximum_digital_sum(a: int, b: int) -> int: # function_definition:maximum_digital_sum
     return max( # composition, function_call:max
-    [
-    sum([int(x) for x in str(base ** power)]) # binary_operator:Pow, composition, function_call:int, function_call:str, function_call:sum
-    for base in range(a) # function_call:range
-    for power in range(b) # function_call:range
-    ]
+        [
+            sum([int(x) for x in str(base ** power)]) # binary_operator:Pow, composition, function_call:int, function_call:str, function_call:sum
+            for base in range(a) # function_call:range
+            for power in range(b) # function_call:range
+        ]
     )
 
 # ----------------------------------------------------------------------------------------
