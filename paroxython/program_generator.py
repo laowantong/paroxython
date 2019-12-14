@@ -12,13 +12,12 @@ def generate_programs(directory, cleanup_strategy="strip_docs"):
     Output: couples of Python programs' `pathlib.Path`s and their contents.
     """
 
+    cleanup = lambda source: source
     if cleanup_strategy == "strip_docs":
         strip_docs = __import__("strip_docs").strip_docs
-        main = regex.compile(r"(?ms)^if +__name__ *== *.__main__. *:.+").sub
-        decorator = regex.compile(r"(?m)^\s*@.+\n").sub
-        cleanup = lambda source: decorator("", main("", strip_docs(source)))
-    else:
-        cleanup = lambda source: source
+        sub_main = regex.compile(r"(?ms)^if +__name__ *== *.__main__. *:.+").sub
+        sub_decorator = regex.compile(r"(?m)^\s*@.+\n").sub
+        cleanup = lambda source: sub_decorator("", sub_main("", strip_docs(source)))
 
     directory = Path(directory)
     for path in sorted(directory.rglob("*.py")):
