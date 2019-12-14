@@ -135,7 +135,7 @@ class ProgramFilter:
         self.sort(lambda p: len(lacking_taxons[p]), reverse)
 
     def sort_by_distance(self, taxon_names, reverse=False):
-        """Sort the programs by number of exta and lacking taxons wrt a given list."""
+        """Sort the programs by number of extra and lacking taxons wrt a given list."""
         extra_taxons = self.get_extra_taxons(taxon_names)
         lacking_taxons = self.get_lacking_taxons(taxon_names)
         self.sort(lambda p: len(extra_taxons[p]) + len(lacking_taxons[p]), reverse)

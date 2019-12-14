@@ -110,9 +110,6 @@ program_8
 4   X/S/M/L/+2  O/J/  Y/E/  O/C/
 5   X/K/  O/N/P/
 6   X/S/M/L/R/D/  O/C/H/B/
-7   
-8   Y/
-9   X/
 
 program_9
 1   X/W/

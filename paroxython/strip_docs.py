@@ -37,7 +37,7 @@ def strip_docs(source):
         previous_end_row = end_row
     result = "".join(result).strip()
     result = replace_blank_lines("\n", result)
-    result = replace_pass(r"\1", result)  # suppress useless pass statements
+    result = replace_pass(r"\1", result)  # suppress most useless pass statements
     return result
 
 

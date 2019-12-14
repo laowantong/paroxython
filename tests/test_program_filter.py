@@ -130,7 +130,7 @@ def test_get_extra_taxons():
         "program_5": [],
         "program_6": ["Y/T/Q/", "Y/T/", "Y/E/"],
         "program_7": ["Y/E/", "Y/T/Q/", "Y/T/"],
-        "program_8": ["Y/E/", "Y/"],
+        "program_8": ["Y/E/"],
         "program_9": ["Y/", "Y/T/Q/", "Y/E/", "Y/T/"],
     }
 
@@ -234,7 +234,15 @@ def test_sort_by_distance():
             "X/S/M/L/$",
         ],
         "program_7": ["O/N/P/$", "X/S/M/L/V/$", "O/C/H/$", "Y/$"],
-        "program_8": ["Y/T/$", "X/S/M/L/R/$", "X/S/M/$", "O/C/H/$", "X/S/$", "O/$"],
+        "program_8": [
+            "Y/T/$",
+            "X/S/M/L/R/$",
+            "X/S/M/$",
+            "O/C/H/$",
+            "X/S/$",
+            "Y/$",
+            "O/$",
+        ],
         "program_9": ["O/N/P/$", "O/C/H/B/$", "O/C/F/U/$", "X/S/$", "X/S/M/L/$"],
     }
     extra = f.get_extra_taxons(taxon_names)
@@ -256,7 +264,7 @@ def test_sort_by_distance():
             "O/C/H/B/I/",
         ],
         "program_7": ["O/N/", "Y/T/Q/", "X/", "O/C/H/B/I/", "X/S/M/L/R/D/"],
-        "program_8": ["X/W/", "O/C/", "O/N/", "X/S/M/L/R/D/A/", "X/S/M/L/R/D/", "X/"],
+        "program_8": ["X/W/", "O/C/", "O/N/", "X/S/M/L/R/D/A/", "X/S/M/L/R/D/"],
         "program_9": ["X/W/", "O/N/", "Y/T/Q/", "O/C/H/B/I/", "O/C/F/"],
     }
     f.sort_by_distance(taxon_names)
@@ -268,7 +276,7 @@ def test_sort_by_distance():
         "program_1",  # 6             5
         "program_4",  # 6             5
         "program_2",  # 7             5
-        "program_8",  # 6             6
+        "program_8",  # 7             5
         "program_5",  # 9             6
         "program_6",  # 9             8
     ]
@@ -281,17 +289,34 @@ def test_sort_by_taxon_count():
     assert f.result == [
         "program_5",
         "program_2",
+        "program_8",
         "program_1",
         "program_4",
         "program_6",
         "program_3",
-        "program_8",
         "program_9",
         "program_7",
     ]
     counts = [len(db["programs"][program_name]["taxons"]) for program_name in f.result]
     print(counts)
-    assert counts == [12, 13, 14, 14, 14, 15, 15, 15, 16]
+    assert counts == [12, 13, 13, 14, 14, 14, 15, 15, 16]
+
+
+def test_sort_by_line_count():
+    f.reset()
+    f.sort_by_line_count()
+    print(f.result)
+    assert f.result == [
+        "program_8",
+        "program_1",
+        "program_2",
+        "program_3",
+        "program_4",
+        "program_5",
+        "program_6",
+        "program_7",
+        "program_9",
+    ]
 
 
 pytest.main(args=["-q"])
