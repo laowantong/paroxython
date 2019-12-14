@@ -34,7 +34,10 @@ find_all_constructs = regex.compile(
 
 
 class Parser:
+    """Compile the given construct definitions, and search them in a source-code."""
+
     def __init__(self, ref_path="paroxython/ref.md"):
+        """Compile the constructs to search."""
         self.ref_path = Path(ref_path)
         text = self.ref_path.read_text()
         self.constructs = {}
@@ -44,6 +47,7 @@ class Parser:
             self.constructs[label_name] = regex.compile(f"(?mx){pattern}")
 
     def __call__(self, source, yield_failed_matches=False):
+        """Analyze a given program source and yield its labels and their spans."""
         try:
             tree = ast.parse(source)
         except (SyntaxError, ValueError):

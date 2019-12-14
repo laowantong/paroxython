@@ -4,6 +4,7 @@ from md_toc import build_toc
 
 import context
 from paroxython import parser
+from span import Span
 
 
 def reformat_file(construct_path):
@@ -39,7 +40,6 @@ for match in extract_examples(parse.ref_path):
     source = match.group(2)
     results = zip(match.captures("LABELS"), match.captures("LINES"))
     examples.append((label_name, source, results))
-pytest.main(args=["-q"])
 
 
 @pytest.mark.parametrize("label_name, source, results", examples)
@@ -57,3 +57,23 @@ def test_at_least_one_example_is_provided_for_each_construct():
     expected = set(parse.constructs)
     actual = {label_name.partition(":")[0] for (label_name, _, _) in examples}
     assert actual == expected
+
+
+def test_malformed_example():
+    source = "if foo():\nbar() # wrong indentation"
+    with pytest.raises(StopIteration):
+        next(parse(source))
+
+
+def test_failed_match():
+    source = "a = 42"
+    actual = dict(parse(source, yield_failed_matches=True))
+    assert actual.pop("assignment") == [Span([1])]
+    assert actual.pop("global_variable_definition") == [Span([1])]
+    assert actual.pop("literal:Num") == [Span([1])]
+    assert actual.pop("suggest_constant_definition") == [Span([1])]
+    for spans in actual.values():
+        assert not spans
+
+
+pytest.main(args=["-q"])
