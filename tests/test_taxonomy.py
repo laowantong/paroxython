@@ -1,5 +1,4 @@
 import pytest
-import regex
 from collections import Counter
 
 import context

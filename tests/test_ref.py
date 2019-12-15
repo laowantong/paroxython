@@ -65,7 +65,7 @@ def test_malformed_example():
         next(parse(source))
 
 
-def test_failed_match():
+def test_failed_matches():
     source = "a = 42"
     actual = dict(parse(source, yield_failed_matches=True))
     assert actual.pop("assignment") == [Span([1])]

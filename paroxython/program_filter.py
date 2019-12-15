@@ -1,7 +1,6 @@
 from pathlib import Path
 import json
 from regex import compile
-import sys
 
 
 class ProgramFilter:
