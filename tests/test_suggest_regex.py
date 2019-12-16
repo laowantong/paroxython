@@ -42,7 +42,7 @@ sources = r"""
 \n(?:\1.+\n)*?\1/value/operand/_hash=(?P=HASH) # match _hash
 >>>
 
-<<< Abstract bodies
+<<< Abstract bodies (one)
 /body/0/_type='For'
 /body/0/lineno=1
 /body/0/iter/_hash=0x4a4b82fd
@@ -56,6 +56,28 @@ sources = r"""
 \n(?:\1.+\n)* \1/(?P<_1>body/\d+)/_type='For'
 \n(?:\1.+\n)*?\1/(?P=_1)         /lineno=(?P<LINE>\d+)
 \n(?:\1.+\n)*?\1/(?P=_1)         /iter/_hash=(?P=HASH) # match _hash
+>>>
+
+<<< Abstract bodies (several)
+/body/0/_type='For'
+/body/0/lineno=1
+/body/0/target/id='element'
+/body/0/body/1/_type='If'
+/body/0/body/1/test/args/0/id='element'
+/body/0/body/1/body/1/lineno=5
+/body/0/body/1/body/1/value/_type='Call'
+/body/0/body/1/body/1/value/func/attr='append'
+/body/0/body/1/body/1/value/args/0/id='element'
+---
+           ^(.*)/_type='For'
+\n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
+\n(?:\1.+\n)*?\1/target/id=(?P<ID>.+) # capture id
+\n(?:\1.+\n)* \1/(?P<_1>body/\d+)/_type='If'
+\n(?:\1.+\n)*?\1/(?P=_1)         /test/args/0/id=(?P=ID) # match id
+\n(?:\1.+\n)* \1/(?P=_1)         /(?P<_2>body/\d+)/lineno=(?P<LINE>\d+)
+\n(?:\1.+\n)*?\1/(?P=_1)         /(?P=_2)         /value/_type='Call'
+\n(?:\1.+\n)*?\1/(?P=_1)         /(?P=_2)         /value/func/attr='append'
+\n(?:\1.+\n)*?\1/(?P=_1)         /(?P=_2)         /value/args/0/id=(?P=ID) # match id
 >>>
 """
 

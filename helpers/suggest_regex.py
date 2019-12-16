@@ -15,6 +15,7 @@ class Suggestion:
         for key in ("name", "id", "_hash", "_ids"):
             self.capture_and_match_key(key)
         self.abstract_body_prefix()
+        self.restore_greedy_quantifiers()
         return self.s
 
     def abstract_first_longest_prefix(self):
@@ -59,4 +60,12 @@ class Suggestion:
             for suffix in match.captures("SUFFIXES"):
                 repl.append(fr"{d['SKIP'][0]}/(?P=_{i}){offset}/{suffix}")
             self.s = self.s[: match.start()] + "".join(repl) + self.s[match.end() :]
-            self.s = self.s.replace(fr"?\1/{prefix}", fr" \1/{prefix}")
+
+    def restore_greedy_quantifiers(self):
+        result = []
+        for line in self.s.split("\n"):
+            if r"body/\d+" in line:
+                result.append(line.replace("*?", "* ", 1))
+            else:
+                result.append(line)
+        self.s = "\n".join(result)
