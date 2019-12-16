@@ -1,3 +1,9 @@
+"""Print the contents of a test file similar to tests/data/taxons_and_programs.txt.
+
+The current version of this file was generated with a seed of 1. For testing purposes,
+the sloc count of program_8 was manually altered by deleting its last three lines.
+"""
+
 import random
 import networkx as nx
 

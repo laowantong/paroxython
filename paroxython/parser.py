@@ -71,6 +71,7 @@ class Parser:
 
 
 if __name__ == "__main__":
+    """Take an individual source-code, print its constructs and write its flat AST."""
     time = __import__("time")
     source = Path("sandbox/source.py").read_text()
     for (i, line) in enumerate(source.splitlines(), 1):
