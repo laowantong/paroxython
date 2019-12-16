@@ -79,6 +79,34 @@ sources = r"""
 \n(?:\1.+\n)*?\1/(?P=_1)         /(?P=_2)         /value/func/attr='append'
 \n(?:\1.+\n)*?\1/(?P=_1)         /(?P=_2)         /value/args/0/id=(?P=ID) # match id
 >>>
+
+<<< Abstract bodies (sequence)
+/body/0/body/0/_type='Assign'
+/body/0/body/0/targets/0/id='candidate'
+/body/0/body/1/_type='For'
+/body/0/body/1/lineno=3
+/body/0/body/1/target/id='element'
+/body/0/body/1/body/0/_type='If'
+/body/0/body/1/body/0/test/_ids='is_better''candidate''element'
+/body/0/body/1/body/0/test/args/1/id='candidate'
+/body/0/body/1/body/0/body/0/_type='Assign'
+/body/0/body/1/body/0/body/0/lineno=5
+/body/0/body/1/body/0/body/0/targets/0/id='candidate'
+/body/0/body/1/body/0/body/0/value/id='element'
+---
+           ^(.*)/(?P<_1>body/\d+)/_type='Assign'
+\n(?:\1.+\n)*?\1/(?P=_1)         /targets/0/id=(?P<ID_1>.+) # capture id #1
+\n(?:\1.+\n)* \1/(?P<_2>body/\d+)/_type='For'
+\n(?:\1.+\n)*?\1/(?P=_2)         /lineno=(?P<LINE>\d+)
+\n(?:\1.+\n)*?\1/(?P=_2)         /target/id=(?P<ID_2>.+) # capture id #2
+\n(?:\1.+\n)* \1/(?P=_2)         /(?P<_3>body/\d+)/_type='If'
+\n(?:\1.+\n)*?\1/(?P=_2)         /(?P=_3)         /test/_ids='is_better''candidate''element'
+\n(?:\1.+\n)*?\1/(?P=_2)         /(?P=_3)         /test/args/1/id=(?P=ID_1) # match id #1
+\n(?:\1.+\n)* \1/(?P=_2)         /(?P=_3)         /(?P<_4>body/\d+)/_type='Assign'
+\n(?:\1.+\n)*?\1/(?P=_2)         /(?P=_3)         /(?P=_4)         /lineno=(?P<LINE>\d+)
+\n(?:\1.+\n)*?\1/(?P=_2)         /(?P=_3)         /(?P=_4)         /targets/0/id=(?P=ID_1) # match id #1
+\n(?:\1.+\n)*?\1/(?P=_2)         /(?P=_3)         /(?P=_4)         /value/id=(?P=ID_2) # match id #2
+>>>
 """
 
 source_rex = regex.compile(r"(?ms)^<<< ([^\n]+)\n(.+?\n)---\n(.+?\n)>>>")

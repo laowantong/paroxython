@@ -1823,9 +1823,9 @@ An accumulation pattern that, from a given collection, returns the best element 
 ##### Regex
 
 ```re
-      ^(.*?)/(?P<_1>body/\d+)/_type='Assign'
+           ^(.*)/(?P<_1>body/\d+)/_type='Assign'
 \n(?:\1.+\n)*?\1/(?P=_1)         /targets/0/id=(?P<CANDIDATE>.+) # capture candidate
-\n(?:\1.+\n)*?\1/(?P<_2>body/\d+)/_type='For'
+\n(?:\1.+\n)* \1/(?P<_2>body/\d+)/_type='For'
 \n(?:\1.+\n)*?\1/(?P=_2)         /lineno=(?P<LINE>\d+)
 \n(?:\1.+\n)*?\1/(?P=_2)         /target/id=(?P<ITER_VAR>.+) # capture iteration variable
 \n(?:\1.+\n)* \1/(?P=_2)         /(?P<_3>body/\d+)/_type='If'

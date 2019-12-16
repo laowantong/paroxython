@@ -15,13 +15,14 @@ class Suggestion:
         for key in ("name", "id", "_hash", "_ids"):
             self.capture_and_match_key(key)
         self.abstract_body_prefix()
+        self.restore_first_prefix()
         self.restore_greedy_quantifiers()
         return self.s
 
     def abstract_first_longest_prefix(self):
-        rex = r"(?m)^(?P<PREFIX>.+)/(?P<SUFFIX>.+\n)(?:\1/(?P<SUFFIXES>.+\n))*"
+        rex = r"(?m)\A\s*(?P<PREFIX>(?:/body/\d+)+)/(?P<SUFFIX>.+\n)(?:\1/(?P<SUFFIXES>.+\n))+\Z"
         match = regex.search(rex, self.s)
-        repl = [FIRST_PREFIX + match.captures("SUFFIX")[0]]
+        repl = [FIRST_PREFIX_MASK + match.captures("SUFFIX")[0]]
         for suffix in match.captures("SUFFIXES"):
             repl.append(FIRST_PREFIX_MASK + suffix)
         self.s = self.s[: match.start()] + "".join(repl) + self.s[match.end() :]
@@ -69,3 +70,6 @@ class Suggestion:
             else:
                 result.append(line)
         self.s = "\n".join(result)
+
+    def restore_first_prefix(self):
+        self.s = self.s.replace(FIRST_PREFIX_MASK, FIRST_PREFIX, 1)
