@@ -150,7 +150,7 @@
 ##### Regex
 
 ```re
-          ^(.*?)/_type='Subscript'
+           ^(.*)/_type='Subscript'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
 \n(?:\1.+\n)*?\1/slice/_type='Index'
 ```
@@ -176,7 +176,7 @@
 ##### Regex
 
 ```re
-          ^(.*?)/_type='Subscript'
+           ^(.*)/_type='Subscript'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
 \n(?:\1.+\n)*?\1/slice/_type='Index'
 \n(?:\1.+\n)*?\1/slice/value/_type='BinOp'
@@ -202,7 +202,7 @@
 ##### Regex
 
 ```re
-          ^(.*?)/_type='Subscript'
+           ^(.*)/_type='Subscript'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
 \n(?:\1.+\n)*?\1/slice/_type='Index'
 (   # A negative number
@@ -246,7 +246,7 @@
 ##### Regex
 
 ```re
-          ^(.*?)/_type='Subscript'
+           ^(.*)/_type='Subscript'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
 \n(?:\1.+\n)*?\1/(?P<_1>slice)/_type='Slice'
 \n(?:\1.+\n)*?\1/(?P=_1)      /step=None
@@ -273,7 +273,7 @@
 ##### Regex
 
 ```re
-          ^(.*?)/_type='Subscript'
+           ^(.*)/_type='Subscript'
 \n(?:\1.+\n)*?\1/(?P<_1>slice)/_type='Slice'
 \n(?:\1.+\n)*?\1/(?P=_1)      /step/lineno=(?P<LINE>\d+)
 ```
@@ -303,7 +303,7 @@
 ##### Regex
 
 ```re
-          ^(.*?)/_type='UnaryOp'
+           ^(.*)/_type='UnaryOp'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
 \n(?:\1.+\n)*?\1/op/_type='(?P<SUFFIX>.+)'
 ```
@@ -332,7 +332,7 @@
 ##### Regex
 
 ```re
-          ^(.*?)/_type='BinOp'
+           ^(.*)/_type='BinOp'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
 \n(?:\1.+\n)*?\1/op/_type='(?P<SUFFIX>.+)'
 ```
@@ -357,7 +357,7 @@
 ##### Regex
 
 ```re
-          ^(.*?)/_type='IfExp'
+           ^(.*)/_type='IfExp'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
 ```
 
@@ -384,7 +384,7 @@
 ##### Regex
 
 ```re
-          ^(.*?)/_type='BoolOp'
+           ^(.*)/_type='BoolOp'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
 \n(?:\1.+\n)*?\1/op/_type='(?P<SUFFIX>.+)'
 ```
@@ -413,7 +413,7 @@
 ##### Regex
 
 ```re
-          ^(.*?)/_type='Compare'
+           ^(.*)/_type='Compare'
 \n(?:\1.+\n)*?\1/ops/0/_type='(?P<SUFFIX>.+)'
 \n(?:\1.+\n)*?\1/comparators/0/lineno=(?P<LINE>\d+)
 ```
@@ -442,7 +442,7 @@
 ##### Regex
 
 ```re
-          ^(.*?)/_type='Compare'
+           ^(.*)/_type='Compare'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
 \n(?:\1.+\n)*?\1/comparators/length=(?!1\n)(?P<SUFFIX>.+)
 ```
@@ -469,7 +469,7 @@
 ##### Regex
 
 ```re
-          ^(.*?)/_type='Compare'
+           ^(.*)/_type='Compare'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
 \n(?:\1.+\n)*?\1/left/op/_type='Mod'
 (   # try to match the % right operand with a number
@@ -510,7 +510,7 @@
 ##### Regex
 
 ```re
-          ^(.*?)/_type='Call'
+           ^(.*)/_type='Call'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
 \n(?:\1.+\n)*?\1/func/_type='Name'
 \n(?:\1.+\n)*?\1/func/id='(?P<SUFFIX>.+)'
@@ -538,7 +538,7 @@
 ##### Regex
 
 ```re
-          ^(.*?)/_type='Call'
+           ^(.*)/_type='Call'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
 \n(?:\1.+\n)*?\1/func/_type='Attribute'
 \n(?:\1.+\n)*?\1/func/attr='(?P<SUFFIX>.+)'
@@ -565,7 +565,7 @@
 ##### Regex
 
 ```re
-          ^(.*?)/_type='Call'
+           ^(.*)/_type='Call'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
 \n(?:\1.+\n)*?\1/func/_type='Attribute'
 \n(?:\1.+\n)*?\1/func/value/_type='Call'
@@ -593,7 +593,7 @@ Apply a function or a method to an expression involving the result of another fu
 ##### Regex
 
 ```re
-          ^(.*?)/_type='Call'
+           ^(.*)/_type='Call'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
 \n(?:\1.+\n)* \1/args/.*/_type='Call'
 ```
@@ -624,7 +624,7 @@ Apply a function or a method to an expression involving the result of another fu
 ##### Regex
 
 ```re
-          ^(.*?)/_type='Lambda'
+           ^(.*)/_type='Lambda'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
 ```
 
@@ -711,7 +711,7 @@ Apply a function or a method to an expression involving the result of another fu
 ##### Regex
 
 ```re
-          ^(.*?)/_type='Assign'
+           ^(.*)/_type='Assign'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
 ```
 
@@ -736,7 +736,7 @@ Apply a function or a method to an expression involving the result of another fu
 ##### Regex
 
 ```re
-          ^(.*?)/_type='AugAssign'
+           ^(.*)/_type='AugAssign'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
 ```
 
@@ -760,7 +760,7 @@ Apply a function or a method to an expression involving the result of another fu
 ##### Regex
 
 ```re
-          ^(.*?)/_type='Assign'
+           ^(.*)/_type='Assign'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
 \n(?:\1.+\n)*?\1/targets/length=(?!1\n).+
 ```
@@ -788,7 +788,7 @@ Swap two variables or two elements of an array with a 2-element tuple or list.
 ##### Regex
 
 ```re
-          ^(.*?)/_type='Assign'
+           ^(.*)/_type='Assign'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
 \n(?:\1.+\n)*?\1/targets/0/elts/length=2
 \n(?:\1.+\n)*?\1/targets/0/elts/0/_hash=(?P<HASH_A>.+)
@@ -822,7 +822,7 @@ Update a variable by negating it.
 ##### Regex
 
 ```re
-          ^(.*?)/_type='Assign'
+           ^(.*)/_type='Assign'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
 \n(?:\1.+\n)*?\1/targets/0/_hash=(?P<HASH>.+) # capture hash
 \n(?:\1.+\n)*?\1/value/_type='UnaryOp'
@@ -857,7 +857,7 @@ Update a variable by negating it.
 ##### Regex
 
 ```re
-          ^(.*?)/_type='FunctionDef'
+           ^(.*)/_type='FunctionDef'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
 \n(?:\1.+\n)*?\1/name='(?P<SUFFIX>.+)'
 \n(?:\1.+\n)* \1/.+/lineno=(?P<LINE>\d+)
@@ -893,7 +893,7 @@ Update a variable by negating it.
 ##### Regex
 
 ```re
-          ^(.*?)/_type='FunctionDef'
+           ^(.*)/_type='FunctionDef'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
 \n(?:\1.+\n)*?\1/name='(?P<SUFFIX>.+)'
 \n(?:\1.+\n)*?\1/args/defaults/length=(?!0\n).+
@@ -921,7 +921,7 @@ Update a variable by negating it.
 ##### Regex
 
 ```re
-          ^(.*?)/_type='FunctionDef'
+           ^(.*)/_type='FunctionDef'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
 \n(?:\1.+\n)*?\1/name='(?P<SUFFIX>.+)' # capture the name of the function
 \n(?:\1.+\n)* \1/(?P<_1>body/\d+)/lineno=(?P<LINE>\d+)
@@ -955,7 +955,7 @@ Any function `f` which contains a nested call to itself (`f(..., f(...), ...)`),
 ##### Regex
 
 ```re
-          ^(.*?)/_type='FunctionDef'
+           ^(.*)/_type='FunctionDef'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
 \n(?:\1.+\n)*?\1/name='(?P<SUFFIX>.+)' # capture the name of the function
 \n(?:\1.+\n)* \1/(?P<_1>body/\d+)/lineno=(?P<LINE>\d+)
@@ -995,7 +995,7 @@ Any function `f` which contains a nested call to itself (`f(..., f(...), ...)`),
 ##### Regex
 
 ```re
-          ^(.*?)/_type='FunctionDef'
+           ^(.*)/_type='FunctionDef'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
 \n(?:\1.+\n)*?\1/name='(?P<SUFFIX>.+)'
 \n(?:\1.+\n)* \1/body/\d+/lineno=(?P<LINE>\d+)
@@ -1030,7 +1030,7 @@ Any function `f` which contains a nested call to itself (`f(..., f(...), ...)`),
 ##### Regex
 
 ```re
-          ^(.*?)/_type='FunctionDef'
+           ^(.*)/_type='FunctionDef'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
 \n(?:\1.+\n)*?\1/name='(?P<SUFFIX>.+)'
 \n(?:\1.+\n)*?\1/.+/_type='FunctionDef'
@@ -1062,7 +1062,7 @@ Function enclosing the definition of an inner function and returning it. Beware 
 ##### Regex
 
 ```re
-          ^(.*?)/_type='FunctionDef'
+           ^(.*)/_type='FunctionDef'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
 \n(?:\1.+\n)*?\1/name='(?P<SUFFIX>.+)'
 \n(?:\1.+\n)* \1/(?P<_1>body/\d+)/_type='FunctionDef'
@@ -1100,7 +1100,7 @@ Function enclosing the definition of an inner function and returning it. Beware 
 ##### Regex
 
 ```re
-          ^(.*?)/_type='If'
+           ^(.*)/_type='If'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
 \n(?:\1.+\n)*?\1/orelse/.*
 ```
@@ -1130,7 +1130,7 @@ Function enclosing the definition of an inner function and returning it. Beware 
 ##### Regex
 
 ```re
-          ^(.*?)/_type='If'
+           ^(.*)/_type='If'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
 \n(?:\1.+\n)*?\1/orelse/0/_type=(?!'If')
 ```
@@ -1164,7 +1164,7 @@ Function enclosing the definition of an inner function and returning it. Beware 
 ##### Regex
 
 ```re
-          ^(.*?)/_type='If'
+           ^(.*)/_type='If'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
 \n(?:\1.+\n)*?\1/orelse/0/_type='If'
 ```
@@ -1203,7 +1203,7 @@ Iterate over the elements of a (named) collection.
 ##### Regex
 
 ```re
-          ^(.*?)/_type='For'
+           ^(.*)/_type='For'
 \n(?:\1.+\n)*?\1/iter/_type='Name'
 \n(?:\1.+\n)*?\1/iter/lineno=(?P<LINE>\d+)
 ```
@@ -1233,7 +1233,7 @@ Iterate over a range with exactly 1 argument (stop).
 ##### Regex
 
 ```re
-          ^(.*?)/_type='For'
+           ^(.*)/_type='For'
 \n(?:\1.+\n)*?\1/iter/lineno=(?P<LINE>\d+)
 \n(?:\1.+\n)*?\1/iter/func/id='range'
 \n(?:\1.+\n)*?\1/iter/args/length=1
@@ -1267,7 +1267,7 @@ Iterate over a range with exactly 2 arguments (start, stop).
 ##### Regex
 
 ```re
-          ^(.*?)/_type='For'
+           ^(.*)/_type='For'
 \n(?:\1.+\n)*?\1/iter/lineno=(?P<LINE>\d+)
 \n(?:\1.+\n)*?\1/iter/func/id='range'
 \n(?:\1.+\n)*?\1/iter/args/length=2
@@ -1301,7 +1301,7 @@ Iterate over a range with 3 arguments (start, stop, step).
 ##### Regex
 
 ```re
-          ^(.*?)/_type='For'
+           ^(.*)/_type='For'
 \n(?:\1.+\n)*?\1/iter/lineno=(?P<LINE>\d+)
 \n(?:\1.+\n)*?\1/iter/func/id='range'
 \n(?:\1.+\n)*?\1/iter/args/length=3
@@ -1343,7 +1343,7 @@ Iterate over index numbers and elements of a collection.
 ##### Regex
 
 ```re
-          ^(.*?)/_type='For'
+           ^(.*)/_type='For'
 \n(?:\1.+\n)*?\1/iter/lineno=(?P<LINE>\d+)
 \n(?:\1.+\n)*?\1/iter/func/id='enumerate'
 ```
@@ -1370,7 +1370,7 @@ Iterate over index numbers of a collection.
 ##### Regex
 
 ```re
-          ^(.*?)/_type='For'
+           ^(.*)/_type='For'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
 \n(?:\1.+\n)*?\1/iter/_type='Call'
 \n(?:\1.+\n)*?\1/iter/func/id='range'
@@ -1400,7 +1400,7 @@ Iterate over index numbers of a collection.
 ##### Regex
 
 ```re
-          ^(.*?)/_type='For'
+           ^(.*)/_type='For'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
 \n(?:\1.+\n)* \1/(?P<_1>body/\d+)/_type='For'
 \n(?:\1.+\n)*?\1/(?P=_1)         /lineno=(?P<LINE>\d+)
@@ -1429,7 +1429,7 @@ A `for` loop with a counter `i` and a nested `for` loop which makes `i` iteratio
 ##### Regex
 
 ```re
-          ^(.*?)/_type='For'
+           ^(.*)/_type='For'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
 \n(?:\1.+\n)*?\1/target/id=(?P<VAR>.+) # capture iteration variable
 \n(?:\1.+\n)*?\1/iter/_type='Call'
@@ -1483,10 +1483,10 @@ Two nested `for` loops doing the same number of iterations.
 ```re
            ^(.*)/_type='For'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
-\n(?:\1.+\n)*?\1/iter/_hash=(?P<_HASH>.+) # capture iterable
+\n(?:\1.+\n)*?\1/iter/_hash=(?P<HASH>.+) # capture _hash
 \n(?:\1.+\n)* \1/(?P<_1>body/\d+)/_type='For'
 \n(?:\1.+\n)*?\1/(?P=_1)         /lineno=(?P<LINE>\d+)
-\n(?:\1.+\n)*?\1/(?P=_1)         /iter/_hash=(?P=_HASH) # match iterable
+\n(?:\1.+\n)*?\1/(?P=_1)         /iter/_hash=(?P=HASH) # match _hash
 ```
 
 ##### Example
@@ -1711,7 +1711,7 @@ An accumulator is iteratively updated from its previous value and the value of t
 ##### Regex
 
 ```re
-          ^(.*?)/_type='For'
+           ^(.*)/_type='For'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
 \n(?:\1.+\n)*?\1/target/_type='Name'
 \n(?:\1.+\n)*?\1/target/id=(?P<ITER_VAR>.+)
@@ -1786,7 +1786,7 @@ An accumulation pattern that, from a given collection, returns a list containing
 ##### Regex
 
 ```re
-          ^(.*?)/_type='For'
+           ^(.*)/_type='For'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
 \n(?:\1.+\n)*?\1/target/id=(?P<ID_1>.+) # capture the iteration variable
 \n(?:\1.+\n)*?\1/(?P<_1>body/\d+)/_type='If'
@@ -1940,7 +1940,7 @@ Linear search. Return the first element of a sequence satisfying a predicate.
 ##### Regex
 
 ```re
-          ^(.*?)/_type='For'
+           ^(.*)/_type='For'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
 \n(?:\1.+\n)*?\1/target/id=(?P<ITER_VAR>.+) # capture the name of the iteration variable
 \n(?:\1.+\n)* \1/(?P<_1>body/.+)/_type='If' # The If appears at any depth in the loop
@@ -1979,7 +1979,7 @@ Evolve the value of a variable until it reaches a desired state.
 ##### Regex
 
 ```re
-          ^(.*?)/_type='While'
+           ^(.*)/_type='While'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
 \n(?:\1.+\n)* \1/test/.*/id=(?P<STATE>'.+') # capture state variable
 (   # the state variable either appears on both sides of a simple assignment
@@ -2034,7 +2034,7 @@ Accumulate the inputs until a sentinel value is encountered (accumulation expres
 ##### Regex
 
 ```re
-          ^(.*?)/_type='While'
+           ^(.*)/_type='While'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
 \n(?:\1.+\n)*?\1/test/value=True
 \n(?:\1.+\n)* \1/body/\d+/targets/.+/id=(?P<INPUT>.+) # capture the name of the input
@@ -2132,7 +2132,7 @@ When a conditional simply assigns different values to the same variable, it may 
 ##### Regex
 
 ```re
-          ^(.*?)/_type='If'
+           ^(.*)/_type='If'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
 \n(?:\1.+\n)*?\1/body/length=1
 \n(?:\1.+\n)*?\1/body/0/_type='Assign'
@@ -2185,7 +2185,7 @@ When the RHS of an assignment consists in a binary operation whose left operand 
 ##### Regex
 
 ```re
-          ^(.*?)/_type='Assign'
+           ^(.*)/_type='Assign'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
 \n(?:\1.+\n)*?\1/targets/length=1
 \n(?:\1.+\n)*?\1/targets/0/id=(?P<TARGET>.+)
@@ -2231,7 +2231,7 @@ When the `else` branch of a conditional is another conditional, it can be rewrit
 ##### Regex
 
 ```re
-          ^(.*?)/_type='BoolOp'
+           ^(.*)/_type='BoolOp'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
 \n(?:\1.+\n)*?\1/op/_type='And'
 \n(?:\1.+\n)*?\1/values/0/_type='Compare'
@@ -2329,7 +2329,7 @@ When a predicate ends with a conditional whose sole purpose is to return `True` 
 ##### Regex
 
 ```re
-          ^(.*?)/_type='If'
+           ^(.*)/_type='If'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
 \n(?:\1.+\n)*?\1/body/0/_type='Return'
 \n(?:\1.+\n)*?\1/body/0/value/value=(?P<BOOL>True|False) # name BOOL the value used here
