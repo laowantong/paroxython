@@ -1372,12 +1372,12 @@ Iterate over index numbers of a collection.
 ```re
           ^(.*?)/_type='For'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
-\n(?:\1.+\n)*?\1/(?P<_1>iter)/_type='Call'
-\n(?:\1.+\n)*?\1/(?P=_1)     /func/id='range'
-\n(?:\1.+\n)*?\1/(?P=_1)     /args/length=1
-\n(?:\1.+\n)*?\1/(?P=_1)     /args/0/_type='Call'
-\n(?:\1.+\n)*?\1/(?P=_1)     /args/0/func/id='len'
-\n(?:\1.+\n)*?\1/(?P=_1)     /keywords/length=0
+\n(?:\1.+\n)*?\1/iter/_type='Call'
+\n(?:\1.+\n)*?\1/iter/func/id='range'
+\n(?:\1.+\n)*?\1/iter/args/length=1
+\n(?:\1.+\n)*?\1/iter/args/0/_type='Call'
+\n(?:\1.+\n)*?\1/iter/args/0/func/id='len'
+\n(?:\1.+\n)*?\1/iter/keywords/length=0
 ```
 
 ##### Example
