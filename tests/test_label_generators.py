@@ -1,13 +1,13 @@
 import pytest
 
 import context
-from paroxython import label_generators
-from paroxython import program_generator
+from label_generators import generate_labeled_sources
+from program_generator import generate_programs
 
 
 def test_label_generator():
-    programs = program_generator.generate_programs("tests/data/programs")
-    result = label_generators.generate_labeled_sources(programs)
+    programs = generate_programs("tests/data/programs")
+    result = generate_labeled_sources(programs)
 
     assert "assignment.py" in next(result)
     assert next(result).strip() == "a = b # assignment, global_variable_definition"
@@ -30,3 +30,6 @@ def test_label_generator():
 
 
 pytest.main(args=["-q"])
+
+if __name__ == "__main__":
+    input("ok")

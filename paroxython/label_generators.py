@@ -3,14 +3,12 @@ from bisect import insort
 from collections import defaultdict
 from pathlib import Path
 
-sys.path[0:0] = [str(Path(__file__).parent)]
-
-from parser import Parser
+from source_parser import SourceParser
 
 
 def generate_labeled_sources(programs):
     """For each program (path, source-code), yield its labeled source-code."""
-    parse = Parser()
+    parse = SourceParser()
     separator = "-" * 88
     for (path, source) in programs:
         yield f"# {separator}\n# {path}\n# {separator}"
@@ -38,7 +36,7 @@ def generate_paths_and_labels(programs):
             ...
         ]), ...
     """
-    parse = Parser()
+    parse = SourceParser()
     for (path, source) in programs:
         labels = defaultdict(list)
         for (label_name, spans) in sorted(parse(source)):

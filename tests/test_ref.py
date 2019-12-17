@@ -3,8 +3,8 @@ import regex
 from md_toc import build_toc
 
 import context
-from paroxython import parser
-from span import Span
+from paroxython.source_parser import SourceParser
+from paroxython.span import Span
 
 
 def reformat_file(construct_path):
@@ -32,7 +32,7 @@ def extract_examples(construct_path):
     return regex.finditer(rex, text)
 
 
-parse = parser.Parser()
+parse = SourceParser()
 reformat_file(parse.ref_path)
 examples = []
 for match in extract_examples(parse.ref_path):
@@ -68,10 +68,11 @@ def test_malformed_example():
 def test_failed_matches():
     source = "a = 42"
     actual = dict(parse(source, yield_failed_matches=True))
-    assert actual.pop("assignment") == [Span([1])]
-    assert actual.pop("global_variable_definition") == [Span([1])]
-    assert actual.pop("literal:Num") == [Span([1])]
-    assert actual.pop("suggest_constant_definition") == [Span([1])]
+    print(actual)
+    assert actual.pop("assignment")[0].to_couple() == (1, 1)
+    assert actual.pop("global_variable_definition")[0].to_couple() == (1, 1)
+    assert actual.pop("literal:Num")[0].to_couple() == (1, 1)
+    assert actual.pop("suggest_constant_definition")[0].to_couple() == (1, 1)
     for spans in actual.values():
         assert not spans
 

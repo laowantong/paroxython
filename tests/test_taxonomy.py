@@ -1,12 +1,13 @@
-import pytest
 from collections import Counter
 
-import context
-from paroxython import taxonomy
-from paroxython import span
+import pytest
 
-t = taxonomy.Taxonomy("tests/data/test_taxonomy.tsv")
-S = lambda i, j: span.Span([i, j])  # shorten Span([i, j])
+import context
+from span import Span
+from taxonomy import Taxonomy
+
+t = Taxonomy("tests/data/test_taxonomy.tsv")
+S = lambda i, j: Span([i, j])  # shorten Span([i, j])
 pytest.main(args=["-q"])
 
 

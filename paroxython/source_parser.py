@@ -1,10 +1,9 @@
 import ast
+import sys
 from collections import defaultdict
 from pathlib import Path
-import regex
-import sys
 
-sys.path[0:0] = [str(Path(__file__).parent)]
+import regex
 
 from flatten import flatten
 from span import Span
@@ -33,7 +32,7 @@ find_all_constructs = regex.compile(
 ).findall
 
 
-class Parser:
+class SourceParser:
     """Compile the given construct definitions, and search them in a source-code."""
 
     def __init__(self, ref_path="paroxython/ref.md"):
@@ -77,7 +76,7 @@ if __name__ == "__main__":
     for (i, line) in enumerate(source.splitlines(), 1):
         print(f"{i: 3} {line}")
     print()
-    parse = Parser()
+    parse = SourceParser()
     start = time.perf_counter()
     acc = []
     for (name, spans) in parse(source, yield_failed_matches=False):

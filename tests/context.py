@@ -1,4 +1,3 @@
 import sys
-from pathlib import Path
 
-sys.path[0:0] = [str(Path(__file__).parent.parent)]
+sys.path[0:0] = [".", "paroxython", "helpers"]

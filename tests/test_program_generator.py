@@ -1,11 +1,11 @@
 import pytest
 
 import context
-from paroxython import program_generator
+from program_generator import generate_programs
 
 
 def test_generate_programs():
-    result = program_generator.generate_programs("tests/data/programs")
+    result = generate_programs("tests/data/programs")
 
     (path, program) = next(result)
     assert path.name == "assignment.py"

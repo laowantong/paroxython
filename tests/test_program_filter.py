@@ -1,10 +1,11 @@
+from collections import defaultdict
+from pathlib import Path
+
 import pytest
 import regex
-from pathlib import Path
-from collections import defaultdict
 
 import context
-from paroxython import program_filter
+from program_filter import ProgramFilter
 
 text = Path("tests/data/taxons_and_programs.txt").read_text()
 
@@ -34,7 +35,7 @@ for (program_name, source) in programs:
 # from pprint import pprint
 # pprint(db, width=200)
 
-f = program_filter.ProgramFilter(db)
+f = ProgramFilter(db)
 
 
 def test_no_filter():

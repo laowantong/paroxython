@@ -1,4 +1,5 @@
 from pathlib import Path
+
 import regex
 
 match_excluded = regex.compile(r"__init__\.py|setup\.py|.*[-_]tests?\.py").match

@@ -1,9 +1,8 @@
 import pytest
+import regex
 
 import context
-from helpers import suggest_regex
-
-import regex
+from suggest_regex import Suggestion
 
 sources = r"""
 <<< Abstract first longest prefix and one line number
@@ -111,15 +110,15 @@ sources = r"""
 
 source_rex = regex.compile(r"(?ms)^<<< ([^\n]+)\n(.+?\n)---\n(.+?\n)>>>")
 examples = [m for m in source_rex.findall(sources)]  # [-1:]
-suggestion = suggest_regex.Suggestion()
+suggestion = Suggestion()
 
 
 @pytest.mark.parametrize("title, original, expected", examples)
-def test_strip_docs(title, original, expected):
+def test_suggest_regex(title, original, expected):
     print(title)
     result = suggestion(original)
     print(result)
     assert result == expected
 
 
-# pytest.main(args=["-q"])
+pytest.main(args=["-q"])

@@ -1,9 +1,8 @@
 import pytest
+import regex
 
 import context
-from paroxython import strip_docs
-
-import regex
+from strip_docs import strip_docs
 
 sources = r'''
 <<< inline comments
@@ -135,7 +134,7 @@ examples = [m for m in source_rex.findall(sources)]  # [-1:]
 @pytest.mark.parametrize("title, original, expected", examples)
 def test_strip_docs(title, original, expected):
     print(title)
-    result = strip_docs.strip_docs(original)
+    result = strip_docs(original)
     print(result)
     assert result == expected
 

@@ -7,10 +7,8 @@ from pathlib import Path
 
 import regex
 
-sys.path[0:0] = [str(Path(__file__).parent)]
-
-from program_generator import generate_programs
 from label_generators import generate_paths_and_labels
+from program_generator import generate_programs
 from taxonomy import Taxonomy
 
 

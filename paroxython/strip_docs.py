@@ -1,7 +1,7 @@
-import regex
-
-from token import STRING, INDENT, NEWLINE, DEDENT
+from token import DEDENT, INDENT, NEWLINE, STRING
 from tokenize import COMMENT, NL, generate_tokens
+
+import regex
 
 replace_first_comments = regex.compile(r"\A(#.*\n)*").sub
 replace_blank_lines = regex.compile(r"\s*\n").sub
