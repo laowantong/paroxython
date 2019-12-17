@@ -23,7 +23,7 @@ class Scanner:
     def set_cleanup_strategy(self, strategy):
         """Select the pre-processing method to apply to the source-code."""
         if strategy == "minimize":
-            minimize = __import__("minimizer").minimize
+            minimize = __import__("strip_docs").strip_docs
             main = regex.compile(r"(?ms)^if +__name__ *== *.__main__. *:.+").sub
             decorator = regex.compile(r"(?m)^\s*@.+\n").sub
             self.cleanup = lambda source: decorator("", main("", minimize(source)))
