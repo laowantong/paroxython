@@ -2,6 +2,9 @@ from pathlib import Path
 
 import regex
 
+from cleanup_source import cleanup_factory
+
+
 match_excluded = regex.compile(r"__init__\.py|setup\.py|.*[-_]tests?\.py").match
 
 
@@ -13,13 +16,7 @@ def generate_programs(directory, cleanup_strategy="strip_docs"):
     Output: couples of Python programs' `pathlib.Path`s and their contents.
     """
 
-    cleanup = lambda source: source
-    if cleanup_strategy == "strip_docs":
-        strip_docs = __import__("strip_docs").strip_docs
-        sub_main = regex.compile(r"(?ms)^if +__name__ *== *.__main__. *:.+").sub
-        sub_decorator = regex.compile(r"(?m)^\s*@.+\n").sub
-        cleanup = lambda source: sub_decorator("", sub_main("", strip_docs(source)))
-
+    cleanup = cleanup_factory(cleanup_strategy)
     directory = Path(directory)
     for path in sorted(directory.rglob("*.py")):
         if not match_excluded(path.name):

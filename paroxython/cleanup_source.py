@@ -3,6 +3,16 @@ from tokenize import COMMENT, NL, generate_tokens
 
 import regex
 
+
+def cleanup_factory(cleanup_strategy):
+    cleanup = lambda source: source
+    if cleanup_strategy == "strip_docs":
+        sub_main = regex.compile(r"(?ms)^if +__name__ *== *.__main__. *:.+").sub
+        sub_decorator = regex.compile(r"(?m)^\s*@.+\n").sub
+        cleanup = lambda source: sub_decorator("", sub_main("", strip_docs(source)))
+    return cleanup
+
+
 replace_first_comments = regex.compile(r"\A(#.*\n)*").sub
 replace_blank_lines = regex.compile(r"\s*\n").sub
 replace_pass = regex.compile(r"(?m)^( *)pass\n\1(?!\s)").sub

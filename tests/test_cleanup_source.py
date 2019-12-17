@@ -2,7 +2,7 @@ import pytest
 import regex
 
 import context
-from paroxython.strip_docs import strip_docs
+from paroxython.cleanup_source import cleanup_factory
 
 sources = r'''
 <<< inline comments
@@ -128,13 +128,14 @@ foobar()
 >>>
 '''
 source_rex = regex.compile(r"(?ms)^<<< ([^\n]+)\n(.+?)\n---\n(.+?)\n>>>")
-examples = [m for m in source_rex.findall(sources)]  # [-1:]
+examples = [m for m in source_rex.findall(sources)]
+cleanup = cleanup_factory("strip_docs")
 
 
 @pytest.mark.parametrize("title, original, expected", examples)
 def test_strip_docs(title, original, expected):
     print(title)
-    result = strip_docs(original)
+    result = cleanup(original)
     print(result)
     assert result == expected
 

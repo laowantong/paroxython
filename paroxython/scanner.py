@@ -5,6 +5,7 @@ from pathlib import Path
 import regex
 
 from source_parser import SourceParser
+from cleanup_source import cleanup_factory
 
 
 class Scanner:
@@ -15,19 +16,10 @@ class Scanner:
     a couple of line numbers delimiting the start and the end of the construct.
     """
 
-    def __init__(self, directory, cleanup_strategy="minimize"):
+    def __init__(self, directory, cleanup_strategy="strip_docs"):
         self.parse = SourceParser()
         self.directory = Path(directory)
-        self.set_cleanup_strategy(cleanup_strategy)
-
-    def set_cleanup_strategy(self, strategy):
-        """Select the pre-processing method to apply to the source-code."""
-        self.cleanup = lambda source: source
-        if strategy == "minimize":
-            minimize = __import__("strip_docs").strip_docs
-            main = regex.compile(r"(?ms)^if +__name__ *== *.__main__. *:.+").sub
-            decorator = regex.compile(r"(?m)^\s*@.+\n").sub
-            self.cleanup = lambda source: decorator("", main("", minimize(source)))
+        self.cleanup = cleanup_factory(cleanup_strategy)
 
     def generate_paths(self):
         """Find and yield the Python programs included in a given directory."""
