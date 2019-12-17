@@ -22,13 +22,12 @@ class Scanner:
 
     def set_cleanup_strategy(self, strategy):
         """Select the pre-processing method to apply to the source-code."""
+        self.cleanup = lambda source: source
         if strategy == "minimize":
             minimize = __import__("strip_docs").strip_docs
             main = regex.compile(r"(?ms)^if +__name__ *== *.__main__. *:.+").sub
             decorator = regex.compile(r"(?m)^\s*@.+\n").sub
             self.cleanup = lambda source: decorator("", main("", minimize(source)))
-        else:
-            self.cleanup = lambda source: source
 
     def generate_paths(self):
         """Find and yield the Python programs included in a given directory."""
@@ -62,7 +61,7 @@ class Scanner:
             for (label, spots) in sorted(self.parse(source)):
                 for spot in spots:
                     insort(tags[label], spot)
-            yield (str(path), tags)
+            yield (str(path), dict(tags))
 
 
 if __name__ == "__main__":
