@@ -1,8 +1,8 @@
 import pytest
 
 import context
-from label_generators import generate_labeled_sources
-from program_generator import generate_programs
+from paroxython.label_generators import generate_labeled_sources
+from paroxython.program_generator import generate_programs
 
 
 def test_label_generator():
@@ -30,6 +30,3 @@ def test_label_generator():
 
 
 pytest.main(args=["-q"])
-
-if __name__ == "__main__":
-    input("ok")

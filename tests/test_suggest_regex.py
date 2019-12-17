@@ -2,7 +2,7 @@ import pytest
 import regex
 
 import context
-from suggest_regex import Suggestion
+from helpers.suggest_regex import Suggestion
 
 sources = r"""
 <<< Abstract first longest prefix and one line number

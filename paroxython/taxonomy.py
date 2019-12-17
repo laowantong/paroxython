@@ -51,7 +51,8 @@ class Taxonomy:
 
     def deduplicated_taxons(self, taxons):
         """For taxons t2 having a taxon t1 as a prefix, remove the common spans in t1."""
-        previous_name = previous_span_bag = "dummy"
+        previous_name = "dummy"
+        previous_span_bag = Counter()
         for (name, span_bag) in taxons:
             if name.startswith(previous_name):
                 previous_span_bag.subtract(span_bag)

@@ -4,7 +4,7 @@ from pathlib import Path
 import pytest
 
 import context
-from make_db import make_database
+from paroxython.make_db import make_database
 
 
 def test_make_db():

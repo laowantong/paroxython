@@ -2,7 +2,7 @@ import pytest
 import regex
 
 import context
-from strip_docs import strip_docs
+from paroxython.strip_docs import strip_docs
 
 sources = r'''
 <<< inline comments

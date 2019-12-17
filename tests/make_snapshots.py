@@ -2,8 +2,8 @@ import time
 from pathlib import Path
 
 import context
-from program_generator import generate_programs
-from label_generators import generate_labeled_sources
+from paroxython.label_generators import generate_labeled_sources
+from paroxython.program_generator import generate_programs
 
 # fmt: off
 DIRECTORIES = [

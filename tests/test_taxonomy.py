@@ -3,8 +3,8 @@ from collections import Counter
 import pytest
 
 import context
-from span import Span
-from taxonomy import Taxonomy
+from paroxython.span import Span
+from paroxython.taxonomy import Taxonomy
 
 t = Taxonomy("tests/data/test_taxonomy.tsv")
 S = lambda i, j: Span([i, j])  # shorten Span([i, j])

@@ -5,7 +5,7 @@ import pytest
 import regex
 
 import context
-from program_filter import ProgramFilter
+from paroxython.program_filter import ProgramFilter
 
 text = Path("tests/data/taxons_and_programs.txt").read_text()
 
