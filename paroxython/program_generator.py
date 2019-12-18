@@ -1,14 +1,16 @@
-from pathlib import Path
+from pathlib import Path, PosixPath
+from typing import Iterator, Tuple
 
 import regex
 
 from cleanup_source import cleanup_factory
 
-
 match_excluded = regex.compile(r"__init__\.py|setup\.py|.*[-_]tests?\.py").match
 
 
-def generate_programs(directory, cleanup_strategy="strip_docs"):
+def generate_programs(
+    directory: str, cleanup_strategy: str = "strip_docs"
+) -> Iterator[Tuple[PosixPath, str]]:
     """Yield the path and the cleaned up source of all programs in a given directory.
 
     Input: a string or a pathlib.Path representing the directory path.

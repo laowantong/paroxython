@@ -1,4 +1,5 @@
 import ast
+from typing import Any
 
 import regex
 
@@ -6,7 +7,7 @@ extract_ids = regex.compile(r"Name\(id='(.+?)'\)").findall
 remove_context = regex.compile(r", ctx=.+?\(\)").sub
 
 
-def flatten(node, prefix=""):
+def flatten(node: Any, prefix: str = "") -> str:
     if isinstance(node, ast.AST):
         acc = [f"{prefix}/_type='{type(node).__name__}'\n"]
         if isinstance(node, ast.expr):

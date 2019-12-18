@@ -1,14 +1,17 @@
 import json
 from collections import Counter, defaultdict
-from pathlib import Path
+from pathlib import Path, PosixPath
+from typing import Dict, Iterator, List, Tuple
 
 import regex
+
+from span import Span
 
 
 class Taxonomy:
     """Translate labels into taxons on a list of program paths."""
 
-    def __init__(self, taxonomy_path="taxonomies/default.tsv"):
+    def __init__(self, taxonomy_path: str = "taxonomies/default.tsv") -> None:
         """Read the taxonomy specifications, and make some pre-processing."""
         is_literal = regex.compile(r"[\w:]+$").match
         tsv = Path(taxonomy_path).read_text()
@@ -27,7 +30,7 @@ class Taxonomy:
 
     cache = {}
 
-    def get_taxon_name_list(self, label_name):
+    def get_taxon_name_list(self, label_name: str) -> List[str]:
         """Translate a label name into a list of taxon names."""
         if label_name not in Taxonomy.cache:
             if label_name in self.literal_label_names:
@@ -41,7 +44,7 @@ class Taxonomy:
                         )
         return Taxonomy.cache[label_name]
 
-    def to_taxons(self, labels):
+    def to_taxons(self, labels: Dict[str, List[Span]]) -> List[Tuple[str, Counter]]:
         """Translate a dict of labels to a list of taxons with their spans in a bag."""
         result = defaultdict(Counter)
         for (label_name, spans) in labels.items():
@@ -49,7 +52,9 @@ class Taxonomy:
                 result[taxon_name].update(Counter(spans))
         return sorted(result.items())
 
-    def deduplicated_taxons(self, taxons):
+    def deduplicated_taxons(
+        self, taxons: List[Tuple[str, Counter]]
+    ) -> List[Tuple[str, Counter]]:
         """For taxons t2 having a taxon t1 as a prefix, remove the common spans in t1."""
         previous_name = "dummy"
         previous_span_bag = Counter()
@@ -66,7 +71,9 @@ class Taxonomy:
                 result.append((name, cleaned_bag))
         return result
 
-    def __call__(self, paths_and_labels):
+    def __call__(
+        self, paths_and_labels: List[Tuple[PosixPath, Dict[str, List[Span]]]]
+    ) -> Iterator[Tuple[PosixPath, List[Tuple[str, Counter]]]]:
         """Translate labels into taxons on a list of program paths.
 
         Input: an iterator on label lists:

@@ -74,7 +74,7 @@ def get_label_infos(paths_and_labels):
     for (path, labels) in paths_and_labels:
         for label_name in labels:
             result[label_name].append(str(path))
-    return result
+    return dict(result)
 
 
 def get_taxon_infos(taxonomy):
@@ -82,7 +82,7 @@ def get_taxon_infos(taxonomy):
     for (path, taxons) in taxonomy:
         for (taxon_name, _) in taxons:
             result[taxon_name].append(str(path))
-    return result
+    return dict(result)
 
 
 def inject_labels(db, paths_and_labels):

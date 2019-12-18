@@ -42,7 +42,7 @@ def generate_paths_and_labels(programs):
         for (label_name, spans) in sorted(parse(source)):
             for span in spans:
                 insort(labels[label_name], span)
-        yield (path, labels)
+        yield (path, dict(labels))
 
 
 if __name__ == "__main__":
