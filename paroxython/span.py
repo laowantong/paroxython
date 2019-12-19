@@ -40,5 +40,5 @@ class Span:
     def to_couple(self) -> Tuple[int, int]:
         return (self.start, self.end)
 
-    def __lt__(self, other):
+    def __lt__(self, other) -> bool:
         return (self.start, self.end) < (other.start, other.end)

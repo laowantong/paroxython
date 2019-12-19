@@ -16,7 +16,6 @@ match_excluded = regex.compile(r"__init__\.py|setup\.py|.*[-_]tests?\.py").match
 
 def generate_programs(directory: str, strategy="strip_docs") -> Iterator[Program]:
     """Yield the path and the cleaned up source of all programs in a given directory."""
-
     cleanup = cleanup_factory(strategy)
     directory_path = Path(directory)
     for path in sorted(directory_path.rglob("*.py")):

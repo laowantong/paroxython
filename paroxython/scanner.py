@@ -1,11 +1,12 @@
 import sys
-from bisect import insort
 from collections import defaultdict
 from pathlib import Path
+from typing import Iterator
+
 import regex
 
-from source_parser import SourceParser
 from cleanup_source import cleanup_factory
+from source_parser import SourceParser
 
 
 class Scanner:
@@ -21,7 +22,7 @@ class Scanner:
         self.directory = Path(directory)
         self.cleanup = cleanup_factory(cleanup_strategy)
 
-    def generate_paths(self):
+    def generate_paths(self) -> Iterator[Path]:
         """Find and yield the Python programs included in a given directory."""
         exclude_file = regex.compile(r"__init__\.py|setup\.py|.*[-_]tests?\.py")
         for path in sorted(self.directory.rglob("*.py")):
@@ -29,7 +30,7 @@ class Scanner:
                 print(path)
                 yield path
 
-    def generate_tagged_source_codes(self):
+    def generate_tagged_source_codes(self) -> Iterator[str]:
         """For each program of a given directory, yield its tagged source-code."""
         separator = "-" * 88
         for path in self.generate_paths():
@@ -44,16 +45,6 @@ class Scanner:
                 if comment:
                     sloc[i] += " # " + ", ".join(sorted(comment))
             yield "\n".join(sloc + [""])
-
-    def generate_lists_of_tags(self):
-        """For each program of a given directory, yield its tag list."""
-        for path in self.generate_paths():
-            source = self.cleanup(path.read_text())
-            tags = defaultdict(list)
-            for (label, spots) in sorted(self.parse(source)):
-                for spot in spots:
-                    insort(tags[label], spot)
-            yield (str(path), dict(tags))
 
 
 if __name__ == "__main__":
