@@ -1,20 +1,21 @@
 import json
 from pathlib import Path
+from typing import Callable, Dict, List, Set
 
 from regex import compile
 
 
 class ProgramFilter:
-    def __init__(self, db):
+    def __init__(self, db: Dict) -> None:
         self.programs = db["programs"]
         self.taxons = db["taxons"]
         self.reset()
 
-    def reset(self):
+    def reset(self) -> None:
         self.result = list(self.programs.keys())
         self.counts = {"initially": len(self.result)}
 
-    def remove_from_result(self, elements):
+    def remove_from_result(self, elements: Set[str]) -> None:
         """Functionally equivalent to self.result.difference_update(elements).
         Complexity:
             O(1) when elements is empty
@@ -24,7 +25,7 @@ class ProgramFilter:
         if elements:
             self.result[:] = [x for x in self.result if x not in elements]
 
-    def filter_blacklisted_programs(self, program_names):
+    def filter_blacklisted_programs(self, program_names: List[str]) -> None:
         """Suppress from self.result all programs whose name matches any
         blacklisted pattern."""
         count = len(self.result)
@@ -37,19 +38,19 @@ class ProgramFilter:
             self.remove_from_result(acc)
         self.counts["blacklisted"] = count - len(self.result)
 
-    def filter_forbidden_taxons(self, taxon_names):
+    def filter_forbidden_taxons(self, taxon_names: List[str]) -> None:
         """Suppress from self.result all programs using any forbidden taxon."""
         count = len(self.result)
         if taxon_names:
             match_taxon = compile("|".join(taxon_names)).match
-            acc = set()
+            acc: Set[str] = set()
             for (taxon_name, program_names) in self.taxons.items():
                 if match_taxon(taxon_name):  # this taxon is forbidden
                     acc.update(program_names)
             self.remove_from_result(acc)
         self.counts["tagged with a forbidden taxon"] = count - len(self.result)
 
-    def filter_mandatory_taxons(self, taxon_names):
+    def filter_mandatory_taxons(self, taxon_names: List[str]) -> None:
         """Suppress from self.result all programs not using at least one
         mandatory taxon."""
         count = len(self.result)
@@ -67,9 +68,9 @@ class ProgramFilter:
             self.remove_from_result(acc)
         self.counts["not tagged with a mandatory taxon"] = count - len(self.result)
 
-    def get_taxons_in_programs(self, program_names):
+    def get_taxons_in_programs(self, program_names: List[str]) -> str:
         """Return all taxons included in at least one program of the given list."""
-        result = set()
+        result: Set[str] = set()
         if program_names:
             match_program = compile("|".join(program_names)).match
             for program_name in self.result:
@@ -77,7 +78,7 @@ class ProgramFilter:
                     result.update(self.programs[program_name]["taxons"])
         return "\n".join(sorted(result))
 
-    def get_taxons_not_in_programs(self, program_names):
+    def get_taxons_not_in_programs(self, program_names: List[str]) -> str:
         """Return all taxons not included in any program of the given list."""
         result = set(self.taxons.keys())
         if program_names:
@@ -87,10 +88,10 @@ class ProgramFilter:
                     result.difference_update(self.programs[program_name]["taxons"])
         return "\n".join(sorted(result))
 
-    def get_extra_taxons(self, taxon_names):
+    def get_extra_taxons(self, taxon_names: List[str]) -> Dict[str, List[str]]:
         """For each program, list those of its taxons which are not among the given taxons."""
         match_taxon = compile("|".join(taxon_names)).match
-        extra_taxons = {}
+        extra_taxons: Dict[str, List[str]] = {}
         for program_name in self.result:
             extra_taxons[program_name] = []
             for taxon_name in self.programs[program_name]["taxons"]:
@@ -98,10 +99,10 @@ class ProgramFilter:
                     extra_taxons[program_name].append(taxon_name)
         return extra_taxons
 
-    def get_lacking_taxons(self, taxon_names):
+    def get_lacking_taxons(self, taxon_names: List[str]) -> Dict[str, List[str]]:
         """For each program, list those of the given taxons that it does not include."""
         match_taxons = [compile(row).match for row in taxon_names]
-        lacking_taxons = {}
+        lacking_taxons: Dict[str, List[str]] = {}
         for program_name in self.result:
             lacking_taxons[program_name] = []
             for (match_taxon, wanted_taxon_name) in zip(match_taxons, taxon_names):
@@ -112,29 +113,31 @@ class ProgramFilter:
                     lacking_taxons[program_name].append(wanted_taxon_name)
         return lacking_taxons
 
-    def sort(self, key, reverse):
+    def sort(self, key: Callable, reverse: bool) -> None:
         """Generic sort. Use the following helpers instead."""
         self.result.sort(key=key, reverse=reverse)
 
-    def sort_by_taxon_count(self, reverse=False):
+    def sort_by_taxon_count(self, reverse=False) -> None:
         """Sort the programs by number of distinct taxons."""
         self.sort(lambda p: len(self.programs[p]["taxons"]), reverse)
 
-    def sort_by_line_count(self, reverse=False):
+    def sort_by_line_count(self, reverse=False) -> None:
         """Sort the programs by SLOC count."""
         self.sort(lambda p: self.programs[p]["source"].count("\n"), reverse)
 
-    def sort_by_extra_taxon_count(self, taxon_names, reverse=False):
+    def sort_by_extra_taxon_count(self, taxon_names: List[str], reverse=False) -> None:
         """Sort the programs by number of extra taxons wrt a given list."""
         extra_taxons = self.get_extra_taxons(taxon_names)
         self.sort(lambda p: len(extra_taxons[p]), reverse)
 
-    def sort_by_lacking_taxon_count(self, taxon_names, reverse=False):
+    def sort_by_lacking_taxon_count(
+        self, taxon_names: List[str], reverse=False
+    ) -> None:
         """Sort the programs by number of lacking taxons wrt a given list."""
         lacking_taxons = self.get_lacking_taxons(taxon_names)
         self.sort(lambda p: len(lacking_taxons[p]), reverse)
 
-    def sort_by_distance(self, taxon_names, reverse=False):
+    def sort_by_distance(self, taxon_names: List[str], reverse=False) -> None:
         """Sort the programs by number of extra and lacking taxons wrt a given list."""
         extra_taxons = self.get_extra_taxons(taxon_names)
         lacking_taxons = self.get_lacking_taxons(taxon_names)

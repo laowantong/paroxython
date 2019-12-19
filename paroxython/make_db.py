@@ -4,15 +4,16 @@ from collections import defaultdict
 from datetime import datetime
 from itertools import chain
 from pathlib import Path
+from typing import Dict, List, Tuple, Union
 
 import regex
 
-from label_generators import generate_paths_and_labels
-from program_generator import generate_programs
-from taxonomy import Taxonomy
+from label_generators import Label, ProgramLabels, generate_programs_labels
+from program_generator import Program, generate_programs
+from taxonomy import ProgramTaxons, Taxon, Taxonomy
 
 
-def make_database(directories):
+def make_database(directories: List[str]) -> str:
     """Construct a JSON object with the following schema:
     {
         "programs": {
@@ -40,26 +41,29 @@ def make_database(directories):
     }
     """
     programs = list(chain.from_iterable(generate_programs(d) for d in directories))
-    paths_and_labels = list(generate_paths_and_labels(programs))
-    taxonomy = list(Taxonomy()(paths_and_labels))
+    programs_labels = list(generate_programs_labels(programs))
+    taxonomy = Taxonomy()
+    programs_taxons = taxonomy(programs_labels)
     db = {
         "programs": get_program_infos(programs),
-        "labels": get_label_infos(paths_and_labels),
-        "taxons": get_taxon_infos(taxonomy),
+        "labels": get_label_infos(programs_labels),
+        "taxons": get_taxon_infos(programs_taxons),
     }
-    inject_labels(db, paths_and_labels)
-    inject_taxons(db, taxonomy)
+    inject_labels(db, programs_labels)
+    inject_taxons(db, programs_taxons)
     return to_Json(db)
 
 
-def serialize_tags(tags):
-    result = {}
+def serialized(
+    tags: Union[List[Taxon], List[Label]]
+) -> Dict[str, List[Tuple[int, int]]]:
+    result: Dict[str, List[Tuple[int, int]]] = {}
     for (tag_name, spans) in tags:
         result[tag_name] = [span.to_couple() for span in sorted(set(spans))]
     return result
 
 
-def get_program_infos(programs):
+def get_program_infos(programs: List[Program]) -> Dict[str, Dict[str, str]]:
     result = {}
     for (path, source) in programs:
         result[str(path)] = {
@@ -69,33 +73,33 @@ def get_program_infos(programs):
     return result
 
 
-def get_label_infos(paths_and_labels):
-    result = defaultdict(list)
-    for (path, labels) in paths_and_labels:
-        for label_name in labels:
-            result[label_name].append(str(path))
-    return result
+def get_label_infos(programs_labels: List[ProgramLabels]) -> Dict[str, List[str]]:
+    result: Dict[str, List[str]] = defaultdict(list)
+    for (path, labels) in programs_labels:
+        for label in labels:
+            result[label.name].append(str(path))
+    return dict(result)
 
 
-def get_taxon_infos(taxonomy):
-    result = defaultdict(list)
-    for (path, taxons) in taxonomy:
-        for (taxon_name, _) in taxons:
-            result[taxon_name].append(str(path))
-    return result
+def get_taxon_infos(programs_taxons: List[ProgramTaxons]) -> Dict[str, List[str]]:
+    result: Dict[str, List[str]] = defaultdict(list)
+    for (path, taxons) in programs_taxons:
+        for taxon in taxons:
+            result[taxon.name].append(str(path))
+    return dict(result)
 
 
-def inject_labels(db, paths_and_labels):
-    for (path, labels) in paths_and_labels:
-        db["programs"][str(path)]["labels"] = serialize_tags(labels.items())
+def inject_labels(db: Dict, programs_labels: List[ProgramLabels]) -> None:
+    for (path, labels) in programs_labels:
+        db["programs"][str(path)]["labels"] = serialized(labels)
 
 
-def inject_taxons(db, taxonomy):
-    for (path, taxons) in taxonomy:
-        db["programs"][str(path)]["taxons"] = serialize_tags(taxons)
+def inject_taxons(db: Dict, programs_taxons: List[ProgramTaxons]) -> None:
+    for (path, taxons) in programs_taxons:
+        db["programs"][str(path)]["taxons"] = serialized(taxons)
 
 
-def to_Json(db):
+def to_Json(db: Dict) -> str:
     """Convert the DB into JSON and reduce to one line each list of spans."""
     text = json.dumps(db, indent=2)
     text = regex.sub(r"\s*\[\s+(\d+),\s+(\d+)\s+\](,?)\s+", r"[\1,\2]\3", text)

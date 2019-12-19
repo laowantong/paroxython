@@ -1,27 +1,27 @@
 from pathlib import Path
+from typing import Iterator, NamedTuple
 
 import regex
 
 from cleanup_source import cleanup_factory
 
 
+class Program(NamedTuple):
+    path: Path
+    source: str
+
+
 match_excluded = regex.compile(r"__init__\.py|setup\.py|.*[-_]tests?\.py").match
 
 
-def generate_programs(directory, cleanup_strategy="strip_docs"):
-    """Yield the path and the cleaned up source of all programs in a given directory.
-
-    Input: a string or a pathlib.Path representing the directory path.
-
-    Output: couples of Python programs' `pathlib.Path`s and their contents.
-    """
-
-    cleanup = cleanup_factory(cleanup_strategy)
-    directory = Path(directory)
-    for path in sorted(directory.rglob("*.py")):
+def generate_programs(directory: str, strategy="strip_docs") -> Iterator[Program]:
+    """Yield the path and the cleaned up source of all programs in a given directory."""
+    cleanup = cleanup_factory(strategy)
+    directory_path = Path(directory)
+    for path in sorted(directory_path.rglob("*.py")):
         if not match_excluded(path.name):
             print(path)
-            yield (path, cleanup(path.read_text()))
+            yield Program(path, cleanup(path.read_text()))
 
 
 if __name__ == "__main__":

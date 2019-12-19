@@ -1,10 +1,11 @@
 from token import DEDENT, INDENT, NEWLINE, STRING
 from tokenize import COMMENT, NL, generate_tokens
+from typing import Callable
 
 import regex
 
 
-def cleanup_factory(cleanup_strategy):
+def cleanup_factory(cleanup_strategy: str) -> Callable:
     cleanup = lambda source: source
     if cleanup_strategy == "strip_docs":
         sub_main = regex.compile(r"(?ms)^if +__name__ *== *.__main__. *:.+").sub
@@ -19,7 +20,7 @@ replace_pass = regex.compile(r"(?m)^( *)pass\n\1(?!\s)").sub
 replace_final_pass = regex.compile(r"(?m)^ *pass\Z").sub
 
 
-def strip_docs(source):
+def strip_docs(source: str) -> str:
     source = replace_first_comments("", source)
     source = source.replace("\t", "    ")
     result = []
@@ -45,10 +46,10 @@ def strip_docs(source):
             previous_token = token
         previous_end_col = end_col
         previous_end_row = end_row
-    result = "".join(result).strip()
-    result = replace_blank_lines("\n", result)
-    result = replace_pass(r"\1", result)  # suppress most useless pass statements
-    return result
+    text = "".join(result).strip()
+    text = replace_blank_lines("\n", text)
+    text = replace_pass(r"\1", text)  # suppress most useless pass statements
+    return text
 
 
 if __name__ == "__main__":

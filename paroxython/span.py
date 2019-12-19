@@ -1,3 +1,6 @@
+from typing import Dict, List, Tuple, Type, Union
+
+
 class Span:
     """Metadata associated with a tag (i.e., a label or a taxon).
     Currently, a span is a couple of line numbers delimiting a construct in a source.
@@ -6,7 +9,7 @@ class Span:
 
     existing_instances = {}
 
-    def __new__(cls, line_numbers):
+    def __new__(cls, line_numbers: Union[List[str], List[int]]):
         """Prevent the creation of distinct instances for identical spans.
         It avoids wasting memory and facilitates the deduplication of a list of spans.
         Reference: https://stackoverflow.com/a/50820933
@@ -28,14 +31,14 @@ class Span:
         cls.existing_instances[key] = self
         return self
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.string
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return self.string
 
-    def to_couple(self):
+    def to_couple(self) -> Tuple[int, int]:
         return (self.start, self.end)
 
-    def __lt__(self, other):
+    def __lt__(self, other) -> bool:
         return (self.start, self.end) < (other.start, other.end)
