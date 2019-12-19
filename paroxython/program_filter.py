@@ -6,7 +6,7 @@ from regex import compile
 
 
 class ProgramFilter:
-    def __init__(self, db: Dict[str, Dict[str, Set[str]]]) -> None:
+    def __init__(self, db: Dict) -> None:
         self.programs = db["programs"]
         self.taxons = db["taxons"]
         self.reset()
@@ -43,7 +43,7 @@ class ProgramFilter:
         count = len(self.result)
         if taxon_names:
             match_taxon = compile("|".join(taxon_names)).match
-            acc = set()
+            acc: Set[str] = set()
             for (taxon_name, program_names) in self.taxons.items():
                 if match_taxon(taxon_name):  # this taxon is forbidden
                     acc.update(program_names)
@@ -70,7 +70,7 @@ class ProgramFilter:
 
     def get_taxons_in_programs(self, program_names: List[str]) -> str:
         """Return all taxons included in at least one program of the given list."""
-        result = set()
+        result: Set[str] = set()
         if program_names:
             match_program = compile("|".join(program_names)).match
             for program_name in self.result:
@@ -91,7 +91,7 @@ class ProgramFilter:
     def get_extra_taxons(self, taxon_names: List[str]) -> Dict[str, List[str]]:
         """For each program, list those of its taxons which are not among the given taxons."""
         match_taxon = compile("|".join(taxon_names)).match
-        extra_taxons = {}
+        extra_taxons: Dict[str, List[str]] = {}
         for program_name in self.result:
             extra_taxons[program_name] = []
             for taxon_name in self.programs[program_name]["taxons"]:
@@ -102,7 +102,7 @@ class ProgramFilter:
     def get_lacking_taxons(self, taxon_names: List[str]) -> Dict[str, List[str]]:
         """For each program, list those of the given taxons that it does not include."""
         match_taxons = [compile(row).match for row in taxon_names]
-        lacking_taxons = {}
+        lacking_taxons: Dict[str, List[str]] = {}
         for program_name in self.result:
             lacking_taxons[program_name] = []
             for (match_taxon, wanted_taxon_name) in zip(match_taxons, taxon_names):

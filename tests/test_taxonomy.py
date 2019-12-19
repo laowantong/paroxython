@@ -1,10 +1,11 @@
-from collections import Counter
+from collections import Counter as C
 
 import pytest
 
 import context
 from paroxython.span import Span
-from paroxython.taxonomy import Taxonomy
+from paroxython.taxonomy import Taxonomy, Taxon, ProgramTaxons
+from paroxython.label_generators import Label, ProgramLabels
 
 t = Taxonomy("tests/data/test_taxonomy.tsv")
 S = lambda i, j: Span([i, j])  # shorten Span([i, j])
@@ -28,54 +29,60 @@ def test_get_taxon_name_list():
 
 
 def test_to_taxons():
-    labels = {
-        "if": [S(1, 1), S(1, 1), S(2, 5)],
-        "comparison_operator:Lt": [S(1, 1), S(3, 3), S(2, 2)],
-    }
+    labels = [
+        Label("if", [S(1, 1), S(1, 1), S(2, 5)]),
+        Label("comparison_operator:Lt", [S(1, 1), S(3, 3), S(2, 2)]),
+    ]
     assert t.to_taxons(labels) == [
-        ("control_flow/conditional/", Counter({S(1, 1): 2, S(2, 5): 1})),
-        ("test/inequality/", Counter({S(2, 2): 1, S(3, 3): 1, S(1, 1): 1})),
+        Taxon("control_flow/conditional/", C({S(1, 1): 2, S(2, 5): 1})),
+        Taxon("test/inequality/", C({S(2, 2): 1, S(3, 3): 1, S(1, 1): 1})),
     ]
 
 
 def test_deduplicated_taxons():
     taxons = [
-        ("control_flow/conditional/", Counter({S(1, 1): 2, S(2, 5): 1})),
-        ("control_flow/conditional/else/", Counter({S(1, 1): 1, S(2, 5): 1})),
-        ("test/inequality/", Counter({S(2, 2): 1, S(3, 3): 1, S(1, 1): 1})),
+        Taxon("control_flow/conditional/", C({S(1, 1): 2, S(2, 5): 1})),
+        Taxon("control_flow/conditional/else/", C({S(1, 1): 1, S(2, 5): 1})),
+        Taxon("test/inequality/", C({S(2, 2): 1, S(3, 3): 1, S(1, 1): 1})),
     ]
     assert t.deduplicated_taxons(taxons) == [
-        ("control_flow/conditional/", Counter({S(1, 1): 1})),
-        ("control_flow/conditional/else/", Counter({S(1, 1): 1, S(2, 5): 1})),
-        ("test/inequality/", Counter({S(2, 2): 1, S(3, 3): 1, S(1, 1): 1})),
+        Taxon("control_flow/conditional/", C({S(1, 1): 1})),
+        Taxon("control_flow/conditional/else/", C({S(1, 1): 1, S(2, 5): 1})),
+        Taxon("test/inequality/", C({S(2, 2): 1, S(3, 3): 1, S(1, 1): 1})),
     ]
 
 
 def test_call():
-    paths_and_labels = {
-        "algo1": {
-            "if": [S(1, 1), S(1, 1), S(2, 5)],
-            "if_else": [S(1, 1), S(2, 5)],
-            "comparison_operator:Lt": [S(1, 1), S(3, 3), S(2, 2)],
-        },
-        "algo2": {
-            "method_call:difference_update": [S(1, 1), S(1, 1), S(2, 5)],
-            "literal:Set": [S(1, 1), S(2, 5)],
-        },
-    }
-    result = list(t(paths_and_labels.items()))
-    assert result[0] == (
+    programs_labels = [
+        ProgramLabels(
+            "algo1",
+            [
+                Label("if", [S(1, 1), S(1, 1), S(2, 5)]),
+                Label("if_else", [S(1, 1), S(2, 5)]),
+                Label("comparison_operator:Lt", [S(1, 1), S(3, 3), S(2, 2)]),
+            ],
+        ),
+        ProgramLabels(
+            "algo2",
+            [
+                Label("method_call:difference_update", [S(1, 1), S(1, 1), S(2, 5)]),
+                Label("literal:Set", [S(1, 1), S(2, 5)]),
+            ],
+        ),
+    ]
+    result = list(t(programs_labels))
+    assert result[0] == ProgramTaxons(
         "algo1",
         [
-            ("control_flow/conditional/", Counter({S(1, 1): 1})),
-            ("control_flow/conditional/else/", Counter({S(1, 1): 1, S(2, 5): 1})),
-            ("test/inequality/", Counter({S(2, 2): 1, S(3, 3): 1, S(1, 1): 1})),
+            Taxon("control_flow/conditional/", C({S(1, 1): 1})),
+            Taxon("control_flow/conditional/else/", C({S(1, 1): 1, S(2, 5): 1})),
+            Taxon("test/inequality/", C({S(2, 2): 1, S(3, 3): 1, S(1, 1): 1})),
         ],
     )
-    assert result[1] == (
+    assert result[1] == ProgramTaxons(
         "algo2",
         [
-            ("call/function/builtin/casting/set/", Counter({S(1, 1): 1, S(2, 5): 1})),
-            ("type/set/", Counter({S(1, 1): 3, S(2, 5): 2})),
+            Taxon("call/function/builtin/casting/set/", C({S(1, 1): 1, S(2, 5): 1})),
+            Taxon("type/set/", C({S(1, 1): 3, S(2, 5): 2})),
         ],
     )

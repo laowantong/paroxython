@@ -1,4 +1,4 @@
-from typing import List, Tuple, Type, Union
+from typing import Dict, List, Tuple, Type, Union
 
 
 class Span:

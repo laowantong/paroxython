@@ -46,10 +46,10 @@ def strip_docs(source: str) -> str:
             previous_token = token
         previous_end_col = end_col
         previous_end_row = end_row
-    result = "".join(result).strip()
-    result = replace_blank_lines("\n", result)
-    result = replace_pass(r"\1", result)  # suppress most useless pass statements
-    return result
+    text = "".join(result).strip()
+    text = replace_blank_lines("\n", text)
+    text = replace_pass(r"\1", text)  # suppress most useless pass statements
+    return text
 
 
 if __name__ == "__main__":
