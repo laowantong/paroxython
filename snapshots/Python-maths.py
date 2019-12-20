@@ -2,7 +2,7 @@
 # ../Python/maths/3n+1.py
 # ----------------------------------------------------------------------------------------
 from typing import Tuple, List # import_from:typing
-def n31(a: int) -> Tuple[List[int], int]: # function_definition:n31, index
+def n31(a: int) -> Tuple[List[int], int]: # function:n31, index
     if not isinstance(a, int): # function_call:isinstance, if, unary_operator:Not
         raise TypeError("Must be int, not {0}".format(type(a).__name__)) # composition, function_call:TypeError, function_call:type, literal:Str, method_call:format, raise_exception:TypeError
     if a < 1: # comparison_operator:Lt, if, literal:Num
@@ -15,7 +15,7 @@ def n31(a: int) -> Tuple[List[int], int]: # function_definition:n31, index
             a = 3 * a + 1 # assignment, binary_operator:Add, binary_operator:Mult, literal:Num, suggest_constant_definition
         path += [a] # augmented_assignment
     return path, len(path) # function_call:len
-def test_n31(): # function_definition:test_n31 (-> +113)
+def test_n31(): # function:test_n31 (-> +113)
     assert n31(4) == ([4, 2, 1], 3) # assertion, comparison_operator:Eq, function_call:n31, literal:List, literal:Num, literal:Tuple, suggest_constant_definition
     assert n31(11) == ([11, 34, 17, 52, 26, 13, 40, 20, 10, 5, 16, 8, 4, 2, 1], 15) # assertion, comparison_operator:Eq, function_call:n31, literal:List, literal:Num, literal:Tuple, suggest_constant_definition
     assert n31(31) == ( # assertion, function_call:n31, literal:Num, suggest_constant_definition
@@ -134,9 +134,9 @@ def test_n31(): # function_definition:test_n31 (-> +113)
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/abs.py
 # ----------------------------------------------------------------------------------------
-def abs_val(num): # function_definition:abs_val (-> +1)
+def abs_val(num): # function:abs_val (-> +1)
     return -num if num < 0 else num # comparison_operator:Lt, conditional_expression, literal:Num, unary_operator:USub
-def test_abs_val(): # function_definition:test_abs_val (-> +3)
+def test_abs_val(): # function:test_abs_val (-> +3)
     assert 0 == abs_val(0) # assertion, comparison_operator:Eq, function_call:abs_val, literal:Num
     assert 34 == abs_val(34) # assertion, comparison_operator:Eq, function_call:abs_val, literal:Num, suggest_constant_definition
     assert 100000000000 == abs_val(-100000000000) # assertion, comparison_operator:Eq, function_call:abs_val, literal:Num, suggest_constant_definition
@@ -145,15 +145,15 @@ def test_abs_val(): # function_definition:test_abs_val (-> +3)
 # ../Python/maths/abs_max.py
 # ----------------------------------------------------------------------------------------
 from typing import List # import_from:typing
-def abs_max(x: List[int]) -> int: # function_definition:abs_max, index
+def abs_max(x: List[int]) -> int: # function:abs_max, index
     j = x[0] # assignment, index, literal:Num
     for i in x: # find_best_element (-> +2), for_each
         if abs(i) > abs(j): # comparison_operator:Gt, function_call:abs, if
             j = i # assignment
     return j
-def abs_max_sort(x): # function_definition:abs_max_sort (-> +1)
+def abs_max_sort(x): # function:abs_max_sort (-> +1)
     return sorted(x, key=abs)[-1] # function_call:sorted, index, literal:Num, negative_index:-1
-def main(): # function_definition:main (-> +3)
+def main(): # function:main (-> +3)
     a = [1, 2, -11] # assignment, literal:List, literal:Num, suggest_constant_definition
     assert abs_max(a) == -11 # assertion, comparison_operator:Eq, function_call:abs_max, literal:Num, suggest_constant_definition
     assert abs_max_sort(a) == -11 # assertion, comparison_operator:Eq, function_call:abs_max_sort, literal:Num, suggest_constant_definition
@@ -162,22 +162,22 @@ def main(): # function_definition:main (-> +3)
 # ../Python/maths/abs_min.py
 # ----------------------------------------------------------------------------------------
 from .abs import abs_val # import_from:abs
-def absMin(x): # function_definition:absMin (-> +5)
+def absMin(x): # function:absMin (-> +5)
     j = x[0] # assignment, index, literal:Num
     for i in x: # find_best_element (-> +2), for_each
         if abs_val(i) < abs_val(j): # comparison_operator:Lt, function_call:abs_val, if
             j = i # assignment
     return j
-def main(): # function_definition:main (-> +2)
+def main(): # function:main (-> +2)
     a = [-3, -1, 2, -11] # assignment, literal:List, literal:Num, suggest_constant_definition
     print(absMin(a)) # composition, function_call:absMin, function_call:print
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/average_mean.py
 # ----------------------------------------------------------------------------------------
-def average(nums): # function_definition:average (-> +1)
+def average(nums): # function:average (-> +1)
     return sum(nums) / len(nums) # binary_operator:Div, function_call:len, function_call:sum
-def test_average(): # function_definition:test_average (-> +3)
+def test_average(): # function:test_average (-> +3)
     assert 12.0 == average([3, 6, 9, 12, 15, 18, 21]) # assertion, comparison_operator:Eq, function_call:average, literal:List, literal:Num, suggest_constant_definition
     assert 20 == average([5, 10, 15, 20, 25, 30, 35]) # assertion, comparison_operator:Eq, function_call:average, literal:List, literal:Num, suggest_constant_definition
     assert 4.5 == average([1, 2, 3, 4, 5, 6, 7, 8]) # assertion, comparison_operator:Eq, function_call:average, literal:List, literal:Num, suggest_constant_definition
@@ -185,7 +185,7 @@ def test_average(): # function_definition:test_average (-> +3)
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/average_median.py
 # ----------------------------------------------------------------------------------------
-def median(nums): # function_definition:median (-> +10)
+def median(nums): # function:median (-> +10)
     sorted_list = sorted(nums) # assignment, function_call:sorted
     med = None # assignment, literal:None
     if len(sorted_list) % 2 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, function_call:len, if, if_else, literal:Num
@@ -196,7 +196,7 @@ def median(nums): # function_definition:median (-> +10)
         mid_index = (len(sorted_list) - 1) // 2 # assignment, binary_operator:FloorDiv, binary_operator:Sub, function_call:len, literal:Num
         med = sorted_list[mid_index] # assignment, index
     return med
-def main(): # function_definition:main (-> +4)
+def main(): # function:main (-> +4)
     print("Odd number of numbers:") # function_call:print, literal:Str
     print(median([2, 4, 6, 8, 20, 50, 70])) # composition, function_call:median, function_call:print, literal:List, literal:Num, suggest_constant_definition
     print("Even number of numbers:") # function_call:print, literal:Str
@@ -206,7 +206,7 @@ def main(): # function_definition:main (-> +4)
 # ../Python/maths/average_mode.py
 # ----------------------------------------------------------------------------------------
 import statistics # import:statistics
-def mode(input_list): # function_definition:mode (-> +7)
+def mode(input_list): # function:mode (-> +7)
     check_list = input_list.copy() # assignment, method_call:copy
     result = list() # assignment, function_call:list
     for x in input_list: # accumulate_elements:Attribute (-> +2), for_each
@@ -219,7 +219,7 @@ def mode(input_list): # function_definition:mode (-> +7)
 # ../Python/maths/basic_maths.py
 # ----------------------------------------------------------------------------------------
 import math # import:math
-def prime_factors(n: int) -> list: # function_definition:prime_factors
+def prime_factors(n: int) -> list: # function:prime_factors
     pf = [] # assignment, literal:List
     while n % 2 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, evolve_state (-> +2), literal:Num
         pf.append(2) # literal:Num, method_call:append
@@ -231,7 +231,7 @@ def prime_factors(n: int) -> list: # function_definition:prime_factors
     if n > 2: # comparison_operator:Gt, if, literal:Num
         pf.append(n) # method_call:append
     return pf
-def number_of_divisors(n: int) -> int: # function_definition:number_of_divisors
+def number_of_divisors(n: int) -> int: # function:number_of_divisors
     div = 1 # assignment, literal:Num
     temp = 1 # assignment, literal:Num
     while n % 2 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, evolve_state (-> +2), literal:Num
@@ -245,7 +245,7 @@ def number_of_divisors(n: int) -> int: # function_definition:number_of_divisors
             n = int(n / i) # assignment, binary_operator:Div, function_call:int
         div *= temp # augmented_assignment
     return div
-def sum_of_divisors(n: int) -> int: # function_definition:sum_of_divisors
+def sum_of_divisors(n: int) -> int: # function:sum_of_divisors
     s = 1 # assignment, literal:Num
     temp = 1 # assignment, literal:Num
     while n % 2 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, evolve_state (-> +2), literal:Num
@@ -261,7 +261,7 @@ def sum_of_divisors(n: int) -> int: # function_definition:sum_of_divisors
         if temp > 1: # comparison_operator:Gt, if, literal:Num
             s *= (i ** temp - 1) / (i - 1) # augmented_assignment, binary_operator:Div, binary_operator:Pow, binary_operator:Sub, literal:Num
     return int(s) # function_call:int
-def euler_phi(n: int) -> int: # function_definition:euler_phi
+def euler_phi(n: int) -> int: # function:euler_phi
     s = n # assignment
     for x in set(prime_factors(n)): # accumulate_elements:AugAssign (-> +1), composition, function_call:prime_factors, function_call:set
         s *= (x - 1) / x # augmented_assignment, binary_operator:Div, binary_operator:Sub, literal:Num
@@ -270,7 +270,7 @@ def euler_phi(n: int) -> int: # function_definition:euler_phi
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/binary_exponentiation.py
 # ----------------------------------------------------------------------------------------
-def binary_exponentiation(a, n): # body_recursive_function_definition:binary_exponentiation (-> +7), function_definition:binary_exponentiation (-> +7), recursive_function_definition:binary_exponentiation (-> +7)
+def binary_exponentiation(a, n): # body_recursive_function:binary_exponentiation (-> +7), function:binary_exponentiation (-> +7), recursive_function:binary_exponentiation (-> +7)
     if n == 0: # comparison_operator:Eq, if, if_elif, literal:Num
         return 1 # literal:Num
     elif n % 2 == 1: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, if, if_else, literal:Num
@@ -282,7 +282,7 @@ def binary_exponentiation(a, n): # body_recursive_function_definition:binary_exp
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/binomial_coefficient.py
 # ----------------------------------------------------------------------------------------
-def binomial_coefficient(n, r): # function_definition:binomial_coefficient (-> +8)
+def binomial_coefficient(n, r): # function:binomial_coefficient (-> +8)
     C = [0 for i in range(r + 1)] # assignment, binary_operator:Add, function_call:range, literal:Num
     C[0] = 1 # assignment, index, literal:Num
     for i in range(1, n + 1): # binary_operator:Add, for_range_start, function_call:range, literal:Num
@@ -296,7 +296,7 @@ print(binomial_coefficient(n=10, r=5)) # composition, function_call:binomial_coe
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/ceil.py
 # ----------------------------------------------------------------------------------------
-def ceil(x) -> int: # function_definition:ceil
+def ceil(x) -> int: # function:ceil
     return (
         x if isinstance(x, int) or x - int(x) == 0 else int(x + 1) if x > 0 else int(x) # binary_operator:Add, binary_operator:Sub, boolean_operator:Or, comparison_operator:Eq, comparison_operator:Gt, conditional_expression, function_call:int, function_call:isinstance, literal:Num
     )
@@ -304,7 +304,7 @@ def ceil(x) -> int: # function_definition:ceil
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/collatz_sequence.py
 # ----------------------------------------------------------------------------------------
-def collatz_sequence(n): # function_definition:collatz_sequence (-> +8)
+def collatz_sequence(n): # function:collatz_sequence (-> +8)
     sequence = [n] # assignment
     while n != 1: # comparison_operator:NotEq, evolve_state (-> +4), literal:Num
         if n % 2 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, if, if_else, literal:Num
@@ -313,7 +313,7 @@ def collatz_sequence(n): # function_definition:collatz_sequence (-> +8)
             n = 3 * n + 1 # assignment, binary_operator:Add, binary_operator:Mult, literal:Num, suggest_constant_definition
         sequence.append(n) # method_call:append
     return sequence
-def main(): # function_definition:main (-> +4)
+def main(): # function:main (-> +4)
     n = 43 # assignment, literal:Num, suggest_constant_definition
     sequence = collatz_sequence(n) # assignment, function_call:collatz_sequence
     print(sequence) # function_call:print
@@ -323,7 +323,7 @@ def main(): # function_definition:main (-> +4)
 # ../Python/maths/explicit_euler.py
 # ----------------------------------------------------------------------------------------
 import numpy as np # import:numpy
-def explicit_euler(ode_func, y0, x0, stepsize, x_end): # function_definition:explicit_euler (-> +8)
+def explicit_euler(ode_func, y0, x0, stepsize, x_end): # function:explicit_euler (-> +8)
     N = int(np.ceil((x_end - x0) / stepsize)) # assignment, binary_operator:Div, binary_operator:Sub, composition, function_call:int, method_call:ceil
     y = np.zeros((N + 1,)) # assignment, binary_operator:Add, literal:Num, method_call:zeros
     y[0] = y0 # assignment, index, literal:Num
@@ -337,7 +337,7 @@ def explicit_euler(ode_func, y0, x0, stepsize, x_end): # function_definition:exp
 # ../Python/maths/extended_euclidean_algorithm.py
 # ----------------------------------------------------------------------------------------
 import sys # import:sys
-def extended_euclidean_algorithm(m, n): # function_definition:extended_euclidean_algorithm (-> +31)
+def extended_euclidean_algorithm(m, n): # function:extended_euclidean_algorithm (-> +31)
     a = 0 # assignment, literal:Num
     a_prime = 1 # assignment, literal:Num
     b = 1 # assignment, literal:Num
@@ -369,7 +369,7 @@ def extended_euclidean_algorithm(m, n): # function_definition:extended_euclidean
     else:
         pair = (b, a) # assignment
     return pair
-def main(): # function_definition:main (-> +6)
+def main(): # function:main (-> +6)
     if len(sys.argv) < 3: # comparison_operator:Lt, function_call:len, if, literal:Num, suggest_constant_definition
         print("2 integer arguments required") # function_call:print, literal:Str
         exit(1) # function_call:exit, literal:Num
@@ -380,7 +380,7 @@ def main(): # function_definition:main (-> +6)
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/factorial_python.py
 # ----------------------------------------------------------------------------------------
-def factorial(input_number: int) -> int: # function_definition:factorial
+def factorial(input_number: int) -> int: # function:factorial
     if input_number < 0: # comparison_operator:Lt, if, literal:Num
         raise ValueError("factorial() not defined for negative values") # function_call:ValueError, literal:Str, raise_exception:ValueError
     if not isinstance(input_number, int): # function_call:isinstance, if, unary_operator:Not
@@ -393,7 +393,7 @@ def factorial(input_number: int) -> int: # function_definition:factorial
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/factorial_recursive.py
 # ----------------------------------------------------------------------------------------
-def factorial(n: int) -> int: # body_recursive_function_definition:factorial, function_definition:factorial, recursive_function_definition:factorial
+def factorial(n: int) -> int: # body_recursive_function:factorial, function:factorial, recursive_function:factorial
     if n < 0: # comparison_operator:Lt, if, literal:Num
         raise ValueError("factorial() not defined for negative values") # function_call:ValueError, literal:Str, raise_exception:ValueError
     if not isinstance(n, int): # function_call:isinstance, if, unary_operator:Not
@@ -403,13 +403,13 @@ def factorial(n: int) -> int: # body_recursive_function_definition:factorial, fu
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/factors.py
 # ----------------------------------------------------------------------------------------
-def factors_of_a_number(num: int) -> list: # function_definition:factors_of_a_number
+def factors_of_a_number(num: int) -> list: # function:factors_of_a_number
     return [i for i in range(1, num + 1) if num % i == 0] # binary_operator:Add, binary_operator:Mod, comparison_operator:Eq, divisibility_test, function_call:range, literal:Num
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/fermat_little_theorem.py
 # ----------------------------------------------------------------------------------------
-def binary_exponentiation(a, n, mod): # body_recursive_function_definition:binary_exponentiation (-> +7), function_definition:binary_exponentiation (-> +7), recursive_function_definition:binary_exponentiation (-> +7)
+def binary_exponentiation(a, n, mod): # body_recursive_function:binary_exponentiation (-> +7), function:binary_exponentiation (-> +7), recursive_function:binary_exponentiation (-> +7)
     if n == 0: # comparison_operator:Eq, if, if_elif, literal:Num
         return 1 # literal:Num
     elif n % 2 == 1: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, if, if_else, literal:Num
@@ -431,8 +431,8 @@ import functools # import:functools
 import time # import:time
 from decimal import getcontext, Decimal # import_from:decimal
 getcontext().prec = 100 # assignment, function_call:getcontext, global_variable_definition, literal:Num
-def timer_decorator(func): # closure_definition:timer_decorator (-> +10), function_definition:timer_decorator (-> +10), nested_function_definition:timer_decorator (-> +10)
-    def timer_wrapper(*args, **kwargs): # function_definition:timer_wrapper (-> +8)
+def timer_decorator(func): # closure:timer_decorator (-> +10), function:timer_decorator (-> +10), nested_function:timer_decorator (-> +10)
+    def timer_wrapper(*args, **kwargs): # function:timer_wrapper (-> +8)
         start = time.time() # assignment, method_call:time
         func(*args, **kwargs) # function_call:func
         end = time.time() # assignment, method_call:time
@@ -450,7 +450,7 @@ class ValueTooSmallError(Error):
     pass
 class ValueLessThanZero(Error):
     pass
-def _check_number_input(n, min_thresh, max_thresh=None): # function_definition:_check_number_input (-> +22), function_with_default_positional_arguments_definition:_check_number_input (-> +22), literal:None
+def _check_number_input(n, min_thresh, max_thresh=None): # function:_check_number_input (-> +22), function_with_default_positional_arguments:_check_number_input (-> +22), literal:None
     try: # catch_exception:ValueTooLargeError (-> +19)
         if n >= min_thresh and max_thresh is None: # boolean_operator:And, comparison_operator:GtE, comparison_operator:Is, if, if_elif, literal:None
             return True # literal:True
@@ -473,7 +473,7 @@ def _check_number_input(n, min_thresh, max_thresh=None): # function_definition:_
             f"Incorrect Input: input number must be < {max_thresh} for the recursive calculation" # literal:Str
         )
     return False # literal:False
-def fib_iterative(n): # function_definition:fib_iterative (-> +8)
+def fib_iterative(n): # function:fib_iterative (-> +8)
     n = int(n) # assignment, function_call:int
     if _check_number_input(n, 2): # function_call:_check_number_input, if, literal:Num
         seq_out = [0, 1] # assignment, literal:List, literal:Num
@@ -482,7 +482,7 @@ def fib_iterative(n): # function_definition:fib_iterative (-> +8)
             a, b = b, a + b # assignment, binary_operator:Add
             seq_out.append(b) # method_call:append
         return seq_out
-def fib_formula(n): # function_definition:fib_formula (-> +12)
+def fib_formula(n): # function:fib_formula (-> +12)
     seq_out = [0, 1] # assignment, literal:List, literal:Num
     n = int(n) # assignment, function_call:int
     if _check_number_input(n, 2, 1000000): # function_call:_check_number_input, if, literal:Num, suggest_constant_definition
@@ -499,9 +499,9 @@ def fib_formula(n): # function_definition:fib_formula (-> +12)
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/fibonacci_sequence_recursion.py
 # ----------------------------------------------------------------------------------------
-def recur_fibo(n): # body_recursive_function_definition:recur_fibo (-> +1), function_definition:recur_fibo (-> +1), recursive_function_definition:recur_fibo (-> +1)
+def recur_fibo(n): # body_recursive_function:recur_fibo (-> +1), function:recur_fibo (-> +1), recursive_function:recur_fibo (-> +1)
     return n if n <= 1 else recur_fibo(n - 1) + recur_fibo(n - 2) # binary_operator:Add, binary_operator:Sub, comparison_operator:LtE, conditional_expression, function_call:recur_fibo, literal:Num
-def main(): # function_definition:main (-> +6)
+def main(): # function:main (-> +6)
     limit = int(input("How many terms to include in fibonacci series: ")) # assignment, composition, function_call:input, function_call:int, literal:Str
     if limit > 0: # comparison_operator:Gt, if, if_else, literal:Num
         print(f"The first {limit} terms of the fibonacci series are as follows:") # function_call:print, literal:Str
@@ -512,19 +512,19 @@ def main(): # function_definition:main (-> +6)
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/find_max.py
 # ----------------------------------------------------------------------------------------
-def find_max(nums): # function_definition:find_max (-> +5)
+def find_max(nums): # function:find_max (-> +5)
     max_num = nums[0] # assignment, index, literal:Num
     for x in nums: # find_best_element (-> +2), for_each
         if x > max_num: # comparison_operator:Gt, if
             max_num = x # assignment
     return max_num
-def main(): # function_definition:main (-> +1)
+def main(): # function:main (-> +1)
     print(find_max([2, 4, 9, 7, 19, 94, 5])) # composition, function_call:find_max, function_call:print, literal:List, literal:Num, suggest_constant_definition
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/find_max_recursion.py
 # ----------------------------------------------------------------------------------------
-def find_max(nums, left, right): # function_definition:find_max (-> +6), recursive_function_definition:find_max (-> +6)
+def find_max(nums, left, right): # function:find_max (-> +6), recursive_function:find_max (-> +6)
     if left == right: # comparison_operator:Eq, if
         return nums[left] # index
     mid = (left + right) >> 1 # assignment, binary_operator:Add, binary_operator:RShift, literal:Num
@@ -535,19 +535,19 @@ def find_max(nums, left, right): # function_definition:find_max (-> +6), recursi
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/find_min.py
 # ----------------------------------------------------------------------------------------
-def find_min(nums): # function_definition:find_min (-> +5)
+def find_min(nums): # function:find_min (-> +5)
     min_num = nums[0] # assignment, index, literal:Num
     for num in nums: # find_best_element (-> +2), for_each
         if min_num > num: # comparison_operator:Gt, if
             min_num = num # assignment
     return min_num
-def main(): # function_definition:main (-> +1)
+def main(): # function:main (-> +1)
     assert find_min([0, 1, 2, 3, 4, 5, -3, 24, -56]) == -56 # assertion, comparison_operator:Eq, function_call:find_min, literal:List, literal:Num, suggest_constant_definition
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/find_min_recursion.py
 # ----------------------------------------------------------------------------------------
-def find_min(nums, left, right): # function_definition:find_min (-> +6), recursive_function_definition:find_min (-> +6)
+def find_min(nums, left, right): # function:find_min (-> +6), recursive_function:find_min (-> +6)
     if left == right: # comparison_operator:Eq, if
         return nums[left] # index
     mid = (left + right) >> 1 # assignment, binary_operator:Add, binary_operator:RShift, literal:Num
@@ -558,7 +558,7 @@ def find_min(nums, left, right): # function_definition:find_min (-> +6), recursi
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/floor.py
 # ----------------------------------------------------------------------------------------
-def floor(x) -> int: # function_definition:floor
+def floor(x) -> int: # function:floor
     return (
         x if isinstance(x, int) or x - int(x) == 0 else int(x) if x > 0 else int(x - 1) # binary_operator:Sub, boolean_operator:Or, comparison_operator:Eq, comparison_operator:Gt, conditional_expression, function_call:int, function_call:isinstance, literal:Num
     )
@@ -567,19 +567,19 @@ def floor(x) -> int: # function_definition:floor
 # ../Python/maths/gaussian.py
 # ----------------------------------------------------------------------------------------
 from numpy import pi, sqrt, exp # import_from:numpy
-def gaussian(x, mu: float = 0.0, sigma: float = 1.0) -> int: # function_definition:gaussian, function_with_default_positional_arguments_definition:gaussian, literal:Num
+def gaussian(x, mu: float = 0.0, sigma: float = 1.0) -> int: # function:gaussian, function_with_default_positional_arguments:gaussian, literal:Num
     return 1 / sqrt(2 * pi * sigma ** 2) * exp(-((x - mu) ** 2) / 2 * sigma ** 2) # binary_operator:Div, binary_operator:Mult, binary_operator:Pow, binary_operator:Sub, function_call:exp, function_call:sqrt, literal:Num, unary_operator:USub
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/greatest_common_divisor.py
 # ----------------------------------------------------------------------------------------
-def greatest_common_divisor(a, b): # function_definition:greatest_common_divisor (-> +1), recursive_function_definition:greatest_common_divisor (-> +1)
+def greatest_common_divisor(a, b): # function:greatest_common_divisor (-> +1), recursive_function:greatest_common_divisor (-> +1)
     return b if a == 0 else greatest_common_divisor(b % a, a) # binary_operator:Mod, comparison_operator:Eq, conditional_expression, function_call:greatest_common_divisor, literal:Num
-def gcd_by_iterative(x, y): # function_definition:gcd_by_iterative (-> +3)
+def gcd_by_iterative(x, y): # function:gcd_by_iterative (-> +3)
     while y:
         x, y = y, x % y # assignment, binary_operator:Mod
     return x
-def main(): # function_definition:main (-> +10)
+def main(): # function:main (-> +10)
     try: # catch_exception (-> +9)
         nums = input("Enter two integers separated by comma (,): ").split(",") # assignment, function_call:input, literal:Str, method_call:split
         num_1 = int(nums[0]) # assignment, function_call:int, index, literal:Num
@@ -595,7 +595,7 @@ def main(): # function_definition:main (-> +10)
 # ../Python/maths/hardy_ramanujanalgo.py
 # ----------------------------------------------------------------------------------------
 import math # import:math
-def exactPrimeFactorCount(n): # function_definition:exactPrimeFactorCount (-> +15)
+def exactPrimeFactorCount(n): # function:exactPrimeFactorCount (-> +15)
     count = 0 # assignment, literal:Num
     if n % 2 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, if, literal:Num
         count += 1 # augmented_assignment, literal:Num
@@ -616,13 +616,13 @@ def exactPrimeFactorCount(n): # function_definition:exactPrimeFactorCount (-> +1
 # ../Python/maths/is_square_free.py
 # ----------------------------------------------------------------------------------------
 from typing import List # import_from:typing
-def is_square_free(factors: List[int]) -> bool: # function_definition:is_square_free, index
+def is_square_free(factors: List[int]) -> bool: # function:is_square_free, index
     return len(set(factors)) == len(factors) # comparison_operator:Eq, composition, function_call:len, function_call:set
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/jaccard_similarity.py
 # ----------------------------------------------------------------------------------------
-def jaccard_similariy(setA, setB, alternativeUnion=False): # function_definition:jaccard_similariy (-> +14), function_with_default_positional_arguments_definition:jaccard_similariy (-> +14), literal:False
+def jaccard_similariy(setA, setB, alternativeUnion=False): # function:jaccard_similariy (-> +14), function_with_default_positional_arguments:jaccard_similariy (-> +14), literal:False
     if isinstance(setA, set) and isinstance(setB, set): # boolean_operator:And, function_call:isinstance, if
         intersection = len(setA.intersection(setB)) # assignment, composition, function_call:len, method_call:intersection
         if alternativeUnion: # if, if_else, suggest_conditional_expression (-> +3)
@@ -641,7 +641,7 @@ def jaccard_similariy(setA, setB, alternativeUnion=False): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/karatsuba.py
 # ----------------------------------------------------------------------------------------
-def karatsuba(a, b): # body_recursive_function_definition:karatsuba (-> +11), function_definition:karatsuba (-> +11), recursive_function_definition:karatsuba (-> +11)
+def karatsuba(a, b): # body_recursive_function:karatsuba (-> +11), function:karatsuba (-> +11), recursive_function:karatsuba (-> +11)
     if len(str(a)) == 1 or len(str(b)) == 1: # boolean_operator:Or, comparison_operator:Eq, composition, function_call:len, function_call:str, if, if_else, literal:Num
         return a * b # binary_operator:Mult
     else:
@@ -653,13 +653,13 @@ def karatsuba(a, b): # body_recursive_function_definition:karatsuba (-> +11), fu
         y = karatsuba((a1 + a2), (b1 + b2)) # assignment, binary_operator:Add, function_call:karatsuba
         z = karatsuba(a1, b1) # assignment, function_call:karatsuba
         return (z * 10 ** (2 * m2)) + ((y - z - x) * 10 ** (m2)) + (x) # binary_operator:Add, binary_operator:Mult, binary_operator:Pow, binary_operator:Sub, literal:Num, suggest_constant_definition
-def main(): # function_definition:main (-> +1)
+def main(): # function:main (-> +1)
     print(karatsuba(15463, 23489)) # composition, function_call:karatsuba, function_call:print, literal:Num, suggest_constant_definition
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/kth_lexicographic_permutation.py
 # ----------------------------------------------------------------------------------------
-def kthPermutation(k, n): # function_definition:kthPermutation (-> +13)
+def kthPermutation(k, n): # function:kthPermutation (-> +13)
     factorials = [1] # assignment, literal:List, literal:Num
     for i in range(2, n): # for_range_start, function_call:range, literal:Num
         factorials.append(factorials[-1] * i) # binary_operator:Mult, index, literal:Num, method_call:append, negative_index:-1
@@ -678,7 +678,7 @@ def kthPermutation(k, n): # function_definition:kthPermutation (-> +13)
 # ../Python/maths/largest_of_very_large_numbers.py
 # ----------------------------------------------------------------------------------------
 import math # import:math
-def res(x, y): # function_definition:res (-> +7)
+def res(x, y): # function:res (-> +7)
     if 0 not in (x, y): # comparison_operator:NotIn, if, if_elif, literal:Num
         return y * math.log10(x) # binary_operator:Mult, method_call:log10
     else:
@@ -691,7 +691,7 @@ def res(x, y): # function_definition:res (-> +7)
 # ../Python/maths/least_common_multiple.py
 # ----------------------------------------------------------------------------------------
 import unittest # import:unittest
-def find_lcm(first_num: int, second_num: int) -> int: # function_definition:find_lcm
+def find_lcm(first_num: int, second_num: int) -> int: # function:find_lcm
     max_num = first_num if first_num >= second_num else second_num # assignment, comparison_operator:GtE, conditional_expression
     common_mult = max_num # assignment
     while (common_mult % first_num > 0) or (common_mult % second_num > 0): # binary_operator:Mod, boolean_operator:Or, comparison_operator:Gt, literal:Num
@@ -710,7 +710,7 @@ class TestLeastCommonMultiple(unittest.TestCase):
         (6, 9), # literal:Num, literal:Tuple, suggest_constant_definition
     ]
     expected_results = [20, 195, 124, 210, 1462, 60, 300, 50, 18] # assignment, literal:List, literal:Num, suggest_constant_definition
-    def test_lcm_function(self): # function_definition:test_lcm_function (-> +4)
+    def test_lcm_function(self): # function:test_lcm_function (-> +4)
         for i, (first_num, second_num) in enumerate(self.test_inputs): # for_indexes_elements, function_call:enumerate
             actual_result = find_lcm(first_num, second_num) # assignment, function_call:find_lcm
             with self.subTest(i=i): # method_call:subTest
@@ -719,7 +719,7 @@ class TestLeastCommonMultiple(unittest.TestCase):
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/lucas_series.py
 # ----------------------------------------------------------------------------------------
-def recur_luc(n): # body_recursive_function_definition:recur_luc (-> +5), function_definition:recur_luc (-> +5), recursive_function_definition:recur_luc (-> +5)
+def recur_luc(n): # body_recursive_function:recur_luc (-> +5), function:recur_luc (-> +5), recursive_function:recur_luc (-> +5)
     if n == 1: # comparison_operator:Eq, if, literal:Num
         return n
     if n == 0: # comparison_operator:Eq, if, literal:Num
@@ -731,21 +731,21 @@ def recur_luc(n): # body_recursive_function_definition:recur_luc (-> +5), functi
 # ----------------------------------------------------------------------------------------
 import timeit # import:timeit
 class Matrix(object):
-    def __init__(self, arg): # function_definition:__init__ (-> +6)
+    def __init__(self, arg): # function:__init__ (-> +6)
         if isinstance(arg, list): # function_call:isinstance, if, if_else
             self.t = arg # assignment
             self.n = len(arg) # assignment, function_call:len
         else:
             self.n = arg # assignment
             self.t = [[0 for _ in range(self.n)] for _ in range(self.n)] # assignment, function_call:range, literal:Num
-    def __mul__(self, b): # function_definition:__mul__ (-> +6)
+    def __mul__(self, b): # function:__mul__ (-> +6)
         matrix = Matrix(self.n) # assignment, function_call:Matrix
         for i in range(self.n): # accumulate_elements:AugAssign (-> +3), for_range_stop, function_call:range, nested_for (-> +1), square_nested_for (-> +1)
             for j in range(self.n): # accumulate_elements:AugAssign (-> +2), for_range_stop, function_call:range, nested_for (-> +1), square_nested_for (-> +1)
                 for k in range(self.n): # accumulate_elements:AugAssign (-> +1), for_range_stop, function_call:range
                     matrix.t[i][j] += self.t[i][k] * b.t[k][j] # augmented_assignment, binary_operator:Mult, index
         return matrix
-def modular_exponentiation(a, b): # function_definition:modular_exponentiation (-> +7)
+def modular_exponentiation(a, b): # function:modular_exponentiation (-> +7)
     matrix = Matrix([[1, 0], [0, 1]]) # assignment, function_call:Matrix, literal:List, literal:Num
     while b > 0: # comparison_operator:Gt, evolve_state (-> +4), literal:Num
         if b & 1: # binary_operator:BitAnd, if, literal:Num
@@ -753,7 +753,7 @@ def modular_exponentiation(a, b): # function_definition:modular_exponentiation (
         a *= a # augmented_assignment
         b >>= 1 # augmented_assignment, literal:Num
     return matrix
-def fibonacci_with_matrix_exponentiation(n, f1, f2): # function_definition:fibonacci_with_matrix_exponentiation (-> +7)
+def fibonacci_with_matrix_exponentiation(n, f1, f2): # function:fibonacci_with_matrix_exponentiation (-> +7)
     if n == 1: # comparison_operator:Eq, if, if_elif, literal:Num
         return f1
     elif n == 2: # comparison_operator:Eq, if, literal:Num
@@ -761,7 +761,7 @@ def fibonacci_with_matrix_exponentiation(n, f1, f2): # function_definition:fibon
     matrix = Matrix([[1, 1], [1, 0]]) # assignment, function_call:Matrix, literal:List, literal:Num
     matrix = modular_exponentiation(matrix, n - 2) # assignment, binary_operator:Sub, function_call:modular_exponentiation, literal:Num
     return f2 * matrix.t[0][0] + f1 * matrix.t[0][1] # binary_operator:Add, binary_operator:Mult, index, literal:Num
-def simple_fibonacci(n, f1, f2): # function_definition:simple_fibonacci (-> +11)
+def simple_fibonacci(n, f1, f2): # function:simple_fibonacci (-> +11)
     if n == 1: # comparison_operator:Eq, if, if_elif, literal:Num
         return f1
     elif n == 2: # comparison_operator:Eq, if, literal:Num
@@ -773,7 +773,7 @@ def simple_fibonacci(n, f1, f2): # function_definition:simple_fibonacci (-> +11)
         fn_1, fn_2 = fn_1 + fn_2, fn_1 # assignment, binary_operator:Add
         n -= 1 # augmented_assignment, literal:Num
     return fn_1
-def matrix_exponentiation_time(): # function_definition:matrix_exponentiation_time (-> +8)
+def matrix_exponentiation_time(): # function:matrix_exponentiation_time (-> +8)
     setup = """ # assignment
 from random import randint
 from __main__ import fibonacci_with_matrix_exponentiation
@@ -782,7 +782,7 @@ from __main__ import fibonacci_with_matrix_exponentiation
     exec_time = timeit.timeit(setup=setup, stmt=code, number=100) # assignment, literal:Num, method_call:timeit, suggest_constant_definition
     print("With matrix exponentiation the average execution time is ", exec_time / 100) # binary_operator:Div, function_call:print, literal:Num, literal:Str, suggest_constant_definition
     return exec_time
-def simple_fibonacci_time(): # function_definition:simple_fibonacci_time (-> +10)
+def simple_fibonacci_time(): # function:simple_fibonacci_time (-> +10)
     setup = """ # assignment
 from random import randint
 from __main__ import simple_fibonacci
@@ -793,7 +793,7 @@ from __main__ import simple_fibonacci
         "Without matrix exponentiation the average execution time is ", exec_time / 100 # binary_operator:Div, literal:Num, literal:Str, suggest_constant_definition
     )
     return exec_time
-def main(): # function_definition:main (-> +2)
+def main(): # function:main (-> +2)
     matrix_exponentiation_time() # function_call:matrix_exponentiation_time
     simple_fibonacci_time() # function_call:simple_fibonacci_time
 
@@ -802,7 +802,7 @@ def main(): # function_definition:main (-> +2)
 # ----------------------------------------------------------------------------------------
 from maths.prime_factors import prime_factors # import_from:maths.prime_factors
 from maths.is_square_free import is_square_free # import_from:maths.is_square_free
-def mobius(n: int) -> int: # function_definition:mobius
+def mobius(n: int) -> int: # function:mobius
     factors = prime_factors(n) # assignment, function_call:prime_factors
     if is_square_free(factors): # function_call:is_square_free, if
         return -1 if len(factors) % 2 else 1 # binary_operator:Mod, conditional_expression, function_call:len, literal:Num
@@ -811,7 +811,7 @@ def mobius(n: int) -> int: # function_definition:mobius
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/modular_exponential.py
 # ----------------------------------------------------------------------------------------
-def modular_exponential(base, power, mod): # function_definition:modular_exponential (-> +10)
+def modular_exponential(base, power, mod): # function:modular_exponential (-> +10)
     if power < 0: # comparison_operator:Lt, if, literal:Num
         return -1 # literal:Num
     base %= mod # augmented_assignment
@@ -822,16 +822,16 @@ def modular_exponential(base, power, mod): # function_definition:modular_exponen
         power = power >> 1 # assignment, binary_operator:RShift, literal:Num, suggest_augmented_assignment
         base = (base * base) % mod # assignment, binary_operator:Mod, binary_operator:Mult
     return result
-def main(): # function_definition:main (-> +1)
+def main(): # function:main (-> +1)
     print(modular_exponential(3, 200, 13)) # composition, function_call:modular_exponential, function_call:print, literal:Num, suggest_constant_definition
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/newton_raphson.py
 # ----------------------------------------------------------------------------------------
 import math as m # import:math
-def calc_derivative(f, a, h=0.001): # function_definition:calc_derivative (-> +1), function_with_default_positional_arguments_definition:calc_derivative (-> +1), literal:Num
+def calc_derivative(f, a, h=0.001): # function:calc_derivative (-> +1), function_with_default_positional_arguments:calc_derivative (-> +1), literal:Num
     return (f(a + h) - f(a - h)) / (2 * h) # binary_operator:Add, binary_operator:Div, binary_operator:Mult, binary_operator:Sub, function_call:f, literal:Num
-def newton_raphson(f, x0=0, maxiter=100, step=0.0001, maxerror=1e-6, logsteps=False): # function_definition:newton_raphson (-> +17), function_with_default_positional_arguments_definition:newton_raphson (-> +17), literal:False, literal:Num
+def newton_raphson(f, x0=0, maxiter=100, step=0.0001, maxerror=1e-6, logsteps=False): # function:newton_raphson (-> +17), function_with_default_positional_arguments:newton_raphson (-> +17), literal:False, literal:Num
     a = x0 # assignment
     steps = [a] # assignment
     error = abs(f(a)) # assignment, composition, function_call:abs, function_call:f
@@ -854,16 +854,16 @@ def newton_raphson(f, x0=0, maxiter=100, step=0.0001, maxerror=1e-6, logsteps=Fa
 # ../Python/maths/perfect_square.py
 # ----------------------------------------------------------------------------------------
 import math # import:math
-def perfect_square(num: int) -> bool: # function_definition:perfect_square
+def perfect_square(num: int) -> bool: # function:perfect_square
     return math.sqrt(num) * math.sqrt(num) == num # binary_operator:Mult, comparison_operator:Eq, method_call:sqrt
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/polynomial_evaluation.py
 # ----------------------------------------------------------------------------------------
 from typing import Sequence # import_from:typing
-def evaluate_poly(poly: Sequence[float], x: float) -> float: # function_definition:evaluate_poly, index
+def evaluate_poly(poly: Sequence[float], x: float) -> float: # function:evaluate_poly, index
     return sum(c * (x ** i) for i, c in enumerate(poly)) # binary_operator:Mult, binary_operator:Pow, composition, function_call:enumerate, function_call:sum
-def horner(poly: Sequence[float], x: float) -> float: # function_definition:horner, index
+def horner(poly: Sequence[float], x: float) -> float: # function:horner, index
     result = 0.0 # assignment, literal:Num, suggest_constant_definition
     for coeff in reversed(poly): # accumulate_elements:Assign (-> +1), function_call:reversed
         result = result * x + coeff # assignment, binary_operator:Add, binary_operator:Mult
@@ -874,7 +874,7 @@ def horner(poly: Sequence[float], x: float) -> float: # function_definition:horn
 # ----------------------------------------------------------------------------------------
 import math # import:math
 import unittest # import:unittest
-def prime_check(number): # function_definition:prime_check (-> +8)
+def prime_check(number): # function:prime_check (-> +8)
     if number < 2: # comparison_operator:Lt, if, literal:Num
         return False # literal:False
     if number < 4: # comparison_operator:Lt, if, literal:Num, suggest_constant_definition
@@ -884,7 +884,7 @@ def prime_check(number): # function_definition:prime_check (-> +8)
     odd_numbers = range(3, int(math.sqrt(number)) + 1, 2) # assignment, binary_operator:Add, composition, function_call:int, function_call:range, literal:Num, method_call:sqrt, suggest_constant_definition
     return not any(number % i == 0 for i in odd_numbers) # binary_operator:Mod, comparison_operator:Eq, divisibility_test, function_call:any, literal:Num, unary_operator:Not
 class Test(unittest.TestCase):
-    def test_primes(self): # function_definition:test_primes (-> +10)
+    def test_primes(self): # function:test_primes (-> +10)
         self.assertTrue(prime_check(2)) # composition, function_call:prime_check, literal:Num, method_call:assertTrue
         self.assertTrue(prime_check(3)) # composition, function_call:prime_check, literal:Num, method_call:assertTrue, suggest_constant_definition
         self.assertTrue(prime_check(5)) # composition, function_call:prime_check, literal:Num, method_call:assertTrue, suggest_constant_definition
@@ -895,7 +895,7 @@ class Test(unittest.TestCase):
         self.assertTrue(prime_check(19)) # composition, function_call:prime_check, literal:Num, method_call:assertTrue, suggest_constant_definition
         self.assertTrue(prime_check(23)) # composition, function_call:prime_check, literal:Num, method_call:assertTrue, suggest_constant_definition
         self.assertTrue(prime_check(29)) # composition, function_call:prime_check, literal:Num, method_call:assertTrue, suggest_constant_definition
-    def test_not_primes(self): # function_definition:test_not_primes (-> +12)
+    def test_not_primes(self): # function:test_not_primes (-> +12)
         self.assertFalse(prime_check(-19), "Negative numbers are not prime.") # composition, function_call:prime_check, literal:Num, literal:Str, method_call:assertFalse, suggest_constant_definition
         self.assertFalse( # composition, method_call:assertFalse
             prime_check(0), "Zero doesn't have any divider, primes must have two" # function_call:prime_check, literal:Num, literal:Str
@@ -913,7 +913,7 @@ class Test(unittest.TestCase):
 # ../Python/maths/prime_factors.py
 # ----------------------------------------------------------------------------------------
 from typing import List # import_from:typing
-def prime_factors(n: int) -> List[int]: # function_definition:prime_factors, index
+def prime_factors(n: int) -> List[int]: # function:prime_factors, index
     i = 2 # assignment, literal:Num
     factors = [] # assignment, literal:List
     while i * i <= n: # binary_operator:Mult, comparison_operator:LtE, evolve_state (-> +4)
@@ -930,7 +930,7 @@ def prime_factors(n: int) -> List[int]: # function_definition:prime_factors, ind
 # ../Python/maths/prime_numbers.py
 # ----------------------------------------------------------------------------------------
 from typing import List # import_from:typing
-def primes(max: int) -> List[int]: # function_definition:primes, index
+def primes(max: int) -> List[int]: # function:primes, index
     max += 1 # augmented_assignment, literal:Num
     numbers = [False] * max # assignment, binary_operator:Mult, literal:False, literal:List
     ret = [] # assignment, literal:List
@@ -944,7 +944,7 @@ def primes(max: int) -> List[int]: # function_definition:primes, index
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/prime_sieve_eratosthenes.py
 # ----------------------------------------------------------------------------------------
-def prime_sieve_eratosthenes(num): # function_definition:prime_sieve_eratosthenes (-> +10)
+def prime_sieve_eratosthenes(num): # function:prime_sieve_eratosthenes (-> +10)
     primes = [True for i in range(num + 1)] # assignment, binary_operator:Add, function_call:range, literal:Num, literal:True
     p = 2 # assignment, literal:Num
     while p * p <= num: # binary_operator:Mult, comparison_operator:LtE
@@ -960,7 +960,7 @@ def prime_sieve_eratosthenes(num): # function_definition:prime_sieve_eratosthene
 # ../Python/maths/qr_decomposition.py
 # ----------------------------------------------------------------------------------------
 import numpy as np # import:numpy
-def qr_householder(A): # function_definition:qr_householder (-> +16)
+def qr_householder(A): # function:qr_householder (-> +16)
     m, n = A.shape # assignment
     t = min(m, n) # assignment, function_call:min
     Q = np.eye(m) # assignment, method_call:eye
@@ -983,7 +983,7 @@ def qr_householder(A): # function_definition:qr_householder (-> +16)
 # ----------------------------------------------------------------------------------------
 from math import sqrt # import_from:math
 from typing import Tuple # import_from:typing
-def QuadraticEquation(a: int, b: int, c: int) -> Tuple[str, str]: # function_definition:QuadraticEquation, index
+def QuadraticEquation(a: int, b: int, c: int) -> Tuple[str, str]: # function:QuadraticEquation, index
     if a == 0: # comparison_operator:Eq, if, literal:Num
         raise ValueError("Coefficient 'a' must not be zero for quadratic equations.") # function_call:ValueError, literal:Str, raise_exception:ValueError
     delta = b * b - 4 * a * c # assignment, binary_operator:Mult, binary_operator:Sub, literal:Num, suggest_constant_definition
@@ -994,7 +994,7 @@ def QuadraticEquation(a: int, b: int, c: int) -> Tuple[str, str]: # function_def
         return f"({snd} * i) / 2", f"({snd} * i) / {2 * a}" # binary_operator:Mult, literal:Num, literal:Str
     b = -abs(b) # assignment, function_call:abs, unary_operator:USub
     return f"({b}+{snd} * i) / 2", f"({b}+{snd} * i) / {2 * a}" # binary_operator:Mult, literal:Num, literal:Str
-def main(): # function_definition:main (-> +2)
+def main(): # function:main (-> +2)
     solutions = QuadraticEquation(a=5, b=6, c=1) # assignment, function_call:QuadraticEquation, literal:Num, suggest_constant_definition
     print("The equation solutions are: {} and {}".format(*solutions)) # composition, function_call:print, literal:Str, method_call:format
 
@@ -1004,7 +1004,7 @@ def main(): # function_definition:main (-> +2)
 import mpmath # import:mpmath
 import numpy as np # import:numpy
 class FFT:
-    def __init__(self, polyA=[0], polyB=[0]): # function_definition:__init__ (-> +17), function_with_default_positional_arguments_definition:__init__ (-> +17), literal:List, literal:Num
+    def __init__(self, polyA=[0], polyB=[0]): # function:__init__ (-> +17), function_with_default_positional_arguments:__init__ (-> +17), literal:List, literal:Num
         self.polyA = list(polyA)[:] # assignment, function_call:list, slice
         self.polyB = list(polyB)[:] # assignment, function_call:list, slice
         while self.polyA[-1] == 0: # comparison_operator:Eq, evolve_state (-> +1), index, literal:Num, negative_index:-1
@@ -1022,7 +1022,7 @@ class FFT:
             self.polyB.append(0) # literal:Num, method_call:append
         self.root = complex(mpmath.root(x=1, n=self.C_max_length, k=1)) # assignment, composition, function_call:complex, literal:Num, method_call:root
         self.product = self.__multiply() # assignment, method_call:__multiply
-    def __DFT(self, which): # function_definition:__DFT (-> +23)
+    def __DFT(self, which): # function:__DFT (-> +23)
         if which == "A": # comparison_operator:Eq, if, if_else, literal:Str, suggest_conditional_expression (-> +3)
             dft = [[x] for x in self.polyA] # assignment
         else:
@@ -1046,7 +1046,7 @@ class FFT:
             dft = new_dft # assignment
             next_ncol = next_ncol // 2 # assignment, binary_operator:FloorDiv, literal:Num, suggest_augmented_assignment
         return dft[0] # index, literal:Num
-    def __multiply(self): # function_definition:__multiply (-> +35)
+    def __multiply(self): # function:__multiply (-> +35)
         dftA = self.__DFT("A") # assignment, literal:Str, method_call:__DFT
         dftB = self.__DFT("B") # assignment, literal:Str, method_call:__DFT
         inverseC = [[dftA[i] * dftB[i] for i in range(self.C_max_length)]] # assignment, binary_operator:Mult, function_call:range, index
@@ -1082,7 +1082,7 @@ class FFT:
         while inverseC[-1] == 0: # comparison_operator:Eq, evolve_state (-> +1), index, literal:Num, negative_index:-1
             inverseC.pop() # method_call:pop
         return inverseC
-    def __str__(self): # function_definition:__str__ (-> +10)
+    def __str__(self): # function:__str__ (-> +10)
         A = "A = " + " + ".join( # assignment, binary_operator:Add, composition, literal:Str, method_call:join
             f"{coef}*x^{i}" for coef, i in enumerate(self.polyA[: self.len_A]) # function_call:enumerate, literal:Str, slice
         )
@@ -1098,7 +1098,7 @@ class FFT:
 # ../Python/maths/runge_kutta.py
 # ----------------------------------------------------------------------------------------
 import numpy as np # import:numpy
-def runge_kutta(f, y0, x0, h, x_end): # function_definition:runge_kutta (-> +12)
+def runge_kutta(f, y0, x0, h, x_end): # function:runge_kutta (-> +12)
     N = int(np.ceil((x_end - x0) / h)) # assignment, binary_operator:Div, binary_operator:Sub, composition, function_call:int, method_call:ceil
     y = np.zeros((N + 1,)) # assignment, binary_operator:Add, literal:Num, method_call:zeros
     y[0] = y0 # assignment, index, literal:Num
@@ -1116,7 +1116,7 @@ def runge_kutta(f, y0, x0, h, x_end): # function_definition:runge_kutta (-> +12)
 # ../Python/maths/segmented_sieve.py
 # ----------------------------------------------------------------------------------------
 import math # import:math
-def sieve(n): # function_definition:sieve (-> +33)
+def sieve(n): # function:sieve (-> +33)
     in_prime = [] # assignment, literal:List
     start = 2 # assignment, literal:Num
     end = int(math.sqrt(n)) # assignment, composition, function_call:int, method_call:sqrt
@@ -1164,7 +1164,7 @@ doctest provider: Bruno Simas Hadlich (https://github.com/brunohadlich)
 Also thanks Dmitry (https://github.com/LizardWizzard) for finding the problem
 """ # literal:Str
 import math # import:math
-def sieve(n): # function_definition:sieve (-> +15)
+def sieve(n): # function:sieve (-> +15)
     l = [True] * (n + 1) # assignment, binary_operator:Add, binary_operator:Mult, literal:List, literal:Num, literal:True
     prime = [] # assignment, literal:List
     start = 2 # assignment, literal:Num
@@ -1184,7 +1184,7 @@ def sieve(n): # function_definition:sieve (-> +15)
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/simpson_rule.py
 # ----------------------------------------------------------------------------------------
-def method_2(boundary, steps): # function_definition:method_2 (-> +12)
+def method_2(boundary, steps): # function:method_2 (-> +12)
     h = (boundary[1] - boundary[0]) / steps # assignment, binary_operator:Div, binary_operator:Sub, index, literal:Num
     a = boundary[0] # assignment, index, literal:Num
     b = boundary[1] # assignment, index, literal:Num
@@ -1197,15 +1197,15 @@ def method_2(boundary, steps): # function_definition:method_2 (-> +12)
         cnt += 1 # augmented_assignment, literal:Num
     y += (h / 3.0) * f(b) # augmented_assignment, binary_operator:Div, binary_operator:Mult, function_call:f, literal:Num, suggest_constant_definition
     return y
-def make_points(a, b, h): # function_definition:make_points (-> +4), generator_definition:make_points (-> +4)
+def make_points(a, b, h): # function:make_points (-> +4), generator:make_points (-> +4)
     x = a + h # assignment, binary_operator:Add
     while x < (b - h): # binary_operator:Sub, comparison_operator:Lt
         yield x
         x = x + h # assignment, binary_operator:Add, suggest_augmented_assignment
-def f(x): # function_definition:f (-> +2)
+def f(x): # function:f (-> +2)
     y = (x - 0) * (x - 0) # assignment, binary_operator:Mult, binary_operator:Sub, literal:Num
     return y
-def main(): # function_definition:main (-> +6)
+def main(): # function:main (-> +6)
     a = 0.0 # assignment, literal:Num, suggest_constant_definition
     b = 1.0 # assignment, literal:Num, suggest_constant_definition
     steps = 10.0 # assignment, literal:Num, suggest_constant_definition
@@ -1217,7 +1217,7 @@ def main(): # function_definition:main (-> +6)
 # ../Python/maths/softmax.py
 # ----------------------------------------------------------------------------------------
 import numpy as np # import:numpy
-def softmax(vector): # function_definition:softmax (-> +4)
+def softmax(vector): # function:softmax (-> +4)
     exponentVector = np.exp(vector) # assignment, method_call:exp
     sumOfExponents = np.sum(exponentVector) # assignment, method_call:sum
     softmax_vector = exponentVector / sumOfExponents # assignment, binary_operator:Div
@@ -1226,10 +1226,10 @@ def softmax(vector): # function_definition:softmax (-> +4)
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/sum_of_arithmetic_series.py
 # ----------------------------------------------------------------------------------------
-def sum_of_series(first_term, common_diff, num_of_terms): # function_definition:sum_of_series (-> +2)
+def sum_of_series(first_term, common_diff, num_of_terms): # function:sum_of_series (-> +2)
     sum = (num_of_terms / 2) * (2 * first_term + (num_of_terms - 1) * common_diff) # assignment, binary_operator:Add, binary_operator:Div, binary_operator:Mult, binary_operator:Sub, literal:Num
     return sum
-def main(): # function_definition:main (-> +1)
+def main(): # function:main (-> +1)
     print(sum_of_series(1, 1, 10)) # composition, function_call:print, function_call:sum_of_series, literal:Num, suggest_constant_definition
 
 # ----------------------------------------------------------------------------------------
@@ -1241,7 +1241,7 @@ Test() # function_call:Test
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/trapezoidal_rule.py
 # ----------------------------------------------------------------------------------------
-def method_1(boundary, steps): # function_definition:method_1 (-> +10)
+def method_1(boundary, steps): # function:method_1 (-> +10)
     h = (boundary[1] - boundary[0]) / steps # assignment, binary_operator:Div, binary_operator:Sub, index, literal:Num
     a = boundary[0] # assignment, index, literal:Num
     b = boundary[1] # assignment, index, literal:Num
@@ -1252,15 +1252,15 @@ def method_1(boundary, steps): # function_definition:method_1 (-> +10)
         y += h * f(i) # augmented_assignment, binary_operator:Mult, function_call:f
     y += (h / 2.0) * f(b) # augmented_assignment, binary_operator:Div, binary_operator:Mult, function_call:f, literal:Num, suggest_constant_definition
     return y
-def make_points(a, b, h): # function_definition:make_points (-> +4), generator_definition:make_points (-> +4)
+def make_points(a, b, h): # function:make_points (-> +4), generator:make_points (-> +4)
     x = a + h # assignment, binary_operator:Add
     while x < (b - h): # binary_operator:Sub, comparison_operator:Lt
         yield x
         x = x + h # assignment, binary_operator:Add, suggest_augmented_assignment
-def f(x): # function_definition:f (-> +2)
+def f(x): # function:f (-> +2)
     y = (x - 0) * (x - 0) # assignment, binary_operator:Mult, binary_operator:Sub, literal:Num
     return y
-def main(): # function_definition:main (-> +6)
+def main(): # function:main (-> +6)
     a = 0.0 # assignment, literal:Num, suggest_constant_definition
     b = 1.0 # assignment, literal:Num, suggest_constant_definition
     steps = 10.0 # assignment, literal:Num, suggest_constant_definition
@@ -1272,23 +1272,23 @@ def main(): # function_definition:main (-> +6)
 # ../Python/maths/volume.py
 # ----------------------------------------------------------------------------------------
 from math import pi # import_from:math
-def vol_cube(side_length): # function_definition:vol_cube (-> +1)
+def vol_cube(side_length): # function:vol_cube (-> +1)
     return float(side_length ** 3) # binary_operator:Pow, function_call:float, literal:Num, suggest_constant_definition
-def vol_cuboid(width, height, length): # function_definition:vol_cuboid (-> +1)
+def vol_cuboid(width, height, length): # function:vol_cuboid (-> +1)
     return float(width * height * length) # binary_operator:Mult, function_call:float
-def vol_cone(area_of_base, height): # function_definition:vol_cone (-> +1)
+def vol_cone(area_of_base, height): # function:vol_cone (-> +1)
     return (float(1) / 3) * area_of_base * height # binary_operator:Div, binary_operator:Mult, function_call:float, literal:Num, suggest_constant_definition
-def vol_right_circ_cone(radius, height): # function_definition:vol_right_circ_cone (-> +1)
+def vol_right_circ_cone(radius, height): # function:vol_right_circ_cone (-> +1)
     return (float(1) / 3) * pi * (radius ** 2) * height # binary_operator:Div, binary_operator:Mult, binary_operator:Pow, function_call:float, literal:Num, suggest_constant_definition
-def vol_prism(area_of_base, height): # function_definition:vol_prism (-> +1)
+def vol_prism(area_of_base, height): # function:vol_prism (-> +1)
     return float(area_of_base * height) # binary_operator:Mult, function_call:float
-def vol_pyramid(area_of_base, height): # function_definition:vol_pyramid (-> +1)
+def vol_pyramid(area_of_base, height): # function:vol_pyramid (-> +1)
     return (float(1) / 3) * area_of_base * height # binary_operator:Div, binary_operator:Mult, function_call:float, literal:Num, suggest_constant_definition
-def vol_sphere(radius): # function_definition:vol_sphere (-> +1)
+def vol_sphere(radius): # function:vol_sphere (-> +1)
     return (float(4) / 3) * pi * radius ** 3 # binary_operator:Div, binary_operator:Mult, binary_operator:Pow, function_call:float, literal:Num, suggest_constant_definition
-def vol_circular_cylinder(radius, height): # function_definition:vol_circular_cylinder (-> +1)
+def vol_circular_cylinder(radius, height): # function:vol_circular_cylinder (-> +1)
     return pi * radius ** 2 * height # binary_operator:Mult, binary_operator:Pow, literal:Num
-def main(): # function_definition:main (-> +9)
+def main(): # function:main (-> +9)
     print("Volumes:") # function_call:print, literal:Str
     print("Cube: " + str(vol_cube(2))) # binary_operator:Add, composition, function_call:print, function_call:str, function_call:vol_cube, literal:Num, literal:Str
     print("Cuboid: " + str(vol_cuboid(2, 2, 2))) # binary_operator:Add, composition, function_call:print, function_call:str, function_call:vol_cuboid, literal:Num, literal:Str
@@ -1304,7 +1304,7 @@ def main(): # function_definition:main (-> +9)
 # ----------------------------------------------------------------------------------------
 import datetime # import:datetime
 import argparse # import:argparse
-def zeller(date_input: str) -> str: # function_definition:zeller
+def zeller(date_input: str) -> str: # function:zeller
     days = { # assignment, literal:Dict
         "0": "Sunday", # literal:Str
         "1": "Monday", # literal:Str

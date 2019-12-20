@@ -16,7 +16,7 @@ def test_generate_tagged_source_codes():
         "# ----------------------------------------------------------------------------------------\n"
         "# tests/data/programs/function_definition.py\n"
         "# ----------------------------------------------------------------------------------------",
-        "def succ(n): # function_definition:succ (-> +1)\n"
+        "def succ(n): # function:succ (-> +1)\n"
         "    return a + b + 1 # binary_operator:Add, literal:Num\n",
         "# ----------------------------------------------------------------------------------------\n"
         "# tests/data/programs/loop.py\n"

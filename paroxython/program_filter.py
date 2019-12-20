@@ -170,7 +170,7 @@ if __name__ == "__main__":
     """.strip().split()
 
     mandatory_patterns = r"""
-        function_definition/.*
+        function/.*
         operator/percent/modulo/.*
     """.strip().split()
 

@@ -14,7 +14,7 @@
       "source": "def succ(n):\n    return a + b + 1",
       "labels": {
         "binary_operator:Add": [[2,2]],
-        "function_definition:succ": [[1,2]],
+        "function:succ": [[1,2]],
         "literal:Num": [[2,2]]
       },
       "taxons": {
@@ -47,7 +47,7 @@
     "binary_operator:Add": [
       "tests/data/programs/function_definition.py"
     ],
-    "function_definition:succ": [
+    "function:succ": [
       "tests/data/programs/function_definition.py"
     ],
     "literal:Num": [

@@ -21,7 +21,7 @@ def test_generate_labeled_sources():
     assert "function_definition.py" in next(result)
     assert next(result).strip() == "\n".join(
         [
-            "def succ(n): # function_definition:succ (-> +1)",
+            "def succ(n): # function:succ (-> +1)",
             "    return a + b + 1 # binary_operator:Add, literal:Num",
         ]
     )
@@ -46,7 +46,7 @@ def test_generate_programs_labels():
             Path("tests/data/programs/function_definition.py"),
             {
                 "binary_operator:Add": [(2, 2), (2, 2)],  # the construct appears twice
-                "function_definition:succ": [(1, 2)],
+                "function:succ": [(1, 2)],
                 "literal:Num": [(2, 2)],
             },
         ),

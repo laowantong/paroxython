@@ -33,14 +33,14 @@
     - [Construct `swapping`](#construct-swapping)
     - [Construct `negation`](#construct-negation)
   - [Function definitions](#function-definitions)
-    - [Construct `function_definition`](#construct-function_definition)
-    - [Construct `function_with_default_positional_arguments_definition`](#construct-function_with_default_positional_arguments_definition)
-    - [Construct `recursive_function_definition`](#construct-recursive_function_definition)
-    - [Construct `deeply_recursive_function_definition`](#construct-deeply_recursive_function_definition)
-    - [Construct `body_recursive_function_definition`](#construct-body_recursive_function_definition)
-    - [Construct `generator_definition`](#construct-generator_definition)
-    - [Construct `nested_function_definition`](#construct-nested_function_definition)
-    - [Construct `closure_definition`](#construct-closure_definition)
+    - [Construct `function`](#construct-function)
+    - [Construct `function_with_default_positional_arguments`](#construct-function_with_default_positional_arguments)
+    - [Construct `recursive_function`](#construct-recursive_function)
+    - [Construct `deeply_recursive_function`](#construct-deeply_recursive_function)
+    - [Construct `body_recursive_function`](#construct-body_recursive_function)
+    - [Construct `generator`](#construct-generator)
+    - [Construct `nested_function`](#construct-nested_function)
+    - [Construct `closure`](#construct-closure)
   - [Conditionals](#conditionals)
     - [Construct `if`](#construct-if)
     - [Construct `if_else`](#construct-if_else)
@@ -853,7 +853,7 @@ Update a variable by negating it.
 
 --------------------------------------------------------------------------------
 
-#### Construct `function_definition`
+#### Construct `function`
 
 ##### Regex
 
@@ -884,12 +884,12 @@ Update a variable by negating it.
 
 | Label | Lines |
 |:--|:--|
-| `function_definition:foo` | 1-7 |
-| `function_definition:fizz` | 2-4 |
+| `function:foo` | 1-7 |
+| `function:fizz` | 2-4 |
 
 --------------------------------------------------------------------------------
 
-#### Construct `function_with_default_positional_arguments_definition`
+#### Construct `function_with_default_positional_arguments`
 
 ##### Regex
 
@@ -913,11 +913,11 @@ Update a variable by negating it.
 
 | Label | Lines |
 |:--|:--|
-| `function_with_default_positional_arguments_definition:foobar` | 1-3 |
+| `function_with_default_positional_arguments:foobar` | 1-3 |
 
 --------------------------------------------------------------------------------
 
-#### Construct `recursive_function_definition`
+#### Construct `recursive_function`
 
 ##### Regex
 
@@ -945,11 +945,11 @@ Update a variable by negating it.
 
 | Label | Lines |
 |:--|:--|
-| `recursive_function_definition:gob_program` | 1-3 |
+| `recursive_function:gob_program` | 1-3 |
 
 --------------------------------------------------------------------------------
 
-#### Construct `deeply_recursive_function_definition`
+#### Construct `deeply_recursive_function`
 
 Any function `f` which contains a nested call to itself (`f(..., f(...), ...)`), e.g. the [Ackermann function](https://en.wikipedia.org/wiki/Ackermann_function).
 
@@ -986,12 +986,12 @@ Any function `f` which contains a nested call to itself (`f(..., f(...), ...)`),
 
 | Label | Lines |
 |:--|:--|
-| `deeply_recursive_function_definition:gob_program` | 1-3 |
-| `deeply_recursive_function_definition:gob_program_2` | 5-7 |
+| `deeply_recursive_function:gob_program` | 1-3 |
+| `deeply_recursive_function:gob_program_2` | 5-7 |
 
 --------------------------------------------------------------------------------
 
-#### Construct `body_recursive_function_definition`
+#### Construct `body_recursive_function`
 
 A tail call is a subroutine call performed as the last action of a procedure. A body-recursive function includes at least one non-tail recursive call.
 
@@ -1060,15 +1060,15 @@ A tail call is a subroutine call performed as the last action of a procedure. A 
 
 | Label | Lines |
 |:--|:--|
-| `body_recursive_function_definition:ack` | 1-7 |
-| `body_recursive_function_definition:recurs` | 10-15 |
-| `body_recursive_function_definition:place` | 18-25 |
-| `body_recursive_function_definition:foo` | 30-31 |
-| `body_recursive_function_definition:bar` | 33-34 |
+| `body_recursive_function:ack` | 1-7 |
+| `body_recursive_function:recurs` | 10-15 |
+| `body_recursive_function:place` | 18-25 |
+| `body_recursive_function:foo` | 30-31 |
+| `body_recursive_function:bar` | 33-34 |
 
 --------------------------------------------------------------------------------
 
-#### Construct `generator_definition`
+#### Construct `generator`
 
 ##### Regex
 
@@ -1098,12 +1098,12 @@ A tail call is a subroutine call performed as the last action of a procedure. A 
 
 | Label | Lines |
 |:--|:--|
-| `generator_definition:foo` | 1-3 |
-| `generator_definition:energy` | 5-6 |
+| `generator:foo` | 1-3 |
+| `generator:energy` | 5-6 |
 
 --------------------------------------------------------------------------------
 
-#### Construct `nested_function_definition`
+#### Construct `nested_function`
 
 ##### Regex
 
@@ -1129,11 +1129,11 @@ A tail call is a subroutine call performed as the last action of a procedure. A 
 
 | Label | Lines |
 |:--|:--|
-| `nested_function_definition:outer_function` | 1-5 |
+| `nested_function:outer_function` | 1-5 |
 
 --------------------------------------------------------------------------------
 
-#### Construct `closure_definition`
+#### Construct `closure`
 
 Function enclosing the definition of an inner function and returning it. Beware that the current regex does not check whether the inner function refers to a variable defined in the enclosing function.
 
@@ -1165,7 +1165,7 @@ Function enclosing the definition of an inner function and returning it. Beware 
 
 | Label | Lines |
 |:--|:--|
-| `closure_definition:outer_function` | 1-5 |
+| `closure:outer_function` | 1-5 |
 
 --------------------------------------------------------------------------------
 
