@@ -38,7 +38,7 @@ examples = []
 for match in extract_examples(parse.ref_path):
     label_name = match.group(1)
     source = match.group(2)
-    results = zip(match.captures("LABELS"), match.captures("LINES"))
+    results = list(zip(match.captures("LABELS"), match.captures("LINES")))
     examples.append((label_name, source, results))
 
 
