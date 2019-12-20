@@ -641,7 +641,7 @@ def jaccard_similariy(setA, setB, alternativeUnion=False): # function_definition
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/karatsuba.py
 # ----------------------------------------------------------------------------------------
-def karatsuba(a, b): # function_definition:karatsuba (-> +11), recursive_function_definition:karatsuba (-> +11)
+def karatsuba(a, b): # body_recursive_function_definition:karatsuba (-> +11), function_definition:karatsuba (-> +11), recursive_function_definition:karatsuba (-> +11)
     if len(str(a)) == 1 or len(str(b)) == 1: # boolean_operator:Or, comparison_operator:Eq, composition, function_call:len, function_call:str, if, if_else, literal:Num
         return a * b # binary_operator:Mult
     else:

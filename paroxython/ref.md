@@ -993,8 +993,7 @@ Any function `f` which contains a nested call to itself (`f(..., f(...), ...)`),
 
 #### Construct `body_recursive_function_definition`
 
-A tail call is a subroutine call performed as the final action of a procedure.
-A body recursive function performs at least one non-tail recursive call.
+A tail call is a subroutine call performed as the last action of a procedure. A body-recursive function includes at least one non-tail recursive call.
 
 ##### Regex
 
@@ -1002,12 +1001,16 @@ A body recursive function performs at least one non-tail recursive call.
            ^(.*)/_type='FunctionDef'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
 \n(?:\1.+\n)*?\1/name='(?P<SUFFIX>.+)' # capture the name of the function
-(   # The recursive call is performed in one argument
-\n(?:\1.+\n)* \1/(?P<_1>(?:body|orelse)/\d+)/(?P<_2>.+/args/.+)/_type='Call'
-\n(?:\1.+\n)*?\1/(?P=_1)                    /(?P=_2)           /func/id='(?P=SUFFIX)'
-|   # The recursive call is performed in one operand
+(   # recursive call as an argument, an element, etc.
+\n(?:\1.+\n)* \1/(?P<_1>(?:body|orelse)/\d+)/(?P<_2>.+/(args|elts|key|value)/\d+.*)/_type='Call'
+\n(?:\1.+\n)*?\1/(?P=_1)                    /(?P=_2)                               /func/id='(?P=SUFFIX)'
+|   # recursive call as an operand
 \n(?:\1.+\n)* \1/(?P<_1>(?:body|orelse)/\d+)/(?P<_2>.+/(left|right).*)/_type='Call'
 \n(?:\1.+\n)*?\1/(?P=_1)                    /(?P=_2)                  /func/id='(?P=SUFFIX)'
+|   # recursive call followed by a statement
+\n(?:\1.+\n)* \1/(?P<_1>(body|orelse)/\d+/(body|orelse))+/(?P<_2>\d+)(?P<_3>.*)/_type='Call'
+\n(?:\1.+\n)*?\1/(?P=_1)                                 /(?P=_2)    (?P=_3)   /func/id='(?P=SUFFIX)'
+\n(?:\1.+\n)*?\1/(?P=_1)                                 /(?!(?P=_2)).+ # same body/orelse, another statement number
 )
 (   # capture the line number of the last line of the function (it may appear before Call)
 \n(?:\1.+\n)* \1/.+/lineno=(?P<LINE>\d+)
@@ -1042,9 +1045,18 @@ A body recursive function performs at least one non-tail recursive call.
 23              place(x + 1, 1, queens + [(x, y)])
 24          if y < SIZE:
 25              place(x, y + 1, queens)
+26
+27  def foobar():
+28      return c and foobar() # no match
+29
+30  def foo():
+31      return (1, foo())
+32
+33  def bar():
+34      return {1: bar()}
 ```
 
-**TODO.** Deal with the case where the recursive call is not the last statement. Check that a recursive call inside a tuple is correctly detected.
+**Remark.** Since the short-circuit expression `c and foobar()` is equivalent to the conditional expression `if c then foobar() else False`, the function `foobar()` is actually tail recursive. This holds for `c or foobar()` too, which is equivalent to `if c then True else foobar()`.
 
 ##### Matches
 
@@ -1052,6 +1064,9 @@ A body recursive function performs at least one non-tail recursive call.
 |:--|:--|
 | `body_recursive_function_definition:ack` | 1-7 |
 | `body_recursive_function_definition:recurs` | 9-16 |
+| `body_recursive_function_definition:place` | 18-25 |
+| `body_recursive_function_definition:foo` | 30-31 |
+| `body_recursive_function_definition:foo` | 33-34 |
 
 --------------------------------------------------------------------------------
 
