@@ -43,7 +43,7 @@ def make_database(directories: List[str]) -> str:
     programs = list(chain.from_iterable(generate_programs(d) for d in directories))
     programs_labels = list(generate_programs_labels(programs))
     taxonomy = Taxonomy()
-    programs_taxons = taxonomy(programs_labels)
+    programs_taxons = list(taxonomy(programs_labels))
     db = {
         "programs": get_program_infos(programs),
         "labels": get_label_infos(programs_labels),

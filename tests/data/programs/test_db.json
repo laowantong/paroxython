@@ -1,7 +1,7 @@
 {
   "programs": {
     "tests/data/programs/assignment.py": {
-      "timestamp": "2019-12-13 16:37:09.273651",
+      "timestamp": "ignored",
       "source": "a = b",
       "labels": {
         "assignment": [[1,1]],
@@ -10,7 +10,7 @@
       "taxons": {}
     },
     "tests/data/programs/function_definition.py": {
-      "timestamp": "2019-12-13 16:21:38.132000",
+      "timestamp": "ignored",
       "source": "def succ(n):\n    return n + 1",
       "labels": {
         "binary_operator:Add": [[2,2]],
@@ -23,7 +23,7 @@
       }
     },
     "tests/data/programs/loop.py": {
-      "timestamp": "2019-12-13 16:22:54.852000",
+      "timestamp": "ignored",
       "source": "while input():\n    print(\"foobar\")",
       "labels": {
         "function_call:input": [[1,1]],
