@@ -1001,12 +1001,10 @@ A tail call is a subroutine call performed as the last action of a procedure. A 
            ^(.*)/_type='FunctionDef'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
 \n(?:\1.+\n)*?\1/name='(?P<SUFFIX>.+)' # capture the name of the function
-(   # recursive call as an argument, an element, etc.
-\n(?:\1.+\n)* \1/(?P<_1>(?:body|orelse)/\d+)/(?P<_2>.+/(args|elts|key|value)/\d+.*)/_type='Call'
-\n(?:\1.+\n)*?\1/(?P=_1)                    /(?P=_2)                               /func/id='(?P=SUFFIX)'
-|   # recursive call as an operand
-\n(?:\1.+\n)* \1/(?P<_1>(?:body|orelse)/\d+)/(?P<_2>.+/(left|right).*)/_type='Call'
-\n(?:\1.+\n)*?\1/(?P=_1)                    /(?P=_2)                  /func/id='(?P=SUFFIX)'
+(   # recursive call as an argument, an element, an operand, etc.
+\n(?:\1.+\n)* \1/(?P<_1>(?:body|orelse)/\d+)/(?P<_2>.+/(args|elts|keys|values|left|right)\b.*)/_type='Call'
+\n(?:\1.+\n)*?\1/(?P=_1)                    /(?P=_2)                                          /lineno=(?P<LINE>\d+)
+\n(?:\1.+\n)*?\1/(?P=_1)                    /(?P=_2)                                          /func/id='(?P=SUFFIX)'
 |   # recursive call followed by a statement
 \n(?:\1.+\n)* \1/(?P<_1>(body|orelse)/\d+/(body|orelse))+/(?P<_2>\d+)(?P<_3>.*)/_type='Call'
 \n(?:\1.+\n)*?\1/(?P=_1)                                 /(?P=_2)    (?P=_3)   /func/id='(?P=SUFFIX)'
@@ -1063,10 +1061,10 @@ A tail call is a subroutine call performed as the last action of a procedure. A 
 | Label | Lines |
 |:--|:--|
 | `body_recursive_function_definition:ack` | 1-7 |
-| `body_recursive_function_definition:recurs` | 9-16 |
+| `body_recursive_function_definition:recurs` | 10-15 |
 | `body_recursive_function_definition:place` | 18-25 |
 | `body_recursive_function_definition:foo` | 30-31 |
-| `body_recursive_function_definition:foo` | 33-34 |
+| `body_recursive_function_definition:bar` | 33-34 |
 
 --------------------------------------------------------------------------------
 
