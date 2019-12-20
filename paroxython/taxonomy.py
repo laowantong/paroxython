@@ -68,12 +68,13 @@ class Taxonomy:
 
     def deduplicated_taxons(self, taxons: List[Taxon]) -> List[Taxon]:
         """If taxon t2 has taxon t1 as a prefix, remove the common spans in t1."""
-        previous_name = ""  # dummy initialization to make static analysis happy
-        previous_span_bag: Bag[Span] = Counter()  # dummy initialization, same purpose
-        for (name, span_bag) in taxons:
+        if len(taxons) == 0:
+            return []
+        (previous_name, previous_span_bag) = taxons[0]
+        for (name, span_bag) in taxons[1:]:
             if name.startswith(previous_name):
                 previous_span_bag.subtract(span_bag)
-            else:  # This is necessarily executed on the first iteration, if any.
+            else:
                 previous_name = name
                 previous_span_bag = span_bag
         result = []
