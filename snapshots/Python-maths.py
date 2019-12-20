@@ -270,7 +270,7 @@ def euler_phi(n: int) -> int: # function_definition:euler_phi
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/binary_exponentiation.py
 # ----------------------------------------------------------------------------------------
-def binary_exponentiation(a, n): # function_definition:binary_exponentiation (-> +7), recursive_function_definition:binary_exponentiation (-> +7)
+def binary_exponentiation(a, n): # body_recursive_function_definition:binary_exponentiation (-> +7), function_definition:binary_exponentiation (-> +7), recursive_function_definition:binary_exponentiation (-> +7)
     if n == 0: # comparison_operator:Eq, if, if_elif, literal:Num
         return 1 # literal:Num
     elif n % 2 == 1: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, if, if_else, literal:Num
@@ -393,7 +393,7 @@ def factorial(input_number: int) -> int: # function_definition:factorial
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/factorial_recursive.py
 # ----------------------------------------------------------------------------------------
-def factorial(n: int) -> int: # function_definition:factorial, recursive_function_definition:factorial
+def factorial(n: int) -> int: # body_recursive_function_definition:factorial, function_definition:factorial, recursive_function_definition:factorial
     if n < 0: # comparison_operator:Lt, if, literal:Num
         raise ValueError("factorial() not defined for negative values") # function_call:ValueError, literal:Str, raise_exception:ValueError
     if not isinstance(n, int): # function_call:isinstance, if, unary_operator:Not
@@ -409,7 +409,7 @@ def factors_of_a_number(num: int) -> list: # function_definition:factors_of_a_nu
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/fermat_little_theorem.py
 # ----------------------------------------------------------------------------------------
-def binary_exponentiation(a, n, mod): # function_definition:binary_exponentiation (-> +7), recursive_function_definition:binary_exponentiation (-> +7)
+def binary_exponentiation(a, n, mod): # body_recursive_function_definition:binary_exponentiation (-> +7), function_definition:binary_exponentiation (-> +7), recursive_function_definition:binary_exponentiation (-> +7)
     if n == 0: # comparison_operator:Eq, if, if_elif, literal:Num
         return 1 # literal:Num
     elif n % 2 == 1: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, if, if_else, literal:Num
@@ -499,7 +499,7 @@ def fib_formula(n): # function_definition:fib_formula (-> +12)
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/fibonacci_sequence_recursion.py
 # ----------------------------------------------------------------------------------------
-def recur_fibo(n): # function_definition:recur_fibo (-> +1), recursive_function_definition:recur_fibo (-> +1)
+def recur_fibo(n): # body_recursive_function_definition:recur_fibo (-> +1), function_definition:recur_fibo (-> +1), recursive_function_definition:recur_fibo (-> +1)
     return n if n <= 1 else recur_fibo(n - 1) + recur_fibo(n - 2) # binary_operator:Add, binary_operator:Sub, comparison_operator:LtE, conditional_expression, function_call:recur_fibo, literal:Num
 def main(): # function_definition:main (-> +6)
     limit = int(input("How many terms to include in fibonacci series: ")) # assignment, composition, function_call:input, function_call:int, literal:Str
@@ -719,7 +719,7 @@ class TestLeastCommonMultiple(unittest.TestCase):
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/lucas_series.py
 # ----------------------------------------------------------------------------------------
-def recur_luc(n): # function_definition:recur_luc (-> +5), recursive_function_definition:recur_luc (-> +5)
+def recur_luc(n): # body_recursive_function_definition:recur_luc (-> +5), function_definition:recur_luc (-> +5), recursive_function_definition:recur_luc (-> +5)
     if n == 1: # comparison_operator:Eq, if, literal:Num
         return n
     if n == 0: # comparison_operator:Eq, if, literal:Num

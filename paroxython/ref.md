@@ -37,6 +37,7 @@
     - [Construct `function_with_default_positional_arguments_definition`](#construct-function_with_default_positional_arguments_definition)
     - [Construct `recursive_function_definition`](#construct-recursive_function_definition)
     - [Construct `deeply_recursive_function_definition`](#construct-deeply_recursive_function_definition)
+    - [Construct `body_recursive_function_definition`](#construct-body_recursive_function_definition)
     - [Construct `generator_definition`](#construct-generator_definition)
     - [Construct `nested_function_definition`](#construct-nested_function_definition)
     - [Construct `closure_definition`](#construct-closure_definition)
@@ -987,6 +988,70 @@ Any function `f` which contains a nested call to itself (`f(..., f(...), ...)`),
 |:--|:--|
 | `deeply_recursive_function_definition:gob_program` | 1-3 |
 | `deeply_recursive_function_definition:gob_program_2` | 5-7 |
+
+--------------------------------------------------------------------------------
+
+#### Construct `body_recursive_function_definition`
+
+A tail call is a subroutine call performed as the final action of a procedure.
+A body recursive function performs at least one non-tail recursive call.
+
+##### Regex
+
+```re
+           ^(.*)/_type='FunctionDef'
+\n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
+\n(?:\1.+\n)*?\1/name='(?P<SUFFIX>.+)' # capture the name of the function
+(   # The recursive call is performed in one argument
+\n(?:\1.+\n)* \1/(?P<_1>body/\d+)/(?P<_2>.+/args/.+)/_type='Call'
+\n(?:\1.+\n)*?\1/(?P=_1)         /(?P=_2)           /func/id='(?P=SUFFIX)'
+|   # The recursive call is performed in one operand
+\n(?:\1.+\n)* \1/(?P<_1>body/\d+)/(?P<_2>.+/(left|right).*)/_type='Call'
+\n(?:\1.+\n)*?\1/(?P=_1)         /(?P=_2)                  /func/id='(?P=SUFFIX)'
+)
+(   # capture the line number of the last line of the function (it may appear before Call)
+\n(?:\1.+\n)* \1/.+/lineno=(?P<LINE>\d+)
+)*
+```
+
+##### Example
+
+```python
+1   def ack(m, n):
+2       if m == 0:
+3           return n + 1
+4       elif n == 0:
+5           return ack(m-1, 1)  # tail call
+6       else:
+7           return ack(m-1, ack(m, n-1))  # body call
+8
+9   def divisor_count(n):
+10      def recurs(candidates):
+11          if len(candidates) == 0:
+12              return 0
+13          if n % candidates[0] == 0:
+14              return 1 + recurs(candidates[1:])
+15          return recurs(candidates[1:])
+16      return recurs(range(1, n+1))
+17
+18  def place(x = 1, y = 1, queens = []):
+19      if x > SIZE:
+20          print(queens)
+21      else:
+22          if possible(x, y, queens):
+23              place(x + 1, 1, queens + [(x, y)])
+24          if y < SIZE:
+25              place(x, y + 1, queens)
+```
+
+**TODO.** Deal with the case where the recursive call is not the last statement. Check that a recursive call inside a tuple is correctly detected.
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `body_recursive_function_definition:ack` | 1-7 |
+| `body_recursive_function_definition:recurs` | 9-16 |
 
 --------------------------------------------------------------------------------
 

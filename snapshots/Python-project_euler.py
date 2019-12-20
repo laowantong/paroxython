@@ -1175,19 +1175,19 @@ def solution(n): # function_definition:solution (-> +8)
 # ----------------------------------------------------------------------------------------
 def one_pence(): # function_definition:one_pence (-> +1)
     return 1 # literal:Num
-def two_pence(x): # function_definition:two_pence (-> +1), recursive_function_definition:two_pence (-> +1)
+def two_pence(x): # body_recursive_function_definition:two_pence (-> +1), function_definition:two_pence (-> +1), recursive_function_definition:two_pence (-> +1)
     return 0 if x < 0 else two_pence(x - 2) + one_pence() # binary_operator:Add, binary_operator:Sub, comparison_operator:Lt, conditional_expression, function_call:one_pence, function_call:two_pence, literal:Num
-def five_pence(x): # function_definition:five_pence (-> +1), recursive_function_definition:five_pence (-> +1)
+def five_pence(x): # body_recursive_function_definition:five_pence (-> +1), function_definition:five_pence (-> +1), recursive_function_definition:five_pence (-> +1)
     return 0 if x < 0 else five_pence(x - 5) + two_pence(x) # binary_operator:Add, binary_operator:Sub, comparison_operator:Lt, conditional_expression, function_call:five_pence, function_call:two_pence, literal:Num, suggest_constant_definition
-def ten_pence(x): # function_definition:ten_pence (-> +1), recursive_function_definition:ten_pence (-> +1)
+def ten_pence(x): # body_recursive_function_definition:ten_pence (-> +1), function_definition:ten_pence (-> +1), recursive_function_definition:ten_pence (-> +1)
     return 0 if x < 0 else ten_pence(x - 10) + five_pence(x) # binary_operator:Add, binary_operator:Sub, comparison_operator:Lt, conditional_expression, function_call:five_pence, function_call:ten_pence, literal:Num, suggest_constant_definition
-def twenty_pence(x): # function_definition:twenty_pence (-> +1), recursive_function_definition:twenty_pence (-> +1)
+def twenty_pence(x): # body_recursive_function_definition:twenty_pence (-> +1), function_definition:twenty_pence (-> +1), recursive_function_definition:twenty_pence (-> +1)
     return 0 if x < 0 else twenty_pence(x - 20) + ten_pence(x) # binary_operator:Add, binary_operator:Sub, comparison_operator:Lt, conditional_expression, function_call:ten_pence, function_call:twenty_pence, literal:Num, suggest_constant_definition
-def fifty_pence(x): # function_definition:fifty_pence (-> +1), recursive_function_definition:fifty_pence (-> +1)
+def fifty_pence(x): # body_recursive_function_definition:fifty_pence (-> +1), function_definition:fifty_pence (-> +1), recursive_function_definition:fifty_pence (-> +1)
     return 0 if x < 0 else fifty_pence(x - 50) + twenty_pence(x) # binary_operator:Add, binary_operator:Sub, comparison_operator:Lt, conditional_expression, function_call:fifty_pence, function_call:twenty_pence, literal:Num, suggest_constant_definition
-def one_pound(x): # function_definition:one_pound (-> +1), recursive_function_definition:one_pound (-> +1)
+def one_pound(x): # body_recursive_function_definition:one_pound (-> +1), function_definition:one_pound (-> +1), recursive_function_definition:one_pound (-> +1)
     return 0 if x < 0 else one_pound(x - 100) + fifty_pence(x) # binary_operator:Add, binary_operator:Sub, comparison_operator:Lt, conditional_expression, function_call:fifty_pence, function_call:one_pound, literal:Num, suggest_constant_definition
-def two_pound(x): # function_definition:two_pound (-> +1), recursive_function_definition:two_pound (-> +1)
+def two_pound(x): # body_recursive_function_definition:two_pound (-> +1), function_definition:two_pound (-> +1), recursive_function_definition:two_pound (-> +1)
     return 0 if x < 0 else two_pound(x - 200) + one_pound(x) # binary_operator:Add, binary_operator:Sub, comparison_operator:Lt, conditional_expression, function_call:one_pound, function_call:two_pound, literal:Num, suggest_constant_definition
 def solution(n): # function_definition:solution (-> +1)
     return two_pound(n) # function_call:two_pound

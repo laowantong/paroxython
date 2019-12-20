@@ -73,3 +73,9 @@ class Suggestion:
 
     def restore_first_prefix(self):
         self.s = self.s.replace(FIRST_PREFIX_MASK, FIRST_PREFIX, 1)
+
+
+if __name__ == "__main__":
+    suggestion = Suggestion()
+    source = __import__("pathlib").Path("sandbox/flat_ast_selection.txt").read_text()
+    print(suggestion(source))
