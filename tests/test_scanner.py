@@ -1,7 +1,7 @@
 import pytest
 
 import context
-from scanner import Scanner
+from paroxython.scanner import Scanner
 
 scan = Scanner("tests/data/programs")
 
@@ -17,14 +17,15 @@ def test_generate_tagged_source_codes():
         "# tests/data/programs/function_definition.py\n"
         "# ----------------------------------------------------------------------------------------",
         "def succ(n): # function_definition:succ (-> +1)\n"
-        "    return n + 1 # binary_operator:Add, literal:Num\n",
+        "    return a + b + 1 # binary_operator:Add, literal:Num\n",
         "# ----------------------------------------------------------------------------------------\n"
         "# tests/data/programs/loop.py\n"
         "# ----------------------------------------------------------------------------------------",
         "while input(): # function_call:input\n"
         '    print("foobar") # function_call:print, literal:Str\n',
     ]
-    assert result == expected
+    for (result_row, expected_row) in zip(result, expected):
+        assert result_row == expected_row
 
 
 pytest.main(args=["-q"])

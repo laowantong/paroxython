@@ -1,2 +1,2 @@
 def succ(n):
-    return n + 1
+    return a + b + 1

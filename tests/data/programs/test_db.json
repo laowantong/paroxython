@@ -11,7 +11,7 @@
     },
     "tests/data/programs/function_definition.py": {
       "timestamp": "ignored",
-      "source": "def succ(n):\n    return n + 1",
+      "source": "def succ(n):\n    return a + b + 1",
       "labels": {
         "binary_operator:Add": [[2,2]],
         "function_definition:succ": [[1,2]],

@@ -13,7 +13,7 @@ def test_generate_programs():
 
     program = next(result)
     assert program.path.name == "function_definition.py"
-    assert program.source == "def succ(n):\n    return n + 1"
+    assert program.source == "def succ(n):\n    return a + b + 1"
 
     program = next(result)
     assert program.path.name == "loop.py"

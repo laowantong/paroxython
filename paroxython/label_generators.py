@@ -2,7 +2,7 @@ import sys
 from bisect import insort
 from collections import defaultdict
 from pathlib import Path
-from typing import List, NamedTuple, Iterator, Dict, Set
+from typing import Dict, Iterator, List, NamedTuple, Set
 
 from program_generator import Program
 from source_parser import SourceParser
