@@ -106,7 +106,7 @@ def solution(n): # function_definition:solution (-> +9)
 # ----------------------------------------------------------------------------------------
 def solution(n): # function_definition:solution (-> +7)
     result = 0 # assignment, literal:Num
-    for i in range(n): # accumulate_elements:AugAssign (-> +2), for_range_stop, function_call:range
+    for i in range(n): # accumulate_elements:AugAssign (-> +4), for_range_stop, function_call:range
         if i % 3 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:3, if, if_elif, literal:Num, suggest_constant_definition
             result += i # augmented_assignment
         elif i % 5 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:5, if, literal:Num, suggest_constant_definition
@@ -834,7 +834,7 @@ def solution(n): # function_definition:solution (-> +17)
     ones_counts = [0, 3, 3, 5, 4, 4, 3, 5, 5, 4, 3, 6, 6, 8, 8, 7, 7, 9, 8, 8] # assignment, literal:List, literal:Num, suggest_constant_definition
     tens_counts = [0, 0, 6, 6, 5, 5, 5, 7, 6, 6] # assignment, literal:List, literal:Num, suggest_constant_definition
     count = 0 # assignment, literal:Num
-    for i in range(1, n + 1): # accumulate_elements:AugAssign (-> +7), binary_operator:Add, for_range_start, function_call:range, literal:Num
+    for i in range(1, n + 1): # accumulate_elements:AugAssign (-> +12), binary_operator:Add, for_range_start, function_call:range, literal:Num
         if i < 1000: # comparison_operator:Lt, if, if_else, literal:Num, suggest_constant_definition
             if i >= 100: # comparison_operator:GtE, if, literal:Num, suggest_constant_definition
                 count += ones_counts[i // 100] + 7 # augmented_assignment, binary_operator:Add, binary_operator:FloorDiv, index, index_arithmetic, literal:Num, suggest_constant_definition
@@ -953,7 +953,7 @@ def solution(n): # function_definition:solution (-> +7)
 from math import sqrt # import_from:math
 def sum_of_divisors(n): # function_definition:sum_of_divisors (-> +7)
     total = 0 # assignment, literal:Num
-    for i in range(1, int(sqrt(n) + 1)): # accumulate_elements:AugAssign (-> +2), binary_operator:Add, composition, for_range_start, function_call:int, function_call:range, function_call:sqrt, literal:Num
+    for i in range(1, int(sqrt(n) + 1)): # accumulate_elements:AugAssign (-> +4), binary_operator:Add, composition, for_range_start, function_call:int, function_call:range, function_call:sqrt, literal:Num
         if n % i == 0 and i != sqrt(n): # binary_operator:Mod, boolean_operator:And, comparison_operator:Eq, comparison_operator:NotEq, divisibility_test, function_call:sqrt, if, if_elif, literal:Num
             total += i + n // i # augmented_assignment, binary_operator:Add, binary_operator:FloorDiv
         elif i == sqrt(n): # comparison_operator:Eq, function_call:sqrt, if
@@ -1398,7 +1398,7 @@ def compute(a_i, k, i, n): # function_definition:compute (-> +25)
         a_i.extend([0 for _ in range(k - len(a_i))]) # binary_operator:Sub, composition, function_call:len, function_call:range, literal:Num, method_call:extend
     start_i = i # assignment
     ds_b, ds_c, diff = 0, 0, 0 # assignment, literal:Num, literal:Tuple
-    for j in range(len(a_i)): # accumulate_elements:AugAssign (-> +2), composition, for_indexes, for_range_stop, function_call:len, function_call:range
+    for j in range(len(a_i)): # accumulate_elements:AugAssign (-> +4), composition, for_indexes, for_range_stop, function_call:len, function_call:range
         if j >= k: # comparison_operator:GtE, if, if_else
             ds_b += a_i[j] # augmented_assignment, index
         else:

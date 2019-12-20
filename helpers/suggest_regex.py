@@ -20,7 +20,7 @@ class Suggestion:
         return self.s
 
     def abstract_first_longest_prefix(self):
-        rex = r"(?m)\A\s*(?P<PREFIX>(?:/body/\d+)+)/(?P<SUFFIX>.+\n)(?:\1/(?P<SUFFIXES>.+\n))+\Z"
+        rex = r"(?m)\A\s*(?P<PREFIX>(?:/(?:body|orelse)/\d+)+)/(?P<SUFFIX>.+\n)(?:\1/(?P<SUFFIXES>.+\n))+\Z"
         match = regex.search(rex, self.s)
         repl = [FIRST_PREFIX_MASK + match.captures("SUFFIX")[0]]
         for suffix in match.captures("SUFFIXES"):
@@ -49,15 +49,15 @@ class Suggestion:
             self.s = self.s.replace(fr" {key} #1", fr" {key}")
 
     def abstract_body_prefix(self):
-        rex = fr"(?m)^(?P<SKIP>.+?)/(?P<PREFIX>body/\d+)/(?P<SUFFIX>.+\n)(?:\1/\2/(?P<SUFFIXES>.+\n))+"
+        rex = fr"(?m)^(?P<SKIP>.+?)/(?P<PREFIX>(?:body|orelse)/\d+)/(?P<SUFFIX>.+\n)(?:\1/\2/(?P<SUFFIXES>.+\n))+"
         for i in itertools.count(1):
             match = regex.search(rex, self.s)
             if not match:
                 break
             d = match.capturesdict()
-            prefix = fr"(?P<_{i}>body/\d+)"
+            prefix = fr"(?P<_{i}>(?:body|orelse)/\d+)"
             repl = [fr"{d['SKIP'][0]}/{prefix}/{d['SUFFIX'][0]}"]
-            offset = " " * (len(r"body/\d+") + 1)
+            offset = " " * (len(r"(?:body|orelse)/\d+") + 1)
             for suffix in match.captures("SUFFIXES"):
                 repl.append(fr"{d['SKIP'][0]}/(?P=_{i}){offset}/{suffix}")
             self.s = self.s[: match.start()] + "".join(repl) + self.s[match.end() :]
@@ -65,7 +65,7 @@ class Suggestion:
     def restore_greedy_quantifiers(self):
         result = []
         for line in self.s.split("\n"):
-            if r"body/\d+" in line:
+            if r"(?:body|orelse)/\d+" in line:
                 result.append(line.replace("*?", "* ", 1))
             else:
                 result.append(line)
