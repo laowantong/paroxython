@@ -930,7 +930,7 @@ Update a variable by negating it.
 \n(?:\1.+\n)*?\1/(?P=_1)                    (?P=_2)   /func/id='(?P=SUFFIX)' # ensure it is called inside its own body
 (   # capture the line number of the last line of the function (it may appear before Call)
 \n(?:\1.+\n)* \1.+/lineno=(?P<LINE>\d+)
-)*
+)?
 ```
 
 ##### Example
@@ -967,7 +967,7 @@ Any function `f` which contains a nested call to itself (`f(..., f(...), ...)`),
 \n(?:\1.+\n)*?\1/(?P=_1)                    (?P=_2)   /(?P=_3)        /func/id='(?P=SUFFIX)'
 (   # capture the line number of the last line of the function (it may appear before Call)
 \n(?:\1.+\n)* \1/.+/lineno=(?P<LINE>\d+)
-)*
+)?
 ```
 
 ##### Example
@@ -1012,7 +1012,7 @@ A tail call is a subroutine call performed as the last action of a procedure. A 
 )
 (   # capture the line number of the last line of the function (it may appear before Call)
 \n(?:\1.+\n)* \1/.+/lineno=(?P<LINE>\d+)
-)*
+)?
 ```
 
 ##### Example
@@ -1082,7 +1082,7 @@ A tail call is a subroutine call performed as the last action of a procedure. A 
 \n(?:\1.+\n)* \1/.+/value/_type='Yield(From)?'
 (   # capture the line number of the last line of the function (it may appear before Call)
 \n(?:\1.+\n)* \1/.+/lineno=(?P<LINE>\d+)
-)*
+)?
 ```
 
 ##### Example
@@ -1182,7 +1182,7 @@ Function enclosing the definition of an inner function and returning it. Beware 
 ```re
            ^(.*)/_type='If'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
-\n(?:\1.+\n)*?\1/orelse/.*
+\n(?:\1.+\n)* \1/.+/lineno=(?P<LINE>\d+)
 ```
 
 ##### Example
@@ -1199,7 +1199,7 @@ Function enclosing the definition of an inner function and returning it. Beware 
 
 | Label | Lines |
 |:--|:--|
-| `if` | 1, 2 |
+| `if` | 1-5, 2-3 |
 
 --------------------------------------------------------------------------------
 
@@ -1212,7 +1212,8 @@ Function enclosing the definition of an inner function and returning it. Beware 
 ```re
            ^(.*)/_type='If'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
-\n(?:\1.+\n)*?\1/orelse/0/_type=(?!'If')
+\n(?:\1.+\n)*?\1/orelse/0/_type=(?!'If').+
+\n(?:\1.+\n)* \1/orelse/.*/lineno=(?P<LINE>\d+)
 ```
 
 ##### Example
@@ -1233,7 +1234,7 @@ Function enclosing the definition of an inner function and returning it. Beware 
 
 | Label | Lines |
 |:--|:--|
-| `if_else` | 1 |
+| `if_else` | 1-5 |
 
 --------------------------------------------------------------------------------
 
@@ -1247,6 +1248,7 @@ Function enclosing the definition of an inner function and returning it. Beware 
            ^(.*)/_type='If'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
 \n(?:\1.+\n)*?\1/orelse/0/_type='If'
+\n(?:\1.+\n)* \1/orelse/.*/lineno=(?P<LINE>\d+)
 ```
 
 ##### Example
@@ -1269,7 +1271,7 @@ Function enclosing the definition of an inner function and returning it. Beware 
 
 | Label | Lines |
 |:--|:--|
-| `if_elif` | 1, 6 |
+| `if_elif` | 1-4, 6-11 |
 
 --------------------------------------------------------------------------------
 
@@ -1286,6 +1288,7 @@ Iterate over the elements of a (named) collection.
            ^(.*)/_type='For'
 \n(?:\1.+\n)*?\1/iter/_type='Name'
 \n(?:\1.+\n)*?\1/iter/lineno=(?P<LINE>\d+)
+\n(?:\1.+\n)* \1/.*/lineno=(?P<LINE>\d+)
 ```
 
 ##### Example
@@ -1302,7 +1305,7 @@ Iterate over the elements of a (named) collection.
 
 | Label | Lines |
 |:--|:--|
-| `for_each` | 1, 4 |
+| `for_each` | 1-5, 4-5 |
 
 --------------------------------------------------------------------------------
 
@@ -1317,6 +1320,7 @@ Iterate over a range with exactly 1 argument (stop).
 \n(?:\1.+\n)*?\1/iter/lineno=(?P<LINE>\d+)
 \n(?:\1.+\n)*?\1/iter/func/id='range'
 \n(?:\1.+\n)*?\1/iter/args/length=1
+\n(?:\1.+\n)* \1/.*/lineno=(?P<LINE>\d+)
 ```
 
 ##### Example
@@ -1324,11 +1328,11 @@ Iterate over a range with exactly 1 argument (stop).
 ```python
 1   for i in range(stop):
 2       pass
-3   for i in range(start, stop):
+3   for i in range(start, stop): # no match
 4       pass
-5   for i in range(start, stop, step):
+5   for i in range(start, stop, step): # no match
 6       pass
-7   for i in range(start, stop, -1):
+7   for i in range(start, stop, -1): # no match
 8       pass
 ```
 
@@ -1336,7 +1340,7 @@ Iterate over a range with exactly 1 argument (stop).
 
 | Label | Lines |
 |:--|:--|
-| `for_range_stop` | 1 |
+| `for_range_stop` | 1-2 |
 
 --------------------------------------------------------------------------------
 
@@ -1351,6 +1355,7 @@ Iterate over a range with exactly 2 arguments (start, stop).
 \n(?:\1.+\n)*?\1/iter/lineno=(?P<LINE>\d+)
 \n(?:\1.+\n)*?\1/iter/func/id='range'
 \n(?:\1.+\n)*?\1/iter/args/length=2
+\n(?:\1.+\n)* \1/.*/lineno=(?P<LINE>\d+)
 ```
 
 ##### Example
@@ -1370,7 +1375,7 @@ Iterate over a range with exactly 2 arguments (start, stop).
 
 | Label | Lines |
 |:--|:--|
-| `for_range_start` | 3 |
+| `for_range_start` | 3-4 |
 
 --------------------------------------------------------------------------------
 
@@ -1389,6 +1394,7 @@ Iterate over a range with 3 arguments (start, stop, step).
 \n(?:\1.+\n)*?\1/iter/args/2/_type='Num'
 \n(?:\1.+\n)*?\1/iter/args/2/n=(?<SUFFIX>.+)
 )?
+\n(?:\1.+\n)* \1/.*/lineno=(?P<LINE>\d+)
 ```
 
 ##### Example
@@ -1410,9 +1416,9 @@ Iterate over a range with 3 arguments (start, stop, step).
 
 | Label | Lines |
 |:--|:--|
-| `for_range_step` | 5 |
-| `for_range_step:-1` | 7 |
-| `for_range_step:2` | 9 |
+| `for_range_step` | 5-6 |
+| `for_range_step:-1` | 7-8 |
+| `for_range_step:2` | 9-10 |
 
 --------------------------------------------------------------------------------
 
@@ -1426,6 +1432,7 @@ Iterate over index numbers and elements of a collection.
            ^(.*)/_type='For'
 \n(?:\1.+\n)*?\1/iter/lineno=(?P<LINE>\d+)
 \n(?:\1.+\n)*?\1/iter/func/id='enumerate'
+\n(?:\1.+\n)* \1/.*/lineno=(?P<LINE>\d+)
 ```
 
 ##### Example
@@ -1439,7 +1446,7 @@ Iterate over index numbers and elements of a collection.
 
 | Label | Lines |
 |:--|:--|
-| `for_indexes_elements` | 1 |
+| `for_indexes_elements` | 1-2 |
 
 --------------------------------------------------------------------------------
 
@@ -1458,6 +1465,7 @@ Iterate over index numbers of a collection.
 \n(?:\1.+\n)*?\1/iter/args/0/_type='Call'
 \n(?:\1.+\n)*?\1/iter/args/0/func/id='len'
 \n(?:\1.+\n)*?\1/iter/keywords/length=0
+\n(?:\1.+\n)* \1/.*/lineno=(?P<LINE>\d+)
 ```
 
 ##### Example
@@ -1471,7 +1479,7 @@ Iterate over index numbers of a collection.
 
 | Label | Lines |
 |:--|:--|
-| `for_indexes` | 1 |
+| `for_indexes` | 1-2 |
 
 --------------------------------------------------------------------------------
 
@@ -1483,7 +1491,7 @@ Iterate over index numbers of a collection.
            ^(.*)/_type='For'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
 \n(?:\1.+\n)* \1/(?P<_1>(?:body|orelse)/\d+)/_type='For'
-\n(?:\1.+\n)*?\1/(?P=_1)                    /lineno=(?P<LINE>\d+)
+\n(?:\1.+\n)* \1/.*/lineno=(?P<LINE>\d+)
 ```
 
 ##### Example
@@ -1492,13 +1500,14 @@ Iterate over index numbers of a collection.
 1   for x_1 in seq_1:
 2       for x_2 in seq_2:
 3           pass
+4       pass
 ```
 
 ##### Matches
 
 | Label | Lines |
 |:--|:--|
-| `nested_for` | 1-2 |
+| `nested_for` | 1-4 |
 
 --------------------------------------------------------------------------------
 
@@ -1517,7 +1526,6 @@ A `for` loop with a counter `i` and a nested `for` loop which makes `i` iteratio
 \n(?:\1.+\n)*?\1/iter/args/length=1 # only range(arg1)
 (   # i goes from 0 to n, and j from 0 to i
 \n(?:\1.+\n)* \1/(?P<_1>(?:body|orelse)/\d+)/_type='For'
-\n(?:\1.+\n)*?\1/(?P=_1)                    /lineno=(?P<LINE>\d+)
 \n(?:\1.+\n)*?\1/(?P=_1)                    /iter/_type='Call'
 \n(?:\1.+\n)*?\1/(?P=_1)                    /iter/func/id='range'
 \n(?:\1.+\n)*?\1/(?P=_1)                    /iter/args/length=1 # only range(arg1)
@@ -1525,13 +1533,13 @@ A `for` loop with a counter `i` and a nested `for` loop which makes `i` iteratio
 |   # i goes from 0 to n, and j from i to n
 \n(?:\1.+\n)*?\1/iter/args/0/_hash=(?P<STOP>.+) # capture stop expression
 \n(?:\1.+\n)* \1/(?P<_1>(?:body|orelse)/\d+)/_type='For'
-\n(?:\1.+\n)*?\1/(?P=_1)                    /lineno=(?P<LINE>\d+)
 \n(?:\1.+\n)*?\1/(?P=_1)                    /iter/_type='Call'
 \n(?:\1.+\n)*?\1/(?P=_1)                    /iter/func/id='range'
 \n(?:\1.+\n)*?\1/(?P=_1)                    /iter/args/length=2 # only range(arg1, arg2)
 \n(?:\1.+\n)* \1/(?P=_1)                    /iter/args/0(/.+)*/id=(?P=VAR) # match iteration variable
 \n(?:\1.+\n)* \1/(?P=_1)                    /iter/args/1(/.+)*/_hash=(?P=STOP) # match stop expression
 )
+\n(?:\1.+\n)* \1/.*/lineno=(?P<LINE>\d+)
 ```
 
 ##### Example
@@ -1550,7 +1558,7 @@ A `for` loop with a counter `i` and a nested `for` loop which makes `i` iteratio
 
 | Label | Lines |
 |:--|:--|
-| `triangular_nested_for` | 1-2, 5-6 |
+| `triangular_nested_for` | 1-3, 5-7 |
 
 --------------------------------------------------------------------------------
 
@@ -1565,8 +1573,8 @@ Two nested `for` loops doing the same number of iterations.
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
 \n(?:\1.+\n)*?\1/iter/_hash=(?P<HASH>.+) # capture _hash
 \n(?:\1.+\n)* \1/(?P<_1>(?:body|orelse)/\d+)/_type='For'
-\n(?:\1.+\n)*?\1/(?P=_1)                    /lineno=(?P<LINE>\d+)
 \n(?:\1.+\n)*?\1/(?P=_1)                    /iter/_hash=(?P=HASH) # match _hash
+\n(?:\1.+\n)* \1/.*/lineno=(?P<LINE>\d+)
 ```
 
 ##### Example
@@ -1585,7 +1593,7 @@ Two nested `for` loops doing the same number of iterations.
 
 | Label | Lines |
 |:--|:--|
-| `square_nested_for` | 1-2, 5-6 |
+| `square_nested_for` | 1-3, 5-7 |
 
 --------------------------------------------------------------------------------
 
@@ -1656,7 +1664,7 @@ Two nested `for` loops doing the same number of iterations.
 \n(?:\1.+\n)*?\1/(?P=_1)             /type/_type='Name'
 \n(?:\1.+\n)*?\1/(?P=_1)             /type/id='(?P<SUFFIX>.+)'
 )?
-\n(?:\1.+\n)* \1/(?P=_1)             .*/lineno=(?P<LINE>\d+)
+\n(?:\1.+\n)* \1/.*/lineno=(?P<LINE>\d+)
 ```
 
 ##### Example
@@ -1799,7 +1807,7 @@ An accumulator is iteratively updated from its previous value and the value of t
 \n(?:\1.+\n)* \1/(?P<_1>((?:body|orelse)/\d+/?)*)/_type='(?P<SUFFIX>Assign)'
 \n(?:\1.+\n)*?\1/(?P=_1)                         /lineno=(?P<LINE>\d+)
 \n(?:\1.+\n)* \1/(?P=_1)                         /targets/.*/id=(?P<ACC>.+) # capture the name of the accumulator
-\n(?:\1.+\n)*?\1/(?P=_1)                         /value/_ids=(?=.*?(?P=ACC))(?=.*?(?P=ITER_VAR)) # both appear in RHS
+\n(?:\1.+\n)*?\1/(?P=_1)                         /value/_ids=(?=.*?(?P=ACC))(?=.*?(?P=ITER_VAR)).* # both appear in RHS
 |   # or should be on LHS of an augmented assignement with the iteration variable
 \n(?:\1.+\n)* \1/(?P<_1>((?:body|orelse)/\d+/?)*)/_type='(?P<SUFFIX>AugAssign)'
 \n(?:\1.+\n)*?\1/(?P=_1)                         /lineno=(?P<LINE>\d+)
@@ -1819,6 +1827,9 @@ An accumulator is iteratively updated from its previous value and the value of t
 \n(?:\1.+\n)*?\1/(?P=_1)                         /value/func/_type='(?P<SUFFIX>Attribute)'
 \n(?:\1.+\n)* \1/(?P=_1)                         /value/args/\d+/id=(?P=ITER_VAR) # the arguments include the iteration variable
 )
+(   # capture the line number of the last line of the function (it may appear before Call)
+\n(?:\1.+\n)* \1.*/lineno=(?P<LINE>\d+)
+)?
 ```
 
 ##### Example
@@ -1828,21 +1839,24 @@ An accumulator is iteratively updated from its previous value and the value of t
 2       acc = seed
 3       for element in elements:
 4           acc = element + acc
-5       return acc
-6
+5           seed += 1
+6       return acc
 7   for i in range(10):
 8       acc = combine(acc, i)
 9   for i in range(10):
 10      if condition:
 11           acc += i
-12  for i in range(10):
-13      acc += foo(bar, i)
-14  for i in range(10):
-15      foo(acc, bar, i)
-16  for i in range(10):
-17      acc.foo(bar, i)
-18  for i in range(10): # no match (cf. remark)
-19      print(foobar, i)
+12      pass
+13  for i in range(10):
+14      acc += foo(bar, i)
+15  for i in range(10):
+16      foo(acc, bar, i)
+17      pass
+18  for i in range(10):
+19      acc.foo(bar, i)
+20      pass
+21  for i in range(10): # no match (cf. remark)
+22      print(foobar, i)
 ```
 
 **Remark.**
@@ -1852,10 +1866,10 @@ The third alternative of the regex is experimental. It matches any one-line func
 
 | Label | Lines |
 |:--|:--|
-| `accumulate_elements:Assign` | 3-4, 7-8 |
-| `accumulate_elements:AugAssign` | 9-11, 12-13 |
-| `accumulate_elements:Name` | 14-15 |
-| `accumulate_elements:Attribute` | 16-17 |
+| `accumulate_elements:Assign` | 3-5, 7-8 |
+| `accumulate_elements:Attribute` | 18-20 |
+| `accumulate_elements:AugAssign` | 9-12, 13-14 |
+| `accumulate_elements:Name` | 15-17 |
 
 --------------------------------------------------------------------------------
 
@@ -1875,6 +1889,7 @@ An accumulation pattern that, from a given collection, returns a list containing
 \n(?:\1.+\n)*?\1/(?P=_1)                /(?P=_2)                    /value/_type='Call'
 \n(?:\1.+\n)*?\1/(?P=_1)                /(?P=_2)                    /value/func/attr='append'
 \n(?:\1.+\n)*?\1/(?P=_1)                /(?P=_2)                    /value/args/0/id=(?P=ID_1) # match it in an append()
+\n(?:\1.+\n)* \1.*/lineno=(?P<LINE>\d+)
 ```
 
 ##### Example
@@ -1892,7 +1907,7 @@ An accumulation pattern that, from a given collection, returns a list containing
 
 | Label | Lines |
 |:--|:--|
-| `filter_for` | 1-5 |
+| `filter_for` | 1-6 |
 
 --------------------------------------------------------------------------------
 
@@ -1915,6 +1930,9 @@ An accumulation pattern that, from a given collection, returns the best element 
 \n(?:\1.+\n)*?\1/(?P=_2)                /(?P=_3)                    /(?P=_4)                /lineno=(?P<LINE>\d+)
 \n(?:\1.+\n)*?\1/(?P=_2)                /(?P=_3)                    /(?P=_4)                /targets/0/id=(?P=CANDIDATE) # match candidate
 \n(?:\1.+\n)*?\1/(?P=_2)                /(?P=_3)                    /(?P=_4)                /value/id=(?P=ITER_VAR) # match iteration variable
+(
+\n(?:\1.+\n)* \1(?P=_2)                /(?P=_3).*/lineno=(?P<LINE>\d+)
+)?
 ```
 
 ##### Example
@@ -2077,6 +2095,9 @@ Evolve the value of a variable until it reaches a desired state.
 \n(?:\1.+\n)*?\1/(?P=_1)        /value/_type='Call'
 \n(?:\1.+\n)*?\1/(?P=_1)        /value/.*/id=(?P=STATE) # it is mutated somewhere in the loop
 )
+(
+\n(?:\1.+\n)* \1.*/lineno=(?P<LINE>\d+)
+)?
 ```
 
 ##### Example
@@ -2147,6 +2168,9 @@ Accumulate the inputs until a sentinel value is encountered (accumulation expres
 \n(?:\1.+\n)*?\1/(?P=_3)                    /value/func/value/id=(?P=ACC) # a method of acc is called on...
 \n(?:\1.+\n)* \1/(?P=_3)                    /value/args/\d+/id=(?P=INPUT) # the iteration variable
 )
+(
+\n(?:\1.+\n)* \1.*/lineno=(?P<LINE>\d+)
+)?
 ```
 
 ##### Example
