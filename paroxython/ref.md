@@ -878,7 +878,7 @@ Update a variable by negating it.
 9   foo(42)
 ```
 
-**Limitation.** This regex and the following do not work properly when the function is decorated or has type hints ([#4](https://github.com/laowantong/paroxython/issues/4)).
+**Limitation.** This regex and the next one do not work properly when the function is decorated or has type hints ([#4](https://github.com/laowantong/paroxython/issues/4)).
 
 ##### Matches
 
@@ -1002,13 +1002,13 @@ A tail call is a subroutine call performed as the last action of a procedure. A 
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
 \n(?:\1.+\n)*?\1/name='(?P<SUFFIX>.+)' # capture the name of the function
 (   # recursive call as an argument, an element, an operand, etc.
-\n(?:\1.+\n)* \1/(?P<_1>(?:body|orelse)/\d+)/(?P<_2>.+/(args|elts|keys|values|left|right)\b.*)/_type='Call'
-\n(?:\1.+\n)*?\1/(?P=_1)                    /(?P=_2)                                          /lineno=(?P<LINE>\d+)
-\n(?:\1.+\n)*?\1/(?P=_1)                    /(?P=_2)                                          /func/id='(?P=SUFFIX)'
+\n(?:\1.+\n)* \1/(?P<_1>.+/(args|elts|keys|left|right)\b.*)/_type='Call'
+\n(?:\1.+\n)*?\1/(?P=_1)                                   /lineno=(?P<LINE>\d+)
+\n(?:\1.+\n)*?\1/(?P=_1)                                   /func/id='(?P=SUFFIX)'
 |   # recursive call followed by a statement
-\n(?:\1.+\n)* \1/(?P<_1>(body|orelse)/\d+/(body|orelse))+/(?P<_2>\d+)(?P<_3>.*)/_type='Call'
-\n(?:\1.+\n)*?\1/(?P=_1)                                 /(?P=_2)    (?P=_3)   /func/id='(?P=SUFFIX)'
-\n(?:\1.+\n)*?\1/(?P=_1)                                 /(?!(?P=_2)).+ # same body/orelse, another statement number
+\n(?:\1.+\n)* \1/(?P<_1>.+?(body|orelse))/(?P<_2>\d+)/(?P<_3>.*)/_type='Call'
+\n(?:\1.+\n)* \1/(?P=_1)                /(?P=_2)    /(?P=_3)   /func/id='(?P=SUFFIX)'
+\n(?:\1.+\n)*?\1/(?P=_1)                /(?!(?P=_2)).+
 )
 (   # capture the line number of the last line of the function (it may appear before Call)
 \n(?:\1.+\n)* \1/.+/lineno=(?P<LINE>\d+)
@@ -1044,14 +1044,17 @@ A tail call is a subroutine call performed as the last action of a procedure. A 
 24          if y < SIZE:
 25              place(x, y + 1, queens)
 26
-27  def foobar():
-28      return c and foobar() # no match
+27  def body_sequence():
+28      return (1, body_sequence())
 29
-30  def foo():
-31      return (1, foo())
+30  def body_dict():
+31      return {1: body_dict()} # body call: TODO
 32
-33  def bar():
-34      return {1: bar()}
+33  def short_circuit_1():
+34      return c and short_circuit_1() # tail call
+32
+33  def short_circuit_2():
+34      return short_circuit_2() and c # body call: TODO
 ```
 
 **Remark.** Since the short-circuit expression `c and foobar()` is equivalent to the conditional expression `if c then foobar() else False`, the function `foobar()` is actually tail recursive. This holds for `c or foobar()` too, which is equivalent to `if c then True else foobar()`.
@@ -1063,8 +1066,7 @@ A tail call is a subroutine call performed as the last action of a procedure. A 
 | `body_recursive_function:ack` | 1-7 |
 | `body_recursive_function:recurs` | 10-15 |
 | `body_recursive_function:place` | 18-25 |
-| `body_recursive_function:foo` | 30-31 |
-| `body_recursive_function:bar` | 33-34 |
+| `body_recursive_function:body_sequence` | 27-28 |
 
 --------------------------------------------------------------------------------
 
