@@ -53,6 +53,8 @@ class SourceParser:
 
     def __call__(self, source: str, yield_failed_matches: bool = False):
         """Analyze a given program source and yield its labels and their spans."""
+        if source.startswith("1   "):
+            source = regex.sub(r"(?m)^.{1,4}", "", source)
         try:
             tree = ast.parse(source)
         except (SyntaxError, ValueError):
@@ -79,16 +81,15 @@ if __name__ == "__main__":
     """Take an individual source-code, print its constructs and write its flat AST."""
     time = __import__("time")
     source = Path("sandbox/source.py").read_text()
-    for (i, line) in enumerate(source.splitlines(), 1):
-        print(f"{i: 3} {line}")
+    print(source)
     print()
     parse = SourceParser()
     start = time.perf_counter()
     acc = []
-    for (name, spans) in parse(source, yield_failed_matches=False):
+    for (name, spans) in sorted(parse(source, yield_failed_matches=False)):
         stop = time.perf_counter()
         spans = ", ".join(map(str, spans))
         acc.append(f"{stop - start:7.4f} s.: | `{name}` | {spans} |")
         start = stop
-    print("\n".join(sorted(acc, reverse=True)))
+    print("\n".join(acc))
     Path("sandbox/flat_ast.txt").write_text(parse.flat_ast)
