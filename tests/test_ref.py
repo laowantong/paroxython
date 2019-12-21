@@ -1,15 +1,31 @@
+from collections import defaultdict
+from unicodedata import normalize
+
 import pytest
 import regex
-from md_toc import build_toc
 
 import context
 from paroxython.source_parser import SourceParser
 from paroxython.span import Span
 
 
+def generate_toc(text):
+    slug_counts = defaultdict(int)
+    for match in regex.finditer(r"(?m)^(#{1,4}) (.+)", text):
+        (hashtags, title) = match.groups()
+        offset = "  " * (len(hashtags) - 1) + "- "
+        slug = normalize("NFD", title.lower()).encode("ASCII", "ignore").decode("ASCII")
+        slug = slug.replace(" ", "-")
+        slug = regex.sub(r"[^\w-]", "", slug)
+        slug = f"{slug}-{slug_counts[slug]}"
+        slug = slug.rstrip("-0")
+        slug_counts[slug] += 1
+        yield f"{offset}[{title}](#{slug})"
+
+
 def reformat_file(construct_path):
     text = construct_path.read_text()
-    toc = build_toc(construct_path, keep_header_levels=4, no_list_coherence=True)
+    toc = "\n".join(generate_toc(text))
     rule = "-" * 80 + "\n"
     text = regex.sub(r"(?m)^---+\n", "", text)
     text = regex.sub(r"(?m)^ +```", "```", text)
