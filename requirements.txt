@@ -1,4 +1,4 @@
 md-toc==6.0.0
 pre-commit==1.20.0
 pytest==5.3.2
-regex==2019.12.19
+regex==2019.12.20
