@@ -47,10 +47,17 @@ def test_example(label_name, source, results):
     source = regex.sub(r"(?m)^.{1,4}", "", source)
     actual = dict(parse(source))
     keys = set(actual.keys())
-    for (label_name, expected_spans) in results:
-        assert label_name in keys
-        actual_spans = ", ".join(map(str, actual[label_name]))
+    for (expected_label_name, expected_spans) in results:
+        assert expected_label_name in keys
+        actual_spans = ", ".join(map(str, actual[expected_label_name]))
         assert actual_spans == expected_spans
+        keys.discard(expected_label_name)
+    n = len(label_name)
+    for expected_label_name in keys:
+        if expected_label_name.partition(":")[0] == label_name:
+            actual_spans = ", ".join(map(str, actual[expected_label_name]))
+            message = f"{expected_label_name} unexpectedly appears on {actual_spans}"
+            assert not expected_label_name[n:], message
 
 
 def test_at_least_one_example_is_provided_for_each_construct():
