@@ -29,15 +29,15 @@ class ProgramFilter:
         self.result: ProgramNames = list(self.programs.keys())
         self.counts = {"initially": len(self.result)}
 
-    def remove_from_result(self, program_names: Set[ProgramName]) -> None:
-        """Functionally equivalent to self.result.difference_update(program_names).
+    def remove_from_result(self, programs: Set[ProgramName]) -> None:
+        """Functionally equivalent to self.result.difference_update(programs).
         Complexity:
-            O(1) when program_names is empty
-            O(len(self.result)) when program_names is a set
-            O(len(self.result) * len(program_names)) otherwise (should not happen)
+            O(1) when programs is empty
+            O(len(self.result)) when programs is a set
+            O(len(self.result) * len(programs)) otherwise (should not happen)
         """
-        if program_names:
-            self.result[:] = [x for x in self.result if x not in program_names]
+        if programs:
+            self.result[:] = [x for x in self.result if x not in programs]
 
     def filter_blacklisted_programs(self, programs: ProgramPatterns) -> None:
         """Suppress from self.result all programs whose name matches any
@@ -45,7 +45,7 @@ class ProgramFilter:
         count = len(self.result)
         if programs:
             match_program = compile("|".join(programs)).match
-            acc = set()
+            acc: Set[ProgramName] = set()
             for program_name in list(self.result):
                 if match_program(program_name):
                     acc.add(program_name)
@@ -119,12 +119,12 @@ class ProgramFilter:
         lacking_taxons: TaxonPatternMap = {}
         for program_name in self.result:
             lacking_taxons[program_name] = []
-            for (match_taxon, wanted_taxons) in zip(match_taxons, taxons):
+            for (match_taxon, wanted_taxon) in zip(match_taxons, taxons):
                 for taxon_name in self.programs[program_name]["taxons"]:
                     if match_taxon(taxon_name):  # this wanted taxon is used
                         break  # no need to test the other taxons of this program
                 else:  # this wanted taxon is not used by this program
-                    lacking_taxons[program_name].append(wanted_taxons)
+                    lacking_taxons[program_name].append(wanted_taxon)
         return lacking_taxons
 
     def _sort(self, key: Callable, reverse: bool) -> None:
@@ -177,23 +177,23 @@ class ProgramFilter:
 
 if __name__ == "__main__":
 
-    forbidden_patterns = r"""
+    forbidden_taxon_patterns = r"""
         call/method/.*
     """.strip().split()
 
-    mandatory_patterns = r"""
+    mandatory_taxon_patterns = r"""
         function/.*
         operator/percent/modulo/.*
     """.strip().split()
 
-    blacklisted_programs = r"""
+    blacklisted_program_patterns = r"""
         .+/problem_10/.+
     """.strip().split()
 
     db = json.loads(Path("db.json").read_text())
     f = ProgramFilter(db)
-    f.filter_forbidden_taxons(forbidden_patterns)
-    f.filter_mandatory_taxons(mandatory_patterns)
-    f.filter_blacklisted_programs(blacklisted_programs)
+    f.filter_forbidden_taxons(forbidden_taxon_patterns)
+    f.filter_mandatory_taxons(mandatory_taxon_patterns)
+    f.filter_blacklisted_programs(blacklisted_program_patterns)
     f.sort_by_taxon_count()
     print(f)
