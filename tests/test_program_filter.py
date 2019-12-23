@@ -79,49 +79,42 @@ def test_get_taxons_in_programs():
     f.reset()
     result = f.get_taxons_in_programs(["program_[1-3]$"])
     print(result)
-    assert result == "\n".join(
-        """
-        O/
-        O/C/
-        O/C/F/U/
-        O/C/H/
-        O/C/H/B/
-        O/C/H/B/I/
-        O/J/
-        O/N/
-        O/N/P/
-        X/
-        X/G/
-        X/K/
-        X/S/
-        X/S/M/
-        X/S/M/L/
-        X/S/M/L/R/
-        X/S/M/L/R/D/
-        X/S/M/L/V/
-        X/W/
-        Y/
-        Y/E/
-        Y/T/
-        Y/T/Q/
-    """.split()
-    )
+    assert result == [
+        "O/",
+        "O/C/",
+        "O/C/F/U/",
+        "O/C/H/",
+        "O/C/H/B/",
+        "O/C/H/B/I/",
+        "O/J/",
+        "O/N/",
+        "O/N/P/",
+        "X/",
+        "X/G/",
+        "X/K/",
+        "X/S/",
+        "X/S/M/",
+        "X/S/M/L/",
+        "X/S/M/L/R/",
+        "X/S/M/L/R/D/",
+        "X/S/M/L/V/",
+        "X/W/",
+        "Y/",
+        "Y/E/",
+        "Y/T/",
+        "Y/T/Q/",
+    ]
 
 
 def test_get_taxons_not_in_programs():
     result = f.get_taxons_not_in_programs(["program_[1-3]$"])
     print(result)
-    assert result == "\n".join(
-        """
-        O/C/F/
-        X/S/M/L/R/D/A/
-    """.split()
-    )
+    assert result == ["O/C/F/", "X/S/M/L/R/D/A/"]
 
 
-def test_get_extra_taxons():
+def test_get_extra_taxon_names():
     f.reset()
-    result = f.get_extra_taxons(["O", "X"])
+    result = f.get_extra_taxon_names(["O", "X"])
     print(result)
     assert result == {
         "program_1": ["Y/T/", "Y/T/Q/", "Y/"],
@@ -141,7 +134,7 @@ def test_sort_by_extra_taxon_count():
     f.sort_by_extra_taxon_count(["O", "X"])
     print(f.result)
     assert f.result == [
-        "program_5",  # no extra taxon, see test_get_extra_taxons()
+        "program_5",  # no extra taxon, see test_get_extra_taxon_names()
         "program_8",  # 2 extra taxons
         "program_1",  # 3 extra taxons
         "program_2",
@@ -153,9 +146,9 @@ def test_sort_by_extra_taxon_count():
     ]
 
 
-def test_get_lacking_taxons():
+def test_get_lacking_taxon_patterns():
     f.reset()
-    result = f.get_lacking_taxons(["O/$", "O/C/H/$", "O/C/F/U/$"])
+    result = f.get_lacking_taxon_patterns(["O/$", "O/C/H/$", "O/C/F/U/$"])
     print(result)
     assert result == {
         "program_1": ["O/$", "O/C/H/$", "O/C/F/U/$"],
@@ -190,7 +183,7 @@ def test_sort_by_lacking_taxon_count():
 def test_sort_by_distance():
     f.reset()
     taxon_names = [name + "$" for name in db["programs"]["program_3"]["taxons"]]
-    lacking = f.get_lacking_taxons(taxon_names)
+    lacking = f.get_lacking_taxon_patterns(taxon_names)
     print(lacking)
     assert lacking == {
         "program_1": [
@@ -246,7 +239,7 @@ def test_sort_by_distance():
         ],
         "program_9": ["O/N/P/$", "O/C/H/B/$", "O/C/F/U/$", "X/S/$", "X/S/M/L/$"],
     }
-    extra = f.get_extra_taxons(taxon_names)
+    extra = f.get_extra_taxon_names(taxon_names)
     print(extra)
     assert extra == {
         "program_1": ["X/W/", "X/", "Y/T/Q/", "X/S/M/L/R/D/", "O/N/"],
