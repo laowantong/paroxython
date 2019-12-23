@@ -112,6 +112,40 @@ def test_get_taxons_not_in_programs():
     assert result == {"O/C/F/", "X/S/M/L/R/D/A/"}
 
 
+def test_set_operations():
+    f.reset()
+    f.filter_mandatory_taxons(["O/$", "O/C/F/U/$"])
+    print(f.result)
+    assert f.result == {"program_3", "program_4", "program_7"}
+    f.complement_update()
+    print(f.result)
+    assert f.result == {
+        "program_9",
+        "program_5",
+        "program_6",
+        "program_1",
+        "program_2",
+        "program_8",
+    }
+    f.update({"program_7"})
+    print(f.result)
+    assert f.result == {
+        "program_9",
+        "program_5",
+        "program_6",
+        "program_1",
+        "program_2",
+        "program_8",
+        "program_7",
+    }
+    f.difference_update({"program_6", "program_1"})
+    print(f.result)
+    assert f.result == {"program_9", "program_5", "program_2", "program_8", "program_7"}
+    f.intersection_update({"program_3", "program_4", "program_5"})
+    print(f.result)
+    assert f.result == {"program_5"}
+
+
 def test_get_extra_taxon_names():
     f.reset()
     result = f.get_extra_taxon_names(["O", "X"])
