@@ -41,7 +41,7 @@ f = ProgramFilter(db)
 def test_no_filter():
     f.reset()
     print(f.result)
-    assert f.result == [
+    assert f.result == {
         "program_1",
         "program_2",
         "program_3",
@@ -51,35 +51,35 @@ def test_no_filter():
         "program_7",
         "program_8",
         "program_9",
-    ]
+    }
 
 
 def test_filter_blacklisted_programs():
     f.reset()
     f.filter_blacklisted_programs(["program_[1-5]$"])
     print(f.result)
-    assert f.result == ["program_6", "program_7", "program_8", "program_9"]
+    assert f.result == {"program_6", "program_7", "program_8", "program_9"}
 
 
 def test_filter_mandatory_taxons():
     f.reset()
     f.filter_mandatory_taxons(["O/$", "O/C/F/U/$"])
     print(f.result)
-    assert f.result == ["program_3", "program_4", "program_7"]
+    assert f.result == {"program_3", "program_4", "program_7"}
 
 
 def test_filter_forbidden_taxons():
     f.reset()
     f.filter_forbidden_taxons(["O/$", "O/C/F/U/$"])
     print(f.result)
-    assert f.result == ["program_1", "program_5"]
+    assert f.result == {"program_1", "program_5"}
 
 
 def test_get_taxons_in_programs():
     f.reset()
     result = f.get_taxons_in_programs(["program_[1-3]$"])
     print(result)
-    assert result == [
+    assert result == {
         "O/",
         "O/C/",
         "O/C/F/U/",
@@ -103,13 +103,13 @@ def test_get_taxons_in_programs():
         "Y/E/",
         "Y/T/",
         "Y/T/Q/",
-    ]
+    }
 
 
 def test_get_taxons_not_in_programs():
     result = f.get_taxons_not_in_programs(["program_[1-3]$"])
     print(result)
-    assert result == ["O/C/F/", "X/S/M/L/R/D/A/"]
+    assert result == {"O/C/F/", "X/S/M/L/R/D/A/"}
 
 
 def test_get_extra_taxon_names():
@@ -131,9 +131,9 @@ def test_get_extra_taxon_names():
 
 def test_sort_by_extra_taxon_count():
     f.reset()
-    f.sort_by_extra_taxon_count(["O", "X"])
-    print(f.result)
-    assert f.result == [
+    result = f.sorted_by_extra_taxon_count(["O", "X"])
+    print(result)
+    assert result == [
         "program_5",  # no extra taxon, see test_get_extra_taxon_names()
         "program_8",  # 2 extra taxons
         "program_1",  # 3 extra taxons
@@ -165,9 +165,9 @@ def test_get_lacking_taxon_patterns():
 
 def test_sort_by_lacking_taxon_count():
     f.reset()
-    f.sort_by_lacking_taxon_count(["O/$", "O/C/H/$", "O/C/F/U/$"])
-    print(f.result)
-    assert f.result == [
+    result = f.sorted_by_lacking_taxon_count(["O/$", "O/C/H/$", "O/C/F/U/$"])
+    print(result)
+    assert result == [
         "program_3",  # program_3 has all the wanted taxons
         "program_4",  # 1 taxon is lacking
         "program_7",
@@ -261,9 +261,9 @@ def test_sort_by_distance():
         "program_8": ["X/W/", "O/C/", "O/N/", "X/S/M/L/R/D/A/", "X/S/M/L/R/D/"],
         "program_9": ["X/W/", "O/N/", "Y/T/Q/", "O/C/H/B/I/", "O/C/F/"],
     }
-    f.sort_by_distance(taxon_names)
-    print(f.result)
-    assert f.result == [
+    result = f.sorted_by_distance(taxon_names)
+    print(result)
+    assert result == [
         "program_3",  # 0 lacking and 0 extra taxons
         "program_7",  # 4             5
         "program_9",  # 5             5
@@ -278,9 +278,9 @@ def test_sort_by_distance():
 
 def test_sort_by_taxon_count():
     f.reset()
-    f.sort_by_taxon_count()
-    print(f.result)
-    assert f.result == [
+    result = f.sorted_by_taxon_count()
+    print(result)
+    assert result == [
         "program_5",
         "program_2",
         "program_8",
@@ -291,16 +291,16 @@ def test_sort_by_taxon_count():
         "program_9",
         "program_7",
     ]
-    counts = [len(db["programs"][program_name]["taxons"]) for program_name in f.result]
+    counts = [len(db["programs"][program_name]["taxons"]) for program_name in result]
     print(counts)
     assert counts == [12, 13, 13, 14, 14, 14, 15, 15, 16]
 
 
-def test_sort_by_line_count():
+def test_sorted_by_line_count():
     f.reset()
-    f.sort_by_line_count()
-    print(f.result)
-    assert f.result == [
+    result = f.sorted_by_line_count()
+    print(result)
+    assert result == [
         "program_8",
         "program_1",
         "program_2",
