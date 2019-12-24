@@ -17,7 +17,7 @@ def make_database(directories: List[str]) -> str:
     """Construct a JSON object with the following schema:
     {
         "programs": {
-            program_1_name: {
+            prg1_name: {
                 "timestamp": "...",
                 "source": "...",
                 "labels": {
@@ -31,11 +31,11 @@ def make_database(directories: List[str]) -> str:
             ...
         },
         "labels": {
-            label_1_name: [program_1_name, program_2_name, ...],
+            label_1_name: [prg1_name, prg2_name, ...],
             ...
         },
         "taxons": {
-            taxon_1_name: [program_1_name, program_2_name, ...],
+            taxon_1_name: [prg1_name, prg2_name, ...],
             ...
         }
     }

@@ -26,7 +26,7 @@ Y/T/
 Y/T/Q/
 
 PROGRAMS
-program_1
+prg1
 1   X/W/+7  X/S/
 2   X/+1  Y/T/  X/S/M/
 3   X/W/  X/S/M/L/R/
@@ -37,7 +37,7 @@ program_1
 8   O/N/  X/S/M/L/R/D/  O/J/
 9   X/S/  X/K/
 
-program_2
+prg2
 1   O/N/P/  Y/T/Q/  Y/
 2   X/S/M/L/R/D/  O/
 3   O/C/H/B/  X/S/M/L/R/D/
@@ -48,7 +48,7 @@ program_2
 8   X/G/  X/S/M/L/V/+1
 9   X/S/M/L/R/D/  X/S/M/L/V/  Y/T/Q/  O/C/H/B/I/
 
-program_3
+prg3
 1   O/N/P/  X/K/  Y/T/
 2   X/S/M/L/V/
 3   O/C/H/B/
@@ -59,7 +59,7 @@ program_3
 8   X/S/M/L/  Y/E/
 9   O/C/H/B/  O/J/
 
-program_4
+prg4
 1   O/N/P/  X/
 2   O/N/P/  Y/T/+1
 3   X/S/  O/+5  Y/T/Q/+4  O/C/H/B/
@@ -70,7 +70,7 @@ program_4
 8   O/C/F/U/
 9   X/S/M/L/
 
-program_5
+prg5
 1   O/N/P/+1  O/C/H/B/I/
 2   O/N/P/  X/K/  O/N/  X/S/
 3   X/
@@ -81,7 +81,7 @@ program_5
 8   O/C/H/  O/N/
 9   O/C/H/B/I/  O/N/
 
-program_6
+prg6
 1   X/
 2   O/N/  Y/T/Q/  X/W/
 3   
@@ -92,7 +92,7 @@ program_6
 8   X/K/
 9   Y/E/  O/C/H/B/I/  X/S/M/L/V/
 
-program_7
+prg7
 1   O/J/  Y/E/  X/K/
 2   O/N/  O/+3  X/S/M/L/R/  Y/E/
 3   O/C/F/U/  Y/T/Q/  X/  O/C/H/B/I/
@@ -103,7 +103,7 @@ program_7
 8   X/S/
 9   Y/T/  X/S/M/
 
-program_8
+prg8
 1   X/W/  O/C/
 2   O/C/F/U/
 3   O/N/  X/S/M/L/R/D/A/  X/S/M/L/V/  Y/E/
@@ -111,7 +111,7 @@ program_8
 5   X/K/  O/N/P/
 6   X/S/M/L/R/D/  O/C/H/B/
 
-program_9
+prg9
 1   X/W/
 2   O/N/  Y/
 3   O/C/H/  Y/T/Q/

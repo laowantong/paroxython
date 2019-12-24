@@ -10,7 +10,7 @@ from paroxython.program_filter import ProgramFilter
 text = Path("tests/data/taxons_and_programs.txt").read_text()
 
 taxon_names = regex.search(r"(?ms)^TAXONS\n(.+?)\n\n", text)[1].split()
-programs = regex.findall(r"(?ms)^(program_\d+)\n(.+?)\n\n", text)
+programs = regex.findall(r"(?ms)^(prg\d+)\n(.+?)\n\n", text)
 
 db = {
     "programs": {
@@ -42,42 +42,42 @@ def test_no_filter():
     f.reset()
     print(f.result)
     assert f.result == {
-        "program_1",
-        "program_2",
-        "program_3",
-        "program_4",
-        "program_5",
-        "program_6",
-        "program_7",
-        "program_8",
-        "program_9",
+        "prg1",
+        "prg2",
+        "prg3",
+        "prg4",
+        "prg5",
+        "prg6",
+        "prg7",
+        "prg8",
+        "prg9",
     }
 
 
 def test_filter_blacklisted_programs():
     f.reset()
-    f.filter_blacklisted_programs(["program_[1-5]$"])
+    f.filter_blacklisted_programs(["prg[1-5]$"])
     print(f.result)
-    assert f.result == {"program_6", "program_7", "program_8", "program_9"}
+    assert f.result == {"prg6", "prg7", "prg8", "prg9"}
 
 
 def test_filter_mandatory_taxons():
     f.reset()
     f.filter_mandatory_taxons(["O/$", "O/C/F/U/$"])
     print(f.result)
-    assert f.result == {"program_3", "program_4", "program_7"}
+    assert f.result == {"prg3", "prg4", "prg7"}
 
 
 def test_filter_forbidden_taxons():
     f.reset()
     f.filter_forbidden_taxons(["O/$", "O/C/F/U/$"])
     print(f.result)
-    assert f.result == {"program_1", "program_5"}
+    assert f.result == {"prg1", "prg5"}
 
 
 def test_get_taxons_in_programs():
     f.reset()
-    result = f.get_taxons_in_programs(["program_[1-3]$"])
+    result = f.get_taxons_in_programs(["prg[1-3]$"])
     print(result)
     assert result == {
         "O/",
@@ -107,7 +107,7 @@ def test_get_taxons_in_programs():
 
 
 def test_get_taxons_not_in_programs():
-    result = f.get_taxons_not_in_programs(["program_[1-3]$"])
+    result = f.get_taxons_not_in_programs(["prg[1-3]$"])
     print(result)
     assert result == {"O/C/F/", "X/S/M/L/R/D/A/"}
 
@@ -116,39 +116,22 @@ def test_set_operations():
     f.reset()
     f.filter_mandatory_taxons(["O/$", "O/C/F/U/$"])
     print(f.result)
-    assert f.result == {"program_3", "program_4", "program_7"}
+    assert f.result == {"prg3", "prg4", "prg7"}
     f.complement_update()
     print(f.result)
-    assert f.result == {
-        "program_9",
-        "program_5",
-        "program_6",
-        "program_1",
-        "program_2",
-        "program_8",
-    }
-    f.update({"program_7"})
+    assert f.result == {"prg9", "prg5", "prg6", "prg1", "prg2", "prg8"}
+    f.update({"prg7"})
     print(f.result)
-    assert f.result == {
-        "program_9",
-        "program_5",
-        "program_6",
-        "program_1",
-        "program_2",
-        "program_8",
-        "program_7",
-    }
-    f.difference_update({"program_6", "program_1"})
+    assert f.result == {"prg9", "prg5", "prg6", "prg1", "prg2", "prg8", "prg7"}
+    f.difference_update({"prg6", "prg1"})
     print(f.result)
-    assert f.result == {"program_9", "program_5", "program_2", "program_8", "program_7"}
-    f.symmetric_difference_update({"program_9", "program_5", "program_1"})
+    assert f.result == {"prg9", "prg5", "prg2", "prg8", "prg7"}
+    f.symmetric_difference_update({"prg9", "prg5", "prg1"})
     print(f.result)
-    assert f.result == {"program_1", "program_2", "program_8", "program_7"}
-    f.intersection_update(
-        {"program_1", "program_2", "program_5"}, {"program_2", "program_8"}
-    )
+    assert f.result == {"prg1", "prg2", "prg8", "prg7"}
+    f.intersection_update({"prg1", "prg2", "prg5"}, {"prg2", "prg8"})
     print(f.result)
-    assert f.result == {"program_2"}
+    assert f.result == {"prg2"}
 
 
 def test_get_extra_taxon_names():
@@ -156,15 +139,15 @@ def test_get_extra_taxon_names():
     result = f.get_extra_taxon_names(["O", "X"])
     print(result)
     assert result == {
-        "program_1": ["Y/T/", "Y/T/Q/", "Y/"],
-        "program_2": ["Y/T/Q/", "Y/", "Y/T/"],
-        "program_3": ["Y/T/", "Y/", "Y/E/"],
-        "program_4": ["Y/T/", "Y/T/Q/", "Y/"],
-        "program_5": [],
-        "program_6": ["Y/T/Q/", "Y/T/", "Y/E/"],
-        "program_7": ["Y/E/", "Y/T/Q/", "Y/T/"],
-        "program_8": ["Y/E/"],
-        "program_9": ["Y/", "Y/T/Q/", "Y/E/", "Y/T/"],
+        "prg1": ["Y/T/", "Y/T/Q/", "Y/"],
+        "prg2": ["Y/T/Q/", "Y/", "Y/T/"],
+        "prg3": ["Y/T/", "Y/", "Y/E/"],
+        "prg4": ["Y/T/", "Y/T/Q/", "Y/"],
+        "prg5": [],
+        "prg6": ["Y/T/Q/", "Y/T/", "Y/E/"],
+        "prg7": ["Y/E/", "Y/T/Q/", "Y/T/"],
+        "prg8": ["Y/E/"],
+        "prg9": ["Y/", "Y/T/Q/", "Y/E/", "Y/T/"],
     }
 
 
@@ -173,15 +156,15 @@ def test_sort_by_extra_taxon_count():
     result = f.sorted_by_extra_taxon_count(["O", "X"])
     print(result)
     assert result == [
-        "program_5",  # no extra taxon, see test_get_extra_taxon_names()
-        "program_8",  # 2 extra taxons
-        "program_1",  # 3 extra taxons
-        "program_2",
-        "program_3",
-        "program_4",
-        "program_6",
-        "program_7",
-        "program_9",  # 4 extra taxons
+        "prg5",  # no extra taxon, see test_get_extra_taxon_names()
+        "prg8",  # 2 extra taxons
+        "prg1",  # 3 extra taxons
+        "prg2",
+        "prg3",
+        "prg4",
+        "prg6",
+        "prg7",
+        "prg9",  # 4 extra taxons
     ]
 
 
@@ -190,15 +173,15 @@ def test_get_lacking_taxon_patterns():
     result = f.get_lacking_taxon_patterns(["O/$", "O/C/H/$", "O/C/F/U/$"])
     print(result)
     assert result == {
-        "program_1": ["O/$", "O/C/H/$", "O/C/F/U/$"],
-        "program_2": ["O/C/H/$", "O/C/F/U/$"],
-        "program_3": [],
-        "program_4": ["O/C/H/$"],
-        "program_5": ["O/$", "O/C/F/U/$"],
-        "program_6": ["O/$", "O/C/H/$"],
-        "program_7": ["O/C/H/$"],
-        "program_8": ["O/$", "O/C/H/$"],
-        "program_9": ["O/C/F/U/$"],
+        "prg1": ["O/$", "O/C/H/$", "O/C/F/U/$"],
+        "prg2": ["O/C/H/$", "O/C/F/U/$"],
+        "prg3": [],
+        "prg4": ["O/C/H/$"],
+        "prg5": ["O/$", "O/C/F/U/$"],
+        "prg6": ["O/$", "O/C/H/$"],
+        "prg7": ["O/C/H/$"],
+        "prg8": ["O/$", "O/C/H/$"],
+        "prg9": ["O/C/F/U/$"],
     }
 
 
@@ -207,33 +190,26 @@ def test_sort_by_lacking_taxon_count():
     result = f.sorted_by_lacking_taxon_count(["O/$", "O/C/H/$", "O/C/F/U/$"])
     print(result)
     assert result == [
-        "program_3",  # program_3 has all the wanted taxons
-        "program_4",  # 1 taxon is lacking
-        "program_7",
-        "program_9",
-        "program_2",
-        "program_5",
-        "program_6",
-        "program_8",
-        "program_1",  # 3 taxons are lacking
+        "prg3",  # prg3 has all the wanted taxons
+        "prg4",  # 1 taxon is lacking
+        "prg7",
+        "prg9",
+        "prg2",
+        "prg5",
+        "prg6",
+        "prg8",
+        "prg1",  # 3 taxons are lacking
     ]
 
 
 def test_sort_by_distance():
     f.reset()
-    taxon_names = [name + "$" for name in db["programs"]["program_3"]["taxons"]]
+    taxon_names = [name + "$" for name in db["programs"]["prg3"]["taxons"]]
     lacking = f.get_lacking_taxon_patterns(taxon_names)
     print(lacking)
     assert lacking == {
-        "program_1": [
-            "X/S/M/L/V/$",
-            "O/C/H/B/$",
-            "O/C/F/U/$",
-            "O/C/H/$",
-            "O/$",
-            "Y/E/$",
-        ],
-        "program_2": [
+        "prg1": ["X/S/M/L/V/$", "O/C/H/B/$", "O/C/F/U/$", "O/C/H/$", "O/$", "Y/E/$"],
+        "prg2": [
             "X/K/$",
             "O/J/$",
             "O/C/F/U/$",
@@ -242,9 +218,9 @@ def test_sort_by_distance():
             "X/S/M/L/$",
             "Y/E/$",
         ],
-        "program_3": [],
-        "program_4": ["X/K/$", "X/S/M/L/V/$", "O/J/$", "X/S/M/$", "O/C/H/$", "Y/E/$"],
-        "program_5": [
+        "prg3": [],
+        "prg4": ["X/K/$", "X/S/M/L/V/$", "O/J/$", "X/S/M/$", "O/C/H/$", "Y/E/$"],
+        "prg5": [
             "Y/T/$",
             "X/S/M/L/R/$",
             "O/J/$",
@@ -255,7 +231,7 @@ def test_sort_by_distance():
             "X/S/M/L/$",
             "Y/E/$",
         ],
-        "program_6": [
+        "prg6": [
             "O/N/P/$",
             "O/C/H/B/$",
             "X/S/M/L/R/$",
@@ -266,27 +242,19 @@ def test_sort_by_distance():
             "O/$",
             "X/S/M/L/$",
         ],
-        "program_7": ["O/N/P/$", "X/S/M/L/V/$", "O/C/H/$", "Y/$"],
-        "program_8": [
-            "Y/T/$",
-            "X/S/M/L/R/$",
-            "X/S/M/$",
-            "O/C/H/$",
-            "X/S/$",
-            "Y/$",
-            "O/$",
-        ],
-        "program_9": ["O/N/P/$", "O/C/H/B/$", "O/C/F/U/$", "X/S/$", "X/S/M/L/$"],
+        "prg7": ["O/N/P/$", "X/S/M/L/V/$", "O/C/H/$", "Y/$"],
+        "prg8": ["Y/T/$", "X/S/M/L/R/$", "X/S/M/$", "O/C/H/$", "X/S/$", "Y/$", "O/$"],
+        "prg9": ["O/N/P/$", "O/C/H/B/$", "O/C/F/U/$", "X/S/$", "X/S/M/L/$"],
     }
     extra = f.get_extra_taxon_names(taxon_names)
     print(extra)
     assert extra == {
-        "program_1": ["X/W/", "X/", "Y/T/Q/", "X/S/M/L/R/D/", "O/N/"],
-        "program_2": ["Y/T/Q/", "X/S/M/L/R/D/", "O/C/", "X/G/", "O/C/H/B/I/"],
-        "program_3": [],
-        "program_4": ["X/", "Y/T/Q/", "X/S/M/L/R/D/A/", "X/G/", "X/S/M/L/R/D/"],
-        "program_5": ["O/C/H/B/I/", "O/N/", "X/", "X/S/M/L/R/D/A/", "O/C/", "O/C/F/"],
-        "program_6": [
+        "prg1": ["X/W/", "X/", "Y/T/Q/", "X/S/M/L/R/D/", "O/N/"],
+        "prg2": ["Y/T/Q/", "X/S/M/L/R/D/", "O/C/", "X/G/", "O/C/H/B/I/"],
+        "prg3": [],
+        "prg4": ["X/", "Y/T/Q/", "X/S/M/L/R/D/A/", "X/G/", "X/S/M/L/R/D/"],
+        "prg5": ["O/C/H/B/I/", "O/N/", "X/", "X/S/M/L/R/D/A/", "O/C/", "O/C/F/"],
+        "prg6": [
             "X/",
             "O/N/",
             "Y/T/Q/",
@@ -296,22 +264,22 @@ def test_sort_by_distance():
             "O/C/F/",
             "O/C/H/B/I/",
         ],
-        "program_7": ["O/N/", "Y/T/Q/", "X/", "O/C/H/B/I/", "X/S/M/L/R/D/"],
-        "program_8": ["X/W/", "O/C/", "O/N/", "X/S/M/L/R/D/A/", "X/S/M/L/R/D/"],
-        "program_9": ["X/W/", "O/N/", "Y/T/Q/", "O/C/H/B/I/", "O/C/F/"],
+        "prg7": ["O/N/", "Y/T/Q/", "X/", "O/C/H/B/I/", "X/S/M/L/R/D/"],
+        "prg8": ["X/W/", "O/C/", "O/N/", "X/S/M/L/R/D/A/", "X/S/M/L/R/D/"],
+        "prg9": ["X/W/", "O/N/", "Y/T/Q/", "O/C/H/B/I/", "O/C/F/"],
     }
     result = f.sorted_by_distance(taxon_names)
     print(result)
     assert result == [
-        "program_3",  # 0 lacking and 0 extra taxons
-        "program_7",  # 4             5
-        "program_9",  # 5             5
-        "program_1",  # 6             5
-        "program_4",  # 6             5
-        "program_2",  # 7             5
-        "program_8",  # 7             5
-        "program_5",  # 9             6
-        "program_6",  # 9             8
+        "prg3",  # 0 lacking and 0 extra taxons
+        "prg7",  # 4             5
+        "prg9",  # 5             5
+        "prg1",  # 6             5
+        "prg4",  # 6             5
+        "prg2",  # 7             5
+        "prg8",  # 7             5
+        "prg5",  # 9             6
+        "prg6",  # 9             8
     ]
 
 
@@ -320,15 +288,15 @@ def test_sort_by_taxon_count():
     result = f.sorted_by_taxon_count()
     print(result)
     assert result == [
-        "program_5",
-        "program_2",
-        "program_8",
-        "program_1",
-        "program_4",
-        "program_6",
-        "program_3",
-        "program_9",
-        "program_7",
+        "prg5",
+        "prg2",
+        "prg8",
+        "prg1",
+        "prg4",
+        "prg6",
+        "prg3",
+        "prg9",
+        "prg7",
     ]
     counts = [len(db["programs"][program_name]["taxons"]) for program_name in result]
     print(counts)
@@ -340,15 +308,15 @@ def test_sorted_by_line_count():
     result = f.sorted_by_line_count()
     print(result)
     assert result == [
-        "program_8",
-        "program_1",
-        "program_2",
-        "program_3",
-        "program_4",
-        "program_5",
-        "program_6",
-        "program_7",
-        "program_9",
+        "prg8",
+        "prg1",
+        "prg2",
+        "prg3",
+        "prg4",
+        "prg5",
+        "prg6",
+        "prg7",
+        "prg9",
     ]
 
 

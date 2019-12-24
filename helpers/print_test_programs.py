@@ -1,7 +1,7 @@
 """Print the contents of a test file similar to tests/data/taxons_and_programs.txt.
 
 The current version of this file was generated with a seed of 1. For testing purposes,
-the sloc count of program_8 was manually altered by deleting its last three lines.
+the sloc count of prg8 was manually altered by deleting its last three lines.
 """
 
 import random
@@ -39,7 +39,7 @@ def create_program(line_count=9, iterations=20):
 
 print("PROGRAMS")
 for i in range(1, 10):
-    print(f"program_{i}")
+    print(f"prg{i}")
     program = create_program()
     for (j, line) in enumerate(program, 1):
         print(f"{j}   {line}")
