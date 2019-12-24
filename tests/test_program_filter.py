@@ -141,9 +141,14 @@ def test_set_operations():
     f.difference_update({"program_6", "program_1"})
     print(f.result)
     assert f.result == {"program_9", "program_5", "program_2", "program_8", "program_7"}
-    f.intersection_update({"program_3", "program_4", "program_5"})
+    f.symmetric_difference_update({"program_9", "program_5", "program_1"})
     print(f.result)
-    assert f.result == {"program_5"}
+    assert f.result == {"program_1", "program_2", "program_8", "program_7"}
+    f.intersection_update(
+        {"program_1", "program_2", "program_5"}, {"program_2", "program_8"}
+    )
+    print(f.result)
+    assert f.result == {"program_2"}
 
 
 def test_get_extra_taxon_names():

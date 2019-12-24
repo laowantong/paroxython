@@ -27,22 +27,27 @@ class ProgramFilter:
 
     def reset(self) -> None:
         self.result: Set[ProgramName] = set(self.programs.keys())
-        self.counts = {"initially": len(self.result)}
+        self.counts = {"initially": len(self.programs)}
+
+    def update(self, *programs: ProgramNames) -> None:
+        "Update self.result, adding programs from all the given ones."
+        self.result.update(*programs)
+
+    def intersection_update(self, *programs: ProgramNames) -> None:
+        "Update self.result, keeping only programs found in it and all the given ones."
+        self.result.intersection_update(*programs)
+
+    def difference_update(self, *programs: ProgramNames) -> None:
+        "Update self.result, removing programs found in the given ones."
+        self.result.difference_update(*programs)
+
+    def symmetric_difference_update(self, programs: ProgramNames) -> None:
+        "Update self.result, keeping only programs found in either set, but not in both."
+        self.result.symmetric_difference_update(programs)
 
     def complement_update(self):
+        "Update self.result, taking only programs filtered out so far."
         self.result = set(self.programs).difference(self.result)
-
-    def update(self, program_names: ProgramNames) -> None:
-        self.result.update(program_names)
-
-    def intersection_update(self, program_names: ProgramNames) -> None:
-        self.result.intersection_update(program_names)
-
-    def difference_update(self, program_names: ProgramNames) -> None:
-        self.result.difference_update(program_names)
-
-    def symmetric_difference_update(self, program_names: ProgramNames) -> None:
-        self.result.symmetric_difference_update(program_names)
 
     def filter_blacklisted_programs(self, programs: ProgramPatterns) -> None:
         """Suppress from self.result all programs whose name matches any
