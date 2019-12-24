@@ -22,3 +22,4 @@ repos:
     hooks:
     -   id: black
         exclude: snapshots/*
+        args: [--line-length=120]

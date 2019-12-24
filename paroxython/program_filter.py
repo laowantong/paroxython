@@ -148,16 +148,12 @@ class ProgramFilter:
         """Sort the programs by SLOC count."""
         return self.sorted(lambda p: self.programs[p]["source"].count("\n"), reverse)
 
-    def sorted_by_extra_taxon_count(
-        self, taxons: TaxonPatterns, reverse=False
-    ) -> ProgramNames:
+    def sorted_by_extra_taxon_count(self, taxons: TaxonPatterns, reverse=False) -> ProgramNames:
         """Sort the programs by number of extra taxons wrt a given list."""
         extra_taxons = self.get_extra_taxon_names(taxons)
         return self.sorted(lambda p: len(extra_taxons[p]), reverse)
 
-    def sorted_by_lacking_taxon_count(
-        self, taxons: TaxonNames, reverse=False
-    ) -> ProgramNames:
+    def sorted_by_lacking_taxon_count(self, taxons: TaxonNames, reverse=False) -> ProgramNames:
         """Sort the programs by number of lacking taxons wrt a given list."""
         lacking_taxons = self.get_lacking_taxon_patterns(taxons)
         return self.sorted(lambda p: len(lacking_taxons[p]), reverse)
