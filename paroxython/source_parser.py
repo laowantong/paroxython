@@ -53,8 +53,6 @@ class SourceParser:
 
     def __call__(self, source: str, yield_failed_matches: bool = False) -> Iterator[Label]:
         """Analyze a given program source and yield its labels and their spans."""
-        if source.startswith("1   "):
-            source = regex.sub(r"(?m)^.{1,4}", "", source)
         try:
             tree = ast.parse(source)
         except (SyntaxError, ValueError):
@@ -80,8 +78,11 @@ class SourceParser:
 if __name__ == "__main__":
     """Take an individual source-code, print its constructs and write its flat AST."""
     time = __import__("time")
-    source = Path("sandbox/source.py").read_text()
-    print(source)
+    source = Path("sandbox/source.py").read_text().strip()
+    if source.startswith("1   "):
+        source = regex.sub(r"(?m)^.{1,4}", "", source)
+    for (i, line) in enumerate(source.split("\n"), 1):
+        print(f"{i:<4}{line}")
     print()
     parse = SourceParser()
     start = time.perf_counter()
