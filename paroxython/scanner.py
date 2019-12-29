@@ -1,9 +1,9 @@
 import sys
 from collections import defaultdict
 from pathlib import Path
-from typing import Iterator
+from typing import Iterator, List, Set
 
-import regex
+import regex  # type: ignore
 
 from cleanup_source import cleanup_factory
 from source_parser import SourceParser
@@ -37,7 +37,7 @@ class Scanner:
             yield f"# {separator}\n# {path}\n# {separator}"
             source = self.cleanup(path.read_text())
             sloc = source.splitlines()
-            comments = [set() for _ in sloc]
+            comments: List[Set[str]] = [set() for _ in sloc]
             for (label, spots) in sorted(self.parse(source)):
                 for spot in spots:
                     comments[spot.start - 1].add(f"{label}{spot.suffix}")

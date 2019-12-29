@@ -2,12 +2,12 @@ import ast
 import sys
 from collections import defaultdict
 from pathlib import Path
-from typing import Callable, Dict, List, NamedTuple
+from typing import Callable, Dict, Iterator, List, NamedTuple
 
-import regex
-from span import Span
+import regex  # type: ignore
 
 from flatten import flatten
+from span import Span
 
 
 class Label(NamedTuple):
@@ -51,7 +51,7 @@ class SourceParser:
                 raise ValueError(f"Duplicated name '{label_name}'!")
             self.constructs[label_name] = regex.compile(f"(?mx){pattern}")
 
-    def __call__(self, source: str, yield_failed_matches: bool = False):
+    def __call__(self, source: str, yield_failed_matches: bool = False) -> Iterator[Label]:
         """Analyze a given program source and yield its labels and their spans."""
         if source.startswith("1   "):
             source = regex.sub(r"(?m)^.{1,4}", "", source)
@@ -88,8 +88,8 @@ if __name__ == "__main__":
     acc = []
     for (name, spans) in sorted(parse(source, yield_failed_matches=False)):
         stop = time.perf_counter()
-        spans = ", ".join(map(str, spans))
-        acc.append(f"{stop - start:7.4f} s.: | `{name}` | {spans} |")
+        spans_as_string = ", ".join(map(str, spans))
+        acc.append(f"{stop - start:7.4f} s.: | `{name}` | {spans_as_string} |")
         start = stop
     print("\n".join(acc))
     Path("sandbox/flat_ast.txt").write_text(parse.flat_ast)

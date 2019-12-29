@@ -2,10 +2,10 @@ from token import DEDENT, INDENT, NEWLINE, STRING
 from tokenize import COMMENT, NL, generate_tokens
 from typing import Callable
 
-import regex
+import regex  # type: ignore
 
 
-def cleanup_factory(cleanup_strategy: str) -> Callable:
+def cleanup_factory(cleanup_strategy: str) -> Callable[[str], str]:
     cleanup = lambda source: source
     if cleanup_strategy == "strip_docs":
         sub_main = regex.compile(r"(?ms)^if +__name__ *== *.__main__. *:.+").sub

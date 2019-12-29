@@ -1,4 +1,4 @@
-import regex
+import regex  # type: ignore
 import itertools
 
 FIRST_PREFIX_MASK = r"\n(?:\1.+\n)*?\1/"

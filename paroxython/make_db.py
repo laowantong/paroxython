@@ -6,7 +6,7 @@ from itertools import chain
 from pathlib import Path
 from typing import Dict, List, Tuple, Union
 
-import regex
+import regex  # type: ignore
 
 from label_generators import Label, ProgramLabels, generate_programs_labels
 from program_generator import Program, generate_programs
@@ -54,9 +54,7 @@ def make_database(directories: List[str]) -> str:
     return to_Json(db)
 
 
-def serialized(
-    tags: Union[List[Taxon], List[Label]]
-) -> Dict[str, List[Tuple[int, int]]]:
+def serialized(tags: Union[List[Taxon], List[Label]]) -> Dict[str, List[Tuple[int, int]]]:
     result: Dict[str, List[Tuple[int, int]]] = {}
     for (tag_name, spans) in tags:
         result[tag_name] = [span.to_couple() for span in sorted(set(spans))]

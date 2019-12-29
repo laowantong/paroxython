@@ -1,10 +1,10 @@
 import json
 from collections import Counter, defaultdict
-from pathlib import Path, PosixPath
+from pathlib import Path
 from typing import Counter as Bag
 from typing import Dict, Iterator, List, NamedTuple, Tuple
 
-import regex
+import regex  # type: ignore
 
 from label_generators import Label, ProgramLabels
 from span import Span
@@ -19,7 +19,7 @@ TaxonDict = Dict[str, Bag[Span]]
 
 
 class ProgramTaxons(NamedTuple):
-    path: PosixPath
+    path: Path
     taxons: List[Taxon]
 
 
@@ -102,14 +102,11 @@ if __name__ == "__main__":
         # "../Algo/programs"
     ]
     programs_labels = chain.from_iterable(
-        generate_programs_labels(generate_programs(directory))
-        for directory in DIRECTORIES
+        generate_programs_labels(generate_programs(directory)) for directory in DIRECTORIES
     )
     taxonomy = Taxonomy()
-    acc: Dict[str, TaxonDict] = {}
+    acc: Dict[str, Dict[str, str]] = {}
     for (path, taxons) in taxonomy(programs_labels):
-        for (i, (name, spans)) in enumerate(taxons):
-            taxons[i] = (name, " ".join(map(str, sorted(set(spans)))))
-        acc[str(path)] = dict(taxons)
+        acc[str(path)] = {name: " ".join(map(str, sorted(set(spans)))) for (name, spans) in taxons}
     output_path = Path("snapshots/taxon_db.json")
     output_path.write_text(json.dumps(acc, indent=2))

@@ -2,7 +2,7 @@ from collections import defaultdict
 from pathlib import Path
 
 import pytest
-import regex
+import regex  # type: ignore
 
 import context
 from paroxython.program_filter import ProgramFilter
@@ -14,8 +14,7 @@ programs = regex.findall(r"(?ms)^(prg\d+)\n(.+?)\n\n", text)
 
 db = {
     "programs": {
-        name: {"source": source, "taxons": defaultdict(list)}
-        for (name, source) in programs
+        name: {"source": source, "taxons": defaultdict(list)} for (name, source) in programs
     },
     "taxons": {taxon_name: set() for taxon_name in taxon_names},
 }
@@ -41,17 +40,7 @@ f = ProgramFilter(db)
 def test_no_filter():
     f.reset()
     print(f.result)
-    assert f.result == {
-        "prg1",
-        "prg2",
-        "prg3",
-        "prg4",
-        "prg5",
-        "prg6",
-        "prg7",
-        "prg8",
-        "prg9",
-    }
+    assert f.result == {"prg1", "prg2", "prg3", "prg4", "prg5", "prg6", "prg7", "prg8", "prg9"}
 
 
 def test_filter_blacklisted_programs():
@@ -209,15 +198,7 @@ def test_sort_by_distance():
     print(lacking)
     assert lacking == {
         "prg1": ["X/S/M/L/V/$", "O/C/H/B/$", "O/C/F/U/$", "O/C/H/$", "O/$", "Y/E/$"],
-        "prg2": [
-            "X/K/$",
-            "O/J/$",
-            "O/C/F/U/$",
-            "O/C/H/$",
-            "X/S/$",
-            "X/S/M/L/$",
-            "Y/E/$",
-        ],
+        "prg2": ["X/K/$", "O/J/$", "O/C/F/U/$", "O/C/H/$", "X/S/$", "X/S/M/L/$", "Y/E/$"],
         "prg3": [],
         "prg4": ["X/K/$", "X/S/M/L/V/$", "O/J/$", "X/S/M/$", "O/C/H/$", "Y/E/$"],
         "prg5": [
@@ -254,16 +235,7 @@ def test_sort_by_distance():
         "prg3": [],
         "prg4": ["X/", "Y/T/Q/", "X/S/M/L/R/D/A/", "X/G/", "X/S/M/L/R/D/"],
         "prg5": ["O/C/H/B/I/", "O/N/", "X/", "X/S/M/L/R/D/A/", "O/C/", "O/C/F/"],
-        "prg6": [
-            "X/",
-            "O/N/",
-            "Y/T/Q/",
-            "X/W/",
-            "O/C/",
-            "X/S/M/L/R/D/A/",
-            "O/C/F/",
-            "O/C/H/B/I/",
-        ],
+        "prg6": ["X/", "O/N/", "Y/T/Q/", "X/W/", "O/C/", "X/S/M/L/R/D/A/", "O/C/F/", "O/C/H/B/I/"],
         "prg7": ["O/N/", "Y/T/Q/", "X/", "O/C/H/B/I/", "X/S/M/L/R/D/"],
         "prg8": ["X/W/", "O/C/", "O/N/", "X/S/M/L/R/D/A/", "X/S/M/L/R/D/"],
         "prg9": ["X/W/", "O/N/", "Y/T/Q/", "O/C/H/B/I/", "O/C/F/"],
@@ -287,17 +259,7 @@ def test_sort_by_taxon_count():
     f.reset()
     result = f.sorted_by_taxon_count()
     print(result)
-    assert result == [
-        "prg5",
-        "prg2",
-        "prg8",
-        "prg1",
-        "prg4",
-        "prg6",
-        "prg3",
-        "prg9",
-        "prg7",
-    ]
+    assert result == ["prg5", "prg2", "prg8", "prg1", "prg4", "prg6", "prg3", "prg9", "prg7"]
     counts = [len(db["programs"][program_name]["taxons"]) for program_name in result]
     print(counts)
     assert counts == [12, 13, 13, 14, 14, 14, 15, 15, 16]
@@ -307,17 +269,7 @@ def test_sorted_by_line_count():
     f.reset()
     result = f.sorted_by_line_count()
     print(result)
-    assert result == [
-        "prg8",
-        "prg1",
-        "prg2",
-        "prg3",
-        "prg4",
-        "prg5",
-        "prg6",
-        "prg7",
-        "prg9",
-    ]
+    assert result == ["prg8", "prg1", "prg2", "prg3", "prg4", "prg5", "prg6", "prg7", "prg9"]
 
 
 pytest.main(args=["-q"])

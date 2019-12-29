@@ -2,7 +2,7 @@ from collections import defaultdict
 from unicodedata import normalize
 
 import pytest
-import regex
+import regex  # type: ignore
 
 import context
 from paroxython.source_parser import SourceParser

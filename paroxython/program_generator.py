@@ -1,7 +1,7 @@
 from pathlib import Path
 from typing import Iterator, NamedTuple
 
-import regex
+import regex  # type: ignore
 
 from cleanup_source import cleanup_factory
 

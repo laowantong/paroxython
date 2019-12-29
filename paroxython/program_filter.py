@@ -2,7 +2,7 @@ import json
 from pathlib import Path
 from typing import Callable, Dict, List, Set
 
-from regex import compile
+import regex  # type: ignore
 
 ProgramPattern = str
 ProgramPatterns = List[ProgramPattern]
@@ -54,7 +54,7 @@ class ProgramFilter:
         blacklisted pattern."""
         count = len(self.result)
         if programs:
-            match_program = compile("|".join(programs)).match
+            match_program = regex.compile("|".join(programs)).match
             acc: Set[ProgramName] = set()
             for program_name in list(self.result):
                 if match_program(program_name):
@@ -66,7 +66,7 @@ class ProgramFilter:
         """Suppress from self.result all programs using any forbidden taxon."""
         count = len(self.result)
         if taxons:
-            match_taxon = compile("|".join(taxons)).match
+            match_taxon = regex.compile("|".join(taxons)).match
             acc: Set[ProgramName] = set()
             for (taxon_name, program_names) in self.taxons.items():
                 if match_taxon(taxon_name):  # this taxon is forbidden
@@ -78,7 +78,7 @@ class ProgramFilter:
         """Suppress from self.result all programs not using at least one mandatory taxon."""
         count = len(self.result)
         if taxons:
-            match_taxons = [compile(row).match for row in taxons]
+            match_taxons = [regex.compile(row).match for row in taxons]
             acc: Set[ProgramName] = set()
             for program_name in self.result:
                 for match_taxon in match_taxons:
@@ -95,7 +95,7 @@ class ProgramFilter:
         """Return all taxons included in at least one program of the given list."""
         result: Set[TaxonName] = set()
         if programs:
-            match_program = compile("|".join(programs)).match
+            match_program = regex.compile("|".join(programs)).match
             for program_name in self.result:
                 if match_program(program_name):
                     result.update(self.programs[program_name]["taxons"])
@@ -105,7 +105,7 @@ class ProgramFilter:
         """Return all taxons not included in any program of the given list."""
         result: Set[TaxonName] = set(self.taxons.keys())
         if programs:
-            match_program = compile("|".join(programs)).match
+            match_program = regex.compile("|".join(programs)).match
             for program_name in self.result:
                 if match_program(program_name):
                     result.difference_update(self.programs[program_name]["taxons"])
@@ -113,7 +113,7 @@ class ProgramFilter:
 
     def get_extra_taxon_names(self, taxons: TaxonPatterns) -> TaxonNameMap:
         """For each program, list those of its taxons which are not among the given taxons."""
-        match_taxon = compile("|".join(taxons)).match
+        match_taxon = regex.compile("|".join(taxons)).match
         extra_taxons: TaxonNameMap = {}
         for program_name in self.result:
             extra_taxons[program_name] = []
@@ -124,7 +124,7 @@ class ProgramFilter:
 
     def get_lacking_taxon_patterns(self, taxons: TaxonPatterns) -> TaxonPatternMap:
         """For each program, list those of the given taxons that it does not include."""
-        match_taxons = [compile(row).match for row in taxons]
+        match_taxons = [regex.compile(row).match for row in taxons]
         lacking_taxons: TaxonPatternMap = {}
         for program_name in self.result:
             lacking_taxons[program_name] = []

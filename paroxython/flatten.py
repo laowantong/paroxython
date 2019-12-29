@@ -1,7 +1,7 @@
 import ast
 from typing import Any
 
-import regex
+import regex  # type: ignore
 
 extract_ids = regex.compile(r"Name\(id='(.+?)'\)").findall
 remove_context = regex.compile(r", ctx=.+?\(\)").sub

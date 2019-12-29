@@ -1,5 +1,5 @@
 import pytest
-import regex
+import regex  # type: ignore
 
 import context
 from helpers.suggest_regex import Suggestion

@@ -1,5 +1,5 @@
 import pytest
-import regex
+import regex  # type: ignore
 
 import context
 from paroxython.cleanup_source import cleanup_factory
