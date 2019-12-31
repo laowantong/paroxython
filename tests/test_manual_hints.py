@@ -64,11 +64,11 @@ def test_single_line_addition_and_deletion_hints():
     (addition, deletion) = wrapper(numbered_hints)
     assert addition == {
         "hint_on_2_and_3": "2",
-        "hint_on_3": "3",  # this label is scheduled for addition
+        "hint_on_3": "3",  # this label is both scheduled for addition
         "hint_on_5": "5",
     }
     assert deletion == {
-        "hint_on_3": "3",  # the same label is scheduled for deletion
+        "hint_on_3": "3",  # ... and deletion
         "hint_on_4": "4",
     }
 

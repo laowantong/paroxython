@@ -126,6 +126,22 @@ foobar()
 ---
 foobar()
 >>>
+
+<<< paroxython label hints
+foo = bar # paroxython: hint_1 hint_2
+# paroxython: hint_3
+fizz = [
+    "foo", # lorem
+    "bar", # paroxython: hint_4
+]
+---
+foo = bar # paroxython: hint_1 hint_2
+# paroxython: hint_3
+fizz = [
+    "foo",
+    "bar", # paroxython: hint_4
+]
+>>>
 '''
 source_rex = regex.compile(r"(?ms)^<<< ([^\n]+)\n(.+?)\n---\n(.+?)\n>>>")
 examples = [m for m in source_rex.findall(sources)]
