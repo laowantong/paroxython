@@ -8,7 +8,7 @@ from paroxython.span import Span
 def wrapper(numbered_hints):
     lines = [f"statement {i}" for i in range(1, 11)]
     for (i, hint) in numbered_hints:
-        i -= 1
+        i -= 1  # lines start from 1, but indexes from 0
         if "paroxython" not in lines[i]:
             lines[i] += " # paroxython:"
         lines[i] += f" {hint}"
@@ -31,7 +31,7 @@ def test_single_line_addition_hints():
     assert addition == {
         "hint_on_2_and_3": "2, 3",  # the spans are sorted
         "hint_on_3": "3",
-        "hint_twice_on_4": "4, 4",  # the span is duplicated
+        "hint_twice_on_4": "4, 4",  # duplicates are kept
     }
     assert deletion == {}
 
@@ -55,7 +55,7 @@ def test_single_line_deletion_hints():
 
 def test_single_line_addition_and_deletion_hints():
     numbered_hints = [
-        (2, "hint_on_2_and_3"),
+        (2, "hint_on_2"),
         (3, "+hint_on_3"),
         (3, "-hint_on_3"),
         (4, "-hint_on_4"),
@@ -63,7 +63,7 @@ def test_single_line_addition_and_deletion_hints():
     ]
     (addition, deletion) = wrapper(numbered_hints)
     assert addition == {
-        "hint_on_2_and_3": "2",
+        "hint_on_2": "2",
         "hint_on_3": "3",  # this label is both scheduled for addition
         "hint_on_5": "5",
     }
