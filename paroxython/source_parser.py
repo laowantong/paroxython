@@ -51,28 +51,48 @@ class SourceParser:
                 raise ValueError(f"Duplicated name '{label_name}'!")
             self.constructs[label_name] = regex.compile(f"(?mx){pattern}")
 
-    def __call__(self, source: str, yield_failed_matches: bool = False) -> Iterator[Label]:
+    def __call__(
+        self,
+        source: str,
+        manual_hints: Tuple[Dict[str, List[Span]], Dict[str, List[Span]]] = None,
+        yield_failed_matches: bool = False,
+    ) -> Iterator[Label]:
         """Analyze a given program source and yield its labels and their spans."""
+
+        (addition, deletion) = manual_hints or ({}, {})
+
+        def try_to_bind_name_and_span(label_name: str, span: Span) -> None:
+            """Bind a name with a span, unless this binding is scheduled for deletion."""
+            try:
+                deletion[label_name].remove(span)
+            except (KeyError, ValueError):
+                result[label_name].append(span)
+
         try:
             tree = ast.parse(source)
         except (SyntaxError, ValueError):
             return print("Warning: unable to construct the AST")
         self.flat_ast = simplify_negative_litterals(flatten(tree))
+
         for (label_name, rex) in self.constructs.items():
             result: Dict[str, List[Span]] = defaultdict(list)
+            for candidate in list(addition):
+                if candidate == label_name or candidate.startswith(f"{label_name}:"):
+                    result[candidate] = addition.pop(candidate)
             d = None
             for match in rex.finditer(self.flat_ast, overlapped=True):
                 d = match.capturesdict()
                 span = Span(d["LINE"])
                 if d.get("SUFFIX"):  # there is a "SUFFIX" key and its value is not []
                     for suffix in d["SUFFIX"]:
-                        result[f"{label_name}:{suffix}"].append(span)
+                        try_to_bind_name_and_span(f"{label_name}:{suffix}", span)
                 else:
-                    result[label_name].append(span)
+                    try_to_bind_name_and_span(label_name, span)
             if yield_failed_matches and not d:
                 yield Label(label_name, [])
             else:
                 yield from (Label(name, spans) for (name, spans) in result.items())
+        yield from (Label(name, spans) for (name, spans) in addition.items())
 
 
 if __name__ == "__main__":

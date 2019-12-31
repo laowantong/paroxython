@@ -12,6 +12,10 @@ def test_generate_programs():
     assert program.source == "a = b"
 
     program = next(result)
+    assert program.path.name == "collatz_print.py"
+    assert program.source.startswith("def print_collatz(n):")
+
+    program = next(result)
     assert program.path.name == "function_definition.py"
     assert program.source == "def succ(n):\n    return a + b + 1"
 

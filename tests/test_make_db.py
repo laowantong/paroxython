@@ -11,6 +11,7 @@ def test_make_db():
     dirty_fields = ["timestamp"]
     sanitize = lambda d: {k: ("ignored" if k in dirty_fields else d[k]) for k in d}
     result = json.loads(make_database(["tests/data/programs"]), object_hook=sanitize)
+    print(make_database(["tests/data/programs"]))
     expected = json.loads(Path("tests/data/programs/test_db.json").read_text())
     assert result == expected
 

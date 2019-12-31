@@ -6,7 +6,10 @@ from typing import Iterator, List, Set
 import regex  # type: ignore
 
 from cleanup_source import cleanup_factory
+from manual_hints import retrieve_manual_hints
 from source_parser import SourceParser
+
+replace_paroxython_hints = regex.compile(r"\s*# paroxython: .*").sub
 
 
 class Scanner:
@@ -36,9 +39,11 @@ class Scanner:
         for path in self.generate_paths():
             yield f"# {separator}\n# {path}\n# {separator}"
             source = self.cleanup(path.read_text())
+            manual_hints = retrieve_manual_hints(source)
+            source = replace_paroxython_hints("", source)
             sloc = source.splitlines()
             comments: List[Set[str]] = [set() for _ in sloc]
-            for (label, spots) in sorted(self.parse(source)):
+            for (label, spots) in sorted(self.parse(source, manual_hints)):
                 for spot in spots:
                     comments[spot.start - 1].add(f"{label}{spot.suffix}")
             for (i, comment) in enumerate(comments):

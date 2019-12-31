@@ -48,7 +48,6 @@ def retrieve_manual_hints(source: str) -> Tuple[Dict[str, List[Span]], Dict[str,
         if not separator:
             continue
         for hint in hints.split():
-            print((hint,))
             (prefix, label, suffix) = regex.split(r"(\w+(?::\w+)?)", hint, maxsplit=1)
             if prefix in ("", "+", "-"):
                 buffer = deletion if prefix == "-" else addition

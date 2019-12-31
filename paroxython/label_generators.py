@@ -4,9 +4,12 @@ from collections import defaultdict
 from pathlib import Path
 from typing import Dict, Iterator, List, NamedTuple, Set
 
+import regex
+
 from program_generator import Program
 from source_parser import SourceParser
 from span import Span
+from manual_hints import retrieve_manual_hints
 
 
 class Label(NamedTuple):
@@ -19,15 +22,20 @@ class ProgramLabels(NamedTuple):
     labels: List[Label]
 
 
+replace_paroxython_hints = regex.compile(r"\s*# paroxython: .*").sub
+
+
 def generate_labeled_sources(programs: List[Program]) -> Iterator[str]:
     """For each program, yield its labeled source-code."""
     parse = SourceParser()
     separator = "-" * 88
     for (path, source) in programs:
         yield f"# {separator}\n# {path}\n# {separator}"
+        manual_hints = retrieve_manual_hints(source)
+        source = replace_paroxython_hints("", source)
         sloc = source.splitlines()
         comments: List[Set[str]] = [set() for _ in sloc]
-        for (label_name, spans) in sorted(parse(source)):
+        for (label_name, spans) in sorted(parse(source, manual_hints)):
             for span in spans:
                 comments[span.start - 1].add(f"{label_name}{span.suffix}")
         for (i, comment) in enumerate(comments):
@@ -50,7 +58,8 @@ def generate_programs_labels(programs: List[Program]) -> Iterator[ProgramLabels]
     parse = SourceParser()
     for (path, source) in programs:
         label_dict: Dict[str, List[Span]] = defaultdict(list)
-        for (label_name, spans) in sorted(parse(source)):
+        manual_hints = retrieve_manual_hints(source)
+        for (label_name, spans) in sorted(parse(source, manual_hints)):
             for span in spans:
                 insort(label_dict[label_name], span)
         labels = [Label(name, span) for (name, span) in label_dict.items()]
