@@ -2,7 +2,7 @@ import ast
 import sys
 from collections import defaultdict
 from pathlib import Path
-from typing import Callable, Dict, Iterator, List, NamedTuple
+from typing import Callable, Dict, Iterator, List, NamedTuple, Tuple
 
 import regex  # type: ignore
 
@@ -72,7 +72,7 @@ class SourceParser:
             if yield_failed_matches and not d:
                 yield Label(label_name, [])
             else:
-                yield from [Label(name, spans) for (name, spans) in result.items()]
+                yield from (Label(name, spans) for (name, spans) in result.items())
 
 
 if __name__ == "__main__":

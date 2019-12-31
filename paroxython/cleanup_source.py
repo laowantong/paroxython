@@ -18,6 +18,7 @@ replace_first_comments = regex.compile(r"\A(#.*\n)*").sub
 replace_blank_lines = regex.compile(r"\s*\n").sub
 replace_pass = regex.compile(r"(?m)^( *)pass\n\1(?!\s)").sub
 replace_final_pass = regex.compile(r"(?m)^ *pass\Z").sub
+subn_paroxython_comment = regex.compile(r"(?i)#\s*paroxython\s*:\s*").subn
 
 
 def strip_docs(source: str) -> str:
@@ -35,7 +36,10 @@ def strip_docs(source: str) -> str:
             previous_end_col = 0
         result.append(" " * max(0, start_col - previous_end_col))
         if token == COMMENT:
-            continue
+            (string, n) = subn_paroxython_comment("# paroxython: ", string)
+            if n == 0:
+                continue
+            result.append(string)
         elif token == STRING and previous_token in (INDENT, DEDENT, NEWLINE):
             result.append("pass\n")  # replace the docstring by a pass statement
         else:
@@ -54,6 +58,9 @@ def strip_docs(source: str) -> str:
 
 if __name__ == "__main__":
     source = open("../Python/maths/matrix_exponentiation.py").read()
+    lines = source.split("\n")
+    lines[13] += " # paroxython: test"
+    source = "\n".join(lines)
     print(source)
     print("-" * 80)
     print(strip_docs(source))
