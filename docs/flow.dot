@@ -1,0 +1,24 @@
+digraph G {
+    node [shape=box fontname=Courier style=filled fillcolor=cornsilk]
+    "db.json" [shape=cylinder fillcolor=moccasin]
+    "ref.md" [shape=note fillcolor=moccasin]
+    make_db -> "db.json"
+    "db.json" -> program_filter
+    "ref.md" -> source_parser
+    cleanup_source -> scanner
+    manual_hints -> scanner
+    source_parser -> scanner
+    cleanup_source -> program_generator
+    flatten -> source_parser
+    span -> source_parser
+    label_generators -> make_db
+    program_generator -> make_db
+    taxonomy -> make_db
+    span -> manual_hints
+    label_generators -> taxonomy
+    span -> taxonomy
+    program_generator -> label_generators
+    source_parser -> label_generators
+    span -> label_generators
+    manual_hints -> label_generators
+}
