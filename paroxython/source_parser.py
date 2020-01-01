@@ -93,7 +93,7 @@ class SourceParser:
 if __name__ == "__main__":
     """Take an individual source-code, print its constructs and write its flat AST."""
     time = __import__("time")
-    source = Source(Path("sandbox/source.py").read_text().strip())
+    source = Path("sandbox/source.py").read_text().strip()
     if source.startswith("1   "):
         source = regex.sub(r"(?m)^.{1,4}", "", source)
     for (i, line) in enumerate(source.split("\n"), 1):
@@ -102,7 +102,7 @@ if __name__ == "__main__":
     parse = SourceParser()
     start = time.perf_counter()
     acc = []
-    for (name, spans) in sorted(parse(source, yield_failed_matches=False)):
+    for (name, spans) in sorted(parse(Source(source), yield_failed_matches=False)):
         stop = time.perf_counter()
         spans_as_string = ", ".join(map(str, spans))
         acc.append(f"{stop - start:7.4f} s.: | `{name}` | {spans_as_string} |")

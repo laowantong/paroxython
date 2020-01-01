@@ -6,6 +6,11 @@ from span import Span
 
 Source = NewType("Source", str)
 
+ProgramName = NewType("ProgramName", str)
+ProgramNames = List[ProgramName]
+Program = NamedTuple("Program", [("path", Path), ("source", Source)])
+Programs = List[Program]
+
 LabelName = NewType("LabelName", str)
 LabelNames = List[LabelName]
 Label = NamedTuple("Label", [("name", LabelName), ("span", List[Span])])
@@ -19,8 +24,3 @@ Taxon = NamedTuple("Taxon", [("name", TaxonName), ("span_bag", Bag[Span])])
 Taxons = List[Taxon]
 TaxonsSpans = Dict[TaxonName, Bag[Span]]
 PathTaxons = NamedTuple("PathTaxons", [("path", Path), ("taxons", Taxons)])
-
-ProgramName = NewType("ProgramName", str)
-ProgramNames = List[ProgramName]
-Program = NamedTuple("Program", [("path", Path), ("source", Source)])
-Programs = List[Program]

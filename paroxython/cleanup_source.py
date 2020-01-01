@@ -16,24 +16,20 @@ def cleanup_factory(cleanup_strategy: str) -> Callable[[Source], Source]:
     return cleanup
 
 
-replace_first_comments = regex.compile(r"\A(#.*\n)*").sub
-replace_blank_lines = regex.compile(r"\s*\n").sub
-replace_pass = regex.compile(r"(?m)^( *)pass\n\1(?!\s)").sub
-replace_final_pass = regex.compile(r"(?m)^ *pass\Z").sub
+sub_first_comments = regex.compile(r"\A(#.*\n)*").sub
+sub_blank_lines = regex.compile(r"\s*\n").sub
+sub_pass = regex.compile(r"(?m)^( *)pass\n\1(?!\s)").sub
+sub_final_pass = regex.compile(r"(?m)^ *pass\Z").sub
 subn_paroxython_comment = regex.compile(r"(?i)#\s*paroxython\s*:\s*").subn
 
 
 def strip_docs(source: Source) -> Source:
-    source = Source(replace_first_comments("", source))
-    source = Source(source.replace("\t", "    "))
     result = []
     previous_token = INDENT
-    previous_end_row = -1
-    previous_end_col = 0
-    lines = iter(source.split("\n"))
+    (previous_end_row, previous_end_col) = (-1, 0)
+    lines = iter(sub_first_comments("", source).replace("\t", "    ").split("\n"))
     for token_info in generate_tokens(lambda: next(lines) + "\n"):
         (token, string, (start_row, start_col), (end_row, end_col), _) = token_info
-        # print(token_info)
         if start_row > previous_end_row:
             previous_end_col = 0
         result.append(" " * max(0, start_col - previous_end_col))
@@ -50,11 +46,10 @@ def strip_docs(source: Source) -> Source:
             previous_token = NEWLINE
         else:
             previous_token = token
-        previous_end_col = end_col
-        previous_end_row = end_row
+        (previous_end_row, previous_end_col) = (end_row, end_col)
     text = "".join(result).strip()
-    text = replace_blank_lines("\n", text)
-    text = replace_pass(r"\1", text)  # suppress most useless pass statements
+    text = sub_blank_lines("\n", text)
+    text = sub_pass(r"\1", text)  # suppress most useless pass statements
     return Source(text)
 
 
