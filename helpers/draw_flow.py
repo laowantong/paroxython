@@ -3,7 +3,8 @@ from pathlib import Path
 
 import regex
 
-paths = list(Path("paroxython").glob("*.py"))
+paths = Path("paroxython").glob("*.py")
+paths = list(path for path in paths if not str(path).endswith("declarations.py"))
 names = [str(path)[len("paroxython/") : -3] for path in paths]
 base = "docs/flow"
 find_all = regex.compile(fr"(?m)^from ({'|'.join(names)}) import").findall

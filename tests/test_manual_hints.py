@@ -2,7 +2,6 @@ import pytest
 
 import context
 from paroxython.manual_hints import retrieve_manual_hints
-from paroxython.span import Span
 
 
 def wrapper(numbered_hints):

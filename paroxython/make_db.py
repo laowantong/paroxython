@@ -1,5 +1,4 @@
 import json
-import sys
 from collections import defaultdict
 from datetime import datetime
 from itertools import chain
@@ -8,9 +7,10 @@ from typing import Dict, List, Tuple, Union
 
 import regex  # type: ignore
 
-from label_generators import Label, ProgramLabels, generate_programs_labels
-from program_generator import Program, generate_programs
-from taxonomy import ProgramTaxons, Taxon, Taxonomy
+from declarations import Labels, PathLabels, PathTaxons, Programs, Taxons
+from label_generators import generate_programs_labels
+from program_generator import generate_programs
+from taxonomy import Taxonomy
 
 
 def make_database(directories: List[str]) -> str:
@@ -43,25 +43,25 @@ def make_database(directories: List[str]) -> str:
     programs = list(chain.from_iterable(generate_programs(d) for d in directories))
     programs_labels = list(generate_programs_labels(programs))
     taxonomy = Taxonomy()
-    programs_taxons = list(taxonomy(programs_labels))
+    paths_taxons = list(taxonomy(programs_labels))
     db = {
         "programs": get_program_infos(programs),
         "labels": get_label_infos(programs_labels),
-        "taxons": get_taxon_infos(programs_taxons),
+        "taxons": get_taxon_infos(paths_taxons),
     }
     inject_labels(db, programs_labels)
-    inject_taxons(db, programs_taxons)
+    inject_taxons(db, paths_taxons)
     return to_Json(db)
 
 
-def serialized(tags: Union[List[Taxon], List[Label]]) -> Dict[str, List[Tuple[int, int]]]:
+def serialized(tags: Union[Taxons, Labels]) -> Dict[str, List[Tuple[int, int]]]:
     result: Dict[str, List[Tuple[int, int]]] = {}
     for (tag_name, spans) in tags:
         result[tag_name] = [span.to_couple() for span in sorted(set(spans))]
     return result
 
 
-def get_program_infos(programs: List[Program]) -> Dict[str, Dict[str, str]]:
+def get_program_infos(programs: Programs) -> Dict[str, Dict[str, str]]:
     result = {}
     for (path, source) in programs:
         result[str(path)] = {
@@ -71,7 +71,7 @@ def get_program_infos(programs: List[Program]) -> Dict[str, Dict[str, str]]:
     return result
 
 
-def get_label_infos(programs_labels: List[ProgramLabels]) -> Dict[str, List[str]]:
+def get_label_infos(programs_labels: List[PathLabels]) -> Dict[str, List[str]]:
     result: Dict[str, List[str]] = defaultdict(list)
     for (path, labels) in programs_labels:
         for label in labels:
@@ -79,21 +79,21 @@ def get_label_infos(programs_labels: List[ProgramLabels]) -> Dict[str, List[str]
     return dict(result)
 
 
-def get_taxon_infos(programs_taxons: List[ProgramTaxons]) -> Dict[str, List[str]]:
+def get_taxon_infos(paths_taxons: List[PathTaxons]) -> Dict[str, List[str]]:
     result: Dict[str, List[str]] = defaultdict(list)
-    for (path, taxons) in programs_taxons:
+    for (path, taxons) in paths_taxons:
         for taxon in taxons:
             result[taxon.name].append(str(path))
     return dict(result)
 
 
-def inject_labels(db: Dict, programs_labels: List[ProgramLabels]) -> None:
+def inject_labels(db: Dict, programs_labels: List[PathLabels]) -> None:
     for (path, labels) in programs_labels:
         db["programs"][str(path)]["labels"] = serialized(labels)
 
 
-def inject_taxons(db: Dict, programs_taxons: List[ProgramTaxons]) -> None:
-    for (path, taxons) in programs_taxons:
+def inject_taxons(db: Dict, paths_taxons: List[PathTaxons]) -> None:
+    for (path, taxons) in paths_taxons:
         db["programs"][str(path)]["taxons"] = serialized(taxons)
 
 

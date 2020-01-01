@@ -1,26 +1,21 @@
 import json
 from collections import Counter, defaultdict
 from pathlib import Path
-from typing import Counter as Bag
-from typing import Dict, Iterator, List, NamedTuple, Tuple
+from typing import Dict, Iterator, List
 
 import regex  # type: ignore
 
-from label_generators import Label, ProgramLabels
-from span import Span
-
-
-class Taxon(NamedTuple):
-    name: str
-    span_bag: Bag[Span]
-
-
-TaxonDict = Dict[str, Bag[Span]]
-
-
-class ProgramTaxons(NamedTuple):
-    path: Path
-    taxons: List[Taxon]
+from declarations import (
+    LabelName,
+    Labels,
+    PathLabels,
+    PathTaxons,
+    Taxon,
+    TaxonName,
+    TaxonNames,
+    Taxons,
+    TaxonsSpans,
+)
 
 
 class Taxonomy:
@@ -30,7 +25,7 @@ class Taxonomy:
         """Read the taxonomy specifications, and make some pre-processing."""
         is_literal = regex.compile(r"[\w:]+$").match
         tsv = Path(taxonomy_path).read_text()
-        self.literal_label_names: Dict[str, List[str]] = defaultdict(list)
+        self.literal_label_names: Dict[LabelName, TaxonNames] = defaultdict(list)
         self.compiled_label_names = []
         for line in tsv.split("\n"):
             line = line.strip()
@@ -38,14 +33,14 @@ class Taxonomy:
                 break
             (taxon_name, label_pattern) = line.split("\t")
             if is_literal(label_pattern):
-                self.literal_label_names[label_pattern].append(taxon_name)
+                self.literal_label_names[LabelName(label_pattern)].append(TaxonName(taxon_name))
             else:
                 rex = regex.compile(label_pattern + "$")
                 self.compiled_label_names.append((rex, taxon_name))
 
-    cache: Dict[str, List[str]] = {}
+    cache: Dict[LabelName, TaxonNames] = {}
 
-    def get_taxon_name_list(self, label_name: str) -> List[str]:
+    def get_taxon_name_list(self, label_name: LabelName) -> TaxonNames:
         """Translate a label name into a list of taxon names."""
         cache = Taxonomy.cache
         if label_name not in cache:
@@ -58,15 +53,15 @@ class Taxonomy:
                         cache[label_name].append(rex.sub(taxon_name, label_name))
         return cache[label_name]
 
-    def to_taxons(self, labels: List[Label]) -> List[Taxon]:
+    def to_taxons(self, labels: Labels) -> Taxons:
         """Translate a list of labels to a list of taxons with their spans in a bag."""
-        result: TaxonDict = defaultdict(Counter)
+        result: TaxonsSpans = defaultdict(Counter)
         for (label_name, spans) in labels:
             for taxon_name in self.get_taxon_name_list(label_name):
                 result[taxon_name].update(Counter(spans))
         return [Taxon(name, span_bag) for (name, span_bag) in sorted(result.items())]
 
-    def deduplicated_taxons(self, taxons: List[Taxon]) -> List[Taxon]:
+    def deduplicated_taxons(self, taxons: Taxons) -> Taxons:
         """If taxon t2 has taxon t1 as a prefix, remove the common spans in t1."""
         if len(taxons) == 0:
             return []
@@ -84,12 +79,12 @@ class Taxonomy:
                 result.append(Taxon(name, cleaned_bag))
         return result
 
-    def __call__(self, programs_labels: List[ProgramLabels]) -> Iterator[ProgramTaxons]:
+    def __call__(self, programs_labels: List[PathLabels]) -> Iterator[PathTaxons]:
         """Translate labels into taxons on a list of program paths."""
         for (path, labels) in programs_labels:
             taxons = self.to_taxons(labels)
             taxons = self.deduplicated_taxons(taxons)
-            yield ProgramTaxons(path, taxons)
+            yield PathTaxons(path, taxons)
 
 
 if __name__ == "__main__":

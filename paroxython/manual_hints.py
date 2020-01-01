@@ -1,8 +1,9 @@
 from collections import defaultdict
-from typing import Dict, List, Tuple, Iterator
+from typing import Dict, List, Tuple
 
 import regex  # type: ignore
 
+from declarations import LabelName, LabelsSpans, Source
 from span import Span
 
 
@@ -10,36 +11,36 @@ class HintBuffer:
     """Layer on the operations of appending, opening and closing an hint."""
 
     def __init__(self, description: str) -> None:
-        self.result: Dict[str, List[Span]] = defaultdict(list)
-        self.stack: Dict[str, List[int]] = defaultdict(list)
+        self.result: LabelsSpans = defaultdict(list)
+        self.stack: Dict[LabelName, List[int]] = defaultdict(list)
         self.description = description
 
-    def append_hint(self, label: str, line_number: int) -> None:
+    def append_hint(self, label_name: LabelName, line_number: int) -> None:
         """Label a span consisting in the given line number."""
-        self.result[label].append(Span([line_number]))
+        self.result[label_name].append(Span([line_number]))
 
-    def open_hint(self, label: str, line_number: int) -> None:
-        self.stack[label].append(line_number)
+    def open_hint(self, label_name: LabelName, line_number: int) -> None:
+        self.stack[label_name].append(line_number)
 
-    def get_champion(self, label: str) -> List[Tuple[int, "HintBuffer"]]:
+    def get_champion(self, label_name: LabelName) -> List[Tuple[int, "HintBuffer"]]:
         """Return the last line number (if any) of the opening label, plus itself."""
-        return [(self.stack[label][-1], self)] if self.stack[label] else []
+        return [(self.stack[label_name][-1], self)] if self.stack[label_name] else []
 
-    def close_hint(self, label: str, line_number: int) -> None:
+    def close_hint(self, label_name: LabelName, line_number: int) -> None:
         """Label a span opened above and closed on the given line number."""
-        self.result[label].append(Span([self.stack[label].pop(), line_number]))
+        self.result[label_name].append(Span([self.stack[label_name].pop(), line_number]))
 
     def ensure_stack_is_empty(self) -> None:
         """Raise an error iff there remains at least one open label."""
         if any(self.stack.values()):
             raise ValueError(f"Unmatched opening hints for {self.description}: {self.stack}.")
 
-    def get_result(self):
+    def get_result(self) -> LabelsSpans:
         """Return the result with sorted spans."""
         return {k: sorted(v) for (k, v) in self.result.items()}
 
 
-def retrieve_manual_hints(source: str) -> Tuple[Dict[str, List[Span]], Dict[str, List[Span]]]:
+def retrieve_manual_hints(source: Source) -> Tuple[LabelsSpans, LabelsSpans]:
     """Schedule for addition or deletion the hints appearing in the comments."""
     addition = HintBuffer("addition")
     deletion = HintBuffer("deletion")

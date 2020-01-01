@@ -1,18 +1,13 @@
 import ast
-import sys
 from collections import defaultdict
 from pathlib import Path
-from typing import Callable, Dict, Iterator, List, NamedTuple, Tuple
+from typing import Callable, Dict, Iterator, Tuple
 
 import regex  # type: ignore
 
+from declarations import Label, LabelName, LabelsSpans, Source
 from flatten import flatten
 from span import Span
-
-
-class Label(NamedTuple):
-    name: str
-    span: List[Span]
 
 
 def _simplify_negative_litterals() -> Callable:
@@ -45,7 +40,7 @@ class SourceParser:
         """Compile the constructs to search."""
         self.ref_path = Path(ref_path)
         text = self.ref_path.read_text()
-        self.constructs: Dict[str, regex.Pattern] = {}
+        self.constructs: Dict[LabelName, regex.Pattern] = {}
         for (label_name, pattern) in find_all_constructs(text):
             if label_name in self.constructs:
                 raise ValueError(f"Duplicated name '{label_name}'!")
@@ -53,15 +48,15 @@ class SourceParser:
 
     def __call__(
         self,
-        source: str,
-        manual_hints: Tuple[Dict[str, List[Span]], Dict[str, List[Span]]] = None,
+        source: Source,
+        manual_hints: Tuple[LabelsSpans, LabelsSpans] = None,
         yield_failed_matches: bool = False,
     ) -> Iterator[Label]:
         """Analyze a given program source and yield its labels and their spans."""
 
         (addition, deletion) = manual_hints or ({}, {})
 
-        def try_to_bind_name_and_span(label_name: str, span: Span) -> None:
+        def try_to_bind(label_name: LabelName, span: Span) -> None:
             """Bind a name with a span, unless this binding is scheduled for deletion."""
             try:
                 deletion[label_name].remove(span)
@@ -75,7 +70,7 @@ class SourceParser:
         self.flat_ast = simplify_negative_litterals(flatten(tree))
 
         for (label_name, rex) in self.constructs.items():
-            result: Dict[str, List[Span]] = defaultdict(list)
+            result: LabelsSpans = defaultdict(list)
             for candidate in list(addition):
                 if candidate == label_name or candidate.startswith(f"{label_name}:"):
                     result[candidate] = addition.pop(candidate)
@@ -85,9 +80,9 @@ class SourceParser:
                 span = Span(d["LINE"])
                 if d.get("SUFFIX"):  # there is a "SUFFIX" key and its value is not []
                     for suffix in d["SUFFIX"]:
-                        try_to_bind_name_and_span(f"{label_name}:{suffix}", span)
+                        try_to_bind(LabelName(f"{label_name}:{suffix}"), span)
                 else:
-                    try_to_bind_name_and_span(label_name, span)
+                    try_to_bind(label_name, span)
             if yield_failed_matches and not d:
                 yield Label(label_name, [])
             else:
@@ -98,7 +93,7 @@ class SourceParser:
 if __name__ == "__main__":
     """Take an individual source-code, print its constructs and write its flat AST."""
     time = __import__("time")
-    source = Path("sandbox/source.py").read_text().strip()
+    source = Source(Path("sandbox/source.py").read_text().strip())
     if source.startswith("1   "):
         source = regex.sub(r"(?m)^.{1,4}", "", source)
     for (i, line) in enumerate(source.split("\n"), 1):

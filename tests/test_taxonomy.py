@@ -4,8 +4,8 @@ import pytest
 
 import context
 from paroxython.span import Span
-from paroxython.taxonomy import Taxonomy, Taxon, ProgramTaxons
-from paroxython.label_generators import Label, ProgramLabels
+from paroxython.taxonomy import Taxonomy
+from paroxython.label_generators import Label, PathLabels
 
 t = Taxonomy("tests/data/test_taxonomy.tsv")
 S = lambda i, j: Span([i, j])  # shorten Span([i, j])
@@ -34,27 +34,27 @@ def test_to_taxons():
         Label("comparison_operator:Lt", [S(1, 1), S(3, 3), S(2, 2)]),
     ]
     assert t.to_taxons(labels) == [
-        Taxon("control_flow/conditional/", C({S(1, 1): 2, S(2, 5): 1})),
-        Taxon("test/inequality/", C({S(2, 2): 1, S(3, 3): 1, S(1, 1): 1})),
+        ("control_flow/conditional/", C({S(1, 1): 2, S(2, 5): 1})),
+        ("test/inequality/", C({S(2, 2): 1, S(3, 3): 1, S(1, 1): 1})),
     ]
 
 
 def test_deduplicated_taxons():
     taxons = [
-        Taxon("control_flow/conditional/", C({S(1, 1): 2, S(2, 5): 1})),
-        Taxon("control_flow/conditional/else/", C({S(1, 1): 1, S(2, 5): 1})),
-        Taxon("test/inequality/", C({S(2, 2): 1, S(3, 3): 1, S(1, 1): 1})),
+        ("control_flow/conditional/", C({S(1, 1): 2, S(2, 5): 1})),
+        ("control_flow/conditional/else/", C({S(1, 1): 1, S(2, 5): 1})),
+        ("test/inequality/", C({S(2, 2): 1, S(3, 3): 1, S(1, 1): 1})),
     ]
     assert t.deduplicated_taxons(taxons) == [
-        Taxon("control_flow/conditional/", C({S(1, 1): 1})),
-        Taxon("control_flow/conditional/else/", C({S(1, 1): 1, S(2, 5): 1})),
-        Taxon("test/inequality/", C({S(2, 2): 1, S(3, 3): 1, S(1, 1): 1})),
+        ("control_flow/conditional/", C({S(1, 1): 1})),
+        ("control_flow/conditional/else/", C({S(1, 1): 1, S(2, 5): 1})),
+        ("test/inequality/", C({S(2, 2): 1, S(3, 3): 1, S(1, 1): 1})),
     ]
 
 
 def test_call():
     programs_labels = [
-        ProgramLabels(
+        PathLabels(
             "algo1",
             [
                 Label("if", [S(1, 1), S(1, 1), S(2, 5)]),
@@ -62,7 +62,7 @@ def test_call():
                 Label("comparison_operator:Lt", [S(1, 1), S(3, 3), S(2, 2)]),
             ],
         ),
-        ProgramLabels(
+        PathLabels(
             "algo2",
             [
                 Label("method_call:difference_update", [S(1, 1), S(1, 1), S(2, 5)]),
@@ -71,18 +71,18 @@ def test_call():
         ),
     ]
     result = list(t(programs_labels))
-    assert result[0] == ProgramTaxons(
+    assert result[0] == (
         "algo1",
         [
-            Taxon("control_flow/conditional/", C({S(1, 1): 1})),
-            Taxon("control_flow/conditional/else/", C({S(1, 1): 1, S(2, 5): 1})),
-            Taxon("test/inequality/", C({S(2, 2): 1, S(3, 3): 1, S(1, 1): 1})),
+            ("control_flow/conditional/", C({S(1, 1): 1})),
+            ("control_flow/conditional/else/", C({S(1, 1): 1, S(2, 5): 1})),
+            ("test/inequality/", C({S(2, 2): 1, S(3, 3): 1, S(1, 1): 1})),
         ],
     )
-    assert result[1] == ProgramTaxons(
+    assert result[1] == (
         "algo2",
         [
-            Taxon("call/function/builtin/casting/set/", C({S(1, 1): 1, S(2, 5): 1})),
-            Taxon("type/set/", C({S(1, 1): 3, S(2, 5): 2})),
+            ("call/function/builtin/casting/set/", C({S(1, 1): 1, S(2, 5): 1})),
+            ("type/set/", C({S(1, 1): 3, S(2, 5): 2})),
         ],
     )

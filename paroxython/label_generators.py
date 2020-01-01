@@ -1,36 +1,22 @@
-import sys
 from bisect import insort
 from collections import defaultdict
-from pathlib import Path
-from typing import Dict, Iterator, List, NamedTuple, Set
+from typing import Iterator, List, Set
 
-import regex
+import regex  # type: ignore
 
-from program_generator import Program
-from source_parser import SourceParser
-from span import Span
+from declarations import Label, LabelsSpans, PathLabels, Programs, Source
 from manual_hints import retrieve_manual_hints
-
-
-class Label(NamedTuple):
-    name: str
-    span: List[Span]
-
-
-class ProgramLabels(NamedTuple):
-    path: Path
-    labels: List[Label]
-
+from source_parser import SourceParser
 
 replace_paroxython_hints = regex.compile(r"\s*# paroxython: .*").sub
 
 
-def generate_labeled_sources(programs: List[Program]) -> Iterator[str]:
+def generate_labeled_sources(programs: Programs) -> Iterator[Source]:
     """For each program, yield its labeled source-code."""
     parse = SourceParser()
     separator = "-" * 88
     for (path, source) in programs:
-        yield f"# {separator}\n# {path}\n# {separator}"
+        yield Source(f"# {separator}\n# {path}\n# {separator}")
         manual_hints = retrieve_manual_hints(source)
         source = replace_paroxython_hints("", source)
         sloc = source.splitlines()
@@ -41,10 +27,10 @@ def generate_labeled_sources(programs: List[Program]) -> Iterator[str]:
         for (i, comment) in enumerate(comments):
             if comment:
                 sloc[i] += " # " + ", ".join(sorted(comment))
-        yield "\n".join(sloc + [""])
+        yield Source("\n".join(sloc + [""]))
 
 
-def generate_programs_labels(programs: List[Program]) -> Iterator[ProgramLabels]:
+def generate_programs_labels(programs: Programs) -> Iterator[PathLabels]:
     """For each program, yield its label list, lexicographically sorted.
 
     Input: an iterator on programs:
@@ -57,13 +43,13 @@ def generate_programs_labels(programs: List[Program]) -> Iterator[ProgramLabels]
     """
     parse = SourceParser()
     for (path, source) in programs:
-        label_dict: Dict[str, List[Span]] = defaultdict(list)
+        label_dict: LabelsSpans = defaultdict(list)
         manual_hints = retrieve_manual_hints(source)
         for (label_name, spans) in sorted(parse(source, manual_hints)):
             for span in spans:
                 insort(label_dict[label_name], span)
         labels = [Label(name, span) for (name, span) in label_dict.items()]
-        yield ProgramLabels(path, labels)
+        yield PathLabels(path, labels)
 
 
 if __name__ == "__main__":

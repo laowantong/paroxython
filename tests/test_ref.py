@@ -6,7 +6,6 @@ import regex  # type: ignore
 
 import context
 from paroxython.source_parser import SourceParser
-from paroxython.span import Span
 
 
 def generate_toc(text):

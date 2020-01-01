@@ -12,10 +12,6 @@ label_generators -> make_db
 program_generator -> make_db
 taxonomy -> make_db
 span -> manual_hints
-label_generators -> taxonomy
-span -> taxonomy
-program_generator -> label_generators
-source_parser -> label_generators
-span -> label_generators
 manual_hints -> label_generators
+source_parser -> label_generators
 }

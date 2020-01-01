@@ -4,19 +4,10 @@ from typing import Callable, Dict, List, Set
 
 import regex  # type: ignore
 
-ProgramPattern = str
-ProgramPatterns = List[ProgramPattern]
+from declarations import ProgramName, ProgramNames, TaxonName, TaxonNames
 
-ProgramName = str
-ProgramNames = List[ProgramName]
-
-TaxonName = str
-TaxonNames = List[TaxonName]
-TaxonNameMap = Dict[ProgramName, TaxonNames]
-
-TaxonPattern = str
-TaxonPatterns = List[TaxonPattern]
-TaxonPatternMap = Dict[ProgramName, TaxonPatterns]
+ProgramPatterns = List[str]
+TaxonPatterns = List[str]
 
 
 class ProgramFilter:
@@ -111,10 +102,10 @@ class ProgramFilter:
                     result.difference_update(self.programs[program_name]["taxons"])
         return result
 
-    def get_extra_taxon_names(self, taxons: TaxonPatterns) -> TaxonNameMap:
+    def get_extra_taxon_names(self, taxons: TaxonPatterns) -> Dict[ProgramName, TaxonNames]:
         """For each program, list those of its taxons which are not among the given taxons."""
         match_taxon = regex.compile("|".join(taxons)).match
-        extra_taxons: TaxonNameMap = {}
+        extra_taxons: Dict[ProgramName, TaxonNames] = {}
         for program_name in self.result:
             extra_taxons[program_name] = []
             for taxon_name in self.programs[program_name]["taxons"]:
@@ -122,10 +113,10 @@ class ProgramFilter:
                     extra_taxons[program_name].append(taxon_name)
         return extra_taxons
 
-    def get_lacking_taxon_patterns(self, taxons: TaxonPatterns) -> TaxonPatternMap:
+    def get_lacking_taxon_patterns(self, taxons: TaxonPatterns) -> Dict[ProgramName, TaxonPatterns]:
         """For each program, list those of the given taxons that it does not include."""
         match_taxons = [regex.compile(row).match for row in taxons]
-        lacking_taxons: TaxonPatternMap = {}
+        lacking_taxons: Dict[ProgramName, TaxonPatterns] = {}
         for program_name in self.result:
             lacking_taxons[program_name] = []
             for (match_taxon, wanted_taxon) in zip(match_taxons, taxons):
@@ -153,7 +144,7 @@ class ProgramFilter:
         extra_taxons = self.get_extra_taxon_names(taxons)
         return self.sorted(lambda p: len(extra_taxons[p]), reverse)
 
-    def sorted_by_lacking_taxon_count(self, taxons: TaxonNames, reverse=False) -> ProgramNames:
+    def sorted_by_lacking_taxon_count(self, taxons: TaxonPatterns, reverse=False) -> ProgramNames:
         """Sort the programs by number of lacking taxons wrt a given list."""
         lacking_taxons = self.get_lacking_taxon_patterns(taxons)
         return self.sorted(lambda p: len(lacking_taxons[p]), reverse)
