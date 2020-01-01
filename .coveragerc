@@ -2,6 +2,7 @@
 omit =
     tests/*
     helpers/print_test_programs.py
+    helpers/draw_flow.py
 [report]
 exclude_lines =
     pragma: no cover
