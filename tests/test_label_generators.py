@@ -5,15 +5,12 @@ import pytest
 import context
 from paroxython.label_generators import (
     generate_labeled_sources,
-    generate_programs_labels,
+    generate_programs,
 )
-from paroxython.program_generator import generate_programs
-
-programs = list(generate_programs("tests/data/programs"))
 
 
 def test_generate_labeled_sources():
-    result = generate_labeled_sources(programs)
+    result = generate_labeled_sources("tests/data/programs")
 
     assert "assignment.py" in next(result)
     assert next(result).strip() == "a = b # assignment, global_variable_definition"
@@ -49,8 +46,8 @@ def test_generate_labeled_sources():
     )
 
 
-def test_generate_programs_labels():
-    result = list(generate_programs_labels(programs))
+def test_generate_programs():
+    result = list(generate_programs("tests/data/programs"))
     expected = [
         (
             Path("tests/data/programs/assignment.py"),
@@ -97,10 +94,7 @@ def test_generate_programs_labels():
         ),
     ]
     print(result)
-    for (rk, rv), (ek, ev) in zip(result, expected):
-        assert rk == ek
-        for (label, spans) in rv:
-            assert ev[label] == [span.to_couple() for span in spans]
-
-
-pytest.main(args=["-q"])
+    for (program, (path, labels)) in zip(result, expected):
+        assert program.path == path
+        for (label, spans) in program.labels:
+            assert labels[label] == [span.to_couple() for span in spans]

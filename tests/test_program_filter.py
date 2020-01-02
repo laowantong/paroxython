@@ -123,9 +123,9 @@ def test_set_operations():
     assert f.result == {"prg2"}
 
 
-def test_get_extra_taxon_names():
+def test_get_extra_taxons():
     f.reset()
-    result = f.get_extra_taxon_names(["O", "X"])
+    result = f.get_extra_taxons(["O", "X"])
     print(result)
     assert result == {
         "prg1": ["Y/T/", "Y/T/Q/", "Y/"],
@@ -145,7 +145,7 @@ def test_sort_by_extra_taxon_count():
     result = f.sorted_by_extra_taxon_count(["O", "X"])
     print(result)
     assert result == [
-        "prg5",  # no extra taxon, see test_get_extra_taxon_names()
+        "prg5",  # no extra taxon, see test_get_extra_taxons()
         "prg8",  # 2 extra taxons
         "prg1",  # 3 extra taxons
         "prg2",
@@ -157,9 +157,9 @@ def test_sort_by_extra_taxon_count():
     ]
 
 
-def test_get_lacking_taxon_patterns():
+def test_get_lacking_taxons():
     f.reset()
-    result = f.get_lacking_taxon_patterns(["O/$", "O/C/H/$", "O/C/F/U/$"])
+    result = f.get_lacking_taxons(["O/$", "O/C/H/$", "O/C/F/U/$"])
     print(result)
     assert result == {
         "prg1": ["O/$", "O/C/H/$", "O/C/F/U/$"],
@@ -194,7 +194,7 @@ def test_sort_by_lacking_taxon_count():
 def test_sort_by_distance():
     f.reset()
     taxon_names = [name + "$" for name in db["programs"]["prg3"]["taxons"]]
-    lacking = f.get_lacking_taxon_patterns(taxon_names)
+    lacking = f.get_lacking_taxons(taxon_names)
     print(lacking)
     assert lacking == {
         "prg1": ["X/S/M/L/V/$", "O/C/H/B/$", "O/C/F/U/$", "O/C/H/$", "O/$", "Y/E/$"],
@@ -227,7 +227,7 @@ def test_sort_by_distance():
         "prg8": ["Y/T/$", "X/S/M/L/R/$", "X/S/M/$", "O/C/H/$", "X/S/$", "Y/$", "O/$"],
         "prg9": ["O/N/P/$", "O/C/H/B/$", "O/C/F/U/$", "X/S/$", "X/S/M/L/$"],
     }
-    extra = f.get_extra_taxon_names(taxon_names)
+    extra = f.get_extra_taxons(taxon_names)
     print(extra)
     assert extra == {
         "prg1": ["X/W/", "X/", "Y/T/Q/", "X/S/M/L/R/D/", "O/N/"],
@@ -270,6 +270,3 @@ def test_sorted_by_line_count():
     result = f.sorted_by_line_count()
     print(result)
     assert result == ["prg8", "prg1", "prg2", "prg3", "prg4", "prg5", "prg6", "prg7", "prg9"]
-
-
-pytest.main(args=["-q"])

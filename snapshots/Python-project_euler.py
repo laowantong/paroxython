@@ -263,7 +263,7 @@ def solution(n: int) -> int: # function:solution
     ans = 0 # assignment, literal:Num
     if n == 2: # comparison_operator:Eq, if (-> +1), literal:Num
         return 2 # literal:Num
-    while n > 2: # comparison_operator:Gt, evolve_state (-> +6), literal:Num
+    while n > 2: # comparison_operator:Gt, evolve_state (-> +5), literal:Num
         while n % i != 0: # binary_operator:Mod, comparison_operator:NotEq, divisibility_test, evolve_state (-> +1), literal:Num
             i += 1 # augmented_assignment, literal:Num
         ans = i # assignment

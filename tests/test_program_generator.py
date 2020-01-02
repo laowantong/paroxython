@@ -22,6 +22,3 @@ def test_generate_programs():
     program = next(result)
     assert program.path.name == "loop.py"
     assert program.source == 'while input():\n    print("foobar")'
-
-
-pytest.main(args=["-q"])

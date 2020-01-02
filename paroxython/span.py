@@ -3,6 +3,7 @@ from typing import Dict, List, Tuple, Union
 
 class CachedSpan(type):
     """Prevent the creation of distinct instances for identical spans.
+
     It avoids wasting memory and facilitates the deduplication of a list of spans.
     References:
     - Code: https://stackoverflow.com/a/50821287/173003

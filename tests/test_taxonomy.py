@@ -5,11 +5,11 @@ import pytest
 import context
 from paroxython.span import Span
 from paroxython.taxonomy import Taxonomy
-from paroxython.label_generators import Label, PathLabels
+from paroxython.label_generators import Label, Program
 
 t = Taxonomy("tests/data/test_taxonomy.tsv")
 S = lambda i, j: Span([i, j])  # shorten Span([i, j])
-pytest.main(args=["-q"])
+# pytest.main(args=["-q"])
 
 
 def test_initial_values():
@@ -53,24 +53,25 @@ def test_deduplicated_taxons():
 
 
 def test_call():
-    programs_labels = [
-        PathLabels(
-            "algo1",
-            [
+    programs = [
+        Program(
+            path="algo1",
+            labels=[
                 Label("if", [S(1, 1), S(1, 1), S(2, 5)]),
                 Label("if_else", [S(1, 1), S(2, 5)]),
                 Label("comparison_operator:Lt", [S(1, 1), S(3, 3), S(2, 2)]),
             ],
         ),
-        PathLabels(
-            "algo2",
-            [
+        Program(
+            path="algo2",
+            labels=[
                 Label("method_call:difference_update", [S(1, 1), S(1, 1), S(2, 5)]),
                 Label("literal:Set", [S(1, 1), S(2, 5)]),
             ],
         ),
     ]
-    result = list(t(programs_labels))
+    result = list(t(programs))
+    print(result)
     assert result[0] == (
         "algo1",
         [

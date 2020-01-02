@@ -3,7 +3,7 @@ from typing import Dict, List, Tuple
 
 import regex  # type: ignore
 
-from declarations import LabelName, LabelsSpans, SourceText
+from declarations import LabelName, LabelsSpans, Source
 from span import Span
 
 
@@ -40,7 +40,7 @@ class HintBuffer:
         return {k: sorted(v) for (k, v) in self.result.items()}
 
 
-def retrieve_manual_hints(source: SourceText) -> Tuple[LabelsSpans, LabelsSpans]:
+def collect_hints(source: Source) -> Tuple[LabelsSpans, LabelsSpans]:
     """Schedule for addition or deletion the hints appearing in the comments."""
     addition = HintBuffer("addition")
     deletion = HintBuffer("deletion")

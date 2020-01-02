@@ -15,9 +15,15 @@ Path(f"{base}.dot").write_text(
         [
             '"db.json" [shape=cylinder fillcolor=moccasin]',
             '"ref.md" [shape=note fillcolor=moccasin]',
+            '"default_taxonomy.tsv" [shape=note fillcolor=moccasin]',
+            '"source files" [shape=folder fillcolor=moccasin]',
+            '"snapshots" [shape=folder fillcolor=moccasin]',
             'make_db -> "db.json"',
             '"db.json" -> program_filter',
-            '"ref.md" -> source_parser',
+            '"ref.md" -> program_parser',
+            '"source files" -> program_generator',
+            '"default_taxonomy.tsv" -> taxonomy',
+            'make_snapshots -> "snapshots"',
         ]
         + [
             f"{imported_name} -> {name}"

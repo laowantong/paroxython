@@ -2,16 +2,24 @@ digraph G {
 node [shape=box fontname=Courier style=filled fillcolor=cornsilk]
 "db.json" [shape=cylinder fillcolor=moccasin]
 "ref.md" [shape=note fillcolor=moccasin]
+"default_taxonomy.tsv" [shape=note fillcolor=moccasin]
+"source files" [shape=folder fillcolor=moccasin]
+"snapshots" [shape=folder fillcolor=moccasin]
 make_db -> "db.json"
 "db.json" -> program_filter
-"ref.md" -> source_parser
+"ref.md" -> program_parser
+"source files" -> program_generator
+"default_taxonomy.tsv" -> taxonomy
+make_snapshots -> "snapshots"
+flatten -> program_parser
+span -> program_parser
+centrifugate_hints -> program_generator
 cleanup_source -> program_generator
-flatten -> source_parser
-span -> source_parser
+collect_hints -> program_generator
 label_generators -> make_db
-program_generator -> make_db
 taxonomy -> make_db
-span -> manual_hints
-manual_hints -> label_generators
-source_parser -> label_generators
+label_generators -> make_snapshots
+span -> collect_hints
+program_generator -> label_generators
+program_parser -> label_generators
 }

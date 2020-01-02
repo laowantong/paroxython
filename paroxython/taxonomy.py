@@ -8,7 +8,7 @@ import regex  # type: ignore
 from declarations import (
     LabelName,
     Labels,
-    PathLabels,
+    Program,
     PathTaxons,
     Taxon,
     TaxonName,
@@ -21,7 +21,7 @@ from declarations import (
 class Taxonomy:
     """Translate labels into taxons on a list of program paths."""
 
-    def __init__(self, taxonomy_path: str = "taxonomies/default.tsv") -> None:
+    def __init__(self, taxonomy_path: str = "taxonomies/default_taxonomy.tsv") -> None:
         """Read the taxonomy specifications, and make some pre-processing."""
         is_literal = regex.compile(r"[\w:]+$").match
         tsv = Path(taxonomy_path).read_text()
@@ -79,29 +79,28 @@ class Taxonomy:
                 result.append(Taxon(name, cleaned_bag))
         return result
 
-    def __call__(self, programs_labels: List[PathLabels]) -> Iterator[PathTaxons]:
+    def __call__(self, programs: List[Program]) -> Iterator[PathTaxons]:
         """Translate labels into taxons on a list of program paths."""
-        for (path, labels) in programs_labels:
-            taxons = self.to_taxons(labels)
+        for program in programs:
+            taxons = self.to_taxons(program.labels)
             taxons = self.deduplicated_taxons(taxons)
-            yield PathTaxons(path, taxons)
+            yield PathTaxons(program.path, taxons)
 
 
 if __name__ == "__main__":
-    generate_programs = __import__("program_generator").generate_programs
-    generate_programs_labels = __import__("label_generators").generate_programs_labels
+    generate_labeled_programs = __import__("label_generators").generate_labeled_programs
     chain = __import__("itertools").chain
     DIRECTORIES = [
         "../Python/project_euler",
         # "../Python/maths",
         # "../Algo/programs"
     ]
-    programs_labels = chain.from_iterable(
-        generate_programs_labels(generate_programs(directory)) for directory in DIRECTORIES
+    programs = chain.from_iterable(
+        generate_labeled_programs(directory) for directory in DIRECTORIES
     )
     taxonomy = Taxonomy()
     acc: Dict[str, Dict[str, str]] = {}
-    for (path, taxons) in taxonomy(programs_labels):
+    for (path, taxons) in taxonomy(programs):
         acc[str(path)] = {name: " ".join(map(str, sorted(set(spans)))) for (name, spans) in taxons}
     output_path = Path("snapshots/taxon_db.json")
     output_path.write_text(json.dumps(acc, indent=2))

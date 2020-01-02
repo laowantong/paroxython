@@ -154,6 +154,3 @@ def test_strip_docs(title, original, expected):
     result = cleanup(original)
     print(result)
     assert result == expected
-
-
-pytest.main(args=["-q"])

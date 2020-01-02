@@ -5,7 +5,8 @@ import pytest
 import regex  # type: ignore
 
 import context
-from paroxython.source_parser import SourceParser
+from paroxython.program_parser import ProgramParser
+from paroxython.declarations import Program
 
 
 def generate_toc(text):
@@ -40,14 +41,14 @@ def extract_examples(construct_path):
     rex = r"""(?msx)
         ^\#{4}\s+Construct\s+`(.+?)` # capture the label's name
         .+?\#{5}\s+Example # ensure the next code is in the Example section
-        .+?```python\n+(.+?)\n``` # capture the source-code
+        .+?```python\n+(.+?)\n``` # capture the source
         .+?\#{5}\s+Matches.+?^\|:--\|:--\| # ensure the table is in the Matches section
         (\n\|\s`(?P<LABELS>[^\|]+)`\s\|\s(?P<LINES>[^\|]+)\s\|)+ # capture the expected results
     """
     return regex.finditer(rex, text)
 
 
-parse = SourceParser()
+parse = ProgramParser()
 reformat_file(parse.ref_path)
 examples = []
 for match in extract_examples(parse.ref_path):
@@ -60,7 +61,7 @@ for match in extract_examples(parse.ref_path):
 @pytest.mark.parametrize("label_name, source, results", examples)
 def test_example(label_name, source, results):
     source = regex.sub(r"(?m)^.{1,4}", "", source)
-    actual = dict(parse(source))
+    actual = dict(parse(Program(source=source)))
     keys = set(actual.keys())
     for (expected_label_name, expected_spans) in results:
         assert expected_label_name in keys
@@ -84,12 +85,12 @@ def test_at_least_one_example_is_provided_for_each_construct():
 def test_malformed_example():
     source = "if foo():\nbar() # wrong indentation"
     with pytest.raises(StopIteration):
-        next(parse(source))
+        next(parse(Program(source=source)))
 
 
 def test_failed_matches():
     source = "a = 42"
-    actual = dict(parse(source, yield_failed_matches=True))
+    actual = dict(parse(Program(source=source), yield_failed_matches=True))
     print(actual)
     assert actual.pop("assignment")[0].to_couple() == (1, 1)
     assert actual.pop("global_variable_definition")[0].to_couple() == (1, 1)
@@ -97,6 +98,3 @@ def test_failed_matches():
     assert actual.pop("suggest_constant_definition")[0].to_couple() == (1, 1)
     for spans in actual.values():
         assert not spans
-
-
-pytest.main(args=["-q"])

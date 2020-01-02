@@ -1,7 +1,7 @@
 import pytest
 
 import context
-from paroxython.manual_hints import retrieve_manual_hints
+from paroxython.collect_hints import collect_hints
 
 
 def wrapper(numbered_hints):
@@ -11,7 +11,7 @@ def wrapper(numbered_hints):
         if "paroxython" not in lines[i]:
             lines[i] += " # paroxython:"
         lines[i] += f" {hint}"
-    (addition, deletion) = retrieve_manual_hints("\n".join(lines))
+    (addition, deletion) = collect_hints("\n".join(lines))
     for operation in (addition, deletion):
         for (name, spans) in operation.items():
             operation[name] = ", ".join(map(str, spans))
@@ -171,6 +171,3 @@ def test_opening_without_closing():
     numbered_hints = [(2, "hint...")]
     with pytest.raises(ValueError, match=r"Unmatched opening hints for addition: .+'hint'.+2"):
         wrapper(numbered_hints)
-
-
-pytest.main(args=["-q"])

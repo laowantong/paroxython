@@ -3,25 +3,39 @@ from typing import Iterator
 
 import regex  # type: ignore
 
+from centrifugate_hints import centrifugate_hints
 from cleanup_source import cleanup_factory
-from declarations import Program, SourceText
+from collect_hints import collect_hints
+from declarations import Program, Source
 
 match_excluded = regex.compile(r"__init__\.py|setup\.py|.*[-_]tests?\.py").match
+replace_hints = regex.compile(r"\s*# paroxython: .*").sub
 
 
 def generate_programs(directory: str, strategy="strip_docs") -> Iterator[Program]:
-    """Yield the path and the cleaned up source of all programs in a given directory."""
+    """Yield all Programs of a given directory.
+
+    Each Program (cf. declaration) includes:
+    - its Path,
+    - its Source,
+    - the hints scheduled for addition or deletion.
+
+    Its labels will be later populated by "label_generators.py".
+    """
     cleanup = cleanup_factory(strategy)
-    directory_path = Path(directory)
-    for path in sorted(directory_path.rglob("*.py")):
+    for path in sorted(Path(directory).rglob("*.py")):
         if not match_excluded(path.name):
             print(path)
-            yield Program(path, cleanup(SourceText(path.read_text())))
+            source = cleanup(Source(path.read_text()))
+            source = centrifugate_hints(source)
+            (addition, deletion) = collect_hints(source)
+            source = replace_hints("", source).strip()
+            yield Program(path=path, source=source, addition=addition, deletion=deletion)
 
 
 if __name__ == "__main__":
     datetime = __import__("datetime").datetime
-    for (path, source) in generate_programs("../Algo/programs/"):
-        print(datetime.fromtimestamp(path.stat().st_mtime))
-        print(source)
+    for program in generate_programs("../Algo/programs/"):
+        print(datetime.fromtimestamp(program.path.stat().st_mtime))
+        print(program.source)
         print("-" * 80)

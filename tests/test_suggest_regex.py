@@ -119,6 +119,3 @@ def test_suggest_regex(title, original, expected):
     result = suggestion(original)
     print(result)
     assert result == expected
-
-
-pytest.main(args=["-q"])

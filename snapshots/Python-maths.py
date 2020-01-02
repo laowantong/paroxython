@@ -602,7 +602,7 @@ def exactPrimeFactorCount(n): # function:exactPrimeFactorCount (-> +15)
         while n % 2 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, evolve_state (-> +1), literal:Num
             n = int(n / 2) # assignment, binary_operator:Div, function_call:int, literal:Num
     i = 3 # assignment, literal:Num, suggest_constant_definition
-    while i <= int(math.sqrt(n)): # comparison_operator:LtE, composition, evolve_state (-> +5), function_call:int, method_call:sqrt
+    while i <= int(math.sqrt(n)): # comparison_operator:LtE, composition, evolve_state (-> +4), function_call:int, method_call:sqrt
         if n % i == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test, if (-> +3), literal:Num
             count += 1 # augmented_assignment, literal:Num
             while n % i == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test, literal:Num

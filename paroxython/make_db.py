@@ -1,23 +1,21 @@
 import json
 from collections import defaultdict
 from datetime import datetime
-from itertools import chain
 from pathlib import Path
 from typing import Dict, List, Tuple, Union
 
 import regex  # type: ignore
 
-from declarations import Labels, PathLabels, PathTaxons, Programs, Taxons
-from label_generators import generate_programs_labels
-from program_generator import generate_programs
+from declarations import Labels, Program, PathTaxons, Taxons
+from label_generators import generate_labeled_programs
 from taxonomy import Taxonomy
 
 
-def make_database(directories: List[str]) -> str:
+def make_database(directories: List[str], *args, **kargs) -> str:
     """Construct a JSON object with the following schema:
     {
         "programs": {
-            prg1_name: {
+            prg1_path: {
                 "timestamp": "...",
                 "source": "...",
                 "labels": {
@@ -31,25 +29,26 @@ def make_database(directories: List[str]) -> str:
             ...
         },
         "labels": {
-            label_1_name: [prg1_name, prg2_name, ...],
+            label_1_name: [prg1_path, prg2_path, ...],
             ...
         },
         "taxons": {
-            taxon_1_name: [prg1_name, prg2_name, ...],
+            taxon_1_name: [prg1_path, prg2_path, ...],
             ...
         }
     }
     """
-    programs = list(chain.from_iterable(generate_programs(d) for d in directories))
-    programs_labels = list(generate_programs_labels(programs))
+    programs: List[Program] = []
+    for directory in directories:
+        programs.extend(generate_labeled_programs(directory, *args, **kargs))
     taxonomy = Taxonomy()
-    paths_taxons = list(taxonomy(programs_labels))
+    paths_taxons = list(taxonomy(programs))
     db = {
         "programs": get_program_infos(programs),
-        "labels": get_label_infos(programs_labels),
+        "labels": get_label_infos(programs),
         "taxons": get_taxon_infos(paths_taxons),
     }
-    inject_labels(db, programs_labels)
+    inject_labels(db, programs)
     inject_taxons(db, paths_taxons)
     return to_Json(db)
 
@@ -61,21 +60,21 @@ def serialized(tags: Union[Taxons, Labels]) -> Dict[str, List[Tuple[int, int]]]:
     return result
 
 
-def get_program_infos(programs: Programs) -> Dict[str, Dict[str, str]]:
+def get_program_infos(programs: List[Program]) -> Dict[str, Dict[str, str]]:
     result = {}
-    for (path, source) in programs:
-        result[str(path)] = {
-            "timestamp": str(datetime.fromtimestamp(path.stat().st_mtime)),
-            "source": source,
+    for program in programs:
+        result[str(program.path)] = {
+            "timestamp": str(datetime.fromtimestamp(program.path.stat().st_mtime)),
+            "source": program.source,
         }
     return result
 
 
-def get_label_infos(programs_labels: List[PathLabels]) -> Dict[str, List[str]]:
+def get_label_infos(programs: List[Program]) -> Dict[str, List[str]]:
     result: Dict[str, List[str]] = defaultdict(list)
-    for (path, labels) in programs_labels:
-        for label in labels:
-            result[label.name].append(str(path))
+    for program in programs:
+        for label in program.labels:
+            result[label.name].append(str(program.path))
     return dict(result)
 
 
@@ -87,9 +86,9 @@ def get_taxon_infos(paths_taxons: List[PathTaxons]) -> Dict[str, List[str]]:
     return dict(result)
 
 
-def inject_labels(db: Dict, programs_labels: List[PathLabels]) -> None:
-    for (path, labels) in programs_labels:
-        db["programs"][str(path)]["labels"] = serialized(labels)
+def inject_labels(db: Dict, programs: List[Program]) -> None:
+    for program in programs:
+        db["programs"][str(program.path)]["labels"] = serialized(program.labels)
 
 
 def inject_taxons(db: Dict, paths_taxons: List[PathTaxons]) -> None:
