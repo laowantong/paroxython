@@ -62,7 +62,7 @@ class Taxonomy:
         return [Taxon(name, span_bag) for (name, span_bag) in sorted(result.items())]
 
     def deduplicated_taxons(self, taxons: Taxons) -> Taxons:
-        """If taxon t2 has taxon t1 as a prefix, remove the common spans in t1."""
+        """If taxon t2 has taxon t1 as a prefix, remove their common spans from t1."""
         if len(taxons) == 0:
             return []
         (previous_name, previous_span_bag) = taxons[0]

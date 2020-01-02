@@ -4,7 +4,7 @@ from typing import Iterator
 import regex  # type: ignore
 
 from cleanup_source import cleanup_factory
-from declarations import Program, Source
+from declarations import Program, SourceText
 
 match_excluded = regex.compile(r"__init__\.py|setup\.py|.*[-_]tests?\.py").match
 
@@ -16,7 +16,7 @@ def generate_programs(directory: str, strategy="strip_docs") -> Iterator[Program
     for path in sorted(directory_path.rglob("*.py")):
         if not match_excluded(path.name):
             print(path)
-            yield Program(path, cleanup(Source(path.read_text())))
+            yield Program(path, cleanup(SourceText(path.read_text())))
 
 
 if __name__ == "__main__":

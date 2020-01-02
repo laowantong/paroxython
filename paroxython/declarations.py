@@ -4,11 +4,11 @@ from typing import Dict, List, NamedTuple, NewType
 
 from span import Span
 
-Source = NewType("Source", str)
+SourceText = NewType("SourceText", str)
 
 ProgramName = NewType("ProgramName", str)
 ProgramNames = List[ProgramName]
-Program = NamedTuple("Program", [("path", Path), ("source", Source)])
+Program = NamedTuple("Program", [("path", Path), ("source", SourceText)])
 Programs = List[Program]
 
 LabelName = NewType("LabelName", str)

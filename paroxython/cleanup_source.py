@@ -4,10 +4,10 @@ from typing import Callable
 
 import regex  # type: ignore
 
-from declarations import Source
+from declarations import SourceText
 
 
-def cleanup_factory(cleanup_strategy: str) -> Callable[[Source], Source]:
+def cleanup_factory(cleanup_strategy: str) -> Callable[[SourceText], SourceText]:
     cleanup = lambda source: source
     if cleanup_strategy == "strip_docs":
         sub_main = regex.compile(r"(?ms)^if +__name__ *== *.__main__. *:.+").sub
@@ -23,7 +23,7 @@ sub_final_pass = regex.compile(r"(?m)^ *pass\Z").sub
 subn_paroxython_comment = regex.compile(r"(?i)#\s*paroxython\s*:\s*").subn
 
 
-def strip_docs(source: Source) -> Source:
+def strip_docs(source: SourceText) -> SourceText:
     result = []
     previous_token = INDENT
     (previous_end_row, previous_end_col) = (-1, 0)
@@ -50,14 +50,14 @@ def strip_docs(source: Source) -> Source:
     text = "".join(result).strip()
     text = sub_blank_lines("\n", text)
     text = sub_pass(r"\1", text)  # suppress most useless pass statements
-    return Source(text)
+    return SourceText(text)
 
 
 if __name__ == "__main__":
     source = open("../Python/maths/matrix_exponentiation.py").read()
     lines = source.split("\n")
     lines[13] += " # paroxython: test"
-    source = Source("\n".join(lines))
+    source = SourceText("\n".join(lines))
     print(source)
     print("-" * 80)
     print(strip_docs(source))

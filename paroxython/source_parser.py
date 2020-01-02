@@ -5,7 +5,7 @@ from typing import Callable, Dict, Iterator, Tuple
 
 import regex  # type: ignore
 
-from declarations import Label, LabelName, LabelsSpans, Source
+from declarations import Label, LabelName, LabelsSpans, SourceText
 from flatten import flatten
 from span import Span
 
@@ -48,7 +48,7 @@ class SourceParser:
 
     def __call__(
         self,
-        source: Source,
+        source: SourceText,
         manual_hints: Tuple[LabelsSpans, LabelsSpans] = None,
         yield_failed_matches: bool = False,
     ) -> Iterator[Label]:
@@ -102,7 +102,7 @@ if __name__ == "__main__":
     parse = SourceParser()
     start = time.perf_counter()
     acc = []
-    for (name, spans) in sorted(parse(Source(source), yield_failed_matches=False)):
+    for (name, spans) in sorted(parse(SourceText(source), yield_failed_matches=False)):
         stop = time.perf_counter()
         spans_as_string = ", ".join(map(str, spans))
         acc.append(f"{stop - start:7.4f} s.: | `{name}` | {spans_as_string} |")

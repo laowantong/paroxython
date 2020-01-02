@@ -4,19 +4,19 @@ from typing import Iterator, List, Set
 
 import regex  # type: ignore
 
-from declarations import Label, LabelsSpans, PathLabels, Programs, Source
+from declarations import Label, LabelsSpans, PathLabels, Programs, SourceText
 from manual_hints import retrieve_manual_hints
 from source_parser import SourceParser
 
 replace_paroxython_hints = regex.compile(r"\s*# paroxython: .*").sub
 
 
-def generate_labeled_sources(programs: Programs) -> Iterator[Source]:
+def generate_labeled_sources(programs: Programs) -> Iterator[SourceText]:
     """For each program, yield its labeled source-code."""
     parse = SourceParser()
     separator = "-" * 88
     for (path, source) in programs:
-        yield Source(f"# {separator}\n# {path}\n# {separator}")
+        yield SourceText(f"# {separator}\n# {path}\n# {separator}")
         manual_hints = retrieve_manual_hints(source)
         source = replace_paroxython_hints("", source)
         sloc = source.splitlines()
@@ -27,20 +27,11 @@ def generate_labeled_sources(programs: Programs) -> Iterator[Source]:
         for (i, comment) in enumerate(comments):
             if comment:
                 sloc[i] += " # " + ", ".join(sorted(comment))
-        yield Source("\n".join(sloc + [""]))
+        yield SourceText("\n".join(sloc + [""]))
 
 
 def generate_programs_labels(programs: Programs) -> Iterator[PathLabels]:
-    """For each program, yield its label list, lexicographically sorted.
-
-    Input: an iterator on programs:
-        (path_1, source_1), (path_2, source_2), ...
-
-    Output: an iterator on label lists:
-        (path_1, [label_1, label_2, ...]),
-        (path_2, [label_1, label_2, ...]),
-        ...
-    """
+    """For each program, yield its label list, lexicographically sorted."""
     parse = SourceParser()
     for (path, source) in programs:
         label_dict: LabelsSpans = defaultdict(list)
