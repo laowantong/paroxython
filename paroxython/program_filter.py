@@ -4,10 +4,8 @@ from typing import Callable, Dict, List, Set, NewType
 
 import regex  # type: ignore
 
-from declarations import TaxonName, TaxonNames
+from declarations import TaxonName, TaxonNames, ProgramName, ProgramNames
 
-ProgramName = NewType("ProgramName", str)
-ProgramNames = List[ProgramName]
 
 ProgramPatterns = List[str]
 TaxonPatterns = List[str]

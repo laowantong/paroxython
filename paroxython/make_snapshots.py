@@ -11,7 +11,7 @@ DIRECTORIES = [
 ]
 # fmt: on
 
-total_elapsed_time = 0
+total_elapsed_time: float = 0
 for directory in DIRECTORIES:
     path = Path(directory)
     if (path / "__is_private_directory").exists():

@@ -58,25 +58,25 @@ class Taxonomy:
         result: TaxonsSpans = defaultdict(Counter)
         for (label_name, spans) in labels:
             for taxon_name in self.get_taxon_name_list(label_name):
-                result[taxon_name].update(Counter(spans))
-        return [Taxon(name, span_bag) for (name, span_bag) in sorted(result.items())]
+                result[taxon_name].update(spans)
+        return [Taxon(name, spans) for (name, spans) in sorted(result.items())]
 
     def deduplicated_taxons(self, taxons: Taxons) -> Taxons:
         """If taxon t2 has taxon t1 as a prefix, remove their common spans from t1."""
         if len(taxons) == 0:
             return []
-        (previous_name, previous_span_bag) = taxons[0]
-        for (name, span_bag) in taxons[1:]:
+        (previous_name, previous_spans) = taxons[0]
+        for (name, spans) in taxons[1:]:
             if name.startswith(previous_name):
-                previous_span_bag.subtract(span_bag)
+                previous_spans.subtract(spans)
             else:
                 previous_name = name
-                previous_span_bag = span_bag
+                previous_spans = spans
         result = []
-        for (name, span_bag) in taxons:
-            cleaned_bag = +span_bag  # suppress items whose count == 0
-            if cleaned_bag:  # if any item remains in the bag
-                result.append(Taxon(name, cleaned_bag))
+        for (name, spans) in taxons:
+            spans = +spans  # Counter's special syntax: suppress items whose count == 0
+            if spans:  # if any item remains in the bag
+                result.append(Taxon(name, spans))
         return result
 
     def __call__(self, programs: List[Program]) -> Iterator[PathTaxons]:

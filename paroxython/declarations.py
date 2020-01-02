@@ -1,6 +1,6 @@
 from pathlib import Path
 from typing import Counter as Bag
-from typing import Dict, List, NamedTuple, NewType
+from typing import Dict, List, NamedTuple, NewType, Generic
 from span import Span
 
 # fmt: off
@@ -11,10 +11,12 @@ LabelName = NewType("LabelName", str)
 LabelNames = List[LabelName]
 class Label(NamedTuple):
     name: LabelName
-    span: List[Span]
+    spans: List[Span]
 Labels = List[Label]
 LabelsSpans = Dict[LabelName, List[Span]]
 
+ProgramName = NewType("ProgramName", str)
+ProgramNames = List[ProgramName]
 class Program(NamedTuple):
     path: Path = Path("")
     source: Source = Source("")
@@ -26,7 +28,7 @@ TaxonName = NewType("TaxonName", str)
 TaxonNames = List[TaxonName]
 class Taxon(NamedTuple):
     name: TaxonName
-    span_bag: Bag[Span]
+    spans: Bag[Span]
 Taxons = List[Taxon]
 TaxonsSpans = Dict[TaxonName, Bag[Span]]
 class PathTaxons(NamedTuple):
