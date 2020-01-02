@@ -1,7 +1,7 @@
 import pytest
 
 import context
-from paroxython.collect_hints import collect_hints
+from paroxython.preprocess_source import collect_hints, HINT
 
 
 def wrapper(numbered_hints):
@@ -9,7 +9,7 @@ def wrapper(numbered_hints):
     for (i, hint) in numbered_hints:
         i -= 1  # lines start from 1, but indexes from 0
         if "paroxython" not in lines[i]:
-            lines[i] += " # paroxython:"
+            lines[i] += f" {HINT}"
         lines[i] += f" {hint}"
     (addition, deletion) = collect_hints("\n".join(lines))
     for operation in (addition, deletion):

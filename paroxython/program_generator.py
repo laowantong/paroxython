@@ -3,13 +3,10 @@ from typing import Iterator
 
 import regex  # type: ignore
 
-from centrifugate_hints import centrifugate_hints
-from cleanup_source import cleanup_factory
-from collect_hints import collect_hints
+from preprocess_source import cleanup_factory, centrifugate_hints, collect_hints, remove_hints
 from declarations import Program, Source
 
 match_excluded = regex.compile(r"__init__\.py|setup\.py|.*[-_]tests?\.py").match
-replace_hints = regex.compile(r"\s*# paroxython: .*").sub
 
 
 def generate_programs(directory: str, strategy="strip_docs") -> Iterator[Program]:
@@ -20,7 +17,7 @@ def generate_programs(directory: str, strategy="strip_docs") -> Iterator[Program
     - its Source,
     - the hints scheduled for addition or deletion.
 
-    Its labels will be later populated by "label_generators.py".
+    Its labels will later be populated by "label_generators.py".
     """
     cleanup = cleanup_factory(strategy)
     for path in sorted(Path(directory).rglob("*.py")):
@@ -29,7 +26,7 @@ def generate_programs(directory: str, strategy="strip_docs") -> Iterator[Program
             source = cleanup(Source(path.read_text()))
             source = centrifugate_hints(source)
             (addition, deletion) = collect_hints(source)
-            source = replace_hints("", source).strip()
+            source = remove_hints(source)
             yield Program(path=path, source=source, addition=addition, deletion=deletion)
 
 

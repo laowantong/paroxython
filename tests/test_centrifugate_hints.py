@@ -3,7 +3,7 @@ import pytest
 import regex  # type: ignore
 
 import context
-from paroxython.centrifugate_hints import centrifugate_hints
+from paroxython.preprocess_source import centrifugate_hints
 
 sources = r"""
 <<< some isolated hints

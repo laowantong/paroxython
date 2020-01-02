@@ -13,13 +13,11 @@ make_db -> "db.json"
 make_snapshots -> "snapshots"
 flatten -> program_parser
 span -> program_parser
-centrifugate_hints -> program_generator
-cleanup_source -> program_generator
-collect_hints -> program_generator
+preprocess_source -> program_generator
+span -> preprocess_source
 label_generators -> make_db
 taxonomy -> make_db
 label_generators -> make_snapshots
-span -> collect_hints
 program_generator -> label_generators
 program_parser -> label_generators
 }

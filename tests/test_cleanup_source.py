@@ -2,7 +2,7 @@ import pytest
 import regex  # type: ignore
 
 import context
-from paroxython.cleanup_source import cleanup_factory
+from paroxython.preprocess_source import cleanup_factory
 
 sources = r'''
 <<< inline comments
