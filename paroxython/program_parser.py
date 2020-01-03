@@ -97,7 +97,7 @@ if __name__ == "__main__":
     parse = ProgramParser()
     start = time.perf_counter()
     acc = []
-    for (name, spans) in sorted(parse(program, yield_failed_matches=False)):
+    for (name, spans) in parse(program, yield_failed_matches=False):
         stop = time.perf_counter()
         spans_as_string = ", ".join(map(str, spans))
         acc.append(f"{stop - start:7.4f} s.: | `{name}` | {spans_as_string} |")

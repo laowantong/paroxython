@@ -283,7 +283,7 @@ def binary_exponentiation(a, n): # body_recursive_function:binary_exponentiation
 # ../Python/maths/binomial_coefficient.py
 # ----------------------------------------------------------------------------------------
 def binomial_coefficient(n, r): # function:binomial_coefficient (-> +8)
-    C = [0 for i in range(r + 1)] # assignment, binary_operator:Add, function_call:range, literal:Num
+    C = [0 for i in range(r + 1)] # assignment, binary_operator:Add, comprehension:List, comprehension_for_count:1, function_call:range, literal:Num
     C[0] = 1 # assignment, index, literal:Num
     for i in range(1, n + 1): # binary_operator:Add, for_range_start (-> +4), function_call:range, literal:Num
         j = min(i, r) # assignment, function_call:min
@@ -404,7 +404,7 @@ def factorial(n: int) -> int: # body_recursive_function:factorial, function:fact
 # ../Python/maths/factors.py
 # ----------------------------------------------------------------------------------------
 def factors_of_a_number(num: int) -> list: # function:factors_of_a_number
-    return [i for i in range(1, num + 1) if num % i == 0] # binary_operator:Add, binary_operator:Mod, comparison_operator:Eq, divisibility_test, function_call:range, literal:Num
+    return [i for i in range(1, num + 1) if num % i == 0] # binary_operator:Add, binary_operator:Mod, comparison_operator:Eq, comprehension:List, comprehension_for_count:1, divisibility_test, filtered_comprehension, function_call:range, literal:Num
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/fermat_little_theorem.py
@@ -505,7 +505,7 @@ def main(): # function:main (-> +6)
     limit = int(input("How many terms to include in fibonacci series: ")) # assignment, composition, function_call:input, function_call:int, literal:Str
     if limit > 0: # comparison_operator:Gt, if (-> +4), if_else (-> +4), literal:Num
         print(f"The first {limit} terms of the fibonacci series are as follows:") # function_call:print, literal:Str
-        print([recur_fibo(n) for n in range(limit)]) # composition, function_call:print, function_call:range, function_call:recur_fibo
+        print([recur_fibo(n) for n in range(limit)]) # composition, comprehension:List, comprehension_for_count:1, function_call:print, function_call:range, function_call:recur_fibo
     else:
         print("Please enter a positive integer: ") # function_call:print, literal:Str
 
@@ -631,11 +631,11 @@ def jaccard_similariy(setA, setB, alternativeUnion=False): # function:jaccard_si
             union = len(setA.union(setB)) # assignment, composition, function_call:len, method_call:union
         return intersection / union # binary_operator:Div
     if isinstance(setA, (list, tuple)) and isinstance(setB, (list, tuple)): # boolean_operator:And, function_call:isinstance, if (-> +6)
-        intersection = [element for element in setA if element in setB] # assignment, comparison_operator:In
+        intersection = [element for element in setA if element in setB] # assignment, comparison_operator:In, comprehension:List, comprehension_for_count:1, filtered_comprehension
         if alternativeUnion: # if (-> +3), if_else (-> +3), suggest_conditional_expression (-> +3)
             union = len(setA) + len(setB) # assignment, binary_operator:Add, function_call:len
         else:
-            union = setA + [element for element in setB if element not in setA] # assignment, binary_operator:Add, comparison_operator:NotIn
+            union = setA + [element for element in setB if element not in setA] # assignment, binary_operator:Add, comparison_operator:NotIn, comprehension:List, comprehension_for_count:1, filtered_comprehension
         return len(intersection) / len(union) # binary_operator:Div, function_call:len
 
 # ----------------------------------------------------------------------------------------
@@ -737,7 +737,7 @@ class Matrix(object):
             self.n = len(arg) # assignment, function_call:len
         else:
             self.n = arg # assignment
-            self.t = [[0 for _ in range(self.n)] for _ in range(self.n)] # assignment, function_call:range, literal:Num
+            self.t = [[0 for _ in range(self.n)] for _ in range(self.n)] # assignment, comprehension:List, comprehension_for_count:1, function_call:range, literal:Num
     def __mul__(self, b): # function:__mul__ (-> +6)
         matrix = Matrix(self.n) # assignment, function_call:Matrix
         for i in range(self.n): # accumulate_elements:AugAssign (-> +3), for_range_stop (-> +3), function_call:range, nested_for (-> +3), square_nested_for (-> +3)
@@ -862,7 +862,7 @@ def perfect_square(num: int) -> bool: # function:perfect_square
 # ----------------------------------------------------------------------------------------
 from typing import Sequence # import_from:typing
 def evaluate_poly(poly: Sequence[float], x: float) -> float: # function:evaluate_poly, index
-    return sum(c * (x ** i) for i, c in enumerate(poly)) # binary_operator:Mult, binary_operator:Pow, composition, function_call:enumerate, function_call:sum
+    return sum(c * (x ** i) for i, c in enumerate(poly)) # binary_operator:Mult, binary_operator:Pow, composition, comprehension:Generator, comprehension_for_count:1, function_call:enumerate, function_call:sum
 def horner(poly: Sequence[float], x: float) -> float: # function:horner, index
     result = 0.0 # assignment, literal:Num, suggest_constant_definition
     for coeff in reversed(poly): # accumulate_elements:Assign (-> +1), function_call:reversed
@@ -882,7 +882,7 @@ def prime_check(number): # function:prime_check (-> +8)
     if number % 2 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, if (-> +1), literal:Num
         return False # literal:False
     odd_numbers = range(3, int(math.sqrt(number)) + 1, 2) # assignment, binary_operator:Add, composition, function_call:int, function_call:range, literal:Num, method_call:sqrt, suggest_constant_definition
-    return not any(number % i == 0 for i in odd_numbers) # binary_operator:Mod, comparison_operator:Eq, divisibility_test, function_call:any, literal:Num, unary_operator:Not
+    return not any(number % i == 0 for i in odd_numbers) # binary_operator:Mod, comparison_operator:Eq, comprehension:Generator, comprehension_for_count:1, divisibility_test, function_call:any, literal:Num, unary_operator:Not
 class Test(unittest.TestCase):
     def test_primes(self): # function:test_primes (-> +10)
         self.assertTrue(prime_check(2)) # composition, function_call:prime_check, literal:Num, method_call:assertTrue
@@ -945,7 +945,7 @@ def primes(max: int) -> List[int]: # function:primes, index
 # ../Python/maths/prime_sieve_eratosthenes.py
 # ----------------------------------------------------------------------------------------
 def prime_sieve_eratosthenes(num): # function:prime_sieve_eratosthenes (-> +10)
-    primes = [True for i in range(num + 1)] # assignment, binary_operator:Add, function_call:range, literal:Num, literal:True
+    primes = [True for i in range(num + 1)] # assignment, binary_operator:Add, comprehension:List, comprehension_for_count:1, function_call:range, literal:Num, literal:True
     p = 2 # assignment, literal:Num
     while p * p <= num: # binary_operator:Mult, comparison_operator:LtE
         if primes[p] == True: # comparison_operator:Eq, if (-> +2), index, literal:True
@@ -1024,14 +1024,14 @@ class FFT:
         self.product = self.__multiply() # assignment, method_call:__multiply
     def __DFT(self, which): # function:__DFT (-> +23)
         if which == "A": # comparison_operator:Eq, if (-> +3), if_else (-> +3), literal:Str, suggest_conditional_expression (-> +3)
-            dft = [[x] for x in self.polyA] # assignment
+            dft = [[x] for x in self.polyA] # assignment, comprehension:List, comprehension_for_count:1
         else:
-            dft = [[x] for x in self.polyB] # assignment
+            dft = [[x] for x in self.polyB] # assignment, comprehension:List, comprehension_for_count:1
         if len(dft) <= 1: # comparison_operator:LtE, function_call:len, if (-> +1), literal:Num
             return dft[0] # index, literal:Num
         next_ncol = self.C_max_length // 2 # assignment, binary_operator:FloorDiv, literal:Num
         while next_ncol > 0: # comparison_operator:Gt, evolve_state (-> +14), literal:Num
-            new_dft = [[] for i in range(next_ncol)] # assignment, function_call:range, literal:List
+            new_dft = [[] for i in range(next_ncol)] # assignment, comprehension:List, comprehension_for_count:1, function_call:range, literal:List
             root = self.root ** next_ncol # assignment, binary_operator:Pow
             current_root = 1 # assignment, literal:Num
             for j in range(self.C_max_length // (next_ncol * 2)): # binary_operator:FloorDiv, binary_operator:Mult, for_range_stop (-> +3), function_call:range, literal:Num, nested_for (-> +3)
@@ -1049,14 +1049,14 @@ class FFT:
     def __multiply(self): # function:__multiply (-> +35)
         dftA = self.__DFT("A") # assignment, literal:Str, method_call:__DFT
         dftB = self.__DFT("B") # assignment, literal:Str, method_call:__DFT
-        inverseC = [[dftA[i] * dftB[i] for i in range(self.C_max_length)]] # assignment, binary_operator:Mult, function_call:range, index
+        inverseC = [[dftA[i] * dftB[i] for i in range(self.C_max_length)]] # assignment, binary_operator:Mult, comprehension:List, comprehension_for_count:1, function_call:range, index
         del dftA
         del dftB
         if len(inverseC[0]) <= 1: # comparison_operator:LtE, function_call:len, if (-> +1), index, literal:Num
             return inverseC[0] # index, literal:Num
         next_ncol = 2 # assignment, literal:Num
         while next_ncol <= self.C_max_length: # comparison_operator:LtE, evolve_state (-> +22)
-            new_inverseC = [[] for i in range(next_ncol)] # assignment, function_call:range, literal:List
+            new_inverseC = [[] for i in range(next_ncol)] # assignment, comprehension:List, comprehension_for_count:1, function_call:range, literal:List
             root = self.root ** (next_ncol // 2) # assignment, binary_operator:FloorDiv, binary_operator:Pow, literal:Num
             current_root = 1 # assignment, literal:Num
             for j in range(self.C_max_length // next_ncol): # binary_operator:FloorDiv, for_range_stop (-> +16), function_call:range, nested_for (-> +16)
@@ -1078,19 +1078,19 @@ class FFT:
                 current_root *= root # augmented_assignment
             inverseC = new_inverseC # assignment
             next_ncol *= 2 # augmented_assignment, literal:Num
-        inverseC = [round(x[0].real, 8) + round(x[0].imag, 8) * 1j for x in inverseC] # assignment, binary_operator:Add, binary_operator:Mult, function_call:round, index, literal:Num, suggest_constant_definition
+        inverseC = [round(x[0].real, 8) + round(x[0].imag, 8) * 1j for x in inverseC] # assignment, binary_operator:Add, binary_operator:Mult, comprehension:List, comprehension_for_count:1, function_call:round, index, literal:Num, suggest_constant_definition
         while inverseC[-1] == 0: # comparison_operator:Eq, evolve_state (-> +1), index, literal:Num, negative_index:-1
             inverseC.pop() # method_call:pop
         return inverseC
     def __str__(self): # function:__str__ (-> +10)
         A = "A = " + " + ".join( # assignment, binary_operator:Add, composition, literal:Str, method_call:join
-            f"{coef}*x^{i}" for coef, i in enumerate(self.polyA[: self.len_A]) # function_call:enumerate, literal:Str, slice
+            f"{coef}*x^{i}" for coef, i in enumerate(self.polyA[: self.len_A]) # comprehension:Generator, comprehension_for_count:1, function_call:enumerate, literal:Str, slice
         )
         B = "B = " + " + ".join( # assignment, binary_operator:Add, composition, literal:Str, method_call:join
-            f"{coef}*x^{i}" for coef, i in enumerate(self.polyB[: self.len_B]) # function_call:enumerate, literal:Str, slice
+            f"{coef}*x^{i}" for coef, i in enumerate(self.polyB[: self.len_B]) # comprehension:Generator, comprehension_for_count:1, function_call:enumerate, literal:Str, slice
         )
         C = "A*B = " + " + ".join( # assignment, binary_operator:Add, composition, literal:Str, method_call:join
-            f"{coef}*x^{i}" for coef, i in enumerate(self.product) # function_call:enumerate, literal:Str
+            f"{coef}*x^{i}" for coef, i in enumerate(self.product) # comprehension:Generator, comprehension_for_count:1, function_call:enumerate, literal:Str
         )
         return "\n".join((A, B, C)) # literal:Str, method_call:join
 

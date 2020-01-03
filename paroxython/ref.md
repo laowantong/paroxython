@@ -23,6 +23,10 @@
       - [Construct `composition`](#construct-composition)
   - [Anonymous functions](#anonymous-functions)
       - [Construct `lambda_function`](#construct-lambda_function)
+  - [Comprehensions](#comprehensions)
+      - [Construct `comprehension`](#construct-comprehension)
+      - [Construct `comprehension_for_count`](#construct-comprehension_for_count)
+      - [Construct `filtered_comprehension`](#construct-filtered_comprehension)
 - [Statements](#statements)
   - [Assignments](#assignments)
       - [Construct `global_constant_definition`](#construct-global_constant_definition)
@@ -640,6 +644,117 @@ Apply a function or a method to an expression involving the result of another fu
 | Label | Lines |
 |:--|:--|
 | `lambda_function` | 1 |
+
+--------------------------------------------------------------------------------
+
+## Comprehensions
+
+--------------------------------------------------------------------------------
+
+#### Construct `comprehension`
+
+##### Regex
+
+```re
+           ^(.*)/_type='((?P<SUFFIX>List|Dict|Set)Comp|(?P<SUFFIX>Generator)Exp)'
+\n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
+```
+
+##### Example
+
+```python
+1   my_list = [x for x in seq]
+2   my_set = {x for x in seq}
+3   my_dict = {x: y for (x, y) in seq}
+4   my_generator = (x for x in seq)
+5   print([x for x in seq])
+6   print(x for x in seq)
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `comprehension:List` | 1, 5 |
+| `comprehension:Set` | 2 |
+| `comprehension:Dict` | 3 |
+| `comprehension:Generator` | 4, 6 |
+
+--------------------------------------------------------------------------------
+
+#### Construct `comprehension_for_count`
+
+Suffix the number of `for` clauses in a given comprehension.
+
+##### Regex
+
+```re
+           ^(.*)/_type='(ListComp|DictComp|SetComp|GeneratorExp)'
+\n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
+\n(?:\1.+\n)*?\1/generators/length=(?P<SUFFIX>\d+)
+```
+
+##### Example
+
+```python
+1   print([x for x in seq])
+2   seq1 = [2, 3, 5]
+3   seq2 = [7, 11]
+4   acc = [i * j for i in seq1 for j in seq2]
+5   acc2 = [[x1 * x2 for x1 in seq1] for x2 in seq2]
+```
+
+**Remark.** Both lines 4 and 5 can be expressed with two nested `for` statements. However, the former uses one single accumulator and produces a list of numbers:
+```python
+acc = []
+for i in seq1:
+    for j in seq2:
+        acc.append(i * j)
+assert acc == [14, 22, 21, 33, 35, 55]
+```
+... whereas the latter uses two accumulators and produces a list _of lists_ of numbers:
+```python
+acc2 = []
+for j in seq2:
+    acc1 = []
+    for i in seq1:
+        acc1.append(i * j)
+    acc2.append(acc1)
+print(acc2)
+```
+Therefore, line 5 consists in two comprehensions, each with one `for` clause only.
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `comprehension_for_count:1` | 1, 5, 5 |
+| `comprehension_for_count:2` | 4 |
+
+--------------------------------------------------------------------------------
+
+#### Construct `filtered_comprehension`
+
+Match a comprehension with an `if` clause.
+
+##### Regex
+
+```re
+/generators/\d+/ifs/0/lineno=(?P<LINE>\d+)
+```
+
+##### Example
+
+```python
+1   [x for x in seq if foo(x)]
+2   acc = [i * j for i in seq1 if foo(i) for j in seq2 if foo(j)]
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `filtered_comprehension` | 1, 2, 2 |
 
 --------------------------------------------------------------------------------
 
