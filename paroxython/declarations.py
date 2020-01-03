@@ -1,6 +1,6 @@
 from pathlib import Path
 from typing import Counter as Bag
-from typing import Dict, List, NamedTuple, NewType, Generic
+from typing import Dict, List, NamedTuple, NewType
 from span import Span
 
 # fmt: off
