@@ -2,19 +2,21 @@ import json
 from collections import defaultdict
 from datetime import datetime
 from pathlib import Path
-from typing import Dict, List, Tuple, Union, Any  # TypedDict (Python 3.8)
+from typing import Any, Dict, List, Tuple, overload
 
 import regex  # type: ignore
+from typing_extensions import TypedDict  # from Python 3.8, import directly from typing
 
 from declarations import (
-    Labels,
-    Program,
-    PathTaxons,
-    Taxons,
     LabelName,
-    TaxonName,
+    Labels,
+    PathTaxons,
+    Program,
     ProgramName,
     ProgramNames,
+    Source,
+    TaxonName,
+    Taxons,
 )
 from label_generators import generate_labeled_programs
 from taxonomy import Taxonomy
@@ -23,28 +25,23 @@ Span = Tuple[int, int]
 LabelsSpans = Dict[LabelName, List[Span]]
 TaxonsSpans = Dict[TaxonName, List[Span]]
 
-Tags = Union[Taxons, Labels]
-TagName = Union[LabelName, TaxonName]
-TagsSpans = Dict[TagName, List[Span]]
 
-# class ProgramRecord(TypedDict):
-#     timestamp: str
-#     source: int
-#     labels: LabelsSpans = {}
-#     taxons: TaxonsSpans = {}
+class ProgramRecord(TypedDict):
+    timestamp: str
+    source: Source
+    labels: LabelsSpans
+    taxons: TaxonsSpans
 
-ProgramRecord = Any  # Workaround before Python 3.8
 
 ProgramInfos = Dict[ProgramName, ProgramRecord]
 LabelInfos = Dict[LabelName, List[ProgramName]]
 TaxonInfos = Dict[TaxonName, List[ProgramName]]
 
-# class DB(TypedDict):
-#     programs: ProgramInfos
-#     labels: LabelInfos
-#     taxons: TaxonInfos
 
-DB = Any  # Workaround before Python 3.8
+class DB(TypedDict):
+    programs: ProgramInfos
+    labels: LabelInfos
+    taxons: TaxonInfos
 
 
 def make_database(directories: List[str], *args, **kargs) -> DB:
@@ -70,6 +67,8 @@ def get_program_infos(programs: List[Program]) -> ProgramInfos:
         result[ProgramName(str(program.path))] = {
             "timestamp": str(datetime.fromtimestamp(program.path.stat().st_mtime)),
             "source": program.source,
+            "labels": {},  # to be populated by inject_labels()
+            "taxons": {},  # to be populated by inject_taxons()
         }
     return result
 
@@ -90,11 +89,19 @@ def get_taxon_infos(paths_taxons: List[PathTaxons]) -> TaxonInfos:
     return dict(result)
 
 
-def serialized(tags: Tags) -> TagsSpans:
-    result: TagsSpans = {}
+# fmt: off
+@overload
+def serialized(tags: Labels) -> LabelsSpans:
+    ...
+@overload
+def serialized(tags: Taxons) -> TaxonsSpans:
+    ...
+def serialized(tags):
+    result: Any = {}
     for (tag_name, spans) in tags:
         result[tag_name] = [span.to_couple() for span in sorted(set(spans))]
     return result
+# fmt: on
 
 
 def inject_labels(db: DB, programs: List[Program]) -> None:
@@ -104,7 +111,7 @@ def inject_labels(db: DB, programs: List[Program]) -> None:
 
 def inject_taxons(db: DB, paths_taxons: List[PathTaxons]) -> None:
     for (path, taxons) in paths_taxons:
-        db["programs"][str(path)]["taxons"] = serialized(taxons)
+        db["programs"][ProgramName(str(path))]["taxons"] = serialized(taxons)
 
 
 def to_json(db: DB) -> str:
