@@ -92,10 +92,10 @@ def get_taxon_infos(paths_taxons: List[PathTaxons]) -> TaxonInfos:
 # fmt: off
 @overload
 def serialized(tags: Labels) -> LabelsSpans:
-    ...
+    ...  # pragma: no cover
 @overload
 def serialized(tags: Taxons) -> TaxonsSpans:
-    ...
+    ...  # pragma: no cover
 def serialized(tags):
     result: Any = {}
     for (tag_name, spans) in tags:

@@ -43,7 +43,7 @@ class ProgramParser:
         self.constructs: Dict[LabelName, regex.Pattern] = {}
         for (label_name, pattern) in find_all_constructs(text):
             if label_name in self.constructs:
-                raise ValueError(f"Duplicated name '{label_name}'!")
+                raise ValueError(f"Duplicated name '{label_name}'!")  # pragma: no cover
             self.constructs[label_name] = regex.compile(f"(?mx){pattern}")
 
     def __call__(self, program: Program, yield_failed_matches: bool = False,) -> Iterator[Label]:
