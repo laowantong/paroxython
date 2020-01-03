@@ -1,6 +1,9 @@
 - [Expressions](#expressions)
   - [Literals](#literals)
       - [Construct `literal`](#construct-literal)
+      - [Construct `int_literal`](#construct-int_literal)
+      - [Construct `float_literal`](#construct-float_literal)
+      - [Construct `imaginary_literal`](#construct-imaginary_literal)
   - [Subscripts](#subscripts)
       - [Construct `index`](#construct-index)
       - [Construct `index_arithmetic`](#construct-index_arithmetic)
@@ -146,6 +149,93 @@
 
 --------------------------------------------------------------------------------
 
+#### Construct `int_literal`
+
+##### Regex
+
+```re
+           ^(.*)/_type='Num'
+\n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
+\n(?:\1.+\n)*?\1/n=-?\d+\n
+```
+
+##### Example
+
+The following examples of numeric literals are taken from the [reference](https://docs.python.org/3/reference/lexical_analysis.html#integer-literals).
+
+```python
+1   7, 2147483647, 0o177, 0b100110111, 3, -79228162514264337593543950336
+2   0o377, 0xdeadbeef, 100_000_000_000, 0b_1110_0101
+3   3.14, 10., .001, 1e100, 3.14e-10, 0e0, 3.14_15_93
+4   23.14j, 10.j, 10j, .001j, 1e100j, 3.14e-10j, 3.14_15_93j
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `int_literal` | 1, 1, 1, 1, 1, 1, 2, 2, 2, 2 |
+
+--------------------------------------------------------------------------------
+
+#### Construct `float_literal`
+
+In the AST, a floating point literal consists of digits and at least one symbol among `.` and `e`.
+
+##### Regex
+
+```re
+           ^(.*)/_type='Num'
+\n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
+\n(?:\1.+\n)*?\1/n=-?[\de\.]*[e\.][\de\.]*\n
+```
+
+##### Example
+
+```python
+1   7, 2147483647, 0o177, 0b100110111, 3, -79228162514264337593543950336
+2   0o377, 0xdeadbeef, 100_000_000_000, 0b_1110_0101
+3   3.14, 10., .001, 1e100, 3.14e-10, 0e0, 3.14_15_93
+4   23.14j, 10.j, 10j, .001j, 1e100j, 3.14e-10j, 3.14_15_93j
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `float_literal` | 3, 3, 3, 3, 3 |
+
+--------------------------------------------------------------------------------
+
+#### Construct `imaginary_literal`
+
+In the AST, an imaginary literal contains the same symbols as a floating point literal, plus a mandatory symbol `j`.
+
+##### Regex
+
+```re
+           ^(.*)/_type='Num'
+\n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
+\n(?:\1.+\n)*?\1/n=-?[\de\.]*j[\de\.]*\n
+```
+
+##### Example
+
+```python
+1   7, 2147483647, 0o177, 0b100110111, 3, -79228162514264337593543950336
+2   0o377, 0xdeadbeef, 100_000_000_000, 0b_1110_0101
+3   3.14, 10., .001, 1e100, 3.14e-10, 0e0, 3.14_15_93
+4   23.14j, 10.j, 10j, .001j, 1e100j, 3.14e-10j, 3.14_15_93j
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `imaginary_literal` | 4, 4, 4, 4, 4 |
+
+--------------------------------------------------------------------------------
+
 ## Subscripts
 
 --------------------------------------------------------------------------------
@@ -213,7 +303,7 @@
 (   # A negative number
 \n(?:\1.+\n)*?\1/slice/value/_type='Num'
 \n(?:\1.+\n)*?\1/slice/value/n=(?P<SUFFIX>-\d+)
-|   # A negated non-litteral expression
+|   # A negated non-literal expression
 \n(?:\1.+\n)*?\1/slice/value/op/_type='USub'
 |   # A binary operation whose left operand is negated
 \n(?:\1.+\n)*?\1/slice/value/_type='BinOp'
@@ -321,7 +411,7 @@
 3   c = -1 # no match
 ```
 
-**Remark.** A negative litteral is represented in the AST by a node `UnaryOp` with `USub` and `Num` children, and a _positive_ value for `n`. Our pre-processing of the AST simplifies this into a node `Num` and a _negative_ value for `n`.
+**Remark.** A negative literal is represented in the AST by a node `UnaryOp` with `USub` and `Num` children, and a _positive_ value for `n`. Our pre-processing of the AST simplifies this into a node `Num` and a _negative_ value for `n`.
 
 ##### Matches
 
@@ -720,7 +810,7 @@ for j in seq2:
     for i in seq1:
         acc1.append(i * j)
     acc2.append(acc1)
-print(acc2)
+assert acc2 == [[14, 21, 35], [22, 33, 55]]
 ```
 Therefore, line 5 consists in two comprehensions, each with one `for` clause only.
 

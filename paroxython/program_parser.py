@@ -10,7 +10,7 @@ from flatten import flatten
 from span import Span
 
 
-def _simplify_negative_litterals() -> Callable:
+def _simplify_negative_literals() -> Callable:
     sub = regex.compile(
         r"""(?mx)
                     ^(.*?)/_type='UnaryOp'
@@ -21,7 +21,7 @@ def _simplify_negative_litterals() -> Callable:
     return lambda flat_ast: sub(r"\1/_type='Num'\2\1/n=-\3", flat_ast)
 
 
-simplify_negative_litterals = _simplify_negative_litterals()
+simplify_negative_literals = _simplify_negative_literals()
 
 
 find_all_constructs = regex.compile(
@@ -60,7 +60,7 @@ class ProgramParser:
             tree = ast.parse(program.source)
         except (SyntaxError, ValueError):
             return print("Warning: unable to construct the AST")
-        self.flat_ast = simplify_negative_litterals(flatten(tree))
+        self.flat_ast = simplify_negative_literals(flatten(tree))
 
         for (label_name, rex) in self.constructs.items():
             result: LabelsSpans = defaultdict(list)

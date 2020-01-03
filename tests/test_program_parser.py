@@ -95,6 +95,7 @@ def test_failed_matches():
     assert actual.pop("assignment")[0].to_couple() == (1, 1)
     assert actual.pop("global_variable_definition")[0].to_couple() == (1, 1)
     assert actual.pop("literal:Num")[0].to_couple() == (1, 1)
+    assert actual.pop("int_literal")[0].to_couple() == (1, 1)
     assert actual.pop("suggest_constant_definition")[0].to_couple() == (1, 1)
     for spans in actual.values():
         assert not spans

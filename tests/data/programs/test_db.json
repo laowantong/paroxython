@@ -27,6 +27,7 @@
         "function_call:print": [[3,3],[8,8]],
         "if": [[4,7],[6,6]],
         "if_else": [[4,7]],
+        "int_literal": [[2,2],[4,4],[5,5],[7,7]],
         "literal:Num": [[2,2],[4,4],[7,7]],
         "suggest_augmented_assignment": [[5,5]],
         "suggest_conditional_expression": [[4,7]],
@@ -51,6 +52,7 @@
       "labels": {
         "binary_operator:Add": [[2,2]],
         "function:succ": [[1,2]],
+        "int_literal": [[2,2]],
         "literal:Num": [[2,2]]
       },
       "taxons": {
@@ -121,6 +123,10 @@
     ],
     "if_else": [
       "tests/data/programs/collatz_print.py"
+    ],
+    "int_literal": [
+      "tests/data/programs/collatz_print.py",
+      "tests/data/programs/function_definition.py"
     ],
     "literal:Num": [
       "tests/data/programs/collatz_print.py",
