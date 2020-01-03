@@ -151,6 +151,8 @@
 
 #### Construct `int_literal`
 
+Matching literal does not require to construct a sophisticated regular expression: the heavy lifting is already made in the given AST, which stores them in a normalized form. For instance, integer literals are just sequence of digits:
+
 ##### Regex
 
 ```re
@@ -209,14 +211,14 @@ In the AST, a floating point literal consists of digits and at least one symbol 
 
 #### Construct `imaginary_literal`
 
-In the AST, an imaginary literal contains the same symbols as a floating point literal, plus a mandatory symbol `j`.
+In the AST, an imaginary literal contains the same symbols as a floating point literal, plus a mandatory trailing symbol `j`.
 
 ##### Regex
 
 ```re
            ^(.*)/_type='Num'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
-\n(?:\1.+\n)*?\1/n=-?[\de\.]*j[\de\.]*\n
+\n(?:\1.+\n)*?\1/n=-?[\de\.]*j\n
 ```
 
 ##### Example
