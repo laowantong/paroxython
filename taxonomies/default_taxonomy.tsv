@@ -19,16 +19,16 @@ control_flow/loop/sequential/arithmetic/	for_range_stop
 control_flow/loop/sequential/arithmetic/start/	for_range_start
 control_flow/loop/sequential/arithmetic/start/step/	for_range_step
 control_flow/loop/sequential/arithmetic/start/step/backwards/	for_range_step:-.+
-control_flow/loop/sequential/elements/	for_each
 control_flow/loop/sequential/elements_and_indexes/	for_indexes_elements
+control_flow/loop/sequential/elements/	for_each
 control_flow/loop/sequential/indexes/	for_indexes
 control_flow/loop/sequential/nested/	nested_for
 control_flow/loop/sequential/nested/square/	square_nested_for
 control_flow/loop/sequential/nested/triangular/	triangular_nested_for
-exception/raise/	raise_exception:.+
-exception/raise/\1/	raise_exception:(BaseException|SystemExit|KeyboardInterrupt|GeneratorExit|Exception|StopIteration|StopAsyncIteration|ArithmeticError|FloatingPointError|OverflowError|ZeroDivisionError|AssertionError|AttributeError|BufferError|EOFError|ImportError|ModuleNotFoundError|LookupError|IndexError|KeyError|MemoryError|NameError|UnboundLocalError|OSError|BlockingIOError|ChildProcessError|ConnectionError|BrokenPipeError|ConnectionAbortedError|ConnectionRefusedError|ConnectionResetError|FileExistsError|FileNotFoundError|InterruptedError|IsADirectoryError|NotADirectoryError|PermissionError|ProcessLookupError|TimeoutError|ReferenceError|RuntimeError|NotImplementedError|RecursionError|SyntaxError|IndentationError|TabError|SystemError|TypeError|ValueError|UnicodeError|UnicodeDecodeError|UnicodeEncodeError|UnicodeTranslateError|Warning|DeprecationWarning|PendingDeprecationWarning|RuntimeWarning|SyntaxWarning|UserWarning|FutureWarning|ImportWarning|UnicodeWarning|BytesWarning|ResourceWarning)
 exception/catch/	catch_exception:.+
 exception/catch/\1/	catch_exception:(BaseException|SystemExit|KeyboardInterrupt|GeneratorExit|Exception|StopIteration|StopAsyncIteration|ArithmeticError|FloatingPointError|OverflowError|ZeroDivisionError|AssertionError|AttributeError|BufferError|EOFError|ImportError|ModuleNotFoundError|LookupError|IndexError|KeyError|MemoryError|NameError|UnboundLocalError|OSError|BlockingIOError|ChildProcessError|ConnectionError|BrokenPipeError|ConnectionAbortedError|ConnectionRefusedError|ConnectionResetError|FileExistsError|FileNotFoundError|InterruptedError|IsADirectoryError|NotADirectoryError|PermissionError|ProcessLookupError|TimeoutError|ReferenceError|RuntimeError|NotImplementedError|RecursionError|SyntaxError|IndentationError|TabError|SystemError|TypeError|ValueError|UnicodeError|UnicodeDecodeError|UnicodeEncodeError|UnicodeTranslateError|Warning|DeprecationWarning|PendingDeprecationWarning|RuntimeWarning|SyntaxWarning|UserWarning|FutureWarning|ImportWarning|UnicodeWarning|BytesWarning|ResourceWarning)
+exception/raise/	raise_exception:.+
+exception/raise/\1/	raise_exception:(BaseException|SystemExit|KeyboardInterrupt|GeneratorExit|Exception|StopIteration|StopAsyncIteration|ArithmeticError|FloatingPointError|OverflowError|ZeroDivisionError|AssertionError|AttributeError|BufferError|EOFError|ImportError|ModuleNotFoundError|LookupError|IndexError|KeyError|MemoryError|NameError|UnboundLocalError|OSError|BlockingIOError|ChildProcessError|ConnectionError|BrokenPipeError|ConnectionAbortedError|ConnectionRefusedError|ConnectionResetError|FileExistsError|FileNotFoundError|InterruptedError|IsADirectoryError|NotADirectoryError|PermissionError|ProcessLookupError|TimeoutError|ReferenceError|RuntimeError|NotImplementedError|RecursionError|SyntaxError|IndentationError|TabError|SystemError|TypeError|ValueError|UnicodeError|UnicodeDecodeError|UnicodeEncodeError|UnicodeTranslateError|Warning|DeprecationWarning|PendingDeprecationWarning|RuntimeWarning|SyntaxWarning|UserWarning|FutureWarning|ImportWarning|UnicodeWarning|BytesWarning|ResourceWarning)
 function_definition/method/avoid_conflict/	function:.+_(?>!_)
 function_definition/method/internal_use/	function:_(?!_).+
 function_definition/method/internal_use/name_mangling/	function:__.+(?<!__)
@@ -50,11 +50,11 @@ operator/bitwise/shift/left/	binary_operator:LShift
 operator/bitwise/shift/right/	binary_operator:RShift
 operator/bitwise/xor/	binary_operator:BitXor
 operator/boolean/and/	boolean_operator:And
+operator/boolean/and/short_circuit/	short_circuit:And
 operator/boolean/not/	unary_operator:Not
 operator/boolean/or/	boolean_operator:Or
-operator/boolean/short_circuit/	short_circuit
-operator/boolean/and/short_circuit/	short_circuit:And
 operator/boolean/or/short_circuit/	short_circuit:Or
+operator/boolean/short_circuit/	short_circuit
 operator/division/	binary_operator:Div
 operator/integer_division/	binary_operator:FloorDiv
 operator/minus/	unary_operator:USub
@@ -91,9 +91,9 @@ type/container/tuple/	literal:Tuple
 type/elementary/boolean/	literal:(True|False)
 type/elementary/null/	literal:None
 type/elementary/number/	literal:Num
-type/elementary/number/int	int_literal
-type/elementary/number/float	float_literal
 type/elementary/number/complex	imaginary_literal
+type/elementary/number/floating_point	float_literal
+type/elementary/number/integer	int_literal
 type/elementary/string/	literal:Str
 variable/assignment/augmented/	augmented_assignment
 variable/assignment/chained/	chained_assignment
@@ -138,7 +138,6 @@ library/third_party/ast/literal_eval
 library/third_party/num2words/num2words	
 pattern/elements/accumulate/collect	
 pattern/elements/accumulate/count	
-pattern/elements/accumulate/find_best	
 pattern/elements/accumulate/find_best/index	
 pattern/elements/find_first_good	
 pattern/inputs/accumulate	
@@ -158,19 +157,11 @@ subscript/index/double
 subscript/slice/start	
 subscript/slice/step/backwards	
 subscript/slice/stop	
-type/container/dict	
 type/container/dict/null	
-type/container/list	
 type/container/list/null	
-type/container/set	
-type/container/tuple	
 type/container/tuple/assignment	
 type/container/tuple/assignment/swapping	
-type/elementary/boolean	
-type/elementary/None	
-type/elementary/num	
 type/elementary/num/null	
-type/elementary/string	
 type/elementary/string/newline	
 type/elementary/string/null	
 variable/assignment/argument	

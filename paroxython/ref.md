@@ -2205,7 +2205,7 @@ An accumulation pattern that, from a given collection, returns the best element 
 
 #### Construct `universal_quantifier`
 
-Check if all the elements of a collection satisfy a predicate.
+Check whether all elements of a collection satisfy a predicate.
 
 ##### Regex
 
@@ -2240,7 +2240,7 @@ Check if all the elements of a collection satisfy a predicate.
 
 #### Construct `existential_quantifier`
 
-Check if any element of a collection satisfies a predicate.
+Check whether any element of a collection satisfies a predicate.
 
 ##### Regex
 
@@ -2470,7 +2470,7 @@ Accumulate the inputs until a sentinel value is encountered (accumulation expres
 
 It may be interesting to indicate the category of the program with an all-encompassing hint `# paroxython: category` placed on its own line. Examples of possible categories are:
 
-- `abstract`: a sort, a search, an algorithmic pattern, etc.
+- `abstract`: sorting, searching, algorithmic pattern, etc.
 - `biology`
 - `combinatorics`
 - `computability`: cellular automata, tag-system, etc.
@@ -2479,7 +2479,7 @@ It may be interesting to indicate the category of the program with an all-encomp
 - `game`
 - `geography`
 - `geometry`
-- `number_theory`: a sieve, most problems of [Project Euler](http://projecteuler.net), etc.
+- `number_theory`: gcd, sieve, most problems of [Project Euler](http://projecteuler.net), etc.
 - `text_processing`
 - ...
 
