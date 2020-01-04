@@ -84,6 +84,8 @@
       - [Construct `evolve_state`](#construct-evolve_state)
     - [Non sequential infinite loops](#non-sequential-infinite-loops)
       - [Construct `accumulate_stream`](#construct-accumulate_stream)
+- [Programs](#programs)
+      - [Construct `category`](#construct-category)
 - [Suggestions](#suggestions)
   - [Assignments](#assignments-1)
       - [Construct `suggest_conditional_expression`](#construct-suggest_conditional_expression)
@@ -602,7 +604,7 @@ Match the so-called ternary operator.
 
 #### Construct `short_circuit`
 
-When the value of the left operand suffices to determine the value of a boolean expression, short-circuit evaluation avoids evaluating the right operand. This behaviour is sometimes desirable or/and exploited, but currently, Paroxython cannot detect such cases: it is up to the programmer to explicit their intention by adding a comment `# paroxython: short_circuit`.
+When the value of the left operand suffices to determine the value of a boolean expression, short-circuit evaluation skips the right operand. This behaviour is sometimes desirable or even required, but Paroxython currently cannot detect the case: so, when commutating the operands would result in an error or a performance penalty, you should add manually the hint `# paroxython: short_circuit` in the source-code.
 
 ##### Regex
 
@@ -617,7 +619,7 @@ No pattern provided.
 2       for i in range(1, len(a)):
 3           aux = a[i]
 4           j = i
-5           while j > 0 and a[j-1] > aux:  # paroxython: short_circuit
+5           while j > 0 and a[j-1] > aux:  # paroxython: short_circuit:And
 6               a[j] = a[j-1]
 7               j -= 1
 8           a[j] = aux
@@ -627,7 +629,7 @@ No pattern provided.
 
 | Label | Lines |
 |:--|:--|
-| `short_circuit` | 5 |
+| `short_circuit:And` | 5 |
 
 --------------------------------------------------------------------------------
 
@@ -2457,6 +2459,58 @@ Accumulate the inputs until a sentinel value is encountered (accumulation expres
 | `accumulate_stream:AugAssign` | 11-15 |
 | `accumulate_stream:Name` | 19-23 |
 | `accumulate_stream:Attribute` | 27-31 |
+
+--------------------------------------------------------------------------------
+
+# Programs
+
+--------------------------------------------------------------------------------
+
+#### Construct `category`
+
+It may be interesting to indicate the category of the program with an all-encompassing hint `# paroxython: category` placed in its own line. Examples of possible categories are:
+
+- `abstract`: a sort, a search, an algorithmic pattern, etc.
+- `biology`
+- `combinatorics`
+- `computability`: cellular automata, tag-system, etc.
+- `fractals`
+- `fun`
+- `game`
+- `geography`
+- `geometry`
+- `number_theory`: a sieve, most problems of [Project Euler](http://projecteuler.net), etc.
+- `text_processing`
+- ...
+
+##### Regex
+
+```re
+No pattern provided.
+```
+
+##### Example
+
+```python
+1   print("See if you can do this. Read each line aloud and press Return between.")
+2   message = "this is how to keep an idiot busy for a while"
+3   for word in message.split(" "):
+4       # paroxython: category:text_processing
+5       input(f"This is {word} cat.")
+6   print("Now read the third word in each line from the top!")
+7   # paroxython: category:fun
+```
+
+**Remarks.**
+- The location of an all-encompassing hint does not matter, as long as it is on its own line.
+- Since all hints are stripped before labelling, the resulting source actually spans from line 1 to line 5.
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `category:fun` | 1-5 |
+| `category:text_processing` | 1-5 |
 
 --------------------------------------------------------------------------------
 

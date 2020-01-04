@@ -263,7 +263,7 @@ def solution(n: int) -> int: # function:solution
     ans = 0 # assignment, int_literal, literal:Num
     if n == 2: # comparison_operator:Eq, if (-> +1), int_literal, literal:Num
         return 2 # int_literal, literal:Num
-    while n > 2: # comparison_operator:Gt, evolve_state (-> +6), int_literal, literal:Num
+    while n > 2: # comparison_operator:Gt, evolve_state (-> +5), int_literal, literal:Num
         while n % i != 0: # binary_operator:Mod, comparison_operator:NotEq, divisibility_test, evolve_state (-> +1), int_literal, literal:Num
             i += 1 # augmented_assignment, int_literal, literal:Num
         ans = i # assignment
@@ -1312,10 +1312,10 @@ def solution(): # function:solution (-> +12)
         if ( # if (-> +8)
             sorted(list(str(i))) # chained_comparison:5, composition, function_call:list, function_call:sorted, function_call:str
             == sorted(list(str(2 * i))) # binary_operator:Mult, comparison_operator:Eq, composition, function_call:list, function_call:sorted, function_call:str, int_literal, literal:Num
-            == sorted(list(str(3 * i))) # binary_operator:Mult, composition, function_call:list, function_call:sorted, function_call:str, int_literal, literal:Num, suggest_constant_definition
-            == sorted(list(str(4 * i))) # binary_operator:Mult, composition, function_call:list, function_call:sorted, function_call:str, int_literal, literal:Num, suggest_constant_definition
-            == sorted(list(str(5 * i))) # binary_operator:Mult, composition, function_call:list, function_call:sorted, function_call:str, int_literal, literal:Num, suggest_constant_definition
-            == sorted(list(str(6 * i))) # binary_operator:Mult, composition, function_call:list, function_call:sorted, function_call:str, int_literal, literal:Num, suggest_constant_definition
+            == sorted(list(str(3 * i))) # binary_operator:Mult, comparison_operator:Eq, composition, function_call:list, function_call:sorted, function_call:str, int_literal, literal:Num, suggest_constant_definition
+            == sorted(list(str(4 * i))) # binary_operator:Mult, comparison_operator:Eq, composition, function_call:list, function_call:sorted, function_call:str, int_literal, literal:Num, suggest_constant_definition
+            == sorted(list(str(5 * i))) # binary_operator:Mult, comparison_operator:Eq, composition, function_call:list, function_call:sorted, function_call:str, int_literal, literal:Num, suggest_constant_definition
+            == sorted(list(str(6 * i))) # binary_operator:Mult, comparison_operator:Eq, composition, function_call:list, function_call:sorted, function_call:str, int_literal, literal:Num, suggest_constant_definition
         ):
             return i
         i += 1 # augmented_assignment, int_literal, literal:Num

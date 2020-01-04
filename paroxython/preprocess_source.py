@@ -8,7 +8,7 @@ import regex  # type: ignore
 from declarations import LabelName, LabelsSpans, Source
 from span import Span
 
-HINT = "# paroxython:"
+HINT_COMMENT = "# paroxython:"
 
 sub_main = regex.compile(r"(?ms)^if +__name__ *== *.__main__. *:.+").sub
 sub_decorator = regex.compile(r"(?m)^\s*@.+\n").sub
@@ -37,7 +37,7 @@ def strip_docs(source: Source) -> Source:
             previous_end_col = 0
         result.append(" " * max(0, start_col - previous_end_col))
         if token == COMMENT:
-            (string, n) = subn_paroxython_comment(f"{HINT} ", string)
+            (string, n) = subn_paroxython_comment(f"{HINT_COMMENT} ", string)
             if n == 0:
                 continue
             result.append(string)
@@ -97,7 +97,7 @@ def collect_hints(source: Source) -> Tuple[LabelsSpans, LabelsSpans]:
     addition = HintBuffer("addition")
     deletion = HintBuffer("deletion")
     for (i, line) in enumerate(source.split("\n"), 1):
-        (_, separator, hints) = line.partition(f"{HINT} ")
+        (_, separator, hints) = line.partition(f"{HINT_COMMENT} ")
         if not separator:
             continue
         for hint in hints.split():
@@ -124,27 +124,31 @@ def collect_hints(source: Source) -> Tuple[LabelsSpans, LabelsSpans]:
     return (addition.get_result(), deletion.get_result())
 
 
-isolated_hints_pattern = regex.compile(fr"(?m)^\s*{HINT} (.+)\n")
+match_isolated_hints = regex.compile(fr"\s*{HINT_COMMENT} (.+)").match
 
 
 def centrifugate_hints(source: Source) -> Source:
     """Transform the isolated hints into all-encompassing hints."""
-    hint_strings = isolated_hints_pattern.findall(source)
-    if not hint_strings:
+    lines = []
+    hints = set()
+    for line in source.split("\n"):
+        m = match_isolated_hints(line)
+        if m:
+            hints.update(m.group(1).split())
+        else:
+            lines.append(line)
+    if not hints:
         return source
-    source = isolated_hints_pattern.sub("", source)
-    lines = source.split("\n")
     for i in (0, -1):
-        if f" {HINT}" not in lines[i]:
-            lines[i] += f" {HINT}"
-    for hint_string in hint_strings:
-        for hint in hint_string.split():
-            lines[0] += f" {hint}..."
-            lines[-1] += f" ...{hint}"
+        if f" {HINT_COMMENT}" not in lines[i]:
+            lines[i] += f" {HINT_COMMENT}"
+    for hint in sorted(hints):
+        lines[0] += f" {hint}..."
+        lines[-1] += f" ...{hint}"
     return Source("\n".join(lines))
 
 
-replace_hints = regex.compile(fr"\s*{HINT} .*").sub
+replace_hints = regex.compile(fr"\s*{HINT_COMMENT} .*").sub
 
 
 def remove_hints(source: Source) -> Source:
@@ -154,7 +158,7 @@ def remove_hints(source: Source) -> Source:
 if __name__ == "__main__":
     source = open("../Python/maths/matrix_exponentiation.py").read()
     lines = source.split("\n")
-    lines[13] += f" {HINT} test"
+    lines[13] += f" {HINT_COMMENT} test"
     source = Source("\n".join(lines))
     print(source)
     print("-" * 80)

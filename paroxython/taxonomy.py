@@ -35,8 +35,7 @@ class Taxonomy:
             if is_literal(label_pattern):
                 self.literal_label_names[LabelName(label_pattern)].append(TaxonName(taxon_name))
             else:
-                rex = regex.compile(label_pattern + "$")
-                self.compiled_label_names.append((rex, taxon_name))
+                self.compiled_label_names.append((regex.compile(label_pattern), taxon_name))
 
     cache: Dict[LabelName, TaxonNames] = {}
 
@@ -49,7 +48,7 @@ class Taxonomy:
             else:
                 cache[label_name] = []
                 for (rex, taxon_name) in self.compiled_label_names:
-                    if rex.match(label_name):
+                    if rex.fullmatch(label_name):
                         cache[label_name].append(rex.sub(taxon_name, label_name))
         return cache[label_name]
 

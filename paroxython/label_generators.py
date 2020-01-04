@@ -8,7 +8,7 @@ from program_parser import ProgramParser
 
 
 def generate_labeled_sources(directory: str, *args, **kargs) -> Iterator[Source]:
-    """For each program, yield its labeled source."""
+    """For each program, yield its source with its labels in comment."""
     parse = ProgramParser()
     separator = "-" * 88
     for program in generate_programs(directory, *args, **kargs):

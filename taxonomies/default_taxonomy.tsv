@@ -11,6 +11,7 @@ call/method/sequence/mutable/\1/	method_call:(append|clear|copy|extend|insert|po
 call/method/sequence/mutable/list/\1/	method_call:(sort)
 call/method/sequence/string/\1/	method_call:(casefold|center|count|encode|endswith|expandtabs|format_map|index|isalnum|isalpha|isascii|isdecimal|isdigit|isidentifier|isnumeric|isprintable|isspace|istitle|isupper|join|ljust|lower|lstrip|partition|replace|rfind|rindex|rjust|rpartition|rsplit|rstrip|strip|title|upper|zfill)
 call/method/set/\1/	method_call:(add|clear|copy|difference_update|difference|discard|intersection_update|intersection|isdisjoint|issubset|issuperset|pop|remove|symmetric_difference_update|symmetric_difference|union|update)
+category/\1/	category:(.+)
 control_flow/conditional/	if
 control_flow/conditional/else/	if_else
 control_flow/conditional/else/chained/	if_elif
@@ -51,6 +52,9 @@ operator/bitwise/xor/	binary_operator:BitXor
 operator/boolean/and/	boolean_operator:And
 operator/boolean/not/	unary_operator:Not
 operator/boolean/or/	boolean_operator:Or
+operator/boolean/short_circuit/	short_circuit
+operator/boolean/and/short_circuit/	short_circuit:And
+operator/boolean/or/short_circuit/	short_circuit:Or
 operator/division/	binary_operator:Div
 operator/integer_division/	binary_operator:FloorDiv
 operator/minus/	unary_operator:USub
@@ -94,9 +98,6 @@ type/elementary/string/	literal:Str
 variable/assignment/augmented/	augmented_assignment
 variable/assignment/chained/	chained_assignment
 -- EOF	
-test/equality/chained	
-test/inequality/chained	
-operator/boolean/short_circuit	
 operator/addition/concatenation/list	
 operator/addition/concatenation/string	
 operator/multiplication/replication/list	
@@ -106,11 +107,6 @@ IO/standard/input
 IO/standard/print	
 call/function/other	
 call/function/other/predicate	
-category/computability	
-category/fun	
-category/game	
-category/number_theory	
-category/text_processing	
 class_definition	
 control_flow/conditional/nested	
 control_flow/loop/non_sequential	
@@ -178,7 +174,6 @@ type/elementary/string
 type/elementary/string/newline	
 type/elementary/string/null	
 variable/assignment/argument	
-variable/assignment/augmented	
 variable/assignment/augmented/subscript	
 variable/assignment/iteration_variable	
 variable/assignment/iteration_variable/tuple	
@@ -190,3 +185,6 @@ variable/scope/local
 variable/scope/local/argument	
 variable/scope/outer	
 variable/scope/shadowing	
+
+test/equality/chained	find comparison_chained and two comparison_operator:Eq on the same line?
+test/inequality/chained	idem?

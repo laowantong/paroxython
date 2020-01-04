@@ -70,7 +70,8 @@
       },
       "taxons": {
         "call/function/builtin/input/": [[1,1]],
-        "call/function/builtin/print/": [[2,2]]
+        "call/function/builtin/print/": [[2,2]],
+        "type/elementary/string/": [[2,2]]
       }
     }
   },
@@ -185,6 +186,9 @@
       "tests/data/programs/function_definition.py"
     ],
     "call/function/builtin/input/": [
+      "tests/data/programs/loop.py"
+    ],
+    "type/elementary/string/": [
       "tests/data/programs/loop.py"
     ]
   }

@@ -8,8 +8,7 @@ from paroxython.taxonomy import Taxonomy
 from paroxython.label_generators import Label, Program
 
 t = Taxonomy("tests/data/test_taxonomy.tsv")
-S = lambda i, j: Span([i, j])  # shorten Span([i, j])
-# pytest.main(args=["-q"])
+S = lambda i, j: Span([i, j])  # shortcut for Span([i, j])
 
 
 def test_initial_values():

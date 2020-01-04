@@ -663,7 +663,7 @@ def kthPermutation(k, n): # function:kthPermutation (-> +13)
     factorials = [1] # assignment, int_literal, literal:List, literal:Num
     for i in range(2, n): # for_range_start (-> +1), function_call:range, int_literal, literal:Num
         factorials.append(factorials[-1] * i) # binary_operator:Mult, index, int_literal, literal:Num, method_call:append, negative_index:-1
-    assert 0 <= k < factorials[-1] * n, "k out of bounds" # assertion, binary_operator:Mult, chained_comparison:2, comparison_operator:LtE, index, int_literal, literal:Num, literal:Str, negative_index:-1
+    assert 0 <= k < factorials[-1] * n, "k out of bounds" # assertion, binary_operator:Mult, chained_comparison:2, comparison_operator:Lt, comparison_operator:LtE, index, int_literal, literal:Num, literal:Str, negative_index:-1
     permutation = [] # assignment, literal:List
     elements = list(range(n)) # assignment, composition, function_call:list, function_call:range
     while factorials:

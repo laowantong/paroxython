@@ -22,6 +22,22 @@ fizz = [
 ] # paroxython: ...hint_3 ...hint_5
 >>>
 
+<<< some trailing isolated hints
+foo = bar # paroxython: hint_1 hint_2
+fizz = [
+    "foo",
+    "bar", # paroxython: hint_3
+] # paroxython: hint_4
+# paroxython: hint_5
+# paroxython: hint_6
+---
+foo = bar # paroxython: hint_1 hint_2 hint_5... hint_6...
+fizz = [
+    "foo",
+    "bar", # paroxython: hint_3
+] # paroxython: hint_4 ...hint_5 ...hint_6
+>>>
+
 <<< no isolated hints
 foo = bar # paroxython: hint_1 hint_2
 fizz = [

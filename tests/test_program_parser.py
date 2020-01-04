@@ -55,35 +55,35 @@ examples = []
 for match in extract_examples(parse.ref_path):
     label_name = match.group(1)
     source = match.group(2)
-    results = list(zip(match.captures("LABELS"), match.captures("LINES")))
-    examples.append((label_name, source, results))
-
-
-@pytest.mark.parametrize("label_name, source, results", examples)
-def test_example(label_name, source, results):
     source = regex.sub(r"(?m)^.{1,4}", "", source)
     source = centrifugate_hints(source)
     (addition, deletion) = collect_hints(source)
     source = remove_hints(source)
-    actual = dict(parse(Program(source=source, addition=addition, deletion=deletion)))
-    keys = set(actual.keys())
-    for (expected_label_name, expected_spans) in results:
+    actual_results = dict(parse(Program(source=source, addition=addition, deletion=deletion)))
+    expected_results = list(zip(match.captures("LABELS"), match.captures("LINES")))
+    examples.append((label_name, actual_results, expected_results))
+
+
+@pytest.mark.parametrize("label_name, actual_results, expected_results", examples)
+def test_example(label_name, actual_results, expected_results):
+    keys = set(actual_results.keys())
+    for (expected_label_name, expected_spans) in expected_results:
         assert expected_label_name in keys
-        actual_spans = ", ".join(map(str, actual[expected_label_name]))
+        actual_spans = ", ".join(map(str, actual_results[expected_label_name]))
         assert actual_spans == expected_spans
         keys.discard(expected_label_name)
     n = len(label_name)
     for expected_label_name in keys:
         if expected_label_name.partition(":")[0] == label_name:
-            actual_spans = ", ".join(map(str, actual[expected_label_name]))
+            actual_spans = ", ".join(map(str, actual_results[expected_label_name]))
             message = f"{expected_label_name} unexpectedly appears on {actual_spans}"
             assert not expected_label_name[n:], message
 
 
 def test_at_least_one_example_is_provided_for_each_construct():
     expected = set(parse.constructs)
-    actual = {label_name.partition(":")[0] for (label_name, _, _) in examples}
-    assert actual.issuperset(expected)
+    actual_results = {label_name.partition(":")[0] for (label_name, _, _) in examples}
+    assert actual_results.issuperset(expected)
 
 
 def test_malformed_example():
@@ -94,12 +94,12 @@ def test_malformed_example():
 
 def test_failed_matches():
     source = "a = 42"
-    actual = dict(parse(Program(source=source), yield_failed_matches=True))
-    print(actual)
-    assert actual.pop("assignment")[0].to_couple() == (1, 1)
-    assert actual.pop("global_variable_definition")[0].to_couple() == (1, 1)
-    assert actual.pop("literal:Num")[0].to_couple() == (1, 1)
-    assert actual.pop("int_literal")[0].to_couple() == (1, 1)
-    assert actual.pop("suggest_constant_definition")[0].to_couple() == (1, 1)
-    for spans in actual.values():
+    actual_results = dict(parse(Program(source=source), yield_failed_matches=True))
+    print(actual_results)
+    assert actual_results.pop("assignment")[0].to_couple() == (1, 1)
+    assert actual_results.pop("global_variable_definition")[0].to_couple() == (1, 1)
+    assert actual_results.pop("literal:Num")[0].to_couple() == (1, 1)
+    assert actual_results.pop("int_literal")[0].to_couple() == (1, 1)
+    assert actual_results.pop("suggest_constant_definition")[0].to_couple() == (1, 1)
+    for spans in actual_results.values():
         assert not spans
