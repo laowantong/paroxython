@@ -7,6 +7,7 @@ import regex  # type: ignore
 import context
 from paroxython.program_parser import ProgramParser
 from paroxython.declarations import Program
+from preprocess_source import cleanup_factory, centrifugate_hints, collect_hints, remove_hints
 
 
 def generate_toc(text):
@@ -61,7 +62,10 @@ for match in extract_examples(parse.ref_path):
 @pytest.mark.parametrize("label_name, source, results", examples)
 def test_example(label_name, source, results):
     source = regex.sub(r"(?m)^.{1,4}", "", source)
-    actual = dict(parse(Program(source=source)))
+    source = centrifugate_hints(source)
+    (addition, deletion) = collect_hints(source)
+    source = remove_hints(source)
+    actual = dict(parse(Program(source=source, addition=addition, deletion=deletion)))
     keys = set(actual.keys())
     for (expected_label_name, expected_spans) in results:
         assert expected_label_name in keys
@@ -79,7 +83,7 @@ def test_example(label_name, source, results):
 def test_at_least_one_example_is_provided_for_each_construct():
     expected = set(parse.constructs)
     actual = {label_name.partition(":")[0] for (label_name, _, _) in examples}
-    assert actual == expected
+    assert actual.issuperset(expected)
 
 
 def test_malformed_example():

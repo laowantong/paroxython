@@ -44,6 +44,8 @@ class ProgramParser:
         for (label_name, pattern) in find_all_constructs(text):
             if label_name in self.constructs:
                 raise ValueError(f"Duplicated name '{label_name}'!")  # pragma: no cover
+            if pattern == "No pattern provided.":
+                continue
             self.constructs[label_name] = regex.compile(f"(?mx){pattern}")
 
     def __call__(self, program: Program, yield_failed_matches: bool = False,) -> Iterator[Label]:

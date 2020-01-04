@@ -19,6 +19,7 @@
       - [Construct `comparison_operator`](#construct-comparison_operator)
       - [Construct `chained_comparison`](#construct-chained_comparison)
       - [Construct `divisibility_test`](#construct-divisibility_test)
+      - [Construct `short_circuit`](#construct-short_circuit)
   - [Calls](#calls)
       - [Construct `function_call`](#construct-function_call)
       - [Construct `method_call`](#construct-method_call)
@@ -596,6 +597,37 @@ Match the so-called ternary operator.
 | `divisibility_test:3` | 3 |
 | `divisibility_test:4` | 4 |
 | `divisibility_test:5` | 5 |
+
+--------------------------------------------------------------------------------
+
+#### Construct `short_circuit`
+
+When the value of the left operand suffices to determine the value of a boolean expression, short-circuit evaluation avoids evaluating the right operand. This behaviour is sometimes desirable or/and exploited, but currently, Paroxython cannot detect such cases: it is up to the programmer to explicit their intention by adding a comment `# paroxython: short_circuit`.
+
+##### Regex
+
+```re
+No pattern provided.
+```
+
+##### Example
+
+```python
+1   def insertion_sort(a):
+2       for i in range(1, len(a)):
+3           aux = a[i]
+4           j = i
+5           while j > 0 and a[j-1] > aux:  # paroxython: short_circuit
+6               a[j] = a[j-1]
+7               j -= 1
+8           a[j] = aux
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `short_circuit` | 5 |
 
 --------------------------------------------------------------------------------
 
