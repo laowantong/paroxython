@@ -451,6 +451,8 @@ In the AST, an imaginary literal contains the same symbols as a floating point l
 
 #### Construct `conditional_expression`
 
+Match the so-called ternary operator.
+
 ##### Regex
 
 ```re
@@ -510,9 +512,8 @@ In the AST, an imaginary literal contains the same symbols as a floating point l
 ##### Regex
 
 ```re
-           ^(.*)/_type='Compare'
-\n(?:\1.+\n)*?\1/ops/0/_type='(?P<SUFFIX>.+)'
-\n(?:\1.+\n)*?\1/comparators/0/lineno=(?P<LINE>\d+)
+           ^(.*)/ops/        (?P<_1>\d+)/_type='(?P<SUFFIX>Eq|Lt|LtE|Gt|GtE|In|NotIn|NotEq|Is|IsNot)'
+\n(?:\1.+\n)*?\1/comparators/(?P=_1)    /lineno=(?P<LINE>\d+)
 ```
 
 ##### Example
@@ -529,7 +530,7 @@ In the AST, an imaginary literal contains the same symbols as a floating point l
 
 | Label | Lines |
 |:--|:--|
-| `comparison_operator:Eq` | 1, 2 |
+| `comparison_operator:Eq` | 1, 2, 2 |
 | `comparison_operator:In` | 4 |
 
 --------------------------------------------------------------------------------
@@ -1697,7 +1698,7 @@ Iterate over index numbers of a collection.
 ```re
            ^(.*)/_type='For'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
-\n(?:\1.+\n)* \1/(?P<_1>(?:body|orelse)/\d+)/_type='For'
+\n(?:\1.+\n)* \1/(?:body|orelse)/\d+/_type='For'
 \n(?:\1.+\n)* \1/.*/lineno=(?P<LINE>\d+)
 ```
 

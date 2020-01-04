@@ -60,6 +60,7 @@ operator/percent/modulo/	binary_operator:Mod
 operator/plus/	unary_operator:UAdd
 operator/power/	binary_operator:Pow
 operator/substraction/	binary_operator:Sub
+operator/ternary/	conditional_expression
 pattern/elements/accumulate/	accumulate_elements:.+
 pattern/elements/filter/	filter_for
 pattern/elements/find/best/	find_best_element
@@ -86,6 +87,9 @@ type/container/tuple/	literal:Tuple
 type/elementary/boolean/	literal:(True|False)
 type/elementary/null/	literal:None
 type/elementary/number/	literal:Num
+type/elementary/number/int	int_literal
+type/elementary/number/float	float_literal
+type/elementary/number/complex	imaginary_literal
 type/elementary/string/	literal:Str
 variable/assignment/augmented/	augmented_assignment
 variable/assignment/chained/	chained_assignment
@@ -136,7 +140,6 @@ library/standard/random/randrange
 library/standard/random/shuffle	
 library/third_party/ast/literal_eval	
 library/third_party/num2words/num2words	
-operator/ternary	
 pattern/elements/accumulate/collect	
 pattern/elements/accumulate/count	
 pattern/elements/accumulate/find_best	

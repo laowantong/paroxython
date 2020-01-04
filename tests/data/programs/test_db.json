@@ -43,7 +43,7 @@
         "test/divisibility/parity/": [[4,4]],
         "test/equality/": [[4,4]],
         "test/equality/not/": [[2,2]],
-        "type/elementary/number/": [[2,2],[4,4],[7,7]]
+        "type/elementary/number/int": [[2,2],[4,4],[5,5],[7,7]]
       }
     },
     "tests/data/programs/function_definition.py": {
@@ -57,7 +57,7 @@
       },
       "taxons": {
         "operator/addition/": [[2,2]],
-        "type/elementary/number/": [[2,2]]
+        "type/elementary/number/int": [[2,2]]
       }
     },
     "tests/data/programs/loop.py": {
@@ -70,8 +70,7 @@
       },
       "taxons": {
         "call/function/builtin/input/": [[1,1]],
-        "call/function/builtin/print/": [[2,2]],
-        "type/elementary/string/": [[2,2]]
+        "call/function/builtin/print/": [[2,2]]
       }
     }
   },
@@ -181,14 +180,11 @@
     "test/equality/not/": [
       "tests/data/programs/collatz_print.py"
     ],
-    "type/elementary/number/": [
+    "type/elementary/number/int": [
       "tests/data/programs/collatz_print.py",
       "tests/data/programs/function_definition.py"
     ],
     "call/function/builtin/input/": [
-      "tests/data/programs/loop.py"
-    ],
-    "type/elementary/string/": [
       "tests/data/programs/loop.py"
     ]
   }
