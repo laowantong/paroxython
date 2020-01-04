@@ -6,7 +6,17 @@ import regex  # type: ignore
 from preprocess_source import cleanup_factory, centrifugate_hints, collect_hints, remove_hints
 from declarations import Program, Source
 
-match_excluded = regex.compile(r"__init__\.py|setup\.py|.*[-_]tests?\.py").match
+match_excluded = regex.compile(
+    r"""(?x)
+    __init__\.py
+    |
+    setup\.py
+    |
+    .*[-_]tests?\.py
+    |
+    quiz_.*\.py
+"""
+).match
 
 
 def generate_programs(directory: str, strategy="strip_docs") -> Iterator[Program]:
