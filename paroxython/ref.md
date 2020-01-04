@@ -2419,7 +2419,7 @@ Accumulate the inputs until a sentinel value is encountered (accumulation expres
 
 ```python
 1   def accumulate_inputs():
-2       acc = neutral
+2       acc = seed
 3       while True:
 4           x = read()
 5           if is_sentinel(x, y):
@@ -2427,7 +2427,7 @@ Accumulate the inputs until a sentinel value is encountered (accumulation expres
 7           acc = combine(x, acc)
 8
 9   def accumulate_inputs():
-10      acc = neutral
+10      acc = seed
 11      while True:
 12          x = read()
 13          if x > y:
@@ -2435,7 +2435,7 @@ Accumulate the inputs until a sentinel value is encountered (accumulation expres
 15          acc += abs(x)
 16
 17  def accumulate_inputs():
-18      acc = neutral
+18      acc = seed
 19      while True:
 20          x = read()
 21          if x > y:
@@ -2443,7 +2443,7 @@ Accumulate the inputs until a sentinel value is encountered (accumulation expres
 23          foobar(acc, x)
 24
 25  def accumulate_inputs():
-26      acc = neutral
+26      acc = seed
 27      while True:
 28          x = read()
 29          if x > y:
@@ -2468,7 +2468,7 @@ Accumulate the inputs until a sentinel value is encountered (accumulation expres
 
 #### Construct `category`
 
-It may be interesting to indicate the category of the program with an all-encompassing hint `# paroxython: category` placed in its own line. Examples of possible categories are:
+It may be interesting to indicate the category of the program with an all-encompassing hint `# paroxython: category` placed on its own line. Examples of possible categories are:
 
 - `abstract`: a sort, a search, an algorithmic pattern, etc.
 - `biology`
