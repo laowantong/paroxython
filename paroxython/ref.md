@@ -53,7 +53,7 @@
       - [Construct `if`](#construct-if)
       - [Construct `if_else`](#construct-if_else)
       - [Construct `if_elif`](#construct-if_elif)
-      - [Construct `nested_if`](#construct-nested_if)
+      - [Construct `nested_ifs`](#construct-nested_ifs)
   - [Iterations](#iterations)
       - [Construct `for_each`](#construct-for_each)
       - [Construct `for_range_stop`](#construct-for_range_stop)
@@ -1519,7 +1519,7 @@ Function enclosing the definition of an inner function and returning it. Beware 
 
 --------------------------------------------------------------------------------
 
-#### Construct `nested_if`
+#### Construct `nested_ifs`
 
 ##### Definition
 
@@ -1548,7 +1548,7 @@ WHERE name = "if"
 
 | Label | Lines |
 |:--|:--|
-| `nested_if` | 1-5 |
+| `nested_ifs` | 1-5 |
 
 --------------------------------------------------------------------------------
 

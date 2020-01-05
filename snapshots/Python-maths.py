@@ -602,7 +602,7 @@ def exactPrimeFactorCount(n): # function:exactPrimeFactorCount (-> +15)
         while n % 2 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, evolve_state (-> +1), int_literal, literal:Num
             n = int(n / 2) # assignment, binary_operator:Div, function_call:int, int_literal, literal:Num
     i = 3 # assignment, int_literal, literal:Num, suggest_constant_definition
-    while i <= int(math.sqrt(n)): # comparison_operator:LtE, composition, evolve_state (-> +4), function_call:int, method_call:sqrt
+    while i <= int(math.sqrt(n)): # comparison_operator:LtE, composition, evolve_state (-> +5), function_call:int, method_call:sqrt
         if n % i == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test, if (-> +3), int_literal, literal:Num
             count += 1 # augmented_assignment, int_literal, literal:Num
             while n % i == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test, int_literal, literal:Num
@@ -623,14 +623,14 @@ def is_square_free(factors: List[int]) -> bool: # function:is_square_free, index
 # ../Python/maths/jaccard_similarity.py
 # ----------------------------------------------------------------------------------------
 def jaccard_similariy(setA, setB, alternativeUnion=False): # function:jaccard_similariy (-> +14), function_with_default_positional_arguments:jaccard_similariy (-> +14), literal:False
-    if isinstance(setA, set) and isinstance(setB, set): # boolean_operator:And, function_call:isinstance, if (-> +6), nested_if (-> +6)
+    if isinstance(setA, set) and isinstance(setB, set): # boolean_operator:And, function_call:isinstance, if (-> +6), nested_ifs (-> +6)
         intersection = len(setA.intersection(setB)) # assignment, composition, function_call:len, method_call:intersection
         if alternativeUnion: # if (-> +3), if_else (-> +3), suggest_conditional_expression (-> +3)
             union = len(setA) + len(setB) # assignment, binary_operator:Add, function_call:len
         else:
             union = len(setA.union(setB)) # assignment, composition, function_call:len, method_call:union
         return intersection / union # binary_operator:Div
-    if isinstance(setA, (list, tuple)) and isinstance(setB, (list, tuple)): # boolean_operator:And, function_call:isinstance, if (-> +6), nested_if (-> +6)
+    if isinstance(setA, (list, tuple)) and isinstance(setB, (list, tuple)): # boolean_operator:And, function_call:isinstance, if (-> +6), nested_ifs (-> +6)
         intersection = [element for element in setA if element in setB] # assignment, comparison_operator:In, comprehension:List, comprehension_for_count:1, filtered_comprehension
         if alternativeUnion: # if (-> +3), if_else (-> +3), suggest_conditional_expression (-> +3)
             union = len(setA) + len(setB) # assignment, binary_operator:Add, function_call:len
@@ -1123,7 +1123,7 @@ def sieve(n): # function:sieve (-> +33)
     temp = [True] * (end + 1) # assignment, binary_operator:Add, binary_operator:Mult, int_literal, literal:List, literal:Num, literal:True
     prime = [] # assignment, literal:List
     while start <= end: # comparison_operator:LtE
-        if temp[start] is True: # comparison_operator:Is, if (-> +4), index, literal:True, nested_if (-> +4)
+        if temp[start] is True: # comparison_operator:Is, if (-> +4), index, literal:True, nested_ifs (-> +4)
             in_prime.append(start) # method_call:append
             for i in range(start * start, end + 1, start): # binary_operator:Add, binary_operator:Mult, for_range_step (-> +2), function_call:range, int_literal, literal:Num
                 if temp[i] is True: # comparison_operator:Is, if (-> +1), index, literal:True
@@ -1170,7 +1170,7 @@ def sieve(n): # function:sieve (-> +15)
     start = 2 # assignment, int_literal, literal:Num
     end = int(math.sqrt(n)) # assignment, composition, function_call:int, method_call:sqrt
     while start <= end: # comparison_operator:LtE
-        if l[start] is True: # comparison_operator:Is, if (-> +4), index, literal:True, nested_if (-> +4)
+        if l[start] is True: # comparison_operator:Is, if (-> +4), index, literal:True, nested_ifs (-> +4)
             prime.append(start) # method_call:append
             for i in range(start * start, n + 1, start): # binary_operator:Add, binary_operator:Mult, for_range_step (-> +2), function_call:range, int_literal, literal:Num
                 if l[i] is True: # comparison_operator:Is, if (-> +1), index, literal:True
