@@ -5,9 +5,9 @@ import pytest
 import regex  # type: ignore
 
 import context
-from paroxython.program_filter import ProgramFilter
+from paroxython.filter_programs import ProgramFilter
 
-text = Path("tests/data/taxons_and_programs.txt").read_text()
+text = Path("tests/data/dummy_taxons_and_programs.txt").read_text()
 
 taxon_names = regex.search(r"(?ms)^TAXONS\n(.+?)\n\n", text)[1].split()
 programs = regex.findall(r"(?ms)^(prg\d+)\n(.+?)\n\n", text)

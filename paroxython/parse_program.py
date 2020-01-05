@@ -5,8 +5,8 @@ from typing import Callable, Dict, Iterator
 
 import regex  # type: ignore
 
-from declarations import Label, LabelName, LabelsSpans, Source, Program
-from flatten import flatten
+from user_types import Label, LabelName, LabelsSpans, Source, Program
+from flatten_ast import flatten_ast
 from span import Span
 
 
@@ -62,7 +62,7 @@ class ProgramParser:
             tree = ast.parse(program.source)
         except (SyntaxError, ValueError):
             return print("Warning: unable to construct the AST")
-        self.flat_ast = simplify_negative_literals(flatten(tree))
+        self.flat_ast = simplify_negative_literals(flatten_ast(tree))
 
         for (label_name, rex) in self.constructs.items():
             result: LabelsSpans = defaultdict(list)

@@ -7,7 +7,7 @@ from typing import Any, Dict, List, Tuple, overload
 import regex  # type: ignore
 from typing_extensions import TypedDict  # from Python 3.8, import directly from typing
 
-from declarations import (
+from user_types import (
     LabelName,
     Labels,
     PathTaxons,
@@ -18,8 +18,8 @@ from declarations import (
     TaxonName,
     Taxons,
 )
-from label_generators import generate_labeled_programs
-from taxonomy import Taxonomy
+from generate_labels import generate_labeled_programs
+from map_taxonomy import Taxonomy
 
 Span = Tuple[int, int]
 LabelsSpans = Dict[LabelName, List[Span]]

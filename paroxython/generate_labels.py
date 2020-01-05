@@ -2,9 +2,9 @@ from bisect import insort
 from collections import defaultdict
 from typing import Iterator, List, Set
 
-from declarations import Label, LabelsSpans, Program, Source
-from program_generator import generate_programs
-from program_parser import ProgramParser
+from user_types import Label, LabelsSpans, Program, Source
+from generate_programs import generate_programs
+from parse_program import ProgramParser
 
 
 def generate_labeled_sources(directory: str, *args, **kargs) -> Iterator[Source]:

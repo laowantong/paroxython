@@ -1,7 +1,7 @@
 import pytest
 
 import context
-from paroxython.program_generator import generate_programs
+from paroxython.generate_programs import generate_programs
 
 
 def test_generate_programs():

@@ -4,10 +4,10 @@ import pytest
 
 import context
 from paroxython.span import Span
-from paroxython.taxonomy import Taxonomy
-from paroxython.label_generators import Label, Program
+from paroxython.map_taxonomy import Taxonomy
+from paroxython.generate_labels import Label, Program
 
-t = Taxonomy("tests/data/test_taxonomy.tsv")
+t = Taxonomy("tests/data/dummy_taxonomy.tsv")
 S = lambda i, j: Span([i, j])  # shortcut for Span([i, j])
 
 

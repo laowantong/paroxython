@@ -6,18 +6,18 @@ node [shape=box fontname=Courier style=filled fillcolor=cornsilk]
 "source files" [shape=folder fillcolor=moccasin]
 "snapshots" [shape=folder fillcolor=moccasin]
 make_db -> "db.json"
-"db.json" -> program_filter
-"ref.md" -> program_parser
-"source files" -> program_generator
-"default_taxonomy.tsv" -> taxonomy
+"db.json" -> filter_programs
+"ref.md" -> parse_program
+"source files" -> generate_programs
+"default_taxonomy.tsv" -> map_taxonomy
 make_snapshots -> "snapshots"
-flatten -> program_parser
-span -> program_parser
-preprocess_source -> program_generator
 span -> preprocess_source
-label_generators -> make_db
-taxonomy -> make_db
-label_generators -> make_snapshots
-program_generator -> label_generators
-program_parser -> label_generators
+generate_programs -> generate_labels
+parse_program -> generate_labels
+generate_labels -> make_db
+map_taxonomy -> make_db
+flatten_ast -> parse_program
+span -> parse_program
+generate_labels -> make_snapshots
+preprocess_source -> generate_programs
 }

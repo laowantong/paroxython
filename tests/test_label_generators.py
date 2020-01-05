@@ -3,7 +3,7 @@ from pathlib import Path
 import pytest
 
 import context
-from paroxython.label_generators import (
+from paroxython.generate_labels import (
     generate_labeled_sources,
     generate_programs,
 )

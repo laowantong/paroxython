@@ -4,7 +4,7 @@ from typing import Callable, Dict, List, Set, NewType
 
 import regex  # type: ignore
 
-from declarations import TaxonName, TaxonNames, ProgramName, ProgramNames
+from user_types import TaxonName, TaxonNames, ProgramName, ProgramNames
 
 
 ProgramPatterns = List[str]

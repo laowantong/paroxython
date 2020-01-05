@@ -1,11 +1,11 @@
 from collections import defaultdict
 from token import DEDENT, INDENT, NEWLINE, STRING
 from tokenize import COMMENT, NL, generate_tokens
-from typing import Callable, Dict, List, Tuple
+from typing import Callable, Dict, List, Tuple, Set
 
 import regex  # type: ignore
 
-from declarations import LabelName, LabelsSpans, Source
+from user_types import LabelName, LabelsSpans, Source
 from span import Span
 
 HINT_COMMENT = "# paroxython:"
@@ -130,7 +130,7 @@ match_isolated_hints = regex.compile(fr"\s*{HINT_COMMENT} (.+)").match
 def centrifugate_hints(source: Source) -> Source:
     """Transform the isolated hints into all-encompassing hints."""
     lines = []
-    hints = set()
+    hints: Set[str] = set()
     for line in source.split("\n"):
         m = match_isolated_hints(line)
         if m:

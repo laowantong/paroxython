@@ -1,7 +1,7 @@
 import time
 from pathlib import Path
 
-from label_generators import generate_labeled_sources
+from generate_labels import generate_labeled_sources
 
 # fmt: off
 DIRECTORIES = [

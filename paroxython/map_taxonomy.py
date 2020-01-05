@@ -5,7 +5,7 @@ from typing import Dict, Iterator, List
 
 import regex  # type: ignore
 
-from declarations import (
+from user_types import (
     LabelName,
     Labels,
     Program,
@@ -87,7 +87,7 @@ class Taxonomy:
 
 
 if __name__ == "__main__":
-    generate_labeled_programs = __import__("label_generators").generate_labeled_programs
+    generate_labeled_programs = __import__("generate_labels").generate_labeled_programs
     chain = __import__("itertools").chain
     DIRECTORIES = [
         "../Python/project_euler",
