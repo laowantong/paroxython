@@ -93,7 +93,7 @@ class ProgramParser:
         yield from labels
 
     def inferred_labels(self, labels: Labels) -> Iterator[Label]:
-        self.c.execute("CREATE TABLE t (id INTEGER, name TEXT, start INTEGER, end INTEGER)")
+        self.c.execute("CREATE TABLE t (id INT, name TEXT, span_start INT, span_end INT)")
         i = itertools.count()
         self.c.executemany(
             "INSERT INTO t VALUES (?,?,?,?)",

@@ -1178,13 +1178,14 @@ Update a variable by negating it.
 
 ```sql
 SELECT "procedure:" || substr(name, 10),
-       t.start,
-       t.end
+       span_start,
+       span_end
 FROM t
 WHERE name glob "function:*"
-  AND
-    (START, END) NOT IN
-    (SELECT START, END
+  AND (span_start,
+       span_end) NOT IN
+    (SELECT span_start,
+            span_end
      FROM t
      WHERE name glob "function_returning_a_value:*" )
 ```
@@ -1608,14 +1609,14 @@ Function enclosing the definition of an inner function and returning it. Beware 
 
 ```sql
 SELECT "nested_ifs",
-       t1.start,
-       t1.end
+       t1.span_start,
+       t1.span_end
 FROM t AS t1
 JOIN t AS t2 USING(name)
 WHERE name = "if"
   AND t1.id != t2.id
-  AND t1.start <= t2.start
-  AND t2.end <= t1.end
+  AND t1.span_start <= t2.span_start
+  AND t2.span_end <= t1.span_end
 ```
 
 ##### Example
