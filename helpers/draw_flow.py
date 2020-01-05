@@ -31,4 +31,4 @@ Path(f"{base}.dot").write_text(
         ]
     )
 )
-os.system(f"dot -Tpng {base}.dot > {base}.png")
+os.system(f"dot -Tpng {base}.dot > {base}.png; rm {base}.dot")

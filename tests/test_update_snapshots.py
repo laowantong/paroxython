@@ -42,7 +42,7 @@ def test_update_taxon_db():
         # "../Algo/programs"
     ]
     # fmt:on
-    programs = chain.from_iterable(generate_labeled_programs(d) for d in DIRECTORIES)
+    programs = chain.from_iterable(map(generate_labeled_programs, DIRECTORIES))
     taxonomy = Taxonomy()
     acc = {}
     for (path, taxons) in taxonomy(programs):
