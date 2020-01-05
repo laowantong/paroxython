@@ -7,7 +7,12 @@ import regex  # type: ignore
 import context
 from paroxython.parse_program import ProgramParser
 from paroxython.user_types import Program
-from preprocess_source import cleanup_factory, centrifugate_hints, collect_hints, remove_hints
+from paroxython.preprocess_source import (
+    cleanup_factory,
+    centrifugate_hints,
+    collect_hints,
+    remove_hints,
+)
 
 
 def generate_toc(text):
