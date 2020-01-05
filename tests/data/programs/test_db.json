@@ -29,6 +29,7 @@
         "if_else": [[4,7]],
         "int_literal": [[2,2],[4,4],[5,5],[7,7]],
         "literal:Num": [[2,2],[4,4],[7,7]],
+        "procedure:print_collatz": [[1,8]],
         "suggest_augmented_assignment": [[5,5]],
         "suggest_conditional_expression": [[4,7]],
         "suggest_constant_definition": [[2,2],[7,7]],
@@ -37,6 +38,7 @@
       "taxons": {
         "call/function/builtin/print/": [[3,3],[8,8]],
         "control_flow/conditional/else/": [[4,7]],
+        "function_definition/procedure/": [[1,8]],
         "operator/addition/": [[7,7]],
         "operator/multiplication/": [[7,7]],
         "operator/percent/modulo/": [[4,4]],
@@ -52,6 +54,7 @@
       "labels": {
         "binary_operator:Add": [[2,2]],
         "function:succ": [[1,2]],
+        "function_returning_a_value:succ": [[1,2]],
         "int_literal": [[2,2]],
         "literal:Num": [[2,2]]
       },
@@ -132,6 +135,9 @@
       "tests/data/programs/collatz_print.py",
       "tests/data/programs/function_definition.py"
     ],
+    "procedure:print_collatz": [
+      "tests/data/programs/collatz_print.py"
+    ],
     "suggest_augmented_assignment": [
       "tests/data/programs/collatz_print.py"
     ],
@@ -147,6 +153,9 @@
     "function:succ": [
       "tests/data/programs/function_definition.py"
     ],
+    "function_returning_a_value:succ": [
+      "tests/data/programs/function_definition.py"
+    ],
     "function_call:input": [
       "tests/data/programs/loop.py"
     ],
@@ -160,6 +169,9 @@
       "tests/data/programs/loop.py"
     ],
     "control_flow/conditional/else/": [
+      "tests/data/programs/collatz_print.py"
+    ],
+    "function_definition/procedure/": [
       "tests/data/programs/collatz_print.py"
     ],
     "operator/addition/": [

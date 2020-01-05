@@ -87,8 +87,8 @@ class ProgramParser:
             if yield_failed_matches and not d:
                 labels.append(Label(label_name, []))
             else:
-                labels.extend(Label(name, spans) for (name, spans) in result.items())
-        labels.extend(Label(name, spans) for (name, spans) in program.addition.items())
+                labels.extend(Label(*item) for item in result.items())
+        labels.extend(Label(*item) for item in program.addition.items())
         labels.extend(self.inferred_labels(labels))
         yield from labels
 
@@ -99,13 +99,16 @@ class ProgramParser:
             "INSERT INTO t VALUES (?,?,?,?)",
             ((next(i), name, span.start, span.end) for (name, spans) in labels for span in spans),
         )
-        for (name, query) in self.queries.items():
+        for query in self.queries.values():
             query_result = list(self.c.execute(query))
             if query_result:
-                yield Label(name, list(map(Span, query_result)))
+                group_by_name: LabelsSpans = defaultdict(list)
+                for (name, start, end) in query_result:
+                    group_by_name[name].append(Span([start, end]))
+                yield from (Label(*item) for item in group_by_name.items())
                 self.c.executemany(
                     "INSERT INTO t VALUES (?,?,?,?)",
-                    ((next(i), name, start, end) for (start, end) in query_result),
+                    ((next(i), name, start, end) for (name, start, end) in query_result),
                 )
         self.c.execute("DROP TABLE t")
 

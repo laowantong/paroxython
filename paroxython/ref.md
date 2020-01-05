@@ -42,6 +42,8 @@
       - [Construct `negation`](#construct-negation)
   - [Function definitions](#function-definitions)
       - [Construct `function`](#construct-function)
+      - [Construct `function_returning_a_value`](#construct-function_returning_a_value)
+      - [Construct `procedure`](#construct-procedure)
       - [Construct `function_with_default_positional_arguments`](#construct-function_with_default_positional_arguments)
       - [Construct `recursive_function`](#construct-recursive_function)
       - [Construct `deeply_recursive_function`](#construct-deeply_recursive_function)
@@ -1131,6 +1133,87 @@ Update a variable by negating it.
 
 --------------------------------------------------------------------------------
 
+#### Construct `function_returning_a_value`
+
+##### Definition
+
+```re
+           ^(.*)/_type='FunctionDef'
+\n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
+\n(?:\1.+\n)*?\1/name='(?P<SUFFIX>.+)'
+\n(?:\1.+\n)* \1/(?P<_1>.+)/_type='Return'
+\n(?:\1.+\n)*?\1/(?P=_1)   /value/lineno=(?P<LINE>\d+)
+\n            \1/(?P=_1)   /value/.+(?<!value=None)$
+(   # capture the line number of the last line of the function (it may appear before Return)
+\n(?:\1.+\n)* \1.+/lineno=(?P<LINE>\d+)
+)?
+```
+
+##### Example
+
+```python
+1   def foo(bar):
+2       if a:
+3           return b
+4       print(c)
+5       return None
+6
+7   def bar(foo):
+8       if a:
+9           return None
+10      print(c)
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `function_returning_a_value:foo` | 1-5 |
+
+--------------------------------------------------------------------------------
+
+#### Construct `procedure`
+
+##### Definition
+
+```sql
+SELECT "procedure:" || substr(name, 10),
+       t.start,
+       t.end
+FROM t
+WHERE name glob "function:*"
+  AND
+    (START, END) NOT IN
+    (SELECT START, END
+     FROM t
+     WHERE name glob "function_returning_a_value:*" )
+```
+
+**Explanation.** Select all functions whose span is not that of a function returning a value.
+
+##### Example
+
+```python
+1   def foo(bar):
+2       if a:
+3           return b
+4       print(c)
+5       return None
+6
+7   def bar(foo):
+8       if a:
+9           return None
+10      print(c)
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `procedure:bar` | 7-10 |
+
+--------------------------------------------------------------------------------
+
 #### Construct `function_with_default_positional_arguments`
 
 ##### Definition
@@ -1524,7 +1607,8 @@ Function enclosing the definition of an inner function and returning it. Beware 
 ##### Definition
 
 ```sql
-SELECT t1.start,
+SELECT "nested_ifs",
+       t1.start,
        t1.end
 FROM t AS t1
 JOIN t AS t2 USING(name)

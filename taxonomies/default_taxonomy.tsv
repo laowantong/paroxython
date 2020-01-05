@@ -37,6 +37,7 @@ function_definition/method/magic/	function:__.+__
 function_definition/nested/	nested_function:.+
 function_definition/nested/closure/	closure:.+
 function_definition/predicate/	function:(is|can|has|are|have)_.+
+function_definition/procedure/	procedure:.+
 function_definition/recursive/	recursive_function
 function_definition/recursive/deep/	deeply_recursive_function
 function_definition/test/	function:.+_tests?
