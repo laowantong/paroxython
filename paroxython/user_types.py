@@ -6,6 +6,7 @@ from span import Span
 # fmt: off
 
 Source = NewType("Source", str)
+Query = NewType("Query", str)
 
 LabelName = NewType("LabelName", str)
 LabelNames = List[LabelName]

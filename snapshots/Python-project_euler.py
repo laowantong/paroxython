@@ -96,7 +96,7 @@ def solution(n): # function:solution (-> +9)
     while a < n: # comparison_operator:Lt
         if a % 3 == 0 or a % 5 == 0: # binary_operator:Mod, boolean_operator:Or, comparison_operator:Eq, divisibility_test:3, divisibility_test:5, if (-> +3), if_elif (-> +3), int_literal, literal:Num, suggest_constant_definition
             result += a # augmented_assignment
-        elif a % 15 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:15, if (-> +1), int_literal, literal:Num, suggest_constant_definition
+        elif a % 15 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:15, int_literal, literal:Num, suggest_constant_definition
             result -= a # augmented_assignment
         a += 1 # augmented_assignment, int_literal, literal:Num
     return result
@@ -109,7 +109,7 @@ def solution(n): # function:solution (-> +7)
     for i in range(n): # accumulate_elements:AugAssign (-> +4), for_range_stop (-> +4), function_call:range
         if i % 3 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:3, if (-> +3), if_elif (-> +3), int_literal, literal:Num, suggest_constant_definition
             result += i # augmented_assignment
-        elif i % 5 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:5, if (-> +1), int_literal, literal:Num, suggest_constant_definition
+        elif i % 5 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:5, int_literal, literal:Num, suggest_constant_definition
             result += i # augmented_assignment
     return result
 
@@ -195,7 +195,7 @@ import math # import:math
 def isprime(no): # function:isprime (-> +9)
     if no == 2: # comparison_operator:Eq, if (-> +3), if_elif (-> +3), int_literal, literal:Num
         return True # literal:True
-    elif no % 2 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, if (-> +1), int_literal, literal:Num
+    elif no % 2 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, int_literal, literal:Num
         return False # literal:False
     sq = int(math.sqrt(no)) + 1 # assignment, binary_operator:Add, composition, function_call:int, int_literal, literal:Num, method_call:sqrt
     for i in range(3, sq, 2): # for_range_step:2 (-> +2), function_call:range, int_literal, literal:Num, suggest_constant_definition, universal_quantifier (-> +3)
@@ -210,21 +210,21 @@ def solution(n): # function:solution (-> +24)
     if n <= 0: # comparison_operator:LtE, if (-> +1), int_literal, literal:Num
         raise ValueError("Parameter n must be greater or equal to one.") # function_call:ValueError, literal:Str, raise_exception:ValueError
     maxNumber = 0 # assignment, int_literal, literal:Num
-    if isprime(n): # function_call:isprime, if (-> +16), if_else (-> +16)
+    if isprime(n): # function_call:isprime, if (-> +16), if_else (-> +16), nested_if (-> +16)
         return n
     else:
         while n % 2 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, evolve_state (-> +1), int_literal, literal:Num
             n = n / 2 # assignment, binary_operator:Div, int_literal, literal:Num, suggest_augmented_assignment
-        if isprime(n): # function_call:isprime, if (-> +11), if_else (-> +11)
+        if isprime(n): # function_call:isprime, if_else (-> +11)
             return int(n) # function_call:int
         else:
             n1 = int(math.sqrt(n)) + 1 # assignment, binary_operator:Add, composition, function_call:int, int_literal, literal:Num, method_call:sqrt
             for i in range(3, n1, 2): # for_range_step:2 (-> +6), function_call:range, int_literal, literal:Num, suggest_constant_definition
-                if n % i == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test, if (-> +5), int_literal, literal:Num
+                if n % i == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test, if (-> +5), int_literal, literal:Num, nested_if (-> +5)
                     if isprime(n / i): # binary_operator:Div, function_call:isprime, if (-> +4), if_elif (-> +4)
                         maxNumber = n / i # assignment, binary_operator:Div
                         break
-                    elif isprime(i): # function_call:isprime, if (-> +1)
+                    elif isprime(i): # function_call:isprime
                         maxNumber = i # assignment
             return maxNumber
 
@@ -278,7 +278,7 @@ def solution(n: int) -> int: # function:solution
 def solution(n): # function:solution (-> +8)
     for number in range(n - 1, 10000, -1): # binary_operator:Sub, find_first_element (-> +6), for_range_step:-1 (-> +7), function_call:range, int_literal, literal:Num, suggest_constant_definition
         strNumber = str(number) # assignment, function_call:str
-        if strNumber == strNumber[::-1]: # comparison_operator:Eq, if (-> +5), int_literal, literal:Num, slice_step
+        if strNumber == strNumber[::-1]: # comparison_operator:Eq, if (-> +5), int_literal, literal:Num, nested_if (-> +5), slice_step
             divisor = 999 # assignment, int_literal, literal:Num, suggest_constant_definition
             while divisor != 99: # comparison_operator:NotEq, evolve_state (-> +3), int_literal, literal:Num, suggest_constant_definition
                 if (number % divisor == 0) and (len(str(int(number / divisor))) == 3): # binary_operator:Div, binary_operator:Mod, boolean_operator:And, comparison_operator:Eq, composition, divisibility_test, function_call:int, function_call:len, function_call:str, if (-> +1), int_literal, literal:Num, suggest_constant_definition
@@ -315,7 +315,7 @@ def solution(n): # function:solution (-> +18)
             if i % j != 0: # binary_operator:Mod, comparison_operator:NotEq, divisibility_test, if (-> +2), int_literal, literal:Num
                 nfound = 1 # assignment, int_literal, literal:Num
                 break
-        if nfound == 0: # comparison_operator:Eq, if (-> +3), int_literal, literal:Num
+        if nfound == 0: # comparison_operator:Eq, if (-> +3), int_literal, literal:Num, nested_if (-> +3)
             if i == 0: # comparison_operator:Eq, if (-> +1), int_literal, literal:Num
                 i = 1 # assignment, int_literal, literal:Num
             return i
@@ -376,9 +376,9 @@ def solution(n): # function:solution (-> +3)
 # ----------------------------------------------------------------------------------------
 from math import sqrt # import_from:math
 def isprime(n): # function:isprime (-> +10)
-    if n == 2: # comparison_operator:Eq, if (-> +8), if_elif (-> +8), int_literal, literal:Num
+    if n == 2: # comparison_operator:Eq, if (-> +8), if_elif (-> +8), int_literal, literal:Num, nested_if (-> +8)
         return True # literal:True
-    elif n % 2 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, if (-> +6), if_else (-> +6), int_literal, literal:Num
+    elif n % 2 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, if_else (-> +6), int_literal, literal:Num
         return False # literal:False
     else:
         sq = int(sqrt(n)) + 1 # assignment, binary_operator:Add, composition, function_call:int, function_call:sqrt, int_literal, literal:Num
@@ -560,8 +560,8 @@ def solution(): # function:solution (-> +7)
     for a in range(300): # for_range_stop (-> +6), function_call:range, int_literal, literal:Num, nested_for (-> +6), suggest_constant_definition
         for b in range(400): # for_range_stop (-> +5), function_call:range, int_literal, literal:Num, nested_for (-> +5), suggest_constant_definition
             for c in range(500): # for_range_stop (-> +4), function_call:range, int_literal, literal:Num, suggest_constant_definition
-                if a < b < c: # chained_comparison:2, comparison_operator:Lt, if (-> +3)
-                    if (a ** 2) + (b ** 2) == (c ** 2): # binary_operator:Add, binary_operator:Pow, comparison_operator:Eq, if (-> +2), int_literal, literal:Num
+                if a < b < c: # chained_comparison:2, comparison_operator:Lt, if (-> +3), nested_if (-> +3)
+                    if (a ** 2) + (b ** 2) == (c ** 2): # binary_operator:Add, binary_operator:Pow, comparison_operator:Eq, if (-> +2), int_literal, literal:Num, nested_if (-> +2)
                         if (a + b + c) == 1000: # binary_operator:Add, comparison_operator:Eq, if (-> +1), int_literal, literal:Num, suggest_constant_definition
                             return a * b * c # binary_operator:Mult
 
@@ -574,7 +574,7 @@ def solution(n): # function:solution (-> +10)
     for a in range(1, n // 3): # binary_operator:FloorDiv, for_range_start (-> +6), function_call:range, int_literal, literal:Num, suggest_constant_definition
         b = (n * n - 2 * a * n) // (2 * n - 2 * a) # assignment, binary_operator:FloorDiv, binary_operator:Mult, binary_operator:Sub, int_literal, literal:Num
         c = n - a - b # assignment, binary_operator:Sub
-        if c * c == (a * a + b * b): # binary_operator:Add, binary_operator:Mult, comparison_operator:Eq, if (-> +3)
+        if c * c == (a * a + b * b): # binary_operator:Add, binary_operator:Mult, comparison_operator:Eq, if (-> +3), nested_if (-> +3)
             d = a * b * c # assignment, binary_operator:Mult
             if d >= product: # comparison_operator:GtE, if (-> +1)
                 product = d # assignment
@@ -835,8 +835,8 @@ def solution(n): # function:solution (-> +17)
     tens_counts = [0, 0, 6, 6, 5, 5, 5, 7, 6, 6] # assignment, int_literal, literal:List, literal:Num, suggest_constant_definition
     count = 0 # assignment, int_literal, literal:Num
     for i in range(1, n + 1): # accumulate_elements:AugAssign (-> +12), binary_operator:Add, for_range_start (-> +12), function_call:range, int_literal, literal:Num
-        if i < 1000: # comparison_operator:Lt, if (-> +11), if_else (-> +11), int_literal, literal:Num, suggest_constant_definition
-            if i >= 100: # comparison_operator:GtE, if (-> +3), int_literal, literal:Num, suggest_constant_definition
+        if i < 1000: # comparison_operator:Lt, if (-> +11), if_else (-> +11), int_literal, literal:Num, nested_if (-> +11), suggest_constant_definition
+            if i >= 100: # comparison_operator:GtE, if (-> +3), int_literal, literal:Num, nested_if (-> +3), suggest_constant_definition
                 count += ones_counts[i // 100] + 7 # augmented_assignment, binary_operator:Add, binary_operator:FloorDiv, index, index_arithmetic, int_literal, literal:Num, suggest_constant_definition
                 if i % 100 != 0: # binary_operator:Mod, comparison_operator:NotEq, divisibility_test:100, if (-> +1), int_literal, literal:Num, suggest_constant_definition
                     count += 3 # augmented_assignment, int_literal, literal:Num, suggest_constant_definition
@@ -883,15 +883,15 @@ def solution(): # function:solution (-> +24)
     sundays = 0 # assignment, int_literal, literal:Num
     while year < 2001: # comparison_operator:Lt, evolve_state (-> +17), int_literal, literal:Num, suggest_constant_definition
         day += 7 # augmented_assignment, int_literal, literal:Num, suggest_constant_definition
-        if (year % 4 == 0 and not year % 100 == 0) or (year % 400 == 0): # binary_operator:Mod, boolean_operator:And, boolean_operator:Or, comparison_operator:Eq, divisibility_test:100, divisibility_test:4, divisibility_test:400, if (-> +10), if_elif (-> +10), int_literal, literal:Num, suggest_constant_definition, unary_operator:Not
+        if (year % 4 == 0 and not year % 100 == 0) or (year % 400 == 0): # binary_operator:Mod, boolean_operator:And, boolean_operator:Or, comparison_operator:Eq, divisibility_test:100, divisibility_test:4, divisibility_test:400, if (-> +10), if_elif (-> +10), int_literal, literal:Num, nested_if (-> +10), suggest_constant_definition, unary_operator:Not
             if day > days_per_month[month - 1] and month != 2: # binary_operator:Sub, boolean_operator:And, comparison_operator:Gt, comparison_operator:NotEq, if (-> +5), if_elif (-> +5), index, index_arithmetic, int_literal, literal:Num
                 month += 1 # augmented_assignment, int_literal, literal:Num
                 day = day - days_per_month[month - 2] # assignment, binary_operator:Sub, index, index_arithmetic, int_literal, literal:Num, suggest_augmented_assignment
-            elif day > 29 and month == 2: # boolean_operator:And, comparison_operator:Eq, comparison_operator:Gt, if (-> +2), int_literal, literal:Num, suggest_constant_definition
+            elif day > 29 and month == 2: # boolean_operator:And, comparison_operator:Eq, comparison_operator:Gt, int_literal, literal:Num, suggest_constant_definition
                 month += 1 # augmented_assignment, int_literal, literal:Num
                 day = day - 29 # assignment, binary_operator:Sub, int_literal, literal:Num, suggest_augmented_assignment, suggest_constant_definition
         else:
-            if day > days_per_month[month - 1]: # binary_operator:Sub, comparison_operator:Gt, if (-> +2), index, index_arithmetic, int_literal, literal:Num
+            if day > days_per_month[month - 1]: # binary_operator:Sub, comparison_operator:Gt, index, index_arithmetic, int_literal, literal:Num
                 month += 1 # augmented_assignment, int_literal, literal:Num
                 day = day - days_per_month[month - 2] # assignment, binary_operator:Sub, index, index_arithmetic, int_literal, literal:Num, suggest_augmented_assignment
         if month > 12: # comparison_operator:Gt, if (-> +2), int_literal, literal:Num, suggest_constant_definition
@@ -956,7 +956,7 @@ def sum_of_divisors(n): # function:sum_of_divisors (-> +7)
     for i in range(1, int(sqrt(n) + 1)): # accumulate_elements:AugAssign (-> +4), binary_operator:Add, composition, for_range_start (-> +4), function_call:int, function_call:range, function_call:sqrt, int_literal, literal:Num
         if n % i == 0 and i != sqrt(n): # binary_operator:Mod, boolean_operator:And, comparison_operator:Eq, comparison_operator:NotEq, divisibility_test, function_call:sqrt, if (-> +3), if_elif (-> +3), int_literal, literal:Num
             total += i + n // i # augmented_assignment, binary_operator:Add, binary_operator:FloorDiv
-        elif i == sqrt(n): # comparison_operator:Eq, function_call:sqrt, if (-> +1)
+        elif i == sqrt(n): # comparison_operator:Eq, function_call:sqrt
             total += i # augmented_assignment
     return total - n # binary_operator:Sub
 def solution(n): # function:solution (-> +8)
@@ -1029,9 +1029,9 @@ def solution(limit=28123): # function:solution (-> +13), function_with_default_p
 def fib(a, b, n): # function:fib (-> +13)
     if n == 1: # comparison_operator:Eq, if (-> +5), if_elif (-> +5), int_literal, literal:Num
         return a
-    elif n == 2: # comparison_operator:Eq, if (-> +3), if_elif (-> +3), int_literal, literal:Num
+    elif n == 2: # comparison_operator:Eq, if_elif (-> +3), int_literal, literal:Num
         return b
-    elif n == 3: # comparison_operator:Eq, if (-> +1), int_literal, literal:Num, suggest_constant_definition
+    elif n == 3: # comparison_operator:Eq, int_literal, literal:Num, suggest_constant_definition
         return str(a) + str(b) # binary_operator:Add, function_call:str
     temp = 0 # assignment, int_literal, literal:Num
     for x in range(2, n): # for_range_start (-> +4), function_call:range, int_literal, literal:Num
@@ -1067,7 +1067,7 @@ def solution(): # function:solution (-> +2)
 def fibonacci(n): # function:fibonacci (-> +9)
     if n == 1 or type(n) is not int: # boolean_operator:Or, comparison_operator:Eq, comparison_operator:IsNot, function_call:type, if (-> +8), if_elif (-> +8), int_literal, literal:Num
         return 0 # int_literal, literal:Num
-    elif n == 2: # comparison_operator:Eq, if (-> +6), if_else (-> +6), int_literal, literal:Num
+    elif n == 2: # comparison_operator:Eq, if_else (-> +6), int_literal, literal:Num
         return 1 # int_literal, literal:Num
     else:
         sequence = [0, 1] # assignment, int_literal, literal:List, literal:Num
@@ -1121,9 +1121,9 @@ def solution(n): # function:solution (-> +12)
 # ----------------------------------------------------------------------------------------
 import math # import:math
 def is_prime(k: int) -> bool: # function:is_prime
-    if k < 2 or k % 2 == 0: # binary_operator:Mod, boolean_operator:Or, comparison_operator:Eq, comparison_operator:Lt, divisibility_test:2, if (-> +7), if_elif (-> +7), int_literal, literal:Num
+    if k < 2 or k % 2 == 0: # binary_operator:Mod, boolean_operator:Or, comparison_operator:Eq, comparison_operator:Lt, divisibility_test:2, if (-> +7), if_elif (-> +7), int_literal, literal:Num, nested_if (-> +7)
         return False # literal:False
-    elif k == 2: # comparison_operator:Eq, if (-> +5), if_else (-> +5), int_literal, literal:Num
+    elif k == 2: # comparison_operator:Eq, if_else (-> +5), int_literal, literal:Num
         return True # literal:True
     else:
         for x in range(3, int(math.sqrt(k) + 1), 2): # binary_operator:Add, composition, for_range_step:2 (-> +2), function_call:int, function_call:range, int_literal, literal:Num, method_call:sqrt, suggest_constant_definition
@@ -1134,7 +1134,7 @@ def solution(a_limit: int, b_limit: int) -> int: # function:solution
     longest = [0, 0, 0] # assignment, int_literal, literal:List, literal:Num
     for a in range((a_limit * -1) + 1, a_limit): # binary_operator:Add, binary_operator:Mult, for_range_start (-> +9), function_call:range, int_literal, literal:Num, nested_for (-> +9)
         for b in range(2, b_limit): # for_range_start (-> +8), function_call:range, int_literal, literal:Num
-            if is_prime(b): # function_call:is_prime, if (-> +7)
+            if is_prime(b): # function_call:is_prime, if (-> +7), nested_if (-> +7)
                 count = 0 # assignment, int_literal, literal:Num
                 n = 0 # assignment, int_literal, literal:Num
                 while is_prime((n ** 2) + (a * n) + b): # binary_operator:Add, binary_operator:Mult, binary_operator:Pow, function_call:is_prime, int_literal, literal:Num
@@ -1219,8 +1219,8 @@ def solution(): # function:solution (-> +6)
 # ../Python/project_euler/problem_33/sol1.py
 # ----------------------------------------------------------------------------------------
 def isDigitCancelling(num, den): # function:isDigitCancelling (-> +4)
-    if num != den: # comparison_operator:NotEq, if (-> +3)
-        if num % 10 == den // 10: # binary_operator:FloorDiv, binary_operator:Mod, comparison_operator:Eq, divisibility_test:10, if (-> +2), int_literal, literal:Num, suggest_constant_definition
+    if num != den: # comparison_operator:NotEq, if (-> +3), nested_if (-> +3)
+        if num % 10 == den // 10: # binary_operator:FloorDiv, binary_operator:Mod, comparison_operator:Eq, divisibility_test:10, if (-> +2), int_literal, literal:Num, nested_if (-> +2), suggest_constant_definition
             if (num // 10) / (den % 10) == num / den: # binary_operator:Div, binary_operator:FloorDiv, binary_operator:Mod, comparison_operator:Eq, if (-> +1), int_literal, literal:Num, suggest_constant_definition
                 return True # literal:True
 def solve(digit_len: int) -> str: # function:solve
@@ -1229,7 +1229,7 @@ def solve(digit_len: int) -> str: # function:solve
     last_digit = int("1" + "0" * digit_len) # assignment, binary_operator:Add, binary_operator:Mult, function_call:int, literal:Str
     for num in range(den, last_digit): # for_range_start (-> +7), function_call:range
         while den <= 99: # comparison_operator:LtE, evolve_state (-> +4), int_literal, literal:Num, suggest_constant_definition
-            if (num != den) and (num % 10 == den // 10) and (den % 10 != 0): # binary_operator:FloorDiv, binary_operator:Mod, boolean_operator:And, comparison_operator:Eq, comparison_operator:NotEq, divisibility_test:10, if (-> +2), int_literal, literal:Num, suggest_constant_definition
+            if (num != den) and (num % 10 == den // 10) and (den % 10 != 0): # binary_operator:FloorDiv, binary_operator:Mod, boolean_operator:And, comparison_operator:Eq, comparison_operator:NotEq, divisibility_test:10, if (-> +2), int_literal, literal:Num, nested_if (-> +2), suggest_constant_definition
                 if isDigitCancelling(num, den): # function_call:isDigitCancelling, if (-> +1)
                     solutions.append("{}/{}".format(num, den)) # composition, literal:Str, method_call:append, method_call:format
             den += 1 # augmented_assignment, int_literal, literal:Num
@@ -1350,15 +1350,15 @@ def next_term(a_i, k, i, n): # function:next_term (-> +50), recursive_function:n
     diff, dn = 0, 0 # assignment, int_literal, literal:Num, literal:Tuple
     max_dn = n - i # assignment, binary_operator:Sub
     sub_memo = memo.get(ds_b) # assignment, method_call:get
-    if sub_memo != None: # comparison_operator:NotEq, if (-> +19), if_else (-> +19), literal:None
+    if sub_memo != None: # comparison_operator:NotEq, if (-> +19), if_else (-> +19), literal:None, nested_if (-> +19)
         jumps = sub_memo.get(c) # assignment, method_call:get
-        if jumps != None and len(jumps) > 0: # boolean_operator:And, comparison_operator:Gt, comparison_operator:NotEq, function_call:len, if (-> +14), if_else (-> +14), int_literal, literal:None, literal:Num
+        if jumps != None and len(jumps) > 0: # boolean_operator:And, comparison_operator:Gt, comparison_operator:NotEq, function_call:len, if (-> +14), if_else (-> +14), int_literal, literal:None, literal:Num, nested_if (-> +14)
             max_jump = -1 # assignment, int_literal, literal:Num
             for _k in range(len(jumps) - 1, -1, -1): # binary_operator:Sub, composition, for_range_step:-1 (-> +3), function_call:len, function_call:range, int_literal, literal:Num
                 if jumps[_k][2] <= k and jumps[_k][1] <= max_dn: # boolean_operator:And, comparison_operator:LtE, if (-> +2), index, int_literal, literal:Num
                     max_jump = _k # assignment
                     break
-            if max_jump >= 0: # comparison_operator:GtE, if (-> +6), int_literal, literal:Num
+            if max_jump >= 0: # comparison_operator:GtE, if (-> +6), int_literal, literal:Num, nested_if (-> +6)
                 diff, dn, _kk = jumps[max_jump] # assignment, index
                 new_c = diff + c # assignment, binary_operator:Add
                 for j in range(min(k, len(a_i))): # composition, for_range_stop (-> +1), function_call:len, function_call:min, function_call:range
@@ -1372,7 +1372,7 @@ def next_term(a_i, k, i, n): # function:next_term (-> +50), recursive_function:n
         memo[ds_b] = sub_memo # assignment, index
     if dn >= max_dn or c + diff >= base[k]: # binary_operator:Add, boolean_operator:Or, comparison_operator:GtE, if (-> +1), index
         return diff, dn
-    if k > ks[0]: # comparison_operator:Gt, if (-> +10), if_else (-> +10), index, int_literal, literal:Num
+    if k > ks[0]: # comparison_operator:Gt, if (-> +10), if_else (-> +10), index, int_literal, literal:Num, nested_if (-> +10)
         while True: # literal:True
             _diff, terms_jumped = next_term(a_i, k - 1, i + dn, n) # assignment, binary_operator:Add, binary_operator:Sub, function_call:next_term, int_literal, literal:Num
             diff += _diff # augmented_assignment
