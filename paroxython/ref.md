@@ -1528,8 +1528,8 @@ Iterate over the elements of a (named) collection.
 
 ```re
            ^(.*)/_type='For'
+\n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
 \n(?:\1.+\n)*?\1/iter/_type='Name'
-\n(?:\1.+\n)*?\1/iter/lineno=(?P<LINE>\d+)
 \n(?:\1.+\n)* \1/.*/lineno=(?P<LINE>\d+)
 ```
 
