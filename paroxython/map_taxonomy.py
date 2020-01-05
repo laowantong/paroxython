@@ -23,7 +23,7 @@ class Taxonomy:
 
     def __init__(self, taxonomy_path: str = "taxonomies/default_taxonomy.tsv") -> None:
         """Read the taxonomy specifications, and make some pre-processing."""
-        is_literal = regex.compile(r"[\w:]+$").match
+        is_literal = regex.compile(r"[\w:]+").fullmatch
         tsv = Path(taxonomy_path).read_text()
         self.literal_label_names: Dict[LabelName, TaxonNames] = defaultdict(list)
         self.compiled_label_names = []
@@ -35,7 +35,8 @@ class Taxonomy:
             if is_literal(label_pattern):
                 self.literal_label_names[LabelName(label_pattern)].append(TaxonName(taxon_name))
             else:
-                self.compiled_label_names.append((regex.compile(label_pattern), taxon_name))
+                self.compiled_label_names.append((regex.compile(label_pattern + "$"), taxon_name))
+                # note: "$" is necessary: regex.fullmatch() has no regex.fullsub() counterpart
 
     cache: Dict[LabelName, TaxonNames] = {}
 
@@ -48,8 +49,8 @@ class Taxonomy:
             else:
                 cache[label_name] = []
                 for (rex, taxon_name) in self.compiled_label_names:
-                    if rex.fullmatch(label_name):
-                        cache[label_name].append(rex.sub(taxon_name, label_name))
+                    if rex.match(label_name):
+                        cache[label_name].append(rex.sub(taxon_name, label_name))  # cf. note above
         return cache[label_name]
 
     def to_taxons(self, labels: Labels) -> Taxons:
