@@ -43,7 +43,7 @@
         "test/divisibility/parity/": [[4,4]],
         "test/equality/": [[4,4]],
         "test/equality/not/": [[2,2]],
-        "type/elementary/number/int": [[2,2],[4,4],[5,5],[7,7]]
+        "type/elementary/number/integer": [[2,2],[4,4],[5,5],[7,7]]
       }
     },
     "tests/data/programs/function_definition.py": {
@@ -57,7 +57,7 @@
       },
       "taxons": {
         "operator/addition/": [[2,2]],
-        "type/elementary/number/int": [[2,2]]
+        "type/elementary/number/integer": [[2,2]]
       }
     },
     "tests/data/programs/loop.py": {
@@ -181,7 +181,7 @@
     "test/equality/not/": [
       "tests/data/programs/collatz_print.py"
     ],
-    "type/elementary/number/int": [
+    "type/elementary/number/integer": [
       "tests/data/programs/collatz_print.py",
       "tests/data/programs/function_definition.py"
     ],
