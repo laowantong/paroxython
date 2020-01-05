@@ -3,6 +3,7 @@ from unicodedata import normalize
 
 import pytest
 import regex  # type: ignore
+import sqlparse
 
 import context
 from paroxython.parse_program import ProgramParser
@@ -29,6 +30,17 @@ def generate_toc(text):
         yield f"{offset}[{title}](#{slug})"
 
 
+def reformat_sql(match):
+    string = sqlparse.format(
+        match.group(1),
+        reindent=True,
+        keyword_case="upper",
+        identifier_case="lower",
+        indent_width=2,
+    )
+    return f"```sql\n{string}\n```"
+
+
 def reformat_file(construct_path):
     text = construct_path.read_text()
     toc = "\n".join(generate_toc(text))
@@ -39,6 +51,7 @@ def reformat_file(construct_path):
     text = regex.sub(r"(?m)\s+^(#+ .+)\s+", fr"\n\n\1\n\n", text)
     text = regex.sub(r"(?ms)^(\| Label \| .+?)(^\#{1,3} )", fr"\1{rule}\n\2", text)
     text = regex.sub(r"(?=\n\#{4} )", fr"\n{rule}", text)
+    text = regex.sub(r"(?ms)^```sql\n(.+?)\n```", reformat_sql, text)
     construct_path.write_text(text)
 
 

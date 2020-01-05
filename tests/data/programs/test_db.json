@@ -25,17 +25,17 @@
         "evolve_state": [[2,7]],
         "function:print_collatz": [[1,8]],
         "function_call:print": [[3,3],[8,8]],
-        "if": [[4,7],[6,6]],
+        "if": [[4,7]],
         "if_else": [[4,7]],
         "int_literal": [[2,2],[4,4],[5,5],[7,7]],
         "literal:Num": [[2,2],[4,4],[7,7]],
         "suggest_augmented_assignment": [[5,5]],
         "suggest_conditional_expression": [[4,7]],
-        "suggest_constant_definition": [[7,7]]
+        "suggest_constant_definition": [[2,2],[7,7]],
+        "unknown_label": [[6,6]]
       },
       "taxons": {
         "call/function/builtin/print/": [[3,3],[8,8]],
-        "control_flow/conditional/": [[6,6]],
         "control_flow/conditional/else/": [[4,7]],
         "operator/addition/": [[7,7]],
         "operator/multiplication/": [[7,7]],
@@ -141,6 +141,9 @@
     "suggest_constant_definition": [
       "tests/data/programs/collatz_print.py"
     ],
+    "unknown_label": [
+      "tests/data/programs/collatz_print.py"
+    ],
     "function:succ": [
       "tests/data/programs/function_definition.py"
     ],
@@ -155,9 +158,6 @@
     "call/function/builtin/print/": [
       "tests/data/programs/collatz_print.py",
       "tests/data/programs/loop.py"
-    ],
-    "control_flow/conditional/": [
-      "tests/data/programs/collatz_print.py"
     ],
     "control_flow/conditional/else/": [
       "tests/data/programs/collatz_print.py"

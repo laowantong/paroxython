@@ -53,6 +53,7 @@
       - [Construct `if`](#construct-if)
       - [Construct `if_else`](#construct-if_else)
       - [Construct `if_elif`](#construct-if_elif)
+      - [Construct `nested_if`](#construct-nested_if)
   - [Iterations](#iterations)
       - [Construct `for_each`](#construct-for_each)
       - [Construct `for_range_stop`](#construct-for_range_stop)
@@ -104,7 +105,7 @@
 
 #### Construct `literal`
 
-##### Regex
+##### Definition
 
 ```re
 ^(.*)
@@ -156,7 +157,7 @@
 
 Matching literal does not require to construct a sophisticated regular expression: the heavy lifting is already made in the given AST, which stores them in a normalized form. For instance, integer literals are just sequence of digits:
 
-##### Regex
+##### Definition
 
 ```re
            ^(.*)/_type='Num'
@@ -187,7 +188,7 @@ The following examples of numeric literals are taken from the [reference](https:
 
 In the AST, a floating point literal consists of digits and at least one symbol among `.` and `e`.
 
-##### Regex
+##### Definition
 
 ```re
            ^(.*)/_type='Num'
@@ -216,7 +217,7 @@ In the AST, a floating point literal consists of digits and at least one symbol 
 
 In the AST, an imaginary literal contains the same symbols as a floating point literal, plus a mandatory trailing symbol `j`.
 
-##### Regex
+##### Definition
 
 ```re
            ^(.*)/_type='Num'
@@ -247,7 +248,7 @@ In the AST, an imaginary literal contains the same symbols as a floating point l
 
 #### Construct `index`
 
-##### Regex
+##### Definition
 
 ```re
            ^(.*)/_type='Subscript'
@@ -273,7 +274,7 @@ In the AST, an imaginary literal contains the same symbols as a floating point l
 
 #### Construct `index_arithmetic`
 
-##### Regex
+##### Definition
 
 ```re
            ^(.*)/_type='Subscript'
@@ -299,7 +300,7 @@ In the AST, an imaginary literal contains the same symbols as a floating point l
 
 #### Construct `negative_index`
 
-##### Regex
+##### Definition
 
 ```re
            ^(.*)/_type='Subscript'
@@ -343,7 +344,7 @@ In the AST, an imaginary literal contains the same symbols as a floating point l
 
 #### Construct `slice`
 
-##### Regex
+##### Definition
 
 ```re
            ^(.*)/_type='Subscript'
@@ -370,7 +371,7 @@ In the AST, an imaginary literal contains the same symbols as a floating point l
 
 #### Construct `slice_step`
 
-##### Regex
+##### Definition
 
 ```re
            ^(.*)/_type='Subscript'
@@ -400,7 +401,7 @@ In the AST, an imaginary literal contains the same symbols as a floating point l
 
 #### Construct `unary_operator`
 
-##### Regex
+##### Definition
 
 ```re
            ^(.*)/_type='UnaryOp'
@@ -429,7 +430,7 @@ In the AST, an imaginary literal contains the same symbols as a floating point l
 
 #### Construct `binary_operator`
 
-##### Regex
+##### Definition
 
 ```re
            ^(.*)/_type='BinOp'
@@ -456,7 +457,7 @@ In the AST, an imaginary literal contains the same symbols as a floating point l
 
 Match the so-called ternary operator.
 
-##### Regex
+##### Definition
 
 ```re
            ^(.*)/_type='IfExp'
@@ -483,7 +484,7 @@ Match the so-called ternary operator.
 
 #### Construct `boolean_operator`
 
-##### Regex
+##### Definition
 
 ```re
            ^(.*)/_type='BoolOp'
@@ -512,7 +513,7 @@ Match the so-called ternary operator.
 
 #### Construct `comparison_operator`
 
-##### Regex
+##### Definition
 
 ```re
            ^(.*)/ops/        (?P<_1>\d+)/_type='(?P<SUFFIX>Eq|Lt|LtE|Gt|GtE|In|NotIn|NotEq|Is|IsNot)'
@@ -540,7 +541,7 @@ Match the so-called ternary operator.
 
 #### Construct `chained_comparison`
 
-##### Regex
+##### Definition
 
 ```re
            ^(.*)/_type='Compare'
@@ -567,7 +568,7 @@ Match the so-called ternary operator.
 
 #### Construct `divisibility_test`
 
-##### Regex
+##### Definition
 
 ```re
            ^(.*)/_type='Compare'
@@ -606,10 +607,9 @@ Match the so-called ternary operator.
 
 When the value of the left operand suffices to determine the value of a boolean expression, short-circuit evaluation skips the right operand. This behaviour is sometimes desirable or even required, but Paroxython currently cannot detect the case: so, when commutating the operands would result in an error or a performance penalty, you should add manually the hint `# paroxython: short_circuit` in the source-code.
 
-##### Regex
+##### Definition
 
-```re
-No pattern provided.
+```
 ```
 
 ##### Example
@@ -639,7 +639,7 @@ No pattern provided.
 
 #### Construct `function_call`
 
-##### Regex
+##### Definition
 
 ```re
            ^(.*)/_type='Call'
@@ -667,7 +667,7 @@ No pattern provided.
 
 #### Construct `method_call`
 
-##### Regex
+##### Definition
 
 ```re
            ^(.*)/_type='Call'
@@ -694,7 +694,7 @@ No pattern provided.
 
 #### Construct `method_chaining`
 
-##### Regex
+##### Definition
 
 ```re
            ^(.*)/_type='Call'
@@ -722,7 +722,7 @@ No pattern provided.
 
 Apply a function or a method to an expression involving the result of another function or method application, without using an intermediate variable.
 
-##### Regex
+##### Definition
 
 ```re
            ^(.*)/_type='Call'
@@ -753,7 +753,7 @@ Apply a function or a method to an expression involving the result of another fu
 
 #### Construct `lambda_function`
 
-##### Regex
+##### Definition
 
 ```re
            ^(.*)/_type='Lambda'
@@ -780,7 +780,7 @@ Apply a function or a method to an expression involving the result of another fu
 
 #### Construct `comprehension`
 
-##### Regex
+##### Definition
 
 ```re
            ^(.*)/_type='((?P<SUFFIX>List|Dict|Set)Comp|(?P<SUFFIX>Generator)Exp)'
@@ -813,7 +813,7 @@ Apply a function or a method to an expression involving the result of another fu
 
 Suffix the number of `for` clauses in a given comprehension.
 
-##### Regex
+##### Definition
 
 ```re
            ^(.*)/_type='(ListComp|DictComp|SetComp|GeneratorExp)'
@@ -864,7 +864,7 @@ Therefore, line 5 consists in two comprehensions, each with one `for` clause onl
 
 Match a comprehension with an `if` clause.
 
-##### Regex
+##### Definition
 
 ```re
 /generators/\d+/ifs/0/lineno=(?P<LINE>\d+)
@@ -893,7 +893,7 @@ Match a comprehension with an `if` clause.
 
 #### Construct `global_constant_definition`
 
-##### Regex
+##### Definition
 
 ```re
  ^(/body/\d+)/_type='Assign' # no indentation
@@ -921,7 +921,7 @@ Match a comprehension with an `if` clause.
 
 #### Construct `global_variable_definition`
 
-##### Regex
+##### Definition
 
 ```re
   ^(/body/\d+)/_type='Assign' # no indentation
@@ -951,7 +951,7 @@ Match a comprehension with an `if` clause.
 
 #### Construct `assignment`
 
-##### Regex
+##### Definition
 
 ```re
            ^(.*)/_type='Assign'
@@ -976,7 +976,7 @@ Match a comprehension with an `if` clause.
 
 #### Construct `augmented_assignment`
 
-##### Regex
+##### Definition
 
 ```re
            ^(.*)/_type='AugAssign'
@@ -1000,7 +1000,7 @@ Match a comprehension with an `if` clause.
 
 #### Construct `chained_assignment`
 
-##### Regex
+##### Definition
 
 ```re
            ^(.*)/_type='Assign'
@@ -1028,7 +1028,7 @@ Match a comprehension with an `if` clause.
 
 Swap two variables or two elements of an array with a 2-element tuple or list.
 
-##### Regex
+##### Definition
 
 ```re
            ^(.*)/_type='Assign'
@@ -1062,7 +1062,7 @@ Swap two variables or two elements of an array with a 2-element tuple or list.
 
 Update a variable by negating it.
 
-##### Regex
+##### Definition
 
 ```re
            ^(.*)/_type='Assign'
@@ -1097,7 +1097,7 @@ Update a variable by negating it.
 
 #### Construct `function`
 
-##### Regex
+##### Definition
 
 ```re
            ^(.*)/_type='FunctionDef'
@@ -1133,7 +1133,7 @@ Update a variable by negating it.
 
 #### Construct `function_with_default_positional_arguments`
 
-##### Regex
+##### Definition
 
 ```re
            ^(.*)/_type='FunctionDef'
@@ -1161,7 +1161,7 @@ Update a variable by negating it.
 
 #### Construct `recursive_function`
 
-##### Regex
+##### Definition
 
 ```re
            ^(.*)/_type='FunctionDef'
@@ -1195,7 +1195,7 @@ Update a variable by negating it.
 
 Any function `f` which contains a nested call to itself (`f(..., f(...), ...)`), e.g. the [Ackermann function](https://en.wikipedia.org/wiki/Ackermann_function).
 
-##### Regex
+##### Definition
 
 ```re
            ^(.*)/_type='FunctionDef'
@@ -1237,7 +1237,7 @@ Any function `f` which contains a nested call to itself (`f(..., f(...), ...)`),
 
 A tail call is a subroutine call performed as the last action of a procedure. A body-recursive function includes at least one non-tail recursive call.
 
-##### Regex
+##### Definition
 
 ```re
            ^(.*)/_type='FunctionDef'
@@ -1314,7 +1314,7 @@ A tail call is a subroutine call performed as the last action of a procedure. A 
 
 #### Construct `generator`
 
-##### Regex
+##### Definition
 
 ```re
            ^(.*)/_type='FunctionDef'
@@ -1349,7 +1349,7 @@ A tail call is a subroutine call performed as the last action of a procedure. A 
 
 #### Construct `nested_function`
 
-##### Regex
+##### Definition
 
 ```re
            ^(.*)/_type='FunctionDef'
@@ -1381,7 +1381,7 @@ A tail call is a subroutine call performed as the last action of a procedure. A 
 
 Function enclosing the definition of an inner function and returning it. Beware that the current regex does not check whether the inner function refers to a variable defined in the enclosing function.
 
-##### Regex
+##### Definition
 
 ```re
            ^(.*)/_type='FunctionDef'
@@ -1419,10 +1419,10 @@ Function enclosing the definition of an inner function and returning it. Beware 
 
 #### Construct `if`
 
-##### Regex
+##### Definition
 
 ```re
-           ^(.*)/_type='If'
+   ^(.*body/\d+)/_type='If' # be careful not to mistake elif (with orelse) for if
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
 \n(?:\1.+\n)* \1/.+/lineno=(?P<LINE>\d+)
 ```
@@ -1433,15 +1433,17 @@ Function enclosing the definition of an inner function and returning it. Beware 
 1   if condition_1:
 2       if condition_2:
 3           pass
-4   else:
+4   elif condition_3:
 5       pass
+6   else:
+7       pass
 ```
 
 ##### Matches
 
 | Label | Lines |
 |:--|:--|
-| `if` | 1-5, 2-3 |
+| `if` | 1-7, 2-3 |
 
 --------------------------------------------------------------------------------
 
@@ -1449,7 +1451,7 @@ Function enclosing the definition of an inner function and returning it. Beware 
 
 `if` statement with `else`.
 
-##### Regex
+##### Definition
 
 ```re
            ^(.*)/_type='If'
@@ -1484,7 +1486,7 @@ Function enclosing the definition of an inner function and returning it. Beware 
 
 `if` statement with `elif`.
 
-##### Regex
+##### Definition
 
 ```re
            ^(.*)/_type='If'
@@ -1517,6 +1519,39 @@ Function enclosing the definition of an inner function and returning it. Beware 
 
 --------------------------------------------------------------------------------
 
+#### Construct `nested_if`
+
+##### Definition
+
+```sql
+SELECT t1.start,
+       t1.end
+FROM t AS t1
+JOIN t AS t2 USING(name)
+WHERE name = "if"
+  AND t1.id != t2.id
+  AND t1.start <= t2.start
+  AND t2.end <= t1.end
+```
+
+##### Example
+
+```python
+1   if condition_1:
+2       if condition_2:
+3           pass
+4   else:
+5       pass
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `nested_if` | 1-5 |
+
+--------------------------------------------------------------------------------
+
 ## Iterations
 
 --------------------------------------------------------------------------------
@@ -1524,7 +1559,7 @@ Function enclosing the definition of an inner function and returning it. Beware 
 #### Construct `for_each`
 Iterate over the elements of a (named) collection.
 
-##### Regex
+##### Definition
 
 ```re
            ^(.*)/_type='For'
@@ -1555,7 +1590,7 @@ Iterate over the elements of a (named) collection.
 
 Iterate over a range with exactly 1 argument (stop).
 
-##### Regex
+##### Definition
 
 ```re
            ^(.*)/_type='For'
@@ -1590,7 +1625,7 @@ Iterate over a range with exactly 1 argument (stop).
 
 Iterate over a range with exactly 2 arguments (start, stop).
 
-##### Regex
+##### Definition
 
 ```re
            ^(.*)/_type='For'
@@ -1625,7 +1660,7 @@ Iterate over a range with exactly 2 arguments (start, stop).
 
 Iterate over a range with 3 arguments (start, stop, step).
 
-##### Regex
+##### Definition
 
 ```re
            ^(.*)/_type='For'
@@ -1668,7 +1703,7 @@ Iterate over a range with 3 arguments (start, stop, step).
 
 Iterate over index numbers and elements of a collection.
 
-##### Regex
+##### Definition
 
 ```re
            ^(.*)/_type='For'
@@ -1696,7 +1731,7 @@ Iterate over index numbers and elements of a collection.
 
 Iterate over index numbers of a collection.
 
-##### Regex
+##### Definition
 
 ```re
            ^(.*)/_type='For'
@@ -1727,7 +1762,7 @@ Iterate over index numbers of a collection.
 
 #### Construct `nested_for`
 
-##### Regex
+##### Definition
 
 ```re
            ^(.*)/_type='For'
@@ -1757,7 +1792,7 @@ Iterate over index numbers of a collection.
 
 A `for` loop with a counter `i` and a nested `for` loop which makes `i` iterations. The total number of iterations is a [triangular number](https://en.wikipedia.org/wiki/Triangular_number).
 
-##### Regex
+##### Definition
 
 ```re
            ^(.*)/_type='For'
@@ -1808,7 +1843,7 @@ A `for` loop with a counter `i` and a nested `for` loop which makes `i` iteratio
 
 Two nested `for` loops doing the same number of iterations.
 
-##### Regex
+##### Definition
 
 ```re
            ^(.*)/_type='For'
@@ -1845,7 +1880,7 @@ Two nested `for` loops doing the same number of iterations.
 
 #### Construct `assertion`
 
-##### Regex
+##### Definition
 
 ```re
            ^(.*)/_type='Assert'
@@ -1868,7 +1903,7 @@ Two nested `for` loops doing the same number of iterations.
 
 #### Construct `raise_exception`
 
-##### Regex
+##### Definition
 
 ```re
            ^(.*)/_type='Raise'
@@ -1896,7 +1931,7 @@ Two nested `for` loops doing the same number of iterations.
 
 #### Construct `catch_exception`
 
-##### Regex
+##### Definition
 
 ```re
            ^(.*)/_type='Try'
@@ -1944,7 +1979,7 @@ Two nested `for` loops doing the same number of iterations.
 
 #### Construct `import`
 
-##### Regex
+##### Definition
 
 ```re
            ^(.*)/_type='Import'
@@ -1974,7 +2009,7 @@ Two nested `for` loops doing the same number of iterations.
 
 #### Construct `import_from`
 
-##### Regex
+##### Definition
 
 ```re
            ^(.*)/_type='ImportFrom'
@@ -2000,7 +2035,7 @@ Two nested `for` loops doing the same number of iterations.
 
 #### Construct `import_by_call`
 
-##### Regex
+##### Definition
 
 ```re
            ^(.*)/_type='Call'
@@ -2038,7 +2073,7 @@ Two nested `for` loops doing the same number of iterations.
 
 An accumulator is iteratively updated from its previous value and the value of the iteration variable.
 
-##### Regex
+##### Definition
 
 ```re
            ^(.*)/_type='For'
@@ -2119,7 +2154,7 @@ The third alternative of the regex is experimental. It matches any one-line func
 
 An accumulation pattern that, from a given collection, returns a list containing only those elements that verify a certain condition.
 
-##### Regex
+##### Definition
 
 ```re
            ^(.*)/_type='For'
@@ -2157,7 +2192,7 @@ An accumulation pattern that, from a given collection, returns a list containing
 
 An accumulation pattern that, from a given collection, returns the best element verifying a certain condition.
 
-##### Regex
+##### Definition
 
 ```re
            ^(.*)/(?P<_1>(?:body|orelse)/\d+)/_type='Assign'
@@ -2207,7 +2242,7 @@ An accumulation pattern that, from a given collection, returns the best element 
 
 Check whether all elements of a collection satisfy a predicate.
 
-##### Regex
+##### Definition
 
 ```re
           ^(.*?)/(?P<_1>(?:body|orelse)/\d+)/_type='For'
@@ -2242,7 +2277,7 @@ Check whether all elements of a collection satisfy a predicate.
 
 Check whether any element of a collection satisfies a predicate.
 
-##### Regex
+##### Definition
 
 ```re
           ^(.*?)/(?P<_1>(?:body|orelse)/\d+)/_type='For'
@@ -2277,7 +2312,7 @@ Check whether any element of a collection satisfies a predicate.
 
 Linear search. Return the first element of a sequence satisfying a predicate.
 
-##### Regex
+##### Definition
 
 ```re
            ^(.*)/_type='For'
@@ -2316,7 +2351,7 @@ Linear search. Return the first element of a sequence satisfying a predicate.
 
 Evolve the value of a variable until it reaches a desired state.
 
-##### Regex
+##### Definition
 
 ```re
            ^(.*)/_type='While'
@@ -2374,7 +2409,7 @@ Evolve the value of a variable until it reaches a desired state.
 
 Accumulate the inputs until a sentinel value is encountered (accumulation expressed by: `acc = combine(x, acc)`).
 
-##### Regex
+##### Definition
 
 ```re
            ^(.*)/_type='While'
@@ -2483,10 +2518,9 @@ It may be interesting to indicate the category of the program with an all-encomp
 - `text_processing`
 - ...
 
-##### Regex
+##### Definition
 
-```re
-No pattern provided.
+```
 ```
 
 ##### Example
@@ -2527,7 +2561,7 @@ It's up to you to decide if a rewriting would make the code clearer.
 
 When a conditional simply assigns different values to the same variable, it may be rewritten as a conditional expression.
 
-##### Regex
+##### Definition
 
 ```re
            ^(.*)/_type='If'
@@ -2580,7 +2614,7 @@ The first conditional (only) may be rewritten as:
 
 When the RHS of an assignment consists in a binary operation whose left operand is the target (`a = a op expr`), the statement can be shortened as `a op= expr`.
 
-##### Regex
+##### Definition
 
 ```re
            ^(.*)/_type='Assign'
@@ -2626,7 +2660,7 @@ May be rewritten as:
 
 When the `else` branch of a conditional is another conditional, it can be rewritten with an `elif` branch.
 
-##### Regex
+##### Definition
 
 ```re
            ^(.*)/_type='BoolOp'
@@ -2670,7 +2704,7 @@ Note that the last simplification is rather confusing and should be avoided.
 
 Match magic numbers (unnamed numerical constants) other than -1, 0, 1 and 2. A number in the RHS of an assignment to a constant is of course ignored.
 
-##### Regex
+##### Definition
 
 ```re
   ^(/(?:body|orelse)/\d+)
@@ -2724,7 +2758,7 @@ May be rewritten as:
 
 When a predicate ends with a conditional whose sole purpose is to return `True` or `False`, it is enough to return the condition.
 
-##### Regex
+##### Definition
 
 ```re
            ^(.*)/_type='If'
