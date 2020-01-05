@@ -1182,10 +1182,8 @@ SELECT "procedure:" || substr(name, 10),
        span_end
 FROM t
 WHERE name glob "function:*"
-  AND (span_start,
-       span_end) NOT IN
-    (SELECT span_start,
-            span_end
+  AND (span_start || '-' || span_end) NOT IN
+    (SELECT (span_start || '-' || span_end)
      FROM t
      WHERE name glob "function_returning_a_value:*" )
 ```
