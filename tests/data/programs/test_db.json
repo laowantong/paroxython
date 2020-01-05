@@ -31,7 +31,7 @@
         "literal:Num": [[2,2],[4,4],[7,7]],
         "suggest_augmented_assignment": [[5,5]],
         "suggest_conditional_expression": [[4,7]],
-        "suggest_constant_definition": [[7,7]],
+        "suggest_constant_definition": [[2,2],[7,7]],
         "unknown_label": [[6,6]]
       },
       "taxons": {
