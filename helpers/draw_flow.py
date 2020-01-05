@@ -23,7 +23,6 @@ Path(f"{base}.dot").write_text(
             '"ref.md" -> parse_program',
             '"source files" -> generate_programs',
             '"default_taxonomy.tsv" -> map_taxonomy',
-            'make_snapshots -> "snapshots"',
         ]
         + [
             f"{imported_name} -> {name}"

@@ -10,7 +10,6 @@ make_db -> "db.json"
 "ref.md" -> parse_program
 "source files" -> generate_programs
 "default_taxonomy.tsv" -> map_taxonomy
-make_snapshots -> "snapshots"
 span -> preprocess_source
 generate_programs -> generate_labels
 parse_program -> generate_labels
@@ -18,6 +17,5 @@ generate_labels -> make_db
 map_taxonomy -> make_db
 flatten_ast -> parse_program
 span -> parse_program
-generate_labels -> make_snapshots
 preprocess_source -> generate_programs
 }

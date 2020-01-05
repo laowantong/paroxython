@@ -85,22 +85,3 @@ class Taxonomy:
             taxons = self.to_taxons(program.labels)
             taxons = self.deduplicated_taxons(taxons)
             yield PathTaxons(program.path, taxons)
-
-
-if __name__ == "__main__":
-    generate_labeled_programs = __import__("generate_labels").generate_labeled_programs
-    chain = __import__("itertools").chain
-    DIRECTORIES = [
-        "../Python/project_euler",
-        # "../Python/maths",
-        # "../Algo/programs"
-    ]
-    programs = chain.from_iterable(
-        generate_labeled_programs(directory) for directory in DIRECTORIES
-    )
-    taxonomy = Taxonomy()
-    acc: Dict[str, Dict[str, str]] = {}
-    for (path, taxons) in taxonomy(programs):
-        acc[str(path)] = {name: " ".join(map(str, sorted(set(spans)))) for (name, spans) in taxons}
-    output_path = Path("snapshots/taxon_db.json")
-    output_path.write_text(json.dumps(acc, indent=2))
