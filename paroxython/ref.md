@@ -1135,6 +1135,8 @@ Update a variable by negating it.
 
 #### Construct `function_returning_a_value`
 
+A function returns a value iff it contains a statement `return` and the returned value is not `None`.
+
 ##### Definition
 
 ```re
@@ -1177,15 +1179,15 @@ Update a variable by negating it.
 ##### Definition
 
 ```sql
-SELECT "procedure:" || substr(name, 10),
+SELECT "procedure" || name_suffix,
        span_start,
        span_end
 FROM t
-WHERE name glob "function:*"
-  AND (span_start || '-' || span_end) NOT IN
-    (SELECT (span_start || '-' || span_end)
+WHERE name_prefix = "function"
+  AND span NOT IN
+    (SELECT span
      FROM t
-     WHERE name glob "function_returning_a_value:*" )
+     WHERE name_prefix = "function_returning_a_value" )
 ```
 
 **Explanation.** Select all functions whose span is not that of a function returning a value.

@@ -1,7 +1,7 @@
 import ast
 from collections import defaultdict
 from pathlib import Path
-from typing import Callable, Dict, Iterator
+from typing import Callable, Dict, Iterator, Tuple, List
 import itertools
 import sqlite3
 
@@ -35,6 +35,55 @@ find_all_constructs = regex.compile(
 ).findall
 
 
+class Table:
+    """A simple RDB consisting in one single table of labels."""
+
+    def __init__(self):
+        self.c = sqlite3.connect(":memory:")
+
+    def create(self, labels: Labels) -> None:
+        self.c.execute(
+            """CREATE TABLE t (
+                id INTEGER,
+                name TEXT,
+                name_prefix TEXT,
+                name_suffix TEXT,
+                span TEXT,
+                span_start INTEGER,
+                span_end INTEGER
+            )"""
+        )
+        self.i = itertools.count()
+        self.update(labels)
+
+    def read(self, query: Query) -> Labels:
+        groups: LabelsSpans = defaultdict(list)
+        for (label_name, start, end) in self.c.execute(query):
+            groups[label_name].append(Span([start, end]))
+        return [Label(*item) for item in groups.items()]
+
+    def update(self, labels: Labels) -> None:
+        values = []
+        for (name, spans) in labels:
+            for span in spans:
+                (name_prefix, _, name_suffix) = name.partition(":")
+                values.append(
+                    (
+                        next(self.i),
+                        name,
+                        name_prefix,
+                        ":" + name_suffix,
+                        str(span),
+                        span.start,
+                        span.end,
+                    )
+                )
+        self.c.executemany("INSERT INTO t VALUES (?,?,?,?,?,?,?)", values)
+
+    def delete(self):
+        self.c.execute("DROP TABLE t")
+
+
 class ProgramParser:
     """Compile the given construct definitions, and search them in a Program."""
 
@@ -51,7 +100,7 @@ class ProgramParser:
                 self.constructs[label_name] = regex.compile(f"(?mx){pattern}")
             elif language == "sql":
                 self.queries[label_name] = pattern
-        self.c = sqlite3.connect(":memory:")
+        self.table = Table()
 
     def __call__(self, program: Program, yield_failed_matches: bool = False,) -> Iterator[Label]:
         """Analyze a given source and yield its labels and their spans."""
@@ -88,29 +137,17 @@ class ProgramParser:
                 labels.append(Label(label_name, []))
             else:
                 labels.extend(Label(*item) for item in result.items())
-        labels.extend(Label(*item) for item in program.addition.items())
-        labels.extend(self.inferred_labels(labels))
-        yield from labels
 
-    def inferred_labels(self, labels: Labels) -> Iterator[Label]:
-        self.c.execute("CREATE TABLE t (id INT, name TEXT, span_start INT, span_end INT)")
-        i = itertools.count()
-        self.c.executemany(
-            "INSERT INTO t VALUES (?,?,?,?)",
-            ((next(i), name, span.start, span.end) for (name, spans) in labels for span in spans),
-        )
+        labels.extend(Label(*item) for item in program.addition.items())
+
+        self.table.create(labels)
         for query in self.queries.values():
-            query_result = list(self.c.execute(query))
-            if query_result:
-                group_by_name: LabelsSpans = defaultdict(list)
-                for (name, start, end) in query_result:
-                    group_by_name[name].append(Span([start, end]))
-                yield from (Label(*item) for item in group_by_name.items())
-                self.c.executemany(
-                    "INSERT INTO t VALUES (?,?,?,?)",
-                    ((next(i), name, start, end) for (name, start, end) in query_result),
-                )
-        self.c.execute("DROP TABLE t")
+            inferred_labels = self.table.read(query)
+            self.table.update(inferred_labels)
+            labels.extend(inferred_labels)
+        self.table.delete()
+
+        yield from labels
 
 
 if __name__ == "__main__":
