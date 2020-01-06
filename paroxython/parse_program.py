@@ -42,18 +42,18 @@ class Table:
         self.c = sqlite3.connect(":memory:")
 
     def create(self, labels: Labels) -> None:
-        self.c.execute(
-            """CREATE TABLE t (
-                id INTEGER,
-                name TEXT,
-                name_prefix TEXT,
-                name_suffix TEXT,
-                span TEXT,
-                span_start INTEGER,
-                span_end INTEGER
-            )"""
-        )
+        columns = [
+            "id INTEGER",
+            "name TEXT",
+            "name_prefix TEXT",
+            "name_suffix TEXT",
+            "span TEXT",
+            "span_start INTEGER",
+            "span_end INTEGER",
+        ]
+        self.c.execute(f"CREATE TABLE t ({','.join(columns)})")
         self.i = itertools.count()
+        self.insert_command = f"INSERT INTO t VALUES ({','.join('?' * len(columns))})"
         self.update(labels)
 
     def read(self, query: Query) -> Labels:
@@ -72,13 +72,13 @@ class Table:
                         next(self.i),
                         name,
                         name_prefix,
-                        ":" + name_suffix,
+                        f":{name_suffix}",
                         str(span),
                         span.start,
                         span.end,
                     )
                 )
-        self.c.executemany("INSERT INTO t VALUES (?,?,?,?,?,?,?)", values)
+        self.c.executemany(self.insert_command, values)
 
     def delete(self):
         self.c.execute("DROP TABLE t")
@@ -142,9 +142,9 @@ class ProgramParser:
 
         self.table.create(labels)
         for query in self.queries.values():
-            inferred_labels = self.table.read(query)
-            self.table.update(inferred_labels)
-            labels.extend(inferred_labels)
+            derived_labels = self.table.read(query)
+            self.table.update(derived_labels)
+            labels.extend(derived_labels)
         self.table.delete()
 
         return sorted(labels)
