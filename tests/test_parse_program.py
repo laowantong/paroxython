@@ -106,8 +106,8 @@ def test_at_least_one_example_is_provided_for_each_construct():
 
 def test_malformed_example():
     source = "if foo():\nbar() # wrong indentation"
-    with pytest.raises(StopIteration):
-        next(parse(Program(source=source)))
+    result = parse(Program(source=source))
+    assert result == [("ast_construction:IndentationError", [])]
 
 
 def test_failed_matches():

@@ -102,8 +102,8 @@ class ProgramParser:
                 self.queries[label_name] = pattern
         self.table = Table()
 
-    def __call__(self, program: Program, yield_failed_matches: bool = False,) -> Iterator[Label]:
-        """Analyze a given source and yield its labels and their spans."""
+    def __call__(self, program: Program, yield_failed_matches: bool = False) -> Labels:
+        """Analyze a given source and return its labels and their spans."""
 
         def try_to_bind(label_name: LabelName, span: Span) -> None:
             """Bind a name with a span, unless this binding is scheduled for deletion."""
@@ -114,8 +114,8 @@ class ProgramParser:
 
         try:
             tree = ast.parse(program.source)
-        except (SyntaxError, ValueError):
-            return print("Warning: unable to construct the AST")
+        except (SyntaxError, ValueError) as exception:
+            return [Label(f"ast_construction:{type(exception).__name__}", [])]
         self.flat_ast = simplify_negative_literals(flatten_ast(tree))
 
         labels: Labels = []
@@ -147,12 +147,11 @@ class ProgramParser:
             labels.extend(inferred_labels)
         self.table.delete()
 
-        yield from labels
+        return sorted(labels)
 
 
 if __name__ == "__main__":
     """Take an individual source, print its constructs and write its flat AST."""
-    time = __import__("time")
     path = Path("sandbox/source.py")
     source = path.read_text().strip()
     if source.startswith("1   "):
@@ -162,12 +161,9 @@ if __name__ == "__main__":
     program = Program(source=Source(source))
     print()
     parse = ProgramParser()
-    start = time.perf_counter()
     acc = []
     for (name, spans) in parse(program, yield_failed_matches=False):
-        stop = time.perf_counter()
         spans_as_string = ", ".join(map(str, spans))
-        acc.append(f"{stop - start:7.4f} s.: | `{name}` | {spans_as_string} |")
-        start = stop
+        acc.append(f"| `{name}` | {spans_as_string} |")
     print("\n".join(acc))
     Path("sandbox/flat_ast.txt").write_text(parse.flat_ast)
