@@ -1182,11 +1182,11 @@ A function returns a value iff it contains a statement `return` and the returned
 SELECT "procedure" || name_suffix,
        span_start,
        span_end
-FROM t
+FROM main
 WHERE name_prefix = "function"
   AND span NOT IN
     (SELECT span
-     FROM t
+     FROM main
      WHERE name_prefix = "function_returning_a_value" )
 ```
 
@@ -1609,14 +1609,11 @@ Function enclosing the definition of an inner function and returning it. Beware 
 
 ```sql
 SELECT "nested_ifs",
-       t1.span_start,
-       t1.span_end
-FROM t AS t1
-JOIN t AS t2 USING(name)
-WHERE name = "if"
-  AND t1.rowid != t2.rowid
-  AND t1.span_start <= t2.span_start
-  AND t2.span_end <= t1.span_end
+       span_start_1,
+       span_end_1
+FROM nest
+WHERE name_1 = "if"
+  AND name_2 = "if"
 ```
 
 ##### Example
