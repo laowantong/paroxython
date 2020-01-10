@@ -54,8 +54,8 @@
   - [Conditionals](#conditionals)
       - [Construct `if`](#construct-if)
       - [Construct `if_then_branch`](#construct-if_then_branch)
-      - [Construct `if_else_branch`](#construct-if_else_branch)
       - [Construct `if_elif_branch`](#construct-if_elif_branch)
+      - [Construct `if_else_branch`](#construct-if_else_branch)
       - [Construct `nested_if`](#construct-nested_if)
   - [Iterations](#iterations)
       - [Construct `for_each`](#construct-for_each)
@@ -1609,59 +1609,6 @@ Match the body of the branch “`then`” of an `if` statement.
 
 --------------------------------------------------------------------------------
 
-#### Construct `if_else_branch`
-
-Match the body of the possible branch `else` of an `if` statement.
-
-##### Definition
-
-```re
-           ^(.*)/_type='If'
-\n(?:\1.+\n)*?\1/orelse/length=
-(   # there is at least two statements in the else branch,
-                               \d+(?<![01])
-\n(?:\1.+\n)*?\1/orelse/0/lineno=(?P<LINE>\d+)
-|   # or only one, but distinct from If (otherwise, this is an elif)
-                               1
-\n(?:\1.+\n)*?\1/orelse/0/_type='.+?(?<!If)'
-\n(?:\1.+\n)*?\1/orelse/0/lineno=(?P<LINE>\d+)
-)
-(
-\n(?:\1.+\n)* \1/orelse/.+/lineno=(?P<LINE>\d+)
-)?
-```
-
-##### Example
-
-```python
-1   if condition_1:
-2       if condition_2:
-3           pass
-4   elif condition_3: # no match: this is an elif
-5       if condition_4:
-6           pass
-7   else:
-8       if condition_5: # match
-9           pass        # |
-10      else:           # |
-11          pass        # |      match
-12      pass            # |
-13
-14  for foo in bar:
-15      if condition_6:
-16          break
-17  else:
-18      pass # no match for a loop else
-```
-
-##### Matches
-
-| Label | Lines |
-|:--|:--|
-| `if_else_branch` | 8-12, 11 |
-
---------------------------------------------------------------------------------
-
 #### Construct `if_elif_branch`
 
 Match the body of an `elif` clause, which is (or could be rewritten as) an `else` branch consisting in a single statement `if`.
@@ -1715,6 +1662,59 @@ Match the body of an `elif` clause, which is (or could be rewritten as) an `else
 | Label | Lines |
 |:--|:--|
 | `if_elif_branch` | 5-6, 8-9, 19, 26 |
+
+--------------------------------------------------------------------------------
+
+#### Construct `if_else_branch`
+
+Match the body of the possible branch `else` of an `if` statement.
+
+##### Definition
+
+```re
+           ^(.*)/_type='If'
+\n(?:\1.+\n)*?\1/orelse/length=
+(   # there is at least two statements in the else branch,
+                               \d+(?<![01])
+\n(?:\1.+\n)*?\1/orelse/0/lineno=(?P<LINE>\d+)
+|   # or only one, but distinct from If (otherwise, this is an elif)
+                               1
+\n(?:\1.+\n)*?\1/orelse/0/_type='.+?(?<!If)'
+\n(?:\1.+\n)*?\1/orelse/0/lineno=(?P<LINE>\d+)
+)
+(
+\n(?:\1.+\n)* \1/orelse/.+/lineno=(?P<LINE>\d+)
+)?
+```
+
+##### Example
+
+```python
+1   if condition_1:
+2       if condition_2:
+3           pass
+4   elif condition_3: # no match: this is an elif
+5       if condition_4:
+6           pass
+7   else:
+8       if condition_5: # match
+9           pass        # |
+10      else:           # |
+11          pass        # |      match
+12      pass            # |
+13
+14  for foo in bar:
+15      if condition_6:
+16          break
+17  else:
+18      pass # no match for a loop else
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `if_else_branch` | 8-12, 11 |
 
 --------------------------------------------------------------------------------
 
