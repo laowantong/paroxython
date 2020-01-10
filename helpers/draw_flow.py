@@ -17,7 +17,6 @@ Path(f"{base}.dot").write_text(
             '"ref.md" [shape=note fillcolor=moccasin]',
             '"default_taxonomy.tsv" [shape=note fillcolor=moccasin]',
             '"source files" [shape=folder fillcolor=moccasin]',
-            '"snapshots" [shape=folder fillcolor=moccasin]',
             'make_db -> "db.json"',
             '"db.json" -> filter_programs',
             '"ref.md" -> parse_program',

@@ -1,6 +1,6 @@
 import json
 from pathlib import Path
-from typing import Callable, Dict, List, Set, NewType
+from typing import Callable, Dict, List, Set
 
 import regex  # type: ignore
 

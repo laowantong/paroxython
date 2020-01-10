@@ -13,7 +13,6 @@ from user_types import (
     PathTaxons,
     Program,
     ProgramName,
-    ProgramNames,
     Source,
     TaxonName,
     Taxons,
