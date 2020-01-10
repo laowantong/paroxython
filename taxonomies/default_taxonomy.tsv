@@ -13,9 +13,9 @@ call/method/sequence/string/\1/	method_call:(casefold|center|count|encode|endswi
 call/method/set/\1/	method_call:(add|clear|copy|difference_update|difference|discard|intersection_update|intersection|isdisjoint|issubset|issuperset|pop|remove|symmetric_difference_update|symmetric_difference|union|update)
 category/\1/	category:(.+)
 control_flow/conditional/	if
-control_flow/conditional/else/	if_else
-control_flow/conditional/else/chained/	if_elif
-control_flow/conditional/nested/	nested_ifs
+control_flow/conditional/else/	if_else_branch
+control_flow/conditional/else/chained/	if_elif_branch
+control_flow/conditional/nested/\1/	nested_if:(.+)
 control_flow/loop/sequential/arithmetic/	for_range_stop
 control_flow/loop/sequential/arithmetic/start/	for_range_start
 control_flow/loop/sequential/arithmetic/start/step/	for_range_step

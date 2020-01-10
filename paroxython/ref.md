@@ -53,9 +53,10 @@
       - [Construct `closure`](#construct-closure)
   - [Conditionals](#conditionals)
       - [Construct `if`](#construct-if)
-      - [Construct `if_else`](#construct-if_else)
-      - [Construct `if_elif`](#construct-if_elif)
-      - [Construct `nested_ifs`](#construct-nested_ifs)
+      - [Construct `if_then_branch`](#construct-if_then_branch)
+      - [Construct `if_else_branch`](#construct-if_else_branch)
+      - [Construct `if_elif_branch`](#construct-if_elif_branch)
+      - [Construct `nested_if`](#construct-nested_if)
   - [Iterations](#iterations)
       - [Construct `for_each`](#construct-for_each)
       - [Construct `for_range_stop`](#construct-for_range_stop)
@@ -1503,12 +1504,177 @@ Function enclosing the definition of an inner function and returning it. Beware 
 
 #### Construct `if`
 
+Match an entire conditional (from the `if` clause to the last line of its body).
+
 ##### Definition
 
 ```re
-   ^(.*body/\d+)/_type='If' # be careful not to mistake elif (with orelse) for if
+           ^(.*)/_type='If'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
 \n(?:\1.+\n)* \1/.+/lineno=(?P<LINE>\d+)
+```
+
+##### Example
+
+```python
+1   if condition_1:     # match
+2       if condition_2: # |     match
+3           pass        # |     |
+4   elif condition_3:   # |     match: cf. remark
+5       if condition_4: # |     |     match
+6           pass        # |     |     |
+7   else:               # |     |
+8       if condition_5: # |     |     match
+9           pass        # |     |     |
+10      pass            # |     |
+```
+
+*Remark.* There is no such thing as an `elif` clause in the AST. Consequently, this code has the same representation as:
+
+```python
+if condition_1:
+    if condition_2:
+        pass
+else:
+    if condition_3:
+        if condition_4:
+            pass
+    else:
+        if condition_5:
+            pass
+        pass
+```
+
+... which should help figure out why the `elif` of line 4 counts as a regular `if`.
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `if` | 1-10, 2-3, 4-10, 5-6, 8-9 |
+
+--------------------------------------------------------------------------------
+
+#### Construct `if_then_branch`
+
+Match the body of the branch “`then`” of an `if` statement.
+
+##### Definition
+
+```re
+(^  # capture any body block
+                   .*/body/\d+
+|   # capture any orelse block whose length is greater than 1
+    (?<!length=1\n).*/orelse/\d+
+)
+                /_type='If'
+\n(?:\1.+\n)*?\1/body/0/lineno=(?P<LINE>\d+)
+(
+\n(?:\1.+\n)* \1/body/.*/lineno=(?P<LINE>\d+)
+)?
+```
+
+##### Example
+
+```python
+1   if condition_1:
+2       pass             # match
+3   elif condition_2:
+4       pass             # no match: this is an elif branch
+5   else:
+6       pass             # no match: this is an else branch
+7
+8   if condition_3:
+9       pass             # match
+10  else:
+11      if condition_4:
+12          pass         # match: there are 2 statements in the else clause of line 10
+13          pass         # |
+14      pass
+15
+16  if condition_5:
+17      pass             # match
+18      pass             # |
+19  else:
+20      if condition_4:  # no match: this is an elif branch in disguise
+21          pass
+22          pass
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `if_then_branch` | 2, 9, 12-13, 17-18 |
+
+--------------------------------------------------------------------------------
+
+#### Construct `if_else_branch`
+
+Match the body of the possible branch `else` of an `if` statement.
+
+##### Definition
+
+```re
+           ^(.*)/_type='If'
+\n(?:\1.+\n)*?\1/orelse/length=
+(   # there is at least two statements in the else branch,
+                               \d+(?<![01])
+\n(?:\1.+\n)*?\1/orelse/0/lineno=(?P<LINE>\d+)
+|   # or only one, but distinct from If (otherwise, this is an elif)
+                               1
+\n(?:\1.+\n)*?\1/orelse/0/_type='.+?(?<!If)'
+\n(?:\1.+\n)*?\1/orelse/0/lineno=(?P<LINE>\d+)
+)
+(
+\n(?:\1.+\n)* \1/orelse/.+/lineno=(?P<LINE>\d+)
+)?
+```
+
+##### Example
+
+```python
+1   if condition_1:
+2       if condition_2:
+3           pass
+4   elif condition_3: # no match: this is an elif
+5       if condition_4:
+6           pass
+7   else:
+8       if condition_5: # match
+9           pass        # |
+10      else:           # |
+11          pass        # |      match
+12      pass            # |
+13
+14  for foo in bar:
+15      if condition_6:
+16          break
+17  else:
+18      pass # no match for a loop else
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `if_else_branch` | 8-12, 11 |
+
+--------------------------------------------------------------------------------
+
+#### Construct `if_elif_branch`
+
+Match the body of an `elif` clause, which is (or could be rewritten as) an `else` branch consisting in a single statement `if`.
+
+##### Definition
+
+```re
+           ^(.*)/orelse/length=1
+\n(?:\1.+\n)*?\1/orelse/0/_type='If'
+\n(?:\1.+\n)*?\1/orelse/0/body/0/lineno=(?P<LINE>\d+)
+(
+\n(?:\1.+\n)* \1/orelse/0/body/.+/lineno=(?P<LINE>\d+)
+)?
 ```
 
 ##### Example
@@ -1518,119 +1684,89 @@ Function enclosing the definition of an inner function and returning it. Beware 
 2       if condition_2:
 3           pass
 4   elif condition_3:
-5       pass
-6   else:
-7       pass
-```
-
-##### Matches
-
-| Label | Lines |
-|:--|:--|
-| `if` | 1-7, 2-3 |
-
---------------------------------------------------------------------------------
-
-#### Construct `if_else`
-
-`if` statement with `else`.
-
-##### Definition
-
-```re
-           ^(.*)/_type='If'
-\n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
-\n(?:\1.+\n)*?\1/orelse/0/_type=(?!'If').+
-\n(?:\1.+\n)* \1/orelse/.*/lineno=(?P<LINE>\d+)
-```
-
-##### Example
-
-```python
-1   if condition_1:
-2       if condition_2:
-3           pass
-4   else:
-5       pass
-6   if condition_2:
-7       pass
-8   elif condition_3:
-9       pass
-```
-
-##### Matches
-
-| Label | Lines |
-|:--|:--|
-| `if_else` | 1-5 |
-
---------------------------------------------------------------------------------
-
-#### Construct `if_elif`
-
-`if` statement with `elif`.
-
-##### Definition
-
-```re
-           ^(.*)/_type='If'
-\n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
-\n(?:\1.+\n)*?\1/orelse/0/_type='If'
-\n(?:\1.+\n)* \1/orelse/.*/lineno=(?P<LINE>\d+)
-```
-
-##### Example
-
-```python
-1   if condition_1:
-2       pass
-3   elif condition_2:
-4       pass
-5
-6   if condition_3:
-7       pass
-8   elif condition_4:
-9       pass
+5       if condition_4: # match
+6           pass        # |
+7   elif condition_5:
+8       pass            # match
+9       pass            # |
 10  else:
-11      pass
+11      if condition_6:
+12          pass        # no match
+13      pass            # ... since this else branch has more than one statement
+14
+15  if condition_7:
+16      pass
+17  else:
+18      if condition_8:
+19          pass        # match: this is an elif in disguise
+20
+21  for foo in bar:
+22      if condition_9:
+23          break
+24  else:
+25      if condition_10:
+26          pass        # BUG: wrongly match a loop elif
 ```
+
+*Remark.* Lines 17-18 could/should be rewritten as `elif condition_8`. This results in a span of `19` for the implicit `elif`.
 
 ##### Matches
 
 | Label | Lines |
 |:--|:--|
-| `if_elif` | 1-4, 6-11 |
+| `if_elif_branch` | 5-6, 8-9, 19, 26 |
 
 --------------------------------------------------------------------------------
 
-#### Construct `nested_ifs`
+#### Construct `nested_if`
+
+Match an `if` clause nested in _n_ other `if` clauses, suffixing it by _n_ + 1.
 
 ##### Definition
 
 ```sql
-SELECT "nested_ifs",
-       span_start_1,
-       span_end_1
+SELECT "nested_if" || ":" || (count(*) + 1),
+       span_start_2,
+       span_end_2
 FROM nest
-WHERE name_1 = "if"
+WHERE name_1 IN ("if_then_branch",
+                 "if_else_branch",
+                 "if_elif_branch")
   AND name_2 = "if"
+GROUP BY span_2
+ORDER BY span_start_2
 ```
 
 ##### Example
 
 ```python
 1   if condition_1:
-2       if condition_2:
-3           pass
-4   else:
-5       pass
+2       if condition_2:     # match
+3           if condition_3: # |        match (nesting depth = 2)
+4               pass        # |        |
+5   else:
+6       if condition_4:     # match
+7           pass            # |
+8       if condition_5:     # match
+9           pass            # |
+10
+11  if condition_6:
+12      pass
+13  elif condition_7:
+14      pass
+15
+16  if condition_8:
+17      for foo in bar:
+18          if condition_9: # match
+19              pass        # |
 ```
 
 ##### Matches
 
 | Label | Lines |
 |:--|:--|
-| `nested_ifs` | 1-5 |
+| `nested_if:2` | 2-4, 6-7, 8-9, 18-19 |
+| `nested_if:3` | 3-4 |
 
 --------------------------------------------------------------------------------
 

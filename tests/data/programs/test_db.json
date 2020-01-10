@@ -26,7 +26,8 @@
         "function:print_collatz": [[1,8]],
         "function_call:print": [[3,3],[8,8]],
         "if": [[4,7]],
-        "if_else": [[4,7]],
+        "if_else_branch": [[7,7]],
+        "if_then_branch": [[5,5]],
         "int_literal": [[2,2],[4,4],[5,5],[7,7]],
         "literal:Num": [[2,2],[4,4],[7,7]],
         "procedure:print_collatz": [[1,8]],
@@ -37,7 +38,8 @@
       },
       "taxons": {
         "call/function/builtin/print/": [[3,3],[8,8]],
-        "control_flow/conditional/else/": [[4,7]],
+        "control_flow/conditional/": [[4,7]],
+        "control_flow/conditional/else/": [[7,7]],
         "function_definition/procedure/": [[1,8]],
         "operator/addition/": [[7,7]],
         "operator/multiplication/": [[7,7]],
@@ -124,7 +126,10 @@
     "if": [
       "tests/data/programs/collatz_print.py"
     ],
-    "if_else": [
+    "if_else_branch": [
+      "tests/data/programs/collatz_print.py"
+    ],
+    "if_then_branch": [
       "tests/data/programs/collatz_print.py"
     ],
     "int_literal": [
@@ -167,6 +172,9 @@
     "call/function/builtin/print/": [
       "tests/data/programs/collatz_print.py",
       "tests/data/programs/loop.py"
+    ],
+    "control_flow/conditional/": [
+      "tests/data/programs/collatz_print.py"
     ],
     "control_flow/conditional/else/": [
       "tests/data/programs/collatz_print.py"
