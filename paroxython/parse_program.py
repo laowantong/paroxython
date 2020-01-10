@@ -2,7 +2,6 @@ import ast
 from collections import defaultdict
 from pathlib import Path
 from typing import Callable, Dict, Iterator, Tuple, List
-import itertools
 import sqlite3
 
 import regex  # type: ignore
@@ -43,7 +42,8 @@ class Table:
 
     def create(self, labels: Labels) -> None:
         columns = [
-            "id INTEGER",
+            # use rowid as primary key:
+            # https://www.sqlite.org/lang_createtable.html#rowid
             "name TEXT",
             "name_prefix TEXT",
             "name_suffix TEXT",
@@ -52,7 +52,6 @@ class Table:
             "span_end INTEGER",
         ]
         self.c.execute(f"CREATE TABLE t ({','.join(columns)})")
-        self.i = itertools.count()
         self.insert_command = f"INSERT INTO t VALUES ({','.join('?' * len(columns))})"
         self.update(labels)
 
@@ -66,21 +65,20 @@ class Table:
         values = []
         for (name, spans) in labels:
             for span in spans:
-                (name_prefix, _, name_suffix) = name.partition(":")
+                (name_prefix, _, name_suffix) = name.partition(":", 1)
                 values.append(
-                    (
-                        next(self.i),
+                    (  # fmt:off
                         name,
                         name_prefix,
                         f":{name_suffix}",
                         str(span),
                         span.start,
                         span.end,
-                    )
+                    )  # fmt: on
                 )
         self.c.executemany(self.insert_command, values)
 
-    def delete(self):
+    def delete(self) -> None:
         self.c.execute("DROP TABLE t")
 
 

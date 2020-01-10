@@ -1614,7 +1614,7 @@ SELECT "nested_ifs",
 FROM t AS t1
 JOIN t AS t2 USING(name)
 WHERE name = "if"
-  AND t1.id != t2.id
+  AND t1.rowid != t2.rowid
   AND t1.span_start <= t2.span_start
   AND t2.span_end <= t1.span_end
 ```
