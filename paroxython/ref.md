@@ -33,8 +33,7 @@
       - [Construct `filtered_comprehension`](#construct-filtered_comprehension)
 - [Statements](#statements)
   - [Assignments](#assignments)
-      - [Construct `global_constant_definition`](#construct-global_constant_definition)
-      - [Construct `global_variable_definition`](#construct-global_variable_definition)
+      - [Construct `variable_definition`](#construct-variable_definition)
       - [Construct `assignment`](#construct-assignment)
       - [Construct `augmented_assignment`](#construct-augmented_assignment)
       - [Construct `chained_assignment`](#construct-chained_assignment)
@@ -895,61 +894,48 @@ Match a comprehension with an `if` clause.
 
 --------------------------------------------------------------------------------
 
-#### Construct `global_constant_definition`
+#### Construct `variable_definition`
 
 ##### Definition
 
 ```re
- ^(/body/\d+)/_type='Assign' # no indentation
-\n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
-\n(?:\1.+\n)*?\1/targets/.+/id='[A-Z0-9_]+' # all caps
+^(.*/targets/\d+(/elts/\d+(/value)?)?)/lineno=(?P<LINE>\d+)
+\n(?:\1.+\n)*?\1                      /id='(?P<SUFFIX>.+)'
 ```
 
 ##### Example
 
 ```python
-1   PATH = "foo/bar"
-2   (a, B) = (0, 1)
-3   (A, B) = (0, 1)
-4   if condition:
-5       PATH = "foo/bar" # BUG: no match
+1   _ = 1
+2   a = 1
+3   (b, c) = (1, 1)
+4   [d, e] = [1, 1]
+5   f[g] = 1            # no match
+6   if foo:
+7       h = 1
+8   def bar():
+9       i = 1
+10  j = k = 1
+11  l.m = 1             # no match
+12  (n, *o) = [1, 1, 1]
 ```
 
 ##### Matches
 
 | Label | Lines |
 |:--|:--|
-| `global_constant_definition` | 1, 2, 3 |
-
---------------------------------------------------------------------------------
-
-#### Construct `global_variable_definition`
-
-##### Definition
-
-```re
-  ^(/body/\d+)/_type='Assign' # no indentation
-\n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
-\n(?:\1.+\n)*?\1/targets/.+/id='.*?[a-z] # at least one lowercase letter
-```
-
-##### Example
-
-```python
-1   PATH = "foo/bar"
-2   (a, B) = (0, 1)
-3   (a, b) = (0, 1)
-4   if condition:
-5       path = "foo/bar" # BUG: no match
-6   path = "foo/bar"
-7   MyPath = "foo/bar"
-```
-
-##### Matches
-
-| Label | Lines |
-|:--|:--|
-| `global_variable_definition` | 2, 3, 6, 7 |
+| `variable_definition:_` | 1 |
+| `variable_definition:a` | 2 |
+| `variable_definition:b` | 3 |
+| `variable_definition:c` | 3 |
+| `variable_definition:d` | 4 |
+| `variable_definition:e` | 4 |
+| `variable_definition:h` | 7 |
+| `variable_definition:i` | 9 |
+| `variable_definition:j` | 10 |
+| `variable_definition:k` | 10 |
+| `variable_definition:n` | 12 |
+| `variable_definition:o` | 12 |
 
 --------------------------------------------------------------------------------
 

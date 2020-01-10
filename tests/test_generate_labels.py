@@ -12,7 +12,7 @@ def test_generate_labeled_sources():
     assert "assignment.py" in next(result)
     source = next(result).strip()
     print(source)
-    assert source == "a = b # assignment, global_variable_definition"
+    assert source == "a = b # assignment, variable_definition:a"
 
     assert "collatz_print.py" in next(result)
     source = next(result).strip()
@@ -23,9 +23,9 @@ def test_generate_labeled_sources():
             "    while n != 1: # comparison_operator:NotEq, evolve_state (-> +5), int_literal, literal:Num, suggest_constant_definition",
             "        print(n) # function_call:print",
             "        if n % 2 == 0: # added_label_on_line_4, binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, if (-> +3), int_literal, literal:Num, suggest_conditional_expression (-> +3)",
-            "            n = n // 2 # assignment, if_then_branch, int_literal, suggest_augmented_assignment",
+            "            n = n // 2 # assignment, if_then_branch, int_literal, suggest_augmented_assignment, variable_definition:n",
             "        else: # unknown_label",
-            "            n = 3 * n + 1 # assignment, binary_operator:Add, binary_operator:Mult, if_else_branch, int_literal, literal:Num, suggest_constant_definition",
+            "            n = 3 * n + 1 # assignment, binary_operator:Add, binary_operator:Mult, if_else_branch, int_literal, literal:Num, suggest_constant_definition, variable_definition:n",
             "    print(n) # function_call:print",
         ]
     )

@@ -47,11 +47,11 @@ class DB:
         self.c.execute(DB.main_creation_query)
         self.update(labels)
         self.c.execute(DB.nest_creation_query)
-        for row in self.c.execute("SELECT * from main"):
-            print(row)
-        print("-" * 80)
-        for row in self.c.execute("SELECT * FROM nest"):
-            print(row)
+        # for row in self.c.execute("SELECT * from main"):
+        #     print(row)
+        # print("-" * 80)
+        # for row in self.c.execute("SELECT * FROM nest"):
+        #     print(row)
 
     def read(self, query: Query) -> Labels:
         groups: LabelsSpans = defaultdict(list)
