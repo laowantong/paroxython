@@ -16,6 +16,7 @@ control_flow/conditional/	if
 control_flow/conditional/else/	if_else_branch
 control_flow/conditional/else/chained/	if_elif_branch
 control_flow/conditional/nested/\1/	nested_if:(.+)
+control_flow/loop/sequential/	for
 control_flow/loop/sequential/arithmetic/	for_range_stop
 control_flow/loop/sequential/arithmetic/start/	for_range_start
 control_flow/loop/sequential/arithmetic/start/step/	for_range_step
@@ -23,7 +24,7 @@ control_flow/loop/sequential/arithmetic/start/step/backwards/	for_range_step:-.+
 control_flow/loop/sequential/elements_and_indexes/	for_indexes_elements
 control_flow/loop/sequential/elements/	for_each
 control_flow/loop/sequential/indexes/	for_indexes
-control_flow/loop/sequential/nested/	nested_for
+control_flow/loop/sequential/nested/\1/	nested_for:(.+)
 control_flow/loop/sequential/nested/square/	square_nested_for
 control_flow/loop/sequential/nested/triangular/	triangular_nested_for
 exception/catch/	catch_exception:.+
@@ -115,12 +116,9 @@ control_flow/loop/non_sequential/divergent/break
 control_flow/loop/non_sequential/divergent/break/else	
 control_flow/loop/non_sequential/divergent/infinite	
 control_flow/loop/non_sequential/divergent/return	
-control_flow/loop/sequential	
 control_flow/loop/sequential/divergent/break	
 control_flow/loop/sequential/divergent/break/else	
 control_flow/loop/sequential/divergent/return	
-control_flow/loop/sequential/nested/rectangular	
-control_flow/loop/sequential/nested/triangular	
 function_definition	
 function_definition/decorated	
 function_definition/procedure	

@@ -58,6 +58,7 @@
       - [Construct `if_else_branch`](#construct-if_else_branch)
       - [Construct `nested_if`](#construct-nested_if)
   - [Iterations](#iterations)
+      - [Construct `for`](#construct-for)
       - [Construct `for_each`](#construct-for_each)
       - [Construct `for_range_stop`](#construct-for_range_stop)
       - [Construct `for_range_start`](#construct-for_range_start)
@@ -1774,7 +1775,38 @@ ORDER BY span_start_2
 
 --------------------------------------------------------------------------------
 
+#### Construct `for`
+
+##### Definition
+
+```re
+           ^(.*)/_type='For'
+\n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
+\n(?:\1.+\n)* \1/.*/lineno=(?P<LINE>\d+)
+```
+
+##### Example
+
+```python
+1   for x in seq_1:
+2       for y in range(len(seq_3)):
+3           pass
+4       for i in seq_2:
+5           pass
+6       else:
+7           pass
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `for` | 1-7, 2-3, 4-7 |
+
+--------------------------------------------------------------------------------
+
 #### Construct `for_each`
+
 Iterate over the elements of a (named) collection.
 
 ##### Definition
@@ -1980,13 +2012,19 @@ Iterate over index numbers of a collection.
 
 #### Construct `nested_for`
 
+Match a `for` statement nested in _n_ other `for` statements, suffixing it by _n_ + 1.
+
 ##### Definition
 
-```re
-           ^(.*)/_type='For'
-\n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
-\n(?:\1.+\n)* \1/(?:body|orelse)/\d+/_type='For'
-\n(?:\1.+\n)* \1/.*/lineno=(?P<LINE>\d+)
+```sql
+SELECT "nested_for" || ":" || (count(*) + 1),
+       span_start_2,
+       span_end_2
+FROM nest
+WHERE name_1 = "for"
+  AND name_2 = "for"
+GROUP BY span_2
+ORDER BY span_start_2
 ```
 
 ##### Example
@@ -1995,14 +2033,17 @@ Iterate over index numbers of a collection.
 1   for x_1 in seq_1:
 2       for x_2 in seq_2:
 3           pass
-4       pass
+4           for x_3 in seq_3:
+5               pass
+6       pass
 ```
 
 ##### Matches
 
 | Label | Lines |
 |:--|:--|
-| `nested_for` | 1-4 |
+| `nested_for:2` | 2-5 |
+| `nested_for:3` | 4-5 |
 
 --------------------------------------------------------------------------------
 
