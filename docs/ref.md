@@ -1639,7 +1639,7 @@ Match the body of an `elif` clause, which is (or could be rewritten as) an `else
 23          break
 24  else:
 25      if condition_10:
-26          pass        # BUG: wrongly match a loop elif
+26          pass        # no match
 ```
 
 *Remark.* Lines 17-18 could/should be rewritten as `elif condition_8`. This results in a span of `19` for the implicit `elif`.
@@ -1648,7 +1648,7 @@ Match the body of an `elif` clause, which is (or could be rewritten as) an `else
 
 | Label | Lines |
 |:--|:--|
-| `if_elif_branch` | 5-6, 8-9, 19, 26 |
+| `if_elif_branch` | 5-6, 8-9, 19 |
 
 --------------------------------------------------------------------------------
 

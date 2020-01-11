@@ -19,6 +19,8 @@ def flatten_ast(node: Any, prefix: str = "") -> str:
         if "lineno" in node._attributes:
             acc.append(f"{prefix}/lineno={node.lineno}\n")
         for (name, x) in ast.iter_fields(node):
+            if name == "orelse" and isinstance(node, (ast.For, ast.While, ast.AsyncFor)):
+                name = "loopelse"  # this change makes the "orelse" specific to conditionals
             acc.append(flatten_ast(x, f"{prefix}/{name}"))
         return "".join(acc)
     elif isinstance(node, list):
