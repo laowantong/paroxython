@@ -37,7 +37,7 @@ find_all_constructs = regex.compile(
 class ProgramParser:
     """Compile the given construct definitions, and search them in a Program."""
 
-    def __init__(self, ref_path: str = "paroxython/ref.md") -> None:
+    def __init__(self, ref_path: str = "docs/ref.md") -> None:
         """Compile the constructs to search."""
         self.ref_path = Path(ref_path)
         text = self.ref_path.read_text()
