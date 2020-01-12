@@ -352,8 +352,8 @@ In the AST, an imaginary literal contains the same symbols as a floating point l
 ```re
            ^(.*)/_type='Subscript'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
-\n(?:\1.+\n)*?\1/(?P<_1>slice)/_type='Slice'
-\n(?:\1.+\n)*?\1/(?P=_1)      /step=None
+\n(?:\1.+\n)*?\1/slice/_type='Slice'
+\n(?:\1.+\n)*?\1/slice/step=None
 ```
 
 ##### Example
@@ -378,8 +378,8 @@ In the AST, an imaginary literal contains the same symbols as a floating point l
 
 ```re
            ^(.*)/_type='Subscript'
-\n(?:\1.+\n)*?\1/(?P<_1>slice)/_type='Slice'
-\n(?:\1.+\n)*?\1/(?P=_1)      /step/lineno=(?P<LINE>\d+)
+\n(?:\1.+\n)*?\1/slice/_type='Slice'
+\n(?:\1.+\n)*?\1/slice/step/lineno=(?P<LINE>\d+)
 ```
 
 ##### Example
