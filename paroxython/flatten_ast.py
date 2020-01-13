@@ -5,6 +5,7 @@ import regex  # type: ignore
 
 extract_ids = regex.compile(r"Name\(id='(.+?)'\)").findall
 remove_context = regex.compile(r", ctx=.+?\(\)").sub
+deduplicate = dict.fromkeys  # deduplicate whilst preserving order
 
 
 def flatten_ast(node: Any, prefix: str = "") -> str:
@@ -12,15 +13,15 @@ def flatten_ast(node: Any, prefix: str = "") -> str:
         acc = [f"{prefix}/_type='{type(node).__name__}'\n"]
         if isinstance(node, ast.expr):
             node_repr = remove_context("", ast.dump(node))
-            ids = "''".join(set(extract_ids(node_repr)))
-            acc.append(f"{prefix}/_ids='{ids}'\n")
+            ids = ":".join(deduplicate(extract_ids(node_repr)))
+            acc.append(f"{prefix}/_ids={ids}\n")
             expr_hash = hex(hash(node_repr) & 0xFFFFFFFF)
             acc.append(f"{prefix}/_hash={expr_hash}\n")
         if "lineno" in node._attributes:
             acc.append(f"{prefix}/lineno={node.lineno}\n")
         for (name, x) in ast.iter_fields(node):
             if name == "orelse" and isinstance(node, (ast.For, ast.While, ast.AsyncFor)):
-                name = "loopelse"  # this change makes the "orelse" specific to conditionals
+                name = "loopelse"  # this makes the "orelse" clause specific to conditionals
             acc.append(flatten_ast(x, f"{prefix}/{name}"))
         return "".join(acc)
     elif isinstance(node, list):

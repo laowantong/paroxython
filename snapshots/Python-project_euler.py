@@ -106,7 +106,7 @@ def solution(n): # function:solution (-> +9), function_returning_a_value:solutio
 # ----------------------------------------------------------------------------------------
 def solution(n): # function:solution (-> +7), function_returning_a_value:solution (-> +7)
     result = 0 # assignment, int_literal, literal:Num, variable_definition:result
-    for i in range(n): # accumulate_elements:AugAssign (-> +4), for (-> +4), for_range_stop (-> +4), function_call:range
+    for i in range(n): # accumulate_elements:AugAssign (-> +4), for:i (-> +4), for_range_stop (-> +4), function_call:range
         if i % 3 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:3, if (-> +3), int_literal, literal:Num, suggest_constant_definition
             result += i # augmented_assignment, if_then_branch
         elif i % 5 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:5, if (-> +1), int_literal, literal:Num, suggest_constant_definition
@@ -183,7 +183,7 @@ def solution(n): # function:solution (-> +12), function_returning_a_value:soluti
             break # if_then_branch
         i += 1 # augmented_assignment, int_literal, literal:Num
     sum = 0 # assignment, int_literal, literal:Num, variable_definition:sum
-    for j in range(len(a) - 1): # accumulate_elements:AugAssign (-> +2), binary_operator:Sub, composition, for (-> +2), for_range_stop (-> +2), function_call:len, function_call:range, int_literal, literal:Num
+    for j in range(len(a) - 1): # accumulate_elements:AugAssign (-> +2), binary_operator:Sub, composition, for:j (-> +2), for_range_stop (-> +2), function_call:len, function_call:range, int_literal, literal:Num
         if a[j] % 2 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, if (-> +1), index, int_literal, literal:Num
             sum += a[j] # augmented_assignment, if_then_branch, index
     return sum
@@ -198,7 +198,7 @@ def isprime(no): # function:isprime (-> +9), function_returning_a_value:isprime 
     elif no % 2 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, if (-> +1), int_literal, literal:Num
         return False # if_elif_branch, literal:False
     sq = int(math.sqrt(no)) + 1 # assignment, binary_operator:Add, composition, function_call:int, int_literal, literal:Num, method_call:sqrt, variable_definition:sq
-    for i in range(3, sq, 2): # for (-> +2), for_range_step:2 (-> +2), function_call:range, int_literal, literal:Num, suggest_constant_definition, universal_quantifier (-> +3)
+    for i in range(3, sq, 2): # for:i (-> +2), for_range_step:2 (-> +2), function_call:range, int_literal, literal:Num, suggest_constant_definition, universal_quantifier (-> +3)
         if no % i == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test, if (-> +1), int_literal, literal:Num
             return False # if_then_branch, literal:False
     return True # literal:True
@@ -219,7 +219,7 @@ def solution(n): # function:solution (-> +24), function_returning_a_value:soluti
             return int(n) # function_call:int, if_then_branch
         else:
             n1 = int(math.sqrt(n)) + 1 # assignment, binary_operator:Add, composition, function_call:int, if_else_branch (-> +8), int_literal, literal:Num, method_call:sqrt, variable_definition:n1
-            for i in range(3, n1, 2): # for (-> +6), for_range_step:2 (-> +6), function_call:range, int_literal, literal:Num, suggest_constant_definition
+            for i in range(3, n1, 2): # for:i (-> +6), for_range_step:2 (-> +6), function_call:range, int_literal, literal:Num, suggest_constant_definition
                 if n % i == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test, if (-> +5), int_literal, literal:Num, nested_if:3 (-> +5)
                     if isprime(n / i): # binary_operator:Div, function_call:isprime, if (-> +4), if_then_branch (-> +4), nested_if:4 (-> +4)
                         maxNumber = n / i # assignment, binary_operator:Div, if_then_branch (-> +1), variable_definition:maxNumber
@@ -276,7 +276,7 @@ def solution(n: int) -> int: # function:solution, function_returning_a_value:sol
 # ../Python/project_euler/problem_04/sol1.py
 # ----------------------------------------------------------------------------------------
 def solution(n): # function:solution (-> +8), function_returning_a_value:solution (-> +8)
-    for number in range(n - 1, 10000, -1): # binary_operator:Sub, find_first_element (-> +6), for (-> +7), for_range_step:-1 (-> +7), function_call:range, int_literal, literal:Num, suggest_constant_definition
+    for number in range(n - 1, 10000, -1): # binary_operator:Sub, find_first_element (-> +6), for:number (-> +7), for_range_step:-1 (-> +7), function_call:range, int_literal, literal:Num, suggest_constant_definition
         strNumber = str(number) # assignment, function_call:str, variable_definition:strNumber
         if strNumber == strNumber[::-1]: # comparison_operator:Eq, if (-> +5), int_literal, literal:Num, slice_step
             divisor = 999 # assignment, if_then_branch (-> +4), int_literal, literal:Num, suggest_constant_definition, variable_definition:divisor
@@ -290,8 +290,8 @@ def solution(n): # function:solution (-> +8), function_returning_a_value:solutio
 # ----------------------------------------------------------------------------------------
 def solution(n): # function:solution (-> +7), function_returning_a_value:solution (-> +7)
     answer = 0 # assignment, int_literal, literal:Num, variable_definition:answer
-    for i in range(999, 99, -1): # accumulate_elements:Assign (-> +4), for (-> +4), for_range_step:-1 (-> +4), function_call:range, int_literal, literal:Num, square_nested_for (-> +4), suggest_constant_definition
-        for j in range(999, 99, -1): # accumulate_elements:Assign (-> +3), for (-> +3), for_range_step:-1 (-> +3), function_call:range, int_literal, literal:Num, nested_for:2 (-> +3), suggest_constant_definition
+    for i in range(999, 99, -1): # accumulate_elements:Assign (-> +4), for:i (-> +4), for_range_step:-1 (-> +4), function_call:range, int_literal, literal:Num, square_nested_for (-> +4), suggest_constant_definition
+        for j in range(999, 99, -1): # accumulate_elements:Assign (-> +3), for:j (-> +3), for_range_step:-1 (-> +3), function_call:range, int_literal, literal:Num, nested_for:2 (-> +3), suggest_constant_definition
             t = str(i * j) # assignment, binary_operator:Mult, function_call:str, variable_definition:t
             if t == t[::-1] and i * j < n: # binary_operator:Mult, boolean_operator:And, comparison_operator:Eq, comparison_operator:Lt, if (-> +1), int_literal, literal:Num, slice_step
                 answer = max(answer, i * j) # assignment, binary_operator:Mult, function_call:max, if_then_branch, variable_definition:answer
@@ -311,7 +311,7 @@ def solution(n): # function:solution (-> +18), function_returning_a_value:soluti
     while 1: # int_literal, literal:Num, while (-> +10)
         i += n * (n - 1) # augmented_assignment, binary_operator:Mult, binary_operator:Sub, int_literal, literal:Num
         nfound = 0 # assignment, int_literal, literal:Num, variable_definition:nfound
-        for j in range(2, n): # for (-> +3), for_range_start (-> +3), function_call:range, int_literal, literal:Num
+        for j in range(2, n): # for:j (-> +3), for_range_start (-> +3), function_call:range, int_literal, literal:Num
             if i % j != 0: # binary_operator:Mod, comparison_operator:NotEq, divisibility_test, if (-> +2), int_literal, literal:Num
                 nfound = 1 # assignment, if_then_branch (-> +1), int_literal, literal:Num, variable_definition:nfound
                 break
@@ -329,7 +329,7 @@ def lcm(x, y): # function:lcm (-> +1), function_returning_a_value:lcm (-> +1)
     return (x * y) // gcd(x, y) # binary_operator:FloorDiv, binary_operator:Mult, function_call:gcd
 def solution(n): # function:solution (-> +4), function_returning_a_value:solution (-> +4)
     g = 1 # assignment, int_literal, literal:Num, variable_definition:g
-    for i in range(1, n + 1): # accumulate_elements:Assign (-> +1), binary_operator:Add, for (-> +1), for_range_start (-> +1), function_call:range, int_literal, literal:Num
+    for i in range(1, n + 1): # accumulate_elements:Assign (-> +1), binary_operator:Add, for:i (-> +1), for_range_start (-> +1), function_call:range, int_literal, literal:Num
         g = lcm(g, i) # assignment, function_call:lcm, variable_definition:g
     return g
 
@@ -339,7 +339,7 @@ def solution(n): # function:solution (-> +4), function_returning_a_value:solutio
 def solution(n): # function:solution (-> +7), function_returning_a_value:solution (-> +7)
     suma = 0 # assignment, int_literal, literal:Num, variable_definition:suma
     sumb = 0 # assignment, int_literal, literal:Num, variable_definition:sumb
-    for i in range(1, n + 1): # accumulate_elements:AugAssign (-> +2), binary_operator:Add, for (-> +2), for_range_start (-> +2), function_call:range, int_literal, literal:Num
+    for i in range(1, n + 1): # accumulate_elements:AugAssign (-> +2), binary_operator:Add, for:i (-> +2), for_range_start (-> +2), function_call:range, int_literal, literal:Num
         suma += i ** 2 # augmented_assignment, binary_operator:Pow, int_literal, literal:Num
         sumb += i # augmented_assignment
     sum = sumb ** 2 - suma # assignment, binary_operator:Pow, binary_operator:Sub, int_literal, literal:Num, variable_definition:sum
@@ -382,7 +382,7 @@ def isprime(n): # function:isprime (-> +10), function_returning_a_value:isprime 
         return False # if_elif_branch, literal:False
     else:
         sq = int(sqrt(n)) + 1 # assignment, binary_operator:Add, composition, function_call:int, function_call:sqrt, if_else_branch (-> +3), int_literal, literal:Num, variable_definition:sq
-        for i in range(3, sq, 2): # for (-> +2), for_range_step:2 (-> +2), function_call:range, int_literal, literal:Num, suggest_constant_definition
+        for i in range(3, sq, 2): # for:i (-> +2), for_range_step:2 (-> +2), function_call:range, int_literal, literal:Num, suggest_constant_definition
             if n % i == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test, if (-> +1), int_literal, literal:Num, nested_if:2 (-> +1)
                 return False # if_then_branch, literal:False
     return True # literal:True
@@ -403,7 +403,7 @@ def solution(n): # function:solution (-> +11), function_returning_a_value:soluti
 # ../Python/project_euler/problem_07/sol2.py
 # ----------------------------------------------------------------------------------------
 def isprime(number): # function:isprime (-> +4), function_returning_a_value:isprime (-> +4)
-    for i in range(2, int(number ** 0.5) + 1): # binary_operator:Add, binary_operator:Pow, composition, float_literal, for (-> +2), for_range_start (-> +2), function_call:int, function_call:range, int_literal, literal:Num, suggest_constant_definition, universal_quantifier (-> +3)
+    for i in range(2, int(number ** 0.5) + 1): # binary_operator:Add, binary_operator:Pow, composition, float_literal, for:i (-> +2), for_range_start (-> +2), function_call:int, function_call:range, int_literal, literal:Num, suggest_constant_definition, universal_quantifier (-> +3)
         if number % i == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test, if (-> +1), int_literal, literal:Num
             return False # if_then_branch, literal:False
     return True # literal:True
@@ -468,9 +468,9 @@ N = """73167176531330624919225119674426574742355349194934\ # assignment, variabl
 71636269561882670428252483600823257530420752963450""" # literal:Str
 def solution(n): # function:solution (-> +8), function_returning_a_value:solution (-> +8)
     LargestProduct = -sys.maxsize - 1 # assignment, binary_operator:Sub, int_literal, literal:Num, unary_operator:USub, variable_definition:LargestProduct
-    for i in range(len(n) - 12): # accumulate_elements:AugAssign (-> +5), binary_operator:Sub, composition, for (-> +5), for_range_stop (-> +5), function_call:len, function_call:range, int_literal, literal:Num, suggest_constant_definition
+    for i in range(len(n) - 12): # accumulate_elements:AugAssign (-> +5), binary_operator:Sub, composition, for:i (-> +5), for_range_stop (-> +5), function_call:len, function_call:range, int_literal, literal:Num, suggest_constant_definition
         product = 1 # assignment, int_literal, literal:Num, variable_definition:product
-        for j in range(13): # accumulate_elements:AugAssign (-> +1), for (-> +1), for_range_stop (-> +1), function_call:range, int_literal, literal:Num, nested_for:2 (-> +1), suggest_constant_definition
+        for j in range(13): # accumulate_elements:AugAssign (-> +1), for:j (-> +1), for_range_stop (-> +1), function_call:range, int_literal, literal:Num, nested_for:2 (-> +1), suggest_constant_definition
             product *= int(n[i + j]) # augmented_assignment, binary_operator:Add, function_call:int, index, index_arithmetic
         if product > LargestProduct: # comparison_operator:Gt, if (-> +1)
             LargestProduct = product # assignment, if_then_branch, variable_definition:LargestProduct
@@ -536,7 +536,7 @@ N = """73167176531330624919225119674426574742355349194934\ # assignment, variabl
 71636269561882670428252483600823257530420752963450""" # literal:Str
 def streval(s: str) -> int: # function:streval, function_returning_a_value:streval
     ret = 1 # assignment, int_literal, literal:Num, variable_definition:ret
-    for it in s: # accumulate_elements:AugAssign (-> +1), for (-> +1), for_each (-> +1)
+    for it in s: # accumulate_elements:AugAssign (-> +1), for:it (-> +1), for_each (-> +1)
         ret *= int(it) # augmented_assignment, function_call:int
     return ret
 def solution(n: str) -> int: # function:solution, function_returning_a_value:solution
@@ -557,9 +557,9 @@ def solution(n: str) -> int: # function:solution, function_returning_a_value:sol
 # ../Python/project_euler/problem_09/sol1.py
 # ----------------------------------------------------------------------------------------
 def solution(): # function:solution (-> +7), function_returning_a_value:solution (-> +7)
-    for a in range(300): # for (-> +6), for_range_stop (-> +6), function_call:range, int_literal, literal:Num, suggest_constant_definition
-        for b in range(400): # for (-> +5), for_range_stop (-> +5), function_call:range, int_literal, literal:Num, nested_for:2 (-> +5), suggest_constant_definition
-            for c in range(500): # for (-> +4), for_range_stop (-> +4), function_call:range, int_literal, literal:Num, nested_for:3 (-> +4), suggest_constant_definition
+    for a in range(300): # for:a (-> +6), for_range_stop (-> +6), function_call:range, int_literal, literal:Num, suggest_constant_definition
+        for b in range(400): # for:b (-> +5), for_range_stop (-> +5), function_call:range, int_literal, literal:Num, nested_for:2 (-> +5), suggest_constant_definition
+            for c in range(500): # for:c (-> +4), for_range_stop (-> +4), function_call:range, int_literal, literal:Num, nested_for:3 (-> +4), suggest_constant_definition
                 if a < b < c: # chained_comparison:2, comparison_operator:Lt, if (-> +3)
                     if (a ** 2) + (b ** 2) == (c ** 2): # binary_operator:Add, binary_operator:Pow, comparison_operator:Eq, if (-> +2), if_then_branch (-> +2), int_literal, literal:Num, nested_if:2 (-> +2)
                         if (a + b + c) == 1000: # binary_operator:Add, comparison_operator:Eq, if (-> +1), if_then_branch (-> +1), int_literal, literal:Num, nested_if:3 (-> +1), suggest_constant_definition
@@ -571,7 +571,7 @@ def solution(): # function:solution (-> +7), function_returning_a_value:solution
 def solution(n): # function:solution (-> +10), function_returning_a_value:solution (-> +10)
     product = -1 # assignment, int_literal, literal:Num, variable_definition:product
     d = 0 # assignment, int_literal, literal:Num, variable_definition:d
-    for a in range(1, n // 3): # binary_operator:FloorDiv, for (-> +6), for_range_start (-> +6), function_call:range, int_literal, literal:Num, suggest_constant_definition
+    for a in range(1, n // 3): # binary_operator:FloorDiv, for:a (-> +6), for_range_start (-> +6), function_call:range, int_literal, literal:Num, suggest_constant_definition
         b = (n * n - 2 * a * n) // (2 * n - 2 * a) # assignment, binary_operator:FloorDiv, binary_operator:Mult, binary_operator:Sub, int_literal, literal:Num, variable_definition:b
         c = n - a - b # assignment, binary_operator:Sub, variable_definition:c
         if c * c == (a * a + b * b): # binary_operator:Add, binary_operator:Mult, comparison_operator:Eq, if (-> +3)
@@ -597,7 +597,7 @@ def solution(): # function:solution (-> +7), function_returning_a_value:solution
 # ----------------------------------------------------------------------------------------
 from math import sqrt # import_from:math
 def is_prime(n): # function:is_prime (-> +4), function_returning_a_value:is_prime (-> +4)
-    for i in range(2, int(sqrt(n)) + 1): # binary_operator:Add, composition, for (-> +2), for_range_start (-> +2), function_call:int, function_call:range, function_call:sqrt, int_literal, literal:Num, universal_quantifier (-> +3)
+    for i in range(2, int(sqrt(n)) + 1): # binary_operator:Add, composition, for:i (-> +2), for_range_start (-> +2), function_call:int, function_call:range, function_call:sqrt, int_literal, literal:Num, universal_quantifier (-> +3)
         if n % i == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test, if (-> +1), int_literal, literal:Num
             return False # if_then_branch, literal:False
     return True # literal:True
@@ -606,7 +606,7 @@ def sum_of_primes(n): # function:sum_of_primes (-> +8), function_returning_a_val
         sumOfPrimes = 2 # assignment, if_then_branch, int_literal, literal:Num, variable_definition:sumOfPrimes
     else:
         return 0 # if_else_branch, int_literal, literal:Num
-    for i in range(3, n, 2): # accumulate_elements:AugAssign (-> +2), for (-> +2), for_range_step:2 (-> +2), function_call:range, int_literal, literal:Num, suggest_constant_definition
+    for i in range(3, n, 2): # accumulate_elements:AugAssign (-> +2), for:i (-> +2), for_range_step:2 (-> +2), function_call:range, int_literal, literal:Num, suggest_constant_definition
         if is_prime(i): # function_call:is_prime, if (-> +1)
             sumOfPrimes += i # augmented_assignment, if_then_branch
     return sumOfPrimes
@@ -638,12 +638,12 @@ def prime_sum(n: int) -> int: # function:prime_sum, function_returning_a_value:p
     list_ = [0 for i in range(n + 1)] # assignment, binary_operator:Add, comprehension:List, comprehension_for_count:1, function_call:range, int_literal, literal:Num, variable_definition:list_
     list_[0] = 1 # assignment, index, int_literal, literal:Num
     list_[1] = 1 # assignment, index, int_literal, literal:Num
-    for i in range(2, int(n ** 0.5) + 1): # binary_operator:Add, binary_operator:Pow, composition, float_literal, for (-> +3), for_range_start (-> +3), function_call:int, function_call:range, int_literal, literal:Num, suggest_constant_definition
+    for i in range(2, int(n ** 0.5) + 1): # binary_operator:Add, binary_operator:Pow, composition, float_literal, for:i (-> +3), for_range_start (-> +3), function_call:int, function_call:range, int_literal, literal:Num, suggest_constant_definition
         if list_[i] == 0: # comparison_operator:Eq, if (-> +2), index, int_literal, literal:Num
-            for j in range(i * i, n + 1, i): # binary_operator:Add, binary_operator:Mult, for (-> +1), for_range_step (-> +1), function_call:range, if_then_branch (-> +1), int_literal, literal:Num, nested_for:2 (-> +1)
+            for j in range(i * i, n + 1, i): # binary_operator:Add, binary_operator:Mult, for:j (-> +1), for_range_step (-> +1), function_call:range, if_then_branch (-> +1), int_literal, literal:Num, nested_for:2 (-> +1)
                 list_[j] = 1 # assignment, index, int_literal, literal:Num
     s = 0 # assignment, int_literal, literal:Num, variable_definition:s
-    for i in range(n): # accumulate_elements:AugAssign (-> +2), for (-> +2), for_range_stop (-> +2), function_call:range
+    for i in range(n): # accumulate_elements:AugAssign (-> +2), for:i (-> +2), for_range_stop (-> +2), function_call:range
         if list_[i] == 0: # comparison_operator:Eq, if (-> +1), index, int_literal, literal:Num
             s += i # augmented_assignment, if_then_branch
     return s
@@ -658,8 +658,8 @@ def largest_product(grid): # function:largest_product (-> +27), function_returni
     largest = 0 # assignment, int_literal, literal:Num, variable_definition:largest
     lrDiagProduct = 0 # assignment, int_literal, literal:Num, variable_definition:lrDiagProduct
     rlDiagProduct = 0 # assignment, int_literal, literal:Num, variable_definition:rlDiagProduct
-    for i in range(nColumns): # for (-> +20), for_range_stop (-> +20), function_call:range
-        for j in range(nRows - 3): # binary_operator:Sub, for (-> +19), for_range_stop (-> +19), function_call:range, int_literal, literal:Num, nested_for:2 (-> +19), suggest_constant_definition
+    for i in range(nColumns): # for:i (-> +20), for_range_stop (-> +20), function_call:range
+        for j in range(nRows - 3): # binary_operator:Sub, for:j (-> +19), for_range_stop (-> +19), function_call:range, int_literal, literal:Num, nested_for:2 (-> +19), suggest_constant_definition
             vertProduct = grid[j][i] * grid[j + 1][i] * grid[j + 2][i] * grid[j + 3][i] # assignment, binary_operator:Add, binary_operator:Mult, index, index_arithmetic, int_literal, literal:Num, suggest_constant_definition, variable_definition:vertProduct
             horzProduct = grid[i][j] * grid[i][j + 1] * grid[i][j + 2] * grid[i][j + 3] # assignment, binary_operator:Add, binary_operator:Mult, index, index_arithmetic, int_literal, literal:Num, suggest_constant_definition, variable_definition:horzProduct
             if i < nColumns - 3: # binary_operator:Sub, comparison_operator:Lt, if (-> +5), int_literal, literal:Num, suggest_constant_definition
@@ -683,7 +683,7 @@ def largest_product(grid): # function:largest_product (-> +27), function_returni
 def solution(): # function:solution (-> +6), function_returning_a_value:solution (-> +6)
     grid = [] # assignment, literal:List, variable_definition:grid
     with open(os.path.dirname(__file__) + "/grid.txt") as file: # binary_operator:Add, composition, function_call:open, literal:Str, method_call:dirname
-        for line in file: # for (-> +1), for_each (-> +1)
+        for line in file: # for:line (-> +1), for_each (-> +1)
             grid.append(line.strip("\n").split(" ")) # composition, literal:Str, method_call:append, method_call:split, method_call:strip, method_chaining
     grid = [[int(i) for i in grid[j]] for j in range(len(grid))] # assignment, composition, comprehension:List, comprehension_for_count:1, function_call:int, function_call:len, function_call:range, index, variable_definition:grid
     return largest_product(grid) # function_call:largest_product
@@ -695,26 +695,26 @@ import os # import:os
 def solution(): # function:solution (-> +26), function_returning_a_value:solution (-> +26)
     with open(os.path.dirname(__file__) + "/grid.txt") as f: # binary_operator:Add, composition, function_call:open, literal:Str, method_call:dirname
         l = [] # assignment, literal:List, variable_definition:l
-        for i in range(20): # for (-> +1), for_range_stop (-> +1), function_call:range, int_literal, literal:Num, suggest_constant_definition
+        for i in range(20): # for:i (-> +1), for_range_stop (-> +1), function_call:range, int_literal, literal:Num, suggest_constant_definition
             l.append([int(x) for x in f.readline().split()]) # composition, comprehension:List, comprehension_for_count:1, function_call:int, method_call:append, method_call:readline, method_call:split, method_chaining
         maximum = 0 # assignment, int_literal, literal:Num, variable_definition:maximum
-        for i in range(20): # for (-> +4), for_range_stop (-> +4), function_call:range, int_literal, literal:Num, suggest_constant_definition
-            for j in range(17): # for (-> +3), for_range_stop (-> +3), function_call:range, int_literal, literal:Num, nested_for:2 (-> +3), suggest_constant_definition
+        for i in range(20): # for:i (-> +4), for_range_stop (-> +4), function_call:range, int_literal, literal:Num, suggest_constant_definition
+            for j in range(17): # for:j (-> +3), for_range_stop (-> +3), function_call:range, int_literal, literal:Num, nested_for:2 (-> +3), suggest_constant_definition
                 temp = l[i][j] * l[i][j + 1] * l[i][j + 2] * l[i][j + 3] # assignment, binary_operator:Add, binary_operator:Mult, index, index_arithmetic, int_literal, literal:Num, suggest_constant_definition, variable_definition:temp
                 if temp > maximum: # comparison_operator:Gt, if (-> +1)
                     maximum = temp # assignment, if_then_branch, variable_definition:maximum
-        for i in range(17): # for (-> +4), for_range_stop (-> +4), function_call:range, int_literal, literal:Num, suggest_constant_definition
-            for j in range(20): # for (-> +3), for_range_stop (-> +3), function_call:range, int_literal, literal:Num, nested_for:2 (-> +3), suggest_constant_definition
+        for i in range(17): # for:i (-> +4), for_range_stop (-> +4), function_call:range, int_literal, literal:Num, suggest_constant_definition
+            for j in range(20): # for:j (-> +3), for_range_stop (-> +3), function_call:range, int_literal, literal:Num, nested_for:2 (-> +3), suggest_constant_definition
                 temp = l[i][j] * l[i + 1][j] * l[i + 2][j] * l[i + 3][j] # assignment, binary_operator:Add, binary_operator:Mult, index, index_arithmetic, int_literal, literal:Num, suggest_constant_definition, variable_definition:temp
                 if temp > maximum: # comparison_operator:Gt, if (-> +1)
                     maximum = temp # assignment, if_then_branch, variable_definition:maximum
-        for i in range(17): # for (-> +4), for_range_stop (-> +4), function_call:range, int_literal, literal:Num, square_nested_for (-> +4), suggest_constant_definition
-            for j in range(17): # for (-> +3), for_range_stop (-> +3), function_call:range, int_literal, literal:Num, nested_for:2 (-> +3), suggest_constant_definition
+        for i in range(17): # for:i (-> +4), for_range_stop (-> +4), function_call:range, int_literal, literal:Num, square_nested_for (-> +4), suggest_constant_definition
+            for j in range(17): # for:j (-> +3), for_range_stop (-> +3), function_call:range, int_literal, literal:Num, nested_for:2 (-> +3), suggest_constant_definition
                 temp = l[i][j] * l[i + 1][j + 1] * l[i + 2][j + 2] * l[i + 3][j + 3] # assignment, binary_operator:Add, binary_operator:Mult, index, index_arithmetic, int_literal, literal:Num, suggest_constant_definition, variable_definition:temp
                 if temp > maximum: # comparison_operator:Gt, if (-> +1)
                     maximum = temp # assignment, if_then_branch, variable_definition:maximum
-        for i in range(17): # for (-> +4), for_range_stop (-> +4), function_call:range, int_literal, literal:Num, suggest_constant_definition
-            for j in range(3, 20): # for (-> +3), for_range_start (-> +3), function_call:range, int_literal, literal:Num, nested_for:2 (-> +3), suggest_constant_definition
+        for i in range(17): # for:i (-> +4), for_range_stop (-> +4), function_call:range, int_literal, literal:Num, suggest_constant_definition
+            for j in range(3, 20): # for:j (-> +3), for_range_start (-> +3), function_call:range, int_literal, literal:Num, nested_for:2 (-> +3), suggest_constant_definition
                 temp = l[i][j] * l[i + 1][j - 1] * l[i + 2][j - 2] * l[i + 3][j - 3] # assignment, binary_operator:Add, binary_operator:Mult, binary_operator:Sub, index, index_arithmetic, int_literal, literal:Num, suggest_constant_definition, variable_definition:temp
                 if temp > maximum: # comparison_operator:Gt, if (-> +1)
                     maximum = temp # assignment, if_then_branch, variable_definition:maximum
@@ -726,7 +726,7 @@ def solution(): # function:solution (-> +26), function_returning_a_value:solutio
 from math import sqrt # import_from:math
 def count_divisors(n): # function:count_divisors (-> +7), function_returning_a_value:count_divisors (-> +7)
     nDivisors = 0 # assignment, int_literal, literal:Num, variable_definition:nDivisors
-    for i in range(1, int(sqrt(n)) + 1): # binary_operator:Add, composition, for (-> +2), for_range_start (-> +2), function_call:int, function_call:range, function_call:sqrt, int_literal, literal:Num
+    for i in range(1, int(sqrt(n)) + 1): # binary_operator:Add, composition, for:i (-> +2), for_range_start (-> +2), function_call:int, function_call:range, function_call:sqrt, int_literal, literal:Num
         if n % i == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test, if (-> +1), int_literal, literal:Num
             nDivisors += 2 # augmented_assignment, if_then_branch, int_literal, literal:Num
     if n ** 0.5 == int(n ** 0.5): # binary_operator:Pow, comparison_operator:Eq, float_literal, function_call:int, if (-> +1), literal:Num, suggest_constant_definition
@@ -746,7 +746,7 @@ def solution(): # function:solution (-> +8), function_returning_a_value:solution
 # ../Python/project_euler/problem_12/sol2.py
 # ----------------------------------------------------------------------------------------
 def triangle_number_generator(): # function:triangle_number_generator (-> +2), generator:triangle_number_generator (-> +2), procedure:triangle_number_generator (-> +2)
-    for n in range(1, 1000000): # for (-> +1), for_range_start (-> +1), function_call:range, int_literal, literal:Num, suggest_constant_definition
+    for n in range(1, 1000000): # for:n (-> +1), for_range_start (-> +1), function_call:range, int_literal, literal:Num, suggest_constant_definition
         yield n * (n + 1) // 2 # binary_operator:Add, binary_operator:FloorDiv, binary_operator:Mult, int_literal, literal:Num
 def count_divisors(n): # function:count_divisors (-> +1), function_returning_a_value:count_divisors (-> +1)
     return sum([2 for i in range(1, int(n ** 0.5) + 1) if n % i == 0 and i * i != n]) # binary_operator:Add, binary_operator:Mod, binary_operator:Mult, binary_operator:Pow, boolean_operator:And, comparison_operator:Eq, comparison_operator:NotEq, composition, comprehension:List, comprehension_for_count:1, divisibility_test, filtered_comprehension, float_literal, function_call:int, function_call:range, function_call:sum, int_literal, literal:Num, suggest_constant_definition
@@ -765,7 +765,7 @@ def solution(array): # function:solution (-> +1), function_returning_a_value:sol
 def solution(n): # function:solution (-> +16), function_returning_a_value:solution (-> +16)
     largest_number = 0 # assignment, int_literal, literal:Num, variable_definition:largest_number
     pre_counter = 0 # assignment, int_literal, literal:Num, variable_definition:pre_counter
-    for input1 in range(n): # for (-> +12), for_range_stop (-> +12), function_call:range
+    for input1 in range(n): # for:input1 (-> +12), for_range_stop (-> +12), function_call:range
         counter = 1 # assignment, int_literal, literal:Num, variable_definition:counter
         number = input1 # assignment, variable_definition:number
         while number > 1: # comparison_operator:Gt, evolve_state (-> +6), int_literal, literal:Num, while (-> +6)
@@ -813,7 +813,7 @@ def solution(power): # function:solution (-> +7), function_returning_a_value:sol
     string_num = str(num) # assignment, function_call:str, variable_definition:string_num
     list_num = list(string_num) # assignment, function_call:list, variable_definition:list_num
     sum_of_num = 0 # assignment, int_literal, literal:Num, variable_definition:sum_of_num
-    for i in list_num: # accumulate_elements:AugAssign (-> +1), for (-> +1), for_each (-> +1)
+    for i in list_num: # accumulate_elements:AugAssign (-> +1), for:i (-> +1), for_each (-> +1)
         sum_of_num += int(i) # augmented_assignment, function_call:int
     return sum_of_num
 
@@ -834,7 +834,7 @@ def solution(n): # function:solution (-> +17), function_returning_a_value:soluti
     ones_counts = [0, 3, 3, 5, 4, 4, 3, 5, 5, 4, 3, 6, 6, 8, 8, 7, 7, 9, 8, 8] # assignment, int_literal, literal:List, literal:Num, suggest_constant_definition, variable_definition:ones_counts
     tens_counts = [0, 0, 6, 6, 5, 5, 5, 7, 6, 6] # assignment, int_literal, literal:List, literal:Num, suggest_constant_definition, variable_definition:tens_counts
     count = 0 # assignment, int_literal, literal:Num, variable_definition:count
-    for i in range(1, n + 1): # accumulate_elements:AugAssign (-> +12), binary_operator:Add, for (-> +12), for_range_start (-> +12), function_call:range, int_literal, literal:Num
+    for i in range(1, n + 1): # accumulate_elements:AugAssign (-> +12), binary_operator:Add, for:i (-> +12), for_range_start (-> +12), function_call:range, int_literal, literal:Num
         if i < 1000: # comparison_operator:Lt, if (-> +11), int_literal, literal:Num, suggest_constant_definition
             if i >= 100: # comparison_operator:GtE, if (-> +3), if_then_branch (-> +8), int_literal, literal:Num, nested_if:2 (-> +3), suggest_constant_definition
                 count += ones_counts[i // 100] + 7 # augmented_assignment, binary_operator:Add, binary_operator:FloorDiv, if_then_branch (-> +2), index, index_arithmetic, int_literal, literal:Num, suggest_constant_definition
@@ -859,8 +859,8 @@ def solution(): # function:solution (-> +17), function_returning_a_value:solutio
     with open(triangle, "r") as f: # function_call:open, literal:Str
         triangle = f.readlines() # assignment, method_call:readlines, variable_definition:triangle
     a = [[int(y) for y in x.rstrip("\r\n").split(" ")] for x in triangle] # assignment, comprehension:List, comprehension_for_count:1, function_call:int, literal:Str, method_call:rstrip, method_call:split, method_chaining, variable_definition:a
-    for i in range(1, len(a)): # composition, for (-> +10), for_range_start (-> +10), function_call:len, function_call:range, int_literal, literal:Num
-        for j in range(len(a[i])): # composition, for (-> +9), for_indexes (-> +9), for_range_stop (-> +9), function_call:len, function_call:range, index, nested_for:2 (-> +9)
+    for i in range(1, len(a)): # composition, for:i (-> +10), for_range_start (-> +10), function_call:len, function_call:range, int_literal, literal:Num
+        for j in range(len(a[i])): # composition, for:j (-> +9), for_indexes (-> +9), for_range_stop (-> +9), function_call:len, function_call:range, index, nested_for:2 (-> +9)
             if j != len(a[i - 1]): # binary_operator:Sub, comparison_operator:NotEq, function_call:len, if (-> +3), index, index_arithmetic, int_literal, literal:Num, suggest_conditional_expression (-> +3)
                 number1 = a[i - 1][j] # assignment, binary_operator:Sub, if_then_branch, index, index_arithmetic, int_literal, literal:Num, variable_definition:number1
             else:
@@ -906,7 +906,7 @@ def solution(): # function:solution (-> +24), function_returning_a_value:solutio
 # ----------------------------------------------------------------------------------------
 def factorial(n): # function:factorial (-> +4), function_returning_a_value:factorial (-> +4)
     fact = 1 # assignment, int_literal, literal:Num, variable_definition:fact
-    for i in range(1, n + 1): # accumulate_elements:AugAssign (-> +1), binary_operator:Add, for (-> +1), for_range_start (-> +1), function_call:range, int_literal, literal:Num
+    for i in range(1, n + 1): # accumulate_elements:AugAssign (-> +1), binary_operator:Add, for:i (-> +1), for_range_start (-> +1), function_call:range, int_literal, literal:Num
         fact *= i # augmented_assignment
     return fact
 def split_and_add(number): # function:split_and_add (-> +6), function_returning_a_value:split_and_add (-> +6)
@@ -941,9 +941,9 @@ def solution(n): # function:solution (-> +1), function_returning_a_value:solutio
 def solution(n): # function:solution (-> +7), function_returning_a_value:solution (-> +7)
     fact = 1 # assignment, int_literal, literal:Num, variable_definition:fact
     result = 0 # assignment, int_literal, literal:Num, variable_definition:result
-    for i in range(1, n + 1): # accumulate_elements:AugAssign (-> +1), binary_operator:Add, for (-> +1), for_range_start (-> +1), function_call:range, int_literal, literal:Num
+    for i in range(1, n + 1): # accumulate_elements:AugAssign (-> +1), binary_operator:Add, for:i (-> +1), for_range_start (-> +1), function_call:range, int_literal, literal:Num
         fact *= i # augmented_assignment
-    for j in str(fact): # accumulate_elements:AugAssign (-> +1), for (-> +1), function_call:str
+    for j in str(fact): # accumulate_elements:AugAssign (-> +1), for:j (-> +1), function_call:str
         result += int(j) # augmented_assignment, function_call:int
     return result
 
@@ -953,7 +953,7 @@ def solution(n): # function:solution (-> +7), function_returning_a_value:solutio
 from math import sqrt # import_from:math
 def sum_of_divisors(n): # function:sum_of_divisors (-> +7), function_returning_a_value:sum_of_divisors (-> +7)
     total = 0 # assignment, int_literal, literal:Num, variable_definition:total
-    for i in range(1, int(sqrt(n) + 1)): # accumulate_elements:AugAssign (-> +4), binary_operator:Add, composition, for (-> +4), for_range_start (-> +4), function_call:int, function_call:range, function_call:sqrt, int_literal, literal:Num
+    for i in range(1, int(sqrt(n) + 1)): # accumulate_elements:AugAssign (-> +4), binary_operator:Add, composition, for:i (-> +4), for_range_start (-> +4), function_call:int, function_call:range, function_call:sqrt, int_literal, literal:Num
         if n % i == 0 and i != sqrt(n): # binary_operator:Mod, boolean_operator:And, comparison_operator:Eq, comparison_operator:NotEq, divisibility_test, function_call:sqrt, if (-> +3), int_literal, literal:Num
             total += i + n // i # augmented_assignment, binary_operator:Add, binary_operator:FloorDiv, if_then_branch
         elif i == sqrt(n): # comparison_operator:Eq, function_call:sqrt, if (-> +1)
@@ -980,8 +980,8 @@ def solution(): # function:solution (-> +12), function_returning_a_value:solutio
     names.sort() # method_call:sort
     name_score = 0 # assignment, int_literal, literal:Num, variable_definition:name_score
     total_score = 0 # assignment, int_literal, literal:Num, variable_definition:total_score
-    for i, name in enumerate(names): # for (-> +4), for_indexes_elements (-> +4), function_call:enumerate
-        for letter in name: # accumulate_elements:AugAssign (-> +1), for (-> +1), for_each (-> +1), nested_for:2 (-> +1)
+    for i, name in enumerate(names): # for:i:name (-> +4), for_indexes_elements (-> +4), function_call:enumerate
+        for letter in name: # accumulate_elements:AugAssign (-> +1), for:letter (-> +1), for_each (-> +1), nested_for:2 (-> +1)
             name_score += ord(letter) - 64 # augmented_assignment, binary_operator:Sub, function_call:ord, int_literal, literal:Num, suggest_constant_definition
         total_score += (i + 1) * name_score # augmented_assignment, binary_operator:Add, binary_operator:Mult, int_literal, literal:Num
         name_score = 0 # assignment, int_literal, literal:Num, variable_definition:name_score
@@ -998,8 +998,8 @@ def solution(): # function:solution (-> +12), function_returning_a_value:solutio
         name = str(file.readlines()[0]) # assignment, composition, function_call:str, index, int_literal, literal:Num, method_call:readlines, variable_definition:name
         name = name.replace('"', "").split(",") # assignment, literal:Str, method_call:replace, method_call:split, method_chaining, variable_definition:name
     name.sort() # method_call:sort
-    for i in range(len(name)): # accumulate_elements:AugAssign (-> +4), composition, for (-> +4), for_indexes (-> +4), for_range_stop (-> +4), function_call:len, function_call:range
-        for j in name[i]: # accumulate_elements:AugAssign (-> +1), for (-> +1), index, nested_for:2 (-> +1)
+    for i in range(len(name)): # accumulate_elements:AugAssign (-> +4), composition, for:i (-> +4), for_indexes (-> +4), for_range_stop (-> +4), function_call:len, function_call:range
+        for j in name[i]: # accumulate_elements:AugAssign (-> +1), for:j (-> +1), index, nested_for:2 (-> +1)
             temp_sum += ord(j) - ord("A") + 1 # augmented_assignment, binary_operator:Add, binary_operator:Sub, function_call:ord, int_literal, literal:Num, literal:Str
         total_sum += (i + 1) * temp_sum # augmented_assignment, binary_operator:Add, binary_operator:Mult, int_literal, literal:Num
         temp_sum = 0 # assignment, int_literal, literal:Num, variable_definition:temp_sum
@@ -1010,13 +1010,13 @@ def solution(): # function:solution (-> +12), function_returning_a_value:solutio
 # ----------------------------------------------------------------------------------------
 def solution(limit=28123): # function:solution (-> +13), function_returning_a_value:solution (-> +13), function_with_default_positional_arguments:solution (-> +13), int_literal, literal:Num
     sumDivs = [1] * (limit + 1) # assignment, binary_operator:Add, binary_operator:Mult, int_literal, literal:List, literal:Num, variable_definition:sumDivs
-    for i in range(2, int(limit ** 0.5) + 1): # accumulate_elements:AugAssign (-> +3), binary_operator:Add, binary_operator:Pow, composition, float_literal, for (-> +3), for_range_start (-> +3), function_call:int, function_call:range, int_literal, literal:Num, suggest_constant_definition
+    for i in range(2, int(limit ** 0.5) + 1): # accumulate_elements:AugAssign (-> +3), binary_operator:Add, binary_operator:Pow, composition, float_literal, for:i (-> +3), for_range_start (-> +3), function_call:int, function_call:range, int_literal, literal:Num, suggest_constant_definition
         sumDivs[i * i] += i # augmented_assignment, binary_operator:Mult, index, index_arithmetic
-        for k in range(i + 1, limit // i + 1): # accumulate_elements:AugAssign (-> +1), binary_operator:Add, binary_operator:FloorDiv, for (-> +1), for_range_start (-> +1), function_call:range, int_literal, literal:Num, nested_for:2 (-> +1)
+        for k in range(i + 1, limit // i + 1): # accumulate_elements:AugAssign (-> +1), binary_operator:Add, binary_operator:FloorDiv, for:k (-> +1), for_range_start (-> +1), function_call:range, int_literal, literal:Num, nested_for:2 (-> +1)
             sumDivs[k * i] += k + i # augmented_assignment, binary_operator:Add, binary_operator:Mult, index, index_arithmetic
     abundants = set() # assignment, function_call:set, variable_definition:abundants
     res = 0 # assignment, int_literal, literal:Num, variable_definition:res
-    for n in range(1, limit + 1): # accumulate_elements:AugAssign (-> +4), binary_operator:Add, for (-> +4), for_range_start (-> +4), function_call:range, int_literal, literal:Num
+    for n in range(1, limit + 1): # accumulate_elements:AugAssign (-> +4), binary_operator:Add, for:n (-> +4), for_range_start (-> +4), function_call:range, int_literal, literal:Num
         if sumDivs[n] > n: # comparison_operator:Gt, if (-> +1), index
             abundants.add(n) # if_then_branch, method_call:add
         if not any((n - a in abundants) for a in abundants): # binary_operator:Sub, comparison_operator:In, comprehension:Generator, comprehension_for_count:1, function_call:any, if (-> +1), unary_operator:Not
@@ -1034,7 +1034,7 @@ def fib(a, b, n): # function:fib (-> +13), function_returning_a_value:fib (-> +1
     elif n == 3: # comparison_operator:Eq, if (-> +1), int_literal, literal:Num, suggest_constant_definition
         return str(a) + str(b) # binary_operator:Add, function_call:str, if_elif_branch
     temp = 0 # assignment, int_literal, literal:Num, variable_definition:temp
-    for x in range(2, n): # for (-> +4), for_range_start (-> +4), function_call:range, int_literal, literal:Num
+    for x in range(2, n): # for:x (-> +4), for_range_start (-> +4), function_call:range, int_literal, literal:Num
         c = str(a) + str(b) # assignment, binary_operator:Add, function_call:str, variable_definition:c
         temp = b # assignment, variable_definition:temp
         b = c # assignment, variable_definition:b
@@ -1042,7 +1042,7 @@ def fib(a, b, n): # function:fib (-> +13), function_returning_a_value:fib (-> +1
     return c
 def solution(n): # function:solution (-> +11), function_returning_a_value:solution (-> +11)
     semidivisible = [] # assignment, literal:List, variable_definition:semidivisible
-    for x in range(n): # for (-> +8), for_range_stop (-> +8), function_call:range
+    for x in range(n): # for:x (-> +8), for_range_stop (-> +8), function_call:range
         l = [i for i in input().split()] # assignment, comprehension:List, comprehension_for_count:1, function_call:input, method_call:split, variable_definition:l
         c2 = 1 # assignment, int_literal, literal:Num, variable_definition:c2
         while 1: # int_literal, literal:Num, while (-> +4)
@@ -1071,7 +1071,7 @@ def fibonacci(n): # function:fibonacci (-> +9), function_returning_a_value:fibon
         return 1 # if_elif_branch, int_literal, literal:Num
     else:
         sequence = [0, 1] # assignment, if_else_branch (-> +3), int_literal, literal:List, literal:Num, variable_definition:sequence
-        for i in range(2, n + 1): # binary_operator:Add, for (-> +1), for_range_start (-> +1), function_call:range, int_literal, literal:Num
+        for i in range(2, n + 1): # binary_operator:Add, for:i (-> +1), for_range_start (-> +1), function_call:range, int_literal, literal:Num
             sequence.append(sequence[i - 1] + sequence[i - 2]) # binary_operator:Add, binary_operator:Sub, index, index_arithmetic, int_literal, literal:Num, method_call:append
         return sequence[n] # index
 def fibonacci_digits_index(n): # function:fibonacci_digits_index (-> +6), function_returning_a_value:fibonacci_digits_index (-> +6)
@@ -1110,7 +1110,7 @@ def solution(n): # function:solution (-> +12), function_returning_a_value:soluti
         f = f1 + f2 # assignment, binary_operator:Add, variable_definition:f
         f1, f2 = f2, f # assignment, variable_definition:f1, variable_definition:f2
         index += 1 # augmented_assignment, int_literal, literal:Num
-        for j in str(f): # for (-> +1), function_call:str
+        for j in str(f): # for:j (-> +1), function_call:str
             i += 1 # augmented_assignment, int_literal, literal:Num
         if i == n: # comparison_operator:Eq, if (-> +1)
             break # if_then_branch
@@ -1126,14 +1126,14 @@ def is_prime(k: int) -> bool: # function:is_prime, function_returning_a_value:is
     elif k == 2: # comparison_operator:Eq, if (-> +5), int_literal, literal:Num
         return True # if_elif_branch, literal:True
     else:
-        for x in range(3, int(math.sqrt(k) + 1), 2): # binary_operator:Add, composition, for (-> +2), for_range_step:2 (-> +2), function_call:int, function_call:range, if_else_branch (-> +2), int_literal, literal:Num, method_call:sqrt, suggest_constant_definition
+        for x in range(3, int(math.sqrt(k) + 1), 2): # binary_operator:Add, composition, for:x (-> +2), for_range_step:2 (-> +2), function_call:int, function_call:range, if_else_branch (-> +2), int_literal, literal:Num, method_call:sqrt, suggest_constant_definition
             if k % x == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test, if (-> +1), int_literal, literal:Num, nested_if:2 (-> +1)
                 return False # if_then_branch, literal:False
     return True # literal:True
 def solution(a_limit: int, b_limit: int) -> int: # function:solution, function_returning_a_value:solution
     longest = [0, 0, 0] # assignment, int_literal, literal:List, literal:Num, variable_definition:longest
-    for a in range((a_limit * -1) + 1, a_limit): # binary_operator:Add, binary_operator:Mult, for (-> +9), for_range_start (-> +9), function_call:range, int_literal, literal:Num
-        for b in range(2, b_limit): # for (-> +8), for_range_start (-> +8), function_call:range, int_literal, literal:Num, nested_for:2 (-> +8)
+    for a in range((a_limit * -1) + 1, a_limit): # binary_operator:Add, binary_operator:Mult, for:a (-> +9), for_range_start (-> +9), function_call:range, int_literal, literal:Num
+        for b in range(2, b_limit): # for:b (-> +8), for_range_start (-> +8), function_call:range, int_literal, literal:Num, nested_for:2 (-> +8)
             if is_prime(b): # function_call:is_prime, if (-> +7)
                 count = 0 # assignment, if_then_branch (-> +6), int_literal, literal:Num, variable_definition:count
                 n = 0 # assignment, int_literal, literal:Num, variable_definition:n
@@ -1151,7 +1151,7 @@ def solution(a_limit: int, b_limit: int) -> int: # function:solution, function_r
 from math import ceil # import_from:math
 def diagonal_sum(n): # function:diagonal_sum (-> +6), function_returning_a_value:diagonal_sum (-> +6)
     total = 1 # assignment, int_literal, literal:Num, variable_definition:total
-    for i in range(1, int(ceil(n / 2.0))): # binary_operator:Div, composition, float_literal, for (-> +3), for_range_start (-> +3), function_call:ceil, function_call:int, function_call:range, int_literal, literal:Num, suggest_constant_definition
+    for i in range(1, int(ceil(n / 2.0))): # binary_operator:Div, composition, float_literal, for:i (-> +3), for_range_start (-> +3), function_call:ceil, function_call:int, function_call:range, int_literal, literal:Num, suggest_constant_definition
         odd = 2 * i + 1 # assignment, binary_operator:Add, binary_operator:Mult, int_literal, literal:Num, variable_definition:odd
         even = 2 * i # assignment, binary_operator:Mult, int_literal, literal:Num, variable_definition:even
         total = total + 4 * odd ** 2 - 6 * even # assignment, binary_operator:Add, binary_operator:Mult, binary_operator:Pow, binary_operator:Sub, int_literal, literal:Num, suggest_constant_definition, variable_definition:total
@@ -1164,8 +1164,8 @@ def solution(n): # function:solution (-> +8), function_returning_a_value:solutio
     collectPowers = set() # assignment, function_call:set, variable_definition:collectPowers
     currentPow = 0 # assignment, int_literal, literal:Num, variable_definition:currentPow
     N = n + 1 # assignment, binary_operator:Add, int_literal, literal:Num, variable_definition:N
-    for a in range(2, N): # for (-> +3), for_range_start (-> +3), function_call:range, int_literal, literal:Num, square_nested_for (-> +3)
-        for b in range(2, N): # for (-> +2), for_range_start (-> +2), function_call:range, int_literal, literal:Num, nested_for:2 (-> +2)
+    for a in range(2, N): # for:a (-> +3), for_range_start (-> +3), function_call:range, int_literal, literal:Num, square_nested_for (-> +3)
+        for b in range(2, N): # for:b (-> +2), for_range_start (-> +2), function_call:range, int_literal, literal:Num, nested_for:2 (-> +2)
             currentPow = a ** b # assignment, binary_operator:Pow, variable_definition:currentPow
             collectPowers.add(currentPow) # method_call:add
     return len(collectPowers) # function_call:len
@@ -1227,7 +1227,7 @@ def solve(digit_len: int) -> str: # function:solve, function_returning_a_value:s
     solutions = [] # assignment, literal:List, variable_definition:solutions
     den = 11 # assignment, int_literal, literal:Num, suggest_constant_definition, variable_definition:den
     last_digit = int("1" + "0" * digit_len) # assignment, binary_operator:Add, binary_operator:Mult, function_call:int, literal:Str, variable_definition:last_digit
-    for num in range(den, last_digit): # for (-> +7), for_range_start (-> +7), function_call:range
+    for num in range(den, last_digit): # for:num (-> +7), for_range_start (-> +7), function_call:range
         while den <= 99: # comparison_operator:LtE, evolve_state (-> +4), int_literal, literal:Num, suggest_constant_definition, while (-> +4)
             if (num != den) and (num % 10 == den // 10) and (den % 10 != 0): # binary_operator:FloorDiv, binary_operator:Mod, boolean_operator:And, comparison_operator:Eq, comparison_operator:NotEq, divisibility_test:10, if (-> +2), int_literal, literal:Num, suggest_constant_definition
                 if isDigitCancelling(num, den): # function_call:isDigitCancelling, if (-> +1), if_then_branch (-> +1), nested_if:2 (-> +1)
@@ -1249,7 +1249,7 @@ def is_palindrome(n): # function:is_palindrome (-> +5), function_returning_a_val
         return False # if_else_branch, literal:False
 def solution(n): # function:solution (-> +5), function_returning_a_value:solution (-> +5)
     total = 0 # assignment, int_literal, literal:Num, variable_definition:total
-    for i in range(1, n): # accumulate_elements:AugAssign (-> +2), for (-> +2), for_range_start (-> +2), function_call:range, int_literal, literal:Num
+    for i in range(1, n): # accumulate_elements:AugAssign (-> +2), for:i (-> +2), for_range_start (-> +2), function_call:range, int_literal, literal:Num
         if is_palindrome(i) and is_palindrome(bin(i).split("b")[1]): # boolean_operator:And, composition, function_call:bin, function_call:is_palindrome, if (-> +1), index, int_literal, literal:Num, literal:Str, method_call:split
             total += i # augmented_assignment, if_then_branch
     return total
@@ -1299,7 +1299,7 @@ def solution(): # function:solution (-> +13), function_returning_a_value:solutio
 # ----------------------------------------------------------------------------------------
 def solution(): # function:solution (-> +4), function_returning_a_value:solution (-> +4)
     total = 0 # assignment, int_literal, literal:Num, variable_definition:total
-    for i in range(1, 1001): # accumulate_elements:AugAssign (-> +1), for (-> +1), for_range_start (-> +1), function_call:range, int_literal, literal:Num, suggest_constant_definition
+    for i in range(1, 1001): # accumulate_elements:AugAssign (-> +1), for:i (-> +1), for_range_start (-> +1), function_call:range, int_literal, literal:Num, suggest_constant_definition
         total += i ** i # augmented_assignment, binary_operator:Pow
     return str(total)[-10:] # function_call:str, int_literal, literal:Num, slice, suggest_constant_definition
 
@@ -1328,8 +1328,8 @@ def combinations(n, r): # function:combinations (-> +1), function_returning_a_va
     return factorial(n) / (factorial(r) * factorial(n - r)) # binary_operator:Div, binary_operator:Mult, binary_operator:Sub, function_call:factorial
 def solution(): # function:solution (-> +6), function_returning_a_value:solution (-> +6)
     total = 0 # assignment, int_literal, literal:Num, variable_definition:total
-    for i in range(1, 101): # for (-> +3), for_range_start (-> +3), function_call:range, int_literal, literal:Num, suggest_constant_definition
-        for j in range(1, i + 1): # binary_operator:Add, for (-> +2), for_range_start (-> +2), function_call:range, int_literal, literal:Num, nested_for:2 (-> +2)
+    for i in range(1, 101): # for:i (-> +3), for_range_start (-> +3), function_call:range, int_literal, literal:Num, suggest_constant_definition
+        for j in range(1, i + 1): # binary_operator:Add, for:j (-> +2), for_range_start (-> +2), function_call:range, int_literal, literal:Num, nested_for:2 (-> +2)
             if combinations(i, j) > 1e6: # comparison_operator:Gt, float_literal, function_call:combinations, if (-> +1), literal:Num, suggest_constant_definition
                 total += 1 # augmented_assignment, if_then_branch, int_literal, literal:Num
     return total
@@ -1342,10 +1342,10 @@ base = [10 ** k for k in range(ks[-1] + 1)] # assignment, binary_operator:Add, b
 memo = {} # assignment, literal:Dict, variable_definition:memo
 def next_term(a_i, k, i, n): # function:next_term (-> +50), function_returning_a_value:next_term (-> +50), recursive_function:next_term (-> +50)
     ds_b = 0 # assignment, int_literal, literal:Num, variable_definition:ds_b
-    for j in range(k, len(a_i)): # accumulate_elements:AugAssign (-> +1), composition, for (-> +1), for_range_start (-> +1), function_call:len, function_call:range
+    for j in range(k, len(a_i)): # accumulate_elements:AugAssign (-> +1), composition, for:j (-> +1), for_range_start (-> +1), function_call:len, function_call:range
         ds_b += a_i[j] # augmented_assignment, index
     c = 0 # assignment, int_literal, literal:Num, variable_definition:c
-    for j in range(min(len(a_i), k)): # accumulate_elements:AugAssign (-> +1), composition, for (-> +1), for_range_stop (-> +1), function_call:len, function_call:min, function_call:range
+    for j in range(min(len(a_i), k)): # accumulate_elements:AugAssign (-> +1), composition, for:j (-> +1), for_range_stop (-> +1), function_call:len, function_call:min, function_call:range
         c += a_i[j] * base[j] # augmented_assignment, binary_operator:Mult, index
     diff, dn = 0, 0 # assignment, int_literal, literal:Num, literal:Tuple, variable_definition:diff, variable_definition:dn
     max_dn = n - i # assignment, binary_operator:Sub, variable_definition:max_dn
@@ -1354,14 +1354,14 @@ def next_term(a_i, k, i, n): # function:next_term (-> +50), function_returning_a
         jumps = sub_memo.get(c) # assignment, if_then_branch (-> +15), method_call:get, variable_definition:jumps
         if jumps != None and len(jumps) > 0: # boolean_operator:And, comparison_operator:Gt, comparison_operator:NotEq, function_call:len, if (-> +14), int_literal, literal:None, literal:Num, nested_if:2 (-> +14)
             max_jump = -1 # assignment, if_then_branch (-> +11), int_literal, literal:Num, variable_definition:max_jump
-            for _k in range(len(jumps) - 1, -1, -1): # binary_operator:Sub, composition, for (-> +3), for_range_step:-1 (-> +3), function_call:len, function_call:range, int_literal, literal:Num
+            for _k in range(len(jumps) - 1, -1, -1): # binary_operator:Sub, composition, for:_k (-> +3), for_range_step:-1 (-> +3), function_call:len, function_call:range, int_literal, literal:Num
                 if jumps[_k][2] <= k and jumps[_k][1] <= max_dn: # boolean_operator:And, comparison_operator:LtE, if (-> +2), index, int_literal, literal:Num, nested_if:3 (-> +2)
                     max_jump = _k # assignment, if_then_branch (-> +1), variable_definition:max_jump
                     break
             if max_jump >= 0: # comparison_operator:GtE, if (-> +6), int_literal, literal:Num, nested_if:3 (-> +6)
                 diff, dn, _kk = jumps[max_jump] # assignment, if_then_branch (-> +5), index, variable_definition:_kk, variable_definition:diff, variable_definition:dn
                 new_c = diff + c # assignment, binary_operator:Add, variable_definition:new_c
-                for j in range(min(k, len(a_i))): # composition, for (-> +1), for_range_stop (-> +1), function_call:len, function_call:min, function_call:range
+                for j in range(min(k, len(a_i))): # composition, for:j (-> +1), for_range_stop (-> +1), function_call:len, function_call:min, function_call:range
                     new_c, a_i[j] = divmod(new_c, 10) # assignment, function_call:divmod, index, int_literal, literal:Num, suggest_constant_definition, variable_definition:a_i, variable_definition:new_c
                 if new_c > 0: # comparison_operator:Gt, if (-> +1), int_literal, literal:Num, nested_if:4 (-> +1)
                     add(a_i, k, new_c) # function_call:add, if_then_branch
@@ -1398,7 +1398,7 @@ def compute(a_i, k, i, n): # function:compute (-> +25), function_returning_a_val
         a_i.extend([0 for _ in range(k - len(a_i))]) # binary_operator:Sub, composition, comprehension:List, comprehension_for_count:1, function_call:len, function_call:range, if_then_branch, int_literal, literal:Num, method_call:extend
     start_i = i # assignment, variable_definition:start_i
     ds_b, ds_c, diff = 0, 0, 0 # assignment, int_literal, literal:Num, literal:Tuple, variable_definition:diff, variable_definition:ds_b, variable_definition:ds_c
-    for j in range(len(a_i)): # accumulate_elements:AugAssign (-> +4), composition, for (-> +4), for_indexes (-> +4), for_range_stop (-> +4), function_call:len, function_call:range
+    for j in range(len(a_i)): # accumulate_elements:AugAssign (-> +4), composition, for:j (-> +4), for_indexes (-> +4), for_range_stop (-> +4), function_call:len, function_call:range
         if j >= k: # comparison_operator:GtE, if (-> +3)
             ds_b += a_i[j] # augmented_assignment, if_then_branch, index
         else:
@@ -1408,7 +1408,7 @@ def compute(a_i, k, i, n): # function:compute (-> +25), function_returning_a_val
         addend = ds_c + ds_b # assignment, binary_operator:Add, variable_definition:addend
         diff += addend # augmented_assignment
         ds_c = 0 # assignment, int_literal, literal:Num, variable_definition:ds_c
-        for j in range(k): # accumulate_elements:AugAssign (-> +3), for (-> +3), for_range_stop (-> +3), function_call:range
+        for j in range(k): # accumulate_elements:AugAssign (-> +3), for:j (-> +3), for_range_stop (-> +3), function_call:range
             s = a_i[j] + addend # assignment, binary_operator:Add, index, variable_definition:s
             addend, a_i[j] = divmod(s, 10) # assignment, function_call:divmod, index, int_literal, literal:Num, suggest_constant_definition, variable_definition:a_i, variable_definition:addend
             ds_c += a_i[j] # augmented_assignment, index
@@ -1418,7 +1418,7 @@ def compute(a_i, k, i, n): # function:compute (-> +25), function_returning_a_val
         add(a_i, k, addend) # function_call:add, if_then_branch
     return diff, i - start_i # binary_operator:Sub
 def add(digits, k, addend): # function:add (-> +13), procedure:add (-> +13)
-    for j in range(k, len(digits)): # composition, for (-> +9), for_range_start (-> +9), function_call:len, function_call:range
+    for j in range(k, len(digits)): # composition, for:j (-> +9), for_range_start (-> +9), function_call:len, function_call:range
         s = digits[j] + addend # assignment, binary_operator:Add, index, variable_definition:s
         if s >= 10: # comparison_operator:GtE, if (-> +5), int_literal, literal:Num, suggest_constant_definition
             quotient, digits[j] = divmod(s, 10) # assignment, function_call:divmod, if_then_branch (-> +1), index, int_literal, literal:Num, suggest_constant_definition, variable_definition:digits, variable_definition:quotient
@@ -1441,7 +1441,7 @@ def solution(n): # function:solution (-> +12), function_returning_a_value:soluti
         if dn == n - i: # binary_operator:Sub, comparison_operator:Eq, if (-> +1)
             break # if_then_branch
     a_n = 0 # assignment, int_literal, literal:Num, variable_definition:a_n
-    for j in range(len(digits)): # accumulate_elements:AugAssign (-> +1), composition, for (-> +1), for_indexes (-> +1), for_range_stop (-> +1), function_call:len, function_call:range
+    for j in range(len(digits)): # accumulate_elements:AugAssign (-> +1), composition, for:j (-> +1), for_indexes (-> +1), for_range_stop (-> +1), function_call:len, function_call:range
         a_n += digits[j] * 10 ** j # augmented_assignment, binary_operator:Mult, binary_operator:Pow, index, int_literal, literal:Num, suggest_constant_definition
     return a_n
 
@@ -1468,8 +1468,8 @@ def solution(): # function:solution (-> +18), function_returning_a_value:solutio
         triangle = f.readlines() # assignment, method_call:readlines, variable_definition:triangle
     a = map(lambda x: x.rstrip("\r\n").split(" "), triangle) # assignment, composition, function_call:map, lambda_function, literal:Str, method_call:rstrip, method_call:split, method_chaining, variable_definition:a
     a = list(map(lambda x: list(map(lambda y: int(y), x)), a)) # assignment, composition, function_call:int, function_call:list, function_call:map, lambda_function, variable_definition:a
-    for i in range(1, len(a)): # composition, for (-> +10), for_range_start (-> +10), function_call:len, function_call:range, int_literal, literal:Num
-        for j in range(len(a[i])): # composition, for (-> +9), for_indexes (-> +9), for_range_stop (-> +9), function_call:len, function_call:range, index, nested_for:2 (-> +9)
+    for i in range(1, len(a)): # composition, for:i (-> +10), for_range_start (-> +10), function_call:len, function_call:range, int_literal, literal:Num
+        for j in range(len(a[i])): # composition, for:j (-> +9), for_indexes (-> +9), for_range_stop (-> +9), function_call:len, function_call:range, index, nested_for:2 (-> +9)
             if j != len(a[i - 1]): # binary_operator:Sub, comparison_operator:NotEq, function_call:len, if (-> +3), index, index_arithmetic, int_literal, literal:Num, suggest_conditional_expression (-> +3)
                 number1 = a[i - 1][j] # assignment, binary_operator:Sub, if_then_branch, index, index_arithmetic, int_literal, literal:Num, variable_definition:number1
             else:
@@ -1486,10 +1486,10 @@ def solution(): # function:solution (-> +18), function_returning_a_value:solutio
 # ----------------------------------------------------------------------------------------
 def partition(m): # function:partition (-> +9), function_returning_a_value:partition (-> +9)
     memo = [[0 for _ in range(m)] for _ in range(m + 1)] # assignment, binary_operator:Add, comprehension:List, comprehension_for_count:1, function_call:range, int_literal, literal:Num, variable_definition:memo
-    for i in range(m + 1): # binary_operator:Add, for (-> +1), for_range_stop (-> +1), function_call:range, int_literal, literal:Num
+    for i in range(m + 1): # binary_operator:Add, for:i (-> +1), for_range_stop (-> +1), function_call:range, int_literal, literal:Num
         memo[i][0] = 1 # assignment, index, int_literal, literal:Num
-    for n in range(m + 1): # accumulate_elements:AugAssign (-> +4), binary_operator:Add, for (-> +4), for_range_stop (-> +4), function_call:range, int_literal, literal:Num
-        for k in range(1, m): # accumulate_elements:AugAssign (-> +3), for (-> +3), for_range_start (-> +3), function_call:range, int_literal, literal:Num, nested_for:2 (-> +3)
+    for n in range(m + 1): # accumulate_elements:AugAssign (-> +4), binary_operator:Add, for:n (-> +4), for_range_stop (-> +4), function_call:range, int_literal, literal:Num
+        for k in range(1, m): # accumulate_elements:AugAssign (-> +3), for:k (-> +3), for_range_start (-> +3), function_call:range, int_literal, literal:Num, nested_for:2 (-> +3)
             memo[n][k] += memo[n][k - 1] # augmented_assignment, binary_operator:Sub, index, index_arithmetic, int_literal, literal:Num
             if n > k: # comparison_operator:Gt, if (-> +1)
                 memo[n][k] += memo[n - k - 1][k] # augmented_assignment, binary_operator:Sub, if_then_branch, index, index_arithmetic, int_literal, literal:Num
@@ -1502,7 +1502,7 @@ import os # import:os
 from math import log10 # import_from:math
 def find_largest(data_file: str = "base_exp.txt") -> int: # function:find_largest, function_returning_a_value:find_largest, function_with_default_positional_arguments:find_largest, literal:Str
     largest = [0, 0] # assignment, int_literal, literal:List, literal:Num, variable_definition:largest
-    for i, line in enumerate(open(os.path.join(os.path.dirname(__file__), data_file))): # composition, for (-> +3), for_indexes_elements (-> +3), function_call:enumerate, function_call:open, method_call:dirname, method_call:join
+    for i, line in enumerate(open(os.path.join(os.path.dirname(__file__), data_file))): # composition, for:i:line (-> +3), for_indexes_elements (-> +3), function_call:enumerate, function_call:open, method_call:dirname, method_call:join
         a, x = list(map(int, line.split(","))) # assignment, composition, function_call:list, function_call:map, literal:Str, method_call:split, variable_definition:a, variable_definition:x
         if x * log10(a) > largest[0]: # binary_operator:Mult, comparison_operator:Gt, function_call:log10, if (-> +1), index, int_literal, literal:Num
             largest = [x * log10(a), i + 1] # assignment, binary_operator:Add, binary_operator:Mult, function_call:log10, if_then_branch, int_literal, literal:Num, variable_definition:largest

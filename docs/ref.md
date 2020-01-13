@@ -119,7 +119,7 @@
 \n(?:\1.+\n)*?\1/value=(?P<SUFFIX>None|True|False)
 |   # match any other constant
               /_type='(?P<SUFFIX>Str|Num|Tuple|Dict|Set|List)'
-\n(?:\1.+\n)*?\1/_ids=''
+\n(?:\1.+\n)*?\1/_ids=
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
 )
 ```
@@ -1764,11 +1764,14 @@ ORDER BY span_start_2
 
 #### Construct `for`
 
+Match sequential loops, along with their iteration variable(s).
+
 ##### Definition
 
 ```re
            ^(.*)/_type='For'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
+\n(?:\1.+\n)*?\1/target/_ids=(?P<SUFFIX>.+)
 \n(?:\1.+\n)* \1/.*/lineno=(?P<LINE>\d+)
 ```
 
@@ -1778,7 +1781,7 @@ ORDER BY span_start_2
 1   for x in seq_1:
 2       for y in range(len(seq_3)):
 3           pass
-4       for i in seq_2:
+4       for (a, (b, c)) in seq_2:
 5           pass
 6       else:
 7           pass
@@ -1788,7 +1791,9 @@ ORDER BY span_start_2
 
 | Label | Lines |
 |:--|:--|
-| `for` | 1-7, 2-3, 4-7 |
+| `for:a:b:c` | 4-7 |
+| `for:x` | 1-7 |
+| `for:y` | 2-3 |
 
 --------------------------------------------------------------------------------
 
@@ -2008,8 +2013,8 @@ SELECT "nested_for" || ":" || (count(*) + 1),
        span_start_2,
        span_end_2
 FROM nest
-WHERE name_1 = "for"
-  AND name_2 = "for"
+WHERE name_prefix_1 = "for"
+  AND name_prefix_2 = "for"
 GROUP BY span_2
 ORDER BY span_start_2
 ```
@@ -2355,16 +2360,18 @@ An accumulator is iteratively updated from its previous value and the value of t
            ^(.*)/_type='For'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
 \n(?:\1.+\n)*?\1/target/_type='Name'
-\n(?:\1.+\n)*?\1/target/id=(?P<ITER_VAR>.+)
+\n(?:\1.+\n)*?\1/target/id='(?P<ITER_VAR>.+)'
 (   # the accumulator either appears on both sides of a simple assignment with the iteration variable
 \n(?:\1.+\n)* \1/(?P<_1>((?:body|orelse)/\d+/?)*)/_type='(?P<SUFFIX>Assign)'
 \n(?:\1.+\n)*?\1/(?P=_1)                         /lineno=(?P<LINE>\d+)
-\n(?:\1.+\n)* \1/(?P=_1)                         /targets/.*/id=(?P<ACC>.+) # capture the name of the accumulator
-\n(?:\1.+\n)*?\1/(?P=_1)                         /value/_ids=(?=.*?(?P=ACC))(?=.*?(?P=ITER_VAR)).* # both appear in RHS
+\n(?:\1.+\n)* \1/(?P=_1)                         /targets/.*/id='(?P<ACC>.+)' # capture the name of the accumulator
+\n(?:\1.+\n)*?\1/(?P=_1)                         /value/_ids=(?=.*?\b(?P=ACC)\b)
+                                                             (?=.*?\b(?P=ITER_VAR)\b)
+                                                             .* # both appear in RHS
 |   # or should be on LHS of an augmented assignement with the iteration variable
 \n(?:\1.+\n)* \1/(?P<_1>((?:body|orelse)/\d+/?)*)/_type='(?P<SUFFIX>AugAssign)'
 \n(?:\1.+\n)*?\1/(?P=_1)                         /lineno=(?P<LINE>\d+)
-\n(?:\1.+\n)* \1/(?P=_1)                         /value.*/id=(?P=ITER_VAR)
+\n(?:\1.+\n)* \1/(?P=_1)                         /value.*/id='(?P=ITER_VAR)'
 |   # or should be mutated by calling a function on this accumulator and the iteration variable
 \n(?:\1.+\n)* \1/(?P<_1>((?:body|orelse)/\d+/?)*)/_type='Expr' # the whole line consists in an expression
 \n(?:\1.+\n)*?\1/(?P=_1)                         /lineno=(?P<LINE>\d+)
@@ -2372,13 +2379,13 @@ An accumulator is iteratively updated from its previous value and the value of t
 \n(?:\1.+\n)*?\1/(?P=_1)                         /value/func/_type='(?P<SUFFIX>Name)'
 \n(?:\1.+\n)*?\1/(?P=_1)                         /value/func/id='(?!breakpoint|delattr|eval|exec|help|input|open|print|setattr|super).+'
 \n(?:\1.+\n)*?\1/(?P=_1)                         /value/args/length=(?![01]\n)\d+ # the function has several arguments
-\n(?:\1.+\n)* \1/(?P=_1)                         /value/args/\d+/id=(?P=ITER_VAR) # which include the iteration variable
+\n(?:\1.+\n)* \1/(?P=_1)                         /value/args/\d+/id='(?P=ITER_VAR)' # which include the iteration variable
 |   # or should be mutated by calling a method of this accumulator, again on the iteration variable
 \n(?:\1.+\n)* \1/(?P<_1>((?:body|orelse)/\d+/?)*)/_type='Expr' # the whole line consists in an expression
 \n(?:\1.+\n)*?\1/(?P=_1)                         /lineno=(?P<LINE>\d+)
 \n(?:\1.+\n)*?\1/(?P=_1)                         /value/_type='Call'
 \n(?:\1.+\n)*?\1/(?P=_1)                         /value/func/_type='(?P<SUFFIX>Attribute)'
-\n(?:\1.+\n)* \1/(?P=_1)                         /value/args/\d+/id=(?P=ITER_VAR) # the arguments include the iteration variable
+\n(?:\1.+\n)* \1/(?P=_1)                         /value/args/\d+/id='(?P=ITER_VAR)' # the arguments include the iteration variable
 )
 (   # capture the line number of the last line of the function (it may appear before Call)
 \n(?:\1.+\n)* \1.*/lineno=(?P<LINE>\d+)
@@ -2472,17 +2479,19 @@ An accumulation pattern that, from a given collection, returns the best element 
 
 ```re
            ^(.*)/(?P<_1>(?:body|orelse)/\d+)/_type='Assign'
-\n(?:\1.+\n)*?\1/(?P=_1)                /targets/0/id=(?P<CANDIDATE>.+) # capture candidate
+\n(?:\1.+\n)*?\1/(?P=_1)                /targets/0/id='(?P<CANDIDATE>.+)' # capture candidate
 \n(?:\1.+\n)* \1/(?P<_2>(?:body|orelse)/\d+)/_type='For'
 \n(?:\1.+\n)*?\1/(?P=_2)                /lineno=(?P<LINE>\d+)
-\n(?:\1.+\n)*?\1/(?P=_2)                /target/id=(?P<ITER_VAR>.+) # capture iteration variable
+\n(?:\1.+\n)*?\1/(?P=_2)                /target/id='(?P<ITER_VAR>.+)' # capture iteration variable
 \n(?:\1.+\n)* \1/(?P=_2)                /(?P<_3>(?:body|orelse)/\d+)/_type='If'
-\n(?:\1.+\n)*?\1/(?P=_2)                /(?P=_3)                    /test/_ids=(?=.*?(?P=ITER_VAR))(?=.*?(?P=CANDIDATE)).* # match both
-\n(?:\1.+\n)* \1/(?P=_2)                /(?P=_3)                    /test/.*/id=(?P=CANDIDATE) # match candidate
+\n(?:\1.+\n)*?\1/(?P=_2)                /(?P=_3)                    /test/_ids=(?=.*?\b(?P=ITER_VAR)\b)
+                                                                               (?=.*?\b(?P=CANDIDATE)\b)
+                                                                               .* # match both
+\n(?:\1.+\n)* \1/(?P=_2)                /(?P=_3)                    /test/.*/id='(?P=CANDIDATE)' # match candidate
 \n(?:\1.+\n)* \1/(?P=_2)                /(?P=_3)                    /(?P<_4>(?:body|orelse)/\d+)/_type='Assign'
 \n(?:\1.+\n)*?\1/(?P=_2)                /(?P=_3)                    /(?P=_4)                /lineno=(?P<LINE>\d+)
-\n(?:\1.+\n)*?\1/(?P=_2)                /(?P=_3)                    /(?P=_4)                /targets/0/id=(?P=CANDIDATE) # match candidate
-\n(?:\1.+\n)*?\1/(?P=_2)                /(?P=_3)                    /(?P=_4)                /value/id=(?P=ITER_VAR) # match iteration variable
+\n(?:\1.+\n)*?\1/(?P=_2)                /(?P=_3)                    /(?P=_4)                /targets/0/id='(?P=CANDIDATE)' # match candidate
+\n(?:\1.+\n)*?\1/(?P=_2)                /(?P=_3)                    /(?P=_4)                /value/id='(?P=ITER_VAR)' # match iteration variable
 (
 \n(?:\1.+\n)* \1(?P=_2)                /(?P=_3).*/lineno=(?P<LINE>\d+)
 )?
@@ -2632,21 +2641,21 @@ Evolve the value of a variable until it reaches a desired state.
 ```re
            ^(.*)/_type='While'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
-\n(?:\1.+\n)* \1/test/.*/id=(?P<STATE>'.+') # capture state variable
+\n(?:\1.+\n)* \1/test/.*/id='(?P<STATE>.+)' # capture state variable
 (   # the state variable either appears on both sides of a simple assignment
 \n(?:\1.+\n)* \1/(?P<_1>body/.*)/_type='Assign'
 \n(?:\1.+\n)*?\1/(?P=_1)        /lineno=(?P<LINE>\d+)
-\n(?:\1.+\n)*?\1/(?P=_1)        /targets/0/id=(?P=STATE) # it is updated somewhere in the loop
-\n(?:\1.+\n)*?\1/(?P=_1)        /value/_ids=.*(?P=STATE) # from its current value
+\n(?:\1.+\n)*?\1/(?P=_1)        /targets/0/id='(?P=STATE)' # it is updated somewhere in the loop
+\n(?:\1.+\n)*?\1/(?P=_1)        /value/_ids=.*\b(?P=STATE)\b.* # from its current value
 |   # or appears on LHS of an augmented assignement
 \n(?:\1.+\n)* \1/(?P<_1>body/.*)/_type='AugAssign'
 \n(?:\1.+\n)*?\1/(?P=_1)        /lineno=(?P<LINE>\d+)
-\n(?:\1.+\n)*?\1/(?P=_1)        /target/id=(?P=STATE) # it is augmented somewhere in the loop
+\n(?:\1.+\n)*?\1/(?P=_1)        /target/id='(?P=STATE)' # it is augmented somewhere in the loop
 |   # or is mutated by calling a function or a method of this variable
 \n(?:\1.+\n)* \1/(?P<_1>body/.*)/_type='Expr'
 \n(?:\1.+\n)*?\1/(?P=_1)        /lineno=(?P<LINE>\d+)
 \n(?:\1.+\n)*?\1/(?P=_1)        /value/_type='Call'
-\n(?:\1.+\n)*?\1/(?P=_1)        /value/.*/id=(?P=STATE) # it is mutated somewhere in the loop
+\n(?:\1.+\n)*?\1/(?P=_1)        /value/.*/id='(?P=STATE)' # it is mutated somewhere in the loop
 )
 (
 \n(?:\1.+\n)* \1.*/lineno=(?P<LINE>\d+)
@@ -2691,26 +2700,30 @@ Accumulate the inputs until a sentinel value is encountered (accumulation expres
            ^(.*)/_type='While'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
 \n(?:\1.+\n)*?\1/test/value=True
-\n(?:\1.+\n)* \1/(?:body|orelse)/\d+/targets/.+/id=(?P<INPUT>.+) # capture the name of the input
+\n(?:\1.+\n)* \1/(?:body|orelse)/\d+/targets/.+/id='(?P<INPUT>.+)' # capture the name of the input
 \n(?:\1.+\n)* \1/(?P<_1>(?:body|orelse)/\d+)/_type='If'
-\n(?:\1.+\n)*?\1/(?P=_1)                /test/_ids=.*?(?P=INPUT).* # the input is tested
+\n(?:\1.+\n)*?\1/(?P=_1)                /test/_ids=.*?\b(?P=INPUT)\b.* # the input is tested
 \n(?:\1.+\n)* \1/(?P=_1)                /(?P<_2>(?:body|orelse)/\d+)/_type='Return'
-\n(?:\1.+\n)*?\1/(?P=_1)                /(?P=_2)                    /value/id=(?P<ACC>.+) # capture the name of the accumulator
+\n(?:\1.+\n)*?\1/(?P=_1)                /(?P=_2)                    /value/id='(?P<ACC>.+)' # capture the name of the accumulator
 (   # the accumulator either appears on both sides of a simple assignment with the input
 \n(?:\1.+\n)* \1/(?P<_3>(?:body|orelse)/\d+)/_type='(?P<SUFFIX>Assign)'
 \n(?:\1.+\n)*?\1/(?P=_3)                    /lineno=(?P<LINE>\d+)
-\n(?:\1.+\n)* \1/(?P=_3)                    /targets/.*/id=(?P=ACC)
-\n(?:\1.+\n)*?\1/(?P=_3)                    /value/_ids=(?=.*(?P=INPUT))(?=.*(?P=ACC)) # both appear in RHS
+\n(?:\1.+\n)* \1/(?P=_3)                    /targets/.*/id='(?P=ACC)'
+\n(?:\1.+\n)*?\1/(?P=_3)                    /value/_ids=(?=.*\b(?P=INPUT)\b)
+                                                        (?=.*\b(?P=ACC)\b)
+                                                        .* # both appear in RHS
 |   # or is on LHS of an augmented assignement with the input
 \n(?:\1.+\n)* \1/(?P<_3>(?:body|orelse)/\d+)/_type='(?P<SUFFIX>AugAssign)'
 \n(?:\1.+\n)*?\1/(?P=_3)                    /lineno=(?P<LINE>\d+)
-\n(?:\1.+\n)*?\1/(?P=_3)                    /target/id=(?P=ACC)
-\n(?:\1.+\n)* \1/(?P=_3)                    /value.*/id=(?P=INPUT)
+\n(?:\1.+\n)*?\1/(?P=_3)                    /target/id='(?P=ACC)'
+\n(?:\1.+\n)* \1/(?P=_3)                    /value.*/id='(?P=INPUT)'
 |   # or should be mutated by calling a function on this accumulator and the iteration variable
 \n(?:\1.+\n)* \1/(?P<_3>(?:body|orelse)/\d+)/_type='Expr' # the whole line consists in an expression
 \n(?:\1.+\n)*?\1/(?P=_3)                    /lineno=(?P<LINE>\d+)
 \n(?:\1.+\n)*?\1/(?P=_3)                    /value/_type='Call'
-\n(?:\1.+\n)*?\1/(?P=_3)                    /value/_ids=(?=.*(?P=INPUT))(?=.*(?P=ACC)).+ # both appear in RHS
+\n(?:\1.+\n)*?\1/(?P=_3)                    /value/_ids=(?=.*\b(?P=INPUT)\b)
+                                                        (?=.*\b(?P=ACC)\b)
+                                                        .+ # both appear in RHS
 \n(?:\1.+\n)*?\1/(?P=_3)                    /value/func/_type='(?P<SUFFIX>Name)'
 \n(?:\1.+\n)*?\1/(?P=_3)                    /value/func/id='(?!(?P=ACC)|(?P=INPUT)|breakpoint|delattr|eval|exec|help|input|open|print|setattr|super).+'
 |   # or should be mutated by calling a method of this accumulator, again on the iteration variable
@@ -2718,8 +2731,8 @@ Accumulate the inputs until a sentinel value is encountered (accumulation expres
 \n(?:\1.+\n)*?\1/(?P=_3)                    /lineno=(?P<LINE>\d+)
 \n(?:\1.+\n)*?\1/(?P=_3)                    /value/_type='Call'
 \n(?:\1.+\n)*?\1/(?P=_3)                    /value/func/_type='(?P<SUFFIX>Attribute)'
-\n(?:\1.+\n)*?\1/(?P=_3)                    /value/func/value/id=(?P=ACC) # a method of acc is called on...
-\n(?:\1.+\n)* \1/(?P=_3)                    /value/args/\d+/id=(?P=INPUT) # the iteration variable
+\n(?:\1.+\n)*?\1/(?P=_3)                    /value/func/value/id='(?P=ACC)' # a method of acc is called on...
+\n(?:\1.+\n)* \1/(?P=_3)                    /value/args/\d+/id='(?P=INPUT)' # the iteration variable
 )
 (
 \n(?:\1.+\n)* \1.*/lineno=(?P<LINE>\d+)
