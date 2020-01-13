@@ -35,7 +35,8 @@
         "suggest_conditional_expression": [[4,7]],
         "suggest_constant_definition": [[2,2],[7,7]],
         "unknown_label": [[6,6]],
-        "variable_definition:n": [[5,5],[7,7]]
+        "variable_definition:n": [[5,5],[7,7]],
+        "while": [[2,7]]
       },
       "taxons": {
         "call/function/builtin/print/": [[3,3],[8,8]],
@@ -72,7 +73,8 @@
       "labels": {
         "function_call:input": [[1,1]],
         "function_call:print": [[2,2]],
-        "literal:Str": [[2,2]]
+        "literal:Str": [[2,2]],
+        "while": [[1,2]]
       },
       "taxons": {
         "call/function/builtin/input/": [[1,1]],
@@ -158,6 +160,10 @@
     ],
     "variable_definition:n": [
       "tests/data/programs/collatz_print.py"
+    ],
+    "while": [
+      "tests/data/programs/collatz_print.py",
+      "tests/data/programs/loop.py"
     ],
     "function:succ": [
       "tests/data/programs/function_definition.py"

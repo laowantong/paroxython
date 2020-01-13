@@ -8,7 +8,7 @@ def n31(a: int) -> Tuple[List[int], int]: # function:n31, function_returning_a_v
     if a < 1: # comparison_operator:Lt, if (-> +1), int_literal, literal:Num
         raise ValueError("Given integer must be greater than 1, not {0}".format(a)) # composition, function_call:ValueError, if_then_branch, literal:Str, method_call:format, raise_exception:ValueError
     path = [a] # assignment, variable_definition:path
-    while a != 1: # comparison_operator:NotEq, evolve_state (-> +5), int_literal, literal:Num
+    while a != 1: # comparison_operator:NotEq, evolve_state (-> +5), int_literal, literal:Num, while (-> +5)
         if a % 2 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, if (-> +3), int_literal, literal:Num, suggest_conditional_expression (-> +3)
             a = a // 2 # assignment, binary_operator:FloorDiv, if_then_branch, int_literal, literal:Num, suggest_augmented_assignment, variable_definition:a
         else:
@@ -221,11 +221,11 @@ def mode(input_list): # function:mode (-> +7), function_returning_a_value:mode (
 import math # import:math
 def prime_factors(n: int) -> list: # function:prime_factors, function_returning_a_value:prime_factors
     pf = [] # assignment, literal:List, variable_definition:pf
-    while n % 2 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, evolve_state (-> +2), int_literal, literal:Num
+    while n % 2 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, evolve_state (-> +2), int_literal, literal:Num, while (-> +2)
         pf.append(2) # int_literal, literal:Num, method_call:append
         n = int(n / 2) # assignment, binary_operator:Div, function_call:int, int_literal, literal:Num, variable_definition:n
     for i in range(3, int(math.sqrt(n)) + 1, 2): # accumulate_elements:Assign (-> +3), binary_operator:Add, composition, for (-> +3), for_range_step:2 (-> +3), function_call:int, function_call:range, int_literal, literal:Num, method_call:sqrt, suggest_constant_definition
-        while n % i == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test, evolve_state (-> +2), int_literal, literal:Num
+        while n % i == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test, evolve_state (-> +2), int_literal, literal:Num, while (-> +2)
             pf.append(i) # method_call:append
             n = int(n / i) # assignment, binary_operator:Div, function_call:int, variable_definition:n
     if n > 2: # comparison_operator:Gt, if (-> +1), int_literal, literal:Num
@@ -234,13 +234,13 @@ def prime_factors(n: int) -> list: # function:prime_factors, function_returning_
 def number_of_divisors(n: int) -> int: # function:number_of_divisors, function_returning_a_value:number_of_divisors
     div = 1 # assignment, int_literal, literal:Num, variable_definition:div
     temp = 1 # assignment, int_literal, literal:Num, variable_definition:temp
-    while n % 2 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, evolve_state (-> +2), int_literal, literal:Num
+    while n % 2 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, evolve_state (-> +2), int_literal, literal:Num, while (-> +2)
         temp += 1 # augmented_assignment, int_literal, literal:Num
         n = int(n / 2) # assignment, binary_operator:Div, function_call:int, int_literal, literal:Num, variable_definition:n
     div *= temp # augmented_assignment
     for i in range(3, int(math.sqrt(n)) + 1, 2): # accumulate_elements:Assign (-> +5), binary_operator:Add, composition, for (-> +5), for_range_step:2 (-> +5), function_call:int, function_call:range, int_literal, literal:Num, method_call:sqrt, suggest_constant_definition
         temp = 1 # assignment, int_literal, literal:Num, variable_definition:temp
-        while n % i == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test, int_literal, literal:Num
+        while n % i == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test, int_literal, literal:Num, while (-> +2)
             temp += 1 # augmented_assignment, int_literal, literal:Num
             n = int(n / i) # assignment, binary_operator:Div, function_call:int, variable_definition:n
         div *= temp # augmented_assignment
@@ -248,14 +248,14 @@ def number_of_divisors(n: int) -> int: # function:number_of_divisors, function_r
 def sum_of_divisors(n: int) -> int: # function:sum_of_divisors, function_returning_a_value:sum_of_divisors
     s = 1 # assignment, int_literal, literal:Num, variable_definition:s
     temp = 1 # assignment, int_literal, literal:Num, variable_definition:temp
-    while n % 2 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, evolve_state (-> +2), int_literal, literal:Num
+    while n % 2 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, evolve_state (-> +2), int_literal, literal:Num, while (-> +2)
         temp += 1 # augmented_assignment, int_literal, literal:Num
         n = int(n / 2) # assignment, binary_operator:Div, function_call:int, int_literal, literal:Num, variable_definition:n
     if temp > 1: # comparison_operator:Gt, if (-> +1), int_literal, literal:Num
         s *= (2 ** temp - 1) / (2 - 1) # augmented_assignment, binary_operator:Div, binary_operator:Pow, binary_operator:Sub, if_then_branch, int_literal, literal:Num
     for i in range(3, int(math.sqrt(n)) + 1, 2): # accumulate_elements:Assign (-> +6), binary_operator:Add, composition, for (-> +6), for_range_step:2 (-> +6), function_call:int, function_call:range, int_literal, literal:Num, method_call:sqrt, suggest_constant_definition
         temp = 1 # assignment, int_literal, literal:Num, variable_definition:temp
-        while n % i == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test, int_literal, literal:Num
+        while n % i == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test, int_literal, literal:Num, while (-> +2)
             temp += 1 # augmented_assignment, int_literal, literal:Num
             n = int(n / i) # assignment, binary_operator:Div, function_call:int, variable_definition:n
         if temp > 1: # comparison_operator:Gt, if (-> +1), int_literal, literal:Num
@@ -287,7 +287,7 @@ def binomial_coefficient(n, r): # function:binomial_coefficient (-> +8), functio
     C[0] = 1 # assignment, index, int_literal, literal:Num
     for i in range(1, n + 1): # binary_operator:Add, for (-> +4), for_range_start (-> +4), function_call:range, int_literal, literal:Num
         j = min(i, r) # assignment, function_call:min, variable_definition:j
-        while j > 0: # comparison_operator:Gt, evolve_state (-> +2), int_literal, literal:Num
+        while j > 0: # comparison_operator:Gt, evolve_state (-> +2), int_literal, literal:Num, while (-> +2)
             C[j] += C[j - 1] # augmented_assignment, binary_operator:Sub, index, index_arithmetic, int_literal, literal:Num
             j -= 1 # augmented_assignment, int_literal, literal:Num
     return C[r] # index
@@ -306,7 +306,7 @@ def ceil(x) -> int: # function:ceil, function_returning_a_value:ceil
 # ----------------------------------------------------------------------------------------
 def collatz_sequence(n): # function:collatz_sequence (-> +8), function_returning_a_value:collatz_sequence (-> +8)
     sequence = [n] # assignment, variable_definition:sequence
-    while n != 1: # comparison_operator:NotEq, evolve_state (-> +5), int_literal, literal:Num
+    while n != 1: # comparison_operator:NotEq, evolve_state (-> +5), int_literal, literal:Num, while (-> +5)
         if n % 2 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, if (-> +3), int_literal, literal:Num
             n //= 2 # augmented_assignment, if_then_branch, int_literal, literal:Num
         else:
@@ -350,7 +350,7 @@ def extended_euclidean_algorithm(m, n): # function:extended_euclidean_algorithm 
     else:
         c = n # assignment, if_else_branch (-> +1), variable_definition:c
         d = m # assignment, variable_definition:d
-    while True: # literal:True
+    while True: # literal:True, while (-> +12)
         q = int(c / d) # assignment, binary_operator:Div, function_call:int, variable_definition:q
         r = c % d # assignment, binary_operator:Mod, variable_definition:r
         if r == 0: # comparison_operator:Eq, if (-> +1), int_literal, literal:Num
@@ -576,7 +576,7 @@ def gaussian(x, mu: float = 0.0, sigma: float = 1.0) -> int: # float_literal, fu
 def greatest_common_divisor(a, b): # function:greatest_common_divisor (-> +1), function_returning_a_value:greatest_common_divisor (-> +1), recursive_function:greatest_common_divisor (-> +1)
     return b if a == 0 else greatest_common_divisor(b % a, a) # binary_operator:Mod, comparison_operator:Eq, conditional_expression, function_call:greatest_common_divisor, int_literal, literal:Num
 def gcd_by_iterative(x, y): # function:gcd_by_iterative (-> +3), function_returning_a_value:gcd_by_iterative (-> +3)
-    while y:
+    while y: # while (-> +1)
         x, y = y, x % y # assignment, binary_operator:Mod, variable_definition:x, variable_definition:y
     return x
 def main(): # function:main (-> +10), procedure:main (-> +10)
@@ -599,13 +599,13 @@ def exactPrimeFactorCount(n): # function:exactPrimeFactorCount (-> +15), functio
     count = 0 # assignment, int_literal, literal:Num, variable_definition:count
     if n % 2 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, if (-> +3), int_literal, literal:Num
         count += 1 # augmented_assignment, if_then_branch (-> +2), int_literal, literal:Num
-        while n % 2 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, evolve_state (-> +1), int_literal, literal:Num
+        while n % 2 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, evolve_state (-> +1), int_literal, literal:Num, while (-> +1)
             n = int(n / 2) # assignment, binary_operator:Div, function_call:int, int_literal, literal:Num, variable_definition:n
     i = 3 # assignment, int_literal, literal:Num, suggest_constant_definition, variable_definition:i
-    while i <= int(math.sqrt(n)): # comparison_operator:LtE, composition, evolve_state (-> +4), function_call:int, method_call:sqrt
+    while i <= int(math.sqrt(n)): # comparison_operator:LtE, composition, evolve_state (-> +5), function_call:int, method_call:sqrt, while (-> +5)
         if n % i == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test, if (-> +3), int_literal, literal:Num
             count += 1 # augmented_assignment, if_then_branch (-> +2), int_literal, literal:Num
-            while n % i == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test, int_literal, literal:Num
+            while n % i == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test, int_literal, literal:Num, while (-> +1)
                 n = int(n / i) # assignment, binary_operator:Div, function_call:int, variable_definition:n
         i = i + 2 # assignment, binary_operator:Add, int_literal, literal:Num, suggest_augmented_assignment, variable_definition:i
     if n > 2: # comparison_operator:Gt, if (-> +1), int_literal, literal:Num
@@ -666,7 +666,7 @@ def kthPermutation(k, n): # function:kthPermutation (-> +13), function_returning
     assert 0 <= k < factorials[-1] * n, "k out of bounds" # assertion, binary_operator:Mult, chained_comparison:2, comparison_operator:Lt, comparison_operator:LtE, index, int_literal, literal:Num, literal:Str, negative_index:-1
     permutation = [] # assignment, literal:List, variable_definition:permutation
     elements = list(range(n)) # assignment, composition, function_call:list, function_call:range, variable_definition:elements
-    while factorials:
+    while factorials: # while (-> +4)
         factorial = factorials.pop() # assignment, method_call:pop, variable_definition:factorial
         number, k = divmod(k, factorial) # assignment, function_call:divmod, variable_definition:k, variable_definition:number
         permutation.append(elements[number]) # index, method_call:append
@@ -694,7 +694,7 @@ import unittest # import:unittest
 def find_lcm(first_num: int, second_num: int) -> int: # function:find_lcm, function_returning_a_value:find_lcm
     max_num = first_num if first_num >= second_num else second_num # assignment, comparison_operator:GtE, conditional_expression, variable_definition:max_num
     common_mult = max_num # assignment, variable_definition:common_mult
-    while (common_mult % first_num > 0) or (common_mult % second_num > 0): # binary_operator:Mod, boolean_operator:Or, comparison_operator:Gt, int_literal, literal:Num
+    while (common_mult % first_num > 0) or (common_mult % second_num > 0): # binary_operator:Mod, boolean_operator:Or, comparison_operator:Gt, int_literal, literal:Num, while (-> +1)
         common_mult += max_num # augmented_assignment
     return common_mult
 class TestLeastCommonMultiple(unittest.TestCase):
@@ -747,7 +747,7 @@ class Matrix(object):
         return matrix
 def modular_exponentiation(a, b): # function:modular_exponentiation (-> +7), function_returning_a_value:modular_exponentiation (-> +7)
     matrix = Matrix([[1, 0], [0, 1]]) # assignment, function_call:Matrix, int_literal, literal:List, literal:Num, variable_definition:matrix
-    while b > 0: # comparison_operator:Gt, evolve_state (-> +4), int_literal, literal:Num
+    while b > 0: # comparison_operator:Gt, evolve_state (-> +4), int_literal, literal:Num, while (-> +4)
         if b & 1: # binary_operator:BitAnd, if (-> +1), int_literal, literal:Num
             matrix *= a # augmented_assignment, if_then_branch
         a *= a # augmented_assignment
@@ -769,7 +769,7 @@ def simple_fibonacci(n, f1, f2): # function:simple_fibonacci (-> +11), function_
     fn_1 = f1 # assignment, variable_definition:fn_1
     fn_2 = f2 # assignment, variable_definition:fn_2
     n -= 2 # augmented_assignment, int_literal, literal:Num
-    while n > 0: # comparison_operator:Gt, evolve_state (-> +2), int_literal, literal:Num
+    while n > 0: # comparison_operator:Gt, evolve_state (-> +2), int_literal, literal:Num, while (-> +2)
         fn_1, fn_2 = fn_1 + fn_2, fn_1 # assignment, binary_operator:Add, variable_definition:fn_1, variable_definition:fn_2
         n -= 1 # augmented_assignment, int_literal, literal:Num
     return fn_1
@@ -816,7 +816,7 @@ def modular_exponential(base, power, mod): # function:modular_exponential (-> +1
         return -1 # if_then_branch, int_literal, literal:Num
     base %= mod # augmented_assignment
     result = 1 # assignment, int_literal, literal:Num, variable_definition:result
-    while power > 0: # comparison_operator:Gt, evolve_state (-> +4), int_literal, literal:Num
+    while power > 0: # comparison_operator:Gt, evolve_state (-> +4), int_literal, literal:Num, while (-> +4)
         if power & 1: # binary_operator:BitAnd, if (-> +1), int_literal, literal:Num
             result = (result * base) % mod # assignment, binary_operator:Mod, binary_operator:Mult, if_then_branch, variable_definition:result
         power = power >> 1 # assignment, binary_operator:RShift, int_literal, literal:Num, suggest_augmented_assignment, variable_definition:power
@@ -916,7 +916,7 @@ from typing import List # import_from:typing
 def prime_factors(n: int) -> List[int]: # function:prime_factors, function_returning_a_value:prime_factors, index
     i = 2 # assignment, int_literal, literal:Num, variable_definition:i
     factors = [] # assignment, literal:List, variable_definition:factors
-    while i * i <= n: # binary_operator:Mult, comparison_operator:LtE, evolve_state (-> +5)
+    while i * i <= n: # binary_operator:Mult, comparison_operator:LtE, evolve_state (-> +5), while (-> +5)
         if n % i: # binary_operator:Mod, if (-> +4)
             i += 1 # augmented_assignment, if_then_branch, int_literal, literal:Num
         else:
@@ -947,7 +947,7 @@ def primes(max: int) -> List[int]: # function:primes, function_returning_a_value
 def prime_sieve_eratosthenes(num): # function:prime_sieve_eratosthenes (-> +10), procedure:prime_sieve_eratosthenes (-> +10)
     primes = [True for i in range(num + 1)] # assignment, binary_operator:Add, comprehension:List, comprehension_for_count:1, function_call:range, int_literal, literal:Num, literal:True, variable_definition:primes
     p = 2 # assignment, int_literal, literal:Num, variable_definition:p
-    while p * p <= num: # binary_operator:Mult, comparison_operator:LtE
+    while p * p <= num: # binary_operator:Mult, comparison_operator:LtE, while (-> +4)
         if primes[p] == True: # comparison_operator:Eq, if (-> +2), index, literal:True
             for i in range(p * p, num + 1, p): # binary_operator:Add, binary_operator:Mult, for (-> +1), for_range_step (-> +1), function_call:range, if_then_branch (-> +1), int_literal, literal:Num
                 primes[i] = False # assignment, index, literal:False
@@ -1007,18 +1007,18 @@ class FFT:
     def __init__(self, polyA=[0], polyB=[0]): # function:__init__ (-> +17), function_with_default_positional_arguments:__init__ (-> +17), int_literal, literal:List, literal:Num, procedure:__init__ (-> +17)
         self.polyA = list(polyA)[:] # assignment, function_call:list, slice
         self.polyB = list(polyB)[:] # assignment, function_call:list, slice
-        while self.polyA[-1] == 0: # comparison_operator:Eq, evolve_state (-> +1), index, int_literal, literal:Num, negative_index:-1
+        while self.polyA[-1] == 0: # comparison_operator:Eq, evolve_state (-> +1), index, int_literal, literal:Num, negative_index:-1, while (-> +1)
             self.polyA.pop() # method_call:pop
         self.len_A = len(self.polyA) # assignment, function_call:len
-        while self.polyB[-1] == 0: # comparison_operator:Eq, evolve_state (-> +1), index, int_literal, literal:Num, negative_index:-1
+        while self.polyB[-1] == 0: # comparison_operator:Eq, evolve_state (-> +1), index, int_literal, literal:Num, negative_index:-1, while (-> +1)
             self.polyB.pop() # method_call:pop
         self.len_B = len(self.polyB) # assignment, function_call:len
         self.C_max_length = int( # assignment, composition, function_call:int
             2 ** np.ceil(np.log2(len(self.polyA) + len(self.polyB) - 1)) # binary_operator:Add, binary_operator:Pow, binary_operator:Sub, composition, function_call:len, int_literal, literal:Num, method_call:ceil, method_call:log2
         )
-        while len(self.polyA) < self.C_max_length: # comparison_operator:Lt, evolve_state (-> +1), function_call:len
+        while len(self.polyA) < self.C_max_length: # comparison_operator:Lt, evolve_state (-> +1), function_call:len, while (-> +1)
             self.polyA.append(0) # int_literal, literal:Num, method_call:append
-        while len(self.polyB) < self.C_max_length: # comparison_operator:Lt, evolve_state (-> +1), function_call:len
+        while len(self.polyB) < self.C_max_length: # comparison_operator:Lt, evolve_state (-> +1), function_call:len, while (-> +1)
             self.polyB.append(0) # int_literal, literal:Num, method_call:append
         self.root = complex(mpmath.root(x=1, n=self.C_max_length, k=1)) # assignment, composition, function_call:complex, int_literal, literal:Num, method_call:root
         self.product = self.__multiply() # assignment, method_call:__multiply
@@ -1030,7 +1030,7 @@ class FFT:
         if len(dft) <= 1: # comparison_operator:LtE, function_call:len, if (-> +1), int_literal, literal:Num
             return dft[0] # if_then_branch, index, int_literal, literal:Num
         next_ncol = self.C_max_length // 2 # assignment, binary_operator:FloorDiv, int_literal, literal:Num, variable_definition:next_ncol
-        while next_ncol > 0: # comparison_operator:Gt, evolve_state (-> +14), int_literal, literal:Num
+        while next_ncol > 0: # comparison_operator:Gt, evolve_state (-> +14), int_literal, literal:Num, while (-> +14)
             new_dft = [[] for i in range(next_ncol)] # assignment, comprehension:List, comprehension_for_count:1, function_call:range, literal:List, variable_definition:new_dft
             root = self.root ** next_ncol # assignment, binary_operator:Pow, variable_definition:root
             current_root = 1 # assignment, int_literal, literal:Num, variable_definition:current_root
@@ -1055,7 +1055,7 @@ class FFT:
         if len(inverseC[0]) <= 1: # comparison_operator:LtE, function_call:len, if (-> +1), index, int_literal, literal:Num
             return inverseC[0] # if_then_branch, index, int_literal, literal:Num
         next_ncol = 2 # assignment, int_literal, literal:Num, variable_definition:next_ncol
-        while next_ncol <= self.C_max_length: # comparison_operator:LtE, evolve_state (-> +22)
+        while next_ncol <= self.C_max_length: # comparison_operator:LtE, evolve_state (-> +22), while (-> +22)
             new_inverseC = [[] for i in range(next_ncol)] # assignment, comprehension:List, comprehension_for_count:1, function_call:range, literal:List, variable_definition:new_inverseC
             root = self.root ** (next_ncol // 2) # assignment, binary_operator:FloorDiv, binary_operator:Pow, int_literal, literal:Num, variable_definition:root
             current_root = 1 # assignment, int_literal, literal:Num, variable_definition:current_root
@@ -1079,7 +1079,7 @@ class FFT:
             inverseC = new_inverseC # assignment, variable_definition:inverseC
             next_ncol *= 2 # augmented_assignment, int_literal, literal:Num
         inverseC = [round(x[0].real, 8) + round(x[0].imag, 8) * 1j for x in inverseC] # assignment, binary_operator:Add, binary_operator:Mult, comprehension:List, comprehension_for_count:1, function_call:round, imaginary_literal, index, int_literal, literal:Num, suggest_constant_definition, variable_definition:inverseC
-        while inverseC[-1] == 0: # comparison_operator:Eq, evolve_state (-> +1), index, int_literal, literal:Num, negative_index:-1
+        while inverseC[-1] == 0: # comparison_operator:Eq, evolve_state (-> +1), index, int_literal, literal:Num, negative_index:-1, while (-> +1)
             inverseC.pop() # method_call:pop
         return inverseC
     def __str__(self): # function:__str__ (-> +10), function_returning_a_value:__str__ (-> +10)
@@ -1122,7 +1122,7 @@ def sieve(n): # function:sieve (-> +33), function_returning_a_value:sieve (-> +3
     end = int(math.sqrt(n)) # assignment, composition, function_call:int, method_call:sqrt, variable_definition:end
     temp = [True] * (end + 1) # assignment, binary_operator:Add, binary_operator:Mult, int_literal, literal:List, literal:Num, literal:True, variable_definition:temp
     prime = [] # assignment, literal:List, variable_definition:prime
-    while start <= end: # comparison_operator:LtE
+    while start <= end: # comparison_operator:LtE, while (-> +6)
         if temp[start] is True: # comparison_operator:Is, if (-> +4), index, literal:True
             in_prime.append(start) # if_then_branch (-> +3), method_call:append
             for i in range(start * start, end + 1, start): # binary_operator:Add, binary_operator:Mult, for (-> +2), for_range_step (-> +2), function_call:range, int_literal, literal:Num
@@ -1134,7 +1134,7 @@ def sieve(n): # function:sieve (-> +33), function_returning_a_value:sieve (-> +3
     high = low + end - 1 # assignment, binary_operator:Add, binary_operator:Sub, int_literal, literal:Num, variable_definition:high
     if high > n: # comparison_operator:Gt, if (-> +1)
         high = n # assignment, if_then_branch, variable_definition:high
-    while low <= n: # comparison_operator:LtE
+    while low <= n: # comparison_operator:LtE, while (-> +14)
         temp = [True] * (high - low + 1) # assignment, binary_operator:Add, binary_operator:Mult, binary_operator:Sub, int_literal, literal:List, literal:Num, literal:True, variable_definition:temp
         for each in in_prime: # accumulate_elements:AugAssign (-> +5), for (-> +5), for_each (-> +5)
             t = math.floor(low / each) * each # assignment, binary_operator:Div, binary_operator:Mult, method_call:floor, variable_definition:t
@@ -1169,7 +1169,7 @@ def sieve(n): # function:sieve (-> +15), function_returning_a_value:sieve (-> +1
     prime = [] # assignment, literal:List, variable_definition:prime
     start = 2 # assignment, int_literal, literal:Num, variable_definition:start
     end = int(math.sqrt(n)) # assignment, composition, function_call:int, method_call:sqrt, variable_definition:end
-    while start <= end: # comparison_operator:LtE
+    while start <= end: # comparison_operator:LtE, while (-> +6)
         if l[start] is True: # comparison_operator:Is, if (-> +4), index, literal:True
             prime.append(start) # if_then_branch (-> +3), method_call:append
             for i in range(start * start, n + 1, start): # binary_operator:Add, binary_operator:Mult, for (-> +2), for_range_step (-> +2), function_call:range, int_literal, literal:Num
@@ -1199,7 +1199,7 @@ def method_2(boundary, steps): # function:method_2 (-> +12), function_returning_
     return y
 def make_points(a, b, h): # function:make_points (-> +4), generator:make_points (-> +4), procedure:make_points (-> +4)
     x = a + h # assignment, binary_operator:Add, variable_definition:x
-    while x < (b - h): # binary_operator:Sub, comparison_operator:Lt
+    while x < (b - h): # binary_operator:Sub, comparison_operator:Lt, while (-> +2)
         yield x
         x = x + h # assignment, binary_operator:Add, suggest_augmented_assignment, variable_definition:x
 def f(x): # function:f (-> +2), function_returning_a_value:f (-> +2)
@@ -1254,7 +1254,7 @@ def method_1(boundary, steps): # function:method_1 (-> +10), function_returning_
     return y
 def make_points(a, b, h): # function:make_points (-> +4), generator:make_points (-> +4), procedure:make_points (-> +4)
     x = a + h # assignment, binary_operator:Add, variable_definition:x
-    while x < (b - h): # binary_operator:Sub, comparison_operator:Lt
+    while x < (b - h): # binary_operator:Sub, comparison_operator:Lt, while (-> +2)
         yield x
         x = x + h # assignment, binary_operator:Add, suggest_augmented_assignment, variable_definition:x
 def f(x): # function:f (-> +2), function_returning_a_value:f (-> +2)

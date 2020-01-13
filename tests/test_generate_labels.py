@@ -20,7 +20,7 @@ def test_generate_labeled_sources():
     assert source == "\n".join(
         [
             "def print_collatz(n): # added_block_label (-> +7), function:print_collatz (-> +7), procedure:print_collatz (-> +7)",
-            "    while n != 1: # comparison_operator:NotEq, evolve_state (-> +5), int_literal, literal:Num, suggest_constant_definition",
+            "    while n != 1: # comparison_operator:NotEq, evolve_state (-> +5), int_literal, literal:Num, suggest_constant_definition, while (-> +5)",
             "        print(n) # function_call:print",
             "        if n % 2 == 0: # added_label_on_line_4, binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, if (-> +3), int_literal, literal:Num, suggest_conditional_expression (-> +3)",
             "            n = n // 2 # assignment, if_then_branch, int_literal, suggest_augmented_assignment, variable_definition:n",
@@ -45,7 +45,7 @@ def test_generate_labeled_sources():
     print(source)
     assert source == "\n".join(
         [
-            "while input(): # function_call:input",
+            "while input(): # function_call:input, while (-> +1)",
             '    print("foobar") # function_call:print, literal:Str',
         ]
     )

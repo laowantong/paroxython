@@ -67,6 +67,7 @@
       - [Construct `nested_for`](#construct-nested_for)
       - [Construct `triangular_nested_for`](#construct-triangular_nested_for)
       - [Construct `square_nested_for`](#construct-square_nested_for)
+      - [Construct `while`](#construct-while)
   - [Exceptions](#exceptions)
       - [Construct `assertion`](#construct-assertion)
       - [Construct `raise_exception`](#construct-raise_exception)
@@ -2116,6 +2117,36 @@ Two nested `for` loops doing the same number of iterations.
 | Label | Lines |
 |:--|:--|
 | `square_nested_for` | 1-3, 5-7 |
+
+--------------------------------------------------------------------------------
+
+#### Construct `while`
+
+##### Definition
+
+```re
+           ^(.*)/_type='While'
+\n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
+\n(?:\1.+\n)* \1/.*/lineno=(?P<LINE>\d+)
+```
+
+##### Example
+
+```python
+1   while foo():
+2       while bar():
+3           pass
+4       while biz():
+5           pass
+6       else:
+7           pass
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `while` | 1-7, 2-3, 4-7 |
 
 --------------------------------------------------------------------------------
 
