@@ -22,6 +22,12 @@ def flatten_ast(node: Any, prefix: str = "") -> str:
         for (name, x) in ast.iter_fields(node):
             if name == "orelse" and isinstance(node, (ast.For, ast.While, ast.AsyncFor)):
                 name = "loopelse"  # this makes the "orelse" clause specific to conditionals
+            elif name == "targets" and isinstance(node, ast.Assign):
+                name = "assigntargets"
+            elif name == "target" and isinstance(node, ast.AugAssign):
+                name = "assigntarget"
+            elif name == "value" and isinstance(node, (ast.Assign, ast.AugAssign)):
+                name = "assignvalue"
             acc.append(flatten_ast(x, f"{prefix}/{name}"))
         return "".join(acc)
     elif isinstance(node, list):

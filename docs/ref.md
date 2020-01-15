@@ -22,7 +22,9 @@
       - [Construct `short_circuit`](#construct-short_circuit)
   - [Calls](#calls)
       - [Construct `function_call`](#construct-function_call)
+      - [Construct `call_parameter`](#construct-call_parameter)
       - [Construct `method_call`](#construct-method_call)
+      - [Construct `method_call_object`](#construct-method_call_object)
       - [Construct `method_chaining`](#construct-method_chaining)
       - [Construct `composition`](#construct-composition)
   - [Anonymous functions](#anonymous-functions)
@@ -36,6 +38,8 @@
       - [Construct `variable_definition`](#construct-variable_definition)
       - [Construct `assignment`](#construct-assignment)
       - [Construct `augmented_assignment`](#construct-augmented_assignment)
+      - [Construct `assignment_lhs_identifier`](#construct-assignment_lhs_identifier)
+      - [Construct `assignment_rhs_identifier`](#construct-assignment_rhs_identifier)
       - [Construct `chained_assignment`](#construct-chained_assignment)
       - [Construct `swapping`](#construct-swapping)
       - [Construct `negation`](#construct-negation)
@@ -655,17 +659,53 @@ When the value of the left operand suffices to determine the value of a boolean 
 ##### Example
 
 ```python
-1   print(len("hello, world"))
-2   print(foobar((42)))
+1   foo(a, b, c)
+2   bar()
+3   buzz(x, 2)
+4   fizz(foobar(x), 2)
 ```
 
 ##### Matches
 
 | Label | Lines |
 |:--|:--|
-| `function_call:len` | 1 |
-| `function_call:print` | 1, 2 |
-| `function_call:foobar` | 2 |
+| `function_call:bar` | 2 |
+| `function_call:buzz` | 3 |
+| `function_call:fizz` | 4 |
+| `function_call:foo` | 1 |
+| `function_call:foobar` | 4 |
+
+--------------------------------------------------------------------------------
+
+#### Construct `call_parameter`
+
+##### Definition
+
+```re
+  ^(.*/args/\d+)/lineno=(?P<LINE>\d+)
+\n(?:\1.+\n)*?\1/id='(?P<SUFFIX>.+)'
+```
+
+##### Example
+
+```python
+1   foo(a, b, c)
+2   bar()
+3   buzz(x, 2)
+4   fizz(foobar(x), 2)
+5   foo.bar(buzz, bizz)
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `call_parameter:a` | 1 |
+| `call_parameter:b` | 1 |
+| `call_parameter:bizz` | 5 |
+| `call_parameter:buzz` | 5 |
+| `call_parameter:c` | 1 |
+| `call_parameter:x` | 3, 4 |
 
 --------------------------------------------------------------------------------
 
@@ -675,8 +715,8 @@ When the value of the left operand suffices to determine the value of a boolean 
 
 ```re
            ^(.*)/_type='Call'
-\n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
 \n(?:\1.+\n)*?\1/func/_type='Attribute'
+\n(?:\1.+\n)*?\1/func/lineno=(?P<LINE>\d+)
 \n(?:\1.+\n)*?\1/func/attr='(?P<SUFFIX>.+)'
 ```
 
@@ -684,7 +724,8 @@ When the value of the left operand suffices to determine the value of a boolean 
 
 ```python
 1   seq.index(42)
-2   foo.bar(42)
+2   foo(bar)  # no match
+3   seq.index # no match
 ```
 
 ##### Matches
@@ -692,7 +733,33 @@ When the value of the left operand suffices to determine the value of a boolean 
 | Label | Lines |
 |:--|:--|
 | `method_call:index` | 1 |
-| `method_call:bar` | 2 |
+
+--------------------------------------------------------------------------------
+
+#### Construct `method_call_object`
+
+##### Definition
+
+```re
+           ^(.*)/value/_type='Call'
+\n(?:\1.+\n)*?\1/value/func/_type='Attribute'
+\n(?:\1.+\n)*?\1/value/func/value/lineno=(?P<LINE>\d+)
+\n(?:\1.+\n)*?\1/value/func/value/id='(?P<SUFFIX>.+)'
+```
+
+##### Example
+
+```python
+1   seq.index(42)
+2   foo(bar)  # no match
+3   seq.index # no match
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `method_call_object:seq` | 1 |
 
 --------------------------------------------------------------------------------
 
@@ -900,8 +967,8 @@ Match a comprehension with an `if` clause.
 ##### Definition
 
 ```re
-^(.*/targets/\d+(/elts/\d+(/value)?)?)/lineno=(?P<LINE>\d+)
-\n(?:\1.+\n)*?\1                      /id='(?P<SUFFIX>.+)'
+^(.*/assigntargets/\d+(/elts/\d+(/value)?)?)/lineno=(?P<LINE>\d+)
+\n(?:\1.+\n)*?\1                            /id='(?P<SUFFIX>.+)'
 ```
 
 ##### Example
@@ -967,11 +1034,14 @@ Match a comprehension with an `if` clause.
 
 #### Construct `augmented_assignment`
 
+The name of the augmented variable is captured as a suffix.
+
 ##### Definition
 
 ```re
            ^(.*)/_type='AugAssign'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
+\n(?:\1.+\n)* \1/assigntarget(/value)?/id='(?P<SUFFIX>.+)'
 ```
 
 ##### Example
@@ -979,13 +1049,109 @@ Match a comprehension with an `if` clause.
 ```python
 1   a += 1
 2   a = a + 1
+3   a += b
+4   a *= foo(bar(a, b, c))
+5   a[3] += 1
+6   a[b] //= 2
 ```
 
 ##### Matches
 
 | Label | Lines |
 |:--|:--|
-| `augmented_assignment` | 1 |
+| `augmented_assignment:a` | 1, 3, 4, 5, 6 |
+
+--------------------------------------------------------------------------------
+
+#### Construct `assignment_lhs_identifier`
+
+Capture any identifier appearing on the left hand side of an assignment (possibly augmented).
+
+##### Definition
+
+```re
+^(.*/assigntarget(s/\d+)?(|/value|/elts/\d+|/elts/\d+/value))/lineno=(?P<LINE>\d+)
+\n(?:\1.+\n)*?\1                                             /id='(?P<SUFFIX>.+)'
+```
+
+##### Example
+
+```python
+1   _ = 1
+2   a = 1
+3   (b, c) = (1, 1)
+4   [d, e] = [1, 1]
+5   f[g] = 1            # no match for g
+6   if foo:
+7       h = 1
+8   def bar():
+9       i = 1
+10  j = k = 1
+11  l.m = 1             # LIMITATION: no match for m
+12  (n, *o) = [1, 1, 1]
+13  a += 1
+14  f[g] += 1            # no match for g
+15  for i in seq:        # no match for i
+16      pass
+17  del a                # no match for a
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `assignment_lhs_identifier:_` | 1 |
+| `assignment_lhs_identifier:a` | 2, 13 |
+| `assignment_lhs_identifier:b` | 3 |
+| `assignment_lhs_identifier:c` | 3 |
+| `assignment_lhs_identifier:d` | 4 |
+| `assignment_lhs_identifier:e` | 4 |
+| `assignment_lhs_identifier:f` | 5, 14 |
+| `assignment_lhs_identifier:h` | 7 |
+| `assignment_lhs_identifier:i` | 9 |
+| `assignment_lhs_identifier:j` | 10 |
+| `assignment_lhs_identifier:k` | 10 |
+| `assignment_lhs_identifier:l` | 11 |
+| `assignment_lhs_identifier:n` | 12 |
+| `assignment_lhs_identifier:o` | 12 |
+
+--------------------------------------------------------------------------------
+
+#### Construct `assignment_rhs_identifier`
+
+Capture any identifier (variable or function) appearing on the right hand side of an assignment (possibly augmented).
+
+##### Definition
+
+```re
+^(.*/assignvalue\b.*)/lineno=(?P<LINE>\d+)
+\n(?:\1.+\n)*?\1     /id='(?P<SUFFIX>.+)'
+```
+
+##### Example
+
+```python
+1   a = a + b + c
+2   a += a + b + c
+3   a = a[b[c]]
+4   a += a[b[c]]
+5   a = foo(bar())
+6   a += foo(bar())
+7   a = a + i
+8   a += i
+9   a[i] = b
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `assignment_rhs_identifier:a` | 1, 2, 3, 4, 7 |
+| `assignment_rhs_identifier:b` | 1, 2, 3, 4, 9 |
+| `assignment_rhs_identifier:bar` | 5, 6 |
+| `assignment_rhs_identifier:c` | 1, 2, 3, 4 |
+| `assignment_rhs_identifier:foo` | 5, 6 |
+| `assignment_rhs_identifier:i` | 7, 8 |
 
 --------------------------------------------------------------------------------
 
@@ -996,7 +1162,7 @@ Match a comprehension with an `if` clause.
 ```re
            ^(.*)/_type='Assign'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
-\n(?:\1.+\n)*?\1/targets/length=(?!1\n).+
+\n(?:\1.+\n)*?\1/assigntargets/length=(?!1\n).+
 ```
 
 ##### Example
@@ -1024,12 +1190,12 @@ Swap two variables or two elements of an array with a 2-element tuple or list.
 ```re
            ^(.*)/_type='Assign'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
-\n(?:\1.+\n)*?\1/targets/0/elts/length=2
-\n(?:\1.+\n)*?\1/targets/0/elts/0/_hash=(?P<HASH_A>.+)
-\n(?:\1.+\n)*?\1/targets/0/elts/1/_hash=(?P<HASH_B>.+)
-\n(?:\1.+\n)*?\1/value/elts/length=2
-\n(?:\1.+\n)*?\1/value/elts/0/_hash=(?P=HASH_B)
-\n(?:\1.+\n)*?\1/value/elts/1/_hash=(?P=HASH_A)
+\n(?:\1.+\n)*?\1/assigntargets/0/elts/length=2
+\n(?:\1.+\n)*?\1/assigntargets/0/elts/0/_hash=(?P<HASH_A>.+)
+\n(?:\1.+\n)*?\1/assigntargets/0/elts/1/_hash=(?P<HASH_B>.+)
+\n(?:\1.+\n)*?\1/assignvalue/elts/length=2
+\n(?:\1.+\n)*?\1/assignvalue/elts/0/_hash=(?P=HASH_B)
+\n(?:\1.+\n)*?\1/assignvalue/elts/1/_hash=(?P=HASH_A)
 ```
 
 ##### Example
@@ -1058,10 +1224,10 @@ Update a variable by negating it.
 ```re
            ^(.*)/_type='Assign'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
-\n(?:\1.+\n)*?\1/targets/0/_hash=(?P<HASH>.+) # capture hash
-\n(?:\1.+\n)*?\1/value/_type='UnaryOp'
-\n(?:\1.+\n)*?\1/value/op/_type='USub'
-\n(?:\1.+\n)*?\1/value/operand/_hash=(?P=HASH) # match hash
+\n(?:\1.+\n)*?\1/assigntargets/0/_hash=(?P<HASH>.+) # capture hash
+\n(?:\1.+\n)*?\1/assignvalue/_type='UnaryOp'
+\n(?:\1.+\n)*?\1/assignvalue/op/_type='USub'
+\n(?:\1.+\n)*?\1/assignvalue/operand/_hash=(?P=HASH) # match hash
 ```
 
 ##### Example
@@ -1168,14 +1334,15 @@ A function returns a value iff it contains a statement `return` and the returned
 ##### Definition
 
 ```sql
-SELECT "procedure" || name_suffix,
+SELECT "procedure",
+       name_suffix,
        span_start,
        span_end
-FROM main
+FROM t
 WHERE name_prefix = "function"
   AND span NOT IN
     (SELECT span
-     FROM main
+     FROM t
      WHERE name_prefix = "function_returning_a_value" )
 ```
 
@@ -1708,21 +1875,24 @@ Match the body of the possible branch `else` of an `if` statement.
 
 #### Construct `nested_if`
 
-Match an `if` clause nested in _n_ other `if` clauses, suffixing it by _n_ + 1.
+Match an `if` clause nested in _n_ other `if` clauses, suffixing it by _n_.
 
 ##### Definition
 
 ```sql
-SELECT "nested_if" || ":" || (count(*) + 1),
-       span_start_2,
-       span_end_2
-FROM nest
-WHERE name_1 IN ("if_then_branch",
-                 "if_else_branch",
-                 "if_elif_branch")
-  AND name_2 = "if"
-GROUP BY span_2
-ORDER BY span_start_2
+SELECT "nested_if",
+       count(*),
+       inner_if.span_start,
+       inner_if.span_end
+FROM t outer_if
+JOIN t inner_if ON (outer_if.span_start <= inner_if.span_start
+                    AND inner_if.span_end <= outer_if.span_end)
+WHERE outer_if.name_prefix IN ("if_then_branch",
+                               "if_else_branch",
+                               "if_elif_branch")
+  AND inner_if.name_prefix = "if"
+GROUP BY inner_if.span
+ORDER BY inner_if.span_start
 ```
 
 ##### Example
@@ -1753,8 +1923,8 @@ ORDER BY span_start_2
 
 | Label | Lines |
 |:--|:--|
-| `nested_if:2` | 2-4, 6-7, 8-9, 18-19 |
-| `nested_if:3` | 3-4 |
+| `nested_if:1` | 2-4, 6-7, 8-9, 18-19 |
+| `nested_if:2` | 3-4 |
 
 --------------------------------------------------------------------------------
 
@@ -2004,19 +2174,23 @@ Iterate over index numbers of a collection.
 
 #### Construct `nested_for`
 
-Match a `for` statement nested in _n_ other `for` statements, suffixing it by _n_ + 1.
+Match a `for` statement nested in _n_ other `for` statements, suffixing it by _n_.
 
 ##### Definition
 
 ```sql
-SELECT "nested_for" || ":" || (count(*) + 1),
-       span_start_2,
-       span_end_2
-FROM nest
-WHERE name_prefix_1 = "for"
-  AND name_prefix_2 = "for"
-GROUP BY span_2
-ORDER BY span_start_2
+SELECT "nested_for",
+       count(*),
+       inner_loop.span_start,
+       inner_loop.span_end
+FROM t outer_loop
+JOIN t inner_loop ON (outer_loop.span_start <= inner_loop.span_start
+                      AND inner_loop.span_end <= outer_loop.span_end
+                      AND inner_loop.rowid != outer_loop.rowid)
+WHERE outer_loop.name_prefix = "for"
+  AND inner_loop.name_prefix = "for"
+GROUP BY inner_loop.span
+ORDER BY inner_loop.span_start
 ```
 
 ##### Example
@@ -2034,8 +2208,8 @@ ORDER BY span_start_2
 
 | Label | Lines |
 |:--|:--|
-| `nested_for:2` | 2-5 |
-| `nested_for:3` | 4-5 |
+| `nested_for:1` | 2-5 |
+| `nested_for:2` | 4-5 |
 
 --------------------------------------------------------------------------------
 
@@ -2352,44 +2526,39 @@ Two nested `for` loops doing the same number of iterations.
 
 #### Construct `accumulate_elements`
 
-An accumulator is iteratively updated from its previous value and the value of the iteration variable.
+An accumulator is iteratively updated from its previous value and those of the iteration variable.
 
 ##### Definition
 
-```re
-           ^(.*)/_type='For'
-\n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
-\n(?:\1.+\n)*?\1/target/_type='Name'
-\n(?:\1.+\n)*?\1/target/id='(?P<ITER_VAR>.+)'
-(   # the accumulator either appears on both sides of a simple assignment with the iteration variable
-\n(?:\1.+\n)* \1/(?P<_1>((?:body|orelse)/\d+/?)*)/_type='(?P<SUFFIX>Assign)'
-\n(?:\1.+\n)*?\1/(?P=_1)                         /lineno=(?P<LINE>\d+)
-\n(?:\1.+\n)* \1/(?P=_1)                         /targets/.*/id='(?P<ACC>.+)' # capture the name of the accumulator
-\n(?:\1.+\n)*?\1/(?P=_1)                         /value/_ids=(?=.*?\b(?P=ACC)\b)
-                                                             (?=.*?\b(?P=ITER_VAR)\b)
-                                                             .* # both appear in RHS
-|   # or should be on LHS of an augmented assignement with the iteration variable
-\n(?:\1.+\n)* \1/(?P<_1>((?:body|orelse)/\d+/?)*)/_type='(?P<SUFFIX>AugAssign)'
-\n(?:\1.+\n)*?\1/(?P=_1)                         /lineno=(?P<LINE>\d+)
-\n(?:\1.+\n)* \1/(?P=_1)                         /value.*/id='(?P=ITER_VAR)'
-|   # or should be mutated by calling a function on this accumulator and the iteration variable
-\n(?:\1.+\n)* \1/(?P<_1>((?:body|orelse)/\d+/?)*)/_type='Expr' # the whole line consists in an expression
-\n(?:\1.+\n)*?\1/(?P=_1)                         /lineno=(?P<LINE>\d+)
-\n(?:\1.+\n)*?\1/(?P=_1)                         /value/_type='Call'
-\n(?:\1.+\n)*?\1/(?P=_1)                         /value/func/_type='(?P<SUFFIX>Name)'
-\n(?:\1.+\n)*?\1/(?P=_1)                         /value/func/id='(?!breakpoint|delattr|eval|exec|help|input|open|print|setattr|super).+'
-\n(?:\1.+\n)*?\1/(?P=_1)                         /value/args/length=(?![01]\n)\d+ # the function has several arguments
-\n(?:\1.+\n)* \1/(?P=_1)                         /value/args/\d+/id='(?P=ITER_VAR)' # which include the iteration variable
-|   # or should be mutated by calling a method of this accumulator, again on the iteration variable
-\n(?:\1.+\n)* \1/(?P<_1>((?:body|orelse)/\d+/?)*)/_type='Expr' # the whole line consists in an expression
-\n(?:\1.+\n)*?\1/(?P=_1)                         /lineno=(?P<LINE>\d+)
-\n(?:\1.+\n)*?\1/(?P=_1)                         /value/_type='Call'
-\n(?:\1.+\n)*?\1/(?P=_1)                         /value/func/_type='(?P<SUFFIX>Attribute)'
-\n(?:\1.+\n)* \1/(?P=_1)                         /value/args/\d+/id='(?P=ITER_VAR)' # the arguments include the iteration variable
-)
-(   # capture the line number of the last line of the function (it may appear before Call)
-\n(?:\1.+\n)* \1.*/lineno=(?P<LINE>\d+)
-)?
+```sql
+SELECT "accumulate_elements",
+       count(DISTINCT acc_left.name_suffix),
+       for_loop.span_start,
+       for_loop.span_end
+FROM t for_loop -- Ensure iter_var, acc_left and acc_right have same span and are inside the loop.
+JOIN t iter_var ON (for_loop.span_start <= iter_var.span_start
+                    AND iter_var.span_end <= for_loop.span_end)
+JOIN t acc_left ON (iter_var.span = acc_left.span)
+JOIN t acc_right ON (acc_left.span = acc_right.span)
+WHERE for_loop.name_prefix = "for" -- A for loop...
+  AND for_loop.name_suffix = iter_var.name_suffix -- whose iteration variable...
+  AND ((iter_var.name_prefix = "assignment_rhs_identifier" -- either appears on the RHS of an assignment...
+        AND (acc_left.name_prefix = "augmented_assignment" -- which is either augmented...
+             OR (acc_left.name_suffix = acc_right.name_suffix -- or references the same identifier...
+                 AND acc_left.name_prefix = "assignment_lhs_identifier" -- on both left...
+                 AND acc_right.name_prefix = "assignment_rhs_identifier")))-- and right hand size...
+       OR (iter_var.name_prefix = "call_parameter" -- or appears as an argument...
+           AND acc_right.name_prefix = "method_call" -- of a call to a method...
+           AND acc_right.name_suffix IN ("append",
+                                         "extend",
+                                         "insert",
+                                         "add",
+                                         "update")-- updating its object.
+           AND acc_left.name_prefix = "method_call_object" -- Ensure that the suffix is the accumulator...
+ ))
+  AND for_loop.name_suffix != acc_left.name_suffix -- and is distinct from the iteration variable.
+GROUP BY for_loop.span
+ORDER BY for_loop.span_start
 ```
 
 ##### Example
@@ -2402,34 +2571,33 @@ An accumulator is iteratively updated from its previous value and the value of t
 5           seed += 1
 6       return acc
 7   for i in range(10):
-8       acc = combine(acc, i)
-9   for i in range(10):
-10      if condition:
-11           acc += i
-12      pass
-13  for i in range(10):
-14      acc += foo(bar, i)
-15  for i in range(10):
-16      foo(acc, bar, i)
-17      pass
-18  for i in range(10):
-19      acc.foo(bar, i)
-20      pass
-21  for i in range(10): # no match (cf. remark)
-22      print(foobar, i)
+8       acc_1 = combine(acc_1, i)
+9       if condition:
+10           acc_2 += i
+11      else:
+12          acc_2 *= i
+13      pass
+14  for i in range(10):
+15      acc += foo(bar, i)
+16  for i in range(10): # no match
+17      foo(acc, bar, i)
+18      pass
+19  for i in range(10):
+20      acc.append(i)
+21      pass
+22  for i in range(10): # no match
+23      print(foobar, i)
+24  for c in string:
+25      c = c.upper() # no match: this is the iteration variable, not an accumulator
+26      print(c)
 ```
-
-**Remark.**
-The third alternative of the regex is experimental. It matches any one-line function call on the iteration variable and another argument, not only those which mutate one of their arguments (hopefully the accumulator). The built-in functions with side effects (such as `print()`) are explicitely excluded, but this may not be enough. The fourth alternative, too, is certainly broader than necessary. Handle with care.
 
 ##### Matches
 
 | Label | Lines |
 |:--|:--|
-| `accumulate_elements:Assign` | 3-5, 7-8 |
-| `accumulate_elements:Attribute` | 18-20 |
-| `accumulate_elements:AugAssign` | 9-12, 13-14 |
-| `accumulate_elements:Name` | 15-17 |
+| `accumulate_elements:1` | 3-5, 14-15, 19-21 |
+| `accumulate_elements:2` | 7-13 |
 
 --------------------------------------------------------------------------------
 
@@ -2479,7 +2647,7 @@ An accumulation pattern that, from a given collection, returns the best element 
 
 ```re
            ^(.*)/(?P<_1>(?:body|orelse)/\d+)/_type='Assign'
-\n(?:\1.+\n)*?\1/(?P=_1)                /targets/0/id='(?P<CANDIDATE>.+)' # capture candidate
+\n(?:\1.+\n)*?\1/(?P=_1)                /assigntargets/0/id='(?P<CANDIDATE>.+)' # capture candidate
 \n(?:\1.+\n)* \1/(?P<_2>(?:body|orelse)/\d+)/_type='For'
 \n(?:\1.+\n)*?\1/(?P=_2)                /lineno=(?P<LINE>\d+)
 \n(?:\1.+\n)*?\1/(?P=_2)                /target/id='(?P<ITER_VAR>.+)' # capture iteration variable
@@ -2490,8 +2658,8 @@ An accumulation pattern that, from a given collection, returns the best element 
 \n(?:\1.+\n)* \1/(?P=_2)                /(?P=_3)                    /test/.*/id='(?P=CANDIDATE)' # match candidate
 \n(?:\1.+\n)* \1/(?P=_2)                /(?P=_3)                    /(?P<_4>(?:body|orelse)/\d+)/_type='Assign'
 \n(?:\1.+\n)*?\1/(?P=_2)                /(?P=_3)                    /(?P=_4)                /lineno=(?P<LINE>\d+)
-\n(?:\1.+\n)*?\1/(?P=_2)                /(?P=_3)                    /(?P=_4)                /targets/0/id='(?P=CANDIDATE)' # match candidate
-\n(?:\1.+\n)*?\1/(?P=_2)                /(?P=_3)                    /(?P=_4)                /value/id='(?P=ITER_VAR)' # match iteration variable
+\n(?:\1.+\n)*?\1/(?P=_2)                /(?P=_3)                    /(?P=_4)                /assigntargets/0/id='(?P=CANDIDATE)' # match candidate
+\n(?:\1.+\n)*?\1/(?P=_2)                /(?P=_3)                    /(?P=_4)                /assignvalue/id='(?P=ITER_VAR)' # match iteration variable
 (
 \n(?:\1.+\n)* \1(?P=_2)                /(?P=_3).*/lineno=(?P<LINE>\d+)
 )?
@@ -2645,12 +2813,12 @@ Evolve the value of a variable until it reaches a desired state.
 (   # the state variable either appears on both sides of a simple assignment
 \n(?:\1.+\n)* \1/(?P<_1>body/.*)/_type='Assign'
 \n(?:\1.+\n)*?\1/(?P=_1)        /lineno=(?P<LINE>\d+)
-\n(?:\1.+\n)*?\1/(?P=_1)        /targets/0/id='(?P=STATE)' # it is updated somewhere in the loop
-\n(?:\1.+\n)*?\1/(?P=_1)        /value/_ids=.*\b(?P=STATE)\b.* # from its current value
+\n(?:\1.+\n)*?\1/(?P=_1)        /assigntargets/0/id='(?P=STATE)' # it is updated somewhere in the loop
+\n(?:\1.+\n)*?\1/(?P=_1)        /assignvalue/_ids=.*\b(?P=STATE)\b.* # from its current value
 |   # or appears on LHS of an augmented assignement
 \n(?:\1.+\n)* \1/(?P<_1>body/.*)/_type='AugAssign'
 \n(?:\1.+\n)*?\1/(?P=_1)        /lineno=(?P<LINE>\d+)
-\n(?:\1.+\n)*?\1/(?P=_1)        /target/id='(?P=STATE)' # it is augmented somewhere in the loop
+\n(?:\1.+\n)*?\1/(?P=_1)        /assigntarget/id='(?P=STATE)' # it is augmented somewhere in the loop
 |   # or is mutated by calling a function or a method of this variable
 \n(?:\1.+\n)* \1/(?P<_1>body/.*)/_type='Expr'
 \n(?:\1.+\n)*?\1/(?P=_1)        /lineno=(?P<LINE>\d+)
@@ -2700,7 +2868,7 @@ Accumulate the inputs until a sentinel value is encountered (accumulation expres
            ^(.*)/_type='While'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
 \n(?:\1.+\n)*?\1/test/value=True
-\n(?:\1.+\n)* \1/(?:body|orelse)/\d+/targets/.+/id='(?P<INPUT>.+)' # capture the name of the input
+\n(?:\1.+\n)* \1/(?:body|orelse)/\d+/assigntargets/.+/id='(?P<INPUT>.+)' # capture the name of the input
 \n(?:\1.+\n)* \1/(?P<_1>(?:body|orelse)/\d+)/_type='If'
 \n(?:\1.+\n)*?\1/(?P=_1)                /test/_ids=.*?\b(?P=INPUT)\b.* # the input is tested
 \n(?:\1.+\n)* \1/(?P=_1)                /(?P<_2>(?:body|orelse)/\d+)/_type='Return'
@@ -2708,15 +2876,15 @@ Accumulate the inputs until a sentinel value is encountered (accumulation expres
 (   # the accumulator either appears on both sides of a simple assignment with the input
 \n(?:\1.+\n)* \1/(?P<_3>(?:body|orelse)/\d+)/_type='(?P<SUFFIX>Assign)'
 \n(?:\1.+\n)*?\1/(?P=_3)                    /lineno=(?P<LINE>\d+)
-\n(?:\1.+\n)* \1/(?P=_3)                    /targets/.*/id='(?P=ACC)'
-\n(?:\1.+\n)*?\1/(?P=_3)                    /value/_ids=(?=.*\b(?P=INPUT)\b)
+\n(?:\1.+\n)* \1/(?P=_3)                    /assigntargets/.*/id='(?P=ACC)'
+\n(?:\1.+\n)*?\1/(?P=_3)                    /assignvalue/_ids=(?=.*\b(?P=INPUT)\b)
                                                         (?=.*\b(?P=ACC)\b)
                                                         .* # both appear in RHS
 |   # or is on LHS of an augmented assignement with the input
 \n(?:\1.+\n)* \1/(?P<_3>(?:body|orelse)/\d+)/_type='(?P<SUFFIX>AugAssign)'
 \n(?:\1.+\n)*?\1/(?P=_3)                    /lineno=(?P<LINE>\d+)
-\n(?:\1.+\n)*?\1/(?P=_3)                    /target/id='(?P=ACC)'
-\n(?:\1.+\n)* \1/(?P=_3)                    /value.*/id='(?P=INPUT)'
+\n(?:\1.+\n)*?\1/(?P=_3)                    /assigntarget/id='(?P=ACC)'
+\n(?:\1.+\n)* \1/(?P=_3)                    /assignvalue.*/id='(?P=INPUT)'
 |   # or should be mutated by calling a function on this accumulator and the iteration variable
 \n(?:\1.+\n)* \1/(?P<_3>(?:body|orelse)/\d+)/_type='Expr' # the whole line consists in an expression
 \n(?:\1.+\n)*?\1/(?P=_3)                    /lineno=(?P<LINE>\d+)
@@ -2857,11 +3025,11 @@ When a conditional simply assigns different values to the same variable, it may 
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
 \n(?:\1.+\n)*?\1/body/length=1
 \n(?:\1.+\n)*?\1/body/0/_type='Assign'
-\n(?:\1.+\n)*?\1/body/0/targets/0/_hash=(?P<HASH>.+)
+\n(?:\1.+\n)*?\1/body/0/assigntargets/0/_hash=(?P<HASH>.+)
 \n(?:\1.+\n)*?\1/orelse/length=1
 \n(?:\1.+\n)*?\1/orelse/0/_type='Assign'
 \n(?:\1.+\n)*?\1/orelse/0/lineno=(?P<LINE>\d+)
-\n(?:\1.+\n)*?\1/orelse/0/targets/0/_hash=(?P=HASH)
+\n(?:\1.+\n)*?\1/orelse/0/assigntargets/0/_hash=(?P=HASH)
 ```
 
 ##### Example
@@ -2908,10 +3076,10 @@ When the RHS of an assignment consists in a binary operation whose left operand 
 ```re
            ^(.*)/_type='Assign'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
-\n(?:\1.+\n)*?\1/targets/length=1
-\n(?:\1.+\n)*?\1/targets/0/id=(?P<TARGET>.+)
-\n(?:\1.+\n)*?\1/value/_type='BinOp'
-\n(?:\1.+\n)*?\1/value/left/id=(?P=TARGET)
+\n(?:\1.+\n)*?\1/assigntargets/length=1
+\n(?:\1.+\n)*?\1/assigntargets/0/id=(?P<TARGET>.+)
+\n(?:\1.+\n)*?\1/assignvalue/_type='BinOp'
+\n(?:\1.+\n)*?\1/assignvalue/left/id=(?P=TARGET)
 ```
 
 ##### Example
@@ -3003,8 +3171,8 @@ Match magic numbers (unnamed numerical constants) other than -1, 0, 1 and 2. A n
 |   # non indented lines
               /_type='Assign'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
-\n(?:\1.+\n)*?\1/targets/0/id='.*?[a-z].*' # at least one lowercase letter
-\n(?:\1.+\n)*?\1/value/n=(?!(-1|0|1|2)\n)
+\n(?:\1.+\n)*?\1/assigntargets/0/id='.*?[a-z].*' # at least one lowercase letter
+\n(?:\1.+\n)*?\1/assignvalue/n=(?!(-1|0|1|2)\n)
 )
 ```
 
