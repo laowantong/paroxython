@@ -1,0 +1,28 @@
+{
+  "tests/data/simple/assignment.py": {
+    "variable/assignment/": "1"
+  },
+  "tests/data/simple/collatz_print.py": {
+    "call/function/builtin/print/": "3 8",
+    "control_flow/conditional/": "4-7",
+    "control_flow/conditional/else/": "7",
+    "function_definition/procedure/": "1-8",
+    "operator/addition/": "7",
+    "operator/multiplication/": "7",
+    "operator/percent/modulo/": "4",
+    "test/divisibility/parity/": "4",
+    "test/equality/": "4",
+    "test/equality/not/": "2",
+    "type/elementary/number/integer": "2 4 5 7",
+    "variable/assignment/": "5 7"
+  },
+  "tests/data/simple/function_definition.py": {
+    "operator/addition/": "2",
+    "type/elementary/number/integer": "2"
+  },
+  "tests/data/simple/loop.py": {
+    "call/function/builtin/input/": "1",
+    "call/function/builtin/print/": "2",
+    "type/elementary/string/": "2"
+  }
+}

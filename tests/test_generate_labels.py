@@ -1,105 +1,45 @@
+import json
 from pathlib import Path
 
 import pytest
+import regex
 
 import context
-from paroxython.generate_labels import generate_labeled_sources, generate_programs
+from make_snapshot import make_snapshot
+from paroxython.generate_labels import generate_labelled_programs, generate_labelled_sources
+from paroxython.make_db import make_database, to_json
+from paroxython.user_types import Span
 
 
-def test_generate_labeled_sources():
-    result = generate_labeled_sources("tests/data/programs")
-
-    assert "assignment.py" in next(result)
-    source = next(result).strip()
-    print(source)
-    assert source == "a = b # assignment, variable_definition:a"
-
-    assert "collatz_print.py" in next(result)
-    source = next(result).strip()
-    print(source)
-    assert source == "\n".join(
-        [
-            "def print_collatz(n): # added_block_label (-> +7), function:print_collatz (-> +7), procedure:print_collatz (-> +7)",
-            "    while n != 1: # comparison_operator:NotEq, evolve_state (-> +5), int_literal, literal:Num, suggest_constant_definition, while (-> +5)",
-            "        print(n) # function_call:print",
-            "        if n % 2 == 0: # added_label_on_line_4, binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, if (-> +3), int_literal, literal:Num, suggest_conditional_expression (-> +3)",
-            "            n = n // 2 # assignment, if_then_branch, int_literal, suggest_augmented_assignment, variable_definition:n",
-            "        else: # unknown_label",
-            "            n = 3 * n + 1 # assignment, binary_operator:Add, binary_operator:Mult, if_else_branch, int_literal, literal:Num, suggest_constant_definition, variable_definition:n",
-            "    print(n) # function_call:print",
-        ]
-    )
-
-    assert "function_definition.py" in next(result)
-    source = next(result).strip()
-    print(source)
-    assert source == "\n".join(
-        [
-            "def succ(n): # function:succ (-> +1), function_returning_a_value:succ (-> +1)",
-            "    return a + b + 1 # binary_operator:Add, int_literal, literal:Num",
-        ]
-    )
-
-    assert "loop.py" in next(result)
-    source = next(result).strip()
-    print(source)
-    assert source == "\n".join(
-        [
-            "while input(): # function_call:input, while (-> +1)",
-            '    print("foobar") # function_call:print, literal:Str',
-        ]
-    )
+class ProgramEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, Path):
+            return str(obj)
+        if isinstance(obj, Span):
+            return obj.to_couple()
+        return json.JSONEncoder.default(self, obj)
 
 
-def test_generate_programs():
-    result = list(generate_programs("tests/data/programs"))
-    expected = [
-        (
-            Path("tests/data/programs/assignment.py"),
-            {"assignment": [(1, 1)], "global_variable_definition": [(1, 1)]},
-        ),
-        (
-            Path("tests/data/programs/collatz_print.py"),
-            {
-                "added_block_label": [(1, 8)],
-                "added_label_on_line_4": [(4, 4)],
-                "assignment": [(5, 5), (7, 7)],
-                "binary_operator:Add": [(7, 7)],
-                "binary_operator:Mod": [(4, 4)],
-                "binary_operator:Mult": [(7, 7)],
-                "comparison_operator:Eq": [(4, 4)],
-                "comparison_operator:NotEq": [(2, 2)],
-                "divisibility_test:2": [(4, 4)],
-                "evolve_state": [(2, 7)],
-                "function:print_collatz": [(1, 8)],
-                "function_call:print": [(3, 3), (8, 8)],
-                "if": [(4, 7), (6, 6)],
-                "if_else": [(4, 7)],
-                "literal:Num": [(2, 2), (4, 4), (4, 4), (7, 7), (7, 7)],
-                "suggest_augmented_assignment": [(5, 5)],
-                "suggest_conditional_expression": [(4, 7)],
-                "suggest_constant_definition": [(7, 7)],
-            },
-        ),
-        (
-            Path("tests/data/programs/function_definition.py"),
-            {
-                "binary_operator:Add": [(2, 2), (2, 2)],  # the construct appears twice
-                "function:succ": [(1, 2)],
-                "literal:Num": [(2, 2)],
-            },
-        ),
-        (
-            Path("tests/data/programs/loop.py"),
-            {
-                "function_call:input": [(1, 1)],
-                "function_call:print": [(2, 2)],
-                "literal:Str": [(2, 2)],
-            },
-        ),
-    ]
-    print(result)
-    for (program, (path, labels)) in zip(result, expected):
-        assert program.path == path
-        for (label, spans) in program.labels:
-            assert labels[label] == [span.to_couple() for span in spans]
+def test_generate_labelled_programs(capsys):
+    result = list(generate_labelled_programs("tests/data/simple"))
+    text = json.dumps(result, cls=ProgramEncoder, indent=2)
+    text = regex.sub(r"\s*\[\s+(\d+),\s+(\d+)\s+\](,?)\s+", r"[\1,\2]\3", text)
+    make_snapshot("snapshots/simple_labelled_programs.json", text, capsys)
+
+
+def test_generate_labelled_sources(capsys):
+    chunks = list(generate_labelled_sources("tests/data/simple"))
+    result = []
+    for chunk in chunks:
+        if chunk.startswith("#"):
+            result.append(chunk)
+        else:
+            for line in chunk.split("\n"):
+                if not line:
+                    continue
+                (source, _, comment) = line.partition(" # ")
+                for label in comment.split(", "):
+                    result.append(f"{source} # {label}")
+                    source = " " * len(source)
+            result.append("")
+    make_snapshot("snapshots/simple_labelled_sources.py", "\n".join(result), capsys)

@@ -1,0 +1,115 @@
+# Present labels
+
+- assignment / assignment.py / 1
+- assignment / collatz_print.py / 5, 7
+- assignment_lhs_identifier:a / assignment.py / 1
+- assignment_lhs_identifier:n / collatz_print.py / 5, 7
+- assignment_rhs_identifier:b / assignment.py / 1
+- assignment_rhs_identifier:n / collatz_print.py / 5, 7
+- binary_operator:Add / collatz_print.py / 7
+- binary_operator:Add / function_definition.py / 2, 2
+- binary_operator:FloorDiv / collatz_print.py / 5
+- binary_operator:Mod / collatz_print.py / 4
+- binary_operator:Mult / collatz_print.py / 7
+- call_parameter:n / collatz_print.py / 3, 8
+- comparison_operator:Eq / collatz_print.py / 4
+- comparison_operator:NotEq / collatz_print.py / 2
+- divisibility_test:2 / collatz_print.py / 4
+- evolve_state / collatz_print.py / 2-7
+- function:print_collatz / collatz_print.py / 1-8
+- function:succ / function_definition.py / 1-2
+- function_call:input / loop.py / 1
+- function_call:print / collatz_print.py / 3, 8
+- function_call:print / loop.py / 2
+- function_returning_a_value:succ / function_definition.py / 1-2
+- if / collatz_print.py / 4-7
+- if_else_branch / collatz_print.py / 7
+- if_then_branch / collatz_print.py / 5
+- int_literal / collatz_print.py / 2, 4, 4, 5, 7, 7
+- int_literal / function_definition.py / 2
+- literal:Num / collatz_print.py / 2, 4, 4, 5, 7, 7
+- literal:Num / function_definition.py / 2
+- literal:Str / loop.py / 2
+- procedure:print_collatz / collatz_print.py / 1-8
+- suggest_augmented_assignment / collatz_print.py / 5
+- suggest_conditional_expression / collatz_print.py / 4-7
+- suggest_constant_definition / collatz_print.py / 7
+- while / collatz_print.py / 2-7
+- while / loop.py / 1-2
+
+# Absent labels
+
+- accumulate_stream
+- assertion
+- assignment
+- assignment_lhs_identifier
+- assignment_rhs_identifier
+- augmented_assignment
+- binary_operator
+- body_recursive_function
+- boolean_operator
+- call_parameter
+- catch_exception
+- chained_assignment
+- chained_comparison
+- closure
+- comparison_operator
+- composition
+- comprehension
+- comprehension_for_count
+- conditional_expression
+- deeply_recursive_function
+- divisibility_test
+- evolve_state
+- existential_quantifier
+- filter_for
+- filtered_comprehension
+- find_best_element
+- find_first_element
+- float_literal
+- for
+- for_each
+- for_indexes
+- for_indexes_elements
+- for_range_start
+- for_range_step
+- for_range_stop
+- function
+- function_call
+- function_returning_a_value
+- function_with_default_positional_arguments
+- generator
+- if
+- if_elif_branch
+- if_else_branch
+- if_then_branch
+- imaginary_literal
+- import
+- import_by_call
+- import_from
+- index
+- index_arithmetic
+- int_literal
+- lambda_function
+- literal
+- method_call
+- method_call_object
+- method_chaining
+- negation
+- negative_index
+- nested_function
+- raise_exception
+- recursive_function
+- slice
+- slice_step
+- square_nested_for
+- suggest_augmented_assignment
+- suggest_comparison_chaining
+- suggest_condition_return
+- suggest_conditional_expression
+- suggest_constant_definition
+- swapping
+- triangular_nested_for
+- unary_operator
+- universal_quantifier
+- while

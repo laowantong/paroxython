@@ -14,6 +14,8 @@ from paroxython.preprocess_source import (
     collect_hints,
     remove_hints,
 )
+from paroxython.generate_programs import generate_programs
+from make_snapshot import make_snapshot
 
 
 def generate_toc(text):
@@ -37,7 +39,7 @@ def reformat_sql(match):
         keyword_case="upper",
         identifier_case="lower",
         indent_width=2,
-    )
+    ).replace("\n\n", "\n")
     return f"```sql\n{string}\n```"
 
 
@@ -110,14 +112,17 @@ def test_malformed_example():
     assert result == [("ast_construction:IndentationError", [])]
 
 
-def test_failed_matches():
-    source = "a = 42"
-    actual_results = dict(parse(Program(source=source), yield_failed_matches=True))
-    print(actual_results)
-    assert actual_results.pop("assignment")[0].to_couple() == (1, 1)
-    assert actual_results.pop("variable_definition:a")[0].to_couple() == (1, 1)
-    assert actual_results.pop("literal:Num")[0].to_couple() == (1, 1)
-    assert actual_results.pop("int_literal")[0].to_couple() == (1, 1)
-    assert actual_results.pop("suggest_constant_definition")[0].to_couple() == (1, 1)
-    for spans in actual_results.values():
-        assert not spans
+def test_label_presence(capsys):
+    absent = set()
+    present = set()
+    for program in generate_programs("tests/data/simple/"):
+        labels = parse(Program(source=program.source), yield_failed_matches=True)
+        for (name, spans) in labels:
+            if spans:
+                present.add(name + f" / {program.path.name} / " + ", ".join(map(str, spans)))
+            else:
+                absent.add(name)
+    present = "\n- ".join(sorted(present))
+    absent = "\n- ".join(sorted(absent))
+    text = f"# Present labels\n\n- {present}\n\n# Absent labels\n\n- {absent}\n"
+    make_snapshot("snapshots/simple_labels.md", text, capsys)

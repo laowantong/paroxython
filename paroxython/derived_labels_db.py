@@ -7,8 +7,7 @@ from span import Span
 
 class DB:
 
-    tables = ("main", "nest")
-    main_columns = (
+    columns = (
         # use rowid as primary key:
         "name TEXT",
         "name_prefix TEXT",
@@ -17,45 +16,20 @@ class DB:
         "span_start INTEGER",
         "span_end INTEGER",
     )
-    main_creation_query = f"CREATE TABLE main ({','.join(main_columns)})"
-    main_update_query = f"INSERT INTO main VALUES ({','.join('?' * len(main_columns))})"
-    nest_creation_query = """
-        CREATE TABLE nest AS
-        SELECT t1.name AS name_1,
-               t1.name_prefix AS name_prefix_1,
-               t1.name_suffix AS name_suffix_1,
-               t1.span AS span_1,
-               t1.span_start AS span_start_1,
-               t1.span_end AS span_end_1,
-               t2.name AS name_2,
-               t2.name_prefix AS name_prefix_2,
-               t2.name_suffix AS name_suffix_2,
-               t2.span AS span_2,
-               t2.span_start AS span_start_2,
-               t2.span_end AS span_end_2
-        FROM main t1
-        JOIN main t2 ON (t1.rowid != t2.rowid
-                        AND t1.span_start < t1.span_end
-                        AND t1.span_start <= t2.span_start
-                        AND t2.span_end <= t1.span_end)
-    """
+    creation_query = f"CREATE TABLE t ({','.join(columns)})"
+    update_query = f"INSERT INTO t VALUES ({','.join('?' * len(columns))})"
 
     def __init__(self):
         self.c = sqlite3.connect(":memory:")
 
     def create(self, labels: Labels) -> None:
-        self.c.execute(DB.main_creation_query)
+        self.c.execute(DB.creation_query)
         self.update(labels)
-        self.c.execute(DB.nest_creation_query)
-        # for row in self.c.execute("SELECT * from main"):
-        #     print(row)
-        # print("-" * 80)
-        # for row in self.c.execute("SELECT * FROM nest"):
-        #     print(row)
 
     def read(self, query: Query) -> Labels:
         groups: LabelsSpans = defaultdict(list)
-        for (label_name, start, end) in self.c.execute(query):
+        for (name_prefix, name_suffix, start, end) in self.c.execute(query):
+            label_name = f"{name_prefix}:{name_suffix}" if name_suffix != "" else name_prefix
             groups[label_name].append(Span([start, end]))
         return [Label(*item) for item in groups.items()]
 
@@ -64,18 +38,14 @@ class DB:
         for (name, spans) in labels:
             for span in spans:
                 (name_prefix, _, name_suffix) = name.partition(":")
-                values.append(
-                    (  # fmt: off
-                        name,
-                        name_prefix,
-                        f":{name_suffix}",
-                        str(span),
-                        span.start,
-                        span.end,
-                    )  # fmt: on
-                )
-        self.c.executemany(DB.main_update_query, values)
+                values.append((name, name_prefix, name_suffix, str(span), span.start, span.end))
+        self.c.executemany(DB.update_query, values)
 
     def delete(self) -> None:
-        for table in DB.tables:
-            self.c.execute(f"DROP TABLE {table}")
+        self.c.execute(f"DROP TABLE t")
+
+    def __str__(self) -> str:  # pragma: no cover
+        result = ["rowid\tname\tname_prefix\tname_suffix\tspan\tspan_start\tspan_end"]
+        for row in self.c.execute("SELECT * FROM t"):
+            result.append("\t".join(map(str, row)))
+        return "\n".join(result)
