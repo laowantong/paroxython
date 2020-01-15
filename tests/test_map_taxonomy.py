@@ -1,11 +1,14 @@
+import json
 from collections import Counter as C
+from pathlib import Path
 
 import pytest
 
 import context
-from paroxython.span import Span
+from make_snapshot import make_snapshot
+from paroxython.generate_labels import Label, Program, generate_labelled_programs
 from paroxython.map_taxonomy import Taxonomy
-from paroxython.generate_labels import Label, Program
+from paroxython.span import Span
 
 t = Taxonomy("tests/data/dummy_taxonomy.tsv")
 S = lambda i, j: Span([i, j])  # shortcut for Span([i, j])
@@ -86,3 +89,13 @@ def test_call():
             ("type/set/", C({S(1, 1): 3, S(2, 5): 2})),
         ],
     )
+
+
+def test_snapshot_simple_taxons(capsys):
+    taxonomy = Taxonomy()
+    acc = {}
+    programs = generate_labelled_programs("tests/data/simple")
+    for (path, taxons) in taxonomy(programs):
+        acc[str(path)] = {name: " ".join(map(str, sorted(set(spans)))) for (name, spans) in taxons}
+    result = json.dumps(acc, indent=2)
+    make_snapshot("snapshots/simple_taxons.json", result, capsys)

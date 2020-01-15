@@ -37,7 +37,7 @@ def reformat_sql(match):
         keyword_case="upper",
         identifier_case="lower",
         indent_width=2,
-    )
+    ).replace("\n\n", "\n")
     return f"```sql\n{string}\n```"
 
 
@@ -108,16 +108,3 @@ def test_malformed_example():
     source = "if foo():\nbar() # wrong indentation"
     result = parse(Program(source=source))
     assert result == [("ast_construction:IndentationError", [])]
-
-
-def test_failed_matches():
-    source = "a = 42"
-    actual_results = dict(parse(Program(source=source), yield_failed_matches=True))
-    print(actual_results)
-    assert actual_results.pop("assignment")[0].to_couple() == (1, 1)
-    assert actual_results.pop("variable_definition:a")[0].to_couple() == (1, 1)
-    assert actual_results.pop("literal:Num")[0].to_couple() == (1, 1)
-    assert actual_results.pop("int_literal")[0].to_couple() == (1, 1)
-    assert actual_results.pop("suggest_constant_definition")[0].to_couple() == (1, 1)
-    for spans in actual_results.values():
-        assert not spans

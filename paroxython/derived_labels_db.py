@@ -40,7 +40,6 @@ class DB:
                 (name_prefix, _, name_suffix) = name.partition(":")
                 values.append((name, name_prefix, name_suffix, str(span), span.start, span.end))
         self.c.executemany(DB.update_query, values)
-        print(str(self))
 
     def delete(self) -> None:
         self.c.execute(f"DROP TABLE t")

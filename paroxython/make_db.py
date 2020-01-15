@@ -17,7 +17,7 @@ from user_types import (
     TaxonName,
     Taxons,
 )
-from generate_labels import generate_labeled_programs
+from generate_labels import generate_labelled_programs
 from map_taxonomy import Taxonomy
 
 Span = Tuple[int, int]
@@ -47,7 +47,7 @@ def make_database(directories: List[str], *args, **kargs) -> DB:
     """Serialize all infos pertaining to the programs, the labels and the taxons."""
     programs: List[Program] = []
     for directory in directories:
-        programs.extend(generate_labeled_programs(directory, *args, **kargs))
+        programs.extend(generate_labelled_programs(directory, *args, **kargs))
     taxonomy = Taxonomy()
     paths_taxons = list(taxonomy(programs))
     db: DB = {

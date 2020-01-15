@@ -7,7 +7,7 @@ from generate_programs import generate_programs
 from parse_program import ProgramParser
 
 
-def generate_labeled_sources(directory: str, *args, **kargs) -> Iterator[Source]:
+def generate_labelled_sources(directory: str, *args, **kargs) -> Iterator[Source]:
     """For each program, yield its source with its labels in comment."""
     parse = ProgramParser()
     separator = "-" * 88
@@ -24,7 +24,7 @@ def generate_labeled_sources(directory: str, *args, **kargs) -> Iterator[Source]
         yield Source("\n".join(sloc + [""]))
 
 
-def generate_labeled_programs(directory: str, *args, **kargs) -> Iterator[Program]:
+def generate_labelled_programs(directory: str, *args, **kargs) -> Iterator[Program]:
     """For each program, yield its label list, lexicographically sorted."""
     parse = ProgramParser()
     for program in generate_programs(directory, *args, **kargs):
@@ -37,5 +37,5 @@ def generate_labeled_programs(directory: str, *args, **kargs) -> Iterator[Progra
 
 
 if __name__ == "__main__":
-    for result in generate_labeled_sources("../Python/project_euler"):
+    for result in generate_labelled_sources("../Python/project_euler"):
         print(result)
