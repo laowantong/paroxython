@@ -16,10 +16,6 @@
       [
         "assignment_rhs_identifier:b",
         [[1,1]]
-      ],
-      [
-        "variable_definition:a",
-        [[1,1]]
       ]
     ]
   ],
@@ -128,10 +124,6 @@
       [
         "unknown_label",
         [[6,6]]
-      ],
-      [
-        "variable_definition:n",
-        [[5,5],[7,7]]
       ],
       [
         "while",

@@ -1,5 +1,3 @@
-"""These tests cannot fail, but update some snapshots for version controlling."""
-
 import json
 import time
 from itertools import chain

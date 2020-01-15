@@ -35,12 +35,12 @@
       - [Construct `filtered_comprehension`](#construct-filtered_comprehension)
 - [Statements](#statements)
   - [Assignments](#assignments)
-      - [Construct `variable_definition`](#construct-variable_definition)
       - [Construct `assignment`](#construct-assignment)
       - [Construct `augmented_assignment`](#construct-augmented_assignment)
+      - [Construct `chained_assignment`](#construct-chained_assignment)
       - [Construct `assignment_lhs_identifier`](#construct-assignment_lhs_identifier)
       - [Construct `assignment_rhs_identifier`](#construct-assignment_rhs_identifier)
-      - [Construct `chained_assignment`](#construct-chained_assignment)
+    - [Assignment idioms](#assignment-idioms)
       - [Construct `swapping`](#construct-swapping)
       - [Construct `negation`](#construct-negation)
   - [Function definitions](#function-definitions)
@@ -962,51 +962,6 @@ Match a comprehension with an `if` clause.
 
 --------------------------------------------------------------------------------
 
-#### Construct `variable_definition`
-
-##### Definition
-
-```re
-^(.*/assigntargets/\d+(/elts/\d+(/value)?)?)/lineno=(?P<LINE>\d+)
-\n(?:\1.+\n)*?\1                            /id='(?P<SUFFIX>.+)'
-```
-
-##### Example
-
-```python
-1   _ = 1
-2   a = 1
-3   (b, c) = (1, 1)
-4   [d, e] = [1, 1]
-5   f[g] = 1            # no match
-6   if foo:
-7       h = 1
-8   def bar():
-9       i = 1
-10  j = k = 1
-11  l.m = 1             # no match
-12  (n, *o) = [1, 1, 1]
-```
-
-##### Matches
-
-| Label | Lines |
-|:--|:--|
-| `variable_definition:_` | 1 |
-| `variable_definition:a` | 2 |
-| `variable_definition:b` | 3 |
-| `variable_definition:c` | 3 |
-| `variable_definition:d` | 4 |
-| `variable_definition:e` | 4 |
-| `variable_definition:h` | 7 |
-| `variable_definition:i` | 9 |
-| `variable_definition:j` | 10 |
-| `variable_definition:k` | 10 |
-| `variable_definition:n` | 12 |
-| `variable_definition:o` | 12 |
-
---------------------------------------------------------------------------------
-
 #### Construct `assignment`
 
 ##### Definition
@@ -1034,14 +989,11 @@ Match a comprehension with an `if` clause.
 
 #### Construct `augmented_assignment`
 
-The name of the augmented variable is captured as a suffix.
-
 ##### Definition
 
 ```re
            ^(.*)/_type='AugAssign'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
-\n(?:\1.+\n)* \1/assigntarget(/value)?/id='(?P<SUFFIX>.+)'
 ```
 
 ##### Example
@@ -1053,13 +1005,40 @@ The name of the augmented variable is captured as a suffix.
 4   a *= foo(bar(a, b, c))
 5   a[3] += 1
 6   a[b] //= 2
+7   a += [x]
 ```
 
 ##### Matches
 
 | Label | Lines |
 |:--|:--|
-| `augmented_assignment:a` | 1, 3, 4, 5, 6 |
+| `augmented_assignment` | 1, 3, 4, 5, 6, 7 |
+
+--------------------------------------------------------------------------------
+
+#### Construct `chained_assignment`
+
+##### Definition
+
+```re
+           ^(.*)/_type='Assign'
+\n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
+\n(?:\1.+\n)*?\1/assigntargets/length=(?!1\n).+
+```
+
+##### Example
+
+```python
+1   a = 42
+2   a = b = 42
+3   a = b = c = 42
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `chained_assignment` | 2, 3 |
 
 --------------------------------------------------------------------------------
 
@@ -1094,6 +1073,7 @@ Capture any identifier appearing on the left hand side of an assignment (possibl
 15  for i in seq:        # no match for i
 16      pass
 17  del a                # no match for a
+18  first = second = third
 ```
 
 ##### Matches
@@ -1114,6 +1094,8 @@ Capture any identifier appearing on the left hand side of an assignment (possibl
 | `assignment_lhs_identifier:l` | 11 |
 | `assignment_lhs_identifier:n` | 12 |
 | `assignment_lhs_identifier:o` | 12 |
+| `assignment_lhs_identifier:first` | 18 |
+| `assignment_lhs_identifier:second` | 18 |
 
 --------------------------------------------------------------------------------
 
@@ -1140,6 +1122,7 @@ Capture any identifier (variable or function) appearing on the right hand side o
 7   a = a + i
 8   a += i
 9   a[i] = b
+10  first = second = third
 ```
 
 ##### Matches
@@ -1152,32 +1135,11 @@ Capture any identifier (variable or function) appearing on the right hand side o
 | `assignment_rhs_identifier:c` | 1, 2, 3, 4 |
 | `assignment_rhs_identifier:foo` | 5, 6 |
 | `assignment_rhs_identifier:i` | 7, 8 |
+| `assignment_rhs_identifier:third` | 10 |
 
 --------------------------------------------------------------------------------
 
-#### Construct `chained_assignment`
-
-##### Definition
-
-```re
-           ^(.*)/_type='Assign'
-\n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
-\n(?:\1.+\n)*?\1/assigntargets/length=(?!1\n).+
-```
-
-##### Example
-
-```python
-1   a = 42
-2   a = b = 42
-3   a = b = c = 42
-```
-
-##### Matches
-
-| Label | Lines |
-|:--|:--|
-| `chained_assignment` | 2, 3 |
+### Assignment idioms
 
 --------------------------------------------------------------------------------
 

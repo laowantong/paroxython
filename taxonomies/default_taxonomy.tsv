@@ -98,6 +98,7 @@ type/elementary/number/complex	imaginary_literal
 type/elementary/number/floating_point	float_literal
 type/elementary/number/integer	int_literal
 type/elementary/string/	literal:Str
+variable/assignment/	assignment
 variable/assignment/augmented/	augmented_assignment
 variable/assignment/chained/	chained_assignment
 -- EOF	

@@ -6,10 +6,11 @@
       "labels": {
         "assignment": [[1,1]],
         "assignment_lhs_identifier:a": [[1,1]],
-        "assignment_rhs_identifier:b": [[1,1]],
-        "variable_definition:a": [[1,1]]
+        "assignment_rhs_identifier:b": [[1,1]]
       },
-      "taxons": {}
+      "taxons": {
+        "variable/assignment/": [[1,1]]
+      }
     },
     "tests/data/simple/collatz_print.py": {
       "timestamp": "ignored",
@@ -40,7 +41,6 @@
         "suggest_conditional_expression": [[4,7]],
         "suggest_constant_definition": [[2,2],[7,7]],
         "unknown_label": [[6,6]],
-        "variable_definition:n": [[5,5],[7,7]],
         "while": [[2,7]]
       },
       "taxons": {
@@ -54,7 +54,8 @@
         "test/divisibility/parity/": [[4,4]],
         "test/equality/": [[4,4]],
         "test/equality/not/": [[2,2]],
-        "type/elementary/number/integer": [[2,2],[4,4],[5,5],[7,7]]
+        "type/elementary/number/integer": [[2,2],[4,4],[5,5],[7,7]],
+        "variable/assignment/": [[5,5],[7,7]]
       }
     },
     "tests/data/simple/function_definition.py": {
@@ -97,9 +98,6 @@
       "tests/data/simple/assignment.py"
     ],
     "assignment_rhs_identifier:b": [
-      "tests/data/simple/assignment.py"
-    ],
-    "variable_definition:a": [
       "tests/data/simple/assignment.py"
     ],
     "added_block_label": [
@@ -178,9 +176,6 @@
     "unknown_label": [
       "tests/data/simple/collatz_print.py"
     ],
-    "variable_definition:n": [
-      "tests/data/simple/collatz_print.py"
-    ],
     "while": [
       "tests/data/simple/collatz_print.py",
       "tests/data/simple/loop.py"
@@ -199,6 +194,10 @@
     ]
   },
   "taxons": {
+    "variable/assignment/": [
+      "tests/data/simple/assignment.py",
+      "tests/data/simple/collatz_print.py"
+    ],
     "call/function/builtin/print/": [
       "tests/data/simple/collatz_print.py",
       "tests/data/simple/loop.py"
