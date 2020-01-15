@@ -2410,16 +2410,15 @@ Two nested `for` loops doing the same number of iterations.
 )
 ```
 
-
 ##### Example
 
 ```python
 1   import m1, m2, m3
 2   import m4
-3   from m5 import a1, a2
-4   from m6 import a3 as a4
+3   from m5 import n1, n2
+4   from m6 import n3 as n4
 5   from . import m7
-6   from .m8 import a5
+6   from .m8 import n5
 ```
 
 ##### Matches
@@ -2455,20 +2454,20 @@ Two nested `for` loops doing the same number of iterations.
 ```python
 1   import m1, m2, m3
 2   import m4
-3   from m5 import a1, a2
-4   from m6 import a3 as a4
+3   from m5 import n1, n2
+4   from m6 import n3 as n4
 5   from . import m7
-6   from .m8 import a5
+6   from .m8 import n5
 ```
 
 ##### Matches
 
 | Label | Lines |
 |:--|:--|
-| `import_name:a1` | 3 |
-| `import_name:a2` | 3 |
-| `import_name:a3` | 4 |
-| `import_name:a5` | 6 |
+| `import_name:n1` | 3 |
+| `import_name:n2` | 3 |
+| `import_name:n3` | 4 |
+| `import_name:n5` | 6 |
 
 --------------------------------------------------------------------------------
 
@@ -2480,16 +2479,16 @@ Suffixed by the imported module and, if any, the imported name. In most cases, c
 
 ```sql
 SELECT "import",
-       imported_module.name_suffix || (CASE
-                                           WHEN imported_name.name_suffix IS NULL THEN ""
-                                           ELSE ":" || imported_name.name_suffix
-                                       END),
-       imported_module.span_start,
-       imported_module.span_end
-FROM t imported_module
-LEFT JOIN t imported_name ON (imported_module.span = imported_name.span
-                              AND imported_name.name_prefix = "import_name")
-WHERE imported_module.name_prefix = "import_module"
+       m.name_suffix || (CASE
+                             WHEN n.name_suffix IS NULL THEN ""
+                             ELSE ":" || n.name_suffix
+                         END),
+       m.span_start,
+       m.span_end
+FROM t m
+LEFT JOIN t n ON (m.span = n.span
+                  AND n.name_prefix = "import_name")
+WHERE m.name_prefix = "import_module"
 ```
 
 ##### Example
@@ -2497,10 +2496,10 @@ WHERE imported_module.name_prefix = "import_module"
 ```python
 1   import m1, m2, m3
 2   import m4
-3   from m5 import a1, a2
-4   from m6 import a3 as a4
+3   from m5 import n1, n2
+4   from m6 import n3 as n4
 5   from . import m7
-6   from .m8 import a5
+6   from .m8 import n5
 ```
 
 ##### Matches
@@ -2511,11 +2510,11 @@ WHERE imported_module.name_prefix = "import_module"
 | `import:m2` | 1 |
 | `import:m3` | 1 |
 | `import:m4` | 2 |
-| `import:m5:a1` | 3 |
-| `import:m5:a2` | 3 |
-| `import:m6:a3` | 4 |
+| `import:m5:n1` | 3 |
+| `import:m5:n2` | 3 |
+| `import:m6:n3` | 4 |
 | `import:m7` | 5 |
-| `import:m8:a5` | 6 |
+| `import:m8:n5` | 6 |
 
 --------------------------------------------------------------------------------
 
