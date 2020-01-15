@@ -113,16 +113,17 @@ def test_malformed_example():
 
 
 def test_label_presence(capsys):
-    absent = set()
-    present = set()
+    all_names = set()
+    present_names = set()
+    result = []
     for program in generate_programs("tests/data/simple/"):
         labels = parse(Program(source=program.source), yield_failed_matches=True)
         for (name, spans) in labels:
+            all_names.add(name)
             if spans:
-                present.add(name + f" / {program.path.name} / " + ", ".join(map(str, spans)))
-            else:
-                absent.add(name)
-    present = "\n- ".join(sorted(present))
-    absent = "\n- ".join(sorted(absent))
+                present_names.add(name)
+                result.append(name + f" / {program.path.name} / " + ", ".join(map(str, spans)))
+    present = "\n- ".join(sorted(result))
+    absent = "\n- ".join(sorted(all_names - present_names))
     text = f"# Present labels\n\n- {present}\n\n# Absent labels\n\n- {absent}\n"
     make_snapshot("snapshots/simple_labels.md", text, capsys)

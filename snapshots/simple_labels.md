@@ -41,7 +41,6 @@
 
 - accumulate_stream
 - assertion
-- assignment
 - assignment_lhs_identifier
 - assignment_rhs_identifier
 - augmented_assignment
@@ -60,7 +59,6 @@
 - conditional_expression
 - deeply_recursive_function
 - divisibility_test
-- evolve_state
 - existential_quantifier
 - filter_for
 - filtered_comprehension
@@ -79,17 +77,13 @@
 - function_returning_a_value
 - function_with_default_positional_arguments
 - generator
-- if
 - if_elif_branch
-- if_else_branch
-- if_then_branch
 - imaginary_literal
 - import
 - import_by_call
 - import_from
 - index
 - index_arithmetic
-- int_literal
 - lambda_function
 - literal
 - method_call
@@ -103,13 +97,9 @@
 - slice
 - slice_step
 - square_nested_for
-- suggest_augmented_assignment
 - suggest_comparison_chaining
 - suggest_condition_return
-- suggest_conditional_expression
-- suggest_constant_definition
 - swapping
 - triangular_nested_for
 - unary_operator
 - universal_quantifier
-- while
