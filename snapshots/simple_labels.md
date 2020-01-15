@@ -79,9 +79,8 @@
 - generator
 - if_elif_branch
 - imaginary_literal
-- import
-- import_by_call
-- import_from
+- import_module
+- import_name
 - index
 - index_arithmetic
 - lambda_function

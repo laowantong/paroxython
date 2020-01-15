@@ -77,9 +77,9 @@
       - [Construct `raise_exception`](#construct-raise_exception)
       - [Construct `catch_exception`](#construct-catch_exception)
   - [Modules](#modules)
+      - [Construct `import_module`](#construct-import_module)
+      - [Construct `import_name`](#construct-import_name)
       - [Construct `import`](#construct-import)
-      - [Construct `import_from`](#construct-import_from)
-      - [Construct `import_by_call`](#construct-import_by_call)
 - [Code patterns](#code-patterns)
   - [Iterative patterns](#iterative-patterns)
     - [Sequential loops](#sequential-loops)
@@ -1451,8 +1451,8 @@ A tail call is a subroutine call performed as the last action of a procedure. A 
 \n(?:\1.+\n)*?\1/(?P=_1)                                   /func/id='(?P=SUFFIX)'
 |   # recursive call followed by a statement
 \n(?:\1.+\n)* \1/(?P<_1>.+?(body|orelse))/(?P<_2>\d+)/(?P<_3>.*)/_type='Call'
-\n(?:\1.+\n)* \1/(?P=_1)                /(?P=_2)    /(?P=_3)   /func/id='(?P=SUFFIX)'
-\n(?:\1.+\n)*?\1/(?P=_1)                /(?!(?P=_2)).+
+\n(?:\1.+\n)* \1/(?P=_1)                 /(?P=_2)    /(?P=_3)   /func/id='(?P=SUFFIX)'
+\n(?:\1.+\n)*?\1/(?P=_1)                 /(?!(?P=_2)).+
 )
 (   # capture the line number of the last line of the function (it may appear before Call)
 \n(?:\1.+\n)* \1/.+/lineno=(?P<LINE>\d+)
@@ -1475,8 +1475,8 @@ A tail call is a subroutine call performed as the last action of a procedure. A 
 11          if len(candidates) == 0:
 12              return 0
 13          if n % candidates[0] == 0:
-14              return 1 + recurs(candidates[1:])
-15          return recurs(candidates[1:])
+14              return 1 + recurs(candidates[1:]) # body call
+15          return recurs(candidates[1:]) # tail call
 16      return recurs(range(1, n+1))
 17
 18  def place(x = 1, y = 1, queens = []):
@@ -1484,9 +1484,9 @@ A tail call is a subroutine call performed as the last action of a procedure. A 
 20          print(queens)
 21      else:
 22          if possible(x, y, queens):
-23              place(x + 1, 1, queens + [(x, y)])
+23              place(x + 1, 1, queens + [(x, y)]) # body call
 24          if y < SIZE:
-25              place(x, y + 1, queens)
+25              place(x, y + 1, queens) # tail call
 26
 27  def body_sequence():
 28      return (1, body_sequence())
@@ -2394,13 +2394,57 @@ Two nested `for` loops doing the same number of iterations.
 
 --------------------------------------------------------------------------------
 
-#### Construct `import`
+#### Construct `import_module`
 
 ##### Definition
 
 ```re
-           ^(.*)/_type='Import'
+           ^(.*)/_type='Import(From)?'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
+(
+\n(?:\1.+\n)*?\1/module='(?P<SUFFIX>.+)'
+|
+(
+\n(?:\1.+\n)*?\1/names/\d+/name='(?P<SUFFIX>.+)'
+)+
+)
+```
+
+
+##### Example
+
+```python
+1   import m1, m2, m3
+2   import m4
+3   from m5 import a1, a2
+4   from m6 import a3 as a4
+5   from . import m7
+6   from .m8 import a5
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `import_module:m1` | 1 |
+| `import_module:m2` | 1 |
+| `import_module:m3` | 1 |
+| `import_module:m4` | 2 |
+| `import_module:m5` | 3 |
+| `import_module:m6` | 4 |
+| `import_module:m7` | 5 |
+| `import_module:m8` | 6 |
+
+--------------------------------------------------------------------------------
+
+#### Construct `import_name`
+
+##### Definition
+
+```re
+           ^(.*)/_type='ImportFrom'
+\n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
+\n(?:\1.+\n)*?\1/module='.+'
 (
 \n(?:\1.+\n)*?\1/names/\d+/name='(?P<SUFFIX>.+)'
 )+
@@ -2409,72 +2453,69 @@ Two nested `for` loops doing the same number of iterations.
 ##### Example
 
 ```python
-1   import a, b, c
-2   import d
+1   import m1, m2, m3
+2   import m4
+3   from m5 import a1, a2
+4   from m6 import a3 as a4
+5   from . import m7
+6   from .m8 import a5
 ```
 
 ##### Matches
 
 | Label | Lines |
 |:--|:--|
-| `import:a` | 1 |
-| `import:c` | 1 |
-| `import:b` | 1 |
-| `import:d` | 2 |
+| `import_name:a1` | 3 |
+| `import_name:a2` | 3 |
+| `import_name:a3` | 4 |
+| `import_name:a5` | 6 |
 
 --------------------------------------------------------------------------------
 
-#### Construct `import_from`
+#### Construct `import`
+
+Suffixed by the imported module and, if any, the imported name. In most cases, could replace the two low-level constructs `import_module` and `import_name`.
 
 ##### Definition
 
-```re
-           ^(.*)/_type='ImportFrom'
-\n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
-\n(?:\1.+\n)*?\1/module='(?P<SUFFIX>.+)'
+```sql
+SELECT "import",
+       imported_module.name_suffix || (CASE
+                                           WHEN imported_name.name_suffix IS NULL THEN ""
+                                           ELSE ":" || imported_name.name_suffix
+                                       END),
+       imported_module.span_start,
+       imported_module.span_end
+FROM t imported_module
+LEFT JOIN t imported_name ON (imported_module.span = imported_name.span
+                              AND imported_name.name_prefix = "import_name")
+WHERE imported_module.name_prefix = "import_module"
 ```
 
 ##### Example
 
 ```python
-1   from a import b, c
-2   from d import e
+1   import m1, m2, m3
+2   import m4
+3   from m5 import a1, a2
+4   from m6 import a3 as a4
+5   from . import m7
+6   from .m8 import a5
 ```
 
 ##### Matches
 
 | Label | Lines |
 |:--|:--|
-| `import_from:a` | 1 |
-| `import_from:d` | 2 |
-
---------------------------------------------------------------------------------
-
-#### Construct `import_by_call`
-
-##### Definition
-
-```re
-           ^(.*)/_type='Call'
-\n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
-\n(?:\1.+\n)*?\1/func/id='__import__'
-(
-\n(?:\1.+\n)*?\1/args/\d+/s='(?P<SUFFIX>.+)'
-)+
-```
-
-##### Example
-
-```python
-1   foo, bar = __import__("a", "b")
-```
-
-##### Matches
-
-| Label | Lines |
-|:--|:--|
-| `import_by_call:a` | 1 |
-| `import_by_call:b` | 1 |
+| `import:m1` | 1 |
+| `import:m2` | 1 |
+| `import:m3` | 1 |
+| `import:m4` | 2 |
+| `import:m5:a1` | 3 |
+| `import:m5:a2` | 3 |
+| `import:m6:a3` | 4 |
+| `import:m7` | 5 |
+| `import:m8:a5` | 6 |
 
 --------------------------------------------------------------------------------
 
