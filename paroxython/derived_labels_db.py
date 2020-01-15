@@ -28,9 +28,9 @@ class DB:
 
     def read(self, query: Query) -> Labels:
         groups: LabelsSpans = defaultdict(list)
-        for (name_prefix, name_suffix, start, end) in self.c.execute(query):
+        for (name_prefix, name_suffix, span) in self.c.execute(query):
             label_name = f"{name_prefix}:{name_suffix}" if name_suffix != "" else name_prefix
-            groups[label_name].append(Span([start, end]))
+            groups[label_name].append(Span(span.split("-")))
         return [Label(*item) for item in groups.items()]
 
     def update(self, labels: Labels) -> None:

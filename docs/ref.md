@@ -1298,8 +1298,7 @@ A function returns a value iff it contains a statement `return` and the returned
 ```sql
 SELECT "procedure",
        name_suffix,
-       span_start,
-       span_end
+       span
 FROM t
 WHERE name_prefix = "function"
   AND span NOT IN
@@ -1844,8 +1843,7 @@ Match an `if` clause nested in _n_ other `if` clauses, suffixing it by _n_.
 ```sql
 SELECT "nested_if",
        count(*),
-       inner_if.span_start,
-       inner_if.span_end
+       inner_if.span
 FROM t outer_if
 JOIN t inner_if ON (outer_if.span_start <= inner_if.span_start
                     AND inner_if.span_end <= outer_if.span_end)
@@ -2143,8 +2141,7 @@ Match a `for` statement nested in _n_ other `for` statements, suffixing it by _n
 ```sql
 SELECT "nested_for",
        count(*),
-       inner_loop.span_start,
-       inner_loop.span_end
+       inner_loop.span
 FROM t outer_loop
 JOIN t inner_loop ON (outer_loop.span_start <= inner_loop.span_start
                       AND inner_loop.span_end <= outer_loop.span_end
@@ -2483,8 +2480,7 @@ SELECT "import",
                              WHEN n.name_suffix IS NULL THEN ""
                              ELSE ":" || n.name_suffix
                          END),
-       m.span_start,
-       m.span_end
+       m.span
 FROM t m
 LEFT JOIN t n ON (m.span = n.span
                   AND n.name_prefix = "import_name")
@@ -2535,8 +2531,7 @@ An accumulator is iteratively updated from its previous value and those of the i
 ```sql
 SELECT "accumulate_elements",
        count(DISTINCT acc_left.name_suffix),
-       for_loop.span_start,
-       for_loop.span_end
+       for_loop.span
 FROM t for_loop -- Ensure iter_var, acc_left and acc_right have same span and are inside the loop.
 JOIN t iter_var ON (for_loop.span_start <= iter_var.span_start
                     AND iter_var.span_end <= for_loop.span_end)
