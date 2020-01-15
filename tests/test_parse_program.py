@@ -14,6 +14,8 @@ from paroxython.preprocess_source import (
     collect_hints,
     remove_hints,
 )
+from paroxython.generate_programs import generate_programs
+from make_snapshot import make_snapshot
 
 
 def generate_toc(text):
@@ -108,3 +110,19 @@ def test_malformed_example():
     source = "if foo():\nbar() # wrong indentation"
     result = parse(Program(source=source))
     assert result == [("ast_construction:IndentationError", [])]
+
+
+def test_label_presence(capsys):
+    absent = set()
+    present = set()
+    for program in generate_programs("tests/data/simple/"):
+        labels = parse(Program(source=program.source), yield_failed_matches=True)
+        for (name, spans) in labels:
+            if spans:
+                present.add(name + f" / {program.path.name} / " + ", ".join(map(str, spans)))
+            else:
+                absent.add(name)
+    present = "\n- ".join(sorted(present))
+    absent = "\n- ".join(sorted(absent))
+    text = f"# Present labels\n\n- {present}\n\n# Absent labels\n\n- {absent}\n"
+    make_snapshot("snapshots/simple_labels.md", text, capsys)

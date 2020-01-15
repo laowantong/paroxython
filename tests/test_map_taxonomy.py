@@ -42,6 +42,7 @@ def test_to_taxons():
 
 
 def test_deduplicated_taxons():
+    assert t.deduplicated_taxons([]) == []
     taxons = [
         ("control_flow/conditional/", C({S(1, 1): 2, S(2, 5): 1})),
         ("control_flow/conditional/else/", C({S(1, 1): 1, S(2, 5): 1})),
