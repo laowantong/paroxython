@@ -88,3 +88,15 @@ class Taxonomy:
             taxons = self.to_taxons(program.labels)
             taxons = self.deduplicated_taxons(taxons)
             yield PathTaxons(program.path, taxons)
+
+
+if __name__ == "__main__":
+    generate_labelled_programs = __import__("generate_labels").generate_labelled_programs
+    chain = __import__("itertools").chain
+    taxonomy = Taxonomy()
+    programs = generate_labelled_programs("sandbox")
+    for (path, taxons) in taxonomy(programs):
+        width = max(len(" ".join(map(str, taxon.spans))) for taxon in taxons)
+        for (name, spans) in taxons:
+            span_string = " ".join(map(str, sorted(set(spans))))
+            print(f"{span_string:>{width}}\t{name}")
