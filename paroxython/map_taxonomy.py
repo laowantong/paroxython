@@ -16,6 +16,8 @@ from user_types import (
     TaxonsSpans,
 )
 
+sub_slash_sequences = regex.compile(r"//+").sub
+
 
 class Taxonomy:
     """Translate labels into taxons on a list of program paths."""
@@ -49,7 +51,9 @@ class Taxonomy:
                 cache[label_name] = []
                 for (rex, taxon_name) in self.compiled_label_names:
                     if rex.match(label_name):
-                        cache[label_name].append(rex.sub(taxon_name, label_name))  # cf. note above
+                        s = rex.sub(taxon_name, label_name)  # cf. note above
+                        s = sub_slash_sequences("/", s)
+                        cache[label_name].append(s)
         return cache[label_name]
 
     def to_taxons(self, labels: Labels) -> Taxons:
