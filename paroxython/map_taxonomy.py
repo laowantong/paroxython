@@ -94,8 +94,10 @@ if __name__ == "__main__":
     generate_labelled_programs = __import__("generate_labels").generate_labelled_programs
     chain = __import__("itertools").chain
     taxonomy = Taxonomy()
-    programs = generate_labelled_programs("sandbox")
+    programs = generate_labelled_programs("../Python/")
     for (path, taxons) in taxonomy(programs):
+        if not taxons:
+            continue
         width = max(len(" ".join(map(str, taxon.spans))) for taxon in taxons)
         for (name, spans) in taxons:
             span_string = " ".join(map(str, sorted(set(spans))))
