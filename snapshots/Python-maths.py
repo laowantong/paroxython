@@ -4,9 +4,9 @@
 from typing import Tuple, List # import:typing:List, import:typing:Tuple, import_module:typing, import_name:List, import_name:Tuple
 def n31(a: int) -> Tuple[List[int], int]: # function:n31, function_returning_a_value:n31, index
     if not isinstance(a, int): # call_parameter:a, call_parameter:int, function_call:isinstance, if (-> +1), unary_operator:Not
-        raise TypeError("Must be int, not {0}".format(type(a).__name__)) # call_parameter:a, composition, function_call:TypeError, function_call:type, if_then_branch, literal:Str, method_call:format, raise_exception:TypeError
+        raise TypeError("Must be int, not {0}".format(type(a).__name__)) # call_parameter:a, composition, function_call:TypeError, function_call:type, if_then_branch, literal:Str, method_call:format, raise:TypeError
     if a < 1: # comparison_operator:Lt, if (-> +1), int_literal, literal:Num
-        raise ValueError("Given integer must be greater than 1, not {0}".format(a)) # call_parameter:a, composition, function_call:ValueError, if_then_branch, literal:Str, method_call:format, raise_exception:ValueError
+        raise ValueError("Given integer must be greater than 1, not {0}".format(a)) # call_parameter:a, composition, function_call:ValueError, if_then_branch, literal:Str, method_call:format, raise:ValueError
     path = [a] # assignment, assignment_lhs_identifier:path, assignment_rhs_identifier:a
     while a != 1: # comparison_operator:NotEq, evolve_state (-> +5), int_literal, literal:Num, while (-> +5)
         if a % 2 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, if (-> +3), int_literal, literal:Num, suggest_conditional_expression (-> +3)
@@ -382,9 +382,9 @@ def main(): # function:main (-> +6), procedure:main (-> +6)
 # ----------------------------------------------------------------------------------------
 def factorial(input_number: int) -> int: # function:factorial, function_returning_a_value:factorial
     if input_number < 0: # comparison_operator:Lt, if (-> +1), int_literal, literal:Num
-        raise ValueError("factorial() not defined for negative values") # function_call:ValueError, if_then_branch, literal:Str, raise_exception:ValueError
+        raise ValueError("factorial() not defined for negative values") # function_call:ValueError, if_then_branch, literal:Str, raise:ValueError
     if not isinstance(input_number, int): # call_parameter:input_number, call_parameter:int, function_call:isinstance, if (-> +1), unary_operator:Not
-        raise ValueError("factorial() only accepts integral values") # function_call:ValueError, if_then_branch, literal:Str, raise_exception:ValueError
+        raise ValueError("factorial() only accepts integral values") # function_call:ValueError, if_then_branch, literal:Str, raise:ValueError
     result = 1 # assignment, assignment_lhs_identifier:result, int_literal, literal:Num
     for i in range(1, input_number): # accumulate_elements:1 (-> +1), call_parameter:input_number, for:i (-> +1), for_range_start (-> +1), function_call:range, int_literal, literal:Num
         result = result * (i + 1) # assignment, assignment_lhs_identifier:result, assignment_rhs_identifier:i, assignment_rhs_identifier:result, binary_operator:Add, binary_operator:Mult, int_literal, literal:Num, suggest_augmented_assignment
@@ -395,9 +395,9 @@ def factorial(input_number: int) -> int: # function:factorial, function_returnin
 # ----------------------------------------------------------------------------------------
 def factorial(n: int) -> int: # body_recursive_function:factorial, function:factorial, function_returning_a_value:factorial, recursive_function:factorial
     if n < 0: # comparison_operator:Lt, if (-> +1), int_literal, literal:Num
-        raise ValueError("factorial() not defined for negative values") # function_call:ValueError, if_then_branch, literal:Str, raise_exception:ValueError
+        raise ValueError("factorial() not defined for negative values") # function_call:ValueError, if_then_branch, literal:Str, raise:ValueError
     if not isinstance(n, int): # call_parameter:int, call_parameter:n, function_call:isinstance, if (-> +1), unary_operator:Not
-        raise ValueError("factorial() only accepts integral values") # function_call:ValueError, if_then_branch, literal:Str, raise_exception:ValueError
+        raise ValueError("factorial() only accepts integral values") # function_call:ValueError, if_then_branch, literal:Str, raise:ValueError
     return 1 if n == 0 or n == 1 else n * factorial(n - 1) # binary_operator:Mult, binary_operator:Sub, boolean_operator:Or, comparison_operator:Eq, conditional_expression, function_call:factorial, int_literal, literal:Num
 
 # ----------------------------------------------------------------------------------------
@@ -451,24 +451,24 @@ class ValueTooSmallError(Error):
 class ValueLessThanZero(Error):
     pass
 def _check_number_input(n, min_thresh, max_thresh=None): # function:_check_number_input (-> +22), function_returning_a_value:_check_number_input (-> +22), function_with_default_positional_arguments:_check_number_input (-> +22), literal:None
-    try: # catch_exception:ValueTooLargeError (-> +19)
+    try: # try (-> +19), try_except:ValueLessThanZero (-> +19), try_except:ValueTooLargeError (-> +19), try_except:ValueTooSmallError (-> +19), try_raise:ValueLessThanZero (-> +19), try_raise:ValueTooLargeError (-> +19), try_raise:ValueTooSmallError (-> +19)
         if n >= min_thresh and max_thresh is None: # boolean_operator:And, comparison_operator:GtE, comparison_operator:Is, if (-> +9), literal:None
             return True # if_then_branch, literal:True
         elif min_thresh <= n <= max_thresh: # chained_comparison:2, comparison_operator:LtE, if (-> +7)
             return True # if_elif_branch, literal:True
         elif n < 0: # comparison_operator:Lt, if (-> +5), int_literal, literal:Num
-            raise ValueLessThanZero # if_elif_branch
+            raise ValueLessThanZero # if_elif_branch, raise:ValueLessThanZero
         elif n < min_thresh: # comparison_operator:Lt, if (-> +3)
-            raise ValueTooSmallError # if_elif_branch
+            raise ValueTooSmallError # if_elif_branch, raise:ValueTooSmallError
         elif n > max_thresh: # comparison_operator:Gt, if (-> +1)
-            raise ValueTooLargeError # if_elif_branch
-    except ValueLessThanZero:
+            raise ValueTooLargeError # if_elif_branch, raise:ValueTooLargeError
+    except ValueLessThanZero: # except:ValueLessThanZero
         print("Incorrect Input: number must not be less than 0") # function_call:print, literal:Str
-    except ValueTooSmallError:
+    except ValueTooSmallError: # except:ValueTooSmallError
         print( # function_call:print
             f"Incorrect Input: input number must be > {min_thresh} for the recursive calculation" # literal:Str
         )
-    except ValueTooLargeError:
+    except ValueTooLargeError: # except:ValueTooLargeError
         print( # function_call:print
             f"Incorrect Input: input number must be < {max_thresh} for the recursive calculation" # literal:Str
         )
@@ -580,7 +580,7 @@ def gcd_by_iterative(x, y): # function:gcd_by_iterative (-> +3), function_return
         x, y = y, x % y # assignment, assignment_lhs_identifier:x, assignment_lhs_identifier:y, assignment_rhs_identifier:x, assignment_rhs_identifier:y, binary_operator:Mod
     return x
 def main(): # function:main (-> +10), procedure:main (-> +10)
-    try: # catch_exception (-> +9)
+    try: # try (-> +9), try_except:IndexError (-> +9), try_except:UnboundLocalError (-> +9), try_except:ValueError (-> +9)
         nums = input("Enter two integers separated by comma (,): ").split(",") # assignment, assignment_lhs_identifier:nums, assignment_rhs_identifier:input, function_call:input, literal:Str, method_call:split
         num_1 = int(nums[0]) # assignment, assignment_lhs_identifier:num_1, assignment_rhs_identifier:int, assignment_rhs_identifier:nums, function_call:int, index, int_literal, literal:Num
         num_2 = int(nums[1]) # assignment, assignment_lhs_identifier:num_2, assignment_rhs_identifier:int, assignment_rhs_identifier:nums, function_call:int, index, int_literal, literal:Num
@@ -588,7 +588,7 @@ def main(): # function:main (-> +10), procedure:main (-> +10)
             f"greatest_common_divisor({num_1}, {num_2}) = {greatest_common_divisor(num_1, num_2)}" # call_parameter:num_1, call_parameter:num_2, function_call:greatest_common_divisor, literal:Str
         )
         print(f"By iterative gcd({num_1}, {num_2}) = {gcd_by_iterative(num_1, num_2)}") # call_parameter:num_1, call_parameter:num_2, composition, function_call:gcd_by_iterative, function_call:print, literal:Str
-    except (IndexError, UnboundLocalError, ValueError):
+    except (IndexError, UnboundLocalError, ValueError): # except:IndexError, except:UnboundLocalError, except:ValueError
         print("Wrong input") # function_call:print, literal:Str
 
 # ----------------------------------------------------------------------------------------
@@ -838,14 +838,14 @@ def newton_raphson(f, x0=0, maxiter=100, step=0.0001, maxerror=1e-6, logsteps=Fa
     f1 = lambda x: calc_derivative(f, x, h=step) # assignment, assignment_lhs_identifier:f1, assignment_rhs_identifier:calc_derivative, assignment_rhs_identifier:f, assignment_rhs_identifier:step, assignment_rhs_identifier:x, call_parameter:f, call_parameter:x, function_call:calc_derivative, lambda_function
     for _ in range(maxiter): # call_parameter:maxiter, for:_ (-> +9), for_range_stop (-> +9), function_call:range
         if f1(a) == 0: # call_parameter:a, comparison_operator:Eq, function_call:f1, if (-> +1), int_literal, literal:Num
-            raise ValueError("No converging solution found") # function_call:ValueError, if_then_branch, literal:Str, raise_exception:ValueError
+            raise ValueError("No converging solution found") # function_call:ValueError, if_then_branch, literal:Str, raise:ValueError
         a = a - f(a) / f1(a) # assignment, assignment_lhs_identifier:a, assignment_rhs_identifier:a, assignment_rhs_identifier:f, assignment_rhs_identifier:f1, binary_operator:Div, binary_operator:Sub, call_parameter:a, function_call:f, function_call:f1, suggest_augmented_assignment
         if logsteps: # if (-> +1)
             steps.append(a) # call_parameter:a, if_then_branch, method_call:append, method_call_object:steps
         if error < maxerror: # comparison_operator:Lt, if (-> +1)
             break # if_then_branch
     else:
-        raise ValueError("Iteration limit reached, no converging solution found") # function_call:ValueError, literal:Str, raise_exception:ValueError
+        raise ValueError("Iteration limit reached, no converging solution found") # function_call:ValueError, literal:Str, raise:ValueError
     if logsteps: # if (-> +1)
         return a, error, steps # if_then_branch
     return a, error
@@ -985,7 +985,7 @@ from math import sqrt # import:math:sqrt, import_module:math, import_name:sqrt
 from typing import Tuple # import:typing:Tuple, import_module:typing, import_name:Tuple
 def QuadraticEquation(a: int, b: int, c: int) -> Tuple[str, str]: # function:QuadraticEquation, function_returning_a_value:QuadraticEquation, index
     if a == 0: # comparison_operator:Eq, if (-> +1), int_literal, literal:Num
-        raise ValueError("Coefficient 'a' must not be zero for quadratic equations.") # function_call:ValueError, if_then_branch, literal:Str, raise_exception:ValueError
+        raise ValueError("Coefficient 'a' must not be zero for quadratic equations.") # function_call:ValueError, if_then_branch, literal:Str, raise:ValueError
     delta = b * b - 4 * a * c # assignment, assignment_lhs_identifier:delta, assignment_rhs_identifier:a, assignment_rhs_identifier:b, assignment_rhs_identifier:c, binary_operator:Mult, binary_operator:Sub, int_literal, literal:Num, suggest_constant_definition
     if delta >= 0: # comparison_operator:GtE, if (-> +1), int_literal, literal:Num
         return str((-b + sqrt(delta)) / (2 * a)), str((-b - sqrt(delta)) / (2 * a)) # binary_operator:Add, binary_operator:Div, binary_operator:Mult, binary_operator:Sub, call_parameter:delta, composition, function_call:sqrt, function_call:str, if_then_branch, int_literal, literal:Num, unary_operator:USub
@@ -1316,22 +1316,22 @@ def zeller(date_input: str) -> str: # function:zeller, function_returning_a_valu
     }
     convert_datetime_days = {0: 1, 1: 2, 2: 3, 3: 4, 4: 5, 5: 6, 6: 0} # assignment, assignment_lhs_identifier:convert_datetime_days, int_literal, literal:Dict, literal:Num, suggest_constant_definition
     if not 0 < len(date_input) < 11: # call_parameter:date_input, chained_comparison:2, comparison_operator:Lt, function_call:len, if (-> +1), int_literal, literal:Num, suggest_constant_definition, unary_operator:Not
-        raise ValueError("Must be 10 characters long") # function_call:ValueError, if_then_branch, literal:Str, raise_exception:ValueError
+        raise ValueError("Must be 10 characters long") # function_call:ValueError, if_then_branch, literal:Str, raise:ValueError
     m: int = int(date_input[0] + date_input[1]) # binary_operator:Add, function_call:int, index, int_literal, literal:Num
     if not 0 < m < 13: # chained_comparison:2, comparison_operator:Lt, if (-> +1), int_literal, literal:Num, suggest_constant_definition, unary_operator:Not
-        raise ValueError("Month must be between 1 - 12") # function_call:ValueError, if_then_branch, literal:Str, raise_exception:ValueError
+        raise ValueError("Month must be between 1 - 12") # function_call:ValueError, if_then_branch, literal:Str, raise:ValueError
     sep_1: str = date_input[2] # index, int_literal, literal:Num
     if sep_1 not in ["-", "/"]: # comparison_operator:NotIn, if (-> +1), literal:List, literal:Str
-        raise ValueError("Date seperator must be '-' or '/'") # function_call:ValueError, if_then_branch, literal:Str, raise_exception:ValueError
+        raise ValueError("Date seperator must be '-' or '/'") # function_call:ValueError, if_then_branch, literal:Str, raise:ValueError
     d: int = int(date_input[3] + date_input[4]) # binary_operator:Add, function_call:int, index, int_literal, literal:Num, suggest_constant_definition
     if not 0 < d < 32: # chained_comparison:2, comparison_operator:Lt, if (-> +1), int_literal, literal:Num, suggest_constant_definition, unary_operator:Not
-        raise ValueError("Date must be between 1 - 31") # function_call:ValueError, if_then_branch, literal:Str, raise_exception:ValueError
+        raise ValueError("Date must be between 1 - 31") # function_call:ValueError, if_then_branch, literal:Str, raise:ValueError
     sep_2: str = date_input[5] # index, int_literal, literal:Num, suggest_constant_definition
     if sep_2 not in ["-", "/"]: # comparison_operator:NotIn, if (-> +1), literal:List, literal:Str
-        raise ValueError("Date seperator must be '-' or '/'") # function_call:ValueError, if_then_branch, literal:Str, raise_exception:ValueError
+        raise ValueError("Date seperator must be '-' or '/'") # function_call:ValueError, if_then_branch, literal:Str, raise:ValueError
     y: int = int(date_input[6] + date_input[7] + date_input[8] + date_input[9]) # binary_operator:Add, function_call:int, index, int_literal, literal:Num, suggest_constant_definition
     if not 45 < y < 8500: # chained_comparison:2, comparison_operator:Lt, if (-> +2), int_literal, literal:Num, suggest_constant_definition, unary_operator:Not
-        raise ValueError( # function_call:ValueError, if_then_branch (-> +1), raise_exception:ValueError
+        raise ValueError( # function_call:ValueError, if_then_branch (-> +1), raise:ValueError
             "Year out of range. There has to be some sort of limit...right?" # literal:Str
         )
     dt_ck = datetime.date(int(y), int(m), int(d)) # assignment, assignment_lhs_identifier:dt_ck, assignment_rhs_identifier:d, assignment_rhs_identifier:datetime, assignment_rhs_identifier:int, assignment_rhs_identifier:m, assignment_rhs_identifier:y, call_parameter:d, call_parameter:m, call_parameter:y, composition, function_call:int, method_call:date
@@ -1348,6 +1348,6 @@ def zeller(date_input: str) -> str: # function:zeller, function_returning_a_valu
     w: int = int(z - (2 * c)) # binary_operator:Mult, binary_operator:Sub, function_call:int, int_literal, literal:Num
     f: int = round(w % 7) # binary_operator:Mod, function_call:round, int_literal, literal:Num, suggest_constant_definition
     if f != convert_datetime_days[dt_ck.weekday()]: # comparison_operator:NotEq, if (-> +1), index, method_call:weekday, method_call_object:dt_ck
-        raise AssertionError("The date was evaluated incorrectly. Contact developer.") # function_call:AssertionError, if_then_branch, literal:Str, raise_exception:AssertionError
+        raise AssertionError("The date was evaluated incorrectly. Contact developer.") # function_call:AssertionError, if_then_branch, literal:Str, raise:AssertionError
     response: str = f"Your date {date_input}, is a {days[str(f)]}!" # call_parameter:f, function_call:str, index, literal:Str
     return response

@@ -158,12 +158,12 @@ def solution(n): # function:solution (-> +9), function_returning_a_value:solutio
 import math # import:math, import_module:math
 from decimal import Decimal, getcontext # import:decimal:Decimal, import:decimal:getcontext, import_module:decimal, import_name:Decimal, import_name:getcontext
 def solution(n): # function:solution (-> +12), function_returning_a_value:solution (-> +12)
-    try: # catch_exception (-> +3)
+    try: # try (-> +3), try_except:TypeError (-> +3), try_except:ValueError (-> +3), try_raise:TypeError (-> +3)
         n = int(n) # assignment, assignment_lhs_identifier:n, assignment_rhs_identifier:int, assignment_rhs_identifier:n, call_parameter:n, function_call:int
-    except (TypeError, ValueError) as e:
-        raise TypeError("Parameter n must be int or passive of cast to int.") # function_call:TypeError, literal:Str, raise_exception:TypeError
+    except (TypeError, ValueError) as e: # except:TypeError, except:ValueError
+        raise TypeError("Parameter n must be int or passive of cast to int.") # function_call:TypeError, literal:Str, raise:TypeError
     if n <= 0: # comparison_operator:LtE, if (-> +1), int_literal, literal:Num
-        raise ValueError("Parameter n must be greater or equal to one.") # function_call:ValueError, if_then_branch, literal:Str, raise_exception:ValueError
+        raise ValueError("Parameter n must be greater or equal to one.") # function_call:ValueError, if_then_branch, literal:Str, raise:ValueError
     getcontext().prec = 100 # assignment, function_call:getcontext, int_literal, literal:Num, suggest_constant_definition
     phi = (Decimal(5) ** Decimal(0.5) + 1) / Decimal(2) # assignment, assignment_lhs_identifier:phi, assignment_rhs_identifier:Decimal, binary_operator:Add, binary_operator:Div, binary_operator:Pow, float_literal, function_call:Decimal, int_literal, literal:Num, suggest_constant_definition
     index = (math.floor(math.log(n * (phi + 2), phi) - 1) // 3) * 3 + 2 # assignment, assignment_lhs_identifier:index, assignment_rhs_identifier:math, assignment_rhs_identifier:n, assignment_rhs_identifier:phi, binary_operator:Add, binary_operator:FloorDiv, binary_operator:Mult, binary_operator:Sub, call_parameter:phi, composition, int_literal, literal:Num, method_call:floor, method_call:log, suggest_constant_definition
@@ -203,12 +203,12 @@ def isprime(no): # function:isprime (-> +9), function_returning_a_value:isprime 
             return False # if_then_branch, literal:False
     return True # literal:True
 def solution(n): # function:solution (-> +24), function_returning_a_value:solution (-> +24)
-    try: # catch_exception (-> +3)
+    try: # try (-> +3), try_except:TypeError (-> +3), try_except:ValueError (-> +3), try_raise:TypeError (-> +3)
         n = int(n) # assignment, assignment_lhs_identifier:n, assignment_rhs_identifier:int, assignment_rhs_identifier:n, call_parameter:n, function_call:int
-    except (TypeError, ValueError) as e:
-        raise TypeError("Parameter n must be int or passive of cast to int.") # function_call:TypeError, literal:Str, raise_exception:TypeError
+    except (TypeError, ValueError) as e: # except:TypeError, except:ValueError
+        raise TypeError("Parameter n must be int or passive of cast to int.") # function_call:TypeError, literal:Str, raise:TypeError
     if n <= 0: # comparison_operator:LtE, if (-> +1), int_literal, literal:Num
-        raise ValueError("Parameter n must be greater or equal to one.") # function_call:ValueError, if_then_branch, literal:Str, raise_exception:ValueError
+        raise ValueError("Parameter n must be greater or equal to one.") # function_call:ValueError, if_then_branch, literal:Str, raise:ValueError
     maxNumber = 0 # assignment, assignment_lhs_identifier:maxNumber, int_literal, literal:Num
     if isprime(n): # call_parameter:n, function_call:isprime, if (-> +16)
         return n # if_then_branch
@@ -232,12 +232,12 @@ def solution(n): # function:solution (-> +24), function_returning_a_value:soluti
 # ../Python/project_euler/problem_03/sol2.py
 # ----------------------------------------------------------------------------------------
 def solution(n): # function:solution (-> +16), function_returning_a_value:solution (-> +16)
-    try: # catch_exception (-> +3)
+    try: # try (-> +3), try_except:TypeError (-> +3), try_except:ValueError (-> +3), try_raise:TypeError (-> +3)
         n = int(n) # assignment, assignment_lhs_identifier:n, assignment_rhs_identifier:int, assignment_rhs_identifier:n, call_parameter:n, function_call:int
-    except (TypeError, ValueError) as e:
-        raise TypeError("Parameter n must be int or passive of cast to int.") # function_call:TypeError, literal:Str, raise_exception:TypeError
+    except (TypeError, ValueError) as e: # except:TypeError, except:ValueError
+        raise TypeError("Parameter n must be int or passive of cast to int.") # function_call:TypeError, literal:Str, raise:TypeError
     if n <= 0: # comparison_operator:LtE, if (-> +1), int_literal, literal:Num
-        raise ValueError("Parameter n must be greater or equal to one.") # function_call:ValueError, if_then_branch, literal:Str, raise_exception:ValueError
+        raise ValueError("Parameter n must be greater or equal to one.") # function_call:ValueError, if_then_branch, literal:Str, raise:ValueError
     prime = 1 # assignment, assignment_lhs_identifier:prime, int_literal, literal:Num
     i = 2 # assignment, assignment_lhs_identifier:i, int_literal, literal:Num
     while i * i <= n: # binary_operator:Mult, comparison_operator:LtE, evolve_state (-> +4), while (-> +4)
@@ -253,12 +253,12 @@ def solution(n): # function:solution (-> +16), function_returning_a_value:soluti
 # ../Python/project_euler/problem_03/sol3.py
 # ----------------------------------------------------------------------------------------
 def solution(n: int) -> int: # function:solution, function_returning_a_value:solution
-    try: # catch_exception (-> +3)
+    try: # try (-> +3), try_except:TypeError (-> +3), try_except:ValueError (-> +3), try_raise:TypeError (-> +3)
         n = int(n) # assignment, assignment_lhs_identifier:n, assignment_rhs_identifier:int, assignment_rhs_identifier:n, call_parameter:n, function_call:int
-    except (TypeError, ValueError):
-        raise TypeError("Parameter n must be int or passive of cast to int.") # function_call:TypeError, literal:Str, raise_exception:TypeError
+    except (TypeError, ValueError): # except:TypeError, except:ValueError
+        raise TypeError("Parameter n must be int or passive of cast to int.") # function_call:TypeError, literal:Str, raise:TypeError
     if n <= 0: # comparison_operator:LtE, if (-> +1), int_literal, literal:Num
-        raise ValueError("Parameter n must be greater or equal to one.") # function_call:ValueError, if_then_branch, literal:Str, raise_exception:ValueError
+        raise ValueError("Parameter n must be greater or equal to one.") # function_call:ValueError, if_then_branch, literal:Str, raise:ValueError
     i = 2 # assignment, assignment_lhs_identifier:i, int_literal, literal:Num
     ans = 0 # assignment, assignment_lhs_identifier:ans, int_literal, literal:Num
     if n == 2: # comparison_operator:Eq, if (-> +1), int_literal, literal:Num
@@ -301,12 +301,12 @@ def solution(n): # function:solution (-> +7), function_returning_a_value:solutio
 # ../Python/project_euler/problem_05/sol1.py
 # ----------------------------------------------------------------------------------------
 def solution(n): # function:solution (-> +18), function_returning_a_value:solution (-> +18)
-    try: # catch_exception (-> +3)
+    try: # try (-> +3), try_except:TypeError (-> +3), try_except:ValueError (-> +3), try_raise:TypeError (-> +3)
         n = int(n) # assignment, assignment_lhs_identifier:n, assignment_rhs_identifier:int, assignment_rhs_identifier:n, call_parameter:n, function_call:int
-    except (TypeError, ValueError) as e:
-        raise TypeError("Parameter n must be int or passive of cast to int.") # function_call:TypeError, literal:Str, raise_exception:TypeError
+    except (TypeError, ValueError) as e: # except:TypeError, except:ValueError
+        raise TypeError("Parameter n must be int or passive of cast to int.") # function_call:TypeError, literal:Str, raise:TypeError
     if n <= 0: # comparison_operator:LtE, if (-> +1), int_literal, literal:Num
-        raise ValueError("Parameter n must be greater or equal to one.") # function_call:ValueError, if_then_branch, literal:Str, raise_exception:ValueError
+        raise ValueError("Parameter n must be greater or equal to one.") # function_call:ValueError, if_then_branch, literal:Str, raise:ValueError
     i = 0 # assignment, assignment_lhs_identifier:i, int_literal, literal:Num
     while 1: # int_literal, literal:Num, while (-> +10)
         i += n * (n - 1) # assignment_lhs_identifier:i, assignment_rhs_identifier:n, augmented_assignment, binary_operator:Mult, binary_operator:Sub, int_literal, literal:Num
@@ -408,12 +408,12 @@ def isprime(number): # function:isprime (-> +4), function_returning_a_value:ispr
             return False # if_then_branch, literal:False
     return True # literal:True
 def solution(n): # function:solution (-> +15), function_returning_a_value:solution (-> +15)
-    try: # catch_exception (-> +3)
+    try: # try (-> +3), try_except:TypeError (-> +3), try_except:ValueError (-> +3), try_raise:TypeError (-> +3)
         n = int(n) # assignment, assignment_lhs_identifier:n, assignment_rhs_identifier:int, assignment_rhs_identifier:n, call_parameter:n, function_call:int
-    except (TypeError, ValueError) as e:
-        raise TypeError("Parameter n must be int or passive of cast to int.") # function_call:TypeError, literal:Str, raise_exception:TypeError
+    except (TypeError, ValueError) as e: # except:TypeError, except:ValueError
+        raise TypeError("Parameter n must be int or passive of cast to int.") # function_call:TypeError, literal:Str, raise:TypeError
     if n <= 0: # comparison_operator:LtE, if (-> +1), int_literal, literal:Num
-        raise ValueError("Parameter n must be greater or equal to one.") # function_call:ValueError, if_then_branch, literal:Str, raise_exception:ValueError
+        raise ValueError("Parameter n must be greater or equal to one.") # function_call:ValueError, if_then_branch, literal:Str, raise:ValueError
     primes = [] # assignment, assignment_lhs_identifier:primes, literal:List
     num = 2 # assignment, assignment_lhs_identifier:num, int_literal, literal:Num
     while len(primes) < n: # call_parameter:primes, comparison_operator:Lt, function_call:len, while (-> +5)

@@ -74,8 +74,10 @@
       - [Construct `while`](#construct-while)
   - [Exceptions](#exceptions)
       - [Construct `assertion`](#construct-assertion)
-      - [Construct `raise_exception`](#construct-raise_exception)
-      - [Construct `catch_exception`](#construct-catch_exception)
+      - [Construct `try`](#construct-try)
+      - [Construct `raise`](#construct-raise)
+      - [Construct `except`](#construct-except)
+      - [Construct `try_raise`](#construct-try_raise)
   - [Modules](#modules)
       - [Construct `import_module`](#construct-import_module)
       - [Construct `import_name`](#construct-import_name)
@@ -2315,46 +2317,13 @@ Two nested `for` loops doing the same number of iterations.
 
 --------------------------------------------------------------------------------
 
-#### Construct `raise_exception`
-
-##### Definition
-
-```re
-           ^(.*)/_type='Raise'
-\n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
-\n(?:\1.+\n)*?\1/exc/_type='Call'
-\n(?:\1.+\n)*?\1/exc/func/_type='Name'
-\n(?:\1.+\n)*?\1/exc/func/id='(?P<SUFFIX>.+)'
-```
-
-##### Example
-
-```python
-1   x = input("Answer? ")
-2   if x != 42:
-3       raise Exception("Wrong answer!")
-```
-
-##### Matches
-
-| Label | Lines |
-|:--|:--|
-| `raise_exception:Exception` | 3 |
-
---------------------------------------------------------------------------------
-
-#### Construct `catch_exception`
+#### Construct `try`
 
 ##### Definition
 
 ```re
            ^(.*)/_type='Try'
 \n(?:\1.+\n)* \1/lineno=(?P<LINE>\d+)
-\n(?:\1.+\n)* \1/(?P<_1>handlers/\d+)/_type='ExceptHandler'
-(   # is the exception type specified ?
-\n(?:\1.+\n)*?\1/(?P=_1)             /type/_type='Name'
-\n(?:\1.+\n)*?\1/(?P=_1)             /type/id='(?P<SUFFIX>.+)'
-)?
 \n(?:\1.+\n)* \1/.*/lineno=(?P<LINE>\d+)
 ```
 
@@ -2362,28 +2331,150 @@ Two nested `for` loops doing the same number of iterations.
 
 ```python
 1   try:
-2       with open(path) as opened_file:
-3           data = opened_file.read()
-4   except:
-5       print(f"Could not open {path}")
-6   try:
-7       with open(path) as opened_file:
-8           data = opened_file.read()
-9   except FileNotFoundError:
-10      print(f"Could not open {path}")
-11  try:
-12      with open(path) as opened_file:
-13          data = opened_file.read()
-14  except (IndexError, UnboundLocalError, ValueError): # BUG: no match
-15      print(f"Could not open {path}")
+2       try:
+3           raise e1
+4       except e1:
+5           raise e2
+6   except e2:
+7       pass
 ```
 
 ##### Matches
 
 | Label | Lines |
 |:--|:--|
-| `catch_exception` | 1-5, 11-15 |
-| `catch_exception:FileNotFoundError` | 6-10 |
+| `try` | 1-7, 2-5 |
+
+--------------------------------------------------------------------------------
+
+#### Construct `raise`
+
+##### Definition
+
+```re
+           ^(.*)/_type='Raise'
+\n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
+\n(?:\1.+\n)*?\1/exc(=(?P<SUFFIX>None)|/.*\bid='(?P<SUFFIX>.+)')
+```
+
+##### Example
+
+```python
+1   try:
+2       if n < 0:
+3           raise ValueLessThanZero
+4       elif n < min_threshold:
+5           raise ValueTooSmallError
+6       elif n > max_threshold:
+7           raise ValueTooLargeError(argument)
+8       elif n == 0:
+9           raise
+10  except ValueLessThanZero:
+11      pass
+12  except ValueTooSmallError(a):
+13      pass
+14  except (e1, e2):
+15      pass
+16  except:
+17      pass
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `raise:None` | 9 |
+| `raise:ValueLessThanZero` | 3 |
+| `raise:ValueTooLargeError` | 7 |
+| `raise:ValueTooSmallError` | 5 |
+
+--------------------------------------------------------------------------------
+
+#### Construct `except`
+
+##### Definition
+
+```re
+           ^(.*)/(?P<_1>handlers/\d+/(type/(func/|elts/\d+/)?)?)lineno=(?P<LINE>\d+)
+\n(?:\1.+\n)*?\1/(?P=_1)                                        (id='(?P<SUFFIX>.+)'|type=(?P<SUFFIX>None))
+```
+
+##### Example
+
+```python
+1   try:
+2       if n < 0:
+3           raise ValueLessThanZero
+4       elif n < min_threshold:
+5           raise ValueTooSmallError
+6       elif n > max_threshold:
+7           raise ValueTooLargeError(argument)
+8       elif n == 0:
+9           raise
+10  except ValueLessThanZero:
+11      pass
+12  except ValueTooSmallError(a):
+13      pass
+14  except (e1, e2):
+15      pass
+16  except:
+17      pass
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `except:None` | 16 |
+| `except:ValueLessThanZero` | 10 |
+| `except:ValueTooSmallError` | 12 |
+| `except:e1` | 14 |
+| `except:e2` | 14 |
+
+--------------------------------------------------------------------------------
+
+#### Construct `try_raise`
+
+##### Definition
+
+```sql
+SELECT "try_" || e.name_prefix,
+       e.name_suffix,
+       max(t.span_start) || "-" || min(t.span_end)
+FROM t t
+JOIN t e ON (t.span_start <= e.span_start
+             AND e.span_end <= t.span_end)
+WHERE t.name_prefix = "try"
+  AND e.name_prefix IN ("raise",
+                        "except")
+GROUP BY e.rowid
+```
+
+##### Example
+
+```python
+1   try:
+2       try:
+3           raise e1
+4       except e1:
+5           pass
+6       raise e2
+7   except e3:
+8       pass
+9   try:
+10      raise e1
+11  except e1:
+12      pass
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `try_except:e1` | 2-5, 9-12 |
+| `try_except:e3` | 1-8 |
+| `try_raise:e1` | 2-5, 9-12 |
+| `try_raise:e2` | 1-8 |
 
 --------------------------------------------------------------------------------
 

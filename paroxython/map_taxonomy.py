@@ -98,7 +98,7 @@ if __name__ == "__main__":
     for (path, taxons) in taxonomy(programs):
         if not taxons:
             continue
-        width = max(len(" ".join(map(str, taxon.spans))) for taxon in taxons)
+        width = min(40, max(len(" ".join(map(str, taxon.spans))) for taxon in taxons))
         for (name, spans) in taxons:
             span_string = " ".join(map(str, sorted(set(spans))))
             print(f"{span_string:>{width}}\t{name}")

@@ -48,7 +48,6 @@
 - body_recursive_function
 - boolean_operator
 - call_parameter
-- catch_exception
 - chained_assignment
 - chained_comparison
 - closure
@@ -59,6 +58,7 @@
 - conditional_expression
 - deeply_recursive_function
 - divisibility_test
+- except
 - existential_quantifier
 - filter_for
 - filtered_comprehension
@@ -91,7 +91,7 @@
 - negation
 - negative_index
 - nested_function
-- raise_exception
+- raise
 - recursive_function
 - slice
 - slice_step
@@ -100,5 +100,6 @@
 - suggest_condition_return
 - swapping
 - triangular_nested_for
+- try
 - unary_operator
 - universal_quantifier
