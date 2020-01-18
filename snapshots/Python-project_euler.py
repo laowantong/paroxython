@@ -560,7 +560,7 @@ def solution(): # function:solution (-> +7), function_returning_a_value:solution
     for a in range(300): # for:a (-> +6), for_range_stop (-> +6), function_call:range, int_literal, literal:Num, suggest_constant_definition
         for b in range(400): # for:b (-> +5), for_range_stop (-> +5), function_call:range, int_literal, literal:Num, nested_for:1 (-> +5), suggest_constant_definition
             for c in range(500): # for:c (-> +4), for_range_stop (-> +4), function_call:range, int_literal, literal:Num, nested_for:2 (-> +4), suggest_constant_definition
-                if a < b < c: # chained_comparison:2, comparison_operator:Lt, if (-> +3)
+                if a < b < c: # chained_comparison:2, chained_inequalities:2, comparison_operator:Lt, if (-> +3)
                     if (a ** 2) + (b ** 2) == (c ** 2): # binary_operator:Add, binary_operator:Pow, comparison_operator:Eq, if (-> +2), if_then_branch (-> +2), int_literal, literal:Num, nested_if:1 (-> +2)
                         if (a + b + c) == 1000: # binary_operator:Add, comparison_operator:Eq, if (-> +1), if_then_branch (-> +1), int_literal, literal:Num, nested_if:2 (-> +1), suggest_constant_definition
                             return a * b * c # binary_operator:Mult, if_then_branch
@@ -840,7 +840,7 @@ def solution(n): # function:solution (-> +17), function_returning_a_value:soluti
                 count += ones_counts[i // 100] + 7 # assignment_lhs_identifier:count, assignment_rhs_identifier:i, assignment_rhs_identifier:ones_counts, augmented_assignment, binary_operator:Add, binary_operator:FloorDiv, if_then_branch (-> +2), index, index_arithmetic, int_literal, literal:Num, suggest_constant_definition
                 if i % 100 != 0: # binary_operator:Mod, comparison_operator:NotEq, divisibility_test:100, if (-> +1), int_literal, literal:Num, nested_if:2 (-> +1), suggest_constant_definition
                     count += 3 # assignment_lhs_identifier:count, augmented_assignment, if_then_branch, int_literal, literal:Num, suggest_constant_definition
-            if 0 < i % 100 < 20: # binary_operator:Mod, chained_comparison:2, comparison_operator:Lt, if (-> +4), int_literal, literal:Num, nested_if:1 (-> +4), suggest_constant_definition
+            if 0 < i % 100 < 20: # binary_operator:Mod, chained_comparison:2, chained_inequalities:2, comparison_operator:Lt, if (-> +4), int_literal, literal:Num, nested_if:1 (-> +4), suggest_constant_definition
                 count += ones_counts[i % 100] # assignment_lhs_identifier:count, assignment_rhs_identifier:i, assignment_rhs_identifier:ones_counts, augmented_assignment, binary_operator:Mod, if_then_branch, index, index_arithmetic, int_literal, literal:Num, suggest_constant_definition
             else:
                 count += ones_counts[i % 10] # assignment_lhs_identifier:count, assignment_rhs_identifier:i, assignment_rhs_identifier:ones_counts, augmented_assignment, binary_operator:Mod, if_else_branch (-> +1), index, index_arithmetic, int_literal, literal:Num, suggest_constant_definition

@@ -454,7 +454,7 @@ def _check_number_input(n, min_thresh, max_thresh=None): # function:_check_numbe
     try: # try (-> +19), try_except:ValueLessThanZero (-> +19), try_except:ValueTooLargeError (-> +19), try_except:ValueTooSmallError (-> +19), try_raise:ValueLessThanZero (-> +19), try_raise:ValueTooLargeError (-> +19), try_raise:ValueTooSmallError (-> +19)
         if n >= min_thresh and max_thresh is None: # boolean_operator:And, comparison_operator:GtE, comparison_operator:Is, if (-> +9), literal:None
             return True # if_then_branch, literal:True
-        elif min_thresh <= n <= max_thresh: # chained_comparison:2, comparison_operator:LtE, if (-> +7)
+        elif min_thresh <= n <= max_thresh: # chained_comparison:2, chained_inequalities:2, comparison_operator:LtE, if (-> +7)
             return True # if_elif_branch, literal:True
         elif n < 0: # comparison_operator:Lt, if (-> +5), int_literal, literal:Num
             raise ValueLessThanZero # if_elif_branch, raise:ValueLessThanZero
@@ -1315,22 +1315,22 @@ def zeller(date_input: str) -> str: # function:zeller, function_returning_a_valu
         "6": "Saturday", # literal:Str
     }
     convert_datetime_days = {0: 1, 1: 2, 2: 3, 3: 4, 4: 5, 5: 6, 6: 0} # assignment, assignment_lhs_identifier:convert_datetime_days, int_literal, literal:Dict, literal:Num, suggest_constant_definition
-    if not 0 < len(date_input) < 11: # call_parameter:date_input, chained_comparison:2, comparison_operator:Lt, function_call:len, if (-> +1), int_literal, literal:Num, suggest_constant_definition, unary_operator:Not
+    if not 0 < len(date_input) < 11: # call_parameter:date_input, chained_comparison:2, chained_inequalities:2, comparison_operator:Lt, function_call:len, if (-> +1), int_literal, literal:Num, suggest_constant_definition, unary_operator:Not
         raise ValueError("Must be 10 characters long") # function_call:ValueError, if_then_branch, literal:Str, raise:ValueError
     m: int = int(date_input[0] + date_input[1]) # binary_operator:Add, function_call:int, index, int_literal, literal:Num
-    if not 0 < m < 13: # chained_comparison:2, comparison_operator:Lt, if (-> +1), int_literal, literal:Num, suggest_constant_definition, unary_operator:Not
+    if not 0 < m < 13: # chained_comparison:2, chained_inequalities:2, comparison_operator:Lt, if (-> +1), int_literal, literal:Num, suggest_constant_definition, unary_operator:Not
         raise ValueError("Month must be between 1 - 12") # function_call:ValueError, if_then_branch, literal:Str, raise:ValueError
     sep_1: str = date_input[2] # index, int_literal, literal:Num
     if sep_1 not in ["-", "/"]: # comparison_operator:NotIn, if (-> +1), literal:List, literal:Str
         raise ValueError("Date seperator must be '-' or '/'") # function_call:ValueError, if_then_branch, literal:Str, raise:ValueError
     d: int = int(date_input[3] + date_input[4]) # binary_operator:Add, function_call:int, index, int_literal, literal:Num, suggest_constant_definition
-    if not 0 < d < 32: # chained_comparison:2, comparison_operator:Lt, if (-> +1), int_literal, literal:Num, suggest_constant_definition, unary_operator:Not
+    if not 0 < d < 32: # chained_comparison:2, chained_inequalities:2, comparison_operator:Lt, if (-> +1), int_literal, literal:Num, suggest_constant_definition, unary_operator:Not
         raise ValueError("Date must be between 1 - 31") # function_call:ValueError, if_then_branch, literal:Str, raise:ValueError
     sep_2: str = date_input[5] # index, int_literal, literal:Num, suggest_constant_definition
     if sep_2 not in ["-", "/"]: # comparison_operator:NotIn, if (-> +1), literal:List, literal:Str
         raise ValueError("Date seperator must be '-' or '/'") # function_call:ValueError, if_then_branch, literal:Str, raise:ValueError
     y: int = int(date_input[6] + date_input[7] + date_input[8] + date_input[9]) # binary_operator:Add, function_call:int, index, int_literal, literal:Num, suggest_constant_definition
-    if not 45 < y < 8500: # chained_comparison:2, comparison_operator:Lt, if (-> +2), int_literal, literal:Num, suggest_constant_definition, unary_operator:Not
+    if not 45 < y < 8500: # chained_comparison:2, chained_inequalities:2, comparison_operator:Lt, if (-> +2), int_literal, literal:Num, suggest_constant_definition, unary_operator:Not
         raise ValueError( # function_call:ValueError, if_then_branch (-> +1), raise:ValueError
             "Year out of range. There has to be some sort of limit...right?" # literal:Str
         )

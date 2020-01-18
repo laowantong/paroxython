@@ -94,7 +94,7 @@ if __name__ == "__main__":
     generate_labelled_programs = __import__("generate_labels").generate_labelled_programs
     chain = __import__("itertools").chain
     taxonomy = Taxonomy()
-    programs = generate_labelled_programs("../Python/")
+    programs = generate_labelled_programs("../Python/project_euler")
     for (path, taxons) in taxonomy(programs):
         if not taxons:
             continue

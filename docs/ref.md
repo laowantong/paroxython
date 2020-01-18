@@ -18,6 +18,7 @@
       - [Construct `boolean_operator`](#construct-boolean_operator)
       - [Construct `comparison_operator`](#construct-comparison_operator)
       - [Construct `chained_comparison`](#construct-chained_comparison)
+      - [Constructs `chained_equalities|chained_inequalities`](#constructs-chained_equalitieschained_inequalities)
       - [Construct `divisibility_test`](#construct-divisibility_test)
       - [Construct `short_circuit`](#construct-short_circuit)
   - [Calls](#calls)
@@ -77,7 +78,7 @@
       - [Construct `try`](#construct-try)
       - [Construct `raise`](#construct-raise)
       - [Construct `except`](#construct-except)
-      - [Constructs `try_(raise|except)`](#constructs-try_raiseexcept)
+      - [Constructs `try_raise|try_except`](#constructs-try_raisetry_except)
   - [Modules](#modules)
       - [Construct `import_module`](#construct-import_module)
       - [Construct `import_name`](#construct-import_name)
@@ -573,6 +574,50 @@ Match the so-called ternary operator.
 |:--|:--|
 | `chained_comparison:2` | 2 |
 | `chained_comparison:3` | 3 |
+
+--------------------------------------------------------------------------------
+
+#### Constructs `chained_equalities|chained_inequalities`
+
+##### Definition
+
+```sql
+SELECT CASE b.name_suffix
+           WHEN "Eq" THEN "chained_equalities"
+           ELSE "chained_inequalities"
+       END,
+       count(*),
+       span
+FROM t a
+JOIN t b USING (span)
+WHERE a.name_prefix = "chained_comparison"
+  AND b.name_prefix = "comparison_operator"
+  AND b.name_suffix IN ("Eq",
+                        "Lt",
+                        "LtE",
+                        "Gt",
+                        "GtE")
+GROUP BY span,
+         b.name_suffix
+HAVING count(*) > 1
+ORDER BY span
+```
+
+##### Example
+
+```python
+1   a == 1
+2   a == b == c
+3   a < b < c < d
+4   a == b == c and d < e
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `chained_equalities:2` | 2, 4 |
+| `chained_inequalities:3` | 3 |
 
 --------------------------------------------------------------------------------
 
@@ -2433,7 +2478,7 @@ Two nested `for` loops doing the same number of iterations.
 
 --------------------------------------------------------------------------------
 
-#### Constructs `try_(raise|except)`
+#### Constructs `try_raise|try_except`
 
 ##### Definition
 

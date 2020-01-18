@@ -81,10 +81,12 @@ test/belonging/not/	comparison_operator:NotIn
 test/divisibility/	divisibility_test
 test/divisibility/parity/	divisibility_test:2
 test/equality/	comparison_operator:Eq
+test/equality/chained/\1/	chained_equalities:(\d+)
 test/equality/not/	comparison_operator:NotEq
 test/identity/	comparison_operator:Is
 test/identity/not/	comparison_operator:IsNot
 test/inequality/	comparison_operator:(Lt|LtE|Gt|GtE)
+test/inequality/chained/\1/	chained_inequalities:(\d+)
 type/container/dictionary/	literal:Dict
 type/container/list/	literal:List
 type/container/set/	literal:Set
@@ -166,6 +168,3 @@ variable/scope/local
 variable/scope/local/argument	
 variable/scope/outer	
 variable/scope/shadowing	
-
-test/equality/chained	find comparison_chained and two comparison_operator:Eq on the same line?
-test/inequality/chained	idem?
