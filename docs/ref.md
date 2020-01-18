@@ -77,7 +77,7 @@
       - [Construct `try`](#construct-try)
       - [Construct `raise`](#construct-raise)
       - [Construct `except`](#construct-except)
-      - [Construct `try_raise`](#construct-try_raise)
+      - [Constructs `try_(raise|except)`](#constructs-try_raiseexcept)
   - [Modules](#modules)
       - [Construct `import_module`](#construct-import_module)
       - [Construct `import_name`](#construct-import_name)
@@ -2433,7 +2433,7 @@ Two nested `for` loops doing the same number of iterations.
 
 --------------------------------------------------------------------------------
 
-#### Construct `try_raise`
+#### Constructs `try_(raise|except)`
 
 ##### Definition
 

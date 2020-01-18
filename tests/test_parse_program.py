@@ -60,7 +60,7 @@ def reformat_file(construct_path):
 def extract_examples(construct_path):
     text = construct_path.read_text()
     rex = r"""(?msx)
-        ^\#{4}\s+Construct\s+`(.+?)` # capture the label's name
+        ^\#{4}\s+Constructs?\s+`(.+?)` # capture the label's pattern
         .+?\#{5}\s+Example # ensure the next code is in the Example section
         .+?```python\n+(.+?)\n``` # capture the source
         .+?\#{5}\s+Matches.+?^\|:--\|:--\| # ensure the table is in the Matches section
@@ -92,12 +92,12 @@ def test_example(label_name, actual_results, expected_results):
         actual_spans = ", ".join(map(str, actual_results[expected_label_name]))
         assert actual_spans == expected_spans
         keys.discard(expected_label_name)
-    n = len(label_name)
     for expected_label_name in keys:
-        if expected_label_name.partition(":")[0] == label_name:
+        expected_name_prefix = expected_label_name.partition(":")[0]
+        if regex.fullmatch(label_name, expected_name_prefix):
             actual_spans = ", ".join(map(str, actual_results[expected_label_name]))
             message = f"{expected_label_name} unexpectedly appears on {actual_spans}"
-            assert not expected_label_name[n:], message
+            raise AssertionError(message)
 
 
 def test_at_least_one_example_is_provided_for_each_construct():
