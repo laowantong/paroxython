@@ -57,6 +57,7 @@
       - [Construct `closure`](#construct-closure)
   - [Conditionals](#conditionals)
       - [Construct `if`](#construct-if)
+      - [Construct `if_test_id`](#construct-if_test_id)
       - [Construct `if_then_branch`](#construct-if_then_branch)
       - [Construct `if_elif_branch`](#construct-if_elif_branch)
       - [Construct `if_else_branch`](#construct-if_else_branch)
@@ -1715,6 +1716,37 @@ else:
 | Label | Lines |
 |:--|:--|
 | `if` | 1-10, 2-3, 4-10, 5-6, 8-9 |
+
+--------------------------------------------------------------------------------
+
+#### Construct `if_test_id`
+
+Match any identifier present in the condition of an `if` statement.
+
+##### Definition
+
+```re
+           ^(.*)/_type='If'
+\n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
+(
+\n(?:\1.+\n)*?\1/test/.+/id='(?P<SUFFIX>.+)'
+)+
+```
+
+##### Example
+
+```python
+1   if foo(bar) == biz:
+2       pass
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `if_test_id:bar` | 1 |
+| `if_test_id:biz` | 1 |
+| `if_test_id:foo` | 1 |
 
 --------------------------------------------------------------------------------
 

@@ -25,31 +25,31 @@ def solution(n): # function:solution (-> +32), function_returning_a_value:soluti
     num = 0 # assignment, assignment_lhs_identifier:num, int_literal, literal:Num
     while 1: # int_literal, literal:Num, while (-> +28)
         num += 3 # assignment_lhs_identifier:num, augmented_assignment, int_literal, literal:Num, suggest_constant_definition
-        if num >= n: # comparison_operator:GtE, if (-> +1)
+        if num >= n: # comparison_operator:GtE, if (-> +1), if_test_id:n, if_test_id:num
             break # if_then_branch
         sum += num # assignment_lhs_identifier:sum, assignment_rhs_identifier:num, augmented_assignment
         num += 2 # assignment_lhs_identifier:num, augmented_assignment, int_literal, literal:Num
-        if num >= n: # comparison_operator:GtE, if (-> +1)
+        if num >= n: # comparison_operator:GtE, if (-> +1), if_test_id:n, if_test_id:num
             break # if_then_branch
         sum += num # assignment_lhs_identifier:sum, assignment_rhs_identifier:num, augmented_assignment
         num += 1 # assignment_lhs_identifier:num, augmented_assignment, int_literal, literal:Num
-        if num >= n: # comparison_operator:GtE, if (-> +1)
+        if num >= n: # comparison_operator:GtE, if (-> +1), if_test_id:n, if_test_id:num
             break # if_then_branch
         sum += num # assignment_lhs_identifier:sum, assignment_rhs_identifier:num, augmented_assignment
         num += 3 # assignment_lhs_identifier:num, augmented_assignment, int_literal, literal:Num, suggest_constant_definition
-        if num >= n: # comparison_operator:GtE, if (-> +1)
+        if num >= n: # comparison_operator:GtE, if (-> +1), if_test_id:n, if_test_id:num
             break # if_then_branch
         sum += num # assignment_lhs_identifier:sum, assignment_rhs_identifier:num, augmented_assignment
         num += 1 # assignment_lhs_identifier:num, augmented_assignment, int_literal, literal:Num
-        if num >= n: # comparison_operator:GtE, if (-> +1)
+        if num >= n: # comparison_operator:GtE, if (-> +1), if_test_id:n, if_test_id:num
             break # if_then_branch
         sum += num # assignment_lhs_identifier:sum, assignment_rhs_identifier:num, augmented_assignment
         num += 2 # assignment_lhs_identifier:num, augmented_assignment, int_literal, literal:Num
-        if num >= n: # comparison_operator:GtE, if (-> +1)
+        if num >= n: # comparison_operator:GtE, if (-> +1), if_test_id:n, if_test_id:num
             break # if_then_branch
         sum += num # assignment_lhs_identifier:sum, assignment_rhs_identifier:num, augmented_assignment
         num += 3 # assignment_lhs_identifier:num, augmented_assignment, int_literal, literal:Num, suggest_constant_definition
-        if num >= n: # comparison_operator:GtE, if (-> +1)
+        if num >= n: # comparison_operator:GtE, if (-> +1), if_test_id:n, if_test_id:num
             break # if_then_branch
         sum += num # assignment_lhs_identifier:sum, assignment_rhs_identifier:num, augmented_assignment
     return sum
@@ -65,7 +65,7 @@ def solution(n): # function:solution (-> +22), function_returning_a_value:soluti
     temp = 1 # assignment, assignment_lhs_identifier:temp, int_literal, literal:Num
     while True: # literal:True, while (-> +7)
         result = z * temp # assignment, assignment_lhs_identifier:result, assignment_rhs_identifier:temp, assignment_rhs_identifier:z, binary_operator:Mult
-        if result < n: # comparison_operator:Lt, if (-> +5)
+        if result < n: # comparison_operator:Lt, if (-> +5), if_test_id:n, if_test_id:result
             zmulti.append(result) # call_parameter:result, if_then_branch (-> +1), method_call:append, method_call_object:zmulti
             temp += 1 # assignment_lhs_identifier:temp, augmented_assignment, int_literal, literal:Num
         else:
@@ -73,7 +73,7 @@ def solution(n): # function:solution (-> +22), function_returning_a_value:soluti
             break
     while True: # literal:True, while (-> +6)
         result = x * temp # assignment, assignment_lhs_identifier:result, assignment_rhs_identifier:temp, assignment_rhs_identifier:x, binary_operator:Mult
-        if result < n: # comparison_operator:Lt, if (-> +4)
+        if result < n: # comparison_operator:Lt, if (-> +4), if_test_id:n, if_test_id:result
             xmulti.append(result) # call_parameter:result, if_then_branch (-> +1), method_call:append, method_call_object:xmulti
             temp += 1 # assignment_lhs_identifier:temp, augmented_assignment, int_literal, literal:Num
         else:
@@ -94,9 +94,9 @@ def solution(n): # function:solution (-> +9), function_returning_a_value:solutio
     a = 3 # assignment, assignment_lhs_identifier:a, int_literal, literal:Num, suggest_constant_definition
     result = 0 # assignment, assignment_lhs_identifier:result, int_literal, literal:Num
     while a < n: # comparison_operator:Lt, while (-> +5)
-        if a % 3 == 0 or a % 5 == 0: # binary_operator:Mod, boolean_operator:Or, comparison_operator:Eq, divisibility_test:3, divisibility_test:5, if (-> +3), int_literal, literal:Num, suggest_constant_definition
+        if a % 3 == 0 or a % 5 == 0: # binary_operator:Mod, boolean_operator:Or, comparison_operator:Eq, divisibility_test:3, divisibility_test:5, if (-> +3), if_test_id:a, int_literal, literal:Num, suggest_constant_definition
             result += a # assignment_lhs_identifier:result, assignment_rhs_identifier:a, augmented_assignment, if_then_branch
-        elif a % 15 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:15, if (-> +1), int_literal, literal:Num, suggest_constant_definition
+        elif a % 15 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:15, if (-> +1), if_test_id:a, int_literal, literal:Num, suggest_constant_definition
             result -= a # assignment_lhs_identifier:result, assignment_rhs_identifier:a, augmented_assignment, if_elif_branch
         a += 1 # assignment_lhs_identifier:a, augmented_assignment, int_literal, literal:Num
     return result
@@ -107,9 +107,9 @@ def solution(n): # function:solution (-> +9), function_returning_a_value:solutio
 def solution(n): # function:solution (-> +7), function_returning_a_value:solution (-> +7)
     result = 0 # assignment, assignment_lhs_identifier:result, int_literal, literal:Num
     for i in range(n): # accumulate_elements:1 (-> +4), call_parameter:n, for:i (-> +4), for_range_stop (-> +4), function_call:range
-        if i % 3 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:3, if (-> +3), int_literal, literal:Num, suggest_constant_definition
+        if i % 3 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:3, if (-> +3), if_test_id:i, int_literal, literal:Num, suggest_constant_definition
             result += i # assignment_lhs_identifier:result, assignment_rhs_identifier:i, augmented_assignment, if_then_branch
-        elif i % 5 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:5, if (-> +1), int_literal, literal:Num, suggest_constant_definition
+        elif i % 5 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:5, if (-> +1), if_test_id:i, int_literal, literal:Num, suggest_constant_definition
             result += i # assignment_lhs_identifier:result, assignment_rhs_identifier:i, augmented_assignment, if_elif_branch
     return result
 
@@ -121,7 +121,7 @@ def solution(n): # function:solution (-> +8), function_returning_a_value:solutio
     j = 2 # assignment, assignment_lhs_identifier:j, int_literal, literal:Num
     sum = 0 # assignment, assignment_lhs_identifier:sum, int_literal, literal:Num
     while j <= n: # comparison_operator:LtE, while (-> +3)
-        if j % 2 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, if (-> +1), int_literal, literal:Num
+        if j % 2 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, if (-> +1), if_test_id:j, int_literal, literal:Num
             sum += j # assignment_lhs_identifier:sum, assignment_rhs_identifier:j, augmented_assignment, if_then_branch
         i, j = j, i + j # assignment, assignment_lhs_identifier:i, assignment_lhs_identifier:j, assignment_rhs_identifier:i, assignment_rhs_identifier:j, binary_operator:Add
     return sum
@@ -133,7 +133,7 @@ def solution(n): # function:solution (-> +7), function_returning_a_value:solutio
     ls = [] # assignment, assignment_lhs_identifier:ls, literal:List
     a, b = 0, 1 # assignment, assignment_lhs_identifier:a, assignment_lhs_identifier:b, int_literal, literal:Num, literal:Tuple
     while b <= n: # comparison_operator:LtE, while (-> +3)
-        if b % 2 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, if (-> +1), int_literal, literal:Num
+        if b % 2 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, if (-> +1), if_test_id:b, int_literal, literal:Num
             ls.append(b) # call_parameter:b, if_then_branch, method_call:append, method_call_object:ls
         a, b = b, a + b # assignment, assignment_lhs_identifier:a, assignment_lhs_identifier:b, assignment_rhs_identifier:a, assignment_rhs_identifier:b, binary_operator:Add
     return ls
@@ -142,7 +142,7 @@ def solution(n): # function:solution (-> +7), function_returning_a_value:solutio
 # ../Python/project_euler/problem_02/sol3.py
 # ----------------------------------------------------------------------------------------
 def solution(n): # function:solution (-> +9), function_returning_a_value:solution (-> +9)
-    if n <= 1: # comparison_operator:LtE, if (-> +1), int_literal, literal:Num
+    if n <= 1: # comparison_operator:LtE, if (-> +1), if_test_id:n, int_literal, literal:Num
         return 0 # if_then_branch, int_literal, literal:Num
     a = 0 # assignment, assignment_lhs_identifier:a, int_literal, literal:Num
     b = 2 # assignment, assignment_lhs_identifier:b, int_literal, literal:Num
@@ -162,7 +162,7 @@ def solution(n): # function:solution (-> +12), function_returning_a_value:soluti
         n = int(n) # assignment, assignment_lhs_identifier:n, assignment_rhs_identifier:int, assignment_rhs_identifier:n, call_parameter:n, function_call:int
     except (TypeError, ValueError) as e: # except:TypeError, except:ValueError
         raise TypeError("Parameter n must be int or passive of cast to int.") # function_call:TypeError, literal:Str, raise:TypeError
-    if n <= 0: # comparison_operator:LtE, if (-> +1), int_literal, literal:Num
+    if n <= 0: # comparison_operator:LtE, if (-> +1), if_test_id:n, int_literal, literal:Num
         raise ValueError("Parameter n must be greater or equal to one.") # function_call:ValueError, if_then_branch, literal:Str, raise:ValueError
     getcontext().prec = 100 # assignment, function_call:getcontext, int_literal, literal:Num, suggest_constant_definition
     phi = (Decimal(5) ** Decimal(0.5) + 1) / Decimal(2) # assignment, assignment_lhs_identifier:phi, assignment_rhs_identifier:Decimal, binary_operator:Add, binary_operator:Div, binary_operator:Pow, float_literal, function_call:Decimal, int_literal, literal:Num, suggest_constant_definition
@@ -179,12 +179,12 @@ def solution(n): # function:solution (-> +12), function_returning_a_value:soluti
     i = 0 # assignment, assignment_lhs_identifier:i, int_literal, literal:Num
     while a[i] <= n: # comparison_operator:LtE, index, while (-> +4)
         a.append(a[i] + a[i + 1]) # binary_operator:Add, index, index_arithmetic, int_literal, literal:Num, method_call:append, method_call_object:a
-        if a[i + 2] > n: # binary_operator:Add, comparison_operator:Gt, if (-> +1), index, index_arithmetic, int_literal, literal:Num
+        if a[i + 2] > n: # binary_operator:Add, comparison_operator:Gt, if (-> +1), if_test_id:a, if_test_id:i, if_test_id:n, index, index_arithmetic, int_literal, literal:Num
             break # if_then_branch
         i += 1 # assignment_lhs_identifier:i, augmented_assignment, int_literal, literal:Num
     sum = 0 # assignment, assignment_lhs_identifier:sum, int_literal, literal:Num
     for j in range(len(a) - 1): # accumulate_elements:1 (-> +2), binary_operator:Sub, call_parameter:a, composition, for:j (-> +2), for_range_stop (-> +2), function_call:len, function_call:range, int_literal, literal:Num
-        if a[j] % 2 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, if (-> +1), index, int_literal, literal:Num
+        if a[j] % 2 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, if (-> +1), if_test_id:a, if_test_id:j, index, int_literal, literal:Num
             sum += a[j] # assignment_lhs_identifier:sum, assignment_rhs_identifier:a, assignment_rhs_identifier:j, augmented_assignment, if_then_branch, index
     return sum
 
@@ -193,13 +193,13 @@ def solution(n): # function:solution (-> +12), function_returning_a_value:soluti
 # ----------------------------------------------------------------------------------------
 import math # import:math, import_module:math
 def isprime(no): # function:isprime (-> +9), function_returning_a_value:isprime (-> +9)
-    if no == 2: # comparison_operator:Eq, if (-> +3), int_literal, literal:Num
+    if no == 2: # comparison_operator:Eq, if (-> +3), if_test_id:no, int_literal, literal:Num
         return True # if_then_branch, literal:True
-    elif no % 2 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, if (-> +1), int_literal, literal:Num
+    elif no % 2 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, if (-> +1), if_test_id:no, int_literal, literal:Num
         return False # if_elif_branch, literal:False
     sq = int(math.sqrt(no)) + 1 # assignment, assignment_lhs_identifier:sq, assignment_rhs_identifier:int, assignment_rhs_identifier:math, assignment_rhs_identifier:no, binary_operator:Add, call_parameter:no, composition, function_call:int, int_literal, literal:Num, method_call:sqrt
     for i in range(3, sq, 2): # call_parameter:sq, for:i (-> +2), for_range_step:2 (-> +2), function_call:range, int_literal, literal:Num, suggest_constant_definition, universal_quantifier (-> +3)
-        if no % i == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test, if (-> +1), int_literal, literal:Num
+        if no % i == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test, if (-> +1), if_test_id:i, if_test_id:no, int_literal, literal:Num
             return False # if_then_branch, literal:False
     return True # literal:True
 def solution(n): # function:solution (-> +24), function_returning_a_value:solution (-> +24)
@@ -207,24 +207,24 @@ def solution(n): # function:solution (-> +24), function_returning_a_value:soluti
         n = int(n) # assignment, assignment_lhs_identifier:n, assignment_rhs_identifier:int, assignment_rhs_identifier:n, call_parameter:n, function_call:int
     except (TypeError, ValueError) as e: # except:TypeError, except:ValueError
         raise TypeError("Parameter n must be int or passive of cast to int.") # function_call:TypeError, literal:Str, raise:TypeError
-    if n <= 0: # comparison_operator:LtE, if (-> +1), int_literal, literal:Num
+    if n <= 0: # comparison_operator:LtE, if (-> +1), if_test_id:n, int_literal, literal:Num
         raise ValueError("Parameter n must be greater or equal to one.") # function_call:ValueError, if_then_branch, literal:Str, raise:ValueError
     maxNumber = 0 # assignment, assignment_lhs_identifier:maxNumber, int_literal, literal:Num
-    if isprime(n): # call_parameter:n, function_call:isprime, if (-> +16)
+    if isprime(n): # call_parameter:n, function_call:isprime, if (-> +16), if_test_id:isprime, if_test_id:n
         return n # if_then_branch
     else:
         while n % 2 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, evolve_state (-> +1), if_else_branch (-> +13), int_literal, literal:Num, while (-> +1)
             n = n / 2 # assignment, assignment_lhs_identifier:n, assignment_rhs_identifier:n, binary_operator:Div, int_literal, literal:Num, suggest_augmented_assignment
-        if isprime(n): # call_parameter:n, function_call:isprime, if (-> +11), nested_if:1 (-> +11)
+        if isprime(n): # call_parameter:n, function_call:isprime, if (-> +11), if_test_id:isprime, if_test_id:n, nested_if:1 (-> +11)
             return int(n) # call_parameter:n, function_call:int, if_then_branch
         else:
             n1 = int(math.sqrt(n)) + 1 # assignment, assignment_lhs_identifier:n1, assignment_rhs_identifier:int, assignment_rhs_identifier:math, assignment_rhs_identifier:n, binary_operator:Add, call_parameter:n, composition, function_call:int, if_else_branch (-> +8), int_literal, literal:Num, method_call:sqrt
             for i in range(3, n1, 2): # call_parameter:n1, for:i (-> +6), for_range_step:2 (-> +6), function_call:range, int_literal, literal:Num, suggest_constant_definition
-                if n % i == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test, if (-> +5), int_literal, literal:Num, nested_if:2 (-> +5)
-                    if isprime(n / i): # binary_operator:Div, function_call:isprime, if (-> +4), if_then_branch (-> +4), nested_if:3 (-> +4)
+                if n % i == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test, if (-> +5), if_test_id:i, if_test_id:n, int_literal, literal:Num, nested_if:2 (-> +5)
+                    if isprime(n / i): # binary_operator:Div, function_call:isprime, if (-> +4), if_test_id:i, if_test_id:isprime, if_test_id:n, if_then_branch (-> +4), nested_if:3 (-> +4)
                         maxNumber = n / i # assignment, assignment_lhs_identifier:maxNumber, assignment_rhs_identifier:i, assignment_rhs_identifier:n, binary_operator:Div, if_then_branch (-> +1)
                         break
-                    elif isprime(i): # call_parameter:i, function_call:isprime, if (-> +1), nested_if:3 (-> +1)
+                    elif isprime(i): # call_parameter:i, function_call:isprime, if (-> +1), if_test_id:i, if_test_id:isprime, nested_if:3 (-> +1)
                         maxNumber = i # assignment, assignment_lhs_identifier:maxNumber, assignment_rhs_identifier:i, if_elif_branch
             return maxNumber
 
@@ -236,7 +236,7 @@ def solution(n): # function:solution (-> +16), function_returning_a_value:soluti
         n = int(n) # assignment, assignment_lhs_identifier:n, assignment_rhs_identifier:int, assignment_rhs_identifier:n, call_parameter:n, function_call:int
     except (TypeError, ValueError) as e: # except:TypeError, except:ValueError
         raise TypeError("Parameter n must be int or passive of cast to int.") # function_call:TypeError, literal:Str, raise:TypeError
-    if n <= 0: # comparison_operator:LtE, if (-> +1), int_literal, literal:Num
+    if n <= 0: # comparison_operator:LtE, if (-> +1), if_test_id:n, int_literal, literal:Num
         raise ValueError("Parameter n must be greater or equal to one.") # function_call:ValueError, if_then_branch, literal:Str, raise:ValueError
     prime = 1 # assignment, assignment_lhs_identifier:prime, int_literal, literal:Num
     i = 2 # assignment, assignment_lhs_identifier:i, int_literal, literal:Num
@@ -245,7 +245,7 @@ def solution(n): # function:solution (-> +16), function_returning_a_value:soluti
             prime = i # assignment, assignment_lhs_identifier:prime, assignment_rhs_identifier:i
             n //= i # assignment_lhs_identifier:n, assignment_rhs_identifier:i, augmented_assignment
         i += 1 # assignment_lhs_identifier:i, augmented_assignment, int_literal, literal:Num
-    if n > 1: # comparison_operator:Gt, if (-> +1), int_literal, literal:Num
+    if n > 1: # comparison_operator:Gt, if (-> +1), if_test_id:n, int_literal, literal:Num
         prime = n # assignment, assignment_lhs_identifier:prime, assignment_rhs_identifier:n, if_then_branch
     return int(prime) # call_parameter:prime, function_call:int
 
@@ -257,11 +257,11 @@ def solution(n: int) -> int: # function:solution (-> +18), function_returning_a_
         n = int(n) # assignment, assignment_lhs_identifier:n, assignment_rhs_identifier:int, assignment_rhs_identifier:n, call_parameter:n, function_call:int
     except (TypeError, ValueError): # except:TypeError, except:ValueError
         raise TypeError("Parameter n must be int or passive of cast to int.") # function_call:TypeError, literal:Str, raise:TypeError
-    if n <= 0: # comparison_operator:LtE, if (-> +1), int_literal, literal:Num
+    if n <= 0: # comparison_operator:LtE, if (-> +1), if_test_id:n, int_literal, literal:Num
         raise ValueError("Parameter n must be greater or equal to one.") # function_call:ValueError, if_then_branch, literal:Str, raise:ValueError
     i = 2 # assignment, assignment_lhs_identifier:i, int_literal, literal:Num
     ans = 0 # assignment, assignment_lhs_identifier:ans, int_literal, literal:Num
-    if n == 2: # comparison_operator:Eq, if (-> +1), int_literal, literal:Num
+    if n == 2: # comparison_operator:Eq, if (-> +1), if_test_id:n, int_literal, literal:Num
         return 2 # if_then_branch, int_literal, literal:Num
     while n > 2: # comparison_operator:Gt, evolve_state (-> +6), int_literal, literal:Num, while (-> +6)
         while n % i != 0: # binary_operator:Mod, comparison_operator:NotEq, divisibility_test, evolve_state (-> +1), int_literal, literal:Num, while (-> +1)
@@ -278,10 +278,10 @@ def solution(n: int) -> int: # function:solution (-> +18), function_returning_a_
 def solution(n): # function:solution (-> +8), function_returning_a_value:solution (-> +8)
     for number in range(n - 1, 10000, -1): # binary_operator:Sub, find_first_element (-> +6), for:number (-> +7), for_range_step:-1 (-> +7), function_call:range, int_literal, literal:Num, suggest_constant_definition
         strNumber = str(number) # assignment, assignment_lhs_identifier:strNumber, assignment_rhs_identifier:number, assignment_rhs_identifier:str, call_parameter:number, function_call:str
-        if strNumber == strNumber[::-1]: # comparison_operator:Eq, if (-> +5), int_literal, literal:Num, slice_step
+        if strNumber == strNumber[::-1]: # comparison_operator:Eq, if (-> +5), if_test_id:strNumber, int_literal, literal:Num, slice_step
             divisor = 999 # assignment, assignment_lhs_identifier:divisor, if_then_branch (-> +4), int_literal, literal:Num, suggest_constant_definition
             while divisor != 99: # comparison_operator:NotEq, evolve_state (-> +3), int_literal, literal:Num, suggest_constant_definition, while (-> +3)
-                if (number % divisor == 0) and (len(str(int(number / divisor))) == 3): # binary_operator:Div, binary_operator:Mod, boolean_operator:And, comparison_operator:Eq, composition, divisibility_test, function_call:int, function_call:len, function_call:str, if (-> +1), int_literal, literal:Num, nested_if:1 (-> +1), suggest_constant_definition
+                if (number % divisor == 0) and (len(str(int(number / divisor))) == 3): # binary_operator:Div, binary_operator:Mod, boolean_operator:And, comparison_operator:Eq, composition, divisibility_test, function_call:int, function_call:len, function_call:str, if (-> +1), if_test_id:divisor, if_test_id:int, if_test_id:len, if_test_id:number, if_test_id:str, int_literal, literal:Num, nested_if:1 (-> +1), suggest_constant_definition
                     return number # if_then_branch
                 divisor -= 1 # assignment_lhs_identifier:divisor, augmented_assignment, int_literal, literal:Num
 
@@ -293,7 +293,7 @@ def solution(n): # function:solution (-> +7), function_returning_a_value:solutio
     for i in range(999, 99, -1): # accumulate_elements:1 (-> +4), for:i (-> +4), for_range_step:-1 (-> +4), function_call:range, int_literal, literal:Num, square_nested_for (-> +4), suggest_constant_definition
         for j in range(999, 99, -1): # accumulate_elements:1 (-> +3), for:j (-> +3), for_range_step:-1 (-> +3), function_call:range, int_literal, literal:Num, nested_for:1 (-> +3), suggest_constant_definition
             t = str(i * j) # assignment, assignment_lhs_identifier:t, assignment_rhs_identifier:i, assignment_rhs_identifier:j, assignment_rhs_identifier:str, binary_operator:Mult, function_call:str
-            if t == t[::-1] and i * j < n: # binary_operator:Mult, boolean_operator:And, comparison_operator:Eq, comparison_operator:Lt, if (-> +1), int_literal, literal:Num, slice_step
+            if t == t[::-1] and i * j < n: # binary_operator:Mult, boolean_operator:And, comparison_operator:Eq, comparison_operator:Lt, if (-> +1), if_test_id:i, if_test_id:j, if_test_id:n, if_test_id:t, int_literal, literal:Num, slice_step
                 answer = max(answer, i * j) # assignment, assignment_lhs_identifier:answer, assignment_rhs_identifier:answer, assignment_rhs_identifier:i, assignment_rhs_identifier:j, assignment_rhs_identifier:max, binary_operator:Mult, call_parameter:answer, function_call:max, if_then_branch
     return answer
 
@@ -305,18 +305,18 @@ def solution(n): # function:solution (-> +18), function_returning_a_value:soluti
         n = int(n) # assignment, assignment_lhs_identifier:n, assignment_rhs_identifier:int, assignment_rhs_identifier:n, call_parameter:n, function_call:int
     except (TypeError, ValueError) as e: # except:TypeError, except:ValueError
         raise TypeError("Parameter n must be int or passive of cast to int.") # function_call:TypeError, literal:Str, raise:TypeError
-    if n <= 0: # comparison_operator:LtE, if (-> +1), int_literal, literal:Num
+    if n <= 0: # comparison_operator:LtE, if (-> +1), if_test_id:n, int_literal, literal:Num
         raise ValueError("Parameter n must be greater or equal to one.") # function_call:ValueError, if_then_branch, literal:Str, raise:ValueError
     i = 0 # assignment, assignment_lhs_identifier:i, int_literal, literal:Num
     while 1: # int_literal, literal:Num, while (-> +10)
         i += n * (n - 1) # assignment_lhs_identifier:i, assignment_rhs_identifier:n, augmented_assignment, binary_operator:Mult, binary_operator:Sub, int_literal, literal:Num
         nfound = 0 # assignment, assignment_lhs_identifier:nfound, int_literal, literal:Num
         for j in range(2, n): # call_parameter:n, for:j (-> +3), for_range_start (-> +3), function_call:range, int_literal, literal:Num
-            if i % j != 0: # binary_operator:Mod, comparison_operator:NotEq, divisibility_test, if (-> +2), int_literal, literal:Num
+            if i % j != 0: # binary_operator:Mod, comparison_operator:NotEq, divisibility_test, if (-> +2), if_test_id:i, if_test_id:j, int_literal, literal:Num
                 nfound = 1 # assignment, assignment_lhs_identifier:nfound, if_then_branch (-> +1), int_literal, literal:Num
                 break
-        if nfound == 0: # comparison_operator:Eq, if (-> +3), int_literal, literal:Num
-            if i == 0: # comparison_operator:Eq, if (-> +1), if_then_branch (-> +2), int_literal, literal:Num, nested_if:1 (-> +1)
+        if nfound == 0: # comparison_operator:Eq, if (-> +3), if_test_id:nfound, int_literal, literal:Num
+            if i == 0: # comparison_operator:Eq, if (-> +1), if_test_id:i, if_then_branch (-> +2), int_literal, literal:Num, nested_if:1 (-> +1)
                 i = 1 # assignment, assignment_lhs_identifier:i, if_then_branch, int_literal, literal:Num
             return i
 
@@ -376,14 +376,14 @@ def solution(n): # function:solution (-> +3), function_returning_a_value:solutio
 # ----------------------------------------------------------------------------------------
 from math import sqrt # import:math:sqrt, import_module:math, import_name:sqrt
 def isprime(n): # function:isprime (-> +10), function_returning_a_value:isprime (-> +10)
-    if n == 2: # comparison_operator:Eq, if (-> +8), int_literal, literal:Num
+    if n == 2: # comparison_operator:Eq, if (-> +8), if_test_id:n, int_literal, literal:Num
         return True # if_then_branch, literal:True
-    elif n % 2 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, if (-> +6), int_literal, literal:Num
+    elif n % 2 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, if (-> +6), if_test_id:n, int_literal, literal:Num
         return False # if_elif_branch, literal:False
     else:
         sq = int(sqrt(n)) + 1 # assignment, assignment_lhs_identifier:sq, assignment_rhs_identifier:int, assignment_rhs_identifier:n, assignment_rhs_identifier:sqrt, binary_operator:Add, call_parameter:n, composition, function_call:int, function_call:sqrt, if_else_branch (-> +3), int_literal, literal:Num
         for i in range(3, sq, 2): # call_parameter:sq, for:i (-> +2), for_range_step:2 (-> +2), function_call:range, int_literal, literal:Num, suggest_constant_definition
-            if n % i == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test, if (-> +1), int_literal, literal:Num, nested_if:1 (-> +1)
+            if n % i == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test, if (-> +1), if_test_id:i, if_test_id:n, int_literal, literal:Num, nested_if:1 (-> +1)
                 return False # if_then_branch, literal:False
     return True # literal:True
 def solution(n): # function:solution (-> +11), function_returning_a_value:solution (-> +11)
@@ -391,11 +391,11 @@ def solution(n): # function:solution (-> +11), function_returning_a_value:soluti
     j = 1 # assignment, assignment_lhs_identifier:j, int_literal, literal:Num
     while i != n and j < 3: # boolean_operator:And, comparison_operator:Lt, comparison_operator:NotEq, evolve_state (-> +3), int_literal, literal:Num, suggest_constant_definition, while (-> +3)
         j += 1 # assignment_lhs_identifier:j, augmented_assignment, int_literal, literal:Num
-        if isprime(j): # call_parameter:j, function_call:isprime, if (-> +1)
+        if isprime(j): # call_parameter:j, function_call:isprime, if (-> +1), if_test_id:isprime, if_test_id:j
             i += 1 # assignment_lhs_identifier:i, augmented_assignment, if_then_branch, int_literal, literal:Num
     while i != n: # comparison_operator:NotEq, while (-> +3)
         j += 2 # assignment_lhs_identifier:j, augmented_assignment, int_literal, literal:Num
-        if isprime(j): # call_parameter:j, function_call:isprime, if (-> +1)
+        if isprime(j): # call_parameter:j, function_call:isprime, if (-> +1), if_test_id:isprime, if_test_id:j
             i += 1 # assignment_lhs_identifier:i, augmented_assignment, if_then_branch, int_literal, literal:Num
     return j
 
@@ -404,7 +404,7 @@ def solution(n): # function:solution (-> +11), function_returning_a_value:soluti
 # ----------------------------------------------------------------------------------------
 def isprime(number): # function:isprime (-> +4), function_returning_a_value:isprime (-> +4)
     for i in range(2, int(number ** 0.5) + 1): # binary_operator:Add, binary_operator:Pow, composition, float_literal, for:i (-> +2), for_range_start (-> +2), function_call:int, function_call:range, int_literal, literal:Num, suggest_constant_definition, universal_quantifier (-> +3)
-        if number % i == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test, if (-> +1), int_literal, literal:Num
+        if number % i == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test, if (-> +1), if_test_id:i, if_test_id:number, int_literal, literal:Num
             return False # if_then_branch, literal:False
     return True # literal:True
 def solution(n): # function:solution (-> +15), function_returning_a_value:solution (-> +15)
@@ -412,12 +412,12 @@ def solution(n): # function:solution (-> +15), function_returning_a_value:soluti
         n = int(n) # assignment, assignment_lhs_identifier:n, assignment_rhs_identifier:int, assignment_rhs_identifier:n, call_parameter:n, function_call:int
     except (TypeError, ValueError) as e: # except:TypeError, except:ValueError
         raise TypeError("Parameter n must be int or passive of cast to int.") # function_call:TypeError, literal:Str, raise:TypeError
-    if n <= 0: # comparison_operator:LtE, if (-> +1), int_literal, literal:Num
+    if n <= 0: # comparison_operator:LtE, if (-> +1), if_test_id:n, int_literal, literal:Num
         raise ValueError("Parameter n must be greater or equal to one.") # function_call:ValueError, if_then_branch, literal:Str, raise:ValueError
     primes = [] # assignment, assignment_lhs_identifier:primes, literal:List
     num = 2 # assignment, assignment_lhs_identifier:num, int_literal, literal:Num
     while len(primes) < n: # call_parameter:primes, comparison_operator:Lt, function_call:len, while (-> +5)
-        if isprime(num): # call_parameter:num, function_call:isprime, if (-> +4)
+        if isprime(num): # call_parameter:num, function_call:isprime, if (-> +4), if_test_id:isprime, if_test_id:num
             primes.append(num) # call_parameter:num, if_then_branch (-> +1), method_call:append, method_call_object:primes
             num += 1 # assignment_lhs_identifier:num, augmented_assignment, int_literal, literal:Num
         else:
@@ -430,13 +430,13 @@ def solution(n): # function:solution (-> +15), function_returning_a_value:soluti
 import math # import:math, import_module:math
 import itertools # import:itertools, import_module:itertools
 def primeCheck(number): # function:primeCheck (-> +3), function_returning_a_value:primeCheck (-> +3)
-    if number % 2 == 0 and number > 2: # binary_operator:Mod, boolean_operator:And, comparison_operator:Eq, comparison_operator:Gt, divisibility_test:2, if (-> +1), int_literal, literal:Num
+    if number % 2 == 0 and number > 2: # binary_operator:Mod, boolean_operator:And, comparison_operator:Eq, comparison_operator:Gt, divisibility_test:2, if (-> +1), if_test_id:number, int_literal, literal:Num
         return False # if_then_branch, literal:False
     return all(number % i for i in range(3, int(math.sqrt(number)) + 1, 2)) # binary_operator:Add, binary_operator:Mod, call_parameter:number, composition, comprehension:Generator, comprehension_for_count:1, function_call:all, function_call:int, function_call:range, int_literal, literal:Num, method_call:sqrt, suggest_constant_definition
 def prime_generator(): # function:prime_generator (-> +5), generator:prime_generator (-> +5), procedure:prime_generator (-> +5)
     num = 2 # assignment, assignment_lhs_identifier:num, int_literal, literal:Num
     while True: # literal:True, while (-> +3)
-        if primeCheck(num): # call_parameter:num, function_call:primeCheck, if (-> +1)
+        if primeCheck(num): # call_parameter:num, function_call:primeCheck, if (-> +1), if_test_id:num, if_test_id:primeCheck
             yield num # if_then_branch
         num += 1 # assignment_lhs_identifier:num, augmented_assignment, int_literal, literal:Num
 def solution(n): # function:solution (-> +1), function_returning_a_value:solution (-> +1)
@@ -472,7 +472,7 @@ def solution(n): # function:solution (-> +8), function_returning_a_value:solutio
         product = 1 # assignment, assignment_lhs_identifier:product, int_literal, literal:Num
         for j in range(13): # accumulate_elements:1 (-> +1), for:j (-> +1), for_range_stop (-> +1), function_call:range, int_literal, literal:Num, nested_for:1 (-> +1), suggest_constant_definition
             product *= int(n[i + j]) # assignment_lhs_identifier:product, assignment_rhs_identifier:i, assignment_rhs_identifier:int, assignment_rhs_identifier:j, assignment_rhs_identifier:n, augmented_assignment, binary_operator:Add, function_call:int, index, index_arithmetic
-        if product > LargestProduct: # comparison_operator:Gt, if (-> +1)
+        if product > LargestProduct: # comparison_operator:Gt, if (-> +1), if_test_id:LargestProduct, if_test_id:product
             LargestProduct = product # assignment, assignment_lhs_identifier:LargestProduct, assignment_rhs_identifier:product, if_then_branch
     return LargestProduct
 
@@ -544,7 +544,7 @@ def solution(n: str) -> int: # function:solution (-> +12), function_returning_a_
     substr = n[:13] # assignment, assignment_lhs_identifier:substr, assignment_rhs_identifier:n, int_literal, literal:Num, slice, suggest_constant_definition
     cur_index = 13 # assignment, assignment_lhs_identifier:cur_index, int_literal, literal:Num, suggest_constant_definition
     while cur_index < len(n) - 13: # binary_operator:Sub, call_parameter:n, comparison_operator:Lt, function_call:len, int_literal, literal:Num, suggest_constant_definition, while (-> +7)
-        if int(n[cur_index]) >= int(substr[0]): # comparison_operator:GtE, function_call:int, if (-> +6), index, int_literal, literal:Num
+        if int(n[cur_index]) >= int(substr[0]): # comparison_operator:GtE, function_call:int, if (-> +6), if_test_id:cur_index, if_test_id:int, if_test_id:n, if_test_id:substr, index, int_literal, literal:Num
             substr = substr[1:] + n[cur_index] # assignment, assignment_lhs_identifier:substr, assignment_rhs_identifier:cur_index, assignment_rhs_identifier:n, assignment_rhs_identifier:substr, binary_operator:Add, if_then_branch (-> +1), index, int_literal, literal:Num, slice
             cur_index += 1 # assignment_lhs_identifier:cur_index, augmented_assignment, int_literal, literal:Num
         else:
@@ -560,9 +560,9 @@ def solution(): # function:solution (-> +7), function_returning_a_value:solution
     for a in range(300): # for:a (-> +6), for_range_stop (-> +6), function_call:range, int_literal, literal:Num, suggest_constant_definition
         for b in range(400): # for:b (-> +5), for_range_stop (-> +5), function_call:range, int_literal, literal:Num, nested_for:1 (-> +5), suggest_constant_definition
             for c in range(500): # for:c (-> +4), for_range_stop (-> +4), function_call:range, int_literal, literal:Num, nested_for:2 (-> +4), suggest_constant_definition
-                if a < b < c: # chained_comparison:2, chained_inequalities:2, comparison_operator:Lt, if (-> +3)
-                    if (a ** 2) + (b ** 2) == (c ** 2): # binary_operator:Add, binary_operator:Pow, comparison_operator:Eq, if (-> +2), if_then_branch (-> +2), int_literal, literal:Num, nested_if:1 (-> +2)
-                        if (a + b + c) == 1000: # binary_operator:Add, comparison_operator:Eq, if (-> +1), if_then_branch (-> +1), int_literal, literal:Num, nested_if:2 (-> +1), suggest_constant_definition
+                if a < b < c: # chained_comparison:2, chained_inequalities:2, comparison_operator:Lt, if (-> +3), if_test_id:a, if_test_id:b, if_test_id:c
+                    if (a ** 2) + (b ** 2) == (c ** 2): # binary_operator:Add, binary_operator:Pow, comparison_operator:Eq, if (-> +2), if_test_id:a, if_test_id:b, if_test_id:c, if_then_branch (-> +2), int_literal, literal:Num, nested_if:1 (-> +2)
+                        if (a + b + c) == 1000: # binary_operator:Add, comparison_operator:Eq, if (-> +1), if_test_id:a, if_test_id:b, if_test_id:c, if_then_branch (-> +1), int_literal, literal:Num, nested_if:2 (-> +1), suggest_constant_definition
                             return a * b * c # binary_operator:Mult, if_then_branch
 
 # ----------------------------------------------------------------------------------------
@@ -574,9 +574,9 @@ def solution(n): # function:solution (-> +10), function_returning_a_value:soluti
     for a in range(1, n // 3): # binary_operator:FloorDiv, for:a (-> +6), for_range_start (-> +6), function_call:range, int_literal, literal:Num, suggest_constant_definition
         b = (n * n - 2 * a * n) // (2 * n - 2 * a) # assignment, assignment_lhs_identifier:b, assignment_rhs_identifier:a, assignment_rhs_identifier:n, binary_operator:FloorDiv, binary_operator:Mult, binary_operator:Sub, int_literal, literal:Num
         c = n - a - b # assignment, assignment_lhs_identifier:c, assignment_rhs_identifier:a, assignment_rhs_identifier:b, assignment_rhs_identifier:n, binary_operator:Sub
-        if c * c == (a * a + b * b): # binary_operator:Add, binary_operator:Mult, comparison_operator:Eq, if (-> +3)
+        if c * c == (a * a + b * b): # binary_operator:Add, binary_operator:Mult, comparison_operator:Eq, if (-> +3), if_test_id:a, if_test_id:b, if_test_id:c
             d = a * b * c # assignment, assignment_lhs_identifier:d, assignment_rhs_identifier:a, assignment_rhs_identifier:b, assignment_rhs_identifier:c, binary_operator:Mult, if_then_branch (-> +2)
-            if d >= product: # comparison_operator:GtE, if (-> +1), nested_if:1 (-> +1)
+            if d >= product: # comparison_operator:GtE, if (-> +1), if_test_id:d, if_test_id:product, nested_if:1 (-> +1)
                 product = d # assignment, assignment_lhs_identifier:product, assignment_rhs_identifier:d, if_then_branch
     return product
 
@@ -598,16 +598,16 @@ def solution(): # function:solution (-> +7), function_returning_a_value:solution
 from math import sqrt # import:math:sqrt, import_module:math, import_name:sqrt
 def is_prime(n): # function:is_prime (-> +4), function_returning_a_value:is_prime (-> +4)
     for i in range(2, int(sqrt(n)) + 1): # binary_operator:Add, call_parameter:n, composition, for:i (-> +2), for_range_start (-> +2), function_call:int, function_call:range, function_call:sqrt, int_literal, literal:Num, universal_quantifier (-> +3)
-        if n % i == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test, if (-> +1), int_literal, literal:Num
+        if n % i == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test, if (-> +1), if_test_id:i, if_test_id:n, int_literal, literal:Num
             return False # if_then_branch, literal:False
     return True # literal:True
 def sum_of_primes(n): # function:sum_of_primes (-> +8), function_returning_a_value:sum_of_primes (-> +8)
-    if n > 2: # comparison_operator:Gt, if (-> +3), int_literal, literal:Num
+    if n > 2: # comparison_operator:Gt, if (-> +3), if_test_id:n, int_literal, literal:Num
         sumOfPrimes = 2 # assignment, assignment_lhs_identifier:sumOfPrimes, if_then_branch, int_literal, literal:Num
     else:
         return 0 # if_else_branch, int_literal, literal:Num
     for i in range(3, n, 2): # accumulate_elements:1 (-> +2), call_parameter:n, for:i (-> +2), for_range_step:2 (-> +2), function_call:range, int_literal, literal:Num, suggest_constant_definition
-        if is_prime(i): # call_parameter:i, function_call:is_prime, if (-> +1)
+        if is_prime(i): # call_parameter:i, function_call:is_prime, if (-> +1), if_test_id:i, if_test_id:is_prime
             sumOfPrimes += i # assignment_lhs_identifier:sumOfPrimes, assignment_rhs_identifier:i, augmented_assignment, if_then_branch
     return sumOfPrimes
 def solution(n): # function:solution (-> +1), function_returning_a_value:solution (-> +1)
@@ -619,13 +619,13 @@ def solution(n): # function:solution (-> +1), function_returning_a_value:solutio
 import math # import:math, import_module:math
 from itertools import takewhile # import:itertools:takewhile, import_module:itertools, import_name:takewhile
 def primeCheck(number): # function:primeCheck (-> +3), function_returning_a_value:primeCheck (-> +3)
-    if number % 2 == 0 and number > 2: # binary_operator:Mod, boolean_operator:And, comparison_operator:Eq, comparison_operator:Gt, divisibility_test:2, if (-> +1), int_literal, literal:Num
+    if number % 2 == 0 and number > 2: # binary_operator:Mod, boolean_operator:And, comparison_operator:Eq, comparison_operator:Gt, divisibility_test:2, if (-> +1), if_test_id:number, int_literal, literal:Num
         return False # if_then_branch, literal:False
     return all(number % i for i in range(3, int(math.sqrt(number)) + 1, 2)) # binary_operator:Add, binary_operator:Mod, call_parameter:number, composition, comprehension:Generator, comprehension_for_count:1, function_call:all, function_call:int, function_call:range, int_literal, literal:Num, method_call:sqrt, suggest_constant_definition
 def prime_generator(): # function:prime_generator (-> +5), generator:prime_generator (-> +5), procedure:prime_generator (-> +5)
     num = 2 # assignment, assignment_lhs_identifier:num, int_literal, literal:Num
     while True: # literal:True, while (-> +3)
-        if primeCheck(num): # call_parameter:num, function_call:primeCheck, if (-> +1)
+        if primeCheck(num): # call_parameter:num, function_call:primeCheck, if (-> +1), if_test_id:num, if_test_id:primeCheck
             yield num # if_then_branch
         num += 1 # assignment_lhs_identifier:num, augmented_assignment, int_literal, literal:Num
 def solution(n): # function:solution (-> +1), function_returning_a_value:solution (-> +1)
@@ -639,12 +639,12 @@ def prime_sum(n: int) -> int: # function:prime_sum (-> +12), function_returning_
     list_[0] = 1 # assignment, assignment_lhs_identifier:list_, index, int_literal, literal:Num
     list_[1] = 1 # assignment, assignment_lhs_identifier:list_, index, int_literal, literal:Num
     for i in range(2, int(n ** 0.5) + 1): # binary_operator:Add, binary_operator:Pow, composition, float_literal, for:i (-> +3), for_range_start (-> +3), function_call:int, function_call:range, int_literal, literal:Num, suggest_constant_definition
-        if list_[i] == 0: # comparison_operator:Eq, if (-> +2), index, int_literal, literal:Num
+        if list_[i] == 0: # comparison_operator:Eq, if (-> +2), if_test_id:i, if_test_id:list_, index, int_literal, literal:Num
             for j in range(i * i, n + 1, i): # binary_operator:Add, binary_operator:Mult, call_parameter:i, for:j (-> +1), for_range_step (-> +1), function_call:range, if_then_branch (-> +1), int_literal, literal:Num, nested_for:1 (-> +1)
                 list_[j] = 1 # assignment, assignment_lhs_identifier:list_, index, int_literal, literal:Num
     s = 0 # assignment, assignment_lhs_identifier:s, int_literal, literal:Num
     for i in range(n): # accumulate_elements:1 (-> +2), call_parameter:n, for:i (-> +2), for_range_stop (-> +2), function_call:range
-        if list_[i] == 0: # comparison_operator:Eq, if (-> +1), index, int_literal, literal:Num
+        if list_[i] == 0: # comparison_operator:Eq, if (-> +1), if_test_id:i, if_test_id:list_, index, int_literal, literal:Num
             s += i # assignment_lhs_identifier:s, assignment_rhs_identifier:i, augmented_assignment, if_then_branch
     return s
 
@@ -662,14 +662,14 @@ def largest_product(grid): # function:largest_product (-> +27), function_returni
         for j in range(nRows - 3): # binary_operator:Sub, for:j (-> +19), for_range_stop (-> +19), function_call:range, int_literal, literal:Num, nested_for:1 (-> +19), suggest_constant_definition
             vertProduct = grid[j][i] * grid[j + 1][i] * grid[j + 2][i] * grid[j + 3][i] # assignment, assignment_lhs_identifier:vertProduct, assignment_rhs_identifier:grid, assignment_rhs_identifier:i, assignment_rhs_identifier:j, binary_operator:Add, binary_operator:Mult, index, index_arithmetic, int_literal, literal:Num, suggest_constant_definition
             horzProduct = grid[i][j] * grid[i][j + 1] * grid[i][j + 2] * grid[i][j + 3] # assignment, assignment_lhs_identifier:horzProduct, assignment_rhs_identifier:grid, assignment_rhs_identifier:i, assignment_rhs_identifier:j, binary_operator:Add, binary_operator:Mult, index, index_arithmetic, int_literal, literal:Num, suggest_constant_definition
-            if i < nColumns - 3: # binary_operator:Sub, comparison_operator:Lt, if (-> +5), int_literal, literal:Num, suggest_constant_definition
+            if i < nColumns - 3: # binary_operator:Sub, comparison_operator:Lt, if (-> +5), if_test_id:i, if_test_id:nColumns, int_literal, literal:Num, suggest_constant_definition
                 lrDiagProduct = ( # assignment, assignment_lhs_identifier:lrDiagProduct, if_then_branch (-> +4)
                     grid[i][j] # assignment_rhs_identifier:grid, assignment_rhs_identifier:i, assignment_rhs_identifier:j, binary_operator:Mult, index
                     * grid[i + 1][j + 1] # assignment_rhs_identifier:grid, assignment_rhs_identifier:i, assignment_rhs_identifier:j, binary_operator:Add, index, index_arithmetic, int_literal, literal:Num
                     * grid[i + 2][j + 2] # assignment_rhs_identifier:grid, assignment_rhs_identifier:i, assignment_rhs_identifier:j, binary_operator:Add, binary_operator:Mult, index, index_arithmetic, int_literal, literal:Num
                     * grid[i + 3][j + 3] # assignment_rhs_identifier:grid, assignment_rhs_identifier:i, assignment_rhs_identifier:j, binary_operator:Add, binary_operator:Mult, index, index_arithmetic, int_literal, literal:Num, suggest_constant_definition
                 )
-            if i > 2: # comparison_operator:Gt, if (-> +5), int_literal, literal:Num
+            if i > 2: # comparison_operator:Gt, if (-> +5), if_test_id:i, int_literal, literal:Num
                 rlDiagProduct = ( # assignment, assignment_lhs_identifier:rlDiagProduct, if_then_branch (-> +4)
                     grid[i][j] # assignment_rhs_identifier:grid, assignment_rhs_identifier:i, assignment_rhs_identifier:j, binary_operator:Mult, index
                     * grid[i - 1][j + 1] # assignment_rhs_identifier:grid, assignment_rhs_identifier:i, assignment_rhs_identifier:j, binary_operator:Add, binary_operator:Sub, index, index_arithmetic, int_literal, literal:Num
@@ -677,7 +677,7 @@ def largest_product(grid): # function:largest_product (-> +27), function_returni
                     * grid[i - 3][j + 3] # assignment_rhs_identifier:grid, assignment_rhs_identifier:i, assignment_rhs_identifier:j, binary_operator:Add, binary_operator:Mult, binary_operator:Sub, index, index_arithmetic, int_literal, literal:Num, suggest_constant_definition
                 )
             maxProduct = max(vertProduct, horzProduct, lrDiagProduct, rlDiagProduct) # assignment, assignment_lhs_identifier:maxProduct, assignment_rhs_identifier:horzProduct, assignment_rhs_identifier:lrDiagProduct, assignment_rhs_identifier:max, assignment_rhs_identifier:rlDiagProduct, assignment_rhs_identifier:vertProduct, call_parameter:horzProduct, call_parameter:lrDiagProduct, call_parameter:rlDiagProduct, call_parameter:vertProduct, function_call:max
-            if maxProduct > largest: # comparison_operator:Gt, if (-> +1)
+            if maxProduct > largest: # comparison_operator:Gt, if (-> +1), if_test_id:largest, if_test_id:maxProduct
                 largest = maxProduct # assignment, assignment_lhs_identifier:largest, assignment_rhs_identifier:maxProduct, if_then_branch
     return largest
 def solution(): # function:solution (-> +6), function_returning_a_value:solution (-> +6)
@@ -701,22 +701,22 @@ def solution(): # function:solution (-> +26), function_returning_a_value:solutio
         for i in range(20): # for:i (-> +4), for_range_stop (-> +4), function_call:range, int_literal, literal:Num, suggest_constant_definition
             for j in range(17): # for:j (-> +3), for_range_stop (-> +3), function_call:range, int_literal, literal:Num, nested_for:1 (-> +3), suggest_constant_definition
                 temp = l[i][j] * l[i][j + 1] * l[i][j + 2] * l[i][j + 3] # assignment, assignment_lhs_identifier:temp, assignment_rhs_identifier:i, assignment_rhs_identifier:j, assignment_rhs_identifier:l, binary_operator:Add, binary_operator:Mult, index, index_arithmetic, int_literal, literal:Num, suggest_constant_definition
-                if temp > maximum: # comparison_operator:Gt, if (-> +1)
+                if temp > maximum: # comparison_operator:Gt, if (-> +1), if_test_id:maximum, if_test_id:temp
                     maximum = temp # assignment, assignment_lhs_identifier:maximum, assignment_rhs_identifier:temp, if_then_branch
         for i in range(17): # for:i (-> +4), for_range_stop (-> +4), function_call:range, int_literal, literal:Num, suggest_constant_definition
             for j in range(20): # for:j (-> +3), for_range_stop (-> +3), function_call:range, int_literal, literal:Num, nested_for:1 (-> +3), suggest_constant_definition
                 temp = l[i][j] * l[i + 1][j] * l[i + 2][j] * l[i + 3][j] # assignment, assignment_lhs_identifier:temp, assignment_rhs_identifier:i, assignment_rhs_identifier:j, assignment_rhs_identifier:l, binary_operator:Add, binary_operator:Mult, index, index_arithmetic, int_literal, literal:Num, suggest_constant_definition
-                if temp > maximum: # comparison_operator:Gt, if (-> +1)
+                if temp > maximum: # comparison_operator:Gt, if (-> +1), if_test_id:maximum, if_test_id:temp
                     maximum = temp # assignment, assignment_lhs_identifier:maximum, assignment_rhs_identifier:temp, if_then_branch
         for i in range(17): # for:i (-> +4), for_range_stop (-> +4), function_call:range, int_literal, literal:Num, square_nested_for (-> +4), suggest_constant_definition
             for j in range(17): # for:j (-> +3), for_range_stop (-> +3), function_call:range, int_literal, literal:Num, nested_for:1 (-> +3), suggest_constant_definition
                 temp = l[i][j] * l[i + 1][j + 1] * l[i + 2][j + 2] * l[i + 3][j + 3] # assignment, assignment_lhs_identifier:temp, assignment_rhs_identifier:i, assignment_rhs_identifier:j, assignment_rhs_identifier:l, binary_operator:Add, binary_operator:Mult, index, index_arithmetic, int_literal, literal:Num, suggest_constant_definition
-                if temp > maximum: # comparison_operator:Gt, if (-> +1)
+                if temp > maximum: # comparison_operator:Gt, if (-> +1), if_test_id:maximum, if_test_id:temp
                     maximum = temp # assignment, assignment_lhs_identifier:maximum, assignment_rhs_identifier:temp, if_then_branch
         for i in range(17): # for:i (-> +4), for_range_stop (-> +4), function_call:range, int_literal, literal:Num, suggest_constant_definition
             for j in range(3, 20): # for:j (-> +3), for_range_start (-> +3), function_call:range, int_literal, literal:Num, nested_for:1 (-> +3), suggest_constant_definition
                 temp = l[i][j] * l[i + 1][j - 1] * l[i + 2][j - 2] * l[i + 3][j - 3] # assignment, assignment_lhs_identifier:temp, assignment_rhs_identifier:i, assignment_rhs_identifier:j, assignment_rhs_identifier:l, binary_operator:Add, binary_operator:Mult, binary_operator:Sub, index, index_arithmetic, int_literal, literal:Num, suggest_constant_definition
-                if temp > maximum: # comparison_operator:Gt, if (-> +1)
+                if temp > maximum: # comparison_operator:Gt, if (-> +1), if_test_id:maximum, if_test_id:temp
                     maximum = temp # assignment, assignment_lhs_identifier:maximum, assignment_rhs_identifier:temp, if_then_branch
         return maximum
 
@@ -727,9 +727,9 @@ from math import sqrt # import:math:sqrt, import_module:math, import_name:sqrt
 def count_divisors(n): # function:count_divisors (-> +7), function_returning_a_value:count_divisors (-> +7)
     nDivisors = 0 # assignment, assignment_lhs_identifier:nDivisors, int_literal, literal:Num
     for i in range(1, int(sqrt(n)) + 1): # binary_operator:Add, call_parameter:n, composition, for:i (-> +2), for_range_start (-> +2), function_call:int, function_call:range, function_call:sqrt, int_literal, literal:Num
-        if n % i == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test, if (-> +1), int_literal, literal:Num
+        if n % i == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test, if (-> +1), if_test_id:i, if_test_id:n, int_literal, literal:Num
             nDivisors += 2 # assignment_lhs_identifier:nDivisors, augmented_assignment, if_then_branch, int_literal, literal:Num
-    if n ** 0.5 == int(n ** 0.5): # binary_operator:Pow, comparison_operator:Eq, float_literal, function_call:int, if (-> +1), literal:Num, suggest_constant_definition
+    if n ** 0.5 == int(n ** 0.5): # binary_operator:Pow, comparison_operator:Eq, float_literal, function_call:int, if (-> +1), if_test_id:int, if_test_id:n, literal:Num, suggest_constant_definition
         nDivisors -= 1 # assignment_lhs_identifier:nDivisors, augmented_assignment, if_then_branch, int_literal, literal:Num
     return nDivisors
 def solution(): # function:solution (-> +8), function_returning_a_value:solution (-> +8)
@@ -738,7 +738,7 @@ def solution(): # function:solution (-> +8), function_returning_a_value:solution
     while True: # literal:True, while (-> +4)
         i += 1 # assignment_lhs_identifier:i, augmented_assignment, int_literal, literal:Num
         tNum += i # assignment_lhs_identifier:tNum, assignment_rhs_identifier:i, augmented_assignment
-        if count_divisors(tNum) > 500: # call_parameter:tNum, comparison_operator:Gt, function_call:count_divisors, if (-> +1), int_literal, literal:Num, suggest_constant_definition
+        if count_divisors(tNum) > 500: # call_parameter:tNum, comparison_operator:Gt, function_call:count_divisors, if (-> +1), if_test_id:count_divisors, if_test_id:tNum, int_literal, literal:Num, suggest_constant_definition
             break # if_then_branch
     return tNum
 
@@ -769,13 +769,13 @@ def solution(n): # function:solution (-> +16), function_returning_a_value:soluti
         counter = 1 # assignment, assignment_lhs_identifier:counter, int_literal, literal:Num
         number = input1 # assignment, assignment_lhs_identifier:number, assignment_rhs_identifier:input1
         while number > 1: # comparison_operator:Gt, evolve_state (-> +6), int_literal, literal:Num, while (-> +6)
-            if number % 2 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, if (-> +5), int_literal, literal:Num
+            if number % 2 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, if (-> +5), if_test_id:number, int_literal, literal:Num
                 number /= 2 # assignment_lhs_identifier:number, augmented_assignment, if_then_branch (-> +1), int_literal, literal:Num
                 counter += 1 # assignment_lhs_identifier:counter, augmented_assignment, int_literal, literal:Num
             else:
                 number = (3 * number) + 1 # assignment, assignment_lhs_identifier:number, assignment_rhs_identifier:number, binary_operator:Add, binary_operator:Mult, if_else_branch (-> +1), int_literal, literal:Num, suggest_constant_definition
                 counter += 1 # assignment_lhs_identifier:counter, augmented_assignment, int_literal, literal:Num
-        if counter > pre_counter: # comparison_operator:Gt, if (-> +2)
+        if counter > pre_counter: # comparison_operator:Gt, if (-> +2), if_test_id:counter, if_test_id:pre_counter
             largest_number = input1 # assignment, assignment_lhs_identifier:largest_number, assignment_rhs_identifier:input1, if_then_branch (-> +1)
             pre_counter = counter # assignment, assignment_lhs_identifier:pre_counter, assignment_rhs_identifier:counter
     return {"counter": pre_counter, "largest_number": largest_number} # literal:Str
@@ -786,7 +786,7 @@ def solution(n): # function:solution (-> +16), function_returning_a_value:soluti
 def collatz_sequence(n): # function:collatz_sequence (-> +8), function_returning_a_value:collatz_sequence (-> +8)
     sequence = [n] # assignment, assignment_lhs_identifier:sequence, assignment_rhs_identifier:n
     while n != 1: # comparison_operator:NotEq, evolve_state (-> +5), int_literal, literal:Num, while (-> +5)
-        if n % 2 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, if (-> +3), int_literal, literal:Num
+        if n % 2 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, if (-> +3), if_test_id:n, int_literal, literal:Num
             n //= 2 # assignment_lhs_identifier:n, augmented_assignment, if_then_branch, int_literal, literal:Num
         else:
             n = 3 * n + 1 # assignment, assignment_lhs_identifier:n, assignment_rhs_identifier:n, binary_operator:Add, binary_operator:Mult, if_else_branch, int_literal, literal:Num, suggest_constant_definition
@@ -835,12 +835,12 @@ def solution(n): # function:solution (-> +17), function_returning_a_value:soluti
     tens_counts = [0, 0, 6, 6, 5, 5, 5, 7, 6, 6] # assignment, assignment_lhs_identifier:tens_counts, int_literal, literal:List, literal:Num, suggest_constant_definition
     count = 0 # assignment, assignment_lhs_identifier:count, int_literal, literal:Num
     for i in range(1, n + 1): # accumulate_elements:1 (-> +12), binary_operator:Add, for:i (-> +12), for_range_start (-> +12), function_call:range, int_literal, literal:Num
-        if i < 1000: # comparison_operator:Lt, if (-> +11), int_literal, literal:Num, suggest_constant_definition
-            if i >= 100: # comparison_operator:GtE, if (-> +3), if_then_branch (-> +8), int_literal, literal:Num, nested_if:1 (-> +3), suggest_constant_definition
+        if i < 1000: # comparison_operator:Lt, if (-> +11), if_test_id:i, int_literal, literal:Num, suggest_constant_definition
+            if i >= 100: # comparison_operator:GtE, if (-> +3), if_test_id:i, if_then_branch (-> +8), int_literal, literal:Num, nested_if:1 (-> +3), suggest_constant_definition
                 count += ones_counts[i // 100] + 7 # assignment_lhs_identifier:count, assignment_rhs_identifier:i, assignment_rhs_identifier:ones_counts, augmented_assignment, binary_operator:Add, binary_operator:FloorDiv, if_then_branch (-> +2), index, index_arithmetic, int_literal, literal:Num, suggest_constant_definition
-                if i % 100 != 0: # binary_operator:Mod, comparison_operator:NotEq, divisibility_test:100, if (-> +1), int_literal, literal:Num, nested_if:2 (-> +1), suggest_constant_definition
+                if i % 100 != 0: # binary_operator:Mod, comparison_operator:NotEq, divisibility_test:100, if (-> +1), if_test_id:i, int_literal, literal:Num, nested_if:2 (-> +1), suggest_constant_definition
                     count += 3 # assignment_lhs_identifier:count, augmented_assignment, if_then_branch, int_literal, literal:Num, suggest_constant_definition
-            if 0 < i % 100 < 20: # binary_operator:Mod, chained_comparison:2, chained_inequalities:2, comparison_operator:Lt, if (-> +4), int_literal, literal:Num, nested_if:1 (-> +4), suggest_constant_definition
+            if 0 < i % 100 < 20: # binary_operator:Mod, chained_comparison:2, chained_inequalities:2, comparison_operator:Lt, if (-> +4), if_test_id:i, int_literal, literal:Num, nested_if:1 (-> +4), suggest_constant_definition
                 count += ones_counts[i % 100] # assignment_lhs_identifier:count, assignment_rhs_identifier:i, assignment_rhs_identifier:ones_counts, augmented_assignment, binary_operator:Mod, if_then_branch, index, index_arithmetic, int_literal, literal:Num, suggest_constant_definition
             else:
                 count += ones_counts[i % 10] # assignment_lhs_identifier:count, assignment_rhs_identifier:i, assignment_rhs_identifier:ones_counts, augmented_assignment, binary_operator:Mod, if_else_branch (-> +1), index, index_arithmetic, int_literal, literal:Num, suggest_constant_definition
@@ -861,11 +861,11 @@ def solution(): # function:solution (-> +17), function_returning_a_value:solutio
     a = [[int(y) for y in x.rstrip("\r\n").split(" ")] for x in triangle] # assignment, assignment_lhs_identifier:a, assignment_rhs_identifier:int, assignment_rhs_identifier:triangle, assignment_rhs_identifier:x, assignment_rhs_identifier:y, call_parameter:y, comprehension:List, comprehension_for_count:1, function_call:int, literal:Str, method_call:rstrip, method_call:split, method_call_object:x, method_chaining
     for i in range(1, len(a)): # call_parameter:a, composition, for:i (-> +10), for_range_start (-> +10), function_call:len, function_call:range, int_literal, literal:Num
         for j in range(len(a[i])): # composition, for:j (-> +9), for_indexes (-> +9), for_range_stop (-> +9), function_call:len, function_call:range, index, nested_for:1 (-> +9)
-            if j != len(a[i - 1]): # binary_operator:Sub, comparison_operator:NotEq, function_call:len, if (-> +3), index, index_arithmetic, int_literal, literal:Num, suggest_conditional_expression (-> +3)
+            if j != len(a[i - 1]): # binary_operator:Sub, comparison_operator:NotEq, function_call:len, if (-> +3), if_test_id:a, if_test_id:i, if_test_id:j, if_test_id:len, index, index_arithmetic, int_literal, literal:Num, suggest_conditional_expression (-> +3)
                 number1 = a[i - 1][j] # assignment, assignment_lhs_identifier:number1, assignment_rhs_identifier:a, assignment_rhs_identifier:i, assignment_rhs_identifier:j, binary_operator:Sub, if_then_branch, index, index_arithmetic, int_literal, literal:Num
             else:
                 number1 = 0 # assignment, assignment_lhs_identifier:number1, if_else_branch, int_literal, literal:Num
-            if j > 0: # comparison_operator:Gt, if (-> +3), int_literal, literal:Num, suggest_conditional_expression (-> +3)
+            if j > 0: # comparison_operator:Gt, if (-> +3), if_test_id:j, int_literal, literal:Num, suggest_conditional_expression (-> +3)
                 number2 = a[i - 1][j - 1] # assignment, assignment_lhs_identifier:number2, assignment_rhs_identifier:a, assignment_rhs_identifier:i, assignment_rhs_identifier:j, binary_operator:Sub, if_then_branch, index, index_arithmetic, int_literal, literal:Num
             else:
                 number2 = 0 # assignment, assignment_lhs_identifier:number2, if_else_branch, int_literal, literal:Num
@@ -883,21 +883,21 @@ def solution(): # function:solution (-> +24), function_returning_a_value:solutio
     sundays = 0 # assignment, assignment_lhs_identifier:sundays, int_literal, literal:Num
     while year < 2001: # comparison_operator:Lt, evolve_state (-> +17), int_literal, literal:Num, suggest_constant_definition, while (-> +17)
         day += 7 # assignment_lhs_identifier:day, augmented_assignment, int_literal, literal:Num, suggest_constant_definition
-        if (year % 4 == 0 and not year % 100 == 0) or (year % 400 == 0): # binary_operator:Mod, boolean_operator:And, boolean_operator:Or, comparison_operator:Eq, divisibility_test:100, divisibility_test:4, divisibility_test:400, if (-> +10), int_literal, literal:Num, suggest_constant_definition, unary_operator:Not
-            if day > days_per_month[month - 1] and month != 2: # binary_operator:Sub, boolean_operator:And, comparison_operator:Gt, comparison_operator:NotEq, if (-> +5), if_then_branch (-> +5), index, index_arithmetic, int_literal, literal:Num, nested_if:1 (-> +5)
+        if (year % 4 == 0 and not year % 100 == 0) or (year % 400 == 0): # binary_operator:Mod, boolean_operator:And, boolean_operator:Or, comparison_operator:Eq, divisibility_test:100, divisibility_test:4, divisibility_test:400, if (-> +10), if_test_id:year, int_literal, literal:Num, suggest_constant_definition, unary_operator:Not
+            if day > days_per_month[month - 1] and month != 2: # binary_operator:Sub, boolean_operator:And, comparison_operator:Gt, comparison_operator:NotEq, if (-> +5), if_test_id:day, if_test_id:days_per_month, if_test_id:month, if_then_branch (-> +5), index, index_arithmetic, int_literal, literal:Num, nested_if:1 (-> +5)
                 month += 1 # assignment_lhs_identifier:month, augmented_assignment, if_then_branch (-> +1), int_literal, literal:Num
                 day = day - days_per_month[month - 2] # assignment, assignment_lhs_identifier:day, assignment_rhs_identifier:day, assignment_rhs_identifier:days_per_month, assignment_rhs_identifier:month, binary_operator:Sub, index, index_arithmetic, int_literal, literal:Num, suggest_augmented_assignment
-            elif day > 29 and month == 2: # boolean_operator:And, comparison_operator:Eq, comparison_operator:Gt, if (-> +2), int_literal, literal:Num, nested_if:1 (-> +2), suggest_constant_definition
+            elif day > 29 and month == 2: # boolean_operator:And, comparison_operator:Eq, comparison_operator:Gt, if (-> +2), if_test_id:day, if_test_id:month, int_literal, literal:Num, nested_if:1 (-> +2), suggest_constant_definition
                 month += 1 # assignment_lhs_identifier:month, augmented_assignment, if_elif_branch (-> +1), int_literal, literal:Num
                 day = day - 29 # assignment, assignment_lhs_identifier:day, assignment_rhs_identifier:day, binary_operator:Sub, int_literal, literal:Num, suggest_augmented_assignment, suggest_constant_definition
         else:
-            if day > days_per_month[month - 1]: # binary_operator:Sub, comparison_operator:Gt, if (-> +2), index, index_arithmetic, int_literal, literal:Num
+            if day > days_per_month[month - 1]: # binary_operator:Sub, comparison_operator:Gt, if (-> +2), if_test_id:day, if_test_id:days_per_month, if_test_id:month, index, index_arithmetic, int_literal, literal:Num
                 month += 1 # assignment_lhs_identifier:month, augmented_assignment, if_elif_branch (-> +1), int_literal, literal:Num
                 day = day - days_per_month[month - 2] # assignment, assignment_lhs_identifier:day, assignment_rhs_identifier:day, assignment_rhs_identifier:days_per_month, assignment_rhs_identifier:month, binary_operator:Sub, index, index_arithmetic, int_literal, literal:Num, suggest_augmented_assignment
-        if month > 12: # comparison_operator:Gt, if (-> +2), int_literal, literal:Num, suggest_constant_definition
+        if month > 12: # comparison_operator:Gt, if (-> +2), if_test_id:month, int_literal, literal:Num, suggest_constant_definition
             year += 1 # assignment_lhs_identifier:year, augmented_assignment, if_then_branch (-> +1), int_literal, literal:Num
             month = 1 # assignment, assignment_lhs_identifier:month, int_literal, literal:Num
-        if year < 2001 and day == 1: # boolean_operator:And, comparison_operator:Eq, comparison_operator:Lt, if (-> +1), int_literal, literal:Num, suggest_constant_definition
+        if year < 2001 and day == 1: # boolean_operator:And, comparison_operator:Eq, comparison_operator:Lt, if (-> +1), if_test_id:day, if_test_id:year, int_literal, literal:Num, suggest_constant_definition
             sundays += 1 # assignment_lhs_identifier:sundays, augmented_assignment, if_then_branch, int_literal, literal:Num
     return sundays
 
@@ -954,9 +954,9 @@ from math import sqrt # import:math:sqrt, import_module:math, import_name:sqrt
 def sum_of_divisors(n): # function:sum_of_divisors (-> +7), function_returning_a_value:sum_of_divisors (-> +7)
     total = 0 # assignment, assignment_lhs_identifier:total, int_literal, literal:Num
     for i in range(1, int(sqrt(n) + 1)): # accumulate_elements:1 (-> +4), binary_operator:Add, call_parameter:n, composition, for:i (-> +4), for_range_start (-> +4), function_call:int, function_call:range, function_call:sqrt, int_literal, literal:Num
-        if n % i == 0 and i != sqrt(n): # binary_operator:Mod, boolean_operator:And, call_parameter:n, comparison_operator:Eq, comparison_operator:NotEq, divisibility_test, function_call:sqrt, if (-> +3), int_literal, literal:Num
+        if n % i == 0 and i != sqrt(n): # binary_operator:Mod, boolean_operator:And, call_parameter:n, comparison_operator:Eq, comparison_operator:NotEq, divisibility_test, function_call:sqrt, if (-> +3), if_test_id:i, if_test_id:n, if_test_id:sqrt, int_literal, literal:Num
             total += i + n // i # assignment_lhs_identifier:total, assignment_rhs_identifier:i, assignment_rhs_identifier:n, augmented_assignment, binary_operator:Add, binary_operator:FloorDiv, if_then_branch
-        elif i == sqrt(n): # call_parameter:n, comparison_operator:Eq, function_call:sqrt, if (-> +1)
+        elif i == sqrt(n): # call_parameter:n, comparison_operator:Eq, function_call:sqrt, if (-> +1), if_test_id:i, if_test_id:n, if_test_id:sqrt
             total += i # assignment_lhs_identifier:total, assignment_rhs_identifier:i, augmented_assignment, if_elif_branch
     return total - n # binary_operator:Sub
 def solution(n): # function:solution (-> +8), function_returning_a_value:solution (-> +8)
@@ -1017,9 +1017,9 @@ def solution(limit=28123): # function:solution (-> +13), function_returning_a_va
     abundants = set() # assignment, assignment_lhs_identifier:abundants, assignment_rhs_identifier:set, function_call:set
     res = 0 # assignment, assignment_lhs_identifier:res, int_literal, literal:Num
     for n in range(1, limit + 1): # accumulate_elements:2 (-> +4), binary_operator:Add, for:n (-> +4), for_range_start (-> +4), function_call:range, int_literal, literal:Num
-        if sumDivs[n] > n: # comparison_operator:Gt, if (-> +1), index
+        if sumDivs[n] > n: # comparison_operator:Gt, if (-> +1), if_test_id:n, if_test_id:sumDivs, index
             abundants.add(n) # call_parameter:n, if_then_branch, method_call:add, method_call_object:abundants
-        if not any((n - a in abundants) for a in abundants): # binary_operator:Sub, comparison_operator:In, comprehension:Generator, comprehension_for_count:1, function_call:any, if (-> +1), unary_operator:Not
+        if not any((n - a in abundants) for a in abundants): # binary_operator:Sub, comparison_operator:In, comprehension:Generator, comprehension_for_count:1, function_call:any, if (-> +1), if_test_id:a, if_test_id:abundants, if_test_id:any, if_test_id:n, unary_operator:Not
             res += n # assignment_lhs_identifier:res, assignment_rhs_identifier:n, augmented_assignment, if_then_branch
     return res
 
@@ -1027,11 +1027,11 @@ def solution(limit=28123): # function:solution (-> +13), function_returning_a_va
 # ../Python/project_euler/problem_234/sol1.py
 # ----------------------------------------------------------------------------------------
 def fib(a, b, n): # function:fib (-> +13), function_returning_a_value:fib (-> +13)
-    if n == 1: # comparison_operator:Eq, if (-> +5), int_literal, literal:Num
+    if n == 1: # comparison_operator:Eq, if (-> +5), if_test_id:n, int_literal, literal:Num
         return a # if_then_branch
-    elif n == 2: # comparison_operator:Eq, if (-> +3), int_literal, literal:Num
+    elif n == 2: # comparison_operator:Eq, if (-> +3), if_test_id:n, int_literal, literal:Num
         return b # if_elif_branch
-    elif n == 3: # comparison_operator:Eq, if (-> +1), int_literal, literal:Num, suggest_constant_definition
+    elif n == 3: # comparison_operator:Eq, if (-> +1), if_test_id:n, int_literal, literal:Num, suggest_constant_definition
         return str(a) + str(b) # binary_operator:Add, call_parameter:a, call_parameter:b, function_call:str, if_elif_branch
     temp = 0 # assignment, assignment_lhs_identifier:temp, int_literal, literal:Num
     for x in range(2, n): # call_parameter:n, for:x (-> +4), for_range_start (-> +4), function_call:range, int_literal, literal:Num
@@ -1046,7 +1046,7 @@ def solution(n): # function:solution (-> +11), function_returning_a_value:soluti
         l = [i for i in input().split()] # assignment, assignment_lhs_identifier:l, assignment_rhs_identifier:i, assignment_rhs_identifier:input, comprehension:List, comprehension_for_count:1, function_call:input, method_call:split
         c2 = 1 # assignment, assignment_lhs_identifier:c2, int_literal, literal:Num
         while 1: # int_literal, literal:Num, while (-> +4)
-            if len(fib(l[0], l[1], c2)) < int(l[2]): # call_parameter:c2, comparison_operator:Lt, composition, function_call:fib, function_call:int, function_call:len, if (-> +3), index, int_literal, literal:Num
+            if len(fib(l[0], l[1], c2)) < int(l[2]): # call_parameter:c2, comparison_operator:Lt, composition, function_call:fib, function_call:int, function_call:len, if (-> +3), if_test_id:c2, if_test_id:fib, if_test_id:int, if_test_id:l, if_test_id:len, index, int_literal, literal:Num
                 c2 += 1 # assignment_lhs_identifier:c2, augmented_assignment, if_then_branch, int_literal, literal:Num
             else:
                 break # if_else_branch
@@ -1065,9 +1065,9 @@ def solution(): # function:solution (-> +2), function_returning_a_value:solution
 # ../Python/project_euler/problem_25/sol1.py
 # ----------------------------------------------------------------------------------------
 def fibonacci(n): # function:fibonacci (-> +9), function_returning_a_value:fibonacci (-> +9)
-    if n == 1 or type(n) is not int: # boolean_operator:Or, call_parameter:n, comparison_operator:Eq, comparison_operator:IsNot, function_call:type, if (-> +8), int_literal, literal:Num
+    if n == 1 or type(n) is not int: # boolean_operator:Or, call_parameter:n, comparison_operator:Eq, comparison_operator:IsNot, function_call:type, if (-> +8), if_test_id:int, if_test_id:n, if_test_id:type, int_literal, literal:Num
         return 0 # if_then_branch, int_literal, literal:Num
-    elif n == 2: # comparison_operator:Eq, if (-> +6), int_literal, literal:Num
+    elif n == 2: # comparison_operator:Eq, if (-> +6), if_test_id:n, int_literal, literal:Num
         return 1 # if_elif_branch, int_literal, literal:Num
     else:
         sequence = [0, 1] # assignment, assignment_lhs_identifier:sequence, if_else_branch (-> +3), int_literal, literal:List, literal:Num
@@ -1112,7 +1112,7 @@ def solution(n): # function:solution (-> +12), function_returning_a_value:soluti
         index += 1 # assignment_lhs_identifier:index, augmented_assignment, int_literal, literal:Num
         for j in str(f): # call_parameter:f, for:j (-> +1), function_call:str
             i += 1 # assignment_lhs_identifier:i, augmented_assignment, int_literal, literal:Num
-        if i == n: # comparison_operator:Eq, if (-> +1)
+        if i == n: # comparison_operator:Eq, if (-> +1), if_test_id:i, if_test_id:n
             break # if_then_branch
     return index
 
@@ -1121,26 +1121,26 @@ def solution(n): # function:solution (-> +12), function_returning_a_value:soluti
 # ----------------------------------------------------------------------------------------
 import math # import:math, import_module:math
 def is_prime(k: int) -> bool: # function:is_prime (-> +9), function_returning_a_value:is_prime (-> +9)
-    if k < 2 or k % 2 == 0: # binary_operator:Mod, boolean_operator:Or, comparison_operator:Eq, comparison_operator:Lt, divisibility_test:2, if (-> +7), int_literal, literal:Num
+    if k < 2 or k % 2 == 0: # binary_operator:Mod, boolean_operator:Or, comparison_operator:Eq, comparison_operator:Lt, divisibility_test:2, if (-> +7), if_test_id:k, int_literal, literal:Num
         return False # if_then_branch, literal:False
-    elif k == 2: # comparison_operator:Eq, if (-> +5), int_literal, literal:Num
+    elif k == 2: # comparison_operator:Eq, if (-> +5), if_test_id:k, int_literal, literal:Num
         return True # if_elif_branch, literal:True
     else:
         for x in range(3, int(math.sqrt(k) + 1), 2): # binary_operator:Add, call_parameter:k, composition, for:x (-> +2), for_range_step:2 (-> +2), function_call:int, function_call:range, if_else_branch (-> +2), int_literal, literal:Num, method_call:sqrt, suggest_constant_definition
-            if k % x == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test, if (-> +1), int_literal, literal:Num, nested_if:1 (-> +1)
+            if k % x == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test, if (-> +1), if_test_id:k, if_test_id:x, int_literal, literal:Num, nested_if:1 (-> +1)
                 return False # if_then_branch, literal:False
     return True # literal:True
 def solution(a_limit: int, b_limit: int) -> int: # function:solution (-> +13), function_returning_a_value:solution (-> +13)
     longest = [0, 0, 0] # assignment, assignment_lhs_identifier:longest, int_literal, literal:List, literal:Num
     for a in range((a_limit * -1) + 1, a_limit): # binary_operator:Add, binary_operator:Mult, call_parameter:a_limit, for:a (-> +9), for_range_start (-> +9), function_call:range, int_literal, literal:Num
         for b in range(2, b_limit): # call_parameter:b_limit, for:b (-> +8), for_range_start (-> +8), function_call:range, int_literal, literal:Num, nested_for:1 (-> +8)
-            if is_prime(b): # call_parameter:b, function_call:is_prime, if (-> +7)
+            if is_prime(b): # call_parameter:b, function_call:is_prime, if (-> +7), if_test_id:b, if_test_id:is_prime
                 count = 0 # assignment, assignment_lhs_identifier:count, if_then_branch (-> +6), int_literal, literal:Num
                 n = 0 # assignment, assignment_lhs_identifier:n, int_literal, literal:Num
                 while is_prime((n ** 2) + (a * n) + b): # binary_operator:Add, binary_operator:Mult, binary_operator:Pow, function_call:is_prime, int_literal, literal:Num, while (-> +2)
                     count += 1 # assignment_lhs_identifier:count, augmented_assignment, int_literal, literal:Num
                     n += 1 # assignment_lhs_identifier:n, augmented_assignment, int_literal, literal:Num
-                if count > longest[0]: # comparison_operator:Gt, if (-> +1), index, int_literal, literal:Num, nested_if:1 (-> +1)
+                if count > longest[0]: # comparison_operator:Gt, if (-> +1), if_test_id:count, if_test_id:longest, index, int_literal, literal:Num, nested_if:1 (-> +1)
                     longest = [count, a, b] # assignment, assignment_lhs_identifier:longest, assignment_rhs_identifier:a, assignment_rhs_identifier:b, assignment_rhs_identifier:count, if_then_branch
     ans = longest[1] * longest[2] # assignment, assignment_lhs_identifier:ans, assignment_rhs_identifier:longest, binary_operator:Mult, index, int_literal, literal:Num
     return ans
@@ -1219,9 +1219,9 @@ def solution(): # function:solution (-> +6), function_returning_a_value:solution
 # ../Python/project_euler/problem_33/sol1.py
 # ----------------------------------------------------------------------------------------
 def isDigitCancelling(num, den): # function:isDigitCancelling (-> +4), function_returning_a_value:isDigitCancelling (-> +4)
-    if num != den: # comparison_operator:NotEq, if (-> +3)
-        if num % 10 == den // 10: # binary_operator:FloorDiv, binary_operator:Mod, comparison_operator:Eq, divisibility_test:10, if (-> +2), if_then_branch (-> +2), int_literal, literal:Num, nested_if:1 (-> +2), suggest_constant_definition
-            if (num // 10) / (den % 10) == num / den: # binary_operator:Div, binary_operator:FloorDiv, binary_operator:Mod, comparison_operator:Eq, if (-> +1), if_then_branch (-> +1), int_literal, literal:Num, nested_if:2 (-> +1), suggest_constant_definition
+    if num != den: # comparison_operator:NotEq, if (-> +3), if_test_id:den, if_test_id:num
+        if num % 10 == den // 10: # binary_operator:FloorDiv, binary_operator:Mod, comparison_operator:Eq, divisibility_test:10, if (-> +2), if_test_id:den, if_test_id:num, if_then_branch (-> +2), int_literal, literal:Num, nested_if:1 (-> +2), suggest_constant_definition
+            if (num // 10) / (den % 10) == num / den: # binary_operator:Div, binary_operator:FloorDiv, binary_operator:Mod, comparison_operator:Eq, if (-> +1), if_test_id:den, if_test_id:num, if_then_branch (-> +1), int_literal, literal:Num, nested_if:2 (-> +1), suggest_constant_definition
                 return True # if_then_branch, literal:True
 def solve(digit_len: int) -> str: # function:solve (-> +13), function_returning_a_value:solve (-> +13)
     solutions = [] # assignment, assignment_lhs_identifier:solutions, literal:List
@@ -1229,8 +1229,8 @@ def solve(digit_len: int) -> str: # function:solve (-> +13), function_returning_
     last_digit = int("1" + "0" * digit_len) # assignment, assignment_lhs_identifier:last_digit, assignment_rhs_identifier:digit_len, assignment_rhs_identifier:int, binary_operator:Add, binary_operator:Mult, function_call:int, literal:Str
     for num in range(den, last_digit): # accumulate_elements:1 (-> +7), call_parameter:den, call_parameter:last_digit, for:num (-> +7), for_range_start (-> +7), function_call:range
         while den <= 99: # comparison_operator:LtE, evolve_state (-> +4), int_literal, literal:Num, suggest_constant_definition, while (-> +4)
-            if (num != den) and (num % 10 == den // 10) and (den % 10 != 0): # binary_operator:FloorDiv, binary_operator:Mod, boolean_operator:And, comparison_operator:Eq, comparison_operator:NotEq, divisibility_test:10, if (-> +2), int_literal, literal:Num, suggest_constant_definition
-                if isDigitCancelling(num, den): # call_parameter:den, call_parameter:num, function_call:isDigitCancelling, if (-> +1), if_then_branch (-> +1), nested_if:1 (-> +1)
+            if (num != den) and (num % 10 == den // 10) and (den % 10 != 0): # binary_operator:FloorDiv, binary_operator:Mod, boolean_operator:And, comparison_operator:Eq, comparison_operator:NotEq, divisibility_test:10, if (-> +2), if_test_id:den, if_test_id:num, int_literal, literal:Num, suggest_constant_definition
+                if isDigitCancelling(num, den): # call_parameter:den, call_parameter:num, function_call:isDigitCancelling, if (-> +1), if_test_id:den, if_test_id:isDigitCancelling, if_test_id:num, if_then_branch (-> +1), nested_if:1 (-> +1)
                     solutions.append("{}/{}".format(num, den)) # call_parameter:den, call_parameter:num, composition, if_then_branch, literal:Str, method_call:append, method_call:format, method_call_object:solutions
             den += 1 # assignment_lhs_identifier:den, augmented_assignment, int_literal, literal:Num
         num += 1 # assignment_lhs_identifier:num, augmented_assignment, int_literal, literal:Num
@@ -1243,14 +1243,14 @@ def solve(digit_len: int) -> str: # function:solve (-> +13), function_returning_
 # ----------------------------------------------------------------------------------------
 def is_palindrome(n): # function:is_palindrome (-> +5), function_returning_a_value:is_palindrome (-> +5)
     n = str(n) # assignment, assignment_lhs_identifier:n, assignment_rhs_identifier:n, assignment_rhs_identifier:str, call_parameter:n, function_call:str
-    if n == n[::-1]: # comparison_operator:Eq, if (-> +3), int_literal, literal:Num, slice_step, suggest_condition_return (-> +3)
+    if n == n[::-1]: # comparison_operator:Eq, if (-> +3), if_test_id:n, int_literal, literal:Num, slice_step, suggest_condition_return (-> +3)
         return True # if_then_branch, literal:True
     else:
         return False # if_else_branch, literal:False
 def solution(n): # function:solution (-> +5), function_returning_a_value:solution (-> +5)
     total = 0 # assignment, assignment_lhs_identifier:total, int_literal, literal:Num
     for i in range(1, n): # accumulate_elements:1 (-> +2), call_parameter:n, for:i (-> +2), for_range_start (-> +2), function_call:range, int_literal, literal:Num
-        if is_palindrome(i) and is_palindrome(bin(i).split("b")[1]): # boolean_operator:And, call_parameter:i, composition, function_call:bin, function_call:is_palindrome, if (-> +1), index, int_literal, literal:Num, literal:Str, method_call:split
+        if is_palindrome(i) and is_palindrome(bin(i).split("b")[1]): # boolean_operator:And, call_parameter:i, composition, function_call:bin, function_call:is_palindrome, if (-> +1), if_test_id:bin, if_test_id:i, if_test_id:is_palindrome, index, int_literal, literal:Num, literal:Str, method_call:split
             total += i # assignment_lhs_identifier:total, assignment_rhs_identifier:i, augmented_assignment, if_then_branch
     return total
 
@@ -1309,7 +1309,7 @@ def solution(): # function:solution (-> +4), function_returning_a_value:solution
 def solution(): # function:solution (-> +12), function_returning_a_value:solution (-> +12)
     i = 1 # assignment, assignment_lhs_identifier:i, int_literal, literal:Num
     while True: # literal:True, while (-> +10)
-        if ( # if (-> +8)
+        if ( # if (-> +8), if_test_id:i, if_test_id:list, if_test_id:sorted, if_test_id:str
             sorted(list(str(i))) # call_parameter:i, chained_comparison:5, composition, function_call:list, function_call:sorted, function_call:str
             == sorted(list(str(2 * i))) # binary_operator:Mult, comparison_operator:Eq, composition, function_call:list, function_call:sorted, function_call:str, int_literal, literal:Num
             == sorted(list(str(3 * i))) # binary_operator:Mult, comparison_operator:Eq, composition, function_call:list, function_call:sorted, function_call:str, int_literal, literal:Num, suggest_constant_definition
@@ -1330,7 +1330,7 @@ def solution(): # function:solution (-> +6), function_returning_a_value:solution
     total = 0 # assignment, assignment_lhs_identifier:total, int_literal, literal:Num
     for i in range(1, 101): # for:i (-> +3), for_range_start (-> +3), function_call:range, int_literal, literal:Num, suggest_constant_definition
         for j in range(1, i + 1): # binary_operator:Add, for:j (-> +2), for_range_start (-> +2), function_call:range, int_literal, literal:Num, nested_for:1 (-> +2)
-            if combinations(i, j) > 1e6: # call_parameter:i, call_parameter:j, comparison_operator:Gt, float_literal, function_call:combinations, if (-> +1), literal:Num, suggest_constant_definition
+            if combinations(i, j) > 1e6: # call_parameter:i, call_parameter:j, comparison_operator:Gt, float_literal, function_call:combinations, if (-> +1), if_test_id:combinations, if_test_id:i, if_test_id:j, literal:Num, suggest_constant_definition
                 total += 1 # assignment_lhs_identifier:total, augmented_assignment, if_then_branch, int_literal, literal:Num
     return total
 
@@ -1350,34 +1350,34 @@ def next_term(a_i, k, i, n): # function:next_term (-> +50), function_returning_a
     diff, dn = 0, 0 # assignment, assignment_lhs_identifier:diff, assignment_lhs_identifier:dn, int_literal, literal:Num, literal:Tuple
     max_dn = n - i # assignment, assignment_lhs_identifier:max_dn, assignment_rhs_identifier:i, assignment_rhs_identifier:n, binary_operator:Sub
     sub_memo = memo.get(ds_b) # assignment, assignment_lhs_identifier:sub_memo, assignment_rhs_identifier:ds_b, assignment_rhs_identifier:memo, call_parameter:ds_b, method_call:get
-    if sub_memo != None: # comparison_operator:NotEq, if (-> +19), literal:None
+    if sub_memo != None: # comparison_operator:NotEq, if (-> +19), if_test_id:sub_memo, literal:None
         jumps = sub_memo.get(c) # assignment, assignment_lhs_identifier:jumps, assignment_rhs_identifier:c, assignment_rhs_identifier:sub_memo, call_parameter:c, if_then_branch (-> +15), method_call:get
-        if jumps != None and len(jumps) > 0: # boolean_operator:And, call_parameter:jumps, comparison_operator:Gt, comparison_operator:NotEq, function_call:len, if (-> +14), int_literal, literal:None, literal:Num, nested_if:1 (-> +14)
+        if jumps != None and len(jumps) > 0: # boolean_operator:And, call_parameter:jumps, comparison_operator:Gt, comparison_operator:NotEq, function_call:len, if (-> +14), if_test_id:jumps, if_test_id:len, int_literal, literal:None, literal:Num, nested_if:1 (-> +14)
             max_jump = -1 # assignment, assignment_lhs_identifier:max_jump, if_then_branch (-> +11), int_literal, literal:Num
             for _k in range(len(jumps) - 1, -1, -1): # binary_operator:Sub, call_parameter:jumps, composition, for:_k (-> +3), for_range_step:-1 (-> +3), function_call:len, function_call:range, int_literal, literal:Num
-                if jumps[_k][2] <= k and jumps[_k][1] <= max_dn: # boolean_operator:And, comparison_operator:LtE, if (-> +2), index, int_literal, literal:Num, nested_if:2 (-> +2)
+                if jumps[_k][2] <= k and jumps[_k][1] <= max_dn: # boolean_operator:And, comparison_operator:LtE, if (-> +2), if_test_id:_k, if_test_id:jumps, if_test_id:k, if_test_id:max_dn, index, int_literal, literal:Num, nested_if:2 (-> +2)
                     max_jump = _k # assignment, assignment_lhs_identifier:max_jump, assignment_rhs_identifier:_k, if_then_branch (-> +1)
                     break
-            if max_jump >= 0: # comparison_operator:GtE, if (-> +6), int_literal, literal:Num, nested_if:2 (-> +6)
+            if max_jump >= 0: # comparison_operator:GtE, if (-> +6), if_test_id:max_jump, int_literal, literal:Num, nested_if:2 (-> +6)
                 diff, dn, _kk = jumps[max_jump] # assignment, assignment_lhs_identifier:_kk, assignment_lhs_identifier:diff, assignment_lhs_identifier:dn, assignment_rhs_identifier:jumps, assignment_rhs_identifier:max_jump, if_then_branch (-> +5), index
                 new_c = diff + c # assignment, assignment_lhs_identifier:new_c, assignment_rhs_identifier:c, assignment_rhs_identifier:diff, binary_operator:Add
                 for j in range(min(k, len(a_i))): # call_parameter:a_i, call_parameter:k, composition, for:j (-> +1), for_range_stop (-> +1), function_call:len, function_call:min, function_call:range
                     new_c, a_i[j] = divmod(new_c, 10) # assignment, assignment_lhs_identifier:a_i, assignment_lhs_identifier:new_c, assignment_rhs_identifier:divmod, assignment_rhs_identifier:new_c, call_parameter:new_c, function_call:divmod, index, int_literal, literal:Num, suggest_constant_definition
-                if new_c > 0: # comparison_operator:Gt, if (-> +1), int_literal, literal:Num, nested_if:3 (-> +1)
+                if new_c > 0: # comparison_operator:Gt, if (-> +1), if_test_id:new_c, int_literal, literal:Num, nested_if:3 (-> +1)
                     add(a_i, k, new_c) # call_parameter:a_i, call_parameter:k, call_parameter:new_c, function_call:add, if_then_branch
         else:
             sub_memo[c] = [] # assignment, assignment_lhs_identifier:sub_memo, if_else_branch, index, literal:List
     else:
         sub_memo = {c: []} # assignment, assignment_lhs_identifier:sub_memo, assignment_rhs_identifier:c, if_else_branch (-> +1), literal:List
         memo[ds_b] = sub_memo # assignment, assignment_lhs_identifier:memo, assignment_rhs_identifier:sub_memo, index
-    if dn >= max_dn or c + diff >= base[k]: # binary_operator:Add, boolean_operator:Or, comparison_operator:GtE, if (-> +1), index
+    if dn >= max_dn or c + diff >= base[k]: # binary_operator:Add, boolean_operator:Or, comparison_operator:GtE, if (-> +1), if_test_id:base, if_test_id:c, if_test_id:diff, if_test_id:dn, if_test_id:k, if_test_id:max_dn, index
         return diff, dn # if_then_branch
-    if k > ks[0]: # comparison_operator:Gt, if (-> +10), index, int_literal, literal:Num
+    if k > ks[0]: # comparison_operator:Gt, if (-> +10), if_test_id:k, if_test_id:ks, index, int_literal, literal:Num
         while True: # if_then_branch (-> +5), literal:True, while (-> +5)
             _diff, terms_jumped = next_term(a_i, k - 1, i + dn, n) # assignment, assignment_lhs_identifier:_diff, assignment_lhs_identifier:terms_jumped, assignment_rhs_identifier:a_i, assignment_rhs_identifier:dn, assignment_rhs_identifier:i, assignment_rhs_identifier:k, assignment_rhs_identifier:n, assignment_rhs_identifier:next_term, binary_operator:Add, binary_operator:Sub, call_parameter:a_i, call_parameter:n, function_call:next_term, int_literal, literal:Num
             diff += _diff # assignment_lhs_identifier:diff, assignment_rhs_identifier:_diff, augmented_assignment
             dn += terms_jumped # assignment_lhs_identifier:dn, assignment_rhs_identifier:terms_jumped, augmented_assignment
-            if dn >= max_dn or c + diff >= base[k]: # binary_operator:Add, boolean_operator:Or, comparison_operator:GtE, if (-> +1), index, nested_if:1 (-> +1)
+            if dn >= max_dn or c + diff >= base[k]: # binary_operator:Add, boolean_operator:Or, comparison_operator:GtE, if (-> +1), if_test_id:base, if_test_id:c, if_test_id:diff, if_test_id:dn, if_test_id:k, if_test_id:max_dn, index, nested_if:1 (-> +1)
                 break # if_then_branch
     else:
         _diff, terms_jumped = compute(a_i, k, i + dn, n) # assignment, assignment_lhs_identifier:_diff, assignment_lhs_identifier:terms_jumped, assignment_rhs_identifier:a_i, assignment_rhs_identifier:compute, assignment_rhs_identifier:dn, assignment_rhs_identifier:i, assignment_rhs_identifier:k, assignment_rhs_identifier:n, binary_operator:Add, call_parameter:a_i, call_parameter:k, call_parameter:n, function_call:compute, if_else_branch (-> +2)
@@ -1386,20 +1386,20 @@ def next_term(a_i, k, i, n): # function:next_term (-> +50), function_returning_a
     jumps = sub_memo[c] # assignment, assignment_lhs_identifier:jumps, assignment_rhs_identifier:c, assignment_rhs_identifier:sub_memo, index
     j = 0 # assignment, assignment_lhs_identifier:j, int_literal, literal:Num
     while j < len(jumps): # call_parameter:jumps, comparison_operator:Lt, function_call:len, while (-> +3)
-        if jumps[j][1] > dn: # comparison_operator:Gt, if (-> +1), index, int_literal, literal:Num
+        if jumps[j][1] > dn: # comparison_operator:Gt, if (-> +1), if_test_id:dn, if_test_id:j, if_test_id:jumps, index, int_literal, literal:Num
             break # if_then_branch
         j += 1 # assignment_lhs_identifier:j, augmented_assignment, int_literal, literal:Num
     sub_memo[c].insert(j, (diff, dn, k)) # call_parameter:j, index, method_call:insert
     return (diff, dn)
 def compute(a_i, k, i, n): # function:compute (-> +25), function_returning_a_value:compute (-> +25)
-    if i >= n: # comparison_operator:GtE, if (-> +1)
+    if i >= n: # comparison_operator:GtE, if (-> +1), if_test_id:i, if_test_id:n
         return 0, i # if_then_branch, int_literal, literal:Num
-    if k > len(a_i): # call_parameter:a_i, comparison_operator:Gt, function_call:len, if (-> +1)
+    if k > len(a_i): # call_parameter:a_i, comparison_operator:Gt, function_call:len, if (-> +1), if_test_id:a_i, if_test_id:k, if_test_id:len
         a_i.extend([0 for _ in range(k - len(a_i))]) # binary_operator:Sub, call_parameter:a_i, composition, comprehension:List, comprehension_for_count:1, function_call:len, function_call:range, if_then_branch, int_literal, literal:Num, method_call:extend, method_call_object:a_i
     start_i = i # assignment, assignment_lhs_identifier:start_i, assignment_rhs_identifier:i
     ds_b, ds_c, diff = 0, 0, 0 # assignment, assignment_lhs_identifier:diff, assignment_lhs_identifier:ds_b, assignment_lhs_identifier:ds_c, int_literal, literal:Num, literal:Tuple
     for j in range(len(a_i)): # accumulate_elements:1 (-> +4), call_parameter:a_i, composition, for:j (-> +4), for_indexes (-> +4), for_range_stop (-> +4), function_call:len, function_call:range
-        if j >= k: # comparison_operator:GtE, if (-> +3)
+        if j >= k: # comparison_operator:GtE, if (-> +3), if_test_id:j, if_test_id:k
             ds_b += a_i[j] # assignment_lhs_identifier:ds_b, assignment_rhs_identifier:a_i, assignment_rhs_identifier:j, augmented_assignment, if_then_branch, index
         else:
             ds_c += a_i[j] # assignment_lhs_identifier:ds_c, assignment_rhs_identifier:a_i, assignment_rhs_identifier:j, augmented_assignment, if_else_branch, index
@@ -1412,21 +1412,21 @@ def compute(a_i, k, i, n): # function:compute (-> +25), function_returning_a_val
             s = a_i[j] + addend # assignment, assignment_lhs_identifier:s, assignment_rhs_identifier:a_i, assignment_rhs_identifier:addend, assignment_rhs_identifier:j, binary_operator:Add, index
             addend, a_i[j] = divmod(s, 10) # assignment, assignment_lhs_identifier:a_i, assignment_lhs_identifier:addend, assignment_rhs_identifier:divmod, assignment_rhs_identifier:s, call_parameter:s, function_call:divmod, index, int_literal, literal:Num, suggest_constant_definition
             ds_c += a_i[j] # assignment_lhs_identifier:ds_c, assignment_rhs_identifier:a_i, assignment_rhs_identifier:j, augmented_assignment, index
-        if addend > 0: # comparison_operator:Gt, if (-> +1), int_literal, literal:Num
+        if addend > 0: # comparison_operator:Gt, if (-> +1), if_test_id:addend, int_literal, literal:Num
             break # if_then_branch
-    if addend > 0: # comparison_operator:Gt, if (-> +1), int_literal, literal:Num
+    if addend > 0: # comparison_operator:Gt, if (-> +1), if_test_id:addend, int_literal, literal:Num
         add(a_i, k, addend) # call_parameter:a_i, call_parameter:addend, call_parameter:k, function_call:add, if_then_branch
     return diff, i - start_i # binary_operator:Sub
 def add(digits, k, addend): # function:add (-> +13), procedure:add (-> +13)
     for j in range(k, len(digits)): # call_parameter:digits, call_parameter:k, composition, for:j (-> +9), for_range_start (-> +9), function_call:len, function_call:range
         s = digits[j] + addend # assignment, assignment_lhs_identifier:s, assignment_rhs_identifier:addend, assignment_rhs_identifier:digits, assignment_rhs_identifier:j, binary_operator:Add, index
-        if s >= 10: # comparison_operator:GtE, if (-> +5), int_literal, literal:Num, suggest_constant_definition
+        if s >= 10: # comparison_operator:GtE, if (-> +5), if_test_id:s, int_literal, literal:Num, suggest_constant_definition
             quotient, digits[j] = divmod(s, 10) # assignment, assignment_lhs_identifier:digits, assignment_lhs_identifier:quotient, assignment_rhs_identifier:divmod, assignment_rhs_identifier:s, call_parameter:s, function_call:divmod, if_then_branch (-> +1), index, int_literal, literal:Num, suggest_constant_definition
             addend = addend // 10 + quotient # assignment, assignment_lhs_identifier:addend, assignment_rhs_identifier:addend, assignment_rhs_identifier:quotient, binary_operator:Add, binary_operator:FloorDiv, int_literal, literal:Num, suggest_constant_definition
         else:
             digits[j] = s # assignment, assignment_lhs_identifier:digits, assignment_rhs_identifier:s, if_else_branch (-> +1), index
             addend = addend // 10 # assignment, assignment_lhs_identifier:addend, assignment_rhs_identifier:addend, binary_operator:FloorDiv, int_literal, literal:Num, suggest_augmented_assignment, suggest_constant_definition
-        if addend == 0: # comparison_operator:Eq, if (-> +1), int_literal, literal:Num
+        if addend == 0: # comparison_operator:Eq, if (-> +1), if_test_id:addend, int_literal, literal:Num
             break # if_then_branch
     while addend > 0: # comparison_operator:Gt, int_literal, literal:Num, while (-> +2)
         addend, digit = divmod(addend, 10) # assignment, assignment_lhs_identifier:addend, assignment_lhs_identifier:digit, assignment_rhs_identifier:addend, assignment_rhs_identifier:divmod, call_parameter:addend, function_call:divmod, int_literal, literal:Num, suggest_constant_definition
@@ -1438,7 +1438,7 @@ def solution(n): # function:solution (-> +12), function_returning_a_value:soluti
     while True: # literal:True, while (-> +4)
         diff, terms_jumped = next_term(digits, 20, i + dn, n) # assignment, assignment_lhs_identifier:diff, assignment_lhs_identifier:terms_jumped, assignment_rhs_identifier:digits, assignment_rhs_identifier:dn, assignment_rhs_identifier:i, assignment_rhs_identifier:n, assignment_rhs_identifier:next_term, binary_operator:Add, call_parameter:digits, call_parameter:n, function_call:next_term, int_literal, literal:Num, suggest_constant_definition
         dn += terms_jumped # assignment_lhs_identifier:dn, assignment_rhs_identifier:terms_jumped, augmented_assignment
-        if dn == n - i: # binary_operator:Sub, comparison_operator:Eq, if (-> +1)
+        if dn == n - i: # binary_operator:Sub, comparison_operator:Eq, if (-> +1), if_test_id:dn, if_test_id:i, if_test_id:n
             break # if_then_branch
     a_n = 0 # assignment, assignment_lhs_identifier:a_n, int_literal, literal:Num
     for j in range(len(digits)): # accumulate_elements:1 (-> +1), call_parameter:digits, composition, for:j (-> +1), for_indexes (-> +1), for_range_stop (-> +1), function_call:len, function_call:range
@@ -1470,11 +1470,11 @@ def solution(): # function:solution (-> +18), function_returning_a_value:solutio
     a = list(map(lambda x: list(map(lambda y: int(y), x)), a)) # assignment, assignment_lhs_identifier:a, assignment_rhs_identifier:a, assignment_rhs_identifier:int, assignment_rhs_identifier:list, assignment_rhs_identifier:map, assignment_rhs_identifier:x, assignment_rhs_identifier:y, call_parameter:a, call_parameter:x, call_parameter:y, composition, function_call:int, function_call:list, function_call:map, lambda_function
     for i in range(1, len(a)): # call_parameter:a, composition, for:i (-> +10), for_range_start (-> +10), function_call:len, function_call:range, int_literal, literal:Num
         for j in range(len(a[i])): # composition, for:j (-> +9), for_indexes (-> +9), for_range_stop (-> +9), function_call:len, function_call:range, index, nested_for:1 (-> +9)
-            if j != len(a[i - 1]): # binary_operator:Sub, comparison_operator:NotEq, function_call:len, if (-> +3), index, index_arithmetic, int_literal, literal:Num, suggest_conditional_expression (-> +3)
+            if j != len(a[i - 1]): # binary_operator:Sub, comparison_operator:NotEq, function_call:len, if (-> +3), if_test_id:a, if_test_id:i, if_test_id:j, if_test_id:len, index, index_arithmetic, int_literal, literal:Num, suggest_conditional_expression (-> +3)
                 number1 = a[i - 1][j] # assignment, assignment_lhs_identifier:number1, assignment_rhs_identifier:a, assignment_rhs_identifier:i, assignment_rhs_identifier:j, binary_operator:Sub, if_then_branch, index, index_arithmetic, int_literal, literal:Num
             else:
                 number1 = 0 # assignment, assignment_lhs_identifier:number1, if_else_branch, int_literal, literal:Num
-            if j > 0: # comparison_operator:Gt, if (-> +3), int_literal, literal:Num, suggest_conditional_expression (-> +3)
+            if j > 0: # comparison_operator:Gt, if (-> +3), if_test_id:j, int_literal, literal:Num, suggest_conditional_expression (-> +3)
                 number2 = a[i - 1][j - 1] # assignment, assignment_lhs_identifier:number2, assignment_rhs_identifier:a, assignment_rhs_identifier:i, assignment_rhs_identifier:j, binary_operator:Sub, if_then_branch, index, index_arithmetic, int_literal, literal:Num
             else:
                 number2 = 0 # assignment, assignment_lhs_identifier:number2, if_else_branch, int_literal, literal:Num
@@ -1491,7 +1491,7 @@ def partition(m): # function:partition (-> +9), function_returning_a_value:parti
     for n in range(m + 1): # accumulate_elements:1 (-> +4), binary_operator:Add, for:n (-> +4), for_range_stop (-> +4), function_call:range, int_literal, literal:Num
         for k in range(1, m): # accumulate_elements:1 (-> +3), call_parameter:m, for:k (-> +3), for_range_start (-> +3), function_call:range, int_literal, literal:Num, nested_for:1 (-> +3)
             memo[n][k] += memo[n][k - 1] # assignment_rhs_identifier:k, assignment_rhs_identifier:memo, assignment_rhs_identifier:n, augmented_assignment, binary_operator:Sub, index, index_arithmetic, int_literal, literal:Num
-            if n > k: # comparison_operator:Gt, if (-> +1)
+            if n > k: # comparison_operator:Gt, if (-> +1), if_test_id:k, if_test_id:n
                 memo[n][k] += memo[n - k - 1][k] # assignment_rhs_identifier:k, assignment_rhs_identifier:memo, assignment_rhs_identifier:n, augmented_assignment, binary_operator:Sub, if_then_branch, index, index_arithmetic, int_literal, literal:Num
     return memo[m][m - 1] - 1 # binary_operator:Sub, index, index_arithmetic, int_literal, literal:Num
 
@@ -1504,6 +1504,6 @@ def find_largest(data_file: str = "base_exp.txt") -> int: # function:find_larges
     largest = [0, 0] # assignment, assignment_lhs_identifier:largest, int_literal, literal:List, literal:Num
     for i, line in enumerate(open(os.path.join(os.path.dirname(__file__), data_file))): # call_parameter:__file__, call_parameter:data_file, composition, for:i:line (-> +3), for_indexes_elements (-> +3), function_call:enumerate, function_call:open, method_call:dirname, method_call:join
         a, x = list(map(int, line.split(","))) # assignment, assignment_lhs_identifier:a, assignment_lhs_identifier:x, assignment_rhs_identifier:int, assignment_rhs_identifier:line, assignment_rhs_identifier:list, assignment_rhs_identifier:map, call_parameter:int, composition, function_call:list, function_call:map, literal:Str, method_call:split
-        if x * log10(a) > largest[0]: # binary_operator:Mult, call_parameter:a, comparison_operator:Gt, function_call:log10, if (-> +1), index, int_literal, literal:Num
+        if x * log10(a) > largest[0]: # binary_operator:Mult, call_parameter:a, comparison_operator:Gt, function_call:log10, if (-> +1), if_test_id:a, if_test_id:largest, if_test_id:log10, if_test_id:x, index, int_literal, literal:Num
             largest = [x * log10(a), i + 1] # assignment, assignment_lhs_identifier:largest, assignment_rhs_identifier:a, assignment_rhs_identifier:i, assignment_rhs_identifier:log10, assignment_rhs_identifier:x, binary_operator:Add, binary_operator:Mult, call_parameter:a, function_call:log10, if_then_branch, int_literal, literal:Num
     return largest[1] # index, int_literal, literal:Num

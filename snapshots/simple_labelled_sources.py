@@ -24,6 +24,7 @@ def print_collatz(n): # added_block_label (-> +7)
                        # comparison_operator:Eq
                        # divisibility_test:2
                        # if (-> +3)
+                       # if_test_id:n
                        # int_literal
                        # literal:Num
                        # suggest_conditional_expression (-> +3)

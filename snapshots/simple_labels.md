@@ -24,6 +24,7 @@
 - function_returning_a_value:succ / function_definition.py / 1-2
 - if / collatz_print.py / 4-7
 - if_else_branch / collatz_print.py / 7
+- if_test_id:n / collatz_print.py / 4
 - if_then_branch / collatz_print.py / 5
 - int_literal / collatz_print.py / 2, 4, 4, 5, 7, 7
 - int_literal / function_definition.py / 2
@@ -78,6 +79,7 @@
 - function_with_default_positional_arguments
 - generator
 - if_elif_branch
+- if_test_id
 - imaginary_literal
 - import_module
 - import_name

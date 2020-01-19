@@ -33,6 +33,7 @@
         "function_call:print": [[3,3],[8,8]],
         "if": [[4,7]],
         "if_else_branch": [[7,7]],
+        "if_test_id:n": [[4,4]],
         "if_then_branch": [[5,5]],
         "int_literal": [[2,2],[4,4],[5,5],[7,7]],
         "literal:Num": [[2,2],[4,4],[7,7]],
@@ -148,6 +149,9 @@
       "tests/data/simple/collatz_print.py"
     ],
     "if_else_branch": [
+      "tests/data/simple/collatz_print.py"
+    ],
+    "if_test_id:n": [
       "tests/data/simple/collatz_print.py"
     ],
     "if_then_branch": [
