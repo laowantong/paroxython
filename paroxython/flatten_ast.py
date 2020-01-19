@@ -19,7 +19,11 @@ def flatten_ast(node: Any, prefix: str = "") -> str:
             acc.append(f"{prefix}/_hash={expr_hash}\n")
         if "lineno" in node._attributes:
             acc.append(f"{prefix}/lineno={node.lineno}\n")
-        for (name, x) in ast.iter_fields(node):
+        fields = ast.iter_fields(node)
+        if isinstance(node, ast.FunctionDef):
+            # reject `body` behind `decorator_list` and `returns`, whose line number is those of `def` clause
+            fields = sorted(fields, key=lambda c: c[0] == "body")
+        for (name, x) in fields:
             if name == "orelse" and isinstance(node, (ast.For, ast.While, ast.AsyncFor)):
                 name = "loopelse"  # this makes the "orelse" clause specific to conditionals
             elif name == "targets" and isinstance(node, ast.Assign):

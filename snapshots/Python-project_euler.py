@@ -252,7 +252,7 @@ def solution(n): # function:solution (-> +16), function_returning_a_value:soluti
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_03/sol3.py
 # ----------------------------------------------------------------------------------------
-def solution(n: int) -> int: # function:solution, function_returning_a_value:solution
+def solution(n: int) -> int: # function:solution (-> +18), function_returning_a_value:solution (-> +18)
     try: # try (-> +3), try_except:TypeError (-> +3), try_except:ValueError (-> +3), try_raise:TypeError (-> +3)
         n = int(n) # assignment, assignment_lhs_identifier:n, assignment_rhs_identifier:int, assignment_rhs_identifier:n, call_parameter:n, function_call:int
     except (TypeError, ValueError): # except:TypeError, except:ValueError
@@ -534,12 +534,12 @@ N = """73167176531330624919225119674426574742355349194934\ # assignment, assignm
 84580156166097919133875499200524063689912560717606\
 05886116467109405077541002256983155200055935729725\
 71636269561882670428252483600823257530420752963450""" # literal:Str
-def streval(s: str) -> int: # function:streval, function_returning_a_value:streval
+def streval(s: str) -> int: # function:streval (-> +4), function_returning_a_value:streval (-> +4)
     ret = 1 # assignment, assignment_lhs_identifier:ret, int_literal, literal:Num
     for it in s: # accumulate_elements:1 (-> +1), for:it (-> +1), for_each (-> +1)
         ret *= int(it) # assignment_lhs_identifier:ret, assignment_rhs_identifier:int, assignment_rhs_identifier:it, augmented_assignment, call_parameter:it, function_call:int
     return ret
-def solution(n: str) -> int: # function:solution, function_returning_a_value:solution
+def solution(n: str) -> int: # function:solution (-> +12), function_returning_a_value:solution (-> +12)
     LargestProduct = -sys.maxsize - 1 # assignment, assignment_lhs_identifier:LargestProduct, assignment_rhs_identifier:sys, binary_operator:Sub, int_literal, literal:Num, unary_operator:USub
     substr = n[:13] # assignment, assignment_lhs_identifier:substr, assignment_rhs_identifier:n, int_literal, literal:Num, slice, suggest_constant_definition
     cur_index = 13 # assignment, assignment_lhs_identifier:cur_index, int_literal, literal:Num, suggest_constant_definition
@@ -634,7 +634,7 @@ def solution(n): # function:solution (-> +1), function_returning_a_value:solutio
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_10/sol3.py
 # ----------------------------------------------------------------------------------------
-def prime_sum(n: int) -> int: # function:prime_sum, function_returning_a_value:prime_sum
+def prime_sum(n: int) -> int: # function:prime_sum (-> +12), function_returning_a_value:prime_sum (-> +12)
     list_ = [0 for i in range(n + 1)] # assignment, assignment_lhs_identifier:list_, assignment_rhs_identifier:i, assignment_rhs_identifier:n, assignment_rhs_identifier:range, binary_operator:Add, comprehension:List, comprehension_for_count:1, function_call:range, int_literal, literal:Num
     list_[0] = 1 # assignment, assignment_lhs_identifier:list_, index, int_literal, literal:Num
     list_[1] = 1 # assignment, assignment_lhs_identifier:list_, index, int_literal, literal:Num
@@ -1120,7 +1120,7 @@ def solution(n): # function:solution (-> +12), function_returning_a_value:soluti
 # ../Python/project_euler/problem_27/problem_27_sol1.py
 # ----------------------------------------------------------------------------------------
 import math # import:math, import_module:math
-def is_prime(k: int) -> bool: # function:is_prime, function_returning_a_value:is_prime
+def is_prime(k: int) -> bool: # function:is_prime (-> +9), function_returning_a_value:is_prime (-> +9)
     if k < 2 or k % 2 == 0: # binary_operator:Mod, boolean_operator:Or, comparison_operator:Eq, comparison_operator:Lt, divisibility_test:2, if (-> +7), int_literal, literal:Num
         return False # if_then_branch, literal:False
     elif k == 2: # comparison_operator:Eq, if (-> +5), int_literal, literal:Num
@@ -1130,7 +1130,7 @@ def is_prime(k: int) -> bool: # function:is_prime, function_returning_a_value:is
             if k % x == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test, if (-> +1), int_literal, literal:Num, nested_if:1 (-> +1)
                 return False # if_then_branch, literal:False
     return True # literal:True
-def solution(a_limit: int, b_limit: int) -> int: # function:solution, function_returning_a_value:solution
+def solution(a_limit: int, b_limit: int) -> int: # function:solution (-> +13), function_returning_a_value:solution (-> +13)
     longest = [0, 0, 0] # assignment, assignment_lhs_identifier:longest, int_literal, literal:List, literal:Num
     for a in range((a_limit * -1) + 1, a_limit): # binary_operator:Add, binary_operator:Mult, call_parameter:a_limit, for:a (-> +9), for_range_start (-> +9), function_call:range, int_literal, literal:Num
         for b in range(2, b_limit): # call_parameter:b_limit, for:b (-> +8), for_range_start (-> +8), function_call:range, int_literal, literal:Num, nested_for:1 (-> +8)
@@ -1223,7 +1223,7 @@ def isDigitCancelling(num, den): # function:isDigitCancelling (-> +4), function_
         if num % 10 == den // 10: # binary_operator:FloorDiv, binary_operator:Mod, comparison_operator:Eq, divisibility_test:10, if (-> +2), if_then_branch (-> +2), int_literal, literal:Num, nested_if:1 (-> +2), suggest_constant_definition
             if (num // 10) / (den % 10) == num / den: # binary_operator:Div, binary_operator:FloorDiv, binary_operator:Mod, comparison_operator:Eq, if (-> +1), if_then_branch (-> +1), int_literal, literal:Num, nested_if:2 (-> +1), suggest_constant_definition
                 return True # if_then_branch, literal:True
-def solve(digit_len: int) -> str: # function:solve, function_returning_a_value:solve
+def solve(digit_len: int) -> str: # function:solve (-> +13), function_returning_a_value:solve (-> +13)
     solutions = [] # assignment, assignment_lhs_identifier:solutions, literal:List
     den = 11 # assignment, assignment_lhs_identifier:den, int_literal, literal:Num, suggest_constant_definition
     last_digit = int("1" + "0" * digit_len) # assignment, assignment_lhs_identifier:last_digit, assignment_rhs_identifier:digit_len, assignment_rhs_identifier:int, binary_operator:Add, binary_operator:Mult, function_call:int, literal:Str
@@ -1448,7 +1448,7 @@ def solution(n): # function:solution (-> +12), function_returning_a_value:soluti
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_56/sol1.py
 # ----------------------------------------------------------------------------------------
-def maximum_digital_sum(a: int, b: int) -> int: # function:maximum_digital_sum, function_returning_a_value:maximum_digital_sum
+def maximum_digital_sum(a: int, b: int) -> int: # function:maximum_digital_sum (-> +5), function_returning_a_value:maximum_digital_sum (-> +5)
     return max( # composition, function_call:max
         [
             sum([int(x) for x in str(base ** power)]) # binary_operator:Pow, call_parameter:x, composition, comprehension:List, comprehension_for_count:1, comprehension_for_count:2, function_call:int, function_call:str, function_call:sum
@@ -1500,7 +1500,7 @@ def partition(m): # function:partition (-> +9), function_returning_a_value:parti
 # ----------------------------------------------------------------------------------------
 import os # import:os, import_module:os
 from math import log10 # import:math:log10, import_module:math, import_name:log10
-def find_largest(data_file: str = "base_exp.txt") -> int: # function:find_largest, function_returning_a_value:find_largest, function_with_default_positional_arguments:find_largest, literal:Str
+def find_largest(data_file: str = "base_exp.txt") -> int: # function:find_largest (-> +6), function_returning_a_value:find_largest (-> +6), function_with_default_positional_arguments:find_largest (-> +6), literal:Str
     largest = [0, 0] # assignment, assignment_lhs_identifier:largest, int_literal, literal:List, literal:Num
     for i, line in enumerate(open(os.path.join(os.path.dirname(__file__), data_file))): # call_parameter:__file__, call_parameter:data_file, composition, for:i:line (-> +3), for_indexes_elements (-> +3), function_call:enumerate, function_call:open, method_call:dirname, method_call:join
         a, x = list(map(int, line.split(","))) # assignment, assignment_lhs_identifier:a, assignment_lhs_identifier:x, assignment_rhs_identifier:int, assignment_rhs_identifier:line, assignment_rhs_identifier:list, assignment_rhs_identifier:map, call_parameter:int, composition, function_call:list, function_call:map, literal:Str, method_call:split

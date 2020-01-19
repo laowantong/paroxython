@@ -2,7 +2,7 @@
 # ../Python/maths/3n+1.py
 # ----------------------------------------------------------------------------------------
 from typing import Tuple, List # import:typing:List, import:typing:Tuple, import_module:typing, import_name:List, import_name:Tuple
-def n31(a: int) -> Tuple[List[int], int]: # function:n31, function_returning_a_value:n31, index
+def n31(a: int) -> Tuple[List[int], int]: # function:n31 (-> +12), function_returning_a_value:n31 (-> +12), index
     if not isinstance(a, int): # call_parameter:a, call_parameter:int, function_call:isinstance, if (-> +1), unary_operator:Not
         raise TypeError("Must be int, not {0}".format(type(a).__name__)) # call_parameter:a, composition, function_call:TypeError, function_call:type, if_then_branch, literal:Str, method_call:format, raise:TypeError
     if a < 1: # comparison_operator:Lt, if (-> +1), int_literal, literal:Num
@@ -145,7 +145,7 @@ def test_abs_val(): # function:test_abs_val (-> +3), procedure:test_abs_val (-> 
 # ../Python/maths/abs_max.py
 # ----------------------------------------------------------------------------------------
 from typing import List # import:typing:List, import_module:typing, import_name:List
-def abs_max(x: List[int]) -> int: # function:abs_max, function_returning_a_value:abs_max, index
+def abs_max(x: List[int]) -> int: # function:abs_max (-> +5), function_returning_a_value:abs_max (-> +5), index
     j = x[0] # assignment, assignment_lhs_identifier:j, assignment_rhs_identifier:x, index, int_literal, literal:Num
     for i in x: # find_best_element (-> +2), for:i (-> +2), for_each (-> +2)
         if abs(i) > abs(j): # call_parameter:i, call_parameter:j, comparison_operator:Gt, function_call:abs, if (-> +1)
@@ -219,7 +219,7 @@ def mode(input_list): # function:mode (-> +7), function_returning_a_value:mode (
 # ../Python/maths/basic_maths.py
 # ----------------------------------------------------------------------------------------
 import math # import:math, import_module:math
-def prime_factors(n: int) -> list: # function:prime_factors, function_returning_a_value:prime_factors
+def prime_factors(n: int) -> list: # function:prime_factors (-> +11), function_returning_a_value:prime_factors (-> +11)
     pf = [] # assignment, assignment_lhs_identifier:pf, literal:List
     while n % 2 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, evolve_state (-> +2), int_literal, literal:Num, while (-> +2)
         pf.append(2) # int_literal, literal:Num, method_call:append, method_call_object:pf
@@ -231,7 +231,7 @@ def prime_factors(n: int) -> list: # function:prime_factors, function_returning_
     if n > 2: # comparison_operator:Gt, if (-> +1), int_literal, literal:Num
         pf.append(n) # call_parameter:n, if_then_branch, method_call:append, method_call_object:pf
     return pf
-def number_of_divisors(n: int) -> int: # function:number_of_divisors, function_returning_a_value:number_of_divisors
+def number_of_divisors(n: int) -> int: # function:number_of_divisors (-> +13), function_returning_a_value:number_of_divisors (-> +13)
     div = 1 # assignment, assignment_lhs_identifier:div, int_literal, literal:Num
     temp = 1 # assignment, assignment_lhs_identifier:temp, int_literal, literal:Num
     while n % 2 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, evolve_state (-> +2), int_literal, literal:Num, while (-> +2)
@@ -245,7 +245,7 @@ def number_of_divisors(n: int) -> int: # function:number_of_divisors, function_r
             n = int(n / i) # assignment, assignment_lhs_identifier:n, assignment_rhs_identifier:i, assignment_rhs_identifier:int, assignment_rhs_identifier:n, binary_operator:Div, function_call:int
         div *= temp # assignment_lhs_identifier:div, assignment_rhs_identifier:temp, augmented_assignment
     return div
-def sum_of_divisors(n: int) -> int: # function:sum_of_divisors, function_returning_a_value:sum_of_divisors
+def sum_of_divisors(n: int) -> int: # function:sum_of_divisors (-> +15), function_returning_a_value:sum_of_divisors (-> +15)
     s = 1 # assignment, assignment_lhs_identifier:s, int_literal, literal:Num
     temp = 1 # assignment, assignment_lhs_identifier:temp, int_literal, literal:Num
     while n % 2 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, evolve_state (-> +2), int_literal, literal:Num, while (-> +2)
@@ -261,7 +261,7 @@ def sum_of_divisors(n: int) -> int: # function:sum_of_divisors, function_returni
         if temp > 1: # comparison_operator:Gt, if (-> +1), int_literal, literal:Num
             s *= (i ** temp - 1) / (i - 1) # assignment_lhs_identifier:s, assignment_rhs_identifier:i, assignment_rhs_identifier:temp, augmented_assignment, binary_operator:Div, binary_operator:Pow, binary_operator:Sub, if_then_branch, int_literal, literal:Num
     return int(s) # call_parameter:s, function_call:int
-def euler_phi(n: int) -> int: # function:euler_phi, function_returning_a_value:euler_phi
+def euler_phi(n: int) -> int: # function:euler_phi (-> +4), function_returning_a_value:euler_phi (-> +4)
     s = n # assignment, assignment_lhs_identifier:s, assignment_rhs_identifier:n
     for x in set(prime_factors(n)): # accumulate_elements:1 (-> +1), call_parameter:n, composition, for:x (-> +1), function_call:prime_factors, function_call:set
         s *= (x - 1) / x # assignment_lhs_identifier:s, assignment_rhs_identifier:x, augmented_assignment, binary_operator:Div, binary_operator:Sub, int_literal, literal:Num
@@ -296,7 +296,7 @@ print(binomial_coefficient(n=10, r=5)) # composition, function_call:binomial_coe
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/ceil.py
 # ----------------------------------------------------------------------------------------
-def ceil(x) -> int: # function:ceil, function_returning_a_value:ceil
+def ceil(x) -> int: # function:ceil (-> +2), function_returning_a_value:ceil (-> +2)
     return (
         x if isinstance(x, int) or x - int(x) == 0 else int(x + 1) if x > 0 else int(x) # binary_operator:Add, binary_operator:Sub, boolean_operator:Or, call_parameter:int, call_parameter:x, comparison_operator:Eq, comparison_operator:Gt, conditional_expression, function_call:int, function_call:isinstance, int_literal, literal:Num
     )
@@ -380,7 +380,7 @@ def main(): # function:main (-> +6), procedure:main (-> +6)
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/factorial_python.py
 # ----------------------------------------------------------------------------------------
-def factorial(input_number: int) -> int: # function:factorial, function_returning_a_value:factorial
+def factorial(input_number: int) -> int: # function:factorial (-> +8), function_returning_a_value:factorial (-> +8)
     if input_number < 0: # comparison_operator:Lt, if (-> +1), int_literal, literal:Num
         raise ValueError("factorial() not defined for negative values") # function_call:ValueError, if_then_branch, literal:Str, raise:ValueError
     if not isinstance(input_number, int): # call_parameter:input_number, call_parameter:int, function_call:isinstance, if (-> +1), unary_operator:Not
@@ -393,7 +393,7 @@ def factorial(input_number: int) -> int: # function:factorial, function_returnin
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/factorial_recursive.py
 # ----------------------------------------------------------------------------------------
-def factorial(n: int) -> int: # body_recursive_function:factorial, function:factorial, function_returning_a_value:factorial, recursive_function:factorial
+def factorial(n: int) -> int: # body_recursive_function:factorial (-> +5), function:factorial (-> +5), function_returning_a_value:factorial (-> +5), recursive_function:factorial (-> +5)
     if n < 0: # comparison_operator:Lt, if (-> +1), int_literal, literal:Num
         raise ValueError("factorial() not defined for negative values") # function_call:ValueError, if_then_branch, literal:Str, raise:ValueError
     if not isinstance(n, int): # call_parameter:int, call_parameter:n, function_call:isinstance, if (-> +1), unary_operator:Not
@@ -403,7 +403,7 @@ def factorial(n: int) -> int: # body_recursive_function:factorial, function:fact
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/factors.py
 # ----------------------------------------------------------------------------------------
-def factors_of_a_number(num: int) -> list: # function:factors_of_a_number, function_returning_a_value:factors_of_a_number
+def factors_of_a_number(num: int) -> list: # function:factors_of_a_number (-> +1), function_returning_a_value:factors_of_a_number (-> +1)
     return [i for i in range(1, num + 1) if num % i == 0] # binary_operator:Add, binary_operator:Mod, comparison_operator:Eq, comprehension:List, comprehension_for_count:1, divisibility_test, filtered_comprehension, function_call:range, int_literal, literal:Num
 
 # ----------------------------------------------------------------------------------------
@@ -558,7 +558,7 @@ def find_min(nums, left, right): # function:find_min (-> +6), function_returning
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/floor.py
 # ----------------------------------------------------------------------------------------
-def floor(x) -> int: # function:floor, function_returning_a_value:floor
+def floor(x) -> int: # function:floor (-> +2), function_returning_a_value:floor (-> +2)
     return (
         x if isinstance(x, int) or x - int(x) == 0 else int(x) if x > 0 else int(x - 1) # binary_operator:Sub, boolean_operator:Or, call_parameter:int, call_parameter:x, comparison_operator:Eq, comparison_operator:Gt, conditional_expression, function_call:int, function_call:isinstance, int_literal, literal:Num
     )
@@ -567,7 +567,7 @@ def floor(x) -> int: # function:floor, function_returning_a_value:floor
 # ../Python/maths/gaussian.py
 # ----------------------------------------------------------------------------------------
 from numpy import pi, sqrt, exp # import:numpy:exp, import:numpy:pi, import:numpy:sqrt, import_module:numpy, import_name:exp, import_name:pi, import_name:sqrt
-def gaussian(x, mu: float = 0.0, sigma: float = 1.0) -> int: # float_literal, function:gaussian, function_returning_a_value:gaussian, function_with_default_positional_arguments:gaussian, literal:Num
+def gaussian(x, mu: float = 0.0, sigma: float = 1.0) -> int: # float_literal, function:gaussian (-> +1), function_returning_a_value:gaussian (-> +1), function_with_default_positional_arguments:gaussian (-> +1), literal:Num
     return 1 / sqrt(2 * pi * sigma ** 2) * exp(-((x - mu) ** 2) / 2 * sigma ** 2) # binary_operator:Div, binary_operator:Mult, binary_operator:Pow, binary_operator:Sub, function_call:exp, function_call:sqrt, int_literal, literal:Num, unary_operator:USub
 
 # ----------------------------------------------------------------------------------------
@@ -616,7 +616,7 @@ def exactPrimeFactorCount(n): # function:exactPrimeFactorCount (-> +15), functio
 # ../Python/maths/is_square_free.py
 # ----------------------------------------------------------------------------------------
 from typing import List # import:typing:List, import_module:typing, import_name:List
-def is_square_free(factors: List[int]) -> bool: # function:is_square_free, function_returning_a_value:is_square_free, index
+def is_square_free(factors: List[int]) -> bool: # function:is_square_free (-> +1), function_returning_a_value:is_square_free (-> +1), index
     return len(set(factors)) == len(factors) # call_parameter:factors, comparison_operator:Eq, composition, function_call:len, function_call:set
 
 # ----------------------------------------------------------------------------------------
@@ -691,7 +691,7 @@ def res(x, y): # function:res (-> +7), function_returning_a_value:res (-> +7)
 # ../Python/maths/least_common_multiple.py
 # ----------------------------------------------------------------------------------------
 import unittest # import:unittest, import_module:unittest
-def find_lcm(first_num: int, second_num: int) -> int: # function:find_lcm, function_returning_a_value:find_lcm
+def find_lcm(first_num: int, second_num: int) -> int: # function:find_lcm (-> +5), function_returning_a_value:find_lcm (-> +5)
     max_num = first_num if first_num >= second_num else second_num # assignment, assignment_lhs_identifier:max_num, assignment_rhs_identifier:first_num, assignment_rhs_identifier:second_num, comparison_operator:GtE, conditional_expression
     common_mult = max_num # assignment, assignment_lhs_identifier:common_mult, assignment_rhs_identifier:max_num
     while (common_mult % first_num > 0) or (common_mult % second_num > 0): # binary_operator:Mod, boolean_operator:Or, comparison_operator:Gt, int_literal, literal:Num, while (-> +1)
@@ -802,7 +802,7 @@ def main(): # function:main (-> +2), procedure:main (-> +2)
 # ----------------------------------------------------------------------------------------
 from maths.prime_factors import prime_factors # import:maths.prime_factors:prime_factors, import_module:maths.prime_factors, import_name:prime_factors
 from maths.is_square_free import is_square_free # import:maths.is_square_free:is_square_free, import_module:maths.is_square_free, import_name:is_square_free
-def mobius(n: int) -> int: # function:mobius, function_returning_a_value:mobius
+def mobius(n: int) -> int: # function:mobius (-> +4), function_returning_a_value:mobius (-> +4)
     factors = prime_factors(n) # assignment, assignment_lhs_identifier:factors, assignment_rhs_identifier:n, assignment_rhs_identifier:prime_factors, call_parameter:n, function_call:prime_factors
     if is_square_free(factors): # call_parameter:factors, function_call:is_square_free, if (-> +1)
         return -1 if len(factors) % 2 else 1 # binary_operator:Mod, call_parameter:factors, conditional_expression, function_call:len, if_then_branch, int_literal, literal:Num
@@ -854,16 +854,16 @@ def newton_raphson(f, x0=0, maxiter=100, step=0.0001, maxerror=1e-6, logsteps=Fa
 # ../Python/maths/perfect_square.py
 # ----------------------------------------------------------------------------------------
 import math # import:math, import_module:math
-def perfect_square(num: int) -> bool: # function:perfect_square, function_returning_a_value:perfect_square
+def perfect_square(num: int) -> bool: # function:perfect_square (-> +1), function_returning_a_value:perfect_square (-> +1)
     return math.sqrt(num) * math.sqrt(num) == num # binary_operator:Mult, call_parameter:num, comparison_operator:Eq, method_call:sqrt
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/polynomial_evaluation.py
 # ----------------------------------------------------------------------------------------
 from typing import Sequence # import:typing:Sequence, import_module:typing, import_name:Sequence
-def evaluate_poly(poly: Sequence[float], x: float) -> float: # function:evaluate_poly, function_returning_a_value:evaluate_poly, index
+def evaluate_poly(poly: Sequence[float], x: float) -> float: # function:evaluate_poly (-> +1), function_returning_a_value:evaluate_poly (-> +1), index
     return sum(c * (x ** i) for i, c in enumerate(poly)) # binary_operator:Mult, binary_operator:Pow, call_parameter:poly, composition, comprehension:Generator, comprehension_for_count:1, function_call:enumerate, function_call:sum
-def horner(poly: Sequence[float], x: float) -> float: # function:horner, function_returning_a_value:horner, index
+def horner(poly: Sequence[float], x: float) -> float: # function:horner (-> +4), function_returning_a_value:horner (-> +4), index
     result = 0.0 # assignment, assignment_lhs_identifier:result, float_literal, literal:Num, suggest_constant_definition
     for coeff in reversed(poly): # accumulate_elements:1 (-> +1), call_parameter:poly, for:coeff (-> +1), function_call:reversed
         result = result * x + coeff # assignment, assignment_lhs_identifier:result, assignment_rhs_identifier:coeff, assignment_rhs_identifier:result, assignment_rhs_identifier:x, binary_operator:Add, binary_operator:Mult
@@ -913,7 +913,7 @@ class Test(unittest.TestCase):
 # ../Python/maths/prime_factors.py
 # ----------------------------------------------------------------------------------------
 from typing import List # import:typing:List, import_module:typing, import_name:List
-def prime_factors(n: int) -> List[int]: # function:prime_factors, function_returning_a_value:prime_factors, index
+def prime_factors(n: int) -> List[int]: # function:prime_factors (-> +11), function_returning_a_value:prime_factors (-> +11), index
     i = 2 # assignment, assignment_lhs_identifier:i, int_literal, literal:Num
     factors = [] # assignment, assignment_lhs_identifier:factors, literal:List
     while i * i <= n: # binary_operator:Mult, comparison_operator:LtE, evolve_state (-> +5), while (-> +5)
@@ -930,7 +930,7 @@ def prime_factors(n: int) -> List[int]: # function:prime_factors, function_retur
 # ../Python/maths/prime_numbers.py
 # ----------------------------------------------------------------------------------------
 from typing import List # import:typing:List, import_module:typing, import_name:List
-def primes(max: int) -> List[int]: # function:primes, function_returning_a_value:primes, index
+def primes(max: int) -> List[int]: # function:primes (-> +9), function_returning_a_value:primes (-> +9), index
     max += 1 # assignment_lhs_identifier:max, augmented_assignment, int_literal, literal:Num
     numbers = [False] * max # assignment, assignment_lhs_identifier:numbers, assignment_rhs_identifier:max, binary_operator:Mult, literal:False, literal:List
     ret = [] # assignment, assignment_lhs_identifier:ret, literal:List
@@ -983,7 +983,7 @@ def qr_householder(A): # function:qr_householder (-> +16), function_returning_a_
 # ----------------------------------------------------------------------------------------
 from math import sqrt # import:math:sqrt, import_module:math, import_name:sqrt
 from typing import Tuple # import:typing:Tuple, import_module:typing, import_name:Tuple
-def QuadraticEquation(a: int, b: int, c: int) -> Tuple[str, str]: # function:QuadraticEquation, function_returning_a_value:QuadraticEquation, index
+def QuadraticEquation(a: int, b: int, c: int) -> Tuple[str, str]: # function:QuadraticEquation (-> +10), function_returning_a_value:QuadraticEquation (-> +10), index
     if a == 0: # comparison_operator:Eq, if (-> +1), int_literal, literal:Num
         raise ValueError("Coefficient 'a' must not be zero for quadratic equations.") # function_call:ValueError, if_then_branch, literal:Str, raise:ValueError
     delta = b * b - 4 * a * c # assignment, assignment_lhs_identifier:delta, assignment_rhs_identifier:a, assignment_rhs_identifier:b, assignment_rhs_identifier:c, binary_operator:Mult, binary_operator:Sub, int_literal, literal:Num, suggest_constant_definition
@@ -1304,7 +1304,7 @@ def main(): # function:main (-> +9), procedure:main (-> +9)
 # ----------------------------------------------------------------------------------------
 import datetime # import:datetime, import_module:datetime
 import argparse # import:argparse, import_module:argparse
-def zeller(date_input: str) -> str: # function:zeller, function_returning_a_value:zeller
+def zeller(date_input: str) -> str: # function:zeller (-> +46), function_returning_a_value:zeller (-> +46)
     days = { # assignment, assignment_lhs_identifier:days, literal:Dict
         "0": "Sunday", # literal:Str
         "1": "Monday", # literal:Str
