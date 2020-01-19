@@ -10,7 +10,7 @@ a = b # assignment
 # ----------------------------------------------------------------------------------------
 def print_collatz(n): # added_block_label (-> +7)
                       # function:print_collatz (-> +7)
-                      # procedure:print_collatz (-> +7)
+                      # function_returning_nothing:print_collatz (-> +7)
     while n != 1: # comparison_operator:NotEq
                   # evolve_state (-> +5)
                   # int_literal
@@ -51,10 +51,12 @@ def print_collatz(n): # added_block_label (-> +7)
 # tests/data/simple/function_definition.py
 # ----------------------------------------------------------------------------------------
 def succ(n): # function:succ (-> +1)
-             # function_returning_a_value:succ (-> +1)
+             # function_returning_something:succ (-> +1)
     return a + b + 1 # binary_operator:Add
                      # int_literal
                      # literal:Num
+                     # return
+                     # return_something
 
 # ----------------------------------------------------------------------------------------
 # tests/data/simple/loop.py

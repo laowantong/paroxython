@@ -46,8 +46,11 @@
       - [Construct `negation`](#construct-negation)
   - [Function definitions](#function-definitions)
       - [Construct `function`](#construct-function)
-      - [Construct `function_returning_a_value`](#construct-function_returning_a_value)
-      - [Construct `procedure`](#construct-procedure)
+      - [Construct `return`](#construct-return)
+      - [Construct `return_nothing`](#construct-return_nothing)
+      - [Construct `return_something`](#construct-return_something)
+      - [Construct `function_returning_something`](#construct-function_returning_something)
+      - [Construct `function_returning_nothing`](#construct-function_returning_nothing)
       - [Construct `function_with_default_positional_arguments`](#construct-function_with_default_positional_arguments)
       - [Construct `recursive_function`](#construct-recursive_function)
       - [Construct `deeply_recursive_function`](#construct-deeply_recursive_function)
@@ -1298,53 +1301,173 @@ Update a variable by negating it.
 
 --------------------------------------------------------------------------------
 
-#### Construct `function_returning_a_value`
-
-A function returns a value iff it contains a statement `return` and the returned value is not `None`.
+#### Construct `return`
 
 ##### Definition
 
 ```re
-           ^(.*)/_type='FunctionDef'
+           ^(.*)/_type='Return'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
-\n(?:\1.+\n)*?\1/name='(?P<SUFFIX>.+)'
-\n(?:\1.+\n)* \1/(?P<_1>.+)/_type='Return'
-\n(?:\1.+\n)*?\1/(?P=_1)   /value/lineno=(?P<LINE>\d+)
-\n            \1/(?P=_1)   /value/.+(?<!value=None)$
-(   # capture the line number of the last line of the function (it may appear before Return)
-\n(?:\1.+\n)* \1.+/lineno=(?P<LINE>\d+)
-)?
 ```
 
 ##### Example
 
 ```python
-1   def foo(bar):
-2       if a:
-3           return b
-4       print(c)
-5       return None
-6
-7   def bar(foo):
-8       if a:
-9           return None
-10      print(c)
+1   def foobar():
+2       return a
+3       return (b, c)
+4       return d(e)
+5       return f + g
+6       return 2
+7       return None
+8       return
 ```
 
 ##### Matches
 
 | Label | Lines |
 |:--|:--|
-| `function_returning_a_value:foo` | 1-5 |
+| `return` | 2, 3, 4, 5, 6, 7, 8 |
 
 --------------------------------------------------------------------------------
 
-#### Construct `procedure`
+#### Construct `return_nothing`
+
+A `return` statement returning no value, or whose returned value is `None`.
+
+##### Definition
+
+```re
+           ^(.*)/_type='Return'
+\n(?:\1.+\n)*?\1/(value/)?lineno=(?P<LINE>\d+)
+\n            \1/(value/)?value=None
+```
+
+##### Example
+
+```python
+1   def foobar():
+2       return a
+3       return (b, c)
+4       return d(e)
+5       return f + g
+6       return 2
+7       return None
+8       return
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `return_nothing` | 7, 8 |
+
+--------------------------------------------------------------------------------
+
+#### Construct `return_something`
+
+A `return` statement returning a value distinct from `None`.
 
 ##### Definition
 
 ```sql
-SELECT "procedure",
+SELECT "return_something",
+       "",
+       span
+FROM t
+WHERE name_prefix = "return"
+  AND span NOT IN
+    (SELECT span
+     FROM t
+     WHERE name_prefix = "return_nothing" )
+```
+
+##### Example
+
+```python
+1   def foobar():
+2       return a
+3       return (b, c)
+4       return d(e)
+5       return f + g
+6       return 2
+7       return None # not match
+8       return # not match
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `return_something` | 2, 3, 4, 5, 6 |
+
+--------------------------------------------------------------------------------
+
+#### Construct `function_returning_something`
+
+A function returning at least one value distinct from `None` is the smallest `function` including a `return_something` clause.
+
+##### Definition
+
+```sql
+SELECT "function_returning_something",
+       f.name_suffix,
+       max(f.span_start) || "-" || min(f.span_end)
+FROM t f
+JOIN t r ON (f.span_start <= r.span_start
+             AND r.span_end <= f.span_end)
+WHERE f.name_prefix = "function"
+  AND r.name_prefix = "return_something"
+GROUP BY r.rowid
+```
+
+##### Example
+
+```python
+1   def a():
+2       return x
+3
+4   def b():
+5       return
+6
+7   def c():
+8       if foobar:
+9           return 0
+10      return
+11
+12  def d():
+13      yield x
+14
+15  def e():
+16      def f():
+17          return x
+18      pass
+19
+20  def g():
+21      def h():
+22          pass
+23      return x
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `function_returning_something:a` | 1-2 |
+| `function_returning_something:c` | 7-10 |
+| `function_returning_something:f` | 16-17 |
+| `function_returning_something:g` | 20-23 |
+
+--------------------------------------------------------------------------------
+
+#### Construct `function_returning_nothing`
+
+A function returning nothing (aka procedure) is a function which is neither a generator or a function returning something.
+
+##### Definition
+
+```sql
+SELECT "function_returning_nothing",
        name_suffix,
        span
 FROM t
@@ -1352,31 +1475,45 @@ WHERE name_prefix = "function"
   AND span NOT IN
     (SELECT span
      FROM t
-     WHERE name_prefix = "function_returning_a_value" )
+     WHERE name_prefix IN ("function_returning_something",
+                           "generator") )
 ```
-
-**Explanation.** Select all functions whose span is not that of a function returning a value.
 
 ##### Example
 
 ```python
-1   def foo(bar):
-2       if a:
-3           return b
-4       print(c)
-5       return None
+1   def a():
+2       return x
+3
+4   def b():
+5       return
 6
-7   def bar(foo):
-8       if a:
-9           return None
-10      print(c)
+7   def c():
+8       if foobar:
+9           return 0
+10      return
+11
+12  def d():
+13      yield x
+14
+15  def e():
+16      def f():
+17          return x
+18      pass
+19
+20  def g():
+21      def h():
+22          pass
+23      return x
 ```
 
 ##### Matches
 
 | Label | Lines |
 |:--|:--|
-| `procedure:bar` | 7-10 |
+| `function_returning_nothing:b` | 4-5 |
+| `function_returning_nothing:e` | 15-18 |
+| `function_returning_nothing:h` | 21-22 |
 
 --------------------------------------------------------------------------------
 

@@ -21,7 +21,8 @@
 - function_call:input / loop.py / 1
 - function_call:print / collatz_print.py / 3, 8
 - function_call:print / loop.py / 2
-- function_returning_a_value:succ / function_definition.py / 1-2
+- function_returning_nothing:print_collatz / collatz_print.py / 1-8
+- function_returning_something:succ / function_definition.py / 1-2
 - if / collatz_print.py / 4-7
 - if_else_branch / collatz_print.py / 7
 - if_test_id:n / collatz_print.py / 4
@@ -31,7 +32,8 @@
 - literal:Num / collatz_print.py / 2, 4, 4, 5, 7, 7
 - literal:Num / function_definition.py / 2
 - literal:Str / loop.py / 2
-- procedure:print_collatz / collatz_print.py / 1-8
+- return / function_definition.py / 2
+- return_something / function_definition.py / 2
 - suggest_augmented_assignment / collatz_print.py / 5
 - suggest_conditional_expression / collatz_print.py / 4-7
 - suggest_constant_definition / collatz_print.py / 7
@@ -75,7 +77,6 @@
 - for_range_stop
 - function
 - function_call
-- function_returning_a_value
 - function_with_default_positional_arguments
 - generator
 - if_elif_branch
@@ -95,6 +96,7 @@
 - nested_function
 - raise
 - recursive_function
+- return_nothing
 - slice
 - slice_step
 - square_nested_for
