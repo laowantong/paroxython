@@ -208,7 +208,7 @@ In the AST, a floating point literal consists of digits and at least one symbol 
 ```re
            ^(.*)/_type='Num'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
-\n(?:\1.+\n)*?\1/n=-?[\de\.]*[e\.][\de\.]*\n
+\n(?:\1.+\n)*?\1/n=.*?[e\.].*(?<!j)\n
 ```
 
 ##### Example
@@ -224,7 +224,7 @@ In the AST, a floating point literal consists of digits and at least one symbol 
 
 | Label | Lines |
 |:--|:--|
-| `float_literal` | 3, 3, 3, 3, 3 |
+| `float_literal` | 3, 3, 3, 3, 3, 3, 3 |
 
 --------------------------------------------------------------------------------
 
@@ -237,7 +237,7 @@ In the AST, an imaginary literal contains the same symbols as a floating point l
 ```re
            ^(.*)/_type='Num'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
-\n(?:\1.+\n)*?\1/n=-?[\de\.]*j\n
+\n(?:\1.+\n)*?\1/n=.*j\n
 ```
 
 ##### Example
@@ -253,7 +253,7 @@ In the AST, an imaginary literal contains the same symbols as a floating point l
 
 | Label | Lines |
 |:--|:--|
-| `imaginary_literal` | 4, 4, 4, 4, 4 |
+| `imaginary_literal` | 4, 4, 4, 4, 4, 4, 4 |
 
 --------------------------------------------------------------------------------
 
