@@ -6,7 +6,7 @@ import regex  # type: ignore
 import sqlparse
 
 import context
-from paroxython.parse_program import ProgramParser
+from paroxython.parse_program import ProgramParser, find_all_constructs
 from paroxython.user_types import Program
 from paroxython.preprocess_source import (
     cleanup_factory,
@@ -18,17 +18,36 @@ from paroxython.generate_programs import generate_programs
 from make_snapshot import make_snapshot
 
 
-def generate_toc(text):
+def title_converter():
     slug_counts = defaultdict(int)
+    cache = {}
+
+    def title_to_slug(title, use_counts=False):
+        if title not in cache:
+            slug = normalize("NFD", title.lower()).encode("ASCII", "ignore").decode("ASCII")
+            slug = slug.replace(" ", "-")
+            slug = regex.sub(r"[^\w-]", "", slug)
+            cache[title] = slug
+        if use_counts:
+            slug = cache[title]
+            slug = f"{slug}-{slug_counts[slug]}"
+            slug = slug.rstrip("-0")
+            slug_counts[slug] += 1
+            return slug
+        else:
+            return cache[title]
+
+    return title_to_slug
+
+
+title_to_slug = title_converter()
+
+
+def generate_toc(text):
     for match in regex.finditer(r"(?m)^(#{1,4}) (.+)", text):
         (hashtags, title) = match.groups()
         offset = "  " * (len(hashtags) - 1) + "- "
-        slug = normalize("NFD", title.lower()).encode("ASCII", "ignore").decode("ASCII")
-        slug = slug.replace(" ", "-")
-        slug = regex.sub(r"[^\w-]", "", slug)
-        slug = f"{slug}-{slug_counts[slug]}"
-        slug = slug.rstrip("-0")
-        slug_counts[slug] += 1
+        slug = title_to_slug(title, use_counts=True)
         yield f"{offset}[{title}](#{slug})"
 
 
@@ -43,6 +62,80 @@ def reformat_sql(match):
     return f"```sql\n{string}\n```"
 
 
+def dependency_map(text):
+
+    find_iter_requirements = regex.compile(
+        r"""(?msx)
+        name_prefix\s(
+            =\s"(?P<REQUIRED_LABEL_NAME>.+?)"
+            |
+            IN\s\(("(?P<REQUIRED_LABEL_NAME>.+?)".*?)+\)
+            )
+    """
+    ).finditer
+
+    def label_converter(label_patterns):
+        cache = {}
+
+        def label_name_to_pattern(label_name):
+            if label_name not in cache:
+                for label_pattern in label_patterns:
+                    if regex.fullmatch(label_pattern, label_name):
+                        cache[label_name] = label_pattern
+                        break
+                else:
+                    raise ValueError(f"Unable to match '{label_name}' with a known pattern")
+            return cache[label_name]
+
+        return label_name_to_pattern
+
+    requires = defaultdict(set)
+    required_by = defaultdict(set)
+    all_constructs = find_all_constructs(text)
+    label_name_to_pattern = label_converter([construct[0] for construct in all_constructs])
+    for (label_pattern, language, query) in all_constructs:
+        if language == "re":
+            continue
+        for m in find_iter_requirements(query):
+            required_label_patterns = [
+                label_name_to_pattern(x) for x in m.captures("REQUIRED_LABEL_NAME")
+            ]
+            requires[label_pattern].update(required_label_patterns)
+            for required_label_pattern in required_label_patterns:
+                required_by[required_label_pattern].add(label_pattern)
+    keys = set(requires).union(required_by)
+    result = {}
+    for key in keys:
+        result[key] = {}
+        if key in requires:
+            result[key]["Requires"] = sorted(requires[key])
+        if key in required_by:
+            result[key]["Required by"] = sorted(required_by[key])
+    return result
+
+
+def inject_dependencies(text):
+    for (key, entries) in dependency_map(text).items():
+        new_section = [f"##### Dependencies\n"]
+        for (kind, constructs) in entries.items():
+            acc = []
+            for construct in constructs:
+                slug = title_to_slug(f"Construct `{construct}`")
+                acc.append(f"[construct `{construct}`](#{slug})")
+            if len(acc) == 1:
+                construct_string = f" {acc[0]}."
+            else:
+                construct_string = ":\n  1. " + "\n  1. ".join(acc)
+            new_section.append(f"- {kind}{construct_string}")
+        new_section.append("\n")
+        text = regex.sub(
+            r"(?msx)^(\#{4}\s+Construct\s+`%s`.+?)^(?=\#{5}\s+Definition)" % regex.escape(key),
+            r"\1" + "\n".join(new_section),
+            text,
+        )
+    return text
+
+
 def reformat_file(construct_path):
     text = construct_path.read_text()
     toc = "\n".join(generate_toc(text))
@@ -54,13 +147,15 @@ def reformat_file(construct_path):
     text = regex.sub(r"(?ms)^(\| Label \| .+?)(^\#{1,3} )", fr"\1{rule}\n\2", text)
     text = regex.sub(r"(?=\n\#{4} )", fr"\n{rule}", text)
     text = regex.sub(r"(?ms)^```sql\n(.+?)\n```", reformat_sql, text)
+    text = regex.sub(r"(?ms)^\#{5} Dependencies\n.+?^(?=\#{5} Definition)", "", text)
+    text = inject_dependencies(text)
     construct_path.write_text(text)
 
 
 def extract_examples(construct_path):
     text = construct_path.read_text()
     rex = r"""(?msx)
-        ^\#{4}\s+Constructs?\s+`(.+?)` # capture the label's pattern
+        ^\#{4}\s+Construct\s+`(.+?)` # capture the label's pattern
         .+?\#{5}\s+Example # ensure the next code is in the Example section
         .+?```python\n+(.+?)\n``` # capture the source
         .+?\#{5}\s+Matches.+?^\|:--\|:--\| # ensure the table is in the Matches section

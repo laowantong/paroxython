@@ -18,7 +18,7 @@
       - [Construct `boolean_operator`](#construct-boolean_operator)
       - [Construct `comparison_operator`](#construct-comparison_operator)
       - [Construct `chained_comparison`](#construct-chained_comparison)
-      - [Constructs `chained_equalities|chained_inequalities`](#constructs-chained_equalitieschained_inequalities)
+      - [Construct `chained_equalities|chained_inequalities`](#construct-chained_equalitieschained_inequalities)
       - [Construct `divisibility_test`](#construct-divisibility_test)
       - [Construct `short_circuit`](#construct-short_circuit)
   - [Calls](#calls)
@@ -82,7 +82,7 @@
       - [Construct `try`](#construct-try)
       - [Construct `raise`](#construct-raise)
       - [Construct `except`](#construct-except)
-      - [Constructs `try_raise|try_except`](#constructs-try_raisetry_except)
+      - [Construct `try_raise|try_except`](#construct-try_raisetry_except)
   - [Modules](#modules)
       - [Construct `import_module`](#construct-import_module)
       - [Construct `import_name`](#construct-import_name)
@@ -528,6 +528,10 @@ Match the so-called ternary operator.
 
 #### Construct `comparison_operator`
 
+##### Dependencies
+
+- Required by [construct `chained_equalities|chained_inequalities`](#construct-chained_equalitieschained_inequalities).
+
 ##### Definition
 
 ```re
@@ -556,6 +560,10 @@ Match the so-called ternary operator.
 
 #### Construct `chained_comparison`
 
+##### Dependencies
+
+- Required by [construct `chained_equalities|chained_inequalities`](#construct-chained_equalitieschained_inequalities).
+
 ##### Definition
 
 ```re
@@ -581,7 +589,13 @@ Match the so-called ternary operator.
 
 --------------------------------------------------------------------------------
 
-#### Constructs `chained_equalities|chained_inequalities`
+#### Construct `chained_equalities|chained_inequalities`
+
+##### Dependencies
+
+- Requires:
+  1. [construct `chained_comparison`](#construct-chained_comparison)
+  1. [construct `comparison_operator`](#construct-comparison_operator)
 
 ##### Definition
 
@@ -730,6 +744,10 @@ When the value of the left operand suffices to determine the value of a boolean 
 
 #### Construct `call_parameter`
 
+##### Dependencies
+
+- Required by [construct `accumulate_elements`](#construct-accumulate_elements).
+
 ##### Definition
 
 ```re
@@ -762,6 +780,10 @@ When the value of the left operand suffices to determine the value of a boolean 
 
 #### Construct `method_call`
 
+##### Dependencies
+
+- Required by [construct `accumulate_elements`](#construct-accumulate_elements).
+
 ##### Definition
 
 ```re
@@ -788,6 +810,10 @@ When the value of the left operand suffices to determine the value of a boolean 
 --------------------------------------------------------------------------------
 
 #### Construct `method_call_object`
+
+##### Dependencies
+
+- Required by [construct `accumulate_elements`](#construct-accumulate_elements).
 
 ##### Definition
 
@@ -1040,6 +1066,10 @@ Match a comprehension with an `if` clause.
 
 #### Construct `augmented_assignment`
 
+##### Dependencies
+
+- Required by [construct `accumulate_elements`](#construct-accumulate_elements).
+
 ##### Definition
 
 ```re
@@ -1097,6 +1127,10 @@ Match a comprehension with an `if` clause.
 
 Capture any identifier appearing on the left hand side of an assignment (possibly augmented).
 
+##### Dependencies
+
+- Required by [construct `accumulate_elements`](#construct-accumulate_elements).
+
 ##### Definition
 
 ```re
@@ -1153,6 +1187,10 @@ Capture any identifier appearing on the left hand side of an assignment (possibl
 #### Construct `assignment_rhs_identifier`
 
 Capture any identifier (variable or function) appearing on the right hand side of an assignment (possibly augmented).
+
+##### Dependencies
+
+- Required by [construct `accumulate_elements`](#construct-accumulate_elements).
 
 ##### Definition
 
@@ -1267,6 +1305,12 @@ Update a variable by negating it.
 
 #### Construct `function`
 
+##### Dependencies
+
+- Required by:
+  1. [construct `function_returning_nothing`](#construct-function_returning_nothing)
+  1. [construct `function_returning_something`](#construct-function_returning_something)
+
 ##### Definition
 
 ```re
@@ -1303,6 +1347,10 @@ Update a variable by negating it.
 
 #### Construct `return`
 
+##### Dependencies
+
+- Required by [construct `return_something`](#construct-return_something).
+
 ##### Definition
 
 ```re
@@ -1334,6 +1382,10 @@ Update a variable by negating it.
 #### Construct `return_nothing`
 
 A `return` statement returning no value, or whose returned value is `None`.
+
+##### Dependencies
+
+- Required by [construct `return_something`](#construct-return_something).
 
 ##### Definition
 
@@ -1367,6 +1419,13 @@ A `return` statement returning no value, or whose returned value is `None`.
 #### Construct `return_something`
 
 A `return` statement returning a value distinct from `None`.
+
+##### Dependencies
+
+- Requires:
+  1. [construct `return`](#construct-return)
+  1. [construct `return_nothing`](#construct-return_nothing)
+- Required by [construct `function_returning_something`](#construct-function_returning_something).
 
 ##### Definition
 
@@ -1406,6 +1465,13 @@ WHERE name_prefix = "return"
 #### Construct `function_returning_something`
 
 A function returning at least one value distinct from `None` is the smallest `function` including a `return_something` clause.
+
+##### Dependencies
+
+- Requires:
+  1. [construct `function`](#construct-function)
+  1. [construct `return_something`](#construct-return_something)
+- Required by [construct `function_returning_nothing`](#construct-function_returning_nothing).
 
 ##### Definition
 
@@ -1463,6 +1529,13 @@ GROUP BY r.rowid
 #### Construct `function_returning_nothing`
 
 A function returning nothing (aka procedure) is a function which is neither a generator or a function returning something.
+
+##### Dependencies
+
+- Requires:
+  1. [construct `function`](#construct-function)
+  1. [construct `function_returning_something`](#construct-function_returning_something)
+  1. [construct `generator`](#construct-generator)
 
 ##### Definition
 
@@ -1700,6 +1773,10 @@ A tail call is a subroutine call performed as the last action of a procedure. A 
 
 #### Construct `generator`
 
+##### Dependencies
+
+- Required by [construct `function_returning_nothing`](#construct-function_returning_nothing).
+
 ##### Definition
 
 ```re
@@ -1807,6 +1884,10 @@ Function enclosing the definition of an inner function and returning it. Beware 
 
 Match an entire conditional (from the `if` clause to the last line of its body).
 
+##### Dependencies
+
+- Required by [construct `nested_if`](#construct-nested_if).
+
 ##### Definition
 
 ```re
@@ -1891,6 +1972,10 @@ Match any identifier present in the condition of an `if` statement.
 
 Match the body of the branch “`then`” of an `if` statement.
 
+##### Dependencies
+
+- Required by [construct `nested_if`](#construct-nested_if).
+
 ##### Definition
 
 ```re
@@ -1944,6 +2029,10 @@ Match the body of the branch “`then`” of an `if` statement.
 #### Construct `if_elif_branch`
 
 Match the body of an `elif` clause, which is (or could be rewritten as) an `else` branch consisting in a single statement `if`.
+
+##### Dependencies
+
+- Required by [construct `nested_if`](#construct-nested_if).
 
 ##### Definition
 
@@ -2001,6 +2090,10 @@ Match the body of an `elif` clause, which is (or could be rewritten as) an `else
 
 Match the body of the possible branch `else` of an `if` statement.
 
+##### Dependencies
+
+- Required by [construct `nested_if`](#construct-nested_if).
+
 ##### Definition
 
 ```re
@@ -2053,6 +2146,14 @@ Match the body of the possible branch `else` of an `if` statement.
 #### Construct `nested_if`
 
 Match an `if` clause nested in _n_ other `if` clauses, suffixing it by _n_.
+
+##### Dependencies
+
+- Requires:
+  1. [construct `if`](#construct-if)
+  1. [construct `if_elif_branch`](#construct-if_elif_branch)
+  1. [construct `if_else_branch`](#construct-if_else_branch)
+  1. [construct `if_then_branch`](#construct-if_then_branch)
 
 ##### Definition
 
@@ -2111,6 +2212,12 @@ ORDER BY inner_if.span_start
 #### Construct `for`
 
 Match sequential loops, along with their iteration variable(s).
+
+##### Dependencies
+
+- Required by:
+  1. [construct `accumulate_elements`](#construct-accumulate_elements)
+  1. [construct `nested_for`](#construct-nested_for)
 
 ##### Definition
 
@@ -2352,6 +2459,10 @@ Iterate over index numbers of a collection.
 
 Match a `for` statement nested in _n_ other `for` statements, suffixing it by _n_.
 
+##### Dependencies
+
+- Requires [construct `for`](#construct-for).
+
 ##### Definition
 
 ```sql
@@ -2533,6 +2644,10 @@ Two nested `for` loops doing the same number of iterations.
 
 #### Construct `try`
 
+##### Dependencies
+
+- Required by [construct `try_raise|try_except`](#construct-try_raisetry_except).
+
 ##### Definition
 
 ```re
@@ -2562,6 +2677,10 @@ Two nested `for` loops doing the same number of iterations.
 --------------------------------------------------------------------------------
 
 #### Construct `raise`
+
+##### Dependencies
+
+- Required by [construct `try_raise|try_except`](#construct-try_raisetry_except).
 
 ##### Definition
 
@@ -2606,6 +2725,10 @@ Two nested `for` loops doing the same number of iterations.
 
 #### Construct `except`
 
+##### Dependencies
+
+- Required by [construct `try_raise|try_except`](#construct-try_raisetry_except).
+
 ##### Definition
 
 ```re
@@ -2647,7 +2770,14 @@ Two nested `for` loops doing the same number of iterations.
 
 --------------------------------------------------------------------------------
 
-#### Constructs `try_raise|try_except`
+#### Construct `try_raise|try_except`
+
+##### Dependencies
+
+- Requires:
+  1. [construct `except`](#construct-except)
+  1. [construct `raise`](#construct-raise)
+  1. [construct `try`](#construct-try)
 
 ##### Definition
 
@@ -2698,6 +2828,10 @@ GROUP BY e.rowid
 
 #### Construct `import_module`
 
+##### Dependencies
+
+- Required by [construct `import`](#construct-import).
+
 ##### Definition
 
 ```re
@@ -2740,6 +2874,10 @@ GROUP BY e.rowid
 
 #### Construct `import_name`
 
+##### Dependencies
+
+- Required by [construct `import`](#construct-import).
+
 ##### Definition
 
 ```re
@@ -2776,6 +2914,12 @@ GROUP BY e.rowid
 #### Construct `import`
 
 Suffixed by the imported module and, if any, the imported name. In most cases, could replace the two low-level constructs `import_module` and `import_name`.
+
+##### Dependencies
+
+- Requires:
+  1. [construct `import_module`](#construct-import_module)
+  1. [construct `import_name`](#construct-import_name)
 
 ##### Definition
 
@@ -2830,6 +2974,17 @@ WHERE m.name_prefix = "import_module"
 #### Construct `accumulate_elements`
 
 An accumulator is iteratively updated from its previous value and those of the iteration variable.
+
+##### Dependencies
+
+- Requires:
+  1. [construct `assignment_lhs_identifier`](#construct-assignment_lhs_identifier)
+  1. [construct `assignment_rhs_identifier`](#construct-assignment_rhs_identifier)
+  1. [construct `augmented_assignment`](#construct-augmented_assignment)
+  1. [construct `call_parameter`](#construct-call_parameter)
+  1. [construct `for`](#construct-for)
+  1. [construct `method_call`](#construct-method_call)
+  1. [construct `method_call_object`](#construct-method_call_object)
 
 ##### Definition
 
