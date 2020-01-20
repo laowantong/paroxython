@@ -27,7 +27,7 @@ simplify_negative_literals = _simplify_negative_literals()
 
 find_all_constructs = regex.compile(
     r"""(?msx)
-            ^\#{4}\s+Constructs?\s+`(.+?)` # capture the label's pattern
+            ^\#{4}\s+Construct\s+`(.+?)` # capture the label's pattern
             .+?\#{5}\s+Definition # ensure the next pattern is in the Definition section
             .+?```(.*?)\n+(.*?)\n``` # capture the language and the pattern
         """

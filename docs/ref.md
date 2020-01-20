@@ -1305,6 +1305,8 @@ Update a variable by negating it.
 
 #### Construct `function`
 
+In Python, the term "function" encompasses any type of subroutine, be it a method, a procedure, a generator or a "pure" function.
+
 ##### Dependencies
 
 - Required by:
@@ -1331,10 +1333,21 @@ Update a variable by negating it.
 6       bar += 1
 7       print(bar)
 8
-9   foo(42)
+9   @decoration
+10  def christmas_tree():
+11      pass
+12
+13  def function_with_types(x: Int) -> Int:
+14      return x + 1
+15
+16  class Foo:
+17
+18      def bar(self):
+19          pass
+20
+21  def generator():
+22      yield x
 ```
-
-**Limitation.** This regex and the next one do not work properly when the function is decorated or has type hints ([#4](https://github.com/laowantong/paroxython/issues/4)).
 
 ##### Matches
 
@@ -1342,6 +1355,10 @@ Update a variable by negating it.
 |:--|:--|
 | `function:foo` | 1-7 |
 | `function:fizz` | 2-4 |
+| `function:christmas_tree` | 9-11 |
+| `function:function_with_types` | 13-14 |
+| `function:bar` | 18-19 |
+| `function:generator` | 21-22 |
 
 --------------------------------------------------------------------------------
 
