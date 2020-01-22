@@ -66,10 +66,10 @@ def dependency_map(text):
 
     find_iter_requirements = regex.compile(
         r"""(?msx)
-        name_prefix\s(
-            =\s"(?P<REQUIRED_LABEL_NAME>.+?)"
+        name(_prefix)?\s(
+            ==?\s"(?P<REQUIRED_LABEL_NAME>.+?)(:.+)?"
             |
-            IN\s\(("(?P<REQUIRED_LABEL_NAME>.+?)".*?)+\)
+            IN\s\(("(?P<REQUIRED_LABEL_NAME>.+?)(:.+)?".*?)+\)
             )
     """
     ).finditer
