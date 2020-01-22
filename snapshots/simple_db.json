@@ -68,8 +68,7 @@
         "function_returning_something:succ": [[1,2]],
         "int_literal": [[2,2]],
         "literal:Num": [[2,2]],
-        "return": [[2,2]],
-        "return_something": [[2,2]]
+        "return": [[2,2]]
       },
       "taxons": {
         "operator/addition/": [[2,2]],
@@ -194,9 +193,6 @@
       "tests/data/simple/function_definition.py"
     ],
     "return": [
-      "tests/data/simple/function_definition.py"
-    ],
-    "return_something": [
       "tests/data/simple/function_definition.py"
     ],
     "function_call:input": [

@@ -56,7 +56,6 @@ def succ(n): # function:succ (-> +1)
                      # int_literal
                      # literal:Num
                      # return
-                     # return_something
 
 # ----------------------------------------------------------------------------------------
 # tests/data/simple/loop.py

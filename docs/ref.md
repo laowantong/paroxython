@@ -47,8 +47,6 @@
   - [Function definitions](#function-definitions)
       - [Construct `function`](#construct-function)
       - [Construct `return`](#construct-return)
-      - [Construct `return_nothing`](#construct-return_nothing)
-      - [Construct `return_something`](#construct-return_something)
       - [Construct `function_returning_something`](#construct-function_returning_something)
       - [Construct `function_returning_nothing`](#construct-function_returning_nothing)
       - [Construct `function_with_default_positional_arguments`](#construct-function_with_default_positional_arguments)
@@ -1364,15 +1362,20 @@ In Python, the term "function" encompasses any type of subroutine, be it a metho
 
 #### Construct `return`
 
+Recognize a `return` clause and, when the returned object is a simple identifier, a number literal, `True`, `False` or `None`, suffix it. Note that a `return` statement returning no value is denoted by `return:None`, not to be confounded with `result` (without suffix), which denotes the return of an object which is not a simple identifier, a number litteral, `True`, `False` or `None`.
+
 ##### Dependencies
 
-- Required by [construct `return_something`](#construct-return_something).
+- Required by [construct `function_returning_something`](#construct-function_returning_something).
 
 ##### Definition
 
 ```re
            ^(.*)/_type='Return'
 \n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
+(
+\n(?:\1.+\n)*?\1/value(/value|/n|/id)?='?(?P<SUFFIX>.+?)\b'?
+)?
 ```
 
 ##### Example
@@ -1380,102 +1383,25 @@ In Python, the term "function" encompasses any type of subroutine, be it a metho
 ```python
 1   def foobar():
 2       return a
-3       return (b, c)
-4       return d(e)
-5       return f + g
+3       return (b, c) # no suffix
+4       return d(e)   # no suffix
+5       return f + g  # no suffix
 6       return 2
-7       return None
-8       return
+7       return True
+8       return None
+9       return
+10      return "foobar"
 ```
 
 ##### Matches
 
 | Label | Lines |
 |:--|:--|
-| `return` | 2, 3, 4, 5, 6, 7, 8 |
-
---------------------------------------------------------------------------------
-
-#### Construct `return_nothing`
-
-A `return` statement returning no value, or whose returned value is `None`.
-
-##### Dependencies
-
-- Required by [construct `return_something`](#construct-return_something).
-
-##### Definition
-
-```re
-           ^(.*)/_type='Return'
-\n(?:\1.+\n)*?\1/(value/)?lineno=(?P<LINE>\d+)
-\n            \1/(value/)?value=None
-```
-
-##### Example
-
-```python
-1   def foobar():
-2       return a
-3       return (b, c)
-4       return d(e)
-5       return f + g
-6       return 2
-7       return None
-8       return
-```
-
-##### Matches
-
-| Label | Lines |
-|:--|:--|
-| `return_nothing` | 7, 8 |
-
---------------------------------------------------------------------------------
-
-#### Construct `return_something`
-
-A `return` statement returning a value distinct from `None`.
-
-##### Dependencies
-
-- Requires:
-  1. [construct `return`](#construct-return)
-  1. [construct `return_nothing`](#construct-return_nothing)
-- Required by [construct `function_returning_something`](#construct-function_returning_something).
-
-##### Definition
-
-```sql
-SELECT "return_something",
-       "",
-       span
-FROM t
-WHERE name_prefix = "return"
-  AND span NOT IN
-    (SELECT span
-     FROM t
-     WHERE name_prefix = "return_nothing" )
-```
-
-##### Example
-
-```python
-1   def foobar():
-2       return a
-3       return (b, c)
-4       return d(e)
-5       return f + g
-6       return 2
-7       return None # not match
-8       return # not match
-```
-
-##### Matches
-
-| Label | Lines |
-|:--|:--|
-| `return_something` | 2, 3, 4, 5, 6 |
+| `return:a` | 2 |
+| `return` | 3, 4, 5, 10 |
+| `return:2` | 6 |
+| `return:True` | 7 |
+| `return:None` | 8, 9 |
 
 --------------------------------------------------------------------------------
 
@@ -1487,7 +1413,7 @@ A function returning at least one value distinct from `None` is the smallest `fu
 
 - Requires:
   1. [construct `function`](#construct-function)
-  1. [construct `return_something`](#construct-return_something)
+  1. [construct `return`](#construct-return)
 - Required by [construct `function_returning_nothing`](#construct-function_returning_nothing).
 
 ##### Definition
@@ -1500,7 +1426,8 @@ FROM t f
 JOIN t r ON (f.span_start <= r.span_start
              AND r.span_end <= f.span_end)
 WHERE f.name_prefix = "function"
-  AND r.name_prefix = "return_something"
+  AND r.name_prefix = "return"
+  AND r.name_suffix != "None"
 GROUP BY r.rowid
 ```
 

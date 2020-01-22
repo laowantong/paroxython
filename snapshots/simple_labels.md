@@ -33,7 +33,6 @@
 - literal:Num / function_definition.py / 2
 - literal:Str / loop.py / 2
 - return / function_definition.py / 2
-- return_something / function_definition.py / 2
 - suggest_augmented_assignment / collatz_print.py / 5
 - suggest_conditional_expression / collatz_print.py / 4-7
 - suggest_constant_definition / collatz_print.py / 7
@@ -96,7 +95,6 @@
 - nested_function
 - raise
 - recursive_function
-- return_nothing
 - slice
 - slice_step
 - square_nested_for
