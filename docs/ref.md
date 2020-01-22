@@ -47,13 +47,14 @@
   - [Function definitions](#function-definitions)
       - [Construct `function`](#construct-function)
       - [Construct `return`](#construct-return)
+      - [Construct `yield`](#construct-yield)
+      - [Construct `generator`](#construct-generator)
       - [Construct `function_returning_something`](#construct-function_returning_something)
       - [Construct `function_returning_nothing`](#construct-function_returning_nothing)
       - [Construct `function_with_default_positional_arguments`](#construct-function_with_default_positional_arguments)
       - [Construct `recursive_function`](#construct-recursive_function)
       - [Construct `deeply_recursive_function`](#construct-deeply_recursive_function)
       - [Construct `body_recursive_function`](#construct-body_recursive_function)
-      - [Construct `generator`](#construct-generator)
       - [Construct `nested_function`](#construct-nested_function)
       - [Construct `closure`](#construct-closure)
   - [Conditionals](#conditionals)
@@ -1310,6 +1311,7 @@ In Python, the term "function" encompasses any type of subroutine, be it a metho
 - Required by:
   1. [construct `function_returning_nothing`](#construct-function_returning_nothing)
   1. [construct `function_returning_something`](#construct-function_returning_something)
+  1. [construct `generator`](#construct-generator)
 
 ##### Definition
 
@@ -1362,7 +1364,7 @@ In Python, the term "function" encompasses any type of subroutine, be it a metho
 
 #### Construct `return`
 
-Recognize a `return` clause and, when the returned object is a simple identifier, a number literal, `True`, `False` or `None`, suffix it. Note that a `return` statement returning no value is denoted by `return:None`, not to be confounded with `result` (without suffix), which denotes the return of an object which is not a simple identifier, a number litteral, `True`, `False` or `None`.
+Match `return` statements and, when the returned object is a simple identifier, a number literal, `True`, `False` or `None`, suffix it. Note that a `return` statement returning no value is denoted by `return:None`, not to be confounded with `result` (without suffix), which denotes the return of an object which is not a simple identifier, a number litteral, `True`, `False` or `None`.
 
 ##### Dependencies
 
@@ -1402,6 +1404,95 @@ Recognize a `return` clause and, when the returned object is a simple identifier
 | `return:2` | 6 |
 | `return:True` | 7 |
 | `return:None` | 8, 9 |
+
+--------------------------------------------------------------------------------
+
+#### Construct `yield`
+
+Match `yield` and `yieldfrom` _[expressions](https://docs.python.org/3/reference/expressions.html#yield-expressions)_ (generally used as statements). See [construct `return`](#construct-return) for a description of the suffix, if any.
+
+##### Dependencies
+
+- Required by [construct `generator`](#construct-generator).
+
+##### Definition
+
+```re
+           ^(.*)/_type='Yield(From)?'
+\n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
+(
+\n(?:\1.+\n)*?\1/value(/value|/n|/id)?='?(?P<SUFFIX>.+?)\b'?
+)?
+```
+
+##### Example
+
+```python
+1   def foobar():
+2       yield a
+3       yield (b, c) # no suffix
+4       yield d(e)   # no suffix
+5       yield f + g  # no suffix
+6       yield 2
+7       yield True
+8       yield None
+9       yield
+10      yield from seq
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `yield:a` | 2 |
+| `yield` | 3, 4, 5 |
+| `yield:2` | 6 |
+| `yield:True` | 7 |
+| `yield:None` | 8, 9 |
+| `yield:seq` | 10 |
+
+--------------------------------------------------------------------------------
+
+#### Construct `generator`
+
+##### Dependencies
+
+- Requires:
+  1. [construct `function`](#construct-function)
+  1. [construct `yield`](#construct-yield)
+- Required by [construct `function_returning_nothing`](#construct-function_returning_nothing).
+
+##### Definition
+
+```sql
+SELECT "generator",
+       f.name_suffix,
+       max(f.span_start) || "-" || min(f.span_end)
+FROM t f
+JOIN t y ON (f.span_start <= y.span_start
+             AND y.span_end <= f.span_end)
+WHERE f.name_prefix = "function"
+  AND y.name_prefix = "yield"
+GROUP BY y.rowid
+```
+
+##### Example
+
+```python
+1   def foo():
+2       for x in s:
+3           yield bar
+4
+5   def energy():
+6       yield from waste
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `generator:foo` | 1-3 |
+| `generator:energy` | 5-6 |
 
 --------------------------------------------------------------------------------
 
@@ -1712,45 +1803,6 @@ A tail call is a subroutine call performed as the last action of a procedure. A 
 | `body_recursive_function:recurs` | 10-15 |
 | `body_recursive_function:place` | 18-25 |
 | `body_recursive_function:body_sequence` | 27-28 |
-
---------------------------------------------------------------------------------
-
-#### Construct `generator`
-
-##### Dependencies
-
-- Required by [construct `function_returning_nothing`](#construct-function_returning_nothing).
-
-##### Definition
-
-```re
-           ^(.*)/_type='FunctionDef'
-\n(?:\1.+\n)*?\1/lineno=(?P<LINE>\d+)
-\n(?:\1.+\n)*?\1/name='(?P<SUFFIX>.+)'
-\n(?:\1.+\n)* \1/.+/lineno=(?P<LINE>\d+)
-\n(?:\1.+\n)* \1/.+/value/_type='Yield(From)?'
-(   # capture the line number of the last line of the function (it may appear before Call)
-\n(?:\1.+\n)* \1/.+/lineno=(?P<LINE>\d+)
-)?
-```
-
-##### Example
-
-```python
-1   def foo():
-2       for x in s:
-3           yield bar
-4
-5   def energy():
-6       yield from waste
-```
-
-##### Matches
-
-| Label | Lines |
-|:--|:--|
-| `generator:foo` | 1-3 |
-| `generator:energy` | 5-6 |
 
 --------------------------------------------------------------------------------
 

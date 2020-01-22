@@ -437,7 +437,7 @@ def prime_generator(): # function:prime_generator (-> +5), generator:prime_gener
     num = 2 # assignment, assignment_lhs_identifier:num, int_literal, literal:Num
     while True: # literal:True, while (-> +3)
         if primeCheck(num): # call_parameter:num, function_call:primeCheck, if (-> +1), if_test_id:num, if_test_id:primeCheck
-            yield num # if_then_branch
+            yield num # if_then_branch, yield:num
         num += 1 # assignment_lhs_identifier:num, augmented_assignment, int_literal, literal:Num
 def solution(n): # function:solution (-> +1), function_returning_something:solution (-> +1)
     return next(itertools.islice(prime_generator(), n - 1, n)) # binary_operator:Sub, call_parameter:n, composition, function_call:next, function_call:prime_generator, int_literal, literal:Num, method_call:islice, return
@@ -626,7 +626,7 @@ def prime_generator(): # function:prime_generator (-> +5), generator:prime_gener
     num = 2 # assignment, assignment_lhs_identifier:num, int_literal, literal:Num
     while True: # literal:True, while (-> +3)
         if primeCheck(num): # call_parameter:num, function_call:primeCheck, if (-> +1), if_test_id:num, if_test_id:primeCheck
-            yield num # if_then_branch
+            yield num # if_then_branch, yield:num
         num += 1 # assignment_lhs_identifier:num, augmented_assignment, int_literal, literal:Num
 def solution(n): # function:solution (-> +1), function_returning_something:solution (-> +1)
     return sum(takewhile(lambda x: x < n, prime_generator())) # comparison_operator:Lt, composition, function_call:prime_generator, function_call:sum, function_call:takewhile, lambda_function, return
@@ -747,7 +747,7 @@ def solution(): # function:solution (-> +8), function_returning_something:soluti
 # ----------------------------------------------------------------------------------------
 def triangle_number_generator(): # function:triangle_number_generator (-> +2), generator:triangle_number_generator (-> +2)
     for n in range(1, 1000000): # for:n (-> +1), for_range_start (-> +1), function_call:range, int_literal, literal:Num, suggest_constant_definition
-        yield n * (n + 1) // 2 # binary_operator:Add, binary_operator:FloorDiv, binary_operator:Mult, int_literal, literal:Num
+        yield n * (n + 1) // 2 # binary_operator:Add, binary_operator:FloorDiv, binary_operator:Mult, int_literal, literal:Num, yield
 def count_divisors(n): # function:count_divisors (-> +1), function_returning_something:count_divisors (-> +1)
     return sum([2 for i in range(1, int(n ** 0.5) + 1) if n % i == 0 and i * i != n]) # binary_operator:Add, binary_operator:Mod, binary_operator:Mult, binary_operator:Pow, boolean_operator:And, comparison_operator:Eq, comparison_operator:NotEq, composition, comprehension:List, comprehension_for_count:1, divisibility_test, filtered_comprehension, float_literal, function_call:int, function_call:range, function_call:sum, int_literal, literal:Num, return, suggest_constant_definition
 def solution(): # function:solution (-> +1), function_returning_something:solution (-> +1)
@@ -1091,7 +1091,7 @@ def fibonacci_generator(): # function:fibonacci_generator (-> +4), generator:fib
     a, b = 0, 1 # assignment, assignment_lhs_identifier:a, assignment_lhs_identifier:b, int_literal, literal:Num, literal:Tuple
     while True: # literal:True, while (-> +2)
         a, b = b, a + b # assignment, assignment_lhs_identifier:a, assignment_lhs_identifier:b, assignment_rhs_identifier:a, assignment_rhs_identifier:b, binary_operator:Add
-        yield b
+        yield b # yield:b
 def solution(n): # function:solution (-> +5), function_returning_something:solution (-> +5)
     answer = 1 # assignment, assignment_lhs_identifier:answer, int_literal, literal:Num
     gen = fibonacci_generator() # assignment, assignment_lhs_identifier:gen, assignment_rhs_identifier:fibonacci_generator, function_call:fibonacci_generator

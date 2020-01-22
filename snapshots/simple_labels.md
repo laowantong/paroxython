@@ -77,7 +77,6 @@
 - function
 - function_call
 - function_with_default_positional_arguments
-- generator
 - if_elif_branch
 - if_test_id
 - imaginary_literal
@@ -105,3 +104,4 @@
 - try
 - unary_operator
 - universal_quantifier
+- yield

@@ -1200,7 +1200,7 @@ def method_2(boundary, steps): # function:method_2 (-> +12), function_returning_
 def make_points(a, b, h): # function:make_points (-> +4), generator:make_points (-> +4)
     x = a + h # assignment, assignment_lhs_identifier:x, assignment_rhs_identifier:a, assignment_rhs_identifier:h, binary_operator:Add
     while x < (b - h): # binary_operator:Sub, comparison_operator:Lt, while (-> +2)
-        yield x
+        yield x # yield:x
         x = x + h # assignment, assignment_lhs_identifier:x, assignment_rhs_identifier:h, assignment_rhs_identifier:x, binary_operator:Add, suggest_augmented_assignment
 def f(x): # function:f (-> +2), function_returning_something:f (-> +2)
     y = (x - 0) * (x - 0) # assignment, assignment_lhs_identifier:y, assignment_rhs_identifier:x, binary_operator:Mult, binary_operator:Sub, int_literal, literal:Num
@@ -1255,7 +1255,7 @@ def method_1(boundary, steps): # function:method_1 (-> +10), function_returning_
 def make_points(a, b, h): # function:make_points (-> +4), generator:make_points (-> +4)
     x = a + h # assignment, assignment_lhs_identifier:x, assignment_rhs_identifier:a, assignment_rhs_identifier:h, binary_operator:Add
     while x < (b - h): # binary_operator:Sub, comparison_operator:Lt, while (-> +2)
-        yield x
+        yield x # yield:x
         x = x + h # assignment, assignment_lhs_identifier:x, assignment_rhs_identifier:h, assignment_rhs_identifier:x, binary_operator:Add, suggest_augmented_assignment
 def f(x): # function:f (-> +2), function_returning_something:f (-> +2)
     y = (x - 0) * (x - 0) # assignment, assignment_lhs_identifier:y, assignment_rhs_identifier:x, binary_operator:Mult, binary_operator:Sub, int_literal, literal:Num
