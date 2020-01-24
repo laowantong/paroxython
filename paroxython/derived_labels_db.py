@@ -15,6 +15,7 @@ class DB:
         "span TEXT",
         "span_start INTEGER",
         "span_end INTEGER",
+        "indent INTEGER",
     )
     creation_query = f"CREATE TABLE t ({','.join(columns)})"
     update_query = f"INSERT INTO t VALUES ({','.join('?' * len(columns))})"
@@ -37,15 +38,15 @@ class DB:
         values = []
         for (name, spans) in labels:
             for span in spans:
-                (name_prefix, _, name_suffix) = name.partition(":")
-                values.append((name, name_prefix, name_suffix, str(span), span.start, span.end))
+                (prefix, _, suffix) = name.partition(":")
+                values.append((name, prefix, suffix, str(span), span.start, span.end, span.indent))
         self.c.executemany(DB.update_query, values)
 
     def delete(self) -> None:
         self.c.execute(f"DROP TABLE t")
 
     def __str__(self) -> str:  # pragma: no cover
-        result = ["rowid\tname\tname_prefix\tname_suffix\tspan\tspan_start\tspan_end"]
+        result = ["rowid\tname\tname_prefix\tname_suffix\tspan\tspan_start\tspan_end\tindent"]
         for row in self.c.execute("SELECT * FROM t"):
             result.append("\t".join(map(str, row)))
         return "\n".join(result)

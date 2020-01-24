@@ -13,9 +13,15 @@ class CachedSpan(type):
     existing_instances: Dict[Tuple[int, int], "CachedSpan"] = {}
 
     def __call__(cls, line_numbers):
-        key = (int(line_numbers[0]), int(line_numbers[-1]))
+        if isinstance(line_numbers[0], int):
+            start_data = [line_numbers[0]]
+            end_data = [line_numbers[-1]]
+        else:
+            start_data = [int(x) for x in line_numbers[0].split(":")]
+            end_data = [int(x) for x in line_numbers[-1].split(":")]
+        key = (start_data[0], end_data[0])
         if key not in cls.existing_instances:
-            cls.existing_instances[key] = super(CachedSpan, cls).__call__(line_numbers)
+            cls.existing_instances[key] = super(CachedSpan, cls).__call__(start_data, end_data)
         return cls.existing_instances[key]
 
 
@@ -25,9 +31,14 @@ class Span(metaclass=CachedSpan):
     Implemented as a Registry of singletons (GoF's Design Patterns), or Multiton.
     """
 
-    def __init__(self, line_numbers: Union[List[str], List[int]]) -> None:
-        key = (int(line_numbers[0]), int(line_numbers[-1]))
-        (self.start, self.end) = key
+    def __init__(self, start_data, end_data) -> None:
+        if len(start_data) == len(end_data) == 2:
+            self.indent = start_data[1]
+        elif len(start_data) == len(end_data) == 1:
+            self.indent = None
+        else:
+            raise NotImplementedError
+        (self.start, self.end) = (start_data[0], end_data[0])
         self.length = self.end - self.start
         if self.length == 0:
             self.string = f"{self.start}"
