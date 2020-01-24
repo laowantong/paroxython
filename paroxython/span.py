@@ -7,15 +7,17 @@ class CachedSpan(type):
     It avoids wasting memory and facilitates the deduplication of a list of spans.
     References:
     - Code: https://stackoverflow.com/a/50821287/173003
-    - Typing: https://mypy.readthedocs.io/en/latest/kinds_of_types.html#class-name-forward-references
+    - Typing:
+        - https://mypy.readthedocs.io/en/latest/kinds_of_types.html#class-name-forward-references
+        - https://github.com/python/mypy/issues/6721 (type: ignore)
     """
 
     existing_instances: Dict[Tuple[int, int], "CachedSpan"] = {}
 
-    def __call__(cls, line_numbers):
+    def __call__(cls, line_numbers: Union[List[str], List[int]]):  # type: ignore
         key = (int(line_numbers[0]), int(line_numbers[-1]))
         if key not in cls.existing_instances:
-            cls.existing_instances[key] = super(CachedSpan, cls).__call__(line_numbers)
+            cls.existing_instances[key] = super(CachedSpan, cls).__call__(key)
         return cls.existing_instances[key]
 
 
@@ -25,9 +27,8 @@ class Span(metaclass=CachedSpan):
     Implemented as a Registry of singletons (GoF's Design Patterns), or Multiton.
     """
 
-    def __init__(self, line_numbers: Union[List[str], List[int]]) -> None:
-        key = (int(line_numbers[0]), int(line_numbers[-1]))
-        (self.start, self.end) = key
+    def __init__(self, key: List[int]) -> None:  # the actual type is Tuple[int, int]...
+        (self.start, self.end) = key  # ... see the call argument in CachedSpan
         self.length = self.end - self.start
         if self.length == 0:
             self.string = f"{self.start}"
