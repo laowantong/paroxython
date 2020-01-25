@@ -11,7 +11,7 @@ class Suggestion:
     def __call__(self, source):
         self.s = source
         self.abstract_first_longest_prefix()
-        self.abstract_line_numbers()
+        self.abstract_position()
         for key in ("name", "id", "_hash", "_ids"):
             self.capture_and_match_key(key)
         self.abstract_body_prefix()
@@ -27,8 +27,8 @@ class Suggestion:
             repl.append(FIRST_PREFIX_MASK + suffix)
         self.s = self.s[: match.start()] + "".join(repl) + self.s[match.end() :]
 
-    def abstract_line_numbers(self):
-        self.s = regex.sub(r"lineno=\d+\n", r"lineno=(?P<LINE>\d+)\n", self.s)
+    def abstract_position(self):
+        self.s = regex.sub(r"_pos=.+\n", r"_pos=(?P<POS>.+)\n", self.s)
 
     def capture_and_match_key(self, key):
         rex = fr"(?ms)/(?P<KEY>{key})=(?P<VALUE>['\"\w_]+)((?P<SKIPS>\n.+?)(?P<KEYS>{key})=\2)+"
