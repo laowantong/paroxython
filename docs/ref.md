@@ -704,6 +704,10 @@ When the value of the left operand suffices to determine the value of a boolean 
 
 #### Construct `function_call`
 
+##### Dependencies
+
+- Derived into [construct `recursive_function`](#construct-recursive_function).
+
 ##### Definition
 
 ```re
@@ -1360,6 +1364,7 @@ In Python, the term "function" encompasses any type of subroutine, be it a metho
   1. [construct `function_returning_nothing`](#construct-function_returning_nothing)
   1. [construct `function_returning_something`](#construct-function_returning_something)
   1. [construct `generator`](#construct-generator)
+  1. [construct `recursive_function`](#construct-recursive_function)
 
 ##### Definition
 
@@ -1705,18 +1710,25 @@ WHERE name_prefix = "function"
 
 #### Construct `recursive_function`
 
+##### Dependencies
+
+- Derived from:
+  1. [construct `function`](#construct-function)
+  1. [construct `function_call`](#construct-function_call)
+
 ##### Definition
 
-```re
-           ^(.*)/_type='FunctionDef'
-\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/name='(?P<SUFFIX>.+)' # capture the name of the function
-\n(?:\1.+\n)* \1/(?P<_1>(?:body|orelse)/\d+)/_pos=(?P<POS>.+)
-\n(?:\1.+\n)* \1/(?P=_1)                    (?P<_2>.*)/_type='Call'
-\n(?:\1.+\n)*?\1/(?P=_1)                    (?P=_2)   /func/id='(?P=SUFFIX)' # ensure it is called inside its own body
-(   # capture the line number of the last line of the function (it may appear before Call)
-\n(?:\1.+\n)* \1.+/_pos=(?P<POS>.+)
-)?
+```sql
+SELECT "recursive_function",
+       f.name_suffix,
+       max(f.span_start) || "-" || min(f.span_end)
+FROM t f
+JOIN t c ON (f.span_start <= c.span_start
+             AND c.span_end <= f.span_end)
+WHERE f.name_prefix = "function"
+  AND c.name_prefix = "function_call"
+  AND f.name_suffix = c.name_suffix
+GROUP BY c.rowid
 ```
 
 ##### Example
