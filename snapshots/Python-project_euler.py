@@ -1310,7 +1310,7 @@ def solution(): # function:solution (-> +12), function_returning_something:solut
     i = 1 # assignment, assignment_lhs_identifier:i, int_literal, literal:Num
     while True: # literal:True, while (-> +10)
         if ( # if (-> +8), if_test_id:i, if_test_id:list, if_test_id:sorted, if_test_id:str
-            sorted(list(str(i))) # call_parameter:i, chained_comparison:5, composition, function_call:list, function_call:sorted, function_call:str
+            sorted(list(str(i))) # call_parameter:i, chained_comparison:5, chained_equalities:5, composition, function_call:list, function_call:sorted, function_call:str
             == sorted(list(str(2 * i))) # binary_operator:Mult, comparison_operator:Eq, composition, function_call:list, function_call:sorted, function_call:str, int_literal, literal:Num
             == sorted(list(str(3 * i))) # binary_operator:Mult, comparison_operator:Eq, composition, function_call:list, function_call:sorted, function_call:str, int_literal, literal:Num, suggest_constant_definition
             == sorted(list(str(4 * i))) # binary_operator:Mult, comparison_operator:Eq, composition, function_call:list, function_call:sorted, function_call:str, int_literal, literal:Num, suggest_constant_definition

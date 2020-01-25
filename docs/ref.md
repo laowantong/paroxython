@@ -613,12 +613,12 @@ ORDER BY cmp.span
 ##### Example
 
 ```python
-1   a == 1
-2   a == b == c  # one chained equality with 2 = signs
-3   a < b < c < d  # one chained inequality with 3 < signs
-4   a == b == c and d < e  # one more chained equality with 2 = signs
-5   a > b > c and d > e > f  # two chained inqualities with 2 > signs
-6   a < b > c and a != b == c # no match
+1   a == 1                     # no match
+2   a == b == c                # one chained equality with 2 = signs
+3   a < b < c < d              # one chained inequality with 3 < signs
+4   a == b == c and d < e      # one more chained equality with 2 = signs
+5   a > b > c and d > e > f    # two chained inequalities with 2 > signs
+6   a < b > c and a != b == c  # no match
 ```
 
 ##### Matches
@@ -972,6 +972,7 @@ Suffix the number of `for` clauses in a given comprehension.
 ```
 
 **Remark.** Both lines 4 and 5 can be expressed with two nested `for` statements. However, the former uses one single accumulator and produces a list of numbers:
+
 ```python
 acc = []
 for i in seq1:
@@ -979,7 +980,9 @@ for i in seq1:
         acc.append(i * j)
 assert acc == [14, 22, 21, 33, 35, 55]
 ```
+
 ... whereas the latter uses two accumulators and produces a list _of lists_ of numbers:
+
 ```python
 acc2 = []
 for j in seq2:
@@ -989,6 +992,7 @@ for j in seq2:
     acc2.append(acc1)
 assert acc2 == [[14, 21, 35], [22, 33, 55]]
 ```
+
 Therefore, line 5 consists in two comprehensions, each with one `for` clause only.
 
 ##### Matches
@@ -1352,6 +1356,7 @@ In Python, the term "function" encompasses any type of subroutine, be it a metho
 ##### Dependencies
 
 - Derived into:
+  1. [construct `closure`](#construct-closure)
   1. [construct `function_returning_nothing`](#construct-function_returning_nothing)
   1. [construct `function_returning_something`](#construct-function_returning_something)
   1. [construct `generator`](#construct-generator)
@@ -1411,7 +1416,9 @@ Match `return` statements and, when the returned object is a simple identifier, 
 
 ##### Dependencies
 
-- Derived into [construct `function_returning_something`](#construct-function_returning_something).
+- Derived into:
+  1. [construct `closure`](#construct-closure)
+  1. [construct `function_returning_something`](#construct-function_returning_something)
 
 ##### Definition
 
@@ -1881,20 +1888,29 @@ A tail call is a subroutine call performed as the last action of a procedure. A 
 
 #### Construct `closure`
 
-Function enclosing the definition of an inner function and returning it. Beware that the current regex does not check whether the inner function refers to a variable defined in the enclosing function.
+Function enclosing the definition of an inner function and returning it. Beware that the current definition does not check whether the inner function refers to a variable defined in the enclosing function.
+
+##### Dependencies
+
+- Derived from:
+  1. [construct `function`](#construct-function)
+  1. [construct `return`](#construct-return)
 
 ##### Definition
 
-```re
-           ^(.*)/_type='FunctionDef'
-\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/name='(?P<SUFFIX>.+)'
-\n(?:\1.+\n)* \1/(?P<_1>(?:body|orelse)/\d+)/_type='FunctionDef'
-\n(?:\1.+\n)*?\1/(?P=_1)                    /name=(?P<NAME>.+) # capture inner function name
-\n(?:\1.+\n)* \1/(?P<_2>(?:body|orelse)/\d+)/_type='Return'
-\n(?:\1.+\n)*?\1/(?P=_2)                    /_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/(?P=_2)                    /value/_type='Name'
-\n(?:\1.+\n)*?\1/(?P=_2)                    /value/id=(?P=NAME) # match inner function name
+```sql
+SELECT "closure",
+       f.name_suffix,
+       max(f.span_start) || "-" || min(f.span_end)
+FROM t f
+JOIN t c ON (f.span_start <= c.span_start
+             AND c.span_end <= r.span_start)
+JOIN t r ON (r.span_end <= f.span_end)
+WHERE f.name_prefix = "function"
+  AND c.name_prefix = "function"
+  AND r.name_prefix = "return"
+  AND c.name_suffix = r.name_suffix
+GROUP BY c.rowid
 ```
 
 ##### Example
