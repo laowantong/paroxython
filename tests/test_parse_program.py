@@ -52,14 +52,16 @@ def generate_toc(text):
 
 
 def reformat_sql(match):
-    string = sqlparse.format(
+    s = sqlparse.format(
         match.group(1),
         reindent=True,
         keyword_case="upper",
         identifier_case="lower",
         indent_width=2,
-    ).replace("\n\n", "\n")
-    return f"```sql\n{string}\n```"
+    )
+    s = s.replace("\n\n", "\n")
+    s = s.replace(" regexp ", " REGEXP ")  # cf. https://github.com/andialbrecht/sqlparse/pull/501
+    return f"```sql\n{s}\n```"
 
 
 def dependency_map(text):

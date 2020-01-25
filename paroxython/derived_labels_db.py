@@ -1,8 +1,10 @@
 import sqlite3
 from collections import defaultdict
 
-from user_types import Label, Labels, LabelsSpans, Query
+from regex import search  # type: ignore
+
 from span import Span
+from user_types import Label, Labels, LabelsSpans, Query
 
 
 class DB:
@@ -21,6 +23,7 @@ class DB:
 
     def __init__(self):
         self.c = sqlite3.connect(":memory:")
+        self.c.create_function("regexp", 2, lambda rex, s: bool(search(rex, s)))
 
     def create(self, labels: Labels) -> None:
         self.c.execute(DB.creation_query)

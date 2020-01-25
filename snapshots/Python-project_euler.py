@@ -446,7 +446,7 @@ def solution(n): # function:solution (-> +1), function_returning_something:solut
 # ../Python/project_euler/problem_08/sol1.py
 # ----------------------------------------------------------------------------------------
 import sys # import:sys, import_module:sys
-N = """73167176531330624919225119674426574742355349194934\ # assignment, assignment_lhs_identifier:N
+N = """73167176531330624919225119674426574742355349194934\ # assignment, assignment_lhs_identifier:N, constant_assignment:N
 96983520312774506326239578318016984801869478851843\
 85861560789112949495459501737958331952853208805511\
 12540698747158523863050715693290963295227443043557\
@@ -480,7 +480,7 @@ def solution(n): # function:solution (-> +8), function_returning_something:solut
 # ../Python/project_euler/problem_08/sol2.py
 # ----------------------------------------------------------------------------------------
 from functools import reduce # import:functools:reduce, import_module:functools, import_name:reduce
-N = ( # assignment, assignment_lhs_identifier:N
+N = ( # assignment, assignment_lhs_identifier:N, constant_assignment:N
     "73167176531330624919225119674426574742355349194934" # literal:Str
     "96983520312774506326239578318016984801869478851843"
     "85861560789112949495459501737958331952853208805511"
@@ -514,7 +514,7 @@ def solution(n): # function:solution (-> +4), function_returning_something:solut
 # ../Python/project_euler/problem_08/sol3.py
 # ----------------------------------------------------------------------------------------
 import sys # import:sys, import_module:sys
-N = """73167176531330624919225119674426574742355349194934\ # assignment, assignment_lhs_identifier:N
+N = """73167176531330624919225119674426574742355349194934\ # assignment, assignment_lhs_identifier:N, constant_assignment:N
 96983520312774506326239578318016984801869478851843\
 85861560789112949495459501737958331952853208805511\
 12540698747158523863050715693290963295227443043557\
@@ -1163,7 +1163,7 @@ def diagonal_sum(n): # function:diagonal_sum (-> +6), function_returning_somethi
 def solution(n): # function:solution (-> +8), function_returning_something:solution (-> +8)
     collectPowers = set() # assignment, assignment_lhs_identifier:collectPowers, assignment_rhs_identifier:set, function_call:set
     currentPow = 0 # assignment, assignment_lhs_identifier:currentPow, int_literal, literal:Num
-    N = n + 1 # assignment, assignment_lhs_identifier:N, assignment_rhs_identifier:n, binary_operator:Add, int_literal, literal:Num
+    N = n + 1 # assignment, assignment_lhs_identifier:N, assignment_rhs_identifier:n, binary_operator:Add, constant_assignment:N, int_literal, literal:Num
     for a in range(2, N): # call_parameter:N, for:a (-> +3), for_range_start (-> +3), function_call:range, int_literal, literal:Num, square_nested_for (-> +3)
         for b in range(2, N): # call_parameter:N, for:b (-> +2), for_range_start (-> +2), function_call:range, int_literal, literal:Num, nested_for:1 (-> +2)
             currentPow = a ** b # assignment, assignment_lhs_identifier:currentPow, assignment_rhs_identifier:a, assignment_rhs_identifier:b, binary_operator:Pow
@@ -1278,7 +1278,7 @@ def solution(): # function:solution (-> +14), function_returning_something:solut
 # ../Python/project_euler/problem_42/solution42.py
 # ----------------------------------------------------------------------------------------
 import os # import:os, import_module:os
-TRIANGULAR_NUMBERS = [int(0.5 * n * (n + 1)) for n in range(1, 101)] # assignment, assignment_lhs_identifier:TRIANGULAR_NUMBERS, assignment_rhs_identifier:int, assignment_rhs_identifier:n, assignment_rhs_identifier:range, binary_operator:Add, binary_operator:Mult, comprehension:List, comprehension_for_count:1, float_literal, function_call:int, function_call:range, int_literal, literal:Num
+TRIANGULAR_NUMBERS = [int(0.5 * n * (n + 1)) for n in range(1, 101)] # assignment, assignment_lhs_identifier:TRIANGULAR_NUMBERS, assignment_rhs_identifier:int, assignment_rhs_identifier:n, assignment_rhs_identifier:range, binary_operator:Add, binary_operator:Mult, comprehension:List, comprehension_for_count:1, constant_assignment:TRIANGULAR_NUMBERS, float_literal, function_call:int, function_call:range, int_literal, literal:Num
 def solution(): # function:solution (-> +13), function_returning_something:solution (-> +13)
     script_dir = os.path.dirname(os.path.realpath(__file__)) # assignment, assignment_lhs_identifier:script_dir, assignment_rhs_identifier:__file__, assignment_rhs_identifier:os, call_parameter:__file__, composition, method_call:dirname, method_call:realpath
     wordsFilePath = os.path.join(script_dir, "words.txt") # assignment, assignment_lhs_identifier:wordsFilePath, assignment_rhs_identifier:os, assignment_rhs_identifier:script_dir, call_parameter:script_dir, literal:Str, method_call:join

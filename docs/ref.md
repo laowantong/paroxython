@@ -40,6 +40,7 @@
       - [Construct `augmented_assignment`](#construct-augmented_assignment)
       - [Construct `chained_assignment`](#construct-chained_assignment)
       - [Construct `assignment_lhs_identifier`](#construct-assignment_lhs_identifier)
+      - [Construct `constant_assignment`](#construct-constant_assignment)
       - [Construct `assignment_rhs_identifier`](#construct-assignment_rhs_identifier)
     - [Assignment idioms](#assignment-idioms)
       - [Construct `swapping`](#construct-swapping)
@@ -1128,7 +1129,9 @@ Capture any identifier appearing on the left hand side of an assignment (possibl
 
 ##### Dependencies
 
-- Required by [construct `accumulate_elements`](#construct-accumulate_elements).
+- Required by:
+  1. [construct `accumulate_elements`](#construct-accumulate_elements)
+  1. [construct `constant_assignment`](#construct-constant_assignment)
 
 ##### Definition
 
@@ -1144,13 +1147,13 @@ Capture any identifier appearing on the left hand side of an assignment (possibl
 2   a = 1
 3   (b, c) = (1, 1)
 4   [d, e] = [1, 1]
-5   f[g] = 1            # no match for g
+5   f[g] = 1             # no match for g
 6   if foo:
 7       h = 1
 8   def bar():
 9       i = 1
 10  j = k = 1
-11  l.m = 1             # LIMITATION: no match for m
+11  l.m = 1              # LIMITATION: no match for m
 12  (n, *o) = [1, 1, 1]
 13  a += 1
 14  f[g] += 1            # no match for g
@@ -1180,6 +1183,54 @@ Capture any identifier appearing on the left hand side of an assignment (possibl
 | `assignment_lhs_identifier:o` | 12 |
 | `assignment_lhs_identifier:first` | 18 |
 | `assignment_lhs_identifier:second` | 18 |
+
+--------------------------------------------------------------------------------
+
+#### Construct `constant_assignment`
+
+Check whether an assignment target follows the Python conventions for constants.
+
+##### Dependencies
+
+- Requires [construct `assignment_lhs_identifier`](#construct-assignment_lhs_identifier).
+
+##### Definition
+
+```sql
+SELECT "constant_assignment",
+       t.name_suffix,
+       t.span
+FROM t
+WHERE t.name_prefix = "assignment_lhs_identifier"
+  AND t.name_suffix REGEXP "^[[:upper:]0-9_]+$"
+```
+
+**Remark.** Note the user-defined function `REGEXP` in the `WHERE`clause. It calls the function `search()` of the third-party [`regex`](https://pypi.org/project/regex/) library.
+
+##### Example
+
+```python
+1   A = 42
+2   a = 42
+3   WORD = 42
+4   word = 42
+5   Word = 42
+6   WORD42 = 42
+7   word42 = 42
+8   Word42 = 42
+9   snake_case = 42
+10  CamelCase = 42
+11  SCREAMING_SNAKE_CASE = 42
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `constant_assignment:A` | 1 |
+| `constant_assignment:WORD` | 3 |
+| `constant_assignment:WORD42` | 6 |
+| `constant_assignment:SCREAMING_SNAKE_CASE` | 11 |
 
 --------------------------------------------------------------------------------
 
