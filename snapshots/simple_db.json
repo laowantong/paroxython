@@ -36,8 +36,8 @@
         "if_else_branch": [[7,7]],
         "if_test_id:n": [[4,4]],
         "if_then_branch": [[5,5]],
-        "int_literal": [[2,2],[4,4],[5,5],[7,7]],
-        "literal:Num": [[2,2],[4,4],[7,7]],
+        "int_literal": [[2,2],[4,4],[4,4],[5,5],[7,7],[7,7]],
+        "literal:Num": [[2,2],[4,4],[4,4],[7,7],[7,7]],
         "suggest_augmented_assignment": [[5,5]],
         "suggest_conditional_expression": [[4,7]],
         "suggest_constant_definition": [[2,2],[7,7]],
@@ -55,7 +55,7 @@
         "test/divisibility/parity/": [[4,4]],
         "test/equality/": [[4,4]],
         "test/equality/not/": [[2,2]],
-        "type/elementary/number/integer": [[2,2],[4,4],[5,5],[7,7]],
+        "type/elementary/number/integer": [[2,2],[4,4],[4,4],[5,5],[7,7],[7,7]],
         "variable/assignment/": [[5,5],[7,7]]
       }
     },
@@ -63,7 +63,7 @@
       "timestamp": "ignored",
       "source": "def succ(n):\n    return a + b + 1",
       "labels": {
-        "binary_operator:Add": [[2,2]],
+        "binary_operator:Add": [[2,2],[2,2]],
         "function:succ": [[1,2]],
         "function_returning_something:succ": [[1,2]],
         "int_literal": [[2,2]],
@@ -71,7 +71,7 @@
         "return": [[2,2]]
       },
       "taxons": {
-        "operator/addition/": [[2,2]],
+        "operator/addition/": [[2,2],[2,2]],
         "subroutine_definition/function/": [[1,2]],
         "type/elementary/number/integer": [[2,2]]
       }

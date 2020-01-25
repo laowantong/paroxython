@@ -126,12 +126,12 @@
 ^(.*)
 (   # match None, True and False
               /_type='NameConstant'
-\n(?:\1.+\n)*?\1/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/value=(?P<SUFFIX>None|True|False)
 |   # match any other constant
               /_type='(?P<SUFFIX>Str|Num|Tuple|Dict|Set|List)'
 \n(?:\1.+\n)*?\1/_ids=
-\n(?:\1.+\n)*?\1/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 )
 ```
 
@@ -176,7 +176,7 @@ Matching literal does not require to construct a sophisticated regular expressio
 
 ```re
            ^(.*)/_type='Num'
-\n(?:\1.+\n)*?\1/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/n=-?\d+\n
 ```
 
@@ -207,7 +207,7 @@ In the AST, a floating point literal consists of digits and at least one symbol 
 
 ```re
            ^(.*)/_type='Num'
-\n(?:\1.+\n)*?\1/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/n=.*?[e\.].*(?<!j)\n
 ```
 
@@ -236,7 +236,7 @@ In the AST, an imaginary literal contains the same symbols as a floating point l
 
 ```re
            ^(.*)/_type='Num'
-\n(?:\1.+\n)*?\1/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/n=.*j\n
 ```
 
@@ -267,7 +267,7 @@ In the AST, an imaginary literal contains the same symbols as a floating point l
 
 ```re
            ^(.*)/_type='Subscript'
-\n(?:\1.+\n)*?\1/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/slice/_type='Index'
 ```
 
@@ -293,7 +293,7 @@ In the AST, an imaginary literal contains the same symbols as a floating point l
 
 ```re
            ^(.*)/_type='Subscript'
-\n(?:\1.+\n)*?\1/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/slice/_type='Index'
 \n(?:\1.+\n)*?\1/slice/value/_type='BinOp'
 ```
@@ -319,7 +319,7 @@ In the AST, an imaginary literal contains the same symbols as a floating point l
 
 ```re
            ^(.*)/_type='Subscript'
-\n(?:\1.+\n)*?\1/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/slice/_type='Index'
 (   # A negative number
 \n(?:\1.+\n)*?\1/slice/value/_type='Num'
@@ -363,7 +363,7 @@ In the AST, an imaginary literal contains the same symbols as a floating point l
 
 ```re
            ^(.*)/_type='Subscript'
-\n(?:\1.+\n)*?\1/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/slice/_type='Slice'
 \n(?:\1.+\n)*?\1/slice/step=None
 ```
@@ -391,7 +391,7 @@ In the AST, an imaginary literal contains the same symbols as a floating point l
 ```re
            ^(.*)/_type='Subscript'
 \n(?:\1.+\n)*?\1/slice/_type='Slice'
-\n(?:\1.+\n)*?\1/slice/step/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/slice/step/_pos=(?P<POS>.+)
 ```
 
 ##### Example
@@ -420,7 +420,7 @@ In the AST, an imaginary literal contains the same symbols as a floating point l
 
 ```re
            ^(.*)/_type='UnaryOp'
-\n(?:\1.+\n)*?\1/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/op/_type='(?P<SUFFIX>.+)'
 ```
 
@@ -449,7 +449,7 @@ In the AST, an imaginary literal contains the same symbols as a floating point l
 
 ```re
            ^(.*)/_type='BinOp'
-\n(?:\1.+\n)*?\1/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/op/_type='(?P<SUFFIX>.+)'
 ```
 
@@ -476,7 +476,7 @@ Match the so-called ternary operator.
 
 ```re
            ^(.*)/_type='IfExp'
-\n(?:\1.+\n)*?\1/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 ```
 
 ##### Example
@@ -503,7 +503,7 @@ Match the so-called ternary operator.
 
 ```re
            ^(.*)/_type='BoolOp'
-\n(?:\1.+\n)*?\1/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/op/_type='(?P<SUFFIX>.+)'
 ```
 
@@ -528,15 +528,11 @@ Match the so-called ternary operator.
 
 #### Construct `comparison_operator`
 
-##### Dependencies
-
-- Derived into [construct `chained_equalities|chained_inequalities`](#construct-chained_equalitieschained_inequalities).
-
 ##### Definition
 
 ```re
            ^(.*)/ops/        (?P<_1>\d+)/_type='(?P<SUFFIX>Eq|Lt|LtE|Gt|GtE|In|NotIn|NotEq|Is|IsNot)'
-\n(?:\1.+\n)*?\1/comparators/(?P=_1)    /lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/comparators/(?P=_1)    /_pos=(?P<POS>.+)
 ```
 
 ##### Example
@@ -568,7 +564,7 @@ Match the so-called ternary operator.
 
 ```re
            ^(.*)/_type='Compare'
-\n(?:\1.+\n)*?\1/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/comparators/length=(?!1\n)(?P<SUFFIX>.+)
 ```
 
@@ -593,41 +589,36 @@ Match the so-called ternary operator.
 
 ##### Dependencies
 
-- Derived from:
-  1. [construct `chained_comparison`](#construct-chained_comparison)
-  1. [construct `comparison_operator`](#construct-comparison_operator)
+- Derived from [construct `chained_comparison`](#construct-chained_comparison).
 
 ##### Definition
 
 ```sql
-SELECT CASE b.name_suffix
+SELECT CASE op.name_suffix
            WHEN "Eq" THEN "chained_equalities"
            ELSE "chained_inequalities"
        END,
        count(*),
-       span
-FROM t a
-JOIN t b USING (span)
-WHERE a.name_prefix = "chained_comparison"
-  AND b.name_prefix = "comparison_operator"
-  AND b.name_suffix IN ("Eq",
-                        "Lt",
-                        "LtE",
-                        "Gt",
-                        "GtE")
-GROUP BY span,
-         b.name_suffix
-HAVING count(*) > 1
-ORDER BY span
+       cmp.span
+FROM t cmp
+JOIN t op ON (op.path GLOB cmp.path || "*")-- op is nested in cmp
+WHERE cmp.name_prefix = "chained_comparison"
+  AND op.name REGEXP "comparison_operator:(Eq|Lt|LtE|Gt|GtE)"
+GROUP BY cmp.path,
+         op.name_suffix
+HAVING count(*) > 1 -- a chain has at least two operators
+ORDER BY cmp.span
 ```
 
 ##### Example
 
 ```python
 1   a == 1
-2   a == b == c
-3   a < b < c < d
-4   a == b == c and d < e
+2   a == b == c  # one chained equality with 2 = signs
+3   a < b < c < d  # one chained inequality with 3 < signs
+4   a == b == c and d < e  # one more chained equality with 2 = signs
+5   a > b > c and d > e > f  # two chained inqualities with 2 > signs
+6   a < b > c and a != b == c # no match
 ```
 
 ##### Matches
@@ -636,6 +627,7 @@ ORDER BY span
 |:--|:--|
 | `chained_equalities:2` | 2, 4 |
 | `chained_inequalities:3` | 3 |
+| `chained_inequalities:2` | 5, 5 |
 
 --------------------------------------------------------------------------------
 
@@ -645,7 +637,7 @@ ORDER BY span
 
 ```re
            ^(.*)/_type='Compare'
-\n(?:\1.+\n)*?\1/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/left/op/_type='Mod'
 (   # try to match the % right operand with a number
 \n(?:\1.+\n)*?\1/left/right/n=(?P<SUFFIX>.+)
@@ -716,7 +708,7 @@ When the value of the left operand suffices to determine the value of a boolean 
 
 ```re
            ^(.*)/_type='Call'
-\n(?:\1.+\n)*?\1/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/func/_type='Name'
 \n(?:\1.+\n)*?\1/func/id='(?P<SUFFIX>.+)'
 ```
@@ -751,7 +743,7 @@ When the value of the left operand suffices to determine the value of a boolean 
 ##### Definition
 
 ```re
-  ^(.*/args/\d+)/lineno=(?P<LINE>.+)
+  ^(.*/args/\d+)/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/id='(?P<SUFFIX>.+)'
 ```
 
@@ -789,7 +781,7 @@ When the value of the left operand suffices to determine the value of a boolean 
 ```re
            ^(.*)/_type='Call'
 \n(?:\1.+\n)*?\1/func/_type='Attribute'
-\n(?:\1.+\n)*?\1/func/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/func/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/func/attr='(?P<SUFFIX>.+)'
 ```
 
@@ -820,7 +812,7 @@ When the value of the left operand suffices to determine the value of a boolean 
 ```re
            ^(.*)/value/_type='Call'
 \n(?:\1.+\n)*?\1/value/func/_type='Attribute'
-\n(?:\1.+\n)*?\1/value/func/value/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/value/func/value/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/value/func/value/id='(?P<SUFFIX>.+)'
 ```
 
@@ -846,7 +838,7 @@ When the value of the left operand suffices to determine the value of a boolean 
 
 ```re
            ^(.*)/_type='Call'
-\n(?:\1.+\n)*?\1/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/func/_type='Attribute'
 \n(?:\1.+\n)*?\1/func/value/_type='Call'
 \n(?:\1.+\n)*?\1/func/value/func/_type='Attribute'
@@ -874,7 +866,7 @@ Apply a function or a method to an expression involving the result of another fu
 
 ```re
            ^(.*)/_type='Call'
-\n(?:\1.+\n)*?\1/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)* \1/args/.*/_type='Call'
 ```
 
@@ -905,7 +897,7 @@ Apply a function or a method to an expression involving the result of another fu
 
 ```re
            ^(.*)/_type='Lambda'
-\n(?:\1.+\n)*?\1/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 ```
 
 ##### Example
@@ -932,7 +924,7 @@ Apply a function or a method to an expression involving the result of another fu
 
 ```re
            ^(.*)/_type='((?P<SUFFIX>List|Dict|Set)Comp|(?P<SUFFIX>Generator)Exp)'
-\n(?:\1.+\n)*?\1/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 ```
 
 ##### Example
@@ -965,7 +957,7 @@ Suffix the number of `for` clauses in a given comprehension.
 
 ```re
            ^(.*)/_type='(ListComp|DictComp|SetComp|GeneratorExp)'
-\n(?:\1.+\n)*?\1/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/generators/length=(?P<SUFFIX>\d+)
 ```
 
@@ -1015,7 +1007,7 @@ Match a comprehension with an `if` clause.
 ##### Definition
 
 ```re
-/generators/\d+/ifs/0/lineno=(?P<LINE>.+)
+/generators/\d+/ifs/0/_pos=(?P<POS>.+)
 ```
 
 ##### Example
@@ -1045,7 +1037,7 @@ Match a comprehension with an `if` clause.
 
 ```re
            ^(.*)/_type='Assign'
-\n(?:\1.+\n)*?\1/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 ```
 
 ##### Example
@@ -1074,7 +1066,7 @@ Match a comprehension with an `if` clause.
 
 ```re
            ^(.*)/_type='AugAssign'
-\n(?:\1.+\n)*?\1/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 ```
 
 ##### Example
@@ -1103,7 +1095,7 @@ Match a comprehension with an `if` clause.
 
 ```re
            ^(.*)/_type='Assign'
-\n(?:\1.+\n)*?\1/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/assigntargets/length=(?!1\n).+
 ```
 
@@ -1136,7 +1128,7 @@ Capture any identifier appearing on the left hand side of an assignment (possibl
 ##### Definition
 
 ```re
-^(.*/assigntarget(s/\d+)?(|/value|/elts/\d+|/elts/\d+/value))/lineno=(?P<LINE>.+)
+^(.*/assigntarget(s/\d+)?(|/value|/elts/\d+|/elts/\d+/value))/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1                                             /id='(?P<SUFFIX>.+)'
 ```
 
@@ -1245,7 +1237,7 @@ Capture any identifier (variable or function) appearing on the right hand side o
 ##### Definition
 
 ```re
-^(.*/assignvalue\b.*)/lineno=(?P<LINE>.+)
+^(.*/assignvalue\b.*)/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1     /id='(?P<SUFFIX>.+)'
 ```
 
@@ -1290,7 +1282,7 @@ Swap two variables or two elements of an array with a 2-element tuple or list.
 
 ```re
            ^(.*)/_type='Assign'
-\n(?:\1.+\n)*?\1/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/assigntargets/0/elts/length=2
 \n(?:\1.+\n)*?\1/assigntargets/0/elts/0/_hash=(?P<HASH_A>.+)
 \n(?:\1.+\n)*?\1/assigntargets/0/elts/1/_hash=(?P<HASH_B>.+)
@@ -1324,7 +1316,7 @@ Update a variable by negating it.
 
 ```re
            ^(.*)/_type='Assign'
-\n(?:\1.+\n)*?\1/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/assigntargets/0/_hash=(?P<HASH>.+) # capture hash
 \n(?:\1.+\n)*?\1/assignvalue/_type='UnaryOp'
 \n(?:\1.+\n)*?\1/assignvalue/op/_type='USub'
@@ -1368,9 +1360,9 @@ In Python, the term "function" encompasses any type of subroutine, be it a metho
 
 ```re
            ^(.*)/_type='FunctionDef'
-\n(?:\1.+\n)*?\1/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/name='(?P<SUFFIX>.+)'
-\n(?:\1.+\n)* \1/.+/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)* \1/.+/_pos=(?P<POS>.+)
 ```
 
 ##### Example
@@ -1425,7 +1417,7 @@ Match `return` statements and, when the returned object is a simple identifier, 
 
 ```re
            ^(.*)/_type='Return'
-\n(?:\1.+\n)*?\1/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 (
 \n(?:\1.+\n)*?\1/value(/value|/n|/id)?='?(?P<SUFFIX>.+?)\b'?
 )?
@@ -1470,7 +1462,7 @@ Match `yield` and `yieldfrom` _[expressions](https://docs.python.org/3/reference
 
 ```re
            ^(.*)/_type='Yield(From)?'
-\n(?:\1.+\n)*?\1/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 (
 \n(?:\1.+\n)*?\1/value(/value|/n|/id)?='?(?P<SUFFIX>.+?)\b'?
 )?
@@ -1682,10 +1674,10 @@ WHERE name_prefix = "function"
 
 ```re
            ^(.*)/_type='FunctionDef'
-\n(?:\1.+\n)*?\1/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/name='(?P<SUFFIX>.+)'
 \n(?:\1.+\n)*?\1/args/defaults/length=(?!0\n).+
-\n(?:\1.+\n)* \1/.+/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)* \1/.+/_pos=(?P<POS>.+)
 ```
 
 ##### Example
@@ -1710,13 +1702,13 @@ WHERE name_prefix = "function"
 
 ```re
            ^(.*)/_type='FunctionDef'
-\n(?:\1.+\n)*?\1/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/name='(?P<SUFFIX>.+)' # capture the name of the function
-\n(?:\1.+\n)* \1/(?P<_1>(?:body|orelse)/\d+)/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)* \1/(?P<_1>(?:body|orelse)/\d+)/_pos=(?P<POS>.+)
 \n(?:\1.+\n)* \1/(?P=_1)                    (?P<_2>.*)/_type='Call'
 \n(?:\1.+\n)*?\1/(?P=_1)                    (?P=_2)   /func/id='(?P=SUFFIX)' # ensure it is called inside its own body
 (   # capture the line number of the last line of the function (it may appear before Call)
-\n(?:\1.+\n)* \1.+/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)* \1.+/_pos=(?P<POS>.+)
 )?
 ```
 
@@ -1744,16 +1736,16 @@ Any function `f` which contains a nested call to itself (`f(..., f(...), ...)`),
 
 ```re
            ^(.*)/_type='FunctionDef'
-\n(?:\1.+\n)*?\1/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/name='(?P<SUFFIX>.+)' # capture the name of the function
-\n(?:\1.+\n)* \1/(?P<_1>(?:body|orelse)/\d+)/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)* \1/(?P<_1>(?:body|orelse)/\d+)/_pos=(?P<POS>.+)
 \n(?:\1.+\n)* \1/(?P=_1)                    (?P<_2>.*)/_type='Call'
-\n(?:\1.+\n)*?\1/(?P=_1)                    (?P=_2)   /func/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/(?P=_1)                    (?P=_2)   /func/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/(?P=_1)                    (?P=_2)   /func/id='(?P=SUFFIX)' # ensure it is called inside its own body
 \n(?:\1.+\n)* \1/(?P=_1)                    (?P=_2)   /(?P<_3>args/.*)/_type='Call'
 \n(?:\1.+\n)*?\1/(?P=_1)                    (?P=_2)   /(?P=_3)        /func/id='(?P=SUFFIX)'
 (   # capture the line number of the last line of the function (it may appear before Call)
-\n(?:\1.+\n)* \1/.+/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)* \1/.+/_pos=(?P<POS>.+)
 )?
 ```
 
@@ -1786,11 +1778,11 @@ A tail call is a subroutine call performed as the last action of a procedure. A 
 
 ```re
            ^(.*)/_type='FunctionDef'
-\n(?:\1.+\n)*?\1/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/name='(?P<SUFFIX>.+)' # capture the name of the function
 (   # recursive call as an argument, an element, an operand, etc.
 \n(?:\1.+\n)* \1/(?P<_1>.+/(args|elts|keys|left|right)\b.*)/_type='Call'
-\n(?:\1.+\n)*?\1/(?P=_1)                                   /lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/(?P=_1)                                   /_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/(?P=_1)                                   /func/id='(?P=SUFFIX)'
 |   # recursive call followed by a statement
 \n(?:\1.+\n)* \1/(?P<_1>.+?(body|orelse))/(?P<_2>\d+)/(?P<_3>.*)/_type='Call'
@@ -1798,7 +1790,7 @@ A tail call is a subroutine call performed as the last action of a procedure. A 
 \n(?:\1.+\n)*?\1/(?P=_1)                 /(?!(?P=_2)).+
 )
 (   # capture the line number of the last line of the function (it may appear before Call)
-\n(?:\1.+\n)* \1/.+/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)* \1/.+/_pos=(?P<POS>.+)
 )?
 ```
 
@@ -1863,10 +1855,10 @@ A tail call is a subroutine call performed as the last action of a procedure. A 
 
 ```re
            ^(.*)/_type='FunctionDef'
-\n(?:\1.+\n)*?\1/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/name='(?P<SUFFIX>.+)'
 \n(?:\1.+\n)*?\1/.+/_type='FunctionDef'
-\n(?:\1.+\n)* \1/.+/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)* \1/.+/_pos=(?P<POS>.+)
 ```
 
 ##### Example
@@ -1895,12 +1887,12 @@ Function enclosing the definition of an inner function and returning it. Beware 
 
 ```re
            ^(.*)/_type='FunctionDef'
-\n(?:\1.+\n)*?\1/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/name='(?P<SUFFIX>.+)'
 \n(?:\1.+\n)* \1/(?P<_1>(?:body|orelse)/\d+)/_type='FunctionDef'
 \n(?:\1.+\n)*?\1/(?P=_1)                    /name=(?P<NAME>.+) # capture inner function name
 \n(?:\1.+\n)* \1/(?P<_2>(?:body|orelse)/\d+)/_type='Return'
-\n(?:\1.+\n)*?\1/(?P=_2)                    /lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/(?P=_2)                    /_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/(?P=_2)                    /value/_type='Name'
 \n(?:\1.+\n)*?\1/(?P=_2)                    /value/id=(?P=NAME) # match inner function name
 ```
@@ -1939,8 +1931,8 @@ Match an entire conditional (from the `if` clause to the last line of its body).
 
 ```re
            ^(.*)/_type='If'
-\n(?:\1.+\n)*?\1/lineno=(?P<LINE>.+)
-\n(?:\1.+\n)* \1/.+/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
+\n(?:\1.+\n)* \1/.+/_pos=(?P<POS>.+)
 ```
 
 ##### Example
@@ -1992,7 +1984,7 @@ Match any identifier present in the condition of an `if` statement.
 
 ```re
            ^(.*)/_type='If'
-\n(?:\1.+\n)*?\1/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 (
 \n(?:\1.+\n)*?\1/test/.+/id='(?P<SUFFIX>.+)'
 )+
@@ -2032,9 +2024,9 @@ Match the body of the branch “`then`” of an `if` statement.
     (?<!length=1\n).*/orelse/\d+
 )
                 /_type='If'
-\n(?:\1.+\n)*?\1/body/0/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/body/0/_pos=(?P<POS>.+)
 (
-\n(?:\1.+\n)* \1/body/.*/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)* \1/body/.*/_pos=(?P<POS>.+)
 )?
 ```
 
@@ -2086,9 +2078,9 @@ Match the body of an `elif` clause, which is (or could be rewritten as) an `else
 ```re
            ^(.*)/orelse/length=1
 \n(?:\1.+\n)*?\1/orelse/0/_type='If'
-\n(?:\1.+\n)*?\1/orelse/0/body/0/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/orelse/0/body/0/_pos=(?P<POS>.+)
 (
-\n(?:\1.+\n)* \1/orelse/0/body/.+/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)* \1/orelse/0/body/.+/_pos=(?P<POS>.+)
 )?
 ```
 
@@ -2148,14 +2140,14 @@ Match the body of the possible branch `else` of an `if` statement.
 \n(?:\1.+\n)*?\1/orelse/length=
 (   # there is at least two statements in the else branch,
                                \d+(?<![01])
-\n(?:\1.+\n)*?\1/orelse/0/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/orelse/0/_pos=(?P<POS>.+)
 |   # or only one, but distinct from If (otherwise, this is an elif)
                                1
 \n(?:\1.+\n)*?\1/orelse/0/_type='.+?(?<!If)'
-\n(?:\1.+\n)*?\1/orelse/0/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/orelse/0/_pos=(?P<POS>.+)
 )
 (
-\n(?:\1.+\n)* \1/orelse/.+/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)* \1/orelse/.+/_pos=(?P<POS>.+)
 )?
 ```
 
@@ -2270,9 +2262,9 @@ Match sequential loops, along with their iteration variable(s).
 
 ```re
            ^(.*)/_type='For'
-\n(?:\1.+\n)*?\1/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/target/_ids=(?P<SUFFIX>.+)
-\n(?:\1.+\n)* \1/.*/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)* \1/.*/_pos=(?P<POS>.+)
 ```
 
 ##### Example
@@ -2305,9 +2297,9 @@ Iterate over the elements of a (named) collection.
 
 ```re
            ^(.*)/_type='For'
-\n(?:\1.+\n)*?\1/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/iter/_type='Name'
-\n(?:\1.+\n)* \1/.*/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)* \1/.*/_pos=(?P<POS>.+)
 ```
 
 ##### Example
@@ -2336,10 +2328,10 @@ Iterate over a range with exactly 1 argument (stop).
 
 ```re
            ^(.*)/_type='For'
-\n(?:\1.+\n)*?\1/iter/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/iter/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/iter/func/id='range'
 \n(?:\1.+\n)*?\1/iter/args/length=1
-\n(?:\1.+\n)* \1/.*/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)* \1/.*/_pos=(?P<POS>.+)
 ```
 
 ##### Example
@@ -2371,10 +2363,10 @@ Iterate over a range with exactly 2 arguments (start, stop).
 
 ```re
            ^(.*)/_type='For'
-\n(?:\1.+\n)*?\1/iter/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/iter/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/iter/func/id='range'
 \n(?:\1.+\n)*?\1/iter/args/length=2
-\n(?:\1.+\n)* \1/.*/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)* \1/.*/_pos=(?P<POS>.+)
 ```
 
 ##### Example
@@ -2406,14 +2398,14 @@ Iterate over a range with 3 arguments (start, stop, step).
 
 ```re
            ^(.*)/_type='For'
-\n(?:\1.+\n)*?\1/iter/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/iter/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/iter/func/id='range'
 \n(?:\1.+\n)*?\1/iter/args/length=3
 (   # If the step is a number, capture it as a suffix
 \n(?:\1.+\n)*?\1/iter/args/2/_type='Num'
 \n(?:\1.+\n)*?\1/iter/args/2/n=(?<SUFFIX>.+)
 )?
-\n(?:\1.+\n)* \1/.*/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)* \1/.*/_pos=(?P<POS>.+)
 ```
 
 ##### Example
@@ -2449,9 +2441,9 @@ Iterate over index numbers and elements of a collection.
 
 ```re
            ^(.*)/_type='For'
-\n(?:\1.+\n)*?\1/iter/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/iter/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/iter/func/id='enumerate'
-\n(?:\1.+\n)* \1/.*/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)* \1/.*/_pos=(?P<POS>.+)
 ```
 
 ##### Example
@@ -2477,14 +2469,14 @@ Iterate over index numbers of a collection.
 
 ```re
            ^(.*)/_type='For'
-\n(?:\1.+\n)*?\1/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/iter/_type='Call'
 \n(?:\1.+\n)*?\1/iter/func/id='range'
 \n(?:\1.+\n)*?\1/iter/args/length=1
 \n(?:\1.+\n)*?\1/iter/args/0/_type='Call'
 \n(?:\1.+\n)*?\1/iter/args/0/func/id='len'
 \n(?:\1.+\n)*?\1/iter/keywords/length=0
-\n(?:\1.+\n)* \1/.*/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)* \1/.*/_pos=(?P<POS>.+)
 ```
 
 ##### Example
@@ -2554,7 +2546,7 @@ A `for` loop with a counter `i` and a nested `for` loop which makes `i` iteratio
 
 ```re
            ^(.*)/_type='For'
-\n(?:\1.+\n)*?\1/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/target/id=(?P<VAR>.+) # capture iteration variable
 \n(?:\1.+\n)*?\1/iter/_type='Call'
 \n(?:\1.+\n)*?\1/iter/func/id='range'
@@ -2574,7 +2566,7 @@ A `for` loop with a counter `i` and a nested `for` loop which makes `i` iteratio
 \n(?:\1.+\n)* \1/(?P=_1)                    /iter/args/0(/.+)*/id=(?P=VAR) # match iteration variable
 \n(?:\1.+\n)* \1/(?P=_1)                    /iter/args/1(/.+)*/_hash=(?P=STOP) # match stop expression
 )
-\n(?:\1.+\n)* \1/.*/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)* \1/.*/_pos=(?P<POS>.+)
 ```
 
 ##### Example
@@ -2605,11 +2597,11 @@ Two nested `for` loops doing the same number of iterations.
 
 ```re
            ^(.*)/_type='For'
-\n(?:\1.+\n)*?\1/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/iter/_hash=(?P<HASH>.+) # capture _hash
 \n(?:\1.+\n)* \1/(?P<_1>(?:body|orelse)/\d+)/_type='For'
 \n(?:\1.+\n)*?\1/(?P=_1)                    /iter/_hash=(?P=HASH) # match _hash
-\n(?:\1.+\n)* \1/.*/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)* \1/.*/_pos=(?P<POS>.+)
 ```
 
 ##### Example
@@ -2638,8 +2630,8 @@ Two nested `for` loops doing the same number of iterations.
 
 ```re
            ^(.*)/_type='While'
-\n(?:\1.+\n)*?\1/lineno=(?P<LINE>.+)
-\n(?:\1.+\n)* \1/.*/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
+\n(?:\1.+\n)* \1/.*/_pos=(?P<POS>.+)
 ```
 
 ##### Example
@@ -2672,7 +2664,7 @@ Two nested `for` loops doing the same number of iterations.
 
 ```re
            ^(.*)/_type='Assert'
-\n(?:\1.+\n)*?\1/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 ```
 
 ##### Example
@@ -2699,8 +2691,8 @@ Two nested `for` loops doing the same number of iterations.
 
 ```re
            ^(.*)/_type='Try'
-\n(?:\1.+\n)* \1/lineno=(?P<LINE>.+)
-\n(?:\1.+\n)* \1/.*/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)* \1/_pos=(?P<POS>.+)
+\n(?:\1.+\n)* \1/.*/_pos=(?P<POS>.+)
 ```
 
 ##### Example
@@ -2733,7 +2725,7 @@ Two nested `for` loops doing the same number of iterations.
 
 ```re
            ^(.*)/_type='Raise'
-\n(?:\1.+\n)*?\1/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/exc(=(?P<SUFFIX>None)|/.*\bid='(?P<SUFFIX>.+)')
 ```
 
@@ -2779,7 +2771,7 @@ Two nested `for` loops doing the same number of iterations.
 ##### Definition
 
 ```re
-           ^(.*)/(?P<_1>handlers/\d+/(type/(func/|elts/\d+/)?)?)lineno=(?P<LINE>.+)
+           ^(.*)/(?P<_1>handlers/\d+/(type/(func/|elts/\d+/)?)?)_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/(?P=_1)                                        (id='(?P<SUFFIX>.+)'|type=(?P<SUFFIX>None))
 ```
 
@@ -2883,7 +2875,7 @@ GROUP BY e.rowid
 
 ```re
            ^(.*)/_type='Import(From)?'
-\n(?:\1.+\n)*?\1/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 (
 \n(?:\1.+\n)*?\1/module='(?P<SUFFIX>.+)'
 |
@@ -2929,7 +2921,7 @@ GROUP BY e.rowid
 
 ```re
            ^(.*)/_type='ImportFrom'
-\n(?:\1.+\n)*?\1/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/module='.+'
 (
 \n(?:\1.+\n)*?\1/names/\d+/name='(?P<SUFFIX>.+)'
@@ -3113,15 +3105,15 @@ An accumulation pattern that, from a given collection, returns a list containing
 
 ```re
            ^(.*)/_type='For'
-\n(?:\1.+\n)*?\1/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/target/id=(?P<ID_1>.+) # capture the iteration variable
 \n(?:\1.+\n)*?\1/(?P<_1>(?:body|orelse)/\d+)/_type='If'
 \n(?:\1.+\n)* \1/(?P=_1)                /test/args/\d+/id=(?P=ID_1) # match it in an inner conditional test
-\n(?:\1.+\n)* \1/(?P=_1)                /(?P<_2>(?:body|orelse)/\d+)/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)* \1/(?P=_1)                /(?P<_2>(?:body|orelse)/\d+)/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/(?P=_1)                /(?P=_2)                    /value/_type='Call'
 \n(?:\1.+\n)*?\1/(?P=_1)                /(?P=_2)                    /value/func/attr='append'
 \n(?:\1.+\n)*?\1/(?P=_1)                /(?P=_2)                    /value/args/0/id=(?P=ID_1) # match it in an append()
-\n(?:\1.+\n)* \1.*/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)* \1.*/_pos=(?P<POS>.+)
 ```
 
 ##### Example
@@ -3153,7 +3145,7 @@ An accumulation pattern that, from a given collection, returns the best element 
            ^(.*)/(?P<_1>(?:body|orelse)/\d+)/_type='Assign'
 \n(?:\1.+\n)*?\1/(?P=_1)                /assigntargets/0/id='(?P<CANDIDATE>.+)' # capture candidate
 \n(?:\1.+\n)* \1/(?P<_2>(?:body|orelse)/\d+)/_type='For'
-\n(?:\1.+\n)*?\1/(?P=_2)                /lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/(?P=_2)                /_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/(?P=_2)                /target/id='(?P<ITER_VAR>.+)' # capture iteration variable
 \n(?:\1.+\n)* \1/(?P=_2)                /(?P<_3>(?:body|orelse)/\d+)/_type='If'
 \n(?:\1.+\n)*?\1/(?P=_2)                /(?P=_3)                    /test/_ids=(?=.*?\b(?P=ITER_VAR)\b)
@@ -3161,11 +3153,11 @@ An accumulation pattern that, from a given collection, returns the best element 
                                                                                .* # match both
 \n(?:\1.+\n)* \1/(?P=_2)                /(?P=_3)                    /test/.*/id='(?P=CANDIDATE)' # match candidate
 \n(?:\1.+\n)* \1/(?P=_2)                /(?P=_3)                    /(?P<_4>(?:body|orelse)/\d+)/_type='Assign'
-\n(?:\1.+\n)*?\1/(?P=_2)                /(?P=_3)                    /(?P=_4)                /lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/(?P=_2)                /(?P=_3)                    /(?P=_4)                /_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/(?P=_2)                /(?P=_3)                    /(?P=_4)                /assigntargets/0/id='(?P=CANDIDATE)' # match candidate
 \n(?:\1.+\n)*?\1/(?P=_2)                /(?P=_3)                    /(?P=_4)                /assignvalue/id='(?P=ITER_VAR)' # match iteration variable
 (
-\n(?:\1.+\n)* \1(?P=_2)                /(?P=_3).*/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)* \1(?P=_2)                /(?P=_3).*/_pos=(?P<POS>.+)
 )?
 ```
 
@@ -3203,12 +3195,12 @@ Check whether all elements of a collection satisfy a predicate.
 
 ```re
           ^(.*?)/(?P<_1>(?:body|orelse)/\d+)/_type='For'
-\n(?:\1.+\n)*?\1/(?P=_1)                    /lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/(?P=_1)                    /_pos=(?P<POS>.+)
 \n(?:\1.+\n)* \1/(?P=_1)                    /(?P<_2>(?:body|orelse)/\d+)/_type='If'
 \n(?:\1.+\n)* \1/(?P=_1)                    /(?P=_2)                    /(?P<_3>(?:body|orelse)/\d+)/_type='Return'
 \n(?:\1.+\n)*?\1/(?P=_1)                    /(?P=_2)                    /(?P=_3)                    /value/value=False
 \n(?:\1.+\n)* \1/(?P<_4>(?:body|orelse)/\d+)/_type='Return'
-\n(?:\1.+\n)*?\1/(?P=_4)                    /lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/(?P=_4)                    /_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/(?P=_4)                    /value/value=True
 ```
 
@@ -3238,12 +3230,12 @@ Check whether any element of a collection satisfies a predicate.
 
 ```re
           ^(.*?)/(?P<_1>(?:body|orelse)/\d+)/_type='For'
-\n(?:\1.+\n)*?\1/(?P=_1)                    /lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/(?P=_1)                    /_pos=(?P<POS>.+)
 \n(?:\1.+\n)* \1/(?P=_1)                    /(?P<_2>(?:body|orelse)/\d+)/_type='If'
 \n(?:\1.+\n)* \1/(?P=_1)                    /(?P=_2)                    /(?P<_3>(?:body|orelse)/\d+)/_type='Return'
 \n(?:\1.+\n)*?\1/(?P=_1)                    /(?P=_2)                    /(?P=_3)                    /value/value=True
 \n(?:\1.+\n)* \1/(?P<_4>(?:body|orelse)/\d+)/_type='Return'
-\n(?:\1.+\n)*?\1/(?P=_4)                    /lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/(?P=_4)                    /_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/(?P=_4)                    /value/value=False
 ```
 
@@ -3273,12 +3265,12 @@ Linear search. Return the first element of a sequence satisfying a predicate.
 
 ```re
            ^(.*)/_type='For'
-\n(?:\1.+\n)*?\1/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/target/id=(?P<ITER_VAR>.+) # capture the name of the iteration variable
 \n(?:\1.+\n)* \1/(?P<_1>(?:body|orelse)/.+)/_type='If' # The If appears at any depth in the loop
 \n(?:\1.+\n)* \1/(?P=_1)                   /test/.+/id=(?P=ITER_VAR) # The variable appears at any depth inside the condition
 \n(?:\1.+\n)*?\1/(?P=_1)                   /(?P<_2>(?:body|orelse)/\d+)/_type='Return'
-\n(?:\1.+\n)*?\1/(?P=_1)                   /(?P=_2)                    /lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/(?P=_1)                   /(?P=_2)                    /_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/(?P=_1)                   /(?P=_2)                    /value/id=(?P=ITER_VAR) # ... and is returned
 ```
 
@@ -3312,25 +3304,25 @@ Evolve the value of a variable until it reaches a desired state.
 
 ```re
            ^(.*)/_type='While'
-\n(?:\1.+\n)*?\1/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)* \1/test/.*/id='(?P<STATE>.+)' # capture state variable
 (   # the state variable either appears on both sides of a simple assignment
 \n(?:\1.+\n)* \1/(?P<_1>body/.*)/_type='Assign'
-\n(?:\1.+\n)*?\1/(?P=_1)        /lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/(?P=_1)        /_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/(?P=_1)        /assigntargets/0/id='(?P=STATE)' # it is updated somewhere in the loop
 \n(?:\1.+\n)*?\1/(?P=_1)        /assignvalue/_ids=.*\b(?P=STATE)\b.* # from its current value
 |   # or appears on LHS of an augmented assignement
 \n(?:\1.+\n)* \1/(?P<_1>body/.*)/_type='AugAssign'
-\n(?:\1.+\n)*?\1/(?P=_1)        /lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/(?P=_1)        /_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/(?P=_1)        /assigntarget/id='(?P=STATE)' # it is augmented somewhere in the loop
 |   # or is mutated by calling a function or a method of this variable
 \n(?:\1.+\n)* \1/(?P<_1>body/.*)/_type='Expr'
-\n(?:\1.+\n)*?\1/(?P=_1)        /lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/(?P=_1)        /_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/(?P=_1)        /value/_type='Call'
 \n(?:\1.+\n)*?\1/(?P=_1)        /value/.*/id='(?P=STATE)' # it is mutated somewhere in the loop
 )
 (
-\n(?:\1.+\n)* \1.*/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)* \1.*/_pos=(?P<POS>.+)
 )?
 ```
 
@@ -3370,7 +3362,7 @@ Accumulate the inputs until a sentinel value is encountered (accumulation expres
 
 ```re
            ^(.*)/_type='While'
-\n(?:\1.+\n)*?\1/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/test/value=True
 \n(?:\1.+\n)* \1/(?:body|orelse)/\d+/assigntargets/.+/id='(?P<INPUT>.+)' # capture the name of the input
 \n(?:\1.+\n)* \1/(?P<_1>(?:body|orelse)/\d+)/_type='If'
@@ -3379,19 +3371,19 @@ Accumulate the inputs until a sentinel value is encountered (accumulation expres
 \n(?:\1.+\n)*?\1/(?P=_1)                /(?P=_2)                    /value/id='(?P<ACC>.+)' # capture the name of the accumulator
 (   # the accumulator either appears on both sides of a simple assignment with the input
 \n(?:\1.+\n)* \1/(?P<_3>(?:body|orelse)/\d+)/_type='(?P<SUFFIX>Assign)'
-\n(?:\1.+\n)*?\1/(?P=_3)                    /lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/(?P=_3)                    /_pos=(?P<POS>.+)
 \n(?:\1.+\n)* \1/(?P=_3)                    /assigntargets/.*/id='(?P=ACC)'
 \n(?:\1.+\n)*?\1/(?P=_3)                    /assignvalue/_ids=(?=.*\b(?P=INPUT)\b)
                                                         (?=.*\b(?P=ACC)\b)
                                                         .* # both appear in RHS
 |   # or is on LHS of an augmented assignement with the input
 \n(?:\1.+\n)* \1/(?P<_3>(?:body|orelse)/\d+)/_type='(?P<SUFFIX>AugAssign)'
-\n(?:\1.+\n)*?\1/(?P=_3)                    /lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/(?P=_3)                    /_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/(?P=_3)                    /assigntarget/id='(?P=ACC)'
 \n(?:\1.+\n)* \1/(?P=_3)                    /assignvalue.*/id='(?P=INPUT)'
 |   # or should be mutated by calling a function on this accumulator and the iteration variable
 \n(?:\1.+\n)* \1/(?P<_3>(?:body|orelse)/\d+)/_type='Expr' # the whole line consists in an expression
-\n(?:\1.+\n)*?\1/(?P=_3)                    /lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/(?P=_3)                    /_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/(?P=_3)                    /value/_type='Call'
 \n(?:\1.+\n)*?\1/(?P=_3)                    /value/_ids=(?=.*\b(?P=INPUT)\b)
                                                         (?=.*\b(?P=ACC)\b)
@@ -3400,14 +3392,14 @@ Accumulate the inputs until a sentinel value is encountered (accumulation expres
 \n(?:\1.+\n)*?\1/(?P=_3)                    /value/func/id='(?!(?P=ACC)|(?P=INPUT)|breakpoint|delattr|eval|exec|help|input|open|print|setattr|super).+'
 |   # or should be mutated by calling a method of this accumulator, again on the iteration variable
 \n(?:\1.+\n)* \1/(?P<_3>(?:body|orelse)/\d+)/_type='Expr' # the whole line consists in an expression
-\n(?:\1.+\n)*?\1/(?P=_3)                    /lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/(?P=_3)                    /_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/(?P=_3)                    /value/_type='Call'
 \n(?:\1.+\n)*?\1/(?P=_3)                    /value/func/_type='(?P<SUFFIX>Attribute)'
 \n(?:\1.+\n)*?\1/(?P=_3)                    /value/func/value/id='(?P=ACC)' # a method of acc is called on...
 \n(?:\1.+\n)* \1/(?P=_3)                    /value/args/\d+/id='(?P=INPUT)' # the iteration variable
 )
 (
-\n(?:\1.+\n)* \1.*/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)* \1.*/_pos=(?P<POS>.+)
 )?
 ```
 
@@ -3526,13 +3518,13 @@ When a conditional simply assigns different values to the same variable, it may 
 
 ```re
            ^(.*)/_type='If'
-\n(?:\1.+\n)*?\1/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/body/length=1
 \n(?:\1.+\n)*?\1/body/0/_type='Assign'
 \n(?:\1.+\n)*?\1/body/0/assigntargets/0/_hash=(?P<HASH>.+)
 \n(?:\1.+\n)*?\1/orelse/length=1
 \n(?:\1.+\n)*?\1/orelse/0/_type='Assign'
-\n(?:\1.+\n)*?\1/orelse/0/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/orelse/0/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/orelse/0/assigntargets/0/_hash=(?P=HASH)
 ```
 
@@ -3579,7 +3571,7 @@ When the RHS of an assignment consists in a binary operation whose left operand 
 
 ```re
            ^(.*)/_type='Assign'
-\n(?:\1.+\n)*?\1/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/assigntargets/length=1
 \n(?:\1.+\n)*?\1/assigntargets/0/id=(?P<TARGET>.+)
 \n(?:\1.+\n)*?\1/assignvalue/_type='BinOp'
@@ -3625,7 +3617,7 @@ When the `else` branch of a conditional is another conditional, it can be rewrit
 
 ```re
            ^(.*)/_type='BoolOp'
-\n(?:\1.+\n)*?\1/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/op/_type='And'
 \n(?:\1.+\n)*?\1/values/0/_type='Compare'
 \n(?:\1.+\n)*?\1/values/0/comparators/0/_hash=(?P<HASH_1>.+) # capture the right operand of the left comparison
@@ -3670,11 +3662,11 @@ Match magic numbers (unnamed numerical constants) other than -1, 0, 1 and 2. A n
 ```re
   ^(/(?:body|orelse)/\d+)
 (   # indented lines
-                /(?P<_1>(?:body|orelse)/.+)/lineno=(?P<LINE>.+)
+                /(?P<_1>(?:body|orelse)/.+)/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/(?P=_1)                   /n=(?!(-1|0|1|2)\n)
 |   # non indented lines
                 /_type='Assign'
-\n(?:\1.+\n)*?\1/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/assigntargets/0/id='.*?[a-z].*' # at least one lowercase letter
 \n(?:\1.+\n)*?\1/assignvalue/n=(?!(-1|0|1|2)\n)
 )
@@ -3723,11 +3715,11 @@ When a predicate ends with a conditional whose sole purpose is to return `True` 
 
 ```re
            ^(.*)/_type='If'
-\n(?:\1.+\n)*?\1/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/body/0/_type='Return'
 \n(?:\1.+\n)*?\1/body/0/value/value=(?P<BOOL>True|False) # name BOOL the value used here
 \n(?:\1.+\n)*?\1/orelse/0/_type='Return'
-\n(?:\1.+\n)*?\1/orelse/0/lineno=(?P<LINE>.+)
+\n(?:\1.+\n)*?\1/orelse/0/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/orelse/0/value/value=(True|False)(?<!(?P=BOOL)) # and check not BOOL is used there
 ```
 

@@ -1,46 +1,27 @@
 from typing import Dict, List, Tuple, Union
 
 
-class CachedSpan(type):
-    """Prevent the creation of distinct instances for identical spans.
-
-    It avoids wasting memory and facilitates the deduplication of a list of spans.
-    References:
-    - Code: https://stackoverflow.com/a/50821287/173003
-    - Typing:
-        - https://mypy.readthedocs.io/en/latest/kinds_of_types.html#class-name-forward-references
-        - https://github.com/python/mypy/issues/6721 (type: ignore)
-    """
-
-    existing_instances: Dict[Tuple[int, int], "CachedSpan"] = {}
-
-    def __call__(cls, line_numbers):
-        if isinstance(line_numbers[0], int):
-            start_data = [line_numbers[0]]
-            end_data = [line_numbers[-1]]
-        else:
-            start_data = [int(x) for x in line_numbers[0].split(":")]
-            end_data = [int(x) for x in line_numbers[-1].split(":")]
-        key = (start_data[0], end_data[0])
-        if key not in cls.existing_instances:
-            cls.existing_instances[key] = super(CachedSpan, cls).__call__(start_data, end_data)
-        return cls.existing_instances[key]
-
-
-class Span(metaclass=CachedSpan):
+class Span:
     """Metadata associated with a tag (i.e., a label or a taxon).
-    Currently, a span is a couple of line numbers delimiting a construct in a source.
+    Currently, a span consists in:
+    - a couple of line numbers delimiting a construct in a source,
+    - the indentation level of the first line,
+    - the path of the construct (useful for any nested expression)
     Implemented as a Registry of singletons (GoF's Design Patterns), or Multiton.
     """
 
-    def __init__(self, start_data, end_data) -> None:
-        if len(start_data) == len(end_data) == 2:
-            self.indent = start_data[1]
-        elif len(start_data) == len(end_data) == 1:
-            self.indent = None
-        else:
-            raise NotImplementedError
-        (self.start, self.end) = (start_data[0], end_data[0])
+    def __init__(self, pos: List) -> None:
+        data = (pos[0], pos[-1])  # keep only the both ends of the position data
+        try:
+            (start, indent, self.path) = data[0].split(":")
+            self.start = int(start)
+            self.indent = int(indent)
+            self.end = int(data[1].partition(":")[0])
+        except (TypeError, ValueError, AttributeError):  # for testing purpose only
+            self.start = int(data[0])
+            self.end = int(data[1])
+            self.indent = -1
+            self.path = ""
         self.length = self.end - self.start
         if self.length == 0:
             self.string = f"{self.start}"
@@ -48,6 +29,7 @@ class Span(metaclass=CachedSpan):
         else:
             self.string = f"{self.start}-{self.end}"
             self.suffix = f" (-> +{self.length})"
+        self.hash = hash((self.start, self.end, self.path))
 
     def __str__(self) -> str:
         return self.string
@@ -59,4 +41,15 @@ class Span(metaclass=CachedSpan):
         return (self.start, self.end)
 
     def __lt__(self, other) -> bool:
-        return (self.start, self.end) < (other.start, other.end)
+        return (self.start, self.end) < (other.start, other.end) or (
+            (self.start, self.end) == (other.start, other.end) and self.path < other.path
+        )
+
+    def __eq__(self, other):
+        if self.path and other.path:
+            return (self.start, self.end) == (other.start, other.end) and self.path == other.path
+        else:
+            return (self.start, self.end) == (other.start, other.end)
+
+    def __hash__(self):
+        return self.hash

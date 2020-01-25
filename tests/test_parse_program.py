@@ -55,12 +55,12 @@ def reformat_sql(match):
     s = sqlparse.format(
         match.group(1),
         reindent=True,
-        keyword_case="upper",
+        keyword_case="upper",  # Limitation: https://github.com/andialbrecht/sqlparse/pull/501
         identifier_case="lower",
         indent_width=2,
     )
     s = s.replace("\n\n", "\n")
-    s = s.replace(" regexp ", " REGEXP ")  # cf. https://github.com/andialbrecht/sqlparse/pull/501
+    s = regex.sub(r"\b(regexp|glob)\b", lambda m: m.group().upper(), s)
     return f"```sql\n{s}\n```"
 
 

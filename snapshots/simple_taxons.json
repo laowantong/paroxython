@@ -13,11 +13,11 @@
     "test/divisibility/parity/": "4",
     "test/equality/": "4",
     "test/equality/not/": "2",
-    "type/elementary/number/integer": "2 4 5 7",
+    "type/elementary/number/integer": "2 4 4 5 7 7",
     "variable/assignment/": "5 7"
   },
   "tests/data/simple/function_definition.py": {
-    "operator/addition/": "2",
+    "operator/addition/": "2 2",
     "subroutine_definition/function/": "1-2",
     "type/elementary/number/integer": "2"
   },

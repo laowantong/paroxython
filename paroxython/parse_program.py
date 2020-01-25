@@ -77,7 +77,7 @@ class ProgramParser:
             d = None
             for match in rex.finditer(self.flat_ast, overlapped=True):
                 d = match.capturesdict()
-                span = Span(d["LINE"])
+                span = Span(d["POS"])
                 if d.get("SUFFIX"):  # there is a "SUFFIX" key and its value is not []
                     for suffix in d["SUFFIX"]:
                         try_to_bind(LabelName(f"{label_name}:{suffix}"), span)
