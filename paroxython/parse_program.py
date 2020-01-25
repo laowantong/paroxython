@@ -91,10 +91,13 @@ class ProgramParser:
         labels.extend(Label(*item) for item in program.addition.items())
 
         self.db.create(labels)
-        for query in self.queries.values():
+        for (candidate_label, query) in self.queries.items():
             derived_labels = self.db.read(query)
-            self.db.update(derived_labels)
-            labels.extend(derived_labels)
+            if derived_labels:
+                self.db.update(derived_labels)
+                labels.extend(derived_labels)
+            elif yield_failed_matches:
+                labels.append(Label(candidate_label, []))
         self.db.delete()
 
         return sorted(labels)

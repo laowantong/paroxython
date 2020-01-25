@@ -41,6 +41,7 @@
 
 # Absent labels
 
+- accumulate_elements
 - accumulate_stream
 - assertion
 - assignment_lhs_identifier
@@ -52,12 +53,14 @@
 - call_parameter
 - chained_assignment
 - chained_comparison
+- chained_equalities|chained_inequalities
 - closure
 - comparison_operator
 - composition
 - comprehension
 - comprehension_for_count
 - conditional_expression
+- constant_assignment
 - deeply_recursive_function
 - divisibility_test
 - except
@@ -76,10 +79,14 @@
 - for_range_stop
 - function
 - function_call
+- function_returning_nothing
+- function_returning_something
 - function_with_default_positional_arguments
+- generator
 - if_elif_branch
 - if_test_id
 - imaginary_literal
+- import
 - import_module
 - import_name
 - index
@@ -91,7 +98,9 @@
 - method_chaining
 - negation
 - negative_index
+- nested_for
 - nested_function
+- nested_if
 - raise
 - recursive_function
 - slice
@@ -102,6 +111,7 @@
 - swapping
 - triangular_nested_for
 - try
+- try_raise|try_except
 - unary_operator
 - universal_quantifier
 - yield
