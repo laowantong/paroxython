@@ -52,19 +52,21 @@ def generate_toc(text):
 
 
 def reformat_sql(match):
-    string = sqlparse.format(
+    s = sqlparse.format(
         match.group(1),
         reindent=True,
         keyword_case="upper",
         identifier_case="lower",
         indent_width=2,
-    ).replace("\n\n", "\n")
-    return f"```sql\n{string}\n```"
+    )
+    s = s.replace("\n\n", "\n")
+    s = s.replace(" regexp ", " REGEXP ")  # cf. https://github.com/andialbrecht/sqlparse/pull/501
+    return f"```sql\n{s}\n```"
 
 
 def dependency_map(text):
 
-    find_iter_requirements = regex.compile(
+    find_iter_derivations = regex.compile(
         r"""(?msx)
         name(_prefix)?\s(
             ==?\s"(?P<REQUIRED_LABEL_NAME>.+?)(:.+)?"
@@ -89,28 +91,28 @@ def dependency_map(text):
 
         return label_name_to_pattern
 
-    requires = defaultdict(set)
-    required_by = defaultdict(set)
+    derived_from = defaultdict(set)
+    derived_into = defaultdict(set)
     all_constructs = find_all_constructs(text)
     label_name_to_pattern = label_converter([construct[0] for construct in all_constructs])
     for (label_pattern, language, query) in all_constructs:
         if language == "re":
             continue
-        for m in find_iter_requirements(query):
-            required_label_patterns = [
+        for m in find_iter_derivations(query):
+            derived_label_patterns = [
                 label_name_to_pattern(x) for x in m.captures("REQUIRED_LABEL_NAME")
             ]
-            requires[label_pattern].update(required_label_patterns)
-            for required_label_pattern in required_label_patterns:
-                required_by[required_label_pattern].add(label_pattern)
-    keys = set(requires).union(required_by)
+            derived_from[label_pattern].update(derived_label_patterns)
+            for derived_label_pattern in derived_label_patterns:
+                derived_into[derived_label_pattern].add(label_pattern)
+    keys = set(derived_from).union(derived_into)
     result = {}
     for key in keys:
         result[key] = {}
-        if key in requires:
-            result[key]["Requires"] = sorted(requires[key])
-        if key in required_by:
-            result[key]["Required by"] = sorted(required_by[key])
+        if key in derived_from:
+            result[key]["Derived from"] = sorted(derived_from[key])
+        if key in derived_into:
+            result[key]["Derived into"] = sorted(derived_into[key])
     return result
 
 

@@ -40,6 +40,7 @@
       - [Construct `augmented_assignment`](#construct-augmented_assignment)
       - [Construct `chained_assignment`](#construct-chained_assignment)
       - [Construct `assignment_lhs_identifier`](#construct-assignment_lhs_identifier)
+      - [Construct `constant_assignment`](#construct-constant_assignment)
       - [Construct `assignment_rhs_identifier`](#construct-assignment_rhs_identifier)
     - [Assignment idioms](#assignment-idioms)
       - [Construct `swapping`](#construct-swapping)
@@ -529,7 +530,7 @@ Match the so-called ternary operator.
 
 ##### Dependencies
 
-- Required by [construct `chained_equalities|chained_inequalities`](#construct-chained_equalitieschained_inequalities).
+- Derived into [construct `chained_equalities|chained_inequalities`](#construct-chained_equalitieschained_inequalities).
 
 ##### Definition
 
@@ -561,7 +562,7 @@ Match the so-called ternary operator.
 
 ##### Dependencies
 
-- Required by [construct `chained_equalities|chained_inequalities`](#construct-chained_equalitieschained_inequalities).
+- Derived into [construct `chained_equalities|chained_inequalities`](#construct-chained_equalitieschained_inequalities).
 
 ##### Definition
 
@@ -592,7 +593,7 @@ Match the so-called ternary operator.
 
 ##### Dependencies
 
-- Requires:
+- Derived from:
   1. [construct `chained_comparison`](#construct-chained_comparison)
   1. [construct `comparison_operator`](#construct-comparison_operator)
 
@@ -745,7 +746,7 @@ When the value of the left operand suffices to determine the value of a boolean 
 
 ##### Dependencies
 
-- Required by [construct `accumulate_elements`](#construct-accumulate_elements).
+- Derived into [construct `accumulate_elements`](#construct-accumulate_elements).
 
 ##### Definition
 
@@ -781,7 +782,7 @@ When the value of the left operand suffices to determine the value of a boolean 
 
 ##### Dependencies
 
-- Required by [construct `accumulate_elements`](#construct-accumulate_elements).
+- Derived into [construct `accumulate_elements`](#construct-accumulate_elements).
 
 ##### Definition
 
@@ -812,7 +813,7 @@ When the value of the left operand suffices to determine the value of a boolean 
 
 ##### Dependencies
 
-- Required by [construct `accumulate_elements`](#construct-accumulate_elements).
+- Derived into [construct `accumulate_elements`](#construct-accumulate_elements).
 
 ##### Definition
 
@@ -1067,7 +1068,7 @@ Match a comprehension with an `if` clause.
 
 ##### Dependencies
 
-- Required by [construct `accumulate_elements`](#construct-accumulate_elements).
+- Derived into [construct `accumulate_elements`](#construct-accumulate_elements).
 
 ##### Definition
 
@@ -1128,7 +1129,9 @@ Capture any identifier appearing on the left hand side of an assignment (possibl
 
 ##### Dependencies
 
-- Required by [construct `accumulate_elements`](#construct-accumulate_elements).
+- Derived into:
+  1. [construct `accumulate_elements`](#construct-accumulate_elements)
+  1. [construct `constant_assignment`](#construct-constant_assignment)
 
 ##### Definition
 
@@ -1144,13 +1147,13 @@ Capture any identifier appearing on the left hand side of an assignment (possibl
 2   a = 1
 3   (b, c) = (1, 1)
 4   [d, e] = [1, 1]
-5   f[g] = 1            # no match for g
+5   f[g] = 1             # no match for g
 6   if foo:
 7       h = 1
 8   def bar():
 9       i = 1
 10  j = k = 1
-11  l.m = 1             # LIMITATION: no match for m
+11  l.m = 1              # LIMITATION: no match for m
 12  (n, *o) = [1, 1, 1]
 13  a += 1
 14  f[g] += 1            # no match for g
@@ -1183,13 +1186,61 @@ Capture any identifier appearing on the left hand side of an assignment (possibl
 
 --------------------------------------------------------------------------------
 
+#### Construct `constant_assignment`
+
+Check whether an assignment target follows the Python conventions for constants.
+
+##### Dependencies
+
+- Derived from [construct `assignment_lhs_identifier`](#construct-assignment_lhs_identifier).
+
+##### Definition
+
+```sql
+SELECT "constant_assignment",
+       t.name_suffix,
+       t.span
+FROM t
+WHERE t.name_prefix = "assignment_lhs_identifier"
+  AND t.name_suffix REGEXP "^[[:upper:]0-9_]+$"
+```
+
+**Remark.** Note the user-defined function `REGEXP` in the `WHERE`clause. It calls the function `search()` of the third-party [`regex`](https://pypi.org/project/regex/) library.
+
+##### Example
+
+```python
+1   A = 42
+2   a = 42
+3   WORD = 42
+4   word = 42
+5   Word = 42
+6   WORD42 = 42
+7   word42 = 42
+8   Word42 = 42
+9   snake_case = 42
+10  CamelCase = 42
+11  SCREAMING_SNAKE_CASE = 42
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `constant_assignment:A` | 1 |
+| `constant_assignment:WORD` | 3 |
+| `constant_assignment:WORD42` | 6 |
+| `constant_assignment:SCREAMING_SNAKE_CASE` | 11 |
+
+--------------------------------------------------------------------------------
+
 #### Construct `assignment_rhs_identifier`
 
 Capture any identifier (variable or function) appearing on the right hand side of an assignment (possibly augmented).
 
 ##### Dependencies
 
-- Required by [construct `accumulate_elements`](#construct-accumulate_elements).
+- Derived into [construct `accumulate_elements`](#construct-accumulate_elements).
 
 ##### Definition
 
@@ -1308,7 +1359,7 @@ In Python, the term "function" encompasses any type of subroutine, be it a metho
 
 ##### Dependencies
 
-- Required by:
+- Derived into:
   1. [construct `function_returning_nothing`](#construct-function_returning_nothing)
   1. [construct `function_returning_something`](#construct-function_returning_something)
   1. [construct `generator`](#construct-generator)
@@ -1368,7 +1419,7 @@ Match `return` statements and, when the returned object is a simple identifier, 
 
 ##### Dependencies
 
-- Required by [construct `function_returning_something`](#construct-function_returning_something).
+- Derived into [construct `function_returning_something`](#construct-function_returning_something).
 
 ##### Definition
 
@@ -1413,7 +1464,7 @@ Match `yield` and `yieldfrom` _[expressions](https://docs.python.org/3/reference
 
 ##### Dependencies
 
-- Required by [construct `generator`](#construct-generator).
+- Derived into [construct `generator`](#construct-generator).
 
 ##### Definition
 
@@ -1457,10 +1508,10 @@ Match `yield` and `yieldfrom` _[expressions](https://docs.python.org/3/reference
 
 ##### Dependencies
 
-- Requires:
+- Derived from:
   1. [construct `function`](#construct-function)
   1. [construct `yield`](#construct-yield)
-- Required by [construct `function_returning_nothing`](#construct-function_returning_nothing).
+- Derived into [construct `function_returning_nothing`](#construct-function_returning_nothing).
 
 ##### Definition
 
@@ -1502,10 +1553,10 @@ A function returning at least one value distinct from `None` is the smallest `fu
 
 ##### Dependencies
 
-- Requires:
+- Derived from:
   1. [construct `function`](#construct-function)
   1. [construct `return`](#construct-return)
-- Required by [construct `function_returning_nothing`](#construct-function_returning_nothing).
+- Derived into [construct `function_returning_nothing`](#construct-function_returning_nothing).
 
 ##### Definition
 
@@ -1567,7 +1618,7 @@ A function returning nothing (aka procedure) is a function which is neither a ge
 
 ##### Dependencies
 
-- Requires:
+- Derived from:
   1. [construct `function`](#construct-function)
   1. [construct `function_returning_something`](#construct-function_returning_something)
   1. [construct `generator`](#construct-generator)
@@ -1882,7 +1933,7 @@ Match an entire conditional (from the `if` clause to the last line of its body).
 
 ##### Dependencies
 
-- Required by [construct `nested_if`](#construct-nested_if).
+- Derived into [construct `nested_if`](#construct-nested_if).
 
 ##### Definition
 
@@ -1970,7 +2021,7 @@ Match the body of the branch “`then`” of an `if` statement.
 
 ##### Dependencies
 
-- Required by [construct `nested_if`](#construct-nested_if).
+- Derived into [construct `nested_if`](#construct-nested_if).
 
 ##### Definition
 
@@ -2028,7 +2079,7 @@ Match the body of an `elif` clause, which is (or could be rewritten as) an `else
 
 ##### Dependencies
 
-- Required by [construct `nested_if`](#construct-nested_if).
+- Derived into [construct `nested_if`](#construct-nested_if).
 
 ##### Definition
 
@@ -2088,7 +2139,7 @@ Match the body of the possible branch `else` of an `if` statement.
 
 ##### Dependencies
 
-- Required by [construct `nested_if`](#construct-nested_if).
+- Derived into [construct `nested_if`](#construct-nested_if).
 
 ##### Definition
 
@@ -2145,7 +2196,7 @@ Match an `if` clause nested in _n_ other `if` clauses, suffixing it by _n_.
 
 ##### Dependencies
 
-- Requires:
+- Derived from:
   1. [construct `if`](#construct-if)
   1. [construct `if_elif_branch`](#construct-if_elif_branch)
   1. [construct `if_else_branch`](#construct-if_else_branch)
@@ -2211,7 +2262,7 @@ Match sequential loops, along with their iteration variable(s).
 
 ##### Dependencies
 
-- Required by:
+- Derived into:
   1. [construct `accumulate_elements`](#construct-accumulate_elements)
   1. [construct `nested_for`](#construct-nested_for)
 
@@ -2457,7 +2508,7 @@ Match a `for` statement nested in _n_ other `for` statements, suffixing it by _n
 
 ##### Dependencies
 
-- Requires [construct `for`](#construct-for).
+- Derived from [construct `for`](#construct-for).
 
 ##### Definition
 
@@ -2642,7 +2693,7 @@ Two nested `for` loops doing the same number of iterations.
 
 ##### Dependencies
 
-- Required by [construct `try_raise|try_except`](#construct-try_raisetry_except).
+- Derived into [construct `try_raise|try_except`](#construct-try_raisetry_except).
 
 ##### Definition
 
@@ -2676,7 +2727,7 @@ Two nested `for` loops doing the same number of iterations.
 
 ##### Dependencies
 
-- Required by [construct `try_raise|try_except`](#construct-try_raisetry_except).
+- Derived into [construct `try_raise|try_except`](#construct-try_raisetry_except).
 
 ##### Definition
 
@@ -2723,7 +2774,7 @@ Two nested `for` loops doing the same number of iterations.
 
 ##### Dependencies
 
-- Required by [construct `try_raise|try_except`](#construct-try_raisetry_except).
+- Derived into [construct `try_raise|try_except`](#construct-try_raisetry_except).
 
 ##### Definition
 
@@ -2770,7 +2821,7 @@ Two nested `for` loops doing the same number of iterations.
 
 ##### Dependencies
 
-- Requires:
+- Derived from:
   1. [construct `except`](#construct-except)
   1. [construct `raise`](#construct-raise)
   1. [construct `try`](#construct-try)
@@ -2826,7 +2877,7 @@ GROUP BY e.rowid
 
 ##### Dependencies
 
-- Required by [construct `import`](#construct-import).
+- Derived into [construct `import`](#construct-import).
 
 ##### Definition
 
@@ -2872,7 +2923,7 @@ GROUP BY e.rowid
 
 ##### Dependencies
 
-- Required by [construct `import`](#construct-import).
+- Derived into [construct `import`](#construct-import).
 
 ##### Definition
 
@@ -2913,7 +2964,7 @@ Suffixed by the imported module and, if any, the imported name. In most cases, c
 
 ##### Dependencies
 
-- Requires:
+- Derived from:
   1. [construct `import_module`](#construct-import_module)
   1. [construct `import_name`](#construct-import_name)
 
@@ -2973,7 +3024,7 @@ An accumulator is iteratively updated from its previous value and those of the i
 
 ##### Dependencies
 
-- Requires:
+- Derived from:
   1. [construct `assignment_lhs_identifier`](#construct-assignment_lhs_identifier)
   1. [construct `assignment_rhs_identifier`](#construct-assignment_rhs_identifier)
   1. [construct `augmented_assignment`](#construct-augmented_assignment)

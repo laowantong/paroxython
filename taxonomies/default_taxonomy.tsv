@@ -102,6 +102,7 @@ type/elementary/string/	literal:Str
 variable/assignment/	assignment
 variable/assignment/augmented/	augmented_assignment
 variable/assignment/chained/	chained_assignment
+variable/assignment/constant/	constant_assignment:.+
 -- EOF	
 operator/addition/concatenation/list	
 operator/addition/concatenation/string	

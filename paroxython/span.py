@@ -7,7 +7,9 @@ class CachedSpan(type):
     It avoids wasting memory and facilitates the deduplication of a list of spans.
     References:
     - Code: https://stackoverflow.com/a/50821287/173003
-    - Typing: https://mypy.readthedocs.io/en/latest/kinds_of_types.html#class-name-forward-references
+    - Typing:
+        - https://mypy.readthedocs.io/en/latest/kinds_of_types.html#class-name-forward-references
+        - https://github.com/python/mypy/issues/6721 (type: ignore)
     """
 
     existing_instances: Dict[Tuple[int, int], "CachedSpan"] = {}
