@@ -1729,13 +1729,11 @@ WHERE name_prefix = "function"
 ```sql
 SELECT "recursive_function",
        f.name_suffix,
-       max(f.span_start) || "-" || min(f.span_end)
+       f.span
 FROM t f
 JOIN t c ON (c.path INSIDE f.path)
 WHERE f.name_prefix = "function"
-  AND c.name_prefix = "function_call"
-  AND f.name_suffix = c.name_suffix
-GROUP BY f.rowid
+  AND c.name = "function_call" || ":" || f.name_suffix
 ```
 
 ##### Example
@@ -1769,14 +1767,13 @@ Any function `f` which contains a nested call to itself (`f(..., f(...), ...)`),
 ```sql
 SELECT "deeply_recursive_function",
        f.name_suffix,
-       max(f.span_start) || "-" || min(f.span_end)
+       f.span
 FROM t f
 JOIN t c1 ON (c1.path INSIDE f.path)
 JOIN t c2 ON (c2.path INSIDE c1.path)
 WHERE f.name_prefix = "function"
   AND c1.name = "function_call" || ":" || f.name_suffix
   AND c2.name = "function_call" || ":" || f.name_suffix
-GROUP BY f.rowid
 ```
 
 ##### Example
