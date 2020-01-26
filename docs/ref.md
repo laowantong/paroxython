@@ -1782,10 +1782,6 @@ WHERE f.name_prefix = "function"
 1   def gob_program():
 2       print("PENUS")
 3       gob_program(gob_program())
-4
-5   def gob_program_2():
-6       gob_program_2(gob_program_2())
-7       print("PENUS")
 ```
 
 ##### Matches
@@ -1793,7 +1789,6 @@ WHERE f.name_prefix = "function"
 | Label | Lines |
 |:--|:--|
 | `deeply_recursive_function:gob_program` | 1-3 |
-| `deeply_recursive_function:gob_program_2` | 5-7 |
 
 --------------------------------------------------------------------------------
 
@@ -1927,8 +1922,7 @@ JOIN t c ON (c.path INSIDE f.path)
 JOIN t r ON (r.path INSIDE f.path)
 WHERE f.name_prefix = "function"
   AND c.name_prefix = "function"
-  AND r.name_prefix = "return"
-  AND c.name_suffix = r.name_suffix
+  AND r.name = "return" || ":" || c.name_suffix
 GROUP BY c.rowid
 ```
 
@@ -2162,7 +2156,7 @@ Match the body of an `elif` clause, which is (or could be rewritten as) an `else
 
 #### Construct `if_else_branch`
 
-Match the body of the possible branch `else` of an `if` statement.
+Match the body of the possible `else` branch of an `if` statement.
 
 ##### Dependencies
 
@@ -3066,8 +3060,8 @@ SELECT "accumulate_elements",
        count(DISTINCT acc_left.name_suffix),
        for_loop.span
 FROM t for_loop
-JOIN t iter_var ON (iter_var.path INSIDE for_loop.path)-- Ensure iter_var is nested in the loop
-JOIN t acc_left ON (iter_var.span = acc_left.span)-- and has same span as both acc_left
+JOIN t iter_var ON (iter_var.path INSIDE for_loop.path)-- Ensure iter_var is nested in the loop...
+JOIN t acc_left ON (iter_var.span = acc_left.span)-- and has same span as both acc_left...
 JOIN t acc_right ON (iter_var.span = acc_right.span)-- and acc_right.
 WHERE for_loop.name_prefix = "for" -- A for loop...
   AND for_loop.name_suffix = iter_var.name_suffix -- whose iteration variable...
