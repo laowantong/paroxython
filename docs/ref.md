@@ -748,6 +748,11 @@ When the value of the left operand suffices to determine the value of a boolean 
 
 #### Construct `call_parameter`
 
+Match any _atomic_ argument of a function or a method call, and suffix it to the construct's name. _Atomic_ denotes an object which is either:
+- a simple identifier,
+- a number literal,
+- `True`, `False`, `None`.
+
 ##### Dependencies
 
 - Derived into [construct `accumulate_elements`](#construct-accumulate_elements).
@@ -756,29 +761,37 @@ When the value of the left operand suffices to determine the value of a boolean 
 
 ```re
   ^(.*/args/\d+)/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/id='(?P<SUFFIX>.+)'
+\n(?:\1.+\n)*?\1/(value|n|id)?='?(?P<SUFFIX>.+?)\b'?$
 ```
 
 ##### Example
 
 ```python
-1   foo(a, b, c)
-2   bar()
-3   buzz(x, 2)
-4   fizz(foobar(x), 2)
-5   foo.bar(buzz, bizz)
+1   bar() # no match
+2   foo("a string") # no match
+3   foo(None)
+4   foo(True)
+5   foo(42)
+6   buzz(x, 42)
+7   buzz((x, 42)) # no match
+8   fizz(foobar(x), 42)
+9   foo(a, b, c)
+10  foo.bar(bizz, buzz)
 ```
 
 ##### Matches
 
 | Label | Lines |
 |:--|:--|
-| `call_parameter:a` | 1 |
-| `call_parameter:b` | 1 |
-| `call_parameter:bizz` | 5 |
-| `call_parameter:buzz` | 5 |
-| `call_parameter:c` | 1 |
-| `call_parameter:x` | 3, 4 |
+| `call_parameter:None` | 3 |
+| `call_parameter:True` | 4 |
+| `call_parameter:42` | 5, 6, 8 |
+| `call_parameter:x` | 6, 8 |
+| `call_parameter:a` | 9 |
+| `call_parameter:b` | 9 |
+| `call_parameter:c` | 9 |
+| `call_parameter:bizz` | 10 |
+| `call_parameter:buzz` | 10 |
 
 --------------------------------------------------------------------------------
 
@@ -1425,7 +1438,7 @@ In Python, the term "function" encompasses any type of subroutine, be it a metho
 
 #### Construct `return`
 
-Match `return` statements and, when the returned object is a simple identifier, a number literal, `True`, `False` or `None`, suffix it. Note that a `return` statement returning no value is denoted by `return:None`, not to be confounded with `result` (without suffix), which denotes the return of an object which is not a simple identifier, a number litteral, `True`, `False` or `None`.
+Match `return` statements and, when the returned object is [_atomic_](#construct-call_parameter), suffix it. Note that a `return` statement returning no value is denoted by `return:None`, not to be confounded with `result` (without suffix), which denotes the return of a non-atomic object.
 
 ##### Dependencies
 
@@ -1439,7 +1452,7 @@ Match `return` statements and, when the returned object is a simple identifier, 
            ^(.*)/_type='Return'
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 (
-\n(?:\1.+\n)*?\1/value(/value|/n|/id)?='?(?P<SUFFIX>.+?)\b'?
+\n(?:\1.+\n)*?\1/value(/value|/n|/id)?='?(?P<SUFFIX>.+?)\b'?$
 )?
 ```
 
@@ -1472,7 +1485,7 @@ Match `return` statements and, when the returned object is a simple identifier, 
 
 #### Construct `yield`
 
-Match `yield` and `yieldfrom` _[expressions](https://docs.python.org/3/reference/expressions.html#yield-expressions)_ (generally used as statements). See [construct `return`](#construct-return) for a description of the suffix, if any.
+Match `yield` and `yieldfrom` _[expressions](https://docs.python.org/3/reference/expressions.html#yield-expressions)_ (generally used as statements) and, when the yielded object is [_atomic_](#construct-call_parameter), suffix it.
 
 ##### Dependencies
 
@@ -1484,7 +1497,7 @@ Match `yield` and `yieldfrom` _[expressions](https://docs.python.org/3/reference
            ^(.*)/_type='Yield(From)?'
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 (
-\n(?:\1.+\n)*?\1/value(/value|/n|/id)?='?(?P<SUFFIX>.+?)\b'?
+\n(?:\1.+\n)*?\1/value(/value|/n|/id)?='?(?P<SUFFIX>.+?)\b'?$
 )?
 ```
 
@@ -1538,7 +1551,7 @@ WHERE f.name_prefix = "function"
 GROUP BY y.rowid
 ```
 
-**Remark.** The `INSIDE` operator is not an Sqlite keyword, and will be replaced on the fly by `GLOB`. This syntactic sugar takes advantage of the fact that the paths are suffixed by `[-]*` during the flattening of the AST. `GLOB` interprets these four meta-characters as “an hyphen (used as path separator) followed by any number of characters“. Consequently, `path_1 GLOB path_2` is truthy when `path_2` (minus its four last characters) is a **strict** prefix of `path_1` (minus its four last characters). In the AST, that means that the node identified by `path_1` is an ancestor of the node identified by `path_2`.
+**Remark.** The `INSIDE` operator is just syntactic sugar for `GLOB` (by which it is replaced before compilation). During the flattening of the AST, the paths of the nodes are made “_glob_-ready” by suffixing them with `[-]*`. These four meta-characters read: “an hyphen (used as path separator) followed by any number of characters“.  Consequently, `path_1 GLOB path_2` is truthy when `path_2[:-4]` is a **strict** prefix of `path_1[:-4]`. In the AST, this means that the node identified by `path_1` is an ancestor of the node identified by `path_2`.
 
 ##### Example
 

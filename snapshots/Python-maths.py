@@ -16,9 +16,9 @@ def n31(a: int) -> Tuple[List[int], int]: # function:n31 (-> +12), function_retu
         path += [a] # assignment_lhs_identifier:path, assignment_rhs_identifier:a, augmented_assignment
     return path, len(path) # call_parameter:path, function_call:len, return
 def test_n31(): # function:test_n31 (-> +113), function_returning_nothing:test_n31 (-> +113)
-    assert n31(4) == ([4, 2, 1], 3) # assertion, comparison_operator:Eq, function_call:n31, int_literal, literal:List, literal:Num, literal:Tuple, suggest_constant_definition
-    assert n31(11) == ([11, 34, 17, 52, 26, 13, 40, 20, 10, 5, 16, 8, 4, 2, 1], 15) # assertion, comparison_operator:Eq, function_call:n31, int_literal, literal:List, literal:Num, literal:Tuple, suggest_constant_definition
-    assert n31(31) == ( # assertion, function_call:n31, int_literal, literal:Num, suggest_constant_definition
+    assert n31(4) == ([4, 2, 1], 3) # assertion, call_parameter:4, comparison_operator:Eq, function_call:n31, int_literal, literal:List, literal:Num, literal:Tuple, suggest_constant_definition
+    assert n31(11) == ([11, 34, 17, 52, 26, 13, 40, 20, 10, 5, 16, 8, 4, 2, 1], 15) # assertion, call_parameter:11, comparison_operator:Eq, function_call:n31, int_literal, literal:List, literal:Num, literal:Tuple, suggest_constant_definition
+    assert n31(31) == ( # assertion, call_parameter:31, function_call:n31, int_literal, literal:Num, suggest_constant_definition
         [ # comparison_operator:Eq, literal:List, literal:Tuple
             31, # int_literal, literal:Num, suggest_constant_definition
             94, # int_literal, literal:Num, suggest_constant_definition
@@ -137,9 +137,9 @@ def test_n31(): # function:test_n31 (-> +113), function_returning_nothing:test_n
 def abs_val(num): # function:abs_val (-> +1), function_returning_something:abs_val (-> +1)
     return -num if num < 0 else num # comparison_operator:Lt, conditional_expression, int_literal, literal:Num, return, unary_operator:USub
 def test_abs_val(): # function:test_abs_val (-> +3), function_returning_nothing:test_abs_val (-> +3)
-    assert 0 == abs_val(0) # assertion, comparison_operator:Eq, function_call:abs_val, int_literal, literal:Num
-    assert 34 == abs_val(34) # assertion, comparison_operator:Eq, function_call:abs_val, int_literal, literal:Num, suggest_constant_definition
-    assert 100000000000 == abs_val(-100000000000) # assertion, comparison_operator:Eq, function_call:abs_val, int_literal, literal:Num, suggest_constant_definition
+    assert 0 == abs_val(0) # assertion, call_parameter:0, comparison_operator:Eq, function_call:abs_val, int_literal, literal:Num
+    assert 34 == abs_val(34) # assertion, call_parameter:34, comparison_operator:Eq, function_call:abs_val, int_literal, literal:Num, suggest_constant_definition
+    assert 100000000000 == abs_val(-100000000000) # assertion, call_parameter:-100000000000, comparison_operator:Eq, function_call:abs_val, int_literal, literal:Num, suggest_constant_definition
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/abs_max.py
@@ -191,7 +191,7 @@ def median(nums): # function:median (-> +10), function_returning_something:media
     if len(sorted_list) % 2 == 0: # binary_operator:Mod, call_parameter:sorted_list, comparison_operator:Eq, divisibility_test:2, function_call:len, if (-> +6), if_test_id:len, if_test_id:sorted_list, int_literal, literal:Num
         mid_index_1 = len(sorted_list) // 2 # assignment, assignment_lhs_identifier:mid_index_1, assignment_rhs_identifier:len, assignment_rhs_identifier:sorted_list, binary_operator:FloorDiv, call_parameter:sorted_list, function_call:len, if_then_branch (-> +2), int_literal, literal:Num
         mid_index_2 = (len(sorted_list) // 2) - 1 # assignment, assignment_lhs_identifier:mid_index_2, assignment_rhs_identifier:len, assignment_rhs_identifier:sorted_list, binary_operator:FloorDiv, binary_operator:Sub, call_parameter:sorted_list, function_call:len, int_literal, literal:Num
-        med = (sorted_list[mid_index_1] + sorted_list[mid_index_2]) / float(2) # assignment, assignment_lhs_identifier:med, assignment_rhs_identifier:float, assignment_rhs_identifier:mid_index_1, assignment_rhs_identifier:mid_index_2, assignment_rhs_identifier:sorted_list, binary_operator:Add, binary_operator:Div, function_call:float, index, int_literal, literal:Num
+        med = (sorted_list[mid_index_1] + sorted_list[mid_index_2]) / float(2) # assignment, assignment_lhs_identifier:med, assignment_rhs_identifier:float, assignment_rhs_identifier:mid_index_1, assignment_rhs_identifier:mid_index_2, assignment_rhs_identifier:sorted_list, binary_operator:Add, binary_operator:Div, call_parameter:2, function_call:float, index, int_literal, literal:Num
     else:
         mid_index = (len(sorted_list) - 1) // 2 # assignment, assignment_lhs_identifier:mid_index, assignment_rhs_identifier:len, assignment_rhs_identifier:sorted_list, binary_operator:FloorDiv, binary_operator:Sub, call_parameter:sorted_list, function_call:len, if_else_branch (-> +1), int_literal, literal:Num
         med = sorted_list[mid_index] # assignment, assignment_lhs_identifier:med, assignment_rhs_identifier:mid_index, assignment_rhs_identifier:sorted_list, index
@@ -222,9 +222,9 @@ import math # import:math, import_module:math
 def prime_factors(n: int) -> list: # function:prime_factors (-> +11), function_returning_something:prime_factors (-> +11)
     pf = [] # assignment, assignment_lhs_identifier:pf, literal:List
     while n % 2 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, evolve_state (-> +2), int_literal, literal:Num, while (-> +2)
-        pf.append(2) # int_literal, literal:Num, method_call:append, method_call_object:pf
+        pf.append(2) # call_parameter:2, int_literal, literal:Num, method_call:append, method_call_object:pf
         n = int(n / 2) # assignment, assignment_lhs_identifier:n, assignment_rhs_identifier:int, assignment_rhs_identifier:n, binary_operator:Div, function_call:int, int_literal, literal:Num
-    for i in range(3, int(math.sqrt(n)) + 1, 2): # accumulate_elements:2 (-> +3), binary_operator:Add, call_parameter:n, composition, for:i (-> +3), for_range_step:2 (-> +3), function_call:int, function_call:range, int_literal, literal:Num, method_call:sqrt, suggest_constant_definition
+    for i in range(3, int(math.sqrt(n)) + 1, 2): # accumulate_elements:2 (-> +3), binary_operator:Add, call_parameter:2, call_parameter:3, call_parameter:n, composition, for:i (-> +3), for_range_step:2 (-> +3), function_call:int, function_call:range, int_literal, literal:Num, method_call:sqrt, suggest_constant_definition
         while n % i == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test, evolve_state (-> +2), int_literal, literal:Num, while (-> +2)
             pf.append(i) # call_parameter:i, method_call:append, method_call_object:pf
             n = int(n / i) # assignment, assignment_lhs_identifier:n, assignment_rhs_identifier:i, assignment_rhs_identifier:int, assignment_rhs_identifier:n, binary_operator:Div, function_call:int
@@ -238,7 +238,7 @@ def number_of_divisors(n: int) -> int: # function:number_of_divisors (-> +13), f
         temp += 1 # assignment_lhs_identifier:temp, augmented_assignment, int_literal, literal:Num
         n = int(n / 2) # assignment, assignment_lhs_identifier:n, assignment_rhs_identifier:int, assignment_rhs_identifier:n, binary_operator:Div, function_call:int, int_literal, literal:Num
     div *= temp # assignment_lhs_identifier:div, assignment_rhs_identifier:temp, augmented_assignment
-    for i in range(3, int(math.sqrt(n)) + 1, 2): # accumulate_elements:1 (-> +5), binary_operator:Add, call_parameter:n, composition, for:i (-> +5), for_range_step:2 (-> +5), function_call:int, function_call:range, int_literal, literal:Num, method_call:sqrt, suggest_constant_definition
+    for i in range(3, int(math.sqrt(n)) + 1, 2): # accumulate_elements:1 (-> +5), binary_operator:Add, call_parameter:2, call_parameter:3, call_parameter:n, composition, for:i (-> +5), for_range_step:2 (-> +5), function_call:int, function_call:range, int_literal, literal:Num, method_call:sqrt, suggest_constant_definition
         temp = 1 # assignment, assignment_lhs_identifier:temp, int_literal, literal:Num
         while n % i == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test, int_literal, literal:Num, while (-> +2)
             temp += 1 # assignment_lhs_identifier:temp, augmented_assignment, int_literal, literal:Num
@@ -253,7 +253,7 @@ def sum_of_divisors(n: int) -> int: # function:sum_of_divisors (-> +15), functio
         n = int(n / 2) # assignment, assignment_lhs_identifier:n, assignment_rhs_identifier:int, assignment_rhs_identifier:n, binary_operator:Div, function_call:int, int_literal, literal:Num
     if temp > 1: # comparison_operator:Gt, if (-> +1), if_test_id:temp, int_literal, literal:Num
         s *= (2 ** temp - 1) / (2 - 1) # assignment_lhs_identifier:s, assignment_rhs_identifier:temp, augmented_assignment, binary_operator:Div, binary_operator:Pow, binary_operator:Sub, if_then_branch, int_literal, literal:Num
-    for i in range(3, int(math.sqrt(n)) + 1, 2): # accumulate_elements:2 (-> +6), binary_operator:Add, call_parameter:n, composition, for:i (-> +6), for_range_step:2 (-> +6), function_call:int, function_call:range, int_literal, literal:Num, method_call:sqrt, suggest_constant_definition
+    for i in range(3, int(math.sqrt(n)) + 1, 2): # accumulate_elements:2 (-> +6), binary_operator:Add, call_parameter:2, call_parameter:3, call_parameter:n, composition, for:i (-> +6), for_range_step:2 (-> +6), function_call:int, function_call:range, int_literal, literal:Num, method_call:sqrt, suggest_constant_definition
         temp = 1 # assignment, assignment_lhs_identifier:temp, int_literal, literal:Num
         while n % i == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test, int_literal, literal:Num, while (-> +2)
             temp += 1 # assignment_lhs_identifier:temp, augmented_assignment, int_literal, literal:Num
@@ -285,7 +285,7 @@ def binary_exponentiation(a, n): # body_recursive_function:binary_exponentiation
 def binomial_coefficient(n, r): # function:binomial_coefficient (-> +8), function_returning_something:binomial_coefficient (-> +8)
     C = [0 for i in range(r + 1)] # assignment, assignment_lhs_identifier:C, assignment_rhs_identifier:i, assignment_rhs_identifier:r, assignment_rhs_identifier:range, binary_operator:Add, comprehension:List, comprehension_for_count:1, constant_assignment:C, function_call:range, int_literal, literal:Num
     C[0] = 1 # assignment, assignment_lhs_identifier:C, constant_assignment:C, index, int_literal, literal:Num
-    for i in range(1, n + 1): # binary_operator:Add, for:i (-> +4), for_range_start (-> +4), function_call:range, int_literal, literal:Num
+    for i in range(1, n + 1): # binary_operator:Add, call_parameter:1, for:i (-> +4), for_range_start (-> +4), function_call:range, int_literal, literal:Num
         j = min(i, r) # assignment, assignment_lhs_identifier:j, assignment_rhs_identifier:i, assignment_rhs_identifier:min, assignment_rhs_identifier:r, call_parameter:i, call_parameter:r, function_call:min
         while j > 0: # comparison_operator:Gt, evolve_state (-> +2), int_literal, literal:Num, while (-> +2)
             C[j] += C[j - 1] # assignment_lhs_identifier:C, assignment_rhs_identifier:C, assignment_rhs_identifier:j, augmented_assignment, binary_operator:Sub, constant_assignment:C, index, index_arithmetic, int_literal, literal:Num
@@ -372,7 +372,7 @@ def extended_euclidean_algorithm(m, n): # function:extended_euclidean_algorithm 
 def main(): # function:main (-> +6), function_returning_nothing:main (-> +6)
     if len(sys.argv) < 3: # comparison_operator:Lt, function_call:len, if (-> +2), if_test_id:len, if_test_id:sys, int_literal, literal:Num, suggest_constant_definition
         print("2 integer arguments required") # function_call:print, if_then_branch (-> +1), literal:Str
-        exit(1) # function_call:exit, int_literal, literal:Num
+        exit(1) # call_parameter:1, function_call:exit, int_literal, literal:Num
     m = int(sys.argv[1]) # assignment, assignment_lhs_identifier:m, assignment_rhs_identifier:int, assignment_rhs_identifier:sys, function_call:int, index, int_literal, literal:Num
     n = int(sys.argv[2]) # assignment, assignment_lhs_identifier:n, assignment_rhs_identifier:int, assignment_rhs_identifier:sys, function_call:int, index, int_literal, literal:Num
     print(extended_euclidean_algorithm(m, n)) # call_parameter:m, call_parameter:n, composition, function_call:extended_euclidean_algorithm, function_call:print
@@ -386,7 +386,7 @@ def factorial(input_number: int) -> int: # function:factorial (-> +8), function_
     if not isinstance(input_number, int): # call_parameter:input_number, call_parameter:int, function_call:isinstance, if (-> +1), if_test_id:input_number, if_test_id:int, if_test_id:isinstance, unary_operator:Not
         raise ValueError("factorial() only accepts integral values") # function_call:ValueError, if_then_branch, literal:Str, raise:ValueError
     result = 1 # assignment, assignment_lhs_identifier:result, int_literal, literal:Num
-    for i in range(1, input_number): # accumulate_elements:1 (-> +1), call_parameter:input_number, for:i (-> +1), for_range_start (-> +1), function_call:range, int_literal, literal:Num
+    for i in range(1, input_number): # accumulate_elements:1 (-> +1), call_parameter:1, call_parameter:input_number, for:i (-> +1), for_range_start (-> +1), function_call:range, int_literal, literal:Num
         result = result * (i + 1) # assignment, assignment_lhs_identifier:result, assignment_rhs_identifier:i, assignment_rhs_identifier:result, binary_operator:Add, binary_operator:Mult, int_literal, literal:Num, suggest_augmented_assignment
     return result # return:result
 
@@ -404,7 +404,7 @@ def factorial(n: int) -> int: # body_recursive_function:factorial (-> +5), funct
 # ../Python/maths/factors.py
 # ----------------------------------------------------------------------------------------
 def factors_of_a_number(num: int) -> list: # function:factors_of_a_number (-> +1), function_returning_something:factors_of_a_number (-> +1)
-    return [i for i in range(1, num + 1) if num % i == 0] # binary_operator:Add, binary_operator:Mod, comparison_operator:Eq, comprehension:List, comprehension_for_count:1, divisibility_test, filtered_comprehension, function_call:range, int_literal, literal:Num, return
+    return [i for i in range(1, num + 1) if num % i == 0] # binary_operator:Add, binary_operator:Mod, call_parameter:1, comparison_operator:Eq, comprehension:List, comprehension_for_count:1, divisibility_test, filtered_comprehension, function_call:range, int_literal, literal:Num, return
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/fermat_little_theorem.py
@@ -475,7 +475,7 @@ def _check_number_input(n, min_thresh, max_thresh=None): # function:_check_numbe
     return False # literal:False, return:False
 def fib_iterative(n): # function:fib_iterative (-> +8), function_returning_something:fib_iterative (-> +8)
     n = int(n) # assignment, assignment_lhs_identifier:n, assignment_rhs_identifier:int, assignment_rhs_identifier:n, call_parameter:n, function_call:int
-    if _check_number_input(n, 2): # call_parameter:n, function_call:_check_number_input, if (-> +6), if_test_id:_check_number_input, if_test_id:n, int_literal, literal:Num
+    if _check_number_input(n, 2): # call_parameter:2, call_parameter:n, function_call:_check_number_input, if (-> +6), if_test_id:_check_number_input, if_test_id:n, int_literal, literal:Num
         seq_out = [0, 1] # assignment, assignment_lhs_identifier:seq_out, if_then_branch (-> +5), int_literal, literal:List, literal:Num
         a, b = 0, 1 # assignment, assignment_lhs_identifier:a, assignment_lhs_identifier:b, int_literal, literal:Num, literal:Tuple
         for _ in range(n - len(seq_out)): # binary_operator:Sub, call_parameter:seq_out, composition, for:_ (-> +2), for_range_stop (-> +2), function_call:len, function_call:range
@@ -485,13 +485,13 @@ def fib_iterative(n): # function:fib_iterative (-> +8), function_returning_somet
 def fib_formula(n): # function:fib_formula (-> +12), function_returning_something:fib_formula (-> +12)
     seq_out = [0, 1] # assignment, assignment_lhs_identifier:seq_out, int_literal, literal:List, literal:Num
     n = int(n) # assignment, assignment_lhs_identifier:n, assignment_rhs_identifier:int, assignment_rhs_identifier:n, call_parameter:n, function_call:int
-    if _check_number_input(n, 2, 1000000): # call_parameter:n, function_call:_check_number_input, if (-> +9), if_test_id:_check_number_input, if_test_id:n, int_literal, literal:Num, suggest_constant_definition
-        sqrt = Decimal(math.sqrt(5)) # assignment, assignment_lhs_identifier:sqrt, assignment_rhs_identifier:Decimal, assignment_rhs_identifier:math, composition, function_call:Decimal, if_then_branch (-> +8), int_literal, literal:Num, method_call:sqrt, suggest_constant_definition
-        phi_1 = Decimal(1 + sqrt) / Decimal(2) # assignment, assignment_lhs_identifier:phi_1, assignment_rhs_identifier:Decimal, assignment_rhs_identifier:sqrt, binary_operator:Add, binary_operator:Div, function_call:Decimal, int_literal, literal:Num
-        phi_2 = Decimal(1 - sqrt) / Decimal(2) # assignment, assignment_lhs_identifier:phi_2, assignment_rhs_identifier:Decimal, assignment_rhs_identifier:sqrt, binary_operator:Div, binary_operator:Sub, function_call:Decimal, int_literal, literal:Num
-        for i in range(2, n): # call_parameter:n, for:i (-> +4), for_range_start (-> +4), function_call:range, int_literal, literal:Num
+    if _check_number_input(n, 2, 1000000): # call_parameter:1000000, call_parameter:2, call_parameter:n, function_call:_check_number_input, if (-> +9), if_test_id:_check_number_input, if_test_id:n, int_literal, literal:Num, suggest_constant_definition
+        sqrt = Decimal(math.sqrt(5)) # assignment, assignment_lhs_identifier:sqrt, assignment_rhs_identifier:Decimal, assignment_rhs_identifier:math, call_parameter:5, composition, function_call:Decimal, if_then_branch (-> +8), int_literal, literal:Num, method_call:sqrt, suggest_constant_definition
+        phi_1 = Decimal(1 + sqrt) / Decimal(2) # assignment, assignment_lhs_identifier:phi_1, assignment_rhs_identifier:Decimal, assignment_rhs_identifier:sqrt, binary_operator:Add, binary_operator:Div, call_parameter:2, function_call:Decimal, int_literal, literal:Num
+        phi_2 = Decimal(1 - sqrt) / Decimal(2) # assignment, assignment_lhs_identifier:phi_2, assignment_rhs_identifier:Decimal, assignment_rhs_identifier:sqrt, binary_operator:Div, binary_operator:Sub, call_parameter:2, function_call:Decimal, int_literal, literal:Num
+        for i in range(2, n): # call_parameter:2, call_parameter:n, for:i (-> +4), for_range_start (-> +4), function_call:range, int_literal, literal:Num
             temp_out = ((phi_1 ** Decimal(i)) - (phi_2 ** Decimal(i))) * ( # assignment, assignment_lhs_identifier:temp_out, assignment_rhs_identifier:Decimal, assignment_rhs_identifier:i, assignment_rhs_identifier:phi_1, assignment_rhs_identifier:phi_2, binary_operator:Mult, binary_operator:Pow, binary_operator:Sub, call_parameter:i, function_call:Decimal
-                Decimal(sqrt) ** Decimal(-1) # assignment_rhs_identifier:Decimal, assignment_rhs_identifier:sqrt, binary_operator:Pow, call_parameter:sqrt, function_call:Decimal, int_literal, literal:Num
+                Decimal(sqrt) ** Decimal(-1) # assignment_rhs_identifier:Decimal, assignment_rhs_identifier:sqrt, binary_operator:Pow, call_parameter:-1, call_parameter:sqrt, function_call:Decimal, int_literal, literal:Num
             )
             seq_out.append(int(temp_out)) # call_parameter:temp_out, composition, function_call:int, method_call:append, method_call_object:seq_out
         return seq_out # return:seq_out
@@ -654,14 +654,14 @@ def karatsuba(a, b): # body_recursive_function:karatsuba (-> +11), function:kara
         z = karatsuba(a1, b1) # assignment, assignment_lhs_identifier:z, assignment_rhs_identifier:a1, assignment_rhs_identifier:b1, assignment_rhs_identifier:karatsuba, call_parameter:a1, call_parameter:b1, function_call:karatsuba
         return (z * 10 ** (2 * m2)) + ((y - z - x) * 10 ** (m2)) + (x) # binary_operator:Add, binary_operator:Mult, binary_operator:Pow, binary_operator:Sub, int_literal, literal:Num, return, suggest_constant_definition
 def main(): # function:main (-> +1), function_returning_nothing:main (-> +1)
-    print(karatsuba(15463, 23489)) # composition, function_call:karatsuba, function_call:print, int_literal, literal:Num, suggest_constant_definition
+    print(karatsuba(15463, 23489)) # call_parameter:15463, call_parameter:23489, composition, function_call:karatsuba, function_call:print, int_literal, literal:Num, suggest_constant_definition
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/kth_lexicographic_permutation.py
 # ----------------------------------------------------------------------------------------
 def kthPermutation(k, n): # function:kthPermutation (-> +13), function_returning_something:kthPermutation (-> +13)
     factorials = [1] # assignment, assignment_lhs_identifier:factorials, int_literal, literal:List, literal:Num
-    for i in range(2, n): # call_parameter:n, for:i (-> +1), for_range_start (-> +1), function_call:range, int_literal, literal:Num
+    for i in range(2, n): # call_parameter:2, call_parameter:n, for:i (-> +1), for_range_start (-> +1), function_call:range, int_literal, literal:Num
         factorials.append(factorials[-1] * i) # binary_operator:Mult, index, int_literal, literal:Num, method_call:append, method_call_object:factorials, negative_index:-1
     assert 0 <= k < factorials[-1] * n, "k out of bounds" # assertion, binary_operator:Mult, chained_comparison:2, comparison_operator:Lt, comparison_operator:LtE, index, int_literal, literal:Num, literal:Str, negative_index:-1
     permutation = [] # assignment, assignment_lhs_identifier:permutation, literal:List
@@ -813,7 +813,7 @@ def mobius(n: int) -> int: # function:mobius (-> +4), function_returning_somethi
 # ----------------------------------------------------------------------------------------
 def modular_exponential(base, power, mod): # function:modular_exponential (-> +10), function_returning_something:modular_exponential (-> +10)
     if power < 0: # comparison_operator:Lt, if (-> +1), if_test_id:power, int_literal, literal:Num
-        return -1 # if_then_branch, int_literal, literal:Num, return:-
+        return -1 # if_then_branch, int_literal, literal:Num, return:-1
     base %= mod # assignment_lhs_identifier:base, assignment_rhs_identifier:mod, augmented_assignment
     result = 1 # assignment, assignment_lhs_identifier:result, int_literal, literal:Num
     while power > 0: # comparison_operator:Gt, evolve_state (-> +4), int_literal, literal:Num, while (-> +4)
@@ -823,7 +823,7 @@ def modular_exponential(base, power, mod): # function:modular_exponential (-> +1
         base = (base * base) % mod # assignment, assignment_lhs_identifier:base, assignment_rhs_identifier:base, assignment_rhs_identifier:mod, binary_operator:Mod, binary_operator:Mult
     return result # return:result
 def main(): # function:main (-> +1), function_returning_nothing:main (-> +1)
-    print(modular_exponential(3, 200, 13)) # composition, function_call:modular_exponential, function_call:print, int_literal, literal:Num, suggest_constant_definition
+    print(modular_exponential(3, 200, 13)) # call_parameter:13, call_parameter:200, call_parameter:3, composition, function_call:modular_exponential, function_call:print, int_literal, literal:Num, suggest_constant_definition
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/newton_raphson.py
@@ -881,27 +881,27 @@ def prime_check(number): # function:prime_check (-> +8), function_returning_some
         return True # if_then_branch, literal:True, return:True
     if number % 2 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, if (-> +1), if_test_id:number, int_literal, literal:Num
         return False # if_then_branch, literal:False, return:False
-    odd_numbers = range(3, int(math.sqrt(number)) + 1, 2) # assignment, assignment_lhs_identifier:odd_numbers, assignment_rhs_identifier:int, assignment_rhs_identifier:math, assignment_rhs_identifier:number, assignment_rhs_identifier:range, binary_operator:Add, call_parameter:number, composition, function_call:int, function_call:range, int_literal, literal:Num, method_call:sqrt, suggest_constant_definition
+    odd_numbers = range(3, int(math.sqrt(number)) + 1, 2) # assignment, assignment_lhs_identifier:odd_numbers, assignment_rhs_identifier:int, assignment_rhs_identifier:math, assignment_rhs_identifier:number, assignment_rhs_identifier:range, binary_operator:Add, call_parameter:2, call_parameter:3, call_parameter:number, composition, function_call:int, function_call:range, int_literal, literal:Num, method_call:sqrt, suggest_constant_definition
     return not any(number % i == 0 for i in odd_numbers) # binary_operator:Mod, comparison_operator:Eq, comprehension:Generator, comprehension_for_count:1, divisibility_test, function_call:any, int_literal, literal:Num, return, unary_operator:Not
 class Test(unittest.TestCase):
     def test_primes(self): # function:test_primes (-> +10), function_returning_nothing:test_primes (-> +10)
-        self.assertTrue(prime_check(2)) # composition, function_call:prime_check, int_literal, literal:Num, method_call:assertTrue, method_call_object:self
-        self.assertTrue(prime_check(3)) # composition, function_call:prime_check, int_literal, literal:Num, method_call:assertTrue, method_call_object:self, suggest_constant_definition
-        self.assertTrue(prime_check(5)) # composition, function_call:prime_check, int_literal, literal:Num, method_call:assertTrue, method_call_object:self, suggest_constant_definition
-        self.assertTrue(prime_check(7)) # composition, function_call:prime_check, int_literal, literal:Num, method_call:assertTrue, method_call_object:self, suggest_constant_definition
-        self.assertTrue(prime_check(11)) # composition, function_call:prime_check, int_literal, literal:Num, method_call:assertTrue, method_call_object:self, suggest_constant_definition
-        self.assertTrue(prime_check(13)) # composition, function_call:prime_check, int_literal, literal:Num, method_call:assertTrue, method_call_object:self, suggest_constant_definition
-        self.assertTrue(prime_check(17)) # composition, function_call:prime_check, int_literal, literal:Num, method_call:assertTrue, method_call_object:self, suggest_constant_definition
-        self.assertTrue(prime_check(19)) # composition, function_call:prime_check, int_literal, literal:Num, method_call:assertTrue, method_call_object:self, suggest_constant_definition
-        self.assertTrue(prime_check(23)) # composition, function_call:prime_check, int_literal, literal:Num, method_call:assertTrue, method_call_object:self, suggest_constant_definition
-        self.assertTrue(prime_check(29)) # composition, function_call:prime_check, int_literal, literal:Num, method_call:assertTrue, method_call_object:self, suggest_constant_definition
+        self.assertTrue(prime_check(2)) # call_parameter:2, composition, function_call:prime_check, int_literal, literal:Num, method_call:assertTrue, method_call_object:self
+        self.assertTrue(prime_check(3)) # call_parameter:3, composition, function_call:prime_check, int_literal, literal:Num, method_call:assertTrue, method_call_object:self, suggest_constant_definition
+        self.assertTrue(prime_check(5)) # call_parameter:5, composition, function_call:prime_check, int_literal, literal:Num, method_call:assertTrue, method_call_object:self, suggest_constant_definition
+        self.assertTrue(prime_check(7)) # call_parameter:7, composition, function_call:prime_check, int_literal, literal:Num, method_call:assertTrue, method_call_object:self, suggest_constant_definition
+        self.assertTrue(prime_check(11)) # call_parameter:11, composition, function_call:prime_check, int_literal, literal:Num, method_call:assertTrue, method_call_object:self, suggest_constant_definition
+        self.assertTrue(prime_check(13)) # call_parameter:13, composition, function_call:prime_check, int_literal, literal:Num, method_call:assertTrue, method_call_object:self, suggest_constant_definition
+        self.assertTrue(prime_check(17)) # call_parameter:17, composition, function_call:prime_check, int_literal, literal:Num, method_call:assertTrue, method_call_object:self, suggest_constant_definition
+        self.assertTrue(prime_check(19)) # call_parameter:19, composition, function_call:prime_check, int_literal, literal:Num, method_call:assertTrue, method_call_object:self, suggest_constant_definition
+        self.assertTrue(prime_check(23)) # call_parameter:23, composition, function_call:prime_check, int_literal, literal:Num, method_call:assertTrue, method_call_object:self, suggest_constant_definition
+        self.assertTrue(prime_check(29)) # call_parameter:29, composition, function_call:prime_check, int_literal, literal:Num, method_call:assertTrue, method_call_object:self, suggest_constant_definition
     def test_not_primes(self): # function:test_not_primes (-> +12), function_returning_nothing:test_not_primes (-> +12)
-        self.assertFalse(prime_check(-19), "Negative numbers are not prime.") # composition, function_call:prime_check, int_literal, literal:Num, literal:Str, method_call:assertFalse, method_call_object:self, suggest_constant_definition
+        self.assertFalse(prime_check(-19), "Negative numbers are not prime.") # call_parameter:-19, composition, function_call:prime_check, int_literal, literal:Num, literal:Str, method_call:assertFalse, method_call_object:self, suggest_constant_definition
         self.assertFalse( # composition, method_call:assertFalse, method_call_object:self
-            prime_check(0), "Zero doesn't have any divider, primes must have two" # function_call:prime_check, int_literal, literal:Num, literal:Str
+            prime_check(0), "Zero doesn't have any divider, primes must have two" # call_parameter:0, function_call:prime_check, int_literal, literal:Num, literal:Str
         )
         self.assertFalse( # composition, method_call:assertFalse, method_call_object:self
-            prime_check(1), "One just have 1 divider, primes must have two." # function_call:prime_check, int_literal, literal:Num, literal:Str
+            prime_check(1), "One just have 1 divider, primes must have two." # call_parameter:1, function_call:prime_check, int_literal, literal:Num, literal:Str
         )
         self.assertFalse(prime_check(2 * 2)) # binary_operator:Mult, composition, function_call:prime_check, int_literal, literal:Num, method_call:assertFalse, method_call_object:self
         self.assertFalse(prime_check(2 * 3)) # binary_operator:Mult, composition, function_call:prime_check, int_literal, literal:Num, method_call:assertFalse, method_call_object:self, suggest_constant_definition
@@ -934,7 +934,7 @@ def primes(max: int) -> List[int]: # function:primes (-> +9), function_returning
     max += 1 # assignment_lhs_identifier:max, augmented_assignment, int_literal, literal:Num
     numbers = [False] * max # assignment, assignment_lhs_identifier:numbers, assignment_rhs_identifier:max, binary_operator:Mult, literal:False, literal:List
     ret = [] # assignment, assignment_lhs_identifier:ret, literal:List
-    for i in range(2, max): # accumulate_elements:1 (-> +4), call_parameter:max, for:i (-> +4), for_range_start (-> +4), function_call:range, int_literal, literal:Num
+    for i in range(2, max): # accumulate_elements:1 (-> +4), call_parameter:2, call_parameter:max, for:i (-> +4), for_range_start (-> +4), function_call:range, int_literal, literal:Num
         if not numbers[i]: # if (-> +3), if_test_id:i, if_test_id:numbers, index, unary_operator:Not
             for j in range(i, max, i): # call_parameter:i, call_parameter:max, for:j (-> +1), for_range_step (-> +1), function_call:range, if_then_branch (-> +2), nested_for:1 (-> +1)
                 numbers[j] = True # assignment, assignment_lhs_identifier:numbers, index, literal:True
@@ -952,7 +952,7 @@ def prime_sieve_eratosthenes(num): # function:prime_sieve_eratosthenes (-> +10),
             for i in range(p * p, num + 1, p): # binary_operator:Add, binary_operator:Mult, call_parameter:p, for:i (-> +1), for_range_step (-> +1), function_call:range, if_then_branch (-> +1), int_literal, literal:Num
                 primes[i] = False # assignment, assignment_lhs_identifier:primes, index, literal:False
         p += 1 # assignment_lhs_identifier:p, augmented_assignment, int_literal, literal:Num
-    for prime in range(2, num + 1): # binary_operator:Add, for:prime (-> +2), for_range_start (-> +2), function_call:range, int_literal, literal:Num
+    for prime in range(2, num + 1): # binary_operator:Add, call_parameter:2, for:prime (-> +2), for_range_start (-> +2), function_call:range, int_literal, literal:Num
         if primes[prime]: # if (-> +1), if_test_id:prime, if_test_id:primes, index
             print(prime, end=" ") # call_parameter:prime, function_call:print, if_then_branch, literal:Str
 
@@ -1017,9 +1017,9 @@ class FFT:
             2 ** np.ceil(np.log2(len(self.polyA) + len(self.polyB) - 1)) # assignment_rhs_identifier:len, assignment_rhs_identifier:np, assignment_rhs_identifier:self, binary_operator:Add, binary_operator:Pow, binary_operator:Sub, composition, function_call:len, int_literal, literal:Num, method_call:ceil, method_call:log2
         )
         while len(self.polyA) < self.C_max_length: # comparison_operator:Lt, evolve_state (-> +1), function_call:len, while (-> +1)
-            self.polyA.append(0) # int_literal, literal:Num, method_call:append
+            self.polyA.append(0) # call_parameter:0, int_literal, literal:Num, method_call:append
         while len(self.polyB) < self.C_max_length: # comparison_operator:Lt, evolve_state (-> +1), function_call:len, while (-> +1)
-            self.polyB.append(0) # int_literal, literal:Num, method_call:append
+            self.polyB.append(0) # call_parameter:0, int_literal, literal:Num, method_call:append
         self.root = complex(mpmath.root(x=1, n=self.C_max_length, k=1)) # assignment, assignment_lhs_identifier:self, assignment_rhs_identifier:complex, assignment_rhs_identifier:mpmath, assignment_rhs_identifier:self, composition, function_call:complex, int_literal, literal:Num, method_call:root
         self.product = self.__multiply() # assignment, assignment_lhs_identifier:self, assignment_rhs_identifier:self, method_call:__multiply
     def __DFT(self, which): # function:__DFT (-> +23), function_returning_something:__DFT (-> +23)
@@ -1078,7 +1078,7 @@ class FFT:
                 current_root *= root # assignment_lhs_identifier:current_root, assignment_rhs_identifier:root, augmented_assignment
             inverseC = new_inverseC # assignment, assignment_lhs_identifier:inverseC, assignment_rhs_identifier:new_inverseC
             next_ncol *= 2 # assignment_lhs_identifier:next_ncol, augmented_assignment, int_literal, literal:Num
-        inverseC = [round(x[0].real, 8) + round(x[0].imag, 8) * 1j for x in inverseC] # assignment, assignment_lhs_identifier:inverseC, assignment_rhs_identifier:inverseC, assignment_rhs_identifier:round, assignment_rhs_identifier:x, binary_operator:Add, binary_operator:Mult, comprehension:List, comprehension_for_count:1, function_call:round, imaginary_literal, index, int_literal, literal:Num, suggest_constant_definition
+        inverseC = [round(x[0].real, 8) + round(x[0].imag, 8) * 1j for x in inverseC] # assignment, assignment_lhs_identifier:inverseC, assignment_rhs_identifier:inverseC, assignment_rhs_identifier:round, assignment_rhs_identifier:x, binary_operator:Add, binary_operator:Mult, call_parameter:8, comprehension:List, comprehension_for_count:1, function_call:round, imaginary_literal, index, int_literal, literal:Num, suggest_constant_definition
         while inverseC[-1] == 0: # comparison_operator:Eq, evolve_state (-> +1), index, int_literal, literal:Num, negative_index:-1, while (-> +1)
             inverseC.pop() # method_call:pop, method_call_object:inverseC
         return inverseC # return:inverseC
@@ -1230,7 +1230,7 @@ def sum_of_series(first_term, common_diff, num_of_terms): # function:sum_of_seri
     sum = (num_of_terms / 2) * (2 * first_term + (num_of_terms - 1) * common_diff) # assignment, assignment_lhs_identifier:sum, assignment_rhs_identifier:common_diff, assignment_rhs_identifier:first_term, assignment_rhs_identifier:num_of_terms, binary_operator:Add, binary_operator:Div, binary_operator:Mult, binary_operator:Sub, int_literal, literal:Num
     return sum # return:sum
 def main(): # function:main (-> +1), function_returning_nothing:main (-> +1)
-    print(sum_of_series(1, 1, 10)) # composition, function_call:print, function_call:sum_of_series, int_literal, literal:Num, suggest_constant_definition
+    print(sum_of_series(1, 1, 10)) # call_parameter:1, call_parameter:10, composition, function_call:print, function_call:sum_of_series, int_literal, literal:Num, suggest_constant_definition
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/test_prime_check.py
@@ -1277,27 +1277,27 @@ def vol_cube(side_length): # function:vol_cube (-> +1), function_returning_somet
 def vol_cuboid(width, height, length): # function:vol_cuboid (-> +1), function_returning_something:vol_cuboid (-> +1)
     return float(width * height * length) # binary_operator:Mult, function_call:float, return
 def vol_cone(area_of_base, height): # function:vol_cone (-> +1), function_returning_something:vol_cone (-> +1)
-    return (float(1) / 3) * area_of_base * height # binary_operator:Div, binary_operator:Mult, function_call:float, int_literal, literal:Num, return, suggest_constant_definition
+    return (float(1) / 3) * area_of_base * height # binary_operator:Div, binary_operator:Mult, call_parameter:1, function_call:float, int_literal, literal:Num, return, suggest_constant_definition
 def vol_right_circ_cone(radius, height): # function:vol_right_circ_cone (-> +1), function_returning_something:vol_right_circ_cone (-> +1)
-    return (float(1) / 3) * pi * (radius ** 2) * height # binary_operator:Div, binary_operator:Mult, binary_operator:Pow, function_call:float, int_literal, literal:Num, return, suggest_constant_definition
+    return (float(1) / 3) * pi * (radius ** 2) * height # binary_operator:Div, binary_operator:Mult, binary_operator:Pow, call_parameter:1, function_call:float, int_literal, literal:Num, return, suggest_constant_definition
 def vol_prism(area_of_base, height): # function:vol_prism (-> +1), function_returning_something:vol_prism (-> +1)
     return float(area_of_base * height) # binary_operator:Mult, function_call:float, return
 def vol_pyramid(area_of_base, height): # function:vol_pyramid (-> +1), function_returning_something:vol_pyramid (-> +1)
-    return (float(1) / 3) * area_of_base * height # binary_operator:Div, binary_operator:Mult, function_call:float, int_literal, literal:Num, return, suggest_constant_definition
+    return (float(1) / 3) * area_of_base * height # binary_operator:Div, binary_operator:Mult, call_parameter:1, function_call:float, int_literal, literal:Num, return, suggest_constant_definition
 def vol_sphere(radius): # function:vol_sphere (-> +1), function_returning_something:vol_sphere (-> +1)
-    return (float(4) / 3) * pi * radius ** 3 # binary_operator:Div, binary_operator:Mult, binary_operator:Pow, function_call:float, int_literal, literal:Num, return, suggest_constant_definition
+    return (float(4) / 3) * pi * radius ** 3 # binary_operator:Div, binary_operator:Mult, binary_operator:Pow, call_parameter:4, function_call:float, int_literal, literal:Num, return, suggest_constant_definition
 def vol_circular_cylinder(radius, height): # function:vol_circular_cylinder (-> +1), function_returning_something:vol_circular_cylinder (-> +1)
     return pi * radius ** 2 * height # binary_operator:Mult, binary_operator:Pow, int_literal, literal:Num, return
 def main(): # function:main (-> +9), function_returning_nothing:main (-> +9)
     print("Volumes:") # function_call:print, literal:Str
-    print("Cube: " + str(vol_cube(2))) # binary_operator:Add, composition, function_call:print, function_call:str, function_call:vol_cube, int_literal, literal:Num, literal:Str
-    print("Cuboid: " + str(vol_cuboid(2, 2, 2))) # binary_operator:Add, composition, function_call:print, function_call:str, function_call:vol_cuboid, int_literal, literal:Num, literal:Str
-    print("Cone: " + str(vol_cone(2, 2))) # binary_operator:Add, composition, function_call:print, function_call:str, function_call:vol_cone, int_literal, literal:Num, literal:Str
-    print("Right Circular Cone: " + str(vol_right_circ_cone(2, 2))) # binary_operator:Add, composition, function_call:print, function_call:str, function_call:vol_right_circ_cone, int_literal, literal:Num, literal:Str
-    print("Prism: " + str(vol_prism(2, 2))) # binary_operator:Add, composition, function_call:print, function_call:str, function_call:vol_prism, int_literal, literal:Num, literal:Str
-    print("Pyramid: " + str(vol_pyramid(2, 2))) # binary_operator:Add, composition, function_call:print, function_call:str, function_call:vol_pyramid, int_literal, literal:Num, literal:Str
-    print("Sphere: " + str(vol_sphere(2))) # binary_operator:Add, composition, function_call:print, function_call:str, function_call:vol_sphere, int_literal, literal:Num, literal:Str
-    print("Circular Cylinder: " + str(vol_circular_cylinder(2, 2))) # binary_operator:Add, composition, function_call:print, function_call:str, function_call:vol_circular_cylinder, int_literal, literal:Num, literal:Str
+    print("Cube: " + str(vol_cube(2))) # binary_operator:Add, call_parameter:2, composition, function_call:print, function_call:str, function_call:vol_cube, int_literal, literal:Num, literal:Str
+    print("Cuboid: " + str(vol_cuboid(2, 2, 2))) # binary_operator:Add, call_parameter:2, composition, function_call:print, function_call:str, function_call:vol_cuboid, int_literal, literal:Num, literal:Str
+    print("Cone: " + str(vol_cone(2, 2))) # binary_operator:Add, call_parameter:2, composition, function_call:print, function_call:str, function_call:vol_cone, int_literal, literal:Num, literal:Str
+    print("Right Circular Cone: " + str(vol_right_circ_cone(2, 2))) # binary_operator:Add, call_parameter:2, composition, function_call:print, function_call:str, function_call:vol_right_circ_cone, int_literal, literal:Num, literal:Str
+    print("Prism: " + str(vol_prism(2, 2))) # binary_operator:Add, call_parameter:2, composition, function_call:print, function_call:str, function_call:vol_prism, int_literal, literal:Num, literal:Str
+    print("Pyramid: " + str(vol_pyramid(2, 2))) # binary_operator:Add, call_parameter:2, composition, function_call:print, function_call:str, function_call:vol_pyramid, int_literal, literal:Num, literal:Str
+    print("Sphere: " + str(vol_sphere(2))) # binary_operator:Add, call_parameter:2, composition, function_call:print, function_call:str, function_call:vol_sphere, int_literal, literal:Num, literal:Str
+    print("Circular Cylinder: " + str(vol_circular_cylinder(2, 2))) # binary_operator:Add, call_parameter:2, composition, function_call:print, function_call:str, function_call:vol_circular_cylinder, int_literal, literal:Num, literal:Str
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/zellers_congruence.py
