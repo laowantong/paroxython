@@ -67,11 +67,11 @@ def reformat_sql(match):
 def dependency_map(text):
 
     find_iter_derivations = regex.compile(
-        r"""(?msx)
+        r"""(?mx)
         name(_prefix)?\s(
             (=|==|REGEXP)\s"(?P<REQUIRED_LABEL_NAME>.+?)(:.+)?"
             |
-            IN\s\(("(?P<REQUIRED_LABEL_NAME>.+?)(:.+)?".*?)+\)
+            IN\s\(("(?P<REQUIRED_LABEL_NAME>.+?)(:.+)?"(.|\n)*?)+\)
             )
     """
     ).finditer
