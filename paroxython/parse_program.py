@@ -49,7 +49,7 @@ class ProgramParser:
             if language == "re":
                 self.constructs[label_name] = regex.compile(f"(?mx){pattern}")
             elif language == "sql":
-                self.queries[label_name] = pattern
+                self.queries[label_name] = pattern.replace(" INSIDE ", " GLOB ")
         self.db = DB()
 
     def __call__(self, program: Program, yield_failed_matches: bool = False) -> Labels:

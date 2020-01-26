@@ -528,6 +528,10 @@ Match the so-called ternary operator.
 
 #### Construct `comparison_operator`
 
+##### Dependencies
+
+- Derived into [construct `chained_equalities|chained_inequalities`](#construct-chained_equalitieschained_inequalities).
+
 ##### Definition
 
 ```re
@@ -589,7 +593,9 @@ Match the so-called ternary operator.
 
 ##### Dependencies
 
-- Derived from [construct `chained_comparison`](#construct-chained_comparison).
+- Derived from:
+  1. [construct `chained_comparison`](#construct-chained_comparison)
+  1. [construct `comparison_operator`](#construct-comparison_operator)
 
 ##### Definition
 
@@ -601,7 +607,7 @@ SELECT CASE op.name_suffix
        count(*),
        cmp.span
 FROM t cmp
-JOIN t op ON (op.path GLOB cmp.path || "*")-- op is nested in cmp
+JOIN t op ON (op.path INSIDE cmp.path)
 WHERE cmp.name_prefix = "chained_comparison"
   AND op.name REGEXP "comparison_operator:(Eq|Lt|LtE|Gt|GtE)"
 GROUP BY cmp.path,
@@ -706,7 +712,9 @@ When the value of the left operand suffices to determine the value of a boolean 
 
 ##### Dependencies
 
-- Derived into [construct `recursive_function`](#construct-recursive_function).
+- Derived into:
+  1. [construct `deeply_recursive_function`](#construct-deeply_recursive_function)
+  1. [construct `recursive_function`](#construct-recursive_function)
 
 ##### Definition
 
@@ -1201,11 +1209,10 @@ SELECT "constant_assignment",
        t.name_suffix,
        t.span
 FROM t
-WHERE t.name_prefix = "assignment_lhs_identifier"
-  AND t.name_suffix REGEXP "^[[:upper:]0-9_]+$"
+WHERE t.name REGEXP "assignment_lhs_identifier:[[:upper:]0-9_]+$"
 ```
 
-**Remark.** Note the user-defined function `REGEXP` in the `WHERE`clause. It calls the function `search()` of the third-party [`regex`](https://pypi.org/project/regex/) library.
+**Remark.** Note the user-defined function `REGEXP` in the `WHERE`clause. It calls the function `match()` of the third-party [`regex`](https://pypi.org/project/regex/) library.
 
 ##### Example
 
@@ -1361,6 +1368,7 @@ In Python, the term "function" encompasses any type of subroutine, be it a metho
 
 - Derived into:
   1. [construct `closure`](#construct-closure)
+  1. [construct `deeply_recursive_function`](#construct-deeply_recursive_function)
   1. [construct `function_returning_nothing`](#construct-function_returning_nothing)
   1. [construct `function_returning_something`](#construct-function_returning_something)
   1. [construct `generator`](#construct-generator)
@@ -1524,12 +1532,13 @@ SELECT "generator",
        f.name_suffix,
        max(f.span_start) || "-" || min(f.span_end)
 FROM t f
-JOIN t y ON (f.span_start <= y.span_start
-             AND y.span_end <= f.span_end)
+JOIN t y ON (y.path INSIDE f.path)
 WHERE f.name_prefix = "function"
   AND y.name_prefix = "yield"
 GROUP BY y.rowid
 ```
+
+**Remark.** The `INSIDE` operator is not an Sqlite keyword, and will be replaced on the fly by `GLOB`. This syntactic sugar takes advantage of the fact that the paths are suffixed by `[-]*` during the flattening of the AST. `GLOB` interprets these four meta-characters as “an hyphen (used as path separator) followed by any number of characters“. Consequently, `path_1 GLOB path_2` is truthy when `path_2` (minus its four last characters) is a **strict** prefix of `path_1` (minus its four last characters). In the AST, that means that the node identified by `path_1` is an ancestor of the node identified by `path_2`.
 
 ##### Example
 
@@ -1569,8 +1578,7 @@ SELECT "function_returning_something",
        f.name_suffix,
        max(f.span_start) || "-" || min(f.span_end)
 FROM t f
-JOIN t r ON (f.span_start <= r.span_start
-             AND r.span_end <= f.span_end)
+JOIN t r ON (r.path INSIDE f.path)
 WHERE f.name_prefix = "function"
   AND r.name_prefix = "return"
   AND r.name_suffix != "None"
@@ -1723,12 +1731,11 @@ SELECT "recursive_function",
        f.name_suffix,
        max(f.span_start) || "-" || min(f.span_end)
 FROM t f
-JOIN t c ON (f.span_start <= c.span_start
-             AND c.span_end <= f.span_end)
+JOIN t c ON (c.path INSIDE f.path)
 WHERE f.name_prefix = "function"
   AND c.name_prefix = "function_call"
   AND f.name_suffix = c.name_suffix
-GROUP BY c.rowid
+GROUP BY f.rowid
 ```
 
 ##### Example
@@ -1751,21 +1758,25 @@ GROUP BY c.rowid
 
 Any function `f` which contains a nested call to itself (`f(..., f(...), ...)`), e.g. the [Ackermann function](https://en.wikipedia.org/wiki/Ackermann_function).
 
+##### Dependencies
+
+- Derived from:
+  1. [construct `function`](#construct-function)
+  1. [construct `function_call`](#construct-function_call)
+
 ##### Definition
 
-```re
-           ^(.*)/_type='FunctionDef'
-\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/name='(?P<SUFFIX>.+)' # capture the name of the function
-\n(?:\1.+\n)* \1/(?P<_1>(?:body|orelse)/\d+)/_pos=(?P<POS>.+)
-\n(?:\1.+\n)* \1/(?P=_1)                    (?P<_2>.*)/_type='Call'
-\n(?:\1.+\n)*?\1/(?P=_1)                    (?P=_2)   /func/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/(?P=_1)                    (?P=_2)   /func/id='(?P=SUFFIX)' # ensure it is called inside its own body
-\n(?:\1.+\n)* \1/(?P=_1)                    (?P=_2)   /(?P<_3>args/.*)/_type='Call'
-\n(?:\1.+\n)*?\1/(?P=_1)                    (?P=_2)   /(?P=_3)        /func/id='(?P=SUFFIX)'
-(   # capture the line number of the last line of the function (it may appear before Call)
-\n(?:\1.+\n)* \1/.+/_pos=(?P<POS>.+)
-)?
+```sql
+SELECT "deeply_recursive_function",
+       f.name_suffix,
+       max(f.span_start) || "-" || min(f.span_end)
+FROM t f
+JOIN t c1 ON (c1.path INSIDE f.path)
+JOIN t c2 ON (c2.path INSIDE c1.path)
+WHERE f.name_prefix = "function"
+  AND c1.name = "function_call" || ":" || f.name_suffix
+  AND c2.name = "function_call" || ":" || f.name_suffix
+GROUP BY f.rowid
 ```
 
 ##### Example
@@ -1915,9 +1926,8 @@ SELECT "closure",
        f.name_suffix,
        max(f.span_start) || "-" || min(f.span_end)
 FROM t f
-JOIN t c ON (f.span_start <= c.span_start
-             AND c.span_end <= r.span_start)
-JOIN t r ON (r.span_end <= f.span_end)
+JOIN t c ON (c.path INSIDE f.path)
+JOIN t r ON (r.path INSIDE f.path)
 WHERE f.name_prefix = "function"
   AND c.name_prefix = "function"
   AND r.name_prefix = "return"
@@ -2228,16 +2238,18 @@ Match an `if` clause nested in _n_ other `if` clauses, suffixing it by _n_.
 SELECT "nested_if",
        count(*),
        inner_if.span
-FROM t outer_if
-JOIN t inner_if ON (outer_if.span_start <= inner_if.span_start
-                    AND inner_if.span_end <= outer_if.span_end)
-WHERE outer_if.name_prefix IN ("if_then_branch",
-                               "if_else_branch",
-                               "if_elif_branch")
+FROM t outer_branch
+JOIN t inner_if ON (outer_branch.span_start <= inner_if.span_start
+                    AND inner_if.span_end <= outer_branch.span_end)
+WHERE outer_branch.name_prefix IN ("if_then_branch",
+                                   "if_else_branch",
+                                   "if_elif_branch")
   AND inner_if.name_prefix = "if"
 GROUP BY inner_if.span
 ORDER BY inner_if.span_start
 ```
+
+**Remark.** A join condition `(inner_if.path INSIDE outer_branch.path)` would not work here, since an `else` branch has no specific path in the AST.
 
 ##### Example
 
@@ -2537,9 +2549,7 @@ SELECT "nested_for",
        count(*),
        inner_loop.span
 FROM t outer_loop
-JOIN t inner_loop ON (outer_loop.span_start <= inner_loop.span_start
-                      AND inner_loop.span_end <= outer_loop.span_end
-                      AND inner_loop.rowid != outer_loop.rowid)
+JOIN t inner_loop ON (inner_loop.path INSIDE outer_loop.path)
 WHERE outer_loop.name_prefix = "for"
   AND inner_loop.name_prefix = "for"
 GROUP BY inner_loop.span
@@ -2853,8 +2863,7 @@ SELECT "try_" || e.name_prefix,
        e.name_suffix,
        max(t.span_start) || "-" || min(t.span_end)
 FROM t t
-JOIN t e ON (t.span_start <= e.span_start
-             AND e.span_end <= t.span_end)
+JOIN t e ON (e.path INSIDE t.path)
 WHERE t.name_prefix = "try"
   AND e.name_prefix IN ("raise",
                         "except")
@@ -3059,11 +3068,10 @@ An accumulator is iteratively updated from its previous value and those of the i
 SELECT "accumulate_elements",
        count(DISTINCT acc_left.name_suffix),
        for_loop.span
-FROM t for_loop -- Ensure iter_var, acc_left and acc_right have same span and are inside the loop.
-JOIN t iter_var ON (for_loop.span_start <= iter_var.span_start
-                    AND iter_var.span_end <= for_loop.span_end)
-JOIN t acc_left ON (iter_var.span = acc_left.span)
-JOIN t acc_right ON (acc_left.span = acc_right.span)
+FROM t for_loop
+JOIN t iter_var ON (iter_var.path INSIDE for_loop.path)-- Ensure iter_var is nested in the loop
+JOIN t acc_left ON (iter_var.span = acc_left.span)-- and has same span as both acc_left
+JOIN t acc_right ON (iter_var.span = acc_right.span)-- and acc_right.
 WHERE for_loop.name_prefix = "for" -- A for loop...
   AND for_loop.name_suffix = iter_var.name_suffix -- whose iteration variable...
   AND ((iter_var.name_prefix = "assignment_rhs_identifier" -- either appears on the RHS of an assignment...
@@ -3073,11 +3081,7 @@ WHERE for_loop.name_prefix = "for" -- A for loop...
                  AND acc_right.name_prefix = "assignment_rhs_identifier")))-- and right hand size)...
        OR (iter_var.name_prefix = "call_parameter" -- or appears as an argument...
            AND acc_right.name_prefix = "method_call" -- of a call to a method...
-           AND acc_right.name_suffix IN ("append",
-                                         "extend",
-                                         "insert",
-                                         "add",
-                                         "update")-- updating its object.
+           AND acc_right.name_suffix REGEXP "(append|extend|insert|add|update)$" -- updating its object.
            AND acc_left.name_prefix = "method_call_object" -- Ensure that the suffix is the accumulator...
  ))
   AND for_loop.name_suffix != acc_left.name_suffix -- and is distinct from the iteration variable.

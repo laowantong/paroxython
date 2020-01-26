@@ -60,7 +60,7 @@ def reformat_sql(match):
         indent_width=2,
     )
     s = s.replace("\n\n", "\n")
-    s = regex.sub(r"\b(regexp|glob)\b", lambda m: m.group().upper(), s)
+    s = regex.sub(r"\b(regexp|glob|inside)\b", lambda m: m.group().upper(), s)
     return f"```sql\n{s}\n```"
 
 
@@ -69,7 +69,7 @@ def dependency_map(text):
     find_iter_derivations = regex.compile(
         r"""(?msx)
         name(_prefix)?\s(
-            ==?\s"(?P<REQUIRED_LABEL_NAME>.+?)(:.+)?"
+            (=|==|REGEXP)\s"(?P<REQUIRED_LABEL_NAME>.+?)(:.+)?"
             |
             IN\s\(("(?P<REQUIRED_LABEL_NAME>.+?)(:.+)?".*?)+\)
             )
