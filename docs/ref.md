@@ -527,9 +527,9 @@ Match the so-called ternary operator.
 
 #### Construct `comparison_operator`
 
-##### Dependencies
+##### Derivations
 
-- Derived into [construct `chained_equalities|chained_inequalities`](#construct-chained_equalitieschained_inequalities).
+[🔽 construct `chained_equalities|chained_inequalities`](#construct-chained_equalitieschained_inequalities)
 
 ##### Definition
 
@@ -559,9 +559,9 @@ Match the so-called ternary operator.
 
 #### Construct `chained_comparison`
 
-##### Dependencies
+##### Derivations
 
-- Derived into [construct `chained_equalities|chained_inequalities`](#construct-chained_equalitieschained_inequalities).
+[🔽 construct `chained_equalities|chained_inequalities`](#construct-chained_equalitieschained_inequalities)
 
 ##### Definition
 
@@ -590,11 +590,10 @@ Match the so-called ternary operator.
 
 #### Construct `chained_equalities|chained_inequalities`
 
-##### Dependencies
+##### Derivations
 
-- Derived from:
-  1. [construct `chained_comparison`](#construct-chained_comparison)
-  1. [construct `comparison_operator`](#construct-comparison_operator)
+[🔼 construct `chained_comparison`](#construct-chained_comparison)
+[🔼 construct `comparison_operator`](#construct-comparison_operator)
 
 ##### Definition
 
@@ -710,12 +709,11 @@ When the value of the left operand suffices to determine the value of a boolean 
 
 #### Construct `function_call`
 
-##### Dependencies
+##### Derivations
 
-- Derived into:
-  1. [construct `deeply_recursive_function`](#construct-deeply_recursive_function)
-  1. [construct `range`](#construct-range)
-  1. [construct `recursive_function`](#construct-recursive_function)
+[🔽 construct `deeply_recursive_function`](#construct-deeply_recursive_function)
+[🔽 construct `range`](#construct-range)
+[🔽 construct `recursive_function`](#construct-recursive_function)
 
 ##### Definition
 
@@ -756,11 +754,10 @@ Match any argument of a function or a method call. Suffix this argument when it 
 - `True`, `False` or `None`.
 Otherwise, suffix it with an empty string.
 
-##### Dependencies
+##### Derivations
 
-- Derived into:
-  1. [construct `accumulate_elements`](#construct-accumulate_elements)
-  1. [construct `range`](#construct-range)
+[🔽 construct `accumulate_elements`](#construct-accumulate_elements)
+[🔽 construct `range`](#construct-range)
 
 ##### Definition
 
@@ -813,9 +810,9 @@ Otherwise, suffix it with an empty string.
 
 #### Construct `method_call`
 
-##### Dependencies
+##### Derivations
 
-- Derived into [construct `accumulate_elements`](#construct-accumulate_elements).
+[🔽 construct `accumulate_elements`](#construct-accumulate_elements)
 
 ##### Definition
 
@@ -844,9 +841,9 @@ Otherwise, suffix it with an empty string.
 
 #### Construct `method_call_object`
 
-##### Dependencies
+##### Derivations
 
-- Derived into [construct `accumulate_elements`](#construct-accumulate_elements).
+[🔽 construct `accumulate_elements`](#construct-accumulate_elements)
 
 ##### Definition
 
@@ -963,12 +960,11 @@ Apply a function or a method to an expression involving the result of another fu
 
 Match a call to `range()` and suffix it by its atomic arguments, separated by a colon. Non atomic arguments are replaced by `?`.
 
-##### Dependencies
+##### Derivations
 
-- Derived from:
-  1. [construct `call_argument`](#construct-call_argument)
-  1. [construct `function_call`](#construct-function_call)
-- Derived into [construct `for_range`](#construct-for_range).
+[🔼 construct `call_argument`](#construct-call_argument)
+[🔼 construct `function_call`](#construct-function_call)
+[🔽 construct `for_range`](#construct-for_range)
 
 ##### Definition
 
@@ -1164,9 +1160,9 @@ Match a comprehension with an `if` clause.
 
 #### Construct `augmented_assignment`
 
-##### Dependencies
+##### Derivations
 
-- Derived into [construct `accumulate_elements`](#construct-accumulate_elements).
+[🔽 construct `accumulate_elements`](#construct-accumulate_elements)
 
 ##### Definition
 
@@ -1225,11 +1221,10 @@ Match a comprehension with an `if` clause.
 
 Capture any identifier appearing on the left hand side of an assignment (possibly augmented).
 
-##### Dependencies
+##### Derivations
 
-- Derived into:
-  1. [construct `accumulate_elements`](#construct-accumulate_elements)
-  1. [construct `constant_assignment`](#construct-constant_assignment)
+[🔽 construct `accumulate_elements`](#construct-accumulate_elements)
+[🔽 construct `constant_assignment`](#construct-constant_assignment)
 
 ##### Definition
 
@@ -1288,9 +1283,9 @@ Capture any identifier appearing on the left hand side of an assignment (possibl
 
 Check whether an assignment target follows the Python conventions for constants.
 
-##### Dependencies
+##### Derivations
 
-- Derived from [construct `assignment_lhs_identifier`](#construct-assignment_lhs_identifier).
+[🔼 construct `assignment_lhs_identifier`](#construct-assignment_lhs_identifier)
 
 ##### Definition
 
@@ -1336,9 +1331,9 @@ WHERE name REGEXP "assignment_lhs_identifier:[[:upper:]0-9_]+$"
 
 Capture any identifier (variable or function) appearing on the right hand side of an assignment (possibly augmented).
 
-##### Dependencies
+##### Derivations
 
-- Derived into [construct `accumulate_elements`](#construct-accumulate_elements).
+[🔽 construct `accumulate_elements`](#construct-accumulate_elements)
 
 ##### Definition
 
@@ -1455,15 +1450,14 @@ Update a variable by negating it.
 
 In Python, the term "function" encompasses any type of subroutine, be it a method, a procedure, a generator or a "pure" function.
 
-##### Dependencies
+##### Derivations
 
-- Derived into:
-  1. [construct `closure`](#construct-closure)
-  1. [construct `deeply_recursive_function`](#construct-deeply_recursive_function)
-  1. [construct `function_returning_nothing`](#construct-function_returning_nothing)
-  1. [construct `function_returning_something`](#construct-function_returning_something)
-  1. [construct `generator`](#construct-generator)
-  1. [construct `recursive_function`](#construct-recursive_function)
+[🔽 construct `closure`](#construct-closure)
+[🔽 construct `deeply_recursive_function`](#construct-deeply_recursive_function)
+[🔽 construct `function_returning_nothing`](#construct-function_returning_nothing)
+[🔽 construct `function_returning_something`](#construct-function_returning_something)
+[🔽 construct `generator`](#construct-generator)
+[🔽 construct `recursive_function`](#construct-recursive_function)
 
 ##### Definition
 
@@ -1518,11 +1512,10 @@ In Python, the term "function" encompasses any type of subroutine, be it a metho
 
 Match `return` statements and, when the returned object is [_atomic_](#construct-call_argument), suffix it. Note that a `return` statement returning no value is denoted by `return:None`, not to be confounded with `result` (without suffix), which denotes the return of a non-atomic object.
 
-##### Dependencies
+##### Derivations
 
-- Derived into:
-  1. [construct `closure`](#construct-closure)
-  1. [construct `function_returning_something`](#construct-function_returning_something)
+[🔽 construct `closure`](#construct-closure)
+[🔽 construct `function_returning_something`](#construct-function_returning_something)
 
 ##### Definition
 
@@ -1565,9 +1558,9 @@ Match `return` statements and, when the returned object is [_atomic_](#construct
 
 Match `yield` and `yieldfrom` _[expressions](https://docs.python.org/3/reference/expressions.html#yield-expressions)_ (generally used as statements) and, when the yielded object is [_atomic_](#construct-call_argument), suffix it.
 
-##### Dependencies
+##### Derivations
 
-- Derived into [construct `generator`](#construct-generator).
+[🔽 construct `generator`](#construct-generator)
 
 ##### Definition
 
@@ -1609,12 +1602,11 @@ Match `yield` and `yieldfrom` _[expressions](https://docs.python.org/3/reference
 
 #### Construct `generator`
 
-##### Dependencies
+##### Derivations
 
-- Derived from:
-  1. [construct `function`](#construct-function)
-  1. [construct `yield`](#construct-yield)
-- Derived into [construct `function_returning_nothing`](#construct-function_returning_nothing).
+[🔼 construct `function`](#construct-function)
+[🔼 construct `yield`](#construct-yield)
+[🔽 construct `function_returning_nothing`](#construct-function_returning_nothing)
 
 ##### Definition
 
@@ -1654,12 +1646,11 @@ GROUP BY y.rowid
 
 A function returning at least one value distinct from `None` is the smallest `function` including a `return_something` clause.
 
-##### Dependencies
+##### Derivations
 
-- Derived from:
-  1. [construct `function`](#construct-function)
-  1. [construct `return`](#construct-return)
-- Derived into [construct `function_returning_nothing`](#construct-function_returning_nothing).
+[🔼 construct `function`](#construct-function)
+[🔼 construct `return`](#construct-return)
+[🔽 construct `function_returning_nothing`](#construct-function_returning_nothing)
 
 ##### Definition
 
@@ -1719,12 +1710,11 @@ GROUP BY r.rowid
 
 A function returning nothing (aka procedure) is a function which is neither a generator or a function returning something.
 
-##### Dependencies
+##### Derivations
 
-- Derived from:
-  1. [construct `function`](#construct-function)
-  1. [construct `function_returning_something`](#construct-function_returning_something)
-  1. [construct `generator`](#construct-generator)
+[🔼 construct `function`](#construct-function)
+[🔼 construct `function_returning_something`](#construct-function_returning_something)
+[🔼 construct `generator`](#construct-generator)
 
 ##### Definition
 
@@ -1810,11 +1800,10 @@ WHERE name_prefix = "function"
 
 #### Construct `recursive_function`
 
-##### Dependencies
+##### Derivations
 
-- Derived from:
-  1. [construct `function`](#construct-function)
-  1. [construct `function_call`](#construct-function_call)
+[🔼 construct `function`](#construct-function)
+[🔼 construct `function_call`](#construct-function_call)
 
 ##### Definition
 
@@ -1849,11 +1838,10 @@ WHERE f.name_prefix = "function"
 
 Any function `f` which contains a nested call to itself (`f(..., f(...), ...)`), e.g. the [Ackermann function](https://en.wikipedia.org/wiki/Ackermann_function).
 
-##### Dependencies
+##### Derivations
 
-- Derived from:
-  1. [construct `function`](#construct-function)
-  1. [construct `function_call`](#construct-function_call)
+[🔼 construct `function`](#construct-function)
+[🔼 construct `function_call`](#construct-function_call)
 
 ##### Definition
 
@@ -1999,11 +1987,10 @@ A tail call is a subroutine call performed as the last action of a procedure. A 
 
 Function enclosing the definition of an inner function and returning it. Beware that the current definition does not check whether the inner function refers to a variable defined in the enclosing function.
 
-##### Dependencies
+##### Derivations
 
-- Derived from:
-  1. [construct `function`](#construct-function)
-  1. [construct `return`](#construct-return)
+[🔼 construct `function`](#construct-function)
+[🔼 construct `return`](#construct-return)
 
 ##### Definition
 
@@ -2047,9 +2034,9 @@ GROUP BY c.rowid
 
 Match an entire conditional (from the `if` clause to the last line of its body).
 
-##### Dependencies
+##### Derivations
 
-- Derived into [construct `nested_if`](#construct-nested_if).
+[🔽 construct `nested_if`](#construct-nested_if)
 
 ##### Definition
 
@@ -2135,9 +2122,9 @@ Match any identifier present in the condition of an `if` statement.
 
 Match the body of the branch “`then`” of an `if` statement.
 
-##### Dependencies
+##### Derivations
 
-- Derived into [construct `nested_if`](#construct-nested_if).
+[🔽 construct `nested_if`](#construct-nested_if)
 
 ##### Definition
 
@@ -2193,9 +2180,9 @@ Match the body of the branch “`then`” of an `if` statement.
 
 Match the body of an `elif` clause, which is (or could be rewritten as) an `else` branch consisting in a single statement `if`.
 
-##### Dependencies
+##### Derivations
 
-- Derived into [construct `nested_if`](#construct-nested_if).
+[🔽 construct `nested_if`](#construct-nested_if)
 
 ##### Definition
 
@@ -2253,9 +2240,9 @@ Match the body of an `elif` clause, which is (or could be rewritten as) an `else
 
 Match the body of the possible `else` branch of an `if` statement.
 
-##### Dependencies
+##### Derivations
 
-- Derived into [construct `nested_if`](#construct-nested_if).
+[🔽 construct `nested_if`](#construct-nested_if)
 
 ##### Definition
 
@@ -2310,13 +2297,12 @@ Match the body of the possible `else` branch of an `if` statement.
 
 Match an `if` clause nested in _n_ other `if` clauses, suffixing it by _n_.
 
-##### Dependencies
+##### Derivations
 
-- Derived from:
-  1. [construct `if`](#construct-if)
-  1. [construct `if_elif_branch`](#construct-if_elif_branch)
-  1. [construct `if_else_branch`](#construct-if_else_branch)
-  1. [construct `if_then_branch`](#construct-if_then_branch)
+[🔼 construct `if`](#construct-if)
+[🔼 construct `if_elif_branch`](#construct-if_elif_branch)
+[🔼 construct `if_else_branch`](#construct-if_else_branch)
+[🔼 construct `if_then_branch`](#construct-if_then_branch)
 
 ##### Definition
 
@@ -2379,12 +2365,11 @@ ORDER BY inner_if.span_start
 
 Match sequential loops, along with their iteration variable(s).
 
-##### Dependencies
+##### Derivations
 
-- Derived into:
-  1. [construct `accumulate_elements`](#construct-accumulate_elements)
-  1. [construct `for_range`](#construct-for_range)
-  1. [construct `nested_for`](#construct-nested_for)
+[🔽 construct `accumulate_elements`](#construct-accumulate_elements)
+[🔽 construct `for_range`](#construct-for_range)
+[🔽 construct `nested_for`](#construct-nested_for)
 
 ##### Definition
 
@@ -2452,11 +2437,10 @@ Iterate over the elements of a (named) collection.
 
 Iterate over a range object.
 
-##### Dependencies
+##### Derivations
 
-- Derived from:
-  1. [construct `for`](#construct-for)
-  1. [construct `range`](#construct-range)
+[🔼 construct `for`](#construct-for)
+[🔼 construct `range`](#construct-range)
 
 ##### Definition
 
@@ -2563,9 +2547,9 @@ Iterate over index numbers of a collection.
 
 Match a `for` statement nested in _n_ other `for` statements, suffixing it by _n_.
 
-##### Dependencies
+##### Derivations
 
-- Derived from [construct `for`](#construct-for).
+[🔼 construct `for`](#construct-for)
 
 ##### Definition
 
@@ -2747,9 +2731,9 @@ Two nested `for` loops doing the same number of iterations.
 
 #### Construct `try`
 
-##### Dependencies
+##### Derivations
 
-- Derived into [construct `try_raise|try_except`](#construct-try_raisetry_except).
+[🔽 construct `try_raise|try_except`](#construct-try_raisetry_except)
 
 ##### Definition
 
@@ -2781,9 +2765,9 @@ Two nested `for` loops doing the same number of iterations.
 
 #### Construct `raise`
 
-##### Dependencies
+##### Derivations
 
-- Derived into [construct `try_raise|try_except`](#construct-try_raisetry_except).
+[🔽 construct `try_raise|try_except`](#construct-try_raisetry_except)
 
 ##### Definition
 
@@ -2828,9 +2812,9 @@ Two nested `for` loops doing the same number of iterations.
 
 #### Construct `except`
 
-##### Dependencies
+##### Derivations
 
-- Derived into [construct `try_raise|try_except`](#construct-try_raisetry_except).
+[🔽 construct `try_raise|try_except`](#construct-try_raisetry_except)
 
 ##### Definition
 
@@ -2875,12 +2859,11 @@ Two nested `for` loops doing the same number of iterations.
 
 #### Construct `try_raise|try_except`
 
-##### Dependencies
+##### Derivations
 
-- Derived from:
-  1. [construct `except`](#construct-except)
-  1. [construct `raise`](#construct-raise)
-  1. [construct `try`](#construct-try)
+[🔼 construct `except`](#construct-except)
+[🔼 construct `raise`](#construct-raise)
+[🔼 construct `try`](#construct-try)
 
 ##### Definition
 
@@ -2931,9 +2914,9 @@ GROUP BY e.rowid
 
 #### Construct `import_module`
 
-##### Dependencies
+##### Derivations
 
-- Derived into [construct `import`](#construct-import).
+[🔽 construct `import`](#construct-import)
 
 ##### Definition
 
@@ -2977,9 +2960,9 @@ GROUP BY e.rowid
 
 #### Construct `import_name`
 
-##### Dependencies
+##### Derivations
 
-- Derived into [construct `import`](#construct-import).
+[🔽 construct `import`](#construct-import)
 
 ##### Definition
 
@@ -3018,11 +3001,10 @@ GROUP BY e.rowid
 
 Suffixed by the imported module and, if any, the imported name. In most cases, could replace the two low-level constructs `import_module` and `import_name`.
 
-##### Dependencies
+##### Derivations
 
-- Derived from:
-  1. [construct `import_module`](#construct-import_module)
-  1. [construct `import_name`](#construct-import_name)
+[🔼 construct `import_module`](#construct-import_module)
+[🔼 construct `import_name`](#construct-import_name)
 
 ##### Definition
 
@@ -3079,16 +3061,15 @@ WHERE m.name_prefix = "import_module"
 
 An accumulator is iteratively updated from its previous value and those of the iteration variable.
 
-##### Dependencies
+##### Derivations
 
-- Derived from:
-  1. [construct `assignment_lhs_identifier`](#construct-assignment_lhs_identifier)
-  1. [construct `assignment_rhs_identifier`](#construct-assignment_rhs_identifier)
-  1. [construct `augmented_assignment`](#construct-augmented_assignment)
-  1. [construct `call_argument`](#construct-call_argument)
-  1. [construct `for`](#construct-for)
-  1. [construct `method_call`](#construct-method_call)
-  1. [construct `method_call_object`](#construct-method_call_object)
+[🔼 construct `assignment_lhs_identifier`](#construct-assignment_lhs_identifier)
+[🔼 construct `assignment_rhs_identifier`](#construct-assignment_rhs_identifier)
+[🔼 construct `augmented_assignment`](#construct-augmented_assignment)
+[🔼 construct `call_argument`](#construct-call_argument)
+[🔼 construct `for`](#construct-for)
+[🔼 construct `method_call`](#construct-method_call)
+[🔼 construct `method_call_object`](#construct-method_call_object)
 
 ##### Definition
 

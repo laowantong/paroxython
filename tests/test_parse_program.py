@@ -65,7 +65,7 @@ def reformat_sql(match):
     return f"```sql\n{s}\n```"
 
 
-def dependency_map(text):
+def derivation_map(text):
 
     find_iter_derivations = regex.compile(
         r"""(?mx)
@@ -111,25 +111,19 @@ def dependency_map(text):
     for key in keys:
         result[key] = {}
         if key in derived_from:
-            result[key]["Derived from"] = sorted(derived_from[key])
+            result[key]["🔼"] = sorted(derived_from[key])
         if key in derived_into:
-            result[key]["Derived into"] = sorted(derived_into[key])
+            result[key]["🔽"] = sorted(derived_into[key])
     return result
 
 
-def inject_dependencies(text):
-    for (key, entries) in dependency_map(text).items():
-        new_section = [f"##### Dependencies\n"]
+def inject_derivations(text):
+    for (key, entries) in derivation_map(text).items():
+        new_section = [f"##### Derivations\n"]
         for (kind, constructs) in entries.items():
-            acc = []
             for construct in constructs:
                 slug = title_to_slug(f"Construct `{construct}`")
-                acc.append(f"[construct `{construct}`](#{slug})")
-            if len(acc) == 1:
-                construct_string = f" {acc[0]}."
-            else:
-                construct_string = ":\n  1. " + "\n  1. ".join(acc)
-            new_section.append(f"- {kind}{construct_string}")
+                new_section.append(f"[{kind} construct `{construct}`](#{slug})  ")
         new_section.append("\n")
         text = regex.sub(
             r"(?msx)^(\#{4}\s+Construct\s+`%s`.+?)^(?=\#{5}\s+Definition)" % regex.escape(key),
@@ -150,8 +144,8 @@ def reformat_file(construct_path):
     text = regex.sub(r"(?ms)^(\| Label \| .+?)(^\#{1,3} )", fr"\1{rule}\n\2", text)
     text = regex.sub(r"(?=\n\#{4} )", fr"\n{rule}", text)
     text = regex.sub(r"(?ms)^```sql\n(.+?)\n```", reformat_sql, text)
-    text = regex.sub(r"(?ms)^\#{5} Dependencies\n.+?^(?=\#{5} Definition)", "", text)
-    text = inject_dependencies(text)
+    text = regex.sub(r"(?ms)^\#{5} Derivations\n.+?^(?=\#{5} Definition)", "", text)
+    text = inject_derivations(text)
     construct_path.write_text(text)
 
 
