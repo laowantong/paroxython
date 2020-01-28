@@ -751,6 +751,8 @@ When the value of the left operand suffices to determine the value of a boolean 
 
 #### Construct `function_tail_call`
 
+A tail-call is a call whose result is immediately returned, without any further calculation. This property is not interesting as such, but will be used below as a basis for the recognition of tail-recursive functions.
+
 ##### Derivations
 
 [🔽 construct `body_recursive_function`](#construct-body_recursive_function)  
@@ -787,8 +789,8 @@ When the value of the left operand suffices to determine the value of a boolean 
 1   def foobar():
 2       return foo(m-1, 1)                   # tail call
 3       return foo(m-1, bar(m, n-1))         # tail call / no match
-4       return c1 and c2 and foo(m)          # tail call
-5       return c and foo(m)                  # tail call
+4       return c and foo(m)                  # tail call
+5       return c1 and c2 and foo(m)          # tail call
 6       return (42 if c else foo(m + 1))     # tail call
 7       return (foo(m) if c else 42)         # tail call
 8       return (foo(m) if c else foo(m + 1)) # tail call / tail_call
@@ -814,7 +816,7 @@ When the value of the left operand suffices to determine the value of a boolean 
 28          bar(3) # LIMITATION: no match
 ```
 
-**Remark.** Since the short-circuit expression `c and foobar()` is equivalent to the conditional expression `if c then foobar() else False`, the function `foobar()` is actually tail recursive. This holds for `c or foobar()` too, which is equivalent to `if c then True else foobar()`.
+**Remark.** Since the short-circuit expression `c and foo(m)` is equivalent to the conditional expression `if c then foo(m) else False`, `foo(m)` is actually a tail-call.
 
 ##### Matches
 
@@ -2053,7 +2055,7 @@ SELECT "tail_recursive_function",
        f.path
 FROM t f
 WHERE f.name_prefix = "recursive_function" -- A recursive function...
-  AND NOT EXISTS -- which is not ...
+  AND NOT EXISTS -- which is not...
     (SELECT 1
      FROM t body_rec
      WHERE body_rec.name_prefix = "body_recursive_function" -- body recursive.
