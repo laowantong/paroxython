@@ -62,5 +62,6 @@ def succ(n): # function:succ (-> +1)
 # ----------------------------------------------------------------------------------------
 while input(): # function_call:input
                # while (-> +1)
-    print("foobar") # function_call:print
+    print("foobar") # call_parameter:
+                    # function_call:print
                     # literal:Str

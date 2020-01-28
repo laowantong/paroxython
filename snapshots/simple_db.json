@@ -80,6 +80,7 @@
       "timestamp": "ignored",
       "source": "while input():\n    print(\"foobar\")",
       "labels": {
+        "call_parameter:": [[2,2]],
         "function_call:input": [[1,1]],
         "function_call:print": [[2,2]],
         "literal:Str": [[2,2]],
@@ -194,6 +195,9 @@
     ],
     "return": [
       "tests/data/simple/function_definition.py"
+    ],
+    "call_parameter:": [
+      "tests/data/simple/loop.py"
     ],
     "function_call:input": [
       "tests/data/simple/loop.py"

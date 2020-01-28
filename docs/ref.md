@@ -732,6 +732,7 @@ When the value of the left operand suffices to determine the value of a boolean 
 2   bar()
 3   buzz(x, 2)
 4   fizz(foobar(x), 2)
+5   baz.qux() # no match, see construct method_call
 ```
 
 ##### Matches
@@ -748,10 +749,11 @@ When the value of the left operand suffices to determine the value of a boolean 
 
 #### Construct `call_parameter`
 
-Match any _atomic_ argument of a function or a method call, and suffix it to the construct's name. _Atomic_ denotes an object which is either:
+Match any argument of a function or a method call. Suffix this argument when it is **atomic**, _i.e._ either:
 - a simple identifier,
 - a number literal,
-- `True`, `False`, `None`.
+- `True`, `False` or `None`.
+Otherwise, suffix it with an empty string.
 
 ##### Dependencies
 
@@ -760,29 +762,39 @@ Match any _atomic_ argument of a function or a method call, and suffix it to the
 ##### Definition
 
 ```re
-  ^(.*/args/\d+)/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/(value|n|id)?='?(?P<SUFFIX>.+?)\b'?$
+           ^(.*)/_type='Call'
+(
+\n(?:\1.+\n)*?\1/(?P<_1>args/\d+)/_pos=(?P<POS>.+)
+\n            \1/(?P=_1)         /(   # the next line denotes either an atomic argument
+                                    (value|n|id)?='?(?P<SUFFIX>.+?)\b'?$ # capture it as suffix
+                                    | # or a non atomic argument
+                                    (?P<SUFFIX>).+ # "capture" an empty suffix
+                                  )
+)+ # at least one argument
 ```
 
 ##### Example
 
 ```python
 1   bar() # no match
-2   foo("a string") # no match
+2   foo("a string") # empty suffix
 3   foo(None)
 4   foo(True)
 5   foo(42)
 6   buzz(x, 42)
-7   buzz((x, 42)) # no match
-8   fizz(foobar(x), 42)
+7   buzz((x, 42))
+8   fizz(foobar(x), 42) # empty suffix for the first argument
 9   foo(a, b, c)
 10  foo.bar(bizz, buzz)
+11  def fun_def(f, g): # no match
+12      f(g)
 ```
 
 ##### Matches
 
 | Label | Lines |
 |:--|:--|
+| `call_parameter:` | 2, 7, 8 |
 | `call_parameter:None` | 3 |
 | `call_parameter:True` | 4 |
 | `call_parameter:42` | 5, 6, 8 |
@@ -792,6 +804,7 @@ Match any _atomic_ argument of a function or a method call, and suffix it to the
 | `call_parameter:c` | 9 |
 | `call_parameter:bizz` | 10 |
 | `call_parameter:buzz` | 10 |
+| `call_parameter:g` | 12 |
 
 --------------------------------------------------------------------------------
 

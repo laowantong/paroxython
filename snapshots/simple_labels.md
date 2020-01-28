@@ -11,6 +11,7 @@
 - binary_operator:FloorDiv / collatz_print.py / 5
 - binary_operator:Mod / collatz_print.py / 4
 - binary_operator:Mult / collatz_print.py / 7
+- call_parameter: / loop.py / 2
 - call_parameter:n / collatz_print.py / 3, 8
 - comparison_operator:Eq / collatz_print.py / 4
 - comparison_operator:NotEq / collatz_print.py / 2
