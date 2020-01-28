@@ -23,6 +23,7 @@
       - [Construct `short_circuit`](#construct-short_circuit)
   - [Calls](#calls)
       - [Construct `function_call`](#construct-function_call)
+      - [Construct `function_tail_call`](#construct-function_tail_call)
       - [Construct `call_argument`](#construct-call_argument)
       - [Construct `method_call`](#construct-method_call)
       - [Construct `method_call_object`](#construct-method_call_object)
@@ -56,7 +57,6 @@
       - [Construct `function_with_default_positional_arguments`](#construct-function_with_default_positional_arguments)
       - [Construct `recursive_function`](#construct-recursive_function)
       - [Construct `deeply_recursive_function`](#construct-deeply_recursive_function)
-      - [Construct `function_tail_call`](#construct-function_tail_call)
       - [Construct `body_recursive_function`](#construct-body_recursive_function)
       - [Construct `tail_recursive_function`](#construct-tail_recursive_function)
       - [Construct `nested_function`](#construct-nested_function)
@@ -746,6 +746,81 @@ When the value of the left operand suffices to determine the value of a boolean 
 | `function_call:fizz` | 4 |
 | `function_call:foo` | 1 |
 | `function_call:foobar` | 4 |
+
+--------------------------------------------------------------------------------
+
+#### Construct `function_tail_call`
+
+##### Derivations
+
+[🔽 construct `body_recursive_function`](#construct-body_recursive_function)  
+
+##### Definition
+
+```re
+           ^(.*)/_type='Return'
+\n(?:\1.+\n)*?\1/value/( 
+                       _type='Call'
+\n(?:\1.+\n)*?\1/value/_pos=(?P<POS>.+)
+\n(?:\1.+\n)*?\1/value/func/_type='Name'
+\n(?:\1.+\n)*?\1/value/func/id='(?P<SUFFIX>.+)'
+                       |
+                       _type='BoolOp'
+\n(?:\1.+\n)*?\1/value/values/length=(?P<LENGTH>\d+)
+\n(?:\1.+\n)*?\1/value/values/(?P=LENGTH)/_type='Call'
+\n(?:\1.+\n)*?\1/value/values/(?P=LENGTH)/_pos=(?P<POS>.+)
+\n(?:\1.+\n)*?\1/value/values/(?P=LENGTH)/func/id='(?P<SUFFIX>.+)'
+                       |
+                       _type='IfExp'
+(
+\n(?:\1.+\n)*?\1/value/(?P<_1>body|orelse)/_type='Call'
+\n(?:\1.+\n)*?\1/value/(?P=_1)            /_pos=(?P<POS>.+)
+\n(?:\1.+\n)*?\1/value/(?P=_1)            /func/_type='Name'
+\n(?:\1.+\n)*?\1/value/(?P=_1)            /func/id='(?P<SUFFIX>.+)'
+)+  # can match both branches
+)
+```
+
+##### Example
+
+```python
+1   def foobar():
+2       return foo(m-1, 1)                   # tail call
+3       return foo(m-1, bar(m, n-1))         # tail call / no match
+4       return c1 and c2 and foo(m)          # tail call
+5       return c and foo(m)                  # tail call
+6       return (42 if c else foo(m + 1))     # tail call
+7       return (foo(m) if c else 42)         # tail call
+8       return (foo(m) if c else foo(m + 1)) # tail call / tail_call
+9       return bar(m) and c  # no match
+10      return bar(m) + 1    # no match
+11      return 1 + bar(m)    # no match
+12      return bar(m)[-1]    # no match
+13      return (1, bar())    # no match
+14      return {1: bar()}    # no match
+15      return {bar(): 1}    # no match
+16  
+17  def useless_assignment():
+18      a = bar(n) 
+19      return a # LIMITATION: no match
+20  
+21  def procedure():
+22      if c1:
+23          if c2:
+24              bar(1) # LIMITATION: no match
+25          else:
+26              bar(2) # LIMITATION: no match
+27      else:
+28          bar(3) # LIMITATION: no match
+```
+
+**Remark.** Since the short-circuit expression `c and foobar()` is equivalent to the conditional expression `if c then foobar() else False`, the function `foobar()` is actually tail recursive. This holds for `c or foobar()` too, which is equivalent to `if c then True else foobar()`.
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `function_tail_call:foo` | 2, 3, 4, 5, 6, 7, 8, 8 |
 
 --------------------------------------------------------------------------------
 
@@ -1874,81 +1949,6 @@ WHERE f.name_prefix = "function"
 | Label | Lines |
 |:--|:--|
 | `deeply_recursive_function:gob_program` | 1-3 |
-
---------------------------------------------------------------------------------
-
-#### Construct `function_tail_call`
-
-##### Derivations
-
-[🔽 construct `body_recursive_function`](#construct-body_recursive_function)  
-
-##### Definition
-
-```re
-           ^(.*)/_type='Return'
-\n(?:\1.+\n)*?\1/value/( 
-                       _type='Call'
-\n(?:\1.+\n)*?\1/value/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/value/func/_type='Name'
-\n(?:\1.+\n)*?\1/value/func/id='(?P<SUFFIX>.+)'
-                       |
-                       _type='BoolOp'
-\n(?:\1.+\n)*?\1/value/values/length=(?P<LENGTH>\d+)
-\n(?:\1.+\n)*?\1/value/values/(?P=LENGTH)/_type='Call'
-\n(?:\1.+\n)*?\1/value/values/(?P=LENGTH)/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/value/values/(?P=LENGTH)/func/id='(?P<SUFFIX>.+)'
-                       |
-                       _type='IfExp'
-(
-\n(?:\1.+\n)*?\1/value/(?P<_1>body|orelse)/_type='Call'
-\n(?:\1.+\n)*?\1/value/(?P=_1)            /_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/value/(?P=_1)            /func/_type='Name'
-\n(?:\1.+\n)*?\1/value/(?P=_1)            /func/id='(?P<SUFFIX>.+)'
-)+  # can match both branches
-)
-```
-
-##### Example
-
-```python
-1   def foobar():
-2       return foo(m-1, 1)                   # tail call
-3       return foo(m-1, bar(m, n-1))         # tail call / no match
-4       return c1 and c2 and foo(m)          # tail call
-5       return c and foo(m)                  # tail call
-6       return (42 if c else foo(m + 1))     # tail call
-7       return (foo(m) if c else 42)         # tail call
-8       return (foo(m) if c else foo(m + 1)) # tail call / tail_call
-9       return bar(m) and c  # no match
-10      return bar(m) + 1    # no match
-11      return 1 + bar(m)    # no match
-12      return bar(m)[-1]    # no match
-13      return (1, bar())    # no match
-14      return {1: bar()}    # no match
-15      return {bar(): 1}    # no match
-16  
-17  def useless_assignment():
-18      a = bar(n) 
-19      return a # LIMITATION: no match
-20  
-21  def procedure():
-22      if c1:
-23          if c2:
-24              bar(1) # LIMITATION: no match
-25          else:
-26              bar(2) # LIMITATION: no match
-27      else:
-28          bar(3) # LIMITATION: no match
-```
-
-**Remark.** Since the short-circuit expression `c and foobar()` is equivalent to the conditional expression `if c then foobar() else False`, the function `foobar()` is actually tail recursive. This holds for `c or foobar()` too, which is equivalent to `if c then True else foobar()`.
-
-##### Matches
-
-| Label | Lines |
-|:--|:--|
-| `function_tail_call:foo` | 2, 3, 4, 5, 6, 7, 8, 8 |
 
 --------------------------------------------------------------------------------
 
