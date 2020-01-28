@@ -16,14 +16,24 @@
     "type/elementary/number/integer": "2 4 4 5 7 7",
     "variable/assignment/": "5 7"
   },
-  "tests/data/simple/function_definition.py": {
-    "operator/addition/": "2 2",
-    "subroutine_definition/function/": "1-2",
-    "type/elementary/number/integer": "2"
+  "tests/data/simple/fizzbuzz.py": {
+    "call/function/builtin/print/": "3 5 7 9",
+    "call/function/builtin/range/": "1",
+    "control_flow/conditional/": "2-9 4-9 6-9",
+    "control_flow/conditional/else/": "9",
+    "control_flow/conditional/else/chained/": "5 7",
+    "control_flow/loop/sequential/arithmetic/start/": "1-9",
+    "operator/percent/modulo/": "2 4 6",
+    "test/equality/": "2 4 6",
+    "type/elementary/number/integer": "1 1 2 2 4 4 6 6",
+    "type/elementary/string/": "3 5 7"
   },
-  "tests/data/simple/loop.py": {
-    "call/function/builtin/input/": "1",
-    "call/function/builtin/print/": "2",
-    "type/elementary/string/": "2"
+  "tests/data/simple/is_even.py": {
+    "operator/percent/modulo/": "2",
+    "subroutine_definition/function/": "1-2",
+    "subroutine_definition/predicate/": "1-2",
+    "test/divisibility/parity/": "2",
+    "test/equality/": "2",
+    "type/elementary/number/integer": "2 2"
   }
 }

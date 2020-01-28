@@ -13,14 +13,12 @@ class Span:
     def __init__(self, pos: List) -> None:
         data = (pos[0], pos[-1])  # keep only the both ends of the position data
         try:
-            (start, indent, self.path) = data[0].split(":")
+            (start, self.path) = data[0].split(":")
             self.start = int(start)
-            self.indent = int(indent)
             self.end = int(data[1].partition(":")[0])
         except (TypeError, ValueError, AttributeError):  # for testing purpose only
             self.start = int(data[0])
             self.end = int(data[1])
-            self.indent = -1
             self.path = ""
         self.length = self.end - self.start
         if self.length == 0:

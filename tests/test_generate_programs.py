@@ -16,9 +16,9 @@ def test_generate_programs():
     assert program.source.startswith("def print_collatz(n):")
 
     program = next(result)
-    assert program.path.name == "function_definition.py"
-    assert program.source == "def succ(n):\n    return a + b + 1"
+    assert program.path.name == "fizzbuzz.py"
+    assert program.source.startswith("for i in range(1, 101):")
 
     program = next(result)
-    assert program.path.name == "loop.py"
-    assert program.source == 'while input():\n    print("foobar")'
+    assert program.path.name == "is_even.py"
+    assert program.source == "def is_even(n):\n    return n % 2 == 0"

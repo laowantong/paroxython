@@ -17,10 +17,10 @@ control_flow/conditional/else/	if_else_branch
 control_flow/conditional/else/chained/	if_elif_branch
 control_flow/conditional/nested/\1/	nested_if:(.+)
 control_flow/loop/sequential/	for:(.+)
-control_flow/loop/sequential/arithmetic/	for_range_stop
-control_flow/loop/sequential/arithmetic/start/	for_range_start
-control_flow/loop/sequential/arithmetic/start/step/	for_range_step
-control_flow/loop/sequential/arithmetic/start/step/backwards/	for_range_step:-.+
+control_flow/loop/sequential/arithmetic/	for_range:[^:]+
+control_flow/loop/sequential/arithmetic/start/	for_range:[^:]+:[^:]+
+control_flow/loop/sequential/arithmetic/start/step/	for_range:[^:]+:[^:]+:[^:]+
+control_flow/loop/sequential/arithmetic/start/step/backwards/	for_range:[^:]+:[^:]+:-[^:]+
 control_flow/loop/sequential/elements_and_indexes/	for_indexes_elements
 control_flow/loop/sequential/elements/	for_each
 control_flow/loop/sequential/indexes/	for_indexes

@@ -30,6 +30,8 @@
       - [Construct `composition`](#construct-composition)
   - [Anonymous functions](#anonymous-functions)
       - [Construct `lambda_function`](#construct-lambda_function)
+  - [Iterables](#iterables)
+      - [Construct `range`](#construct-range)
       - [Construct `comprehension`](#construct-comprehension)
       - [Construct `comprehension_for_count`](#construct-comprehension_for_count)
       - [Construct `filtered_comprehension`](#construct-filtered_comprehension)
@@ -67,9 +69,7 @@
   - [Iterations](#iterations)
       - [Construct `for`](#construct-for)
       - [Construct `for_each`](#construct-for_each)
-      - [Construct `for_range_stop`](#construct-for_range_stop)
-      - [Construct `for_range_start`](#construct-for_range_start)
-      - [Construct `for_range_step`](#construct-for_range_step)
+      - [Construct `for_range`](#construct-for_range)
       - [Construct `for_indexes_elements`](#construct-for_indexes_elements)
       - [Construct `for_indexes`](#construct-for_indexes)
       - [Construct `nested_for`](#construct-nested_for)
@@ -604,7 +604,8 @@ SELECT CASE op.name_suffix
            ELSE "chained_inequalities"
        END,
        count(*),
-       cmp.span
+       cmp.span,
+       cmp.path
 FROM t cmp
 JOIN t op ON (op.path GLOB cmp.path || "?*")
 WHERE cmp.name_prefix = "chained_comparison"
@@ -713,6 +714,7 @@ When the value of the left operand suffices to determine the value of a boolean 
 
 - Derived into:
   1. [construct `deeply_recursive_function`](#construct-deeply_recursive_function)
+  1. [construct `range`](#construct-range)
   1. [construct `recursive_function`](#construct-recursive_function)
 
 ##### Definition
@@ -756,7 +758,9 @@ Otherwise, suffix it with an empty string.
 
 ##### Dependencies
 
-- Derived into [construct `accumulate_elements`](#construct-accumulate_elements).
+- Derived into:
+  1. [construct `accumulate_elements`](#construct-accumulate_elements)
+  1. [construct `range`](#construct-range)
 
 ##### Definition
 
@@ -948,6 +952,71 @@ Apply a function or a method to an expression involving the result of another fu
 | Label | Lines |
 |:--|:--|
 | `lambda_function` | 1 |
+
+--------------------------------------------------------------------------------
+
+## Iterables
+
+--------------------------------------------------------------------------------
+
+#### Construct `range`
+
+Match a call to `range()` and suffix it by its atomic arguments, separated by a colon. Non atomic arguments are replaced by `?`.
+
+##### Dependencies
+
+- Derived from:
+  1. [construct `call_argument`](#construct-call_argument)
+  1. [construct `function_call`](#construct-function_call)
+- Derived into [construct `for_range`](#construct-for_range).
+
+##### Definition
+
+```sql
+SELECT "range",
+       group_concat(name_suffix, ":"),
+       span,
+       path
+FROM -- Only a subquery permits to sort the arguments before grouping them together.
+  (SELECT range.rowid AS rowid,
+          CASE arg.name_suffix
+              WHEN "" THEN "_"
+              ELSE arg.name_suffix
+          END AS name_suffix,
+          range.span AS span,
+          range.path AS path
+   FROM t range
+   JOIN t arg ON (arg.path GLOB range.path || "?*")
+   WHERE range.name = "function_call:range"
+     AND arg.name_prefix = "call_argument"
+     AND length(range.path) + 4 = length(arg.path) -- Ensure that arg is a (direct) argument of range().
+   ORDER BY arg.path)-- Thanks to the subquery, this clause...
+GROUP BY rowid -- will be executed before this one.
+```
+
+##### Example
+
+```python
+1   range(stop1)
+2   range(start2, stop2)
+3   range(start3, stop3, step3)
+4   range(start4, stop4, -1)
+5   range(foo(bar), fizz(buzz)) # bar and buzz are not direct arguments of range()
+6   range(0, 2 * n, 100)
+7   range(len(seq))
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `range:stop1` | 1 |
+| `range:start2:stop2` | 2 |
+| `range:start3:stop3:step3` | 3 |
+| `range:start4:stop4:-1` | 4 |
+| `range:_:_` | 5 |
+| `range:0:_:100` | 6 |
+| `range:_` | 7 |
 
 --------------------------------------------------------------------------------
 
@@ -1227,10 +1296,11 @@ Check whether an assignment target follows the Python conventions for constants.
 
 ```sql
 SELECT "constant_assignment",
-       t.name_suffix,
-       t.span
+       name_suffix,
+       span,
+       path
 FROM t
-WHERE t.name REGEXP "assignment_lhs_identifier:[[:upper:]0-9_]+$"
+WHERE name REGEXP "assignment_lhs_identifier:[[:upper:]0-9_]+$"
 ```
 
 **Remark.** Note the user-defined function `REGEXP` in the `WHERE`clause. It calls the function `match()` of the third-party [`regex`](https://pypi.org/project/regex/) library.
@@ -1551,7 +1621,8 @@ Match `yield` and `yieldfrom` _[expressions](https://docs.python.org/3/reference
 ```sql
 SELECT "generator",
        f.name_suffix,
-       max(f.span_start) || "-" || min(f.span_end)
+       max(f.span_start) || "-" || min(f.span_end),
+       max(f.path)
 FROM t f
 JOIN t y ON (y.path GLOB f.path || "?*")
 WHERE f.name_prefix = "function"
@@ -1595,7 +1666,8 @@ A function returning at least one value distinct from `None` is the smallest `fu
 ```sql
 SELECT "function_returning_something",
        f.name_suffix,
-       max(f.span_start) || "-" || min(f.span_end)
+       max(f.span_start) || "-" || min(f.span_end),
+       max(f.path)
 FROM t f
 JOIN t r ON (r.path GLOB f.path || "?*")
 WHERE f.name_prefix = "function"
@@ -1659,7 +1731,8 @@ A function returning nothing (aka procedure) is a function which is neither a ge
 ```sql
 SELECT "function_returning_nothing",
        name_suffix,
-       span
+       span,
+       path
 FROM t
 WHERE name_prefix = "function"
   AND span NOT IN
@@ -1748,7 +1821,8 @@ WHERE name_prefix = "function"
 ```sql
 SELECT "recursive_function",
        f.name_suffix,
-       f.span
+       f.span,
+       f.path
 FROM t f
 JOIN t c ON (c.path GLOB f.path || "?*")
 WHERE f.name_prefix = "function"
@@ -1786,7 +1860,8 @@ Any function `f` which contains a nested call to itself (`f(..., f(...), ...)`),
 ```sql
 SELECT "deeply_recursive_function",
        f.name_suffix,
-       f.span
+       f.span,
+       f.path
 FROM t f
 JOIN t c1 ON (c1.path GLOB f.path || "?*")
 JOIN t c2 ON (c2.path GLOB c1.path || "?*")
@@ -1935,7 +2010,8 @@ Function enclosing the definition of an inner function and returning it. Beware 
 ```sql
 SELECT "closure",
        f.name_suffix,
-       max(f.span_start) || "-" || min(f.span_end)
+       max(f.span_start) || "-" || min(f.span_end),
+       max(f.path)
 FROM t f
 JOIN t c ON (c.path GLOB f.path || "?*")
 JOIN t r ON (r.path GLOB f.path || "?*")
@@ -2247,7 +2323,8 @@ Match an `if` clause nested in _n_ other `if` clauses, suffixing it by _n_.
 ```sql
 SELECT "nested_if",
        count(*),
-       inner_if.span
+       inner_if.span,
+       inner_if.path
 FROM t outer_branch
 JOIN t inner_if ON (outer_branch.span_start <= inner_if.span_start
                     AND inner_if.span_end <= outer_branch.span_end)
@@ -2306,6 +2383,7 @@ Match sequential loops, along with their iteration variable(s).
 
 - Derived into:
   1. [construct `accumulate_elements`](#construct-accumulate_elements)
+  1. [construct `for_range`](#construct-for_range)
   1. [construct `nested_for`](#construct-nested_for)
 
 ##### Definition
@@ -2370,53 +2448,27 @@ Iterate over the elements of a (named) collection.
 
 --------------------------------------------------------------------------------
 
-#### Construct `for_range_stop`
+#### Construct `for_range`
 
-Iterate over a range with exactly 1 argument (stop).
+Iterate over a range object.
 
-##### Definition
+##### Dependencies
 
-```re
-           ^(.*)/_type='For'
-\n(?:\1.+\n)*?\1/iter/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/iter/func/id='range'
-\n(?:\1.+\n)*?\1/iter/args/length=1
-\n(?:\1.+\n)* \1/.*/_pos=(?P<POS>.+)
-```
-
-##### Example
-
-```python
-1   for i in range(stop):
-2       pass
-3   for i in range(start, stop): # no match
-4       pass
-5   for i in range(start, stop, step): # no match
-6       pass
-7   for i in range(start, stop, -1): # no match
-8       pass
-```
-
-##### Matches
-
-| Label | Lines |
-|:--|:--|
-| `for_range_stop` | 1-2 |
-
---------------------------------------------------------------------------------
-
-#### Construct `for_range_start`
-
-Iterate over a range with exactly 2 arguments (start, stop).
+- Derived from:
+  1. [construct `for`](#construct-for)
+  1. [construct `range`](#construct-range)
 
 ##### Definition
 
-```re
-           ^(.*)/_type='For'
-\n(?:\1.+\n)*?\1/iter/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/iter/func/id='range'
-\n(?:\1.+\n)*?\1/iter/args/length=2
-\n(?:\1.+\n)* \1/.*/_pos=(?P<POS>.+)
+```sql
+SELECT "for_range",
+       range_expr.name_suffix,
+       for_stmt.span,
+       for_stmt.path
+FROM t for_stmt
+JOIN t range_expr ON (range_expr.path GLOB for_stmt.path || "?*")
+WHERE for_stmt.name_prefix = "for"
+  AND range_expr.name_prefix = "range"
 ```
 
 ##### Example
@@ -2430,56 +2482,19 @@ Iterate over a range with exactly 2 arguments (start, stop).
 6       pass
 7   for i in range(start, stop, -1):
 8       pass
+9   for i in range(len(seq)):
+10       pass
 ```
 
 ##### Matches
 
 | Label | Lines |
 |:--|:--|
-| `for_range_start` | 3-4 |
-
---------------------------------------------------------------------------------
-
-#### Construct `for_range_step`
-
-Iterate over a range with 3 arguments (start, stop, step).
-
-##### Definition
-
-```re
-           ^(.*)/_type='For'
-\n(?:\1.+\n)*?\1/iter/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/iter/func/id='range'
-\n(?:\1.+\n)*?\1/iter/args/length=3
-(   # If the step is a number, capture it as a suffix
-\n(?:\1.+\n)*?\1/iter/args/2/_type='Num'
-\n(?:\1.+\n)*?\1/iter/args/2/n=(?<SUFFIX>.+)
-)?
-\n(?:\1.+\n)* \1/.*/_pos=(?P<POS>.+)
-```
-
-##### Example
-
-```python
-1   for i in range(stop):
-2       pass
-3   for i in range(start, stop):
-4       pass
-5   for i in range(start, stop, step):
-6       pass
-7   for i in range(start, stop, -1):
-8       pass
-9   for i in range(start, stop, 2):
-10      pass
-```
-
-##### Matches
-
-| Label | Lines |
-|:--|:--|
-| `for_range_step` | 5-6 |
-| `for_range_step:-1` | 7-8 |
-| `for_range_step:2` | 9-10 |
+| `for_range:stop` | 1-2 |
+| `for_range:start:stop` | 3-4 |
+| `for_range:start:stop:step` | 5-6 |
+| `for_range:start:stop:-1` | 7-8 |
+| `for_range:_` | 9-10 |
 
 --------------------------------------------------------------------------------
 
@@ -2557,7 +2572,8 @@ Match a `for` statement nested in _n_ other `for` statements, suffixing it by _n
 ```sql
 SELECT "nested_for",
        count(*),
-       inner_loop.span
+       inner_loop.span,
+       inner_loop.path
 FROM t outer_loop
 JOIN t inner_loop ON (inner_loop.path GLOB outer_loop.path || "?*")
 WHERE outer_loop.name_prefix = "for"
@@ -2871,7 +2887,8 @@ Two nested `for` loops doing the same number of iterations.
 ```sql
 SELECT "try_" || e.name_prefix,
        e.name_suffix,
-       max(t.span_start) || "-" || min(t.span_end)
+       max(t.span_start) || "-" || min(t.span_end),
+       max(t.path)
 FROM t t
 JOIN t e ON (e.path GLOB t.path || "?*")
 WHERE t.name_prefix = "try"
@@ -3015,7 +3032,8 @@ SELECT "import",
                              WHEN n.name_suffix IS NULL THEN ""
                              ELSE ":" || n.name_suffix
                          END),
-       m.span
+       m.span,
+       m.path
 FROM t m
 LEFT JOIN t n ON (m.span = n.span
                   AND n.name_prefix = "import_name")
@@ -3077,7 +3095,8 @@ An accumulator is iteratively updated from its previous value and those of the i
 ```sql
 SELECT "accumulate_elements",
        count(DISTINCT acc_left.name_suffix),
-       for_loop.span
+       for_loop.span,
+       for_loop.path
 FROM t for_loop
 JOIN t iter_var ON (iter_var.path GLOB for_loop.path || "?*")-- Ensure iter_var is nested in the loop...
 JOIN t acc_left ON (iter_var.span = acc_left.span)-- and has same span as both acc_left...

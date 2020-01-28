@@ -7,38 +7,58 @@
 - assignment_rhs_identifier:b / assignment.py / 1
 - assignment_rhs_identifier:n / collatz_print.py / 5, 7
 - binary_operator:Add / collatz_print.py / 7
-- binary_operator:Add / function_definition.py / 2, 2
 - binary_operator:FloorDiv / collatz_print.py / 5
 - binary_operator:Mod / collatz_print.py / 4
+- binary_operator:Mod / fizzbuzz.py / 2, 4, 6
+- binary_operator:Mod / is_even.py / 2
 - binary_operator:Mult / collatz_print.py / 7
-- call_argument: / loop.py / 2
+- call_argument: / fizzbuzz.py / 3, 5, 7
+- call_argument:1 / fizzbuzz.py / 1
+- call_argument:101 / fizzbuzz.py / 1
+- call_argument:i / fizzbuzz.py / 9
 - call_argument:n / collatz_print.py / 3, 8
 - comparison_operator:Eq / collatz_print.py / 4
+- comparison_operator:Eq / fizzbuzz.py / 2, 4, 6
+- comparison_operator:Eq / is_even.py / 2
 - comparison_operator:NotEq / collatz_print.py / 2
+- divisibility_test:15 / fizzbuzz.py / 2
 - divisibility_test:2 / collatz_print.py / 4
+- divisibility_test:2 / is_even.py / 2
+- divisibility_test:3 / fizzbuzz.py / 4
+- divisibility_test:5 / fizzbuzz.py / 6
 - evolve_state / collatz_print.py / 2-7
+- for:i / fizzbuzz.py / 1-9
+- for_range:1:101 / fizzbuzz.py / 1-9
+- function:is_even / is_even.py / 1-2
 - function:print_collatz / collatz_print.py / 1-8
-- function:succ / function_definition.py / 1-2
-- function_call:input / loop.py / 1
 - function_call:print / collatz_print.py / 3, 8
-- function_call:print / loop.py / 2
+- function_call:print / fizzbuzz.py / 3, 5, 7, 9
+- function_call:range / fizzbuzz.py / 1
 - function_returning_nothing:print_collatz / collatz_print.py / 1-8
-- function_returning_something:succ / function_definition.py / 1-2
+- function_returning_something:is_even / is_even.py / 1-2
 - if / collatz_print.py / 4-7
+- if / fizzbuzz.py / 2-9, 4-9, 6-9
+- if_elif_branch / fizzbuzz.py / 5, 7
 - if_else_branch / collatz_print.py / 7
+- if_else_branch / fizzbuzz.py / 9
+- if_test_id:i / fizzbuzz.py / 2, 4, 6
 - if_test_id:n / collatz_print.py / 4
 - if_then_branch / collatz_print.py / 5
+- if_then_branch / fizzbuzz.py / 3
 - int_literal / collatz_print.py / 2, 4, 4, 5, 7, 7
-- int_literal / function_definition.py / 2
+- int_literal / fizzbuzz.py / 1, 1, 2, 2, 4, 4, 6, 6
+- int_literal / is_even.py / 2, 2
 - literal:Num / collatz_print.py / 2, 4, 4, 5, 7, 7
-- literal:Num / function_definition.py / 2
-- literal:Str / loop.py / 2
-- return / function_definition.py / 2
+- literal:Num / fizzbuzz.py / 1, 1, 2, 2, 4, 4, 6, 6
+- literal:Num / is_even.py / 2, 2
+- literal:Str / fizzbuzz.py / 3, 5, 7
+- range:1:101 / fizzbuzz.py / 1
+- return / is_even.py / 2
 - suggest_augmented_assignment / collatz_print.py / 5
 - suggest_conditional_expression / collatz_print.py / 4-7
 - suggest_constant_definition / collatz_print.py / 7
+- suggest_constant_definition / fizzbuzz.py / 2, 4, 6
 - while / collatz_print.py / 2-7
-- while / loop.py / 1-2
 
 # Absent labels
 
@@ -75,16 +95,13 @@
 - for_each
 - for_indexes
 - for_indexes_elements
-- for_range_start
-- for_range_step
-- for_range_stop
+- for_range
 - function
 - function_call
 - function_returning_nothing
 - function_returning_something
 - function_with_default_positional_arguments
 - generator
-- if_elif_branch
 - if_test_id
 - imaginary_literal
 - import
@@ -103,6 +120,7 @@
 - nested_function
 - nested_if
 - raise
+- range
 - recursive_function
 - slice
 - slice_step

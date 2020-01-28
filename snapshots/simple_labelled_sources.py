@@ -48,20 +48,65 @@ def print_collatz(n): # added_block_label (-> +7)
              # function_call:print
 
 # ----------------------------------------------------------------------------------------
-# tests/data/simple/function_definition.py
+# tests/data/simple/fizzbuzz.py
 # ----------------------------------------------------------------------------------------
-def succ(n): # function:succ (-> +1)
-             # function_returning_something:succ (-> +1)
-    return a + b + 1 # binary_operator:Add
+for i in range(1, 101): # call_argument:1
+                        # call_argument:101
+                        # for:i (-> +8)
+                        # for_range:1:101 (-> +8)
+                        # function_call:range
+                        # int_literal
+                        # literal:Num
+                        # range:1:101
+    if i % 15 == 0: # binary_operator:Mod
+                    # comparison_operator:Eq
+                    # divisibility_test:15
+                    # if (-> +7)
+                    # if_test_id:i
+                    # int_literal
+                    # literal:Num
+                    # suggest_constant_definition
+        print("FizzBuzz") # call_argument:
+                          # function_call:print
+                          # if_then_branch
+                          # literal:Str
+    elif i % 3 == 0: # binary_operator:Mod
+                     # comparison_operator:Eq
+                     # divisibility_test:3
+                     # if (-> +5)
+                     # if_test_id:i
                      # int_literal
                      # literal:Num
-                     # return
+                     # suggest_constant_definition
+        print("Fizz") # call_argument:
+                      # function_call:print
+                      # if_elif_branch
+                      # literal:Str
+    elif i % 5 == 0: # binary_operator:Mod
+                     # comparison_operator:Eq
+                     # divisibility_test:5
+                     # if (-> +3)
+                     # if_test_id:i
+                     # int_literal
+                     # literal:Num
+                     # suggest_constant_definition
+        print("Buzz") # call_argument:
+                      # function_call:print
+                      # if_elif_branch
+                      # literal:Str
+    else: # 
+        print(i) # call_argument:i
+                 # function_call:print
+                 # if_else_branch
 
 # ----------------------------------------------------------------------------------------
-# tests/data/simple/loop.py
+# tests/data/simple/is_even.py
 # ----------------------------------------------------------------------------------------
-while input(): # function_call:input
-               # while (-> +1)
-    print("foobar") # call_argument:
-                    # function_call:print
-                    # literal:Str
+def is_even(n): # function:is_even (-> +1)
+                # function_returning_something:is_even (-> +1)
+    return n % 2 == 0 # binary_operator:Mod
+                      # comparison_operator:Eq
+                      # divisibility_test:2
+                      # int_literal
+                      # literal:Num
+                      # return

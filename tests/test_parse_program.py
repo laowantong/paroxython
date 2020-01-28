@@ -61,6 +61,7 @@ def reformat_sql(match):
     )
     s = s.replace("\n\n", "\n")
     s = regex.sub(r"\b(regexp|glob|inside)\b", lambda m: m.group().upper(), s)
+    s = regex.sub(r"\b(PATH)\b", lambda m: m.group().lower(), s)
     return f"```sql\n{s}\n```"
 
 

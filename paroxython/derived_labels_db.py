@@ -17,7 +17,6 @@ class DB:
         "span TEXT",
         "span_start INTEGER",
         "span_end INTEGER",
-        "indent INTEGER",
         "path TEXT",
     )
     creation_query = f"CREATE TABLE t ({','.join(columns)})"
@@ -33,35 +32,30 @@ class DB:
 
     def read(self, query: Query) -> Labels:
         groups: LabelsSpans = defaultdict(list)
-        for (name_prefix, name_suffix, span) in self.c.execute(query):
+        for (name_prefix, name_suffix, span_string, path) in self.c.execute(query):
             label_name = f"{name_prefix}:{name_suffix}" if name_suffix != "" else name_prefix
-            groups[label_name].append(Span(span.split("-")))
+            span = span_string.split("-")
+            span[0] = f"{span[0]}:{path}"
+            groups[label_name].append(Span(span))
         return [Label(*item) for item in groups.items()]
 
     def update(self, labels: Labels) -> None:
         values = []
         for (name, spans) in labels:
             for span in spans:
-                (name_prefix, _, name_suffix) = name.partition(":")
-                values.append(
-                    (
-                        name,
-                        name_prefix,
-                        name_suffix,
-                        str(span),
-                        span.start,
-                        span.end,
-                        span.indent,
-                        span.path,
-                    )
-                )
+                (prefix, _, suffix) = name.partition(":")
+                values.append((name, prefix, suffix, str(span), span.start, span.end, span.path))
         self.c.executemany(DB.update_query, values)
 
     def delete(self) -> None:
         self.c.execute(f"DROP TABLE t")
 
     def __str__(self) -> str:  # pragma: no cover
-        result = ["rowid\tname\tname_prefix\tname_suffix\tspan\tspan_start\tspan_end\tindent\tpath"]
-        for row in self.c.execute("SELECT * FROM t"):
-            result.append("\t".join(map(str, row)))
+        rows = ["name name_prefix name_suffix span span_start span_end path".split()]
+        rows.extend(sorted(list(map(str, row)) for row in self.c.execute("SELECT * FROM t")))
+        widths = list(map(len, [max(column, key=len) for column in zip(*rows)]))
+        result = [""]
+        for row in rows:
+            result.append(" | ".join(s + " " * (w - len(s)) for (w, s) in zip(widths, row)))
+        result[1:1] = ["-+-".join("-" * w for w in widths)]
         return "\n".join(result)
