@@ -100,6 +100,7 @@
 - function_call
 - function_returning_nothing
 - function_returning_something
+- function_tail_call
 - function_with_default_positional_arguments
 - generator
 - if_test_id
@@ -128,6 +129,7 @@
 - suggest_comparison_chaining
 - suggest_condition_return
 - swapping
+- tail_recursive_function
 - triangular_nested_for
 - try
 - try_raise|try_except

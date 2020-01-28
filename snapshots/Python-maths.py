@@ -260,12 +260,12 @@ def sum_of_divisors(n: int) -> int: # function:sum_of_divisors (-> +15), functio
             n = int(n / i) # assignment, assignment_lhs_identifier:n, assignment_rhs_identifier:i, assignment_rhs_identifier:int, assignment_rhs_identifier:n, binary_operator:Div, call_argument:, function_call:int
         if temp > 1: # comparison_operator:Gt, if (-> +1), if_test_id:temp, int_literal, literal:Num
             s *= (i ** temp - 1) / (i - 1) # assignment_lhs_identifier:s, assignment_rhs_identifier:i, assignment_rhs_identifier:temp, augmented_assignment, binary_operator:Div, binary_operator:Pow, binary_operator:Sub, if_then_branch, int_literal, literal:Num
-    return int(s) # call_argument:s, function_call:int, return
+    return int(s) # call_argument:s, function_call:int, function_tail_call:int, return
 def euler_phi(n: int) -> int: # function:euler_phi (-> +4), function_returning_something:euler_phi (-> +4)
     s = n # assignment, assignment_lhs_identifier:s, assignment_rhs_identifier:n
     for x in set(prime_factors(n)): # accumulate_elements:1 (-> +1), call_argument:, call_argument:n, composition, for:x (-> +1), function_call:prime_factors, function_call:set
         s *= (x - 1) / x # assignment_lhs_identifier:s, assignment_rhs_identifier:x, augmented_assignment, binary_operator:Div, binary_operator:Sub, int_literal, literal:Num
-    return int(s) # call_argument:s, function_call:int, return
+    return int(s) # call_argument:s, function_call:int, function_tail_call:int, return
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/binary_exponentiation.py
@@ -440,7 +440,7 @@ def timer_decorator(func): # closure:timer_decorator (-> +10), function:timer_de
             print(f"Run time for {func.__name__}: {(end - start):0.2f}s") # binary_operator:Sub, call_argument:, function_call:print, if_then_branch, literal:Str
         else:
             print(f"Run time for {func.__name__}: {(end - start)*1000:0.2f}ms") # binary_operator:Mult, binary_operator:Sub, call_argument:, function_call:print, if_else_branch, int_literal, literal:Num, literal:Str, suggest_constant_definition
-        return func(*args, **kwargs) # call_argument:, function_call:func, return
+        return func(*args, **kwargs) # call_argument:, function_call:func, function_tail_call:func, return
     return timer_wrapper # return:timer_wrapper
 class Error(Exception):
     pass
@@ -524,7 +524,7 @@ def main(): # function:main (-> +1), function_returning_nothing:main (-> +1)
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/find_max_recursion.py
 # ----------------------------------------------------------------------------------------
-def find_max(nums, left, right): # function:find_max (-> +6), function_returning_something:find_max (-> +6), recursive_function:find_max (-> +6)
+def find_max(nums, left, right): # body_recursive_function:find_max (-> +6), function:find_max (-> +6), function_returning_something:find_max (-> +6), recursive_function:find_max (-> +6)
     if left == right: # comparison_operator:Eq, if (-> +1), if_test_id:left, if_test_id:right
         return nums[left] # if_then_branch, index, return
     mid = (left + right) >> 1 # assignment, assignment_lhs_identifier:mid, assignment_rhs_identifier:left, assignment_rhs_identifier:right, binary_operator:Add, binary_operator:RShift, int_literal, literal:Num
@@ -547,7 +547,7 @@ def main(): # function:main (-> +1), function_returning_nothing:main (-> +1)
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/find_min_recursion.py
 # ----------------------------------------------------------------------------------------
-def find_min(nums, left, right): # function:find_min (-> +6), function_returning_something:find_min (-> +6), recursive_function:find_min (-> +6)
+def find_min(nums, left, right): # body_recursive_function:find_min (-> +6), function:find_min (-> +6), function_returning_something:find_min (-> +6), recursive_function:find_min (-> +6)
     if left == right: # comparison_operator:Eq, if (-> +1), if_test_id:left, if_test_id:right
         return nums[left] # if_then_branch, index, return
     mid = (left + right) >> 1 # assignment, assignment_lhs_identifier:mid, assignment_rhs_identifier:left, assignment_rhs_identifier:right, binary_operator:Add, binary_operator:RShift, int_literal, literal:Num
@@ -573,8 +573,8 @@ def gaussian(x, mu: float = 0.0, sigma: float = 1.0) -> int: # float_literal, fu
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/greatest_common_divisor.py
 # ----------------------------------------------------------------------------------------
-def greatest_common_divisor(a, b): # function:greatest_common_divisor (-> +1), function_returning_something:greatest_common_divisor (-> +1), recursive_function:greatest_common_divisor (-> +1)
-    return b if a == 0 else greatest_common_divisor(b % a, a) # binary_operator:Mod, call_argument:, call_argument:a, comparison_operator:Eq, conditional_expression, function_call:greatest_common_divisor, int_literal, literal:Num, return
+def greatest_common_divisor(a, b): # function:greatest_common_divisor (-> +1), function_returning_something:greatest_common_divisor (-> +1), recursive_function:greatest_common_divisor (-> +1), tail_recursive_function:greatest_common_divisor (-> +1)
+    return b if a == 0 else greatest_common_divisor(b % a, a) # binary_operator:Mod, call_argument:, call_argument:a, comparison_operator:Eq, conditional_expression, function_call:greatest_common_divisor, function_tail_call:greatest_common_divisor, int_literal, literal:Num, return
 def gcd_by_iterative(x, y): # function:gcd_by_iterative (-> +3), function_returning_something:gcd_by_iterative (-> +3)
     while y: # while (-> +1)
         x, y = y, x % y # assignment, assignment_lhs_identifier:x, assignment_lhs_identifier:y, assignment_rhs_identifier:x, assignment_rhs_identifier:y, binary_operator:Mod
@@ -862,7 +862,7 @@ def perfect_square(num: int) -> bool: # function:perfect_square (-> +1), functio
 # ----------------------------------------------------------------------------------------
 from typing import Sequence # import:typing:Sequence, import_module:typing, import_name:Sequence
 def evaluate_poly(poly: Sequence[float], x: float) -> float: # function:evaluate_poly (-> +1), function_returning_something:evaluate_poly (-> +1), index
-    return sum(c * (x ** i) for i, c in enumerate(poly)) # binary_operator:Mult, binary_operator:Pow, call_argument:, call_argument:poly, composition, comprehension:Generator, comprehension_for_count:1, function_call:enumerate, function_call:sum, return
+    return sum(c * (x ** i) for i, c in enumerate(poly)) # binary_operator:Mult, binary_operator:Pow, call_argument:, call_argument:poly, composition, comprehension:Generator, comprehension_for_count:1, function_call:enumerate, function_call:sum, function_tail_call:sum, return
 def horner(poly: Sequence[float], x: float) -> float: # function:horner (-> +4), function_returning_something:horner (-> +4), index
     result = 0.0 # assignment, assignment_lhs_identifier:result, float_literal, literal:Num, suggest_constant_definition
     for coeff in reversed(poly): # accumulate_elements:1 (-> +1), call_argument:poly, for:coeff (-> +1), function_call:reversed
@@ -1273,15 +1273,15 @@ def main(): # function:main (-> +6), function_returning_nothing:main (-> +6)
 # ----------------------------------------------------------------------------------------
 from math import pi # import:math:pi, import_module:math, import_name:pi
 def vol_cube(side_length): # function:vol_cube (-> +1), function_returning_something:vol_cube (-> +1)
-    return float(side_length ** 3) # binary_operator:Pow, call_argument:, function_call:float, int_literal, literal:Num, return, suggest_constant_definition
+    return float(side_length ** 3) # binary_operator:Pow, call_argument:, function_call:float, function_tail_call:float, int_literal, literal:Num, return, suggest_constant_definition
 def vol_cuboid(width, height, length): # function:vol_cuboid (-> +1), function_returning_something:vol_cuboid (-> +1)
-    return float(width * height * length) # binary_operator:Mult, call_argument:, function_call:float, return
+    return float(width * height * length) # binary_operator:Mult, call_argument:, function_call:float, function_tail_call:float, return
 def vol_cone(area_of_base, height): # function:vol_cone (-> +1), function_returning_something:vol_cone (-> +1)
     return (float(1) / 3) * area_of_base * height # binary_operator:Div, binary_operator:Mult, call_argument:1, function_call:float, int_literal, literal:Num, return, suggest_constant_definition
 def vol_right_circ_cone(radius, height): # function:vol_right_circ_cone (-> +1), function_returning_something:vol_right_circ_cone (-> +1)
     return (float(1) / 3) * pi * (radius ** 2) * height # binary_operator:Div, binary_operator:Mult, binary_operator:Pow, call_argument:1, function_call:float, int_literal, literal:Num, return, suggest_constant_definition
 def vol_prism(area_of_base, height): # function:vol_prism (-> +1), function_returning_something:vol_prism (-> +1)
-    return float(area_of_base * height) # binary_operator:Mult, call_argument:, function_call:float, return
+    return float(area_of_base * height) # binary_operator:Mult, call_argument:, function_call:float, function_tail_call:float, return
 def vol_pyramid(area_of_base, height): # function:vol_pyramid (-> +1), function_returning_something:vol_pyramid (-> +1)
     return (float(1) / 3) * area_of_base * height # binary_operator:Div, binary_operator:Mult, call_argument:1, function_call:float, int_literal, literal:Num, return, suggest_constant_definition
 def vol_sphere(radius): # function:vol_sphere (-> +1), function_returning_something:vol_sphere (-> +1)

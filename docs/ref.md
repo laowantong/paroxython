@@ -56,7 +56,9 @@
       - [Construct `function_with_default_positional_arguments`](#construct-function_with_default_positional_arguments)
       - [Construct `recursive_function`](#construct-recursive_function)
       - [Construct `deeply_recursive_function`](#construct-deeply_recursive_function)
+      - [Construct `function_tail_call`](#construct-function_tail_call)
       - [Construct `body_recursive_function`](#construct-body_recursive_function)
+      - [Construct `tail_recursive_function`](#construct-tail_recursive_function)
       - [Construct `nested_function`](#construct-nested_function)
       - [Construct `closure`](#construct-closure)
   - [Conditionals](#conditionals)
@@ -711,6 +713,7 @@ When the value of the left operand suffices to determine the value of a boolean 
 
 ##### Derivations
 
+[🔽 construct `body_recursive_function`](#construct-body_recursive_function)  
 [🔽 construct `deeply_recursive_function`](#construct-deeply_recursive_function)  
 [🔽 construct `range`](#construct-range)  
 [🔽 construct `recursive_function`](#construct-recursive_function)  
@@ -1802,6 +1805,8 @@ WHERE name_prefix = "function"
 
 [🔼 construct `function`](#construct-function)  
 [🔼 construct `function_call`](#construct-function_call)  
+[🔽 construct `body_recursive_function`](#construct-body_recursive_function)  
+[🔽 construct `tail_recursive_function`](#construct-tail_recursive_function)  
 
 ##### Definition
 
@@ -1813,7 +1818,7 @@ SELECT "recursive_function",
 FROM t f
 JOIN t c ON (c.path GLOB f.path || "?*")
 WHERE f.name_prefix = "function"
-  AND c.name = "function_call" || ":" || f.name_suffix
+  AND c.name = "function_call:" || f.name_suffix
 ```
 
 ##### Example
@@ -1852,8 +1857,8 @@ FROM t f
 JOIN t c1 ON (c1.path GLOB f.path || "?*")
 JOIN t c2 ON (c2.path GLOB c1.path || "?*")
 WHERE f.name_prefix = "function"
-  AND c1.name = "function_call" || ":" || f.name_suffix
-  AND c2.name = "function_call" || ":" || f.name_suffix
+  AND c1.name = "function_call:" || f.name_suffix
+  AND c2.name = "function_call:" || f.name_suffix
 ```
 
 ##### Example
@@ -1872,70 +1877,69 @@ WHERE f.name_prefix = "function"
 
 --------------------------------------------------------------------------------
 
-#### Construct `body_recursive_function`
+#### Construct `function_tail_call`
 
-A tail call is a subroutine call performed as the last action of a procedure. A body-recursive function includes at least one non-tail recursive call.
+##### Derivations
+
+[🔽 construct `body_recursive_function`](#construct-body_recursive_function)  
 
 ##### Definition
 
 ```re
-           ^(.*)/_type='FunctionDef'
-\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/name='(?P<SUFFIX>.+)' # capture the name of the function
-(   # recursive call as an argument, an element, an operand, etc.
-\n(?:\1.+\n)* \1/(?P<_1>.+/(args|elts|keys|left|right)\b.*)/_type='Call'
-\n(?:\1.+\n)*?\1/(?P=_1)                                   /_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/(?P=_1)                                   /func/id='(?P=SUFFIX)'
-|   # recursive call followed by a statement
-\n(?:\1.+\n)* \1/(?P<_1>.+?(body|orelse))/(?P<_2>\d+)/(?P<_3>.*)/_type='Call'
-\n(?:\1.+\n)* \1/(?P=_1)                 /(?P=_2)    /(?P=_3)   /func/id='(?P=SUFFIX)'
-\n(?:\1.+\n)*?\1/(?P=_1)                 /(?!(?P=_2)).+
+           ^(.*)/_type='Return'
+\n(?:\1.+\n)*?\1/value/( 
+                       _type='Call'
+\n(?:\1.+\n)*?\1/value/_pos=(?P<POS>.+)
+\n(?:\1.+\n)*?\1/value/func/_type='Name'
+\n(?:\1.+\n)*?\1/value/func/id='(?P<SUFFIX>.+)'
+                       |
+                       _type='BoolOp'
+\n(?:\1.+\n)*?\1/value/values/length=(?P<LENGTH>\d+)
+\n(?:\1.+\n)*?\1/value/values/(?P=LENGTH)/_type='Call'
+\n(?:\1.+\n)*?\1/value/values/(?P=LENGTH)/_pos=(?P<POS>.+)
+\n(?:\1.+\n)*?\1/value/values/(?P=LENGTH)/func/id='(?P<SUFFIX>.+)'
+                       |
+                       _type='IfExp'
+(
+\n(?:\1.+\n)*?\1/value/(?P<_1>body|orelse)/_type='Call'
+\n(?:\1.+\n)*?\1/value/(?P=_1)            /_pos=(?P<POS>.+)
+\n(?:\1.+\n)*?\1/value/(?P=_1)            /func/_type='Name'
+\n(?:\1.+\n)*?\1/value/(?P=_1)            /func/id='(?P<SUFFIX>.+)'
+)+  # can match both branches
 )
-(   # capture the line number of the last line of the function (it may appear before Call)
-\n(?:\1.+\n)* \1/.+/_pos=(?P<POS>.+)
-)?
 ```
 
 ##### Example
 
 ```python
-1   def ack(m, n):
-2       if m == 0:
-3           return n + 1
-4       elif n == 0:
-5           return ack(m-1, 1)  # tail call
-6       else:
-7           return ack(m-1, ack(m, n-1))  # body call
-8
-9   def divisor_count(n):
-10      def recurs(candidates):
-11          if len(candidates) == 0:
-12              return 0
-13          if n % candidates[0] == 0:
-14              return 1 + recurs(candidates[1:]) # body call
-15          return recurs(candidates[1:]) # tail call
-16      return recurs(range(1, n+1))
-17
-18  def place(x = 1, y = 1, queens = []):
-19      if x > SIZE:
-20          print(queens)
-21      else:
-22          if possible(x, y, queens):
-23              place(x + 1, 1, queens + [(x, y)]) # body call
-24          if y < SIZE:
-25              place(x, y + 1, queens) # tail call
-26
-27  def body_sequence():
-28      return (1, body_sequence())
-29
-30  def body_dict():
-31      return {1: body_dict()} # body call: TODO
-32
-33  def short_circuit_1():
-34      return c and short_circuit_1() # tail call
-32
-33  def short_circuit_2():
-34      return short_circuit_2() and c # body call: TODO
+1   def foobar():
+2       return foo(m-1, 1)                   # tail call
+3       return foo(m-1, bar(m, n-1))         # tail call / no match
+4       return c1 and c2 and foo(m)          # tail call
+5       return c and foo(m)                  # tail call
+6       return (42 if c else foo(m + 1))     # tail call
+7       return (foo(m) if c else 42)         # tail call
+8       return (foo(m) if c else foo(m + 1)) # tail call / tail_call
+9       return bar(m) and c  # no match
+10      return bar(m) + 1    # no match
+11      return 1 + bar(m)    # no match
+12      return bar(m)[-1]    # no match
+13      return (1, bar())    # no match
+14      return {1: bar()}    # no match
+15      return {bar(): 1}    # no match
+16  
+17  def useless_assignment():
+18      a = bar(n) 
+19      return a # LIMITATION: no match
+20  
+21  def procedure():
+22      if c1:
+23          if c2:
+24              bar(1) # LIMITATION: no match
+25          else:
+26              bar(2) # LIMITATION: no match
+27      else:
+28          bar(3) # LIMITATION: no match
 ```
 
 **Remark.** Since the short-circuit expression `c and foobar()` is equivalent to the conditional expression `if c then foobar() else False`, the function `foobar()` is actually tail recursive. This holds for `c or foobar()` too, which is equivalent to `if c then True else foobar()`.
@@ -1944,10 +1948,162 @@ A tail call is a subroutine call performed as the last action of a procedure. A 
 
 | Label | Lines |
 |:--|:--|
-| `body_recursive_function:ack` | 1-7 |
-| `body_recursive_function:recurs` | 10-15 |
-| `body_recursive_function:place` | 18-25 |
-| `body_recursive_function:body_sequence` | 27-28 |
+| `function_tail_call:foo` | 2, 3, 4, 5, 6, 7, 8, 8 |
+
+--------------------------------------------------------------------------------
+
+#### Construct `body_recursive_function`
+
+A function is body-recursive if and only if at least one of its recursive calls is not a tail call.
+
+**BUG.** Since the procedure tail calls are not recognized by `function_tail_call`, the tail recursive procedures are incorrectly labelled as body recursive.
+
+##### Derivations
+
+[🔼 construct `function_call`](#construct-function_call)  
+[🔼 construct `function_tail_call`](#construct-function_tail_call)  
+[🔼 construct `recursive_function`](#construct-recursive_function)  
+[🔽 construct `tail_recursive_function`](#construct-tail_recursive_function)  
+
+##### Definition
+
+```sql
+SELECT "body_recursive_function",
+       f.name_suffix,
+       f.span,
+       f.path
+FROM t f
+JOIN t any_call ON (any_call.path GLOB f.path || "?*")
+WHERE f.name_prefix = "recursive_function"
+  AND any_call.name = "function_call:" || f.name_suffix
+  AND NOT EXISTS
+    (SELECT 1
+     FROM t tail_call
+     WHERE tail_call.name_prefix = "function_tail_call"
+       AND tail_call.path = any_call.path )
+GROUP BY f.span
+```
+
+##### Example
+
+```python
+1   def gcd(a, b): # no match
+2       if b == 0:
+3           return a
+4       else:
+5           return gcd(b, a % b)
+6   
+7   def gcd(a, b): # no match
+8       return (gcd(b, a % b) if b else a)
+9   
+10  def ack(m, n): # body-recursive
+11      if m == 0:
+12          return n + 1
+13      elif n == 0:
+14          return ack(m-1, 1)
+15      else:
+16          return ack(m-1, ack(m, n-1))
+17  
+18  def divisor_count(n): # no match (not recursive)
+19      def recurs(candidates): # body_recursive
+20          if len(candidates) == 0:
+21              return 0
+22          if n % candidates[0] == 0:
+23              return 1 + recurs(candidates[1:])
+24          return recurs(candidates[1:])
+25      return recurs(range(1, n+1))
+26  
+27  def place(x = 1, y = 1, queens = []): # BUG: incorrectly labelled as body recursive
+28      if x > SIZE:
+29          print(queens)
+30      else:
+31          if possible(x, y, queens):
+32              place(x + 1, 1, queens + [(x, y)])
+33          if y < SIZE:
+34              place(x, y + 1, queens)
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `body_recursive_function:ack` | 10-16 |
+| `body_recursive_function:place` | 27-34 |
+| `body_recursive_function:recurs` | 19-24 |
+
+--------------------------------------------------------------------------------
+
+#### Construct `tail_recursive_function`
+
+A function is tail-recursive if and only if all its recursive calls are tail calls.
+
+**LIMITATION.** Currently, the tail recursive procedures (_i.e._, without `return`, e.g. the drawing of a fractal) are not recognized.
+
+##### Derivations
+
+[🔼 construct `body_recursive_function`](#construct-body_recursive_function)  
+[🔼 construct `recursive_function`](#construct-recursive_function)  
+
+##### Definition
+
+```sql
+SELECT "tail_recursive_function",
+       f.name_suffix,
+       f.span,
+       f.path
+FROM t f
+WHERE f.name_prefix = "recursive_function" -- A recursive function...
+  AND NOT EXISTS -- which is not ...
+    (SELECT 1
+     FROM t body_rec
+     WHERE body_rec.name_prefix = "body_recursive_function" -- body recursive.
+       AND body_rec.span = f.span)
+```
+
+##### Example
+
+```python
+1   def gcd(a, b):
+2       if b == 0:
+3           return a
+4       else:
+5           return gcd(b, a % b)
+6   
+7   def gcd(a, b):
+8       return (gcd(b, a % b) if b else a)
+9   
+10  def ack(m, n):
+11      if m == 0:
+12          return n + 1
+13      elif n == 0:
+14          return ack(m-1, 1)
+15      else:
+16          return ack(m-1, ack(m, n-1))
+17  
+18  def divisor_count(n):
+19      def recurs(candidates):
+20          if len(candidates) == 0:
+21              return 0
+22          if n % candidates[0] == 0:
+23              return 1 + recurs(candidates[1:])
+24          return recurs(candidates[1:])
+25      return recurs(range(1, n+1))
+26  
+27  def place(x = 1, y = 1, queens = []):
+28      if x > SIZE:
+29          print(queens)
+30      else:
+31          if possible(x, y, queens):
+32              place(x + 1, 1, queens + [(x, y)])
+33          if y < SIZE:
+34              place(x, y + 1, queens)
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `tail_recursive_function:gcd` | 1-5, 7-8 |
 
 --------------------------------------------------------------------------------
 
@@ -2002,7 +2158,7 @@ JOIN t c ON (c.path GLOB f.path || "?*")
 JOIN t r ON (r.path GLOB f.path || "?*")
 WHERE f.name_prefix = "function"
   AND c.name_prefix = "function"
-  AND r.name = "return" || ":" || c.name_suffix
+  AND r.name = "return:" || c.name_suffix
 GROUP BY c.rowid
 ```
 

@@ -70,9 +70,9 @@ def derivation_map(text):
     find_iter_derivations = regex.compile(
         r"""(?mx)
         name(_prefix)?\s(
-            (=|==|REGEXP)\s"(?P<REQUIRED_LABEL_NAME>.+?)(:.+)?"
+            (=|==|REGEXP)\s"(?P<REQUIRED_LABEL_NAME>.+?)(:.*)?"
             |
-            IN\s\(("(?P<REQUIRED_LABEL_NAME>.+?)(:.+)?"(.|\n)*?)+\)
+            IN\s\(("(?P<REQUIRED_LABEL_NAME>.+?)(:.*)?"(.|\n)*?)+\)
             )
     """
     ).finditer
