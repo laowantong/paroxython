@@ -5,10 +5,10 @@ from typing import Callable, Dict
 
 import regex  # type: ignore
 
-from user_types import Label, Labels, LabelName, LabelsSpans, Source, Program, Query
+from derived_labels_db import DB
 from flatten_ast import flatten_ast
 from span import Span
-from derived_labels_db import DB
+from user_types import Label, LabelName, Labels, LabelsSpans, Program, Query, Source
 
 
 def _simplify_negative_literals() -> Callable:
@@ -77,12 +77,16 @@ class ProgramParser:
             d = None
             for match in rex.finditer(self.flat_ast, overlapped=True):
                 d = match.capturesdict()
-                span = Span(d["POS"])
                 if d.get("SUFFIX"):  # there is a "SUFFIX" key and its value is not []
-                    for suffix in d["SUFFIX"]:
-                        try_to_bind(LabelName(f"{label_name}:{suffix}"), span)
+                    if len(d["POS"]) == len(d["SUFFIX"]):
+                        for (suffix, pos) in zip(d["SUFFIX"], d["POS"]):
+                            try_to_bind(LabelName(f"{label_name}:{suffix}"), Span([pos]))
+                    else:
+                        span = Span(d["POS"])
+                        for suffix in d["SUFFIX"]:
+                            try_to_bind(LabelName(f"{label_name}:{suffix}"), span)
                 else:
-                    try_to_bind(label_name, span)
+                    try_to_bind(label_name, Span(d["POS"]))
             if yield_failed_matches and not d:
                 labels.append(Label(label_name, []))
             else:
@@ -118,5 +122,7 @@ if __name__ == "__main__":
     for (name, spans) in parse(program, yield_failed_matches=False):
         spans_as_string = ", ".join(map(str, spans))
         acc.append(f"| `{name}` | {spans_as_string} |")
+        # paths_as_string = ", ".join(s.path for s in spans)
+        # acc.append(f"| `{name}` | {spans_as_string} | {paths_as_string} |")
     print("\n".join(acc))
     Path("sandbox/flat_ast.txt").write_text(parse.flat_ast)
