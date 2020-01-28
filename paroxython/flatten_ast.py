@@ -36,7 +36,7 @@ def flatten_ast(node: Any, prefix="", path="") -> str:
         return "".join(acc)
     elif isinstance(node, list):
         acc = [f"{prefix}/length={len(node)}\n"]
-        for (i, x) in enumerate(node):
+        for (i, x) in enumerate(node, 1):
             acc.append(flatten_ast(x, f"{prefix}/{i}", f"{path}{i}-"))
         return "".join(acc)
     else:

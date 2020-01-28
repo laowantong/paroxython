@@ -301,7 +301,7 @@ In the AST, an imaginary literal contains the same symbols as a floating point l
 
 ```python
 1   a[i + j]
-2   a[i]
+2   a[i] # no match
 ```
 
 ##### Matches
@@ -521,7 +521,7 @@ Match the so-called ternary operator.
 | `boolean_operator:And` | 1 |
 | `boolean_operator:Or` | 2 |
 
-**Remark.** `Not` is not a boolean operator in Python. To match it, use the construct [`unary_operator:Not`](#construct-unary_operator).
+**Remark.** `Not` is not a boolean operator in Python. To match it, use [construct `unary_operator:Not`](#construct-unary_operator).
 
 --------------------------------------------------------------------------------
 
@@ -612,7 +612,7 @@ WHERE cmp.name_prefix = "chained_comparison"
 GROUP BY cmp.path,
          op.name_suffix
 HAVING count(*) > 1 -- a chain has at least two operators
-ORDER BY cmp.span
+ORDER BY cmp.path
 ```
 
 ##### Example
@@ -648,7 +648,7 @@ ORDER BY cmp.span
 \n(?:\1.+\n)*?\1/left/right/n=(?P<SUFFIX>.+)
 )?
 \n(?:\1.+\n)*?\1/ops/length=1
-\n(?:\1.+\n)*?\1/ops/0/_type='(Eq|NotEq)'
+\n(?:\1.+\n)*?\1/ops/1/_type='(Eq|NotEq)'
 ```
 
 ##### Example
@@ -912,7 +912,7 @@ Apply a function or a method to an expression involving the result of another fu
 
 ```python
 1   print(len("hello, world"))
-2   print("hello, world")
+2   print("hello, world") # no match
 3   print(a + abs(b))
 4   print(s.upper())
 ```
@@ -958,7 +958,7 @@ Apply a function or a method to an expression involving the result of another fu
 
 #### Construct `range`
 
-Match a call to `range()` and suffix it by its atomic arguments, separated by a colon. Non atomic arguments are replaced by `?`.
+Match a call to `range()` and suffix it by its [_atomic_](#construct-call_argument) arguments, separated by a colon. Non-atomic arguments are replaced by `_`.
 
 ##### Derivations
 
@@ -1109,7 +1109,7 @@ Match a comprehension with an `if` clause.
 ##### Definition
 
 ```re
-/generators/\d+/ifs/0/_pos=(?P<POS>.+)
+/generators/\d+/ifs/1/_pos=(?P<POS>.+)
 ```
 
 ##### Example
@@ -1384,12 +1384,10 @@ Swap two variables or two elements of an array with a 2-element tuple or list.
 ```re
            ^(.*)/_type='Assign'
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/assigntargets/0/elts/length=2
-\n(?:\1.+\n)*?\1/assigntargets/0/elts/0/_hash=(?P<HASH_A>.+)
-\n(?:\1.+\n)*?\1/assigntargets/0/elts/1/_hash=(?P<HASH_B>.+)
-\n(?:\1.+\n)*?\1/assignvalue/elts/length=2
-\n(?:\1.+\n)*?\1/assignvalue/elts/0/_hash=(?P=HASH_B)
-\n(?:\1.+\n)*?\1/assignvalue/elts/1/_hash=(?P=HASH_A)
+\n(?:\1.+\n)*?\1/assigntargets/1/elts/1/_hash=(?P<HASH_A>.+)
+\n(?:\1.+\n)*?\1/assigntargets/1/elts/2/_hash=(?P<HASH_B>.+)
+\n(?:\1.+\n)*?\1/assignvalue/elts/1/_hash=(?P=HASH_B)
+\n(?:\1.+\n)*?\1/assignvalue/elts/2/_hash=(?P=HASH_A)
 ```
 
 ##### Example
@@ -1418,7 +1416,7 @@ Update a variable by negating it.
 ```re
            ^(.*)/_type='Assign'
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/assigntargets/0/_hash=(?P<HASH>.+) # capture hash
+\n(?:\1.+\n)*?\1/assigntargets/1/_hash=(?P<HASH>.+) # capture hash
 \n(?:\1.+\n)*?\1/assignvalue/_type='UnaryOp'
 \n(?:\1.+\n)*?\1/assignvalue/op/_type='USub'
 \n(?:\1.+\n)*?\1/assignvalue/operand/_hash=(?P=HASH) # match hash
@@ -1510,7 +1508,7 @@ In Python, the term "function" encompasses any type of subroutine, be it a metho
 
 #### Construct `return`
 
-Match `return` statements and, when the returned object is [_atomic_](#construct-call_argument), suffix it. Note that a `return` statement returning no value is denoted by `return:None`, not to be confounded with `result` (without suffix), which denotes the return of a non-atomic object.
+Match `return` statements and, when the returned object is [_atomic_](#construct-call_argument), suffix it. Note that a `return` statement returning no value is denoted by `return:None`, not to be confounded with `return` (without suffix), which denotes the return of a non-atomic object.
 
 ##### Derivations
 
@@ -2135,7 +2133,7 @@ Match the body of the branch “`then`” of an `if` statement.
     (?<!length=1\n).*/orelse/\d+
 )
                 /_type='If'
-\n(?:\1.+\n)*?\1/body/0/_pos=(?P<POS>.+)
+\n(?:\1.+\n)*?\1/body/1/_pos=(?P<POS>.+)
 (
 \n(?:\1.+\n)* \1/body/.*/_pos=(?P<POS>.+)
 )?
@@ -2188,10 +2186,10 @@ Match the body of an `elif` clause, which is (or could be rewritten as) an `else
 
 ```re
            ^(.*)/orelse/length=1
-\n(?:\1.+\n)*?\1/orelse/0/_type='If'
-\n(?:\1.+\n)*?\1/orelse/0/body/0/_pos=(?P<POS>.+)
+\n(?:\1.+\n)*?\1/orelse/1/_type='If'
+\n(?:\1.+\n)*?\1/orelse/1/body/1/_pos=(?P<POS>.+)
 (
-\n(?:\1.+\n)* \1/orelse/0/body/.+/_pos=(?P<POS>.+)
+\n(?:\1.+\n)* \1/orelse/1/body/.+/_pos=(?P<POS>.+)
 )?
 ```
 
@@ -2248,14 +2246,14 @@ Match the body of the possible `else` branch of an `if` statement.
 
 ```re
            ^(.*)/_type='If'
-\n(?:\1.+\n)*?\1/orelse/length=
+\n(?:\1.+\n)*?\1/orelse/
 (   # there is at least two statements in the else branch,
-                               \d+(?<![01])
-\n(?:\1.+\n)*?\1/orelse/0/_pos=(?P<POS>.+)
+                        length=\d+(?<![01])
+\n(?:\1.+\n)*?\1/orelse/1/_pos=(?P<POS>.+)
 |   # or only one, but distinct from If (otherwise, this is an elif)
-                               1
-\n(?:\1.+\n)*?\1/orelse/0/_type='.+?(?<!If)'
-\n(?:\1.+\n)*?\1/orelse/0/_pos=(?P<POS>.+)
+                        length=1
+\n(?:\1.+\n)*?\1/orelse/1/_type='.+?(?<!If)'
+\n(?:\1.+\n)*?\1/orelse/1/_pos=(?P<POS>.+)
 )
 (
 \n(?:\1.+\n)* \1/orelse/.+/_pos=(?P<POS>.+)
@@ -2522,8 +2520,8 @@ Iterate over index numbers of a collection.
 \n(?:\1.+\n)*?\1/iter/_type='Call'
 \n(?:\1.+\n)*?\1/iter/func/id='range'
 \n(?:\1.+\n)*?\1/iter/args/length=1
-\n(?:\1.+\n)*?\1/iter/args/0/_type='Call'
-\n(?:\1.+\n)*?\1/iter/args/0/func/id='len'
+\n(?:\1.+\n)*?\1/iter/args/1/_type='Call'
+\n(?:\1.+\n)*?\1/iter/args/1/func/id='len'
 \n(?:\1.+\n)*?\1/iter/keywords/length=0
 \n(?:\1.+\n)* \1/.*/_pos=(?P<POS>.+)
 ```
@@ -2604,15 +2602,15 @@ A `for` loop with a counter `i` and a nested `for` loop which makes `i` iteratio
 \n(?:\1.+\n)*?\1/(?P=_1)                    /iter/_type='Call'
 \n(?:\1.+\n)*?\1/(?P=_1)                    /iter/func/id='range'
 \n(?:\1.+\n)*?\1/(?P=_1)                    /iter/args/length=1 # only range(arg1)
-\n(?:\1.+\n)* \1/(?P=_1)                    /iter/args/0.*/id=(?P=VAR) # match iteration variable
+\n(?:\1.+\n)* \1/(?P=_1)                    /iter/args/1.*/id=(?P=VAR) # match iteration variable
 |   # i goes from 0 to n, and j from i to n
-\n(?:\1.+\n)*?\1/iter/args/0/_hash=(?P<STOP>.+) # capture stop expression
+\n(?:\1.+\n)*?\1/iter/args/1/_hash=(?P<STOP>.+) # capture stop expression
 \n(?:\1.+\n)* \1/(?P<_1>(?:body|orelse)/\d+)/_type='For'
 \n(?:\1.+\n)*?\1/(?P=_1)                    /iter/_type='Call'
 \n(?:\1.+\n)*?\1/(?P=_1)                    /iter/func/id='range'
 \n(?:\1.+\n)*?\1/(?P=_1)                    /iter/args/length=2 # only range(arg1, arg2)
-\n(?:\1.+\n)* \1/(?P=_1)                    /iter/args/0(/.+)*/id=(?P=VAR) # match iteration variable
-\n(?:\1.+\n)* \1/(?P=_1)                    /iter/args/1(/.+)*/_hash=(?P=STOP) # match stop expression
+\n(?:\1.+\n)* \1/(?P=_1)                    /iter/args/1(/.+)*/id=(?P=VAR) # match iteration variable
+\n(?:\1.+\n)* \1/(?P=_1)                    /iter/args/2(/.+)*/_hash=(?P=STOP) # match stop expression
 )
 \n(?:\1.+\n)* \1/.*/_pos=(?P<POS>.+)
 ```
@@ -3154,7 +3152,7 @@ An accumulation pattern that, from a given collection, returns a list containing
 \n(?:\1.+\n)* \1/(?P=_1)                /(?P<_2>(?:body|orelse)/\d+)/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/(?P=_1)                /(?P=_2)                    /value/_type='Call'
 \n(?:\1.+\n)*?\1/(?P=_1)                /(?P=_2)                    /value/func/attr='append'
-\n(?:\1.+\n)*?\1/(?P=_1)                /(?P=_2)                    /value/args/0/id=(?P=ID_1) # match it in an append()
+\n(?:\1.+\n)*?\1/(?P=_1)                /(?P=_2)                    /value/args/1/id=(?P=ID_1) # match it in an append()
 \n(?:\1.+\n)* \1.*/_pos=(?P<POS>.+)
 ```
 
@@ -3185,7 +3183,7 @@ An accumulation pattern that, from a given collection, returns the best element 
 
 ```re
            ^(.*)/(?P<_1>(?:body|orelse)/\d+)/_type='Assign'
-\n(?:\1.+\n)*?\1/(?P=_1)                /assigntargets/0/id='(?P<CANDIDATE>.+)' # capture candidate
+\n(?:\1.+\n)*?\1/(?P=_1)                /assigntargets/1/id='(?P<CANDIDATE>.+)' # capture candidate
 \n(?:\1.+\n)* \1/(?P<_2>(?:body|orelse)/\d+)/_type='For'
 \n(?:\1.+\n)*?\1/(?P=_2)                /_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/(?P=_2)                /target/id='(?P<ITER_VAR>.+)' # capture iteration variable
@@ -3196,7 +3194,7 @@ An accumulation pattern that, from a given collection, returns the best element 
 \n(?:\1.+\n)* \1/(?P=_2)                /(?P=_3)                    /test/.*/id='(?P=CANDIDATE)' # match candidate
 \n(?:\1.+\n)* \1/(?P=_2)                /(?P=_3)                    /(?P<_4>(?:body|orelse)/\d+)/_type='Assign'
 \n(?:\1.+\n)*?\1/(?P=_2)                /(?P=_3)                    /(?P=_4)                /_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/(?P=_2)                /(?P=_3)                    /(?P=_4)                /assigntargets/0/id='(?P=CANDIDATE)' # match candidate
+\n(?:\1.+\n)*?\1/(?P=_2)                /(?P=_3)                    /(?P=_4)                /assigntargets/1/id='(?P=CANDIDATE)' # match candidate
 \n(?:\1.+\n)*?\1/(?P=_2)                /(?P=_3)                    /(?P=_4)                /assignvalue/id='(?P=ITER_VAR)' # match iteration variable
 (
 \n(?:\1.+\n)* \1(?P=_2)                /(?P=_3).*/_pos=(?P<POS>.+)
@@ -3351,7 +3349,7 @@ Evolve the value of a variable until it reaches a desired state.
 (   # the state variable either appears on both sides of a simple assignment
 \n(?:\1.+\n)* \1/(?P<_1>body/.*)/_type='Assign'
 \n(?:\1.+\n)*?\1/(?P=_1)        /_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/(?P=_1)        /assigntargets/0/id='(?P=STATE)' # it is updated somewhere in the loop
+\n(?:\1.+\n)*?\1/(?P=_1)        /assigntargets/1/id='(?P=STATE)' # it is updated somewhere in the loop
 \n(?:\1.+\n)*?\1/(?P=_1)        /assignvalue/_ids=.*\b(?P=STATE)\b.* # from its current value
 |   # or appears on LHS of an augmented assignement
 \n(?:\1.+\n)* \1/(?P<_1>body/.*)/_type='AugAssign'
@@ -3562,12 +3560,12 @@ When a conditional simply assigns different values to the same variable, it may 
            ^(.*)/_type='If'
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/body/length=1
-\n(?:\1.+\n)*?\1/body/0/_type='Assign'
-\n(?:\1.+\n)*?\1/body/0/assigntargets/0/_hash=(?P<HASH>.+)
+\n(?:\1.+\n)*?\1/body/1/_type='Assign'
+\n(?:\1.+\n)*?\1/body/1/assigntargets/1/_hash=(?P<HASH>.+)
 \n(?:\1.+\n)*?\1/orelse/length=1
-\n(?:\1.+\n)*?\1/orelse/0/_type='Assign'
-\n(?:\1.+\n)*?\1/orelse/0/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/orelse/0/assigntargets/0/_hash=(?P=HASH)
+\n(?:\1.+\n)*?\1/orelse/1/_type='Assign'
+\n(?:\1.+\n)*?\1/orelse/1/_pos=(?P<POS>.+)
+\n(?:\1.+\n)*?\1/orelse/1/assigntargets/1/_hash=(?P=HASH)
 ```
 
 ##### Example
@@ -3615,7 +3613,7 @@ When the RHS of an assignment consists in a binary operation whose left operand 
            ^(.*)/_type='Assign'
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/assigntargets/length=1
-\n(?:\1.+\n)*?\1/assigntargets/0/id=(?P<TARGET>.+)
+\n(?:\1.+\n)*?\1/assigntargets/1/id=(?P<TARGET>.+)
 \n(?:\1.+\n)*?\1/assignvalue/_type='BinOp'
 \n(?:\1.+\n)*?\1/assignvalue/left/id=(?P=TARGET)
 ```
@@ -3661,10 +3659,10 @@ When the `else` branch of a conditional is another conditional, it can be rewrit
            ^(.*)/_type='BoolOp'
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/op/_type='And'
-\n(?:\1.+\n)*?\1/values/0/_type='Compare'
-\n(?:\1.+\n)*?\1/values/0/comparators/0/_hash=(?P<HASH_1>.+) # capture the right operand of the left comparison
 \n(?:\1.+\n)*?\1/values/1/_type='Compare'
-\n(?:\1.+\n)*?\1/values/1/left/_hash=(?P=HASH_1) # match the left operand of the right comparison
+\n(?:\1.+\n)*?\1/values/1/comparators/1/_hash=(?P<HASH_1>.+) # capture the right operand of the left comparison
+\n(?:\1.+\n)*?\1/values/2/_type='Compare'
+\n(?:\1.+\n)*?\1/values/2/left/_hash=(?P=HASH_1) # match the left operand of the right comparison
 ```
 
 ##### Example
@@ -3709,7 +3707,7 @@ Match magic numbers (unnamed numerical constants) other than -1, 0, 1 and 2. A n
 |   # non indented lines
                 /_type='Assign'
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/assigntargets/0/id='.*?[a-z].*' # at least one lowercase letter
+\n(?:\1.+\n)*?\1/assigntargets/1/id='.*?[a-z].*' # at least one lowercase letter
 \n(?:\1.+\n)*?\1/assignvalue/n=(?!(-1|0|1|2)\n)
 )
 ```
@@ -3758,11 +3756,11 @@ When a predicate ends with a conditional whose sole purpose is to return `True` 
 ```re
            ^(.*)/_type='If'
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/body/0/_type='Return'
-\n(?:\1.+\n)*?\1/body/0/value/value=(?P<BOOL>True|False) # name BOOL the value used here
-\n(?:\1.+\n)*?\1/orelse/0/_type='Return'
-\n(?:\1.+\n)*?\1/orelse/0/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/orelse/0/value/value=(True|False)(?<!(?P=BOOL)) # and check not BOOL is used there
+\n(?:\1.+\n)*?\1/body/1/_type='Return'
+\n(?:\1.+\n)*?\1/body/1/value/value=(?P<BOOL>True|False) # name BOOL the value used here
+\n(?:\1.+\n)*?\1/orelse/1/_type='Return'
+\n(?:\1.+\n)*?\1/orelse/1/_pos=(?P<POS>.+)
+\n(?:\1.+\n)*?\1/orelse/1/value/value=(True|False)(?<!(?P=BOOL)) # and check not BOOL is used there
 ```
 
 ##### Example
