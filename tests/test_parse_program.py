@@ -136,6 +136,9 @@ def inject_derivations(text):
 def reformat_file(construct_path):
     text = construct_path.read_text()
     toc = "\n".join(generate_toc(text))
+    for m in regex.finditer(r"(?sm)^#### Construct (`.+?`).+?```(\w*)", text):
+        if m[2] == "sql":
+            toc = toc.replace(m[1], f"{m[1]} (SQL)")
     rule = "-" * 80 + "\n"
     text = regex.sub(r"(?m)^---+\n", "", text)
     text = regex.sub(r"(?m)^ +```", "```", text)

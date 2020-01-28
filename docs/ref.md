@@ -18,7 +18,7 @@
       - [Construct `boolean_operator`](#construct-boolean_operator)
       - [Construct `comparison_operator`](#construct-comparison_operator)
       - [Construct `chained_comparison`](#construct-chained_comparison)
-      - [Construct `chained_equalities|chained_inequalities`](#construct-chained_equalitieschained_inequalities)
+      - [Construct `chained_equalities|chained_inequalities` (SQL)](#construct-chained_equalitieschained_inequalities)
       - [Construct `divisibility_test`](#construct-divisibility_test)
       - [Construct `short_circuit`](#construct-short_circuit)
   - [Calls](#calls)
@@ -32,7 +32,7 @@
   - [Anonymous functions](#anonymous-functions)
       - [Construct `lambda_function`](#construct-lambda_function)
   - [Iterables](#iterables)
-      - [Construct `range`](#construct-range)
+      - [Construct `range` (SQL)](#construct-range)
       - [Construct `comprehension`](#construct-comprehension)
       - [Construct `comprehension_for_count`](#construct-comprehension_for_count)
       - [Construct `filtered_comprehension`](#construct-filtered_comprehension)
@@ -42,39 +42,42 @@
       - [Construct `augmented_assignment`](#construct-augmented_assignment)
       - [Construct `chained_assignment`](#construct-chained_assignment)
       - [Construct `assignment_lhs_identifier`](#construct-assignment_lhs_identifier)
-      - [Construct `constant_assignment`](#construct-constant_assignment)
+      - [Construct `constant_assignment` (SQL)](#construct-constant_assignment)
       - [Construct `assignment_rhs_identifier`](#construct-assignment_rhs_identifier)
     - [Assignment idioms](#assignment-idioms)
       - [Construct `swapping`](#construct-swapping)
       - [Construct `negation`](#construct-negation)
   - [Function definitions](#function-definitions)
+    - [Interface](#interface)
       - [Construct `function`](#construct-function)
       - [Construct `return`](#construct-return)
       - [Construct `yield`](#construct-yield)
-      - [Construct `generator`](#construct-generator)
-      - [Construct `function_returning_something`](#construct-function_returning_something)
-      - [Construct `function_returning_nothing`](#construct-function_returning_nothing)
+      - [Construct `generator` (SQL)](#construct-generator)
+      - [Construct `function_returning_something` (SQL)](#construct-function_returning_something)
+      - [Construct `function_returning_nothing` (SQL)](#construct-function_returning_nothing)
       - [Construct `function_with_default_positional_arguments`](#construct-function_with_default_positional_arguments)
-      - [Construct `recursive_function`](#construct-recursive_function)
-      - [Construct `deeply_recursive_function`](#construct-deeply_recursive_function)
-      - [Construct `body_recursive_function`](#construct-body_recursive_function)
-      - [Construct `tail_recursive_function`](#construct-tail_recursive_function)
+    - [Nesting](#nesting)
       - [Construct `nested_function`](#construct-nested_function)
-      - [Construct `closure`](#construct-closure)
+      - [Construct `closure` (SQL)](#construct-closure)
+    - [Recursion](#recursion)
+      - [Construct `recursive_function` (SQL)](#construct-recursive_function)
+      - [Construct `deeply_recursive_function` (SQL)](#construct-deeply_recursive_function)
+      - [Construct `body_recursive_function` (SQL)](#construct-body_recursive_function)
+      - [Construct `tail_recursive_function` (SQL)](#construct-tail_recursive_function)
   - [Conditionals](#conditionals)
       - [Construct `if`](#construct-if)
       - [Construct `if_test_id`](#construct-if_test_id)
       - [Construct `if_then_branch`](#construct-if_then_branch)
       - [Construct `if_elif_branch`](#construct-if_elif_branch)
       - [Construct `if_else_branch`](#construct-if_else_branch)
-      - [Construct `nested_if`](#construct-nested_if)
+      - [Construct `nested_if` (SQL)](#construct-nested_if)
   - [Iterations](#iterations)
       - [Construct `for`](#construct-for)
       - [Construct `for_each`](#construct-for_each)
-      - [Construct `for_range`](#construct-for_range)
+      - [Construct `for_range` (SQL)](#construct-for_range)
       - [Construct `for_indexes_elements`](#construct-for_indexes_elements)
       - [Construct `for_indexes`](#construct-for_indexes)
-      - [Construct `nested_for`](#construct-nested_for)
+      - [Construct `nested_for` (SQL)](#construct-nested_for)
       - [Construct `triangular_nested_for`](#construct-triangular_nested_for)
       - [Construct `square_nested_for`](#construct-square_nested_for)
       - [Construct `while`](#construct-while)
@@ -83,15 +86,15 @@
       - [Construct `try`](#construct-try)
       - [Construct `raise`](#construct-raise)
       - [Construct `except`](#construct-except)
-      - [Construct `try_raise|try_except`](#construct-try_raisetry_except)
+      - [Construct `try_raise|try_except` (SQL)](#construct-try_raisetry_except)
   - [Modules](#modules)
       - [Construct `import_module`](#construct-import_module)
       - [Construct `import_name`](#construct-import_name)
-      - [Construct `import`](#construct-import)
+      - [Construct `import` (SQL)](#construct-import)
 - [Code patterns](#code-patterns)
   - [Iterative patterns](#iterative-patterns)
     - [Sequential loops](#sequential-loops)
-      - [Construct `accumulate_elements`](#construct-accumulate_elements)
+      - [Construct `accumulate_elements` (SQL)](#construct-accumulate_elements)
       - [Construct `filter_for`](#construct-filter_for)
       - [Construct `find_best_element`](#construct-find_best_element)
       - [Construct `universal_quantifier`](#construct-universal_quantifier)
@@ -1522,6 +1525,8 @@ Update a variable by negating it.
 
 ## Function definitions
 
+### Interface
+
 --------------------------------------------------------------------------------
 
 #### Construct `function`
@@ -1876,6 +1881,87 @@ WHERE name_prefix = "function"
 
 --------------------------------------------------------------------------------
 
+### Nesting
+
+--------------------------------------------------------------------------------
+
+#### Construct `nested_function`
+
+##### Definition
+
+```re
+           ^(.*)/_type='FunctionDef'
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
+\n(?:\1.+\n)*?\1/name='(?P<SUFFIX>.+)'
+\n(?:\1.+\n)*?\1/.+/_type='FunctionDef'
+\n(?:\1.+\n)* \1/.+/_pos=(?P<POS>.+)
+```
+
+##### Example
+
+```python
+1   def outer_function(a, b):
+2   	c = a + b
+3   	def inner_function(c):
+4   		print(c)
+5   	return inner_function(c)
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `nested_function:outer_function` | 1-5 |
+
+--------------------------------------------------------------------------------
+
+#### Construct `closure`
+
+Function enclosing the definition of an inner function and returning it. Beware that the current definition does not check whether the inner function refers to a variable defined in the enclosing function.
+
+##### Derivations
+
+[🔼 construct `function`](#construct-function)  
+[🔼 construct `return`](#construct-return)  
+
+##### Definition
+
+```sql
+SELECT "closure",
+       f.name_suffix,
+       max(f.span_start) || "-" || min(f.span_end),
+       max(f.path)
+FROM t f
+JOIN t c ON (c.path GLOB f.path || "?*")
+JOIN t r ON (r.path GLOB f.path || "?*")
+WHERE f.name_prefix = "function"
+  AND c.name_prefix = "function"
+  AND r.name = "return:" || c.name_suffix
+GROUP BY c.rowid
+```
+
+##### Example
+
+```python
+1   def outer_function(a, b):
+2       c = a + b
+3       def inner_function():
+4           print(c)
+5       return inner_function
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `closure:outer_function` | 1-5 |
+
+--------------------------------------------------------------------------------
+
+### Recursion
+
+--------------------------------------------------------------------------------
+
 #### Construct `recursive_function`
 
 ##### Derivations
@@ -2106,79 +2192,6 @@ WHERE f.name_prefix = "recursive_function" -- A recursive function...
 | Label | Lines |
 |:--|:--|
 | `tail_recursive_function:gcd` | 1-5, 7-8 |
-
---------------------------------------------------------------------------------
-
-#### Construct `nested_function`
-
-##### Definition
-
-```re
-           ^(.*)/_type='FunctionDef'
-\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/name='(?P<SUFFIX>.+)'
-\n(?:\1.+\n)*?\1/.+/_type='FunctionDef'
-\n(?:\1.+\n)* \1/.+/_pos=(?P<POS>.+)
-```
-
-##### Example
-
-```python
-1   def outer_function(a, b):
-2   	c = a + b
-3   	def inner_function(c):
-4   		print(c)
-5   	return inner_function(c)
-```
-
-##### Matches
-
-| Label | Lines |
-|:--|:--|
-| `nested_function:outer_function` | 1-5 |
-
---------------------------------------------------------------------------------
-
-#### Construct `closure`
-
-Function enclosing the definition of an inner function and returning it. Beware that the current definition does not check whether the inner function refers to a variable defined in the enclosing function.
-
-##### Derivations
-
-[🔼 construct `function`](#construct-function)  
-[🔼 construct `return`](#construct-return)  
-
-##### Definition
-
-```sql
-SELECT "closure",
-       f.name_suffix,
-       max(f.span_start) || "-" || min(f.span_end),
-       max(f.path)
-FROM t f
-JOIN t c ON (c.path GLOB f.path || "?*")
-JOIN t r ON (r.path GLOB f.path || "?*")
-WHERE f.name_prefix = "function"
-  AND c.name_prefix = "function"
-  AND r.name = "return:" || c.name_suffix
-GROUP BY c.rowid
-```
-
-##### Example
-
-```python
-1   def outer_function(a, b):
-2       c = a + b
-3       def inner_function():
-4           print(c)
-5       return inner_function
-```
-
-##### Matches
-
-| Label | Lines |
-|:--|:--|
-| `closure:outer_function` | 1-5 |
 
 --------------------------------------------------------------------------------
 

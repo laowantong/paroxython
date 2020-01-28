@@ -134,7 +134,7 @@ def centrifugate_hints(source: Source) -> Source:
     for line in source.split("\n"):
         m = match_isolated_hints(line)
         if m:
-            hints.update(m.group(1).split())
+            hints.update(m[1].split())
         else:
             lines.append(line)
     if not hints:
