@@ -17,7 +17,7 @@ def print_collatz(n): # added_block_label (-> +7)
                   # literal:Num
                   # suggest_constant_definition
                   # while (-> +5)
-        print(n) # call_parameter:n
+        print(n) # call_argument:n
                  # function_call:print
         if n % 2 == 0: # added_label_on_line_4
                        # binary_operator:Mod
@@ -44,7 +44,7 @@ def print_collatz(n): # added_block_label (-> +7)
                           # int_literal
                           # literal:Num
                           # suggest_constant_definition
-    print(n) # call_parameter:n
+    print(n) # call_argument:n
              # function_call:print
 
 # ----------------------------------------------------------------------------------------
@@ -62,6 +62,6 @@ def succ(n): # function:succ (-> +1)
 # ----------------------------------------------------------------------------------------
 while input(): # function_call:input
                # while (-> +1)
-    print("foobar") # call_parameter:
+    print("foobar") # call_argument:
                     # function_call:print
                     # literal:Str

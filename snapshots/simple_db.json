@@ -24,7 +24,7 @@
         "binary_operator:Add": [[7,7]],
         "binary_operator:Mod": [[4,4]],
         "binary_operator:Mult": [[7,7]],
-        "call_parameter:n": [[3,3],[8,8]],
+        "call_argument:n": [[3,3],[8,8]],
         "comparison_operator:Eq": [[4,4]],
         "comparison_operator:NotEq": [[2,2]],
         "divisibility_test:2": [[4,4]],
@@ -80,7 +80,7 @@
       "timestamp": "ignored",
       "source": "while input():\n    print(\"foobar\")",
       "labels": {
-        "call_parameter:": [[2,2]],
+        "call_argument:": [[2,2]],
         "function_call:input": [[1,1]],
         "function_call:print": [[2,2]],
         "literal:Str": [[2,2]],
@@ -126,7 +126,7 @@
     "binary_operator:Mult": [
       "tests/data/simple/collatz_print.py"
     ],
-    "call_parameter:n": [
+    "call_argument:n": [
       "tests/data/simple/collatz_print.py"
     ],
     "comparison_operator:Eq": [
@@ -196,7 +196,7 @@
     "return": [
       "tests/data/simple/function_definition.py"
     ],
-    "call_parameter:": [
+    "call_argument:": [
       "tests/data/simple/loop.py"
     ],
     "function_call:input": [

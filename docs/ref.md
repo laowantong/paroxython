@@ -23,7 +23,7 @@
       - [Construct `short_circuit`](#construct-short_circuit)
   - [Calls](#calls)
       - [Construct `function_call`](#construct-function_call)
-      - [Construct `call_parameter`](#construct-call_parameter)
+      - [Construct `call_argument`](#construct-call_argument)
       - [Construct `method_call`](#construct-method_call)
       - [Construct `method_call_object`](#construct-method_call_object)
       - [Construct `method_chaining`](#construct-method_chaining)
@@ -747,7 +747,7 @@ When the value of the left operand suffices to determine the value of a boolean 
 
 --------------------------------------------------------------------------------
 
-#### Construct `call_parameter`
+#### Construct `call_argument`
 
 Match any argument of a function or a method call. Suffix this argument when it is **atomic**, _i.e._ either:
 - a simple identifier,
@@ -794,17 +794,17 @@ Otherwise, suffix it with an empty string.
 
 | Label | Lines |
 |:--|:--|
-| `call_parameter:` | 2, 7, 8 |
-| `call_parameter:None` | 3 |
-| `call_parameter:True` | 4 |
-| `call_parameter:42` | 5, 6, 8 |
-| `call_parameter:x` | 6, 8 |
-| `call_parameter:a` | 9 |
-| `call_parameter:b` | 9 |
-| `call_parameter:c` | 9 |
-| `call_parameter:bizz` | 10 |
-| `call_parameter:buzz` | 10 |
-| `call_parameter:g` | 12 |
+| `call_argument:` | 2, 7, 8 |
+| `call_argument:None` | 3 |
+| `call_argument:True` | 4 |
+| `call_argument:42` | 5, 6, 8 |
+| `call_argument:x` | 6, 8 |
+| `call_argument:a` | 9 |
+| `call_argument:b` | 9 |
+| `call_argument:c` | 9 |
+| `call_argument:bizz` | 10 |
+| `call_argument:buzz` | 10 |
+| `call_argument:g` | 12 |
 
 --------------------------------------------------------------------------------
 
@@ -1451,7 +1451,7 @@ In Python, the term "function" encompasses any type of subroutine, be it a metho
 
 #### Construct `return`
 
-Match `return` statements and, when the returned object is [_atomic_](#construct-call_parameter), suffix it. Note that a `return` statement returning no value is denoted by `return:None`, not to be confounded with `result` (without suffix), which denotes the return of a non-atomic object.
+Match `return` statements and, when the returned object is [_atomic_](#construct-call_argument), suffix it. Note that a `return` statement returning no value is denoted by `return:None`, not to be confounded with `result` (without suffix), which denotes the return of a non-atomic object.
 
 ##### Dependencies
 
@@ -1498,7 +1498,7 @@ Match `return` statements and, when the returned object is [_atomic_](#construct
 
 #### Construct `yield`
 
-Match `yield` and `yieldfrom` _[expressions](https://docs.python.org/3/reference/expressions.html#yield-expressions)_ (generally used as statements) and, when the yielded object is [_atomic_](#construct-call_parameter), suffix it.
+Match `yield` and `yieldfrom` _[expressions](https://docs.python.org/3/reference/expressions.html#yield-expressions)_ (generally used as statements) and, when the yielded object is [_atomic_](#construct-call_argument), suffix it.
 
 ##### Dependencies
 
@@ -3074,7 +3074,7 @@ An accumulator is iteratively updated from its previous value and those of the i
   1. [construct `assignment_lhs_identifier`](#construct-assignment_lhs_identifier)
   1. [construct `assignment_rhs_identifier`](#construct-assignment_rhs_identifier)
   1. [construct `augmented_assignment`](#construct-augmented_assignment)
-  1. [construct `call_parameter`](#construct-call_parameter)
+  1. [construct `call_argument`](#construct-call_argument)
   1. [construct `for`](#construct-for)
   1. [construct `method_call`](#construct-method_call)
   1. [construct `method_call_object`](#construct-method_call_object)
@@ -3096,7 +3096,7 @@ WHERE for_loop.name_prefix = "for" -- A for loop...
              OR (acc_left.name_suffix = acc_right.name_suffix -- or references the same identifier...
                  AND acc_left.name_prefix = "assignment_lhs_identifier" -- on both left...
                  AND acc_right.name_prefix = "assignment_rhs_identifier")))-- and right hand size)...
-       OR (iter_var.name_prefix = "call_parameter" -- or appears as an argument...
+       OR (iter_var.name_prefix = "call_argument" -- or appears as an argument...
            AND acc_right.name_prefix = "method_call" -- of a call to a method...
            AND acc_right.name_suffix REGEXP "(append|extend|insert|add|update)$" -- updating its object.
            AND acc_left.name_prefix = "method_call_object" -- Ensure that the suffix is the accumulator...

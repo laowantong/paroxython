@@ -11,8 +11,8 @@
 - binary_operator:FloorDiv / collatz_print.py / 5
 - binary_operator:Mod / collatz_print.py / 4
 - binary_operator:Mult / collatz_print.py / 7
-- call_parameter: / loop.py / 2
-- call_parameter:n / collatz_print.py / 3, 8
+- call_argument: / loop.py / 2
+- call_argument:n / collatz_print.py / 3, 8
 - comparison_operator:Eq / collatz_print.py / 4
 - comparison_operator:NotEq / collatz_print.py / 2
 - divisibility_test:2 / collatz_print.py / 4
@@ -51,7 +51,7 @@
 - binary_operator
 - body_recursive_function
 - boolean_operator
-- call_parameter
+- call_argument
 - chained_assignment
 - chained_comparison
 - chained_equalities|chained_inequalities
