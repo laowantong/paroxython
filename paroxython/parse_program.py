@@ -28,14 +28,14 @@ simplify_negative_literals = _simplify_negative_literals()
 find_all_constructs = regex.compile(
     r"""(?msx)
             ^\#{4}\s+Construct\s+`(.+?)` # capture the label's pattern
-            .+?\#{5}\s+Definition # ensure the next pattern is in the Definition section
+            .+?\#{5}\s+Specification # ensure the next pattern is in the Specification section
             .+?```(.*?)\n+(.*?)\n``` # capture the language and the pattern
         """
 ).findall
 
 
 class ProgramParser:
-    """Compile the given construct definitions, and search them in a Program."""
+    """Compile the given construct specifications, and search them in a Program."""
 
     def __init__(self, spec_path: str = "docs/spec.md") -> None:
         """Compile the constructs to search."""

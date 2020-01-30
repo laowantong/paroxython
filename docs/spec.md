@@ -123,7 +123,7 @@
 
 #### Construct `literal`
 
-##### Definition
+##### Specification
 
 ```re
 ^(.*)
@@ -175,7 +175,7 @@
 
 Matching literal does not require to construct a sophisticated regular expression: the heavy lifting is already made in the given AST, which stores them in a normalized form. For instance, integer literals are just sequence of digits:
 
-##### Definition
+##### Specification
 
 ```re
            ^(.*)/_type='Num'
@@ -206,7 +206,7 @@ The following examples of numeric literals are taken from the [reference](https:
 
 In the AST, a floating point literal consists of digits and at least one symbol among `.` and `e`.
 
-##### Definition
+##### Specification
 
 ```re
            ^(.*)/_type='Num'
@@ -235,7 +235,7 @@ In the AST, a floating point literal consists of digits and at least one symbol 
 
 In the AST, an imaginary literal contains the same symbols as a floating point literal, plus a mandatory trailing symbol `j`.
 
-##### Definition
+##### Specification
 
 ```re
            ^(.*)/_type='Num'
@@ -266,7 +266,7 @@ In the AST, an imaginary literal contains the same symbols as a floating point l
 
 #### Construct `index`
 
-##### Definition
+##### Specification
 
 ```re
            ^(.*)/_type='Subscript'
@@ -292,7 +292,7 @@ In the AST, an imaginary literal contains the same symbols as a floating point l
 
 #### Construct `index_arithmetic`
 
-##### Definition
+##### Specification
 
 ```re
            ^(.*)/_type='Subscript'
@@ -318,7 +318,7 @@ In the AST, an imaginary literal contains the same symbols as a floating point l
 
 #### Construct `negative_index`
 
-##### Definition
+##### Specification
 
 ```re
            ^(.*)/_type='Subscript'
@@ -362,7 +362,7 @@ In the AST, an imaginary literal contains the same symbols as a floating point l
 
 #### Construct `slice`
 
-##### Definition
+##### Specification
 
 ```re
            ^(.*)/_type='Subscript'
@@ -389,7 +389,7 @@ In the AST, an imaginary literal contains the same symbols as a floating point l
 
 #### Construct `slice_step`
 
-##### Definition
+##### Specification
 
 ```re
            ^(.*)/_type='Subscript'
@@ -419,7 +419,7 @@ In the AST, an imaginary literal contains the same symbols as a floating point l
 
 #### Construct `unary_operator`
 
-##### Definition
+##### Specification
 
 ```re
            ^(.*)/_type='UnaryOp'
@@ -448,7 +448,7 @@ In the AST, an imaginary literal contains the same symbols as a floating point l
 
 #### Construct `binary_operator`
 
-##### Definition
+##### Specification
 
 ```re
            ^(.*)/_type='BinOp'
@@ -475,7 +475,7 @@ In the AST, an imaginary literal contains the same symbols as a floating point l
 
 Match the so-called ternary operator.
 
-##### Definition
+##### Specification
 
 ```re
            ^(.*)/_type='IfExp'
@@ -502,7 +502,7 @@ Match the so-called ternary operator.
 
 #### Construct `boolean_operator`
 
-##### Definition
+##### Specification
 
 ```re
            ^(.*)/_type='BoolOp'
@@ -535,7 +535,7 @@ Match the so-called ternary operator.
 
 [🔽 construct `chained_equalities|chained_inequalities`](#construct-chained_equalitieschained_inequalities)  
 
-##### Definition
+##### Specification
 
 ```re
            ^(.*)/ops/        (?P<_1>\d+)/_type='(?P<SUFFIX>Eq|Lt|LtE|Gt|GtE|In|NotIn|NotEq|Is|IsNot)'
@@ -567,7 +567,7 @@ Match the so-called ternary operator.
 
 [🔽 construct `chained_equalities|chained_inequalities`](#construct-chained_equalitieschained_inequalities)  
 
-##### Definition
+##### Specification
 
 ```re
            ^(.*)/_type='Compare'
@@ -599,7 +599,7 @@ Match the so-called ternary operator.
 [🔼 construct `chained_comparison`](#construct-chained_comparison)  
 [🔼 construct `comparison_operator`](#construct-comparison_operator)  
 
-##### Definition
+##### Specification
 
 ```sql
 SELECT CASE op.name_suffix
@@ -642,7 +642,7 @@ ORDER BY cmp.path
 
 #### Construct `divisibility_test`
 
-##### Definition
+##### Specification
 
 ```re
            ^(.*)/_type='Compare'
@@ -681,7 +681,7 @@ ORDER BY cmp.path
 
 When the value of the left operand suffices to determine the value of a boolean expression, short-circuit evaluation skips the right operand. This behaviour is sometimes desirable or even required, but Paroxython currently cannot detect the case: so, when commutating the operands would result in an error or a performance penalty, you should add manually the hint `# paroxython: short_circuit` in the source-code.
 
-##### Definition
+##### Specification
 
 ```
 ```
@@ -720,7 +720,7 @@ When the value of the left operand suffices to determine the value of a boolean 
 [🔽 construct `range`](#construct-range)  
 [🔽 construct `recursive_function`](#construct-recursive_function)  
 
-##### Definition
+##### Specification
 
 ```re
            ^(.*)/_type='Call'
@@ -759,7 +759,7 @@ A tail-call is a call whose result is immediately returned, without any further 
 
 [🔽 construct `body_recursive_function`](#construct-body_recursive_function)  
 
-##### Definition
+##### Specification
 
 ```re
            ^(.*)/_type='Return'
@@ -841,7 +841,7 @@ Otherwise, suffix it with an empty string.
 [🔽 construct `accumulate_elements`](#construct-accumulate_elements)  
 [🔽 construct `range`](#construct-range)  
 
-##### Definition
+##### Specification
 
 ```re
            ^(.*)/_type='Call'
@@ -896,7 +896,7 @@ Otherwise, suffix it with an empty string.
 
 [🔽 construct `accumulate_elements`](#construct-accumulate_elements)  
 
-##### Definition
+##### Specification
 
 ```re
            ^(.*)/_type='Call'
@@ -927,7 +927,7 @@ Otherwise, suffix it with an empty string.
 
 [🔽 construct `accumulate_elements`](#construct-accumulate_elements)  
 
-##### Definition
+##### Specification
 
 ```re
            ^(.*)/value/_type='Call'
@@ -954,7 +954,7 @@ Otherwise, suffix it with an empty string.
 
 #### Construct `method_chaining`
 
-##### Definition
+##### Specification
 
 ```re
            ^(.*)/_type='Call'
@@ -982,7 +982,7 @@ Otherwise, suffix it with an empty string.
 
 Apply a function or a method to an expression involving the result of another function or method application, without using an intermediate variable.
 
-##### Definition
+##### Specification
 
 ```re
            ^(.*)/_type='Call'
@@ -1013,7 +1013,7 @@ Apply a function or a method to an expression involving the result of another fu
 
 #### Construct `lambda_function`
 
-##### Definition
+##### Specification
 
 ```re
            ^(.*)/_type='Lambda'
@@ -1048,7 +1048,7 @@ Match a call to `range()` and suffix it by its [_atomic_](#construct-call_argume
 [🔼 construct `function_call`](#construct-function_call)  
 [🔽 construct `for_range`](#construct-for_range)  
 
-##### Definition
+##### Specification
 
 ```sql
 SELECT "range",
@@ -1100,7 +1100,7 @@ GROUP BY rowid -- will be executed before this one.
 
 #### Construct `comprehension`
 
-##### Definition
+##### Specification
 
 ```re
            ^(.*)/_type='((?P<SUFFIX>List|Dict|Set)Comp|(?P<SUFFIX>Generator)Exp)'
@@ -1133,7 +1133,7 @@ GROUP BY rowid -- will be executed before this one.
 
 Suffix the number of `for` clauses in a given comprehension.
 
-##### Definition
+##### Specification
 
 ```re
            ^(.*)/_type='(ListComp|DictComp|SetComp|GeneratorExp)'
@@ -1188,7 +1188,7 @@ Therefore, line 5 consists in two comprehensions, each with one `for` clause onl
 
 Match a comprehension with an `if` clause.
 
-##### Definition
+##### Specification
 
 ```re
 /generators/\d+/ifs/1/_pos=(?P<POS>.+)
@@ -1217,7 +1217,7 @@ Match a comprehension with an `if` clause.
 
 #### Construct `assignment`
 
-##### Definition
+##### Specification
 
 ```re
            ^(.*)/_type='Assign'
@@ -1246,7 +1246,7 @@ Match a comprehension with an `if` clause.
 
 [🔽 construct `accumulate_elements`](#construct-accumulate_elements)  
 
-##### Definition
+##### Specification
 
 ```re
            ^(.*)/_type='AugAssign'
@@ -1275,7 +1275,7 @@ Match a comprehension with an `if` clause.
 
 #### Construct `chained_assignment`
 
-##### Definition
+##### Specification
 
 ```re
            ^(.*)/_type='Assign'
@@ -1307,7 +1307,7 @@ Capture any identifier appearing on the left hand side of an assignment (possibl
 
 [🔽 construct `accumulate_elements`](#construct-accumulate_elements)  
 
-##### Definition
+##### Specification
 
 ```re
 ^(.*/assigntarget(s/\d+)?(|/value|/elts/\d+|/elts/\d+/value))/_pos=(?P<POS>.+)
@@ -1368,7 +1368,7 @@ Capture any identifier (variable or function) appearing on the right hand side o
 
 [🔽 construct `accumulate_elements`](#construct-accumulate_elements)  
 
-##### Definition
+##### Specification
 
 ```re
 ^(.*/assignvalue\b.*)/_pos=(?P<POS>.+)
@@ -1412,7 +1412,7 @@ Capture any identifier (variable or function) appearing on the right hand side o
 
 Swap two variables or two elements of an array with a 2-element tuple or list.
 
-##### Definition
+##### Specification
 
 ```re
            ^(.*)/_type='Assign'
@@ -1444,7 +1444,7 @@ Swap two variables or two elements of an array with a 2-element tuple or list.
 
 Update a variable by negating it.
 
-##### Definition
+##### Specification
 
 ```re
            ^(.*)/_type='Assign'
@@ -1492,7 +1492,7 @@ In Python, the term "function" encompasses any type of subroutine, be it a metho
 [🔽 construct `generator`](#construct-generator)  
 [🔽 construct `recursive_function`](#construct-recursive_function)  
 
-##### Definition
+##### Specification
 
 ```re
            ^(.*)/_type='FunctionDef'
@@ -1550,7 +1550,7 @@ Match `return` statements and, when the returned object is [_atomic_](#construct
 [🔽 construct `closure`](#construct-closure)  
 [🔽 construct `function_returning_something`](#construct-function_returning_something)  
 
-##### Definition
+##### Specification
 
 ```re
            ^(.*)/_type='Return'
@@ -1595,7 +1595,7 @@ Match `yield` and `yieldfrom` _[expressions](https://docs.python.org/3/reference
 
 [🔽 construct `generator`](#construct-generator)  
 
-##### Definition
+##### Specification
 
 ```re
            ^(.*)/_type='Yield(From)?'
@@ -1641,7 +1641,7 @@ Match `yield` and `yieldfrom` _[expressions](https://docs.python.org/3/reference
 [🔼 construct `yield`](#construct-yield)  
 [🔽 construct `function_returning_nothing`](#construct-function_returning_nothing)  
 
-##### Definition
+##### Specification
 
 ```sql
 SELECT "generator",
@@ -1685,7 +1685,7 @@ A function returning at least one value distinct from `None` is the smallest `fu
 [🔼 construct `return`](#construct-return)  
 [🔽 construct `function_returning_nothing`](#construct-function_returning_nothing)  
 
-##### Definition
+##### Specification
 
 ```sql
 SELECT "function_returning_something",
@@ -1749,7 +1749,7 @@ A function returning nothing (aka procedure) is a function which is neither a ge
 [🔼 construct `function_returning_something`](#construct-function_returning_something)  
 [🔼 construct `generator`](#construct-generator)  
 
-##### Definition
+##### Specification
 
 ```sql
 SELECT "function_returning_nothing",
@@ -1805,7 +1805,7 @@ WHERE name_prefix = "function"
 
 #### Construct `function_with_default_positional_arguments`
 
-##### Definition
+##### Specification
 
 ```re
            ^(.*)/_type='FunctionDef'
@@ -1837,7 +1837,7 @@ WHERE name_prefix = "function"
 
 #### Construct `nested_function`
 
-##### Definition
+##### Specification
 
 ```re
            ^(.*)/_type='FunctionDef'
@@ -1874,7 +1874,7 @@ Function enclosing the definition of an inner function and returning it. Beware 
 [🔼 construct `function`](#construct-function)  
 [🔼 construct `return`](#construct-return)  
 
-##### Definition
+##### Specification
 
 ```sql
 SELECT "closure",
@@ -1921,7 +1921,7 @@ GROUP BY c.rowid
 [🔽 construct `body_recursive_function`](#construct-body_recursive_function)  
 [🔽 construct `tail_recursive_function`](#construct-tail_recursive_function)  
 
-##### Definition
+##### Specification
 
 ```sql
 SELECT "recursive_function",
@@ -1959,7 +1959,7 @@ Any function `f` which contains a nested call to itself (`f(..., f(...), ...)`),
 [🔼 construct `function`](#construct-function)  
 [🔼 construct `function_call`](#construct-function_call)  
 
-##### Definition
+##### Specification
 
 ```sql
 SELECT "deeply_recursive_function",
@@ -2003,7 +2003,7 @@ A function is body-recursive if and only if at least one of its recursive calls 
 [🔼 construct `recursive_function`](#construct-recursive_function)  
 [🔽 construct `tail_recursive_function`](#construct-tail_recursive_function)  
 
-##### Definition
+##### Specification
 
 ```sql
 SELECT "body_recursive_function",
@@ -2082,7 +2082,7 @@ A function is tail-recursive if and only if all its recursive calls are tail cal
 [🔼 construct `body_recursive_function`](#construct-body_recursive_function)  
 [🔼 construct `recursive_function`](#construct-recursive_function)  
 
-##### Definition
+##### Specification
 
 ```sql
 SELECT "tail_recursive_function",
@@ -2157,7 +2157,7 @@ Match an entire conditional (from the `if` clause to the last line of its body).
 
 [🔽 construct `nested_if`](#construct-nested_if)  
 
-##### Definition
+##### Specification
 
 ```re
            ^(.*)/_type='If'
@@ -2210,7 +2210,7 @@ else:
 
 Match any identifier present in the condition of an `if` statement.
 
-##### Definition
+##### Specification
 
 ```re
            ^(.*)/_type='If'
@@ -2245,7 +2245,7 @@ Match the body of the branch “`then`” of an `if` statement.
 
 [🔽 construct `nested_if`](#construct-nested_if)  
 
-##### Definition
+##### Specification
 
 ```re
 (^  # capture any body block
@@ -2303,7 +2303,7 @@ Match the body of an `elif` clause, which is (or could be rewritten as) an `else
 
 [🔽 construct `nested_if`](#construct-nested_if)  
 
-##### Definition
+##### Specification
 
 ```re
            ^(.*)/orelse/length=1
@@ -2363,7 +2363,7 @@ Match the body of the possible `else` branch of an `if` statement.
 
 [🔽 construct `nested_if`](#construct-nested_if)  
 
-##### Definition
+##### Specification
 
 ```re
            ^(.*)/_type='If'
@@ -2423,7 +2423,7 @@ Match an `if` clause nested in _n_ other `if` clauses, suffixing it by _n_.
 [🔼 construct `if_else_branch`](#construct-if_else_branch)  
 [🔼 construct `if_then_branch`](#construct-if_then_branch)  
 
-##### Definition
+##### Specification
 
 ```sql
 SELECT "nested_if",
@@ -2490,7 +2490,7 @@ Match sequential loops, along with their iteration variable(s).
 [🔽 construct `for_range`](#construct-for_range)  
 [🔽 construct `nested_for`](#construct-nested_for)  
 
-##### Definition
+##### Specification
 
 ```re
            ^(.*)/_type='For'
@@ -2525,7 +2525,7 @@ Match sequential loops, along with their iteration variable(s).
 
 Iterate over the elements of a (named) collection.
 
-##### Definition
+##### Specification
 
 ```re
            ^(.*)/_type='For'
@@ -2561,7 +2561,7 @@ Iterate over a range object.
 [🔼 construct `for`](#construct-for)  
 [🔼 construct `range`](#construct-range)  
 
-##### Definition
+##### Specification
 
 ```sql
 SELECT "for_range",
@@ -2605,7 +2605,7 @@ WHERE for_stmt.name_prefix = "for"
 
 Iterate over index numbers and elements of a collection.
 
-##### Definition
+##### Specification
 
 ```re
            ^(.*)/_type='For'
@@ -2633,7 +2633,7 @@ Iterate over index numbers and elements of a collection.
 
 Iterate over index numbers of a collection.
 
-##### Definition
+##### Specification
 
 ```re
            ^(.*)/_type='For'
@@ -2670,7 +2670,7 @@ Match a `for` statement nested in _n_ other `for` statements, suffixing it by _n
 
 [🔼 construct `for`](#construct-for)  
 
-##### Definition
+##### Specification
 
 ```sql
 SELECT "nested_for",
@@ -2709,7 +2709,7 @@ ORDER BY inner_loop.span_start
 
 A `for` loop with a counter `i` and a nested `for` loop which makes `i` iterations. The total number of iterations is a [triangular number](https://en.wikipedia.org/wiki/Triangular_number).
 
-##### Definition
+##### Specification
 
 ```re
            ^(.*)/_type='For'
@@ -2760,7 +2760,7 @@ A `for` loop with a counter `i` and a nested `for` loop which makes `i` iteratio
 
 Two nested `for` loops doing the same number of iterations.
 
-##### Definition
+##### Specification
 
 ```re
            ^(.*)/_type='For'
@@ -2793,7 +2793,7 @@ Two nested `for` loops doing the same number of iterations.
 
 #### Construct `while`
 
-##### Definition
+##### Specification
 
 ```re
            ^(.*)/_type='While'
@@ -2827,7 +2827,7 @@ Two nested `for` loops doing the same number of iterations.
 
 #### Construct `assertion`
 
-##### Definition
+##### Specification
 
 ```re
            ^(.*)/_type='Assert'
@@ -2854,7 +2854,7 @@ Two nested `for` loops doing the same number of iterations.
 
 [🔽 construct `try_raise|try_except`](#construct-try_raisetry_except)  
 
-##### Definition
+##### Specification
 
 ```re
            ^(.*)/_type='Try'
@@ -2888,7 +2888,7 @@ Two nested `for` loops doing the same number of iterations.
 
 [🔽 construct `try_raise|try_except`](#construct-try_raisetry_except)  
 
-##### Definition
+##### Specification
 
 ```re
            ^(.*)/_type='Raise'
@@ -2935,7 +2935,7 @@ Two nested `for` loops doing the same number of iterations.
 
 [🔽 construct `try_raise|try_except`](#construct-try_raisetry_except)  
 
-##### Definition
+##### Specification
 
 ```re
            ^(.*)/(?P<_1>handlers/\d+/(type/(func/|elts/\d+/)?)?)_pos=(?P<POS>.+)
@@ -2984,7 +2984,7 @@ Two nested `for` loops doing the same number of iterations.
 [🔼 construct `raise`](#construct-raise)  
 [🔼 construct `try`](#construct-try)  
 
-##### Definition
+##### Specification
 
 ```sql
 SELECT "try_" || e.name_prefix,
@@ -3037,7 +3037,7 @@ GROUP BY e.rowid
 
 [🔽 construct `import`](#construct-import)  
 
-##### Definition
+##### Specification
 
 ```re
            ^(.*)/_type='Import(From)?'
@@ -3083,7 +3083,7 @@ GROUP BY e.rowid
 
 [🔽 construct `import`](#construct-import)  
 
-##### Definition
+##### Specification
 
 ```re
            ^(.*)/_type='ImportFrom'
@@ -3125,7 +3125,7 @@ Suffixed by the imported module and, if any, the imported name. In most cases, c
 [🔼 construct `import_module`](#construct-import_module)  
 [🔼 construct `import_name`](#construct-import_name)  
 
-##### Definition
+##### Specification
 
 ```sql
 SELECT "import",
@@ -3190,7 +3190,7 @@ An accumulator is iteratively updated from its previous value and those of the i
 [🔼 construct `method_call`](#construct-method_call)  
 [🔼 construct `method_call_object`](#construct-method_call_object)  
 
-##### Definition
+##### Specification
 
 ```sql
 SELECT "accumulate_elements",
@@ -3264,7 +3264,7 @@ ORDER BY for_loop.span_start
 
 An accumulation pattern that, from a given collection, returns a list containing only those elements that verify a certain condition.
 
-##### Definition
+##### Specification
 
 ```re
            ^(.*)/_type='For'
@@ -3302,7 +3302,7 @@ An accumulation pattern that, from a given collection, returns a list containing
 
 An accumulation pattern that, from a given collection, returns the best element verifying a certain condition.
 
-##### Definition
+##### Specification
 
 ```re
            ^(.*)/(?P<_1>(?:body|orelse)/\d+)/_type='Assign'
@@ -3354,7 +3354,7 @@ An accumulation pattern that, from a given collection, returns the best element 
 
 Check whether all elements of a collection satisfy a predicate.
 
-##### Definition
+##### Specification
 
 ```re
           ^(.*?)/(?P<_1>(?:body|orelse)/\d+)/_type='For'
@@ -3389,7 +3389,7 @@ Check whether all elements of a collection satisfy a predicate.
 
 Check whether any element of a collection satisfies a predicate.
 
-##### Definition
+##### Specification
 
 ```re
           ^(.*?)/(?P<_1>(?:body|orelse)/\d+)/_type='For'
@@ -3424,7 +3424,7 @@ Check whether any element of a collection satisfies a predicate.
 
 Linear search. Return the first element of a sequence satisfying a predicate.
 
-##### Definition
+##### Specification
 
 ```re
            ^(.*)/_type='For'
@@ -3463,7 +3463,7 @@ Linear search. Return the first element of a sequence satisfying a predicate.
 
 Evolve the value of a variable until it reaches a desired state.
 
-##### Definition
+##### Specification
 
 ```re
            ^(.*)/_type='While'
@@ -3521,7 +3521,7 @@ Evolve the value of a variable until it reaches a desired state.
 
 Accumulate the inputs until a sentinel value is encountered (accumulation expressed by: `acc = combine(x, acc)`).
 
-##### Definition
+##### Specification
 
 ```re
            ^(.*)/_type='While'
@@ -3634,7 +3634,7 @@ It may be interesting to indicate the category of the program with an all-encomp
 - `text_processing`
 - ...
 
-##### Definition
+##### Specification
 
 ```
 ```
@@ -3677,7 +3677,7 @@ It's up to you to decide if a rewriting would make the code clearer.
 
 When a conditional simply assigns different values to the same variable, it may be rewritten as a conditional expression.
 
-##### Definition
+##### Specification
 
 ```re
            ^(.*)/_type='If'
@@ -3730,7 +3730,7 @@ The first conditional (only) may be rewritten as:
 
 When the RHS of an assignment consists in a binary operation whose left operand is the target (`a = a op expr`), the statement can be shortened as `a op= expr`.
 
-##### Definition
+##### Specification
 
 ```re
            ^(.*)/_type='Assign'
@@ -3776,7 +3776,7 @@ May be rewritten as:
 
 When the `else` branch of a conditional is another conditional, it can be rewritten with an `elif` branch.
 
-##### Definition
+##### Specification
 
 ```re
            ^(.*)/_type='BoolOp'
@@ -3820,7 +3820,7 @@ Note that the last simplification is rather confusing and should be avoided.
 
 Match magic numbers (unnamed numerical constants) other than -1, 0, 1 and 2. A number in the RHS of an assignment to a constant is of course ignored.
 
-##### Definition
+##### Specification
 
 ```re
   ^(/(?:body|orelse)/\d+)
@@ -3874,7 +3874,7 @@ May be rewritten as:
 
 When a predicate ends with a conditional whose sole purpose is to return `True` or `False`, it is enough to return the condition.
 
-##### Definition
+##### Specification
 
 ```re
            ^(.*)/_type='If'

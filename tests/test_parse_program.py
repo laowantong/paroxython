@@ -126,7 +126,7 @@ def inject_derivations(text):
                 new_section.append(f"[{kind} construct `{construct}`](#{slug})  ")
         new_section.append("\n")
         text = regex.sub(
-            r"(?msx)^(\#{4}\s+Construct\s+`%s`.+?)^(?=\#{5}\s+Definition)" % regex.escape(key),
+            r"(?msx)^(\#{4}\s+Construct\s+`%s`.+?)^(?=\#{5}\s+Specification)" % regex.escape(key),
             r"\1" + "\n".join(new_section),
             text,
         )
@@ -147,7 +147,7 @@ def reformat_file(construct_path):
     text = regex.sub(r"(?ms)^(\| Label \| .+?)(^\#{1,3} )", fr"\1{rule}\n\2", text)
     text = regex.sub(r"(?=\n\#{4} )", fr"\n{rule}", text)
     text = regex.sub(r"(?ms)^```sql\n(.+?)\n```", reformat_sql, text)
-    text = regex.sub(r"(?ms)^\#{5} Derivations\n.+?^(?=\#{5} Definition)", "", text)
+    text = regex.sub(r"(?ms)^\#{5} Derivations\n.+?^(?=\#{5} Specification)", "", text)
     text = inject_derivations(text)
     construct_path.write_text(text)
 
