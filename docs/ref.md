@@ -42,7 +42,6 @@
       - [Construct `augmented_assignment`](#construct-augmented_assignment)
       - [Construct `chained_assignment`](#construct-chained_assignment)
       - [Construct `assignment_lhs_identifier`](#construct-assignment_lhs_identifier)
-      - [Construct `constant_assignment` (SQL)](#construct-constant_assignment)
       - [Construct `assignment_rhs_identifier`](#construct-assignment_rhs_identifier)
     - [Assignment idioms](#assignment-idioms)
       - [Construct `swapping`](#construct-swapping)
@@ -1307,7 +1306,6 @@ Capture any identifier appearing on the left hand side of an assignment (possibl
 ##### Derivations
 
 [🔽 construct `accumulate_elements`](#construct-accumulate_elements)  
-[🔽 construct `constant_assignment`](#construct-constant_assignment)  
 
 ##### Definition
 
@@ -1359,54 +1357,6 @@ Capture any identifier appearing on the left hand side of an assignment (possibl
 | `assignment_lhs_identifier:o` | 12 |
 | `assignment_lhs_identifier:first` | 18 |
 | `assignment_lhs_identifier:second` | 18 |
-
---------------------------------------------------------------------------------
-
-#### Construct `constant_assignment`
-
-Check whether an assignment target follows the Python conventions for constants.
-
-##### Derivations
-
-[🔼 construct `assignment_lhs_identifier`](#construct-assignment_lhs_identifier)  
-
-##### Definition
-
-```sql
-SELECT "constant_assignment",
-       name_suffix,
-       span,
-       path
-FROM t
-WHERE name REGEXP "assignment_lhs_identifier:[[:upper:]0-9_]+$"
-```
-
-**Remark.** Note the user-defined function `REGEXP` in the `WHERE`clause. It calls the function `match()` of the third-party [`regex`](https://pypi.org/project/regex/) library.
-
-##### Example
-
-```python
-1   A = 42
-2   a = 42
-3   WORD = 42
-4   word = 42
-5   Word = 42
-6   WORD42 = 42
-7   word42 = 42
-8   Word42 = 42
-9   snake_case = 42
-10  CamelCase = 42
-11  SCREAMING_SNAKE_CASE = 42
-```
-
-##### Matches
-
-| Label | Lines |
-|:--|:--|
-| `constant_assignment:A` | 1 |
-| `constant_assignment:WORD` | 3 |
-| `constant_assignment:WORD42` | 6 |
-| `constant_assignment:SCREAMING_SNAKE_CASE` | 11 |
 
 --------------------------------------------------------------------------------
 
@@ -3267,6 +3217,8 @@ WHERE for_loop.name_prefix = "for" -- A for loop...
 GROUP BY for_loop.span
 ORDER BY for_loop.span_start
 ```
+
+**Remark.** Note the user-defined function `REGEXP` in the `WHERE`clause. It calls the function `match()` of the third-party [`regex`](https://pypi.org/project/regex/) library.
 
 ##### Example
 

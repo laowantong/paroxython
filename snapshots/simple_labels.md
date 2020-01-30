@@ -81,7 +81,6 @@
 - comprehension
 - comprehension_for_count
 - conditional_expression
-- constant_assignment
 - deeply_recursive_function
 - divisibility_test
 - except

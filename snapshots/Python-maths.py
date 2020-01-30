@@ -283,12 +283,12 @@ def binary_exponentiation(a, n): # body_recursive_function:binary_exponentiation
 # ../Python/maths/binomial_coefficient.py
 # ----------------------------------------------------------------------------------------
 def binomial_coefficient(n, r): # function:binomial_coefficient (-> +8), function_returning_something:binomial_coefficient (-> +8)
-    C = [0 for i in range(r + 1)] # assignment, assignment_lhs_identifier:C, assignment_rhs_identifier:i, assignment_rhs_identifier:r, assignment_rhs_identifier:range, binary_operator:Add, call_argument:, comprehension:List, comprehension_for_count:1, constant_assignment:C, function_call:range, int_literal, literal:Num, range:_
-    C[0] = 1 # assignment, assignment_lhs_identifier:C, constant_assignment:C, index, int_literal, literal:Num
+    C = [0 for i in range(r + 1)] # assignment, assignment_lhs_identifier:C, assignment_rhs_identifier:i, assignment_rhs_identifier:r, assignment_rhs_identifier:range, binary_operator:Add, call_argument:, comprehension:List, comprehension_for_count:1, function_call:range, int_literal, literal:Num, range:_
+    C[0] = 1 # assignment, assignment_lhs_identifier:C, index, int_literal, literal:Num
     for i in range(1, n + 1): # binary_operator:Add, call_argument:, call_argument:1, for:i (-> +4), for_range:1:_ (-> +4), function_call:range, int_literal, literal:Num, range:1:_
         j = min(i, r) # assignment, assignment_lhs_identifier:j, assignment_rhs_identifier:i, assignment_rhs_identifier:min, assignment_rhs_identifier:r, call_argument:i, call_argument:r, function_call:min
         while j > 0: # comparison_operator:Gt, evolve_state (-> +2), int_literal, literal:Num, while (-> +2)
-            C[j] += C[j - 1] # assignment_lhs_identifier:C, assignment_rhs_identifier:C, assignment_rhs_identifier:j, augmented_assignment, binary_operator:Sub, constant_assignment:C, index, index_arithmetic, int_literal, literal:Num
+            C[j] += C[j - 1] # assignment_lhs_identifier:C, assignment_rhs_identifier:C, assignment_rhs_identifier:j, augmented_assignment, binary_operator:Sub, index, index_arithmetic, int_literal, literal:Num
             j -= 1 # assignment_lhs_identifier:j, augmented_assignment, int_literal, literal:Num
     return C[r] # index, return
 print(binomial_coefficient(n=10, r=5)) # call_argument:, composition, function_call:binomial_coefficient, function_call:print, int_literal, literal:Num
@@ -324,7 +324,7 @@ def main(): # function:main (-> +4), function_returning_nothing:main (-> +4)
 # ----------------------------------------------------------------------------------------
 import numpy as np # import:numpy, import_module:numpy
 def explicit_euler(ode_func, y0, x0, stepsize, x_end): # function:explicit_euler (-> +8), function_returning_something:explicit_euler (-> +8)
-    N = int(np.ceil((x_end - x0) / stepsize)) # assignment, assignment_lhs_identifier:N, assignment_rhs_identifier:int, assignment_rhs_identifier:np, assignment_rhs_identifier:stepsize, assignment_rhs_identifier:x0, assignment_rhs_identifier:x_end, binary_operator:Div, binary_operator:Sub, call_argument:, composition, constant_assignment:N, function_call:int, method_call:ceil
+    N = int(np.ceil((x_end - x0) / stepsize)) # assignment, assignment_lhs_identifier:N, assignment_rhs_identifier:int, assignment_rhs_identifier:np, assignment_rhs_identifier:stepsize, assignment_rhs_identifier:x0, assignment_rhs_identifier:x_end, binary_operator:Div, binary_operator:Sub, call_argument:, composition, function_call:int, method_call:ceil
     y = np.zeros((N + 1,)) # assignment, assignment_lhs_identifier:y, assignment_rhs_identifier:N, assignment_rhs_identifier:np, binary_operator:Add, call_argument:, int_literal, literal:Num, method_call:zeros
     y[0] = y0 # assignment, assignment_lhs_identifier:y, assignment_rhs_identifier:y0, index, int_literal, literal:Num
     x = x0 # assignment, assignment_lhs_identifier:x, assignment_rhs_identifier:x0
@@ -963,8 +963,8 @@ import numpy as np # import:numpy, import_module:numpy
 def qr_householder(A): # function:qr_householder (-> +16), function_returning_something:qr_householder (-> +16)
     m, n = A.shape # assignment, assignment_lhs_identifier:m, assignment_lhs_identifier:n, assignment_rhs_identifier:A
     t = min(m, n) # assignment, assignment_lhs_identifier:t, assignment_rhs_identifier:m, assignment_rhs_identifier:min, assignment_rhs_identifier:n, call_argument:m, call_argument:n, function_call:min
-    Q = np.eye(m) # assignment, assignment_lhs_identifier:Q, assignment_rhs_identifier:m, assignment_rhs_identifier:np, call_argument:m, constant_assignment:Q, method_call:eye
-    R = A.copy() # assignment, assignment_lhs_identifier:R, assignment_rhs_identifier:A, constant_assignment:R, method_call:copy
+    Q = np.eye(m) # assignment, assignment_lhs_identifier:Q, assignment_rhs_identifier:m, assignment_rhs_identifier:np, call_argument:m, method_call:eye
+    R = A.copy() # assignment, assignment_lhs_identifier:R, assignment_rhs_identifier:A, method_call:copy
     for k in range(t - 1): # accumulate_elements:1 (-> +10), binary_operator:Sub, call_argument:, for:k (-> +10), for_range:_ (-> +10), function_call:range, int_literal, literal:Num, range:_
         x = R[k:, [k]] # assignment, assignment_lhs_identifier:x, assignment_rhs_identifier:R, assignment_rhs_identifier:k
         e1 = np.zeros_like(x) # assignment, assignment_lhs_identifier:e1, assignment_rhs_identifier:np, assignment_rhs_identifier:x, call_argument:x, method_call:zeros_like
@@ -974,8 +974,8 @@ def qr_householder(A): # function:qr_householder (-> +16), function_returning_so
         v /= np.linalg.norm(v) # assignment_lhs_identifier:v, assignment_rhs_identifier:np, assignment_rhs_identifier:v, augmented_assignment, call_argument:v, method_call:norm
         Q_k = np.eye(m - k) - 2.0 * v @ v.T # assignment, assignment_lhs_identifier:Q_k, assignment_rhs_identifier:k, assignment_rhs_identifier:m, assignment_rhs_identifier:np, assignment_rhs_identifier:v, binary_operator:MatMult, binary_operator:Mult, binary_operator:Sub, call_argument:, float_literal, literal:Num, method_call:eye, suggest_constant_definition
         Q_k = np.block([[np.eye(k), np.zeros((k, m - k))], [np.zeros((m - k, k)), Q_k]]) # assignment, assignment_lhs_identifier:Q_k, assignment_rhs_identifier:Q_k, assignment_rhs_identifier:k, assignment_rhs_identifier:m, assignment_rhs_identifier:np, binary_operator:Sub, call_argument:, call_argument:k, composition, method_call:block, method_call:eye, method_call:zeros
-        Q = Q @ Q_k.T # assignment, assignment_lhs_identifier:Q, assignment_rhs_identifier:Q, assignment_rhs_identifier:Q_k, binary_operator:MatMult, constant_assignment:Q, suggest_augmented_assignment
-        R = Q_k @ R # assignment, assignment_lhs_identifier:R, assignment_rhs_identifier:Q_k, assignment_rhs_identifier:R, binary_operator:MatMult, constant_assignment:R
+        Q = Q @ Q_k.T # assignment, assignment_lhs_identifier:Q, assignment_rhs_identifier:Q, assignment_rhs_identifier:Q_k, binary_operator:MatMult, suggest_augmented_assignment
+        R = Q_k @ R # assignment, assignment_lhs_identifier:R, assignment_rhs_identifier:Q_k, assignment_rhs_identifier:R, binary_operator:MatMult
     return Q, R # return
 
 # ----------------------------------------------------------------------------------------
@@ -1083,13 +1083,13 @@ class FFT:
             inverseC.pop() # method_call:pop, method_call_object:inverseC
         return inverseC # return:inverseC
     def __str__(self): # function:__str__ (-> +10), function_returning_something:__str__ (-> +10)
-        A = "A = " + " + ".join( # assignment, assignment_lhs_identifier:A, binary_operator:Add, composition, constant_assignment:A, literal:Str, method_call:join
+        A = "A = " + " + ".join( # assignment, assignment_lhs_identifier:A, binary_operator:Add, composition, literal:Str, method_call:join
             f"{coef}*x^{i}" for coef, i in enumerate(self.polyA[: self.len_A]) # assignment_rhs_identifier:coef, assignment_rhs_identifier:enumerate, assignment_rhs_identifier:i, assignment_rhs_identifier:self, call_argument:, comprehension:Generator, comprehension_for_count:1, function_call:enumerate, literal:Str, slice
         )
-        B = "B = " + " + ".join( # assignment, assignment_lhs_identifier:B, binary_operator:Add, composition, constant_assignment:B, literal:Str, method_call:join
+        B = "B = " + " + ".join( # assignment, assignment_lhs_identifier:B, binary_operator:Add, composition, literal:Str, method_call:join
             f"{coef}*x^{i}" for coef, i in enumerate(self.polyB[: self.len_B]) # assignment_rhs_identifier:coef, assignment_rhs_identifier:enumerate, assignment_rhs_identifier:i, assignment_rhs_identifier:self, call_argument:, comprehension:Generator, comprehension_for_count:1, function_call:enumerate, literal:Str, slice
         )
-        C = "A*B = " + " + ".join( # assignment, assignment_lhs_identifier:C, binary_operator:Add, composition, constant_assignment:C, literal:Str, method_call:join
+        C = "A*B = " + " + ".join( # assignment, assignment_lhs_identifier:C, binary_operator:Add, composition, literal:Str, method_call:join
             f"{coef}*x^{i}" for coef, i in enumerate(self.product) # assignment_rhs_identifier:coef, assignment_rhs_identifier:enumerate, assignment_rhs_identifier:i, assignment_rhs_identifier:self, call_argument:, comprehension:Generator, comprehension_for_count:1, function_call:enumerate, literal:Str
         )
         return "\n".join((A, B, C)) # call_argument:, literal:Str, method_call:join, return
@@ -1099,7 +1099,7 @@ class FFT:
 # ----------------------------------------------------------------------------------------
 import numpy as np # import:numpy, import_module:numpy
 def runge_kutta(f, y0, x0, h, x_end): # function:runge_kutta (-> +12), function_returning_something:runge_kutta (-> +12)
-    N = int(np.ceil((x_end - x0) / h)) # assignment, assignment_lhs_identifier:N, assignment_rhs_identifier:h, assignment_rhs_identifier:int, assignment_rhs_identifier:np, assignment_rhs_identifier:x0, assignment_rhs_identifier:x_end, binary_operator:Div, binary_operator:Sub, call_argument:, composition, constant_assignment:N, function_call:int, method_call:ceil
+    N = int(np.ceil((x_end - x0) / h)) # assignment, assignment_lhs_identifier:N, assignment_rhs_identifier:h, assignment_rhs_identifier:int, assignment_rhs_identifier:np, assignment_rhs_identifier:x0, assignment_rhs_identifier:x_end, binary_operator:Div, binary_operator:Sub, call_argument:, composition, function_call:int, method_call:ceil
     y = np.zeros((N + 1,)) # assignment, assignment_lhs_identifier:y, assignment_rhs_identifier:N, assignment_rhs_identifier:np, binary_operator:Add, call_argument:, int_literal, literal:Num, method_call:zeros
     y[0] = y0 # assignment, assignment_lhs_identifier:y, assignment_rhs_identifier:y0, index, int_literal, literal:Num
     x = x0 # assignment, assignment_lhs_identifier:x, assignment_rhs_identifier:x0
