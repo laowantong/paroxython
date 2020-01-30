@@ -25,9 +25,9 @@ def _simplify_negative_literals() -> Callable:
 simplify_negative_literals = _simplify_negative_literals()
 
 
-find_all_constructs = regex.compile(
+find_all_features = regex.compile(
     r"""(?msx)
-            ^\#{4}\s+Construct\s+`(.+?)` # capture the label's pattern
+            ^\#{4}\s+Feature\s+`(.+?)` # capture the label's pattern
             .+?\#{5}\s+Specification # ensure the next pattern is in the Specification section
             .+?```(.*?)\n+(.*?)\n``` # capture the language and the pattern
         """
@@ -35,19 +35,19 @@ find_all_constructs = regex.compile(
 
 
 class ProgramParser:
-    """Compile the given construct specifications, and search them in a Program."""
+    """Compile the given feature specifications, and search them in a Program."""
 
     def __init__(self, spec_path: str = "docs/spec.md") -> None:
-        """Compile the constructs to search."""
+        """Compile the features to search."""
         self.spec_path = Path(spec_path)
         text = self.spec_path.read_text()
-        self.constructs: Dict[LabelName, regex.Pattern] = {}
+        self.features: Dict[LabelName, regex.Pattern] = {}
         self.queries: Dict[LabelName, Query] = {}
-        for (label_name, language, pattern) in find_all_constructs(text):
-            if label_name in self.constructs:
+        for (label_name, language, pattern) in find_all_features(text):
+            if label_name in self.features:
                 raise ValueError(f"Duplicated name '{label_name}'!")  # pragma: no cover
             if language == "re":
-                self.constructs[label_name] = regex.compile(f"(?mx){pattern}")
+                self.features[label_name] = regex.compile(f"(?mx){pattern}")
             elif language == "sql":
                 self.queries[label_name] = pattern.replace(" INSIDE ", " GLOB ")
         self.db = DB()
@@ -69,7 +69,7 @@ class ProgramParser:
         self.flat_ast = simplify_negative_literals(flatten_ast(tree))
 
         labels: Labels = []
-        for (label_name, rex) in self.constructs.items():
+        for (label_name, rex) in self.features.items():
             result: LabelsSpans = defaultdict(list)
             for candidate in list(program.addition):
                 if candidate == label_name or candidate.startswith(f"{label_name}:"):
@@ -108,7 +108,7 @@ class ProgramParser:
 
 
 if __name__ == "__main__":
-    """Take an individual source, print its constructs and write its flat AST."""
+    """Take an individual source, print its features and write its flat AST."""
     path = Path("sandbox/source.py")
     source = path.read_text().strip()
     if source.startswith("1   "):

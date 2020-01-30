@@ -1,119 +1,119 @@
 - [Expressions](#expressions)
   - [Literals](#literals)
-      - [Construct `literal`](#construct-literal)
-      - [Construct `int_literal`](#construct-int_literal)
-      - [Construct `float_literal`](#construct-float_literal)
-      - [Construct `imaginary_literal`](#construct-imaginary_literal)
+      - [Feature `literal`](#feature-literal)
+      - [Feature `int_literal`](#feature-int_literal)
+      - [Feature `float_literal`](#feature-float_literal)
+      - [Feature `imaginary_literal`](#feature-imaginary_literal)
   - [Subscripts](#subscripts)
-      - [Construct `index`](#construct-index)
-      - [Construct `index_arithmetic`](#construct-index_arithmetic)
-      - [Construct `negative_index`](#construct-negative_index)
-      - [Construct `slice`](#construct-slice)
-      - [Construct `slice_step`](#construct-slice_step)
+      - [Feature `index`](#feature-index)
+      - [Feature `index_arithmetic`](#feature-index_arithmetic)
+      - [Feature `negative_index`](#feature-negative_index)
+      - [Feature `slice`](#feature-slice)
+      - [Feature `slice_step`](#feature-slice_step)
   - [Operators](#operators)
-      - [Construct `unary_operator`](#construct-unary_operator)
-      - [Construct `binary_operator`](#construct-binary_operator)
-      - [Construct `conditional_expression`](#construct-conditional_expression)
+      - [Feature `unary_operator`](#feature-unary_operator)
+      - [Feature `binary_operator`](#feature-binary_operator)
+      - [Feature `conditional_expression`](#feature-conditional_expression)
   - [Boolean expressions](#boolean-expressions)
-      - [Construct `boolean_operator`](#construct-boolean_operator)
-      - [Construct `comparison_operator`](#construct-comparison_operator)
-      - [Construct `chained_comparison`](#construct-chained_comparison)
-      - [Construct `chained_equalities|chained_inequalities` (SQL)](#construct-chained_equalitieschained_inequalities)
-      - [Construct `divisibility_test`](#construct-divisibility_test)
-      - [Construct `short_circuit`](#construct-short_circuit)
+      - [Feature `boolean_operator`](#feature-boolean_operator)
+      - [Feature `comparison_operator`](#feature-comparison_operator)
+      - [Feature `chained_comparison`](#feature-chained_comparison)
+      - [Feature `chained_equalities|chained_inequalities` (SQL)](#feature-chained_equalitieschained_inequalities)
+      - [Feature `divisibility_test`](#feature-divisibility_test)
+      - [Feature `short_circuit`](#feature-short_circuit)
   - [Calls](#calls)
-      - [Construct `function_call`](#construct-function_call)
-      - [Construct `function_tail_call`](#construct-function_tail_call)
-      - [Construct `call_argument`](#construct-call_argument)
-      - [Construct `method_call`](#construct-method_call)
-      - [Construct `method_call_object`](#construct-method_call_object)
-      - [Construct `method_chaining`](#construct-method_chaining)
-      - [Construct `composition`](#construct-composition)
+      - [Feature `function_call`](#feature-function_call)
+      - [Feature `function_tail_call`](#feature-function_tail_call)
+      - [Feature `call_argument`](#feature-call_argument)
+      - [Feature `method_call`](#feature-method_call)
+      - [Feature `method_call_object`](#feature-method_call_object)
+      - [Feature `method_chaining`](#feature-method_chaining)
+      - [Feature `composition`](#feature-composition)
   - [Anonymous functions](#anonymous-functions)
-      - [Construct `lambda_function`](#construct-lambda_function)
+      - [Feature `lambda_function`](#feature-lambda_function)
   - [Iterables](#iterables)
-      - [Construct `range` (SQL)](#construct-range)
-      - [Construct `comprehension`](#construct-comprehension)
-      - [Construct `comprehension_for_count`](#construct-comprehension_for_count)
-      - [Construct `filtered_comprehension`](#construct-filtered_comprehension)
+      - [Feature `range` (SQL)](#feature-range)
+      - [Feature `comprehension`](#feature-comprehension)
+      - [Feature `comprehension_for_count`](#feature-comprehension_for_count)
+      - [Feature `filtered_comprehension`](#feature-filtered_comprehension)
 - [Statements](#statements)
   - [Assignments](#assignments)
-      - [Construct `assignment`](#construct-assignment)
-      - [Construct `augmented_assignment`](#construct-augmented_assignment)
-      - [Construct `chained_assignment`](#construct-chained_assignment)
-      - [Construct `assignment_lhs_identifier`](#construct-assignment_lhs_identifier)
-      - [Construct `assignment_rhs_identifier`](#construct-assignment_rhs_identifier)
+      - [Feature `assignment`](#feature-assignment)
+      - [Feature `augmented_assignment`](#feature-augmented_assignment)
+      - [Feature `chained_assignment`](#feature-chained_assignment)
+      - [Feature `assignment_lhs_identifier`](#feature-assignment_lhs_identifier)
+      - [Feature `assignment_rhs_identifier`](#feature-assignment_rhs_identifier)
     - [Assignment idioms](#assignment-idioms)
-      - [Construct `swapping`](#construct-swapping)
-      - [Construct `negation`](#construct-negation)
+      - [Feature `swapping`](#feature-swapping)
+      - [Feature `negation`](#feature-negation)
   - [Function definitions](#function-definitions)
     - [Interface](#interface)
-      - [Construct `function`](#construct-function)
-      - [Construct `return`](#construct-return)
-      - [Construct `yield`](#construct-yield)
-      - [Construct `generator` (SQL)](#construct-generator)
-      - [Construct `function_returning_something` (SQL)](#construct-function_returning_something)
-      - [Construct `function_returning_nothing` (SQL)](#construct-function_returning_nothing)
-      - [Construct `function_with_default_positional_arguments`](#construct-function_with_default_positional_arguments)
+      - [Feature `function`](#feature-function)
+      - [Feature `return`](#feature-return)
+      - [Feature `yield`](#feature-yield)
+      - [Feature `generator` (SQL)](#feature-generator)
+      - [Feature `function_returning_something` (SQL)](#feature-function_returning_something)
+      - [Feature `function_returning_nothing` (SQL)](#feature-function_returning_nothing)
+      - [Feature `function_with_default_positional_arguments`](#feature-function_with_default_positional_arguments)
     - [Nesting](#nesting)
-      - [Construct `nested_function`](#construct-nested_function)
-      - [Construct `closure` (SQL)](#construct-closure)
+      - [Feature `nested_function`](#feature-nested_function)
+      - [Feature `closure` (SQL)](#feature-closure)
     - [Recursion](#recursion)
-      - [Construct `recursive_function` (SQL)](#construct-recursive_function)
-      - [Construct `deeply_recursive_function` (SQL)](#construct-deeply_recursive_function)
-      - [Construct `body_recursive_function` (SQL)](#construct-body_recursive_function)
-      - [Construct `tail_recursive_function` (SQL)](#construct-tail_recursive_function)
+      - [Feature `recursive_function` (SQL)](#feature-recursive_function)
+      - [Feature `deeply_recursive_function` (SQL)](#feature-deeply_recursive_function)
+      - [Feature `body_recursive_function` (SQL)](#feature-body_recursive_function)
+      - [Feature `tail_recursive_function` (SQL)](#feature-tail_recursive_function)
   - [Conditionals](#conditionals)
-      - [Construct `if`](#construct-if)
-      - [Construct `if_test_id`](#construct-if_test_id)
-      - [Construct `if_then_branch`](#construct-if_then_branch)
-      - [Construct `if_elif_branch`](#construct-if_elif_branch)
-      - [Construct `if_else_branch`](#construct-if_else_branch)
-      - [Construct `nested_if` (SQL)](#construct-nested_if)
+      - [Feature `if`](#feature-if)
+      - [Feature `if_test_id`](#feature-if_test_id)
+      - [Feature `if_then_branch`](#feature-if_then_branch)
+      - [Feature `if_elif_branch`](#feature-if_elif_branch)
+      - [Feature `if_else_branch`](#feature-if_else_branch)
+      - [Feature `nested_if` (SQL)](#feature-nested_if)
   - [Iterations](#iterations)
-      - [Construct `for`](#construct-for)
-      - [Construct `for_each`](#construct-for_each)
-      - [Construct `for_range` (SQL)](#construct-for_range)
-      - [Construct `for_indexes_elements`](#construct-for_indexes_elements)
-      - [Construct `for_indexes`](#construct-for_indexes)
-      - [Construct `nested_for` (SQL)](#construct-nested_for)
-      - [Construct `triangular_nested_for`](#construct-triangular_nested_for)
-      - [Construct `square_nested_for`](#construct-square_nested_for)
-      - [Construct `while`](#construct-while)
+      - [Feature `for`](#feature-for)
+      - [Feature `for_each`](#feature-for_each)
+      - [Feature `for_range` (SQL)](#feature-for_range)
+      - [Feature `for_indexes_elements`](#feature-for_indexes_elements)
+      - [Feature `for_indexes`](#feature-for_indexes)
+      - [Feature `nested_for` (SQL)](#feature-nested_for)
+      - [Feature `triangular_nested_for`](#feature-triangular_nested_for)
+      - [Feature `square_nested_for`](#feature-square_nested_for)
+      - [Feature `while`](#feature-while)
   - [Exceptions](#exceptions)
-      - [Construct `assertion`](#construct-assertion)
-      - [Construct `try`](#construct-try)
-      - [Construct `raise`](#construct-raise)
-      - [Construct `except`](#construct-except)
-      - [Construct `try_raise|try_except` (SQL)](#construct-try_raisetry_except)
+      - [Feature `assertion`](#feature-assertion)
+      - [Feature `try`](#feature-try)
+      - [Feature `raise`](#feature-raise)
+      - [Feature `except`](#feature-except)
+      - [Feature `try_raise|try_except` (SQL)](#feature-try_raisetry_except)
   - [Modules](#modules)
-      - [Construct `import_module`](#construct-import_module)
-      - [Construct `import_name`](#construct-import_name)
-      - [Construct `import` (SQL)](#construct-import)
+      - [Feature `import_module`](#feature-import_module)
+      - [Feature `import_name`](#feature-import_name)
+      - [Feature `import` (SQL)](#feature-import)
 - [Code patterns](#code-patterns)
   - [Iterative patterns](#iterative-patterns)
     - [Sequential loops](#sequential-loops)
-      - [Construct `accumulate_elements` (SQL)](#construct-accumulate_elements)
-      - [Construct `filter_for`](#construct-filter_for)
-      - [Construct `find_best_element`](#construct-find_best_element)
-      - [Construct `universal_quantifier`](#construct-universal_quantifier)
-      - [Construct `existential_quantifier`](#construct-existential_quantifier)
-      - [Construct `find_first_element`](#construct-find_first_element)
+      - [Feature `accumulate_elements` (SQL)](#feature-accumulate_elements)
+      - [Feature `filter_for`](#feature-filter_for)
+      - [Feature `find_best_element`](#feature-find_best_element)
+      - [Feature `universal_quantifier`](#feature-universal_quantifier)
+      - [Feature `existential_quantifier`](#feature-existential_quantifier)
+      - [Feature `find_first_element`](#feature-find_first_element)
     - [Non sequential finite loops](#non-sequential-finite-loops)
-      - [Construct `evolve_state`](#construct-evolve_state)
+      - [Feature `evolve_state`](#feature-evolve_state)
     - [Non sequential infinite loops](#non-sequential-infinite-loops)
-      - [Construct `accumulate_stream`](#construct-accumulate_stream)
+      - [Feature `accumulate_stream`](#feature-accumulate_stream)
 - [Programs](#programs)
-      - [Construct `category`](#construct-category)
+      - [Feature `category`](#feature-category)
 - [Suggestions](#suggestions)
   - [Assignments](#assignments-1)
-      - [Construct `suggest_conditional_expression`](#construct-suggest_conditional_expression)
-      - [Construct `suggest_augmented_assignment`](#construct-suggest_augmented_assignment)
+      - [Feature `suggest_conditional_expression`](#feature-suggest_conditional_expression)
+      - [Feature `suggest_augmented_assignment`](#feature-suggest_augmented_assignment)
   - [Expressions](#expressions-1)
-      - [Construct `suggest_comparison_chaining`](#construct-suggest_comparison_chaining)
-      - [Construct `suggest_constant_definition`](#construct-suggest_constant_definition)
+      - [Feature `suggest_comparison_chaining`](#feature-suggest_comparison_chaining)
+      - [Feature `suggest_constant_definition`](#feature-suggest_constant_definition)
   - [Subroutines](#subroutines)
-      - [Construct `suggest_condition_return`](#construct-suggest_condition_return)
+      - [Feature `suggest_condition_return`](#feature-suggest_condition_return)
 
 # Expressions
 
@@ -121,7 +121,7 @@
 
 --------------------------------------------------------------------------------
 
-#### Construct `literal`
+#### Feature `literal`
 
 ##### Specification
 
@@ -171,9 +171,9 @@
 
 --------------------------------------------------------------------------------
 
-#### Construct `int_literal`
+#### Feature `int_literal`
 
-Matching literal does not require to construct a sophisticated regular expression: the heavy lifting is already made in the given AST, which stores them in a normalized form. For instance, integer literals are just sequence of digits:
+Matching literal does not require to feature a sophisticated regular expression: the heavy lifting is already made in the given AST, which stores them in a normalized form. For instance, integer literals are just sequence of digits:
 
 ##### Specification
 
@@ -202,7 +202,7 @@ The following examples of numeric literals are taken from the [reference](https:
 
 --------------------------------------------------------------------------------
 
-#### Construct `float_literal`
+#### Feature `float_literal`
 
 In the AST, a floating point literal consists of digits and at least one symbol among `.` and `e`.
 
@@ -231,7 +231,7 @@ In the AST, a floating point literal consists of digits and at least one symbol 
 
 --------------------------------------------------------------------------------
 
-#### Construct `imaginary_literal`
+#### Feature `imaginary_literal`
 
 In the AST, an imaginary literal contains the same symbols as a floating point literal, plus a mandatory trailing symbol `j`.
 
@@ -264,7 +264,7 @@ In the AST, an imaginary literal contains the same symbols as a floating point l
 
 --------------------------------------------------------------------------------
 
-#### Construct `index`
+#### Feature `index`
 
 ##### Specification
 
@@ -290,7 +290,7 @@ In the AST, an imaginary literal contains the same symbols as a floating point l
 
 --------------------------------------------------------------------------------
 
-#### Construct `index_arithmetic`
+#### Feature `index_arithmetic`
 
 ##### Specification
 
@@ -316,7 +316,7 @@ In the AST, an imaginary literal contains the same symbols as a floating point l
 
 --------------------------------------------------------------------------------
 
-#### Construct `negative_index`
+#### Feature `negative_index`
 
 ##### Specification
 
@@ -360,7 +360,7 @@ In the AST, an imaginary literal contains the same symbols as a floating point l
 
 --------------------------------------------------------------------------------
 
-#### Construct `slice`
+#### Feature `slice`
 
 ##### Specification
 
@@ -387,7 +387,7 @@ In the AST, an imaginary literal contains the same symbols as a floating point l
 
 --------------------------------------------------------------------------------
 
-#### Construct `slice_step`
+#### Feature `slice_step`
 
 ##### Specification
 
@@ -417,7 +417,7 @@ In the AST, an imaginary literal contains the same symbols as a floating point l
 
 --------------------------------------------------------------------------------
 
-#### Construct `unary_operator`
+#### Feature `unary_operator`
 
 ##### Specification
 
@@ -446,7 +446,7 @@ In the AST, an imaginary literal contains the same symbols as a floating point l
 
 --------------------------------------------------------------------------------
 
-#### Construct `binary_operator`
+#### Feature `binary_operator`
 
 ##### Specification
 
@@ -471,7 +471,7 @@ In the AST, an imaginary literal contains the same symbols as a floating point l
 
 --------------------------------------------------------------------------------
 
-#### Construct `conditional_expression`
+#### Feature `conditional_expression`
 
 Match the so-called ternary operator.
 
@@ -500,7 +500,7 @@ Match the so-called ternary operator.
 
 --------------------------------------------------------------------------------
 
-#### Construct `boolean_operator`
+#### Feature `boolean_operator`
 
 ##### Specification
 
@@ -525,15 +525,15 @@ Match the so-called ternary operator.
 | `boolean_operator:And` | 1 |
 | `boolean_operator:Or` | 2 |
 
-**Remark.** `Not` is not a boolean operator in Python. To match it, use [construct `unary_operator:Not`](#construct-unary_operator).
+**Remark.** `Not` is not a boolean operator in Python. To match it, use [feature `unary_operator:Not`](#feature-unary_operator).
 
 --------------------------------------------------------------------------------
 
-#### Construct `comparison_operator`
+#### Feature `comparison_operator`
 
 ##### Derivations
 
-[🔽 construct `chained_equalities|chained_inequalities`](#construct-chained_equalitieschained_inequalities)  
+[🔽 feature `chained_equalities|chained_inequalities`](#feature-chained_equalitieschained_inequalities)  
 
 ##### Specification
 
@@ -561,11 +561,11 @@ Match the so-called ternary operator.
 
 --------------------------------------------------------------------------------
 
-#### Construct `chained_comparison`
+#### Feature `chained_comparison`
 
 ##### Derivations
 
-[🔽 construct `chained_equalities|chained_inequalities`](#construct-chained_equalitieschained_inequalities)  
+[🔽 feature `chained_equalities|chained_inequalities`](#feature-chained_equalitieschained_inequalities)  
 
 ##### Specification
 
@@ -592,12 +592,12 @@ Match the so-called ternary operator.
 
 --------------------------------------------------------------------------------
 
-#### Construct `chained_equalities|chained_inequalities`
+#### Feature `chained_equalities|chained_inequalities`
 
 ##### Derivations
 
-[🔼 construct `chained_comparison`](#construct-chained_comparison)  
-[🔼 construct `comparison_operator`](#construct-comparison_operator)  
+[🔼 feature `chained_comparison`](#feature-chained_comparison)  
+[🔼 feature `comparison_operator`](#feature-comparison_operator)  
 
 ##### Specification
 
@@ -640,7 +640,7 @@ ORDER BY cmp.path
 
 --------------------------------------------------------------------------------
 
-#### Construct `divisibility_test`
+#### Feature `divisibility_test`
 
 ##### Specification
 
@@ -677,7 +677,7 @@ ORDER BY cmp.path
 
 --------------------------------------------------------------------------------
 
-#### Construct `short_circuit`
+#### Feature `short_circuit`
 
 When the value of the left operand suffices to determine the value of a boolean expression, short-circuit evaluation skips the right operand. This behaviour is sometimes desirable or even required, but Paroxython currently cannot detect the case: so, when commutating the operands would result in an error or a performance penalty, you should add manually the hint `# paroxython: short_circuit` in the source-code.
 
@@ -711,14 +711,14 @@ When the value of the left operand suffices to determine the value of a boolean 
 
 --------------------------------------------------------------------------------
 
-#### Construct `function_call`
+#### Feature `function_call`
 
 ##### Derivations
 
-[🔽 construct `body_recursive_function`](#construct-body_recursive_function)  
-[🔽 construct `deeply_recursive_function`](#construct-deeply_recursive_function)  
-[🔽 construct `range`](#construct-range)  
-[🔽 construct `recursive_function`](#construct-recursive_function)  
+[🔽 feature `body_recursive_function`](#feature-body_recursive_function)  
+[🔽 feature `deeply_recursive_function`](#feature-deeply_recursive_function)  
+[🔽 feature `range`](#feature-range)  
+[🔽 feature `recursive_function`](#feature-recursive_function)  
 
 ##### Specification
 
@@ -736,7 +736,7 @@ When the value of the left operand suffices to determine the value of a boolean 
 2   bar()
 3   buzz(x, 2)
 4   fizz(foobar(x), 2)
-5   baz.qux() # no match, see construct method_call
+5   baz.qux() # no match, see feature method_call
 ```
 
 ##### Matches
@@ -751,13 +751,13 @@ When the value of the left operand suffices to determine the value of a boolean 
 
 --------------------------------------------------------------------------------
 
-#### Construct `function_tail_call`
+#### Feature `function_tail_call`
 
 A tail-call is a call whose result is immediately returned, without any further calculation. This property is not interesting as such, but will be used below as a basis for the recognition of tail-recursive functions.
 
 ##### Derivations
 
-[🔽 construct `body_recursive_function`](#construct-body_recursive_function)  
+[🔽 feature `body_recursive_function`](#feature-body_recursive_function)  
 
 ##### Specification
 
@@ -828,7 +828,7 @@ A tail-call is a call whose result is immediately returned, without any further 
 
 --------------------------------------------------------------------------------
 
-#### Construct `call_argument`
+#### Feature `call_argument`
 
 Match any argument of a function or a method call. Suffix this argument when it is **atomic**, _i.e._ either:
 - a simple identifier,
@@ -838,8 +838,8 @@ Otherwise, suffix it with an empty string.
 
 ##### Derivations
 
-[🔽 construct `accumulate_elements`](#construct-accumulate_elements)  
-[🔽 construct `range`](#construct-range)  
+[🔽 feature `accumulate_elements`](#feature-accumulate_elements)  
+[🔽 feature `range`](#feature-range)  
 
 ##### Specification
 
@@ -890,11 +890,11 @@ Otherwise, suffix it with an empty string.
 
 --------------------------------------------------------------------------------
 
-#### Construct `method_call`
+#### Feature `method_call`
 
 ##### Derivations
 
-[🔽 construct `accumulate_elements`](#construct-accumulate_elements)  
+[🔽 feature `accumulate_elements`](#feature-accumulate_elements)  
 
 ##### Specification
 
@@ -921,11 +921,11 @@ Otherwise, suffix it with an empty string.
 
 --------------------------------------------------------------------------------
 
-#### Construct `method_call_object`
+#### Feature `method_call_object`
 
 ##### Derivations
 
-[🔽 construct `accumulate_elements`](#construct-accumulate_elements)  
+[🔽 feature `accumulate_elements`](#feature-accumulate_elements)  
 
 ##### Specification
 
@@ -952,7 +952,7 @@ Otherwise, suffix it with an empty string.
 
 --------------------------------------------------------------------------------
 
-#### Construct `method_chaining`
+#### Feature `method_chaining`
 
 ##### Specification
 
@@ -978,7 +978,7 @@ Otherwise, suffix it with an empty string.
 
 --------------------------------------------------------------------------------
 
-#### Construct `composition`
+#### Feature `composition`
 
 Apply a function or a method to an expression involving the result of another function or method application, without using an intermediate variable.
 
@@ -1011,7 +1011,7 @@ Apply a function or a method to an expression involving the result of another fu
 
 --------------------------------------------------------------------------------
 
-#### Construct `lambda_function`
+#### Feature `lambda_function`
 
 ##### Specification
 
@@ -1038,15 +1038,15 @@ Apply a function or a method to an expression involving the result of another fu
 
 --------------------------------------------------------------------------------
 
-#### Construct `range`
+#### Feature `range`
 
-Match a call to `range()` and suffix it by its [_atomic_](#construct-call_argument) arguments, separated by a colon. Non-atomic arguments are replaced by `_`.
+Match a call to `range()` and suffix it by its [_atomic_](#feature-call_argument) arguments, separated by a colon. Non-atomic arguments are replaced by `_`.
 
 ##### Derivations
 
-[🔼 construct `call_argument`](#construct-call_argument)  
-[🔼 construct `function_call`](#construct-function_call)  
-[🔽 construct `for_range`](#construct-for_range)  
+[🔼 feature `call_argument`](#feature-call_argument)  
+[🔼 feature `function_call`](#feature-function_call)  
+[🔽 feature `for_range`](#feature-for_range)  
 
 ##### Specification
 
@@ -1098,7 +1098,7 @@ GROUP BY rowid -- will be executed before this one.
 
 --------------------------------------------------------------------------------
 
-#### Construct `comprehension`
+#### Feature `comprehension`
 
 ##### Specification
 
@@ -1129,7 +1129,7 @@ GROUP BY rowid -- will be executed before this one.
 
 --------------------------------------------------------------------------------
 
-#### Construct `comprehension_for_count`
+#### Feature `comprehension_for_count`
 
 Suffix the number of `for` clauses in a given comprehension.
 
@@ -1184,7 +1184,7 @@ Therefore, line 5 consists in two comprehensions, each with one `for` clause onl
 
 --------------------------------------------------------------------------------
 
-#### Construct `filtered_comprehension`
+#### Feature `filtered_comprehension`
 
 Match a comprehension with an `if` clause.
 
@@ -1215,7 +1215,7 @@ Match a comprehension with an `if` clause.
 
 --------------------------------------------------------------------------------
 
-#### Construct `assignment`
+#### Feature `assignment`
 
 ##### Specification
 
@@ -1240,11 +1240,11 @@ Match a comprehension with an `if` clause.
 
 --------------------------------------------------------------------------------
 
-#### Construct `augmented_assignment`
+#### Feature `augmented_assignment`
 
 ##### Derivations
 
-[🔽 construct `accumulate_elements`](#construct-accumulate_elements)  
+[🔽 feature `accumulate_elements`](#feature-accumulate_elements)  
 
 ##### Specification
 
@@ -1273,7 +1273,7 @@ Match a comprehension with an `if` clause.
 
 --------------------------------------------------------------------------------
 
-#### Construct `chained_assignment`
+#### Feature `chained_assignment`
 
 ##### Specification
 
@@ -1299,13 +1299,13 @@ Match a comprehension with an `if` clause.
 
 --------------------------------------------------------------------------------
 
-#### Construct `assignment_lhs_identifier`
+#### Feature `assignment_lhs_identifier`
 
 Capture any identifier appearing on the left hand side of an assignment (possibly augmented).
 
 ##### Derivations
 
-[🔽 construct `accumulate_elements`](#construct-accumulate_elements)  
+[🔽 feature `accumulate_elements`](#feature-accumulate_elements)  
 
 ##### Specification
 
@@ -1360,13 +1360,13 @@ Capture any identifier appearing on the left hand side of an assignment (possibl
 
 --------------------------------------------------------------------------------
 
-#### Construct `assignment_rhs_identifier`
+#### Feature `assignment_rhs_identifier`
 
 Capture any identifier (variable or function) appearing on the right hand side of an assignment (possibly augmented).
 
 ##### Derivations
 
-[🔽 construct `accumulate_elements`](#construct-accumulate_elements)  
+[🔽 feature `accumulate_elements`](#feature-accumulate_elements)  
 
 ##### Specification
 
@@ -1408,7 +1408,7 @@ Capture any identifier (variable or function) appearing on the right hand side o
 
 --------------------------------------------------------------------------------
 
-#### Construct `swapping`
+#### Feature `swapping`
 
 Swap two variables or two elements of an array with a 2-element tuple or list.
 
@@ -1440,7 +1440,7 @@ Swap two variables or two elements of an array with a 2-element tuple or list.
 
 --------------------------------------------------------------------------------
 
-#### Construct `negation`
+#### Feature `negation`
 
 Update a variable by negating it.
 
@@ -1479,18 +1479,18 @@ Update a variable by negating it.
 
 --------------------------------------------------------------------------------
 
-#### Construct `function`
+#### Feature `function`
 
 In Python, the term "function" encompasses any type of subroutine, be it a method, a procedure, a generator or a "pure" function.
 
 ##### Derivations
 
-[🔽 construct `closure`](#construct-closure)  
-[🔽 construct `deeply_recursive_function`](#construct-deeply_recursive_function)  
-[🔽 construct `function_returning_nothing`](#construct-function_returning_nothing)  
-[🔽 construct `function_returning_something`](#construct-function_returning_something)  
-[🔽 construct `generator`](#construct-generator)  
-[🔽 construct `recursive_function`](#construct-recursive_function)  
+[🔽 feature `closure`](#feature-closure)  
+[🔽 feature `deeply_recursive_function`](#feature-deeply_recursive_function)  
+[🔽 feature `function_returning_nothing`](#feature-function_returning_nothing)  
+[🔽 feature `function_returning_something`](#feature-function_returning_something)  
+[🔽 feature `generator`](#feature-generator)  
+[🔽 feature `recursive_function`](#feature-recursive_function)  
 
 ##### Specification
 
@@ -1541,14 +1541,14 @@ In Python, the term "function" encompasses any type of subroutine, be it a metho
 
 --------------------------------------------------------------------------------
 
-#### Construct `return`
+#### Feature `return`
 
-Match `return` statements and, when the returned object is [_atomic_](#construct-call_argument), suffix it. Note that a `return` statement returning no value is denoted by `return:None`, not to be confounded with `return` (without suffix), which denotes the return of a non-atomic object.
+Match `return` statements and, when the returned object is [_atomic_](#feature-call_argument), suffix it. Note that a `return` statement returning no value is denoted by `return:None`, not to be confounded with `return` (without suffix), which denotes the return of a non-atomic object.
 
 ##### Derivations
 
-[🔽 construct `closure`](#construct-closure)  
-[🔽 construct `function_returning_something`](#construct-function_returning_something)  
+[🔽 feature `closure`](#feature-closure)  
+[🔽 feature `function_returning_something`](#feature-function_returning_something)  
 
 ##### Specification
 
@@ -1587,13 +1587,13 @@ Match `return` statements and, when the returned object is [_atomic_](#construct
 
 --------------------------------------------------------------------------------
 
-#### Construct `yield`
+#### Feature `yield`
 
-Match `yield` and `yieldfrom` _[expressions](https://docs.python.org/3/reference/expressions.html#yield-expressions)_ (generally used as statements) and, when the yielded object is [_atomic_](#construct-call_argument), suffix it.
+Match `yield` and `yieldfrom` _[expressions](https://docs.python.org/3/reference/expressions.html#yield-expressions)_ (generally used as statements) and, when the yielded object is [_atomic_](#feature-call_argument), suffix it.
 
 ##### Derivations
 
-[🔽 construct `generator`](#construct-generator)  
+[🔽 feature `generator`](#feature-generator)  
 
 ##### Specification
 
@@ -1633,13 +1633,13 @@ Match `yield` and `yieldfrom` _[expressions](https://docs.python.org/3/reference
 
 --------------------------------------------------------------------------------
 
-#### Construct `generator`
+#### Feature `generator`
 
 ##### Derivations
 
-[🔼 construct `function`](#construct-function)  
-[🔼 construct `yield`](#construct-yield)  
-[🔽 construct `function_returning_nothing`](#construct-function_returning_nothing)  
+[🔼 feature `function`](#feature-function)  
+[🔼 feature `yield`](#feature-yield)  
+[🔽 feature `function_returning_nothing`](#feature-function_returning_nothing)  
 
 ##### Specification
 
@@ -1675,15 +1675,15 @@ GROUP BY y.rowid
 
 --------------------------------------------------------------------------------
 
-#### Construct `function_returning_something`
+#### Feature `function_returning_something`
 
-A function returning at least one value distinct from `None` is the smallest `function` including a `return_something` clause.
+A function returning at least one value distinct from `None` is the smallest `function` featuring `return_something`.
 
 ##### Derivations
 
-[🔼 construct `function`](#construct-function)  
-[🔼 construct `return`](#construct-return)  
-[🔽 construct `function_returning_nothing`](#construct-function_returning_nothing)  
+[🔼 feature `function`](#feature-function)  
+[🔼 feature `return`](#feature-return)  
+[🔽 feature `function_returning_nothing`](#feature-function_returning_nothing)  
 
 ##### Specification
 
@@ -1739,15 +1739,15 @@ GROUP BY r.rowid
 
 --------------------------------------------------------------------------------
 
-#### Construct `function_returning_nothing`
+#### Feature `function_returning_nothing`
 
 A function returning nothing (aka procedure) is a function which is neither a generator or a function returning something.
 
 ##### Derivations
 
-[🔼 construct `function`](#construct-function)  
-[🔼 construct `function_returning_something`](#construct-function_returning_something)  
-[🔼 construct `generator`](#construct-generator)  
+[🔼 feature `function`](#feature-function)  
+[🔼 feature `function_returning_something`](#feature-function_returning_something)  
+[🔼 feature `generator`](#feature-generator)  
 
 ##### Specification
 
@@ -1803,7 +1803,7 @@ WHERE name_prefix = "function"
 
 --------------------------------------------------------------------------------
 
-#### Construct `function_with_default_positional_arguments`
+#### Feature `function_with_default_positional_arguments`
 
 ##### Specification
 
@@ -1835,7 +1835,7 @@ WHERE name_prefix = "function"
 
 --------------------------------------------------------------------------------
 
-#### Construct `nested_function`
+#### Feature `nested_function`
 
 ##### Specification
 
@@ -1865,14 +1865,14 @@ WHERE name_prefix = "function"
 
 --------------------------------------------------------------------------------
 
-#### Construct `closure`
+#### Feature `closure`
 
 Function enclosing the definition of an inner function and returning it. Beware that the current definition does not check whether the inner function refers to a variable defined in the enclosing function.
 
 ##### Derivations
 
-[🔼 construct `function`](#construct-function)  
-[🔼 construct `return`](#construct-return)  
+[🔼 feature `function`](#feature-function)  
+[🔼 feature `return`](#feature-return)  
 
 ##### Specification
 
@@ -1912,14 +1912,14 @@ GROUP BY c.rowid
 
 --------------------------------------------------------------------------------
 
-#### Construct `recursive_function`
+#### Feature `recursive_function`
 
 ##### Derivations
 
-[🔼 construct `function`](#construct-function)  
-[🔼 construct `function_call`](#construct-function_call)  
-[🔽 construct `body_recursive_function`](#construct-body_recursive_function)  
-[🔽 construct `tail_recursive_function`](#construct-tail_recursive_function)  
+[🔼 feature `function`](#feature-function)  
+[🔼 feature `function_call`](#feature-function_call)  
+[🔽 feature `body_recursive_function`](#feature-body_recursive_function)  
+[🔽 feature `tail_recursive_function`](#feature-tail_recursive_function)  
 
 ##### Specification
 
@@ -1950,14 +1950,14 @@ WHERE f.name_prefix = "function"
 
 --------------------------------------------------------------------------------
 
-#### Construct `deeply_recursive_function`
+#### Feature `deeply_recursive_function`
 
-Any function `f` which contains a nested call to itself (`f(..., f(...), ...)`), e.g. the [Ackermann function](https://en.wikipedia.org/wiki/Ackermann_function).
+Any function `f` which features a nested call to itself (`f(..., f(...), ...)`), e.g. the [Ackermann function](https://en.wikipedia.org/wiki/Ackermann_function).
 
 ##### Derivations
 
-[🔼 construct `function`](#construct-function)  
-[🔼 construct `function_call`](#construct-function_call)  
+[🔼 feature `function`](#feature-function)  
+[🔼 feature `function_call`](#feature-function_call)  
 
 ##### Specification
 
@@ -1990,7 +1990,7 @@ WHERE f.name_prefix = "function"
 
 --------------------------------------------------------------------------------
 
-#### Construct `body_recursive_function`
+#### Feature `body_recursive_function`
 
 A function is body-recursive if and only if at least one of its recursive calls is not a tail call.
 
@@ -1998,10 +1998,10 @@ A function is body-recursive if and only if at least one of its recursive calls 
 
 ##### Derivations
 
-[🔼 construct `function_call`](#construct-function_call)  
-[🔼 construct `function_tail_call`](#construct-function_tail_call)  
-[🔼 construct `recursive_function`](#construct-recursive_function)  
-[🔽 construct `tail_recursive_function`](#construct-tail_recursive_function)  
+[🔼 feature `function_call`](#feature-function_call)  
+[🔼 feature `function_tail_call`](#feature-function_tail_call)  
+[🔼 feature `recursive_function`](#feature-recursive_function)  
+[🔽 feature `tail_recursive_function`](#feature-tail_recursive_function)  
 
 ##### Specification
 
@@ -2071,7 +2071,7 @@ GROUP BY f.span
 
 --------------------------------------------------------------------------------
 
-#### Construct `tail_recursive_function`
+#### Feature `tail_recursive_function`
 
 A function is tail-recursive if and only if all its recursive calls are tail calls.
 
@@ -2079,8 +2079,8 @@ A function is tail-recursive if and only if all its recursive calls are tail cal
 
 ##### Derivations
 
-[🔼 construct `body_recursive_function`](#construct-body_recursive_function)  
-[🔼 construct `recursive_function`](#construct-recursive_function)  
+[🔼 feature `body_recursive_function`](#feature-body_recursive_function)  
+[🔼 feature `recursive_function`](#feature-recursive_function)  
 
 ##### Specification
 
@@ -2149,13 +2149,13 @@ WHERE f.name_prefix = "recursive_function" -- A recursive function...
 
 --------------------------------------------------------------------------------
 
-#### Construct `if`
+#### Feature `if`
 
 Match an entire conditional (from the `if` clause to the last line of its body).
 
 ##### Derivations
 
-[🔽 construct `nested_if`](#construct-nested_if)  
+[🔽 feature `nested_if`](#feature-nested_if)  
 
 ##### Specification
 
@@ -2206,7 +2206,7 @@ else:
 
 --------------------------------------------------------------------------------
 
-#### Construct `if_test_id`
+#### Feature `if_test_id`
 
 Match any identifier present in the condition of an `if` statement.
 
@@ -2237,13 +2237,13 @@ Match any identifier present in the condition of an `if` statement.
 
 --------------------------------------------------------------------------------
 
-#### Construct `if_then_branch`
+#### Feature `if_then_branch`
 
 Match the body of the branch “`then`” of an `if` statement.
 
 ##### Derivations
 
-[🔽 construct `nested_if`](#construct-nested_if)  
+[🔽 feature `nested_if`](#feature-nested_if)  
 
 ##### Specification
 
@@ -2295,13 +2295,13 @@ Match the body of the branch “`then`” of an `if` statement.
 
 --------------------------------------------------------------------------------
 
-#### Construct `if_elif_branch`
+#### Feature `if_elif_branch`
 
 Match the body of an `elif` clause, which is (or could be rewritten as) an `else` branch consisting in a single statement `if`.
 
 ##### Derivations
 
-[🔽 construct `nested_if`](#construct-nested_if)  
+[🔽 feature `nested_if`](#feature-nested_if)  
 
 ##### Specification
 
@@ -2355,13 +2355,13 @@ Match the body of an `elif` clause, which is (or could be rewritten as) an `else
 
 --------------------------------------------------------------------------------
 
-#### Construct `if_else_branch`
+#### Feature `if_else_branch`
 
 Match the body of the possible `else` branch of an `if` statement.
 
 ##### Derivations
 
-[🔽 construct `nested_if`](#construct-nested_if)  
+[🔽 feature `nested_if`](#feature-nested_if)  
 
 ##### Specification
 
@@ -2412,16 +2412,16 @@ Match the body of the possible `else` branch of an `if` statement.
 
 --------------------------------------------------------------------------------
 
-#### Construct `nested_if`
+#### Feature `nested_if`
 
 Match an `if` clause nested in _n_ other `if` clauses, suffixing it by _n_.
 
 ##### Derivations
 
-[🔼 construct `if`](#construct-if)  
-[🔼 construct `if_elif_branch`](#construct-if_elif_branch)  
-[🔼 construct `if_else_branch`](#construct-if_else_branch)  
-[🔼 construct `if_then_branch`](#construct-if_then_branch)  
+[🔼 feature `if`](#feature-if)  
+[🔼 feature `if_elif_branch`](#feature-if_elif_branch)  
+[🔼 feature `if_else_branch`](#feature-if_else_branch)  
+[🔼 feature `if_then_branch`](#feature-if_then_branch)  
 
 ##### Specification
 
@@ -2480,15 +2480,15 @@ ORDER BY inner_if.span_start
 
 --------------------------------------------------------------------------------
 
-#### Construct `for`
+#### Feature `for`
 
 Match sequential loops, along with their iteration variable(s).
 
 ##### Derivations
 
-[🔽 construct `accumulate_elements`](#construct-accumulate_elements)  
-[🔽 construct `for_range`](#construct-for_range)  
-[🔽 construct `nested_for`](#construct-nested_for)  
+[🔽 feature `accumulate_elements`](#feature-accumulate_elements)  
+[🔽 feature `for_range`](#feature-for_range)  
+[🔽 feature `nested_for`](#feature-nested_for)  
 
 ##### Specification
 
@@ -2521,7 +2521,7 @@ Match sequential loops, along with their iteration variable(s).
 
 --------------------------------------------------------------------------------
 
-#### Construct `for_each`
+#### Feature `for_each`
 
 Iterate over the elements of a (named) collection.
 
@@ -2552,14 +2552,14 @@ Iterate over the elements of a (named) collection.
 
 --------------------------------------------------------------------------------
 
-#### Construct `for_range`
+#### Feature `for_range`
 
 Iterate over a range object.
 
 ##### Derivations
 
-[🔼 construct `for`](#construct-for)  
-[🔼 construct `range`](#construct-range)  
+[🔼 feature `for`](#feature-for)  
+[🔼 feature `range`](#feature-range)  
 
 ##### Specification
 
@@ -2601,7 +2601,7 @@ WHERE for_stmt.name_prefix = "for"
 
 --------------------------------------------------------------------------------
 
-#### Construct `for_indexes_elements`
+#### Feature `for_indexes_elements`
 
 Iterate over index numbers and elements of a collection.
 
@@ -2629,7 +2629,7 @@ Iterate over index numbers and elements of a collection.
 
 --------------------------------------------------------------------------------
 
-#### Construct `for_indexes`
+#### Feature `for_indexes`
 
 Iterate over index numbers of a collection.
 
@@ -2662,13 +2662,13 @@ Iterate over index numbers of a collection.
 
 --------------------------------------------------------------------------------
 
-#### Construct `nested_for`
+#### Feature `nested_for`
 
 Match a `for` statement nested in _n_ other `for` statements, suffixing it by _n_.
 
 ##### Derivations
 
-[🔼 construct `for`](#construct-for)  
+[🔼 feature `for`](#feature-for)  
 
 ##### Specification
 
@@ -2705,7 +2705,7 @@ ORDER BY inner_loop.span_start
 
 --------------------------------------------------------------------------------
 
-#### Construct `triangular_nested_for`
+#### Feature `triangular_nested_for`
 
 A `for` loop with a counter `i` and a nested `for` loop which makes `i` iterations. The total number of iterations is a [triangular number](https://en.wikipedia.org/wiki/Triangular_number).
 
@@ -2756,7 +2756,7 @@ A `for` loop with a counter `i` and a nested `for` loop which makes `i` iteratio
 
 --------------------------------------------------------------------------------
 
-#### Construct `square_nested_for`
+#### Feature `square_nested_for`
 
 Two nested `for` loops doing the same number of iterations.
 
@@ -2791,7 +2791,7 @@ Two nested `for` loops doing the same number of iterations.
 
 --------------------------------------------------------------------------------
 
-#### Construct `while`
+#### Feature `while`
 
 ##### Specification
 
@@ -2825,7 +2825,7 @@ Two nested `for` loops doing the same number of iterations.
 
 --------------------------------------------------------------------------------
 
-#### Construct `assertion`
+#### Feature `assertion`
 
 ##### Specification
 
@@ -2848,11 +2848,11 @@ Two nested `for` loops doing the same number of iterations.
 
 --------------------------------------------------------------------------------
 
-#### Construct `try`
+#### Feature `try`
 
 ##### Derivations
 
-[🔽 construct `try_raise|try_except`](#construct-try_raisetry_except)  
+[🔽 feature `try_raise|try_except`](#feature-try_raisetry_except)  
 
 ##### Specification
 
@@ -2882,11 +2882,11 @@ Two nested `for` loops doing the same number of iterations.
 
 --------------------------------------------------------------------------------
 
-#### Construct `raise`
+#### Feature `raise`
 
 ##### Derivations
 
-[🔽 construct `try_raise|try_except`](#construct-try_raisetry_except)  
+[🔽 feature `try_raise|try_except`](#feature-try_raisetry_except)  
 
 ##### Specification
 
@@ -2929,11 +2929,11 @@ Two nested `for` loops doing the same number of iterations.
 
 --------------------------------------------------------------------------------
 
-#### Construct `except`
+#### Feature `except`
 
 ##### Derivations
 
-[🔽 construct `try_raise|try_except`](#construct-try_raisetry_except)  
+[🔽 feature `try_raise|try_except`](#feature-try_raisetry_except)  
 
 ##### Specification
 
@@ -2976,13 +2976,13 @@ Two nested `for` loops doing the same number of iterations.
 
 --------------------------------------------------------------------------------
 
-#### Construct `try_raise|try_except`
+#### Feature `try_raise|try_except`
 
 ##### Derivations
 
-[🔼 construct `except`](#construct-except)  
-[🔼 construct `raise`](#construct-raise)  
-[🔼 construct `try`](#construct-try)  
+[🔼 feature `except`](#feature-except)  
+[🔼 feature `raise`](#feature-raise)  
+[🔼 feature `try`](#feature-try)  
 
 ##### Specification
 
@@ -3031,11 +3031,11 @@ GROUP BY e.rowid
 
 --------------------------------------------------------------------------------
 
-#### Construct `import_module`
+#### Feature `import_module`
 
 ##### Derivations
 
-[🔽 construct `import`](#construct-import)  
+[🔽 feature `import`](#feature-import)  
 
 ##### Specification
 
@@ -3077,11 +3077,11 @@ GROUP BY e.rowid
 
 --------------------------------------------------------------------------------
 
-#### Construct `import_name`
+#### Feature `import_name`
 
 ##### Derivations
 
-[🔽 construct `import`](#construct-import)  
+[🔽 feature `import`](#feature-import)  
 
 ##### Specification
 
@@ -3116,14 +3116,14 @@ GROUP BY e.rowid
 
 --------------------------------------------------------------------------------
 
-#### Construct `import`
+#### Feature `import`
 
-Suffixed by the imported module and, if any, the imported name. In most cases, could replace the two low-level constructs `import_module` and `import_name`.
+Suffixed by the imported module and, if any, the imported name. In most cases, could replace the two low-level features `import_module` and `import_name`.
 
 ##### Derivations
 
-[🔼 construct `import_module`](#construct-import_module)  
-[🔼 construct `import_name`](#construct-import_name)  
+[🔼 feature `import_module`](#feature-import_module)  
+[🔼 feature `import_name`](#feature-import_name)  
 
 ##### Specification
 
@@ -3176,19 +3176,19 @@ WHERE m.name_prefix = "import_module"
 
 --------------------------------------------------------------------------------
 
-#### Construct `accumulate_elements`
+#### Feature `accumulate_elements`
 
 An accumulator is iteratively updated from its previous value and those of the iteration variable.
 
 ##### Derivations
 
-[🔼 construct `assignment_lhs_identifier`](#construct-assignment_lhs_identifier)  
-[🔼 construct `assignment_rhs_identifier`](#construct-assignment_rhs_identifier)  
-[🔼 construct `augmented_assignment`](#construct-augmented_assignment)  
-[🔼 construct `call_argument`](#construct-call_argument)  
-[🔼 construct `for`](#construct-for)  
-[🔼 construct `method_call`](#construct-method_call)  
-[🔼 construct `method_call_object`](#construct-method_call_object)  
+[🔼 feature `assignment_lhs_identifier`](#feature-assignment_lhs_identifier)  
+[🔼 feature `assignment_rhs_identifier`](#feature-assignment_rhs_identifier)  
+[🔼 feature `augmented_assignment`](#feature-augmented_assignment)  
+[🔼 feature `call_argument`](#feature-call_argument)  
+[🔼 feature `for`](#feature-for)  
+[🔼 feature `method_call`](#feature-method_call)  
+[🔼 feature `method_call_object`](#feature-method_call_object)  
 
 ##### Specification
 
@@ -3260,7 +3260,7 @@ ORDER BY for_loop.span_start
 
 --------------------------------------------------------------------------------
 
-#### Construct `filter_for`
+#### Feature `filter_for`
 
 An accumulation pattern that, from a given collection, returns a list containing only those elements that verify a certain condition.
 
@@ -3298,7 +3298,7 @@ An accumulation pattern that, from a given collection, returns a list containing
 
 --------------------------------------------------------------------------------
 
-#### Construct `find_best_element`
+#### Feature `find_best_element`
 
 An accumulation pattern that, from a given collection, returns the best element verifying a certain condition.
 
@@ -3350,7 +3350,7 @@ An accumulation pattern that, from a given collection, returns the best element 
 
 --------------------------------------------------------------------------------
 
-#### Construct `universal_quantifier`
+#### Feature `universal_quantifier`
 
 Check whether all elements of a collection satisfy a predicate.
 
@@ -3385,7 +3385,7 @@ Check whether all elements of a collection satisfy a predicate.
 
 --------------------------------------------------------------------------------
 
-#### Construct `existential_quantifier`
+#### Feature `existential_quantifier`
 
 Check whether any element of a collection satisfies a predicate.
 
@@ -3420,7 +3420,7 @@ Check whether any element of a collection satisfies a predicate.
 
 --------------------------------------------------------------------------------
 
-#### Construct `find_first_element`
+#### Feature `find_first_element`
 
 Linear search. Return the first element of a sequence satisfying a predicate.
 
@@ -3459,7 +3459,7 @@ Linear search. Return the first element of a sequence satisfying a predicate.
 
 --------------------------------------------------------------------------------
 
-#### Construct `evolve_state`
+#### Feature `evolve_state`
 
 Evolve the value of a variable until it reaches a desired state.
 
@@ -3517,7 +3517,7 @@ Evolve the value of a variable until it reaches a desired state.
 
 --------------------------------------------------------------------------------
 
-#### Construct `accumulate_stream`
+#### Feature `accumulate_stream`
 
 Accumulate the inputs until a sentinel value is encountered (accumulation expressed by: `acc = combine(x, acc)`).
 
@@ -3617,7 +3617,7 @@ Accumulate the inputs until a sentinel value is encountered (accumulation expres
 
 --------------------------------------------------------------------------------
 
-#### Construct `category`
+#### Feature `category`
 
 It may be interesting to indicate the category of the program with an all-encompassing hint `# paroxython: category` placed on its own line. Examples of possible categories are:
 
@@ -3666,14 +3666,14 @@ It may be interesting to indicate the category of the program with an all-encomp
 
 # Suggestions
 
-These patterns match constructs that can be shortened.
+These patterns match features that can be shortened.
 It's up to you to decide if a rewriting would make the code clearer.
 
 ## Assignments
 
 --------------------------------------------------------------------------------
 
-#### Construct `suggest_conditional_expression`
+#### Feature `suggest_conditional_expression`
 
 When a conditional simply assigns different values to the same variable, it may be rewritten as a conditional expression.
 
@@ -3726,7 +3726,7 @@ The first conditional (only) may be rewritten as:
 
 --------------------------------------------------------------------------------
 
-#### Construct `suggest_augmented_assignment`
+#### Feature `suggest_augmented_assignment`
 
 When the RHS of an assignment consists in a binary operation whose left operand is the target (`a = a op expr`), the statement can be shortened as `a op= expr`.
 
@@ -3772,7 +3772,7 @@ May be rewritten as:
 
 --------------------------------------------------------------------------------
 
-#### Construct `suggest_comparison_chaining`
+#### Feature `suggest_comparison_chaining`
 
 When the `else` branch of a conditional is another conditional, it can be rewritten with an `elif` branch.
 
@@ -3816,7 +3816,7 @@ Note that the last simplification is rather confusing and should be avoided.
 
 --------------------------------------------------------------------------------
 
-#### Construct `suggest_constant_definition`
+#### Feature `suggest_constant_definition`
 
 Match magic numbers (unnamed numerical constants) other than -1, 0, 1 and 2. A number in the RHS of an assignment to a constant is of course ignored.
 
@@ -3870,7 +3870,7 @@ May be rewritten as:
 
 --------------------------------------------------------------------------------
 
-#### Construct `suggest_condition_return`
+#### Feature `suggest_condition_return`
 
 When a predicate ends with a conditional whose sole purpose is to return `True` or `False`, it is enough to return the condition.
 

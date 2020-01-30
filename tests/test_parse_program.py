@@ -6,7 +6,7 @@ import regex  # type: ignore
 import sqlparse
 
 import context
-from paroxython.parse_program import ProgramParser, find_all_constructs
+from paroxython.parse_program import ProgramParser, find_all_features
 from paroxython.user_types import Program
 from paroxython.preprocess_source import (
     cleanup_factory,
@@ -94,9 +94,9 @@ def derivation_map(text):
 
     derived_from = defaultdict(set)
     derived_into = defaultdict(set)
-    all_constructs = find_all_constructs(text)
-    label_name_to_pattern = label_converter([construct[0] for construct in all_constructs])
-    for (label_pattern, language, query) in all_constructs:
+    all_features = find_all_features(text)
+    label_name_to_pattern = label_converter([feature[0] for feature in all_features])
+    for (label_pattern, language, query) in all_features:
         if language == "re":
             continue
         for m in find_iter_derivations(query):
@@ -120,23 +120,23 @@ def derivation_map(text):
 def inject_derivations(text):
     for (key, entries) in derivation_map(text).items():
         new_section = [f"##### Derivations\n"]
-        for (kind, constructs) in entries.items():
-            for construct in constructs:
-                slug = title_to_slug(f"Construct `{construct}`")
-                new_section.append(f"[{kind} construct `{construct}`](#{slug})  ")
+        for (kind, features) in entries.items():
+            for feature in features:
+                slug = title_to_slug(f"Feature `{feature}`")
+                new_section.append(f"[{kind} feature `{feature}`](#{slug})  ")
         new_section.append("\n")
         text = regex.sub(
-            r"(?msx)^(\#{4}\s+Construct\s+`%s`.+?)^(?=\#{5}\s+Specification)" % regex.escape(key),
+            r"(?msx)^(\#{4}\s+Feature\s+`%s`.+?)^(?=\#{5}\s+Specification)" % regex.escape(key),
             r"\1" + "\n".join(new_section),
             text,
         )
     return text
 
 
-def reformat_file(construct_path):
-    text = construct_path.read_text()
+def reformat_file(feature_path):
+    text = feature_path.read_text()
     toc = "\n".join(generate_toc(text))
-    for m in regex.finditer(r"(?sm)^#### Construct (`.+?`).+?```(\w*)", text):
+    for m in regex.finditer(r"(?sm)^#### Feature (`.+?`).+?```(\w*)", text):
         if m[2] == "sql":
             toc = toc.replace(m[1], f"{m[1]} (SQL)")
     rule = "-" * 80 + "\n"
@@ -149,13 +149,13 @@ def reformat_file(construct_path):
     text = regex.sub(r"(?ms)^```sql\n(.+?)\n```", reformat_sql, text)
     text = regex.sub(r"(?ms)^\#{5} Derivations\n.+?^(?=\#{5} Specification)", "", text)
     text = inject_derivations(text)
-    construct_path.write_text(text)
+    feature_path.write_text(text)
 
 
-def extract_examples(construct_path):
-    text = construct_path.read_text()
+def extract_examples(feature_path):
+    text = feature_path.read_text()
     rex = r"""(?msx)
-        ^\#{4}\s+Construct\s+`(.+?)` # capture the label's pattern
+        ^\#{4}\s+Feature\s+`(.+?)` # capture the label's pattern
         .+?\#{5}\s+Example # ensure the next code is in the Example section
         .+?```python\n+(.+?)\n``` # capture the source
         .+?\#{5}\s+Matches.+?^\|:--\|:--\| # ensure the table is in the Matches section
@@ -196,8 +196,8 @@ def test_example(label_name, actual_results, expected_results):
             raise AssertionError(message)
 
 
-def test_at_least_one_example_is_provided_for_each_construct():
-    expected = set(parse.constructs)
+def test_at_least_one_example_is_provided_for_each_feature():
+    expected = set(parse.features)
     actual_results = {label_name.partition(":")[0] for (label_name, _, _) in examples}
     assert actual_results.issuperset(expected)
 
