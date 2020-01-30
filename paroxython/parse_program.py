@@ -37,10 +37,10 @@ find_all_constructs = regex.compile(
 class ProgramParser:
     """Compile the given construct definitions, and search them in a Program."""
 
-    def __init__(self, ref_path: str = "docs/ref.md") -> None:
+    def __init__(self, spec_path: str = "docs/spec.md") -> None:
         """Compile the constructs to search."""
-        self.ref_path = Path(ref_path)
-        text = self.ref_path.read_text()
+        self.spec_path = Path(spec_path)
+        text = self.spec_path.read_text()
         self.constructs: Dict[LabelName, regex.Pattern] = {}
         self.queries: Dict[LabelName, Query] = {}
         for (label_name, language, pattern) in find_all_constructs(text):

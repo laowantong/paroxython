@@ -165,9 +165,9 @@ def extract_examples(construct_path):
 
 
 parse = ProgramParser()
-reformat_file(parse.ref_path)
+reformat_file(parse.spec_path)
 examples = []
-for match in extract_examples(parse.ref_path):
+for match in extract_examples(parse.spec_path):
     label_name = match.group(1)
     source = match.group(2)
     source = regex.sub(r"(?m)^.{1,4}", "", source)

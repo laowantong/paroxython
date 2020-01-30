@@ -14,12 +14,12 @@ Path(f"{base}.dot").write_text(
     % "\n".join(
         [
             '"db.json" [shape=cylinder fillcolor=moccasin]',
-            '"ref.md" [shape=note fillcolor=moccasin]',
+            '"spec.md" [shape=note fillcolor=moccasin]',
             '"default_taxonomy.tsv" [shape=note fillcolor=moccasin]',
             '"source files" [shape=folder fillcolor=moccasin]',
             'make_db -> "db.json"',
             '"db.json" -> filter_programs',
-            '"ref.md" -> parse_program',
+            '"spec.md" -> parse_program',
             '"source files" -> generate_programs',
             '"default_taxonomy.tsv" -> map_taxonomy',
         ]
