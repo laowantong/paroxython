@@ -10,7 +10,7 @@ deduplicate_whilst_preserving_order = dict.fromkeys
 
 def flatten_ast(node: Any, prefix="", path="") -> str:
     if isinstance(node, ast.AST):
-        acc = [f"{prefix}/_type='{type(node).__name__}'\n"]
+        acc = [f"{prefix}/_type={type(node).__name__}\n"]
         if isinstance(node, ast.expr):
             node_repr = remove_context("", ast.dump(node))
             ids = ":".join(deduplicate_whilst_preserving_order(extract_ids(node_repr)))
@@ -39,8 +39,10 @@ def flatten_ast(node: Any, prefix="", path="") -> str:
         for (i, x) in enumerate(node, 1):
             acc.append(flatten_ast(x, f"{prefix}/{i}", f"{path}{i}-"))
         return "".join(acc)
+    elif prefix.endswith(("/s", "/module")):
+        return f"""{prefix}={repr(node)}\n"""
     else:
-        return f"{prefix}={node!r}\n"
+        return f"""{prefix}={repr(node).strip("'")}\n"""
 
 
 if __name__ == "__main__":

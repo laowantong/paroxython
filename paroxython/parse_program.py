@@ -14,12 +14,12 @@ from user_types import Label, LabelName, Labels, LabelsSpans, Program, Query, So
 def _simplify_negative_literals() -> Callable:
     sub = regex.compile(
         r"""(?mx)
-                    ^(.*?)/_type='UnaryOp'
-            (\n(?:.+\n)*?)\1/op/_type='USub'
+                    ^(.*?)/_type=UnaryOp
+            (\n(?:.+\n)*?)\1/op/_type=USub
              \n(?:.+\n)*? \1/operand/n=(.+)
         """
     ).sub
-    return lambda flat_ast: sub(r"\1/_type='Num'\2\1/n=-\3", flat_ast)
+    return lambda flat_ast: sub(r"\1/_type=Num\2\1/n=-\3", flat_ast)
 
 
 simplify_negative_literals = _simplify_negative_literals()
