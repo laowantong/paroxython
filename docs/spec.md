@@ -173,7 +173,7 @@
 
 #### Feature `int_literal`
 
-Matching literal does not require to feature a sophisticated regular expression: the heavy lifting is already made in the given AST, which stores them in a normalized form. For instance, integer literals are just sequence of digits:
+Matching a literal does not require to construct a sophisticated regular expression: the heavy lifting is already made in the given AST, which stores them in a normalized form. For instance, integer literals are just sequence of digits:
 
 ##### Specification
 
