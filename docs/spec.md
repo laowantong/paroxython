@@ -621,6 +621,8 @@ HAVING count(*) > 1 -- a chain has at least two operators
 ORDER BY cmp.path
 ```
 
+**Remark.** Note the user-defined function `REGEXP` in the `WHERE`clause. It calls the function `match()` of the third-party [`regex`](https://pypi.org/project/regex/) library.
+
 ##### Example
 
 ```python
@@ -840,7 +842,6 @@ Otherwise, suffix it with an empty string.
 
 ##### Derivations
 
-[🔽 feature `accumulate_elements`](#feature-accumulate_elements)  
 [🔽 feature `range`](#feature-range)  
 
 ##### Specification
@@ -924,10 +925,6 @@ Otherwise, suffix it with an empty string.
 
 #### Feature `method_call_name`
 
-##### Derivations
-
-[🔽 feature `accumulate_elements`](#feature-accumulate_elements)  
-
 ##### Specification
 
 ```re
@@ -954,10 +951,6 @@ Otherwise, suffix it with an empty string.
 --------------------------------------------------------------------------------
 
 #### Feature `method_call_object`
-
-##### Derivations
-
-[🔽 feature `accumulate_elements`](#feature-accumulate_elements)  
 
 ##### Specification
 
@@ -1280,7 +1273,6 @@ Match a comprehension with an `if` clause.
 
 ##### Derivations
 
-[🔽 feature `accumulate_elements`](#feature-accumulate_elements)  
 [🔽 feature `update_variable`](#feature-update_variable)  
 
 ##### Specification
@@ -1340,10 +1332,6 @@ Match a comprehension with an `if` clause.
 
 Capture any identifier appearing on the left hand side of an assignment (possibly augmented).
 
-##### Derivations
-
-[🔽 feature `accumulate_elements`](#feature-accumulate_elements)  
-
 ##### Specification
 
 ```re
@@ -1401,10 +1389,6 @@ Capture any identifier appearing on the left hand side of an assignment (possibl
 
 Capture any [_atom_](#feature-call_argument) appearing on the right hand side of an assignment (possibly augmented), except the function names.
 
-##### Derivations
-
-[🔽 feature `accumulate_elements`](#feature-accumulate_elements)  
-
 ##### Specification
 
 ```re
@@ -1459,6 +1443,7 @@ Match the update of a variable `x` and capture its name in the first part of the
 [🔼 feature `assignment`](#feature-assignment)  
 [🔼 feature `augmented_assignment`](#feature-augmented_assignment)  
 [🔼 feature `method_call`](#feature-method_call)  
+[🔽 feature `accumulate_elements`](#feature-accumulate_elements)  
 
 ##### Specification
 
@@ -3327,47 +3312,28 @@ WHERE m.name_prefix = "import_module"
 
 #### Feature `accumulate_elements`
 
-An accumulator is iteratively updated from its previous value and those of the iteration variable.
+An accumulator is iteratively updated from its previous value and those of the iteration variable. Suffixed by the name of this accumulator.
 
 ##### Derivations
 
-[🔼 feature `assignment_lhs_identifier`](#feature-assignment_lhs_identifier)  
-[🔼 feature `assignment_rhs_atom`](#feature-assignment_rhs_atom)  
-[🔼 feature `augmented_assignment`](#feature-augmented_assignment)  
-[🔼 feature `call_argument`](#feature-call_argument)  
 [🔼 feature `for`](#feature-for)  
-[🔼 feature `method_call_name`](#feature-method_call_name)  
-[🔼 feature `method_call_object`](#feature-method_call_object)  
+[🔼 feature `update_variable`](#feature-update_variable)  
 
 ##### Specification
 
 ```sql
 SELECT "accumulate_elements",
-       count(DISTINCT acc_left.name_suffix),
+       replace(update_stmt.name_suffix, ":" || for_loop.name_suffix, ""),
        for_loop.span,
        for_loop.path
 FROM t for_loop
-JOIN t iter_var ON (iter_var.path GLOB for_loop.path || "?*")-- Ensure iter_var is nested in the loop...
-JOIN t acc_left ON (iter_var.span = acc_left.span)-- and has same span as both acc_left...
-JOIN t acc_right ON (iter_var.span = acc_right.span)-- and acc_right.
-WHERE for_loop.name_prefix = "for" -- A for loop...
-  AND for_loop.name_suffix = iter_var.name_suffix -- whose iteration variable...
-  AND ((iter_var.name_prefix = "assignment_rhs_atom" -- either appears on the RHS of an assignment...
-        AND (acc_left.name_prefix = "augmented_assignment" -- (which is either augmented...
-             OR (acc_left.name_suffix = acc_right.name_suffix -- or references the same identifier...
-                 AND acc_left.name_prefix = "assignment_lhs_identifier" -- on both left...
-                 AND acc_right.name_prefix = "assignment_rhs_atom")))-- and right hand size)...
-       OR (iter_var.name_prefix = "call_argument" -- or appears as an argument...
-           AND acc_right.name_prefix = "method_call_name" -- of a call to a method...
-           AND acc_right.name_suffix REGEXP "(append|extend|insert|add|update)$" -- updating its object.
-           AND acc_left.name_prefix = "method_call_object" -- Ensure that the suffix is the accumulator...
- ))
-  AND for_loop.name_suffix != acc_left.name_suffix -- and is distinct from the iteration variable.
-GROUP BY for_loop.span
-ORDER BY for_loop.span_start
+JOIN t update_stmt ON (update_stmt.path GLOB for_loop.path || "?*")
+WHERE for_loop.name_prefix = "for"
+  AND update_stmt.name_prefix = "update_variable"
+  AND update_stmt.name_suffix GLOB "*:" || for_loop.name_suffix
+GROUP BY for_loop.path,
+         update_stmt.name_suffix
 ```
-
-**Remark.** Note the user-defined function `REGEXP` in the `WHERE`clause. It calls the function `match()` of the third-party [`regex`](https://pypi.org/project/regex/) library.
 
 ##### Example
 
@@ -3381,7 +3347,7 @@ ORDER BY for_loop.span_start
 7   for i in range(10):
 8       acc_1 = combine(acc_1, i)
 9       if condition:
-10           acc_2 += i
+10          acc_2 += i
 11      else:
 12          acc_2 *= i
 13      pass
@@ -3404,8 +3370,9 @@ ORDER BY for_loop.span_start
 
 | Label | Lines |
 |:--|:--|
-| `accumulate_elements:1` | 3-5, 14-15, 19-21 |
-| `accumulate_elements:2` | 7-13 |
+| `accumulate_elements:acc` | 3-5, 14-15, 19-21 |
+| `accumulate_elements:acc_1` | 7-13 |
+| `accumulate_elements:acc_2` | 7-13 |
 
 --------------------------------------------------------------------------------
 
