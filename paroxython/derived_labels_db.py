@@ -33,10 +33,14 @@ class DB:
 
     def read(self, query: Query) -> Labels:
         groups: LabelsSpans = defaultdict(list)
-        with suppress(ValueError):
-            i = query.rindex("\n\nSELECT")
-            self.c.executescript(query[:i])
-            query = query[i:]
+        # Uncomment the following lines for executing multi-queries,
+        # including for instance the creation of a temporary table.
+        #
+        # with suppress(ValueError):
+        #     i = query.rindex("\n\nSELECT")
+        #     self.c.executescript(query[:i])
+        #     query = query[i:]
+        #
         for (name_prefix, name_suffix, span_string, path) in self.c.execute(query):
             label_name = f"{name_prefix}:{name_suffix}" if name_suffix != "" else name_prefix
             span = span_string.split("-")
