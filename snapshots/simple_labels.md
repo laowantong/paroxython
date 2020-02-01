@@ -115,6 +115,7 @@
 - import_name
 - index
 - index_arithmetic
+- infinite_while
 - lambda_function
 - literal
 - method_call

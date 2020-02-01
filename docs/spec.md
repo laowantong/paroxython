@@ -82,6 +82,7 @@
       - [Feature `triangular_nested_for`](#feature-triangular_nested_for)
       - [Feature `square_nested_for`](#feature-square_nested_for)
       - [Feature `while`](#feature-while)
+      - [Feature `infinite_while`](#feature-infinite_while)
   - [Exceptions](#exceptions)
       - [Feature `assertion`](#feature-assertion)
       - [Feature `try`](#feature-try)
@@ -2952,6 +2953,36 @@ Two nested `for` loops doing the same number of iterations.
 | Label | Lines |
 |:--|:--|
 | `while` | 1-7, 2-3, 4-7 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `infinite_while`
+
+##### Specification
+
+```re
+           ^(.*)/_type=While
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
+\n(?:\1.+\n)*?\1/test/value=True
+```
+
+##### Example
+
+```python
+1   while True:
+2       while bar():
+3           pass
+4       while True:
+5           pass
+6       else:
+7           pass
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `infinite_while` | 1, 4 |
 
 --------------------------------------------------------------------------------
 

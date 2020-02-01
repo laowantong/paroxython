@@ -350,7 +350,7 @@ def extended_euclidean_algorithm(m, n): # function:extended_euclidean_algorithm 
     else:
         c = n # assignment, assignment_lhs_identifier:c, assignment_rhs_atom:n, if_else_branch (-> +1)
         d = m # assignment, assignment_lhs_identifier:d, assignment_rhs_atom:m
-    while True: # literal:True, while (-> +12)
+    while True: # infinite_while, literal:True, while (-> +12)
         q = int(c / d) # assignment, assignment_lhs_identifier:q, assignment_rhs_atom:c, assignment_rhs_atom:d, binary_operator:Div, call_argument:, function_call:int
         r = c % d # assignment, assignment_lhs_identifier:r, assignment_rhs_atom:c, assignment_rhs_atom:d, binary_operator:Mod
         if r == 0: # comparison_operator:Eq, if (-> +1), if_test_id:r, int_literal, literal:Num
