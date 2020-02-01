@@ -47,6 +47,8 @@ def print_collatz(n): # added_block_label (-> +7)
                           # binary_operator:Add
                           # binary_operator:Mult
                           # if_else_branch
+                          # increment_variable:n:1
+                          # increment_variable:n:3
                           # int_literal
                           # literal:Num
                           # suggest_constant_definition

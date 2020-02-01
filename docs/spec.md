@@ -46,6 +46,7 @@
       - [Feature `assignment_rhs_atom`](#feature-assignment_rhs_atom)
     - [Assignment idioms](#assignment-idioms)
       - [Feature `update_variable` (SQL)](#feature-update_variable)
+      - [Feature `increment_variable|decrement_variable` (SQL)](#feature-increment_variabledecrement_variable)
       - [Feature `swapping`](#feature-swapping)
       - [Feature `negation`](#feature-negation)
   - [Function definitions](#function-definitions)
@@ -450,6 +451,10 @@ In the AST, an imaginary literal contains the same symbols as a floating point l
 --------------------------------------------------------------------------------
 
 #### Feature `binary_operator`
+
+##### Derivations
+
+[🔽 feature `increment_variable|decrement_variable`](#feature-increment_variabledecrement_variable)  
 
 ##### Specification
 
@@ -1245,6 +1250,7 @@ Match a comprehension with an `if` clause.
 
 ##### Derivations
 
+[🔽 feature `increment_variable|decrement_variable`](#feature-increment_variabledecrement_variable)  
 [🔽 feature `update_variable`](#feature-update_variable)  
 
 ##### Specification
@@ -1274,13 +1280,15 @@ Match a comprehension with an `if` clause.
 
 ##### Derivations
 
+[🔽 feature `increment_variable|decrement_variable`](#feature-increment_variabledecrement_variable)  
 [🔽 feature `update_variable`](#feature-update_variable)  
 
 ##### Specification
 
 ```re
            ^(.*)/_type=AugAssign
-\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
+\n            \1/_pos=(?P<POS>.+)
+\n(?:\1.+\n)* \1/op/_type=(?P<SUFFIX>.+)
 ```
 
 ##### Example
@@ -1299,7 +1307,9 @@ Match a comprehension with an `if` clause.
 
 | Label | Lines |
 |:--|:--|
-| `augmented_assignment` | 1, 3, 4, 5, 6, 7 |
+| `augmented_assignment:Add` | 1, 3, 5, 7 |
+| `augmented_assignment:Mult` | 4 |
+| `augmented_assignment:FloorDiv` | 6 |
 
 --------------------------------------------------------------------------------
 
@@ -1449,6 +1459,7 @@ Match the update of a variable `x` and capture its name in the first part of the
 [🔼 feature `augmented_assignment`](#feature-augmented_assignment)  
 [🔼 feature `method_call`](#feature-method_call)  
 [🔽 feature `accumulate_elements`](#feature-accumulate_elements)  
+[🔽 feature `increment_variable|decrement_variable`](#feature-increment_variabledecrement_variable)  
 
 ##### Specification
 
@@ -1540,6 +1551,73 @@ This complex query requires three self-joins. Expressing the filtering condition
 | `update_variable:b:a` | 16 |
 | `update_variable:seq:` | 17 |
 | `update_variable:seq:s` | 17 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `increment_variable|decrement_variable`
+
+##### Derivations
+
+[🔼 feature `assignment`](#feature-assignment)  
+[🔼 feature `augmented_assignment`](#feature-augmented_assignment)  
+[🔼 feature `binary_operator`](#feature-binary_operator)  
+[🔼 feature `update_variable`](#feature-update_variable)  
+
+##### Specification
+
+```sql
+SELECT CASE
+           WHEN (assign_stmt.name_prefix = "assignment"
+                 AND op.name = "binary_operator:Add"
+                 OR assign_stmt.name = "augmented_assignment:Add") THEN "increment_variable"
+           ELSE "decrement_variable"
+       END,
+       update_stmt.name_suffix,
+       update_stmt.span,
+       update_stmt.path
+FROM
+  (SELECT *
+   FROM t
+   WHERE name_prefix = "update_variable") update_stmt
+JOIN t assign_stmt USING (path)
+JOIN t op ON (op.path GLOB assign_stmt.path || "?*")
+WHERE (assign_stmt.name_prefix = "augmented_assignment"
+       AND assign_stmt.name_suffix REGEXP "Add|Sub")
+  OR (assign_stmt.name_prefix = "assignment"
+      AND op.name_prefix = "binary_operator"
+      AND op.name_suffix REGEXP "Add|Sub")
+GROUP BY update_stmt.path,
+         update_stmt.name_suffix
+```
+
+##### Example
+
+```python
+1   a = a + 1
+2   b += 2
+3   c = d + e # no match
+4   f += g + h
+5   a = a - 1
+6   b -= 2
+7   c = d - e # no match
+8   f -= g + h
+9   n = 3 * n + 1 # BUG: match
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `increment_variable:a:1` | 1 |
+| `increment_variable:b:2` | 2 |
+| `increment_variable:f:g` | 4 |
+| `increment_variable:f:h` | 4 |
+| `decrement_variable:a:1` | 5 |
+| `decrement_variable:b:2` | 6 |
+| `decrement_variable:f:g` | 8 |
+| `decrement_variable:f:h` | 8 |
+| `increment_variable:n:1` | 9 |
+| `increment_variable:n:3` | 9 |
 
 --------------------------------------------------------------------------------
 

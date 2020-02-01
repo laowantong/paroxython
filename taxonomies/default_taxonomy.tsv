@@ -102,7 +102,7 @@ type/elementary/number/floating_point	float_literal
 type/elementary/number/integer	int_literal
 type/elementary/string/	literal:Str
 variable/assignment/	assignment
-variable/assignment/augmented/	augmented_assignment
+variable/assignment/augmented/\1/	augmented_assignment:(.+)
 variable/assignment/chained/	chained_assignment
 variable/assignment/constant/	assignment_lhs_identifier:[[:upper:]0-9_]+
 -- EOF	

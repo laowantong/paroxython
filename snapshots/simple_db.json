@@ -41,6 +41,8 @@
         "if_test_atom:2": [[4,4]],
         "if_test_atom:n": [[4,4]],
         "if_then_branch": [[5,5]],
+        "increment_variable:n:1": [[7,7]],
+        "increment_variable:n:3": [[7,7]],
         "int_literal": [[2,2],[4,4],[4,4],[5,5],[7,7],[7,7]],
         "literal:Num": [[2,2],[4,4],[4,4],[7,7],[7,7]],
         "suggest_augmented_assignment": [[5,5]],
@@ -227,6 +229,12 @@
     "if_then_branch": [
       "tests/data/simple/collatz_print.py",
       "tests/data/simple/fizzbuzz.py"
+    ],
+    "increment_variable:n:1": [
+      "tests/data/simple/collatz_print.py"
+    ],
+    "increment_variable:n:3": [
+      "tests/data/simple/collatz_print.py"
     ],
     "int_literal": [
       "tests/data/simple/collatz_print.py",
