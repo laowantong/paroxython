@@ -44,8 +44,8 @@
       - [Feature `chained_assignment`](#feature-chained_assignment)
       - [Feature `assignment_lhs_identifier`](#feature-assignment_lhs_identifier)
       - [Feature `assignment_rhs_atom`](#feature-assignment_rhs_atom)
-      - [Feature `update_variable` (SQL)](#feature-update_variable)
     - [Assignment idioms](#assignment-idioms)
+      - [Feature `update_variable` (SQL)](#feature-update_variable)
       - [Feature `swapping`](#feature-swapping)
       - [Feature `negation`](#feature-negation)
   - [Function definitions](#function-definitions)
@@ -1434,6 +1434,10 @@ Capture any [_atom_](#feature-call_argument) appearing on the right hand side of
 
 --------------------------------------------------------------------------------
 
+### Assignment idioms
+
+--------------------------------------------------------------------------------
+
 #### Feature `update_variable`
 
 Match the update of a variable `x` and capture its name in the first part of the suffix. In the second part, match any atom distinct from `x` and participating to the update (this excludes any function name).
@@ -1458,18 +1462,18 @@ FROM
    WHERE t.name_prefix IN ("assignment",
                            "augmented_assignment",
                            "method_call")) op
-JOIN t lhs_acc ON (lhs_acc.name_prefix = (CASE op.name_prefix
-                                              WHEN "method_call" THEN "method_call_object"
+JOIN t lhs_acc ON (lhs_acc.name_prefix = (CASE
+                                              WHEN op.name_prefix = "method_call" THEN "method_call_object"
                                               ELSE "assignment_lhs_identifier"
                                           END)
                    AND (lhs_acc.path GLOB op.path || "?*"))
-JOIN t rhs_acc ON (rhs_acc.name_prefix = (CASE op.name_prefix
-                                              WHEN "method_call" THEN "method_call_name"
+JOIN t rhs_acc ON (rhs_acc.name_prefix = (CASE
+                                              WHEN op.name_prefix = "method_call" THEN "method_call_name"
                                               ELSE "assignment_rhs_atom"
                                           END)
                    AND (rhs_acc.path GLOB op.path || "?*"))
-JOIN t rhs_var ON (rhs_var.name_prefix = (CASE op.name_prefix
-                                              WHEN "method_call" THEN "call_argument"
+JOIN t rhs_var ON (rhs_var.name_prefix = (CASE
+                                              WHEN op.name_prefix = "method_call" THEN "call_argument"
                                               ELSE "assignment_rhs_atom"
                                           END)
                    AND (rhs_var.path GLOB op.path || "?*"))
@@ -1491,7 +1495,7 @@ Three distinct cases are covered:
 2. Assignment: the same identifier must appear on both LHS and RHS, and an atom distinct from this identifier must appear on RHS.
 3. Method call: the method must mutate the object it is applied on. Obviously, only a handful of such methods can be statically detected.
 
-This complex query requires three self-joins. Expressing the filtering conditions in the `WHERE` clause proved [ineffective](https://dba.stackexchange.com/questions/258679/accelerating-a-sql-quadruple-self-join-with-a-complex-alternation-in-the-where-c). Table `t` is first restricted to the main features ([`augmented_assignment`](#feature-augmented_assignment), [`assignment`](#feature-assignment) and [`method_call`](#feature-method_call). The resulting lines are then directly matched with the required sub-features. The constraints of the three cases listed above finally reduce the result to the desired rows.
+This complex query requires three self-joins. Expressing the filtering conditions in the `WHERE` clause proved [ineffective](https://dba.stackexchange.com/questions/258679/accelerating-a-sql-quadruple-self-join-with-a-complex-alternation-in-the-where-c). Table `t` is first restricted to the main features ([`augmented_assignment`](#feature-augmented_assignment), [`assignment`](#feature-assignment) and [`method_call`](#feature-method_call)). The resulting lines are then directly matched with the required sub-features. The constraints of the three cases listed above finally reduce the result to the desired rows.
 
 ##### Example
 
@@ -1535,10 +1539,6 @@ This complex query requires three self-joins. Expressing the filtering condition
 | `update_variable:b:a` | 16 |
 | `update_variable:seq:` | 17 |
 | `update_variable:seq:s` | 17 |
-
---------------------------------------------------------------------------------
-
-### Assignment idioms
 
 --------------------------------------------------------------------------------
 
