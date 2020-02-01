@@ -24,7 +24,9 @@ def print_collatz(n): # added_block_label (-> +7)
                        # comparison_operator:Eq
                        # divisibility_test:2
                        # if (-> +3)
-                       # if_test_id:n
+                       # if_test_atom:0
+                       # if_test_atom:2
+                       # if_test_atom:n
                        # int_literal
                        # literal:Num
                        # suggest_conditional_expression (-> +3)
@@ -68,7 +70,9 @@ for i in range(1, 101): # call_argument:1
                     # comparison_operator:Eq
                     # divisibility_test:15
                     # if (-> +7)
-                    # if_test_id:i
+                    # if_test_atom:0
+                    # if_test_atom:15
+                    # if_test_atom:i
                     # int_literal
                     # literal:Num
                     # suggest_constant_definition
@@ -80,7 +84,9 @@ for i in range(1, 101): # call_argument:1
                      # comparison_operator:Eq
                      # divisibility_test:3
                      # if (-> +5)
-                     # if_test_id:i
+                     # if_test_atom:0
+                     # if_test_atom:3
+                     # if_test_atom:i
                      # int_literal
                      # literal:Num
                      # suggest_constant_definition
@@ -92,7 +98,9 @@ for i in range(1, 101): # call_argument:1
                      # comparison_operator:Eq
                      # divisibility_test:5
                      # if (-> +3)
-                     # if_test_id:i
+                     # if_test_atom:0
+                     # if_test_atom:5
+                     # if_test_atom:i
                      # int_literal
                      # literal:Num
                      # suggest_constant_definition

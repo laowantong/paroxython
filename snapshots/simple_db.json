@@ -37,7 +37,9 @@
         "function_returning_nothing:print_collatz": [[1,8]],
         "if": [[4,7]],
         "if_else_branch": [[7,7]],
-        "if_test_id:n": [[4,4]],
+        "if_test_atom:0": [[4,4]],
+        "if_test_atom:2": [[4,4]],
+        "if_test_atom:n": [[4,4]],
         "if_then_branch": [[5,5]],
         "int_literal": [[2,2],[4,4],[4,4],[5,5],[7,7],[7,7]],
         "literal:Num": [[2,2],[4,4],[4,4],[7,7],[7,7]],
@@ -85,7 +87,11 @@
         "if": [[2,9],[4,9],[6,9]],
         "if_elif_branch": [[5,5],[7,7]],
         "if_else_branch": [[9,9]],
-        "if_test_id:i": [[2,2],[4,4],[6,6]],
+        "if_test_atom:0": [[2,2],[4,4],[6,6]],
+        "if_test_atom:15": [[2,2]],
+        "if_test_atom:3": [[4,4]],
+        "if_test_atom:5": [[6,6]],
+        "if_test_atom:i": [[2,2],[4,4],[6,6]],
         "if_then_branch": [[3,3]],
         "int_literal": [[1,1],[1,1],[2,2],[2,2],[4,4],[4,4],[6,6],[6,6]],
         "literal:Num": [[1,1],[1,1],[2,2],[2,2],[4,4],[4,4],[6,6],[6,6]],
@@ -208,7 +214,14 @@
       "tests/data/simple/collatz_print.py",
       "tests/data/simple/fizzbuzz.py"
     ],
-    "if_test_id:n": [
+    "if_test_atom:0": [
+      "tests/data/simple/collatz_print.py",
+      "tests/data/simple/fizzbuzz.py"
+    ],
+    "if_test_atom:2": [
+      "tests/data/simple/collatz_print.py"
+    ],
+    "if_test_atom:n": [
       "tests/data/simple/collatz_print.py"
     ],
     "if_then_branch": [
@@ -283,7 +296,16 @@
     "if_elif_branch": [
       "tests/data/simple/fizzbuzz.py"
     ],
-    "if_test_id:i": [
+    "if_test_atom:15": [
+      "tests/data/simple/fizzbuzz.py"
+    ],
+    "if_test_atom:3": [
+      "tests/data/simple/fizzbuzz.py"
+    ],
+    "if_test_atom:5": [
+      "tests/data/simple/fizzbuzz.py"
+    ],
+    "if_test_atom:i": [
       "tests/data/simple/fizzbuzz.py"
     ],
     "literal:Str": [

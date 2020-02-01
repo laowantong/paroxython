@@ -67,7 +67,7 @@
       - [Feature `tail_recursive_function` (SQL)](#feature-tail_recursive_function)
   - [Conditionals](#conditionals)
       - [Feature `if`](#feature-if)
-      - [Feature `if_test_id`](#feature-if_test_id)
+      - [Feature `if_test_atom`](#feature-if_test_atom)
       - [Feature `if_then_branch`](#feature-if_then_branch)
       - [Feature `if_elif_branch`](#feature-if_elif_branch)
       - [Feature `if_else_branch`](#feature-if_else_branch)
@@ -2341,34 +2341,40 @@ else:
 
 --------------------------------------------------------------------------------
 
-#### Feature `if_test_id`
+#### Feature `if_test_atom`
 
-Match any identifier present in the condition of an `if` statement.
+Match and suffix any [atom](#feature-call_argument) present in the condition of an `if` statement.
 
 ##### Specification
 
 ```re
            ^(.*)/_type=If
-\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 (
-\n(?:\1.+\n)*?\1/test/.+/id=(?P<SUFFIX>.+)
+\n(?:\1.+\n)*?\1/test(?P<_1>/.*)   /_pos=(?P<POS>.+)
+\n            \1/test(?P=_1)       /(value|n|(?<!func/)id)=(?P<SUFFIX>.+)
 )+
 ```
 
 ##### Example
 
 ```python
-1   if foo(bar) == biz:
+1   if foo(bar) == biz: # no match for "foo"
 2       pass
+3   if a.b(c) > (d + e) / 2: # no match for "b"
+4       pass
 ```
 
 ##### Matches
 
 | Label | Lines |
 |:--|:--|
-| `if_test_id:bar` | 1 |
-| `if_test_id:biz` | 1 |
-| `if_test_id:foo` | 1 |
+| `if_test_atom:bar` | 1 |
+| `if_test_atom:biz` | 1 |
+| `if_test_atom:2` | 3 |
+| `if_test_atom:a` | 3 |
+| `if_test_atom:c` | 3 |
+| `if_test_atom:d` | 3 |
+| `if_test_atom:e` | 3 |
 
 --------------------------------------------------------------------------------
 

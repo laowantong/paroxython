@@ -44,8 +44,14 @@
 - if_elif_branch / fizzbuzz.py / 5, 7
 - if_else_branch / collatz_print.py / 7
 - if_else_branch / fizzbuzz.py / 9
-- if_test_id:i / fizzbuzz.py / 2, 4, 6
-- if_test_id:n / collatz_print.py / 4
+- if_test_atom:0 / collatz_print.py / 4
+- if_test_atom:0 / fizzbuzz.py / 2, 4, 6
+- if_test_atom:15 / fizzbuzz.py / 2
+- if_test_atom:2 / collatz_print.py / 4
+- if_test_atom:3 / fizzbuzz.py / 4
+- if_test_atom:5 / fizzbuzz.py / 6
+- if_test_atom:i / fizzbuzz.py / 2, 4, 6
+- if_test_atom:n / collatz_print.py / 4
 - if_then_branch / collatz_print.py / 5
 - if_then_branch / fizzbuzz.py / 3
 - int_literal / collatz_print.py / 2, 4, 4, 5, 7, 7
@@ -108,7 +114,7 @@
 - function_tail_call
 - function_with_default_positional_arguments
 - generator
-- if_test_id
+- if_test_atom
 - imaginary_literal
 - import
 - import_module
