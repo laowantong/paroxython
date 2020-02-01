@@ -6,7 +6,7 @@
       "labels": {
         "assignment": [[1,1]],
         "assignment_lhs_identifier:a": [[1,1]],
-        "assignment_rhs_identifier:b": [[1,1]]
+        "assignment_rhs_atom:b": [[1,1]]
       },
       "taxons": {
         "variable/assignment/": [[1,1]]
@@ -20,7 +20,10 @@
         "added_label_on_line_4": [[4,4]],
         "assignment": [[5,5],[7,7]],
         "assignment_lhs_identifier:n": [[5,5],[7,7]],
-        "assignment_rhs_identifier:n": [[5,5],[7,7]],
+        "assignment_rhs_atom:1": [[7,7]],
+        "assignment_rhs_atom:2": [[5,5]],
+        "assignment_rhs_atom:3": [[7,7]],
+        "assignment_rhs_atom:n": [[5,5],[7,7]],
         "binary_operator:Add": [[7,7]],
         "binary_operator:Mod": [[4,4]],
         "binary_operator:Mult": [[7,7]],
@@ -131,7 +134,7 @@
     "assignment_lhs_identifier:a": [
       "tests/data/simple/assignment.py"
     ],
-    "assignment_rhs_identifier:b": [
+    "assignment_rhs_atom:b": [
       "tests/data/simple/assignment.py"
     ],
     "added_block_label": [
@@ -143,7 +146,16 @@
     "assignment_lhs_identifier:n": [
       "tests/data/simple/collatz_print.py"
     ],
-    "assignment_rhs_identifier:n": [
+    "assignment_rhs_atom:1": [
+      "tests/data/simple/collatz_print.py"
+    ],
+    "assignment_rhs_atom:2": [
+      "tests/data/simple/collatz_print.py"
+    ],
+    "assignment_rhs_atom:3": [
+      "tests/data/simple/collatz_print.py"
+    ],
+    "assignment_rhs_atom:n": [
       "tests/data/simple/collatz_print.py"
     ],
     "binary_operator:Add": [

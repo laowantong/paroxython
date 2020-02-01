@@ -3,7 +3,7 @@
 # ----------------------------------------------------------------------------------------
 a = b # assignment
       # assignment_lhs_identifier:a
-      # assignment_rhs_identifier:b
+      # assignment_rhs_atom:b
 
 # ----------------------------------------------------------------------------------------
 # tests/data/simple/collatz_print.py
@@ -30,14 +30,17 @@ def print_collatz(n): # added_block_label (-> +7)
                        # suggest_conditional_expression (-> +3)
             n = n // 2 # assignment
                        # assignment_lhs_identifier:n
-                       # assignment_rhs_identifier:n
+                       # assignment_rhs_atom:2
+                       # assignment_rhs_atom:n
                        # if_then_branch
                        # int_literal
                        # suggest_augmented_assignment
         else: # unknown_label
             n = 3 * n + 1 # assignment
                           # assignment_lhs_identifier:n
-                          # assignment_rhs_identifier:n
+                          # assignment_rhs_atom:1
+                          # assignment_rhs_atom:3
+                          # assignment_rhs_atom:n
                           # binary_operator:Add
                           # binary_operator:Mult
                           # if_else_branch

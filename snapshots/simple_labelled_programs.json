@@ -14,7 +14,7 @@
         [[1,1]]
       ],
       [
-        "assignment_rhs_identifier:b",
+        "assignment_rhs_atom:b",
         [[1,1]]
       ]
     ]
@@ -42,7 +42,19 @@
         [[5,5],[7,7]]
       ],
       [
-        "assignment_rhs_identifier:n",
+        "assignment_rhs_atom:1",
+        [[7,7]]
+      ],
+      [
+        "assignment_rhs_atom:2",
+        [[5,5]]
+      ],
+      [
+        "assignment_rhs_atom:3",
+        [[7,7]]
+      ],
+      [
+        "assignment_rhs_atom:n",
         [[5,5],[7,7]]
       ],
       [

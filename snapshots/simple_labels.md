@@ -4,8 +4,11 @@
 - assignment / collatz_print.py / 5, 7
 - assignment_lhs_identifier:a / assignment.py / 1
 - assignment_lhs_identifier:n / collatz_print.py / 5, 7
-- assignment_rhs_identifier:b / assignment.py / 1
-- assignment_rhs_identifier:n / collatz_print.py / 5, 7
+- assignment_rhs_atom:1 / collatz_print.py / 7
+- assignment_rhs_atom:2 / collatz_print.py / 5
+- assignment_rhs_atom:3 / collatz_print.py / 7
+- assignment_rhs_atom:b / assignment.py / 1
+- assignment_rhs_atom:n / collatz_print.py / 5, 7
 - binary_operator:Add / collatz_print.py / 7
 - binary_operator:FloorDiv / collatz_print.py / 5
 - binary_operator:Mod / collatz_print.py / 4
@@ -66,7 +69,7 @@
 - accumulate_stream
 - assertion
 - assignment_lhs_identifier
-- assignment_rhs_identifier
+- assignment_rhs_atom
 - augmented_assignment
 - binary_operator
 - body_recursive_function

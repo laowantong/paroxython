@@ -42,7 +42,7 @@
       - [Feature `augmented_assignment`](#feature-augmented_assignment)
       - [Feature `chained_assignment`](#feature-chained_assignment)
       - [Feature `assignment_lhs_identifier`](#feature-assignment_lhs_identifier)
-      - [Feature `assignment_rhs_identifier`](#feature-assignment_rhs_identifier)
+      - [Feature `assignment_rhs_atom`](#feature-assignment_rhs_atom)
     - [Assignment idioms](#assignment-idioms)
       - [Feature `swapping`](#feature-swapping)
       - [Feature `negation`](#feature-negation)
@@ -99,9 +99,9 @@
       - [Feature `universal_quantifier`](#feature-universal_quantifier)
       - [Feature `existential_quantifier`](#feature-existential_quantifier)
       - [Feature `find_first_element`](#feature-find_first_element)
-    - [Non sequential finite loops](#non-sequential-finite-loops)
+    - [Non-sequential finite loops](#non-sequential-finite-loops)
       - [Feature `evolve_state`](#feature-evolve_state)
-    - [Non sequential infinite loops](#non-sequential-infinite-loops)
+    - [Non-sequential infinite loops](#non-sequential-infinite-loops)
       - [Feature `accumulate_stream`](#feature-accumulate_stream)
 - [Programs](#programs)
       - [Feature `category`](#feature-category)
@@ -831,7 +831,7 @@ A tail-call is a call whose result is immediately returned, without any further 
 #### Feature `call_argument`
 
 Match any argument of a function or a method call. Suffix this argument when it is **atomic**, _i.e._ either:
-- a simple identifier,
+- an identifier,
 - a number literal,
 - `True`, `False` or `None`.
 Otherwise, suffix it with an empty string.
@@ -849,7 +849,7 @@ Otherwise, suffix it with an empty string.
 \n(?:\1.+\n)*?\1/(?P<_1>args/\d+)/_pos=(?P<POS>.+)
 \n            \1/(?P=_1)         /(   # the next line denotes either an atomic argument
                                     (value|n|id)?=(?P<SUFFIX>.+) # capture it as suffix
-                                    | # or a non atomic argument
+                                    | # or a non-atomic argument
                                     (?P<SUFFIX>).+ # "capture" an empty suffix
                                   )
 )+ # at least one argument
@@ -1360,9 +1360,9 @@ Capture any identifier appearing on the left hand side of an assignment (possibl
 
 --------------------------------------------------------------------------------
 
-#### Feature `assignment_rhs_identifier`
+#### Feature `assignment_rhs_atom`
 
-Capture any identifier (variable or function) appearing on the right hand side of an assignment (possibly augmented).
+Capture any [_atom_](#feature-call_argument) appearing on the right hand side of an assignment (possibly augmented).
 
 ##### Derivations
 
@@ -1371,8 +1371,8 @@ Capture any identifier (variable or function) appearing on the right hand side o
 ##### Specification
 
 ```re
-^(.*/assignvalue\b.*)/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1     /id=(?P<SUFFIX>.+)
+ ^(.*/assignvalue\b.*)/_pos=(?P<POS>.+)
+\n                  \1/(value|n|id)=(?P<SUFFIX>.+)
 ```
 
 ##### Example
@@ -1388,19 +1388,26 @@ Capture any identifier (variable or function) appearing on the right hand side o
 8   a += i
 9   a[i] = b
 10  first = second = third
+11  a = 42
+12  a = True
+13  a = None
+14  a = [] # no match
 ```
 
 ##### Matches
 
 | Label | Lines |
 |:--|:--|
-| `assignment_rhs_identifier:a` | 1, 2, 3, 4, 7 |
-| `assignment_rhs_identifier:b` | 1, 2, 3, 4, 9 |
-| `assignment_rhs_identifier:bar` | 5, 6 |
-| `assignment_rhs_identifier:c` | 1, 2, 3, 4 |
-| `assignment_rhs_identifier:foo` | 5, 6 |
-| `assignment_rhs_identifier:i` | 7, 8 |
-| `assignment_rhs_identifier:third` | 10 |
+| `assignment_rhs_atom:a` | 1, 2, 3, 4, 7 |
+| `assignment_rhs_atom:b` | 1, 2, 3, 4, 9 |
+| `assignment_rhs_atom:bar` | 5, 6 |
+| `assignment_rhs_atom:c` | 1, 2, 3, 4 |
+| `assignment_rhs_atom:foo` | 5, 6 |
+| `assignment_rhs_atom:i` | 7, 8 |
+| `assignment_rhs_atom:third` | 10 |
+| `assignment_rhs_atom:42` | 11 |
+| `assignment_rhs_atom:None` | 13 |
+| `assignment_rhs_atom:True` | 12 |
 
 --------------------------------------------------------------------------------
 
@@ -1543,7 +1550,7 @@ In Python, the term "function" encompasses any type of subroutine, be it a metho
 
 #### Feature `return`
 
-Match `return` statements and, when the returned object is [_atomic_](#feature-call_argument), suffix it. Note that a `return` statement returning no value is denoted by `return:None`, not to be confounded with `return` (without suffix), which denotes the return of a non-atomic object.
+Match `return` statements and, when the returned object is an [_atom_](#feature-call_argument), suffix it. Note that a `return` statement returning no value is denoted by `return:None`, not to be confounded with `return` (without suffix), which denotes the return of a non-atomic object.
 
 ##### Derivations
 
@@ -1589,7 +1596,7 @@ Match `return` statements and, when the returned object is [_atomic_](#feature-c
 
 #### Feature `yield`
 
-Match `yield` and `yieldfrom` _[expressions](https://docs.python.org/3/reference/expressions.html#yield-expressions)_ (generally used as statements) and, when the yielded object is [_atomic_](#feature-call_argument), suffix it.
+Match `yield` and `yieldfrom` _[expressions](https://docs.python.org/3/reference/expressions.html#yield-expressions)_ (generally used as statements) and, when the yielded object is an [atom](#feature-call_argument), suffix it.
 
 ##### Derivations
 
@@ -3183,7 +3190,7 @@ An accumulator is iteratively updated from its previous value and those of the i
 ##### Derivations
 
 [🔼 feature `assignment_lhs_identifier`](#feature-assignment_lhs_identifier)  
-[🔼 feature `assignment_rhs_identifier`](#feature-assignment_rhs_identifier)  
+[🔼 feature `assignment_rhs_atom`](#feature-assignment_rhs_atom)  
 [🔼 feature `augmented_assignment`](#feature-augmented_assignment)  
 [🔼 feature `call_argument`](#feature-call_argument)  
 [🔼 feature `for`](#feature-for)  
@@ -3203,11 +3210,11 @@ JOIN t acc_left ON (iter_var.span = acc_left.span)-- and has same span as both a
 JOIN t acc_right ON (iter_var.span = acc_right.span)-- and acc_right.
 WHERE for_loop.name_prefix = "for" -- A for loop...
   AND for_loop.name_suffix = iter_var.name_suffix -- whose iteration variable...
-  AND ((iter_var.name_prefix = "assignment_rhs_identifier" -- either appears on the RHS of an assignment...
+  AND ((iter_var.name_prefix = "assignment_rhs_atom" -- either appears on the RHS of an assignment...
         AND (acc_left.name_prefix = "augmented_assignment" -- (which is either augmented...
              OR (acc_left.name_suffix = acc_right.name_suffix -- or references the same identifier...
                  AND acc_left.name_prefix = "assignment_lhs_identifier" -- on both left...
-                 AND acc_right.name_prefix = "assignment_rhs_identifier")))-- and right hand size)...
+                 AND acc_right.name_prefix = "assignment_rhs_atom")))-- and right hand size)...
        OR (iter_var.name_prefix = "call_argument" -- or appears as an argument...
            AND acc_right.name_prefix = "method_call" -- of a call to a method...
            AND acc_right.name_suffix REGEXP "(append|extend|insert|add|update)$" -- updating its object.
@@ -3455,7 +3462,7 @@ Linear search. Return the first element of a sequence satisfying a predicate.
 
 --------------------------------------------------------------------------------
 
-### Non sequential finite loops
+### Non-sequential finite loops
 
 --------------------------------------------------------------------------------
 
@@ -3513,7 +3520,7 @@ Evolve the value of a variable until it reaches a desired state.
 
 --------------------------------------------------------------------------------
 
-### Non sequential infinite loops
+### Non-sequential infinite loops
 
 --------------------------------------------------------------------------------
 
@@ -3827,7 +3834,7 @@ Match magic numbers (unnamed numerical constants) other than -1, 0, 1 and 2. A n
 (   # indented lines
                 /(?P<_1>(?:body|orelse)/.+)/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/(?P=_1)                   /n=(?!(-1|0|1|2)\n)
-|   # non indented lines
+|   # unindented lines
                 /_type=Assign
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/assigntargets/1/id=.*?[a-z].* # at least one lowercase letter
