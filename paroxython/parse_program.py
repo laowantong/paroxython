@@ -119,10 +119,13 @@ if __name__ == "__main__":
     print()
     parse = ProgramParser()
     acc = []
-    for (name, spans) in parse(program, yield_failed_matches=False):
+    for (name, spans) in sorted(
+        parse(program, yield_failed_matches=False),
+        key=lambda c: (c[0].partition(":")[0], c[1][0].to_couple()),
+    ):
         spans_as_string = ", ".join(map(str, spans))
+        paths_as_string = ", ".join(s.path for s in spans)
         acc.append(f"| `{name}` | {spans_as_string} |")
-        # paths_as_string = ", ".join(s.path for s in spans)
-        # acc.append(f"| `{name}` | {spans_as_string} | {paths_as_string} |")
+        # acc[-1] += f" {paths_as_string} |"
     print("\n".join(acc))
     Path("sandbox/flat_ast.txt").write_text(parse.flat_ast)

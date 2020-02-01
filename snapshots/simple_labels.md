@@ -61,6 +61,9 @@
 - suggest_conditional_expression / collatz_print.py / 4-7
 - suggest_constant_definition / collatz_print.py / 7
 - suggest_constant_definition / fizzbuzz.py / 2, 4, 6
+- update_variable:n:1 / collatz_print.py / 7
+- update_variable:n:2 / collatz_print.py / 5
+- update_variable:n:3 / collatz_print.py / 7
 - while / collatz_print.py / 2-7
 
 # Absent labels
@@ -115,6 +118,7 @@
 - lambda_function
 - literal
 - method_call
+- method_call_name
 - method_call_object
 - method_chaining
 - negation
@@ -137,4 +141,5 @@
 - try_raise|try_except
 - unary_operator
 - universal_quantifier
+- update_variable
 - yield

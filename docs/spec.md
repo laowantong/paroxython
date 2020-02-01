@@ -26,6 +26,7 @@
       - [Feature `function_tail_call`](#feature-function_tail_call)
       - [Feature `call_argument`](#feature-call_argument)
       - [Feature `method_call`](#feature-method_call)
+      - [Feature `method_call_name`](#feature-method_call_name)
       - [Feature `method_call_object`](#feature-method_call_object)
       - [Feature `method_chaining`](#feature-method_chaining)
       - [Feature `composition`](#feature-composition)
@@ -43,6 +44,7 @@
       - [Feature `chained_assignment`](#feature-chained_assignment)
       - [Feature `assignment_lhs_identifier`](#feature-assignment_lhs_identifier)
       - [Feature `assignment_rhs_atom`](#feature-assignment_rhs_atom)
+      - [Feature `update_variable` (SQL)](#feature-update_variable)
     - [Assignment idioms](#assignment-idioms)
       - [Feature `swapping`](#feature-swapping)
       - [Feature `negation`](#feature-negation)
@@ -736,7 +738,7 @@ When the value of the left operand suffices to determine the value of a boolean 
 2   bar()
 3   buzz(x, 2)
 4   fizz(foobar(x), 2)
-5   baz.qux() # no match, see feature method_call
+5   baz.qux() # no match, see feature method_call_name
 ```
 
 ##### Matches
@@ -894,6 +896,36 @@ Otherwise, suffix it with an empty string.
 
 ##### Derivations
 
+[🔽 feature `update_variable`](#feature-update_variable)  
+
+##### Specification
+
+```re
+           ^(.*)/_type=Call
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
+\n(?:\1.+\n)*?\1/func/_type=Attribute
+```
+
+##### Example
+
+```python
+1   seq.index(42)
+2   foo(bar)  # no match
+3   seq.index # no match
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `method_call` | 1 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `method_call_name`
+
+##### Derivations
+
 [🔽 feature `accumulate_elements`](#feature-accumulate_elements)  
 
 ##### Specification
@@ -917,7 +949,7 @@ Otherwise, suffix it with an empty string.
 
 | Label | Lines |
 |:--|:--|
-| `method_call:index` | 1 |
+| `method_call_name:index` | 1 |
 
 --------------------------------------------------------------------------------
 
@@ -1217,6 +1249,10 @@ Match a comprehension with an `if` clause.
 
 #### Feature `assignment`
 
+##### Derivations
+
+[🔽 feature `update_variable`](#feature-update_variable)  
+
 ##### Specification
 
 ```re
@@ -1245,6 +1281,7 @@ Match a comprehension with an `if` clause.
 ##### Derivations
 
 [🔽 feature `accumulate_elements`](#feature-accumulate_elements)  
+[🔽 feature `update_variable`](#feature-update_variable)  
 
 ##### Specification
 
@@ -1362,7 +1399,7 @@ Capture any identifier appearing on the left hand side of an assignment (possibl
 
 #### Feature `assignment_rhs_atom`
 
-Capture any [_atom_](#feature-call_argument) appearing on the right hand side of an assignment (possibly augmented).
+Capture any [_atom_](#feature-call_argument) appearing on the right hand side of an assignment (possibly augmented), except the function names.
 
 ##### Derivations
 
@@ -1371,8 +1408,8 @@ Capture any [_atom_](#feature-call_argument) appearing on the right hand side of
 ##### Specification
 
 ```re
- ^(.*/assignvalue\b.*)/_pos=(?P<POS>.+)
-\n                  \1/(value|n|id)=(?P<SUFFIX>.+)
+^(.*/assignvalue\b.*)/_pos=(?P<POS>.+)
+\n                 \1/(value|n|(?<!func/)id)=(?P<SUFFIX>.+)
 ```
 
 ##### Example
@@ -1382,16 +1419,17 @@ Capture any [_atom_](#feature-call_argument) appearing on the right hand side of
 2   a += a + b + c
 3   a = a[b[c]]
 4   a += a[b[c]]
-5   a = foo(bar())
-6   a += foo(bar())
+5   a = foo(bar()) # no match
+6   a += foo(bar) # matches "bar" only
 7   a = a + i
 8   a += i
 9   a[i] = b
-10  first = second = third
+10  first = second = third # matches "third" only
 11  a = 42
 12  a = True
 13  a = None
 14  a = [] # no match
+15  a = foo.bar(fizz) # matches "foo" and "fizz" only
 ```
 
 ##### Matches
@@ -1400,14 +1438,118 @@ Capture any [_atom_](#feature-call_argument) appearing on the right hand side of
 |:--|:--|
 | `assignment_rhs_atom:a` | 1, 2, 3, 4, 7 |
 | `assignment_rhs_atom:b` | 1, 2, 3, 4, 9 |
-| `assignment_rhs_atom:bar` | 5, 6 |
 | `assignment_rhs_atom:c` | 1, 2, 3, 4 |
-| `assignment_rhs_atom:foo` | 5, 6 |
+| `assignment_rhs_atom:bar` | 6 |
 | `assignment_rhs_atom:i` | 7, 8 |
 | `assignment_rhs_atom:third` | 10 |
 | `assignment_rhs_atom:42` | 11 |
-| `assignment_rhs_atom:None` | 13 |
 | `assignment_rhs_atom:True` | 12 |
+| `assignment_rhs_atom:None` | 13 |
+| `assignment_rhs_atom:foo` | 15 |
+| `assignment_rhs_atom:fizz` | 15 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `update_variable`
+
+Match the update of a variable `x` and capture its name in the first part of the suffix. In the second part, match any atom distinct from `x` and participating to the update (this excludes any function name).
+
+##### Derivations
+
+[🔼 feature `assignment`](#feature-assignment)  
+[🔼 feature `augmented_assignment`](#feature-augmented_assignment)  
+[🔼 feature `method_call`](#feature-method_call)  
+
+##### Specification
+
+```sql
+SELECT "update_variable",
+       lhs_acc.name_suffix || ":" || rhs_var.name_suffix,
+       op.span,
+       op.path
+FROM
+  (SELECT *
+   FROM t
+   WHERE t.name_prefix IN ("assignment",
+                           "augmented_assignment",
+                           "method_call")) op
+JOIN t lhs_acc ON (lhs_acc.name_prefix = (CASE op.name_prefix
+                                              WHEN "method_call" THEN "method_call_object"
+                                              ELSE "assignment_lhs_identifier"
+                                          END)
+                   AND (lhs_acc.path GLOB op.path || "?*"))
+JOIN t rhs_acc ON (rhs_acc.name_prefix = (CASE op.name_prefix
+                                              WHEN "method_call" THEN "method_call_name"
+                                              ELSE "assignment_rhs_atom"
+                                          END)
+                   AND (rhs_acc.path GLOB op.path || "?*"))
+JOIN t rhs_var ON (rhs_var.name_prefix = (CASE op.name_prefix
+                                              WHEN "method_call" THEN "call_argument"
+                                              ELSE "assignment_rhs_atom"
+                                          END)
+                   AND (rhs_var.path GLOB op.path || "?*"))
+WHERE op.name_prefix = "augmented_assignment"
+  OR (op.name_prefix = "assignment"
+      AND rhs_acc.name_suffix = lhs_acc.name_suffix
+      AND rhs_acc.name_suffix != rhs_var.name_suffix)
+  OR (op.name_prefix = "method_call"
+      AND rhs_acc.name_suffix REGEXP "(append|extend|insert|add|update)$"
+      AND rhs_acc.name_suffix != rhs_var.name_suffix)
+GROUP BY op.span,
+         lhs_acc.name,
+         rhs_var.name
+```
+
+Three distinct cases are covered:
+
+1. Augmented assignment.
+2. Assignment: the same identifier must appear on both LHS and RHS, and an atom distinct from this identifier must appear on RHS.
+3. Method call: the method must mutate the object it is applied on. Obviously, only a handful of such methods can be statically detected.
+
+This complex query requires three self-joins. Expressing the filtering conditions in the `WHERE` clause proved [ineffective](https://dba.stackexchange.com/questions/258679/accelerating-a-sql-quadruple-self-join-with-a-complex-alternation-in-the-where-c). Table `t` is first restricted to the main features ([`augmented_assignment`](#feature-augmented_assignment), [`assignment`](#feature-assignment) and [`method_call`](#feature-method_call). The resulting lines are then directly matched with the required sub-features. The constraints of the three cases listed above finally reduce the result to the desired rows.
+
+##### Example
+
+```python
+1   foo = foo + a
+2   foo += a
+3   foo.append(a)
+4   foo += [a]
+5   
+6   bar = bar.mult(5)
+7   bar = mult(bar, 5)
+8   
+9   fizz = fizz.upper() # no match
+10  fizz.process(a) # no match
+11  
+12  buzz += a + b + c
+13  s *= (x - 1) / x
+14  c[j] += c[i- 1]
+15  (x, y) = (y, x)
+16  (a, b) = (b, a + b)
+17  seq.append(int(s))
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `update_variable:foo:a` | 1, 2, 3, 4 |
+| `update_variable:bar:5` | 6, 7 |
+| `update_variable:buzz:a` | 12 |
+| `update_variable:buzz:b` | 12 |
+| `update_variable:buzz:c` | 12 |
+| `update_variable:s:1` | 13 |
+| `update_variable:s:x` | 13 |
+| `update_variable:c:1` | 14 |
+| `update_variable:c:c` | 14 |
+| `update_variable:c:i` | 14 |
+| `update_variable:x:y` | 15 |
+| `update_variable:y:x` | 15 |
+| `update_variable:a:b` | 16 |
+| `update_variable:b:a` | 16 |
+| `update_variable:seq:` | 17 |
+| `update_variable:seq:s` | 17 |
 
 --------------------------------------------------------------------------------
 
@@ -3194,7 +3336,7 @@ An accumulator is iteratively updated from its previous value and those of the i
 [🔼 feature `augmented_assignment`](#feature-augmented_assignment)  
 [🔼 feature `call_argument`](#feature-call_argument)  
 [🔼 feature `for`](#feature-for)  
-[🔼 feature `method_call`](#feature-method_call)  
+[🔼 feature `method_call_name`](#feature-method_call_name)  
 [🔼 feature `method_call_object`](#feature-method_call_object)  
 
 ##### Specification
@@ -3216,7 +3358,7 @@ WHERE for_loop.name_prefix = "for" -- A for loop...
                  AND acc_left.name_prefix = "assignment_lhs_identifier" -- on both left...
                  AND acc_right.name_prefix = "assignment_rhs_atom")))-- and right hand size)...
        OR (iter_var.name_prefix = "call_argument" -- or appears as an argument...
-           AND acc_right.name_prefix = "method_call" -- of a call to a method...
+           AND acc_right.name_prefix = "method_call_name" -- of a call to a method...
            AND acc_right.name_suffix REGEXP "(append|extend|insert|add|update)$" -- updating its object.
            AND acc_left.name_prefix = "method_call_object" -- Ensure that the suffix is the accumulator...
  ))

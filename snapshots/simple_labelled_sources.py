@@ -35,6 +35,7 @@ def print_collatz(n): # added_block_label (-> +7)
                        # if_then_branch
                        # int_literal
                        # suggest_augmented_assignment
+                       # update_variable:n:2
         else: # unknown_label
             n = 3 * n + 1 # assignment
                           # assignment_lhs_identifier:n
@@ -47,6 +48,8 @@ def print_collatz(n): # added_block_label (-> +7)
                           # int_literal
                           # literal:Num
                           # suggest_constant_definition
+                          # update_variable:n:1
+                          # update_variable:n:3
     print(n) # call_argument:n
              # function_call:print
 
