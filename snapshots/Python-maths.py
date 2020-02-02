@@ -711,7 +711,7 @@ class TestLeastCommonMultiple(unittest.TestCase):
     ]
     expected_results = [20, 195, 124, 210, 1462, 60, 300, 50, 18] # assignment, assignment_lhs_identifier:expected_results, assignment_rhs_atom:124, assignment_rhs_atom:1462, assignment_rhs_atom:18, assignment_rhs_atom:195, assignment_rhs_atom:20, assignment_rhs_atom:210, assignment_rhs_atom:300, assignment_rhs_atom:50, assignment_rhs_atom:60, int_literal, literal:List, literal:Num, suggest_constant_definition
     def test_lcm_function(self): # function:test_lcm_function (-> +4), function_returning_nothing:test_lcm_function (-> +4)
-        for i, (first_num, second_num) in enumerate(self.test_inputs): # call_argument:, for:i:first_num:second_num (-> +3), for_indexes_elements (-> +3), function_call:enumerate
+        for i, (first_num, second_num) in enumerate(self.test_inputs): # call_argument:, for:first_num (-> +3), for:i (-> +3), for:second_num (-> +3), for_indexes_elements (-> +3), function_call:enumerate
             actual_result = find_lcm(first_num, second_num) # assignment, assignment_lhs_identifier:actual_result, assignment_rhs_atom:first_num, assignment_rhs_atom:second_num, call_argument:first_num, call_argument:second_num, function_call:find_lcm
             with self.subTest(i=i): # method_call, method_call_name:subTest
                 self.assertEqual(actual_result, self.expected_results[i]) # call_argument:, call_argument:actual_result, index, method_call, method_call_name:assertEqual, method_call_object:self

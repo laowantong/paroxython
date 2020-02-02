@@ -980,11 +980,11 @@ def solution(): # function:solution (-> +12), function_returning_something:solut
     names.sort() # method_call, method_call_name:sort, method_call_object:names
     name_score = 0 # assignment, assignment_lhs_identifier:name_score, assignment_rhs_atom:0, int_literal, literal:Num
     total_score = 0 # assignment, assignment_lhs_identifier:total_score, assignment_rhs_atom:0, int_literal, literal:Num
-    for i, name in enumerate(names): # call_argument:names, for:i:name (-> +4), for_indexes_elements (-> +4), function_call:enumerate
+    for i, name in enumerate(names): # accumulate_elements:total_score, call_argument:names, for:i, for_indexes_elements (-> +4), function_call:enumerate
         for letter in name: # accumulate_elements:name_score (-> +1), for:letter (-> +1), for_each (-> +1), nested_for:1 (-> +1)
             name_score += ord(letter) - 64 # assignment_lhs_identifier:name_score, assignment_rhs_atom:64, assignment_rhs_atom:letter, augmented_assignment:Add, binary_operator:Sub, call_argument:letter, function_call:ord, increment_variable:name_score:64, increment_variable:name_score:letter, int_literal, literal:Num, suggest_constant_definition, update_variable:name_score:64, update_variable:name_score:letter
         total_score += (i + 1) * name_score # assignment_lhs_identifier:total_score, assignment_rhs_atom:1, assignment_rhs_atom:i, assignment_rhs_atom:name_score, augmented_assignment:Add, binary_operator:Add, binary_operator:Mult, increment_variable:total_score:1, increment_variable:total_score:i, increment_variable:total_score:name_score, int_literal, literal:Num, update_variable:total_score:1, update_variable:total_score:i, update_variable:total_score:name_score
-        name_score = 0 # assignment, assignment_lhs_identifier:name_score, assignment_rhs_atom:0, int_literal, literal:Num
+        name_score = 0 # assignment, assignment_lhs_identifier:name_score, assignment_rhs_atom:0, for:name, int_literal, literal:Num, nested_for:1
     return total_score # return:total_score
 
 # ----------------------------------------------------------------------------------------
@@ -1502,8 +1502,8 @@ import os # import:os, import_module:os
 from math import log10 # import:math:log10, import_module:math, import_name:log10
 def find_largest(data_file: str = "base_exp.txt") -> int: # function:find_largest (-> +6), function_returning_something:find_largest (-> +6), function_with_default_positional_arguments:find_largest (-> +6), literal:Str
     largest = [0, 0] # assignment, assignment_lhs_identifier:largest, assignment_rhs_atom:0, int_literal, literal:List, literal:Num
-    for i, line in enumerate(open(os.path.join(os.path.dirname(__file__), data_file))): # call_argument:, call_argument:__file__, call_argument:data_file, composition, for:i:line (-> +3), for_indexes_elements (-> +3), function_call:enumerate, function_call:open, method_call, method_call_name:dirname, method_call_name:join
+    for i, line in enumerate(open(os.path.join(os.path.dirname(__file__), data_file))): # call_argument:, call_argument:__file__, call_argument:data_file, composition, for:i, for_indexes_elements (-> +3), function_call:enumerate, function_call:open, method_call, method_call_name:dirname, method_call_name:join
         a, x = list(map(int, line.split(","))) # assignment, assignment_lhs_identifier:a, assignment_lhs_identifier:x, assignment_rhs_atom:int, assignment_rhs_atom:line, call_argument:, call_argument:int, composition, function_call:list, function_call:map, literal:Str, method_call, method_call_name:split
         if x * log10(a) > largest[0]: # binary_operator:Mult, call_argument:a, comparison_operator:Gt, function_call:log10, if (-> +1), if_test_atom:0, if_test_atom:a, if_test_atom:largest, if_test_atom:x, index, int_literal, literal:Num
-            largest = [x * log10(a), i + 1] # assignment, assignment_lhs_identifier:largest, assignment_rhs_atom:1, assignment_rhs_atom:a, assignment_rhs_atom:i, assignment_rhs_atom:x, binary_operator:Add, binary_operator:Mult, call_argument:a, function_call:log10, if_then_branch, int_literal, literal:Num
+            largest = [x * log10(a), i + 1] # assignment, assignment_lhs_identifier:largest, assignment_rhs_atom:1, assignment_rhs_atom:a, assignment_rhs_atom:i, assignment_rhs_atom:x, binary_operator:Add, binary_operator:Mult, call_argument:a, for:line, function_call:log10, if_then_branch, int_literal, literal:Num, nested_for:1
     return largest[1] # index, int_literal, literal:Num, return

@@ -1601,7 +1601,7 @@ GROUP BY update_stmt.path,
 6   b -= 2
 7   c = d - e # no match
 8   f -= g + h
-9   n = 3 * n + 1 # BUG: match
+9   n = 3 * n + 1 # BUG: 2 matches
 ```
 
 ##### Matches
@@ -2714,9 +2714,24 @@ Match sequential loops, along with their iteration variable(s).
 ```re
            ^(.*)/_type=For
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/target/_ids=(?P<SUFFIX>.+)
+(
+\n(?:\1.+\n)*?\1/target/(.+/)?id=(?P<SUFFIX>.+)
+)+
 \n(?:\1.+\n)* \1/.*/_pos=(?P<POS>.+)
 ```
+
+/body/1/body/2/_type=For
+/body/1/body/2/_pos=4:1-2-2-
+/body/1/body/2/target/_type=Tuple
+/body/1/body/2/target/_ids=a:b:c
+/body/1/body/2/target/_hash=0x8de92ead
+/body/1/body/2/target/_pos=4:1-2-2-0-
+/body/1/body/2/target/elts/length=2
+/body/1/body/2/target/elts/1/_type=Name
+/body/1/body/2/target/elts/1/_ids=a
+/body/1/body/2/target/elts/1/_hash=0x668ea8d0
+/body/1/body/2/target/elts/1/_pos=4:1-2-2-0-0-1-
+/body/1/body/2/target/elts/1/id=a
 
 ##### Example
 
@@ -2734,9 +2749,11 @@ Match sequential loops, along with their iteration variable(s).
 
 | Label | Lines |
 |:--|:--|
-| `for:a:b:c` | 4-7 |
 | `for:x` | 1-7 |
 | `for:y` | 2-3 |
+| `for:a` | 4-7 |
+| `for:b` | 4-7 |
+| `for:c` | 4-7 |
 
 --------------------------------------------------------------------------------
 
