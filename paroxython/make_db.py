@@ -1,4 +1,5 @@
 import json
+import sqlite3
 from collections import defaultdict
 from datetime import datetime
 from pathlib import Path
@@ -7,6 +8,8 @@ from typing import Any, Dict, List, Tuple, overload
 import regex  # type: ignore
 from typing_extensions import TypedDict  # from Python 3.8, import directly from typing
 
+from generate_labels import generate_labelled_programs
+from map_taxonomy import Taxonomy
 from user_types import (
     LabelName,
     Labels,
@@ -17,8 +20,6 @@ from user_types import (
     TaxonName,
     Taxons,
 )
-from generate_labels import generate_labelled_programs
-from map_taxonomy import Taxonomy
 
 Span = Tuple[int, int]
 LabelsSpans = Dict[LabelName, List[Span]]
@@ -81,6 +82,78 @@ class Database:
         text = regex.sub(r"\s*\[\s+(\d+),\s+(\d+)\s+\](,?)\s+", r"[\1,\2]\3", text)
         Path(path).write_text(text)
 
+    def write_sqlite(self, db_path: str) -> None:
+        program_rows: Tuple = []
+        label_rows: Tuple = []
+        taxon_rows: Tuple = []
+        for (path, info) in self.programs.items():
+            source = f"{path}\n\n" + "\n".join(
+                f"{line_number: <4}{line}"
+                for (line_number, line) in enumerate(info["source"].split("\n"), 1)
+            )
+            program_rows.append((path, info["timestamp"], source))
+            for (name, spans) in info["labels"].items():
+                (prefix, _, suffix) = name.partition(":")
+                for span in spans:
+                    span_string = "-".join(map(str, span)) if span[0] != span[1] else str(span[0])
+                    label_rows.append((name, prefix, suffix, span_string, span[0], span[1], path))
+            for (name, spans) in info["taxons"].items():
+                for span in spans:
+                    span_string = "-".join(map(str, span)) if span[0] != span[1] else str(span[0])
+                    taxon_rows.append((name, span_string, span[0], span[1], path))
+
+        if Path(db_path).exists():  # In Python 3.8, use missing_ok=True parameter
+            Path(db_path).unlink()
+        connexion = sqlite3.connect(db_path)
+        c = connexion.cursor()
+
+        program_columns = (
+            "program TEXT PRIMARY KEY",
+            "timestamp TEXT",
+            "source TEXT",
+        )
+        c.execute(f"CREATE TABLE program ({','.join(program_columns)})")
+        c.executemany(
+            f"INSERT INTO program VALUES ({','.join('?' * len(program_columns))})", program_rows,
+        )
+
+        label_columns = (
+            # use rowid as primary key:
+            "name TEXT",
+            "name_prefix TEXT",
+            "name_suffix TEXT",
+            "span TEXT",
+            "span_start INTEGER",
+            "span_end INTEGER",
+            "program TEXT",
+        )
+        c.execute(
+            f"CREATE TABLE label ({','.join(label_columns)},"
+            "FOREIGN KEY (program) REFERENCES program (program))"
+        )
+        c.executemany(
+            f"INSERT INTO label VALUES ({','.join('?' * len(label_columns))})", label_rows,
+        )
+
+        taxon_columns = (
+            # use rowid as primary key:
+            "name TEXT",
+            "span TEXT",
+            "span_start INTEGER",
+            "span_end INTEGER",
+            "program TEXT",
+        )
+        c.execute(
+            f"CREATE TABLE taxon ({','.join(taxon_columns)},"
+            "FOREIGN KEY (program) REFERENCES program (program))"
+        )
+        c.executemany(
+            f"INSERT INTO taxon VALUES ({','.join('?' * len(taxon_columns))})", taxon_rows,
+        )
+
+        connexion.commit()
+        connexion.close()
+
 
 # fmt: off
 @overload
@@ -100,9 +173,11 @@ def prepared(tags):
 
 if __name__ == "__main__":
     directories = [
-        "../Python/project_euler",
+        # "../Python/project_euler",
         # "../Python/maths",
-        # "../Algo/programs"
+        # "../Algo/programs",
+        "paroxython"
     ]
     database = Database(directories)
     database.write_json("db.json")
+    database.write_sqlite("db.sqlite")
