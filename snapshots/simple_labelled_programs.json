@@ -158,15 +158,27 @@
         [[6,6]]
       ],
       [
-        "update_variable:n:1",
+        "variable_update:n:1",
         [[7,7]]
       ],
       [
-        "update_variable:n:2",
+        "variable_update:n:2",
         [[5,5]]
       ],
       [
-        "update_variable:n:3",
+        "variable_update:n:3",
+        [[7,7]]
+      ],
+      [
+        "variable_update_by_assignment:n:1",
+        [[7,7]]
+      ],
+      [
+        "variable_update_by_assignment:n:2",
+        [[5,5]]
+      ],
+      [
+        "variable_update_by_assignment:n:3",
         [[7,7]]
       ],
       [

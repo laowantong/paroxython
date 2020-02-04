@@ -49,9 +49,12 @@
         "suggest_conditional_expression": [[4,7]],
         "suggest_constant_definition": [[2,2],[7,7]],
         "unknown_label": [[6,6]],
-        "update_variable:n:1": [[7,7]],
-        "update_variable:n:2": [[5,5]],
-        "update_variable:n:3": [[7,7]],
+        "variable_update:n:1": [[7,7]],
+        "variable_update:n:2": [[5,5]],
+        "variable_update:n:3": [[7,7]],
+        "variable_update_by_assignment:n:1": [[7,7]],
+        "variable_update_by_assignment:n:2": [[5,5]],
+        "variable_update_by_assignment:n:3": [[7,7]],
         "while": [[2,7]]
       },
       "taxons": {
@@ -259,13 +262,22 @@
     "unknown_label": [
       "tests/data/simple/collatz_print.py"
     ],
-    "update_variable:n:1": [
+    "variable_update:n:1": [
       "tests/data/simple/collatz_print.py"
     ],
-    "update_variable:n:2": [
+    "variable_update:n:2": [
       "tests/data/simple/collatz_print.py"
     ],
-    "update_variable:n:3": [
+    "variable_update:n:3": [
+      "tests/data/simple/collatz_print.py"
+    ],
+    "variable_update_by_assignment:n:1": [
+      "tests/data/simple/collatz_print.py"
+    ],
+    "variable_update_by_assignment:n:2": [
+      "tests/data/simple/collatz_print.py"
+    ],
+    "variable_update_by_assignment:n:3": [
       "tests/data/simple/collatz_print.py"
     ],
     "while": [

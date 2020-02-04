@@ -45,7 +45,10 @@
       - [Feature `assignment_lhs_identifier`](#feature-assignment_lhs_identifier)
       - [Feature `assignment_rhs_atom`](#feature-assignment_rhs_atom)
     - [Assignment idioms](#assignment-idioms)
-      - [Feature `update_variable` (SQL)](#feature-update_variable)
+      - [Feature `variable_update_by_assignment` (SQL)](#feature-variable_update_by_assignment)
+      - [Feature `variable_update_by_augmented_assignment` (SQL)](#feature-variable_update_by_augmented_assignment)
+      - [Feature `variable_update_by_method_call` (SQL)](#feature-variable_update_by_method_call)
+      - [Feature `variable_update` (SQL)](#feature-variable_update)
       - [Feature `increment_variable|decrement_variable` (SQL)](#feature-increment_variabledecrement_variable)
       - [Feature `swapping`](#feature-swapping)
       - [Feature `negation`](#feature-negation)
@@ -617,10 +620,9 @@ SELECT CASE op.name_suffix
        count(*),
        cmp.span,
        cmp.path
-FROM t cmp
-JOIN t op ON (op.path GLOB cmp.path || "?*")
-WHERE cmp.name_prefix = "chained_comparison"
-  AND op.name REGEXP "comparison_operator:(Eq|Lt|LtE|Gt|GtE)"
+FROM t_chained_comparison cmp
+JOIN t_comparison_operator op ON (op.path GLOB cmp.path || "?*")
+WHERE op.name_suffix REGEXP "Eq|Lt|LtE|Gt|GtE"
 GROUP BY cmp.path,
          op.name_suffix
 HAVING count(*) > 1 -- a chain has at least two operators
@@ -849,6 +851,7 @@ Otherwise, suffix it with an empty string.
 ##### Derivations
 
 [🔽 feature `range`](#feature-range)  
+[🔽 feature `variable_update_by_method_call`](#feature-variable_update_by_method_call)  
 
 ##### Specification
 
@@ -903,7 +906,7 @@ Otherwise, suffix it with an empty string.
 
 ##### Derivations
 
-[🔽 feature `update_variable`](#feature-update_variable)  
+[🔽 feature `variable_update_by_method_call`](#feature-variable_update_by_method_call)  
 
 ##### Specification
 
@@ -931,6 +934,10 @@ Otherwise, suffix it with an empty string.
 
 #### Feature `method_call_name`
 
+##### Derivations
+
+[🔽 feature `variable_update_by_method_call`](#feature-variable_update_by_method_call)  
+
 ##### Specification
 
 ```re
@@ -957,6 +964,10 @@ Otherwise, suffix it with an empty string.
 --------------------------------------------------------------------------------
 
 #### Feature `method_call_object`
+
+##### Derivations
+
+[🔽 feature `variable_update_by_method_call`](#feature-variable_update_by_method_call)  
 
 ##### Specification
 
@@ -1251,7 +1262,7 @@ Match a comprehension with an `if` clause.
 ##### Derivations
 
 [🔽 feature `increment_variable|decrement_variable`](#feature-increment_variabledecrement_variable)  
-[🔽 feature `update_variable`](#feature-update_variable)  
+[🔽 feature `variable_update_by_assignment`](#feature-variable_update_by_assignment)  
 
 ##### Specification
 
@@ -1281,7 +1292,7 @@ Match a comprehension with an `if` clause.
 ##### Derivations
 
 [🔽 feature `increment_variable|decrement_variable`](#feature-increment_variabledecrement_variable)  
-[🔽 feature `update_variable`](#feature-update_variable)  
+[🔽 feature `variable_update_by_augmented_assignment`](#feature-variable_update_by_augmented_assignment)  
 
 ##### Specification
 
@@ -1343,6 +1354,11 @@ Match a comprehension with an `if` clause.
 
 Capture any identifier appearing on the left hand side of an assignment (possibly augmented).
 
+##### Derivations
+
+[🔽 feature `variable_update_by_assignment`](#feature-variable_update_by_assignment)  
+[🔽 feature `variable_update_by_augmented_assignment`](#feature-variable_update_by_augmented_assignment)  
+
 ##### Specification
 
 ```re
@@ -1400,6 +1416,11 @@ Capture any identifier appearing on the left hand side of an assignment (possibl
 
 Capture any [_atom_](#feature-call_argument) appearing on the right hand side of an assignment (possibly augmented), except the function names.
 
+##### Derivations
+
+[🔽 feature `variable_update_by_assignment`](#feature-variable_update_by_assignment)  
+[🔽 feature `variable_update_by_augmented_assignment`](#feature-variable_update_by_augmented_assignment)  
+
 ##### Specification
 
 ```re
@@ -1449,65 +1470,180 @@ Capture any [_atom_](#feature-call_argument) appearing on the right hand side of
 
 --------------------------------------------------------------------------------
 
-#### Feature `update_variable`
+#### Feature `variable_update_by_assignment`
+
+Match the reassignment of a variable `x` and capture its name in the first part of the suffix. In the second part, match any atom distinct from `x` and participating to the update (this excludes any function name).
+
+##### Derivations
+
+[🔼 feature `assignment`](#feature-assignment)  
+[🔼 feature `assignment_lhs_identifier`](#feature-assignment_lhs_identifier)  
+[🔼 feature `assignment_rhs_atom`](#feature-assignment_rhs_atom)  
+[🔽 feature `variable_update`](#feature-variable_update)  
+
+##### Specification
+
+```sql
+SELECT "variable_update_by_assignment",
+       lhs_acc.name_suffix || ":" || rhs_var.name_suffix,
+       op.span,
+       op.path
+FROM t_assignment AS op
+JOIN t_assignment_lhs_identifier AS lhs_acc ON (lhs_acc.path GLOB op.path || "?*")
+JOIN t_assignment_rhs_atom AS rhs_acc ON (rhs_acc.path GLOB op.path || "?*")
+JOIN t_assignment_rhs_atom AS rhs_var ON (rhs_var.path GLOB op.path || "?*")
+WHERE rhs_acc.name_suffix = lhs_acc.name_suffix -- The same identifier must appear on both LHS and RHS...
+  AND rhs_acc.name_suffix != rhs_var.name_suffix -- and an atom distinct from this identifier must appear on RHS.
+GROUP BY op.span,
+         lhs_acc.name,
+         rhs_var.name
+```
+
+##### Example
+
+```python
+1   foo = foo + a
+2   bar = bar.mult(5)
+3   bar = mult(bar, 5)
+4   (x, y) = (y, x)
+5   (a, b) = (b, a + b)
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `variable_update_by_assignment:foo:a` | 1 |
+| `variable_update_by_assignment:bar:5` | 2, 3 |
+| `variable_update_by_assignment:x:y` | 4 |
+| `variable_update_by_assignment:y:x` | 4 |
+| `variable_update_by_assignment:a:b` | 5 |
+| `variable_update_by_assignment:b:a` | 5 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `variable_update_by_augmented_assignment`
+
+Match the augmented assignment of a variable `x` and capture its name in the first part of the suffix. In the second part, match any atom participating to the update (this excludes any function name).
+
+##### Derivations
+
+[🔼 feature `assignment_lhs_identifier`](#feature-assignment_lhs_identifier)  
+[🔼 feature `assignment_rhs_atom`](#feature-assignment_rhs_atom)  
+[🔼 feature `augmented_assignment`](#feature-augmented_assignment)  
+[🔽 feature `variable_update`](#feature-variable_update)  
+
+##### Specification
+
+```sql
+SELECT "variable_update_by_augmented_assignment",
+       lhs_acc.name_suffix || ":" || rhs_var.name_suffix,
+       op.span,
+       op.path
+FROM t_augmented_assignment AS op
+JOIN t_assignment_lhs_identifier AS lhs_acc ON (lhs_acc.path GLOB op.path || "?*")
+JOIN t_assignment_rhs_atom AS rhs_var ON (rhs_var.path GLOB op.path || "?*")
+GROUP BY op.span,
+         lhs_acc.name,
+         rhs_var.name
+```
+
+##### Example
+
+```python
+1   foo += a
+2   foo += [a]
+3   buzz += a + b + c
+4   s *= (x - 1) / x
+5   c[j] += c[i- 1]
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `variable_update_by_augmented_assignment:foo:a` | 1, 2 |
+| `variable_update_by_augmented_assignment:buzz:a` | 3 |
+| `variable_update_by_augmented_assignment:buzz:b` | 3 |
+| `variable_update_by_augmented_assignment:buzz:c` | 3 |
+| `variable_update_by_augmented_assignment:s:1` | 4 |
+| `variable_update_by_augmented_assignment:s:x` | 4 |
+| `variable_update_by_augmented_assignment:c:1` | 5 |
+| `variable_update_by_augmented_assignment:c:c` | 5 |
+| `variable_update_by_augmented_assignment:c:i` | 5 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `variable_update_by_method_call`
+
+The method must mutate the object it is applied on. Obviously, only a handful of such methods can be statically detected.
+
+##### Derivations
+
+[🔼 feature `call_argument`](#feature-call_argument)  
+[🔼 feature `method_call`](#feature-method_call)  
+[🔼 feature `method_call_name`](#feature-method_call_name)  
+[🔼 feature `method_call_object`](#feature-method_call_object)  
+[🔽 feature `variable_update`](#feature-variable_update)  
+
+##### Specification
+
+```sql
+SELECT "variable_update_by_method_call",
+       lhs_acc.name_suffix || ":" || rhs_var.name_suffix,
+       op.span,
+       op.path
+FROM t_method_call AS op
+JOIN t_method_call_object AS lhs_acc ON (lhs_acc.path GLOB op.path || "?*")
+JOIN t_method_call_name AS rhs_acc ON (rhs_acc.path GLOB op.path || "?*")
+JOIN t_call_argument AS rhs_var ON (rhs_var.path GLOB op.path || "?*")
+WHERE rhs_var.name_suffix != ""
+  AND rhs_acc.name_suffix REGEXP "(append|extend|insert|add|update)$"
+GROUP BY op.span,
+         lhs_acc.name,
+         rhs_var.name
+```
+
+##### Example
+
+```python
+1   foo.append(a)
+2   seq.append(int(s))
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `variable_update_by_method_call:foo:a` | 1 |
+| `variable_update_by_method_call:seq:s` | 2 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `variable_update`
 
 Match the update of a variable `x` and capture its name in the first part of the suffix. In the second part, match any atom distinct from `x` and participating to the update (this excludes any function name).
 
 ##### Derivations
 
-[🔼 feature `assignment`](#feature-assignment)  
-[🔼 feature `augmented_assignment`](#feature-augmented_assignment)  
-[🔼 feature `method_call`](#feature-method_call)  
+[🔼 feature `variable_update_by_assignment`](#feature-variable_update_by_assignment)  
+[🔼 feature `variable_update_by_augmented_assignment`](#feature-variable_update_by_augmented_assignment)  
+[🔼 feature `variable_update_by_method_call`](#feature-variable_update_by_method_call)  
 [🔽 feature `accumulate_elements`](#feature-accumulate_elements)  
 [🔽 feature `increment_variable|decrement_variable`](#feature-increment_variabledecrement_variable)  
 
 ##### Specification
 
 ```sql
-SELECT "update_variable",
-       lhs_acc.name_suffix || ":" || rhs_var.name_suffix,
-       op.span,
-       op.path
-FROM
-  (SELECT *
-   FROM t
-   WHERE t.name_prefix IN ("assignment",
-                           "augmented_assignment",
-                           "method_call")) op
-JOIN t lhs_acc ON (lhs_acc.name_prefix = (CASE
-                                              WHEN op.name_prefix = "method_call" THEN "method_call_object"
-                                              ELSE "assignment_lhs_identifier"
-                                          END)
-                   AND (lhs_acc.path GLOB op.path || "?*"))
-JOIN t rhs_acc ON (rhs_acc.name_prefix = (CASE
-                                              WHEN op.name_prefix = "method_call" THEN "method_call_name"
-                                              ELSE "assignment_rhs_atom"
-                                          END)
-                   AND (rhs_acc.path GLOB op.path || "?*"))
-JOIN t rhs_var ON (rhs_var.name_prefix = (CASE
-                                              WHEN op.name_prefix = "method_call" THEN "call_argument"
-                                              ELSE "assignment_rhs_atom"
-                                          END)
-                   AND (rhs_var.path GLOB op.path || "?*"))
-WHERE op.name_prefix = "augmented_assignment"
-  OR (op.name_prefix = "assignment"
-      AND rhs_acc.name_suffix = lhs_acc.name_suffix
-      AND rhs_acc.name_suffix != rhs_var.name_suffix)
-  OR (op.name_prefix = "method_call"
-      AND rhs_acc.name_suffix REGEXP "(append|extend|insert|add|update)$"
-      AND rhs_acc.name_suffix != rhs_var.name_suffix)
-GROUP BY op.span,
-         lhs_acc.name,
-         rhs_var.name
+SELECT "variable_update",
+       t.name_suffix,
+       t.span,
+       t.path
+FROM t
+WHERE name_prefix IN ("variable_update_by_assignment",
+                      "variable_update_by_augmented_assignment",
+                      "variable_update_by_method_call")
 ```
-
-Three distinct cases are covered:
-
-1. Augmented assignment.
-2. Assignment: the same identifier must appear on both LHS and RHS, and an atom distinct from this identifier must appear on RHS.
-3. Method call: the method must mutate the object it is applied on. Obviously, only a handful of such methods can be statically detected.
-
-This complex query requires three self-joins. Expressing the filtering conditions in the `WHERE` clause proved [ineffective](https://dba.stackexchange.com/questions/258679/accelerating-a-sql-quadruple-self-join-with-a-complex-alternation-in-the-where-c). Table `t` is first restricted to the main features ([`augmented_assignment`](#feature-augmented_assignment), [`assignment`](#feature-assignment) and [`method_call`](#feature-method_call)). The resulting lines are then directly matched with the required sub-features. The constraints of the three cases listed above finally reduce the result to the desired rows.
 
 ##### Example
 
@@ -1535,22 +1671,21 @@ This complex query requires three self-joins. Expressing the filtering condition
 
 | Label | Lines |
 |:--|:--|
-| `update_variable:foo:a` | 1, 2, 3, 4 |
-| `update_variable:bar:5` | 6, 7 |
-| `update_variable:buzz:a` | 12 |
-| `update_variable:buzz:b` | 12 |
-| `update_variable:buzz:c` | 12 |
-| `update_variable:s:1` | 13 |
-| `update_variable:s:x` | 13 |
-| `update_variable:c:1` | 14 |
-| `update_variable:c:c` | 14 |
-| `update_variable:c:i` | 14 |
-| `update_variable:x:y` | 15 |
-| `update_variable:y:x` | 15 |
-| `update_variable:a:b` | 16 |
-| `update_variable:b:a` | 16 |
-| `update_variable:seq:` | 17 |
-| `update_variable:seq:s` | 17 |
+| `variable_update:foo:a` | 1, 2, 4, 3 |
+| `variable_update:bar:5` | 6, 7 |
+| `variable_update:buzz:a` | 12 |
+| `variable_update:buzz:b` | 12 |
+| `variable_update:buzz:c` | 12 |
+| `variable_update:s:1` | 13 |
+| `variable_update:s:x` | 13 |
+| `variable_update:c:1` | 14 |
+| `variable_update:c:c` | 14 |
+| `variable_update:c:i` | 14 |
+| `variable_update:x:y` | 15 |
+| `variable_update:y:x` | 15 |
+| `variable_update:a:b` | 16 |
+| `variable_update:b:a` | 16 |
+| `variable_update:seq:s` | 17 |
 
 --------------------------------------------------------------------------------
 
@@ -1561,7 +1696,7 @@ This complex query requires three self-joins. Expressing the filtering condition
 [🔼 feature `assignment`](#feature-assignment)  
 [🔼 feature `augmented_assignment`](#feature-augmented_assignment)  
 [🔼 feature `binary_operator`](#feature-binary_operator)  
-[🔼 feature `update_variable`](#feature-update_variable)  
+[🔼 feature `variable_update`](#feature-variable_update)  
 
 ##### Specification
 
@@ -1575,10 +1710,7 @@ SELECT CASE
        update_stmt.name_suffix,
        update_stmt.span,
        update_stmt.path
-FROM
-  (SELECT *
-   FROM t
-   WHERE name_prefix = "update_variable") update_stmt
+FROM t_variable_update update_stmt
 JOIN t assign_stmt USING (path)
 JOIN t op ON (op.path GLOB assign_stmt.path || "?*")
 WHERE (assign_stmt.name_prefix = "augmented_assignment"
@@ -1861,10 +1993,8 @@ SELECT "generator",
        f.name_suffix,
        max(f.span_start) || "-" || min(f.span_end),
        max(f.path)
-FROM t f
-JOIN t y ON (y.path GLOB f.path || "?*")
-WHERE f.name_prefix = "function"
-  AND y.name_prefix = "yield"
+FROM t_function f
+JOIN t_yield y ON (y.path GLOB f.path || "?*")
 GROUP BY y.rowid
 ```
 
@@ -1905,11 +2035,9 @@ SELECT "function_returning_something",
        f.name_suffix,
        max(f.span_start) || "-" || min(f.span_end),
        max(f.path)
-FROM t f
-JOIN t r ON (r.path GLOB f.path || "?*")
-WHERE f.name_prefix = "function"
-  AND r.name_prefix = "return"
-  AND r.name_suffix != "None"
+FROM t_function f
+JOIN t_return r ON (r.path GLOB f.path || "?*")
+WHERE r.name_suffix != "None"
 GROUP BY r.rowid
 ```
 
@@ -2094,12 +2222,10 @@ SELECT "closure",
        f.name_suffix,
        max(f.span_start) || "-" || min(f.span_end),
        max(f.path)
-FROM t f
-JOIN t c ON (c.path GLOB f.path || "?*")
-JOIN t r ON (r.path GLOB f.path || "?*")
-WHERE f.name_prefix = "function"
-  AND c.name_prefix = "function"
-  AND r.name = "return:" || c.name_suffix
+FROM t_function f
+JOIN t_function c ON (c.path GLOB f.path || "?*")
+JOIN t_return r ON (r.path GLOB f.path || "?*")
+WHERE r.name_suffix = c.name_suffix
 GROUP BY c.rowid
 ```
 
@@ -2141,10 +2267,9 @@ SELECT "recursive_function",
        f.name_suffix,
        f.span,
        f.path
-FROM t f
-JOIN t c ON (c.path GLOB f.path || "?*")
-WHERE f.name_prefix = "function"
-  AND c.name = "function_call:" || f.name_suffix
+FROM t_function f
+JOIN t_function_call c ON (c.path GLOB f.path || "?*")
+WHERE c.name_suffix = f.name_suffix
 ```
 
 ##### Example
@@ -2179,12 +2304,11 @@ SELECT "deeply_recursive_function",
        f.name_suffix,
        f.span,
        f.path
-FROM t f
-JOIN t c1 ON (c1.path GLOB f.path || "?*")
-JOIN t c2 ON (c2.path GLOB c1.path || "?*")
-WHERE f.name_prefix = "function"
-  AND c1.name = "function_call:" || f.name_suffix
-  AND c2.name = "function_call:" || f.name_suffix
+FROM t_function f
+JOIN t_function_call c1 ON (c1.path GLOB f.path || "?*")
+JOIN t_function_call c2 ON (c2.path GLOB c1.path || "?*")
+WHERE c1.name_suffix = f.name_suffix
+  AND c2.name_suffix = f.name_suffix
 ```
 
 ##### Example
@@ -2220,19 +2344,17 @@ A function is body-recursive if and only if at least one of its recursive calls 
 
 ```sql
 SELECT "body_recursive_function",
-       f.name_suffix,
-       f.span,
-       f.path
-FROM t f
-JOIN t any_call ON (any_call.path GLOB f.path || "?*")
-WHERE f.name_prefix = "recursive_function"
-  AND any_call.name = "function_call:" || f.name_suffix
+       t_recursive_function.name_suffix,
+       t_recursive_function.span,
+       t_recursive_function.path
+FROM t_recursive_function
+JOIN t_function_call ON (t_function_call.path GLOB t_recursive_function.path || "?*")
+WHERE t_function_call.name_suffix = t_recursive_function.name_suffix
   AND NOT EXISTS
     (SELECT 1
-     FROM t tail_call
-     WHERE tail_call.name_prefix = "function_tail_call"
-       AND tail_call.path = any_call.path )
-GROUP BY f.span
+     FROM t_function_tail_call
+     WHERE t_function_tail_call.path = t_function_call.path )
+GROUP BY t_recursive_function.span
 ```
 
 ##### Example
@@ -2302,13 +2424,9 @@ SELECT "tail_recursive_function",
        f.name_suffix,
        f.span,
        f.path
-FROM t f
-WHERE f.name_prefix = "recursive_function" -- A recursive function...
-  AND NOT EXISTS -- which is not...
-    (SELECT 1
-     FROM t body_rec
-     WHERE body_rec.name_prefix = "body_recursive_function" -- body recursive.
-       AND body_rec.span = f.span)
+FROM t_recursive_function f
+LEFT JOIN t_body_recursive_function USING (span)
+WHERE t_body_recursive_function.rowid IS NULL
 ```
 
 ##### Example
@@ -2647,20 +2765,19 @@ Match an `if` clause nested in _n_ other `if` clauses, suffixing it by _n_.
 ```sql
 SELECT "nested_if",
        count(*),
-       inner_if.span,
-       inner_if.path
-FROM t outer_branch
-JOIN t inner_if ON (outer_branch.span_start <= inner_if.span_start
-                    AND inner_if.span_end <= outer_branch.span_end)
-WHERE outer_branch.name_prefix IN ("if_then_branch",
-                                   "if_else_branch",
-                                   "if_elif_branch")
-  AND inner_if.name_prefix = "if"
-GROUP BY inner_if.span
-ORDER BY inner_if.span_start
+       t_if.span,
+       t_if.path
+FROM t branch
+JOIN t_if ON (branch.span_start <= t_if.span_start
+              AND t_if.span_end <= branch.span_end)
+WHERE branch.name_prefix IN ("if_then_branch",
+                             "if_else_branch",
+                             "if_elif_branch")
+GROUP BY t_if.span
+ORDER BY t_if.span_start
 ```
 
-**Remark.** A join condition `(inner_if.path GLOB outer_branch.path || "?*")` would not work here, since an `else` branch has no specific path in the AST.
+**Remark.** A join condition `(inner_if.path GLOB branch.path || "?*")` would not work here, since an `else` branch has no specific path in the AST.
 
 ##### Example
 
@@ -2801,13 +2918,11 @@ Iterate over a range object.
 
 ```sql
 SELECT "for_range",
-       range_expr.name_suffix,
-       for_stmt.span,
-       for_stmt.path
-FROM t for_stmt
-JOIN t range_expr ON (range_expr.path GLOB for_stmt.path || "?*")
-WHERE for_stmt.name_prefix = "for"
-  AND range_expr.name_prefix = "range"
+       t_range.name_suffix,
+       t_for.span,
+       t_for.path
+FROM t_for
+JOIN t_range ON (t_range.path GLOB t_for.path || "?*")
 ```
 
 ##### Example
@@ -2913,10 +3028,8 @@ SELECT "nested_for",
        count(*),
        inner_loop.span,
        inner_loop.path
-FROM t outer_loop
-JOIN t inner_loop ON (inner_loop.path GLOB outer_loop.path || "?*")
-WHERE outer_loop.name_prefix = "for"
-  AND inner_loop.name_prefix = "for"
+FROM t_for outer_loop
+JOIN t_for inner_loop ON (inner_loop.path GLOB outer_loop.path || "?*")
 GROUP BY inner_loop.span
 ORDER BY inner_loop.span_start
 ```
@@ -3257,10 +3370,9 @@ SELECT "try_" || e.name_prefix,
        e.name_suffix,
        max(t.span_start) || "-" || min(t.span_end),
        max(t.path)
-FROM t t
+FROM t_try t
 JOIN t e ON (e.path GLOB t.path || "?*")
-WHERE t.name_prefix = "try"
-  AND e.name_prefix IN ("raise",
+WHERE e.name_prefix IN ("raise",
                         "except")
 GROUP BY e.rowid
 ```
@@ -3401,10 +3513,8 @@ SELECT "import",
                          END),
        m.span,
        m.path
-FROM t m
-LEFT JOIN t n ON (m.span = n.span
-                  AND n.name_prefix = "import_name")
-WHERE m.name_prefix = "import_module"
+FROM t_import_module m
+LEFT JOIN t_import_name n ON (m.span = n.span)
 ```
 
 ##### Example
@@ -3449,7 +3559,7 @@ An accumulator is iteratively updated from its previous value and those of the i
 ##### Derivations
 
 [🔼 feature `for`](#feature-for)  
-[🔼 feature `update_variable`](#feature-update_variable)  
+[🔼 feature `variable_update`](#feature-variable_update)  
 
 ##### Specification
 
@@ -3458,11 +3568,9 @@ SELECT "accumulate_elements",
        replace(update_stmt.name_suffix, ":" || for_loop.name_suffix, ""),
        for_loop.span,
        for_loop.path
-FROM t for_loop
-JOIN t update_stmt ON (update_stmt.path GLOB for_loop.path || "?*")
-WHERE for_loop.name_prefix = "for"
-  AND update_stmt.name_prefix = "update_variable"
-  AND update_stmt.name_suffix GLOB "*:" || for_loop.name_suffix
+FROM t_for for_loop
+JOIN t_variable_update update_stmt ON (update_stmt.path GLOB for_loop.path || "?*")
+WHERE update_stmt.name_suffix GLOB "*:" || for_loop.name_suffix
 GROUP BY for_loop.path,
          update_stmt.name_suffix
 ```
