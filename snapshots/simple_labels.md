@@ -119,6 +119,7 @@
 - function_tail_call
 - function_with_default_positional_arguments
 - generator
+- get_valid_input
 - if_test_atom
 - imaginary_literal
 - import
