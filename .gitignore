@@ -127,3 +127,4 @@ draft.*
 sandbox/*.*
 .DS_Store
 db.json
+db.sqlite

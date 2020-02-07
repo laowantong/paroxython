@@ -1,4 +1,5 @@
 import json
+import sqlite3
 from collections import defaultdict
 from datetime import datetime
 from pathlib import Path
@@ -7,6 +8,8 @@ from typing import Any, Dict, List, Tuple, overload
 import regex  # type: ignore
 from typing_extensions import TypedDict  # from Python 3.8, import directly from typing
 
+from generate_labels import generate_labelled_programs
+from map_taxonomy import Taxonomy
 from user_types import (
     LabelName,
     Labels,
@@ -17,8 +20,6 @@ from user_types import (
     TaxonName,
     Taxons,
 )
-from generate_labels import generate_labelled_programs
-from map_taxonomy import Taxonomy
 
 Span = Tuple[int, int]
 LabelsSpans = Dict[LabelName, List[Span]]
@@ -37,65 +38,152 @@ LabelInfos = Dict[LabelName, List[ProgramName]]
 TaxonInfos = Dict[TaxonName, List[ProgramName]]
 
 
-class DB(TypedDict):
-    programs: ProgramInfos
-    labels: LabelInfos
-    taxons: TaxonInfos
+class Database:
+    def __init__(self, directories: List[str], ignore_timestamps=False, *args, **kargs) -> None:
+        """collect all infos pertaining to the programs, the labels and the taxons."""
+        programs: List[Program] = []
+        for directory in directories:
+            programs.extend(generate_labelled_programs(directory, *args, **kargs))
 
+        taxonomy = Taxonomy()
+        paths_taxons = list(taxonomy(programs))
 
-def make_database(directories: List[str], *args, **kargs) -> DB:
-    """Serialize all infos pertaining to the programs, the labels and the taxons."""
-    programs: List[Program] = []
-    for directory in directories:
-        programs.extend(generate_labelled_programs(directory, *args, **kargs))
-    taxonomy = Taxonomy()
-    paths_taxons = list(taxonomy(programs))
-    db: DB = {
-        "programs": get_program_infos(programs),
-        "labels": get_label_infos(programs),
-        "taxons": get_taxon_infos(paths_taxons),
-    }
-    inject_labels(db, programs)
-    inject_taxons(db, paths_taxons)
-    return db
+        get_timestamp = lambda program: str(datetime.fromtimestamp(program.path.stat().st_mtime))
+        if ignore_timestamps:
+            get_timestamp = lambda program: "ignored"
 
+        self.programs: ProgramInfos = {}
+        for program in programs:
+            self.programs[ProgramName(str(program.path))] = {
+                "timestamp": get_timestamp(program),
+                "source": program.source,
+                "labels": {},  # to be populated by inject_labels()
+                "taxons": {},  # to be populated by inject_taxons()
+            }
 
-def get_program_infos(programs: List[Program]) -> ProgramInfos:
-    result: ProgramInfos = {}
-    for program in programs:
-        result[ProgramName(str(program.path))] = {
-            "timestamp": str(datetime.fromtimestamp(program.path.stat().st_mtime)),
-            "source": program.source,
-            "labels": {},  # to be populated by inject_labels()
-            "taxons": {},  # to be populated by inject_taxons()
+        self.labels: LabelInfos = defaultdict(list)
+        for program in programs:
+            for label in program.labels:
+                self.labels[label.name].append(ProgramName(str(program.path)))
+        for program in programs:
+            self.programs[ProgramName(str(program.path))]["labels"] = prepared(program.labels)
+
+        self.taxons: TaxonInfos = defaultdict(list)
+        for (path, taxons) in paths_taxons:
+            for taxon in taxons:
+                self.taxons[taxon.name].append(ProgramName(str(path)))
+        for (path, taxons) in paths_taxons:
+            self.programs[ProgramName(str(path))]["taxons"] = prepared(taxons)
+
+    def get_json(self) -> str:
+        """Dump the data to JSON, reduce each list of spans to one line."""
+        data = {
+            "programs": self.programs,
+            "labels": self.labels,
+            "taxons": self.taxons,
         }
-    return result
+        text = json.dumps(data, indent=2)
+        text = regex.sub(r"\s*\[\s+(\d+),\s+(\d+)\s+\](,?)\s+", r"[\1,\2]\3", text)
+        return text
 
+    def write_sqlite(self, db_path: str) -> None:
+        program_rows: List[Tuple] = []
+        label_rows: List[Tuple] = []
+        taxon_rows: List[Tuple] = []
+        for (path, info) in self.programs.items():
+            source = f"{path}\n\n" + "\n".join(
+                f"{line_number: <4}{line}"
+                for (line_number, line) in enumerate(info["source"].split("\n"), 1)
+            )
+            program_rows.append((path, info["timestamp"], source))
+            for (label_name, spans) in info["labels"].items():
+                (prefix, _, suffix) = label_name.partition(":")
+                for span in spans:
+                    label_rows.append(
+                        (
+                            label_name,
+                            prefix,
+                            suffix,
+                            "-".join(map(str, span)) if span[0] != span[1] else str(span[0]),
+                            span[0],
+                            span[1],
+                            path,
+                        )
+                    )
+            for (taxon_name, spans) in info["taxons"].items():
+                for span in spans:
+                    taxon_rows.append(
+                        (
+                            taxon_name,
+                            "-".join(map(str, span)) if span[0] != span[1] else str(span[0]),
+                            span[0],
+                            span[1],
+                            path,
+                        )
+                    )
 
-def get_label_infos(programs: List[Program]) -> LabelInfos:
-    result: LabelInfos = defaultdict(list)
-    for program in programs:
-        for label in program.labels:
-            result[label.name].append(ProgramName(str(program.path)))
-    return dict(result)
+        if Path(db_path).exists():  # In Python 3.8, use missing_ok=True parameter
+            Path(db_path).unlink()
+        connexion = sqlite3.connect(db_path)
+        c = connexion.cursor()
 
+        program_columns = (
+            "program TEXT PRIMARY KEY",
+            "timestamp TEXT",
+            "source TEXT",
+        )
+        c.execute(f"CREATE TABLE program ({','.join(program_columns)})")
+        c.executemany(
+            f"INSERT INTO program VALUES ({','.join('?' * len(program_columns))})", program_rows,
+        )
 
-def get_taxon_infos(paths_taxons: List[PathTaxons]) -> TaxonInfos:
-    result: TaxonInfos = defaultdict(list)
-    for (path, taxons) in paths_taxons:
-        for taxon in taxons:
-            result[taxon.name].append(ProgramName(str(path)))
-    return dict(result)
+        label_columns = (
+            # use rowid as primary key:
+            "name TEXT",
+            "name_prefix TEXT",
+            "name_suffix TEXT",
+            "span TEXT",
+            "span_start INTEGER",
+            "span_end INTEGER",
+            "program TEXT",
+        )
+        c.execute(
+            f"CREATE TABLE label ({','.join(label_columns)},"
+            "FOREIGN KEY (program) REFERENCES program (program))"
+        )
+        c.executemany(
+            f"INSERT INTO label VALUES ({','.join('?' * len(label_columns))})", label_rows,
+        )
+
+        taxon_columns = (
+            # use rowid as primary key:
+            "name TEXT",
+            "span TEXT",
+            "span_start INTEGER",
+            "span_end INTEGER",
+            "program TEXT",
+        )
+        c.execute(
+            f"CREATE TABLE taxon ({','.join(taxon_columns)},"
+            "FOREIGN KEY (program) REFERENCES program (program))"
+        )
+        c.executemany(
+            f"INSERT INTO taxon VALUES ({','.join('?' * len(taxon_columns))})", taxon_rows,
+        )
+
+        connexion.commit()
+        connexion.close()
 
 
 # fmt: off
 @overload
-def serialized(tags: Labels) -> LabelsSpans:
+def prepared(tags: Labels) -> LabelsSpans:
     ...  # pragma: no cover
 @overload
-def serialized(tags: Taxons) -> TaxonsSpans:
+def prepared(tags: Taxons) -> TaxonsSpans:
     ...  # pragma: no cover
-def serialized(tags):
+def prepared(tags):
+    """Prepare the spans for serialization."""
     result: Any = {}
     for (tag_name, spans) in tags:
         result[tag_name] = [span.to_couple() for span in sorted(set(spans))]
@@ -103,28 +191,13 @@ def serialized(tags):
 # fmt: on
 
 
-def inject_labels(db: DB, programs: List[Program]) -> None:
-    for program in programs:
-        db["programs"][ProgramName(str(program.path))]["labels"] = serialized(program.labels)
-
-
-def inject_taxons(db: DB, paths_taxons: List[PathTaxons]) -> None:
-    for (path, taxons) in paths_taxons:
-        db["programs"][ProgramName(str(path))]["taxons"] = serialized(taxons)
-
-
-def to_json(db: DB) -> str:
-    """Convert the DB into JSON and reduce to one line each list of spans."""
-    text = json.dumps(db, indent=2)
-    text = regex.sub(r"\s*\[\s+(\d+),\s+(\d+)\s+\](,?)\s+", r"[\1,\2]\3", text)
-    return text
-
-
 if __name__ == "__main__":
     directories = [
-        "../Python/project_euler",
+        # "../Python/project_euler",
         # "../Python/maths",
-        # "../Algo/programs"
+        # "../Algo/programs",
+        "paroxython"
     ]
-    db = make_database(directories)
-    Path("db.json").write_text(to_json(db))
+    db = Database(directories)
+    Path("db.json").write_text(db.get_json())
+    db.write_sqlite("db.sqlite")

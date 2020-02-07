@@ -89,7 +89,7 @@ class HintBuffer:
         return {k: sorted(v) for (k, v) in self.result.items()}
 
 
-label_pattern = regex.compile(r"(\w+(?::\w+)?)")
+label_pattern = regex.compile(r"^(\W*)([\w:]+)(\W*)$")
 
 
 def collect_hints(source: Source) -> Tuple[LabelsSpans, LabelsSpans]:
@@ -101,24 +101,25 @@ def collect_hints(source: Source) -> Tuple[LabelsSpans, LabelsSpans]:
         if not separator:
             continue
         for hint in hints.split():
-            (prefix, label, suffix) = label_pattern.split(hint, maxsplit=1)
-            if prefix in ("", "+", "-"):
-                buffer = deletion if prefix == "-" else addition
-                if suffix == "":
+            (before, label, after) = label_pattern.match(hint).groups()
+            hint_parts = f"{before}/{label}/{after}"
+            if before in ("", "+", "-"):
+                buffer = deletion if before == "-" else addition
+                if after == "":
                     buffer.append_hint(label, i)
-                elif suffix in ("...", "…"):
+                elif after in ("...", "…"):
                     buffer.open_hint(label, i)
                 else:
-                    raise ValueError(f"Illegal suffix for hint '{hint}' on line {i}.")
-            elif prefix in ("...", "…"):
-                if suffix:
-                    raise ValueError(f"Illegal suffix for hint '{hint}' on line {i}.")
+                    raise ValueError(f"Illegal last part  for hint '{hint_parts}' on line {i}.")
+            elif before in ("...", "…"):
+                if after:
+                    raise ValueError(f"Illegal last part for hint '{hint_parts}' on line {i}.")
                 champions = addition.get_champion(label) + deletion.get_champion(label)
                 if not champions:
-                    raise ValueError(f"Unmatched closing hint '{hint}' on line {i}.")
+                    raise ValueError(f"Unmatched closing hint '{hint_parts}' on line {i}.")
                 max(champions)[1].close_hint(label, i)
             else:
-                raise ValueError(f"Illegal prefix for hint '{hint}' on line {i}.")
+                raise ValueError(f"Illegal first part for hint '{hint_parts}' on line {i}.")
     addition.ensure_stack_is_empty()
     deletion.ensure_stack_is_empty()
     return (addition.get_result(), deletion.get_result())

@@ -145,25 +145,25 @@ def test_multi_line_nested_addition_and_deletion_hints():
 
 def test_illegal_suffix():
     numbered_hints = [(2, "hint#")]
-    with pytest.raises(ValueError, match="Illegal suffix for hint 'hint#' on line 2."):
+    with pytest.raises(ValueError, match="Illegal last part  for hint '/hint/#' on line 2."):
         wrapper(numbered_hints)
 
 
 def test_illegal_prefix():
     numbered_hints = [(2, "..hint")]
-    with pytest.raises(ValueError, match="Illegal prefix for hint '..hint' on line 2."):
+    with pytest.raises(ValueError, match="Illegal first part for hint '../hint/' on line 2."):
         wrapper(numbered_hints)
 
 
 def test_illegal_double_ellipsis():
     numbered_hints = [(2, "...hint...")]
-    with pytest.raises(ValueError, match="Illegal suffix for hint '...hint...' on line 2."):
+    with pytest.raises(ValueError, match="Illegal last part for hint '.../hint/...' on line 2."):
         wrapper(numbered_hints)
 
 
 def test_closing_without_opening():
     numbered_hints = [(2, "...hint")]
-    with pytest.raises(ValueError, match="Unmatched closing hint '...hint' on line 2."):
+    with pytest.raises(ValueError, match="Unmatched closing hint '.../hint/' on line 2."):
         wrapper(numbered_hints)
 
 

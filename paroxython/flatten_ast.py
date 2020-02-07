@@ -18,7 +18,7 @@ def flatten_ast(node: Any, prefix="", path="") -> str:
             expr_hash = hex(hash(node_repr) & 0xFFFFFFFF)
             acc.append(f"{prefix}/_hash={expr_hash}\n")
         if "lineno" in node._attributes:
-            acc.append(f"{prefix}/_pos={node.lineno}:{path[2:-1]}\n")
+            acc.append(f"{prefix}/_pos={node.lineno}:{path[2:]}\n")
         fields = ast.iter_fields(node)
         if isinstance(node, ast.FunctionDef):
             # reject `body` behind `decorator_list` and `returns`, whose line number is those of `def` clause

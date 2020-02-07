@@ -110,12 +110,28 @@
         [[7,7]]
       ],
       [
-        "if_test_id:n",
+        "if_test_atom:0",
+        [[4,4]]
+      ],
+      [
+        "if_test_atom:2",
+        [[4,4]]
+      ],
+      [
+        "if_test_atom:n",
         [[4,4]]
       ],
       [
         "if_then_branch",
         [[5,5]]
+      ],
+      [
+        "increment_variable:n:1",
+        [[7,7]]
+      ],
+      [
+        "increment_variable:n:3",
+        [[7,7]]
       ],
       [
         "int_literal",
@@ -140,6 +156,30 @@
       [
         "unknown_label",
         [[6,6]]
+      ],
+      [
+        "variable_update:n:1",
+        [[7,7]]
+      ],
+      [
+        "variable_update:n:2",
+        [[5,5]]
+      ],
+      [
+        "variable_update:n:3",
+        [[7,7]]
+      ],
+      [
+        "variable_update_by_assignment:n:1",
+        [[7,7]]
+      ],
+      [
+        "variable_update_by_assignment:n:2",
+        [[5,5]]
+      ],
+      [
+        "variable_update_by_assignment:n:3",
+        [[7,7]]
       ],
       [
         "while",
@@ -218,7 +258,23 @@
         [[9,9]]
       ],
       [
-        "if_test_id:i",
+        "if_test_atom:0",
+        [[2,2],[4,4],[6,6]]
+      ],
+      [
+        "if_test_atom:15",
+        [[2,2]]
+      ],
+      [
+        "if_test_atom:3",
+        [[4,4]]
+      ],
+      [
+        "if_test_atom:5",
+        [[6,6]]
+      ],
+      [
+        "if_test_atom:i",
         [[2,2],[4,4],[6,6]]
       ],
       [
