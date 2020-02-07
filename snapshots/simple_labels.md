@@ -96,6 +96,7 @@
 - comprehension
 - comprehension_for_count
 - conditional_expression
+- count_inputs
 - deeply_recursive_function
 - divisibility_test
 - except

@@ -110,6 +110,7 @@
       - [Feature `evolve_state`](#feature-evolve_state)
     - [Non-sequential infinite loops](#non-sequential-infinite-loops)
       - [Feature `get_valid_input` (SQL)](#feature-get_valid_input)
+      - [Feature `count_inputs` (SQL)](#feature-count_inputs)
       - [Feature `accumulate_inputs` (SQL)](#feature-accumulate_inputs)
 - [Programs](#programs)
       - [Feature `category`](#feature-category)
@@ -1351,6 +1352,7 @@ Capture any identifier appearing on the left hand side of an assignment (possibl
 ##### Derivations
 
 [🔽 feature `accumulate_inputs`](#feature-accumulate_inputs)  
+[🔽 feature `count_inputs`](#feature-count_inputs)  
 [🔽 feature `get_valid_input`](#feature-get_valid_input)  
 [🔽 feature `variable_update_by_assignment`](#feature-variable_update_by_assignment)  
 [🔽 feature `variable_update_by_augmented_assignment`](#feature-variable_update_by_augmented_assignment)  
@@ -1687,6 +1689,10 @@ WHERE name_prefix IN ("variable_update_by_assignment",
 
 #### Feature `increment_variable`
 
+##### Derivations
+
+[🔽 feature `count_inputs`](#feature-count_inputs)  
+
 ##### Specification
 
 ```re
@@ -1874,6 +1880,7 @@ Match `return` statements and, when the returned object is an [_atom_](#feature-
 
 [🔽 feature `accumulate_inputs`](#feature-accumulate_inputs)  
 [🔽 feature `closure`](#feature-closure)  
+[🔽 feature `count_inputs`](#feature-count_inputs)  
 [🔽 feature `function_returning_something`](#feature-function_returning_something)  
 [🔽 feature `get_valid_input`](#feature-get_valid_input)  
 
@@ -2467,6 +2474,7 @@ Match an entire conditional (from the `if` clause to the last line of its body).
 ##### Derivations
 
 [🔽 feature `accumulate_inputs`](#feature-accumulate_inputs)  
+[🔽 feature `count_inputs`](#feature-count_inputs)  
 [🔽 feature `get_valid_input`](#feature-get_valid_input)  
 [🔽 feature `nested_if`](#feature-nested_if)  
 
@@ -2526,6 +2534,7 @@ Match and suffix any [atom](#feature-call_argument) present in the condition of 
 ##### Derivations
 
 [🔽 feature `accumulate_inputs`](#feature-accumulate_inputs)  
+[🔽 feature `count_inputs`](#feature-count_inputs)  
 [🔽 feature `get_valid_input`](#feature-get_valid_input)  
 
 ##### Specification
@@ -3162,6 +3171,7 @@ Two nested `for` loops doing the same number of iterations.
 ##### Derivations
 
 [🔽 feature `accumulate_inputs`](#feature-accumulate_inputs)  
+[🔽 feature `count_inputs`](#feature-count_inputs)  
 [🔽 feature `get_valid_input`](#feature-get_valid_input)  
 
 ##### Specification
@@ -3888,7 +3898,7 @@ SELECT "get_valid_input",
 FROM t_infinite_while wt -- An infinite loop...
 JOIN t_assignment_lhs_identifier x1 ON (x1.path GLOB wt.path || "?*")-- features the assignment of a variable...
 JOIN t_if ON (t_if.path GLOB wt.path || "?*"
-              AND t_if.span_start > x1.span_end)-- followed by a conditional...
+              AND t_if.span_start > x1.span_end)-- followed by a conditional statement...
 JOIN t_if_test_atom x2 ON (x1.name_suffix = x2.name_suffix -- testing this variable...
                            AND x2.span_start = t_if.span_start)
 JOIN t_return ret ON (ret.path GLOB t_if.path || "?*"
@@ -3911,6 +3921,63 @@ JOIN t_return ret ON (ret.path GLOB t_if.path || "?*"
 | Label | Lines |
 |:--|:--|
 | `get_valid_input:number` | 2-6 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `count_inputs`
+
+Count inputs until a sentinel value is encountered.
+
+##### Derivations
+
+[🔼 feature `assignment_lhs_identifier`](#feature-assignment_lhs_identifier)  
+[🔼 feature `if`](#feature-if)  
+[🔼 feature `if_test_atom`](#feature-if_test_atom)  
+[🔼 feature `increment_variable`](#feature-increment_variable)  
+[🔼 feature `infinite_while`](#feature-infinite_while)  
+[🔼 feature `return`](#feature-return)  
+
+##### Specification
+
+```sql
+SELECT "count_inputs",
+       ret.name_suffix,
+       wt.span,
+       wt.path
+FROM t_infinite_while wt -- An infinite loop...
+JOIN t_assignment_lhs_identifier x1 ON (x1.path GLOB wt.path || "?*")-- features the assignment of a variable...
+JOIN t_if ON (t_if.path GLOB wt.path || "?*"
+              AND t_if.span_start > x1.span_end)-- followed by a conditional statement...
+JOIN t_if_test_atom x2 ON (x1.name_suffix = x2.name_suffix -- testing this variable...
+                           AND x2.span_start = t_if.span_start)
+JOIN t_return ret ON (ret.path GLOB t_if.path || "?*")-- and returning another variable (an accumulator)...
+JOIN t_increment_variable acc ON (acc.name_suffix = ret.name_suffix
+                                  AND acc.path GLOB wt.path || "?*" -- which is incremented somewhere in the loop...
+                                  AND acc.path NOT GLOB t_if.path || "?*" -- but not INSIDE the conditional statement.
+)
+```
+
+##### Example
+
+```python
+1   def number_guessing(bound):
+2       print("I'm thinking of an integer in [1, %s]." % bound)
+3       number = randrange(bound) + 1
+4       trial_count = 1
+5       while True:
+6           candidate = int(input("Your guess #%s? " % trial_count))
+7           if candidate == number:
+8               print("Yes!")
+9               return trial_count
+10          print("Too %s!" % ("low" if candidate < number else "high"))
+11          trial_count += 1
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `count_inputs:trial_count` | 5-11 |
 
 --------------------------------------------------------------------------------
 
@@ -3937,7 +4004,7 @@ SELECT "accumulate_inputs",
 FROM t_infinite_while wt -- An infinite loop...
 JOIN t_assignment_lhs_identifier x1 ON (x1.path GLOB wt.path || "?*")-- features the assignment of a variable...
 JOIN t_if ON (t_if.path GLOB wt.path || "?*"
-              AND t_if.span_start > x1.span_end)-- followed by a conditional...
+              AND t_if.span_start > x1.span_end)-- followed by a conditional statement...
 JOIN t_if_test_atom x2 ON (x1.name_suffix = x2.name_suffix -- testing this variable...
                            AND x2.span_start = t_if.span_start)
 JOIN t_return ret ON (ret.path GLOB t_if.path || "?*")-- and returning another variable (an accumulator)...
