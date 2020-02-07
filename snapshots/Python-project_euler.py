@@ -1110,7 +1110,7 @@ def solution(n): # function:solution (-> +12), function_returning_something:solu
         f = f1 + f2 # assignment, assignment_lhs_identifier:f, assignment_rhs_atom:f1, assignment_rhs_atom:f2, binary_operator:Add
         f1, f2 = f2, f # assignment, assignment_lhs_identifier:f1, assignment_lhs_identifier:f2, assignment_rhs_atom:f, assignment_rhs_atom:f2, variable_update:f2:f, variable_update_by_assignment:f2:f
         index += 1 # assignment_lhs_identifier:index, assignment_rhs_atom:1, augmented_assignment:Add, increment_variable:index, int_literal, literal:Num, variable_update:index:1, variable_update_by_augmented_assignment:index:1
-        for j in str(f): # call_argument:f, for:j (-> +1), function_call:str
+        for j in str(f): # call_argument:f, count_elements:i (-> +1), for:j (-> +1), function_call:str
             i += 1 # assignment_lhs_identifier:i, assignment_rhs_atom:1, augmented_assignment:Add, increment_variable:i, int_literal, literal:Num, variable_update:i:1, variable_update_by_augmented_assignment:i:1
         if i == n: # comparison_operator:Eq, if (-> +1), if_test_atom:i, if_test_atom:n
             break # if_then_branch
@@ -1227,7 +1227,7 @@ def solve(digit_len: int) -> str: # function:solve (-> +13), function_returning_
     solutions = [] # assignment, assignment_lhs_identifier:solutions, literal:List
     den = 11 # assignment, assignment_lhs_identifier:den, assignment_rhs_atom:11, int_literal, literal:Num, suggest_constant_definition
     last_digit = int("1" + "0" * digit_len) # assignment, assignment_lhs_identifier:last_digit, assignment_rhs_atom:digit_len, binary_operator:Add, binary_operator:Mult, call_argument:, function_call:int, literal:Str
-    for num in range(den, last_digit): # accumulate_elements:solutions (-> +7), call_argument:den, call_argument:last_digit, for:num (-> +7), for_range:den:last_digit (-> +7), function_call:range, range:den:last_digit
+    for num in range(den, last_digit): # accumulate_elements:solutions (-> +7), call_argument:den, call_argument:last_digit, count_elements:num (-> +7), for:num (-> +7), for_range:den:last_digit (-> +7), function_call:range, range:den:last_digit
         while den <= 99: # comparison_operator:LtE, evolve_state (-> +4), int_literal, literal:Num, suggest_constant_definition, while (-> +4)
             if (num != den) and (num % 10 == den // 10) and (den % 10 != 0): # binary_operator:FloorDiv, binary_operator:Mod, boolean_operator:And, comparison_operator:Eq, comparison_operator:NotEq, divisibility_test:10, if (-> +2), if_test_atom:0, if_test_atom:10, if_test_atom:den, if_test_atom:num, int_literal, literal:Num, suggest_constant_definition
                 if isDigitCancelling(num, den): # call_argument:den, call_argument:num, function_call:isDigitCancelling, if (-> +1), if_test_atom:den, if_test_atom:num, if_then_branch (-> +1), nested_if:1 (-> +1)
@@ -1328,7 +1328,7 @@ def combinations(n, r): # function:combinations (-> +1), function_returning_some
     return factorial(n) / (factorial(r) * factorial(n - r)) # binary_operator:Div, binary_operator:Mult, binary_operator:Sub, call_argument:, call_argument:n, call_argument:r, function_call:factorial, return
 def solution(): # function:solution (-> +6), function_returning_something:solution (-> +6)
     total = 0 # assignment, assignment_lhs_identifier:total, assignment_rhs_atom:0, int_literal, literal:Num
-    for i in range(1, 101): # call_argument:1, call_argument:101, for:i (-> +3), for_range:1:101 (-> +3), for_range:1:_ (-> +3), function_call:range, int_literal, literal:Num, range:1:101, suggest_constant_definition
+    for i in range(1, 101): # call_argument:1, call_argument:101, count_elements:total (-> +3), for:i (-> +3), for_range:1:101 (-> +3), for_range:1:_ (-> +3), function_call:range, int_literal, literal:Num, range:1:101, suggest_constant_definition
         for j in range(1, i + 1): # binary_operator:Add, call_argument:, call_argument:1, for:j (-> +2), for_range:1:_ (-> +2), function_call:range, int_literal, literal:Num, nested_for:1 (-> +2), range:1:_
             if combinations(i, j) > 1e6: # call_argument:i, call_argument:j, comparison_operator:Gt, float_literal, function_call:combinations, if (-> +1), if_test_atom:1000000.0, if_test_atom:i, if_test_atom:j, literal:Num, suggest_constant_definition
                 total += 1 # assignment_lhs_identifier:total, assignment_rhs_atom:1, augmented_assignment:Add, if_then_branch, increment_variable:total, int_literal, literal:Num, variable_update:total:1, variable_update_by_augmented_assignment:total:1

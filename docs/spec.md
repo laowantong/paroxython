@@ -101,6 +101,7 @@
   - [Iterative patterns](#iterative-patterns)
     - [Sequential loops](#sequential-loops)
       - [Feature `accumulate_elements` (SQL)](#feature-accumulate_elements)
+      - [Feature `count_elements` (SQL)](#feature-count_elements)
       - [Feature `filter_for`](#feature-filter_for)
       - [Feature `find_best_element`](#feature-find_best_element)
       - [Feature `universal_quantifier`](#feature-universal_quantifier)
@@ -1352,6 +1353,7 @@ Capture any identifier appearing on the left hand side of an assignment (possibl
 ##### Derivations
 
 [🔽 feature `accumulate_inputs`](#feature-accumulate_inputs)  
+[🔽 feature `count_elements`](#feature-count_elements)  
 [🔽 feature `count_inputs`](#feature-count_inputs)  
 [🔽 feature `get_valid_input`](#feature-get_valid_input)  
 [🔽 feature `variable_update_by_assignment`](#feature-variable_update_by_assignment)  
@@ -1691,6 +1693,7 @@ WHERE name_prefix IN ("variable_update_by_assignment",
 
 ##### Derivations
 
+[🔽 feature `count_elements`](#feature-count_elements)  
 [🔽 feature `count_inputs`](#feature-count_inputs)  
 
 ##### Specification
@@ -2819,6 +2822,7 @@ Match sequential loops, along with their iteration variable(s).
 ##### Derivations
 
 [🔽 feature `accumulate_elements`](#feature-accumulate_elements)  
+[🔽 feature `count_elements`](#feature-count_elements)  
 [🔽 feature `for_range`](#feature-for_range)  
 [🔽 feature `nested_for`](#feature-nested_for)  
 
@@ -3616,6 +3620,57 @@ GROUP BY for_loop.path,
 | `accumulate_elements:acc` | 3-5, 14-15, 19-21 |
 | `accumulate_elements:acc_1` | 7-13 |
 | `accumulate_elements:acc_2` | 7-13 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `count_elements`
+
+##### Derivations
+
+[🔼 feature `assignment_lhs_identifier`](#feature-assignment_lhs_identifier)  
+[🔼 feature `for`](#feature-for)  
+[🔼 feature `increment_variable`](#feature-increment_variable)  
+
+##### Specification
+
+```sql
+SELECT "count_elements",
+       inc.name_suffix,
+       min(for_loop.span_start) || "-" || max(for_loop.span_end),
+       for_loop.path
+FROM t_for for_loop
+JOIN t_increment_variable inc ON (inc.path GLOB for_loop.path || "?*")
+WHERE NOT EXISTS
+    (SELECT *
+     FROM t_assignment_lhs_identifier x
+     WHERE (x.name_suffix = inc.name_suffix
+            AND x.span != inc.span
+            AND x.path GLOB for_loop.path || "?*") )
+GROUP BY inc.path
+```
+
+##### Example
+
+```python
+1   for i1 in s1:
+2       c1 = 0
+3       c2 = 1
+4       for i2 in s2:
+5           c2 += 1
+6           c3 = 0
+7           for i3 in s3:
+8               if foo(i2, i3):
+9                   c3 += 1
+10              c1 = c1 + 1
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `count_elements:c1` | 4-10 |
+| `count_elements:c2` | 4-10 |
+| `count_elements:c3` | 7-10 |
 
 --------------------------------------------------------------------------------
 
