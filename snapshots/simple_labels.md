@@ -54,8 +54,6 @@
 - if_test_atom:n / collatz_print.py / 4
 - if_then_branch / collatz_print.py / 5
 - if_then_branch / fizzbuzz.py / 3
-- increment_variable:n:1 / collatz_print.py / 7
-- increment_variable:n:3 / collatz_print.py / 7
 - int_literal / collatz_print.py / 2, 4, 4, 5, 7, 7
 - int_literal / fizzbuzz.py / 1, 1, 2, 2, 4, 4, 6, 6
 - int_literal / is_even.py / 2, 2
@@ -125,7 +123,7 @@
 - import
 - import_module
 - import_name
-- increment_variable|decrement_variable
+- increment_variable
 - index
 - index_arithmetic
 - infinite_while

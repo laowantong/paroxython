@@ -49,7 +49,7 @@
       - [Feature `variable_update_by_augmented_assignment` (SQL)](#feature-variable_update_by_augmented_assignment)
       - [Feature `variable_update_by_method_call` (SQL)](#feature-variable_update_by_method_call)
       - [Feature `variable_update` (SQL)](#feature-variable_update)
-      - [Feature `increment_variable|decrement_variable` (SQL)](#feature-increment_variabledecrement_variable)
+      - [Feature `increment_variable`](#feature-increment_variable)
       - [Feature `swapping`](#feature-swapping)
       - [Feature `negation`](#feature-negation)
   - [Function definitions](#function-definitions)
@@ -455,10 +455,6 @@ _Remark._ A negative literal is represented in the AST by a node `UnaryOp` with 
 --------------------------------------------------------------------------------
 
 #### Feature `binary_operator`
-
-##### Derivations
-
-[🔽 feature `increment_variable|decrement_variable`](#feature-increment_variabledecrement_variable)  
 
 ##### Specification
 
@@ -1261,7 +1257,6 @@ Match a comprehension with an `if` clause.
 
 ##### Derivations
 
-[🔽 feature `increment_variable|decrement_variable`](#feature-increment_variabledecrement_variable)  
 [🔽 feature `variable_update_by_assignment`](#feature-variable_update_by_assignment)  
 
 ##### Specification
@@ -1291,7 +1286,6 @@ Match a comprehension with an `if` clause.
 
 ##### Derivations
 
-[🔽 feature `increment_variable|decrement_variable`](#feature-increment_variabledecrement_variable)  
 [🔽 feature `variable_update_by_augmented_assignment`](#feature-variable_update_by_augmented_assignment)  
 
 ##### Specification
@@ -1633,7 +1627,6 @@ Match the update of a variable `x` and capture its name in the first part of the
 [🔼 feature `variable_update_by_method_call`](#feature-variable_update_by_method_call)  
 [🔽 feature `accumulate_elements`](#feature-accumulate_elements)  
 [🔽 feature `accumulate_inputs`](#feature-accumulate_inputs)  
-[🔽 feature `increment_variable|decrement_variable`](#feature-increment_variabledecrement_variable)  
 
 ##### Specification
 
@@ -1692,67 +1685,51 @@ WHERE name_prefix IN ("variable_update_by_assignment",
 
 --------------------------------------------------------------------------------
 
-#### Feature `increment_variable|decrement_variable`
-
-##### Derivations
-
-[🔼 feature `assignment`](#feature-assignment)  
-[🔼 feature `augmented_assignment`](#feature-augmented_assignment)  
-[🔼 feature `binary_operator`](#feature-binary_operator)  
-[🔼 feature `variable_update`](#feature-variable_update)  
+#### Feature `increment_variable`
 
 ##### Specification
 
-```sql
-SELECT CASE
-           WHEN (assign_stmt.name_prefix = "assignment"
-                 AND op.name = "binary_operator:Add"
-                 OR assign_stmt.name = "augmented_assignment:Add") THEN "increment_variable"
-           ELSE "decrement_variable"
-       END,
-       update_stmt.name_suffix,
-       update_stmt.span,
-       update_stmt.path
-FROM t_variable_update update_stmt
-JOIN t assign_stmt USING (path)
-JOIN t op ON (op.path GLOB assign_stmt.path || "?*")
-WHERE (assign_stmt.name_prefix = "augmented_assignment"
-       AND assign_stmt.name_suffix REGEXP "Add|Sub")
-  OR (assign_stmt.name_prefix = "assignment"
-      AND op.name_prefix = "binary_operator"
-      AND op.name_suffix REGEXP "Add|Sub")
-GROUP BY update_stmt.path,
-         update_stmt.name_suffix
+```re
+               ^(.*)/_type=
+(   # augmented assignment
+                           AugAssign
+    \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
+    (
+        \n(?:\1.+\n)*?\1/assigntarget/id=(?P<SUFFIX>.+)
+    )?
+    \n(?:\1.+\n)*?\1/op/_type=Add
+    \n(?:\1.+\n)*?\1/assignvalue/n=1
+|   # simple assignment
+                           Assign
+    \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
+    \n(?:\1.+\n)*?\1/assigntargets/1/_hash=(?P<HASH>.+) # capture _hash
+    \n(?:\1.+\n)*?\1/assignvalue/_type=BinOp
+    \n(?:\1.+\n)*?\1/assignvalue/left/_hash=(?P=HASH) # match _hash
+    (
+        \n(?:\1.+\n)*?\1/assignvalue/left/id=(?P<SUFFIX>.+)
+    )?
+    \n(?:\1.+\n)*?\1/assignvalue/op/_type=Add
+    \n(?:\1.+\n)*?\1/assignvalue/right/n=1
+)
 ```
 
 ##### Example
 
 ```python
 1   a = a + 1
-2   b += 2
-3   c = d + e # no match
-4   f += g + h
-5   a = a - 1
-6   b -= 2
-7   c = d - e # no match
-8   f -= g + h
-9   n = 3 * n + 1 # BUG: 2 matches
+2   a = 1 + a # LIMITATION: no match for Yoda style
+3   b += 1
+4   a[i+j] += 1
+5   b[foo()] = b[foo()] + 1
 ```
 
 ##### Matches
 
 | Label | Lines |
 |:--|:--|
-| `increment_variable:a:1` | 1 |
-| `increment_variable:b:2` | 2 |
-| `increment_variable:f:g` | 4 |
-| `increment_variable:f:h` | 4 |
-| `decrement_variable:a:1` | 5 |
-| `decrement_variable:b:2` | 6 |
-| `decrement_variable:f:g` | 8 |
-| `decrement_variable:f:h` | 8 |
-| `increment_variable:n:1` | 9 |
-| `increment_variable:n:3` | 9 |
+| `increment_variable:a` | 1 |
+| `increment_variable:b` | 3 |
+| `increment_variable` | 4, 5 |
 
 --------------------------------------------------------------------------------
 
