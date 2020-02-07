@@ -125,7 +125,6 @@
 - import
 - import_module
 - import_name
-- increment_variable
 - index
 - index_arithmetic
 - infinite_while
@@ -155,6 +154,7 @@
 - try_raise|try_except
 - unary_operator
 - universal_quantifier
+- variable_increment
 - variable_update
 - variable_update_by_assignment
 - variable_update_by_augmented_assignment

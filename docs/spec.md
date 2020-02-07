@@ -49,7 +49,7 @@
       - [Feature `variable_update_by_augmented_assignment` (SQL)](#feature-variable_update_by_augmented_assignment)
       - [Feature `variable_update_by_method_call` (SQL)](#feature-variable_update_by_method_call)
       - [Feature `variable_update` (SQL)](#feature-variable_update)
-      - [Feature `increment_variable`](#feature-increment_variable)
+      - [Feature `variable_increment`](#feature-variable_increment)
       - [Feature `swapping`](#feature-swapping)
       - [Feature `negation`](#feature-negation)
   - [Function definitions](#function-definitions)
@@ -1689,7 +1689,7 @@ WHERE name_prefix IN ("variable_update_by_assignment",
 
 --------------------------------------------------------------------------------
 
-#### Feature `increment_variable`
+#### Feature `variable_increment`
 
 ##### Derivations
 
@@ -1736,9 +1736,9 @@ WHERE name_prefix IN ("variable_update_by_assignment",
 
 | Label | Lines |
 |:--|:--|
-| `increment_variable:a` | 1 |
-| `increment_variable:b` | 3 |
-| `increment_variable` | 4, 5 |
+| `variable_increment:a` | 1 |
+| `variable_increment:b` | 3 |
+| `variable_increment` | 4, 5 |
 
 --------------------------------------------------------------------------------
 
@@ -2074,7 +2074,7 @@ GROUP BY r.rowid
 
 #### Feature `function_returning_nothing`
 
-A function returning nothing (aka procedure) is a function which is neither a generator or a function returning something.
+A function returning nothing (aka a procedure) is a function which is neither a generator or a function returning something.
 
 ##### Derivations
 
@@ -2836,19 +2836,6 @@ Match sequential loops, along with their iteration variable(s).
 )+
 \n(?:\1.+\n)* \1/.*/_pos=(?P<POS>.+)
 ```
-
-/body/1/body/2/_type=For
-/body/1/body/2/_pos=4:1-2-2-
-/body/1/body/2/target/_type=Tuple
-/body/1/body/2/target/_ids=a:b:c
-/body/1/body/2/target/_hash=0x8de92ead
-/body/1/body/2/target/_pos=4:1-2-2-0-
-/body/1/body/2/target/elts/length=2
-/body/1/body/2/target/elts/1/_type=Name
-/body/1/body/2/target/elts/1/_ids=a
-/body/1/body/2/target/elts/1/_hash=0x668ea8d0
-/body/1/body/2/target/elts/1/_pos=4:1-2-2-0-0-1-
-/body/1/body/2/target/elts/1/id=a
 
 ##### Example
 
@@ -3625,27 +3612,29 @@ GROUP BY for_loop.path,
 
 #### Feature `count_elements`
 
+Counting all the elements of a sequence, or only those which satisfy a condition.
+
 ##### Derivations
 
 [🔼 feature `assignment_lhs_identifier`](#feature-assignment_lhs_identifier)  
 [🔼 feature `for`](#feature-for)  
-[🔼 feature `increment_variable`](#feature-increment_variable)  
+[🔼 feature `variable_increment`](#feature-variable_increment)  
 
 ##### Specification
 
 ```sql
 SELECT "count_elements",
        inc.name_suffix,
-       min(for_loop.span_start) || "-" || max(for_loop.span_end),
-       for_loop.path
+       min(for_loop.span_start) || "-" || max(for_loop.span_end), -- The biggest loop...
+ for_loop.path
 FROM t_for for_loop
-JOIN t_increment_variable inc ON (inc.path GLOB for_loop.path || "?*")
-WHERE NOT EXISTS
-    (SELECT *
-     FROM t_assignment_lhs_identifier x
-     WHERE (x.name_suffix = inc.name_suffix
-            AND x.span != inc.span
-            AND x.path GLOB for_loop.path || "?*") )
+JOIN t_variable_increment inc ON (inc.path GLOB for_loop.path || "?*")-- including the incrementation of a variable x...
+WHERE NOT EXISTS -- which is not initialized in this loop.
+    (SELECT * -- In other words, ensure there is no...
+     FROM t_assignment_lhs_identifier x -- assignment...
+     WHERE (x.name_suffix = inc.name_suffix -- to the same x...
+            AND x.span != inc.span -- distinct from its incrementation...
+            AND x.path GLOB for_loop.path || "?*") )-- and enclosed in the loop.
 GROUP BY inc.path
 ```
 
@@ -3988,9 +3977,9 @@ Count inputs until a sentinel value is encountered.
 [🔼 feature `assignment_lhs_identifier`](#feature-assignment_lhs_identifier)  
 [🔼 feature `if`](#feature-if)  
 [🔼 feature `if_test_atom`](#feature-if_test_atom)  
-[🔼 feature `increment_variable`](#feature-increment_variable)  
 [🔼 feature `infinite_while`](#feature-infinite_while)  
 [🔼 feature `return`](#feature-return)  
+[🔼 feature `variable_increment`](#feature-variable_increment)  
 
 ##### Specification
 
@@ -4006,7 +3995,7 @@ JOIN t_if ON (t_if.path GLOB wt.path || "?*"
 JOIN t_if_test_atom x2 ON (x1.name_suffix = x2.name_suffix -- testing this variable...
                            AND x2.span_start = t_if.span_start)
 JOIN t_return ret ON (ret.path GLOB t_if.path || "?*")-- and returning another variable (an accumulator)...
-JOIN t_increment_variable acc ON (acc.name_suffix = ret.name_suffix
+JOIN t_variable_increment acc ON (acc.name_suffix = ret.name_suffix
                                   AND acc.path GLOB wt.path || "?*" -- which is incremented somewhere in the loop...
                                   AND acc.path NOT GLOB t_if.path || "?*" -- but not INSIDE the conditional statement.
 )
