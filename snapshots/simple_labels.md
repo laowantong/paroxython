@@ -80,7 +80,7 @@
 # Absent labels
 
 - accumulate_elements
-- accumulate_stream
+- accumulate_inputs
 - assertion
 - assignment_lhs_identifier
 - assignment_rhs_atom

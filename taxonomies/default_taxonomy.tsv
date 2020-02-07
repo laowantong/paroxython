@@ -75,6 +75,7 @@ pattern/elements/find/best/	find_best_element
 pattern/elements/find/first/	find_first_element
 pattern/elements/satisfy/all/	universal_quantifier
 pattern/elements/satisfy/some/	existential_quantifier
+pattern/inputs/accumulate/	accumulate_inputs:.+
 subscript/index/	index
 subscript/index/arithmetic/	index_arithmetic
 subscript/index/backwards/	negative_index
@@ -135,7 +136,6 @@ pattern/elements/accumulate/collect
 pattern/elements/accumulate/count	
 pattern/elements/accumulate/find_best/index	
 pattern/elements/find_first_good	
-pattern/inputs/accumulate	
 pattern/inputs/accumulate/count	
 pattern/inputs/find_first_good	
 pattern/states/accumulate	

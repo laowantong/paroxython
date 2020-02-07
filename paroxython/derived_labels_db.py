@@ -37,13 +37,6 @@ class DB:
 
     def read(self, query: Query) -> Labels:
         groups: LabelsSpans = defaultdict(list)
-        # Uncomment the following lines for executing multi-queries,
-        # including for instance the creation of a temporary table.
-        #
-        # with suppress(ValueError):
-        #     i = query.rindex("\n\nSELECT")
-        #     self.c.executescript(query[:i])
-        #     query = query[i:]
         for label_name in DB.prerequisites(query):
             if label_name not in self.added_table_labels:
                 self.c.execute(DB.addition_query.format(label_name))

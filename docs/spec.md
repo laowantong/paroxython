@@ -109,7 +109,7 @@
     - [Non-sequential finite loops](#non-sequential-finite-loops)
       - [Feature `evolve_state`](#feature-evolve_state)
     - [Non-sequential infinite loops](#non-sequential-infinite-loops)
-      - [Feature `accumulate_stream`](#feature-accumulate_stream)
+      - [Feature `accumulate_inputs` (SQL)](#feature-accumulate_inputs)
 - [Programs](#programs)
       - [Feature `category`](#feature-category)
 - [Suggestions](#suggestions)
@@ -356,7 +356,7 @@ In the AST, an imaginary literal contains the same symbols as a floating point l
 5   a[~i]
 ```
 
-**Remark.** In line 4, `~i` evaluates to `-i - 1` (bitwise complement of `i`). Line 3 could be rewritten as `a[-i]`.
+_Remark._ In line 4, `~i` evaluates to `-i - 1` (bitwise complement of `i`). Line 3 could be rewritten as `a[-i]`.
 
 ##### Matches
 
@@ -442,7 +442,7 @@ In the AST, an imaginary literal contains the same symbols as a floating point l
 3   c = -1 # no match
 ```
 
-**Remark.** A negative literal is represented in the AST by a node `UnaryOp` with `USub` and `Num` children, and a _positive_ value for `n`. Our pre-processing of the AST simplifies this into a node `Num` and a _negative_ value for `n`.
+_Remark._ A negative literal is represented in the AST by a node `UnaryOp` with `USub` and `Num` children, and a _positive_ value for `n`. Our pre-processing of the AST simplifies this into a node `Num` and a _negative_ value for `n`.
 
 ##### Matches
 
@@ -536,7 +536,7 @@ Match the so-called ternary operator.
 | `boolean_operator:And` | 1 |
 | `boolean_operator:Or` | 2 |
 
-**Remark.** `Not` is not a boolean operator in Python. To match it, use [feature `unary_operator:Not`](#feature-unary_operator).
+_Remark._ `Not` is not a boolean operator in Python. To match it, use [feature `unary_operator:Not`](#feature-unary_operator).
 
 --------------------------------------------------------------------------------
 
@@ -629,7 +629,7 @@ HAVING count(*) > 1 -- a chain has at least two operators
 ORDER BY cmp.path
 ```
 
-**Remark.** Note the user-defined function `REGEXP` in the `WHERE`clause. It calls the function `match()` of the third-party [`regex`](https://pypi.org/project/regex/) library.
+_Remark._ Note the user-defined function `REGEXP` in the `WHERE`clause. It calls the function `match()` of the third-party [`regex`](https://pypi.org/project/regex/) library.
 
 ##### Example
 
@@ -830,7 +830,7 @@ A tail-call is a call whose result is immediately returned, without any further 
 28          bar(3) # LIMITATION: no match
 ```
 
-**Remark.** Since the short-circuit expression `c and foo(m)` is equivalent to the conditional expression `if c then foo(m) else False`, `foo(m)` is actually a tail-call.
+_Remark._ Since the short-circuit expression `c and foo(m)` is equivalent to the conditional expression `if c then foo(m) else False`, `foo(m)` is actually a tail-call.
 
 ##### Matches
 
@@ -1105,10 +1105,9 @@ FROM -- Only a subquery permits to sort the arguments before grouping them toget
           END AS name_suffix,
           range.span AS span,
           range.path AS path
-   FROM t range
-   JOIN t arg ON (arg.path GLOB range.path || "?*")
-   WHERE range.name = "function_call:range"
-     AND arg.name_prefix = "call_argument"
+   FROM t_function_call range
+   JOIN t_call_argument arg ON (arg.path GLOB range.path || "?*")
+   WHERE range.name_suffix = "range"
      AND length(range.path) + 4 = length(arg.path) -- Ensure that arg is a (direct) argument of range().
    ORDER BY arg.path)-- Thanks to the subquery, this clause...
 GROUP BY rowid -- will be executed before this one.
@@ -1193,7 +1192,7 @@ Suffix the number of `for` clauses in a given comprehension.
 5   acc2 = [[x1 * x2 for x1 in seq1] for x2 in seq2]
 ```
 
-**Remark.** Both lines 4 and 5 can be expressed with two nested `for` statements. However, the former uses one single accumulator and produces a list of numbers:
+_Remark._ Both lines 4 and 5 can be expressed with two nested `for` statements. However, the former uses one single accumulator and produces a list of numbers:
 
 ```python
 acc = []
@@ -1356,6 +1355,7 @@ Capture any identifier appearing on the left hand side of an assignment (possibl
 
 ##### Derivations
 
+[🔽 feature `accumulate_inputs`](#feature-accumulate_inputs)  
 [🔽 feature `variable_update_by_assignment`](#feature-variable_update_by_assignment)  
 [🔽 feature `variable_update_by_augmented_assignment`](#feature-variable_update_by_augmented_assignment)  
 
@@ -1630,6 +1630,7 @@ Match the update of a variable `x` and capture its name in the first part of the
 [🔼 feature `variable_update_by_augmented_assignment`](#feature-variable_update_by_augmented_assignment)  
 [🔼 feature `variable_update_by_method_call`](#feature-variable_update_by_method_call)  
 [🔽 feature `accumulate_elements`](#feature-accumulate_elements)  
+[🔽 feature `accumulate_inputs`](#feature-accumulate_inputs)  
 [🔽 feature `increment_variable|decrement_variable`](#feature-increment_variabledecrement_variable)  
 
 ##### Specification
@@ -1892,6 +1893,7 @@ Match `return` statements and, when the returned object is an [_atom_](#feature-
 
 ##### Derivations
 
+[🔽 feature `accumulate_inputs`](#feature-accumulate_inputs)  
 [🔽 feature `closure`](#feature-closure)  
 [🔽 feature `function_returning_something`](#feature-function_returning_something)  
 
@@ -2094,16 +2096,14 @@ A function returning nothing (aka procedure) is a function which is neither a ge
 
 ```sql
 SELECT "function_returning_nothing",
-       name_suffix,
-       span,
-       path
-FROM t
-WHERE name_prefix = "function"
-  AND span NOT IN
-    (SELECT span
-     FROM t
-     WHERE name_prefix IN ("function_returning_something",
-                           "generator") )
+       t_function.name_suffix,
+       t_function.span,
+       t_function.path
+FROM t_function
+LEFT JOIN t ON (t_function.span = t.span
+                AND t.name_prefix IN ("function_returning_something",
+                                      "generator"))
+WHERE t.span IS NULL
 ```
 
 ##### Example
@@ -2486,6 +2486,7 @@ Match an entire conditional (from the `if` clause to the last line of its body).
 
 ##### Derivations
 
+[🔽 feature `accumulate_inputs`](#feature-accumulate_inputs)  
 [🔽 feature `nested_if`](#feature-nested_if)  
 
 ##### Specification
@@ -2540,6 +2541,10 @@ else:
 #### Feature `if_test_atom`
 
 Match and suffix any [atom](#feature-call_argument) present in the condition of an `if` statement.
+
+##### Derivations
+
+[🔽 feature `accumulate_inputs`](#feature-accumulate_inputs)  
 
 ##### Specification
 
@@ -2777,7 +2782,7 @@ GROUP BY t_if.span
 ORDER BY t_if.span_start
 ```
 
-**Remark.** A join condition `(inner_if.path GLOB branch.path || "?*")` would not work here, since an `else` branch has no specific path in the AST.
+_Remark._ A join condition `(inner_if.path GLOB branch.path || "?*")` would not work here, since an `else` branch has no specific path in the AST.
 
 ##### Example
 
@@ -3172,12 +3177,17 @@ Two nested `for` loops doing the same number of iterations.
 
 #### Feature `infinite_while`
 
+##### Derivations
+
+[🔽 feature `accumulate_inputs`](#feature-accumulate_inputs)  
+
 ##### Specification
 
 ```re
            ^(.*)/_type=While
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/test/value=True
+\n(?:\1.+\n)* \1/.*/_pos=(?P<POS>.+)
 ```
 
 ##### Example
@@ -3196,7 +3206,7 @@ Two nested `for` loops doing the same number of iterations.
 
 | Label | Lines |
 |:--|:--|
-| `infinite_while` | 1, 4 |
+| `infinite_while` | 1-7, 4-7 |
 
 --------------------------------------------------------------------------------
 
@@ -3873,53 +3883,36 @@ Evolve the value of a variable until it reaches a desired state.
 
 --------------------------------------------------------------------------------
 
-#### Feature `accumulate_stream`
+#### Feature `accumulate_inputs`
 
-Accumulate the inputs until a sentinel value is encountered (accumulation expressed by: `acc = combine(x, acc)`).
+Accumulate a stream of inputs until a sentinel value is encountered.
+
+##### Derivations
+
+[🔼 feature `assignment_lhs_identifier`](#feature-assignment_lhs_identifier)  
+[🔼 feature `if`](#feature-if)  
+[🔼 feature `if_test_atom`](#feature-if_test_atom)  
+[🔼 feature `infinite_while`](#feature-infinite_while)  
+[🔼 feature `return`](#feature-return)  
+[🔼 feature `variable_update`](#feature-variable_update)  
 
 ##### Specification
 
-```re
-           ^(.*)/_type=While
-\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/test/value=True
-\n(?:\1.+\n)* \1/(?:body|orelse)/\d+/assigntargets/.+/id=(?P<INPUT>.+) # capture the name of the input
-\n(?:\1.+\n)* \1/(?P<_1>(?:body|orelse)/\d+)/_type=If
-\n(?:\1.+\n)*?\1/(?P=_1)                /test/_ids=.*?\b(?P=INPUT)\b.* # the input is tested
-\n(?:\1.+\n)* \1/(?P=_1)                /(?P<_2>(?:body|orelse)/\d+)/_type=Return
-\n(?:\1.+\n)*?\1/(?P=_1)                /(?P=_2)                    /value/id=(?P<ACC>.+) # capture the name of the accumulator
-(   # the accumulator either appears on both sides of a simple assignment with the input
-\n(?:\1.+\n)* \1/(?P<_3>(?:body|orelse)/\d+)/_type=(?P<SUFFIX>Assign)
-\n(?:\1.+\n)*?\1/(?P=_3)                    /_pos=(?P<POS>.+)
-\n(?:\1.+\n)* \1/(?P=_3)                    /assigntargets/.*/id=(?P=ACC)
-\n(?:\1.+\n)*?\1/(?P=_3)                    /assignvalue/_ids=(?=.*\b(?P=INPUT)\b)
-                                                        (?=.*\b(?P=ACC)\b)
-                                                        .* # both appear in RHS
-|   # or is on LHS of an augmented assignement with the input
-\n(?:\1.+\n)* \1/(?P<_3>(?:body|orelse)/\d+)/_type=(?P<SUFFIX>AugAssign)
-\n(?:\1.+\n)*?\1/(?P=_3)                    /_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/(?P=_3)                    /assigntarget/id=(?P=ACC)
-\n(?:\1.+\n)* \1/(?P=_3)                    /assignvalue.*/id=(?P=INPUT)
-|   # or should be mutated by calling a function on this accumulator and the iteration variable
-\n(?:\1.+\n)* \1/(?P<_3>(?:body|orelse)/\d+)/_type=Expr # the whole line consists in an expression
-\n(?:\1.+\n)*?\1/(?P=_3)                    /_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/(?P=_3)                    /value/_type=Call
-\n(?:\1.+\n)*?\1/(?P=_3)                    /value/_ids=(?=.*\b(?P=INPUT)\b)
-                                                        (?=.*\b(?P=ACC)\b)
-                                                        .+ # both appear in RHS
-\n(?:\1.+\n)*?\1/(?P=_3)                    /value/func/_type=(?P<SUFFIX>Name)
-\n(?:\1.+\n)*?\1/(?P=_3)                    /value/func/id=(?!(?P=ACC)|(?P=INPUT)|breakpoint|delattr|eval|exec|help|input|open|print|setattr|super).+
-|   # or should be mutated by calling a method of this accumulator, again on the iteration variable
-\n(?:\1.+\n)* \1/(?P<_3>(?:body|orelse)/\d+)/_type=Expr # the whole line consists in an expression
-\n(?:\1.+\n)*?\1/(?P=_3)                    /_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/(?P=_3)                    /value/_type=Call
-\n(?:\1.+\n)*?\1/(?P=_3)                    /value/func/_type=(?P<SUFFIX>Attribute)
-\n(?:\1.+\n)*?\1/(?P=_3)                    /value/func/value/id=(?P=ACC) # a method of acc is called on...
-\n(?:\1.+\n)* \1/(?P=_3)                    /value/args/\d+/id=(?P=INPUT) # the iteration variable
-)
-(
-\n(?:\1.+\n)* \1.*/_pos=(?P<POS>.+)
-)?
+```sql
+SELECT "accumulate_inputs",
+       ret.name_suffix,
+       wt.span,
+       wt.path
+FROM t_infinite_while wt -- An infinite loop...
+JOIN t_assignment_lhs_identifier x1 ON (x1.path GLOB wt.path || "?*")-- features the assignment of a variable...
+JOIN t_if ON (t_if.path GLOB wt.path || "?*"
+              AND t_if.span_start > x1.span_end)-- followed by a conditional...
+JOIN t_if_test_atom x2 ON (x1.name_suffix = x2.name_suffix -- testing this variable...
+                           AND x2.span_start = t_if.span_start)
+JOIN t_return ret ON (ret.path GLOB t_if.path || "?*")-- and returning another variable (an accumulator)...
+JOIN t_variable_update acc ON (acc.span_start > t_if.span_start -- which is updated after the conditional...
+                               AND acc.span_end <= wt.span_end -- but before the end of the loop...
+                               AND acc.name_suffix = ret.name_suffix || ":" || x1.name_suffix) -- with the first variable.
 ```
 
 ##### Example
@@ -3932,7 +3925,7 @@ Accumulate the inputs until a sentinel value is encountered (accumulation expres
 5           if is_sentinel(x, y):
 6               return acc
 7           acc = combine(x, acc)
-8
+8   
 9   def accumulate_inputs():
 10      acc = seed
 11      while True:
@@ -3940,32 +3933,32 @@ Accumulate the inputs until a sentinel value is encountered (accumulation expres
 13          if x > y:
 14              return acc
 15          acc += abs(x)
-16
+16  
 17  def accumulate_inputs():
 18      acc = seed
 19      while True:
 20          x = read()
 21          if x > y:
 22              return acc
-23          foobar(acc, x)
-24
+23          foobar(acc, x) # paroxython: variable_update:acc:x
+24  
 25  def accumulate_inputs():
-26      acc = seed
+26      acc = []
 27      while True:
 28          x = read()
 29          if x > y:
 30              return acc
-31          acc.foobar(x)
+31          acc.append(x)
 ```
+
+_Remark._
+When the update is carried out by a function call, it must be indicated with a manual hint (see line 23).
 
 ##### Matches
 
 | Label | Lines |
 |:--|:--|
-| `accumulate_stream:Assign` | 3-7 |
-| `accumulate_stream:AugAssign` | 11-15 |
-| `accumulate_stream:Name` | 19-23 |
-| `accumulate_stream:Attribute` | 27-31 |
+| `accumulate_inputs:acc` | 3-7, 11-15, 19-23, 27-31 |
 
 --------------------------------------------------------------------------------
 
@@ -4007,7 +4000,7 @@ It may be interesting to indicate the category of the program with an all-encomp
 7   # paroxython: category:fun
 ```
 
-**Remarks.**
+_Remark._
 - The location of an all-encompassing hint does not matter, as long as it is on its own line.
 - Since all hints are stripped before labelling, the resulting source actually spans from line 1 to line 5.
 
