@@ -74,6 +74,8 @@ def derivation_map(text):
             |
             IN\s\(("(?P<REQUIRED_LABEL_NAME>.+?)(:.*)?"(.|\n)*?)+\)
             )
+        |
+        \b(FROM|JOIN)\st_(?P<REQUIRED_LABEL_NAME>\w+)
     """
     ).finditer
 

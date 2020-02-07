@@ -26,6 +26,7 @@
       - [Feature `function_tail_call`](#feature-function_tail_call)
       - [Feature `call_argument`](#feature-call_argument)
       - [Feature `method_call`](#feature-method_call)
+      - [Feature `method_call_name`](#feature-method_call_name)
       - [Feature `method_call_object`](#feature-method_call_object)
       - [Feature `method_chaining`](#feature-method_chaining)
       - [Feature `composition`](#feature-composition)
@@ -42,8 +43,13 @@
       - [Feature `augmented_assignment`](#feature-augmented_assignment)
       - [Feature `chained_assignment`](#feature-chained_assignment)
       - [Feature `assignment_lhs_identifier`](#feature-assignment_lhs_identifier)
-      - [Feature `assignment_rhs_identifier`](#feature-assignment_rhs_identifier)
+      - [Feature `assignment_rhs_atom`](#feature-assignment_rhs_atom)
     - [Assignment idioms](#assignment-idioms)
+      - [Feature `variable_update_by_assignment` (SQL)](#feature-variable_update_by_assignment)
+      - [Feature `variable_update_by_augmented_assignment` (SQL)](#feature-variable_update_by_augmented_assignment)
+      - [Feature `variable_update_by_method_call` (SQL)](#feature-variable_update_by_method_call)
+      - [Feature `variable_update` (SQL)](#feature-variable_update)
+      - [Feature `increment_variable`](#feature-increment_variable)
       - [Feature `swapping`](#feature-swapping)
       - [Feature `negation`](#feature-negation)
   - [Function definitions](#function-definitions)
@@ -65,7 +71,7 @@
       - [Feature `tail_recursive_function` (SQL)](#feature-tail_recursive_function)
   - [Conditionals](#conditionals)
       - [Feature `if`](#feature-if)
-      - [Feature `if_test_id`](#feature-if_test_id)
+      - [Feature `if_test_atom`](#feature-if_test_atom)
       - [Feature `if_then_branch`](#feature-if_then_branch)
       - [Feature `if_elif_branch`](#feature-if_elif_branch)
       - [Feature `if_else_branch`](#feature-if_else_branch)
@@ -80,6 +86,7 @@
       - [Feature `triangular_nested_for`](#feature-triangular_nested_for)
       - [Feature `square_nested_for`](#feature-square_nested_for)
       - [Feature `while`](#feature-while)
+      - [Feature `infinite_while`](#feature-infinite_while)
   - [Exceptions](#exceptions)
       - [Feature `assertion`](#feature-assertion)
       - [Feature `try`](#feature-try)
@@ -94,15 +101,18 @@
   - [Iterative patterns](#iterative-patterns)
     - [Sequential loops](#sequential-loops)
       - [Feature `accumulate_elements` (SQL)](#feature-accumulate_elements)
+      - [Feature `count_elements` (SQL)](#feature-count_elements)
       - [Feature `filter_for`](#feature-filter_for)
       - [Feature `find_best_element`](#feature-find_best_element)
       - [Feature `universal_quantifier`](#feature-universal_quantifier)
       - [Feature `existential_quantifier`](#feature-existential_quantifier)
       - [Feature `find_first_element`](#feature-find_first_element)
-    - [Non sequential finite loops](#non-sequential-finite-loops)
+    - [Non-sequential finite loops](#non-sequential-finite-loops)
       - [Feature `evolve_state`](#feature-evolve_state)
-    - [Non sequential infinite loops](#non-sequential-infinite-loops)
-      - [Feature `accumulate_stream`](#feature-accumulate_stream)
+    - [Non-sequential infinite loops](#non-sequential-infinite-loops)
+      - [Feature `get_valid_input` (SQL)](#feature-get_valid_input)
+      - [Feature `count_inputs` (SQL)](#feature-count_inputs)
+      - [Feature `accumulate_inputs` (SQL)](#feature-accumulate_inputs)
 - [Programs](#programs)
       - [Feature `category`](#feature-category)
 - [Suggestions](#suggestions)
@@ -128,11 +138,11 @@
 ```re
 ^(.*)
 (   # match None, True and False
-              /_type='NameConstant'
+              /_type=NameConstant
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/value=(?P<SUFFIX>None|True|False)
 |   # match any other constant
-              /_type='(?P<SUFFIX>Str|Num|Tuple|Dict|Set|List)'
+              /_type=(?P<SUFFIX>Str|Num|Tuple|Dict|Set|List)
 \n(?:\1.+\n)*?\1/_ids=
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 )
@@ -173,12 +183,12 @@
 
 #### Feature `int_literal`
 
-Matching literal does not require to feature a sophisticated regular expression: the heavy lifting is already made in the given AST, which stores them in a normalized form. For instance, integer literals are just sequence of digits:
+Matching a literal does not require to construct a sophisticated regular expression: the heavy lifting is already made in the given AST, which stores them in a normalized form. For instance, integer literals are just sequence of digits:
 
 ##### Specification
 
 ```re
-           ^(.*)/_type='Num'
+           ^(.*)/_type=Num
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/n=-?\d+\n
 ```
@@ -209,7 +219,7 @@ In the AST, a floating point literal consists of digits and at least one symbol 
 ##### Specification
 
 ```re
-           ^(.*)/_type='Num'
+           ^(.*)/_type=Num
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/n=.*?[e\.].*(?<!j)\n
 ```
@@ -238,7 +248,7 @@ In the AST, an imaginary literal contains the same symbols as a floating point l
 ##### Specification
 
 ```re
-           ^(.*)/_type='Num'
+           ^(.*)/_type=Num
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/n=.*j\n
 ```
@@ -269,9 +279,9 @@ In the AST, an imaginary literal contains the same symbols as a floating point l
 ##### Specification
 
 ```re
-           ^(.*)/_type='Subscript'
+           ^(.*)/_type=Subscript
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/slice/_type='Index'
+\n(?:\1.+\n)*?\1/slice/_type=Index
 ```
 
 ##### Example
@@ -295,10 +305,10 @@ In the AST, an imaginary literal contains the same symbols as a floating point l
 ##### Specification
 
 ```re
-           ^(.*)/_type='Subscript'
+           ^(.*)/_type=Subscript
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/slice/_type='Index'
-\n(?:\1.+\n)*?\1/slice/value/_type='BinOp'
+\n(?:\1.+\n)*?\1/slice/_type=Index
+\n(?:\1.+\n)*?\1/slice/value/_type=BinOp
 ```
 
 ##### Example
@@ -321,21 +331,21 @@ In the AST, an imaginary literal contains the same symbols as a floating point l
 ##### Specification
 
 ```re
-           ^(.*)/_type='Subscript'
+           ^(.*)/_type=Subscript
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/slice/_type='Index'
+\n(?:\1.+\n)*?\1/slice/_type=Index
 (   # A negative number
-\n(?:\1.+\n)*?\1/slice/value/_type='Num'
+\n(?:\1.+\n)*?\1/slice/value/_type=Num
 \n(?:\1.+\n)*?\1/slice/value/n=(?P<SUFFIX>-\d+)
 |   # A negated non-literal expression
-\n(?:\1.+\n)*?\1/slice/value/op/_type='USub'
+\n(?:\1.+\n)*?\1/slice/value/op/_type=USub
 |   # A binary operation whose left operand is negated
-\n(?:\1.+\n)*?\1/slice/value/_type='BinOp'
-\n(?:\1.+\n)*?\1/slice/value/left/_type='UnaryOp'
-\n(?:\1.+\n)*?\1/slice/value/left/op/_type='USub'
+\n(?:\1.+\n)*?\1/slice/value/_type=BinOp
+\n(?:\1.+\n)*?\1/slice/value/left/_type=UnaryOp
+\n(?:\1.+\n)*?\1/slice/value/left/op/_type=USub
 |   # A complemented expression
-\n(?:\1.+\n)*?\1/slice/value/_type='UnaryOp'
-\n(?:\1.+\n)*?\1/slice/value/op/_type='Invert'
+\n(?:\1.+\n)*?\1/slice/value/_type=UnaryOp
+\n(?:\1.+\n)*?\1/slice/value/op/_type=Invert
 )
 ```
 
@@ -349,7 +359,7 @@ In the AST, an imaginary literal contains the same symbols as a floating point l
 5   a[~i]
 ```
 
-**Remark.** In line 4, `~i` evaluates to `-i - 1` (bitwise complement of `i`). Line 3 could be rewritten as `a[-i]`.
+_Remark._ In line 4, `~i` evaluates to `-i - 1` (bitwise complement of `i`). Line 3 could be rewritten as `a[-i]`.
 
 ##### Matches
 
@@ -365,9 +375,9 @@ In the AST, an imaginary literal contains the same symbols as a floating point l
 ##### Specification
 
 ```re
-           ^(.*)/_type='Subscript'
+           ^(.*)/_type=Subscript
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/slice/_type='Slice'
+\n(?:\1.+\n)*?\1/slice/_type=Slice
 \n(?:\1.+\n)*?\1/slice/step=None
 ```
 
@@ -392,8 +402,8 @@ In the AST, an imaginary literal contains the same symbols as a floating point l
 ##### Specification
 
 ```re
-           ^(.*)/_type='Subscript'
-\n(?:\1.+\n)*?\1/slice/_type='Slice'
+           ^(.*)/_type=Subscript
+\n(?:\1.+\n)*?\1/slice/_type=Slice
 \n(?:\1.+\n)*?\1/slice/step/_pos=(?P<POS>.+)
 ```
 
@@ -422,9 +432,9 @@ In the AST, an imaginary literal contains the same symbols as a floating point l
 ##### Specification
 
 ```re
-           ^(.*)/_type='UnaryOp'
+           ^(.*)/_type=UnaryOp
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/op/_type='(?P<SUFFIX>.+)'
+\n(?:\1.+\n)*?\1/op/_type=(?P<SUFFIX>.+)
 ```
 
 ##### Example
@@ -435,7 +445,7 @@ In the AST, an imaginary literal contains the same symbols as a floating point l
 3   c = -1 # no match
 ```
 
-**Remark.** A negative literal is represented in the AST by a node `UnaryOp` with `USub` and `Num` children, and a _positive_ value for `n`. Our pre-processing of the AST simplifies this into a node `Num` and a _negative_ value for `n`.
+_Remark._ A negative literal is represented in the AST by a node `UnaryOp` with `USub` and `Num` children, and a _positive_ value for `n`. Our pre-processing of the AST simplifies this into a node `Num` and a _negative_ value for `n`.
 
 ##### Matches
 
@@ -451,9 +461,9 @@ In the AST, an imaginary literal contains the same symbols as a floating point l
 ##### Specification
 
 ```re
-           ^(.*)/_type='BinOp'
+           ^(.*)/_type=BinOp
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/op/_type='(?P<SUFFIX>.+)'
+\n(?:\1.+\n)*?\1/op/_type=(?P<SUFFIX>.+)
 ```
 
 ##### Example
@@ -478,7 +488,7 @@ Match the so-called ternary operator.
 ##### Specification
 
 ```re
-           ^(.*)/_type='IfExp'
+           ^(.*)/_type=IfExp
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 ```
 
@@ -505,9 +515,9 @@ Match the so-called ternary operator.
 ##### Specification
 
 ```re
-           ^(.*)/_type='BoolOp'
+           ^(.*)/_type=BoolOp
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/op/_type='(?P<SUFFIX>.+)'
+\n(?:\1.+\n)*?\1/op/_type=(?P<SUFFIX>.+)
 ```
 
 ##### Example
@@ -525,7 +535,7 @@ Match the so-called ternary operator.
 | `boolean_operator:And` | 1 |
 | `boolean_operator:Or` | 2 |
 
-**Remark.** `Not` is not a boolean operator in Python. To match it, use [feature `unary_operator:Not`](#feature-unary_operator).
+_Remark._ `Not` is not a boolean operator in Python. To match it, use [feature `unary_operator:Not`](#feature-unary_operator).
 
 --------------------------------------------------------------------------------
 
@@ -538,7 +548,7 @@ Match the so-called ternary operator.
 ##### Specification
 
 ```re
-           ^(.*)/ops/        (?P<_1>\d+)/_type='(?P<SUFFIX>Eq|Lt|LtE|Gt|GtE|In|NotIn|NotEq|Is|IsNot)'
+           ^(.*)/ops/        (?P<_1>\d+)/_type=(?P<SUFFIX>Eq|Lt|LtE|Gt|GtE|In|NotIn|NotEq|Is|IsNot)
 \n(?:\1.+\n)*?\1/comparators/(?P=_1)    /_pos=(?P<POS>.+)
 ```
 
@@ -570,7 +580,7 @@ Match the so-called ternary operator.
 ##### Specification
 
 ```re
-           ^(.*)/_type='Compare'
+           ^(.*)/_type=Compare
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/comparators/length=(?!1\n)(?P<SUFFIX>.+)
 ```
@@ -609,15 +619,16 @@ SELECT CASE op.name_suffix
        count(*),
        cmp.span,
        cmp.path
-FROM t cmp
-JOIN t op ON (op.path GLOB cmp.path || "?*")
-WHERE cmp.name_prefix = "chained_comparison"
-  AND op.name REGEXP "comparison_operator:(Eq|Lt|LtE|Gt|GtE)"
+FROM t_chained_comparison cmp
+JOIN t_comparison_operator op ON (op.path GLOB cmp.path || "?*")
+WHERE op.name_suffix REGEXP "Eq|Lt|LtE|Gt|GtE"
 GROUP BY cmp.path,
          op.name_suffix
 HAVING count(*) > 1 -- a chain has at least two operators
 ORDER BY cmp.path
 ```
+
+_Remark._ Note the user-defined function `REGEXP` in the `WHERE`clause. It calls the function `match()` of the third-party [`regex`](https://pypi.org/project/regex/) library.
 
 ##### Example
 
@@ -645,14 +656,14 @@ ORDER BY cmp.path
 ##### Specification
 
 ```re
-           ^(.*)/_type='Compare'
+           ^(.*)/_type=Compare
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/left/op/_type='Mod'
+\n(?:\1.+\n)*?\1/left/op/_type=Mod
 (   # try to match the % right operand with a number
 \n(?:\1.+\n)*?\1/left/right/n=(?P<SUFFIX>.+)
 )?
 \n(?:\1.+\n)*?\1/ops/length=1
-\n(?:\1.+\n)*?\1/ops/1/_type='(Eq|NotEq)'
+\n(?:\1.+\n)*?\1/ops/1/_type=(Eq|NotEq)
 ```
 
 ##### Example
@@ -723,10 +734,10 @@ When the value of the left operand suffices to determine the value of a boolean 
 ##### Specification
 
 ```re
-           ^(.*)/_type='Call'
+           ^(.*)/_type=Call
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/func/_type='Name'
-\n(?:\1.+\n)*?\1/func/id='(?P<SUFFIX>.+)'
+\n(?:\1.+\n)*?\1/func/_type=Name
+\n(?:\1.+\n)*?\1/func/id=(?P<SUFFIX>.+)
 ```
 
 ##### Example
@@ -736,17 +747,17 @@ When the value of the left operand suffices to determine the value of a boolean 
 2   bar()
 3   buzz(x, 2)
 4   fizz(foobar(x), 2)
-5   baz.qux() # no match, see feature method_call
+5   baz.qux() # no match, see feature method_call_name
 ```
 
 ##### Matches
 
 | Label | Lines |
 |:--|:--|
+| `function_call:foo` | 1 |
 | `function_call:bar` | 2 |
 | `function_call:buzz` | 3 |
 | `function_call:fizz` | 4 |
-| `function_call:foo` | 1 |
 | `function_call:foobar` | 4 |
 
 --------------------------------------------------------------------------------
@@ -762,25 +773,25 @@ A tail-call is a call whose result is immediately returned, without any further 
 ##### Specification
 
 ```re
-           ^(.*)/_type='Return'
+           ^(.*)/_type=Return
 \n(?:\1.+\n)*?\1/value/( 
-                       _type='Call'
+                       _type=Call
 \n(?:\1.+\n)*?\1/value/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/value/func/_type='Name'
-\n(?:\1.+\n)*?\1/value/func/id='(?P<SUFFIX>.+)'
+\n(?:\1.+\n)*?\1/value/func/_type=Name
+\n(?:\1.+\n)*?\1/value/func/id=(?P<SUFFIX>.+)
                        |
-                       _type='BoolOp'
+                       _type=BoolOp
 \n(?:\1.+\n)*?\1/value/values/length=(?P<LENGTH>\d+)
-\n(?:\1.+\n)*?\1/value/values/(?P=LENGTH)/_type='Call'
+\n(?:\1.+\n)*?\1/value/values/(?P=LENGTH)/_type=Call
 \n(?:\1.+\n)*?\1/value/values/(?P=LENGTH)/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/value/values/(?P=LENGTH)/func/id='(?P<SUFFIX>.+)'
+\n(?:\1.+\n)*?\1/value/values/(?P=LENGTH)/func/id=(?P<SUFFIX>.+)
                        |
-                       _type='IfExp'
+                       _type=IfExp
 (
-\n(?:\1.+\n)*?\1/value/(?P<_1>body|orelse)/_type='Call'
+\n(?:\1.+\n)*?\1/value/(?P<_1>body|orelse)/_type=Call
 \n(?:\1.+\n)*?\1/value/(?P=_1)            /_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/value/(?P=_1)            /func/_type='Name'
-\n(?:\1.+\n)*?\1/value/(?P=_1)            /func/id='(?P<SUFFIX>.+)'
+\n(?:\1.+\n)*?\1/value/(?P=_1)            /func/_type=Name
+\n(?:\1.+\n)*?\1/value/(?P=_1)            /func/id=(?P<SUFFIX>.+)
 )+  # can match both branches
 )
 ```
@@ -818,7 +829,7 @@ A tail-call is a call whose result is immediately returned, without any further 
 28          bar(3) # LIMITATION: no match
 ```
 
-**Remark.** Since the short-circuit expression `c and foo(m)` is equivalent to the conditional expression `if c then foo(m) else False`, `foo(m)` is actually a tail-call.
+_Remark._ Since the short-circuit expression `c and foo(m)` is equivalent to the conditional expression `if c then foo(m) else False`, `foo(m)` is actually a tail-call.
 
 ##### Matches
 
@@ -831,25 +842,25 @@ A tail-call is a call whose result is immediately returned, without any further 
 #### Feature `call_argument`
 
 Match any argument of a function or a method call. Suffix this argument when it is **atomic**, _i.e._ either:
-- a simple identifier,
+- an identifier,
 - a number literal,
 - `True`, `False` or `None`.
 Otherwise, suffix it with an empty string.
 
 ##### Derivations
 
-[🔽 feature `accumulate_elements`](#feature-accumulate_elements)  
 [🔽 feature `range`](#feature-range)  
+[🔽 feature `variable_update_by_method_call`](#feature-variable_update_by_method_call)  
 
 ##### Specification
 
 ```re
-           ^(.*)/_type='Call'
+           ^(.*)/_type=Call
 (
 \n(?:\1.+\n)*?\1/(?P<_1>args/\d+)/_pos=(?P<POS>.+)
 \n            \1/(?P=_1)         /(   # the next line denotes either an atomic argument
-                                    (value|n|id)?='?(?P<SUFFIX>.+?)\b'?$ # capture it as suffix
-                                    | # or a non atomic argument
+                                    (value|n|id)?=(?P<SUFFIX>.+) # capture it as suffix
+                                    | # or a non-atomic argument
                                     (?P<SUFFIX>).+ # "capture" an empty suffix
                                   )
 )+ # at least one argument
@@ -894,15 +905,14 @@ Otherwise, suffix it with an empty string.
 
 ##### Derivations
 
-[🔽 feature `accumulate_elements`](#feature-accumulate_elements)  
+[🔽 feature `variable_update_by_method_call`](#feature-variable_update_by_method_call)  
 
 ##### Specification
 
 ```re
-           ^(.*)/_type='Call'
-\n(?:\1.+\n)*?\1/func/_type='Attribute'
-\n(?:\1.+\n)*?\1/func/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/func/attr='(?P<SUFFIX>.+)'
+           ^(.*)/_type=Call
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
+\n(?:\1.+\n)*?\1/func/_type=Attribute
 ```
 
 ##### Example
@@ -917,7 +927,38 @@ Otherwise, suffix it with an empty string.
 
 | Label | Lines |
 |:--|:--|
-| `method_call:index` | 1 |
+| `method_call` | 1 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `method_call_name`
+
+##### Derivations
+
+[🔽 feature `variable_update_by_method_call`](#feature-variable_update_by_method_call)  
+
+##### Specification
+
+```re
+           ^(.*)/_type=Call
+\n(?:\1.+\n)*?\1/func/_type=Attribute
+\n(?:\1.+\n)*?\1/func/_pos=(?P<POS>.+)
+\n(?:\1.+\n)*?\1/func/attr=(?P<SUFFIX>.+)
+```
+
+##### Example
+
+```python
+1   seq.index(42)
+2   foo(bar)  # no match
+3   seq.index # no match
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `method_call_name:index` | 1 |
 
 --------------------------------------------------------------------------------
 
@@ -925,15 +966,15 @@ Otherwise, suffix it with an empty string.
 
 ##### Derivations
 
-[🔽 feature `accumulate_elements`](#feature-accumulate_elements)  
+[🔽 feature `variable_update_by_method_call`](#feature-variable_update_by_method_call)  
 
 ##### Specification
 
 ```re
-           ^(.*)/value/_type='Call'
-\n(?:\1.+\n)*?\1/value/func/_type='Attribute'
+           ^(.*)/value/_type=Call
+\n(?:\1.+\n)*?\1/value/func/_type=Attribute
 \n(?:\1.+\n)*?\1/value/func/value/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/value/func/value/id='(?P<SUFFIX>.+)'
+\n(?:\1.+\n)*?\1/value/func/value/id=(?P<SUFFIX>.+)
 ```
 
 ##### Example
@@ -957,11 +998,11 @@ Otherwise, suffix it with an empty string.
 ##### Specification
 
 ```re
-           ^(.*)/_type='Call'
+           ^(.*)/_type=Call
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/func/_type='Attribute'
-\n(?:\1.+\n)*?\1/func/value/_type='Call'
-\n(?:\1.+\n)*?\1/func/value/func/_type='Attribute'
+\n(?:\1.+\n)*?\1/func/_type=Attribute
+\n(?:\1.+\n)*?\1/func/value/_type=Call
+\n(?:\1.+\n)*?\1/func/value/func/_type=Attribute
 ```
 
 ##### Example
@@ -985,9 +1026,9 @@ Apply a function or a method to an expression involving the result of another fu
 ##### Specification
 
 ```re
-           ^(.*)/_type='Call'
+           ^(.*)/_type=Call
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)* \1/args/.*/_type='Call'
+\n(?:\1.+\n)* \1/args/.*/_type=Call
 ```
 
 ##### Example
@@ -1016,7 +1057,7 @@ Apply a function or a method to an expression involving the result of another fu
 ##### Specification
 
 ```re
-           ^(.*)/_type='Lambda'
+           ^(.*)/_type=Lambda
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 ```
 
@@ -1063,10 +1104,9 @@ FROM -- Only a subquery permits to sort the arguments before grouping them toget
           END AS name_suffix,
           range.span AS span,
           range.path AS path
-   FROM t range
-   JOIN t arg ON (arg.path GLOB range.path || "?*")
-   WHERE range.name = "function_call:range"
-     AND arg.name_prefix = "call_argument"
+   FROM t_function_call range
+   JOIN t_call_argument arg ON (arg.path GLOB range.path || "?*")
+   WHERE range.name_suffix = "range"
      AND length(range.path) + 4 = length(arg.path) -- Ensure that arg is a (direct) argument of range().
    ORDER BY arg.path)-- Thanks to the subquery, this clause...
 GROUP BY rowid -- will be executed before this one.
@@ -1103,7 +1143,7 @@ GROUP BY rowid -- will be executed before this one.
 ##### Specification
 
 ```re
-           ^(.*)/_type='((?P<SUFFIX>List|Dict|Set)Comp|(?P<SUFFIX>Generator)Exp)'
+           ^(.*)/_type=((?P<SUFFIX>List|Dict|Set)Comp|(?P<SUFFIX>Generator)Exp)
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 ```
 
@@ -1136,7 +1176,7 @@ Suffix the number of `for` clauses in a given comprehension.
 ##### Specification
 
 ```re
-           ^(.*)/_type='(ListComp|DictComp|SetComp|GeneratorExp)'
+           ^(.*)/_type=(ListComp|DictComp|SetComp|GeneratorExp)
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/generators/length=(?P<SUFFIX>\d+)
 ```
@@ -1151,7 +1191,7 @@ Suffix the number of `for` clauses in a given comprehension.
 5   acc2 = [[x1 * x2 for x1 in seq1] for x2 in seq2]
 ```
 
-**Remark.** Both lines 4 and 5 can be expressed with two nested `for` statements. However, the former uses one single accumulator and produces a list of numbers:
+_Remark._ Both lines 4 and 5 can be expressed with two nested `for` statements. However, the former uses one single accumulator and produces a list of numbers:
 
 ```python
 acc = []
@@ -1217,10 +1257,14 @@ Match a comprehension with an `if` clause.
 
 #### Feature `assignment`
 
+##### Derivations
+
+[🔽 feature `variable_update_by_assignment`](#feature-variable_update_by_assignment)  
+
 ##### Specification
 
 ```re
-           ^(.*)/_type='Assign'
+           ^(.*)/_type=Assign
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 ```
 
@@ -1244,13 +1288,14 @@ Match a comprehension with an `if` clause.
 
 ##### Derivations
 
-[🔽 feature `accumulate_elements`](#feature-accumulate_elements)  
+[🔽 feature `variable_update_by_augmented_assignment`](#feature-variable_update_by_augmented_assignment)  
 
 ##### Specification
 
 ```re
-           ^(.*)/_type='AugAssign'
-\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
+           ^(.*)/_type=AugAssign
+\n            \1/_pos=(?P<POS>.+)
+\n(?:\1.+\n)* \1/op/_type=(?P<SUFFIX>.+)
 ```
 
 ##### Example
@@ -1269,7 +1314,9 @@ Match a comprehension with an `if` clause.
 
 | Label | Lines |
 |:--|:--|
-| `augmented_assignment` | 1, 3, 4, 5, 6, 7 |
+| `augmented_assignment:Add` | 1, 3, 5, 7 |
+| `augmented_assignment:Mult` | 4 |
+| `augmented_assignment:FloorDiv` | 6 |
 
 --------------------------------------------------------------------------------
 
@@ -1278,7 +1325,7 @@ Match a comprehension with an `if` clause.
 ##### Specification
 
 ```re
-           ^(.*)/_type='Assign'
+           ^(.*)/_type=Assign
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/assigntargets/length=(?!1\n).+
 ```
@@ -1305,13 +1352,18 @@ Capture any identifier appearing on the left hand side of an assignment (possibl
 
 ##### Derivations
 
-[🔽 feature `accumulate_elements`](#feature-accumulate_elements)  
+[🔽 feature `accumulate_inputs`](#feature-accumulate_inputs)  
+[🔽 feature `count_elements`](#feature-count_elements)  
+[🔽 feature `count_inputs`](#feature-count_inputs)  
+[🔽 feature `get_valid_input`](#feature-get_valid_input)  
+[🔽 feature `variable_update_by_assignment`](#feature-variable_update_by_assignment)  
+[🔽 feature `variable_update_by_augmented_assignment`](#feature-variable_update_by_augmented_assignment)  
 
 ##### Specification
 
 ```re
 ^(.*/assigntarget(s/\d+)?(|/value|/elts/\d+|/elts/\d+/value))/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1                                             /id='(?P<SUFFIX>.+)'
+\n(?:\1.+\n)*?\1                                             /id=(?P<SUFFIX>.+)
 ```
 
 ##### Example
@@ -1360,19 +1412,20 @@ Capture any identifier appearing on the left hand side of an assignment (possibl
 
 --------------------------------------------------------------------------------
 
-#### Feature `assignment_rhs_identifier`
+#### Feature `assignment_rhs_atom`
 
-Capture any identifier (variable or function) appearing on the right hand side of an assignment (possibly augmented).
+Capture any [_atom_](#feature-call_argument) appearing on the right hand side of an assignment (possibly augmented), except the function names.
 
 ##### Derivations
 
-[🔽 feature `accumulate_elements`](#feature-accumulate_elements)  
+[🔽 feature `variable_update_by_assignment`](#feature-variable_update_by_assignment)  
+[🔽 feature `variable_update_by_augmented_assignment`](#feature-variable_update_by_augmented_assignment)  
 
 ##### Specification
 
 ```re
 ^(.*/assignvalue\b.*)/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1     /id='(?P<SUFFIX>.+)'
+\n                 \1/(value|n|(?<!func/)id)=(?P<SUFFIX>.+)
 ```
 
 ##### Example
@@ -1382,29 +1435,310 @@ Capture any identifier (variable or function) appearing on the right hand side o
 2   a += a + b + c
 3   a = a[b[c]]
 4   a += a[b[c]]
-5   a = foo(bar())
-6   a += foo(bar())
+5   a = foo(bar()) # no match
+6   a += foo(bar) # matches "bar" only
 7   a = a + i
 8   a += i
 9   a[i] = b
-10  first = second = third
+10  first = second = third # matches "third" only
+11  a = 42
+12  a = True
+13  a = None
+14  a = [] # no match
+15  a = foo.bar(fizz) # matches "foo" and "fizz" only
 ```
 
 ##### Matches
 
 | Label | Lines |
 |:--|:--|
-| `assignment_rhs_identifier:a` | 1, 2, 3, 4, 7 |
-| `assignment_rhs_identifier:b` | 1, 2, 3, 4, 9 |
-| `assignment_rhs_identifier:bar` | 5, 6 |
-| `assignment_rhs_identifier:c` | 1, 2, 3, 4 |
-| `assignment_rhs_identifier:foo` | 5, 6 |
-| `assignment_rhs_identifier:i` | 7, 8 |
-| `assignment_rhs_identifier:third` | 10 |
+| `assignment_rhs_atom:a` | 1, 2, 3, 4, 7 |
+| `assignment_rhs_atom:b` | 1, 2, 3, 4, 9 |
+| `assignment_rhs_atom:c` | 1, 2, 3, 4 |
+| `assignment_rhs_atom:bar` | 6 |
+| `assignment_rhs_atom:i` | 7, 8 |
+| `assignment_rhs_atom:third` | 10 |
+| `assignment_rhs_atom:42` | 11 |
+| `assignment_rhs_atom:True` | 12 |
+| `assignment_rhs_atom:None` | 13 |
+| `assignment_rhs_atom:foo` | 15 |
+| `assignment_rhs_atom:fizz` | 15 |
 
 --------------------------------------------------------------------------------
 
 ### Assignment idioms
+
+--------------------------------------------------------------------------------
+
+#### Feature `variable_update_by_assignment`
+
+Match the reassignment of a variable `x` and capture its name in the first part of the suffix. In the second part, match any atom distinct from `x` and participating to the update (this excludes any function name).
+
+##### Derivations
+
+[🔼 feature `assignment`](#feature-assignment)  
+[🔼 feature `assignment_lhs_identifier`](#feature-assignment_lhs_identifier)  
+[🔼 feature `assignment_rhs_atom`](#feature-assignment_rhs_atom)  
+[🔽 feature `variable_update`](#feature-variable_update)  
+
+##### Specification
+
+```sql
+SELECT "variable_update_by_assignment",
+       lhs_acc.name_suffix || ":" || rhs_var.name_suffix,
+       op.span,
+       op.path
+FROM t_assignment AS op
+JOIN t_assignment_lhs_identifier AS lhs_acc ON (lhs_acc.path GLOB op.path || "?*")
+JOIN t_assignment_rhs_atom AS rhs_acc ON (rhs_acc.path GLOB op.path || "?*")
+JOIN t_assignment_rhs_atom AS rhs_var ON (rhs_var.path GLOB op.path || "?*")
+WHERE rhs_acc.name_suffix = lhs_acc.name_suffix -- The same identifier must appear on both LHS and RHS...
+  AND rhs_acc.name_suffix != rhs_var.name_suffix -- and an atom distinct from this identifier must appear on RHS.
+GROUP BY op.span,
+         lhs_acc.name,
+         rhs_var.name
+```
+
+##### Example
+
+```python
+1   foo = foo + a
+2   bar = bar.mult(5)
+3   bar = mult(bar, 5)
+4   (x, y) = (y, x)
+5   (a, b) = (b, a + b)
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `variable_update_by_assignment:foo:a` | 1 |
+| `variable_update_by_assignment:bar:5` | 2, 3 |
+| `variable_update_by_assignment:x:y` | 4 |
+| `variable_update_by_assignment:y:x` | 4 |
+| `variable_update_by_assignment:a:b` | 5 |
+| `variable_update_by_assignment:b:a` | 5 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `variable_update_by_augmented_assignment`
+
+Match the augmented assignment of a variable `x` and capture its name in the first part of the suffix. In the second part, match any atom participating to the update (this excludes any function name).
+
+##### Derivations
+
+[🔼 feature `assignment_lhs_identifier`](#feature-assignment_lhs_identifier)  
+[🔼 feature `assignment_rhs_atom`](#feature-assignment_rhs_atom)  
+[🔼 feature `augmented_assignment`](#feature-augmented_assignment)  
+[🔽 feature `variable_update`](#feature-variable_update)  
+
+##### Specification
+
+```sql
+SELECT "variable_update_by_augmented_assignment",
+       lhs_acc.name_suffix || ":" || rhs_var.name_suffix,
+       op.span,
+       op.path
+FROM t_augmented_assignment AS op
+JOIN t_assignment_lhs_identifier AS lhs_acc ON (lhs_acc.path GLOB op.path || "?*")
+JOIN t_assignment_rhs_atom AS rhs_var ON (rhs_var.path GLOB op.path || "?*")
+GROUP BY op.span,
+         lhs_acc.name,
+         rhs_var.name
+```
+
+##### Example
+
+```python
+1   foo += a
+2   foo += [a]
+3   buzz += a + b + c
+4   s *= (x - 1) / x
+5   c[j] += c[i- 1]
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `variable_update_by_augmented_assignment:foo:a` | 1, 2 |
+| `variable_update_by_augmented_assignment:buzz:a` | 3 |
+| `variable_update_by_augmented_assignment:buzz:b` | 3 |
+| `variable_update_by_augmented_assignment:buzz:c` | 3 |
+| `variable_update_by_augmented_assignment:s:1` | 4 |
+| `variable_update_by_augmented_assignment:s:x` | 4 |
+| `variable_update_by_augmented_assignment:c:1` | 5 |
+| `variable_update_by_augmented_assignment:c:c` | 5 |
+| `variable_update_by_augmented_assignment:c:i` | 5 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `variable_update_by_method_call`
+
+The method must mutate the object it is applied on. Obviously, only a handful of such methods can be statically detected.
+
+##### Derivations
+
+[🔼 feature `call_argument`](#feature-call_argument)  
+[🔼 feature `method_call`](#feature-method_call)  
+[🔼 feature `method_call_name`](#feature-method_call_name)  
+[🔼 feature `method_call_object`](#feature-method_call_object)  
+[🔽 feature `variable_update`](#feature-variable_update)  
+
+##### Specification
+
+```sql
+SELECT "variable_update_by_method_call",
+       lhs_acc.name_suffix || ":" || rhs_var.name_suffix,
+       op.span,
+       op.path
+FROM t_method_call AS op
+JOIN t_method_call_object AS lhs_acc ON (lhs_acc.path GLOB op.path || "?*")
+JOIN t_method_call_name AS rhs_acc ON (rhs_acc.path GLOB op.path || "?*")
+JOIN t_call_argument AS rhs_var ON (rhs_var.path GLOB op.path || "?*")
+WHERE rhs_var.name_suffix != ""
+  AND rhs_acc.name_suffix REGEXP "(append|extend|insert|add|update)$"
+GROUP BY op.span,
+         lhs_acc.name,
+         rhs_var.name
+```
+
+##### Example
+
+```python
+1   foo.append(a)
+2   seq.append(int(s))
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `variable_update_by_method_call:foo:a` | 1 |
+| `variable_update_by_method_call:seq:s` | 2 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `variable_update`
+
+Match the update of a variable `x` and capture its name in the first part of the suffix. In the second part, match any atom distinct from `x` and participating to the update (this excludes any function name).
+
+##### Derivations
+
+[🔼 feature `variable_update_by_assignment`](#feature-variable_update_by_assignment)  
+[🔼 feature `variable_update_by_augmented_assignment`](#feature-variable_update_by_augmented_assignment)  
+[🔼 feature `variable_update_by_method_call`](#feature-variable_update_by_method_call)  
+[🔽 feature `accumulate_elements`](#feature-accumulate_elements)  
+[🔽 feature `accumulate_inputs`](#feature-accumulate_inputs)  
+
+##### Specification
+
+```sql
+SELECT "variable_update",
+       t.name_suffix,
+       t.span,
+       t.path
+FROM t
+WHERE name_prefix IN ("variable_update_by_assignment",
+                      "variable_update_by_augmented_assignment",
+                      "variable_update_by_method_call")
+```
+
+##### Example
+
+```python
+1   foo = foo + a
+2   foo += a
+3   foo.append(a)
+4   foo += [a]
+5   
+6   bar = bar.mult(5)
+7   bar = mult(bar, 5)
+8   
+9   fizz = fizz.upper() # no match
+10  fizz.process(a) # no match
+11  
+12  buzz += a + b + c
+13  s *= (x - 1) / x
+14  c[j] += c[i- 1]
+15  (x, y) = (y, x)
+16  (a, b) = (b, a + b)
+17  seq.append(int(s))
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `variable_update:foo:a` | 1, 2, 4, 3 |
+| `variable_update:bar:5` | 6, 7 |
+| `variable_update:buzz:a` | 12 |
+| `variable_update:buzz:b` | 12 |
+| `variable_update:buzz:c` | 12 |
+| `variable_update:s:1` | 13 |
+| `variable_update:s:x` | 13 |
+| `variable_update:c:1` | 14 |
+| `variable_update:c:c` | 14 |
+| `variable_update:c:i` | 14 |
+| `variable_update:x:y` | 15 |
+| `variable_update:y:x` | 15 |
+| `variable_update:a:b` | 16 |
+| `variable_update:b:a` | 16 |
+| `variable_update:seq:s` | 17 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `increment_variable`
+
+##### Derivations
+
+[🔽 feature `count_elements`](#feature-count_elements)  
+[🔽 feature `count_inputs`](#feature-count_inputs)  
+
+##### Specification
+
+```re
+               ^(.*)/_type=
+(   # augmented assignment
+                           AugAssign
+    \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
+    (
+        \n(?:\1.+\n)*?\1/assigntarget/id=(?P<SUFFIX>.+)
+    )?
+    \n(?:\1.+\n)*?\1/op/_type=Add
+    \n(?:\1.+\n)*?\1/assignvalue/n=1
+|   # simple assignment
+                           Assign
+    \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
+    \n(?:\1.+\n)*?\1/assigntargets/1/_hash=(?P<HASH>.+) # capture _hash
+    \n(?:\1.+\n)*?\1/assignvalue/_type=BinOp
+    \n(?:\1.+\n)*?\1/assignvalue/left/_hash=(?P=HASH) # match _hash
+    (
+        \n(?:\1.+\n)*?\1/assignvalue/left/id=(?P<SUFFIX>.+)
+    )?
+    \n(?:\1.+\n)*?\1/assignvalue/op/_type=Add
+    \n(?:\1.+\n)*?\1/assignvalue/right/n=1
+)
+```
+
+##### Example
+
+```python
+1   a = a + 1
+2   a = 1 + a # LIMITATION: no match for Yoda style
+3   b += 1
+4   a[i+j] += 1
+5   b[foo()] = b[foo()] + 1
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `increment_variable:a` | 1 |
+| `increment_variable:b` | 3 |
+| `increment_variable` | 4, 5 |
 
 --------------------------------------------------------------------------------
 
@@ -1415,7 +1749,7 @@ Swap two variables or two elements of an array with a 2-element tuple or list.
 ##### Specification
 
 ```re
-           ^(.*)/_type='Assign'
+           ^(.*)/_type=Assign
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/assigntargets/1/elts/1/_hash=(?P<HASH_A>.+)
 \n(?:\1.+\n)*?\1/assigntargets/1/elts/2/_hash=(?P<HASH_B>.+)
@@ -1447,11 +1781,11 @@ Update a variable by negating it.
 ##### Specification
 
 ```re
-           ^(.*)/_type='Assign'
+           ^(.*)/_type=Assign
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/assigntargets/1/_hash=(?P<HASH>.+) # capture hash
-\n(?:\1.+\n)*?\1/assignvalue/_type='UnaryOp'
-\n(?:\1.+\n)*?\1/assignvalue/op/_type='USub'
+\n(?:\1.+\n)*?\1/assignvalue/_type=UnaryOp
+\n(?:\1.+\n)*?\1/assignvalue/op/_type=USub
 \n(?:\1.+\n)*?\1/assignvalue/operand/_hash=(?P=HASH) # match hash
 ```
 
@@ -1495,9 +1829,9 @@ In Python, the term "function" encompasses any type of subroutine, be it a metho
 ##### Specification
 
 ```re
-           ^(.*)/_type='FunctionDef'
+           ^(.*)/_type=FunctionDef
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/name='(?P<SUFFIX>.+)'
+\n(?:\1.+\n)*?\1/name=(?P<SUFFIX>.+)
 \n(?:\1.+\n)* \1/.+/_pos=(?P<POS>.+)
 ```
 
@@ -1543,20 +1877,23 @@ In Python, the term "function" encompasses any type of subroutine, be it a metho
 
 #### Feature `return`
 
-Match `return` statements and, when the returned object is [_atomic_](#feature-call_argument), suffix it. Note that a `return` statement returning no value is denoted by `return:None`, not to be confounded with `return` (without suffix), which denotes the return of a non-atomic object.
+Match `return` statements and, when the returned object is an [_atom_](#feature-call_argument), suffix it. Note that a `return` statement returning no value is denoted by `return:None`, not to be confounded with `return` (without suffix), which denotes the return of a non-atomic object.
 
 ##### Derivations
 
+[🔽 feature `accumulate_inputs`](#feature-accumulate_inputs)  
 [🔽 feature `closure`](#feature-closure)  
+[🔽 feature `count_inputs`](#feature-count_inputs)  
 [🔽 feature `function_returning_something`](#feature-function_returning_something)  
+[🔽 feature `get_valid_input`](#feature-get_valid_input)  
 
 ##### Specification
 
 ```re
-           ^(.*)/_type='Return'
+           ^(.*)/_type=Return
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 (
-\n(?:\1.+\n)*?\1/value(/value|/n|/id)?='?(?P<SUFFIX>.+?)\b'?$
+\n(?:\1.+\n)*?\1/value(/value|/n|/id)?=(?P<SUFFIX>.+)
 )?
 ```
 
@@ -1589,7 +1926,7 @@ Match `return` statements and, when the returned object is [_atomic_](#feature-c
 
 #### Feature `yield`
 
-Match `yield` and `yieldfrom` _[expressions](https://docs.python.org/3/reference/expressions.html#yield-expressions)_ (generally used as statements) and, when the yielded object is [_atomic_](#feature-call_argument), suffix it.
+Match `yield` and `yieldfrom` _[expressions](https://docs.python.org/3/reference/expressions.html#yield-expressions)_ (generally used as statements) and, when the yielded object is an [atom](#feature-call_argument), suffix it.
 
 ##### Derivations
 
@@ -1598,10 +1935,10 @@ Match `yield` and `yieldfrom` _[expressions](https://docs.python.org/3/reference
 ##### Specification
 
 ```re
-           ^(.*)/_type='Yield(From)?'
+           ^(.*)/_type=Yield(From)?
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 (
-\n(?:\1.+\n)*?\1/value(/value|/n|/id)?='?(?P<SUFFIX>.+?)\b'?$
+\n(?:\1.+\n)*?\1/value(/value|/n|/id)?=(?P<SUFFIX>.+)
 )?
 ```
 
@@ -1648,10 +1985,8 @@ SELECT "generator",
        f.name_suffix,
        max(f.span_start) || "-" || min(f.span_end),
        max(f.path)
-FROM t f
-JOIN t y ON (y.path GLOB f.path || "?*")
-WHERE f.name_prefix = "function"
-  AND y.name_prefix = "yield"
+FROM t_function f
+JOIN t_yield y ON (y.path GLOB f.path || "?*")
 GROUP BY y.rowid
 ```
 
@@ -1692,11 +2027,9 @@ SELECT "function_returning_something",
        f.name_suffix,
        max(f.span_start) || "-" || min(f.span_end),
        max(f.path)
-FROM t f
-JOIN t r ON (r.path GLOB f.path || "?*")
-WHERE f.name_prefix = "function"
-  AND r.name_prefix = "return"
-  AND r.name_suffix != "None"
+FROM t_function f
+JOIN t_return r ON (r.path GLOB f.path || "?*")
+WHERE r.name_suffix != "None"
 GROUP BY r.rowid
 ```
 
@@ -1753,16 +2086,14 @@ A function returning nothing (aka procedure) is a function which is neither a ge
 
 ```sql
 SELECT "function_returning_nothing",
-       name_suffix,
-       span,
-       path
-FROM t
-WHERE name_prefix = "function"
-  AND span NOT IN
-    (SELECT span
-     FROM t
-     WHERE name_prefix IN ("function_returning_something",
-                           "generator") )
+       t_function.name_suffix,
+       t_function.span,
+       t_function.path
+FROM t_function
+LEFT JOIN t ON (t_function.span = t.span
+                AND t.name_prefix IN ("function_returning_something",
+                                      "generator"))
+WHERE t.span IS NULL
 ```
 
 ##### Example
@@ -1808,9 +2139,9 @@ WHERE name_prefix = "function"
 ##### Specification
 
 ```re
-           ^(.*)/_type='FunctionDef'
+           ^(.*)/_type=FunctionDef
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/name='(?P<SUFFIX>.+)'
+\n(?:\1.+\n)*?\1/name=(?P<SUFFIX>.+)
 \n(?:\1.+\n)*?\1/args/defaults/length=(?!0\n).+
 \n(?:\1.+\n)* \1/.+/_pos=(?P<POS>.+)
 ```
@@ -1840,10 +2171,10 @@ WHERE name_prefix = "function"
 ##### Specification
 
 ```re
-           ^(.*)/_type='FunctionDef'
+           ^(.*)/_type=FunctionDef
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/name='(?P<SUFFIX>.+)'
-\n(?:\1.+\n)*?\1/.+/_type='FunctionDef'
+\n(?:\1.+\n)*?\1/name=(?P<SUFFIX>.+)
+\n(?:\1.+\n)*?\1/.+/_type=FunctionDef
 \n(?:\1.+\n)* \1/.+/_pos=(?P<POS>.+)
 ```
 
@@ -1881,12 +2212,10 @@ SELECT "closure",
        f.name_suffix,
        max(f.span_start) || "-" || min(f.span_end),
        max(f.path)
-FROM t f
-JOIN t c ON (c.path GLOB f.path || "?*")
-JOIN t r ON (r.path GLOB f.path || "?*")
-WHERE f.name_prefix = "function"
-  AND c.name_prefix = "function"
-  AND r.name = "return:" || c.name_suffix
+FROM t_function f
+JOIN t_function c ON (c.path GLOB f.path || "?*")
+JOIN t_return r ON (r.path GLOB f.path || "?*")
+WHERE r.name_suffix = c.name_suffix
 GROUP BY c.rowid
 ```
 
@@ -1928,10 +2257,9 @@ SELECT "recursive_function",
        f.name_suffix,
        f.span,
        f.path
-FROM t f
-JOIN t c ON (c.path GLOB f.path || "?*")
-WHERE f.name_prefix = "function"
-  AND c.name = "function_call:" || f.name_suffix
+FROM t_function f
+JOIN t_function_call c ON (c.path GLOB f.path || "?*")
+WHERE c.name_suffix = f.name_suffix
 ```
 
 ##### Example
@@ -1966,12 +2294,11 @@ SELECT "deeply_recursive_function",
        f.name_suffix,
        f.span,
        f.path
-FROM t f
-JOIN t c1 ON (c1.path GLOB f.path || "?*")
-JOIN t c2 ON (c2.path GLOB c1.path || "?*")
-WHERE f.name_prefix = "function"
-  AND c1.name = "function_call:" || f.name_suffix
-  AND c2.name = "function_call:" || f.name_suffix
+FROM t_function f
+JOIN t_function_call c1 ON (c1.path GLOB f.path || "?*")
+JOIN t_function_call c2 ON (c2.path GLOB c1.path || "?*")
+WHERE c1.name_suffix = f.name_suffix
+  AND c2.name_suffix = f.name_suffix
 ```
 
 ##### Example
@@ -2007,19 +2334,17 @@ A function is body-recursive if and only if at least one of its recursive calls 
 
 ```sql
 SELECT "body_recursive_function",
-       f.name_suffix,
-       f.span,
-       f.path
-FROM t f
-JOIN t any_call ON (any_call.path GLOB f.path || "?*")
-WHERE f.name_prefix = "recursive_function"
-  AND any_call.name = "function_call:" || f.name_suffix
+       t_recursive_function.name_suffix,
+       t_recursive_function.span,
+       t_recursive_function.path
+FROM t_recursive_function
+JOIN t_function_call ON (t_function_call.path GLOB t_recursive_function.path || "?*")
+WHERE t_function_call.name_suffix = t_recursive_function.name_suffix
   AND NOT EXISTS
     (SELECT 1
-     FROM t tail_call
-     WHERE tail_call.name_prefix = "function_tail_call"
-       AND tail_call.path = any_call.path )
-GROUP BY f.span
+     FROM t_function_tail_call
+     WHERE t_function_tail_call.path = t_function_call.path )
+GROUP BY t_recursive_function.span
 ```
 
 ##### Example
@@ -2089,13 +2414,9 @@ SELECT "tail_recursive_function",
        f.name_suffix,
        f.span,
        f.path
-FROM t f
-WHERE f.name_prefix = "recursive_function" -- A recursive function...
-  AND NOT EXISTS -- which is not...
-    (SELECT 1
-     FROM t body_rec
-     WHERE body_rec.name_prefix = "body_recursive_function" -- body recursive.
-       AND body_rec.span = f.span)
+FROM t_recursive_function f
+LEFT JOIN t_body_recursive_function USING (span)
+WHERE t_body_recursive_function.rowid IS NULL
 ```
 
 ##### Example
@@ -2155,12 +2476,15 @@ Match an entire conditional (from the `if` clause to the last line of its body).
 
 ##### Derivations
 
+[🔽 feature `accumulate_inputs`](#feature-accumulate_inputs)  
+[🔽 feature `count_inputs`](#feature-count_inputs)  
+[🔽 feature `get_valid_input`](#feature-get_valid_input)  
 [🔽 feature `nested_if`](#feature-nested_if)  
 
 ##### Specification
 
 ```re
-           ^(.*)/_type='If'
+           ^(.*)/_type=If
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)* \1/.+/_pos=(?P<POS>.+)
 ```
@@ -2206,34 +2530,46 @@ else:
 
 --------------------------------------------------------------------------------
 
-#### Feature `if_test_id`
+#### Feature `if_test_atom`
 
-Match any identifier present in the condition of an `if` statement.
+Match and suffix any [atom](#feature-call_argument) present in the condition of an `if` statement.
+
+##### Derivations
+
+[🔽 feature `accumulate_inputs`](#feature-accumulate_inputs)  
+[🔽 feature `count_inputs`](#feature-count_inputs)  
+[🔽 feature `get_valid_input`](#feature-get_valid_input)  
 
 ##### Specification
 
 ```re
-           ^(.*)/_type='If'
-\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
+           ^(.*)/_type=If
 (
-\n(?:\1.+\n)*?\1/test/.+/id='(?P<SUFFIX>.+)'
+\n(?:\1.+\n)*?\1/test(?P<_1>/.*)   /_pos=(?P<POS>.+)
+\n            \1/test(?P=_1)       /(value|n|(?<!func/)id)=(?P<SUFFIX>.+)
 )+
 ```
 
 ##### Example
 
 ```python
-1   if foo(bar) == biz:
+1   if foo(bar) == biz: # no match for "foo"
 2       pass
+3   if a.b(c) > (d + e) / 2: # no match for "b"
+4       pass
 ```
 
 ##### Matches
 
 | Label | Lines |
 |:--|:--|
-| `if_test_id:bar` | 1 |
-| `if_test_id:biz` | 1 |
-| `if_test_id:foo` | 1 |
+| `if_test_atom:bar` | 1 |
+| `if_test_atom:biz` | 1 |
+| `if_test_atom:2` | 3 |
+| `if_test_atom:a` | 3 |
+| `if_test_atom:c` | 3 |
+| `if_test_atom:d` | 3 |
+| `if_test_atom:e` | 3 |
 
 --------------------------------------------------------------------------------
 
@@ -2253,7 +2589,7 @@ Match the body of the branch “`then`” of an `if` statement.
 |   # capture any orelse block whose length is greater than 1
     (?<!length=1\n).*/orelse/\d+
 )
-                /_type='If'
+                /_type=If
 \n(?:\1.+\n)*?\1/body/1/_pos=(?P<POS>.+)
 (
 \n(?:\1.+\n)* \1/body/.*/_pos=(?P<POS>.+)
@@ -2307,7 +2643,7 @@ Match the body of an `elif` clause, which is (or could be rewritten as) an `else
 
 ```re
            ^(.*)/orelse/length=1
-\n(?:\1.+\n)*?\1/orelse/1/_type='If'
+\n(?:\1.+\n)*?\1/orelse/1/_type=If
 \n(?:\1.+\n)*?\1/orelse/1/body/1/_pos=(?P<POS>.+)
 (
 \n(?:\1.+\n)* \1/orelse/1/body/.+/_pos=(?P<POS>.+)
@@ -2366,14 +2702,14 @@ Match the body of the possible `else` branch of an `if` statement.
 ##### Specification
 
 ```re
-           ^(.*)/_type='If'
+           ^(.*)/_type=If
 \n(?:\1.+\n)*?\1/orelse/
 (   # there is at least two statements in the else branch,
                         length=\d+(?<![01])
 \n(?:\1.+\n)*?\1/orelse/1/_pos=(?P<POS>.+)
 |   # or only one, but distinct from If (otherwise, this is an elif)
                         length=1
-\n(?:\1.+\n)*?\1/orelse/1/_type='.+?(?<!If)'
+\n(?:\1.+\n)*?\1/orelse/1/_type=.+?(?<!If)
 \n(?:\1.+\n)*?\1/orelse/1/_pos=(?P<POS>.+)
 )
 (
@@ -2428,20 +2764,19 @@ Match an `if` clause nested in _n_ other `if` clauses, suffixing it by _n_.
 ```sql
 SELECT "nested_if",
        count(*),
-       inner_if.span,
-       inner_if.path
-FROM t outer_branch
-JOIN t inner_if ON (outer_branch.span_start <= inner_if.span_start
-                    AND inner_if.span_end <= outer_branch.span_end)
-WHERE outer_branch.name_prefix IN ("if_then_branch",
-                                   "if_else_branch",
-                                   "if_elif_branch")
-  AND inner_if.name_prefix = "if"
-GROUP BY inner_if.span
-ORDER BY inner_if.span_start
+       t_if.span,
+       t_if.path
+FROM t branch
+JOIN t_if ON (branch.span_start <= t_if.span_start
+              AND t_if.span_end <= branch.span_end)
+WHERE branch.name_prefix IN ("if_then_branch",
+                             "if_else_branch",
+                             "if_elif_branch")
+GROUP BY t_if.span
+ORDER BY t_if.span_start
 ```
 
-**Remark.** A join condition `(inner_if.path GLOB outer_branch.path || "?*")` would not work here, since an `else` branch has no specific path in the AST.
+_Remark._ A join condition `(inner_if.path GLOB branch.path || "?*")` would not work here, since an `else` branch has no specific path in the AST.
 
 ##### Example
 
@@ -2487,17 +2822,33 @@ Match sequential loops, along with their iteration variable(s).
 ##### Derivations
 
 [🔽 feature `accumulate_elements`](#feature-accumulate_elements)  
+[🔽 feature `count_elements`](#feature-count_elements)  
 [🔽 feature `for_range`](#feature-for_range)  
 [🔽 feature `nested_for`](#feature-nested_for)  
 
 ##### Specification
 
 ```re
-           ^(.*)/_type='For'
+           ^(.*)/_type=For
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/target/_ids=(?P<SUFFIX>.+)
+(
+\n(?:\1.+\n)*?\1/target/(.+/)?id=(?P<SUFFIX>.+)
+)+
 \n(?:\1.+\n)* \1/.*/_pos=(?P<POS>.+)
 ```
+
+/body/1/body/2/_type=For
+/body/1/body/2/_pos=4:1-2-2-
+/body/1/body/2/target/_type=Tuple
+/body/1/body/2/target/_ids=a:b:c
+/body/1/body/2/target/_hash=0x8de92ead
+/body/1/body/2/target/_pos=4:1-2-2-0-
+/body/1/body/2/target/elts/length=2
+/body/1/body/2/target/elts/1/_type=Name
+/body/1/body/2/target/elts/1/_ids=a
+/body/1/body/2/target/elts/1/_hash=0x668ea8d0
+/body/1/body/2/target/elts/1/_pos=4:1-2-2-0-0-1-
+/body/1/body/2/target/elts/1/id=a
 
 ##### Example
 
@@ -2515,9 +2866,11 @@ Match sequential loops, along with their iteration variable(s).
 
 | Label | Lines |
 |:--|:--|
-| `for:a:b:c` | 4-7 |
 | `for:x` | 1-7 |
 | `for:y` | 2-3 |
+| `for:a` | 4-7 |
+| `for:b` | 4-7 |
+| `for:c` | 4-7 |
 
 --------------------------------------------------------------------------------
 
@@ -2528,9 +2881,9 @@ Iterate over the elements of a (named) collection.
 ##### Specification
 
 ```re
-           ^(.*)/_type='For'
+           ^(.*)/_type=For
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/iter/_type='Name'
+\n(?:\1.+\n)*?\1/iter/_type=Name
 \n(?:\1.+\n)* \1/.*/_pos=(?P<POS>.+)
 ```
 
@@ -2565,13 +2918,11 @@ Iterate over a range object.
 
 ```sql
 SELECT "for_range",
-       range_expr.name_suffix,
-       for_stmt.span,
-       for_stmt.path
-FROM t for_stmt
-JOIN t range_expr ON (range_expr.path GLOB for_stmt.path || "?*")
-WHERE for_stmt.name_prefix = "for"
-  AND range_expr.name_prefix = "range"
+       t_range.name_suffix,
+       t_for.span,
+       t_for.path
+FROM t_for
+JOIN t_range ON (t_range.path GLOB t_for.path || "?*")
 ```
 
 ##### Example
@@ -2608,9 +2959,9 @@ Iterate over index numbers and elements of a collection.
 ##### Specification
 
 ```re
-           ^(.*)/_type='For'
+           ^(.*)/_type=For
 \n(?:\1.+\n)*?\1/iter/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/iter/func/id='enumerate'
+\n(?:\1.+\n)*?\1/iter/func/id=enumerate
 \n(?:\1.+\n)* \1/.*/_pos=(?P<POS>.+)
 ```
 
@@ -2636,13 +2987,13 @@ Iterate over index numbers of a collection.
 ##### Specification
 
 ```re
-           ^(.*)/_type='For'
+           ^(.*)/_type=For
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/iter/_type='Call'
-\n(?:\1.+\n)*?\1/iter/func/id='range'
+\n(?:\1.+\n)*?\1/iter/_type=Call
+\n(?:\1.+\n)*?\1/iter/func/id=range
 \n(?:\1.+\n)*?\1/iter/args/length=1
-\n(?:\1.+\n)*?\1/iter/args/1/_type='Call'
-\n(?:\1.+\n)*?\1/iter/args/1/func/id='len'
+\n(?:\1.+\n)*?\1/iter/args/1/_type=Call
+\n(?:\1.+\n)*?\1/iter/args/1/func/id=len
 \n(?:\1.+\n)*?\1/iter/keywords/length=0
 \n(?:\1.+\n)* \1/.*/_pos=(?P<POS>.+)
 ```
@@ -2677,10 +3028,8 @@ SELECT "nested_for",
        count(*),
        inner_loop.span,
        inner_loop.path
-FROM t outer_loop
-JOIN t inner_loop ON (inner_loop.path GLOB outer_loop.path || "?*")
-WHERE outer_loop.name_prefix = "for"
-  AND inner_loop.name_prefix = "for"
+FROM t_for outer_loop
+JOIN t_for inner_loop ON (inner_loop.path GLOB outer_loop.path || "?*")
 GROUP BY inner_loop.span
 ORDER BY inner_loop.span_start
 ```
@@ -2712,23 +3061,23 @@ A `for` loop with a counter `i` and a nested `for` loop which makes `i` iteratio
 ##### Specification
 
 ```re
-           ^(.*)/_type='For'
+           ^(.*)/_type=For
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/target/id=(?P<VAR>.+) # capture iteration variable
-\n(?:\1.+\n)*?\1/iter/_type='Call'
-\n(?:\1.+\n)*?\1/iter/func/id='range'
+\n(?:\1.+\n)*?\1/iter/_type=Call
+\n(?:\1.+\n)*?\1/iter/func/id=range
 \n(?:\1.+\n)*?\1/iter/args/length=1 # only range(arg1)
 (   # i goes from 0 to n, and j from 0 to i
-\n(?:\1.+\n)* \1/(?P<_1>(?:body|orelse)/\d+)/_type='For'
-\n(?:\1.+\n)*?\1/(?P=_1)                    /iter/_type='Call'
-\n(?:\1.+\n)*?\1/(?P=_1)                    /iter/func/id='range'
+\n(?:\1.+\n)* \1/(?P<_1>(?:body|orelse)/\d+)/_type=For
+\n(?:\1.+\n)*?\1/(?P=_1)                    /iter/_type=Call
+\n(?:\1.+\n)*?\1/(?P=_1)                    /iter/func/id=range
 \n(?:\1.+\n)*?\1/(?P=_1)                    /iter/args/length=1 # only range(arg1)
 \n(?:\1.+\n)* \1/(?P=_1)                    /iter/args/1.*/id=(?P=VAR) # match iteration variable
 |   # i goes from 0 to n, and j from i to n
 \n(?:\1.+\n)*?\1/iter/args/1/_hash=(?P<STOP>.+) # capture stop expression
-\n(?:\1.+\n)* \1/(?P<_1>(?:body|orelse)/\d+)/_type='For'
-\n(?:\1.+\n)*?\1/(?P=_1)                    /iter/_type='Call'
-\n(?:\1.+\n)*?\1/(?P=_1)                    /iter/func/id='range'
+\n(?:\1.+\n)* \1/(?P<_1>(?:body|orelse)/\d+)/_type=For
+\n(?:\1.+\n)*?\1/(?P=_1)                    /iter/_type=Call
+\n(?:\1.+\n)*?\1/(?P=_1)                    /iter/func/id=range
 \n(?:\1.+\n)*?\1/(?P=_1)                    /iter/args/length=2 # only range(arg1, arg2)
 \n(?:\1.+\n)* \1/(?P=_1)                    /iter/args/1(/.+)*/id=(?P=VAR) # match iteration variable
 \n(?:\1.+\n)* \1/(?P=_1)                    /iter/args/2(/.+)*/_hash=(?P=STOP) # match stop expression
@@ -2763,10 +3112,10 @@ Two nested `for` loops doing the same number of iterations.
 ##### Specification
 
 ```re
-           ^(.*)/_type='For'
+           ^(.*)/_type=For
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/iter/_hash=(?P<HASH>.+) # capture _hash
-\n(?:\1.+\n)* \1/(?P<_1>(?:body|orelse)/\d+)/_type='For'
+\n(?:\1.+\n)* \1/(?P<_1>(?:body|orelse)/\d+)/_type=For
 \n(?:\1.+\n)*?\1/(?P=_1)                    /iter/_hash=(?P=HASH) # match _hash
 \n(?:\1.+\n)* \1/.*/_pos=(?P<POS>.+)
 ```
@@ -2796,7 +3145,7 @@ Two nested `for` loops doing the same number of iterations.
 ##### Specification
 
 ```re
-           ^(.*)/_type='While'
+           ^(.*)/_type=While
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)* \1/.*/_pos=(?P<POS>.+)
 ```
@@ -2821,6 +3170,43 @@ Two nested `for` loops doing the same number of iterations.
 
 --------------------------------------------------------------------------------
 
+#### Feature `infinite_while`
+
+##### Derivations
+
+[🔽 feature `accumulate_inputs`](#feature-accumulate_inputs)  
+[🔽 feature `count_inputs`](#feature-count_inputs)  
+[🔽 feature `get_valid_input`](#feature-get_valid_input)  
+
+##### Specification
+
+```re
+           ^(.*)/_type=While
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
+\n(?:\1.+\n)*?\1/test/value=True
+\n(?:\1.+\n)* \1/.*/_pos=(?P<POS>.+)
+```
+
+##### Example
+
+```python
+1   while True:
+2       while bar():
+3           pass
+4       while True:
+5           pass
+6       else:
+7           pass
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `infinite_while` | 1-7, 4-7 |
+
+--------------------------------------------------------------------------------
+
 ## Exceptions
 
 --------------------------------------------------------------------------------
@@ -2830,7 +3216,7 @@ Two nested `for` loops doing the same number of iterations.
 ##### Specification
 
 ```re
-           ^(.*)/_type='Assert'
+           ^(.*)/_type=Assert
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 ```
 
@@ -2857,7 +3243,7 @@ Two nested `for` loops doing the same number of iterations.
 ##### Specification
 
 ```re
-           ^(.*)/_type='Try'
+           ^(.*)/_type=Try
 \n(?:\1.+\n)* \1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)* \1/.*/_pos=(?P<POS>.+)
 ```
@@ -2891,9 +3277,9 @@ Two nested `for` loops doing the same number of iterations.
 ##### Specification
 
 ```re
-           ^(.*)/_type='Raise'
+           ^(.*)/_type=Raise
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/exc(=(?P<SUFFIX>None)|/.*\bid='(?P<SUFFIX>.+)')
+\n(?:\1.+\n)*?\1/exc(=(?P<SUFFIX>None)|/.*\bid=(?P<SUFFIX>.+))
 ```
 
 ##### Example
@@ -2939,7 +3325,7 @@ Two nested `for` loops doing the same number of iterations.
 
 ```re
            ^(.*)/(?P<_1>handlers/\d+/(type/(func/|elts/\d+/)?)?)_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/(?P=_1)                                        (id='(?P<SUFFIX>.+)'|type=(?P<SUFFIX>None))
+\n(?:\1.+\n)*?\1/(?P=_1)                                        (id=(?P<SUFFIX>.+)|type=(?P<SUFFIX>None))
 ```
 
 ##### Example
@@ -2991,10 +3377,9 @@ SELECT "try_" || e.name_prefix,
        e.name_suffix,
        max(t.span_start) || "-" || min(t.span_end),
        max(t.path)
-FROM t t
+FROM t_try t
 JOIN t e ON (e.path GLOB t.path || "?*")
-WHERE t.name_prefix = "try"
-  AND e.name_prefix IN ("raise",
+WHERE e.name_prefix IN ("raise",
                         "except")
 GROUP BY e.rowid
 ```
@@ -3040,13 +3425,13 @@ GROUP BY e.rowid
 ##### Specification
 
 ```re
-           ^(.*)/_type='Import(From)?'
+           ^(.*)/_type=Import(From)?
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 (
 \n(?:\1.+\n)*?\1/module='(?P<SUFFIX>.+)'
 |
 (
-\n(?:\1.+\n)*?\1/names/\d+/name='(?P<SUFFIX>.+)'
+\n(?:\1.+\n)*?\1/names/\d+/name=(?P<SUFFIX>.+)
 )+
 )
 ```
@@ -3086,11 +3471,11 @@ GROUP BY e.rowid
 ##### Specification
 
 ```re
-           ^(.*)/_type='ImportFrom'
+           ^(.*)/_type=ImportFrom
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/module='.+'
 (
-\n(?:\1.+\n)*?\1/names/\d+/name='(?P<SUFFIX>.+)'
+\n(?:\1.+\n)*?\1/names/\d+/name=(?P<SUFFIX>.+)
 )+
 ```
 
@@ -3135,10 +3520,8 @@ SELECT "import",
                          END),
        m.span,
        m.path
-FROM t m
-LEFT JOIN t n ON (m.span = n.span
-                  AND n.name_prefix = "import_name")
-WHERE m.name_prefix = "import_module"
+FROM t_import_module m
+LEFT JOIN t_import_name n ON (m.span = n.span)
 ```
 
 ##### Example
@@ -3178,47 +3561,26 @@ WHERE m.name_prefix = "import_module"
 
 #### Feature `accumulate_elements`
 
-An accumulator is iteratively updated from its previous value and those of the iteration variable.
+An accumulator is iteratively updated from its previous value and those of the iteration variable. Suffixed by the name of this accumulator.
 
 ##### Derivations
 
-[🔼 feature `assignment_lhs_identifier`](#feature-assignment_lhs_identifier)  
-[🔼 feature `assignment_rhs_identifier`](#feature-assignment_rhs_identifier)  
-[🔼 feature `augmented_assignment`](#feature-augmented_assignment)  
-[🔼 feature `call_argument`](#feature-call_argument)  
 [🔼 feature `for`](#feature-for)  
-[🔼 feature `method_call`](#feature-method_call)  
-[🔼 feature `method_call_object`](#feature-method_call_object)  
+[🔼 feature `variable_update`](#feature-variable_update)  
 
 ##### Specification
 
 ```sql
 SELECT "accumulate_elements",
-       count(DISTINCT acc_left.name_suffix),
+       replace(update_stmt.name_suffix, ":" || for_loop.name_suffix, ""),
        for_loop.span,
        for_loop.path
-FROM t for_loop
-JOIN t iter_var ON (iter_var.path GLOB for_loop.path || "?*")-- Ensure iter_var is nested in the loop...
-JOIN t acc_left ON (iter_var.span = acc_left.span)-- and has same span as both acc_left...
-JOIN t acc_right ON (iter_var.span = acc_right.span)-- and acc_right.
-WHERE for_loop.name_prefix = "for" -- A for loop...
-  AND for_loop.name_suffix = iter_var.name_suffix -- whose iteration variable...
-  AND ((iter_var.name_prefix = "assignment_rhs_identifier" -- either appears on the RHS of an assignment...
-        AND (acc_left.name_prefix = "augmented_assignment" -- (which is either augmented...
-             OR (acc_left.name_suffix = acc_right.name_suffix -- or references the same identifier...
-                 AND acc_left.name_prefix = "assignment_lhs_identifier" -- on both left...
-                 AND acc_right.name_prefix = "assignment_rhs_identifier")))-- and right hand size)...
-       OR (iter_var.name_prefix = "call_argument" -- or appears as an argument...
-           AND acc_right.name_prefix = "method_call" -- of a call to a method...
-           AND acc_right.name_suffix REGEXP "(append|extend|insert|add|update)$" -- updating its object.
-           AND acc_left.name_prefix = "method_call_object" -- Ensure that the suffix is the accumulator...
- ))
-  AND for_loop.name_suffix != acc_left.name_suffix -- and is distinct from the iteration variable.
-GROUP BY for_loop.span
-ORDER BY for_loop.span_start
+FROM t_for for_loop
+JOIN t_variable_update update_stmt ON (update_stmt.path GLOB for_loop.path || "?*")
+WHERE update_stmt.name_suffix GLOB "*:" || for_loop.name_suffix
+GROUP BY for_loop.path,
+         update_stmt.name_suffix
 ```
-
-**Remark.** Note the user-defined function `REGEXP` in the `WHERE`clause. It calls the function `match()` of the third-party [`regex`](https://pypi.org/project/regex/) library.
 
 ##### Example
 
@@ -3232,7 +3594,7 @@ ORDER BY for_loop.span_start
 7   for i in range(10):
 8       acc_1 = combine(acc_1, i)
 9       if condition:
-10           acc_2 += i
+10          acc_2 += i
 11      else:
 12          acc_2 *= i
 13      pass
@@ -3255,8 +3617,60 @@ ORDER BY for_loop.span_start
 
 | Label | Lines |
 |:--|:--|
-| `accumulate_elements:1` | 3-5, 14-15, 19-21 |
-| `accumulate_elements:2` | 7-13 |
+| `accumulate_elements:acc` | 3-5, 14-15, 19-21 |
+| `accumulate_elements:acc_1` | 7-13 |
+| `accumulate_elements:acc_2` | 7-13 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `count_elements`
+
+##### Derivations
+
+[🔼 feature `assignment_lhs_identifier`](#feature-assignment_lhs_identifier)  
+[🔼 feature `for`](#feature-for)  
+[🔼 feature `increment_variable`](#feature-increment_variable)  
+
+##### Specification
+
+```sql
+SELECT "count_elements",
+       inc.name_suffix,
+       min(for_loop.span_start) || "-" || max(for_loop.span_end),
+       for_loop.path
+FROM t_for for_loop
+JOIN t_increment_variable inc ON (inc.path GLOB for_loop.path || "?*")
+WHERE NOT EXISTS
+    (SELECT *
+     FROM t_assignment_lhs_identifier x
+     WHERE (x.name_suffix = inc.name_suffix
+            AND x.span != inc.span
+            AND x.path GLOB for_loop.path || "?*") )
+GROUP BY inc.path
+```
+
+##### Example
+
+```python
+1   for i1 in s1:
+2       c1 = 0
+3       c2 = 1
+4       for i2 in s2:
+5           c2 += 1
+6           c3 = 0
+7           for i3 in s3:
+8               if foo(i2, i3):
+9                   c3 += 1
+10              c1 = c1 + 1
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `count_elements:c1` | 4-10 |
+| `count_elements:c2` | 4-10 |
+| `count_elements:c3` | 7-10 |
 
 --------------------------------------------------------------------------------
 
@@ -3267,14 +3681,14 @@ An accumulation pattern that, from a given collection, returns a list containing
 ##### Specification
 
 ```re
-           ^(.*)/_type='For'
+           ^(.*)/_type=For
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/target/id=(?P<ID_1>.+) # capture the iteration variable
-\n(?:\1.+\n)*?\1/(?P<_1>(?:body|orelse)/\d+)/_type='If'
+\n(?:\1.+\n)*?\1/(?P<_1>(?:body|orelse)/\d+)/_type=If
 \n(?:\1.+\n)* \1/(?P=_1)                /test/args/\d+/id=(?P=ID_1) # match it in an inner conditional test
 \n(?:\1.+\n)* \1/(?P=_1)                /(?P<_2>(?:body|orelse)/\d+)/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/(?P=_1)                /(?P=_2)                    /value/_type='Call'
-\n(?:\1.+\n)*?\1/(?P=_1)                /(?P=_2)                    /value/func/attr='append'
+\n(?:\1.+\n)*?\1/(?P=_1)                /(?P=_2)                    /value/_type=Call
+\n(?:\1.+\n)*?\1/(?P=_1)                /(?P=_2)                    /value/func/attr=append
 \n(?:\1.+\n)*?\1/(?P=_1)                /(?P=_2)                    /value/args/1/id=(?P=ID_1) # match it in an append()
 \n(?:\1.+\n)* \1.*/_pos=(?P<POS>.+)
 ```
@@ -3305,20 +3719,20 @@ An accumulation pattern that, from a given collection, returns the best element 
 ##### Specification
 
 ```re
-           ^(.*)/(?P<_1>(?:body|orelse)/\d+)/_type='Assign'
-\n(?:\1.+\n)*?\1/(?P=_1)                /assigntargets/1/id='(?P<CANDIDATE>.+)' # capture candidate
-\n(?:\1.+\n)* \1/(?P<_2>(?:body|orelse)/\d+)/_type='For'
+           ^(.*)/(?P<_1>(?:body|orelse)/\d+)/_type=Assign
+\n(?:\1.+\n)*?\1/(?P=_1)                /assigntargets/1/id=(?P<CANDIDATE>.+) # capture candidate
+\n(?:\1.+\n)* \1/(?P<_2>(?:body|orelse)/\d+)/_type=For
 \n(?:\1.+\n)*?\1/(?P=_2)                /_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/(?P=_2)                /target/id='(?P<ITER_VAR>.+)' # capture iteration variable
-\n(?:\1.+\n)* \1/(?P=_2)                /(?P<_3>(?:body|orelse)/\d+)/_type='If'
+\n(?:\1.+\n)*?\1/(?P=_2)                /target/id=(?P<ITER_VAR>.+) # capture iteration variable
+\n(?:\1.+\n)* \1/(?P=_2)                /(?P<_3>(?:body|orelse)/\d+)/_type=If
 \n(?:\1.+\n)*?\1/(?P=_2)                /(?P=_3)                    /test/_ids=(?=.*?\b(?P=ITER_VAR)\b)
                                                                                (?=.*?\b(?P=CANDIDATE)\b)
                                                                                .* # match both
-\n(?:\1.+\n)* \1/(?P=_2)                /(?P=_3)                    /test/.*/id='(?P=CANDIDATE)' # match candidate
-\n(?:\1.+\n)* \1/(?P=_2)                /(?P=_3)                    /(?P<_4>(?:body|orelse)/\d+)/_type='Assign'
+\n(?:\1.+\n)* \1/(?P=_2)                /(?P=_3)                    /test/.*/id=(?P=CANDIDATE) # match candidate
+\n(?:\1.+\n)* \1/(?P=_2)                /(?P=_3)                    /(?P<_4>(?:body|orelse)/\d+)/_type=Assign
 \n(?:\1.+\n)*?\1/(?P=_2)                /(?P=_3)                    /(?P=_4)                /_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/(?P=_2)                /(?P=_3)                    /(?P=_4)                /assigntargets/1/id='(?P=CANDIDATE)' # match candidate
-\n(?:\1.+\n)*?\1/(?P=_2)                /(?P=_3)                    /(?P=_4)                /assignvalue/id='(?P=ITER_VAR)' # match iteration variable
+\n(?:\1.+\n)*?\1/(?P=_2)                /(?P=_3)                    /(?P=_4)                /assigntargets/1/id=(?P=CANDIDATE) # match candidate
+\n(?:\1.+\n)*?\1/(?P=_2)                /(?P=_3)                    /(?P=_4)                /assignvalue/id=(?P=ITER_VAR) # match iteration variable
 (
 \n(?:\1.+\n)* \1(?P=_2)                /(?P=_3).*/_pos=(?P<POS>.+)
 )?
@@ -3357,12 +3771,12 @@ Check whether all elements of a collection satisfy a predicate.
 ##### Specification
 
 ```re
-          ^(.*?)/(?P<_1>(?:body|orelse)/\d+)/_type='For'
+          ^(.*?)/(?P<_1>(?:body|orelse)/\d+)/_type=For
 \n(?:\1.+\n)*?\1/(?P=_1)                    /_pos=(?P<POS>.+)
-\n(?:\1.+\n)* \1/(?P=_1)                    /(?P<_2>(?:body|orelse)/\d+)/_type='If'
-\n(?:\1.+\n)* \1/(?P=_1)                    /(?P=_2)                    /(?P<_3>(?:body|orelse)/\d+)/_type='Return'
+\n(?:\1.+\n)* \1/(?P=_1)                    /(?P<_2>(?:body|orelse)/\d+)/_type=If
+\n(?:\1.+\n)* \1/(?P=_1)                    /(?P=_2)                    /(?P<_3>(?:body|orelse)/\d+)/_type=Return
 \n(?:\1.+\n)*?\1/(?P=_1)                    /(?P=_2)                    /(?P=_3)                    /value/value=False
-\n(?:\1.+\n)* \1/(?P<_4>(?:body|orelse)/\d+)/_type='Return'
+\n(?:\1.+\n)* \1/(?P<_4>(?:body|orelse)/\d+)/_type=Return
 \n(?:\1.+\n)*?\1/(?P=_4)                    /_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/(?P=_4)                    /value/value=True
 ```
@@ -3392,12 +3806,12 @@ Check whether any element of a collection satisfies a predicate.
 ##### Specification
 
 ```re
-          ^(.*?)/(?P<_1>(?:body|orelse)/\d+)/_type='For'
+          ^(.*?)/(?P<_1>(?:body|orelse)/\d+)/_type=For
 \n(?:\1.+\n)*?\1/(?P=_1)                    /_pos=(?P<POS>.+)
-\n(?:\1.+\n)* \1/(?P=_1)                    /(?P<_2>(?:body|orelse)/\d+)/_type='If'
-\n(?:\1.+\n)* \1/(?P=_1)                    /(?P=_2)                    /(?P<_3>(?:body|orelse)/\d+)/_type='Return'
+\n(?:\1.+\n)* \1/(?P=_1)                    /(?P<_2>(?:body|orelse)/\d+)/_type=If
+\n(?:\1.+\n)* \1/(?P=_1)                    /(?P=_2)                    /(?P<_3>(?:body|orelse)/\d+)/_type=Return
 \n(?:\1.+\n)*?\1/(?P=_1)                    /(?P=_2)                    /(?P=_3)                    /value/value=True
-\n(?:\1.+\n)* \1/(?P<_4>(?:body|orelse)/\d+)/_type='Return'
+\n(?:\1.+\n)* \1/(?P<_4>(?:body|orelse)/\d+)/_type=Return
 \n(?:\1.+\n)*?\1/(?P=_4)                    /_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/(?P=_4)                    /value/value=False
 ```
@@ -3427,12 +3841,12 @@ Linear search. Return the first element of a sequence satisfying a predicate.
 ##### Specification
 
 ```re
-           ^(.*)/_type='For'
+           ^(.*)/_type=For
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/target/id=(?P<ITER_VAR>.+) # capture the name of the iteration variable
-\n(?:\1.+\n)* \1/(?P<_1>(?:body|orelse)/.+)/_type='If' # The If appears at any depth in the loop
+\n(?:\1.+\n)* \1/(?P<_1>(?:body|orelse)/.+)/_type=If # The If appears at any depth in the loop
 \n(?:\1.+\n)* \1/(?P=_1)                   /test/.+/id=(?P=ITER_VAR) # The variable appears at any depth inside the condition
-\n(?:\1.+\n)*?\1/(?P=_1)                   /(?P<_2>(?:body|orelse)/\d+)/_type='Return'
+\n(?:\1.+\n)*?\1/(?P=_1)                   /(?P<_2>(?:body|orelse)/\d+)/_type=Return
 \n(?:\1.+\n)*?\1/(?P=_1)                   /(?P=_2)                    /_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/(?P=_1)                   /(?P=_2)                    /value/id=(?P=ITER_VAR) # ... and is returned
 ```
@@ -3455,7 +3869,7 @@ Linear search. Return the first element of a sequence satisfying a predicate.
 
 --------------------------------------------------------------------------------
 
-### Non sequential finite loops
+### Non-sequential finite loops
 
 --------------------------------------------------------------------------------
 
@@ -3466,23 +3880,23 @@ Evolve the value of a variable until it reaches a desired state.
 ##### Specification
 
 ```re
-           ^(.*)/_type='While'
+           ^(.*)/_type=While
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)* \1/test/.*/id='(?P<STATE>.+)' # capture state variable
+\n(?:\1.+\n)* \1/test/.*/id=(?P<STATE>.+) # capture state variable
 (   # the state variable either appears on both sides of a simple assignment
-\n(?:\1.+\n)* \1/(?P<_1>body/.*)/_type='Assign'
+\n(?:\1.+\n)* \1/(?P<_1>body/.*)/_type=Assign
 \n(?:\1.+\n)*?\1/(?P=_1)        /_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/(?P=_1)        /assigntargets/1/id='(?P=STATE)' # it is updated somewhere in the loop
+\n(?:\1.+\n)*?\1/(?P=_1)        /assigntargets/1/id=(?P=STATE) # it is updated somewhere in the loop
 \n(?:\1.+\n)*?\1/(?P=_1)        /assignvalue/_ids=.*\b(?P=STATE)\b.* # from its current value
 |   # or appears on LHS of an augmented assignement
-\n(?:\1.+\n)* \1/(?P<_1>body/.*)/_type='AugAssign'
+\n(?:\1.+\n)* \1/(?P<_1>body/.*)/_type=AugAssign
 \n(?:\1.+\n)*?\1/(?P=_1)        /_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/(?P=_1)        /assigntarget/id='(?P=STATE)' # it is augmented somewhere in the loop
+\n(?:\1.+\n)*?\1/(?P=_1)        /assigntarget/id=(?P=STATE) # it is augmented somewhere in the loop
 |   # or is mutated by calling a function or a method of this variable
-\n(?:\1.+\n)* \1/(?P<_1>body/.*)/_type='Expr'
+\n(?:\1.+\n)* \1/(?P<_1>body/.*)/_type=Expr
 \n(?:\1.+\n)*?\1/(?P=_1)        /_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/(?P=_1)        /value/_type='Call'
-\n(?:\1.+\n)*?\1/(?P=_1)        /value/.*/id='(?P=STATE)' # it is mutated somewhere in the loop
+\n(?:\1.+\n)*?\1/(?P=_1)        /value/_type=Call
+\n(?:\1.+\n)*?\1/(?P=_1)        /value/.*/id=(?P=STATE) # it is mutated somewhere in the loop
 )
 (
 \n(?:\1.+\n)* \1.*/_pos=(?P<POS>.+)
@@ -3513,57 +3927,145 @@ Evolve the value of a variable until it reaches a desired state.
 
 --------------------------------------------------------------------------------
 
-### Non sequential infinite loops
+### Non-sequential infinite loops
 
 --------------------------------------------------------------------------------
 
-#### Feature `accumulate_stream`
+#### Feature `get_valid_input`
 
-Accumulate the inputs until a sentinel value is encountered (accumulation expressed by: `acc = combine(x, acc)`).
+Interrogate a stream of inputs up to a valid value, and returning it.
+
+##### Derivations
+
+[🔼 feature `assignment_lhs_identifier`](#feature-assignment_lhs_identifier)  
+[🔼 feature `if`](#feature-if)  
+[🔼 feature `if_test_atom`](#feature-if_test_atom)  
+[🔼 feature `infinite_while`](#feature-infinite_while)  
+[🔼 feature `return`](#feature-return)  
 
 ##### Specification
 
-```re
-           ^(.*)/_type='While'
-\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/test/value=True
-\n(?:\1.+\n)* \1/(?:body|orelse)/\d+/assigntargets/.+/id='(?P<INPUT>.+)' # capture the name of the input
-\n(?:\1.+\n)* \1/(?P<_1>(?:body|orelse)/\d+)/_type='If'
-\n(?:\1.+\n)*?\1/(?P=_1)                /test/_ids=.*?\b(?P=INPUT)\b.* # the input is tested
-\n(?:\1.+\n)* \1/(?P=_1)                /(?P<_2>(?:body|orelse)/\d+)/_type='Return'
-\n(?:\1.+\n)*?\1/(?P=_1)                /(?P=_2)                    /value/id='(?P<ACC>.+)' # capture the name of the accumulator
-(   # the accumulator either appears on both sides of a simple assignment with the input
-\n(?:\1.+\n)* \1/(?P<_3>(?:body|orelse)/\d+)/_type='(?P<SUFFIX>Assign)'
-\n(?:\1.+\n)*?\1/(?P=_3)                    /_pos=(?P<POS>.+)
-\n(?:\1.+\n)* \1/(?P=_3)                    /assigntargets/.*/id='(?P=ACC)'
-\n(?:\1.+\n)*?\1/(?P=_3)                    /assignvalue/_ids=(?=.*\b(?P=INPUT)\b)
-                                                        (?=.*\b(?P=ACC)\b)
-                                                        .* # both appear in RHS
-|   # or is on LHS of an augmented assignement with the input
-\n(?:\1.+\n)* \1/(?P<_3>(?:body|orelse)/\d+)/_type='(?P<SUFFIX>AugAssign)'
-\n(?:\1.+\n)*?\1/(?P=_3)                    /_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/(?P=_3)                    /assigntarget/id='(?P=ACC)'
-\n(?:\1.+\n)* \1/(?P=_3)                    /assignvalue.*/id='(?P=INPUT)'
-|   # or should be mutated by calling a function on this accumulator and the iteration variable
-\n(?:\1.+\n)* \1/(?P<_3>(?:body|orelse)/\d+)/_type='Expr' # the whole line consists in an expression
-\n(?:\1.+\n)*?\1/(?P=_3)                    /_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/(?P=_3)                    /value/_type='Call'
-\n(?:\1.+\n)*?\1/(?P=_3)                    /value/_ids=(?=.*\b(?P=INPUT)\b)
-                                                        (?=.*\b(?P=ACC)\b)
-                                                        .+ # both appear in RHS
-\n(?:\1.+\n)*?\1/(?P=_3)                    /value/func/_type='(?P<SUFFIX>Name)'
-\n(?:\1.+\n)*?\1/(?P=_3)                    /value/func/id='(?!(?P=ACC)|(?P=INPUT)|breakpoint|delattr|eval|exec|help|input|open|print|setattr|super).+'
-|   # or should be mutated by calling a method of this accumulator, again on the iteration variable
-\n(?:\1.+\n)* \1/(?P<_3>(?:body|orelse)/\d+)/_type='Expr' # the whole line consists in an expression
-\n(?:\1.+\n)*?\1/(?P=_3)                    /_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/(?P=_3)                    /value/_type='Call'
-\n(?:\1.+\n)*?\1/(?P=_3)                    /value/func/_type='(?P<SUFFIX>Attribute)'
-\n(?:\1.+\n)*?\1/(?P=_3)                    /value/func/value/id='(?P=ACC)' # a method of acc is called on...
-\n(?:\1.+\n)* \1/(?P=_3)                    /value/args/\d+/id='(?P=INPUT)' # the iteration variable
+```sql
+SELECT "get_valid_input",
+       ret.name_suffix,
+       wt.span,
+       wt.path
+FROM t_infinite_while wt -- An infinite loop...
+JOIN t_assignment_lhs_identifier x1 ON (x1.path GLOB wt.path || "?*")-- features the assignment of a variable...
+JOIN t_if ON (t_if.path GLOB wt.path || "?*"
+              AND t_if.span_start > x1.span_end)-- followed by a conditional statement...
+JOIN t_if_test_atom x2 ON (x1.name_suffix = x2.name_suffix -- testing this variable...
+                           AND x2.span_start = t_if.span_start)
+JOIN t_return ret ON (ret.path GLOB t_if.path || "?*"
+                      AND ret.name_suffix = x1.name_suffix)-- and returning it.
+```
+
+##### Example
+
+```python
+1   def input_number_between(prompt, lower_bound, upper_bound):
+2       while True:
+3           number = literal_eval(input(prompt))
+4           if lower_bound <= number <= upper_bound:
+5               return number
+6           print(f"Your number should be between {lower_bound} and {upper_bound}!")
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `get_valid_input:number` | 2-6 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `count_inputs`
+
+Count inputs until a sentinel value is encountered.
+
+##### Derivations
+
+[🔼 feature `assignment_lhs_identifier`](#feature-assignment_lhs_identifier)  
+[🔼 feature `if`](#feature-if)  
+[🔼 feature `if_test_atom`](#feature-if_test_atom)  
+[🔼 feature `increment_variable`](#feature-increment_variable)  
+[🔼 feature `infinite_while`](#feature-infinite_while)  
+[🔼 feature `return`](#feature-return)  
+
+##### Specification
+
+```sql
+SELECT "count_inputs",
+       ret.name_suffix,
+       wt.span,
+       wt.path
+FROM t_infinite_while wt -- An infinite loop...
+JOIN t_assignment_lhs_identifier x1 ON (x1.path GLOB wt.path || "?*")-- features the assignment of a variable...
+JOIN t_if ON (t_if.path GLOB wt.path || "?*"
+              AND t_if.span_start > x1.span_end)-- followed by a conditional statement...
+JOIN t_if_test_atom x2 ON (x1.name_suffix = x2.name_suffix -- testing this variable...
+                           AND x2.span_start = t_if.span_start)
+JOIN t_return ret ON (ret.path GLOB t_if.path || "?*")-- and returning another variable (an accumulator)...
+JOIN t_increment_variable acc ON (acc.name_suffix = ret.name_suffix
+                                  AND acc.path GLOB wt.path || "?*" -- which is incremented somewhere in the loop...
+                                  AND acc.path NOT GLOB t_if.path || "?*" -- but not INSIDE the conditional statement.
 )
-(
-\n(?:\1.+\n)* \1.*/_pos=(?P<POS>.+)
-)?
+```
+
+##### Example
+
+```python
+1   def number_guessing(bound):
+2       print("I'm thinking of an integer in [1, %s]." % bound)
+3       number = randrange(bound) + 1
+4       trial_count = 1
+5       while True:
+6           candidate = int(input("Your guess #%s? " % trial_count))
+7           if candidate == number:
+8               print("Yes!")
+9               return trial_count
+10          print("Too %s!" % ("low" if candidate < number else "high"))
+11          trial_count += 1
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `count_inputs:trial_count` | 5-11 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `accumulate_inputs`
+
+Accumulate a stream of inputs until a sentinel value is encountered.
+
+##### Derivations
+
+[🔼 feature `assignment_lhs_identifier`](#feature-assignment_lhs_identifier)  
+[🔼 feature `if`](#feature-if)  
+[🔼 feature `if_test_atom`](#feature-if_test_atom)  
+[🔼 feature `infinite_while`](#feature-infinite_while)  
+[🔼 feature `return`](#feature-return)  
+[🔼 feature `variable_update`](#feature-variable_update)  
+
+##### Specification
+
+```sql
+SELECT "accumulate_inputs",
+       ret.name_suffix,
+       wt.span,
+       wt.path
+FROM t_infinite_while wt -- An infinite loop...
+JOIN t_assignment_lhs_identifier x1 ON (x1.path GLOB wt.path || "?*")-- features the assignment of a variable...
+JOIN t_if ON (t_if.path GLOB wt.path || "?*"
+              AND t_if.span_start > x1.span_end)-- followed by a conditional statement...
+JOIN t_if_test_atom x2 ON (x1.name_suffix = x2.name_suffix -- testing this variable...
+                           AND x2.span_start = t_if.span_start)
+JOIN t_return ret ON (ret.path GLOB t_if.path || "?*")-- and returning another variable (an accumulator)...
+JOIN t_variable_update acc ON (acc.span_start > t_if.span_start -- which is updated after the conditional...
+                               AND acc.span_end <= wt.span_end -- but before the end of the loop...
+                               AND acc.name_suffix = ret.name_suffix || ":" || x1.name_suffix) -- with the first variable.
 ```
 
 ##### Example
@@ -3576,7 +4078,7 @@ Accumulate the inputs until a sentinel value is encountered (accumulation expres
 5           if is_sentinel(x, y):
 6               return acc
 7           acc = combine(x, acc)
-8
+8   
 9   def accumulate_inputs():
 10      acc = seed
 11      while True:
@@ -3584,32 +4086,32 @@ Accumulate the inputs until a sentinel value is encountered (accumulation expres
 13          if x > y:
 14              return acc
 15          acc += abs(x)
-16
+16  
 17  def accumulate_inputs():
 18      acc = seed
 19      while True:
 20          x = read()
 21          if x > y:
 22              return acc
-23          foobar(acc, x)
-24
+23          foobar(acc, x) # paroxython: variable_update:acc:x
+24  
 25  def accumulate_inputs():
-26      acc = seed
+26      acc = []
 27      while True:
 28          x = read()
 29          if x > y:
 30              return acc
-31          acc.foobar(x)
+31          acc.append(x)
 ```
+
+_Remark._
+When the update is carried out by a function call, it must be indicated with a manual hint (see line 23).
 
 ##### Matches
 
 | Label | Lines |
 |:--|:--|
-| `accumulate_stream:Assign` | 3-7 |
-| `accumulate_stream:AugAssign` | 11-15 |
-| `accumulate_stream:Name` | 19-23 |
-| `accumulate_stream:Attribute` | 27-31 |
+| `accumulate_inputs:acc` | 3-7, 11-15, 19-23, 27-31 |
 
 --------------------------------------------------------------------------------
 
@@ -3651,7 +4153,7 @@ It may be interesting to indicate the category of the program with an all-encomp
 7   # paroxython: category:fun
 ```
 
-**Remarks.**
+_Remark._
 - The location of an all-encompassing hint does not matter, as long as it is on its own line.
 - Since all hints are stripped before labelling, the resulting source actually spans from line 1 to line 5.
 
@@ -3680,13 +4182,13 @@ When a conditional simply assigns different values to the same variable, it may 
 ##### Specification
 
 ```re
-           ^(.*)/_type='If'
+           ^(.*)/_type=If
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/body/length=1
-\n(?:\1.+\n)*?\1/body/1/_type='Assign'
+\n(?:\1.+\n)*?\1/body/1/_type=Assign
 \n(?:\1.+\n)*?\1/body/1/assigntargets/1/_hash=(?P<HASH>.+)
 \n(?:\1.+\n)*?\1/orelse/length=1
-\n(?:\1.+\n)*?\1/orelse/1/_type='Assign'
+\n(?:\1.+\n)*?\1/orelse/1/_type=Assign
 \n(?:\1.+\n)*?\1/orelse/1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/orelse/1/assigntargets/1/_hash=(?P=HASH)
 ```
@@ -3733,12 +4235,12 @@ When the RHS of an assignment consists in a binary operation whose left operand 
 ##### Specification
 
 ```re
-           ^(.*)/_type='Assign'
+           ^(.*)/_type=Assign
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/assigntargets/length=1
 \n(?:\1.+\n)*?\1/assigntargets/1/id=(?P<TARGET>.+)
-\n(?:\1.+\n)*?\1/assignvalue/_type='BinOp'
-\n(?:\1.+\n)*?\1/assignvalue/left/id=(?P=TARGET)
+\n(?:\1.+\n)*?\1/assignvalue/_type=BinOp
+\n(?:\1.+\n)*?\1/assignvalue/left/id=(?P=TARGET)\b
 ```
 
 ##### Example
@@ -3779,12 +4281,12 @@ When the `else` branch of a conditional is another conditional, it can be rewrit
 ##### Specification
 
 ```re
-           ^(.*)/_type='BoolOp'
+           ^(.*)/_type=BoolOp
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/op/_type='And'
-\n(?:\1.+\n)*?\1/values/1/_type='Compare'
+\n(?:\1.+\n)*?\1/op/_type=And
+\n(?:\1.+\n)*?\1/values/1/_type=Compare
 \n(?:\1.+\n)*?\1/values/1/comparators/1/_hash=(?P<HASH_1>.+) # capture the right operand of the left comparison
-\n(?:\1.+\n)*?\1/values/2/_type='Compare'
+\n(?:\1.+\n)*?\1/values/2/_type=Compare
 \n(?:\1.+\n)*?\1/values/2/left/_hash=(?P=HASH_1) # match the left operand of the right comparison
 ```
 
@@ -3827,11 +4329,11 @@ Match magic numbers (unnamed numerical constants) other than -1, 0, 1 and 2. A n
 (   # indented lines
                 /(?P<_1>(?:body|orelse)/.+)/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/(?P=_1)                   /n=(?!(-1|0|1|2)\n)
-|   # non indented lines
-                /_type='Assign'
+|   # unindented lines
+                /_type=Assign
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/assigntargets/1/id='.*?[a-z].*' # at least one lowercase letter
-\n(?:\1.+\n)*?\1/assignvalue/n=(?!(-1|0|1|2)\n)
+\n(?:\1.+\n)*?\1/assigntargets/1/id=.*?[a-z].* # at least one lowercase letter
+\n(?:\1.+\n)*?\1/assignvalue/n=(?!(-1|0|1|2)\b)
 )
 ```
 
@@ -3877,11 +4379,11 @@ When a predicate ends with a conditional whose sole purpose is to return `True` 
 ##### Specification
 
 ```re
-           ^(.*)/_type='If'
+           ^(.*)/_type=If
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/body/1/_type='Return'
+\n(?:\1.+\n)*?\1/body/1/_type=Return
 \n(?:\1.+\n)*?\1/body/1/value/value=(?P<BOOL>True|False) # name BOOL the value used here
-\n(?:\1.+\n)*?\1/orelse/1/_type='Return'
+\n(?:\1.+\n)*?\1/orelse/1/_type=Return
 \n(?:\1.+\n)*?\1/orelse/1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/orelse/1/value/value=(True|False)(?<!(?P=BOOL)) # and check not BOOL is used there
 ```

@@ -69,12 +69,16 @@ operator/plus/	unary_operator:UAdd
 operator/power/	binary_operator:Pow
 operator/substraction/	binary_operator:Sub
 operator/ternary/	conditional_expression
-pattern/elements/accumulate/	accumulate_elements:.+
+pattern/elements/accumulate/	accumulate_elements\b.+
+pattern/elements/accumulate/count	count_elements\b.+
 pattern/elements/filter/	filter_for
 pattern/elements/find/best/	find_best_element
 pattern/elements/find/first/	find_first_element
 pattern/elements/satisfy/all/	universal_quantifier
 pattern/elements/satisfy/some/	existential_quantifier
+pattern/inputs/accumulate/	accumulate_inputs\b.+
+pattern/inputs/accumulate/count/	count_inputs\b.+
+pattern/inputs/find_first_good/	get_valid_input\b.+
 subscript/index/	index
 subscript/index/arithmetic/	index_arithmetic
 subscript/index/backwards/	negative_index
@@ -102,7 +106,7 @@ type/elementary/number/floating_point	float_literal
 type/elementary/number/integer	int_literal
 type/elementary/string/	literal:Str
 variable/assignment/	assignment
-variable/assignment/augmented/	augmented_assignment
+variable/assignment/augmented/\1/	augmented_assignment:(.+)
 variable/assignment/chained/	chained_assignment
 variable/assignment/constant/	assignment_lhs_identifier:[[:upper:]0-9_]+
 -- EOF	
@@ -132,12 +136,8 @@ IO/standard/print/multiple
 IO/standard/print/newline	
 IO/standard/print/without_newline	
 pattern/elements/accumulate/collect	
-pattern/elements/accumulate/count	
 pattern/elements/accumulate/find_best/index	
 pattern/elements/find_first_good	
-pattern/inputs/accumulate	
-pattern/inputs/accumulate/count	
-pattern/inputs/find_first_good	
 pattern/states/accumulate	
 pattern/states/accumulate/collect	
 pattern/states/accumulate/count	

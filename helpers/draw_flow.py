@@ -14,10 +14,14 @@ Path(f"{base}.dot").write_text(
     % "\n".join(
         [
             '"db.json" [shape=cylinder fillcolor=moccasin]',
+            '"db.sqlite" [shape=cylinder fillcolor=moccasin]',
             '"spec.md" [shape=note fillcolor=moccasin]',
             '"default_taxonomy.tsv" [shape=note fillcolor=moccasin]',
             '"source files" [shape=folder fillcolor=moccasin]',
+            '"sqlite_queries" [shape=folder fillcolor=moccasin]',
             'make_db -> "db.json"',
+            'make_db -> "db.sqlite"',
+            '"db.sqlite" -> sqlite_queries',
             '"db.json" -> filter_programs',
             '"spec.md" -> parse_program',
             '"source files" -> generate_programs',

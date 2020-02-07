@@ -4,8 +4,11 @@
 - assignment / collatz_print.py / 5, 7
 - assignment_lhs_identifier:a / assignment.py / 1
 - assignment_lhs_identifier:n / collatz_print.py / 5, 7
-- assignment_rhs_identifier:b / assignment.py / 1
-- assignment_rhs_identifier:n / collatz_print.py / 5, 7
+- assignment_rhs_atom:1 / collatz_print.py / 7
+- assignment_rhs_atom:2 / collatz_print.py / 5
+- assignment_rhs_atom:3 / collatz_print.py / 7
+- assignment_rhs_atom:b / assignment.py / 1
+- assignment_rhs_atom:n / collatz_print.py / 5, 7
 - binary_operator:Add / collatz_print.py / 7
 - binary_operator:FloorDiv / collatz_print.py / 5
 - binary_operator:Mod / collatz_print.py / 4
@@ -41,8 +44,14 @@
 - if_elif_branch / fizzbuzz.py / 5, 7
 - if_else_branch / collatz_print.py / 7
 - if_else_branch / fizzbuzz.py / 9
-- if_test_id:i / fizzbuzz.py / 2, 4, 6
-- if_test_id:n / collatz_print.py / 4
+- if_test_atom:0 / collatz_print.py / 4
+- if_test_atom:0 / fizzbuzz.py / 2, 4, 6
+- if_test_atom:15 / fizzbuzz.py / 2
+- if_test_atom:2 / collatz_print.py / 4
+- if_test_atom:3 / fizzbuzz.py / 4
+- if_test_atom:5 / fizzbuzz.py / 6
+- if_test_atom:i / fizzbuzz.py / 2, 4, 6
+- if_test_atom:n / collatz_print.py / 4
 - if_then_branch / collatz_print.py / 5
 - if_then_branch / fizzbuzz.py / 3
 - int_literal / collatz_print.py / 2, 4, 4, 5, 7, 7
@@ -58,15 +67,21 @@
 - suggest_conditional_expression / collatz_print.py / 4-7
 - suggest_constant_definition / collatz_print.py / 7
 - suggest_constant_definition / fizzbuzz.py / 2, 4, 6
+- variable_update:n:1 / collatz_print.py / 7
+- variable_update:n:2 / collatz_print.py / 5
+- variable_update:n:3 / collatz_print.py / 7
+- variable_update_by_assignment:n:1 / collatz_print.py / 7
+- variable_update_by_assignment:n:2 / collatz_print.py / 5
+- variable_update_by_assignment:n:3 / collatz_print.py / 7
 - while / collatz_print.py / 2-7
 
 # Absent labels
 
 - accumulate_elements
-- accumulate_stream
+- accumulate_inputs
 - assertion
 - assignment_lhs_identifier
-- assignment_rhs_identifier
+- assignment_rhs_atom
 - augmented_assignment
 - binary_operator
 - body_recursive_function
@@ -81,6 +96,8 @@
 - comprehension
 - comprehension_for_count
 - conditional_expression
+- count_elements
+- count_inputs
 - deeply_recursive_function
 - divisibility_test
 - except
@@ -102,16 +119,20 @@
 - function_tail_call
 - function_with_default_positional_arguments
 - generator
-- if_test_id
+- get_valid_input
+- if_test_atom
 - imaginary_literal
 - import
 - import_module
 - import_name
+- increment_variable
 - index
 - index_arithmetic
+- infinite_while
 - lambda_function
 - literal
 - method_call
+- method_call_name
 - method_call_object
 - method_chaining
 - negation
@@ -134,4 +155,8 @@
 - try_raise|try_except
 - unary_operator
 - universal_quantifier
+- variable_update
+- variable_update_by_assignment
+- variable_update_by_augmented_assignment
+- variable_update_by_method_call
 - yield

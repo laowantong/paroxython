@@ -5,12 +5,14 @@ import pytest
 
 import context
 from make_snapshot import make_snapshot
-from paroxython.make_db import make_database, to_json
+from paroxython.make_db import Database
 
 
 def test_snapshot_simple_db(capsys):
-    dirty_fields = ["timestamp"]
-    sanitize = lambda d: {k: ("ignored" if k in dirty_fields else d[k]) for k in d}
-    db = make_database(["tests/data/simple"])
-    result = to_json(json.loads(to_json(db), object_hook=sanitize))
-    make_snapshot("snapshots/simple_db.json", result, capsys)
+    db = Database(["tests/data/simple"], ignore_timestamps=True)
+    make_snapshot("snapshots/simple_db.json", db.get_json(), capsys)
+
+
+def test_sqlite_simple_db(capsys):
+    db = Database(["tests/data/simple"])
+    db.write_sqlite("snapshots/simple_db.sqlite")

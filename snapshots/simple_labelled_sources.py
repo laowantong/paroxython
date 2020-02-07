@@ -3,7 +3,7 @@
 # ----------------------------------------------------------------------------------------
 a = b # assignment
       # assignment_lhs_identifier:a
-      # assignment_rhs_identifier:b
+      # assignment_rhs_atom:b
 
 # ----------------------------------------------------------------------------------------
 # tests/data/simple/collatz_print.py
@@ -24,26 +24,37 @@ def print_collatz(n): # added_block_label (-> +7)
                        # comparison_operator:Eq
                        # divisibility_test:2
                        # if (-> +3)
-                       # if_test_id:n
+                       # if_test_atom:0
+                       # if_test_atom:2
+                       # if_test_atom:n
                        # int_literal
                        # literal:Num
                        # suggest_conditional_expression (-> +3)
             n = n // 2 # assignment
                        # assignment_lhs_identifier:n
-                       # assignment_rhs_identifier:n
+                       # assignment_rhs_atom:2
+                       # assignment_rhs_atom:n
                        # if_then_branch
                        # int_literal
                        # suggest_augmented_assignment
+                       # variable_update:n:2
+                       # variable_update_by_assignment:n:2
         else: # unknown_label
             n = 3 * n + 1 # assignment
                           # assignment_lhs_identifier:n
-                          # assignment_rhs_identifier:n
+                          # assignment_rhs_atom:1
+                          # assignment_rhs_atom:3
+                          # assignment_rhs_atom:n
                           # binary_operator:Add
                           # binary_operator:Mult
                           # if_else_branch
                           # int_literal
                           # literal:Num
                           # suggest_constant_definition
+                          # variable_update:n:1
+                          # variable_update:n:3
+                          # variable_update_by_assignment:n:1
+                          # variable_update_by_assignment:n:3
     print(n) # call_argument:n
              # function_call:print
 
@@ -62,7 +73,9 @@ for i in range(1, 101): # call_argument:1
                     # comparison_operator:Eq
                     # divisibility_test:15
                     # if (-> +7)
-                    # if_test_id:i
+                    # if_test_atom:0
+                    # if_test_atom:15
+                    # if_test_atom:i
                     # int_literal
                     # literal:Num
                     # suggest_constant_definition
@@ -74,7 +87,9 @@ for i in range(1, 101): # call_argument:1
                      # comparison_operator:Eq
                      # divisibility_test:3
                      # if (-> +5)
-                     # if_test_id:i
+                     # if_test_atom:0
+                     # if_test_atom:3
+                     # if_test_atom:i
                      # int_literal
                      # literal:Num
                      # suggest_constant_definition
@@ -86,7 +101,9 @@ for i in range(1, 101): # call_argument:1
                      # comparison_operator:Eq
                      # divisibility_test:5
                      # if (-> +3)
-                     # if_test_id:i
+                     # if_test_atom:0
+                     # if_test_atom:5
+                     # if_test_atom:i
                      # int_literal
                      # literal:Num
                      # suggest_constant_definition
