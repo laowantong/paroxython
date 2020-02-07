@@ -7,7 +7,6 @@ import regex
 import context
 from make_snapshot import make_snapshot
 from paroxython.generate_labels import generate_labelled_programs, generate_labelled_sources
-from paroxython.make_db import make_database, to_json
 from paroxython.user_types import Span
 
 

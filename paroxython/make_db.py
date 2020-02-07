@@ -39,7 +39,7 @@ TaxonInfos = Dict[TaxonName, List[ProgramName]]
 
 
 class Database:
-    def __init__(self, directories: List[str], *args, **kargs) -> None:
+    def __init__(self, directories: List[str], ignore_timestamps=False, *args, **kargs) -> None:
         """collect all infos pertaining to the programs, the labels and the taxons."""
         programs: List[Program] = []
         for directory in directories:
@@ -48,10 +48,14 @@ class Database:
         taxonomy = Taxonomy()
         paths_taxons = list(taxonomy(programs))
 
+        get_timestamp = lambda program: str(datetime.fromtimestamp(program.path.stat().st_mtime))
+        if ignore_timestamps:
+            get_timestamp = lambda program: "ignored"
+
         self.programs: ProgramInfos = {}
         for program in programs:
             self.programs[ProgramName(str(program.path))] = {
-                "timestamp": str(datetime.fromtimestamp(program.path.stat().st_mtime)),
+                "timestamp": get_timestamp(program),
                 "source": program.source,
                 "labels": {},  # to be populated by inject_labels()
                 "taxons": {},  # to be populated by inject_taxons()
@@ -71,8 +75,8 @@ class Database:
         for (path, taxons) in paths_taxons:
             self.programs[ProgramName(str(path))]["taxons"] = prepared(taxons)
 
-    def write_json(self, path: str) -> None:
-        """Dump the data to JSON, reduce each list of spans to one line, write it."""
+    def get_json(self) -> str:
+        """Dump the data to JSON, reduce each list of spans to one line."""
         data = {
             "programs": self.programs,
             "labels": self.labels,
@@ -80,27 +84,43 @@ class Database:
         }
         text = json.dumps(data, indent=2)
         text = regex.sub(r"\s*\[\s+(\d+),\s+(\d+)\s+\](,?)\s+", r"[\1,\2]\3", text)
-        Path(path).write_text(text)
+        return text
 
     def write_sqlite(self, db_path: str) -> None:
-        program_rows: Tuple = []
-        label_rows: Tuple = []
-        taxon_rows: Tuple = []
+        program_rows: List[Tuple] = []
+        label_rows: List[Tuple] = []
+        taxon_rows: List[Tuple] = []
         for (path, info) in self.programs.items():
             source = f"{path}\n\n" + "\n".join(
                 f"{line_number: <4}{line}"
                 for (line_number, line) in enumerate(info["source"].split("\n"), 1)
             )
             program_rows.append((path, info["timestamp"], source))
-            for (name, spans) in info["labels"].items():
-                (prefix, _, suffix) = name.partition(":")
+            for (label_name, spans) in info["labels"].items():
+                (prefix, _, suffix) = label_name.partition(":")
                 for span in spans:
-                    span_string = "-".join(map(str, span)) if span[0] != span[1] else str(span[0])
-                    label_rows.append((name, prefix, suffix, span_string, span[0], span[1], path))
-            for (name, spans) in info["taxons"].items():
+                    label_rows.append(
+                        (
+                            label_name,
+                            prefix,
+                            suffix,
+                            "-".join(map(str, span)) if span[0] != span[1] else str(span[0]),
+                            span[0],
+                            span[1],
+                            path,
+                        )
+                    )
+            for (taxon_name, spans) in info["taxons"].items():
                 for span in spans:
-                    span_string = "-".join(map(str, span)) if span[0] != span[1] else str(span[0])
-                    taxon_rows.append((name, span_string, span[0], span[1], path))
+                    taxon_rows.append(
+                        (
+                            taxon_name,
+                            "-".join(map(str, span)) if span[0] != span[1] else str(span[0]),
+                            span[0],
+                            span[1],
+                            path,
+                        )
+                    )
 
         if Path(db_path).exists():  # In Python 3.8, use missing_ok=True parameter
             Path(db_path).unlink()
@@ -178,6 +198,6 @@ if __name__ == "__main__":
         # "../Algo/programs",
         "paroxython"
     ]
-    database = Database(directories)
-    database.write_json("db.json")
-    database.write_sqlite("db.sqlite")
+    db = Database(directories)
+    Path("db.json").write_text(db.get_json())
+    db.write_sqlite("db.sqlite")

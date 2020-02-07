@@ -1,11 +1,12 @@
 import sqlite3
 from collections import defaultdict
 from contextlib import suppress
+from typing import Dict
 
-from regex import match, compile  # type: ignore
+from regex import compile, match  # type: ignore
 
 from span import Span
-from user_types import Label, Labels, LabelsSpans, Query
+from user_types import Label, LabelName, Labels, LabelsSpans, Query
 
 
 class DB:
@@ -33,7 +34,7 @@ class DB:
     def create(self, labels: Labels) -> None:
         self.c.execute(DB.creation_query)
         self.update(labels)
-        self.added_table_labels = defaultdict(int)
+        self.added_table_labels: Dict[LabelName, int] = defaultdict(int)
 
     def read(self, query: Query) -> Labels:
         groups: LabelsSpans = defaultdict(list)
