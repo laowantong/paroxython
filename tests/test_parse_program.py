@@ -113,9 +113,9 @@ def derivation_map(text):
     for key in keys:
         result[key] = {}
         if key in derived_from:
-            result[key]["🔼"] = sorted(derived_from[key])
+            result[key]["⬆️"] = sorted(derived_from[key])
         if key in derived_into:
-            result[key]["🔽"] = sorted(derived_into[key])
+            result[key]["⬇️"] = sorted(derived_into[key])
     return result
 
 
