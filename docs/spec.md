@@ -40,6 +40,7 @@
 - [Statements](#statements)
   - [Assignments](#assignments)
       - [Feature `assignment`](#feature-assignment)
+      - [Feature `single_assignment`](#feature-single_assignment)
       - [Feature `augmented_assignment`](#feature-augmented_assignment)
       - [Feature `chained_assignment`](#feature-chained_assignment)
       - [Feature `assignment_lhs_identifier`](#feature-assignment_lhs_identifier)
@@ -103,7 +104,7 @@
       - [Feature `accumulate_elements` (SQL)](#feature-accumulate_elements)
       - [Feature `count_elements` (SQL)](#feature-count_elements)
       - [Feature `filter_for`](#feature-filter_for)
-      - [Feature `find_best_element`](#feature-find_best_element)
+      - [Feature `find_best_element` (SQL)](#feature-find_best_element)
       - [Feature `universal_quantifier`](#feature-universal_quantifier)
       - [Feature `existential_quantifier`](#feature-existential_quantifier)
       - [Feature `find_first_element`](#feature-find_first_element)
@@ -1284,6 +1285,39 @@ Match a comprehension with an `if` clause.
 
 --------------------------------------------------------------------------------
 
+#### Feature `single_assignment`
+
+##### Derivations
+
+[⬇️ feature `find_best_element`](#feature-find_best_element)  
+
+##### Specification
+
+```re
+           ^(.*)/_type=Assign
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
+\n(?:\1.+\n)*?\1/assigntargets/length=1
+\n(?:\1.+\n)*?\1/assigntargets/1/id=(?P<SUFFIX>.+)
+```
+
+##### Example
+
+```python
+1   a = b
+2   c = 42
+3   d[0] = e # no match
+4   (f, g) = divmod(42, 7) # no match
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `single_assignment:a` | 1 |
+| `single_assignment:c` | 2 |
+
+--------------------------------------------------------------------------------
+
 #### Feature `augmented_assignment`
 
 ##### Derivations
@@ -1355,6 +1389,7 @@ Capture any identifier appearing on the left hand side of an assignment (possibl
 [⬇️ feature `accumulate_inputs`](#feature-accumulate_inputs)  
 [⬇️ feature `count_elements`](#feature-count_elements)  
 [⬇️ feature `count_inputs`](#feature-count_inputs)  
+[⬇️ feature `find_best_element`](#feature-find_best_element)  
 [⬇️ feature `get_valid_input`](#feature-get_valid_input)  
 [⬇️ feature `variable_update_by_assignment`](#feature-variable_update_by_assignment)  
 [⬇️ feature `variable_update_by_augmented_assignment`](#feature-variable_update_by_augmented_assignment)  
@@ -1418,6 +1453,7 @@ Capture any [_atom_](#feature-call_argument) appearing on the right hand side of
 
 ##### Derivations
 
+[⬇️ feature `find_best_element`](#feature-find_best_element)  
 [⬇️ feature `variable_update_by_assignment`](#feature-variable_update_by_assignment)  
 [⬇️ feature `variable_update_by_augmented_assignment`](#feature-variable_update_by_augmented_assignment)  
 
@@ -2478,6 +2514,7 @@ Match an entire conditional (from the `if` clause to the last line of its body).
 
 [⬇️ feature `accumulate_inputs`](#feature-accumulate_inputs)  
 [⬇️ feature `count_inputs`](#feature-count_inputs)  
+[⬇️ feature `find_best_element`](#feature-find_best_element)  
 [⬇️ feature `get_valid_input`](#feature-get_valid_input)  
 [⬇️ feature `nested_if`](#feature-nested_if)  
 
@@ -2538,6 +2575,7 @@ Match and suffix any [atom](#feature-call_argument) present in the condition of 
 
 [⬇️ feature `accumulate_inputs`](#feature-accumulate_inputs)  
 [⬇️ feature `count_inputs`](#feature-count_inputs)  
+[⬇️ feature `find_best_element`](#feature-find_best_element)  
 [⬇️ feature `get_valid_input`](#feature-get_valid_input)  
 
 ##### Specification
@@ -2823,6 +2861,7 @@ Match sequential loops, along with their iteration variable(s).
 
 [⬇️ feature `accumulate_elements`](#feature-accumulate_elements)  
 [⬇️ feature `count_elements`](#feature-count_elements)  
+[⬇️ feature `find_best_element`](#feature-find_best_element)  
 [⬇️ feature `for_range`](#feature-for_range)  
 [⬇️ feature `nested_for`](#feature-nested_for)  
 
@@ -3705,26 +3744,38 @@ An accumulation pattern that, from a given collection, returns a list containing
 
 An accumulation pattern that, from a given collection, returns the best element verifying a certain condition.
 
+##### Derivations
+
+[⬆️ feature `assignment_lhs_identifier`](#feature-assignment_lhs_identifier)  
+[⬆️ feature `assignment_rhs_atom`](#feature-assignment_rhs_atom)  
+[⬆️ feature `for`](#feature-for)  
+[⬆️ feature `if`](#feature-if)  
+[⬆️ feature `if_test_atom`](#feature-if_test_atom)  
+[⬆️ feature `single_assignment`](#feature-single_assignment)  
+
 ##### Specification
 
-```re
-           ^(.*)/(?P<_1>(?:body|orelse)/\d+)/_type=Assign
-\n(?:\1.+\n)*?\1/(?P=_1)                /assigntargets/1/id=(?P<CANDIDATE>.+) # capture candidate
-\n(?:\1.+\n)* \1/(?P<_2>(?:body|orelse)/\d+)/_type=For
-\n(?:\1.+\n)*?\1/(?P=_2)                /_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/(?P=_2)                /target/id=(?P<ITER_VAR>.+) # capture iteration variable
-\n(?:\1.+\n)* \1/(?P=_2)                /(?P<_3>(?:body|orelse)/\d+)/_type=If
-\n(?:\1.+\n)*?\1/(?P=_2)                /(?P=_3)                    /test/_ids=(?=.*?\b(?P=ITER_VAR)\b)
-                                                                               (?=.*?\b(?P=CANDIDATE)\b)
-                                                                               .* # match both
-\n(?:\1.+\n)* \1/(?P=_2)                /(?P=_3)                    /test/.*/id=(?P=CANDIDATE) # match candidate
-\n(?:\1.+\n)* \1/(?P=_2)                /(?P=_3)                    /(?P<_4>(?:body|orelse)/\d+)/_type=Assign
-\n(?:\1.+\n)*?\1/(?P=_2)                /(?P=_3)                    /(?P=_4)                /_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/(?P=_2)                /(?P=_3)                    /(?P=_4)                /assigntargets/1/id=(?P=CANDIDATE) # match candidate
-\n(?:\1.+\n)*?\1/(?P=_2)                /(?P=_3)                    /(?P=_4)                /assignvalue/id=(?P=ITER_VAR) # match iteration variable
-(
-\n(?:\1.+\n)* \1(?P=_2)                /(?P=_3).*/_pos=(?P<POS>.+)
-)?
+```sql
+SELECT "find_best_element",
+       elt.name_suffix || ":" || cnd.name_suffix,
+       t_for.span,
+       t_for.path
+FROM t_for -- A foor loop...
+JOIN t_if ON (t_if.path GLOB t_for.path || "?*")-- enclosing a conditional statement...
+JOIN t_if_test_atom elt ON (elt.span_start = t_if.span_start -- (comparing...
+                            AND elt.name_suffix = t_for.name_suffix)-- the iteration variable...
+JOIN t_if_test_atom cnd ON (cnd.span_start = t_if.span_start
+                            AND elt.rowid != cnd.rowid)-- to a candidate)...
+JOIN t_single_assignment lhs ON (lhs.path GLOB t_if.path || "?*" -- enclosing...
+                                 AND cnd.name_suffix = lhs.name_suffix)--  a single assignment of the candidate...
+JOIN t_assignment_rhs_atom rhs ON (elt.name_suffix = rhs.name_suffix -- to the iteration variable.
+                                   AND rhs.path GLOB lhs.path || "?*")
+WHERE NOT EXISTS -- Ensure that there is no...
+    (SELECT *
+     FROM t_assignment_lhs_identifier -- other assignment...
+     WHERE name_suffix == lhs.name_suffix -- of the candidate...
+       AND span != lhs.span
+       AND path GLOB t_for.path || "?*" ) -- INSIDE the loop.
 ```
 
 ##### Example
@@ -3736,20 +3787,50 @@ An accumulation pattern that, from a given collection, returns the best element 
 4           if is_better(element, candidate):
 5               candidate = element
 6       return candidate
-7
+7   
 8   def find_maximum_element(elements):
 9       candidate = element[0]
 10      for element in elements:
 11          if candidate > element:
 12              candidate = element
 13      return candidate
+14  
+15  def longest_progression(elements):
+16      previous, *elements = elements
+17      candidate = [previous]
+18      best = [previous]
+19      for element in elements: # paroxython: find_best_element:element:best...
+20          if element <= previous:
+21              candidate = [element]
+22          else:
+23              candidate += [element]
+24              if len(candidate) > len(best):
+25                  best = candidate
+26          previous = element # paroxython: ...find_best_element:element:best
+27      return best
+28  
+29  greatest = 0
+30  for (i, (a, b)) in enumerate(couples, 1):
+31      if b * log(a) > greatest:
+32          greatest = b * log(a)
+33  
+34  for digit in word:
+35      if digit == previous_digit == "1":
+36          previous_digit = None
+37      else:
+38          previous_digit = digit
 ```
+
+_Limitation._ False negative when the iteration variable does not appear directly in the test of the conditional statement (cf. function `longest_progression()` above). Add a manual hint in such cases.
 
 ##### Matches
 
 | Label | Lines |
 |:--|:--|
-| `find_best_element` | 3-5, 10-12 |
+| `find_best_element:element:candidate` | 3-5, 10-12 |
+| `find_best_element:a:greatest` | 30-32 |
+| `find_best_element:b:greatest` | 30-32 |
+| `find_best_element:element:best` | 19-26 |
 
 --------------------------------------------------------------------------------
 

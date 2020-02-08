@@ -72,7 +72,7 @@ operator/ternary/	conditional_expression
 pattern/elements/accumulate/	accumulate_elements\b.+
 pattern/elements/accumulate/count	count_elements\b.+
 pattern/elements/filter/	filter_for
-pattern/elements/find/best/	find_best_element
+pattern/elements/find/best/	find_best_element\b.+
 pattern/elements/find/first/	find_first_element
 pattern/elements/satisfy/all/	universal_quantifier
 pattern/elements/satisfy/some/	existential_quantifier
@@ -106,6 +106,7 @@ type/elementary/number/floating_point	float_literal
 type/elementary/number/integer	int_literal
 type/elementary/string/	literal:Str
 variable/assignment/	assignment
+variable/assignment/single/	single_assignment:.+
 variable/assignment/augmented/\1/	augmented_assignment:(.+)
 variable/assignment/chained/	chained_assignment
 variable/assignment/constant/	assignment_lhs_identifier:[[:upper:]0-9_]+
@@ -164,7 +165,6 @@ variable/assignment/augmented/subscript
 variable/assignment/iteration_variable	
 variable/assignment/iteration_variable/tuple	
 variable/assignment/parallel/subscript	
-variable/assignment/single	
 variable/assignment/single/subscript	
 variable/scope/global	
 variable/scope/local	

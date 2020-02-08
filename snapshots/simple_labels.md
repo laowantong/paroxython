@@ -63,6 +63,8 @@
 - literal:Str / fizzbuzz.py / 3, 5, 7
 - range:1:101 / fizzbuzz.py / 1
 - return / is_even.py / 2
+- single_assignment:a / assignment.py / 1
+- single_assignment:n / collatz_print.py / 5, 7
 - suggest_augmented_assignment / collatz_print.py / 5
 - suggest_conditional_expression / collatz_print.py / 4-7
 - suggest_constant_definition / collatz_print.py / 7
@@ -142,6 +144,7 @@
 - raise
 - range
 - recursive_function
+- single_assignment
 - slice
 - slice_step
 - square_nested_for

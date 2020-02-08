@@ -1,6 +1,6 @@
 {
   "tests/data/simple/assignment.py": {
-    "variable/assignment/": "1"
+    "variable/assignment/single/": "1"
   },
   "tests/data/simple/collatz_print.py": {
     "call/function/builtin/print/": "3 8",
@@ -14,7 +14,7 @@
     "test/equality/": "4",
     "test/equality/not/": "2",
     "type/elementary/number/integer": "2 4 4 5 7 7",
-    "variable/assignment/": "5 7"
+    "variable/assignment/single/": "5 7"
   },
   "tests/data/simple/fizzbuzz.py": {
     "call/function/builtin/print/": "3 5 7 9",

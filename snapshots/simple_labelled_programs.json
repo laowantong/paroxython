@@ -16,6 +16,10 @@
       [
         "assignment_rhs_atom:b",
         [[1,1]]
+      ],
+      [
+        "single_assignment:a",
+        [[1,1]]
       ]
     ]
   ],
@@ -132,6 +136,10 @@
       [
         "literal:Num",
         [[2,2],[4,4],[4,4],[7,7],[7,7]]
+      ],
+      [
+        "single_assignment:n",
+        [[5,5],[7,7]]
       ],
       [
         "suggest_augmented_assignment",

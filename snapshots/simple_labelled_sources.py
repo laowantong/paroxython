@@ -4,6 +4,7 @@
 a = b # assignment
       # assignment_lhs_identifier:a
       # assignment_rhs_atom:b
+      # single_assignment:a
 
 # ----------------------------------------------------------------------------------------
 # tests/data/simple/collatz_print.py
@@ -36,6 +37,7 @@ def print_collatz(n): # added_block_label (-> +7)
                        # assignment_rhs_atom:n
                        # if_then_branch
                        # int_literal
+                       # single_assignment:n
                        # suggest_augmented_assignment
                        # variable_update:n:2
                        # variable_update_by_assignment:n:2
@@ -50,6 +52,7 @@ def print_collatz(n): # added_block_label (-> +7)
                           # if_else_branch
                           # int_literal
                           # literal:Num
+                          # single_assignment:n
                           # suggest_constant_definition
                           # variable_update:n:1
                           # variable_update:n:3
