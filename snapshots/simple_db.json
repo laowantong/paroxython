@@ -58,9 +58,9 @@
         "while": [[2,7]]
       },
       "taxons": {
-        "call/function/builtin/print/": [[3,3],[8,8]],
         "control_flow/conditional/": [[4,7]],
         "control_flow/conditional/else/": [[7,7]],
+        "io/standard/print": [[3,3],[8,8]],
         "operator/addition/": [[7,7]],
         "operator/multiplication/": [[7,7]],
         "operator/percent/modulo/": [[4,4]],
@@ -105,12 +105,12 @@
         "suggest_constant_definition": [[2,2],[4,4],[6,6]]
       },
       "taxons": {
-        "call/function/builtin/print/": [[3,3],[5,5],[7,7],[9,9]],
         "call/function/builtin/range/": [[1,1]],
         "control_flow/conditional/": [[2,9],[4,9],[6,9]],
         "control_flow/conditional/else/": [[9,9]],
         "control_flow/conditional/else/chained/": [[5,5],[7,7]],
         "control_flow/loop/sequential/arithmetic/start/": [[1,9]],
+        "io/standard/print": [[3,3],[5,5],[7,7],[9,9]],
         "operator/percent/modulo/": [[2,2],[4,4],[6,6]],
         "test/equality/": [[2,2],[4,4],[6,6]],
         "type/elementary/number/integer": [[1,1],[1,1],[2,2],[2,2],[4,4],[4,4],[6,6],[6,6]],
@@ -349,15 +349,15 @@
       "tests/data/simple/assignment.py",
       "tests/data/simple/collatz_print.py"
     ],
-    "call/function/builtin/print/": [
-      "tests/data/simple/collatz_print.py",
-      "tests/data/simple/fizzbuzz.py"
-    ],
     "control_flow/conditional/": [
       "tests/data/simple/collatz_print.py",
       "tests/data/simple/fizzbuzz.py"
     ],
     "control_flow/conditional/else/": [
+      "tests/data/simple/collatz_print.py",
+      "tests/data/simple/fizzbuzz.py"
+    ],
+    "io/standard/print": [
       "tests/data/simple/collatz_print.py",
       "tests/data/simple/fizzbuzz.py"
     ],

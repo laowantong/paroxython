@@ -105,6 +105,7 @@
 - divisibility_test
 - except
 - existential_quantifier
+- falsey_literal
 - filter_for
 - filtered_comprehension
 - find_best_element
@@ -117,6 +118,7 @@
 - for_range
 - function
 - function_call
+- function_call_with_no_argument
 - function_returning_nothing
 - function_returning_something
 - function_tail_call

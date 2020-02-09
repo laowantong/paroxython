@@ -208,7 +208,7 @@ def main(): # function:main (-> +4), function_returning_nothing:main (-> +4)
 import statistics # import:statistics, import_module:statistics
 def mode(input_list): # function:mode (-> +7), function_returning_something:mode (-> +7)
     check_list = input_list.copy() # assignment, assignment_lhs_identifier:check_list, assignment_rhs_atom:input_list, method_call, method_call_name:copy, single_assignment:check_list
-    result = list() # assignment, assignment_lhs_identifier:result, function_call:list, single_assignment:result
+    result = list() # assignment, assignment_lhs_identifier:result, function_call:list, function_call_with_no_argument:list, single_assignment:result
     for x in input_list: # accumulate_elements:result (-> +4), for:x (-> +4), for_each (-> +4)
         result.append(input_list.count(x)) # call_argument:, call_argument:x, composition, method_call, method_call_name:append, method_call_name:count, method_call_object:result, variable_update:result:x, variable_update_by_method_call:result:x
         input_list.remove(x) # call_argument:x, method_call, method_call_name:remove, method_call_object:input_list
@@ -430,7 +430,7 @@ import math # import:math, import_module:math
 import functools # import:functools, import_module:functools
 import time # import:time, import_module:time
 from decimal import getcontext, Decimal # import:decimal:Decimal, import:decimal:getcontext, import_module:decimal, import_name:Decimal, import_name:getcontext
-getcontext().prec = 100 # assignment, assignment_rhs_atom:100, function_call:getcontext, int_literal, literal:Num
+getcontext().prec = 100 # assignment, assignment_rhs_atom:100, function_call:getcontext, function_call_with_no_argument:getcontext, int_literal, literal:Num
 def timer_decorator(func): # closure:timer_decorator (-> +10), function:timer_decorator (-> +10), function_returning_something:timer_decorator (-> +10), nested_function:timer_decorator (-> +10)
     def timer_wrapper(*args, **kwargs): # function:timer_wrapper (-> +8), function_returning_something:timer_wrapper (-> +8)
         start = time.time() # assignment, assignment_lhs_identifier:start, assignment_rhs_atom:time, method_call, method_call_name:time, single_assignment:start
@@ -794,8 +794,8 @@ from __main__ import simple_fibonacci
     )
     return exec_time # return:exec_time
 def main(): # function:main (-> +2), function_returning_nothing:main (-> +2)
-    matrix_exponentiation_time() # function_call:matrix_exponentiation_time
-    simple_fibonacci_time() # function_call:simple_fibonacci_time
+    matrix_exponentiation_time() # function_call:matrix_exponentiation_time, function_call_with_no_argument:matrix_exponentiation_time
+    simple_fibonacci_time() # function_call:simple_fibonacci_time, function_call_with_no_argument:simple_fibonacci_time
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/mobius_function.py
@@ -1236,7 +1236,7 @@ def main(): # function:main (-> +1), function_returning_nothing:main (-> +1)
 # ../Python/maths/test_prime_check.py
 # ----------------------------------------------------------------------------------------
 from .prime_check import Test # import:prime_check:Test, import_module:prime_check, import_name:Test
-Test() # function_call:Test
+Test() # function_call:Test, function_call_with_no_argument:Test
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/trapezoidal_rule.py

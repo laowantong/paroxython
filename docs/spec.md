@@ -4,6 +4,7 @@
       - [Feature `int_literal`](#feature-int_literal)
       - [Feature `float_literal`](#feature-float_literal)
       - [Feature `imaginary_literal`](#feature-imaginary_literal)
+      - [Feature `falsey_literal`](#feature-falsey_literal)
   - [Subscripts](#subscripts)
       - [Feature `index`](#feature-index)
       - [Feature `index_arithmetic`](#feature-index_arithmetic)
@@ -24,6 +25,7 @@
       - [Feature `short_circuit`](#feature-short_circuit)
   - [Calls](#calls)
       - [Feature `function_call`](#feature-function_call)
+      - [Feature `function_call_with_no_argument`](#feature-function_call_with_no_argument)
       - [Feature `function_tail_call`](#feature-function_tail_call)
       - [Feature `call_argument`](#feature-call_argument)
       - [Feature `method_call`](#feature-method_call)
@@ -273,6 +275,59 @@ In the AST, an imaginary literal contains the same symbols as a floating point l
 | Label | Lines |
 |:--|:--|
 | `imaginary_literal` | 4, 4, 4, 4, 4, 4, 4 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `falsey_literal`
+
+##### Specification
+
+```re
+           ^(.*)/_type=Expr
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
+\n(?:\1.+\n)*?\1/value/_type=
+(
+                             NameConstant
+\n(?:\1.+\n)*?\1/value/value=(?P<SUFFIX>None|False)
+|
+                             Num
+\n(?:\1.+\n)*?\1/value/n=(?P<SUFFIX>0|0\.0|0j)
+|
+                             (?P<SUFFIX>Str)
+\n(?:\1.+\n)*?\1/value/s=''
+|
+                             (?P<SUFFIX>Tuple|List|Dict)
+\n(?:\1.+\n)*?\1/value/(elts|keys)/length=0
+)$
+```
+
+##### Example
+
+```python
+1   None
+2   False
+3   0
+4   0.0
+5   0j
+6   ""
+7   ()
+8   []
+9   {}
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `falsey_literal:None` | 1 |
+| `falsey_literal:False` | 2 |
+| `falsey_literal:0` | 3 |
+| `falsey_literal:0.0` | 4 |
+| `falsey_literal:0j` | 5 |
+| `falsey_literal:Str` | 6 |
+| `falsey_literal:Tuple` | 7 |
+| `falsey_literal:List` | 8 |
+| `falsey_literal:Dict` | 9 |
 
 --------------------------------------------------------------------------------
 
@@ -805,7 +860,6 @@ When the value of the left operand suffices to determine the value of a boolean 
 ```re
            ^(.*)/_type=Call
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/func/_type=Name
 \n(?:\1.+\n)*?\1/func/id=(?P<SUFFIX>.+)
 ```
 
@@ -828,6 +882,34 @@ When the value of the left operand suffices to determine the value of a boolean 
 | `function_call:buzz` | 3 |
 | `function_call:fizz` | 4 |
 | `function_call:foobar` | 4 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `function_call_with_no_argument`
+
+##### Specification
+
+```re
+           ^(.*)/_type=Call
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
+\n(?:\1.+\n)*?\1/func/id=(?P<SUFFIX>.+)
+\n(?:\1.+\n)*?\1/args/length=0
+\n(?:\1.+\n)*?\1/keywords/length=0
+```
+
+##### Example
+
+```python
+1   foo()
+2   bar(x=1) # no match
+3   baz.qux() # no match
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `function_call_with_no_argument:foo` | 1 |
 
 --------------------------------------------------------------------------------
 

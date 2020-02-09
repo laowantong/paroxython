@@ -3,9 +3,9 @@
     "variable/assignment/single/": "1"
   },
   "tests/data/simple/collatz_print.py": {
-    "call/function/builtin/print/": "3 8",
     "control_flow/conditional/": "4-7",
     "control_flow/conditional/else/": "7",
+    "io/standard/print": "3 8",
     "operator/addition/": "7",
     "operator/multiplication/": "7",
     "operator/percent/modulo/": "4",
@@ -17,12 +17,12 @@
     "variable/assignment/single/": "5 7"
   },
   "tests/data/simple/fizzbuzz.py": {
-    "call/function/builtin/print/": "3 5 7 9",
     "call/function/builtin/range/": "1",
     "control_flow/conditional/": "2-9 4-9 6-9",
     "control_flow/conditional/else/": "9",
     "control_flow/conditional/else/chained/": "5 7",
     "control_flow/loop/sequential/arithmetic/start/": "1-9",
+    "io/standard/print": "3 5 7 9",
     "operator/percent/modulo/": "2 4 6",
     "test/equality/": "2 4 6",
     "type/elementary/number/integer": "1 1 2 2 4 4 6 6",

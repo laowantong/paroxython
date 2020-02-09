@@ -164,7 +164,7 @@ def solution(n): # function:solution (-> +12), function_returning_something:solu
         raise TypeError("Parameter n must be int or passive of cast to int.") # call_argument:, function_call:TypeError, literal:Str, raise:TypeError
     if n <= 0: # comparison_operator:LtE, if (-> +1), if_test_atom:0, if_test_atom:n, int_literal, literal:Num
         raise ValueError("Parameter n must be greater or equal to one.") # call_argument:, function_call:ValueError, if_then_branch, literal:Str, raise:ValueError
-    getcontext().prec = 100 # assignment, assignment_rhs_atom:100, function_call:getcontext, int_literal, literal:Num, suggest_constant_definition
+    getcontext().prec = 100 # assignment, assignment_rhs_atom:100, function_call:getcontext, function_call_with_no_argument:getcontext, int_literal, literal:Num, suggest_constant_definition
     phi = (Decimal(5) ** Decimal(0.5) + 1) / Decimal(2) # assignment, assignment_lhs_identifier:phi, assignment_rhs_atom:0.5, assignment_rhs_atom:1, assignment_rhs_atom:2, assignment_rhs_atom:5, binary_operator:Add, binary_operator:Div, binary_operator:Pow, call_argument:0.5, call_argument:2, call_argument:5, float_literal, function_call:Decimal, int_literal, literal:Num, single_assignment:phi, suggest_constant_definition
     index = (math.floor(math.log(n * (phi + 2), phi) - 1) // 3) * 3 + 2 # assignment, assignment_lhs_identifier:index, assignment_rhs_atom:1, assignment_rhs_atom:2, assignment_rhs_atom:3, assignment_rhs_atom:math, assignment_rhs_atom:n, assignment_rhs_atom:phi, binary_operator:Add, binary_operator:FloorDiv, binary_operator:Mult, binary_operator:Sub, call_argument:, call_argument:phi, composition, int_literal, literal:Num, method_call, method_call_name:floor, method_call_name:log, single_assignment:index, suggest_constant_definition
     num = Decimal(round(phi ** Decimal(index + 1))) / (phi + 2) # assignment, assignment_lhs_identifier:num, assignment_rhs_atom:1, assignment_rhs_atom:2, assignment_rhs_atom:index, assignment_rhs_atom:phi, binary_operator:Add, binary_operator:Div, binary_operator:Pow, call_argument:, composition, function_call:Decimal, function_call:round, int_literal, literal:Num, single_assignment:num
@@ -440,7 +440,7 @@ def prime_generator(): # function:prime_generator (-> +5), generator:prime_gener
             yield num # if_then_branch, yield:num
         num += 1 # assignment_lhs_identifier:num, assignment_rhs_atom:1, augmented_assignment:Add, int_literal, literal:Num, variable_increment:num, variable_update:num:1, variable_update_by_augmented_assignment:num:1
 def solution(n): # function:solution (-> +1), function_returning_something:solution (-> +1)
-    return next(itertools.islice(prime_generator(), n - 1, n)) # binary_operator:Sub, call_argument:, call_argument:n, composition, function_call:next, function_call:prime_generator, function_tail_call:next, int_literal, literal:Num, method_call, method_call_name:islice, return
+    return next(itertools.islice(prime_generator(), n - 1, n)) # binary_operator:Sub, call_argument:, call_argument:n, composition, function_call:next, function_call:prime_generator, function_call_with_no_argument:prime_generator, function_tail_call:next, int_literal, literal:Num, method_call, method_call_name:islice, return
 
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_08/sol1.py
@@ -629,7 +629,7 @@ def prime_generator(): # function:prime_generator (-> +5), generator:prime_gener
             yield num # if_then_branch, yield:num
         num += 1 # assignment_lhs_identifier:num, assignment_rhs_atom:1, augmented_assignment:Add, int_literal, literal:Num, variable_increment:num, variable_update:num:1, variable_update_by_augmented_assignment:num:1
 def solution(n): # function:solution (-> +1), function_returning_something:solution (-> +1)
-    return sum(takewhile(lambda x: x < n, prime_generator())) # call_argument:, comparison_operator:Lt, composition, function_call:prime_generator, function_call:sum, function_call:takewhile, function_tail_call:sum, lambda_function, return
+    return sum(takewhile(lambda x: x < n, prime_generator())) # call_argument:, comparison_operator:Lt, composition, function_call:prime_generator, function_call:sum, function_call:takewhile, function_call_with_no_argument:prime_generator, function_tail_call:sum, lambda_function, return
 
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_10/sol3.py
@@ -751,7 +751,7 @@ def triangle_number_generator(): # function:triangle_number_generator (-> +2), g
 def count_divisors(n): # function:count_divisors (-> +1), function_returning_something:count_divisors (-> +1)
     return sum([2 for i in range(1, int(n ** 0.5) + 1) if n % i == 0 and i * i != n]) # binary_operator:Add, binary_operator:Mod, binary_operator:Mult, binary_operator:Pow, boolean_operator:And, call_argument:, call_argument:1, comparison_operator:Eq, comparison_operator:NotEq, composition, comprehension:List, comprehension_for_count:1, divisibility_test, filtered_comprehension, float_literal, function_call:int, function_call:range, function_call:sum, function_tail_call:sum, int_literal, literal:Num, range:1:_, return, suggest_constant_definition
 def solution(): # function:solution (-> +1), function_returning_something:solution (-> +1)
-    return next(i for i in triangle_number_generator() if count_divisors(i) > 500) # call_argument:, call_argument:i, comparison_operator:Gt, composition, comprehension:Generator, comprehension_for_count:1, filtered_comprehension, function_call:count_divisors, function_call:next, function_call:triangle_number_generator, function_tail_call:next, int_literal, literal:Num, return, suggest_constant_definition
+    return next(i for i in triangle_number_generator() if count_divisors(i) > 500) # call_argument:, call_argument:i, comparison_operator:Gt, composition, comprehension:Generator, comprehension_for_count:1, filtered_comprehension, function_call:count_divisors, function_call:next, function_call:triangle_number_generator, function_call_with_no_argument:triangle_number_generator, function_tail_call:next, int_literal, literal:Num, return, suggest_constant_definition
 
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_13/sol1.py
@@ -1014,7 +1014,7 @@ def solution(limit=28123): # function:solution (-> +13), function_returning_some
         sumDivs[i * i] += i # assignment_lhs_identifier:sumDivs, assignment_rhs_atom:i, augmented_assignment:Add, binary_operator:Mult, index, index_arithmetic, variable_update:sumDivs:i, variable_update_by_augmented_assignment:sumDivs:i
         for k in range(i + 1, limit // i + 1): # accumulate_elements:sumDivs (-> +1), binary_operator:Add, binary_operator:FloorDiv, call_argument:, for:k (-> +1), for_range:_:_ (-> +1), function_call:range, int_literal, literal:Num, nested_for:1 (-> +1), range:_:_
             sumDivs[k * i] += k + i # assignment_lhs_identifier:sumDivs, assignment_rhs_atom:i, assignment_rhs_atom:k, augmented_assignment:Add, binary_operator:Add, binary_operator:Mult, index, index_arithmetic, variable_update:sumDivs:i, variable_update:sumDivs:k, variable_update_by_augmented_assignment:sumDivs:i, variable_update_by_augmented_assignment:sumDivs:k
-    abundants = set() # assignment, assignment_lhs_identifier:abundants, function_call:set, single_assignment:abundants
+    abundants = set() # assignment, assignment_lhs_identifier:abundants, function_call:set, function_call_with_no_argument:set, single_assignment:abundants
     res = 0 # assignment, assignment_lhs_identifier:res, assignment_rhs_atom:0, int_literal, literal:Num, single_assignment:res
     for n in range(1, limit + 1): # accumulate_elements:abundants (-> +4), accumulate_elements:res (-> +4), binary_operator:Add, call_argument:, call_argument:1, for:n (-> +4), for_range:1:_ (-> +4), function_call:range, int_literal, literal:Num, range:1:_
         if sumDivs[n] > n: # comparison_operator:Gt, if (-> +1), if_test_atom:n, if_test_atom:sumDivs, index
@@ -1043,7 +1043,7 @@ def fib(a, b, n): # function:fib (-> +13), function_returning_something:fib (-> 
 def solution(n): # function:solution (-> +11), function_returning_something:solution (-> +11)
     semidivisible = [] # assignment, assignment_lhs_identifier:semidivisible, literal:List, single_assignment:semidivisible
     for x in range(n): # call_argument:n, for:x (-> +8), for_range:n (-> +8), function_call:range, range:n
-        l = [i for i in input().split()] # assignment, assignment_lhs_identifier:l, assignment_rhs_atom:i, comprehension:List, comprehension_for_count:1, function_call:input, method_call, method_call_name:split, single_assignment:l
+        l = [i for i in input().split()] # assignment, assignment_lhs_identifier:l, assignment_rhs_atom:i, comprehension:List, comprehension_for_count:1, function_call:input, function_call_with_no_argument:input, method_call, method_call_name:split, single_assignment:l
         c2 = 1 # assignment, assignment_lhs_identifier:c2, assignment_rhs_atom:1, int_literal, literal:Num, single_assignment:c2
         while 1: # int_literal, literal:Num, while (-> +4)
             if len(fib(l[0], l[1], c2)) < int(l[2]): # call_argument:, call_argument:c2, comparison_operator:Lt, composition, function_call:fib, function_call:int, function_call:len, if (-> +3), if_test_atom:0, if_test_atom:1, if_test_atom:2, if_test_atom:c2, if_test_atom:l, index, int_literal, literal:Num
@@ -1094,7 +1094,7 @@ def fibonacci_generator(): # function:fibonacci_generator (-> +4), generator:fib
         yield b # yield:b
 def solution(n): # function:solution (-> +5), function_returning_something:solution (-> +5)
     answer = 1 # assignment, assignment_lhs_identifier:answer, assignment_rhs_atom:1, int_literal, literal:Num, single_assignment:answer
-    gen = fibonacci_generator() # assignment, assignment_lhs_identifier:gen, function_call:fibonacci_generator, single_assignment:gen
+    gen = fibonacci_generator() # assignment, assignment_lhs_identifier:gen, function_call:fibonacci_generator, function_call_with_no_argument:fibonacci_generator, single_assignment:gen
     while len(str(next(gen))) < n: # call_argument:, call_argument:gen, comparison_operator:Lt, composition, function_call:len, function_call:next, function_call:str, while (-> +1)
         answer += 1 # assignment_lhs_identifier:answer, assignment_rhs_atom:1, augmented_assignment:Add, int_literal, literal:Num, variable_increment:answer, variable_update:answer:1, variable_update_by_augmented_assignment:answer:1
     return answer + 1 # binary_operator:Add, int_literal, literal:Num, return
@@ -1161,7 +1161,7 @@ def diagonal_sum(n): # function:diagonal_sum (-> +6), function_returning_somethi
 # ../Python/project_euler/problem_29/solution.py
 # ----------------------------------------------------------------------------------------
 def solution(n): # function:solution (-> +8), function_returning_something:solution (-> +8)
-    collectPowers = set() # assignment, assignment_lhs_identifier:collectPowers, function_call:set, single_assignment:collectPowers
+    collectPowers = set() # assignment, assignment_lhs_identifier:collectPowers, function_call:set, function_call_with_no_argument:set, single_assignment:collectPowers
     currentPow = 0 # assignment, assignment_lhs_identifier:currentPow, assignment_rhs_atom:0, int_literal, literal:Num, single_assignment:currentPow
     N = n + 1 # assignment, assignment_lhs_identifier:N, assignment_rhs_atom:1, assignment_rhs_atom:n, binary_operator:Add, int_literal, literal:Num, single_assignment:N
     for a in range(2, N): # call_argument:2, call_argument:N, for:a (-> +3), for_range:2:N (-> +3), function_call:range, int_literal, literal:Num, range:2:N, square_nested_for (-> +3)
@@ -1176,7 +1176,7 @@ def solution(n): # function:solution (-> +8), function_returning_something:solut
 def one_pence(): # function:one_pence (-> +1), function_returning_something:one_pence (-> +1)
     return 1 # int_literal, literal:Num, return:1
 def two_pence(x): # body_recursive_function:two_pence (-> +1), function:two_pence (-> +1), function_returning_something:two_pence (-> +1), recursive_function:two_pence (-> +1)
-    return 0 if x < 0 else two_pence(x - 2) + one_pence() # binary_operator:Add, binary_operator:Sub, call_argument:, comparison_operator:Lt, conditional_expression, function_call:one_pence, function_call:two_pence, int_literal, literal:Num, return
+    return 0 if x < 0 else two_pence(x - 2) + one_pence() # binary_operator:Add, binary_operator:Sub, call_argument:, comparison_operator:Lt, conditional_expression, function_call:one_pence, function_call:two_pence, function_call_with_no_argument:one_pence, int_literal, literal:Num, return
 def five_pence(x): # body_recursive_function:five_pence (-> +1), function:five_pence (-> +1), function_returning_something:five_pence (-> +1), recursive_function:five_pence (-> +1)
     return 0 if x < 0 else five_pence(x - 5) + two_pence(x) # binary_operator:Add, binary_operator:Sub, call_argument:, call_argument:x, comparison_operator:Lt, conditional_expression, function_call:five_pence, function_call:two_pence, int_literal, literal:Num, return, suggest_constant_definition
 def ten_pence(x): # body_recursive_function:ten_pence (-> +1), function:ten_pence (-> +1), function_returning_something:ten_pence (-> +1), recursive_function:ten_pence (-> +1)
