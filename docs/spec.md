@@ -280,24 +280,30 @@ In the AST, an imaginary literal contains the same symbols as a floating point l
 
 #### Feature `falsey_literal`
 
+Match any literal whose [truth value](https://docs.python.org/3/library/stdtypes.html#truth-value-testing) is `False`, i.e., `None`, `False`, `0` (null integer), `0.0` (null floating number), `0j` (null complex number), `""` (empty string), `()` (empty tuple), `[]` (empty list), `{}` (empty dictionary).
+
+Except from `None`, any falsey value can be constructed by calling its type without argument, e.g., `dict()`, `int()`, `set()` (the latter having no literal form). An empty (falsey) range is constructed by `range(0)`. No dedicated feature is implemented for these cases: use for instance `function_call_without_argument:dict` and `range:0` to recognize them.
+
 ##### Specification
 
 ```re
-           ^(.*)/_type=Expr
-\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/value/_type=
+           ^(.*)/_type=
 (
-                             NameConstant
-\n(?:\1.+\n)*?\1/value/value=(?P<SUFFIX>None|False)
+                       NameConstant
+\n(?:\1.+\n)* \1/_pos=(?P<POS>.+)
+\n(?:\1.+\n)* \1/value=(?P<SUFFIX>None|False)
 |
-                             Num
-\n(?:\1.+\n)*?\1/value/n=(?P<SUFFIX>0|0\.0|0j)
+                       Num
+\n(?:\1.+\n)* \1/_pos=(?P<POS>.+)
+\n(?:\1.+\n)* \1/n=(?P<SUFFIX>0|0\.0|0j)
 |
-                             (?P<SUFFIX>Str)
-\n(?:\1.+\n)*?\1/value/s=''
+                       (?P<SUFFIX>Str)
+\n(?:\1.+\n)* \1/_pos=(?P<POS>.+)
+\n(?:\1.+\n)* \1/s=''
 |
-                             (?P<SUFFIX>Tuple|List|Dict)
-\n(?:\1.+\n)*?\1/value/(elts|keys)/length=0
+                       (?P<SUFFIX>Tuple|List|Dict)
+\n(?:\1.+\n)* \1/_pos=(?P<POS>.+)
+\n(?:\1.+\n)* \1/(elts|keys)/length=0
 )$
 ```
 
@@ -313,6 +319,10 @@ In the AST, an imaginary literal contains the same symbols as a floating point l
 7   ()
 8   []
 9   {}
+10  a = []
+11  print(0)
+12  if m == 0:
+13      pass
 ```
 
 ##### Matches
@@ -321,12 +331,12 @@ In the AST, an imaginary literal contains the same symbols as a floating point l
 |:--|:--|
 | `falsey_literal:None` | 1 |
 | `falsey_literal:False` | 2 |
-| `falsey_literal:0` | 3 |
+| `falsey_literal:0` | 3, 11, 12 |
 | `falsey_literal:0.0` | 4 |
 | `falsey_literal:0j` | 5 |
 | `falsey_literal:Str` | 6 |
 | `falsey_literal:Tuple` | 7 |
-| `falsey_literal:List` | 8 |
+| `falsey_literal:List` | 8, 10 |
 | `falsey_literal:Dict` | 9 |
 
 --------------------------------------------------------------------------------

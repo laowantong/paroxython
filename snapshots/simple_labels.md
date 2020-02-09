@@ -30,6 +30,9 @@
 - divisibility_test:3 / fizzbuzz.py / 4
 - divisibility_test:5 / fizzbuzz.py / 6
 - evolve_state / collatz_print.py / 2-7
+- falsey_literal:0 / collatz_print.py / 4
+- falsey_literal:0 / fizzbuzz.py / 2, 4, 6
+- falsey_literal:0 / is_even.py / 2
 - for:i / fizzbuzz.py / 1-9
 - for_range:1:101 / fizzbuzz.py / 1-9
 - function:is_even / is_even.py / 1-2

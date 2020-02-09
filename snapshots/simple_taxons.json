@@ -13,6 +13,7 @@
     "test/divisibility/parity/": "4",
     "test/equality/": "4",
     "test/equality/not/": "2",
+    "type/elementary/int/zero/": "4",
     "type/elementary/number/integer": "2 4 4 5 7 7",
     "variable/assignment/single/": "5 7"
   },
@@ -25,6 +26,7 @@
     "io/standard/print": "3 5 7 9",
     "operator/percent/modulo/": "2 4 6",
     "test/equality/": "2 4 6",
+    "type/elementary/int/zero/": "2 4 6",
     "type/elementary/number/integer": "1 1 2 2 4 4 6 6",
     "type/elementary/string/": "3 5 7"
   },
@@ -34,6 +36,7 @@
     "subroutine_definition/predicate/": "1-2",
     "test/divisibility/parity/": "2",
     "test/equality/": "2",
+    "type/elementary/int/zero/": "2",
     "type/elementary/number/integer": "2 2"
   }
 }

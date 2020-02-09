@@ -24,6 +24,7 @@ def print_collatz(n): # added_block_label (-> +7)
                        # binary_operator:Mod
                        # comparison_operator:Eq
                        # divisibility_test:2
+                       # falsey_literal:0
                        # if (-> +3)
                        # if_test_atom:0
                        # if_test_atom:2
@@ -75,6 +76,7 @@ for i in range(1, 101): # call_argument:1
     if i % 15 == 0: # binary_operator:Mod
                     # comparison_operator:Eq
                     # divisibility_test:15
+                    # falsey_literal:0
                     # if (-> +7)
                     # if_test_atom:0
                     # if_test_atom:15
@@ -89,6 +91,7 @@ for i in range(1, 101): # call_argument:1
     elif i % 3 == 0: # binary_operator:Mod
                      # comparison_operator:Eq
                      # divisibility_test:3
+                     # falsey_literal:0
                      # if (-> +5)
                      # if_test_atom:0
                      # if_test_atom:3
@@ -103,6 +106,7 @@ for i in range(1, 101): # call_argument:1
     elif i % 5 == 0: # binary_operator:Mod
                      # comparison_operator:Eq
                      # divisibility_test:5
+                     # falsey_literal:0
                      # if (-> +3)
                      # if_test_atom:0
                      # if_test_atom:5
@@ -127,6 +131,7 @@ def is_even(n): # function:is_even (-> +1)
     return n % 2 == 0 # binary_operator:Mod
                       # comparison_operator:Eq
                       # divisibility_test:2
+                      # falsey_literal:0
                       # int_literal
                       # literal:Num
                       # return

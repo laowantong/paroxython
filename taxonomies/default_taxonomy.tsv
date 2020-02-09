@@ -104,18 +104,27 @@ test/identity/not/	comparison_operator:IsNot
 test/inequality/	comparison_operator:(Lt|LtE|Gt|GtE)
 test/inequality/chained/\1/	chained_inequalities:(\d+)
 type/container/dict/empty/	falsey_literal:Dict
+type/container/dict/empty/	function_call_with_no_argument:dict
 type/container/dictionary/	literal:Dict
 type/container/list/	literal:List
 type/container/list/empty/	falsey_literal:List
+type/container/list/empty/	function_call_with_no_argument:list
+type/container/range/empty/	range:0
 type/container/set/	literal:Set
+type/container/set/empty/	function_call_with_no_argument:set
 type/container/tuple/	literal:Tuple
 type/container/tuple/empty/	falsey_literal:Tuple
+type/container/tuple/empty/	function_call_with_no_argument:tuple
+type/elementary/bool/false/	function_call_with_no_argument:bool
+type/elementary/bool/false/	literal:False
+type/elementary/bool/true/	literal:True
 type/elementary/boolean/	literal:(True|False)
 type/elementary/complex/zero/	falsey_literal:0j
-type/elementary/empty/	falsey_literal:False
-type/elementary/empty/	falsey_literal:None
+type/elementary/complex/zero/	function_call_with_no_argument:complex
 type/elementary/float/zero/	falsey_literal:0.0
+type/elementary/float/zero/	function_call_with_no_argument:float
 type/elementary/int/zero/	falsey_literal:0
+type/elementary/int/zero/	function_call_with_no_argument:int
 type/elementary/null/	literal:None
 type/elementary/number/	literal:Num
 type/elementary/number/complex	imaginary_literal
@@ -167,7 +176,6 @@ subscript/slice/step/backwards
 subscript/slice/stop	
 type/container/tuple/assignment	
 type/container/tuple/assignment/swapping	
-type/elementary/num/null	
 type/elementary/string/newline	
 variable/assignment/argument	
 variable/assignment/augmented/subscript	

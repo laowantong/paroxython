@@ -33,6 +33,7 @@
         "comparison_operator:NotEq": [[2,2]],
         "divisibility_test:2": [[4,4]],
         "evolve_state": [[2,7]],
+        "falsey_literal:0": [[4,4]],
         "function:print_collatz": [[1,8]],
         "function_call:print": [[3,3],[8,8]],
         "function_returning_nothing:print_collatz": [[1,8]],
@@ -68,6 +69,7 @@
         "test/divisibility/parity/": [[4,4]],
         "test/equality/": [[4,4]],
         "test/equality/not/": [[2,2]],
+        "type/elementary/int/zero/": [[4,4]],
         "type/elementary/number/integer": [[2,2],[4,4],[4,4],[5,5],[7,7],[7,7]],
         "variable/assignment/single/": [[5,5],[7,7]]
       }
@@ -85,6 +87,7 @@
         "divisibility_test:15": [[2,2]],
         "divisibility_test:3": [[4,4]],
         "divisibility_test:5": [[6,6]],
+        "falsey_literal:0": [[2,2],[4,4],[6,6]],
         "for:i": [[1,9]],
         "for_range:1:101": [[1,9]],
         "function_call:print": [[3,3],[5,5],[7,7],[9,9]],
@@ -113,6 +116,7 @@
         "io/standard/print": [[3,3],[5,5],[7,7],[9,9]],
         "operator/percent/modulo/": [[2,2],[4,4],[6,6]],
         "test/equality/": [[2,2],[4,4],[6,6]],
+        "type/elementary/int/zero/": [[2,2],[4,4],[6,6]],
         "type/elementary/number/integer": [[1,1],[1,1],[2,2],[2,2],[4,4],[4,4],[6,6],[6,6]],
         "type/elementary/string/": [[3,3],[5,5],[7,7]]
       }
@@ -124,6 +128,7 @@
         "binary_operator:Mod": [[2,2]],
         "comparison_operator:Eq": [[2,2]],
         "divisibility_test:2": [[2,2]],
+        "falsey_literal:0": [[2,2]],
         "function:is_even": [[1,2]],
         "function_returning_something:is_even": [[1,2]],
         "int_literal": [[2,2],[2,2]],
@@ -136,6 +141,7 @@
         "subroutine_definition/predicate/": [[1,2]],
         "test/divisibility/parity/": [[2,2]],
         "test/equality/": [[2,2]],
+        "type/elementary/int/zero/": [[2,2]],
         "type/elementary/number/integer": [[2,2],[2,2]]
       }
     }
@@ -203,6 +209,11 @@
     ],
     "evolve_state": [
       "tests/data/simple/collatz_print.py"
+    ],
+    "falsey_literal:0": [
+      "tests/data/simple/collatz_print.py",
+      "tests/data/simple/fizzbuzz.py",
+      "tests/data/simple/is_even.py"
     ],
     "function:print_collatz": [
       "tests/data/simple/collatz_print.py"
@@ -386,6 +397,11 @@
     ],
     "test/equality/not/": [
       "tests/data/simple/collatz_print.py"
+    ],
+    "type/elementary/int/zero/": [
+      "tests/data/simple/collatz_print.py",
+      "tests/data/simple/fizzbuzz.py",
+      "tests/data/simple/is_even.py"
     ],
     "type/elementary/number/integer": [
       "tests/data/simple/collatz_print.py",
