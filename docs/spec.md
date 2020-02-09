@@ -34,14 +34,14 @@
       - [Feature `method_call_object`](#feature-method_call_object)
       - [Feature `method_chaining`](#feature-method_chaining)
       - [Feature `composition`](#feature-composition)
-  - [Various](#various)
-      - [Feature `lambda_function`](#feature-lambda_function)
-      - [Feature `f_string`](#feature-f_string)
   - [Iterables](#iterables)
       - [Feature `range` (SQL)](#feature-range)
       - [Feature `comprehension`](#feature-comprehension)
       - [Feature `comprehension_for_count`](#feature-comprehension_for_count)
       - [Feature `filtered_comprehension`](#feature-filtered_comprehension)
+  - [Various](#various)
+      - [Feature `lambda_function`](#feature-lambda_function)
+      - [Feature `f_string`](#feature-f_string)
 - [Statements](#statements)
   - [Assignments](#assignments)
       - [Feature `assignment`](#feature-assignment)
@@ -1252,56 +1252,6 @@ Apply a function or a method to an expression involving the result of another fu
 
 --------------------------------------------------------------------------------
 
-## Various
-
---------------------------------------------------------------------------------
-
-#### Feature `lambda_function`
-
-##### Specification
-
-```re
-           ^(.*)/_type=Lambda
-\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-```
-
-##### Example
-
-```python
-1   lambda x: x + 1
-```
-
-##### Matches
-
-| Label | Lines |
-|:--|:--|
-| `lambda_function` | 1 |
-
---------------------------------------------------------------------------------
-
-#### Feature `f_string`
-
-##### Specification
-
-```re
-           ^(.*)/value/args/1/_type=JoinedStr
-\n(?:\1.+\n)*?\1/value/args/1/_pos=(?P<POS>.+)
-```
-
-##### Example
-
-```python
-1   print(f"hello, {world}")
-```
-
-##### Matches
-
-| Label | Lines |
-|:--|:--|
-| `f_string` | 1 |
-
---------------------------------------------------------------------------------
-
 ## Iterables
 
 --------------------------------------------------------------------------------
@@ -1473,6 +1423,56 @@ Match a comprehension with an `if` clause.
 | Label | Lines |
 |:--|:--|
 | `filtered_comprehension` | 1, 2, 2 |
+
+--------------------------------------------------------------------------------
+
+## Various
+
+--------------------------------------------------------------------------------
+
+#### Feature `lambda_function`
+
+##### Specification
+
+```re
+           ^(.*)/_type=Lambda
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
+```
+
+##### Example
+
+```python
+1   lambda x: x + 1
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `lambda_function` | 1 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `f_string`
+
+##### Specification
+
+```re
+           ^(.*)/value/args/1/_type=JoinedStr
+\n(?:\1.+\n)*?\1/value/args/1/_pos=(?P<POS>.+)
+```
+
+##### Example
+
+```python
+1   print(f"hello, {world}")
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `f_string` | 1 |
 
 --------------------------------------------------------------------------------
 
