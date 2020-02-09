@@ -126,6 +126,7 @@
 - function_returning_something
 - function_tail_call
 - function_with_default_positional_arguments
+- function_without_argument
 - generator
 - get_valid_input
 - if_test_atom

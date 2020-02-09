@@ -90,6 +90,7 @@ subroutine_definition/recursive/deep/	deeply_recursive_function:.+
 subroutine_definition/recursive/tail/	tail_recursive_function:.+
 subroutine_definition/test/	function:.+_tests?
 subroutine_definition/test/	function:test_.+
+subroutine_definition/without_argument/	function_without_argument:.+
 subscript/index/	index
 subscript/index/arithmetic/	index_arithmetic
 subscript/index/backwards/	negative_index
@@ -152,7 +153,6 @@ control_flow/loop/sequential/divergent/break
 control_flow/loop/sequential/divergent/break/else	
 control_flow/loop/sequential/divergent/return	
 function_definition/decorated	
-function_definition/without_arguments	
 io/file	
 io/standard/print/multiple	
 io/standard/print/newline	

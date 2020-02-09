@@ -66,6 +66,7 @@
       - [Feature `function_returning_something` (SQL)](#feature-function_returning_something)
       - [Feature `function_returning_nothing` (SQL)](#feature-function_returning_nothing)
       - [Feature `function_with_default_positional_arguments`](#feature-function_with_default_positional_arguments)
+      - [Feature `function_without_argument`](#feature-function_without_argument)
     - [Nesting](#nesting)
       - [Feature `nested_function`](#feature-nested_function)
       - [Feature `closure` (SQL)](#feature-closure)
@@ -2396,6 +2397,47 @@ WHERE t.span IS NULL
 | Label | Lines |
 |:--|:--|
 | `function_with_default_positional_arguments:foobar` | 1-3 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `function_without_argument`
+
+##### Specification
+
+```re
+           ^(.*)/_type=FunctionDef
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
+\n(?:\1.+\n)*?\1/name=(?P<SUFFIX>.+)
+\n(?:\1.+\n)*?\1/args/args/length=0
+\n(?:\1.+\n)*?\1/args/vararg=None
+\n(?:\1.+\n)*?\1/args/kwonlyargs/length=0
+\n(?:\1.+\n)*?\1/args/kw_defaults/length=0
+\n(?:\1.+\n)*?\1/args/kwarg=None
+\n(?:\1.+\n)*?\1/args/defaults/length=0
+\n(?:\1.+\n)* \1/.+/_pos=(?P<POS>.+)
+```
+
+##### Example
+
+```python
+1   def bizz():
+2       pass
+3   
+4   def foo(a, b="c"): # no match
+5       pass
+6   
+7   def bar(b="c"): # no match
+8       pass
+9   
+10  def qux(*args, **kwargs): # no match
+11      pass
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `function_without_argument:bizz` | 1-2 |
 
 --------------------------------------------------------------------------------
 
