@@ -16,6 +16,7 @@
       - [Feature `binary_operator`](#feature-binary_operator)
       - [Feature `conditional_expression`](#feature-conditional_expression)
       - [Feature `concatenation_operator|replication_operator` (SQL)](#feature-concatenation_operatorreplication_operator)
+      - [Feature `string_formatting_operator` (SQL)](#feature-string_formatting_operator)
   - [Boolean expressions](#boolean-expressions)
       - [Feature `boolean_operator`](#feature-boolean_operator)
       - [Feature `comparison_operator`](#feature-comparison_operator)
@@ -140,6 +141,7 @@
 ##### Derivations
 
 [⬇️ feature `concatenation_operator|replication_operator`](#feature-concatenation_operatorreplication_operator)  
+[⬇️ feature `string_formatting_operator`](#feature-string_formatting_operator)  
 
 ##### Specification
 
@@ -532,6 +534,7 @@ _Remark._ A negative literal is represented in the AST by a node `UnaryOp` with 
 ##### Derivations
 
 [⬇️ feature `concatenation_operator|replication_operator`](#feature-concatenation_operatorreplication_operator)  
+[⬇️ feature `string_formatting_operator`](#feature-string_formatting_operator)  
 
 ##### Specification
 
@@ -637,6 +640,43 @@ GROUP BY op.path
 | `replication_operator:Str` | 4, 8, 8 |
 | `replication_operator:List` | 5, 6 |
 | `replication_operator:Tuple` | 7 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `string_formatting_operator`
+
+Match old-style `%` operators whose left operand is a string **literal**.
+
+##### Derivations
+
+[⬆️ feature `binary_operator`](#feature-binary_operator)  
+[⬆️ feature `literal`](#feature-literal)  
+
+##### Specification
+
+```sql
+SELECT "string_formatting_operator",
+       "",
+       op.span,
+       op.path
+FROM t_binary_operator op
+JOIN t_literal lit ON (lit.path GLOB op.path || "?-")
+WHERE op.name_suffix = "Mod"
+  AND lit.name_suffix = "Str"
+GROUP BY op.path
+```
+
+##### Example
+
+```python
+1   s = "hello, %s" % world
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `string_formatting_operator` | 1 |
 
 --------------------------------------------------------------------------------
 

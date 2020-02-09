@@ -317,7 +317,7 @@ def main(): # function:main (-> +4), function_returning_nothing:main (-> +4)
     n = 43 # assignment, assignment_lhs_identifier:n, assignment_rhs_atom:43, int_literal, literal:Num, single_assignment:n, suggest_constant_definition
     sequence = collatz_sequence(n) # assignment, assignment_lhs_identifier:sequence, assignment_rhs_atom:n, call_argument:n, function_call:collatz_sequence, single_assignment:sequence
     print(sequence) # call_argument:sequence, function_call:print
-    print("collatz sequence from %d took %d steps." % (n, len(sequence))) # binary_operator:Mod, call_argument:, call_argument:sequence, composition, function_call:len, function_call:print, literal:Str
+    print("collatz sequence from %d took %d steps." % (n, len(sequence))) # binary_operator:Mod, call_argument:, call_argument:sequence, composition, function_call:len, function_call:print, literal:Str, string_formatting_operator
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/explicit_euler.py

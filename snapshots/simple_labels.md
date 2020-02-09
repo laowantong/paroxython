@@ -154,6 +154,7 @@
 - slice
 - slice_step
 - square_nested_for
+- string_formatting_operator
 - suggest_comparison_chaining
 - suggest_condition_return
 - swapping
