@@ -27,9 +27,8 @@ class DB:
     prerequisites = compile(r"(?m)\b(?:FROM|JOIN) t_(\w+)").findall
 
     def __init__(self):
-        connexion = sqlite3.connect(":memory:")
-        connexion.create_function("regexp", 2, lambda rex, s: bool(match(rex, s)))
-        self.c = connexion.cursor()
+        self.c = sqlite3.connect(":memory:")
+        self.c.create_function("regexp", 2, lambda rex, s: bool(match(rex, s)))
 
     def create(self, labels: Labels) -> None:
         self.c.execute(DB.creation_query)
@@ -41,6 +40,7 @@ class DB:
         for label_name in DB.prerequisites(query):
             if label_name not in self.added_table_labels:
                 self.c.execute(DB.addition_query.format(label_name))
+                self.c.commit()
             self.added_table_labels[label_name] += 1
         for (name_prefix, name_suffix, span_string, path) in self.c.execute(query):
             label_name = f"{name_prefix}:{name_suffix}" if name_suffix != "" else name_prefix
