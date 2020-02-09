@@ -9,8 +9,10 @@
       - [Feature `index`](#feature-index)
       - [Feature `index_arithmetic`](#feature-index_arithmetic)
       - [Feature `negative_index`](#feature-negative_index)
-      - [Feature `slice`](#feature-slice)
+      - [Feature `slice_lower`](#feature-slice_lower)
+      - [Feature `slice_upper`](#feature-slice_upper)
       - [Feature `slice_step`](#feature-slice_step)
+      - [Feature `slice` (SQL)](#feature-slice)
   - [Operators](#operators)
       - [Feature `unary_operator`](#feature-unary_operator)
       - [Feature `binary_operator`](#feature-binary_operator)
@@ -352,12 +354,26 @@ Except from `None`, any falsey value can be constructed by calling its type with
 
 #### Feature `index`
 
+Match an index in a sequence type or a key in a dictionary type, and suffix it by either an integer or an identifier if is atomic, or `"_"` otherwise.
+
 ##### Specification
 
 ```re
-           ^(.*)/_type=Subscript
-\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
+           ^(.*)(?<!/annotation)/_type=Subscript
 \n(?:\1.+\n)*?\1/slice/_type=Index
+\n            \1/slice/value
+(
+                            /_type=Name
+\n(?:\1.+\n)*?\1/slice/value/_pos=(?P<POS>.+)
+\n(?:\1.+\n)* \1/slice/value/id=(?P<SUFFIX>.+)
+|
+                            /_type=Num
+\n(?:\1.+\n)*?\1/slice/value/_pos=(?P<POS>.+)
+\n(?:\1.+\n)* \1/slice/value/n=(?P<SUFFIX>.+)
+|
+                            /(?P<SUFFIX>_)type=.+
+\n(?:\1.+\n)*?\1/slice/value/_pos=(?P<POS>.+)
+)$
 ```
 
 ##### Example
@@ -366,13 +382,18 @@ Except from `None`, any falsey value can be constructed by calling its type with
 1   a[42]
 2   dictionary[key]
 3   a[42:-1] # no match
+4   a[i + 1]
+5   def abs(l: List[int]) -> int: # no match
+6       pass
 ```
 
 ##### Matches
 
 | Label | Lines |
 |:--|:--|
-| `index` | 1, 2 |
+| `index:42` | 1 |
+| `index:key` | 2 |
+| `index:_` | 4 |
 
 --------------------------------------------------------------------------------
 
@@ -382,9 +403,9 @@ Except from `None`, any falsey value can be constructed by calling its type with
 
 ```re
            ^(.*)/_type=Subscript
-\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/slice/_type=Index
 \n(?:\1.+\n)*?\1/slice/value/_type=BinOp
+\n(?:\1.+\n)*?\1/slice/value/_pos=(?P<POS>.+)
 ```
 
 ##### Example
@@ -408,19 +429,22 @@ Except from `None`, any falsey value can be constructed by calling its type with
 
 ```re
            ^(.*)/_type=Subscript
-\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/slice/_type=Index
 (   # A negative number
 \n(?:\1.+\n)*?\1/slice/value/_type=Num
+\n(?:\1.+\n)*?\1/slice/value/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/slice/value/n=(?P<SUFFIX>-\d+)
 |   # A negated non-literal expression
+\n(?:\1.+\n)*?\1/slice/value/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/slice/value/op/_type=USub
 |   # A binary operation whose left operand is negated
 \n(?:\1.+\n)*?\1/slice/value/_type=BinOp
+\n(?:\1.+\n)*?\1/slice/value/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/slice/value/left/_type=UnaryOp
 \n(?:\1.+\n)*?\1/slice/value/left/op/_type=USub
 |   # A complemented expression
 \n(?:\1.+\n)*?\1/slice/value/_type=UnaryOp
+\n(?:\1.+\n)*?\1/slice/value/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/slice/value/op/_type=Invert
 )
 ```
@@ -446,56 +470,215 @@ _Remark._ In line 4, `~i` evaluates to `-i - 1` (bitwise complement of `i`). Lin
 
 --------------------------------------------------------------------------------
 
-#### Feature `slice`
+#### Feature `slice_lower`
+
+Match the lower bound of a slice, and suffix it by either `""` if it is omitted, an integer or an identifier if is atomic, or `"_"` otherwise.
+
+##### Derivations
+
+[⬇️ feature `slice`](#feature-slice)  
 
 ##### Specification
 
 ```re
            ^(.*)/_type=Subscript
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/slice/_type=Slice
-\n(?:\1.+\n)*?\1/slice/step=None
+\n(?:\1.+\n)* \1/slice/lower
+(
+                            =None(?P<SUFFIX>)
+|
+                            /_type=Name
+\n(?:\1.+\n)* \1/slice/lower/id=(?P<SUFFIX>.+)
+|
+                            /_type=Num
+\n(?:\1.+\n)* \1/slice/lower/n=(?P<SUFFIX>.+)
+|
+                            /(?P<SUFFIX>_)type=.+
+)$
 ```
 
 ##### Example
 
 ```python
-1   a[1] # no match
-2   a[1:-1]
-3   a[1:-1:2] # no match
+1   a[:stop1]
+2   a[start2:]
+3   a[start3:stop3]
+4   a[start4:stop4:step4]
+5   a[foo(bar):fizz(buzz)]
+6   a[0:2 * n:100]
+7   a[:]
+8   a[::2]
+9   a[::-1]
 ```
 
 ##### Matches
 
 | Label | Lines |
 |:--|:--|
-| `slice` | 2 |
+| `slice_lower:` | 1, 7, 8, 9 |
+| `slice_lower:start2` | 2 |
+| `slice_lower:start3` | 3 |
+| `slice_lower:start4` | 4 |
+| `slice_lower:_` | 5 |
+| `slice_lower:0` | 6 |
 
 --------------------------------------------------------------------------------
 
-#### Feature `slice_step`
+#### Feature `slice_upper`
+
+Match the upper bound of a slice, and suffix it by either `""` if it is omitted, an integer or an identifier if is atomic, or `"_"` otherwise.
+
+##### Derivations
+
+[⬇️ feature `slice`](#feature-slice)  
 
 ##### Specification
 
 ```re
            ^(.*)/_type=Subscript
-\n(?:\1.+\n)*?\1/slice/_type=Slice
-\n(?:\1.+\n)*?\1/slice/step/_pos=(?P<POS>.+)
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
+\n(?:\1.+\n)* \1/slice/upper
+(
+                            =None(?P<SUFFIX>)
+|
+                            /_type=Name
+\n(?:\1.+\n)* \1/slice/upper/id=(?P<SUFFIX>.+)
+|
+                            /_type=Num
+\n(?:\1.+\n)* \1/slice/upper/n=(?P<SUFFIX>.+)
+|
+                            /(?P<SUFFIX>_)type=.+
+)$
 ```
 
 ##### Example
 
 ```python
-1   a[1] # no match
-2   a[1:-1] # no match
-3   a[1:-1:2]
+1   a[:stop1]
+2   a[start2:]
+3   a[start3:stop3]
+4   a[start4:stop4:step4]
+5   a[foo(bar):fizz(buzz)]
+6   a[0:2 * n:100]
+7   a[:]
+8   a[::2]
+9   a[::-1]
 ```
 
 ##### Matches
 
 | Label | Lines |
 |:--|:--|
-| `slice_step` | 3 |
+| `slice_upper:stop1` | 1 |
+| `slice_upper:` | 2, 7, 8, 9 |
+| `slice_upper:stop3` | 3 |
+| `slice_upper:stop4` | 4 |
+| `slice_upper:_` | 5, 6 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `slice_step`
+
+Match the step of a slice, and suffix it by either `""` if it is omitted, an integer or an identifier if is atomic, or `"_"` otherwise.
+
+##### Derivations
+
+[⬇️ feature `slice`](#feature-slice)  
+
+##### Specification
+
+```re
+           ^(.*)/_type=Subscript
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
+\n(?:\1.+\n)*?\1/slice/step
+(
+                            =None(?P<SUFFIX>)
+|
+                            /_type=Name
+\n(?:\1.+\n)* \1/slice/step/id=(?P<SUFFIX>.+)
+|
+                            /_type=Num
+\n(?:\1.+\n)* \1/slice/step/n=(?P<SUFFIX>.+)
+|
+                                  /(?P<SUFFIX>_)type=.+
+)$
+```
+
+##### Example
+
+```python
+1   a[:stop1]
+2   a[start2:]
+3   a[start3:stop3]
+4   a[start4:stop4:step4]
+5   a[foo(bar):fizz(buzz)]
+6   a[0:2 * n:100]
+7   a[:]
+8   a[::2]
+9   a[::-1]
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `slice_step:` | 1, 2, 3, 5, 7 |
+| `slice_step:step4` | 4 |
+| `slice_step:100` | 6 |
+| `slice_step:2` | 8 |
+| `slice_step:-1` | 9 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `slice`
+
+Match a slice, and suffix it with three parts, either empty, atomic or replaced by an underscore: the lower bound, the upper bound and the step.
+
+##### Derivations
+
+[⬆️ feature `slice_lower`](#feature-slice_lower)  
+[⬆️ feature `slice_step`](#feature-slice_step)  
+[⬆️ feature `slice_upper`](#feature-slice_upper)  
+
+##### Specification
+
+```sql
+SELECT "slice",
+       lo.name_suffix || ":" || up.name_suffix || ":" || st.name_suffix,
+       lo.span,
+       lo.path
+FROM t_slice_lower lo
+JOIN t_slice_upper up USING (path)
+JOIN t_slice_step st USING (path)
+```
+
+##### Example
+
+```python
+1   a[:stop1]
+2   a[start2:]
+3   a[start3:stop3]
+4   a[start4:stop4:step4]
+5   a[foo(bar):fizz(buzz)]
+6   a[0:2 * n:100]
+7   a[:]
+8   a[::2]
+9   a[::-1]
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `slice::stop1:` | 1 |
+| `slice:start2::` | 2 |
+| `slice:start3:stop3:` | 3 |
+| `slice:start4:stop4:step4` | 4 |
+| `slice:_:_:` | 5 |
+| `slice:0:_:100` | 6 |
+| `slice:::` | 7 |
+| `slice:::2` | 8 |
+| `slice:::-1` | 9 |
 
 --------------------------------------------------------------------------------
 

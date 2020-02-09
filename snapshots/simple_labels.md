@@ -155,7 +155,9 @@
 - recursive_function
 - single_assignment
 - slice
+- slice_lower
 - slice_step
+- slice_upper
 - square_nested_for
 - string_formatting_operator
 - suggest_comparison_chaining

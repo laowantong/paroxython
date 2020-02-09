@@ -61,7 +61,7 @@
       "taxons": {
         "control_flow/conditional/": [[4,7]],
         "control_flow/conditional/else/": [[7,7]],
-        "io/standard/print": [[3,3],[8,8]],
+        "io/standard/print/": [[3,3],[8,8]],
         "operator/addition/": [[7,7]],
         "operator/multiplication/": [[7,7]],
         "operator/percent/modulo/": [[4,4]],
@@ -70,7 +70,7 @@
         "test/equality/": [[4,4]],
         "test/equality/not/": [[2,2]],
         "type/elementary/int/zero/": [[4,4]],
-        "type/elementary/number/integer": [[2,2],[4,4],[4,4],[5,5],[7,7],[7,7]],
+        "type/elementary/number/integer/": [[2,2],[4,4],[4,4],[5,5],[7,7],[7,7]],
         "variable/assignment/single/": [[5,5],[7,7]]
       }
     },
@@ -113,11 +113,11 @@
         "control_flow/conditional/else/": [[9,9]],
         "control_flow/conditional/else/chained/": [[5,5],[7,7]],
         "control_flow/loop/sequential/arithmetic/start/": [[1,9]],
-        "io/standard/print": [[3,3],[5,5],[7,7],[9,9]],
+        "io/standard/print/": [[3,3],[5,5],[7,7],[9,9]],
         "operator/percent/modulo/": [[2,2],[4,4],[6,6]],
         "test/equality/": [[2,2],[4,4],[6,6]],
         "type/elementary/int/zero/": [[2,2],[4,4],[6,6]],
-        "type/elementary/number/integer": [[1,1],[1,1],[2,2],[2,2],[4,4],[4,4],[6,6],[6,6]],
+        "type/elementary/number/integer/": [[1,1],[1,1],[2,2],[2,2],[4,4],[4,4],[6,6],[6,6]],
         "type/elementary/string/": [[3,3],[5,5],[7,7]]
       }
     },
@@ -142,7 +142,7 @@
         "test/divisibility/parity/": [[2,2]],
         "test/equality/": [[2,2]],
         "type/elementary/int/zero/": [[2,2]],
-        "type/elementary/number/integer": [[2,2],[2,2]]
+        "type/elementary/number/integer/": [[2,2],[2,2]]
       }
     }
   },
@@ -368,7 +368,7 @@
       "tests/data/simple/collatz_print.py",
       "tests/data/simple/fizzbuzz.py"
     ],
-    "io/standard/print": [
+    "io/standard/print/": [
       "tests/data/simple/collatz_print.py",
       "tests/data/simple/fizzbuzz.py"
     ],
@@ -403,7 +403,7 @@
       "tests/data/simple/fizzbuzz.py",
       "tests/data/simple/is_even.py"
     ],
-    "type/elementary/number/integer": [
+    "type/elementary/number/integer/": [
       "tests/data/simple/collatz_print.py",
       "tests/data/simple/fizzbuzz.py",
       "tests/data/simple/is_even.py"
