@@ -121,12 +121,12 @@
 - for_range
 - function
 - function_call
-- function_call_with_no_argument
+- function_call_without_arguments
 - function_returning_nothing
 - function_returning_something
 - function_tail_call
 - function_with_default_positional_arguments
-- function_without_argument
+- function_without_arguments
 - generator
 - get_valid_input
 - if_test_atom

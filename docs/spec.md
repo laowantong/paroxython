@@ -26,7 +26,7 @@
       - [Feature `short_circuit`](#feature-short_circuit)
   - [Calls](#calls)
       - [Feature `function_call`](#feature-function_call)
-      - [Feature `function_call_with_no_argument`](#feature-function_call_with_no_argument)
+      - [Feature `function_call_without_arguments`](#feature-function_call_without_arguments)
       - [Feature `function_tail_call`](#feature-function_tail_call)
       - [Feature `call_argument`](#feature-call_argument)
       - [Feature `method_call`](#feature-method_call)
@@ -66,7 +66,7 @@
       - [Feature `function_returning_something` (SQL)](#feature-function_returning_something)
       - [Feature `function_returning_nothing` (SQL)](#feature-function_returning_nothing)
       - [Feature `function_with_default_positional_arguments`](#feature-function_with_default_positional_arguments)
-      - [Feature `function_without_argument`](#feature-function_without_argument)
+      - [Feature `function_without_arguments`](#feature-function_without_arguments)
     - [Nesting](#nesting)
       - [Feature `nested_function`](#feature-nested_function)
       - [Feature `closure` (SQL)](#feature-closure)
@@ -285,7 +285,7 @@ In the AST, an imaginary literal contains the same symbols as a floating point l
 
 Match any literal whose [truth value](https://docs.python.org/3/library/stdtypes.html#truth-value-testing) is `False`, i.e., `None`, `False`, `0` (null integer), `0.0` (null floating number), `0j` (null complex number), `""` (empty string), `()` (empty tuple), `[]` (empty list), `{}` (empty dictionary).
 
-Except from `None`, any falsey value can be constructed by calling its type without argument, e.g., `dict()`, `int()`, `set()` (the latter having no literal form). An empty (falsey) range is constructed by `range(0)`. No dedicated feature is implemented for these cases: use for instance `function_call_without_argument:dict` and `range:0` to recognize them.
+Except from `None`, any falsey value can be constructed by calling its type without argument, e.g., `dict()`, `int()`, `set()` (the latter having no literal form). An empty (falsey) range is constructed by `range(0)`. No dedicated feature is implemented for these cases: use for instance `function_call_without_arguments:dict` and `range:0` to recognize them.
 
 ##### Specification
 
@@ -936,7 +936,7 @@ When the value of the left operand suffices to determine the value of a boolean 
 
 --------------------------------------------------------------------------------
 
-#### Feature `function_call_with_no_argument`
+#### Feature `function_call_without_arguments`
 
 ##### Specification
 
@@ -960,7 +960,7 @@ When the value of the left operand suffices to determine the value of a boolean 
 
 | Label | Lines |
 |:--|:--|
-| `function_call_with_no_argument:foo` | 1 |
+| `function_call_without_arguments:foo` | 1 |
 
 --------------------------------------------------------------------------------
 
@@ -2400,7 +2400,7 @@ WHERE t.span IS NULL
 
 --------------------------------------------------------------------------------
 
-#### Feature `function_without_argument`
+#### Feature `function_without_arguments`
 
 ##### Specification
 
@@ -2437,7 +2437,7 @@ WHERE t.span IS NULL
 
 | Label | Lines |
 |:--|:--|
-| `function_without_argument:bizz` | 1-2 |
+| `function_without_arguments:bizz` | 1-2 |
 
 --------------------------------------------------------------------------------
 

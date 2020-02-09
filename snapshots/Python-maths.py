@@ -15,7 +15,7 @@ def n31(a: int) -> Tuple[List[int], int]: # function:n31 (-> +12), function_retu
             a = 3 * a + 1 # assignment, assignment_lhs_identifier:a, assignment_rhs_atom:1, assignment_rhs_atom:3, assignment_rhs_atom:a, binary_operator:Add, binary_operator:Mult, if_else_branch, int_literal, literal:Num, single_assignment:a, suggest_constant_definition, variable_update:a:1, variable_update:a:3, variable_update_by_assignment:a:1, variable_update_by_assignment:a:3
         path += [a] # assignment_lhs_identifier:path, assignment_rhs_atom:a, augmented_assignment:Add, variable_update:path:a, variable_update_by_augmented_assignment:path:a
     return path, len(path) # call_argument:path, function_call:len, return
-def test_n31(): # function:test_n31 (-> +113), function_returning_nothing:test_n31 (-> +113), function_without_argument:test_n31 (-> +113)
+def test_n31(): # function:test_n31 (-> +113), function_returning_nothing:test_n31 (-> +113), function_without_arguments:test_n31 (-> +113)
     assert n31(4) == ([4, 2, 1], 3) # assertion, call_argument:4, comparison_operator:Eq, function_call:n31, int_literal, literal:List, literal:Num, literal:Tuple, suggest_constant_definition
     assert n31(11) == ([11, 34, 17, 52, 26, 13, 40, 20, 10, 5, 16, 8, 4, 2, 1], 15) # assertion, call_argument:11, comparison_operator:Eq, function_call:n31, int_literal, literal:List, literal:Num, literal:Tuple, suggest_constant_definition
     assert n31(31) == ( # assertion, call_argument:31, function_call:n31, int_literal, literal:Num, suggest_constant_definition
@@ -136,7 +136,7 @@ def test_n31(): # function:test_n31 (-> +113), function_returning_nothing:test_n
 # ----------------------------------------------------------------------------------------
 def abs_val(num): # function:abs_val (-> +1), function_returning_something:abs_val (-> +1)
     return -num if num < 0 else num # comparison_operator:Lt, conditional_expression, falsey_literal:0, int_literal, literal:Num, return, unary_operator:USub
-def test_abs_val(): # function:test_abs_val (-> +3), function_returning_nothing:test_abs_val (-> +3), function_without_argument:test_abs_val (-> +3)
+def test_abs_val(): # function:test_abs_val (-> +3), function_returning_nothing:test_abs_val (-> +3), function_without_arguments:test_abs_val (-> +3)
     assert 0 == abs_val(0) # assertion, call_argument:0, comparison_operator:Eq, falsey_literal:0, function_call:abs_val, int_literal, literal:Num
     assert 34 == abs_val(34) # assertion, call_argument:34, comparison_operator:Eq, function_call:abs_val, int_literal, literal:Num, suggest_constant_definition
     assert 100000000000 == abs_val(-100000000000) # assertion, call_argument:-100000000000, comparison_operator:Eq, function_call:abs_val, int_literal, literal:Num, suggest_constant_definition
@@ -153,7 +153,7 @@ def abs_max(x: List[int]) -> int: # function:abs_max (-> +5), function_returning
     return j # return:j
 def abs_max_sort(x): # function:abs_max_sort (-> +1), function_returning_something:abs_max_sort (-> +1)
     return sorted(x, key=abs)[-1] # call_argument:x, function_call:sorted, index, int_literal, literal:Num, negative_index:-1, return
-def main(): # function:main (-> +3), function_returning_nothing:main (-> +3), function_without_argument:main (-> +3)
+def main(): # function:main (-> +3), function_returning_nothing:main (-> +3), function_without_arguments:main (-> +3)
     a = [1, 2, -11] # assignment, assignment_lhs_identifier:a, assignment_rhs_atom:-11, assignment_rhs_atom:1, assignment_rhs_atom:2, int_literal, literal:List, literal:Num, single_assignment:a, suggest_constant_definition
     assert abs_max(a) == -11 # assertion, call_argument:a, comparison_operator:Eq, function_call:abs_max, int_literal, literal:Num, suggest_constant_definition
     assert abs_max_sort(a) == -11 # assertion, call_argument:a, comparison_operator:Eq, function_call:abs_max_sort, int_literal, literal:Num, suggest_constant_definition
@@ -168,7 +168,7 @@ def absMin(x): # function:absMin (-> +5), function_returning_something:absMin (-
         if abs_val(i) < abs_val(j): # call_argument:i, call_argument:j, comparison_operator:Lt, function_call:abs_val, if (-> +1), if_test_atom:i, if_test_atom:j
             j = i # assignment, assignment_lhs_identifier:j, assignment_rhs_atom:i, if_then_branch, single_assignment:j
     return j # return:j
-def main(): # function:main (-> +2), function_returning_nothing:main (-> +2), function_without_argument:main (-> +2)
+def main(): # function:main (-> +2), function_returning_nothing:main (-> +2), function_without_arguments:main (-> +2)
     a = [-3, -1, 2, -11] # assignment, assignment_lhs_identifier:a, assignment_rhs_atom:-1, assignment_rhs_atom:-11, assignment_rhs_atom:-3, assignment_rhs_atom:2, int_literal, literal:List, literal:Num, single_assignment:a, suggest_constant_definition
     print(absMin(a)) # call_argument:, call_argument:a, composition, function_call:absMin, function_call:print
 
@@ -177,7 +177,7 @@ def main(): # function:main (-> +2), function_returning_nothing:main (-> +2), fu
 # ----------------------------------------------------------------------------------------
 def average(nums): # function:average (-> +1), function_returning_something:average (-> +1)
     return sum(nums) / len(nums) # binary_operator:Div, call_argument:nums, function_call:len, function_call:sum, return
-def test_average(): # function:test_average (-> +3), function_returning_nothing:test_average (-> +3), function_without_argument:test_average (-> +3)
+def test_average(): # function:test_average (-> +3), function_returning_nothing:test_average (-> +3), function_without_arguments:test_average (-> +3)
     assert 12.0 == average([3, 6, 9, 12, 15, 18, 21]) # assertion, call_argument:, comparison_operator:Eq, float_literal, function_call:average, int_literal, literal:List, literal:Num, suggest_constant_definition
     assert 20 == average([5, 10, 15, 20, 25, 30, 35]) # assertion, call_argument:, comparison_operator:Eq, function_call:average, int_literal, literal:List, literal:Num, suggest_constant_definition
     assert 4.5 == average([1, 2, 3, 4, 5, 6, 7, 8]) # assertion, call_argument:, comparison_operator:Eq, float_literal, function_call:average, int_literal, literal:List, literal:Num, suggest_constant_definition
@@ -196,7 +196,7 @@ def median(nums): # function:median (-> +10), function_returning_something:media
         mid_index = (len(sorted_list) - 1) // 2 # assignment, assignment_lhs_identifier:mid_index, assignment_rhs_atom:1, assignment_rhs_atom:2, assignment_rhs_atom:sorted_list, binary_operator:FloorDiv, binary_operator:Sub, call_argument:sorted_list, function_call:len, if_else_branch (-> +1), int_literal, literal:Num, single_assignment:mid_index
         med = sorted_list[mid_index] # assignment, assignment_lhs_identifier:med, assignment_rhs_atom:mid_index, assignment_rhs_atom:sorted_list, index, single_assignment:med
     return med # return:med
-def main(): # function:main (-> +4), function_returning_nothing:main (-> +4), function_without_argument:main (-> +4)
+def main(): # function:main (-> +4), function_returning_nothing:main (-> +4), function_without_arguments:main (-> +4)
     print("Odd number of numbers:") # call_argument:, function_call:print, literal:Str
     print(median([2, 4, 6, 8, 20, 50, 70])) # call_argument:, composition, function_call:median, function_call:print, int_literal, literal:List, literal:Num, suggest_constant_definition
     print("Even number of numbers:") # call_argument:, function_call:print, literal:Str
@@ -208,7 +208,7 @@ def main(): # function:main (-> +4), function_returning_nothing:main (-> +4), fu
 import statistics # import:statistics, import_module:statistics
 def mode(input_list): # function:mode (-> +7), function_returning_something:mode (-> +7)
     check_list = input_list.copy() # assignment, assignment_lhs_identifier:check_list, assignment_rhs_atom:input_list, method_call, method_call_name:copy, single_assignment:check_list
-    result = list() # assignment, assignment_lhs_identifier:result, function_call:list, function_call_with_no_argument:list, single_assignment:result
+    result = list() # assignment, assignment_lhs_identifier:result, function_call:list, function_call_without_arguments:list, single_assignment:result
     for x in input_list: # accumulate_elements:result (-> +4), for:x (-> +4), for_each (-> +4)
         result.append(input_list.count(x)) # call_argument:, call_argument:x, composition, method_call, method_call_name:append, method_call_name:count, method_call_object:result, variable_update:result:x, variable_update_by_method_call:result:x
         input_list.remove(x) # call_argument:x, method_call, method_call_name:remove, method_call_object:input_list
@@ -313,7 +313,7 @@ def collatz_sequence(n): # function:collatz_sequence (-> +8), function_returning
             n = 3 * n + 1 # assignment, assignment_lhs_identifier:n, assignment_rhs_atom:1, assignment_rhs_atom:3, assignment_rhs_atom:n, binary_operator:Add, binary_operator:Mult, if_else_branch, int_literal, literal:Num, single_assignment:n, suggest_constant_definition, variable_update:n:1, variable_update:n:3, variable_update_by_assignment:n:1, variable_update_by_assignment:n:3
         sequence.append(n) # call_argument:n, method_call, method_call_name:append, method_call_object:sequence, variable_update:sequence:n, variable_update_by_method_call:sequence:n
     return sequence # return:sequence
-def main(): # function:main (-> +4), function_returning_nothing:main (-> +4), function_without_argument:main (-> +4)
+def main(): # function:main (-> +4), function_returning_nothing:main (-> +4), function_without_arguments:main (-> +4)
     n = 43 # assignment, assignment_lhs_identifier:n, assignment_rhs_atom:43, int_literal, literal:Num, single_assignment:n, suggest_constant_definition
     sequence = collatz_sequence(n) # assignment, assignment_lhs_identifier:sequence, assignment_rhs_atom:n, call_argument:n, function_call:collatz_sequence, single_assignment:sequence
     print(sequence) # call_argument:sequence, function_call:print
@@ -369,7 +369,7 @@ def extended_euclidean_algorithm(m, n): # function:extended_euclidean_algorithm 
     else:
         pair = (b, a) # assignment, assignment_lhs_identifier:pair, assignment_rhs_atom:a, assignment_rhs_atom:b, if_else_branch, single_assignment:pair
     return pair # return:pair
-def main(): # function:main (-> +6), function_returning_nothing:main (-> +6), function_without_argument:main (-> +6)
+def main(): # function:main (-> +6), function_returning_nothing:main (-> +6), function_without_arguments:main (-> +6)
     if len(sys.argv) < 3: # call_argument:, comparison_operator:Lt, function_call:len, if (-> +2), if_test_atom:3, if_test_atom:sys, int_literal, literal:Num, suggest_constant_definition
         print("2 integer arguments required") # call_argument:, function_call:print, if_then_branch (-> +1), literal:Str
         exit(1) # call_argument:1, function_call:exit, int_literal, literal:Num
@@ -430,7 +430,7 @@ import math # import:math, import_module:math
 import functools # import:functools, import_module:functools
 import time # import:time, import_module:time
 from decimal import getcontext, Decimal # import:decimal:Decimal, import:decimal:getcontext, import_module:decimal, import_name:Decimal, import_name:getcontext
-getcontext().prec = 100 # assignment, assignment_rhs_atom:100, function_call:getcontext, function_call_with_no_argument:getcontext, int_literal, literal:Num
+getcontext().prec = 100 # assignment, assignment_rhs_atom:100, function_call:getcontext, function_call_without_arguments:getcontext, int_literal, literal:Num
 def timer_decorator(func): # closure:timer_decorator (-> +10), function:timer_decorator (-> +10), function_returning_something:timer_decorator (-> +10), nested_function:timer_decorator (-> +10)
     def timer_wrapper(*args, **kwargs): # function:timer_wrapper (-> +8), function_returning_something:timer_wrapper (-> +8)
         start = time.time() # assignment, assignment_lhs_identifier:start, assignment_rhs_atom:time, method_call, method_call_name:time, single_assignment:start
@@ -501,7 +501,7 @@ def fib_formula(n): # function:fib_formula (-> +12), function_returning_somethin
 # ----------------------------------------------------------------------------------------
 def recur_fibo(n): # body_recursive_function:recur_fibo (-> +1), function:recur_fibo (-> +1), function_returning_something:recur_fibo (-> +1), recursive_function:recur_fibo (-> +1)
     return n if n <= 1 else recur_fibo(n - 1) + recur_fibo(n - 2) # binary_operator:Add, binary_operator:Sub, call_argument:, comparison_operator:LtE, conditional_expression, function_call:recur_fibo, int_literal, literal:Num, return
-def main(): # function:main (-> +6), function_returning_nothing:main (-> +6), function_without_argument:main (-> +6)
+def main(): # function:main (-> +6), function_returning_nothing:main (-> +6), function_without_arguments:main (-> +6)
     limit = int(input("How many terms to include in fibonacci series: ")) # assignment, assignment_lhs_identifier:limit, call_argument:, composition, function_call:input, function_call:int, literal:Str, single_assignment:limit
     if limit > 0: # comparison_operator:Gt, falsey_literal:0, if (-> +4), if_test_atom:0, if_test_atom:limit, int_literal, literal:Num
         print(f"The first {limit} terms of the fibonacci series are as follows:") # call_argument:, function_call:print, if_then_branch (-> +1), literal:Str
@@ -518,7 +518,7 @@ def find_max(nums): # function:find_max (-> +5), function_returning_something:fi
         if x > max_num: # comparison_operator:Gt, if (-> +1), if_test_atom:max_num, if_test_atom:x
             max_num = x # assignment, assignment_lhs_identifier:max_num, assignment_rhs_atom:x, if_then_branch, single_assignment:max_num
     return max_num # return:max_num
-def main(): # function:main (-> +1), function_returning_nothing:main (-> +1), function_without_argument:main (-> +1)
+def main(): # function:main (-> +1), function_returning_nothing:main (-> +1), function_without_arguments:main (-> +1)
     print(find_max([2, 4, 9, 7, 19, 94, 5])) # call_argument:, composition, function_call:find_max, function_call:print, int_literal, literal:List, literal:Num, suggest_constant_definition
 
 # ----------------------------------------------------------------------------------------
@@ -541,7 +541,7 @@ def find_min(nums): # function:find_min (-> +5), function_returning_something:fi
         if min_num > num: # comparison_operator:Gt, if (-> +1), if_test_atom:min_num, if_test_atom:num
             min_num = num # assignment, assignment_lhs_identifier:min_num, assignment_rhs_atom:num, if_then_branch, single_assignment:min_num
     return min_num # return:min_num
-def main(): # function:main (-> +1), function_returning_nothing:main (-> +1), function_without_argument:main (-> +1)
+def main(): # function:main (-> +1), function_returning_nothing:main (-> +1), function_without_arguments:main (-> +1)
     assert find_min([0, 1, 2, 3, 4, 5, -3, 24, -56]) == -56 # assertion, call_argument:, comparison_operator:Eq, falsey_literal:0, function_call:find_min, int_literal, literal:List, literal:Num, suggest_constant_definition
 
 # ----------------------------------------------------------------------------------------
@@ -579,7 +579,7 @@ def gcd_by_iterative(x, y): # function:gcd_by_iterative (-> +3), function_return
     while y: # while (-> +1)
         x, y = y, x % y # assignment, assignment_lhs_identifier:x, assignment_lhs_identifier:y, assignment_rhs_atom:x, assignment_rhs_atom:y, binary_operator:Mod, variable_update:x:y, variable_update:y:x, variable_update_by_assignment:x:y, variable_update_by_assignment:y:x
     return x # return:x
-def main(): # function:main (-> +10), function_returning_nothing:main (-> +10), function_without_argument:main (-> +10)
+def main(): # function:main (-> +10), function_returning_nothing:main (-> +10), function_without_arguments:main (-> +10)
     try: # try (-> +9), try_except:IndexError (-> +9), try_except:UnboundLocalError (-> +9), try_except:ValueError (-> +9)
         nums = input("Enter two integers separated by comma (,): ").split(",") # assignment, assignment_lhs_identifier:nums, call_argument:, function_call:input, literal:Str, method_call, method_call_name:split, single_assignment:nums
         num_1 = int(nums[0]) # assignment, assignment_lhs_identifier:num_1, assignment_rhs_atom:0, assignment_rhs_atom:nums, call_argument:, falsey_literal:0, function_call:int, index, int_literal, literal:Num, single_assignment:num_1
@@ -653,7 +653,7 @@ def karatsuba(a, b): # body_recursive_function:karatsuba (-> +11), function:kara
         y = karatsuba((a1 + a2), (b1 + b2)) # assignment, assignment_lhs_identifier:y, assignment_rhs_atom:a1, assignment_rhs_atom:a2, assignment_rhs_atom:b1, assignment_rhs_atom:b2, binary_operator:Add, call_argument:, function_call:karatsuba, single_assignment:y
         z = karatsuba(a1, b1) # assignment, assignment_lhs_identifier:z, assignment_rhs_atom:a1, assignment_rhs_atom:b1, call_argument:a1, call_argument:b1, function_call:karatsuba, single_assignment:z
         return (z * 10 ** (2 * m2)) + ((y - z - x) * 10 ** (m2)) + (x) # binary_operator:Add, binary_operator:Mult, binary_operator:Pow, binary_operator:Sub, int_literal, literal:Num, return, suggest_constant_definition
-def main(): # function:main (-> +1), function_returning_nothing:main (-> +1), function_without_argument:main (-> +1)
+def main(): # function:main (-> +1), function_returning_nothing:main (-> +1), function_without_arguments:main (-> +1)
     print(karatsuba(15463, 23489)) # call_argument:, call_argument:15463, call_argument:23489, composition, function_call:karatsuba, function_call:print, int_literal, literal:Num, suggest_constant_definition
 
 # ----------------------------------------------------------------------------------------
@@ -773,7 +773,7 @@ def simple_fibonacci(n, f1, f2): # function:simple_fibonacci (-> +11), function_
         fn_1, fn_2 = fn_1 + fn_2, fn_1 # assignment, assignment_lhs_identifier:fn_1, assignment_lhs_identifier:fn_2, assignment_rhs_atom:fn_1, assignment_rhs_atom:fn_2, binary_operator:Add, variable_update:fn_1:fn_2, variable_update:fn_2:fn_1, variable_update_by_assignment:fn_1:fn_2, variable_update_by_assignment:fn_2:fn_1
         n -= 1 # assignment_lhs_identifier:n, assignment_rhs_atom:1, augmented_assignment:Sub, int_literal, literal:Num, variable_update:n:1, variable_update_by_augmented_assignment:n:1
     return fn_1 # return:fn_1
-def matrix_exponentiation_time(): # function:matrix_exponentiation_time (-> +8), function_returning_something:matrix_exponentiation_time (-> +8), function_without_argument:matrix_exponentiation_time (-> +8)
+def matrix_exponentiation_time(): # function:matrix_exponentiation_time (-> +8), function_returning_something:matrix_exponentiation_time (-> +8), function_without_arguments:matrix_exponentiation_time (-> +8)
     setup = """ # assignment, assignment_lhs_identifier:setup, single_assignment:setup
 from random import randint
 from __main__ import fibonacci_with_matrix_exponentiation
@@ -782,7 +782,7 @@ from __main__ import fibonacci_with_matrix_exponentiation
     exec_time = timeit.timeit(setup=setup, stmt=code, number=100) # assignment, assignment_lhs_identifier:exec_time, assignment_rhs_atom:100, assignment_rhs_atom:code, assignment_rhs_atom:setup, assignment_rhs_atom:timeit, int_literal, literal:Num, method_call, method_call_name:timeit, single_assignment:exec_time, suggest_constant_definition
     print("With matrix exponentiation the average execution time is ", exec_time / 100) # binary_operator:Div, call_argument:, function_call:print, int_literal, literal:Num, literal:Str, suggest_constant_definition
     return exec_time # return:exec_time
-def simple_fibonacci_time(): # function:simple_fibonacci_time (-> +10), function_returning_something:simple_fibonacci_time (-> +10), function_without_argument:simple_fibonacci_time (-> +10)
+def simple_fibonacci_time(): # function:simple_fibonacci_time (-> +10), function_returning_something:simple_fibonacci_time (-> +10), function_without_arguments:simple_fibonacci_time (-> +10)
     setup = """ # assignment, assignment_lhs_identifier:setup, single_assignment:setup
 from random import randint
 from __main__ import simple_fibonacci
@@ -793,9 +793,9 @@ from __main__ import simple_fibonacci
         "Without matrix exponentiation the average execution time is ", exec_time / 100 # binary_operator:Div, call_argument:, int_literal, literal:Num, literal:Str, suggest_constant_definition
     )
     return exec_time # return:exec_time
-def main(): # function:main (-> +2), function_returning_nothing:main (-> +2), function_without_argument:main (-> +2)
-    matrix_exponentiation_time() # function_call:matrix_exponentiation_time, function_call_with_no_argument:matrix_exponentiation_time
-    simple_fibonacci_time() # function_call:simple_fibonacci_time, function_call_with_no_argument:simple_fibonacci_time
+def main(): # function:main (-> +2), function_returning_nothing:main (-> +2), function_without_arguments:main (-> +2)
+    matrix_exponentiation_time() # function_call:matrix_exponentiation_time, function_call_without_arguments:matrix_exponentiation_time
+    simple_fibonacci_time() # function_call:simple_fibonacci_time, function_call_without_arguments:simple_fibonacci_time
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/mobius_function.py
@@ -822,7 +822,7 @@ def modular_exponential(base, power, mod): # function:modular_exponential (-> +1
         power = power >> 1 # assignment, assignment_lhs_identifier:power, assignment_rhs_atom:1, assignment_rhs_atom:power, binary_operator:RShift, int_literal, literal:Num, single_assignment:power, suggest_augmented_assignment, variable_update:power:1, variable_update_by_assignment:power:1
         base = (base * base) % mod # assignment, assignment_lhs_identifier:base, assignment_rhs_atom:base, assignment_rhs_atom:mod, binary_operator:Mod, binary_operator:Mult, single_assignment:base, variable_update:base:mod, variable_update_by_assignment:base:mod
     return result # return:result
-def main(): # function:main (-> +1), function_returning_nothing:main (-> +1), function_without_argument:main (-> +1)
+def main(): # function:main (-> +1), function_returning_nothing:main (-> +1), function_without_arguments:main (-> +1)
     print(modular_exponential(3, 200, 13)) # call_argument:, call_argument:13, call_argument:200, call_argument:3, composition, function_call:modular_exponential, function_call:print, int_literal, literal:Num, suggest_constant_definition
 
 # ----------------------------------------------------------------------------------------
@@ -994,7 +994,7 @@ def QuadraticEquation(a: int, b: int, c: int) -> Tuple[str, str]: # function:Qua
         return f"({snd} * i) / 2", f"({snd} * i) / {2 * a}" # binary_operator:Mult, if_then_branch, int_literal, literal:Num, literal:Str, return
     b = -abs(b) # assignment, assignment_lhs_identifier:b, assignment_rhs_atom:b, call_argument:b, function_call:abs, single_assignment:b, unary_operator:USub
     return f"({b}+{snd} * i) / 2", f"({b}+{snd} * i) / {2 * a}" # binary_operator:Mult, int_literal, literal:Num, literal:Str, return
-def main(): # function:main (-> +2), function_returning_nothing:main (-> +2), function_without_argument:main (-> +2)
+def main(): # function:main (-> +2), function_returning_nothing:main (-> +2), function_without_arguments:main (-> +2)
     solutions = QuadraticEquation(a=5, b=6, c=1) # assignment, assignment_lhs_identifier:solutions, assignment_rhs_atom:1, assignment_rhs_atom:5, assignment_rhs_atom:6, function_call:QuadraticEquation, int_literal, literal:Num, single_assignment:solutions, suggest_constant_definition
     print("The equation solutions are: {} and {}".format(*solutions)) # call_argument:, composition, function_call:print, literal:Str, method_call, method_call_name:format
 
@@ -1205,7 +1205,7 @@ def make_points(a, b, h): # function:make_points (-> +4), generator:make_points 
 def f(x): # function:f (-> +2), function_returning_something:f (-> +2)
     y = (x - 0) * (x - 0) # assignment, assignment_lhs_identifier:y, assignment_rhs_atom:0, assignment_rhs_atom:x, binary_operator:Mult, binary_operator:Sub, falsey_literal:0, int_literal, literal:Num, single_assignment:y
     return y # return:y
-def main(): # function:main (-> +6), function_returning_nothing:main (-> +6), function_without_argument:main (-> +6)
+def main(): # function:main (-> +6), function_returning_nothing:main (-> +6), function_without_arguments:main (-> +6)
     a = 0.0 # assignment, assignment_lhs_identifier:a, assignment_rhs_atom:0.0, falsey_literal:0.0, float_literal, literal:Num, single_assignment:a, suggest_constant_definition
     b = 1.0 # assignment, assignment_lhs_identifier:b, assignment_rhs_atom:1.0, float_literal, literal:Num, single_assignment:b, suggest_constant_definition
     steps = 10.0 # assignment, assignment_lhs_identifier:steps, assignment_rhs_atom:10.0, float_literal, literal:Num, single_assignment:steps, suggest_constant_definition
@@ -1229,14 +1229,14 @@ def softmax(vector): # function:softmax (-> +4), function_returning_something:so
 def sum_of_series(first_term, common_diff, num_of_terms): # function:sum_of_series (-> +2), function_returning_something:sum_of_series (-> +2)
     sum = (num_of_terms / 2) * (2 * first_term + (num_of_terms - 1) * common_diff) # assignment, assignment_lhs_identifier:sum, assignment_rhs_atom:1, assignment_rhs_atom:2, assignment_rhs_atom:common_diff, assignment_rhs_atom:first_term, assignment_rhs_atom:num_of_terms, binary_operator:Add, binary_operator:Div, binary_operator:Mult, binary_operator:Sub, int_literal, literal:Num, single_assignment:sum
     return sum # return:sum
-def main(): # function:main (-> +1), function_returning_nothing:main (-> +1), function_without_argument:main (-> +1)
+def main(): # function:main (-> +1), function_returning_nothing:main (-> +1), function_without_arguments:main (-> +1)
     print(sum_of_series(1, 1, 10)) # call_argument:, call_argument:1, call_argument:10, composition, function_call:print, function_call:sum_of_series, int_literal, literal:Num, suggest_constant_definition
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/test_prime_check.py
 # ----------------------------------------------------------------------------------------
 from .prime_check import Test # import:prime_check:Test, import_module:prime_check, import_name:Test
-Test() # function_call:Test, function_call_with_no_argument:Test
+Test() # function_call:Test, function_call_without_arguments:Test
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/trapezoidal_rule.py
@@ -1260,7 +1260,7 @@ def make_points(a, b, h): # function:make_points (-> +4), generator:make_points 
 def f(x): # function:f (-> +2), function_returning_something:f (-> +2)
     y = (x - 0) * (x - 0) # assignment, assignment_lhs_identifier:y, assignment_rhs_atom:0, assignment_rhs_atom:x, binary_operator:Mult, binary_operator:Sub, falsey_literal:0, int_literal, literal:Num, single_assignment:y
     return y # return:y
-def main(): # function:main (-> +6), function_returning_nothing:main (-> +6), function_without_argument:main (-> +6)
+def main(): # function:main (-> +6), function_returning_nothing:main (-> +6), function_without_arguments:main (-> +6)
     a = 0.0 # assignment, assignment_lhs_identifier:a, assignment_rhs_atom:0.0, falsey_literal:0.0, float_literal, literal:Num, single_assignment:a, suggest_constant_definition
     b = 1.0 # assignment, assignment_lhs_identifier:b, assignment_rhs_atom:1.0, float_literal, literal:Num, single_assignment:b, suggest_constant_definition
     steps = 10.0 # assignment, assignment_lhs_identifier:steps, assignment_rhs_atom:10.0, float_literal, literal:Num, single_assignment:steps, suggest_constant_definition
@@ -1288,7 +1288,7 @@ def vol_sphere(radius): # function:vol_sphere (-> +1), function_returning_someth
     return (float(4) / 3) * pi * radius ** 3 # binary_operator:Div, binary_operator:Mult, binary_operator:Pow, call_argument:4, function_call:float, int_literal, literal:Num, return, suggest_constant_definition
 def vol_circular_cylinder(radius, height): # function:vol_circular_cylinder (-> +1), function_returning_something:vol_circular_cylinder (-> +1)
     return pi * radius ** 2 * height # binary_operator:Mult, binary_operator:Pow, int_literal, literal:Num, return
-def main(): # function:main (-> +9), function_returning_nothing:main (-> +9), function_without_argument:main (-> +9)
+def main(): # function:main (-> +9), function_returning_nothing:main (-> +9), function_without_arguments:main (-> +9)
     print("Volumes:") # call_argument:, function_call:print, literal:Str
     print("Cube: " + str(vol_cube(2))) # binary_operator:Add, call_argument:, call_argument:2, composition, concatenation operator:Str, function_call:print, function_call:str, function_call:vol_cube, int_literal, literal:Num, literal:Str
     print("Cuboid: " + str(vol_cuboid(2, 2, 2))) # binary_operator:Add, call_argument:, call_argument:2, composition, concatenation operator:Str, function_call:print, function_call:str, function_call:vol_cuboid, int_literal, literal:Num, literal:Str
