@@ -137,6 +137,7 @@ type/elementary/number/floating_point	float_literal
 type/elementary/number/integer	int_literal
 type/elementary/string/	literal:Str
 type/elementary/string/empty/	falsey_literal:Str
+type/elementary/string/formatted/	f_string
 variable/assignment/	assignment
 variable/assignment/augmented/\1/	augmented_assignment:(.+)
 variable/assignment/chained/	chained_assignment

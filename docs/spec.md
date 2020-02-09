@@ -34,8 +34,9 @@
       - [Feature `method_call_object`](#feature-method_call_object)
       - [Feature `method_chaining`](#feature-method_chaining)
       - [Feature `composition`](#feature-composition)
-  - [Anonymous functions](#anonymous-functions)
+  - [Various](#various)
       - [Feature `lambda_function`](#feature-lambda_function)
+      - [Feature `f_string`](#feature-f_string)
   - [Iterables](#iterables)
       - [Feature `range` (SQL)](#feature-range)
       - [Feature `comprehension`](#feature-comprehension)
@@ -1251,7 +1252,7 @@ Apply a function or a method to an expression involving the result of another fu
 
 --------------------------------------------------------------------------------
 
-## Anonymous functions
+## Various
 
 --------------------------------------------------------------------------------
 
@@ -1275,6 +1276,29 @@ Apply a function or a method to an expression involving the result of another fu
 | Label | Lines |
 |:--|:--|
 | `lambda_function` | 1 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `f_string`
+
+##### Specification
+
+```re
+           ^(.*)/value/args/1/_type=JoinedStr
+\n(?:\1.+\n)*?\1/value/args/1/_pos=(?P<POS>.+)
+```
+
+##### Example
+
+```python
+1   print(f"hello, {world}")
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `f_string` | 1 |
 
 --------------------------------------------------------------------------------
 

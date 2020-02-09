@@ -438,9 +438,9 @@ def timer_decorator(func): # closure:timer_decorator (-> +11), function:timer_de
         func(*args, **kwargs) # call_argument:, function_call:func
         end = time.time() # assignment, assignment_lhs_identifier:end, assignment_rhs_atom:time, method_call, method_call_name:time, single_assignment:end
         if int(end - start) > 0: # binary_operator:Sub, call_argument:, comparison_operator:Gt, falsey_literal:0, function_call:int, if (-> +3), if_test_atom:0, if_test_atom:end, if_test_atom:start, int_literal, literal:Num
-            print(f"Run time for {func.__name__}: {(end - start):0.2f}s") # binary_operator:Sub, call_argument:, function_call:print, if_then_branch, literal:Str
+            print(f"Run time for {func.__name__}: {(end - start):0.2f}s") # binary_operator:Sub, call_argument:, f_string, function_call:print, if_then_branch, literal:Str
         else:
-            print(f"Run time for {func.__name__}: {(end - start)*1000:0.2f}ms") # binary_operator:Mult, binary_operator:Sub, call_argument:, function_call:print, if_else_branch, int_literal, literal:Num, literal:Str, suggest_constant_definition
+            print(f"Run time for {func.__name__}: {(end - start)*1000:0.2f}ms") # binary_operator:Mult, binary_operator:Sub, call_argument:, f_string, function_call:print, if_else_branch, int_literal, literal:Num, literal:Str, suggest_constant_definition
         return func(*args, **kwargs) # call_argument:, function_call:func, function_tail_call:func, return
     return timer_wrapper # return:timer_wrapper
 class Error(Exception):
@@ -467,11 +467,11 @@ def _check_number_input(n, min_thresh, max_thresh=None): # falsey_literal:None, 
         print("Incorrect Input: number must not be less than 0") # call_argument:, function_call:print, literal:Str
     except ValueTooSmallError: # except:ValueTooSmallError
         print( # function_call:print
-            f"Incorrect Input: input number must be > {min_thresh} for the recursive calculation" # call_argument:, literal:Str
+            f"Incorrect Input: input number must be > {min_thresh} for the recursive calculation" # call_argument:, f_string, literal:Str
         )
     except ValueTooLargeError: # except:ValueTooLargeError
         print( # function_call:print
-            f"Incorrect Input: input number must be < {max_thresh} for the recursive calculation" # call_argument:, literal:Str
+            f"Incorrect Input: input number must be < {max_thresh} for the recursive calculation" # call_argument:, f_string, literal:Str
         )
     return False # falsey_literal:False, literal:False, return:False
 @timer_decorator # decorated_function:fib_iterative (-> +9), function:fib_iterative (-> +9), function_returning_something:fib_iterative (-> +9)
@@ -507,7 +507,7 @@ def recur_fibo(n): # body_recursive_function:recur_fibo (-> +1), function:recur_
 def main(): # function:main (-> +6), function_returning_nothing:main (-> +6), function_without_arguments:main (-> +6)
     limit = int(input("How many terms to include in fibonacci series: ")) # assignment, assignment_lhs_identifier:limit, call_argument:, composition, function_call:input, function_call:int, literal:Str, single_assignment:limit
     if limit > 0: # comparison_operator:Gt, falsey_literal:0, if (-> +4), if_test_atom:0, if_test_atom:limit, int_literal, literal:Num
-        print(f"The first {limit} terms of the fibonacci series are as follows:") # call_argument:, function_call:print, if_then_branch (-> +1), literal:Str
+        print(f"The first {limit} terms of the fibonacci series are as follows:") # call_argument:, f_string, function_call:print, if_then_branch (-> +1), literal:Str
         print([recur_fibo(n) for n in range(limit)]) # call_argument:, call_argument:limit, call_argument:n, composition, comprehension:List, comprehension_for_count:1, function_call:print, function_call:range, function_call:recur_fibo, range:limit
     else:
         print("Please enter a positive integer: ") # call_argument:, function_call:print, if_else_branch, literal:Str
@@ -588,9 +588,9 @@ def main(): # function:main (-> +10), function_returning_nothing:main (-> +10), 
         num_1 = int(nums[0]) # assignment, assignment_lhs_identifier:num_1, assignment_rhs_atom:0, assignment_rhs_atom:nums, call_argument:, falsey_literal:0, function_call:int, index, int_literal, literal:Num, single_assignment:num_1
         num_2 = int(nums[1]) # assignment, assignment_lhs_identifier:num_2, assignment_rhs_atom:1, assignment_rhs_atom:nums, call_argument:, function_call:int, index, int_literal, literal:Num, single_assignment:num_2
         print( # composition, function_call:print
-            f"greatest_common_divisor({num_1}, {num_2}) = {greatest_common_divisor(num_1, num_2)}" # call_argument:, call_argument:num_1, call_argument:num_2, function_call:greatest_common_divisor, literal:Str
+            f"greatest_common_divisor({num_1}, {num_2}) = {greatest_common_divisor(num_1, num_2)}" # call_argument:, call_argument:num_1, call_argument:num_2, f_string, function_call:greatest_common_divisor, literal:Str
         )
-        print(f"By iterative gcd({num_1}, {num_2}) = {gcd_by_iterative(num_1, num_2)}") # call_argument:, call_argument:num_1, call_argument:num_2, composition, function_call:gcd_by_iterative, function_call:print, literal:Str
+        print(f"By iterative gcd({num_1}, {num_2}) = {gcd_by_iterative(num_1, num_2)}") # call_argument:, call_argument:num_1, call_argument:num_2, composition, f_string, function_call:gcd_by_iterative, function_call:print, literal:Str
     except (IndexError, UnboundLocalError, ValueError): # except:IndexError, except:UnboundLocalError, except:ValueError
         print("Wrong input") # call_argument:, function_call:print, literal:Str
 

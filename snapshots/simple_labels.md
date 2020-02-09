@@ -109,6 +109,7 @@
 - divisibility_test
 - except
 - existential_quantifier
+- f_string
 - falsey_literal
 - filter_for
 - filtered_comprehension
