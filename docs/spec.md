@@ -144,14 +144,14 @@
 ##### Specification
 
 ```re
-^(.*)
-(   # match None, True and False
-              /_type=NameConstant
+           ^(.*)/_type=
+(   # match True, False and None
+                       NameConstant
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/value=(?P<SUFFIX>None|True|False)
+\n(?:\1.+\n)*?\1/value=(?P<SUFFIX>.+)
 |   # match any other constant
-              /_type=(?P<SUFFIX>Str|Num|Tuple|Dict|Set|List)
-\n(?:\1.+\n)*?\1/_ids=
+                       (?P<SUFFIX>Str|Num|Tuple|Dict|Set|List)
+\n(?:\1.+\n)*?\1/_ids= # prevent matching of containers with non-literal elements
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 )
 ```
