@@ -11,7 +11,6 @@ from span import Span
 HINT_COMMENT = "# paroxython:"
 
 sub_main = regex.compile(r"(?ms)^if +__name__ *== *.__main__. *:.+").sub
-sub_decorator = regex.compile(r"(?m)^\s*@.+\n").sub
 sub_first_comments = regex.compile(r"\A(#.*\n)*").sub
 sub_blank_lines = regex.compile(r"\s*\n").sub
 sub_pass = regex.compile(r"(?m)^( *)pass\n\1(?!\s)").sub
@@ -22,7 +21,7 @@ subn_paroxython_comment = regex.compile(r"(?i)#\s*paroxython\s*:\s*").subn
 def cleanup_factory(cleanup_strategy: str) -> Callable[[Source], Source]:
     cleanup = lambda source: source
     if cleanup_strategy == "strip_docs":
-        cleanup = lambda source: sub_decorator("", sub_main("", strip_docs(source)))
+        cleanup = lambda source: sub_main("", strip_docs(source))
     return cleanup
 
 

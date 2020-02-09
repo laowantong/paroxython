@@ -104,6 +104,7 @@
 - conditional_expression
 - count_elements
 - count_inputs
+- decorated_function
 - deeply_recursive_function
 - divisibility_test
 - except

@@ -431,8 +431,9 @@ import functools # import:functools, import_module:functools
 import time # import:time, import_module:time
 from decimal import getcontext, Decimal # import:decimal:Decimal, import:decimal:getcontext, import_module:decimal, import_name:Decimal, import_name:getcontext
 getcontext().prec = 100 # assignment, assignment_rhs_atom:100, function_call:getcontext, function_call_without_arguments:getcontext, int_literal, literal:Num
-def timer_decorator(func): # closure:timer_decorator (-> +10), function:timer_decorator (-> +10), function_returning_something:timer_decorator (-> +10), nested_function:timer_decorator (-> +10)
-    def timer_wrapper(*args, **kwargs): # function:timer_wrapper (-> +8), function_returning_something:timer_wrapper (-> +8)
+def timer_decorator(func): # closure:timer_decorator (-> +11), function:timer_decorator (-> +11), function_returning_something:timer_decorator (-> +11), nested_function:timer_decorator (-> +11)
+    @functools.wraps(func) # call_argument:func, decorated_function:timer_wrapper (-> +9), function:timer_wrapper (-> +9), function_returning_something:timer_wrapper (-> +9), method_call, method_call_name:wraps
+    def timer_wrapper(*args, **kwargs):
         start = time.time() # assignment, assignment_lhs_identifier:start, assignment_rhs_atom:time, method_call, method_call_name:time, single_assignment:start
         func(*args, **kwargs) # call_argument:, function_call:func
         end = time.time() # assignment, assignment_lhs_identifier:end, assignment_rhs_atom:time, method_call, method_call_name:time, single_assignment:end
@@ -473,7 +474,8 @@ def _check_number_input(n, min_thresh, max_thresh=None): # falsey_literal:None, 
             f"Incorrect Input: input number must be < {max_thresh} for the recursive calculation" # call_argument:, literal:Str
         )
     return False # falsey_literal:False, literal:False, return:False
-def fib_iterative(n): # function:fib_iterative (-> +8), function_returning_something:fib_iterative (-> +8)
+@timer_decorator # decorated_function:fib_iterative (-> +9), function:fib_iterative (-> +9), function_returning_something:fib_iterative (-> +9)
+def fib_iterative(n):
     n = int(n) # assignment, assignment_lhs_identifier:n, assignment_rhs_atom:n, call_argument:n, function_call:int, single_assignment:n
     if _check_number_input(n, 2): # call_argument:2, call_argument:n, function_call:_check_number_input, if (-> +6), if_test_atom:2, if_test_atom:n, int_literal, literal:Num
         seq_out = [0, 1] # assignment, assignment_lhs_identifier:seq_out, assignment_rhs_atom:0, assignment_rhs_atom:1, falsey_literal:0, if_then_branch (-> +5), int_literal, literal:List, literal:Num, single_assignment:seq_out
@@ -482,7 +484,8 @@ def fib_iterative(n): # function:fib_iterative (-> +8), function_returning_somet
             a, b = b, a + b # assignment, assignment_lhs_identifier:a, assignment_lhs_identifier:b, assignment_rhs_atom:a, assignment_rhs_atom:b, binary_operator:Add, variable_update:a:b, variable_update:b:a, variable_update_by_assignment:a:b, variable_update_by_assignment:b:a
             seq_out.append(b) # call_argument:b, method_call, method_call_name:append, method_call_object:seq_out, variable_update:seq_out:b, variable_update_by_method_call:seq_out:b
         return seq_out # return:seq_out
-def fib_formula(n): # function:fib_formula (-> +12), function_returning_something:fib_formula (-> +12)
+@timer_decorator # decorated_function:fib_formula (-> +13), function:fib_formula (-> +13), function_returning_something:fib_formula (-> +13)
+def fib_formula(n):
     seq_out = [0, 1] # assignment, assignment_lhs_identifier:seq_out, assignment_rhs_atom:0, assignment_rhs_atom:1, falsey_literal:0, int_literal, literal:List, literal:Num, single_assignment:seq_out
     n = int(n) # assignment, assignment_lhs_identifier:n, assignment_rhs_atom:n, call_argument:n, function_call:int, single_assignment:n
     if _check_number_input(n, 2, 1000000): # call_argument:1000000, call_argument:2, call_argument:n, function_call:_check_number_input, if (-> +9), if_test_atom:1000000, if_test_atom:2, if_test_atom:n, int_literal, literal:Num, suggest_constant_definition

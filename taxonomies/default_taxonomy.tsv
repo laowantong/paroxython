@@ -74,6 +74,7 @@ pattern/elements/satisfy/some/	existential_quantifier
 pattern/inputs/accumulate/	accumulate_inputs\b.+
 pattern/inputs/accumulate/count/	count_inputs\b.+
 pattern/inputs/find_first_good/	get_valid_input\b.+
+subroutine_definition/decorated/	decorated_function:.+
 subroutine_definition/function/	function_returning_something:.+
 subroutine_definition/generator/	generator:.+
 subroutine_definition/method/avoid_conflict/	function:.+_(?>!_)
@@ -116,6 +117,7 @@ type/container/range/empty/	range:0
 type/container/set/	literal:Set
 type/container/set/empty/	function_call_without_arguments:set
 type/container/tuple/	literal:Tuple
+type/container/tuple/assignment/swapping	swapping
 type/container/tuple/empty/	falsey_literal:Tuple
 type/container/tuple/empty/	function_call_without_arguments:tuple
 type/elementary/bool/false/	function_call_without_arguments:bool
@@ -152,7 +154,6 @@ control_flow/loop/non_sequential/divergent/return
 control_flow/loop/sequential/divergent/break	
 control_flow/loop/sequential/divergent/break/else	
 control_flow/loop/sequential/divergent/return	
-function_definition/decorated	
 io/file	
 io/standard/print/multiple	
 io/standard/print/newline	
@@ -175,7 +176,6 @@ subscript/slice/start
 subscript/slice/step/backwards	
 subscript/slice/stop	
 type/container/tuple/assignment	
-type/container/tuple/assignment/swapping	
 type/elementary/string/newline	
 variable/assignment/argument	
 variable/assignment/augmented/subscript	

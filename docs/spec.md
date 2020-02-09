@@ -67,6 +67,7 @@
       - [Feature `function_returning_nothing` (SQL)](#feature-function_returning_nothing)
       - [Feature `function_with_default_positional_arguments`](#feature-function_with_default_positional_arguments)
       - [Feature `function_without_arguments`](#feature-function_without_arguments)
+      - [Feature `decorated_function`](#feature-decorated_function)
     - [Nesting](#nesting)
       - [Feature `nested_function`](#feature-nested_function)
       - [Feature `closure` (SQL)](#feature-closure)
@@ -2438,6 +2439,38 @@ WHERE t.span IS NULL
 | Label | Lines |
 |:--|:--|
 | `function_without_arguments:bizz` | 1-2 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `decorated_function`
+
+##### Specification
+
+```re
+           ^(.*)/_type=FunctionDef
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
+\n(?:\1.+\n)*?\1/name=(?P<SUFFIX>.+)
+\n(?:\1.+\n)*?\1/decorator_list/length=(?!0\n).+
+\n(?:\1.+\n)* \1/.+/_pos=(?P<POS>.+)
+```
+
+##### Example
+
+```python
+1   @bizz
+2   @foo
+3   @bar
+4   def qux(*args, **kwargs):
+5       pass
+```
+
+_Remark._ The span starts from the first decorator.
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `decorated_function:qux` | 1-5 |
 
 --------------------------------------------------------------------------------
 
