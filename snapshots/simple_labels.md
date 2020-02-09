@@ -97,6 +97,7 @@
 - composition
 - comprehension
 - comprehension_for_count
+- concatenation_operator|replication_operator
 - conditional_expression
 - count_elements
 - count_inputs

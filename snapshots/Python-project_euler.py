@@ -682,7 +682,7 @@ def largest_product(grid): # function:largest_product (-> +27), function_returni
     return largest # return:largest
 def solution(): # function:solution (-> +6), function_returning_something:solution (-> +6)
     grid = [] # assignment, assignment_lhs_identifier:grid, literal:List, single_assignment:grid
-    with open(os.path.dirname(__file__) + "/grid.txt") as file: # binary_operator:Add, call_argument:, call_argument:__file__, composition, function_call:open, literal:Str, method_call, method_call_name:dirname
+    with open(os.path.dirname(__file__) + "/grid.txt") as file: # binary_operator:Add, call_argument:, call_argument:__file__, composition, concatenation operator:Str, function_call:open, literal:Str, method_call, method_call_name:dirname
         for line in file: # for:line (-> +1), for_each (-> +1)
             grid.append(line.strip("\n").split(" ")) # call_argument:, composition, literal:Str, method_call, method_call_name:append, method_call_name:split, method_call_name:strip, method_call_object:grid, method_call_object:line, method_chaining
     grid = [[int(i) for i in grid[j]] for j in range(len(grid))] # assignment, assignment_lhs_identifier:grid, assignment_rhs_atom:grid, assignment_rhs_atom:i, assignment_rhs_atom:j, call_argument:, call_argument:grid, call_argument:i, composition, comprehension:List, comprehension_for_count:1, function_call:int, function_call:len, function_call:range, index, range:_, single_assignment:grid, variable_update:grid:i, variable_update:grid:j, variable_update_by_assignment:grid:i, variable_update_by_assignment:grid:j
@@ -693,7 +693,7 @@ def solution(): # function:solution (-> +6), function_returning_something:soluti
 # ----------------------------------------------------------------------------------------
 import os # import:os, import_module:os
 def solution(): # function:solution (-> +26), function_returning_something:solution (-> +26)
-    with open(os.path.dirname(__file__) + "/grid.txt") as f: # binary_operator:Add, call_argument:, call_argument:__file__, composition, function_call:open, literal:Str, method_call, method_call_name:dirname
+    with open(os.path.dirname(__file__) + "/grid.txt") as f: # binary_operator:Add, call_argument:, call_argument:__file__, composition, concatenation operator:Str, function_call:open, literal:Str, method_call, method_call_name:dirname
         l = [] # assignment, assignment_lhs_identifier:l, literal:List, single_assignment:l
         for i in range(20): # call_argument:20, for:i (-> +1), for_range:20 (-> +1), function_call:range, int_literal, literal:Num, range:20, suggest_constant_definition
             l.append([int(x) for x in f.readline().split()]) # call_argument:, call_argument:x, composition, comprehension:List, comprehension_for_count:1, function_call:int, method_call, method_call_name:append, method_call_name:readline, method_call_name:split, method_call_object:f, method_call_object:l, method_chaining, variable_update:f:x, variable_update:l:x, variable_update_by_method_call:f:x, variable_update_by_method_call:l:x
@@ -974,7 +974,7 @@ def solution(n): # function:solution (-> +8), function_returning_something:solut
 # ----------------------------------------------------------------------------------------
 import os # import:os, import_module:os
 def solution(): # function:solution (-> +12), function_returning_something:solution (-> +12)
-    with open(os.path.dirname(__file__) + "/p022_names.txt") as file: # binary_operator:Add, call_argument:, call_argument:__file__, composition, function_call:open, literal:Str, method_call, method_call_name:dirname
+    with open(os.path.dirname(__file__) + "/p022_names.txt") as file: # binary_operator:Add, call_argument:, call_argument:__file__, composition, concatenation operator:Str, function_call:open, literal:Str, method_call, method_call_name:dirname
         names = str(file.readlines()[0]) # assignment, assignment_lhs_identifier:names, assignment_rhs_atom:0, assignment_rhs_atom:file, call_argument:, composition, function_call:str, index, int_literal, literal:Num, method_call, method_call_name:readlines, method_call_object:file, single_assignment:names
         names = names.replace('"', "").split(",") # assignment, assignment_lhs_identifier:names, assignment_rhs_atom:names, call_argument:, literal:Str, method_call, method_call_name:replace, method_call_name:split, method_call_object:names, method_chaining, single_assignment:names
     names.sort() # method_call, method_call_name:sort, method_call_object:names
@@ -994,7 +994,7 @@ import os # import:os, import_module:os
 def solution(): # function:solution (-> +12), function_returning_something:solution (-> +12)
     total_sum = 0 # assignment, assignment_lhs_identifier:total_sum, assignment_rhs_atom:0, int_literal, literal:Num, single_assignment:total_sum
     temp_sum = 0 # assignment, assignment_lhs_identifier:temp_sum, assignment_rhs_atom:0, int_literal, literal:Num, single_assignment:temp_sum
-    with open(os.path.dirname(__file__) + "/p022_names.txt") as file: # binary_operator:Add, call_argument:, call_argument:__file__, composition, function_call:open, literal:Str, method_call, method_call_name:dirname
+    with open(os.path.dirname(__file__) + "/p022_names.txt") as file: # binary_operator:Add, call_argument:, call_argument:__file__, composition, concatenation operator:Str, function_call:open, literal:Str, method_call, method_call_name:dirname
         name = str(file.readlines()[0]) # assignment, assignment_lhs_identifier:name, assignment_rhs_atom:0, assignment_rhs_atom:file, call_argument:, composition, function_call:str, index, int_literal, literal:Num, method_call, method_call_name:readlines, method_call_object:file, single_assignment:name
         name = name.replace('"', "").split(",") # assignment, assignment_lhs_identifier:name, assignment_rhs_atom:name, call_argument:, literal:Str, method_call, method_call_name:replace, method_call_name:split, method_call_object:name, method_chaining, single_assignment:name
     name.sort() # method_call, method_call_name:sort, method_call_object:name
@@ -1009,7 +1009,7 @@ def solution(): # function:solution (-> +12), function_returning_something:solut
 # ../Python/project_euler/problem_23/sol1.py
 # ----------------------------------------------------------------------------------------
 def solution(limit=28123): # function:solution (-> +13), function_returning_something:solution (-> +13), function_with_default_positional_arguments:solution (-> +13), int_literal, literal:Num
-    sumDivs = [1] * (limit + 1) # assignment, assignment_lhs_identifier:sumDivs, assignment_rhs_atom:1, assignment_rhs_atom:limit, binary_operator:Add, binary_operator:Mult, int_literal, literal:List, literal:Num, single_assignment:sumDivs
+    sumDivs = [1] * (limit + 1) # assignment, assignment_lhs_identifier:sumDivs, assignment_rhs_atom:1, assignment_rhs_atom:limit, binary_operator:Add, binary_operator:Mult, int_literal, literal:List, literal:Num, replication_operator:List, single_assignment:sumDivs
     for i in range(2, int(limit ** 0.5) + 1): # accumulate_elements:sumDivs (-> +3), binary_operator:Add, binary_operator:Pow, call_argument:, call_argument:2, composition, float_literal, for:i (-> +3), for_range:2:_ (-> +3), for_range:_:_ (-> +3), function_call:int, function_call:range, int_literal, literal:Num, range:2:_, suggest_constant_definition
         sumDivs[i * i] += i # assignment_lhs_identifier:sumDivs, assignment_rhs_atom:i, augmented_assignment:Add, binary_operator:Mult, index, index_arithmetic, variable_update:sumDivs:i, variable_update_by_augmented_assignment:sumDivs:i
         for k in range(i + 1, limit // i + 1): # accumulate_elements:sumDivs (-> +1), binary_operator:Add, binary_operator:FloorDiv, call_argument:, for:k (-> +1), for_range:_:_ (-> +1), function_call:range, int_literal, literal:Num, nested_for:1 (-> +1), range:_:_
@@ -1226,7 +1226,7 @@ def isDigitCancelling(num, den): # function:isDigitCancelling (-> +4), function_
 def solve(digit_len: int) -> str: # function:solve (-> +13), function_returning_something:solve (-> +13)
     solutions = [] # assignment, assignment_lhs_identifier:solutions, literal:List, single_assignment:solutions
     den = 11 # assignment, assignment_lhs_identifier:den, assignment_rhs_atom:11, int_literal, literal:Num, single_assignment:den, suggest_constant_definition
-    last_digit = int("1" + "0" * digit_len) # assignment, assignment_lhs_identifier:last_digit, assignment_rhs_atom:digit_len, binary_operator:Add, binary_operator:Mult, call_argument:, function_call:int, literal:Str, single_assignment:last_digit
+    last_digit = int("1" + "0" * digit_len) # assignment, assignment_lhs_identifier:last_digit, assignment_rhs_atom:digit_len, binary_operator:Add, binary_operator:Mult, call_argument:, concatenation operator:Str, function_call:int, literal:Str, replication_operator:Str, single_assignment:last_digit
     for num in range(den, last_digit): # accumulate_elements:solutions (-> +7), call_argument:den, call_argument:last_digit, count_elements:num (-> +7), for:num (-> +7), for_range:den:last_digit (-> +7), function_call:range, range:den:last_digit
         while den <= 99: # comparison_operator:LtE, evolve_state (-> +4), int_literal, literal:Num, suggest_constant_definition, while (-> +4)
             if (num != den) and (num % 10 == den // 10) and (den % 10 != 0): # binary_operator:FloorDiv, binary_operator:Mod, boolean_operator:And, comparison_operator:Eq, comparison_operator:NotEq, divisibility_test:10, if (-> +2), if_test_atom:0, if_test_atom:10, if_test_atom:den, if_test_atom:num, int_literal, literal:Num, suggest_constant_definition

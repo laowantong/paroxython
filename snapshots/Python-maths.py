@@ -932,7 +932,7 @@ def prime_factors(n: int) -> List[int]: # function:prime_factors (-> +11), funct
 from typing import List # import:typing:List, import_module:typing, import_name:List
 def primes(max: int) -> List[int]: # function:primes (-> +9), function_returning_something:primes (-> +9), index
     max += 1 # assignment_lhs_identifier:max, assignment_rhs_atom:1, augmented_assignment:Add, int_literal, literal:Num, variable_increment:max, variable_update:max:1, variable_update_by_augmented_assignment:max:1
-    numbers = [False] * max # assignment, assignment_lhs_identifier:numbers, assignment_rhs_atom:False, assignment_rhs_atom:max, binary_operator:Mult, literal:False, literal:List, single_assignment:numbers
+    numbers = [False] * max # assignment, assignment_lhs_identifier:numbers, assignment_rhs_atom:False, assignment_rhs_atom:max, binary_operator:Mult, literal:False, literal:List, replication_operator:List, single_assignment:numbers
     ret = [] # assignment, assignment_lhs_identifier:ret, literal:List, single_assignment:ret
     for i in range(2, max): # accumulate_elements:ret (-> +4), call_argument:2, call_argument:max, for:i (-> +4), for_range:2:max (-> +4), for_range:i:max:i (-> +4), function_call:range, int_literal, literal:Num, range:2:max
         if not numbers[i]: # if (-> +3), if_test_atom:i, if_test_atom:numbers, index, unary_operator:Not
@@ -1083,13 +1083,13 @@ class FFT:
             inverseC.pop() # method_call, method_call_name:pop, method_call_object:inverseC
         return inverseC # return:inverseC
     def __str__(self): # function:__str__ (-> +10), function_returning_something:__str__ (-> +10)
-        A = "A = " + " + ".join( # assignment, assignment_lhs_identifier:A, binary_operator:Add, composition, literal:Str, method_call, method_call_name:join, single_assignment:A
+        A = "A = " + " + ".join( # assignment, assignment_lhs_identifier:A, binary_operator:Add, composition, concatenation operator:Str, literal:Str, method_call, method_call_name:join, single_assignment:A
             f"{coef}*x^{i}" for coef, i in enumerate(self.polyA[: self.len_A]) # assignment_rhs_atom:coef, assignment_rhs_atom:i, assignment_rhs_atom:self, call_argument:, comprehension:Generator, comprehension_for_count:1, function_call:enumerate, literal:Str, slice
         )
-        B = "B = " + " + ".join( # assignment, assignment_lhs_identifier:B, binary_operator:Add, composition, literal:Str, method_call, method_call_name:join, single_assignment:B
+        B = "B = " + " + ".join( # assignment, assignment_lhs_identifier:B, binary_operator:Add, composition, concatenation operator:Str, literal:Str, method_call, method_call_name:join, single_assignment:B
             f"{coef}*x^{i}" for coef, i in enumerate(self.polyB[: self.len_B]) # assignment_rhs_atom:coef, assignment_rhs_atom:i, assignment_rhs_atom:self, call_argument:, comprehension:Generator, comprehension_for_count:1, function_call:enumerate, literal:Str, slice
         )
-        C = "A*B = " + " + ".join( # assignment, assignment_lhs_identifier:C, binary_operator:Add, composition, literal:Str, method_call, method_call_name:join, single_assignment:C
+        C = "A*B = " + " + ".join( # assignment, assignment_lhs_identifier:C, binary_operator:Add, composition, concatenation operator:Str, literal:Str, method_call, method_call_name:join, single_assignment:C
             f"{coef}*x^{i}" for coef, i in enumerate(self.product) # assignment_rhs_atom:coef, assignment_rhs_atom:i, assignment_rhs_atom:self, call_argument:, comprehension:Generator, comprehension_for_count:1, function_call:enumerate, literal:Str
         )
         return "\n".join((A, B, C)) # call_argument:, literal:Str, method_call, method_call_name:join, return
@@ -1120,7 +1120,7 @@ def sieve(n): # function:sieve (-> +33), function_returning_something:sieve (-> 
     in_prime = [] # assignment, assignment_lhs_identifier:in_prime, literal:List, single_assignment:in_prime
     start = 2 # assignment, assignment_lhs_identifier:start, assignment_rhs_atom:2, int_literal, literal:Num, single_assignment:start
     end = int(math.sqrt(n)) # assignment, assignment_lhs_identifier:end, assignment_rhs_atom:math, assignment_rhs_atom:n, call_argument:, call_argument:n, composition, function_call:int, method_call, method_call_name:sqrt, single_assignment:end
-    temp = [True] * (end + 1) # assignment, assignment_lhs_identifier:temp, assignment_rhs_atom:1, assignment_rhs_atom:True, assignment_rhs_atom:end, binary_operator:Add, binary_operator:Mult, int_literal, literal:List, literal:Num, literal:True, single_assignment:temp
+    temp = [True] * (end + 1) # assignment, assignment_lhs_identifier:temp, assignment_rhs_atom:1, assignment_rhs_atom:True, assignment_rhs_atom:end, binary_operator:Add, binary_operator:Mult, int_literal, literal:List, literal:Num, literal:True, replication_operator:List, single_assignment:temp
     prime = [] # assignment, assignment_lhs_identifier:prime, literal:List, single_assignment:prime
     while start <= end: # comparison_operator:LtE, while (-> +6)
         if temp[start] is True: # comparison_operator:Is, if (-> +4), if_test_atom:True, if_test_atom:start, if_test_atom:temp, index, literal:True
@@ -1135,7 +1135,7 @@ def sieve(n): # function:sieve (-> +33), function_returning_something:sieve (-> 
     if high > n: # comparison_operator:Gt, if (-> +1), if_test_atom:high, if_test_atom:n
         high = n # assignment, assignment_lhs_identifier:high, assignment_rhs_atom:n, if_then_branch, single_assignment:high
     while low <= n: # comparison_operator:LtE, while (-> +14)
-        temp = [True] * (high - low + 1) # assignment, assignment_lhs_identifier:temp, assignment_rhs_atom:1, assignment_rhs_atom:True, assignment_rhs_atom:high, assignment_rhs_atom:low, binary_operator:Add, binary_operator:Mult, binary_operator:Sub, int_literal, literal:List, literal:Num, literal:True, single_assignment:temp
+        temp = [True] * (high - low + 1) # assignment, assignment_lhs_identifier:temp, assignment_rhs_atom:1, assignment_rhs_atom:True, assignment_rhs_atom:high, assignment_rhs_atom:low, binary_operator:Add, binary_operator:Mult, binary_operator:Sub, int_literal, literal:List, literal:Num, literal:True, replication_operator:List, single_assignment:temp
         for each in in_prime: # accumulate_elements:t (-> +5), for:each (-> +5), for_each (-> +5), for_range:t:_:each (-> +5)
             t = math.floor(low / each) * each # assignment, assignment_lhs_identifier:t, assignment_rhs_atom:each, assignment_rhs_atom:low, assignment_rhs_atom:math, binary_operator:Div, binary_operator:Mult, call_argument:, method_call, method_call_name:floor, single_assignment:t
             if t < low: # comparison_operator:Lt, if (-> +1), if_test_atom:low, if_test_atom:t
@@ -1165,7 +1165,7 @@ Also thanks Dmitry (https://github.com/LizardWizzard) for finding the problem
 """ # literal:Str
 import math # import:math, import_module:math
 def sieve(n): # function:sieve (-> +15), function_returning_something:sieve (-> +15)
-    l = [True] * (n + 1) # assignment, assignment_lhs_identifier:l, assignment_rhs_atom:1, assignment_rhs_atom:True, assignment_rhs_atom:n, binary_operator:Add, binary_operator:Mult, int_literal, literal:List, literal:Num, literal:True, single_assignment:l
+    l = [True] * (n + 1) # assignment, assignment_lhs_identifier:l, assignment_rhs_atom:1, assignment_rhs_atom:True, assignment_rhs_atom:n, binary_operator:Add, binary_operator:Mult, int_literal, literal:List, literal:Num, literal:True, replication_operator:List, single_assignment:l
     prime = [] # assignment, assignment_lhs_identifier:prime, literal:List, single_assignment:prime
     start = 2 # assignment, assignment_lhs_identifier:start, assignment_rhs_atom:2, int_literal, literal:Num, single_assignment:start
     end = int(math.sqrt(n)) # assignment, assignment_lhs_identifier:end, assignment_rhs_atom:math, assignment_rhs_atom:n, call_argument:, call_argument:n, composition, function_call:int, method_call, method_call_name:sqrt, single_assignment:end
@@ -1290,14 +1290,14 @@ def vol_circular_cylinder(radius, height): # function:vol_circular_cylinder (-> 
     return pi * radius ** 2 * height # binary_operator:Mult, binary_operator:Pow, int_literal, literal:Num, return
 def main(): # function:main (-> +9), function_returning_nothing:main (-> +9)
     print("Volumes:") # call_argument:, function_call:print, literal:Str
-    print("Cube: " + str(vol_cube(2))) # binary_operator:Add, call_argument:, call_argument:2, composition, function_call:print, function_call:str, function_call:vol_cube, int_literal, literal:Num, literal:Str
-    print("Cuboid: " + str(vol_cuboid(2, 2, 2))) # binary_operator:Add, call_argument:, call_argument:2, composition, function_call:print, function_call:str, function_call:vol_cuboid, int_literal, literal:Num, literal:Str
-    print("Cone: " + str(vol_cone(2, 2))) # binary_operator:Add, call_argument:, call_argument:2, composition, function_call:print, function_call:str, function_call:vol_cone, int_literal, literal:Num, literal:Str
-    print("Right Circular Cone: " + str(vol_right_circ_cone(2, 2))) # binary_operator:Add, call_argument:, call_argument:2, composition, function_call:print, function_call:str, function_call:vol_right_circ_cone, int_literal, literal:Num, literal:Str
-    print("Prism: " + str(vol_prism(2, 2))) # binary_operator:Add, call_argument:, call_argument:2, composition, function_call:print, function_call:str, function_call:vol_prism, int_literal, literal:Num, literal:Str
-    print("Pyramid: " + str(vol_pyramid(2, 2))) # binary_operator:Add, call_argument:, call_argument:2, composition, function_call:print, function_call:str, function_call:vol_pyramid, int_literal, literal:Num, literal:Str
-    print("Sphere: " + str(vol_sphere(2))) # binary_operator:Add, call_argument:, call_argument:2, composition, function_call:print, function_call:str, function_call:vol_sphere, int_literal, literal:Num, literal:Str
-    print("Circular Cylinder: " + str(vol_circular_cylinder(2, 2))) # binary_operator:Add, call_argument:, call_argument:2, composition, function_call:print, function_call:str, function_call:vol_circular_cylinder, int_literal, literal:Num, literal:Str
+    print("Cube: " + str(vol_cube(2))) # binary_operator:Add, call_argument:, call_argument:2, composition, concatenation operator:Str, function_call:print, function_call:str, function_call:vol_cube, int_literal, literal:Num, literal:Str
+    print("Cuboid: " + str(vol_cuboid(2, 2, 2))) # binary_operator:Add, call_argument:, call_argument:2, composition, concatenation operator:Str, function_call:print, function_call:str, function_call:vol_cuboid, int_literal, literal:Num, literal:Str
+    print("Cone: " + str(vol_cone(2, 2))) # binary_operator:Add, call_argument:, call_argument:2, composition, concatenation operator:Str, function_call:print, function_call:str, function_call:vol_cone, int_literal, literal:Num, literal:Str
+    print("Right Circular Cone: " + str(vol_right_circ_cone(2, 2))) # binary_operator:Add, call_argument:, call_argument:2, composition, concatenation operator:Str, function_call:print, function_call:str, function_call:vol_right_circ_cone, int_literal, literal:Num, literal:Str
+    print("Prism: " + str(vol_prism(2, 2))) # binary_operator:Add, call_argument:, call_argument:2, composition, concatenation operator:Str, function_call:print, function_call:str, function_call:vol_prism, int_literal, literal:Num, literal:Str
+    print("Pyramid: " + str(vol_pyramid(2, 2))) # binary_operator:Add, call_argument:, call_argument:2, composition, concatenation operator:Str, function_call:print, function_call:str, function_call:vol_pyramid, int_literal, literal:Num, literal:Str
+    print("Sphere: " + str(vol_sphere(2))) # binary_operator:Add, call_argument:, call_argument:2, composition, concatenation operator:Str, function_call:print, function_call:str, function_call:vol_sphere, int_literal, literal:Num, literal:Str
+    print("Circular Cylinder: " + str(vol_circular_cylinder(2, 2))) # binary_operator:Add, call_argument:, call_argument:2, composition, concatenation operator:Str, function_call:print, function_call:str, function_call:vol_circular_cylinder, int_literal, literal:Num, literal:Str
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/zellers_congruence.py

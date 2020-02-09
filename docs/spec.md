@@ -14,6 +14,7 @@
       - [Feature `unary_operator`](#feature-unary_operator)
       - [Feature `binary_operator`](#feature-binary_operator)
       - [Feature `conditional_expression`](#feature-conditional_expression)
+      - [Feature `concatenation_operator|replication_operator` (SQL)](#feature-concatenation_operatorreplication_operator)
   - [Boolean expressions](#boolean-expressions)
       - [Feature `boolean_operator`](#feature-boolean_operator)
       - [Feature `comparison_operator`](#feature-comparison_operator)
@@ -133,6 +134,10 @@
 --------------------------------------------------------------------------------
 
 #### Feature `literal`
+
+##### Derivations
+
+[⬇️ feature `concatenation_operator|replication_operator`](#feature-concatenation_operatorreplication_operator)  
 
 ##### Specification
 
@@ -459,6 +464,10 @@ _Remark._ A negative literal is represented in the AST by a node `UnaryOp` with 
 
 #### Feature `binary_operator`
 
+##### Derivations
+
+[⬇️ feature `concatenation_operator|replication_operator`](#feature-concatenation_operatorreplication_operator)  
+
 ##### Specification
 
 ```re
@@ -504,6 +513,65 @@ Match the so-called ternary operator.
 | Label | Lines |
 |:--|:--|
 | `conditional_expression` | 1 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `concatenation_operator|replication_operator`
+
+Match replication operators whose one operand is either a string, a list or a tuple **literal**. Match their augmented assignment version too (although it should belong to the [Statements section](#statements)).
+
+##### Derivations
+
+[⬆️ feature `augmented_assignment`](#feature-augmented_assignment)  
+[⬆️ feature `binary_operator`](#feature-binary_operator)  
+[⬆️ feature `literal`](#feature-literal)  
+
+##### Specification
+
+```sql
+SELECT CASE op.name_suffix
+           WHEN "Add" THEN "concatenation operator"
+           ELSE "replication_operator"
+       END,
+       lit.name_suffix,
+       op.span,
+       op.path
+FROM
+  (SELECT *
+   FROM t_binary_operator
+   UNION ALL SELECT *
+   FROM t_augmented_assignment) op
+JOIN t_literal lit ON (lit.path GLOB op.path || "?-")
+WHERE op.name_suffix IN ("Mult",
+                         "Add")
+  AND lit.name_suffix IN ("List",
+                          "Str",
+                          "Tuple")
+GROUP BY op.path
+```
+
+##### Example
+
+```python
+1   print("foo" + "bar")
+2   l = l + [1]
+3   l += [1]
+4   print("-" * 80)
+5   a = [0] * 80
+6   b = 80 * [0]
+7   c = (1, 2, 3) * n
+8   print("Fizz" * (i % 3 == 0) + "Buzz" * (i % 5 == 0) or i)
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `concatenation operator:Str` | 1 |
+| `concatenation operator:List` | 2, 3 |
+| `replication_operator:Str` | 4, 8, 8 |
+| `replication_operator:List` | 5, 6 |
+| `replication_operator:Tuple` | 7 |
 
 --------------------------------------------------------------------------------
 
@@ -1322,6 +1390,7 @@ Match a comprehension with an `if` clause.
 
 ##### Derivations
 
+[⬇️ feature `concatenation_operator|replication_operator`](#feature-concatenation_operatorreplication_operator)  
 [⬇️ feature `variable_update_by_augmented_assignment`](#feature-variable_update_by_augmented_assignment)  
 
 ##### Specification

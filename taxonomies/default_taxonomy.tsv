@@ -69,6 +69,12 @@ operator/plus/	unary_operator:UAdd
 operator/power/	binary_operator:Pow
 operator/substraction/	binary_operator:Sub
 operator/ternary/	conditional_expression
+operator/addition/concatenation/list	concatenation_operator:List
+operator/addition/concatenation/string	concatenation_operator:Str
+operator/addition/concatenation/tuple	concatenation_operator:Tuple
+operator/multiplication/replication/list	replication_operator:List
+operator/multiplication/replication/string	replication_operator:Str
+operator/multiplication/replication/tuple	replication_operator:Tuple
 pattern/elements/accumulate/	accumulate_elements\b.+
 pattern/elements/accumulate/count	count_elements\b.+
 pattern/elements/filter/	filter_for
@@ -111,10 +117,6 @@ variable/assignment/augmented/\1/	augmented_assignment:(.+)
 variable/assignment/chained/	chained_assignment
 variable/assignment/constant/	assignment_lhs_identifier:[[:upper:]0-9_]+
 -- EOF	
-operator/addition/concatenation/list	
-operator/addition/concatenation/string	
-operator/multiplication/replication/list	
-operator/multiplication/replication/string	
 operator/percent/format	
 IO/standard/input	
 IO/standard/print	
