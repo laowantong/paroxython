@@ -801,7 +801,7 @@ FROM
    FROM t_binary_operator
    UNION ALL SELECT *
    FROM t_augmented_assignment) op
-JOIN t_literal lit ON (lit.path GLOB op.path || "?-")
+JOIN t_literal lit ON (lit.path REGEXP op.path || "\d+-$")
 WHERE op.name_suffix IN ("Mult",
                          "Add")
   AND lit.name_suffix IN ("List",
@@ -852,7 +852,7 @@ SELECT "string_formatting_operator",
        op.span,
        op.path
 FROM t_binary_operator op
-JOIN t_literal lit ON (lit.path GLOB op.path || "?-")
+JOIN t_literal lit ON (lit.path REGEXP op.path || "\d+-$")
 WHERE op.name_suffix = "Mod"
   AND lit.name_suffix = "Str"
 GROUP BY op.path
@@ -986,8 +986,8 @@ SELECT CASE op.name_suffix
        cmp.span,
        cmp.path
 FROM t_chained_comparison cmp
-JOIN t_comparison_operator op ON (op.path GLOB cmp.path || "?*")
-WHERE op.name_suffix REGEXP "Eq|Lt|LtE|Gt|GtE"
+JOIN t_comparison_operator op ON (op.path GLOB cmp.path || "*-")
+WHERE op.name_suffix REGEXP "(Eq|Lt|LtE|Gt|GtE)$"
 GROUP BY cmp.path,
          op.name_suffix
 HAVING count(*) > 1 -- a chain has at least two operators
@@ -1471,7 +1471,7 @@ FROM -- Only a subquery permits to sort the arguments before grouping them toget
           range.span AS span,
           range.path AS path
    FROM t_function_call range
-   JOIN t_call_argument arg ON (arg.path GLOB range.path || "?*")
+   JOIN t_call_argument arg ON (arg.path GLOB range.path || "*-")
    WHERE range.name_suffix = "range"
      AND length(range.path) + 4 = length(arg.path) -- Ensure that arg is a (direct) argument of range().
    ORDER BY arg.path)-- Thanks to the subquery, this clause...
@@ -1941,9 +1941,9 @@ SELECT "variable_update_by_assignment",
        op.span,
        op.path
 FROM t_assignment AS op
-JOIN t_assignment_lhs_identifier AS lhs_acc ON (lhs_acc.path GLOB op.path || "?*")
-JOIN t_assignment_rhs_atom AS rhs_acc ON (rhs_acc.path GLOB op.path || "?*")
-JOIN t_assignment_rhs_atom AS rhs_var ON (rhs_var.path GLOB op.path || "?*")
+JOIN t_assignment_lhs_identifier AS lhs_acc ON (lhs_acc.path GLOB op.path || "*-")
+JOIN t_assignment_rhs_atom AS rhs_acc ON (rhs_acc.path GLOB op.path || "*-")
+JOIN t_assignment_rhs_atom AS rhs_var ON (rhs_var.path GLOB op.path || "*-")
 WHERE rhs_acc.name_suffix = lhs_acc.name_suffix -- The same identifier must appear on both LHS and RHS...
   AND rhs_acc.name_suffix != rhs_var.name_suffix -- and an atom distinct from this identifier must appear on RHS.
 GROUP BY op.span,
@@ -1993,8 +1993,8 @@ SELECT "variable_update_by_augmented_assignment",
        op.span,
        op.path
 FROM t_augmented_assignment AS op
-JOIN t_assignment_lhs_identifier AS lhs_acc ON (lhs_acc.path GLOB op.path || "?*")
-JOIN t_assignment_rhs_atom AS rhs_var ON (rhs_var.path GLOB op.path || "?*")
+JOIN t_assignment_lhs_identifier AS lhs_acc ON (lhs_acc.path GLOB op.path || "*-")
+JOIN t_assignment_rhs_atom AS rhs_var ON (rhs_var.path GLOB op.path || "*-")
 GROUP BY op.span,
          lhs_acc.name,
          rhs_var.name
@@ -2046,9 +2046,9 @@ SELECT "variable_update_by_method_call",
        op.span,
        op.path
 FROM t_method_call AS op
-JOIN t_method_call_object AS lhs_acc ON (lhs_acc.path GLOB op.path || "?*")
-JOIN t_method_call_name AS rhs_acc ON (rhs_acc.path GLOB op.path || "?*")
-JOIN t_call_argument AS rhs_var ON (rhs_var.path GLOB op.path || "?*")
+JOIN t_method_call_object AS lhs_acc ON (lhs_acc.path GLOB op.path || "*-")
+JOIN t_method_call_name AS rhs_acc ON (rhs_acc.path GLOB op.path || "*-")
+JOIN t_call_argument AS rhs_var ON (rhs_var.path GLOB op.path || "*-")
 WHERE rhs_var.name_suffix != ""
   AND rhs_acc.name_suffix REGEXP "(append|extend|insert|add|update)$"
 GROUP BY op.span,
@@ -2440,7 +2440,7 @@ SELECT "generator",
        max(f.span_start) || "-" || min(f.span_end),
        max(f.path)
 FROM t_function f
-JOIN t_yield y ON (y.path GLOB f.path || "?*")
+JOIN t_yield y ON (y.path GLOB f.path || "*-")
 GROUP BY y.rowid
 ```
 
@@ -2482,7 +2482,7 @@ SELECT "function_returning_something",
        max(f.span_start) || "-" || min(f.span_end),
        max(f.path)
 FROM t_function f
-JOIN t_return r ON (r.path GLOB f.path || "?*")
+JOIN t_return r ON (r.path GLOB f.path || "*-")
 WHERE r.name_suffix != "None"
 GROUP BY r.rowid
 ```
@@ -2815,8 +2815,8 @@ SELECT "closure",
        max(f.span_start) || "-" || min(f.span_end),
        max(f.path)
 FROM t_function f
-JOIN t_function c ON (c.path GLOB f.path || "?*")
-JOIN t_return r ON (r.path GLOB f.path || "?*")
+JOIN t_function c ON (c.path GLOB f.path || "*-")
+JOIN t_return r ON (r.path GLOB f.path || "*-")
 WHERE r.name_suffix = c.name_suffix
 GROUP BY c.rowid
 ```
@@ -2860,7 +2860,7 @@ SELECT "recursive_function",
        f.span,
        f.path
 FROM t_function f
-JOIN t_function_call c ON (c.path GLOB f.path || "?*")
+JOIN t_function_call c ON (c.path GLOB f.path || "*-")
 WHERE c.name_suffix = f.name_suffix
 ```
 
@@ -2897,8 +2897,8 @@ SELECT "deeply_recursive_function",
        f.span,
        f.path
 FROM t_function f
-JOIN t_function_call c1 ON (c1.path GLOB f.path || "?*")
-JOIN t_function_call c2 ON (c2.path GLOB c1.path || "?*")
+JOIN t_function_call c1 ON (c1.path GLOB f.path || "*-")
+JOIN t_function_call c2 ON (c2.path GLOB c1.path || "*-")
 WHERE c1.name_suffix = f.name_suffix
   AND c2.name_suffix = f.name_suffix
 ```
@@ -2940,7 +2940,7 @@ SELECT "body_recursive_function",
        t_recursive_function.span,
        t_recursive_function.path
 FROM t_recursive_function
-JOIN t_function_call ON (t_function_call.path GLOB t_recursive_function.path || "?*")
+JOIN t_function_call ON (t_function_call.path GLOB t_recursive_function.path || "*-")
 WHERE t_function_call.name_suffix = t_recursive_function.name_suffix
   AND NOT EXISTS
     (SELECT 1
@@ -3382,7 +3382,7 @@ GROUP BY t_if.span
 ORDER BY t_if.span_start
 ```
 
-_Remark._ A join condition `(inner_if.path GLOB branch.path || "?*")` would not work here, since an `else` branch has no specific path in the AST.
+_Remark._ A join condition `(inner_if.path GLOB branch.path || "*-")` would not work here, since an `else` branch has no specific path in the AST.
 
 ##### Example
 
@@ -3517,7 +3517,7 @@ SELECT "for_range",
        t_for.span,
        t_for.path
 FROM t_for
-JOIN t_range ON (t_range.path GLOB t_for.path || "?*")
+JOIN t_range ON (t_range.path GLOB t_for.path || "*-")
 ```
 
 ##### Example
@@ -3624,7 +3624,7 @@ SELECT "nested_for",
        inner_loop.span,
        inner_loop.path
 FROM t_for outer_loop
-JOIN t_for inner_loop ON (inner_loop.path GLOB outer_loop.path || "?*")
+JOIN t_for inner_loop ON (inner_loop.path GLOB outer_loop.path || "*-")
 GROUP BY inner_loop.span
 ORDER BY inner_loop.span_start
 ```
@@ -3973,7 +3973,7 @@ SELECT "try_" || e.name_prefix,
        max(t.span_start) || "-" || min(t.span_end),
        max(t.path)
 FROM t_try t
-JOIN t e ON (e.path GLOB t.path || "?*")
+JOIN t e ON (e.path GLOB t.path || "*-")
 WHERE e.name_prefix IN ("raise",
                         "except")
 GROUP BY e.rowid
@@ -4297,7 +4297,7 @@ LEFT JOIN t_import_name n ON (m.span = n.span)
 
 #### Feature `accumulate_elements`
 
-An accumulator is iteratively updated from its previous value and those of the iteration variable. Suffixed by the name of this accumulator.
+An accumulator is iteratively updated from its previous value and that of the iteration variable. Suffixed by the name of this accumulator.
 
 ##### Derivations
 
@@ -4312,7 +4312,7 @@ SELECT "accumulate_elements",
        for_loop.span,
        for_loop.path
 FROM t_for for_loop
-JOIN t_variable_update update_stmt ON (update_stmt.path GLOB for_loop.path || "?*")
+JOIN t_variable_update update_stmt ON (update_stmt.path GLOB for_loop.path || "*-")
 WHERE update_stmt.name_suffix GLOB "*:" || for_loop.name_suffix
 GROUP BY for_loop.path,
          update_stmt.name_suffix
@@ -4377,13 +4377,13 @@ SELECT "count_elements",
        min(for_loop.span_start) || "-" || max(for_loop.span_end), -- The biggest loop...
  for_loop.path
 FROM t_for for_loop
-JOIN t_variable_increment inc ON (inc.path GLOB for_loop.path || "?*")-- including the incrementation of a variable x...
+JOIN t_variable_increment inc ON (inc.path GLOB for_loop.path || "*-")-- including the incrementation of a variable x...
 WHERE NOT EXISTS -- which is not initialized in this loop.
     (SELECT * -- In other words, ensure there is no...
      FROM t_assignment_lhs_identifier x -- assignment...
      WHERE (x.name_suffix = inc.name_suffix -- to the same x...
             AND x.span != inc.span -- distinct from its incrementation...
-            AND x.path GLOB for_loop.path || "?*") )-- and enclosed in the loop.
+            AND x.path GLOB for_loop.path || "*-") )-- and enclosed in the loop.
 GROUP BY inc.path
 ```
 
@@ -4471,21 +4471,21 @@ SELECT "find_best_element",
        t_for.span,
        t_for.path
 FROM t_for -- A foor loop...
-JOIN t_if ON (t_if.path GLOB t_for.path || "?*")-- enclosing a conditional statement...
+JOIN t_if ON (t_if.path GLOB t_for.path || "*-")-- enclosing a conditional statement...
 JOIN t_if_test_atom elt ON (elt.span_start = t_if.span_start -- (comparing...
                             AND elt.name_suffix = t_for.name_suffix)-- the iteration variable...
 JOIN t_if_test_atom cnd ON (cnd.span_start = t_if.span_start
                             AND elt.rowid != cnd.rowid)-- to a candidate)...
-JOIN t_single_assignment lhs ON (lhs.path GLOB t_if.path || "?*" -- enclosing...
+JOIN t_single_assignment lhs ON (lhs.path GLOB t_if.path || "*-" -- enclosing...
                                  AND cnd.name_suffix = lhs.name_suffix)--  a single assignment of the candidate...
 JOIN t_assignment_rhs_atom rhs ON (elt.name_suffix = rhs.name_suffix -- to the iteration variable.
-                                   AND rhs.path GLOB lhs.path || "?*")
+                                   AND rhs.path GLOB lhs.path || "*-")
 WHERE NOT EXISTS -- Ensure that there is no...
     (SELECT *
      FROM t_assignment_lhs_identifier -- other assignment...
      WHERE name_suffix == lhs.name_suffix -- of the candidate...
        AND span != lhs.span
-       AND path GLOB t_for.path || "?*" ) -- INSIDE the loop.
+       AND path GLOB t_for.path || "*-" ) -- INSIDE the loop.
 ```
 
 ##### Example
@@ -4566,9 +4566,9 @@ SELECT CASE ret.name_suffix
        t_for.span,
        t_for.path
 FROM t_for -- A for loop...
-JOIN t_if ON (t_if.path GLOB t_for.path || "?*")-- enclosing an if statement...
+JOIN t_if ON (t_if.path GLOB t_for.path || "*-")-- enclosing an if statement...
 JOIN t_if_test_atom x ON (x.span_start = t_if.span_start)-- which tests the iteration variable...
-JOIN t_return ret ON (ret.path GLOB t_if.path || "?*" -- and returns...
+JOIN t_return ret ON (ret.path GLOB t_if.path || "*-" -- and returns...
                       AND ret.name_suffix IN ("True",
                                               "False"))-- a boolean
 GROUP BY t_for.path
@@ -4725,12 +4725,12 @@ SELECT "get_valid_input",
        wt.span,
        wt.path
 FROM t_infinite_while wt -- An infinite loop...
-JOIN t_assignment_lhs_identifier x1 ON (x1.path GLOB wt.path || "?*")-- features the assignment of a variable...
-JOIN t_if ON (t_if.path GLOB wt.path || "?*"
+JOIN t_assignment_lhs_identifier x1 ON (x1.path GLOB wt.path || "*-")-- features the assignment of a variable...
+JOIN t_if ON (t_if.path GLOB wt.path || "*-"
               AND t_if.span_start > x1.span_end)-- followed by a conditional statement...
 JOIN t_if_test_atom x2 ON (x1.name_suffix = x2.name_suffix -- testing this variable...
                            AND x2.span_start = t_if.span_start)
-JOIN t_return ret ON (ret.path GLOB t_if.path || "?*"
+JOIN t_return ret ON (ret.path GLOB t_if.path || "*-"
                       AND ret.name_suffix = x1.name_suffix)-- and returning it.
 ```
 
@@ -4774,15 +4774,15 @@ SELECT "count_inputs",
        wt.span,
        wt.path
 FROM t_infinite_while wt -- An infinite loop...
-JOIN t_assignment_lhs_identifier x1 ON (x1.path GLOB wt.path || "?*")-- features the assignment of a variable...
-JOIN t_if ON (t_if.path GLOB wt.path || "?*"
+JOIN t_assignment_lhs_identifier x1 ON (x1.path GLOB wt.path || "*-")-- features the assignment of a variable...
+JOIN t_if ON (t_if.path GLOB wt.path || "*-"
               AND t_if.span_start > x1.span_end)-- followed by a conditional statement...
 JOIN t_if_test_atom x2 ON (x1.name_suffix = x2.name_suffix -- testing this variable...
                            AND x2.span_start = t_if.span_start)
-JOIN t_return ret ON (ret.path GLOB t_if.path || "?*")-- and returning another variable (an accumulator)...
+JOIN t_return ret ON (ret.path GLOB t_if.path || "*-")-- and returning another variable (an accumulator)...
 JOIN t_variable_increment acc ON (acc.name_suffix = ret.name_suffix
-                                  AND acc.path GLOB wt.path || "?*" -- which is incremented somewhere in the loop...
-                                  AND acc.path NOT GLOB t_if.path || "?*" -- but not INSIDE the conditional statement.
+                                  AND acc.path GLOB wt.path || "*-" -- which is incremented somewhere in the loop...
+                                  AND acc.path NOT GLOB t_if.path || "*-" -- but not INSIDE the conditional statement.
 )
 ```
 
@@ -4831,12 +4831,12 @@ SELECT "accumulate_inputs",
        wt.span,
        wt.path
 FROM t_infinite_while wt -- An infinite loop...
-JOIN t_assignment_lhs_identifier x1 ON (x1.path GLOB wt.path || "?*")-- features the assignment of a variable...
-JOIN t_if ON (t_if.path GLOB wt.path || "?*"
+JOIN t_assignment_lhs_identifier x1 ON (x1.path GLOB wt.path || "*-")-- features the assignment of a variable...
+JOIN t_if ON (t_if.path GLOB wt.path || "*-"
               AND t_if.span_start > x1.span_end)-- followed by a conditional statement...
 JOIN t_if_test_atom x2 ON (x1.name_suffix = x2.name_suffix -- testing this variable...
                            AND x2.span_start = t_if.span_start)
-JOIN t_return ret ON (ret.path GLOB t_if.path || "?*")-- and returning another variable (an accumulator)...
+JOIN t_return ret ON (ret.path GLOB t_if.path || "*-")-- and returning another variable (an accumulator)...
 JOIN t_variable_update acc ON (acc.span_start > t_if.span_start -- which is updated after the conditional...
                                AND acc.span_end <= wt.span_end -- but before the end of the loop...
                                AND acc.name_suffix = ret.name_suffix || ":" || x1.name_suffix) -- with the first variable.
