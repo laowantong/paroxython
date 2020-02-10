@@ -130,6 +130,7 @@
       - [Feature `count_inputs` (SQL)](#feature-count_inputs)
       - [Feature `accumulate_inputs` (SQL)](#feature-accumulate_inputs)
 - [Programs](#programs)
+      - [Feature `lines_of_code`](#feature-lines_of_code)
       - [Feature `topic`](#feature-topic)
 - [Suggestions](#suggestions)
   - [Assignments](#assignments-1)
@@ -4892,6 +4893,43 @@ When the update is carried out by a function call, it must be indicated with a m
 --------------------------------------------------------------------------------
 
 # Programs
+
+--------------------------------------------------------------------------------
+
+#### Feature `lines_of_code`
+
+Match a whole program, and suffix it by the number of its last line of code.
+
+##### Specification
+
+```re
+\A
+/_type=Module
+(\n.+?)+?
+_pos=(?P<POS>.+)
+(?:\n.+)+
+_pos=(?P<POS>(?P<SUFFIX>\d+):.+)
+```
+
+##### Example
+
+```python
+1   print("See if you can do this. Read each line aloud and press Return between.")
+2   message = "this is how to keep an idiot busy for a while"
+3   for word in message.split(" "):
+4       # a comment
+5       input(f"This is {word} cat.")
+6   print("Now read the third word in each line from the top!")
+7   # a final comment
+```
+
+_Remark._ Normally, a source code is stripped from all its comments during its pre-processing.
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `lines_of_code:6` | 1-6 |
 
 --------------------------------------------------------------------------------
 

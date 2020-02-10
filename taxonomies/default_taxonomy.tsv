@@ -12,7 +12,7 @@ call/method/sequence/mutable/\1/	method_call:(append|clear|copy|extend|insert|po
 call/method/sequence/mutable/list/\1/	method_call:(sort)
 call/method/sequence/string/\1/	method_call:(casefold|center|count|encode|endswith|expandtabs|format_map|index|isalnum|isalpha|isascii|isdecimal|isdigit|isidentifier|isnumeric|isprintable|isspace|istitle|isupper|join|ljust|lower|lstrip|partition|replace|rfind|rindex|rjust|rpartition|rsplit|rstrip|strip|title|upper|zfill)
 call/method/set/\1/	method_call:(add|clear|copy|difference_update|difference|discard|intersection_update|intersection|isdisjoint|issubset|issuperset|pop|remove|symmetric_difference_update|symmetric_difference|union|update)
-topic/\1/	topic:(.+)
+class_definition/	class:.+
 control_flow/conditional/	if
 control_flow/conditional/else/	if_else_branch
 control_flow/conditional/else/chained/	if_elif_branch
@@ -30,6 +30,7 @@ control_flow/loop/sequential/nested/square/	square_nested_for
 control_flow/loop/sequential/nested/triangular/	triangular_nested_for
 exception/catch/\1/	try_except(?::(BaseException|SystemExit|KeyboardInterrupt|GeneratorExit|Exception|StopIteration|StopAsyncIteration|ArithmeticError|FloatingPointError|OverflowError|ZeroDivisionError|AssertionError|AttributeError|BufferError|EOFError|ImportError|ModuleNotFoundError|LookupError|IndexError|KeyError|MemoryError|NameError|UnboundLocalError|OSError|BlockingIOError|ChildProcessError|ConnectionError|BrokenPipeError|ConnectionAbortedError|ConnectionRefusedError|ConnectionResetError|FileExistsError|FileNotFoundError|InterruptedError|IsADirectoryError|NotADirectoryError|PermissionError|ProcessLookupError|TimeoutError|ReferenceError|RuntimeError|NotImplementedError|RecursionError|SyntaxError|IndentationError|TabError|SystemError|TypeError|ValueError|UnicodeError|UnicodeDecodeError|UnicodeEncodeError|UnicodeTranslateError|Warning|DeprecationWarning|PendingDeprecationWarning|RuntimeWarning|SyntaxWarning|UserWarning|FutureWarning|ImportWarning|UnicodeWarning|BytesWarning|ResourceWarning))?.*
 exception/raise/\1/	try_raise(?::(BaseException|SystemExit|KeyboardInterrupt|GeneratorExit|Exception|StopIteration|StopAsyncIteration|ArithmeticError|FloatingPointError|OverflowError|ZeroDivisionError|AssertionError|AttributeError|BufferError|EOFError|ImportError|ModuleNotFoundError|LookupError|IndexError|KeyError|MemoryError|NameError|UnboundLocalError|OSError|BlockingIOError|ChildProcessError|ConnectionError|BrokenPipeError|ConnectionAbortedError|ConnectionRefusedError|ConnectionResetError|FileExistsError|FileNotFoundError|InterruptedError|IsADirectoryError|NotADirectoryError|PermissionError|ProcessLookupError|TimeoutError|ReferenceError|RuntimeError|NotImplementedError|RecursionError|SyntaxError|IndentationError|TabError|SystemError|TypeError|ValueError|UnicodeError|UnicodeDecodeError|UnicodeEncodeError|UnicodeTranslateError|Warning|DeprecationWarning|PendingDeprecationWarning|RuntimeWarning|SyntaxWarning|UserWarning|FutureWarning|ImportWarning|UnicodeWarning|BytesWarning|ResourceWarning))?.*
+io/file/open/	function_call:open
 io/standard/input/	function_call:input
 io/standard/print/	function_call:print
 library/standard/\1/\2/	import:(math|typing|random|sys|os|collections|itertools|string|time|decimal|doctest|argparse|unittest|base64|multiprocessing|pprint|bisect|functools|heapq|queue|__future__|abc|copy|datetime|hashlib|numbers|operator|pickle|statistics|struct|tempfile|timeit|turtle|urllib\.request|webbrowser|__main__|_dummy_thread|_thread|aifc|array|ast|asynchat|asyncio|asyncore|atexit|audioop|bdb|binascii|binhex|builtins|bz2|calendar|cgi|cgitb|chunk|cmath|cmd|code|codecs|codeop|collections\.abc|colorsys|compileall|concurrent\.futures|configparser|contextlib|contextvars|copyreg|crypt|csv|ctypes|curses|curses\.ascii|curses\.panel|curses\.textpad|dataclasses|dbm|difflib|dis|distutils|dummy_threading|email|ensurepip|enum|errno|faulthandler|fcntl|filecmp|fileinput|fnmatch|formatter|fractions|ftplib|gc|getopt|getpass|gettext|glob|grp|gzip|hmac|html|html\.entities|html\.parser|http|http\.client|http\.cookiejar|http\.cookies|http\.server|imaplib|imghdr|imp|importlib|inspect|io|ipaddress|json|keyword|linecache|locale|logging|logging\.config|logging\.handlers|lzma|mailbox|mailcap|marshal|mimetypes|mmap|modulefinder|msilib|msvcrt|multiprocessing\.shared_memory|netrc|nis|nntplib|optparse|os\.path|ossaudiodev|parser|pathlib|pdb|pickletools|pipes|pkgutil|platform|plistlib|poplib|posix|pty|pwd|py_compile|pyclbr|pydoc|quopri|re|readline|reprlib|resource|rlcompleter|runpy|sched|secrets|select|selectors|shelve|shlex|shutil|signal|site|smtpd|smtplib|sndhdr|socket|socketserver|spwd|sqlite3|ssl|stat|stringprep|subprocess|sunau|symbol|symtable|sysconfig|syslog|tabnanny|tarfile|telnetlib|termios|test|test\.support|test\.support\.script_helper|textwrap|threading|tkinter|tkinter\.scrolledtext|tkinter\.tix|tkinter\.ttk|token|tokenize|trace|traceback|tracemalloc|tty|types|unicodedata|unittest\.mock|urllib|urllib\.error|urllib\.parse|urllib\.response|urllib\.robotparser|uu|uuid|venv|warnings|wave|weakref|winreg|winsound|wsgiref|xdrlib|xml\.dom|xml\.dom\.minidom|xml\.dom\.pulldom|xml\.etree\.ElementTree|xml\.parsers\.expat|xml\.sax|xml\.sax\.handler|xml\.sax\.saxutils|xml\.sax\.xmlreader|xmlrpc|xmlrpc\.client|xmlrpc\.server|zipapp|zipfile|zipimport|zlib)(?::(.+))?
@@ -74,6 +75,9 @@ pattern/elements/satisfy/some/	existential_quantifier
 pattern/inputs/accumulate/	accumulate_inputs\b.+
 pattern/inputs/accumulate/count/	count_inputs\b.+
 pattern/inputs/find_first_good/	get_valid_input\b.+
+program/sloc/\1	lines_of_code:(\d{3})
+program/sloc/0\1	lines_of_code:(\d{2})
+program/sloc/00\1	lines_of_code:(\d{1})
 subroutine_definition/argument/\1/	function_argument_flavor:(.+)
 subroutine_definition/argument/no/	function_without_arguments:.+
 subroutine_definition/decorated/	decorated_function:.+
@@ -116,6 +120,7 @@ test/identity/	comparison_operator:Is
 test/identity/not/	comparison_operator:IsNot
 test/inequality/	comparison_operator:(Lt|LtE|Gt|GtE)
 test/inequality/chained/\1/	chained_inequalities:(\d+)
+topic/\1/	topic:(.+)
 type/container/dict/empty/	falsey_literal:Dict
 type/container/dict/empty/	function_call_without_arguments:dict
 type/container/dictionary/	literal:Dict
@@ -155,7 +160,6 @@ variable/assignment/single/	single_assignment:.+
 -- EOF	
 call/function/other/	
 call/function/other/predicate/	
-class_definition/	
 control_flow/loop/non_sequential/	
 control_flow/loop/non_sequential/divergent/break/	
 control_flow/loop/non_sequential/divergent/break/else/	
@@ -164,7 +168,6 @@ control_flow/loop/non_sequential/divergent/return/
 control_flow/loop/sequential/divergent/break/	
 control_flow/loop/sequential/divergent/break/else/	
 control_flow/loop/sequential/divergent/return/	
-io/file/	
 io/standard/print/multiple/	
 io/standard/print/newline/	
 io/standard/print/without_newline/	

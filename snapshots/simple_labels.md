@@ -64,6 +64,10 @@
 - int_literal / collatz_print.py / 2, 4, 4, 5, 7, 7
 - int_literal / fizzbuzz.py / 1, 1, 2, 2, 4, 4, 6, 6
 - int_literal / is_even.py / 2, 2
+- lines_of_code:1 / assignment.py / 1
+- lines_of_code:2 / is_even.py / 1-2
+- lines_of_code:8 / collatz_print.py / 1-8
+- lines_of_code:9 / fizzbuzz.py / 1-9
 - literal:Num / collatz_print.py / 2, 4, 4, 5, 7, 7
 - literal:Num / fizzbuzz.py / 1, 1, 2, 2, 4, 4, 6, 6
 - literal:Num / is_even.py / 2, 2

@@ -1,13 +1,13 @@
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_01/sol1.py
 # ----------------------------------------------------------------------------------------
-def solution(n): # function:solution (-> +1), function_argument:n, function_argument_flavor:arg, function_returning_something:solution (-> +1)
+def solution(n): # function:solution (-> +1), function_argument:n, function_argument_flavor:arg, function_returning_something:solution (-> +1), lines_of_code:2 (-> +1)
     return sum([e for e in range(3, n) if e % 3 == 0 or e % 5 == 0]) # binary_operator:Mod, boolean_operator:Or, call_argument:, call_argument:3, call_argument:n, comparison_operator:Eq, composition, comprehension:List, comprehension_for_count:1, divisibility_test:3, divisibility_test:5, falsey_literal:0, filtered_comprehension, function_call:range, function_call:sum, function_tail_call:sum, int_literal, literal:Num, range:3:n, return, suggest_constant_definition
 
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_01/sol2.py
 # ----------------------------------------------------------------------------------------
-def solution(n): # function:solution (-> +8), function_argument:n, function_argument_flavor:arg, function_returning_something:solution (-> +8)
+def solution(n): # function:solution (-> +8), function_argument:n, function_argument_flavor:arg, function_returning_something:solution (-> +8), lines_of_code:9 (-> +8)
     sum = 0 # assignment, assignment_lhs_identifier:sum, assignment_rhs_atom:0, falsey_literal:0, int_literal, literal:Num, single_assignment:sum
     terms = (n - 1) // 3 # assignment, assignment_lhs_identifier:terms, assignment_rhs_atom:1, assignment_rhs_atom:3, assignment_rhs_atom:n, binary_operator:FloorDiv, binary_operator:Sub, int_literal, literal:Num, single_assignment:terms, suggest_constant_definition
     sum += ((terms) * (6 + (terms - 1) * 3)) // 2 # assignment_lhs_identifier:sum, assignment_rhs_atom:1, assignment_rhs_atom:2, assignment_rhs_atom:3, assignment_rhs_atom:6, assignment_rhs_atom:terms, augmented_assignment:Add, binary_operator:Add, binary_operator:FloorDiv, binary_operator:Mult, binary_operator:Sub, int_literal, literal:Num, suggest_constant_definition, variable_update:sum:1, variable_update:sum:2, variable_update:sum:3, variable_update:sum:6, variable_update:sum:terms, variable_update_by_augmented_assignment:sum:1, variable_update_by_augmented_assignment:sum:2, variable_update_by_augmented_assignment:sum:3, variable_update_by_augmented_assignment:sum:6, variable_update_by_augmented_assignment:sum:terms
@@ -20,7 +20,7 @@ def solution(n): # function:solution (-> +8), function_argument:n, function_argu
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_01/sol3.py
 # ----------------------------------------------------------------------------------------
-def solution(n): # function:solution (-> +32), function_argument:n, function_argument_flavor:arg, function_returning_something:solution (-> +32)
+def solution(n): # function:solution (-> +32), function_argument:n, function_argument_flavor:arg, function_returning_something:solution (-> +32), lines_of_code:33 (-> +32)
     sum = 0 # assignment, assignment_lhs_identifier:sum, assignment_rhs_atom:0, falsey_literal:0, int_literal, literal:Num, single_assignment:sum
     num = 0 # assignment, assignment_lhs_identifier:num, assignment_rhs_atom:0, falsey_literal:0, int_literal, literal:Num, single_assignment:num
     while 1: # int_literal, literal:Num, while (-> +28)
@@ -57,7 +57,7 @@ def solution(n): # function:solution (-> +32), function_argument:n, function_arg
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_01/sol4.py
 # ----------------------------------------------------------------------------------------
-def solution(n): # function:solution (-> +22), function_argument:n, function_argument_flavor:arg, function_returning_something:solution (-> +22)
+def solution(n): # function:solution (-> +22), function_argument:n, function_argument_flavor:arg, function_returning_something:solution (-> +22), lines_of_code:23 (-> +22)
     xmulti = [] # assignment, assignment_lhs_identifier:xmulti, falsey_literal:List, literal:List, single_assignment:xmulti
     zmulti = [] # assignment, assignment_lhs_identifier:zmulti, falsey_literal:List, literal:List, single_assignment:zmulti
     z = 3 # assignment, assignment_lhs_identifier:z, assignment_rhs_atom:3, int_literal, literal:Num, single_assignment:z, suggest_constant_definition
@@ -84,13 +84,13 @@ def solution(n): # function:solution (-> +22), function_argument:n, function_arg
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_01/sol5.py
 # ----------------------------------------------------------------------------------------
-def solution(n): # function:solution (-> +1), function_argument:n, function_argument_flavor:arg, function_returning_something:solution (-> +1)
+def solution(n): # function:solution (-> +1), function_argument:n, function_argument_flavor:arg, function_returning_something:solution (-> +1), lines_of_code:2 (-> +1)
     return sum([i for i in range(n) if i % 3 == 0 or i % 5 == 0]) # binary_operator:Mod, boolean_operator:Or, call_argument:, call_argument:n, comparison_operator:Eq, composition, comprehension:List, comprehension_for_count:1, divisibility_test:3, divisibility_test:5, falsey_literal:0, filtered_comprehension, function_call:range, function_call:sum, function_tail_call:sum, int_literal, literal:Num, range:n, return, suggest_constant_definition
 
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_01/sol6.py
 # ----------------------------------------------------------------------------------------
-def solution(n): # function:solution (-> +9), function_argument:n, function_argument_flavor:arg, function_returning_something:solution (-> +9)
+def solution(n): # function:solution (-> +9), function_argument:n, function_argument_flavor:arg, function_returning_something:solution (-> +9), lines_of_code:10 (-> +9)
     a = 3 # assignment, assignment_lhs_identifier:a, assignment_rhs_atom:3, int_literal, literal:Num, single_assignment:a, suggest_constant_definition
     result = 0 # assignment, assignment_lhs_identifier:result, assignment_rhs_atom:0, falsey_literal:0, int_literal, literal:Num, single_assignment:result
     while a < n: # comparison_operator:Lt, while (-> +5)
@@ -104,7 +104,7 @@ def solution(n): # function:solution (-> +9), function_argument:n, function_argu
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_01/sol7.py
 # ----------------------------------------------------------------------------------------
-def solution(n): # function:solution (-> +7), function_argument:n, function_argument_flavor:arg, function_returning_something:solution (-> +7)
+def solution(n): # function:solution (-> +7), function_argument:n, function_argument_flavor:arg, function_returning_something:solution (-> +7), lines_of_code:8 (-> +7)
     result = 0 # assignment, assignment_lhs_identifier:result, assignment_rhs_atom:0, falsey_literal:0, int_literal, literal:Num, single_assignment:result
     for i in range(n): # accumulate_elements:result (-> +4), call_argument:n, for:i (-> +4), for_range:n (-> +4), function_call:range, range:n
         if i % 3 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:3, falsey_literal:0, if (-> +3), if_test_atom:0, if_test_atom:3, if_test_atom:i, int_literal, literal:Num, suggest_constant_definition
@@ -116,7 +116,7 @@ def solution(n): # function:solution (-> +7), function_argument:n, function_argu
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_02/sol1.py
 # ----------------------------------------------------------------------------------------
-def solution(n): # function:solution (-> +8), function_argument:n, function_argument_flavor:arg, function_returning_something:solution (-> +8)
+def solution(n): # function:solution (-> +8), function_argument:n, function_argument_flavor:arg, function_returning_something:solution (-> +8), lines_of_code:9 (-> +8)
     i = 1 # assignment, assignment_lhs_identifier:i, assignment_rhs_atom:1, int_literal, literal:Num, single_assignment:i
     j = 2 # assignment, assignment_lhs_identifier:j, assignment_rhs_atom:2, int_literal, literal:Num, single_assignment:j
     sum = 0 # assignment, assignment_lhs_identifier:sum, assignment_rhs_atom:0, falsey_literal:0, int_literal, literal:Num, single_assignment:sum
@@ -129,7 +129,7 @@ def solution(n): # function:solution (-> +8), function_argument:n, function_argu
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_02/sol2.py
 # ----------------------------------------------------------------------------------------
-def solution(n): # function:solution (-> +7), function_argument:n, function_argument_flavor:arg, function_returning_something:solution (-> +7)
+def solution(n): # function:solution (-> +7), function_argument:n, function_argument_flavor:arg, function_returning_something:solution (-> +7), lines_of_code:8 (-> +7)
     ls = [] # assignment, assignment_lhs_identifier:ls, falsey_literal:List, literal:List, single_assignment:ls
     a, b = 0, 1 # assignment, assignment_lhs_identifier:a, assignment_lhs_identifier:b, assignment_rhs_atom:0, assignment_rhs_atom:1, falsey_literal:0, int_literal, literal:Num, literal:Tuple
     while b <= n: # comparison_operator:LtE, while (-> +3)
@@ -141,7 +141,7 @@ def solution(n): # function:solution (-> +7), function_argument:n, function_argu
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_02/sol3.py
 # ----------------------------------------------------------------------------------------
-def solution(n): # function:solution (-> +9), function_argument:n, function_argument_flavor:arg, function_returning_something:solution (-> +9)
+def solution(n): # function:solution (-> +9), function_argument:n, function_argument_flavor:arg, function_returning_something:solution (-> +9), lines_of_code:10 (-> +9)
     if n <= 1: # comparison_operator:LtE, if (-> +1), if_test_atom:1, if_test_atom:n, int_literal, literal:Num
         return 0 # falsey_literal:0, if_then_branch, int_literal, literal:Num, return:0
     a = 0 # assignment, assignment_lhs_identifier:a, assignment_rhs_atom:0, falsey_literal:0, int_literal, literal:Num, single_assignment:a
@@ -155,7 +155,7 @@ def solution(n): # function:solution (-> +9), function_argument:n, function_argu
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_02/sol4.py
 # ----------------------------------------------------------------------------------------
-import math # import:math, import_module:math
+import math # import:math, import_module:math, lines_of_code:15 (-> +14)
 from decimal import Decimal, getcontext # import:decimal:Decimal, import:decimal:getcontext, import_module:decimal, import_name:Decimal, import_name:getcontext
 def solution(n): # function:solution (-> +12), function_argument:n, function_argument_flavor:arg, function_returning_something:solution (-> +12)
     try: # try (-> +3), try_except:TypeError (-> +3), try_except:ValueError (-> +3), try_raise:TypeError (-> +3)
@@ -174,7 +174,7 @@ def solution(n): # function:solution (-> +12), function_argument:n, function_arg
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_02/sol5.py
 # ----------------------------------------------------------------------------------------
-def solution(n): # function:solution (-> +12), function_argument:n, function_argument_flavor:arg, function_returning_something:solution (-> +12)
+def solution(n): # function:solution (-> +12), function_argument:n, function_argument_flavor:arg, function_returning_something:solution (-> +12), lines_of_code:13 (-> +12)
     a = [0, 1] # assignment, assignment_lhs_identifier:a, assignment_rhs_atom:0, assignment_rhs_atom:1, falsey_literal:0, int_literal, literal:List, literal:Num, single_assignment:a
     i = 0 # assignment, assignment_lhs_identifier:i, assignment_rhs_atom:0, falsey_literal:0, int_literal, literal:Num, single_assignment:i
     while a[i] <= n: # comparison_operator:LtE, index:i, while (-> +4)
@@ -191,7 +191,7 @@ def solution(n): # function:solution (-> +12), function_argument:n, function_arg
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_03/sol1.py
 # ----------------------------------------------------------------------------------------
-import math # import:math, import_module:math
+import math # import:math, import_module:math, lines_of_code:36 (-> +35)
 def isprime(no): # function:isprime (-> +9), function_argument:no, function_argument_flavor:arg, function_returning_something:isprime (-> +9)
     if no == 2: # comparison_operator:Eq, if (-> +3), if_test_atom:2, if_test_atom:no, int_literal, literal:Num
         return True # if_then_branch, literal:True, return:True
@@ -231,7 +231,7 @@ def solution(n): # function:solution (-> +24), function_argument:n, function_arg
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_03/sol2.py
 # ----------------------------------------------------------------------------------------
-def solution(n): # function:solution (-> +16), function_argument:n, function_argument_flavor:arg, function_returning_something:solution (-> +16)
+def solution(n): # function:solution (-> +16), function_argument:n, function_argument_flavor:arg, function_returning_something:solution (-> +16), lines_of_code:17 (-> +16)
     try: # try (-> +3), try_except:TypeError (-> +3), try_except:ValueError (-> +3), try_raise:TypeError (-> +3)
         n = int(n) # assignment, assignment_lhs_identifier:n, assignment_rhs_atom:n, call_argument:n, function_call:int, single_assignment:n
     except (TypeError, ValueError) as e: # except:TypeError, except:ValueError
@@ -252,7 +252,7 @@ def solution(n): # function:solution (-> +16), function_argument:n, function_arg
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_03/sol3.py
 # ----------------------------------------------------------------------------------------
-def solution(n: int) -> int: # function:solution (-> +18), function_argument:n, function_argument_flavor:arg, function_returning_something:solution (-> +18)
+def solution(n: int) -> int: # function:solution (-> +18), function_argument:n, function_argument_flavor:arg, function_returning_something:solution (-> +18), lines_of_code:19 (-> +18)
     try: # try (-> +3), try_except:TypeError (-> +3), try_except:ValueError (-> +3), try_raise:TypeError (-> +3)
         n = int(n) # assignment, assignment_lhs_identifier:n, assignment_rhs_atom:n, call_argument:n, function_call:int, single_assignment:n
     except (TypeError, ValueError): # except:TypeError, except:ValueError
@@ -275,7 +275,7 @@ def solution(n: int) -> int: # function:solution (-> +18), function_argument:n, 
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_04/sol1.py
 # ----------------------------------------------------------------------------------------
-def solution(n): # function:solution (-> +8), function_argument:n, function_argument_flavor:arg, function_returning_something:solution (-> +8)
+def solution(n): # function:solution (-> +8), function_argument:n, function_argument_flavor:arg, function_returning_something:solution (-> +8), lines_of_code:9 (-> +8)
     for number in range(n - 1, 10000, -1): # binary_operator:Sub, call_argument:, call_argument:-1, call_argument:10000, find_first_element (-> +6), for:number (-> +7), for_range:_:10000:-1 (-> +7), function_call:range, int_literal, literal:Num, range:_:10000:-1, suggest_constant_definition
         strNumber = str(number) # assignment, assignment_lhs_identifier:strNumber, assignment_rhs_atom:number, call_argument:number, function_call:str, single_assignment:strNumber
         if strNumber == strNumber[::-1]: # comparison_operator:Eq, if (-> +5), if_test_atom:-1, if_test_atom:strNumber, int_literal, literal:Num, slice:::-1, slice_lower:, slice_step:-1, slice_upper:
@@ -288,7 +288,7 @@ def solution(n): # function:solution (-> +8), function_argument:n, function_argu
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_04/sol2.py
 # ----------------------------------------------------------------------------------------
-def solution(n): # function:solution (-> +7), function_argument:n, function_argument_flavor:arg, function_returning_something:solution (-> +7)
+def solution(n): # function:solution (-> +7), function_argument:n, function_argument_flavor:arg, function_returning_something:solution (-> +7), lines_of_code:8 (-> +7)
     answer = 0 # assignment, assignment_lhs_identifier:answer, assignment_rhs_atom:0, falsey_literal:0, int_literal, literal:Num, single_assignment:answer
     for i in range(999, 99, -1): # accumulate_elements:answer (-> +4), call_argument:-1, call_argument:99, call_argument:999, for:i (-> +4), for_range:999:99:-1 (-> +4), function_call:range, int_literal, literal:Num, range:999:99:-1, square_nested_for (-> +4), suggest_constant_definition
         for j in range(999, 99, -1): # accumulate_elements:answer (-> +3), call_argument:-1, call_argument:99, call_argument:999, for:j (-> +3), for_range:999:99:-1 (-> +3), function_call:range, int_literal, literal:Num, nested_for:1 (-> +3), range:999:99:-1, suggest_constant_definition
@@ -300,7 +300,7 @@ def solution(n): # function:solution (-> +7), function_argument:n, function_argu
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_05/sol1.py
 # ----------------------------------------------------------------------------------------
-def solution(n): # function:solution (-> +18), function_argument:n, function_argument_flavor:arg, function_returning_something:solution (-> +18)
+def solution(n): # function:solution (-> +18), function_argument:n, function_argument_flavor:arg, function_returning_something:solution (-> +18), lines_of_code:19 (-> +18)
     try: # try (-> +3), try_except:TypeError (-> +3), try_except:ValueError (-> +3), try_raise:TypeError (-> +3)
         n = int(n) # assignment, assignment_lhs_identifier:n, assignment_rhs_atom:n, call_argument:n, function_call:int, single_assignment:n
     except (TypeError, ValueError) as e: # except:TypeError, except:ValueError
@@ -323,7 +323,7 @@ def solution(n): # function:solution (-> +18), function_argument:n, function_arg
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_05/sol2.py
 # ----------------------------------------------------------------------------------------
-def gcd(x, y): # function:gcd (-> +1), function_argument:x, function_argument:y, function_argument_flavor:arg, function_returning_something:gcd (-> +1), recursive_function:gcd (-> +1), tail_recursive_function:gcd (-> +1)
+def gcd(x, y): # function:gcd (-> +1), function_argument:x, function_argument:y, function_argument_flavor:arg, function_returning_something:gcd (-> +1), lines_of_code:9 (-> +8), recursive_function:gcd (-> +1), tail_recursive_function:gcd (-> +1)
     return x if y == 0 else gcd(y, x % y) # binary_operator:Mod, call_argument:, call_argument:y, comparison_operator:Eq, conditional_expression, falsey_literal:0, function_call:gcd, function_tail_call:gcd, int_literal, literal:Num, return
 def lcm(x, y): # function:lcm (-> +1), function_argument:x, function_argument:y, function_argument_flavor:arg, function_returning_something:lcm (-> +1)
     return (x * y) // gcd(x, y) # binary_operator:FloorDiv, binary_operator:Mult, call_argument:x, call_argument:y, function_call:gcd, return
@@ -336,7 +336,7 @@ def solution(n): # function:solution (-> +4), function_argument:n, function_argu
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_06/sol1.py
 # ----------------------------------------------------------------------------------------
-def solution(n): # function:solution (-> +7), function_argument:n, function_argument_flavor:arg, function_returning_something:solution (-> +7)
+def solution(n): # function:solution (-> +7), function_argument:n, function_argument_flavor:arg, function_returning_something:solution (-> +7), lines_of_code:8 (-> +7)
     suma = 0 # assignment, assignment_lhs_identifier:suma, assignment_rhs_atom:0, falsey_literal:0, int_literal, literal:Num, single_assignment:suma
     sumb = 0 # assignment, assignment_lhs_identifier:sumb, assignment_rhs_atom:0, falsey_literal:0, int_literal, literal:Num, single_assignment:sumb
     for i in range(1, n + 1): # accumulate_elements:suma (-> +2), accumulate_elements:sumb (-> +2), binary_operator:Add, call_argument:, call_argument:1, for:i (-> +2), for_range:1:_ (-> +2), function_call:range, int_literal, literal:Num, range:1:_
@@ -348,7 +348,7 @@ def solution(n): # function:solution (-> +7), function_argument:n, function_argu
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_06/sol2.py
 # ----------------------------------------------------------------------------------------
-def solution(n): # function:solution (-> +4), function_argument:n, function_argument_flavor:arg, function_returning_something:solution (-> +4)
+def solution(n): # function:solution (-> +4), function_argument:n, function_argument_flavor:arg, function_returning_something:solution (-> +4), lines_of_code:5 (-> +4)
     suma = n * (n + 1) / 2 # assignment, assignment_lhs_identifier:suma, assignment_rhs_atom:1, assignment_rhs_atom:2, assignment_rhs_atom:n, binary_operator:Add, binary_operator:Div, binary_operator:Mult, int_literal, literal:Num, single_assignment:suma
     suma **= 2 # assignment_lhs_identifier:suma, assignment_rhs_atom:2, augmented_assignment:Pow, int_literal, literal:Num, variable_update:suma:2, variable_update_by_augmented_assignment:suma:2
     sumb = n * (n + 1) * (2 * n + 1) / 6 # assignment, assignment_lhs_identifier:sumb, assignment_rhs_atom:1, assignment_rhs_atom:2, assignment_rhs_atom:6, assignment_rhs_atom:n, binary_operator:Add, binary_operator:Div, binary_operator:Mult, int_literal, literal:Num, single_assignment:sumb, suggest_constant_definition
@@ -357,7 +357,7 @@ def solution(n): # function:solution (-> +4), function_argument:n, function_argu
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_06/sol3.py
 # ----------------------------------------------------------------------------------------
-import math # import:math, import_module:math
+import math # import:math, import_module:math, lines_of_code:5 (-> +4)
 def solution(n): # function:solution (-> +3), function_argument:n, function_argument_flavor:arg, function_returning_something:solution (-> +3)
     sum_of_squares = sum([i * i for i in range(1, n + 1)]) # assignment, assignment_lhs_identifier:sum_of_squares, assignment_rhs_atom:1, assignment_rhs_atom:i, assignment_rhs_atom:n, binary_operator:Add, binary_operator:Mult, call_argument:, call_argument:1, composition, comprehension:List, comprehension_for_count:1, function_call:range, function_call:sum, int_literal, literal:Num, range:1:_, single_assignment:sum_of_squares
     square_of_sum = int(math.pow(sum(range(1, n + 1)), 2)) # assignment, assignment_lhs_identifier:square_of_sum, assignment_rhs_atom:1, assignment_rhs_atom:2, assignment_rhs_atom:math, assignment_rhs_atom:n, binary_operator:Add, call_argument:, call_argument:1, call_argument:2, composition, function_call:int, function_call:range, function_call:sum, int_literal, literal:Num, method_call, method_call_name:pow, range:1:_, single_assignment:square_of_sum
@@ -366,7 +366,7 @@ def solution(n): # function:solution (-> +3), function_argument:n, function_argu
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_06/sol4.py
 # ----------------------------------------------------------------------------------------
-def solution(n): # function:solution (-> +3), function_argument:n, function_argument_flavor:arg, function_returning_something:solution (-> +3)
+def solution(n): # function:solution (-> +3), function_argument:n, function_argument_flavor:arg, function_returning_something:solution (-> +3), lines_of_code:4 (-> +3)
     sum_of_squares = n * (n + 1) * (2 * n + 1) / 6 # assignment, assignment_lhs_identifier:sum_of_squares, assignment_rhs_atom:1, assignment_rhs_atom:2, assignment_rhs_atom:6, assignment_rhs_atom:n, binary_operator:Add, binary_operator:Div, binary_operator:Mult, int_literal, literal:Num, single_assignment:sum_of_squares, suggest_constant_definition
     square_of_sum = (n * (n + 1) / 2) ** 2 # assignment, assignment_lhs_identifier:square_of_sum, assignment_rhs_atom:1, assignment_rhs_atom:2, assignment_rhs_atom:n, binary_operator:Add, binary_operator:Div, binary_operator:Mult, binary_operator:Pow, int_literal, literal:Num, single_assignment:square_of_sum
     return int(square_of_sum - sum_of_squares) # binary_operator:Sub, call_argument:, function_call:int, function_tail_call:int, return
@@ -374,7 +374,7 @@ def solution(n): # function:solution (-> +3), function_argument:n, function_argu
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_07/sol1.py
 # ----------------------------------------------------------------------------------------
-from math import sqrt # import:math:sqrt, import_module:math, import_name:sqrt
+from math import sqrt # import:math:sqrt, import_module:math, import_name:sqrt, lines_of_code:24 (-> +23)
 def isprime(n): # function:isprime (-> +10), function_argument:n, function_argument_flavor:arg, function_returning_something:isprime (-> +10)
     if n == 2: # comparison_operator:Eq, if (-> +8), if_test_atom:2, if_test_atom:n, int_literal, literal:Num
         return True # if_then_branch, literal:True, return:True
@@ -402,7 +402,7 @@ def solution(n): # function:solution (-> +11), function_argument:n, function_arg
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_07/sol2.py
 # ----------------------------------------------------------------------------------------
-def isprime(number): # function:isprime (-> +4), function_argument:number, function_argument_flavor:arg, function_returning_something:isprime (-> +4)
+def isprime(number): # function:isprime (-> +4), function_argument:number, function_argument_flavor:arg, function_returning_something:isprime (-> +4), lines_of_code:21 (-> +20)
     for i in range(2, int(number ** 0.5) + 1): # binary_operator:Add, binary_operator:Pow, call_argument:, call_argument:2, composition, float_literal, for:i (-> +2), for_range:2:_ (-> +2), function_call:int, function_call:range, int_literal, literal:Num, range:2:_, suggest_constant_definition, universal_quantifier (-> +3)
         if number % i == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test, falsey_literal:0, if (-> +1), if_test_atom:0, if_test_atom:i, if_test_atom:number, int_literal, literal:Num
             return False # falsey_literal:False, if_then_branch, literal:False, return:False
@@ -427,7 +427,7 @@ def solution(n): # function:solution (-> +15), function_argument:n, function_arg
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_07/sol3.py
 # ----------------------------------------------------------------------------------------
-import math # import:math, import_module:math
+import math # import:math, import_module:math, lines_of_code:14 (-> +13)
 import itertools # import:itertools, import_module:itertools
 def primeCheck(number): # function:primeCheck (-> +3), function_argument:number, function_argument_flavor:arg, function_returning_something:primeCheck (-> +3)
     if number % 2 == 0 and number > 2: # binary_operator:Mod, boolean_operator:And, comparison_operator:Eq, comparison_operator:Gt, divisibility_test:2, falsey_literal:0, if (-> +1), if_test_atom:0, if_test_atom:2, if_test_atom:number, int_literal, literal:Num
@@ -445,7 +445,7 @@ def solution(n): # function:solution (-> +1), function_argument:n, function_argu
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_08/sol1.py
 # ----------------------------------------------------------------------------------------
-import sys # import:sys, import_module:sys
+import sys # import:sys, import_module:sys, lines_of_code:30 (-> +29)
 N = """73167176531330624919225119674426574742355349194934\ # assignment, assignment_lhs_identifier:N, single_assignment:N
 96983520312774506326239578318016984801869478851843\
 85861560789112949495459501737958331952853208805511\
@@ -479,7 +479,7 @@ def solution(n): # function:solution (-> +8), function_argument:n, function_argu
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_08/sol2.py
 # ----------------------------------------------------------------------------------------
-from functools import reduce # import:functools:reduce, import_module:functools, import_name:reduce
+from functools import reduce # import:functools:reduce, import_module:functools, import_name:reduce, lines_of_code:28 (-> +27)
 N = ( # assignment, assignment_lhs_identifier:N, single_assignment:N
     "73167176531330624919225119674426574742355349194934" # literal:Str
     "96983520312774506326239578318016984801869478851843"
@@ -513,7 +513,7 @@ def solution(n): # function:solution (-> +4), function_argument:n, function_argu
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_08/sol3.py
 # ----------------------------------------------------------------------------------------
-import sys # import:sys, import_module:sys
+import sys # import:sys, import_module:sys, lines_of_code:39 (-> +38)
 N = """73167176531330624919225119674426574742355349194934\ # assignment, assignment_lhs_identifier:N, single_assignment:N
 96983520312774506326239578318016984801869478851843\
 85861560789112949495459501737958331952853208805511\
@@ -556,7 +556,7 @@ def solution(n: str) -> int: # function:solution (-> +12), function_argument:n, 
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_09/sol1.py
 # ----------------------------------------------------------------------------------------
-def solution(): # function:solution (-> +7), function_returning_something:solution (-> +7), function_without_arguments:solution (-> +7)
+def solution(): # function:solution (-> +7), function_returning_something:solution (-> +7), function_without_arguments:solution (-> +7), lines_of_code:8 (-> +7)
     for a in range(300): # call_argument:300, for:a (-> +6), for_range:300 (-> +6), for_range:400 (-> +6), for_range:500 (-> +6), function_call:range, int_literal, literal:Num, range:300, suggest_constant_definition
         for b in range(400): # call_argument:400, for:b (-> +5), for_range:400 (-> +5), for_range:500 (-> +5), function_call:range, int_literal, literal:Num, nested_for:1 (-> +5), range:400, suggest_constant_definition
             for c in range(500): # call_argument:500, for:c (-> +4), for_range:500 (-> +4), function_call:range, int_literal, literal:Num, nested_for:2 (-> +4), range:500, suggest_constant_definition
@@ -568,7 +568,7 @@ def solution(): # function:solution (-> +7), function_returning_something:soluti
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_09/sol2.py
 # ----------------------------------------------------------------------------------------
-def solution(n): # function:solution (-> +10), function_argument:n, function_argument_flavor:arg, function_returning_something:solution (-> +10)
+def solution(n): # function:solution (-> +10), function_argument:n, function_argument_flavor:arg, function_returning_something:solution (-> +10), lines_of_code:11 (-> +10)
     product = -1 # assignment, assignment_lhs_identifier:product, assignment_rhs_atom:-1, int_literal, literal:Num, single_assignment:product
     d = 0 # assignment, assignment_lhs_identifier:d, assignment_rhs_atom:0, falsey_literal:0, int_literal, literal:Num, single_assignment:d
     for a in range(1, n // 3): # binary_operator:FloorDiv, call_argument:, call_argument:1, for:a (-> +6), for_range:1:_ (-> +6), function_call:range, int_literal, literal:Num, range:1:_, suggest_constant_definition
@@ -583,7 +583,7 @@ def solution(n): # function:solution (-> +10), function_argument:n, function_arg
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_09/sol3.py
 # ----------------------------------------------------------------------------------------
-def solution(): # function:solution (-> +7), function_returning_something:solution (-> +7), function_without_arguments:solution (-> +7)
+def solution(): # function:solution (-> +7), function_returning_something:solution (-> +7), function_without_arguments:solution (-> +7), lines_of_code:8 (-> +7)
     return [ # return
         a * b * c # binary_operator:Mult, comprehension:List, comprehension_for_count:3
         for a in range(1, 999) # call_argument:1, call_argument:999, function_call:range, int_literal, literal:Num, range:1:999, suggest_constant_definition
@@ -595,7 +595,7 @@ def solution(): # function:solution (-> +7), function_returning_something:soluti
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_10/sol1.py
 # ----------------------------------------------------------------------------------------
-from math import sqrt # import:math:sqrt, import_module:math, import_name:sqrt
+from math import sqrt # import:math:sqrt, import_module:math, import_name:sqrt, lines_of_code:17 (-> +16)
 def is_prime(n): # function:is_prime (-> +4), function_argument:n, function_argument_flavor:arg, function_returning_something:is_prime (-> +4)
     for i in range(2, int(sqrt(n)) + 1): # binary_operator:Add, call_argument:, call_argument:2, call_argument:n, composition, for:i (-> +2), for_range:2:_ (-> +2), function_call:int, function_call:range, function_call:sqrt, int_literal, literal:Num, range:2:_, universal_quantifier (-> +3)
         if n % i == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test, falsey_literal:0, if (-> +1), if_test_atom:0, if_test_atom:i, if_test_atom:n, int_literal, literal:Num
@@ -616,7 +616,7 @@ def solution(n): # function:solution (-> +1), function_argument:n, function_argu
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_10/sol2.py
 # ----------------------------------------------------------------------------------------
-import math # import:math, import_module:math
+import math # import:math, import_module:math, lines_of_code:14 (-> +13)
 from itertools import takewhile # import:itertools:takewhile, import_module:itertools, import_name:takewhile
 def primeCheck(number): # function:primeCheck (-> +3), function_argument:number, function_argument_flavor:arg, function_returning_something:primeCheck (-> +3)
     if number % 2 == 0 and number > 2: # binary_operator:Mod, boolean_operator:And, comparison_operator:Eq, comparison_operator:Gt, divisibility_test:2, falsey_literal:0, if (-> +1), if_test_atom:0, if_test_atom:2, if_test_atom:number, int_literal, literal:Num
@@ -634,7 +634,7 @@ def solution(n): # function:solution (-> +1), function_argument:n, function_argu
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_10/sol3.py
 # ----------------------------------------------------------------------------------------
-def prime_sum(n: int) -> int: # function:prime_sum (-> +12), function_argument:n, function_argument_flavor:arg, function_returning_something:prime_sum (-> +12)
+def prime_sum(n: int) -> int: # function:prime_sum (-> +12), function_argument:n, function_argument_flavor:arg, function_returning_something:prime_sum (-> +12), lines_of_code:13 (-> +12)
     list_ = [0 for i in range(n + 1)] # assignment, assignment_lhs_identifier:list_, assignment_rhs_atom:0, assignment_rhs_atom:1, assignment_rhs_atom:i, assignment_rhs_atom:n, binary_operator:Add, call_argument:, comprehension:List, comprehension_for_count:1, falsey_literal:0, function_call:range, int_literal, literal:Num, range:_, single_assignment:list_
     list_[0] = 1 # assignment, assignment_lhs_identifier:list_, assignment_rhs_atom:1, falsey_literal:0, index:0, int_literal, literal:Num
     list_[1] = 1 # assignment, assignment_lhs_identifier:list_, assignment_rhs_atom:1, index:1, int_literal, literal:Num
@@ -651,7 +651,7 @@ def prime_sum(n: int) -> int: # function:prime_sum (-> +12), function_argument:n
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_11/sol1.py
 # ----------------------------------------------------------------------------------------
-import os # import:os, import_module:os
+import os # import:os, import_module:os, lines_of_code:36 (-> +35)
 def largest_product(grid): # function:largest_product (-> +27), function_argument:grid, function_argument_flavor:arg, function_returning_something:largest_product (-> +27)
     nColumns = len(grid[0]) # assignment, assignment_lhs_identifier:nColumns, assignment_rhs_atom:0, assignment_rhs_atom:grid, call_argument:, falsey_literal:0, function_call:len, index:0, int_literal, literal:Num, single_assignment:nColumns
     nRows = len(grid) # assignment, assignment_lhs_identifier:nRows, assignment_rhs_atom:grid, call_argument:grid, function_call:len, single_assignment:nRows
@@ -691,7 +691,7 @@ def solution(): # function:solution (-> +6), function_returning_something:soluti
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_11/sol2.py
 # ----------------------------------------------------------------------------------------
-import os # import:os, import_module:os
+import os # import:os, import_module:os, lines_of_code:28 (-> +27)
 def solution(): # function:solution (-> +26), function_returning_something:solution (-> +26), function_without_arguments:solution (-> +26)
     with open(os.path.dirname(__file__) + "/grid.txt") as f: # binary_operator:Add, call_argument:, call_argument:__file__, composition, concatenation operator:Str, function_call:open, literal:Str, method_call, method_call_name:dirname
         l = [] # assignment, assignment_lhs_identifier:l, falsey_literal:List, literal:List, single_assignment:l
@@ -723,7 +723,7 @@ def solution(): # function:solution (-> +26), function_returning_something:solut
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_12/sol1.py
 # ----------------------------------------------------------------------------------------
-from math import sqrt # import:math:sqrt, import_module:math, import_name:sqrt
+from math import sqrt # import:math:sqrt, import_module:math, import_name:sqrt, lines_of_code:18 (-> +17)
 def count_divisors(n): # function:count_divisors (-> +7), function_argument:n, function_argument_flavor:arg, function_returning_something:count_divisors (-> +7)
     nDivisors = 0 # assignment, assignment_lhs_identifier:nDivisors, assignment_rhs_atom:0, falsey_literal:0, int_literal, literal:Num, single_assignment:nDivisors
     for i in range(1, int(sqrt(n)) + 1): # binary_operator:Add, call_argument:, call_argument:1, call_argument:n, composition, for:i (-> +2), for_range:1:_ (-> +2), function_call:int, function_call:range, function_call:sqrt, int_literal, literal:Num, range:1:_
@@ -745,7 +745,7 @@ def solution(): # function:solution (-> +8), function_returning_something:soluti
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_12/sol2.py
 # ----------------------------------------------------------------------------------------
-def triangle_number_generator(): # function:triangle_number_generator (-> +2), function_without_arguments:triangle_number_generator (-> +2), generator:triangle_number_generator (-> +2)
+def triangle_number_generator(): # function:triangle_number_generator (-> +2), function_without_arguments:triangle_number_generator (-> +2), generator:triangle_number_generator (-> +2), lines_of_code:7 (-> +6)
     for n in range(1, 1000000): # call_argument:1, call_argument:1000000, for:n (-> +1), for_range:1:1000000 (-> +1), function_call:range, int_literal, literal:Num, range:1:1000000, suggest_constant_definition
         yield n * (n + 1) // 2 # binary_operator:Add, binary_operator:FloorDiv, binary_operator:Mult, int_literal, literal:Num, yield
 def count_divisors(n): # function:count_divisors (-> +1), function_argument:n, function_argument_flavor:arg, function_returning_something:count_divisors (-> +1)
@@ -756,13 +756,13 @@ def solution(): # function:solution (-> +1), function_returning_something:soluti
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_13/sol1.py
 # ----------------------------------------------------------------------------------------
-def solution(array): # function:solution (-> +1), function_argument:array, function_argument_flavor:arg, function_returning_something:solution (-> +1)
+def solution(array): # function:solution (-> +1), function_argument:array, function_argument_flavor:arg, function_returning_something:solution (-> +1), lines_of_code:2 (-> +1)
     return str(sum(array))[:10] # call_argument:, call_argument:array, composition, function_call:str, function_call:sum, int_literal, literal:Num, return, slice::10:, slice_lower:, slice_step:, slice_upper:10, suggest_constant_definition
 
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_14/sol1.py
 # ----------------------------------------------------------------------------------------
-def solution(n): # function:solution (-> +16), function_argument:n, function_argument_flavor:arg, function_returning_something:solution (-> +16)
+def solution(n): # function:solution (-> +16), function_argument:n, function_argument_flavor:arg, function_returning_something:solution (-> +16), lines_of_code:17 (-> +16)
     largest_number = 0 # assignment, assignment_lhs_identifier:largest_number, assignment_rhs_atom:0, falsey_literal:0, int_literal, literal:Num, single_assignment:largest_number
     pre_counter = 0 # assignment, assignment_lhs_identifier:pre_counter, assignment_rhs_atom:0, falsey_literal:0, int_literal, literal:Num, single_assignment:pre_counter
     for input1 in range(n): # call_argument:n, for:input1 (-> +12), for_range:n (-> +12), function_call:range, range:n
@@ -783,7 +783,7 @@ def solution(n): # function:solution (-> +16), function_argument:n, function_arg
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_14/sol2.py
 # ----------------------------------------------------------------------------------------
-def collatz_sequence(n): # function:collatz_sequence (-> +8), function_argument:n, function_argument_flavor:arg, function_returning_something:collatz_sequence (-> +8)
+def collatz_sequence(n): # function:collatz_sequence (-> +8), function_argument:n, function_argument_flavor:arg, function_returning_something:collatz_sequence (-> +8), lines_of_code:12 (-> +11)
     sequence = [n] # assignment, assignment_lhs_identifier:sequence, assignment_rhs_atom:n, single_assignment:sequence
     while n != 1: # comparison_operator:NotEq, evolve_state (-> +5), int_literal, literal:Num, while (-> +5)
         if n % 2 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, falsey_literal:0, if (-> +3), if_test_atom:0, if_test_atom:2, if_test_atom:n, int_literal, literal:Num
@@ -799,7 +799,7 @@ def solution(n): # function:solution (-> +2), function_argument:n, function_argu
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_15/sol1.py
 # ----------------------------------------------------------------------------------------
-from math import factorial # import:math:factorial, import_module:math, import_name:factorial
+from math import factorial # import:math:factorial, import_module:math, import_name:factorial, lines_of_code:5 (-> +4)
 def lattice_paths(n): # function:lattice_paths (-> +3), function_argument:n, function_argument_flavor:arg, function_returning_something:lattice_paths (-> +3)
     n = 2 * n # assignment, assignment_lhs_identifier:n, assignment_rhs_atom:2, assignment_rhs_atom:n, binary_operator:Mult, int_literal, literal:Num, single_assignment:n, variable_update:n:2, variable_update_by_assignment:n:2
     k = n / 2 # assignment, assignment_lhs_identifier:k, assignment_rhs_atom:2, assignment_rhs_atom:n, binary_operator:Div, int_literal, literal:Num, single_assignment:k
@@ -808,7 +808,7 @@ def lattice_paths(n): # function:lattice_paths (-> +3), function_argument:n, fun
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_16/sol1.py
 # ----------------------------------------------------------------------------------------
-def solution(power): # function:solution (-> +7), function_argument:power, function_argument_flavor:arg, function_returning_something:solution (-> +7)
+def solution(power): # function:solution (-> +7), function_argument:power, function_argument_flavor:arg, function_returning_something:solution (-> +7), lines_of_code:8 (-> +7)
     num = 2 ** power # assignment, assignment_lhs_identifier:num, assignment_rhs_atom:2, assignment_rhs_atom:power, binary_operator:Pow, int_literal, literal:Num, single_assignment:num
     string_num = str(num) # assignment, assignment_lhs_identifier:string_num, assignment_rhs_atom:num, call_argument:num, function_call:str, single_assignment:string_num
     list_num = list(string_num) # assignment, assignment_lhs_identifier:list_num, assignment_rhs_atom:string_num, call_argument:string_num, function_call:list, single_assignment:list_num
@@ -820,7 +820,7 @@ def solution(power): # function:solution (-> +7), function_argument:power, funct
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_16/sol2.py
 # ----------------------------------------------------------------------------------------
-def solution(power): # function:solution (-> +5), function_argument:power, function_argument_flavor:arg, function_returning_something:solution (-> +5)
+def solution(power): # function:solution (-> +5), function_argument:power, function_argument_flavor:arg, function_returning_something:solution (-> +5), lines_of_code:6 (-> +5)
     n = 2 ** power # assignment, assignment_lhs_identifier:n, assignment_rhs_atom:2, assignment_rhs_atom:power, binary_operator:Pow, int_literal, literal:Num, single_assignment:n
     r = 0 # assignment, assignment_lhs_identifier:r, assignment_rhs_atom:0, falsey_literal:0, int_literal, literal:Num, single_assignment:r
     while n: # while (-> +1)
@@ -830,7 +830,7 @@ def solution(power): # function:solution (-> +5), function_argument:power, funct
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_17/sol1.py
 # ----------------------------------------------------------------------------------------
-def solution(n): # function:solution (-> +17), function_argument:n, function_argument_flavor:arg, function_returning_something:solution (-> +17)
+def solution(n): # function:solution (-> +17), function_argument:n, function_argument_flavor:arg, function_returning_something:solution (-> +17), lines_of_code:18 (-> +17)
     ones_counts = [0, 3, 3, 5, 4, 4, 3, 5, 5, 4, 3, 6, 6, 8, 8, 7, 7, 9, 8, 8] # assignment, assignment_lhs_identifier:ones_counts, assignment_rhs_atom:0, assignment_rhs_atom:3, assignment_rhs_atom:4, assignment_rhs_atom:5, assignment_rhs_atom:6, assignment_rhs_atom:7, assignment_rhs_atom:8, assignment_rhs_atom:9, falsey_literal:0, int_literal, literal:List, literal:Num, single_assignment:ones_counts, suggest_constant_definition
     tens_counts = [0, 0, 6, 6, 5, 5, 5, 7, 6, 6] # assignment, assignment_lhs_identifier:tens_counts, assignment_rhs_atom:0, assignment_rhs_atom:5, assignment_rhs_atom:6, assignment_rhs_atom:7, falsey_literal:0, int_literal, literal:List, literal:Num, single_assignment:tens_counts, suggest_constant_definition
     count = 0 # assignment, assignment_lhs_identifier:count, assignment_rhs_atom:0, falsey_literal:0, int_literal, literal:Num, single_assignment:count
@@ -852,7 +852,7 @@ def solution(n): # function:solution (-> +17), function_argument:n, function_arg
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_18/solution.py
 # ----------------------------------------------------------------------------------------
-import os # import:os, import_module:os
+import os # import:os, import_module:os, lines_of_code:19 (-> +18)
 def solution(): # function:solution (-> +17), function_returning_something:solution (-> +17), function_without_arguments:solution (-> +17)
     script_dir = os.path.dirname(os.path.realpath(__file__)) # assignment, assignment_lhs_identifier:script_dir, assignment_rhs_atom:__file__, assignment_rhs_atom:os, call_argument:, call_argument:__file__, composition, method_call, method_call_name:dirname, method_call_name:realpath, single_assignment:script_dir
     triangle = os.path.join(script_dir, "triangle.txt") # assignment, assignment_lhs_identifier:triangle, assignment_rhs_atom:os, assignment_rhs_atom:script_dir, call_argument:, call_argument:script_dir, literal:Str, method_call, method_call_name:join, single_assignment:triangle
@@ -875,7 +875,7 @@ def solution(): # function:solution (-> +17), function_returning_something:solut
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_19/sol1.py
 # ----------------------------------------------------------------------------------------
-def solution(): # function:solution (-> +24), function_returning_something:solution (-> +24), function_without_arguments:solution (-> +24)
+def solution(): # function:solution (-> +24), function_returning_something:solution (-> +24), function_without_arguments:solution (-> +24), lines_of_code:25 (-> +24)
     days_per_month = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31] # assignment, assignment_lhs_identifier:days_per_month, assignment_rhs_atom:28, assignment_rhs_atom:30, assignment_rhs_atom:31, int_literal, literal:List, literal:Num, single_assignment:days_per_month, suggest_constant_definition
     day = 6 # assignment, assignment_lhs_identifier:day, assignment_rhs_atom:6, int_literal, literal:Num, single_assignment:day, suggest_constant_definition
     month = 1 # assignment, assignment_lhs_identifier:month, assignment_rhs_atom:1, int_literal, literal:Num, single_assignment:month
@@ -904,7 +904,7 @@ def solution(): # function:solution (-> +24), function_returning_something:solut
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_20/sol1.py
 # ----------------------------------------------------------------------------------------
-def factorial(n): # function:factorial (-> +4), function_argument:n, function_argument_flavor:arg, function_returning_something:factorial (-> +4)
+def factorial(n): # function:factorial (-> +4), function_argument:n, function_argument_flavor:arg, function_returning_something:factorial (-> +4), lines_of_code:16 (-> +15)
     fact = 1 # assignment, assignment_lhs_identifier:fact, assignment_rhs_atom:1, int_literal, literal:Num, single_assignment:fact
     for i in range(1, n + 1): # accumulate_elements:fact (-> +1), binary_operator:Add, call_argument:, call_argument:1, for:i (-> +1), for_range:1:_ (-> +1), function_call:range, int_literal, literal:Num, range:1:_
         fact *= i # assignment_lhs_identifier:fact, assignment_rhs_atom:i, augmented_assignment:Mult, variable_update:fact:i, variable_update_by_augmented_assignment:fact:i
@@ -924,21 +924,21 @@ def solution(n): # function:solution (-> +3), function_argument:n, function_argu
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_20/sol2.py
 # ----------------------------------------------------------------------------------------
-from math import factorial # import:math:factorial, import_module:math, import_name:factorial
+from math import factorial # import:math:factorial, import_module:math, import_name:factorial, lines_of_code:3 (-> +2)
 def solution(n): # function:solution (-> +1), function_argument:n, function_argument_flavor:arg, function_returning_something:solution (-> +1)
     return sum([int(x) for x in str(factorial(n))]) # call_argument:, call_argument:n, call_argument:x, composition, comprehension:List, comprehension_for_count:1, function_call:factorial, function_call:int, function_call:str, function_call:sum, function_tail_call:sum, return
 
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_20/sol3.py
 # ----------------------------------------------------------------------------------------
-from math import factorial # import:math:factorial, import_module:math, import_name:factorial
+from math import factorial # import:math:factorial, import_module:math, import_name:factorial, lines_of_code:3 (-> +2)
 def solution(n): # function:solution (-> +1), function_argument:n, function_argument_flavor:arg, function_returning_something:solution (-> +1)
     return sum(map(int, str(factorial(n)))) # call_argument:, call_argument:int, call_argument:n, composition, function_call:factorial, function_call:map, function_call:str, function_call:sum, function_tail_call:sum, return
 
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_20/sol4.py
 # ----------------------------------------------------------------------------------------
-def solution(n): # function:solution (-> +7), function_argument:n, function_argument_flavor:arg, function_returning_something:solution (-> +7)
+def solution(n): # function:solution (-> +7), function_argument:n, function_argument_flavor:arg, function_returning_something:solution (-> +7), lines_of_code:8 (-> +7)
     fact = 1 # assignment, assignment_lhs_identifier:fact, assignment_rhs_atom:1, int_literal, literal:Num, single_assignment:fact
     result = 0 # assignment, assignment_lhs_identifier:result, assignment_rhs_atom:0, falsey_literal:0, int_literal, literal:Num, single_assignment:result
     for i in range(1, n + 1): # accumulate_elements:fact (-> +1), binary_operator:Add, call_argument:, call_argument:1, for:i (-> +1), for_range:1:_ (-> +1), function_call:range, int_literal, literal:Num, range:1:_
@@ -950,7 +950,7 @@ def solution(n): # function:solution (-> +7), function_argument:n, function_argu
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_21/sol1.py
 # ----------------------------------------------------------------------------------------
-from math import sqrt # import:math:sqrt, import_module:math, import_name:sqrt
+from math import sqrt # import:math:sqrt, import_module:math, import_name:sqrt, lines_of_code:18 (-> +17)
 def sum_of_divisors(n): # function:sum_of_divisors (-> +7), function_argument:n, function_argument_flavor:arg, function_returning_something:sum_of_divisors (-> +7)
     total = 0 # assignment, assignment_lhs_identifier:total, assignment_rhs_atom:0, falsey_literal:0, int_literal, literal:Num, single_assignment:total
     for i in range(1, int(sqrt(n) + 1)): # accumulate_elements:total (-> +4), binary_operator:Add, call_argument:, call_argument:1, call_argument:n, composition, for:i (-> +4), for_range:1:_ (-> +4), function_call:int, function_call:range, function_call:sqrt, int_literal, literal:Num, range:1:_
@@ -972,7 +972,7 @@ def solution(n): # function:solution (-> +8), function_argument:n, function_argu
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_22/sol1.py
 # ----------------------------------------------------------------------------------------
-import os # import:os, import_module:os
+import os # import:os, import_module:os, lines_of_code:14 (-> +13)
 def solution(): # function:solution (-> +12), function_returning_something:solution (-> +12), function_without_arguments:solution (-> +12)
     with open(os.path.dirname(__file__) + "/p022_names.txt") as file: # binary_operator:Add, call_argument:, call_argument:__file__, composition, concatenation operator:Str, function_call:open, literal:Str, method_call, method_call_name:dirname
         names = str(file.readlines()[0]) # assignment, assignment_lhs_identifier:names, assignment_rhs_atom:0, assignment_rhs_atom:file, call_argument:, composition, falsey_literal:0, function_call:str, index:0, int_literal, literal:Num, method_call, method_call_name:readlines, method_call_object:file, single_assignment:names
@@ -990,7 +990,7 @@ def solution(): # function:solution (-> +12), function_returning_something:solut
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_22/sol2.py
 # ----------------------------------------------------------------------------------------
-import os # import:os, import_module:os
+import os # import:os, import_module:os, lines_of_code:14 (-> +13)
 def solution(): # function:solution (-> +12), function_returning_something:solution (-> +12), function_without_arguments:solution (-> +12)
     total_sum = 0 # assignment, assignment_lhs_identifier:total_sum, assignment_rhs_atom:0, falsey_literal:0, int_literal, literal:Num, single_assignment:total_sum
     temp_sum = 0 # assignment, assignment_lhs_identifier:temp_sum, assignment_rhs_atom:0, falsey_literal:0, int_literal, literal:Num, single_assignment:temp_sum
@@ -1008,7 +1008,7 @@ def solution(): # function:solution (-> +12), function_returning_something:solut
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_23/sol1.py
 # ----------------------------------------------------------------------------------------
-def solution(limit=28123): # function:solution (-> +13), function_argument:limit, function_argument_flavor:arg, function_returning_something:solution (-> +13), int_literal, literal:Num
+def solution(limit=28123): # function:solution (-> +13), function_argument:limit, function_argument_flavor:arg, function_returning_something:solution (-> +13), int_literal, lines_of_code:14 (-> +13), literal:Num
     sumDivs = [1] * (limit + 1) # assignment, assignment_lhs_identifier:sumDivs, assignment_rhs_atom:1, assignment_rhs_atom:limit, binary_operator:Add, binary_operator:Mult, int_literal, literal:List, literal:Num, replication_operator:List, single_assignment:sumDivs
     for i in range(2, int(limit ** 0.5) + 1): # accumulate_elements:sumDivs (-> +3), binary_operator:Add, binary_operator:Pow, call_argument:, call_argument:2, composition, float_literal, for:i (-> +3), for_range:2:_ (-> +3), for_range:_:_ (-> +3), function_call:int, function_call:range, int_literal, literal:Num, range:2:_, suggest_constant_definition
         sumDivs[i * i] += i # assignment_lhs_identifier:sumDivs, assignment_rhs_atom:i, augmented_assignment:Add, binary_operator:Mult, index:_, index_arithmetic, variable_update:sumDivs:i, variable_update_by_augmented_assignment:sumDivs:i
@@ -1026,7 +1026,7 @@ def solution(limit=28123): # function:solution (-> +13), function_argument:limit
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_234/sol1.py
 # ----------------------------------------------------------------------------------------
-def fib(a, b, n): # function:fib (-> +13), function_argument:a, function_argument:b, function_argument:n, function_argument_flavor:arg, function_returning_something:fib (-> +13)
+def fib(a, b, n): # function:fib (-> +13), function_argument:a, function_argument:b, function_argument:n, function_argument_flavor:arg, function_returning_something:fib (-> +13), lines_of_code:26 (-> +25)
     if n == 1: # comparison_operator:Eq, if (-> +5), if_test_atom:1, if_test_atom:n, int_literal, literal:Num
         return a # if_then_branch, return:a
     elif n == 2: # comparison_operator:Eq, if (-> +3), if_test_atom:2, if_test_atom:n, int_literal, literal:Num
@@ -1056,7 +1056,7 @@ def solution(n): # function:solution (-> +11), function_argument:n, function_arg
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_24/sol1.py
 # ----------------------------------------------------------------------------------------
-from itertools import permutations # import:itertools:permutations, import_module:itertools, import_name:permutations
+from itertools import permutations # import:itertools:permutations, import_module:itertools, import_name:permutations, lines_of_code:4 (-> +3)
 def solution(): # function:solution (-> +2), function_returning_something:solution (-> +2), function_without_arguments:solution (-> +2)
     result = list(map("".join, permutations("0123456789"))) # assignment, assignment_lhs_identifier:result, call_argument:, composition, falsey_literal:Str, function_call:list, function_call:map, function_call:permutations, literal:Str, single_assignment:result
     return result[999999] # index:999999, int_literal, literal:Num, return, suggest_constant_definition
@@ -1064,7 +1064,7 @@ def solution(): # function:solution (-> +2), function_returning_something:soluti
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_25/sol1.py
 # ----------------------------------------------------------------------------------------
-def fibonacci(n): # function:fibonacci (-> +9), function_argument:n, function_argument_flavor:arg, function_returning_something:fibonacci (-> +9)
+def fibonacci(n): # function:fibonacci (-> +9), function_argument:n, function_argument_flavor:arg, function_returning_something:fibonacci (-> +9), lines_of_code:19 (-> +18)
     if n == 1 or type(n) is not int: # boolean_operator:Or, call_argument:n, comparison_operator:Eq, comparison_operator:IsNot, function_call:type, if (-> +8), if_test_atom:1, if_test_atom:int, if_test_atom:n, int_literal, literal:Num
         return 0 # falsey_literal:0, if_then_branch, int_literal, literal:Num, return:0
     elif n == 2: # comparison_operator:Eq, if (-> +6), if_test_atom:2, if_test_atom:n, int_literal, literal:Num
@@ -1087,7 +1087,7 @@ def solution(n): # function:solution (-> +1), function_argument:n, function_argu
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_25/sol2.py
 # ----------------------------------------------------------------------------------------
-def fibonacci_generator(): # function:fibonacci_generator (-> +4), function_without_arguments:fibonacci_generator (-> +4), generator:fibonacci_generator (-> +4)
+def fibonacci_generator(): # function:fibonacci_generator (-> +4), function_without_arguments:fibonacci_generator (-> +4), generator:fibonacci_generator (-> +4), lines_of_code:11 (-> +10)
     a, b = 0, 1 # assignment, assignment_lhs_identifier:a, assignment_lhs_identifier:b, assignment_rhs_atom:0, assignment_rhs_atom:1, falsey_literal:0, int_literal, literal:Num, literal:Tuple
     while True: # infinite_while (-> +2), literal:True, while (-> +2)
         a, b = b, a + b # assignment, assignment_lhs_identifier:a, assignment_lhs_identifier:b, assignment_rhs_atom:a, assignment_rhs_atom:b, binary_operator:Add, variable_update:a:b, variable_update:b:a, variable_update_by_assignment:a:b, variable_update_by_assignment:b:a
@@ -1102,7 +1102,7 @@ def solution(n): # function:solution (-> +5), function_argument:n, function_argu
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_25/sol3.py
 # ----------------------------------------------------------------------------------------
-def solution(n): # function:solution (-> +12), function_argument:n, function_argument_flavor:arg, function_returning_something:solution (-> +12)
+def solution(n): # function:solution (-> +12), function_argument:n, function_argument_flavor:arg, function_returning_something:solution (-> +12), lines_of_code:13 (-> +12)
     f1, f2 = 1, 1 # assignment, assignment_lhs_identifier:f1, assignment_lhs_identifier:f2, assignment_rhs_atom:1, int_literal, literal:Num, literal:Tuple
     index = 2 # assignment, assignment_lhs_identifier:index, assignment_rhs_atom:2, int_literal, literal:Num, single_assignment:index
     while True: # infinite_while (-> +8), literal:True, while (-> +8)
@@ -1119,7 +1119,7 @@ def solution(n): # function:solution (-> +12), function_argument:n, function_arg
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_27/problem_27_sol1.py
 # ----------------------------------------------------------------------------------------
-import math # import:math, import_module:math
+import math # import:math, import_module:math, lines_of_code:25 (-> +24)
 def is_prime(k: int) -> bool: # function:is_prime (-> +9), function_argument:k, function_argument_flavor:arg, function_returning_something:is_prime (-> +9)
     if k < 2 or k % 2 == 0: # binary_operator:Mod, boolean_operator:Or, comparison_operator:Eq, comparison_operator:Lt, divisibility_test:2, falsey_literal:0, if (-> +7), if_test_atom:0, if_test_atom:2, if_test_atom:k, int_literal, literal:Num
         return False # falsey_literal:False, if_then_branch, literal:False, return:False
@@ -1148,7 +1148,7 @@ def solution(a_limit: int, b_limit: int) -> int: # function:solution (-> +13), f
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_28/sol1.py
 # ----------------------------------------------------------------------------------------
-from math import ceil # import:math:ceil, import_module:math, import_name:ceil
+from math import ceil # import:math:ceil, import_module:math, import_name:ceil, lines_of_code:8 (-> +7)
 def diagonal_sum(n): # function:diagonal_sum (-> +6), function_argument:n, function_argument_flavor:arg, function_returning_something:diagonal_sum (-> +6)
     total = 1 # assignment, assignment_lhs_identifier:total, assignment_rhs_atom:1, int_literal, literal:Num, single_assignment:total
     for i in range(1, int(ceil(n / 2.0))): # binary_operator:Div, call_argument:, call_argument:1, composition, float_literal, for:i (-> +3), for_range:1:_ (-> +3), function_call:ceil, function_call:int, function_call:range, int_literal, literal:Num, range:1:_, suggest_constant_definition
@@ -1160,7 +1160,7 @@ def diagonal_sum(n): # function:diagonal_sum (-> +6), function_argument:n, funct
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_29/solution.py
 # ----------------------------------------------------------------------------------------
-def solution(n): # function:solution (-> +8), function_argument:n, function_argument_flavor:arg, function_returning_something:solution (-> +8)
+def solution(n): # function:solution (-> +8), function_argument:n, function_argument_flavor:arg, function_returning_something:solution (-> +8), lines_of_code:9 (-> +8)
     collectPowers = set() # assignment, assignment_lhs_identifier:collectPowers, function_call:set, function_call_without_arguments:set, single_assignment:collectPowers
     currentPow = 0 # assignment, assignment_lhs_identifier:currentPow, assignment_rhs_atom:0, falsey_literal:0, int_literal, literal:Num, single_assignment:currentPow
     N = n + 1 # assignment, assignment_lhs_identifier:N, assignment_rhs_atom:1, assignment_rhs_atom:n, binary_operator:Add, int_literal, literal:Num, single_assignment:N
@@ -1173,7 +1173,7 @@ def solution(n): # function:solution (-> +8), function_argument:n, function_argu
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_31/sol1.py
 # ----------------------------------------------------------------------------------------
-def one_pence(): # function:one_pence (-> +1), function_returning_something:one_pence (-> +1), function_without_arguments:one_pence (-> +1)
+def one_pence(): # function:one_pence (-> +1), function_returning_something:one_pence (-> +1), function_without_arguments:one_pence (-> +1), lines_of_code:18 (-> +17)
     return 1 # int_literal, literal:Num, return:1
 def two_pence(x): # body_recursive_function:two_pence (-> +1), function:two_pence (-> +1), function_argument:x, function_argument_flavor:arg, function_returning_something:two_pence (-> +1), recursive_function:two_pence (-> +1)
     return 0 if x < 0 else two_pence(x - 2) + one_pence() # binary_operator:Add, binary_operator:Sub, call_argument:, comparison_operator:Lt, conditional_expression, falsey_literal:0, function_call:one_pence, function_call:two_pence, function_call_without_arguments:one_pence, int_literal, literal:Num, return
@@ -1195,7 +1195,7 @@ def solution(n): # function:solution (-> +1), function_argument:n, function_argu
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_32/sol32.py
 # ----------------------------------------------------------------------------------------
-import itertools # import:itertools, import_module:itertools
+import itertools # import:itertools, import_module:itertools, lines_of_code:16 (-> +15)
 def isCombinationValid(combination): # function:isCombinationValid (-> +6), function_argument:combination, function_argument_flavor:arg, function_returning_something:isCombinationValid (-> +6)
     return ( # boolean_operator:Or, return
         int("".join(combination[0:2])) * int("".join(combination[2:5])) # binary_operator:Mult, call_argument:, composition, falsey_literal:0, falsey_literal:Str, function_call:int, int_literal, literal:Num, literal:Str, method_call, method_call_name:join, slice:0:2:, slice:2:5:, slice_lower:0, slice_lower:2, slice_step:, slice_upper:2, slice_upper:5, suggest_constant_definition
@@ -1218,7 +1218,7 @@ def solution(): # function:solution (-> +6), function_returning_something:soluti
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_33/sol1.py
 # ----------------------------------------------------------------------------------------
-def isDigitCancelling(num, den): # function:isDigitCancelling (-> +4), function_argument:den, function_argument:num, function_argument_flavor:arg, function_returning_something:isDigitCancelling (-> +4)
+def isDigitCancelling(num, den): # function:isDigitCancelling (-> +4), function_argument:den, function_argument:num, function_argument_flavor:arg, function_returning_something:isDigitCancelling (-> +4), lines_of_code:19 (-> +18)
     if num != den: # comparison_operator:NotEq, if (-> +3), if_test_atom:den, if_test_atom:num
         if num % 10 == den // 10: # binary_operator:FloorDiv, binary_operator:Mod, comparison_operator:Eq, divisibility_test:10, if (-> +2), if_test_atom:10, if_test_atom:den, if_test_atom:num, if_then_branch (-> +2), int_literal, literal:Num, nested_if:1 (-> +2), suggest_constant_definition
             if (num // 10) / (den % 10) == num / den: # binary_operator:Div, binary_operator:FloorDiv, binary_operator:Mod, comparison_operator:Eq, if (-> +1), if_test_atom:10, if_test_atom:den, if_test_atom:num, if_then_branch (-> +1), int_literal, literal:Num, nested_if:2 (-> +1), suggest_constant_definition
@@ -1241,7 +1241,7 @@ def solve(digit_len: int) -> str: # function:solve (-> +13), function_argument:d
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_36/sol1.py
 # ----------------------------------------------------------------------------------------
-def is_palindrome(n): # function:is_palindrome (-> +5), function_argument:n, function_argument_flavor:arg, function_returning_something:is_palindrome (-> +5)
+def is_palindrome(n): # function:is_palindrome (-> +5), function_argument:n, function_argument_flavor:arg, function_returning_something:is_palindrome (-> +5), lines_of_code:12 (-> +11)
     n = str(n) # assignment, assignment_lhs_identifier:n, assignment_rhs_atom:n, call_argument:n, function_call:str, single_assignment:n
     if n == n[::-1]: # comparison_operator:Eq, if (-> +3), if_test_atom:-1, if_test_atom:n, int_literal, literal:Num, slice:::-1, slice_lower:, slice_step:-1, slice_upper:, suggest_condition_return (-> +3)
         return True # if_then_branch, literal:True, return:True
@@ -1257,7 +1257,7 @@ def solution(n): # function:solution (-> +5), function_argument:n, function_argu
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_40/sol1.py
 # ----------------------------------------------------------------------------------------
-def solution(): # function:solution (-> +14), function_returning_something:solution (-> +14), function_without_arguments:solution (-> +14)
+def solution(): # function:solution (-> +14), function_returning_something:solution (-> +14), function_without_arguments:solution (-> +14), lines_of_code:15 (-> +14)
     constant = [] # assignment, assignment_lhs_identifier:constant, falsey_literal:List, literal:List, single_assignment:constant
     i = 1 # assignment, assignment_lhs_identifier:i, assignment_rhs_atom:1, int_literal, literal:Num, single_assignment:i
     while len(constant) < 1e6: # call_argument:constant, comparison_operator:Lt, evolve_state (-> +2), float_literal, function_call:len, literal:Num, suggest_constant_definition, while (-> +2)
@@ -1277,7 +1277,7 @@ def solution(): # function:solution (-> +14), function_returning_something:solut
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_42/solution42.py
 # ----------------------------------------------------------------------------------------
-import os # import:os, import_module:os
+import os # import:os, import_module:os, lines_of_code:16 (-> +15)
 TRIANGULAR_NUMBERS = [int(0.5 * n * (n + 1)) for n in range(1, 101)] # assignment, assignment_lhs_identifier:TRIANGULAR_NUMBERS, assignment_rhs_atom:0.5, assignment_rhs_atom:1, assignment_rhs_atom:101, assignment_rhs_atom:n, binary_operator:Add, binary_operator:Mult, call_argument:, call_argument:1, call_argument:101, comprehension:List, comprehension_for_count:1, float_literal, function_call:int, function_call:range, int_literal, literal:Num, range:1:101, single_assignment:TRIANGULAR_NUMBERS
 def solution(): # function:solution (-> +13), function_returning_something:solution (-> +13), function_without_arguments:solution (-> +13)
     script_dir = os.path.dirname(os.path.realpath(__file__)) # assignment, assignment_lhs_identifier:script_dir, assignment_rhs_atom:__file__, assignment_rhs_atom:os, call_argument:, call_argument:__file__, composition, method_call, method_call_name:dirname, method_call_name:realpath, single_assignment:script_dir
@@ -1297,7 +1297,7 @@ def solution(): # function:solution (-> +13), function_returning_something:solut
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_48/sol1.py
 # ----------------------------------------------------------------------------------------
-def solution(): # function:solution (-> +4), function_returning_something:solution (-> +4), function_without_arguments:solution (-> +4)
+def solution(): # function:solution (-> +4), function_returning_something:solution (-> +4), function_without_arguments:solution (-> +4), lines_of_code:5 (-> +4)
     total = 0 # assignment, assignment_lhs_identifier:total, assignment_rhs_atom:0, falsey_literal:0, int_literal, literal:Num, single_assignment:total
     for i in range(1, 1001): # accumulate_elements:total (-> +1), call_argument:1, call_argument:1001, for:i (-> +1), for_range:1:1001 (-> +1), function_call:range, int_literal, literal:Num, range:1:1001, suggest_constant_definition
         total += i ** i # assignment_lhs_identifier:total, assignment_rhs_atom:i, augmented_assignment:Add, binary_operator:Pow, variable_update:total:i, variable_update_by_augmented_assignment:total:i
@@ -1306,7 +1306,7 @@ def solution(): # function:solution (-> +4), function_returning_something:soluti
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_52/sol1.py
 # ----------------------------------------------------------------------------------------
-def solution(): # function:solution (-> +12), function_returning_something:solution (-> +12), function_without_arguments:solution (-> +12)
+def solution(): # function:solution (-> +12), function_returning_something:solution (-> +12), function_without_arguments:solution (-> +12), lines_of_code:13 (-> +12)
     i = 1 # assignment, assignment_lhs_identifier:i, assignment_rhs_atom:1, int_literal, literal:Num, single_assignment:i
     while True: # infinite_while (-> +10), literal:True, while (-> +10)
         if ( # if (-> +8)
@@ -1323,7 +1323,7 @@ def solution(): # function:solution (-> +12), function_returning_something:solut
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_53/sol1.py
 # ----------------------------------------------------------------------------------------
-from math import factorial # import:math:factorial, import_module:math, import_name:factorial
+from math import factorial # import:math:factorial, import_module:math, import_name:factorial, lines_of_code:10 (-> +9)
 def combinations(n, r): # function:combinations (-> +1), function_argument:n, function_argument:r, function_argument_flavor:arg, function_returning_something:combinations (-> +1)
     return factorial(n) / (factorial(r) * factorial(n - r)) # binary_operator:Div, binary_operator:Mult, binary_operator:Sub, call_argument:, call_argument:n, call_argument:r, function_call:factorial, return
 def solution(): # function:solution (-> +6), function_returning_something:solution (-> +6), function_without_arguments:solution (-> +6)
@@ -1337,7 +1337,7 @@ def solution(): # function:solution (-> +6), function_returning_something:soluti
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_551/sol1.py
 # ----------------------------------------------------------------------------------------
-ks = [k for k in range(2, 20 + 1)] # assignment, assignment_lhs_identifier:ks, assignment_rhs_atom:1, assignment_rhs_atom:2, assignment_rhs_atom:20, assignment_rhs_atom:k, binary_operator:Add, call_argument:, call_argument:2, comprehension:List, comprehension_for_count:1, function_call:range, int_literal, literal:Num, range:2:_, single_assignment:ks
+ks = [k for k in range(2, 20 + 1)] # assignment, assignment_lhs_identifier:ks, assignment_rhs_atom:1, assignment_rhs_atom:2, assignment_rhs_atom:20, assignment_rhs_atom:k, binary_operator:Add, call_argument:, call_argument:2, comprehension:List, comprehension_for_count:1, function_call:range, int_literal, lines_of_code:107 (-> +106), literal:Num, range:2:_, single_assignment:ks
 base = [10 ** k for k in range(ks[-1] + 1)] # assignment, assignment_lhs_identifier:base, assignment_rhs_atom:-1, assignment_rhs_atom:1, assignment_rhs_atom:10, assignment_rhs_atom:k, assignment_rhs_atom:ks, binary_operator:Add, binary_operator:Pow, call_argument:, comprehension:List, comprehension_for_count:1, function_call:range, index:-1, int_literal, literal:Num, negative_index:-1, range:_, single_assignment:base
 memo = {} # assignment, assignment_lhs_identifier:memo, falsey_literal:Dict, literal:Dict, single_assignment:memo
 def next_term(a_i, k, i, n): # body_recursive_function:next_term (-> +50), function:next_term (-> +50), function_argument:a_i, function_argument:i, function_argument:k, function_argument:n, function_argument_flavor:arg, function_returning_something:next_term (-> +50), recursive_function:next_term (-> +50)
@@ -1448,7 +1448,7 @@ def solution(n): # function:solution (-> +12), function_argument:n, function_arg
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_56/sol1.py
 # ----------------------------------------------------------------------------------------
-def maximum_digital_sum(a: int, b: int) -> int: # function:maximum_digital_sum (-> +5), function_argument:a, function_argument:b, function_argument_flavor:arg, function_returning_something:maximum_digital_sum (-> +5)
+def maximum_digital_sum(a: int, b: int) -> int: # function:maximum_digital_sum (-> +5), function_argument:a, function_argument:b, function_argument_flavor:arg, function_returning_something:maximum_digital_sum (-> +5), lines_of_code:6 (-> +5)
     return max( # composition, function_call:max, function_tail_call:max, return
         [
             sum([int(x) for x in str(base ** power)]) # binary_operator:Pow, call_argument:, call_argument:x, composition, comprehension:List, comprehension_for_count:1, comprehension_for_count:2, function_call:int, function_call:str, function_call:sum
@@ -1460,7 +1460,7 @@ def maximum_digital_sum(a: int, b: int) -> int: # function:maximum_digital_sum (
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_67/sol1.py
 # ----------------------------------------------------------------------------------------
-import os # import:os, import_module:os
+import os # import:os, import_module:os, lines_of_code:20 (-> +19)
 def solution(): # function:solution (-> +18), function_returning_something:solution (-> +18), function_without_arguments:solution (-> +18)
     script_dir = os.path.dirname(os.path.realpath(__file__)) # assignment, assignment_lhs_identifier:script_dir, assignment_rhs_atom:__file__, assignment_rhs_atom:os, call_argument:, call_argument:__file__, composition, method_call, method_call_name:dirname, method_call_name:realpath, single_assignment:script_dir
     triangle = os.path.join(script_dir, "triangle.txt") # assignment, assignment_lhs_identifier:triangle, assignment_rhs_atom:os, assignment_rhs_atom:script_dir, call_argument:, call_argument:script_dir, literal:Str, method_call, method_call_name:join, single_assignment:triangle
@@ -1484,7 +1484,7 @@ def solution(): # function:solution (-> +18), function_returning_something:solut
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_76/sol1.py
 # ----------------------------------------------------------------------------------------
-def partition(m): # function:partition (-> +9), function_argument:m, function_argument_flavor:arg, function_returning_something:partition (-> +9)
+def partition(m): # function:partition (-> +9), function_argument:m, function_argument_flavor:arg, function_returning_something:partition (-> +9), lines_of_code:10 (-> +9)
     memo = [[0 for _ in range(m)] for _ in range(m + 1)] # assignment, assignment_lhs_identifier:memo, assignment_rhs_atom:0, assignment_rhs_atom:1, assignment_rhs_atom:_, assignment_rhs_atom:m, binary_operator:Add, call_argument:, call_argument:m, comprehension:List, comprehension_for_count:1, falsey_literal:0, function_call:range, int_literal, literal:Num, range:_, range:m, single_assignment:memo
     for i in range(m + 1): # binary_operator:Add, call_argument:, for:i (-> +1), for_range:_ (-> +1), function_call:range, int_literal, literal:Num, range:_
         memo[i][0] = 1 # assignment, assignment_rhs_atom:1, falsey_literal:0, index:0, index:i, int_literal, literal:Num
@@ -1498,7 +1498,7 @@ def partition(m): # function:partition (-> +9), function_argument:m, function_ar
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_99/sol1.py
 # ----------------------------------------------------------------------------------------
-import os # import:os, import_module:os
+import os # import:os, import_module:os, lines_of_code:9 (-> +8)
 from math import log10 # import:math:log10, import_module:math, import_name:log10
 def find_largest(data_file: str = "base_exp.txt") -> int: # function:find_largest (-> +6), function_argument:data_file, function_argument_flavor:arg, function_returning_something:find_largest (-> +6), literal:Str
     largest = [0, 0] # assignment, assignment_lhs_identifier:largest, assignment_rhs_atom:0, falsey_literal:0, int_literal, literal:List, literal:Num, single_assignment:largest
