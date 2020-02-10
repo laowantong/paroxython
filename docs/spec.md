@@ -68,9 +68,11 @@
       - [Feature `generator` (SQL)](#feature-generator)
       - [Feature `function_returning_something` (SQL)](#feature-function_returning_something)
       - [Feature `function_returning_nothing` (SQL)](#feature-function_returning_nothing)
-      - [Feature `function_with_default_positional_arguments`](#feature-function_with_default_positional_arguments)
+      - [Feature `function_argument`](#feature-function_argument)
+      - [Feature `function_argument_flavor`](#feature-function_argument_flavor)
       - [Feature `function_without_arguments`](#feature-function_without_arguments)
       - [Feature `decorated_function`](#feature-decorated_function)
+      - [Feature `function_decorator`](#feature-function_decorator)
     - [Nesting](#nesting)
       - [Feature `nested_function`](#feature-nested_function)
       - [Feature `closure` (SQL)](#feature-closure)
@@ -103,6 +105,10 @@
       - [Feature `raise`](#feature-raise)
       - [Feature `except`](#feature-except)
       - [Feature `try_raise|try_except` (SQL)](#feature-try_raisetry_except)
+  - [Class definitions](#class-definitions)
+      - [Feature `class`](#feature-class)
+      - [Feature `method` (SQL)](#feature-method)
+      - [Feature `instance_method|class_method|static_method` (SQL)](#feature-instance_methodclass_methodstatic_method)
   - [Modules](#modules)
       - [Feature `import_module`](#feature-import_module)
       - [Feature `import_name`](#feature-import_name)
@@ -354,7 +360,7 @@ Except from `None`, any falsey value can be constructed by calling its type with
 
 #### Feature `index`
 
-Match an index in a sequence type or a key in a dictionary type, and suffix it by either an integer or an identifier if is atomic, or `"_"` otherwise.
+Match an index in a sequence type or a key in a dictionary type, and suffix it by either an integer or an identifier if it is atomic, or `"_"` otherwise.
 
 ##### Specification
 
@@ -472,7 +478,7 @@ _Remark._ In line 4, `~i` evaluates to `-i - 1` (bitwise complement of `i`). Lin
 
 #### Feature `slice_lower`
 
-Match the lower bound of a slice, and suffix it by either `""` if it is omitted, an integer or an identifier if is atomic, or `"_"` otherwise.
+Match the lower bound of a slice, and suffix it by either `""` if it is omitted, an integer or an identifier if is is atomic, or `"_"` otherwise.
 
 ##### Derivations
 
@@ -526,7 +532,7 @@ Match the lower bound of a slice, and suffix it by either `""` if it is omitted,
 
 #### Feature `slice_upper`
 
-Match the upper bound of a slice, and suffix it by either `""` if it is omitted, an integer or an identifier if is atomic, or `"_"` otherwise.
+Match the upper bound of a slice, and suffix it by either `""` if it is omitted, an integer or an identifier if it is atomic, or `"_"` otherwise.
 
 ##### Derivations
 
@@ -579,7 +585,7 @@ Match the upper bound of a slice, and suffix it by either `""` if it is omitted,
 
 #### Feature `slice_step`
 
-Match the step of a slice, and suffix it by either `""` if it is omitted, an integer or an identifier if is atomic, or `"_"` otherwise.
+Match the step of a slice, and suffix it by either `""` if it is omitted, an integer or an identifier if it is atomic, or `"_"` otherwise.
 
 ##### Derivations
 
@@ -600,7 +606,7 @@ Match the step of a slice, and suffix it by either `""` if it is omitted, an int
                             /_type=Num
 \n(?:\1.+\n)* \1/slice/step/n=(?P<SUFFIX>.+)
 |
-                                  /(?P<SUFFIX>_)type=.+
+                            /(?P<SUFFIX>_)type=.+
 )$
 ```
 
@@ -2270,6 +2276,7 @@ In Python, the term "function" encompasses any type of subroutine, be it a metho
 [⬇️ feature `function_returning_nothing`](#feature-function_returning_nothing)  
 [⬇️ feature `function_returning_something`](#feature-function_returning_something)  
 [⬇️ feature `generator`](#feature-generator)  
+[⬇️ feature `method`](#feature-method)  
 [⬇️ feature `recursive_function`](#feature-recursive_function)  
 
 ##### Specification
@@ -2580,31 +2587,73 @@ WHERE t.span IS NULL
 
 --------------------------------------------------------------------------------
 
-#### Feature `function_with_default_positional_arguments`
+#### Feature `function_argument`
+
+##### Derivations
+
+[⬇️ feature `instance_method|class_method|static_method`](#feature-instance_methodclass_methodstatic_method)  
 
 ##### Specification
 
 ```re
-           ^(.*)/_type=FunctionDef
-\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/name=(?P<SUFFIX>.+)
-\n(?:\1.+\n)*?\1/args/defaults/length=(?!0\n).+
-\n(?:\1.+\n)* \1/.+/_pos=(?P<POS>.+)
+           ^(.*)/_type=arg
+\n            \1/_pos=(?P<POS>.+)
+\n            \1/arg=(?P<SUFFIX>.+)
 ```
 
 ##### Example
 
 ```python
-1   def foobar(a, b="c"):
-2       c = a + b
-3       print(c)
+1   def foobar(a, b, *c, d=42, e=None, **f):
+2       pass
 ```
 
 ##### Matches
 
 | Label | Lines |
 |:--|:--|
-| `function_with_default_positional_arguments:foobar` | 1-3 |
+| `function_argument:a` | 1 |
+| `function_argument:b` | 1 |
+| `function_argument:c` | 1 |
+| `function_argument:d` | 1 |
+| `function_argument:e` | 1 |
+| `function_argument:f` | 1 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `function_argument_flavor`
+
+Give the category of each function argument among:
+- `arg`: positional argument;
+- `vararg`: list of unnamed arguments;
+- `kwonlyarg`: keyword argument;
+- `kwarg`: dictionary of named arguments.
+
+_Remark._ The actual name of an argument can be retrieved by joining with `function_argument` using its `path`.
+
+##### Specification
+
+```re
+^(.*/(?P<SUFFIX>arg|vararg|kwonlyarg|kwarg)(s/\d+)?)/_type=arg
+\n                                                \1/_pos=(?P<POS>.+)
+
+```
+
+##### Example
+
+```python
+1   def foobar(a, b, *c, d=42, e=None, **f):
+2       pass
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `function_argument_flavor:arg` | 1, 1 |
+| `function_argument_flavor:kwarg` | 1 |
+| `function_argument_flavor:kwonlyarg` | 1, 1 |
+| `function_argument_flavor:vararg` | 1 |
 
 --------------------------------------------------------------------------------
 
@@ -2619,9 +2668,7 @@ WHERE t.span IS NULL
 \n(?:\1.+\n)*?\1/args/args/length=0
 \n(?:\1.+\n)*?\1/args/vararg=None
 \n(?:\1.+\n)*?\1/args/kwonlyargs/length=0
-\n(?:\1.+\n)*?\1/args/kw_defaults/length=0
 \n(?:\1.+\n)*?\1/args/kwarg=None
-\n(?:\1.+\n)*?\1/args/defaults/length=0
 \n(?:\1.+\n)* \1/.+/_pos=(?P<POS>.+)
 ```
 
@@ -2678,6 +2725,41 @@ _Remark._ The span starts from the first decorator.
 | Label | Lines |
 |:--|:--|
 | `decorated_function:qux` | 1-5 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `function_decorator`
+
+##### Specification
+
+```re
+           ^(.*)/_type=FunctionDef
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
+(
+\n(?:\1.+\n)*?\1/decorator_list/\d+/id=(?P<SUFFIX>.+)
+)+
+\n(?:\1.+\n)* \1/.+/_pos=(?P<POS>.+)
+```
+
+##### Example
+
+```python
+1   @bizz
+2   @foo
+3   @bar
+4   def qux(*args, **kwargs):
+5       pass
+```
+
+_Remark._ The span and the path are the same as those of the function.
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `function_decorator:bar` | 1-5 |
+| `function_decorator:bizz` | 1-5 |
+| `function_decorator:foo` | 1-5 |
 
 --------------------------------------------------------------------------------
 
@@ -3918,6 +4000,147 @@ GROUP BY e.rowid
 | `try_except:e3` | 1-8 |
 | `try_raise:e1` | 2-5, 9-12 |
 | `try_raise:e2` | 1-8 |
+
+--------------------------------------------------------------------------------
+
+## Class definitions
+
+--------------------------------------------------------------------------------
+
+#### Feature `class`
+
+Match a class definition.
+
+##### Derivations
+
+[⬇️ feature `method`](#feature-method)  
+
+##### Specification
+
+```re
+           ^(.*)/_type=ClassDef
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
+\n(?:\1.+\n)*?\1/name=(?P<SUFFIX>.+)
+\n(?:\1.+\n)* \1/.+/_pos=(?P<POS>.+)
+```
+
+##### Example
+
+```python
+1   class MyClass:
+2       """A simple example class"""
+3       i = 12345
+4   
+5       def f(self):
+6           return 'hello world'
+7   
+8   instance = MyClass()
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `class:MyClass` | 1-6 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `method`
+
+##### Derivations
+
+[⬆️ feature `class`](#feature-class)  
+[⬆️ feature `function`](#feature-function)  
+[⬇️ feature `instance_method|class_method|static_method`](#feature-instance_methodclass_methodstatic_method)  
+
+##### Specification
+
+```sql
+SELECT "method",
+       f.name_suffix,
+       f.span,
+       f.path
+FROM t_class c
+JOIN t_function f ON (f.path GLOB c.path || "*-*-")
+```
+
+##### Example
+
+```python
+1   class MyClass:
+2   
+3       def an_instance_method(self, a, b, c):
+4           pass
+5   
+6       @staticmethod
+7       def a_static_method(f, g):
+8           pass
+9   
+10      @classmethod
+11      def a_class_method(cls, d, e):
+12          pass
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `method:an_instance_method` | 3-4 |
+| `method:a_static_method` | 6-8 |
+| `method:a_class_method` | 10-12 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `instance_method|class_method|static_method`
+
+##### Derivations
+
+[⬆️ feature `function_argument`](#feature-function_argument)  
+[⬆️ feature `method`](#feature-method)  
+
+##### Specification
+
+```sql
+SELECT CASE a.name_suffix
+           WHEN "self" THEN "instance_method"
+           WHEN "cls" THEN "class_method"
+           ELSE "static_method"
+       END,
+       m.name_suffix,
+       m.span,
+       m.path
+FROM t_method m
+LEFT JOIN t_function_argument a ON (a.path GLOB m.path || "*-*-"
+                                    AND a.name_suffix IN ("self",
+                                                          "cls"))
+```
+
+_Remark._: the presence of a decorator `classmethod` or `staticmethod` is unchecked, nor is the flavor of the arguments `self` and `cls` (they should be positional arguments). In other words, a method with an argument `self` (resp. `cls`) is categorized as an instance (resp. class) method, or else as a static method.
+
+##### Example
+
+```python
+1   class MyClass:
+2   
+3       def an_instance_method(self, a, b, c):
+4           pass
+5   
+6       @classmethod
+7       def a_class_method(cls, d, e):
+8           pass
+9   
+10      @staticmethod
+11      def a_static_method(f, g):
+12          pass
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `instance_method:an_instance_method` | 3-4 |
+| `class_method:a_class_method` | 6-8 |
+| `static_method:a_static_method` | 10-12 |
 
 --------------------------------------------------------------------------------
 

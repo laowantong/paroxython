@@ -11,6 +11,8 @@ a = b # assignment
 # ----------------------------------------------------------------------------------------
 def print_collatz(n): # added_block_label (-> +7)
                       # function:print_collatz (-> +7)
+                      # function_argument:n
+                      # function_argument_flavor:arg
                       # function_returning_nothing:print_collatz (-> +7)
     while n != 1: # comparison_operator:NotEq
                   # evolve_state (-> +5)
@@ -127,6 +129,8 @@ for i in range(1, 101): # call_argument:1
 # tests/data/simple/is_even.py
 # ----------------------------------------------------------------------------------------
 def is_even(n): # function:is_even (-> +1)
+                # function_argument:n
+                # function_argument_flavor:arg
                 # function_returning_something:is_even (-> +1)
     return n % 2 == 0 # binary_operator:Mod
                       # comparison_operator:Eq

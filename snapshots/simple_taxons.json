@@ -9,6 +9,7 @@
     "operator/addition/": "7",
     "operator/multiplication/": "7",
     "operator/percent/modulo/": "4",
+    "subroutine_definition/argument/arg/": "1",
     "subroutine_definition/procedure/": "1-8",
     "test/divisibility/parity/": "4",
     "test/equality/": "4",
@@ -32,6 +33,7 @@
   },
   "tests/data/simple/is_even.py": {
     "operator/percent/modulo/": "2",
+    "subroutine_definition/argument/arg/": "1",
     "subroutine_definition/function/": "1-2",
     "subroutine_definition/predicate/": "1-2",
     "test/divisibility/parity/": "2",

@@ -35,6 +35,8 @@
         "evolve_state": [[2,7]],
         "falsey_literal:0": [[4,4]],
         "function:print_collatz": [[1,8]],
+        "function_argument:n": [[1,1]],
+        "function_argument_flavor:arg": [[1,1]],
         "function_call:print": [[3,3],[8,8]],
         "function_returning_nothing:print_collatz": [[1,8]],
         "if": [[4,7]],
@@ -65,6 +67,7 @@
         "operator/addition/": [[7,7]],
         "operator/multiplication/": [[7,7]],
         "operator/percent/modulo/": [[4,4]],
+        "subroutine_definition/argument/arg/": [[1,1]],
         "subroutine_definition/procedure/": [[1,8]],
         "test/divisibility/parity/": [[4,4]],
         "test/equality/": [[4,4]],
@@ -130,6 +133,8 @@
         "divisibility_test:2": [[2,2]],
         "falsey_literal:0": [[2,2]],
         "function:is_even": [[1,2]],
+        "function_argument:n": [[1,1]],
+        "function_argument_flavor:arg": [[1,1]],
         "function_returning_something:is_even": [[1,2]],
         "int_literal": [[2,2],[2,2]],
         "literal:Num": [[2,2],[2,2]],
@@ -137,6 +142,7 @@
       },
       "taxons": {
         "operator/percent/modulo/": [[2,2]],
+        "subroutine_definition/argument/arg/": [[1,1]],
         "subroutine_definition/function/": [[1,2]],
         "subroutine_definition/predicate/": [[1,2]],
         "test/divisibility/parity/": [[2,2]],
@@ -217,6 +223,14 @@
     ],
     "function:print_collatz": [
       "tests/data/simple/collatz_print.py"
+    ],
+    "function_argument:n": [
+      "tests/data/simple/collatz_print.py",
+      "tests/data/simple/is_even.py"
+    ],
+    "function_argument_flavor:arg": [
+      "tests/data/simple/collatz_print.py",
+      "tests/data/simple/is_even.py"
     ],
     "function_call:print": [
       "tests/data/simple/collatz_print.py",
@@ -381,6 +395,10 @@
     "operator/percent/modulo/": [
       "tests/data/simple/collatz_print.py",
       "tests/data/simple/fizzbuzz.py",
+      "tests/data/simple/is_even.py"
+    ],
+    "subroutine_definition/argument/arg/": [
+      "tests/data/simple/collatz_print.py",
       "tests/data/simple/is_even.py"
     ],
     "subroutine_definition/procedure/": [

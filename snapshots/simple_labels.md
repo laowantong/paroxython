@@ -37,6 +37,10 @@
 - for_range:1:101 / fizzbuzz.py / 1-9
 - function:is_even / is_even.py / 1-2
 - function:print_collatz / collatz_print.py / 1-8
+- function_argument:n / collatz_print.py / 1
+- function_argument:n / is_even.py / 1
+- function_argument_flavor:arg / collatz_print.py / 1
+- function_argument_flavor:arg / is_even.py / 1
 - function_call:print / collatz_print.py / 3, 8
 - function_call:print / fizzbuzz.py / 3, 5, 7, 9
 - function_call:range / fizzbuzz.py / 1
@@ -95,6 +99,7 @@
 - chained_assignment
 - chained_comparison
 - chained_equalities|chained_inequalities
+- class
 - closure
 - comparison_operator
 - composition
@@ -122,12 +127,14 @@
 - for_indexes_elements
 - for_range
 - function
+- function_argument
+- function_argument_flavor
 - function_call
 - function_call_without_arguments
+- function_decorator
 - function_returning_nothing
 - function_returning_something
 - function_tail_call
-- function_with_default_positional_arguments
 - function_without_arguments
 - generator
 - get_valid_input
@@ -139,8 +146,10 @@
 - index
 - index_arithmetic
 - infinite_while
+- instance_method|class_method|static_method
 - lambda_function
 - literal
+- method
 - method_call
 - method_call_name
 - method_call_object

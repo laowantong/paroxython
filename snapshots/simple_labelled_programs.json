@@ -102,6 +102,14 @@
         [[1,8]]
       ],
       [
+        "function_argument:n",
+        [[1,1]]
+      ],
+      [
+        "function_argument_flavor:arg",
+        [[1,1]]
+      ],
+      [
         "function_call:print",
         [[3,3],[8,8]]
       ],
@@ -336,6 +344,14 @@
       [
         "function:is_even",
         [[1,2]]
+      ],
+      [
+        "function_argument:n",
+        [[1,1]]
+      ],
+      [
+        "function_argument_flavor:arg",
+        [[1,1]]
       ],
       [
         "function_returning_something:is_even",
