@@ -70,8 +70,8 @@ pattern/elements/accumulate/some/	accumulate_some_elements:.+
 pattern/elements/accumulate/count/	count_elements:.+
 pattern/elements/find/best/	find_best_element:.+
 pattern/elements/find/first/	find_first_element:.+
-pattern/elements/satisfy/all/	universal_quantifier:.+
-pattern/elements/satisfy/some/	existential_quantifier:.+
+pattern/elements/satisfy/all/	universal_quantification:.+
+pattern/elements/satisfy/some/	existential_quantification:.+
 pattern/inputs/accumulate/	accumulate_inputs:.+
 pattern/inputs/accumulate/count/	count_inputs:.+
 pattern/inputs/find_first_good/	get_valid_input:.+

@@ -121,7 +121,7 @@
       - [Feature `accumulate_all_elements` (SQL)](#feature-accumulate_all_elements)
       - [Feature `count_elements` (SQL)](#feature-count_elements)
       - [Feature `find_best_element` (SQL)](#feature-find_best_element)
-      - [Feature `universal_quantifier|existential_quantifier` (SQL)](#feature-universal_quantifierexistential_quantifier)
+      - [Feature `universal_quantification|existential_quantification` (SQL)](#feature-universal_quantificationexistential_quantification)
       - [Feature `find_first_element` (SQL)](#feature-find_first_element)
     - [Non-sequential finite loops](#non-sequential-finite-loops)
       - [Feature `evolve_state`](#feature-evolve_state)
@@ -2342,7 +2342,7 @@ Match `return` statements and, when the returned object is an [_atom_](#feature-
 [⬇️ feature `find_first_element`](#feature-find_first_element)  
 [⬇️ feature `function_returning_something`](#feature-function_returning_something)  
 [⬇️ feature `get_valid_input`](#feature-get_valid_input)  
-[⬇️ feature `universal_quantifier|existential_quantifier`](#feature-universal_quantifierexistential_quantifier)  
+[⬇️ feature `universal_quantification|existential_quantification`](#feature-universal_quantificationexistential_quantification)  
 
 ##### Specification
 
@@ -3088,7 +3088,7 @@ Match an entire conditional (from the `if` clause to the last line of its body).
 [⬇️ feature `find_first_element`](#feature-find_first_element)  
 [⬇️ feature `get_valid_input`](#feature-get_valid_input)  
 [⬇️ feature `nested_if`](#feature-nested_if)  
-[⬇️ feature `universal_quantifier|existential_quantifier`](#feature-universal_quantifierexistential_quantifier)  
+[⬇️ feature `universal_quantification|existential_quantification`](#feature-universal_quantificationexistential_quantification)  
 
 ##### Specification
 
@@ -3150,7 +3150,7 @@ Match and suffix any [atom](#feature-call_argument) present in the condition of 
 [⬇️ feature `find_best_element`](#feature-find_best_element)  
 [⬇️ feature `find_first_element`](#feature-find_first_element)  
 [⬇️ feature `get_valid_input`](#feature-get_valid_input)  
-[⬇️ feature `universal_quantifier|existential_quantifier`](#feature-universal_quantifierexistential_quantifier)  
+[⬇️ feature `universal_quantification|existential_quantification`](#feature-universal_quantificationexistential_quantification)  
 
 ##### Specification
 
@@ -3440,7 +3440,7 @@ Match sequential loops, along with their iteration variable(s).
 [⬇️ feature `find_first_element`](#feature-find_first_element)  
 [⬇️ feature `for_range`](#feature-for_range)  
 [⬇️ feature `nested_for`](#feature-nested_for)  
-[⬇️ feature `universal_quantifier|existential_quantifier`](#feature-universal_quantifierexistential_quantifier)  
+[⬇️ feature `universal_quantification|existential_quantification`](#feature-universal_quantificationexistential_quantification)  
 
 ##### Specification
 
@@ -4675,9 +4675,9 @@ _Limitation._ False negative when the iteration variable does not appear directl
 
 --------------------------------------------------------------------------------
 
-#### Feature `universal_quantifier|existential_quantifier`
+#### Feature `universal_quantification|existential_quantification`
 
-Check whether all elements of a collection satisfy a predicate (universal quantifier) or at least one element satisfies a predicate (existential quantifier).
+Check whether all elements of a collection satisfy a predicate (universal quantification) or at least one element satisfies a predicate (existential quantification).
 
 ##### Derivations
 
@@ -4690,8 +4690,8 @@ Check whether all elements of a collection satisfy a predicate (universal quanti
 
 ```sql
 SELECT CASE ret.name_suffix
-           WHEN "False" THEN "universal_quantifier"
-           ELSE "existential_quantifier"
+           WHEN "False" THEN "universal_quantification"
+           ELSE "existential_quantification"
        END,
        t_for.name_suffix,
        t_for.span,
@@ -4703,10 +4703,9 @@ JOIN t_if_test_atom x ON (x.span_start = t_if.span_start
 JOIN t_return ret ON (ret.path GLOB t_if.path || "*-" -- and returns...
                       AND ret.name_suffix IN ("True",
                                               "False"))-- a boolean
--- GROUP BY t_for.path
 ```
 
-_Remark._ The `return` statement following the loop is untested, which allows to catch some “hidden” quantifiers. For instance, in `is_prime()` (below), an integer _n_ is prime iff it is coprime with **all** the integers of [2, _n_[ and greater than 1).
+_Remark._ The `return` statement following the loop is untested, which allows to catch some “hidden” quantification patterns. For instance, in `is_prime()` (below), an integer _n_ is prime iff it is coprime with **all** the integers of [2, _n_[ and greater than 1).
 
 ##### Example
 
@@ -4734,9 +4733,9 @@ _Remark._ The `return` statement following the loop is untested, which allows to
 
 | Label | Lines |
 |:--|:--|
-| `universal_quantifier:element` | 2-4 |
-| `existential_quantifier:element` | 8-10 |
-| `universal_quantifier:candidate` | 14-16 |
+| `universal_quantification:element` | 2-4 |
+| `existential_quantification:element` | 8-10 |
+| `universal_quantification:candidate` | 14-16 |
 
 --------------------------------------------------------------------------------
 
@@ -4764,7 +4763,6 @@ JOIN t_if_test_atom x ON (x.span_start = t_if.span_start
                           AND x.name_suffix = t_for.name_suffix)-- which tests the iteration variable...
 JOIN t_return ret ON (ret.path GLOB t_if.path || "*-" -- and returns...
                       AND ret.name_suffix = x.name_suffix)-- it.
-GROUP BY t_for.path
 ```
 
 ##### Example

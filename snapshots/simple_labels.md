@@ -181,7 +181,7 @@
 - try
 - try_raise|try_except
 - unary_operator
-- universal_quantifier|existential_quantifier
+- universal_quantification|existential_quantification
 - variable_increment
 - variable_update
 - variable_update_by_assignment
