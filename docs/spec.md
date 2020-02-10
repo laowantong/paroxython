@@ -117,8 +117,9 @@
   - [Iterative patterns](#iterative-patterns)
     - [Sequential loops](#sequential-loops)
       - [Feature `accumulate_elements` (SQL)](#feature-accumulate_elements)
+      - [Feature `accumulate_some_elements` (SQL)](#feature-accumulate_some_elements)
+      - [Feature `accumulate_all_elements` (SQL)](#feature-accumulate_all_elements)
       - [Feature `count_elements` (SQL)](#feature-count_elements)
-      - [Feature `filter_for`](#feature-filter_for)
       - [Feature `find_best_element` (SQL)](#feature-find_best_element)
       - [Feature `universal_quantifier|existential_quantifier` (SQL)](#feature-universal_quantifierexistential_quantifier)
       - [Feature `find_first_element`](#feature-find_first_element)
@@ -2083,6 +2084,7 @@ Match the update of a variable `x` and capture its name in the first part of the
 [⬆️ feature `variable_update_by_method_call`](#feature-variable_update_by_method_call)  
 [⬇️ feature `accumulate_elements`](#feature-accumulate_elements)  
 [⬇️ feature `accumulate_inputs`](#feature-accumulate_inputs)  
+[⬇️ feature `accumulate_some_elements`](#feature-accumulate_some_elements)  
 
 ##### Specification
 
@@ -3079,6 +3081,7 @@ Match an entire conditional (from the `if` clause to the last line of its body).
 ##### Derivations
 
 [⬇️ feature `accumulate_inputs`](#feature-accumulate_inputs)  
+[⬇️ feature `accumulate_some_elements`](#feature-accumulate_some_elements)  
 [⬇️ feature `count_inputs`](#feature-count_inputs)  
 [⬇️ feature `find_best_element`](#feature-find_best_element)  
 [⬇️ feature `get_valid_input`](#feature-get_valid_input)  
@@ -3428,6 +3431,7 @@ Match sequential loops, along with their iteration variable(s).
 ##### Derivations
 
 [⬇️ feature `accumulate_elements`](#feature-accumulate_elements)  
+[⬇️ feature `accumulate_some_elements`](#feature-accumulate_some_elements)  
 [⬇️ feature `count_elements`](#feature-count_elements)  
 [⬇️ feature `find_best_element`](#feature-find_best_element)  
 [⬇️ feature `for_range`](#feature-for_range)  
@@ -4303,6 +4307,7 @@ An accumulator is iteratively updated from its previous value and that of the it
 
 [⬆️ feature `for`](#feature-for)  
 [⬆️ feature `variable_update`](#feature-variable_update)  
+[⬇️ feature `accumulate_all_elements`](#feature-accumulate_all_elements)  
 
 ##### Specification
 
@@ -4327,35 +4332,195 @@ GROUP BY for_loop.path,
 4           acc = element + acc
 5           seed += 1
 6       return acc
-7   for i in range(10):
-8       acc_1 = combine(acc_1, i)
-9       if condition:
-10          acc_2 += i
-11      else:
-12          acc_2 *= i
-13      pass
-14  for i in range(10):
-15      acc += foo(bar, i)
-16  for i in range(10): # no match
-17      foo(acc, bar, i)
-18      pass
-19  for i in range(10):
-20      acc.append(i)
-21      pass
-22  for i in range(10): # no match
-23      print(foobar, i)
-24  for c in string:
-25      c = c.upper() # no match: this is the iteration variable, not an accumulator
-26      print(c)
+7   
+8   for i in range(10):
+9       acc_1 = combine(acc_1, i)
+10      if condition:
+11          acc_2 += i
+12      else:
+13          acc_2 *= i
+14  
+15  for element in elements:
+16      print("foo")
+17      if predicate(element):
+18          print("bar")
+19          acc.append(element)
+20      print("fiz")
+21  
+22  for i in range(10):
+23      acc += foo(bar, i)
+24  
+25  for i in range(10): # no match
+26      foo(acc, bar, i)
+27  
+28  for i in range(10):
+29      acc.append(i)
+30  
+31  for i in range(10): # no match
+32      print(foobar, i)
+33  
+34  for c in string:
+35      c = c.upper() # no match: this is the iteration variable, not an accumulator
+36      print(c)
 ```
 
 ##### Matches
 
 | Label | Lines |
 |:--|:--|
-| `accumulate_elements:acc` | 3-5, 14-15, 19-21 |
-| `accumulate_elements:acc_1` | 7-13 |
-| `accumulate_elements:acc_2` | 7-13 |
+| `accumulate_elements:acc` | 3-5, 15-20, 22-23, 28-29 |
+| `accumulate_elements:acc_1` | 8-13 |
+| `accumulate_elements:acc_2` | 8-13 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `accumulate_some_elements`
+
+Variant of the previous feature. This time, the update statement is enclosed in a conditional statement.
+
+##### Derivations
+
+[⬆️ feature `for`](#feature-for)  
+[⬆️ feature `if`](#feature-if)  
+[⬆️ feature `variable_update`](#feature-variable_update)  
+[⬇️ feature `accumulate_all_elements`](#feature-accumulate_all_elements)  
+
+##### Specification
+
+```sql
+SELECT "accumulate_some_elements",
+       replace(update_stmt.name_suffix, ":" || for_loop.name_suffix, ""),
+       for_loop.span,
+       for_loop.path
+FROM t_for for_loop
+JOIN t_if ON (t_if.path GLOB for_loop.path || "*-")
+JOIN t_variable_update update_stmt ON (update_stmt.path GLOB t_if.path || "*-")
+WHERE update_stmt.name_suffix GLOB "*:" || for_loop.name_suffix
+GROUP BY for_loop.path,
+         update_stmt.name_suffix
+```
+
+##### Example
+
+```python
+1   def accumulate_elements(elements):
+2       acc = seed
+3       for element in elements:
+4           acc = element + acc
+5           seed += 1
+6       return acc
+7   
+8   for i in range(10):
+9       acc_1 = combine(acc_1, i)
+10      if condition:
+11          acc_2 += i
+12      else:
+13          acc_2 *= i
+14  
+15  for element in elements:
+16      print("foo")
+17      if predicate(element):
+18          print("bar")
+19          acc.append(element)
+20      print("fiz")
+21  
+22  for i in range(10):
+23      acc += foo(bar, i)
+24  
+25  for i in range(10): # no match
+26      foo(acc, bar, i)
+27  
+28  for i in range(10):
+29      acc.append(i)
+30  
+31  for i in range(10): # no match
+32      print(foobar, i)
+33  
+34  for c in string:
+35      c = c.upper() # no match: this is the iteration variable, not an accumulator
+36      print(c)
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `accumulate_some_elements:acc_2` | 8-13 |
+| `accumulate_some_elements:acc` | 15-20 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `accumulate_all_elements`
+
+Difference between features `accumulate_elements` and `accumulate_some_elements`.
+
+##### Derivations
+
+[⬆️ feature `accumulate_elements`](#feature-accumulate_elements)  
+[⬆️ feature `accumulate_some_elements`](#feature-accumulate_some_elements)  
+
+##### Specification
+
+```sql
+SELECT "accumulate_all_elements",
+       acc.name_suffix,
+       acc.span,
+       acc.path
+FROM t_accumulate_elements acc
+WHERE NOT EXISTS
+    (SELECT *
+     FROM t_accumulate_some_elements SOME
+     WHERE some.path = acc.path
+       AND some.name_suffix = acc.name_suffix)
+```
+
+##### Example
+
+```python
+1   def accumulate_elements(elements):
+2       acc = seed
+3       for element in elements:
+4           acc = element + acc
+5           seed += 1
+6       return acc
+7   
+8   for i in range(10):
+9       acc_1 = combine(acc_1, i)
+10      if condition:
+11          acc_2 += i
+12      else:
+13          acc_2 *= i
+14  
+15  for element in elements:
+16      print("foo")
+17      if predicate(element):
+18          print("bar")
+19          acc.append(element)
+20      print("fiz")
+21  
+22  for i in range(10):
+23      acc += foo(bar, i)
+24  
+25  for i in range(10): # no match
+26      foo(acc, bar, i)
+27  
+28  for i in range(10):
+29      acc.append(i)
+30  
+31  for i in range(10): # no match
+32      print(foobar, i)
+33  
+34  for c in string:
+35      c = c.upper() # no match: this is the iteration variable, not an accumulator
+36      print(c)
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `accumulate_all_elements:acc` | 3-5, 22-23, 28-29 |
+| `accumulate_all_elements:acc_1` | 8-13 |
 
 --------------------------------------------------------------------------------
 
@@ -4409,44 +4574,6 @@ GROUP BY inc.path
 | `count_elements:c1` | 4-10 |
 | `count_elements:c2` | 4-10 |
 | `count_elements:c3` | 7-10 |
-
---------------------------------------------------------------------------------
-
-#### Feature `filter_for`
-
-An accumulation pattern that, from a given collection, returns a list containing only those elements that verify a certain condition.
-
-##### Specification
-
-```re
-           ^(.*)/_type=For
-\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/target/id=(?P<ID_1>.+) # capture the iteration variable
-\n(?:\1.+\n)*?\1/(?P<_1>(?:body|orelse)/\d+)/_type=If
-\n(?:\1.+\n)* \1/(?P=_1)                /test/args/\d+/id=(?P=ID_1) # match it in an inner conditional test
-\n(?:\1.+\n)* \1/(?P=_1)                /(?P<_2>(?:body|orelse)/\d+)/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/(?P=_1)                /(?P=_2)                    /value/_type=Call
-\n(?:\1.+\n)*?\1/(?P=_1)                /(?P=_2)                    /value/func/attr=append
-\n(?:\1.+\n)*?\1/(?P=_1)                /(?P=_2)                    /value/args/1/id=(?P=ID_1) # match it in an append()
-\n(?:\1.+\n)* \1.*/_pos=(?P<POS>.+)
-```
-
-##### Example
-
-```python
-1   for element in elements:
-2       print("foo")
-3       if predicate(element):
-4           print("bar")
-5           acc.append(element)
-6       print("fiz")
-```
-
-##### Matches
-
-| Label | Lines |
-|:--|:--|
-| `filter_for` | 1-6 |
 
 --------------------------------------------------------------------------------
 

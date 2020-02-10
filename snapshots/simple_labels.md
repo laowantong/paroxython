@@ -90,8 +90,10 @@
 
 # Absent labels
 
+- accumulate_all_elements
 - accumulate_elements
 - accumulate_inputs
+- accumulate_some_elements
 - assertion
 - assignment_lhs_identifier
 - assignment_rhs_atom
@@ -119,7 +121,6 @@
 - except
 - f_string
 - falsey_literal
-- filter_for
 - filtered_comprehension
 - find_best_element
 - find_first_element

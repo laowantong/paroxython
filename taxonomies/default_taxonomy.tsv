@@ -65,9 +65,9 @@ operator/plus/	unary_operator:UAdd
 operator/power/	binary_operator:Pow
 operator/substraction/	binary_operator:Sub
 operator/ternary/	conditional_expression
-pattern/elements/accumulate/	accumulate_elements\b.+
+pattern/elements/accumulate/all/	accumulate_all_elements\b.+
+pattern/elements/accumulate/some/	accumulate_some_elements\b.+
 pattern/elements/accumulate/count/	count_elements\b.+
-pattern/elements/filter/	filter_for
 pattern/elements/find/best/	find_best_element\b.+
 pattern/elements/find/first/	find_first_element
 pattern/elements/satisfy/all/	universal_quantifier:.+
