@@ -120,8 +120,7 @@
       - [Feature `count_elements` (SQL)](#feature-count_elements)
       - [Feature `filter_for`](#feature-filter_for)
       - [Feature `find_best_element` (SQL)](#feature-find_best_element)
-      - [Feature `universal_quantifier`](#feature-universal_quantifier)
-      - [Feature `existential_quantifier`](#feature-existential_quantifier)
+      - [Feature `universal_quantifier|existential_quantifier` (SQL)](#feature-universal_quantifierexistential_quantifier)
       - [Feature `find_first_element`](#feature-find_first_element)
     - [Non-sequential finite loops](#non-sequential-finite-loops)
       - [Feature `evolve_state`](#feature-evolve_state)
@@ -2340,6 +2339,7 @@ Match `return` statements and, when the returned object is an [_atom_](#feature-
 [⬇️ feature `count_inputs`](#feature-count_inputs)  
 [⬇️ feature `function_returning_something`](#feature-function_returning_something)  
 [⬇️ feature `get_valid_input`](#feature-get_valid_input)  
+[⬇️ feature `universal_quantifier|existential_quantifier`](#feature-universal_quantifierexistential_quantifier)  
 
 ##### Specification
 
@@ -3083,6 +3083,7 @@ Match an entire conditional (from the `if` clause to the last line of its body).
 [⬇️ feature `find_best_element`](#feature-find_best_element)  
 [⬇️ feature `get_valid_input`](#feature-get_valid_input)  
 [⬇️ feature `nested_if`](#feature-nested_if)  
+[⬇️ feature `universal_quantifier|existential_quantifier`](#feature-universal_quantifierexistential_quantifier)  
 
 ##### Specification
 
@@ -3143,6 +3144,7 @@ Match and suffix any [atom](#feature-call_argument) present in the condition of 
 [⬇️ feature `count_inputs`](#feature-count_inputs)  
 [⬇️ feature `find_best_element`](#feature-find_best_element)  
 [⬇️ feature `get_valid_input`](#feature-get_valid_input)  
+[⬇️ feature `universal_quantifier|existential_quantifier`](#feature-universal_quantifierexistential_quantifier)  
 
 ##### Specification
 
@@ -3430,6 +3432,7 @@ Match sequential loops, along with their iteration variable(s).
 [⬇️ feature `find_best_element`](#feature-find_best_element)  
 [⬇️ feature `for_range`](#feature-for_range)  
 [⬇️ feature `nested_for`](#feature-nested_for)  
+[⬇️ feature `universal_quantifier|existential_quantifier`](#feature-universal_quantifierexistential_quantifier)  
 
 ##### Specification
 
@@ -4541,22 +4544,37 @@ _Limitation._ False negative when the iteration variable does not appear directl
 
 --------------------------------------------------------------------------------
 
-#### Feature `universal_quantifier`
+#### Feature `universal_quantifier|existential_quantifier`
 
-Check whether all elements of a collection satisfy a predicate.
+Check whether all elements of a collection satisfy a predicate (universal quantifier) or at least one element satisfies a predicate (existential quantifier).
+
+##### Derivations
+
+[⬆️ feature `for`](#feature-for)  
+[⬆️ feature `if`](#feature-if)  
+[⬆️ feature `if_test_atom`](#feature-if_test_atom)  
+[⬆️ feature `return`](#feature-return)  
 
 ##### Specification
 
-```re
-          ^(.*?)/(?P<_1>(?:body|orelse)/\d+)/_type=For
-\n(?:\1.+\n)*?\1/(?P=_1)                    /_pos=(?P<POS>.+)
-\n(?:\1.+\n)* \1/(?P=_1)                    /(?P<_2>(?:body|orelse)/\d+)/_type=If
-\n(?:\1.+\n)* \1/(?P=_1)                    /(?P=_2)                    /(?P<_3>(?:body|orelse)/\d+)/_type=Return
-\n(?:\1.+\n)*?\1/(?P=_1)                    /(?P=_2)                    /(?P=_3)                    /value/value=False
-\n(?:\1.+\n)* \1/(?P<_4>(?:body|orelse)/\d+)/_type=Return
-\n(?:\1.+\n)*?\1/(?P=_4)                    /_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/(?P=_4)                    /value/value=True
+```sql
+SELECT CASE ret.name_suffix
+           WHEN "False" THEN "universal_quantifier"
+           ELSE "existential_quantifier"
+       END,
+       t_for.name_suffix,
+       t_for.span,
+       t_for.path
+FROM t_for -- A for loop...
+JOIN t_if ON (t_if.path GLOB t_for.path || "?*")-- enclosing an if statement...
+JOIN t_if_test_atom x ON (x.span_start = t_if.span_start)-- which tests the iteration variable...
+JOIN t_return ret ON (ret.path GLOB t_if.path || "?*" -- and returns...
+                      AND ret.name_suffix IN ("True",
+                                              "False"))-- a boolean
+GROUP BY t_for.path
 ```
+
+_Remark._ The `return` statement following the loop is untested, which allows to catch some “hidden” quantifiers. For instance, in `is_prime()` (below), an integer _n_ is prime iff it is coprime with **all** the integers of [2, _n_[ and greater than 1).
 
 ##### Example
 
@@ -4566,48 +4584,27 @@ Check whether all elements of a collection satisfy a predicate.
 3           if not is_good(element):
 4               return False
 5       return True
+6   
+7   def some_elements_satisfy(elements):
+8       for element in elements:
+9           if is_good(element):
+10              return True
+11      return False
+12
+13  def is_prime(n):
+14      for candidate in range(2, n):
+15          if n % candidate == 0:
+16              return False
+17      return n > 1
 ```
 
 ##### Matches
 
 | Label | Lines |
 |:--|:--|
-| `universal_quantifier` | 2-5 |
-
---------------------------------------------------------------------------------
-
-#### Feature `existential_quantifier`
-
-Check whether any element of a collection satisfies a predicate.
-
-##### Specification
-
-```re
-          ^(.*?)/(?P<_1>(?:body|orelse)/\d+)/_type=For
-\n(?:\1.+\n)*?\1/(?P=_1)                    /_pos=(?P<POS>.+)
-\n(?:\1.+\n)* \1/(?P=_1)                    /(?P<_2>(?:body|orelse)/\d+)/_type=If
-\n(?:\1.+\n)* \1/(?P=_1)                    /(?P=_2)                    /(?P<_3>(?:body|orelse)/\d+)/_type=Return
-\n(?:\1.+\n)*?\1/(?P=_1)                    /(?P=_2)                    /(?P=_3)                    /value/value=True
-\n(?:\1.+\n)* \1/(?P<_4>(?:body|orelse)/\d+)/_type=Return
-\n(?:\1.+\n)*?\1/(?P=_4)                    /_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/(?P=_4)                    /value/value=False
-```
-
-##### Example
-
-```python
-2   def some_elements_satisfy(elements):
-1       for element in elements:
-3           if is_good(element):
-4               return True
-5       return False
-```
-
-##### Matches
-
-| Label | Lines |
-|:--|:--|
-| `existential_quantifier` | 2-5 |
+| `universal_quantifier:element` | 2-4 |
+| `existential_quantifier:element` | 8-10 |
+| `universal_quantifier:candidate` | 14-16 |
 
 --------------------------------------------------------------------------------
 

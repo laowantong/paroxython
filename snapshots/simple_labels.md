@@ -117,7 +117,6 @@
 - deeply_recursive_function
 - divisibility_test
 - except
-- existential_quantifier
 - f_string
 - falsey_literal
 - filter_for
@@ -181,7 +180,7 @@
 - try
 - try_raise|try_except
 - unary_operator
-- universal_quantifier
+- universal_quantifier|existential_quantifier
 - variable_increment
 - variable_update
 - variable_update_by_assignment

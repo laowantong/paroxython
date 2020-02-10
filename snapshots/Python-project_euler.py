@@ -198,7 +198,7 @@ def isprime(no): # function:isprime (-> +9), function_argument:no, function_argu
     elif no % 2 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, falsey_literal:0, if (-> +1), if_test_atom:0, if_test_atom:2, if_test_atom:no, int_literal, literal:Num
         return False # falsey_literal:False, if_elif_branch, literal:False, return:False
     sq = int(math.sqrt(no)) + 1 # assignment, assignment_lhs_identifier:sq, assignment_rhs_atom:1, assignment_rhs_atom:math, assignment_rhs_atom:no, binary_operator:Add, call_argument:, call_argument:no, composition, function_call:int, int_literal, literal:Num, method_call, method_call_name:sqrt, single_assignment:sq
-    for i in range(3, sq, 2): # call_argument:2, call_argument:3, call_argument:sq, for:i (-> +2), for_range:3:sq:2 (-> +2), function_call:range, int_literal, literal:Num, range:3:sq:2, suggest_constant_definition, universal_quantifier (-> +3)
+    for i in range(3, sq, 2): # call_argument:2, call_argument:3, call_argument:sq, for:i (-> +2), for_range:3:sq:2 (-> +2), function_call:range, int_literal, literal:Num, range:3:sq:2, suggest_constant_definition, universal_quantifier:i (-> +2)
         if no % i == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test, falsey_literal:0, if (-> +1), if_test_atom:0, if_test_atom:i, if_test_atom:no, int_literal, literal:Num
             return False # falsey_literal:False, if_then_branch, literal:False, return:False
     return True # literal:True, return:True
@@ -382,7 +382,7 @@ def isprime(n): # function:isprime (-> +10), function_argument:n, function_argum
         return False # falsey_literal:False, if_elif_branch, literal:False, return:False
     else:
         sq = int(sqrt(n)) + 1 # assignment, assignment_lhs_identifier:sq, assignment_rhs_atom:1, assignment_rhs_atom:n, binary_operator:Add, call_argument:, call_argument:n, composition, function_call:int, function_call:sqrt, if_else_branch (-> +3), int_literal, literal:Num, single_assignment:sq
-        for i in range(3, sq, 2): # call_argument:2, call_argument:3, call_argument:sq, for:i (-> +2), for_range:3:sq:2 (-> +2), function_call:range, int_literal, literal:Num, range:3:sq:2, suggest_constant_definition
+        for i in range(3, sq, 2): # call_argument:2, call_argument:3, call_argument:sq, for:i (-> +2), for_range:3:sq:2 (-> +2), function_call:range, int_literal, literal:Num, range:3:sq:2, suggest_constant_definition, universal_quantifier:i (-> +2)
             if n % i == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test, falsey_literal:0, if (-> +1), if_test_atom:0, if_test_atom:i, if_test_atom:n, int_literal, literal:Num, nested_if:1 (-> +1)
                 return False # falsey_literal:False, if_then_branch, literal:False, return:False
     return True # literal:True, return:True
@@ -403,7 +403,7 @@ def solution(n): # function:solution (-> +11), function_argument:n, function_arg
 # ../Python/project_euler/problem_07/sol2.py
 # ----------------------------------------------------------------------------------------
 def isprime(number): # function:isprime (-> +4), function_argument:number, function_argument_flavor:arg, function_returning_something:isprime (-> +4), lines_of_code:21 (-> +20)
-    for i in range(2, int(number ** 0.5) + 1): # binary_operator:Add, binary_operator:Pow, call_argument:, call_argument:2, composition, float_literal, for:i (-> +2), for_range:2:_ (-> +2), function_call:int, function_call:range, int_literal, literal:Num, range:2:_, suggest_constant_definition, universal_quantifier (-> +3)
+    for i in range(2, int(number ** 0.5) + 1): # binary_operator:Add, binary_operator:Pow, call_argument:, call_argument:2, composition, float_literal, for:i (-> +2), for_range:2:_ (-> +2), function_call:int, function_call:range, int_literal, literal:Num, range:2:_, suggest_constant_definition, universal_quantifier:i (-> +2)
         if number % i == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test, falsey_literal:0, if (-> +1), if_test_atom:0, if_test_atom:i, if_test_atom:number, int_literal, literal:Num
             return False # falsey_literal:False, if_then_branch, literal:False, return:False
     return True # literal:True, return:True
@@ -597,7 +597,7 @@ def solution(): # function:solution (-> +7), function_returning_something:soluti
 # ----------------------------------------------------------------------------------------
 from math import sqrt # import:math:sqrt, import_module:math, import_name:sqrt, lines_of_code:17 (-> +16)
 def is_prime(n): # function:is_prime (-> +4), function_argument:n, function_argument_flavor:arg, function_returning_something:is_prime (-> +4)
-    for i in range(2, int(sqrt(n)) + 1): # binary_operator:Add, call_argument:, call_argument:2, call_argument:n, composition, for:i (-> +2), for_range:2:_ (-> +2), function_call:int, function_call:range, function_call:sqrt, int_literal, literal:Num, range:2:_, universal_quantifier (-> +3)
+    for i in range(2, int(sqrt(n)) + 1): # binary_operator:Add, call_argument:, call_argument:2, call_argument:n, composition, for:i (-> +2), for_range:2:_ (-> +2), function_call:int, function_call:range, function_call:sqrt, int_literal, literal:Num, range:2:_, universal_quantifier:i (-> +2)
         if n % i == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test, falsey_literal:0, if (-> +1), if_test_atom:0, if_test_atom:i, if_test_atom:n, int_literal, literal:Num
             return False # falsey_literal:False, if_then_branch, literal:False, return:False
     return True # literal:True, return:True
@@ -1126,7 +1126,7 @@ def is_prime(k: int) -> bool: # function:is_prime (-> +9), function_argument:k, 
     elif k == 2: # comparison_operator:Eq, if (-> +5), if_test_atom:2, if_test_atom:k, int_literal, literal:Num
         return True # if_elif_branch, literal:True, return:True
     else:
-        for x in range(3, int(math.sqrt(k) + 1), 2): # binary_operator:Add, call_argument:, call_argument:2, call_argument:3, call_argument:k, composition, for:x (-> +2), for_range:3:_:2 (-> +2), function_call:int, function_call:range, if_else_branch (-> +2), int_literal, literal:Num, method_call, method_call_name:sqrt, range:3:_:2, suggest_constant_definition
+        for x in range(3, int(math.sqrt(k) + 1), 2): # binary_operator:Add, call_argument:, call_argument:2, call_argument:3, call_argument:k, composition, for:x (-> +2), for_range:3:_:2 (-> +2), function_call:int, function_call:range, if_else_branch (-> +2), int_literal, literal:Num, method_call, method_call_name:sqrt, range:3:_:2, suggest_constant_definition, universal_quantifier:x (-> +2)
             if k % x == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test, falsey_literal:0, if (-> +1), if_test_atom:0, if_test_atom:k, if_test_atom:x, int_literal, literal:Num, nested_if:1 (-> +1)
                 return False # falsey_literal:False, if_then_branch, literal:False, return:False
     return True # literal:True, return:True
