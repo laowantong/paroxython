@@ -130,7 +130,7 @@
       - [Feature `count_inputs` (SQL)](#feature-count_inputs)
       - [Feature `accumulate_inputs` (SQL)](#feature-accumulate_inputs)
 - [Programs](#programs)
-      - [Feature `category`](#feature-category)
+      - [Feature `topic`](#feature-topic)
 - [Suggestions](#suggestions)
   - [Assignments](#assignments-1)
       - [Feature `suggest_conditional_expression`](#feature-suggest_conditional_expression)
@@ -4115,7 +4115,7 @@ LEFT JOIN t_function_argument a ON (a.path GLOB m.path || "*-*-"
                                                           "cls"))
 ```
 
-_Remark._: the presence of a decorator `classmethod` or `staticmethod` is unchecked, nor is the flavor of the arguments `self` and `cls` (they should be positional arguments). In other words, a method with an argument `self` (resp. `cls`) is categorized as an instance (resp. class) method, or else as a static method.
+_Remark._: the presence of a decorator `classmethod` or `staticmethod` is unchecked, nor is the flavor of the arguments `self` and `cls` (they should be positional arguments). In other words, it is enough that a method has an argument `self` (resp. `cls`) for being categorized as an instance (resp. class) method, or else as a static method.
 
 ##### Example
 
@@ -4895,17 +4895,17 @@ When the update is carried out by a function call, it must be indicated with a m
 
 --------------------------------------------------------------------------------
 
-#### Feature `category`
+#### Feature `topic`
 
-It may be interesting to indicate the category of the program with an all-encompassing hint `# paroxython: category` placed on its own line. Examples of possible categories are:
+It may be interesting to indicate the category of the program with an all-encompassing hint `# paroxython: topic` placed on its own line. Examples of possible categories are:
 
-- `abstract`: sorting, searching, algorithmic pattern, etc.
 - `biology`
 - `combinatorics`
 - `computability`: cellular automata, tag-system, etc.
 - `fractals`
 - `fun`
 - `game`
+- `general`: sorting, searching, algorithmic pattern, etc.
 - `geography`
 - `geometry`
 - `number_theory`: gcd, sieve, most problems of [Project Euler](http://projecteuler.net), etc.
@@ -4923,10 +4923,10 @@ It may be interesting to indicate the category of the program with an all-encomp
 1   print("See if you can do this. Read each line aloud and press Return between.")
 2   message = "this is how to keep an idiot busy for a while"
 3   for word in message.split(" "):
-4       # paroxython: category:text_processing
+4       # paroxython: topic:text_processing
 5       input(f"This is {word} cat.")
 6   print("Now read the third word in each line from the top!")
-7   # paroxython: category:fun
+7   # paroxython: topic:fun
 ```
 
 _Remark._
@@ -4937,8 +4937,8 @@ _Remark._
 
 | Label | Lines |
 |:--|:--|
-| `category:fun` | 1-5 |
-| `category:text_processing` | 1-5 |
+| `topic:fun` | 1-5 |
+| `topic:text_processing` | 1-5 |
 
 --------------------------------------------------------------------------------
 
