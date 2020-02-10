@@ -113,19 +113,20 @@
       - [Feature `import_module`](#feature-import_module)
       - [Feature `import_name`](#feature-import_name)
       - [Feature `import` (SQL)](#feature-import)
-- [Code patterns](#code-patterns)
-  - [Iterative patterns](#iterative-patterns)
-    - [Sequential loops](#sequential-loops)
+- [Iterative patterns](#iterative-patterns)
+  - [Sequential loops](#sequential-loops)
+    - [Sequential loops with late exit](#sequential-loops-with-late-exit)
       - [Feature `accumulate_elements` (SQL)](#feature-accumulate_elements)
       - [Feature `accumulate_some_elements` (SQL)](#feature-accumulate_some_elements)
       - [Feature `accumulate_all_elements` (SQL)](#feature-accumulate_all_elements)
       - [Feature `count_elements` (SQL)](#feature-count_elements)
       - [Feature `find_best_element` (SQL)](#feature-find_best_element)
+    - [Sequential loops with early exit](#sequential-loops-with-early-exit)
       - [Feature `universal_quantification|existential_quantification` (SQL)](#feature-universal_quantificationexistential_quantification)
       - [Feature `find_first_element` (SQL)](#feature-find_first_element)
-    - [Non-sequential finite loops](#non-sequential-finite-loops)
+  - [Non-sequential finite loops](#non-sequential-finite-loops)
       - [Feature `evolve_state`](#feature-evolve_state)
-    - [Non-sequential infinite loops](#non-sequential-infinite-loops)
+  - [Non-sequential infinite loops](#non-sequential-infinite-loops)
       - [Feature `get_valid_input` (SQL)](#feature-get_valid_input)
       - [Feature `count_inputs` (SQL)](#feature-count_inputs)
       - [Feature `accumulate_inputs` (SQL)](#feature-accumulate_inputs)
@@ -4295,11 +4296,11 @@ LEFT JOIN t_import_name n ON (m.span = n.span)
 
 --------------------------------------------------------------------------------
 
-# Code patterns
+# Iterative patterns
 
-## Iterative patterns
+## Sequential loops
 
-### Sequential loops
+### Sequential loops with late exit
 
 --------------------------------------------------------------------------------
 
@@ -4675,6 +4676,10 @@ _Limitation._ False negative when the iteration variable does not appear directl
 
 --------------------------------------------------------------------------------
 
+### Sequential loops with early exit
+
+--------------------------------------------------------------------------------
+
 #### Feature `universal_quantification|existential_quantification`
 
 Check whether all elements of a collection satisfy a predicate (universal quantification) or at least one element satisfies a predicate (existential quantification).
@@ -4790,7 +4795,7 @@ JOIN t_return ret ON (ret.path GLOB t_if.path || "*-" -- and returns...
 
 --------------------------------------------------------------------------------
 
-### Non-sequential finite loops
+## Non-sequential finite loops
 
 --------------------------------------------------------------------------------
 
@@ -4848,7 +4853,7 @@ Evolve the value of a variable until it reaches a desired state.
 
 --------------------------------------------------------------------------------
 
-### Non-sequential infinite loops
+## Non-sequential infinite loops
 
 --------------------------------------------------------------------------------
 

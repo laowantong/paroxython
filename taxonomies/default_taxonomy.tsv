@@ -173,7 +173,6 @@ io/standard/print/newline/
 io/standard/print/without_newline/	
 pattern/elements/accumulate/collect/	
 pattern/elements/accumulate/find_best/index/	
-pattern/elements/find_first_good/	
 pattern/states/accumulate/	
 pattern/states/accumulate/collect/	
 pattern/states/accumulate/count/	
