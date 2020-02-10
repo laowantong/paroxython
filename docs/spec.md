@@ -122,7 +122,7 @@
       - [Feature `count_elements` (SQL)](#feature-count_elements)
       - [Feature `find_best_element` (SQL)](#feature-find_best_element)
       - [Feature `universal_quantifier|existential_quantifier` (SQL)](#feature-universal_quantifierexistential_quantifier)
-      - [Feature `find_first_element`](#feature-find_first_element)
+      - [Feature `find_first_element` (SQL)](#feature-find_first_element)
     - [Non-sequential finite loops](#non-sequential-finite-loops)
       - [Feature `evolve_state`](#feature-evolve_state)
     - [Non-sequential infinite loops](#non-sequential-infinite-loops)
@@ -2339,6 +2339,7 @@ Match `return` statements and, when the returned object is an [_atom_](#feature-
 [⬇️ feature `accumulate_inputs`](#feature-accumulate_inputs)  
 [⬇️ feature `closure`](#feature-closure)  
 [⬇️ feature `count_inputs`](#feature-count_inputs)  
+[⬇️ feature `find_first_element`](#feature-find_first_element)  
 [⬇️ feature `function_returning_something`](#feature-function_returning_something)  
 [⬇️ feature `get_valid_input`](#feature-get_valid_input)  
 [⬇️ feature `universal_quantifier|existential_quantifier`](#feature-universal_quantifierexistential_quantifier)  
@@ -3084,6 +3085,7 @@ Match an entire conditional (from the `if` clause to the last line of its body).
 [⬇️ feature `accumulate_some_elements`](#feature-accumulate_some_elements)  
 [⬇️ feature `count_inputs`](#feature-count_inputs)  
 [⬇️ feature `find_best_element`](#feature-find_best_element)  
+[⬇️ feature `find_first_element`](#feature-find_first_element)  
 [⬇️ feature `get_valid_input`](#feature-get_valid_input)  
 [⬇️ feature `nested_if`](#feature-nested_if)  
 [⬇️ feature `universal_quantifier|existential_quantifier`](#feature-universal_quantifierexistential_quantifier)  
@@ -3146,6 +3148,7 @@ Match and suffix any [atom](#feature-call_argument) present in the condition of 
 [⬇️ feature `accumulate_inputs`](#feature-accumulate_inputs)  
 [⬇️ feature `count_inputs`](#feature-count_inputs)  
 [⬇️ feature `find_best_element`](#feature-find_best_element)  
+[⬇️ feature `find_first_element`](#feature-find_first_element)  
 [⬇️ feature `get_valid_input`](#feature-get_valid_input)  
 [⬇️ feature `universal_quantifier|existential_quantifier`](#feature-universal_quantifierexistential_quantifier)  
 
@@ -3434,6 +3437,7 @@ Match sequential loops, along with their iteration variable(s).
 [⬇️ feature `accumulate_some_elements`](#feature-accumulate_some_elements)  
 [⬇️ feature `count_elements`](#feature-count_elements)  
 [⬇️ feature `find_best_element`](#feature-find_best_element)  
+[⬇️ feature `find_first_element`](#feature-find_first_element)  
 [⬇️ feature `for_range`](#feature-for_range)  
 [⬇️ feature `nested_for`](#feature-nested_for)  
 [⬇️ feature `universal_quantifier|existential_quantifier`](#feature-universal_quantifierexistential_quantifier)  
@@ -4694,11 +4698,12 @@ SELECT CASE ret.name_suffix
        t_for.path
 FROM t_for -- A for loop...
 JOIN t_if ON (t_if.path GLOB t_for.path || "*-")-- enclosing an if statement...
-JOIN t_if_test_atom x ON (x.span_start = t_if.span_start)-- which tests the iteration variable...
+JOIN t_if_test_atom x ON (x.span_start = t_if.span_start
+                          AND x.name_suffix = t_for.name_suffix)-- which tests the iteration variable...
 JOIN t_return ret ON (ret.path GLOB t_if.path || "*-" -- and returns...
                       AND ret.name_suffix IN ("True",
                                               "False"))-- a boolean
-GROUP BY t_for.path
+-- GROUP BY t_for.path
 ```
 
 _Remark._ The `return` statement following the loop is untested, which allows to catch some “hidden” quantifiers. For instance, in `is_prime()` (below), an integer _n_ is prime iff it is coprime with **all** the integers of [2, _n_[ and greater than 1).
@@ -4739,34 +4744,51 @@ _Remark._ The `return` statement following the loop is untested, which allows to
 
 Linear search. Return the first element of a sequence satisfying a predicate.
 
+##### Derivations
+
+[⬆️ feature `for`](#feature-for)  
+[⬆️ feature `if`](#feature-if)  
+[⬆️ feature `if_test_atom`](#feature-if_test_atom)  
+[⬆️ feature `return`](#feature-return)  
+
 ##### Specification
 
-```re
-           ^(.*)/_type=For
-\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/target/id=(?P<ITER_VAR>.+) # capture the name of the iteration variable
-\n(?:\1.+\n)* \1/(?P<_1>(?:body|orelse)/.+)/_type=If # The If appears at any depth in the loop
-\n(?:\1.+\n)* \1/(?P=_1)                   /test/.+/id=(?P=ITER_VAR) # The variable appears at any depth inside the condition
-\n(?:\1.+\n)*?\1/(?P=_1)                   /(?P<_2>(?:body|orelse)/\d+)/_type=Return
-\n(?:\1.+\n)*?\1/(?P=_1)                   /(?P=_2)                    /_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/(?P=_1)                   /(?P=_2)                    /value/id=(?P=ITER_VAR) # ... and is returned
+```sql
+SELECT "find_first_element",
+       t_for.name_suffix,
+       t_for.span,
+       t_for.path
+FROM t_for -- A for loop...
+JOIN t_if ON (t_if.path GLOB t_for.path || "*-")-- enclosing an if statement...
+JOIN t_if_test_atom x ON (x.span_start = t_if.span_start
+                          AND x.name_suffix = t_for.name_suffix)-- which tests the iteration variable...
+JOIN t_return ret ON (ret.path GLOB t_if.path || "*-" -- and returns...
+                      AND ret.name_suffix = x.name_suffix)-- it.
+GROUP BY t_for.path
 ```
 
 ##### Example
 
 ```python
-1   def search(seq, x):
+1   def search_index(seq, x):
 2       for i in range(len(seq)):
 3           if seq[i] == x:
 4               return i
 5       return None
+6
+7   def search_element(seq):
+8       for x in seq:
+9           if is_good(x):
+10               return x
+11      return None
 ```
 
 ##### Matches
 
 | Label | Lines |
 |:--|:--|
-| `find_first_element` | 2-4 |
+| `find_first_element:i` | 2-4 |
+| `find_first_element:x` | 8-10 |
 
 --------------------------------------------------------------------------------
 

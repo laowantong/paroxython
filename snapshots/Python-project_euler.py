@@ -276,7 +276,7 @@ def solution(n: int) -> int: # function:solution (-> +18), function_argument:n, 
 # ../Python/project_euler/problem_04/sol1.py
 # ----------------------------------------------------------------------------------------
 def solution(n): # function:solution (-> +8), function_argument:n, function_argument_flavor:arg, function_returning_something:solution (-> +8), lines_of_code:9 (-> +8)
-    for number in range(n - 1, 10000, -1): # binary_operator:Sub, call_argument:, call_argument:-1, call_argument:10000, find_first_element (-> +6), for:number (-> +7), for_range:_:10000:-1 (-> +7), function_call:range, int_literal, literal:Num, range:_:10000:-1, suggest_constant_definition
+    for number in range(n - 1, 10000, -1): # binary_operator:Sub, call_argument:, call_argument:-1, call_argument:10000, find_first_element:number (-> +7), for:number (-> +7), for_range:_:10000:-1 (-> +7), function_call:range, int_literal, literal:Num, range:_:10000:-1, suggest_constant_definition
         strNumber = str(number) # assignment, assignment_lhs_identifier:strNumber, assignment_rhs_atom:number, call_argument:number, function_call:str, single_assignment:strNumber
         if strNumber == strNumber[::-1]: # comparison_operator:Eq, if (-> +5), if_test_atom:-1, if_test_atom:strNumber, int_literal, literal:Num, slice:::-1, slice_lower:, slice_step:-1, slice_upper:
             divisor = 999 # assignment, assignment_lhs_identifier:divisor, assignment_rhs_atom:999, if_then_branch (-> +4), int_literal, literal:Num, single_assignment:divisor, suggest_constant_definition
