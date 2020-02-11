@@ -6,6 +6,7 @@
   "tests/data/simple/collatz_print.py": {
     "control_flow/conditional/": "4-7",
     "control_flow/conditional/else/": "7",
+    "control_flow/loop/non_sequential/": "2-7",
     "io/standard/print/": "3 8",
     "operator/addition/": "7",
     "operator/multiplication/": "7",

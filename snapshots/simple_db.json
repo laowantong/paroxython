@@ -66,6 +66,7 @@
       "taxons": {
         "control_flow/conditional/": [[4,7]],
         "control_flow/conditional/else/": [[7,7]],
+        "control_flow/loop/non_sequential/": [[2,7]],
         "io/standard/print/": [[3,3],[8,8]],
         "operator/addition/": [[7,7]],
         "operator/multiplication/": [[7,7]],
@@ -404,6 +405,9 @@
     "control_flow/conditional/else/": [
       "tests/data/simple/collatz_print.py",
       "tests/data/simple/fizzbuzz.py"
+    ],
+    "control_flow/loop/non_sequential/": [
+      "tests/data/simple/collatz_print.py"
     ],
     "io/standard/print/": [
       "tests/data/simple/collatz_print.py",

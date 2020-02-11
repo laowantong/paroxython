@@ -101,6 +101,7 @@
 - binary_operator
 - body_recursive_function
 - boolean_operator
+- break
 - call_argument
 - chained_assignment
 - chained_comparison
@@ -113,6 +114,7 @@
 - comprehension_for_count
 - concatenation_operator|replication_operator
 - conditional_expression
+- continue
 - count_elements
 - count_inputs
 - decorated_function
@@ -130,6 +132,8 @@
 - for_indexes
 - for_indexes_elements
 - for_range
+- for_with_early_exit|while_with_early_exit
+- for_with_else|while_with_else
 - function
 - function_argument
 - function_argument_flavor
@@ -153,6 +157,7 @@
 - instance_method|class_method|static_method
 - lambda_function
 - literal
+- loop_else
 - method
 - method_call
 - method_call_name

@@ -89,7 +89,13 @@
       - [Feature `if_else_branch`](#feature-if_else_branch)
       - [Feature `nested_if` (SQL)](#feature-nested_if)
   - [Iterations](#iterations)
+    - [Iteration keywords](#iteration-keywords)
       - [Feature `for`](#feature-for)
+      - [Feature `while`](#feature-while)
+      - [Feature `break`](#feature-break)
+      - [Feature `loop_else`](#feature-loop_else)
+      - [Feature `continue`](#feature-continue)
+    - [Sequential loops](#sequential-loops)
       - [Feature `for_each`](#feature-for_each)
       - [Feature `for_range` (SQL)](#feature-for_range)
       - [Feature `for_indexes_elements`](#feature-for_indexes_elements)
@@ -97,8 +103,11 @@
       - [Feature `nested_for` (SQL)](#feature-nested_for)
       - [Feature `triangular_nested_for`](#feature-triangular_nested_for)
       - [Feature `square_nested_for`](#feature-square_nested_for)
-      - [Feature `while`](#feature-while)
+    - [Non-sequential loops](#non-sequential-loops)
       - [Feature `infinite_while`](#feature-infinite_while)
+    - [Early exit](#early-exit)
+      - [Feature `for_with_early_exit|while_with_early_exit` (SQL)](#feature-for_with_early_exitwhile_with_early_exit)
+      - [Feature `for_with_else|while_with_else` (SQL)](#feature-for_with_elsewhile_with_else)
   - [Exceptions](#exceptions)
       - [Feature `assertion`](#feature-assertion)
       - [Feature `try`](#feature-try)
@@ -114,7 +123,7 @@
       - [Feature `import_name`](#feature-import_name)
       - [Feature `import` (SQL)](#feature-import)
 - [Iterative patterns](#iterative-patterns)
-  - [Sequential loops](#sequential-loops)
+  - [Sequential loops](#sequential-loops-1)
     - [Sequential loops with late exit](#sequential-loops-with-late-exit)
       - [Feature `accumulate_elements` (SQL)](#feature-accumulate_elements)
       - [Feature `accumulate_some_elements` (SQL)](#feature-accumulate_some_elements)
@@ -2341,6 +2350,7 @@ Match `return` statements and, when the returned object is an [_atom_](#feature-
 [⬇️ feature `closure`](#feature-closure)  
 [⬇️ feature `count_inputs`](#feature-count_inputs)  
 [⬇️ feature `find_first_element`](#feature-find_first_element)  
+[⬇️ feature `for_with_early_exit|while_with_early_exit`](#feature-for_with_early_exitwhile_with_early_exit)  
 [⬇️ feature `function_returning_something`](#feature-function_returning_something)  
 [⬇️ feature `get_valid_input`](#feature-get_valid_input)  
 [⬇️ feature `universal_quantification|existential_quantification`](#feature-universal_quantificationexistential_quantification)  
@@ -3426,6 +3436,8 @@ _Remark._ A join condition `(inner_if.path GLOB branch.path || "*-")` would not 
 
 ## Iterations
 
+### Iteration keywords
+
 --------------------------------------------------------------------------------
 
 #### Feature `for`
@@ -3440,6 +3452,8 @@ Match sequential loops, along with their iteration variable(s).
 [⬇️ feature `find_best_element`](#feature-find_best_element)  
 [⬇️ feature `find_first_element`](#feature-find_first_element)  
 [⬇️ feature `for_range`](#feature-for_range)  
+[⬇️ feature `for_with_early_exit|while_with_early_exit`](#feature-for_with_early_exitwhile_with_early_exit)  
+[⬇️ feature `for_with_else|while_with_else`](#feature-for_with_elsewhile_with_else)  
 [⬇️ feature `nested_for`](#feature-nested_for)  
 [⬇️ feature `universal_quantification|existential_quantification`](#feature-universal_quantificationexistential_quantification)  
 
@@ -3475,6 +3489,140 @@ Match sequential loops, along with their iteration variable(s).
 | `for:a` | 4-7 |
 | `for:b` | 4-7 |
 | `for:c` | 4-7 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `while`
+
+##### Derivations
+
+[⬇️ feature `for_with_early_exit|while_with_early_exit`](#feature-for_with_early_exitwhile_with_early_exit)  
+[⬇️ feature `for_with_else|while_with_else`](#feature-for_with_elsewhile_with_else)  
+
+##### Specification
+
+```re
+           ^(.*)/_type=While
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
+\n(?:\1.+\n)* \1/.*/_pos=(?P<POS>.+)
+```
+
+##### Example
+
+```python
+1   while foo():
+2       while bar():
+3           pass
+4       while biz():
+5           pass
+6       else:
+7           pass
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `while` | 1-7, 2-3, 4-7 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `break`
+
+##### Derivations
+
+[⬇️ feature `for_with_early_exit|while_with_early_exit`](#feature-for_with_early_exitwhile_with_early_exit)  
+
+##### Specification
+
+```re
+           ^(.*)/_type=Break
+\n            \1/_pos=(?P<POS>.+)
+```
+
+##### Example
+
+```python
+1   for x in seq:
+2       if foo():
+3           break
+4   else:
+5       bar()
+6       biz()
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `break` | 3 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `loop_else`
+
+##### Derivations
+
+[⬇️ feature `for_with_else|while_with_else`](#feature-for_with_elsewhile_with_else)  
+
+##### Specification
+
+```re
+  ^(.*/loopelse)/1/_type=.+
+\n            \1/1/_pos=(?P<POS>.+)
+(
+\n(?:\1.+\n)+ \1/.*_pos=(?P<POS>.+)
+)*
+```
+
+##### Example
+
+```python
+1   for x in seq:
+2       if foo():
+3           break
+4   else:
+5       bar()
+6       biz()
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `loop_else` | 5-6 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `continue`
+
+##### Specification
+
+```re
+           ^(.*)/_type=Continue
+\n            \1/_pos=(?P<POS>.+)
+```
+
+##### Example
+
+```python
+1   for x in seq:
+2       if foo():
+3           continue
+4       if bar():
+5           continue
+6       pass
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `continue` | 3, 5 |
+
+--------------------------------------------------------------------------------
+
+### Sequential loops
 
 --------------------------------------------------------------------------------
 
@@ -3744,33 +3892,7 @@ Two nested `for` loops doing the same number of iterations.
 
 --------------------------------------------------------------------------------
 
-#### Feature `while`
-
-##### Specification
-
-```re
-           ^(.*)/_type=While
-\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)* \1/.*/_pos=(?P<POS>.+)
-```
-
-##### Example
-
-```python
-1   while foo():
-2       while bar():
-3           pass
-4       while biz():
-5           pass
-6       else:
-7           pass
-```
-
-##### Matches
-
-| Label | Lines |
-|:--|:--|
-| `while` | 1-7, 2-3, 4-7 |
+### Non-sequential loops
 
 --------------------------------------------------------------------------------
 
@@ -3808,6 +3930,129 @@ Two nested `for` loops doing the same number of iterations.
 | Label | Lines |
 |:--|:--|
 | `infinite_while` | 1-7, 4-7 |
+
+--------------------------------------------------------------------------------
+
+### Early exit
+
+--------------------------------------------------------------------------------
+
+#### Feature `for_with_early_exit|while_with_early_exit`
+
+##### Derivations
+
+[⬆️ feature `break`](#feature-break)  
+[⬆️ feature `for`](#feature-for)  
+[⬆️ feature `return`](#feature-return)  
+[⬆️ feature `while`](#feature-while)  
+
+##### Specification
+
+```sql
+SELECT name_prefix || "_with_early_exit",
+       b_name_suffix,
+       span,
+       path
+FROM
+  (SELECT *
+   FROM t_for
+   UNION ALL SELECT *
+   FROM t_while)
+JOIN
+  (SELECT b.name_prefix AS b_name_suffix,
+          max(l.span_start) AS span_start
+   FROM
+     (SELECT *
+      FROM t_for
+      UNION ALL SELECT *
+      FROM t_while) l
+   JOIN
+     (SELECT *
+      FROM t_break
+      UNION ALL SELECT *
+      FROM t_return) b ON (b.path GLOB l.path || "*-")
+   GROUP BY b.rowid) USING (span_start)
+```
+
+##### Example
+
+```python
+1   for x in seq_x:
+2       for y in seq_y:
+3           if foo():
+4               break
+5       else:
+6           while True:
+7               if bizz():
+8                   break
+9   def func():
+10      for x in seq_x:
+11          for y in seq_y:
+12              if foo():
+13                  return
+14          while True:
+15              if bizz():
+16                  return
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `for_with_early_exit:break` | 2-8 |
+| `for_with_early_exit:return` | 11-13 |
+| `while_with_early_exit:break` | 6-8 |
+| `while_with_early_exit:return` | 14-16 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `for_with_else|while_with_else`
+
+##### Derivations
+
+[⬆️ feature `for`](#feature-for)  
+[⬆️ feature `loop_else`](#feature-loop_else)  
+[⬆️ feature `while`](#feature-while)  
+
+##### Specification
+
+```sql
+SELECT name_prefix || "_with_else",
+       "",
+       span,
+       path
+FROM
+  (SELECT *
+   FROM t_for
+   UNION ALL SELECT *
+   FROM t_while)
+JOIN
+  (SELECT max(l.span_start) AS span_start
+   FROM
+     (SELECT *
+      FROM t_for
+      UNION ALL SELECT *
+      FROM t_while) l
+   JOIN t_loop_else e ON (e.path GLOB l.path || "*-")
+   GROUP BY e.rowid) USING (span_start)
+```
+
+##### Example
+
+```python
+1   for x in seq:
+2       if foo():
+3           break
+4   else:
+5       bar()
+6       biz()
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `for_with_else` | 1-6 |
 
 --------------------------------------------------------------------------------
 

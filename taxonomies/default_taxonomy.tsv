@@ -17,11 +17,19 @@ control_flow/conditional/	if
 control_flow/conditional/else/	if_else_branch
 control_flow/conditional/else/chained/	if_elif_branch
 control_flow/conditional/nested/\1/	nested_if:(.+)
+control_flow/loop/non_sequential/	while
+control_flow/loop/non_sequential/divergent/break/	while_with_early_exit:break
+control_flow/loop/non_sequential/divergent/break/else/	while_with_early_exit
+control_flow/loop/non_sequential/divergent/infinite/	infinite_while
+control_flow/loop/non_sequential/divergent/return/	while_with_early_exit:return
 control_flow/loop/sequential/	for:(.+)
 control_flow/loop/sequential/arithmetic/	for_range:[^:]+
 control_flow/loop/sequential/arithmetic/start/	for_range:[^:]+:[^:]+
 control_flow/loop/sequential/arithmetic/start/step/	for_range:[^:]+:[^:]+:[^:]+
 control_flow/loop/sequential/arithmetic/start/step/backwards/	for_range:[^:]+:[^:]+:-[^:]+
+control_flow/loop/sequential/divergent/break/	for_with_early_exit:break
+control_flow/loop/sequential/divergent/break/else/	for_with_early_exit
+control_flow/loop/sequential/divergent/return/	for_with_early_exit:return
 control_flow/loop/sequential/elements_and_indexes/	for_indexes_elements
 control_flow/loop/sequential/elements/	for_each
 control_flow/loop/sequential/indexes/	for_indexes
@@ -66,8 +74,8 @@ operator/power/	binary_operator:Pow
 operator/substraction/	binary_operator:Sub
 operator/ternary/	conditional_expression
 pattern/elements/accumulate/all/	accumulate_all_elements:.+
-pattern/elements/accumulate/some/	accumulate_some_elements:.+
 pattern/elements/accumulate/count/	count_elements:.+
+pattern/elements/accumulate/some/	accumulate_some_elements:.+
 pattern/elements/find/best/	find_best_element:.+
 pattern/elements/find/first/	find_first_element:.+
 pattern/elements/satisfy/all/	universal_quantification:.+
@@ -160,14 +168,6 @@ variable/assignment/single/	single_assignment:.+
 -- EOF	
 call/function/other/	
 call/function/other/predicate/	
-control_flow/loop/non_sequential/	
-control_flow/loop/non_sequential/divergent/break/	
-control_flow/loop/non_sequential/divergent/break/else/	
-control_flow/loop/non_sequential/divergent/infinite/	
-control_flow/loop/non_sequential/divergent/return/	
-control_flow/loop/sequential/divergent/break/	
-control_flow/loop/sequential/divergent/break/else/	
-control_flow/loop/sequential/divergent/return/	
 io/standard/print/multiple/	
 io/standard/print/newline/	
 io/standard/print/without_newline/	
