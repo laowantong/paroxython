@@ -92,6 +92,7 @@
     - [Iteration keywords](#iteration-keywords)
       - [Feature `for`](#feature-for)
       - [Feature `while`](#feature-while)
+      - [Feature `loop` (SQL)](#feature-loop)
       - [Feature `break`](#feature-break)
       - [Feature `loop_else`](#feature-loop_else)
       - [Feature `continue`](#feature-continue)
@@ -2258,8 +2259,8 @@ Update a variable by negating it.
 ```python
 1   a = -a
 2   numbers[i] = -numbers[i]
-3   a -= 2 * a # LIMITATION
-4   a = -1 * a # LIMITATION
+3   a -= 2 * a # LIMITATION: no match
+4   a = -1 * a # LIMITATION: no match
 5   a = -abs(a) # no match
 ```
 
@@ -3016,8 +3017,6 @@ GROUP BY t_recursive_function.span
 
 A function is tail-recursive if and only if all its recursive calls are tail calls.
 
-**LIMITATION.** Currently, the tail recursive procedures (_i.e._, without `return`, e.g. the drawing of a fractal) are not recognized.
-
 ##### Derivations
 
 [⬆️ feature `body_recursive_function`](#feature-body_recursive_function)  
@@ -3034,6 +3033,8 @@ FROM t_recursive_function f
 LEFT JOIN t_body_recursive_function USING (span)
 WHERE t_body_recursive_function.rowid IS NULL
 ```
+
+_LIMITATION._ Currently, the tail recursive procedures (_i.e._, without `return`, e.g. the drawing of a fractal) are not recognized.
 
 ##### Example
 
@@ -3452,8 +3453,7 @@ Match sequential loops, along with their iteration variable(s).
 [⬇️ feature `find_best_element`](#feature-find_best_element)  
 [⬇️ feature `find_first_element`](#feature-find_first_element)  
 [⬇️ feature `for_range`](#feature-for_range)  
-[⬇️ feature `for_with_early_exit|while_with_early_exit`](#feature-for_with_early_exitwhile_with_early_exit)  
-[⬇️ feature `for_with_else|while_with_else`](#feature-for_with_elsewhile_with_else)  
+[⬇️ feature `loop`](#feature-loop)  
 [⬇️ feature `nested_for`](#feature-nested_for)  
 [⬇️ feature `universal_quantification|existential_quantification`](#feature-universal_quantificationexistential_quantification)  
 
@@ -3496,8 +3496,7 @@ Match sequential loops, along with their iteration variable(s).
 
 ##### Derivations
 
-[⬇️ feature `for_with_early_exit|while_with_early_exit`](#feature-for_with_early_exitwhile_with_early_exit)  
-[⬇️ feature `for_with_else|while_with_else`](#feature-for_with_elsewhile_with_else)  
+[⬇️ feature `loop`](#feature-loop)  
 
 ##### Specification
 
@@ -3524,6 +3523,46 @@ Match sequential loops, along with their iteration variable(s).
 | Label | Lines |
 |:--|:--|
 | `while` | 1-7, 2-3, 4-7 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `loop`
+
+##### Derivations
+
+[⬆️ feature `for`](#feature-for)  
+[⬆️ feature `while`](#feature-while)  
+[⬇️ feature `for_with_early_exit|while_with_early_exit`](#feature-for_with_early_exitwhile_with_early_exit)  
+[⬇️ feature `for_with_else|while_with_else`](#feature-for_with_elsewhile_with_else)  
+
+##### Specification
+
+```sql
+SELECT "loop",
+       name_prefix,
+       span,
+       path
+FROM t
+WHERE name_prefix IN ("for",
+                      "while")
+```
+
+##### Example
+
+```python
+1   while foo():
+2       while bar():
+3           pass
+4       for x in s:
+5           pass
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `loop:while` | 1-5, 2-3 |
+| `loop:for` | 4-5 |
 
 --------------------------------------------------------------------------------
 
@@ -3942,30 +3981,21 @@ Two nested `for` loops doing the same number of iterations.
 ##### Derivations
 
 [⬆️ feature `break`](#feature-break)  
-[⬆️ feature `for`](#feature-for)  
+[⬆️ feature `loop`](#feature-loop)  
 [⬆️ feature `return`](#feature-return)  
-[⬆️ feature `while`](#feature-while)  
 
 ##### Specification
 
 ```sql
-SELECT name_prefix || "_with_early_exit",
+SELECT name_suffix || "_with_early_exit",
        b_name_suffix,
        span,
        path
-FROM
-  (SELECT *
-   FROM t_for
-   UNION ALL SELECT *
-   FROM t_while)
+FROM t_loop
 JOIN
   (SELECT b.name_prefix AS b_name_suffix,
           max(l.span_start) AS span_start
-   FROM
-     (SELECT *
-      FROM t_for
-      UNION ALL SELECT *
-      FROM t_while) l
+   FROM t_loop l
    JOIN
      (SELECT *
       FROM t_break
@@ -3993,6 +4023,10 @@ JOIN
 14          while True:
 15              if bizz():
 16                  return
+17  def fail():
+18      for x in seq:
+19          if foobar(x):
+20              raise ValueError # LIMITATION: no match
 ```
 
 ##### Matches
@@ -4010,29 +4044,20 @@ JOIN
 
 ##### Derivations
 
-[⬆️ feature `for`](#feature-for)  
+[⬆️ feature `loop`](#feature-loop)  
 [⬆️ feature `loop_else`](#feature-loop_else)  
-[⬆️ feature `while`](#feature-while)  
 
 ##### Specification
 
 ```sql
-SELECT name_prefix || "_with_else",
+SELECT name_suffix || "_with_else",
        "",
        span,
        path
-FROM
-  (SELECT *
-   FROM t_for
-   UNION ALL SELECT *
-   FROM t_while)
+FROM t_loop
 JOIN
   (SELECT max(l.span_start) AS span_start
-   FROM
-     (SELECT *
-      FROM t_for
-      UNION ALL SELECT *
-      FROM t_while) l
+   FROM t_loop l
    JOIN t_loop_else e ON (e.path GLOB l.path || "*-")
    GROUP BY e.rowid) USING (span_start)
 ```
@@ -4908,7 +4933,7 @@ WHERE NOT EXISTS -- Ensure that there is no...
 38          previous_digit = digit
 ```
 
-_Limitation._ False negative when the iteration variable does not appear directly in the test of the conditional statement (cf. function `longest_progression()` above). Add a manual hint in such cases.
+_LIMITATION._ False negative when the iteration variable does not appear directly in the test of the conditional statement (cf. function `longest_progression()` above). Add a manual hint in such cases.
 
 ##### Matches
 

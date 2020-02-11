@@ -15,8 +15,9 @@ call/method/set/\1/	method_call:(add|clear|copy|difference_update|difference|dis
 class_definition/	class:.+
 control_flow/conditional/	if
 control_flow/conditional/else/	if_else_branch
-control_flow/conditional/else/chained/	if_elif_branch
+control_flow/conditional/else/if/	if_elif_branch
 control_flow/conditional/nested/\1/	nested_if:(.+)
+control_flow/loop/	loop:.+
 control_flow/loop/non_sequential/	while
 control_flow/loop/non_sequential/divergent/break/	while_with_early_exit:break
 control_flow/loop/non_sequential/divergent/break/else/	while_with_early_exit

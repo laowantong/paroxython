@@ -72,6 +72,8 @@
 - literal:Num / fizzbuzz.py / 1, 1, 2, 2, 4, 4, 6, 6
 - literal:Num / is_even.py / 2, 2
 - literal:Str / fizzbuzz.py / 3, 5, 7
+- loop:for / fizzbuzz.py / 1-9
+- loop:while / collatz_print.py / 2-7
 - range:1:101 / fizzbuzz.py / 1
 - return / is_even.py / 2
 - single_assignment:a / assignment.py / 1
@@ -157,6 +159,7 @@
 - instance_method|class_method|static_method
 - lambda_function
 - literal
+- loop
 - loop_else
 - method
 - method_call

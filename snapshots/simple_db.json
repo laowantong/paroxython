@@ -50,6 +50,7 @@
         "int_literal": [[2,2],[4,4],[4,4],[5,5],[7,7],[7,7]],
         "lines_of_code:8": [[1,8]],
         "literal:Num": [[2,2],[4,4],[4,4],[7,7],[7,7]],
+        "loop:while": [[2,7]],
         "single_assignment:n": [[5,5],[7,7]],
         "suggest_augmented_assignment": [[5,5]],
         "suggest_conditional_expression": [[4,7]],
@@ -113,6 +114,7 @@
         "lines_of_code:9": [[1,9]],
         "literal:Num": [[1,1],[1,1],[2,2],[2,2],[4,4],[4,4],[6,6],[6,6]],
         "literal:Str": [[3,3],[5,5],[7,7]],
+        "loop:for": [[1,9]],
         "range:1:101": [[1,1]],
         "suggest_constant_definition": [[2,2],[4,4],[6,6]]
       },
@@ -120,7 +122,8 @@
         "call/function/builtin/range/": [[1,1]],
         "control_flow/conditional/": [[2,9],[4,9],[6,9]],
         "control_flow/conditional/else/": [[9,9]],
-        "control_flow/conditional/else/chained/": [[5,5],[7,7]],
+        "control_flow/conditional/else/if/": [[5,5],[7,7]],
+        "control_flow/loop/sequential/": [[1,9]],
         "control_flow/loop/sequential/arithmetic/start/": [[1,9]],
         "io/standard/print/": [[3,3],[5,5],[7,7],[9,9]],
         "operator/percent/modulo/": [[2,2],[4,4],[6,6]],
@@ -286,6 +289,9 @@
       "tests/data/simple/fizzbuzz.py",
       "tests/data/simple/is_even.py"
     ],
+    "loop:while": [
+      "tests/data/simple/collatz_print.py"
+    ],
     "single_assignment:n": [
       "tests/data/simple/collatz_print.py"
     ],
@@ -374,6 +380,9 @@
     "literal:Str": [
       "tests/data/simple/fizzbuzz.py"
     ],
+    "loop:for": [
+      "tests/data/simple/fizzbuzz.py"
+    ],
     "range:1:101": [
       "tests/data/simple/fizzbuzz.py"
     ],
@@ -459,7 +468,10 @@
     "call/function/builtin/range/": [
       "tests/data/simple/fizzbuzz.py"
     ],
-    "control_flow/conditional/else/chained/": [
+    "control_flow/conditional/else/if/": [
+      "tests/data/simple/fizzbuzz.py"
+    ],
+    "control_flow/loop/sequential/": [
       "tests/data/simple/fizzbuzz.py"
     ],
     "control_flow/loop/sequential/arithmetic/start/": [
