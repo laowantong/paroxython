@@ -178,11 +178,12 @@
 - slice_lower
 - slice_step
 - slice_upper
+- slide
 - square_nested_for
 - string_formatting_operator
 - suggest_comparison_chaining
 - suggest_condition_return
-- swapping
+- swap
 - tail_recursive_function
 - triangular_nested_for
 - try

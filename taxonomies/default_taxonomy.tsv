@@ -140,7 +140,8 @@ type/container/range/empty/	range:0
 type/container/set/	literal:Set
 type/container/set/empty/	function_call_without_arguments:set
 type/container/tuple/	literal:Tuple
-type/container/tuple/assignment/swapping/	swapping
+type/container/tuple/assignment/slide/	slide
+type/container/tuple/assignment/swap/	swap
 type/container/tuple/empty/	falsey_literal:Tuple
 type/container/tuple/empty/	function_call_without_arguments:tuple
 type/elementary/bool/false/	function_call_without_arguments:bool

@@ -481,7 +481,7 @@ def fib_iterative(n): # function_argument:n, function_argument_flavor:arg
         seq_out = [0, 1] # assignment, assignment_lhs_identifier:seq_out, assignment_rhs_atom:0, assignment_rhs_atom:1, falsey_literal:0, if_then_branch (-> +5), int_literal, literal:List, literal:Num, single_assignment:seq_out
         a, b = 0, 1 # assignment, assignment_lhs_identifier:a, assignment_lhs_identifier:b, assignment_rhs_atom:0, assignment_rhs_atom:1, falsey_literal:0, int_literal, literal:Num, literal:Tuple
         for _ in range(n - len(seq_out)): # binary_operator:Sub, call_argument:, call_argument:seq_out, composition, for:_ (-> +2), for_range:_ (-> +2), function_call:len, function_call:range, loop:for (-> +2), range:_
-            a, b = b, a + b # assignment, assignment_lhs_identifier:a, assignment_lhs_identifier:b, assignment_rhs_atom:a, assignment_rhs_atom:b, binary_operator:Add, variable_update:a:b, variable_update:b:a, variable_update_by_assignment:a:b, variable_update_by_assignment:b:a
+            a, b = b, a + b # assignment, assignment_lhs_identifier:a, assignment_lhs_identifier:b, assignment_rhs_atom:a, assignment_rhs_atom:b, binary_operator:Add, slide, variable_update:a:b, variable_update:b:a, variable_update_by_assignment:a:b, variable_update_by_assignment:b:a
             seq_out.append(b) # call_argument:b, method_call:append, method_call_object:seq_out, variable_update:seq_out:b, variable_update_by_method_call:seq_out:b
         return seq_out # return:seq_out
 @timer_decorator # decorated_function:fib_formula (-> +13), function:fib_formula (-> +13), function_decorator:timer_decorator (-> +13), function_returning_something:fib_formula (-> +13)
@@ -580,7 +580,7 @@ def greatest_common_divisor(a, b): # function:greatest_common_divisor (-> +1), f
     return b if a == 0 else greatest_common_divisor(b % a, a) # binary_operator:Mod, call_argument:, call_argument:a, comparison_operator:Eq, conditional_expression, falsey_literal:0, function_call:greatest_common_divisor, function_tail_call:greatest_common_divisor, int_literal, literal:Num, return
 def gcd_by_iterative(x, y): # function:gcd_by_iterative (-> +3), function_argument:x, function_argument:y, function_argument_flavor:arg, function_returning_something:gcd_by_iterative (-> +3)
     while y: # loop:while (-> +1), while (-> +1)
-        x, y = y, x % y # assignment, assignment_lhs_identifier:x, assignment_lhs_identifier:y, assignment_rhs_atom:x, assignment_rhs_atom:y, binary_operator:Mod, variable_update:x:y, variable_update:y:x, variable_update_by_assignment:x:y, variable_update_by_assignment:y:x
+        x, y = y, x % y # assignment, assignment_lhs_identifier:x, assignment_lhs_identifier:y, assignment_rhs_atom:x, assignment_rhs_atom:y, binary_operator:Mod, slide, variable_update:x:y, variable_update:y:x, variable_update_by_assignment:x:y, variable_update_by_assignment:y:x
     return x # return:x
 def main(): # function:main (-> +10), function_returning_nothing:main (-> +10), function_without_arguments:main (-> +10)
     try: # try (-> +9), try_except:IndexError (-> +9), try_except:UnboundLocalError (-> +9), try_except:ValueError (-> +9)

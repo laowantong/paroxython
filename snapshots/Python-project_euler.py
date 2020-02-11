@@ -123,7 +123,7 @@ def solution(n): # function:solution (-> +8), function_argument:n, function_argu
     while j <= n: # comparison_operator:LtE, loop:while (-> +3), while (-> +3)
         if j % 2 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, falsey_literal:0, if (-> +1), if_test_atom:0, if_test_atom:2, if_test_atom:j, int_literal, literal:Num
             sum += j # assignment_lhs_identifier:sum, assignment_rhs_atom:j, augmented_assignment:Add, if_then_branch, variable_update:sum:j, variable_update_by_augmented_assignment:sum:j
-        i, j = j, i + j # assignment, assignment_lhs_identifier:i, assignment_lhs_identifier:j, assignment_rhs_atom:i, assignment_rhs_atom:j, binary_operator:Add, variable_update:i:j, variable_update:j:i, variable_update_by_assignment:i:j, variable_update_by_assignment:j:i
+        i, j = j, i + j # assignment, assignment_lhs_identifier:i, assignment_lhs_identifier:j, assignment_rhs_atom:i, assignment_rhs_atom:j, binary_operator:Add, slide, variable_update:i:j, variable_update:j:i, variable_update_by_assignment:i:j, variable_update_by_assignment:j:i
     return sum # return:sum
 
 # ----------------------------------------------------------------------------------------
@@ -135,7 +135,7 @@ def solution(n): # function:solution (-> +7), function_argument:n, function_argu
     while b <= n: # comparison_operator:LtE, loop:while (-> +3), while (-> +3)
         if b % 2 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, falsey_literal:0, if (-> +1), if_test_atom:0, if_test_atom:2, if_test_atom:b, int_literal, literal:Num
             ls.append(b) # call_argument:b, if_then_branch, method_call:append, method_call_object:ls, variable_update:ls:b, variable_update_by_method_call:ls:b
-        a, b = b, a + b # assignment, assignment_lhs_identifier:a, assignment_lhs_identifier:b, assignment_rhs_atom:a, assignment_rhs_atom:b, binary_operator:Add, variable_update:a:b, variable_update:b:a, variable_update_by_assignment:a:b, variable_update_by_assignment:b:a
+        a, b = b, a + b # assignment, assignment_lhs_identifier:a, assignment_lhs_identifier:b, assignment_rhs_atom:a, assignment_rhs_atom:b, binary_operator:Add, slide, variable_update:a:b, variable_update:b:a, variable_update_by_assignment:a:b, variable_update_by_assignment:b:a
     return ls # return:ls
 
 # ----------------------------------------------------------------------------------------
@@ -148,7 +148,7 @@ def solution(n): # function:solution (-> +9), function_argument:n, function_argu
     b = 2 # assignment, assignment_lhs_identifier:b, assignment_rhs_atom:2, int_literal, literal:Num, single_assignment:b
     count = 0 # assignment, assignment_lhs_identifier:count, assignment_rhs_atom:0, falsey_literal:0, int_literal, literal:Num, single_assignment:count
     while 4 * b + a <= n: # binary_operator:Add, binary_operator:Mult, comparison_operator:LtE, int_literal, literal:Num, loop:while (-> +2), suggest_constant_definition, while (-> +2)
-        a, b = b, 4 * b + a # assignment, assignment_lhs_identifier:a, assignment_lhs_identifier:b, assignment_rhs_atom:4, assignment_rhs_atom:a, assignment_rhs_atom:b, binary_operator:Add, binary_operator:Mult, int_literal, literal:Num, suggest_constant_definition, variable_update:a:4, variable_update:a:b, variable_update:b:4, variable_update:b:a, variable_update_by_assignment:a:4, variable_update_by_assignment:a:b, variable_update_by_assignment:b:4, variable_update_by_assignment:b:a
+        a, b = b, 4 * b + a # assignment, assignment_lhs_identifier:a, assignment_lhs_identifier:b, assignment_rhs_atom:4, assignment_rhs_atom:a, assignment_rhs_atom:b, binary_operator:Add, binary_operator:Mult, int_literal, literal:Num, slide, suggest_constant_definition, variable_update:a:4, variable_update:a:b, variable_update:b:4, variable_update:b:a, variable_update_by_assignment:a:4, variable_update_by_assignment:a:b, variable_update_by_assignment:b:4, variable_update_by_assignment:b:a
         count += a # assignment_lhs_identifier:count, assignment_rhs_atom:a, augmented_assignment:Add, variable_update:count:a, variable_update_by_augmented_assignment:count:a
     return count + b # binary_operator:Add, return
 
@@ -1090,7 +1090,7 @@ def solution(n): # function:solution (-> +1), function_argument:n, function_argu
 def fibonacci_generator(): # function:fibonacci_generator (-> +4), function_without_arguments:fibonacci_generator (-> +4), generator:fibonacci_generator (-> +4), lines_of_code:11 (-> +10)
     a, b = 0, 1 # assignment, assignment_lhs_identifier:a, assignment_lhs_identifier:b, assignment_rhs_atom:0, assignment_rhs_atom:1, falsey_literal:0, int_literal, literal:Num, literal:Tuple
     while True: # infinite_while (-> +2), literal:True, loop:while (-> +2), while (-> +2)
-        a, b = b, a + b # assignment, assignment_lhs_identifier:a, assignment_lhs_identifier:b, assignment_rhs_atom:a, assignment_rhs_atom:b, binary_operator:Add, variable_update:a:b, variable_update:b:a, variable_update_by_assignment:a:b, variable_update_by_assignment:b:a
+        a, b = b, a + b # assignment, assignment_lhs_identifier:a, assignment_lhs_identifier:b, assignment_rhs_atom:a, assignment_rhs_atom:b, binary_operator:Add, slide, variable_update:a:b, variable_update:b:a, variable_update_by_assignment:a:b, variable_update_by_assignment:b:a
         yield b # yield:b
 def solution(n): # function:solution (-> +5), function_argument:n, function_argument_flavor:arg, function_returning_something:solution (-> +5)
     answer = 1 # assignment, assignment_lhs_identifier:answer, assignment_rhs_atom:1, int_literal, literal:Num, single_assignment:answer
@@ -1108,7 +1108,7 @@ def solution(n): # function:solution (-> +12), function_argument:n, function_arg
     while True: # infinite_while (-> +8), literal:True, loop:while (-> +8), while (-> +8), while_with_early_exit:break (-> +8)
         i = 0 # assignment, assignment_lhs_identifier:i, assignment_rhs_atom:0, falsey_literal:0, int_literal, literal:Num, single_assignment:i
         f = f1 + f2 # assignment, assignment_lhs_identifier:f, assignment_rhs_atom:f1, assignment_rhs_atom:f2, binary_operator:Add, single_assignment:f
-        f1, f2 = f2, f # assignment, assignment_lhs_identifier:f1, assignment_lhs_identifier:f2, assignment_rhs_atom:f, assignment_rhs_atom:f2, variable_update:f2:f, variable_update_by_assignment:f2:f
+        f1, f2 = f2, f # assignment, assignment_lhs_identifier:f1, assignment_lhs_identifier:f2, assignment_rhs_atom:f, assignment_rhs_atom:f2, slide, variable_update:f2:f, variable_update_by_assignment:f2:f
         index += 1 # assignment_lhs_identifier:index, assignment_rhs_atom:1, augmented_assignment:Add, int_literal, literal:Num, variable_increment:index, variable_update:index:1, variable_update_by_augmented_assignment:index:1
         for j in str(f): # call_argument:f, count_elements:i (-> +1), for:j (-> +1), function_call:str, loop:for (-> +1)
             i += 1 # assignment_lhs_identifier:i, assignment_rhs_atom:1, augmented_assignment:Add, int_literal, literal:Num, variable_increment:i, variable_update:i:1, variable_update_by_augmented_assignment:i:1

@@ -57,7 +57,8 @@
       - [Feature `variable_update_by_method_call` (SQL)](#feature-variable_update_by_method_call)
       - [Feature `variable_update` (SQL)](#feature-variable_update)
       - [Feature `variable_increment`](#feature-variable_increment)
-      - [Feature `swapping`](#feature-swapping)
+      - [Feature `swap`](#feature-swap)
+      - [Feature `slide`](#feature-slide)
       - [Feature `negation`](#feature-negation)
   - [Function definitions](#function-definitions)
     - [Interface](#interface)
@@ -2174,7 +2175,7 @@ WHERE name_prefix IN ("variable_update_by_assignment",
 
 --------------------------------------------------------------------------------
 
-#### Feature `swapping`
+#### Feature `swap`
 
 Swap two variables or two elements of an array with a 2-element tuple or list.
 
@@ -2196,13 +2197,49 @@ Swap two variables or two elements of an array with a 2-element tuple or list.
 2   [a, b] = [b, a]
 3   (a[0], a[1]) = (a[1], a[0])
 4   (a[i], a[i + 1]) = (a[i + 1], a[i])
+5   
+6   aux = x # LIMITATION: no match for the traditional method with a temporary variable
+7   x = y
+8   y = aux
 ```
 
 ##### Matches
 
 | Label | Lines |
 |:--|:--|
-| `swapping` | 1, 2, 3, 4 |
+| `swap` | 1, 2, 3, 4 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `slide`
+
+« Slide » a window on two variables, the value of the second one being copied in the first one.
+
+##### Specification
+
+```re
+           ^(.*)/_type=Assign
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
+\n(?:\1.+\n)*?\1/assigntargets/1/elts/1/_hash=(?P<HASH_A>.+)
+\n(?:\1.+\n)*?\1/assigntargets/1/elts/2/_hash=(?P<HASH_B>.+)
+\n(?:\1.+\n)*?\1/assignvalue/elts/1/_hash=(?P=HASH_B)
+\n(?:\1.+\n)*?\1/assignvalue/elts/2/_hash=(?!(?P=HASH_A)).+
+```
+
+##### Example
+
+```python
+1   (a, b) = (b, a + b) # cf. Fibonacci
+2   (a, b) = (b, a % b) # cf. Greatest Common Divisor
+3   (array[pivot_index], array[i]) = (array[i], pivot) # cf. Quick Sort
+4   (a, b) = (b, a) # no match
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `slide` | 1 |
 
 --------------------------------------------------------------------------------
 
