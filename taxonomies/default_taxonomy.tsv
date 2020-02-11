@@ -4,7 +4,7 @@ call/function/builtin/\1/	function_call:(abs|delattr|hash|memoryview|all|help|mi
 call/function/builtin/casting/\1/	function_call:(set|dict|bool|int|bytearray|bytes|float|tuple|frozenset|list|complex)
 call/function/predicate/	function_call:(is_|are_).+
 call/function/without_arguments/	function_call_without_arguments:.+
-call/method/	method_call
+call/method/	method_call:.+
 call/method/chaining/	method_chaining
 call/method/dictionary/\1/	method_call:(clear|copy|fromkeys|get|items|keys|pop|popitem|reversed|setdefault|update|values)
 call/method/sequence/\1/	method_call:(count|index)

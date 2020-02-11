@@ -163,7 +163,6 @@
 - loop_else
 - method
 - method_call
-- method_call_name
 - method_call_object
 - method_chaining
 - negation

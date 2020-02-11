@@ -32,7 +32,6 @@
       - [Feature `function_tail_call`](#feature-function_tail_call)
       - [Feature `call_argument`](#feature-call_argument)
       - [Feature `method_call`](#feature-method_call)
-      - [Feature `method_call_name`](#feature-method_call_name)
       - [Feature `method_call_object`](#feature-method_call_object)
       - [Feature `method_chaining`](#feature-method_chaining)
       - [Feature `composition`](#feature-composition)
@@ -1068,7 +1067,7 @@ _Remark._ Note the user-defined function `REGEXP` in the `WHERE`clause. It calls
 
 #### Feature `short_circuit`
 
-When the value of the left operand suffices to determine the value of a boolean expression, short-circuit evaluation skips the right operand. This behaviour is sometimes desirable or even required, but Paroxython currently cannot detect the case: so, when commutating the operands would result in an error or a performance penalty, you should add manually the hint `# paroxython: short_circuit` in the source-code.
+When the value of the left operand suffices to determine the value of a boolean expression, short-circuit evaluation skips the right operand. This behaviour is sometimes desirable or even required, but Paroxython currently cannot detect the case: so, when commutating the operands would result in an error or a performance penalty, you should add manually the hint `# paroxython: short_circuit` in the source-code. The suffix shoud be either `And`, `Or` or omitted.
 
 ##### Specification
 
@@ -1124,7 +1123,7 @@ When the value of the left operand suffices to determine the value of a boolean 
 2   bar()
 3   buzz(x, 2)
 4   fizz(foobar(x), 2)
-5   baz.qux() # no match, see feature method_call_name
+5   baz.qux() # no match, see feature method_call
 ```
 
 ##### Matches
@@ -1318,36 +1317,6 @@ Otherwise, suffix it with an empty string.
            ^(.*)/_type=Call
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/func/_type=Attribute
-```
-
-##### Example
-
-```python
-1   seq.index(42)
-2   foo(bar)  # no match
-3   seq.index # no match
-```
-
-##### Matches
-
-| Label | Lines |
-|:--|:--|
-| `method_call` | 1 |
-
---------------------------------------------------------------------------------
-
-#### Feature `method_call_name`
-
-##### Derivations
-
-[⬇️ feature `variable_update_by_method_call`](#feature-variable_update_by_method_call)  
-
-##### Specification
-
-```re
-           ^(.*)/_type=Call
-\n(?:\1.+\n)*?\1/func/_type=Attribute
-\n(?:\1.+\n)*?\1/func/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/func/attr=(?P<SUFFIX>.+)
 ```
 
@@ -1363,7 +1332,7 @@ Otherwise, suffix it with an empty string.
 
 | Label | Lines |
 |:--|:--|
-| `method_call_name:index` | 1 |
+| `method_call:index` | 1 |
 
 --------------------------------------------------------------------------------
 
@@ -2046,7 +2015,6 @@ The method must mutate the object it is applied on. Obviously, only a handful of
 
 [⬆️ feature `call_argument`](#feature-call_argument)  
 [⬆️ feature `method_call`](#feature-method_call)  
-[⬆️ feature `method_call_name`](#feature-method_call_name)  
 [⬆️ feature `method_call_object`](#feature-method_call_object)  
 [⬇️ feature `variable_update`](#feature-variable_update)  
 
@@ -2059,10 +2027,9 @@ SELECT "variable_update_by_method_call",
        op.path
 FROM t_method_call AS op
 JOIN t_method_call_object AS lhs_acc ON (lhs_acc.path GLOB op.path || "*-")
-JOIN t_method_call_name AS rhs_acc ON (rhs_acc.path GLOB op.path || "*-")
 JOIN t_call_argument AS rhs_var ON (rhs_var.path GLOB op.path || "*-")
 WHERE rhs_var.name_suffix != ""
-  AND rhs_acc.name_suffix REGEXP "(append|extend|insert|add|update)$"
+  AND op.name_suffix REGEXP "(append|extend|insert|add|update)$"
 GROUP BY op.span,
          lhs_acc.name,
          rhs_var.name
