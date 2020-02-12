@@ -42,8 +42,12 @@
         [[4,4]]
       ],
       [
-        "assignment",
-        [[5,5],[7,7]]
+        "assignment:Add",
+        [[7,7]]
+      ],
+      [
+        "assignment:FloorDiv",
+        [[5,5]]
       ],
       [
         "assignment_lhs_identifier:n",
@@ -182,28 +186,44 @@
         [[6,6]]
       ],
       [
-        "variable_update:n:1",
+        "update:n:1",
         [[7,7]]
       ],
       [
-        "variable_update:n:2",
+        "update:n:2",
         [[5,5]]
       ],
       [
-        "variable_update:n:3",
+        "update:n:3",
         [[7,7]]
       ],
       [
-        "variable_update_by_assignment:n:1",
+        "update_by_assignment:n:1",
         [[7,7]]
       ],
       [
-        "variable_update_by_assignment:n:2",
+        "update_by_assignment:n:2",
         [[5,5]]
       ],
       [
-        "variable_update_by_assignment:n:3",
+        "update_by_assignment:n:3",
         [[7,7]]
+      ],
+      [
+        "update_by_assignment_with:Add",
+        [[7,7]]
+      ],
+      [
+        "update_by_assignment_with:FloorDiv",
+        [[5,5]]
+      ],
+      [
+        "update_with:Add",
+        [[7,7]]
+      ],
+      [
+        "update_with:FloorDiv",
+        [[5,5]]
       ],
       [
         "while",

@@ -52,14 +52,18 @@
       - [Feature `assignment_lhs_identifier`](#feature-assignment_lhs_identifier)
       - [Feature `assignment_rhs_atom`](#feature-assignment_rhs_atom)
     - [Assignment idioms](#assignment-idioms)
-      - [Feature `variable_update_by_assignment` (SQL)](#feature-variable_update_by_assignment)
-      - [Feature `variable_update_by_augmented_assignment` (SQL)](#feature-variable_update_by_augmented_assignment)
-      - [Feature `variable_update_by_method_call` (SQL)](#feature-variable_update_by_method_call)
-      - [Feature `variable_update` (SQL)](#feature-variable_update)
-      - [Feature `variable_increment`](#feature-variable_increment)
+      - [Feature `update_by_assignment` (SQL)](#feature-update_by_assignment)
+      - [Feature `update_by_augmented_assignment` (SQL)](#feature-update_by_augmented_assignment)
+      - [Feature `update_by_method_call` (SQL)](#feature-update_by_method_call)
+      - [Feature `update` (SQL)](#feature-update)
+      - [Feature `update_by_assignment_with` (SQL)](#feature-update_by_assignment_with)
+      - [Feature `update_by_augmented_assignment_with` (SQL)](#feature-update_by_augmented_assignment_with)
+      - [Feature `update_by_method_call_with` (SQL)](#feature-update_by_method_call_with)
+      - [Feature `update_with` (SQL)](#feature-update_with)
+      - [Feature `increment`](#feature-increment)
       - [Feature `swap`](#feature-swap)
       - [Feature `slide`](#feature-slide)
-      - [Feature `negation`](#feature-negation)
+      - [Feature `negate`](#feature-negate)
   - [Function definitions](#function-definitions)
     - [Interface](#interface)
       - [Feature `function`](#feature-function)
@@ -1255,7 +1259,7 @@ Otherwise, suffix it with an empty string.
 ##### Derivations
 
 [⬇️ feature `range`](#feature-range)  
-[⬇️ feature `variable_update_by_method_call`](#feature-variable_update_by_method_call)  
+[⬇️ feature `update_by_method_call`](#feature-update_by_method_call)  
 
 ##### Specification
 
@@ -1310,7 +1314,8 @@ Otherwise, suffix it with an empty string.
 
 ##### Derivations
 
-[⬇️ feature `variable_update_by_method_call`](#feature-variable_update_by_method_call)  
+[⬇️ feature `update_by_method_call`](#feature-update_by_method_call)  
+[⬇️ feature `update_by_method_call_with`](#feature-update_by_method_call_with)  
 
 ##### Specification
 
@@ -1341,7 +1346,7 @@ Otherwise, suffix it with an empty string.
 
 ##### Derivations
 
-[⬇️ feature `variable_update_by_method_call`](#feature-variable_update_by_method_call)  
+[⬇️ feature `update_by_method_call`](#feature-update_by_method_call)  
 
 ##### Specification
 
@@ -1657,13 +1662,30 @@ Match a comprehension with an `if` clause.
 
 ##### Derivations
 
-[⬇️ feature `variable_update_by_assignment`](#feature-variable_update_by_assignment)  
+[⬇️ feature `update_by_assignment`](#feature-update_by_assignment)  
+[⬇️ feature `update_by_assignment_with`](#feature-update_by_assignment_with)  
 
 ##### Specification
 
 ```re
            ^(.*)/_type=Assign
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
+\n(?:\1.+\n)*?\1/assignvalue/_type=
+(
+                                   BinOp
+\n(?:\1.+\n)*?\1/assignvalue/op/_type=(?P<SUFFIX>.+)
+|
+                                   Call
+\n(?:\1.+\n)*?\1/assignvalue/func/(attr|id)=(?P<SUFFIX>.+)
+|
+                                   Num
+\n(?:\1.+\n)*?\1/assignvalue/n=(?P<SUFFIX>.+)
+|
+                                   NameConstant
+\n(?:\1.+\n)*?\1/assignvalue/value=(?P<SUFFIX>.+)
+|
+)
+
 ```
 
 ##### Example
@@ -1672,13 +1694,20 @@ Match a comprehension with an `if` clause.
 1   a = 42
 2   (a, b) = (1, 2)
 3   a[0] = b[0]
+4   a = foo(a, b)
+5   a = b + c * d
+6   a = foo.bar(b)
 ```
 
 ##### Matches
 
 | Label | Lines |
 |:--|:--|
-| `assignment` | 1, 2, 3 |
+| `assignment:42` | 1 |
+| `assignment` | 2, 3 |
+| `assignment:foo` | 4 |
+| `assignment:Add` | 5 |
+| `assignment:bar` | 6 |
 
 --------------------------------------------------------------------------------
 
@@ -1720,7 +1749,8 @@ Match a comprehension with an `if` clause.
 ##### Derivations
 
 [⬇️ feature `concatenation_operator|replication_operator`](#feature-concatenation_operatorreplication_operator)  
-[⬇️ feature `variable_update_by_augmented_assignment`](#feature-variable_update_by_augmented_assignment)  
+[⬇️ feature `update_by_augmented_assignment`](#feature-update_by_augmented_assignment)  
+[⬇️ feature `update_by_augmented_assignment_with`](#feature-update_by_augmented_assignment_with)  
 
 ##### Specification
 
@@ -1789,8 +1819,8 @@ Capture any identifier appearing on the left hand side of an assignment (possibl
 [⬇️ feature `count_inputs`](#feature-count_inputs)  
 [⬇️ feature `find_best_element`](#feature-find_best_element)  
 [⬇️ feature `get_valid_input`](#feature-get_valid_input)  
-[⬇️ feature `variable_update_by_assignment`](#feature-variable_update_by_assignment)  
-[⬇️ feature `variable_update_by_augmented_assignment`](#feature-variable_update_by_augmented_assignment)  
+[⬇️ feature `update_by_assignment`](#feature-update_by_assignment)  
+[⬇️ feature `update_by_augmented_assignment`](#feature-update_by_augmented_assignment)  
 
 ##### Specification
 
@@ -1852,8 +1882,8 @@ Capture any [_atom_](#feature-call_argument) appearing on the right hand side of
 ##### Derivations
 
 [⬇️ feature `find_best_element`](#feature-find_best_element)  
-[⬇️ feature `variable_update_by_assignment`](#feature-variable_update_by_assignment)  
-[⬇️ feature `variable_update_by_augmented_assignment`](#feature-variable_update_by_augmented_assignment)  
+[⬇️ feature `update_by_assignment`](#feature-update_by_assignment)  
+[⬇️ feature `update_by_augmented_assignment`](#feature-update_by_augmented_assignment)  
 
 ##### Specification
 
@@ -1904,7 +1934,7 @@ Capture any [_atom_](#feature-call_argument) appearing on the right hand side of
 
 --------------------------------------------------------------------------------
 
-#### Feature `variable_update_by_assignment`
+#### Feature `update_by_assignment`
 
 Match the reassignment of a variable `x` and capture its name in the first part of the suffix. In the second part, match any atom distinct from `x` and participating to the update (this excludes any function name).
 
@@ -1913,12 +1943,13 @@ Match the reassignment of a variable `x` and capture its name in the first part 
 [⬆️ feature `assignment`](#feature-assignment)  
 [⬆️ feature `assignment_lhs_identifier`](#feature-assignment_lhs_identifier)  
 [⬆️ feature `assignment_rhs_atom`](#feature-assignment_rhs_atom)  
-[⬇️ feature `variable_update`](#feature-variable_update)  
+[⬇️ feature `update`](#feature-update)  
+[⬇️ feature `update_by_assignment_with`](#feature-update_by_assignment_with)  
 
 ##### Specification
 
 ```sql
-SELECT "variable_update_by_assignment",
+SELECT "update_by_assignment",
        lhs_acc.name_suffix || ":" || rhs_var.name_suffix,
        op.span,
        op.path
@@ -1947,16 +1978,16 @@ GROUP BY op.span,
 
 | Label | Lines |
 |:--|:--|
-| `variable_update_by_assignment:foo:a` | 1 |
-| `variable_update_by_assignment:bar:5` | 2, 3 |
-| `variable_update_by_assignment:x:y` | 4 |
-| `variable_update_by_assignment:y:x` | 4 |
-| `variable_update_by_assignment:a:b` | 5 |
-| `variable_update_by_assignment:b:a` | 5 |
+| `update_by_assignment:foo:a` | 1 |
+| `update_by_assignment:bar:5` | 2, 3 |
+| `update_by_assignment:x:y` | 4 |
+| `update_by_assignment:y:x` | 4 |
+| `update_by_assignment:a:b` | 5 |
+| `update_by_assignment:b:a` | 5 |
 
 --------------------------------------------------------------------------------
 
-#### Feature `variable_update_by_augmented_assignment`
+#### Feature `update_by_augmented_assignment`
 
 Match the augmented assignment of a variable `x` and capture its name in the first part of the suffix. In the second part, match any atom participating to the update (this excludes any function name).
 
@@ -1965,12 +1996,13 @@ Match the augmented assignment of a variable `x` and capture its name in the fir
 [⬆️ feature `assignment_lhs_identifier`](#feature-assignment_lhs_identifier)  
 [⬆️ feature `assignment_rhs_atom`](#feature-assignment_rhs_atom)  
 [⬆️ feature `augmented_assignment`](#feature-augmented_assignment)  
-[⬇️ feature `variable_update`](#feature-variable_update)  
+[⬇️ feature `update`](#feature-update)  
+[⬇️ feature `update_by_augmented_assignment_with`](#feature-update_by_augmented_assignment_with)  
 
 ##### Specification
 
 ```sql
-SELECT "variable_update_by_augmented_assignment",
+SELECT "update_by_augmented_assignment",
        lhs_acc.name_suffix || ":" || rhs_var.name_suffix,
        op.span,
        op.path
@@ -1996,19 +2028,19 @@ GROUP BY op.span,
 
 | Label | Lines |
 |:--|:--|
-| `variable_update_by_augmented_assignment:foo:a` | 1, 2 |
-| `variable_update_by_augmented_assignment:buzz:a` | 3 |
-| `variable_update_by_augmented_assignment:buzz:b` | 3 |
-| `variable_update_by_augmented_assignment:buzz:c` | 3 |
-| `variable_update_by_augmented_assignment:s:1` | 4 |
-| `variable_update_by_augmented_assignment:s:x` | 4 |
-| `variable_update_by_augmented_assignment:c:1` | 5 |
-| `variable_update_by_augmented_assignment:c:c` | 5 |
-| `variable_update_by_augmented_assignment:c:i` | 5 |
+| `update_by_augmented_assignment:foo:a` | 1, 2 |
+| `update_by_augmented_assignment:buzz:a` | 3 |
+| `update_by_augmented_assignment:buzz:b` | 3 |
+| `update_by_augmented_assignment:buzz:c` | 3 |
+| `update_by_augmented_assignment:s:1` | 4 |
+| `update_by_augmented_assignment:s:x` | 4 |
+| `update_by_augmented_assignment:c:1` | 5 |
+| `update_by_augmented_assignment:c:c` | 5 |
+| `update_by_augmented_assignment:c:i` | 5 |
 
 --------------------------------------------------------------------------------
 
-#### Feature `variable_update_by_method_call`
+#### Feature `update_by_method_call`
 
 The method must mutate the object it is applied on. Obviously, only a handful of such methods can be statically detected.
 
@@ -2017,12 +2049,13 @@ The method must mutate the object it is applied on. Obviously, only a handful of
 [⬆️ feature `call_argument`](#feature-call_argument)  
 [⬆️ feature `method_call`](#feature-method_call)  
 [⬆️ feature `method_call_object`](#feature-method_call_object)  
-[⬇️ feature `variable_update`](#feature-variable_update)  
+[⬇️ feature `update`](#feature-update)  
+[⬇️ feature `update_by_method_call_with`](#feature-update_by_method_call_with)  
 
 ##### Specification
 
 ```sql
-SELECT "variable_update_by_method_call",
+SELECT "update_by_method_call",
        lhs_acc.name_suffix || ":" || rhs_var.name_suffix,
        op.span,
        op.path
@@ -2047,20 +2080,20 @@ GROUP BY op.span,
 
 | Label | Lines |
 |:--|:--|
-| `variable_update_by_method_call:foo:a` | 1 |
-| `variable_update_by_method_call:seq:s` | 2 |
+| `update_by_method_call:foo:a` | 1 |
+| `update_by_method_call:seq:s` | 2 |
 
 --------------------------------------------------------------------------------
 
-#### Feature `variable_update`
+#### Feature `update`
 
 Match the update of a variable `x` and capture its name in the first part of the suffix. In the second part, match any atom distinct from `x` and participating to the update (this excludes any function name).
 
 ##### Derivations
 
-[⬆️ feature `variable_update_by_assignment`](#feature-variable_update_by_assignment)  
-[⬆️ feature `variable_update_by_augmented_assignment`](#feature-variable_update_by_augmented_assignment)  
-[⬆️ feature `variable_update_by_method_call`](#feature-variable_update_by_method_call)  
+[⬆️ feature `update_by_assignment`](#feature-update_by_assignment)  
+[⬆️ feature `update_by_augmented_assignment`](#feature-update_by_augmented_assignment)  
+[⬆️ feature `update_by_method_call`](#feature-update_by_method_call)  
 [⬇️ feature `accumulate_elements`](#feature-accumulate_elements)  
 [⬇️ feature `accumulate_inputs`](#feature-accumulate_inputs)  
 [⬇️ feature `accumulate_some_elements`](#feature-accumulate_some_elements)  
@@ -2068,14 +2101,14 @@ Match the update of a variable `x` and capture its name in the first part of the
 ##### Specification
 
 ```sql
-SELECT "variable_update",
+SELECT "update",
        t.name_suffix,
        t.span,
        t.path
 FROM t
-WHERE name_prefix IN ("variable_update_by_assignment",
-                      "variable_update_by_augmented_assignment",
-                      "variable_update_by_method_call")
+WHERE name_prefix IN ("update_by_assignment",
+                      "update_by_augmented_assignment",
+                      "update_by_method_call")
 ```
 
 ##### Example
@@ -2104,25 +2137,196 @@ WHERE name_prefix IN ("variable_update_by_assignment",
 
 | Label | Lines |
 |:--|:--|
-| `variable_update:foo:a` | 1, 2, 4, 3 |
-| `variable_update:bar:5` | 6, 7 |
-| `variable_update:buzz:a` | 12 |
-| `variable_update:buzz:b` | 12 |
-| `variable_update:buzz:c` | 12 |
-| `variable_update:s:1` | 13 |
-| `variable_update:s:x` | 13 |
-| `variable_update:c:1` | 14 |
-| `variable_update:c:c` | 14 |
-| `variable_update:c:i` | 14 |
-| `variable_update:x:y` | 15 |
-| `variable_update:y:x` | 15 |
-| `variable_update:a:b` | 16 |
-| `variable_update:b:a` | 16 |
-| `variable_update:seq:s` | 17 |
+| `update:foo:a` | 1, 2, 4, 3 |
+| `update:bar:5` | 6, 7 |
+| `update:buzz:a` | 12 |
+| `update:buzz:b` | 12 |
+| `update:buzz:c` | 12 |
+| `update:s:1` | 13 |
+| `update:s:x` | 13 |
+| `update:c:1` | 14 |
+| `update:c:c` | 14 |
+| `update:c:i` | 14 |
+| `update:x:y` | 15 |
+| `update:y:x` | 15 |
+| `update:a:b` | 16 |
+| `update:b:a` | 16 |
+| `update:seq:s` | 17 |
 
 --------------------------------------------------------------------------------
 
-#### Feature `variable_increment`
+#### Feature `update_by_assignment_with`
+
+##### Derivations
+
+[⬆️ feature `assignment`](#feature-assignment)  
+[⬆️ feature `update_by_assignment`](#feature-update_by_assignment)  
+[⬇️ feature `update_with`](#feature-update_with)  
+
+##### Specification
+
+```sql
+SELECT "update_by_assignment_with",
+       op.name_suffix,
+       op.span,
+       op.path
+FROM t_assignment AS op
+JOIN t_update_by_assignment USING (path)
+GROUP BY op.path
+```
+
+##### Example
+
+```python
+1   foo = foo + a
+2   bar = bar.mult(5)
+3   bar = mult(bar, 5)
+4   (x, y) = (y, x)
+5   (a, b) = (b, a + b)
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `update_by_assignment_with:Add` | 1 |
+| `update_by_assignment_with:mult` | 2, 3 |
+| `update_by_assignment_with` | 4, 5 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `update_by_augmented_assignment_with`
+
+##### Derivations
+
+[⬆️ feature `augmented_assignment`](#feature-augmented_assignment)  
+[⬆️ feature `update_by_augmented_assignment`](#feature-update_by_augmented_assignment)  
+[⬇️ feature `update_with`](#feature-update_with)  
+
+##### Specification
+
+```sql
+SELECT "update_by_augmented_assignment_with",
+       op.name_suffix,
+       op.span,
+       op.path
+FROM t_augmented_assignment op
+JOIN t_update_by_augmented_assignment USING (path)
+GROUP BY path
+```
+
+##### Example
+
+```python
+1   foo += a
+2   foo += [a]
+3   buzz += a + b + c
+4   s *= (x - 1) / x
+5   c[j] += c[i- 1]
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `update_by_augmented_assignment_with:Add` | 1, 2, 3, 5 |
+| `update_by_augmented_assignment_with:Mult` | 4 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `update_by_method_call_with`
+
+##### Derivations
+
+[⬆️ feature `method_call`](#feature-method_call)  
+[⬆️ feature `update_by_method_call`](#feature-update_by_method_call)  
+[⬇️ feature `update_with`](#feature-update_with)  
+
+##### Specification
+
+```sql
+SELECT "update_by_method_call_with",
+       op.name_suffix,
+       op.span,
+       op.path
+FROM t_method_call AS op
+JOIN t_update_by_method_call USING (path)
+GROUP BY op.path
+```
+
+##### Example
+
+```python
+1   foo.append(a)
+2   seq.append(int(s))
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `update_by_method_call_with:append` | 1, 2 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `update_with`
+
+##### Derivations
+
+[⬆️ feature `update_by_assignment_with`](#feature-update_by_assignment_with)  
+[⬆️ feature `update_by_augmented_assignment_with`](#feature-update_by_augmented_assignment_with)  
+[⬆️ feature `update_by_method_call_with`](#feature-update_by_method_call_with)  
+[⬇️ feature `accumulate_elements`](#feature-accumulate_elements)  
+[⬇️ feature `accumulate_some_elements`](#feature-accumulate_some_elements)  
+
+##### Specification
+
+```sql
+SELECT "update_with",
+       t.name_suffix,
+       t.span,
+       t.path
+FROM t
+WHERE name_prefix IN ("update_by_assignment_with",
+                      "update_by_augmented_assignment_with",
+                      "update_by_method_call_with")
+```
+
+##### Example
+
+```python
+1   foo = foo + a
+2   foo += a
+3   foo.append(a)
+4   foo += [a]
+5   
+6   bar = bar.mult(5)
+7   bar = mult(bar, 5)
+8   
+9   fizz = fizz.upper() # no match
+10  fizz.process(a) # no match
+11  
+12  buzz += a + b + c
+13  s *= (x - 1) / x
+14  c[j] += c[i- 1]
+15  (x, y) = (y, x)
+16  (a, b) = (b, a + b)
+17  seq.append(int(s))
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `update_with:Add` | 1, 14, 2, 4, 12 |
+| `update_with:mult` | 6, 7 |
+| `update_with:Mult` | 13 |
+| `update_with` | 15, 16 |
+| `update_with:append` | 17, 3 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `increment`
 
 ##### Derivations
 
@@ -2169,9 +2373,9 @@ WHERE name_prefix IN ("variable_update_by_assignment",
 
 | Label | Lines |
 |:--|:--|
-| `variable_increment:a` | 1 |
-| `variable_increment:b` | 3 |
-| `variable_increment` | 4, 5 |
+| `increment:a` | 1 |
+| `increment:b` | 3 |
+| `increment` | 4, 5 |
 
 --------------------------------------------------------------------------------
 
@@ -2239,11 +2443,11 @@ Swap two variables or two elements of an array with a 2-element tuple or list.
 
 | Label | Lines |
 |:--|:--|
-| `slide` | 1 |
+| `slide` | 1, 2, 3 |
 
 --------------------------------------------------------------------------------
 
-#### Feature `negation`
+#### Feature `negate`
 
 Update a variable by negating it.
 
@@ -2272,7 +2476,7 @@ Update a variable by negating it.
 
 | Label | Lines |
 |:--|:--|
-| `negation` | 1, 2 |
+| `negate` | 1, 2 |
 
 --------------------------------------------------------------------------------
 
@@ -4585,21 +4789,21 @@ An accumulator is iteratively updated from its previous value and that of the it
 ##### Derivations
 
 [⬆️ feature `for`](#feature-for)  
-[⬆️ feature `variable_update`](#feature-variable_update)  
+[⬆️ feature `update`](#feature-update)  
+[⬆️ feature `update_with`](#feature-update_with)  
 [⬇️ feature `accumulate_all_elements`](#feature-accumulate_all_elements)  
 
 ##### Specification
 
 ```sql
 SELECT "accumulate_elements",
-       replace(update_stmt.name_suffix, ":" || for_loop.name_suffix, ""),
-       for_loop.span,
-       for_loop.path
-FROM t_for for_loop
-JOIN t_variable_update update_stmt ON (update_stmt.path GLOB for_loop.path || "*-")
-WHERE update_stmt.name_suffix GLOB "*:" || for_loop.name_suffix
-GROUP BY for_loop.path,
-         update_stmt.name_suffix
+       t_update_with.name_suffix,
+       t_for.span,
+       t_for.path
+FROM t_for
+JOIN t_update ON (t_update.path GLOB t_for.path || "*-")
+JOIN t_update_with ON (t_update.path = t_update_with.path)
+WHERE t_update.name_suffix GLOB "*:" || t_for.name_suffix
 ```
 
 ##### Example
@@ -4617,7 +4821,7 @@ GROUP BY for_loop.path,
 10      if condition:
 11          acc_2 += i
 12      else:
-13          acc_2 *= i
+13          acc_2 -= i
 14  
 15  for element in elements:
 16      print("foo")
@@ -4626,57 +4830,65 @@ GROUP BY for_loop.path,
 19          acc.append(element)
 20      print("fiz")
 21  
-22  for i in range(10):
-23      acc += foo(bar, i)
-24  
-25  for i in range(10): # no match
-26      foo(acc, bar, i)
-27  
-28  for i in range(10):
-29      acc.append(i)
-30  
-31  for i in range(10): # no match
-32      print(foobar, i)
-33  
-34  for c in string:
-35      c = c.upper() # no match: this is the iteration variable, not an accumulator
-36      print(c)
+22  power = 1
+23  for x1 in seq1:
+24      acc = set()
+25      for x2 in seq2:
+26          acc.add(x2)
+27          power *= 2 # LIMITATION: no match, since this update does not make use of the iteration variable
+28  
+29  for i in range(10):
+30      acc //= foo(bar, i)
+31  
+32  for i in range(10): # no match
+33      foo(acc, bar, i)
+34  
+35  for i in range(10): # no match
+36      print(foobar, i)
+37  
+38  for c in string:
+39      c = c.upper() # no match: this is the iteration variable, not an accumulator
+40      print(c)
 ```
 
 ##### Matches
 
 | Label | Lines |
 |:--|:--|
-| `accumulate_elements:acc` | 3-5, 15-20, 22-23, 28-29 |
-| `accumulate_elements:acc_1` | 8-13 |
-| `accumulate_elements:acc_2` | 8-13 |
+| `accumulate_elements:Add` | 3-5, 8-13 |
+| `accumulate_elements:Sub` | 8-13 |
+| `accumulate_elements:combine` | 8-13 |
+| `accumulate_elements:append` | 15-20 |
+| `accumulate_elements:add` | 25-27 |
+| `accumulate_elements:FloorDiv` | 29-30 |
 
 --------------------------------------------------------------------------------
 
 #### Feature `accumulate_some_elements`
 
-Variant of the previous feature. This time, the update statement is enclosed in a conditional statement.
+Restriction of [feature `accumulate_elements`](#feature-accumulate_elements) . This time, the update statement is enclosed in a conditional statement.
 
 ##### Derivations
 
 [⬆️ feature `for`](#feature-for)  
 [⬆️ feature `if`](#feature-if)  
-[⬆️ feature `variable_update`](#feature-variable_update)  
+[⬆️ feature `update`](#feature-update)  
+[⬆️ feature `update_with`](#feature-update_with)  
 [⬇️ feature `accumulate_all_elements`](#feature-accumulate_all_elements)  
 
 ##### Specification
 
 ```sql
 SELECT "accumulate_some_elements",
-       replace(update_stmt.name_suffix, ":" || for_loop.name_suffix, ""),
-       for_loop.span,
-       for_loop.path
-FROM t_for for_loop
-JOIN t_if ON (t_if.path GLOB for_loop.path || "*-")
-JOIN t_variable_update update_stmt ON (update_stmt.path GLOB t_if.path || "*-")
-WHERE update_stmt.name_suffix GLOB "*:" || for_loop.name_suffix
-GROUP BY for_loop.path,
-         update_stmt.name_suffix
+       t_update_with.name_suffix,
+       t_for.span,
+       t_for.path
+FROM t_for
+JOIN t_if ON (t_if.path GLOB t_for.path || "*-")
+JOIN t_update ON (t_update.path GLOB t_if.path || "*-")
+JOIN t_update_with ON (t_update.path = t_update_with.path)
+WHERE t_update.name_suffix GLOB "*:" || t_for.name_suffix
+GROUP BY t_update.path
 ```
 
 ##### Example
@@ -4694,44 +4906,30 @@ GROUP BY for_loop.path,
 10      if condition:
 11          acc_2 += i
 12      else:
-13          acc_2 *= i
+13          acc_2 -= i
 14  
 15  for element in elements:
 16      print("foo")
-17      if predicate(element):
+17      if predicate_1(element):
 18          print("bar")
-19          acc.append(element)
-20      print("fiz")
-21  
-22  for i in range(10):
-23      acc += foo(bar, i)
-24  
-25  for i in range(10): # no match
-26      foo(acc, bar, i)
-27  
-28  for i in range(10):
-29      acc.append(i)
-30  
-31  for i in range(10): # no match
-32      print(foobar, i)
-33  
-34  for c in string:
-35      c = c.upper() # no match: this is the iteration variable, not an accumulator
-36      print(c)
+19          if predicate_2(element):
+20              acc.append(element)
+21      print("fiz")
 ```
 
 ##### Matches
 
 | Label | Lines |
 |:--|:--|
-| `accumulate_some_elements:acc_2` | 8-13 |
-| `accumulate_some_elements:acc` | 15-20 |
+| `accumulate_some_elements:Add` | 8-13 |
+| `accumulate_some_elements:Sub` | 8-13 |
+| `accumulate_some_elements:append` | 15-21 |
 
 --------------------------------------------------------------------------------
 
 #### Feature `accumulate_all_elements`
 
-Difference between features `accumulate_elements` and `accumulate_some_elements`.
+Difference between features [`accumulate_elements`](#feature-accumulate_elements) and [`accumulate_some_elements`](#feature-accumulate_some_elements).
 
 ##### Derivations
 
@@ -4748,9 +4946,9 @@ SELECT "accumulate_all_elements",
 FROM t_accumulate_elements acc
 WHERE NOT EXISTS
     (SELECT *
-     FROM t_accumulate_some_elements SOME
-     WHERE some.path = acc.path
-       AND some.name_suffix = acc.name_suffix)
+     FROM t_accumulate_some_elements
+     WHERE path = acc.path
+       AND name_suffix = acc.name_suffix)
 ```
 
 ##### Example
@@ -4768,38 +4966,23 @@ WHERE NOT EXISTS
 10      if condition:
 11          acc_2 += i
 12      else:
-13          acc_2 *= i
+13          acc_2 -= i
 14  
 15  for element in elements:
 16      print("foo")
-17      if predicate(element):
+17      if predicate_1(element):
 18          print("bar")
-19          acc.append(element)
-20      print("fiz")
-21  
-22  for i in range(10):
-23      acc += foo(bar, i)
-24  
-25  for i in range(10): # no match
-26      foo(acc, bar, i)
-27  
-28  for i in range(10):
-29      acc.append(i)
-30  
-31  for i in range(10): # no match
-32      print(foobar, i)
-33  
-34  for c in string:
-35      c = c.upper() # no match: this is the iteration variable, not an accumulator
-36      print(c)
+19          if predicate_2(element):
+20              acc.append(element)
+21      print("fiz")
 ```
 
 ##### Matches
 
 | Label | Lines |
 |:--|:--|
-| `accumulate_all_elements:acc` | 3-5, 22-23, 28-29 |
-| `accumulate_all_elements:acc_1` | 8-13 |
+| `accumulate_all_elements:Add` | 3-5 |
+| `accumulate_all_elements:combine` | 8-13 |
 
 --------------------------------------------------------------------------------
 
@@ -4811,7 +4994,7 @@ Counting all the elements of a sequence, or only those which satisfy a condition
 
 [⬆️ feature `assignment_lhs_identifier`](#feature-assignment_lhs_identifier)  
 [⬆️ feature `for`](#feature-for)  
-[⬆️ feature `variable_increment`](#feature-variable_increment)  
+[⬆️ feature `increment`](#feature-increment)  
 
 ##### Specification
 
@@ -4821,7 +5004,7 @@ SELECT "count_elements",
        min(for_loop.span_start) || "-" || max(for_loop.span_end), -- The biggest loop...
  for_loop.path
 FROM t_for for_loop
-JOIN t_variable_increment inc ON (inc.path GLOB for_loop.path || "*-")-- including the incrementation of a variable x...
+JOIN t_increment inc ON (inc.path GLOB for_loop.path || "*-")-- including the incrementation of a variable x...
 WHERE NOT EXISTS -- which is not initialized in this loop.
     (SELECT * -- In other words, ensure there is no...
      FROM t_assignment_lhs_identifier x -- assignment...
@@ -5188,9 +5371,9 @@ Count inputs until a sentinel value is encountered.
 [⬆️ feature `assignment_lhs_identifier`](#feature-assignment_lhs_identifier)  
 [⬆️ feature `if`](#feature-if)  
 [⬆️ feature `if_test_atom`](#feature-if_test_atom)  
+[⬆️ feature `increment`](#feature-increment)  
 [⬆️ feature `infinite_while`](#feature-infinite_while)  
 [⬆️ feature `return`](#feature-return)  
-[⬆️ feature `variable_increment`](#feature-variable_increment)  
 
 ##### Specification
 
@@ -5206,9 +5389,9 @@ JOIN t_if ON (t_if.path GLOB wt.path || "*-"
 JOIN t_if_test_atom x2 ON (x1.name_suffix = x2.name_suffix -- testing this variable...
                            AND x2.span_start = t_if.span_start)
 JOIN t_return ret ON (ret.path GLOB t_if.path || "*-")-- and returning another variable (an accumulator)...
-JOIN t_variable_increment acc ON (acc.name_suffix = ret.name_suffix
-                                  AND acc.path GLOB wt.path || "*-" -- which is incremented somewhere in the loop...
-                                  AND acc.path NOT GLOB t_if.path || "*-" -- but not INSIDE the conditional statement.
+JOIN t_increment acc ON (acc.name_suffix = ret.name_suffix
+                         AND acc.path GLOB wt.path || "*-" -- which is incremented somewhere in the loop...
+                         AND acc.path NOT GLOB t_if.path || "*-" -- but not INSIDE the conditional statement.
 )
 ```
 
@@ -5247,7 +5430,7 @@ Accumulate a stream of inputs until a sentinel value is encountered.
 [⬆️ feature `if_test_atom`](#feature-if_test_atom)  
 [⬆️ feature `infinite_while`](#feature-infinite_while)  
 [⬆️ feature `return`](#feature-return)  
-[⬆️ feature `variable_update`](#feature-variable_update)  
+[⬆️ feature `update`](#feature-update)  
 
 ##### Specification
 
@@ -5263,9 +5446,9 @@ JOIN t_if ON (t_if.path GLOB wt.path || "*-"
 JOIN t_if_test_atom x2 ON (x1.name_suffix = x2.name_suffix -- testing this variable...
                            AND x2.span_start = t_if.span_start)
 JOIN t_return ret ON (ret.path GLOB t_if.path || "*-")-- and returning another variable (an accumulator)...
-JOIN t_variable_update acc ON (acc.span_start > t_if.span_start -- which is updated after the conditional...
-                               AND acc.span_end <= wt.span_end -- but before the end of the loop...
-                               AND acc.name_suffix = ret.name_suffix || ":" || x1.name_suffix) -- with the first variable.
+JOIN t_update acc ON (acc.span_start > t_if.span_start -- which is updated after the conditional...
+                      AND acc.span_end <= wt.span_end -- but before the end of the loop...
+                      AND acc.name_suffix = ret.name_suffix || ":" || x1.name_suffix) -- with the first variable.
 ```
 
 ##### Example
@@ -5293,7 +5476,7 @@ JOIN t_variable_update acc ON (acc.span_start > t_if.span_start -- which is upda
 20          x = read()
 21          if x > y:
 22              return acc
-23          foobar(acc, x) # paroxython: variable_update:acc:x
+23          foobar(acc, x) # paroxython: update:acc:x
 24  
 25  def accumulate_inputs():
 26      acc = []

@@ -37,7 +37,7 @@ def print_collatz(n): # added_block_label (-> +7)
                        # int_literal
                        # literal:Num
                        # suggest_conditional_expression (-> +3)
-            n = n // 2 # assignment
+            n = n // 2 # assignment:FloorDiv
                        # assignment_lhs_identifier:n
                        # assignment_rhs_atom:2
                        # assignment_rhs_atom:n
@@ -45,10 +45,12 @@ def print_collatz(n): # added_block_label (-> +7)
                        # int_literal
                        # single_assignment:n
                        # suggest_augmented_assignment
-                       # variable_update:n:2
-                       # variable_update_by_assignment:n:2
+                       # update:n:2
+                       # update_by_assignment:n:2
+                       # update_by_assignment_with:FloorDiv
+                       # update_with:FloorDiv
         else: # unknown_label
-            n = 3 * n + 1 # assignment
+            n = 3 * n + 1 # assignment:Add
                           # assignment_lhs_identifier:n
                           # assignment_rhs_atom:1
                           # assignment_rhs_atom:3
@@ -60,10 +62,12 @@ def print_collatz(n): # added_block_label (-> +7)
                           # literal:Num
                           # single_assignment:n
                           # suggest_constant_definition
-                          # variable_update:n:1
-                          # variable_update:n:3
-                          # variable_update_by_assignment:n:1
-                          # variable_update_by_assignment:n:3
+                          # update:n:1
+                          # update:n:3
+                          # update_by_assignment:n:1
+                          # update_by_assignment:n:3
+                          # update_by_assignment_with:Add
+                          # update_with:Add
     print(n) # call_argument:n
              # function_call:print
 

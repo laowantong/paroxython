@@ -1,7 +1,8 @@
 # Present labels
 
 - assignment / assignment.py / 1
-- assignment / collatz_print.py / 5, 7
+- assignment:Add / collatz_print.py / 7
+- assignment:FloorDiv / collatz_print.py / 5
 - assignment_lhs_identifier:a / assignment.py / 1
 - assignment_lhs_identifier:n / collatz_print.py / 5, 7
 - assignment_rhs_atom:1 / collatz_print.py / 7
@@ -82,12 +83,16 @@
 - suggest_conditional_expression / collatz_print.py / 4-7
 - suggest_constant_definition / collatz_print.py / 7
 - suggest_constant_definition / fizzbuzz.py / 2, 4, 6
-- variable_update:n:1 / collatz_print.py / 7
-- variable_update:n:2 / collatz_print.py / 5
-- variable_update:n:3 / collatz_print.py / 7
-- variable_update_by_assignment:n:1 / collatz_print.py / 7
-- variable_update_by_assignment:n:2 / collatz_print.py / 5
-- variable_update_by_assignment:n:3 / collatz_print.py / 7
+- update:n:1 / collatz_print.py / 7
+- update:n:2 / collatz_print.py / 5
+- update:n:3 / collatz_print.py / 7
+- update_by_assignment:n:1 / collatz_print.py / 7
+- update_by_assignment:n:2 / collatz_print.py / 5
+- update_by_assignment:n:3 / collatz_print.py / 7
+- update_by_assignment_with:Add / collatz_print.py / 7
+- update_by_assignment_with:FloorDiv / collatz_print.py / 5
+- update_with:Add / collatz_print.py / 7
+- update_with:FloorDiv / collatz_print.py / 5
 - while / collatz_print.py / 2-7
 
 # Absent labels
@@ -153,6 +158,7 @@
 - import
 - import_module
 - import_name
+- increment
 - index
 - index_arithmetic
 - infinite_while
@@ -165,7 +171,7 @@
 - method_call
 - method_call_object
 - method_chaining
-- negation
+- negate
 - negative_index
 - nested_for
 - nested_function
@@ -190,9 +196,12 @@
 - try_raise|try_except
 - unary_operator
 - universal_quantification|existential_quantification
-- variable_increment
-- variable_update
-- variable_update_by_assignment
-- variable_update_by_augmented_assignment
-- variable_update_by_method_call
+- update
+- update_by_assignment
+- update_by_assignment_with
+- update_by_augmented_assignment
+- update_by_augmented_assignment_with
+- update_by_method_call
+- update_by_method_call_with
+- update_with
 - yield
