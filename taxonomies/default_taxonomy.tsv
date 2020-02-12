@@ -77,8 +77,8 @@ operator/ternary/	conditional_expression
 pattern/elements/accumulate/	accumulate_all_elements/b.+
 pattern/elements/accumulate/count/	count_elements:.+
 pattern/elements/accumulate/in_list/	accumulate_all_elements:append
-pattern/elements/accumulate/in_list/extension/	accumulate_all_elements:extension
-pattern/elements/accumulate/in_list/extension/filtered/	accumulate_some_elements:extension
+pattern/elements/accumulate/in_list/extension/	accumulate_all_elements:extend
+pattern/elements/accumulate/in_list/extension/filtered/	accumulate_some_elements:extend
 pattern/elements/accumulate/in_list/filtered/	accumulate_some_elements:append
 pattern/elements/accumulate/in_set/	accumulate_all_elements:add
 pattern/elements/accumulate/in_set/intersection/	accumulate_all_elements:intersection
@@ -195,10 +195,8 @@ call/function/other/predicate/
 io/standard/print/multiple/	
 io/standard/print/newline/	
 io/standard/print/without_newline/	
-pattern/elements/accumulate/collect/	
 pattern/elements/accumulate/find_best/index/	
 pattern/states/accumulate/	
-pattern/states/accumulate/collect/	
 pattern/states/accumulate/count/	
 pattern/states/accumulate/find_best/	
 style/functional/	
