@@ -1,9 +1,6 @@
 - [Expressions](#expressions)
   - [Literals](#literals)
       - [Feature `literal`](#feature-literal)
-      - [Feature `int_literal`](#feature-int_literal)
-      - [Feature `float_literal`](#feature-float_literal)
-      - [Feature `imaginary_literal`](#feature-imaginary_literal)
       - [Feature `falsey_literal`](#feature-falsey_literal)
   - [Subscripts](#subscripts)
       - [Feature `index`](#feature-index)
@@ -165,6 +162,13 @@
 
 #### Feature `literal`
 
+Match `None`, `True`, `False`, and literal numbers, strings, tuples, dictionaries, sets and lists. For the first four, suffix with the literal value.
+
+Further categorization of numeric literals does not require to construct a sophisticated regular expression: the heavy lifting is already made in the given AST, which stores them under normalized form:
+- integer literals are just sequences of digits, with an optional minus sign `-`;
+- floating point literals consist of digits, minus signs and at least one symbol among `.` and `e`;
+- imaginary literals contain the same symbols as floating point literals, plus a mandatory trailing symbol `j`.
+
 ##### Derivations
 
 [⬇️ feature `concatenation_operator|replication_operator`](#feature-concatenation_operatorreplication_operator)  
@@ -178,10 +182,20 @@
                        NameConstant
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/value=(?P<SUFFIX>.+)
-|   # match any other constant
-                       (?P<SUFFIX>Str|Num|Tuple|Dict|Set|List)
-\n(?:\1.+\n)*?\1/_ids= # prevent matching of containers with non-literal elements
+|   # match numbers
+                       Num
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
+\n(?:\1.+\n)*?\1/n=(?P<SUFFIX>.+)
+|   # match strings
+                       (?P<SUFFIX>Str)
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
+|   # match containers
+                       (?P<SUFFIX>Tuple|Dict|Set|List)
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
+    (
+    \n\1/.*(?<!/id)=.* # ensure that there is no identifier below
+    )+
+    \n(?!\1)
 )
 ```
 
@@ -200,110 +214,30 @@
 10  {a, b, c} # no match
 11  [1, 2, 3]
 12  -42
+13  [1, {2, 3}, {"a": "b", "c": "d"}]
+14  [foo(4)]
+15  {"foo": "bar"}
 ```
 
 ##### Matches
 
 | Label | Lines |
 |:--|:--|
-| `literal:Num` | 1, 2, 4, 4, 7, 7, 7, 11, 11, 11, 12 |
-| `literal:Str` | 3 |
+| `literal:42` | 1 |
+| `literal:42.0` | 2 |
+| `literal:Str` | 3, 13, 13, 13, 13, 15, 15 |
+| `literal:1` | 4, 4, 7, 11, 13 |
 | `literal:Tuple` | 4 |
-| `literal:List` | 5, 11 |
-| `literal:Dict` | 6 |
-| `literal:Set` | 7 |
+| `literal:List` | 5, 11, 13 |
+| `literal:Dict` | 6, 13, 15 |
+| `literal:2` | 7, 11, 13 |
+| `literal:3` | 7, 11, 13 |
+| `literal:Set` | 7, 13 |
 | `literal:False` | 8 |
 | `literal:True` | 8 |
 | `literal:None` | 9 |
-
---------------------------------------------------------------------------------
-
-#### Feature `int_literal`
-
-Matching a literal does not require to construct a sophisticated regular expression: the heavy lifting is already made in the given AST, which stores them in a normalized form. For instance, integer literals are just sequence of digits:
-
-##### Specification
-
-```re
-           ^(.*)/_type=Num
-\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/n=-?\d+\n
-```
-
-##### Example
-
-The following examples of numeric literals are taken from the [reference](https://docs.python.org/3/reference/lexical_analysis.html#integer-literals).
-
-```python
-1   7, 2147483647, 0o177, 0b100110111, 3, -79228162514264337593543950336
-2   0o377, 0xdeadbeef, 100_000_000_000, 0b_1110_0101
-3   3.14, 10., .001, 1e100, 3.14e-10, 0e0, 3.14_15_93
-4   23.14j, 10.j, 10j, .001j, 1e100j, 3.14e-10j, 3.14_15_93j
-```
-
-##### Matches
-
-| Label | Lines |
-|:--|:--|
-| `int_literal` | 1, 1, 1, 1, 1, 1, 2, 2, 2, 2 |
-
---------------------------------------------------------------------------------
-
-#### Feature `float_literal`
-
-In the AST, a floating point literal consists of digits and at least one symbol among `.` and `e`.
-
-##### Specification
-
-```re
-           ^(.*)/_type=Num
-\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/n=.*?[e\.].*(?<!j)\n
-```
-
-##### Example
-
-```python
-1   7, 2147483647, 0o177, 0b100110111, 3, -79228162514264337593543950336
-2   0o377, 0xdeadbeef, 100_000_000_000, 0b_1110_0101
-3   3.14, 10., .001, 1e100, 3.14e-10, 0e0, 3.14_15_93
-4   23.14j, 10.j, 10j, .001j, 1e100j, 3.14e-10j, 3.14_15_93j
-```
-
-##### Matches
-
-| Label | Lines |
-|:--|:--|
-| `float_literal` | 3, 3, 3, 3, 3, 3, 3 |
-
---------------------------------------------------------------------------------
-
-#### Feature `imaginary_literal`
-
-In the AST, an imaginary literal contains the same symbols as a floating point literal, plus a mandatory trailing symbol `j`.
-
-##### Specification
-
-```re
-           ^(.*)/_type=Num
-\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/n=.*j\n
-```
-
-##### Example
-
-```python
-1   7, 2147483647, 0o177, 0b100110111, 3, -79228162514264337593543950336
-2   0o377, 0xdeadbeef, 100_000_000_000, 0b_1110_0101
-3   3.14, 10., .001, 1e100, 3.14e-10, 0e0, 3.14_15_93
-4   23.14j, 10.j, 10j, .001j, 1e100j, 3.14e-10j, 3.14_15_93j
-```
-
-##### Matches
-
-| Label | Lines |
-|:--|:--|
-| `imaginary_literal` | 4, 4, 4, 4, 4, 4, 4 |
+| `literal:-42` | 12 |
+| `literal:4` | 14 |
 
 --------------------------------------------------------------------------------
 

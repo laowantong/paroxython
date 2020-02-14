@@ -62,16 +62,22 @@
 - if_test_atom:n / collatz_print.py / 4
 - if_then_branch / collatz_print.py / 5
 - if_then_branch / fizzbuzz.py / 3
-- int_literal / collatz_print.py / 2, 4, 4, 5, 7, 7
-- int_literal / fizzbuzz.py / 1, 1, 2, 2, 4, 4, 6, 6
-- int_literal / is_even.py / 2, 2
 - lines_of_code:1 / assignment.py / 1
 - lines_of_code:2 / is_even.py / 1-2
 - lines_of_code:8 / collatz_print.py / 1-8
 - lines_of_code:9 / fizzbuzz.py / 1-9
-- literal:Num / collatz_print.py / 2, 4, 4, 5, 7, 7
-- literal:Num / fizzbuzz.py / 1, 1, 2, 2, 4, 4, 6, 6
-- literal:Num / is_even.py / 2, 2
+- literal:0 / collatz_print.py / 4
+- literal:0 / fizzbuzz.py / 2, 4, 6
+- literal:0 / is_even.py / 2
+- literal:1 / collatz_print.py / 2, 7
+- literal:1 / fizzbuzz.py / 1
+- literal:101 / fizzbuzz.py / 1
+- literal:15 / fizzbuzz.py / 2
+- literal:2 / collatz_print.py / 4, 5
+- literal:2 / is_even.py / 2
+- literal:3 / collatz_print.py / 7
+- literal:3 / fizzbuzz.py / 4
+- literal:5 / fizzbuzz.py / 6
 - literal:Str / fizzbuzz.py / 3, 5, 7
 - loop:for / fizzbuzz.py / 1-9
 - loop:while / collatz_print.py / 2-7
@@ -133,7 +139,6 @@
 - filtered_comprehension
 - find_best_element
 - find_first_element
-- float_literal
 - for
 - for_each
 - for_indexes
@@ -154,7 +159,6 @@
 - generator
 - get_valid_input
 - if_test_atom
-- imaginary_literal
 - import
 - import_module
 - import_name

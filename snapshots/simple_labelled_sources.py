@@ -18,8 +18,7 @@ def print_collatz(n): # added_block_label (-> +7)
                       # lines_of_code:8 (-> +7)
     while n != 1: # comparison_operator:NotEq
                   # evolve_state (-> +5)
-                  # int_literal
-                  # literal:Num
+                  # literal:1
                   # loop:while (-> +5)
                   # suggest_constant_definition
                   # while (-> +5)
@@ -34,15 +33,15 @@ def print_collatz(n): # added_block_label (-> +7)
                        # if_test_atom:0
                        # if_test_atom:2
                        # if_test_atom:n
-                       # int_literal
-                       # literal:Num
+                       # literal:0
+                       # literal:2
                        # suggest_conditional_expression (-> +3)
             n = n // 2 # assignment:FloorDiv
                        # assignment_lhs_identifier:n
                        # assignment_rhs_atom:2
                        # assignment_rhs_atom:n
                        # if_then_branch
-                       # int_literal
+                       # literal:2
                        # single_assignment:n
                        # suggest_augmented_assignment
                        # update:n:2
@@ -58,8 +57,8 @@ def print_collatz(n): # added_block_label (-> +7)
                           # binary_operator:Add
                           # binary_operator:Mult
                           # if_else_branch
-                          # int_literal
-                          # literal:Num
+                          # literal:1
+                          # literal:3
                           # single_assignment:n
                           # suggest_constant_definition
                           # update:n:1
@@ -79,9 +78,9 @@ for i in range(1, 101): # call_argument:1
                         # for:i (-> +8)
                         # for_range:1:101 (-> +8)
                         # function_call:range
-                        # int_literal
                         # lines_of_code:9 (-> +8)
-                        # literal:Num
+                        # literal:1
+                        # literal:101
                         # loop:for (-> +8)
                         # range:1:101
     if i % 15 == 0: # binary_operator:Mod
@@ -92,8 +91,8 @@ for i in range(1, 101): # call_argument:1
                     # if_test_atom:0
                     # if_test_atom:15
                     # if_test_atom:i
-                    # int_literal
-                    # literal:Num
+                    # literal:0
+                    # literal:15
                     # suggest_constant_definition
         print("FizzBuzz") # call_argument:
                           # function_call:print
@@ -107,8 +106,8 @@ for i in range(1, 101): # call_argument:1
                      # if_test_atom:0
                      # if_test_atom:3
                      # if_test_atom:i
-                     # int_literal
-                     # literal:Num
+                     # literal:0
+                     # literal:3
                      # suggest_constant_definition
         print("Fizz") # call_argument:
                       # function_call:print
@@ -122,8 +121,8 @@ for i in range(1, 101): # call_argument:1
                      # if_test_atom:0
                      # if_test_atom:5
                      # if_test_atom:i
-                     # int_literal
-                     # literal:Num
+                     # literal:0
+                     # literal:5
                      # suggest_constant_definition
         print("Buzz") # call_argument:
                       # function_call:print
@@ -146,6 +145,6 @@ def is_even(n): # function:is_even (-> +1)
                       # comparison_operator:Eq
                       # divisibility_test:2
                       # falsey_literal:0
-                      # int_literal
-                      # literal:Num
+                      # literal:0
+                      # literal:2
                       # return

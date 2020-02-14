@@ -48,9 +48,11 @@
         "if_test_atom:2": [[4,4]],
         "if_test_atom:n": [[4,4]],
         "if_then_branch": [[5,5]],
-        "int_literal": [[2,2],[4,4],[4,4],[5,5],[7,7],[7,7]],
         "lines_of_code:8": [[1,8]],
-        "literal:Num": [[2,2],[4,4],[4,4],[7,7],[7,7]],
+        "literal:0": [[4,4]],
+        "literal:1": [[2,2],[7,7]],
+        "literal:2": [[4,4],[5,5]],
+        "literal:3": [[7,7]],
         "loop:while": [[2,7]],
         "single_assignment:n": [[5,5],[7,7]],
         "suggest_augmented_assignment": [[5,5]],
@@ -83,8 +85,8 @@
         "test/divisibility/parity/": [[4,4]],
         "test/equality/": [[4,4]],
         "test/equality/not/": [[2,2]],
-        "type/elementary/int/zero/": [[4,4]],
-        "type/elementary/number/integer/": [[2,2],[4,4],[4,4],[5,5],[7,7],[7,7]],
+        "type/elementary/number/integer/": [[2,2],[4,4],[5,5],[7,7],[7,7]],
+        "type/elementary/number/integer/zero/": [[4,4]],
         "variable/assignment/single/": [[5,5],[7,7]]
       }
     },
@@ -115,9 +117,13 @@
         "if_test_atom:5": [[6,6]],
         "if_test_atom:i": [[2,2],[4,4],[6,6]],
         "if_then_branch": [[3,3]],
-        "int_literal": [[1,1],[1,1],[2,2],[2,2],[4,4],[4,4],[6,6],[6,6]],
         "lines_of_code:9": [[1,9]],
-        "literal:Num": [[1,1],[1,1],[2,2],[2,2],[4,4],[4,4],[6,6],[6,6]],
+        "literal:0": [[2,2],[4,4],[6,6]],
+        "literal:1": [[1,1]],
+        "literal:101": [[1,1]],
+        "literal:15": [[2,2]],
+        "literal:3": [[4,4]],
+        "literal:5": [[6,6]],
         "literal:Str": [[3,3],[5,5],[7,7]],
         "loop:for": [[1,9]],
         "range:1:101": [[1,1]],
@@ -134,8 +140,8 @@
         "operator/percent/modulo/": [[2,2],[4,4],[6,6]],
         "program/sloc/009": [[1,9]],
         "test/equality/": [[2,2],[4,4],[6,6]],
-        "type/elementary/int/zero/": [[2,2],[4,4],[6,6]],
-        "type/elementary/number/integer/": [[1,1],[1,1],[2,2],[2,2],[4,4],[4,4],[6,6],[6,6]],
+        "type/elementary/number/integer/": [[1,1],[1,1],[2,2],[4,4],[6,6]],
+        "type/elementary/number/integer/zero/": [[2,2],[4,4],[6,6]],
         "type/elementary/string/": [[3,3],[5,5],[7,7]]
       }
     },
@@ -151,9 +157,9 @@
         "function_argument:n": [[1,1]],
         "function_argument_flavor:arg": [[1,1]],
         "function_returning_something:is_even": [[1,2]],
-        "int_literal": [[2,2],[2,2]],
         "lines_of_code:2": [[1,2]],
-        "literal:Num": [[2,2],[2,2]],
+        "literal:0": [[2,2]],
+        "literal:2": [[2,2]],
         "return": [[2,2]]
       },
       "taxons": {
@@ -164,8 +170,8 @@
         "subroutine_definition/predicate/": [[1,2]],
         "test/divisibility/parity/": [[2,2]],
         "test/equality/": [[2,2]],
-        "type/elementary/int/zero/": [[2,2]],
-        "type/elementary/number/integer/": [[2,2],[2,2]]
+        "type/elementary/number/integer/": [[2,2]],
+        "type/elementary/number/integer/zero/": [[2,2]]
       }
     }
   },
@@ -286,18 +292,25 @@
       "tests/data/simple/collatz_print.py",
       "tests/data/simple/fizzbuzz.py"
     ],
-    "int_literal": [
-      "tests/data/simple/collatz_print.py",
-      "tests/data/simple/fizzbuzz.py",
-      "tests/data/simple/is_even.py"
-    ],
     "lines_of_code:8": [
       "tests/data/simple/collatz_print.py"
     ],
-    "literal:Num": [
+    "literal:0": [
       "tests/data/simple/collatz_print.py",
       "tests/data/simple/fizzbuzz.py",
       "tests/data/simple/is_even.py"
+    ],
+    "literal:1": [
+      "tests/data/simple/collatz_print.py",
+      "tests/data/simple/fizzbuzz.py"
+    ],
+    "literal:2": [
+      "tests/data/simple/collatz_print.py",
+      "tests/data/simple/is_even.py"
+    ],
+    "literal:3": [
+      "tests/data/simple/collatz_print.py",
+      "tests/data/simple/fizzbuzz.py"
     ],
     "loop:while": [
       "tests/data/simple/collatz_print.py"
@@ -399,6 +412,15 @@
     "lines_of_code:9": [
       "tests/data/simple/fizzbuzz.py"
     ],
+    "literal:101": [
+      "tests/data/simple/fizzbuzz.py"
+    ],
+    "literal:15": [
+      "tests/data/simple/fizzbuzz.py"
+    ],
+    "literal:5": [
+      "tests/data/simple/fizzbuzz.py"
+    ],
     "literal:Str": [
       "tests/data/simple/fizzbuzz.py"
     ],
@@ -477,12 +499,12 @@
     "test/equality/not/": [
       "tests/data/simple/collatz_print.py"
     ],
-    "type/elementary/int/zero/": [
+    "type/elementary/number/integer/": [
       "tests/data/simple/collatz_print.py",
       "tests/data/simple/fizzbuzz.py",
       "tests/data/simple/is_even.py"
     ],
-    "type/elementary/number/integer/": [
+    "type/elementary/number/integer/zero/": [
       "tests/data/simple/collatz_print.py",
       "tests/data/simple/fizzbuzz.py",
       "tests/data/simple/is_even.py"

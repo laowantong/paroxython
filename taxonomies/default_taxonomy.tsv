@@ -166,21 +166,20 @@ type/container/tuple/assignment/slide/	slide
 type/container/tuple/assignment/swap/	swap
 type/container/tuple/empty/	falsey_literal:Tuple
 type/container/tuple/empty/	function_call_without_arguments:tuple
-type/elementary/bool/false/	function_call_without_arguments:bool
-type/elementary/bool/false/	literal:False
-type/elementary/bool/true/	literal:True
 type/elementary/boolean/	literal:(True|False)
-type/elementary/complex/zero/	falsey_literal:0j
-type/elementary/complex/zero/	function_call_without_arguments:complex
-type/elementary/float/zero/	falsey_literal:0.0
-type/elementary/float/zero/	function_call_without_arguments:float
-type/elementary/int/zero/	falsey_literal:0
-type/elementary/int/zero/	function_call_without_arguments:int
+type/elementary/boolean/false/	function_call_without_arguments:bool
+type/elementary/boolean/false/	literal:False
+type/elementary/boolean/true/	literal:True
 type/elementary/null/	literal:None
-type/elementary/number/	literal:Num
-type/elementary/number/complex/	imaginary_literal
-type/elementary/number/floating_point/	float_literal
-type/elementary/number/integer/	int_literal
+type/elementary/number/complex/	literal:.*j
+type/elementary/number/complex/zero/	falsey_literal:0j
+type/elementary/number/complex/zero/	function_call_without_arguments:complex
+type/elementary/number/floating_point/	literal:[\d-]*?[e\.][\d-]*?(?<!j)
+type/elementary/number/floating_point/zero/	falsey_literal:0.0
+type/elementary/number/floating_point/zero/	function_call_without_arguments:float
+type/elementary/number/integer/	literal:-?\d+
+type/elementary/number/integer/zero/	falsey_literal:0
+type/elementary/number/integer/zero/	function_call_without_arguments:int
 type/elementary/string/	literal:Str
 type/elementary/string/empty/	falsey_literal:Str
 type/elementary/string/formatted/	f_string
@@ -212,6 +211,7 @@ variable/assignment/argument/
 variable/assignment/augmented/subscript/	
 variable/assignment/iteration_variable/	
 variable/assignment/iteration_variable/tuple/	
+variable/assignment/parallel/
 variable/assignment/parallel/subscript/	
 variable/assignment/single/subscript/	
 variable/scope/global/	
