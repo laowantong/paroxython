@@ -249,10 +249,10 @@ Generally speaking, all falsey constants (i.e., of whom [truth value](https://do
 - null integer: `literal:0`;
 - null floating-point number: `literal:0.0`;
 - null complex number: `literal:0j`
-- empty string: `empty_literal:Str` or `function_call_without_arguments:str`;
-- empty tuple: `empty_literal:Tuple` or `function_call_without_arguments:tuple`;
-- empty list: `empty_literal:List` or `function_call_without_arguments:list`;
-- empty dictionary: `empty_literal:Dict` or `function_call_without_arguments:dict`;
+- empty string: `function_call_without_arguments:str` or `empty_literal:Str`;
+- empty tuple: `function_call_without_arguments:tuple` or `empty_literal:Tuple`;
+- empty list: `function_call_without_arguments:list` or `empty_literal:List`;
+- empty dictionary: `function_call_without_arguments:dict` or `empty_literal:Dict`;
 - empty set: `function_call_without_arguments:set`;
 - empty range: `range:0`.
 
