@@ -17,7 +17,6 @@ def print_collatz(n): # added_block_label (-> +7)
                       # function_returning_nothing:print_collatz (-> +7)
                       # lines_of_code:8 (-> +7)
     while n != 1: # comparison_operator:NotEq
-                  # evolve_state (-> +5)
                   # literal:1
                   # loop:while (-> +5)
                   # suggest_constant_definition

@@ -3,9 +3,7 @@ from typing import Any
 
 import regex  # type: ignore
 
-extract_ids = regex.compile(r"Name\(id='(.+?)'\)").findall
 remove_context = regex.compile(r", ctx=.+?\(\)").sub
-deduplicate_whilst_preserving_order = dict.fromkeys
 
 
 def flatten_ast(node: Any, prefix="", path="") -> str:
@@ -13,8 +11,6 @@ def flatten_ast(node: Any, prefix="", path="") -> str:
         acc = [f"{prefix}/_type={type(node).__name__}\n"]
         if isinstance(node, ast.expr):
             node_repr = remove_context("", ast.dump(node))
-            ids = ":".join(deduplicate_whilst_preserving_order(extract_ids(node_repr)))
-            acc.append(f"{prefix}/_ids={ids}\n")
             expr_hash = hex(hash(node_repr) & 0xFFFFFFFF)
             acc.append(f"{prefix}/_hash={expr_hash}\n")
         if "lineno" in node._attributes:

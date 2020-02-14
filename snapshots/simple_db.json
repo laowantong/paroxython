@@ -35,7 +35,6 @@
         "comparison_operator:Eq": [[4,4]],
         "comparison_operator:NotEq": [[2,2]],
         "divisibility_test:2": [[4,4]],
-        "evolve_state": [[2,7]],
         "falsey_literal:0": [[4,4]],
         "function:print_collatz": [[1,8]],
         "function_argument:n": [[1,1]],
@@ -243,9 +242,6 @@
     "divisibility_test:2": [
       "tests/data/simple/collatz_print.py",
       "tests/data/simple/is_even.py"
-    ],
-    "evolve_state": [
-      "tests/data/simple/collatz_print.py"
     ],
     "falsey_literal:0": [
       "tests/data/simple/collatz_print.py",
