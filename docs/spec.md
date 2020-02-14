@@ -1,7 +1,7 @@
 - [Expressions](#expressions)
   - [Literals](#literals)
       - [Feature `literal`](#feature-literal)
-      - [Feature `falsey_literal`](#feature-falsey_literal)
+      - [Feature `empty_literal`](#feature-empty_literal)
   - [Subscripts](#subscripts)
       - [Feature `index`](#feature-index)
       - [Feature `index_arithmetic`](#feature-index_arithmetic)
@@ -239,25 +239,28 @@ Further categorization of numeric literals does not require to construct a sophi
 
 --------------------------------------------------------------------------------
 
-#### Feature `falsey_literal`
+#### Feature `empty_literal`
 
-Match any literal whose [truth value](https://docs.python.org/3/library/stdtypes.html#truth-value-testing) is `False`, i.e., `None`, `False`, `0` (null integer), `0.0` (null floating number), `0j` (null complex number), `""` (empty string), `()` (empty tuple), `[]` (empty list), `{}` (empty dictionary).
+Match `""` (empty string), `()` (empty tuple), `[]` (empty list) and `{}` (empty dictionary).
 
-Except from `None`, any falsey value can be constructed by calling its type without argument, e.g., `dict()`, `int()`, `set()` (the latter having no literal form). An empty (falsey) range is constructed by `range(0)`. No dedicated feature is implemented for these cases: use for instance `function_call_without_arguments:dict` and `range:0` to recognize them.
+Generally speaking, all falsey constants (i.e., of whom [truth value](https://docs.python.org/3/library/stdtypes.html#truth-value-testing) is `False`) can be recognized by an existing feature:
+- `None`: `literal:None`;
+- `False`: `literal:False`;
+- null integer: `literal:0`;
+- null floating-point number: `literal:0.0`;
+- null complex number: `literal:0j`
+- empty string: `empty_literal:Str` or `function_call_without_arguments:str`;
+- empty tuple: `empty_literal:Tuple` or `function_call_without_arguments:tuple`;
+- empty list: `empty_literal:List` or `function_call_without_arguments:list`;
+- empty dictionary: `empty_literal:Dict` or `function_call_without_arguments:dict`;
+- empty set: `function_call_without_arguments:set`;
+- empty range: `range:0`.
 
 ##### Specification
 
 ```re
            ^(.*)/_type=
 (
-                       NameConstant
-\n(?:\1.+\n)* \1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)* \1/value=(?P<SUFFIX>None|False)
-|
-                       Num
-\n(?:\1.+\n)* \1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)* \1/n=(?P<SUFFIX>0|0\.0|0j)
-|
                        (?P<SUFFIX>Str)
 \n(?:\1.+\n)* \1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)* \1/s=''
@@ -265,40 +268,26 @@ Except from `None`, any falsey value can be constructed by calling its type with
                        (?P<SUFFIX>Tuple|List|Dict)
 \n(?:\1.+\n)* \1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)* \1/(elts|keys)/length=0
-)$
+)
 ```
 
 ##### Example
 
 ```python
-1   None
-2   False
-3   0
-4   0.0
-5   0j
-6   ""
-7   ()
-8   []
-9   {}
-10  a = []
-11  print(0)
-12  if m == 0:
-13      pass
+1   ""
+2   ()
+3   []
+4   {}
 ```
 
 ##### Matches
 
 | Label | Lines |
 |:--|:--|
-| `falsey_literal:None` | 1 |
-| `falsey_literal:False` | 2 |
-| `falsey_literal:0` | 3, 11, 12 |
-| `falsey_literal:0.0` | 4 |
-| `falsey_literal:0j` | 5 |
-| `falsey_literal:Str` | 6 |
-| `falsey_literal:Tuple` | 7 |
-| `falsey_literal:List` | 8, 10 |
-| `falsey_literal:Dict` | 9 |
+| `empty_literal:Str` | 1 |
+| `empty_literal:Tuple` | 2 |
+| `empty_literal:List` | 3 |
+| `empty_literal:Dict` | 4 |
 
 --------------------------------------------------------------------------------
 
