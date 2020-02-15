@@ -45,6 +45,7 @@
       - [Feature `assignment`](#feature-assignment)
       - [Feature `single_assignment`](#feature-single_assignment)
       - [Feature `augmented_assignment`](#feature-augmented_assignment)
+      - [Feature `subscript_augmented_assignment`](#feature-subscript_augmented_assignment)
       - [Feature `chained_assignment`](#feature-chained_assignment)
       - [Feature `assignment_lhs_identifier`](#feature-assignment_lhs_identifier)
       - [Feature `assignment_rhs_atom`](#feature-assignment_rhs_atom)
@@ -1700,6 +1701,31 @@ Match a comprehension with an `if` clause.
 | `augmented_assignment:Add` | 1, 3, 5, 7 |
 | `augmented_assignment:Mult` | 4 |
 | `augmented_assignment:FloorDiv` | 6 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `subscript_augmented_assignment`
+
+##### Specification
+
+```re
+           ^(.*)/_type=AugAssign
+\n            \1/_pos=(?P<POS>.+)
+\n(?:\1.+\n)* \1/assigntarget/_type=Subscript
+\n(?:\1.+\n)* \1/op/_type=(?P<SUFFIX>.+)
+```
+
+##### Example
+
+```python
+1   a[i] += 1
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `subscript_augmented_assignment:Add` | 1 |
 
 --------------------------------------------------------------------------------
 

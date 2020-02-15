@@ -869,7 +869,7 @@ def solution(): # function:solution (-> +17), function_returning_something:solut
                 number2 = a[i - 1][j - 1] # assignment, assignment_lhs_identifier:number2, assignment_rhs_atom:1, assignment_rhs_atom:a, assignment_rhs_atom:i, assignment_rhs_atom:j, binary_operator:Sub, if_then_branch, index:_, index_arithmetic, literal:1, single_assignment:number2
             else:
                 number2 = 0 # assignment:0, assignment_lhs_identifier:number2, assignment_rhs_atom:0, if_else_branch, literal:0, single_assignment:number2
-            a[i][j] += max(number1, number2) # assignment_rhs_atom:number1, assignment_rhs_atom:number2, augmented_assignment:Add, call_argument:number1, call_argument:number2, function_call:max, index:i, index:j
+            a[i][j] += max(number1, number2) # assignment_rhs_atom:number1, assignment_rhs_atom:number2, augmented_assignment:Add, call_argument:number1, call_argument:number2, function_call:max, index:i, index:j, subscript_augmented_assignment:Add
     return max(a[-1]) # call_argument:, function_call:max, function_tail_call:max, index:-1, literal:-1, negative_index:-1, return
 
 # ----------------------------------------------------------------------------------------
@@ -1011,9 +1011,9 @@ def solution(): # function:solution (-> +12), function_returning_something:solut
 def solution(limit=28123): # function:solution (-> +13), function_argument:limit, function_argument_flavor:arg, function_returning_something:solution (-> +13), lines_of_code:14 (-> +13), literal:28123
     sumDivs = [1] * (limit + 1) # assignment:Mult, assignment_lhs_identifier:sumDivs, assignment_rhs_atom:1, assignment_rhs_atom:limit, binary_operator:Add, binary_operator:Mult, literal:1, literal:List, replication_operator:List, single_assignment:sumDivs
     for i in range(2, int(limit ** 0.5) + 1): # accumulate_all_elements:Add (-> +3), accumulate_elements:Add (-> +3), binary_operator:Add, binary_operator:Pow, call_argument:, call_argument:2, composition, for:i (-> +3), for_range:2:_ (-> +3), for_range:_:_ (-> +3), function_call:int, function_call:range, literal:0.5, literal:1, literal:2, loop:for (-> +3), range:2:_, suggest_constant_definition
-        sumDivs[i * i] += i # assignment_lhs_identifier:sumDivs, assignment_rhs_atom:i, augmented_assignment:Add, binary_operator:Mult, index:_, index_arithmetic, update:sumDivs:i, update_by_augmented_assignment:sumDivs:i, update_by_augmented_assignment_with:Add, update_with:Add
+        sumDivs[i * i] += i # assignment_lhs_identifier:sumDivs, assignment_rhs_atom:i, augmented_assignment:Add, binary_operator:Mult, index:_, index_arithmetic, subscript_augmented_assignment:Add, update:sumDivs:i, update_by_augmented_assignment:sumDivs:i, update_by_augmented_assignment_with:Add, update_with:Add
         for k in range(i + 1, limit // i + 1): # accumulate_all_elements:Add (-> +1), accumulate_elements:Add (-> +1), binary_operator:Add, binary_operator:FloorDiv, call_argument:, for:k (-> +1), for_range:_:_ (-> +1), function_call:range, literal:1, loop:for (-> +1), nested_for:1 (-> +1), range:_:_
-            sumDivs[k * i] += k + i # assignment_lhs_identifier:sumDivs, assignment_rhs_atom:i, assignment_rhs_atom:k, augmented_assignment:Add, binary_operator:Add, binary_operator:Mult, index:_, index_arithmetic, update:sumDivs:i, update:sumDivs:k, update_by_augmented_assignment:sumDivs:i, update_by_augmented_assignment:sumDivs:k, update_by_augmented_assignment_with:Add, update_with:Add
+            sumDivs[k * i] += k + i # assignment_lhs_identifier:sumDivs, assignment_rhs_atom:i, assignment_rhs_atom:k, augmented_assignment:Add, binary_operator:Add, binary_operator:Mult, index:_, index_arithmetic, subscript_augmented_assignment:Add, update:sumDivs:i, update:sumDivs:k, update_by_augmented_assignment:sumDivs:i, update_by_augmented_assignment:sumDivs:k, update_by_augmented_assignment_with:Add, update_with:Add
     abundants = set() # assignment:set, assignment_lhs_identifier:abundants, function_call:set, function_call_without_arguments:set, single_assignment:abundants
     res = 0 # assignment:0, assignment_lhs_identifier:res, assignment_rhs_atom:0, literal:0, single_assignment:res
     for n in range(1, limit + 1): # accumulate_elements:Add (-> +4), accumulate_elements:add (-> +4), accumulate_some_elements:Add (-> +4), accumulate_some_elements:add (-> +4), binary_operator:Add, call_argument:, call_argument:1, for:n (-> +4), for_range:1:_ (-> +4), function_call:range, literal:1, loop:for (-> +4), range:1:_
@@ -1478,7 +1478,7 @@ def solution(): # function:solution (-> +18), function_returning_something:solut
                 number2 = a[i - 1][j - 1] # assignment, assignment_lhs_identifier:number2, assignment_rhs_atom:1, assignment_rhs_atom:a, assignment_rhs_atom:i, assignment_rhs_atom:j, binary_operator:Sub, if_then_branch, index:_, index_arithmetic, literal:1, single_assignment:number2
             else:
                 number2 = 0 # assignment:0, assignment_lhs_identifier:number2, assignment_rhs_atom:0, if_else_branch, literal:0, single_assignment:number2
-            a[i][j] += max(number1, number2) # assignment_rhs_atom:number1, assignment_rhs_atom:number2, augmented_assignment:Add, call_argument:number1, call_argument:number2, function_call:max, index:i, index:j
+            a[i][j] += max(number1, number2) # assignment_rhs_atom:number1, assignment_rhs_atom:number2, augmented_assignment:Add, call_argument:number1, call_argument:number2, function_call:max, index:i, index:j, subscript_augmented_assignment:Add
     return max(a[-1]) # call_argument:, function_call:max, function_tail_call:max, index:-1, literal:-1, negative_index:-1, return
 
 # ----------------------------------------------------------------------------------------
@@ -1490,9 +1490,9 @@ def partition(m): # function:partition (-> +9), function_argument:m, function_ar
         memo[i][0] = 1 # assignment:1, assignment_rhs_atom:1, index:0, index:i, literal:0, literal:1
     for n in range(m + 1): # binary_operator:Add, call_argument:, for:n (-> +4), for_range:1:m (-> +4), for_range:_ (-> +4), function_call:range, literal:1, loop:for (-> +4), range:_
         for k in range(1, m): # call_argument:1, call_argument:m, for:k (-> +3), for_range:1:m (-> +3), function_call:range, literal:1, loop:for (-> +3), nested_for:1 (-> +3), range:1:m
-            memo[n][k] += memo[n][k - 1] # assignment_rhs_atom:1, assignment_rhs_atom:k, assignment_rhs_atom:memo, assignment_rhs_atom:n, augmented_assignment:Add, binary_operator:Sub, index:_, index:k, index:n, index_arithmetic, literal:1
+            memo[n][k] += memo[n][k - 1] # assignment_rhs_atom:1, assignment_rhs_atom:k, assignment_rhs_atom:memo, assignment_rhs_atom:n, augmented_assignment:Add, binary_operator:Sub, index:_, index:k, index:n, index_arithmetic, literal:1, subscript_augmented_assignment:Add
             if n > k: # comparison_operator:Gt, if (-> +1), if_test_atom:k, if_test_atom:n
-                memo[n][k] += memo[n - k - 1][k] # assignment_rhs_atom:1, assignment_rhs_atom:k, assignment_rhs_atom:memo, assignment_rhs_atom:n, augmented_assignment:Add, binary_operator:Sub, if_then_branch, index:_, index:k, index:n, index_arithmetic, literal:1
+                memo[n][k] += memo[n - k - 1][k] # assignment_rhs_atom:1, assignment_rhs_atom:k, assignment_rhs_atom:memo, assignment_rhs_atom:n, augmented_assignment:Add, binary_operator:Sub, if_then_branch, index:_, index:k, index:n, index_arithmetic, literal:1, subscript_augmented_assignment:Add
     return memo[m][m - 1] - 1 # binary_operator:Sub, index:_, index:m, index_arithmetic, literal:1, return
 
 # ----------------------------------------------------------------------------------------

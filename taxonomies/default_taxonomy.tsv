@@ -194,6 +194,7 @@ type/elementary/string/empty/	empty_literal:Str
 type/elementary/string/formatted/	f_string
 variable/assignment/	assignment\b.*
 variable/assignment/augmented/\1/	augmented_assignment:(.+)
+variable/assignment/augmented/subscript/\1/	subscript_augmented_assignment:(.+)
 variable/assignment/chained/	chained_assignment
 variable/assignment/constant/	assignment_lhs_identifier:[[:upper:]0-9_]+
 variable/assignment/single/	single_assignment:.+
@@ -217,7 +218,6 @@ subscript/index/double/	TODO
 type/container/tuple/assignment/	TODO
 type/elementary/string/newline/	TODO
 variable/assignment/argument/	TODO
-variable/assignment/augmented/subscript/	TODO
 variable/assignment/iteration_variable/	TODO
 variable/assignment/iteration_variable/tuple/	TODO
 variable/assignment/parallel/	TODO

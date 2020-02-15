@@ -288,7 +288,7 @@ def binomial_coefficient(n, r): # function:binomial_coefficient (-> +8), functio
     for i in range(1, n + 1): # binary_operator:Add, call_argument:, call_argument:1, for:i (-> +4), for_range:1:_ (-> +4), function_call:range, literal:1, loop:for (-> +4), range:1:_
         j = min(i, r) # assignment:min, assignment_lhs_identifier:j, assignment_rhs_atom:i, assignment_rhs_atom:r, call_argument:i, call_argument:r, function_call:min, single_assignment:j
         while j > 0: # comparison_operator:Gt, literal:0, loop:while (-> +2), while (-> +2)
-            C[j] += C[j - 1] # assignment_lhs_identifier:C, assignment_rhs_atom:1, assignment_rhs_atom:C, assignment_rhs_atom:j, augmented_assignment:Add, binary_operator:Sub, index:_, index:j, index_arithmetic, literal:1, update:C:1, update:C:C, update:C:j, update_by_augmented_assignment:C:1, update_by_augmented_assignment:C:C, update_by_augmented_assignment:C:j, update_by_augmented_assignment_with:Add, update_with:Add
+            C[j] += C[j - 1] # assignment_lhs_identifier:C, assignment_rhs_atom:1, assignment_rhs_atom:C, assignment_rhs_atom:j, augmented_assignment:Add, binary_operator:Sub, index:_, index:j, index_arithmetic, literal:1, subscript_augmented_assignment:Add, update:C:1, update:C:C, update:C:j, update_by_augmented_assignment:C:1, update_by_augmented_assignment:C:C, update_by_augmented_assignment:C:j, update_by_augmented_assignment_with:Add, update_with:Add
             j -= 1 # assignment_lhs_identifier:j, assignment_rhs_atom:1, augmented_assignment:Sub, literal:1, update:j:1, update_by_augmented_assignment:j:1, update_by_augmented_assignment_with:Sub, update_with:Sub
     return C[r] # index:r, return
 print(binomial_coefficient(n=10, r=5)) # call_argument:, composition, function_call:binomial_coefficient, function_call:print, literal:10, literal:5
@@ -746,7 +746,7 @@ class Matrix(object): # class:Matrix (-> +14)
         for i in range(self.n): # call_argument:, for:i (-> +3), for_range:_ (-> +3), function_call:range, loop:for (-> +3), range:_, square_nested_for (-> +3)
             for j in range(self.n): # call_argument:, for:j (-> +2), for_range:_ (-> +2), function_call:range, loop:for (-> +2), nested_for:1 (-> +2), range:_, square_nested_for (-> +2)
                 for k in range(self.n): # call_argument:, for:k (-> +1), for_range:_ (-> +1), function_call:range, loop:for (-> +1), nested_for:2 (-> +1), range:_
-                    matrix.t[i][j] += self.t[i][k] * b.t[k][j] # assignment_rhs_atom:b, assignment_rhs_atom:i, assignment_rhs_atom:j, assignment_rhs_atom:k, assignment_rhs_atom:self, augmented_assignment:Add, binary_operator:Mult, index:i, index:j, index:k
+                    matrix.t[i][j] += self.t[i][k] * b.t[k][j] # assignment_rhs_atom:b, assignment_rhs_atom:i, assignment_rhs_atom:j, assignment_rhs_atom:k, assignment_rhs_atom:self, augmented_assignment:Add, binary_operator:Mult, index:i, index:j, index:k, subscript_augmented_assignment:Add
         return matrix # return:matrix
 def modular_exponentiation(a, b): # function:modular_exponentiation (-> +7), function_argument:a, function_argument:b, function_argument_flavor:arg, function_returning_something:modular_exponentiation (-> +7)
     matrix = Matrix([[1, 0], [0, 1]]) # assignment:Matrix, assignment_lhs_identifier:matrix, assignment_rhs_atom:0, assignment_rhs_atom:1, call_argument:, function_call:Matrix, literal:0, literal:1, literal:List, single_assignment:matrix
