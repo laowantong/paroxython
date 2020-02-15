@@ -243,12 +243,12 @@ Further categorization of numeric literals does not require to construct a sophi
 
 Match `""` (empty string), `()` (empty tuple), `[]` (empty list) and `{}` (empty dictionary).
 
-Generally speaking, all falsey constants (i.e., of whom [truth value](https://docs.python.org/3/library/stdtypes.html#truth-value-testing) is `False`) can be recognized by an existing feature:
+Generally speaking, all _falsey_ constants (i.e., whose [truth value](https://docs.python.org/3/library/stdtypes.html#truth-value-testing) is `False`) can be recognized by an existing feature:
 - `None`: `literal:None`;
 - `False`: `literal:False`;
 - null integer: `literal:0`;
 - null floating-point number: `literal:0.0`;
-- null complex number: `literal:0j`
+- null complex number: `literal:0j`;
 - empty string: `function_call_without_arguments:str` or `empty_literal:Str`;
 - empty tuple: `function_call_without_arguments:tuple` or `empty_literal:Tuple`;
 - empty list: `function_call_without_arguments:list` or `empty_literal:List`;
@@ -1857,7 +1857,7 @@ Capture any [_atom_](#feature-call_argument) appearing on the right hand side of
 
 #### Feature `update_by_assignment`
 
-Match the reassignment of a variable `x` and capture its name in the first part of the suffix. In the second part, match any atom distinct from `x` and participating to the update (this excludes any function name).
+Match the reassignment of a variable `x` and capture its name in the first part of the suffix. In the second part, match any atom distinct from `x` and participating in the update (this excludes any function name).
 
 ##### Derivations
 
@@ -2672,7 +2672,7 @@ GROUP BY r.rowid
 
 #### Feature `function_returning_nothing`
 
-A function returning nothing (aka a procedure) is a function which is neither a generator or a function returning something.
+A function returning nothing (_aka_ a procedure) is a function which is neither a generator or a function returning something.
 
 ##### Derivations
 

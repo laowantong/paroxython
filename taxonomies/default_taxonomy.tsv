@@ -198,33 +198,33 @@ variable/assignment/chained/	chained_assignment
 variable/assignment/constant/	assignment_lhs_identifier:[[:upper:]0-9_]+
 variable/assignment/single/	single_assignment:.+
 -- EOF	
-call/function/other/	
-call/function/other/predicate/	
-io/standard/print/multiple/	
-io/standard/print/newline/	
-io/standard/print/without_newline/	
-pattern/elements/accumulate/find_best/index/	
-pattern/states/accumulate/	
-pattern/states/accumulate/count/	
-pattern/states/accumulate/find_best/	
-style/functional/	
-style/object/	
-style/one_liner/	
-style/procedural/	
-style/sequential/	
-style/test_driven/	
-subscript/index/double/	
-type/container/tuple/assignment/	
-type/elementary/string/newline/	
-variable/assignment/argument/	
-variable/assignment/augmented/subscript/	
-variable/assignment/iteration_variable/	
-variable/assignment/iteration_variable/tuple/	
-variable/assignment/parallel/
-variable/assignment/parallel/subscript/	
-variable/assignment/single/subscript/	
-variable/scope/global/	
-variable/scope/local/	
-variable/scope/local/argument/	
-variable/scope/outer/	
-variable/scope/shadowing/	
+call/function/other/	TODO
+call/function/other/predicate/	TODO
+io/standard/print/multiple/	TODO
+io/standard/print/newline/	TODO
+io/standard/print/without_newline/	TODO
+pattern/elements/accumulate/find_best/index/	TODO
+pattern/states/accumulate/	TODO
+pattern/states/accumulate/count/	TODO
+pattern/states/accumulate/find_best/	TODO
+style/functional/	TODO
+style/object/	TODO
+style/one_liner/	TODO
+style/procedural/	TODO
+style/sequential/	TODO
+style/test_driven/	TODO
+subscript/index/double/	TODO
+type/container/tuple/assignment/	TODO
+type/elementary/string/newline/	TODO
+variable/assignment/argument/	TODO
+variable/assignment/augmented/subscript/	TODO
+variable/assignment/iteration_variable/	TODO
+variable/assignment/iteration_variable/tuple/	TODO
+variable/assignment/parallel/	TODO
+variable/assignment/parallel/subscript/	TODO
+variable/assignment/single/subscript/	TODO
+variable/scope/global/	TODO
+variable/scope/local/	TODO
+variable/scope/local/argument/	TODO
+variable/scope/outer/	TODO
+variable/scope/shadowing/	TODO
