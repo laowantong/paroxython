@@ -154,6 +154,7 @@
 - function_without_arguments
 - generator
 - get_valid_input
+- higher-order function
 - if_test_atom
 - import
 - import_module

@@ -323,7 +323,7 @@ def main(): # function:main (-> +4), function_returning_nothing:main (-> +4), fu
 # ../Python/maths/explicit_euler.py
 # ----------------------------------------------------------------------------------------
 import numpy as np # import:numpy, import_module:numpy, lines_of_code:10 (-> +9)
-def explicit_euler(ode_func, y0, x0, stepsize, x_end): # function:explicit_euler (-> +8), function_argument:ode_func, function_argument:stepsize, function_argument:x0, function_argument:x_end, function_argument:y0, function_argument_flavor:arg, function_returning_something:explicit_euler (-> +8)
+def explicit_euler(ode_func, y0, x0, stepsize, x_end): # function:explicit_euler (-> +8), function_argument:ode_func, function_argument:stepsize, function_argument:x0, function_argument:x_end, function_argument:y0, function_argument_flavor:arg, function_returning_something:explicit_euler (-> +8), higher_order_function:ode_func (-> +8)
     N = int(np.ceil((x_end - x0) / stepsize)) # assignment:int, assignment_lhs_identifier:N, assignment_rhs_atom:np, assignment_rhs_atom:stepsize, assignment_rhs_atom:x0, assignment_rhs_atom:x_end, binary_operator:Div, binary_operator:Sub, call_argument:, composition, function_call:int, method_call:ceil, single_assignment:N
     y = np.zeros((N + 1,)) # assignment:zeros, assignment_lhs_identifier:y, assignment_rhs_atom:1, assignment_rhs_atom:N, assignment_rhs_atom:np, binary_operator:Add, call_argument:, literal:1, method_call:zeros, single_assignment:y
     y[0] = y0 # assignment, assignment_lhs_identifier:y, assignment_rhs_atom:y0, index:0, literal:0
@@ -431,7 +431,7 @@ import functools # import:functools, import_module:functools
 import time # import:time, import_module:time
 from decimal import getcontext, Decimal # import:decimal:Decimal, import:decimal:getcontext, import_module:decimal, import_name:Decimal, import_name:getcontext
 getcontext().prec = 100 # assignment:100, assignment_rhs_atom:100, function_call:getcontext, function_call_without_arguments:getcontext, literal:100
-def timer_decorator(func): # closure:timer_decorator (-> +11), function:timer_decorator (-> +11), function_argument:func, function_argument_flavor:arg, function_returning_something:timer_decorator (-> +11), nested_function:timer_decorator (-> +11)
+def timer_decorator(func): # closure:timer_decorator (-> +11), function:timer_decorator (-> +11), function_argument:func, function_argument_flavor:arg, function_returning_something:timer_decorator (-> +11), higher_order_function:func (-> +11), nested_function:timer_decorator (-> +11)
     @functools.wraps(func) # call_argument:func, decorated_function:timer_wrapper (-> +9), function:timer_wrapper (-> +9), function_returning_something:timer_wrapper (-> +9), method_call:wraps
     def timer_wrapper(*args, **kwargs): # function_argument:args, function_argument:kwargs, function_argument_flavor:kwarg, function_argument_flavor:vararg
         start = time.time() # assignment:time, assignment_lhs_identifier:start, assignment_rhs_atom:time, method_call:time, single_assignment:start
@@ -832,9 +832,9 @@ def main(): # function:main (-> +1), function_returning_nothing:main (-> +1), fu
 # ../Python/maths/newton_raphson.py
 # ----------------------------------------------------------------------------------------
 import math as m # import:math, import_module:math, lines_of_code:21 (-> +20)
-def calc_derivative(f, a, h=0.001): # function:calc_derivative (-> +1), function_argument:a, function_argument:f, function_argument:h, function_argument_flavor:arg, function_returning_something:calc_derivative (-> +1), literal:0.001
+def calc_derivative(f, a, h=0.001): # function:calc_derivative (-> +1), function_argument:a, function_argument:f, function_argument:h, function_argument_flavor:arg, function_returning_something:calc_derivative (-> +1), higher_order_function:f (-> +1), literal:0.001
     return (f(a + h) - f(a - h)) / (2 * h) # binary_operator:Add, binary_operator:Div, binary_operator:Mult, binary_operator:Sub, call_argument:, function_call:f, literal:2, return
-def newton_raphson(f, x0=0, maxiter=100, step=0.0001, maxerror=1e-6, logsteps=False): # function:newton_raphson (-> +17), function_argument:f, function_argument:logsteps, function_argument:maxerror, function_argument:maxiter, function_argument:step, function_argument:x0, function_argument_flavor:arg, function_returning_something:newton_raphson (-> +17), literal:0, literal:0.0001, literal:100, literal:1e-06, literal:False
+def newton_raphson(f, x0=0, maxiter=100, step=0.0001, maxerror=1e-6, logsteps=False): # function:newton_raphson (-> +17), function_argument:f, function_argument:logsteps, function_argument:maxerror, function_argument:maxiter, function_argument:step, function_argument:x0, function_argument_flavor:arg, function_returning_something:newton_raphson (-> +17), higher_order_function:f (-> +17), literal:0, literal:0.0001, literal:100, literal:1e-06, literal:False
     a = x0 # assignment, assignment_lhs_identifier:a, assignment_rhs_atom:x0, single_assignment:a
     steps = [a] # assignment, assignment_lhs_identifier:steps, assignment_rhs_atom:a, single_assignment:steps
     error = abs(f(a)) # assignment:abs, assignment_lhs_identifier:error, assignment_rhs_atom:a, call_argument:, call_argument:a, composition, function_call:abs, function_call:f, single_assignment:error
@@ -1101,7 +1101,7 @@ class FFT: # class:FFT (-> +89)
 # ../Python/maths/runge_kutta.py
 # ----------------------------------------------------------------------------------------
 import numpy as np # import:numpy, import_module:numpy, lines_of_code:14 (-> +13)
-def runge_kutta(f, y0, x0, h, x_end): # function:runge_kutta (-> +12), function_argument:f, function_argument:h, function_argument:x0, function_argument:x_end, function_argument:y0, function_argument_flavor:arg, function_returning_something:runge_kutta (-> +12)
+def runge_kutta(f, y0, x0, h, x_end): # function:runge_kutta (-> +12), function_argument:f, function_argument:h, function_argument:x0, function_argument:x_end, function_argument:y0, function_argument_flavor:arg, function_returning_something:runge_kutta (-> +12), higher_order_function:f (-> +12)
     N = int(np.ceil((x_end - x0) / h)) # assignment:int, assignment_lhs_identifier:N, assignment_rhs_atom:h, assignment_rhs_atom:np, assignment_rhs_atom:x0, assignment_rhs_atom:x_end, binary_operator:Div, binary_operator:Sub, call_argument:, composition, function_call:int, method_call:ceil, single_assignment:N
     y = np.zeros((N + 1,)) # assignment:zeros, assignment_lhs_identifier:y, assignment_rhs_atom:1, assignment_rhs_atom:N, assignment_rhs_atom:np, binary_operator:Add, call_argument:, literal:1, method_call:zeros, single_assignment:y
     y[0] = y0 # assignment, assignment_lhs_identifier:y, assignment_rhs_atom:y0, index:0, literal:0

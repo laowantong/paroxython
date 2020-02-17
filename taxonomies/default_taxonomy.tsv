@@ -114,6 +114,7 @@ subroutine_definition/argument/no/	function_without_arguments:.+
 subroutine_definition/decorated/	decorated_function:.+
 subroutine_definition/function/	function_returning_something:.+
 subroutine_definition/generator/	generator:.+
+subroutine_definition/higher_order/	higher_order_function:.+
 subroutine_definition/method/flavor/class/	class_method:.+
 subroutine_definition/method/flavor/instance/	instance_method:.+
 subroutine_definition/method/flavor/static/	static_method:.+

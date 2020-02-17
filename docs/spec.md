@@ -79,6 +79,7 @@
     - [Nesting](#nesting)
       - [Feature `nested_function`](#feature-nested_function)
       - [Feature `closure` (SQL)](#feature-closure)
+      - [Feature `higher-order function` (SQL)](#feature-higher-order-function)
     - [Recursion](#recursion)
       - [Feature `recursive_function` (SQL)](#feature-recursive_function)
       - [Feature `deeply_recursive_function` (SQL)](#feature-deeply_recursive_function)
@@ -1085,6 +1086,7 @@ When the value of the left operand suffices to determine the value of a boolean 
 
 [⬇️ feature `body_recursive_function`](#feature-body_recursive_function)  
 [⬇️ feature `deeply_recursive_function`](#feature-deeply_recursive_function)  
+[⬇️ feature `higher-order function`](#feature-higher-order-function)  
 [⬇️ feature `range`](#feature-range)  
 [⬇️ feature `recursive_function`](#feature-recursive_function)  
 
@@ -2497,6 +2499,7 @@ In Python, the term "function" encompasses any type of subroutine, be it a metho
 [⬇️ feature `function_returning_nothing`](#feature-function_returning_nothing)  
 [⬇️ feature `function_returning_something`](#feature-function_returning_something)  
 [⬇️ feature `generator`](#feature-generator)  
+[⬇️ feature `higher-order function`](#feature-higher-order-function)  
 [⬇️ feature `method`](#feature-method)  
 [⬇️ feature `recursive_function`](#feature-recursive_function)  
 
@@ -2815,6 +2818,7 @@ WHERE t.span IS NULL
 
 ##### Derivations
 
+[⬇️ feature `higher-order function`](#feature-higher-order-function)  
 [⬇️ feature `instance_method|class_method|static_method`](#feature-instance_methodclass_methodstatic_method)  
 
 ##### Specification
@@ -3059,6 +3063,52 @@ GROUP BY c.rowid
 | Label | Lines |
 |:--|:--|
 | `closure:outer_function` | 1-5 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `higher-order function`
+
+Match a function having another function as an argument, at least when the latter is called inside the former.
+
+##### Derivations
+
+[⬆️ feature `function`](#feature-function)  
+[⬆️ feature `function_argument`](#feature-function_argument)  
+[⬆️ feature `function_call`](#feature-function_call)  
+
+##### Specification
+
+```sql
+SELECT "higher_order_function",
+       a.name_suffix,
+       f.span,
+       f.path
+FROM t_function f
+JOIN t_function_argument a ON (a.path GLOB f.path || "*-")
+JOIN t_function_call c ON (c.name_suffix = a.name_suffix
+                           AND c.path GLOB f.path || "*-")
+GROUP BY f.path,
+         a.name_suffix
+```
+
+##### Example
+
+```python
+1   def bar(f, g):
+2       def foo(h, a, b):
+3           x = h(a)
+4           y = h(b)
+5           z = g(a, b)
+6           return x + y + z
+7       foo(f, 1, 2)
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `higher_order_function:g` | 1-7 |
+| `higher_order_function:h` | 1-7, 2-6 |
 
 --------------------------------------------------------------------------------
 
