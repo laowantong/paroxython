@@ -4,6 +4,7 @@
       - [Feature `empty_literal`](#feature-empty_literal)
   - [Subscripts](#subscripts)
       - [Feature `index`](#feature-index)
+      - [Feature `nested_index` (SQL)](#feature-nested_index)
       - [Feature `index_arithmetic`](#feature-index_arithmetic)
       - [Feature `negative_index`](#feature-negative_index)
       - [Feature `slice_lower`](#feature-slice_lower)
@@ -300,23 +301,25 @@ Generally speaking, all _falsey_ constants (i.e., whose [truth value](https://do
 
 Match an index in a sequence type or a key in a dictionary type, and suffix it by either an integer or an identifier if it is atomic, or `"_"` otherwise.
 
+##### Derivations
+
+[⬇️ feature `nested_index`](#feature-nested_index)  
+
 ##### Specification
 
 ```re
            ^(.*)(?<!/annotation)/_type=Subscript
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/slice/_type=Index
 \n            \1/slice/value
 (
                             /_type=Name
-\n(?:\1.+\n)*?\1/slice/value/_pos=(?P<POS>.+)
 \n(?:\1.+\n)* \1/slice/value/id=(?P<SUFFIX>.+)
 |
                             /_type=Num
-\n(?:\1.+\n)*?\1/slice/value/_pos=(?P<POS>.+)
 \n(?:\1.+\n)* \1/slice/value/n=(?P<SUFFIX>.+)
 |
                             /(?P<SUFFIX>_)type=.+
-\n(?:\1.+\n)*?\1/slice/value/_pos=(?P<POS>.+)
 )$
 ```
 
@@ -338,6 +341,56 @@ Match an index in a sequence type or a key in a dictionary type, and suffix it b
 | `index:42` | 1 |
 | `index:key` | 2 |
 | `index:_` | 4 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `nested_index`
+
+In pure Python, multidimensionnal arrays are lists of lists. Thus, accessing a cell (_i_, _j_) of a matrix _m_ is done first
+by accessing the _i_th list of _m_ (`m[i]`), then the _j_th cell of this list (`m[i][j]`). The length of this index concatenation gives the dimension (or _shape_) of the array.
+
+##### Derivations
+
+[⬆️ feature `index`](#feature-index)  
+
+##### Specification
+
+```sql
+SELECT "nested_index",
+       count(*) + 1,
+       i2.span,
+       i2.path
+FROM t_index i1
+JOIN t_index i2 ON (i2.path GLOB i1.path || "*-")
+WHERE NOT EXISTS
+    (SELECT *
+     FROM t_index i0
+     WHERE (i1.path REGEXP i0.path || "\d+-$") )
+GROUP BY i1.path
+ORDER BY i1.path
+```
+
+##### Example
+
+```python
+1   a[i] # no match
+2   a[i][j]
+3   a[i][j][k]
+4   a[i][j][k][l]
+5   a[i][j][k][l][m]
+6   a[i][j][k][l][m][n]
+7   a[i][j] + b[i][j][k]
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `nested_index:2` | 2, 7 |
+| `nested_index:3` | 3, 7 |
+| `nested_index:4` | 4 |
+| `nested_index:5` | 5 |
+| `nested_index:6` | 6 |
 
 --------------------------------------------------------------------------------
 

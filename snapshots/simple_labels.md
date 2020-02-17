@@ -176,6 +176,7 @@
 - nested_for
 - nested_function
 - nested_if
+- nested_index
 - raise
 - range
 - recursive_function

@@ -2,7 +2,7 @@
 # ../Python/maths/3n+1.py
 # ----------------------------------------------------------------------------------------
 from typing import Tuple, List # import:typing:List, import:typing:Tuple, import_module:typing, import_name:List, import_name:Tuple, lines_of_code:128 (-> +127)
-def n31(a: int) -> Tuple[List[int], int]: # function:n31 (-> +12), function_argument:a, function_argument_flavor:arg, function_returning_something:n31 (-> +12), index:_, index:int
+def n31(a: int) -> Tuple[List[int], int]: # function:n31 (-> +12), function_argument:a, function_argument_flavor:arg, function_returning_something:n31 (-> +12), index:_, index:int, nested_index:2
     if not isinstance(a, int): # call_argument:a, call_argument:int, function_call:isinstance, if (-> +1), if_test_atom:a, if_test_atom:int, unary_operator:Not
         raise TypeError("Must be int, not {0}".format(type(a).__name__)) # call_argument:, call_argument:a, composition, function_call:TypeError, function_call:type, if_then_branch, literal:Str, method_call:format, raise:TypeError
     if a < 1: # comparison_operator:Lt, if (-> +1), if_test_atom:1, if_test_atom:a, literal:1
@@ -746,7 +746,7 @@ class Matrix(object): # class:Matrix (-> +14)
         for i in range(self.n): # call_argument:, for:i (-> +3), for_range:_ (-> +3), function_call:range, loop:for (-> +3), range:_, square_nested_for (-> +3)
             for j in range(self.n): # call_argument:, for:j (-> +2), for_range:_ (-> +2), function_call:range, loop:for (-> +2), nested_for:1 (-> +2), range:_, square_nested_for (-> +2)
                 for k in range(self.n): # call_argument:, for:k (-> +1), for_range:_ (-> +1), function_call:range, loop:for (-> +1), nested_for:2 (-> +1), range:_
-                    matrix.t[i][j] += self.t[i][k] * b.t[k][j] # assignment_rhs_atom:b, assignment_rhs_atom:i, assignment_rhs_atom:j, assignment_rhs_atom:k, assignment_rhs_atom:self, augmented_assignment:Add, binary_operator:Mult, index:i, index:j, index:k, subscript_augmented_assignment:Add
+                    matrix.t[i][j] += self.t[i][k] * b.t[k][j] # assignment_rhs_atom:b, assignment_rhs_atom:i, assignment_rhs_atom:j, assignment_rhs_atom:k, assignment_rhs_atom:self, augmented_assignment:Add, binary_operator:Mult, index:i, index:j, index:k, nested_index:2, subscript_augmented_assignment:Add
         return matrix # return:matrix
 def modular_exponentiation(a, b): # function:modular_exponentiation (-> +7), function_argument:a, function_argument:b, function_argument_flavor:arg, function_returning_something:modular_exponentiation (-> +7)
     matrix = Matrix([[1, 0], [0, 1]]) # assignment:Matrix, assignment_lhs_identifier:matrix, assignment_rhs_atom:0, assignment_rhs_atom:1, call_argument:, function_call:Matrix, literal:0, literal:1, literal:List, single_assignment:matrix
@@ -763,7 +763,7 @@ def fibonacci_with_matrix_exponentiation(n, f1, f2): # function:fibonacci_with_m
         return f2 # if_elif_branch, return:f2
     matrix = Matrix([[1, 1], [1, 0]]) # assignment:Matrix, assignment_lhs_identifier:matrix, assignment_rhs_atom:0, assignment_rhs_atom:1, call_argument:, function_call:Matrix, literal:0, literal:1, literal:List, single_assignment:matrix
     matrix = modular_exponentiation(matrix, n - 2) # assignment:modular_exponentiation, assignment_lhs_identifier:matrix, assignment_rhs_atom:2, assignment_rhs_atom:matrix, assignment_rhs_atom:n, binary_operator:Sub, call_argument:, call_argument:matrix, function_call:modular_exponentiation, literal:2, single_assignment:matrix, update:matrix:2, update:matrix:n, update_by_assignment:matrix:2, update_by_assignment:matrix:n, update_by_assignment_with:modular_exponentiation, update_with:modular_exponentiation
-    return f2 * matrix.t[0][0] + f1 * matrix.t[0][1] # binary_operator:Add, binary_operator:Mult, index:0, index:1, literal:0, literal:1, return
+    return f2 * matrix.t[0][0] + f1 * matrix.t[0][1] # binary_operator:Add, binary_operator:Mult, index:0, index:1, literal:0, literal:1, nested_index:2, return
 def simple_fibonacci(n, f1, f2): # function:simple_fibonacci (-> +11), function_argument:f1, function_argument:f2, function_argument:n, function_argument_flavor:arg, function_returning_something:simple_fibonacci (-> +11)
     if n == 1: # comparison_operator:Eq, if (-> +3), if_test_atom:1, if_test_atom:n, literal:1
         return f1 # if_then_branch, return:f1
@@ -1039,12 +1039,12 @@ class FFT: # class:FFT (-> +89)
             current_root = 1 # assignment:1, assignment_lhs_identifier:current_root, assignment_rhs_atom:1, literal:1, single_assignment:current_root
             for j in range(self.C_max_length // (next_ncol * 2)): # binary_operator:FloorDiv, binary_operator:Mult, call_argument:, for:j (-> +3), for_range:_ (-> +3), for_range:next_ncol (-> +3), function_call:range, literal:2, loop:for (-> +3), range:_
                 for i in range(next_ncol): # call_argument:next_ncol, for:i (-> +1), for_range:next_ncol (-> +1), function_call:range, loop:for (-> +1), nested_for:1 (-> +1), range:next_ncol
-                    new_dft[i].append(dft[i][j] + current_root * dft[i + next_ncol][j]) # binary_operator:Add, binary_operator:Mult, call_argument:, index:_, index:i, index:j, index_arithmetic, method_call:append
+                    new_dft[i].append(dft[i][j] + current_root * dft[i + next_ncol][j]) # binary_operator:Add, binary_operator:Mult, call_argument:, index:_, index:i, index:j, index_arithmetic, method_call:append, nested_index:2
                 current_root *= root # assignment_lhs_identifier:current_root, assignment_rhs_atom:root, augmented_assignment:Mult, update:current_root:root, update_by_augmented_assignment:current_root:root, update_by_augmented_assignment_with:Mult, update_with:Mult
             current_root = 1 # assignment:1, assignment_lhs_identifier:current_root, assignment_rhs_atom:1, literal:1, single_assignment:current_root
             for j in range(self.C_max_length // (next_ncol * 2)): # binary_operator:FloorDiv, binary_operator:Mult, call_argument:, for:j (-> +3), for_range:_ (-> +3), for_range:next_ncol (-> +3), function_call:range, literal:2, loop:for (-> +3), range:_
                 for i in range(next_ncol): # call_argument:next_ncol, for:i (-> +1), for_range:next_ncol (-> +1), function_call:range, loop:for (-> +1), nested_for:1 (-> +1), range:next_ncol
-                    new_dft[i].append(dft[i][j] - current_root * dft[i + next_ncol][j]) # binary_operator:Add, binary_operator:Mult, binary_operator:Sub, call_argument:, index:_, index:i, index:j, index_arithmetic, method_call:append
+                    new_dft[i].append(dft[i][j] - current_root * dft[i + next_ncol][j]) # binary_operator:Add, binary_operator:Mult, binary_operator:Sub, call_argument:, index:_, index:i, index:j, index_arithmetic, method_call:append, nested_index:2
                 current_root *= root # assignment_lhs_identifier:current_root, assignment_rhs_atom:root, augmented_assignment:Mult, update:current_root:root, update_by_augmented_assignment:current_root:root, update_by_augmented_assignment_with:Mult, update_with:Mult
             dft = new_dft # assignment, assignment_lhs_identifier:dft, assignment_rhs_atom:new_dft, single_assignment:dft
             next_ncol = next_ncol // 2 # assignment:FloorDiv, assignment_lhs_identifier:next_ncol, assignment_rhs_atom:2, assignment_rhs_atom:next_ncol, binary_operator:FloorDiv, literal:2, single_assignment:next_ncol, suggest_augmented_assignment, update:next_ncol:2, update_by_assignment:next_ncol:2, update_by_assignment_with:FloorDiv, update_with:FloorDiv
@@ -1066,15 +1066,15 @@ class FFT: # class:FFT (-> +89)
                 for i in range(next_ncol // 2): # binary_operator:FloorDiv, call_argument:, for:i (-> +13), for_range:_ (-> +13), function_call:range, literal:2, loop:for (-> +13), nested_for:1 (-> +13), range:_
                     new_inverseC[i].append( # index:i, method_call:append
                         ( # binary_operator:Div, call_argument:
-                            inverseC[i][j] # binary_operator:Add, index:i, index:j
-                            + inverseC[i][j + self.C_max_length // next_ncol] # binary_operator:Add, binary_operator:FloorDiv, index:_, index:i, index_arithmetic
+                            inverseC[i][j] # binary_operator:Add, index:i, index:j, nested_index:2
+                            + inverseC[i][j + self.C_max_length // next_ncol] # binary_operator:Add, binary_operator:FloorDiv, index:_, index:i, index_arithmetic, nested_index:2
                         )
                         / 2 # literal:2
                     )
                     new_inverseC[i + next_ncol // 2].append( # binary_operator:Add, binary_operator:FloorDiv, index:_, index_arithmetic, literal:2, method_call:append
                         ( # binary_operator:Div, call_argument:
-                            inverseC[i][j] # binary_operator:Sub, index:i, index:j
-                            - inverseC[i][j + self.C_max_length // next_ncol] # binary_operator:Add, binary_operator:FloorDiv, index:_, index:i, index_arithmetic
+                            inverseC[i][j] # binary_operator:Sub, index:i, index:j, nested_index:2
+                            - inverseC[i][j + self.C_max_length // next_ncol] # binary_operator:Add, binary_operator:FloorDiv, index:_, index:i, index_arithmetic, nested_index:2
                         )
                         / (2 * current_root) # binary_operator:Mult, literal:2
                     )

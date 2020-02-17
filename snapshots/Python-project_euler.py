@@ -585,12 +585,12 @@ def solution(n): # function:solution (-> +10), function_argument:n, function_arg
 # ----------------------------------------------------------------------------------------
 def solution(): # function:solution (-> +7), function_returning_something:solution (-> +7), function_without_arguments:solution (-> +7), lines_of_code:8 (-> +7)
     return [ # return
-        a * b * c # binary_operator:Mult, comprehension:List, comprehension_for_count:3
+        a * b * c # binary_operator:Mult, comprehension:List, comprehension_for_count:3, index:0
         for a in range(1, 999) # call_argument:1, call_argument:999, function_call:range, literal:1, literal:999, range:1:999, suggest_constant_definition
         for b in range(a, 999) # call_argument:999, call_argument:a, function_call:range, literal:999, range:a:999, suggest_constant_definition
         for c in range(b, 999) # call_argument:999, call_argument:b, function_call:range, literal:999, range:b:999, suggest_constant_definition
         if (a * a + b * b == c * c) and (a + b + c == 1000) # binary_operator:Add, binary_operator:Mult, boolean_operator:And, comparison_operator:Eq, filtered_comprehension, literal:1000, suggest_constant_definition
-    ][0] # index:0, literal:0
+    ][0] # literal:0
 
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_10/sol1.py
@@ -660,21 +660,21 @@ def largest_product(grid): # function:largest_product (-> +27), function_argumen
     rlDiagProduct = 0 # assignment:0, assignment_lhs_identifier:rlDiagProduct, assignment_rhs_atom:0, literal:0, single_assignment:rlDiagProduct
     for i in range(nColumns): # call_argument:nColumns, for:i (-> +20), for_range:_ (-> +20), for_range:nColumns (-> +20), function_call:range, loop:for (-> +20), range:nColumns
         for j in range(nRows - 3): # binary_operator:Sub, call_argument:, for:j (-> +19), for_range:_ (-> +19), function_call:range, literal:3, loop:for (-> +19), nested_for:1 (-> +19), range:_, suggest_constant_definition
-            vertProduct = grid[j][i] * grid[j + 1][i] * grid[j + 2][i] * grid[j + 3][i] # assignment:Mult, assignment_lhs_identifier:vertProduct, assignment_rhs_atom:1, assignment_rhs_atom:2, assignment_rhs_atom:3, assignment_rhs_atom:grid, assignment_rhs_atom:i, assignment_rhs_atom:j, binary_operator:Add, binary_operator:Mult, index:_, index:i, index:j, index_arithmetic, literal:1, literal:2, literal:3, single_assignment:vertProduct, suggest_constant_definition
-            horzProduct = grid[i][j] * grid[i][j + 1] * grid[i][j + 2] * grid[i][j + 3] # assignment:Mult, assignment_lhs_identifier:horzProduct, assignment_rhs_atom:1, assignment_rhs_atom:2, assignment_rhs_atom:3, assignment_rhs_atom:grid, assignment_rhs_atom:i, assignment_rhs_atom:j, binary_operator:Add, binary_operator:Mult, index:_, index:i, index:j, index_arithmetic, literal:1, literal:2, literal:3, single_assignment:horzProduct, suggest_constant_definition
+            vertProduct = grid[j][i] * grid[j + 1][i] * grid[j + 2][i] * grid[j + 3][i] # assignment:Mult, assignment_lhs_identifier:vertProduct, assignment_rhs_atom:1, assignment_rhs_atom:2, assignment_rhs_atom:3, assignment_rhs_atom:grid, assignment_rhs_atom:i, assignment_rhs_atom:j, binary_operator:Add, binary_operator:Mult, index:_, index:i, index:j, index_arithmetic, literal:1, literal:2, literal:3, nested_index:2, single_assignment:vertProduct, suggest_constant_definition
+            horzProduct = grid[i][j] * grid[i][j + 1] * grid[i][j + 2] * grid[i][j + 3] # assignment:Mult, assignment_lhs_identifier:horzProduct, assignment_rhs_atom:1, assignment_rhs_atom:2, assignment_rhs_atom:3, assignment_rhs_atom:grid, assignment_rhs_atom:i, assignment_rhs_atom:j, binary_operator:Add, binary_operator:Mult, index:_, index:i, index:j, index_arithmetic, literal:1, literal:2, literal:3, nested_index:2, single_assignment:horzProduct, suggest_constant_definition
             if i < nColumns - 3: # binary_operator:Sub, comparison_operator:Lt, if (-> +5), if_test_atom:3, if_test_atom:i, if_test_atom:nColumns, literal:3, suggest_constant_definition
                 lrDiagProduct = ( # assignment:Mult, assignment_lhs_identifier:lrDiagProduct, if_then_branch (-> +4), single_assignment:lrDiagProduct
-                    grid[i][j] # assignment_rhs_atom:grid, assignment_rhs_atom:i, assignment_rhs_atom:j, binary_operator:Mult, index:i, index:j
-                    * grid[i + 1][j + 1] # assignment_rhs_atom:1, assignment_rhs_atom:grid, assignment_rhs_atom:i, assignment_rhs_atom:j, binary_operator:Add, index:_, index_arithmetic, literal:1
-                    * grid[i + 2][j + 2] # assignment_rhs_atom:2, assignment_rhs_atom:grid, assignment_rhs_atom:i, assignment_rhs_atom:j, binary_operator:Add, binary_operator:Mult, index:_, index_arithmetic, literal:2
-                    * grid[i + 3][j + 3] # assignment_rhs_atom:3, assignment_rhs_atom:grid, assignment_rhs_atom:i, assignment_rhs_atom:j, binary_operator:Add, binary_operator:Mult, index:_, index_arithmetic, literal:3, suggest_constant_definition
+                    grid[i][j] # assignment_rhs_atom:grid, assignment_rhs_atom:i, assignment_rhs_atom:j, binary_operator:Mult, index:i, index:j, nested_index:2
+                    * grid[i + 1][j + 1] # assignment_rhs_atom:1, assignment_rhs_atom:grid, assignment_rhs_atom:i, assignment_rhs_atom:j, binary_operator:Add, index:_, index_arithmetic, literal:1, nested_index:2
+                    * grid[i + 2][j + 2] # assignment_rhs_atom:2, assignment_rhs_atom:grid, assignment_rhs_atom:i, assignment_rhs_atom:j, binary_operator:Add, binary_operator:Mult, index:_, index_arithmetic, literal:2, nested_index:2
+                    * grid[i + 3][j + 3] # assignment_rhs_atom:3, assignment_rhs_atom:grid, assignment_rhs_atom:i, assignment_rhs_atom:j, binary_operator:Add, binary_operator:Mult, index:_, index_arithmetic, literal:3, nested_index:2, suggest_constant_definition
                 )
             if i > 2: # comparison_operator:Gt, if (-> +5), if_test_atom:2, if_test_atom:i, literal:2
                 rlDiagProduct = ( # assignment:Mult, assignment_lhs_identifier:rlDiagProduct, if_then_branch (-> +4), single_assignment:rlDiagProduct
-                    grid[i][j] # assignment_rhs_atom:grid, assignment_rhs_atom:i, assignment_rhs_atom:j, binary_operator:Mult, index:i, index:j
-                    * grid[i - 1][j + 1] # assignment_rhs_atom:1, assignment_rhs_atom:grid, assignment_rhs_atom:i, assignment_rhs_atom:j, binary_operator:Add, binary_operator:Sub, index:_, index_arithmetic, literal:1
-                    * grid[i - 2][j + 2] # assignment_rhs_atom:2, assignment_rhs_atom:grid, assignment_rhs_atom:i, assignment_rhs_atom:j, binary_operator:Add, binary_operator:Mult, binary_operator:Sub, index:_, index_arithmetic, literal:2
-                    * grid[i - 3][j + 3] # assignment_rhs_atom:3, assignment_rhs_atom:grid, assignment_rhs_atom:i, assignment_rhs_atom:j, binary_operator:Add, binary_operator:Mult, binary_operator:Sub, index:_, index_arithmetic, literal:3, suggest_constant_definition
+                    grid[i][j] # assignment_rhs_atom:grid, assignment_rhs_atom:i, assignment_rhs_atom:j, binary_operator:Mult, index:i, index:j, nested_index:2
+                    * grid[i - 1][j + 1] # assignment_rhs_atom:1, assignment_rhs_atom:grid, assignment_rhs_atom:i, assignment_rhs_atom:j, binary_operator:Add, binary_operator:Sub, index:_, index_arithmetic, literal:1, nested_index:2
+                    * grid[i - 2][j + 2] # assignment_rhs_atom:2, assignment_rhs_atom:grid, assignment_rhs_atom:i, assignment_rhs_atom:j, binary_operator:Add, binary_operator:Mult, binary_operator:Sub, index:_, index_arithmetic, literal:2, nested_index:2
+                    * grid[i - 3][j + 3] # assignment_rhs_atom:3, assignment_rhs_atom:grid, assignment_rhs_atom:i, assignment_rhs_atom:j, binary_operator:Add, binary_operator:Mult, binary_operator:Sub, index:_, index_arithmetic, literal:3, nested_index:2, suggest_constant_definition
                 )
             maxProduct = max(vertProduct, horzProduct, lrDiagProduct, rlDiagProduct) # assignment:max, assignment_lhs_identifier:maxProduct, assignment_rhs_atom:horzProduct, assignment_rhs_atom:lrDiagProduct, assignment_rhs_atom:rlDiagProduct, assignment_rhs_atom:vertProduct, call_argument:horzProduct, call_argument:lrDiagProduct, call_argument:rlDiagProduct, call_argument:vertProduct, function_call:max, single_assignment:maxProduct
             if maxProduct > largest: # comparison_operator:Gt, if (-> +1), if_test_atom:largest, if_test_atom:maxProduct
@@ -700,22 +700,22 @@ def solution(): # function:solution (-> +26), function_returning_something:solut
         maximum = 0 # assignment:0, assignment_lhs_identifier:maximum, assignment_rhs_atom:0, literal:0, single_assignment:maximum
         for i in range(20): # call_argument:20, for:i (-> +4), for_range:17 (-> +4), for_range:20 (-> +4), function_call:range, literal:20, loop:for (-> +4), range:20, suggest_constant_definition
             for j in range(17): # call_argument:17, for:j (-> +3), for_range:17 (-> +3), function_call:range, literal:17, loop:for (-> +3), nested_for:1 (-> +3), range:17, suggest_constant_definition
-                temp = l[i][j] * l[i][j + 1] * l[i][j + 2] * l[i][j + 3] # assignment:Mult, assignment_lhs_identifier:temp, assignment_rhs_atom:1, assignment_rhs_atom:2, assignment_rhs_atom:3, assignment_rhs_atom:i, assignment_rhs_atom:j, assignment_rhs_atom:l, binary_operator:Add, binary_operator:Mult, index:_, index:i, index:j, index_arithmetic, literal:1, literal:2, literal:3, single_assignment:temp, suggest_constant_definition
+                temp = l[i][j] * l[i][j + 1] * l[i][j + 2] * l[i][j + 3] # assignment:Mult, assignment_lhs_identifier:temp, assignment_rhs_atom:1, assignment_rhs_atom:2, assignment_rhs_atom:3, assignment_rhs_atom:i, assignment_rhs_atom:j, assignment_rhs_atom:l, binary_operator:Add, binary_operator:Mult, index:_, index:i, index:j, index_arithmetic, literal:1, literal:2, literal:3, nested_index:2, single_assignment:temp, suggest_constant_definition
                 if temp > maximum: # comparison_operator:Gt, if (-> +1), if_test_atom:maximum, if_test_atom:temp
                     maximum = temp # assignment, assignment_lhs_identifier:maximum, assignment_rhs_atom:temp, if_then_branch, single_assignment:maximum
         for i in range(17): # call_argument:17, for:i (-> +4), for_range:17 (-> +4), for_range:20 (-> +4), function_call:range, literal:17, loop:for (-> +4), range:17, suggest_constant_definition
             for j in range(20): # call_argument:20, for:j (-> +3), for_range:20 (-> +3), function_call:range, literal:20, loop:for (-> +3), nested_for:1 (-> +3), range:20, suggest_constant_definition
-                temp = l[i][j] * l[i + 1][j] * l[i + 2][j] * l[i + 3][j] # assignment:Mult, assignment_lhs_identifier:temp, assignment_rhs_atom:1, assignment_rhs_atom:2, assignment_rhs_atom:3, assignment_rhs_atom:i, assignment_rhs_atom:j, assignment_rhs_atom:l, binary_operator:Add, binary_operator:Mult, index:_, index:i, index:j, index_arithmetic, literal:1, literal:2, literal:3, single_assignment:temp, suggest_constant_definition
+                temp = l[i][j] * l[i + 1][j] * l[i + 2][j] * l[i + 3][j] # assignment:Mult, assignment_lhs_identifier:temp, assignment_rhs_atom:1, assignment_rhs_atom:2, assignment_rhs_atom:3, assignment_rhs_atom:i, assignment_rhs_atom:j, assignment_rhs_atom:l, binary_operator:Add, binary_operator:Mult, index:_, index:i, index:j, index_arithmetic, literal:1, literal:2, literal:3, nested_index:2, single_assignment:temp, suggest_constant_definition
                 if temp > maximum: # comparison_operator:Gt, if (-> +1), if_test_atom:maximum, if_test_atom:temp
                     maximum = temp # assignment, assignment_lhs_identifier:maximum, assignment_rhs_atom:temp, if_then_branch, single_assignment:maximum
         for i in range(17): # call_argument:17, for:i (-> +4), for_range:17 (-> +4), function_call:range, literal:17, loop:for (-> +4), range:17, square_nested_for (-> +4), suggest_constant_definition
             for j in range(17): # call_argument:17, for:j (-> +3), for_range:17 (-> +3), function_call:range, literal:17, loop:for (-> +3), nested_for:1 (-> +3), range:17, suggest_constant_definition
-                temp = l[i][j] * l[i + 1][j + 1] * l[i + 2][j + 2] * l[i + 3][j + 3] # assignment:Mult, assignment_lhs_identifier:temp, assignment_rhs_atom:1, assignment_rhs_atom:2, assignment_rhs_atom:3, assignment_rhs_atom:i, assignment_rhs_atom:j, assignment_rhs_atom:l, binary_operator:Add, binary_operator:Mult, index:_, index:i, index:j, index_arithmetic, literal:1, literal:2, literal:3, single_assignment:temp, suggest_constant_definition
+                temp = l[i][j] * l[i + 1][j + 1] * l[i + 2][j + 2] * l[i + 3][j + 3] # assignment:Mult, assignment_lhs_identifier:temp, assignment_rhs_atom:1, assignment_rhs_atom:2, assignment_rhs_atom:3, assignment_rhs_atom:i, assignment_rhs_atom:j, assignment_rhs_atom:l, binary_operator:Add, binary_operator:Mult, index:_, index:i, index:j, index_arithmetic, literal:1, literal:2, literal:3, nested_index:2, single_assignment:temp, suggest_constant_definition
                 if temp > maximum: # comparison_operator:Gt, if (-> +1), if_test_atom:maximum, if_test_atom:temp
                     maximum = temp # assignment, assignment_lhs_identifier:maximum, assignment_rhs_atom:temp, if_then_branch, single_assignment:maximum
         for i in range(17): # call_argument:17, for:i (-> +4), for_range:17 (-> +4), for_range:3:20 (-> +4), function_call:range, literal:17, loop:for (-> +4), range:17, suggest_constant_definition
             for j in range(3, 20): # call_argument:20, call_argument:3, for:j (-> +3), for_range:3:20 (-> +3), function_call:range, literal:20, literal:3, loop:for (-> +3), nested_for:1 (-> +3), range:3:20, suggest_constant_definition
-                temp = l[i][j] * l[i + 1][j - 1] * l[i + 2][j - 2] * l[i + 3][j - 3] # assignment:Mult, assignment_lhs_identifier:temp, assignment_rhs_atom:1, assignment_rhs_atom:2, assignment_rhs_atom:3, assignment_rhs_atom:i, assignment_rhs_atom:j, assignment_rhs_atom:l, binary_operator:Add, binary_operator:Mult, binary_operator:Sub, index:_, index:i, index:j, index_arithmetic, literal:1, literal:2, literal:3, single_assignment:temp, suggest_constant_definition
+                temp = l[i][j] * l[i + 1][j - 1] * l[i + 2][j - 2] * l[i + 3][j - 3] # assignment:Mult, assignment_lhs_identifier:temp, assignment_rhs_atom:1, assignment_rhs_atom:2, assignment_rhs_atom:3, assignment_rhs_atom:i, assignment_rhs_atom:j, assignment_rhs_atom:l, binary_operator:Add, binary_operator:Mult, binary_operator:Sub, index:_, index:i, index:j, index_arithmetic, literal:1, literal:2, literal:3, nested_index:2, single_assignment:temp, suggest_constant_definition
                 if temp > maximum: # comparison_operator:Gt, if (-> +1), if_test_atom:maximum, if_test_atom:temp
                     maximum = temp # assignment, assignment_lhs_identifier:maximum, assignment_rhs_atom:temp, if_then_branch, single_assignment:maximum
         return maximum # return:maximum
@@ -862,14 +862,14 @@ def solution(): # function:solution (-> +17), function_returning_something:solut
     for i in range(1, len(a)): # call_argument:, call_argument:1, call_argument:a, composition, for:i (-> +10), for_range:1:_ (-> +10), for_range:_ (-> +10), function_call:len, function_call:range, literal:1, loop:for (-> +10), range:1:_
         for j in range(len(a[i])): # call_argument:, composition, for:j (-> +9), for_indexes (-> +9), for_range:_ (-> +9), function_call:len, function_call:range, index:i, loop:for (-> +9), nested_for:1 (-> +9), range:_
             if j != len(a[i - 1]): # binary_operator:Sub, call_argument:, comparison_operator:NotEq, function_call:len, if (-> +3), if_test_atom:1, if_test_atom:a, if_test_atom:i, if_test_atom:j, index:_, index_arithmetic, literal:1, suggest_conditional_expression (-> +3)
-                number1 = a[i - 1][j] # assignment, assignment_lhs_identifier:number1, assignment_rhs_atom:1, assignment_rhs_atom:a, assignment_rhs_atom:i, assignment_rhs_atom:j, binary_operator:Sub, if_then_branch, index:_, index:j, index_arithmetic, literal:1, single_assignment:number1
+                number1 = a[i - 1][j] # assignment, assignment_lhs_identifier:number1, assignment_rhs_atom:1, assignment_rhs_atom:a, assignment_rhs_atom:i, assignment_rhs_atom:j, binary_operator:Sub, if_then_branch, index:_, index:j, index_arithmetic, literal:1, nested_index:2, single_assignment:number1
             else:
                 number1 = 0 # assignment:0, assignment_lhs_identifier:number1, assignment_rhs_atom:0, if_else_branch, literal:0, single_assignment:number1
             if j > 0: # comparison_operator:Gt, if (-> +3), if_test_atom:0, if_test_atom:j, literal:0, suggest_conditional_expression (-> +3)
-                number2 = a[i - 1][j - 1] # assignment, assignment_lhs_identifier:number2, assignment_rhs_atom:1, assignment_rhs_atom:a, assignment_rhs_atom:i, assignment_rhs_atom:j, binary_operator:Sub, if_then_branch, index:_, index_arithmetic, literal:1, single_assignment:number2
+                number2 = a[i - 1][j - 1] # assignment, assignment_lhs_identifier:number2, assignment_rhs_atom:1, assignment_rhs_atom:a, assignment_rhs_atom:i, assignment_rhs_atom:j, binary_operator:Sub, if_then_branch, index:_, index_arithmetic, literal:1, nested_index:2, single_assignment:number2
             else:
                 number2 = 0 # assignment:0, assignment_lhs_identifier:number2, assignment_rhs_atom:0, if_else_branch, literal:0, single_assignment:number2
-            a[i][j] += max(number1, number2) # assignment_rhs_atom:number1, assignment_rhs_atom:number2, augmented_assignment:Add, call_argument:number1, call_argument:number2, function_call:max, index:i, index:j, subscript_augmented_assignment:Add
+            a[i][j] += max(number1, number2) # assignment_rhs_atom:number1, assignment_rhs_atom:number2, augmented_assignment:Add, call_argument:number1, call_argument:number2, function_call:max, index:i, index:j, nested_index:2, subscript_augmented_assignment:Add
     return max(a[-1]) # call_argument:, function_call:max, function_tail_call:max, index:-1, literal:-1, negative_index:-1, return
 
 # ----------------------------------------------------------------------------------------
@@ -1050,7 +1050,7 @@ def solution(n): # function:solution (-> +11), function_argument:n, function_arg
                 c2 += 1 # assignment_lhs_identifier:c2, assignment_rhs_atom:1, augmented_assignment:Add, if_then_branch, increment:c2, literal:1, update:c2:1, update_by_augmented_assignment:c2:1, update_by_augmented_assignment_with:Add, update_with:Add
             else:
                 break # break, if_else_branch
-        semidivisible.append(fib(l[0], l[1], c2 + 1)[int(l[2]) - 1]) # binary_operator:Add, binary_operator:Sub, call_argument:, composition, function_call:fib, function_call:int, index:0, index:1, index:2, index:_, index_arithmetic, literal:0, literal:1, literal:2, method_call:append, method_call_object:semidivisible
+        semidivisible.append(fib(l[0], l[1], c2 + 1)[int(l[2]) - 1]) # binary_operator:Add, binary_operator:Sub, call_argument:, composition, function_call:fib, function_call:int, index:0, index:1, index:2, index:_, index_arithmetic, literal:0, literal:1, literal:2, method_call:append, method_call_object:semidivisible, nested_index:4
     return semidivisible # return:semidivisible
 
 # ----------------------------------------------------------------------------------------
@@ -1355,7 +1355,7 @@ def next_term(a_i, k, i, n): # body_recursive_function:next_term (-> +50), funct
         if jumps != None and len(jumps) > 0: # boolean_operator:And, call_argument:jumps, comparison_operator:Gt, comparison_operator:NotEq, function_call:len, if (-> +14), if_test_atom:0, if_test_atom:None, if_test_atom:jumps, literal:0, literal:None, nested_if:1 (-> +14)
             max_jump = -1 # assignment:-1, assignment_lhs_identifier:max_jump, assignment_rhs_atom:-1, if_then_branch (-> +11), literal:-1, single_assignment:max_jump
             for _k in range(len(jumps) - 1, -1, -1): # binary_operator:Sub, call_argument:, call_argument:-1, call_argument:jumps, composition, for:_k (-> +3), for_range:_:-1:-1 (-> +3), for_with_early_exit:break (-> +3), function_call:len, function_call:range, literal:-1, literal:1, loop:for (-> +3), range:_:-1:-1
-                if jumps[_k][2] <= k and jumps[_k][1] <= max_dn: # boolean_operator:And, comparison_operator:LtE, if (-> +2), if_test_atom:1, if_test_atom:2, if_test_atom:_k, if_test_atom:jumps, if_test_atom:k, if_test_atom:max_dn, index:1, index:2, index:_k, literal:1, literal:2, nested_if:2 (-> +2)
+                if jumps[_k][2] <= k and jumps[_k][1] <= max_dn: # boolean_operator:And, comparison_operator:LtE, if (-> +2), if_test_atom:1, if_test_atom:2, if_test_atom:_k, if_test_atom:jumps, if_test_atom:k, if_test_atom:max_dn, index:1, index:2, index:_k, literal:1, literal:2, nested_if:2 (-> +2), nested_index:2
                     max_jump = _k # assignment, assignment_lhs_identifier:max_jump, assignment_rhs_atom:_k, if_then_branch (-> +1), single_assignment:max_jump
                     break # break
             if max_jump >= 0: # comparison_operator:GtE, if (-> +6), if_test_atom:0, if_test_atom:max_jump, literal:0, nested_if:2 (-> +6)
@@ -1386,7 +1386,7 @@ def next_term(a_i, k, i, n): # body_recursive_function:next_term (-> +50), funct
     jumps = sub_memo[c] # assignment, assignment_lhs_identifier:jumps, assignment_rhs_atom:c, assignment_rhs_atom:sub_memo, index:c, single_assignment:jumps
     j = 0 # assignment:0, assignment_lhs_identifier:j, assignment_rhs_atom:0, literal:0, single_assignment:j
     while j < len(jumps): # call_argument:jumps, comparison_operator:Lt, function_call:len, loop:while (-> +3), while (-> +3), while_with_early_exit:break (-> +3)
-        if jumps[j][1] > dn: # comparison_operator:Gt, if (-> +1), if_test_atom:1, if_test_atom:dn, if_test_atom:j, if_test_atom:jumps, index:1, index:j, literal:1
+        if jumps[j][1] > dn: # comparison_operator:Gt, if (-> +1), if_test_atom:1, if_test_atom:dn, if_test_atom:j, if_test_atom:jumps, index:1, index:j, literal:1, nested_index:2
             break # break, if_then_branch
         j += 1 # assignment_lhs_identifier:j, assignment_rhs_atom:1, augmented_assignment:Add, increment:j, literal:1, update:j:1, update_by_augmented_assignment:j:1, update_by_augmented_assignment_with:Add, update_with:Add
     sub_memo[c].insert(j, (diff, dn, k)) # call_argument:, call_argument:j, index:c, method_call:insert
@@ -1471,14 +1471,14 @@ def solution(): # function:solution (-> +18), function_returning_something:solut
     for i in range(1, len(a)): # call_argument:, call_argument:1, call_argument:a, composition, for:i (-> +10), for_range:1:_ (-> +10), for_range:_ (-> +10), function_call:len, function_call:range, literal:1, loop:for (-> +10), range:1:_
         for j in range(len(a[i])): # call_argument:, composition, for:j (-> +9), for_indexes (-> +9), for_range:_ (-> +9), function_call:len, function_call:range, index:i, loop:for (-> +9), nested_for:1 (-> +9), range:_
             if j != len(a[i - 1]): # binary_operator:Sub, call_argument:, comparison_operator:NotEq, function_call:len, if (-> +3), if_test_atom:1, if_test_atom:a, if_test_atom:i, if_test_atom:j, index:_, index_arithmetic, literal:1, suggest_conditional_expression (-> +3)
-                number1 = a[i - 1][j] # assignment, assignment_lhs_identifier:number1, assignment_rhs_atom:1, assignment_rhs_atom:a, assignment_rhs_atom:i, assignment_rhs_atom:j, binary_operator:Sub, if_then_branch, index:_, index:j, index_arithmetic, literal:1, single_assignment:number1
+                number1 = a[i - 1][j] # assignment, assignment_lhs_identifier:number1, assignment_rhs_atom:1, assignment_rhs_atom:a, assignment_rhs_atom:i, assignment_rhs_atom:j, binary_operator:Sub, if_then_branch, index:_, index:j, index_arithmetic, literal:1, nested_index:2, single_assignment:number1
             else:
                 number1 = 0 # assignment:0, assignment_lhs_identifier:number1, assignment_rhs_atom:0, if_else_branch, literal:0, single_assignment:number1
             if j > 0: # comparison_operator:Gt, if (-> +3), if_test_atom:0, if_test_atom:j, literal:0, suggest_conditional_expression (-> +3)
-                number2 = a[i - 1][j - 1] # assignment, assignment_lhs_identifier:number2, assignment_rhs_atom:1, assignment_rhs_atom:a, assignment_rhs_atom:i, assignment_rhs_atom:j, binary_operator:Sub, if_then_branch, index:_, index_arithmetic, literal:1, single_assignment:number2
+                number2 = a[i - 1][j - 1] # assignment, assignment_lhs_identifier:number2, assignment_rhs_atom:1, assignment_rhs_atom:a, assignment_rhs_atom:i, assignment_rhs_atom:j, binary_operator:Sub, if_then_branch, index:_, index_arithmetic, literal:1, nested_index:2, single_assignment:number2
             else:
                 number2 = 0 # assignment:0, assignment_lhs_identifier:number2, assignment_rhs_atom:0, if_else_branch, literal:0, single_assignment:number2
-            a[i][j] += max(number1, number2) # assignment_rhs_atom:number1, assignment_rhs_atom:number2, augmented_assignment:Add, call_argument:number1, call_argument:number2, function_call:max, index:i, index:j, subscript_augmented_assignment:Add
+            a[i][j] += max(number1, number2) # assignment_rhs_atom:number1, assignment_rhs_atom:number2, augmented_assignment:Add, call_argument:number1, call_argument:number2, function_call:max, index:i, index:j, nested_index:2, subscript_augmented_assignment:Add
     return max(a[-1]) # call_argument:, function_call:max, function_tail_call:max, index:-1, literal:-1, negative_index:-1, return
 
 # ----------------------------------------------------------------------------------------
@@ -1487,13 +1487,13 @@ def solution(): # function:solution (-> +18), function_returning_something:solut
 def partition(m): # function:partition (-> +9), function_argument:m, function_argument_flavor:arg, function_returning_something:partition (-> +9), lines_of_code:10 (-> +9)
     memo = [[0 for _ in range(m)] for _ in range(m + 1)] # assignment, assignment_lhs_identifier:memo, assignment_rhs_atom:0, assignment_rhs_atom:1, assignment_rhs_atom:_, assignment_rhs_atom:m, binary_operator:Add, call_argument:, call_argument:m, comprehension:List, comprehension_for_count:1, function_call:range, literal:0, literal:1, range:_, range:m, single_assignment:memo
     for i in range(m + 1): # binary_operator:Add, call_argument:, for:i (-> +1), for_range:_ (-> +1), function_call:range, literal:1, loop:for (-> +1), range:_
-        memo[i][0] = 1 # assignment:1, assignment_rhs_atom:1, index:0, index:i, literal:0, literal:1
+        memo[i][0] = 1 # assignment:1, assignment_rhs_atom:1, index:0, index:i, literal:0, literal:1, nested_index:2
     for n in range(m + 1): # binary_operator:Add, call_argument:, for:n (-> +4), for_range:1:m (-> +4), for_range:_ (-> +4), function_call:range, literal:1, loop:for (-> +4), range:_
         for k in range(1, m): # call_argument:1, call_argument:m, for:k (-> +3), for_range:1:m (-> +3), function_call:range, literal:1, loop:for (-> +3), nested_for:1 (-> +3), range:1:m
-            memo[n][k] += memo[n][k - 1] # assignment_rhs_atom:1, assignment_rhs_atom:k, assignment_rhs_atom:memo, assignment_rhs_atom:n, augmented_assignment:Add, binary_operator:Sub, index:_, index:k, index:n, index_arithmetic, literal:1, subscript_augmented_assignment:Add
+            memo[n][k] += memo[n][k - 1] # assignment_rhs_atom:1, assignment_rhs_atom:k, assignment_rhs_atom:memo, assignment_rhs_atom:n, augmented_assignment:Add, binary_operator:Sub, index:_, index:k, index:n, index_arithmetic, literal:1, nested_index:2, subscript_augmented_assignment:Add
             if n > k: # comparison_operator:Gt, if (-> +1), if_test_atom:k, if_test_atom:n
-                memo[n][k] += memo[n - k - 1][k] # assignment_rhs_atom:1, assignment_rhs_atom:k, assignment_rhs_atom:memo, assignment_rhs_atom:n, augmented_assignment:Add, binary_operator:Sub, if_then_branch, index:_, index:k, index:n, index_arithmetic, literal:1, subscript_augmented_assignment:Add
-    return memo[m][m - 1] - 1 # binary_operator:Sub, index:_, index:m, index_arithmetic, literal:1, return
+                memo[n][k] += memo[n - k - 1][k] # assignment_rhs_atom:1, assignment_rhs_atom:k, assignment_rhs_atom:memo, assignment_rhs_atom:n, augmented_assignment:Add, binary_operator:Sub, if_then_branch, index:_, index:k, index:n, index_arithmetic, literal:1, nested_index:2, subscript_augmented_assignment:Add
+    return memo[m][m - 1] - 1 # binary_operator:Sub, index:_, index:m, index_arithmetic, literal:1, nested_index:2, return
 
 # ----------------------------------------------------------------------------------------
 # ../Python/project_euler/problem_99/sol1.py
