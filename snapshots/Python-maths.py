@@ -479,9 +479,9 @@ def fib_iterative(n): # function_argument:n, function_argument_flavor:arg
     n = int(n) # assignment:int, assignment_lhs_identifier:n, assignment_rhs_atom:n, call_argument:n, function_call:int, single_assignment:n
     if _check_number_input(n, 2): # call_argument:2, call_argument:n, function_call:_check_number_input, if (-> +6), if_test_atom:2, if_test_atom:n, literal:2
         seq_out = [0, 1] # assignment, assignment_lhs_identifier:seq_out, assignment_rhs_atom:0, assignment_rhs_atom:1, if_then_branch (-> +5), literal:0, literal:1, literal:List, single_assignment:seq_out
-        a, b = 0, 1 # assignment, assignment_lhs_identifier:a, assignment_lhs_identifier:b, assignment_rhs_atom:0, assignment_rhs_atom:1, literal:0, literal:1, literal:Tuple
+        a, b = 0, 1 # assignment, assignment_lhs_identifier:a, assignment_lhs_identifier:b, assignment_rhs_atom:0, assignment_rhs_atom:1, literal:0, literal:1, literal:Tuple, parallel_assignment:2
         for _ in range(n - len(seq_out)): # binary_operator:Sub, call_argument:, call_argument:seq_out, composition, for:_ (-> +2), for_range:_ (-> +2), function_call:len, function_call:range, loop:for (-> +2), range:_
-            a, b = b, a + b # assignment, assignment_lhs_identifier:a, assignment_lhs_identifier:b, assignment_rhs_atom:a, assignment_rhs_atom:b, binary_operator:Add, slide, update:a:b, update:b:a, update_by_assignment:a:b, update_by_assignment:b:a, update_by_assignment_with, update_with
+            a, b = b, a + b # assignment, assignment_lhs_identifier:a, assignment_lhs_identifier:b, assignment_rhs_atom:a, assignment_rhs_atom:b, binary_operator:Add, parallel_assignment:2, slide, update:a:b, update:b:a, update_by_assignment:a:b, update_by_assignment:b:a, update_by_assignment_with, update_with
             seq_out.append(b) # call_argument:b, method_call:append, method_call_object:seq_out, update:seq_out:b, update_by_method_call:seq_out:b, update_by_method_call_with:append, update_with:append
         return seq_out # return:seq_out
 @timer_decorator # decorated_function:fib_formula (-> +13), function:fib_formula (-> +13), function_decorator:timer_decorator (-> +13), function_returning_something:fib_formula (-> +13)
@@ -580,7 +580,7 @@ def greatest_common_divisor(a, b): # function:greatest_common_divisor (-> +1), f
     return b if a == 0 else greatest_common_divisor(b % a, a) # binary_operator:Mod, call_argument:, call_argument:a, comparison_operator:Eq, conditional_expression, function_call:greatest_common_divisor, function_tail_call:greatest_common_divisor, literal:0, return
 def gcd_by_iterative(x, y): # function:gcd_by_iterative (-> +3), function_argument:x, function_argument:y, function_argument_flavor:arg, function_returning_something:gcd_by_iterative (-> +3)
     while y: # loop:while (-> +1), while (-> +1)
-        x, y = y, x % y # assignment, assignment_lhs_identifier:x, assignment_lhs_identifier:y, assignment_rhs_atom:x, assignment_rhs_atom:y, binary_operator:Mod, slide, update:x:y, update:y:x, update_by_assignment:x:y, update_by_assignment:y:x, update_by_assignment_with, update_with
+        x, y = y, x % y # assignment, assignment_lhs_identifier:x, assignment_lhs_identifier:y, assignment_rhs_atom:x, assignment_rhs_atom:y, binary_operator:Mod, parallel_assignment:2, slide, update:x:y, update:y:x, update_by_assignment:x:y, update_by_assignment:y:x, update_by_assignment_with, update_with
     return x # return:x
 def main(): # function:main (-> +10), function_returning_nothing:main (-> +10), function_without_arguments:main (-> +10)
     try: # try (-> +9), try_except:IndexError (-> +9), try_except:UnboundLocalError (-> +9), try_except:ValueError (-> +9)
@@ -650,8 +650,8 @@ def karatsuba(a, b): # body_recursive_function:karatsuba (-> +11), function:kara
     else:
         m1 = max(len(str(a)), len(str(b))) # assignment:max, assignment_lhs_identifier:m1, assignment_rhs_atom:a, assignment_rhs_atom:b, call_argument:, call_argument:a, call_argument:b, composition, function_call:len, function_call:max, function_call:str, if_else_branch (-> +7), single_assignment:m1
         m2 = m1 // 2 # assignment:FloorDiv, assignment_lhs_identifier:m2, assignment_rhs_atom:2, assignment_rhs_atom:m1, binary_operator:FloorDiv, literal:2, single_assignment:m2
-        a1, a2 = divmod(a, 10 ** m2) # assignment:divmod, assignment_lhs_identifier:a1, assignment_lhs_identifier:a2, assignment_rhs_atom:10, assignment_rhs_atom:a, assignment_rhs_atom:m2, binary_operator:Pow, call_argument:, call_argument:a, function_call:divmod, literal:10, suggest_constant_definition
-        b1, b2 = divmod(b, 10 ** m2) # assignment:divmod, assignment_lhs_identifier:b1, assignment_lhs_identifier:b2, assignment_rhs_atom:10, assignment_rhs_atom:b, assignment_rhs_atom:m2, binary_operator:Pow, call_argument:, call_argument:b, function_call:divmod, literal:10, suggest_constant_definition
+        a1, a2 = divmod(a, 10 ** m2) # assignment:divmod, assignment_lhs_identifier:a1, assignment_lhs_identifier:a2, assignment_rhs_atom:10, assignment_rhs_atom:a, assignment_rhs_atom:m2, binary_operator:Pow, call_argument:, call_argument:a, function_call:divmod, literal:10, parallel_assignment:2, suggest_constant_definition
+        b1, b2 = divmod(b, 10 ** m2) # assignment:divmod, assignment_lhs_identifier:b1, assignment_lhs_identifier:b2, assignment_rhs_atom:10, assignment_rhs_atom:b, assignment_rhs_atom:m2, binary_operator:Pow, call_argument:, call_argument:b, function_call:divmod, literal:10, parallel_assignment:2, suggest_constant_definition
         x = karatsuba(a2, b2) # assignment:karatsuba, assignment_lhs_identifier:x, assignment_rhs_atom:a2, assignment_rhs_atom:b2, call_argument:a2, call_argument:b2, function_call:karatsuba, single_assignment:x
         y = karatsuba((a1 + a2), (b1 + b2)) # assignment:karatsuba, assignment_lhs_identifier:y, assignment_rhs_atom:a1, assignment_rhs_atom:a2, assignment_rhs_atom:b1, assignment_rhs_atom:b2, binary_operator:Add, call_argument:, function_call:karatsuba, single_assignment:y
         z = karatsuba(a1, b1) # assignment:karatsuba, assignment_lhs_identifier:z, assignment_rhs_atom:a1, assignment_rhs_atom:b1, call_argument:a1, call_argument:b1, function_call:karatsuba, single_assignment:z
@@ -671,7 +671,7 @@ def kthPermutation(k, n): # function:kthPermutation (-> +13), function_argument:
     elements = list(range(n)) # assignment:list, assignment_lhs_identifier:elements, assignment_rhs_atom:n, call_argument:, call_argument:n, composition, function_call:list, function_call:range, range:n, single_assignment:elements
     while factorials: # loop:while (-> +4), while (-> +4)
         factorial = factorials.pop() # assignment:pop, assignment_lhs_identifier:factorial, assignment_rhs_atom:factorials, method_call:pop, single_assignment:factorial
-        number, k = divmod(k, factorial) # assignment:divmod, assignment_lhs_identifier:k, assignment_lhs_identifier:number, assignment_rhs_atom:factorial, assignment_rhs_atom:k, call_argument:factorial, call_argument:k, function_call:divmod, update:k:factorial, update_by_assignment:k:factorial, update_by_assignment_with:divmod, update_with:divmod
+        number, k = divmod(k, factorial) # assignment:divmod, assignment_lhs_identifier:k, assignment_lhs_identifier:number, assignment_rhs_atom:factorial, assignment_rhs_atom:k, call_argument:factorial, call_argument:k, function_call:divmod, parallel_assignment:2, update:k:factorial, update_by_assignment:k:factorial, update_by_assignment_with:divmod, update_with:divmod
         permutation.append(elements[number]) # call_argument:, index:number, method_call:append, method_call_object:permutation
         elements.remove(elements[number]) # call_argument:, index:number, method_call:remove, method_call_object:elements
     permutation.append(elements[0]) # call_argument:, index:0, literal:0, method_call:append, method_call_object:permutation
@@ -773,7 +773,7 @@ def simple_fibonacci(n, f1, f2): # function:simple_fibonacci (-> +11), function_
     fn_2 = f2 # assignment, assignment_lhs_identifier:fn_2, assignment_rhs_atom:f2, single_assignment:fn_2
     n -= 2 # assignment_lhs_identifier:n, assignment_rhs_atom:2, augmented_assignment:Sub, literal:2, update:n:2, update_by_augmented_assignment:n:2, update_by_augmented_assignment_with:Sub, update_with:Sub
     while n > 0: # comparison_operator:Gt, literal:0, loop:while (-> +2), while (-> +2)
-        fn_1, fn_2 = fn_1 + fn_2, fn_1 # assignment, assignment_lhs_identifier:fn_1, assignment_lhs_identifier:fn_2, assignment_rhs_atom:fn_1, assignment_rhs_atom:fn_2, binary_operator:Add, update:fn_1:fn_2, update:fn_2:fn_1, update_by_assignment:fn_1:fn_2, update_by_assignment:fn_2:fn_1, update_by_assignment_with, update_with
+        fn_1, fn_2 = fn_1 + fn_2, fn_1 # assignment, assignment_lhs_identifier:fn_1, assignment_lhs_identifier:fn_2, assignment_rhs_atom:fn_1, assignment_rhs_atom:fn_2, binary_operator:Add, parallel_assignment:2, update:fn_1:fn_2, update:fn_2:fn_1, update_by_assignment:fn_1:fn_2, update_by_assignment:fn_2:fn_1, update_by_assignment_with, update_with
         n -= 1 # assignment_lhs_identifier:n, assignment_rhs_atom:1, augmented_assignment:Sub, literal:1, update:n:1, update_by_augmented_assignment:n:1, update_by_augmented_assignment_with:Sub, update_with:Sub
     return fn_1 # return:fn_1
 def matrix_exponentiation_time(): # function:matrix_exponentiation_time (-> +8), function_returning_something:matrix_exponentiation_time (-> +8), function_without_arguments:matrix_exponentiation_time (-> +8)
@@ -964,7 +964,7 @@ def prime_sieve_eratosthenes(num): # function:prime_sieve_eratosthenes (-> +10),
 # ----------------------------------------------------------------------------------------
 import numpy as np # import:numpy, import_module:numpy, lines_of_code:18 (-> +17)
 def qr_householder(A): # function:qr_householder (-> +16), function_argument:A, function_argument_flavor:arg, function_returning_something:qr_householder (-> +16)
-    m, n = A.shape # assignment, assignment_lhs_identifier:m, assignment_lhs_identifier:n, assignment_rhs_atom:A
+    m, n = A.shape # assignment, assignment_lhs_identifier:m, assignment_lhs_identifier:n, assignment_rhs_atom:A, parallel_assignment:2
     t = min(m, n) # assignment:min, assignment_lhs_identifier:t, assignment_rhs_atom:m, assignment_rhs_atom:n, call_argument:m, call_argument:n, function_call:min, single_assignment:t
     Q = np.eye(m) # assignment:eye, assignment_lhs_identifier:Q, assignment_rhs_atom:m, assignment_rhs_atom:np, call_argument:m, method_call:eye, single_assignment:Q
     R = A.copy() # assignment:copy, assignment_lhs_identifier:R, assignment_rhs_atom:A, method_call:copy, single_assignment:R

@@ -45,6 +45,7 @@
   - [Assignments](#assignments)
       - [Feature `assignment`](#feature-assignment)
       - [Feature `single_assignment`](#feature-single_assignment)
+      - [Feature `parallel_assignment`](#feature-parallel_assignment)
       - [Feature `augmented_assignment`](#feature-augmented_assignment)
       - [Feature `subscript_augmented_assignment`](#feature-subscript_augmented_assignment)
       - [Feature `chained_assignment`](#feature-chained_assignment)
@@ -1718,6 +1719,37 @@ Match a comprehension with an `if` clause.
 |:--|:--|
 | `single_assignment:a` | 1 |
 | `single_assignment:c` | 2 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `parallel_assignment`
+
+Match a tuple unpacking assignment, and suffix it with the tuple size.
+
+##### Specification
+
+```re
+           ^(.*)/_type=Assign
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
+\n(?:\1.+\n)*?\1/assigntargets/length=1
+\n(?:\1.+\n)*?\1/assigntargets/1/_type=Tuple
+\n(?:\1.+\n)*?\1/assigntargets/1/elts/length=(?P<SUFFIX>.+)
+```
+
+##### Example
+
+```python
+1   a = b # no match
+2   c = 42 # no match
+3   d[0] = e # no match
+4   (f, g) = divmod(42, 7)
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `parallel_assignment:2` | 4 |
 
 --------------------------------------------------------------------------------
 

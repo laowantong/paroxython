@@ -168,6 +168,7 @@ type/container/set/	literal:Set
 type/container/set/empty/	function_call_without_arguments:set
 type/container/tuple/	function_call:tuple
 type/container/tuple/	literal:Tuple
+type/container/tuple/assignment/	parallel_assignment:\d+
 type/container/tuple/assignment/slide/	slide
 type/container/tuple/assignment/swap/	swap
 type/container/tuple/empty/	empty_literal:Tuple
@@ -199,6 +200,7 @@ variable/assignment/augmented/\1/	augmented_assignment:(.+)
 variable/assignment/augmented/subscript/\1/	subscript_augmented_assignment:(.+)
 variable/assignment/chained/	chained_assignment
 variable/assignment/constant/	assignment_lhs_identifier:[[:upper:]0-9_]+
+variable/assignment/parallel/\1/	parallel_assignment:(\d+)
 variable/assignment/single/	single_assignment:.+
 -- EOF	
 call/function/other/	TODO
@@ -217,12 +219,10 @@ style/procedural/	TODO
 style/sequential/	TODO
 style/test_driven/	TODO
 subscript/index/double/	TODO
-type/container/tuple/assignment/	TODO
 type/elementary/string/newline/	TODO
 variable/assignment/argument/	TODO
 variable/assignment/iteration_variable/	TODO
 variable/assignment/iteration_variable/tuple/	TODO
-variable/assignment/parallel/	TODO
 variable/assignment/parallel/subscript/	TODO
 variable/assignment/single/subscript/	TODO
 variable/scope/global/	TODO

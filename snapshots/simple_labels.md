@@ -178,6 +178,7 @@
 - nested_function
 - nested_if
 - nested_index
+- parallel_assignment
 - raise
 - range
 - recursive_function
