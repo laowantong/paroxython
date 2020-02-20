@@ -129,17 +129,19 @@
       - [Feature `import_name`](#feature-import_name)
       - [Feature `import` (SQL)](#feature-import)
 - [Iterative patterns](#iterative-patterns)
+  - [Loops](#loops)
+      - [Feature `count_elements|count_states` (SQL)](#feature-count_elementscount_states)
   - [Sequential loops](#sequential-loops-1)
     - [Sequential loops with late exit](#sequential-loops-with-late-exit)
       - [Feature `accumulate_elements` (SQL)](#feature-accumulate_elements)
       - [Feature `accumulate_some_elements` (SQL)](#feature-accumulate_some_elements)
       - [Feature `accumulate_all_elements` (SQL)](#feature-accumulate_all_elements)
-      - [Feature `count_elements` (SQL)](#feature-count_elements)
       - [Feature `find_best_element` (SQL)](#feature-find_best_element)
     - [Sequential loops with early exit](#sequential-loops-with-early-exit)
       - [Feature `universal_quantification|existential_quantification` (SQL)](#feature-universal_quantificationexistential_quantification)
       - [Feature `find_first_element` (SQL)](#feature-find_first_element)
-  - [Non-sequential infinite loops](#non-sequential-infinite-loops)
+  - [Non-sequential loops](#non-sequential-loops-1)
+    - [Non-sequential infinite loops](#non-sequential-infinite-loops)
       - [Feature `get_valid_input` (SQL)](#feature-get_valid_input)
       - [Feature `count_inputs` (SQL)](#feature-count_inputs)
       - [Feature `accumulate_inputs` (SQL)](#feature-accumulate_inputs)
@@ -1849,7 +1851,7 @@ Capture any identifier appearing on the left hand side of an assignment (possibl
 ##### Derivations
 
 [⬇️ feature `accumulate_inputs`](#feature-accumulate_inputs)  
-[⬇️ feature `count_elements`](#feature-count_elements)  
+[⬇️ feature `count_elements|count_states`](#feature-count_elementscount_states)  
 [⬇️ feature `count_inputs`](#feature-count_inputs)  
 [⬇️ feature `find_best_element`](#feature-find_best_element)  
 [⬇️ feature `get_valid_input`](#feature-get_valid_input)  
@@ -2364,7 +2366,7 @@ WHERE name_prefix IN ("update_by_assignment_with",
 
 ##### Derivations
 
-[⬇️ feature `count_elements`](#feature-count_elements)  
+[⬇️ feature `count_elements|count_states`](#feature-count_elementscount_states)  
 [⬇️ feature `count_inputs`](#feature-count_inputs)  
 
 ##### Specification
@@ -3739,7 +3741,6 @@ Match sequential loops, along with their iteration variable(s).
 
 [⬇️ feature `accumulate_elements`](#feature-accumulate_elements)  
 [⬇️ feature `accumulate_some_elements`](#feature-accumulate_some_elements)  
-[⬇️ feature `count_elements`](#feature-count_elements)  
 [⬇️ feature `find_best_element`](#feature-find_best_element)  
 [⬇️ feature `find_first_element`](#feature-find_first_element)  
 [⬇️ feature `for_range`](#feature-for_range)  
@@ -3822,6 +3823,7 @@ Match sequential loops, along with their iteration variable(s).
 
 [⬆️ feature `for`](#feature-for)  
 [⬆️ feature `while`](#feature-while)  
+[⬇️ feature `count_elements|count_states`](#feature-count_elementscount_states)  
 [⬇️ feature `for_with_early_exit|while_with_early_exit`](#feature-for_with_early_exitwhile_with_early_exit)  
 [⬇️ feature `for_with_else|while_with_else`](#feature-for_with_elsewhile_with_else)  
 
@@ -4858,6 +4860,74 @@ LEFT JOIN t_import_name n ON (m.span = n.span)
 
 # Iterative patterns
 
+## Loops
+
+--------------------------------------------------------------------------------
+
+#### Feature `count_elements|count_states`
+
+Counting the elements of a sequence (`for`), or the states of an evolution (`while`) (all of them, or only those which satisfy a condition). Suffix with the name of the counter.
+
+##### Derivations
+
+[⬆️ feature `assignment_lhs_identifier`](#feature-assignment_lhs_identifier)  
+[⬆️ feature `increment`](#feature-increment)  
+[⬆️ feature `loop`](#feature-loop)  
+
+##### Specification
+
+```sql
+SELECT CASE t_loop.name_suffix
+           WHEN "for" THEN "count_elements"
+           ELSE "count_states"
+       END,
+       inc.name_suffix,
+       min(t_loop.span_start) || "-" || max(t_loop.span_end), -- The biggest loop...
+ t_loop.path
+FROM t_loop
+JOIN t_increment inc ON (inc.path GLOB t_loop.path || "*-")-- including the incrementation of a variable x...
+WHERE NOT EXISTS -- which is not initialized in this loop.
+    (SELECT * -- In other words, ensure there is no...
+     FROM t_assignment_lhs_identifier x -- assignment...
+     WHERE (x.name_suffix = inc.name_suffix -- to the same x...
+            AND x.span != inc.span -- distinct from its incrementation...
+            AND x.path GLOB t_loop.path || "*-") )-- and enclosed in the loop.
+GROUP BY inc.path
+```
+
+##### Example
+
+```python
+1   for i1 in s1:
+2       c1 = 0
+3       c2 = 1
+4       for i2 in s2:
+5           c2 += 1
+6           c3 = 0
+7           for i3 in s3:
+8               if foo(i2, i3):
+9                   c3 += 1
+10              c1 = c1 + 1
+11  while foo(i):
+12      i = 0
+13      f1, f2 = f2, f
+14      index += 1
+15      for j in str(f):
+16          i += 1
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `count_elements:c1` | 4-10 |
+| `count_elements:c2` | 4-10 |
+| `count_elements:c3` | 7-10 |
+| `count_elements:i` | 15-16 |
+| `count_states:index` | 11-16 |
+
+--------------------------------------------------------------------------------
+
 ## Sequential loops
 
 ### Sequential loops with late exit
@@ -5065,59 +5135,6 @@ WHERE NOT EXISTS
 |:--|:--|
 | `accumulate_all_elements:Add` | 3-5 |
 | `accumulate_all_elements:combine` | 8-13 |
-
---------------------------------------------------------------------------------
-
-#### Feature `count_elements`
-
-Counting all the elements of a sequence, or only those which satisfy a condition.
-
-##### Derivations
-
-[⬆️ feature `assignment_lhs_identifier`](#feature-assignment_lhs_identifier)  
-[⬆️ feature `for`](#feature-for)  
-[⬆️ feature `increment`](#feature-increment)  
-
-##### Specification
-
-```sql
-SELECT "count_elements",
-       inc.name_suffix,
-       min(for_loop.span_start) || "-" || max(for_loop.span_end), -- The biggest loop...
- for_loop.path
-FROM t_for for_loop
-JOIN t_increment inc ON (inc.path GLOB for_loop.path || "*-")-- including the incrementation of a variable x...
-WHERE NOT EXISTS -- which is not initialized in this loop.
-    (SELECT * -- In other words, ensure there is no...
-     FROM t_assignment_lhs_identifier x -- assignment...
-     WHERE (x.name_suffix = inc.name_suffix -- to the same x...
-            AND x.span != inc.span -- distinct from its incrementation...
-            AND x.path GLOB for_loop.path || "*-") )-- and enclosed in the loop.
-GROUP BY inc.path
-```
-
-##### Example
-
-```python
-1   for i1 in s1:
-2       c1 = 0
-3       c2 = 1
-4       for i2 in s2:
-5           c2 += 1
-6           c3 = 0
-7           for i3 in s3:
-8               if foo(i2, i3):
-9                   c3 += 1
-10              c1 = c1 + 1
-```
-
-##### Matches
-
-| Label | Lines |
-|:--|:--|
-| `count_elements:c1` | 4-10 |
-| `count_elements:c2` | 4-10 |
-| `count_elements:c3` | 7-10 |
 
 --------------------------------------------------------------------------------
 
@@ -5334,7 +5351,9 @@ JOIN t_return ret ON (ret.path GLOB t_if.path || "*-" -- and returns...
 
 --------------------------------------------------------------------------------
 
-## Non-sequential infinite loops
+## Non-sequential loops
+
+### Non-sequential infinite loops
 
 --------------------------------------------------------------------------------
 

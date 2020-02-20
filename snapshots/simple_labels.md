@@ -124,7 +124,7 @@
 - concatenation_operator|replication_operator
 - conditional_expression
 - continue
-- count_elements
+- count_elements|count_states
 - count_inputs
 - decorated_function
 - deeply_recursive_function
