@@ -170,7 +170,7 @@ def absMin(x): # function:absMin (-> +5), function_argument:x, function_argument
     return j # return:j
 def main(): # function:main (-> +2), function_returning_nothing:main (-> +2), function_without_arguments:main (-> +2)
     a = [-3, -1, 2, -11] # assignment, assignment_lhs_identifier:a, assignment_rhs_atom:-1, assignment_rhs_atom:-11, assignment_rhs_atom:-3, assignment_rhs_atom:2, literal:-1, literal:-11, literal:-3, literal:2, literal:List, single_assignment:a, suggest_constant_definition
-    print(absMin(a)) # call_argument:, call_argument:a, composition, function_call:absMin, function_call:print
+    print(absMin(a)) # call_argument:, call_argument:a, composition, function_call:absMin, function_call:print, function_call_without_result:print
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/average_mean.py
@@ -197,10 +197,10 @@ def median(nums): # function:median (-> +10), function_argument:nums, function_a
         med = sorted_list[mid_index] # assignment, assignment_lhs_identifier:med, assignment_rhs_atom:mid_index, assignment_rhs_atom:sorted_list, index:mid_index, single_assignment:med
     return med # return:med
 def main(): # function:main (-> +4), function_returning_nothing:main (-> +4), function_without_arguments:main (-> +4)
-    print("Odd number of numbers:") # call_argument:, function_call:print, literal:Str
-    print(median([2, 4, 6, 8, 20, 50, 70])) # call_argument:, composition, function_call:median, function_call:print, literal:2, literal:20, literal:4, literal:50, literal:6, literal:70, literal:8, literal:List, suggest_constant_definition
-    print("Even number of numbers:") # call_argument:, function_call:print, literal:Str
-    print(median([2, 4, 6, 8, 20, 50])) # call_argument:, composition, function_call:median, function_call:print, literal:2, literal:20, literal:4, literal:50, literal:6, literal:8, literal:List, suggest_constant_definition
+    print("Odd number of numbers:") # call_argument:, function_call:print, function_call_without_result:print, literal:Str
+    print(median([2, 4, 6, 8, 20, 50, 70])) # call_argument:, composition, function_call:median, function_call:print, function_call_without_result:print, literal:2, literal:20, literal:4, literal:50, literal:6, literal:70, literal:8, literal:List, suggest_constant_definition
+    print("Even number of numbers:") # call_argument:, function_call:print, function_call_without_result:print, literal:Str
+    print(median([2, 4, 6, 8, 20, 50])) # call_argument:, composition, function_call:median, function_call:print, function_call_without_result:print, literal:2, literal:20, literal:4, literal:50, literal:6, literal:8, literal:List, suggest_constant_definition
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/average_mode.py
@@ -291,7 +291,7 @@ def binomial_coefficient(n, r): # function:binomial_coefficient (-> +8), functio
             C[j] += C[j - 1] # assignment_lhs_identifier:C, assignment_rhs_atom:1, assignment_rhs_atom:C, assignment_rhs_atom:j, augmented_assignment:Add, binary_operator:Sub, index:_, index:j, index_arithmetic, literal:1, subscript_augmented_assignment:Add, update:C:1, update:C:C, update:C:j, update_by_augmented_assignment:C:1, update_by_augmented_assignment:C:C, update_by_augmented_assignment:C:j, update_by_augmented_assignment_with:Add, update_with:Add
             j -= 1 # assignment_lhs_identifier:j, assignment_rhs_atom:1, augmented_assignment:Sub, literal:1, update:j:1, update_by_augmented_assignment:j:1, update_by_augmented_assignment_with:Sub, update_with:Sub
     return C[r] # index:r, return
-print(binomial_coefficient(n=10, r=5)) # call_argument:, composition, function_call:binomial_coefficient, function_call:print, literal:10, literal:5
+print(binomial_coefficient(n=10, r=5)) # call_argument:, composition, function_call:binomial_coefficient, function_call:print, function_call_without_result:print, literal:10, literal:5
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/ceil.py
@@ -316,8 +316,8 @@ def collatz_sequence(n): # function:collatz_sequence (-> +8), function_argument:
 def main(): # function:main (-> +4), function_returning_nothing:main (-> +4), function_without_arguments:main (-> +4)
     n = 43 # assignment:43, assignment_lhs_identifier:n, assignment_rhs_atom:43, literal:43, single_assignment:n, suggest_constant_definition
     sequence = collatz_sequence(n) # assignment:collatz_sequence, assignment_lhs_identifier:sequence, assignment_rhs_atom:n, call_argument:n, function_call:collatz_sequence, single_assignment:sequence
-    print(sequence) # call_argument:sequence, function_call:print
-    print("collatz sequence from %d took %d steps." % (n, len(sequence))) # binary_operator:Mod, call_argument:, call_argument:sequence, composition, function_call:len, function_call:print, literal:Str, string_formatting_operator
+    print(sequence) # call_argument:sequence, function_call:print, function_call_without_result:print
+    print("collatz sequence from %d took %d steps." % (n, len(sequence))) # binary_operator:Mod, call_argument:, call_argument:sequence, composition, function_call:len, function_call:print, function_call_without_result:print, literal:Str, string_formatting_operator
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/explicit_euler.py
@@ -371,11 +371,11 @@ def extended_euclidean_algorithm(m, n): # function:extended_euclidean_algorithm 
     return pair # return:pair
 def main(): # function:main (-> +6), function_returning_nothing:main (-> +6), function_without_arguments:main (-> +6)
     if len(sys.argv) < 3: # call_argument:, comparison_operator:Lt, function_call:len, if (-> +2), if_test_atom:3, if_test_atom:sys, literal:3, suggest_constant_definition
-        print("2 integer arguments required") # call_argument:, function_call:print, if_then_branch (-> +1), literal:Str
-        exit(1) # call_argument:1, function_call:exit, literal:1
+        print("2 integer arguments required") # call_argument:, function_call:print, function_call_without_result:print, if_then_branch (-> +1), literal:Str
+        exit(1) # call_argument:1, function_call:exit, function_call_without_result:exit, literal:1
     m = int(sys.argv[1]) # assignment:int, assignment_lhs_identifier:m, assignment_rhs_atom:1, assignment_rhs_atom:sys, call_argument:, function_call:int, index:1, literal:1, single_assignment:m
     n = int(sys.argv[2]) # assignment:int, assignment_lhs_identifier:n, assignment_rhs_atom:2, assignment_rhs_atom:sys, call_argument:, function_call:int, index:2, literal:2, single_assignment:n
-    print(extended_euclidean_algorithm(m, n)) # call_argument:, call_argument:m, call_argument:n, composition, function_call:extended_euclidean_algorithm, function_call:print
+    print(extended_euclidean_algorithm(m, n)) # call_argument:, call_argument:m, call_argument:n, composition, function_call:extended_euclidean_algorithm, function_call:print, function_call_without_result:print
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/factorial_python.py
@@ -420,8 +420,8 @@ def binary_exponentiation(a, n, mod): # body_recursive_function:binary_exponenti
 p = 701 # assignment:701, assignment_lhs_identifier:p, assignment_rhs_atom:701, literal:701, single_assignment:p, suggest_constant_definition
 a = 1000000000 # assignment:1000000000, assignment_lhs_identifier:a, assignment_rhs_atom:1000000000, literal:1000000000, single_assignment:a, suggest_constant_definition
 b = 10 # assignment:10, assignment_lhs_identifier:b, assignment_rhs_atom:10, literal:10, single_assignment:b, suggest_constant_definition
-print((a / b) % p == (a * binary_exponentiation(b, p - 2, p)) % p) # binary_operator:Div, binary_operator:Mod, binary_operator:Mult, binary_operator:Sub, call_argument:, call_argument:b, call_argument:p, comparison_operator:Eq, composition, divisibility_test, function_call:binary_exponentiation, function_call:print, literal:2
-print((a / b) % p == (a * b ** (p - 2)) % p) # binary_operator:Div, binary_operator:Mod, binary_operator:Mult, binary_operator:Pow, binary_operator:Sub, call_argument:, comparison_operator:Eq, divisibility_test, function_call:print, literal:2
+print((a / b) % p == (a * binary_exponentiation(b, p - 2, p)) % p) # binary_operator:Div, binary_operator:Mod, binary_operator:Mult, binary_operator:Sub, call_argument:, call_argument:b, call_argument:p, comparison_operator:Eq, composition, divisibility_test, function_call:binary_exponentiation, function_call:print, function_call_without_result:print, literal:2
+print((a / b) % p == (a * b ** (p - 2)) % p) # binary_operator:Div, binary_operator:Mod, binary_operator:Mult, binary_operator:Pow, binary_operator:Sub, call_argument:, comparison_operator:Eq, divisibility_test, function_call:print, function_call_without_result:print, literal:2
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/fibonacci.py
@@ -435,10 +435,10 @@ def timer_decorator(func): # closure:timer_decorator (-> +11), function:timer_de
     @functools.wraps(func) # call_argument:func, decorated_function:timer_wrapper (-> +9), function:timer_wrapper (-> +9), function_returning_something:timer_wrapper (-> +9), method_call:wraps
     def timer_wrapper(*args, **kwargs): # function_argument:args, function_argument:kwargs, function_argument_flavor:kwarg, function_argument_flavor:vararg
         start = time.time() # assignment:time, assignment_lhs_identifier:start, assignment_rhs_atom:time, method_call:time, single_assignment:start
-        func(*args, **kwargs) # call_argument:, function_call:func
+        func(*args, **kwargs) # call_argument:, function_call:func, function_call_without_result:func
         end = time.time() # assignment:time, assignment_lhs_identifier:end, assignment_rhs_atom:time, method_call:time, single_assignment:end
         if int(end - start) > 0: # binary_operator:Sub, call_argument:, comparison_operator:Gt, function_call:int, if (-> +3), if_test_atom:0, if_test_atom:end, if_test_atom:start, literal:0
-            print(f"Run time for {func.__name__}: {(end - start):0.2f}s") # binary_operator:Sub, call_argument:, f_string, function_call:print, if_then_branch, literal:Str
+            print(f"Run time for {func.__name__}: {(end - start):0.2f}s") # binary_operator:Sub, call_argument:, f_string, function_call:print, function_call_without_result:print, if_then_branch, literal:Str
         else:
             print(f"Run time for {func.__name__}: {(end - start)*1000:0.2f}ms") # binary_operator:Mult, binary_operator:Sub, call_argument:, f_string, function_call:print, if_else_branch, literal:1000, literal:Str, suggest_constant_definition
         return func(*args, **kwargs) # call_argument:, function_call:func, function_tail_call:func, return
@@ -464,13 +464,13 @@ def _check_number_input(n, min_thresh, max_thresh=None): # function:_check_numbe
         elif n > max_thresh: # comparison_operator:Gt, if (-> +1), if_test_atom:max_thresh, if_test_atom:n
             raise ValueTooLargeError # if_elif_branch, raise:ValueTooLargeError
     except ValueLessThanZero: # except:ValueLessThanZero
-        print("Incorrect Input: number must not be less than 0") # call_argument:, function_call:print, literal:Str
+        print("Incorrect Input: number must not be less than 0") # call_argument:, function_call:print, function_call_without_result:print, literal:Str
     except ValueTooSmallError: # except:ValueTooSmallError
-        print( # function_call:print
+        print( # function_call:print, function_call_without_result:print
             f"Incorrect Input: input number must be > {min_thresh} for the recursive calculation" # call_argument:, f_string, literal:Str
         )
     except ValueTooLargeError: # except:ValueTooLargeError
-        print( # function_call:print
+        print( # function_call:print, function_call_without_result:print
             f"Incorrect Input: input number must be < {max_thresh} for the recursive calculation" # call_argument:, f_string, literal:Str
         )
     return False # literal:False, return:False
@@ -507,8 +507,8 @@ def recur_fibo(n): # body_recursive_function:recur_fibo (-> +1), function:recur_
 def main(): # function:main (-> +6), function_returning_nothing:main (-> +6), function_without_arguments:main (-> +6)
     limit = int(input("How many terms to include in fibonacci series: ")) # assignment:int, assignment_lhs_identifier:limit, call_argument:, composition, function_call:input, function_call:int, literal:Str, single_assignment:limit
     if limit > 0: # comparison_operator:Gt, if (-> +4), if_test_atom:0, if_test_atom:limit, literal:0
-        print(f"The first {limit} terms of the fibonacci series are as follows:") # call_argument:, f_string, function_call:print, if_then_branch (-> +1), literal:Str
-        print([recur_fibo(n) for n in range(limit)]) # call_argument:, call_argument:limit, call_argument:n, composition, comprehension:List, comprehension_for_count:1, function_call:print, function_call:range, function_call:recur_fibo, range:limit
+        print(f"The first {limit} terms of the fibonacci series are as follows:") # call_argument:, f_string, function_call:print, function_call_without_result:print, if_then_branch (-> +1), literal:Str
+        print([recur_fibo(n) for n in range(limit)]) # call_argument:, call_argument:limit, call_argument:n, composition, comprehension:List, comprehension_for_count:1, function_call:print, function_call:range, function_call:recur_fibo, function_call_without_result:print, range:limit
     else:
         print("Please enter a positive integer: ") # call_argument:, function_call:print, if_else_branch, literal:Str
 
@@ -522,7 +522,7 @@ def find_max(nums): # function:find_max (-> +5), function_argument:nums, functio
             max_num = x # assignment, assignment_lhs_identifier:max_num, assignment_rhs_atom:x, if_then_branch, single_assignment:max_num
     return max_num # return:max_num
 def main(): # function:main (-> +1), function_returning_nothing:main (-> +1), function_without_arguments:main (-> +1)
-    print(find_max([2, 4, 9, 7, 19, 94, 5])) # call_argument:, composition, function_call:find_max, function_call:print, literal:19, literal:2, literal:4, literal:5, literal:7, literal:9, literal:94, literal:List, suggest_constant_definition
+    print(find_max([2, 4, 9, 7, 19, 94, 5])) # call_argument:, composition, function_call:find_max, function_call:print, function_call_without_result:print, literal:19, literal:2, literal:4, literal:5, literal:7, literal:9, literal:94, literal:List, suggest_constant_definition
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/find_max_recursion.py
@@ -587,12 +587,12 @@ def main(): # function:main (-> +10), function_returning_nothing:main (-> +10), 
         nums = input("Enter two integers separated by comma (,): ").split(",") # assignment:split, assignment_lhs_identifier:nums, call_argument:, function_call:input, literal:Str, method_call:split, single_assignment:nums
         num_1 = int(nums[0]) # assignment:int, assignment_lhs_identifier:num_1, assignment_rhs_atom:0, assignment_rhs_atom:nums, call_argument:, function_call:int, index:0, literal:0, single_assignment:num_1
         num_2 = int(nums[1]) # assignment:int, assignment_lhs_identifier:num_2, assignment_rhs_atom:1, assignment_rhs_atom:nums, call_argument:, function_call:int, index:1, literal:1, single_assignment:num_2
-        print( # composition, function_call:print
+        print( # composition, function_call:print, function_call_without_result:print
             f"greatest_common_divisor({num_1}, {num_2}) = {greatest_common_divisor(num_1, num_2)}" # call_argument:, call_argument:num_1, call_argument:num_2, f_string, function_call:greatest_common_divisor, literal:Str
         )
-        print(f"By iterative gcd({num_1}, {num_2}) = {gcd_by_iterative(num_1, num_2)}") # call_argument:, call_argument:num_1, call_argument:num_2, composition, f_string, function_call:gcd_by_iterative, function_call:print, literal:Str
+        print(f"By iterative gcd({num_1}, {num_2}) = {gcd_by_iterative(num_1, num_2)}") # call_argument:, call_argument:num_1, call_argument:num_2, composition, f_string, function_call:gcd_by_iterative, function_call:print, function_call_without_result:print, literal:Str
     except (IndexError, UnboundLocalError, ValueError): # except:IndexError, except:UnboundLocalError, except:ValueError
-        print("Wrong input") # call_argument:, function_call:print, literal:Str
+        print("Wrong input") # call_argument:, function_call:print, function_call_without_result:print, literal:Str
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/hardy_ramanujanalgo.py
@@ -657,7 +657,7 @@ def karatsuba(a, b): # body_recursive_function:karatsuba (-> +11), function:kara
         z = karatsuba(a1, b1) # assignment:karatsuba, assignment_lhs_identifier:z, assignment_rhs_atom:a1, assignment_rhs_atom:b1, call_argument:a1, call_argument:b1, function_call:karatsuba, single_assignment:z
         return (z * 10 ** (2 * m2)) + ((y - z - x) * 10 ** (m2)) + (x) # binary_operator:Add, binary_operator:Mult, binary_operator:Pow, binary_operator:Sub, literal:10, literal:2, return, suggest_constant_definition
 def main(): # function:main (-> +1), function_returning_nothing:main (-> +1), function_without_arguments:main (-> +1)
-    print(karatsuba(15463, 23489)) # call_argument:, call_argument:15463, call_argument:23489, composition, function_call:karatsuba, function_call:print, literal:15463, literal:23489, suggest_constant_definition
+    print(karatsuba(15463, 23489)) # call_argument:, call_argument:15463, call_argument:23489, composition, function_call:karatsuba, function_call:print, function_call_without_result:print, literal:15463, literal:23489, suggest_constant_definition
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/kth_lexicographic_permutation.py
@@ -783,7 +783,7 @@ from __main__ import fibonacci_with_matrix_exponentiation
 """ # literal:Str
     code = "fibonacci_with_matrix_exponentiation(randint(1,70000), 1, 1)" # assignment, assignment_lhs_identifier:code, literal:Str, single_assignment:code
     exec_time = timeit.timeit(setup=setup, stmt=code, number=100) # assignment:timeit, assignment_lhs_identifier:exec_time, assignment_rhs_atom:100, assignment_rhs_atom:code, assignment_rhs_atom:setup, assignment_rhs_atom:timeit, literal:100, method_call:timeit, single_assignment:exec_time, suggest_constant_definition
-    print("With matrix exponentiation the average execution time is ", exec_time / 100) # binary_operator:Div, call_argument:, function_call:print, literal:100, literal:Str, suggest_constant_definition
+    print("With matrix exponentiation the average execution time is ", exec_time / 100) # binary_operator:Div, call_argument:, function_call:print, function_call_without_result:print, literal:100, literal:Str, suggest_constant_definition
     return exec_time # return:exec_time
 def simple_fibonacci_time(): # function:simple_fibonacci_time (-> +10), function_returning_something:simple_fibonacci_time (-> +10), function_without_arguments:simple_fibonacci_time (-> +10)
     setup = """ # assignment, assignment_lhs_identifier:setup, single_assignment:setup
@@ -792,13 +792,13 @@ from __main__ import simple_fibonacci
 """ # literal:Str
     code = "simple_fibonacci(randint(1,70000), 1, 1)" # assignment, assignment_lhs_identifier:code, literal:Str, single_assignment:code
     exec_time = timeit.timeit(setup=setup, stmt=code, number=100) # assignment:timeit, assignment_lhs_identifier:exec_time, assignment_rhs_atom:100, assignment_rhs_atom:code, assignment_rhs_atom:setup, assignment_rhs_atom:timeit, literal:100, method_call:timeit, single_assignment:exec_time, suggest_constant_definition
-    print( # function_call:print
+    print( # function_call:print, function_call_without_result:print
         "Without matrix exponentiation the average execution time is ", exec_time / 100 # binary_operator:Div, call_argument:, literal:100, literal:Str, suggest_constant_definition
     )
     return exec_time # return:exec_time
 def main(): # function:main (-> +2), function_returning_nothing:main (-> +2), function_without_arguments:main (-> +2)
-    matrix_exponentiation_time() # function_call:matrix_exponentiation_time, function_call_without_arguments:matrix_exponentiation_time
-    simple_fibonacci_time() # function_call:simple_fibonacci_time, function_call_without_arguments:simple_fibonacci_time
+    matrix_exponentiation_time() # function_call:matrix_exponentiation_time, function_call_without_arguments:matrix_exponentiation_time, function_call_without_result:matrix_exponentiation_time
+    simple_fibonacci_time() # function_call:simple_fibonacci_time, function_call_without_arguments:simple_fibonacci_time, function_call_without_result:simple_fibonacci_time
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/mobius_function.py
@@ -826,7 +826,7 @@ def modular_exponential(base, power, mod): # function:modular_exponential (-> +1
         base = (base * base) % mod # assignment:Mod, assignment_lhs_identifier:base, assignment_rhs_atom:base, assignment_rhs_atom:mod, binary_operator:Mod, binary_operator:Mult, single_assignment:base, update:base:mod, update_by_assignment:base:mod, update_by_assignment_with:Mod, update_with:Mod
     return result # return:result
 def main(): # function:main (-> +1), function_returning_nothing:main (-> +1), function_without_arguments:main (-> +1)
-    print(modular_exponential(3, 200, 13)) # call_argument:, call_argument:13, call_argument:200, call_argument:3, composition, function_call:modular_exponential, function_call:print, literal:13, literal:200, literal:3, suggest_constant_definition
+    print(modular_exponential(3, 200, 13)) # call_argument:, call_argument:13, call_argument:200, call_argument:3, composition, function_call:modular_exponential, function_call:print, function_call_without_result:print, literal:13, literal:200, literal:3, suggest_constant_definition
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/newton_raphson.py
@@ -957,7 +957,7 @@ def prime_sieve_eratosthenes(num): # function:prime_sieve_eratosthenes (-> +10),
         p += 1 # assignment_lhs_identifier:p, assignment_rhs_atom:1, augmented_assignment:Add, increment:p, literal:1, update:p:1, update_by_augmented_assignment:p:1, update_by_augmented_assignment_with:Add, update_with:Add
     for prime in range(2, num + 1): # binary_operator:Add, call_argument:, call_argument:2, for:prime (-> +2), for_range:2:_ (-> +2), function_call:range, literal:1, literal:2, loop:for (-> +2), range:2:_
         if primes[prime]: # if (-> +1), if_test_atom:prime, if_test_atom:primes, index:prime
-            print(prime, end=" ") # call_argument:prime, function_call:print, if_then_branch, literal:Str
+            print(prime, end=" ") # call_argument:prime, function_call:print, function_call_without_result:print, if_then_branch, literal:Str
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/qr_decomposition.py
@@ -999,7 +999,7 @@ def QuadraticEquation(a: int, b: int, c: int) -> Tuple[str, str]: # function:Qua
     return f"({b}+{snd} * i) / 2", f"({b}+{snd} * i) / {2 * a}" # binary_operator:Mult, literal:2, literal:Str, return
 def main(): # function:main (-> +2), function_returning_nothing:main (-> +2), function_without_arguments:main (-> +2)
     solutions = QuadraticEquation(a=5, b=6, c=1) # assignment:QuadraticEquation, assignment_lhs_identifier:solutions, assignment_rhs_atom:1, assignment_rhs_atom:5, assignment_rhs_atom:6, function_call:QuadraticEquation, literal:1, literal:5, literal:6, single_assignment:solutions, suggest_constant_definition
-    print("The equation solutions are: {} and {}".format(*solutions)) # call_argument:, composition, function_call:print, literal:Str, method_call:format
+    print("The equation solutions are: {} and {}".format(*solutions)) # call_argument:, composition, function_call:print, function_call_without_result:print, literal:Str, method_call:format
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/radix2_fft.py
@@ -1153,7 +1153,7 @@ def sieve(n): # function:sieve (-> +33), function_argument:n, function_argument_
         if high > n: # comparison_operator:Gt, if (-> +1), if_test_atom:high, if_test_atom:n
             high = n # assignment, assignment_lhs_identifier:high, assignment_rhs_atom:n, if_then_branch, single_assignment:high
     return prime # return:prime
-print(sieve(10 ** 6)) # binary_operator:Pow, call_argument:, composition, function_call:print, function_call:sieve, literal:10, literal:6
+print(sieve(10 ** 6)) # binary_operator:Pow, call_argument:, composition, function_call:print, function_call:sieve, function_call_without_result:print, literal:10, literal:6
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/sieve_of_eratosthenes.py
@@ -1214,7 +1214,7 @@ def main(): # function:main (-> +6), function_returning_nothing:main (-> +6), fu
     steps = 10.0 # assignment:10.0, assignment_lhs_identifier:steps, assignment_rhs_atom:10.0, literal:10.0, single_assignment:steps, suggest_constant_definition
     boundary = [a, b] # assignment, assignment_lhs_identifier:boundary, assignment_rhs_atom:a, assignment_rhs_atom:b, single_assignment:boundary
     y = method_2(boundary, steps) # assignment:method_2, assignment_lhs_identifier:y, assignment_rhs_atom:boundary, assignment_rhs_atom:steps, call_argument:boundary, call_argument:steps, function_call:method_2, single_assignment:y
-    print("y = {0}".format(y)) # call_argument:, call_argument:y, composition, function_call:print, literal:Str, method_call:format
+    print("y = {0}".format(y)) # call_argument:, call_argument:y, composition, function_call:print, function_call_without_result:print, literal:Str, method_call:format
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/softmax.py
@@ -1233,13 +1233,13 @@ def sum_of_series(first_term, common_diff, num_of_terms): # function:sum_of_seri
     sum = (num_of_terms / 2) * (2 * first_term + (num_of_terms - 1) * common_diff) # assignment:Mult, assignment_lhs_identifier:sum, assignment_rhs_atom:1, assignment_rhs_atom:2, assignment_rhs_atom:common_diff, assignment_rhs_atom:first_term, assignment_rhs_atom:num_of_terms, binary_operator:Add, binary_operator:Div, binary_operator:Mult, binary_operator:Sub, literal:1, literal:2, single_assignment:sum
     return sum # return:sum
 def main(): # function:main (-> +1), function_returning_nothing:main (-> +1), function_without_arguments:main (-> +1)
-    print(sum_of_series(1, 1, 10)) # call_argument:, call_argument:1, call_argument:10, composition, function_call:print, function_call:sum_of_series, literal:1, literal:10, suggest_constant_definition
+    print(sum_of_series(1, 1, 10)) # call_argument:, call_argument:1, call_argument:10, composition, function_call:print, function_call:sum_of_series, function_call_without_result:print, literal:1, literal:10, suggest_constant_definition
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/test_prime_check.py
 # ----------------------------------------------------------------------------------------
 from .prime_check import Test # import:prime_check:Test, import_module:prime_check, import_name:Test, lines_of_code:2 (-> +1)
-Test() # function_call:Test, function_call_without_arguments:Test
+Test() # function_call:Test, function_call_without_arguments:Test, function_call_without_result:Test
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/trapezoidal_rule.py
@@ -1269,7 +1269,7 @@ def main(): # function:main (-> +6), function_returning_nothing:main (-> +6), fu
     steps = 10.0 # assignment:10.0, assignment_lhs_identifier:steps, assignment_rhs_atom:10.0, literal:10.0, single_assignment:steps, suggest_constant_definition
     boundary = [a, b] # assignment, assignment_lhs_identifier:boundary, assignment_rhs_atom:a, assignment_rhs_atom:b, single_assignment:boundary
     y = method_1(boundary, steps) # assignment:method_1, assignment_lhs_identifier:y, assignment_rhs_atom:boundary, assignment_rhs_atom:steps, call_argument:boundary, call_argument:steps, function_call:method_1, single_assignment:y
-    print("y = {0}".format(y)) # call_argument:, call_argument:y, composition, function_call:print, literal:Str, method_call:format
+    print("y = {0}".format(y)) # call_argument:, call_argument:y, composition, function_call:print, function_call_without_result:print, literal:Str, method_call:format
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/volume.py
@@ -1292,15 +1292,15 @@ def vol_sphere(radius): # function:vol_sphere (-> +1), function_argument:radius,
 def vol_circular_cylinder(radius, height): # function:vol_circular_cylinder (-> +1), function_argument:height, function_argument:radius, function_argument_flavor:arg, function_returning_something:vol_circular_cylinder (-> +1)
     return pi * radius ** 2 * height # binary_operator:Mult, binary_operator:Pow, literal:2, return
 def main(): # function:main (-> +9), function_returning_nothing:main (-> +9), function_without_arguments:main (-> +9)
-    print("Volumes:") # call_argument:, function_call:print, literal:Str
-    print("Cube: " + str(vol_cube(2))) # binary_operator:Add, call_argument:, call_argument:2, composition, concatenation operator:Str, function_call:print, function_call:str, function_call:vol_cube, literal:2, literal:Str
-    print("Cuboid: " + str(vol_cuboid(2, 2, 2))) # binary_operator:Add, call_argument:, call_argument:2, composition, concatenation operator:Str, function_call:print, function_call:str, function_call:vol_cuboid, literal:2, literal:Str
-    print("Cone: " + str(vol_cone(2, 2))) # binary_operator:Add, call_argument:, call_argument:2, composition, concatenation operator:Str, function_call:print, function_call:str, function_call:vol_cone, literal:2, literal:Str
-    print("Right Circular Cone: " + str(vol_right_circ_cone(2, 2))) # binary_operator:Add, call_argument:, call_argument:2, composition, concatenation operator:Str, function_call:print, function_call:str, function_call:vol_right_circ_cone, literal:2, literal:Str
-    print("Prism: " + str(vol_prism(2, 2))) # binary_operator:Add, call_argument:, call_argument:2, composition, concatenation operator:Str, function_call:print, function_call:str, function_call:vol_prism, literal:2, literal:Str
-    print("Pyramid: " + str(vol_pyramid(2, 2))) # binary_operator:Add, call_argument:, call_argument:2, composition, concatenation operator:Str, function_call:print, function_call:str, function_call:vol_pyramid, literal:2, literal:Str
-    print("Sphere: " + str(vol_sphere(2))) # binary_operator:Add, call_argument:, call_argument:2, composition, concatenation operator:Str, function_call:print, function_call:str, function_call:vol_sphere, literal:2, literal:Str
-    print("Circular Cylinder: " + str(vol_circular_cylinder(2, 2))) # binary_operator:Add, call_argument:, call_argument:2, composition, concatenation operator:Str, function_call:print, function_call:str, function_call:vol_circular_cylinder, literal:2, literal:Str
+    print("Volumes:") # call_argument:, function_call:print, function_call_without_result:print, literal:Str
+    print("Cube: " + str(vol_cube(2))) # binary_operator:Add, call_argument:, call_argument:2, composition, concatenation operator:Str, function_call:print, function_call:str, function_call:vol_cube, function_call_without_result:print, literal:2, literal:Str
+    print("Cuboid: " + str(vol_cuboid(2, 2, 2))) # binary_operator:Add, call_argument:, call_argument:2, composition, concatenation operator:Str, function_call:print, function_call:str, function_call:vol_cuboid, function_call_without_result:print, literal:2, literal:Str
+    print("Cone: " + str(vol_cone(2, 2))) # binary_operator:Add, call_argument:, call_argument:2, composition, concatenation operator:Str, function_call:print, function_call:str, function_call:vol_cone, function_call_without_result:print, literal:2, literal:Str
+    print("Right Circular Cone: " + str(vol_right_circ_cone(2, 2))) # binary_operator:Add, call_argument:, call_argument:2, composition, concatenation operator:Str, function_call:print, function_call:str, function_call:vol_right_circ_cone, function_call_without_result:print, literal:2, literal:Str
+    print("Prism: " + str(vol_prism(2, 2))) # binary_operator:Add, call_argument:, call_argument:2, composition, concatenation operator:Str, function_call:print, function_call:str, function_call:vol_prism, function_call_without_result:print, literal:2, literal:Str
+    print("Pyramid: " + str(vol_pyramid(2, 2))) # binary_operator:Add, call_argument:, call_argument:2, composition, concatenation operator:Str, function_call:print, function_call:str, function_call:vol_pyramid, function_call_without_result:print, literal:2, literal:Str
+    print("Sphere: " + str(vol_sphere(2))) # binary_operator:Add, call_argument:, call_argument:2, composition, concatenation operator:Str, function_call:print, function_call:str, function_call:vol_sphere, function_call_without_result:print, literal:2, literal:Str
+    print("Circular Cylinder: " + str(vol_circular_cylinder(2, 2))) # binary_operator:Add, call_argument:, call_argument:2, composition, concatenation operator:Str, function_call:print, function_call:str, function_call:vol_circular_cylinder, function_call_without_result:print, literal:2, literal:Str
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/zellers_congruence.py

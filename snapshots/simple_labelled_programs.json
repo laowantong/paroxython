@@ -114,6 +114,10 @@
         [[3,3],[8,8]]
       ],
       [
+        "function_call_without_result:print",
+        [[3,3],[8,8]]
+      ],
+      [
         "function_returning_nothing:print_collatz",
         [[1,8]]
       ],
@@ -288,6 +292,10 @@
       [
         "function_call:range",
         [[1,1]]
+      ],
+      [
+        "function_call_without_result:print",
+        [[3,3],[5,5],[7,7]]
       ],
       [
         "if",

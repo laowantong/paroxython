@@ -39,6 +39,7 @@
         "function_argument:n": [[1,1]],
         "function_argument_flavor:arg": [[1,1]],
         "function_call:print": [[3,3],[8,8]],
+        "function_call_without_result:print": [[3,3],[8,8]],
         "function_returning_nothing:print_collatz": [[1,8]],
         "if": [[4,7]],
         "if_else_branch": [[7,7]],
@@ -105,6 +106,7 @@
         "for_range:1:101": [[1,9]],
         "function_call:print": [[3,3],[5,5],[7,7],[9,9]],
         "function_call:range": [[1,1]],
+        "function_call_without_result:print": [[3,3],[5,5],[7,7]],
         "if": [[2,9],[4,9],[6,9]],
         "if_elif_branch": [[5,5],[7,7]],
         "if_else_branch": [[9,9]],
@@ -252,6 +254,10 @@
       "tests/data/simple/is_even.py"
     ],
     "function_call:print": [
+      "tests/data/simple/collatz_print.py",
+      "tests/data/simple/fizzbuzz.py"
+    ],
+    "function_call_without_result:print": [
       "tests/data/simple/collatz_print.py",
       "tests/data/simple/fizzbuzz.py"
     ],

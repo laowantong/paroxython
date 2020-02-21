@@ -1364,7 +1364,7 @@ def next_term(a_i, k, i, n): # body_recursive_function:next_term (-> +50), funct
                 for j in range(min(k, len(a_i))): # call_argument:, call_argument:a_i, call_argument:k, composition, for:j (-> +1), for_range:_ (-> +1), function_call:len, function_call:min, function_call:range, loop:for (-> +1), range:_
                     new_c, a_i[j] = divmod(new_c, 10) # assignment:divmod, assignment_lhs_identifier:a_i, assignment_lhs_identifier:new_c, assignment_rhs_atom:10, assignment_rhs_atom:new_c, call_argument:10, call_argument:new_c, function_call:divmod, index:j, literal:10, parallel_assignment:2, suggest_constant_definition, update:new_c:10, update_by_assignment:new_c:10, update_by_assignment_with:divmod, update_with:divmod
                 if new_c > 0: # comparison_operator:Gt, if (-> +1), if_test_atom:0, if_test_atom:new_c, literal:0, nested_if:3 (-> +1)
-                    add(a_i, k, new_c) # call_argument:a_i, call_argument:k, call_argument:new_c, function_call:add, if_then_branch
+                    add(a_i, k, new_c) # call_argument:a_i, call_argument:k, call_argument:new_c, function_call:add, function_call_without_result:add, if_then_branch
         else:
             sub_memo[c] = [] # assignment, assignment_lhs_identifier:sub_memo, empty_literal:List, if_else_branch, index:c, literal:List
     else:
@@ -1415,7 +1415,7 @@ def compute(a_i, k, i, n): # function:compute (-> +25), function_argument:a_i, f
         if addend > 0: # comparison_operator:Gt, if (-> +1), if_test_atom:0, if_test_atom:addend, literal:0
             break # break, if_then_branch
     if addend > 0: # comparison_operator:Gt, if (-> +1), if_test_atom:0, if_test_atom:addend, literal:0
-        add(a_i, k, addend) # call_argument:a_i, call_argument:addend, call_argument:k, function_call:add, if_then_branch
+        add(a_i, k, addend) # call_argument:a_i, call_argument:addend, call_argument:k, function_call:add, function_call_without_result:add, if_then_branch
     return diff, i - start_i # binary_operator:Sub, return
 def add(digits, k, addend): # function:add (-> +13), function_argument:addend, function_argument:digits, function_argument:k, function_argument_flavor:arg, function_returning_nothing:add (-> +13)
     for j in range(k, len(digits)): # call_argument:, call_argument:digits, call_argument:k, composition, for:j (-> +9), for_range:k:_ (-> +9), for_with_early_exit:break (-> +9), function_call:len, function_call:range, loop:for (-> +9), range:k:_

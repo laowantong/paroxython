@@ -41,6 +41,8 @@
 - function_call:print / collatz_print.py / 3, 8
 - function_call:print / fizzbuzz.py / 3, 5, 7, 9
 - function_call:range / fizzbuzz.py / 1
+- function_call_without_result:print / collatz_print.py / 3, 8
+- function_call_without_result:print / fizzbuzz.py / 3, 5, 7
 - function_returning_nothing:print_collatz / collatz_print.py / 1-8
 - function_returning_something:is_even / is_even.py / 1-2
 - if / collatz_print.py / 4-7
@@ -147,6 +149,7 @@
 - function_argument_flavor
 - function_call
 - function_call_without_arguments
+- function_call_without_result
 - function_decorator
 - function_returning_nothing
 - function_returning_something

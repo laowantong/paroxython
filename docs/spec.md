@@ -26,6 +26,7 @@
       - [Feature `short_circuit`](#feature-short_circuit)
   - [Calls](#calls)
       - [Feature `function_call`](#feature-function_call)
+      - [Feature `function_call_without_result`](#feature-function_call_without_result)
       - [Feature `function_call_without_arguments`](#feature-function_call_without_arguments)
       - [Feature `function_tail_call`](#feature-function_tail_call)
       - [Feature `call_argument`](#feature-call_argument)
@@ -1120,6 +1121,35 @@ When the value of the left operand suffices to determine the value of a boolean 
 | `function_call:buzz` | 3 |
 | `function_call:fizz` | 4 |
 | `function_call:foobar` | 4 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `function_call_without_result`
+
+##### Specification
+
+```re
+  ^(.*/body/\d+)/_type=Expr
+\n(?:\1.+\n)*?\1/value/_type=Call
+\n(?:\1.+\n)*?\1/value/_pos=(?P<POS>.+)
+\n(?:\1.+\n)*?\1/value/func/id=(?P<SUFFIX>.+)
+```
+
+##### Example
+
+```python
+1   a = foo(a, b, c) # no match
+2   return bar() # no match
+3   1 + buzz(x, 2) # no match
+4   fizz(foobar(x), 2) # match for fizz, no match for foobar
+5   baz.qux() # no match
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `function_call_without_result:fizz` | 4 |
 
 --------------------------------------------------------------------------------
 

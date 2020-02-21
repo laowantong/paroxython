@@ -23,6 +23,7 @@ def print_collatz(n): # added_block_label (-> +7)
                   # while (-> +5)
         print(n) # call_argument:n
                  # function_call:print
+                 # function_call_without_result:print
         if n % 2 == 0: # added_label_on_line_4
                        # binary_operator:Mod
                        # comparison_operator:Eq
@@ -67,6 +68,7 @@ def print_collatz(n): # added_block_label (-> +7)
                           # update_with:Add
     print(n) # call_argument:n
              # function_call:print
+             # function_call_without_result:print
 
 # ----------------------------------------------------------------------------------------
 # tests/data/simple/fizzbuzz.py
@@ -93,6 +95,7 @@ for i in range(1, 101): # call_argument:1
                     # suggest_constant_definition
         print("FizzBuzz") # call_argument:
                           # function_call:print
+                          # function_call_without_result:print
                           # if_then_branch
                           # literal:Str
     elif i % 3 == 0: # binary_operator:Mod
@@ -107,6 +110,7 @@ for i in range(1, 101): # call_argument:1
                      # suggest_constant_definition
         print("Fizz") # call_argument:
                       # function_call:print
+                      # function_call_without_result:print
                       # if_elif_branch
                       # literal:Str
     elif i % 5 == 0: # binary_operator:Mod
@@ -121,6 +125,7 @@ for i in range(1, 101): # call_argument:1
                      # suggest_constant_definition
         print("Buzz") # call_argument:
                       # function_call:print
+                      # function_call_without_result:print
                       # if_elif_branch
                       # literal:Str
     else: # 
