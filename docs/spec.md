@@ -31,6 +31,7 @@
       - [Feature `function_tail_call`](#feature-function_tail_call)
       - [Feature `call_argument`](#feature-call_argument)
       - [Feature `method_call`](#feature-method_call)
+      - [Feature `method_call_without_result`](#feature-method_call_without_result)
       - [Feature `method_call_object`](#feature-method_call_object)
       - [Feature `method_chaining`](#feature-method_chaining)
       - [Feature `composition`](#feature-composition)
@@ -1348,6 +1349,35 @@ Otherwise, suffix it with an empty string.
 | Label | Lines |
 |:--|:--|
 | `method_call:index` | 1 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `method_call_without_result`
+
+##### Specification
+
+```re
+  ^(.*/body/\d+)/_type=Expr
+\n(?:\1.+\n)*?\1/value/_type=Call
+\n(?:\1.+\n)*?\1/value/_pos=(?P<POS>.+)
+\n(?:\1.+\n)*?\1/value/func/attr=(?P<SUFFIX>.+)
+```
+
+##### Example
+
+```python
+1   a = foo(a, b, c) # no match
+2   return bar() # no match
+3   1 + buzz(x, 2) # no match
+4   fizz(foobar(x), 2) # no match
+5   baz.qux() # match
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `method_call_without_result:qux` | 5 |
 
 --------------------------------------------------------------------------------
 

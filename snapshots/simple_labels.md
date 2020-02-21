@@ -174,6 +174,7 @@
 - method
 - method_call
 - method_call_object
+- method_call_without_result
 - method_chaining
 - negate
 - negative_index

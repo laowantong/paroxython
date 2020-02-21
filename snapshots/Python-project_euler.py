@@ -66,7 +66,7 @@ def solution(n): # function:solution (-> +22), function_argument:n, function_arg
     while True: # infinite_while (-> +7), literal:True, loop:while (-> +7), while (-> +7), while_with_early_exit:break (-> +7)
         result = z * temp # assignment:Mult, assignment_lhs_identifier:result, assignment_rhs_atom:temp, assignment_rhs_atom:z, binary_operator:Mult, single_assignment:result
         if result < n: # comparison_operator:Lt, if (-> +5), if_test_atom:n, if_test_atom:result
-            zmulti.append(result) # call_argument:result, if_then_branch (-> +1), method_call:append, method_call_object:zmulti, update:zmulti:result, update_by_method_call:zmulti:result, update_by_method_call_with:append, update_with:append
+            zmulti.append(result) # call_argument:result, if_then_branch (-> +1), method_call:append, method_call_object:zmulti, method_call_without_result:append, update:zmulti:result, update_by_method_call:zmulti:result, update_by_method_call_with:append, update_with:append
             temp += 1 # assignment_lhs_identifier:temp, assignment_rhs_atom:1, augmented_assignment:Add, increment:temp, literal:1, update:temp:1, update_by_augmented_assignment:temp:1, update_by_augmented_assignment_with:Add, update_with:Add
         else:
             temp = 1 # assignment:1, assignment_lhs_identifier:temp, assignment_rhs_atom:1, if_else_branch (-> +1), literal:1, single_assignment:temp
@@ -74,7 +74,7 @@ def solution(n): # function:solution (-> +22), function_argument:n, function_arg
     while True: # count_states:temp (-> +6), infinite_while (-> +6), literal:True, loop:while (-> +6), while (-> +6), while_with_early_exit:break (-> +6)
         result = x * temp # assignment:Mult, assignment_lhs_identifier:result, assignment_rhs_atom:temp, assignment_rhs_atom:x, binary_operator:Mult, single_assignment:result
         if result < n: # comparison_operator:Lt, if (-> +4), if_test_atom:n, if_test_atom:result
-            xmulti.append(result) # call_argument:result, if_then_branch (-> +1), method_call:append, method_call_object:xmulti, update:xmulti:result, update_by_method_call:xmulti:result, update_by_method_call_with:append, update_with:append
+            xmulti.append(result) # call_argument:result, if_then_branch (-> +1), method_call:append, method_call_object:xmulti, method_call_without_result:append, update:xmulti:result, update_by_method_call:xmulti:result, update_by_method_call_with:append, update_with:append
             temp += 1 # assignment_lhs_identifier:temp, assignment_rhs_atom:1, augmented_assignment:Add, increment:temp, literal:1, update:temp:1, update_by_augmented_assignment:temp:1, update_by_augmented_assignment_with:Add, update_with:Add
         else:
             break # break, if_else_branch
@@ -134,7 +134,7 @@ def solution(n): # function:solution (-> +7), function_argument:n, function_argu
     a, b = 0, 1 # assignment, assignment_lhs_identifier:a, assignment_lhs_identifier:b, assignment_rhs_atom:0, assignment_rhs_atom:1, literal:0, literal:1, literal:Tuple, parallel_assignment:2
     while b <= n: # comparison_operator:LtE, loop:while (-> +3), while (-> +3)
         if b % 2 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, if (-> +1), if_test_atom:0, if_test_atom:2, if_test_atom:b, literal:0, literal:2
-            ls.append(b) # call_argument:b, if_then_branch, method_call:append, method_call_object:ls, update:ls:b, update_by_method_call:ls:b, update_by_method_call_with:append, update_with:append
+            ls.append(b) # call_argument:b, if_then_branch, method_call:append, method_call_object:ls, method_call_without_result:append, update:ls:b, update_by_method_call:ls:b, update_by_method_call_with:append, update_with:append
         a, b = b, a + b # assignment, assignment_lhs_identifier:a, assignment_lhs_identifier:b, assignment_rhs_atom:a, assignment_rhs_atom:b, binary_operator:Add, parallel_assignment:2, slide, update:a:b, update:b:a, update_by_assignment:a:b, update_by_assignment:b:a, update_by_assignment_with, update_with
     return ls # return:ls
 
@@ -178,7 +178,7 @@ def solution(n): # function:solution (-> +12), function_argument:n, function_arg
     a = [0, 1] # assignment, assignment_lhs_identifier:a, assignment_rhs_atom:0, assignment_rhs_atom:1, literal:0, literal:1, literal:List, single_assignment:a
     i = 0 # assignment:0, assignment_lhs_identifier:i, assignment_rhs_atom:0, literal:0, single_assignment:i
     while a[i] <= n: # comparison_operator:LtE, count_states:i (-> +4), index:i, loop:while (-> +4), while (-> +4), while_with_early_exit:break (-> +4)
-        a.append(a[i] + a[i + 1]) # binary_operator:Add, call_argument:, index:_, index:i, index_arithmetic, literal:1, method_call:append, method_call_object:a
+        a.append(a[i] + a[i + 1]) # binary_operator:Add, call_argument:, index:_, index:i, index_arithmetic, literal:1, method_call:append, method_call_object:a, method_call_without_result:append
         if a[i + 2] > n: # binary_operator:Add, comparison_operator:Gt, if (-> +1), if_test_atom:2, if_test_atom:a, if_test_atom:i, if_test_atom:n, index:_, index_arithmetic, literal:2
             break # break, if_then_branch
         i += 1 # assignment_lhs_identifier:i, assignment_rhs_atom:1, augmented_assignment:Add, increment:i, literal:1, update:i:1, update_by_augmented_assignment:i:1, update_by_augmented_assignment_with:Add, update_with:Add
@@ -418,7 +418,7 @@ def solution(n): # function:solution (-> +15), function_argument:n, function_arg
     num = 2 # assignment:2, assignment_lhs_identifier:num, assignment_rhs_atom:2, literal:2, single_assignment:num
     while len(primes) < n: # call_argument:primes, comparison_operator:Lt, function_call:len, loop:while (-> +5), while (-> +5)
         if isprime(num): # call_argument:num, function_call:isprime, if (-> +4), if_test_atom:num
-            primes.append(num) # call_argument:num, if_then_branch (-> +1), method_call:append, method_call_object:primes, update:primes:num, update_by_method_call:primes:num, update_by_method_call_with:append, update_with:append
+            primes.append(num) # call_argument:num, if_then_branch (-> +1), method_call:append, method_call_object:primes, method_call_without_result:append, update:primes:num, update_by_method_call:primes:num, update_by_method_call_with:append, update_with:append
             num += 1 # assignment_lhs_identifier:num, assignment_rhs_atom:1, augmented_assignment:Add, increment:num, literal:1, update:num:1, update_by_augmented_assignment:num:1, update_by_augmented_assignment_with:Add, update_with:Add
         else:
             num += 1 # assignment_lhs_identifier:num, assignment_rhs_atom:1, augmented_assignment:Add, if_else_branch, increment:num, literal:1, update:num:1, update_by_augmented_assignment:num:1, update_by_augmented_assignment_with:Add, update_with:Add
@@ -684,7 +684,7 @@ def solution(): # function:solution (-> +6), function_returning_something:soluti
     grid = [] # assignment, assignment_lhs_identifier:grid, empty_literal:List, literal:List, single_assignment:grid
     with open(os.path.dirname(__file__) + "/grid.txt") as file: # binary_operator:Add, call_argument:, call_argument:__file__, composition, concatenation operator:Str, function_call:open, literal:Str, method_call:dirname
         for line in file: # for:line (-> +1), for_each (-> +1), loop:for (-> +1)
-            grid.append(line.strip("\n").split(" ")) # call_argument:, composition, literal:Str, method_call:append, method_call:split, method_call:strip, method_call_object:grid, method_call_object:line, method_chaining
+            grid.append(line.strip("\n").split(" ")) # call_argument:, composition, literal:Str, method_call:append, method_call:split, method_call:strip, method_call_object:grid, method_call_object:line, method_call_without_result:append, method_chaining
     grid = [[int(i) for i in grid[j]] for j in range(len(grid))] # assignment, assignment_lhs_identifier:grid, assignment_rhs_atom:grid, assignment_rhs_atom:i, assignment_rhs_atom:j, call_argument:, call_argument:grid, call_argument:i, composition, comprehension:List, comprehension_for_count:1, function_call:int, function_call:len, function_call:range, index:j, range:_, single_assignment:grid, update:grid:i, update:grid:j, update_by_assignment:grid:i, update_by_assignment:grid:j, update_by_assignment_with, update_with
     return largest_product(grid) # call_argument:grid, function_call:largest_product, function_tail_call:largest_product, return
 
@@ -696,7 +696,7 @@ def solution(): # function:solution (-> +26), function_returning_something:solut
     with open(os.path.dirname(__file__) + "/grid.txt") as f: # binary_operator:Add, call_argument:, call_argument:__file__, composition, concatenation operator:Str, function_call:open, literal:Str, method_call:dirname
         l = [] # assignment, assignment_lhs_identifier:l, empty_literal:List, literal:List, single_assignment:l
         for i in range(20): # call_argument:20, for:i (-> +1), for_range:20 (-> +1), function_call:range, literal:20, loop:for (-> +1), range:20, suggest_constant_definition
-            l.append([int(x) for x in f.readline().split()]) # call_argument:, call_argument:x, composition, comprehension:List, comprehension_for_count:1, function_call:int, method_call:append, method_call:readline, method_call:split, method_call_object:f, method_call_object:l, method_chaining, update:f:x, update:l:x, update_by_method_call:f:x, update_by_method_call:l:x, update_by_method_call_with:append, update_with:append
+            l.append([int(x) for x in f.readline().split()]) # call_argument:, call_argument:x, composition, comprehension:List, comprehension_for_count:1, function_call:int, method_call:append, method_call:readline, method_call:split, method_call_object:f, method_call_object:l, method_call_without_result:append, method_chaining, update:f:x, update:l:x, update_by_method_call:f:x, update_by_method_call:l:x, update_by_method_call_with:append, update_with:append
         maximum = 0 # assignment:0, assignment_lhs_identifier:maximum, assignment_rhs_atom:0, literal:0, single_assignment:maximum
         for i in range(20): # call_argument:20, for:i (-> +4), for_range:17 (-> +4), for_range:20 (-> +4), function_call:range, literal:20, loop:for (-> +4), range:20, suggest_constant_definition
             for j in range(17): # call_argument:17, for:j (-> +3), for_range:17 (-> +3), function_call:range, literal:17, loop:for (-> +3), nested_for:1 (-> +3), range:17, suggest_constant_definition
@@ -790,7 +790,7 @@ def collatz_sequence(n): # function:collatz_sequence (-> +8), function_argument:
             n //= 2 # assignment_lhs_identifier:n, assignment_rhs_atom:2, augmented_assignment:FloorDiv, if_then_branch, literal:2, update:n:2, update_by_augmented_assignment:n:2, update_by_augmented_assignment_with:FloorDiv, update_with:FloorDiv
         else:
             n = 3 * n + 1 # assignment:Add, assignment_lhs_identifier:n, assignment_rhs_atom:1, assignment_rhs_atom:3, assignment_rhs_atom:n, binary_operator:Add, binary_operator:Mult, if_else_branch, literal:1, literal:3, single_assignment:n, suggest_constant_definition, update:n:1, update:n:3, update_by_assignment:n:1, update_by_assignment:n:3, update_by_assignment_with:Add, update_with:Add
-        sequence.append(n) # call_argument:n, method_call:append, method_call_object:sequence, update:sequence:n, update_by_method_call:sequence:n, update_by_method_call_with:append, update_with:append
+        sequence.append(n) # call_argument:n, method_call:append, method_call_object:sequence, method_call_without_result:append, update:sequence:n, update_by_method_call:sequence:n, update_by_method_call_with:append, update_with:append
     return sequence # return:sequence
 def solution(n): # function:solution (-> +2), function_argument:n, function_argument_flavor:arg, function_returning_something:solution (-> +2)
     result = max([(len(collatz_sequence(i)), i) for i in range(1, n)]) # assignment:max, assignment_lhs_identifier:result, assignment_rhs_atom:1, assignment_rhs_atom:i, assignment_rhs_atom:n, call_argument:, call_argument:1, call_argument:i, call_argument:n, composition, comprehension:List, comprehension_for_count:1, function_call:collatz_sequence, function_call:len, function_call:max, function_call:range, literal:1, range:1:n, single_assignment:result
@@ -977,7 +977,7 @@ def solution(): # function:solution (-> +12), function_returning_something:solut
     with open(os.path.dirname(__file__) + "/p022_names.txt") as file: # binary_operator:Add, call_argument:, call_argument:__file__, composition, concatenation operator:Str, function_call:open, literal:Str, method_call:dirname
         names = str(file.readlines()[0]) # assignment:str, assignment_lhs_identifier:names, assignment_rhs_atom:0, assignment_rhs_atom:file, call_argument:, composition, function_call:str, index:0, literal:0, method_call:readlines, method_call_object:file, single_assignment:names
         names = names.replace('"', "").split(",") # assignment:split, assignment_lhs_identifier:names, assignment_rhs_atom:names, call_argument:, empty_literal:Str, literal:Str, method_call:replace, method_call:split, method_call_object:names, method_chaining, single_assignment:names
-    names.sort() # method_call:sort, method_call_object:names
+    names.sort() # method_call:sort, method_call_object:names, method_call_without_result:sort
     name_score = 0 # assignment:0, assignment_lhs_identifier:name_score, assignment_rhs_atom:0, literal:0, single_assignment:name_score
     total_score = 0 # assignment:0, assignment_lhs_identifier:total_score, assignment_rhs_atom:0, literal:0, single_assignment:total_score
     for i, name in enumerate(names): # accumulate_all_elements:Add, accumulate_elements:Add, call_argument:names, for:i, for_indexes_elements (-> +4), function_call:enumerate, loop:for
@@ -997,7 +997,7 @@ def solution(): # function:solution (-> +12), function_returning_something:solut
     with open(os.path.dirname(__file__) + "/p022_names.txt") as file: # binary_operator:Add, call_argument:, call_argument:__file__, composition, concatenation operator:Str, function_call:open, literal:Str, method_call:dirname
         name = str(file.readlines()[0]) # assignment:str, assignment_lhs_identifier:name, assignment_rhs_atom:0, assignment_rhs_atom:file, call_argument:, composition, function_call:str, index:0, literal:0, method_call:readlines, method_call_object:file, single_assignment:name
         name = name.replace('"', "").split(",") # assignment:split, assignment_lhs_identifier:name, assignment_rhs_atom:name, call_argument:, empty_literal:Str, literal:Str, method_call:replace, method_call:split, method_call_object:name, method_chaining, single_assignment:name
-    name.sort() # method_call:sort, method_call_object:name
+    name.sort() # method_call:sort, method_call_object:name, method_call_without_result:sort
     for i in range(len(name)): # accumulate_all_elements:Add (-> +4), accumulate_elements:Add (-> +4), call_argument:, call_argument:name, composition, for:i (-> +4), for_indexes (-> +4), for_range:_ (-> +4), function_call:len, function_call:range, loop:for (-> +4), range:_
         for j in name[i]: # accumulate_all_elements:Add (-> +1), accumulate_elements:Add (-> +1), for:j (-> +1), index:i, loop:for (-> +1), nested_for:1 (-> +1)
             temp_sum += ord(j) - ord("A") + 1 # assignment_lhs_identifier:temp_sum, assignment_rhs_atom:1, assignment_rhs_atom:j, augmented_assignment:Add, binary_operator:Add, binary_operator:Sub, call_argument:, call_argument:j, function_call:ord, literal:1, literal:Str, update:temp_sum:1, update:temp_sum:j, update_by_augmented_assignment:temp_sum:1, update_by_augmented_assignment:temp_sum:j, update_by_augmented_assignment_with:Add, update_with:Add
@@ -1018,7 +1018,7 @@ def solution(limit=28123): # function:solution (-> +13), function_argument:limit
     res = 0 # assignment:0, assignment_lhs_identifier:res, assignment_rhs_atom:0, literal:0, single_assignment:res
     for n in range(1, limit + 1): # accumulate_elements:Add (-> +4), accumulate_elements:add (-> +4), accumulate_some_elements:Add (-> +4), accumulate_some_elements:add (-> +4), binary_operator:Add, call_argument:, call_argument:1, for:n (-> +4), for_range:1:_ (-> +4), function_call:range, literal:1, loop:for (-> +4), range:1:_
         if sumDivs[n] > n: # comparison_operator:Gt, if (-> +1), if_test_atom:n, if_test_atom:sumDivs, index:n
-            abundants.add(n) # call_argument:n, if_then_branch, method_call:add, method_call_object:abundants, update:abundants:n, update_by_method_call:abundants:n, update_by_method_call_with:add, update_with:add
+            abundants.add(n) # call_argument:n, if_then_branch, method_call:add, method_call_object:abundants, method_call_without_result:add, update:abundants:n, update_by_method_call:abundants:n, update_by_method_call_with:add, update_with:add
         if not any((n - a in abundants) for a in abundants): # binary_operator:Sub, call_argument:, comparison_operator:In, comprehension:Generator, comprehension_for_count:1, function_call:any, if (-> +1), if_test_atom:a, if_test_atom:abundants, if_test_atom:n, unary_operator:Not
             res += n # assignment_lhs_identifier:res, assignment_rhs_atom:n, augmented_assignment:Add, if_then_branch, update:res:n, update_by_augmented_assignment:res:n, update_by_augmented_assignment_with:Add, update_with:Add
     return res # return:res
@@ -1050,7 +1050,7 @@ def solution(n): # function:solution (-> +11), function_argument:n, function_arg
                 c2 += 1 # assignment_lhs_identifier:c2, assignment_rhs_atom:1, augmented_assignment:Add, if_then_branch, increment:c2, literal:1, update:c2:1, update_by_augmented_assignment:c2:1, update_by_augmented_assignment_with:Add, update_with:Add
             else:
                 break # break, if_else_branch
-        semidivisible.append(fib(l[0], l[1], c2 + 1)[int(l[2]) - 1]) # binary_operator:Add, binary_operator:Sub, call_argument:, composition, function_call:fib, function_call:int, index:0, index:1, index:2, index:_, index_arithmetic, literal:0, literal:1, literal:2, method_call:append, method_call_object:semidivisible, nested_index:4
+        semidivisible.append(fib(l[0], l[1], c2 + 1)[int(l[2]) - 1]) # binary_operator:Add, binary_operator:Sub, call_argument:, composition, function_call:fib, function_call:int, index:0, index:1, index:2, index:_, index_arithmetic, literal:0, literal:1, literal:2, method_call:append, method_call_object:semidivisible, method_call_without_result:append, nested_index:4
     return semidivisible # return:semidivisible
 
 # ----------------------------------------------------------------------------------------
@@ -1072,7 +1072,7 @@ def fibonacci(n): # function:fibonacci (-> +9), function_argument:n, function_ar
     else:
         sequence = [0, 1] # assignment, assignment_lhs_identifier:sequence, assignment_rhs_atom:0, assignment_rhs_atom:1, if_else_branch (-> +3), literal:0, literal:1, literal:List, single_assignment:sequence
         for i in range(2, n + 1): # binary_operator:Add, call_argument:, call_argument:2, for:i (-> +1), for_range:2:_ (-> +1), function_call:range, literal:1, literal:2, loop:for (-> +1), range:2:_
-            sequence.append(sequence[i - 1] + sequence[i - 2]) # binary_operator:Add, binary_operator:Sub, call_argument:, index:_, index_arithmetic, literal:1, literal:2, method_call:append, method_call_object:sequence
+            sequence.append(sequence[i - 1] + sequence[i - 2]) # binary_operator:Add, binary_operator:Sub, call_argument:, index:_, index_arithmetic, literal:1, literal:2, method_call:append, method_call_object:sequence, method_call_without_result:append
         return sequence[n] # index:n, return
 def fibonacci_digits_index(n): # function:fibonacci_digits_index (-> +6), function_argument:n, function_argument_flavor:arg, function_returning_something:fibonacci_digits_index (-> +6)
     digits = 0 # assignment:0, assignment_lhs_identifier:digits, assignment_rhs_atom:0, literal:0, single_assignment:digits
@@ -1167,7 +1167,7 @@ def solution(n): # function:solution (-> +8), function_argument:n, function_argu
     for a in range(2, N): # call_argument:2, call_argument:N, for:a (-> +3), for_range:2:N (-> +3), function_call:range, literal:2, loop:for (-> +3), range:2:N, square_nested_for (-> +3)
         for b in range(2, N): # call_argument:2, call_argument:N, for:b (-> +2), for_range:2:N (-> +2), function_call:range, literal:2, loop:for (-> +2), nested_for:1 (-> +2), range:2:N
             currentPow = a ** b # assignment:Pow, assignment_lhs_identifier:currentPow, assignment_rhs_atom:a, assignment_rhs_atom:b, binary_operator:Pow, single_assignment:currentPow
-            collectPowers.add(currentPow) # call_argument:currentPow, method_call:add, method_call_object:collectPowers, update:collectPowers:currentPow, update_by_method_call:collectPowers:currentPow, update_by_method_call_with:add, update_with:add
+            collectPowers.add(currentPow) # call_argument:currentPow, method_call:add, method_call_object:collectPowers, method_call_without_result:add, update:collectPowers:currentPow, update_by_method_call:collectPowers:currentPow, update_by_method_call_with:add, update_with:add
     return len(collectPowers) # call_argument:collectPowers, function_call:len, function_tail_call:len, return
 
 # ----------------------------------------------------------------------------------------
@@ -1231,7 +1231,7 @@ def solve(digit_len: int) -> str: # function:solve (-> +13), function_argument:d
         while den <= 99: # comparison_operator:LtE, count_states:den (-> +4), literal:99, loop:while (-> +4), suggest_constant_definition, while (-> +4)
             if (num != den) and (num % 10 == den // 10) and (den % 10 != 0): # binary_operator:FloorDiv, binary_operator:Mod, boolean_operator:And, comparison_operator:Eq, comparison_operator:NotEq, divisibility_test:10, if (-> +2), if_test_atom:0, if_test_atom:10, if_test_atom:den, if_test_atom:num, literal:0, literal:10, suggest_constant_definition
                 if isDigitCancelling(num, den): # call_argument:den, call_argument:num, function_call:isDigitCancelling, if (-> +1), if_test_atom:den, if_test_atom:num, if_then_branch (-> +1), nested_if:1 (-> +1)
-                    solutions.append("{}/{}".format(num, den)) # call_argument:, call_argument:den, call_argument:num, composition, if_then_branch, literal:Str, method_call:append, method_call:format, method_call_object:solutions, update:solutions:den, update:solutions:num, update_by_method_call:solutions:den, update_by_method_call:solutions:num, update_by_method_call_with:append, update_with:append
+                    solutions.append("{}/{}".format(num, den)) # call_argument:, call_argument:den, call_argument:num, composition, if_then_branch, literal:Str, method_call:append, method_call:format, method_call_object:solutions, method_call_without_result:append, update:solutions:den, update:solutions:num, update_by_method_call:solutions:den, update_by_method_call:solutions:num, update_by_method_call_with:append, update_with:append
             den += 1 # assignment_lhs_identifier:den, assignment_rhs_atom:1, augmented_assignment:Add, increment:den, literal:1, update:den:1, update_by_augmented_assignment:den:1, update_by_augmented_assignment_with:Add, update_with:Add
         num += 1 # assignment_lhs_identifier:num, assignment_rhs_atom:1, augmented_assignment:Add, increment:num, literal:1, update:num:1, update_by_augmented_assignment:num:1, update_by_augmented_assignment_with:Add, update_with:Add
         den = 10 # assignment:10, assignment_lhs_identifier:den, assignment_rhs_atom:10, literal:10, single_assignment:den, suggest_constant_definition
@@ -1261,7 +1261,7 @@ def solution(): # function:solution (-> +14), function_returning_something:solut
     constant = [] # assignment, assignment_lhs_identifier:constant, empty_literal:List, literal:List, single_assignment:constant
     i = 1 # assignment:1, assignment_lhs_identifier:i, assignment_rhs_atom:1, literal:1, single_assignment:i
     while len(constant) < 1e6: # call_argument:constant, comparison_operator:Lt, count_states:i (-> +2), function_call:len, literal:1000000.0, loop:while (-> +2), suggest_constant_definition, while (-> +2)
-        constant.append(str(i)) # call_argument:, call_argument:i, composition, function_call:str, method_call:append, method_call_object:constant, update:constant:i, update_by_method_call:constant:i, update_by_method_call_with:append, update_with:append
+        constant.append(str(i)) # call_argument:, call_argument:i, composition, function_call:str, method_call:append, method_call_object:constant, method_call_without_result:append, update:constant:i, update_by_method_call:constant:i, update_by_method_call_with:append, update_with:append
         i += 1 # assignment_lhs_identifier:i, assignment_rhs_atom:1, augmented_assignment:Add, increment:i, literal:1, update:i:1, update_by_augmented_assignment:i:1, update_by_augmented_assignment_with:Add, update_with:Add
     constant = "".join(constant) # assignment:join, assignment_lhs_identifier:constant, assignment_rhs_atom:constant, call_argument:constant, empty_literal:Str, literal:Str, method_call:join, single_assignment:constant
     return ( # return
@@ -1389,13 +1389,13 @@ def next_term(a_i, k, i, n): # body_recursive_function:next_term (-> +50), funct
         if jumps[j][1] > dn: # comparison_operator:Gt, if (-> +1), if_test_atom:1, if_test_atom:dn, if_test_atom:j, if_test_atom:jumps, index:1, index:j, literal:1, nested_index:2
             break # break, if_then_branch
         j += 1 # assignment_lhs_identifier:j, assignment_rhs_atom:1, augmented_assignment:Add, increment:j, literal:1, update:j:1, update_by_augmented_assignment:j:1, update_by_augmented_assignment_with:Add, update_with:Add
-    sub_memo[c].insert(j, (diff, dn, k)) # call_argument:, call_argument:j, index:c, method_call:insert
+    sub_memo[c].insert(j, (diff, dn, k)) # call_argument:, call_argument:j, index:c, method_call:insert, method_call_without_result:insert
     return (diff, dn) # return
 def compute(a_i, k, i, n): # function:compute (-> +25), function_argument:a_i, function_argument:i, function_argument:k, function_argument:n, function_argument_flavor:arg, function_returning_something:compute (-> +25)
     if i >= n: # comparison_operator:GtE, if (-> +1), if_test_atom:i, if_test_atom:n
         return 0, i # if_then_branch, literal:0, return
     if k > len(a_i): # call_argument:a_i, comparison_operator:Gt, function_call:len, if (-> +1), if_test_atom:a_i, if_test_atom:k
-        a_i.extend([0 for _ in range(k - len(a_i))]) # binary_operator:Sub, call_argument:, call_argument:a_i, composition, comprehension:List, comprehension_for_count:1, function_call:len, function_call:range, if_then_branch, literal:0, method_call:extend, method_call_object:a_i, range:_, update:a_i:a_i, update_by_method_call:a_i:a_i, update_by_method_call_with:extend, update_with:extend
+        a_i.extend([0 for _ in range(k - len(a_i))]) # binary_operator:Sub, call_argument:, call_argument:a_i, composition, comprehension:List, comprehension_for_count:1, function_call:len, function_call:range, if_then_branch, literal:0, method_call:extend, method_call_object:a_i, method_call_without_result:extend, range:_, update:a_i:a_i, update_by_method_call:a_i:a_i, update_by_method_call_with:extend, update_with:extend
     start_i = i # assignment, assignment_lhs_identifier:start_i, assignment_rhs_atom:i, single_assignment:start_i
     ds_b, ds_c, diff = 0, 0, 0 # assignment, assignment_lhs_identifier:diff, assignment_lhs_identifier:ds_b, assignment_lhs_identifier:ds_c, assignment_rhs_atom:0, literal:0, literal:Tuple, parallel_assignment:3
     for j in range(len(a_i)): # accumulate_elements:Add (-> +4), accumulate_some_elements:Add (-> +4), call_argument:, call_argument:a_i, composition, for:j (-> +4), for_indexes (-> +4), for_range:_ (-> +4), function_call:len, function_call:range, loop:for (-> +4), range:_
@@ -1430,7 +1430,7 @@ def add(digits, k, addend): # function:add (-> +13), function_argument:addend, f
             break # break, if_then_branch
     while addend > 0: # comparison_operator:Gt, literal:0, loop:while (-> +2), while (-> +2)
         addend, digit = divmod(addend, 10) # assignment:divmod, assignment_lhs_identifier:addend, assignment_lhs_identifier:digit, assignment_rhs_atom:10, assignment_rhs_atom:addend, call_argument:10, call_argument:addend, function_call:divmod, literal:10, parallel_assignment:2, suggest_constant_definition, update:addend:10, update_by_assignment:addend:10, update_by_assignment_with:divmod, update_with:divmod
-        digits.append(digit) # call_argument:digit, method_call:append, method_call_object:digits, update:digits:digit, update_by_method_call:digits:digit, update_by_method_call_with:append, update_with:append
+        digits.append(digit) # call_argument:digit, method_call:append, method_call_object:digits, method_call_without_result:append, update:digits:digit, update_by_method_call:digits:digit, update_by_method_call_with:append, update_with:append
 def solution(n): # function:solution (-> +12), function_argument:n, function_argument_flavor:arg, function_returning_something:solution (-> +12)
     digits = [1] # assignment, assignment_lhs_identifier:digits, assignment_rhs_atom:1, literal:1, literal:List, single_assignment:digits
     i = 1 # assignment:1, assignment_lhs_identifier:i, assignment_rhs_atom:1, literal:1, single_assignment:i

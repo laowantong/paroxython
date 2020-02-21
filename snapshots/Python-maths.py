@@ -210,8 +210,8 @@ def mode(input_list): # function:mode (-> +7), function_argument:input_list, fun
     check_list = input_list.copy() # assignment:copy, assignment_lhs_identifier:check_list, assignment_rhs_atom:input_list, method_call:copy, single_assignment:check_list
     result = list() # assignment:list, assignment_lhs_identifier:result, function_call:list, function_call_without_arguments:list, single_assignment:result
     for x in input_list: # accumulate_all_elements:append (-> +4), accumulate_elements:append (-> +4), for:x (-> +4), for_each (-> +4), for_with_early_exit:return (-> +4), loop:for (-> +4)
-        result.append(input_list.count(x)) # call_argument:, call_argument:x, composition, method_call:append, method_call:count, method_call_object:result, update:result:x, update_by_method_call:result:x, update_by_method_call_with:append, update_with:append
-        input_list.remove(x) # call_argument:x, method_call:remove, method_call_object:input_list
+        result.append(input_list.count(x)) # call_argument:, call_argument:x, composition, method_call:append, method_call:count, method_call_object:result, method_call_without_result:append, update:result:x, update_by_method_call:result:x, update_by_method_call_with:append, update_with:append
+        input_list.remove(x) # call_argument:x, method_call:remove, method_call_object:input_list, method_call_without_result:remove
         y = max(result) # assignment:max, assignment_lhs_identifier:y, assignment_rhs_atom:result, call_argument:result, function_call:max, single_assignment:y
         return check_list[result.index(y)] # call_argument:y, index:_, method_call:index, method_call_object:result, return
 
@@ -222,14 +222,14 @@ import math # import:math, import_module:math, lines_of_code:48 (-> +47)
 def prime_factors(n: int) -> list: # function:prime_factors (-> +11), function_argument:n, function_argument_flavor:arg, function_returning_something:prime_factors (-> +11)
     pf = [] # assignment, assignment_lhs_identifier:pf, empty_literal:List, literal:List, single_assignment:pf
     while n % 2 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, literal:0, literal:2, loop:while (-> +2), while (-> +2)
-        pf.append(2) # call_argument:2, literal:2, method_call:append, method_call_object:pf, update:pf:2, update_by_method_call:pf:2, update_by_method_call_with:append, update_with:append
+        pf.append(2) # call_argument:2, literal:2, method_call:append, method_call_object:pf, method_call_without_result:append, update:pf:2, update_by_method_call:pf:2, update_by_method_call_with:append, update_with:append
         n = int(n / 2) # assignment:int, assignment_lhs_identifier:n, assignment_rhs_atom:2, assignment_rhs_atom:n, binary_operator:Div, call_argument:, function_call:int, literal:2, single_assignment:n, update:n:2, update_by_assignment:n:2, update_by_assignment_with:int, update_with:int
     for i in range(3, int(math.sqrt(n)) + 1, 2): # accumulate_all_elements:append (-> +3), accumulate_all_elements:int (-> +3), accumulate_elements:append (-> +3), accumulate_elements:int (-> +3), binary_operator:Add, call_argument:, call_argument:2, call_argument:3, call_argument:n, composition, for:i (-> +3), for_range:3:_:2 (-> +3), function_call:int, function_call:range, literal:1, literal:2, literal:3, loop:for (-> +3), method_call:sqrt, range:3:_:2, suggest_constant_definition
         while n % i == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test, literal:0, loop:while (-> +2), while (-> +2)
-            pf.append(i) # call_argument:i, method_call:append, method_call_object:pf, update:pf:i, update_by_method_call:pf:i, update_by_method_call_with:append, update_with:append
+            pf.append(i) # call_argument:i, method_call:append, method_call_object:pf, method_call_without_result:append, update:pf:i, update_by_method_call:pf:i, update_by_method_call_with:append, update_with:append
             n = int(n / i) # assignment:int, assignment_lhs_identifier:n, assignment_rhs_atom:i, assignment_rhs_atom:n, binary_operator:Div, call_argument:, function_call:int, single_assignment:n, update:n:i, update_by_assignment:n:i, update_by_assignment_with:int, update_with:int
     if n > 2: # comparison_operator:Gt, if (-> +1), if_test_atom:2, if_test_atom:n, literal:2
-        pf.append(n) # call_argument:n, if_then_branch, method_call:append, method_call_object:pf, update:pf:n, update_by_method_call:pf:n, update_by_method_call_with:append, update_with:append
+        pf.append(n) # call_argument:n, if_then_branch, method_call:append, method_call_object:pf, method_call_without_result:append, update:pf:n, update_by_method_call:pf:n, update_by_method_call_with:append, update_with:append
     return pf # return:pf
 def number_of_divisors(n: int) -> int: # function:number_of_divisors (-> +13), function_argument:n, function_argument_flavor:arg, function_returning_something:number_of_divisors (-> +13)
     div = 1 # assignment:1, assignment_lhs_identifier:div, assignment_rhs_atom:1, literal:1, single_assignment:div
@@ -311,7 +311,7 @@ def collatz_sequence(n): # function:collatz_sequence (-> +8), function_argument:
             n //= 2 # assignment_lhs_identifier:n, assignment_rhs_atom:2, augmented_assignment:FloorDiv, if_then_branch, literal:2, update:n:2, update_by_augmented_assignment:n:2, update_by_augmented_assignment_with:FloorDiv, update_with:FloorDiv
         else:
             n = 3 * n + 1 # assignment:Add, assignment_lhs_identifier:n, assignment_rhs_atom:1, assignment_rhs_atom:3, assignment_rhs_atom:n, binary_operator:Add, binary_operator:Mult, if_else_branch, literal:1, literal:3, single_assignment:n, suggest_constant_definition, update:n:1, update:n:3, update_by_assignment:n:1, update_by_assignment:n:3, update_by_assignment_with:Add, update_with:Add
-        sequence.append(n) # call_argument:n, method_call:append, method_call_object:sequence, update:sequence:n, update_by_method_call:sequence:n, update_by_method_call_with:append, update_with:append
+        sequence.append(n) # call_argument:n, method_call:append, method_call_object:sequence, method_call_without_result:append, update:sequence:n, update_by_method_call:sequence:n, update_by_method_call_with:append, update_with:append
     return sequence # return:sequence
 def main(): # function:main (-> +4), function_returning_nothing:main (-> +4), function_without_arguments:main (-> +4)
     n = 43 # assignment:43, assignment_lhs_identifier:n, assignment_rhs_atom:43, literal:43, single_assignment:n, suggest_constant_definition
@@ -482,7 +482,7 @@ def fib_iterative(n): # function_argument:n, function_argument_flavor:arg
         a, b = 0, 1 # assignment, assignment_lhs_identifier:a, assignment_lhs_identifier:b, assignment_rhs_atom:0, assignment_rhs_atom:1, literal:0, literal:1, literal:Tuple, parallel_assignment:2
         for _ in range(n - len(seq_out)): # binary_operator:Sub, call_argument:, call_argument:seq_out, composition, for:_ (-> +2), for_range:_ (-> +2), function_call:len, function_call:range, loop:for (-> +2), range:_
             a, b = b, a + b # assignment, assignment_lhs_identifier:a, assignment_lhs_identifier:b, assignment_rhs_atom:a, assignment_rhs_atom:b, binary_operator:Add, parallel_assignment:2, slide, update:a:b, update:b:a, update_by_assignment:a:b, update_by_assignment:b:a, update_by_assignment_with, update_with
-            seq_out.append(b) # call_argument:b, method_call:append, method_call_object:seq_out, update:seq_out:b, update_by_method_call:seq_out:b, update_by_method_call_with:append, update_with:append
+            seq_out.append(b) # call_argument:b, method_call:append, method_call_object:seq_out, method_call_without_result:append, update:seq_out:b, update_by_method_call:seq_out:b, update_by_method_call_with:append, update_with:append
         return seq_out # return:seq_out
 @timer_decorator # decorated_function:fib_formula (-> +13), function:fib_formula (-> +13), function_decorator:timer_decorator (-> +13), function_returning_something:fib_formula (-> +13)
 def fib_formula(n): # function_argument:n, function_argument_flavor:arg
@@ -496,7 +496,7 @@ def fib_formula(n): # function_argument:n, function_argument_flavor:arg
             temp_out = ((phi_1 ** Decimal(i)) - (phi_2 ** Decimal(i))) * ( # assignment:Mult, assignment_lhs_identifier:temp_out, assignment_rhs_atom:i, assignment_rhs_atom:phi_1, assignment_rhs_atom:phi_2, binary_operator:Mult, binary_operator:Pow, binary_operator:Sub, call_argument:i, function_call:Decimal, single_assignment:temp_out
                 Decimal(sqrt) ** Decimal(-1) # assignment_rhs_atom:-1, assignment_rhs_atom:sqrt, binary_operator:Pow, call_argument:-1, call_argument:sqrt, function_call:Decimal, literal:-1
             )
-            seq_out.append(int(temp_out)) # call_argument:, call_argument:temp_out, composition, function_call:int, method_call:append, method_call_object:seq_out, update:seq_out:temp_out, update_by_method_call:seq_out:temp_out, update_by_method_call_with:append, update_with:append
+            seq_out.append(int(temp_out)) # call_argument:, call_argument:temp_out, composition, function_call:int, method_call:append, method_call_object:seq_out, method_call_without_result:append, update:seq_out:temp_out, update_by_method_call:seq_out:temp_out, update_by_method_call_with:append, update_with:append
         return seq_out # return:seq_out
 
 # ----------------------------------------------------------------------------------------
@@ -665,16 +665,16 @@ def main(): # function:main (-> +1), function_returning_nothing:main (-> +1), fu
 def kthPermutation(k, n): # function:kthPermutation (-> +13), function_argument:k, function_argument:n, function_argument_flavor:arg, function_returning_something:kthPermutation (-> +13), lines_of_code:14 (-> +13)
     factorials = [1] # assignment, assignment_lhs_identifier:factorials, assignment_rhs_atom:1, literal:1, literal:List, single_assignment:factorials
     for i in range(2, n): # call_argument:2, call_argument:n, for:i (-> +1), for_range:2:n (-> +1), function_call:range, literal:2, loop:for (-> +1), range:2:n
-        factorials.append(factorials[-1] * i) # binary_operator:Mult, call_argument:, index:-1, literal:-1, method_call:append, method_call_object:factorials, negative_index:-1
+        factorials.append(factorials[-1] * i) # binary_operator:Mult, call_argument:, index:-1, literal:-1, method_call:append, method_call_object:factorials, method_call_without_result:append, negative_index:-1
     assert 0 <= k < factorials[-1] * n, "k out of bounds" # assertion, binary_operator:Mult, chained_comparison:2, comparison_operator:Lt, comparison_operator:LtE, index:-1, literal:-1, literal:0, literal:Str, negative_index:-1
     permutation = [] # assignment, assignment_lhs_identifier:permutation, empty_literal:List, literal:List, single_assignment:permutation
     elements = list(range(n)) # assignment:list, assignment_lhs_identifier:elements, assignment_rhs_atom:n, call_argument:, call_argument:n, composition, function_call:list, function_call:range, range:n, single_assignment:elements
     while factorials: # loop:while (-> +4), while (-> +4)
         factorial = factorials.pop() # assignment:pop, assignment_lhs_identifier:factorial, assignment_rhs_atom:factorials, method_call:pop, single_assignment:factorial
         number, k = divmod(k, factorial) # assignment:divmod, assignment_lhs_identifier:k, assignment_lhs_identifier:number, assignment_rhs_atom:factorial, assignment_rhs_atom:k, call_argument:factorial, call_argument:k, function_call:divmod, parallel_assignment:2, update:k:factorial, update_by_assignment:k:factorial, update_by_assignment_with:divmod, update_with:divmod
-        permutation.append(elements[number]) # call_argument:, index:number, method_call:append, method_call_object:permutation
-        elements.remove(elements[number]) # call_argument:, index:number, method_call:remove, method_call_object:elements
-    permutation.append(elements[0]) # call_argument:, index:0, literal:0, method_call:append, method_call_object:permutation
+        permutation.append(elements[number]) # call_argument:, index:number, method_call:append, method_call_object:permutation, method_call_without_result:append
+        elements.remove(elements[number]) # call_argument:, index:number, method_call:remove, method_call_object:elements, method_call_without_result:remove
+    permutation.append(elements[0]) # call_argument:, index:0, literal:0, method_call:append, method_call_object:permutation, method_call_without_result:append
     return permutation # return:permutation
 
 # ----------------------------------------------------------------------------------------
@@ -717,7 +717,7 @@ class TestLeastCommonMultiple(unittest.TestCase): # class:TestLeastCommonMultipl
         for i, (first_num, second_num) in enumerate(self.test_inputs): # call_argument:, for:first_num (-> +3), for:i (-> +3), for:second_num (-> +3), for_indexes_elements (-> +3), function_call:enumerate, loop:for (-> +3)
             actual_result = find_lcm(first_num, second_num) # assignment:find_lcm, assignment_lhs_identifier:actual_result, assignment_rhs_atom:first_num, assignment_rhs_atom:second_num, call_argument:first_num, call_argument:second_num, function_call:find_lcm, single_assignment:actual_result
             with self.subTest(i=i): # method_call:subTest
-                self.assertEqual(actual_result, self.expected_results[i]) # call_argument:, call_argument:actual_result, index:i, method_call:assertEqual, method_call_object:self
+                self.assertEqual(actual_result, self.expected_results[i]) # call_argument:, call_argument:actual_result, index:i, method_call:assertEqual, method_call_object:self, method_call_without_result:assertEqual
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/lucas_series.py
@@ -844,7 +844,7 @@ def newton_raphson(f, x0=0, maxiter=100, step=0.0001, maxerror=1e-6, logsteps=Fa
             raise ValueError("No converging solution found") # call_argument:, function_call:ValueError, if_then_branch, literal:Str, raise:ValueError
         a = a - f(a) / f1(a) # assignment:Sub, assignment_lhs_identifier:a, assignment_rhs_atom:a, binary_operator:Div, binary_operator:Sub, call_argument:a, function_call:f, function_call:f1, single_assignment:a, suggest_augmented_assignment
         if logsteps: # if (-> +1)
-            steps.append(a) # call_argument:a, if_then_branch, method_call:append, method_call_object:steps, update:steps:a, update_by_method_call:steps:a, update_by_method_call_with:append, update_with:append
+            steps.append(a) # call_argument:a, if_then_branch, method_call:append, method_call_object:steps, method_call_without_result:append, update:steps:a, update_by_method_call:steps:a, update_by_method_call_with:append, update_with:append
         if error < maxerror: # comparison_operator:Lt, if (-> +1), if_test_atom:error, if_test_atom:maxerror
             break # break, if_then_branch
     else:
@@ -888,29 +888,29 @@ def prime_check(number): # function:prime_check (-> +8), function_argument:numbe
     return not any(number % i == 0 for i in odd_numbers) # binary_operator:Mod, call_argument:, comparison_operator:Eq, comprehension:Generator, comprehension_for_count:1, divisibility_test, function_call:any, literal:0, return, unary_operator:Not
 class Test(unittest.TestCase): # class:Test (-> +24)
     def test_primes(self): # function:test_primes (-> +10), function_argument:self, function_argument_flavor:arg, function_returning_nothing:test_primes (-> +10), instance_method:test_primes (-> +10), method:test_primes (-> +10)
-        self.assertTrue(prime_check(2)) # call_argument:, call_argument:2, composition, function_call:prime_check, literal:2, method_call:assertTrue, method_call_object:self
-        self.assertTrue(prime_check(3)) # call_argument:, call_argument:3, composition, function_call:prime_check, literal:3, method_call:assertTrue, method_call_object:self, suggest_constant_definition
-        self.assertTrue(prime_check(5)) # call_argument:, call_argument:5, composition, function_call:prime_check, literal:5, method_call:assertTrue, method_call_object:self, suggest_constant_definition
-        self.assertTrue(prime_check(7)) # call_argument:, call_argument:7, composition, function_call:prime_check, literal:7, method_call:assertTrue, method_call_object:self, suggest_constant_definition
-        self.assertTrue(prime_check(11)) # call_argument:, call_argument:11, composition, function_call:prime_check, literal:11, method_call:assertTrue, method_call_object:self, suggest_constant_definition
-        self.assertTrue(prime_check(13)) # call_argument:, call_argument:13, composition, function_call:prime_check, literal:13, method_call:assertTrue, method_call_object:self, suggest_constant_definition
-        self.assertTrue(prime_check(17)) # call_argument:, call_argument:17, composition, function_call:prime_check, literal:17, method_call:assertTrue, method_call_object:self, suggest_constant_definition
-        self.assertTrue(prime_check(19)) # call_argument:, call_argument:19, composition, function_call:prime_check, literal:19, method_call:assertTrue, method_call_object:self, suggest_constant_definition
-        self.assertTrue(prime_check(23)) # call_argument:, call_argument:23, composition, function_call:prime_check, literal:23, method_call:assertTrue, method_call_object:self, suggest_constant_definition
-        self.assertTrue(prime_check(29)) # call_argument:, call_argument:29, composition, function_call:prime_check, literal:29, method_call:assertTrue, method_call_object:self, suggest_constant_definition
+        self.assertTrue(prime_check(2)) # call_argument:, call_argument:2, composition, function_call:prime_check, literal:2, method_call:assertTrue, method_call_object:self, method_call_without_result:assertTrue
+        self.assertTrue(prime_check(3)) # call_argument:, call_argument:3, composition, function_call:prime_check, literal:3, method_call:assertTrue, method_call_object:self, method_call_without_result:assertTrue, suggest_constant_definition
+        self.assertTrue(prime_check(5)) # call_argument:, call_argument:5, composition, function_call:prime_check, literal:5, method_call:assertTrue, method_call_object:self, method_call_without_result:assertTrue, suggest_constant_definition
+        self.assertTrue(prime_check(7)) # call_argument:, call_argument:7, composition, function_call:prime_check, literal:7, method_call:assertTrue, method_call_object:self, method_call_without_result:assertTrue, suggest_constant_definition
+        self.assertTrue(prime_check(11)) # call_argument:, call_argument:11, composition, function_call:prime_check, literal:11, method_call:assertTrue, method_call_object:self, method_call_without_result:assertTrue, suggest_constant_definition
+        self.assertTrue(prime_check(13)) # call_argument:, call_argument:13, composition, function_call:prime_check, literal:13, method_call:assertTrue, method_call_object:self, method_call_without_result:assertTrue, suggest_constant_definition
+        self.assertTrue(prime_check(17)) # call_argument:, call_argument:17, composition, function_call:prime_check, literal:17, method_call:assertTrue, method_call_object:self, method_call_without_result:assertTrue, suggest_constant_definition
+        self.assertTrue(prime_check(19)) # call_argument:, call_argument:19, composition, function_call:prime_check, literal:19, method_call:assertTrue, method_call_object:self, method_call_without_result:assertTrue, suggest_constant_definition
+        self.assertTrue(prime_check(23)) # call_argument:, call_argument:23, composition, function_call:prime_check, literal:23, method_call:assertTrue, method_call_object:self, method_call_without_result:assertTrue, suggest_constant_definition
+        self.assertTrue(prime_check(29)) # call_argument:, call_argument:29, composition, function_call:prime_check, literal:29, method_call:assertTrue, method_call_object:self, method_call_without_result:assertTrue, suggest_constant_definition
     def test_not_primes(self): # function:test_not_primes (-> +12), function_argument:self, function_argument_flavor:arg, function_returning_nothing:test_not_primes (-> +12), instance_method:test_not_primes (-> +12), method:test_not_primes (-> +12)
-        self.assertFalse(prime_check(-19), "Negative numbers are not prime.") # call_argument:, call_argument:-19, composition, function_call:prime_check, literal:-19, literal:Str, method_call:assertFalse, method_call_object:self, suggest_constant_definition
-        self.assertFalse( # composition, method_call:assertFalse, method_call_object:self
+        self.assertFalse(prime_check(-19), "Negative numbers are not prime.") # call_argument:, call_argument:-19, composition, function_call:prime_check, literal:-19, literal:Str, method_call:assertFalse, method_call_object:self, method_call_without_result:assertFalse, suggest_constant_definition
+        self.assertFalse( # composition, method_call:assertFalse, method_call_object:self, method_call_without_result:assertFalse
             prime_check(0), "Zero doesn't have any divider, primes must have two" # call_argument:, call_argument:0, function_call:prime_check, literal:0, literal:Str
         )
-        self.assertFalse( # composition, method_call:assertFalse, method_call_object:self
+        self.assertFalse( # composition, method_call:assertFalse, method_call_object:self, method_call_without_result:assertFalse
             prime_check(1), "One just have 1 divider, primes must have two." # call_argument:, call_argument:1, function_call:prime_check, literal:1, literal:Str
         )
-        self.assertFalse(prime_check(2 * 2)) # binary_operator:Mult, call_argument:, composition, function_call:prime_check, literal:2, method_call:assertFalse, method_call_object:self
-        self.assertFalse(prime_check(2 * 3)) # binary_operator:Mult, call_argument:, composition, function_call:prime_check, literal:2, literal:3, method_call:assertFalse, method_call_object:self, suggest_constant_definition
-        self.assertFalse(prime_check(3 * 3)) # binary_operator:Mult, call_argument:, composition, function_call:prime_check, literal:3, method_call:assertFalse, method_call_object:self, suggest_constant_definition
-        self.assertFalse(prime_check(3 * 5)) # binary_operator:Mult, call_argument:, composition, function_call:prime_check, literal:3, literal:5, method_call:assertFalse, method_call_object:self, suggest_constant_definition
-        self.assertFalse(prime_check(3 * 5 * 7)) # binary_operator:Mult, call_argument:, composition, function_call:prime_check, literal:3, literal:5, literal:7, method_call:assertFalse, method_call_object:self, suggest_constant_definition
+        self.assertFalse(prime_check(2 * 2)) # binary_operator:Mult, call_argument:, composition, function_call:prime_check, literal:2, method_call:assertFalse, method_call_object:self, method_call_without_result:assertFalse
+        self.assertFalse(prime_check(2 * 3)) # binary_operator:Mult, call_argument:, composition, function_call:prime_check, literal:2, literal:3, method_call:assertFalse, method_call_object:self, method_call_without_result:assertFalse, suggest_constant_definition
+        self.assertFalse(prime_check(3 * 3)) # binary_operator:Mult, call_argument:, composition, function_call:prime_check, literal:3, method_call:assertFalse, method_call_object:self, method_call_without_result:assertFalse, suggest_constant_definition
+        self.assertFalse(prime_check(3 * 5)) # binary_operator:Mult, call_argument:, composition, function_call:prime_check, literal:3, literal:5, method_call:assertFalse, method_call_object:self, method_call_without_result:assertFalse, suggest_constant_definition
+        self.assertFalse(prime_check(3 * 5 * 7)) # binary_operator:Mult, call_argument:, composition, function_call:prime_check, literal:3, literal:5, literal:7, method_call:assertFalse, method_call_object:self, method_call_without_result:assertFalse, suggest_constant_definition
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/prime_factors.py
@@ -926,7 +926,7 @@ def prime_factors(n: int) -> List[int]: # function:prime_factors (-> +11), funct
             n //= i # assignment_lhs_identifier:n, assignment_rhs_atom:i, augmented_assignment:FloorDiv, if_else_branch (-> +1), update:n:i, update_by_augmented_assignment:n:i, update_by_augmented_assignment_with:FloorDiv, update_with:FloorDiv
             factors.append(i) # call_argument:i, method_call:append, method_call_object:factors, update:factors:i, update_by_method_call:factors:i, update_by_method_call_with:append, update_with:append
     if n > 1: # comparison_operator:Gt, if (-> +1), if_test_atom:1, if_test_atom:n, literal:1
-        factors.append(n) # call_argument:n, if_then_branch, method_call:append, method_call_object:factors, update:factors:n, update_by_method_call:factors:n, update_by_method_call_with:append, update_with:append
+        factors.append(n) # call_argument:n, if_then_branch, method_call:append, method_call_object:factors, method_call_without_result:append, update:factors:n, update_by_method_call:factors:n, update_by_method_call_with:append, update_with:append
     return factors # return:factors
 
 # ----------------------------------------------------------------------------------------
@@ -941,7 +941,7 @@ def primes(max: int) -> List[int]: # function:primes (-> +9), function_argument:
         if not numbers[i]: # if (-> +3), if_test_atom:i, if_test_atom:numbers, index:i, unary_operator:Not
             for j in range(i, max, i): # call_argument:i, call_argument:max, for:j (-> +1), for_range:i:max:i (-> +1), function_call:range, if_then_branch (-> +2), loop:for (-> +1), nested_for:1 (-> +1), range:i:max:i
                 numbers[j] = True # assignment:True, assignment_lhs_identifier:numbers, assignment_rhs_atom:True, index:j, literal:True
-            ret.append(i) # call_argument:i, method_call:append, method_call_object:ret, update:ret:i, update_by_method_call:ret:i, update_by_method_call_with:append, update_with:append
+            ret.append(i) # call_argument:i, method_call:append, method_call_object:ret, method_call_without_result:append, update:ret:i, update_by_method_call:ret:i, update_by_method_call_with:append, update_with:append
     return ret # return:ret
 
 # ----------------------------------------------------------------------------------------
@@ -1011,18 +1011,18 @@ class FFT: # class:FFT (-> +89)
         self.polyA = list(polyA)[:] # assignment, assignment_lhs_identifier:self, assignment_rhs_atom:polyA, call_argument:polyA, function_call:list, slice:::, slice_lower:, slice_step:, slice_upper:
         self.polyB = list(polyB)[:] # assignment, assignment_lhs_identifier:self, assignment_rhs_atom:polyB, call_argument:polyB, function_call:list, slice:::, slice_lower:, slice_step:, slice_upper:
         while self.polyA[-1] == 0: # comparison_operator:Eq, index:-1, literal:-1, literal:0, loop:while (-> +1), negative_index:-1, while (-> +1)
-            self.polyA.pop() # method_call:pop
+            self.polyA.pop() # method_call:pop, method_call_without_result:pop
         self.len_A = len(self.polyA) # assignment:len, assignment_lhs_identifier:self, assignment_rhs_atom:self, call_argument:, function_call:len
         while self.polyB[-1] == 0: # comparison_operator:Eq, index:-1, literal:-1, literal:0, loop:while (-> +1), negative_index:-1, while (-> +1)
-            self.polyB.pop() # method_call:pop
+            self.polyB.pop() # method_call:pop, method_call_without_result:pop
         self.len_B = len(self.polyB) # assignment:len, assignment_lhs_identifier:self, assignment_rhs_atom:self, call_argument:, function_call:len
         self.C_max_length = int( # assignment:int, assignment_lhs_identifier:self, composition, function_call:int, update:self:1, update:self:2, update:self:np, update_by_assignment:self:1, update_by_assignment:self:2, update_by_assignment:self:np, update_by_assignment_with:int, update_with:int
             2 ** np.ceil(np.log2(len(self.polyA) + len(self.polyB) - 1)) # assignment_rhs_atom:1, assignment_rhs_atom:2, assignment_rhs_atom:np, assignment_rhs_atom:self, binary_operator:Add, binary_operator:Pow, binary_operator:Sub, call_argument:, composition, function_call:len, literal:1, literal:2, method_call:ceil, method_call:log2
         )
         while len(self.polyA) < self.C_max_length: # call_argument:, comparison_operator:Lt, function_call:len, loop:while (-> +1), while (-> +1)
-            self.polyA.append(0) # call_argument:0, literal:0, method_call:append
+            self.polyA.append(0) # call_argument:0, literal:0, method_call:append, method_call_without_result:append
         while len(self.polyB) < self.C_max_length: # call_argument:, comparison_operator:Lt, function_call:len, loop:while (-> +1), while (-> +1)
-            self.polyB.append(0) # call_argument:0, literal:0, method_call:append
+            self.polyB.append(0) # call_argument:0, literal:0, method_call:append, method_call_without_result:append
         self.root = complex(mpmath.root(x=1, n=self.C_max_length, k=1)) # assignment:complex, assignment_lhs_identifier:self, assignment_rhs_atom:1, assignment_rhs_atom:mpmath, assignment_rhs_atom:self, call_argument:, composition, function_call:complex, literal:1, method_call:root, update:self:1, update:self:mpmath, update_by_assignment:self:1, update_by_assignment:self:mpmath, update_by_assignment_with:complex, update_with:complex
         self.product = self.__multiply() # assignment:__multiply, assignment_lhs_identifier:self, assignment_rhs_atom:self, method_call:__multiply
     def __DFT(self, which): # function:__DFT (-> +23), function_argument:self, function_argument:which, function_argument_flavor:arg, function_returning_something:__DFT (-> +23), instance_method:__DFT (-> +23), method:__DFT (-> +23)
@@ -1039,12 +1039,12 @@ class FFT: # class:FFT (-> +89)
             current_root = 1 # assignment:1, assignment_lhs_identifier:current_root, assignment_rhs_atom:1, literal:1, single_assignment:current_root
             for j in range(self.C_max_length // (next_ncol * 2)): # binary_operator:FloorDiv, binary_operator:Mult, call_argument:, for:j (-> +3), for_range:_ (-> +3), for_range:next_ncol (-> +3), function_call:range, literal:2, loop:for (-> +3), range:_
                 for i in range(next_ncol): # call_argument:next_ncol, for:i (-> +1), for_range:next_ncol (-> +1), function_call:range, loop:for (-> +1), nested_for:1 (-> +1), range:next_ncol
-                    new_dft[i].append(dft[i][j] + current_root * dft[i + next_ncol][j]) # binary_operator:Add, binary_operator:Mult, call_argument:, index:_, index:i, index:j, index_arithmetic, method_call:append, nested_index:2
+                    new_dft[i].append(dft[i][j] + current_root * dft[i + next_ncol][j]) # binary_operator:Add, binary_operator:Mult, call_argument:, index:_, index:i, index:j, index_arithmetic, method_call:append, method_call_without_result:append, nested_index:2
                 current_root *= root # assignment_lhs_identifier:current_root, assignment_rhs_atom:root, augmented_assignment:Mult, update:current_root:root, update_by_augmented_assignment:current_root:root, update_by_augmented_assignment_with:Mult, update_with:Mult
             current_root = 1 # assignment:1, assignment_lhs_identifier:current_root, assignment_rhs_atom:1, literal:1, single_assignment:current_root
             for j in range(self.C_max_length // (next_ncol * 2)): # binary_operator:FloorDiv, binary_operator:Mult, call_argument:, for:j (-> +3), for_range:_ (-> +3), for_range:next_ncol (-> +3), function_call:range, literal:2, loop:for (-> +3), range:_
                 for i in range(next_ncol): # call_argument:next_ncol, for:i (-> +1), for_range:next_ncol (-> +1), function_call:range, loop:for (-> +1), nested_for:1 (-> +1), range:next_ncol
-                    new_dft[i].append(dft[i][j] - current_root * dft[i + next_ncol][j]) # binary_operator:Add, binary_operator:Mult, binary_operator:Sub, call_argument:, index:_, index:i, index:j, index_arithmetic, method_call:append, nested_index:2
+                    new_dft[i].append(dft[i][j] - current_root * dft[i + next_ncol][j]) # binary_operator:Add, binary_operator:Mult, binary_operator:Sub, call_argument:, index:_, index:i, index:j, index_arithmetic, method_call:append, method_call_without_result:append, nested_index:2
                 current_root *= root # assignment_lhs_identifier:current_root, assignment_rhs_atom:root, augmented_assignment:Mult, update:current_root:root, update_by_augmented_assignment:current_root:root, update_by_augmented_assignment_with:Mult, update_with:Mult
             dft = new_dft # assignment, assignment_lhs_identifier:dft, assignment_rhs_atom:new_dft, single_assignment:dft
             next_ncol = next_ncol // 2 # assignment:FloorDiv, assignment_lhs_identifier:next_ncol, assignment_rhs_atom:2, assignment_rhs_atom:next_ncol, binary_operator:FloorDiv, literal:2, single_assignment:next_ncol, suggest_augmented_assignment, update:next_ncol:2, update_by_assignment:next_ncol:2, update_by_assignment_with:FloorDiv, update_with:FloorDiv
@@ -1064,14 +1064,14 @@ class FFT: # class:FFT (-> +89)
             current_root = 1 # assignment:1, assignment_lhs_identifier:current_root, assignment_rhs_atom:1, literal:1, single_assignment:current_root
             for j in range(self.C_max_length // next_ncol): # binary_operator:FloorDiv, call_argument:, for:j (-> +16), for_range:_ (-> +16), function_call:range, loop:for (-> +16), range:_
                 for i in range(next_ncol // 2): # binary_operator:FloorDiv, call_argument:, for:i (-> +13), for_range:_ (-> +13), function_call:range, literal:2, loop:for (-> +13), nested_for:1 (-> +13), range:_
-                    new_inverseC[i].append( # index:i, method_call:append
+                    new_inverseC[i].append( # index:i, method_call:append, method_call_without_result:append
                         ( # binary_operator:Div, call_argument:
                             inverseC[i][j] # binary_operator:Add, index:i, index:j, nested_index:2
                             + inverseC[i][j + self.C_max_length // next_ncol] # binary_operator:Add, binary_operator:FloorDiv, index:_, index:i, index_arithmetic, nested_index:2
                         )
                         / 2 # literal:2
                     )
-                    new_inverseC[i + next_ncol // 2].append( # binary_operator:Add, binary_operator:FloorDiv, index:_, index_arithmetic, literal:2, method_call:append
+                    new_inverseC[i + next_ncol // 2].append( # binary_operator:Add, binary_operator:FloorDiv, index:_, index_arithmetic, literal:2, method_call:append, method_call_without_result:append
                         ( # binary_operator:Div, call_argument:
                             inverseC[i][j] # binary_operator:Sub, index:i, index:j, nested_index:2
                             - inverseC[i][j + self.C_max_length // next_ncol] # binary_operator:Add, binary_operator:FloorDiv, index:_, index:i, index_arithmetic, nested_index:2
@@ -1083,7 +1083,7 @@ class FFT: # class:FFT (-> +89)
             next_ncol *= 2 # assignment_lhs_identifier:next_ncol, assignment_rhs_atom:2, augmented_assignment:Mult, literal:2, update:next_ncol:2, update_by_augmented_assignment:next_ncol:2, update_by_augmented_assignment_with:Mult, update_with:Mult
         inverseC = [round(x[0].real, 8) + round(x[0].imag, 8) * 1j for x in inverseC] # assignment, assignment_lhs_identifier:inverseC, assignment_rhs_atom:0, assignment_rhs_atom:1j, assignment_rhs_atom:8, assignment_rhs_atom:inverseC, assignment_rhs_atom:x, binary_operator:Add, binary_operator:Mult, call_argument:, call_argument:8, comprehension:List, comprehension_for_count:1, function_call:round, index:0, literal:0, literal:1j, literal:8, single_assignment:inverseC, suggest_constant_definition, update:inverseC:0, update:inverseC:1j, update:inverseC:8, update:inverseC:x, update_by_assignment:inverseC:0, update_by_assignment:inverseC:1j, update_by_assignment:inverseC:8, update_by_assignment:inverseC:x, update_by_assignment_with, update_with
         while inverseC[-1] == 0: # comparison_operator:Eq, index:-1, literal:-1, literal:0, loop:while (-> +1), negative_index:-1, while (-> +1)
-            inverseC.pop() # method_call:pop, method_call_object:inverseC
+            inverseC.pop() # method_call:pop, method_call_object:inverseC, method_call_without_result:pop
         return inverseC # return:inverseC
     def __str__(self): # function:__str__ (-> +10), function_argument:self, function_argument_flavor:arg, function_returning_something:__str__ (-> +10), instance_method:__str__ (-> +10), method:__str__ (-> +10)
         A = "A = " + " + ".join( # assignment:Add, assignment_lhs_identifier:A, binary_operator:Add, composition, concatenation operator:Str, literal:Str, method_call:join, single_assignment:A
@@ -1127,7 +1127,7 @@ def sieve(n): # function:sieve (-> +33), function_argument:n, function_argument_
     prime = [] # assignment, assignment_lhs_identifier:prime, empty_literal:List, literal:List, single_assignment:prime
     while start <= end: # comparison_operator:LtE, count_states:start (-> +6), loop:while (-> +6), while (-> +6)
         if temp[start] is True: # comparison_operator:Is, if (-> +4), if_test_atom:True, if_test_atom:start, if_test_atom:temp, index:start, literal:True
-            in_prime.append(start) # call_argument:start, if_then_branch (-> +3), method_call:append, method_call_object:in_prime, update:in_prime:start, update_by_method_call:in_prime:start, update_by_method_call_with:append, update_with:append
+            in_prime.append(start) # call_argument:start, if_then_branch (-> +3), method_call:append, method_call_object:in_prime, method_call_without_result:append, update:in_prime:start, update_by_method_call:in_prime:start, update_by_method_call_with:append, update_with:append
             for i in range(start * start, end + 1, start): # binary_operator:Add, binary_operator:Mult, call_argument:, call_argument:start, for:i (-> +2), for_range:_:_:start (-> +2), function_call:range, literal:1, loop:for (-> +2), range:_:_:start
                 if temp[i] is True: # comparison_operator:Is, if (-> +1), if_test_atom:True, if_test_atom:i, if_test_atom:temp, index:i, literal:True, nested_if:1 (-> +1)
                     temp[i] = False # assignment:False, assignment_lhs_identifier:temp, assignment_rhs_atom:False, if_then_branch, index:i, literal:False
@@ -1147,7 +1147,7 @@ def sieve(n): # function:sieve (-> +33), function_argument:n, function_argument_
                 temp[j - low] = False # assignment:False, assignment_lhs_identifier:temp, assignment_rhs_atom:False, binary_operator:Sub, index:_, index_arithmetic, literal:False
         for j in range(len(temp)): # call_argument:, call_argument:temp, composition, for:j (-> +2), for_indexes (-> +2), for_range:_ (-> +2), function_call:len, function_call:range, loop:for (-> +2), range:_
             if temp[j] is True: # comparison_operator:Is, if (-> +1), if_test_atom:True, if_test_atom:j, if_test_atom:temp, index:j, literal:True
-                prime.append(j + low) # binary_operator:Add, call_argument:, if_then_branch, method_call:append, method_call_object:prime
+                prime.append(j + low) # binary_operator:Add, call_argument:, if_then_branch, method_call:append, method_call_object:prime, method_call_without_result:append
         low = high + 1 # assignment:Add, assignment_lhs_identifier:low, assignment_rhs_atom:1, assignment_rhs_atom:high, binary_operator:Add, literal:1, single_assignment:low
         high = low + end - 1 # assignment:Sub, assignment_lhs_identifier:high, assignment_rhs_atom:1, assignment_rhs_atom:end, assignment_rhs_atom:low, binary_operator:Add, binary_operator:Sub, literal:1, single_assignment:high
         if high > n: # comparison_operator:Gt, if (-> +1), if_test_atom:high, if_test_atom:n
@@ -1174,14 +1174,14 @@ def sieve(n): # function:sieve (-> +15), function_argument:n, function_argument_
     end = int(math.sqrt(n)) # assignment:int, assignment_lhs_identifier:end, assignment_rhs_atom:math, assignment_rhs_atom:n, call_argument:, call_argument:n, composition, function_call:int, method_call:sqrt, single_assignment:end
     while start <= end: # comparison_operator:LtE, count_states:start (-> +6), loop:while (-> +6), while (-> +6)
         if l[start] is True: # comparison_operator:Is, if (-> +4), if_test_atom:True, if_test_atom:l, if_test_atom:start, index:start, literal:True
-            prime.append(start) # call_argument:start, if_then_branch (-> +3), method_call:append, method_call_object:prime, update:prime:start, update_by_method_call:prime:start, update_by_method_call_with:append, update_with:append
+            prime.append(start) # call_argument:start, if_then_branch (-> +3), method_call:append, method_call_object:prime, method_call_without_result:append, update:prime:start, update_by_method_call:prime:start, update_by_method_call_with:append, update_with:append
             for i in range(start * start, n + 1, start): # binary_operator:Add, binary_operator:Mult, call_argument:, call_argument:start, for:i (-> +2), for_range:_:_:start (-> +2), function_call:range, literal:1, loop:for (-> +2), range:_:_:start
                 if l[i] is True: # comparison_operator:Is, if (-> +1), if_test_atom:True, if_test_atom:i, if_test_atom:l, index:i, literal:True, nested_if:1 (-> +1)
                     l[i] = False # assignment:False, assignment_lhs_identifier:l, assignment_rhs_atom:False, if_then_branch, index:i, literal:False
         start += 1 # assignment_lhs_identifier:start, assignment_rhs_atom:1, augmented_assignment:Add, increment:start, literal:1, update:start:1, update_by_augmented_assignment:start:1, update_by_augmented_assignment_with:Add, update_with:Add
     for j in range(end + 1, n + 1): # accumulate_elements:append (-> +2), accumulate_some_elements:append (-> +2), binary_operator:Add, call_argument:, for:j (-> +2), for_range:_:_ (-> +2), function_call:range, literal:1, loop:for (-> +2), range:_:_
         if l[j] is True: # comparison_operator:Is, if (-> +1), if_test_atom:True, if_test_atom:j, if_test_atom:l, index:j, literal:True
-            prime.append(j) # call_argument:j, if_then_branch, method_call:append, method_call_object:prime, update:prime:j, update_by_method_call:prime:j, update_by_method_call_with:append, update_with:append
+            prime.append(j) # call_argument:j, if_then_branch, method_call:append, method_call_object:prime, method_call_without_result:append, update:prime:j, update_by_method_call:prime:j, update_by_method_call_with:append, update_with:append
     return prime # return:prime
 
 # ----------------------------------------------------------------------------------------
