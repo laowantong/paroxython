@@ -4288,6 +4288,8 @@ Two nested `for` loops doing the same number of iterations.
 
 #### Feature `infinite_while`
 
+Match an infinite loop denoted by `while True` (preferred) or `while 1`.
+
 ##### Derivations
 
 [⬇️ feature `accumulate_inputs`](#feature-accumulate_inputs)  
@@ -4299,7 +4301,7 @@ Two nested `for` loops doing the same number of iterations.
 ```re
            ^(.*)/_type=While
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/test/value=True
+\n(?:\1.+\n)*?\1/test/(value=True|n=1)
 \n(?:\1.+\n)* \1/.*/_pos=(?P<POS>.+)
 ```
 
@@ -4309,7 +4311,7 @@ Two nested `for` loops doing the same number of iterations.
 1   while True:
 2       while bar():
 3           pass
-4       while True:
+4       while 1:
 5           pass
 6       else:
 7           pass

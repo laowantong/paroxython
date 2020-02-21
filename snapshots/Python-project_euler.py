@@ -23,7 +23,7 @@ def solution(n): # function:solution (-> +8), function_argument:n, function_argu
 def solution(n): # function:solution (-> +32), function_argument:n, function_argument_flavor:arg, function_returning_something:solution (-> +32), lines_of_code:33 (-> +32)
     sum = 0 # assignment:0, assignment_lhs_identifier:sum, assignment_rhs_atom:0, literal:0, single_assignment:sum
     num = 0 # assignment:0, assignment_lhs_identifier:num, assignment_rhs_atom:0, literal:0, single_assignment:num
-    while 1: # literal:1, loop:while (-> +28), while (-> +28), while_with_early_exit:break (-> +28)
+    while 1: # infinite_while (-> +28), literal:1, loop:while (-> +28), while (-> +28), while_with_early_exit:break (-> +28)
         num += 3 # assignment_lhs_identifier:num, assignment_rhs_atom:3, augmented_assignment:Add, literal:3, suggest_constant_definition, update:num:3, update_by_augmented_assignment:num:3, update_by_augmented_assignment_with:Add, update_with:Add
         if num >= n: # comparison_operator:GtE, if (-> +1), if_test_atom:n, if_test_atom:num
             break # break, if_then_branch
@@ -308,7 +308,7 @@ def solution(n): # function:solution (-> +18), function_argument:n, function_arg
     if n <= 0: # comparison_operator:LtE, if (-> +1), if_test_atom:0, if_test_atom:n, literal:0
         raise ValueError("Parameter n must be greater or equal to one.") # call_argument:, function_call:ValueError, if_then_branch, literal:Str, raise:ValueError
     i = 0 # assignment:0, assignment_lhs_identifier:i, assignment_rhs_atom:0, literal:0, single_assignment:i
-    while 1: # literal:1, loop:while (-> +10), while (-> +10), while_with_early_exit:return (-> +10)
+    while 1: # infinite_while (-> +10), literal:1, loop:while (-> +10), while (-> +10), while_with_early_exit:return (-> +10)
         i += n * (n - 1) # assignment_lhs_identifier:i, assignment_rhs_atom:1, assignment_rhs_atom:n, augmented_assignment:Add, binary_operator:Mult, binary_operator:Sub, literal:1, update:i:1, update:i:n, update_by_augmented_assignment:i:1, update_by_augmented_assignment:i:n, update_by_augmented_assignment_with:Add, update_with:Add
         nfound = 0 # assignment:0, assignment_lhs_identifier:nfound, assignment_rhs_atom:0, literal:0, single_assignment:nfound
         for j in range(2, n): # call_argument:2, call_argument:n, for:j (-> +3), for_range:2:n (-> +3), for_with_early_exit:break (-> +3), function_call:range, literal:2, loop:for (-> +3), range:2:n
@@ -1045,7 +1045,7 @@ def solution(n): # function:solution (-> +11), function_argument:n, function_arg
     for x in range(n): # call_argument:n, for:x (-> +8), for_range:n (-> +8), function_call:range, loop:for (-> +8), range:n
         l = [i for i in input().split()] # assignment, assignment_lhs_identifier:l, assignment_rhs_atom:i, comprehension:List, comprehension_for_count:1, function_call:input, function_call_without_arguments:input, method_call:split, single_assignment:l
         c2 = 1 # assignment:1, assignment_lhs_identifier:c2, assignment_rhs_atom:1, literal:1, single_assignment:c2
-        while 1: # count_states:c2 (-> +4), literal:1, loop:while (-> +4), while (-> +4), while_with_early_exit:break (-> +4)
+        while 1: # count_states:c2 (-> +4), infinite_while (-> +4), literal:1, loop:while (-> +4), while (-> +4), while_with_early_exit:break (-> +4)
             if len(fib(l[0], l[1], c2)) < int(l[2]): # call_argument:, call_argument:c2, comparison_operator:Lt, composition, function_call:fib, function_call:int, function_call:len, if (-> +3), if_test_atom:0, if_test_atom:1, if_test_atom:2, if_test_atom:c2, if_test_atom:l, index:0, index:1, index:2, literal:0, literal:1, literal:2
                 c2 += 1 # assignment_lhs_identifier:c2, assignment_rhs_atom:1, augmented_assignment:Add, if_then_branch, increment:c2, literal:1, update:c2:1, update_by_augmented_assignment:c2:1, update_by_augmented_assignment_with:Add, update_with:Add
             else:
