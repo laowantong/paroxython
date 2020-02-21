@@ -1332,7 +1332,6 @@ Otherwise, suffix it with an empty string.
 ```re
            ^(.*)/_type=Call
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/func/_type=Attribute
 \n(?:\1.+\n)*?\1/func/attr=(?P<SUFFIX>.+)
 ```
 
