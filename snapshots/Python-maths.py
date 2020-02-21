@@ -209,9 +209,9 @@ import statistics # import:statistics, import_module:statistics, lines_of_code:9
 def mode(input_list): # function:mode (-> +7), function_argument:input_list, function_argument_flavor:arg, function_returning_something:mode (-> +7)
     check_list = input_list.copy() # assignment:copy, assignment_lhs_identifier:check_list, assignment_rhs_atom:input_list, method_call:copy, single_assignment:check_list
     result = list() # assignment:list, assignment_lhs_identifier:result, function_call:list, function_call_without_arguments:list, single_assignment:result
-    for x in input_list: # accumulate_all_elements:append (-> +4), accumulate_elements:append (-> +4), for:x (-> +4), for_each (-> +4), for_with_early_exit:return (-> +4), loop:for (-> +4)
+    for x in input_list: # accumulate_all_elements:append (-> +4), accumulate_all_elements:remove (-> +4), accumulate_elements:append (-> +4), accumulate_elements:remove (-> +4), for:x (-> +4), for_each (-> +4), for_with_early_exit:return (-> +4), loop:for (-> +4)
         result.append(input_list.count(x)) # call_argument:, call_argument:x, composition, method_call:append, method_call:count, method_call_object:result, method_call_without_result:append, update:result:x, update_by_method_call:result:x, update_by_method_call_with:append, update_with:append
-        input_list.remove(x) # call_argument:x, method_call:remove, method_call_object:input_list, method_call_without_result:remove
+        input_list.remove(x) # call_argument:x, method_call:remove, method_call_object:input_list, method_call_without_result:remove, update:input_list:x, update_by_method_call:input_list:x, update_by_method_call_with:remove, update_with:remove
         y = max(result) # assignment:max, assignment_lhs_identifier:y, assignment_rhs_atom:result, call_argument:result, function_call:max, single_assignment:y
         return check_list[result.index(y)] # call_argument:y, index:_, method_call:index, method_call_object:result, return
 

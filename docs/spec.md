@@ -2158,7 +2158,7 @@ FROM t_method_call AS op
 JOIN t_method_call_object AS lhs_acc ON (lhs_acc.path GLOB op.path || "*-")
 JOIN t_call_argument AS rhs_var ON (rhs_var.path GLOB op.path || "*-")
 WHERE rhs_var.name_suffix != ""
-  AND op.name_suffix REGEXP "(append|extend|insert|add|update)$"
+  AND op.name_suffix REGEXP "(append|extend|insert|add|update|remove|pop)$"
 GROUP BY op.span,
          lhs_acc.name,
          rhs_var.name
