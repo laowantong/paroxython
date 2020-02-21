@@ -1130,10 +1130,10 @@ When the value of the left operand suffices to determine the value of a boolean 
 ##### Specification
 
 ```re
-  ^(.*/body/\d+)/_type=Expr
-\n(?:\1.+\n)*?\1/value/_type=Call
-\n(?:\1.+\n)*?\1/value/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/value/func/id=(?P<SUFFIX>.+)
+^(.*/(?:body|orelse|loopelse)/\d+)/_type=Expr
+\n(?:\1.+\n)*?\1                  /value/_type=Call
+\n(?:\1.+\n)*?\1                  /value/_pos=(?P<POS>.+)
+\n(?:\1.+\n)*?\1                  /value/func/id=(?P<SUFFIX>.+)
 ```
 
 ##### Example
@@ -1357,10 +1357,10 @@ Otherwise, suffix it with an empty string.
 ##### Specification
 
 ```re
-  ^(.*/body/\d+)/_type=Expr
-\n(?:\1.+\n)*?\1/value/_type=Call
-\n(?:\1.+\n)*?\1/value/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/value/func/attr=(?P<SUFFIX>.+)
+^(.*/(?:body|orelse|loopelse)/\d+)/_type=Expr
+\n(?:\1.+\n)*?\1                  /value/_type=Call
+\n(?:\1.+\n)*?\1                  /value/_pos=(?P<POS>.+)
+\n(?:\1.+\n)*?\1                  /value/func/attr=(?P<SUFFIX>.+)
 ```
 
 ##### Example

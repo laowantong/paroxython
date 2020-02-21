@@ -440,7 +440,7 @@ def timer_decorator(func): # closure:timer_decorator (-> +11), function:timer_de
         if int(end - start) > 0: # binary_operator:Sub, call_argument:, comparison_operator:Gt, function_call:int, if (-> +3), if_test_atom:0, if_test_atom:end, if_test_atom:start, literal:0
             print(f"Run time for {func.__name__}: {(end - start):0.2f}s") # binary_operator:Sub, call_argument:, f_string, function_call:print, function_call_without_result:print, if_then_branch, literal:Str
         else:
-            print(f"Run time for {func.__name__}: {(end - start)*1000:0.2f}ms") # binary_operator:Mult, binary_operator:Sub, call_argument:, f_string, function_call:print, if_else_branch, literal:1000, literal:Str, suggest_constant_definition
+            print(f"Run time for {func.__name__}: {(end - start)*1000:0.2f}ms") # binary_operator:Mult, binary_operator:Sub, call_argument:, f_string, function_call:print, function_call_without_result:print, if_else_branch, literal:1000, literal:Str, suggest_constant_definition
         return func(*args, **kwargs) # call_argument:, function_call:func, function_tail_call:func, return
     return timer_wrapper # return:timer_wrapper
 class Error(Exception): # class:Error (-> +1)
@@ -510,7 +510,7 @@ def main(): # function:main (-> +6), function_returning_nothing:main (-> +6), fu
         print(f"The first {limit} terms of the fibonacci series are as follows:") # call_argument:, f_string, function_call:print, function_call_without_result:print, if_then_branch (-> +1), literal:Str
         print([recur_fibo(n) for n in range(limit)]) # call_argument:, call_argument:limit, call_argument:n, composition, comprehension:List, comprehension_for_count:1, function_call:print, function_call:range, function_call:recur_fibo, function_call_without_result:print, range:limit
     else:
-        print("Please enter a positive integer: ") # call_argument:, function_call:print, if_else_branch, literal:Str
+        print("Please enter a positive integer: ") # call_argument:, function_call:print, function_call_without_result:print, if_else_branch, literal:Str
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/find_max.py
@@ -924,7 +924,7 @@ def prime_factors(n: int) -> List[int]: # function:prime_factors (-> +11), funct
             i += 1 # assignment_lhs_identifier:i, assignment_rhs_atom:1, augmented_assignment:Add, if_then_branch, increment:i, literal:1, update:i:1, update_by_augmented_assignment:i:1, update_by_augmented_assignment_with:Add, update_with:Add
         else:
             n //= i # assignment_lhs_identifier:n, assignment_rhs_atom:i, augmented_assignment:FloorDiv, if_else_branch (-> +1), update:n:i, update_by_augmented_assignment:n:i, update_by_augmented_assignment_with:FloorDiv, update_with:FloorDiv
-            factors.append(i) # call_argument:i, method_call:append, method_call_object:factors, update:factors:i, update_by_method_call:factors:i, update_by_method_call_with:append, update_with:append
+            factors.append(i) # call_argument:i, method_call:append, method_call_object:factors, method_call_without_result:append, update:factors:i, update_by_method_call:factors:i, update_by_method_call_with:append, update_with:append
     if n > 1: # comparison_operator:Gt, if (-> +1), if_test_atom:1, if_test_atom:n, literal:1
         factors.append(n) # call_argument:n, if_then_branch, method_call:append, method_call_object:factors, method_call_without_result:append, update:factors:n, update_by_method_call:factors:n, update_by_method_call_with:append, update_with:append
     return factors # return:factors

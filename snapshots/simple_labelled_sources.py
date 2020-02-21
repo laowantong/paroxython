@@ -131,6 +131,7 @@ for i in range(1, 101): # call_argument:1
     else: # 
         print(i) # call_argument:i
                  # function_call:print
+                 # function_call_without_result:print
                  # if_else_branch
 
 # ----------------------------------------------------------------------------------------
