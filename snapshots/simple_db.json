@@ -55,7 +55,6 @@
         "loop:while": [[2,7]],
         "single_assignment:n": [[5,5],[7,7]],
         "suggest_augmented_assignment": [[5,5]],
-        "suggest_conditional_expression": [[4,7]],
         "suggest_constant_definition": [[2,2],[7,7]],
         "unknown_label": [[6,6]],
         "update:n:1": [[7,7]],
@@ -68,6 +67,7 @@
         "update_by_assignment_with:FloorDiv": [[5,5]],
         "update_with:Add": [[7,7]],
         "update_with:FloorDiv": [[5,5]],
+        "verbose_conditional_assignment": [[4,7]],
         "while": [[2,7]]
       },
       "taxons": {
@@ -86,6 +86,7 @@
         "test/equality/not/": [[2,2]],
         "type/elementary/number/integer/": [[2,2],[4,4],[5,5],[7,7],[7,7]],
         "type/elementary/number/integer/zero/": [[4,4]],
+        "variable/assignment/conditional/verbose/": [[4,7]],
         "variable/assignment/single/": [[5,5],[7,7]]
       }
     },
@@ -315,9 +316,6 @@
     "suggest_augmented_assignment": [
       "tests/data/simple/collatz_print.py"
     ],
-    "suggest_conditional_expression": [
-      "tests/data/simple/collatz_print.py"
-    ],
     "suggest_constant_definition": [
       "tests/data/simple/collatz_print.py",
       "tests/data/simple/fizzbuzz.py"
@@ -353,6 +351,9 @@
       "tests/data/simple/collatz_print.py"
     ],
     "update_with:FloorDiv": [
+      "tests/data/simple/collatz_print.py"
+    ],
+    "verbose_conditional_assignment": [
       "tests/data/simple/collatz_print.py"
     ],
     "while": [
@@ -502,6 +503,9 @@
       "tests/data/simple/collatz_print.py",
       "tests/data/simple/fizzbuzz.py",
       "tests/data/simple/is_even.py"
+    ],
+    "variable/assignment/conditional/verbose/": [
+      "tests/data/simple/collatz_print.py"
     ],
     "call/function/builtin/range/": [
       "tests/data/simple/fizzbuzz.py"

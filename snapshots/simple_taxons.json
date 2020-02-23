@@ -19,6 +19,7 @@
     "test/equality/not/": "2",
     "type/elementary/number/integer/": "2 4 5 7 7",
     "type/elementary/number/integer/zero/": "4",
+    "variable/assignment/conditional/verbose/": "4-7",
     "variable/assignment/single/": "5 7"
   },
   "tests/data/simple/fizzbuzz.py": {

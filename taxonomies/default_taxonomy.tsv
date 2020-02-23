@@ -200,6 +200,9 @@ variable/assignment/	assignment\b.*
 variable/assignment/augmented/\1/	augmented_assignment:(.+)
 variable/assignment/augmented/subscript/\1/	subscript_augmented_assignment:(.+)
 variable/assignment/chained/	chained_assignment
+variable/assignment/conditional/compact/	compact_conditional_assignment
+variable/assignment/conditional/corrective/	corrective_conditional_assignment
+variable/assignment/conditional/verbose/	verbose_conditional_assignment
 variable/assignment/constant/	assignment_lhs_identifier:[[:upper:]0-9_]+
 variable/assignment/parallel/\1/	parallel_assignment:(\d+)
 variable/assignment/single/	single_assignment:.+

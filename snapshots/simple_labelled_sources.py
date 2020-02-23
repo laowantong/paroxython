@@ -34,7 +34,7 @@ def print_collatz(n): # added_block_label (-> +7)
                        # if_test_atom:n
                        # literal:0
                        # literal:2
-                       # suggest_conditional_expression (-> +3)
+                       # verbose_conditional_assignment (-> +3)
             n = n // 2 # assignment:FloorDiv
                        # assignment_lhs_identifier:n
                        # assignment_rhs_atom:2

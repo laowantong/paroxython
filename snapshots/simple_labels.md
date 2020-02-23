@@ -84,7 +84,6 @@
 - single_assignment:a / assignment.py / 1
 - single_assignment:n / collatz_print.py / 5, 7
 - suggest_augmented_assignment / collatz_print.py / 5
-- suggest_conditional_expression / collatz_print.py / 4-7
 - suggest_constant_definition / collatz_print.py / 7
 - suggest_constant_definition / fizzbuzz.py / 2, 4, 6
 - update:n:1 / collatz_print.py / 7
@@ -97,6 +96,7 @@
 - update_by_assignment_with:FloorDiv / collatz_print.py / 5
 - update_with:Add / collatz_print.py / 7
 - update_with:FloorDiv / collatz_print.py / 5
+- verbose_conditional_assignment / collatz_print.py / 4-7
 - while / collatz_print.py / 2-7
 
 # Absent labels
@@ -119,6 +119,7 @@
 - chained_equalities|chained_inequalities
 - class
 - closure
+- compact_conditional_assignment
 - comparison_operator
 - composition
 - comprehension
@@ -126,6 +127,7 @@
 - concatenation_operator|replication_operator
 - conditional_expression
 - continue
+- corrective_conditional_assignment
 - count_elements|count_states
 - count_inputs
 - decorated_function

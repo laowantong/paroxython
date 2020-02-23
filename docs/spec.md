@@ -66,6 +66,9 @@
       - [Feature `swap`](#feature-swap)
       - [Feature `slide`](#feature-slide)
       - [Feature `negate`](#feature-negate)
+      - [Feature `verbose_conditional_assignment`](#feature-verbose_conditional_assignment)
+      - [Feature `compact_conditional_assignment`](#feature-compact_conditional_assignment)
+      - [Feature `corrective_conditional_assignment`](#feature-corrective_conditional_assignment)
   - [Function definitions](#function-definitions)
     - [Interface](#interface)
       - [Feature `function`](#feature-function)
@@ -152,7 +155,6 @@
       - [Feature `topic`](#feature-topic)
 - [Suggestions](#suggestions)
   - [Assignments](#assignments-1)
-      - [Feature `suggest_conditional_expression`](#feature-suggest_conditional_expression)
       - [Feature `suggest_augmented_assignment`](#feature-suggest_augmented_assignment)
   - [Expressions](#expressions-1)
       - [Feature `suggest_comparison_chaining`](#feature-suggest_comparison_chaining)
@@ -2572,6 +2574,116 @@ Update a variable by negating it.
 | Label | Lines |
 |:--|:--|
 | `negate` | 1, 2 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `verbose_conditional_assignment`
+
+A conditional statement whose each branch consists solely in a assignment to the same variable (could be rewritten as a conditional expression).
+
+##### Specification
+
+```re
+           ^(.*)/_type=If
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
+\n(?:\1.+\n)*?\1/body/length=1
+\n(?:\1.+\n)*?\1/body/1/_type=Assign
+\n(?:\1.+\n)*?\1/body/1/assigntargets/1/_hash=(?P<HASH>.+)
+\n(?:\1.+\n)*?\1/orelse/length=1
+\n(?:\1.+\n)*?\1/orelse/1/_type=Assign
+\n(?:\1.+\n)*?\1/orelse/1/_pos=(?P<POS>.+)
+\n(?:\1.+\n)*?\1/orelse/1/assigntargets/1/_hash=(?P=HASH)
+```
+
+##### Example
+
+```python
+1   if condition:
+2       a[i] = 1
+3   else:
+4       a[i] = 2
+5
+6   if condition:
+7       a = 1
+8       b = 0
+9   else:
+10      a = 2
+11
+12  if condition:
+13      a = 1
+14  else:
+15      b = 0
+16      a = 2
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `verbose_conditional_assignment` | 1-4 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `compact_conditional_assignment`
+
+Assignment to the result of a conditional expression.
+
+##### Specification
+
+```re
+           ^(.*)/assignvalue/_type=IfExp
+\n(?:\1.+\n)*?\1/assignvalue/_pos=(?P<POS>.+)
+```
+
+##### Example
+
+```python
+1   a[i] = 1 if condition else 2
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `compact_conditional_assignment` | 1 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `corrective_conditional_assignment`
+
+Assign a “default” value to a variable, then if a certain condition is satisfied, update it. This form is sometimes preferred, especially when the plain form would require the repetition of a complex sub-expression.
+
+##### Specification
+
+```re
+           ^(.*)/(?P<_1>\d+)/_type=Assign
+\n(?:\1/(?P=_1).+\n)*?\1/(?P=_1)/_pos=(?P<POS>.+)
+\n(?:\1/(?P=_1).+\n)*?\1/(?P=_1)/assigntargets/1/_hash=(?P<HASH>.+)
+\n(?:\1/(?P=_1).+\n)*?\1/(?P<_2>\d+)/_type=If
+\n(?:\1/(?P=_2).+\n)*?\1/(?P=_2)    /body/length=1
+\n(?:\1/(?P=_2).+\n)*?\1/(?P=_2)    /body/1/_type=(?:Aug)?Assign
+\n(?:\1/(?P=_2).+\n)*?\1/(?P=_2)    /body/1/_pos=(?P<POS>.+)
+\n(?:\1/(?P=_2).+\n)*?\1/(?P=_2)    /body/1/assigntarget(s/1)?/_hash=(?P=HASH)
+\n(?:\1/(?P=_2).+\n)*?\1/(?P=_2)    /orelse/length=0
+```
+
+##### Example
+
+```python
+1   double = 2 * int(number[-i - 1])
+2   if double > 9:
+3       double -= 9
+4   
+5   double = 2 * int(number[-i - 1])
+6   if double > 9:
+7       double = double - 9
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `corrective_conditional_assignment` | 1-3, 5-7 |
 
 --------------------------------------------------------------------------------
 
@@ -5696,59 +5808,6 @@ These patterns match features that can be shortened.
 It's up to you to decide if a rewriting would make the code clearer.
 
 ## Assignments
-
---------------------------------------------------------------------------------
-
-#### Feature `suggest_conditional_expression`
-
-When a conditional simply assigns different values to the same variable, it may be rewritten as a conditional expression.
-
-##### Specification
-
-```re
-           ^(.*)/_type=If
-\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/body/length=1
-\n(?:\1.+\n)*?\1/body/1/_type=Assign
-\n(?:\1.+\n)*?\1/body/1/assigntargets/1/_hash=(?P<HASH>.+)
-\n(?:\1.+\n)*?\1/orelse/length=1
-\n(?:\1.+\n)*?\1/orelse/1/_type=Assign
-\n(?:\1.+\n)*?\1/orelse/1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/orelse/1/assigntargets/1/_hash=(?P=HASH)
-```
-
-##### Example
-
-```python
-1   if condition:
-2       a = 1
-3   else:
-4       a = 2
-5
-6   if condition:
-7       a = 1
-8       b = 0
-9   else:
-10      a = 2
-11
-12  if condition:
-13      a = 1
-14  else:
-15      b = 0
-16      a = 2
-```
-
-The first conditional (only) may be rewritten as:
-
-```python
-1   a = (1 if condition else 2)
-```
-
-##### Matches
-
-| Label | Lines |
-|:--|:--|
-| `suggest_conditional_expression` | 1-4 |
 
 --------------------------------------------------------------------------------
 

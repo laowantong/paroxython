@@ -178,10 +178,6 @@
         [[5,5]]
       ],
       [
-        "suggest_conditional_expression",
-        [[4,7]]
-      ],
-      [
         "suggest_constant_definition",
         [[2,2],[7,7]]
       ],
@@ -228,6 +224,10 @@
       [
         "update_with:FloorDiv",
         [[5,5]]
+      ],
+      [
+        "verbose_conditional_assignment",
+        [[4,7]]
       ],
       [
         "while",

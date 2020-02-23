@@ -9,7 +9,7 @@ def n31(a: int) -> Tuple[List[int], int]: # function:n31 (-> +12), function_argu
         raise ValueError("Given integer must be greater than 1, not {0}".format(a)) # call_argument:, call_argument:a, composition, function_call:ValueError, if_then_branch, literal:Str, method_call:format, raise:ValueError
     path = [a] # assignment, assignment_lhs_identifier:path, assignment_rhs_atom:a, single_assignment:path
     while a != 1: # comparison_operator:NotEq, literal:1, loop:while (-> +5), while (-> +5)
-        if a % 2 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, if (-> +3), if_test_atom:0, if_test_atom:2, if_test_atom:a, literal:0, literal:2, suggest_conditional_expression (-> +3)
+        if a % 2 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, if (-> +3), if_test_atom:0, if_test_atom:2, if_test_atom:a, literal:0, literal:2, verbose_conditional_assignment (-> +3)
             a = a // 2 # assignment:FloorDiv, assignment_lhs_identifier:a, assignment_rhs_atom:2, assignment_rhs_atom:a, binary_operator:FloorDiv, if_then_branch, literal:2, single_assignment:a, suggest_augmented_assignment, update:a:2, update_by_assignment:a:2, update_by_assignment_with:FloorDiv, update_with:FloorDiv
         else:
             a = 3 * a + 1 # assignment:Add, assignment_lhs_identifier:a, assignment_rhs_atom:1, assignment_rhs_atom:3, assignment_rhs_atom:a, binary_operator:Add, binary_operator:Mult, if_else_branch, literal:1, literal:3, single_assignment:a, suggest_constant_definition, update:a:1, update:a:3, update_by_assignment:a:1, update_by_assignment:a:3, update_by_assignment_with:Add, update_with:Add
@@ -364,7 +364,7 @@ def extended_euclidean_algorithm(m, n): # function:extended_euclidean_algorithm 
         b_prime = b # assignment, assignment_lhs_identifier:b_prime, assignment_rhs_atom:b, single_assignment:b_prime
         b = t - q * b # assignment:Sub, assignment_lhs_identifier:b, assignment_rhs_atom:b, assignment_rhs_atom:q, assignment_rhs_atom:t, binary_operator:Mult, binary_operator:Sub, single_assignment:b, update:b:q, update:b:t, update_by_assignment:b:q, update_by_assignment:b:t, update_by_assignment_with:Sub, update_with:Sub
     pair = None # assignment:None, assignment_lhs_identifier:pair, assignment_rhs_atom:None, literal:None, single_assignment:pair
-    if m > n: # comparison_operator:Gt, if (-> +3), if_test_atom:m, if_test_atom:n, suggest_conditional_expression (-> +3)
+    if m > n: # comparison_operator:Gt, if (-> +3), if_test_atom:m, if_test_atom:n, verbose_conditional_assignment (-> +3)
         pair = (a, b) # assignment, assignment_lhs_identifier:pair, assignment_rhs_atom:a, assignment_rhs_atom:b, if_then_branch, single_assignment:pair
     else:
         pair = (b, a) # assignment, assignment_lhs_identifier:pair, assignment_rhs_atom:a, assignment_rhs_atom:b, if_else_branch, single_assignment:pair
@@ -628,14 +628,14 @@ def is_square_free(factors: List[int]) -> bool: # function:is_square_free (-> +1
 def jaccard_similariy(setA, setB, alternativeUnion=False): # function:jaccard_similariy (-> +14), function_argument:alternativeUnion, function_argument:setA, function_argument:setB, function_argument_flavor:arg, function_returning_something:jaccard_similariy (-> +14), lines_of_code:15 (-> +14), literal:False
     if isinstance(setA, set) and isinstance(setB, set): # boolean_operator:And, call_argument:set, call_argument:setA, call_argument:setB, function_call:isinstance, if (-> +6), if_test_atom:set, if_test_atom:setA, if_test_atom:setB
         intersection = len(setA.intersection(setB)) # assignment:len, assignment_lhs_identifier:intersection, assignment_rhs_atom:setA, assignment_rhs_atom:setB, call_argument:, call_argument:setB, composition, function_call:len, if_then_branch (-> +5), method_call:intersection, single_assignment:intersection
-        if alternativeUnion: # if (-> +3), nested_if:1 (-> +3), suggest_conditional_expression (-> +3)
+        if alternativeUnion: # if (-> +3), nested_if:1 (-> +3), verbose_conditional_assignment (-> +3)
             union = len(setA) + len(setB) # assignment:Add, assignment_lhs_identifier:union, assignment_rhs_atom:setA, assignment_rhs_atom:setB, binary_operator:Add, call_argument:setA, call_argument:setB, function_call:len, if_then_branch, single_assignment:union
         else:
             union = len(setA.union(setB)) # assignment:len, assignment_lhs_identifier:union, assignment_rhs_atom:setA, assignment_rhs_atom:setB, call_argument:, call_argument:setB, composition, function_call:len, if_else_branch, method_call:union, single_assignment:union
         return intersection / union # binary_operator:Div, return
     if isinstance(setA, (list, tuple)) and isinstance(setB, (list, tuple)): # boolean_operator:And, call_argument:, call_argument:setA, call_argument:setB, function_call:isinstance, if (-> +6), if_test_atom:list, if_test_atom:setA, if_test_atom:setB, if_test_atom:tuple
         intersection = [element for element in setA if element in setB] # assignment, assignment_lhs_identifier:intersection, assignment_rhs_atom:element, assignment_rhs_atom:setA, assignment_rhs_atom:setB, comparison_operator:In, comprehension:List, comprehension_for_count:1, filtered_comprehension, if_then_branch (-> +5), single_assignment:intersection
-        if alternativeUnion: # if (-> +3), nested_if:1 (-> +3), suggest_conditional_expression (-> +3)
+        if alternativeUnion: # if (-> +3), nested_if:1 (-> +3), verbose_conditional_assignment (-> +3)
             union = len(setA) + len(setB) # assignment:Add, assignment_lhs_identifier:union, assignment_rhs_atom:setA, assignment_rhs_atom:setB, binary_operator:Add, call_argument:setA, call_argument:setB, function_call:len, if_then_branch, single_assignment:union
         else:
             union = setA + [element for element in setB if element not in setA] # assignment:Add, assignment_lhs_identifier:union, assignment_rhs_atom:element, assignment_rhs_atom:setA, assignment_rhs_atom:setB, binary_operator:Add, comparison_operator:NotIn, comprehension:List, comprehension_for_count:1, filtered_comprehension, if_else_branch, single_assignment:union
@@ -695,7 +695,7 @@ def res(x, y): # function:res (-> +7), function_argument:x, function_argument:y,
 # ----------------------------------------------------------------------------------------
 import unittest # import:unittest, import_module:unittest, lines_of_code:25 (-> +24)
 def find_lcm(first_num: int, second_num: int) -> int: # function:find_lcm (-> +5), function_argument:first_num, function_argument:second_num, function_argument_flavor:arg, function_returning_something:find_lcm (-> +5)
-    max_num = first_num if first_num >= second_num else second_num # assignment, assignment_lhs_identifier:max_num, assignment_rhs_atom:first_num, assignment_rhs_atom:second_num, comparison_operator:GtE, conditional_expression, single_assignment:max_num
+    max_num = first_num if first_num >= second_num else second_num # assignment, assignment_lhs_identifier:max_num, assignment_rhs_atom:first_num, assignment_rhs_atom:second_num, compact_conditional_assignment, comparison_operator:GtE, conditional_expression, single_assignment:max_num
     common_mult = max_num # assignment, assignment_lhs_identifier:common_mult, assignment_rhs_atom:max_num, single_assignment:common_mult
     while (common_mult % first_num > 0) or (common_mult % second_num > 0): # binary_operator:Mod, boolean_operator:Or, comparison_operator:Gt, literal:0, loop:while (-> +1), while (-> +1)
         common_mult += max_num # assignment_lhs_identifier:common_mult, assignment_rhs_atom:max_num, augmented_assignment:Add, update:common_mult:max_num, update_by_augmented_assignment:common_mult:max_num, update_by_augmented_assignment_with:Add, update_with:Add
@@ -1026,7 +1026,7 @@ class FFT: # class:FFT (-> +89)
         self.root = complex(mpmath.root(x=1, n=self.C_max_length, k=1)) # assignment:complex, assignment_lhs_identifier:self, assignment_rhs_atom:1, assignment_rhs_atom:mpmath, assignment_rhs_atom:self, call_argument:, composition, function_call:complex, literal:1, method_call:root, update:self:1, update:self:mpmath, update_by_assignment:self:1, update_by_assignment:self:mpmath, update_by_assignment_with:complex, update_with:complex
         self.product = self.__multiply() # assignment:__multiply, assignment_lhs_identifier:self, assignment_rhs_atom:self, method_call:__multiply
     def __DFT(self, which): # function:__DFT (-> +23), function_argument:self, function_argument:which, function_argument_flavor:arg, function_returning_something:__DFT (-> +23), instance_method:__DFT (-> +23), method:__DFT (-> +23)
-        if which == "A": # comparison_operator:Eq, if (-> +3), if_test_atom:which, literal:Str, suggest_conditional_expression (-> +3)
+        if which == "A": # comparison_operator:Eq, if (-> +3), if_test_atom:which, literal:Str, verbose_conditional_assignment (-> +3)
             dft = [[x] for x in self.polyA] # assignment, assignment_lhs_identifier:dft, assignment_rhs_atom:self, assignment_rhs_atom:x, comprehension:List, comprehension_for_count:1, if_then_branch, single_assignment:dft
         else:
             dft = [[x] for x in self.polyB] # assignment, assignment_lhs_identifier:dft, assignment_rhs_atom:self, assignment_rhs_atom:x, comprehension:List, comprehension_for_count:1, if_else_branch, single_assignment:dft
@@ -1134,13 +1134,13 @@ def sieve(n): # function:sieve (-> +33), function_argument:n, function_argument_
         start += 1 # assignment_lhs_identifier:start, assignment_rhs_atom:1, augmented_assignment:Add, increment:start, literal:1, update:start:1, update_by_augmented_assignment:start:1, update_by_augmented_assignment_with:Add, update_with:Add
     prime += in_prime # assignment_lhs_identifier:prime, assignment_rhs_atom:in_prime, augmented_assignment:Add, update:prime:in_prime, update_by_augmented_assignment:prime:in_prime, update_by_augmented_assignment_with:Add, update_with:Add
     low = end + 1 # assignment:Add, assignment_lhs_identifier:low, assignment_rhs_atom:1, assignment_rhs_atom:end, binary_operator:Add, literal:1, single_assignment:low
-    high = low + end - 1 # assignment:Sub, assignment_lhs_identifier:high, assignment_rhs_atom:1, assignment_rhs_atom:end, assignment_rhs_atom:low, binary_operator:Add, binary_operator:Sub, literal:1, single_assignment:high
+    high = low + end - 1 # assignment:Sub, assignment_lhs_identifier:high, assignment_rhs_atom:1, assignment_rhs_atom:end, assignment_rhs_atom:low, binary_operator:Add, binary_operator:Sub, corrective_conditional_assignment (-> +2), literal:1, single_assignment:high
     if high > n: # comparison_operator:Gt, if (-> +1), if_test_atom:high, if_test_atom:n
         high = n # assignment, assignment_lhs_identifier:high, assignment_rhs_atom:n, if_then_branch, single_assignment:high
     while low <= n: # comparison_operator:LtE, loop:while (-> +14), while (-> +14)
         temp = [True] * (high - low + 1) # assignment:Mult, assignment_lhs_identifier:temp, assignment_rhs_atom:1, assignment_rhs_atom:True, assignment_rhs_atom:high, assignment_rhs_atom:low, binary_operator:Add, binary_operator:Mult, binary_operator:Sub, literal:1, literal:List, literal:True, replication_operator:List, single_assignment:temp
         for each in in_prime: # accumulate_elements:Add (-> +5), accumulate_some_elements:Add (-> +5), for:each (-> +5), for_each (-> +5), for_range:t:_:each (-> +5), loop:for (-> +5)
-            t = math.floor(low / each) * each # assignment:Mult, assignment_lhs_identifier:t, assignment_rhs_atom:each, assignment_rhs_atom:low, assignment_rhs_atom:math, binary_operator:Div, binary_operator:Mult, call_argument:, method_call:floor, single_assignment:t
+            t = math.floor(low / each) * each # assignment:Mult, assignment_lhs_identifier:t, assignment_rhs_atom:each, assignment_rhs_atom:low, assignment_rhs_atom:math, binary_operator:Div, binary_operator:Mult, call_argument:, corrective_conditional_assignment (-> +2), method_call:floor, single_assignment:t
             if t < low: # comparison_operator:Lt, if (-> +1), if_test_atom:low, if_test_atom:t
                 t += each # assignment_lhs_identifier:t, assignment_rhs_atom:each, augmented_assignment:Add, if_then_branch, update:t:each, update_by_augmented_assignment:t:each, update_by_augmented_assignment_with:Add, update_with:Add
             for j in range(t, high + 1, each): # binary_operator:Add, call_argument:, call_argument:each, call_argument:t, for:j (-> +1), for_range:t:_:each (-> +1), function_call:range, literal:1, loop:for (-> +1), nested_for:1 (-> +1), range:t:_:each
@@ -1149,7 +1149,7 @@ def sieve(n): # function:sieve (-> +33), function_argument:n, function_argument_
             if temp[j] is True: # comparison_operator:Is, if (-> +1), if_test_atom:True, if_test_atom:j, if_test_atom:temp, index:j, literal:True
                 prime.append(j + low) # binary_operator:Add, call_argument:, if_then_branch, method_call:append, method_call_object:prime, method_call_without_result:append
         low = high + 1 # assignment:Add, assignment_lhs_identifier:low, assignment_rhs_atom:1, assignment_rhs_atom:high, binary_operator:Add, literal:1, single_assignment:low
-        high = low + end - 1 # assignment:Sub, assignment_lhs_identifier:high, assignment_rhs_atom:1, assignment_rhs_atom:end, assignment_rhs_atom:low, binary_operator:Add, binary_operator:Sub, literal:1, single_assignment:high
+        high = low + end - 1 # assignment:Sub, assignment_lhs_identifier:high, assignment_rhs_atom:1, assignment_rhs_atom:end, assignment_rhs_atom:low, binary_operator:Add, binary_operator:Sub, corrective_conditional_assignment (-> +2), literal:1, single_assignment:high
         if high > n: # comparison_operator:Gt, if (-> +1), if_test_atom:high, if_test_atom:n
             high = n # assignment, assignment_lhs_identifier:high, assignment_rhs_atom:n, if_then_branch, single_assignment:high
     return prime # return:prime
