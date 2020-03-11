@@ -5859,8 +5859,6 @@ May be rewritten as:
 
 #### Feature `suggest_comparison_chaining`
 
-When the `else` branch of a conditional is another conditional, it can be rewritten with an `elif` branch.
-
 ##### Specification
 
 ```re
