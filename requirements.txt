@@ -1,5 +1,5 @@
 mypy==0.770
 pre-commit==2.1.1
-pytest==5.3.5
+pytest==5.4.0
 regex==2020.2.20
 sqlparse==0.3.1
