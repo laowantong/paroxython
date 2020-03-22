@@ -1,6 +1,6 @@
 {
   "tests/data/simple/assignment.py": {
-    "program/sloc/001": "1",
+    "program/sloc/001/": "1",
     "variable/assignment/single/": "1"
   },
   "tests/data/simple/collatz_print.py": {
@@ -11,7 +11,7 @@
     "operator/addition/": "7",
     "operator/multiplication/": "7",
     "operator/percent/modulo/": "4",
-    "program/sloc/008": "1-8",
+    "program/sloc/008/": "1-8",
     "subroutine_definition/argument/arg/": "1",
     "subroutine_definition/procedure/": "1-8",
     "test/divisibility/parity/": "4",
@@ -31,7 +31,7 @@
     "control_flow/loop/sequential/arithmetic/start/": "1-9",
     "io/standard/print/": "3 5 7 9",
     "operator/percent/modulo/": "2 4 6",
-    "program/sloc/009": "1-9",
+    "program/sloc/009/": "1-9",
     "test/equality/": "2 4 6",
     "type/elementary/number/integer/": "1 1 2 4 6",
     "type/elementary/number/integer/zero/": "2 4 6",
@@ -39,7 +39,7 @@
   },
   "tests/data/simple/is_even.py": {
     "operator/percent/modulo/": "2",
-    "program/sloc/002": "1-2",
+    "program/sloc/002/": "1-2",
     "subroutine_definition/argument/arg/": "1",
     "subroutine_definition/function/": "1-2",
     "subroutine_definition/predicate/": "1-2",

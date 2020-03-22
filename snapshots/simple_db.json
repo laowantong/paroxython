@@ -11,7 +11,7 @@
         "single_assignment:a": [[1,1]]
       },
       "taxons": {
-        "program/sloc/001": [[1,1]],
+        "program/sloc/001/": [[1,1]],
         "variable/assignment/single/": [[1,1]]
       }
     },
@@ -78,7 +78,7 @@
         "operator/addition/": [[7,7]],
         "operator/multiplication/": [[7,7]],
         "operator/percent/modulo/": [[4,4]],
-        "program/sloc/008": [[1,8]],
+        "program/sloc/008/": [[1,8]],
         "subroutine_definition/argument/arg/": [[1,1]],
         "subroutine_definition/procedure/": [[1,8]],
         "test/divisibility/parity/": [[4,4]],
@@ -138,7 +138,7 @@
         "control_flow/loop/sequential/arithmetic/start/": [[1,9]],
         "io/standard/print/": [[3,3],[5,5],[7,7],[9,9]],
         "operator/percent/modulo/": [[2,2],[4,4],[6,6]],
-        "program/sloc/009": [[1,9]],
+        "program/sloc/009/": [[1,9]],
         "test/equality/": [[2,2],[4,4],[6,6]],
         "type/elementary/number/integer/": [[1,1],[1,1],[2,2],[4,4],[6,6]],
         "type/elementary/number/integer/zero/": [[2,2],[4,4],[6,6]],
@@ -163,7 +163,7 @@
       },
       "taxons": {
         "operator/percent/modulo/": [[2,2]],
-        "program/sloc/002": [[1,2]],
+        "program/sloc/002/": [[1,2]],
         "subroutine_definition/argument/arg/": [[1,1]],
         "subroutine_definition/function/": [[1,2]],
         "subroutine_definition/predicate/": [[1,2]],
@@ -439,7 +439,7 @@
     ]
   },
   "taxons": {
-    "program/sloc/001": [
+    "program/sloc/001/": [
       "tests/data/simple/assignment.py"
     ],
     "variable/assignment/single/": [
@@ -472,7 +472,7 @@
       "tests/data/simple/fizzbuzz.py",
       "tests/data/simple/is_even.py"
     ],
-    "program/sloc/008": [
+    "program/sloc/008/": [
       "tests/data/simple/collatz_print.py"
     ],
     "subroutine_definition/argument/arg/": [
@@ -519,13 +519,13 @@
     "control_flow/loop/sequential/arithmetic/start/": [
       "tests/data/simple/fizzbuzz.py"
     ],
-    "program/sloc/009": [
+    "program/sloc/009/": [
       "tests/data/simple/fizzbuzz.py"
     ],
     "type/elementary/string/": [
       "tests/data/simple/fizzbuzz.py"
     ],
-    "program/sloc/002": [
+    "program/sloc/002/": [
       "tests/data/simple/is_even.py"
     ],
     "subroutine_definition/function/": [
