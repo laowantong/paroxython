@@ -3,39 +3,28 @@ import sqlite3
 from collections import defaultdict
 from datetime import datetime
 from pathlib import Path
-from typing import Any, Dict, List, Tuple, overload
+from typing import List, Union, Tuple, overload
 
 import regex  # type: ignore
-from typing_extensions import TypedDict  # from Python 3.8, import directly from typing
 
 from generate_labels import generate_labelled_programs
 from map_taxonomy import Taxonomy
 from user_types import (
+    LabelInfos,
     LabelName,
     Labels,
+    LabelsPoorSpans,
     PathTaxons,
     Program,
+    ProgramInfos,
     ProgramName,
+    ProgramRecord,
     Source,
+    TaxonInfos,
     TaxonName,
     Taxons,
+    TaxonsPoorSpans,
 )
-
-Span = Tuple[int, int]
-LabelsSpans = Dict[LabelName, List[Span]]
-TaxonsSpans = Dict[TaxonName, List[Span]]
-
-
-class ProgramRecord(TypedDict):
-    timestamp: str
-    source: Source
-    labels: LabelsSpans
-    taxons: TaxonsSpans
-
-
-ProgramInfos = Dict[ProgramName, ProgramRecord]
-LabelInfos = Dict[LabelName, List[ProgramName]]
-TaxonInfos = Dict[TaxonName, List[ProgramName]]
 
 
 class Database:
@@ -122,7 +111,7 @@ class Database:
                         )
                     )
 
-        if Path(db_path).exists():  # In Python 3.8, use missing_ok=True parameter
+        if Path(db_path).exists():  # Python 3.8: use missing_ok=True parameter
             Path(db_path).unlink()
         connexion = sqlite3.connect(db_path)
         c = connexion.cursor()
@@ -177,14 +166,14 @@ class Database:
 
 # fmt: off
 @overload
-def prepared(tags: Labels) -> LabelsSpans:
+def prepared(tags: Labels) -> LabelsPoorSpans:
     ...  # pragma: no cover
 @overload
-def prepared(tags: Taxons) -> TaxonsSpans:
+def prepared(tags: Taxons) -> TaxonsPoorSpans:
     ...  # pragma: no cover
 def prepared(tags):
     """Prepare the spans for serialization."""
-    result: Any = {}
+    result: Union[LabelsPoorSpans, TaxonsPoorSpans] = {}
     for (tag_name, spans) in tags:
         result[tag_name] = [span.to_couple() for span in sorted(set(spans))]
     return result
@@ -195,8 +184,8 @@ if __name__ == "__main__":
     directories = [
         # "../Python/project_euler",
         # "../Python/maths",
-        # "../Algo/programs",
-        "paroxython"
+        "../algo/programs",
+        # "paroxython"
     ]
     db = Database(directories)
     Path("db.json").write_text(db.get_json())
