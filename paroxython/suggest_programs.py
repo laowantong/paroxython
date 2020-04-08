@@ -1,19 +1,20 @@
 from functools import lru_cache
-from typing import Tuple, Union
+from typing import Tuple
 
 import regex  # type: ignore
 
 from user_types import JsonDatabase, ProgramName, ProgramNameSet, TaxonName, TaxonNameSet
 
 
-@lru_cache(None)
+@lru_cache(maxsize=None)
 def compute_taxon_cost_zeno(start: int, stop: int) -> float:
     """Sum the slice [start : stop] of the infinite series [1/2 + 1/4 + 1/8 + ...]."""
     return sum(2 ** ~depth for depth in range(start, stop))
 
 
-def compute_taxon_cost_length(start: int, stop: int) -> int:
-    return stop - start
+@lru_cache(maxsize=None)  # NB: memoization needed for consistency with mypy's typing
+def compute_taxon_cost_length(start: int, stop: int) -> float:
+    return float(stop - start)
 
 
 class ProgramProcessor:
@@ -60,9 +61,9 @@ class ProgramProcessor:
             for taxon_name in taxon_names:
                 segments = taxon_name.split("/")
                 for i in range(len(segments)):
-                    self.old_taxons.add("/".join(segments[: i + 1]))
+                    self.old_taxons.add(TaxonName("/".join(segments[: i + 1])))
 
-    @lru_cache(None)
+    @lru_cache(maxsize=None)
     def compute_taxon_depth_range(self, taxon_name: TaxonName) -> Tuple[int, int]:
         """Evaluate the learning cost of a new taxon as a couple of depths in the taxonomy."""
         (start, stop) = (0, 0)
@@ -74,10 +75,10 @@ class ProgramProcessor:
                     break
         return (start, stop)
 
-    def compute_program_cost(self, program_name: ProgramName) -> Union[int, float]:
+    def compute_program_cost(self, program_name: ProgramName) -> float:
         """Sum the cost of all taxons in the given program."""
         return sum(
-            self.compute_taxon_cost(self.compute_taxon_depth_range(taxon_name))
+            self.compute_taxon_cost(*self.compute_taxon_depth_range(taxon_name))
             for taxon_name in self.db["programs"][program_name]["taxons"]
         )
 
