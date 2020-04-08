@@ -16,7 +16,7 @@ def test_run():
         + assignment.py
         + unknown_program.py
     February :
-        + is_even.py
+        + [mandatory] is_even.py
     # EOF: no program below is studied yet
     March :
         either + collatz_print.py or + fizzbuzz.py
@@ -41,7 +41,13 @@ def test_run():
     for taxon_name in sorted(db["taxons"]):
         taxon_cost = pp.calculate_taxon_cost(taxon_name)
         print(taxon_cost, taxon_name)
-    assert 2 == pp.calculate_taxon_cost("variable/assignment/conditional/verbose/")
-    assert 1 == pp.calculate_taxon_cost("variable/assignment/conditional/")
-    assert 0 == pp.calculate_taxon_cost("variable/assignment/")
-    assert 0 == pp.calculate_taxon_cost("variable/")
+
+    assert 2 == pp.calculate_taxon_cost(
+        "variable/assignment/conditional/verbose"
+    )  # from "variable/assignment"
+    assert 1 == pp.calculate_taxon_cost(
+        "variable/assignment/conditional"
+    )  # from "variable/assignment"
+    assert 0 == pp.calculate_taxon_cost("variable/assignment")  # already known
+    assert 0 == pp.calculate_taxon_cost("variable")  # already known
+    assert 4 == pp.calculate_taxon_cost("foo/bar/bizz/buzz")  # all segments are new

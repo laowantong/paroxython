@@ -11,8 +11,8 @@
         "single_assignment:a": [[1,1]]
       },
       "taxons": {
-        "program/sloc/001/": [[1,1]],
-        "variable/assignment/single/": [[1,1]]
+        "program/sloc/001": [[1,1]],
+        "variable/assignment/single": [[1,1]]
       }
     },
     "tests/data/simple/collatz_print.py": {
@@ -71,23 +71,23 @@
         "while": [[2,7]]
       },
       "taxons": {
-        "control_flow/conditional/": [[4,7]],
-        "control_flow/conditional/else/": [[7,7]],
-        "control_flow/loop/non_sequential/": [[2,7]],
-        "io/standard/print/": [[3,3],[8,8]],
-        "operator/addition/": [[7,7]],
-        "operator/multiplication/": [[7,7]],
-        "operator/percent/modulo/": [[4,4]],
-        "program/sloc/008/": [[1,8]],
-        "subroutine_definition/argument/arg/": [[1,1]],
-        "subroutine_definition/procedure/": [[1,8]],
-        "test/divisibility/parity/": [[4,4]],
-        "test/equality/": [[4,4]],
-        "test/equality/not/": [[2,2]],
-        "type/elementary/number/integer/": [[2,2],[4,4],[5,5],[7,7],[7,7]],
-        "type/elementary/number/integer/zero/": [[4,4]],
-        "variable/assignment/conditional/verbose/": [[4,7]],
-        "variable/assignment/single/": [[5,5],[7,7]]
+        "control_flow/conditional": [[4,7]],
+        "control_flow/conditional/else": [[7,7]],
+        "control_flow/loop/non_sequential": [[2,7]],
+        "io/standard/print": [[3,3],[8,8]],
+        "operator/addition": [[7,7]],
+        "operator/multiplication": [[7,7]],
+        "operator/percent/modulo": [[4,4]],
+        "program/sloc/008": [[1,8]],
+        "subroutine_definition/argument/arg": [[1,1]],
+        "subroutine_definition/procedure": [[1,8]],
+        "test/divisibility/parity": [[4,4]],
+        "test/equality": [[4,4]],
+        "test/equality/not": [[2,2]],
+        "type/elementary/number/integer": [[2,2],[4,4],[5,5],[7,7],[7,7]],
+        "type/elementary/number/integer/zero": [[4,4]],
+        "variable/assignment/conditional/verbose": [[4,7]],
+        "variable/assignment/single": [[5,5],[7,7]]
       }
     },
     "tests/data/simple/fizzbuzz.py": {
@@ -130,19 +130,19 @@
         "suggest_constant_definition": [[2,2],[4,4],[6,6]]
       },
       "taxons": {
-        "call/function/builtin/range/": [[1,1]],
-        "control_flow/conditional/": [[2,9],[4,9],[6,9]],
-        "control_flow/conditional/else/": [[9,9]],
-        "control_flow/conditional/else/if/": [[5,5],[7,7]],
-        "control_flow/loop/sequential/": [[1,9]],
-        "control_flow/loop/sequential/arithmetic/start/": [[1,9]],
-        "io/standard/print/": [[3,3],[5,5],[7,7],[9,9]],
-        "operator/percent/modulo/": [[2,2],[4,4],[6,6]],
-        "program/sloc/009/": [[1,9]],
-        "test/equality/": [[2,2],[4,4],[6,6]],
-        "type/elementary/number/integer/": [[1,1],[1,1],[2,2],[4,4],[6,6]],
-        "type/elementary/number/integer/zero/": [[2,2],[4,4],[6,6]],
-        "type/elementary/string/": [[3,3],[5,5],[7,7]]
+        "call/function/builtin/range": [[1,1]],
+        "control_flow/conditional": [[2,9],[4,9],[6,9]],
+        "control_flow/conditional/else": [[9,9]],
+        "control_flow/conditional/else/if": [[5,5],[7,7]],
+        "control_flow/loop/sequential": [[1,9]],
+        "control_flow/loop/sequential/arithmetic/start": [[1,9]],
+        "io/standard/print": [[3,3],[5,5],[7,7],[9,9]],
+        "operator/percent/modulo": [[2,2],[4,4],[6,6]],
+        "program/sloc/009": [[1,9]],
+        "test/equality": [[2,2],[4,4],[6,6]],
+        "type/elementary/number/integer": [[1,1],[1,1],[2,2],[4,4],[6,6]],
+        "type/elementary/number/integer/zero": [[2,2],[4,4],[6,6]],
+        "type/elementary/string": [[3,3],[5,5],[7,7]]
       }
     },
     "tests/data/simple/is_even.py": {
@@ -162,15 +162,15 @@
         "return": [[2,2]]
       },
       "taxons": {
-        "operator/percent/modulo/": [[2,2]],
-        "program/sloc/002/": [[1,2]],
-        "subroutine_definition/argument/arg/": [[1,1]],
-        "subroutine_definition/function/": [[1,2]],
-        "subroutine_definition/predicate/": [[1,2]],
-        "test/divisibility/parity/": [[2,2]],
-        "test/equality/": [[2,2]],
-        "type/elementary/number/integer/": [[2,2]],
-        "type/elementary/number/integer/zero/": [[2,2]]
+        "operator/percent/modulo": [[2,2]],
+        "program/sloc/002": [[1,2]],
+        "subroutine_definition/argument/arg": [[1,1]],
+        "subroutine_definition/function": [[1,2]],
+        "subroutine_definition/predicate": [[1,2]],
+        "test/divisibility/parity": [[2,2]],
+        "test/equality": [[2,2]],
+        "type/elementary/number/integer": [[2,2]],
+        "type/elementary/number/integer/zero": [[2,2]]
       }
     }
   },
@@ -439,99 +439,99 @@
     ]
   },
   "taxons": {
-    "program/sloc/001/": [
+    "program/sloc/001": [
       "tests/data/simple/assignment.py"
     ],
-    "variable/assignment/single/": [
+    "variable/assignment/single": [
       "tests/data/simple/assignment.py",
       "tests/data/simple/collatz_print.py"
     ],
-    "control_flow/conditional/": [
+    "control_flow/conditional": [
       "tests/data/simple/collatz_print.py",
       "tests/data/simple/fizzbuzz.py"
     ],
-    "control_flow/conditional/else/": [
+    "control_flow/conditional/else": [
       "tests/data/simple/collatz_print.py",
       "tests/data/simple/fizzbuzz.py"
     ],
-    "control_flow/loop/non_sequential/": [
+    "control_flow/loop/non_sequential": [
       "tests/data/simple/collatz_print.py"
     ],
-    "io/standard/print/": [
+    "io/standard/print": [
       "tests/data/simple/collatz_print.py",
       "tests/data/simple/fizzbuzz.py"
     ],
-    "operator/addition/": [
+    "operator/addition": [
       "tests/data/simple/collatz_print.py"
     ],
-    "operator/multiplication/": [
+    "operator/multiplication": [
       "tests/data/simple/collatz_print.py"
     ],
-    "operator/percent/modulo/": [
+    "operator/percent/modulo": [
       "tests/data/simple/collatz_print.py",
       "tests/data/simple/fizzbuzz.py",
       "tests/data/simple/is_even.py"
     ],
-    "program/sloc/008/": [
+    "program/sloc/008": [
       "tests/data/simple/collatz_print.py"
     ],
-    "subroutine_definition/argument/arg/": [
+    "subroutine_definition/argument/arg": [
       "tests/data/simple/collatz_print.py",
       "tests/data/simple/is_even.py"
     ],
-    "subroutine_definition/procedure/": [
+    "subroutine_definition/procedure": [
       "tests/data/simple/collatz_print.py"
     ],
-    "test/divisibility/parity/": [
+    "test/divisibility/parity": [
       "tests/data/simple/collatz_print.py",
       "tests/data/simple/is_even.py"
     ],
-    "test/equality/": [
+    "test/equality": [
       "tests/data/simple/collatz_print.py",
       "tests/data/simple/fizzbuzz.py",
       "tests/data/simple/is_even.py"
     ],
-    "test/equality/not/": [
+    "test/equality/not": [
       "tests/data/simple/collatz_print.py"
     ],
-    "type/elementary/number/integer/": [
+    "type/elementary/number/integer": [
       "tests/data/simple/collatz_print.py",
       "tests/data/simple/fizzbuzz.py",
       "tests/data/simple/is_even.py"
     ],
-    "type/elementary/number/integer/zero/": [
+    "type/elementary/number/integer/zero": [
       "tests/data/simple/collatz_print.py",
       "tests/data/simple/fizzbuzz.py",
       "tests/data/simple/is_even.py"
     ],
-    "variable/assignment/conditional/verbose/": [
+    "variable/assignment/conditional/verbose": [
       "tests/data/simple/collatz_print.py"
     ],
-    "call/function/builtin/range/": [
+    "call/function/builtin/range": [
       "tests/data/simple/fizzbuzz.py"
     ],
-    "control_flow/conditional/else/if/": [
+    "control_flow/conditional/else/if": [
       "tests/data/simple/fizzbuzz.py"
     ],
-    "control_flow/loop/sequential/": [
+    "control_flow/loop/sequential": [
       "tests/data/simple/fizzbuzz.py"
     ],
-    "control_flow/loop/sequential/arithmetic/start/": [
+    "control_flow/loop/sequential/arithmetic/start": [
       "tests/data/simple/fizzbuzz.py"
     ],
-    "program/sloc/009/": [
+    "program/sloc/009": [
       "tests/data/simple/fizzbuzz.py"
     ],
-    "type/elementary/string/": [
+    "type/elementary/string": [
       "tests/data/simple/fizzbuzz.py"
     ],
-    "program/sloc/002/": [
+    "program/sloc/002": [
       "tests/data/simple/is_even.py"
     ],
-    "subroutine_definition/function/": [
+    "subroutine_definition/function": [
       "tests/data/simple/is_even.py"
     ],
-    "subroutine_definition/predicate/": [
+    "subroutine_definition/predicate": [
       "tests/data/simple/is_even.py"
     ]
   }
