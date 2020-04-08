@@ -16,7 +16,7 @@ def test_run():
         + assignment.py
         + unknown_program.py
     February :
-        + is_even.py
+        + [mandatory] is_even.py
     # EOF: no program below is studied yet
     March :
         either + collatz_print.py or + fizzbuzz.py
