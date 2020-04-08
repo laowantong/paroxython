@@ -1,6 +1,19 @@
+from functools import lru_cache
+from typing import Tuple, Union
+
 import regex  # type: ignore
 
-from user_types import TaxonName, JsonDatabase, ProgramNameSet, TaxonNameSet
+from user_types import JsonDatabase, ProgramName, ProgramNameSet, TaxonName, TaxonNameSet
+
+
+@lru_cache(None)
+def compute_taxon_cost_zeno(start: int, stop: int) -> float:
+    """Sum the slice [start : stop] of the infinite series [1/2 + 1/4 + 1/8 + ...]."""
+    return sum(2 ** ~depth for depth in range(start, stop))
+
+
+def compute_taxon_cost_length(start: int, stop: int) -> int:
+    return stop - start
 
 
 class ProgramProcessor:
@@ -9,24 +22,33 @@ class ProgramProcessor:
         self.old_program_names: ProgramNameSet = set()
         self.old_taxons: TaxonNameSet = set()
 
+    def set_cost_computation_strategy(self, strategy: str) -> None:
+        if strategy.lower() == "zeno":
+            self.compute_taxon_cost = compute_taxon_cost_zeno
+        elif strategy == "length":
+            self.compute_taxon_cost = compute_taxon_cost_length
+        else:
+            raise NotImplementedError
+
     def init_old_programs(
         self,
         syllabus_text: str,
         path_prefix: str = "",
-        search_pattern: str = r"(?sm)(.*)^ *# EOF",  # \1 matches the useful part of the syllabus
-        finditer_pattern: str = r"\+ *(?:\[.+?\] *)?(\w+\.py)\b",  # \1 matches a program name
-    ):
+        search_pattern: str = r"(?sm)(.*)^ *# EOF",  # \1 match the useful part of the syllabus
+        finditer_pattern: str = r"\+ *(?:\[.+?\] *)?(\w+\.py)\b",  # \1 match a program name
+    ) -> None:
         """Retrieve the programs marked as already studied in the teacher's syllabus."""
         source = regex.search(search_pattern, syllabus_text)[1]
         matches = regex.finditer(finditer_pattern, source)
         syllabus_old_programs = {path_prefix + match[1] for match in matches}
         self.old_program_names = syllabus_old_programs.intersection(self.db["programs"])
 
-    def init_old_taxons(self):
+    def init_old_taxons(self) -> None:
         """
         Construct the set of the notions covered by the programs already studied.
 
-        A taxon having the form "segment_0/segment_1/.../segment_n", it covers subsequently:
+        Since a taxon has the form "segment_0/segment_1/.../segment_n", introducing it requires
+        the introduction of all its "prefix" notions, namely:
             - "segment_0"
             - "segment_0/segment_1"
             - ...
@@ -40,16 +62,24 @@ class ProgramProcessor:
                 for i in range(len(segments)):
                     self.old_taxons.add("/".join(segments[: i + 1]))
 
-    def calculate_taxon_cost(self, taxon_name: TaxonName) -> int:
-        """Evaluate the learning cost of a new taxon as the minimal path length from an old one."""
-        if taxon_name in self.old_taxons:
-            cost = 0
-        else:
+    @lru_cache(None)
+    def compute_taxon_depth_range(self, taxon_name: TaxonName) -> Tuple[int, int]:
+        """Evaluate the learning cost of a new taxon as a couple of depths in the taxonomy."""
+        (start, stop) = (0, 0)
+        if taxon_name not in self.old_taxons:
             segments = taxon_name.split("/")
-            for cost in range(1, len(segments) + 1):
-                if "/".join(segments[:-cost]) in self.old_taxons:
+            stop = len(segments)
+            for start in range(stop - 1, -1, -1):
+                if "/".join(segments[:start]) in self.old_taxons:
                     break
-        return cost
+        return (start, stop)
+
+    def compute_program_cost(self, program_name: ProgramName) -> Union[int, float]:
+        """Sum the cost of all taxons in the given program."""
+        return sum(
+            self.compute_taxon_cost(self.compute_taxon_depth_range(taxon_name))
+            for taxon_name in self.db["programs"][program_name]["taxons"]
+        )
 
 
 if __name__ == "__main__":

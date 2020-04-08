@@ -4,7 +4,7 @@ from pathlib import Path
 import pytest
 
 import context
-from suggest_programs import ProgramProcessor
+from suggest_programs import ProgramProcessor, compute_taxon_cost_zeno, compute_taxon_cost_length
 from paroxython.make_db import Database
 
 
@@ -39,15 +39,24 @@ def test_run():
     assert not pp.old_taxons.__contains__("variable/assignment/conditional")
 
     for taxon_name in sorted(db["taxons"]):
-        taxon_cost = pp.calculate_taxon_cost(taxon_name)
+        taxon_cost = pp.compute_taxon_depth_range(taxon_name)
         print(taxon_cost, taxon_name)
 
-    assert 2 == pp.calculate_taxon_cost(
-        "variable/assignment/conditional/verbose"
-    )  # from "variable/assignment"
-    assert 1 == pp.calculate_taxon_cost(
-        "variable/assignment/conditional"
-    )  # from "variable/assignment"
-    assert 0 == pp.calculate_taxon_cost("variable/assignment")  # already known
-    assert 0 == pp.calculate_taxon_cost("variable")  # already known
-    assert 4 == pp.calculate_taxon_cost("foo/bar/bizz/buzz")  # all segments are new
+    assert (2, 4) == pp.compute_taxon_depth_range("variable/assignment/conditional/verbose")
+    assert (2, 3) == pp.compute_taxon_depth_range("variable/assignment/conditional")
+    assert (0, 0) == pp.compute_taxon_depth_range("variable/assignment")  # already known
+    assert (0, 0) == pp.compute_taxon_depth_range("variable")  # already known
+    assert (0, 4) == pp.compute_taxon_depth_range("foo/bar/bizz/buzz")  # all segments are new
+
+
+def test_compute_taxon_cost_length():
+    assert compute_taxon_cost_length(3, 5) == 2
+
+
+def test_compute_taxon_cost_zeno():
+    assert compute_taxon_cost_zeno(0, 0) == 0
+    assert compute_taxon_cost_zeno(42, 42) == 0
+    assert compute_taxon_cost_zeno(0, 1) == 1 / 2
+    assert compute_taxon_cost_zeno(0, 2) == 1 / 2 + 1 / 4
+    assert compute_taxon_cost_zeno(0, 3) == 1 / 2 + 1 / 4 + 1 / 8
+    assert compute_taxon_cost_zeno(1, 4) == 1 / 4 + 1 / 8 + 1 / 16
