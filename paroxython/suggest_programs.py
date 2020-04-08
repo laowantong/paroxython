@@ -26,11 +26,11 @@ class ProgramProcessor:
         """
         Construct the set of the notions covered by the programs already studied.
 
-        A taxon having the form "segment_0/segment_1/.../segment_n/", it covers subsequently:
+        A taxon having the form "segment_0/segment_1/.../segment_n", it covers subsequently:
             - "segment_0"
-            - "segment_0/segment_1/"
+            - "segment_0/segment_1"
             - ...
-            - "segment_0/segment_1/.../segment_n/"
+            - "segment_0/segment_1/.../segment_n"
         """
         self.old_taxons.clear()
         for old_program_name in self.old_program_names:
@@ -38,14 +38,17 @@ class ProgramProcessor:
             for taxon_name in taxon_names:
                 segments = taxon_name.split("/")
                 for i in range(len(segments)):
-                    self.old_taxons.add("/".join(segments[:~i]))
+                    self.old_taxons.add("/".join(segments[: i + 1]))
 
     def calculate_taxon_cost(self, taxon_name: TaxonName) -> int:
         """Evaluate the learning cost of a new taxon as the minimal path length from an old one."""
-        segments = taxon_name.split("/")
-        for cost in range(len(segments)):
-            if "/".join(segments[:~cost]) in self.old_taxons:
-                break
+        if taxon_name in self.old_taxons:
+            cost = 0
+        else:
+            segments = taxon_name.split("/")
+            for cost in range(1, len(segments) + 1):
+                if "/".join(segments[:-cost]) in self.old_taxons:
+                    break
         return cost
 
 

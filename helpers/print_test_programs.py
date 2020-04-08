@@ -13,7 +13,7 @@ paths = [nx.shortest_path(G, 0, node) for node in G]
 
 taxons = []
 for path in paths:
-    taxons.append("/".join(chr(64 + i) for i in path[1:]) + "/")
+    taxons.append("/".join(chr(64 + i) for i in path[1:]))
 taxons.sort()
 del taxons[0]  # suppress root to get a forest
 print("TAXONS")
