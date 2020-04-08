@@ -13,15 +13,15 @@ def generate_labelled_sources(directory: str, *args, **kargs) -> Iterator[Source
     separator = "-" * 88
     for program in generate_programs(directory, *args, **kargs):
         yield Source(f"# {separator}\n# {program.path}\n# {separator}")
-        sloc = program.source.splitlines()
-        comments: List[Set[str]] = [set() for _ in sloc]
+        lines = program.source.splitlines()
+        comments: List[Set[str]] = [set() for _ in lines]
         for (label_name, spans) in parse(program):
             for span in spans:
                 comments[span.start - 1].add(f"{label_name}{span.suffix}")
         for (i, comment) in enumerate(comments):
             if comment:
-                sloc[i] += " # " + ", ".join(sorted(comment))
-        yield Source("\n".join(sloc + [""]))
+                lines[i] += " # " + ", ".join(sorted(comment))
+        yield Source("\n".join(lines + [""]))
 
 
 def generate_labelled_programs(directory: str, *args, **kargs) -> Iterator[Program]:

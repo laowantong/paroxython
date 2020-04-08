@@ -52,14 +52,14 @@ def test_filter_blacklisted_programs():
 
 def test_filter_mandatory_taxons():
     f.reset()
-    f.filter_mandatory_taxons(["O/$", "O/C/F/U/$"])
+    f.filter_mandatory_taxons(["O$", "O/C/F/U$"])
     print(f.result)
     assert f.result == {"prg3", "prg4", "prg7"}
 
 
 def test_filter_forbidden_taxons():
     f.reset()
-    f.filter_forbidden_taxons(["O/$", "O/C/F/U/$"])
+    f.filter_forbidden_taxons(["O$", "O/C/F/U$"])
     print(f.result)
     assert f.result == {"prg1", "prg5"}
 
@@ -69,41 +69,41 @@ def test_get_taxons_in_programs():
     result = f.get_taxons_in_programs(["prg[1-3]$"])
     print(result)
     assert result == {
-        "O/",
-        "O/C/",
-        "O/C/F/U/",
-        "O/C/H/",
-        "O/C/H/B/",
-        "O/C/H/B/I/",
-        "O/J/",
-        "O/N/",
-        "O/N/P/",
-        "X/",
-        "X/G/",
-        "X/K/",
-        "X/S/",
-        "X/S/M/",
-        "X/S/M/L/",
-        "X/S/M/L/R/",
-        "X/S/M/L/R/D/",
-        "X/S/M/L/V/",
-        "X/W/",
-        "Y/",
-        "Y/E/",
-        "Y/T/",
-        "Y/T/Q/",
+        "O",
+        "O/C",
+        "O/C/F/U",
+        "O/C/H",
+        "O/C/H/B",
+        "O/C/H/B/I",
+        "O/J",
+        "O/N",
+        "O/N/P",
+        "X",
+        "X/G",
+        "X/K",
+        "X/S",
+        "X/S/M",
+        "X/S/M/L",
+        "X/S/M/L/R",
+        "X/S/M/L/R/D",
+        "X/S/M/L/V",
+        "X/W",
+        "Y",
+        "Y/E",
+        "Y/T",
+        "Y/T/Q",
     }
 
 
 def test_get_taxons_not_in_programs():
     result = f.get_taxons_not_in_programs(["prg[1-3]$"])
     print(result)
-    assert result == {"O/C/F/", "X/S/M/L/R/D/A/"}
+    assert result == {"O/C/F", "X/S/M/L/R/D/A"}
 
 
 def test_set_operations():
     f.reset()
-    f.filter_mandatory_taxons(["O/$", "O/C/F/U/$"])
+    f.filter_mandatory_taxons(["O$", "O/C/F/U$"])
     print(f.result)
     assert f.result == {"prg3", "prg4", "prg7"}
     f.complement_update()
@@ -128,15 +128,15 @@ def test_get_extra_taxons():
     result = f.get_extra_taxons(["O", "X"])
     print(result)
     assert result == {
-        "prg1": ["Y/T/", "Y/T/Q/", "Y/"],
-        "prg2": ["Y/T/Q/", "Y/", "Y/T/"],
-        "prg3": ["Y/T/", "Y/", "Y/E/"],
-        "prg4": ["Y/T/", "Y/T/Q/", "Y/"],
+        "prg1": ["Y/T", "Y/T/Q", "Y"],
+        "prg2": ["Y/T/Q", "Y", "Y/T"],
+        "prg3": ["Y/T", "Y", "Y/E"],
+        "prg4": ["Y/T", "Y/T/Q", "Y"],
         "prg5": [],
-        "prg6": ["Y/T/Q/", "Y/T/", "Y/E/"],
-        "prg7": ["Y/E/", "Y/T/Q/", "Y/T/"],
-        "prg8": ["Y/E/"],
-        "prg9": ["Y/", "Y/T/Q/", "Y/E/", "Y/T/"],
+        "prg6": ["Y/T/Q", "Y/T", "Y/E"],
+        "prg7": ["Y/E", "Y/T/Q", "Y/T"],
+        "prg8": ["Y/E"],
+        "prg9": ["Y", "Y/T/Q", "Y/E", "Y/T"],
     }
 
 
@@ -159,24 +159,24 @@ def test_sort_by_extra_taxon_count():
 
 def test_get_lacking_taxons():
     f.reset()
-    result = f.get_lacking_taxons(["O/$", "O/C/H/$", "O/C/F/U/$"])
+    result = f.get_lacking_taxons(["O$", "O/C/H$", "O/C/F/U$"])
     print(result)
     assert result == {
-        "prg1": ["O/$", "O/C/H/$", "O/C/F/U/$"],
-        "prg2": ["O/C/H/$", "O/C/F/U/$"],
+        "prg1": ["O$", "O/C/H$", "O/C/F/U$"],
+        "prg2": ["O/C/H$", "O/C/F/U$"],
         "prg3": [],
-        "prg4": ["O/C/H/$"],
-        "prg5": ["O/$", "O/C/F/U/$"],
-        "prg6": ["O/$", "O/C/H/$"],
-        "prg7": ["O/C/H/$"],
-        "prg8": ["O/$", "O/C/H/$"],
-        "prg9": ["O/C/F/U/$"],
+        "prg4": ["O/C/H$"],
+        "prg5": ["O$", "O/C/F/U$"],
+        "prg6": ["O$", "O/C/H$"],
+        "prg7": ["O/C/H$"],
+        "prg8": ["O$", "O/C/H$"],
+        "prg9": ["O/C/F/U$"],
     }
 
 
 def test_sort_by_lacking_taxon_count():
     f.reset()
-    result = f.sorted_by_lacking_taxon_count(["O/$", "O/C/H/$", "O/C/F/U/$"])
+    result = f.sorted_by_lacking_taxon_count(["O$", "O/C/H$", "O/C/F/U$"])
     print(result)
     assert result == [
         "prg3",  # prg3 has all the wanted taxons
@@ -197,48 +197,48 @@ def test_sort_by_distance():
     lacking = f.get_lacking_taxons(taxon_names)
     print(lacking)
     assert lacking == {
-        "prg1": ["X/S/M/L/V/$", "O/C/H/B/$", "O/C/F/U/$", "O/C/H/$", "O/$", "Y/E/$"],
-        "prg2": ["X/K/$", "O/J/$", "O/C/F/U/$", "O/C/H/$", "X/S/$", "X/S/M/L/$", "Y/E/$"],
+        "prg1": ["X/S/M/L/V$", "O/C/H/B$", "O/C/F/U$", "O/C/H$", "O$", "Y/E$"],
+        "prg2": ["X/K$", "O/J$", "O/C/F/U$", "O/C/H$", "X/S$", "X/S/M/L$", "Y/E$"],
         "prg3": [],
-        "prg4": ["X/K/$", "X/S/M/L/V/$", "O/J/$", "X/S/M/$", "O/C/H/$", "Y/E/$"],
+        "prg4": ["X/K$", "X/S/M/L/V$", "O/J$", "X/S/M$", "O/C/H$", "Y/E$"],
         "prg5": [
-            "Y/T/$",
-            "X/S/M/L/R/$",
-            "O/J/$",
-            "X/S/M/$",
-            "O/C/F/U/$",
-            "Y/$",
-            "O/$",
-            "X/S/M/L/$",
-            "Y/E/$",
+            "Y/T$",
+            "X/S/M/L/R$",
+            "O/J$",
+            "X/S/M$",
+            "O/C/F/U$",
+            "Y$",
+            "O$",
+            "X/S/M/L$",
+            "Y/E$",
         ],
         "prg6": [
-            "O/N/P/$",
-            "O/C/H/B/$",
-            "X/S/M/L/R/$",
-            "X/S/M/$",
-            "O/C/H/$",
-            "X/S/$",
-            "Y/$",
-            "O/$",
-            "X/S/M/L/$",
+            "O/N/P$",
+            "O/C/H/B$",
+            "X/S/M/L/R$",
+            "X/S/M$",
+            "O/C/H$",
+            "X/S$",
+            "Y$",
+            "O$",
+            "X/S/M/L$",
         ],
-        "prg7": ["O/N/P/$", "X/S/M/L/V/$", "O/C/H/$", "Y/$"],
-        "prg8": ["Y/T/$", "X/S/M/L/R/$", "X/S/M/$", "O/C/H/$", "X/S/$", "Y/$", "O/$"],
-        "prg9": ["O/N/P/$", "O/C/H/B/$", "O/C/F/U/$", "X/S/$", "X/S/M/L/$"],
+        "prg7": ["O/N/P$", "X/S/M/L/V$", "O/C/H$", "Y$"],
+        "prg8": ["Y/T$", "X/S/M/L/R$", "X/S/M$", "O/C/H$", "X/S$", "Y$", "O$"],
+        "prg9": ["O/N/P$", "O/C/H/B$", "O/C/F/U$", "X/S$", "X/S/M/L$"],
     }
     extra = f.get_extra_taxons(taxon_names)
     print(extra)
     assert extra == {
-        "prg1": ["X/W/", "X/", "Y/T/Q/", "X/S/M/L/R/D/", "O/N/"],
-        "prg2": ["Y/T/Q/", "X/S/M/L/R/D/", "O/C/", "X/G/", "O/C/H/B/I/"],
+        "prg1": ["X/W", "X", "Y/T/Q", "X/S/M/L/R/D", "O/N"],
+        "prg2": ["Y/T/Q", "X/S/M/L/R/D", "O/C", "X/G", "O/C/H/B/I"],
         "prg3": [],
-        "prg4": ["X/", "Y/T/Q/", "X/S/M/L/R/D/A/", "X/G/", "X/S/M/L/R/D/"],
-        "prg5": ["O/C/H/B/I/", "O/N/", "X/", "X/S/M/L/R/D/A/", "O/C/", "O/C/F/"],
-        "prg6": ["X/", "O/N/", "Y/T/Q/", "X/W/", "O/C/", "X/S/M/L/R/D/A/", "O/C/F/", "O/C/H/B/I/"],
-        "prg7": ["O/N/", "Y/T/Q/", "X/", "O/C/H/B/I/", "X/S/M/L/R/D/"],
-        "prg8": ["X/W/", "O/C/", "O/N/", "X/S/M/L/R/D/A/", "X/S/M/L/R/D/"],
-        "prg9": ["X/W/", "O/N/", "Y/T/Q/", "O/C/H/B/I/", "O/C/F/"],
+        "prg4": ["X", "Y/T/Q", "X/S/M/L/R/D/A", "X/G", "X/S/M/L/R/D"],
+        "prg5": ["O/C/H/B/I", "O/N", "X", "X/S/M/L/R/D/A", "O/C", "O/C/F"],
+        "prg6": ["X", "O/N", "Y/T/Q", "X/W", "O/C", "X/S/M/L/R/D/A", "O/C/F", "O/C/H/B/I"],
+        "prg7": ["O/N", "Y/T/Q", "X", "O/C/H/B/I", "X/S/M/L/R/D"],
+        "prg8": ["X/W", "O/C", "O/N", "X/S/M/L/R/D/A", "X/S/M/L/R/D"],
+        "prg9": ["X/W", "O/N", "Y/T/Q", "O/C/H/B/I", "O/C/F"],
     }
     result = f.sorted_by_distance(taxon_names)
     print(result)
