@@ -18,10 +18,6 @@
         [[1,1]]
       ],
       [
-        "lines_of_code:1",
-        [[1,1]]
-      ],
-      [
         "single_assignment:a",
         [[1,1]]
       ]
@@ -144,10 +140,6 @@
       [
         "if_then_branch",
         [[5,5]]
-      ],
-      [
-        "lines_of_code:8",
-        [[1,8]]
       ],
       [
         "literal:0",
@@ -334,10 +326,6 @@
         [[3,3]]
       ],
       [
-        "lines_of_code:9",
-        [[1,9]]
-      ],
-      [
         "literal:0",
         [[2,2],[4,4],[6,6]]
       ],
@@ -411,10 +399,6 @@
       ],
       [
         "function_returning_something:is_even",
-        [[1,2]]
-      ],
-      [
-        "lines_of_code:2",
         [[1,2]]
       ],
       [

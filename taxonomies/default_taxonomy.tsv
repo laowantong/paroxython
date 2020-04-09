@@ -107,9 +107,6 @@ pattern/inputs/accumulate	accumulate_inputs:.+
 pattern/inputs/accumulate/count	count_inputs:.+
 pattern/inputs/find_first_good	get_valid_input:.+
 pattern/states/accumulate/count	count_states:.+
-program/sloc/\1	lines_of_code:(\d{3})
-program/sloc/0\1	lines_of_code:(\d{2})
-program/sloc/00\1	lines_of_code:(\d{1})
 subroutine_definition/argument/\1	function_argument_flavor:(.+)
 subroutine_definition/argument/no	function_without_arguments:.+
 subroutine_definition/decorated	decorated_function:.+

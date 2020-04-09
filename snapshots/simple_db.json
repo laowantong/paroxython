@@ -7,11 +7,9 @@
         "assignment": [[1,1]],
         "assignment_lhs_identifier:a": [[1,1]],
         "assignment_rhs_atom:b": [[1,1]],
-        "lines_of_code:1": [[1,1]],
         "single_assignment:a": [[1,1]]
       },
       "taxons": {
-        "program/sloc/001": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
     },
@@ -47,7 +45,6 @@
         "if_test_atom:2": [[4,4]],
         "if_test_atom:n": [[4,4]],
         "if_then_branch": [[5,5]],
-        "lines_of_code:8": [[1,8]],
         "literal:0": [[4,4]],
         "literal:1": [[2,2],[7,7]],
         "literal:2": [[4,4],[5,5]],
@@ -78,7 +75,6 @@
         "operator/addition": [[7,7]],
         "operator/multiplication": [[7,7]],
         "operator/percent/modulo": [[4,4]],
-        "program/sloc/008": [[1,8]],
         "subroutine_definition/argument/arg": [[1,1]],
         "subroutine_definition/procedure": [[1,8]],
         "test/divisibility/parity": [[4,4]],
@@ -117,7 +113,6 @@
         "if_test_atom:5": [[6,6]],
         "if_test_atom:i": [[2,2],[4,4],[6,6]],
         "if_then_branch": [[3,3]],
-        "lines_of_code:9": [[1,9]],
         "literal:0": [[2,2],[4,4],[6,6]],
         "literal:1": [[1,1]],
         "literal:101": [[1,1]],
@@ -138,7 +133,6 @@
         "control_flow/loop/sequential/arithmetic/start": [[1,9]],
         "io/standard/print": [[3,3],[5,5],[7,7],[9,9]],
         "operator/percent/modulo": [[2,2],[4,4],[6,6]],
-        "program/sloc/009": [[1,9]],
         "test/equality": [[2,2],[4,4],[6,6]],
         "type/elementary/number/integer": [[1,1],[1,1],[2,2],[4,4],[6,6]],
         "type/elementary/number/integer/zero": [[2,2],[4,4],[6,6]],
@@ -156,14 +150,12 @@
         "function_argument:n": [[1,1]],
         "function_argument_flavor:arg": [[1,1]],
         "function_returning_something:is_even": [[1,2]],
-        "lines_of_code:2": [[1,2]],
         "literal:0": [[2,2]],
         "literal:2": [[2,2]],
         "return": [[2,2]]
       },
       "taxons": {
         "operator/percent/modulo": [[2,2]],
-        "program/sloc/002": [[1,2]],
         "subroutine_definition/argument/arg": [[1,1]],
         "subroutine_definition/function": [[1,2]],
         "subroutine_definition/predicate": [[1,2]],
@@ -182,9 +174,6 @@
       "tests/data/simple/assignment.py"
     ],
     "assignment_rhs_atom:b": [
-      "tests/data/simple/assignment.py"
-    ],
-    "lines_of_code:1": [
       "tests/data/simple/assignment.py"
     ],
     "single_assignment:a": [
@@ -286,9 +275,6 @@
     "if_then_branch": [
       "tests/data/simple/collatz_print.py",
       "tests/data/simple/fizzbuzz.py"
-    ],
-    "lines_of_code:8": [
-      "tests/data/simple/collatz_print.py"
     ],
     "literal:0": [
       "tests/data/simple/collatz_print.py",
@@ -404,9 +390,6 @@
     "if_test_atom:i": [
       "tests/data/simple/fizzbuzz.py"
     ],
-    "lines_of_code:9": [
-      "tests/data/simple/fizzbuzz.py"
-    ],
     "literal:101": [
       "tests/data/simple/fizzbuzz.py"
     ],
@@ -431,17 +414,11 @@
     "function_returning_something:is_even": [
       "tests/data/simple/is_even.py"
     ],
-    "lines_of_code:2": [
-      "tests/data/simple/is_even.py"
-    ],
     "return": [
       "tests/data/simple/is_even.py"
     ]
   },
   "taxons": {
-    "program/sloc/001": [
-      "tests/data/simple/assignment.py"
-    ],
     "variable/assignment/single": [
       "tests/data/simple/assignment.py",
       "tests/data/simple/collatz_print.py"
@@ -471,9 +448,6 @@
       "tests/data/simple/collatz_print.py",
       "tests/data/simple/fizzbuzz.py",
       "tests/data/simple/is_even.py"
-    ],
-    "program/sloc/008": [
-      "tests/data/simple/collatz_print.py"
     ],
     "subroutine_definition/argument/arg": [
       "tests/data/simple/collatz_print.py",
@@ -519,14 +493,8 @@
     "control_flow/loop/sequential/arithmetic/start": [
       "tests/data/simple/fizzbuzz.py"
     ],
-    "program/sloc/009": [
-      "tests/data/simple/fizzbuzz.py"
-    ],
     "type/elementary/string": [
       "tests/data/simple/fizzbuzz.py"
-    ],
-    "program/sloc/002": [
-      "tests/data/simple/is_even.py"
     ],
     "subroutine_definition/function": [
       "tests/data/simple/is_even.py"

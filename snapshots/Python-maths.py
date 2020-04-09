@@ -1,7 +1,7 @@
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/3n+1.py
 # ----------------------------------------------------------------------------------------
-from typing import Tuple, List # import:typing:List, import:typing:Tuple, import_module:typing, import_name:List, import_name:Tuple, lines_of_code:128 (-> +127)
+from typing import Tuple, List # import:typing:List, import:typing:Tuple, import_module:typing, import_name:List, import_name:Tuple
 def n31(a: int) -> Tuple[List[int], int]: # function:n31 (-> +12), function_argument:a, function_argument_flavor:arg, function_returning_something:n31 (-> +12), index:_, index:int, nested_index:2
     if not isinstance(a, int): # call_argument:a, call_argument:int, function_call:isinstance, if (-> +1), if_test_atom:a, if_test_atom:int, unary_operator:Not
         raise TypeError("Must be int, not {0}".format(type(a).__name__)) # call_argument:, call_argument:a, composition, function_call:TypeError, function_call:type, if_then_branch, literal:Str, method_call:format, raise:TypeError
@@ -134,7 +134,7 @@ def test_n31(): # function:test_n31 (-> +113), function_returning_nothing:test_n
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/abs.py
 # ----------------------------------------------------------------------------------------
-def abs_val(num): # function:abs_val (-> +1), function_argument:num, function_argument_flavor:arg, function_returning_something:abs_val (-> +1), lines_of_code:6 (-> +5)
+def abs_val(num): # function:abs_val (-> +1), function_argument:num, function_argument_flavor:arg, function_returning_something:abs_val (-> +1)
     return -num if num < 0 else num # comparison_operator:Lt, conditional_expression, literal:0, return, unary_operator:USub
 def test_abs_val(): # function:test_abs_val (-> +3), function_returning_nothing:test_abs_val (-> +3), function_without_arguments:test_abs_val (-> +3)
     assert 0 == abs_val(0) # assertion, call_argument:0, comparison_operator:Eq, function_call:abs_val, literal:0
@@ -144,7 +144,7 @@ def test_abs_val(): # function:test_abs_val (-> +3), function_returning_nothing:
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/abs_max.py
 # ----------------------------------------------------------------------------------------
-from typing import List # import:typing:List, import_module:typing, import_name:List, lines_of_code:13 (-> +12)
+from typing import List # import:typing:List, import_module:typing, import_name:List
 def abs_max(x: List[int]) -> int: # function:abs_max (-> +5), function_argument:x, function_argument_flavor:arg, function_returning_something:abs_max (-> +5)
     j = x[0] # assignment, assignment_lhs_identifier:j, assignment_rhs_atom:0, assignment_rhs_atom:x, index:0, literal:0, single_assignment:j
     for i in x: # find_best_element:i:j (-> +2), for:i (-> +2), for_each (-> +2), loop:for (-> +2)
@@ -161,7 +161,7 @@ def main(): # function:main (-> +3), function_returning_nothing:main (-> +3), fu
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/abs_min.py
 # ----------------------------------------------------------------------------------------
-from .abs import abs_val # import:abs:abs_val, import_module:abs, import_name:abs_val, lines_of_code:10 (-> +9)
+from .abs import abs_val # import:abs:abs_val, import_module:abs, import_name:abs_val
 def absMin(x): # function:absMin (-> +5), function_argument:x, function_argument_flavor:arg, function_returning_something:absMin (-> +5)
     j = x[0] # assignment, assignment_lhs_identifier:j, assignment_rhs_atom:0, assignment_rhs_atom:x, index:0, literal:0, single_assignment:j
     for i in x: # find_best_element:i:j (-> +2), for:i (-> +2), for_each (-> +2), loop:for (-> +2)
@@ -175,7 +175,7 @@ def main(): # function:main (-> +2), function_returning_nothing:main (-> +2), fu
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/average_mean.py
 # ----------------------------------------------------------------------------------------
-def average(nums): # function:average (-> +1), function_argument:nums, function_argument_flavor:arg, function_returning_something:average (-> +1), lines_of_code:6 (-> +5)
+def average(nums): # function:average (-> +1), function_argument:nums, function_argument_flavor:arg, function_returning_something:average (-> +1)
     return sum(nums) / len(nums) # binary_operator:Div, call_argument:nums, function_call:len, function_call:sum, return
 def test_average(): # function:test_average (-> +3), function_returning_nothing:test_average (-> +3), function_without_arguments:test_average (-> +3)
     assert 12.0 == average([3, 6, 9, 12, 15, 18, 21]) # assertion, call_argument:, comparison_operator:Eq, function_call:average, literal:12, literal:12.0, literal:15, literal:18, literal:21, literal:3, literal:6, literal:9, literal:List, suggest_constant_definition
@@ -185,7 +185,7 @@ def test_average(): # function:test_average (-> +3), function_returning_nothing:
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/average_median.py
 # ----------------------------------------------------------------------------------------
-def median(nums): # function:median (-> +10), function_argument:nums, function_argument_flavor:arg, function_returning_something:median (-> +10), lines_of_code:16 (-> +15)
+def median(nums): # function:median (-> +10), function_argument:nums, function_argument_flavor:arg, function_returning_something:median (-> +10)
     sorted_list = sorted(nums) # assignment:sorted, assignment_lhs_identifier:sorted_list, assignment_rhs_atom:nums, call_argument:nums, function_call:sorted, single_assignment:sorted_list
     med = None # assignment:None, assignment_lhs_identifier:med, assignment_rhs_atom:None, literal:None, single_assignment:med
     if len(sorted_list) % 2 == 0: # binary_operator:Mod, call_argument:sorted_list, comparison_operator:Eq, divisibility_test:2, function_call:len, if (-> +6), if_test_atom:0, if_test_atom:2, if_test_atom:sorted_list, literal:0, literal:2
@@ -205,7 +205,7 @@ def main(): # function:main (-> +4), function_returning_nothing:main (-> +4), fu
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/average_mode.py
 # ----------------------------------------------------------------------------------------
-import statistics # import:statistics, import_module:statistics, lines_of_code:9 (-> +8)
+import statistics # import:statistics, import_module:statistics
 def mode(input_list): # function:mode (-> +7), function_argument:input_list, function_argument_flavor:arg, function_returning_something:mode (-> +7)
     check_list = input_list.copy() # assignment:copy, assignment_lhs_identifier:check_list, assignment_rhs_atom:input_list, method_call:copy, single_assignment:check_list
     result = list() # assignment:list, assignment_lhs_identifier:result, function_call:list, function_call_without_arguments:list, single_assignment:result
@@ -218,7 +218,7 @@ def mode(input_list): # function:mode (-> +7), function_argument:input_list, fun
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/basic_maths.py
 # ----------------------------------------------------------------------------------------
-import math # import:math, import_module:math, lines_of_code:48 (-> +47)
+import math # import:math, import_module:math
 def prime_factors(n: int) -> list: # function:prime_factors (-> +11), function_argument:n, function_argument_flavor:arg, function_returning_something:prime_factors (-> +11)
     pf = [] # assignment, assignment_lhs_identifier:pf, empty_literal:List, literal:List, single_assignment:pf
     while n % 2 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, literal:0, literal:2, loop:while (-> +2), while (-> +2)
@@ -270,7 +270,7 @@ def euler_phi(n: int) -> int: # function:euler_phi (-> +4), function_argument:n,
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/binary_exponentiation.py
 # ----------------------------------------------------------------------------------------
-def binary_exponentiation(a, n): # body_recursive_function:binary_exponentiation (-> +7), function:binary_exponentiation (-> +7), function_argument:a, function_argument:n, function_argument_flavor:arg, function_returning_something:binary_exponentiation (-> +7), lines_of_code:8 (-> +7), recursive_function:binary_exponentiation (-> +7)
+def binary_exponentiation(a, n): # body_recursive_function:binary_exponentiation (-> +7), function:binary_exponentiation (-> +7), function_argument:a, function_argument:n, function_argument_flavor:arg, function_returning_something:binary_exponentiation (-> +7), recursive_function:binary_exponentiation (-> +7)
     if n == 0: # comparison_operator:Eq, if (-> +6), if_test_atom:0, if_test_atom:n, literal:0
         return 1 # if_then_branch, literal:1, return:1
     elif n % 2 == 1: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, if (-> +4), if_test_atom:1, if_test_atom:2, if_test_atom:n, literal:1, literal:2
@@ -282,7 +282,7 @@ def binary_exponentiation(a, n): # body_recursive_function:binary_exponentiation
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/binomial_coefficient.py
 # ----------------------------------------------------------------------------------------
-def binomial_coefficient(n, r): # function:binomial_coefficient (-> +8), function_argument:n, function_argument:r, function_argument_flavor:arg, function_returning_something:binomial_coefficient (-> +8), lines_of_code:10 (-> +9)
+def binomial_coefficient(n, r): # function:binomial_coefficient (-> +8), function_argument:n, function_argument:r, function_argument_flavor:arg, function_returning_something:binomial_coefficient (-> +8)
     C = [0 for i in range(r + 1)] # assignment, assignment_lhs_identifier:C, assignment_rhs_atom:0, assignment_rhs_atom:1, assignment_rhs_atom:i, assignment_rhs_atom:r, binary_operator:Add, call_argument:, comprehension:List, comprehension_for_count:1, function_call:range, literal:0, literal:1, range:_, single_assignment:C
     C[0] = 1 # assignment:1, assignment_lhs_identifier:C, assignment_rhs_atom:1, index:0, literal:0, literal:1
     for i in range(1, n + 1): # binary_operator:Add, call_argument:, call_argument:1, for:i (-> +4), for_range:1:_ (-> +4), function_call:range, literal:1, loop:for (-> +4), range:1:_
@@ -296,7 +296,7 @@ print(binomial_coefficient(n=10, r=5)) # call_argument:, composition, function_c
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/ceil.py
 # ----------------------------------------------------------------------------------------
-def ceil(x) -> int: # function:ceil (-> +2), function_argument:x, function_argument_flavor:arg, function_returning_something:ceil (-> +2), lines_of_code:3 (-> +2)
+def ceil(x) -> int: # function:ceil (-> +2), function_argument:x, function_argument_flavor:arg, function_returning_something:ceil (-> +2)
     return ( # return
         x if isinstance(x, int) or x - int(x) == 0 else int(x + 1) if x > 0 else int(x) # binary_operator:Add, binary_operator:Sub, boolean_operator:Or, call_argument:, call_argument:int, call_argument:x, comparison_operator:Eq, comparison_operator:Gt, conditional_expression, function_call:int, function_call:isinstance, literal:0, literal:1
     )
@@ -304,7 +304,7 @@ def ceil(x) -> int: # function:ceil (-> +2), function_argument:x, function_argum
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/collatz_sequence.py
 # ----------------------------------------------------------------------------------------
-def collatz_sequence(n): # function:collatz_sequence (-> +8), function_argument:n, function_argument_flavor:arg, function_returning_something:collatz_sequence (-> +8), lines_of_code:14 (-> +13)
+def collatz_sequence(n): # function:collatz_sequence (-> +8), function_argument:n, function_argument_flavor:arg, function_returning_something:collatz_sequence (-> +8)
     sequence = [n] # assignment, assignment_lhs_identifier:sequence, assignment_rhs_atom:n, single_assignment:sequence
     while n != 1: # comparison_operator:NotEq, literal:1, loop:while (-> +5), while (-> +5)
         if n % 2 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, if (-> +3), if_test_atom:0, if_test_atom:2, if_test_atom:n, literal:0, literal:2
@@ -322,7 +322,7 @@ def main(): # function:main (-> +4), function_returning_nothing:main (-> +4), fu
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/explicit_euler.py
 # ----------------------------------------------------------------------------------------
-import numpy as np # import:numpy, import_module:numpy, lines_of_code:10 (-> +9)
+import numpy as np # import:numpy, import_module:numpy
 def explicit_euler(ode_func, y0, x0, stepsize, x_end): # function:explicit_euler (-> +8), function_argument:ode_func, function_argument:stepsize, function_argument:x0, function_argument:x_end, function_argument:y0, function_argument_flavor:arg, function_returning_something:explicit_euler (-> +8), higher_order_function:ode_func (-> +8)
     N = int(np.ceil((x_end - x0) / stepsize)) # assignment:int, assignment_lhs_identifier:N, assignment_rhs_atom:np, assignment_rhs_atom:stepsize, assignment_rhs_atom:x0, assignment_rhs_atom:x_end, binary_operator:Div, binary_operator:Sub, call_argument:, composition, function_call:int, method_call:ceil, single_assignment:N
     y = np.zeros((N + 1,)) # assignment:zeros, assignment_lhs_identifier:y, assignment_rhs_atom:1, assignment_rhs_atom:N, assignment_rhs_atom:np, binary_operator:Add, call_argument:, literal:1, method_call:zeros, single_assignment:y
@@ -336,7 +336,7 @@ def explicit_euler(ode_func, y0, x0, stepsize, x_end): # function:explicit_euler
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/extended_euclidean_algorithm.py
 # ----------------------------------------------------------------------------------------
-import sys # import:sys, import_module:sys, lines_of_code:40 (-> +39)
+import sys # import:sys, import_module:sys
 def extended_euclidean_algorithm(m, n): # function:extended_euclidean_algorithm (-> +31), function_argument:m, function_argument:n, function_argument_flavor:arg, function_returning_something:extended_euclidean_algorithm (-> +31)
     a = 0 # assignment:0, assignment_lhs_identifier:a, assignment_rhs_atom:0, literal:0, single_assignment:a
     a_prime = 1 # assignment:1, assignment_lhs_identifier:a_prime, assignment_rhs_atom:1, literal:1, single_assignment:a_prime
@@ -380,7 +380,7 @@ def main(): # function:main (-> +6), function_returning_nothing:main (-> +6), fu
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/factorial_python.py
 # ----------------------------------------------------------------------------------------
-def factorial(input_number: int) -> int: # function:factorial (-> +8), function_argument:input_number, function_argument_flavor:arg, function_returning_something:factorial (-> +8), lines_of_code:9 (-> +8)
+def factorial(input_number: int) -> int: # function:factorial (-> +8), function_argument:input_number, function_argument_flavor:arg, function_returning_something:factorial (-> +8)
     if input_number < 0: # comparison_operator:Lt, if (-> +1), if_test_atom:0, if_test_atom:input_number, literal:0
         raise ValueError("factorial() not defined for negative values") # call_argument:, function_call:ValueError, if_then_branch, literal:Str, raise:ValueError
     if not isinstance(input_number, int): # call_argument:input_number, call_argument:int, function_call:isinstance, if (-> +1), if_test_atom:input_number, if_test_atom:int, unary_operator:Not
@@ -393,7 +393,7 @@ def factorial(input_number: int) -> int: # function:factorial (-> +8), function_
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/factorial_recursive.py
 # ----------------------------------------------------------------------------------------
-def factorial(n: int) -> int: # body_recursive_function:factorial (-> +5), function:factorial (-> +5), function_argument:n, function_argument_flavor:arg, function_returning_something:factorial (-> +5), lines_of_code:6 (-> +5), recursive_function:factorial (-> +5)
+def factorial(n: int) -> int: # body_recursive_function:factorial (-> +5), function:factorial (-> +5), function_argument:n, function_argument_flavor:arg, function_returning_something:factorial (-> +5), recursive_function:factorial (-> +5)
     if n < 0: # comparison_operator:Lt, if (-> +1), if_test_atom:0, if_test_atom:n, literal:0
         raise ValueError("factorial() not defined for negative values") # call_argument:, function_call:ValueError, if_then_branch, literal:Str, raise:ValueError
     if not isinstance(n, int): # call_argument:int, call_argument:n, function_call:isinstance, if (-> +1), if_test_atom:int, if_test_atom:n, unary_operator:Not
@@ -403,13 +403,13 @@ def factorial(n: int) -> int: # body_recursive_function:factorial (-> +5), funct
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/factors.py
 # ----------------------------------------------------------------------------------------
-def factors_of_a_number(num: int) -> list: # function:factors_of_a_number (-> +1), function_argument:num, function_argument_flavor:arg, function_returning_something:factors_of_a_number (-> +1), lines_of_code:2 (-> +1)
+def factors_of_a_number(num: int) -> list: # function:factors_of_a_number (-> +1), function_argument:num, function_argument_flavor:arg, function_returning_something:factors_of_a_number (-> +1)
     return [i for i in range(1, num + 1) if num % i == 0] # binary_operator:Add, binary_operator:Mod, call_argument:, call_argument:1, comparison_operator:Eq, comprehension:List, comprehension_for_count:1, divisibility_test, filtered_comprehension, function_call:range, literal:0, literal:1, range:1:_, return
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/fermat_little_theorem.py
 # ----------------------------------------------------------------------------------------
-def binary_exponentiation(a, n, mod): # body_recursive_function:binary_exponentiation (-> +7), function:binary_exponentiation (-> +7), function_argument:a, function_argument:mod, function_argument:n, function_argument_flavor:arg, function_returning_something:binary_exponentiation (-> +7), lines_of_code:13 (-> +12), recursive_function:binary_exponentiation (-> +7)
+def binary_exponentiation(a, n, mod): # body_recursive_function:binary_exponentiation (-> +7), function:binary_exponentiation (-> +7), function_argument:a, function_argument:mod, function_argument:n, function_argument_flavor:arg, function_returning_something:binary_exponentiation (-> +7), recursive_function:binary_exponentiation (-> +7)
     if n == 0: # comparison_operator:Eq, if (-> +6), if_test_atom:0, if_test_atom:n, literal:0
         return 1 # if_then_branch, literal:1, return:1
     elif n % 2 == 1: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, if (-> +4), if_test_atom:1, if_test_atom:2, if_test_atom:n, literal:1, literal:2
@@ -426,7 +426,7 @@ print((a / b) % p == (a * b ** (p - 2)) % p) # binary_operator:Div, binary_opera
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/fibonacci.py
 # ----------------------------------------------------------------------------------------
-import math # import:math, import_module:math, lines_of_code:72 (-> +71)
+import math # import:math, import_module:math
 import functools # import:functools, import_module:functools
 import time # import:time, import_module:time
 from decimal import getcontext, Decimal # import:decimal:Decimal, import:decimal:getcontext, import_module:decimal, import_name:Decimal, import_name:getcontext
@@ -502,7 +502,7 @@ def fib_formula(n): # function_argument:n, function_argument_flavor:arg
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/fibonacci_sequence_recursion.py
 # ----------------------------------------------------------------------------------------
-def recur_fibo(n): # body_recursive_function:recur_fibo (-> +1), function:recur_fibo (-> +1), function_argument:n, function_argument_flavor:arg, function_returning_something:recur_fibo (-> +1), lines_of_code:9 (-> +8), recursive_function:recur_fibo (-> +1)
+def recur_fibo(n): # body_recursive_function:recur_fibo (-> +1), function:recur_fibo (-> +1), function_argument:n, function_argument_flavor:arg, function_returning_something:recur_fibo (-> +1), recursive_function:recur_fibo (-> +1)
     return n if n <= 1 else recur_fibo(n - 1) + recur_fibo(n - 2) # binary_operator:Add, binary_operator:Sub, call_argument:, comparison_operator:LtE, conditional_expression, function_call:recur_fibo, literal:1, literal:2, return
 def main(): # function:main (-> +6), function_returning_nothing:main (-> +6), function_without_arguments:main (-> +6)
     limit = int(input("How many terms to include in fibonacci series: ")) # assignment:int, assignment_lhs_identifier:limit, call_argument:, composition, function_call:input, function_call:int, literal:Str, single_assignment:limit
@@ -515,7 +515,7 @@ def main(): # function:main (-> +6), function_returning_nothing:main (-> +6), fu
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/find_max.py
 # ----------------------------------------------------------------------------------------
-def find_max(nums): # function:find_max (-> +5), function_argument:nums, function_argument_flavor:arg, function_returning_something:find_max (-> +5), lines_of_code:8 (-> +7)
+def find_max(nums): # function:find_max (-> +5), function_argument:nums, function_argument_flavor:arg, function_returning_something:find_max (-> +5)
     max_num = nums[0] # assignment, assignment_lhs_identifier:max_num, assignment_rhs_atom:0, assignment_rhs_atom:nums, index:0, literal:0, single_assignment:max_num
     for x in nums: # find_best_element:x:max_num (-> +2), for:x (-> +2), for_each (-> +2), loop:for (-> +2)
         if x > max_num: # comparison_operator:Gt, if (-> +1), if_test_atom:max_num, if_test_atom:x
@@ -527,7 +527,7 @@ def main(): # function:main (-> +1), function_returning_nothing:main (-> +1), fu
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/find_max_recursion.py
 # ----------------------------------------------------------------------------------------
-def find_max(nums, left, right): # body_recursive_function:find_max (-> +6), function:find_max (-> +6), function_argument:left, function_argument:nums, function_argument:right, function_argument_flavor:arg, function_returning_something:find_max (-> +6), lines_of_code:7 (-> +6), recursive_function:find_max (-> +6)
+def find_max(nums, left, right): # body_recursive_function:find_max (-> +6), function:find_max (-> +6), function_argument:left, function_argument:nums, function_argument:right, function_argument_flavor:arg, function_returning_something:find_max (-> +6), recursive_function:find_max (-> +6)
     if left == right: # comparison_operator:Eq, if (-> +1), if_test_atom:left, if_test_atom:right
         return nums[left] # if_then_branch, index:left, return
     mid = (left + right) >> 1 # assignment:RShift, assignment_lhs_identifier:mid, assignment_rhs_atom:1, assignment_rhs_atom:left, assignment_rhs_atom:right, binary_operator:Add, binary_operator:RShift, literal:1, single_assignment:mid
@@ -538,7 +538,7 @@ def find_max(nums, left, right): # body_recursive_function:find_max (-> +6), fun
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/find_min.py
 # ----------------------------------------------------------------------------------------
-def find_min(nums): # function:find_min (-> +5), function_argument:nums, function_argument_flavor:arg, function_returning_something:find_min (-> +5), lines_of_code:8 (-> +7)
+def find_min(nums): # function:find_min (-> +5), function_argument:nums, function_argument_flavor:arg, function_returning_something:find_min (-> +5)
     min_num = nums[0] # assignment, assignment_lhs_identifier:min_num, assignment_rhs_atom:0, assignment_rhs_atom:nums, index:0, literal:0, single_assignment:min_num
     for num in nums: # find_best_element:num:min_num (-> +2), for:num (-> +2), for_each (-> +2), loop:for (-> +2)
         if min_num > num: # comparison_operator:Gt, if (-> +1), if_test_atom:min_num, if_test_atom:num
@@ -550,7 +550,7 @@ def main(): # function:main (-> +1), function_returning_nothing:main (-> +1), fu
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/find_min_recursion.py
 # ----------------------------------------------------------------------------------------
-def find_min(nums, left, right): # body_recursive_function:find_min (-> +6), function:find_min (-> +6), function_argument:left, function_argument:nums, function_argument:right, function_argument_flavor:arg, function_returning_something:find_min (-> +6), lines_of_code:7 (-> +6), recursive_function:find_min (-> +6)
+def find_min(nums, left, right): # body_recursive_function:find_min (-> +6), function:find_min (-> +6), function_argument:left, function_argument:nums, function_argument:right, function_argument_flavor:arg, function_returning_something:find_min (-> +6), recursive_function:find_min (-> +6)
     if left == right: # comparison_operator:Eq, if (-> +1), if_test_atom:left, if_test_atom:right
         return nums[left] # if_then_branch, index:left, return
     mid = (left + right) >> 1 # assignment:RShift, assignment_lhs_identifier:mid, assignment_rhs_atom:1, assignment_rhs_atom:left, assignment_rhs_atom:right, binary_operator:Add, binary_operator:RShift, literal:1, single_assignment:mid
@@ -561,7 +561,7 @@ def find_min(nums, left, right): # body_recursive_function:find_min (-> +6), fun
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/floor.py
 # ----------------------------------------------------------------------------------------
-def floor(x) -> int: # function:floor (-> +2), function_argument:x, function_argument_flavor:arg, function_returning_something:floor (-> +2), lines_of_code:3 (-> +2)
+def floor(x) -> int: # function:floor (-> +2), function_argument:x, function_argument_flavor:arg, function_returning_something:floor (-> +2)
     return ( # return
         x if isinstance(x, int) or x - int(x) == 0 else int(x) if x > 0 else int(x - 1) # binary_operator:Sub, boolean_operator:Or, call_argument:, call_argument:int, call_argument:x, comparison_operator:Eq, comparison_operator:Gt, conditional_expression, function_call:int, function_call:isinstance, literal:0, literal:1
     )
@@ -569,14 +569,14 @@ def floor(x) -> int: # function:floor (-> +2), function_argument:x, function_arg
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/gaussian.py
 # ----------------------------------------------------------------------------------------
-from numpy import pi, sqrt, exp # import:numpy:exp, import:numpy:pi, import:numpy:sqrt, import_module:numpy, import_name:exp, import_name:pi, import_name:sqrt, lines_of_code:3 (-> +2)
+from numpy import pi, sqrt, exp # import:numpy:exp, import:numpy:pi, import:numpy:sqrt, import_module:numpy, import_name:exp, import_name:pi, import_name:sqrt
 def gaussian(x, mu: float = 0.0, sigma: float = 1.0) -> int: # function:gaussian (-> +1), function_argument:mu, function_argument:sigma, function_argument:x, function_argument_flavor:arg, function_returning_something:gaussian (-> +1), literal:0.0, literal:1.0
     return 1 / sqrt(2 * pi * sigma ** 2) * exp(-((x - mu) ** 2) / 2 * sigma ** 2) # binary_operator:Div, binary_operator:Mult, binary_operator:Pow, binary_operator:Sub, call_argument:, function_call:exp, function_call:sqrt, literal:1, literal:2, return, unary_operator:USub
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/greatest_common_divisor.py
 # ----------------------------------------------------------------------------------------
-def greatest_common_divisor(a, b): # function:greatest_common_divisor (-> +1), function_argument:a, function_argument:b, function_argument_flavor:arg, function_returning_something:greatest_common_divisor (-> +1), lines_of_code:17 (-> +16), recursive_function:greatest_common_divisor (-> +1), tail_recursive_function:greatest_common_divisor (-> +1)
+def greatest_common_divisor(a, b): # function:greatest_common_divisor (-> +1), function_argument:a, function_argument:b, function_argument_flavor:arg, function_returning_something:greatest_common_divisor (-> +1), recursive_function:greatest_common_divisor (-> +1), tail_recursive_function:greatest_common_divisor (-> +1)
     return b if a == 0 else greatest_common_divisor(b % a, a) # binary_operator:Mod, call_argument:, call_argument:a, comparison_operator:Eq, conditional_expression, function_call:greatest_common_divisor, function_tail_call:greatest_common_divisor, literal:0, return
 def gcd_by_iterative(x, y): # function:gcd_by_iterative (-> +3), function_argument:x, function_argument:y, function_argument_flavor:arg, function_returning_something:gcd_by_iterative (-> +3)
     while y: # loop:while (-> +1), while (-> +1)
@@ -597,7 +597,7 @@ def main(): # function:main (-> +10), function_returning_nothing:main (-> +10), 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/hardy_ramanujanalgo.py
 # ----------------------------------------------------------------------------------------
-import math # import:math, import_module:math, lines_of_code:17 (-> +16)
+import math # import:math, import_module:math
 def exactPrimeFactorCount(n): # function:exactPrimeFactorCount (-> +15), function_argument:n, function_argument_flavor:arg, function_returning_something:exactPrimeFactorCount (-> +15)
     count = 0 # assignment:0, assignment_lhs_identifier:count, assignment_rhs_atom:0, literal:0, single_assignment:count
     if n % 2 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, if (-> +3), if_test_atom:0, if_test_atom:2, if_test_atom:n, literal:0, literal:2
@@ -618,14 +618,14 @@ def exactPrimeFactorCount(n): # function:exactPrimeFactorCount (-> +15), functio
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/is_square_free.py
 # ----------------------------------------------------------------------------------------
-from typing import List # import:typing:List, import_module:typing, import_name:List, lines_of_code:3 (-> +2)
+from typing import List # import:typing:List, import_module:typing, import_name:List
 def is_square_free(factors: List[int]) -> bool: # function:is_square_free (-> +1), function_argument:factors, function_argument_flavor:arg, function_returning_something:is_square_free (-> +1)
     return len(set(factors)) == len(factors) # call_argument:, call_argument:factors, comparison_operator:Eq, composition, function_call:len, function_call:set, return
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/jaccard_similarity.py
 # ----------------------------------------------------------------------------------------
-def jaccard_similariy(setA, setB, alternativeUnion=False): # function:jaccard_similariy (-> +14), function_argument:alternativeUnion, function_argument:setA, function_argument:setB, function_argument_flavor:arg, function_returning_something:jaccard_similariy (-> +14), lines_of_code:15 (-> +14), literal:False
+def jaccard_similariy(setA, setB, alternativeUnion=False): # function:jaccard_similariy (-> +14), function_argument:alternativeUnion, function_argument:setA, function_argument:setB, function_argument_flavor:arg, function_returning_something:jaccard_similariy (-> +14), literal:False
     if isinstance(setA, set) and isinstance(setB, set): # boolean_operator:And, call_argument:set, call_argument:setA, call_argument:setB, function_call:isinstance, if (-> +6), if_test_atom:set, if_test_atom:setA, if_test_atom:setB
         intersection = len(setA.intersection(setB)) # assignment:len, assignment_lhs_identifier:intersection, assignment_rhs_atom:setA, assignment_rhs_atom:setB, call_argument:, call_argument:setB, composition, function_call:len, if_then_branch (-> +5), method_call:intersection, single_assignment:intersection
         if alternativeUnion: # if (-> +3), nested_if:1 (-> +3), verbose_conditional_assignment (-> +3)
@@ -644,7 +644,7 @@ def jaccard_similariy(setA, setB, alternativeUnion=False): # function:jaccard_si
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/karatsuba.py
 # ----------------------------------------------------------------------------------------
-def karatsuba(a, b): # body_recursive_function:karatsuba (-> +11), function:karatsuba (-> +11), function_argument:a, function_argument:b, function_argument_flavor:arg, function_returning_something:karatsuba (-> +11), lines_of_code:14 (-> +13), recursive_function:karatsuba (-> +11)
+def karatsuba(a, b): # body_recursive_function:karatsuba (-> +11), function:karatsuba (-> +11), function_argument:a, function_argument:b, function_argument_flavor:arg, function_returning_something:karatsuba (-> +11), recursive_function:karatsuba (-> +11)
     if len(str(a)) == 1 or len(str(b)) == 1: # boolean_operator:Or, call_argument:, call_argument:a, call_argument:b, comparison_operator:Eq, composition, function_call:len, function_call:str, if (-> +10), if_test_atom:1, if_test_atom:a, if_test_atom:b, literal:1
         return a * b # binary_operator:Mult, if_then_branch, return
     else:
@@ -662,7 +662,7 @@ def main(): # function:main (-> +1), function_returning_nothing:main (-> +1), fu
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/kth_lexicographic_permutation.py
 # ----------------------------------------------------------------------------------------
-def kthPermutation(k, n): # function:kthPermutation (-> +13), function_argument:k, function_argument:n, function_argument_flavor:arg, function_returning_something:kthPermutation (-> +13), lines_of_code:14 (-> +13)
+def kthPermutation(k, n): # function:kthPermutation (-> +13), function_argument:k, function_argument:n, function_argument_flavor:arg, function_returning_something:kthPermutation (-> +13)
     factorials = [1] # assignment, assignment_lhs_identifier:factorials, assignment_rhs_atom:1, literal:1, literal:List, single_assignment:factorials
     for i in range(2, n): # call_argument:2, call_argument:n, for:i (-> +1), for_range:2:n (-> +1), function_call:range, literal:2, loop:for (-> +1), range:2:n
         factorials.append(factorials[-1] * i) # binary_operator:Mult, call_argument:, index:-1, literal:-1, method_call:append, method_call_object:factorials, method_call_without_result:append, negative_index:-1
@@ -680,7 +680,7 @@ def kthPermutation(k, n): # function:kthPermutation (-> +13), function_argument:
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/largest_of_very_large_numbers.py
 # ----------------------------------------------------------------------------------------
-import math # import:math, import_module:math, lines_of_code:9 (-> +8)
+import math # import:math, import_module:math
 def res(x, y): # function:res (-> +7), function_argument:x, function_argument:y, function_argument_flavor:arg, function_returning_something:res (-> +7)
     if 0 not in (x, y): # comparison_operator:NotIn, if (-> +6), if_test_atom:0, if_test_atom:x, if_test_atom:y, literal:0
         return y * math.log10(x) # binary_operator:Mult, call_argument:x, if_then_branch, method_call:log10, return
@@ -693,7 +693,7 @@ def res(x, y): # function:res (-> +7), function_argument:x, function_argument:y,
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/least_common_multiple.py
 # ----------------------------------------------------------------------------------------
-import unittest # import:unittest, import_module:unittest, lines_of_code:25 (-> +24)
+import unittest # import:unittest, import_module:unittest
 def find_lcm(first_num: int, second_num: int) -> int: # function:find_lcm (-> +5), function_argument:first_num, function_argument:second_num, function_argument_flavor:arg, function_returning_something:find_lcm (-> +5)
     max_num = first_num if first_num >= second_num else second_num # assignment, assignment_lhs_identifier:max_num, assignment_rhs_atom:first_num, assignment_rhs_atom:second_num, compact_conditional_assignment, comparison_operator:GtE, conditional_expression, single_assignment:max_num
     common_mult = max_num # assignment, assignment_lhs_identifier:common_mult, assignment_rhs_atom:max_num, single_assignment:common_mult
@@ -722,7 +722,7 @@ class TestLeastCommonMultiple(unittest.TestCase): # class:TestLeastCommonMultipl
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/lucas_series.py
 # ----------------------------------------------------------------------------------------
-def recur_luc(n): # body_recursive_function:recur_luc (-> +5), function:recur_luc (-> +5), function_argument:n, function_argument_flavor:arg, function_returning_something:recur_luc (-> +5), lines_of_code:6 (-> +5), recursive_function:recur_luc (-> +5)
+def recur_luc(n): # body_recursive_function:recur_luc (-> +5), function:recur_luc (-> +5), function_argument:n, function_argument_flavor:arg, function_returning_something:recur_luc (-> +5), recursive_function:recur_luc (-> +5)
     if n == 1: # comparison_operator:Eq, if (-> +1), if_test_atom:1, if_test_atom:n, literal:1
         return n # if_then_branch, return:n
     if n == 0: # comparison_operator:Eq, if (-> +1), if_test_atom:0, if_test_atom:n, literal:0
@@ -732,7 +732,7 @@ def recur_luc(n): # body_recursive_function:recur_luc (-> +5), function:recur_lu
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/matrix_exponentiation.py
 # ----------------------------------------------------------------------------------------
-import timeit # import:timeit, import_module:timeit, lines_of_code:67 (-> +66)
+import timeit # import:timeit, import_module:timeit
 class Matrix(object): # class:Matrix (-> +14)
     def __init__(self, arg): # function:__init__ (-> +6), function_argument:arg, function_argument:self, function_argument_flavor:arg, function_returning_nothing:__init__ (-> +6), instance_method:__init__ (-> +6), method:__init__ (-> +6)
         if isinstance(arg, list): # call_argument:arg, call_argument:list, function_call:isinstance, if (-> +5), if_test_atom:arg, if_test_atom:list
@@ -803,7 +803,7 @@ def main(): # function:main (-> +2), function_returning_nothing:main (-> +2), fu
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/mobius_function.py
 # ----------------------------------------------------------------------------------------
-from maths.prime_factors import prime_factors # import:maths.prime_factors:prime_factors, import_module:maths.prime_factors, import_name:prime_factors, lines_of_code:7 (-> +6)
+from maths.prime_factors import prime_factors # import:maths.prime_factors:prime_factors, import_module:maths.prime_factors, import_name:prime_factors
 from maths.is_square_free import is_square_free # import:maths.is_square_free:is_square_free, import_module:maths.is_square_free, import_name:is_square_free
 def mobius(n: int) -> int: # function:mobius (-> +4), function_argument:n, function_argument_flavor:arg, function_returning_something:mobius (-> +4)
     factors = prime_factors(n) # assignment:prime_factors, assignment_lhs_identifier:factors, assignment_rhs_atom:n, call_argument:n, function_call:prime_factors, single_assignment:factors
@@ -814,7 +814,7 @@ def mobius(n: int) -> int: # function:mobius (-> +4), function_argument:n, funct
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/modular_exponential.py
 # ----------------------------------------------------------------------------------------
-def modular_exponential(base, power, mod): # function:modular_exponential (-> +10), function_argument:base, function_argument:mod, function_argument:power, function_argument_flavor:arg, function_returning_something:modular_exponential (-> +10), lines_of_code:13 (-> +12)
+def modular_exponential(base, power, mod): # function:modular_exponential (-> +10), function_argument:base, function_argument:mod, function_argument:power, function_argument_flavor:arg, function_returning_something:modular_exponential (-> +10)
     if power < 0: # comparison_operator:Lt, if (-> +1), if_test_atom:0, if_test_atom:power, literal:0
         return -1 # if_then_branch, literal:-1, return:-1
     base %= mod # assignment_lhs_identifier:base, assignment_rhs_atom:mod, augmented_assignment:Mod, update:base:mod, update_by_augmented_assignment:base:mod, update_by_augmented_assignment_with:Mod, update_with:Mod
@@ -831,7 +831,7 @@ def main(): # function:main (-> +1), function_returning_nothing:main (-> +1), fu
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/newton_raphson.py
 # ----------------------------------------------------------------------------------------
-import math as m # import:math, import_module:math, lines_of_code:21 (-> +20)
+import math as m # import:math, import_module:math
 def calc_derivative(f, a, h=0.001): # function:calc_derivative (-> +1), function_argument:a, function_argument:f, function_argument:h, function_argument_flavor:arg, function_returning_something:calc_derivative (-> +1), higher_order_function:f (-> +1), literal:0.001
     return (f(a + h) - f(a - h)) / (2 * h) # binary_operator:Add, binary_operator:Div, binary_operator:Mult, binary_operator:Sub, call_argument:, function_call:f, literal:2, return
 def newton_raphson(f, x0=0, maxiter=100, step=0.0001, maxerror=1e-6, logsteps=False): # function:newton_raphson (-> +17), function_argument:f, function_argument:logsteps, function_argument:maxerror, function_argument:maxiter, function_argument:step, function_argument:x0, function_argument_flavor:arg, function_returning_something:newton_raphson (-> +17), higher_order_function:f (-> +17), literal:0, literal:0.0001, literal:100, literal:1e-06, literal:False
@@ -856,14 +856,14 @@ def newton_raphson(f, x0=0, maxiter=100, step=0.0001, maxerror=1e-6, logsteps=Fa
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/perfect_square.py
 # ----------------------------------------------------------------------------------------
-import math # import:math, import_module:math, lines_of_code:3 (-> +2)
+import math # import:math, import_module:math
 def perfect_square(num: int) -> bool: # function:perfect_square (-> +1), function_argument:num, function_argument_flavor:arg, function_returning_something:perfect_square (-> +1)
     return math.sqrt(num) * math.sqrt(num) == num # binary_operator:Mult, call_argument:num, comparison_operator:Eq, method_call:sqrt, return
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/polynomial_evaluation.py
 # ----------------------------------------------------------------------------------------
-from typing import Sequence # import:typing:Sequence, import_module:typing, import_name:Sequence, lines_of_code:8 (-> +7)
+from typing import Sequence # import:typing:Sequence, import_module:typing, import_name:Sequence
 def evaluate_poly(poly: Sequence[float], x: float) -> float: # function:evaluate_poly (-> +1), function_argument:poly, function_argument:x, function_argument_flavor:arg, function_returning_something:evaluate_poly (-> +1)
     return sum(c * (x ** i) for i, c in enumerate(poly)) # binary_operator:Mult, binary_operator:Pow, call_argument:, call_argument:poly, composition, comprehension:Generator, comprehension_for_count:1, function_call:enumerate, function_call:sum, function_tail_call:sum, return
 def horner(poly: Sequence[float], x: float) -> float: # function:horner (-> +4), function_argument:poly, function_argument:x, function_argument_flavor:arg, function_returning_something:horner (-> +4)
@@ -875,7 +875,7 @@ def horner(poly: Sequence[float], x: float) -> float: # function:horner (-> +4),
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/prime_check.py
 # ----------------------------------------------------------------------------------------
-import math # import:math, import_module:math, lines_of_code:36 (-> +35)
+import math # import:math, import_module:math
 import unittest # import:unittest, import_module:unittest
 def prime_check(number): # function:prime_check (-> +8), function_argument:number, function_argument_flavor:arg, function_returning_something:prime_check (-> +8)
     if number < 2: # comparison_operator:Lt, if (-> +1), if_test_atom:2, if_test_atom:number, literal:2
@@ -915,7 +915,7 @@ class Test(unittest.TestCase): # class:Test (-> +24)
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/prime_factors.py
 # ----------------------------------------------------------------------------------------
-from typing import List # import:typing:List, import_module:typing, import_name:List, lines_of_code:13 (-> +12)
+from typing import List # import:typing:List, import_module:typing, import_name:List
 def prime_factors(n: int) -> List[int]: # function:prime_factors (-> +11), function_argument:n, function_argument_flavor:arg, function_returning_something:prime_factors (-> +11), index:int
     i = 2 # assignment:2, assignment_lhs_identifier:i, assignment_rhs_atom:2, literal:2, single_assignment:i
     factors = [] # assignment, assignment_lhs_identifier:factors, empty_literal:List, literal:List, single_assignment:factors
@@ -932,7 +932,7 @@ def prime_factors(n: int) -> List[int]: # function:prime_factors (-> +11), funct
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/prime_numbers.py
 # ----------------------------------------------------------------------------------------
-from typing import List # import:typing:List, import_module:typing, import_name:List, lines_of_code:11 (-> +10)
+from typing import List # import:typing:List, import_module:typing, import_name:List
 def primes(max: int) -> List[int]: # function:primes (-> +9), function_argument:max, function_argument_flavor:arg, function_returning_something:primes (-> +9), index:int
     max += 1 # assignment_lhs_identifier:max, assignment_rhs_atom:1, augmented_assignment:Add, increment:max, literal:1, update:max:1, update_by_augmented_assignment:max:1, update_by_augmented_assignment_with:Add, update_with:Add
     numbers = [False] * max # assignment:Mult, assignment_lhs_identifier:numbers, assignment_rhs_atom:False, assignment_rhs_atom:max, binary_operator:Mult, literal:False, literal:List, replication_operator:List, single_assignment:numbers
@@ -947,7 +947,7 @@ def primes(max: int) -> List[int]: # function:primes (-> +9), function_argument:
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/prime_sieve_eratosthenes.py
 # ----------------------------------------------------------------------------------------
-def prime_sieve_eratosthenes(num): # function:prime_sieve_eratosthenes (-> +10), function_argument:num, function_argument_flavor:arg, function_returning_nothing:prime_sieve_eratosthenes (-> +10), lines_of_code:11 (-> +10)
+def prime_sieve_eratosthenes(num): # function:prime_sieve_eratosthenes (-> +10), function_argument:num, function_argument_flavor:arg, function_returning_nothing:prime_sieve_eratosthenes (-> +10)
     primes = [True for i in range(num + 1)] # assignment, assignment_lhs_identifier:primes, assignment_rhs_atom:1, assignment_rhs_atom:True, assignment_rhs_atom:i, assignment_rhs_atom:num, binary_operator:Add, call_argument:, comprehension:List, comprehension_for_count:1, function_call:range, literal:1, literal:True, range:_, single_assignment:primes
     p = 2 # assignment:2, assignment_lhs_identifier:p, assignment_rhs_atom:2, literal:2, single_assignment:p
     while p * p <= num: # binary_operator:Mult, comparison_operator:LtE, count_states:p (-> +4), loop:while (-> +4), while (-> +4)
@@ -962,7 +962,7 @@ def prime_sieve_eratosthenes(num): # function:prime_sieve_eratosthenes (-> +10),
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/qr_decomposition.py
 # ----------------------------------------------------------------------------------------
-import numpy as np # import:numpy, import_module:numpy, lines_of_code:18 (-> +17)
+import numpy as np # import:numpy, import_module:numpy
 def qr_householder(A): # function:qr_householder (-> +16), function_argument:A, function_argument_flavor:arg, function_returning_something:qr_householder (-> +16)
     m, n = A.shape # assignment, assignment_lhs_identifier:m, assignment_lhs_identifier:n, assignment_rhs_atom:A, parallel_assignment:2
     t = min(m, n) # assignment:min, assignment_lhs_identifier:t, assignment_rhs_atom:m, assignment_rhs_atom:n, call_argument:m, call_argument:n, function_call:min, single_assignment:t
@@ -984,7 +984,7 @@ def qr_householder(A): # function:qr_householder (-> +16), function_argument:A, 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/quadratic_equations_complex_numbers.py
 # ----------------------------------------------------------------------------------------
-from math import sqrt # import:math:sqrt, import_module:math, import_name:sqrt, lines_of_code:16 (-> +15)
+from math import sqrt # import:math:sqrt, import_module:math, import_name:sqrt
 from typing import Tuple # import:typing:Tuple, import_module:typing, import_name:Tuple
 def QuadraticEquation(a: int, b: int, c: int) -> Tuple[str, str]: # function:QuadraticEquation (-> +10), function_argument:a, function_argument:b, function_argument:c, function_argument_flavor:arg, function_returning_something:QuadraticEquation (-> +10), index:_
     if a == 0: # comparison_operator:Eq, if (-> +1), if_test_atom:0, if_test_atom:a, literal:0
@@ -1004,7 +1004,7 @@ def main(): # function:main (-> +2), function_returning_nothing:main (-> +2), fu
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/radix2_fft.py
 # ----------------------------------------------------------------------------------------
-import mpmath # import:mpmath, import_module:mpmath, lines_of_code:92 (-> +91)
+import mpmath # import:mpmath, import_module:mpmath
 import numpy as np # import:numpy, import_module:numpy
 class FFT: # class:FFT (-> +89)
     def __init__(self, polyA=[0], polyB=[0]): # function:__init__ (-> +17), function_argument:polyA, function_argument:polyB, function_argument:self, function_argument_flavor:arg, function_returning_nothing:__init__ (-> +17), instance_method:__init__ (-> +17), literal:0, literal:List, method:__init__ (-> +17)
@@ -1100,7 +1100,7 @@ class FFT: # class:FFT (-> +89)
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/runge_kutta.py
 # ----------------------------------------------------------------------------------------
-import numpy as np # import:numpy, import_module:numpy, lines_of_code:14 (-> +13)
+import numpy as np # import:numpy, import_module:numpy
 def runge_kutta(f, y0, x0, h, x_end): # function:runge_kutta (-> +12), function_argument:f, function_argument:h, function_argument:x0, function_argument:x_end, function_argument:y0, function_argument_flavor:arg, function_returning_something:runge_kutta (-> +12), higher_order_function:f (-> +12)
     N = int(np.ceil((x_end - x0) / h)) # assignment:int, assignment_lhs_identifier:N, assignment_rhs_atom:h, assignment_rhs_atom:np, assignment_rhs_atom:x0, assignment_rhs_atom:x_end, binary_operator:Div, binary_operator:Sub, call_argument:, composition, function_call:int, method_call:ceil, single_assignment:N
     y = np.zeros((N + 1,)) # assignment:zeros, assignment_lhs_identifier:y, assignment_rhs_atom:1, assignment_rhs_atom:N, assignment_rhs_atom:np, binary_operator:Add, call_argument:, literal:1, method_call:zeros, single_assignment:y
@@ -1118,7 +1118,7 @@ def runge_kutta(f, y0, x0, h, x_end): # function:runge_kutta (-> +12), function_
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/segmented_sieve.py
 # ----------------------------------------------------------------------------------------
-import math # import:math, import_module:math, lines_of_code:36 (-> +35)
+import math # import:math, import_module:math
 def sieve(n): # function:sieve (-> +33), function_argument:n, function_argument_flavor:arg, function_returning_something:sieve (-> +33)
     in_prime = [] # assignment, assignment_lhs_identifier:in_prime, empty_literal:List, literal:List, single_assignment:in_prime
     start = 2 # assignment:2, assignment_lhs_identifier:start, assignment_rhs_atom:2, literal:2, single_assignment:start
@@ -1165,7 +1165,7 @@ Illustration: https://upload.wikimedia.org/wikipedia/commons/b/b9/Sieve_of_Erato
 Reference: https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes
 doctest provider: Bruno Simas Hadlich (https://github.com/brunohadlich)
 Also thanks Dmitry (https://github.com/LizardWizzard) for finding the problem
-""" # lines_of_code:25 (-> +17), literal:Str
+""" # literal:Str
 import math # import:math, import_module:math
 def sieve(n): # function:sieve (-> +15), function_argument:n, function_argument_flavor:arg, function_returning_something:sieve (-> +15)
     l = [True] * (n + 1) # assignment:Mult, assignment_lhs_identifier:l, assignment_rhs_atom:1, assignment_rhs_atom:True, assignment_rhs_atom:n, binary_operator:Add, binary_operator:Mult, literal:1, literal:List, literal:True, replication_operator:List, single_assignment:l
@@ -1187,7 +1187,7 @@ def sieve(n): # function:sieve (-> +15), function_argument:n, function_argument_
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/simpson_rule.py
 # ----------------------------------------------------------------------------------------
-def method_2(boundary, steps): # function:method_2 (-> +12), function_argument:boundary, function_argument:steps, function_argument_flavor:arg, function_returning_something:method_2 (-> +12), lines_of_code:28 (-> +27)
+def method_2(boundary, steps): # function:method_2 (-> +12), function_argument:boundary, function_argument:steps, function_argument_flavor:arg, function_returning_something:method_2 (-> +12)
     h = (boundary[1] - boundary[0]) / steps # assignment:Div, assignment_lhs_identifier:h, assignment_rhs_atom:0, assignment_rhs_atom:1, assignment_rhs_atom:boundary, assignment_rhs_atom:steps, binary_operator:Div, binary_operator:Sub, index:0, index:1, literal:0, literal:1, single_assignment:h
     a = boundary[0] # assignment, assignment_lhs_identifier:a, assignment_rhs_atom:0, assignment_rhs_atom:boundary, index:0, literal:0, single_assignment:a
     b = boundary[1] # assignment, assignment_lhs_identifier:b, assignment_rhs_atom:1, assignment_rhs_atom:boundary, index:1, literal:1, single_assignment:b
@@ -1219,7 +1219,7 @@ def main(): # function:main (-> +6), function_returning_nothing:main (-> +6), fu
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/softmax.py
 # ----------------------------------------------------------------------------------------
-import numpy as np # import:numpy, import_module:numpy, lines_of_code:6 (-> +5)
+import numpy as np # import:numpy, import_module:numpy
 def softmax(vector): # function:softmax (-> +4), function_argument:vector, function_argument_flavor:arg, function_returning_something:softmax (-> +4)
     exponentVector = np.exp(vector) # assignment:exp, assignment_lhs_identifier:exponentVector, assignment_rhs_atom:np, assignment_rhs_atom:vector, call_argument:vector, method_call:exp, single_assignment:exponentVector
     sumOfExponents = np.sum(exponentVector) # assignment:sum, assignment_lhs_identifier:sumOfExponents, assignment_rhs_atom:exponentVector, assignment_rhs_atom:np, call_argument:exponentVector, method_call:sum, single_assignment:sumOfExponents
@@ -1229,7 +1229,7 @@ def softmax(vector): # function:softmax (-> +4), function_argument:vector, funct
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/sum_of_arithmetic_series.py
 # ----------------------------------------------------------------------------------------
-def sum_of_series(first_term, common_diff, num_of_terms): # function:sum_of_series (-> +2), function_argument:common_diff, function_argument:first_term, function_argument:num_of_terms, function_argument_flavor:arg, function_returning_something:sum_of_series (-> +2), lines_of_code:5 (-> +4)
+def sum_of_series(first_term, common_diff, num_of_terms): # function:sum_of_series (-> +2), function_argument:common_diff, function_argument:first_term, function_argument:num_of_terms, function_argument_flavor:arg, function_returning_something:sum_of_series (-> +2)
     sum = (num_of_terms / 2) * (2 * first_term + (num_of_terms - 1) * common_diff) # assignment:Mult, assignment_lhs_identifier:sum, assignment_rhs_atom:1, assignment_rhs_atom:2, assignment_rhs_atom:common_diff, assignment_rhs_atom:first_term, assignment_rhs_atom:num_of_terms, binary_operator:Add, binary_operator:Div, binary_operator:Mult, binary_operator:Sub, literal:1, literal:2, single_assignment:sum
     return sum # return:sum
 def main(): # function:main (-> +1), function_returning_nothing:main (-> +1), function_without_arguments:main (-> +1)
@@ -1238,13 +1238,13 @@ def main(): # function:main (-> +1), function_returning_nothing:main (-> +1), fu
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/test_prime_check.py
 # ----------------------------------------------------------------------------------------
-from .prime_check import Test # import:prime_check:Test, import_module:prime_check, import_name:Test, lines_of_code:2 (-> +1)
+from .prime_check import Test # import:prime_check:Test, import_module:prime_check, import_name:Test
 Test() # function_call:Test, function_call_without_arguments:Test, function_call_without_result:Test
 
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/trapezoidal_rule.py
 # ----------------------------------------------------------------------------------------
-def method_1(boundary, steps): # function:method_1 (-> +10), function_argument:boundary, function_argument:steps, function_argument_flavor:arg, function_returning_something:method_1 (-> +10), lines_of_code:26 (-> +25)
+def method_1(boundary, steps): # function:method_1 (-> +10), function_argument:boundary, function_argument:steps, function_argument_flavor:arg, function_returning_something:method_1 (-> +10)
     h = (boundary[1] - boundary[0]) / steps # assignment:Div, assignment_lhs_identifier:h, assignment_rhs_atom:0, assignment_rhs_atom:1, assignment_rhs_atom:boundary, assignment_rhs_atom:steps, binary_operator:Div, binary_operator:Sub, index:0, index:1, literal:0, literal:1, single_assignment:h
     a = boundary[0] # assignment, assignment_lhs_identifier:a, assignment_rhs_atom:0, assignment_rhs_atom:boundary, index:0, literal:0, single_assignment:a
     b = boundary[1] # assignment, assignment_lhs_identifier:b, assignment_rhs_atom:1, assignment_rhs_atom:boundary, index:1, literal:1, single_assignment:b
@@ -1274,7 +1274,7 @@ def main(): # function:main (-> +6), function_returning_nothing:main (-> +6), fu
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/volume.py
 # ----------------------------------------------------------------------------------------
-from math import pi # import:math:pi, import_module:math, import_name:pi, lines_of_code:27 (-> +26)
+from math import pi # import:math:pi, import_module:math, import_name:pi
 def vol_cube(side_length): # function:vol_cube (-> +1), function_argument:side_length, function_argument_flavor:arg, function_returning_something:vol_cube (-> +1)
     return float(side_length ** 3) # binary_operator:Pow, call_argument:, function_call:float, function_tail_call:float, literal:3, return, suggest_constant_definition
 def vol_cuboid(width, height, length): # function:vol_cuboid (-> +1), function_argument:height, function_argument:length, function_argument:width, function_argument_flavor:arg, function_returning_something:vol_cuboid (-> +1)
@@ -1305,7 +1305,7 @@ def main(): # function:main (-> +9), function_returning_nothing:main (-> +9), fu
 # ----------------------------------------------------------------------------------------
 # ../Python/maths/zellers_congruence.py
 # ----------------------------------------------------------------------------------------
-import datetime # import:datetime, import_module:datetime, lines_of_code:49 (-> +48)
+import datetime # import:datetime, import_module:datetime
 import argparse # import:argparse, import_module:argparse
 def zeller(date_input: str) -> str: # function:zeller (-> +46), function_argument:date_input, function_argument_flavor:arg, function_returning_something:zeller (-> +46)
     days = { # assignment, assignment_lhs_identifier:days, literal:Dict, single_assignment:days

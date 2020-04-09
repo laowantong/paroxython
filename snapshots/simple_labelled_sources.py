@@ -4,7 +4,6 @@
 a = b # assignment
       # assignment_lhs_identifier:a
       # assignment_rhs_atom:b
-      # lines_of_code:1
       # single_assignment:a
 
 # ----------------------------------------------------------------------------------------
@@ -15,7 +14,6 @@ def print_collatz(n): # added_block_label (-> +7)
                       # function_argument:n
                       # function_argument_flavor:arg
                       # function_returning_nothing:print_collatz (-> +7)
-                      # lines_of_code:8 (-> +7)
     while n != 1: # comparison_operator:NotEq
                   # literal:1
                   # loop:while (-> +5)
@@ -78,7 +76,6 @@ for i in range(1, 101): # call_argument:1
                         # for:i (-> +8)
                         # for_range:1:101 (-> +8)
                         # function_call:range
-                        # lines_of_code:9 (-> +8)
                         # literal:1
                         # literal:101
                         # loop:for (-> +8)
@@ -141,7 +138,6 @@ def is_even(n): # function:is_even (-> +1)
                 # function_argument:n
                 # function_argument_flavor:arg
                 # function_returning_something:is_even (-> +1)
-                # lines_of_code:2 (-> +1)
     return n % 2 == 0 # binary_operator:Mod
                       # comparison_operator:Eq
                       # divisibility_test:2
