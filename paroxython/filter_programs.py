@@ -1,119 +1,124 @@
 import json
+from functools import lru_cache
 from pathlib import Path
 from typing import Callable, Dict, List, Set
 
 import regex  # type: ignore
 
 from user_types import (
-    TaxonName,
-    TaxonNames,
-    TaxonPatterns,
+    JsonDatabase,
     ProgramName,
     ProgramNames,
+    ProgramNameSet,
     ProgramPatterns,
+    TaxonName,
+    TaxonNames,
+    TaxonNameSet,
+    TaxonPatterns,
 )
 
 HORIZONTAL_RULE = "-" * 80
 
 
 class ProgramFilter:
-    def __init__(self, db: Dict) -> None:
-        self.program_names = db["programs"]
-        self.taxons = db["taxons"]
+    def __init__(self, db: JsonDatabase) -> None:
+        self.db_programs = db["programs"]
+        self.db_taxons = db["taxons"]
+        self.db_program_taxon_names = {p: self.db_programs[p]["taxons"] for p in self.db_programs}
         self.reset()
 
     def reset(self) -> None:
-        self.result: Set[ProgramName] = set(self.program_names.keys())
-        self.counts = {"initially": len(self.program_names)}
+        self.program_names: ProgramNameSet = set(self.db_programs.keys())
+        self.counts = {"initially": len(self.db_programs)}
 
     def update(self, *program_names: ProgramNames) -> None:
-        "Update self.result, adding programs from all the given ones."
-        self.result.update(*program_names)
+        "Update self.program_names, adding programs from all the given ones."
+        self.program_names.update(*program_names)
 
     def intersection_update(self, *program_names: ProgramNames) -> None:
-        "Update self.result, keeping only programs found in it and all the given ones."
-        self.result.intersection_update(*program_names)
+        "Update self.program_names, keeping only programs found in it and all the given ones."
+        self.program_names.intersection_update(*program_names)
 
     def difference_update(self, *program_names: ProgramNames) -> None:
-        "Update self.result, removing programs found in the given ones."
-        self.result.difference_update(*program_names)
+        "Update self.program_names, removing programs found in the given ones."
+        self.program_names.difference_update(*program_names)
 
-    def symmetric_difference_update(self, program_names: ProgramNames) -> None:
-        "Update self.result, keeping only programs found in either set, but not in both."
-        self.result.symmetric_difference_update(program_names)
+    def symmetric_difference_update(self, *program_names: ProgramNames) -> None:
+        "Update self.program_names, keeping only programs found in either set, but not in both."
+        self.program_names.symmetric_difference_update(*program_names)
 
     def complement_update(self):
-        "Update self.result, taking only programs filtered out so far."
-        self.result = set(self.program_names).difference(self.result)
+        "Update self.program_names, taking only programs filtered out so far."
+        self.program_names = set(self.db_programs).difference(self.program_names)
 
     def filter_blacklisted_programs(self, patterns: ProgramPatterns) -> None:
-        """Suppress from self.result all programs whose name matches any blacklisted pattern."""
-        count = len(self.result)
+        """Suppress from self.program_names all programs whose name matches any blacklisted pattern."""
+        count = len(self.program_names)
         if patterns:
             match = regex.compile("|".join(patterns)).match
             acc: Set[ProgramName] = set()
-            for program_name in list(self.result):
+            for program_name in list(self.program_names):
                 if match(program_name):
                     acc.add(program_name)
-            self.result.difference_update(acc)
-        self.counts["blacklisted"] = count - len(self.result)
+            self.program_names.difference_update(acc)
+        self.counts["blacklisted"] = count - len(self.program_names)
 
     def filter_forbidden_taxons(self, patterns: TaxonPatterns) -> None:
-        """Suppress from self.result all programs using any forbidden taxon."""
-        count = len(self.result)
+        """Suppress from self.program_names all programs using any forbidden taxon."""
+        count = len(self.program_names)
         if patterns:
             match = regex.compile("|".join(patterns)).match
             acc: Set[ProgramName] = set()
-            for (taxon_name, program_names) in self.taxons.items():
+            for (taxon_name, program_names) in self.db_taxons.items():
                 if match(taxon_name):  # this taxon is forbidden
                     acc.update(program_names)
-            self.result.difference_update(acc)
-        self.counts["tagged with a forbidden taxon"] = count - len(self.result)
+            self.program_names.difference_update(acc)
+        self.counts["tagged with a forbidden taxon"] = count - len(self.program_names)
 
     def filter_mandatory_taxons(self, patterns: TaxonPatterns) -> None:
-        """Suppress from self.result all programs not using at least one mandatory taxon."""
-        count = len(self.result)
+        """Suppress from self.program_names all programs not using at least one mandatory taxon."""
+        count = len(self.program_names)
         if patterns:
             matches = [regex.compile(row).match for row in patterns]
             acc: Set[ProgramName] = set()
-            for program_name in self.result:
+            for program_name in self.program_names:
                 for match in matches:
-                    for taxon_name in self.program_names[program_name]["taxons"]:
+                    for taxon_name in self.db_program_taxon_names[program_name]:
                         if match(taxon_name):  # this mandatory taxon is used
                             break  # no need to test the other taxons of this program
                     else:  # this mandatory taxon is not used by this program
                         acc.add(program_name)
                         break  # no need to test the other mandatory taxons
-            self.result.difference_update(acc)
-        self.counts["not tagged with a mandatory taxon"] = count - len(self.result)
+            self.program_names.difference_update(acc)
+        self.counts["not tagged with a mandatory taxon"] = count - len(self.program_names)
 
-    def get_taxons_in_programs(self, patterns: ProgramPatterns) -> Set[TaxonName]:
+    def get_taxons_in_programs(self, patterns: ProgramPatterns) -> TaxonNameSet:
         """Return all taxons included in at least one program of the given list."""
-        result: Set[TaxonName] = set()
+        result: TaxonNameSet = set()
         if patterns:
             match = regex.compile("|".join(patterns)).match
-            for program_name in self.result:
+            for program_name in self.program_names:
                 if match(program_name):
-                    result.update(self.program_names[program_name]["taxons"])
+                    result.update(self.db_program_taxon_names[program_name])
         return result
 
-    def get_taxons_not_in_programs(self, patterns: ProgramPatterns) -> Set[TaxonName]:
+    def get_taxons_not_in_programs(self, patterns: ProgramPatterns) -> TaxonNameSet:
         """Return all taxons not included in any program of the given list."""
-        result: Set[TaxonName] = set(self.taxons.keys())
+        result: TaxonNameSet = set(self.db_taxons.keys())
         if patterns:
             match = regex.compile("|".join(patterns)).match
-            for program_name in self.result:
+            for program_name in self.program_names:
                 if match(program_name):
-                    result.difference_update(self.program_names[program_name]["taxons"])
+                    result.difference_update(self.db_program_taxon_names[program_name])
         return result
 
     def get_extra_taxons(self, patterns: TaxonPatterns) -> Dict[ProgramName, TaxonNames]:
         """For each program, list those of its taxons which are not among the given taxons."""
         match = regex.compile("|".join(patterns)).match
         extra_taxon_names: Dict[ProgramName, TaxonNames] = {}
-        for program_name in self.result:
+        for program_name in self.program_names:
             extra_taxon_names[program_name] = []
-            for taxon_name in self.program_names[program_name]["taxons"]:
+            for taxon_name in self.db_program_taxon_names[program_name]:
                 if not match(taxon_name):
                     extra_taxon_names[program_name].append(taxon_name)
         return extra_taxon_names
@@ -122,10 +127,10 @@ class ProgramFilter:
         """For each program, list those of the given taxons that it does not include."""
         matches = [regex.compile(row).match for row in patterns]
         lacking_taxon_patterns: Dict[ProgramName, TaxonPatterns] = {}
-        for program_name in self.result:
+        for program_name in self.program_names:
             lacking_taxon_patterns[program_name] = []
             for (match, wanted_taxon) in zip(matches, patterns):
-                for taxon_name in self.program_names[program_name]["taxons"]:
+                for taxon_name in self.db_program_taxon_names[program_name]:
                     if match(taxon_name):  # this wanted taxon is used
                         break  # no need to test the other taxons of this program
                 else:  # this wanted taxon is not used by this program
@@ -133,16 +138,16 @@ class ProgramFilter:
         return lacking_taxon_patterns
 
     def sorted(self, key: Callable, reverse: bool) -> ProgramNames:
-        """Generic sort. Use the following helpers instead."""
-        return sorted(self.result, key=lambda p: (key(p), p), reverse=reverse)
+        """Generic program sort. Use the following helpers instead."""
+        return sorted(self.program_names, key=lambda p: (key(p), p), reverse=reverse)
 
     def sorted_by_taxon_count(self, reverse=False) -> ProgramNames:
         """Sort the programs by number of distinct taxons."""
-        return self.sorted(lambda p: len(self.program_names[p]["taxons"]), reverse)
+        return self.sorted(lambda p: len(self.db_programs[p]["taxons"]), reverse)
 
     def sorted_by_line_count(self, reverse=False) -> ProgramNames:
         """Sort the programs by SLOC count."""
-        return self.sorted(lambda p: self.program_names[p]["source"].count("\n"), reverse)
+        return self.sorted(lambda p: self.db_programs[p]["source"].count("\n"), reverse)
 
     def sorted_by_extra_taxon_count(self, taxons: TaxonPatterns, reverse=False) -> ProgramNames:
         """Sort the programs by number of extra taxons wrt a given list."""
@@ -156,14 +161,14 @@ class ProgramFilter:
 
     def sorted_by_distance(self, taxons: TaxonPatterns, reverse=False) -> ProgramNames:
         """Sort the programs by number of extra and lacking taxons wrt a given list."""
-        extra = self.get_extra_taxons(taxons)
-        lacking = self.get_lacking_taxons(taxons)
-        return self.sorted(lambda p: len(extra[p]) + len(lacking[p]), reverse)
+        extra_taxons = self.get_extra_taxons(taxons)
+        lacking_taxons = self.get_lacking_taxons(taxons)
+        return self.sorted(lambda p: len(extra_taxons[p]) + len(lacking_taxons[p]), reverse)
 
     def __repr__(self):
         result: List[str] = []
-        for program_name in self.result:
-            program = self.program_names[program_name]
+        for program_name in self.program_names:
+            program = self.db_programs[program_name]
             result.append("")
             result.append(HORIZONTAL_RULE)
             result.append(program_name)
@@ -173,7 +178,7 @@ class ProgramFilter:
             for (other_name, spans) in program["taxons"].items():
                 result.append(f"{len(spans):3}: {other_name}")
         result.append(HORIZONTAL_RULE)
-        self.counts["remaining"] = len(self.result)
+        self.counts["remaining"] = len(self.program_names)
         for (description, count) in self.counts.items():
             plural = "" if count == 1 else "s"
             result.append(f"{count:3} program{plural} {description}")

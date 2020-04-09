@@ -39,29 +39,39 @@ f = ProgramFilter(db)
 
 def test_no_filter():
     f.reset()
-    print(f.result)
-    assert f.result == {"prg1", "prg2", "prg3", "prg4", "prg5", "prg6", "prg7", "prg8", "prg9"}
+    print(f.program_names)
+    assert f.program_names == {
+        "prg1",
+        "prg2",
+        "prg3",
+        "prg4",
+        "prg5",
+        "prg6",
+        "prg7",
+        "prg8",
+        "prg9",
+    }
 
 
 def test_filter_blacklisted_programs():
     f.reset()
     f.filter_blacklisted_programs(["prg[1-5]$"])
-    print(f.result)
-    assert f.result == {"prg6", "prg7", "prg8", "prg9"}
+    print(f.program_names)
+    assert f.program_names == {"prg6", "prg7", "prg8", "prg9"}
 
 
 def test_filter_mandatory_taxons():
     f.reset()
     f.filter_mandatory_taxons(["O$", "O/C/F/U$"])
-    print(f.result)
-    assert f.result == {"prg3", "prg4", "prg7"}
+    print(f.program_names)
+    assert f.program_names == {"prg3", "prg4", "prg7"}
 
 
 def test_filter_forbidden_taxons():
     f.reset()
     f.filter_forbidden_taxons(["O$", "O/C/F/U$"])
-    print(f.result)
-    assert f.result == {"prg1", "prg5"}
+    print(f.program_names)
+    assert f.program_names == {"prg1", "prg5"}
 
 
 def test_get_taxons_in_programs():
@@ -104,23 +114,23 @@ def test_get_taxons_not_in_programs():
 def test_set_operations():
     f.reset()
     f.filter_mandatory_taxons(["O$", "O/C/F/U$"])
-    print(f.result)
-    assert f.result == {"prg3", "prg4", "prg7"}
+    print(f.program_names)
+    assert f.program_names == {"prg3", "prg4", "prg7"}
     f.complement_update()
-    print(f.result)
-    assert f.result == {"prg9", "prg5", "prg6", "prg1", "prg2", "prg8"}
+    print(f.program_names)
+    assert f.program_names == {"prg9", "prg5", "prg6", "prg1", "prg2", "prg8"}
     f.update({"prg7"})
-    print(f.result)
-    assert f.result == {"prg9", "prg5", "prg6", "prg1", "prg2", "prg8", "prg7"}
+    print(f.program_names)
+    assert f.program_names == {"prg9", "prg5", "prg6", "prg1", "prg2", "prg8", "prg7"}
     f.difference_update({"prg6", "prg1"})
-    print(f.result)
-    assert f.result == {"prg9", "prg5", "prg2", "prg8", "prg7"}
+    print(f.program_names)
+    assert f.program_names == {"prg9", "prg5", "prg2", "prg8", "prg7"}
     f.symmetric_difference_update({"prg9", "prg5", "prg1"})
-    print(f.result)
-    assert f.result == {"prg1", "prg2", "prg8", "prg7"}
+    print(f.program_names)
+    assert f.program_names == {"prg1", "prg2", "prg8", "prg7"}
     f.intersection_update({"prg1", "prg2", "prg5"}, {"prg2", "prg8"})
-    print(f.result)
-    assert f.result == {"prg2"}
+    print(f.program_names)
+    assert f.program_names == {"prg2"}
 
 
 def test_get_extra_taxons():
