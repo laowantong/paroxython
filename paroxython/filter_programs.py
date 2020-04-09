@@ -4,11 +4,16 @@ from typing import Callable, Dict, List, Set
 
 import regex  # type: ignore
 
-from user_types import TaxonName, TaxonNames, ProgramName, ProgramNames
+from user_types import (
+    TaxonName,
+    TaxonNames,
+    TaxonPatterns,
+    ProgramName,
+    ProgramNames,
+    ProgramPatterns,
+)
 
-
-ProgramPatterns = List[str]
-TaxonPatterns = List[str]
+HORIZONTAL_RULE = "-" * 80
 
 
 class ProgramFilter:
@@ -160,14 +165,14 @@ class ProgramFilter:
         for program_name in self.result:
             program = self.program_names[program_name]
             result.append("")
-            result.append("-" * 80)
+            result.append(HORIZONTAL_RULE)
             result.append(program_name)
-            result.append("-" * 80)
+            result.append(HORIZONTAL_RULE)
             result.append(program["source"])
             result.append("")
             for (other_name, spans) in program["taxons"].items():
                 result.append(f"{len(spans):3}: {other_name}")
-        result.append("-" * 80)
+        result.append(HORIZONTAL_RULE)
         self.counts["remaining"] = len(self.result)
         for (description, count) in self.counts.items():
             plural = "" if count == 1 else "s"

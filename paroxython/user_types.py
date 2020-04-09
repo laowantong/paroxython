@@ -45,6 +45,8 @@ class PathTaxons(NamedTuple):
     path: Path
     taxons: Taxons
 
+TaxonPatterns = List[str]
+
 
 # Programs
 
@@ -58,6 +60,8 @@ class Program(NamedTuple):
     addition: LabelsSpans = {}
     deletion: LabelsSpans = {}
     labels: Labels = []
+
+ProgramPatterns = List[str]
 
 
 # Serialization-ready types used for the JSON database
