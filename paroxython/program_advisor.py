@@ -67,7 +67,7 @@ class ProgramAdvisor:
         elif strategy == "length":
             self.depths_to_cost = depths_to_cost_length
         else:
-            raise NotImplementedError  # pragma: no cover
+            raise NotImplementedError  # type: ignore
 
     def init_old_programs(self, **kwargs):
         program_names = get_studied_programs_from_syllabus(**kwargs)

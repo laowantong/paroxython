@@ -5,6 +5,7 @@ import regex  # type: ignore
 
 from filter_programs import ProgramFilter
 from user_types import (
+    JsonDatabase,
     ProgramName,
     ProgramNames,
     ProgramNameSet,
@@ -54,8 +55,8 @@ def get_prefixes_of_taxon_names(taxon_name: TaxonName) -> TaxonNames:
 
 
 class ProgramAdvisor:
-    def __init__(self, program_filter: ProgramFilter):
-        self.program_filter = program_filter
+    def __init__(self, db: JsonDatabase):
+        self.program_filter = ProgramFilter(db)
         self.old_program_names: ProgramNameSet = set()
         self.old_taxon_names: TaxonNameSet = set()
 
@@ -67,7 +68,7 @@ class ProgramAdvisor:
         elif strategy == "length":
             self.depths_to_cost = depths_to_cost_length
         else:
-            raise NotImplementedError  # pragma: no cover
+            raise NotImplementedError  # type: ignore
 
     def init_old_programs(self, **kwargs):
         program_names = get_studied_programs_from_syllabus(**kwargs)
@@ -107,7 +108,7 @@ if __name__ == "__main__":
     Path = __import__("pathlib").Path
     json = __import__("json")
     db = json.loads(Path("db.json").read_text())
-    advisor = ProgramAdvisor(ProgramFilter(db))
+    advisor = ProgramAdvisor(db)
     syllabus = Path("../algo/timeline.txt").read_text()
     advisor.init_old_programs(syllabus=syllabus, path_prefix="../algo/programs/")
     advisor.set_cost_computation_strategy("zeno")

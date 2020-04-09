@@ -78,6 +78,8 @@ def test_run():
     assert advisor.compute_taxon_cost("variable") == 0
     assert advisor.compute_taxon_cost("foo/bar/bizz/buzz") == 1 / 2 + 1 / 4 + 1 / 8 + 1 / 16
 
+    assert advisor.compute_program_cost("tests/data/simple/collatz_print.py") == 4.4375
+
     advisor.set_cost_computation_strategy("length")
 
     assert advisor.compute_taxon_cost("variable/assignment/conditional/verbose") == 2
@@ -85,3 +87,9 @@ def test_run():
     assert advisor.compute_taxon_cost("variable/assignment") == 0
     assert advisor.compute_taxon_cost("variable") == 0
     assert advisor.compute_taxon_cost("foo/bar/bizz/buzz") == 4
+
+    assert advisor.compute_program_cost("tests/data/simple/collatz_print.py") == 17
+
+    recommendations = advisor.get_recommendations()
+    assert "[17.0] tests/data/simple/collatz_print.py" in recommendations
+    assert "[25.0] tests/data/simple/fizzbuzz.py" in recommendations

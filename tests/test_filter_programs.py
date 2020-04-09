@@ -297,3 +297,12 @@ def test_sorted_by_line_count():
         (8, "prg7"),
         (8, "prg9"),
     ]
+
+
+def test_str():
+    f.reset()
+    f.sort_by_line_count()
+    text = str(f)
+    print(text)
+    assert "[5] prg8" in text
+    assert "[8] prg1" in text
