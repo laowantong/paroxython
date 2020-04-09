@@ -19,6 +19,7 @@ Path(f"{base}.dot").write_text(
             '"default_taxonomy.tsv" [shape=note fillcolor=moccasin]',
             '"source files" [shape=folder fillcolor=moccasin]',
             '"sqlite_queries" [shape=folder fillcolor=moccasin]',
+            '"syllabus.txt" [shape=note fillcolor=moccasin]',
             'make_db -> "db.json"',
             'make_db -> "db.sqlite"',
             '"db.sqlite" -> sqlite_queries',
@@ -26,6 +27,7 @@ Path(f"{base}.dot").write_text(
             '"spec.md" -> parse_program',
             '"source files" -> generate_programs',
             '"default_taxonomy.tsv" -> map_taxonomy',
+            '"syllabus.txt" -> recommend_programs',
         ]
         + [
             f"{imported_name} -> {name}"
