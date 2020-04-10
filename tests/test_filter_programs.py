@@ -5,7 +5,7 @@ import pytest
 import regex  # type: ignore
 
 import context
-from paroxython.filter_programs import ProgramFilter
+from paroxython.filter_programs import DatabaseFilter
 
 text = Path("tests/data/dummy_taxons_and_programs.txt").read_text()
 
@@ -14,7 +14,8 @@ programs = regex.findall(r"(?ms)^(prg\d+)\n(.+?)\n\n", text)
 
 db = {
     "programs": {
-        name: {"source": source, "taxons": defaultdict(list)} for (name, source) in programs
+        program_name: {"source": source, "taxons": defaultdict(list),}
+        for (program_name, source) in programs
     },
     "taxons": {taxon_name: set() for taxon_name in taxon_names},
 }
@@ -34,13 +35,11 @@ for (program_name, source) in programs:
 # from pprint import pprint
 # pprint(db, width=200)
 
-f = ProgramFilter(db)
-
 
 def test_no_filter():
-    f.reset()
-    print(f.program_names)
-    assert f.program_names == {
+    dbf = DatabaseFilter(db)
+    print(dbf.program_names)
+    assert dbf.program_names == {
         "prg1",
         "prg2",
         "prg3",
@@ -54,29 +53,29 @@ def test_no_filter():
 
 
 def test_filter_blacklisted_programs():
-    f.reset()
-    f.filter_blacklisted_programs(["prg[1-5]$"])
-    print(f.program_names)
-    assert f.program_names == {"prg6", "prg7", "prg8", "prg9"}
+    dbf = DatabaseFilter(db)
+    dbf.filter_blacklisted_programs(["prg[1-5]$"])
+    print(dbf.program_names)
+    assert dbf.program_names == {"prg6", "prg7", "prg8", "prg9"}
 
 
 def test_filter_mandatory_taxons():
-    f.reset()
-    f.filter_mandatory_taxons(["O$", "O/C/F/U$"])
-    print(f.program_names)
-    assert f.program_names == {"prg3", "prg4", "prg7"}
+    dbf = DatabaseFilter(db)
+    dbf.filter_mandatory_taxons(["O$", "O/C/F/U$"])
+    print(dbf.program_names)
+    assert dbf.program_names == {"prg3", "prg4", "prg7"}
 
 
 def test_filter_forbidden_taxons():
-    f.reset()
-    f.filter_forbidden_taxons(["O$", "O/C/F/U$"])
-    print(f.program_names)
-    assert f.program_names == {"prg1", "prg5"}
+    dbf = DatabaseFilter(db)
+    dbf.filter_forbidden_taxons(["O$", "O/C/F/U$"])
+    print(dbf.program_names)
+    assert dbf.program_names == {"prg1", "prg5"}
 
 
 def test_get_taxons_in_programs():
-    f.reset()
-    result = f.get_taxons_in_programs(["prg[1-3]$"])
+    dbf = DatabaseFilter(db)
+    result = dbf.get_taxons_in_programs(["prg[1-3]$"])
     print(result)
     assert result == {
         "O",
@@ -106,36 +105,37 @@ def test_get_taxons_in_programs():
 
 
 def test_get_taxons_not_in_programs():
-    result = f.get_taxons_not_in_programs(["prg[1-3]$"])
+    dbf = DatabaseFilter(db)
+    result = dbf.get_taxons_not_in_programs(["prg[1-3]$"])
     print(result)
     assert result == {"O/C/F", "X/S/M/L/R/D/A"}
 
 
 def test_set_operations():
-    f.reset()
-    f.filter_mandatory_taxons(["O$", "O/C/F/U$"])
-    print(f.program_names)
-    assert f.program_names == {"prg3", "prg4", "prg7"}
-    f.complement_update()
-    print(f.program_names)
-    assert f.program_names == {"prg9", "prg5", "prg6", "prg1", "prg2", "prg8"}
-    f.update({"prg7"})
-    print(f.program_names)
-    assert f.program_names == {"prg9", "prg5", "prg6", "prg1", "prg2", "prg8", "prg7"}
-    f.difference_update({"prg6", "prg1"})
-    print(f.program_names)
-    assert f.program_names == {"prg9", "prg5", "prg2", "prg8", "prg7"}
-    f.symmetric_difference_update({"prg9", "prg5", "prg1"})
-    print(f.program_names)
-    assert f.program_names == {"prg1", "prg2", "prg8", "prg7"}
-    f.intersection_update({"prg1", "prg2", "prg5"}, {"prg2", "prg8"})
-    print(f.program_names)
-    assert f.program_names == {"prg2"}
+    dbf = DatabaseFilter(db)
+    dbf.filter_mandatory_taxons(["O$", "O/C/F/U$"])
+    print(dbf.program_names)
+    assert dbf.program_names == {"prg3", "prg4", "prg7"}
+    dbf.complement_update()
+    print(dbf.program_names)
+    assert dbf.program_names == {"prg9", "prg5", "prg6", "prg1", "prg2", "prg8"}
+    dbf.update({"prg7"})
+    print(dbf.program_names)
+    assert dbf.program_names == {"prg9", "prg5", "prg6", "prg1", "prg2", "prg8", "prg7"}
+    dbf.difference_update({"prg6", "prg1"})
+    print(dbf.program_names)
+    assert dbf.program_names == {"prg9", "prg5", "prg2", "prg8", "prg7"}
+    dbf.symmetric_difference_update({"prg9", "prg5", "prg1"})
+    print(dbf.program_names)
+    assert dbf.program_names == {"prg1", "prg2", "prg8", "prg7"}
+    dbf.intersection_update({"prg1", "prg2", "prg5"}, {"prg2", "prg8"})
+    print(dbf.program_names)
+    assert dbf.program_names == {"prg2"}
 
 
 def test_get_extra_taxons():
-    f.reset()
-    result = f.get_extra_taxons(["O", "X"])
+    dbf = DatabaseFilter(db)
+    result = dbf.get_extra_taxons(["O", "X"])
     print(result)
     assert result == {
         "prg1": ["Y", "Y/T", "Y/T/Q"],
@@ -151,10 +151,10 @@ def test_get_extra_taxons():
 
 
 def test_sort_by_extra_taxon_count():
-    f.reset()
-    f.sort_by_extra_taxon_count(["O", "X"])
-    print(f.sorted_programs)
-    assert f.sorted_programs == [
+    dbf = DatabaseFilter(db)
+    dbf.sort_by_extra_taxon_count(["O", "X"])
+    print(dbf.sorted_programs)
+    assert dbf.sorted_programs == [
         (0, "prg5"),  # no extra taxon, see test_get_extra_taxons()
         (1, "prg8"),  # 1 extra taxons
         (3, "prg1"),  # 3 extra taxons
@@ -168,8 +168,8 @@ def test_sort_by_extra_taxon_count():
 
 
 def test_get_lacking_taxons():
-    f.reset()
-    result = f.get_lacking_taxons(["O$", "O/C/H$", "O/C/F/U$"])
+    dbf = DatabaseFilter(db)
+    result = dbf.get_lacking_taxons(["O$", "O/C/H$", "O/C/F/U$"])
     print(result)
     assert result == {
         "prg1": ["O$", "O/C/F/U$", "O/C/H$"],
@@ -185,10 +185,10 @@ def test_get_lacking_taxons():
 
 
 def test_sort_by_lacking_taxon_count():
-    f.reset()
-    f.sort_by_lacking_taxon_count(["O$", "O/C/H$", "O/C/F/U$"])
-    print(f.sorted_programs)
-    assert f.sorted_programs == [
+    dbf = DatabaseFilter(db)
+    dbf.sort_by_lacking_taxon_count(["O$", "O/C/H$", "O/C/F/U$"])
+    print(dbf.sorted_programs)
+    assert dbf.sorted_programs == [
         (0, "prg3"),  # prg3 has all the wanted taxons
         (1, "prg4"),  # 1 taxon is lacking
         (1, "prg7"),
@@ -202,9 +202,9 @@ def test_sort_by_lacking_taxon_count():
 
 
 def test_sort_by_distance():
-    f.reset()
+    dbf = DatabaseFilter(db)
     taxon_names = [name + "$" for name in db["programs"]["prg3"]["taxons"]]
-    lacking = f.get_lacking_taxons(taxon_names)
+    lacking = dbf.get_lacking_taxons(taxon_names)
     print(lacking)
     assert lacking == {
         "prg1": ["O$", "O/C/F/U$", "O/C/H$", "O/C/H/B$", "X/S/M/L/V$", "Y/E$"],
@@ -237,7 +237,7 @@ def test_sort_by_distance():
         "prg8": ["O$", "O/C/H$", "X/S$", "X/S/M$", "X/S/M/L/R$", "Y$", "Y/T$"],
         "prg9": ["O/C/F/U$", "O/C/H/B$", "O/N/P$", "X/S$", "X/S/M/L$"],
     }
-    extra = f.get_extra_taxons(taxon_names)
+    extra = dbf.get_extra_taxons(taxon_names)
     print(extra)
     assert extra == {
         "prg1": ["O/N", "X", "X/S/M/L/R/D", "X/W", "Y/T/Q"],
@@ -250,9 +250,9 @@ def test_sort_by_distance():
         "prg8": ["O/C", "O/N", "X/S/M/L/R/D", "X/S/M/L/R/D/A", "X/W"],
         "prg9": ["O/C/F", "O/C/H/B/I", "O/N", "X/W", "Y/T/Q"],
     }
-    f.sort_by_distance(taxon_names)
-    print(f.sorted_programs)
-    assert f.sorted_programs == [
+    dbf.sort_by_distance(taxon_names)
+    print(dbf.sorted_programs)
+    assert dbf.sorted_programs == [
         (0, "prg3"),  #  0 lacking and 0 extra taxons
         (9, "prg7"),  #  4             5
         (10, "prg9"),  # 5             5
@@ -266,10 +266,10 @@ def test_sort_by_distance():
 
 
 def test_sort_by_taxon_count():
-    f.reset()
-    f.sort_by_taxon_count()
-    print(f.sorted_programs)
-    assert f.sorted_programs == [
+    dbf = DatabaseFilter(db)
+    dbf.sort_by_taxon_count()
+    print(dbf.sorted_programs)
+    assert dbf.sorted_programs == [
         (12, "prg5"),
         (13, "prg2"),
         (13, "prg8"),
@@ -283,10 +283,10 @@ def test_sort_by_taxon_count():
 
 
 def test_sorted_by_line_count():
-    f.reset()
-    f.sort_by_line_count()
-    print(f.sorted_programs)
-    assert f.sorted_programs == [
+    dbf = DatabaseFilter(db)
+    dbf.sort_by_line_count()
+    print(dbf.sorted_programs)
+    assert dbf.sorted_programs == [
         (5, "prg8"),
         (8, "prg1"),
         (8, "prg2"),
@@ -300,9 +300,9 @@ def test_sorted_by_line_count():
 
 
 def test_str():
-    f.reset()
-    f.sort_by_line_count()
-    text = str(f)
+    dbf = DatabaseFilter(db)
+    dbf.sort_by_line_count()
+    text = str(dbf)
     print(text)
     assert "[5] prg8" in text
     assert "[8] prg1" in text

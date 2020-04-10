@@ -21,18 +21,23 @@ from user_types import (
 HORIZONTAL_RULE = "-" * 80
 
 
-class ProgramFilter:
-    def __init__(self, db: JsonDatabase) -> None:
-        self.db_programs = db["programs"]
-        self.db_taxons = db["taxons"]
-        self.db_program_taxon_names = {
-            p: set(self.db_programs[p]["taxons"].keys()) for p in self.db_programs
-        }
-        self.reset()
+class DatabaseFilter:
+    """
+    Mutate a set of program names accross various operations, or filters.
 
-    def reset(self) -> None:
-        self.program_names: ProgramNameSet = set(self.db_programs.keys())
-        self.counts = {"initially": len(self.db_programs)}
+    Initialized with a DB of tagged programs constructed by make_db.py.
+    The attribute program_names is considered as public, and maintains
+    the current set of filtered program names.
+    """
+
+    def __init__(self, db: JsonDatabase) -> None:
+        self.db = db
+        self.program_names: ProgramNameSet = set(db["programs"])
+        self.counts = {"initially": len(self.program_names)}
+
+    def program_taxons(self, program_name):
+        """Return the dictionary of taxons associated with a given program name."""
+        return self.db["programs"][program_name]["taxons"]
 
     def update(self, *program_names: ProgramNames) -> None:
         "Update self.program_names, adding programs from all the given ones."
@@ -52,7 +57,7 @@ class ProgramFilter:
 
     def complement_update(self):
         "Update self.program_names, taking only programs filtered out so far."
-        self.program_names = set(self.db_programs).difference(self.program_names)
+        self.program_names = set(self.db["programs"]).difference(self.program_names)
 
     def intersection(self, *program_names: ProgramNames) -> ProgramNameSet:
         "Return those of the given program names which are present in self.program_names."
@@ -63,7 +68,7 @@ class ProgramFilter:
         count = len(self.program_names)
         if patterns:
             match = regex.compile("|".join(patterns)).match
-            acc: Set[ProgramName] = set()
+            acc: ProgramNameSet = set()
             for program_name in list(self.program_names):
                 if match(program_name):
                     acc.add(program_name)
@@ -75,8 +80,8 @@ class ProgramFilter:
         count = len(self.program_names)
         if patterns:
             match = regex.compile("|".join(patterns)).match
-            acc: Set[ProgramName] = set()
-            for (taxon_name, program_names) in self.db_taxons.items():
+            acc: ProgramNameSet = set()
+            for (taxon_name, program_names) in self.db["taxons"].items():
                 if match(taxon_name):  # this taxon is forbidden
                     acc.update(program_names)
             self.program_names.difference_update(acc)
@@ -87,10 +92,10 @@ class ProgramFilter:
         count = len(self.program_names)
         if patterns:
             matches = [regex.compile(row).match for row in patterns]
-            acc: Set[ProgramName] = set()
+            acc: ProgramNameSet = set()
             for program_name in self.program_names:
                 for match in matches:
-                    for taxon_name in self.db_program_taxon_names[program_name]:
+                    for taxon_name in self.program_taxons(program_name):
                         if match(taxon_name):  # this mandatory taxon is used
                             break  # no need to test the other taxons of this program
                     else:  # this mandatory taxon is not used by this program
@@ -106,17 +111,17 @@ class ProgramFilter:
             match = regex.compile("|".join(patterns)).match
             for program_name in self.program_names:
                 if match(program_name):
-                    result.update(self.db_program_taxon_names[program_name])
+                    result.update(self.program_taxons(program_name))
         return result
 
     def get_taxons_not_in_programs(self, patterns: ProgramPatterns) -> TaxonNameSet:
         """Return all taxons not included in any program of the given list."""
-        result: TaxonNameSet = set(self.db_taxons.keys())
+        result: TaxonNameSet = set(self.db["taxons"])
         if patterns:
             match = regex.compile("|".join(patterns)).match
             for program_name in self.program_names:
                 if match(program_name):
-                    result.difference_update(self.db_program_taxon_names[program_name])
+                    result.difference_update(self.program_taxons(program_name))
         return result
 
     def get_extra_taxons(self, patterns: TaxonPatterns) -> Dict[ProgramName, TaxonNames]:
@@ -125,7 +130,7 @@ class ProgramFilter:
         extra_taxon_names: Dict[ProgramName, TaxonNames] = {}
         for program_name in self.program_names:
             extra_taxon_names[program_name] = []
-            for taxon_name in self.db_program_taxon_names[program_name]:
+            for taxon_name in self.program_taxons(program_name):
                 if not match(taxon_name):
                     insort(extra_taxon_names[program_name], taxon_name)
         return extra_taxon_names
@@ -137,7 +142,7 @@ class ProgramFilter:
         for program_name in self.program_names:
             lacking_taxon_patterns[program_name] = []
             for (match, wanted_taxon) in zip(matches, patterns):
-                for taxon_name in self.db_program_taxon_names[program_name]:
+                for taxon_name in self.program_taxons(program_name):
                     if match(taxon_name):  # this wanted taxon is used
                         break  # no need to test the other taxons of this program
                 else:  # this wanted taxon is not used by this program
@@ -150,11 +155,11 @@ class ProgramFilter:
 
     def sort_by_taxon_count(self, reverse=False):
         """Sort the programs by number of distinct taxons."""
-        self.sort(lambda p: len(self.db_programs[p]["taxons"]), reverse)
+        self.sort(lambda p: len(self.program_taxons(p)), reverse)
 
     def sort_by_line_count(self, reverse=False):
         """Sort the programs by SLOC count."""
-        self.sort(lambda p: self.db_programs[p]["source"].count("\n"), reverse)
+        self.sort(lambda p: self.db["programs"][p]["source"].count("\n"), reverse)
 
     def sort_by_extra_taxon_count(self, taxons: TaxonPatterns, reverse=False):
         """Sort the programs by number of extra taxons wrt a given list."""
@@ -175,7 +180,7 @@ class ProgramFilter:
     def __str__(self) -> str:
         result: List[str] = []
         for (weight, program_name) in self.sorted_programs:
-            program = self.db_programs[program_name]
+            program = self.db["programs"][program_name]
             result.append("")
             result.append(HORIZONTAL_RULE)
             result.append(f"[{weight}] {program_name}")
@@ -193,24 +198,23 @@ class ProgramFilter:
 
 
 if __name__ == "__main__":
+    dbf = DatabaseFilter(json.loads(Path("db.json").read_text()))
 
     forbidden_taxon_patterns = r"""
         call/method/.*
     """.strip().split()
+    dbf.filter_forbidden_taxons(forbidden_taxon_patterns)
 
     mandatory_taxon_patterns = r"""
         function_definition/.*
         operator/addition/
     """.strip().split()
+    dbf.filter_mandatory_taxons(mandatory_taxon_patterns)
 
     blacklisted_program_patterns = r"""
         .+/problem_10/.+
     """.strip().split()
+    dbf.filter_blacklisted_programs(blacklisted_program_patterns)
 
-    db = json.loads(Path("db.json").read_text())
-    f = ProgramFilter(db)
-    f.filter_forbidden_taxons(forbidden_taxon_patterns)
-    f.filter_mandatory_taxons(mandatory_taxon_patterns)
-    f.filter_blacklisted_programs(blacklisted_program_patterns)
-    f.sort_by_taxon_count()
-    print(f)
+    dbf.sort_by_taxon_count()
+    print(dbf)

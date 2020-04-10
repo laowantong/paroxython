@@ -7,7 +7,7 @@ import context
 from make_db import Database
 from recommend_programs import (
     ProgramAdvisor,
-    ProgramFilter,
+    DatabaseFilter,
     depths_to_cost_length,
     depths_to_cost_zeno,
     get_prefixes_of_taxon_names,
@@ -55,7 +55,7 @@ DB = json.loads(Path("snapshots/simple_db.json").read_text())
 
 
 def test_run():
-    advisor = ProgramAdvisor(ProgramFilter(DB))
+    advisor = ProgramAdvisor(DatabaseFilter(DB))
 
     advisor.init_old_programs(syllabus=SYLLABUS, path_prefix=PATH_PREFIX)
     print("\n".join(sorted(advisor.old_program_names)))

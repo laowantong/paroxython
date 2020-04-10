@@ -3,7 +3,7 @@ from typing import Tuple
 
 import regex  # type: ignore
 
-from filter_programs import ProgramFilter
+from filter_programs import DatabaseFilter
 from user_types import (
     ProgramName,
     ProgramNames,
@@ -54,28 +54,29 @@ def get_prefixes_of_taxon_names(taxon_name: TaxonName) -> TaxonNames:
 
 
 class ProgramAdvisor:
-    def __init__(self, program_filter: ProgramFilter):
-        self.program_filter = program_filter
+    def __init__(self, database_filter: DatabaseFilter):
+        self.dbf = database_filter
         self.old_program_names: ProgramNameSet = set()
         self.old_taxon_names: TaxonNameSet = set()
 
     def set_cost_computation_strategy(self, strategy: str) -> None:
         self.compute_taxon_cost.cache_clear()
-        depths_to_cost_zeno.cache_clear()
         if strategy.lower() == "zeno":
             self.depths_to_cost = depths_to_cost_zeno
         elif strategy == "length":
             self.depths_to_cost = depths_to_cost_length
         else:
             raise NotImplementedError  # pragma: no cover
+        self.depths_to_cost.cache_clear()
 
     def init_old_programs(self, **kwargs):
+        """Mark the given programs and their taxons as already studied."""
         program_names = get_studied_programs_from_syllabus(**kwargs)
-        self.old_program_names = self.program_filter.intersection(program_names)
-        self.program_filter.difference_update(program_names)
+        self.old_program_names = self.dbf.intersection(program_names)
+        self.dbf.difference_update(program_names)
         self.old_taxon_names.clear()
         for program_name in self.old_program_names:
-            taxon_names = self.program_filter.db_program_taxon_names[program_name]
+            taxon_names = self.dbf.program_taxons(program_name)
             for taxon_name in taxon_names:
                 self.old_taxon_names.update(get_prefixes_of_taxon_names(taxon_name))
 
@@ -95,19 +96,19 @@ class ProgramAdvisor:
         """Sum the cost of all taxons of the given program."""
         return sum(
             self.compute_taxon_cost(taxon_name)
-            for taxon_name in self.program_filter.db_program_taxon_names[program_name]
+            for taxon_name in self.dbf.program_taxons(program_name)
         )
 
     def get_recommendations(self) -> str:
-        self.program_filter.sort(self.compute_program_cost)
-        return str(self.program_filter)
+        self.dbf.sort(self.compute_program_cost)
+        return str(self.dbf)
 
 
 if __name__ == "__main__":
     Path = __import__("pathlib").Path
     json = __import__("json")
     db = json.loads(Path("db.json").read_text())
-    advisor = ProgramAdvisor(ProgramFilter(db))
+    advisor = ProgramAdvisor(DatabaseFilter(db))
     syllabus = Path("../algo/timeline.txt").read_text()
     advisor.init_old_programs(syllabus=syllabus, path_prefix="../algo/programs/")
     advisor.set_cost_computation_strategy("zeno")
