@@ -1,43 +1,21 @@
 from collections import defaultdict
-from unicodedata import normalize
 
 import pytest
 import regex  # type: ignore
 import sqlparse
 
 import context
+from make_snapshot import make_snapshot
+from paroxython.generate_programs import generate_programs
 from paroxython.parse_program import ProgramParser, find_all_features
-from paroxython.user_types import Program
 from paroxython.preprocess_source import (
-    cleanup_factory,
     centrifugate_hints,
+    cleanup_factory,
     collect_hints,
     remove_hints,
 )
-from paroxython.generate_programs import generate_programs
-from make_snapshot import make_snapshot
-
-
-def title_converter():
-    slug_counts = defaultdict(int)
-    cache = {}
-
-    def title_to_slug(title, use_counts=False):
-        if title not in cache:
-            slug = normalize("NFD", title.lower()).encode("ASCII", "ignore").decode("ASCII")
-            slug = slug.replace(" ", "-")
-            slug = regex.sub(r"[^\w-]", "", slug)
-            cache[title] = slug
-        if use_counts:
-            slug = cache[title]
-            slug = f"{slug}-{slug_counts[slug]}"
-            slug = slug.rstrip("-0")
-            slug_counts[slug] += 1
-            return slug
-        else:
-            return cache[title]
-
-    return title_to_slug
+from paroxython.title_to_slug import title_converter
+from paroxython.user_types import Program
 
 
 title_to_slug = title_converter()
@@ -47,7 +25,7 @@ def generate_toc(text):
     for match in regex.finditer(r"(?m)^(#{1,4}) (.+)", text):
         (hashtags, title) = match.groups()
         offset = "  " * (len(hashtags) - 1) + "- "
-        slug = title_to_slug(title, use_counts=True)
+        slug = title_to_slug(title, deduplicate=True)
         yield f"{offset}[{title}](#{slug})"
 
 
