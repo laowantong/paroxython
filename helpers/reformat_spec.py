@@ -3,14 +3,14 @@ Read the contents of docs/spec.md, normalize its formatting and write it back.
 
 The following operations are carried out:
 - The old clickable table of contents (if any) is replaced by a new one.
-- The vertical spaces and separators between sections are homogeneized.
-- SQL request are reformatted (courtesy of the python-sqlparse library).
+- The spaces and separators between sections are homogeneized.
+- The SQL requests are reformatted (courtesy of the python-sqlparse library).
 - The derivations of each feature (i.e., the features which it is derived from and into)
   are calculated and injected before its specification.
 
-This code is executed each time tests/test_parse_program.py is called. Although no unit
-test is provided, any regression should be visible in the differences between two versions
-of docs/spec.md.
+This code is executed each time tests/test_parse_program.py is called. Thus, although no
+unit test is provided, any regression should be visible in the differences between two
+versions of docs/spec.md.
 """
 
 from collections import defaultdict
