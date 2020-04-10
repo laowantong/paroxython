@@ -179,7 +179,7 @@ class DatabaseFilter:
         lacking_taxons = self.get_lacking_taxons(taxons)
         self.sort(lambda p: len(extra_taxons[p]) + len(lacking_taxons[p]), reverse)
 
-    def get_markdown(self) -> str:
+    def get_markdown(self, section_group_limit=5) -> str:
         display_count = lambda n: f"{n:3} program" + ("" if n == 1 else "s")
         n = len(self.program_names)
         title_to_slug = title_converter()
@@ -192,7 +192,7 @@ class DatabaseFilter:
         remainder = len(self.program_names)
         for (cost, program_names) in toc_data.items():
             if must_detail:
-                if len(program_names) > 5:
+                if len(program_names) >= section_group_limit:
                     title = f"{display_count(len(program_names))} of cost {cost}"
                     remainder -= len(program_names)
                 else:
@@ -210,8 +210,7 @@ class DatabaseFilter:
         summary: List[str] = ["# Quantitative summary"]
         self.counts["remaining"] = len(self.program_names)
         for (description, count) in self.counts.items():
-            plural = "" if count == 1 else "s"
-            summary.append(f"- {count:3} program{plural} {description}.")
+            summary.append(f"- {display_count(count)} {description}.")
         return "\n".join(toc + contents + summary)
 
 

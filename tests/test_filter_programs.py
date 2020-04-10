@@ -302,6 +302,9 @@ def test_sorted_by_line_count():
 def test_markdown():
     dbf = DatabaseFilter(db)
     dbf.sort_by_line_count()
-    text = dbf.get_markdown()
+    text = dbf.get_markdown(section_group_limit=10)
     print(text)
-    assert "# Table of contents\n- [`  9 programs" in text
+    assert "##   9 programs of greater costs" in text
+    text = dbf.get_markdown(section_group_limit=1)
+    print(text)
+    assert "##   1 program of cost 5" in text
