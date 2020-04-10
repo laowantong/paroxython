@@ -101,7 +101,7 @@ class ProgramAdvisor:
 
     def get_recommendations(self) -> str:
         self.dbf.sort(self.compute_program_cost)
-        return str(self.dbf)
+        return self.dbf.get_markdown()
 
 
 if __name__ == "__main__":
@@ -112,4 +112,6 @@ if __name__ == "__main__":
     syllabus = Path("../algo/timeline.txt").read_text()
     advisor.init_old_programs(syllabus=syllabus, path_prefix="../algo/programs/")
     advisor.set_cost_computation_strategy("zeno")
-    print(advisor.get_recommendations())
+    output_path = Path("sandbox/recommendations.md")
+    text = advisor.get_recommendations()
+    output_path.write_text(text)

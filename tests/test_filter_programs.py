@@ -299,10 +299,9 @@ def test_sorted_by_line_count():
     ]
 
 
-def test_str():
+def test_markdown():
     dbf = DatabaseFilter(db)
     dbf.sort_by_line_count()
-    text = str(dbf)
+    text = dbf.get_markdown()
     print(text)
-    assert "[5] prg8" in text
-    assert "[8] prg1" in text
+    assert "# Table of contents\n- [`  9 programs" in text

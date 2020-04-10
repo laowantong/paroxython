@@ -1,11 +1,13 @@
 import json
+from bisect import insort
+from collections import defaultdict
 from functools import lru_cache
 from pathlib import Path
 from typing import Callable, Dict, List, Set
-from bisect import insort
 
 import regex  # type: ignore
 
+from title_to_slug import title_converter
 from user_types import (
     JsonDatabase,
     ProgramName,
@@ -177,24 +179,40 @@ class DatabaseFilter:
         lacking_taxons = self.get_lacking_taxons(taxons)
         self.sort(lambda p: len(extra_taxons[p]) + len(lacking_taxons[p]), reverse)
 
-    def __str__(self) -> str:
-        result: List[str] = []
-        for (weight, program_name) in self.sorted_programs:
-            program = self.db["programs"][program_name]
-            result.append("")
-            result.append(HORIZONTAL_RULE)
-            result.append(f"[{weight}] {program_name}")
-            result.append(HORIZONTAL_RULE)
-            result.append(program["source"])
-            result.append("")
-            for (other_name, spans) in program["taxons"].items():
-                result.append(f"{len(spans):3}: {other_name}")
-        result.append(HORIZONTAL_RULE)
+    def get_markdown(self) -> str:
+        display_count = lambda n: f"{n:3} program" + ("" if n == 1 else "s")
+        n = len(self.program_names)
+        title_to_slug = title_converter()
+        toc_data: Dict[float, ProgramNames] = defaultdict(list)
+        for (cost, program_name) in self.sorted_programs:
+            toc_data[cost].append(program_name)
+        toc: List[str] = ["# Table of contents"]
+        contents: List[str] = [f"# {display_count(n)}"]
+        must_detail = True
+        remainder = len(self.program_names)
+        for (cost, program_names) in toc_data.items():
+            if must_detail:
+                if len(program_names) > 5:
+                    title = f"{display_count(len(program_names))} of cost {cost}"
+                    remainder -= len(program_names)
+                else:
+                    title = f"{display_count(remainder)} of greater costs"
+                    must_detail = False
+                toc.append(f"- [`{title}`](#{title_to_slug(title)})")
+                contents.append(f"## {title}")
+            for program_name in program_names:
+                toc.append(f"    - [`{program_name}`](#{title_to_slug(program_name)})")
+                contents.append(f"### `{program_name}`")
+                program = self.db["programs"][program_name]
+                contents.append(f"```python\n{program['source']}\n```")
+                for (taxon_name, spans) in program["taxons"].items():
+                    contents.append(f"- {len(spans):3}: `{taxon_name}`")
+        summary: List[str] = ["# Quantitative summary"]
         self.counts["remaining"] = len(self.program_names)
         for (description, count) in self.counts.items():
             plural = "" if count == 1 else "s"
-            result.append(f"{count:3} program{plural} {description}")
-        return "\n".join(result)
+            summary.append(f"- {count:3} program{plural} {description}.")
+        return "\n".join(toc + contents + summary)
 
 
 if __name__ == "__main__":
@@ -206,15 +224,15 @@ if __name__ == "__main__":
     dbf.filter_forbidden_taxons(forbidden_taxon_patterns)
 
     mandatory_taxon_patterns = r"""
-        function_definition/.*
-        operator/addition/
+        subroutine_definition\b.*
+        operator/addition\b.*
     """.strip().split()
     dbf.filter_mandatory_taxons(mandatory_taxon_patterns)
 
     blacklisted_program_patterns = r"""
-        .+/problem_10/.+
+        .+/euler_.+
     """.strip().split()
     dbf.filter_blacklisted_programs(blacklisted_program_patterns)
 
     dbf.sort_by_taxon_count()
-    print(dbf)
+    print(dbf.get_markdown())

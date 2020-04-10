@@ -91,5 +91,6 @@ def test_run():
     assert advisor.compute_program_cost("tests/data/simple/collatz_print.py") == 17
 
     recommendations = advisor.get_recommendations()
-    assert "[17.0] tests/data/simple/collatz_print.py" in recommendations
-    assert "[25.0] tests/data/simple/fizzbuzz.py" in recommendations
+    print(recommendations)
+    assert "4 programs initially" in recommendations
+    assert "2 programs remaining" in recommendations
