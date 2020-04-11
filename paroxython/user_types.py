@@ -98,9 +98,9 @@ class Configuration(TypedDict):
     output_path: str # The path for the recommendations in Markdown format
     syllabus: Syllabus
     cost_computation_strategy: str
-    mandatory_taxon_patterns: List[str]
-    excluded_program_patterns: List[str]
-    excluded_taxon_patterns: List[str]
+    mandatory_taxon_patterns: TaxonPatterns
+    blacklisted_program_patterns: ProgramPatterns
+    forbidden_taxon_patterns: TaxonPatterns
 
 
 # fmt:on

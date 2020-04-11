@@ -8,6 +8,6 @@
     },
     "cost_computation_strategy": "zeno",
     "mandatory_taxon_patterns": [],
-    "excluded_program_patterns": [],
-    "excluded_taxon_patterns": [],
+    "blacklisted_program_patterns": [],
+    "forbidden_taxon_patterns": [],
 }

@@ -67,9 +67,13 @@ class ProgramAdvisor:
         self.init_old_program_names(self.cfg["syllabus"])
         self.dbf.difference_update(self.old_program_names)
         self.init_old_taxon_names()
+        self.dbf.filter_blacklisted_programs(self.cfg["blacklisted_program_patterns"])
+        self.dbf.filter_forbidden_taxons(self.cfg["forbidden_taxon_patterns"])
+        self.dbf.filter_mandatory_taxons(self.cfg["mandatory_taxon_patterns"])
         self.set_cost_computation_strategy(self.cfg["cost_computation_strategy"])
         self.dbf.sort(self.compute_program_cost)
         output_path = self.base_path / self.cfg["output_path"]
+        print(f"Output path: {output_path.resolve()}")
         output_path.write_text(self.dbf.get_markdown())
 
     def init_old_program_names(self, syllabus):

@@ -57,4 +57,7 @@ for i in range(1, 101):
 -   3: `type/elementary/string`
 # Quantitative summary
 -   4 programs initially.
+-   0 programs blacklisted.
+-   0 programs tagged with a forbidden taxon.
+-   0 programs not tagged with a mandatory taxon.
 -   2 programs remaining.
