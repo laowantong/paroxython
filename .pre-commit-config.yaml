@@ -5,9 +5,9 @@ repos:
     rev: v2.4.0
     hooks:
     -   id: trailing-whitespace
-        exclude: docs/spec.md|snapshots/*|tests/data/dummy_taxons_and_programs\.txt|taxonomies/*
+        exclude: docs/spec.md|tests/snapshots/*|tests/data/dummy_taxons_and_programs\.txt|taxonomies/*
     -   id: end-of-file-fixer
-        exclude: snapshots/*|tests/data/dummy_taxons_and_programs\.txt
+        exclude: tests/snapshots/*|tests/data/dummy_taxons_and_programs\.txt
     -   id: check-yaml
     -   id: check-added-large-files
     -   id: check-json
@@ -16,10 +16,10 @@ repos:
     rev: v1.25.2
     hooks:
     -   id: pyupgrade
-        exclude: snapshots/*
+        exclude: tests/snapshots/*
 -   repo: https://github.com/psf/black
     rev: 19.10b0
     hooks:
     -   id: black
-        exclude: snapshots/*
+        exclude: tests/snapshots/*
         args: [--line-length=100]

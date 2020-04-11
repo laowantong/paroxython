@@ -23,8 +23,6 @@ def test_update_snapshots(capsys):
         if (path / "__is_private_directory").exists():
             output_path = Path(path.parent, "snapshot_" + path.parts[-1] + ".py")
         else:
-            output_path = Path("snapshots", "-".join(path.parts[-2:]) + ".py")
+            output_path = Path("tests/snapshots", "-".join(path.parts[-2:]) + ".py")
         acc = [result for result in generate_labelled_sources(path)]
         make_snapshot(output_path, "\n".join(acc), capsys)
-
-

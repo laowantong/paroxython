@@ -86,4 +86,4 @@ def test_label_presence(capsys):
     present = "\n- ".join(sorted(result))
     absent = "\n- ".join(sorted(all_names - present_names))
     text = f"# Present labels\n\n- {present}\n\n# Absent labels\n\n- {absent}\n"
-    make_snapshot(Path("snapshots/simple_labels.md"), text, capsys)
+    make_snapshot(Path("tests/snapshots/simple_labels.md"), text, capsys)

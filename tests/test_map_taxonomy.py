@@ -99,4 +99,4 @@ def test_snapshot_simple_taxons(capsys):
     for (path, taxons) in taxonomy(programs):
         acc[str(path)] = {name: " ".join(map(str, sorted(set(spans)))) for (name, spans) in taxons}
     result = json.dumps(acc, indent=2)
-    make_snapshot(Path("snapshots/simple_taxons.json"), result, capsys)
+    make_snapshot(Path("tests/snapshots/simple_taxons.json"), result, capsys)

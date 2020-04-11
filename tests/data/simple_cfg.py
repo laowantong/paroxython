@@ -1,6 +1,6 @@
 {
-    "input_path": "../../snapshots/simple_db.json",
-    "output_path": "../../snapshots/simple_recommendations.md",
+    "input_path": "../snapshots/simple_db.json",
+    "output_path": "../snapshots/simple_recommendations.md",
     "syllabus": {
         "path": "simple_syllabus.txt",
         "search_pattern": r"(?sm)(.*)^ *# EOF",
