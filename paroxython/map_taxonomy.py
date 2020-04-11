@@ -17,15 +17,16 @@ from user_types import (
 )
 
 sub_slash_sequences = regex.compile(r"//+").sub
+DEFAULT_TAXONOMY_PATH = Path("taxonomies/default_taxonomy.tsv")
 
 
 class Taxonomy:
     """Translate labels into taxons on a list of program paths."""
 
-    def __init__(self, taxonomy_path: str = "taxonomies/default_taxonomy.tsv") -> None:
+    def __init__(self, taxonomy_path: Path = DEFAULT_TAXONOMY_PATH) -> None:
         """Read the taxonomy specifications, and make some pre-processing."""
         is_literal = regex.compile(r"[\w:]+").fullmatch
-        tsv = Path(taxonomy_path).read_text()
+        tsv = taxonomy_path.read_text()
         self.literal_label_names: Dict[LabelName, TaxonNames] = defaultdict(list)
         self.compiled_label_names = []
         for line in tsv.split("\n"):
@@ -94,8 +95,8 @@ if __name__ == "__main__":
     generate_labelled_programs = __import__("generate_labels").generate_labelled_programs
     chain = __import__("itertools").chain
     taxonomy = Taxonomy()
-    programs = generate_labelled_programs("../Python/project_euler")
-    for (path, taxons) in taxonomy(programs):
+    programs = generate_labelled_programs(Path("../Python/project_euler"))
+    for (_, taxons) in taxonomy(programs):
         if not taxons:
             continue
         width = min(40, max(len(" ".join(map(str, taxon.spans))) for taxon in taxons))

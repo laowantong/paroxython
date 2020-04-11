@@ -1,3 +1,4 @@
+from pathlib import Path
 import pytest
 import regex  # type: ignore
 
@@ -75,7 +76,7 @@ def test_label_presence(capsys):
     all_names = set()
     present_names = set()
     result = []
-    for program in generate_programs("tests/data/simple/"):
+    for program in generate_programs(Path("tests/data/simple/")):
         labels = parse(Program(source=program.source), yield_failed_matches=True)
         for (name, spans) in labels:
             all_names.add(name)
@@ -85,4 +86,4 @@ def test_label_presence(capsys):
     present = "\n- ".join(sorted(result))
     absent = "\n- ".join(sorted(all_names - present_names))
     text = f"# Present labels\n\n- {present}\n\n# Absent labels\n\n- {absent}\n"
-    make_snapshot("snapshots/simple_labels.md", text, capsys)
+    make_snapshot(Path("snapshots/simple_labels.md"), text, capsys)

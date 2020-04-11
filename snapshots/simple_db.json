@@ -1,6 +1,6 @@
 {
   "programs": {
-    "tests/data/simple/assignment.py": {
+    "assignment.py": {
       "timestamp": "ignored",
       "source": "a = b",
       "labels": {
@@ -13,7 +13,7 @@
         "variable/assignment/single": [[1,1]]
       }
     },
-    "tests/data/simple/collatz_print.py": {
+    "collatz_print.py": {
       "timestamp": "ignored",
       "source": "def print_collatz(n):\n    while n != 1:\n        print(n)\n        if n % 2 == 0:\n            n = n // 2\n        else:\n            n = 3 * n + 1\n    print(n)",
       "labels": {
@@ -86,7 +86,7 @@
         "variable/assignment/single": [[5,5],[7,7]]
       }
     },
-    "tests/data/simple/fizzbuzz.py": {
+    "fizzbuzz.py": {
       "timestamp": "ignored",
       "source": "for i in range(1, 101):\n    if i % 15 == 0:\n        print(\"FizzBuzz\")\n    elif i % 3 == 0:\n        print(\"Fizz\")\n    elif i % 5 == 0:\n        print(\"Buzz\")\n    else:\n        print(i)",
       "labels": {
@@ -139,7 +139,7 @@
         "type/elementary/string": [[3,3],[5,5],[7,7]]
       }
     },
-    "tests/data/simple/is_even.py": {
+    "is_even.py": {
       "timestamp": "ignored",
       "source": "def is_even(n):\n    return n % 2 == 0",
       "labels": {
@@ -168,339 +168,339 @@
   },
   "labels": {
     "assignment": [
-      "tests/data/simple/assignment.py"
+      "assignment.py"
     ],
     "assignment_lhs_identifier:a": [
-      "tests/data/simple/assignment.py"
+      "assignment.py"
     ],
     "assignment_rhs_atom:b": [
-      "tests/data/simple/assignment.py"
+      "assignment.py"
     ],
     "single_assignment:a": [
-      "tests/data/simple/assignment.py"
+      "assignment.py"
     ],
     "added_block_label": [
-      "tests/data/simple/collatz_print.py"
+      "collatz_print.py"
     ],
     "added_label_on_line_4": [
-      "tests/data/simple/collatz_print.py"
+      "collatz_print.py"
     ],
     "assignment:Add": [
-      "tests/data/simple/collatz_print.py"
+      "collatz_print.py"
     ],
     "assignment:FloorDiv": [
-      "tests/data/simple/collatz_print.py"
+      "collatz_print.py"
     ],
     "assignment_lhs_identifier:n": [
-      "tests/data/simple/collatz_print.py"
+      "collatz_print.py"
     ],
     "assignment_rhs_atom:1": [
-      "tests/data/simple/collatz_print.py"
+      "collatz_print.py"
     ],
     "assignment_rhs_atom:2": [
-      "tests/data/simple/collatz_print.py"
+      "collatz_print.py"
     ],
     "assignment_rhs_atom:3": [
-      "tests/data/simple/collatz_print.py"
+      "collatz_print.py"
     ],
     "assignment_rhs_atom:n": [
-      "tests/data/simple/collatz_print.py"
+      "collatz_print.py"
     ],
     "binary_operator:Add": [
-      "tests/data/simple/collatz_print.py"
+      "collatz_print.py"
     ],
     "binary_operator:Mod": [
-      "tests/data/simple/collatz_print.py",
-      "tests/data/simple/fizzbuzz.py",
-      "tests/data/simple/is_even.py"
+      "collatz_print.py",
+      "fizzbuzz.py",
+      "is_even.py"
     ],
     "binary_operator:Mult": [
-      "tests/data/simple/collatz_print.py"
+      "collatz_print.py"
     ],
     "call_argument:n": [
-      "tests/data/simple/collatz_print.py"
+      "collatz_print.py"
     ],
     "comparison_operator:Eq": [
-      "tests/data/simple/collatz_print.py",
-      "tests/data/simple/fizzbuzz.py",
-      "tests/data/simple/is_even.py"
+      "collatz_print.py",
+      "fizzbuzz.py",
+      "is_even.py"
     ],
     "comparison_operator:NotEq": [
-      "tests/data/simple/collatz_print.py"
+      "collatz_print.py"
     ],
     "divisibility_test:2": [
-      "tests/data/simple/collatz_print.py",
-      "tests/data/simple/is_even.py"
+      "collatz_print.py",
+      "is_even.py"
     ],
     "function:print_collatz": [
-      "tests/data/simple/collatz_print.py"
+      "collatz_print.py"
     ],
     "function_argument:n": [
-      "tests/data/simple/collatz_print.py",
-      "tests/data/simple/is_even.py"
+      "collatz_print.py",
+      "is_even.py"
     ],
     "function_argument_flavor:arg": [
-      "tests/data/simple/collatz_print.py",
-      "tests/data/simple/is_even.py"
+      "collatz_print.py",
+      "is_even.py"
     ],
     "function_call:print": [
-      "tests/data/simple/collatz_print.py",
-      "tests/data/simple/fizzbuzz.py"
+      "collatz_print.py",
+      "fizzbuzz.py"
     ],
     "function_call_without_result:print": [
-      "tests/data/simple/collatz_print.py",
-      "tests/data/simple/fizzbuzz.py"
+      "collatz_print.py",
+      "fizzbuzz.py"
     ],
     "function_returning_nothing:print_collatz": [
-      "tests/data/simple/collatz_print.py"
+      "collatz_print.py"
     ],
     "if": [
-      "tests/data/simple/collatz_print.py",
-      "tests/data/simple/fizzbuzz.py"
+      "collatz_print.py",
+      "fizzbuzz.py"
     ],
     "if_else_branch": [
-      "tests/data/simple/collatz_print.py",
-      "tests/data/simple/fizzbuzz.py"
+      "collatz_print.py",
+      "fizzbuzz.py"
     ],
     "if_test_atom:0": [
-      "tests/data/simple/collatz_print.py",
-      "tests/data/simple/fizzbuzz.py"
+      "collatz_print.py",
+      "fizzbuzz.py"
     ],
     "if_test_atom:2": [
-      "tests/data/simple/collatz_print.py"
+      "collatz_print.py"
     ],
     "if_test_atom:n": [
-      "tests/data/simple/collatz_print.py"
+      "collatz_print.py"
     ],
     "if_then_branch": [
-      "tests/data/simple/collatz_print.py",
-      "tests/data/simple/fizzbuzz.py"
+      "collatz_print.py",
+      "fizzbuzz.py"
     ],
     "literal:0": [
-      "tests/data/simple/collatz_print.py",
-      "tests/data/simple/fizzbuzz.py",
-      "tests/data/simple/is_even.py"
+      "collatz_print.py",
+      "fizzbuzz.py",
+      "is_even.py"
     ],
     "literal:1": [
-      "tests/data/simple/collatz_print.py",
-      "tests/data/simple/fizzbuzz.py"
+      "collatz_print.py",
+      "fizzbuzz.py"
     ],
     "literal:2": [
-      "tests/data/simple/collatz_print.py",
-      "tests/data/simple/is_even.py"
+      "collatz_print.py",
+      "is_even.py"
     ],
     "literal:3": [
-      "tests/data/simple/collatz_print.py",
-      "tests/data/simple/fizzbuzz.py"
+      "collatz_print.py",
+      "fizzbuzz.py"
     ],
     "loop:while": [
-      "tests/data/simple/collatz_print.py"
+      "collatz_print.py"
     ],
     "single_assignment:n": [
-      "tests/data/simple/collatz_print.py"
+      "collatz_print.py"
     ],
     "suggest_augmented_assignment": [
-      "tests/data/simple/collatz_print.py"
+      "collatz_print.py"
     ],
     "suggest_constant_definition": [
-      "tests/data/simple/collatz_print.py",
-      "tests/data/simple/fizzbuzz.py"
+      "collatz_print.py",
+      "fizzbuzz.py"
     ],
     "unknown_label": [
-      "tests/data/simple/collatz_print.py"
+      "collatz_print.py"
     ],
     "update:n:1": [
-      "tests/data/simple/collatz_print.py"
+      "collatz_print.py"
     ],
     "update:n:2": [
-      "tests/data/simple/collatz_print.py"
+      "collatz_print.py"
     ],
     "update:n:3": [
-      "tests/data/simple/collatz_print.py"
+      "collatz_print.py"
     ],
     "update_by_assignment:n:1": [
-      "tests/data/simple/collatz_print.py"
+      "collatz_print.py"
     ],
     "update_by_assignment:n:2": [
-      "tests/data/simple/collatz_print.py"
+      "collatz_print.py"
     ],
     "update_by_assignment:n:3": [
-      "tests/data/simple/collatz_print.py"
+      "collatz_print.py"
     ],
     "update_by_assignment_with:Add": [
-      "tests/data/simple/collatz_print.py"
+      "collatz_print.py"
     ],
     "update_by_assignment_with:FloorDiv": [
-      "tests/data/simple/collatz_print.py"
+      "collatz_print.py"
     ],
     "update_with:Add": [
-      "tests/data/simple/collatz_print.py"
+      "collatz_print.py"
     ],
     "update_with:FloorDiv": [
-      "tests/data/simple/collatz_print.py"
+      "collatz_print.py"
     ],
     "verbose_conditional_assignment": [
-      "tests/data/simple/collatz_print.py"
+      "collatz_print.py"
     ],
     "while": [
-      "tests/data/simple/collatz_print.py"
+      "collatz_print.py"
     ],
     "call_argument:": [
-      "tests/data/simple/fizzbuzz.py"
+      "fizzbuzz.py"
     ],
     "call_argument:1": [
-      "tests/data/simple/fizzbuzz.py"
+      "fizzbuzz.py"
     ],
     "call_argument:101": [
-      "tests/data/simple/fizzbuzz.py"
+      "fizzbuzz.py"
     ],
     "call_argument:i": [
-      "tests/data/simple/fizzbuzz.py"
+      "fizzbuzz.py"
     ],
     "divisibility_test:15": [
-      "tests/data/simple/fizzbuzz.py"
+      "fizzbuzz.py"
     ],
     "divisibility_test:3": [
-      "tests/data/simple/fizzbuzz.py"
+      "fizzbuzz.py"
     ],
     "divisibility_test:5": [
-      "tests/data/simple/fizzbuzz.py"
+      "fizzbuzz.py"
     ],
     "for:i": [
-      "tests/data/simple/fizzbuzz.py"
+      "fizzbuzz.py"
     ],
     "for_range:1:101": [
-      "tests/data/simple/fizzbuzz.py"
+      "fizzbuzz.py"
     ],
     "function_call:range": [
-      "tests/data/simple/fizzbuzz.py"
+      "fizzbuzz.py"
     ],
     "if_elif_branch": [
-      "tests/data/simple/fizzbuzz.py"
+      "fizzbuzz.py"
     ],
     "if_test_atom:15": [
-      "tests/data/simple/fizzbuzz.py"
+      "fizzbuzz.py"
     ],
     "if_test_atom:3": [
-      "tests/data/simple/fizzbuzz.py"
+      "fizzbuzz.py"
     ],
     "if_test_atom:5": [
-      "tests/data/simple/fizzbuzz.py"
+      "fizzbuzz.py"
     ],
     "if_test_atom:i": [
-      "tests/data/simple/fizzbuzz.py"
+      "fizzbuzz.py"
     ],
     "literal:101": [
-      "tests/data/simple/fizzbuzz.py"
+      "fizzbuzz.py"
     ],
     "literal:15": [
-      "tests/data/simple/fizzbuzz.py"
+      "fizzbuzz.py"
     ],
     "literal:5": [
-      "tests/data/simple/fizzbuzz.py"
+      "fizzbuzz.py"
     ],
     "literal:Str": [
-      "tests/data/simple/fizzbuzz.py"
+      "fizzbuzz.py"
     ],
     "loop:for": [
-      "tests/data/simple/fizzbuzz.py"
+      "fizzbuzz.py"
     ],
     "range:1:101": [
-      "tests/data/simple/fizzbuzz.py"
+      "fizzbuzz.py"
     ],
     "function:is_even": [
-      "tests/data/simple/is_even.py"
+      "is_even.py"
     ],
     "function_returning_something:is_even": [
-      "tests/data/simple/is_even.py"
+      "is_even.py"
     ],
     "return": [
-      "tests/data/simple/is_even.py"
+      "is_even.py"
     ]
   },
   "taxons": {
     "variable/assignment/single": [
-      "tests/data/simple/assignment.py",
-      "tests/data/simple/collatz_print.py"
+      "assignment.py",
+      "collatz_print.py"
     ],
     "control_flow/conditional": [
-      "tests/data/simple/collatz_print.py",
-      "tests/data/simple/fizzbuzz.py"
+      "collatz_print.py",
+      "fizzbuzz.py"
     ],
     "control_flow/conditional/else": [
-      "tests/data/simple/collatz_print.py",
-      "tests/data/simple/fizzbuzz.py"
+      "collatz_print.py",
+      "fizzbuzz.py"
     ],
     "control_flow/loop/non_sequential": [
-      "tests/data/simple/collatz_print.py"
+      "collatz_print.py"
     ],
     "io/standard/print": [
-      "tests/data/simple/collatz_print.py",
-      "tests/data/simple/fizzbuzz.py"
+      "collatz_print.py",
+      "fizzbuzz.py"
     ],
     "operator/addition": [
-      "tests/data/simple/collatz_print.py"
+      "collatz_print.py"
     ],
     "operator/multiplication": [
-      "tests/data/simple/collatz_print.py"
+      "collatz_print.py"
     ],
     "operator/percent/modulo": [
-      "tests/data/simple/collatz_print.py",
-      "tests/data/simple/fizzbuzz.py",
-      "tests/data/simple/is_even.py"
+      "collatz_print.py",
+      "fizzbuzz.py",
+      "is_even.py"
     ],
     "subroutine_definition/argument/arg": [
-      "tests/data/simple/collatz_print.py",
-      "tests/data/simple/is_even.py"
+      "collatz_print.py",
+      "is_even.py"
     ],
     "subroutine_definition/procedure": [
-      "tests/data/simple/collatz_print.py"
+      "collatz_print.py"
     ],
     "test/divisibility/parity": [
-      "tests/data/simple/collatz_print.py",
-      "tests/data/simple/is_even.py"
+      "collatz_print.py",
+      "is_even.py"
     ],
     "test/equality": [
-      "tests/data/simple/collatz_print.py",
-      "tests/data/simple/fizzbuzz.py",
-      "tests/data/simple/is_even.py"
+      "collatz_print.py",
+      "fizzbuzz.py",
+      "is_even.py"
     ],
     "test/equality/not": [
-      "tests/data/simple/collatz_print.py"
+      "collatz_print.py"
     ],
     "type/elementary/number/integer": [
-      "tests/data/simple/collatz_print.py",
-      "tests/data/simple/fizzbuzz.py",
-      "tests/data/simple/is_even.py"
+      "collatz_print.py",
+      "fizzbuzz.py",
+      "is_even.py"
     ],
     "type/elementary/number/integer/zero": [
-      "tests/data/simple/collatz_print.py",
-      "tests/data/simple/fizzbuzz.py",
-      "tests/data/simple/is_even.py"
+      "collatz_print.py",
+      "fizzbuzz.py",
+      "is_even.py"
     ],
     "variable/assignment/conditional/verbose": [
-      "tests/data/simple/collatz_print.py"
+      "collatz_print.py"
     ],
     "call/function/builtin/range": [
-      "tests/data/simple/fizzbuzz.py"
+      "fizzbuzz.py"
     ],
     "control_flow/conditional/else/if": [
-      "tests/data/simple/fizzbuzz.py"
+      "fizzbuzz.py"
     ],
     "control_flow/loop/sequential": [
-      "tests/data/simple/fizzbuzz.py"
+      "fizzbuzz.py"
     ],
     "control_flow/loop/sequential/arithmetic/start": [
-      "tests/data/simple/fizzbuzz.py"
+      "fizzbuzz.py"
     ],
     "type/elementary/string": [
-      "tests/data/simple/fizzbuzz.py"
+      "fizzbuzz.py"
     ],
     "subroutine_definition/function": [
-      "tests/data/simple/is_even.py"
+      "is_even.py"
     ],
     "subroutine_definition/predicate": [
-      "tests/data/simple/is_even.py"
+      "is_even.py"
     ]
   }
 }

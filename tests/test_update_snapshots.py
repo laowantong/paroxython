@@ -24,7 +24,7 @@ def test_update_snapshots(capsys):
             output_path = Path(path.parent, "snapshot_" + path.parts[-1] + ".py")
         else:
             output_path = Path("snapshots", "-".join(path.parts[-2:]) + ".py")
-        acc = [result for result in generate_labelled_sources(directory)]
+        acc = [result for result in generate_labelled_sources(path)]
         make_snapshot(output_path, "\n".join(acc), capsys)
 
 

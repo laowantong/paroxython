@@ -3,7 +3,7 @@ import sqlite3
 from collections import defaultdict
 from datetime import datetime
 from pathlib import Path
-from typing import List, Union, Tuple, overload
+from typing import List, Optional, Tuple, Union, overload
 
 import regex  # type: ignore
 
@@ -28,23 +28,21 @@ from user_types import (
 
 
 class Database:
-    def __init__(self, directories: List[str], ignore_timestamps=False, *args, **kargs) -> None:
+    def __init__(self, directory: Path, ignore_timestamps=False, *args, **kargs) -> None:
         """collect all infos pertaining to the programs, the labels and the taxons."""
-        programs: List[Program] = []
-        for directory in directories:
-            programs.extend(generate_labelled_programs(directory, *args, **kargs))
+        self.default_json_db_path = directory.parent / f"{directory.name}_db.json"
+        self.default_sqlite_db_path = directory.parent / f"{directory.name}_db.sqlite"
+        programs: List[Program] = list(generate_labelled_programs(directory, *args, **kargs))
+        paths_taxons: List[PathTaxons] = list(Taxonomy()(programs))
 
-        taxonomy = Taxonomy()
-        paths_taxons = list(taxonomy(programs))
-
-        get_timestamp = lambda program: str(datetime.fromtimestamp(program.path.stat().st_mtime))
+        get_timestamp = lambda path: str(datetime.fromtimestamp(path.stat().st_mtime))
         if ignore_timestamps:
-            get_timestamp = lambda program: "ignored"
+            get_timestamp = lambda path: "ignored"
 
         self.programs: ProgramInfos = {}
         for program in programs:
             self.programs[ProgramName(str(program.path))] = {
-                "timestamp": get_timestamp(program),
+                "timestamp": get_timestamp(directory / program.path),
                 "source": program.source,
                 "labels": {},  # to be populated by inject_labels()
                 "taxons": {},  # to be populated by inject_taxons()
@@ -75,7 +73,12 @@ class Database:
         text = regex.sub(r"\s*\[\s+(\d+),\s+(\d+)\s+\](,?)\s+", r"[\1,\2]\3", text)
         return text
 
-    def write_sqlite(self, db_path: str) -> None:
+    def write_json(self, db_path: Optional[Path] = None) -> None:
+        db_path = db_path or self.default_json_db_path
+        db_path.write_text(self.get_json())
+
+    def write_sqlite(self, db_path: Optional[Path] = None) -> None:
+        db_path = db_path or self.default_sqlite_db_path
         program_rows: List[Tuple] = []
         label_rows: List[Tuple] = []
         taxon_rows: List[Tuple] = []
@@ -111,8 +114,8 @@ class Database:
                         )
                     )
 
-        if Path(db_path).exists():  # Python 3.8: use missing_ok=True parameter
-            Path(db_path).unlink()
+        if db_path.exists():  # Python 3.8: use missing_ok=True parameter
+            db_path.unlink()
         connexion = sqlite3.connect(db_path)
         c = connexion.cursor()
 
@@ -127,7 +130,7 @@ class Database:
         )
 
         label_columns = (
-            # use rowid as primary key:
+            # use rowid as primary key
             "name TEXT",
             "name_prefix TEXT",
             "name_suffix TEXT",
@@ -145,7 +148,7 @@ class Database:
         )
 
         taxon_columns = (
-            # use rowid as primary key:
+            # use rowid as primary key
             "name TEXT",
             "span TEXT",
             "span_start INTEGER",
@@ -181,12 +184,8 @@ def prepared(tags):
 
 
 if __name__ == "__main__":
-    directories = [
-        # "../Python/project_euler",
-        # "../Python/maths",
-        "../algo/programs",
-        # "paroxython"
-    ]
-    db = Database(directories)
-    Path("db.json").write_text(db.get_json())
-    db.write_sqlite("db.sqlite")
+    directories = ["../Python/project_euler", "../Python/maths", "../algo/programs", "paroxython"]
+    for directory in directories:
+        db = Database(Path(directory))
+        db.write_json()
+        db.write_sqlite()

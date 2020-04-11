@@ -1,8 +1,8 @@
 {
-  "tests/data/simple/assignment.py": {
+  "assignment.py": {
     "variable/assignment/single": "1"
   },
-  "tests/data/simple/collatz_print.py": {
+  "collatz_print.py": {
     "control_flow/conditional": "4-7",
     "control_flow/conditional/else": "7",
     "control_flow/loop/non_sequential": "2-7",
@@ -20,7 +20,7 @@
     "variable/assignment/conditional/verbose": "4-7",
     "variable/assignment/single": "5 7"
   },
-  "tests/data/simple/fizzbuzz.py": {
+  "fizzbuzz.py": {
     "call/function/builtin/range": "1",
     "control_flow/conditional": "2-9 4-9 6-9",
     "control_flow/conditional/else": "9",
@@ -34,7 +34,7 @@
     "type/elementary/number/integer/zero": "2 4 6",
     "type/elementary/string": "3 5 7"
   },
-  "tests/data/simple/is_even.py": {
+  "is_even.py": {
     "operator/percent/modulo": "2",
     "subroutine_definition/argument/arg": "1",
     "subroutine_definition/function": "1-2",

@@ -27,14 +27,13 @@ def depths_to_cost_length(start: int, stop: int) -> float:
 
 def get_studied_programs_from_syllabus(
     syllabus: str,
-    path_prefix: str = "",
     search_pattern: str = r"(?sm)(.*)^ *# EOF",  # \1 match the useful part of the syllabus
     finditer_pattern: str = r"\+ *(?:\[.+?\] *)?(\w+\.py)\b",  # \1 match a program name
 ) -> ProgramNameSet:
     """Retrieve the programs marked as already studied in the teacher's syllabus."""
     source = regex.search(search_pattern, syllabus)[1]
     matches = regex.finditer(finditer_pattern, source)
-    return {ProgramName(path_prefix + m[1]) for m in matches}
+    return {ProgramName(m[1]) for m in matches}
 
 
 @lru_cache(maxsize=None)
@@ -94,10 +93,7 @@ class ProgramAdvisor:
 
     def compute_program_cost(self, program_name: ProgramName) -> float:
         """Sum the cost of all taxons of the given program."""
-        return sum(
-            self.compute_taxon_cost(taxon_name)
-            for taxon_name in self.dbf.program_taxons(program_name)
-        )
+        return sum(map(self.compute_taxon_cost, self.dbf.program_taxons(program_name)))
 
     def get_recommendations(self) -> str:
         self.dbf.sort(self.compute_program_cost)
@@ -107,10 +103,10 @@ class ProgramAdvisor:
 if __name__ == "__main__":
     Path = __import__("pathlib").Path
     json = __import__("json")
-    db = json.loads(Path("db.json").read_text())
+    db = json.loads(Path("../algo/programs_db.json").read_text())
     advisor = ProgramAdvisor(DatabaseFilter(db))
     syllabus = Path("../algo/timeline.txt").read_text()
-    advisor.init_old_programs(syllabus=syllabus, path_prefix="../algo/programs/")
+    advisor.init_old_programs(syllabus=syllabus)
     advisor.set_cost_computation_strategy("zeno")
     output_path = Path("sandbox/recommendations.md")
     text = advisor.get_recommendations()

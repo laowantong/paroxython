@@ -20,14 +20,14 @@ class ProgramEncoder(json.JSONEncoder):
 
 
 def test_generate_labelled_programs(capsys):
-    result = list(generate_labelled_programs("tests/data/simple"))
+    result = list(generate_labelled_programs(Path("tests/data/simple")))
     text = json.dumps(result, cls=ProgramEncoder, indent=2)
     text = regex.sub(r"\s*\[\s+(\d+),\s+(\d+)\s+\](,?)\s+", r"[\1,\2]\3", text)
-    make_snapshot("snapshots/simple_labelled_programs.json", text, capsys)
+    make_snapshot(Path("snapshots/simple_labelled_programs.json"), text, capsys)
 
 
 def test_generate_labelled_sources(capsys):
-    chunks = list(generate_labelled_sources("tests/data/simple"))
+    chunks = list(generate_labelled_sources(Path("tests/data/simple")))
     result = []
     for chunk in chunks:
         if chunk.startswith("#"):
@@ -41,4 +41,4 @@ def test_generate_labelled_sources(capsys):
                     result.append(f"{source} # {label}")
                     source = " " * len(source)
             result.append("")
-    make_snapshot("snapshots/simple_labelled_sources.py", "\n".join(result), capsys)
+    make_snapshot(Path("snapshots/simple_labelled_sources.py"), "\n".join(result), capsys)

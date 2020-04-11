@@ -10,7 +10,7 @@ from paroxython.generate_labels import Label, Program, generate_labelled_program
 from paroxython.map_taxonomy import Taxonomy
 from paroxython.span import Span
 
-t = Taxonomy("tests/data/dummy_taxonomy.tsv")
+t = Taxonomy(Path("tests/data/dummy_taxonomy.tsv"))
 S = lambda i, j: Span([i, j])  # shortcut for Span([i, j])
 
 
@@ -95,8 +95,8 @@ def test_call():
 def test_snapshot_simple_taxons(capsys):
     taxonomy = Taxonomy()
     acc = {}
-    programs = generate_labelled_programs("tests/data/simple")
+    programs = generate_labelled_programs(Path("tests/data/simple"))
     for (path, taxons) in taxonomy(programs):
         acc[str(path)] = {name: " ".join(map(str, sorted(set(spans)))) for (name, spans) in taxons}
     result = json.dumps(acc, indent=2)
-    make_snapshot("snapshots/simple_taxons.json", result, capsys)
+    make_snapshot(Path("snapshots/simple_taxons.json"), result, capsys)

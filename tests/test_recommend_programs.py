@@ -38,16 +38,15 @@ February :
 March :
     either + collatz_print.py or + fizzbuzz.py
 """
-PATH_PREFIX = "tests/data/simple/"
 
 
 def test_get_studied_programs_from_syllabus():
-    result = get_studied_programs_from_syllabus(SYLLABUS, PATH_PREFIX)
+    result = get_studied_programs_from_syllabus(SYLLABUS)
     print(result)
     assert result == {
-        "tests/data/simple/assignment.py",
-        "tests/data/simple/unknown_program.py",
-        "tests/data/simple/is_even.py",
+        "assignment.py",
+        "unknown_program.py",
+        "is_even.py",
     }
 
 
@@ -57,11 +56,11 @@ DB = json.loads(Path("snapshots/simple_db.json").read_text())
 def test_run():
     advisor = ProgramAdvisor(DatabaseFilter(DB))
 
-    advisor.init_old_programs(syllabus=SYLLABUS, path_prefix=PATH_PREFIX)
+    advisor.init_old_programs(syllabus=SYLLABUS)
     print("\n".join(sorted(advisor.old_program_names)))
     assert advisor.old_program_names == {
-        "tests/data/simple/assignment.py",
-        "tests/data/simple/is_even.py",
+        "assignment.py",
+        "is_even.py",
     }
     print("\n".join(sorted(advisor.old_taxon_names)))
     print()
@@ -78,7 +77,7 @@ def test_run():
     assert advisor.compute_taxon_cost("variable") == 0
     assert advisor.compute_taxon_cost("foo/bar/bizz/buzz") == 1 / 2 + 1 / 4 + 1 / 8 + 1 / 16
 
-    assert advisor.compute_program_cost("tests/data/simple/collatz_print.py") == 4.4375
+    assert advisor.compute_program_cost("collatz_print.py") == 4.4375
 
     advisor.set_cost_computation_strategy("length")
 
@@ -88,7 +87,7 @@ def test_run():
     assert advisor.compute_taxon_cost("variable") == 0
     assert advisor.compute_taxon_cost("foo/bar/bizz/buzz") == 4
 
-    assert advisor.compute_program_cost("tests/data/simple/collatz_print.py") == 17
+    assert advisor.compute_program_cost("collatz_print.py") == 17
 
     recommendations = advisor.get_recommendations()
     print(recommendations)

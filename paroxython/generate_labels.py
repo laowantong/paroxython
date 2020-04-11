@@ -1,5 +1,6 @@
 from bisect import insort
 from collections import defaultdict
+from pathlib import Path
 from typing import Iterator, List, Set
 
 from user_types import Label, LabelsSpans, Program, Source
@@ -7,7 +8,7 @@ from generate_programs import generate_programs
 from parse_program import ProgramParser
 
 
-def generate_labelled_sources(directory: str, *args, **kargs) -> Iterator[Source]:
+def generate_labelled_sources(directory: Path, *args, **kargs) -> Iterator[Source]:
     """For each program, yield its source with its labels in comment."""
     parse = ProgramParser()
     separator = "-" * 88
@@ -24,7 +25,7 @@ def generate_labelled_sources(directory: str, *args, **kargs) -> Iterator[Source
         yield Source("\n".join(lines + [""]))
 
 
-def generate_labelled_programs(directory: str, *args, **kargs) -> Iterator[Program]:
+def generate_labelled_programs(directory: Path, *args, **kargs) -> Iterator[Program]:
     """For each program, yield its label list, lexicographically sorted."""
     parse = ProgramParser()
     for program in generate_programs(directory, *args, **kargs):
@@ -37,5 +38,5 @@ def generate_labelled_programs(directory: str, *args, **kargs) -> Iterator[Progr
 
 
 if __name__ == "__main__":
-    for result in generate_labelled_sources("../Python/project_euler"):
+    for result in generate_labelled_sources(Path("../Python/project_euler")):
         print(result)

@@ -1,3 +1,4 @@
+from pathlib import Path
 import pytest
 
 import context
@@ -5,7 +6,7 @@ from paroxython.generate_programs import generate_programs
 
 
 def test_generate_programs():
-    result = generate_programs("tests/data/simple")
+    result = generate_programs(Path("tests/data/simple"))
 
     program = next(result)
     assert program.path.name == "assignment.py"

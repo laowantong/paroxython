@@ -1,5 +1,5 @@
 # ----------------------------------------------------------------------------------------
-# tests/data/simple/assignment.py
+# assignment.py
 # ----------------------------------------------------------------------------------------
 a = b # assignment
       # assignment_lhs_identifier:a
@@ -7,7 +7,7 @@ a = b # assignment
       # single_assignment:a
 
 # ----------------------------------------------------------------------------------------
-# tests/data/simple/collatz_print.py
+# collatz_print.py
 # ----------------------------------------------------------------------------------------
 def print_collatz(n): # added_block_label (-> +7)
                       # function:print_collatz (-> +7)
@@ -69,7 +69,7 @@ def print_collatz(n): # added_block_label (-> +7)
              # function_call_without_result:print
 
 # ----------------------------------------------------------------------------------------
-# tests/data/simple/fizzbuzz.py
+# fizzbuzz.py
 # ----------------------------------------------------------------------------------------
 for i in range(1, 101): # call_argument:1
                         # call_argument:101
@@ -132,7 +132,7 @@ for i in range(1, 101): # call_argument:1
                  # if_else_branch
 
 # ----------------------------------------------------------------------------------------
-# tests/data/simple/is_even.py
+# is_even.py
 # ----------------------------------------------------------------------------------------
 def is_even(n): # function:is_even (-> +1)
                 # function_argument:n

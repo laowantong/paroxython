@@ -2,7 +2,6 @@ import json
 from bisect import insort
 from collections import defaultdict
 from functools import lru_cache
-from pathlib import Path
 from typing import Callable, Dict, List, Set
 
 import regex  # type: ignore
@@ -215,7 +214,9 @@ class DatabaseFilter:
 
 
 if __name__ == "__main__":
-    dbf = DatabaseFilter(json.loads(Path("db.json").read_text()))
+    Path = __import__("pathlib").Path
+
+    dbf = DatabaseFilter(json.loads(Path("../algo/programs_db.json").read_text()))
 
     forbidden_taxon_patterns = r"""
         call/method/.*

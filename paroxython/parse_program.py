@@ -37,9 +37,9 @@ find_all_features = regex.compile(
 class ProgramParser:
     """Compile the given feature specifications, and search them in a Program."""
 
-    def __init__(self, spec_path: str = "docs/spec.md") -> None:
+    def __init__(self, spec_path: Path = Path("docs/spec.md")) -> None:
         """Compile the features to search."""
-        self.spec_path = Path(spec_path)
+        self.spec_path = spec_path
         text = self.spec_path.read_text()
         self.features: Dict[LabelName, regex.Pattern] = {}
         self.queries: Dict[LabelName, Query] = {}
