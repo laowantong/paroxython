@@ -210,7 +210,7 @@ class DatabaseFilter:
         self.counts["remaining"] = len(self.program_names)
         for (description, count) in self.counts.items():
             summary.append(f"- {display_count(count)} {description}.")
-        return "\n".join(toc + contents + summary)
+        return "\n".join(toc + contents + summary + [""])
 
 
 if __name__ == "__main__":

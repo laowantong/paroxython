@@ -7,11 +7,9 @@ import context
 from make_db import Database
 from recommend_programs import (
     ProgramAdvisor,
-    DatabaseFilter,
     depths_to_cost_length,
     depths_to_cost_zeno,
     get_prefixes_of_taxon_names,
-    get_studied_programs_from_syllabus,
 )
 
 
@@ -28,35 +26,10 @@ def test_depths_to_cost_zeno():
     assert depths_to_cost_zeno(1, 4) == 1 / 4 + 1 / 8 + 1 / 16
 
 
-SYLLABUS = """
-January :
-    + assignment.py
-    + unknown_program.py
-February :
-    + [mandatory] is_even.py
-# EOF: no program below is studied yet
-March :
-    either + collatz_print.py or + fizzbuzz.py
-"""
-
-
-def test_get_studied_programs_from_syllabus():
-    result = get_studied_programs_from_syllabus(SYLLABUS)
-    print(result)
-    assert result == {
-        "assignment.py",
-        "unknown_program.py",
-        "is_even.py",
-    }
-
-
-DB = json.loads(Path("snapshots/simple_db.json").read_text())
-
-
 def test_run():
-    advisor = ProgramAdvisor(DatabaseFilter(DB))
+    advisor = ProgramAdvisor(Path("tests/data/simple_cfg.py"))
+    advisor()
 
-    advisor.init_old_programs(syllabus=SYLLABUS)
     print("\n".join(sorted(advisor.old_program_names)))
     assert advisor.old_program_names == {
         "assignment.py",
@@ -89,7 +62,7 @@ def test_run():
 
     assert advisor.compute_program_cost("collatz_print.py") == 17
 
-    recommendations = advisor.get_recommendations()
+    recommendations = advisor.dbf.get_markdown()
     print(recommendations)
     assert "4 programs initially" in recommendations
     assert "2 programs remaining" in recommendations

@@ -1,0 +1,8 @@
+January :
+    + assignment.py
+    + unknown_program.py
+February :
+    + [mandatory] is_even.py
+# EOF: no program below is studied yet
+March :
+    either + collatz_print.py or + fizzbuzz.py

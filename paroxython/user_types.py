@@ -86,4 +86,21 @@ class JsonDatabase(TypedDict):
     taxons: TaxonInfos
 
 
+# Configuration dictionary
+
+class Syllabus(TypedDict):
+    path: str
+    search_pattern: str
+    finditer_pattern: str
+
+class Configuration(TypedDict):
+    input_path: str # A JSON database as produced by make_db.py
+    output_path: str # The path for the recommendations in Markdown format
+    syllabus: Syllabus
+    cost_computation_strategy: str
+    mandatory_taxon_patterns: List[str]
+    excluded_program_patterns: List[str]
+    excluded_taxon_patterns: List[str]
+
+
 # fmt:on
