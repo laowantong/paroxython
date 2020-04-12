@@ -64,9 +64,20 @@ class ProgramAdvisor:
     def __call__(self):
         db_path = self.base_path / self.cfg["input_path"]
         self.dbf = DatabaseFilter(json.loads(db_path.read_text()))
-        self.init_old_program_names(self.cfg["syllabus"])
-        self.dbf.difference_update(self.old_program_names)
-        self.init_old_taxon_names()
+
+        syllabus = self.cfg["syllabus"]
+        syllabus_path = self.base_path / syllabus["path"]
+        source = regex.search(syllabus["search_pattern"], syllabus_path.read_text())[1]
+        matches = regex.finditer(syllabus["finditer_pattern"], source)
+        old_program_names: ProgramNameSet = {ProgramName(m[1]) for m in matches}
+        self.dbf.difference_update(old_program_names)
+
+        self.old_taxon_names: TaxonNameSet = set()
+        for program_name in old_program_names:
+            taxon_names = self.dbf.program_taxons(program_name)
+            for taxon_name in taxon_names:
+                self.old_taxon_names.update(get_prefixes_of_taxon_names(taxon_name))
+
         self.dbf.filter_blacklisted_programs(self.cfg["blacklisted_program_patterns"])
         self.dbf.filter_forbidden_taxons(self.cfg["forbidden_taxon_patterns"])
         self.dbf.filter_mandatory_taxons(self.cfg["mandatory_taxon_patterns"])
@@ -75,23 +86,6 @@ class ProgramAdvisor:
         output_path = self.base_path / self.cfg["output_path"]
         print(f"Output path: {output_path.resolve()}")
         output_path.write_text(self.dbf.get_markdown())
-
-    def init_old_program_names(self, syllabus):
-        """Find the programs already studied."""
-        self.old_program_names: ProgramNameSet = set()
-        syllabus_path = self.base_path / syllabus["path"]
-        source = regex.search(syllabus["search_pattern"], syllabus_path.read_text())[1]
-        matches = regex.finditer(syllabus["finditer_pattern"], source)
-        program_names = {ProgramName(m[1]) for m in matches}
-        self.old_program_names = self.dbf.intersection(program_names)
-
-    def init_old_taxon_names(self):
-        """Find the taxons already studied."""
-        self.old_taxon_names: TaxonNameSet = set()
-        for program_name in self.old_program_names:
-            taxon_names = self.dbf.program_taxons(program_name)
-            for taxon_name in taxon_names:
-                self.old_taxon_names.update(get_prefixes_of_taxon_names(taxon_name))
 
     def set_cost_computation_strategy(self, strategy) -> None:
         self.compute_taxon_cost.cache_clear()

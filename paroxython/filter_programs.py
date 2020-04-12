@@ -27,8 +27,7 @@ class DatabaseFilter:
     Mutate a set of program names accross various operations, or filters.
 
     Initialized with a DB of tagged programs constructed by make_db.py.
-    The attribute program_names is considered as public, and maintains
-    the current set of filtered program names.
+    The attribute program_names maintains the current result of the filtering.
     """
 
     def __init__(self, db: JsonDatabase) -> None:
@@ -36,9 +35,12 @@ class DatabaseFilter:
         self.program_names: ProgramNameSet = set(db["programs"])
         self.counts = {"initially": len(self.program_names)}
 
-    def program_taxons(self, program_name):
-        """Return the dictionary of taxons associated with a given program name."""
-        return self.db["programs"][program_name]["taxons"]
+    def program_taxons(self, program_name: ProgramName) -> TaxonNameSet:
+        """Return the taxon names associated with a given program name (safe method)."""
+        try:
+            return set(self.db["programs"][program_name]["taxons"])
+        except KeyError:
+            return set()
 
     def update(self, *program_names: ProgramNames) -> None:
         "Update self.program_names, adding programs from all the given ones."
@@ -59,10 +61,6 @@ class DatabaseFilter:
     def complement_update(self):
         "Update self.program_names, taking only programs filtered out so far."
         self.program_names = set(self.db["programs"]).difference(self.program_names)
-
-    def intersection(self, *program_names: ProgramNames) -> ProgramNameSet:
-        "Return those of the given program names which are present in self.program_names."
-        return self.program_names.intersection(*program_names)
 
     def filter_blacklisted_programs(self, patterns: ProgramPatterns) -> None:
         """Suppress from self.program_names all programs whose name matches any blacklisted pattern."""
