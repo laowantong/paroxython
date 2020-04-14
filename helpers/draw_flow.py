@@ -13,21 +13,21 @@ Path(f"{base}.dot").write_text(
     "digraph G {\nnode [shape=box fontname=Courier style=filled fillcolor=cornsilk]\n%s\n}\n"
     % "\n".join(
         [
-            '"db.json" [shape=cylinder fillcolor=moccasin]',
-            '"db.sqlite" [shape=cylinder fillcolor=moccasin]',
+            '"*_db.json" [shape=cylinder fillcolor=moccasin]',
+            '"*_db.sqlite" [shape=cylinder fillcolor=moccasin]',
             '"spec.md" [shape=note fillcolor=moccasin]',
-            '"default_taxonomy.tsv" [shape=note fillcolor=moccasin]',
+            '"*_taxonomy.tsv" [shape=note fillcolor=moccasin]',
             '"source files" [shape=folder fillcolor=moccasin]',
             '"sqlite_queries" [shape=folder fillcolor=moccasin]',
-            '"syllabus.txt" [shape=note fillcolor=moccasin]',
-            'make_db -> "db.json"',
-            'make_db -> "db.sqlite"',
-            '"db.sqlite" -> sqlite_queries',
-            '"db.json" -> filter_programs',
+            '"*_pipe.py" [shape=note fillcolor=moccasin]',
+            'make_db -> "*_db.json"',
+            'make_db -> "*_db.sqlite"',
+            '"*_db.sqlite" -> sqlite_queries',
+            '"*_db.json" -> filter_programs',
             '"spec.md" -> parse_program',
             '"source files" -> generate_programs',
-            '"default_taxonomy.tsv" -> map_taxonomy',
-            '"syllabus.txt" -> recommend_programs',
+            '"*_taxonomy.tsv" -> map_taxonomy',
+            '"*_pipe.py" -> recommend_programs',
         ]
         + [
             f"{imported_name} -> {name}"
