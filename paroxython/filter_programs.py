@@ -1,8 +1,6 @@
-import json
-from bisect import insort
 from collections import defaultdict
 from functools import lru_cache
-from typing import Callable, Dict, List, Set
+from typing import Dict, List, Tuple
 
 import regex  # type: ignore
 
@@ -19,174 +17,146 @@ from user_types import (
     TaxonPatterns,
 )
 
-HORIZONTAL_RULE = "-" * 80
+
+@lru_cache(maxsize=None)
+def depths_to_cost_zeno(start: int, stop: int) -> float:
+    """Sum the slice [start : stop] of the infinite series [1/2 + 1/4 + 1/8 + ...]."""
+    return sum(2 ** ~depth for depth in range(start, stop))
 
 
-class DatabaseFilter:
-    """
-    Mutate a set of program names accross various operations, or filters.
+@lru_cache(maxsize=None)  # NB: memoization needed for consistency with mypy's typing
+def depths_to_cost_length(start: int, stop: int) -> float:
+    return float(stop - start)
 
-    Initialized with a DB of tagged programs constructed by make_db.py.
-    The attribute program_names maintains the current result of the filtering.
-    """
+
+class ProgramFilter:
+    """Evolve a set of recommended programs and a set of imparted knowledge."""
 
     def __init__(self, db: JsonDatabase) -> None:
-        self.db = db
-        self.program_names: ProgramNameSet = set(db["programs"])
-        self.counts = {"initially": len(self.program_names)}
+        """
+        Initialize the state of the filter (recommended programs + imparted knowledge).
 
-    def program_taxons(self, program_name: ProgramName) -> TaxonNameSet:
+        During the evolution of the filter, the recommended program set (initially that
+        of the whole database) can only decrease, and the imparted knowledge (initially
+        empty) can only increase.
+        """
+        self.db = db
+        self.recommended_programs: ProgramNameSet = set(db["programs"])
+        self.imparted_knowledge: TaxonNameSet = set()
+        self.log = {"initially": len(self.recommended_programs)}
+
+    # Select programs from the taxons they cover, and vice versa.
+
+    def programs_of_taxons(self, taxons: TaxonNames) -> ProgramNameSet:
+        """Return the programs covering a given list of taxons."""
+        programs = set()
+        for taxon in taxons:
+            programs.update(self.db["taxons"].get(taxon, []))
+        return programs
+
+    def taxons_of_program(self, program: ProgramName) -> TaxonNameSet:
         """Return the taxon names associated with a given program name (safe method)."""
         try:
-            return set(self.db["programs"][program_name]["taxons"])
+            return set(self.db["programs"][program]["taxons"])
         except KeyError:
             return set()
 
-    def update(self, *program_names: ProgramNames) -> None:
-        "Update self.program_names, adding programs from all the given ones."
-        self.program_names.update(*program_names)
+    def taxons_of_programs(self, programs: ProgramNameSet) -> TaxonNameSet:
+        """Fold self.taxons_of_program on several program names."""
+        taxons: TaxonNameSet = set()
+        for program in programs:
+            taxons.update(self.taxons_of_program(program))
+        return taxons
 
-    def intersection_update(self, *program_names: ProgramNames) -> None:
-        "Update self.program_names, keeping only programs found in it and all the given ones."
-        self.program_names.intersection_update(*program_names)
+    # Update the state of the filter by applying set operations with the given taxons.
 
-    def difference_update(self, *program_names: ProgramNames) -> None:
-        "Update self.program_names, removing programs found in the given ones."
-        self.program_names.difference_update(*program_names)
+    def patterns_to_taxons(self, patterns: TaxonPatterns) -> TaxonNameSet:
+        """Return all the taxon names matching at least one of the given regex patterns."""
+        return set(filter(regex.compile("|".join(patterns)).match, self.db["taxons"]))
 
-    def symmetric_difference_update(self, *program_names: ProgramNames) -> None:
-        "Update self.program_names, keeping only programs found in either set, but not in both."
-        self.program_names.symmetric_difference_update(*program_names)
+    def impart_taxons(self, taxons: TaxonNameSet) -> None:
+        """Enrich the imparted knowledge with all the prefixes of the given taxons."""
+        for taxon in taxons:
+            segments = taxon.split("/")
+            for i in range(len(segments)):
+                prefix = "/".join(segments[: i + 1])
+                if prefix in self.db["taxons"]:
+                    self.imparted_knowledge.add(TaxonName(prefix))
 
-    def complement_update(self):
-        "Update self.program_names, taking only programs filtered out so far."
-        self.program_names = set(self.db["programs"]).difference(self.program_names)
+    def exclude_taxons(self, taxons: TaxonNames) -> None:
+        """Remove from the recommended programs those covering at least one given taxon."""
+        programs = self.programs_of_taxons(taxons)
+        self.recommended_programs.difference_update(programs)
 
-    def filter_blacklisted_programs(self, patterns: ProgramPatterns) -> None:
-        """Suppress from self.program_names all programs whose name matches any blacklisted pattern."""
-        count = len(self.program_names)
-        if patterns:
-            match = regex.compile("|".join(patterns)).match
-            acc: ProgramNameSet = set()
-            for program_name in list(self.program_names):
-                if match(program_name):
-                    acc.add(program_name)
-            self.program_names.difference_update(acc)
-        self.counts["blacklisted"] = count - len(self.program_names)
+    def include_taxons(self, taxons: TaxonNames) -> None:
+        """Remove from the recommended programs those not covering any given taxon."""
+        programs = self.programs_of_taxons(taxons)
+        self.recommended_programs.intersection_update(programs)
 
-    def filter_forbidden_taxons(self, patterns: TaxonPatterns) -> None:
-        """Suppress from self.program_names all programs using any forbidden taxon."""
-        count = len(self.program_names)
-        if patterns:
-            match = regex.compile("|".join(patterns)).match
-            acc: ProgramNameSet = set()
-            for (taxon_name, program_names) in self.db["taxons"].items():
-                if match(taxon_name):  # this taxon is forbidden
-                    acc.update(program_names)
-            self.program_names.difference_update(acc)
-        self.counts["tagged with a forbidden taxon"] = count - len(self.program_names)
+    # Update the state of the filter by applying set operations with the given taxons.
 
-    def filter_mandatory_taxons(self, patterns: TaxonPatterns) -> None:
-        """Suppress from self.program_names all programs not using at least one mandatory taxon."""
-        count = len(self.program_names)
-        if patterns:
-            matches = [regex.compile(row).match for row in patterns]
-            acc: ProgramNameSet = set()
-            for program_name in self.program_names:
-                for match in matches:
-                    for taxon_name in self.program_taxons(program_name):
-                        if match(taxon_name):  # this mandatory taxon is used
-                            break  # no need to test the other taxons of this program
-                    else:  # this mandatory taxon is not used by this program
-                        acc.add(program_name)
-                        break  # no need to test the other mandatory taxons
-            self.program_names.difference_update(acc)
-        self.counts["not tagged with a mandatory taxon"] = count - len(self.program_names)
+    def patterns_to_programs(self, patterns: ProgramPatterns) -> ProgramNameSet:
+        """Return all the program names matching at least one of the given regex patterns."""
+        return set(filter(regex.compile("|".join(patterns)).match, self.db["programs"]))
 
-    def get_taxons_in_programs(self, patterns: ProgramPatterns) -> TaxonNameSet:
-        """Return all taxons included in at least one program of the given list."""
-        result: TaxonNameSet = set()
-        if patterns:
-            match = regex.compile("|".join(patterns)).match
-            for program_name in self.program_names:
-                if match(program_name):
-                    result.update(self.program_taxons(program_name))
-        return result
+    def impart_programs(self, programs: ProgramNameSet) -> None:
+        """
+        Remove from the recommended programs those found in the given ones, and enrich the
+        imparted knowledge with all the prefixes of the taxons covered by these programs.
+        """
+        self.impart_taxons(self.taxons_of_programs(programs))
+        self.recommended_programs.difference_update(programs)
 
-    def get_taxons_not_in_programs(self, patterns: ProgramPatterns) -> TaxonNameSet:
-        """Return all taxons not included in any program of the given list."""
-        result: TaxonNameSet = set(self.db["taxons"])
-        if patterns:
-            match = regex.compile("|".join(patterns)).match
-            for program_name in self.program_names:
-                if match(program_name):
-                    result.difference_update(self.program_taxons(program_name))
-        return result
+    def exclude_programs(self, programs: ProgramNameSet) -> None:
+        "Remove from the recommended programs those found in the given ones."
+        self.recommended_programs.difference_update(programs)
 
-    def get_extra_taxons(self, patterns: TaxonPatterns) -> Dict[ProgramName, TaxonNames]:
-        """For each program, list those of its taxons which are not among the given taxons."""
-        match = regex.compile("|".join(patterns)).match
-        extra_taxon_names: Dict[ProgramName, TaxonNames] = {}
-        for program_name in self.program_names:
-            extra_taxon_names[program_name] = []
-            for taxon_name in self.program_taxons(program_name):
-                if not match(taxon_name):
-                    insort(extra_taxon_names[program_name], taxon_name)
-        return extra_taxon_names
+    def include_programs(self, programs: ProgramNameSet) -> None:
+        "Remove from the recommended programs those not found in the given ones."
+        self.recommended_programs.intersection_update(programs)
 
-    def get_lacking_taxons(self, patterns: TaxonPatterns) -> Dict[ProgramName, TaxonPatterns]:
-        """For each program, list those of the given taxons that it does not include."""
-        matches = [regex.compile(row).match for row in patterns]
-        lacking_taxon_patterns: Dict[ProgramName, TaxonPatterns] = {}
-        for program_name in self.program_names:
-            lacking_taxon_patterns[program_name] = []
-            for (match, wanted_taxon) in zip(matches, patterns):
-                for taxon_name in self.program_taxons(program_name):
-                    if match(taxon_name):  # this wanted taxon is used
-                        break  # no need to test the other taxons of this program
-                else:  # this wanted taxon is not used by this program
-                    insort(lacking_taxon_patterns[program_name], wanted_taxon)
-        return lacking_taxon_patterns
+    # Compute the learning cost of the recommended programs wrt the imparted knowledge.
 
-    def sort(self, criterium: Callable, reverse=False):
-        """Generic program sort. Use the following helpers instead."""
-        self.sorted_programs = sorted((criterium(p), p) for p in self.program_names)
+    def set_cost_computation_strategy(self, strategy) -> None:
+        self.compute_taxon_cost.cache_clear()
+        if strategy.lower() == "zeno":
+            self.depths_to_cost = depths_to_cost_zeno
+        elif strategy == "length":
+            self.depths_to_cost = depths_to_cost_length
+        else:
+            raise NotImplementedError
+        self.depths_to_cost.cache_clear()
 
-    def sort_by_taxon_count(self, reverse=False):
-        """Sort the programs by number of distinct taxons."""
-        self.sort(lambda p: len(self.program_taxons(p)), reverse)
+    @lru_cache(maxsize=None)
+    def compute_taxon_cost(self, taxon: TaxonName) -> float:
+        """Evaluate the learning cost of a given taxon name."""
+        (start, stop) = (0, 0)
+        if taxon not in self.imparted_knowledge:
+            segments = taxon.split("/")
+            stop = len(segments)
+            for start in range(stop - 1, -1, -1):
+                if "/".join(segments[:start]) in self.imparted_knowledge:
+                    break
+        return self.depths_to_cost(start, stop)
 
-    def sort_by_line_count(self, reverse=False):
-        """Sort the programs by SLOC count."""
-        self.sort(lambda p: self.db["programs"][p]["source"].count("\n"), reverse)
-
-    def sort_by_extra_taxon_count(self, taxons: TaxonPatterns, reverse=False):
-        """Sort the programs by number of extra taxons wrt a given list."""
-        extra_taxons = self.get_extra_taxons(taxons)
-        self.sort(lambda p: len(extra_taxons[p]), reverse)
-
-    def sort_by_lacking_taxon_count(self, taxons: TaxonPatterns, reverse=False):
-        """Sort the programs by number of lacking taxons wrt a given list."""
-        lacking_taxons = self.get_lacking_taxons(taxons)
-        self.sort(lambda p: len(lacking_taxons[p]), reverse)
-
-    def sort_by_distance(self, taxons: TaxonPatterns, reverse=False):
-        """Sort the programs by number of extra and lacking taxons wrt a given list."""
-        extra_taxons = self.get_extra_taxons(taxons)
-        lacking_taxons = self.get_lacking_taxons(taxons)
-        self.sort(lambda p: len(extra_taxons[p]) + len(lacking_taxons[p]), reverse)
+    def get_sorted_recommendations(self) -> List[Tuple[float, ProgramName]]:
+        result: List[Tuple[float, ProgramName]] = []
+        for program in self.recommended_programs:
+            taxons = self.taxons_of_program(program)
+            result.append((sum(map(self.compute_taxon_cost, taxons)), program))
+        return sorted(result)
 
     def get_markdown(self, section_group_limit=5) -> str:
         display_count = lambda n: f"{n:3} program" + ("" if n == 1 else "s")
-        n = len(self.program_names)
+        n = len(self.recommended_programs)
         title_to_slug = title_converter()
         toc_data: Dict[float, ProgramNames] = defaultdict(list)
-        for (cost, program_name) in self.sorted_programs:
+        for (cost, program_name) in self.get_sorted_recommendations():
             toc_data[cost].append(program_name)
         toc: List[str] = ["# Table of contents"]
         contents: List[str] = [f"# {display_count(n)}"]
         must_detail = True
-        remainder = len(self.program_names)
+        remainder = len(self.recommended_programs)
         for (cost, program_names) in toc_data.items():
             if must_detail:
                 if len(program_names) >= section_group_limit:
@@ -205,33 +175,7 @@ class DatabaseFilter:
                 for (taxon_name, spans) in program["taxons"].items():
                     contents.append(f"- {len(spans):3}: `{taxon_name}`")
         summary: List[str] = ["# Quantitative summary"]
-        self.counts["remaining"] = len(self.program_names)
-        for (description, count) in self.counts.items():
+        self.log["remaining"] = len(self.recommended_programs)
+        for (description, count) in self.log.items():
             summary.append(f"- {display_count(count)} {description}.")
-        print("\n".join(summary))
         return "\n".join(toc + contents + summary + [""])
-
-
-if __name__ == "__main__":
-    Path = __import__("pathlib").Path
-
-    dbf = DatabaseFilter(json.loads(Path("../algo/programs_db.json").read_text()))
-
-    forbidden_taxon_patterns = r"""
-        call/method/.*
-    """.strip().split()
-    dbf.filter_forbidden_taxons(forbidden_taxon_patterns)
-
-    mandatory_taxon_patterns = r"""
-        subroutine_definition\b.*
-        operator/addition\b.*
-    """.strip().split()
-    dbf.filter_mandatory_taxons(mandatory_taxon_patterns)
-
-    blacklisted_program_patterns = r"""
-        .+/euler_.+
-    """.strip().split()
-    dbf.filter_blacklisted_programs(blacklisted_program_patterns)
-
-    dbf.sort_by_taxon_count()
-    print(dbf.get_markdown())

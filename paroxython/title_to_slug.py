@@ -9,6 +9,7 @@ def title_converter():
     cache = {}
 
     def title_to_slug(title, deduplicate=False):
+        title = title.strip()
         if title not in cache:
             slug = normalize("NFD", title.lower()).encode("ASCII", "ignore").decode("ASCII")
             slug = slug.replace(" ", "-")

@@ -1,8 +1,8 @@
 from pathlib import Path
 from typing import Counter as Bag
-from typing import Dict, List, NamedTuple, NewType, Set, Tuple
+from typing import Dict, List, NamedTuple, NewType, Set, Tuple, Union
 
-from typing_extensions import TypedDict  # Python 3.8: import directly from typing
+from typing_extensions import TypedDict, Literal  # Python 3.8: import directly from typing
 
 from span import Span
 
@@ -86,21 +86,27 @@ class JsonDatabase(TypedDict):
     taxons: TaxonInfos
 
 
-# Configuration dictionary
+# Pipeline dictionary
+#
+# The pipeline file consists in a Python dictionary which, for security purposes, will be
+# evaluated by ast.literal_eval: https://docs.python.org/3/library/ast.html#ast.literal_eval).
+#
+# Main benefits over JSON:
+# - with raw strings r"...", no need to double-escape backslashes in regexes;
+# - trailing commas;
+# - comments!
 
-class Syllabus(TypedDict):
-    path: str
-    search_pattern: str
-    finditer_pattern: str
+class Process(TypedDict):
+    operation: Literal["acquire", "exclude", "keep"]
+    programs_or_taxons: Literal["programs", "taxons"]
+    name_or_pattern: Literal["name", "pattern"]
+    source: Union[str, List[str]]
 
-class Configuration(TypedDict):
-    input_path: str # A JSON database as produced by make_db.py
-    output_path: str # The path for the recommendations in Markdown format
-    syllabus: Syllabus
+class Pipeline(TypedDict):
+    input_path: str
+    output_path: str
     cost_computation_strategy: str
-    mandatory_taxon_patterns: TaxonPatterns
-    blacklisted_program_patterns: ProgramPatterns
-    forbidden_taxon_patterns: TaxonPatterns
+    processes: List[Process]
 
 
 # fmt:on

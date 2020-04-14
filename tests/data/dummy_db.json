@@ -1,0 +1,353 @@
+{
+  "programs": {
+    "prg1": {
+      "source": "1   X/W+7  X/S\n2   X+1  Y/T  X/S/M\n3   X/W  X/S/M/L/R\n4   X/S+5  Y/T/Q\n5   O/N/P\n6   O/J  X/S/M/L/R/D  X/S/M/L+2\n7   Y\n8   O/N  X/S/M/L/R/D  O/J\n9   X/S  X/K",
+      "taxons": {
+        "X/W": [[1,8],[3,3]],
+        "X/S": [[1,1],[4,9],[9,9]],
+        "X": [[2,3]],
+        "Y/T": [[2,2]],
+        "X/S/M": [[2,2]],
+        "X/S/M/L/R": [[3,3]],
+        "Y/T/Q": [[4,4]],
+        "O/N/P": [[5,5]],
+        "O/J": [[6,6],[8,8]],
+        "X/S/M/L/R/D": [[6,6],[8,8]],
+        "X/S/M/L": [[6,8]],
+        "Y": [[7,7]],
+        "O/N": [[8,8]],
+        "X/K": [[9,9]]
+      }
+    },
+    "prg2": {
+      "source": "1   O/N/P  Y/T/Q  Y\n2   X/S/M/L/R/D  O\n3   O/C/H/B  X/S/M/L/R/D\n4   \n5   \n6   X/S/M  O\n7   X/S/M/L/R  Y/T  O/C\n8   X/G  X/S/M/L/V+1\n9   X/S/M/L/R/D  X/S/M/L/V  Y/T/Q  O/C/H/B/I",
+      "taxons": {
+        "O/N/P": [[1,1]],
+        "Y/T/Q": [[1,1],[9,9]],
+        "Y": [[1,1]],
+        "X/S/M/L/R/D": [[2,2],[3,3],[9,9]],
+        "O": [[2,2],[6,6]],
+        "O/C/H/B": [[3,3]],
+        "X/S/M": [[6,6]],
+        "X/S/M/L/R": [[7,7]],
+        "Y/T": [[7,7]],
+        "O/C": [[7,7]],
+        "X/G": [[8,8]],
+        "X/S/M/L/V": [[8,9],[9,9]],
+        "O/C/H/B/I": [[9,9]]
+      }
+    },
+    "prg3": {
+      "source": "1   O/N/P  X/K  Y/T\n2   X/S/M/L/V\n3   O/C/H/B\n4   X/S/M/L/R+4\n5   O/J  X/S/M  O/C/F/U  O/C/H\n6   O/N/P  X/S  Y\n7   O\n8   X/S/M/L  Y/E\n9   O/C/H/B  O/J",
+      "taxons": {
+        "O/N/P": [[1,1],[6,6]],
+        "X/K": [[1,1]],
+        "Y/T": [[1,1]],
+        "X/S/M/L/V": [[2,2]],
+        "O/C/H/B": [[3,3],[9,9]],
+        "X/S/M/L/R": [[4,8]],
+        "O/J": [[5,5],[9,9]],
+        "X/S/M": [[5,5]],
+        "O/C/F/U": [[5,5]],
+        "O/C/H": [[5,5]],
+        "X/S": [[6,6]],
+        "Y": [[6,6]],
+        "O": [[7,7]],
+        "X/S/M/L": [[8,8]],
+        "Y/E": [[8,8]]
+      }
+    },
+    "prg4": {
+      "source": "1   O/N/P  X\n2   O/N/P  Y/T+1\n3   X/S  O+5  Y/T/Q+4  O/C/H/B\n4   X/S/M/L/R/D/A  X/G  X\n5   X/S/M/L/R  O  Y\n6   X/S\n7   X/S/M/L/R/D/A  X/S/M/L/R/D\n8   O/C/F/U\n9   X/S/M/L",
+      "taxons": {
+        "O/N/P": [[1,1],[2,2]],
+        "X": [[1,1],[4,4]],
+        "Y/T": [[2,3]],
+        "X/S": [[3,3],[6,6]],
+        "O": [[3,8],[5,5]],
+        "Y/T/Q": [[3,7]],
+        "O/C/H/B": [[3,3]],
+        "X/S/M/L/R/D/A": [[4,4],[7,7]],
+        "X/G": [[4,4]],
+        "X/S/M/L/R": [[5,5]],
+        "Y": [[5,5]],
+        "X/S/M/L/R/D": [[7,7]],
+        "O/C/F/U": [[8,8]],
+        "X/S/M/L": [[9,9]]
+      }
+    },
+    "prg5": {
+      "source": "1   O/N/P+1  O/C/H/B/I\n2   O/N/P  X/K  O/N  X/S\n3   X\n4   O/C/H/B\n5   X/S/M/L/R/D/A\n6   X/S/M/L/V  X  O/C\n7   O/C/F  O/C/H/B  X/K\n8   O/C/H  O/N\n9   O/C/H/B/I  O/N",
+      "taxons": {
+        "O/N/P": [[1,2],[2,2]],
+        "O/C/H/B/I": [[1,1],[9,9]],
+        "X/K": [[2,2],[7,7]],
+        "O/N": [[2,2],[8,8],[9,9]],
+        "X/S": [[2,2]],
+        "X": [[3,3],[6,6]],
+        "O/C/H/B": [[4,4],[7,7]],
+        "X/S/M/L/R/D/A": [[5,5]],
+        "X/S/M/L/V": [[6,6]],
+        "O/C": [[6,6]],
+        "O/C/F": [[7,7]],
+        "O/C/H": [[8,8]]
+      }
+    },
+    "prg6": {
+      "source": "1   X\n2   O/N  Y/T/Q  X/W\n3   \n4   O/J  X/K  X\n5   Y/T\n6   O/C/F/U  O/C+1  X/S/M/L/V  O/N  X/S/M/L/R/D/A\n7   O/C/F\n8   X/K\n9   Y/E  O/C/H/B/I  X/S/M/L/V",
+      "taxons": {
+        "X": [[1,1],[4,4]],
+        "O/N": [[2,2],[6,6]],
+        "Y/T/Q": [[2,2]],
+        "X/W": [[2,2]],
+        "O/J": [[4,4]],
+        "X/K": [[4,4],[8,8]],
+        "Y/T": [[5,5]],
+        "O/C/F/U": [[6,6]],
+        "O/C": [[6,7]],
+        "X/S/M/L/V": [[6,6],[9,9]],
+        "X/S/M/L/R/D/A": [[6,6]],
+        "O/C/F": [[7,7]],
+        "Y/E": [[9,9]],
+        "O/C/H/B/I": [[9,9]]
+      }
+    },
+    "prg7": {
+      "source": "1   O/J  Y/E  X/K\n2   O/N  O+3  X/S/M/L/R  Y/E\n3   O/C/F/U  Y/T/Q  X  O/C/H/B/I\n4   O/C/H/B\n5   Y/T/Q\n6   X/S/M/L\n7   X/S/M/L/R/D\n8   X/S\n9   Y/T  X/S/M",
+      "taxons": {
+        "O/J": [[1,1]],
+        "Y/E": [[1,1],[2,2]],
+        "X/K": [[1,1]],
+        "O/N": [[2,2]],
+        "O": [[2,5]],
+        "X/S/M/L/R": [[2,2]],
+        "O/C/F/U": [[3,3]],
+        "Y/T/Q": [[3,3],[5,5]],
+        "X": [[3,3]],
+        "O/C/H/B/I": [[3,3]],
+        "O/C/H/B": [[4,4]],
+        "X/S/M/L": [[6,6]],
+        "X/S/M/L/R/D": [[7,7]],
+        "X/S": [[8,8]],
+        "Y/T": [[9,9]],
+        "X/S/M": [[9,9]]
+      }
+    },
+    "prg8": {
+      "source": "1   X/W  O/C\n2   O/C/F/U\n3   O/N  X/S/M/L/R/D/A  X/S/M/L/V  Y/E\n4   X/S/M/L+2  O/J  Y/E  O/C\n5   X/K  O/N/P\n6   X/S/M/L/R/D  O/C/H/B",
+      "taxons": {
+        "X/W": [[1,1]],
+        "O/C": [[1,1],[4,4]],
+        "O/C/F/U": [[2,2]],
+        "O/N": [[3,3]],
+        "X/S/M/L/R/D/A": [[3,3]],
+        "X/S/M/L/V": [[3,3]],
+        "Y/E": [[3,3],[4,4]],
+        "X/S/M/L": [[4,6]],
+        "O/J": [[4,4]],
+        "X/K": [[5,5]],
+        "O/N/P": [[5,5]],
+        "X/S/M/L/R/D": [[6,6]],
+        "O/C/H/B": [[6,6]]
+      }
+    },
+    "prg9": {
+      "source": "1   X/W\n2   O/N  Y\n3   O/C/H  Y/T/Q\n4   \n5   O/J  O/C/H/B/I  O/C/H\n6   X/S/M\n7   O/C/H/B/I+2  Y/E  X/S/M/L/R  X/K  X/S/M/L/V\n8   O/J  O/C/H/B/I\n9   Y/T  O/C/F  O  X/S/M",
+      "taxons": {
+        "X/W": [[1,1]],
+        "O/N": [[2,2]],
+        "Y": [[2,2]],
+        "O/C/H": [[3,3],[5,5]],
+        "Y/T/Q": [[3,3]],
+        "O/J": [[5,5],[8,8]],
+        "O/C/H/B/I": [[5,5],[7,9],[8,8]],
+        "X/S/M": [[6,6],[9,9]],
+        "Y/E": [[7,7]],
+        "X/S/M/L/R": [[7,7]],
+        "X/K": [[7,7]],
+        "X/S/M/L/V": [[7,7]],
+        "Y/T": [[9,9]],
+        "O/C/F": [[9,9]],
+        "O": [[9,9]]
+      }
+    }
+  },
+  "taxons": {
+    "O": [
+      "prg2",
+      "prg3",
+      "prg4",
+      "prg7",
+      "prg9"
+    ],
+    "O/C": [
+      "prg2",
+      "prg5",
+      "prg6",
+      "prg8"
+    ],
+    "O/C/F": [
+      "prg5",
+      "prg6",
+      "prg9"
+    ],
+    "O/C/F/U": [
+      "prg3",
+      "prg4",
+      "prg6",
+      "prg7",
+      "prg8"
+    ],
+    "O/C/H": [
+      "prg3",
+      "prg5",
+      "prg9"
+    ],
+    "O/C/H/B": [
+      "prg2",
+      "prg3",
+      "prg4",
+      "prg5",
+      "prg7",
+      "prg8"
+    ],
+    "O/C/H/B/I": [
+      "prg2",
+      "prg5",
+      "prg6",
+      "prg7",
+      "prg9"
+    ],
+    "O/J": [
+      "prg1",
+      "prg3",
+      "prg6",
+      "prg7",
+      "prg8",
+      "prg9"
+    ],
+    "O/N": [
+      "prg1",
+      "prg5",
+      "prg6",
+      "prg7",
+      "prg8",
+      "prg9"
+    ],
+    "O/N/P": [
+      "prg1",
+      "prg2",
+      "prg3",
+      "prg4",
+      "prg5",
+      "prg8"
+    ],
+    "X": [
+      "prg1",
+      "prg4",
+      "prg5",
+      "prg6",
+      "prg7"
+    ],
+    "X/G": [
+      "prg2",
+      "prg4"
+    ],
+    "X/K": [
+      "prg1",
+      "prg3",
+      "prg5",
+      "prg6",
+      "prg7",
+      "prg8",
+      "prg9"
+    ],
+    "X/S": [
+      "prg1",
+      "prg3",
+      "prg4",
+      "prg5",
+      "prg7"
+    ],
+    "X/S/M": [
+      "prg1",
+      "prg2",
+      "prg3",
+      "prg7",
+      "prg9"
+    ],
+    "X/S/M/L": [
+      "prg1",
+      "prg3",
+      "prg4",
+      "prg7",
+      "prg8"
+    ],
+    "X/S/M/L/R": [
+      "prg1",
+      "prg2",
+      "prg3",
+      "prg4",
+      "prg7",
+      "prg9"
+    ],
+    "X/S/M/L/R/D": [
+      "prg1",
+      "prg2",
+      "prg4",
+      "prg7",
+      "prg8"
+    ],
+    "X/S/M/L/R/D/A": [
+      "prg4",
+      "prg5",
+      "prg6",
+      "prg8"
+    ],
+    "X/S/M/L/V": [
+      "prg2",
+      "prg3",
+      "prg5",
+      "prg6",
+      "prg8",
+      "prg9"
+    ],
+    "X/W": [
+      "prg1",
+      "prg6",
+      "prg8",
+      "prg9"
+    ],
+    "Y": [
+      "prg1",
+      "prg2",
+      "prg3",
+      "prg4",
+      "prg9"
+    ],
+    "Y/E": [
+      "prg3",
+      "prg6",
+      "prg7",
+      "prg8",
+      "prg9"
+    ],
+    "Y/T": [
+      "prg1",
+      "prg2",
+      "prg3",
+      "prg4",
+      "prg6",
+      "prg7",
+      "prg9"
+    ],
+    "Y/T/Q": [
+      "prg1",
+      "prg2",
+      "prg4",
+      "prg6",
+      "prg7",
+      "prg9"
+    ]
+  }
+}

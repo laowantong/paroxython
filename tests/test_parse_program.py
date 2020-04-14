@@ -8,7 +8,6 @@ from paroxython.generate_programs import generate_programs
 from paroxython.parse_program import ProgramParser
 from paroxython.preprocess_source import (
     centrifugate_hints,
-    cleanup_factory,
     collect_hints,
     remove_hints,
 )

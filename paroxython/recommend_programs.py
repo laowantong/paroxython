@@ -1,119 +1,56 @@
 import json
+import subprocess
 from ast import literal_eval
-from functools import lru_cache
 from pathlib import Path
-from typing import Dict, Tuple
 
-import regex  # type: ignore
-
-from filter_programs import DatabaseFilter
-from user_types import (
-    Configuration,
-    ProgramName,
-    ProgramNames,
-    ProgramNameSet,
-    TaxonName,
-    TaxonNames,
-    TaxonNameSet,
-)
+from filter_programs import ProgramFilter
+from user_types import Pipeline
 
 
-@lru_cache(maxsize=None)
-def depths_to_cost_zeno(start: int, stop: int) -> float:
-    """Sum the slice [start : stop] of the infinite series [1/2 + 1/4 + 1/8 + ...]."""
-    return sum(2 ** ~depth for depth in range(start, stop))
+def recommend_programs(pipeline_path: Path):
+    """Read and execute a pipeline of processes and dump the resulting recommendations."""
+    pipe: Pipeline = literal_eval(pipeline_path.read_text())
+    base_path = pipeline_path.parent  # to be passed to the shell commands
+    dbf = ProgramFilter(json.loads(Path(base_path / pipe["input_path"]).read_text()))
+    current_count = len(dbf.recommended_programs)
 
+    # Execute sequentially all the processes in the pipeline
+    for process in pipe["processes"]:
 
-@lru_cache(maxsize=None)  # NB: memoization needed for consistency with mypy's typing
-def depths_to_cost_length(start: int, stop: int) -> float:
-    return float(stop - start)
+        # Hide the ugliness of dynamic method calls by defining an ad hoc function
+        method_call = lambda template, *args: getattr(dbf, template.format(**process))(*args)
 
+        # The names or patterns fed to a process can either be a list of strings...
+        strings = process["source"]
+        if not isinstance(strings, list):  # ... or a shell command printing them on stdout
+            strings = subprocess.run(
+                str(process["source"]).format(base_path=base_path),  # str() makes mypy happy
+                capture_output=True,
+                encoding="utf-8",
+                shell=True,
+            ).stdout.split("\n")
 
-@lru_cache(maxsize=None)
-def get_prefixes_of_taxon_names(taxon_name: TaxonName) -> TaxonNames:
-    """
-    Compute the whole set of the notions required by a taxon already studied.
+        # If needed, replace the resulting strings by the matched names of programs or taxons
+        if process["name_or_pattern"] == "pattern":
+            strings = method_call("patterns_to_{programs_or_taxons}", strings)
 
-    Since a taxon has the form "segment_0/segment_1/.../segment_n", introducing it requires
-    the introduction of all its "prefix" notions, namely:
-        - "segment_0"
-        - "segment_0/segment_1"
-        - ...
-        - "segment_0/segment_1/.../segment_n"
-    """
-    segments = taxon_name.split("/")
-    return [TaxonName("/".join(segments[: i + 1])) for i in range(len(segments))]
+        # Apply to them a method whose name depends on both the operation and the name category
+        method_call("{operation}_{programs_or_taxons}", strings)
 
+        # Update the statistics if the filter state for the last operation
+        (previous_count, current_count) = (current_count, len(dbf.recommended_programs))
+        key = "removed by {operation}/{programs_or_taxons}/{name_or_pattern}".format(**process)
+        dbf.log[key] = previous_count - current_count
 
-class ProgramAdvisor:
-    def __init__(self, configuration_path: Path):
-        """
-        Read a configuration file written as a Python dictionary.
-
-        For security purposes, this expression is evaluated by ast.literal_eval
-        Cf. https://docs.python.org/3/library/ast.html#ast.literal_eval).
-
-        Main benefits over JSON:
-        - with raw strings r"...", no need to double-escape backslashes in regexes;
-        - trailing commas;
-        - comments!
-        """
-        self.cfg: Configuration = literal_eval(configuration_path.read_text())
-        self.base_path = configuration_path.parent
-
-    def __call__(self):
-        db_path = self.base_path / self.cfg["input_path"]
-        self.dbf = DatabaseFilter(json.loads(db_path.read_text()))
-
-        syllabus = self.cfg["syllabus"]
-        syllabus_path = self.base_path / syllabus["path"]
-        source = regex.search(syllabus["search_pattern"], syllabus_path.read_text())[1]
-        matches = regex.finditer(syllabus["finditer_pattern"], source)
-        old_program_names: ProgramNameSet = {ProgramName(m[1]) for m in matches}
-        self.dbf.difference_update(old_program_names)
-
-        self.old_taxon_names: TaxonNameSet = set()
-        for program_name in old_program_names:
-            taxon_names = self.dbf.program_taxons(program_name)
-            for taxon_name in taxon_names:
-                self.old_taxon_names.update(get_prefixes_of_taxon_names(taxon_name))
-
-        self.dbf.filter_blacklisted_programs(self.cfg["blacklisted_program_patterns"])
-        self.dbf.filter_forbidden_taxons(self.cfg["forbidden_taxon_patterns"])
-        self.dbf.filter_mandatory_taxons(self.cfg["mandatory_taxon_patterns"])
-        self.set_cost_computation_strategy(self.cfg["cost_computation_strategy"])
-        self.dbf.sort(self.compute_program_cost)
-        output_path = self.base_path / self.cfg["output_path"]
+    # Sort the recommendations by increasing costs and dump them
+    dbf.set_cost_computation_strategy(pipe["cost_computation_strategy"])
+    result = dbf.get_markdown()
+    if pipe.get("output_path"):
+        output_path = base_path / pipe["output_path"]
         print(f"Output path: {output_path.resolve()}")
-        output_path.write_text(self.dbf.get_markdown())
-
-    def set_cost_computation_strategy(self, strategy) -> None:
-        self.compute_taxon_cost.cache_clear()
-        if strategy.lower() == "zeno":
-            self.depths_to_cost = depths_to_cost_zeno
-        elif strategy == "length":
-            self.depths_to_cost = depths_to_cost_length
-        else:
-            raise NotImplementedError  # pragma: no cover
-        self.depths_to_cost.cache_clear()
-
-    @lru_cache(maxsize=None)
-    def compute_taxon_cost(self, taxon_name: TaxonName) -> float:
-        """Evaluate the learning cost of a given taxon name."""
-        (start, stop) = (0, 0)
-        if taxon_name not in self.old_taxon_names:
-            segments = taxon_name.split("/")
-            stop = len(segments)
-            for start in range(stop - 1, -1, -1):
-                if "/".join(segments[:start]) in self.old_taxon_names:
-                    break
-        return self.depths_to_cost(start, stop)
-
-    def compute_program_cost(self, program_name: ProgramName) -> float:
-        """Sum the cost of all taxons of the given program."""
-        return sum(map(self.compute_taxon_cost, self.dbf.program_taxons(program_name)))
+        output_path.write_text(result)
+    return result
 
 
 if __name__ == "__main__":
-    recommend_programs = ProgramAdvisor(Path("../algo/programs_cfg.py"))
-    recommend_programs()
+    recommend_programs(Path("../algo/programs_pipe.py"))

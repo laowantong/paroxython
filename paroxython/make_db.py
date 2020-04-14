@@ -11,17 +11,13 @@ from generate_labels import generate_labelled_programs
 from map_taxonomy import Taxonomy
 from user_types import (
     LabelInfos,
-    LabelName,
     Labels,
     LabelsPoorSpans,
     PathTaxons,
     Program,
     ProgramInfos,
     ProgramName,
-    ProgramRecord,
-    Source,
     TaxonInfos,
-    TaxonName,
     Taxons,
     TaxonsPoorSpans,
 )

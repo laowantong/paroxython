@@ -1,310 +1,250 @@
-from collections import defaultdict
+import json
 from pathlib import Path
 
 import pytest
-import regex  # type: ignore
 
 import context
-from paroxython.filter_programs import DatabaseFilter
-
-text = Path("tests/data/dummy_taxons_and_programs.txt").read_text()
-
-taxon_names = regex.search(r"(?ms)^TAXONS\n(.+?)\n\n", text)[1].split()
-programs = regex.findall(r"(?ms)^(prg\d+)\n(.+?)\n\n", text)
-
-db = {
-    "programs": {
-        program_name: {"source": source, "taxons": defaultdict(list),}
-        for (program_name, source) in programs
-    },
-    "taxons": {taxon_name: set() for taxon_name in taxon_names},
-}
+from paroxython.filter_programs import ProgramFilter, depths_to_cost_length, depths_to_cost_zeno
 
 
-for (program_name, source) in programs:
-    program = db["programs"][program_name]
-    for line in source.split("\n"):
-        (i, *taxons) = line.split()
-        i = int(i)
-        for taxon in taxons:
-            (taxon_name, _, length) = taxon.partition("+")
-            span = (i, i + int(length)) if length else (i, i)
-            program["taxons"][taxon_name].append(span)
-            db["taxons"][taxon_name].add(program_name)
-
-# from pprint import pprint
-# pprint(db, width=200)
+def test_depths_to_cost_zeno():
+    assert depths_to_cost_zeno(0, 0) == 0
+    assert depths_to_cost_zeno(42, 42) == 0
+    assert depths_to_cost_zeno(0, 1) == 1 / 2
+    assert depths_to_cost_zeno(0, 2) == 1 / 2 + 1 / 4
+    assert depths_to_cost_zeno(0, 3) == 1 / 2 + 1 / 4 + 1 / 8
+    assert depths_to_cost_zeno(1, 4) == 1 / 4 + 1 / 8 + 1 / 16
 
 
-def test_no_filter():
-    dbf = DatabaseFilter(db)
-    print(dbf.program_names)
-    assert dbf.program_names == {
-        "prg1",
-        "prg2",
-        "prg3",
-        "prg4",
-        "prg5",
-        "prg6",
-        "prg7",
-        "prg8",
-        "prg9",
-    }
+def test_depths_to_cost_length():
+    assert depths_to_cost_length(3, 5) == 2
 
 
-def test_filter_blacklisted_programs():
-    dbf = DatabaseFilter(db)
-    dbf.filter_blacklisted_programs(["prg[1-5]$"])
-    print(dbf.program_names)
-    assert dbf.program_names == {"prg6", "prg7", "prg8", "prg9"}
+db = json.loads(Path("tests/data/dummy_db.json").read_text())
 
 
-def test_filter_mandatory_taxons():
-    dbf = DatabaseFilter(db)
-    dbf.filter_mandatory_taxons(["O$", "O/C/F/U$"])
-    print(dbf.program_names)
-    assert dbf.program_names == {"prg3", "prg4", "prg7"}
+def test_init():
+    dbf = ProgramFilter(db)
+    print(dbf.recommended_programs)
+    assert dbf.recommended_programs == set(db["programs"])
+    assert not dbf.imparted_knowledge
 
 
-def test_filter_forbidden_taxons():
-    dbf = DatabaseFilter(db)
-    dbf.filter_forbidden_taxons(["O$", "O/C/F/U$"])
-    print(dbf.program_names)
-    assert dbf.program_names == {"prg1", "prg5"}
+def test_programs_of_taxons():
+    dbf = ProgramFilter(db)
+    taxons = {"X/S/M/L/R/D/A", "X/S/M/L/R/D", "non_existing_taxon"}
+    programs = dbf.programs_of_taxons(taxons)
+    print(sorted(programs))
+    for (db_program, db_program_data) in db["programs"].items():
+        if taxons.intersection(db_program_data["taxons"]):
+            assert db_program in programs
+        else:
+            assert db_program not in programs
 
 
-def test_get_taxons_in_programs():
-    dbf = DatabaseFilter(db)
-    result = dbf.get_taxons_in_programs(["prg[1-3]$"])
-    print(result)
-    assert result == {
+def test_taxons_of_program():
+    dbf = ProgramFilter(db)
+    program = "prg8"
+    taxons = dbf.taxons_of_program(program)
+    print(sorted(taxons))
+    assert taxons == set(db["programs"][program]["taxons"])
+    program = "non_existing_program"
+    taxons = dbf.taxons_of_program(program)
+    print(sorted(taxons))
+    assert taxons == set()
+
+
+def test_taxons_of_programs():
+    dbf = ProgramFilter(db)
+    programs = ["prg8", "prg9", "non_existing_program"]
+    taxons = dbf.taxons_of_programs(programs)
+    prg8_taxons = dbf.taxons_of_program("prg8")
+    prg9_taxons = dbf.taxons_of_program("prg9")
+    print(sorted(taxons))
+    assert taxons == prg8_taxons | prg9_taxons
+
+
+def test_patterns_to_taxons():
+    dbf = ProgramFilter(db)
+    patterns = ["X/S/M.*", "O(?!/C).*", "non_matching_pattern"]
+    taxons = dbf.patterns_to_taxons(patterns)
+    print(sorted(taxons))
+    assert taxons == {
         "O",
-        "O/C",
-        "O/C/F/U",
-        "O/C/H",
-        "O/C/H/B",
-        "O/C/H/B/I",
         "O/J",
         "O/N",
         "O/N/P",
-        "X",
-        "X/G",
-        "X/K",
-        "X/S",
         "X/S/M",
         "X/S/M/L",
         "X/S/M/L/R",
         "X/S/M/L/R/D",
+        "X/S/M/L/R/D/A",
         "X/S/M/L/V",
-        "X/W",
-        "Y",
+    }
+
+
+def test_impart_taxons():
+    dbf = ProgramFilter(db)
+    taxons = ["O/J", "X/S/M/L", "non_existing_taxon"]
+    dbf.impart_taxons(taxons)
+    print(sorted(dbf.imparted_knowledge))
+    assert dbf.imparted_knowledge == {"O", "O/J", "X", "X/S", "X/S/M", "X/S/M/L"}
+
+
+def test_exclude_taxons():
+    dbf = ProgramFilter(db)
+    taxons = ["O/J", "X/S/M/L", "non_existing_taxon"]
+    dbf.exclude_taxons(taxons)
+    print(sorted(dbf.recommended_programs))
+    assert dbf.recommended_programs == {"prg2", "prg5"}
+    for taxon in taxons:
+        assert taxon not in db["programs"]["prg2"]["taxons"]
+        assert taxon not in db["programs"]["prg5"]["taxons"]
+
+
+def test_include_taxons():
+    dbf = ProgramFilter(db)
+    taxons = ["O/J", "X/S/M/L", "non_existing_taxon"]
+    dbf.include_taxons(taxons)
+    print(sorted(dbf.recommended_programs))
+    assert dbf.recommended_programs == {"prg1", "prg3", "prg4", "prg6", "prg7", "prg8", "prg9"}
+
+
+def test_patterns_to_programs():
+    dbf = ProgramFilter(db)
+    patterns = ["prg[1-3]", "prg[7-9]", "non_matching_pattern"]
+    programs = dbf.patterns_to_programs(patterns)
+    print(sorted(programs))
+    assert programs == {"prg1", "prg2", "prg3", "prg7", "prg8", "prg9"}
+
+
+def test_impart_programs():
+    dbf = ProgramFilter(db)
+    programs = ["prg1", "prg2", "non_existing_program"]
+    dbf.impart_programs(programs)
+    print(sorted(dbf.recommended_programs))
+    assert dbf.recommended_programs == set(db["programs"]) - set(programs)
+    print(sorted(dbf.imparted_knowledge))
+    assert set(db["taxons"]) - dbf.imparted_knowledge == {
+        "O/C/F",
+        "O/C/F/U",
+        "X/S/M/L/R/D/A",
         "Y/E",
-        "Y/T",
-        "Y/T/Q",
     }
 
 
-def test_get_taxons_not_in_programs():
-    dbf = DatabaseFilter(db)
-    result = dbf.get_taxons_not_in_programs(["prg[1-3]$"])
-    print(result)
-    assert result == {"O/C/F", "X/S/M/L/R/D/A"}
+def test_exclude_programs():
+    dbf = ProgramFilter(db)
+    programs = ["prg1", "prg2", "non_existing_program"]
+    dbf.exclude_programs(programs)
+    print(sorted(dbf.recommended_programs))
+    assert dbf.recommended_programs == set(db["programs"]) - set(programs)
 
 
-def test_set_operations():
-    dbf = DatabaseFilter(db)
-    dbf.filter_mandatory_taxons(["O$", "O/C/F/U$"])
-    print(dbf.program_names)
-    assert dbf.program_names == {"prg3", "prg4", "prg7"}
-    dbf.complement_update()
-    print(dbf.program_names)
-    assert dbf.program_names == {"prg9", "prg5", "prg6", "prg1", "prg2", "prg8"}
-    dbf.update({"prg7"})
-    print(dbf.program_names)
-    assert dbf.program_names == {"prg9", "prg5", "prg6", "prg1", "prg2", "prg8", "prg7"}
-    dbf.difference_update({"prg6", "prg1"})
-    print(dbf.program_names)
-    assert dbf.program_names == {"prg9", "prg5", "prg2", "prg8", "prg7"}
-    dbf.symmetric_difference_update({"prg9", "prg5", "prg1"})
-    print(dbf.program_names)
-    assert dbf.program_names == {"prg1", "prg2", "prg8", "prg7"}
-    dbf.intersection_update({"prg1", "prg2", "prg5"}, {"prg2", "prg8"})
-    print(dbf.program_names)
-    assert dbf.program_names == {"prg2"}
+def test_include_programs():
+    dbf = ProgramFilter(db)
+    programs = ["prg1", "prg2", "non_existing_program"]
+    dbf.include_programs(programs)
+    print(sorted(dbf.recommended_programs))
+    assert dbf.recommended_programs == {"prg1", "prg2"}
 
 
-def test_get_extra_taxons():
-    dbf = DatabaseFilter(db)
-    result = dbf.get_extra_taxons(["O", "X"])
-    print(result)
-    assert result == {
-        "prg1": ["Y", "Y/T", "Y/T/Q"],
-        "prg2": ["Y", "Y/T", "Y/T/Q"],
-        "prg3": ["Y", "Y/E", "Y/T"],
-        "prg4": ["Y", "Y/T", "Y/T/Q"],
-        "prg5": [],
-        "prg6": ["Y/E", "Y/T", "Y/T/Q"],
-        "prg7": ["Y/E", "Y/T", "Y/T/Q"],
-        "prg8": ["Y/E"],
-        "prg9": ["Y", "Y/E", "Y/T", "Y/T/Q"],
+def test_compute_taxon_cost_with_length_strategy():
+    dbf = ProgramFilter(db)
+    dbf.imparted_knowledge = {"O", "O/J", "X", "X/S", "X/S/M", "X/S/M/L"}
+    dbf.set_cost_computation_strategy("length")
+    taxon_costs = {taxon: dbf.compute_taxon_cost(taxon) for taxon in db["taxons"]}
+    print(taxon_costs)
+    assert taxon_costs == {
+        "O": 0.0,
+        "O/C": 1.0,
+        "O/C/F": 2.0,
+        "O/C/F/U": 3.0,
+        "O/C/H": 2.0,
+        "O/C/H/B": 3.0,
+        "O/C/H/B/I": 4.0,
+        "O/J": 0.0,
+        "O/N": 1.0,
+        "O/N/P": 2.0,
+        "X": 0.0,
+        "X/G": 1.0,
+        "X/K": 1.0,
+        "X/S": 0.0,
+        "X/S/M": 0.0,
+        "X/S/M/L": 0.0,
+        "X/S/M/L/R": 1.0,
+        "X/S/M/L/R/D": 2.0,
+        "X/S/M/L/R/D/A": 3.0,
+        "X/S/M/L/V": 1.0,
+        "X/W": 1.0,
+        "Y": 1.0,
+        "Y/E": 2.0,
+        "Y/T": 2.0,
+        "Y/T/Q": 3.0,
     }
 
 
-def test_sort_by_extra_taxon_count():
-    dbf = DatabaseFilter(db)
-    dbf.sort_by_extra_taxon_count(["O", "X"])
-    print(dbf.sorted_programs)
-    assert dbf.sorted_programs == [
-        (0, "prg5"),  # no extra taxon, see test_get_extra_taxons()
-        (1, "prg8"),  # 1 extra taxons
-        (3, "prg1"),  # 3 extra taxons
-        (3, "prg2"),
-        (3, "prg3"),
-        (3, "prg4"),
-        (3, "prg6"),
-        (3, "prg7"),
-        (4, "prg9"),  # 4 extra taxons
-    ]
-
-
-def test_get_lacking_taxons():
-    dbf = DatabaseFilter(db)
-    result = dbf.get_lacking_taxons(["O$", "O/C/H$", "O/C/F/U$"])
-    print(result)
-    assert result == {
-        "prg1": ["O$", "O/C/F/U$", "O/C/H$"],
-        "prg2": ["O/C/F/U$", "O/C/H$"],
-        "prg3": [],
-        "prg4": ["O/C/H$"],
-        "prg5": ["O$", "O/C/F/U$"],
-        "prg6": ["O$", "O/C/H$"],
-        "prg7": ["O/C/H$"],
-        "prg8": ["O$", "O/C/H$"],
-        "prg9": ["O/C/F/U$"],
+def test_compute_taxon_cost_with_zeno_strategy():
+    dbf = ProgramFilter(db)
+    dbf.imparted_knowledge = {"O", "O/J", "X", "X/S", "X/S/M", "X/S/M/L"}
+    dbf.set_cost_computation_strategy("zeno")
+    taxon_costs = {taxon: dbf.compute_taxon_cost(taxon) for taxon in db["taxons"]}
+    print(taxon_costs)
+    assert taxon_costs == {
+        "O": 0,
+        "O/C": 0.25,
+        "O/C/F": 0.375,
+        "O/C/F/U": 0.4375,
+        "O/C/H": 0.375,
+        "O/C/H/B": 0.4375,
+        "O/C/H/B/I": 0.46875,
+        "O/J": 0,
+        "O/N": 0.25,
+        "O/N/P": 0.375,
+        "X": 0,
+        "X/G": 0.25,
+        "X/K": 0.25,
+        "X/S": 0,
+        "X/S/M": 0,
+        "X/S/M/L": 0,
+        "X/S/M/L/R": 0.03125,
+        "X/S/M/L/R/D": 0.046875,
+        "X/S/M/L/R/D/A": 0.0546875,
+        "X/S/M/L/V": 0.03125,
+        "X/W": 0.25,
+        "Y": 0.5,
+        "Y/E": 0.75,
+        "Y/T": 0.75,
+        "Y/T/Q": 0.875,
     }
 
 
-def test_sort_by_lacking_taxon_count():
-    dbf = DatabaseFilter(db)
-    dbf.sort_by_lacking_taxon_count(["O$", "O/C/H$", "O/C/F/U$"])
-    print(dbf.sorted_programs)
-    assert dbf.sorted_programs == [
-        (0, "prg3"),  # prg3 has all the wanted taxons
-        (1, "prg4"),  # 1 taxon is lacking
-        (1, "prg7"),
-        (1, "prg9"),
-        (2, "prg2"),
-        (2, "prg5"),
-        (2, "prg6"),
-        (2, "prg8"),
-        (3, "prg1"),  # 3 taxons are lacking
+def test_get_sorted_recommandations():
+    dbf = ProgramFilter(db)
+    programs = ["prg1", "prg2", "non_existing_program"]
+    dbf.impart_programs(programs)
+    dbf.set_cost_computation_strategy("zeno")
+    sorted_recommendations = dbf.get_sorted_recommendations()
+    print(sorted_recommendations)
+    assert sorted_recommendations == [
+        (0.1328125, "prg5"),
+        (0.1953125, "prg4"),
+        (0.375, "prg9"),
+        (0.4375, "prg3"),
+        (0.4375, "prg7"),
+        (0.4453125, "prg8"),
+        (0.5703125, "prg6"),
     ]
 
 
-def test_sort_by_distance():
-    dbf = DatabaseFilter(db)
-    taxon_names = [name + "$" for name in db["programs"]["prg3"]["taxons"]]
-    lacking = dbf.get_lacking_taxons(taxon_names)
-    print(lacking)
-    assert lacking == {
-        "prg1": ["O$", "O/C/F/U$", "O/C/H$", "O/C/H/B$", "X/S/M/L/V$", "Y/E$"],
-        "prg2": ["O/C/F/U$", "O/C/H$", "O/J$", "X/K$", "X/S$", "X/S/M/L$", "Y/E$"],
-        "prg3": [],
-        "prg4": ["O/C/H$", "O/J$", "X/K$", "X/S/M$", "X/S/M/L/V$", "Y/E$"],
-        "prg5": [
-            "O$",
-            "O/C/F/U$",
-            "O/J$",
-            "X/S/M$",
-            "X/S/M/L$",
-            "X/S/M/L/R$",
-            "Y$",
-            "Y/E$",
-            "Y/T$",
-        ],
-        "prg6": [
-            "O$",
-            "O/C/H$",
-            "O/C/H/B$",
-            "O/N/P$",
-            "X/S$",
-            "X/S/M$",
-            "X/S/M/L$",
-            "X/S/M/L/R$",
-            "Y$",
-        ],
-        "prg7": ["O/C/H$", "O/N/P$", "X/S/M/L/V$", "Y$"],
-        "prg8": ["O$", "O/C/H$", "X/S$", "X/S/M$", "X/S/M/L/R$", "Y$", "Y/T$"],
-        "prg9": ["O/C/F/U$", "O/C/H/B$", "O/N/P$", "X/S$", "X/S/M/L$"],
-    }
-    extra = dbf.get_extra_taxons(taxon_names)
-    print(extra)
-    assert extra == {
-        "prg1": ["O/N", "X", "X/S/M/L/R/D", "X/W", "Y/T/Q"],
-        "prg2": ["O/C", "O/C/H/B/I", "X/G", "X/S/M/L/R/D", "Y/T/Q"],
-        "prg3": [],
-        "prg4": ["X", "X/G", "X/S/M/L/R/D", "X/S/M/L/R/D/A", "Y/T/Q"],
-        "prg5": ["O/C", "O/C/F", "O/C/H/B/I", "O/N", "X", "X/S/M/L/R/D/A"],
-        "prg6": ["O/C", "O/C/F", "O/C/H/B/I", "O/N", "X", "X/S/M/L/R/D/A", "X/W", "Y/T/Q"],
-        "prg7": ["O/C/H/B/I", "O/N", "X", "X/S/M/L/R/D", "Y/T/Q"],
-        "prg8": ["O/C", "O/N", "X/S/M/L/R/D", "X/S/M/L/R/D/A", "X/W"],
-        "prg9": ["O/C/F", "O/C/H/B/I", "O/N", "X/W", "Y/T/Q"],
-    }
-    dbf.sort_by_distance(taxon_names)
-    print(dbf.sorted_programs)
-    assert dbf.sorted_programs == [
-        (0, "prg3"),  #  0 lacking and 0 extra taxons
-        (9, "prg7"),  #  4             5
-        (10, "prg9"),  # 5             5
-        (11, "prg1"),  # 6             5
-        (11, "prg4"),  # 6             5
-        (12, "prg2"),  # 7             5
-        (12, "prg8"),  # 7             5
-        (15, "prg5"),  # 9             6
-        (17, "prg6"),  # 9             8
-    ]
-
-
-def test_sort_by_taxon_count():
-    dbf = DatabaseFilter(db)
-    dbf.sort_by_taxon_count()
-    print(dbf.sorted_programs)
-    assert dbf.sorted_programs == [
-        (12, "prg5"),
-        (13, "prg2"),
-        (13, "prg8"),
-        (14, "prg1"),
-        (14, "prg4"),
-        (14, "prg6"),
-        (15, "prg3"),
-        (15, "prg9"),
-        (16, "prg7"),
-    ]
-
-
-def test_sorted_by_line_count():
-    dbf = DatabaseFilter(db)
-    dbf.sort_by_line_count()
-    print(dbf.sorted_programs)
-    assert dbf.sorted_programs == [
-        (5, "prg8"),
-        (8, "prg1"),
-        (8, "prg2"),
-        (8, "prg3"),
-        (8, "prg4"),
-        (8, "prg5"),
-        (8, "prg6"),
-        (8, "prg7"),
-        (8, "prg9"),
-    ]
-
-
-def test_markdown():
-    dbf = DatabaseFilter(db)
-    dbf.sort_by_line_count()
-    text = dbf.get_markdown(section_group_limit=10)
+def test_get_markdown():
+    dbf = ProgramFilter(db)
+    programs = ["prg1", "prg2", "non_existing_program"]
+    dbf.impart_programs(programs)
+    dbf.set_cost_computation_strategy("length")
+    text = dbf.get_markdown(section_group_limit=2)
     print(text)
-    assert "##   9 programs of greater costs" in text
-    text = dbf.get_markdown(section_group_limit=1)
-    print(text)
-    assert "##   1 program of cost 5" in text
+    assert "2 programs of cost 2" in text
+    assert "3 programs of cost 3" in text
+    assert "9 programs initially" in text
+    assert "7 programs remaining" in text

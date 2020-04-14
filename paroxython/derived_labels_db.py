@@ -1,6 +1,5 @@
 import sqlite3
 from collections import defaultdict
-from contextlib import suppress
 from typing import Dict
 
 from regex import compile, match  # type: ignore
