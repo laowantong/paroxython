@@ -97,7 +97,7 @@ class JsonDatabase(TypedDict):
 # - comments!
 
 class Process(TypedDict):
-    operation: Literal["acquire", "exclude", "keep"]
+    operation: Literal["impart", "exclude", "include"]
     programs_or_taxons: Literal["programs", "taxons"]
     name_or_pattern: Literal["name", "pattern"]
     source: Union[str, List[str]]
