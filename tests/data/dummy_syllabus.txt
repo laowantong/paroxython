@@ -1,0 +1,9 @@
+This is an example of syllabus.
+
+The Python programs already that have already been studied are prefixed by a + symbol.
+
+For instance, + prg8.py has been studied, but prg7.py has not.
+
+# EOF marks the end of the useful section.
+
+Consequentely, + prg6.py is not marked as studied.

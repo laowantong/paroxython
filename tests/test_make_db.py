@@ -10,6 +10,7 @@ from paroxython.make_db import Database
 def test_snapshot_simple_db(capsys):
     db = Database(Path("tests/data/simple"), ignore_timestamps=True)
     make_snapshot(Path("tests/snapshots/simple_db.json"), db.get_json(), capsys)
+    db.write_json(Path("tests/snapshots/simple_db.json"))
 
 
 def test_sqlite_simple_db(capsys):

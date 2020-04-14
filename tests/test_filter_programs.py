@@ -44,7 +44,7 @@ def test_programs_of_taxons():
 
 def test_taxons_of_program():
     dbf = ProgramFilter(db)
-    program = "prg8"
+    program = "prg8.py"
     taxons = dbf.taxons_of_program(program)
     print(sorted(taxons))
     assert taxons == set(db["programs"][program]["taxons"])
@@ -56,10 +56,10 @@ def test_taxons_of_program():
 
 def test_taxons_of_programs():
     dbf = ProgramFilter(db)
-    programs = ["prg8", "prg9", "non_existing_program"]
+    programs = ["prg8.py", "prg9.py", "non_existing_program"]
     taxons = dbf.taxons_of_programs(programs)
-    prg8_taxons = dbf.taxons_of_program("prg8")
-    prg9_taxons = dbf.taxons_of_program("prg9")
+    prg8_taxons = dbf.taxons_of_program("prg8.py")
+    prg9_taxons = dbf.taxons_of_program("prg9.py")
     print(sorted(taxons))
     assert taxons == prg8_taxons | prg9_taxons
 
@@ -96,10 +96,10 @@ def test_exclude_taxons():
     taxons = ["O/J", "X/S/M/L", "non_existing_taxon"]
     dbf.exclude_taxons(taxons)
     print(sorted(dbf.recommended_programs))
-    assert dbf.recommended_programs == {"prg2", "prg5"}
+    assert dbf.recommended_programs == {"prg2.py", "prg5.py"}
     for taxon in taxons:
-        assert taxon not in db["programs"]["prg2"]["taxons"]
-        assert taxon not in db["programs"]["prg5"]["taxons"]
+        assert taxon not in db["programs"]["prg2.py"]["taxons"]
+        assert taxon not in db["programs"]["prg5.py"]["taxons"]
 
 
 def test_include_taxons():
@@ -107,7 +107,15 @@ def test_include_taxons():
     taxons = ["O/J", "X/S/M/L", "non_existing_taxon"]
     dbf.include_taxons(taxons)
     print(sorted(dbf.recommended_programs))
-    assert dbf.recommended_programs == {"prg1", "prg3", "prg4", "prg6", "prg7", "prg8", "prg9"}
+    assert dbf.recommended_programs == {
+        "prg1.py",
+        "prg3.py",
+        "prg4.py",
+        "prg6.py",
+        "prg7.py",
+        "prg8.py",
+        "prg9.py",
+    }
 
 
 def test_patterns_to_programs():
@@ -115,12 +123,12 @@ def test_patterns_to_programs():
     patterns = ["prg[1-3]", "prg[7-9]", "non_matching_pattern"]
     programs = dbf.patterns_to_programs(patterns)
     print(sorted(programs))
-    assert programs == {"prg1", "prg2", "prg3", "prg7", "prg8", "prg9"}
+    assert programs == {"prg1.py", "prg2.py", "prg3.py", "prg7.py", "prg8.py", "prg9.py"}
 
 
 def test_impart_programs():
     dbf = ProgramFilter(db)
-    programs = ["prg1", "prg2", "non_existing_program"]
+    programs = ["prg1.py", "prg2.py", "non_existing_program"]
     dbf.impart_programs(programs)
     print(sorted(dbf.recommended_programs))
     assert dbf.recommended_programs == set(db["programs"]) - set(programs)
@@ -135,7 +143,7 @@ def test_impart_programs():
 
 def test_exclude_programs():
     dbf = ProgramFilter(db)
-    programs = ["prg1", "prg2", "non_existing_program"]
+    programs = ["prg1.py", "prg2.py", "non_existing_program"]
     dbf.exclude_programs(programs)
     print(sorted(dbf.recommended_programs))
     assert dbf.recommended_programs == set(db["programs"]) - set(programs)
@@ -143,10 +151,10 @@ def test_exclude_programs():
 
 def test_include_programs():
     dbf = ProgramFilter(db)
-    programs = ["prg1", "prg2", "non_existing_program"]
+    programs = ["prg1.py", "prg2.py", "non_existing_program"]
     dbf.include_programs(programs)
     print(sorted(dbf.recommended_programs))
-    assert dbf.recommended_programs == {"prg1", "prg2"}
+    assert dbf.recommended_programs == {"prg1.py", "prg2.py"}
 
 
 def test_compute_taxon_cost_with_length_strategy():
@@ -221,25 +229,25 @@ def test_compute_taxon_cost_with_zeno_strategy():
 
 def test_get_sorted_recommandations():
     dbf = ProgramFilter(db)
-    programs = ["prg1", "prg2", "non_existing_program"]
+    programs = ["prg1.py", "prg2.py", "non_existing_program"]
     dbf.impart_programs(programs)
     dbf.set_cost_computation_strategy("zeno")
     sorted_recommendations = dbf.get_sorted_recommendations()
     print(sorted_recommendations)
     assert sorted_recommendations == [
-        (0.1328125, "prg5"),
-        (0.1953125, "prg4"),
-        (0.375, "prg9"),
-        (0.4375, "prg3"),
-        (0.4375, "prg7"),
-        (0.4453125, "prg8"),
-        (0.5703125, "prg6"),
+        (0.1328125, "prg5.py"),
+        (0.1953125, "prg4.py"),
+        (0.375, "prg9.py"),
+        (0.4375, "prg3.py"),
+        (0.4375, "prg7.py"),
+        (0.4453125, "prg8.py"),
+        (0.5703125, "prg6.py"),
     ]
 
 
 def test_get_markdown():
     dbf = ProgramFilter(db)
-    programs = ["prg1", "prg2", "non_existing_program"]
+    programs = ["prg1.py", "prg2.py", "non_existing_program"]
     dbf.impart_programs(programs)
     dbf.set_cost_computation_strategy("length")
     text = dbf.get_markdown(section_group_limit=2)

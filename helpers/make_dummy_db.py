@@ -42,11 +42,11 @@ def dump_dummy_taxons_and_programs():
     result.append("")
     result.append("PROGRAMS")
     for i in range(1, 10):
-        result.append(f"prg{i}")
+        result.append(f"prg{i}.py")
         program = create_program(taxons)
         for (j, line) in enumerate(program, 1):
             if i == 8 and j >= 7:
-                # the sloc count of prg8 is altered by deleting its last three lines.
+                # the sloc count of prg8.py is altered by deleting its last three lines.
                 break
             result.append(f"{j}   {line}")
         result.append("")
@@ -58,7 +58,7 @@ def dump_dummy_taxons_and_programs():
 def dump_dummy_db():
     text = Path("tests/data/dummy_taxons_and_programs.txt").read_text()
     taxon_names = regex.search(r"(?ms)^TAXONS\n(.+?)\n\n", text)[1].split()
-    program_names_and_sources = regex.findall(r"(?ms)^(prg\d+)\n(.+?)\n\n", text)
+    program_names_and_sources = regex.findall(r"(?ms)^(prg\d+\.py)\n(.+?)\n\n", text)
     data = {
         "programs": {
             program_name: {"source": source, "taxons": defaultdict(list),}
@@ -81,7 +81,7 @@ def dump_dummy_db():
     text = json.dumps(data, indent=2)
     text = regex.sub(r"\s*\[\s+(\d+),\s+(\d+)\s+\](,?)\s+", r"[\1,\2]\3", text)
     output_path = Path("tests/data/dummy_db.json")
-    output_path.write_text(text)
+    output_path.write_text(text + "\n")
 
 
 if __name__ == "__main__":

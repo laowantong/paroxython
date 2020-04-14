@@ -7,13 +7,13 @@
             "operation": "impart",
             "programs_or_taxons": "programs",
             "name_or_pattern": "name",
-            "source": ["prg8"],
+            "source": "python helpers/parse_syllabus.py {base_path}/dummy_syllabus.txt",
         },
         {
             "operation": "exclude",
             "programs_or_taxons": "programs",
             "name_or_pattern": "name",
-            "source": ["prg7", "prg9"],
+            "source": ["prg7.py", "prg9.py"],
         },
         {
             "operation": "exclude",

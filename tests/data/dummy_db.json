@@ -1,6 +1,6 @@
 {
   "programs": {
-    "prg1": {
+    "prg1.py": {
       "source": "1   X/W+7  X/S\n2   X+1  Y/T  X/S/M\n3   X/W  X/S/M/L/R\n4   X/S+5  Y/T/Q\n5   O/N/P\n6   O/J  X/S/M/L/R/D  X/S/M/L+2\n7   Y\n8   O/N  X/S/M/L/R/D  O/J\n9   X/S  X/K",
       "taxons": {
         "X/W": [[1,8],[3,3]],
@@ -19,7 +19,7 @@
         "X/K": [[9,9]]
       }
     },
-    "prg2": {
+    "prg2.py": {
       "source": "1   O/N/P  Y/T/Q  Y\n2   X/S/M/L/R/D  O\n3   O/C/H/B  X/S/M/L/R/D\n4   \n5   \n6   X/S/M  O\n7   X/S/M/L/R  Y/T  O/C\n8   X/G  X/S/M/L/V+1\n9   X/S/M/L/R/D  X/S/M/L/V  Y/T/Q  O/C/H/B/I",
       "taxons": {
         "O/N/P": [[1,1]],
@@ -37,7 +37,7 @@
         "O/C/H/B/I": [[9,9]]
       }
     },
-    "prg3": {
+    "prg3.py": {
       "source": "1   O/N/P  X/K  Y/T\n2   X/S/M/L/V\n3   O/C/H/B\n4   X/S/M/L/R+4\n5   O/J  X/S/M  O/C/F/U  O/C/H\n6   O/N/P  X/S  Y\n7   O\n8   X/S/M/L  Y/E\n9   O/C/H/B  O/J",
       "taxons": {
         "O/N/P": [[1,1],[6,6]],
@@ -57,7 +57,7 @@
         "Y/E": [[8,8]]
       }
     },
-    "prg4": {
+    "prg4.py": {
       "source": "1   O/N/P  X\n2   O/N/P  Y/T+1\n3   X/S  O+5  Y/T/Q+4  O/C/H/B\n4   X/S/M/L/R/D/A  X/G  X\n5   X/S/M/L/R  O  Y\n6   X/S\n7   X/S/M/L/R/D/A  X/S/M/L/R/D\n8   O/C/F/U\n9   X/S/M/L",
       "taxons": {
         "O/N/P": [[1,1],[2,2]],
@@ -76,7 +76,7 @@
         "X/S/M/L": [[9,9]]
       }
     },
-    "prg5": {
+    "prg5.py": {
       "source": "1   O/N/P+1  O/C/H/B/I\n2   O/N/P  X/K  O/N  X/S\n3   X\n4   O/C/H/B\n5   X/S/M/L/R/D/A\n6   X/S/M/L/V  X  O/C\n7   O/C/F  O/C/H/B  X/K\n8   O/C/H  O/N\n9   O/C/H/B/I  O/N",
       "taxons": {
         "O/N/P": [[1,2],[2,2]],
@@ -93,7 +93,7 @@
         "O/C/H": [[8,8]]
       }
     },
-    "prg6": {
+    "prg6.py": {
       "source": "1   X\n2   O/N  Y/T/Q  X/W\n3   \n4   O/J  X/K  X\n5   Y/T\n6   O/C/F/U  O/C+1  X/S/M/L/V  O/N  X/S/M/L/R/D/A\n7   O/C/F\n8   X/K\n9   Y/E  O/C/H/B/I  X/S/M/L/V",
       "taxons": {
         "X": [[1,1],[4,4]],
@@ -112,7 +112,7 @@
         "O/C/H/B/I": [[9,9]]
       }
     },
-    "prg7": {
+    "prg7.py": {
       "source": "1   O/J  Y/E  X/K\n2   O/N  O+3  X/S/M/L/R  Y/E\n3   O/C/F/U  Y/T/Q  X  O/C/H/B/I\n4   O/C/H/B\n5   Y/T/Q\n6   X/S/M/L\n7   X/S/M/L/R/D\n8   X/S\n9   Y/T  X/S/M",
       "taxons": {
         "O/J": [[1,1]],
@@ -133,7 +133,7 @@
         "X/S/M": [[9,9]]
       }
     },
-    "prg8": {
+    "prg8.py": {
       "source": "1   X/W  O/C\n2   O/C/F/U\n3   O/N  X/S/M/L/R/D/A  X/S/M/L/V  Y/E\n4   X/S/M/L+2  O/J  Y/E  O/C\n5   X/K  O/N/P\n6   X/S/M/L/R/D  O/C/H/B",
       "taxons": {
         "X/W": [[1,1]],
@@ -151,7 +151,7 @@
         "O/C/H/B": [[6,6]]
       }
     },
-    "prg9": {
+    "prg9.py": {
       "source": "1   X/W\n2   O/N  Y\n3   O/C/H  Y/T/Q\n4   \n5   O/J  O/C/H/B/I  O/C/H\n6   X/S/M\n7   O/C/H/B/I+2  Y/E  X/S/M/L/R  X/K  X/S/M/L/V\n8   O/J  O/C/H/B/I\n9   Y/T  O/C/F  O  X/S/M",
       "taxons": {
         "X/W": [[1,1]],
@@ -174,180 +174,180 @@
   },
   "taxons": {
     "O": [
-      "prg2",
-      "prg3",
-      "prg4",
-      "prg7",
-      "prg9"
+      "prg2.py",
+      "prg3.py",
+      "prg4.py",
+      "prg7.py",
+      "prg9.py"
     ],
     "O/C": [
-      "prg2",
-      "prg5",
-      "prg6",
-      "prg8"
+      "prg2.py",
+      "prg5.py",
+      "prg6.py",
+      "prg8.py"
     ],
     "O/C/F": [
-      "prg5",
-      "prg6",
-      "prg9"
+      "prg5.py",
+      "prg6.py",
+      "prg9.py"
     ],
     "O/C/F/U": [
-      "prg3",
-      "prg4",
-      "prg6",
-      "prg7",
-      "prg8"
+      "prg3.py",
+      "prg4.py",
+      "prg6.py",
+      "prg7.py",
+      "prg8.py"
     ],
     "O/C/H": [
-      "prg3",
-      "prg5",
-      "prg9"
+      "prg3.py",
+      "prg5.py",
+      "prg9.py"
     ],
     "O/C/H/B": [
-      "prg2",
-      "prg3",
-      "prg4",
-      "prg5",
-      "prg7",
-      "prg8"
+      "prg2.py",
+      "prg3.py",
+      "prg4.py",
+      "prg5.py",
+      "prg7.py",
+      "prg8.py"
     ],
     "O/C/H/B/I": [
-      "prg2",
-      "prg5",
-      "prg6",
-      "prg7",
-      "prg9"
+      "prg2.py",
+      "prg5.py",
+      "prg6.py",
+      "prg7.py",
+      "prg9.py"
     ],
     "O/J": [
-      "prg1",
-      "prg3",
-      "prg6",
-      "prg7",
-      "prg8",
-      "prg9"
+      "prg1.py",
+      "prg3.py",
+      "prg6.py",
+      "prg7.py",
+      "prg8.py",
+      "prg9.py"
     ],
     "O/N": [
-      "prg1",
-      "prg5",
-      "prg6",
-      "prg7",
-      "prg8",
-      "prg9"
+      "prg1.py",
+      "prg5.py",
+      "prg6.py",
+      "prg7.py",
+      "prg8.py",
+      "prg9.py"
     ],
     "O/N/P": [
-      "prg1",
-      "prg2",
-      "prg3",
-      "prg4",
-      "prg5",
-      "prg8"
+      "prg1.py",
+      "prg2.py",
+      "prg3.py",
+      "prg4.py",
+      "prg5.py",
+      "prg8.py"
     ],
     "X": [
-      "prg1",
-      "prg4",
-      "prg5",
-      "prg6",
-      "prg7"
+      "prg1.py",
+      "prg4.py",
+      "prg5.py",
+      "prg6.py",
+      "prg7.py"
     ],
     "X/G": [
-      "prg2",
-      "prg4"
+      "prg2.py",
+      "prg4.py"
     ],
     "X/K": [
-      "prg1",
-      "prg3",
-      "prg5",
-      "prg6",
-      "prg7",
-      "prg8",
-      "prg9"
+      "prg1.py",
+      "prg3.py",
+      "prg5.py",
+      "prg6.py",
+      "prg7.py",
+      "prg8.py",
+      "prg9.py"
     ],
     "X/S": [
-      "prg1",
-      "prg3",
-      "prg4",
-      "prg5",
-      "prg7"
+      "prg1.py",
+      "prg3.py",
+      "prg4.py",
+      "prg5.py",
+      "prg7.py"
     ],
     "X/S/M": [
-      "prg1",
-      "prg2",
-      "prg3",
-      "prg7",
-      "prg9"
+      "prg1.py",
+      "prg2.py",
+      "prg3.py",
+      "prg7.py",
+      "prg9.py"
     ],
     "X/S/M/L": [
-      "prg1",
-      "prg3",
-      "prg4",
-      "prg7",
-      "prg8"
+      "prg1.py",
+      "prg3.py",
+      "prg4.py",
+      "prg7.py",
+      "prg8.py"
     ],
     "X/S/M/L/R": [
-      "prg1",
-      "prg2",
-      "prg3",
-      "prg4",
-      "prg7",
-      "prg9"
+      "prg1.py",
+      "prg2.py",
+      "prg3.py",
+      "prg4.py",
+      "prg7.py",
+      "prg9.py"
     ],
     "X/S/M/L/R/D": [
-      "prg1",
-      "prg2",
-      "prg4",
-      "prg7",
-      "prg8"
+      "prg1.py",
+      "prg2.py",
+      "prg4.py",
+      "prg7.py",
+      "prg8.py"
     ],
     "X/S/M/L/R/D/A": [
-      "prg4",
-      "prg5",
-      "prg6",
-      "prg8"
+      "prg4.py",
+      "prg5.py",
+      "prg6.py",
+      "prg8.py"
     ],
     "X/S/M/L/V": [
-      "prg2",
-      "prg3",
-      "prg5",
-      "prg6",
-      "prg8",
-      "prg9"
+      "prg2.py",
+      "prg3.py",
+      "prg5.py",
+      "prg6.py",
+      "prg8.py",
+      "prg9.py"
     ],
     "X/W": [
-      "prg1",
-      "prg6",
-      "prg8",
-      "prg9"
+      "prg1.py",
+      "prg6.py",
+      "prg8.py",
+      "prg9.py"
     ],
     "Y": [
-      "prg1",
-      "prg2",
-      "prg3",
-      "prg4",
-      "prg9"
+      "prg1.py",
+      "prg2.py",
+      "prg3.py",
+      "prg4.py",
+      "prg9.py"
     ],
     "Y/E": [
-      "prg3",
-      "prg6",
-      "prg7",
-      "prg8",
-      "prg9"
+      "prg3.py",
+      "prg6.py",
+      "prg7.py",
+      "prg8.py",
+      "prg9.py"
     ],
     "Y/T": [
-      "prg1",
-      "prg2",
-      "prg3",
-      "prg4",
-      "prg6",
-      "prg7",
-      "prg9"
+      "prg1.py",
+      "prg2.py",
+      "prg3.py",
+      "prg4.py",
+      "prg6.py",
+      "prg7.py",
+      "prg9.py"
     ],
     "Y/T/Q": [
-      "prg1",
-      "prg2",
-      "prg4",
-      "prg6",
-      "prg7",
-      "prg9"
+      "prg1.py",
+      "prg2.py",
+      "prg4.py",
+      "prg6.py",
+      "prg7.py",
+      "prg9.py"
     ]
   }
 }

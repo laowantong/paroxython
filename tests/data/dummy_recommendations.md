@@ -1,10 +1,10 @@
 # Table of contents
 - [`  2 programs of greater costs`](#2-programs-of-greater-costs)
-    - [`prg3`](#prg3)
-    - [`prg2`](#prg2)
+    - [`prg3.py`](#prg3py)
+    - [`prg2.py`](#prg2py)
 #   2 programs
 ##   2 programs of greater costs
-### `prg3`
+### `prg3.py`
 ```python
 1   O/N/P  X/K  Y/T
 2   X/S/M/L/V
@@ -31,7 +31,7 @@
 -   1: `O`
 -   1: `X/S/M/L`
 -   1: `Y/E`
-### `prg2`
+### `prg2.py`
 ```python
 1   O/N/P  Y/T/Q  Y
 2   X/S/M/L/R/D  O
