@@ -2,7 +2,7 @@
 omit =
     helpers/context.py
     helpers/draw_flow.py
-    helpers/print_test_programs.py
+    helpers/make_dummy_db.py
     helpers/reformat_spec.py
     paroxython/make_snapshots.py
     tests/*
