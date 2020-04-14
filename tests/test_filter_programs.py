@@ -20,7 +20,7 @@ def test_depths_to_cost_length():
     assert depths_to_cost_length(3, 5) == 2
 
 
-db = json.loads(Path("tests/data/dummy_db.json").read_text())
+db = json.loads(Path("tests/data/dummy/db.json").read_text())
 
 
 def test_init():

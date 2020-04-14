@@ -9,7 +9,7 @@ from paroxython.recommend_programs import recommend_programs
 
 
 def test_recommend_program():
-    result = recommend_programs(Path("tests/data/dummy_pipe.py"))
+    result = recommend_programs(Path("tests/data/dummy/pipe.py"))
     print(result)
     assert (
         "\n".join(

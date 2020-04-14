@@ -10,7 +10,7 @@ from paroxython.generate_labels import Label, Program, generate_labelled_program
 from paroxython.map_taxonomy import Taxonomy
 from paroxython.span import Span
 
-t = Taxonomy(Path("tests/data/dummy_taxonomy.tsv"))
+t = Taxonomy(Path("tests/data/dummy/taxonomy.tsv"))
 S = lambda i, j: Span([i, j])  # shortcut for Span([i, j])
 
 
