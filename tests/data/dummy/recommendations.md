@@ -1,10 +1,10 @@
 # Table of contents
-- [`  2 programs of greater costs`](#2-programs-of-greater-costs)
-    - [`prg3.py`](#prg3py)
-    - [`prg2.py`](#prg2py)
+- [`  2 programs of greater learning costs`](#2-programs-of-greater-learning-costs)
+    - [`prg3.py`](#program-prg3py-learning-cost-256)
+    - [`prg2.py`](#program-prg2py-learning-cost-928)
 #   2 programs
-##   2 programs of greater costs
-### `prg3.py`
+##   2 programs of greater learning costs
+### Program `prg3.py` (learning cost 256)
 ```python
 1   O/N/P  X/K  Y/T
 2   X/S/M/L/V
@@ -31,7 +31,7 @@
 -   1: `O`
 -   1: `X/S/M/L`
 -   1: `Y/E`
-### `prg2.py`
+### Program `prg2.py` (learning cost 928)
 ```python
 1   O/N/P  Y/T/Q  Y
 2   X/S/M/L/R/D  O
@@ -58,8 +58,8 @@
 -   1: `O/C/H/B/I`
 # Quantitative summary
 -   9 programs initially.
--   1 program removed by impart/programs/name.
--   2 programs removed by exclude/programs/name.
--   3 programs removed by exclude/taxons/pattern.
--   1 program removed by include/taxons/pattern.
+-   1 program filtered out by impart/programs/name.
+-   2 programs filtered out by exclude/programs/name.
+-   3 programs filtered out by exclude/taxons/pattern.
+-   1 program filtered out by include/taxons/pattern.
 -   2 programs remaining.

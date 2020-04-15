@@ -10,14 +10,14 @@ from paroxython.filter_programs import ProgramFilter, depths_to_cost_length, dep
 def test_depths_to_cost_zeno():
     assert depths_to_cost_zeno(0, 0) == 0
     assert depths_to_cost_zeno(42, 42) == 0
-    assert depths_to_cost_zeno(0, 1) == 1 / 2
-    assert depths_to_cost_zeno(0, 2) == 1 / 2 + 1 / 4
-    assert depths_to_cost_zeno(0, 3) == 1 / 2 + 1 / 4 + 1 / 8
-    assert depths_to_cost_zeno(1, 4) == 1 / 4 + 1 / 8 + 1 / 16
+    assert depths_to_cost_zeno(0, 1) == int(1024 * (1 / 2))
+    assert depths_to_cost_zeno(0, 2) == int(1024 * (1 / 2 + 1 / 4))
+    assert depths_to_cost_zeno(0, 3) == int(1024 * (1 / 2 + 1 / 4 + 1 / 8))
+    assert depths_to_cost_zeno(1, 4) == int(1024 * (1 / 4 + 1 / 8 + 1 / 16))
 
 
 def test_depths_to_cost_length():
-    assert depths_to_cost_length(3, 5) == 2
+    assert depths_to_cost_length(3, 5) == 2000
 
 
 db = json.loads(Path("tests/data/dummy/db.json").read_text())
@@ -157,73 +157,38 @@ def test_include_programs():
     assert dbf.recommended_programs == {"prg1.py", "prg2.py"}
 
 
-def test_compute_taxon_cost_with_length_strategy():
+def test_compute_taxon_cost():
     dbf = ProgramFilter(db)
     dbf.imparted_knowledge = {"O", "O/J", "X", "X/S", "X/S/M", "X/S/M/L"}
     dbf.set_cost_computation_strategy("length")
     taxon_costs = {taxon: dbf.compute_taxon_cost(taxon) for taxon in db["taxons"]}
     print(taxon_costs)
     assert taxon_costs == {
-        "O": 0.0,
-        "O/C": 1.0,
-        "O/C/F": 2.0,
-        "O/C/F/U": 3.0,
-        "O/C/H": 2.0,
-        "O/C/H/B": 3.0,
-        "O/C/H/B/I": 4.0,
-        "O/J": 0.0,
-        "O/N": 1.0,
-        "O/N/P": 2.0,
-        "X": 0.0,
-        "X/G": 1.0,
-        "X/K": 1.0,
-        "X/S": 0.0,
-        "X/S/M": 0.0,
-        "X/S/M/L": 0.0,
-        "X/S/M/L/R": 1.0,
-        "X/S/M/L/R/D": 2.0,
-        "X/S/M/L/R/D/A": 3.0,
-        "X/S/M/L/V": 1.0,
-        "X/W": 1.0,
-        "Y": 1.0,
-        "Y/E": 2.0,
-        "Y/T": 2.0,
-        "Y/T/Q": 3.0,
-    }
-
-
-def test_compute_taxon_cost_with_zeno_strategy():
-    dbf = ProgramFilter(db)
-    dbf.imparted_knowledge = {"O", "O/J", "X", "X/S", "X/S/M", "X/S/M/L"}
-    dbf.set_cost_computation_strategy("zeno")
-    taxon_costs = {taxon: dbf.compute_taxon_cost(taxon) for taxon in db["taxons"]}
-    print(taxon_costs)
-    assert taxon_costs == {
-        "O": 0,
-        "O/C": 0.25,
-        "O/C/F": 0.375,
-        "O/C/F/U": 0.4375,
-        "O/C/H": 0.375,
-        "O/C/H/B": 0.4375,
-        "O/C/H/B/I": 0.46875,
-        "O/J": 0,
-        "O/N": 0.25,
-        "O/N/P": 0.375,
-        "X": 0,
-        "X/G": 0.25,
-        "X/K": 0.25,
-        "X/S": 0,
-        "X/S/M": 0,
-        "X/S/M/L": 0,
-        "X/S/M/L/R": 0.03125,
-        "X/S/M/L/R/D": 0.046875,
-        "X/S/M/L/R/D/A": 0.0546875,
-        "X/S/M/L/V": 0.03125,
-        "X/W": 0.25,
-        "Y": 0.5,
-        "Y/E": 0.75,
-        "Y/T": 0.75,
-        "Y/T/Q": 0.875,
+        "O": 0000,
+        "O/C": 1000,
+        "O/C/F": 2000,
+        "O/C/F/U": 3000,
+        "O/C/H": 2000,
+        "O/C/H/B": 3000,
+        "O/C/H/B/I": 4000,
+        "O/J": 0000,
+        "O/N": 1000,
+        "O/N/P": 2000,
+        "X": 0000,
+        "X/G": 1000,
+        "X/K": 1000,
+        "X/S": 0000,
+        "X/S/M": 0000,
+        "X/S/M/L": 0000,
+        "X/S/M/L/R": 1000,
+        "X/S/M/L/R/D": 2000,
+        "X/S/M/L/R/D/A": 3000,
+        "X/S/M/L/V": 1000,
+        "X/W": 1000,
+        "Y": 1000,
+        "Y/E": 2000,
+        "Y/T": 2000,
+        "Y/T/Q": 3000,
     }
 
 
@@ -235,13 +200,13 @@ def test_get_sorted_recommandations():
     sorted_recommendations = dbf.get_sorted_recommendations()
     print(sorted_recommendations)
     assert sorted_recommendations == [
-        (0.1328125, "prg5.py"),
-        (0.1953125, "prg4.py"),
-        (0.375, "prg9.py"),
-        (0.4375, "prg3.py"),
-        (0.4375, "prg7.py"),
-        (0.4453125, "prg8.py"),
-        (0.5703125, "prg6.py"),
+        (136, "prg5.py"),
+        (200, "prg4.py"),
+        (384, "prg9.py"),
+        (448, "prg3.py"),
+        (448, "prg7.py"),
+        (456, "prg8.py"),
+        (584, "prg6.py"),
     ]
 
 
@@ -252,7 +217,7 @@ def test_get_markdown():
     dbf.set_cost_computation_strategy("length")
     text = dbf.get_markdown(section_group_limit=2)
     print(text)
-    assert "2 programs of cost 2" in text
-    assert "3 programs of cost 3" in text
+    assert "2 programs of learning cost 2000" in text
+    assert "3 programs of learning cost 3000" in text
     assert "9 programs initially" in text
     assert "7 programs remaining" in text

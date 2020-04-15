@@ -16,10 +16,10 @@ def test_recommend_program():
             [
                 "# Quantitative summary",
                 "-   9 programs initially.",
-                "-   1 program removed by impart/programs/name.",
-                "-   2 programs removed by exclude/programs/name.",
-                "-   3 programs removed by exclude/taxons/pattern.",
-                "-   1 program removed by include/taxons/pattern.",
+                "-   1 program filtered out by impart/programs/name.",
+                "-   2 programs filtered out by exclude/programs/name.",
+                "-   3 programs filtered out by exclude/taxons/pattern.",
+                "-   1 program filtered out by include/taxons/pattern.",
                 "-   2 programs remaining.",
             ]
         )

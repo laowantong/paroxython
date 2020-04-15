@@ -37,9 +37,9 @@ def recommend_programs(pipeline_path: Path):
         # Apply to them a method whose name depends on both the operation and the name category
         method_call("{operation}_{programs_or_taxons}", strings)
 
-        # Update the statistics if the filter state for the last operation
+        # Update the statistics of the filter state for the last operation
         (previous_count, current_count) = (current_count, len(dbf.recommended_programs))
-        key = "removed by {operation}/{programs_or_taxons}/{name_or_pattern}".format(**process)
+        key = "filtered out by {operation}/{programs_or_taxons}/{name_or_pattern}".format(**process)
         dbf.log[key] = previous_count - current_count
 
     # Sort the recommendations by increasing costs and dump them
