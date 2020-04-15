@@ -63,7 +63,6 @@ class Program(NamedTuple):
 
 ProgramPatterns = List[str]
 
-
 # Serialization-ready types used for the JSON database
 
 PoorSpan = Tuple[int, int]
@@ -85,6 +84,11 @@ class JsonDatabase(TypedDict):
     labels: LabelInfos
     taxons: TaxonInfos
 
+# Recommendations
+
+ProgramsTaxons = Dict[ProgramName, TaxonNames]
+AssessedPrograms = List[Tuple[int, ProgramName]]
+
 
 # Pipeline dictionary
 #
@@ -105,7 +109,7 @@ class Process(TypedDict):
 class Pipeline(TypedDict):
     input_path: str
     output_path: str
-    cost_computation_strategy: str
+    cost_assessment_strategy: str
     processes: List[Process]
 
 

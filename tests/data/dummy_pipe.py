@@ -1,13 +1,13 @@
 {
-    "input_path": "db.json",
-    "output_path": "recommendations.md",
+    "input_path": "dummy/db.json",
+    "output_path": "dummy/recommendations.md",
     "cost_assessment_strategy": "zeno",
     "processes": [
         {
             "operation": "impart",
             "programs_or_taxons": "programs",
             "name_or_pattern": "name",
-            "source": "python helpers/parse_syllabus.py {base_path}/syllabus.txt",
+            "source": "python helpers/parse_syllabus.py {base_path}/dummy/syllabus.txt",
         },
         {
             "operation": "exclude",

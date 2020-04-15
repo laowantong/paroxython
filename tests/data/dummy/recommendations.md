@@ -3,8 +3,11 @@
     - [`prg3.py`](#program-prg3py-learning-cost-256)
     - [`prg2.py`](#program-prg2py-learning-cost-928)
 #   2 programs
+
 ##   2 programs of greater learning costs
+
 ### Program `prg3.py` (learning cost 256)
+
 ```python
 1   1   O/N/P  X/K  Y/T
 2   2   X/S/M/L/V
@@ -16,22 +19,27 @@
 8   8   X/S/M/L  Y/E
 9   9   O/C/H/B  O/J
 ```
--   2: `O/N/P`
--   1: `X/K`
--   1: `Y/T`
--   1: `X/S/M/L/V`
--   2: `O/C/H/B`
--   1: `X/S/M/L/R`
--   2: `O/J`
--   1: `X/S/M`
--   1: `O/C/F/U`
--   1: `O/C/H`
--   1: `X/S`
--   1: `Y`
--   1: `O`
--   1: `X/S/M/L`
--   1: `Y/E`
+
+| Cost  | Taxon | Lines |
+|----|----|----|
+| 0 | `O/N/P` | 1, 6 |
+| 0 | `X/K` | 1 |
+| 256 | `Y/T` | 1 |
+| 0 | `X/S/M/L/V` | 2 |
+| 0 | `O/C/H/B` | 3, 9 |
+| 0 | `X/S/M/L/R` | 4-8 |
+| 0 | `O/J` | 5, 9 |
+| 0 | `X/S/M` | 5 |
+| 0 | `O/C/F/U` | 5 |
+| 0 | `O/C/H` | 5 |
+| 0 | `X/S` | 6 |
+| 0 | `Y` | 6 |
+| 0 | `O` | 7 |
+| 0 | `X/S/M/L` | 8 |
+| 0 | `Y/E` | 8 |
+
 ### Program `prg2.py` (learning cost 928)
+
 ```python
 1   1   O/N/P  Y/T/Q  Y
 2   2   X/S/M/L/R/D  O
@@ -43,19 +51,23 @@
 8   8   X/G  X/S/M/L/V+1
 9   9   X/S/M/L/R/D  X/S/M/L/V  Y/T/Q  O/C/H/B/I
 ```
--   1: `O/N/P`
--   2: `Y/T/Q`
--   1: `Y`
--   3: `X/S/M/L/R/D`
--   2: `O`
--   1: `O/C/H/B`
--   1: `X/S/M`
--   1: `X/S/M/L/R`
--   1: `Y/T`
--   1: `O/C`
--   1: `X/G`
--   2: `X/S/M/L/V`
--   1: `O/C/H/B/I`
+
+| Cost  | Taxon | Lines |
+|----|----|----|
+| 0 | `O/N/P` | 1 |
+| 384 | `Y/T/Q` | 1, 9 |
+| 0 | `Y` | 1 |
+| 0 | `X/S/M/L/R/D` | 2, 3, 9 |
+| 0 | `O` | 2, 6 |
+| 0 | `O/C/H/B` | 3 |
+| 0 | `X/S/M` | 6 |
+| 0 | `X/S/M/L/R` | 7 |
+| 256 | `Y/T` | 7 |
+| 0 | `O/C` | 7 |
+| 256 | `X/G` | 8 |
+| 0 | `X/S/M/L/V` | 8-9, 9 |
+| 32 | `O/C/H/B/I` | 9 |
+
 # Quantitative summary
 -   9 programs initially.
 -   1 program filtered out by impart/programs/name.
