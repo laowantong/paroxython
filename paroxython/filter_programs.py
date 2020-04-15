@@ -4,7 +4,8 @@ from typing import Dict, List, Tuple
 
 import regex  # type: ignore
 
-from goodies import title_converter, add_line_numbers
+from goodies import add_line_numbers, title_converter
+from span import Span
 from user_types import (
     JsonDatabase,
     ProgramName,
@@ -166,16 +167,25 @@ class ProgramFilter:
                     title = f"{display_count(remainder)} of greater learning costs"
                     must_detail = False
                 toc.append(f"- [`{title}`](#{title_to_slug(title)})")
-                contents.append(f"## {title}")
+                contents.append(f"\n## {title}")
             for program_name in program_names:
                 title = f"Program `{program_name}` (learning cost {cost})"
                 toc.append(f"    - [`{program_name}`](#{title_to_slug(title)})")
-                contents.append(f"### {title}")
-                program = self.db["programs"][program_name]
-                contents.append(f"```python\n{add_line_numbers(program['source'])}\n```")
-                for (taxon_name, spans) in program["taxons"].items():
-                    contents.append(f"- {len(spans):3}: `{taxon_name}`")
-        summary: List[str] = ["# Quantitative summary"]
+                contents.append(f"\n### {title}")
+                program_info = self.db["programs"][program_name]
+                contents.append(f"\n```python\n{add_line_numbers(program_info['source'])}\n```")
+                contents.append("\n| Cost  | Taxon | Lines |")
+                contents.append("|" + "----|" * 3)
+                for (taxon_name, spans) in program_info["taxons"].items():
+                    cost = self.compute_taxon_cost(taxon_name)
+                    all_span_strings = [str(Span(span)) for span in spans]
+                    if len(all_span_strings) > 7:
+                        n = len(all_span_strings) - 4
+                        span_string = ", ".join(all_span_strings[:4]) + f" and {n} more"
+                    else:
+                        span_string = ", ".join(all_span_strings)
+                    contents.append(f"| {cost} | `{taxon_name}` | {span_string} |")
+        summary: List[str] = ["\n# Quantitative summary"]
         self.log["remaining"] = len(self.recommended_programs)
         for (description, count) in self.log.items():
             summary.append(f"- {display_count(count)} {description}.")
