@@ -4,7 +4,7 @@ from typing import Dict, List, Tuple
 
 import regex  # type: ignore
 
-from title_to_slug import title_converter
+from goodies import title_converter
 from user_types import (
     JsonDatabase,
     ProgramName,

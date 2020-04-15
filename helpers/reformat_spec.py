@@ -19,7 +19,7 @@ import regex  # type: ignore
 import sqlparse
 
 import context
-from paroxython.title_to_slug import title_converter
+from paroxython.goodies import title_converter
 from paroxython.parse_program import ProgramParser, find_all_features
 
 title_to_slug = title_converter()

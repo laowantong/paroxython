@@ -1,10 +1,10 @@
 import pytest
 
 import context
-from paroxython.title_to_slug import title_converter
+from paroxython.goodies import title_converter
 
 
-def test_non_ascii_titles():
+def test_non_ascii_title_converter():
     titles_and_slugs = [
         ("Partie 1. Fantine", "partie-1-fantine"),
         ("Livre 1. Un juste", "livre-1-un-juste"),
@@ -34,7 +34,7 @@ def test_non_ascii_titles():
         assert title_to_slug(title) == slug
 
 
-def test_duplicate_titles():
+def test_duplicate_title_converter():
     titles_and_slugs = [
         ("foobar", "foobar"),
         ("foo", "foo"),
