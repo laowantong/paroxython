@@ -3,6 +3,8 @@ from unicodedata import normalize
 
 import regex  # type: ignore
 
+from user_types import Source
+
 
 def title_converter():
     slug_counts = defaultdict(int)
@@ -29,3 +31,7 @@ def title_converter():
 
 
 title_to_slug = title_converter()
+
+
+def add_line_numbers(source: Source) -> str:
+    return "\n".join(f"{n: <4}{line}" for (n, line) in enumerate(source.split("\n"), 1))

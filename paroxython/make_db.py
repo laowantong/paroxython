@@ -8,6 +8,7 @@ from typing import List, Optional, Tuple, Union, overload
 import regex  # type: ignore
 
 from generate_labels import generate_labelled_programs
+from goodies import add_line_numbers
 from map_taxonomy import Taxonomy
 from user_types import (
     LabelInfos,
@@ -79,10 +80,7 @@ class Database:
         label_rows: List[Tuple] = []
         taxon_rows: List[Tuple] = []
         for (path, info) in self.programs.items():
-            source = f"{path}\n\n" + "\n".join(
-                f"{line_number: <4}{line}"
-                for (line_number, line) in enumerate(info["source"].split("\n"), 1)
-            )
+            source = f"{path}\n\n" + add_line_numbers(info["source"])
             program_rows.append((path, info["timestamp"], source))
             for (label_name, spans) in info["labels"].items():
                 (prefix, _, suffix) = label_name.partition(":")

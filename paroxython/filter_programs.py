@@ -4,7 +4,7 @@ from typing import Dict, List, Tuple
 
 import regex  # type: ignore
 
-from goodies import title_converter
+from goodies import title_converter, add_line_numbers
 from user_types import (
     JsonDatabase,
     ProgramName,
@@ -172,7 +172,7 @@ class ProgramFilter:
                 toc.append(f"    - [`{program_name}`](#{title_to_slug(title)})")
                 contents.append(f"### {title}")
                 program = self.db["programs"][program_name]
-                contents.append(f"```python\n{program['source']}\n```")
+                contents.append(f"```python\n{add_line_numbers(program['source'])}\n```")
                 for (taxon_name, spans) in program["taxons"].items():
                     contents.append(f"- {len(spans):3}: `{taxon_name}`")
         summary: List[str] = ["# Quantitative summary"]
