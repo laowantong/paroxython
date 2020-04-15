@@ -64,7 +64,8 @@ def test_recommend_program(capsys):
         "X/S/M/L/V": 0,
         "O/C/H/B/I": 32,
     }
-    text = rec.get_markdown()
+    text = rec.get_markdown(toc_group_limit=1)  # for coverage testing
+    text = rec.get_markdown(span_count_limit=2, delta=1)
     print(text)
     assert (
         "\n".join(

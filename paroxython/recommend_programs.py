@@ -72,7 +72,7 @@ class Recommendations:
         self.log["remaining"] = len(self.recommended_programs)
         self.assessed_programs = self.assess_costs(self.recommended_programs)
 
-    def get_markdown(self, section_group_limit=5) -> str:
+    def get_markdown(self, toc_group_limit=5, span_count_limit=7, delta=4) -> str:
         display_count = lambda n: f"{n:3} program" + ("" if n == 1 else "s")
         n = len(self.recommended_programs)
         toc_data: Dict[int, ProgramNames] = defaultdict(list)
@@ -84,7 +84,7 @@ class Recommendations:
         remainder = len(self.recommended_programs)
         for (cost, program_names) in toc_data.items():
             if must_detail:
-                if len(program_names) >= section_group_limit:
+                if len(program_names) >= toc_group_limit:
                     title = f"{display_count(len(program_names))} of learning cost {cost}"
                     remainder -= len(program_names)
                 else:
@@ -103,9 +103,9 @@ class Recommendations:
                 for (taxon_name, spans) in program_info["taxons"].items():
                     cost = self.taxon_cost(taxon_name)
                     all_span_strings = [str(Span(list(span))) for span in spans]
-                    if len(all_span_strings) > 7:
-                        n = len(all_span_strings) - 4
-                        span_string = ", ".join(all_span_strings[:4]) + f" and {n} more"
+                    if len(all_span_strings) > span_count_limit:
+                        n = len(all_span_strings) - delta - 1
+                        span_string = ", ".join(all_span_strings[:delta]) + f" and {n} more"
                     else:
                         span_string = ", ".join(all_span_strings)
                     contents.append(f"| {cost} | `{taxon_name}` | {span_string} |")
