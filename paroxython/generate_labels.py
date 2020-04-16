@@ -1,7 +1,7 @@
 from bisect import insort
 from collections import defaultdict
 from pathlib import Path
-from typing import Iterator, List, Set
+from typing import List, Set
 
 from user_types import Label, LabelsSpans, Program, Programs, Source
 from list_programs import list_programs
@@ -9,17 +9,16 @@ from parse_program import ProgramParser
 from mark_internal_imports import InternalImportsMarker
 
 
-def generate_labelled_sources(directory: Path, *args, **kargs) -> Iterator[Source]:
+def generate_labelled_sources(directory: Path, *args, **kargs) -> List[Source]:
     """For each program, yield its source with its labels in comment."""
-    print("ok")
+    result = []
     programs = list_programs(directory, *args, **kargs)
-    print(programs)
     may_mark_as_internal = InternalImportsMarker(programs)
     parse = ProgramParser()
     separator = "-" * 88
     for program in programs:
         may_mark_as_internal.reset()
-        yield Source(f"# {separator}\n# {program.name}\n# {separator}")
+        result.append(Source(f"# {separator}\n# {program.name}\n# {separator}"))
         lines = program.source.splitlines()
         comments: List[Set[str]] = [set() for _ in lines]
         for (label_name, spans) in parse(program):
@@ -29,13 +28,14 @@ def generate_labelled_sources(directory: Path, *args, **kargs) -> Iterator[Sourc
         for (i, comment) in enumerate(comments):
             if comment:
                 lines[i] += " # " + ", ".join(sorted(comment))
-        yield Source("\n".join(lines + [""]))
+        result.append(Source("\n".join(lines + [""])))
+    return result
 
 
 def generate_labelled_programs(directory: Path, *args, **kargs) -> Programs:
     """For each program, yield its label list, lexicographically sorted."""
-    programs = list_programs(directory, *args, **kargs)
     result = []
+    programs = list_programs(directory, *args, **kargs)
     may_mark_as_internal = InternalImportsMarker(programs)
     parse = ProgramParser()
     for program in programs:
@@ -51,7 +51,7 @@ def generate_labelled_programs(directory: Path, *args, **kargs) -> Programs:
                 name=program.name,
                 source=program.source,
                 labels=labels,
-                local_imports=may_mark_as_internal.internal_imports,
+                links=list(may_mark_as_internal.internal_imports),
             )
         )
     return result

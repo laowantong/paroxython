@@ -55,7 +55,7 @@ class Program(NamedTuple):
     addition: LabelsSpans = {}
     deletion: LabelsSpans = {}
     labels: Labels = []
-    local_imports: ProgramNames = []
+    links: ProgramNames = []
 
 Programs = List[Program]
 ProgramTaxons = Dict[ProgramName, Taxons]
@@ -70,6 +70,7 @@ TaxonsPoorSpans = Dict[TaxonName, List[PoorSpan]]
 
 class ProgramRecord(TypedDict):
     timestamp: str
+    links: ProgramNames
     source: Source
     labels: LabelsPoorSpans
     taxons: TaxonsPoorSpans

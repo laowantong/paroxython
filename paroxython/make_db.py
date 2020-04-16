@@ -17,6 +17,7 @@ from user_types import (
     ProgramTaxons,
     Program,
     ProgramInfos,
+    ProgramName,
     TaxonInfos,
     Taxons,
     TaxonsPoorSpans,
@@ -28,7 +29,7 @@ class Database:
         """collect all infos pertaining to the programs, the labels and the taxons."""
         self.default_json_db_path = directory.parent / f"{directory.name}_db.json"
         self.default_sqlite_db_path = directory.parent / f"{directory.name}_db.sqlite"
-        programs: List[Program] = list(generate_labelled_programs(directory, *args, **kargs))
+        programs: List[Program] = generate_labelled_programs(directory, *args, **kargs)
         program_taxons: ProgramTaxons = dict(Taxonomy()(programs))
 
         get_timestamp = lambda path: str(datetime.fromtimestamp(path.stat().st_mtime))
@@ -39,12 +40,11 @@ class Database:
         for program in programs:
             self.programs[program.name] = {
                 "timestamp": get_timestamp(directory / program.name),
+                "links": sorted(ProgramName(link) for link in program.links),
                 "source": program.source,
                 "labels": {},  # to be populated by inject_labels()
                 "taxons": {},  # to be populated by inject_taxons()
             }
-            if program.local_imports:
-                self.programs[program.name]["links"] = list(map(str, program.local_imports))
 
         self.labels: LabelInfos = defaultdict(list)
         for program in programs:

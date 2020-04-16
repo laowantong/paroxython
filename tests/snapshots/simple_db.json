@@ -11,7 +11,8 @@
       },
       "taxons": {
         "variable/assignment/single": [[1,1]]
-      }
+      },
+      "links": []
     },
     "collatz_print.py": {
       "timestamp": "ignored",
@@ -84,7 +85,8 @@
         "type/elementary/number/integer/zero": [[4,4]],
         "variable/assignment/conditional/verbose": [[4,7]],
         "variable/assignment/single": [[5,5],[7,7]]
-      }
+      },
+      "links": []
     },
     "fizzbuzz.py": {
       "timestamp": "ignored",
@@ -137,7 +139,8 @@
         "type/elementary/number/integer": [[1,1],[1,1],[2,2],[4,4],[6,6]],
         "type/elementary/number/integer/zero": [[2,2],[4,4],[6,6]],
         "type/elementary/string": [[3,3],[5,5],[7,7]]
-      }
+      },
+      "links": []
     },
     "is_even.py": {
       "timestamp": "ignored",
@@ -163,7 +166,8 @@
         "test/equality": [[2,2]],
         "type/elementary/number/integer": [[2,2]],
         "type/elementary/number/integer/zero": [[2,2]]
-      }
+      },
+      "links": []
     }
   },
   "labels": {
