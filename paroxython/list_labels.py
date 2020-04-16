@@ -9,7 +9,7 @@ from parse_program import ProgramParser
 from mark_internal_imports import InternalImportsMarker
 
 
-def generate_labelled_sources(directory: Path, *args, **kargs) -> List[Source]:
+def list_labelled_sources(directory: Path, *args, **kargs) -> List[Source]:
     """For each program, yield its source with its labels in comment."""
     result = []
     programs = list_programs(directory, *args, **kargs)
@@ -32,7 +32,7 @@ def generate_labelled_sources(directory: Path, *args, **kargs) -> List[Source]:
     return result
 
 
-def generate_labelled_programs(directory: Path, *args, **kargs) -> Programs:
+def list_labelled_programs(directory: Path, *args, **kargs) -> Programs:
     """For each program, yield its label list, lexicographically sorted."""
     result = []
     programs = list_programs(directory, *args, **kargs)
@@ -58,5 +58,5 @@ def generate_labelled_programs(directory: Path, *args, **kargs) -> Programs:
 
 
 if __name__ == "__main__":
-    for result in generate_labelled_sources(Path("../Python/project_euler")):
+    for result in list_labelled_sources(Path("../Python/project_euler")):
         print(result)

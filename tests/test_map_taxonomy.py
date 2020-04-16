@@ -6,7 +6,7 @@ import pytest
 
 import context
 from make_snapshot import make_snapshot
-from paroxython.generate_labels import generate_labelled_programs
+from paroxython.list_labels import list_labelled_programs
 from paroxython.map_taxonomy import Taxonomy
 from paroxython.span import Span
 from paroxython.user_types import Label, Program
@@ -92,7 +92,7 @@ def test_call():
 def test_snapshot_simple_taxons(capsys):
     taxonomy = Taxonomy()
     acc = {}
-    programs = generate_labelled_programs(Path("tests/data/simple"))
+    programs = list_labelled_programs(Path("tests/data/simple"))
     for (path, taxons) in taxonomy(programs).items():
         acc[str(path)] = {name: " ".join(map(str, sorted(set(spans)))) for (name, spans) in taxons}
     result = json.dumps(acc, indent=2)

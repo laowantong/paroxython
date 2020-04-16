@@ -7,7 +7,7 @@ from typing import List, Optional, Tuple, Union, overload
 
 import regex  # type: ignore
 
-from generate_labels import generate_labelled_programs
+from list_labels import list_labelled_programs
 from goodies import add_line_numbers
 from map_taxonomy import Taxonomy
 from user_types import (
@@ -29,7 +29,7 @@ class Database:
         """collect all infos pertaining to the programs, the labels and the taxons."""
         self.default_json_db_path = directory.parent / f"{directory.name}_db.json"
         self.default_sqlite_db_path = directory.parent / f"{directory.name}_db.sqlite"
-        programs: List[Program] = generate_labelled_programs(directory, *args, **kargs)
+        programs: List[Program] = list_labelled_programs(directory, *args, **kargs)
         program_taxons: ProgramTaxons = dict(Taxonomy()(programs))
 
         get_timestamp = lambda path: str(datetime.fromtimestamp(path.stat().st_mtime))

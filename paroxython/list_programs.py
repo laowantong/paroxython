@@ -26,7 +26,7 @@ def list_programs(directory: Path, strategy="strip_docs") -> Programs:
     - its Source,
     - the hints scheduled for addition or deletion.
 
-    Its labels will later be populated by "generate_labels.py".
+    Its labels will later be populated by "list_labels.py".
     """
     result = []
     cleanup = cleanup_factory(strategy)

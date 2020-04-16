@@ -92,10 +92,10 @@ class Taxonomy:
 
 
 if __name__ == "__main__":
-    generate_labelled_programs = __import__("generate_labels").generate_labelled_programs
+    list_labelled_programs = __import__("list_labels").list_labelled_programs
     chain = __import__("itertools").chain
     taxonomy = Taxonomy()
-    programs = generate_labelled_programs(Path("../Python/project_euler"))
+    programs = list_labelled_programs(Path("../Python/project_euler"))
     for (_, taxons) in taxonomy(programs).items():
         if not taxons:
             continue
