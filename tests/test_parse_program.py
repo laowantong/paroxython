@@ -4,7 +4,7 @@ import regex  # type: ignore
 
 import context
 from make_snapshot import make_snapshot
-from paroxython.generate_programs import generate_programs
+from paroxython.list_programs import list_programs
 from paroxython.parse_program import ProgramParser
 from paroxython.preprocess_source import (
     centrifugate_hints,
@@ -75,7 +75,7 @@ def test_label_presence(capsys):
     all_names = set()
     present_names = set()
     result = []
-    for program in generate_programs(Path("tests/data/simple/")):
+    for program in list_programs(Path("tests/data/simple/")):
         labels = parse(Program(source=program.source), yield_failed_matches=True)
         for (name, spans) in labels:
             all_names.add(name)

@@ -4,7 +4,7 @@ from pathlib import Path
 from typing import Iterator, List, Set
 
 from user_types import Label, LabelsSpans, Program, Source
-from generate_programs import generate_programs
+from list_programs import list_programs
 from parse_program import ProgramParser
 
 
@@ -12,7 +12,7 @@ def generate_labelled_sources(directory: Path, *args, **kargs) -> Iterator[Sourc
     """For each program, yield its source with its labels in comment."""
     parse = ProgramParser()
     separator = "-" * 88
-    for program in generate_programs(directory, *args, **kargs):
+    for program in list_programs(directory, *args, **kargs):
         yield Source(f"# {separator}\n# {program.path}\n# {separator}")
         lines = program.source.splitlines()
         comments: List[Set[str]] = [set() for _ in lines]
@@ -28,7 +28,7 @@ def generate_labelled_sources(directory: Path, *args, **kargs) -> Iterator[Sourc
 def generate_labelled_programs(directory: Path, *args, **kargs) -> Iterator[Program]:
     """For each program, yield its label list, lexicographically sorted."""
     parse = ProgramParser()
-    for program in generate_programs(directory, *args, **kargs):
+    for program in list_programs(directory, *args, **kargs):
         label_dict: LabelsSpans = defaultdict(list)
         for (label_name, spans) in parse(program):
             for span in spans:

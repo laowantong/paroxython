@@ -19,7 +19,7 @@ match_excluded = regex.compile(
 ).match
 
 
-def generate_programs(directory: Path, strategy="strip_docs") -> Iterator[Program]:
+def list_programs(directory: Path, strategy="strip_docs") -> Iterator[Program]:
     """Yield all Programs of a given directory.
 
     Each Program (cf. declaration) includes:
@@ -48,7 +48,7 @@ def generate_programs(directory: Path, strategy="strip_docs") -> Iterator[Progra
 if __name__ == "__main__":
     datetime = __import__("datetime").datetime
     directory = Path("../Algo/programs/")
-    for program in generate_programs(directory):
+    for program in list_programs(directory):
         path = directory / program.path
         print(datetime.fromtimestamp(path.stat().st_mtime))
         print(program.source)

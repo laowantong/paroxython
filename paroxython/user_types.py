@@ -61,6 +61,8 @@ class Program(NamedTuple):
     deletion: LabelsSpans = {}
     labels: Labels = []
 
+Programs = List[Program]
+
 ProgramPatterns = List[str]
 
 # Serialization-ready types used for the JSON database

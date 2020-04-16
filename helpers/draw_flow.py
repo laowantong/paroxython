@@ -27,13 +27,13 @@ Path(f"{base}.dot").write_text(
             '"*_db.sqlite" -> sqlite_queries',
             '"*_db.json" -> filter_programs',
             '"spec.md" -> parse_program',
-            '"source files" -> generate_programs',
+            '"source files" -> list_programs',
             '"*_taxonomy.tsv" -> map_taxonomy',
             '"*_pipe.py" -> recommend_programs',
             # Add invisible edges to make the layout more compact
             "sqlite_queries -> recommend_programs  [style=invis]",
             '"*_db.sqlite" -> "*_pipe.py"  [style=invis]',
-            'generate_programs -> "*_db.json"  [style=invis]',
+            'list_programs -> "*_db.json"  [style=invis]',
         ]
         + [
             f"{imported_name} -> {name}"

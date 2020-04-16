@@ -178,7 +178,14 @@ def prepared(tags):
 
 
 if __name__ == "__main__":
-    directories = ["../Python/project_euler", "../Python/maths", "../algo/programs", "paroxython"]
+    # fmt:off
+    directories = [
+        # "../Python/project_euler",
+        # "../Python/maths",
+        "../algo/programs",
+        # "paroxython"
+    ]
+    # fmt:on
     for directory in directories:
         db = Database(Path(directory))
         db.write_json()
