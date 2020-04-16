@@ -4,7 +4,7 @@ from typing import Iterator
 import regex  # type: ignore
 
 from preprocess_source import cleanup_factory, centrifugate_hints, collect_hints, remove_hints
-from user_types import Program, Source
+from user_types import Program, ProgramName, Source
 
 match_excluded = regex.compile(
     r"""(?x)
@@ -38,7 +38,7 @@ def list_programs(directory: Path, strategy="strip_docs") -> Iterator[Program]:
             (addition, deletion) = collect_hints(source)
             source = remove_hints(source)
             yield Program(
-                path=program_path.relative_to(directory),
+                name=ProgramName(str(program_path.relative_to(directory))),
                 source=source,
                 addition=addition,
                 deletion=deletion,
@@ -49,7 +49,7 @@ if __name__ == "__main__":
     datetime = __import__("datetime").datetime
     directory = Path("../Algo/programs/")
     for program in list_programs(directory):
-        path = directory / program.path
+        path = directory / program.name
         print(datetime.fromtimestamp(path.stat().st_mtime))
         print(program.source)
         print("-" * 80)

@@ -5,7 +5,7 @@ repos:
     rev: v2.4.0
     hooks:
     -   id: trailing-whitespace
-        exclude: docs/spec.md|tests/snapshots/*|tests/data/dummy/taxons_and_programs\.txt|taxonomies/*
+        exclude: docs/spec.md|tests/snapshots/*|tests/data/dummy/*|taxonomies/*
     -   id: end-of-file-fixer
         exclude: tests/snapshots/*|tests/data/dummy_taxons_and_programs\.txt
     -   id: check-yaml

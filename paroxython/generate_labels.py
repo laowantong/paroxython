@@ -13,7 +13,7 @@ def generate_labelled_sources(directory: Path, *args, **kargs) -> Iterator[Sourc
     parse = ProgramParser()
     separator = "-" * 88
     for program in list_programs(directory, *args, **kargs):
-        yield Source(f"# {separator}\n# {program.path}\n# {separator}")
+        yield Source(f"# {separator}\n# {program.name}\n# {separator}")
         lines = program.source.splitlines()
         comments: List[Set[str]] = [set() for _ in lines]
         for (label_name, spans) in parse(program):
@@ -34,7 +34,7 @@ def generate_labelled_programs(directory: Path, *args, **kargs) -> Iterator[Prog
             for span in spans:
                 insort(label_dict[label_name], span)
         labels = [Label(name, span) for (name, span) in label_dict.items()]
-        yield Program(path=program.path, source=program.source, labels=labels)
+        yield Program(name=program.name, source=program.source, labels=labels)
 
 
 if __name__ == "__main__":

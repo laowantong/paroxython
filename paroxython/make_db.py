@@ -14,10 +14,9 @@ from user_types import (
     LabelInfos,
     Labels,
     LabelsPoorSpans,
-    PathTaxons,
+    ProgramTaxons,
     Program,
     ProgramInfos,
-    ProgramName,
     TaxonInfos,
     Taxons,
     TaxonsPoorSpans,
@@ -30,7 +29,7 @@ class Database:
         self.default_json_db_path = directory.parent / f"{directory.name}_db.json"
         self.default_sqlite_db_path = directory.parent / f"{directory.name}_db.sqlite"
         programs: List[Program] = list(generate_labelled_programs(directory, *args, **kargs))
-        paths_taxons: List[PathTaxons] = list(Taxonomy()(programs))
+        program_taxons: ProgramTaxons = dict(Taxonomy()(programs))
 
         get_timestamp = lambda path: str(datetime.fromtimestamp(path.stat().st_mtime))
         if ignore_timestamps:
@@ -38,8 +37,8 @@ class Database:
 
         self.programs: ProgramInfos = {}
         for program in programs:
-            self.programs[ProgramName(str(program.path))] = {
-                "timestamp": get_timestamp(directory / program.path),
+            self.programs[program.name] = {
+                "timestamp": get_timestamp(directory / program.name),
                 "source": program.source,
                 "labels": {},  # to be populated by inject_labels()
                 "taxons": {},  # to be populated by inject_taxons()
@@ -48,16 +47,16 @@ class Database:
         self.labels: LabelInfos = defaultdict(list)
         for program in programs:
             for label in program.labels:
-                self.labels[label.name].append(ProgramName(str(program.path)))
+                self.labels[label.name].append(program.name)
         for program in programs:
-            self.programs[ProgramName(str(program.path))]["labels"] = prepared(program.labels)
+            self.programs[program.name]["labels"] = prepared(program.labels)
 
         self.taxons: TaxonInfos = defaultdict(list)
-        for (path, taxons) in paths_taxons:
+        for (program_name, taxons) in program_taxons.items():
             for taxon in taxons:
-                self.taxons[taxon.name].append(ProgramName(str(path)))
-        for (path, taxons) in paths_taxons:
-            self.programs[ProgramName(str(path))]["taxons"] = prepared(taxons)
+                self.taxons[taxon.name].append(program_name)
+        for (program_name, taxons) in program_taxons.items():
+            self.programs[program_name]["taxons"] = prepared(taxons)
 
     def get_json(self) -> str:
         """Dump the data to JSON, reduce each list of spans to one line."""
@@ -180,8 +179,8 @@ def prepared(tags):
 if __name__ == "__main__":
     # fmt:off
     directories = [
-        # "../Python/project_euler",
-        # "../Python/maths",
+        "../Python/project_euler",
+        "../Python/maths",
         "../algo/programs",
         # "paroxython"
     ]

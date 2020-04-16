@@ -58,7 +58,7 @@ def test_deduplicated_taxons():
 def test_call():
     programs = [
         Program(
-            path="algo1",
+            name="algo1",
             labels=[
                 Label("if", [S(1, 1), S(1, 1), S(2, 5)]),
                 Label("if_else", [S(1, 1), S(2, 5)]),
@@ -66,37 +66,33 @@ def test_call():
             ],
         ),
         Program(
-            path="algo2",
+            name="algo2",
             labels=[
                 Label("method_call:difference_update", [S(1, 1), S(1, 1), S(2, 5)]),
                 Label("literal:Set", [S(1, 1), S(2, 5)]),
             ],
         ),
     ]
-    result = list(t(programs))
+    result = t(programs)
     print(result)
-    assert result[0] == (
-        "algo1",
-        [
+    assert result == {
+        "algo1": [
             ("control_flow/conditional", C({S(1, 1): 1})),
             ("control_flow/conditional/else", C({S(1, 1): 1, S(2, 5): 1})),
             ("test/inequality", C({S(2, 2): 1, S(3, 3): 1, S(1, 1): 1})),
         ],
-    )
-    assert result[1] == (
-        "algo2",
-        [
+        "algo2": [
             ("call/function/builtin/casting/set", C({S(1, 1): 1, S(2, 5): 1})),
             ("type/set", C({S(1, 1): 3, S(2, 5): 2})),
         ],
-    )
+    }
 
 
 def test_snapshot_simple_taxons(capsys):
     taxonomy = Taxonomy()
     acc = {}
     programs = generate_labelled_programs(Path("tests/data/simple"))
-    for (path, taxons) in taxonomy(programs):
+    for (path, taxons) in taxonomy(programs).items():
         acc[str(path)] = {name: " ".join(map(str, sorted(set(spans)))) for (name, spans) in taxons}
     result = json.dumps(acc, indent=2)
     make_snapshot(Path("tests/snapshots/simple_taxons.json"), result, capsys)

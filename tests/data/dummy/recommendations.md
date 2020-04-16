@@ -44,8 +44,8 @@
 1   1   O/N/P  Y/T/Q  Y
 2   2   X/S/M/L/R/D  O
 3   3   O/C/H/B  X/S/M/L/R/D
-4   4
-5   5
+4   4   
+5   5   
 6   6   X/S/M  O
 7   7   X/S/M/L/R  Y/T  O/C
 8   8   X/G  X/S/M/L/V+1

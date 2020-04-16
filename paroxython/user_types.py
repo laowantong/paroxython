@@ -1,4 +1,3 @@
-from pathlib import Path
 from typing import Counter as Bag
 from typing import Dict, List, NamedTuple, NewType, Set, Tuple, Union
 
@@ -41,10 +40,6 @@ class Taxon(NamedTuple):
 Taxons = List[Taxon]
 TaxonsSpans = Dict[TaxonName, Bag[Span]]
 
-class PathTaxons(NamedTuple):
-    path: Path
-    taxons: Taxons
-
 TaxonPatterns = List[str]
 
 
@@ -55,13 +50,14 @@ ProgramNames = List[ProgramName]
 ProgramNameSet = Set[ProgramName]
 
 class Program(NamedTuple):
-    path: Path = Path("")
+    name: ProgramName = ProgramName("")
     source: Source = Source("")
     addition: LabelsSpans = {}
     deletion: LabelsSpans = {}
     labels: Labels = []
 
 Programs = List[Program]
+ProgramTaxons = Dict[ProgramName, Taxons]
 
 ProgramPatterns = List[str]
 
@@ -88,9 +84,8 @@ class JsonDatabase(TypedDict):
 
 # Recommendations
 
-ProgramsTaxons = Dict[ProgramName, TaxonNames]
+ProgramTaxonNames = Dict[ProgramName, TaxonNames]
 AssessedPrograms = List[Tuple[int, ProgramName]]
-
 
 # Pipeline dictionary
 #

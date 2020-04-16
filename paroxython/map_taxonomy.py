@@ -1,6 +1,6 @@
 from collections import Counter, defaultdict
 from pathlib import Path
-from typing import Dict, Iterator, List
+from typing import Dict, List
 
 import regex  # type: ignore
 
@@ -8,7 +8,7 @@ from user_types import (
     LabelName,
     Labels,
     Program,
-    PathTaxons,
+    ProgramTaxons,
     Taxon,
     TaxonName,
     TaxonNames,
@@ -83,12 +83,12 @@ class Taxonomy:
                 result.append(Taxon(name, spans))
         return result
 
-    def __call__(self, programs: List[Program]) -> Iterator[PathTaxons]:
-        """Translate labels into taxons on a list of program paths."""
-        for program in programs:
-            taxons = self.to_taxons(program.labels)
-            taxons = self.deduplicated_taxons(taxons)
-            yield PathTaxons(program.path, taxons)
+    def __call__(self, programs: List[Program]) -> ProgramTaxons:
+        """Translate labels into taxons on a list of program names."""
+        return {
+            program.name: self.deduplicated_taxons(self.to_taxons(program.labels))
+            for program in programs
+        }
 
 
 if __name__ == "__main__":
@@ -96,7 +96,7 @@ if __name__ == "__main__":
     chain = __import__("itertools").chain
     taxonomy = Taxonomy()
     programs = generate_labelled_programs(Path("../Python/project_euler"))
-    for (_, taxons) in taxonomy(programs):
+    for (_, taxons) in taxonomy(programs).items():
         if not taxons:
             continue
         width = min(40, max(len(" ".join(map(str, taxon.spans))) for taxon in taxons))

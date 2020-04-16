@@ -2,11 +2,11 @@ import regex  # type: ignore
 
 from user_types import (
     JsonDatabase,
+    ProgramInfos,
     ProgramName,
     ProgramNameSet,
     ProgramPatterns,
-    ProgramInfos,
-    ProgramsTaxons,
+    ProgramTaxonNames,
     TaxonInfos,
     TaxonName,
     TaxonNames,
@@ -28,7 +28,7 @@ class ProgramFilter:
         """
         self.db_programs: ProgramInfos = db["programs"]
         self.db_taxons: TaxonInfos = db["taxons"]
-        self.recommended_programs: ProgramsTaxons = {
+        self.recommended_programs: ProgramTaxonNames = {
             program_name: list(program_info["taxons"])
             for (program_name, program_info) in self.db_programs.items()
         }

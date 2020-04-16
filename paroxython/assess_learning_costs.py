@@ -1,6 +1,6 @@
 from functools import lru_cache
 
-from user_types import TaxonName, TaxonNameSet, ProgramsTaxons, AssessedPrograms
+from user_types import TaxonName, TaxonNameSet, ProgramTaxonNames, AssessedPrograms
 
 
 @lru_cache(maxsize=None)
@@ -40,7 +40,7 @@ class LearningCostAssessor:
                     break
         return self.depths_to_cost(start, stop)
 
-    def __call__(self, programs: ProgramsTaxons) -> AssessedPrograms:
+    def __call__(self, programs: ProgramTaxonNames) -> AssessedPrograms:
         """Evaluate the learning costs of the given programs wrt the imparted knowledge."""
         return sorted(
             (sum(map(self.taxon_cost, taxon_names)), program_name)
