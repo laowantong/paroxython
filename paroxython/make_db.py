@@ -181,8 +181,8 @@ def prepared(tags):
 if __name__ == "__main__":
     # fmt:off
     directories = [
-        "../Python/project_euler",
-        "../Python/maths",
+        # "../Python/project_euler",
+        # "../Python/maths",
         "../algo/programs",
         # "paroxython"
     ]

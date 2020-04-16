@@ -21,27 +21,29 @@
     "variable/assignment/single": "5 7"
   },
   "fizzbuzz.py": {
-    "call/function/builtin/range": "1",
-    "control_flow/conditional": "2-9 4-9 6-9",
-    "control_flow/conditional/else": "9",
-    "control_flow/conditional/else/if": "5 7",
-    "control_flow/loop/sequential": "1-9",
-    "control_flow/loop/sequential/arithmetic/start": "1-9",
-    "io/standard/print": "3 5 7 9",
-    "operator/percent/modulo": "2 4 6",
-    "test/equality": "2 4 6",
-    "type/elementary/number/integer": "1 1 2 4 6",
-    "type/elementary/number/integer/zero": "2 4 6",
-    "type/elementary/string": "3 5 7"
+    "call/function/builtin/range": "2",
+    "control_flow/conditional": "3-10 5-10 7-10",
+    "control_flow/conditional/else": "10",
+    "control_flow/conditional/else/if": "6 8",
+    "control_flow/loop/sequential": "2-10",
+    "control_flow/loop/sequential/arithmetic/start": "2-10",
+    "io/standard/print": "4 6 8 10",
+    "library/personal": "1",
+    "operator/percent/modulo": "3 5 7",
+    "test/equality": "3 5 7",
+    "type/elementary/number/integer": "2 2 3 5 7",
+    "type/elementary/number/integer/zero": "3 5 7",
+    "type/elementary/string": "4 6 8"
   },
   "is_even.py": {
-    "operator/percent/modulo": "2",
-    "subroutine_definition/argument/arg": "1",
-    "subroutine_definition/function": "1-2",
-    "subroutine_definition/predicate": "1-2",
-    "test/divisibility/parity": "2",
-    "test/equality": "2",
-    "type/elementary/number/integer": "2",
-    "type/elementary/number/integer/zero": "2"
+    "library/personal": "1",
+    "operator/percent/modulo": "3",
+    "subroutine_definition/argument/arg": "2",
+    "subroutine_definition/function": "2-3",
+    "subroutine_definition/predicate": "2-3",
+    "test/divisibility/parity": "3",
+    "test/equality": "3",
+    "type/elementary/number/integer": "3",
+    "type/elementary/number/integer/zero": "3"
   }
 }

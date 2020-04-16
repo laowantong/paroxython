@@ -90,83 +90,94 @@
     },
     "fizzbuzz.py": {
       "timestamp": "ignored",
-      "links": [],
-      "source": "for i in range(1, 101):\n    if i % 15 == 0:\n        print(\"FizzBuzz\")\n    elif i % 3 == 0:\n        print(\"Fizz\")\n    elif i % 5 == 0:\n        print(\"Buzz\")\n    else:\n        print(i)",
+      "links": [
+        "collatz_print.py",
+        "is_even.py"
+      ],
+      "source": "import is_even\nfor i in range(1, 101):\n    if i % 15 == 0:\n        print(\"FizzBuzz\")\n    elif i % 3 == 0:\n        print(\"Fizz\")\n    elif i % 5 == 0:\n        print(\"Buzz\")\n    else:\n        print(i)",
       "labels": {
-        "binary_operator:Mod": [[2,2],[4,4],[6,6]],
-        "call_argument:": [[3,3],[5,5],[7,7]],
-        "call_argument:1": [[1,1]],
-        "call_argument:101": [[1,1]],
-        "call_argument:i": [[9,9]],
-        "comparison_operator:Eq": [[2,2],[4,4],[6,6]],
-        "divisibility_test:15": [[2,2]],
-        "divisibility_test:3": [[4,4]],
-        "divisibility_test:5": [[6,6]],
-        "for:i": [[1,9]],
-        "for_range:1:101": [[1,9]],
-        "function_call:print": [[3,3],[5,5],[7,7],[9,9]],
-        "function_call:range": [[1,1]],
-        "function_call_without_result:print": [[3,3],[5,5],[7,7],[9,9]],
-        "if": [[2,9],[4,9],[6,9]],
-        "if_elif_branch": [[5,5],[7,7]],
-        "if_else_branch": [[9,9]],
-        "if_test_atom:0": [[2,2],[4,4],[6,6]],
-        "if_test_atom:15": [[2,2]],
-        "if_test_atom:3": [[4,4]],
-        "if_test_atom:5": [[6,6]],
-        "if_test_atom:i": [[2,2],[4,4],[6,6]],
-        "if_then_branch": [[3,3]],
-        "literal:0": [[2,2],[4,4],[6,6]],
-        "literal:1": [[1,1]],
-        "literal:101": [[1,1]],
-        "literal:15": [[2,2]],
-        "literal:3": [[4,4]],
-        "literal:5": [[6,6]],
-        "literal:Str": [[3,3],[5,5],[7,7]],
-        "loop:for": [[1,9]],
-        "range:1:101": [[1,1]],
-        "suggest_constant_definition": [[2,2],[4,4],[6,6]]
+        "binary_operator:Mod": [[3,3],[5,5],[7,7]],
+        "call_argument:": [[4,4],[6,6],[8,8]],
+        "call_argument:1": [[2,2]],
+        "call_argument:101": [[2,2]],
+        "call_argument:i": [[10,10]],
+        "comparison_operator:Eq": [[3,3],[5,5],[7,7]],
+        "divisibility_test:15": [[3,3]],
+        "divisibility_test:3": [[5,5]],
+        "divisibility_test:5": [[7,7]],
+        "for:i": [[2,10]],
+        "for_range:1:101": [[2,10]],
+        "function_call:print": [[4,4],[6,6],[8,8],[10,10]],
+        "function_call:range": [[2,2]],
+        "function_call_without_result:print": [[4,4],[6,6],[8,8],[10,10]],
+        "if": [[3,10],[5,10],[7,10]],
+        "if_elif_branch": [[6,6],[8,8]],
+        "if_else_branch": [[10,10]],
+        "if_test_atom:0": [[3,3],[5,5],[7,7]],
+        "if_test_atom:15": [[3,3]],
+        "if_test_atom:3": [[5,5]],
+        "if_test_atom:5": [[7,7]],
+        "if_test_atom:i": [[3,3],[5,5],[7,7]],
+        "if_then_branch": [[4,4]],
+        "import_internally:is_even": [[1,1]],
+        "import_module_internally:is_even": [[1,1]],
+        "literal:0": [[3,3],[5,5],[7,7]],
+        "literal:1": [[2,2]],
+        "literal:101": [[2,2]],
+        "literal:15": [[3,3]],
+        "literal:3": [[5,5]],
+        "literal:5": [[7,7]],
+        "literal:Str": [[4,4],[6,6],[8,8]],
+        "loop:for": [[2,10]],
+        "range:1:101": [[2,2]],
+        "suggest_constant_definition": [[3,3],[5,5],[7,7]]
       },
       "taxons": {
-        "call/function/builtin/range": [[1,1]],
-        "control_flow/conditional": [[2,9],[4,9],[6,9]],
-        "control_flow/conditional/else": [[9,9]],
-        "control_flow/conditional/else/if": [[5,5],[7,7]],
-        "control_flow/loop/sequential": [[1,9]],
-        "control_flow/loop/sequential/arithmetic/start": [[1,9]],
-        "io/standard/print": [[3,3],[5,5],[7,7],[9,9]],
-        "operator/percent/modulo": [[2,2],[4,4],[6,6]],
-        "test/equality": [[2,2],[4,4],[6,6]],
-        "type/elementary/number/integer": [[1,1],[1,1],[2,2],[4,4],[6,6]],
-        "type/elementary/number/integer/zero": [[2,2],[4,4],[6,6]],
-        "type/elementary/string": [[3,3],[5,5],[7,7]]
+        "call/function/builtin/range": [[2,2]],
+        "control_flow/conditional": [[3,10],[5,10],[7,10]],
+        "control_flow/conditional/else": [[10,10]],
+        "control_flow/conditional/else/if": [[6,6],[8,8]],
+        "control_flow/loop/sequential": [[2,10]],
+        "control_flow/loop/sequential/arithmetic/start": [[2,10]],
+        "io/standard/print": [[4,4],[6,6],[8,8],[10,10]],
+        "library/personal": [[1,1]],
+        "operator/percent/modulo": [[3,3],[5,5],[7,7]],
+        "test/equality": [[3,3],[5,5],[7,7]],
+        "type/elementary/number/integer": [[2,2],[2,2],[3,3],[5,5],[7,7]],
+        "type/elementary/number/integer/zero": [[3,3],[5,5],[7,7]],
+        "type/elementary/string": [[4,4],[6,6],[8,8]]
       }
     },
     "is_even.py": {
       "timestamp": "ignored",
-      "links": [],
-      "source": "def is_even(n):\n    return n % 2 == 0",
+      "links": [
+        "collatz_print.py"
+      ],
+      "source": "import collatz_print\ndef is_even(n):\n    return n % 2 == 0",
       "labels": {
-        "binary_operator:Mod": [[2,2]],
-        "comparison_operator:Eq": [[2,2]],
-        "divisibility_test:2": [[2,2]],
-        "function:is_even": [[1,2]],
-        "function_argument:n": [[1,1]],
-        "function_argument_flavor:arg": [[1,1]],
-        "function_returning_something:is_even": [[1,2]],
-        "literal:0": [[2,2]],
-        "literal:2": [[2,2]],
-        "return": [[2,2]]
+        "binary_operator:Mod": [[3,3]],
+        "comparison_operator:Eq": [[3,3]],
+        "divisibility_test:2": [[3,3]],
+        "function:is_even": [[2,3]],
+        "function_argument:n": [[2,2]],
+        "function_argument_flavor:arg": [[2,2]],
+        "function_returning_something:is_even": [[2,3]],
+        "import_internally:collatz_print": [[1,1]],
+        "import_module_internally:collatz_print": [[1,1]],
+        "literal:0": [[3,3]],
+        "literal:2": [[3,3]],
+        "return": [[3,3]]
       },
       "taxons": {
-        "operator/percent/modulo": [[2,2]],
-        "subroutine_definition/argument/arg": [[1,1]],
-        "subroutine_definition/function": [[1,2]],
-        "subroutine_definition/predicate": [[1,2]],
-        "test/divisibility/parity": [[2,2]],
-        "test/equality": [[2,2]],
-        "type/elementary/number/integer": [[2,2]],
-        "type/elementary/number/integer/zero": [[2,2]]
+        "library/personal": [[1,1]],
+        "operator/percent/modulo": [[3,3]],
+        "subroutine_definition/argument/arg": [[2,2]],
+        "subroutine_definition/function": [[2,3]],
+        "subroutine_definition/predicate": [[2,3]],
+        "test/divisibility/parity": [[3,3]],
+        "test/equality": [[3,3]],
+        "type/elementary/number/integer": [[3,3]],
+        "type/elementary/number/integer/zero": [[3,3]]
       }
     }
   },
@@ -394,6 +405,12 @@
     "if_test_atom:i": [
       "fizzbuzz.py"
     ],
+    "import_internally:is_even": [
+      "fizzbuzz.py"
+    ],
+    "import_module_internally:is_even": [
+      "fizzbuzz.py"
+    ],
     "literal:101": [
       "fizzbuzz.py"
     ],
@@ -416,6 +433,12 @@
       "is_even.py"
     ],
     "function_returning_something:is_even": [
+      "is_even.py"
+    ],
+    "import_internally:collatz_print": [
+      "is_even.py"
+    ],
+    "import_module_internally:collatz_print": [
       "is_even.py"
     ],
     "return": [
@@ -496,6 +519,10 @@
     ],
     "control_flow/loop/sequential/arithmetic/start": [
       "fizzbuzz.py"
+    ],
+    "library/personal": [
+      "fizzbuzz.py",
+      "is_even.py"
     ],
     "type/elementary/string": [
       "fizzbuzz.py"

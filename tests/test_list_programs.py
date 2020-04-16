@@ -18,8 +18,8 @@ def test_list_programs():
 
     program = next(result)
     assert program.name == "fizzbuzz.py"
-    assert program.source.startswith("for i in range(1, 101):")
+    assert program.source.startswith("import is_even")
 
     program = next(result)
     assert program.name == "is_even.py"
-    assert program.source == "def is_even(n):\n    return n % 2 == 0"
+    assert program.source.__contains__("def is_even(n):\n    return n % 2 == 0")

@@ -1,12 +1,12 @@
 from bisect import insort
 from collections import defaultdict
 from pathlib import Path
-from typing import List, Set
+from typing import Dict, List, Set
 
-from user_types import Label, LabelsSpans, Program, Programs, Source
 from list_programs import list_programs
+from mark_internal_imports import InternalImportsMarker, complete_internal_imports
 from parse_program import ProgramParser
-from mark_internal_imports import InternalImportsMarker
+from user_types import Label, LabelsSpans, Program, ProgramName, Programs, Source
 
 
 def list_labelled_sources(directory: Path, *args, **kargs) -> List[Source]:
@@ -34,7 +34,7 @@ def list_labelled_sources(directory: Path, *args, **kargs) -> List[Source]:
 
 def list_labelled_programs(directory: Path, *args, **kargs) -> Programs:
     """For each program, yield its label list, lexicographically sorted."""
-    result = []
+    result: Dict[ProgramName, Program] = {}
     programs = list_programs(directory, *args, **kargs)
     may_mark_as_internal = InternalImportsMarker(programs)
     parse = ProgramParser()
@@ -46,15 +46,14 @@ def list_labelled_programs(directory: Path, *args, **kargs) -> Programs:
             for span in spans:
                 insort(label_dict[label_name], span)
         labels = [Label(name, span) for (name, span) in label_dict.items()]
-        result.append(
-            Program(
-                name=program.name,
-                source=program.source,
-                labels=labels,
-                links=list(may_mark_as_internal.internal_imports),
-            )
+        result[program.name] = Program(
+            name=program.name,
+            source=program.source,
+            labels=labels,
+            links=list(may_mark_as_internal.internal_imports),
         )
-    return result
+    complete_internal_imports(result)
+    return list(result.values())
 
 
 if __name__ == "__main__":
