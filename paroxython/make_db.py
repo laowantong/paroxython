@@ -43,6 +43,8 @@ class Database:
                 "labels": {},  # to be populated by inject_labels()
                 "taxons": {},  # to be populated by inject_taxons()
             }
+            if program.local_imports:
+                self.programs[program.name]["links"] = list(map(str, program.local_imports))
 
         self.labels: LabelInfos = defaultdict(list)
         for program in programs:

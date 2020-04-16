@@ -55,6 +55,7 @@ class Program(NamedTuple):
     addition: LabelsSpans = {}
     deletion: LabelsSpans = {}
     labels: Labels = []
+    local_imports: ProgramNames = []
 
 Programs = List[Program]
 ProgramTaxons = Dict[ProgramName, Taxons]

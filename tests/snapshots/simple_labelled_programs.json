@@ -21,7 +21,8 @@
         "single_assignment:a",
         [[1,1]]
       ]
-    ]
+    ],
+    []
   ],
   [
     "collatz_print.py",
@@ -225,7 +226,8 @@
         "while",
         [[2,7]]
       ]
-    ]
+    ],
+    []
   ],
   [
     "fizzbuzz.py",
@@ -365,7 +367,8 @@
         "suggest_constant_definition",
         [[2,2],[4,4],[6,6]]
       ]
-    ]
+    ],
+    []
   ],
   [
     "is_even.py",
@@ -413,6 +416,7 @@
         "return",
         [[2,2]]
       ]
-    ]
+    ],
+    []
   ]
 ]

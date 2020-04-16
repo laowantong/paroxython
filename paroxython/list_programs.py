@@ -1,10 +1,9 @@
 from pathlib import Path
-from typing import Iterator
 
 import regex  # type: ignore
 
 from preprocess_source import cleanup_factory, centrifugate_hints, collect_hints, remove_hints
-from user_types import Program, ProgramName, Source
+from user_types import Program, ProgramName, Programs, Source
 
 match_excluded = regex.compile(
     r"""(?x)
@@ -19,8 +18,8 @@ match_excluded = regex.compile(
 ).match
 
 
-def list_programs(directory: Path, strategy="strip_docs") -> Iterator[Program]:
-    """Yield all Programs of a given directory.
+def list_programs(directory: Path, strategy="strip_docs") -> Programs:
+    """List all Programs of a given directory.
 
     Each Program (cf. declaration) includes:
     - its Path, relative to the given directory
@@ -29,6 +28,7 @@ def list_programs(directory: Path, strategy="strip_docs") -> Iterator[Program]:
 
     Its labels will later be populated by "generate_labels.py".
     """
+    result = []
     cleanup = cleanup_factory(strategy)
     for program_path in sorted(directory.rglob("*.py")):
         if not match_excluded(program_path.name):
@@ -37,12 +37,15 @@ def list_programs(directory: Path, strategy="strip_docs") -> Iterator[Program]:
             source = centrifugate_hints(source)
             (addition, deletion) = collect_hints(source)
             source = remove_hints(source)
-            yield Program(
-                name=ProgramName(str(program_path.relative_to(directory))),
-                source=source,
-                addition=addition,
-                deletion=deletion,
+            result.append(
+                Program(
+                    name=ProgramName(str(program_path.relative_to(directory))),
+                    source=source,
+                    addition=addition,
+                    deletion=deletion,
+                )
             )
+    return result
 
 
 if __name__ == "__main__":

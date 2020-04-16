@@ -161,7 +161,7 @@ def main(): # function:main (-> +3), function_returning_nothing:main (-> +3), fu
 # ----------------------------------------------------------------------------------------
 # abs_min.py
 # ----------------------------------------------------------------------------------------
-from .abs import abs_val # import:abs:abs_val, import_module:abs, import_name:abs_val
+from .abs import abs_val # import_internally:abs:abs_val, import_module_internally:abs, import_name:abs_val
 def absMin(x): # function:absMin (-> +5), function_argument:x, function_argument_flavor:arg, function_returning_something:absMin (-> +5)
     j = x[0] # assignment, assignment_lhs_identifier:j, assignment_rhs_atom:0, assignment_rhs_atom:x, index:0, literal:0, single_assignment:j
     for i in x: # find_best_element:i:j (-> +2), for:i (-> +2), for_each (-> +2), loop:for (-> +2)
@@ -1238,7 +1238,7 @@ def main(): # function:main (-> +1), function_returning_nothing:main (-> +1), fu
 # ----------------------------------------------------------------------------------------
 # test_prime_check.py
 # ----------------------------------------------------------------------------------------
-from .prime_check import Test # import:prime_check:Test, import_module:prime_check, import_name:Test
+from .prime_check import Test # import_internally:prime_check:Test, import_module_internally:prime_check, import_name:Test
 Test() # function_call:Test, function_call_without_arguments:Test, function_call_without_result:Test
 
 # ----------------------------------------------------------------------------------------

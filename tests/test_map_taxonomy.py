@@ -6,9 +6,10 @@ import pytest
 
 import context
 from make_snapshot import make_snapshot
-from paroxython.generate_labels import Label, Program, generate_labelled_programs
+from paroxython.generate_labels import generate_labelled_programs
 from paroxython.map_taxonomy import Taxonomy
 from paroxython.span import Span
+from paroxython.user_types import Label, Program
 
 t = Taxonomy(Path("tests/data/dummy/taxonomy.tsv"))
 S = lambda i, j: Span([i, j])  # shortcut for Span([i, j])
