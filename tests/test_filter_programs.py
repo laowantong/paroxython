@@ -20,7 +20,7 @@ def test_init():
 def test_programs_of_taxons():
     dbf = ProgramFilter(db)
     taxons = {"X/S/M/L/R/D/A", "X/S/M/L/R/D", "non_existing_taxon"}
-    programs = dbf.programs_of_taxons(taxons)
+    programs = dbf.programs_of_taxons(taxons, follow_import=False)
     print(sorted(programs))
     for (db_program, db_program_data) in db["programs"].items():
         if taxons.intersection(db_program_data["taxons"]):
@@ -29,24 +29,12 @@ def test_programs_of_taxons():
             assert db_program not in programs
 
 
-def test_taxons_of_program():
-    dbf = ProgramFilter(db)
-    program = "prg8.py"
-    taxons = dbf.taxons_of_program(program)
-    print(sorted(taxons))
-    assert taxons == set(db["programs"][program]["taxons"])
-    program = "non_existing_program"
-    taxons = dbf.taxons_of_program(program)
-    print(sorted(taxons))
-    assert taxons == set()
-
-
 def test_taxons_of_programs():
     dbf = ProgramFilter(db)
-    programs = ["prg8.py", "prg9.py", "non_existing_program"]
+    programs = {"prg8.py", "prg9.py", "non_existing_program"}
     taxons = dbf.taxons_of_programs(programs)
-    prg8_taxons = dbf.taxons_of_program("prg8.py")
-    prg9_taxons = dbf.taxons_of_program("prg9.py")
+    prg8_taxons = set(dbf.db_programs["prg8.py"]["taxons"])
+    prg9_taxons = set(dbf.db_programs["prg9.py"]["taxons"])
     print(sorted(taxons))
     assert taxons == prg8_taxons | prg9_taxons
 
@@ -115,7 +103,7 @@ def test_patterns_to_programs():
 
 def test_impart_programs():
     dbf = ProgramFilter(db)
-    programs = ["prg1.py", "prg2.py", "non_existing_program"]
+    programs = {"prg1.py", "prg2.py", "non_existing_program"}
     dbf.impart_programs(programs)
     print(sorted(dbf.recommended_programs))
     assert dbf.recommended_programs.keys() == set(db["programs"]) - set(programs)
@@ -130,7 +118,7 @@ def test_impart_programs():
 
 def test_exclude_programs():
     dbf = ProgramFilter(db)
-    programs = ["prg1.py", "prg2.py", "non_existing_program"]
+    programs = {"prg1.py", "prg2.py", "non_existing_program"}
     dbf.exclude_programs(programs)
     print(sorted(dbf.recommended_programs))
     assert dbf.recommended_programs.keys() == set(db["programs"]) - set(programs)
@@ -138,7 +126,7 @@ def test_exclude_programs():
 
 def test_include_programs():
     dbf = ProgramFilter(db)
-    programs = ["prg1.py", "prg2.py", "non_existing_program"]
+    programs = {"prg1.py", "prg2.py", "non_existing_program"}
     dbf.include_programs(programs)
     print(sorted(dbf.recommended_programs))
     assert dbf.recommended_programs.keys() == {"prg1.py", "prg2.py"}

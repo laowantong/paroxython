@@ -60,10 +60,10 @@
 - if_test_atom:n / collatz_print.py / 4
 - if_then_branch / collatz_print.py / 5
 - if_then_branch / fizzbuzz.py / 4
-- import:collatz_print / is_even.py / 1
-- import:is_even / fizzbuzz.py / 1
-- import_module:collatz_print / is_even.py / 1
-- import_module:is_even / fizzbuzz.py / 1
+- import:collatz_print / fizzbuzz.py / 1
+- import:fizzbuzz / is_even.py / 1
+- import_module:collatz_print / fizzbuzz.py / 1
+- import_module:fizzbuzz / is_even.py / 1
 - literal:0 / collatz_print.py / 4
 - literal:0 / fizzbuzz.py / 3, 5, 7
 - literal:0 / is_even.py / 3

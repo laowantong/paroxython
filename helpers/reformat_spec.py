@@ -19,10 +19,10 @@ import regex  # type: ignore
 import sqlparse
 
 import context
-from paroxython.goodies import title_converter
+from paroxython.goodies import title_to_slug_factory
 from paroxython.parse_program import ProgramParser, find_all_features
 
-title_to_slug = title_converter()
+title_to_slug = title_to_slug_factory()
 
 
 def generate_toc(text):

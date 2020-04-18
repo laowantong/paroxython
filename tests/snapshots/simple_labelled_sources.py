@@ -71,8 +71,8 @@ def print_collatz(n): # added_block_label (-> +7)
 # ----------------------------------------------------------------------------------------
 # fizzbuzz.py
 # ----------------------------------------------------------------------------------------
-import is_even # import_internally:is_even
-               # import_module_internally:is_even
+import collatz_print # import_internally:collatz_print
+                     # import_module_internally:collatz_print
 for i in range(1, 101): # call_argument:1
                         # call_argument:101
                         # for:i (-> +8)
@@ -136,8 +136,8 @@ for i in range(1, 101): # call_argument:1
 # ----------------------------------------------------------------------------------------
 # is_even.py
 # ----------------------------------------------------------------------------------------
-import collatz_print # import_internally:collatz_print
-                     # import_module_internally:collatz_print
+import fizzbuzz # import_internally:fizzbuzz
+                # import_module_internally:fizzbuzz
 def is_even(n): # function:is_even (-> +1)
                 # function_argument:n
                 # function_argument_flavor:arg

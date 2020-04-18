@@ -1,4 +1,4 @@
-import collatz_print
+import fizzbuzz
 
 
 def is_even(n):

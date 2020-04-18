@@ -47,6 +47,12 @@ def test_recommend_program(capsys):
             "Y/E",
         ],
     }
+    assert [p["filtered_out"] for p in rec.processes] == [
+        ["prg8.py"],
+        ["prg7.py", "prg9.py"],
+        ["prg4.py", "prg5.py", "prg6.py"],
+        ["prg1.py"],
+    ]
     costs = {taxon: rec.taxon_cost(taxon) for taxon in rec.recommended_programs["prg2.py"]}
     print(costs)
     assert costs == {
@@ -65,21 +71,6 @@ def test_recommend_program(capsys):
         "O/C/H/B/I": 32,
     }
     text = rec.get_markdown(toc_group_limit=1)  # for coverage testing
-    text = rec.get_markdown(span_count_limit=2, delta=1)
-    print(text)
-    assert (
-        "\n".join(
-            [
-                "# Quantitative summary",
-                "-   9 programs initially.",
-                "-   1 program filtered out by impart/programs/name.",
-                "-   2 programs filtered out by exclude/programs/name.",
-                "-   3 programs filtered out by exclude/taxons/pattern.",
-                "-   1 program filtered out by include/taxons/pattern.",
-                "-   2 programs remaining.",
-            ]
-        )
-        in text
-    )
+    text = rec.get_markdown(span_column_width=10)
     make_snapshot(Path("tests/data/dummy/recommendations.md"), text, capsys)
-    rec.dump(text)
+    rec.dump(text)  # for coverage testing

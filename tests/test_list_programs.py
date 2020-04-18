@@ -18,7 +18,7 @@ def test_list_programs():
 
     program = next(result)
     assert program.name == "fizzbuzz.py"
-    assert program.source.startswith("import is_even")
+    assert program.source.startswith("import collatz_print")
 
     program = next(result)
     assert program.name == "is_even.py"

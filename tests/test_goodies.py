@@ -1,10 +1,10 @@
 import pytest
 
 import context
-from paroxython.goodies import title_converter
+from paroxython.goodies import title_to_slug_factory, add_line_numbers, enumeration_to_html_factory
 
 
-def test_non_ascii_title_converter():
+def test_non_ascii_title_to_slug_factory():
     titles_and_slugs = [
         ("Partie 1. Fantine", "partie-1-fantine"),
         ("Livre 1. Un juste", "livre-1-un-juste"),
@@ -29,12 +29,12 @@ def test_non_ascii_title_converter():
         ("Ce qu'il croyait", "ce-quil-croyait"),
         ("Ce qu'il pensait", "ce-quil-pensait"),
     ]
-    title_to_slug = title_converter()
+    title_to_slug = title_to_slug_factory()
     for (title, slug) in titles_and_slugs:
         assert title_to_slug(title) == slug
 
 
-def test_duplicate_title_converter():
+def test_duplicate_title_to_slug_factory():
     titles_and_slugs = [
         ("foobar", "foobar"),
         ("foo", "foo"),
@@ -48,6 +48,22 @@ def test_duplicate_title_converter():
         ("foo-2", "foo-2-2"),
         ("foo", "foo-3"),
     ]
-    title_to_slug = title_converter()
+    title_to_slug = title_to_slug_factory()
     for (title, slug) in titles_and_slugs:
         assert title_to_slug(title, deduplicate=True) == slug
+
+
+def test_enumeration_to_html():
+    enumeration_to_html = enumeration_to_html_factory()
+    assert enumeration_to_html("") == ""
+    enumeration_to_html = enumeration_to_html_factory(30)
+    assert enumeration_to_html("1, 2, 3, 4, 5-6, 7, 8, 9") == "1, 2, 3, 4, 5-6, 7, 8, 9"
+    enumeration_to_html = enumeration_to_html_factory(10)
+    assert (
+        enumeration_to_html("1, 2, 3, 4, 5-6, 7, 8, 9")
+        == "<details><summary>1, 2, 3, 4, </summary>5-6, 7, 8, 9</details>"
+    )
+    assert (
+        enumeration_to_html("1. 2. 3. 4. 5-6. 7. 8, 9")
+        == "<details><summary>1. 2. 3. 4. 5-6. 7. 8, </summary>9</details>"
+    )

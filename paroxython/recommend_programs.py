@@ -7,7 +7,7 @@ from typing import Dict, List
 
 from assess_learning_costs import LearningCostAssessor
 from filter_programs import ProgramFilter
-from goodies import add_line_numbers, title_to_slug
+from goodies import add_line_numbers, title_to_slug_factory, enumeration_to_html_factory
 from span import Span
 from user_types import Pipeline, ProgramNames
 
@@ -41,78 +41,116 @@ class Recommendations:
     def run_pipeline(self) -> None:
         """Evolve recommended programs, imparted knowledge and log accross pipeline processes."""
 
-        current_count = len(self.recommended_programs)
-        self.log = {"initially": current_count}
+        current = set(self.programs)
 
         # Execute sequentially all the processes of the pipeline
-        for p in self.processes:
+        for process in self.processes:
 
             # The names or patterns fed to a process can either be a list of strings...
-            strings = p["source"]
-            if not isinstance(strings, list):  # ... or a shell command printing them on stdout
-                strings = subprocess.run(
-                    str(p["source"]).format(base_path=self.base_path),  # str() needed by mypy
+            data = process["source"]
+            if not isinstance(data, list):  # ... or a shell command printing them on stdout
+                data = subprocess.run(
+                    str(process["source"]).format(base_path=self.base_path),  # str() needed by mypy
                     capture_output=True,
                     encoding="utf-8",
                     shell=True,
                 ).stdout.split("\n")
 
             # If needed, replace the resulting strings by the matched names of programs or taxons
-            if p["name_or_pattern"] == "pattern":
-                strings = self.method("patterns_to_{programs_or_taxons}".format(**p), strings)
+            if process["name_or_pattern"] == "pattern":
+                data = self.method("patterns_to_{programs_or_taxons}".format(**process), data)
 
             # Apply to them a method whose name depends on both the operation and the name category
-            self.method("{operation}_{programs_or_taxons}".format(**p), strings)
+            self.method("{operation}_{programs_or_taxons}".format(**process), set(data))
 
             # Update the statistics of the filter state for the last operation
-            (previous_count, current_count) = (current_count, len(self.recommended_programs))
-            key = "filtered out by {operation}/{programs_or_taxons}/{name_or_pattern}".format(**p)
-            self.log[key] = previous_count - current_count
+            (previous, current) = (current, set(self.recommended_programs))
+            process["filtered_out"] = sorted(previous - current)
 
-        self.log["remaining"] = len(self.recommended_programs)
         self.assessed_programs = self.assess_costs(self.recommended_programs)
 
-    def get_markdown(self, toc_group_limit=5, span_count_limit=7, delta=4) -> str:
-        display_count = lambda n: f"{n:3} program" + ("" if n == 1 else "s")
-        n = len(self.recommended_programs)
+    def get_markdown(self, toc_group_limit=5, span_column_width=30) -> str:
+        """Iterate on the processes, now populated by the results, and construct a string output."""
+
+        title_to_slug = title_to_slug_factory()
+        spans_to_html = enumeration_to_html_factory(span_column_width, "_imported_")
+
+        # Group resulting programs by cost
+
         toc_data: Dict[int, ProgramNames] = defaultdict(list)
-        for (cost, program_name) in self.assessed_programs:
-            toc_data[cost].append(program_name)
+        for (cost, program) in self.assessed_programs:
+            toc_data[cost].append(program)
+
+        # accumulate simultaneously the TOC and the contents
+
+        def display_count(n):
+            return f"{n} program" + ("" if n == 1 else "s")
+
         toc: List[str] = ["# Table of contents"]
-        contents: List[str] = [f"# {display_count(n)}"]
-        must_detail = True
+        contents: List[str] = [f"# Recommended programs"]
+        must_group_by_equal_costs = True
         remainder = len(self.recommended_programs)
+
         for (cost, program_names) in toc_data.items():
-            if must_detail:
+
+            if must_group_by_equal_costs:
                 if len(program_names) >= toc_group_limit:
                     title = f"{display_count(len(program_names))} of learning cost {cost}"
                     remainder -= len(program_names)
                 else:
-                    title = f"{display_count(remainder)} of greater learning costs"
-                    must_detail = False
+                    title = f"{display_count(remainder)} remaining"
+                    must_group_by_equal_costs = False
                 toc.append(f"- [`{title}`](#{title_to_slug(title)})")
                 contents.append(f"\n## {title}")
+
             for program_name in program_names:
-                title = f"Program `{program_name}` (learning cost {cost})"
-                toc.append(f"    - [`{program_name}`](#{title_to_slug(title)})")
-                contents.append(f"\n### {title}")
                 program_info = self.programs[program_name]
+                title = f"Program `{program_name}` (learning cost {cost})"
+                loc = len(program_info["source"].split("\n"))
+                toc.append(f"    - [`{program_name}` ({loc} lines)](#{title_to_slug(title)})")
+                contents.append(f"\n### {title}")
                 contents.append(f"\n```python\n{add_line_numbers(program_info['source'])}\n```")
                 contents.append("\n| Cost  | Taxon | Lines |")
                 contents.append("|" + "----|" * 3)
-                for (taxon_name, spans) in program_info["taxons"].items():
+                for (taxon_name, spans) in sorted(program_info["taxons"].items()):
                     cost = self.taxon_cost(taxon_name)
-                    all_span_strings = [str(Span(list(span))) for span in spans]
-                    if len(all_span_strings) > span_count_limit:
-                        n = len(all_span_strings) - delta - 1
-                        span_string = ", ".join(all_span_strings[:delta]) + f" and {n} more"
-                    else:
-                        span_string = ", ".join(all_span_strings)
-                    contents.append(f"| {cost} | `{taxon_name}` | {span_string} |")
-        summary: List[str] = ["\n# Quantitative summary"]
-        for (description, count) in self.log.items():
-            summary.append(f"- {display_count(count)} {description}.")
-        return "\n".join(toc + contents + summary + [""])
+                    s = spans_to_html(", ".join(str(Span(list(span))) for span in spans))
+                    contents.append(f"| {cost} | `{taxon_name}` | {s} |")
+
+        def programs_to_html(description: str, programs: ProgramNames) -> str:
+            if programs:
+                description = description.replace(" 1 programs", " 1 program")
+                details = ["<ol>"]
+                for program in sorted(programs):
+                    details.append(f"  <li><code>{program}</code></li>")
+                details.append("</ol>")
+            else:
+                description = description.replace(" the following 0", " no")
+                details = []
+            return (
+                "<details>\n"
+                + f"  <summary>{description}.</summary>\n  "
+                + "\n  ".join(details)
+                + "\n</details>\n"
+            )
+
+        remainder = len(self.programs)
+        summary: List[str] = [f"\n# Summary"]
+        summary.append(programs_to_html(f"{remainder} initially", list(self.programs)))
+        for process in self.processes:
+            action = "<kbd>{operation}/{programs_or_taxons}/{name_or_pattern}</kbd>".format(
+                **process
+            )
+            removed = len(process["filtered_out"])
+            remainder -= removed
+            summary.append(
+                programs_to_html(
+                    f"{remainder} remaining after {action} has filtered out {removed} programs",
+                    process["filtered_out"],
+                )
+            )
+
+        return "\n".join(toc + contents + summary)
 
     def dump(self, text):
         self.output_path.write_text(text)

@@ -1,10 +1,10 @@
 # Table of contents
-- [`  2 programs of greater learning costs`](#2-programs-of-greater-learning-costs)
-    - [`prg3.py`](#program-prg3py-learning-cost-256)
-    - [`prg2.py`](#program-prg2py-learning-cost-928)
-#   2 programs
+- [`2 programs remaining`](#2-programs-remaining)
+    - [`prg3.py` (9 lines)](#program-prg3py-learning-cost-256)
+    - [`prg2.py` (9 lines)](#program-prg2py-learning-cost-928)
+# Recommended programs
 
-##   2 programs of greater learning costs
+## 2 programs remaining
 
 ### Program `prg3.py` (learning cost 256)
 
@@ -22,21 +22,21 @@
 
 | Cost  | Taxon | Lines |
 |----|----|----|
-| 0 | `O/N/P` | 1, 6 |
-| 0 | `X/K` | 1 |
-| 256 | `Y/T` | 1 |
-| 0 | `X/S/M/L/V` | 2 |
-| 0 | `O/C/H/B` | 3, 9 |
-| 0 | `X/S/M/L/R` | 4-8 |
-| 0 | `O/J` | 5, 9 |
-| 0 | `X/S/M` | 5 |
+| 0 | `O` | 7 |
 | 0 | `O/C/F/U` | 5 |
 | 0 | `O/C/H` | 5 |
+| 0 | `O/C/H/B` | 3, 9 |
+| 0 | `O/J` | 5, 9 |
+| 0 | `O/N/P` | 1, 6 |
+| 0 | `X/K` | 1 |
 | 0 | `X/S` | 6 |
-| 0 | `Y` | 6 |
-| 0 | `O` | 7 |
+| 0 | `X/S/M` | 5 |
 | 0 | `X/S/M/L` | 8 |
+| 0 | `X/S/M/L/R` | 4-8 |
+| 0 | `X/S/M/L/V` | 2 |
+| 0 | `Y` | 6 |
 | 0 | `Y/E` | 8 |
+| 256 | `Y/T` | 1 |
 
 ### Program `prg2.py` (learning cost 928)
 
@@ -54,24 +54,63 @@
 
 | Cost  | Taxon | Lines |
 |----|----|----|
-| 0 | `O/N/P` | 1 |
-| 384 | `Y/T/Q` | 1, 9 |
-| 0 | `Y` | 1 |
-| 0 | `X/S/M/L/R/D` | 2 and 1 more |
 | 0 | `O` | 2, 6 |
+| 0 | `O/C` | 7 |
 | 0 | `O/C/H/B` | 3 |
+| 32 | `O/C/H/B/I` | 9 |
+| 0 | `O/N/P` | 1 |
+| 256 | `X/G` | 8 |
 | 0 | `X/S/M` | 6 |
 | 0 | `X/S/M/L/R` | 7 |
-| 256 | `Y/T` | 7 |
-| 0 | `O/C` | 7 |
-| 256 | `X/G` | 8 |
+| 0 | `X/S/M/L/R/D` | 2, 3, 9 |
 | 0 | `X/S/M/L/V` | 8-9, 9 |
-| 32 | `O/C/H/B/I` | 9 |
+| 0 | `Y` | 1 |
+| 256 | `Y/T` | 7 |
+| 384 | `Y/T/Q` | 1, 9 |
 
-# Quantitative summary
--   9 programs initially.
--   1 program filtered out by impart/programs/name.
--   2 programs filtered out by exclude/programs/name.
--   3 programs filtered out by exclude/taxons/pattern.
--   1 program filtered out by include/taxons/pattern.
--   2 programs remaining.
+# Summary
+<details>
+  <summary>9 initially.</summary>
+  <ol>
+    <li><code>prg1.py</code></li>
+    <li><code>prg2.py</code></li>
+    <li><code>prg3.py</code></li>
+    <li><code>prg4.py</code></li>
+    <li><code>prg5.py</code></li>
+    <li><code>prg6.py</code></li>
+    <li><code>prg7.py</code></li>
+    <li><code>prg8.py</code></li>
+    <li><code>prg9.py</code></li>
+  </ol>
+</details>
+
+<details>
+  <summary>8 remaining after <kbd>impart/programs/name</kbd> has filtered out 1 program.</summary>
+  <ol>
+    <li><code>prg8.py</code></li>
+  </ol>
+</details>
+
+<details>
+  <summary>6 remaining after <kbd>exclude/programs/name</kbd> has filtered out 2 programs.</summary>
+  <ol>
+    <li><code>prg7.py</code></li>
+    <li><code>prg9.py</code></li>
+  </ol>
+</details>
+
+<details>
+  <summary>3 remaining after <kbd>exclude/taxons/pattern</kbd> has filtered out 3 programs.</summary>
+  <ol>
+    <li><code>prg4.py</code></li>
+    <li><code>prg5.py</code></li>
+    <li><code>prg6.py</code></li>
+  </ol>
+</details>
+
+<details>
+  <summary>2 remaining after <kbd>include/taxons/pattern</kbd> has filtered out 1 program.</summary>
+  <ol>
+    <li><code>prg1.py</code></li>
+  </ol>
+</details>

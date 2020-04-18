@@ -91,10 +91,9 @@
     "fizzbuzz.py": {
       "timestamp": "ignored",
       "links": [
-        "collatz_print.py",
-        "is_even.py"
+        "collatz_print.py"
       ],
-      "source": "import is_even\nfor i in range(1, 101):\n    if i % 15 == 0:\n        print(\"FizzBuzz\")\n    elif i % 3 == 0:\n        print(\"Fizz\")\n    elif i % 5 == 0:\n        print(\"Buzz\")\n    else:\n        print(i)",
+      "source": "import collatz_print\nfor i in range(1, 101):\n    if i % 15 == 0:\n        print(\"FizzBuzz\")\n    elif i % 3 == 0:\n        print(\"Fizz\")\n    elif i % 5 == 0:\n        print(\"Buzz\")\n    else:\n        print(i)",
       "labels": {
         "binary_operator:Mod": [[3,3],[5,5],[7,7]],
         "call_argument:": [[4,4],[6,6],[8,8]],
@@ -119,8 +118,8 @@
         "if_test_atom:5": [[7,7]],
         "if_test_atom:i": [[3,3],[5,5],[7,7]],
         "if_then_branch": [[4,4]],
-        "import_internally:is_even": [[1,1]],
-        "import_module_internally:is_even": [[1,1]],
+        "import_internally:collatz_print": [[1,1]],
+        "import_module_internally:collatz_print": [[1,1]],
         "literal:0": [[3,3],[5,5],[7,7]],
         "literal:1": [[2,2]],
         "literal:101": [[2,2]],
@@ -151,9 +150,10 @@
     "is_even.py": {
       "timestamp": "ignored",
       "links": [
-        "collatz_print.py"
+        "collatz_print.py",
+        "fizzbuzz.py"
       ],
-      "source": "import collatz_print\ndef is_even(n):\n    return n % 2 == 0",
+      "source": "import fizzbuzz\ndef is_even(n):\n    return n % 2 == 0",
       "labels": {
         "binary_operator:Mod": [[3,3]],
         "comparison_operator:Eq": [[3,3]],
@@ -162,8 +162,8 @@
         "function_argument:n": [[2,2]],
         "function_argument_flavor:arg": [[2,2]],
         "function_returning_something:is_even": [[2,3]],
-        "import_internally:collatz_print": [[1,1]],
-        "import_module_internally:collatz_print": [[1,1]],
+        "import_internally:fizzbuzz": [[1,1]],
+        "import_module_internally:fizzbuzz": [[1,1]],
         "literal:0": [[3,3]],
         "literal:2": [[3,3]],
         "return": [[3,3]]
@@ -405,10 +405,10 @@
     "if_test_atom:i": [
       "fizzbuzz.py"
     ],
-    "import_internally:is_even": [
+    "import_internally:collatz_print": [
       "fizzbuzz.py"
     ],
-    "import_module_internally:is_even": [
+    "import_module_internally:collatz_print": [
       "fizzbuzz.py"
     ],
     "literal:101": [
@@ -435,10 +435,10 @@
     "function_returning_something:is_even": [
       "is_even.py"
     ],
-    "import_internally:collatz_print": [
+    "import_internally:fizzbuzz": [
       "is_even.py"
     ],
-    "import_module_internally:collatz_print": [
+    "import_module_internally:fizzbuzz": [
       "is_even.py"
     ],
     "return": [

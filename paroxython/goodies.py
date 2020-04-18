@@ -6,7 +6,7 @@ import regex  # type: ignore
 from user_types import Source
 
 
-def title_converter():
+def title_to_slug_factory():
     slug_counts = defaultdict(int)
     cache = {}
 
@@ -30,8 +30,22 @@ def title_converter():
     return title_to_slug
 
 
-title_to_slug = title_converter()
-
-
 def add_line_numbers(source: Source) -> str:
     return "\n".join(f"{n: <4}{line}" for (n, line) in enumerate(source.split("\n"), 1))
+
+
+def enumeration_to_html_factory(width=20, default_string=""):
+    def enumeration_to_html(s):
+        if not s:
+            return default_string
+        i = len(s)
+        if i <= width:
+            return s
+        while i > width:
+            candidate = s.rfind(",", 0, i)
+            if candidate == -1:
+                break
+            i = candidate
+        return f"<details><summary>{s[:i+2]}</summary>{s[i+2:]}</details>"
+
+    return enumeration_to_html
