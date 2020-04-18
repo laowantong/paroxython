@@ -85,14 +85,14 @@
 </details>
 
 <details>
-  <summary>8 remaining after <kbd>impart/programs/name</kbd> has filtered out 1 program.</summary>
+  <summary>8 remaining after impart/programs/name has filtered out 1 program.</summary>
   <ol>
     <li><code>prg8.py</code></li>
   </ol>
 </details>
 
 <details>
-  <summary>6 remaining after <kbd>exclude/programs/name</kbd> has filtered out 2 programs.</summary>
+  <summary>6 remaining after exclude/programs/name has filtered out 2 programs.</summary>
   <ol>
     <li><code>prg7.py</code></li>
     <li><code>prg9.py</code></li>
@@ -100,7 +100,7 @@
 </details>
 
 <details>
-  <summary>3 remaining after <kbd>exclude/taxons/pattern</kbd> has filtered out 3 programs.</summary>
+  <summary>3 remaining after exclude/taxons/pattern has filtered out 3 programs.</summary>
   <ol>
     <li><code>prg4.py</code></li>
     <li><code>prg5.py</code></li>
@@ -109,7 +109,7 @@
 </details>
 
 <details>
-  <summary>2 remaining after <kbd>include/taxons/pattern</kbd> has filtered out 1 program.</summary>
+  <summary>2 remaining after include/taxons/pattern has filtered out 1 program.</summary>
   <ol>
     <li><code>prg1.py</code></li>
   </ol>

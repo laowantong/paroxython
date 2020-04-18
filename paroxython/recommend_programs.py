@@ -118,15 +118,13 @@ class Recommendations:
                     contents.append(f"| {cost} | `{taxon_name}` | {s} |")
 
         def programs_to_html(description: str, programs: ProgramNames) -> str:
+            details = []
             if programs:
                 description = description.replace(" 1 programs", " 1 program")
                 details = ["<ol>"]
                 for program in sorted(programs):
                     details.append(f"  <li><code>{program}</code></li>")
                 details.append("</ol>")
-            else:
-                description = description.replace(" the following 0", " no")
-                details = []
             return (
                 "<details>\n"
                 + f"  <summary>{description}.</summary>\n  "
@@ -138,9 +136,7 @@ class Recommendations:
         summary: List[str] = [f"\n# Summary"]
         summary.append(programs_to_html(f"{remainder} initially", list(self.programs)))
         for process in self.processes:
-            action = "<kbd>{operation}/{programs_or_taxons}/{name_or_pattern}</kbd>".format(
-                **process
-            )
+            action = "{operation}/{programs_or_taxons}/{name_or_pattern}".format(**process)
             removed = len(process["filtered_out"])
             remainder -= removed
             summary.append(
