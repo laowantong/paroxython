@@ -42,6 +42,7 @@ class Recommendations:
         """Evolve recommended programs, imparted knowledge and log accross pipeline processes."""
 
         current = set(self.programs)
+        print(len(current))
 
         # Execute sequentially all the processes of the pipeline
         for process in self.processes:
@@ -67,6 +68,7 @@ class Recommendations:
             # Update the statistics of the filter state for the last operation
             (previous, current) = (current, set(self.selected_programs))
             process["filtered_out"] = sorted(previous - current)
+            print(len(current))
 
         self.assessed_programs = self.assess_costs(self.selected_programs)
 
@@ -118,6 +120,7 @@ class Recommendations:
                     cost = self.taxon_cost(taxon_name)
                     s = spans_to_html(", ".join(str(Span(list(span))) for span in spans))
                     contents.append(f"| {cost} | `{taxon_name}` | {s} |")
+                contents.append("---")
 
         def programs_to_html(description: str, programs: ProgramNames) -> str:
             details = []

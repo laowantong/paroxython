@@ -32,6 +32,7 @@ def print_collatz(n): # added_block_label (-> +7)
                        # if_test_atom:n
                        # literal:0
                        # literal:2
+                       # modulo_operator
                        # verbose_conditional_assignment (-> +3)
             n = n // 2 # assignment:FloorDiv
                        # assignment_lhs_identifier:n
@@ -46,7 +47,8 @@ def print_collatz(n): # added_block_label (-> +7)
                        # update_by_assignment_with:FloorDiv
                        # update_with:FloorDiv
         else: # unknown_label
-            n = 3 * n + 1 # assignment:Add
+            n = 3 * n + 1 # addition_operator
+                          # assignment:Add
                           # assignment_lhs_identifier:n
                           # assignment_rhs_atom:1
                           # assignment_rhs_atom:3
@@ -56,6 +58,7 @@ def print_collatz(n): # added_block_label (-> +7)
                           # if_else_branch
                           # literal:1
                           # literal:3
+                          # multiplication_operator
                           # single_assignment:n
                           # suggest_constant_definition
                           # update:n:1
@@ -91,6 +94,7 @@ for i in range(1, 101): # call_argument:1
                     # if_test_atom:i
                     # literal:0
                     # literal:15
+                    # modulo_operator
                     # suggest_constant_definition
         print("FizzBuzz") # call_argument:
                           # function_call:print
@@ -106,6 +110,7 @@ for i in range(1, 101): # call_argument:1
                      # if_test_atom:i
                      # literal:0
                      # literal:3
+                     # modulo_operator
                      # suggest_constant_definition
         print("Fizz") # call_argument:
                       # function_call:print
@@ -121,6 +126,7 @@ for i in range(1, 101): # call_argument:1
                      # if_test_atom:i
                      # literal:0
                      # literal:5
+                     # modulo_operator
                      # suggest_constant_definition
         print("Buzz") # call_argument:
                       # function_call:print
@@ -147,4 +153,5 @@ def is_even(n): # function:is_even (-> +1)
                       # divisibility_test:2
                       # literal:0
                       # literal:2
+                      # modulo_operator
                       # return

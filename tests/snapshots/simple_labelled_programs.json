@@ -39,6 +39,10 @@
         [[4,4]]
       ],
       [
+        "addition_operator",
+        [[7,7]]
+      ],
+      [
         "assignment:Add",
         [[7,7]]
       ],
@@ -161,6 +165,14 @@
       [
         "loop:while",
         [[2,7]]
+      ],
+      [
+        "modulo_operator",
+        [[4,4]]
+      ],
+      [
+        "multiplication_operator",
+        [[7,7]]
       ],
       [
         "single_assignment:n",
@@ -368,6 +380,10 @@
         [[2,10]]
       ],
       [
+        "modulo_operator",
+        [[3,3],[5,5],[7,7]]
+      ],
+      [
         "range:1:101",
         [[2,2]]
       ],
@@ -428,6 +444,10 @@
       ],
       [
         "literal:2",
+        [[3,3]]
+      ],
+      [
+        "modulo_operator",
         [[3,3]]
       ],
       [

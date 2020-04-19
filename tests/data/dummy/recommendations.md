@@ -37,6 +37,7 @@
 | 0 | `Y` | 6 |
 | 0 | `Y/E` | 8 |
 | 256 | `Y/T` | 1 |
+---
 
 ### Program `prg2.py` (learning cost 928)
 
@@ -67,6 +68,7 @@
 | 0 | `Y` | 1 |
 | 256 | `Y/T` | 7 |
 | 384 | `Y/T/Q` | 1, 9 |
+---
 
 # Summary
 <details>

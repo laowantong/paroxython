@@ -17,6 +17,9 @@
       - [Feature `conditional_expression`](#feature-conditional_expression)
       - [Feature `concatenation_operator|replication_operator` (SQL)](#feature-concatenation_operatorreplication_operator)
       - [Feature `string_formatting_operator` (SQL)](#feature-string_formatting_operator)
+      - [Feature `addition_operator` (SQL)](#feature-addition_operator)
+      - [Feature `multiplication_operator` (SQL)](#feature-multiplication_operator)
+      - [Feature `modulo_operator` (SQL)](#feature-modulo_operator)
   - [Boolean expressions](#boolean-expressions)
       - [Feature `boolean_operator`](#feature-boolean_operator)
       - [Feature `comparison_operator`](#feature-comparison_operator)
@@ -723,7 +726,10 @@ _Remark._ A negative literal is represented in the AST by a node `UnaryOp` with 
 
 ##### Derivations
 
+[⬇️ feature `addition_operator`](#feature-addition_operator)  
 [⬇️ feature `concatenation_operator|replication_operator`](#feature-concatenation_operatorreplication_operator)  
+[⬇️ feature `modulo_operator`](#feature-modulo_operator)  
+[⬇️ feature `multiplication_operator`](#feature-multiplication_operator)  
 [⬇️ feature `string_formatting_operator`](#feature-string_formatting_operator)  
 
 ##### Specification
@@ -783,12 +789,14 @@ Match replication operators whose one operand is either a string, a list or a tu
 [⬆️ feature `augmented_assignment`](#feature-augmented_assignment)  
 [⬆️ feature `binary_operator`](#feature-binary_operator)  
 [⬆️ feature `literal`](#feature-literal)  
+[⬇️ feature `addition_operator`](#feature-addition_operator)  
+[⬇️ feature `multiplication_operator`](#feature-multiplication_operator)  
 
 ##### Specification
 
 ```sql
 SELECT CASE op.name_suffix
-           WHEN "Add" THEN "concatenation operator"
+           WHEN "Add" THEN "concatenation_operator"
            ELSE "replication_operator"
        END,
        lit.name_suffix,
@@ -825,8 +833,8 @@ GROUP BY op.path
 
 | Label | Lines |
 |:--|:--|
-| `concatenation operator:Str` | 1 |
-| `concatenation operator:List` | 2, 3 |
+| `concatenation_operator:Str` | 1 |
+| `concatenation_operator:List` | 2, 3 |
 | `replication_operator:Str` | 4, 8, 8 |
 | `replication_operator:List` | 5, 6 |
 | `replication_operator:Tuple` | 7 |
@@ -841,6 +849,7 @@ Match old-style `%` operators whose left operand is a string **literal**.
 
 [⬆️ feature `binary_operator`](#feature-binary_operator)  
 [⬆️ feature `literal`](#feature-literal)  
+[⬇️ feature `modulo_operator`](#feature-modulo_operator)  
 
 ##### Specification
 
@@ -860,6 +869,8 @@ GROUP BY op.path
 
 ```python
 1   s = "hello, %s" % world
+2   n = n % 10
+3   print(a % b)
 ```
 
 ##### Matches
@@ -867,6 +878,121 @@ GROUP BY op.path
 | Label | Lines |
 |:--|:--|
 | `string_formatting_operator` | 1 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `addition_operator`
+
+An addition operator is a binary operator `Add` which has not be classified as a concatenation operator.
+
+##### Derivations
+
+[⬆️ feature `binary_operator`](#feature-binary_operator)  
+[⬆️ feature `concatenation_operator|replication_operator`](#feature-concatenation_operatorreplication_operator)  
+
+##### Specification
+
+```sql
+SELECT "addition_operator",
+       "",
+       op.span,
+       op.path
+FROM t_binary_operator op
+LEFT JOIN t_concatenation_operator con ON (op.span = con.span)
+WHERE op.name_suffix="Add"
+  AND con.span IS NULL
+```
+
+##### Example
+
+```python
+1   print("foo" + "bar")
+2   l = l + [1]
+3   l += [1]
+4   print(a + 1)
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `addition_operator` | 4 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `multiplication_operator`
+
+A multiplication operator is a binary operator `Mult` which has not be classified as a replication operator.
+
+##### Derivations
+
+[⬆️ feature `binary_operator`](#feature-binary_operator)  
+[⬆️ feature `concatenation_operator|replication_operator`](#feature-concatenation_operatorreplication_operator)  
+
+##### Specification
+
+```sql
+SELECT "multiplication_operator",
+       "",
+       op.span,
+       op.path
+FROM t_binary_operator op
+LEFT JOIN t_replication_operator rep ON (op.path = rep.path)
+WHERE rep.span IS NULL
+  AND op.name_suffix="Mult"
+```
+
+##### Example
+
+```python
+1   print("-" * 80)
+2   print(a * b)
+3   c = (1, 2, 3) * n
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `multiplication_operator` | 2 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `modulo_operator`
+
+A modulo operator is a binary operator `Mod` which has not be classified as an old-style format operator.
+
+##### Derivations
+
+[⬆️ feature `binary_operator`](#feature-binary_operator)  
+[⬆️ feature `string_formatting_operator`](#feature-string_formatting_operator)  
+
+##### Specification
+
+```sql
+SELECT "modulo_operator",
+       "",
+       op.span,
+       op.path
+FROM t_binary_operator op
+LEFT JOIN t_string_formatting_operator f ON (op.path = f.path)
+WHERE f.span IS NULL
+  AND op.name_suffix="Mod"
+```
+
+##### Example
+
+```python
+1   s = "hello, %s" % world
+2   n = n % 10
+3   print(a % b)
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `modulo_operator` | 2, 3 |
 
 --------------------------------------------------------------------------------
 

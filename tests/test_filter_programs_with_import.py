@@ -54,7 +54,7 @@ def test_exclude_taxons():
     print(set(dbf.selected_programs.keys()))
     assert set(dbf.selected_programs.keys()) == set()
 
-    # "operator/addition" is featured by collatz_print.py, and indirectly by fizzbuzz.py and
+    # "operator/arithmetic/addition" is featured by collatz_print.py, and indirectly by fizzbuzz.py and
     # is_even.py. Therefore, excluding this taxon keeps only assignment.py.
     dbf = ProgramFilter(db)
     dbf.exclude_taxons({"io/standard/print"})
@@ -86,10 +86,10 @@ def test_include_taxons():
     print(set(dbf.selected_programs.keys()))
     assert set(dbf.selected_programs.keys()) == {"assignment.py", "collatz_print.py"}
 
-    # "operator/addition" is directly featured by collatz_print.py only. Therefore, including this
-    # taxon keeps only collatz_print.py.
+    # "operator/arithmetic/addition" is directly featured by collatz_print.py only. Therefore,
+    # including this taxon keeps only collatz_print.py.
     dbf = ProgramFilter(db)
-    dbf.include_taxons({"operator/addition"})
+    dbf.include_taxons({"operator/arithmetic/addition"})
     print(set(dbf.selected_programs.keys()))
     assert set(dbf.selected_programs.keys()) == {"collatz_print.py"}
 

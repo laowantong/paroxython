@@ -1,5 +1,6 @@
 # Present labels
 
+- addition_operator / collatz_print.py / 7
 - assignment / assignment.py / 1
 - assignment:Add / collatz_print.py / 7
 - assignment:FloorDiv / collatz_print.py / 5
@@ -79,6 +80,10 @@
 - literal:Str / fizzbuzz.py / 4, 6, 8
 - loop:for / fizzbuzz.py / 2-10
 - loop:while / collatz_print.py / 2-7
+- modulo_operator / collatz_print.py / 4
+- modulo_operator / fizzbuzz.py / 3, 5, 7
+- modulo_operator / is_even.py / 3
+- multiplication_operator / collatz_print.py / 7
 - range:1:101 / fizzbuzz.py / 2
 - return / is_even.py / 3
 - single_assignment:a / assignment.py / 1
