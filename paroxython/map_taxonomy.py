@@ -26,14 +26,11 @@ class Taxonomy:
     def __init__(self, taxonomy_path: Path = DEFAULT_TAXONOMY_PATH) -> None:
         """Read the taxonomy specifications, and make some pre-processing."""
         is_literal = regex.compile(r"[\w:]+").fullmatch
-        tsv = taxonomy_path.read_text()
+        tsv = taxonomy_path.read_text().partition("-- EOF")[0].strip()
         self.literal_label_names: Dict[LabelName, TaxonNames] = defaultdict(list)
         self.compiled_label_names = []
-        for line in tsv.split("\n"):
-            line = line.strip()
-            if not line or line == "-- EOF":
-                break
-            (taxon_name, label_pattern) = line.split("\t")
+        for line in sorted(tsv.split("\n")):
+            (taxon_name, label_pattern) = line.strip().split(maxsplit=1)
             if is_literal(label_pattern):
                 self.literal_label_names[LabelName(label_pattern)].append(TaxonName(taxon_name))
             else:
@@ -65,7 +62,8 @@ class Taxonomy:
                 result[taxon_name].update(spans)
         return [Taxon(name, spans) for (name, spans) in sorted(result.items())]
 
-    def deduplicated_taxons(self, taxons: Taxons) -> Taxons:
+    @staticmethod
+    def deduplicated_taxons(taxons: Taxons) -> Taxons:
         """If taxon t2 has taxon t1 as a prefix, remove their common spans from t1."""
         if len(taxons) == 0:
             return []
@@ -73,9 +71,8 @@ class Taxonomy:
         for (name, spans) in taxons[1:]:
             if name.startswith(previous_name):
                 previous_spans.subtract(spans)
-            else:
-                previous_name = name
-                previous_spans = spans
+            previous_name = name
+            previous_spans = spans
         result = []
         for (name, spans) in taxons:
             spans = +spans  # Counter's special syntax: suppress items whose count == 0
@@ -86,7 +83,7 @@ class Taxonomy:
     def __call__(self, programs: List[Program]) -> ProgramTaxons:
         """Translate labels into taxons on a list of program names."""
         return {
-            program.name: self.deduplicated_taxons(self.to_taxons(program.labels))
+            program.name: Taxonomy.deduplicated_taxons(self.to_taxons(program.labels))
             for program in programs
         }
 

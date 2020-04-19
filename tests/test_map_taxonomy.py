@@ -16,11 +16,12 @@ S = lambda i, j: Span([i, j])  # shortcut for Span([i, j])
 
 
 def test_initial_values():
+    print(t.literal_label_names)
     assert t.literal_label_names == {
+        "literal:Set": ["call/function/builtin/casting/set", "type/set"],
         "if": ["control_flow/conditional"],
         "if_else": ["control_flow/conditional/else"],
         "method_call:difference_update": ["type/set"],
-        "literal:Set": ["type/set", "call/function/builtin/casting/set"],
     }
     assert t.compiled_label_names[0][1] == "test/inequality"
 
@@ -53,6 +54,26 @@ def test_deduplicated_taxons():
         ("control_flow/conditional", C({S(1, 1): 1})),
         ("control_flow/conditional/else", C({S(1, 1): 1, S(2, 5): 1})),
         ("test/inequality", C({S(2, 2): 1, S(3, 3): 1, S(1, 1): 1})),
+    ]
+
+
+def test_deduplicated_taxons_with_deletion():
+    taxons = [
+        ("control_flow", C({S(1, 1): 2, S(2, 5): 1})),
+        ("control_flow/conditional", C({S(1, 1): 2, S(2, 5): 1})),
+        ("control_flow/conditional/else", C({S(1, 1): 2, S(2, 5): 1})),
+    ]
+    assert t.deduplicated_taxons(taxons) == [
+        ("control_flow/conditional/else", C({S(1, 1): 2, S(2, 5): 1})),
+    ]
+    taxons = [
+        ("control_flow", C({S(1, 1): 2, S(2, 5): 2})),
+        ("control_flow/conditional", C({S(1, 1): 2, S(2, 5): 1})),
+        ("control_flow/conditional/else", C({S(1, 1): 2, S(2, 5): 1})),
+    ]
+    assert t.deduplicated_taxons(taxons) == [
+        ("control_flow", C({S(2, 5): 1})),
+        ("control_flow/conditional/else", C({S(1, 1): 2, S(2, 5): 1})),
     ]
 
 
