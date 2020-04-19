@@ -357,7 +357,7 @@ Match an index in a sequence type or a key in a dictionary type, and suffix it b
 #### Feature `nested_index`
 
 In pure Python, multidimensionnal arrays are lists of lists. Thus, accessing a cell (_i_, _j_) of a matrix _m_ is done first
-by accessing the _i_th list of _m_ (`m[i]`), then the _j_th cell of this list (`m[i][j]`). The length of this index concatenation gives the dimension (or _shape_) of the array.
+by accessing the _i_-th list of _m_ (`m[i]`), then the _j_-th cell of this list (`m[i][j]`). The length of this index concatenation gives the dimension (or _shape_) of the array.
 
 ##### Derivations
 

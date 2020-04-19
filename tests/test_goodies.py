@@ -58,12 +58,9 @@ def test_enumeration_to_html():
     assert enumeration_to_html("") == ""
     enumeration_to_html = enumeration_to_html_factory(30)
     assert enumeration_to_html("1, 2, 3, 4, 5-6, 7, 8, 9") == "1, 2, 3, 4, 5-6, 7, 8, 9"
-    enumeration_to_html = enumeration_to_html_factory(10)
+    enumeration_to_html = enumeration_to_html_factory(7)
+    print(enumeration_to_html("1, 2, 3, 4, 5-6, 7, 8, 9"))
     assert (
         enumeration_to_html("1, 2, 3, 4, 5-6, 7, 8, 9")
-        == "<details><summary>1, 2, 3, 4, </summary>5-6, 7, 8, 9</details>"
-    )
-    assert (
-        enumeration_to_html("1. 2. 3. 4. 5-6. 7. 8, 9")
-        == "<details><summary>1. 2. 3. 4. 5-6. 7. 8, </summary>9</details>"
+        == "<details><summary>1,</summary>2, 3,<br>4, 5-6,<br>7, 8, 9</details>"
     )
