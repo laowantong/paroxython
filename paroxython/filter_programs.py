@@ -18,17 +18,17 @@ from user_types import (
 
 
 class ProgramFilter:
-    """Evolve a set of recommended programs and a set of imparted knowledge."""
+
+    """Evolve a set of selected programs and a set of imparted knowledge."""
 
     def __init__(self, db: JsonDatabase) -> None:
-        """Initialize the state of the filter (recommended programs + imparted knowledge).
+        """Initialize the state of the filter (selected programs + imparted knowledge).
 
-        During the evolution of the filter, the recommended program set (initially that of the
-        whole database) can only decrease, and the imparted knowledge (initially empty) can only
-        increase.
+        During the evolution of the filter, the set of the selected programs (initially all of
+        them) can only shrink, and the imparted knowledge (initially empty) can only increase.
         """
 
-        # store some shortcuts to DB objects
+        # Create some shortcuts to reference information.
         self.db_programs: ProgramInfos = db["programs"]
         self.db_taxons: TaxonInfos = db["taxons"]
         self.db_links = {
@@ -49,7 +49,7 @@ class ProgramFilter:
 
         # Initialize the state of the filter
         self.imparted_knowledge: TaxonNameSet = set()
-        self.recommended_programs: ProgramTaxonNames = {
+        self.selected_programs: ProgramTaxonNames = {
             program_name: list(program_info["taxons"])
             for (program_name, program_info) in self.db_programs.items()
         }
@@ -57,7 +57,7 @@ class ProgramFilter:
     # Select programs from the taxons they feature, and vice versa.
 
     def programs_of_taxons(self, taxons: TaxonNames, follow_import: bool) -> ProgramNameSet:
-        """Return the programs featuring a given list of taxons, either directly or indirectly."""
+        """Return the programs featuring (optionally by importation) a given list of taxons."""
         programs: ProgramNameSet = set()
         for taxon in taxons:
             programs.update(self.db_taxons.get(taxon, []))
@@ -66,7 +66,7 @@ class ProgramFilter:
         return programs
 
     def taxons_of_programs(self, programs: ProgramNameSet) -> TaxonNameSet:
-        """Return the taxon names featured by the given programs, either directly or indirectly."""
+        """Return the taxon names featured (directly or not) by the given programs."""
         taxons: TaxonNameSet = set()
         for program in programs:
             if program in self.db_programs:
@@ -80,35 +80,34 @@ class ProgramFilter:
         return set(filter(regex.compile("|".join(patterns)).match, self.db_programs))
 
     def impart_programs(self, programs: ProgramNameSet) -> None:
-        """Remove from the recommended programs those found in the given ones, and enrich the
-        imparted knowledge with all the prefixes of the taxons featured by these programs,
-        including the imported ones."""
+        """Deselect the programs found in the given ones.
+
+        Additionally, enrich the imparted knowledge with all the prefixes of the taxons featured
+        (directly or not) by these programs."""
         for program in programs:
-            self.recommended_programs.pop(program, None)
+            self.selected_programs.pop(program, None)
             if program in self.db_programs:
                 for imported_program in self.db_links[program]:
-                    self.recommended_programs.pop(imported_program, None)
+                    self.selected_programs.pop(imported_program, None)
         self.impart_taxons(self.taxons_of_programs(programs))
 
     def exclude_programs(self, programs: ProgramNameSet) -> None:
-        """Remove from the recommended programs those found in the given ones or imported by
-        them."""
+        """Deselect the programs found among the given ones or imported by them."""
         for program in programs:
-            self.recommended_programs.pop(program, None)
-        for program in list(self.recommended_programs):
+            self.selected_programs.pop(program, None)
+        for program in list(self.selected_programs):
             if programs.intersection(self.db_links[program]):
-                self.recommended_programs.pop(program, None)
+                self.selected_programs.pop(program, None)
 
     def include_programs(self, programs: ProgramNameSet) -> None:
-        """Remove from the recommended programs those not found in the given ones or in those
-        imported by them."""
+        """Deselect the programs neither found among the given ones or those they import."""
         extended_programs: ProgramNameSet = set(programs)  # make a copy to ensure purity
         for program in programs:
             if program in self.db_programs:
                 extended_programs.update(self.db_links[program])
-        for program in list(self.recommended_programs):
+        for program in list(self.selected_programs):
             if program not in extended_programs:
-                self.recommended_programs.pop(program, None)
+                self.selected_programs.pop(program, None)
 
     # Update the state of the filter by applying set operations with the given taxons.
 
@@ -126,18 +125,17 @@ class ProgramFilter:
                     self.imparted_knowledge.add(TaxonName(prefix))
 
     def exclude_taxons(self, taxons: TaxonNames) -> None:
-        """Remove from the recommended programs those covering at least one given taxon, either
-        directly or by importation."""
+        """Deselect the programs featuring (directly or not) at least one given taxon."""
         programs = self.programs_of_taxons(taxons, follow_import=True)
         for program in programs:
-            self.recommended_programs.pop(program, None)
+            self.selected_programs.pop(program, None)
 
     def include_taxons(self, taxons: TaxonNames) -> None:
-        """Remove from the recommended programs those not covering any given taxon."""
+        """Deselect the programs not featuring any given taxon."""
         programs = self.programs_of_taxons(taxons, follow_import=False)
-        for program in list(self.recommended_programs):
+        for program in list(self.selected_programs):
             if program not in programs:
-                self.recommended_programs.pop(program, None)
+                self.selected_programs.pop(program, None)
 
 
 if __name__ == "__main__":

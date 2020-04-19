@@ -27,7 +27,7 @@ class Recommendations:
         # copy locally some attributes and methods or a ProgramFilter instance
         program_filter = ProgramFilter(db)
         self.programs = program_filter.db_programs
-        self.recommended_programs = program_filter.recommended_programs
+        self.selected_programs = program_filter.selected_programs
         self.imparted_knowledge = program_filter.imparted_knowledge
 
         # hide the ugliness of dynamic method calls by defining an ad hoc function
@@ -64,10 +64,10 @@ class Recommendations:
             self.method("{operation}_{programs_or_taxons}".format(**process), set(data))
 
             # Update the statistics of the filter state for the last operation
-            (previous, current) = (current, set(self.recommended_programs))
+            (previous, current) = (current, set(self.selected_programs))
             process["filtered_out"] = sorted(previous - current)
 
-        self.assessed_programs = self.assess_costs(self.recommended_programs)
+        self.assessed_programs = self.assess_costs(self.selected_programs)
 
     def get_markdown(self, toc_group_limit=5, span_column_width=30) -> str:
         """Iterate on the processes, now populated by the results, and construct a string
@@ -90,7 +90,7 @@ class Recommendations:
         toc: List[str] = ["# Table of contents"]
         contents: List[str] = [f"# Recommended programs"]
         must_group_by_equal_costs = True
-        remainder = len(self.recommended_programs)
+        remainder = len(self.selected_programs)
 
         for (cost, program_names) in toc_data.items():
 

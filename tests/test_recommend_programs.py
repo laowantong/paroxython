@@ -12,8 +12,8 @@ from make_snapshot import make_snapshot
 def test_recommend_program(capsys):
     rec = Recommendations(Path("tests/data/dummy/pipe.py"))
     rec.run_pipeline()
-    print(rec.recommended_programs)
-    assert rec.recommended_programs == {
+    print(rec.selected_programs)
+    assert rec.selected_programs == {
         "prg2.py": [
             "O/N/P",
             "Y/T/Q",
@@ -53,7 +53,7 @@ def test_recommend_program(capsys):
         ["prg4.py", "prg5.py", "prg6.py"],
         ["prg1.py"],
     ]
-    costs = {taxon: rec.taxon_cost(taxon) for taxon in rec.recommended_programs["prg2.py"]}
+    costs = {taxon: rec.taxon_cost(taxon) for taxon in rec.selected_programs["prg2.py"]}
     print(costs)
     assert costs == {
         "O/N/P": 0,

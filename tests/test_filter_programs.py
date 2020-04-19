@@ -12,8 +12,8 @@ db = json.loads(Path("tests/data/dummy/db.json").read_text())
 
 def test_init():
     dbf = ProgramFilter(db)
-    print(dbf.recommended_programs)
-    assert dbf.recommended_programs.keys() == db["programs"].keys()
+    print(dbf.selected_programs)
+    assert dbf.selected_programs.keys() == db["programs"].keys()
     assert not dbf.imparted_knowledge
 
 
@@ -70,8 +70,8 @@ def test_exclude_taxons():
     dbf = ProgramFilter(db)
     taxons = ["O/J", "X/S/M/L", "non_existing_taxon"]
     dbf.exclude_taxons(taxons)
-    print(sorted(dbf.recommended_programs))
-    assert dbf.recommended_programs.keys() == {"prg2.py", "prg5.py"}
+    print(sorted(dbf.selected_programs))
+    assert dbf.selected_programs.keys() == {"prg2.py", "prg5.py"}
     for taxon in taxons:
         assert taxon not in db["programs"]["prg2.py"]["taxons"]
         assert taxon not in db["programs"]["prg5.py"]["taxons"]
@@ -81,8 +81,8 @@ def test_include_taxons():
     dbf = ProgramFilter(db)
     taxons = ["O/J", "X/S/M/L", "non_existing_taxon"]
     dbf.include_taxons(taxons)
-    print(sorted(dbf.recommended_programs))
-    assert dbf.recommended_programs.keys() == {
+    print(sorted(dbf.selected_programs))
+    assert dbf.selected_programs.keys() == {
         "prg1.py",
         "prg3.py",
         "prg4.py",
@@ -105,8 +105,8 @@ def test_impart_programs():
     dbf = ProgramFilter(db)
     programs = {"prg1.py", "prg2.py", "non_existing_program"}
     dbf.impart_programs(programs)
-    print(sorted(dbf.recommended_programs))
-    assert dbf.recommended_programs.keys() == set(db["programs"]) - set(programs)
+    print(sorted(dbf.selected_programs))
+    assert dbf.selected_programs.keys() == set(db["programs"]) - set(programs)
     print(sorted(dbf.imparted_knowledge))
     assert set(db["taxons"]) - dbf.imparted_knowledge == {
         "O/C/F",
@@ -120,13 +120,13 @@ def test_exclude_programs():
     dbf = ProgramFilter(db)
     programs = {"prg1.py", "prg2.py", "non_existing_program"}
     dbf.exclude_programs(programs)
-    print(sorted(dbf.recommended_programs))
-    assert dbf.recommended_programs.keys() == set(db["programs"]) - set(programs)
+    print(sorted(dbf.selected_programs))
+    assert dbf.selected_programs.keys() == set(db["programs"]) - set(programs)
 
 
 def test_include_programs():
     dbf = ProgramFilter(db)
     programs = {"prg1.py", "prg2.py", "non_existing_program"}
     dbf.include_programs(programs)
-    print(sorted(dbf.recommended_programs))
-    assert dbf.recommended_programs.keys() == {"prg1.py", "prg2.py"}
+    print(sorted(dbf.selected_programs))
+    assert dbf.selected_programs.keys() == {"prg1.py", "prg2.py"}
