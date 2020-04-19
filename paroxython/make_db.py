@@ -26,7 +26,7 @@ from user_types import (
 
 class Database:
     def __init__(self, directory: Path, ignore_timestamps=False, *args, **kargs) -> None:
-        """collect all infos pertaining to the programs, the labels and the taxons."""
+        """Collect all infos pertaining to the programs, the labels and the taxons."""
         self.default_json_db_path = directory.parent / f"{directory.name}_db.json"
         self.default_sqlite_db_path = directory.parent / f"{directory.name}_db.sqlite"
         programs: List[Program] = list_labelled_programs(directory, *args, **kargs)

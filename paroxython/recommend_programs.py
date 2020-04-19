@@ -54,6 +54,7 @@ class Recommendations:
                     capture_output=True,
                     encoding="utf-8",
                     shell=True,
+                    check=True,
                 ).stdout.split("\n")
 
             # If needed, replace the resulting strings by the matched names of programs or taxons

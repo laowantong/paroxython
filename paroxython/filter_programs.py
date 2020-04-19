@@ -5,7 +5,6 @@ import regex  # type: ignore
 from user_types import (
     JsonDatabase,
     ProgramInfos,
-    ProgramName,
     ProgramNameSet,
     ProgramPatterns,
     ProgramTaxonNames,
@@ -18,7 +17,6 @@ from user_types import (
 
 
 class ProgramFilter:
-
     """Evolve a set of selected programs and a set of imparted knowledge."""
 
     def __init__(self, db: JsonDatabase) -> None:

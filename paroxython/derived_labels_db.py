@@ -2,7 +2,7 @@ import sqlite3
 from collections import defaultdict
 from typing import Dict
 
-from regex import compile, match  # type: ignore
+import regex  # type: ignore
 
 from span import Span
 from user_types import Label, LabelName, Labels, LabelsSpans, Query
@@ -23,11 +23,11 @@ class DB:
     creation_query = f"CREATE TABLE t ({','.join(columns)})"
     update_query = f"INSERT INTO t VALUES ({','.join('?' * len(columns))})"
     addition_query = "CREATE TABLE t_{0} AS SELECT * FROM t WHERE name_prefix = '{0}'"
-    prerequisites = compile(r"(?m)\b(?:FROM|JOIN) t_(\w+)").findall
+    prerequisites = regex.compile(r"(?m)\b(?:FROM|JOIN) t_(\w+)").findall
 
     def __init__(self):
         self.c = sqlite3.connect(":memory:")
-        self.c.create_function("regexp", 2, lambda rex, s: bool(match(rex, s)))
+        self.c.create_function("regexp", 2, lambda rex, s: bool(regex.match(rex, s)))
 
     def create(self, labels: Labels) -> None:
         self.c.execute(DB.creation_query)
