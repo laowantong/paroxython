@@ -70,7 +70,8 @@ class Recommendations:
         self.assessed_programs = self.assess_costs(self.recommended_programs)
 
     def get_markdown(self, toc_group_limit=5, span_column_width=30) -> str:
-        """Iterate on the processes, now populated by the results, and construct a string output."""
+        """Iterate on the processes, now populated by the results, and construct a string
+        output."""
 
         title_to_slug = title_to_slug_factory()
         spans_to_html = enumeration_to_html_factory(span_column_width, "_imported_")

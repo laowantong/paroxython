@@ -21,12 +21,11 @@ class ProgramFilter:
     """Evolve a set of recommended programs and a set of imparted knowledge."""
 
     def __init__(self, db: JsonDatabase) -> None:
-        """
-        Initialize the state of the filter (recommended programs + imparted knowledge).
+        """Initialize the state of the filter (recommended programs + imparted knowledge).
 
-        During the evolution of the filter, the recommended program set (initially that
-        of the whole database) can only decrease, and the imparted knowledge (initially
-        empty) can only increase.
+        During the evolution of the filter, the recommended program set (initially that of the
+        whole database) can only decrease, and the imparted knowledge (initially empty) can only
+        increase.
         """
 
         # store some shortcuts to DB objects
@@ -81,11 +80,9 @@ class ProgramFilter:
         return set(filter(regex.compile("|".join(patterns)).match, self.db_programs))
 
     def impart_programs(self, programs: ProgramNameSet) -> None:
-        """
-        Remove from the recommended programs those found in the given ones, and enrich the imparted
-        knowledge with all the prefixes of the taxons featured by these programs, including the
-        imported ones.
-        """
+        """Remove from the recommended programs those found in the given ones, and enrich the
+        imparted knowledge with all the prefixes of the taxons featured by these programs,
+        including the imported ones."""
         for program in programs:
             self.recommended_programs.pop(program, None)
             if program in self.db_programs:
@@ -94,9 +91,8 @@ class ProgramFilter:
         self.impart_taxons(self.taxons_of_programs(programs))
 
     def exclude_programs(self, programs: ProgramNameSet) -> None:
-        """
-        Remove from the recommended programs those found in the given ones or imported by them.
-        """
+        """Remove from the recommended programs those found in the given ones or imported by
+        them."""
         for program in programs:
             self.recommended_programs.pop(program, None)
         for program in list(self.recommended_programs):
@@ -104,10 +100,8 @@ class ProgramFilter:
                 self.recommended_programs.pop(program, None)
 
     def include_programs(self, programs: ProgramNameSet) -> None:
-        """
-        Remove from the recommended programs those not found in the given ones or in those imported
-        by them.
-        """
+        """Remove from the recommended programs those not found in the given ones or in those
+        imported by them."""
         extended_programs: ProgramNameSet = set(programs)  # make a copy to ensure purity
         for program in programs:
             if program in self.db_programs:
@@ -119,9 +113,7 @@ class ProgramFilter:
     # Update the state of the filter by applying set operations with the given taxons.
 
     def patterns_to_taxons(self, patterns: TaxonPatterns) -> TaxonNameSet:
-        """
-        Return all the taxon names matching at least one of the given regex patterns.
-        """
+        """Return all the taxon names matching at least one of the given regex patterns."""
         return set(filter(regex.compile("|".join(patterns)).match, self.db_taxons))
 
     def impart_taxons(self, taxons: TaxonNameSet) -> None:
@@ -134,10 +126,8 @@ class ProgramFilter:
                     self.imparted_knowledge.add(TaxonName(prefix))
 
     def exclude_taxons(self, taxons: TaxonNames) -> None:
-        """
-        Remove from the recommended programs those covering at least one given taxon, either
-        directly or by importation.
-        """
+        """Remove from the recommended programs those covering at least one given taxon, either
+        directly or by importation."""
         programs = self.programs_of_taxons(taxons, follow_import=True)
         for program in programs:
             self.recommended_programs.pop(program, None)

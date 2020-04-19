@@ -1,5 +1,4 @@
-"""
-Read the contents of docs/spec.md, normalize its formatting and write it back.
+"""Read the contents of docs/spec.md, normalize its formatting and write it back.
 
 The following operations are carried out:
 - The old clickable table of contents (if any) is replaced by a new one.

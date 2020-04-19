@@ -2,8 +2,8 @@ from typing import List, Tuple
 
 
 class Span:
-    """Metadata associated with a tag (i.e., a label or a taxon).
-    Currently, a span consists in:
+    """Metadata associated with a tag (i.e., a label or a taxon). Currently, a span consists in:
+
     - a couple of line numbers delimiting a feature in a source,
     - the indentation level of the first line,
     - the path of the feature (useful for any nested expression)

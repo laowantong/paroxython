@@ -12,8 +12,7 @@ class InternalImportsMarker:
         self.internal_imports: ProgramNameSet = set()
 
     def __call__(self, label_name: LabelName) -> LabelName:
-        """
-        Return a modified copy of label "import:(module).*" when module.py belongs to the DB.
+        """Return a modified copy of label "import:(module).*" when module.py belongs to the DB.
 
         As a side effect, store all these module.py program names in the set self.internal_imports.
         """

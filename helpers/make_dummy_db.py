@@ -1,5 +1,5 @@
-"""
-Dump the contents of two test files:
+"""Dump the contents of two test files:
+
 1. tests/data/dummy/taxons_and_programs.txt
 2. tests/data/dummy/db.txt
 """
