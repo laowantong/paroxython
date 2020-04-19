@@ -196,7 +196,7 @@ def test_impart_programs():
     print(set(dbf.recommended_programs.keys()))
     assert set(dbf.recommended_programs.keys()) == {"assignment.py", "is_even.py"}
 
-    # The program is_even.py import collatz_print.py, which imports collatz_print.py. Imparting
+    # The program is_even.py imports collatz_print.py, which imports collatz_print.py. Imparting
     # the former excludes the three of them from the recommendations.
     dbf = ProgramFilter(db)
     dbf.impart_programs({"is_even.py"})

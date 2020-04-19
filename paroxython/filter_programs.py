@@ -108,7 +108,7 @@ class ProgramFilter:
         Remove from the recommended programs those not found in the given ones or in those imported
         by them.
         """
-        extended_programs: ProgramNameSet = set(programs)  # make a copy
+        extended_programs: ProgramNameSet = set(programs)  # make a copy to ensure purity
         for program in programs:
             if program in self.db_programs:
                 extended_programs.update(self.db_links[program])

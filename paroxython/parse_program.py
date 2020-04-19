@@ -108,7 +108,7 @@ class ProgramParser:
 
 
 if __name__ == "__main__":
-    """Take an individual source, print its features and write its flat AST."""
+    # Take an individual source, print its features and write its flat AST.
     path = Path("sandbox/source.py")
     source = path.read_text().strip()
     if source.startswith("1   "):
