@@ -1,6 +1,7 @@
 from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Dict, List
+from os.path import commonpath
 
 import regex  # type: ignore
 
@@ -67,15 +68,19 @@ class Taxonomy:
         """If taxon t2 has taxon t1 as a prefix, remove their common spans from t1."""
         if len(taxons) == 0:
             return []
-        (previous_name, previous_spans) = taxons[0]
-        for (name, spans) in taxons[1:]:
-            if name.startswith(previous_name):
-                previous_spans.subtract(spans)
-            previous_name = name
-            previous_spans = spans
+        for (i, (name, spans)) in enumerate(taxons[1:], 1):
+            for j in range(i - 1, -1, -1):
+                (previous_name, previous_spans) = taxons[j]
+                common_prefix = commonpath((name, previous_name))
+                if not common_prefix:
+                    break
+                if previous_name == common_prefix:
+                    difference = spans - previous_spans
+                    previous_spans.subtract(spans)
+                    spans = difference
         result = []
         for (name, spans) in taxons:
-            spans = +spans  # Counter's special syntax: suppress items whose count == 0
+            spans += Counter()  # suppress items whose count <= 0
             if spans:  # if any item remains in the bag
                 result.append(Taxon(name, spans))
         return result

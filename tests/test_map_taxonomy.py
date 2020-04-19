@@ -50,7 +50,9 @@ def test_deduplicated_taxons():
         ("control_flow/conditional/else", C({S(1, 1): 1, S(2, 5): 1})),
         ("test/inequality", C({S(2, 2): 1, S(3, 3): 1, S(1, 1): 1})),
     ]
-    assert t.deduplicated_taxons(taxons) == [
+    result = t.deduplicated_taxons(taxons)
+    print(result)
+    assert result == [
         ("control_flow/conditional", C({S(1, 1): 1})),
         ("control_flow/conditional/else", C({S(1, 1): 1, S(2, 5): 1})),
         ("test/inequality", C({S(2, 2): 1, S(3, 3): 1, S(1, 1): 1})),
@@ -63,7 +65,9 @@ def test_deduplicated_taxons_with_deletion():
         ("control_flow/conditional", C({S(1, 1): 2, S(2, 5): 1})),
         ("control_flow/conditional/else", C({S(1, 1): 2, S(2, 5): 1})),
     ]
-    assert t.deduplicated_taxons(taxons) == [
+    result = t.deduplicated_taxons(taxons)
+    print(result)
+    assert result == [
         ("control_flow/conditional/else", C({S(1, 1): 2, S(2, 5): 1})),
     ]
     taxons = [
@@ -71,9 +75,22 @@ def test_deduplicated_taxons_with_deletion():
         ("control_flow/conditional", C({S(1, 1): 2, S(2, 5): 1})),
         ("control_flow/conditional/else", C({S(1, 1): 2, S(2, 5): 1})),
     ]
-    assert t.deduplicated_taxons(taxons) == [
+    result = t.deduplicated_taxons(taxons)
+    print(result)
+    assert result == [
         ("control_flow", C({S(2, 5): 1})),
         ("control_flow/conditional/else", C({S(1, 1): 2, S(2, 5): 1})),
+    ]
+    taxons = [
+        ("control_flow", C({S(1, 1): 2, S(2, 5): 2})),
+        ("control_flow/conditional", C({S(1, 1): 1, S(2, 5): 1})),
+        ("control_flow/loop", C({S(1, 1): 1, S(2, 5): 1})),
+    ]
+    result = t.deduplicated_taxons(taxons)
+    print(result)
+    assert result == [
+        ("control_flow/conditional", C({S(1, 1): 1, S(2, 5): 1})),
+        ("control_flow/loop", C({S(1, 1): 1, S(2, 5): 1})),
     ]
 
 

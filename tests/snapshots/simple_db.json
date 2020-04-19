@@ -70,9 +70,9 @@
         "while": [[2,7]]
       },
       "taxons": {
-        "control_flow/conditional": [[4,7]],
-        "control_flow/conditional/else": [[7,7]],
-        "control_flow/loop/non_sequential": [[2,7]],
+        "control/conditional": [[4,7]],
+        "control/conditional/else": [[7,7]],
+        "control/loop/while": [[2,7]],
         "io/standard/print": [[3,3],[8,8]],
         "operator/addition": [[7,7]],
         "operator/multiplication": [[7,7]],
@@ -133,11 +133,10 @@
       },
       "taxons": {
         "call/function/builtin/range": [[2,2]],
-        "control_flow/conditional": [[3,10],[5,10],[7,10]],
-        "control_flow/conditional/else": [[10,10]],
-        "control_flow/conditional/else/if": [[6,6],[8,8]],
-        "control_flow/loop/sequential": [[2,10]],
-        "control_flow/loop/sequential/arithmetic/start": [[2,10]],
+        "control/conditional": [[3,10],[5,10],[7,10]],
+        "control/conditional/else": [[10,10]],
+        "control/conditional/else/if": [[6,6],[8,8]],
+        "control/loop/for/arithmetic/start": [[2,10]],
         "io/standard/print": [[4,4],[6,6],[8,8],[10,10]],
         "library/personal": [[1,1]],
         "operator/percent/modulo": [[3,3],[5,5],[7,7]],
@@ -450,15 +449,15 @@
       "assignment.py",
       "collatz_print.py"
     ],
-    "control_flow/conditional": [
+    "control/conditional": [
       "collatz_print.py",
       "fizzbuzz.py"
     ],
-    "control_flow/conditional/else": [
+    "control/conditional/else": [
       "collatz_print.py",
       "fizzbuzz.py"
     ],
-    "control_flow/loop/non_sequential": [
+    "control/loop/while": [
       "collatz_print.py"
     ],
     "io/standard/print": [
@@ -511,13 +510,10 @@
     "call/function/builtin/range": [
       "fizzbuzz.py"
     ],
-    "control_flow/conditional/else/if": [
+    "control/conditional/else/if": [
       "fizzbuzz.py"
     ],
-    "control_flow/loop/sequential": [
-      "fizzbuzz.py"
-    ],
-    "control_flow/loop/sequential/arithmetic/start": [
+    "control/loop/for/arithmetic/start": [
       "fizzbuzz.py"
     ],
     "library/personal": [
