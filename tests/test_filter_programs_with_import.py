@@ -61,10 +61,10 @@ def test_exclude_taxons():
     print(set(dbf.selected_programs.keys()))
     assert set(dbf.selected_programs.keys()) == {"assignment.py"}
 
-    # "control_flow/conditional" is featured by collatz_print.py, fizzbuzz.py, and indirectly by
+    # "control/conditional" is featured by collatz_print.py, fizzbuzz.py, and indirectly by
     # is_even.py. Therefore, excluding this taxon keeps only assignment.py.
     dbf = ProgramFilter(db)
-    dbf.exclude_taxons({"control_flow/conditional"})
+    dbf.exclude_taxons({"control/conditional"})
     print(set(dbf.selected_programs.keys()))
     assert set(dbf.selected_programs.keys()) == {"assignment.py"}
 
@@ -93,10 +93,10 @@ def test_include_taxons():
     print(set(dbf.selected_programs.keys()))
     assert set(dbf.selected_programs.keys()) == {"collatz_print.py"}
 
-    # "control_flow/conditional" is featured by collatz_print.py, fizzbuzz.py, and indirectly by
+    # "control/conditional" is featured by collatz_print.py, fizzbuzz.py, and indirectly by
     # is_even.py. Therefore, including this taxon keeps only the former two.
     dbf = ProgramFilter(db)
-    dbf.include_taxons({"control_flow/conditional"})
+    dbf.include_taxons({"control/conditional"})
     print(set(dbf.selected_programs.keys()))
     assert set(dbf.selected_programs.keys()) == {"collatz_print.py", "fizzbuzz.py"}
 
@@ -113,7 +113,7 @@ def test_impart_taxons():
     # Imparting a knowledge decreases the learning cost of the corresponding taxons, but has no
     # effect whatsoever on the selected programs.
     dbf = ProgramFilter(db)
-    dbf.impart_taxons({"control_flow/conditional"})
+    dbf.impart_taxons({"control/conditional"})
     print(set(dbf.selected_programs.keys()))
     assert set(dbf.selected_programs.keys()) == {
         "assignment.py",
