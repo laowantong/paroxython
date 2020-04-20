@@ -5,6 +5,7 @@ from os.path import commonpath
 
 import regex  # type: ignore
 
+from goodies import progress_printer
 from user_types import (
     LabelName,
     Labels,
@@ -87,10 +88,14 @@ class Taxonomy:
 
     def __call__(self, programs: List[Program]) -> ProgramTaxons:
         """Translate labels into taxons on a list of program names."""
-        return {
-            program.name: Taxonomy.deduplicated_taxons(self.to_taxons(program.labels))
-            for program in programs
-        }
+        result: ProgramTaxons = {}
+        print(f"Mapping labels of {len(programs)} programs onto taxonomy.")
+        print_progress = progress_printer([p.name for p in programs])
+        for program in programs:
+            result[program.name] = Taxonomy.deduplicated_taxons(self.to_taxons(program.labels))
+            next(print_progress)
+        next(print_progress)
+        return result
 
 
 if __name__ == "__main__":

@@ -3,6 +3,7 @@ from collections import defaultdict
 from pathlib import Path
 from typing import Dict, List, Set
 
+from goodies import progress_printer
 from list_programs import list_programs
 from mark_internal_imports import InternalImportsMarker, complete_internal_imports
 from parse_program import ProgramParser
@@ -36,9 +37,12 @@ def list_labelled_programs(directory: Path, *args, **kargs) -> Programs:
     """For each program, yield its label list, lexicographically sorted."""
     result: Dict[ProgramName, Program] = {}
     programs = list_programs(directory, *args, **kargs)
+    print(f"Labelling {len(programs)} programs.")
+    print_progress = progress_printer([p.name for p in programs])
     may_mark_as_internal = InternalImportsMarker(programs)
     parse = ProgramParser()
     for program in programs:
+        next(print_progress)
         may_mark_as_internal.reset()
         label_dict: LabelsSpans = defaultdict(list)
         for (label_name, spans) in parse(program):
@@ -52,6 +56,7 @@ def list_labelled_programs(directory: Path, *args, **kargs) -> Programs:
             labels=labels,
             links=list(may_mark_as_internal.internal_imports),
         )
+    next(print_progress)
     complete_internal_imports(result)
     return list(result.values())
 

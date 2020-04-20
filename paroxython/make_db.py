@@ -73,10 +73,12 @@ class Database:
 
     def write_json(self, db_path: Optional[Path] = None) -> None:
         db_path = db_path or self.default_json_db_path
+        print(f"Writing {db_path}.")
         db_path.write_text(self.get_json())
 
     def write_sqlite(self, db_path: Optional[Path] = None) -> None:
         db_path = db_path or self.default_sqlite_db_path
+        print(f"Writing {db_path}.")
         program_rows: List[Tuple] = []
         label_rows: List[Tuple] = []
         taxon_rows: List[Tuple] = []
@@ -187,7 +189,9 @@ if __name__ == "__main__":
         # "paroxython"
     ]
     # fmt:on
+    print()
     for directory in directories:
         db = Database(Path(directory))
         db.write_json()
         db.write_sqlite()
+    print()

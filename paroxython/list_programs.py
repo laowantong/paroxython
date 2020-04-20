@@ -32,7 +32,6 @@ def list_programs(directory: Path, strategy="strip_docs") -> Programs:
     cleanup = cleanup_factory(strategy)
     for program_path in sorted(directory.rglob("*.py")):
         if not match_excluded(program_path.name):
-            print(program_path)
             source = cleanup(Source(program_path.read_text()))
             source = centrifugate_hints(source)
             (addition, deletion) = collect_hints(source)

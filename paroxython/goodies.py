@@ -1,6 +1,7 @@
 from collections import defaultdict
+import sys
 from textwrap import wrap
-from typing import Callable, Optional
+from typing import Callable, Sequence, Iterator
 from unicodedata import normalize
 
 import regex  # type: ignore
@@ -56,3 +57,13 @@ def enumeration_to_txt_factory(
         return template.format(summary=summary, details=details)
 
     return enumeration_to_txt
+
+
+def progress_printer(sequence: Sequence) -> Iterator:  # pragma: no cover
+    blanks = ""
+    for (i, element) in enumerate(sequence, 1):
+        print(f"\r{blanks}\r{i: 6} {element}", end="", flush=True)
+        yield
+        blanks = " " * (len(str(element)) + 7)
+    print(f"\r{blanks}\r", end="", flush=True)
+    yield
