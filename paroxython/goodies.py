@@ -1,4 +1,5 @@
 from collections import defaultdict
+from math import log2
 from textwrap import wrap
 from typing import Callable, Iterator, Sequence
 from unicodedata import normalize
@@ -66,3 +67,17 @@ def progress_printer(sequence: Sequence) -> Iterator:  # pragma: no cover
         blanks = " " * (len(str(element)) + 7)
     print(f"\r{blanks}\r", end="", flush=True)
     yield
+
+
+def cost_interval(x):
+    if x == 0:
+        return "0"
+    if x < 0.25:
+        return "in ]0, 0.25["
+    if x < 0.5:
+        return "in ]0.25, 0.5["
+    if x < 1:
+        return "in ]0.5, 1["
+    inf = 2 ** int(log2(x))
+    sup = 2 ** int(log2(x) + 1)
+    return f"in [{inf}, {sup}["

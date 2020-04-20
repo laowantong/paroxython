@@ -70,7 +70,6 @@ def test_recommend_program(capsys):
         "X/S/M/L/V": 0,
         "O/C/H/B/I": 0.03125,
     }
-    text = rec.get_markdown(toc_group_limit=1)  # for coverage testing
     text = rec.get_markdown(span_column_width=10)
     make_snapshot(Path("tests/data/dummy/recommendations.md"), text, capsys)
     rec.dump(text)  # for coverage testing

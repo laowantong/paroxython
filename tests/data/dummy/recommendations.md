@@ -1,10 +1,11 @@
 # Table of contents
-- [`2 programs remaining`](#2-programs-remaining)
-    - [`prg3.py` (9 lines)](#program-prg3py-learning-cost-025)
-    - [`prg2.py` (9 lines)](#program-prg2py-learning-cost-090625)
+- [`1 program of learning cost in ]0.25, 0.5[`](#1-program-of-learning-cost-in-025-05)
+    - [`prg3.py`](#program-prg3py-learning-cost-025)
+- [`1 program of learning cost in ]0.5, 1[`](#1-program-of-learning-cost-in-05-1)
+    - [`prg2.py`](#program-prg2py-learning-cost-090625)
 # Recommended programs
 
-## 2 programs remaining
+## 1 program of learning cost in ]0.25, 0.5[
 
 ### Program `prg3.py` (learning cost 0.25)
 
@@ -38,6 +39,8 @@
 | 0 | `Y/E` | 8 |
 | 0.25 | `Y/T` | 1 |
 ---
+
+## 1 program of learning cost in ]0.5, 1[
 
 ### Program `prg2.py` (learning cost 0.90625)
 

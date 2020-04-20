@@ -7,9 +7,14 @@ from typing import Dict, List
 
 from assess_learning_costs import LearningCostAssessor
 from filter_programs import ProgramFilter
-from goodies import add_line_numbers, title_to_slug_factory, enumeration_to_txt_factory
+from goodies import (
+    add_line_numbers,
+    title_to_slug_factory,
+    enumeration_to_txt_factory,
+    cost_interval,
+)
 from span import Span
-from user_types import Pipeline, ProgramNames
+from user_types import Pipeline, ProgramNames, AssessedPrograms, Tuple
 
 
 class Recommendations:
@@ -72,46 +77,39 @@ class Recommendations:
 
         self.assessed_programs = self.assess_costs(self.selected_programs)
 
-    def get_markdown(self, toc_group_limit=5, span_column_width=30) -> str:
-        """Iterate on the processes, now populated by the results, and construct a string
-        output."""
+    def get_markdown(self, span_column_width=30) -> str:
+        """Reiterate on the processes, now populated by the results, and output them."""
+
+        # Define some helper functions
 
         title_to_slug = title_to_slug_factory()
         spans_to_html = enumeration_to_txt_factory(span_column_width, "_imported_")
+        by_cost_and_sloc = lambda x: (x[0], len(self.programs[x[1]]["source"].split("\n")))
+        display_count = lambda n: f"{n} program" + ("" if n == 1 else "s")
 
-        # Group resulting programs by cost
+        # Group resulting programs by cost interval, and sort each group by increasing difficulty.
 
-        toc_data: Dict[float, ProgramNames] = defaultdict(list)
+        toc_data: Dict[str, AssessedPrograms] = defaultdict(list)
         for (cost, program) in self.assessed_programs:
-            toc_data[cost].append(program)
+            toc_data[cost_interval(cost)].append((cost, program))
+        for costs_and_program_names in toc_data.values():
+            costs_and_program_names.sort(key=by_cost_and_sloc)
 
-        # accumulate simultaneously the TOC and the contents
-
-        def display_count(n):
-            return f"{n} program" + ("" if n == 1 else "s")
+        # Accumulate simultaneously the TOC and the contents
 
         toc: List[str] = ["# Table of contents"]
         contents: List[str] = [f"# Recommended programs"]
-        must_group_by_equal_costs = True
-        remainder = len(self.selected_programs)
 
-        for (cost, program_names) in toc_data.items():
+        for (bounds, costs_and_program_names) in toc_data.items():
 
-            if must_group_by_equal_costs:
-                if len(program_names) >= toc_group_limit:
-                    title = f"{display_count(len(program_names))} of learning cost {cost}"
-                    remainder -= len(program_names)
-                else:
-                    title = f"{display_count(remainder)} remaining"
-                    must_group_by_equal_costs = False
-                toc.append(f"- [`{title}`](#{title_to_slug(title)})")
-                contents.append(f"\n## {title}")
+            title = f"{display_count(len(costs_and_program_names))} of learning cost {bounds}"
+            toc.append(f"- [`{title}`](#{title_to_slug(title)})")
+            contents.append(f"\n## {title}")
 
-            for program_name in program_names:
+            for (cost, program_name) in costs_and_program_names:
                 program_info = self.programs[program_name]
                 title = f"Program `{program_name}` (learning cost {cost})"
-                loc = len(program_info["source"].split("\n"))
-                toc.append(f"    - [`{program_name}` ({loc} lines)](#{title_to_slug(title)})")
+                toc.append(f"    - [`{program_name}`](#{title_to_slug(title)})")
                 contents.append(f"\n### {title}")
                 contents.append(f"\n```python\n{add_line_numbers(program_info['source'])}\n```")
                 contents.append("\n| Cost  | Taxon | Lines |")
