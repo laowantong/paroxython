@@ -1,12 +1,12 @@
 # Table of contents
 - [`2 programs remaining`](#2-programs-remaining)
-    - [`prg3.py` (9 lines)](#program-prg3py-learning-cost-256)
-    - [`prg2.py` (9 lines)](#program-prg2py-learning-cost-928)
+    - [`prg3.py` (9 lines)](#program-prg3py-learning-cost-025)
+    - [`prg2.py` (9 lines)](#program-prg2py-learning-cost-090625)
 # Recommended programs
 
 ## 2 programs remaining
 
-### Program `prg3.py` (learning cost 256)
+### Program `prg3.py` (learning cost 0.25)
 
 ```python
 1   1   O/N/P  X/K  Y/T
@@ -36,10 +36,10 @@
 | 0 | `X/S/M/L/V` | 2 |
 | 0 | `Y` | 6 |
 | 0 | `Y/E` | 8 |
-| 256 | `Y/T` | 1 |
+| 0.25 | `Y/T` | 1 |
 ---
 
-### Program `prg2.py` (learning cost 928)
+### Program `prg2.py` (learning cost 0.90625)
 
 ```python
 1   1   O/N/P  Y/T/Q  Y
@@ -58,16 +58,16 @@
 | 0 | `O` | 2, 6 |
 | 0 | `O/C` | 7 |
 | 0 | `O/C/H/B` | 3 |
-| 32 | `O/C/H/B/I` | 9 |
+| 0.03125 | `O/C/H/B/I` | 9 |
 | 0 | `O/N/P` | 1 |
-| 256 | `X/G` | 8 |
+| 0.25 | `X/G` | 8 |
 | 0 | `X/S/M` | 6 |
 | 0 | `X/S/M/L/R` | 7 |
 | 0 | `X/S/M/L/R/D` | 2, 3, 9 |
 | 0 | `X/S/M/L/V` | 8-9, 9 |
 | 0 | `Y` | 1 |
-| 256 | `Y/T` | 7 |
-| 384 | `Y/T/Q` | 1, 9 |
+| 0.25 | `Y/T` | 7 |
+| 0.375 | `Y/T/Q` | 1, 9 |
 ---
 
 # Summary

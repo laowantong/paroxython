@@ -81,7 +81,7 @@ class Recommendations:
 
         # Group resulting programs by cost
 
-        toc_data: Dict[int, ProgramNames] = defaultdict(list)
+        toc_data: Dict[float, ProgramNames] = defaultdict(list)
         for (cost, program) in self.assessed_programs:
             toc_data[cost].append(program)
 
@@ -117,9 +117,9 @@ class Recommendations:
                 contents.append("\n| Cost  | Taxon | Lines |")
                 contents.append("|" + "----|" * 3)
                 for (taxon_name, spans) in sorted(program_info["taxons"].items()):
-                    cost = self.taxon_cost(taxon_name)
+                    taxon_cost = self.taxon_cost(taxon_name)
                     s = spans_to_html(", ".join(str(Span(list(span))) for span in spans))
-                    contents.append(f"| {cost} | `{taxon_name}` | {s} |")
+                    contents.append(f"| {taxon_cost} | `{taxon_name}` | {s} |")
                 contents.append("---")
 
         def programs_to_html(description: str, programs: ProgramNames) -> str:

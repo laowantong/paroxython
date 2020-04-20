@@ -4,14 +4,14 @@ from user_types import TaxonName, TaxonNameSet, ProgramTaxonNames, AssessedProgr
 
 
 @lru_cache(maxsize=None)
-def depths_to_cost_zeno(start: int, stop: int) -> int:
+def depths_to_cost_zeno(start: int, stop: int) -> float:
     """Sum the slice [start : stop] of the infinite series [1/2 + 1/4 + 1/8 + ...]."""
-    return int(1024 * sum(2 ** ~depth for depth in range(start, stop)))
+    return sum(2 ** ~depth for depth in range(start, stop))
 
 
 @lru_cache(maxsize=None)  # NB: memoization needed for consistency with mypy's typing
-def depths_to_cost_length(start: int, stop: int) -> int:
-    return (stop - start) * 1000
+def depths_to_cost_length(start: int, stop: int) -> float:
+    return float(stop - start)
 
 
 class LearningCostAssessor:
@@ -29,7 +29,7 @@ class LearningCostAssessor:
         self.taxon_cost.cache_clear()
 
     @lru_cache(maxsize=None)
-    def taxon_cost(self, taxon: TaxonName) -> int:
+    def taxon_cost(self, taxon: TaxonName) -> float:
         """Evaluate the learning cost of a given taxon name."""
         (start, stop) = (0, 0)
         if taxon not in self.imparted_knowledge:

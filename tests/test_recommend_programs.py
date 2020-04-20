@@ -57,18 +57,18 @@ def test_recommend_program(capsys):
     print(costs)
     assert costs == {
         "O/N/P": 0,
-        "Y/T/Q": 384,
+        "Y/T/Q": 0.375,
         "Y": 0,
         "X/S/M/L/R/D": 0,
         "O": 0,
         "O/C/H/B": 0,
         "X/S/M": 0,
         "X/S/M/L/R": 0,
-        "Y/T": 256,
+        "Y/T": 0.25,
         "O/C": 0,
-        "X/G": 256,
+        "X/G": 0.25,
         "X/S/M/L/V": 0,
-        "O/C/H/B/I": 32,
+        "O/C/H/B/I": 0.03125,
     }
     text = rec.get_markdown(toc_group_limit=1)  # for coverage testing
     text = rec.get_markdown(span_column_width=10)

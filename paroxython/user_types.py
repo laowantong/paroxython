@@ -87,7 +87,7 @@ class JsonDatabase(TypedDict):
 # Recommendations
 
 ProgramTaxonNames = Dict[ProgramName, TaxonNames]
-AssessedPrograms = List[Tuple[int, ProgramName]]
+AssessedPrograms = List[Tuple[float, ProgramName]]
 
 # Pipeline dictionary
 #
