@@ -1,6 +1,7 @@
 from collections import defaultdict
-from unicodedata import normalize
 from textwrap import wrap
+from typing import Callable, Optional
+from unicodedata import normalize
 
 import regex  # type: ignore
 
@@ -35,18 +36,23 @@ def add_line_numbers(source: Source) -> str:
     return "\n".join(f"{n: <4}{line}" for (n, line) in enumerate(source.split("\n"), 1))
 
 
-DETAILS_MARKER_WIDTH = 3
+def enumeration_to_txt_factory(
+    width: int = 20,
+    default_string: str = "",
+    sep: str = "<br>",
+    template: str = "<details><summary>{summary}</summary>{details}</details>",
+    initial_indent: str = "   ",  # take into account the details marker
+) -> Callable[[str], str]:
+    """Return a function formatting a enumeration string on a given column width."""
 
-
-def enumeration_to_html_factory(width=20, default_string=""):
-    def enumeration_to_html(s):
+    def enumeration_to_txt(s: str) -> str:
         if not s:
             return default_string
         if len(s) <= width:
             return s
-        lines = wrap(s, width, initial_indent=" " * DETAILS_MARKER_WIDTH)
-        summary = lines[0][DETAILS_MARKER_WIDTH:]
-        details = "<br>".join(lines[1:])
-        return f"<details><summary>{summary}</summary>{details}</details>"
+        lines = wrap(s, width, initial_indent=initial_indent)
+        summary = lines[0][len(initial_indent) :]
+        details = sep.join(lines[1:])
+        return template.format(summary=summary, details=details)
 
-    return enumeration_to_html
+    return enumeration_to_txt

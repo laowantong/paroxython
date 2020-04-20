@@ -7,7 +7,7 @@ from typing import Dict, List
 
 from assess_learning_costs import LearningCostAssessor
 from filter_programs import ProgramFilter
-from goodies import add_line_numbers, title_to_slug_factory, enumeration_to_html_factory
+from goodies import add_line_numbers, title_to_slug_factory, enumeration_to_txt_factory
 from span import Span
 from user_types import Pipeline, ProgramNames
 
@@ -77,7 +77,7 @@ class Recommendations:
         output."""
 
         title_to_slug = title_to_slug_factory()
-        spans_to_html = enumeration_to_html_factory(span_column_width, "_imported_")
+        spans_to_html = enumeration_to_txt_factory(span_column_width, "_imported_")
 
         # Group resulting programs by cost
 

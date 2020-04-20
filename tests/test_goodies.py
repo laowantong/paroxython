@@ -1,7 +1,7 @@
 import pytest
 
 import context
-from paroxython.goodies import title_to_slug_factory, add_line_numbers, enumeration_to_html_factory
+from paroxython.goodies import title_to_slug_factory, add_line_numbers, enumeration_to_txt_factory
 
 
 def test_non_ascii_title_to_slug_factory():
@@ -53,14 +53,14 @@ def test_duplicate_title_to_slug_factory():
         assert title_to_slug(title, deduplicate=True) == slug
 
 
-def test_enumeration_to_html():
-    enumeration_to_html = enumeration_to_html_factory()
-    assert enumeration_to_html("") == ""
-    enumeration_to_html = enumeration_to_html_factory(30)
-    assert enumeration_to_html("1, 2, 3, 4, 5-6, 7, 8, 9") == "1, 2, 3, 4, 5-6, 7, 8, 9"
-    enumeration_to_html = enumeration_to_html_factory(7)
-    print(enumeration_to_html("1, 2, 3, 4, 5-6, 7, 8, 9"))
+def test_enumeration_to_txt():
+    enumeration_to_txt = enumeration_to_txt_factory()
+    assert enumeration_to_txt("") == ""
+    enumeration_to_txt = enumeration_to_txt_factory(30)
+    assert enumeration_to_txt("1, 2, 3, 4, 5-6, 7, 8, 9") == "1, 2, 3, 4, 5-6, 7, 8, 9"
+    enumeration_to_txt = enumeration_to_txt_factory(7)
+    print(enumeration_to_txt("1, 2, 3, 4, 5-6, 7, 8, 9"))
     assert (
-        enumeration_to_html("1, 2, 3, 4, 5-6, 7, 8, 9")
+        enumeration_to_txt("1, 2, 3, 4, 5-6, 7, 8, 9")
         == "<details><summary>1,</summary>2, 3,<br>4, 5-6,<br>7, 8, 9</details>"
     )
