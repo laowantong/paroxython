@@ -73,9 +73,9 @@
         "while": [[2,7]]
       },
       "taxons": {
-        "control/conditional": [[4,7]],
-        "control/conditional/else": [[7,7]],
-        "control/loop/while": [[2,7]],
+        "flow/conditional": [[4,7]],
+        "flow/conditional/else": [[7,7]],
+        "flow/loop/while": [[2,7]],
         "io/standard/print": [[3,3],[8,8]],
         "operator/arithmetic/addition": [[7,7]],
         "operator/arithmetic/modulo": [[4,4]],
@@ -137,10 +137,10 @@
       },
       "taxons": {
         "call/function/builtin/range": [[2,2]],
-        "control/conditional": [[3,10],[5,10],[7,10]],
-        "control/conditional/else": [[10,10]],
-        "control/conditional/else/if": [[6,6],[8,8]],
-        "control/loop/for/arithmetic/start": [[2,10]],
+        "flow/conditional": [[3,10],[5,10],[7,10]],
+        "flow/conditional/else": [[10,10]],
+        "flow/conditional/else/if": [[6,6],[8,8]],
+        "flow/loop/for/arithmetic/start": [[2,10]],
         "io/standard/print": [[4,4],[6,6],[8,8],[10,10]],
         "library/personal": [[1,1]],
         "operator/arithmetic/modulo": [[3,3],[5,5],[7,7]],
@@ -465,15 +465,15 @@
       "assignment.py",
       "collatz_print.py"
     ],
-    "control/conditional": [
+    "flow/conditional": [
       "collatz_print.py",
       "fizzbuzz.py"
     ],
-    "control/conditional/else": [
+    "flow/conditional/else": [
       "collatz_print.py",
       "fizzbuzz.py"
     ],
-    "control/loop/while": [
+    "flow/loop/while": [
       "collatz_print.py"
     ],
     "io/standard/print": [
@@ -526,10 +526,10 @@
     "call/function/builtin/range": [
       "fizzbuzz.py"
     ],
-    "control/conditional/else/if": [
+    "flow/conditional/else/if": [
       "fizzbuzz.py"
     ],
-    "control/loop/for/arithmetic/start": [
+    "flow/loop/for/arithmetic/start": [
       "fizzbuzz.py"
     ],
     "library/personal": [

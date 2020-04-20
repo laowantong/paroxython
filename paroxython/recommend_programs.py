@@ -12,6 +12,7 @@ from goodies import (
     title_to_slug_factory,
     enumeration_to_txt_factory,
     cost_interval,
+    progress_printer,
 )
 from span import Span
 from user_types import Pipeline, ProgramNames, AssessedPrograms, Tuple
@@ -25,7 +26,7 @@ class Recommendations:
 
         # get data from the pipeline
         pipeline: Pipeline = literal_eval(pipeline_path.read_text())
-        self.processes = pipeline["processes"]
+        self.commands = pipeline["commands"]
         self.output_path = self.base_path / pipeline["output_path"]
         db = json.loads(Path(self.base_path / pipeline["input_path"]).read_text())
 
@@ -44,19 +45,19 @@ class Recommendations:
         self.taxon_cost = self.assess_costs.taxon_cost
 
     def run_pipeline(self) -> None:
-        """Evolve recommended programs, imparted knowledge and log accross pipeline processes."""
+        """Evolve recommended programs, imparted knowledge and log accross pipeline commands."""
 
         current = set(self.programs)
-        print(len(current))
+        print(f"Processing {len(self.commands)} commands on {len(current)} programs.")
 
-        # Execute sequentially all the processes of the pipeline
-        for process in self.processes:
+        # Execute sequentially all the commands of the pipeline
+        for command in self.commands:
 
-            # The names or patterns fed to a process can either be a list of strings...
-            data = process["source"]
+            # The names or patterns fed to a command can either be a list of strings...
+            data = command["source"]
             if not isinstance(data, list):  # ... or a shell command printing them on stdout
                 data = subprocess.run(
-                    str(process["source"]).format(base_path=self.base_path),  # str() needed by mypy
+                    str(command["source"]).format(base_path=self.base_path),  # str() needed by mypy
                     capture_output=True,
                     encoding="utf-8",
                     shell=True,
@@ -64,23 +65,24 @@ class Recommendations:
                 ).stdout.split("\n")
 
             # If needed, replace the resulting strings by the matched names of programs or taxons
-            if process["name_or_pattern"] == "pattern":
-                data = self.method("patterns_to_{programs_or_taxons}".format(**process), data)
+            if command["name_or_pattern"] == "pattern":
+                data = self.method("patterns_to_{programs_or_taxons}".format(**command), data)
 
             # Apply to them a method whose name depends on both the operation and the name category
-            self.method("{operation}_{programs_or_taxons}".format(**process), set(data))
+            self.method("{operation}_{programs_or_taxons}".format(**command), set(data))
 
             # Update the statistics of the filter state for the last operation
             (previous, current) = (current, set(self.selected_programs))
-            process["filtered_out"] = sorted(previous - current)
-            print(len(current))
+            command["filtered_out"] = sorted(previous - current)
+            action = "{operation}/{programs_or_taxons}/{name_or_pattern}".format(**command)
+            print(f"  {len(current)} programs remaining after executing {action}.")
 
         self.assessed_programs = self.assess_costs(self.selected_programs)
 
     def get_markdown(self, span_column_width=30) -> str:
-        """Reiterate on the processes, now populated by the results, and output them."""
+        """Reiterate on the commands, now populated by the results, and output them."""
 
-        # Define some helper functions
+        # Define some helper functions.
 
         title_to_slug = title_to_slug_factory()
         spans_to_html = enumeration_to_txt_factory(span_column_width, "_imported_")
@@ -95,7 +97,7 @@ class Recommendations:
         for costs_and_program_names in toc_data.values():
             costs_and_program_names.sort(key=by_cost_and_sloc)
 
-        # Accumulate simultaneously the TOC and the contents
+        # Accumulate simultaneously the TOC and the contents.
 
         toc: List[str] = ["# Table of contents"]
         contents: List[str] = [f"# Recommended programs"]
@@ -138,14 +140,14 @@ class Recommendations:
         remainder = len(self.programs)
         summary: List[str] = [f"\n# Summary"]
         summary.append(programs_to_html(f"{remainder} initially", list(self.programs)))
-        for process in self.processes:
-            action = "{operation}/{programs_or_taxons}/{name_or_pattern}".format(**process)
-            removed = len(process["filtered_out"])
+        for command in self.commands:
+            action = "{operation}/{programs_or_taxons}/{name_or_pattern}".format(**command)
+            removed = len(command["filtered_out"])
             remainder -= removed
             summary.append(
                 programs_to_html(
                     f"{remainder} remaining after {action} has filtered out {removed} programs",
-                    process["filtered_out"],
+                    command["filtered_out"],
                 )
             )
 

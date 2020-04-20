@@ -47,7 +47,7 @@ def test_recommend_program(capsys):
             "Y/E",
         ],
     }
-    assert [p["filtered_out"] for p in rec.processes] == [
+    assert [p["filtered_out"] for p in rec.commands] == [
         ["prg8.py"],
         ["prg7.py", "prg9.py"],
         ["prg4.py", "prg5.py", "prg6.py"],

@@ -99,17 +99,17 @@ AssessedPrograms = List[Tuple[float, ProgramName]]
 # - trailing commas;
 # - comments!
 
-class Process(TypedDict):
+class Command(TypedDict):
     operation: Literal["impart", "exclude", "include"]
     programs_or_taxons: Literal["programs", "taxons"]
     name_or_pattern: Literal["name", "pattern"]
     source: Union[str, List[str]] # not source-code, but source of the data
-    filtered_out: ProgramNames # to be populated by the execution of the process
+    filtered_out: ProgramNames # to be populated by the execution of the command
 
 class Pipeline(TypedDict):
     input_path: str
     output_path: str
     cost_assessment_strategy: str
-    processes: List[Process]
+    commands: List[Command]
 
 # fmt:on
