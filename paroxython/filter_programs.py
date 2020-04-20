@@ -119,8 +119,7 @@ class ProgramFilter:
             segments = taxon.split("/")
             for i in range(len(segments)):
                 prefix = "/".join(segments[: i + 1])
-                if prefix in self.db_taxons:
-                    self.imparted_knowledge.add(TaxonName(prefix))
+                self.imparted_knowledge.add(TaxonName(prefix))
 
     def exclude_taxons(self, taxons: TaxonNames) -> None:
         """Deselect the programs featuring (directly or not) at least one given taxon."""

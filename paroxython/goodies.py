@@ -1,7 +1,6 @@
 from collections import defaultdict
-import sys
 from textwrap import wrap
-from typing import Callable, Sequence, Iterator
+from typing import Callable, Iterator, Sequence
 from unicodedata import normalize
 
 import regex  # type: ignore

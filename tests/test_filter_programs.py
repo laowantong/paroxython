@@ -60,10 +60,20 @@ def test_patterns_to_taxons():
 
 def test_impart_taxons():
     dbf = ProgramFilter(db)
-    taxons = ["O/J", "X/S/M/L", "non_existing_taxon"]
+    taxons = ["O/J", "X/S/M/L", "non/existing/taxon"]
     dbf.impart_taxons(taxons)
     print(sorted(dbf.imparted_knowledge))
-    assert dbf.imparted_knowledge == {"O", "O/J", "X", "X/S", "X/S/M", "X/S/M/L"}
+    assert dbf.imparted_knowledge == {
+        "O",
+        "O/J",
+        "X",
+        "X/S",
+        "X/S/M",
+        "X/S/M/L",
+        "non",
+        "non/existing",
+        "non/existing/taxon",
+    }
 
 
 def test_exclude_taxons():
