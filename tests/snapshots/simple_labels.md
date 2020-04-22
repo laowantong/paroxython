@@ -165,7 +165,9 @@
 - generator
 - get_valid_input
 - higher-order function
+- if_guard
 - if_test_atom
+- if_without_else
 - import
 - import_module
 - import_name

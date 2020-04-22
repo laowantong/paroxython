@@ -100,6 +100,8 @@
       - [Feature `if_then_branch`](#feature-if_then_branch)
       - [Feature `if_elif_branch`](#feature-if_elif_branch)
       - [Feature `if_else_branch`](#feature-if_else_branch)
+      - [Feature `if_without_else` (SQL)](#feature-if_without_else)
+      - [Feature `if_guard` (SQL)](#feature-if_guard)
       - [Feature `nested_if` (SQL)](#feature-nested_if)
   - [Iterations](#iterations)
     - [Iteration keywords](#iteration-keywords)
@@ -2830,6 +2832,7 @@ In Python, the term "function" encompasses any type of subroutine, be it a metho
 [⬇️ feature `function_returning_something`](#feature-function_returning_something)  
 [⬇️ feature `generator`](#feature-generator)  
 [⬇️ feature `higher-order function`](#feature-higher-order-function)  
+[⬇️ feature `if_guard`](#feature-if_guard)  
 [⬇️ feature `method`](#feature-method)  
 [⬇️ feature `recursive_function`](#feature-recursive_function)  
 
@@ -2895,6 +2898,7 @@ Match `return` statements and, when the returned object is an [_atom_](#feature-
 [⬇️ feature `for_with_early_exit|while_with_early_exit`](#feature-for_with_early_exitwhile_with_early_exit)  
 [⬇️ feature `function_returning_something`](#feature-function_returning_something)  
 [⬇️ feature `get_valid_input`](#feature-get_valid_input)  
+[⬇️ feature `if_guard`](#feature-if_guard)  
 [⬇️ feature `universal_quantification|existential_quantification`](#feature-universal_quantificationexistential_quantification)  
 
 ##### Specification
@@ -3687,6 +3691,7 @@ Match an entire conditional (from the `if` clause to the last line of its body).
 [⬇️ feature `find_best_element`](#feature-find_best_element)  
 [⬇️ feature `find_first_element`](#feature-find_first_element)  
 [⬇️ feature `get_valid_input`](#feature-get_valid_input)  
+[⬇️ feature `if_without_else`](#feature-if_without_else)  
 [⬇️ feature `nested_if`](#feature-nested_if)  
 [⬇️ feature `universal_quantification|existential_quantification`](#feature-universal_quantificationexistential_quantification)  
 
@@ -3791,6 +3796,7 @@ Match the body of the branch “`then`” of an `if` statement.
 
 ##### Derivations
 
+[⬇️ feature `if_without_else`](#feature-if_without_else)  
 [⬇️ feature `nested_if`](#feature-nested_if)  
 
 ##### Specification
@@ -3957,6 +3963,120 @@ Match the body of the possible `else` branch of an `if` statement.
 | Label | Lines |
 |:--|:--|
 | `if_else_branch` | 8-12, 11 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `if_without_else`
+
+##### Derivations
+
+[⬆️ feature `if`](#feature-if)  
+[⬆️ feature `if_then_branch`](#feature-if_then_branch)  
+[⬇️ feature `if_guard`](#feature-if_guard)  
+
+##### Specification
+
+```sql
+SELECT "if_without_else",
+       "",
+       t_if.span,
+       t_if.path
+FROM t_if
+JOIN t_if_then_branch branch ON (t_if.span_start + 1 == branch.span_start
+                                 AND t_if.span_end == branch.span_end)
+```
+
+##### Example
+
+```python
+1   if condition_1:         # no match ("else" on line 5)
+2       if condition_2:     # match
+3           if condition_3: # |        match
+4               pass        # |        |
+5   else:
+6       if condition_4:     # match
+7           pass            # |
+8       if condition_5:     # match
+9           pass            # |
+10
+11  if condition_6:         # no match ("elif" on line 13)
+12      pass
+13  elif condition_7:
+14      pass
+15
+16  if condition_8:         # match
+17      for foo in bar:     # |
+18          if condition_9: # |        match
+19              pass        # |        |
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `if_without_else` | 2-4, 3-4, 6-7, 8-9, 16-19, 18-19 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `if_guard`
+
+A guard clause is a conditional which provides an early exit from a subroutine.
+
+The heuristic ensures that:
+
+1. it is at the first level of the subroutine;
+2. it does not extend to the end of the subroutine;
+3. it ends by a `return` clause that is not followed by an `else` or an `elif` branch.
+
+Condition 2 is probably too weak in numerous situations, but in case of false positive, it is always possible for the programmer to make condition 3 fail by adding an `else`clause. As a general rule, this style may be recommended to highlight the difference between a guard and a simple returning conditional in the main treatment.
+
+##### Derivations
+
+[⬆️ feature `function`](#feature-function)  
+[⬆️ feature `if_without_else`](#feature-if_without_else)  
+[⬆️ feature `return`](#feature-return)  
+
+##### Specification
+
+```sql
+SELECT "if_guard",
+       "",
+       guard.span,
+       guard.path
+FROM t_if_without_else guard
+JOIN t_function f ON (guard.path GLOB f.path || "?-?-"
+                      AND f.span_start < guard.span_start
+                      AND guard.span_end < f.span_end)
+JOIN t_return ret ON (guard.span_end == ret.span_end)
+```
+
+##### Example
+
+```python
+1   def foo():
+2       if condition_1:     # match
+3           return
+4       if condition_2:     # match
+5           return
+6       pass # at least one line
+7   def foo():
+8       if condition_1:     # no match, since it is followed by an elif branch
+9           return
+10      elif condition_2:   # no match, since it is not on the first level
+11          return
+12      pass # at least one line
+13  def foo():
+14      if condition_1:     # match
+15          return
+16      if condition_2:     # no match, since this is the last line of the function
+17          return
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `if_guard` | 2-3, 4-5, 14-15 |
 
 --------------------------------------------------------------------------------
 
