@@ -1,5 +1,5 @@
 from datetime import datetime
-from itertools import chain, permutations, product
+from itertools import permutations, product
 from pathlib import Path
 
 result = [
@@ -23,13 +23,12 @@ for (b1, b2, b3, b4) in sorted(set(permutations("xxyy", 4))):
 result.append("}")
 result.append(
     """
-# Translation of Allen's interval algebra 13 relations into keys of compare_spans dictionary.
-# All the inequalities are regarded as inclusive.
+# Translate the 13 Allen's interval algebra relations, with all inequalities regarded as inclusive.
 #
 # Cf. Fig. 4 of Allen, James F. (26 Nov. 1983). "Maintaining knowledge about temporal intervals".
 # Communications of the ACM. 26 (11): 832–843. doi:10.1145/182.358434
 # http://cse.unl.edu/~choueiry/Documents/Allen-CACM1983.pdf
-#
+
 compare_spans.update(
     {  #                                              Allen's symbols
         "before": compare_spans["x≤x≤y≤y"],  #             <
@@ -49,6 +48,7 @@ compare_spans.update(
 )
 
 # Add some extra synonyms.
+
 compare_spans.update(
     {
         "inside": compare_spans["during"],

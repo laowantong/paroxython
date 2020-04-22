@@ -4,7 +4,7 @@ from pathlib import Path
 import pytest
 
 import context
-from paroxython.assess_learning_costs import (
+from paroxython.assess_costs import (
     LearningCostAssessor,
     depths_to_cost_length,
     depths_to_cost_zeno,
