@@ -68,3 +68,7 @@ def test_get_sorted_recommandations():
         (4.7421875, "prg6.py"),
         (4.90625, "prg9.py"),
     ]
+
+
+if __name__ == "__main__":
+    pytest.main(["-qq", __import__("sys").argv[0]])

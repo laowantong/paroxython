@@ -44,3 +44,7 @@ def test_list_labelled_sources(capsys):
                     source = " " * len(source)
             result.append("")
     make_snapshot(Path("tests/snapshots/simple_labelled_sources.py"), "\n".join(result), capsys)
+
+
+if __name__ == "__main__":
+    pytest.main(["-qq", __import__("sys").argv[0]])

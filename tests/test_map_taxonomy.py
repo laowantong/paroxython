@@ -135,3 +135,7 @@ def test_snapshot_simple_taxons(capsys):
         acc[str(path)] = {name: " ".join(map(str, sorted(set(spans)))) for (name, spans) in taxons}
     result = json.dumps(acc, indent=2)
     make_snapshot(Path("tests/snapshots/simple_taxons.json"), result, capsys)
+
+
+if __name__ == "__main__":
+    pytest.main(["-qq", __import__("sys").argv[0]])

@@ -23,3 +23,7 @@ def test_list_programs():
     program = next(result)
     assert program.name == "is_even.py"
     assert program.source.__contains__("def is_even(n):\n    return n % 2 == 0")
+
+
+if __name__ == "__main__":
+    pytest.main(["-qq", __import__("sys").argv[0]])

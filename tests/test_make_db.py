@@ -16,3 +16,7 @@ def test_snapshot_simple_db(capsys):
 def test_sqlite_simple_db(capsys):
     db = Database(Path("tests/data/simple"))
     db.write_sqlite(Path("tests/snapshots/simple_db.sqlite"))
+
+
+if __name__ == "__main__":
+    pytest.main(["-qq", __import__("sys").argv[0]])

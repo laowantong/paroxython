@@ -171,3 +171,7 @@ def test_opening_without_closing():
     numbered_hints = [(2, "hint...")]
     with pytest.raises(ValueError, match=r"Unmatched opening hints for addition: .+'hint'.+2"):
         wrapper(numbered_hints)
+
+
+if __name__ == "__main__":
+    pytest.main(["-qq", __import__("sys").argv[0]])

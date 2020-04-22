@@ -73,3 +73,7 @@ def test_recommend_program(capsys):
     text = rec.get_markdown(span_column_width=10)
     make_snapshot(Path("tests/data/dummy/recommendations.md"), text, capsys)
     rec.dump(text)  # for coverage testing
+
+
+if __name__ == "__main__":
+    pytest.main(["-qq", __import__("sys").argv[0]])

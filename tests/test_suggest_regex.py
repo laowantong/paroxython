@@ -119,3 +119,7 @@ def test_suggest_regex(title, original, expected):
     result = suggestion(original)
     print(result)
     assert result == expected
+
+
+if __name__ == "__main__":
+    pytest.main(["-qq", __import__("sys").argv[0]])

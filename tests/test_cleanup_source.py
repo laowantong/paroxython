@@ -154,3 +154,7 @@ def test_strip_docs(title, original, expected):
     result = cleanup(original)
     print(result)
     assert result == expected
+
+
+if __name__ == "__main__":
+    pytest.main(["-qq", __import__("sys").argv[0]])

@@ -86,3 +86,7 @@ def test_label_presence(capsys):
     absent = "\n- ".join(sorted(all_names - present_names))
     text = f"# Present labels\n\n- {present}\n\n# Absent labels\n\n- {absent}\n"
     make_snapshot(Path("tests/snapshots/simple_labels.md"), text, capsys)
+
+
+if __name__ == "__main__":
+    pytest.main(["-qq", __import__("sys").argv[0]])

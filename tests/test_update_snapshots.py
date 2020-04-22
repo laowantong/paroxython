@@ -23,3 +23,7 @@ def test_update_snapshots(capsys):
             output_path = Path("tests/snapshots", "-".join(path.parts[-2:]) + ".py")
         acc = [result for result in list_labelled_sources(path)]
         make_snapshot(output_path, "\n".join(acc), capsys)
+
+
+if __name__ == "__main__":
+    pytest.main(["-qq", __import__("sys").argv[0]])

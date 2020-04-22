@@ -64,3 +64,7 @@ def test_enumeration_to_txt():
         enumeration_to_txt("1, 2, 3, 4, 5-6, 7, 8, 9")
         == "<details><summary>1,</summary>2, 3,<br>4, 5-6,<br>7, 8, 9</details>"
     )
+
+
+if __name__ == "__main__":
+    pytest.main(["-qq", __import__("sys").argv[0]])
