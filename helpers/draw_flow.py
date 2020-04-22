@@ -34,6 +34,7 @@ Path(f"{base}.dot").write_text(
             "sqlite_queries -> recommend_programs  [style=invis]",
             '"*_db.sqlite" -> "*_pipe.py"  [style=invis]',
             'list_programs -> "*_db.json"  [style=invis]',
+            "compare_spans -> assess_learning_costs  [style=invis]",
         ]
         + [
             f"{imported_name} -> {name}"

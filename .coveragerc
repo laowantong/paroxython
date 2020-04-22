@@ -3,8 +3,10 @@ omit =
     helpers/context.py
     helpers/draw_flow.py
     helpers/make_dummy_db.py
+    helpers/make_compare_spans.py
     helpers/reformat_spec.py
     paroxython/make_snapshots.py
+    paroxython/compare_spans.py
     tests/*
 [report]
 exclude_lines =
