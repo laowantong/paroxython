@@ -9,13 +9,13 @@ from paroxython.list_labels import generate_labelled_sources
 
 def test_update_snapshots(capsys):
     # fmt: off
-    DIRECTORIES = [
+    directories = [
         "../Python/project_euler",
         "../Python/maths",
         "../Algo/programs",
     ]
     # fmt: on
-    for directory in DIRECTORIES:
+    for directory in directories:
         path = Path(directory)
         if (path / "__is_private_directory").exists():
             output_path = Path(path.parent, "snapshot_" + path.parts[-1] + ".py")

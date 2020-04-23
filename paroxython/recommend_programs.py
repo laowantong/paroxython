@@ -14,7 +14,7 @@ from goodies import (
     cost_interval,
 )
 from span import Span
-from user_types import Pipeline, ProgramNames, AssessedPrograms, Tuple
+from user_types import Pipeline, ProgramNames, AssessedPrograms
 
 
 class Recommendations:
@@ -55,17 +55,22 @@ class Recommendations:
             # The patterns fed to a command can either be a list of strings...
             data = command["source"]
             if not isinstance(data, list):  # ... or a shell command printing them on stdout
-                data = subprocess.run(
-                    str(command["source"]).format(base_path=self.base_path),  # str() needed by mypy
-                    capture_output=True,
-                    encoding="utf-8",
-                    shell=True,
-                    check=True,
-                ).stdout.split("\n")
+                data = (
+                    subprocess.run(
+                        str(command["source"]).format(
+                            base_path=self.base_path
+                        ),  # str() needed by mypy
+                        capture_output=True,
+                        encoding="utf-8",
+                        shell=True,
+                        check=True,
+                    )
+                    .stdout.strip()
+                    .split("\n")
+                )
 
             # If needed, replace the resulting strings by the matched names of programs or taxons
-            if command["name_or_pattern"] == "pattern":
-                data = self.method("patterns_to_{programs_or_taxons}".format(**command), data)
+            data = self.method("preprocess_{programs_or_taxons}".format(**command), data)
 
             # Apply to them a method whose name depends on both the operation and the name category
             self.method("{operation}_{programs_or_taxons}".format(**command), set(data))
@@ -73,7 +78,7 @@ class Recommendations:
             # Update the statistics of the filter state for the last operation
             (previous, current) = (current, set(self.selected_programs))
             command["filtered_out"] = sorted(previous - current)
-            action = "{operation}/{programs_or_taxons}/{name_or_pattern}".format(**command)
+            action = "{operation}/{programs_or_taxons}".format(**command)
             print(f"  {len(current)} programs remaining after executing {action}.")
 
         self.assessed_programs = self.assess_costs(self.selected_programs)
@@ -140,7 +145,7 @@ class Recommendations:
         summary: List[str] = [f"\n# Summary"]
         summary.append(programs_to_html(f"{remainder} initially", list(self.programs)))
         for command in self.commands:
-            action = "{operation}/{programs_or_taxons}/{name_or_pattern}".format(**command)
+            action = "{operation}/{programs_or_taxons}".format(**command)
             removed = len(command["filtered_out"])
             remainder -= removed
             summary.append(

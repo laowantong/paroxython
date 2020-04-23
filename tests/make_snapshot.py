@@ -1,5 +1,7 @@
 from pathlib import Path
 
+import pytest
+
 
 def make_snapshot(path: Path, result: str, capsys):
     expected = path.exists() and path.read_text()

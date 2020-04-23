@@ -71,6 +71,21 @@ def test_include_taxons():
     print(set(dbf.selected_programs.keys()))
     assert set(dbf.selected_programs.keys()) == {"is_even.py"}
 
+    # "test/equality" is inside "subroutine/function" in is_even.py and inside
+    # "subroutine/procedure" in collatz_print.py. Both will be included.
+    dbf = ProgramFilter(db)
+    taxons = dbf.preprocess_taxons([("inside", "test/equality", "subroutine/.*")])
+    print(taxons)
+    assert taxons == [
+        ("inside", "test/equality", "subroutine/argument/arg"),
+        ("inside", "test/equality", "subroutine/function"),
+        ("inside", "test/equality", "subroutine/predicate"),
+        ("inside", "test/equality", "subroutine/procedure"),
+    ]
+    dbf.include_taxons(taxons)
+    print(set(dbf.selected_programs.keys()))
+    assert set(dbf.selected_programs.keys()) == {"collatz_print.py", "is_even.py"}
+
     # "call/function/builtin/range" is not inside "flow/conditional" anywhere.
     dbf = ProgramFilter(db)
     dbf.include_taxons([("inside", "call/function/builtin/range", "flow/conditional")])

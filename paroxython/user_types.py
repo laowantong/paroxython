@@ -40,8 +40,6 @@ class Taxon(NamedTuple):
 Taxons = List[Taxon]
 TaxonsSpans = Dict[TaxonName, Bag[Span]]
 
-TaxonPatterns = List[str]
-
 
 # Programs
 
@@ -58,8 +56,6 @@ class Program(NamedTuple):
 
 Programs = List[Program]
 ProgramTaxons = Dict[ProgramName, Taxons]
-
-ProgramPatterns = List[str]
 
 # Serialization-ready types used for the JSON database
 
@@ -99,7 +95,6 @@ class JsonDatabase(TypedDict):
 class Command(TypedDict):
     operation: Literal["impart", "exclude", "include"]
     programs_or_taxons: Literal["programs", "taxons"]
-    name_or_pattern: Literal["name", "pattern"]
     source: Union[str, List[str]] # not source-code, but source of the data
     filtered_out: ProgramNames # to be populated by the execution of the command
 

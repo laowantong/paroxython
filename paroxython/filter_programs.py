@@ -1,5 +1,5 @@
-from collections import defaultdict
 from itertools import product
+from typing import Set
 
 import regex  # type: ignore
 
@@ -7,17 +7,16 @@ from compare_spans import compare_spans
 from user_types import (
     JsonDatabase,
     ProgramInfos,
+    ProgramName,
+    ProgramNames,
     ProgramNameSet,
-    ProgramPatterns,
     ProgramTaxonNames,
     ProgramToPrograms,
     TaxonInfos,
     TaxonName,
     TaxonNameOrTriple,
-    TaxonNames,
     TaxonNameSet,
     TaxonNamesOrTriples,
-    TaxonPatterns,
     TaxonTriple,
 )
 
@@ -107,9 +106,28 @@ class ProgramFilter:
 
     # Update the state of the filter by applying set operations with the given programs.
 
-    def patterns_to_programs(self, patterns: ProgramPatterns) -> ProgramNameSet:
+    def match_against_existing_programs(self, pattern: str) -> ProgramNameSet:
+        """Enumerate all the existing programs matching the given pattern."""
+        result: ProgramNameSet = set()
+        fullmatch = regex.compile(pattern).fullmatch
+        no_match = True
+        for program_name in self.db_programs:
+            if fullmatch(program_name):
+                result.add(program_name)
+                no_match = False
+        if no_match:
+            print(f"Warning: the pattern '{pattern}' doesn't match any existing program.")
+        return result
+
+    def preprocess_programs(self, programs: ProgramNames) -> ProgramNames:
         """Return all the program names matching at least one of the given regex patterns."""
-        return set(filter(regex.compile("|".join(patterns)).match, self.db_programs))
+        result: Set[ProgramName] = set()
+        for program in programs:
+            if program in self.db_programs:
+                result.add(program)
+            else:
+                result.update(self.match_against_existing_programs(program))
+        return sorted(result)
 
     def impart_programs(self, programs: ProgramNameSet) -> None:
         """Deselect the programs found in the given ones.
@@ -143,9 +161,44 @@ class ProgramFilter:
 
     # Update the state of the filter by applying set operations with the given taxons.
 
-    def patterns_to_taxons(self, patterns: TaxonPatterns) -> TaxonNameSet:
-        """Return all the taxon names matching at least one of the given regex patterns."""
-        return set(filter(regex.compile("|".join(patterns)).match, self.db_taxons))
+    def match_against_existing_taxons(self, pattern: str) -> TaxonNameSet:
+        """Enumerate all the existing taxons matching the given pattern."""
+        result: TaxonNameSet = set()
+        fullmatch = regex.compile(pattern).fullmatch
+        no_match = True
+        for taxon_name in self.db_taxons:
+            if fullmatch(taxon_name):
+                result.add(taxon_name)
+                no_match = False
+        if no_match:
+            print(f"Warning: the pattern '{pattern}' doesn't match any existing taxon.")
+        return result
+
+    def preprocess_taxons(self, taxons: TaxonNamesOrTriples) -> TaxonNamesOrTriples:
+        """Parse the taxons and the triples and try to match them with existing taxon names."""
+        result: Set[TaxonNameOrTriple] = set()
+        for taxon in taxons:
+            if isinstance(taxon, str):
+                # The taxon is a name or a pattern.
+                if taxon in self.db_taxons:
+                    # If it is an existing name, keep it.
+                    result.add(taxon)
+                else:
+                    # Otherwise, process it as a pattern, and add all its matches.
+                    result.update(self.match_against_existing_taxons(taxon))
+            else:
+                # The taxon is a triple.
+                (predicate, name_1, name_2) = taxon
+                if name_1 in self.db_taxons and name_2 in self.db_taxons:
+                    # If both names are existing, keep the triple.
+                    result.add(taxon)
+                else:
+                    # Otherwise, process them as patterns, and add the product of their matches.
+                    taxons_1 = self.match_against_existing_taxons(name_1)
+                    taxons_2 = self.match_against_existing_taxons(name_2)
+                    for (name_1, name_2) in product(taxons_1, taxons_2):
+                        result.add(TaxonTriple(predicate, name_1, name_2))
+        return sorted(result)
 
     def impart_taxon_name(self, taxon: TaxonName) -> None:
         """Enrich the imparted knowledge with all the prefixes of the given taxon."""

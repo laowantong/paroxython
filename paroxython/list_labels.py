@@ -1,12 +1,12 @@
 from bisect import insort
 from collections import defaultdict
 from pathlib import Path
-from typing import Dict, List, Set, Iterator
+from typing import List, Set, Iterator
 
 from goodies import iterate_and_print_programs
 from list_programs import list_programs
 from parse_program import ProgramParser
-from user_types import Label, LabelsSpans, Program, ProgramName, Programs, Source, LabelName
+from user_types import Label, LabelsSpans, ProgramName, Programs, Source, LabelName
 
 
 def tweak_internal_import_labels(programs: Programs) -> None:

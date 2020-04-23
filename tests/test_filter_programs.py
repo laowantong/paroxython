@@ -39,12 +39,12 @@ def test_taxons_of_programs():
     assert taxons == prg8_taxons | prg9_taxons
 
 
-def test_patterns_to_taxons():
+def test_preprocess_taxons():
     dbf = ProgramFilter(db)
-    patterns = ["X/S/M.*", "O(?!/C).*", "non_matching_pattern"]
-    taxons = dbf.patterns_to_taxons(patterns)
+    names = ["X/S/M.*", "O(?!/C).*", "Y/E", "non_matching_pattern"]
+    taxons = dbf.preprocess_taxons(names)
     print(sorted(taxons))
-    assert taxons == {
+    assert taxons == [
         "O",
         "O/J",
         "O/N",
@@ -55,7 +55,25 @@ def test_patterns_to_taxons():
         "X/S/M/L/R/D",
         "X/S/M/L/R/D/A",
         "X/S/M/L/V",
-    }
+        "Y/E",
+    ]
+    names = [
+        ("never mind", "O/J", "Y/E"),
+        ("whatever", r"X/S/M/L/R/D.*", r"O/N.*"),
+        ("who cares", r"X/S/M/L/R.*", r"O/N"),
+    ]
+    taxons = dbf.preprocess_taxons(names)
+    print(sorted(taxons))
+    assert taxons == [
+        ("never mind", "O/J", "Y/E"),
+        ("whatever", "X/S/M/L/R/D", "O/N"),
+        ("whatever", "X/S/M/L/R/D", "O/N/P"),
+        ("whatever", "X/S/M/L/R/D/A", "O/N"),
+        ("whatever", "X/S/M/L/R/D/A", "O/N/P"),
+        ("who cares", "X/S/M/L/R", "O/N"),
+        ("who cares", "X/S/M/L/R/D", "O/N"),
+        ("who cares", "X/S/M/L/R/D/A", "O/N"),
+    ]
 
 
 def test_impart_taxons():
@@ -103,12 +121,11 @@ def test_include_taxons():
     }
 
 
-def test_patterns_to_programs():
+def test_preprocess_programs():
     dbf = ProgramFilter(db)
-    patterns = ["prg[1-3]", "prg[7-9]", "non_matching_pattern"]
-    programs = dbf.patterns_to_programs(patterns)
+    programs = dbf.preprocess_programs([r"prg[1-3]\.py", r"prg[7-9]\.py", "non_matching_pattern"])
     print(sorted(programs))
-    assert programs == {"prg1.py", "prg2.py", "prg3.py", "prg7.py", "prg8.py", "prg9.py"}
+    assert programs == ["prg1.py", "prg2.py", "prg3.py", "prg7.py", "prg8.py", "prg9.py"]
 
 
 def test_impart_programs():

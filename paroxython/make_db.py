@@ -15,7 +15,6 @@ from user_types import (
     LabelInfos,
     Labels,
     LabelsPoorSpans,
-    Program,
     ProgramInfos,
     ProgramName,
     ProgramNameSet,
