@@ -76,7 +76,7 @@ class ProgramFilter:
             s = regex.sub(r"[^xy<=≤]", "", s)
             if s != predicate:
                 print(f"Warning: predicate '{predicate}' normalized into '{s}'.")
-            if s not in compare_spans:
+            if s not in compare_spans:  # pragma: no cover
                 raise ValueError(f"Malformed predicate '{predicate}' in the pipeline.")
         return TaxonTriple(predicate=s, name_1=name_1, name_2=name_2)
 
