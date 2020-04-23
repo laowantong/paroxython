@@ -23,6 +23,7 @@
   - [Boolean expressions](#boolean-expressions)
       - [Feature `boolean_operator`](#feature-boolean_operator)
       - [Feature `comparison_operator`](#feature-comparison_operator)
+      - [Feature `yoda_comparison` (SQL)](#feature-yoda_comparison)
       - [Feature `chained_comparison`](#feature-chained_comparison)
       - [Feature `chained_equalities|chained_inequalities` (SQL)](#feature-chained_equalitieschained_inequalities)
       - [Feature `divisibility_test`](#feature-divisibility_test)
@@ -185,6 +186,7 @@ Further categorization of numeric literals does not require to construct a sophi
 
 [⬇️ feature `concatenation_operator|replication_operator`](#feature-concatenation_operatorreplication_operator)  
 [⬇️ feature `string_formatting_operator`](#feature-string_formatting_operator)  
+[⬇️ feature `yoda_comparison`](#feature-yoda_comparison)  
 
 ##### Specification
 
@@ -1036,6 +1038,7 @@ _Remark._ `Not` is not a boolean operator in Python. To match it, use [feature `
 ##### Derivations
 
 [⬇️ feature `chained_equalities|chained_inequalities`](#feature-chained_equalitieschained_inequalities)  
+[⬇️ feature `yoda_comparison`](#feature-yoda_comparison)  
 
 ##### Specification
 
@@ -1060,6 +1063,48 @@ _Remark._ `Not` is not a boolean operator in Python. To match it, use [feature `
 |:--|:--|
 | `comparison_operator:Eq` | 1, 2, 2 |
 | `comparison_operator:In` | 4 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `yoda_comparison`
+
+The so-called Yoda style puts the literal operand on the left side of a comparison. Although generally not recommended, this order is sometimes natural or even mandatory for certain non-commutative operators (see examples below).
+
+##### Derivations
+
+[⬆️ feature `comparison_operator`](#feature-comparison_operator)  
+[⬆️ feature `literal`](#feature-literal)  
+
+##### Specification
+
+```sql
+SELECT "yoda_comparison",
+       cmp.name_suffix,
+       cmp.span,
+       cmp.path
+FROM t_comparison_operator cmp
+JOIN t_literal lit ON (cmp.span = lit.span
+                       AND cmp.path GLOB "*-2-1-"
+                       AND lit.path GLOB "*-0-")
+WHERE substr(cmp.path, 1, length(cmp.path)-4) == substr(lit.path, 1, length(lit.path)-2)
+```
+
+##### Example
+
+```python
+1   assert 0 == x
+2   assert x == 0 # no match
+3   if "A" <= symbol <= "Z" or "needle" not in haystack:
+4       pass
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `yoda_comparison:Eq` | 1 |
+| `yoda_comparison:NotIn` | 3 |
+| `yoda_comparison:LtE` | 3 |
 
 --------------------------------------------------------------------------------
 
