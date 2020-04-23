@@ -2,7 +2,6 @@
   "programs": {
     "assignment.py": {
       "timestamp": "ignored",
-      "links": [],
       "source": "a = b",
       "labels": {
         "assignment": [[1,1]],
@@ -16,7 +15,6 @@
     },
     "collatz_print.py": {
       "timestamp": "ignored",
-      "links": [],
       "source": "def print_collatz(n):\n    while n != 1:\n        print(n)\n        if n % 2 == 0:\n            n = n // 2\n        else:\n            n = 3 * n + 1\n    print(n)",
       "labels": {
         "added_block_label": [[1,8]],
@@ -93,9 +91,6 @@
     },
     "fizzbuzz.py": {
       "timestamp": "ignored",
-      "links": [
-        "collatz_print.py"
-      ],
       "source": "import collatz_print\nfor i in range(1, 101):\n    if i % 15 == 0:\n        print(\"FizzBuzz\")\n    elif i % 3 == 0:\n        print(\"Fizz\")\n    elif i % 5 == 0:\n        print(\"Buzz\")\n    else:\n        print(i)",
       "labels": {
         "binary_operator:Mod": [[3,3],[5,5],[7,7]],
@@ -152,10 +147,6 @@
     },
     "is_even.py": {
       "timestamp": "ignored",
-      "links": [
-        "collatz_print.py",
-        "fizzbuzz.py"
-      ],
       "source": "import fizzbuzz\ndef is_even(n):\n    return n % 2 == 0",
       "labels": {
         "binary_operator:Mod": [[3,3]],
@@ -186,18 +177,6 @@
     }
   },
   "labels": {
-    "assignment": [
-      "assignment.py"
-    ],
-    "assignment_lhs_identifier:a": [
-      "assignment.py"
-    ],
-    "assignment_rhs_atom:b": [
-      "assignment.py"
-    ],
-    "single_assignment:a": [
-      "assignment.py"
-    ],
     "added_block_label": [
       "collatz_print.py"
     ],
@@ -207,11 +186,17 @@
     "addition_operator": [
       "collatz_print.py"
     ],
+    "assignment": [
+      "assignment.py"
+    ],
     "assignment:Add": [
       "collatz_print.py"
     ],
     "assignment:FloorDiv": [
       "collatz_print.py"
+    ],
+    "assignment_lhs_identifier:a": [
+      "assignment.py"
     ],
     "assignment_lhs_identifier:n": [
       "collatz_print.py"
@@ -224,6 +209,9 @@
     ],
     "assignment_rhs_atom:3": [
       "collatz_print.py"
+    ],
+    "assignment_rhs_atom:b": [
+      "assignment.py"
     ],
     "assignment_rhs_atom:n": [
       "collatz_print.py"
@@ -239,6 +227,18 @@
     "binary_operator:Mult": [
       "collatz_print.py"
     ],
+    "call_argument:": [
+      "fizzbuzz.py"
+    ],
+    "call_argument:1": [
+      "fizzbuzz.py"
+    ],
+    "call_argument:101": [
+      "fizzbuzz.py"
+    ],
+    "call_argument:i": [
+      "fizzbuzz.py"
+    ],
     "call_argument:n": [
       "collatz_print.py"
     ],
@@ -250,8 +250,26 @@
     "comparison_operator:NotEq": [
       "collatz_print.py"
     ],
+    "divisibility_test:15": [
+      "fizzbuzz.py"
+    ],
     "divisibility_test:2": [
       "collatz_print.py",
+      "is_even.py"
+    ],
+    "divisibility_test:3": [
+      "fizzbuzz.py"
+    ],
+    "divisibility_test:5": [
+      "fizzbuzz.py"
+    ],
+    "for:i": [
+      "fizzbuzz.py"
+    ],
+    "for_range:1:101": [
+      "fizzbuzz.py"
+    ],
+    "function:is_even": [
       "is_even.py"
     ],
     "function:print_collatz": [
@@ -269,6 +287,9 @@
       "collatz_print.py",
       "fizzbuzz.py"
     ],
+    "function_call:range": [
+      "fizzbuzz.py"
+    ],
     "function_call_without_result:print": [
       "collatz_print.py",
       "fizzbuzz.py"
@@ -276,8 +297,14 @@
     "function_returning_nothing:print_collatz": [
       "collatz_print.py"
     ],
+    "function_returning_something:is_even": [
+      "is_even.py"
+    ],
     "if": [
       "collatz_print.py",
+      "fizzbuzz.py"
+    ],
+    "if_elif_branch": [
       "fizzbuzz.py"
     ],
     "if_else_branch": [
@@ -288,8 +315,20 @@
       "collatz_print.py",
       "fizzbuzz.py"
     ],
+    "if_test_atom:15": [
+      "fizzbuzz.py"
+    ],
     "if_test_atom:2": [
       "collatz_print.py"
+    ],
+    "if_test_atom:3": [
+      "fizzbuzz.py"
+    ],
+    "if_test_atom:5": [
+      "fizzbuzz.py"
+    ],
+    "if_test_atom:i": [
+      "fizzbuzz.py"
     ],
     "if_test_atom:n": [
       "collatz_print.py"
@@ -297,6 +336,18 @@
     "if_then_branch": [
       "collatz_print.py",
       "fizzbuzz.py"
+    ],
+    "import_internally:collatz_print": [
+      "fizzbuzz.py"
+    ],
+    "import_internally:fizzbuzz": [
+      "is_even.py"
+    ],
+    "import_module_internally:collatz_print": [
+      "fizzbuzz.py"
+    ],
+    "import_module_internally:fizzbuzz": [
+      "is_even.py"
     ],
     "literal:0": [
       "collatz_print.py",
@@ -307,12 +358,27 @@
       "collatz_print.py",
       "fizzbuzz.py"
     ],
+    "literal:101": [
+      "fizzbuzz.py"
+    ],
+    "literal:15": [
+      "fizzbuzz.py"
+    ],
     "literal:2": [
       "collatz_print.py",
       "is_even.py"
     ],
     "literal:3": [
       "collatz_print.py",
+      "fizzbuzz.py"
+    ],
+    "literal:5": [
+      "fizzbuzz.py"
+    ],
+    "literal:Str": [
+      "fizzbuzz.py"
+    ],
+    "loop:for": [
       "fizzbuzz.py"
     ],
     "loop:while": [
@@ -325,6 +391,15 @@
     ],
     "multiplication_operator": [
       "collatz_print.py"
+    ],
+    "range:1:101": [
+      "fizzbuzz.py"
+    ],
+    "return": [
+      "is_even.py"
+    ],
+    "single_assignment:a": [
+      "assignment.py"
     ],
     "single_assignment:n": [
       "collatz_print.py"
@@ -374,96 +449,11 @@
     ],
     "while": [
       "collatz_print.py"
-    ],
-    "call_argument:": [
-      "fizzbuzz.py"
-    ],
-    "call_argument:1": [
-      "fizzbuzz.py"
-    ],
-    "call_argument:101": [
-      "fizzbuzz.py"
-    ],
-    "call_argument:i": [
-      "fizzbuzz.py"
-    ],
-    "divisibility_test:15": [
-      "fizzbuzz.py"
-    ],
-    "divisibility_test:3": [
-      "fizzbuzz.py"
-    ],
-    "divisibility_test:5": [
-      "fizzbuzz.py"
-    ],
-    "for:i": [
-      "fizzbuzz.py"
-    ],
-    "for_range:1:101": [
-      "fizzbuzz.py"
-    ],
-    "function_call:range": [
-      "fizzbuzz.py"
-    ],
-    "if_elif_branch": [
-      "fizzbuzz.py"
-    ],
-    "if_test_atom:15": [
-      "fizzbuzz.py"
-    ],
-    "if_test_atom:3": [
-      "fizzbuzz.py"
-    ],
-    "if_test_atom:5": [
-      "fizzbuzz.py"
-    ],
-    "if_test_atom:i": [
-      "fizzbuzz.py"
-    ],
-    "import_internally:collatz_print": [
-      "fizzbuzz.py"
-    ],
-    "import_module_internally:collatz_print": [
-      "fizzbuzz.py"
-    ],
-    "literal:101": [
-      "fizzbuzz.py"
-    ],
-    "literal:15": [
-      "fizzbuzz.py"
-    ],
-    "literal:5": [
-      "fizzbuzz.py"
-    ],
-    "literal:Str": [
-      "fizzbuzz.py"
-    ],
-    "loop:for": [
-      "fizzbuzz.py"
-    ],
-    "range:1:101": [
-      "fizzbuzz.py"
-    ],
-    "function:is_even": [
-      "is_even.py"
-    ],
-    "function_returning_something:is_even": [
-      "is_even.py"
-    ],
-    "import_internally:fizzbuzz": [
-      "is_even.py"
-    ],
-    "import_module_internally:fizzbuzz": [
-      "is_even.py"
-    ],
-    "return": [
-      "is_even.py"
     ]
   },
   "taxons": {
-    "variable/assignment/single": [
-      "assignment.py",
-      "collatz_print.py"
+    "call/function/builtin/range": [
+      "fizzbuzz.py"
     ],
     "flow/conditional": [
       "collatz_print.py",
@@ -473,12 +463,22 @@
       "collatz_print.py",
       "fizzbuzz.py"
     ],
+    "flow/conditional/else/if": [
+      "fizzbuzz.py"
+    ],
+    "flow/loop/for/arithmetic/start": [
+      "fizzbuzz.py"
+    ],
     "flow/loop/while": [
       "collatz_print.py"
     ],
     "io/standard/print": [
       "collatz_print.py",
       "fizzbuzz.py"
+    ],
+    "library/personal": [
+      "fizzbuzz.py",
+      "is_even.py"
     ],
     "operator/arithmetic/addition": [
       "collatz_print.py"
@@ -493,6 +493,12 @@
     ],
     "subroutine/argument/arg": [
       "collatz_print.py",
+      "is_even.py"
+    ],
+    "subroutine/function": [
+      "is_even.py"
+    ],
+    "subroutine/predicate": [
       "is_even.py"
     ],
     "subroutine/procedure": [
@@ -520,30 +526,37 @@
       "fizzbuzz.py",
       "is_even.py"
     ],
-    "variable/assignment/conditional/verbose": [
-      "collatz_print.py"
-    ],
-    "call/function/builtin/range": [
-      "fizzbuzz.py"
-    ],
-    "flow/conditional/else/if": [
-      "fizzbuzz.py"
-    ],
-    "flow/loop/for/arithmetic/start": [
-      "fizzbuzz.py"
-    ],
-    "library/personal": [
-      "fizzbuzz.py",
-      "is_even.py"
-    ],
     "type/elementary/string": [
       "fizzbuzz.py"
     ],
-    "subroutine/function": [
+    "variable/assignment/conditional/verbose": [
+      "collatz_print.py"
+    ],
+    "variable/assignment/single": [
+      "assignment.py",
+      "collatz_print.py"
+    ]
+  },
+  "importations": {
+    "assignment.py": [],
+    "collatz_print.py": [],
+    "fizzbuzz.py": [
+      "collatz_print.py"
+    ],
+    "is_even.py": [
+      "collatz_print.py",
+      "fizzbuzz.py"
+    ]
+  },
+  "exportations": {
+    "assignment.py": [],
+    "collatz_print.py": [
+      "fizzbuzz.py",
       "is_even.py"
     ],
-    "subroutine/predicate": [
+    "fizzbuzz.py": [
       "is_even.py"
-    ]
+    ],
+    "is_even.py": []
   }
 }

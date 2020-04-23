@@ -61,10 +61,12 @@ def dump_dummy_db():
     program_names_and_sources = regex.findall(r"(?ms)^(prg\d+\.py)\n(.+?)\n\n", text)
     data = {
         "programs": {
-            program_name: {"source": source, "links": [], "taxons": defaultdict(list)}
+            program_name: {"source": source, "taxons": defaultdict(list),}
             for (program_name, source) in program_names_and_sources
         },
         "taxons": {taxon_name: set() for taxon_name in taxon_names},
+        "importations": {p: [] for (p, _) in program_names_and_sources},
+        "exportations": {p: [] for (p, _) in program_names_and_sources},
     }
     for (program_name, source) in program_names_and_sources:
         program = data["programs"][program_name]

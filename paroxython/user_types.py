@@ -52,10 +52,9 @@ ProgramNameSet = Set[ProgramName]
 class Program(NamedTuple):
     name: ProgramName = ProgramName("")
     source: Source = Source("")
-    addition: LabelsSpans = {}
-    deletion: LabelsSpans = {}
-    labels: Labels = []
-    links: ProgramNames = []
+    addition: LabelsSpans= {}
+    deletion: LabelsSpans= {}
+    labels: Labels= []
 
 Programs = List[Program]
 ProgramTaxons = Dict[ProgramName, Taxons]
@@ -70,24 +69,22 @@ TaxonsPoorSpans = Dict[TaxonName, List[PoorSpan]]
 
 class ProgramRecord(TypedDict):
     timestamp: str
-    links: ProgramNames
     source: Source
     labels: LabelsPoorSpans
     taxons: TaxonsPoorSpans
 
 ProgramInfos = Dict[ProgramName, ProgramRecord]
-LabelInfos = Dict[LabelName, List[ProgramName]]
-TaxonInfos = Dict[TaxonName, List[ProgramName]]
+LabelInfos = Dict[LabelName, ProgramNames]
+TaxonInfos = Dict[TaxonName, ProgramNames]
+ProgramToPrograms = Dict[ProgramName, ProgramNames]
 
 class JsonDatabase(TypedDict):
     programs: ProgramInfos
     labels: LabelInfos
     taxons: TaxonInfos
+    importations: ProgramToPrograms
+    exportations: ProgramToPrograms
 
-# Recommendations
-
-ProgramTaxonNames = Dict[ProgramName, TaxonNames]
-AssessedPrograms = List[Tuple[float, ProgramName]]
 
 # Pipeline dictionary
 #
@@ -111,5 +108,19 @@ class Pipeline(TypedDict):
     output_path: str
     cost_assessment_strategy: str
     commands: List[Command]
+
+class TaxonTriple(NamedTuple): #  cf. https://en.wikipedia.org/wiki/Semantic_triple
+    predicate: str
+    name_1: TaxonName
+    name_2: TaxonName
+
+TaxonNameOrTriple = Union[TaxonName, TaxonTriple]
+TaxonNamesOrTriples = List[TaxonNameOrTriple]
+
+
+# Recommendations
+
+ProgramTaxonNames = Dict[ProgramName, TaxonNames]
+AssessedPrograms = List[Tuple[float, ProgramName]]
 
 # fmt:on

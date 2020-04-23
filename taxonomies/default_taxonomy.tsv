@@ -156,6 +156,7 @@ test/identity	comparison_operator:Is
 test/identity/not	comparison_operator:IsNot
 test/inequality	comparison_operator:(Lt|LtE|Gt|GtE)
 test/inequality/chained/\1	chained_inequalities:(\d+)
+test/yoda	yoda_comparison:(Eq|NotEq|Is|IsNot)
 topic/\1	topic:(.+)
 type/container/dictionary	function_call:dict
 type/container/dictionary	literal:Dict

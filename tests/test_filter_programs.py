@@ -20,7 +20,7 @@ def test_init():
 def test_programs_of_taxons():
     dbf = ProgramFilter(db)
     taxons = {"X/S/M/L/R/D/A", "X/S/M/L/R/D", "non_existing_taxon"}
-    programs = dbf.programs_of_taxons(taxons, follow_import=False)
+    programs = dbf.programs_of_taxons(taxons, follow=False)
     print(sorted(programs))
     for (db_program, db_program_data) in db["programs"].items():
         if taxons.intersection(db_program_data["taxons"]):
@@ -140,3 +140,7 @@ def test_include_programs():
     dbf.include_programs(programs)
     print(sorted(dbf.selected_programs))
     assert dbf.selected_programs.keys() == {"prg1.py", "prg2.py"}
+
+
+if __name__ == "__main__":
+    pytest.main(["-qq", "tests/test_filter_programs.py"])

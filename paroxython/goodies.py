@@ -1,7 +1,8 @@
 from collections import defaultdict
 from math import log2
 from textwrap import wrap
-from typing import Callable, Iterator, Sequence
+from typing import Callable, Iterator
+from user_types import Programs, Program
 from unicodedata import normalize
 
 import regex  # type: ignore
@@ -59,14 +60,14 @@ def enumeration_to_txt_factory(
     return enumeration_to_txt
 
 
-def progress_printer(sequence: Sequence) -> Iterator:  # pragma: no cover
+def iterate_and_print_programs(programs: Programs) -> Iterator[Program]:
     blanks = ""
-    for (i, element) in enumerate(sequence, 1):
-        print(f"\r{blanks}\r{i: 6} {element}", end="", flush=True)
-        yield
-        blanks = " " * (len(str(element)) + 7)
-    print(f"\r{blanks}\r", end="", flush=True)
-    yield
+    for (i, program) in enumerate(programs, 1):
+        print(f"\r{blanks}\r{i: 5} {program.name}", end="", flush=True)
+        blanks = " " * (len(program.name) + 7)
+        if i == len(programs):  # Placed after the loop, the next line would not be executed.
+            print(f"\r{blanks}\r", end="", flush=True)
+        yield program
 
 
 def cost_interval(x):

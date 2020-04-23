@@ -6,7 +6,7 @@ import regex
 
 import context
 from make_snapshot import make_snapshot
-from paroxython.list_labels import list_labelled_programs, list_labelled_sources
+from paroxython.list_labels import list_labelled_programs, generate_labelled_sources
 from paroxython.user_types import Span, ProgramName
 
 
@@ -28,8 +28,8 @@ def test_list_labelled_programs(capsys):
     make_snapshot(Path("tests/snapshots/simple_labelled_programs.json"), text, capsys)
 
 
-def test_list_labelled_sources(capsys):
-    chunks = list(list_labelled_sources(Path("tests/data/simple")))
+def test_generate_labelled_sources(capsys):
+    chunks = list(generate_labelled_sources(Path("tests/data/simple")))
     result = []
     for chunk in chunks:
         if chunk.startswith("#"):

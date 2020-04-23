@@ -2,7 +2,6 @@
   "programs": {
     "prg1.py": {
       "source": "1   X/W+7  X/S\n2   X+1  Y/T  X/S/M\n3   X/W  X/S/M/L/R\n4   X/S+5  Y/T/Q\n5   O/N/P\n6   O/J  X/S/M/L/R/D  X/S/M/L+2\n7   Y\n8   O/N  X/S/M/L/R/D  O/J\n9   X/S  X/K",
-      "links": [],
       "taxons": {
         "X/W": [[1,8],[3,3]],
         "X/S": [[1,1],[4,9],[9,9]],
@@ -22,7 +21,6 @@
     },
     "prg2.py": {
       "source": "1   O/N/P  Y/T/Q  Y\n2   X/S/M/L/R/D  O\n3   O/C/H/B  X/S/M/L/R/D\n4   \n5   \n6   X/S/M  O\n7   X/S/M/L/R  Y/T  O/C\n8   X/G  X/S/M/L/V+1\n9   X/S/M/L/R/D  X/S/M/L/V  Y/T/Q  O/C/H/B/I",
-      "links": [],
       "taxons": {
         "O/N/P": [[1,1]],
         "Y/T/Q": [[1,1],[9,9]],
@@ -41,7 +39,6 @@
     },
     "prg3.py": {
       "source": "1   O/N/P  X/K  Y/T\n2   X/S/M/L/V\n3   O/C/H/B\n4   X/S/M/L/R+4\n5   O/J  X/S/M  O/C/F/U  O/C/H\n6   O/N/P  X/S  Y\n7   O\n8   X/S/M/L  Y/E\n9   O/C/H/B  O/J",
-      "links": [],
       "taxons": {
         "O/N/P": [[1,1],[6,6]],
         "X/K": [[1,1]],
@@ -62,7 +59,6 @@
     },
     "prg4.py": {
       "source": "1   O/N/P  X\n2   O/N/P  Y/T+1\n3   X/S  O+5  Y/T/Q+4  O/C/H/B\n4   X/S/M/L/R/D/A  X/G  X\n5   X/S/M/L/R  O  Y\n6   X/S\n7   X/S/M/L/R/D/A  X/S/M/L/R/D\n8   O/C/F/U\n9   X/S/M/L",
-      "links": [],
       "taxons": {
         "O/N/P": [[1,1],[2,2]],
         "X": [[1,1],[4,4]],
@@ -82,7 +78,6 @@
     },
     "prg5.py": {
       "source": "1   O/N/P+1  O/C/H/B/I\n2   O/N/P  X/K  O/N  X/S\n3   X\n4   O/C/H/B\n5   X/S/M/L/R/D/A\n6   X/S/M/L/V  X  O/C\n7   O/C/F  O/C/H/B  X/K\n8   O/C/H  O/N\n9   O/C/H/B/I  O/N",
-      "links": [],
       "taxons": {
         "O/N/P": [[1,2],[2,2]],
         "O/C/H/B/I": [[1,1],[9,9]],
@@ -100,7 +95,6 @@
     },
     "prg6.py": {
       "source": "1   X\n2   O/N  Y/T/Q  X/W\n3   \n4   O/J  X/K  X\n5   Y/T\n6   O/C/F/U  O/C+1  X/S/M/L/V  O/N  X/S/M/L/R/D/A\n7   O/C/F\n8   X/K\n9   Y/E  O/C/H/B/I  X/S/M/L/V",
-      "links": [],
       "taxons": {
         "X": [[1,1],[4,4]],
         "O/N": [[2,2],[6,6]],
@@ -120,7 +114,6 @@
     },
     "prg7.py": {
       "source": "1   O/J  Y/E  X/K\n2   O/N  O+3  X/S/M/L/R  Y/E\n3   O/C/F/U  Y/T/Q  X  O/C/H/B/I\n4   O/C/H/B\n5   Y/T/Q\n6   X/S/M/L\n7   X/S/M/L/R/D\n8   X/S\n9   Y/T  X/S/M",
-      "links": [],
       "taxons": {
         "O/J": [[1,1]],
         "Y/E": [[1,1],[2,2]],
@@ -142,7 +135,6 @@
     },
     "prg8.py": {
       "source": "1   X/W  O/C\n2   O/C/F/U\n3   O/N  X/S/M/L/R/D/A  X/S/M/L/V  Y/E\n4   X/S/M/L+2  O/J  Y/E  O/C\n5   X/K  O/N/P\n6   X/S/M/L/R/D  O/C/H/B",
-      "links": [],
       "taxons": {
         "X/W": [[1,1]],
         "O/C": [[1,1],[4,4]],
@@ -161,7 +153,6 @@
     },
     "prg9.py": {
       "source": "1   X/W\n2   O/N  Y\n3   O/C/H  Y/T/Q\n4   \n5   O/J  O/C/H/B/I  O/C/H\n6   X/S/M\n7   O/C/H/B/I+2  Y/E  X/S/M/L/R  X/K  X/S/M/L/V\n8   O/J  O/C/H/B/I\n9   Y/T  O/C/F  O  X/S/M",
-      "links": [],
       "taxons": {
         "X/W": [[1,1]],
         "O/N": [[2,2]],
@@ -358,5 +349,27 @@
       "prg7.py",
       "prg9.py"
     ]
+  },
+  "importations": {
+    "prg1.py": [],
+    "prg2.py": [],
+    "prg3.py": [],
+    "prg4.py": [],
+    "prg5.py": [],
+    "prg6.py": [],
+    "prg7.py": [],
+    "prg8.py": [],
+    "prg9.py": []
+  },
+  "exportations": {
+    "prg1.py": [],
+    "prg2.py": [],
+    "prg3.py": [],
+    "prg4.py": [],
+    "prg5.py": [],
+    "prg6.py": [],
+    "prg7.py": [],
+    "prg8.py": [],
+    "prg9.py": []
   }
 }

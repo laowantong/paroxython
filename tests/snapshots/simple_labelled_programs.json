@@ -21,14 +21,20 @@
         "single_assignment:a",
         [[1,1]]
       ]
-    ],
-    []
+    ]
   ],
   [
     "collatz_print.py",
     "def print_collatz(n):\n    while n != 1:\n        print(n)\n        if n % 2 == 0:\n            n = n // 2\n        else:\n            n = 3 * n + 1\n    print(n)",
-    {},
-    {},
+    {
+      "added_label_on_line_4": [[4,4]],
+      "unknown_label": [[6,6]],
+      "added_block_label": [[1,8]]
+    },
+    {
+      "literal:Num": [[5,5]],
+      "binary_operator:FloorDiv": []
+    },
     [
       [
         "added_block_label",
@@ -238,8 +244,7 @@
         "while",
         [[2,7]]
       ]
-    ],
-    []
+    ]
   ],
   [
     "fizzbuzz.py",
@@ -391,9 +396,6 @@
         "suggest_constant_definition",
         [[3,3],[5,5],[7,7]]
       ]
-    ],
-    [
-      "collatz_print.py"
     ]
   ],
   [
@@ -454,10 +456,6 @@
         "return",
         [[3,3]]
       ]
-    ],
-    [
-      "fizzbuzz.py",
-      "collatz_print.py"
     ]
   ]
 ]

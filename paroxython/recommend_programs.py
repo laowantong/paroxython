@@ -5,14 +5,13 @@ from collections import defaultdict
 from pathlib import Path
 from typing import Dict, List
 
-from assess_learning_costs import LearningCostAssessor
+from assess_costs import LearningCostAssessor
 from filter_programs import ProgramFilter
 from goodies import (
     add_line_numbers,
     title_to_slug_factory,
     enumeration_to_txt_factory,
     cost_interval,
-    progress_printer,
 )
 from span import Span
 from user_types import Pipeline, ProgramNames, AssessedPrograms, Tuple
@@ -53,7 +52,7 @@ class Recommendations:
         # Execute sequentially all the commands of the pipeline
         for command in self.commands:
 
-            # The names or patterns fed to a command can either be a list of strings...
+            # The patterns fed to a command can either be a list of strings...
             data = command["source"]
             if not isinstance(data, list):  # ... or a shell command printing them on stdout
                 data = subprocess.run(
@@ -160,6 +159,7 @@ class Recommendations:
 
 if __name__ == "__main__":
     rec = Recommendations(Path("../algo/programs_pipe.py"))
+    # rec = Recommendations(Path("tests/data/simple_pipe.py"))
     rec.run_pipeline()
     text = rec.get_markdown()
     rec.dump(text)

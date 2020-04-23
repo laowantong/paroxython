@@ -21,12 +21,12 @@ match_excluded = regex.compile(
 def list_programs(directory: Path, strategy="strip_docs") -> Programs:
     """List all Programs of a given directory.
 
-    Each Program (cf. declaration) includes:
-    - its Path, relative to the given directory
-    - its Source,
+    Each `Program` (cf. declaration) includes:
+    - its `Path`, relative to the given directory
+    - its `Source`,
     - the hints scheduled for addition or deletion.
 
-    Its labels will later be populated by "list_labels.py".
+    Its `labels` will later be populated by "list_labels.py".
     """
     result = []
     cleanup = cleanup_factory(strategy)
@@ -42,6 +42,7 @@ def list_programs(directory: Path, strategy="strip_docs") -> Programs:
                     source=source,
                     addition=addition,
                     deletion=deletion,
+                    labels=[],
                 )
             )
     return result

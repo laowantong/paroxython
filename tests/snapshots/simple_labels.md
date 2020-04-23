@@ -222,3 +222,4 @@
 - update_by_method_call_with
 - update_with
 - yield
+- yoda_comparison

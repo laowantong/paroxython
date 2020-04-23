@@ -137,9 +137,9 @@ def test_n31(): # function:test_n31 (-> +113), function_returning_nothing:test_n
 def abs_val(num): # function:abs_val (-> +1), function_argument:num, function_argument_flavor:arg, function_returning_something:abs_val (-> +1)
     return -num if num < 0 else num # comparison_operator:Lt, conditional_expression, literal:0, return, unary_operator:USub
 def test_abs_val(): # function:test_abs_val (-> +3), function_returning_nothing:test_abs_val (-> +3), function_without_arguments:test_abs_val (-> +3)
-    assert 0 == abs_val(0) # assertion, call_argument:0, comparison_operator:Eq, function_call:abs_val, literal:0
-    assert 34 == abs_val(34) # assertion, call_argument:34, comparison_operator:Eq, function_call:abs_val, literal:34, suggest_constant_definition
-    assert 100000000000 == abs_val(-100000000000) # assertion, call_argument:-100000000000, comparison_operator:Eq, function_call:abs_val, literal:-100000000000, literal:100000000000, suggest_constant_definition
+    assert 0 == abs_val(0) # assertion, call_argument:0, comparison_operator:Eq, function_call:abs_val, literal:0, yoda_comparison:Eq
+    assert 34 == abs_val(34) # assertion, call_argument:34, comparison_operator:Eq, function_call:abs_val, literal:34, suggest_constant_definition, yoda_comparison:Eq
+    assert 100000000000 == abs_val(-100000000000) # assertion, call_argument:-100000000000, comparison_operator:Eq, function_call:abs_val, literal:-100000000000, literal:100000000000, suggest_constant_definition, yoda_comparison:Eq
 
 # ----------------------------------------------------------------------------------------
 # abs_max.py
@@ -178,9 +178,9 @@ def main(): # function:main (-> +2), function_returning_nothing:main (-> +2), fu
 def average(nums): # function:average (-> +1), function_argument:nums, function_argument_flavor:arg, function_returning_something:average (-> +1)
     return sum(nums) / len(nums) # binary_operator:Div, call_argument:nums, function_call:len, function_call:sum, return
 def test_average(): # function:test_average (-> +3), function_returning_nothing:test_average (-> +3), function_without_arguments:test_average (-> +3)
-    assert 12.0 == average([3, 6, 9, 12, 15, 18, 21]) # assertion, call_argument:, comparison_operator:Eq, function_call:average, literal:12, literal:12.0, literal:15, literal:18, literal:21, literal:3, literal:6, literal:9, literal:List, suggest_constant_definition
-    assert 20 == average([5, 10, 15, 20, 25, 30, 35]) # assertion, call_argument:, comparison_operator:Eq, function_call:average, literal:10, literal:15, literal:20, literal:25, literal:30, literal:35, literal:5, literal:List, suggest_constant_definition
-    assert 4.5 == average([1, 2, 3, 4, 5, 6, 7, 8]) # assertion, call_argument:, comparison_operator:Eq, function_call:average, literal:1, literal:2, literal:3, literal:4, literal:4.5, literal:5, literal:6, literal:7, literal:8, literal:List, suggest_constant_definition
+    assert 12.0 == average([3, 6, 9, 12, 15, 18, 21]) # assertion, call_argument:, comparison_operator:Eq, function_call:average, literal:12, literal:12.0, literal:15, literal:18, literal:21, literal:3, literal:6, literal:9, literal:List, suggest_constant_definition, yoda_comparison:Eq
+    assert 20 == average([5, 10, 15, 20, 25, 30, 35]) # assertion, call_argument:, comparison_operator:Eq, function_call:average, literal:10, literal:15, literal:20, literal:25, literal:30, literal:35, literal:5, literal:List, suggest_constant_definition, yoda_comparison:Eq
+    assert 4.5 == average([1, 2, 3, 4, 5, 6, 7, 8]) # assertion, call_argument:, comparison_operator:Eq, function_call:average, literal:1, literal:2, literal:3, literal:4, literal:4.5, literal:5, literal:6, literal:7, literal:8, literal:List, suggest_constant_definition, yoda_comparison:Eq
 
 # ----------------------------------------------------------------------------------------
 # average_median.py
@@ -666,7 +666,7 @@ def kthPermutation(k, n): # function:kthPermutation (-> +13), function_argument:
     factorials = [1] # assignment, assignment_lhs_identifier:factorials, assignment_rhs_atom:1, literal:1, literal:List, single_assignment:factorials
     for i in range(2, n): # call_argument:2, call_argument:n, for:i (-> +1), for_range:2:n (-> +1), function_call:range, literal:2, loop:for (-> +1), range:2:n
         factorials.append(factorials[-1] * i) # binary_operator:Mult, call_argument:, index:-1, literal:-1, method_call:append, method_call_object:factorials, method_call_without_result:append, multiplication_operator, negative_index:-1
-    assert 0 <= k < factorials[-1] * n, "k out of bounds" # assertion, binary_operator:Mult, chained_comparison:2, comparison_operator:Lt, comparison_operator:LtE, index:-1, literal:-1, literal:0, literal:Str, multiplication_operator, negative_index:-1
+    assert 0 <= k < factorials[-1] * n, "k out of bounds" # assertion, binary_operator:Mult, chained_comparison:2, comparison_operator:Lt, comparison_operator:LtE, index:-1, literal:-1, literal:0, literal:Str, multiplication_operator, negative_index:-1, yoda_comparison:LtE
     permutation = [] # assignment, assignment_lhs_identifier:permutation, empty_literal:List, literal:List, single_assignment:permutation
     elements = list(range(n)) # assignment:list, assignment_lhs_identifier:elements, assignment_rhs_atom:n, call_argument:, call_argument:n, composition, function_call:list, function_call:range, range:n, single_assignment:elements
     while factorials: # loop:while (-> +4), while (-> +4)
@@ -682,7 +682,7 @@ def kthPermutation(k, n): # function:kthPermutation (-> +13), function_argument:
 # ----------------------------------------------------------------------------------------
 import math # import:math, import_module:math
 def res(x, y): # function:res (-> +7), function_argument:x, function_argument:y, function_argument_flavor:arg, function_returning_something:res (-> +7)
-    if 0 not in (x, y): # comparison_operator:NotIn, if (-> +6), if_test_atom:0, if_test_atom:x, if_test_atom:y, literal:0
+    if 0 not in (x, y): # comparison_operator:NotIn, if (-> +6), if_test_atom:0, if_test_atom:x, if_test_atom:y, literal:0, yoda_comparison:NotIn
         return y * math.log10(x) # binary_operator:Mult, call_argument:x, if_then_branch, method_call:log10, multiplication_operator, return
     else:
         if x == 0: # comparison_operator:Eq, if (-> +3), if_test_atom:0, if_test_atom:x, literal:0
@@ -1318,22 +1318,22 @@ def zeller(date_input: str) -> str: # function:zeller (-> +46), function_argumen
         "6": "Saturday", # literal:Str
     }
     convert_datetime_days = {0: 1, 1: 2, 2: 3, 3: 4, 4: 5, 5: 6, 6: 0} # assignment, assignment_lhs_identifier:convert_datetime_days, assignment_rhs_atom:0, assignment_rhs_atom:1, assignment_rhs_atom:2, assignment_rhs_atom:3, assignment_rhs_atom:4, assignment_rhs_atom:5, assignment_rhs_atom:6, literal:0, literal:1, literal:2, literal:3, literal:4, literal:5, literal:6, literal:Dict, single_assignment:convert_datetime_days, suggest_constant_definition
-    if not 0 < len(date_input) < 11: # call_argument:date_input, chained_comparison:2, chained_inequalities:2, comparison_operator:Lt, function_call:len, if (-> +1), if_test_atom:0, if_test_atom:11, if_test_atom:date_input, if_without_else (-> +1), literal:0, literal:11, suggest_constant_definition, unary_operator:Not
+    if not 0 < len(date_input) < 11: # call_argument:date_input, chained_comparison:2, chained_inequalities:2, comparison_operator:Lt, function_call:len, if (-> +1), if_test_atom:0, if_test_atom:11, if_test_atom:date_input, if_without_else (-> +1), literal:0, literal:11, suggest_constant_definition, unary_operator:Not, yoda_comparison:Lt
         raise ValueError("Must be 10 characters long") # call_argument:, function_call:ValueError, if_then_branch, literal:Str, raise:ValueError
     m: int = int(date_input[0] + date_input[1]) # addition_operator, binary_operator:Add, call_argument:, function_call:int, index:0, index:1, literal:0, literal:1
-    if not 0 < m < 13: # chained_comparison:2, chained_inequalities:2, comparison_operator:Lt, if (-> +1), if_test_atom:0, if_test_atom:13, if_test_atom:m, if_without_else (-> +1), literal:0, literal:13, suggest_constant_definition, unary_operator:Not
+    if not 0 < m < 13: # chained_comparison:2, chained_inequalities:2, comparison_operator:Lt, if (-> +1), if_test_atom:0, if_test_atom:13, if_test_atom:m, if_without_else (-> +1), literal:0, literal:13, suggest_constant_definition, unary_operator:Not, yoda_comparison:Lt
         raise ValueError("Month must be between 1 - 12") # call_argument:, function_call:ValueError, if_then_branch, literal:Str, raise:ValueError
     sep_1: str = date_input[2] # index:2, literal:2
     if sep_1 not in ["-", "/"]: # comparison_operator:NotIn, if (-> +1), if_test_atom:sep_1, if_without_else (-> +1), literal:List, literal:Str
         raise ValueError("Date seperator must be '-' or '/'") # call_argument:, function_call:ValueError, if_then_branch, literal:Str, raise:ValueError
     d: int = int(date_input[3] + date_input[4]) # addition_operator, binary_operator:Add, call_argument:, function_call:int, index:3, index:4, literal:3, literal:4, suggest_constant_definition
-    if not 0 < d < 32: # chained_comparison:2, chained_inequalities:2, comparison_operator:Lt, if (-> +1), if_test_atom:0, if_test_atom:32, if_test_atom:d, if_without_else (-> +1), literal:0, literal:32, suggest_constant_definition, unary_operator:Not
+    if not 0 < d < 32: # chained_comparison:2, chained_inequalities:2, comparison_operator:Lt, if (-> +1), if_test_atom:0, if_test_atom:32, if_test_atom:d, if_without_else (-> +1), literal:0, literal:32, suggest_constant_definition, unary_operator:Not, yoda_comparison:Lt
         raise ValueError("Date must be between 1 - 31") # call_argument:, function_call:ValueError, if_then_branch, literal:Str, raise:ValueError
     sep_2: str = date_input[5] # index:5, literal:5, suggest_constant_definition
     if sep_2 not in ["-", "/"]: # comparison_operator:NotIn, if (-> +1), if_test_atom:sep_2, if_without_else (-> +1), literal:List, literal:Str
         raise ValueError("Date seperator must be '-' or '/'") # call_argument:, function_call:ValueError, if_then_branch, literal:Str, raise:ValueError
     y: int = int(date_input[6] + date_input[7] + date_input[8] + date_input[9]) # addition_operator, binary_operator:Add, call_argument:, function_call:int, index:6, index:7, index:8, index:9, literal:6, literal:7, literal:8, literal:9, suggest_constant_definition
-    if not 45 < y < 8500: # chained_comparison:2, chained_inequalities:2, comparison_operator:Lt, if (-> +2), if_test_atom:45, if_test_atom:8500, if_test_atom:y, if_without_else (-> +2), literal:45, literal:8500, suggest_constant_definition, unary_operator:Not
+    if not 45 < y < 8500: # chained_comparison:2, chained_inequalities:2, comparison_operator:Lt, if (-> +2), if_test_atom:45, if_test_atom:8500, if_test_atom:y, if_without_else (-> +2), literal:45, literal:8500, suggest_constant_definition, unary_operator:Not, yoda_comparison:Lt
         raise ValueError( # function_call:ValueError, if_then_branch (-> +1), raise:ValueError
             "Year out of range. There has to be some sort of limit...right?" # call_argument:, literal:Str
         )

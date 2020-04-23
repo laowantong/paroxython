@@ -2,22 +2,26 @@ import json
 import sqlite3
 from collections import defaultdict
 from datetime import datetime
+from functools import lru_cache
 from pathlib import Path
-from typing import List, Optional, Tuple, Union, overload
+from typing import List, Optional, Tuple, Union, overload, Dict
 
 import regex  # type: ignore
 
-from list_labels import list_labelled_programs
 from goodies import add_line_numbers
+from list_labels import list_labelled_programs
 from map_taxonomy import Taxonomy
 from user_types import (
     LabelInfos,
     Labels,
     LabelsPoorSpans,
-    ProgramTaxons,
     Program,
     ProgramInfos,
     ProgramName,
+    ProgramNameSet,
+    Programs,
+    ProgramTaxons,
+    ProgramToPrograms,
     TaxonInfos,
     Taxons,
     TaxonsPoorSpans,
@@ -29,43 +33,85 @@ class Database:
         """Collect all infos pertaining to the programs, the labels and the taxons."""
         self.default_json_db_path = directory.parent / f"{directory.name}_db.json"
         self.default_sqlite_db_path = directory.parent / f"{directory.name}_db.sqlite"
-        programs: List[Program] = list_labelled_programs(directory, *args, **kargs)
-        program_taxons: ProgramTaxons = dict(Taxonomy()(programs))
 
         get_timestamp = lambda path: str(datetime.fromtimestamp(path.stat().st_mtime))
         if ignore_timestamps:
             get_timestamp = lambda path: "ignored"
 
+        programs: Programs = list_labelled_programs(directory, *args, **kargs)
         self.programs: ProgramInfos = {}
         for program in programs:
             self.programs[program.name] = {
                 "timestamp": get_timestamp(directory / program.name),
-                "links": sorted(ProgramName(link) for link in program.links),
                 "source": program.source,
-                "labels": {},  # to be populated by inject_labels()
-                "taxons": {},  # to be populated by inject_taxons()
+                "labels": {},  # to be populated by below
+                "taxons": {},  # to be populated by below
             }
 
+        self.initialize_labels(programs)
+        self.initialize_taxons(programs)
+        self.initialize_importations(programs)
+        self.initialize_exportations(programs)
+
+    def initialize_labels(self, programs: Programs) -> None:
+        for program in programs:
+            self.programs[program.name]["labels"] = prepared(program.labels)
         self.labels: LabelInfos = defaultdict(list)
         for program in programs:
             for label in program.labels:
                 self.labels[label.name].append(program.name)
-        for program in programs:
-            self.programs[program.name]["labels"] = prepared(program.labels)
 
+    def initialize_taxons(self, programs: Programs) -> None:
+        program_taxons: ProgramTaxons = dict(Taxonomy()(programs))
+        for (program_name, taxons) in program_taxons.items():
+            self.programs[program_name]["taxons"] = prepared(taxons)
         self.taxons: TaxonInfos = defaultdict(list)
         for (program_name, taxons) in program_taxons.items():
             for taxon in taxons:
                 self.taxons[taxon.name].append(program_name)
-        for (program_name, taxons) in program_taxons.items():
-            self.programs[program_name]["taxons"] = prepared(taxons)
+
+    def initialize_importations(self, programs) -> None:
+        """Associate each program to the set of its internal imports (direct and indirect)."""
+
+        # Starts with DIRECT internal imports.
+        importations: Dict = {program.name: set() for program in programs}
+        for program in programs:
+            for label in program.labels:
+                match = regex.match(r"import_internally:([^:]+)", label.name)
+                if match:  # Python 3.8: use assignement-expression
+                    importations[program.name].add(f"{match[1]}.py")
+
+        # Complete them recursively with INDIRECT internal imports.
+        @lru_cache(maxsize=None)
+        def complete_internal_imports(program_name: ProgramName) -> ProgramNameSet:
+            result: ProgramNameSet = importations.get(program_name, set())
+            for imported in list(result):  # traverse a copy
+                result.update(complete_internal_imports(imported))
+            return result
+
+        self.importations: ProgramToPrograms = {}
+        for program_name in list(importations.keys()):
+            self.importations[program_name] = sorted(complete_internal_imports(program_name))
+
+    def initialize_exportations(self, programs) -> None:
+        """Invert `importations` to construct `exportations`."""
+        exportations: Dict = {program.name: set() for program in programs}
+        for (importing_name, imported_names) in self.importations.items():
+            for imported_name in imported_names:
+                exportations[imported_name].add(importing_name)
+
+        self.exportations: ProgramToPrograms = {}
+        for (exporting_name, exported_names) in exportations.items():
+            self.exportations[exporting_name] = sorted(exported_names)
 
     def get_json(self) -> str:
         """Dump the data to JSON, reduce each list of spans to one line."""
         data = {
             "programs": self.programs,
-            "labels": self.labels,
-            "taxons": self.taxons,
+            "labels": dict(sorted(self.labels.items())),
+            "taxons": dict(sorted(self.taxons.items())),
+            "importations": dict(self.importations.items()),
+            "exportations": dict(self.exportations.items()),
         }
         text = json.dumps(data, indent=2)
         text = regex.sub(r"\s*\[\s+(\d+),\s+(\d+)\s+\](,?)\s+", r"[\1,\2]\3", text)
