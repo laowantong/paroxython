@@ -71,13 +71,13 @@ class ProgramFilter:
             s = regex.sub(r"^([^x]*)x([^x]*)$", r"\1x≤x\2", s)
             s = regex.sub(r"^([^y]*)y([^y]*)$", r"\1y≤y\2", s)
             # Convert usual comparison operators
-            s = predicate.replace("<=", "≤").replace("==", "=")
+            s = s.replace("<=", "≤").replace("==", "=")
             # Ignore all other characters
             s = regex.sub(r"[^xy<=≤]", "", s)
             if s != predicate:
                 print(f"Warning: predicate '{predicate}' normalized into '{s}'.")
             if s not in compare_spans:
-                raise ValueError(f"Malformed predicate '{predicate}' in your pipeline.")
+                raise ValueError(f"Malformed predicate '{predicate}' in the pipeline.")
         return TaxonTriple(predicate=s, name_1=name_1, name_2=name_2)
 
     def programs_of_taxon(self, taxon: TaxonNameOrTriple) -> ProgramNameSet:

@@ -1,7 +1,12 @@
 import pytest
 
 import context
-from paroxython.goodies import title_to_slug_factory, add_line_numbers, enumeration_to_txt_factory
+from paroxython.goodies import (
+    title_to_slug_factory,
+    add_line_numbers,
+    enumeration_to_txt_factory,
+    cost_interval,
+)
 
 
 def test_non_ascii_title_to_slug_factory():
@@ -64,6 +69,34 @@ def test_enumeration_to_txt():
         enumeration_to_txt("1, 2, 3, 4, 5-6, 7, 8, 9")
         == "<details><summary>1,</summary>2, 3,<br>4, 5-6,<br>7, 8, 9</details>"
     )
+
+
+def test_cost_interval():
+    values = [i / 8 for i in range(20)]
+    result = list(zip(values, map(cost_interval, values)))
+    print(result)
+    assert result == [
+        (0.0, "0"),
+        (0.125, "in ]0, 0.25["),
+        (0.25, "in ]0.25, 0.5["),
+        (0.375, "in ]0.25, 0.5["),
+        (0.5, "in ]0.5, 1["),
+        (0.625, "in ]0.5, 1["),
+        (0.75, "in ]0.5, 1["),
+        (0.875, "in ]0.5, 1["),
+        (1.0, "in [1, 2["),
+        (1.125, "in [1, 2["),
+        (1.25, "in [1, 2["),
+        (1.375, "in [1, 2["),
+        (1.5, "in [1, 2["),
+        (1.625, "in [1, 2["),
+        (1.75, "in [1, 2["),
+        (1.875, "in [1, 2["),
+        (2.0, "in [2, 4["),
+        (2.125, "in [2, 4["),
+        (2.25, "in [2, 4["),
+        (2.375, "in [2, 4["),
+    ]
 
 
 if __name__ == "__main__":

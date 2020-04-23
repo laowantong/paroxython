@@ -65,6 +65,12 @@ def test_include_taxons():
     print(set(dbf.selected_programs.keys()))
     assert set(dbf.selected_programs.keys()) == {"collatz_print.py", "is_even.py", "fizzbuzz.py"}
 
+    # The same with "x == y" instead of "equals"
+    dbf = ProgramFilter(db)
+    dbf.include_taxons({("x == y", "operator/arithmetic/modulo", "type/elementary/number/integer")})
+    print(set(dbf.selected_programs.keys()))
+    assert set(dbf.selected_programs.keys()) == {"collatz_print.py", "is_even.py", "fizzbuzz.py"}
+
     # "test/equality" is inside "subroutine/function" in is_even.py, which is not imported anywhere.
     dbf = ProgramFilter(db)
     dbf.include_taxons({("inside", "test/equality", "subroutine/function")})
