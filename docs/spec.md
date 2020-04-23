@@ -4742,8 +4742,8 @@ Match an infinite loop denoted by `while True` (preferred) or `while 1`.
 ##### Specification
 
 ```sql
-SELECT name_suffix || "_with_early_exit",
-       b_name_suffix,
+SELECT "loop_with_early_exit",
+       name_suffix || ":" || b_name_suffix,
        span,
        path
 FROM t_loop
@@ -4788,10 +4788,10 @@ JOIN
 
 | Label | Lines |
 |:--|:--|
-| `for_with_early_exit:break` | 2-8 |
-| `for_with_early_exit:return` | 11-13 |
-| `while_with_early_exit:break` | 6-8 |
-| `while_with_early_exit:return` | 14-16 |
+| `loop_with_early_exit:for:break` | 2-8 |
+| `loop_with_early_exit:for:return` | 11-13 |
+| `loop_with_early_exit:while:break` | 6-8 |
+| `loop_with_early_exit:while:return` | 14-16 |
 
 --------------------------------------------------------------------------------
 
@@ -4805,8 +4805,8 @@ JOIN
 ##### Specification
 
 ```sql
-SELECT name_suffix || "_with_else",
-       "",
+SELECT "loop_with_else",
+       name_suffix,
        span,
        path
 FROM t_loop
@@ -4832,7 +4832,7 @@ JOIN
 
 | Label | Lines |
 |:--|:--|
-| `for_with_else` | 1-6 |
+| `loop_with_else:for` | 1-6 |
 
 --------------------------------------------------------------------------------
 

@@ -27,9 +27,8 @@ flow/loop/for/arithmetic	for_range:[^:]+
 flow/loop/for/arithmetic/start	for_range:[^:]+:[^:]+
 flow/loop/for/arithmetic/start/step	for_range:[^:]+:[^:]+:[^:]+
 flow/loop/for/arithmetic/start/step/backwards	for_range:[^:]+:[^:]+:-[^:]+
-flow/loop/for/early/break	for_with_early_exit:break
-flow/loop/for/early/break/else	for_with_early_exit
-flow/loop/for/early/return	for_with_early_exit:return
+flow/loop/early/\1	loop_with_early_exit:.+:(.+)
+flow/loop/early/break/else	loop_with_else:.+
 flow/loop/for/elements	for_each
 flow/loop/for/elements_and_indexes	for_indexes_elements
 flow/loop/for/indexes	for_indexes
@@ -37,9 +36,6 @@ flow/loop/for/nested/\1	nested_for:(.+)
 flow/loop/for/nested/square	square_nested_for
 flow/loop/for/nested/triangular	triangular_nested_for
 flow/loop/while	while
-flow/loop/while/early/break	while_with_early_exit:break
-flow/loop/while/early/break/else	while_with_early_exit
-flow/loop/while/early/return	while_with_early_exit:return
 flow/loop/while/infinite	infinite_while
 io/file/open	function_call:open
 io/standard/input	function_call:input

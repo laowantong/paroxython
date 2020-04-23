@@ -209,7 +209,7 @@ import statistics # import:statistics, import_module:statistics
 def mode(input_list): # function:mode (-> +7), function_argument:input_list, function_argument_flavor:arg, function_returning_something:mode (-> +7)
     check_list = input_list.copy() # assignment:copy, assignment_lhs_identifier:check_list, assignment_rhs_atom:input_list, method_call:copy, single_assignment:check_list
     result = list() # assignment:list, assignment_lhs_identifier:result, function_call:list, function_call_without_arguments:list, single_assignment:result
-    for x in input_list: # accumulate_all_elements:append (-> +4), accumulate_all_elements:remove (-> +4), accumulate_elements:append (-> +4), accumulate_elements:remove (-> +4), for:x (-> +4), for_each (-> +4), for_with_early_exit:return (-> +4), loop:for (-> +4)
+    for x in input_list: # accumulate_all_elements:append (-> +4), accumulate_all_elements:remove (-> +4), accumulate_elements:append (-> +4), accumulate_elements:remove (-> +4), for:x (-> +4), for_each (-> +4), loop:for (-> +4), loop_with_early_exit:for:return (-> +4)
         result.append(input_list.count(x)) # call_argument:, call_argument:x, composition, method_call:append, method_call:count, method_call_object:result, method_call_without_result:append, update:result:x, update_by_method_call:result:x, update_by_method_call_with:append, update_with:append
         input_list.remove(x) # call_argument:x, method_call:remove, method_call_object:input_list, method_call_without_result:remove, update:input_list:x, update_by_method_call:input_list:x, update_by_method_call_with:remove, update_with:remove
         y = max(result) # assignment:max, assignment_lhs_identifier:y, assignment_rhs_atom:result, call_argument:result, function_call:max, single_assignment:y
@@ -350,7 +350,7 @@ def extended_euclidean_algorithm(m, n): # function:extended_euclidean_algorithm 
     else:
         c = n # assignment, assignment_lhs_identifier:c, assignment_rhs_atom:n, if_else_branch (-> +1), single_assignment:c
         d = m # assignment, assignment_lhs_identifier:d, assignment_rhs_atom:m, single_assignment:d
-    while True: # infinite_while (-> +12), literal:True, loop:while (-> +12), while (-> +12), while_with_early_exit:break (-> +12)
+    while True: # infinite_while (-> +12), literal:True, loop:while (-> +12), loop_with_early_exit:while:break (-> +12), while (-> +12)
         q = int(c / d) # assignment:int, assignment_lhs_identifier:q, assignment_rhs_atom:c, assignment_rhs_atom:d, binary_operator:Div, call_argument:, function_call:int, single_assignment:q
         r = c % d # assignment:Mod, assignment_lhs_identifier:r, assignment_rhs_atom:c, assignment_rhs_atom:d, binary_operator:Mod, modulo_operator, single_assignment:r
         if r == 0: # comparison_operator:Eq, if (-> +1), if_test_atom:0, if_test_atom:r, if_without_else (-> +1), literal:0
@@ -839,7 +839,7 @@ def newton_raphson(f, x0=0, maxiter=100, step=0.0001, maxerror=1e-6, logsteps=Fa
     steps = [a] # assignment, assignment_lhs_identifier:steps, assignment_rhs_atom:a, single_assignment:steps
     error = abs(f(a)) # assignment:abs, assignment_lhs_identifier:error, assignment_rhs_atom:a, call_argument:, call_argument:a, composition, function_call:abs, function_call:f, single_assignment:error
     f1 = lambda x: calc_derivative(f, x, h=step) # assignment, assignment_lhs_identifier:f1, assignment_rhs_atom:f, assignment_rhs_atom:step, assignment_rhs_atom:x, call_argument:f, call_argument:x, function_argument:x, function_argument_flavor:arg, function_call:calc_derivative, lambda_function, single_assignment:f1
-    for _ in range(maxiter): # call_argument:maxiter, for:_ (-> +9), for_range:maxiter (-> +9), for_with_early_exit:break (-> +9), for_with_else (-> +9), function_call:range, loop:for (-> +9), range:maxiter
+    for _ in range(maxiter): # call_argument:maxiter, for:_ (-> +9), for_range:maxiter (-> +9), function_call:range, loop:for (-> +9), loop_with_early_exit:for:break (-> +9), loop_with_else:for (-> +9), range:maxiter
         if f1(a) == 0: # call_argument:a, comparison_operator:Eq, function_call:f1, if (-> +1), if_test_atom:0, if_test_atom:a, if_without_else (-> +1), literal:0
             raise ValueError("No converging solution found") # call_argument:, function_call:ValueError, if_then_branch, literal:Str, raise:ValueError
         a = a - f(a) / f1(a) # assignment:Sub, assignment_lhs_identifier:a, assignment_rhs_atom:a, binary_operator:Div, binary_operator:Sub, call_argument:a, function_call:f, function_call:f1, single_assignment:a, suggest_augmented_assignment
