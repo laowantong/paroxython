@@ -6,7 +6,7 @@ import pytest
 
 import context
 from make_snapshot import make_snapshot
-from paroxython.list_labels import ProgramLabeller
+from paroxython.label_programs import ProgramLabeller
 from paroxython.map_taxonomy import Taxonomy
 from paroxython.span import Span
 from paroxython.user_types import Label, Program

@@ -44,7 +44,7 @@ def get_program(source: Source, relative_path: Path = None) -> Program:
     - the program `Path`, empty or relative to the directory passed to list_programs()
     - its centrifugated `Source`,
     - the hints scheduled for addition or deletion.
-    - its `labels`, currently empty, to be later populated by list_labels.py.
+    - its `labels`, currently empty, to be later populated by label_programs.py.
     """
     source = centrifugate_hints(source)
     (addition, deletion) = collect_hints(source)

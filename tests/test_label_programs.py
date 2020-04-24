@@ -6,7 +6,7 @@ import regex
 
 import context
 from make_snapshot import make_snapshot
-from paroxython.list_labels import ProgramLabeller
+from paroxython.label_programs import ProgramLabeller
 from paroxython.user_types import Span, ProgramName
 
 

@@ -96,7 +96,7 @@ class Taxonomy:
 
 
 if __name__ == "__main__":
-    list_labelled_programs = __import__("list_labels").list_labelled_programs
+    list_labelled_programs = __import__("label_programs").list_labelled_programs
     chain = __import__("itertools").chain
     taxonomy = Taxonomy()
     programs = list_labelled_programs(Path("../Python/project_euler"))
