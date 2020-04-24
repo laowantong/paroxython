@@ -103,6 +103,8 @@ def test_call():
                 Label("if_else", [S(1, 1), S(2, 5)]),
                 Label("comparison_operator:Lt", [S(1, 1), S(3, 3), S(2, 2)]),
             ],
+            addition={},
+            deletion={},
         ),
         Program(
             name="algo2",
@@ -110,6 +112,8 @@ def test_call():
                 Label("method_call:difference_update", [S(1, 1), S(1, 1), S(2, 5)]),
                 Label("literal:Set", [S(1, 1), S(2, 5)]),
             ],
+            addition={},
+            deletion={},
         ),
     ]
     result = t(programs)

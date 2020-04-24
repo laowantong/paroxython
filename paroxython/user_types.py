@@ -48,13 +48,11 @@ ProgramNames = List[ProgramName]
 ProgramNameSet = Set[ProgramName]
 
 class Program(NamedTuple):
+    labels: Labels
+    addition: LabelsSpans
+    deletion: LabelsSpans
     name: ProgramName = ProgramName("")
     source: Source = Source("")
-    # Never rely on the following MUTABLE default values.
-    # They are only useful for quick initialization during testing.
-    addition: LabelsSpans= {}
-    deletion: LabelsSpans= {}
-    labels: Labels= []
 
 Programs = List[Program]
 ProgramTaxons = Dict[ProgramName, Taxons]

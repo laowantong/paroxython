@@ -37,7 +37,9 @@ for match in extract_examples(parse.spec_path):
     source = centrifugate_hints(source)
     (addition, deletion) = collect_hints(source)
     source = remove_hints(source)
-    actual_results = dict(parse(Program(source=source, addition=addition, deletion=deletion)))
+    actual_results = dict(
+        parse(Program(source=source, labels=[], addition=addition, deletion=deletion))
+    )
     expected_results = list(zip(match.captures("LABELS"), match.captures("LINES")))
     examples.append((label_name, actual_results, expected_results))
 
@@ -67,7 +69,7 @@ def test_at_least_one_example_is_provided_for_each_feature():
 
 def test_malformed_example():
     source = "if foo():\nbar() # wrong indentation"
-    result = parse(Program(source=source))
+    result = parse(Program(source=source, labels=[], addition={}, deletion={}))
     assert result == [("ast_construction:IndentationError", [])]
 
 
@@ -76,7 +78,10 @@ def test_label_presence(capsys):
     present_names = set()
     result = []
     for program in list_programs(Path("tests/data/simple/")):
-        labels = parse(Program(source=program.source), yield_failed_matches=True)
+        labels = parse(
+            Program(source=program.source, labels=[], addition={}, deletion={}),
+            yield_failed_matches=True,
+        )
         for (name, spans) in labels:
             all_names.add(name)
             if spans:
