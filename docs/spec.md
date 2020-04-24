@@ -4231,6 +4231,8 @@ Match sequential loops, along with their iteration variable(s).
 5           pass
 6       else:
 7           pass
+8   # for (i, j) in enumerate(seq):
+9   #     pass
 ```
 
 ##### Matches
