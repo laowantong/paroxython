@@ -1080,14 +1080,14 @@ The so-called Yoda style puts the literal operand on the left side of a comparis
 
 ```sql
 SELECT "yoda_comparison",
-       cmp.name_suffix,
-       cmp.span,
-       cmp.path
-FROM t_comparison_operator cmp
-JOIN t_literal lit ON (cmp.span = lit.span
-                       AND cmp.path GLOB "*-2-1-"
+       c.name_suffix,
+       c.span,
+       c.path
+FROM t_comparison_operator c
+JOIN t_literal lit ON (c.span = lit.span
+                       AND c.path GLOB "*-2-1-"
                        AND lit.path GLOB "*-0-")
-WHERE substr(cmp.path, 1, length(cmp.path)-4) == substr(lit.path, 1, length(lit.path)-2)
+WHERE substr(c.path, 1, length(c.path)-4) == substr(lit.path, 1, length(lit.path)-2)
 ```
 
 ##### Example
@@ -1155,15 +1155,15 @@ SELECT CASE op.name_suffix
            ELSE "chained_inequalities"
        END,
        count(*),
-       cmp.span,
-       cmp.path
-FROM t_chained_comparison cmp
-JOIN t_comparison_operator op ON (op.path GLOB cmp.path || "*-")
+       c.span,
+       c.path
+FROM t_chained_comparison c
+JOIN t_comparison_operator op ON (op.path GLOB c.path || "*-")
 WHERE op.name_suffix REGEXP "(Eq|Lt|LtE|Gt|GtE)$"
-GROUP BY cmp.path,
+GROUP BY c.path,
          op.name_suffix
 HAVING count(*) > 1 -- a chain has at least two operators
-ORDER BY cmp.path
+ORDER BY c.path
 ```
 
 _Remark._ Note the user-defined function `REGEXP` in the `WHERE`clause. It calls the function `match()` of the third-party [`regex`](https://pypi.org/project/regex/) library.
@@ -1664,17 +1664,17 @@ SELECT "range",
        span,
        path
 FROM -- Only a subquery permits to sort the arguments before grouping them together.
-  (SELECT range.rowid AS rowid,
+  (SELECT f.rowid AS rowid,
           CASE arg.name_suffix
               WHEN "" THEN "_"
               ELSE arg.name_suffix
           END AS name_suffix,
-          range.span AS span,
-          range.path AS path
-   FROM t_function_call range
-   JOIN t_call_argument arg ON (arg.path GLOB range.path || "*-")
-   WHERE range.name_suffix = "range"
-     AND length(range.path) + 4 = length(arg.path) -- Ensure that arg is a (direct) argument of range().
+          f.span AS span,
+          f.path AS path
+   FROM t_function_call f
+   JOIN t_call_argument arg ON (arg.path GLOB f.path || "*-")
+   WHERE f.name_suffix = "range"
+     AND length(f.path) + 4 = length(arg.path) -- Ensure that arg is a (direct) argument of range().
    ORDER BY arg.path)-- Thanks to the subquery, this clause...
 GROUP BY rowid -- will be executed before this one.
 ```

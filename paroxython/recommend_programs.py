@@ -57,10 +57,9 @@ class Recommendations:
             if not isinstance(data, list):  # ... or a shell command printing them on stdout
                 data = (
                     subprocess.run(
-                        str(command["source"]).format(
-                            base_path=self.base_path
-                        ),  # str() needed by mypy
-                        capture_output=True,
+                        str(data).format(base_path=self.base_path),  # str() needed by mypy
+                        stdout=subprocess.PIPE,  # From Python 3.7, these two arguments can be
+                        stderr=subprocess.PIPE,  # ... replaced by: capture_output=True
                         encoding="utf-8",
                         shell=True,
                         check=True,

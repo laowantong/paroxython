@@ -159,7 +159,7 @@ class Database:
 
         if db_path.exists():  # Python 3.8: use missing_ok=True parameter
             db_path.unlink()
-        connexion = sqlite3.connect(db_path)
+        connexion = sqlite3.connect(str(db_path))  # str() for Python 3.6 compatibility
         c = connexion.cursor()
 
         program_columns = (
