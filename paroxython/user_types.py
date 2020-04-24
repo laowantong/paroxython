@@ -50,6 +50,8 @@ ProgramNameSet = Set[ProgramName]
 class Program(NamedTuple):
     name: ProgramName = ProgramName("")
     source: Source = Source("")
+    # Never rely on the following MUTABLE default values.
+    # They are only useful for quick initialization during testing.
     addition: LabelsSpans= {}
     deletion: LabelsSpans= {}
     labels: Labels= []

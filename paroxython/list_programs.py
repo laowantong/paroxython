@@ -18,34 +18,37 @@ match_excluded = regex.compile(
 ).match
 
 
-def list_programs(directory: Path, strategy="strip_docs") -> Programs:
-    """List all Programs of a given directory.
-
-    Each `Program` (cf. declaration) includes:
-    - its `Path`, relative to the given directory
-    - its `Source`,
-    - the hints scheduled for addition or deletion.
-
-    Its `labels` will later be populated by "list_labels.py".
-    """
-    result = []
-    cleanup = cleanup_factory(strategy)
+def list_programs(directory: Path, cleanup_strategy: str = "strip_docs") -> Programs:
+    """List recursively all Python `Programs` of a given directory."""
+    result: Programs = []
+    cleanup = cleanup_factory(cleanup_strategy)
     for program_path in sorted(directory.rglob("*.py")):
         if not match_excluded(program_path.name):
             source = cleanup(Source(program_path.read_text()))
-            source = centrifugate_hints(source)
-            (addition, deletion) = collect_hints(source)
-            source = remove_hints(source)
-            result.append(
-                Program(
-                    name=ProgramName(str(program_path.relative_to(directory))),
-                    source=source,
-                    addition=addition,
-                    deletion=deletion,
-                    labels=[],
-                )
-            )
+            relative_path = program_path.relative_to(directory)
+            result.append(get_program(source, relative_path))
     return result
+
+
+def get_program(source: Source, relative_path: Path = None) -> Program:
+    """Construct a `Program` of its `Source` and relative `Path`.
+
+    The result consists in:
+    - the program `Path`, empty or relative to the directory passed to list_programs()
+    - its centrifugated `Source`,
+    - the hints scheduled for addition or deletion.
+    - its `labels`, currently empty, to be later populated by list_labels.py.
+    """
+    source = centrifugate_hints(source)
+    (addition, deletion) = collect_hints(source)
+    source = remove_hints(source)
+    return Program(
+        name=ProgramName(str(relative_path or Path())),
+        source=source,
+        addition=addition,
+        deletion=deletion,
+        labels=[],  # necessary, since the default value is mutable.
+    )
 
 
 if __name__ == "__main__":
