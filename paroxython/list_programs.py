@@ -1,4 +1,5 @@
 from pathlib import Path
+from typing import Iterator
 
 import regex  # type: ignore
 
@@ -22,12 +23,18 @@ def list_programs(directory: Path, cleanup_strategy: str = "strip_docs") -> Prog
     """List recursively all Python `Programs` of a given directory."""
     result: Programs = []
     cleanup = cleanup_factory(cleanup_strategy)
+    for program_path in generate_program_paths(directory):
+        source = cleanup(Source(program_path.read_text()))
+        relative_path = program_path.relative_to(directory)
+        result.append(get_program(source, relative_path))
+    return result
+
+
+def generate_program_paths(directory: Path) -> Iterator[Path]:
+    """Generate recursively the paths of all Python files of a given directory."""
     for program_path in sorted(directory.rglob("*.py")):
         if not match_excluded(program_path.name):
-            source = cleanup(Source(program_path.read_text()))
-            relative_path = program_path.relative_to(directory)
-            result.append(get_program(source, relative_path))
-    return result
+            yield program_path
 
 
 def get_program(source: Source, relative_path: Path = None) -> Program:

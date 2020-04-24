@@ -4,7 +4,7 @@ import pytest
 
 import context
 from make_snapshot import make_snapshot
-from paroxython.list_labels import generate_labelled_sources
+from paroxython.list_labels import ProgramLabeller
 
 
 def test_update_snapshots(capsys):
@@ -17,11 +17,12 @@ def test_update_snapshots(capsys):
     # fmt: on
     for directory in directories:
         path = Path(directory)
+        labeller = ProgramLabeller(path)
         if (path / "__is_private_directory").exists():
             output_path = Path(path.parent, "snapshot_" + path.parts[-1] + ".py")
         else:
             output_path = Path("tests/snapshots", "-".join(path.parts[-2:]) + ".py")
-        acc = [result for result in generate_labelled_sources(path)]
+        acc = [result for result in labeller.generate_labelled_sources()]
         make_snapshot(output_path, "\n".join(acc), capsys)
 
 

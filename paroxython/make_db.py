@@ -9,7 +9,7 @@ from typing import List, Optional, Tuple, Union, overload, Dict
 import regex  # type: ignore
 
 from goodies import add_line_numbers
-from list_labels import list_labelled_programs
+from list_labels import ProgramLabeller
 from map_taxonomy import Taxonomy
 from user_types import (
     LabelInfos,
@@ -37,7 +37,8 @@ class Database:
         if ignore_timestamps:
             get_timestamp = lambda path: "ignored"
 
-        programs: Programs = list_labelled_programs(directory, *args, **kargs)
+        labeller = ProgramLabeller(directory, *args, **kargs)
+        programs: Programs = labeller.list_labelled_programs()
         self.programs: ProgramInfos = {}
         for program in programs:
             self.programs[program.name] = {

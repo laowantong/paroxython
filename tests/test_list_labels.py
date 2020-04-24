@@ -6,7 +6,7 @@ import regex
 
 import context
 from make_snapshot import make_snapshot
-from paroxython.list_labels import list_labelled_programs, generate_labelled_sources
+from paroxython.list_labels import ProgramLabeller
 from paroxython.user_types import Span, ProgramName
 
 
@@ -21,15 +21,18 @@ class ProgramEncoder(json.JSONEncoder):
         return json.JSONEncoder.default(self, obj)
 
 
+labeller = ProgramLabeller(Path("tests/data/simple"))
+
+
 def test_list_labelled_programs(capsys):
-    result = list_labelled_programs(Path("tests/data/simple"))
+    result = labeller.list_labelled_programs()
     text = json.dumps(result, cls=ProgramEncoder, indent=2)
     text = regex.sub(r"\s*\[\s+(\d+),\s+(\d+)\s+\](,?)\s+", r"[\1,\2]\3", text)
     make_snapshot(Path("tests/snapshots/simple_labelled_programs.json"), text, capsys)
 
 
 def test_generate_labelled_sources(capsys):
-    chunks = list(generate_labelled_sources(Path("tests/data/simple")))
+    chunks = list(labeller.generate_labelled_sources())
     result = []
     for chunk in chunks:
         if chunk.startswith("#"):
