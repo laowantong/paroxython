@@ -1,4 +1,4 @@
-import ast
+from typed_ast import ast3 as ast
 from typing import Any
 
 import regex  # type: ignore

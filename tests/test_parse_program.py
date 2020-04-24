@@ -70,7 +70,11 @@ def test_at_least_one_example_is_provided_for_each_feature():
 def test_malformed_example():
     source = "if foo():\nbar() # wrong indentation"
     result = parse(Program(source=source, labels=[], addition={}, deletion={}))
-    assert result == [("ast_construction:IndentationError", [])]
+    print(result)
+    assert result[0].name in (
+        "ast_construction:IndentationError",  # under Python 3.7 ast standard library
+        "ast_construction:SyntaxError",  # under Python 3.7 with typed_ast.ast3 library
+    )
 
 
 def test_label_presence(capsys):

@@ -1,4 +1,4 @@
-import ast
+from typed_ast import ast3 as ast
 from collections import defaultdict
 from pathlib import Path
 from typing import Callable, Dict
