@@ -80,6 +80,8 @@
 - literal:Str / fizzbuzz.py / 4, 6, 8
 - loop:for / fizzbuzz.py / 2-10
 - loop:while / collatz_print.py / 2-7
+- loop_with_late_exit:for / fizzbuzz.py / 2-10
+- loop_with_late_exit:while / collatz_print.py / 2-7
 - modulo_operator / collatz_print.py / 4
 - modulo_operator / fizzbuzz.py / 3, 5, 7
 - modulo_operator / is_even.py / 3
@@ -149,8 +151,6 @@
 - for_indexes
 - for_indexes_elements
 - for_range
-- for_with_early_exit|while_with_early_exit
-- for_with_else|while_with_else
 - function
 - function_argument
 - function_argument_flavor
@@ -180,6 +180,9 @@
 - literal
 - loop
 - loop_else
+- loop_with_early_exit
+- loop_with_else
+- loop_with_late_exit
 - method
 - method_call
 - method_call_object

@@ -122,9 +122,10 @@
       - [Feature `square_nested_for`](#feature-square_nested_for)
     - [Non-sequential loops](#non-sequential-loops)
       - [Feature `infinite_while`](#feature-infinite_while)
-    - [Early exit](#early-exit)
-      - [Feature `for_with_early_exit|while_with_early_exit` (SQL)](#feature-for_with_early_exitwhile_with_early_exit)
-      - [Feature `for_with_else|while_with_else` (SQL)](#feature-for_with_elsewhile_with_else)
+    - [Loop exit](#loop-exit)
+      - [Feature `loop_with_early_exit` (SQL)](#feature-loop_with_early_exit)
+      - [Feature `loop_with_else` (SQL)](#feature-loop_with_else)
+      - [Feature `loop_with_late_exit` (SQL)](#feature-loop_with_late_exit)
   - [Exceptions](#exceptions)
       - [Feature `assertion`](#feature-assertion)
       - [Feature `try`](#feature-try)
@@ -2940,10 +2941,10 @@ Match `return` statements and, when the returned object is an [_atom_](#feature-
 [⬇️ feature `closure`](#feature-closure)  
 [⬇️ feature `count_inputs`](#feature-count_inputs)  
 [⬇️ feature `find_first_element`](#feature-find_first_element)  
-[⬇️ feature `for_with_early_exit|while_with_early_exit`](#feature-for_with_early_exitwhile_with_early_exit)  
 [⬇️ feature `function_returning_something`](#feature-function_returning_something)  
 [⬇️ feature `get_valid_input`](#feature-get_valid_input)  
 [⬇️ feature `if_guard`](#feature-if_guard)  
+[⬇️ feature `loop_with_early_exit`](#feature-loop_with_early_exit)  
 [⬇️ feature `universal_quantification|existential_quantification`](#feature-universal_quantificationexistential_quantification)  
 
 ##### Specification
@@ -4285,8 +4286,9 @@ Match sequential loops, along with their iteration variable(s).
 [⬆️ feature `for`](#feature-for)  
 [⬆️ feature `while`](#feature-while)  
 [⬇️ feature `count_elements|count_states`](#feature-count_elementscount_states)  
-[⬇️ feature `for_with_early_exit|while_with_early_exit`](#feature-for_with_early_exitwhile_with_early_exit)  
-[⬇️ feature `for_with_else|while_with_else`](#feature-for_with_elsewhile_with_else)  
+[⬇️ feature `loop_with_early_exit`](#feature-loop_with_early_exit)  
+[⬇️ feature `loop_with_else`](#feature-loop_with_else)  
+[⬇️ feature `loop_with_late_exit`](#feature-loop_with_late_exit)  
 
 ##### Specification
 
@@ -4323,7 +4325,7 @@ WHERE name_prefix IN ("for",
 
 ##### Derivations
 
-[⬇️ feature `for_with_early_exit|while_with_early_exit`](#feature-for_with_early_exitwhile_with_early_exit)  
+[⬇️ feature `loop_with_early_exit`](#feature-loop_with_early_exit)  
 
 ##### Specification
 
@@ -4355,7 +4357,7 @@ WHERE name_prefix IN ("for",
 
 ##### Derivations
 
-[⬇️ feature `for_with_else|while_with_else`](#feature-for_with_elsewhile_with_else)  
+[⬇️ feature `loop_with_else`](#feature-loop_with_else)  
 
 ##### Specification
 
@@ -4727,17 +4729,18 @@ Match an infinite loop denoted by `while True` (preferred) or `while 1`.
 
 --------------------------------------------------------------------------------
 
-### Early exit
+### Loop exit
 
 --------------------------------------------------------------------------------
 
-#### Feature `for_with_early_exit|while_with_early_exit`
+#### Feature `loop_with_early_exit`
 
 ##### Derivations
 
 [⬆️ feature `break`](#feature-break)  
 [⬆️ feature `loop`](#feature-loop)  
 [⬆️ feature `return`](#feature-return)  
+[⬇️ feature `loop_with_late_exit`](#feature-loop_with_late_exit)  
 
 ##### Specification
 
@@ -4795,7 +4798,7 @@ JOIN
 
 --------------------------------------------------------------------------------
 
-#### Feature `for_with_else|while_with_else`
+#### Feature `loop_with_else`
 
 ##### Derivations
 
@@ -4833,6 +4836,46 @@ JOIN
 | Label | Lines |
 |:--|:--|
 | `loop_with_else:for` | 1-6 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `loop_with_late_exit`
+
+A loop without early exit.
+
+##### Derivations
+
+[⬆️ feature `loop`](#feature-loop)  
+[⬆️ feature `loop_with_early_exit`](#feature-loop_with_early_exit)  
+
+##### Specification
+
+```sql
+SELECT "loop_with_late_exit",
+       l1.name_suffix,
+       l1.span,
+       l1.path
+FROM t_loop l1
+LEFT JOIN t_loop_with_early_exit l2 ON (l1.span = l2.span)
+WHERE l2.span IS NULL
+```
+
+##### Example
+
+```python
+1   for x in seq:
+2       if foo():
+3           break
+4   for x in seq:
+5       if foo():
+6           pass
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `loop_with_late_exit:for` | 4-6 |
 
 --------------------------------------------------------------------------------
 

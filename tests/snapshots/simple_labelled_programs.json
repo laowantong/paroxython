@@ -173,6 +173,10 @@
         [[2,7]]
       ],
       [
+        "loop_with_late_exit:while",
+        [[2,7]]
+      ],
+      [
         "modulo_operator",
         [[4,4]]
       ],
@@ -382,6 +386,10 @@
       ],
       [
         "loop:for",
+        [[2,10]]
+      ],
+      [
+        "loop_with_late_exit:for",
         [[2,10]]
       ],
       [

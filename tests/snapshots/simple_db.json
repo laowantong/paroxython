@@ -51,6 +51,7 @@
         "literal:2": [[4,4],[5,5]],
         "literal:3": [[7,7]],
         "loop:while": [[2,7]],
+        "loop_with_late_exit:while": [[2,7]],
         "modulo_operator": [[4,4]],
         "multiplication_operator": [[7,7]],
         "single_assignment:n": [[5,5],[7,7]],
@@ -73,6 +74,7 @@
       "taxons": {
         "flow/conditional": [[4,7]],
         "flow/conditional/else": [[7,7]],
+        "flow/loop/exit/late": [[2,7]],
         "flow/loop/while": [[2,7]],
         "io/standard/print": [[3,3],[8,8]],
         "operator/arithmetic/addition": [[7,7]],
@@ -126,6 +128,7 @@
         "literal:5": [[7,7]],
         "literal:Str": [[4,4],[6,6],[8,8]],
         "loop:for": [[2,10]],
+        "loop_with_late_exit:for": [[2,10]],
         "modulo_operator": [[3,3],[5,5],[7,7]],
         "range:1:101": [[2,2]],
         "suggest_constant_definition": [[3,3],[5,5],[7,7]]
@@ -135,6 +138,7 @@
         "flow/conditional": [[3,10],[5,10],[7,10]],
         "flow/conditional/else": [[10,10]],
         "flow/conditional/else/if": [[6,6],[8,8]],
+        "flow/loop/exit/late": [[2,10]],
         "flow/loop/for/arithmetic/start": [[2,10]],
         "io/standard/print": [[4,4],[6,6],[8,8],[10,10]],
         "library/personal": [[1,1]],
@@ -384,6 +388,12 @@
     "loop:while": [
       "collatz_print.py"
     ],
+    "loop_with_late_exit:for": [
+      "fizzbuzz.py"
+    ],
+    "loop_with_late_exit:while": [
+      "collatz_print.py"
+    ],
     "modulo_operator": [
       "collatz_print.py",
       "fizzbuzz.py",
@@ -464,6 +474,10 @@
       "fizzbuzz.py"
     ],
     "flow/conditional/else/if": [
+      "fizzbuzz.py"
+    ],
+    "flow/loop/exit/late": [
+      "collatz_print.py",
       "fizzbuzz.py"
     ],
     "flow/loop/for/arithmetic/start": [

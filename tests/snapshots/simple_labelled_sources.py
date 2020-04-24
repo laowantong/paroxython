@@ -17,6 +17,7 @@ def print_collatz(n): # added_block_label (-> +7)
     while n != 1: # comparison_operator:NotEq
                   # literal:1
                   # loop:while (-> +5)
+                  # loop_with_late_exit:while (-> +5)
                   # suggest_constant_definition
                   # while (-> +5)
         print(n) # call_argument:n
@@ -84,6 +85,7 @@ for i in range(1, 101): # call_argument:1
                         # literal:1
                         # literal:101
                         # loop:for (-> +8)
+                        # loop_with_late_exit:for (-> +8)
                         # range:1:101
     if i % 15 == 0: # binary_operator:Mod
                     # comparison_operator:Eq
