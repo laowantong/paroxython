@@ -1,7 +1,7 @@
 from bisect import insort
 from collections import defaultdict
 from pathlib import Path
-from typing import Callable, Iterator, List, Set
+from typing import Iterator, List, Set
 
 from list_programs import generate_program_paths, list_programs, iterate_and_print_programs
 from parse_program import ProgramParser

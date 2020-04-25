@@ -1,7 +1,7 @@
 from collections import defaultdict
 from math import log2
 from textwrap import wrap
-from typing import Callable, Iterator
+from typing import Callable
 from unicodedata import normalize
 
 import regex  # type: ignore

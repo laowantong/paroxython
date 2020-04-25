@@ -1,6 +1,6 @@
 from collections import Counter, defaultdict
 from pathlib import Path
-from typing import Dict, List
+from typing import Dict
 from os.path import commonpath
 from functools import lru_cache
 
@@ -9,9 +9,7 @@ import regex  # type: ignore
 from user_types import (
     LabelName,
     Labels,
-    Program,
-    Programs,
-    ProgramTaxons,
+    Span,
     Taxon,
     TaxonName,
     TaxonNames,

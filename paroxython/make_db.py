@@ -19,7 +19,6 @@ from user_types import (
     ProgramName,
     ProgramNameSet,
     Programs,
-    ProgramTaxons,
     ProgramToPrograms,
     TaxonInfos,
     Taxons,
