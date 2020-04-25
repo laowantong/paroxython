@@ -115,7 +115,7 @@ if __name__ == "__main__":
         source = regex.sub(r"(?m)^.{1,4}", "", source)
     for (i, line) in enumerate(source.split("\n"), 1):
         print(f"{i:<4}{line}")
-    program = Program(source=Source(source), labels=[], addition={}, deletion={})
+    program = Program(source=Source(source), labels=[], taxons=[], addition={}, deletion={})
     print()
     parse = ProgramParser()
     acc = []

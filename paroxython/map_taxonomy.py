@@ -2,14 +2,15 @@ from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Dict, List
 from os.path import commonpath
+from functools import lru_cache
 
 import regex  # type: ignore
 
-from goodies import iterate_and_print_programs
 from user_types import (
     LabelName,
     Labels,
     Program,
+    Programs,
     ProgramTaxons,
     Taxon,
     TaxonName,
@@ -41,28 +42,27 @@ class Taxonomy:
 
     cache: Dict[LabelName, TaxonNames] = {}
 
+    @lru_cache(maxsize=None)
     def get_taxon_name_list(self, label_name: LabelName) -> TaxonNames:
         """Translate a label name into a list of taxon names."""
-        cache = Taxonomy.cache
-        if label_name not in cache:
-            if label_name in self.literal_label_names:
-                cache[label_name] = self.literal_label_names[label_name]
-            else:
-                cache[label_name] = []
-                for (rex, taxon_name) in self.compiled_label_names:
-                    if rex.match(label_name):
-                        s = rex.sub(taxon_name, label_name)  # cf. note above
-                        s = sub_slash_sequences("/", s)
-                        cache[label_name].append(s)
-        return cache[label_name]
+        if label_name in self.literal_label_names:
+            return self.literal_label_names[label_name]
+        result: TaxonNames = []
+        for (rex, taxon_name) in self.compiled_label_names:
+            if rex.match(label_name):
+                s = rex.sub(taxon_name, label_name)  # cf. note above
+                s = sub_slash_sequences("/", s)
+                result.append(s)
+        return result
 
     def to_taxons(self, labels: Labels) -> Taxons:
         """Translate a list of labels to a list of taxons with their spans in a bag."""
-        result: TaxonsSpans = defaultdict(Counter)
+        acc: TaxonsSpans = defaultdict(Counter)
         for (label_name, spans) in labels:
             for taxon_name in self.get_taxon_name_list(label_name):
-                result[taxon_name].update(spans)
-        return [Taxon(name, spans) for (name, spans) in sorted(result.items())]
+                acc[taxon_name].update(spans)
+        taxons = [Taxon(name, spans) for (name, spans) in sorted(acc.items())]
+        return self.deduplicated_taxons(taxons)
 
     @staticmethod
     def deduplicated_taxons(taxons: Taxons) -> Taxons:
@@ -86,21 +86,14 @@ class Taxonomy:
                 result.append(Taxon(name, spans))
         return result
 
-    def __call__(self, programs: List[Program]) -> ProgramTaxons:
-        """Translate labels into taxons on a list of program names."""
-        result: ProgramTaxons = {}
-        print(f"Mapping labels of {len(programs)} programs onto taxonomy.")
-        for program in iterate_and_print_programs(programs):
-            result[program.name] = self.deduplicated_taxons(self.to_taxons(program.labels))
-        return result
-
 
 if __name__ == "__main__":
-    list_labelled_programs = __import__("label_programs").list_labelled_programs
-    chain = __import__("itertools").chain
+    ProgramLabeller = __import__("label_programs").ProgramLabeller
+    labeller = ProgramLabeller(Path("../Python/project_euler"))
+    programs = labeller.list_labelled_programs()
     taxonomy = Taxonomy()
-    programs = list_labelled_programs(Path("../Python/project_euler"))
-    for (_, taxons) in taxonomy(programs).items():
+    for program in programs:
+        taxons = taxonomy.to_taxons(program.labels)
         if not taxons:
             continue
         width = min(40, max(len(" ".join(map(str, taxon.spans))) for taxon in taxons))

@@ -49,6 +49,7 @@ ProgramNameSet = Set[ProgramName]
 
 class Program(NamedTuple):
     labels: Labels
+    taxons: Taxons
     addition: LabelsSpans
     deletion: LabelsSpans
     name: ProgramName = ProgramName("")

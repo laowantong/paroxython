@@ -13,7 +13,7 @@ from goodies import (
     enumeration_to_txt_factory,
     cost_interval,
 )
-from span import Span
+from goodies import couple_to_string
 from user_types import Pipeline, ProgramNames, AssessedPrograms
 
 
@@ -47,7 +47,7 @@ class Recommendations:
         """Evolve recommended programs, imparted knowledge and log accross pipeline commands."""
 
         current = set(self.programs)
-        print(f"Processing {len(self.commands)} commands on {len(current)} programs.")
+        print(f"\nProcessing {len(self.commands)} commands on {len(current)} programs.")
 
         # Execute sequentially all the commands of the pipeline
         for command in self.commands:
@@ -121,7 +121,7 @@ class Recommendations:
                 contents.append("|" + "----|" * 3)
                 for (taxon_name, spans) in sorted(program_info["taxons"].items()):
                     taxon_cost = self.taxon_cost(taxon_name)
-                    s = spans_to_html(", ".join(str(Span(list(span))) for span in spans))
+                    s = spans_to_html(", ".join(map(couple_to_string, spans)))
                     contents.append(f"| {taxon_cost} | `{taxon_name}` | {s} |")
                 contents.append("---")
 
@@ -158,7 +158,7 @@ class Recommendations:
 
     def dump(self, text):
         self.output_path.write_text(text)
-        print(f"Dumped: {self.output_path.resolve()}")
+        print(f"Dumped: {self.output_path.resolve()}\n")
 
 
 if __name__ == "__main__":

@@ -3,8 +3,7 @@ from collections import defaultdict
 from pathlib import Path
 from typing import Callable, Iterator, List, Set
 
-from goodies import iterate_and_print_programs
-from list_programs import generate_program_paths, list_programs
+from list_programs import generate_program_paths, list_programs, iterate_and_print_programs
 from parse_program import ProgramParser
 from user_types import Label, LabelName, LabelsSpans, Program, ProgramName, Programs, Source
 

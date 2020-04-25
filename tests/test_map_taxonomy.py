@@ -103,6 +103,7 @@ def test_call():
                 Label("if_else", [S(1, 1), S(2, 5)]),
                 Label("comparison_operator:Lt", [S(1, 1), S(3, 3), S(2, 2)]),
             ],
+            taxons=[],
             addition={},
             deletion={},
         ),
@@ -112,11 +113,12 @@ def test_call():
                 Label("method_call:difference_update", [S(1, 1), S(1, 1), S(2, 5)]),
                 Label("literal:Set", [S(1, 1), S(2, 5)]),
             ],
+            taxons=[],
             addition={},
             deletion={},
         ),
     ]
-    result = t(programs)
+    result = {program.name: t.to_taxons(program.labels) for program in programs}
     print(result)
     assert result == {
         "algo1": [
@@ -136,8 +138,11 @@ def test_snapshot_simple_taxons(capsys):
     acc = {}
     labeller = ProgramLabeller(Path("tests/data/simple"))
     programs = labeller.list_labelled_programs()
-    for (path, taxons) in taxonomy(programs).items():
-        acc[str(path)] = {name: " ".join(map(str, sorted(set(spans)))) for (name, spans) in taxons}
+    for program in programs:
+        taxons = taxonomy.to_taxons(program.labels)
+        acc[program.name] = {
+            name: " ".join(map(str, sorted(set(spans)))) for (name, spans) in taxons
+        }
     result = json.dumps(acc, indent=2)
     make_snapshot(Path("tests/snapshots/simple_taxons.json"), result, capsys)
 

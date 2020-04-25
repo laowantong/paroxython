@@ -13,6 +13,7 @@ versions of docs/spec.md.
 """
 
 from collections import defaultdict
+from functools import lru_cache
 
 import regex  # type: ignore
 import sqlparse
@@ -61,17 +62,12 @@ def derivation_map(text):
     ).finditer
 
     def label_converter(label_patterns):
-        cache = {}
-
+        @lru_cache(maxsize=None)
         def label_name_to_pattern(label_name):
-            if label_name not in cache:
-                for label_pattern in label_patterns:
-                    if regex.fullmatch(label_pattern, label_name):
-                        cache[label_name] = label_pattern
-                        break
-                else:
-                    raise ValueError(f"Unable to match '{label_name}' with a known pattern")
-            return cache[label_name]
+            for label_pattern in label_patterns:
+                if regex.fullmatch(label_pattern, label_name):
+                    return label_pattern
+            raise ValueError(f"Unable to match '{label_name}' with a known pattern")
 
         return label_name_to_pattern
 

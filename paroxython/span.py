@@ -1,5 +1,7 @@
 from typing import List, Tuple
 
+from goodies import couple_to_string
+
 
 class Span:
     """Metadata associated with a tag (i.e., a label or a taxon).
@@ -19,14 +21,11 @@ class Span:
             self.start = int(data[0])
             self.end = int(data[1])
             self.path = ""
+        couple = (self.start, self.end)
+        self.hash = hash(couple)
+        self.string = couple_to_string(couple)
         self.length = self.end - self.start
-        if self.length == 0:
-            self.string = f"{self.start}"
-            self.suffix = ""
-        else:
-            self.string = f"{self.start}-{self.end}"
-            self.suffix = f" (-> +{self.length})"
-        self.hash = hash((self.start, self.end, self.path))
+        self.suffix = f" (-> +{self.length})" if self.length else ""
 
     def __str__(self) -> str:
         return self.string

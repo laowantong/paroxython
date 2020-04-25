@@ -54,8 +54,20 @@ def get_program(source: Source, relative_path: Path = None) -> Program:
         source=source,
         addition=addition,
         deletion=deletion,
-        labels=[],  # necessary, since the default value is mutable.
+        labels=[],
+        taxons=[],
     )
+
+
+def iterate_and_print_programs(programs: Programs) -> Iterator[Program]:
+    """Wrap the iteration of programs into a logger."""
+    blanks = ""
+    for (i, program) in enumerate(programs, 1):
+        print(f"\r{blanks}\r{i: 5} {program.name}", end="", flush=True)
+        blanks = " " * (len(program.name) + 7)
+        if i == len(programs):  # Placed after the loop, the next line would not be executed.
+            print(f"\r{blanks}\r", end="", flush=True)
+        yield program
 
 
 if __name__ == "__main__":

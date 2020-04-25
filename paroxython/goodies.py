@@ -2,12 +2,9 @@ from collections import defaultdict
 from math import log2
 from textwrap import wrap
 from typing import Callable, Iterator
-from user_types import Programs, Program
 from unicodedata import normalize
 
 import regex  # type: ignore
-
-from user_types import Source
 
 
 def title_to_slug_factory():
@@ -34,7 +31,7 @@ def title_to_slug_factory():
     return title_to_slug
 
 
-def add_line_numbers(source: Source) -> str:
+def add_line_numbers(source: str) -> str:
     return "\n".join(f"{n: <4}{line}" for (n, line) in enumerate(source.split("\n"), 1))
 
 
@@ -60,16 +57,6 @@ def enumeration_to_txt_factory(
     return enumeration_to_txt
 
 
-def iterate_and_print_programs(programs: Programs) -> Iterator[Program]:
-    blanks = ""
-    for (i, program) in enumerate(programs, 1):
-        print(f"\r{blanks}\r{i: 5} {program.name}", end="", flush=True)
-        blanks = " " * (len(program.name) + 7)
-        if i == len(programs):  # Placed after the loop, the next line would not be executed.
-            print(f"\r{blanks}\r", end="", flush=True)
-        yield program
-
-
 def cost_interval(x):
     if x == 0:
         return "0"
@@ -82,3 +69,11 @@ def cost_interval(x):
     inf = 2 ** int(log2(x))
     sup = 2 ** int(log2(x) + 1)
     return f"in [{inf}, {sup}["
+
+
+def couple_to_string(couple):
+    """Return a deduplicated string representation of the given couple."""
+    if couple[0] == couple[1]:
+        return str(couple[0])
+    else:
+        return f"{couple[0]}-{couple[1]}"
