@@ -44,7 +44,7 @@ class Database:
         importations = compute_direct_importations(programs)
         self.importations = complete_and_collect_importations(importations)
 
-        exportations = compute_exportations(programs, importations)
+        exportations = compute_exportations(programs, self.importations)
         self.exportations = collect_exportations(exportations)
 
         get_timestamp = lambda path: str(datetime.fromtimestamp(path.stat().st_mtime))
@@ -177,7 +177,7 @@ def prepared(tags):
     """Prepare the spans for serialization."""
     result: Union[LabelsPoorSpans, TaxonsPoorSpans] = {}
     for (tag_name, spans) in tags:
-        result[tag_name] = [span.to_couple() for span in sorted(set(spans))]
+        result[tag_name] = [span[:2] for span in sorted(set(spans))]
     return result
 # fmt: on
 

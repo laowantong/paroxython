@@ -3,8 +3,6 @@ from typing import Dict, List, NamedTuple, NewType, Set, Tuple, Union
 
 from typing_extensions import TypedDict, Literal  # Python 3.8: import directly from typing
 
-from span import Span
-
 # fmt: off
 
 
@@ -13,6 +11,10 @@ from span import Span
 Source = NewType("Source", str)
 Query = NewType("Query", str)
 
+class Span(NamedTuple):
+    start: int
+    end: int
+    path: str = ""
 
 # Labels
 

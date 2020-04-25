@@ -5,8 +5,7 @@ from typing import Callable, Dict, List, Tuple, Set
 
 import regex  # type: ignore
 
-from user_types import LabelName, LabelsSpans, Source
-from span import Span
+from user_types import LabelName, LabelsSpans, Source, Span
 
 HINT_COMMENT = "# paroxython:"
 
@@ -65,7 +64,7 @@ class HintBuffer:
 
     def append_hint(self, label_name: LabelName, line_number: int) -> None:
         """Label a span consisting in the given line number."""
-        self.result[label_name].append(Span([line_number]))
+        self.result[label_name].append(Span(line_number, line_number))
 
     def open_hint(self, label_name: LabelName, line_number: int) -> None:
         self.stack[label_name].append(line_number)
@@ -76,7 +75,7 @@ class HintBuffer:
 
     def close_hint(self, label_name: LabelName, line_number: int) -> None:
         """Label a span opened above and closed on the given line number."""
-        self.result[label_name].append(Span([self.stack[label_name].pop(), line_number]))
+        self.result[label_name].append(Span(self.stack[label_name].pop(), line_number))
 
     def ensure_stack_is_empty(self) -> None:
         """Raise an error iff there remains at least one open label."""

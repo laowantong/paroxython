@@ -4,8 +4,8 @@ from typing import Dict
 
 import regex  # type: ignore
 
-from span import Span
-from user_types import Label, LabelName, Labels, LabelsSpans, Query
+from goodies import couple_to_string
+from user_types import Label, LabelName, Labels, LabelsSpans, Query, Span
 
 
 class DB:
@@ -44,8 +44,7 @@ class DB:
         for (name_prefix, name_suffix, span_string, path) in self.c.execute(query):
             label_name = f"{name_prefix}:{name_suffix}" if name_suffix != "" else name_prefix
             span = span_string.split("-")
-            span[0] = f"{span[0]}:{path}"
-            groups[label_name].append(Span(span))
+            groups[label_name].append(Span(int(span[0]), int(span[-1]), path))
         return [Label(*item) for item in groups.items()]
 
     def update(self, labels: Labels) -> None:
@@ -53,7 +52,8 @@ class DB:
         for (name, spans) in labels:
             for span in spans:
                 (prefix, _, suffix) = name.partition(":")
-                values.append((name, prefix, suffix, str(span), span.start, span.end, span.path))
+                span_string = couple_to_string(span)
+                values.append((name, prefix, suffix, span_string, span.start, span.end, span.path))
         self.c.executemany(DB.update_query, values)
 
     def delete(self) -> None:

@@ -4,6 +4,7 @@ import regex  # type: ignore
 
 import context
 from make_snapshot import make_snapshot
+from paroxython.goodies import couple_to_string
 from paroxython.list_programs import list_programs
 from paroxython.parse_program import ProgramParser
 from paroxython.preprocess_source import (
@@ -49,7 +50,7 @@ def test_example(label_name, actual_results, expected_results):
     print(actual_results)
     for (expected_label_name, expected_spans) in expected_results:
         assert expected_label_name in keys
-        actual_spans = ", ".join(map(str, actual_results[expected_label_name]))
+        actual_spans = ", ".join(map(couple_to_string, actual_results[expected_label_name]))
         assert actual_spans == expected_spans
         keys.discard(expected_label_name)
     for expected_label_name in keys:
@@ -89,7 +90,9 @@ def test_label_presence(capsys):
             all_names.add(name)
             if spans:
                 present_names.add(name)
-                result.append(name + f" / {program.name} / " + ", ".join(map(str, spans)))
+                result.append(
+                    name + f" / {program.name} / " + ", ".join(map(couple_to_string, spans))
+                )
     present = "\n- ".join(sorted(result))
     absent = "\n- ".join(sorted(all_names - present_names))
     text = f"# Present labels\n\n- {present}\n\n# Absent labels\n\n- {absent}\n"

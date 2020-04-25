@@ -6,13 +6,13 @@ import pytest
 
 import context
 from make_snapshot import make_snapshot
+from paroxython.goodies import couple_to_string
 from paroxython.label_programs import ProgramLabeller
 from paroxython.map_taxonomy import Taxonomy
-from paroxython.span import Span
-from paroxython.user_types import Label, Program
+from paroxython.user_types import Label, Program, Span
 
 t = Taxonomy(Path("tests/data/dummy/taxonomy.tsv"))
-S = lambda i, j: Span([i, j])  # shortcut for Span([i, j])
+S = lambda i, j: Span(i, j)  # shortcut for Span(i, j)
 
 
 def test_initial_values():
@@ -141,7 +141,7 @@ def test_snapshot_simple_taxons(capsys):
     for program in programs:
         taxons = taxonomy.to_taxons(program.labels)
         acc[program.name] = {
-            name: " ".join(map(str, sorted(set(spans)))) for (name, spans) in taxons
+            name: " ".join(map(couple_to_string, sorted(set(spans)))) for (name, spans) in taxons
         }
     result = json.dumps(acc, indent=2)
     make_snapshot(Path("tests/snapshots/simple_taxons.json"), result, capsys)

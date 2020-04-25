@@ -1,6 +1,7 @@
 import pytest
 
 import context
+from paroxython.goodies import couple_to_string
 from paroxython.preprocess_source import collect_hints, HINT_COMMENT
 
 
@@ -14,7 +15,7 @@ def wrapper(numbered_hints):
     (addition, deletion) = collect_hints("\n".join(lines))
     for operation in (addition, deletion):
         for (name, spans) in operation.items():
-            operation[name] = ", ".join(map(str, spans))
+            operation[name] = ", ".join(map(couple_to_string, spans))
     return (addition, deletion)
 
 

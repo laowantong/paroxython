@@ -1,14 +1,13 @@
 from typed_ast import ast3 as ast
 from collections import defaultdict
 from pathlib import Path
-from typing import Callable, Dict
+from typing import Callable, Dict, List
 
 import regex  # type: ignore
 
 from derived_labels_db import DB
 from flatten_ast import flatten_ast
-from span import Span
-from user_types import Label, LabelName, Labels, LabelsSpans, Program, Query, Source
+from user_types import Label, LabelName, Labels, LabelsSpans, Program, Query, Source, Span
 
 
 def _simplify_negative_literals() -> Callable:
@@ -58,9 +57,15 @@ class ProgramParser:
         def try_to_bind(label_name: LabelName, span: Span) -> None:
             """Bind a name with a span, unless this binding is scheduled for deletion."""
             try:
-                program.deletion[label_name].remove(span)
+                program.deletion[label_name].remove(Span(span.start, span.end))
             except (KeyError, ValueError):
                 result[label_name].append(span)
+
+        def pos_to_span(pos: List[str]) -> Span:
+            """Convert into a span a list of strings of the form f"{line_number}:{path}"."""
+            (start, path) = pos[0].split(":")
+            (end, _) = pos[-1].split(":")
+            return Span(int(start), int(end), path)
 
         try:
             tree = ast.parse(program.source)
@@ -80,13 +85,13 @@ class ProgramParser:
                 if d.get("SUFFIX"):  # there is a "SUFFIX" key and its value is not []
                     if len(d["POS"]) == len(d["SUFFIX"]):
                         for (suffix, pos) in zip(d["SUFFIX"], d["POS"]):
-                            try_to_bind(LabelName(f"{label_name}:{suffix}"), Span([pos]))
+                            try_to_bind(LabelName(f"{label_name}:{suffix}"), pos_to_span([pos]))
                     else:
-                        span = Span(d["POS"])
+                        span = pos_to_span(d["POS"])
                         for suffix in d["SUFFIX"]:
                             try_to_bind(LabelName(f"{label_name}:{suffix}"), span)
                 else:
-                    try_to_bind(label_name, Span(d["POS"]))
+                    try_to_bind(label_name, pos_to_span(d["POS"]))
             if yield_failed_matches and not d:
                 labels.append(Label(label_name, []))
             else:
@@ -109,6 +114,7 @@ class ProgramParser:
 
 if __name__ == "__main__":
     # Take an individual source, print its features and write its flat AST.
+    couple_to_string = __import__("goodies").couple_to_string
     path = Path("sandbox/source.py")
     source = path.read_text().strip()
     if source.startswith("1   "):
@@ -119,13 +125,9 @@ if __name__ == "__main__":
     print()
     parse = ProgramParser()
     acc = []
-    for (name, spans) in sorted(
-        parse(program, yield_failed_matches=False),
-        key=lambda c: (c[0].partition(":")[0], c[1][0].to_couple()),
-    ):
-        spans_as_string = ", ".join(map(str, spans))
-        paths_as_string = ", ".join(s.path for s in spans)
+    for (name, spans) in sorted(parse(program, yield_failed_matches=False)):
+        spans_as_string = ", ".join(map(couple_to_string, spans))
         acc.append(f"| `{name}` | {spans_as_string} |")
-        # acc[-1] += f" {paths_as_string} |"
+        # acc[-1] += " %s |" % ", ".join(f"{span.path}" for span in spans)
     print("\n".join(acc))
     Path("sandbox/flat_ast.txt").write_text(parse.flat_ast)
