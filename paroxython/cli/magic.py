@@ -3,10 +3,9 @@ from IPython.display import Markdown, display  # type: ignore
 
 import sys
 
-if sys.path[0] != "paroxython":
-    sys.path[0:0] = ["paroxython"]
+sys.path[0:0] = [".", "paroxython", "paroxython/cli"]
 
-from analyze_one import analyze_one
+from cli_tag import main
 
 
 def load_ipython_extension(ipython):
@@ -18,7 +17,7 @@ class ParoxythonMagics(Magics):
     @line_cell_magic
     def paroxython(self, line, source=None):
         """
-        Tag a program.
+        Tag a Python code cell and output the table of its taxons or labels.
 
         In cell mode:
             %%paroxython [labels]
@@ -28,4 +27,4 @@ class ParoxythonMagics(Magics):
             args = set(line.lower().split())
             tags = "Label" if args.intersection(["label", "labels"]) else "Taxon"
             source = f"# Compensate the offset of the magic command.\n{source}"
-            display(Markdown(analyze_one(source, tags)))
+            display(Markdown(main(source, tags=tags)))

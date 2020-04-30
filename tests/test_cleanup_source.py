@@ -145,11 +145,11 @@ fizz = [
 '''
 source_rex = regex.compile(r"(?ms)^<<< ([^\n]+)\n(.+?)\n---\n(.+?)\n>>>")
 examples = [m for m in source_rex.findall(sources)]
-cleanup = cleanup_factory("strip_docs")
+cleanup = cleanup_factory("full")
 
 
 @pytest.mark.parametrize("title, original, expected", examples)
-def test_strip_docs(title, original, expected):
+def test_full_cleaning(title, original, expected):
     print(title)
     result = cleanup(original)
     print(result)

@@ -101,12 +101,6 @@ class Command(TypedDict):
     source: Union[str, List[str]] # not source-code, but source of the data
     filtered_out: ProgramNames # to be populated by the execution of the command
 
-class Pipeline(TypedDict):
-    input_path: str
-    output_path: str
-    cost_assessment_strategy: str
-    commands: List[Command]
-
 class TaxonTriple(NamedTuple): #  cf. https://en.wikipedia.org/wiki/Semantic_triple
     predicate: str
     name_1: TaxonName

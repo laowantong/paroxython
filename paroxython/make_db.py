@@ -33,8 +33,9 @@ class Database:
         self.default_json_db_path = directory.parent / f"{directory.name}_db.json"
         self.default_sqlite_db_path = directory.parent / f"{directory.name}_db.sqlite"
 
-        labeller = ProgramLabeller(directory, *args, **kargs)
-        programs: Programs = labeller.list_labelled_programs()
+        labeller = ProgramLabeller()
+        labeller.label_programs(directory, *args, **kargs)
+        programs: Programs = labeller.programs
         self.labels = collect_labels(programs)
 
         map_labels_on_taxons(programs)

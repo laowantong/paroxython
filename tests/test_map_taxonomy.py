@@ -136,9 +136,9 @@ def test_call():
 def test_snapshot_simple_taxons(capsys):
     taxonomy = Taxonomy()
     acc = {}
-    labeller = ProgramLabeller(Path("tests/data/simple"))
-    programs = labeller.list_labelled_programs()
-    for program in programs:
+    labeller = ProgramLabeller()
+    labeller.label_programs(Path("tests/data/simple"))
+    for program in labeller.programs:
         taxons = taxonomy.to_taxons(program.labels)
         acc[program.name] = {
             name: " ".join(map(couple_to_string, sorted(set(spans)))) for (name, spans) in taxons

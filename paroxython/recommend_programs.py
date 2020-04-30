@@ -1,9 +1,8 @@
-import json
 import subprocess
-from ast import literal_eval
 from collections import defaultdict
 from pathlib import Path
 from typing import Dict, List
+from typing_extensions import Literal
 
 from assess_costs import LearningCostAssessor
 from filter_programs import ProgramFilter
@@ -14,20 +13,22 @@ from goodies import (
     cost_interval,
 )
 from goodies import couple_to_string
-from user_types import Pipeline, ProgramNames, AssessedPrograms
+from user_types import Command, ProgramNames, AssessedPrograms, JsonDatabase
 
 
 class Recommendations:
-    def __init__(self, pipeline_path: Path) -> None:
+    def __init__(
+        self,
+        commands: List[Command],
+        db: JsonDatabase,
+        base_path: Path,
+        output_path: Path,
+        cost_assessment_strategy: Literal["zeno", "linear"] = "zeno",
+    ) -> None:
 
-        # path to be passed to the shell commands, if any
-        self.base_path = pipeline_path.parent
-
-        # get data from the pipeline
-        pipeline: Pipeline = literal_eval(pipeline_path.read_text())
-        self.commands = pipeline["commands"]
-        self.output_path = self.base_path / pipeline["output_path"]
-        db = json.loads(Path(self.base_path / pipeline["input_path"]).read_text())
+        self.commands = commands
+        self.base_path = base_path
+        self.output_path = output_path
 
         # copy locally some attributes and methods or a ProgramFilter instance
         program_filter = ProgramFilter(db)
@@ -40,7 +41,7 @@ class Recommendations:
 
         # copy locally some attributes and methods or a LearningCostAssessor instance
         self.assess_costs = LearningCostAssessor(self.imparted_knowledge)
-        self.assess_costs.set_cost_assessment_strategy(pipeline["cost_assessment_strategy"])
+        self.assess_costs.set_cost_assessment_strategy(cost_assessment_strategy)
         self.taxon_cost = self.assess_costs.taxon_cost
 
     def run_pipeline(self) -> None:
@@ -162,8 +163,14 @@ class Recommendations:
 
 
 if __name__ == "__main__":
-    rec = Recommendations(Path("../algo/programs_pipe.py"))
-    # rec = Recommendations(Path("tests/data/simple_pipe.py"))
+    ast = __import__("ast")
+    json = __import__("json")
+    rec = Recommendations(
+        commands=ast.literal_eval(Path("../algo/programs_pipe.py").read_text()),
+        db=json.loads(Path("../algo/programs_db.json").read_text()),
+        base_path=Path("../algo/"),
+        output_path=Path("../algo/programs_recommendations.md"),
+    )
     rec.run_pipeline()
     text = rec.get_markdown()
     rec.dump(text)

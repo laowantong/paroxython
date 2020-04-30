@@ -1,16 +1,22 @@
+from typed_ast.ast3 import literal_eval
+import json
 from pathlib import Path
 
 import pytest
 
 import context
-
+from make_snapshot import make_snapshot
 
 from paroxython.recommend_programs import Recommendations
-from make_snapshot import make_snapshot
 
 
 def test_recommend_program(capsys):
-    rec = Recommendations(Path("tests/data/dummy/pipe.py"))
+    rec = Recommendations(
+        commands=literal_eval(Path("tests/data/dummy/pipe.py").read_text()),
+        db=json.loads(Path("tests/data/dummy/db.json").read_text()),
+        base_path=Path("tests/data/dummy/"),
+        output_path=Path("tests/data/dummy/recommendations.md"),
+    )
     rec.run_pipeline()
     print(rec.selected_programs)
     assert rec.selected_programs == {

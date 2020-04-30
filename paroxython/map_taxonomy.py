@@ -9,7 +9,6 @@ import regex  # type: ignore
 from user_types import (
     LabelName,
     Labels,
-    Span,
     Taxon,
     TaxonName,
     TaxonNames,
@@ -86,15 +85,15 @@ class Taxonomy:
 
 
 if __name__ == "__main__":
-    ProgramLabeller = __import__("label_programs").ProgramLabeller
-    labeller = ProgramLabeller(Path("../Python/project_euler"))
-    programs = labeller.list_labelled_programs()
+    labeller = __import__("label_programs").ProgramLabeller()
+    labeller.label_programs(Path("../Python/project_euler"))
+    couple_to_string = __import__("goodies").couple_to_string
     taxonomy = Taxonomy()
-    for program in programs:
+    for program in labeller.programs:
         taxons = taxonomy.to_taxons(program.labels)
         if not taxons:
             continue
         width = min(40, max(len(" ".join(map(str, taxon.spans))) for taxon in taxons))
         for (name, spans) in taxons:
-            span_string = " ".join(map(str, sorted(set(spans))))
+            span_string = " ".join(map(couple_to_string, sorted(set(spans))))
             print(f"{span_string:>{width}}\t{name}")

@@ -15,9 +15,10 @@ def test_update_snapshots(capsys):
         "../Algo/programs",
     ]
     # fmt: on
+    labeller = ProgramLabeller()
     for directory in directories:
         path = Path(directory)
-        labeller = ProgramLabeller(path)
+        labeller.label_programs(path)
         if (path / "__is_private_directory").exists():
             output_path = Path(path.parent, "snapshot_" + path.parts[-1] + ".py")
         else:

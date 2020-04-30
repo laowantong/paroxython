@@ -6,32 +6,25 @@ import regex  # type: ignore
 from preprocess_source import cleanup_factory, centrifugate_hints, collect_hints, remove_hints
 from user_types import Program, ProgramName, Programs, Source
 
-match_excluded = regex.compile(
-    r"""(?x)
-    __init__\.py
-    |
-    setup\.py
-    |
-    .*[-_]tests?\.py
-    |
-    quiz_.*\.py
-"""
-).match
 
-
-def list_programs(directory: Path, cleanup_strategy: str = "strip_docs") -> Programs:
+def list_programs(directory: Path, cleanup_strategy: str = "full", *args, **kargs) -> Programs:
     """List recursively all Python `Programs` of a given directory."""
     result: Programs = []
     cleanup = cleanup_factory(cleanup_strategy)
-    for program_path in generate_program_paths(directory):
+    for program_path in generate_program_paths(directory, *args, **kargs):
         source = cleanup(Source(program_path.read_text()))
         relative_path = program_path.relative_to(directory)
         result.append(get_program(source, relative_path))
     return result
 
 
-def generate_program_paths(directory: Path) -> Iterator[Path]:
+def generate_program_paths(
+    directory: Path,
+    glob_pattern: str = "**/*.py",
+    exclude_pattern: str = r"^(__init__|setup|.*[-_]tests?)\.py$",
+) -> Iterator[Path]:
     """Generate recursively the paths of all Python files of a given directory."""
+    match_excluded = regex.compile(exclude_pattern).fullmatch
     for program_path in sorted(directory.rglob("*.py")):
         if not match_excluded(program_path.name):
             yield program_path
@@ -73,7 +66,11 @@ def iterate_and_print_programs(programs: Programs) -> Iterator[Program]:
 if __name__ == "__main__":
     datetime = __import__("datetime").datetime
     directory = Path("../Algo/programs/")
-    for program in list_programs(directory):
+    for program in list_programs(
+        directory,
+        exclude_pattern=r"^(__init__|setup|.*[-_]tests?|quiz_.*)\.py$",
+        cleanup_strategy="full",
+    ):
         path = directory / program.name
         print(datetime.fromtimestamp(path.stat().st_mtime))
         print(program.source)

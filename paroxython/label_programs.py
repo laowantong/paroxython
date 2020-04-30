@@ -3,29 +3,27 @@ from collections import defaultdict
 from pathlib import Path
 from typing import Iterator, List, Set
 
-from list_programs import generate_program_paths, list_programs, iterate_and_print_programs
+from list_programs import list_programs, iterate_and_print_programs
 from parse_program import ProgramParser
-from user_types import Label, LabelName, LabelsSpans, Program, ProgramName, Programs, Source
+from user_types import Label, LabelName, LabelsSpans, Program, ProgramName, Source
 
 
 class ProgramLabeller:
     """Populate the labels of one or more programs."""
 
-    def __init__(self, directory: Path, *args, **kargs):
-        self.directory = directory
-        self.internal_program_names = {p.name for p in generate_program_paths(directory)}
+    def __init__(self):
         self.parse = ProgramParser()
 
-    def list_labelled_programs(self, *args, **kargs) -> Programs:
-        """Return a list of programs with all their fields completed."""
-        print(self.directory, *args, **kargs)
-        programs = list_programs(self.directory, *args, **kargs)
-        print(f"Labelling {len(programs)} programs.")
-        for program in iterate_and_print_programs(programs):
+    def label_programs(self, directory: Path, *args, **kargs) -> None:
+        """Complete all fields of a list of programs."""
+        self.directory = directory
+        self.programs = list_programs(self.directory, *args, **kargs)
+        self.internal_program_names = {p.name for p in self.programs}
+        print(f"Labelling {len(self.programs)} programs.")
+        for program in iterate_and_print_programs(self.programs):
             self.label_program(program)
-        for program in programs:
+        for program in self.programs:
             self.tweak_internal_import_labels(program)
-        return programs
 
     def label_program(self, program: Program) -> None:
         """Compute the labels of a given program and store the result in its `labels` field."""
@@ -49,9 +47,8 @@ class ProgramLabeller:
 
     def generate_labelled_sources(self, *args, **kargs) -> Iterator:
         """For each program, yield its source with its labels in comment."""
-        programs = self.list_labelled_programs(*args, **kargs)
         separator = "-" * 88
-        for program in programs:
+        for program in self.programs:
             yield Source(f"# {separator}\n# {program.name}\n# {separator}")
             lines = program.source.splitlines()
             comments: List[Set[str]] = [set() for _ in lines]
@@ -67,6 +64,7 @@ class ProgramLabeller:
 
 
 if __name__ == "__main__":
-    labeller = ProgramLabeller(Path("../Python/project_euler"))
+    labeller = ProgramLabeller()
+    labeller.label_programs(Path("../Python/project_euler"))
     for result in labeller.generate_labelled_sources():
         print(result)

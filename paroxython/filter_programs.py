@@ -232,9 +232,16 @@ class ProgramFilter:
 
 
 if __name__ == "__main__":
-    Recommendations = __import__("recommend_programs").Recommendations
     Path = __import__("pathlib").Path
-    rec = Recommendations(Path("../algo/programs_pipe.py"))
+    ast = __import__("ast")
+    json = __import__("json")
+    Recommendations = __import__("recommend_programs").Recommendations
+    rec = Recommendations(
+        commands=ast.literal_eval(Path("../algo/programs_pipe.py").read_text()),
+        db=json.loads(Path("../algo/programs_db.json").read_text()),
+        base_path=Path("../algo/"),
+        output_path=Path("../algo/programs_recommendations.md"),
+    )
     rec.run_pipeline()
     text = rec.get_markdown()
     rec.dump(text)

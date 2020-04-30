@@ -19,12 +19,12 @@ subn_paroxython_comment = regex.compile(r"(?i)#\s*paroxython\s*:\s*").subn
 
 def cleanup_factory(cleanup_strategy: str) -> Callable[[Source], Source]:
     cleanup = lambda source: source
-    if cleanup_strategy == "strip_docs":
-        cleanup = lambda source: sub_main("", strip_docs(source))
+    if cleanup_strategy == "full":
+        cleanup = lambda source: sub_main("", full_cleaning(source))
     return cleanup
 
 
-def strip_docs(source: Source) -> Source:
+def full_cleaning(source: Source) -> Source:
     result = []
     previous_token = INDENT
     (previous_end_row, previous_end_col) = (-1, 0)
@@ -161,4 +161,4 @@ if __name__ == "__main__":
     source = Source("\n".join(lines))
     print(source)
     print("-" * 80)
-    print(strip_docs(source))
+    print(full_cleaning(source))

@@ -1,0 +1,576 @@
+{
+  "programs": {
+    "assignment.py": {
+      "timestamp": "2020-01-28 14:24:20.758340",
+      "source": "a = b",
+      "labels": {
+        "assignment": [[1,1]],
+        "assignment_lhs_identifier:a": [[1,1]],
+        "assignment_rhs_atom:b": [[1,1]],
+        "single_assignment:a": [[1,1]]
+      },
+      "taxons": {
+        "variable/assignment/single": [[1,1]]
+      }
+    },
+    "collatz_print.py": {
+      "timestamp": "2020-01-15 18:39:31.587995",
+      "source": "def print_collatz(n):\n    while n != 1:\n        print(n)\n        if n % 2 == 0:\n            n = n // 2\n        else:\n            n = 3 * n + 1\n    print(n)",
+      "labels": {
+        "added_block_label": [[1,8]],
+        "added_label_on_line_4": [[4,4]],
+        "addition_operator": [[7,7]],
+        "assignment:Add": [[7,7]],
+        "assignment:FloorDiv": [[5,5]],
+        "assignment_lhs_identifier:n": [[5,5],[7,7]],
+        "assignment_rhs_atom:1": [[7,7]],
+        "assignment_rhs_atom:2": [[5,5]],
+        "assignment_rhs_atom:3": [[7,7]],
+        "assignment_rhs_atom:n": [[5,5],[7,7]],
+        "binary_operator:Add": [[7,7]],
+        "binary_operator:Mod": [[4,4]],
+        "binary_operator:Mult": [[7,7]],
+        "call_argument:n": [[3,3],[8,8]],
+        "comparison_operator:Eq": [[4,4]],
+        "comparison_operator:NotEq": [[2,2]],
+        "divisibility_test:2": [[4,4]],
+        "function:print_collatz": [[1,8]],
+        "function_argument:n": [[1,1]],
+        "function_argument_flavor:arg": [[1,1]],
+        "function_call:print": [[3,3],[8,8]],
+        "function_call_without_result:print": [[3,3],[8,8]],
+        "function_returning_nothing:print_collatz": [[1,8]],
+        "if": [[4,7]],
+        "if_else_branch": [[7,7]],
+        "if_test_atom:0": [[4,4]],
+        "if_test_atom:2": [[4,4]],
+        "if_test_atom:n": [[4,4]],
+        "if_then_branch": [[5,5]],
+        "literal:0": [[4,4]],
+        "literal:1": [[2,2],[7,7]],
+        "literal:2": [[4,4],[5,5]],
+        "literal:3": [[7,7]],
+        "loop:while": [[2,7]],
+        "loop_with_late_exit:while": [[2,7]],
+        "modulo_operator": [[4,4]],
+        "multiplication_operator": [[7,7]],
+        "single_assignment:n": [[5,5],[7,7]],
+        "suggest_augmented_assignment": [[5,5]],
+        "suggest_constant_definition": [[2,2],[7,7]],
+        "unknown_label": [[6,6]],
+        "update:n:1": [[7,7]],
+        "update:n:2": [[5,5]],
+        "update:n:3": [[7,7]],
+        "update_by_assignment:n:1": [[7,7]],
+        "update_by_assignment:n:2": [[5,5]],
+        "update_by_assignment:n:3": [[7,7]],
+        "update_by_assignment_with:Add": [[7,7]],
+        "update_by_assignment_with:FloorDiv": [[5,5]],
+        "update_with:Add": [[7,7]],
+        "update_with:FloorDiv": [[5,5]],
+        "verbose_conditional_assignment": [[4,7]],
+        "while": [[2,7]]
+      },
+      "taxons": {
+        "flow/conditional": [[4,7]],
+        "flow/conditional/else": [[7,7]],
+        "flow/loop/exit/late": [[2,7]],
+        "flow/loop/while": [[2,7]],
+        "io/standard/print": [[3,3],[8,8]],
+        "operator/arithmetic/addition": [[7,7]],
+        "operator/arithmetic/modulo": [[4,4]],
+        "operator/arithmetic/multiplication": [[7,7]],
+        "subroutine/argument/arg": [[1,1]],
+        "subroutine/procedure": [[1,8]],
+        "test/divisibility/parity": [[4,4]],
+        "test/equality": [[4,4]],
+        "test/equality/not": [[2,2]],
+        "type/elementary/number/integer": [[2,2],[4,4],[5,5],[7,7],[7,7]],
+        "type/elementary/number/integer/zero": [[4,4]],
+        "variable/assignment/conditional/verbose": [[4,7]],
+        "variable/assignment/single": [[5,5],[7,7]]
+      }
+    },
+    "fizzbuzz.py": {
+      "timestamp": "2020-04-18 10:32:04.516197",
+      "source": "import collatz_print\nfor i in range(1, 101):\n    if i % 15 == 0:\n        print(\"FizzBuzz\")\n    elif i % 3 == 0:\n        print(\"Fizz\")\n    elif i % 5 == 0:\n        print(\"Buzz\")\n    else:\n        print(i)",
+      "labels": {
+        "binary_operator:Mod": [[3,3],[5,5],[7,7]],
+        "call_argument:": [[4,4],[6,6],[8,8]],
+        "call_argument:1": [[2,2]],
+        "call_argument:101": [[2,2]],
+        "call_argument:i": [[10,10]],
+        "comparison_operator:Eq": [[3,3],[5,5],[7,7]],
+        "divisibility_test:15": [[3,3]],
+        "divisibility_test:3": [[5,5]],
+        "divisibility_test:5": [[7,7]],
+        "for:i": [[2,10]],
+        "for_range:1:101": [[2,10]],
+        "function_call:print": [[4,4],[6,6],[8,8],[10,10]],
+        "function_call:range": [[2,2]],
+        "function_call_without_result:print": [[4,4],[6,6],[8,8],[10,10]],
+        "if": [[3,10],[5,10],[7,10]],
+        "if_elif_branch": [[6,6],[8,8]],
+        "if_else_branch": [[10,10]],
+        "if_test_atom:0": [[3,3],[5,5],[7,7]],
+        "if_test_atom:15": [[3,3]],
+        "if_test_atom:3": [[5,5]],
+        "if_test_atom:5": [[7,7]],
+        "if_test_atom:i": [[3,3],[5,5],[7,7]],
+        "if_then_branch": [[4,4]],
+        "import_internally:collatz_print": [[1,1]],
+        "import_module_internally:collatz_print": [[1,1]],
+        "literal:0": [[3,3],[5,5],[7,7]],
+        "literal:1": [[2,2]],
+        "literal:101": [[2,2]],
+        "literal:15": [[3,3]],
+        "literal:3": [[5,5]],
+        "literal:5": [[7,7]],
+        "literal:Str": [[4,4],[6,6],[8,8]],
+        "loop:for": [[2,10]],
+        "loop_with_late_exit:for": [[2,10]],
+        "modulo_operator": [[3,3],[5,5],[7,7]],
+        "range:1:101": [[2,2]],
+        "suggest_constant_definition": [[3,3],[5,5],[7,7]]
+      },
+      "taxons": {
+        "call/function/builtin/range": [[2,2]],
+        "flow/conditional": [[3,10],[5,10],[7,10]],
+        "flow/conditional/else": [[10,10]],
+        "flow/conditional/else/if": [[6,6],[8,8]],
+        "flow/loop/exit/late": [[2,10]],
+        "flow/loop/for/arithmetic/start": [[2,10]],
+        "io/standard/print": [[4,4],[6,6],[8,8],[10,10]],
+        "library/personal": [[1,1]],
+        "operator/arithmetic/modulo": [[3,3],[5,5],[7,7]],
+        "test/equality": [[3,3],[5,5],[7,7]],
+        "type/elementary/number/integer": [[2,2],[2,2],[3,3],[5,5],[7,7]],
+        "type/elementary/number/integer/zero": [[3,3],[5,5],[7,7]],
+        "type/elementary/string": [[4,4],[6,6],[8,8]]
+      }
+    },
+    "is_even.py": {
+      "timestamp": "2020-04-18 10:32:28.423812",
+      "source": "import fizzbuzz\ndef is_even(n):\n    return n % 2 == 0",
+      "labels": {
+        "binary_operator:Mod": [[3,3]],
+        "comparison_operator:Eq": [[3,3]],
+        "divisibility_test:2": [[3,3]],
+        "function:is_even": [[2,3]],
+        "function_argument:n": [[2,2]],
+        "function_argument_flavor:arg": [[2,2]],
+        "function_returning_something:is_even": [[2,3]],
+        "import_internally:fizzbuzz": [[1,1]],
+        "import_module_internally:fizzbuzz": [[1,1]],
+        "literal:0": [[3,3]],
+        "literal:2": [[3,3]],
+        "modulo_operator": [[3,3]],
+        "return": [[3,3]]
+      },
+      "taxons": {
+        "library/personal": [[1,1]],
+        "operator/arithmetic/modulo": [[3,3]],
+        "subroutine/argument/arg": [[2,2]],
+        "subroutine/function": [[2,3]],
+        "subroutine/predicate": [[2,3]],
+        "test/divisibility/parity": [[3,3]],
+        "test/equality": [[3,3]],
+        "type/elementary/number/integer": [[3,3]],
+        "type/elementary/number/integer/zero": [[3,3]]
+      }
+    }
+  },
+  "labels": {
+    "added_block_label": [
+      "collatz_print.py"
+    ],
+    "added_label_on_line_4": [
+      "collatz_print.py"
+    ],
+    "addition_operator": [
+      "collatz_print.py"
+    ],
+    "assignment": [
+      "assignment.py"
+    ],
+    "assignment:Add": [
+      "collatz_print.py"
+    ],
+    "assignment:FloorDiv": [
+      "collatz_print.py"
+    ],
+    "assignment_lhs_identifier:a": [
+      "assignment.py"
+    ],
+    "assignment_lhs_identifier:n": [
+      "collatz_print.py"
+    ],
+    "assignment_rhs_atom:1": [
+      "collatz_print.py"
+    ],
+    "assignment_rhs_atom:2": [
+      "collatz_print.py"
+    ],
+    "assignment_rhs_atom:3": [
+      "collatz_print.py"
+    ],
+    "assignment_rhs_atom:b": [
+      "assignment.py"
+    ],
+    "assignment_rhs_atom:n": [
+      "collatz_print.py"
+    ],
+    "binary_operator:Add": [
+      "collatz_print.py"
+    ],
+    "binary_operator:Mod": [
+      "collatz_print.py",
+      "fizzbuzz.py",
+      "is_even.py"
+    ],
+    "binary_operator:Mult": [
+      "collatz_print.py"
+    ],
+    "call_argument:": [
+      "fizzbuzz.py"
+    ],
+    "call_argument:1": [
+      "fizzbuzz.py"
+    ],
+    "call_argument:101": [
+      "fizzbuzz.py"
+    ],
+    "call_argument:i": [
+      "fizzbuzz.py"
+    ],
+    "call_argument:n": [
+      "collatz_print.py"
+    ],
+    "comparison_operator:Eq": [
+      "collatz_print.py",
+      "fizzbuzz.py",
+      "is_even.py"
+    ],
+    "comparison_operator:NotEq": [
+      "collatz_print.py"
+    ],
+    "divisibility_test:15": [
+      "fizzbuzz.py"
+    ],
+    "divisibility_test:2": [
+      "collatz_print.py",
+      "is_even.py"
+    ],
+    "divisibility_test:3": [
+      "fizzbuzz.py"
+    ],
+    "divisibility_test:5": [
+      "fizzbuzz.py"
+    ],
+    "for:i": [
+      "fizzbuzz.py"
+    ],
+    "for_range:1:101": [
+      "fizzbuzz.py"
+    ],
+    "function:is_even": [
+      "is_even.py"
+    ],
+    "function:print_collatz": [
+      "collatz_print.py"
+    ],
+    "function_argument:n": [
+      "collatz_print.py",
+      "is_even.py"
+    ],
+    "function_argument_flavor:arg": [
+      "collatz_print.py",
+      "is_even.py"
+    ],
+    "function_call:print": [
+      "collatz_print.py",
+      "fizzbuzz.py"
+    ],
+    "function_call:range": [
+      "fizzbuzz.py"
+    ],
+    "function_call_without_result:print": [
+      "collatz_print.py",
+      "fizzbuzz.py"
+    ],
+    "function_returning_nothing:print_collatz": [
+      "collatz_print.py"
+    ],
+    "function_returning_something:is_even": [
+      "is_even.py"
+    ],
+    "if": [
+      "collatz_print.py",
+      "fizzbuzz.py"
+    ],
+    "if_elif_branch": [
+      "fizzbuzz.py"
+    ],
+    "if_else_branch": [
+      "collatz_print.py",
+      "fizzbuzz.py"
+    ],
+    "if_test_atom:0": [
+      "collatz_print.py",
+      "fizzbuzz.py"
+    ],
+    "if_test_atom:15": [
+      "fizzbuzz.py"
+    ],
+    "if_test_atom:2": [
+      "collatz_print.py"
+    ],
+    "if_test_atom:3": [
+      "fizzbuzz.py"
+    ],
+    "if_test_atom:5": [
+      "fizzbuzz.py"
+    ],
+    "if_test_atom:i": [
+      "fizzbuzz.py"
+    ],
+    "if_test_atom:n": [
+      "collatz_print.py"
+    ],
+    "if_then_branch": [
+      "collatz_print.py",
+      "fizzbuzz.py"
+    ],
+    "import_internally:collatz_print": [
+      "fizzbuzz.py"
+    ],
+    "import_internally:fizzbuzz": [
+      "is_even.py"
+    ],
+    "import_module_internally:collatz_print": [
+      "fizzbuzz.py"
+    ],
+    "import_module_internally:fizzbuzz": [
+      "is_even.py"
+    ],
+    "literal:0": [
+      "collatz_print.py",
+      "fizzbuzz.py",
+      "is_even.py"
+    ],
+    "literal:1": [
+      "collatz_print.py",
+      "fizzbuzz.py"
+    ],
+    "literal:101": [
+      "fizzbuzz.py"
+    ],
+    "literal:15": [
+      "fizzbuzz.py"
+    ],
+    "literal:2": [
+      "collatz_print.py",
+      "is_even.py"
+    ],
+    "literal:3": [
+      "collatz_print.py",
+      "fizzbuzz.py"
+    ],
+    "literal:5": [
+      "fizzbuzz.py"
+    ],
+    "literal:Str": [
+      "fizzbuzz.py"
+    ],
+    "loop:for": [
+      "fizzbuzz.py"
+    ],
+    "loop:while": [
+      "collatz_print.py"
+    ],
+    "loop_with_late_exit:for": [
+      "fizzbuzz.py"
+    ],
+    "loop_with_late_exit:while": [
+      "collatz_print.py"
+    ],
+    "modulo_operator": [
+      "collatz_print.py",
+      "fizzbuzz.py",
+      "is_even.py"
+    ],
+    "multiplication_operator": [
+      "collatz_print.py"
+    ],
+    "range:1:101": [
+      "fizzbuzz.py"
+    ],
+    "return": [
+      "is_even.py"
+    ],
+    "single_assignment:a": [
+      "assignment.py"
+    ],
+    "single_assignment:n": [
+      "collatz_print.py"
+    ],
+    "suggest_augmented_assignment": [
+      "collatz_print.py"
+    ],
+    "suggest_constant_definition": [
+      "collatz_print.py",
+      "fizzbuzz.py"
+    ],
+    "unknown_label": [
+      "collatz_print.py"
+    ],
+    "update:n:1": [
+      "collatz_print.py"
+    ],
+    "update:n:2": [
+      "collatz_print.py"
+    ],
+    "update:n:3": [
+      "collatz_print.py"
+    ],
+    "update_by_assignment:n:1": [
+      "collatz_print.py"
+    ],
+    "update_by_assignment:n:2": [
+      "collatz_print.py"
+    ],
+    "update_by_assignment:n:3": [
+      "collatz_print.py"
+    ],
+    "update_by_assignment_with:Add": [
+      "collatz_print.py"
+    ],
+    "update_by_assignment_with:FloorDiv": [
+      "collatz_print.py"
+    ],
+    "update_with:Add": [
+      "collatz_print.py"
+    ],
+    "update_with:FloorDiv": [
+      "collatz_print.py"
+    ],
+    "verbose_conditional_assignment": [
+      "collatz_print.py"
+    ],
+    "while": [
+      "collatz_print.py"
+    ]
+  },
+  "taxons": {
+    "call/function/builtin/range": [
+      "fizzbuzz.py"
+    ],
+    "flow/conditional": [
+      "collatz_print.py",
+      "fizzbuzz.py"
+    ],
+    "flow/conditional/else": [
+      "collatz_print.py",
+      "fizzbuzz.py"
+    ],
+    "flow/conditional/else/if": [
+      "fizzbuzz.py"
+    ],
+    "flow/loop/exit/late": [
+      "collatz_print.py",
+      "fizzbuzz.py"
+    ],
+    "flow/loop/for/arithmetic/start": [
+      "fizzbuzz.py"
+    ],
+    "flow/loop/while": [
+      "collatz_print.py"
+    ],
+    "io/standard/print": [
+      "collatz_print.py",
+      "fizzbuzz.py"
+    ],
+    "library/personal": [
+      "fizzbuzz.py",
+      "is_even.py"
+    ],
+    "operator/arithmetic/addition": [
+      "collatz_print.py"
+    ],
+    "operator/arithmetic/modulo": [
+      "collatz_print.py",
+      "fizzbuzz.py",
+      "is_even.py"
+    ],
+    "operator/arithmetic/multiplication": [
+      "collatz_print.py"
+    ],
+    "subroutine/argument/arg": [
+      "collatz_print.py",
+      "is_even.py"
+    ],
+    "subroutine/function": [
+      "is_even.py"
+    ],
+    "subroutine/predicate": [
+      "is_even.py"
+    ],
+    "subroutine/procedure": [
+      "collatz_print.py"
+    ],
+    "test/divisibility/parity": [
+      "collatz_print.py",
+      "is_even.py"
+    ],
+    "test/equality": [
+      "collatz_print.py",
+      "fizzbuzz.py",
+      "is_even.py"
+    ],
+    "test/equality/not": [
+      "collatz_print.py"
+    ],
+    "type/elementary/number/integer": [
+      "collatz_print.py",
+      "fizzbuzz.py",
+      "is_even.py"
+    ],
+    "type/elementary/number/integer/zero": [
+      "collatz_print.py",
+      "fizzbuzz.py",
+      "is_even.py"
+    ],
+    "type/elementary/string": [
+      "fizzbuzz.py"
+    ],
+    "variable/assignment/conditional/verbose": [
+      "collatz_print.py"
+    ],
+    "variable/assignment/single": [
+      "assignment.py",
+      "collatz_print.py"
+    ]
+  },
+  "importations": {
+    "assignment.py": [],
+    "collatz_print.py": [],
+    "fizzbuzz.py": [
+      "collatz_print.py"
+    ],
+    "is_even.py": [
+      "collatz_print.py",
+      "fizzbuzz.py"
+    ]
+  },
+  "exportations": {
+    "assignment.py": [],
+    "collatz_print.py": [
+      "fizzbuzz.py",
+      "is_even.py"
+    ],
+    "fizzbuzz.py": [
+      "is_even.py"
+    ],
+    "is_even.py": []
+  }
+}
