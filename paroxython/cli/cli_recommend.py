@@ -1,14 +1,15 @@
 """
 USAGE:
-    paroxython recommend [options] PIPELINE_PATH
+    paroxython recommend [options] DB_PATH
 
 OPTIONS:
-    --db=DB_PATH        Path of the JSON database. If it is omitted, and PIPELINE_PATH is of the
-                        form PREFIX_pipe.py, a value of PREFIX_db.json is used. [default: ]
+    --pipe=PATH         Path of the command pipeline. If it is omitted, and DB_PATH is of the
+                        form PREFIX_db.json, a value of PREFIX_pipe.py is used. If the associated
+                        file is missing or malformed, no filter is applied. [default: ]
     --base=PATH         Value accessible by any shell command of the pipeline. If not specified,
-                        this is parent directory of PIPELINE_PATH. [default: ]
-    -o --output=PATH    The path of the resulting report. If it is omitted, and PIPELINE_PATH is
-                        of the form PREFIX_pipe.py, a value of PREFIX_recommendations.json is
+                        this is parent directory of DB_PATH. [default: ]
+    -o --output=PATH    The path of the resulting report. If it is omitted, and DB_PATH is
+                        of the form PREFIX_db.json, a value of PREFIX_recommendations.json is
                         used. [default: ]
     -c --cost=STR       Learning cost assessment strategy. [default: zeno]
                         Currently available:
@@ -21,22 +22,29 @@ DESCRIPTION:
     Walk a directory, tag its Python files and make a database of the results.
 """
 
-import regex  # type: ignore
-from pathlib import Path
 import json
+from pathlib import Path
+
+import regex  # type: ignore
+from typed_ast.ast3 import literal_eval
+
 import context
 from recommend_programs import Recommendations
-from typed_ast.ast3 import literal_eval
 
 
 def cli_wrapper(args):
-    pipeline_path = Path(args["PIPELINE_PATH"])
-    parent_path = pipeline_path.parent
-    m = regex.fullmatch(r"(.+)[_-]pipe(?:line)?\.py", pipeline_path.name)
+    db_path = Path(args["DB_PATH"])
+    parent_path = db_path.parent
+    m = regex.fullmatch(r"(.+)[_-]db\.json", db_path.name)
     prefix = m[1] if m else None
+    try:
+        pipeline_path = Path(args["--pipe"] or parent_path / f"{prefix}_pipe.py")
+        commands = literal_eval(pipeline_path.read_text())
+    except Exception:  # Too much possible exceptions
+        commands = []
     rec = Recommendations(
-        commands=literal_eval(pipeline_path.read_text()),
-        db=json.loads(Path(args["--db"] or parent_path / f"{prefix}_db.json").read_text()),
+        commands=commands,
+        db=json.loads(db_path.read_text()),
         base_path=Path(args["--base"] or parent_path),
         output_path=Path(args["--output"] or parent_path / f"{prefix}_recommendations.md"),
         cost_assessment_strategy=args["--cost"],

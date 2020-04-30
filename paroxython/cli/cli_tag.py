@@ -4,7 +4,7 @@ USAGE:
 
 OPTIONS:
     -l --labels         Output the labels instead of the taxons.
-    -f --format=FORMAT  Format of the output, either "md" (Markdown) or "tsv" (Tab Separated
+    -f --output_format=FORMAT  Format of the output, either "md" (Markdown) or "tsv" (Tab Separated
                         Values). [default: md]
 
 DESCRIPTION:
@@ -29,7 +29,7 @@ def main(
     source: Source,
     tags: Literal["Taxon", "Label"] = "Taxon",
     relative_path: Path = Path("."),
-    format: Literal["md", "tsv"] = "md",
+    output_format: Literal["md", "tsv"] = "md",
 ) -> str:
     program = get_program(source, relative_path)
     labeller = ProgramLabeller()
@@ -45,7 +45,7 @@ def main(
         for (taxon_name, taxon_spans) in sorted(taxons):
             s = ", ".join(map(couple_to_string, sorted(taxon_spans.elements())))
             couples.append((taxon_name, s))
-    if format == "md":
+    if output_format == "md":
         result = [f"| {tag} | {lines} |" for (tag, lines) in couples]
         result[1:1] = ["|:--|:--|"]
     else:
@@ -59,6 +59,6 @@ def cli_wrapper(args):
         source=Source(path.read_text()),
         tags="Label" if args["--labels"] else "Taxon",
         relative_path=path.parent,
-        format=args["--format"],
+        output_format=args["--output_format"],
     )
     print(result)
