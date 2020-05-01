@@ -1,13 +1,15 @@
-from typed_ast import ast3 as ast
 from collections import defaultdict
+from os.path import dirname
 from pathlib import Path
+from typed_ast import ast3 as ast
 from typing import Callable, Dict, List
+
 
 import regex  # type: ignore
 
-from derived_labels_db import DB
-from flatten_ast import flatten_ast
-from user_types import Label, LabelName, Labels, LabelsSpans, Program, Query, Source, Span
+from .derived_labels_db import DB
+from .flatten_ast import flatten_ast
+from .user_types import Label, LabelName, Labels, LabelsSpans, Program, Query, Source, Span
 
 
 def _simplify_negative_literals() -> Callable:
@@ -32,11 +34,13 @@ find_all_features = regex.compile(
         """
 ).findall
 
+DEFAULT_SPEC_PATH = Path(dirname(__file__)) / "spec.md"
+
 
 class ProgramParser:
     """Compile the given feature specifications, and search them in a Program."""
 
-    def __init__(self, spec_path: Path = Path("docs/spec.md")) -> None:
+    def __init__(self, spec_path: Path = DEFAULT_SPEC_PATH) -> None:
         """Compile the features to search."""
         self.spec_path = spec_path
         text = self.spec_path.read_text()
@@ -114,7 +118,8 @@ class ProgramParser:
 
 if __name__ == "__main__":
     # Take an individual source, print its features and write its flat AST.
-    couple_to_string = __import__("goodies").couple_to_string
+    from .goodies import couple_to_string
+
     path = Path("sandbox/source.py")
     source = path.read_text().strip()
     if source.startswith("1   "):

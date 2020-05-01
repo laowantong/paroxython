@@ -5,7 +5,7 @@ from typing import Callable, Dict, List, Tuple, Set
 
 import regex  # type: ignore
 
-from user_types import LabelName, LabelsSpans, Source, Span
+from .user_types import LabelName, LabelsSpans, Source, Span
 
 HINT_COMMENT = "# paroxython:"
 

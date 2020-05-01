@@ -4,8 +4,8 @@ from typing import Dict
 
 import regex  # type: ignore
 
-from goodies import couple_to_string
-from user_types import Label, LabelName, Labels, LabelsSpans, Query, Span
+from .goodies import couple_to_string
+from .user_types import Label, LabelName, Labels, LabelsSpans, Query, Span
 
 
 class DB:

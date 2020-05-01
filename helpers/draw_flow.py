@@ -11,7 +11,7 @@ paths = list(
 )
 names = [str(path)[len("paroxython/") : -3] for path in paths]
 base = "docs/flow"
-find_all = regex.compile(fr"(?m)^from ({'|'.join(names)}) import").findall
+find_all = regex.compile(fr"(?m)^from \.({'|'.join(names)}) import").findall
 
 Path(f"{base}.dot").write_text(
     "digraph G {\nnode [shape=box fontname=Courier style=filled fillcolor=cornsilk]\n%s\n}\n"
@@ -21,7 +21,7 @@ Path(f"{base}.dot").write_text(
             '"*_db.sqlite" [shape=cylinder fillcolor=moccasin]',
             '"spec.md" [shape=note fillcolor=moccasin]',
             '"*_pipe.py" [shape=note fillcolor=moccasin]',
-            '"*_taxonomy.tsv" [shape=note fillcolor=moccasin]',
+            '"taxonomy.tsv" [shape=note fillcolor=moccasin]',
             '"source files" [shape=folder fillcolor=moccasin]',
             # '"sqlite_queries" [shape=folder fillcolor=moccasin]',
             'make_db -> "*_db.json"',
@@ -30,7 +30,7 @@ Path(f"{base}.dot").write_text(
             '"*_db.json" -> filter_programs',
             '"spec.md" -> parse_program',
             '"source files" -> list_programs',
-            '"*_taxonomy.tsv" -> map_taxonomy',
+            '"taxonomy.tsv" -> map_taxonomy',
             '"*_pipe.py" -> recommend_programs',
             # Add invisible edges to make the layout more compact
             # "sqlite_queries -> recommend_programs  [style=invis]",

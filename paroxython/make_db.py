@@ -8,10 +8,10 @@ from typing import List, Optional, Tuple, Union, overload, Dict
 
 import regex  # type: ignore
 
-from goodies import add_line_numbers
-from label_programs import ProgramLabeller, iterate_and_print_programs
-from map_taxonomy import Taxonomy
-from user_types import (
+from .goodies import add_line_numbers
+from .label_programs import ProgramLabeller, iterate_and_print_programs
+from .map_taxonomy import Taxonomy
+from .user_types import (
     LabelInfos,
     Labels,
     LabelsPoorSpans,

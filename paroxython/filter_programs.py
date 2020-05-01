@@ -3,8 +3,8 @@ from typing import Set
 
 import regex  # type: ignore
 
-from compare_spans import compare_spans
-from user_types import (
+from .compare_spans import compare_spans
+from .user_types import (
     JsonDatabase,
     ProgramInfos,
     ProgramName,
@@ -235,7 +235,8 @@ if __name__ == "__main__":
     Path = __import__("pathlib").Path
     ast = __import__("ast")
     json = __import__("json")
-    Recommendations = __import__("recommend_programs").Recommendations
+    from .recommend_programs import Recommendations
+
     rec = Recommendations(
         commands=ast.literal_eval(Path("../algo/programs_pipe.py").read_text()),
         db=json.loads(Path("../algo/programs_db.json").read_text()),

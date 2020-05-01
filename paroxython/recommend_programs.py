@@ -2,18 +2,19 @@ import subprocess
 from collections import defaultdict
 from pathlib import Path
 from typing import Dict, List, Optional
+
 from typing_extensions import Literal
 
-from assess_costs import LearningCostAssessor
-from filter_programs import ProgramFilter
-from goodies import (
+from .assess_costs import LearningCostAssessor
+from .filter_programs import ProgramFilter
+from .goodies import (
     add_line_numbers,
-    title_to_slug_factory,
-    enumeration_to_txt_factory,
     cost_interval,
+    couple_to_string,
+    enumeration_to_txt_factory,
+    title_to_slug_factory,
 )
-from goodies import couple_to_string
-from user_types import Command, ProgramNames, AssessedPrograms, JsonDatabase
+from .user_types import AssessedPrograms, Command, JsonDatabase, ProgramNames
 
 
 class Recommendations:
@@ -163,6 +164,9 @@ class Recommendations:
 
 
 if __name__ == "__main__":
+    import sys
+
+    sys.path[0:0] = ["paroxython", ".", ".."]
     ast = __import__("ast")
     json = __import__("json")
     rec = Recommendations(

@@ -3,8 +3,8 @@ from typing import Iterator
 
 import regex  # type: ignore
 
-from preprocess_source import cleanup_factory, centrifugate_hints, collect_hints, remove_hints
-from user_types import Program, ProgramName, Programs, Source
+from .preprocess_source import cleanup_factory, centrifugate_hints, collect_hints, remove_hints
+from .user_types import Program, ProgramName, Programs, Source
 
 
 def list_programs(directory: Path, cleanup_strategy: str = "full", *args, **kargs) -> Programs:

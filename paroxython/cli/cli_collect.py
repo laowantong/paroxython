@@ -24,8 +24,7 @@ DESCRIPTION:
 
 from pathlib import Path
 
-import context
-from make_db import Database
+from ..make_db import Database
 
 
 def cli_wrapper(args):

@@ -1,4 +1,4 @@
-"""Read the contents of docs/spec.md, normalize its formatting and write it back.
+"""Read the contents of paroxython/spec.md, normalize its formatting and write it back.
 
 The following operations are carried out:
 - The old clickable table of contents (if any) is replaced by a new one.
@@ -9,7 +9,7 @@ The following operations are carried out:
 
 This code is executed each time tests/test_parse_program.py is called. Thus, although no
 unit test is provided, any regression should be visible in the differences between two
-versions of docs/spec.md.
+versions of paroxython/spec.md.
 """
 
 from collections import defaultdict

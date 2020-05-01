@@ -1,12 +1,12 @@
 from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Dict
-from os.path import commonpath
+from os.path import commonpath, dirname
 from functools import lru_cache
 
 import regex  # type: ignore
 
-from user_types import (
+from .user_types import (
     LabelName,
     Labels,
     Taxon,
@@ -17,7 +17,7 @@ from user_types import (
 )
 
 sub_slash_sequences = regex.compile(r"//+").sub
-DEFAULT_TAXONOMY_PATH = Path("taxonomies/default_taxonomy.tsv")
+DEFAULT_TAXONOMY_PATH = Path(dirname(__file__)) / "taxonomy.tsv"
 
 
 class Taxonomy:
@@ -85,9 +85,11 @@ class Taxonomy:
 
 
 if __name__ == "__main__":
-    labeller = __import__("label_programs").ProgramLabeller()
+    from .goodies import couple_to_string
+    from .label_programs import ProgramLabeller
+
+    labeller = ProgramLabeller()
     labeller.label_programs(Path("../Python/project_euler"))
-    couple_to_string = __import__("goodies").couple_to_string
     taxonomy = Taxonomy()
     for program in labeller.programs:
         taxons = taxonomy.to_taxons(program.labels)

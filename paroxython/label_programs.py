@@ -3,9 +3,9 @@ from collections import defaultdict
 from pathlib import Path
 from typing import Iterator, List, Set
 
-from list_programs import list_programs, iterate_and_print_programs
-from parse_program import ProgramParser
-from user_types import Label, LabelName, LabelsSpans, Program, ProgramName, Source
+from .list_programs import list_programs, iterate_and_print_programs
+from .parse_program import ProgramParser
+from .user_types import Label, LabelName, LabelsSpans, Program, ProgramName, Source
 
 
 class ProgramLabeller:

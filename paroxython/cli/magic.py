@@ -5,7 +5,7 @@ import sys
 
 sys.path[0:0] = [".", "paroxython", "paroxython/cli"]
 
-from cli_tag import main
+from .cli_tag import main
 
 
 def load_ipython_extension(ipython):

@@ -12,17 +12,14 @@ DESCRIPTION:
 """
 
 from pathlib import Path
-
-import context
-
-from label_programs import ProgramLabeller
-from map_taxonomy import Taxonomy
-from list_programs import get_program
 from typing import List, Tuple
 from typing_extensions import Literal
 
-from goodies import couple_to_string
-from user_types import Source
+from ..goodies import couple_to_string
+from ..label_programs import ProgramLabeller
+from ..list_programs import get_program
+from ..map_taxonomy import Taxonomy
+from ..user_types import Source
 
 
 def main(

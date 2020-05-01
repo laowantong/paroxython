@@ -1,6 +1,6 @@
 from functools import lru_cache
 
-from user_types import TaxonName, TaxonNameSet, ProgramTaxonNames, AssessedPrograms
+from .user_types import TaxonName, TaxonNameSet, ProgramTaxonNames, AssessedPrograms
 
 
 @lru_cache(maxsize=None)
