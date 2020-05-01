@@ -81,5 +81,13 @@ def test_recommend_program(capsys):
     rec.dump(text)  # for coverage testing
 
 
+def test_recommend_programming_idioms(capsys):
+    path = Path("tests/snapshots/sanity_db.json")
+    rec = Recommendations(db=json.loads(path.read_text()))
+    rec.run_pipeline()
+    output_path = path.parent / "sanity_recommendations.md"
+    make_snapshot(output_path, rec.get_markdown(), capsys)
+
+
 if __name__ == "__main__":
     pytest.main(["-qq", __import__("sys").argv[0]])

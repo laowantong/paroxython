@@ -18,5 +18,10 @@ def test_sqlite_simple_db(capsys):
     db.write_sqlite(Path("tests/snapshots/simple_db.sqlite"))
 
 
+def test_snapshot_programming_idioms_db(capsys):
+    db = Database(Path("tests/data/sanity"), ignore_timestamps=True)
+    make_snapshot(Path("tests/snapshots/sanity_db.json"), db.get_json(), capsys)
+
+
 if __name__ == "__main__":
     pytest.main(["-qq", __import__("sys").argv[0]])

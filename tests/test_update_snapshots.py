@@ -18,6 +18,8 @@ def test_update_snapshots(capsys):
     labeller = ProgramLabeller()
     for directory in directories:
         path = Path(directory)
+        if not path.is_dir():
+            continue
         labeller.label_programs(path)
         if (path / "__is_private_directory").exists():
             output_path = Path(path.parent, "snapshot_" + path.parts[-1] + ".py")

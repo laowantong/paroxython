@@ -1,3 +1,4 @@
+docopt==0.6.2
 mypy==0.770
 pre-commit==2.3.0
 pytest==5.4.1

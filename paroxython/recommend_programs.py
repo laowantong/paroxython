@@ -1,7 +1,7 @@
 import subprocess
 from collections import defaultdict
 from pathlib import Path
-from typing import Dict, List
+from typing import Dict, List, Optional
 from typing_extensions import Literal
 
 from assess_costs import LearningCostAssessor
@@ -19,14 +19,14 @@ from user_types import Command, ProgramNames, AssessedPrograms, JsonDatabase
 class Recommendations:
     def __init__(
         self,
-        commands: List[Command],
         db: JsonDatabase,
-        base_path: Path,
-        output_path: Path,
+        commands: Optional[List[Command]] = None,
+        base_path: Optional[Path] = None,
+        output_path: Optional[Path] = None,
         cost_assessment_strategy: Literal["zeno", "linear"] = "zeno",
     ) -> None:
 
-        self.commands = commands
+        self.commands = commands or []
         self.base_path = base_path
         self.output_path = output_path
 

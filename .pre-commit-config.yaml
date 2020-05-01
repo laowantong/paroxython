@@ -5,9 +5,9 @@ repos:
     rev: v2.4.0
     hooks:
     -   id: trailing-whitespace
-        exclude: docs/spec.md|tests/snapshots/*|tests/data/dummy/*|taxonomies/*
+        exclude: docs/spec.md|tests/snapshots/*|tests/data/dummy/*|taxonomies/*|tests/data/sanity/*
     -   id: end-of-file-fixer
-        exclude: tests/snapshots/*|tests/data/dummy_taxons_and_programs\.txt
+        exclude: tests/snapshots/*|tests/data/dummy_taxons_and_programs\.txt|tests/data/sanity/*
     -   id: check-yaml
     -   id: check-added-large-files
     -   id: check-json
@@ -21,5 +21,5 @@ repos:
     rev: 19.10b0
     hooks:
     -   id: black
-        exclude: tests/snapshots/*
+        exclude: tests/snapshots/*|tests/data/sanity/*
         args: [--line-length=100]
