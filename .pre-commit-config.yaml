@@ -5,7 +5,7 @@ repos:
     rev: v2.4.0
     hooks:
     -   id: trailing-whitespace
-        exclude: paroxython/spec.md|tests/snapshots/*|tests/data/dummy/*|taxonomies/*|tests/data/sanity/*
+        exclude: paroxython/spec.md|tests/snapshots/*|tests/data/dummy/*|tests/data/sanity/*
     -   id: end-of-file-fixer
         exclude: tests/snapshots/*|tests/data/dummy_taxons_and_programs\.txt|tests/data/sanity/*
     -   id: check-yaml

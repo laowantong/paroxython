@@ -206,7 +206,7 @@ variable/assignment/conditional/verbose	verbose_conditional_assignment
 variable/assignment/constant	assignment_lhs_identifier:[[:upper:]0-9_]+
 variable/assignment/parallel/\1	parallel_assignment:(\d+)
 variable/assignment/single	single_assignment:.+
--- EOF
+-- EOF	EOF
 call/function/other	TODO
 call/function/other/predicate	TODO
 io/standard/print/multiple	TODO
