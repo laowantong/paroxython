@@ -5,6 +5,7 @@ omit =
     helpers/make_dummy_db.py
     helpers/make_compare_spans.py
     helpers/reformat_spec.py
+    helpers/make_programming_idioms_folder.py
     paroxython/make_snapshots.py
     paroxython/compare_spans.py
     paroxython/cli/*
