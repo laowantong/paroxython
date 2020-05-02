@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "paroxython"
-version = "0.1.10"
+version = "0.1.17"
 description = "Search Python code for algorithmic features"
 authors = ["Aristide Grange"]
 license = "MIT"
@@ -17,6 +17,7 @@ keywords = ["education",
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Environment :: Console",
+    "Framework :: IPython",
     "Intended Audience :: Education",
     "License :: OSI Approved :: MIT License",
     "Natural Language :: English",
@@ -32,11 +33,11 @@ classifiers = [
 
 [tool.poetry.dependencies]
 python = "^3.6.1"
-# regex = "^2020.4.4"
-# sqlparse = "^0.3.1"
-# typed-ast = "^1.4.1"
-# docopt = "^0.6.2"
-# typing-extensions = "^3.7.4.2"
+regex = "^2020.4.4"
+sqlparse = "^0.3.1"
+typed-ast = "^1.4.1"
+docopt = "^0.6.2"
+typing-extensions = "^3.7.4.2"
 
 [tool.poetry.dev-dependencies]
 mypy = "^0.770"

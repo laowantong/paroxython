@@ -3,9 +3,9 @@ from IPython.display import Markdown, display  # type: ignore
 
 import sys
 
-sys.path[0:0] = [".", "paroxython", "paroxython/cli"]
+sys.path[0:0] = [".", "paroxython"]
 
-from .cli_tag import main
+from .cli.cli_tag import main
 
 
 def load_ipython_extension(ipython):
