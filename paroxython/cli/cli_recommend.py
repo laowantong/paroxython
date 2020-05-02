@@ -3,18 +3,21 @@ USAGE:
     paroxython recommend [options] DB_PATH
 
 OPTIONS:
-    --pipe=PATH         Path of the command pipeline. If it is omitted, and DB_PATH is of the
-                        form PREFIX_db.json, a value of PREFIX_pipe.py is used. If the associated
-                        file is missing or malformed, no filter is applied. [default: ]
-    --base=PATH         Value accessible by any shell command of the pipeline. If not specified,
-                        this is parent directory of DB_PATH. [default: ]
-    -o --output=PATH    The path of the resulting report. If it is omitted, and DB_PATH is
-                        of the form PREFIX_db.json, a value of PREFIX_recommendations.json is
-                        used. [default: ]
+    --pipe=PATH         Path of the command pipeline. If it is omitted, and
+                        DB_PATH is of the form PREFIX_db.json, a value of
+                        PREFIX_pipe.py is used. If the associated file is
+                        missing or malformed, no filter is applied. [default: ]
+    --base=PATH         Value accessible by any shell command of the pipeline.
+                        If not specified, this is parent directory of DB_PATH.
+                        [default: ]
+    -o --output=PATH    The path of the resulting report. If it is omitted, and
+                        DB_PATH is of the form PREFIX_db.json, a value of
+                        PREFIX_recommendations.json is used. [default: ]
     -c --cost=STR       Learning cost assessment strategy. [default: zeno]
                         Currently available:
-                        • zeno: the i-th segment of a taxon, if not already imparted, costs 2^(-i).
-                                For instance, the taxon old/new/new will costs 2^-2 + 2^-3 = 0.375.
+                        • zeno: the i-th segment of a taxon, if not already
+                                imparted, costs 2^(-i). For instance, the taxon
+                                old/new/new will costs 2^-2 + 2^-3 = 0.375.
                         • length: simply count the number of new segments.
 
 

@@ -4,8 +4,8 @@ USAGE:
 
 OPTIONS:
     -l --labels         Output the labels instead of the taxons.
-    -f --output_format=FORMAT  Format of the output, either "md" (Markdown) or "tsv" (Tab Separated
-                        Values). [default: md]
+    -f --format=FORMAT  Format of the output, either "md" (Markdown)
+                        or "tsv" (Tab SeparatedValues). [default: md]
 
 DESCRIPTION:
     Tag one Python file and output the table of its taxons or labels.
@@ -56,6 +56,6 @@ def cli_wrapper(args):
         source=Source(path.read_text()),
         tags="Label" if args["--labels"] else "Taxon",
         relative_path=path.parent,
-        output_format=args["--output_format"],
+        output_format=args["--format"],
     )
     print(result)
