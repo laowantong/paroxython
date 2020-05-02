@@ -28,7 +28,7 @@ paroxython --help
 ### Jupyter notebook
 
 ```
-%load_ext paroxython.magic
+%load_ext paroxython
 ```
 
 ```
