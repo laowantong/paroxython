@@ -14,10 +14,10 @@ class ProgramLabeller:
     def __init__(self):
         self.parse = ProgramParser()
 
-    def label_programs(self, directory: Path, *args, **kargs) -> None:
+    def label_programs(self, directory: Path, *args, **kwargs) -> None:
         """Complete all fields of a list of programs."""
         self.directory = directory
-        self.programs = list_programs(self.directory, *args, **kargs)
+        self.programs = list_programs(self.directory, *args, **kwargs)
         self.internal_program_names = {p.name for p in self.programs}
         print(f"Labelling {len(self.programs)} programs.")
         for program in iterate_and_print_programs(self.programs):
@@ -45,7 +45,7 @@ class ProgramLabeller:
                         spans=label.spans,
                     )
 
-    def generate_labelled_sources(self, *args, **kargs) -> Iterator:
+    def generate_labelled_sources(self, *args, **kwargs) -> Iterator:
         """For each program, yield its source with its labels in comment."""
         separator = "-" * 88
         for program in self.programs:

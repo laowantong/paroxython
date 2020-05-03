@@ -15,7 +15,6 @@ def test_recommend_program(capsys):
         commands=literal_eval(Path("tests/data/dummy/pipe.py").read_text()),
         db=json.loads(Path("tests/data/dummy/db.json").read_text()),
         base_path=Path("tests/data/dummy/"),
-        output_path=Path("tests/data/dummy/recommendations.md"),
     )
     rec.run_pipeline()
     print(rec.selected_programs)
@@ -78,7 +77,6 @@ def test_recommend_program(capsys):
     }
     text = rec.get_markdown(span_column_width=10)
     make_snapshot(Path("tests/data/dummy/recommendations.md"), text, capsys)
-    rec.dump(text)  # for coverage testing
 
 
 def test_recommend_programming_idioms(capsys):

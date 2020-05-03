@@ -229,20 +229,3 @@ class ProgramFilter:
         for program in list(self.selected_programs):
             if program not in programs:
                 self.selected_programs.pop(program, None)
-
-
-if __name__ == "__main__":
-    Path = __import__("pathlib").Path
-    ast = __import__("ast")
-    json = __import__("json")
-    from .recommend_programs import Recommendations
-
-    rec = Recommendations(
-        commands=ast.literal_eval(Path("../algo/programs_pipe.py").read_text()),
-        db=json.loads(Path("../algo/programs_db.json").read_text()),
-        base_path=Path("../algo/"),
-        output_path=Path("../algo/programs_recommendations.md"),
-    )
-    rec.run_pipeline()
-    text = rec.get_markdown()
-    rec.dump(text)

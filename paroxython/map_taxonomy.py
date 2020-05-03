@@ -1,6 +1,6 @@
 from collections import Counter, defaultdict
 from pathlib import Path
-from typing import Dict
+from typing import Dict, Optional
 from os.path import commonpath, dirname
 from functools import lru_cache
 
@@ -17,15 +17,15 @@ from .user_types import (
 )
 
 sub_slash_sequences = regex.compile(r"//+").sub
-DEFAULT_TAXONOMY_PATH = Path(dirname(__file__)) / "taxonomy.tsv"
 
 
 class Taxonomy:
     """Translate labels into taxons on a list of program paths."""
 
-    def __init__(self, taxonomy_path: Path = DEFAULT_TAXONOMY_PATH) -> None:
+    def __init__(self, taxonomy_path: Optional[Path] = None, *args, **kwargs) -> None:
         """Read the taxonomy specifications, and make some pre-processing."""
         is_literal = regex.compile(r"[\w:]+").fullmatch
+        taxonomy_path = taxonomy_path or Path(dirname(__file__)) / "taxonomy.tsv"
         tsv = taxonomy_path.read_text().partition("-- EOF")[0].strip()
         self.literal_label_names: Dict[LabelName, TaxonNames] = defaultdict(list)
         self.compiled_label_names = []

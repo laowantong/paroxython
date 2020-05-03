@@ -9,7 +9,6 @@ omit =
     paroxython/__init__.py
     paroxython/make_snapshots.py
     paroxython/compare_spans.py
-    paroxython/cli/*
     tests/*
 [report]
 exclude_lines =

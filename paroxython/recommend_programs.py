@@ -23,13 +23,11 @@ class Recommendations:
         db: JsonDatabase,
         commands: Optional[List[Command]] = None,
         base_path: Optional[Path] = None,
-        output_path: Optional[Path] = None,
         cost_assessment_strategy: Literal["zeno", "linear"] = "zeno",
     ) -> None:
 
         self.commands = commands or []
         self.base_path = base_path
-        self.output_path = output_path
 
         # copy locally some attributes and methods or a ProgramFilter instance
         program_filter = ProgramFilter(db)
@@ -158,23 +156,17 @@ class Recommendations:
 
         return "\n".join(toc + contents + summary)
 
-    def dump(self, text):
-        self.output_path.write_text(text)
-        print(f"Dumped: {self.output_path.resolve()}\n")
-
 
 if __name__ == "__main__":
-    import sys
-
-    sys.path[0:0] = ["paroxython", ".", ".."]
     ast = __import__("ast")
     json = __import__("json")
+    program_path = Path("../algo/programs")
     rec = Recommendations(
-        commands=ast.literal_eval(Path("../algo/programs_pipe.py").read_text()),
-        db=json.loads(Path("../algo/programs_db.json").read_text()),
-        base_path=Path("../algo/"),
-        output_path=Path("../algo/programs_recommendations.md"),
+        commands=ast.literal_eval(Path(f"{program_path}_pipe.py").read_text()),
+        db=json.loads(Path(f"{program_path}_db.json").read_text()),
+        base_path=program_path.parent,
     )
     rec.run_pipeline()
-    text = rec.get_markdown()
-    rec.dump(text)
+    output_path = Path(f"{program_path}_recommendations.md")
+    output_path.write_text(rec.get_markdown())
+    print(f"Dumped: {output_path.resolve()}.\n")

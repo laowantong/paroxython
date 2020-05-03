@@ -27,18 +27,19 @@ from .user_types import (
 
 
 class Database:
-    def __init__(self, directory: Path, ignore_timestamps=False, *args, **kargs) -> None:
+    def __init__(self, directory: Path, ignore_timestamps=False, *args, **kwargs) -> None:
         """Collect all infos pertaining to the programs, the labels and the taxons."""
 
         self.default_json_db_path = directory.parent / f"{directory.name}_db.json"
         self.default_sqlite_db_path = directory.parent / f"{directory.name}_db.sqlite"
 
         labeller = ProgramLabeller()
-        labeller.label_programs(directory, *args, **kargs)
+        labeller.label_programs(directory, *args, **kwargs)
         programs: Programs = labeller.programs
         self.labels = collect_labels(programs)
 
-        map_labels_on_taxons(programs)
+        taxonomy = Taxonomy(*args, **kwargs)
+        map_labels_on_taxons(programs, taxonomy)
         self.taxons = collect_taxons(programs)
 
         importations = compute_direct_importations(programs)
@@ -69,7 +70,7 @@ class Database:
             "importations": dict(self.importations.items()),
             "exportations": dict(self.exportations.items()),
         }
-        text = json.dumps(data, indent=2)
+        text = json.dumps(data, indent=2) + "\n"
         text = regex.sub(r"\s*\[\s+(\d+),\s+(\d+)\s+\](,?)\s+", r"[\1,\2]\3", text)
         return text
 
@@ -191,10 +192,9 @@ def collect_labels(programs: Programs) -> LabelInfos:
     return result
 
 
-def map_labels_on_taxons(programs: Programs) -> None:
+def map_labels_on_taxons(programs: Programs, taxonomy: Taxonomy) -> None:
     """Translate labels into taxons on a list of program names."""
     print(f"Mapping taxonomy on {len(programs)} programs.")
-    taxonomy = Taxonomy()
     for program in iterate_and_print_programs(programs):
         program.taxons[:] = taxonomy.to_taxons(program.labels)
 

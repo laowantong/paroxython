@@ -3,7 +3,7 @@
 USAGE:
     paroxython [--version] [--help] COMMAND [ARGS...]
 
-SUBCOMMANDS:
+COMMANDS:
     tag         Tag one Python file and output the table of its taxons or
                 labels.
     collect     Walk a directory, tag its Python files and make a JSON

@@ -3,16 +3,19 @@ USAGE:
     paroxython tag [options] FILENAME
 
 OPTIONS:
-    -l --labels         Output the labels instead of the taxons.
     -f --format=FORMAT  Format of the output, either "md" (Markdown)
                         or "tsv" (Tab SeparatedValues). [default: md]
+    -l --labels         Output the labels instead of the taxons.
+    -t --taxonomy=PATH  The path of a TSV file mapping labels onto taxons.
+                        If not specified, use the included copy of the table
+                        whose last version is at https://bit.ly/2Yu0LqU.
 
 DESCRIPTION:
     Tag one Python file and output the table of its taxons or labels.
 """
 
 from pathlib import Path
-from typing import List, Tuple
+from typing import List, Tuple, Optional
 from typing_extensions import Literal
 
 from ..goodies import couple_to_string
@@ -27,6 +30,7 @@ def main(
     tags: Literal["Taxon", "Label"] = "Taxon",
     relative_path: Path = Path("."),
     output_format: Literal["md", "tsv"] = "md",
+    taxonomy_path: Optional[Path] = None,
 ) -> str:
     program = get_program(source, relative_path)
     labeller = ProgramLabeller()
@@ -37,7 +41,7 @@ def main(
             s = ", ".join(map(couple_to_string, sorted(label_spans)))
             couples.append((label_name, s))
     else:
-        taxonomy = Taxonomy()
+        taxonomy = Taxonomy(taxonomy_path)
         taxons = taxonomy.to_taxons(program.labels)
         for (taxon_name, taxon_spans) in sorted(taxons):
             s = ", ".join(map(couple_to_string, sorted(taxon_spans.elements())))
@@ -57,5 +61,6 @@ def cli_wrapper(args):
         tags="Label" if args["--labels"] else "Taxon",
         relative_path=path.parent,
         output_format=args["--format"],
+        taxonomy_path=Path(args["--taxonomy"]) if args["--taxonomy"] else None,
     )
     print(result)

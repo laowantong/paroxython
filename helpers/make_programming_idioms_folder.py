@@ -56,7 +56,7 @@ for algo in algos:
             print(f"Problem during the formatting of {path}.")
         path.write_text(source)
         count += 1
-print(f"Dumped {count} programs in '{base_path}' directory.")
+print(f"Dumped {count} programs in '{base_path.resolve()}' directory.")
 
 (base_path / "__read-me.md").write_text(
     f"""\
