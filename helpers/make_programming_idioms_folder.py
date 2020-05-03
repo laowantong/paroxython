@@ -5,6 +5,8 @@ from pathlib import Path
 
 from black import FileMode, format_str
 
+import regex  # type: ignore
+
 import context
 from goodies import title_to_slug_factory
 
@@ -25,7 +27,18 @@ for algo in algos:
     for program in algo["Implementations"]:
         if program["LanguageName"] != "Python":
             continue
+        if program["Id"] == 669:  # contents: "print >>sys.stderr, "%s is negative" % x"
+            continue
         comment = "\n# ".join(program["AuthorComment"].split("\n"))
+
+        # Manually “fix” some source-codes
+        source = regex.sub(r"print (.+)\n", r"print(\1)\n", program["CodeBlock"] + "\n")
+        if program["Id"] == 2687:
+            source = source.replace("<your data dict>", "'<your data dict>'")
+        elif program["Id"] == 1829:
+            source = source.replace("input().split())", "input().split()))")
+        elif program["Id"] == 2429:
+            source = f'print("{source[:-1]}")\n'
         source = "\n".join(
             [
                 f'"""{algo["Title"]}.',
@@ -39,15 +52,9 @@ for algo in algos:
                 f"# Version {program['Version']}",
                 "" if not comment else f"\n# {comment}\n",
                 "" if not program["ImportsBlock"] else f"\n{program['ImportsBlock']}\n",
-                program["CodeBlock"],
+                source,
             ]
         ).replace("\n\n\n", "\n\n")
-
-        # Manually fix some syntax errors
-        if program["Id"] == 2687:
-            source = source.replace("<your data dict>", "'<your data dict>'")
-        elif program["Id"] == 1829:
-            source = source.replace("input().split())", "input().split()))")
 
         path = base_path / f"{algo['Id']:03}.{program['Id']}-{slug}.py"
         try:

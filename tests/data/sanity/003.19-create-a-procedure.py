@@ -12,4 +12,4 @@ Source: programming-idioms.org
 
 
 def finish(name):
-    print "My job here is done. Goodbye " + name
+    print("My job here is done. Goodbye " + name)

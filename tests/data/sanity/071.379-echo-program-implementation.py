@@ -13,4 +13,4 @@ Source: christianhujer
 
 import sys
 
-print " ".join(sys.argv[1:])
+print(" ".join(sys.argv[1:]))

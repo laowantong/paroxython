@@ -16,4 +16,4 @@ Source: programming-idioms.org
 # variable name must be quoted.
 
 if "x" in locals():
-    print x
+    print(x)

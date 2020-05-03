@@ -11,4 +11,4 @@ Source: programming-idioms.org
 # Version 1
 
 for i, x in enumerate(items):
-    print i, x
+    print(i, x)
