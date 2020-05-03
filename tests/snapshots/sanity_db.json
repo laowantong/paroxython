@@ -390,7 +390,7 @@
       },
       "taxons": {
         "call/function/builtin/print": [[2,2]],
-        "call/method/dictionary/items": [[1,1]],
+        "call/method/dict/items": [[1,1]],
         "flow/loop/exit/late": [[1,1],[2,2]],
         "flow/loop/for": [[1,1]],
         "flow/loop/for/nested/1": [[2,2]],
@@ -607,7 +607,7 @@
         "method_call_without_result:reverse": [[1,1]]
       },
       "taxons": {
-        "call/method/sequence/mutable/reverse": [[1,1]]
+        "call/method/sequence/list/reverse": [[1,1]]
       }
     },
     "020.573-return-two-values.py": {
@@ -641,7 +641,6 @@
       "taxons": {
         "call/function/builtin/enumerate": [[2,2]],
         "call/method/sequence/index": [[4,4]],
-        "call/method/sequence/string/index": [[4,4]],
         "flow/conditional/no_else": [[3,4]],
         "flow/loop/exit/early/return": [[2,2]],
         "flow/loop/exit/late": [[4,4]],
@@ -706,7 +705,7 @@
         "single_assignment:s": [[1,1]]
       },
       "taxons": {
-        "call/method": [[1,1]],
+        "call/method/sequence/string/format": [[1,1]],
         "type/elementary/string": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
@@ -1517,7 +1516,7 @@
         "update_with:insert": [[1,1]]
       },
       "taxons": {
-        "call/method/sequence/mutable/insert": [[1,1]]
+        "call/method/sequence/list/insert": [[1,1]]
       }
     },
     "045.570-pause-execution-for-5-seconds.py": {
@@ -1605,7 +1604,7 @@
         "single_assignment:chunks": [[1,1]]
       },
       "taxons": {
-        "call/method": [[1,1]],
+        "call/method/sequence/string/split": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
     },
@@ -1645,7 +1644,7 @@
         "method_call:values": [[1,1]]
       },
       "taxons": {
-        "call/method/dictionary/values": [[1,1]],
+        "call/method/dict/values": [[1,1]],
         "test/belonging": [[1,1]]
       }
     },
@@ -1720,6 +1719,7 @@
         "single_assignment:s": [[1,1]]
       },
       "taxons": {
+        "call/function/builtin/casting/str": [[1,1]],
         "call/function/builtin/str": [[1,1]],
         "type/elementary/string": [[1,1]],
         "variable/assignment/single": [[1,1]]
@@ -1897,7 +1897,7 @@
         "single_assignment:i": [[1,1]]
       },
       "taxons": {
-        "call/method": [[1,1]],
+        "call/method/sequence/string/find": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
     },
@@ -1952,7 +1952,7 @@
         "single_assignment:s": [[1,1]]
       },
       "taxons": {
-        "call/method": [[1,1]],
+        "call/method/sequence/string/format": [[1,1]],
         "type/elementary/string": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
@@ -2198,7 +2198,7 @@
         "single_assignment:s": [[1,1]]
       },
       "taxons": {
-        "call/method": [[1,1]],
+        "call/method/sequence/string/format": [[1,1]],
         "type/elementary/string": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
@@ -2331,7 +2331,6 @@
       },
       "taxons": {
         "call/method/sequence/count": [[1,1]],
-        "call/method/sequence/string/count": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
     },
@@ -2373,7 +2372,6 @@
       "taxons": {
         "call/function/builtin/bin": [[1,1]],
         "call/method/sequence/count": [[1,1]],
-        "call/method/sequence/string/count": [[1,1]],
         "type/elementary/string": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
@@ -2637,7 +2635,7 @@
         "single_assignment:b": [[1,1]]
       },
       "taxons": {
-        "call/method": [[1,1]],
+        "call/method/sequence/string/startswith": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
     },
@@ -2749,7 +2747,7 @@
         "method_call_without_result:sort": [[1,1]]
       },
       "taxons": {
-        "call/method/sequence/mutable/list/sort": [[1,1]]
+        "call/method/sequence/list/sort": [[1,1]]
       }
     },
     "101.2172-load-from-http-get-request-into-a-string.py": {
@@ -3077,7 +3075,7 @@
         "call/composition": [[1,1]],
         "call/function/builtin/print": [[2,2]],
         "call/function/builtin/sorted": [[1,1]],
-        "call/method/dictionary/items": [[1,1]],
+        "call/method/dict/items": [[1,1]],
         "flow/loop/exit/late": [[1,1],[2,2]],
         "flow/loop/for": [[1,1]],
         "flow/loop/for/nested/1": [[2,2]],
@@ -3263,7 +3261,7 @@
         "call/function/builtin/casting/set": [[2,2]],
         "call/function/builtin/print": [[8,8]],
         "call/function/without_arguments": [[2,2]],
-        "call/method/sequence/mutable/append": [[7,7]],
+        "call/method/sequence/list/append": [[7,7]],
         "call/method/set/add": [[6,6]],
         "flow/conditional/no_else": [[5,7]],
         "flow/loop/exit/late": [[4,7]],
@@ -3599,10 +3597,8 @@
       },
       "taxons": {
         "call/function": [[5,5]],
-        "call/method/dictionary/pop": [[4,4]],
-        "call/method/sequence/mutable/append": [[9,9]],
-        "call/method/sequence/mutable/pop": [[4,4]],
-        "call/method/set/pop": [[4,4]],
+        "call/method/sequence/list/append": [[9,9]],
+        "call/method/set_or_list/pop": [[4,4]],
         "flow/conditional/no_else": [[7,9]],
         "flow/loop/exit/late": [[3,9],[6,9]],
         "flow/loop/for/elements": [[6,9]],
@@ -3673,7 +3669,7 @@
         "call/function/builtin/casting/set": [[3,3]],
         "call/function/without_arguments": [[3,3]],
         "call/method": [[6,6]],
-        "call/method/sequence/mutable/extend": [[9,9]],
+        "call/method/sequence/list/extend": [[9,9]],
         "call/method/set/add": [[8,8]],
         "flow/loop/exit/late": [[5,9]],
         "flow/loop/while": [[5,9]],
@@ -3736,11 +3732,9 @@
         "call/function": [[6,6]],
         "call/function/builtin/casting/set": [[2,2]],
         "call/function/without_arguments": [[2,2]],
-        "call/method/dictionary/pop": [[5,5]],
-        "call/method/sequence/mutable/extend": [[8,8]],
-        "call/method/sequence/mutable/pop": [[5,5]],
+        "call/method/sequence/list/extend": [[8,8]],
         "call/method/set/add": [[7,7]],
-        "call/method/set/pop": [[5,5]],
+        "call/method/set_or_list/pop": [[5,5]],
         "flow/loop/exit/late": [[4,8]],
         "flow/loop/while": [[4,8]],
         "subroutine/argument/arg": [[1,1],[1,1]],
@@ -3854,8 +3848,7 @@
         "update_with:remove": [[1,1]]
       },
       "taxons": {
-        "call/method/sequence/mutable/remove": [[1,1]],
-        "call/method/set/remove": [[1,1]]
+        "call/method/set_or_list/remove": [[1,1]]
       }
     },
     "136.2141-remove-all-occurrences-of-a-value-from-a-list.py": {
@@ -3947,9 +3940,7 @@
         "update_with:pop": [[1,1]]
       },
       "taxons": {
-        "call/method/dictionary/pop": [[1,1]],
-        "call/method/sequence/mutable/pop": [[1,1]],
-        "call/method/set/pop": [[1,1]],
+        "call/method/set_or_list/pop": [[1,1]],
         "type/elementary/null": [[1,1]]
       }
     },
@@ -4191,7 +4182,7 @@
         "call/function/builtin/input": [[1,1]],
         "call/function/builtin/map": [[1,1]],
         "call/function/without_arguments": [[1,1]],
-        "call/method": [[1,1]],
+        "call/method/sequence/string/split": [[1,1]],
         "io/standard/input": [[1,1]],
         "type/container/list": [[1,1]]
       }
@@ -4279,7 +4270,7 @@
         "single_assignment:t": [[1,1]]
       },
       "taxons": {
-        "call/method": [[1,1]],
+        "call/method/sequence/string/format": [[1,1]],
         "type/elementary/string": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
@@ -4339,7 +4330,7 @@
       "taxons": {
         "call/function/builtin/casting/int": [[1,1],[2,2]],
         "call/function/builtin/range": [[1,1],[2,2]],
-        "call/method": [[3,3]],
+        "call/method/sequence/string/format": [[3,3]],
         "operator/arithmetic/addition": [[1,1],[2,2],[3,3],[3,3],[3,3]],
         "operator/arithmetic/integer_division": [[3,3],[3,3],[3,3]],
         "subscript/slice/start": [[1,1],[2,2]],
@@ -4825,7 +4816,7 @@
       },
       "taxons": {
         "call/function/builtin/len": [[1,1]],
-        "call/method": [[1,1]],
+        "call/method/sequence/string/startswith": [[1,1]],
         "operator/boolean/and": [[1,1]],
         "subscript/slice/start": [[1,1]],
         "variable/assignment/single": [[1,1]]
@@ -4938,7 +4929,7 @@
         "update_with:append": [[1,1]]
       },
       "taxons": {
-        "call/method/sequence/mutable/append": [[1,1]]
+        "call/method/sequence/list/append": [[1,1]]
       }
     },
     "172.2442-insert-entry-in-map.py": {
@@ -5148,7 +5139,8 @@
         "single_assignment:filtered_files": [[3,3]]
       },
       "taxons": {
-        "call/method": [[4,4],[5,5],[7,7]],
+        "call/method": [[5,5],[7,7]],
+        "call/method/sequence/string/format": [[4,4]],
         "library/standard/os": [[2,2]],
         "library/standard/re": [[1,1]],
         "type/elementary/string": [[4,4],[7,7]],
@@ -10938,6 +10930,9 @@
       "129.2282-breadth-first-traversing-in-a-graph.py",
       "130.2283-depth-first-traversing-in-a-graph.py"
     ],
+    "call/function/builtin/casting/str": [
+      "055.575-convert-integer-to-string.py"
+    ],
     "call/function/builtin/enumerate": [
       "007.183-iterate-over-list-indexes-and-values.py",
       "020.573-return-two-values.py",
@@ -11074,7 +11069,6 @@
       "014.185-pick-uniformly-a-random-floating-point-number-in-ab.py",
       "014.3410-pick-uniformly-a-random-floating-point-number-in-ab.py",
       "015.184-pick-uniformly-a-random-integer-in-ab.py",
-      "023.1102-convert-real-number-to-string-with-2-decimal-places.py",
       "025.195-send-a-value-to-another-thread.py",
       "027.193-create-a-3-dimensional-array.py",
       "030.189-parallelize-execution-of-1000-independent-tasks.py",
@@ -11082,23 +11076,18 @@
       "040.2279-graph-with-adjacency-lists.py",
       "041.187-reverse-a-string.py",
       "045.570-pause-execution-for-5-seconds.py",
-      "049.242-split-a-space-separated-string.py",
       "056.1424-launch-1000-parallel-tasks-and-wait-for-completion.py",
       "058.665-extract-file-content-to-a-string.py",
       "061.576-get-current-date.py",
-      "062.1091-find-substring-position.py",
-      "065.1085-format-decimal-number.py",
       "067.1426-binomial-coefficient-n-choose-k.py",
       "068.2271-create-a-bitset.py",
       "069.1086-seed-random-generator.py",
       "070.1087-use-clock-as-random-generator-seed.py",
-      "076.1083-binary-digits-from-an-integer.py",
       "083.1805-regex-with-character-repetition.py",
       "087.1139-stop-program.py",
       "091.1098-load-json-file-into-struct.py",
       "092.1100-save-object-into-json-file.py",
       "095.2140-get-file-size.py",
-      "096.1094-check-string-prefix.py",
       "098.2142-epoch-seconds-to-date-object.py",
       "099.1429-format-date-yyyy-mm-dd.py",
       "099.2693-format-date-yyyy-mm-dd.py",
@@ -11123,14 +11112,10 @@
       "145.1822-print-log-line-with-datetime.py",
       "146.1825-convert-string-to-floating-point-number.py",
       "147.2171-remove-all-non-ascii-characters.py",
-      "148.1829-read-list-of-integer-numbers-from-stdin.py",
-      "153.1980-concatenate-string-with-integer.py",
-      "154.2155-halfway-between-two-hex-color-codes.py",
       "154.2292-halfway-between-two-hex-color-codes.py",
       "155.2147-delete-file.py",
       "158.2163-random-sublist.py",
       "164.2169-open-url-in-default-browser.py",
-      "167.2611-trim-prefix.py",
       "174.2687-make-http-post-request.py",
       "175.2613-bytes-to-hex-string.py",
       "176.2614-hex-string-to-byte-array.py",
@@ -11150,16 +11135,11 @@
       "154.2292-halfway-between-two-hex-color-codes.py",
       "174.2687-make-http-post-request.py"
     ],
-    "call/method/dictionary/items": [
+    "call/method/dict/items": [
       "013.574-iterate-over-map-keys-and-values.py",
       "113.2157-iterate-over-map-entries-ordered-by-values.py"
     ],
-    "call/method/dictionary/pop": [
-      "128.2085-breadth-first-traversing-of-a-tree.py",
-      "130.2283-depth-first-traversing-in-a-graph.py",
-      "140.2156-delete-map-entry.py"
-    ],
-    "call/method/dictionary/values": [
+    "call/method/dict/values": [
       "052.666-check-if-map-contains-value.py"
     ],
     "call/method/sequence/count": [
@@ -11169,35 +11149,23 @@
     "call/method/sequence/index": [
       "020.573-return-two-values.py"
     ],
-    "call/method/sequence/mutable/append": [
+    "call/method/sequence/list/append": [
       "119.3263-deduplicate-list.py",
       "128.2085-breadth-first-traversing-of-a-tree.py",
       "171.2446-add-an-element-at-the-end-of-a-list.py"
     ],
-    "call/method/sequence/mutable/extend": [
+    "call/method/sequence/list/extend": [
       "129.2282-breadth-first-traversing-in-a-graph.py",
       "130.2283-depth-first-traversing-in-a-graph.py"
     ],
-    "call/method/sequence/mutable/insert": [
+    "call/method/sequence/list/insert": [
       "044.190-insert-element-in-list.py"
     ],
-    "call/method/sequence/mutable/list/sort": [
-      "100.1142-sort-by-a-comparator.py"
-    ],
-    "call/method/sequence/mutable/pop": [
-      "128.2085-breadth-first-traversing-of-a-tree.py",
-      "130.2283-depth-first-traversing-in-a-graph.py",
-      "140.2156-delete-map-entry.py"
-    ],
-    "call/method/sequence/mutable/remove": [
-      "135.2158-remove-item-from-list-by-its-value.py"
-    ],
-    "call/method/sequence/mutable/reverse": [
+    "call/method/sequence/list/reverse": [
       "019.3164-reverse-a-list.py"
     ],
-    "call/method/sequence/string/count": [
-      "082.1096-count-substring-occurrences.py",
-      "084.1940-count-bits-set-in-integer-binary-representation.py"
+    "call/method/sequence/list/sort": [
+      "100.1142-sort-by-a-comparator.py"
     ],
     "call/method/sequence/string/encode": [
       "041.187-reverse-a-string.py",
@@ -11207,8 +11175,16 @@
       "097.1095-check-string-suffix.py",
       "151.2166-remove-string-trailing-path-separator.py"
     ],
-    "call/method/sequence/string/index": [
-      "020.573-return-two-values.py"
+    "call/method/sequence/string/find": [
+      "062.1091-find-substring-position.py"
+    ],
+    "call/method/sequence/string/format": [
+      "023.1102-convert-real-number-to-string-with-2-decimal-places.py",
+      "065.1085-format-decimal-number.py",
+      "076.1083-binary-digits-from-an-integer.py",
+      "153.1980-concatenate-string-with-integer.py",
+      "154.2155-halfway-between-two-hex-color-codes.py",
+      "177.2725-find-files-with-a-given-list-of-filename-extensions.py"
     ],
     "call/method/sequence/string/isdigit": [
       "137.1823-check-if-string-contains-only-digits.py"
@@ -11236,6 +11212,14 @@
       "150.2154-remove-trailing-slash.py",
       "168.3174-trim-suffix.py"
     ],
+    "call/method/sequence/string/split": [
+      "049.242-split-a-space-separated-string.py",
+      "148.1829-read-list-of-integer-numbers-from-stdin.py"
+    ],
+    "call/method/sequence/string/startswith": [
+      "096.1094-check-string-prefix.py",
+      "167.2611-trim-prefix.py"
+    ],
     "call/method/sequence/string/strip": [
       "110.1455-check-if-string-is-blank.py"
     ],
@@ -11245,12 +11229,12 @@
       "129.2282-breadth-first-traversing-in-a-graph.py",
       "130.2283-depth-first-traversing-in-a-graph.py"
     ],
-    "call/method/set/pop": [
+    "call/method/set_or_list/pop": [
       "128.2085-breadth-first-traversing-of-a-tree.py",
       "130.2283-depth-first-traversing-in-a-graph.py",
       "140.2156-delete-map-entry.py"
     ],
-    "call/method/set/remove": [
+    "call/method/set_or_list/remove": [
       "135.2158-remove-item-from-list-by-its-value.py"
     ],
     "class": [
