@@ -138,6 +138,8 @@ def test_recommend():
 
     with pytest.raises(subprocess.CalledProcessError):
         run(f"recommend -p foobar.py {db_path}")  # non existing
+
+    with pytest.raises(subprocess.CalledProcessError):
         run(f"recommend -p paroxython/goodies.py {db_path}")  # malformed
 
 
