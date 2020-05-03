@@ -24,7 +24,7 @@ class Taxonomy:
 
     def __init__(self, taxonomy_path: Optional[Path] = None, *args, **kwargs) -> None:
         """Read the taxonomy specifications, and make some pre-processing."""
-        is_literal = regex.compile(r"[\w:]+").fullmatch
+        is_literal = regex.compile(r"[\w:.]+").fullmatch
         taxonomy_path = taxonomy_path or Path(dirname(__file__)) / "taxonomy.tsv"
         tsv = taxonomy_path.read_text().partition("-- EOF")[0].strip()
         self.literal_label_names: Dict[LabelName, TaxonNames] = defaultdict(list)
@@ -42,9 +42,9 @@ class Taxonomy:
     @lru_cache(maxsize=None)
     def get_taxon_name_list(self, label_name: LabelName) -> TaxonNames:
         """Translate a label name into a list of taxon names."""
-        if label_name in self.literal_label_names:
-            return self.literal_label_names[label_name]
         result: TaxonNames = []
+        if label_name in self.literal_label_names:
+            result.extend(self.literal_label_names[label_name])
         for (rex, taxon_name) in self.compiled_label_names:
             if rex.match(label_name):
                 s = rex.sub(taxon_name, label_name)  # cf. note above

@@ -72,6 +72,7 @@
         "while": [[2,7]]
       },
       "taxons": {
+        "call/function/builtin/print": [[3,3],[8,8]],
         "flow/conditional": [[4,7]],
         "flow/conditional/else": [[7,7]],
         "flow/loop/exit/late": [[2,7]],
@@ -134,6 +135,7 @@
         "suggest_constant_definition": [[3,3],[5,5],[7,7]]
       },
       "taxons": {
+        "call/function/builtin/print": [[4,4],[6,6],[8,8],[10,10]],
         "call/function/builtin/range": [[2,2]],
         "flow/conditional": [[3,10],[5,10],[7,10]],
         "flow/conditional/else": [[10,10]],
@@ -462,6 +464,10 @@
     ]
   },
   "taxons": {
+    "call/function/builtin/print": [
+      "collatz_print.py",
+      "fizzbuzz.py"
+    ],
     "call/function/builtin/range": [
       "fizzbuzz.py"
     ],

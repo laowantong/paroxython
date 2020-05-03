@@ -3,6 +3,7 @@
     "variable/assignment/single": "1"
   },
   "collatz_print.py": {
+    "call/function/builtin/print": "3 8",
     "flow/conditional": "4-7",
     "flow/conditional/else": "7",
     "flow/loop/exit/late": "2-7",
@@ -22,6 +23,7 @@
     "variable/assignment/single": "5 7"
   },
   "fizzbuzz.py": {
+    "call/function/builtin/print": "4 6 8 10",
     "call/function/builtin/range": "2",
     "flow/conditional": "3-10 5-10 7-10",
     "flow/conditional/else": "10",

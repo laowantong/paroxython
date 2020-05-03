@@ -1,6 +1,8 @@
 call/function/builtin/casting/set	literal:Set
+call/function/builtin/casting/\1	function_call:(list|dict)
 flow/conditional	if
 flow/conditional/else	if_else
 test/inequality	comparison_operator:(Lt|LtE|Gt|GtE)
+type/container/list	function_call:list
 type/set	literal:Set
 type/set	method_call:difference_update

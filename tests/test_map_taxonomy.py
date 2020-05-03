@@ -21,15 +21,22 @@ def test_initial_values():
         "literal:Set": ["call/function/builtin/casting/set", "type/set"],
         "if": ["flow/conditional"],
         "if_else": ["flow/conditional/else"],
+        "function_call:list": ["type/container/list"],
         "method_call:difference_update": ["type/set"],
     }
-    assert t.compiled_label_names[0][1] == "test/inequality"
+    print(t.compiled_label_names)
+    assert t.compiled_label_names[0][1] == "call/function/builtin/casting/\\1"
+    assert t.compiled_label_names[1][1] == "test/inequality"
 
 
 def test_get_taxon_name_list():
     assert t.get_taxon_name_list("if") == ["flow/conditional"]
     assert t.get_taxon_name_list("comparison_operator:Gt") == ["test/inequality"]
     assert t.get_taxon_name_list("label_with_no_corresponding_taxon") == []
+    assert t.get_taxon_name_list("function_call:list") == [
+        "type/container/list",
+        "call/function/builtin/casting/list",
+    ]
 
 
 def test_to_taxons():

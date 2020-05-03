@@ -10,6 +10,7 @@
         "literal:Str": [[1,1]]
       },
       "taxons": {
+        "call/function/builtin/print": [[1,1]],
         "io/standard/print": [[1,1]],
         "type/elementary/string": [[1,1]]
       }
@@ -27,6 +28,7 @@
         "literal:Str": [[2,2]]
       },
       "taxons": {
+        "call/function/builtin/print": [[2,2]],
         "io/standard/print": [[2,2]],
         "library/standard/__future__/print_function": [[1,1]],
         "type/elementary/string": [[2,2]]
@@ -50,6 +52,7 @@
         "range:10": [[1,1]]
       },
       "taxons": {
+        "call/function/builtin/print": [[2,2]],
         "call/function/builtin/range": [[1,1]],
         "flow/loop/exit/late": [[1,2]],
         "flow/loop/for/arithmetic": [[1,2]],
@@ -71,6 +74,7 @@
         "replication_operator:Str": [[1,1]]
       },
       "taxons": {
+        "call/function/builtin/print": [[1,1]],
         "io/standard/print": [[1,1]],
         "operator/string/replication": [[1,1]],
         "type/elementary/number/integer": [[1,1]],
@@ -90,6 +94,7 @@
         "replication_operator:Str": [[1,1]]
       },
       "taxons": {
+        "call/function/builtin/print": [[1,1]],
         "io/standard/print": [[1,1]],
         "operator/string/replication": [[1,1]],
         "type/elementary/number/integer": [[1,1]],
@@ -112,6 +117,7 @@
         "literal:Str": [[2,2]]
       },
       "taxons": {
+        "call/function/builtin/print": [[2,2]],
         "io/standard/print": [[2,2]],
         "operator/string/concatenation": [[2,2]],
         "subroutine/argument/arg": [[1,1]],
@@ -222,6 +228,7 @@
       },
       "taxons": {
         "call/function/builtin/enumerate": [[1,1]],
+        "call/function/builtin/print": [[2,2]],
         "flow/loop/exit/late": [[1,1],[2,2]],
         "flow/loop/for": [[1,1]],
         "flow/loop/for/elements_and_indexes": [[1,2]],
@@ -382,6 +389,7 @@
         "nested_for:1": [[2,2]]
       },
       "taxons": {
+        "call/function/builtin/print": [[2,2]],
         "call/method/dictionary/items": [[1,1]],
         "flow/loop/exit/late": [[1,1],[2,2]],
         "flow/loop/for": [[1,1]],
@@ -508,6 +516,7 @@
         "method:__init__": [[2,4]]
       },
       "taxons": {
+        "call/function/builtin/casting/list": [[4,4]],
         "class": [[1,4]],
         "subroutine/argument/arg": [[2,2],[2,2]],
         "subroutine/argument/vararg": [[2,2]],
@@ -679,6 +688,7 @@
         "single_assignment:i": [[1,1]]
       },
       "taxons": {
+        "call/function/builtin/casting/int": [[1,1]],
         "type/elementary/number/integer": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
@@ -1008,6 +1018,7 @@
       },
       "taxons": {
         "call/composition": [[3,3]],
+        "call/function/builtin/casting/set": [[3,3]],
         "call/function/without_arguments": [[3,3]],
         "class": [[1,2]],
         "flow/null_operation": [[2,2]],
@@ -1104,6 +1115,7 @@
       "taxons": {
         "call/composition": [[6,6]],
         "call/function": [[6,6]],
+        "call/function/builtin/print": [[6,6]],
         "io/standard/print": [[6,6]],
         "library/standard/functools/partial": [[1,1]],
         "operator/arithmetic/addition": [[4,4]],
@@ -1322,6 +1334,7 @@
         "try_raise:Exception": [[2,8]]
       },
       "taxons": {
+        "call/function/builtin/print": [[6,6]],
         "call/function/without_arguments": [[5,5]],
         "flow/conditional/no_else": [[4,5]],
         "flow/exception/catch/Exception": [[2,8]],
@@ -1355,6 +1368,7 @@
         "nested_for:1": [[2,5]]
       },
       "taxons": {
+        "call/function/builtin/print": [[5,5]],
         "flow/conditional/no_else": [[3,4]],
         "flow/loop/exit/late": [[1,5],[2,5]],
         "flow/loop/for/elements": [[1,5],[2,5]],
@@ -1416,6 +1430,7 @@
         "call/composition": [[7,7]],
         "call/function": [[7,7]],
         "call/function/builtin/enumerate": [[2,2],[3,3]],
+        "call/function/builtin/print": [[7,7]],
         "flow/conditional/no_else": [[4,5]],
         "flow/loop/exit/early/return": [[3,3]],
         "flow/loop/exit/late": [[2,2],[5,5]],
@@ -1705,6 +1720,7 @@
         "single_assignment:s": [[1,1]]
       },
       "taxons": {
+        "call/function/builtin/str": [[1,1]],
         "type/elementary/string": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
@@ -1741,6 +1757,7 @@
       },
       "taxons": {
         "call/function": [[4,4]],
+        "call/function/builtin/print": [[6,6]],
         "call/function/builtin/range": [[5,5]],
         "call/method": [[5,5]],
         "io/standard/print": [[6,6]],
@@ -1803,6 +1820,7 @@
         "single_assignment:lines": [[1,1]]
       },
       "taxons": {
+        "call/function/builtin/open": [[1,1]],
         "call/method": [[1,1]],
         "io/file/open": [[1,1]],
         "variable/assignment/single": [[1,1]]
@@ -1821,6 +1839,7 @@
         "literal:Str": [[2,2]]
       },
       "taxons": {
+        "call/function/builtin/print": [[2,2]],
         "io/standard/print": [[2,2]],
         "library/standard/sys": [[1,1]],
         "type/elementary/string": [[2,2]]
@@ -2008,6 +2027,7 @@
       "taxons": {
         "call/composition": [[3,3],[3,3]],
         "call/function/builtin/casting/bytearray": [[3,3]],
+        "call/function/builtin/casting/int": [[3,3]],
         "call/method": [[3,3]],
         "library/standard/__future__/division": [[1,1]],
         "library/standard/math": [[2,2]],
@@ -2075,6 +2095,7 @@
       },
       "taxons": {
         "call/composition": [[2,2]],
+        "call/function/builtin/print": [[2,2]],
         "call/method/sequence/string/join": [[2,2]],
         "io/standard/print": [[2,2]],
         "library/standard/sys": [[1,1]],
@@ -2251,6 +2272,7 @@
         "single_assignment:y": [[1,1]]
       },
       "taxons": {
+        "call/function/builtin/casting/float": [[1,1]],
         "type/elementary/number/floating_point": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
@@ -2267,6 +2289,7 @@
         "single_assignment:y": [[1,1]]
       },
       "taxons": {
+        "call/function/builtin/casting/int": [[1,1]],
         "type/elementary/number/integer": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
@@ -2287,6 +2310,7 @@
         "single_assignment:y": [[1,1]]
       },
       "taxons": {
+        "call/function/builtin/casting/int": [[1,1]],
         "operator/arithmetic/addition": [[1,1]],
         "type/elementary/number/floating_point": [[1,1]],
         "type/elementary/number/integer": [[1,1]],
@@ -2493,6 +2517,7 @@
         "single_assignment:x": [[3,3]]
       },
       "taxons": {
+        "call/function/builtin/open": [[2,2]],
         "call/method": [[3,3]],
         "io/file/open": [[2,2]],
         "library/standard/json": [[1,1]],
@@ -2516,6 +2541,7 @@
         "method_call_without_result:dump": [[3,3]]
       },
       "taxons": {
+        "call/function/builtin/open": [[2,2]],
         "call/method": [[3,3]],
         "io/file/open": [[2,2]],
         "library/standard/json": [[1,1]],
@@ -2560,6 +2586,7 @@
       },
       "taxons": {
         "call/composition": [[1,1]],
+        "call/function/builtin/print": [[1,1]],
         "call/function/builtin/type": [[1,1]],
         "io/standard/print": [[1,1]]
       }
@@ -2573,6 +2600,7 @@
         "function_call_without_result:print": [[1,1]]
       },
       "taxons": {
+        "call/function/builtin/print": [[1,1]],
         "io/standard/print": [[1,1]]
       }
     },
@@ -2838,6 +2866,7 @@
       },
       "taxons": {
         "call/function": [[10,10]],
+        "call/function/builtin/print": [[12,12]],
         "call/method": [[11,11]],
         "class": [[2,9]],
         "io/standard/print": [[12,12]],
@@ -2933,6 +2962,7 @@
       },
       "taxons": {
         "call/function/builtin/locals": [[1,1]],
+        "call/function/builtin/print": [[2,2]],
         "call/function/without_arguments": [[1,1]],
         "flow/conditional/no_else": [[1,2]],
         "io/standard/print": [[2,2]],
@@ -3015,6 +3045,7 @@
         "loop_with_late_exit:for": [[1,2]]
       },
       "taxons": {
+        "call/function/builtin/print": [[2,2]],
         "call/function/builtin/sorted": [[1,1]],
         "flow/loop/exit/late": [[1,2]],
         "flow/loop/for": [[1,2]],
@@ -3044,6 +3075,7 @@
       },
       "taxons": {
         "call/composition": [[1,1]],
+        "call/function/builtin/print": [[2,2]],
         "call/function/builtin/sorted": [[1,1]],
         "call/method/dictionary/items": [[1,1]],
         "flow/loop/exit/late": [[1,1],[2,2]],
@@ -3136,6 +3168,7 @@
         "single_assignment:y": [[1,1]]
       },
       "taxons": {
+        "call/function/builtin/casting/set": [[1,1]],
         "type/container/set": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
@@ -3149,6 +3182,7 @@
         "function_call_without_result:set": [[1,1]]
       },
       "taxons": {
+        "call/function/builtin/casting/set": [[1,1]],
         "type/container/set": [[1,1]]
       }
     },
@@ -3168,6 +3202,8 @@
       },
       "taxons": {
         "call/composition": [[1,1]],
+        "call/function/builtin/casting/list": [[1,1]],
+        "call/function/builtin/casting/set": [[1,1]],
         "type/container/list": [[1,1]],
         "type/container/set": [[1,1]],
         "variable/assignment/single": [[1,1]]
@@ -3224,6 +3260,9 @@
         "update_with:append": [[7,7]]
       },
       "taxons": {
+        "call/function/builtin/casting/set": [[2,2]],
+        "call/function/builtin/print": [[8,8]],
+        "call/function/without_arguments": [[2,2]],
         "call/method/sequence/mutable/append": [[7,7]],
         "call/method/set/add": [[6,6]],
         "flow/conditional/no_else": [[5,7]],
@@ -3256,6 +3295,7 @@
       "taxons": {
         "call/composition": [[1,1]],
         "call/function": [[1,1]],
+        "call/function/builtin/casting/int": [[1,1]],
         "type/elementary/number/integer": [[1,1]],
         "type/elementary/string": [[1,1]],
         "variable/assignment/single": [[1,1]]
@@ -3300,6 +3340,7 @@
         "while": [[5,7]]
       },
       "taxons": {
+        "call/function/builtin/print": [[7,7]],
         "call/method": [[3,3],[4,4],[6,6]],
         "flow/loop/exit/late": [[5,7]],
         "flow/loop/while/infinite": [[5,7]],
@@ -3456,6 +3497,7 @@
         "single_assignment:t2": [[4,4]]
       },
       "taxons": {
+        "call/function/builtin/print": [[5,5]],
         "call/function/without_arguments": [[3,3]],
         "call/method": [[2,2],[4,4]],
         "io/standard/print": [[5,5]],
@@ -3628,6 +3670,8 @@
       },
       "taxons": {
         "call/function": [[4,4],[7,7]],
+        "call/function/builtin/casting/set": [[3,3]],
+        "call/function/without_arguments": [[3,3]],
         "call/method": [[6,6]],
         "call/method/sequence/mutable/extend": [[9,9]],
         "call/method/set/add": [[8,8]],
@@ -3690,6 +3734,8 @@
       },
       "taxons": {
         "call/function": [[6,6]],
+        "call/function/builtin/casting/set": [[2,2]],
+        "call/function/without_arguments": [[2,2]],
         "call/method/dictionary/pop": [[5,5]],
         "call/method/sequence/mutable/extend": [[8,8]],
         "call/method/sequence/mutable/pop": [[5,5]],
@@ -3921,6 +3967,7 @@
         "loop_with_late_exit:for": [[1,2]]
       },
       "taxons": {
+        "call/function/builtin/print": [[2,2]],
         "flow/loop/exit/late": [[1,2]],
         "flow/loop/for": [[1,2]],
         "io/standard/print": [[2,2]],
@@ -3958,6 +4005,7 @@
         "loop_with_late_exit:for": [[1,2]]
       },
       "taxons": {
+        "call/function/builtin/print": [[2,2]],
         "call/function/builtin/zip": [[1,1]],
         "flow/loop/exit/late": [[1,2]],
         "flow/loop/for": [[1,2]],
@@ -4078,6 +4126,7 @@
         "single_assignment:f": [[1,1]]
       },
       "taxons": {
+        "call/function/builtin/casting/float": [[1,1]],
         "type/elementary/number/floating_point": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
@@ -4092,6 +4141,7 @@
         "literal:Str": [[1,1]]
       },
       "taxons": {
+        "call/function/builtin/casting/float": [[1,1]],
         "type/elementary/number/floating_point": [[1,1]],
         "type/elementary/string": [[1,1]]
       }
@@ -4137,6 +4187,8 @@
       },
       "taxons": {
         "call/composition": [[1,1],[1,1]],
+        "call/function/builtin/casting/list": [[1,1]],
+        "call/function/builtin/input": [[1,1]],
         "call/function/builtin/map": [[1,1]],
         "call/function/without_arguments": [[1,1]],
         "call/method": [[1,1]],
@@ -4285,6 +4337,7 @@
         "slice_upper:_": [[1,1],[2,2]]
       },
       "taxons": {
+        "call/function/builtin/casting/int": [[1,1],[2,2]],
         "call/function/builtin/range": [[1,1],[2,2]],
         "call/method": [[3,3]],
         "operator/arithmetic/addition": [[1,1],[2,2],[3,3],[3,3],[3,3]],
@@ -4379,8 +4432,10 @@
       },
       "taxons": {
         "call/composition": [[5,5],[6,6],[10,10]],
+        "call/function/builtin/casting/int": [[6,6]],
         "call/function/builtin/format": [[10,10]],
         "call/function/builtin/len": [[6,6]],
+        "call/function/builtin/print": [[12,12],[14,14],[15,15]],
         "call/function/builtin/range": [[6,6]],
         "call/method": [[5,5],[9,9],[11,11],[13,13]],
         "call/method/chaining": [[5,5]],
@@ -4633,6 +4688,7 @@
         "slice_upper:": [[1,1],[1,1]]
       },
       "taxons": {
+        "call/function/builtin/print": [[2,2]],
         "call/function/builtin/zip": [[1,1]],
         "flow/loop/exit/late": [[1,2]],
         "flow/loop/for": [[1,2]],
@@ -4682,6 +4738,7 @@
       "taxons": {
         "call/function": [[3,3],[6,6]],
         "call/function/builtin/next": [[4,4]],
+        "call/function/builtin/print": [[7,7]],
         "call/function/builtin/zip": [[5,5]],
         "flow/loop/exit/late": [[6,6],[7,7]],
         "flow/loop/for": [[6,6]],
@@ -4908,6 +4965,7 @@
         "literal:Str": [[1,1]]
       },
       "taxons": {
+        "call/function/builtin/print": [[1,1]],
         "io/standard/print": [[1,1]],
         "type/elementary/string": [[1,1]]
       }
@@ -4922,6 +4980,7 @@
         "literal:Str": [[1,1]]
       },
       "taxons": {
+        "call/function/builtin/print": [[1,1]],
         "io/standard/print": [[1,1]],
         "type/elementary/string": [[1,1]]
       }
@@ -4936,6 +4995,7 @@
         "literal:Str": [[1,1]]
       },
       "taxons": {
+        "call/function/builtin/print": [[1,1]],
         "io/standard/print": [[1,1]],
         "type/elementary/string": [[1,1]]
       }
@@ -5118,6 +5178,7 @@
       },
       "taxons": {
         "call/composition": [[3,3],[3,3]],
+        "call/function/builtin/casting/list": [[3,3]],
         "call/method": [[3,3],[3,3]],
         "library/standard/glob": [[1,1]],
         "library/standard/itertools": [[2,2]],
@@ -5247,6 +5308,7 @@
         "single_assignment:s": [[1,1]]
       },
       "taxons": {
+        "call/function/builtin/print": [[2,2]],
         "io/standard/print": [[2,2]],
         "operator/arithmetic/modulo": [[2,2]],
         "type/elementary/string": [[1,1]],
@@ -5558,6 +5620,7 @@
         "single_assignment:lines": [[2,2]]
       },
       "taxons": {
+        "call/function/builtin/open": [[1,1]],
         "call/method": [[2,2]],
         "io/file/open": [[1,1]],
         "variable/assignment/single": [[2,2]]
@@ -10846,6 +10909,35 @@
       "068.2271-create-a-bitset.py",
       "088.2143-allocate-1m-bytes.py"
     ],
+    "call/function/builtin/casting/float": [
+      "079.1090-convert-integer-to-floating-point-number.py",
+      "146.1826-convert-string-to-floating-point-number.py",
+      "146.2739-convert-string-to-floating-point-number.py"
+    ],
+    "call/function/builtin/casting/int": [
+      "022.243-convert-string-to-integer.py",
+      "068.2271-create-a-bitset.py",
+      "080.1092-truncate-floating-point-number-to-integer.py",
+      "081.2270-round-floating-point-number-to-integer.py",
+      "120.1479-read-integer-from-stdin.py",
+      "154.2155-halfway-between-two-hex-color-codes.py",
+      "154.2292-halfway-between-two-hex-color-codes.py"
+    ],
+    "call/function/builtin/casting/list": [
+      "017.1103-create-a-tree-data-structure.py",
+      "119.1253-deduplicate-list.py",
+      "148.1829-read-list-of-integer-numbers-from-stdin.py",
+      "177.3241-find-files-with-a-given-list-of-filename-extensions.py"
+    ],
+    "call/function/builtin/casting/set": [
+      "034.625-create-a-set-of-objects.py",
+      "118.1254-list-to-set.py",
+      "118.3266-list-to-set.py",
+      "119.1253-deduplicate-list.py",
+      "119.3263-deduplicate-list.py",
+      "129.2282-breadth-first-traversing-in-a-graph.py",
+      "130.2283-depth-first-traversing-in-a-graph.py"
+    ],
     "call/function/builtin/enumerate": [
       "007.183-iterate-over-list-indexes-and-values.py",
       "020.573-return-two-values.py",
@@ -10860,6 +10952,9 @@
     ],
     "call/function/builtin/hex": [
       "142.2151-hexadecimal-digits-of-an-integer.py"
+    ],
+    "call/function/builtin/input": [
+      "148.1829-read-list-of-integer-numbers-from-stdin.py"
     ],
     "call/function/builtin/issubclass": [
       "073.673-create-a-factory.py"
@@ -10882,6 +10977,47 @@
     "call/function/builtin/next": [
       "163.3177-print-list-elements-by-group-of-2.py"
     ],
+    "call/function/builtin/open": [
+      "058.665-extract-file-content-to-a-string.py",
+      "091.1098-load-json-file-into-struct.py",
+      "092.1100-save-object-into-json-file.py",
+      "197.3457-get-a-list-of-lines-from-a-file.py"
+    ],
+    "call/function/builtin/print": [
+      "001.1159-print-hello-world.py",
+      "001.3-print-hello-world.py",
+      "002.11-print-hello-10-times.py",
+      "002.1493-print-hello-10-times.py",
+      "002.3117-print-hello-10-times.py",
+      "003.19-create-a-procedure.py",
+      "007.183-iterate-over-list-indexes-and-values.py",
+      "013.574-iterate-over-map-keys-and-values.py",
+      "037.671-currying.py",
+      "042.1264-continue-outer-loop.py",
+      "042.3168-continue-outer-loop.py",
+      "043.2733-break-outer-loop.py",
+      "056.1424-launch-1000-parallel-tasks-and-wait-for-completion.py",
+      "059.668-write-to-standard-error-stream.py",
+      "071.379-echo-program-implementation.py",
+      "094.1101-print-type-of-variable.py",
+      "094.1864-print-type-of-variable.py",
+      "104.3264-save-object-into-xml-file.py",
+      "108.1291-determine-if-variable-name-is-defined.py",
+      "112.2144-iterate-over-map-entries-ordered-by-keys.py",
+      "113.2157-iterate-over-map-entries-ordered-by-values.py",
+      "119.3263-deduplicate-list.py",
+      "121.3029-udp-listen-and-read.py",
+      "125.2167-measure-function-call-duration.py",
+      "141.2159-iterate-in-sequence-over-two-lists.py",
+      "143.2256-iterate-alternatively-over-two-lists.py",
+      "154.2292-halfway-between-two-hex-color-codes.py",
+      "163.2170-print-list-elements-by-group-of-2.py",
+      "163.3177-print-list-elements-by-group-of-2.py",
+      "173.2427-format-a-number-with-grouped-thousands.py",
+      "173.2428-format-a-number-with-grouped-thousands.py",
+      "173.2429-format-a-number-with-grouped-thousands.py",
+      "182.2658-quine-program.py"
+    ],
     "call/function/builtin/range": [
       "002.11-print-hello-10-times.py",
       "030.189-parallelize-execution-of-1000-independent-tasks.py",
@@ -10898,6 +11034,9 @@
       "028.350-sort-by-a-property.py",
       "112.2144-iterate-over-map-entries-ordered-by-keys.py",
       "113.2157-iterate-over-map-entries-ordered-by-values.py"
+    ],
+    "call/function/builtin/str": [
+      "055.575-convert-integer-to-string.py"
     ],
     "call/function/builtin/sum": [
       "054.241-compute-sum-of-integers.py"
@@ -10919,7 +11058,10 @@
       "078.1089-do-while-loop.py",
       "093.1082-pass-a-runnable-procedure-as-parameter.py",
       "108.1291-determine-if-variable-name-is-defined.py",
+      "119.3263-deduplicate-list.py",
       "125.2167-measure-function-call-duration.py",
+      "129.2282-breadth-first-traversing-in-a-graph.py",
+      "130.2283-depth-first-traversing-in-a-graph.py",
       "131.2766-successive-conditions.py",
       "148.1829-read-list-of-integer-numbers-from-stdin.py",
       "160.2165-detect-if-32-bit-or-64-bit-architecture.py",
