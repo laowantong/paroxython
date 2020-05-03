@@ -26,6 +26,7 @@ DESCRIPTION:
 """
 
 import json
+import sys
 from pathlib import Path
 
 import regex  # type: ignore
@@ -40,9 +41,14 @@ def cli_wrapper(args):
     m = regex.fullmatch(r"(.+)[_-]db\.json", db_path.name)
     prefix = m[1] if m else None
     pipeline_path = Path(args["--pipe"] or parent_path / f"{prefix}_pipe.py")
-    try:
-        commands = literal_eval(pipeline_path.read_text())
-    except Exception:  # Too much possible exceptions
+    if pipeline_path.is_file():
+        try:
+            commands = literal_eval(pipeline_path.read_text())
+        except Exception:  # Too many possible exceptions
+            sys.exit(f"The pipeline '{pipeline_path}' is malformed: aborted.")
+    elif args["--pipe"]:
+        sys.exit(f"No pipeline at '{pipeline_path}': aborted.")
+    else:
         commands = []
     rec = Recommendations(
         commands=commands,

@@ -24,7 +24,7 @@ def run(command_suffix):
     return str(result.stdout)
 
 
-def test_help_messages():
+def test_cli():
     result = run("--help")
     assert "USAGE" in result
     assert "COMMANDS" in result
@@ -37,6 +37,8 @@ def test_help_messages():
     result = run("tag -h")
     assert "USAGE" in result
     assert "OPTIONS" in result
+    with pytest.raises(subprocess.CalledProcessError):
+        run("foobar")
 
 
 def test_tag():
@@ -109,20 +111,34 @@ def test_collect_options():
 
     db_path.unlink()
 
+    db_path = Path("tests/data/temp_db.sqlite")
+    result = run(f"collect -o {db_path} tests/data/simple")
+    assert f"Writing {db_path}." in result
+    assert db_path.is_file()
+    db_path.unlink()
+
 
 def test_recommend():
     pipe_path = Path("tests/data/dummy/pipe.py")
     db_path = Path("tests/data/dummy/db.json")
     result_path = Path("tests/data/dummy/temp_recommendations.md")
-    _ = run(f"recommend -o {result_path} -p {pipe_path} {db_path}")
+    run(f"recommend -o {result_path} -p {pipe_path} {db_path}")
     result_text = result_path.read_text()
     assert result_text == Path("tests/data/dummy/recommendations.md").read_text()
 
-    _ = run(f"recommend -o {result_path} -p {pipe_path} -c length {db_path}")
+    run(f"recommend -o {result_path} -p {pipe_path} -c length {db_path}")
     result_text = result_path.read_text()
     assert "1 program of learning cost in [1, 2[" in result_text
     assert "1 program of learning cost in [4, 8[" in result_text
+
+    result = run(f"recommend -o {result_path} {db_path}")  # implicit empty pipeline
+    assert "Processing 0 commands on 9 programs" in result
+
     result_path.unlink()
+
+    with pytest.raises(subprocess.CalledProcessError):
+        run(f"recommend -p foobar.py {db_path}")  # non existing
+        run(f"recommend -p paroxython/goodies.py {db_path}")  # malformed
 
 
 if __name__ == "__main__":

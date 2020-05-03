@@ -46,7 +46,7 @@ from importlib import import_module
 
 from docopt import docopt  # type: ignore
 
-if sys.version < "3.6":
+if sys.version < "3.6":  # pragma: no cover
     print(f"Paroxython requires Python 3.6 or later to run.\nThis version is {sys.version}.")
     sys.exit()
 
@@ -56,7 +56,7 @@ def main():
     command_name = args["COMMAND"].lower()
     command_args = [command_name] + args["ARGS"]
     if command_name not in ("tag", "recommend", "collect"):
-        sys.exit(f"{command_name} is not a valid subcommand. Type 'paroxython --help'.")
+        sys.exit(f"{command_name} is not a valid command. Type 'paroxython --help'.")
     command = import_module(f"paroxython.cli.cli_{command_name}", "cli_wrapper")
     command.cli_wrapper(docopt(command.__doc__, argv=command_args))
 
