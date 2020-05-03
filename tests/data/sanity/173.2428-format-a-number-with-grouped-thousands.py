@@ -10,4 +10,4 @@ Source: cup
 # Last modified on 2018-09-17T20:09:55.503266Z
 # Version 1
 
-format(1000, ",")
+print("format(1000, ',')")

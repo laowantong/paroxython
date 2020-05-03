@@ -1930,7 +1930,7 @@ Match a comprehension with an `if` clause.
 
 #### Feature `unbinding`
 
-Deletion of a name removes the binding of that name from the local or global namespace. Suffixed by the name. Not to be confused with the deletion of attribute references, subscriptions and slicings.
+Deleting a name removes the binding of that name from the local or global namespace. Not to be confused with the deletion of attribute references, subscriptions and slicings.
 
 ##### Specification
 

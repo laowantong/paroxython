@@ -4900,28 +4900,29 @@
     },
     "173.2427-format-a-number-with-grouped-thousands.py": {
       "timestamp": "ignored",
-      "source": "pass",
+      "source": "print(\"f'{1000:,}'\")",
       "labels": {
-        "null_operation": [[1,1]]
+        "call_argument:": [[1,1]],
+        "function_call:print": [[1,1]],
+        "function_call_without_result:print": [[1,1]],
+        "literal:Str": [[1,1]]
       },
       "taxons": {
-        "flow/null_operation": [[1,1]]
+        "io/standard/print": [[1,1]],
+        "type/elementary/string": [[1,1]]
       }
     },
     "173.2428-format-a-number-with-grouped-thousands.py": {
       "timestamp": "ignored",
-      "source": "format(1000, \",\")",
+      "source": "print(\"format(1000, ',')\")",
       "labels": {
         "call_argument:": [[1,1]],
-        "call_argument:1000": [[1,1]],
-        "function_call:format": [[1,1]],
-        "function_call_without_result:format": [[1,1]],
-        "literal:1000": [[1,1]],
+        "function_call:print": [[1,1]],
+        "function_call_without_result:print": [[1,1]],
         "literal:Str": [[1,1]]
       },
       "taxons": {
-        "call/function/builtin/format": [[1,1]],
-        "type/elementary/number/integer": [[1,1]],
+        "io/standard/print": [[1,1]],
         "type/elementary/string": [[1,1]]
       }
     },
@@ -7020,6 +7021,7 @@
       "154.2292-halfway-between-two-hex-color-codes.py",
       "156.2148-format-integer-with-zero-padding.py",
       "163.2170-print-list-elements-by-group-of-2.py",
+      "173.2427-format-a-number-with-grouped-thousands.py",
       "173.2428-format-a-number-with-grouped-thousands.py",
       "173.2429-format-a-number-with-grouped-thousands.py",
       "174.2687-make-http-post-request.py",
@@ -7045,9 +7047,6 @@
     ],
     "call_argument:10": [
       "002.11-print-hello-10-times.py"
-    ],
-    "call_argument:1000": [
-      "173.2428-format-a-number-with-grouped-thousands.py"
     ],
     "call_argument:1000000": [
       "088.2143-allocate-1m-bytes.py"
@@ -8072,8 +8071,7 @@
     ],
     "function_call:format": [
       "154.2292-halfway-between-two-hex-color-codes.py",
-      "156.2148-format-integer-with-zero-padding.py",
-      "173.2428-format-a-number-with-grouped-thousands.py"
+      "156.2148-format-integer-with-zero-padding.py"
     ],
     "function_call:fox": [
       "162.2164-execute-procedures-depending-on-options.py"
@@ -8176,6 +8174,8 @@
       "154.2292-halfway-between-two-hex-color-codes.py",
       "163.2170-print-list-elements-by-group-of-2.py",
       "163.3177-print-list-elements-by-group-of-2.py",
+      "173.2427-format-a-number-with-grouped-thousands.py",
+      "173.2428-format-a-number-with-grouped-thousands.py",
       "173.2429-format-a-number-with-grouped-thousands.py",
       "182.2658-quine-program.py"
     ],
@@ -8334,9 +8334,6 @@
     "function_call_without_result:foo": [
       "125.2167-measure-function-call-duration.py"
     ],
-    "function_call_without_result:format": [
-      "173.2428-format-a-number-with-grouped-thousands.py"
-    ],
     "function_call_without_result:fox": [
       "162.2164-execute-procedures-depending-on-options.py"
     ],
@@ -8377,6 +8374,8 @@
       "154.2292-halfway-between-two-hex-color-codes.py",
       "163.2170-print-list-elements-by-group-of-2.py",
       "163.3177-print-list-elements-by-group-of-2.py",
+      "173.2427-format-a-number-with-grouped-thousands.py",
+      "173.2428-format-a-number-with-grouped-thousands.py",
       "173.2429-format-a-number-with-grouped-thousands.py",
       "182.2658-quine-program.py"
     ],
@@ -9195,9 +9194,6 @@
       "002.1493-print-hello-10-times.py",
       "002.3117-print-hello-10-times.py"
     ],
-    "literal:1000": [
-      "173.2428-format-a-number-with-grouped-thousands.py"
-    ],
     "literal:1000000": [
       "088.2143-allocate-1m-bytes.py"
     ],
@@ -9364,6 +9360,7 @@
       "156.2148-format-integer-with-zero-padding.py",
       "157.2150-declare-constant-string.py",
       "162.2164-execute-procedures-depending-on-options.py",
+      "173.2427-format-a-number-with-grouped-thousands.py",
       "173.2428-format-a-number-with-grouped-thousands.py",
       "173.2429-format-a-number-with-grouped-thousands.py",
       "174.2687-make-http-post-request.py",
@@ -10070,8 +10067,7 @@
       "034.625-create-a-set-of-objects.py",
       "040.2279-graph-with-adjacency-lists.py",
       "043.676-break-outer-loop.py",
-      "050.572-make-an-infinite-loop.py",
-      "173.2427-format-a-number-with-grouped-thousands.py"
+      "050.572-make-an-infinite-loop.py"
     ],
     "parallel_assignment:2": [
       "021.84-swap-values-of-variables-a-and-b.py",
@@ -10860,8 +10856,7 @@
     ],
     "call/function/builtin/format": [
       "154.2292-halfway-between-two-hex-color-codes.py",
-      "156.2148-format-integer-with-zero-padding.py",
-      "173.2428-format-a-number-with-grouped-thousands.py"
+      "156.2148-format-integer-with-zero-padding.py"
     ],
     "call/function/builtin/hex": [
       "142.2151-hexadecimal-digits-of-an-integer.py"
@@ -11278,8 +11273,7 @@
       "034.625-create-a-set-of-objects.py",
       "040.2279-graph-with-adjacency-lists.py",
       "043.676-break-outer-loop.py",
-      "050.572-make-an-infinite-loop.py",
-      "173.2427-format-a-number-with-grouped-thousands.py"
+      "050.572-make-an-infinite-loop.py"
     ],
     "io/file/open": [
       "058.665-extract-file-content-to-a-string.py",
@@ -11320,6 +11314,8 @@
       "154.2292-halfway-between-two-hex-color-codes.py",
       "163.2170-print-list-elements-by-group-of-2.py",
       "163.3177-print-list-elements-by-group-of-2.py",
+      "173.2427-format-a-number-with-grouped-thousands.py",
+      "173.2428-format-a-number-with-grouped-thousands.py",
       "173.2429-format-a-number-with-grouped-thousands.py",
       "182.2658-quine-program.py"
     ],
@@ -11933,7 +11929,6 @@
       "163.2170-print-list-elements-by-group-of-2.py",
       "165.2149-last-element-of-list.py",
       "168.2277-trim-suffix.py",
-      "173.2428-format-a-number-with-grouped-thousands.py",
       "177.2709-find-files-with-a-given-list-of-filename-extensions.py",
       "179.2688-get-center-of-a-rectangle.py",
       "179.2689-get-center-of-a-rectangle.py",
@@ -12002,6 +11997,7 @@
       "156.2148-format-integer-with-zero-padding.py",
       "157.2150-declare-constant-string.py",
       "162.2164-execute-procedures-depending-on-options.py",
+      "173.2427-format-a-number-with-grouped-thousands.py",
       "173.2428-format-a-number-with-grouped-thousands.py",
       "173.2429-format-a-number-with-grouped-thousands.py",
       "174.2687-make-http-post-request.py",

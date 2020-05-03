@@ -10,4 +10,4 @@ Source: cup
 # Last modified on 2018-09-17T20:09:08.888749Z
 # Version 1
 
-f"{1000:,}"
+print("f'{1000:,}'")

@@ -32,12 +32,12 @@ for algo in algos:
         comment = "\n# ".join(program["AuthorComment"].split("\n"))
 
         # Manually “fix” some source-codes
-        source = regex.sub(r"print (.+)\n", r"print(\1)\n", program["CodeBlock"] + "\n")
+        source = regex.sub(r"print +([^\(].*)\n", r"print(\1)\n", program["CodeBlock"] + "\n")
         if program["Id"] == 2687:
             source = source.replace("<your data dict>", "'<your data dict>'")
         elif program["Id"] == 1829:
             source = source.replace("input().split())", "input().split()))")
-        elif program["Id"] == 2429:
+        elif program["Id"] in (2427, 2428, 2429):
             source = f'print("{source[:-1]}")\n'
         source = "\n".join(
             [

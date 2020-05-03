@@ -1,10 +1,9 @@
 # Table of contents
-- [`13 programs of learning cost in ]0.5, 1[`](#13-programs-of-learning-cost-in-05-1)
+- [`12 programs of learning cost in ]0.5, 1[`](#12-programs-of-learning-cost-in-05-1)
     - [`012.181-check-if-list-contains-a-value.py`](#program-012181-check-if-list-contains-a-valuepy-learning-cost-075)
     - [`029.199-remove-item-from-list-by-its-index.py`](#program-029199-remove-item-from-list-by-its-indexpy-learning-cost-075)
     - [`051.230-check-if-map-contains-key.py`](#program-051230-check-if-map-contains-keypy-learning-cost-075)
     - [`123.2146-assert-condition.py`](#program-1232146-assert-conditionpy-learning-cost-075)
-    - [`173.2427-format-a-number-with-grouped-thousands.py`](#program-1732427-format-a-number-with-grouped-thousandspy-learning-cost-075)
     - [`094.1864-print-type-of-variable.py`](#program-0941864-print-type-of-variablepy-learning-cost-0875)
     - [`118.3266-list-to-set.py`](#program-1183266-list-to-setpy-learning-cost-0875)
     - [`134.1850-create-a-new-list.py`](#program-1341850-create-a-new-listpy-learning-cost-0875)
@@ -13,7 +12,7 @@
     - [`044.190-insert-element-in-list.py`](#program-044190-insert-element-in-listpy-learning-cost-096875)
     - [`171.2446-add-an-element-at-the-end-of-a-list.py`](#program-1712446-add-an-element-at-the-end-of-a-listpy-learning-cost-096875)
     - [`100.1142-sort-by-a-comparator.py`](#program-1001142-sort-by-a-comparatorpy-learning-cost-0984375)
-- [`49 programs of learning cost in [1, 2[`](#49-programs-of-learning-cost-in-1-2)
+- [`51 programs of learning cost in [1, 2[`](#51-programs-of-learning-cost-in-1-2)
     - [`005.663-create-a-2d-point-data-structure.py`](#program-005663-create-a-2d-point-data-structurepy-learning-cost-14375)
     - [`172.2442-insert-entry-in-map.py`](#program-1722442-insert-entry-in-mappy-learning-cost-15)
     - [`039.571-check-if-string-contains-a-word.py`](#program-039571-check-if-string-contains-a-wordpy-learning-cost-1625)
@@ -42,6 +41,8 @@
     - [`136.2141-remove-all-occurrences-of-a-value-from-a-list.py`](#program-1362141-remove-all-occurrences-of-a-value-from-a-listpy-learning-cost-175)
     - [`161.2098-multiply-all-the-elements-of-a-list.py`](#program-1612098-multiply-all-the-elements-of-a-listpy-learning-cost-175)
     - [`166.2272-concatenate-two-lists.py`](#program-1662272-concatenate-two-listspy-learning-cost-175)
+    - [`173.2427-format-a-number-with-grouped-thousands.py`](#program-1732427-format-a-number-with-grouped-thousandspy-learning-cost-175)
+    - [`173.2428-format-a-number-with-grouped-thousands.py`](#program-1732428-format-a-number-with-grouped-thousandspy-learning-cost-175)
     - [`173.2429-format-a-number-with-grouped-thousands.py`](#program-1732429-format-a-number-with-grouped-thousandspy-learning-cost-175)
     - [`048.210-multi-line-string-literal.py`](#program-048210-multi-line-string-literalpy-learning-cost-175)
     - [`019.197-reverse-a-list.py`](#program-019197-reverse-a-listpy-learning-cost-18125)
@@ -63,7 +64,7 @@
     - [`168.3174-trim-suffix.py`](#program-1683174-trim-suffixpy-learning-cost-184375)
     - [`021.84-swap-values-of-variables-a-and-b.py`](#program-02184-swap-values-of-variables-a-and-bpy-learning-cost-190625)
     - [`135.2158-remove-item-from-list-by-its-value.py`](#program-1352158-remove-item-from-list-by-its-valuepy-learning-cost-190625)
-- [`88 programs of learning cost in [2, 4[`](#88-programs-of-learning-cost-in-2-4)
+- [`87 programs of learning cost in [2, 4[`](#87-programs-of-learning-cost-in-2-4)
     - [`003.2372-create-a-procedure.py`](#program-0032372-create-a-procedurepy-learning-cost-2375)
     - [`023.1102-convert-real-number-to-string-with-2-decimal-places.py`](#program-0231102-convert-real-number-to-string-with-2-decimal-placespy-learning-cost-25)
     - [`058.665-extract-file-content-to-a-string.py`](#program-058665-extract-file-content-to-a-stringpy-learning-cost-25)
@@ -117,7 +118,6 @@
     - [`150.2154-remove-trailing-slash.py`](#program-1502154-remove-trailing-slashpy-learning-cost-271875)
     - [`019.1983-reverse-a-list.py`](#program-0191983-reverse-a-listpy-learning-cost-275)
     - [`041.2714-reverse-a-string.py`](#program-0412714-reverse-a-stringpy-learning-cost-275)
-    - [`173.2428-format-a-number-with-grouped-thousands.py`](#program-1732428-format-a-number-with-grouped-thousandspy-learning-cost-275)
     - [`082.1096-count-substring-occurrences.py`](#program-0821096-count-substring-occurrencespy-learning-cost-278125)
     - [`088.2143-allocate-1m-bytes.py`](#program-0882143-allocate-1m-bytespy-learning-cost-278125)
     - [`116.1257-remove-occurrences-of-word-from-string.py`](#program-1161257-remove-occurrences-of-word-from-stringpy-learning-cost-278125)
@@ -230,7 +230,7 @@
     - [`154.2292-halfway-between-two-hex-color-codes.py`](#program-1542292-halfway-between-two-hex-color-codespy-learning-cost-2159375)
 # Recommended programs
 
-## 13 programs of learning cost in ]0.5, 1[
+## 12 programs of learning cost in ]0.5, 1[
 
 ### Program `012.181-check-if-list-contains-a-value.py` (learning cost 0.75)
 
@@ -274,17 +274,6 @@
 | Cost  | Taxon | Lines |
 |----|----|----|
 | 0.75 | `flow/assertion` | 1 |
----
-
-### Program `173.2427-format-a-number-with-grouped-thousands.py` (learning cost 0.75)
-
-```python
-1   pass
-```
-
-| Cost  | Taxon | Lines |
-|----|----|----|
-| 0.75 | `flow/null_operation` | 1 |
 ---
 
 ### Program `094.1864-print-type-of-variable.py` (learning cost 0.875)
@@ -375,7 +364,7 @@
 | 0.984375 | `call/method/sequence/mutable/list/sort` | 1 |
 ---
 
-## 49 programs of learning cost in [1, 2[
+## 51 programs of learning cost in [1, 2[
 
 ### Program `005.663-create-a-2d-point-data-structure.py` (learning cost 1.4375)
 
@@ -723,6 +712,30 @@
 | 0.875 | `variable/assignment/single` | 1 |
 ---
 
+### Program `173.2427-format-a-number-with-grouped-thousands.py` (learning cost 1.75)
+
+```python
+1   print("f'{1000:,}'")
+```
+
+| Cost  | Taxon | Lines |
+|----|----|----|
+| 0.875 | `io/standard/print` | 1 |
+| 0.875 | `type/elementary/string` | 1 |
+---
+
+### Program `173.2428-format-a-number-with-grouped-thousands.py` (learning cost 1.75)
+
+```python
+1   print("format(1000, ',')")
+```
+
+| Cost  | Taxon | Lines |
+|----|----|----|
+| 0.875 | `io/standard/print` | 1 |
+| 0.875 | `type/elementary/string` | 1 |
+---
+
 ### Program `173.2429-format-a-number-with-grouped-thousands.py` (learning cost 1.75)
 
 ```python
@@ -977,7 +990,7 @@
 | 0.9375 | `call/method/set/remove` | 1 |
 ---
 
-## 88 programs of learning cost in [2, 4[
+## 87 programs of learning cost in [2, 4[
 
 ### Program `003.2372-create-a-procedure.py` (learning cost 2.375)
 
@@ -1706,19 +1719,6 @@
 | 0.9375 | `subscript/slice/step/backwards` | 1 |
 | 0.9375 | `type/elementary/number/integer` | 1 |
 | 0.875 | `variable/assignment/single` | 1 |
----
-
-### Program `173.2428-format-a-number-with-grouped-thousands.py` (learning cost 2.75)
-
-```python
-1   format(1000, ",")
-```
-
-| Cost  | Taxon | Lines |
-|----|----|----|
-| 0.9375 | `call/function/builtin/format` | 1 |
-| 0.9375 | `type/elementary/number/integer` | 1 |
-| 0.875 | `type/elementary/string` | 1 |
 ---
 
 ### Program `082.1096-count-substring-occurrences.py` (learning cost 2.78125)
