@@ -194,6 +194,7 @@
 - nested_function
 - nested_if
 - nested_index
+- null_operation
 - parallel_assignment
 - raise
 - range
@@ -215,6 +216,7 @@
 - try
 - try_raise|try_except
 - unary_operator
+- unbinding
 - universal_quantification|existential_quantification
 - update
 - update_by_assignment

@@ -1,16 +1,10 @@
 # Table of contents
-- [`7 programs of learning cost 0`](#7-programs-of-learning-cost-0)
-    - [`123.2146-assert-condition.py`](#program-1232146-assert-conditionpy-learning-cost-0)
-    - [`173.2427-format-a-number-with-grouped-thousands.py`](#program-1732427-format-a-number-with-grouped-thousandspy-learning-cost-0)
-    - [`173.2429-format-a-number-with-grouped-thousands.py`](#program-1732429-format-a-number-with-grouped-thousandspy-learning-cost-0)
-    - [`003.19-create-a-procedure.py`](#program-00319-create-a-procedurepy-learning-cost-0)
-    - [`007.183-iterate-over-list-indexes-and-values.py`](#program-007183-iterate-over-list-indexes-and-valuespy-learning-cost-0)
-    - [`071.379-echo-program-implementation.py`](#program-071379-echo-program-implementationpy-learning-cost-0)
-    - [`108.1291-determine-if-variable-name-is-defined.py`](#program-1081291-determine-if-variable-name-is-definedpy-learning-cost-0)
-- [`11 programs of learning cost in ]0.5, 1[`](#11-programs-of-learning-cost-in-05-1)
+- [`13 programs of learning cost in ]0.5, 1[`](#13-programs-of-learning-cost-in-05-1)
     - [`012.181-check-if-list-contains-a-value.py`](#program-012181-check-if-list-contains-a-valuepy-learning-cost-075)
     - [`029.199-remove-item-from-list-by-its-index.py`](#program-029199-remove-item-from-list-by-its-indexpy-learning-cost-075)
     - [`051.230-check-if-map-contains-key.py`](#program-051230-check-if-map-contains-keypy-learning-cost-075)
+    - [`123.2146-assert-condition.py`](#program-1232146-assert-conditionpy-learning-cost-075)
+    - [`173.2427-format-a-number-with-grouped-thousands.py`](#program-1732427-format-a-number-with-grouped-thousandspy-learning-cost-075)
     - [`094.1864-print-type-of-variable.py`](#program-0941864-print-type-of-variablepy-learning-cost-0875)
     - [`118.3266-list-to-set.py`](#program-1183266-list-to-setpy-learning-cost-0875)
     - [`134.1850-create-a-new-list.py`](#program-1341850-create-a-new-listpy-learning-cost-0875)
@@ -33,7 +27,6 @@
     - [`175.2613-bytes-to-hex-string.py`](#program-1752613-bytes-to-hex-stringpy-learning-cost-1625)
     - [`176.2614-hex-string-to-byte-array.py`](#program-1762614-hex-string-to-byte-arraypy-learning-cost-1625)
     - [`189.3236-filter-and-transform-list.py`](#program-1893236-filter-and-transform-listpy-learning-cost-1625)
-    - [`003.2372-create-a-procedure.py`](#program-0032372-create-a-procedurepy-learning-cost-1625)
     - [`010.1478-shuffle-a-list.py`](#program-0101478-shuffle-a-listpy-learning-cost-1625)
     - [`011.47-pick-a-random-element-from-a-list.py`](#program-01147-pick-a-random-element-from-a-listpy-learning-cost-1625)
     - [`014.3410-pick-uniformly-a-random-floating-point-number-in-ab.py`](#program-0143410-pick-uniformly-a-random-floating-point-number-in-abpy-learning-cost-1625)
@@ -49,6 +42,7 @@
     - [`136.2141-remove-all-occurrences-of-a-value-from-a-list.py`](#program-1362141-remove-all-occurrences-of-a-value-from-a-listpy-learning-cost-175)
     - [`161.2098-multiply-all-the-elements-of-a-list.py`](#program-1612098-multiply-all-the-elements-of-a-listpy-learning-cost-175)
     - [`166.2272-concatenate-two-lists.py`](#program-1662272-concatenate-two-listspy-learning-cost-175)
+    - [`173.2429-format-a-number-with-grouped-thousands.py`](#program-1732429-format-a-number-with-grouped-thousandspy-learning-cost-175)
     - [`048.210-multi-line-string-literal.py`](#program-048210-multi-line-string-literalpy-learning-cost-175)
     - [`019.197-reverse-a-list.py`](#program-019197-reverse-a-listpy-learning-cost-18125)
     - [`022.243-convert-string-to-integer.py`](#program-022243-convert-string-to-integerpy-learning-cost-18125)
@@ -69,7 +63,8 @@
     - [`168.3174-trim-suffix.py`](#program-1683174-trim-suffixpy-learning-cost-184375)
     - [`021.84-swap-values-of-variables-a-and-b.py`](#program-02184-swap-values-of-variables-a-and-bpy-learning-cost-190625)
     - [`135.2158-remove-item-from-list-by-its-value.py`](#program-1352158-remove-item-from-list-by-its-valuepy-learning-cost-190625)
-- [`89 programs of learning cost in [2, 4[`](#89-programs-of-learning-cost-in-2-4)
+- [`88 programs of learning cost in [2, 4[`](#88-programs-of-learning-cost-in-2-4)
+    - [`003.2372-create-a-procedure.py`](#program-0032372-create-a-procedurepy-learning-cost-2375)
     - [`023.1102-convert-real-number-to-string-with-2-decimal-places.py`](#program-0231102-convert-real-number-to-string-with-2-decimal-placespy-learning-cost-25)
     - [`058.665-extract-file-content-to-a-string.py`](#program-058665-extract-file-content-to-a-stringpy-learning-cost-25)
     - [`065.1085-format-decimal-number.py`](#program-0651085-format-decimal-numberpy-learning-cost-25)
@@ -126,7 +121,6 @@
     - [`082.1096-count-substring-occurrences.py`](#program-0821096-count-substring-occurrencespy-learning-cost-278125)
     - [`088.2143-allocate-1m-bytes.py`](#program-0882143-allocate-1m-bytespy-learning-cost-278125)
     - [`116.1257-remove-occurrences-of-word-from-string.py`](#program-1161257-remove-occurrences-of-word-from-stringpy-learning-cost-278125)
-    - [`050.572-make-an-infinite-loop.py`](#program-050572-make-an-infinite-looppy-learning-cost-28125)
     - [`107.2139-get-folder-containing-current-program.py`](#program-1072139-get-folder-containing-current-programpy-learning-cost-325)
     - [`014.185-pick-uniformly-a-random-floating-point-number-in-ab.py`](#program-014185-pick-uniformly-a-random-floating-point-number-in-abpy-learning-cost-325)
     - [`033.1420-atomically-read-and-update-variable.py`](#program-0331420-atomically-read-and-update-variablepy-learning-cost-325)
@@ -151,18 +145,18 @@
     - [`002.3117-print-hello-10-times.py`](#program-0023117-print-hello-10-timespy-learning-cost-35625)
     - [`008.39-initialize-a-new-map-associative-array.py`](#program-00839-initialize-a-new-map-associative-arraypy-learning-cost-35625)
     - [`179.2688-get-center-of-a-rectangle.py`](#program-1792688-get-center-of-a-rectanglepy-learning-cost-35625)
-    - [`059.669-write-to-standard-error-stream.py`](#program-059669-write-to-standard-error-streampy-learning-cost-35625)
+    - [`050.572-make-an-infinite-loop.py`](#program-050572-make-an-infinite-looppy-learning-cost-35625)
     - [`141.2159-iterate-in-sequence-over-two-lists.py`](#program-1412159-iterate-in-sequence-over-two-listspy-learning-cost-35625)
     - [`081.2270-round-floating-point-number-to-integer.py`](#program-0812270-round-floating-point-number-to-integerpy-learning-cost-3625)
     - [`143.2256-iterate-alternatively-over-two-lists.py`](#program-1432256-iterate-alternatively-over-two-listspy-learning-cost-3625)
     - [`140.2156-delete-map-entry.py`](#program-1402156-delete-map-entrypy-learning-cost-371875)
     - [`035.667-first-class-function--compose.py`](#program-035667-first-class-function--composepy-learning-cost-3875)
     - [`036.670-first-class-function--generic-composition.py`](#program-036670-first-class-function--generic-compositionpy-learning-cost-3875)
-    - [`034.625-create-a-set-of-objects.py`](#program-034625-create-a-set-of-objectspy-learning-cost-3875)
-- [`50 programs of learning cost in [4, 8[`](#50-programs-of-learning-cost-in-4-8)
+- [`55 programs of learning cost in [4, 8[`](#55-programs-of-learning-cost-in-4-8)
     - [`122.1454-declare-enumeration.py`](#program-1221454-declare-enumerationpy-learning-cost-4125)
     - [`120.1479-read-integer-from-stdin.py`](#program-1201479-read-integer-from-stdinpy-learning-cost-41875)
     - [`093.1082-pass-a-runnable-procedure-as-parameter.py`](#program-0931082-pass-a-runnable-procedure-as-parameterpy-learning-cost-41875)
+    - [`003.19-create-a-procedure.py`](#program-00319-create-a-procedurepy-learning-cost-425)
     - [`091.1098-load-json-file-into-struct.py`](#program-0911098-load-json-file-into-structpy-learning-cost-425)
     - [`145.1822-print-log-line-with-datetime.py`](#program-1451822-print-log-line-with-datetimepy-learning-cost-425)
     - [`177.2725-find-files-with-a-given-list-of-filename-extensions.py`](#program-1772725-find-files-with-a-given-list-of-filename-extensionspy-learning-cost-425)
@@ -177,12 +171,14 @@
     - [`077.1093-complex-number.py`](#program-0771093-complex-numberpy-learning-cost-45)
     - [`084.1940-count-bits-set-in-integer-binary-representation.py`](#program-0841940-count-bits-set-in-integer-binary-representationpy-learning-cost-459375)
     - [`013.574-iterate-over-map-keys-and-values.py`](#program-013574-iterate-over-map-keys-and-valuespy-learning-cost-459375)
+    - [`034.625-create-a-set-of-objects.py`](#program-034625-create-a-set-of-objectspy-learning-cost-4625)
     - [`009.3176-create-a-binary-tree-data-structure.py`](#program-0093176-create-a-binary-tree-data-structurepy-learning-cost-475)
     - [`073.673-create-a-factory.py`](#program-073673-create-a-factorypy-learning-cost-49375)
     - [`067.1426-binomial-coefficient-n-choose-k.py`](#program-0671426-binomial-coefficient-n-choose-kpy-learning-cost-50)
     - [`148.1829-read-list-of-integer-numbers-from-stdin.py`](#program-1481829-read-list-of-integer-numbers-from-stdinpy-learning-cost-50625)
     - [`122.1453-declare-enumeration.py`](#program-1221453-declare-enumerationpy-learning-cost-5125)
     - [`099.1429-format-date-yyyy-mm-dd.py`](#program-0991429-format-date-yyyy-mm-ddpy-learning-cost-5125)
+    - [`108.1291-determine-if-variable-name-is-defined.py`](#program-1081291-determine-if-variable-name-is-definedpy-learning-cost-51875)
     - [`184.2701-tomorrow.py`](#program-1842701-tomorrowpy-learning-cost-51875)
     - [`185.2820-execute-function-in-30-seconds.py`](#program-1852820-execute-function-in-30-secondspy-learning-cost-525)
     - [`041.187-reverse-a-string.py`](#program-041187-reverse-a-stringpy-learning-cost-534375)
@@ -190,6 +186,7 @@
     - [`151.2166-remove-string-trailing-path-separator.py`](#program-1512166-remove-string-trailing-path-separatorpy-learning-cost-540625)
     - [`078.1089-do-while-loop.py`](#program-0781089-do-while-looppy-learning-cost-546875)
     - [`002.11-print-hello-10-times.py`](#program-00211-print-hello-10-timespy-learning-cost-55)
+    - [`007.183-iterate-over-list-indexes-and-values.py`](#program-007183-iterate-over-list-indexes-and-valuespy-learning-cost-553125)
     - [`009.1410-create-a-binary-tree-data-structure.py`](#program-0091410-create-a-binary-tree-data-structurepy-learning-cost-5625)
     - [`177.3241-find-files-with-a-given-list-of-filename-extensions.py`](#program-1773241-find-files-with-a-given-list-of-filename-extensionspy-learning-cost-5875)
     - [`018.2084-depth-first-traversing-of-a-tree.py`](#program-0182084-depth-first-traversing-of-a-treepy-learning-cost-5875)
@@ -197,6 +194,7 @@
     - [`125.2167-measure-function-call-duration.py`](#program-1252167-measure-function-call-durationpy-learning-cost-60)
     - [`162.2164-execute-procedures-depending-on-options.py`](#program-1622164-execute-procedures-depending-on-optionspy-learning-cost-60625)
     - [`179.2689-get-center-of-a-rectangle.py`](#program-1792689-get-center-of-a-rectanglepy-learning-cost-6125)
+    - [`071.379-echo-program-implementation.py`](#program-071379-echo-program-implementationpy-learning-cost-615625)
     - [`183.3025-make-http-put-request.py`](#program-1833025-make-http-put-requestpy-learning-cost-61875)
     - [`174.2687-make-http-post-request.py`](#program-1742687-make-http-post-requestpy-learning-cost-621875)
     - [`113.2157-iterate-over-map-entries-ordered-by-values.py`](#program-1132157-iterate-over-map-entries-ordered-by-valuespy-learning-cost-628125)
@@ -214,9 +212,9 @@
     - [`042.1264-continue-outer-loop.py`](#program-0421264-continue-outer-looppy-learning-cost-809375)
     - [`056.1424-launch-1000-parallel-tasks-and-wait-for-completion.py`](#program-0561424-launch-1000-parallel-tasks-and-wait-for-completionpy-learning-cost-85625)
     - [`031.188-recursive-factorial-simple.py`](#program-031188-recursive-factorial-simplepy-learning-cost-928125)
-    - [`043.676-break-outer-loop.py`](#program-043676-break-outer-looppy-learning-cost-934375)
     - [`154.2155-halfway-between-two-hex-color-codes.py`](#program-1542155-halfway-between-two-hex-color-codespy-learning-cost-975)
     - [`124.2152-binary-search-for-a-value-in-sorted-array.py`](#program-1242152-binary-search-for-a-value-in-sorted-arraypy-learning-cost-100)
+    - [`043.676-break-outer-loop.py`](#program-043676-break-outer-looppy-learning-cost-1009375)
     - [`104.3264-save-object-into-xml-file.py`](#program-1043264-save-object-into-xml-filepy-learning-cost-10625)
     - [`121.3029-udp-listen-and-read.py`](#program-1213029-udp-listen-and-readpy-learning-cost-1075)
     - [`020.573-return-two-values.py`](#program-020573-return-two-valuespy-learning-cost-1078125)
@@ -228,87 +226,11 @@
     - [`128.2085-breadth-first-traversing-of-a-tree.py`](#program-1282085-breadth-first-traversing-of-a-treepy-learning-cost-1584375)
 - [`3 programs of learning cost in [16, 32[`](#3-programs-of-learning-cost-in-16-32)
     - [`187.3261-disjoint-set.py`](#program-1873261-disjoint-setpy-learning-cost-1740625)
-    - [`040.2279-graph-with-adjacency-lists.py`](#program-0402279-graph-with-adjacency-listspy-learning-cost-198125)
+    - [`040.2279-graph-with-adjacency-lists.py`](#program-0402279-graph-with-adjacency-listspy-learning-cost-205625)
     - [`154.2292-halfway-between-two-hex-color-codes.py`](#program-1542292-halfway-between-two-hex-color-codespy-learning-cost-2159375)
 # Recommended programs
 
-## 7 programs of learning cost 0
-
-### Program `123.2146-assert-condition.py` (learning cost 0)
-
-```python
-1   assert isConsistent
-```
-
-| Cost  | Taxon | Lines |
-|----|----|----|
----
-
-### Program `173.2427-format-a-number-with-grouped-thousands.py` (learning cost 0)
-
-```python
-1   pass
-```
-
-| Cost  | Taxon | Lines |
-|----|----|----|
----
-
-### Program `173.2429-format-a-number-with-grouped-thousands.py` (learning cost 0)
-
-```python
-1   .format(1000)
-```
-
-| Cost  | Taxon | Lines |
-|----|----|----|
----
-
-### Program `003.19-create-a-procedure.py` (learning cost 0)
-
-```python
-1   def finish(name):
-2       print "My job here is done. Goodbye " + name
-```
-
-| Cost  | Taxon | Lines |
-|----|----|----|
----
-
-### Program `007.183-iterate-over-list-indexes-and-values.py` (learning cost 0)
-
-```python
-1   for i, x in enumerate(items):
-2       print i, x
-```
-
-| Cost  | Taxon | Lines |
-|----|----|----|
----
-
-### Program `071.379-echo-program-implementation.py` (learning cost 0)
-
-```python
-1   import sys
-2   print " ".join(sys.argv[1:])
-```
-
-| Cost  | Taxon | Lines |
-|----|----|----|
----
-
-### Program `108.1291-determine-if-variable-name-is-defined.py` (learning cost 0)
-
-```python
-1   if "x" in locals():
-2       print x
-```
-
-| Cost  | Taxon | Lines |
-|----|----|----|
----
-
-## 11 programs of learning cost in ]0.5, 1[
+## 13 programs of learning cost in ]0.5, 1[
 
 ### Program `012.181-check-if-list-contains-a-value.py` (learning cost 0.75)
 
@@ -341,6 +263,28 @@
 | Cost  | Taxon | Lines |
 |----|----|----|
 | 0.75 | `test/belonging` | 1 |
+---
+
+### Program `123.2146-assert-condition.py` (learning cost 0.75)
+
+```python
+1   assert isConsistent
+```
+
+| Cost  | Taxon | Lines |
+|----|----|----|
+| 0.75 | `flow/assertion` | 1 |
+---
+
+### Program `173.2427-format-a-number-with-grouped-thousands.py` (learning cost 0.75)
+
+```python
+1   pass
+```
+
+| Cost  | Taxon | Lines |
+|----|----|----|
+| 0.75 | `flow/null_operation` | 1 |
 ---
 
 ### Program `094.1864-print-type-of-variable.py` (learning cost 0.875)
@@ -593,19 +537,6 @@
 | 0.875 | `variable/assignment/single` | 1 |
 ---
 
-### Program `003.2372-create-a-procedure.py` (learning cost 1.625)
-
-```python
-1   def a():
-2       pass
-```
-
-| Cost  | Taxon | Lines |
-|----|----|----|
-| 0.875 | `subroutine/argument/no` | 1-2 |
-| 0.75 | `subroutine/procedure` | 1-2 |
----
-
 ### Program `010.1478-shuffle-a-list.py` (learning cost 1.625)
 
 ```python
@@ -790,6 +721,18 @@
 |----|----|----|
 | 0.875 | `operator/arithmetic/addition` | 1 |
 | 0.875 | `variable/assignment/single` | 1 |
+---
+
+### Program `173.2429-format-a-number-with-grouped-thousands.py` (learning cost 1.75)
+
+```python
+1   print("'{:,}'.format(1000)")
+```
+
+| Cost  | Taxon | Lines |
+|----|----|----|
+| 0.875 | `io/standard/print` | 1 |
+| 0.875 | `type/elementary/string` | 1 |
 ---
 
 ### Program `048.210-multi-line-string-literal.py` (learning cost 1.75)
@@ -1034,7 +977,21 @@
 | 0.9375 | `call/method/set/remove` | 1 |
 ---
 
-## 89 programs of learning cost in [2, 4[
+## 88 programs of learning cost in [2, 4[
+
+### Program `003.2372-create-a-procedure.py` (learning cost 2.375)
+
+```python
+1   def a():
+2       pass
+```
+
+| Cost  | Taxon | Lines |
+|----|----|----|
+| 0.75 | `flow/null_operation` | 2 |
+| 0.875 | `subroutine/argument/no` | 1-2 |
+| 0.75 | `subroutine/procedure` | 1-2 |
+---
 
 ### Program `023.1102-convert-real-number-to-string-with-2-decimal-places.py` (learning cost 2.5)
 
@@ -1803,20 +1760,6 @@
 | 0.875 | `variable/assignment/single` | 1 |
 ---
 
-### Program `050.572-make-an-infinite-loop.py` (learning cost 2.8125)
-
-```python
-1   while True:
-2       pass
-```
-
-| Cost  | Taxon | Lines |
-|----|----|----|
-| 0.9375 | `flow/loop/exit/late` | 1-2 |
-| 0.9375 | `flow/loop/while/infinite` | 1-2 |
-| 0.9375 | `type/elementary/boolean/true` | 1 |
----
-
 ### Program `107.2139-get-folder-containing-current-program.py` (learning cost 3.25)
 
 ```python
@@ -2178,19 +2121,19 @@
 | 0.875 | `variable/assignment/single` | 1 |
 ---
 
-### Program `059.669-write-to-standard-error-stream.py` (learning cost 3.5625)
+### Program `050.572-make-an-infinite-loop.py` (learning cost 3.5625)
 
 ```python
-1   import sys
-2   print >>sys.stderr, "%s is negative" % x
+1   while True:
+2       pass
 ```
 
 | Cost  | Taxon | Lines |
 |----|----|----|
-| 0.875 | `library/standard/sys` | 1 |
-| 0.9375 | `operator/bitwise/shift/right` | 2 |
-| 0.875 | `operator/string/format` | 2 |
-| 0.875 | `type/elementary/string` | 2 |
+| 0.9375 | `flow/loop/exit/late` | 1-2 |
+| 0.9375 | `flow/loop/while/infinite` | 1-2 |
+| 0.75 | `flow/null_operation` | 2 |
+| 0.9375 | `type/elementary/boolean/true` | 1 |
 ---
 
 ### Program `141.2159-iterate-in-sequence-over-two-lists.py` (learning cost 3.5625)
@@ -2283,24 +2226,7 @@
 | 0.75 | `subroutine/higher_order` | 1-2 |
 ---
 
-### Program `034.625-create-a-set-of-objects.py` (learning cost 3.875)
-
-```python
-1   class T(object):
-2       pass
-3   x = set(T())
-```
-
-| Cost  | Taxon | Lines |
-|----|----|----|
-| 0.75 | `call/composition` | 3 |
-| 0.875 | `call/function/without_arguments` | 3 |
-| 0.5 | `class` | 1-2 |
-| 0.875 | `type/container/set` | 3 |
-| 0.875 | `variable/assignment/single` | 3 |
----
-
-## 50 programs of learning cost in [4, 8[
+## 55 programs of learning cost in [4, 8[
 
 ### Program `122.1454-declare-enumeration.py` (learning cost 4.125)
 
@@ -2352,6 +2278,22 @@
 | 0.875 | `subroutine/argument/arg` | 2 |
 | 0.75 | `subroutine/function` | 2-3 |
 | 0.75 | `subroutine/higher_order` | 2-3 |
+---
+
+### Program `003.19-create-a-procedure.py` (learning cost 4.25)
+
+```python
+1   def finish(name):
+2       print("My job here is done. Goodbye " + name)
+```
+
+| Cost  | Taxon | Lines |
+|----|----|----|
+| 0.875 | `io/standard/print` | 2 |
+| 0.875 | `operator/string/concatenation` | 2 |
+| 0.875 | `subroutine/argument/arg` | 1 |
+| 0.75 | `subroutine/procedure` | 1-2 |
+| 0.875 | `type/elementary/string` | 2 |
 ---
 
 ### Program `091.1098-load-json-file-into-struct.py` (learning cost 4.25)
@@ -2585,6 +2527,24 @@
 | 0.875 | `io/standard/print` | 2 |
 ---
 
+### Program `034.625-create-a-set-of-objects.py` (learning cost 4.625)
+
+```python
+1   class T(object):
+2       pass
+3   x = set(T())
+```
+
+| Cost  | Taxon | Lines |
+|----|----|----|
+| 0.75 | `call/composition` | 3 |
+| 0.875 | `call/function/without_arguments` | 3 |
+| 0.5 | `class` | 1-2 |
+| 0.75 | `flow/null_operation` | 2 |
+| 0.875 | `type/container/set` | 3 |
+| 0.875 | `variable/assignment/single` | 3 |
+---
+
 ### Program `009.3176-create-a-binary-tree-data-structure.py` (learning cost 4.75)
 
 ```python
@@ -2690,6 +2650,23 @@
 | 0.9375 | `type/elementary/number/integer` | 2, 2, 2 |
 | 0.875 | `type/elementary/string` | 3 |
 | 0.875 | `variable/assignment/single` | 2, 3 |
+---
+
+### Program `108.1291-determine-if-variable-name-is-defined.py` (learning cost 5.1875)
+
+```python
+1   if "x" in locals():
+2       print(x)
+```
+
+| Cost  | Taxon | Lines |
+|----|----|----|
+| 0.9375 | `call/function/builtin/locals` | 1 |
+| 0.875 | `call/function/without_arguments` | 1 |
+| 0.875 | `flow/conditional/no_else` | 1-2 |
+| 0.875 | `io/standard/print` | 2 |
+| 0.75 | `test/belonging` | 1 |
+| 0.875 | `type/elementary/string` | 1 |
 ---
 
 ### Program `184.2701-tomorrow.py` (learning cost 5.1875)
@@ -2815,6 +2792,23 @@
 | 0.875 | `io/standard/print` | 2 |
 | 0.9375 | `type/elementary/number/integer` | 1 |
 | 0.875 | `type/elementary/string` | 2 |
+---
+
+### Program `007.183-iterate-over-list-indexes-and-values.py` (learning cost 5.53125)
+
+```python
+1   for i, x in enumerate(items):
+2       print(i, x)
+```
+
+| Cost  | Taxon | Lines |
+|----|----|----|
+| 0.9375 | `call/function/builtin/enumerate` | 1 |
+| 0.9375 | `flow/loop/exit/late` | 1, 2 |
+| 0.875 | `flow/loop/for` | 1 |
+| 0.9375 | `flow/loop/for/elements_and_indexes` | 1-2 |
+| 0.96875 | `flow/loop/for/nested/1` | 2 |
+| 0.875 | `io/standard/print` | 2 |
 ---
 
 ### Program `009.1410-create-a-binary-tree-data-structure.py` (learning cost 5.625)
@@ -2957,6 +2951,24 @@
 | 0.9375 | `type/elementary/number/integer` | 3, 3 |
 | 0.875 | `type/elementary/string` | 2, 2 |
 | 0.875 | `variable/assignment/single` | 2, 3 |
+---
+
+### Program `071.379-echo-program-implementation.py` (learning cost 6.15625)
+
+```python
+1   import sys
+2   print(" ".join(sys.argv[1:]))
+```
+
+| Cost  | Taxon | Lines |
+|----|----|----|
+| 0.75 | `call/composition` | 2 |
+| 0.96875 | `call/method/sequence/string/join` | 2 |
+| 0.875 | `io/standard/print` | 2 |
+| 0.875 | `library/standard/sys` | 1 |
+| 0.875 | `subscript/slice/start` | 2 |
+| 0.9375 | `type/elementary/number/integer` | 2 |
+| 0.875 | `type/elementary/string` | 2 |
 ---
 
 ### Program `183.3025-make-http-put-request.py` (learning cost 6.1875)
@@ -3317,37 +3329,6 @@
 | 0.96875 | `type/elementary/number/integer/zero` | 2 |
 ---
 
-### Program `043.676-break-outer-loop.py` (learning cost 9.34375)
-
-```python
-1   class BreakOuterLoop(Exception):
-2       pass
-3   try:
-4       position = None
-5       for row in m:
-6           for column in m[row]:
-7               if m[row][column] == v:
-8                   position = (row, column)
-9                   raise BreakOuterLoop
-10  except BreakOuterLoop:
-11      pass
-```
-
-| Cost  | Taxon | Lines |
-|----|----|----|
-| 0.5 | `class` | 1-2 |
-| 0.875 | `flow/conditional/no_else` | 7-9 |
-| 0.9375 | `flow/exception/catch/` | 3-11 |
-| 0.9375 | `flow/exception/raise/` | 3-11 |
-| 0.9375 | `flow/loop/exit/late` | 5-9, 6-9 |
-| 0.9375 | `flow/loop/for/elements` | 5-9 |
-| 0.96875 | `flow/loop/for/nested/1` | 6-9 |
-| 0.75 | `subscript/index` | 6, 7, 7 |
-| 0.75 | `test/equality` | 7 |
-| 0.875 | `type/elementary/null` | 4 |
-| 0.875 | `variable/assignment/single` | 4, 8 |
----
-
 ### Program `154.2155-halfway-between-two-hex-color-codes.py` (learning cost 9.75)
 
 ```python
@@ -3394,6 +3375,38 @@
 | 0.875 | `test/equality/not` | 4 |
 | 0.9375 | `type/elementary/number/integer` | 4 |
 | 0.875 | `variable/assignment/single` | 3 |
+---
+
+### Program `043.676-break-outer-loop.py` (learning cost 10.09375)
+
+```python
+1   class BreakOuterLoop(Exception):
+2       pass
+3   try:
+4       position = None
+5       for row in m:
+6           for column in m[row]:
+7               if m[row][column] == v:
+8                   position = (row, column)
+9                   raise BreakOuterLoop
+10  except BreakOuterLoop:
+11      pass
+```
+
+| Cost  | Taxon | Lines |
+|----|----|----|
+| 0.5 | `class` | 1-2 |
+| 0.875 | `flow/conditional/no_else` | 7-9 |
+| 0.9375 | `flow/exception/catch/` | 3-11 |
+| 0.9375 | `flow/exception/raise/` | 3-11 |
+| 0.9375 | `flow/loop/exit/late` | 5-9, 6-9 |
+| 0.9375 | `flow/loop/for/elements` | 5-9 |
+| 0.96875 | `flow/loop/for/nested/1` | 6-9 |
+| 0.75 | `flow/null_operation` | 2, 11 |
+| 0.75 | `subscript/index` | 6, 7, 7 |
+| 0.75 | `test/equality` | 7 |
+| 0.875 | `type/elementary/null` | 4 |
+| 0.875 | `variable/assignment/single` | 4, 8 |
 ---
 
 ### Program `104.3264-save-object-into-xml-file.py` (learning cost 10.625)
@@ -3722,7 +3735,7 @@
 | 0.9375 | `variable/assignment/parallel/2` | 15 |
 ---
 
-### Program `040.2279-graph-with-adjacency-lists.py` (learning cost 19.8125)
+### Program `040.2279-graph-with-adjacency-lists.py` (learning cost 20.5625)
 
 ```python
 1   from collections import defaultdict
@@ -3751,6 +3764,7 @@
 | 0.875 | `flow/loop/for` | 10 |
 | 0.9375 | `flow/loop/for/elements` | 7-8 |
 | 0.96875 | `flow/loop/for/nested/1` | 12 |
+| 0.75 | `flow/null_operation` | 3 |
 | 0.9375 | `library/standard/collections/defaultdict` | 1 |
 | 0.875 | `subroutine/argument/arg` | 5, 9, 9 |
 | 0.875 | `subroutine/argument/vararg` | 5 |
@@ -3818,7 +3832,7 @@
 
 # Summary
 <details>
-  <summary>224 initially.</summary>
+  <summary>223 initially.</summary>
   <ol>
     <li><code>001.1159-print-hello-world.py</code></li>
     <li><code>001.3-print-hello-world.py</code></li>
@@ -3895,7 +3909,6 @@
     <li><code>057.3173-filter-list.py</code></li>
     <li><code>058.665-extract-file-content-to-a-string.py</code></li>
     <li><code>059.668-write-to-standard-error-stream.py</code></li>
-    <li><code>059.669-write-to-standard-error-stream.py</code></li>
     <li><code>060.1084-read-command-line-argument.py</code></li>
     <li><code>061.576-get-current-date.py</code></li>
     <li><code>062.1091-find-substring-position.py</code></li>

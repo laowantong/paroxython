@@ -48,8 +48,9 @@
       - [Feature `lambda_function`](#feature-lambda_function)
       - [Feature `f_string`](#feature-f_string)
 - [Statements](#statements)
-  - [Assignments](#assignments)
+  - [Bindings](#bindings)
       - [Feature `assignment`](#feature-assignment)
+      - [Feature `unbinding`](#feature-unbinding)
       - [Feature `single_assignment`](#feature-single_assignment)
       - [Feature `parallel_assignment`](#feature-parallel_assignment)
       - [Feature `augmented_assignment`](#feature-augmented_assignment)
@@ -126,8 +127,10 @@
       - [Feature `loop_with_early_exit` (SQL)](#feature-loop_with_early_exit)
       - [Feature `loop_with_else` (SQL)](#feature-loop_with_else)
       - [Feature `loop_with_late_exit` (SQL)](#feature-loop_with_late_exit)
-  - [Exceptions](#exceptions)
+  - [Various statements](#various-statements)
       - [Feature `assertion`](#feature-assertion)
+      - [Feature `null_operation`](#feature-null_operation)
+    - [Exceptions](#exceptions)
       - [Feature `try`](#feature-try)
       - [Feature `raise`](#feature-raise)
       - [Feature `except`](#feature-except)
@@ -160,7 +163,7 @@
 - [Programs](#programs)
       - [Feature `topic`](#feature-topic)
 - [Suggestions](#suggestions)
-  - [Assignments](#assignments-1)
+  - [Assignments](#assignments)
       - [Feature `suggest_augmented_assignment`](#feature-suggest_augmented_assignment)
   - [Expressions](#expressions-1)
       - [Feature `suggest_comparison_chaining`](#feature-suggest_comparison_chaining)
@@ -1868,7 +1871,7 @@ Match a comprehension with an `if` clause.
 
 # Statements
 
-## Assignments
+## Bindings
 
 --------------------------------------------------------------------------------
 
@@ -1922,6 +1925,45 @@ Match a comprehension with an `if` clause.
 | `assignment:foo` | 4 |
 | `assignment:Add` | 5 |
 | `assignment:bar` | 6 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `unbinding`
+
+Deletion of a name removes the binding of that name from the local or global namespace. Suffixed by the name. Not to be confused with the deletion of attribute references, subscriptions and slicings.
+
+##### Specification
+
+```re
+           ^(.*)/_type=Delete
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
+(
+\n(?:\1.+\n)*?\1/(?P<_1>targets/\d+)/_type=Name
+\n(?:\1.+\n)*?\1/(?P=_1)            /id=(?P<SUFFIX>.+)
+)+
+```
+
+##### Example
+
+```python
+1   del a
+2   del b, c, d
+3   del array[1] # no match
+4   del e, array[2], f # match only e and f
+5   del array[3:4], array[3:4:5], array[:] # no match
+6   del foo.bar # no match
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `unbinding:a` | 1 |
+| `unbinding:b` | 2 |
+| `unbinding:c` | 2 |
+| `unbinding:d` | 2 |
+| `unbinding:e` | 4 |
+| `unbinding:f` | 4 |
 
 --------------------------------------------------------------------------------
 
@@ -4881,7 +4923,7 @@ WHERE l2.span IS NULL
 
 --------------------------------------------------------------------------------
 
-## Exceptions
+## Various statements
 
 --------------------------------------------------------------------------------
 
@@ -4905,6 +4947,34 @@ WHERE l2.span IS NULL
 | Label | Lines |
 |:--|:--|
 | `assertion` | 1 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `null_operation`
+
+##### Specification
+
+```re
+           ^(.*)/_type=Pass
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
+```
+
+##### Example
+
+```python
+1   def foobar():
+2       pass
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `null_operation` | 2 |
+
+--------------------------------------------------------------------------------
+
+### Exceptions
 
 --------------------------------------------------------------------------------
 

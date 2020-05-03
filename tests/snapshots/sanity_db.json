@@ -98,9 +98,26 @@
     },
     "003.19-create-a-procedure.py": {
       "timestamp": "ignored",
-      "source": "def finish(name):\n    print \"My job here is done. Goodbye \" + name",
-      "labels": {},
-      "taxons": {}
+      "source": "def finish(name):\n    print(\"My job here is done. Goodbye \" + name)",
+      "labels": {
+        "binary_operator:Add": [[2,2]],
+        "call_argument:": [[2,2]],
+        "concatenation_operator:Str": [[2,2]],
+        "function:finish": [[1,2]],
+        "function_argument:name": [[1,1]],
+        "function_argument_flavor:arg": [[1,1]],
+        "function_call:print": [[2,2]],
+        "function_call_without_result:print": [[2,2]],
+        "function_returning_nothing:finish": [[1,2]],
+        "literal:Str": [[2,2]]
+      },
+      "taxons": {
+        "io/standard/print": [[2,2]],
+        "operator/string/concatenation": [[2,2]],
+        "subroutine/argument/arg": [[1,1]],
+        "subroutine/procedure": [[1,2]],
+        "type/elementary/string": [[2,2]]
+      }
     },
     "003.2372-create-a-procedure.py": {
       "timestamp": "ignored",
@@ -108,9 +125,11 @@
       "labels": {
         "function:a": [[1,2]],
         "function_returning_nothing:a": [[1,2]],
-        "function_without_arguments:a": [[1,2]]
+        "function_without_arguments:a": [[1,2]],
+        "null_operation": [[2,2]]
       },
       "taxons": {
+        "flow/null_operation": [[2,2]],
         "subroutine/argument/no": [[1,2]],
         "subroutine/procedure": [[1,2]]
       }
@@ -186,9 +205,29 @@
     },
     "007.183-iterate-over-list-indexes-and-values.py": {
       "timestamp": "ignored",
-      "source": "for i, x in enumerate(items):\n    print i, x",
-      "labels": {},
-      "taxons": {}
+      "source": "for i, x in enumerate(items):\n    print(i, x)",
+      "labels": {
+        "call_argument:i": [[2,2]],
+        "call_argument:items": [[1,1]],
+        "call_argument:x": [[2,2]],
+        "for:i": [[1,1]],
+        "for:x": [[2,2]],
+        "for_indexes_elements": [[1,2]],
+        "function_call:enumerate": [[1,1]],
+        "function_call:print": [[2,2]],
+        "function_call_without_result:print": [[2,2]],
+        "loop:for": [[1,1],[2,2]],
+        "loop_with_late_exit:for": [[1,1],[2,2]],
+        "nested_for:1": [[2,2]]
+      },
+      "taxons": {
+        "call/function/builtin/enumerate": [[1,1]],
+        "flow/loop/exit/late": [[1,1],[2,2]],
+        "flow/loop/for": [[1,1]],
+        "flow/loop/for/elements_and_indexes": [[1,2]],
+        "flow/loop/for/nested/1": [[2,2]],
+        "io/standard/print": [[2,2]]
+      }
     },
     "008.39-initialize-a-new-map-associative-array.py": {
       "timestamp": "ignored",
@@ -964,12 +1003,14 @@
         "function_call:T": [[3,3]],
         "function_call:set": [[3,3]],
         "function_call_without_arguments:T": [[3,3]],
+        "null_operation": [[2,2]],
         "single_assignment:x": [[3,3]]
       },
       "taxons": {
         "call/composition": [[3,3]],
         "call/function/without_arguments": [[3,3]],
         "class": [[1,2]],
+        "flow/null_operation": [[2,2]],
         "type/container/set": [[3,3]],
         "variable/assignment/single": [[3,3]]
       }
@@ -1168,6 +1209,7 @@
         "method_call_without_result:add": [[11,11],[12,12]],
         "method_call_without_result:make_path": [[8,8]],
         "nested_for:1": [[12,12]],
+        "null_operation": [[3,3]],
         "single_assignment:G": [[13,13]],
         "slice:1::": [[10,10]],
         "slice_lower:1": [[10,10]],
@@ -1184,6 +1226,7 @@
         "flow/loop/for": [[10,10]],
         "flow/loop/for/elements": [[7,8]],
         "flow/loop/for/nested/1": [[12,12]],
+        "flow/null_operation": [[3,3]],
         "library/standard/collections/defaultdict": [[1,1]],
         "subroutine/argument/arg": [[5,5],[9,9],[9,9]],
         "subroutine/argument/vararg": [[5,5]],
@@ -1420,6 +1463,7 @@
         "loop_with_late_exit:for": [[5,9],[6,9]],
         "nested_for:1": [[6,9]],
         "nested_index:2": [[7,7]],
+        "null_operation": [[2,2],[11,11]],
         "raise:BreakOuterLoop": [[9,9]],
         "single_assignment:position": [[4,4],[8,8]],
         "try": [[3,11]],
@@ -1434,6 +1478,7 @@
         "flow/loop/exit/late": [[5,9],[6,9]],
         "flow/loop/for/elements": [[5,9]],
         "flow/loop/for/nested/1": [[6,9]],
+        "flow/null_operation": [[2,2],[11,11]],
         "subscript/index": [[6,6],[7,7],[7,7]],
         "test/equality": [[7,7]],
         "type/elementary/null": [[4,4]],
@@ -1557,11 +1602,13 @@
         "literal:True": [[1,1]],
         "loop:while": [[1,2]],
         "loop_with_late_exit:while": [[1,2]],
+        "null_operation": [[2,2]],
         "while": [[1,2]]
       },
       "taxons": {
         "flow/loop/exit/late": [[1,2]],
         "flow/loop/while/infinite": [[1,2]],
+        "flow/null_operation": [[2,2]],
         "type/elementary/boolean/true": [[1,1]]
       }
     },
@@ -1776,24 +1823,6 @@
       "taxons": {
         "io/standard/print": [[2,2]],
         "library/standard/sys": [[1,1]],
-        "type/elementary/string": [[2,2]]
-      }
-    },
-    "059.669-write-to-standard-error-stream.py": {
-      "timestamp": "ignored",
-      "source": "import sys\nprint >>sys.stderr, \"%s is negative\" % x",
-      "labels": {
-        "binary_operator:Mod": [[2,2]],
-        "binary_operator:RShift": [[2,2]],
-        "import:sys": [[1,1]],
-        "import_module:sys": [[1,1]],
-        "literal:Str": [[2,2]],
-        "string_formatting_operator": [[2,2]]
-      },
-      "taxons": {
-        "library/standard/sys": [[1,1]],
-        "operator/bitwise/shift/right": [[2,2]],
-        "operator/string/format": [[2,2]],
         "type/elementary/string": [[2,2]]
       }
     },
@@ -2028,9 +2057,31 @@
     },
     "071.379-echo-program-implementation.py": {
       "timestamp": "ignored",
-      "source": "import sys\nprint \" \".join(sys.argv[1:])",
-      "labels": {},
-      "taxons": {}
+      "source": "import sys\nprint(\" \".join(sys.argv[1:]))",
+      "labels": {
+        "call_argument:": [[2,2],[2,2]],
+        "composition": [[2,2]],
+        "function_call:print": [[2,2]],
+        "function_call_without_result:print": [[2,2]],
+        "import:sys": [[1,1]],
+        "import_module:sys": [[1,1]],
+        "literal:1": [[2,2]],
+        "literal:Str": [[2,2]],
+        "method_call:join": [[2,2]],
+        "slice:1::": [[2,2]],
+        "slice_lower:1": [[2,2]],
+        "slice_step:": [[2,2]],
+        "slice_upper:": [[2,2]]
+      },
+      "taxons": {
+        "call/composition": [[2,2]],
+        "call/method/sequence/string/join": [[2,2]],
+        "io/standard/print": [[2,2]],
+        "library/standard/sys": [[1,1]],
+        "subscript/slice/start": [[2,2]],
+        "type/elementary/number/integer": [[2,2]],
+        "type/elementary/string": [[2,2]]
+      }
     },
     "073.673-create-a-factory.py": {
       "timestamp": "ignored",
@@ -2866,9 +2917,28 @@
     },
     "108.1291-determine-if-variable-name-is-defined.py": {
       "timestamp": "ignored",
-      "source": "if \"x\" in locals():\n    print x",
-      "labels": {},
-      "taxons": {}
+      "source": "if \"x\" in locals():\n    print(x)",
+      "labels": {
+        "call_argument:x": [[2,2]],
+        "comparison_operator:In": [[1,1]],
+        "function_call:locals": [[1,1]],
+        "function_call:print": [[2,2]],
+        "function_call_without_arguments:locals": [[1,1]],
+        "function_call_without_result:print": [[2,2]],
+        "if": [[1,2]],
+        "if_then_branch": [[2,2]],
+        "if_without_else": [[1,2]],
+        "literal:Str": [[1,1]],
+        "yoda_comparison:In": [[1,1]]
+      },
+      "taxons": {
+        "call/function/builtin/locals": [[1,1]],
+        "call/function/without_arguments": [[1,1]],
+        "flow/conditional/no_else": [[1,2]],
+        "io/standard/print": [[2,2]],
+        "test/belonging": [[1,1]],
+        "type/elementary/string": [[1,1]]
+      }
     },
     "109.2280-number-of-bytes-of-a-type.py": {
       "timestamp": "ignored",
@@ -3315,7 +3385,9 @@
       "labels": {
         "assertion": [[1,1]]
       },
-      "taxons": {}
+      "taxons": {
+        "flow/assertion": [[1,1]]
+      }
     },
     "124.2152-binary-search-for-a-value-in-sorted-array.py": {
       "timestamp": "ignored",
@@ -4829,8 +4901,12 @@
     "173.2427-format-a-number-with-grouped-thousands.py": {
       "timestamp": "ignored",
       "source": "pass",
-      "labels": {},
-      "taxons": {}
+      "labels": {
+        "null_operation": [[1,1]]
+      },
+      "taxons": {
+        "flow/null_operation": [[1,1]]
+      }
     },
     "173.2428-format-a-number-with-grouped-thousands.py": {
       "timestamp": "ignored",
@@ -4851,9 +4927,17 @@
     },
     "173.2429-format-a-number-with-grouped-thousands.py": {
       "timestamp": "ignored",
-      "source": ".format(1000)",
-      "labels": {},
-      "taxons": {}
+      "source": "print(\"'{:,}'.format(1000)\")",
+      "labels": {
+        "call_argument:": [[1,1]],
+        "function_call:print": [[1,1]],
+        "function_call_without_result:print": [[1,1]],
+        "literal:Str": [[1,1]]
+      },
+      "taxons": {
+        "io/standard/print": [[1,1]],
+        "type/elementary/string": [[1,1]]
+      }
     },
     "174.2687-make-http-post-request.py": {
       "timestamp": "ignored",
@@ -6805,6 +6889,7 @@
       "063.1088-replace-fragment-of-a-string.py"
     ],
     "binary_operator:Add": [
+      "003.19-create-a-procedure.py",
       "037.671-currying.py",
       "081.2270-round-floating-point-number-to-integer.py",
       "141.2159-iterate-in-sequence-over-two-lists.py",
@@ -6830,7 +6915,6 @@
       "188.3171-matrix-multiplication.py"
     ],
     "binary_operator:Mod": [
-      "059.669-write-to-standard-error-stream.py",
       "177.3241-find-files-with-a-given-list-of-filename-extensions.py",
       "182.2658-quine-program.py"
     ],
@@ -6851,9 +6935,6 @@
       "064.274-big-integer--value-3-power-247.py",
       "066.672-big-integer-exponentiation.py",
       "160.2165-detect-if-32-bit-or-64-bit-architecture.py"
-    ],
-    "binary_operator:RShift": [
-      "059.669-write-to-standard-error-stream.py"
     ],
     "binary_operator:Sub": [
       "031.188-recursive-factorial-simple.py",
@@ -6884,6 +6965,7 @@
       "002.11-print-hello-10-times.py",
       "002.1493-print-hello-10-times.py",
       "002.3117-print-hello-10-times.py",
+      "003.19-create-a-procedure.py",
       "016.1530-depth-first-traversing-of-a-binary-tree.py",
       "025.195-send-a-value-to-another-thread.py",
       "027.193-create-a-3-dimensional-array.py",
@@ -6901,6 +6983,7 @@
       "059.668-write-to-standard-error-stream.py",
       "067.1426-binomial-coefficient-n-choose-k.py",
       "068.2271-create-a-bitset.py",
+      "071.379-echo-program-implementation.py",
       "081.2270-round-floating-point-number-to-integer.py",
       "083.1805-regex-with-character-repetition.py",
       "084.1940-count-bits-set-in-integer-binary-representation.py",
@@ -6938,6 +7021,7 @@
       "156.2148-format-integer-with-zero-padding.py",
       "163.2170-print-list-elements-by-group-of-2.py",
       "173.2428-format-a-number-with-grouped-thousands.py",
+      "173.2429-format-a-number-with-grouped-thousands.py",
       "174.2687-make-http-post-request.py",
       "177.2725-find-files-with-a-given-list-of-filename-extensions.py",
       "177.3241-find-files-with-a-given-list-of-filename-extensions.py",
@@ -7100,6 +7184,7 @@
       "144.2915-check-if-file-exists.py"
     ],
     "call_argument:i": [
+      "007.183-iterate-over-list-indexes-and-values.py",
       "044.190-insert-element-in-list.py",
       "055.575-convert-integer-to-string.py",
       "084.1940-count-bits-set-in-integer-binary-representation.py",
@@ -7121,6 +7206,7 @@
       "143.2256-iterate-alternatively-over-two-lists.py"
     ],
     "call_argument:items": [
+      "007.183-iterate-over-list-indexes-and-values.py",
       "028.350-sort-by-a-property.py"
     ],
     "call_argument:iterable": [
@@ -7261,6 +7347,7 @@
     ],
     "call_argument:x": [
       "006.32-iterate-over-list-values.py",
+      "007.183-iterate-over-list-indexes-and-values.py",
       "010.182-shuffle-a-list.py",
       "011.47-pick-a-random-element-from-a-list.py",
       "019.197-reverse-a-list.py",
@@ -7280,6 +7367,7 @@
       "080.1092-truncate-floating-point-number-to-integer.py",
       "092.1100-save-object-into-json-file.py",
       "094.1101-print-type-of-variable.py",
+      "108.1291-determine-if-variable-name-is-defined.py",
       "113.2157-iterate-over-map-entries-ordered-by-values.py",
       "117.1297-get-list-size.py",
       "118.1254-list-to-set.py",
@@ -7372,6 +7460,7 @@
       "039.571-check-if-string-contains-a-word.py",
       "051.230-check-if-map-contains-key.py",
       "052.666-check-if-map-contains-value.py",
+      "108.1291-determine-if-variable-name-is-defined.py",
       "133.2160-case-insensitive-string-contains.py",
       "162.2164-execute-procedures-depending-on-options.py",
       "177.2709-find-files-with-a-given-list-of-filename-extensions.py"
@@ -7400,6 +7489,7 @@
       "043.2733-break-outer-loop.py",
       "053.1933-join-a-list-of-strings.py",
       "068.2271-create-a-bitset.py",
+      "071.379-echo-program-implementation.py",
       "094.1101-print-type-of-variable.py",
       "107.2139-get-folder-containing-current-program.py",
       "113.2157-iterate-over-map-entries-ordered-by-values.py",
@@ -7451,6 +7541,7 @@
       "177.2725-find-files-with-a-given-list-of-filename-extensions.py"
     ],
     "concatenation_operator:Str": [
+      "003.19-create-a-procedure.py",
       "154.2292-halfway-between-two-hex-color-codes.py"
     ],
     "conditional_expression": [
@@ -7510,6 +7601,7 @@
     ],
     "for:i": [
       "002.11-print-hello-10-times.py",
+      "007.183-iterate-over-list-indexes-and-values.py",
       "030.189-parallelize-execution-of-1000-independent-tasks.py",
       "043.2733-break-outer-loop.py",
       "119.3263-deduplicate-list.py"
@@ -7560,6 +7652,7 @@
     ],
     "for:x": [
       "006.32-iterate-over-list-values.py",
+      "007.183-iterate-over-list-indexes-and-values.py",
       "113.2157-iterate-over-map-entries-ordered-by-values.py",
       "141.2159-iterate-in-sequence-over-two-lists.py",
       "163.2170-print-list-elements-by-group-of-2.py"
@@ -7575,6 +7668,7 @@
       "128.2085-breadth-first-traversing-of-a-tree.py"
     ],
     "for_indexes_elements": [
+      "007.183-iterate-over-list-indexes-and-values.py",
       "020.573-return-two-values.py",
       "043.2733-break-outer-loop.py"
     ],
@@ -7647,6 +7741,9 @@
     ],
     "function:find_set": [
       "187.3261-disjoint-set.py"
+    ],
+    "function:finish": [
+      "003.19-create-a-procedure.py"
     ],
     "function:foo": [
       "126.2137-multiple-return-values.py"
@@ -7757,6 +7854,9 @@
       "032.196-integer-exponentiation-by-squaring.py",
       "067.1426-binomial-coefficient-n-choose-k.py"
     ],
+    "function_argument:name": [
+      "003.19-create-a-procedure.py"
+    ],
     "function_argument:paths": [
       "040.2279-graph-with-adjacency-lists.py"
     ],
@@ -7817,6 +7917,7 @@
       "086.1004-check-if-integer-multiplication-will-overflow.py"
     ],
     "function_argument_flavor:arg": [
+      "003.19-create-a-procedure.py",
       "004.24-create-a-function-which-returns-the-square-of-an-integer.py",
       "004.2921-create-a-function-which-returns-the-square-of-an-integer.py",
       "009.1410-create-a-binary-tree-data-structure.py",
@@ -7925,6 +8026,7 @@
       "078.1089-do-while-loop.py"
     ],
     "function_call:enumerate": [
+      "007.183-iterate-over-list-indexes-and-values.py",
       "020.573-return-two-values.py",
       "043.2733-break-outer-loop.py"
     ],
@@ -8016,6 +8118,9 @@
       "148.1829-read-list-of-integer-numbers-from-stdin.py",
       "177.3241-find-files-with-a-given-list-of-filename-extensions.py"
     ],
+    "function_call:locals": [
+      "108.1291-determine-if-variable-name-is-defined.py"
+    ],
     "function_call:loop_breaking": [
       "043.2733-break-outer-loop.py"
     ],
@@ -8047,6 +8152,8 @@
       "002.11-print-hello-10-times.py",
       "002.1493-print-hello-10-times.py",
       "002.3117-print-hello-10-times.py",
+      "003.19-create-a-procedure.py",
+      "007.183-iterate-over-list-indexes-and-values.py",
       "013.574-iterate-over-map-keys-and-values.py",
       "037.671-currying.py",
       "042.1264-continue-outer-loop.py",
@@ -8054,9 +8161,11 @@
       "043.2733-break-outer-loop.py",
       "056.1424-launch-1000-parallel-tasks-and-wait-for-completion.py",
       "059.668-write-to-standard-error-stream.py",
+      "071.379-echo-program-implementation.py",
       "094.1101-print-type-of-variable.py",
       "094.1864-print-type-of-variable.py",
       "104.3264-save-object-into-xml-file.py",
+      "108.1291-determine-if-variable-name-is-defined.py",
       "112.2144-iterate-over-map-entries-ordered-by-keys.py",
       "113.2157-iterate-over-map-entries-ordered-by-values.py",
       "119.3263-deduplicate-list.py",
@@ -8067,6 +8176,7 @@
       "154.2292-halfway-between-two-hex-color-codes.py",
       "163.2170-print-list-elements-by-group-of-2.py",
       "163.3177-print-list-elements-by-group-of-2.py",
+      "173.2429-format-a-number-with-grouped-thousands.py",
       "182.2658-quine-program.py"
     ],
     "function_call:range": [
@@ -8172,6 +8282,9 @@
     "function_call_without_arguments:input": [
       "148.1829-read-list-of-integer-numbers-from-stdin.py"
     ],
+    "function_call_without_arguments:locals": [
+      "108.1291-determine-if-variable-name-is-defined.py"
+    ],
     "function_call_without_arguments:set": [
       "119.3263-deduplicate-list.py",
       "129.2282-breadth-first-traversing-in-a-graph.py",
@@ -8240,6 +8353,8 @@
       "002.11-print-hello-10-times.py",
       "002.1493-print-hello-10-times.py",
       "002.3117-print-hello-10-times.py",
+      "003.19-create-a-procedure.py",
+      "007.183-iterate-over-list-indexes-and-values.py",
       "013.574-iterate-over-map-keys-and-values.py",
       "037.671-currying.py",
       "042.1264-continue-outer-loop.py",
@@ -8247,9 +8362,11 @@
       "043.2733-break-outer-loop.py",
       "056.1424-launch-1000-parallel-tasks-and-wait-for-completion.py",
       "059.668-write-to-standard-error-stream.py",
+      "071.379-echo-program-implementation.py",
       "094.1101-print-type-of-variable.py",
       "094.1864-print-type-of-variable.py",
       "104.3264-save-object-into-xml-file.py",
+      "108.1291-determine-if-variable-name-is-defined.py",
       "112.2144-iterate-over-map-entries-ordered-by-keys.py",
       "113.2157-iterate-over-map-entries-ordered-by-values.py",
       "119.3263-deduplicate-list.py",
@@ -8260,6 +8377,7 @@
       "154.2292-halfway-between-two-hex-color-codes.py",
       "163.2170-print-list-elements-by-group-of-2.py",
       "163.3177-print-list-elements-by-group-of-2.py",
+      "173.2429-format-a-number-with-grouped-thousands.py",
       "182.2658-quine-program.py"
     ],
     "function_call_without_result:set": [
@@ -8304,6 +8422,9 @@
     ],
     "function_returning_nothing:f": [
       "056.1424-launch-1000-parallel-tasks-and-wait-for-completion.py"
+    ],
+    "function_returning_nothing:finish": [
+      "003.19-create-a-procedure.py"
     ],
     "function_returning_nothing:make_path": [
       "040.2279-graph-with-adjacency-lists.py"
@@ -8418,6 +8539,7 @@
       "043.676-break-outer-loop.py",
       "073.673-create-a-factory.py",
       "078.1089-do-while-loop.py",
+      "108.1291-determine-if-variable-name-is-defined.py",
       "119.3263-deduplicate-list.py",
       "128.2085-breadth-first-traversing-of-a-tree.py",
       "131.2766-successive-conditions.py",
@@ -8537,6 +8659,7 @@
       "043.676-break-outer-loop.py",
       "073.673-create-a-factory.py",
       "078.1089-do-while-loop.py",
+      "108.1291-determine-if-variable-name-is-defined.py",
       "119.3263-deduplicate-list.py",
       "128.2085-breadth-first-traversing-of-a-tree.py",
       "131.2766-successive-conditions.py",
@@ -8555,6 +8678,7 @@
       "043.676-break-outer-loop.py",
       "073.673-create-a-factory.py",
       "078.1089-do-while-loop.py",
+      "108.1291-determine-if-variable-name-is-defined.py",
       "119.3263-deduplicate-list.py",
       "128.2085-breadth-first-traversing-of-a-tree.py",
       "151.2166-remove-string-trailing-path-separator.py",
@@ -8700,8 +8824,8 @@
     ],
     "import:sys": [
       "059.668-write-to-standard-error-stream.py",
-      "059.669-write-to-standard-error-stream.py",
       "060.1084-read-command-line-argument.py",
+      "071.379-echo-program-implementation.py",
       "087.1139-stop-program.py",
       "105.1804-current-executable-name.py",
       "145.1822-print-log-line-with-datetime.py",
@@ -8860,8 +8984,8 @@
     ],
     "import_module:sys": [
       "059.668-write-to-standard-error-stream.py",
-      "059.669-write-to-standard-error-stream.py",
       "060.1084-read-command-line-argument.py",
+      "071.379-echo-program-implementation.py",
       "087.1139-stop-program.py",
       "105.1804-current-executable-name.py",
       "145.1822-print-log-line-with-datetime.py",
@@ -9055,6 +9179,7 @@
       "043.2733-break-outer-loop.py",
       "056.1424-launch-1000-parallel-tasks-and-wait-for-completion.py",
       "060.1084-read-command-line-argument.py",
+      "071.379-echo-program-implementation.py",
       "087.1139-stop-program.py",
       "122.1454-declare-enumeration.py",
       "154.2155-halfway-between-two-hex-color-codes.py",
@@ -9194,6 +9319,7 @@
       "002.11-print-hello-10-times.py",
       "002.1493-print-hello-10-times.py",
       "002.3117-print-hello-10-times.py",
+      "003.19-create-a-procedure.py",
       "008.39-initialize-a-new-map-associative-array.py",
       "023.1102-convert-real-number-to-string-with-2-decimal-places.py",
       "024.664-assign-to-string-the-japanese-word-.py",
@@ -9204,8 +9330,8 @@
       "053.240-join-a-list-of-strings.py",
       "056.1424-launch-1000-parallel-tasks-and-wait-for-completion.py",
       "059.668-write-to-standard-error-stream.py",
-      "059.669-write-to-standard-error-stream.py",
       "065.1085-format-decimal-number.py",
+      "071.379-echo-program-implementation.py",
       "076.1083-binary-digits-from-an-integer.py",
       "083.1805-regex-with-character-repetition.py",
       "084.1940-count-bits-set-in-integer-binary-representation.py",
@@ -9216,6 +9342,7 @@
       "102.2173-load-from-http-get-request-into-a-file.py",
       "103.2276-load-xml-file-into-struct.py",
       "104.3264-save-object-into-xml-file.py",
+      "108.1291-determine-if-variable-name-is-defined.py",
       "110.1455-check-if-string-is-blank.py",
       "111.2168-launch-other-program.py",
       "116.1257-remove-occurrences-of-word-from-string.py",
@@ -9238,6 +9365,7 @@
       "157.2150-declare-constant-string.py",
       "162.2164-execute-procedures-depending-on-options.py",
       "173.2428-format-a-number-with-grouped-thousands.py",
+      "173.2429-format-a-number-with-grouped-thousands.py",
       "174.2687-make-http-post-request.py",
       "177.2709-find-files-with-a-given-list-of-filename-extensions.py",
       "177.2725-find-files-with-a-given-list-of-filename-extensions.py",
@@ -9263,6 +9391,7 @@
     "loop:for": [
       "002.11-print-hello-10-times.py",
       "006.32-iterate-over-list-values.py",
+      "007.183-iterate-over-list-indexes-and-values.py",
       "013.574-iterate-over-map-keys-and-values.py",
       "018.2084-depth-first-traversing-of-a-tree.py",
       "020.573-return-two-values.py",
@@ -9299,6 +9428,7 @@
     "loop_with_late_exit:for": [
       "002.11-print-hello-10-times.py",
       "006.32-iterate-over-list-values.py",
+      "007.183-iterate-over-list-indexes-and-values.py",
       "013.574-iterate-over-map-keys-and-values.py",
       "018.2084-depth-first-traversing-of-a-tree.py",
       "020.573-return-two-values.py",
@@ -9532,6 +9662,7 @@
     "method_call:join": [
       "053.1933-join-a-list-of-strings.py",
       "053.240-join-a-list-of-strings.py",
+      "071.379-echo-program-implementation.py",
       "154.2292-halfway-between-two-hex-color-codes.py"
     ],
     "method_call:listdir": [
@@ -9914,6 +10045,7 @@
       "165.2149-last-element-of-list.py"
     ],
     "nested_for:1": [
+      "007.183-iterate-over-list-indexes-and-values.py",
       "013.574-iterate-over-map-keys-and-values.py",
       "020.573-return-two-values.py",
       "040.2279-graph-with-adjacency-lists.py",
@@ -9932,6 +10064,14 @@
     ],
     "nested_index:2": [
       "043.676-break-outer-loop.py"
+    ],
+    "null_operation": [
+      "003.2372-create-a-procedure.py",
+      "034.625-create-a-set-of-objects.py",
+      "040.2279-graph-with-adjacency-lists.py",
+      "043.676-break-outer-loop.py",
+      "050.572-make-an-infinite-loop.py",
+      "173.2427-format-a-number-with-grouped-thousands.py"
     ],
     "parallel_assignment:2": [
       "021.84-swap-values-of-variables-a-and-b.py",
@@ -10339,6 +10479,7 @@
     ],
     "slice:1::": [
       "040.2279-graph-with-adjacency-lists.py",
+      "071.379-echo-program-implementation.py",
       "162.2164-execute-procedures-depending-on-options.py"
     ],
     "slice:1::2": [
@@ -10383,6 +10524,7 @@
     ],
     "slice_lower:1": [
       "040.2279-graph-with-adjacency-lists.py",
+      "071.379-echo-program-implementation.py",
       "162.2164-execute-procedures-depending-on-options.py",
       "163.2170-print-list-elements-by-group-of-2.py"
     ],
@@ -10401,6 +10543,7 @@
       "040.2279-graph-with-adjacency-lists.py",
       "046.191-extract-beginning-of-string-prefix.py",
       "047.198-extract-string-suffix.py",
+      "071.379-echo-program-implementation.py",
       "151.2166-remove-string-trailing-path-separator.py",
       "154.2155-halfway-between-two-hex-color-codes.py",
       "154.2292-halfway-between-two-hex-color-codes.py",
@@ -10421,6 +10564,7 @@
       "041.187-reverse-a-string.py",
       "041.2714-reverse-a-string.py",
       "047.198-extract-string-suffix.py",
+      "071.379-echo-program-implementation.py",
       "162.2164-execute-procedures-depending-on-options.py",
       "163.2170-print-list-elements-by-group-of-2.py",
       "167.2611-trim-prefix.py"
@@ -10439,7 +10583,6 @@
       "038.186-extract-a-substring.py"
     ],
     "string_formatting_operator": [
-      "059.669-write-to-standard-error-stream.py",
       "177.3241-find-files-with-a-given-list-of-filename-extensions.py"
     ],
     "suggest_constant_definition": [
@@ -10641,6 +10784,7 @@
       "130.2283-depth-first-traversing-in-a-graph.py"
     ],
     "yoda_comparison:In": [
+      "108.1291-determine-if-variable-name-is-defined.py",
       "162.2164-execute-procedures-depending-on-options.py"
     ]
   },
@@ -10653,6 +10797,7 @@
       "043.2733-break-outer-loop.py",
       "053.1933-join-a-list-of-strings.py",
       "068.2271-create-a-bitset.py",
+      "071.379-echo-program-implementation.py",
       "094.1101-print-type-of-variable.py",
       "107.2139-get-folder-containing-current-program.py",
       "113.2157-iterate-over-map-entries-ordered-by-values.py",
@@ -10706,6 +10851,7 @@
       "088.2143-allocate-1m-bytes.py"
     ],
     "call/function/builtin/enumerate": [
+      "007.183-iterate-over-list-indexes-and-values.py",
       "020.573-return-two-values.py",
       "043.2733-break-outer-loop.py"
     ],
@@ -10730,6 +10876,9 @@
       "167.2611-trim-prefix.py",
       "169.2233-string-length.py",
       "170.2275-get-map-size.py"
+    ],
+    "call/function/builtin/locals": [
+      "108.1291-determine-if-variable-name-is-defined.py"
     ],
     "call/function/builtin/map": [
       "053.1933-join-a-list-of-strings.py",
@@ -10774,6 +10923,7 @@
       "042.1264-continue-outer-loop.py",
       "078.1089-do-while-loop.py",
       "093.1082-pass-a-runnable-procedure-as-parameter.py",
+      "108.1291-determine-if-variable-name-is-defined.py",
       "125.2167-measure-function-call-duration.py",
       "131.2766-successive-conditions.py",
       "148.1829-read-list-of-integer-numbers-from-stdin.py",
@@ -10929,6 +11079,7 @@
     "call/method/sequence/string/join": [
       "053.1933-join-a-list-of-strings.py",
       "053.240-join-a-list-of-strings.py",
+      "071.379-echo-program-implementation.py",
       "154.2292-halfway-between-two-hex-color-codes.py"
     ],
     "call/method/sequence/string/lower": [
@@ -10981,6 +11132,9 @@
       "159.2281-trie.py",
       "187.3261-disjoint-set.py"
     ],
+    "flow/assertion": [
+      "123.2146-assert-condition.py"
+    ],
     "flow/conditional": [
       "031.188-recursive-factorial-simple.py",
       "131.2766-successive-conditions.py",
@@ -11007,6 +11161,7 @@
       "043.676-break-outer-loop.py",
       "073.673-create-a-factory.py",
       "078.1089-do-while-loop.py",
+      "108.1291-determine-if-variable-name-is-defined.py",
       "119.3263-deduplicate-list.py",
       "128.2085-breadth-first-traversing-of-a-tree.py",
       "151.2166-remove-string-trailing-path-separator.py",
@@ -11036,6 +11191,7 @@
     "flow/loop/exit/late": [
       "002.11-print-hello-10-times.py",
       "006.32-iterate-over-list-values.py",
+      "007.183-iterate-over-list-indexes-and-values.py",
       "013.574-iterate-over-map-keys-and-values.py",
       "018.2084-depth-first-traversing-of-a-tree.py",
       "020.573-return-two-values.py",
@@ -11059,6 +11215,7 @@
       "163.3177-print-list-elements-by-group-of-2.py"
     ],
     "flow/loop/for": [
+      "007.183-iterate-over-list-indexes-and-values.py",
       "013.574-iterate-over-map-keys-and-values.py",
       "020.573-return-two-values.py",
       "040.2279-graph-with-adjacency-lists.py",
@@ -11087,10 +11244,12 @@
       "128.2085-breadth-first-traversing-of-a-tree.py"
     ],
     "flow/loop/for/elements_and_indexes": [
+      "007.183-iterate-over-list-indexes-and-values.py",
       "020.573-return-two-values.py",
       "043.2733-break-outer-loop.py"
     ],
     "flow/loop/for/nested/1": [
+      "007.183-iterate-over-list-indexes-and-values.py",
       "013.574-iterate-over-map-keys-and-values.py",
       "020.573-return-two-values.py",
       "040.2279-graph-with-adjacency-lists.py",
@@ -11114,6 +11273,14 @@
       "078.1089-do-while-loop.py",
       "121.3029-udp-listen-and-read.py"
     ],
+    "flow/null_operation": [
+      "003.2372-create-a-procedure.py",
+      "034.625-create-a-set-of-objects.py",
+      "040.2279-graph-with-adjacency-lists.py",
+      "043.676-break-outer-loop.py",
+      "050.572-make-an-infinite-loop.py",
+      "173.2427-format-a-number-with-grouped-thousands.py"
+    ],
     "io/file/open": [
       "058.665-extract-file-content-to-a-string.py",
       "091.1098-load-json-file-into-struct.py",
@@ -11129,6 +11296,8 @@
       "002.11-print-hello-10-times.py",
       "002.1493-print-hello-10-times.py",
       "002.3117-print-hello-10-times.py",
+      "003.19-create-a-procedure.py",
+      "007.183-iterate-over-list-indexes-and-values.py",
       "013.574-iterate-over-map-keys-and-values.py",
       "037.671-currying.py",
       "042.1264-continue-outer-loop.py",
@@ -11136,9 +11305,11 @@
       "043.2733-break-outer-loop.py",
       "056.1424-launch-1000-parallel-tasks-and-wait-for-completion.py",
       "059.668-write-to-standard-error-stream.py",
+      "071.379-echo-program-implementation.py",
       "094.1101-print-type-of-variable.py",
       "094.1864-print-type-of-variable.py",
       "104.3264-save-object-into-xml-file.py",
+      "108.1291-determine-if-variable-name-is-defined.py",
       "112.2144-iterate-over-map-entries-ordered-by-keys.py",
       "113.2157-iterate-over-map-entries-ordered-by-values.py",
       "119.3263-deduplicate-list.py",
@@ -11149,6 +11320,7 @@
       "154.2292-halfway-between-two-hex-color-codes.py",
       "163.2170-print-list-elements-by-group-of-2.py",
       "163.3177-print-list-elements-by-group-of-2.py",
+      "173.2429-format-a-number-with-grouped-thousands.py",
       "182.2658-quine-program.py"
     ],
     "library/standard/__future__/division": [
@@ -11268,8 +11440,8 @@
     ],
     "library/standard/sys": [
       "059.668-write-to-standard-error-stream.py",
-      "059.669-write-to-standard-error-stream.py",
       "060.1084-read-command-line-argument.py",
+      "071.379-echo-program-implementation.py",
       "087.1139-stop-program.py",
       "105.1804-current-executable-name.py",
       "145.1822-print-log-line-with-datetime.py",
@@ -11374,9 +11546,6 @@
       "077.1093-complex-number.py",
       "125.2167-measure-function-call-duration.py"
     ],
-    "operator/bitwise/shift/right": [
-      "059.669-write-to-standard-error-stream.py"
-    ],
     "operator/boolean/and": [
       "124.2152-binary-search-for-a-value-in-sorted-array.py",
       "167.2611-trim-prefix.py",
@@ -11394,10 +11563,10 @@
       "188.3171-matrix-multiplication.py"
     ],
     "operator/string/concatenation": [
+      "003.19-create-a-procedure.py",
       "154.2292-halfway-between-two-hex-color-codes.py"
     ],
     "operator/string/format": [
-      "059.669-write-to-standard-error-stream.py",
       "177.3241-find-files-with-a-given-list-of-filename-extensions.py"
     ],
     "operator/string/replication": [
@@ -11415,6 +11584,7 @@
       "119.3263-deduplicate-list.py"
     ],
     "subroutine/argument/arg": [
+      "003.19-create-a-procedure.py",
       "004.24-create-a-function-which-returns-the-square-of-an-integer.py",
       "004.2921-create-a-function-which-returns-the-square-of-an-integer.py",
       "009.1410-create-a-binary-tree-data-structure.py",
@@ -11526,6 +11696,7 @@
       "187.3261-disjoint-set.py"
     ],
     "subroutine/procedure": [
+      "003.19-create-a-procedure.py",
       "003.2372-create-a-procedure.py",
       "009.1410-create-a-binary-tree-data-structure.py",
       "009.3176-create-a-binary-tree-data-structure.py",
@@ -11571,6 +11742,7 @@
       "038.186-extract-a-substring.py",
       "040.2279-graph-with-adjacency-lists.py",
       "047.198-extract-string-suffix.py",
+      "071.379-echo-program-implementation.py",
       "154.2155-halfway-between-two-hex-color-codes.py",
       "154.2292-halfway-between-two-hex-color-codes.py",
       "162.2164-execute-procedures-depending-on-options.py",
@@ -11598,6 +11770,7 @@
       "039.571-check-if-string-contains-a-word.py",
       "051.230-check-if-map-contains-key.py",
       "052.666-check-if-map-contains-value.py",
+      "108.1291-determine-if-variable-name-is-defined.py",
       "133.2160-case-insensitive-string-contains.py",
       "162.2164-execute-procedures-depending-on-options.py",
       "177.2709-find-files-with-a-given-list-of-filename-extensions.py"
@@ -11740,6 +11913,7 @@
       "060.1084-read-command-line-argument.py",
       "064.274-big-integer--value-3-power-247.py",
       "068.2271-create-a-bitset.py",
+      "071.379-echo-program-implementation.py",
       "077.1093-complex-number.py",
       "080.1092-truncate-floating-point-number-to-integer.py",
       "081.2270-round-floating-point-number-to-integer.py",
@@ -11784,6 +11958,7 @@
       "002.11-print-hello-10-times.py",
       "002.1493-print-hello-10-times.py",
       "002.3117-print-hello-10-times.py",
+      "003.19-create-a-procedure.py",
       "008.39-initialize-a-new-map-associative-array.py",
       "023.1102-convert-real-number-to-string-with-2-decimal-places.py",
       "024.664-assign-to-string-the-japanese-word-.py",
@@ -11795,8 +11970,8 @@
       "055.575-convert-integer-to-string.py",
       "056.1424-launch-1000-parallel-tasks-and-wait-for-completion.py",
       "059.668-write-to-standard-error-stream.py",
-      "059.669-write-to-standard-error-stream.py",
       "065.1085-format-decimal-number.py",
+      "071.379-echo-program-implementation.py",
       "076.1083-binary-digits-from-an-integer.py",
       "083.1805-regex-with-character-repetition.py",
       "084.1940-count-bits-set-in-integer-binary-representation.py",
@@ -11807,6 +11982,7 @@
       "102.2173-load-from-http-get-request-into-a-file.py",
       "103.2276-load-xml-file-into-struct.py",
       "104.3264-save-object-into-xml-file.py",
+      "108.1291-determine-if-variable-name-is-defined.py",
       "111.2168-launch-other-program.py",
       "119.3263-deduplicate-list.py",
       "120.1479-read-integer-from-stdin.py",
@@ -11827,6 +12003,7 @@
       "157.2150-declare-constant-string.py",
       "162.2164-execute-procedures-depending-on-options.py",
       "173.2428-format-a-number-with-grouped-thousands.py",
+      "173.2429-format-a-number-with-grouped-thousands.py",
       "174.2687-make-http-post-request.py",
       "177.2709-find-files-with-a-given-list-of-filename-extensions.py",
       "177.2725-find-files-with-a-given-list-of-filename-extensions.py",
@@ -12088,7 +12265,6 @@
     "057.3173-filter-list.py": [],
     "058.665-extract-file-content-to-a-string.py": [],
     "059.668-write-to-standard-error-stream.py": [],
-    "059.669-write-to-standard-error-stream.py": [],
     "060.1084-read-command-line-argument.py": [],
     "061.576-get-current-date.py": [],
     "062.1091-find-substring-position.py": [],
@@ -12314,7 +12490,6 @@
     "057.3173-filter-list.py": [],
     "058.665-extract-file-content-to-a-string.py": [],
     "059.668-write-to-standard-error-stream.py": [],
-    "059.669-write-to-standard-error-stream.py": [],
     "060.1084-read-command-line-argument.py": [],
     "061.576-get-current-date.py": [],
     "062.1091-find-substring-position.py": [],

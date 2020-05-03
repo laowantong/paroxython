@@ -444,13 +444,13 @@ def timer_decorator(func): # closure:timer_decorator (-> +11), function:timer_de
         return func(*args, **kwargs) # call_argument:, function_call:func, function_tail_call:func, return
     return timer_wrapper # return:timer_wrapper
 class Error(Exception): # class:Error (-> +1)
-    pass
+    pass # null_operation
 class ValueTooLargeError(Error): # class:ValueTooLargeError (-> +1)
-    pass
+    pass # null_operation
 class ValueTooSmallError(Error): # class:ValueTooSmallError (-> +1)
-    pass
+    pass # null_operation
 class ValueLessThanZero(Error): # class:ValueLessThanZero (-> +1)
-    pass
+    pass # null_operation
 def _check_number_input(n, min_thresh, max_thresh=None): # function:_check_number_input (-> +22), function_argument:max_thresh, function_argument:min_thresh, function_argument:n, function_argument_flavor:arg, function_returning_something:_check_number_input (-> +22), literal:None
     try: # try (-> +19), try_except:ValueLessThanZero (-> +19), try_except:ValueTooLargeError (-> +19), try_except:ValueTooSmallError (-> +19), try_raise:ValueLessThanZero (-> +19), try_raise:ValueTooLargeError (-> +19), try_raise:ValueTooSmallError (-> +19)
         if n >= min_thresh and max_thresh is None: # boolean_operator:And, comparison_operator:GtE, comparison_operator:Is, if (-> +9), if_test_atom:None, if_test_atom:max_thresh, if_test_atom:min_thresh, if_test_atom:n, literal:None
@@ -1053,8 +1053,8 @@ class FFT: # class:FFT (-> +89)
         dftA = self.__DFT("A") # assignment:__DFT, assignment_lhs_identifier:dftA, assignment_rhs_atom:self, call_argument:, literal:Str, method_call:__DFT, single_assignment:dftA
         dftB = self.__DFT("B") # assignment:__DFT, assignment_lhs_identifier:dftB, assignment_rhs_atom:self, call_argument:, literal:Str, method_call:__DFT, single_assignment:dftB
         inverseC = [[dftA[i] * dftB[i] for i in range(self.C_max_length)]] # assignment, assignment_lhs_identifier:inverseC, assignment_rhs_atom:dftA, assignment_rhs_atom:dftB, assignment_rhs_atom:i, assignment_rhs_atom:self, binary_operator:Mult, call_argument:, comprehension:List, comprehension_for_count:1, function_call:range, index:i, multiplication_operator, range:_, single_assignment:inverseC
-        del dftA
-        del dftB
+        del dftA # unbinding:dftA
+        del dftB # unbinding:dftB
         if len(inverseC[0]) <= 1: # call_argument:, comparison_operator:LtE, function_call:len, if (-> +1), if_guard (-> +1), if_test_atom:0, if_test_atom:1, if_test_atom:inverseC, if_without_else (-> +1), index:0, literal:0, literal:1
             return inverseC[0] # if_then_branch, index:0, literal:0, return
         next_ncol = 2 # assignment:2, assignment_lhs_identifier:next_ncol, assignment_rhs_atom:2, literal:2, single_assignment:next_ncol
