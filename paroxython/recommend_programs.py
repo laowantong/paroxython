@@ -119,7 +119,11 @@ class Recommendations:
                 contents.append(f"\n```python\n{add_line_numbers(program_info['source'])}\n```")
                 contents.append("\n| Cost  | Taxon | Lines |")
                 contents.append("|" + "----|" * 3)
-                for (taxon_name, spans) in sorted(program_info["taxons"].items()):
+                items = sorted(
+                    program_info["taxons"].items(),
+                    key=lambda x: f"~{x[0]}" if x[0].startswith("metadata/") else x[0],
+                )
+                for (taxon_name, spans) in items:
                     taxon_cost = self.taxon_cost(taxon_name)
                     s = spans_to_html(", ".join(map(couple_to_string, spans)))
                     contents.append(f"| {taxon_cost} | `{taxon_name}` | {s} |")

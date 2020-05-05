@@ -105,6 +105,10 @@
 - update_with:FloorDiv / collatz_print.py / 5
 - verbose_conditional_assignment / collatz_print.py / 4-7
 - while / collatz_print.py / 2-7
+- whole_span:1 / assignment.py / 1
+- whole_span:10 / fizzbuzz.py / 1-10
+- whole_span:3 / is_even.py / 1-3
+- whole_span:8 / collatz_print.py / 1-8
 
 # Absent labels
 

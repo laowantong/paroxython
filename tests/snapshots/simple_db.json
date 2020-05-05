@@ -7,9 +7,11 @@
         "assignment": [[1,1]],
         "assignment_lhs_identifier:a": [[1,1]],
         "assignment_rhs_atom:b": [[1,1]],
-        "single_assignment:a": [[1,1]]
+        "single_assignment:a": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
+        "metadata/sloc/1": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
     },
@@ -69,7 +71,8 @@
         "update_with:Add": [[7,7]],
         "update_with:FloorDiv": [[5,5]],
         "verbose_conditional_assignment": [[4,7]],
-        "while": [[2,7]]
+        "while": [[2,7]],
+        "whole_span:8": [[1,8]]
       },
       "taxons": {
         "call/function/builtin/print": [[3,3],[8,8]],
@@ -78,6 +81,7 @@
         "flow/loop/exit/late": [[2,7]],
         "flow/loop/while": [[2,7]],
         "io/standard/print": [[3,3],[8,8]],
+        "metadata/sloc/8": [[1,8]],
         "operator/arithmetic/addition": [[7,7]],
         "operator/arithmetic/modulo": [[4,4]],
         "operator/arithmetic/multiplication": [[7,7]],
@@ -132,7 +136,8 @@
         "loop_with_late_exit:for": [[2,10]],
         "modulo_operator": [[3,3],[5,5],[7,7]],
         "range:1:101": [[2,2]],
-        "suggest_constant_definition": [[3,3],[5,5],[7,7]]
+        "suggest_constant_definition": [[3,3],[5,5],[7,7]],
+        "whole_span:10": [[1,10]]
       },
       "taxons": {
         "call/function/builtin/print": [[4,4],[6,6],[8,8],[10,10]],
@@ -144,6 +149,7 @@
         "flow/loop/for/arithmetic/start": [[2,10]],
         "io/standard/print": [[4,4],[6,6],[8,8],[10,10]],
         "library/personal": [[1,1]],
+        "metadata/sloc/10": [[1,10]],
         "operator/arithmetic/modulo": [[3,3],[5,5],[7,7]],
         "test/equality": [[3,3],[5,5],[7,7]],
         "type/elementary/number/integer": [[2,2],[2,2],[3,3],[5,5],[7,7]],
@@ -167,10 +173,12 @@
         "literal:0": [[3,3]],
         "literal:2": [[3,3]],
         "modulo_operator": [[3,3]],
-        "return": [[3,3]]
+        "return": [[3,3]],
+        "whole_span:3": [[1,3]]
       },
       "taxons": {
         "library/personal": [[1,1]],
+        "metadata/sloc/3": [[1,3]],
         "operator/arithmetic/modulo": [[3,3]],
         "subroutine/argument/arg": [[2,2]],
         "subroutine/function": [[2,3]],
@@ -461,6 +469,18 @@
     ],
     "while": [
       "collatz_print.py"
+    ],
+    "whole_span:1": [
+      "assignment.py"
+    ],
+    "whole_span:10": [
+      "fizzbuzz.py"
+    ],
+    "whole_span:3": [
+      "is_even.py"
+    ],
+    "whole_span:8": [
+      "collatz_print.py"
     ]
   },
   "taxons": {
@@ -499,6 +519,18 @@
     "library/personal": [
       "fizzbuzz.py",
       "is_even.py"
+    ],
+    "metadata/sloc/1": [
+      "assignment.py"
+    ],
+    "metadata/sloc/10": [
+      "fizzbuzz.py"
+    ],
+    "metadata/sloc/3": [
+      "is_even.py"
+    ],
+    "metadata/sloc/8": [
+      "collatz_print.py"
     ],
     "operator/arithmetic/addition": [
       "collatz_print.py"
