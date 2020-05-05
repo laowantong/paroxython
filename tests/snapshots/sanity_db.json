@@ -7,11 +7,13 @@
         "call_argument:": [[1,1]],
         "function_call:print": [[1,1]],
         "function_call_without_result:print": [[1,1]],
-        "literal:Str": [[1,1]]
+        "literal:Str": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
         "call/function/builtin/print": [[1,1]],
         "io/standard/print": [[1,1]],
+        "metadata/sloc/1": [[1,1]],
         "type/elementary/string": [[1,1]]
       }
     },
@@ -25,12 +27,14 @@
         "import:__future__:print_function": [[1,1]],
         "import_module:__future__": [[1,1]],
         "import_name:print_function": [[1,1]],
-        "literal:Str": [[2,2]]
+        "literal:Str": [[2,2]],
+        "whole_span:2": [[1,2]]
       },
       "taxons": {
         "call/function/builtin/print": [[2,2]],
         "io/standard/print": [[2,2]],
         "library/standard/__future__/print_function": [[1,1]],
+        "metadata/sloc/2": [[1,2]],
         "type/elementary/string": [[2,2]]
       }
     },
@@ -49,7 +53,8 @@
         "literal:Str": [[2,2]],
         "loop:for": [[1,2]],
         "loop_with_late_exit:for": [[1,2]],
-        "range:10": [[1,1]]
+        "range:10": [[1,1]],
+        "whole_span:2": [[1,2]]
       },
       "taxons": {
         "call/function/builtin/print": [[2,2]],
@@ -57,6 +62,7 @@
         "flow/loop/exit/late": [[1,2]],
         "flow/loop/for/arithmetic": [[1,2]],
         "io/standard/print": [[2,2]],
+        "metadata/sloc/2": [[1,2]],
         "type/elementary/number/integer": [[1,1]],
         "type/elementary/string": [[2,2]]
       }
@@ -71,11 +77,13 @@
         "function_call_without_result:print": [[1,1]],
         "literal:10": [[1,1]],
         "literal:Str": [[1,1]],
-        "replication_operator:Str": [[1,1]]
+        "replication_operator:Str": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
         "call/function/builtin/print": [[1,1]],
         "io/standard/print": [[1,1]],
+        "metadata/sloc/1": [[1,1]],
         "operator/string/replication": [[1,1]],
         "type/elementary/number/integer": [[1,1]],
         "type/elementary/string": [[1,1]]
@@ -91,11 +99,13 @@
         "function_call_without_result:print": [[1,1]],
         "literal:10": [[1,1]],
         "literal:Str": [[1,1]],
-        "replication_operator:Str": [[1,1]]
+        "replication_operator:Str": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
         "call/function/builtin/print": [[1,1]],
         "io/standard/print": [[1,1]],
+        "metadata/sloc/1": [[1,1]],
         "operator/string/replication": [[1,1]],
         "type/elementary/number/integer": [[1,1]],
         "type/elementary/string": [[1,1]]
@@ -114,11 +124,13 @@
         "function_call:print": [[2,2]],
         "function_call_without_result:print": [[2,2]],
         "function_returning_nothing:finish": [[1,2]],
-        "literal:Str": [[2,2]]
+        "literal:Str": [[2,2]],
+        "whole_span:2": [[1,2]]
       },
       "taxons": {
         "call/function/builtin/print": [[2,2]],
         "io/standard/print": [[2,2]],
+        "metadata/sloc/2": [[1,2]],
         "operator/string/concatenation": [[2,2]],
         "subroutine/argument/arg": [[1,1]],
         "subroutine/procedure": [[1,2]],
@@ -132,10 +144,12 @@
         "function:a": [[1,2]],
         "function_returning_nothing:a": [[1,2]],
         "function_without_arguments:a": [[1,2]],
-        "null_operation": [[2,2]]
+        "null_operation": [[2,2]],
+        "whole_span:2": [[1,2]]
       },
       "taxons": {
         "flow/null_operation": [[2,2]],
+        "metadata/sloc/2": [[1,2]],
         "subroutine/argument/no": [[1,2]],
         "subroutine/procedure": [[1,2]]
       }
@@ -150,9 +164,11 @@
         "function_argument_flavor:arg": [[1,1]],
         "function_returning_something:square": [[1,2]],
         "multiplication_operator": [[2,2]],
-        "return": [[2,2]]
+        "return": [[2,2]],
+        "whole_span:2": [[1,2]]
       },
       "taxons": {
+        "metadata/sloc/2": [[1,2]],
         "operator/arithmetic/multiplication": [[2,2]],
         "subroutine/argument/arg": [[1,1]],
         "subroutine/function": [[1,2]]
@@ -168,9 +184,11 @@
         "function_argument_flavor:arg": [[1,1]],
         "function_returning_something:square": [[1,2]],
         "literal:2": [[2,2]],
-        "return": [[2,2]]
+        "return": [[2,2]],
+        "whole_span:2": [[1,2]]
       },
       "taxons": {
+        "metadata/sloc/2": [[1,2]],
         "operator/arithmetic/power": [[2,2]],
         "subroutine/argument/arg": [[1,1]],
         "subroutine/function": [[1,2]],
@@ -184,11 +202,13 @@
         "class:Point": [[2,2]],
         "import:dataclasses:dataclass": [[1,1]],
         "import_module:dataclasses": [[1,1]],
-        "import_name:dataclass": [[1,1]]
+        "import_name:dataclass": [[1,1]],
+        "whole_span:2": [[1,2]]
       },
       "taxons": {
         "class": [[2,2]],
-        "library/standard/dataclasses/dataclass": [[1,1]]
+        "library/standard/dataclasses/dataclass": [[1,1]],
+        "metadata/sloc/2": [[1,2]]
       }
     },
     "006.32-iterate-over-list-values.py": {
@@ -201,12 +221,14 @@
         "function_call:doSomething": [[2,2]],
         "function_call_without_result:doSomething": [[2,2]],
         "loop:for": [[1,2]],
-        "loop_with_late_exit:for": [[1,2]]
+        "loop_with_late_exit:for": [[1,2]],
+        "whole_span:2": [[1,2]]
       },
       "taxons": {
         "call/function": [[2,2]],
         "flow/loop/exit/late": [[1,2]],
-        "flow/loop/for/elements": [[1,2]]
+        "flow/loop/for/elements": [[1,2]],
+        "metadata/sloc/2": [[1,2]]
       }
     },
     "007.183-iterate-over-list-indexes-and-values.py": {
@@ -224,7 +246,8 @@
         "function_call_without_result:print": [[2,2]],
         "loop:for": [[1,1],[2,2]],
         "loop_with_late_exit:for": [[1,1],[2,2]],
-        "nested_for:1": [[2,2]]
+        "nested_for:1": [[2,2]],
+        "whole_span:2": [[1,2]]
       },
       "taxons": {
         "call/function/builtin/enumerate": [[1,1]],
@@ -233,7 +256,8 @@
         "flow/loop/for": [[1,1]],
         "flow/loop/for/elements_and_indexes": [[1,2]],
         "flow/loop/for/nested/1": [[2,2]],
-        "io/standard/print": [[2,2]]
+        "io/standard/print": [[2,2]],
+        "metadata/sloc/2": [[1,2]]
       }
     },
     "008.39-initialize-a-new-map-associative-array.py": {
@@ -248,9 +272,11 @@
         "literal:2": [[1,1]],
         "literal:Dict": [[1,1]],
         "literal:Str": [[1,1],[1,1]],
-        "single_assignment:x": [[1,1]]
+        "single_assignment:x": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
+        "metadata/sloc/1": [[1,1]],
         "type/container/dictionary": [[1,1]],
         "type/elementary/number/integer": [[1,1],[1,1]],
         "type/elementary/string": [[1,1],[1,1]],
@@ -274,10 +300,12 @@
         "function_returning_nothing:__init__": [[2,5]],
         "instance_method:__init__": [[2,5]],
         "literal:None": [[4,4],[5,5]],
-        "method:__init__": [[2,5]]
+        "method:__init__": [[2,5]],
+        "whole_span:5": [[1,5]]
       },
       "taxons": {
         "class": [[1,5]],
+        "metadata/sloc/5": [[1,5]],
         "subroutine/argument/arg": [[2,2],[2,2]],
         "subroutine/method/flavor/instance": [[2,5]],
         "subroutine/method/naming/magic": [[2,5]],
@@ -304,10 +332,12 @@
         "function_argument_flavor:arg": [[2,2],[2,2],[2,2],[2,2]],
         "function_returning_nothing:__init__": [[2,5]],
         "instance_method:__init__": [[2,5]],
-        "method:__init__": [[2,5]]
+        "method:__init__": [[2,5]],
+        "whole_span:5": [[1,5]]
       },
       "taxons": {
         "class": [[1,5]],
+        "metadata/sloc/5": [[1,5]],
         "subroutine/argument/arg": [[2,2],[2,2],[2,2],[2,2]],
         "subroutine/method/flavor/instance": [[2,5]],
         "subroutine/method/naming/magic": [[2,5]],
@@ -324,11 +354,13 @@
         "import_module:random": [[1,1]],
         "method_call:shuffle": [[2,2]],
         "method_call_object:random": [[2,2]],
-        "method_call_without_result:shuffle": [[2,2]]
+        "method_call_without_result:shuffle": [[2,2]],
+        "whole_span:2": [[1,2]]
       },
       "taxons": {
-        "call/method": [[2,2]],
-        "library/standard/random": [[1,1]]
+        "call/method/shuffle": [[2,2]],
+        "library/standard/random": [[1,1]],
+        "metadata/sloc/2": [[1,2]]
       }
     },
     "010.182-shuffle-a-list.py": {
@@ -340,11 +372,13 @@
         "function_call_without_result:shuffle": [[2,2]],
         "import:random:shuffle": [[1,1]],
         "import_module:random": [[1,1]],
-        "import_name:shuffle": [[1,1]]
+        "import_name:shuffle": [[1,1]],
+        "whole_span:2": [[1,2]]
       },
       "taxons": {
         "call/function": [[2,2]],
-        "library/standard/random/shuffle": [[1,1]]
+        "library/standard/random/shuffle": [[1,1]],
+        "metadata/sloc/2": [[1,2]]
       }
     },
     "011.47-pick-a-random-element-from-a-list.py": {
@@ -356,20 +390,24 @@
         "import_module:random": [[1,1]],
         "method_call:choice": [[2,2]],
         "method_call_object:random": [[2,2]],
-        "method_call_without_result:choice": [[2,2]]
+        "method_call_without_result:choice": [[2,2]],
+        "whole_span:2": [[1,2]]
       },
       "taxons": {
-        "call/method": [[2,2]],
-        "library/standard/random": [[1,1]]
+        "call/method/choice": [[2,2]],
+        "library/standard/random": [[1,1]],
+        "metadata/sloc/2": [[1,2]]
       }
     },
     "012.181-check-if-list-contains-a-value.py": {
       "timestamp": "ignored",
       "source": "x in list",
       "labels": {
-        "comparison_operator:In": [[1,1]]
+        "comparison_operator:In": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
+        "metadata/sloc/1": [[1,1]],
         "test/belonging": [[1,1]]
       }
     },
@@ -386,15 +424,18 @@
         "loop:for": [[1,1],[2,2]],
         "loop_with_late_exit:for": [[1,1],[2,2]],
         "method_call:items": [[1,1]],
-        "nested_for:1": [[2,2]]
+        "nested_for:1": [[2,2]],
+        "whole_span:2": [[1,2]]
       },
       "taxons": {
         "call/function/builtin/print": [[2,2]],
-        "call/method/dict/items": [[1,1]],
+        "call/method/items": [[1,1]],
         "flow/loop/exit/late": [[1,1],[2,2]],
         "flow/loop/for": [[1,1]],
         "flow/loop/for/nested/1": [[2,2]],
-        "io/standard/print": [[2,2]]
+        "io/standard/print": [[2,2]],
+        "metadata/sloc/2": [[1,2]],
+        "type/container/dictionary": [[1,1]]
       }
     },
     "014.185-pick-uniformly-a-random-floating-point-number-in-ab.py": {
@@ -412,11 +453,13 @@
         "import_module:random": [[1,1]],
         "method_call:randrange": [[3,3]],
         "method_call_object:random": [[3,3]],
-        "return": [[3,3]]
+        "return": [[3,3]],
+        "whole_span:3": [[1,3]]
       },
       "taxons": {
-        "call/method": [[3,3]],
+        "call/method/randrange": [[3,3]],
         "library/standard/random": [[1,1]],
+        "metadata/sloc/3": [[1,3]],
         "subroutine/argument/arg": [[2,2],[2,2]],
         "subroutine/function": [[2,3]]
       }
@@ -431,11 +474,13 @@
         "import_module:random": [[1,1]],
         "method_call:uniform": [[2,2]],
         "method_call_object:random": [[2,2]],
-        "method_call_without_result:uniform": [[2,2]]
+        "method_call_without_result:uniform": [[2,2]],
+        "whole_span:2": [[1,2]]
       },
       "taxons": {
-        "call/method": [[2,2]],
-        "library/standard/random": [[1,1]]
+        "call/method/uniform": [[2,2]],
+        "library/standard/random": [[1,1]],
+        "metadata/sloc/2": [[1,2]]
       }
     },
     "015.184-pick-uniformly-a-random-integer-in-ab.py": {
@@ -448,11 +493,13 @@
         "import_module:random": [[1,1]],
         "method_call:randint": [[2,2]],
         "method_call_object:random": [[2,2]],
-        "method_call_without_result:randint": [[2,2]]
+        "method_call_without_result:randint": [[2,2]],
+        "whole_span:2": [[1,2]]
       },
       "taxons": {
-        "call/method": [[2,2]],
-        "library/standard/random": [[1,1]]
+        "call/method/randint": [[2,2]],
+        "library/standard/random": [[1,1]],
+        "metadata/sloc/2": [[1,2]]
       }
     },
     "016.1530-depth-first-traversing-of-a-binary-tree.py": {
@@ -479,12 +526,14 @@
         "if_without_else": [[2,3]],
         "literal:None": [[2,2]],
         "recursive_function:dfs": [[1,6]],
-        "return:None": [[3,3]]
+        "return:None": [[3,3]],
+        "whole_span:6": [[1,6]]
       },
       "taxons": {
         "call/function": [[4,4],[5,5],[6,6]],
         "flow/conditional/guard": [[2,3]],
         "flow/conditional/no_else": [[2,3]],
+        "metadata/sloc/6": [[1,6]],
         "subroutine/argument/arg": [[1,1]],
         "subroutine/procedure": [[1,6]],
         "subroutine/recursive": [[1,6]],
@@ -513,11 +562,13 @@
         "function_call:list": [[4,4]],
         "function_returning_nothing:__init__": [[2,4]],
         "instance_method:__init__": [[2,4]],
-        "method:__init__": [[2,4]]
+        "method:__init__": [[2,4]],
+        "whole_span:4": [[1,4]]
       },
       "taxons": {
         "call/function/builtin/casting/list": [[4,4]],
         "class": [[1,4]],
+        "metadata/sloc/4": [[1,4]],
         "subroutine/argument/arg": [[2,2],[2,2]],
         "subroutine/argument/vararg": [[2,2]],
         "subroutine/method/flavor/instance": [[2,4]],
@@ -549,12 +600,14 @@
         "higher_order_function:f": [[1,4]],
         "loop:for": [[3,4]],
         "loop_with_late_exit:for": [[3,4]],
-        "recursive_function:DFS": [[1,4]]
+        "recursive_function:DFS": [[1,4]],
+        "whole_span:4": [[1,4]]
       },
       "taxons": {
         "call/function": [[2,2],[4,4]],
         "flow/loop/exit/late": [[3,4]],
         "flow/loop/for/elements": [[3,4]],
+        "metadata/sloc/4": [[1,4]],
         "subroutine/argument/arg": [[1,1],[1,1]],
         "subroutine/higher_order": [[1,4]],
         "subroutine/procedure": [[1,4]],
@@ -570,10 +623,12 @@
         "assignment_rhs_atom:x": [[1,1]],
         "call_argument:x": [[1,1]],
         "function_call:reversed": [[1,1]],
-        "single_assignment:x": [[1,1]]
+        "single_assignment:x": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
         "call/function/builtin/reversed": [[1,1]],
+        "metadata/sloc/1": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
     },
@@ -590,9 +645,11 @@
         "slice:::-1": [[1,1]],
         "slice_lower:": [[1,1]],
         "slice_step:-1": [[1,1]],
-        "slice_upper:": [[1,1]]
+        "slice_upper:": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
+        "metadata/sloc/1": [[1,1]],
         "subscript/slice/step/backwards": [[1,1]],
         "type/elementary/number/integer": [[1,1]],
         "variable/assignment/single": [[1,1]]
@@ -604,10 +661,13 @@
       "labels": {
         "method_call:reverse": [[1,1]],
         "method_call_object:x": [[1,1]],
-        "method_call_without_result:reverse": [[1,1]]
+        "method_call_without_result:reverse": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
-        "call/method/sequence/list/reverse": [[1,1]]
+        "call/method/reverse": [[1,1]],
+        "metadata/sloc/1": [[1,1]],
+        "type/container/list": [[1,1]]
       }
     },
     "020.573-return-two-values.py": {
@@ -636,20 +696,23 @@
         "loop_with_late_exit:for": [[4,4]],
         "method_call:index": [[4,4]],
         "nested_for:1": [[4,4]],
-        "return": [[4,4]]
+        "return": [[4,4]],
+        "whole_span:4": [[1,4]]
       },
       "taxons": {
         "call/function/builtin/enumerate": [[2,2]],
-        "call/method/sequence/index": [[4,4]],
+        "call/method/index": [[4,4]],
         "flow/conditional/no_else": [[3,4]],
         "flow/loop/exit/early/return": [[2,2]],
         "flow/loop/exit/late": [[4,4]],
         "flow/loop/for": [[2,2]],
         "flow/loop/for/elements_and_indexes": [[2,4]],
         "flow/loop/for/nested/1": [[4,4]],
+        "metadata/sloc/4": [[1,4]],
         "subroutine/argument/arg": [[1,1],[1,1]],
         "subroutine/function": [[1,4]],
-        "test/belonging": [[3,3]]
+        "test/belonging": [[3,3]],
+        "type/container/sequence": [[4,4]]
       }
     },
     "021.84-swap-values-of-variables-a-and-b.py": {
@@ -668,9 +731,11 @@
         "update_by_assignment:a:b": [[1,1]],
         "update_by_assignment:b:a": [[1,1]],
         "update_by_assignment_with": [[1,1]],
-        "update_with": [[1,1]]
+        "update_with": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
+        "metadata/sloc/1": [[1,1]],
         "type/container/tuple/assignment/swap": [[1,1]],
         "variable/assignment/parallel/2": [[1,1]]
       }
@@ -684,10 +749,12 @@
         "assignment_rhs_atom:s": [[1,1]],
         "call_argument:s": [[1,1]],
         "function_call:int": [[1,1]],
-        "single_assignment:i": [[1,1]]
+        "single_assignment:i": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
         "call/function/builtin/casting/int": [[1,1]],
+        "metadata/sloc/1": [[1,1]],
         "type/elementary/number/integer": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
@@ -702,10 +769,13 @@
         "call_argument:x": [[1,1]],
         "literal:Str": [[1,1]],
         "method_call:format": [[1,1]],
-        "single_assignment:s": [[1,1]]
+        "single_assignment:s": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
-        "call/method/sequence/string/format": [[1,1]],
+        "call/method/format": [[1,1]],
+        "metadata/sloc/1": [[1,1]],
+        "type/container/string": [[1,1]],
         "type/elementary/string": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
@@ -717,9 +787,11 @@
         "assignment": [[1,1]],
         "assignment_lhs_identifier:s": [[1,1]],
         "literal:Str": [[1,1]],
-        "single_assignment:s": [[1,1]]
+        "single_assignment:s": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
+        "metadata/sloc/1": [[1,1]],
         "type/elementary/string": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
@@ -750,13 +822,16 @@
         "method_call_without_result:put": [[6,6]],
         "method_call_without_result:start": [[5,5]],
         "single_assignment:q": [[2,2]],
-        "single_assignment:t": [[3,3]]
+        "single_assignment:t": [[3,3]],
+        "whole_span:6": [[1,6]]
       },
       "taxons": {
         "call/function": [[3,3]],
         "call/function/without_arguments": [[2,2]],
-        "call/method": [[5,5],[6,6]],
+        "call/method/put": [[6,6]],
+        "call/method/start": [[5,5]],
         "library/third_party/Queue": [[1,1]],
+        "metadata/sloc/6": [[1,6]],
         "type/elementary/boolean/true": [[4,4]],
         "type/elementary/string": [[6,6]],
         "variable/assignment": [[4,4]],
@@ -780,10 +855,12 @@
         "comprehension_for_count:1": [[1,1],[1,1]],
         "function_call:xrange": [[1,1],[1,1]],
         "literal:0": [[1,1]],
-        "single_assignment:x": [[1,1]]
+        "single_assignment:x": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
         "call/function": [[1,1],[1,1]],
+        "metadata/sloc/1": [[1,1]],
         "type/elementary/number/integer/zero": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
@@ -808,10 +885,12 @@
         "comprehension_for_count:1": [[1,1],[1,1],[1,1]],
         "function_call:xrange": [[1,1],[1,1],[1,1]],
         "literal:0": [[1,1]],
-        "single_assignment:x": [[1,1]]
+        "single_assignment:x": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
         "call/function": [[1,1],[1,1],[1,1]],
+        "metadata/sloc/1": [[1,1]],
         "type/elementary/number/integer/zero": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
@@ -830,11 +909,13 @@
         "import:numpy": [[1,1]],
         "import_module:numpy": [[1,1]],
         "method_call:zeros": [[2,2]],
-        "single_assignment:x": [[2,2]]
+        "single_assignment:x": [[2,2]],
+        "whole_span:2": [[1,2]]
       },
       "taxons": {
-        "call/method": [[2,2]],
+        "call/method/zeros": [[2,2]],
         "library/third_party/numpy": [[1,1]],
+        "metadata/sloc/2": [[1,2]],
         "variable/assignment/single": [[2,2]]
       }
     },
@@ -855,10 +936,12 @@
         "update:items:x": [[1,1]],
         "update_by_assignment:items:x": [[1,1]],
         "update_by_assignment_with:sorted": [[1,1]],
-        "update_with:sorted": [[1,1]]
+        "update_with:sorted": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
         "call/function/builtin/sorted": [[1,1]],
+        "metadata/sloc/1": [[1,1]],
         "subroutine/argument/arg": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
@@ -867,9 +950,11 @@
       "timestamp": "ignored",
       "source": "del items[i]",
       "labels": {
-        "index:i": [[1,1]]
+        "index:i": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
+        "metadata/sloc/1": [[1,1]],
         "subscript/index": [[1,1]]
       }
     },
@@ -899,15 +984,17 @@
         "method_call_object:pool": [[4,4]],
         "method_call_without_result:apply_async": [[4,4]],
         "range:1:1001": [[3,3]],
-        "single_assignment:pool": [[2,2]]
+        "single_assignment:pool": [[2,2]],
+        "whole_span:4": [[1,4]]
       },
       "taxons": {
         "call/function/builtin/range": [[3,3]],
         "call/function/without_arguments": [[2,2]],
-        "call/method": [[4,4]],
+        "call/method/apply_async": [[4,4]],
         "flow/loop/exit/late": [[3,4]],
         "flow/loop/for/arithmetic/start": [[3,4]],
         "library/standard/multiprocessing/Pool": [[1,1]],
+        "metadata/sloc/4": [[1,4]],
         "type/elementary/number/integer": [[3,3],[3,3]],
         "variable/assignment/single": [[2,2]]
       }
@@ -936,12 +1023,14 @@
         "multiplication_operator": [[5,5]],
         "recursive_function:f": [[1,5]],
         "return": [[5,5]],
-        "return:1": [[3,3]]
+        "return:1": [[3,3]],
+        "whole_span:5": [[1,5]]
       },
       "taxons": {
         "call/function": [[5,5]],
         "flow/conditional": [[2,5]],
         "flow/conditional/else": [[5,5]],
+        "metadata/sloc/5": [[1,5]],
         "operator/arithmetic/multiplication": [[5,5]],
         "operator/arithmetic/substraction": [[5,5]],
         "subroutine/argument/arg": [[1,1]],
@@ -962,9 +1051,11 @@
         "function_argument:x": [[1,1]],
         "function_argument_flavor:arg": [[1,1],[1,1]],
         "function_returning_something:exp": [[1,2]],
-        "return": [[2,2]]
+        "return": [[2,2]],
+        "whole_span:2": [[1,2]]
       },
       "taxons": {
+        "metadata/sloc/2": [[1,2]],
         "operator/arithmetic/power": [[2,2]],
         "subroutine/argument/arg": [[1,1],[1,1]],
         "subroutine/function": [[1,2]]
@@ -991,12 +1082,16 @@
         "method_call_without_result:acquire": [[3,3]],
         "single_assignment:lock": [[2,2]],
         "single_assignment:x": [[5,5]],
-        "try": [[4,7]]
+        "try": [[4,7]],
+        "whole_span:7": [[1,7]]
       },
       "taxons": {
         "call/function": [[5,5]],
-        "call/method": [[2,2],[3,3],[7,7]],
+        "call/method/Lock": [[2,2]],
+        "call/method/acquire": [[3,3]],
+        "call/method/release": [[7,7]],
         "library/standard/threading": [[1,1]],
+        "metadata/sloc/7": [[1,7]],
         "variable/assignment/single": [[2,2],[5,5]]
       }
     },
@@ -1013,7 +1108,8 @@
         "function_call:set": [[3,3]],
         "function_call_without_arguments:T": [[3,3]],
         "null_operation": [[2,2]],
-        "single_assignment:x": [[3,3]]
+        "single_assignment:x": [[3,3]],
+        "whole_span:3": [[1,3]]
       },
       "taxons": {
         "call/composition": [[3,3]],
@@ -1021,6 +1117,7 @@
         "call/function/without_arguments": [[3,3]],
         "class": [[1,2]],
         "flow/null_operation": [[2,2]],
+        "metadata/sloc/3": [[1,3]],
         "type/container/set": [[3,3]],
         "variable/assignment/single": [[3,3]]
       }
@@ -1043,11 +1140,13 @@
         "higher_order_function:f": [[1,2]],
         "higher_order_function:g": [[1,2]],
         "lambda_function": [[2,2]],
-        "return": [[2,2]]
+        "return": [[2,2]],
+        "whole_span:2": [[1,2]]
       },
       "taxons": {
         "call/composition": [[2,2]],
         "call/function": [[2,2],[2,2]],
+        "metadata/sloc/2": [[1,2]],
         "subroutine/argument/arg": [[1,1],[1,1],[2,2]],
         "subroutine/function": [[1,2]],
         "subroutine/higher_order": [[1,2]]
@@ -1071,11 +1170,13 @@
         "higher_order_function:f": [[1,2]],
         "higher_order_function:g": [[1,2]],
         "lambda_function": [[2,2]],
-        "return": [[2,2]]
+        "return": [[2,2]],
+        "whole_span:2": [[1,2]]
       },
       "taxons": {
         "call/composition": [[2,2]],
         "call/function": [[2,2],[2,2]],
+        "metadata/sloc/2": [[1,2]],
         "subroutine/argument/arg": [[1,1],[1,1],[2,2]],
         "subroutine/function": [[1,2]],
         "subroutine/higher_order": [[1,2]]
@@ -1109,7 +1210,8 @@
         "literal:2": [[6,6]],
         "nested_function:f": [[2,5]],
         "return": [[4,4]],
-        "return:add": [[5,5]]
+        "return:add": [[5,5]],
+        "whole_span:6": [[1,6]]
       },
       "taxons": {
         "call/composition": [[6,6]],
@@ -1117,6 +1219,7 @@
         "call/function/builtin/print": [[6,6]],
         "io/standard/print": [[6,6]],
         "library/standard/functools/partial": [[1,1]],
+        "metadata/sloc/6": [[1,6]],
         "operator/arithmetic/addition": [[4,4]],
         "subroutine/argument/arg": [[2,2],[3,3]],
         "subroutine/function": [[2,5],[3,4]],
@@ -1137,9 +1240,11 @@
         "slice:i:j:": [[1,1]],
         "slice_lower:i": [[1,1]],
         "slice_step:": [[1,1]],
-        "slice_upper:j": [[1,1]]
+        "slice_upper:j": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
+        "metadata/sloc/1": [[1,1]],
         "subscript/slice/start": [[1,1]],
         "subscript/slice/stop": [[1,1]],
         "variable/assignment/single": [[1,1]]
@@ -1154,9 +1259,11 @@
         "assignment_rhs_atom:s": [[1,1]],
         "assignment_rhs_atom:word": [[1,1]],
         "comparison_operator:In": [[1,1]],
-        "single_assignment:ok": [[1,1]]
+        "single_assignment:ok": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
+        "metadata/sloc/1": [[1,1]],
         "test/belonging": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
@@ -1225,13 +1332,14 @@
         "slice:1::": [[10,10]],
         "slice_lower:1": [[10,10]],
         "slice_step:": [[10,10]],
-        "slice_upper:": [[10,10]]
+        "slice_upper:": [[10,10]],
+        "whole_span:13": [[1,13]]
       },
       "taxons": {
         "call/function": [[13,13]],
         "call/function/builtin/zip": [[10,10]],
-        "call/method": [[8,8]],
-        "call/method/set/add": [[11,11],[12,12]],
+        "call/method/add": [[11,11],[12,12]],
+        "call/method/make_path": [[8,8]],
         "class": [[2,3],[4,12]],
         "flow/loop/exit/late": [[7,8],[10,10],[12,12]],
         "flow/loop/for": [[10,10]],
@@ -1239,6 +1347,7 @@
         "flow/loop/for/nested/1": [[12,12]],
         "flow/null_operation": [[3,3]],
         "library/standard/collections/defaultdict": [[1,1]],
+        "metadata/sloc/13": [[1,13]],
         "subroutine/argument/arg": [[5,5],[9,9],[9,9]],
         "subroutine/argument/vararg": [[5,5]],
         "subroutine/method/flavor/instance": [[5,8],[9,12]],
@@ -1246,6 +1355,7 @@
         "subroutine/procedure": [[5,8],[9,12]],
         "subscript/index": [[11,11],[12,12]],
         "subscript/slice/start": [[10,10]],
+        "type/container/set": [[11,11],[12,12]],
         "type/container/tuple": [[13,13],[13,13]],
         "type/elementary/number/integer": [[10,10],[13,13],[13,13],[13,13],[13,13],[13,13],[13,13]],
         "type/elementary/number/integer/zero": [[13,13]],
@@ -1272,12 +1382,15 @@
         "slice:::-1": [[1,1]],
         "slice_lower:": [[1,1]],
         "slice_step:-1": [[1,1]],
-        "slice_upper:": [[1,1]]
+        "slice_upper:": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
-        "call/method": [[1,1]],
-        "call/method/sequence/string/encode": [[1,1]],
+        "call/method/decode": [[1,1]],
+        "call/method/encode": [[1,1]],
+        "metadata/sloc/1": [[1,1]],
         "subscript/slice/step/backwards": [[1,1]],
+        "type/container/string": [[1,1]],
         "type/elementary/number/integer": [[1,1]],
         "type/elementary/string": [[1,1],[1,1]],
         "variable/assignment/single": [[1,1]]
@@ -1296,9 +1409,11 @@
         "slice:::-1": [[1,1]],
         "slice_lower:": [[1,1]],
         "slice_step:-1": [[1,1]],
-        "slice_upper:": [[1,1]]
+        "slice_upper:": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
+        "metadata/sloc/1": [[1,1]],
         "subscript/slice/step/backwards": [[1,1]],
         "type/elementary/number/integer": [[1,1]],
         "variable/assignment/single": [[1,1]]
@@ -1330,7 +1445,8 @@
         "raise:Exception": [[5,5]],
         "try": [[2,8]],
         "try_except:Exception": [[2,8]],
-        "try_raise:Exception": [[2,8]]
+        "try_raise:Exception": [[2,8]],
+        "whole_span:8": [[1,8]]
       },
       "taxons": {
         "call/function/builtin/print": [[6,6]],
@@ -1342,6 +1458,7 @@
         "flow/loop/for/elements": [[1,8],[3,5]],
         "flow/loop/for/nested/1": [[3,5]],
         "io/standard/print": [[6,6]],
+        "metadata/sloc/8": [[1,8]],
         "test/equality": [[4,4]]
       }
     },
@@ -1364,7 +1481,8 @@
         "if_without_else": [[3,4]],
         "loop:for": [[1,5],[2,5]],
         "loop_with_late_exit:for": [[1,5],[2,5]],
-        "nested_for:1": [[2,5]]
+        "nested_for:1": [[2,5]],
+        "whole_span:5": [[1,5]]
       },
       "taxons": {
         "call/function/builtin/print": [[5,5]],
@@ -1373,6 +1491,7 @@
         "flow/loop/for/elements": [[1,5],[2,5]],
         "flow/loop/for/nested/1": [[2,5]],
         "io/standard/print": [[5,5]],
+        "metadata/sloc/5": [[1,5]],
         "test/equality": [[3,3]]
       }
     },
@@ -1423,7 +1542,8 @@
         "nested_for:1": [[3,3]],
         "nested_for:4": [[5,5]],
         "return": [[5,5]],
-        "return:None": [[6,6]]
+        "return:None": [[6,6]],
+        "whole_span:7": [[1,7]]
       },
       "taxons": {
         "call/composition": [[7,7]],
@@ -1438,6 +1558,7 @@
         "flow/loop/for/nested/1": [[3,3]],
         "flow/loop/for/nested/4": [[5,5]],
         "io/standard/print": [[7,7]],
+        "metadata/sloc/7": [[1,7]],
         "subroutine/argument/arg": [[1,1],[1,1]],
         "subroutine/function": [[1,6]],
         "test/equality": [[4,4]],
@@ -1482,7 +1603,8 @@
         "single_assignment:position": [[4,4],[8,8]],
         "try": [[3,11]],
         "try_except:BreakOuterLoop": [[3,11]],
-        "try_raise:BreakOuterLoop": [[3,11]]
+        "try_raise:BreakOuterLoop": [[3,11]],
+        "whole_span:11": [[1,11]]
       },
       "taxons": {
         "class": [[1,2]],
@@ -1493,6 +1615,7 @@
         "flow/loop/for/elements": [[5,9]],
         "flow/loop/for/nested/1": [[6,9]],
         "flow/null_operation": [[2,2],[11,11]],
+        "metadata/sloc/11": [[1,11]],
         "subscript/index": [[6,6],[7,7],[7,7]],
         "test/equality": [[7,7]],
         "type/elementary/null": [[4,4]],
@@ -1513,10 +1636,13 @@
         "update_by_method_call:s:i": [[1,1]],
         "update_by_method_call:s:x": [[1,1]],
         "update_by_method_call_with:insert": [[1,1]],
-        "update_with:insert": [[1,1]]
+        "update_with:insert": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
-        "call/method/sequence/list/insert": [[1,1]]
+        "call/method/insert": [[1,1]],
+        "metadata/sloc/1": [[1,1]],
+        "type/container/list": [[1,1]]
       }
     },
     "045.570-pause-execution-for-5-seconds.py": {
@@ -1529,11 +1655,13 @@
         "literal:5": [[2,2]],
         "method_call:sleep": [[2,2]],
         "method_call_object:time": [[2,2]],
-        "method_call_without_result:sleep": [[2,2]]
+        "method_call_without_result:sleep": [[2,2]],
+        "whole_span:2": [[1,2]]
       },
       "taxons": {
-        "call/method": [[2,2]],
+        "call/method/sleep": [[2,2]],
         "library/standard/time": [[1,1]],
+        "metadata/sloc/2": [[1,2]],
         "type/elementary/number/integer": [[2,2]]
       }
     },
@@ -1550,9 +1678,11 @@
         "slice::5:": [[1,1]],
         "slice_lower:": [[1,1]],
         "slice_step:": [[1,1]],
-        "slice_upper:5": [[1,1]]
+        "slice_upper:5": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
+        "metadata/sloc/1": [[1,1]],
         "subscript/slice/stop": [[1,1]],
         "type/elementary/number/integer": [[1,1]],
         "variable/assignment/single": [[1,1]]
@@ -1571,9 +1701,11 @@
         "slice:-5::": [[1,1]],
         "slice_lower:-5": [[1,1]],
         "slice_step:": [[1,1]],
-        "slice_upper:": [[1,1]]
+        "slice_upper:": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
+        "metadata/sloc/1": [[1,1]],
         "subscript/slice/start": [[1,1]],
         "type/elementary/number/integer": [[1,1]],
         "variable/assignment/single": [[1,1]]
@@ -1586,9 +1718,11 @@
         "assignment": [[1,1]],
         "assignment_lhs_identifier:s": [[1,1]],
         "literal:Str": [[3,3]],
-        "single_assignment:s": [[1,1]]
+        "single_assignment:s": [[1,1]],
+        "whole_span:3": [[1,3]]
       },
       "taxons": {
+        "metadata/sloc/3": [[1,3]],
         "type/elementary/string": [[3,3]],
         "variable/assignment/single": [[1,1]]
       }
@@ -1601,10 +1735,13 @@
         "assignment_lhs_identifier:chunks": [[1,1]],
         "assignment_rhs_atom:s": [[1,1]],
         "method_call:split": [[1,1]],
-        "single_assignment:chunks": [[1,1]]
+        "single_assignment:chunks": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
-        "call/method/sequence/string/split": [[1,1]],
+        "call/method/split": [[1,1]],
+        "metadata/sloc/1": [[1,1]],
+        "type/container/string": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
     },
@@ -1617,12 +1754,14 @@
         "loop:while": [[1,2]],
         "loop_with_late_exit:while": [[1,2]],
         "null_operation": [[2,2]],
-        "while": [[1,2]]
+        "while": [[1,2]],
+        "whole_span:2": [[1,2]]
       },
       "taxons": {
         "flow/loop/exit/late": [[1,2]],
         "flow/loop/while/infinite": [[1,2]],
         "flow/null_operation": [[2,2]],
+        "metadata/sloc/2": [[1,2]],
         "type/elementary/boolean/true": [[1,1]]
       }
     },
@@ -1630,9 +1769,11 @@
       "timestamp": "ignored",
       "source": "k in m",
       "labels": {
-        "comparison_operator:In": [[1,1]]
+        "comparison_operator:In": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
+        "metadata/sloc/1": [[1,1]],
         "test/belonging": [[1,1]]
       }
     },
@@ -1641,11 +1782,14 @@
       "source": "v in map.values()",
       "labels": {
         "comparison_operator:In": [[1,1]],
-        "method_call:values": [[1,1]]
+        "method_call:values": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
-        "call/method/dict/values": [[1,1]],
-        "test/belonging": [[1,1]]
+        "call/method/values": [[1,1]],
+        "metadata/sloc/1": [[1,1]],
+        "test/belonging": [[1,1]],
+        "type/container/dictionary": [[1,1]]
       }
     },
     "053.1933-join-a-list-of-strings.py": {
@@ -1663,12 +1807,15 @@
         "function_call:map": [[1,1]],
         "literal:Str": [[1,1]],
         "method_call:join": [[1,1]],
-        "single_assignment:y": [[1,1]]
+        "single_assignment:y": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
         "call/composition": [[1,1]],
         "call/function/builtin/map": [[1,1]],
-        "call/method/sequence/string/join": [[1,1]],
+        "call/method/join": [[1,1]],
+        "metadata/sloc/1": [[1,1]],
+        "type/container/string": [[1,1]],
         "type/elementary/string": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
@@ -1683,10 +1830,13 @@
         "call_argument:x": [[1,1]],
         "literal:Str": [[1,1]],
         "method_call:join": [[1,1]],
-        "single_assignment:y": [[1,1]]
+        "single_assignment:y": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
-        "call/method/sequence/string/join": [[1,1]],
+        "call/method/join": [[1,1]],
+        "metadata/sloc/1": [[1,1]],
+        "type/container/string": [[1,1]],
         "type/elementary/string": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
@@ -1700,10 +1850,12 @@
         "assignment_rhs_atom:x": [[1,1]],
         "call_argument:x": [[1,1]],
         "function_call:sum": [[1,1]],
-        "single_assignment:s": [[1,1]]
+        "single_assignment:s": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
         "call/function/builtin/sum": [[1,1]],
+        "metadata/sloc/1": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
     },
@@ -1716,11 +1868,13 @@
         "assignment_rhs_atom:i": [[1,1]],
         "call_argument:i": [[1,1]],
         "function_call:str": [[1,1]],
-        "single_assignment:s": [[1,1]]
+        "single_assignment:s": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
         "call/function/builtin/casting/str": [[1,1]],
         "call/function/builtin/str": [[1,1]],
+        "metadata/sloc/1": [[1,1]],
         "type/elementary/string": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
@@ -1753,15 +1907,17 @@
         "method_call_without_result:map": [[5,5]],
         "multiplication_operator": [[3,3]],
         "range:1:1001": [[5,5]],
-        "suggest_constant_definition": [[5,5]]
+        "suggest_constant_definition": [[5,5]],
+        "whole_span:6": [[1,6]]
       },
       "taxons": {
         "call/function": [[4,4]],
         "call/function/builtin/print": [[6,6]],
         "call/function/builtin/range": [[5,5]],
-        "call/method": [[5,5]],
+        "call/method/map": [[5,5]],
         "io/standard/print": [[6,6]],
         "library/standard/multiprocessing/Pool": [[1,1]],
+        "metadata/sloc/6": [[1,6]],
         "operator/arithmetic/multiplication": [[3,3]],
         "subroutine/argument/arg": [[2,2]],
         "subroutine/procedure": [[2,3]],
@@ -1780,10 +1936,12 @@
         "call_argument:p": [[1,1]],
         "call_argument:x": [[1,1]],
         "function_call:filter": [[1,1]],
-        "single_assignment:y": [[1,1]]
+        "single_assignment:y": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
         "call/function/builtin/filter": [[1,1]],
+        "metadata/sloc/1": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
     },
@@ -1800,10 +1958,12 @@
         "comprehension_for_count:1": [[1,1]],
         "filtered_comprehension": [[1,1]],
         "function_call:p": [[1,1]],
-        "single_assignment:y": [[1,1]]
+        "single_assignment:y": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
         "call/function": [[1,1]],
+        "metadata/sloc/1": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
     },
@@ -1817,12 +1977,14 @@
         "call_argument:f": [[1,1]],
         "function_call:open": [[1,1]],
         "method_call:read": [[1,1]],
-        "single_assignment:lines": [[1,1]]
+        "single_assignment:lines": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
         "call/function/builtin/open": [[1,1]],
-        "call/method": [[1,1]],
+        "call/method/read": [[1,1]],
         "io/file/open": [[1,1]],
+        "metadata/sloc/1": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
     },
@@ -1836,12 +1998,14 @@
         "function_call_without_result:print": [[2,2]],
         "import:sys": [[1,1]],
         "import_module:sys": [[1,1]],
-        "literal:Str": [[2,2]]
+        "literal:Str": [[2,2]],
+        "whole_span:2": [[1,2]]
       },
       "taxons": {
         "call/function/builtin/print": [[2,2]],
         "io/standard/print": [[2,2]],
         "library/standard/sys": [[1,1]],
+        "metadata/sloc/2": [[1,2]],
         "type/elementary/string": [[2,2]]
       }
     },
@@ -1857,10 +2021,12 @@
         "import_module:sys": [[1,1]],
         "index:1": [[2,2]],
         "literal:1": [[2,2]],
-        "single_assignment:x": [[2,2]]
+        "single_assignment:x": [[2,2]],
+        "whole_span:2": [[1,2]]
       },
       "taxons": {
         "library/standard/sys": [[1,1]],
+        "metadata/sloc/2": [[1,2]],
         "subscript/index": [[2,2]],
         "type/elementary/number/integer": [[2,2]],
         "variable/assignment/single": [[2,2]]
@@ -1876,11 +2042,13 @@
         "import:datetime": [[1,1]],
         "import_module:datetime": [[1,1]],
         "method_call:now": [[2,2]],
-        "single_assignment:d": [[2,2]]
+        "single_assignment:d": [[2,2]],
+        "whole_span:2": [[1,2]]
       },
       "taxons": {
-        "call/method": [[2,2]],
+        "call/method/now": [[2,2]],
         "library/standard/datetime": [[1,1]],
+        "metadata/sloc/2": [[1,2]],
         "variable/assignment/single": [[2,2]]
       }
     },
@@ -1894,10 +2062,13 @@
         "assignment_rhs_atom:y": [[1,1]],
         "call_argument:y": [[1,1]],
         "method_call:find": [[1,1]],
-        "single_assignment:i": [[1,1]]
+        "single_assignment:i": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
-        "call/method/sequence/string/find": [[1,1]],
+        "call/method/find": [[1,1]],
+        "metadata/sloc/1": [[1,1]],
+        "type/container/string": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
     },
@@ -1913,10 +2084,13 @@
         "call_argument:y": [[1,1]],
         "call_argument:z": [[1,1]],
         "method_call:replace": [[1,1]],
-        "single_assignment:x2": [[1,1]]
+        "single_assignment:x2": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
-        "call/method/sequence/string/replace": [[1,1]],
+        "call/method/replace": [[1,1]],
+        "metadata/sloc/1": [[1,1]],
+        "type/container/string": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
     },
@@ -1931,9 +2105,11 @@
         "binary_operator:Pow": [[1,1]],
         "literal:247": [[1,1]],
         "literal:3": [[1,1]],
-        "single_assignment:x": [[1,1]]
+        "single_assignment:x": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
+        "metadata/sloc/1": [[1,1]],
         "operator/arithmetic/power": [[1,1]],
         "type/elementary/number/integer": [[1,1],[1,1]],
         "variable/assignment/single": [[1,1]]
@@ -1949,10 +2125,13 @@
         "call_argument:x": [[1,1]],
         "literal:Str": [[1,1]],
         "method_call:format": [[1,1]],
-        "single_assignment:s": [[1,1]]
+        "single_assignment:s": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
-        "call/method/sequence/string/format": [[1,1]],
+        "call/method/format": [[1,1]],
+        "metadata/sloc/1": [[1,1]],
+        "type/container/string": [[1,1]],
         "type/elementary/string": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
@@ -1966,9 +2145,11 @@
         "assignment_rhs_atom:n": [[1,1]],
         "assignment_rhs_atom:x": [[1,1]],
         "binary_operator:Pow": [[1,1]],
-        "single_assignment:z": [[1,1]]
+        "single_assignment:z": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
+        "metadata/sloc/1": [[1,1]],
         "operator/arithmetic/power": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
@@ -1990,11 +2171,13 @@
         "import:math": [[1,1]],
         "import_module:math": [[1,1]],
         "method_call:factorial": [[3,3],[3,3],[3,3]],
-        "return": [[3,3]]
+        "return": [[3,3]],
+        "whole_span:3": [[1,3]]
       },
       "taxons": {
-        "call/method": [[3,3],[3,3],[3,3]],
+        "call/method/factorial": [[3,3],[3,3],[3,3]],
         "library/standard/math": [[1,1]],
+        "metadata/sloc/3": [[1,3]],
         "operator/arithmetic/integer_division": [[3,3],[3,3]],
         "operator/arithmetic/substraction": [[3,3]],
         "subroutine/argument/arg": [[2,2],[2,2]],
@@ -2022,15 +2205,17 @@
         "import_name:division": [[1,1]],
         "literal:8.0": [[3,3]],
         "method_call:ceil": [[3,3]],
-        "single_assignment:x": [[3,3]]
+        "single_assignment:x": [[3,3]],
+        "whole_span:3": [[1,3]]
       },
       "taxons": {
         "call/composition": [[3,3],[3,3]],
         "call/function/builtin/casting/bytearray": [[3,3]],
         "call/function/builtin/casting/int": [[3,3]],
-        "call/method": [[3,3]],
+        "call/method/ceil": [[3,3]],
         "library/standard/__future__/division": [[1,1]],
         "library/standard/math": [[2,2]],
+        "metadata/sloc/3": [[1,3]],
         "operator/arithmetic/division": [[3,3]],
         "type/elementary/number/floating_point": [[3,3]],
         "type/elementary/number/integer": [[3,3]],
@@ -2049,11 +2234,13 @@
         "import:random": [[1,1]],
         "import_module:random": [[1,1]],
         "method_call:Random": [[2,2]],
-        "single_assignment:rand": [[2,2]]
+        "single_assignment:rand": [[2,2]],
+        "whole_span:2": [[1,2]]
       },
       "taxons": {
-        "call/method": [[2,2]],
+        "call/method/Random": [[2,2]],
         "library/standard/random": [[1,1]],
+        "metadata/sloc/2": [[1,2]],
         "variable/assignment/single": [[2,2]]
       }
     },
@@ -2067,11 +2254,13 @@
         "import:random": [[1,1]],
         "import_module:random": [[1,1]],
         "method_call:Random": [[2,2]],
-        "single_assignment:rand": [[2,2]]
+        "single_assignment:rand": [[2,2]],
+        "whole_span:2": [[1,2]]
       },
       "taxons": {
-        "call/method": [[2,2]],
+        "call/method/Random": [[2,2]],
         "library/standard/random": [[1,1]],
+        "metadata/sloc/2": [[1,2]],
         "variable/assignment/single": [[2,2]]
       }
     },
@@ -2091,15 +2280,18 @@
         "slice:1::": [[2,2]],
         "slice_lower:1": [[2,2]],
         "slice_step:": [[2,2]],
-        "slice_upper:": [[2,2]]
+        "slice_upper:": [[2,2]],
+        "whole_span:2": [[1,2]]
       },
       "taxons": {
         "call/composition": [[2,2]],
         "call/function/builtin/print": [[2,2]],
-        "call/method/sequence/string/join": [[2,2]],
+        "call/method/join": [[2,2]],
         "io/standard/print": [[2,2]],
         "library/standard/sys": [[1,1]],
+        "metadata/sloc/2": [[1,2]],
         "subscript/slice/start": [[2,2]],
+        "type/container/string": [[2,2]],
         "type/elementary/number/integer": [[2,2]],
         "type/elementary/string": [[2,2]]
       }
@@ -2125,12 +2317,14 @@
         "if_test_atom:a_class": [[2,2]],
         "if_then_branch": [[3,3]],
         "if_without_else": [[2,3]],
-        "return": [[3,3]]
+        "return": [[3,3]],
+        "whole_span:3": [[1,3]]
       },
       "taxons": {
         "call/function": [[3,3]],
         "call/function/builtin/issubclass": [[2,2]],
         "flow/conditional/no_else": [[2,3]],
+        "metadata/sloc/3": [[1,3]],
         "subroutine/argument/arg": [[1,1],[1,1]],
         "subroutine/function": [[1,3]],
         "subroutine/higher_order": [[1,3]]
@@ -2150,11 +2344,13 @@
         "import:fractions:gcd": [[1,1]],
         "import_module:fractions": [[1,1]],
         "import_name:gcd": [[1,1]],
-        "single_assignment:x": [[2,2]]
+        "single_assignment:x": [[2,2]],
+        "whole_span:2": [[1,2]]
       },
       "taxons": {
         "call/function": [[2,2]],
         "library/standard/fractions/gcd": [[1,1]],
+        "metadata/sloc/2": [[1,2]],
         "variable/assignment/single": [[2,2]]
       }
     },
@@ -2175,11 +2371,13 @@
         "import_module:fractions": [[1,1]],
         "import_name:gcd": [[1,1]],
         "multiplication_operator": [[2,2]],
-        "single_assignment:x": [[2,2]]
+        "single_assignment:x": [[2,2]],
+        "whole_span:2": [[1,2]]
       },
       "taxons": {
         "call/function": [[2,2]],
         "library/standard/fractions/gcd": [[1,1]],
+        "metadata/sloc/2": [[1,2]],
         "operator/arithmetic/integer_division": [[2,2]],
         "operator/arithmetic/multiplication": [[2,2]],
         "variable/assignment/single": [[2,2]]
@@ -2195,10 +2393,13 @@
         "call_argument:x": [[1,1]],
         "literal:Str": [[1,1]],
         "method_call:format": [[1,1]],
-        "single_assignment:s": [[1,1]]
+        "single_assignment:s": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
-        "call/method/sequence/string/format": [[1,1]],
+        "call/method/format": [[1,1]],
+        "metadata/sloc/1": [[1,1]],
+        "type/container/string": [[1,1]],
         "type/elementary/string": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
@@ -2222,9 +2423,11 @@
         "literal:3j": [[1,1]],
         "multiplication_operator": [[2,2]],
         "single_assignment:x": [[1,1]],
-        "single_assignment:y": [[2,2]]
+        "single_assignment:y": [[2,2]],
+        "whole_span:2": [[1,2]]
       },
       "taxons": {
+        "metadata/sloc/2": [[1,2]],
         "operator/arithmetic/multiplication": [[2,2]],
         "operator/arithmetic/substraction": [[1,1]],
         "type/elementary/number/complex": [[1,1],[2,2]],
@@ -2249,13 +2452,15 @@
         "loop:while": [[1,4]],
         "loop_with_early_exit:while:break": [[1,4]],
         "unary_operator:Not": [[3,3]],
-        "while": [[1,4]]
+        "while": [[1,4]],
+        "whole_span:4": [[1,4]]
       },
       "taxons": {
         "call/function/without_arguments": [[2,2]],
         "flow/conditional/no_else": [[3,4]],
         "flow/loop/exit/early/break": [[1,4]],
         "flow/loop/while/infinite": [[1,4]],
+        "metadata/sloc/4": [[1,4]],
         "operator/boolean/not": [[3,3]],
         "type/elementary/boolean/true": [[1,1]]
       }
@@ -2269,10 +2474,12 @@
         "assignment_rhs_atom:x": [[1,1]],
         "call_argument:x": [[1,1]],
         "function_call:float": [[1,1]],
-        "single_assignment:y": [[1,1]]
+        "single_assignment:y": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
         "call/function/builtin/casting/float": [[1,1]],
+        "metadata/sloc/1": [[1,1]],
         "type/elementary/number/floating_point": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
@@ -2286,10 +2493,12 @@
         "assignment_rhs_atom:x": [[1,1]],
         "call_argument:x": [[1,1]],
         "function_call:int": [[1,1]],
-        "single_assignment:y": [[1,1]]
+        "single_assignment:y": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
         "call/function/builtin/casting/int": [[1,1]],
+        "metadata/sloc/1": [[1,1]],
         "type/elementary/number/integer": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
@@ -2307,10 +2516,12 @@
         "call_argument:": [[1,1]],
         "function_call:int": [[1,1]],
         "literal:0.5": [[1,1]],
-        "single_assignment:y": [[1,1]]
+        "single_assignment:y": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
         "call/function/builtin/casting/int": [[1,1]],
+        "metadata/sloc/1": [[1,1]],
         "operator/arithmetic/addition": [[1,1]],
         "type/elementary/number/floating_point": [[1,1]],
         "type/elementary/number/integer": [[1,1]],
@@ -2327,10 +2538,13 @@
         "assignment_rhs_atom:t": [[1,1]],
         "call_argument:t": [[1,1]],
         "method_call:count": [[1,1]],
-        "single_assignment:count": [[1,1]]
+        "single_assignment:count": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
-        "call/method/sequence/count": [[1,1]],
+        "call/method/count": [[1,1]],
+        "metadata/sloc/1": [[1,1]],
+        "type/container/sequence": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
     },
@@ -2346,11 +2560,13 @@
         "import_module:re": [[1,1]],
         "literal:Str": [[2,2]],
         "method_call:compile": [[2,2]],
-        "single_assignment:r": [[2,2]]
+        "single_assignment:r": [[2,2]],
+        "whole_span:2": [[1,2]]
       },
       "taxons": {
-        "call/method": [[2,2]],
+        "call/method/compile": [[2,2]],
         "library/standard/re": [[1,1]],
+        "metadata/sloc/2": [[1,2]],
         "type/elementary/string": [[2,2]],
         "variable/assignment/single": [[2,2]]
       }
@@ -2367,11 +2583,14 @@
         "function_call:bin": [[1,1]],
         "literal:Str": [[1,1]],
         "method_call:count": [[1,1]],
-        "single_assignment:c": [[1,1]]
+        "single_assignment:c": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
         "call/function/builtin/bin": [[1,1]],
-        "call/method/sequence/count": [[1,1]],
+        "call/method/count": [[1,1]],
+        "metadata/sloc/1": [[1,1]],
+        "type/container/sequence": [[1,1]],
         "type/elementary/string": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
@@ -2386,9 +2605,11 @@
         "function_argument_flavor:arg": [[1,1],[1,1]],
         "function_returning_something:adding_will_overflow": [[1,2]],
         "literal:False": [[2,2]],
-        "return:False": [[2,2]]
+        "return:False": [[2,2]],
+        "whole_span:2": [[1,2]]
       },
       "taxons": {
+        "metadata/sloc/2": [[1,2]],
         "subroutine/argument/arg": [[1,1],[1,1]],
         "subroutine/function": [[1,2]],
         "type/elementary/boolean/false": [[2,2]]
@@ -2404,9 +2625,11 @@
         "function_argument_flavor:arg": [[1,1],[1,1]],
         "function_returning_something:multiplyWillOverflow": [[1,2]],
         "literal:False": [[2,2]],
-        "return:False": [[2,2]]
+        "return:False": [[2,2]],
+        "whole_span:2": [[1,2]]
       },
       "taxons": {
+        "metadata/sloc/2": [[1,2]],
         "subroutine/argument/arg": [[1,1],[1,1]],
         "subroutine/function": [[1,2]],
         "type/elementary/boolean/false": [[2,2]]
@@ -2422,11 +2645,13 @@
         "literal:1": [[2,2]],
         "method_call:exit": [[2,2]],
         "method_call_object:sys": [[2,2]],
-        "method_call_without_result:exit": [[2,2]]
+        "method_call_without_result:exit": [[2,2]],
+        "whole_span:2": [[1,2]]
       },
       "taxons": {
-        "call/method": [[2,2]],
+        "call/method/exit": [[2,2]],
         "library/standard/sys": [[1,1]],
+        "metadata/sloc/2": [[1,2]],
         "type/elementary/number/integer": [[2,2]]
       }
     },
@@ -2440,10 +2665,12 @@
         "call_argument:1000000": [[1,1]],
         "function_call:bytearray": [[1,1]],
         "literal:1000000": [[1,1]],
-        "single_assignment:buf": [[1,1]]
+        "single_assignment:buf": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
         "call/function/builtin/casting/bytearray": [[1,1]],
+        "metadata/sloc/1": [[1,1]],
         "type/elementary/number/integer": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
@@ -2455,10 +2682,12 @@
         "call_argument:": [[1,1]],
         "function_call:ValueError": [[1,1]],
         "literal:Str": [[1,1]],
-        "raise:ValueError": [[1,1]]
+        "raise:ValueError": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
         "call/function": [[1,1]],
+        "metadata/sloc/1": [[1,1]],
         "type/elementary/string": [[1,1]]
       }
     },
@@ -2483,10 +2712,12 @@
         "literal:0": [[3,3]],
         "method:__init__": [[2,3]],
         "method:x": [[4,6]],
-        "return": [[6,6]]
+        "return": [[6,6]],
+        "whole_span:6": [[1,6]]
       },
       "taxons": {
         "class": [[1,6]],
+        "metadata/sloc/6": [[1,6]],
         "subroutine/argument/arg": [[2,2],[5,5]],
         "subroutine/decorated": [[4,6]],
         "subroutine/function": [[4,6]],
@@ -2512,13 +2743,15 @@
         "import_module:json": [[1,1]],
         "literal:Str": [[2,2],[2,2]],
         "method_call:load": [[3,3]],
-        "single_assignment:x": [[3,3]]
+        "single_assignment:x": [[3,3]],
+        "whole_span:3": [[1,3]]
       },
       "taxons": {
         "call/function/builtin/open": [[2,2]],
-        "call/method": [[3,3]],
+        "call/method/load": [[3,3]],
         "io/file/open": [[2,2]],
         "library/standard/json": [[1,1]],
+        "metadata/sloc/3": [[1,3]],
         "type/elementary/string": [[2,2],[2,2]],
         "variable/assignment/single": [[3,3]]
       }
@@ -2536,13 +2769,15 @@
         "literal:Str": [[2,2],[2,2]],
         "method_call:dump": [[3,3]],
         "method_call_object:json": [[3,3]],
-        "method_call_without_result:dump": [[3,3]]
+        "method_call_without_result:dump": [[3,3]],
+        "whole_span:3": [[1,3]]
       },
       "taxons": {
         "call/function/builtin/open": [[2,2]],
-        "call/method": [[3,3]],
+        "call/method/dump": [[3,3]],
         "io/file/open": [[2,2]],
         "library/standard/json": [[1,1]],
+        "metadata/sloc/3": [[1,3]],
         "type/elementary/string": [[2,2],[2,2]]
       }
     },
@@ -2561,11 +2796,13 @@
         "import:__future__:print_function": [[1,1]],
         "import_module:__future__": [[1,1]],
         "import_name:print_function": [[1,1]],
-        "return": [[3,3]]
+        "return": [[3,3]],
+        "whole_span:3": [[1,3]]
       },
       "taxons": {
         "call/function/without_arguments": [[3,3]],
         "library/standard/__future__/print_function": [[1,1]],
+        "metadata/sloc/3": [[1,3]],
         "subroutine/argument/arg": [[2,2]],
         "subroutine/function": [[2,3]],
         "subroutine/higher_order": [[2,3]]
@@ -2580,13 +2817,15 @@
         "composition": [[1,1]],
         "function_call:print": [[1,1]],
         "function_call:type": [[1,1]],
-        "function_call_without_result:print": [[1,1]]
+        "function_call_without_result:print": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
         "call/composition": [[1,1]],
         "call/function/builtin/print": [[1,1]],
         "call/function/builtin/type": [[1,1]],
-        "io/standard/print": [[1,1]]
+        "io/standard/print": [[1,1]],
+        "metadata/sloc/1": [[1,1]]
       }
     },
     "094.1864-print-type-of-variable.py": {
@@ -2595,11 +2834,13 @@
       "labels": {
         "call_argument:": [[1,1]],
         "function_call:print": [[1,1]],
-        "function_call_without_result:print": [[1,1]]
+        "function_call_without_result:print": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
         "call/function/builtin/print": [[1,1]],
-        "io/standard/print": [[1,1]]
+        "io/standard/print": [[1,1]],
+        "metadata/sloc/1": [[1,1]]
       }
     },
     "095.2140-get-file-size.py": {
@@ -2614,11 +2855,13 @@
         "import:os": [[1,1]],
         "import_module:os": [[1,1]],
         "method_call:getsize": [[2,2]],
-        "single_assignment:x": [[2,2]]
+        "single_assignment:x": [[2,2]],
+        "whole_span:2": [[1,2]]
       },
       "taxons": {
-        "call/method": [[2,2]],
+        "call/method/getsize": [[2,2]],
         "library/standard/os": [[1,1]],
+        "metadata/sloc/2": [[1,2]],
         "variable/assignment/single": [[2,2]]
       }
     },
@@ -2632,10 +2875,13 @@
         "assignment_rhs_atom:s": [[1,1]],
         "call_argument:prefix": [[1,1]],
         "method_call:startswith": [[1,1]],
-        "single_assignment:b": [[1,1]]
+        "single_assignment:b": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
-        "call/method/sequence/string/startswith": [[1,1]],
+        "call/method/startswith": [[1,1]],
+        "metadata/sloc/1": [[1,1]],
+        "type/container/string": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
     },
@@ -2649,10 +2895,13 @@
         "assignment_rhs_atom:suffix": [[1,1]],
         "call_argument:suffix": [[1,1]],
         "method_call:endswith": [[1,1]],
-        "single_assignment:b": [[1,1]]
+        "single_assignment:b": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
-        "call/method/sequence/string/endswith": [[1,1]],
+        "call/method/endswith": [[1,1]],
+        "metadata/sloc/1": [[1,1]],
+        "type/container/string": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
     },
@@ -2668,11 +2917,13 @@
         "import:datetime": [[1,1]],
         "import_module:datetime": [[1,1]],
         "method_call:fromtimestamp": [[2,2]],
-        "single_assignment:d": [[2,2]]
+        "single_assignment:d": [[2,2]],
+        "whole_span:2": [[1,2]]
       },
       "taxons": {
-        "call/method": [[2,2]],
+        "call/method/fromtimestamp": [[2,2]],
         "library/standard/datetime": [[1,1]],
+        "metadata/sloc/2": [[1,2]],
         "variable/assignment/single": [[2,2]]
       }
     },
@@ -2702,12 +2953,14 @@
         "literal:Str": [[3,3]],
         "method_call:strftime": [[3,3]],
         "single_assignment:d": [[2,2]],
-        "single_assignment:x": [[3,3]]
+        "single_assignment:x": [[3,3]],
+        "whole_span:3": [[1,3]]
       },
       "taxons": {
         "call/function": [[2,2]],
-        "call/method": [[3,3]],
+        "call/method/strftime": [[3,3]],
         "library/standard/datetime/date": [[1,1]],
+        "metadata/sloc/3": [[1,3]],
         "type/elementary/number/integer": [[2,2],[2,2],[2,2]],
         "type/elementary/string": [[3,3]],
         "variable/assignment/single": [[2,2],[3,3]]
@@ -2729,11 +2982,14 @@
         "method_call:isoformat": [[3,3]],
         "method_call:today": [[2,2]],
         "single_assignment:d": [[2,2]],
-        "single_assignment:x": [[3,3]]
+        "single_assignment:x": [[3,3]],
+        "whole_span:3": [[1,3]]
       },
       "taxons": {
-        "call/method": [[2,2],[3,3]],
+        "call/method/isoformat": [[3,3]],
+        "call/method/today": [[2,2]],
         "library/standard/datetime/date": [[1,1]],
+        "metadata/sloc/3": [[1,3]],
         "variable/assignment/single": [[2,2],[3,3]]
       }
     },
@@ -2744,10 +3000,13 @@
         "call_argument:c": [[1,1]],
         "method_call:sort": [[1,1]],
         "method_call_object:items": [[1,1]],
-        "method_call_without_result:sort": [[1,1]]
+        "method_call_without_result:sort": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
-        "call/method/sequence/list/sort": [[1,1]]
+        "call/method/sort": [[1,1]],
+        "metadata/sloc/1": [[1,1]],
+        "type/container/list": [[1,1]]
       }
     },
     "101.2172-load-from-http-get-request-into-a-string.py": {
@@ -2762,11 +3021,14 @@
         "import_module:urllib.request": [[1,1]],
         "method_call:read": [[3,3]],
         "method_call:urlopen": [[2,2]],
-        "single_assignment:s": [[3,3]]
+        "single_assignment:s": [[3,3]],
+        "whole_span:3": [[1,3]]
       },
       "taxons": {
-        "call/method": [[2,2],[3,3]],
+        "call/method/read": [[3,3]],
+        "call/method/urlopen": [[2,2]],
         "library/standard/urllib.request": [[1,1]],
+        "metadata/sloc/3": [[1,3]],
         "variable/assignment/single": [[3,3]]
       }
     },
@@ -2785,11 +3047,13 @@
         "import_module:urllib": [[1,1]],
         "literal:Str": [[2,2]],
         "method_call:urlretrieve": [[2,2]],
-        "parallel_assignment:2": [[2,2]]
+        "parallel_assignment:2": [[2,2]],
+        "whole_span:2": [[1,2]]
       },
       "taxons": {
-        "call/method": [[2,2]],
+        "call/method/urlretrieve": [[2,2]],
         "library/standard/urllib": [[1,1]],
+        "metadata/sloc/2": [[1,2]],
         "type/container/tuple/assignment": [[2,2]],
         "type/elementary/string": [[2,2]],
         "variable/assignment/parallel/2": [[2,2]]
@@ -2807,11 +3071,13 @@
         "import_module:lxml.etree": [[1,1]],
         "literal:Str": [[2,2]],
         "method_call:parse": [[2,2]],
-        "single_assignment:x": [[2,2]]
+        "single_assignment:x": [[2,2]],
+        "whole_span:2": [[1,2]]
       },
       "taxons": {
-        "call/method": [[2,2]],
+        "call/method/parse": [[2,2]],
         "library/third_party/lxml.etree": [[1,1]],
+        "metadata/sloc/2": [[1,2]],
         "type/elementary/string": [[2,2]],
         "variable/assignment/single": [[2,2]]
       }
@@ -2860,15 +3126,17 @@
         "single_assignment:b": [[4,4]],
         "single_assignment:c": [[5,5]],
         "single_assignment:ser": [[11,11]],
-        "single_assignment:tst": [[10,10]]
+        "single_assignment:tst": [[10,10]],
+        "whole_span:12": [[1,12]]
       },
       "taxons": {
         "call/function": [[10,10]],
         "call/function/builtin/print": [[12,12]],
-        "call/method": [[11,11]],
+        "call/method/serialize": [[11,11]],
         "class": [[2,9]],
         "io/standard/print": [[12,12]],
         "library/third_party/pyxser": [[1,1]],
+        "metadata/sloc/12": [[1,12]],
         "subroutine/argument/arg": [[6,6],[6,6],[6,6],[6,6]],
         "subroutine/method/flavor/instance": [[6,9]],
         "subroutine/method/naming/magic": [[6,9]],
@@ -2891,10 +3159,12 @@
         "import_module:sys": [[1,1]],
         "index:0": [[2,2]],
         "literal:0": [[2,2]],
-        "single_assignment:s": [[2,2]]
+        "single_assignment:s": [[2,2]],
+        "whole_span:2": [[1,2]]
       },
       "taxons": {
         "library/standard/sys": [[1,1]],
+        "metadata/sloc/2": [[1,2]],
         "subscript/index": [[2,2]],
         "type/elementary/number/integer/zero": [[2,2]],
         "variable/assignment/single": [[2,2]]
@@ -2910,11 +3180,13 @@
         "import:os": [[1,1]],
         "import_module:os": [[1,1]],
         "method_call:getcwd": [[2,2]],
-        "single_assignment:dir": [[2,2]]
+        "single_assignment:dir": [[2,2]],
+        "whole_span:2": [[1,2]]
       },
       "taxons": {
-        "call/method": [[2,2]],
+        "call/method/getcwd": [[2,2]],
         "library/standard/os": [[1,1]],
+        "metadata/sloc/2": [[1,2]],
         "variable/assignment/single": [[2,2]]
       }
     },
@@ -2933,12 +3205,15 @@
         "import_module:os": [[1,1]],
         "method_call:abspath": [[2,2]],
         "method_call:dirname": [[2,2]],
-        "single_assignment:dir": [[2,2]]
+        "single_assignment:dir": [[2,2]],
+        "whole_span:2": [[1,2]]
       },
       "taxons": {
         "call/composition": [[2,2]],
-        "call/method": [[2,2],[2,2]],
+        "call/method/abspath": [[2,2]],
+        "call/method/dirname": [[2,2]],
         "library/standard/os": [[1,1]],
+        "metadata/sloc/2": [[1,2]],
         "variable/assignment/single": [[2,2]]
       }
     },
@@ -2956,6 +3231,7 @@
         "if_then_branch": [[2,2]],
         "if_without_else": [[1,2]],
         "literal:Str": [[1,1]],
+        "whole_span:2": [[1,2]],
         "yoda_comparison:In": [[1,1]]
       },
       "taxons": {
@@ -2964,6 +3240,7 @@
         "call/function/without_arguments": [[1,1]],
         "flow/conditional/no_else": [[1,2]],
         "io/standard/print": [[2,2]],
+        "metadata/sloc/2": [[1,2]],
         "test/belonging": [[1,1]],
         "type/elementary/string": [[1,1]]
       }
@@ -2980,11 +3257,13 @@
         "import:pympler.asizeof": [[1,1]],
         "import_module:pympler.asizeof": [[1,1]],
         "method_call:asizeof": [[2,2]],
-        "single_assignment:n": [[2,2]]
+        "single_assignment:n": [[2,2]],
+        "whole_span:2": [[1,2]]
       },
       "taxons": {
-        "call/method": [[2,2]],
+        "call/method/asizeof": [[2,2]],
         "library/third_party/pympler.asizeof": [[1,1]],
+        "metadata/sloc/2": [[1,2]],
         "variable/assignment/single": [[2,2]]
       }
     },
@@ -2999,11 +3278,14 @@
         "empty_literal:Str": [[1,1]],
         "literal:Str": [[1,1]],
         "method_call:strip": [[1,1]],
-        "single_assignment:blank": [[1,1]]
+        "single_assignment:blank": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
-        "call/method/sequence/string/strip": [[1,1]],
+        "call/method/strip": [[1,1]],
+        "metadata/sloc/1": [[1,1]],
         "test/equality": [[1,1]],
+        "type/container/string": [[1,1]],
         "type/elementary/string/empty": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
@@ -3019,11 +3301,13 @@
         "literal:Str": [[2,2],[2,2],[2,2]],
         "method_call:call": [[2,2]],
         "method_call_object:subprocess": [[2,2]],
-        "method_call_without_result:call": [[2,2]]
+        "method_call_without_result:call": [[2,2]],
+        "whole_span:2": [[1,2]]
       },
       "taxons": {
-        "call/method": [[2,2]],
+        "call/method/call": [[2,2]],
         "library/standard/subprocess": [[1,1]],
+        "metadata/sloc/2": [[1,2]],
         "type/container/list": [[2,2]],
         "type/elementary/string": [[2,2],[2,2],[2,2]]
       }
@@ -3040,7 +3324,8 @@
         "function_call_without_result:print": [[2,2]],
         "index:k": [[2,2]],
         "loop:for": [[1,2]],
-        "loop_with_late_exit:for": [[1,2]]
+        "loop_with_late_exit:for": [[1,2]],
+        "whole_span:2": [[1,2]]
       },
       "taxons": {
         "call/function/builtin/print": [[2,2]],
@@ -3048,6 +3333,7 @@
         "flow/loop/exit/late": [[1,2]],
         "flow/loop/for": [[1,2]],
         "io/standard/print": [[2,2]],
+        "metadata/sloc/2": [[1,2]],
         "subscript/index": [[2,2]]
       }
     },
@@ -3069,17 +3355,20 @@
         "loop:for": [[1,1],[2,2]],
         "loop_with_late_exit:for": [[1,1],[2,2]],
         "method_call:items": [[1,1]],
-        "nested_for:1": [[2,2]]
+        "nested_for:1": [[2,2]],
+        "whole_span:2": [[1,2]]
       },
       "taxons": {
         "call/composition": [[1,1]],
         "call/function/builtin/print": [[2,2]],
         "call/function/builtin/sorted": [[1,1]],
-        "call/method/dict/items": [[1,1]],
+        "call/method/items": [[1,1]],
         "flow/loop/exit/late": [[1,1],[2,2]],
         "flow/loop/for": [[1,1]],
         "flow/loop/for/nested/1": [[2,2]],
-        "io/standard/print": [[2,2]]
+        "io/standard/print": [[2,2]],
+        "metadata/sloc/2": [[1,2]],
+        "type/container/dictionary": [[1,1]]
       }
     },
     "114.2273-test-deep-equality.py": {
@@ -3091,9 +3380,11 @@
         "assignment_rhs_atom:x": [[1,1]],
         "assignment_rhs_atom:y": [[1,1]],
         "comparison_operator:Eq": [[1,1]],
-        "single_assignment:b": [[1,1]]
+        "single_assignment:b": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
+        "metadata/sloc/1": [[1,1]],
         "test/equality": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
@@ -3109,10 +3400,12 @@
         "comparison_operator:Lt": [[2,2]],
         "import:datetime": [[1,1]],
         "import_module:datetime": [[1,1]],
-        "single_assignment:b": [[2,2]]
+        "single_assignment:b": [[2,2]],
+        "whole_span:2": [[1,2]]
       },
       "taxons": {
         "library/standard/datetime": [[1,1]],
+        "metadata/sloc/2": [[1,2]],
         "test/inequality": [[2,2]],
         "variable/assignment/single": [[2,2]]
       }
@@ -3130,10 +3423,13 @@
         "empty_literal:Str": [[1,1]],
         "literal:Str": [[1,1]],
         "method_call:replace": [[1,1]],
-        "single_assignment:s2": [[1,1]]
+        "single_assignment:s2": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
-        "call/method/sequence/string/replace": [[1,1]],
+        "call/method/replace": [[1,1]],
+        "metadata/sloc/1": [[1,1]],
+        "type/container/string": [[1,1]],
         "type/elementary/string/empty": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
@@ -3147,10 +3443,12 @@
         "assignment_rhs_atom:x": [[1,1]],
         "call_argument:x": [[1,1]],
         "function_call:len": [[1,1]],
-        "single_assignment:n": [[1,1]]
+        "single_assignment:n": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
         "call/function/builtin/len": [[1,1]],
+        "metadata/sloc/1": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
     },
@@ -3163,10 +3461,12 @@
         "assignment_rhs_atom:x": [[1,1]],
         "call_argument:x": [[1,1]],
         "function_call:set": [[1,1]],
-        "single_assignment:y": [[1,1]]
+        "single_assignment:y": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
         "call/function/builtin/casting/set": [[1,1]],
+        "metadata/sloc/1": [[1,1]],
         "type/container/set": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
@@ -3177,10 +3477,12 @@
       "labels": {
         "call_argument:x": [[1,1]],
         "function_call:set": [[1,1]],
-        "function_call_without_result:set": [[1,1]]
+        "function_call_without_result:set": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
         "call/function/builtin/casting/set": [[1,1]],
+        "metadata/sloc/1": [[1,1]],
         "type/container/set": [[1,1]]
       }
     },
@@ -3196,12 +3498,14 @@
         "composition": [[1,1]],
         "function_call:list": [[1,1]],
         "function_call:set": [[1,1]],
-        "single_assignment:x": [[1,1]]
+        "single_assignment:x": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
         "call/composition": [[1,1]],
         "call/function/builtin/casting/list": [[1,1]],
         "call/function/builtin/casting/set": [[1,1]],
+        "metadata/sloc/1": [[1,1]],
         "type/container/list": [[1,1]],
         "type/container/set": [[1,1]],
         "variable/assignment/single": [[1,1]]
@@ -3255,23 +3559,26 @@
         "update_by_method_call_with:add": [[6,6]],
         "update_by_method_call_with:append": [[7,7]],
         "update_with:add": [[6,6]],
-        "update_with:append": [[7,7]]
+        "update_with:append": [[7,7]],
+        "whole_span:8": [[1,8]]
       },
       "taxons": {
         "call/function/builtin/casting/set": [[2,2]],
         "call/function/builtin/print": [[8,8]],
         "call/function/without_arguments": [[2,2]],
-        "call/method/sequence/list/append": [[7,7]],
-        "call/method/set/add": [[6,6]],
+        "call/method/add": [[6,6]],
+        "call/method/append": [[7,7]],
         "flow/conditional/no_else": [[5,7]],
         "flow/loop/exit/late": [[4,7]],
         "flow/loop/for/elements": [[4,7]],
         "io/standard/print": [[8,8]],
+        "metadata/sloc/8": [[1,8]],
         "pattern/elements/accumulate/in_list/filtered": [[4,7]],
         "pattern/elements/accumulate/in_set/filtered": [[4,7]],
         "test/belonging/not": [[5,5]],
-        "type/container/list": [[1,1]],
+        "type/container/list": [[1,1],[7,7]],
         "type/container/list/empty": [[3,3]],
+        "type/container/set": [[6,6]],
         "type/container/set/empty": [[2,2]],
         "type/elementary/string": [[1,1],[1,1],[1,1],[1,1]],
         "variable/assignment/single": [[1,1],[2,2],[3,3]]
@@ -3288,12 +3595,14 @@
         "function_call:int": [[1,1]],
         "function_call:raw_input": [[1,1]],
         "literal:Str": [[1,1]],
-        "single_assignment:input_var": [[1,1]]
+        "single_assignment:input_var": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
         "call/composition": [[1,1]],
         "call/function": [[1,1]],
         "call/function/builtin/casting/int": [[1,1]],
+        "metadata/sloc/1": [[1,1]],
         "type/elementary/number/integer": [[1,1]],
         "type/elementary/string": [[1,1]],
         "variable/assignment/single": [[1,1]]
@@ -3335,15 +3644,19 @@
         "single_assignment:UDP_IP": [[2,2]],
         "single_assignment:sock": [[3,3]],
         "suggest_constant_definition": [[6,6]],
-        "while": [[5,7]]
+        "while": [[5,7]],
+        "whole_span:7": [[1,7]]
       },
       "taxons": {
         "call/function/builtin/print": [[7,7]],
-        "call/method": [[3,3],[4,4],[6,6]],
+        "call/method/bind": [[4,4]],
+        "call/method/recvfrom": [[6,6]],
+        "call/method/socket": [[3,3]],
         "flow/loop/exit/late": [[5,7]],
         "flow/loop/while/infinite": [[5,7]],
         "io/standard/print": [[7,7]],
         "library/standard/socket": [[1,1]],
+        "metadata/sloc/7": [[1,7]],
         "type/container/tuple/assignment": [[6,6]],
         "type/elementary/boolean/true": [[5,5]],
         "type/elementary/number/integer": [[6,6]],
@@ -3369,11 +3682,13 @@
         "literal:4": [[2,2]],
         "parallel_assignment:4": [[2,2]],
         "range:4": [[2,2]],
-        "suggest_constant_definition": [[2,2]]
+        "suggest_constant_definition": [[2,2]],
+        "whole_span:2": [[1,2]]
       },
       "taxons": {
         "call/function/builtin/range": [[2,2]],
         "class": [[1,2]],
+        "metadata/sloc/2": [[1,2]],
         "type/container/tuple/assignment": [[2,2]],
         "type/elementary/number/integer": [[2,2]],
         "variable/assignment/constant": [[2,2],[2,2],[2,2],[2,2]],
@@ -3408,11 +3723,13 @@
         "single_assignment:DIAMONDS": [[5,5]],
         "single_assignment:HEARTS": [[4,4]],
         "single_assignment:SPADES": [[3,3]],
-        "suggest_constant_definition": [[5,5],[6,6]]
+        "suggest_constant_definition": [[5,5],[6,6]],
+        "whole_span:6": [[1,6]]
       },
       "taxons": {
         "class": [[2,6]],
         "library/standard/enum/Enum": [[1,1]],
+        "metadata/sloc/6": [[1,6]],
         "type/elementary/number/integer": [[3,3],[4,4],[5,5],[6,6]],
         "variable/assignment/constant": [[3,3],[4,4],[5,5],[6,6]],
         "variable/assignment/single": [[3,3],[4,4],[5,5],[6,6]]
@@ -3422,10 +3739,12 @@
       "timestamp": "ignored",
       "source": "assert isConsistent",
       "labels": {
-        "assertion": [[1,1]]
+        "assertion": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
-        "flow/assertion": [[1,1]]
+        "flow/assertion": [[1,1]],
+        "metadata/sloc/1": [[1,1]]
       }
     },
     "124.2152-binary-search-for-a-value-in-sorted-array.py": {
@@ -3455,12 +3774,14 @@
         "literal:-1": [[4,4]],
         "method_call:bisect_left": [[3,3]],
         "return": [[4,4]],
-        "single_assignment:i": [[3,3]]
+        "single_assignment:i": [[3,3]],
+        "whole_span:4": [[1,4]]
       },
       "taxons": {
         "call/function/builtin/len": [[4,4]],
-        "call/method": [[3,3]],
+        "call/method/bisect_left": [[3,3]],
         "library/standard/bisect": [[1,1]],
+        "metadata/sloc/4": [[1,4]],
         "operator/boolean/and": [[4,4]],
         "operator/ternary": [[4,4]],
         "subroutine/argument/arg": [[2,2],[2,2]],
@@ -3492,14 +3813,16 @@
         "literal:Str": [[5,5]],
         "method_call:perf_counter": [[2,2],[4,4]],
         "single_assignment:t1": [[2,2]],
-        "single_assignment:t2": [[4,4]]
+        "single_assignment:t2": [[4,4]],
+        "whole_span:5": [[1,5]]
       },
       "taxons": {
         "call/function/builtin/print": [[5,5]],
         "call/function/without_arguments": [[3,3]],
-        "call/method": [[2,2],[4,4]],
+        "call/method/perf_counter": [[2,2],[4,4]],
         "io/standard/print": [[5,5]],
         "library/standard/time": [[1,1]],
+        "metadata/sloc/5": [[1,5]],
         "operator/arithmetic/substraction": [[5,5]],
         "type/elementary/string": [[5,5]],
         "variable/assignment/single": [[2,2],[4,4]]
@@ -3515,9 +3838,11 @@
         "literal:Str": [[2,2]],
         "literal:True": [[2,2]],
         "literal:Tuple": [[2,2]],
-        "return": [[2,2]]
+        "return": [[2,2]],
+        "whole_span:2": [[1,2]]
       },
       "taxons": {
+        "metadata/sloc/2": [[1,2]],
         "subroutine/argument/no": [[1,2]],
         "subroutine/function": [[1,2]],
         "type/container/tuple": [[2,2]],
@@ -3538,11 +3863,13 @@
         "literal:Str": [[2,2],[2,2]],
         "method_call:load_module": [[2,2]],
         "method_call_object:imp": [[2,2]],
-        "single_assignment:foo": [[2,2]]
+        "single_assignment:foo": [[2,2]],
+        "whole_span:2": [[1,2]]
       },
       "taxons": {
-        "call/method": [[2,2]],
+        "call/method/load_module": [[2,2]],
         "library/standard/imp": [[1,1]],
+        "metadata/sloc/2": [[1,2]],
         "type/elementary/string": [[2,2],[2,2]],
         "variable/assignment/single": [[2,2]]
       }
@@ -3593,20 +3920,23 @@
         "update_by_method_call:Q:n": [[9,9]],
         "update_by_method_call_with:append": [[9,9]],
         "update_with:append": [[9,9]],
-        "while": [[3,9]]
+        "while": [[3,9]],
+        "whole_span:9": [[1,9]]
       },
       "taxons": {
         "call/function": [[5,5]],
-        "call/method/sequence/list/append": [[9,9]],
-        "call/method/set_or_list/pop": [[4,4]],
+        "call/method/append": [[9,9]],
+        "call/method/pop": [[4,4]],
         "flow/conditional/no_else": [[7,9]],
         "flow/loop/exit/late": [[3,9],[6,9]],
         "flow/loop/for/elements": [[6,9]],
         "flow/loop/while": [[3,9]],
+        "metadata/sloc/9": [[1,9]],
         "operator/boolean/not": [[7,7]],
         "subroutine/argument/arg": [[1,1],[1,1]],
         "subroutine/higher_order": [[1,9]],
         "subroutine/procedure": [[1,9]],
+        "type/container/list": [[9,9]],
         "type/elementary/boolean/true": [[8,8]],
         "type/elementary/number/integer/zero": [[4,4]],
         "variable/assignment": [[8,8]],
@@ -3662,22 +3992,26 @@
         "update_by_method_call:seen:vertex": [[8,8]],
         "update_by_method_call_with:add": [[8,8]],
         "update_with:add": [[8,8]],
-        "while": [[5,9]]
+        "while": [[5,9]],
+        "whole_span:9": [[1,9]]
       },
       "taxons": {
         "call/function": [[4,4],[7,7]],
         "call/function/builtin/casting/set": [[3,3]],
         "call/function/without_arguments": [[3,3]],
-        "call/method": [[6,6]],
-        "call/method/sequence/list/extend": [[9,9]],
-        "call/method/set/add": [[8,8]],
+        "call/method/add": [[8,8]],
+        "call/method/extend": [[9,9]],
+        "call/method/popleft": [[6,6]],
         "flow/loop/exit/late": [[5,9]],
         "flow/loop/while": [[5,9]],
         "library/standard/collections/deque": [[1,1]],
+        "metadata/sloc/9": [[1,9]],
         "subroutine/argument/arg": [[2,2],[2,2]],
         "subroutine/higher_order": [[2,9]],
         "subroutine/procedure": [[2,9]],
         "test/belonging/not": [[9,9]],
+        "type/container/list": [[9,9]],
+        "type/container/set": [[8,8]],
         "type/container/set/empty": [[3,3]],
         "variable/assignment/single": [[3,3],[4,4],[6,6]]
       }
@@ -3726,21 +4060,25 @@
         "update_by_method_call:seen:vertex": [[7,7]],
         "update_by_method_call_with:add": [[7,7]],
         "update_with:add": [[7,7]],
-        "while": [[4,8]]
+        "while": [[4,8]],
+        "whole_span:8": [[1,8]]
       },
       "taxons": {
         "call/function": [[6,6]],
         "call/function/builtin/casting/set": [[2,2]],
         "call/function/without_arguments": [[2,2]],
-        "call/method/sequence/list/extend": [[8,8]],
-        "call/method/set/add": [[7,7]],
-        "call/method/set_or_list/pop": [[5,5]],
+        "call/method/add": [[7,7]],
+        "call/method/extend": [[8,8]],
+        "call/method/pop": [[5,5]],
         "flow/loop/exit/late": [[4,8]],
         "flow/loop/while": [[4,8]],
+        "metadata/sloc/8": [[1,8]],
         "subroutine/argument/arg": [[1,1],[1,1]],
         "subroutine/higher_order": [[1,8]],
         "subroutine/procedure": [[1,8]],
         "test/belonging/not": [[8,8]],
+        "type/container/list": [[8,8]],
+        "type/container/set": [[7,7]],
         "type/container/set/empty": [[2,2]],
         "variable/assignment/single": [[2,2],[3,3],[5,5]]
       }
@@ -3750,9 +4088,11 @@
       "source": "f1 if c1 else f2 if c2 else f3 if c3 else None",
       "labels": {
         "conditional_expression": [[1,1],[1,1],[1,1]],
-        "literal:None": [[1,1]]
+        "literal:None": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
+        "metadata/sloc/1": [[1,1]],
         "operator/ternary": [[1,1],[1,1],[1,1]],
         "type/elementary/null": [[1,1]]
       }
@@ -3772,12 +4112,14 @@
         "function_call_without_result:f3": [[6,6]],
         "if": [[1,6],[3,6],[5,6]],
         "if_elif_branch": [[4,4],[6,6]],
-        "if_then_branch": [[2,2]]
+        "if_then_branch": [[2,2]],
+        "whole_span:6": [[1,6]]
       },
       "taxons": {
         "call/function/without_arguments": [[2,2],[4,4],[6,6]],
         "flow/conditional": [[1,6],[3,6],[5,6]],
-        "flow/conditional/else/if": [[4,4],[6,6]]
+        "flow/conditional/else/if": [[4,4],[6,6]],
+        "metadata/sloc/6": [[1,6]]
       }
     },
     "132.2040-measure-duration-of-procedure-execution.py": {
@@ -3792,11 +4134,13 @@
         "import_module:timeit": [[1,1]],
         "literal:Str": [[2,2],[2,2]],
         "method_call:timeit": [[2,2]],
-        "single_assignment:duration": [[2,2]]
+        "single_assignment:duration": [[2,2]],
+        "whole_span:2": [[1,2]]
       },
       "taxons": {
-        "call/method": [[2,2]],
+        "call/method/timeit": [[2,2]],
         "library/standard/timeit": [[1,1]],
+        "metadata/sloc/2": [[1,2]],
         "type/elementary/string": [[2,2],[2,2]],
         "variable/assignment/single": [[2,2]]
       }
@@ -3811,11 +4155,14 @@
         "assignment_rhs_atom:word": [[1,1]],
         "comparison_operator:In": [[1,1]],
         "method_call:lower": [[1,1],[1,1]],
-        "single_assignment:ok": [[1,1]]
+        "single_assignment:ok": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
-        "call/method/sequence/string/lower": [[1,1],[1,1]],
+        "call/method/lower": [[1,1],[1,1]],
+        "metadata/sloc/1": [[1,1]],
         "test/belonging": [[1,1]],
+        "type/container/string": [[1,1],[1,1]],
         "variable/assignment/single": [[1,1]]
       }
     },
@@ -3828,9 +4175,11 @@
         "assignment_rhs_atom:a": [[1,1]],
         "assignment_rhs_atom:b": [[1,1]],
         "assignment_rhs_atom:c": [[1,1]],
-        "single_assignment:items": [[1,1]]
+        "single_assignment:items": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
+        "metadata/sloc/1": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
     },
@@ -3845,10 +4194,12 @@
         "update:items:x": [[1,1]],
         "update_by_method_call:items:x": [[1,1]],
         "update_by_method_call_with:remove": [[1,1]],
-        "update_with:remove": [[1,1]]
+        "update_with:remove": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
-        "call/method/set_or_list/remove": [[1,1]]
+        "call/method/remove": [[1,1]],
+        "metadata/sloc/1": [[1,1]]
       }
     },
     "136.2141-remove-all-occurrences-of-a-value-from-a-list.py": {
@@ -3864,9 +4215,11 @@
         "comprehension:List": [[1,1]],
         "comprehension_for_count:1": [[1,1]],
         "filtered_comprehension": [[1,1]],
-        "single_assignment:newlist": [[1,1]]
+        "single_assignment:newlist": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
+        "metadata/sloc/1": [[1,1]],
         "test/equality/not": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
@@ -3879,10 +4232,13 @@
         "assignment_lhs_identifier:b": [[1,1]],
         "assignment_rhs_atom:s": [[1,1]],
         "method_call:isdigit": [[1,1]],
-        "single_assignment:b": [[1,1]]
+        "single_assignment:b": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
-        "call/method/sequence/string/isdigit": [[1,1]],
+        "call/method/isdigit": [[1,1]],
+        "metadata/sloc/1": [[1,1]],
+        "type/container/string": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
     },
@@ -3896,11 +4252,13 @@
         "import:tempfile": [[1,1]],
         "import_module:tempfile": [[1,1]],
         "method_call:TemporaryFile": [[2,2]],
-        "single_assignment:file": [[2,2]]
+        "single_assignment:file": [[2,2]],
+        "whole_span:2": [[1,2]]
       },
       "taxons": {
-        "call/method": [[2,2]],
+        "call/method/TemporaryFile": [[2,2]],
         "library/standard/tempfile": [[1,1]],
+        "metadata/sloc/2": [[1,2]],
         "variable/assignment/single": [[2,2]]
       }
     },
@@ -3914,11 +4272,13 @@
         "import:tempfile": [[1,1]],
         "import_module:tempfile": [[1,1]],
         "method_call:TemporaryDirectory": [[2,2]],
-        "single_assignment:td": [[2,2]]
+        "single_assignment:td": [[2,2]],
+        "whole_span:2": [[1,2]]
       },
       "taxons": {
-        "call/method": [[2,2]],
+        "call/method/TemporaryDirectory": [[2,2]],
         "library/standard/tempfile": [[1,1]],
+        "metadata/sloc/2": [[1,2]],
         "variable/assignment/single": [[2,2]]
       }
     },
@@ -3937,10 +4297,12 @@
         "update_by_method_call:m:None": [[1,1]],
         "update_by_method_call:m:k": [[1,1]],
         "update_by_method_call_with:pop": [[1,1]],
-        "update_with:pop": [[1,1]]
+        "update_with:pop": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
-        "call/method/set_or_list/pop": [[1,1]],
+        "call/method/pop": [[1,1]],
+        "metadata/sloc/1": [[1,1]],
         "type/elementary/null": [[1,1]]
       }
     },
@@ -3955,13 +4317,15 @@
         "function_call:print": [[2,2]],
         "function_call_without_result:print": [[2,2]],
         "loop:for": [[1,2]],
-        "loop_with_late_exit:for": [[1,2]]
+        "loop_with_late_exit:for": [[1,2]],
+        "whole_span:2": [[1,2]]
       },
       "taxons": {
         "call/function/builtin/print": [[2,2]],
         "flow/loop/exit/late": [[1,2]],
         "flow/loop/for": [[1,2]],
         "io/standard/print": [[2,2]],
+        "metadata/sloc/2": [[1,2]],
         "operator/arithmetic/addition": [[1,1]]
       }
     },
@@ -3974,10 +4338,12 @@
         "assignment_rhs_atom:x": [[1,1]],
         "call_argument:x": [[1,1]],
         "function_call:hex": [[1,1]],
-        "single_assignment:s": [[1,1]]
+        "single_assignment:s": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
         "call/function/builtin/hex": [[1,1]],
+        "metadata/sloc/1": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
     },
@@ -3993,14 +4359,16 @@
         "function_call:zip": [[1,1]],
         "function_call_without_result:print": [[2,2]],
         "loop:for": [[1,2]],
-        "loop_with_late_exit:for": [[1,2]]
+        "loop_with_late_exit:for": [[1,2]],
+        "whole_span:2": [[1,2]]
       },
       "taxons": {
         "call/function/builtin/print": [[2,2]],
         "call/function/builtin/zip": [[1,1]],
         "flow/loop/exit/late": [[1,2]],
         "flow/loop/for": [[1,2]],
-        "io/standard/print": [[2,2]]
+        "io/standard/print": [[2,2]],
+        "metadata/sloc/2": [[1,2]]
       }
     },
     "144.2145-check-if-file-exists.py": {
@@ -4015,11 +4383,13 @@
         "import:os": [[1,1]],
         "import_module:os": [[1,1]],
         "method_call:exists": [[2,2]],
-        "single_assignment:b": [[2,2]]
+        "single_assignment:b": [[2,2]],
+        "whole_span:2": [[1,2]]
       },
       "taxons": {
-        "call/method": [[2,2]],
+        "call/method/exists": [[2,2]],
         "library/standard/os": [[1,1]],
+        "metadata/sloc/2": [[1,2]],
         "variable/assignment/single": [[2,2]]
       }
     },
@@ -4036,12 +4406,14 @@
         "import_module:pathlib": [[1,1]],
         "import_name:Path": [[1,1]],
         "method_call:exists": [[2,2]],
-        "single_assignment:b": [[2,2]]
+        "single_assignment:b": [[2,2]],
+        "whole_span:2": [[1,2]]
       },
       "taxons": {
         "call/function": [[2,2]],
-        "call/method": [[2,2]],
+        "call/method/exists": [[2,2]],
         "library/standard/pathlib/Path": [[1,1]],
+        "metadata/sloc/2": [[1,2]],
         "variable/assignment/single": [[2,2]]
       }
     },
@@ -4066,12 +4438,16 @@
         "method_call_object:logging": [[2,2]],
         "method_call_without_result:basicConfig": [[2,2]],
         "method_call_without_result:info": [[6,6]],
-        "single_assignment:logger": [[5,5]]
+        "single_assignment:logger": [[5,5]],
+        "whole_span:6": [[1,6]]
       },
       "taxons": {
-        "call/method": [[2,2],[5,5],[6,6]],
+        "call/method/basicConfig": [[2,2]],
+        "call/method/getLogger": [[5,5]],
+        "call/method/info": [[6,6]],
         "library/standard/logging": [[1,1]],
         "library/standard/sys": [[1,1]],
+        "metadata/sloc/6": [[1,6]],
         "type/elementary/string": [[3,3],[5,5]],
         "variable/assignment/single": [[5,5]]
       }
@@ -4096,11 +4472,14 @@
         "method_call_object:locale": [[3,3]],
         "method_call_without_result:setlocale": [[3,3]],
         "single_assignment:f": [[4,4]],
-        "single_assignment:s": [[2,2]]
+        "single_assignment:s": [[2,2]],
+        "whole_span:4": [[1,4]]
       },
       "taxons": {
-        "call/method": [[3,3],[4,4]],
+        "call/method/atof": [[4,4]],
+        "call/method/setlocale": [[3,3]],
         "library/standard/locale": [[1,1]],
+        "metadata/sloc/4": [[1,4]],
         "type/elementary/string": [[2,2],[3,3]],
         "variable/assignment/single": [[2,2],[4,4]]
       }
@@ -4114,10 +4493,12 @@
         "assignment_rhs_atom:s": [[1,1]],
         "call_argument:s": [[1,1]],
         "function_call:float": [[1,1]],
-        "single_assignment:f": [[1,1]]
+        "single_assignment:f": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
         "call/function/builtin/casting/float": [[1,1]],
+        "metadata/sloc/1": [[1,1]],
         "type/elementary/number/floating_point": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
@@ -4129,10 +4510,12 @@
         "call_argument:": [[1,1]],
         "function_call:float": [[1,1]],
         "function_call_without_result:float": [[1,1]],
-        "literal:Str": [[1,1]]
+        "literal:Str": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
         "call/function/builtin/casting/float": [[1,1]],
+        "metadata/sloc/1": [[1,1]],
         "type/elementary/number/floating_point": [[1,1]],
         "type/elementary/string": [[1,1]]
       }
@@ -4152,11 +4535,13 @@
         "import_module:re": [[1,1]],
         "literal:Str": [[2,2],[2,2]],
         "method_call:sub": [[2,2]],
-        "single_assignment:t": [[2,2]]
+        "single_assignment:t": [[2,2]],
+        "whole_span:2": [[1,2]]
       },
       "taxons": {
-        "call/method": [[2,2]],
+        "call/method/sub": [[2,2]],
         "library/standard/re": [[1,1]],
+        "metadata/sloc/2": [[1,2]],
         "type/elementary/string": [[2,2]],
         "type/elementary/string/empty": [[2,2]],
         "variable/assignment/single": [[2,2]]
@@ -4174,7 +4559,8 @@
         "function_call:map": [[1,1]],
         "function_call_without_arguments:input": [[1,1]],
         "function_call_without_result:list": [[1,1]],
-        "method_call:split": [[1,1]]
+        "method_call:split": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
         "call/composition": [[1,1],[1,1]],
@@ -4182,9 +4568,11 @@
         "call/function/builtin/input": [[1,1]],
         "call/function/builtin/map": [[1,1]],
         "call/function/without_arguments": [[1,1]],
-        "call/method/sequence/string/split": [[1,1]],
+        "call/method/split": [[1,1]],
         "io/standard/input": [[1,1]],
-        "type/container/list": [[1,1]]
+        "metadata/sloc/1": [[1,1]],
+        "type/container/list": [[1,1]],
+        "type/container/string": [[1,1]]
       }
     },
     "150.2154-remove-trailing-slash.py": {
@@ -4197,10 +4585,13 @@
         "call_argument:": [[1,1]],
         "literal:Str": [[1,1]],
         "method_call:rstrip": [[1,1]],
-        "single_assignment:p": [[1,1]]
+        "single_assignment:p": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
-        "call/method/sequence/string/rstrip": [[1,1]],
+        "call/method/rstrip": [[1,1]],
+        "metadata/sloc/1": [[1,1]],
+        "type/container/string": [[1,1]],
         "type/elementary/string": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
@@ -4231,13 +4622,16 @@
         "update:p:-1": [[3,3]],
         "update_by_assignment:p:-1": [[3,3]],
         "update_by_assignment_with": [[3,3]],
-        "update_with": [[3,3]]
+        "update_with": [[3,3]],
+        "whole_span:3": [[1,3]]
       },
       "taxons": {
-        "call/method/sequence/string/endswith": [[2,2]],
+        "call/method/endswith": [[2,2]],
         "flow/conditional/no_else": [[2,3]],
         "library/standard/os": [[1,1]],
+        "metadata/sloc/3": [[1,3]],
         "subscript/slice/stop": [[3,3]],
+        "type/container/string": [[2,2]],
         "type/elementary/number/integer": [[3,3]],
         "variable/assignment/single": [[3,3]]
       }
@@ -4249,9 +4643,11 @@
         "assignment": [[1,1]],
         "assignment_lhs_identifier:s": [[1,1]],
         "assignment_rhs_atom:c": [[1,1]],
-        "single_assignment:s": [[1,1]]
+        "single_assignment:s": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
+        "metadata/sloc/1": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
     },
@@ -4267,10 +4663,13 @@
         "call_argument:s": [[1,1]],
         "literal:Str": [[1,1]],
         "method_call:format": [[1,1]],
-        "single_assignment:t": [[1,1]]
+        "single_assignment:t": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
-        "call/method/sequence/string/format": [[1,1]],
+        "call/method/format": [[1,1]],
+        "metadata/sloc/1": [[1,1]],
+        "type/container/string": [[1,1]],
         "type/elementary/string": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
@@ -4325,16 +4724,19 @@
         "slice:p:_:": [[1,1],[2,2]],
         "slice_lower:p": [[1,1],[2,2]],
         "slice_step:": [[1,1],[2,2]],
-        "slice_upper:_": [[1,1],[2,2]]
+        "slice_upper:_": [[1,1],[2,2]],
+        "whole_span:3": [[1,3]]
       },
       "taxons": {
         "call/function/builtin/casting/int": [[1,1],[2,2]],
         "call/function/builtin/range": [[1,1],[2,2]],
-        "call/method/sequence/string/format": [[3,3]],
+        "call/method/format": [[3,3]],
+        "metadata/sloc/3": [[1,3]],
         "operator/arithmetic/addition": [[1,1],[2,2],[3,3],[3,3],[3,3]],
         "operator/arithmetic/integer_division": [[3,3],[3,3],[3,3]],
         "subscript/slice/start": [[1,1],[2,2]],
         "subscript/slice/stop": [[1,1],[2,2]],
+        "type/container/string": [[3,3]],
         "type/container/tuple/assignment": [[1,1],[2,2]],
         "type/elementary/number/integer": [[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[2,2],[2,2],[2,2],[2,2],[2,2],[2,2],[3,3],[3,3],[3,3]],
         "type/elementary/string": [[3,3]],
@@ -4419,7 +4821,8 @@
         "update:self:numpy": [[9,9]],
         "update_by_assignment:self:numpy": [[9,9]],
         "update_by_assignment_with:astype": [[9,9]],
-        "update_with:astype": [[9,9]]
+        "update_with:astype": [[9,9]],
+        "whole_span:15": [[1,15]]
       },
       "taxons": {
         "call/composition": [[5,5],[6,6],[10,10]],
@@ -4428,12 +4831,16 @@
         "call/function/builtin/len": [[6,6]],
         "call/function/builtin/print": [[12,12],[14,14],[15,15]],
         "call/function/builtin/range": [[6,6]],
-        "call/method": [[5,5],[9,9],[11,11],[13,13]],
+        "call/method/array": [[5,5]],
+        "call/method/astype": [[9,9]],
         "call/method/chaining": [[5,5]],
-        "call/method/sequence/string/join": [[10,10]],
+        "call/method/from_str": [[11,11],[13,13]],
+        "call/method/join": [[10,10]],
+        "call/method/view": [[5,5]],
         "class": [[2,10]],
         "io/standard/print": [[12,12],[14,14],[15,15]],
         "library/third_party/numpy": [[1,1]],
+        "metadata/sloc/15": [[1,15]],
         "operator/arithmetic/addition": [[6,6],[15,15]],
         "operator/arithmetic/division": [[15,15]],
         "operator/string/concatenation": [[10,10]],
@@ -4445,6 +4852,7 @@
         "subroutine/method/naming/magic": [[8,10]],
         "subscript/slice/start": [[6,6]],
         "subscript/slice/stop": [[6,6]],
+        "type/container/string": [[10,10]],
         "type/elementary/number/integer": [[6,6],[6,6],[6,6],[6,6],[6,6],[15,15]],
         "type/elementary/string": [[10,10],[10,10],[11,11],[13,13]],
         "type/elementary/string/empty": [[10,10]],
@@ -4466,11 +4874,14 @@
         "method_call:unlink": [[3,3]],
         "method_call_object:path": [[3,3]],
         "method_call_without_result:unlink": [[3,3]],
-        "single_assignment:path": [[2,2]]
+        "single_assignment:path": [[2,2]],
+        "whole_span:3": [[1,3]]
       },
       "taxons": {
-        "call/method": [[2,2],[3,3]],
+        "call/method/Path": [[2,2]],
+        "call/method/unlink": [[3,3]],
         "library/standard/pathlib": [[1,1]],
+        "metadata/sloc/3": [[1,3]],
         "variable/assignment/single": [[2,2]]
       }
     },
@@ -4485,10 +4896,12 @@
         "call_argument:i": [[1,1]],
         "function_call:format": [[1,1]],
         "literal:Str": [[1,1]],
-        "single_assignment:s": [[1,1]]
+        "single_assignment:s": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
         "call/function/builtin/format": [[1,1]],
+        "metadata/sloc/1": [[1,1]],
         "type/elementary/string": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
@@ -4500,9 +4913,11 @@
         "assignment": [[1,1]],
         "assignment_lhs_identifier:PLANET": [[1,1]],
         "literal:Str": [[1,1]],
-        "single_assignment:PLANET": [[1,1]]
+        "single_assignment:PLANET": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
+        "metadata/sloc/1": [[1,1]],
         "type/elementary/string": [[1,1]],
         "variable/assignment/constant": [[1,1]],
         "variable/assignment/single": [[1,1]]
@@ -4522,11 +4937,13 @@
         "import:random": [[1,1]],
         "import_module:random": [[1,1]],
         "method_call:sample": [[2,2]],
-        "single_assignment:y": [[2,2]]
+        "single_assignment:y": [[2,2]],
+        "whole_span:2": [[1,2]]
       },
       "taxons": {
-        "call/method": [[2,2]],
+        "call/method/sample": [[2,2]],
         "library/standard/random": [[1,1]],
+        "metadata/sloc/2": [[1,2]],
         "variable/assignment/single": [[2,2]]
       }
     },
@@ -4549,10 +4966,12 @@
         "instance_method:__init__": [[2,5]],
         "literal:List": [[4,4]],
         "literal:None": [[2,2]],
-        "method:__init__": [[2,5]]
+        "method:__init__": [[2,5]],
+        "whole_span:5": [[1,5]]
       },
       "taxons": {
         "class": [[1,5]],
+        "metadata/sloc/5": [[1,5]],
         "subroutine/argument/arg": [[2,2],[2,2],[2,2]],
         "subroutine/method/flavor/instance": [[2,5]],
         "subroutine/method/naming/magic": [[2,5]],
@@ -4583,13 +5002,15 @@
         "import:sys": [[1,1]],
         "import_module:sys": [[1,1]],
         "literal:2": [[2,2]],
-        "literal:32": [[2,2]]
+        "literal:32": [[2,2]],
+        "whole_span:5": [[1,5]]
       },
       "taxons": {
         "call/function/without_arguments": [[3,3],[5,5]],
         "flow/conditional": [[2,5]],
         "flow/conditional/else": [[5,5]],
         "library/standard/sys": [[1,1]],
+        "metadata/sloc/5": [[1,5]],
         "operator/arithmetic/power": [[2,2]],
         "test/inequality": [[2,2]],
         "type/elementary/number/integer": [[2,2],[2,2]]
@@ -4614,9 +5035,11 @@
         "update_by_assignment:elements:c": [[1,1]],
         "update_by_assignment:elements:x": [[1,1]],
         "update_by_assignment_with": [[1,1]],
-        "update_with": [[1,1]]
+        "update_with": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
+        "metadata/sloc/1": [[1,1]],
         "operator/arithmetic/multiplication": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
@@ -4645,12 +5068,14 @@
         "slice_lower:1": [[2,2],[4,4]],
         "slice_step:": [[2,2],[4,4]],
         "slice_upper:": [[2,2],[4,4]],
+        "whole_span:5": [[1,5]],
         "yoda_comparison:In": [[2,2],[4,4]]
       },
       "taxons": {
         "call/function/without_arguments": [[3,3],[5,5]],
         "flow/conditional/no_else": [[2,3],[4,5]],
         "library/standard/sys": [[1,1]],
+        "metadata/sloc/5": [[1,5]],
         "subscript/slice/start": [[2,2],[4,4]],
         "test/belonging": [[2,2],[4,4]],
         "type/elementary/number/integer": [[2,2],[4,4]],
@@ -4676,7 +5101,8 @@
         "slice_lower:": [[1,1]],
         "slice_lower:1": [[1,1]],
         "slice_step:2": [[1,1],[1,1]],
-        "slice_upper:": [[1,1],[1,1]]
+        "slice_upper:": [[1,1],[1,1]],
+        "whole_span:2": [[1,2]]
       },
       "taxons": {
         "call/function/builtin/print": [[2,2]],
@@ -4684,6 +5110,7 @@
         "flow/loop/exit/late": [[1,2]],
         "flow/loop/for": [[1,2]],
         "io/standard/print": [[2,2]],
+        "metadata/sloc/2": [[1,2]],
         "subscript/slice/start": [[1,1]],
         "subscript/slice/step": [[1,1],[1,1]],
         "type/elementary/number/integer": [[1,1],[1,1],[1,1]]
@@ -4724,7 +5151,8 @@
         "loop_with_late_exit:for": [[6,6],[7,7]],
         "nested_for:1": [[7,7]],
         "parallel_assignment:2": [[3,3]],
-        "return": [[5,5]]
+        "return": [[5,5]],
+        "whole_span:7": [[1,7]]
       },
       "taxons": {
         "call/function": [[3,3],[6,6]],
@@ -4736,6 +5164,7 @@
         "flow/loop/for/nested/1": [[7,7]],
         "io/standard/print": [[7,7]],
         "library/standard/itertools/tee": [[1,1]],
+        "metadata/sloc/7": [[1,7]],
         "subroutine/argument/arg": [[2,2]],
         "subroutine/function": [[2,5]],
         "type/container/tuple/assignment": [[3,3]],
@@ -4752,11 +5181,13 @@
         "import_module:webbrowser": [[1,1]],
         "method_call:open": [[2,2]],
         "method_call_object:webbrowser": [[2,2]],
-        "method_call_without_result:open": [[2,2]]
+        "method_call_without_result:open": [[2,2]],
+        "whole_span:2": [[1,2]]
       },
       "taxons": {
-        "call/method": [[2,2]],
-        "library/standard/webbrowser": [[1,1]]
+        "call/method/open": [[2,2]],
+        "library/standard/webbrowser": [[1,1]],
+        "metadata/sloc/2": [[1,2]]
       }
     },
     "165.2149-last-element-of-list.py": {
@@ -4770,9 +5201,11 @@
         "index:-1": [[1,1]],
         "literal:-1": [[1,1]],
         "negative_index:-1": [[1,1]],
-        "single_assignment:x": [[1,1]]
+        "single_assignment:x": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
+        "metadata/sloc/1": [[1,1]],
         "subscript/index": [[1,1]],
         "subscript/index/backwards/last": [[1,1]],
         "type/elementary/number/integer": [[1,1]],
@@ -4789,9 +5222,11 @@
         "assignment_rhs_atom:a": [[1,1]],
         "assignment_rhs_atom:b": [[1,1]],
         "binary_operator:Add": [[1,1]],
-        "single_assignment:ab": [[1,1]]
+        "single_assignment:ab": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
+        "metadata/sloc/1": [[1,1]],
         "operator/arithmetic/addition": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
@@ -4812,13 +5247,16 @@
         "slice:_::": [[1,1]],
         "slice_lower:_": [[1,1]],
         "slice_step:": [[1,1]],
-        "slice_upper:": [[1,1]]
+        "slice_upper:": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
         "call/function/builtin/len": [[1,1]],
-        "call/method/sequence/string/startswith": [[1,1]],
+        "call/method/startswith": [[1,1]],
+        "metadata/sloc/1": [[1,1]],
         "operator/boolean/and": [[1,1]],
         "subscript/slice/start": [[1,1]],
+        "type/container/string": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
     },
@@ -4832,10 +5270,13 @@
         "assignment_rhs_atom:s": [[1,1]],
         "call_argument:p": [[1,1]],
         "method_call:lstrip": [[1,1]],
-        "single_assignment:t": [[1,1]]
+        "single_assignment:t": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
-        "call/method/sequence/string/lstrip": [[1,1]],
+        "call/method/lstrip": [[1,1]],
+        "metadata/sloc/1": [[1,1]],
+        "type/container/string": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
     },
@@ -4856,11 +5297,14 @@
         "literal:1": [[1,1]],
         "method_call:rsplit": [[1,1]],
         "method_call_object:s": [[1,1]],
-        "single_assignment:t": [[1,1]]
+        "single_assignment:t": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
-        "call/method/sequence/string/rsplit": [[1,1]],
+        "call/method/rsplit": [[1,1]],
+        "metadata/sloc/1": [[1,1]],
         "subscript/index": [[1,1]],
+        "type/container/string": [[1,1]],
         "type/elementary/number/integer": [[1,1]],
         "type/elementary/number/integer/zero": [[1,1]],
         "variable/assignment/single": [[1,1]]
@@ -4876,10 +5320,13 @@
         "assignment_rhs_atom:w": [[1,1]],
         "call_argument:w": [[1,1]],
         "method_call:rstrip": [[1,1]],
-        "single_assignment:t": [[1,1]]
+        "single_assignment:t": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
-        "call/method/sequence/string/rstrip": [[1,1]],
+        "call/method/rstrip": [[1,1]],
+        "metadata/sloc/1": [[1,1]],
+        "type/container/string": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
     },
@@ -4892,10 +5339,12 @@
         "assignment_rhs_atom:s": [[1,1]],
         "call_argument:s": [[1,1]],
         "function_call:len": [[1,1]],
-        "single_assignment:n": [[1,1]]
+        "single_assignment:n": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
         "call/function/builtin/len": [[1,1]],
+        "metadata/sloc/1": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
     },
@@ -4908,10 +5357,12 @@
         "assignment_rhs_atom:mymap": [[1,1]],
         "call_argument:mymap": [[1,1]],
         "function_call:len": [[1,1]],
-        "single_assignment:n": [[1,1]]
+        "single_assignment:n": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
         "call/function/builtin/len": [[1,1]],
+        "metadata/sloc/1": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
     },
@@ -4926,10 +5377,13 @@
         "update:s:x": [[1,1]],
         "update_by_method_call:s:x": [[1,1]],
         "update_by_method_call_with:append": [[1,1]],
-        "update_with:append": [[1,1]]
+        "update_with:append": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
-        "call/method/sequence/list/append": [[1,1]]
+        "call/method/append": [[1,1]],
+        "metadata/sloc/1": [[1,1]],
+        "type/container/list": [[1,1]]
       }
     },
     "172.2442-insert-entry-in-map.py": {
@@ -4939,9 +5393,11 @@
         "assignment": [[1,1]],
         "assignment_lhs_identifier:m": [[1,1]],
         "assignment_rhs_atom:v": [[1,1]],
-        "index:k": [[1,1]]
+        "index:k": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
+        "metadata/sloc/1": [[1,1]],
         "subscript/index": [[1,1]],
         "variable/assignment": [[1,1]]
       }
@@ -4953,11 +5409,13 @@
         "call_argument:": [[1,1]],
         "function_call:print": [[1,1]],
         "function_call_without_result:print": [[1,1]],
-        "literal:Str": [[1,1]]
+        "literal:Str": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
         "call/function/builtin/print": [[1,1]],
         "io/standard/print": [[1,1]],
+        "metadata/sloc/1": [[1,1]],
         "type/elementary/string": [[1,1]]
       }
     },
@@ -4968,11 +5426,13 @@
         "call_argument:": [[1,1]],
         "function_call:print": [[1,1]],
         "function_call_without_result:print": [[1,1]],
-        "literal:Str": [[1,1]]
+        "literal:Str": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
         "call/function/builtin/print": [[1,1]],
         "io/standard/print": [[1,1]],
+        "metadata/sloc/1": [[1,1]],
         "type/elementary/string": [[1,1]]
       }
     },
@@ -4983,11 +5443,13 @@
         "call_argument:": [[1,1]],
         "function_call:print": [[1,1]],
         "function_call_without_result:print": [[1,1]],
-        "literal:Str": [[1,1]]
+        "literal:Str": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
         "call/function/builtin/print": [[1,1]],
         "io/standard/print": [[1,1]],
+        "metadata/sloc/1": [[1,1]],
         "type/elementary/string": [[1,1]]
       }
     },
@@ -5023,14 +5485,19 @@
         "method_chaining": [[2,2]],
         "single_assignment:data": [[2,2]],
         "single_assignment:req": [[3,3]],
-        "single_assignment:resp": [[4,4]]
+        "single_assignment:resp": [[4,4]],
+        "whole_span:4": [[1,4]]
       },
       "taxons": {
-        "call/method": [[2,2],[3,3],[4,4]],
+        "call/method/Request": [[3,3]],
         "call/method/chaining": [[2,2]],
-        "call/method/sequence/string/encode": [[2,2]],
+        "call/method/encode": [[2,2]],
+        "call/method/urlencode": [[2,2]],
+        "call/method/urlopen": [[4,4]],
         "library/standard/urllib/parse": [[1,1]],
         "library/standard/urllib/request": [[1,1]],
+        "metadata/sloc/4": [[1,4]],
+        "type/container/string": [[2,2]],
         "type/elementary/string": [[2,2],[3,3]],
         "variable/assignment/single": [[2,2],[3,3],[4,4]]
       }
@@ -5043,10 +5510,12 @@
         "assignment_lhs_identifier:s": [[1,1]],
         "assignment_rhs_atom:a": [[1,1]],
         "method_call:hex": [[1,1]],
-        "single_assignment:s": [[1,1]]
+        "single_assignment:s": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
-        "call/method": [[1,1]],
+        "call/method/hex": [[1,1]],
+        "metadata/sloc/1": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
     },
@@ -5060,10 +5529,12 @@
         "assignment_rhs_atom:s": [[1,1]],
         "call_argument:s": [[1,1]],
         "method_call:fromhex": [[1,1]],
-        "single_assignment:a": [[1,1]]
+        "single_assignment:a": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
-        "call/method": [[1,1]],
+        "call/method/fromhex": [[1,1]],
+        "metadata/sloc/1": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
     },
@@ -5094,11 +5565,14 @@
         "method_call:listdir": [[3,3]],
         "method_call:splitext": [[3,3]],
         "single_assignment:L": [[3,3]],
-        "single_assignment:extensions": [[2,2]]
+        "single_assignment:extensions": [[2,2]],
+        "whole_span:3": [[1,3]]
       },
       "taxons": {
-        "call/method": [[3,3],[3,3]],
+        "call/method/listdir": [[3,3]],
+        "call/method/splitext": [[3,3]],
         "library/standard/os": [[1,1]],
+        "metadata/sloc/3": [[1,3]],
         "subscript/index": [[3,3]],
         "test/belonging": [[3,3]],
         "type/container/list": [[2,2]],
@@ -5136,13 +5610,17 @@
         "method_call:format": [[4,4]],
         "method_call:match": [[7,7]],
         "method_call:walk": [[5,5]],
-        "single_assignment:filtered_files": [[3,3]]
+        "single_assignment:filtered_files": [[3,3]],
+        "whole_span:7": [[1,7]]
       },
       "taxons": {
-        "call/method": [[5,5],[7,7]],
-        "call/method/sequence/string/format": [[4,4]],
+        "call/method/format": [[4,4]],
+        "call/method/match": [[7,7]],
+        "call/method/walk": [[5,5]],
         "library/standard/os": [[2,2]],
         "library/standard/re": [[1,1]],
+        "metadata/sloc/7": [[1,7]],
+        "type/container/string": [[4,4]],
         "type/elementary/string": [[4,4],[7,7]],
         "variable/assignment/single": [[3,3]]
       }
@@ -5166,14 +5644,17 @@
         "literal:Str": [[3,3],[3,3],[3,3],[3,3]],
         "method_call:chain": [[3,3]],
         "method_call:glob": [[3,3]],
-        "string_formatting_operator": [[3,3]]
+        "string_formatting_operator": [[3,3]],
+        "whole_span:3": [[1,3]]
       },
       "taxons": {
         "call/composition": [[3,3],[3,3]],
         "call/function/builtin/casting/list": [[3,3]],
-        "call/method": [[3,3],[3,3]],
+        "call/method/chain": [[3,3]],
+        "call/method/glob": [[3,3]],
         "library/standard/glob": [[1,1]],
         "library/standard/itertools": [[2,2]],
+        "metadata/sloc/3": [[1,3]],
         "operator/string/format": [[3,3]],
         "type/container/list": [[3,3],[3,3]],
         "type/elementary/string": [[3,3],[3,3],[3,3],[3,3]]
@@ -5195,9 +5676,11 @@
         "chained_comparison:2": [[1,1],[1,1]],
         "chained_inequalities:2": [[1,1],[1,1]],
         "comparison_operator:Lt": [[1,1],[1,1],[1,1],[1,1]],
-        "single_assignment:b": [[1,1]]
+        "single_assignment:b": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
+        "metadata/sloc/1": [[1,1]],
         "operator/boolean/and": [[1,1]],
         "test/inequality": [[1,1],[1,1],[1,1],[1,1]],
         "test/inequality/chained/2": [[1,1],[1,1]],
@@ -5219,9 +5702,11 @@
         "binary_operator:Add": [[1,1],[1,1]],
         "binary_operator:Div": [[1,1],[1,1]],
         "literal:2": [[1,1],[1,1]],
-        "single_assignment:center": [[1,1]]
+        "single_assignment:center": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
+        "metadata/sloc/1": [[1,1]],
         "operator/arithmetic/addition": [[1,1],[1,1]],
         "operator/arithmetic/division": [[1,1],[1,1]],
         "type/elementary/number/integer": [[1,1],[1,1]],
@@ -5253,11 +5738,13 @@
         "literal:2": [[3,3],[3,3]],
         "literal:Str": [[2,2],[2,2]],
         "single_assignment:Point": [[2,2]],
-        "single_assignment:center": [[3,3]]
+        "single_assignment:center": [[3,3]],
+        "whole_span:3": [[1,3]]
       },
       "taxons": {
         "call/function": [[2,2],[3,3]],
         "library/standard/collections/namedtuple": [[1,1]],
+        "metadata/sloc/3": [[1,3]],
         "operator/arithmetic/addition": [[3,3],[3,3]],
         "operator/arithmetic/division": [[3,3],[3,3]],
         "type/elementary/number/integer": [[3,3],[3,3]],
@@ -5277,11 +5764,13 @@
         "import:os": [[1,1]],
         "import_module:os": [[1,1]],
         "method_call:listdir": [[2,2]],
-        "single_assignment:x": [[2,2]]
+        "single_assignment:x": [[2,2]],
+        "whole_span:2": [[1,2]]
       },
       "taxons": {
-        "call/method": [[2,2]],
+        "call/method/listdir": [[2,2]],
         "library/standard/os": [[1,1]],
+        "metadata/sloc/2": [[1,2]],
         "variable/assignment/single": [[2,2]]
       }
     },
@@ -5297,11 +5786,13 @@
         "function_call_without_result:print": [[2,2]],
         "literal:Str": [[1,1]],
         "modulo_operator": [[2,2]],
-        "single_assignment:s": [[1,1]]
+        "single_assignment:s": [[1,1]],
+        "whole_span:2": [[1,2]]
       },
       "taxons": {
         "call/function/builtin/print": [[2,2]],
         "io/standard/print": [[2,2]],
+        "metadata/sloc/2": [[1,2]],
         "operator/arithmetic/modulo": [[2,2]],
         "type/elementary/string": [[1,1]],
         "variable/assignment/single": [[1,1]]
@@ -5336,11 +5827,13 @@
         "single_assignment:content_type": [[3,3]],
         "single_assignment:data": [[5,5]],
         "single_assignment:headers": [[4,4]],
-        "single_assignment:r": [[6,6]]
+        "single_assignment:r": [[6,6]],
+        "whole_span:7": [[1,7]]
       },
       "taxons": {
-        "call/method": [[6,6]],
+        "call/method/put": [[6,6]],
         "library/third_party/requests": [[2,2]],
+        "metadata/sloc/7": [[1,7]],
         "type/container/dictionary/empty": [[5,5]],
         "type/container/tuple/assignment": [[7,7]],
         "type/elementary/string": [[3,3],[4,4]],
@@ -5361,13 +5854,15 @@
         "import_name:date": [[1,1]],
         "import_name:timedelta": [[1,1]],
         "literal:1": [[2,2]],
-        "method_call:today": [[2,2]]
+        "method_call:today": [[2,2]],
+        "whole_span:2": [[1,2]]
       },
       "taxons": {
         "call/function": [[2,2]],
-        "call/method": [[2,2]],
+        "call/method/today": [[2,2]],
         "library/standard/datetime/date": [[1,1]],
         "library/standard/datetime/timedelta": [[1,1]],
+        "metadata/sloc/2": [[1,2]],
         "operator/arithmetic/addition": [[2,2]],
         "type/elementary/number/integer": [[2,2]]
       }
@@ -5393,11 +5888,14 @@
         "method_call:start": [[3,3]],
         "method_call_object:timer": [[3,3]],
         "method_call_without_result:start": [[3,3]],
-        "single_assignment:timer": [[2,2]]
+        "single_assignment:timer": [[2,2]],
+        "whole_span:3": [[1,3]]
       },
       "taxons": {
-        "call/method": [[2,2],[3,3]],
+        "call/method/Timer": [[2,2]],
+        "call/method/start": [[3,3]],
         "library/standard/threading": [[1,1]],
+        "metadata/sloc/3": [[1,3]],
         "type/container/tuple": [[2,2]],
         "type/elementary/number/floating_point": [[2,2]],
         "type/elementary/number/integer": [[2,2]],
@@ -5414,11 +5912,13 @@
         "literal:0": [[2,2]],
         "method_call:exit": [[2,2]],
         "method_call_object:sys": [[2,2]],
-        "method_call_without_result:exit": [[2,2]]
+        "method_call_without_result:exit": [[2,2]],
+        "whole_span:2": [[1,2]]
       },
       "taxons": {
-        "call/method": [[2,2]],
+        "call/method/exit": [[2,2]],
         "library/standard/sys": [[1,1]],
+        "metadata/sloc/2": [[1,2]],
         "type/elementary/number/integer/zero": [[2,2]]
       }
     },
@@ -5485,15 +5985,18 @@
         "replication_operator:List": [[3,3]],
         "return": [[10,10],[12,12]],
         "return:i": [[7,7]],
-        "unary_operator:Not": [[14,14]]
+        "unary_operator:Not": [[14,14]],
+        "whole_span:15": [[1,15]]
       },
       "taxons": {
         "call/function/builtin/range": [[4,4]],
-        "call/method": [[9,9],[12,12],[12,12],[14,14],[15,15],[15,15]],
+        "call/method/find_set": [[9,9],[12,12],[12,12],[15,15],[15,15]],
+        "call/method/is_same_set": [[14,14]],
         "class": [[1,15]],
         "flow/conditional": [[6,10]],
         "flow/conditional/else": [[9,10]],
         "flow/conditional/no_else": [[14,15]],
+        "metadata/sloc/15": [[1,15]],
         "operator/boolean/not": [[14,14]],
         "operator/list/replication": [[3,3]],
         "subroutine/argument/arg": [[2,2],[2,2],[5,5],[5,5],[11,11],[11,11],[11,11],[13,13],[13,13],[13,13]],
@@ -5522,10 +6025,12 @@
         "binary_operator:MatMult": [[2,2]],
         "import:numpy": [[1,1]],
         "import_module:numpy": [[1,1]],
-        "single_assignment:c": [[2,2]]
+        "single_assignment:c": [[2,2]],
+        "whole_span:2": [[1,2]]
       },
       "taxons": {
         "library/third_party/numpy": [[1,1]],
+        "metadata/sloc/2": [[1,2]],
         "operator/matrix/multiplication": [[2,2]],
         "variable/assignment/single": [[2,2]]
       }
@@ -5544,11 +6049,13 @@
         "import:numpy": [[1,1]],
         "import_module:numpy": [[1,1]],
         "method_call:matmul": [[2,2]],
-        "single_assignment:c": [[2,2]]
+        "single_assignment:c": [[2,2]],
+        "whole_span:2": [[1,2]]
       },
       "taxons": {
-        "call/method": [[2,2]],
+        "call/method/matmul": [[2,2]],
         "library/third_party/numpy": [[1,1]],
+        "metadata/sloc/2": [[1,2]],
         "variable/assignment/single": [[2,2]]
       }
     },
@@ -5566,10 +6073,12 @@
         "filtered_comprehension": [[1,1]],
         "function_call:P": [[1,1]],
         "function_call:T": [[1,1]],
-        "single_assignment:y": [[1,1]]
+        "single_assignment:y": [[1,1]],
+        "whole_span:1": [[1,1]]
       },
       "taxons": {
         "call/function": [[1,1],[1,1]],
+        "metadata/sloc/1": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
     },
@@ -5590,12 +6099,14 @@
         "if_test_atom:v": [[1,1],[1,1]],
         "if_test_atom:x": [[1,1]],
         "if_then_branch": [[2,2]],
-        "if_without_else": [[1,2]]
+        "if_without_else": [[1,2]],
+        "whole_span:2": [[1,2]]
       },
       "taxons": {
         "call/function/builtin/any": [[1,1]],
         "call/function/without_arguments": [[2,2]],
         "flow/conditional/no_else": [[1,2]],
+        "metadata/sloc/2": [[1,2]],
         "test/inequality": [[1,1]]
       }
     },
@@ -5609,12 +6120,14 @@
         "call_argument:path": [[1,1]],
         "function_call:open": [[1,1]],
         "method_call:readlines": [[2,2]],
-        "single_assignment:lines": [[2,2]]
+        "single_assignment:lines": [[2,2]],
+        "whole_span:2": [[1,2]]
       },
       "taxons": {
         "call/function/builtin/open": [[1,1]],
-        "call/method": [[2,2]],
+        "call/method/readlines": [[2,2]],
         "io/file/open": [[1,1]],
+        "metadata/sloc/2": [[1,2]],
         "variable/assignment/single": [[2,2]]
       }
     }
@@ -10834,6 +11347,255 @@
       "129.2282-breadth-first-traversing-in-a-graph.py",
       "130.2283-depth-first-traversing-in-a-graph.py"
     ],
+    "whole_span:1": [
+      "001.1159-print-hello-world.py",
+      "002.1493-print-hello-10-times.py",
+      "002.3117-print-hello-10-times.py",
+      "008.39-initialize-a-new-map-associative-array.py",
+      "012.181-check-if-list-contains-a-value.py",
+      "019.197-reverse-a-list.py",
+      "019.1983-reverse-a-list.py",
+      "019.3164-reverse-a-list.py",
+      "021.84-swap-values-of-variables-a-and-b.py",
+      "022.243-convert-string-to-integer.py",
+      "023.1102-convert-real-number-to-string-with-2-decimal-places.py",
+      "024.664-assign-to-string-the-japanese-word-.py",
+      "026.194-create-a-2-dimensional-array.py",
+      "027.192-create-a-3-dimensional-array.py",
+      "028.350-sort-by-a-property.py",
+      "029.199-remove-item-from-list-by-its-index.py",
+      "038.186-extract-a-substring.py",
+      "039.571-check-if-string-contains-a-word.py",
+      "041.187-reverse-a-string.py",
+      "041.2714-reverse-a-string.py",
+      "044.190-insert-element-in-list.py",
+      "046.191-extract-beginning-of-string-prefix.py",
+      "047.198-extract-string-suffix.py",
+      "049.242-split-a-space-separated-string.py",
+      "051.230-check-if-map-contains-key.py",
+      "052.666-check-if-map-contains-value.py",
+      "053.1933-join-a-list-of-strings.py",
+      "053.240-join-a-list-of-strings.py",
+      "054.241-compute-sum-of-integers.py",
+      "055.575-convert-integer-to-string.py",
+      "057.260-filter-list.py",
+      "057.3173-filter-list.py",
+      "058.665-extract-file-content-to-a-string.py",
+      "062.1091-find-substring-position.py",
+      "063.1088-replace-fragment-of-a-string.py",
+      "064.274-big-integer--value-3-power-247.py",
+      "065.1085-format-decimal-number.py",
+      "066.672-big-integer-exponentiation.py",
+      "076.1083-binary-digits-from-an-integer.py",
+      "079.1090-convert-integer-to-floating-point-number.py",
+      "080.1092-truncate-floating-point-number-to-integer.py",
+      "081.2270-round-floating-point-number-to-integer.py",
+      "082.1096-count-substring-occurrences.py",
+      "084.1940-count-bits-set-in-integer-binary-representation.py",
+      "088.2143-allocate-1m-bytes.py",
+      "089.1097-handle-invalid-argument.py",
+      "094.1101-print-type-of-variable.py",
+      "094.1864-print-type-of-variable.py",
+      "096.1094-check-string-prefix.py",
+      "097.1095-check-string-suffix.py",
+      "100.1142-sort-by-a-comparator.py",
+      "110.1455-check-if-string-is-blank.py",
+      "114.2273-test-deep-equality.py",
+      "116.1257-remove-occurrences-of-word-from-string.py",
+      "117.1297-get-list-size.py",
+      "118.1254-list-to-set.py",
+      "118.3266-list-to-set.py",
+      "119.1253-deduplicate-list.py",
+      "120.1479-read-integer-from-stdin.py",
+      "123.2146-assert-condition.py",
+      "131.2083-successive-conditions.py",
+      "133.2160-case-insensitive-string-contains.py",
+      "134.1850-create-a-new-list.py",
+      "135.2158-remove-item-from-list-by-its-value.py",
+      "136.2141-remove-all-occurrences-of-a-value-from-a-list.py",
+      "137.1823-check-if-string-contains-only-digits.py",
+      "140.2156-delete-map-entry.py",
+      "142.2151-hexadecimal-digits-of-an-integer.py",
+      "146.1826-convert-string-to-floating-point-number.py",
+      "146.2739-convert-string-to-floating-point-number.py",
+      "148.1829-read-list-of-integer-numbers-from-stdin.py",
+      "150.2154-remove-trailing-slash.py",
+      "152.2153-turn-a-character-into-a-string.py",
+      "153.1980-concatenate-string-with-integer.py",
+      "156.2148-format-integer-with-zero-padding.py",
+      "157.2150-declare-constant-string.py",
+      "161.2098-multiply-all-the-elements-of-a-list.py",
+      "165.2149-last-element-of-list.py",
+      "166.2272-concatenate-two-lists.py",
+      "167.2611-trim-prefix.py",
+      "167.3175-trim-prefix.py",
+      "168.2277-trim-suffix.py",
+      "168.3174-trim-suffix.py",
+      "169.2233-string-length.py",
+      "170.2275-get-map-size.py",
+      "171.2446-add-an-element-at-the-end-of-a-list.py",
+      "172.2442-insert-entry-in-map.py",
+      "173.2427-format-a-number-with-grouped-thousands.py",
+      "173.2428-format-a-number-with-grouped-thousands.py",
+      "173.2429-format-a-number-with-grouped-thousands.py",
+      "175.2613-bytes-to-hex-string.py",
+      "176.2614-hex-string-to-byte-array.py",
+      "178.2615-check-if-point-is-inside-rectangle.py",
+      "179.2688-get-center-of-a-rectangle.py",
+      "189.3236-filter-and-transform-list.py"
+    ],
+    "whole_span:11": [
+      "043.676-break-outer-loop.py"
+    ],
+    "whole_span:12": [
+      "104.3264-save-object-into-xml-file.py"
+    ],
+    "whole_span:13": [
+      "040.2279-graph-with-adjacency-lists.py"
+    ],
+    "whole_span:15": [
+      "154.2292-halfway-between-two-hex-color-codes.py",
+      "187.3261-disjoint-set.py"
+    ],
+    "whole_span:2": [
+      "001.3-print-hello-world.py",
+      "002.11-print-hello-10-times.py",
+      "003.19-create-a-procedure.py",
+      "003.2372-create-a-procedure.py",
+      "004.24-create-a-function-which-returns-the-square-of-an-integer.py",
+      "004.2921-create-a-function-which-returns-the-square-of-an-integer.py",
+      "005.663-create-a-2d-point-data-structure.py",
+      "006.32-iterate-over-list-values.py",
+      "007.183-iterate-over-list-indexes-and-values.py",
+      "010.1478-shuffle-a-list.py",
+      "010.182-shuffle-a-list.py",
+      "011.47-pick-a-random-element-from-a-list.py",
+      "013.574-iterate-over-map-keys-and-values.py",
+      "014.3410-pick-uniformly-a-random-floating-point-number-in-ab.py",
+      "015.184-pick-uniformly-a-random-integer-in-ab.py",
+      "027.193-create-a-3-dimensional-array.py",
+      "032.196-integer-exponentiation-by-squaring.py",
+      "035.667-first-class-function--compose.py",
+      "036.670-first-class-function--generic-composition.py",
+      "045.570-pause-execution-for-5-seconds.py",
+      "050.572-make-an-infinite-loop.py",
+      "059.668-write-to-standard-error-stream.py",
+      "060.1084-read-command-line-argument.py",
+      "061.576-get-current-date.py",
+      "069.1086-seed-random-generator.py",
+      "070.1087-use-clock-as-random-generator-seed.py",
+      "071.379-echo-program-implementation.py",
+      "074.674-compute-gcd.py",
+      "075.675-compute-lcm.py",
+      "077.1093-complex-number.py",
+      "083.1805-regex-with-character-repetition.py",
+      "085.1003-check-if-integer-addition-will-overflow.py",
+      "086.1004-check-if-integer-multiplication-will-overflow.py",
+      "087.1139-stop-program.py",
+      "095.2140-get-file-size.py",
+      "098.2142-epoch-seconds-to-date-object.py",
+      "102.2173-load-from-http-get-request-into-a-file.py",
+      "103.2276-load-xml-file-into-struct.py",
+      "105.1804-current-executable-name.py",
+      "106.2039-get-program-working-directory.py",
+      "107.2139-get-folder-containing-current-program.py",
+      "108.1291-determine-if-variable-name-is-defined.py",
+      "109.2280-number-of-bytes-of-a-type.py",
+      "111.2168-launch-other-program.py",
+      "112.2144-iterate-over-map-entries-ordered-by-keys.py",
+      "113.2157-iterate-over-map-entries-ordered-by-values.py",
+      "115.2138-compare-dates.py",
+      "122.1453-declare-enumeration.py",
+      "126.2137-multiple-return-values.py",
+      "127.2274-source-code-inclusion.py",
+      "132.2040-measure-duration-of-procedure-execution.py",
+      "138.2161-create-temp-file.py",
+      "139.2162-create-temp-directory.py",
+      "141.2159-iterate-in-sequence-over-two-lists.py",
+      "143.2256-iterate-alternatively-over-two-lists.py",
+      "144.2145-check-if-file-exists.py",
+      "144.2915-check-if-file-exists.py",
+      "147.2171-remove-all-non-ascii-characters.py",
+      "158.2163-random-sublist.py",
+      "163.2170-print-list-elements-by-group-of-2.py",
+      "164.2169-open-url-in-default-browser.py",
+      "180.2612-list-files-in-directory.py",
+      "182.2658-quine-program.py",
+      "184.2701-tomorrow.py",
+      "186.2699-exit-program-cleanly.py",
+      "188.3171-matrix-multiplication.py",
+      "188.3284-matrix-multiplication.py",
+      "191.3403-check-if-any-value-in-a-list-is-larger-than-a-limit.py",
+      "197.3457-get-a-list-of-lines-from-a-file.py"
+    ],
+    "whole_span:3": [
+      "014.185-pick-uniformly-a-random-floating-point-number-in-ab.py",
+      "034.625-create-a-set-of-objects.py",
+      "048.210-multi-line-string-literal.py",
+      "067.1426-binomial-coefficient-n-choose-k.py",
+      "068.2271-create-a-bitset.py",
+      "073.673-create-a-factory.py",
+      "091.1098-load-json-file-into-struct.py",
+      "092.1100-save-object-into-json-file.py",
+      "093.1082-pass-a-runnable-procedure-as-parameter.py",
+      "099.1429-format-date-yyyy-mm-dd.py",
+      "099.2693-format-date-yyyy-mm-dd.py",
+      "101.2172-load-from-http-get-request-into-a-string.py",
+      "151.2166-remove-string-trailing-path-separator.py",
+      "154.2155-halfway-between-two-hex-color-codes.py",
+      "155.2147-delete-file.py",
+      "177.2709-find-files-with-a-given-list-of-filename-extensions.py",
+      "177.3241-find-files-with-a-given-list-of-filename-extensions.py",
+      "179.2689-get-center-of-a-rectangle.py",
+      "185.2820-execute-function-in-30-seconds.py"
+    ],
+    "whole_span:4": [
+      "017.1103-create-a-tree-data-structure.py",
+      "018.2084-depth-first-traversing-of-a-tree.py",
+      "020.573-return-two-values.py",
+      "030.189-parallelize-execution-of-1000-independent-tasks.py",
+      "078.1089-do-while-loop.py",
+      "124.2152-binary-search-for-a-value-in-sorted-array.py",
+      "146.1825-convert-string-to-floating-point-number.py",
+      "174.2687-make-http-post-request.py"
+    ],
+    "whole_span:5": [
+      "009.1410-create-a-binary-tree-data-structure.py",
+      "009.3176-create-a-binary-tree-data-structure.py",
+      "031.188-recursive-factorial-simple.py",
+      "042.3168-continue-outer-loop.py",
+      "125.2167-measure-function-call-duration.py",
+      "159.2281-trie.py",
+      "160.2165-detect-if-32-bit-or-64-bit-architecture.py",
+      "162.2164-execute-procedures-depending-on-options.py"
+    ],
+    "whole_span:6": [
+      "016.1530-depth-first-traversing-of-a-binary-tree.py",
+      "025.195-send-a-value-to-another-thread.py",
+      "037.671-currying.py",
+      "056.1424-launch-1000-parallel-tasks-and-wait-for-completion.py",
+      "090.1099-read-only-outside.py",
+      "122.1454-declare-enumeration.py",
+      "131.2766-successive-conditions.py",
+      "145.1822-print-log-line-with-datetime.py"
+    ],
+    "whole_span:7": [
+      "033.1420-atomically-read-and-update-variable.py",
+      "043.2733-break-outer-loop.py",
+      "121.3029-udp-listen-and-read.py",
+      "163.3177-print-list-elements-by-group-of-2.py",
+      "177.2725-find-files-with-a-given-list-of-filename-extensions.py",
+      "183.3025-make-http-put-request.py"
+    ],
+    "whole_span:8": [
+      "042.1264-continue-outer-loop.py",
+      "119.3263-deduplicate-list.py",
+      "130.2283-depth-first-traversing-in-a-graph.py"
+    ],
+    "whole_span:9": [
+      "128.2085-breadth-first-traversing-of-a-tree.py",
+      "129.2282-breadth-first-traversing-in-a-graph.py"
+    ],
     "yoda_comparison:In": [
       "108.1291-determine-if-variable-name-is-defined.py",
       "162.2164-execute-procedures-depending-on-options.py"
@@ -11063,122 +11825,131 @@
       "162.2164-execute-procedures-depending-on-options.py",
       "191.3403-check-if-any-value-in-a-list-is-larger-than-a-limit.py"
     ],
-    "call/method": [
-      "010.1478-shuffle-a-list.py",
-      "011.47-pick-a-random-element-from-a-list.py",
-      "014.185-pick-uniformly-a-random-floating-point-number-in-ab.py",
-      "014.3410-pick-uniformly-a-random-floating-point-number-in-ab.py",
-      "015.184-pick-uniformly-a-random-integer-in-ab.py",
-      "025.195-send-a-value-to-another-thread.py",
-      "027.193-create-a-3-dimensional-array.py",
-      "030.189-parallelize-execution-of-1000-independent-tasks.py",
-      "033.1420-atomically-read-and-update-variable.py",
-      "040.2279-graph-with-adjacency-lists.py",
-      "041.187-reverse-a-string.py",
-      "045.570-pause-execution-for-5-seconds.py",
-      "056.1424-launch-1000-parallel-tasks-and-wait-for-completion.py",
-      "058.665-extract-file-content-to-a-string.py",
-      "061.576-get-current-date.py",
-      "067.1426-binomial-coefficient-n-choose-k.py",
-      "068.2271-create-a-bitset.py",
+    "call/method/Lock": [
+      "033.1420-atomically-read-and-update-variable.py"
+    ],
+    "call/method/Path": [
+      "155.2147-delete-file.py"
+    ],
+    "call/method/Random": [
       "069.1086-seed-random-generator.py",
-      "070.1087-use-clock-as-random-generator-seed.py",
-      "083.1805-regex-with-character-repetition.py",
-      "087.1139-stop-program.py",
-      "091.1098-load-json-file-into-struct.py",
-      "092.1100-save-object-into-json-file.py",
-      "095.2140-get-file-size.py",
-      "098.2142-epoch-seconds-to-date-object.py",
-      "099.1429-format-date-yyyy-mm-dd.py",
-      "099.2693-format-date-yyyy-mm-dd.py",
-      "101.2172-load-from-http-get-request-into-a-string.py",
-      "102.2173-load-from-http-get-request-into-a-file.py",
-      "103.2276-load-xml-file-into-struct.py",
-      "104.3264-save-object-into-xml-file.py",
-      "106.2039-get-program-working-directory.py",
-      "107.2139-get-folder-containing-current-program.py",
-      "109.2280-number-of-bytes-of-a-type.py",
-      "111.2168-launch-other-program.py",
-      "121.3029-udp-listen-and-read.py",
-      "124.2152-binary-search-for-a-value-in-sorted-array.py",
-      "125.2167-measure-function-call-duration.py",
-      "127.2274-source-code-inclusion.py",
+      "070.1087-use-clock-as-random-generator-seed.py"
+    ],
+    "call/method/Request": [
+      "174.2687-make-http-post-request.py"
+    ],
+    "call/method/TemporaryDirectory": [
+      "139.2162-create-temp-directory.py"
+    ],
+    "call/method/TemporaryFile": [
+      "138.2161-create-temp-file.py"
+    ],
+    "call/method/Timer": [
+      "185.2820-execute-function-in-30-seconds.py"
+    ],
+    "call/method/abspath": [
+      "107.2139-get-folder-containing-current-program.py"
+    ],
+    "call/method/acquire": [
+      "033.1420-atomically-read-and-update-variable.py"
+    ],
+    "call/method/add": [
+      "040.2279-graph-with-adjacency-lists.py",
+      "119.3263-deduplicate-list.py",
       "129.2282-breadth-first-traversing-in-a-graph.py",
-      "132.2040-measure-duration-of-procedure-execution.py",
-      "138.2161-create-temp-file.py",
-      "139.2162-create-temp-directory.py",
-      "144.2145-check-if-file-exists.py",
-      "144.2915-check-if-file-exists.py",
-      "145.1822-print-log-line-with-datetime.py",
-      "146.1825-convert-string-to-floating-point-number.py",
-      "147.2171-remove-all-non-ascii-characters.py",
-      "154.2292-halfway-between-two-hex-color-codes.py",
-      "155.2147-delete-file.py",
-      "158.2163-random-sublist.py",
-      "164.2169-open-url-in-default-browser.py",
-      "174.2687-make-http-post-request.py",
-      "175.2613-bytes-to-hex-string.py",
-      "176.2614-hex-string-to-byte-array.py",
-      "177.2709-find-files-with-a-given-list-of-filename-extensions.py",
-      "177.2725-find-files-with-a-given-list-of-filename-extensions.py",
-      "177.3241-find-files-with-a-given-list-of-filename-extensions.py",
-      "180.2612-list-files-in-directory.py",
-      "183.3025-make-http-put-request.py",
-      "184.2701-tomorrow.py",
-      "185.2820-execute-function-in-30-seconds.py",
-      "186.2699-exit-program-cleanly.py",
-      "187.3261-disjoint-set.py",
-      "188.3284-matrix-multiplication.py",
-      "197.3457-get-a-list-of-lines-from-a-file.py"
+      "130.2283-depth-first-traversing-in-a-graph.py"
+    ],
+    "call/method/append": [
+      "119.3263-deduplicate-list.py",
+      "128.2085-breadth-first-traversing-of-a-tree.py",
+      "171.2446-add-an-element-at-the-end-of-a-list.py"
+    ],
+    "call/method/apply_async": [
+      "030.189-parallelize-execution-of-1000-independent-tasks.py"
+    ],
+    "call/method/array": [
+      "154.2292-halfway-between-two-hex-color-codes.py"
+    ],
+    "call/method/asizeof": [
+      "109.2280-number-of-bytes-of-a-type.py"
+    ],
+    "call/method/astype": [
+      "154.2292-halfway-between-two-hex-color-codes.py"
+    ],
+    "call/method/atof": [
+      "146.1825-convert-string-to-floating-point-number.py"
+    ],
+    "call/method/basicConfig": [
+      "145.1822-print-log-line-with-datetime.py"
+    ],
+    "call/method/bind": [
+      "121.3029-udp-listen-and-read.py"
+    ],
+    "call/method/bisect_left": [
+      "124.2152-binary-search-for-a-value-in-sorted-array.py"
+    ],
+    "call/method/call": [
+      "111.2168-launch-other-program.py"
+    ],
+    "call/method/ceil": [
+      "068.2271-create-a-bitset.py"
+    ],
+    "call/method/chain": [
+      "177.3241-find-files-with-a-given-list-of-filename-extensions.py"
     ],
     "call/method/chaining": [
       "154.2292-halfway-between-two-hex-color-codes.py",
       "174.2687-make-http-post-request.py"
     ],
-    "call/method/dict/items": [
-      "013.574-iterate-over-map-keys-and-values.py",
-      "113.2157-iterate-over-map-entries-ordered-by-values.py"
+    "call/method/choice": [
+      "011.47-pick-a-random-element-from-a-list.py"
     ],
-    "call/method/dict/values": [
-      "052.666-check-if-map-contains-value.py"
+    "call/method/compile": [
+      "083.1805-regex-with-character-repetition.py"
     ],
-    "call/method/sequence/count": [
+    "call/method/count": [
       "082.1096-count-substring-occurrences.py",
       "084.1940-count-bits-set-in-integer-binary-representation.py"
     ],
-    "call/method/sequence/index": [
-      "020.573-return-two-values.py"
+    "call/method/decode": [
+      "041.187-reverse-a-string.py"
     ],
-    "call/method/sequence/list/append": [
-      "119.3263-deduplicate-list.py",
-      "128.2085-breadth-first-traversing-of-a-tree.py",
-      "171.2446-add-an-element-at-the-end-of-a-list.py"
+    "call/method/dirname": [
+      "107.2139-get-folder-containing-current-program.py"
     ],
-    "call/method/sequence/list/extend": [
-      "129.2282-breadth-first-traversing-in-a-graph.py",
-      "130.2283-depth-first-traversing-in-a-graph.py"
+    "call/method/dump": [
+      "092.1100-save-object-into-json-file.py"
     ],
-    "call/method/sequence/list/insert": [
-      "044.190-insert-element-in-list.py"
-    ],
-    "call/method/sequence/list/reverse": [
-      "019.3164-reverse-a-list.py"
-    ],
-    "call/method/sequence/list/sort": [
-      "100.1142-sort-by-a-comparator.py"
-    ],
-    "call/method/sequence/string/encode": [
+    "call/method/encode": [
       "041.187-reverse-a-string.py",
       "174.2687-make-http-post-request.py"
     ],
-    "call/method/sequence/string/endswith": [
+    "call/method/endswith": [
       "097.1095-check-string-suffix.py",
       "151.2166-remove-string-trailing-path-separator.py"
     ],
-    "call/method/sequence/string/find": [
+    "call/method/exists": [
+      "144.2145-check-if-file-exists.py",
+      "144.2915-check-if-file-exists.py"
+    ],
+    "call/method/exit": [
+      "087.1139-stop-program.py",
+      "186.2699-exit-program-cleanly.py"
+    ],
+    "call/method/extend": [
+      "129.2282-breadth-first-traversing-in-a-graph.py",
+      "130.2283-depth-first-traversing-in-a-graph.py"
+    ],
+    "call/method/factorial": [
+      "067.1426-binomial-coefficient-n-choose-k.py"
+    ],
+    "call/method/find": [
       "062.1091-find-substring-position.py"
     ],
-    "call/method/sequence/string/format": [
+    "call/method/find_set": [
+      "187.3261-disjoint-set.py"
+    ],
+    "call/method/format": [
       "023.1102-convert-real-number-to-string-with-2-decimal-places.py",
       "065.1085-format-decimal-number.py",
       "076.1083-binary-digits-from-an-integer.py",
@@ -11186,56 +11957,225 @@
       "154.2155-halfway-between-two-hex-color-codes.py",
       "177.2725-find-files-with-a-given-list-of-filename-extensions.py"
     ],
-    "call/method/sequence/string/isdigit": [
+    "call/method/from_str": [
+      "154.2292-halfway-between-two-hex-color-codes.py"
+    ],
+    "call/method/fromhex": [
+      "176.2614-hex-string-to-byte-array.py"
+    ],
+    "call/method/fromtimestamp": [
+      "098.2142-epoch-seconds-to-date-object.py"
+    ],
+    "call/method/getLogger": [
+      "145.1822-print-log-line-with-datetime.py"
+    ],
+    "call/method/getcwd": [
+      "106.2039-get-program-working-directory.py"
+    ],
+    "call/method/getsize": [
+      "095.2140-get-file-size.py"
+    ],
+    "call/method/glob": [
+      "177.3241-find-files-with-a-given-list-of-filename-extensions.py"
+    ],
+    "call/method/hex": [
+      "175.2613-bytes-to-hex-string.py"
+    ],
+    "call/method/index": [
+      "020.573-return-two-values.py"
+    ],
+    "call/method/info": [
+      "145.1822-print-log-line-with-datetime.py"
+    ],
+    "call/method/insert": [
+      "044.190-insert-element-in-list.py"
+    ],
+    "call/method/is_same_set": [
+      "187.3261-disjoint-set.py"
+    ],
+    "call/method/isdigit": [
       "137.1823-check-if-string-contains-only-digits.py"
     ],
-    "call/method/sequence/string/join": [
+    "call/method/isoformat": [
+      "099.2693-format-date-yyyy-mm-dd.py"
+    ],
+    "call/method/items": [
+      "013.574-iterate-over-map-keys-and-values.py",
+      "113.2157-iterate-over-map-entries-ordered-by-values.py"
+    ],
+    "call/method/join": [
       "053.1933-join-a-list-of-strings.py",
       "053.240-join-a-list-of-strings.py",
       "071.379-echo-program-implementation.py",
       "154.2292-halfway-between-two-hex-color-codes.py"
     ],
-    "call/method/sequence/string/lower": [
+    "call/method/listdir": [
+      "177.2709-find-files-with-a-given-list-of-filename-extensions.py",
+      "180.2612-list-files-in-directory.py"
+    ],
+    "call/method/load": [
+      "091.1098-load-json-file-into-struct.py"
+    ],
+    "call/method/load_module": [
+      "127.2274-source-code-inclusion.py"
+    ],
+    "call/method/lower": [
       "133.2160-case-insensitive-string-contains.py"
     ],
-    "call/method/sequence/string/lstrip": [
+    "call/method/lstrip": [
       "167.3175-trim-prefix.py"
     ],
-    "call/method/sequence/string/replace": [
-      "063.1088-replace-fragment-of-a-string.py",
-      "116.1257-remove-occurrences-of-word-from-string.py"
+    "call/method/make_path": [
+      "040.2279-graph-with-adjacency-lists.py"
     ],
-    "call/method/sequence/string/rsplit": [
-      "168.2277-trim-suffix.py"
+    "call/method/map": [
+      "056.1424-launch-1000-parallel-tasks-and-wait-for-completion.py"
     ],
-    "call/method/sequence/string/rstrip": [
-      "150.2154-remove-trailing-slash.py",
-      "168.3174-trim-suffix.py"
+    "call/method/match": [
+      "177.2725-find-files-with-a-given-list-of-filename-extensions.py"
     ],
-    "call/method/sequence/string/split": [
-      "049.242-split-a-space-separated-string.py",
-      "148.1829-read-list-of-integer-numbers-from-stdin.py"
+    "call/method/matmul": [
+      "188.3284-matrix-multiplication.py"
     ],
-    "call/method/sequence/string/startswith": [
-      "096.1094-check-string-prefix.py",
-      "167.2611-trim-prefix.py"
+    "call/method/now": [
+      "061.576-get-current-date.py"
     ],
-    "call/method/sequence/string/strip": [
-      "110.1455-check-if-string-is-blank.py"
+    "call/method/open": [
+      "164.2169-open-url-in-default-browser.py"
     ],
-    "call/method/set/add": [
-      "040.2279-graph-with-adjacency-lists.py",
-      "119.3263-deduplicate-list.py",
-      "129.2282-breadth-first-traversing-in-a-graph.py",
-      "130.2283-depth-first-traversing-in-a-graph.py"
+    "call/method/parse": [
+      "103.2276-load-xml-file-into-struct.py"
     ],
-    "call/method/set_or_list/pop": [
+    "call/method/perf_counter": [
+      "125.2167-measure-function-call-duration.py"
+    ],
+    "call/method/pop": [
       "128.2085-breadth-first-traversing-of-a-tree.py",
       "130.2283-depth-first-traversing-in-a-graph.py",
       "140.2156-delete-map-entry.py"
     ],
-    "call/method/set_or_list/remove": [
+    "call/method/popleft": [
+      "129.2282-breadth-first-traversing-in-a-graph.py"
+    ],
+    "call/method/put": [
+      "025.195-send-a-value-to-another-thread.py",
+      "183.3025-make-http-put-request.py"
+    ],
+    "call/method/randint": [
+      "015.184-pick-uniformly-a-random-integer-in-ab.py"
+    ],
+    "call/method/randrange": [
+      "014.185-pick-uniformly-a-random-floating-point-number-in-ab.py"
+    ],
+    "call/method/read": [
+      "058.665-extract-file-content-to-a-string.py",
+      "101.2172-load-from-http-get-request-into-a-string.py"
+    ],
+    "call/method/readlines": [
+      "197.3457-get-a-list-of-lines-from-a-file.py"
+    ],
+    "call/method/recvfrom": [
+      "121.3029-udp-listen-and-read.py"
+    ],
+    "call/method/release": [
+      "033.1420-atomically-read-and-update-variable.py"
+    ],
+    "call/method/remove": [
       "135.2158-remove-item-from-list-by-its-value.py"
+    ],
+    "call/method/replace": [
+      "063.1088-replace-fragment-of-a-string.py",
+      "116.1257-remove-occurrences-of-word-from-string.py"
+    ],
+    "call/method/reverse": [
+      "019.3164-reverse-a-list.py"
+    ],
+    "call/method/rsplit": [
+      "168.2277-trim-suffix.py"
+    ],
+    "call/method/rstrip": [
+      "150.2154-remove-trailing-slash.py",
+      "168.3174-trim-suffix.py"
+    ],
+    "call/method/sample": [
+      "158.2163-random-sublist.py"
+    ],
+    "call/method/serialize": [
+      "104.3264-save-object-into-xml-file.py"
+    ],
+    "call/method/setlocale": [
+      "146.1825-convert-string-to-floating-point-number.py"
+    ],
+    "call/method/shuffle": [
+      "010.1478-shuffle-a-list.py"
+    ],
+    "call/method/sleep": [
+      "045.570-pause-execution-for-5-seconds.py"
+    ],
+    "call/method/socket": [
+      "121.3029-udp-listen-and-read.py"
+    ],
+    "call/method/sort": [
+      "100.1142-sort-by-a-comparator.py"
+    ],
+    "call/method/split": [
+      "049.242-split-a-space-separated-string.py",
+      "148.1829-read-list-of-integer-numbers-from-stdin.py"
+    ],
+    "call/method/splitext": [
+      "177.2709-find-files-with-a-given-list-of-filename-extensions.py"
+    ],
+    "call/method/start": [
+      "025.195-send-a-value-to-another-thread.py",
+      "185.2820-execute-function-in-30-seconds.py"
+    ],
+    "call/method/startswith": [
+      "096.1094-check-string-prefix.py",
+      "167.2611-trim-prefix.py"
+    ],
+    "call/method/strftime": [
+      "099.1429-format-date-yyyy-mm-dd.py"
+    ],
+    "call/method/strip": [
+      "110.1455-check-if-string-is-blank.py"
+    ],
+    "call/method/sub": [
+      "147.2171-remove-all-non-ascii-characters.py"
+    ],
+    "call/method/timeit": [
+      "132.2040-measure-duration-of-procedure-execution.py"
+    ],
+    "call/method/today": [
+      "099.2693-format-date-yyyy-mm-dd.py",
+      "184.2701-tomorrow.py"
+    ],
+    "call/method/uniform": [
+      "014.3410-pick-uniformly-a-random-floating-point-number-in-ab.py"
+    ],
+    "call/method/unlink": [
+      "155.2147-delete-file.py"
+    ],
+    "call/method/urlencode": [
+      "174.2687-make-http-post-request.py"
+    ],
+    "call/method/urlopen": [
+      "101.2172-load-from-http-get-request-into-a-string.py",
+      "174.2687-make-http-post-request.py"
+    ],
+    "call/method/urlretrieve": [
+      "102.2173-load-from-http-get-request-into-a-file.py"
+    ],
+    "call/method/values": [
+      "052.666-check-if-map-contains-value.py"
+    ],
+    "call/method/view": [
+      "154.2292-halfway-between-two-hex-color-codes.py"
+    ],
+    "call/method/walk": [
+      "177.2725-find-files-with-a-given-list-of-filename-extensions.py"
+    ],
+    "call/method/zeros": [
+      "027.193-create-a-3-dimensional-array.py"
     ],
     "class": [
       "005.663-create-a-2d-point-data-structure.py",
@@ -11622,6 +12562,255 @@
     "library/third_party/requests": [
       "183.3025-make-http-put-request.py"
     ],
+    "metadata/sloc/1": [
+      "001.1159-print-hello-world.py",
+      "002.1493-print-hello-10-times.py",
+      "002.3117-print-hello-10-times.py",
+      "008.39-initialize-a-new-map-associative-array.py",
+      "012.181-check-if-list-contains-a-value.py",
+      "019.197-reverse-a-list.py",
+      "019.1983-reverse-a-list.py",
+      "019.3164-reverse-a-list.py",
+      "021.84-swap-values-of-variables-a-and-b.py",
+      "022.243-convert-string-to-integer.py",
+      "023.1102-convert-real-number-to-string-with-2-decimal-places.py",
+      "024.664-assign-to-string-the-japanese-word-.py",
+      "026.194-create-a-2-dimensional-array.py",
+      "027.192-create-a-3-dimensional-array.py",
+      "028.350-sort-by-a-property.py",
+      "029.199-remove-item-from-list-by-its-index.py",
+      "038.186-extract-a-substring.py",
+      "039.571-check-if-string-contains-a-word.py",
+      "041.187-reverse-a-string.py",
+      "041.2714-reverse-a-string.py",
+      "044.190-insert-element-in-list.py",
+      "046.191-extract-beginning-of-string-prefix.py",
+      "047.198-extract-string-suffix.py",
+      "049.242-split-a-space-separated-string.py",
+      "051.230-check-if-map-contains-key.py",
+      "052.666-check-if-map-contains-value.py",
+      "053.1933-join-a-list-of-strings.py",
+      "053.240-join-a-list-of-strings.py",
+      "054.241-compute-sum-of-integers.py",
+      "055.575-convert-integer-to-string.py",
+      "057.260-filter-list.py",
+      "057.3173-filter-list.py",
+      "058.665-extract-file-content-to-a-string.py",
+      "062.1091-find-substring-position.py",
+      "063.1088-replace-fragment-of-a-string.py",
+      "064.274-big-integer--value-3-power-247.py",
+      "065.1085-format-decimal-number.py",
+      "066.672-big-integer-exponentiation.py",
+      "076.1083-binary-digits-from-an-integer.py",
+      "079.1090-convert-integer-to-floating-point-number.py",
+      "080.1092-truncate-floating-point-number-to-integer.py",
+      "081.2270-round-floating-point-number-to-integer.py",
+      "082.1096-count-substring-occurrences.py",
+      "084.1940-count-bits-set-in-integer-binary-representation.py",
+      "088.2143-allocate-1m-bytes.py",
+      "089.1097-handle-invalid-argument.py",
+      "094.1101-print-type-of-variable.py",
+      "094.1864-print-type-of-variable.py",
+      "096.1094-check-string-prefix.py",
+      "097.1095-check-string-suffix.py",
+      "100.1142-sort-by-a-comparator.py",
+      "110.1455-check-if-string-is-blank.py",
+      "114.2273-test-deep-equality.py",
+      "116.1257-remove-occurrences-of-word-from-string.py",
+      "117.1297-get-list-size.py",
+      "118.1254-list-to-set.py",
+      "118.3266-list-to-set.py",
+      "119.1253-deduplicate-list.py",
+      "120.1479-read-integer-from-stdin.py",
+      "123.2146-assert-condition.py",
+      "131.2083-successive-conditions.py",
+      "133.2160-case-insensitive-string-contains.py",
+      "134.1850-create-a-new-list.py",
+      "135.2158-remove-item-from-list-by-its-value.py",
+      "136.2141-remove-all-occurrences-of-a-value-from-a-list.py",
+      "137.1823-check-if-string-contains-only-digits.py",
+      "140.2156-delete-map-entry.py",
+      "142.2151-hexadecimal-digits-of-an-integer.py",
+      "146.1826-convert-string-to-floating-point-number.py",
+      "146.2739-convert-string-to-floating-point-number.py",
+      "148.1829-read-list-of-integer-numbers-from-stdin.py",
+      "150.2154-remove-trailing-slash.py",
+      "152.2153-turn-a-character-into-a-string.py",
+      "153.1980-concatenate-string-with-integer.py",
+      "156.2148-format-integer-with-zero-padding.py",
+      "157.2150-declare-constant-string.py",
+      "161.2098-multiply-all-the-elements-of-a-list.py",
+      "165.2149-last-element-of-list.py",
+      "166.2272-concatenate-two-lists.py",
+      "167.2611-trim-prefix.py",
+      "167.3175-trim-prefix.py",
+      "168.2277-trim-suffix.py",
+      "168.3174-trim-suffix.py",
+      "169.2233-string-length.py",
+      "170.2275-get-map-size.py",
+      "171.2446-add-an-element-at-the-end-of-a-list.py",
+      "172.2442-insert-entry-in-map.py",
+      "173.2427-format-a-number-with-grouped-thousands.py",
+      "173.2428-format-a-number-with-grouped-thousands.py",
+      "173.2429-format-a-number-with-grouped-thousands.py",
+      "175.2613-bytes-to-hex-string.py",
+      "176.2614-hex-string-to-byte-array.py",
+      "178.2615-check-if-point-is-inside-rectangle.py",
+      "179.2688-get-center-of-a-rectangle.py",
+      "189.3236-filter-and-transform-list.py"
+    ],
+    "metadata/sloc/11": [
+      "043.676-break-outer-loop.py"
+    ],
+    "metadata/sloc/12": [
+      "104.3264-save-object-into-xml-file.py"
+    ],
+    "metadata/sloc/13": [
+      "040.2279-graph-with-adjacency-lists.py"
+    ],
+    "metadata/sloc/15": [
+      "154.2292-halfway-between-two-hex-color-codes.py",
+      "187.3261-disjoint-set.py"
+    ],
+    "metadata/sloc/2": [
+      "001.3-print-hello-world.py",
+      "002.11-print-hello-10-times.py",
+      "003.19-create-a-procedure.py",
+      "003.2372-create-a-procedure.py",
+      "004.24-create-a-function-which-returns-the-square-of-an-integer.py",
+      "004.2921-create-a-function-which-returns-the-square-of-an-integer.py",
+      "005.663-create-a-2d-point-data-structure.py",
+      "006.32-iterate-over-list-values.py",
+      "007.183-iterate-over-list-indexes-and-values.py",
+      "010.1478-shuffle-a-list.py",
+      "010.182-shuffle-a-list.py",
+      "011.47-pick-a-random-element-from-a-list.py",
+      "013.574-iterate-over-map-keys-and-values.py",
+      "014.3410-pick-uniformly-a-random-floating-point-number-in-ab.py",
+      "015.184-pick-uniformly-a-random-integer-in-ab.py",
+      "027.193-create-a-3-dimensional-array.py",
+      "032.196-integer-exponentiation-by-squaring.py",
+      "035.667-first-class-function--compose.py",
+      "036.670-first-class-function--generic-composition.py",
+      "045.570-pause-execution-for-5-seconds.py",
+      "050.572-make-an-infinite-loop.py",
+      "059.668-write-to-standard-error-stream.py",
+      "060.1084-read-command-line-argument.py",
+      "061.576-get-current-date.py",
+      "069.1086-seed-random-generator.py",
+      "070.1087-use-clock-as-random-generator-seed.py",
+      "071.379-echo-program-implementation.py",
+      "074.674-compute-gcd.py",
+      "075.675-compute-lcm.py",
+      "077.1093-complex-number.py",
+      "083.1805-regex-with-character-repetition.py",
+      "085.1003-check-if-integer-addition-will-overflow.py",
+      "086.1004-check-if-integer-multiplication-will-overflow.py",
+      "087.1139-stop-program.py",
+      "095.2140-get-file-size.py",
+      "098.2142-epoch-seconds-to-date-object.py",
+      "102.2173-load-from-http-get-request-into-a-file.py",
+      "103.2276-load-xml-file-into-struct.py",
+      "105.1804-current-executable-name.py",
+      "106.2039-get-program-working-directory.py",
+      "107.2139-get-folder-containing-current-program.py",
+      "108.1291-determine-if-variable-name-is-defined.py",
+      "109.2280-number-of-bytes-of-a-type.py",
+      "111.2168-launch-other-program.py",
+      "112.2144-iterate-over-map-entries-ordered-by-keys.py",
+      "113.2157-iterate-over-map-entries-ordered-by-values.py",
+      "115.2138-compare-dates.py",
+      "122.1453-declare-enumeration.py",
+      "126.2137-multiple-return-values.py",
+      "127.2274-source-code-inclusion.py",
+      "132.2040-measure-duration-of-procedure-execution.py",
+      "138.2161-create-temp-file.py",
+      "139.2162-create-temp-directory.py",
+      "141.2159-iterate-in-sequence-over-two-lists.py",
+      "143.2256-iterate-alternatively-over-two-lists.py",
+      "144.2145-check-if-file-exists.py",
+      "144.2915-check-if-file-exists.py",
+      "147.2171-remove-all-non-ascii-characters.py",
+      "158.2163-random-sublist.py",
+      "163.2170-print-list-elements-by-group-of-2.py",
+      "164.2169-open-url-in-default-browser.py",
+      "180.2612-list-files-in-directory.py",
+      "182.2658-quine-program.py",
+      "184.2701-tomorrow.py",
+      "186.2699-exit-program-cleanly.py",
+      "188.3171-matrix-multiplication.py",
+      "188.3284-matrix-multiplication.py",
+      "191.3403-check-if-any-value-in-a-list-is-larger-than-a-limit.py",
+      "197.3457-get-a-list-of-lines-from-a-file.py"
+    ],
+    "metadata/sloc/3": [
+      "014.185-pick-uniformly-a-random-floating-point-number-in-ab.py",
+      "034.625-create-a-set-of-objects.py",
+      "048.210-multi-line-string-literal.py",
+      "067.1426-binomial-coefficient-n-choose-k.py",
+      "068.2271-create-a-bitset.py",
+      "073.673-create-a-factory.py",
+      "091.1098-load-json-file-into-struct.py",
+      "092.1100-save-object-into-json-file.py",
+      "093.1082-pass-a-runnable-procedure-as-parameter.py",
+      "099.1429-format-date-yyyy-mm-dd.py",
+      "099.2693-format-date-yyyy-mm-dd.py",
+      "101.2172-load-from-http-get-request-into-a-string.py",
+      "151.2166-remove-string-trailing-path-separator.py",
+      "154.2155-halfway-between-two-hex-color-codes.py",
+      "155.2147-delete-file.py",
+      "177.2709-find-files-with-a-given-list-of-filename-extensions.py",
+      "177.3241-find-files-with-a-given-list-of-filename-extensions.py",
+      "179.2689-get-center-of-a-rectangle.py",
+      "185.2820-execute-function-in-30-seconds.py"
+    ],
+    "metadata/sloc/4": [
+      "017.1103-create-a-tree-data-structure.py",
+      "018.2084-depth-first-traversing-of-a-tree.py",
+      "020.573-return-two-values.py",
+      "030.189-parallelize-execution-of-1000-independent-tasks.py",
+      "078.1089-do-while-loop.py",
+      "124.2152-binary-search-for-a-value-in-sorted-array.py",
+      "146.1825-convert-string-to-floating-point-number.py",
+      "174.2687-make-http-post-request.py"
+    ],
+    "metadata/sloc/5": [
+      "009.1410-create-a-binary-tree-data-structure.py",
+      "009.3176-create-a-binary-tree-data-structure.py",
+      "031.188-recursive-factorial-simple.py",
+      "042.3168-continue-outer-loop.py",
+      "125.2167-measure-function-call-duration.py",
+      "159.2281-trie.py",
+      "160.2165-detect-if-32-bit-or-64-bit-architecture.py",
+      "162.2164-execute-procedures-depending-on-options.py"
+    ],
+    "metadata/sloc/6": [
+      "016.1530-depth-first-traversing-of-a-binary-tree.py",
+      "025.195-send-a-value-to-another-thread.py",
+      "037.671-currying.py",
+      "056.1424-launch-1000-parallel-tasks-and-wait-for-completion.py",
+      "090.1099-read-only-outside.py",
+      "122.1454-declare-enumeration.py",
+      "131.2766-successive-conditions.py",
+      "145.1822-print-log-line-with-datetime.py"
+    ],
+    "metadata/sloc/7": [
+      "033.1420-atomically-read-and-update-variable.py",
+      "043.2733-break-outer-loop.py",
+      "121.3029-udp-listen-and-read.py",
+      "163.3177-print-list-elements-by-group-of-2.py",
+      "177.2725-find-files-with-a-given-list-of-filename-extensions.py",
+      "183.3025-make-http-put-request.py"
+    ],
+    "metadata/sloc/8": [
+      "042.1264-continue-outer-loop.py",
+      "119.3263-deduplicate-list.py",
+      "130.2283-depth-first-traversing-in-a-graph.py"
+    ],
+    "metadata/sloc/9": [
+      "128.2085-breadth-first-traversing-of-a-tree.py",
+      "129.2282-breadth-first-traversing-in-a-graph.py"
+    ],
     "operator/arithmetic/addition": [
       "037.671-currying.py",
       "081.2270-round-floating-point-number-to-integer.py",
@@ -11930,18 +13119,28 @@
       "178.2615-check-if-point-is-inside-rectangle.py"
     ],
     "type/container/dictionary": [
-      "008.39-initialize-a-new-map-associative-array.py"
+      "008.39-initialize-a-new-map-associative-array.py",
+      "013.574-iterate-over-map-keys-and-values.py",
+      "052.666-check-if-map-contains-value.py",
+      "113.2157-iterate-over-map-entries-ordered-by-values.py"
     ],
     "type/container/dictionary/empty": [
       "183.3025-make-http-put-request.py"
     ],
     "type/container/list": [
       "017.1103-create-a-tree-data-structure.py",
+      "019.3164-reverse-a-list.py",
       "043.2733-break-outer-loop.py",
+      "044.190-insert-element-in-list.py",
+      "100.1142-sort-by-a-comparator.py",
       "111.2168-launch-other-program.py",
       "119.1253-deduplicate-list.py",
       "119.3263-deduplicate-list.py",
+      "128.2085-breadth-first-traversing-of-a-tree.py",
+      "129.2282-breadth-first-traversing-in-a-graph.py",
+      "130.2283-depth-first-traversing-in-a-graph.py",
       "148.1829-read-list-of-integer-numbers-from-stdin.py",
+      "171.2446-add-an-element-at-the-end-of-a-list.py",
       "177.2709-find-files-with-a-given-list-of-filename-extensions.py",
       "177.3241-find-files-with-a-given-list-of-filename-extensions.py",
       "187.3261-disjoint-set.py"
@@ -11950,16 +13149,55 @@
       "119.3263-deduplicate-list.py",
       "159.2281-trie.py"
     ],
+    "type/container/sequence": [
+      "020.573-return-two-values.py",
+      "082.1096-count-substring-occurrences.py",
+      "084.1940-count-bits-set-in-integer-binary-representation.py"
+    ],
     "type/container/set": [
       "034.625-create-a-set-of-objects.py",
+      "040.2279-graph-with-adjacency-lists.py",
       "118.1254-list-to-set.py",
       "118.3266-list-to-set.py",
-      "119.1253-deduplicate-list.py"
+      "119.1253-deduplicate-list.py",
+      "119.3263-deduplicate-list.py",
+      "129.2282-breadth-first-traversing-in-a-graph.py",
+      "130.2283-depth-first-traversing-in-a-graph.py"
     ],
     "type/container/set/empty": [
       "119.3263-deduplicate-list.py",
       "129.2282-breadth-first-traversing-in-a-graph.py",
       "130.2283-depth-first-traversing-in-a-graph.py"
+    ],
+    "type/container/string": [
+      "023.1102-convert-real-number-to-string-with-2-decimal-places.py",
+      "041.187-reverse-a-string.py",
+      "049.242-split-a-space-separated-string.py",
+      "053.1933-join-a-list-of-strings.py",
+      "053.240-join-a-list-of-strings.py",
+      "062.1091-find-substring-position.py",
+      "063.1088-replace-fragment-of-a-string.py",
+      "065.1085-format-decimal-number.py",
+      "071.379-echo-program-implementation.py",
+      "076.1083-binary-digits-from-an-integer.py",
+      "096.1094-check-string-prefix.py",
+      "097.1095-check-string-suffix.py",
+      "110.1455-check-if-string-is-blank.py",
+      "116.1257-remove-occurrences-of-word-from-string.py",
+      "133.2160-case-insensitive-string-contains.py",
+      "137.1823-check-if-string-contains-only-digits.py",
+      "148.1829-read-list-of-integer-numbers-from-stdin.py",
+      "150.2154-remove-trailing-slash.py",
+      "151.2166-remove-string-trailing-path-separator.py",
+      "153.1980-concatenate-string-with-integer.py",
+      "154.2155-halfway-between-two-hex-color-codes.py",
+      "154.2292-halfway-between-two-hex-color-codes.py",
+      "167.2611-trim-prefix.py",
+      "167.3175-trim-prefix.py",
+      "168.2277-trim-suffix.py",
+      "168.3174-trim-suffix.py",
+      "174.2687-make-http-post-request.py",
+      "177.2725-find-files-with-a-given-list-of-filename-extensions.py"
     ],
     "type/container/tuple": [
       "040.2279-graph-with-adjacency-lists.py",

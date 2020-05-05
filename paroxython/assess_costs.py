@@ -31,6 +31,8 @@ class LearningCostAssessor:
     @lru_cache(maxsize=None)
     def taxon_cost(self, taxon: TaxonName) -> float:
         """Evaluate the learning cost of a given taxon name."""
+        if taxon.startswith("metadata/"):
+            return 0
         (start, stop) = (0, 0)
         if taxon not in self.imparted_knowledge:
             segments = taxon.split("/")

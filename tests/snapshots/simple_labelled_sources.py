@@ -5,6 +5,7 @@ a = b # assignment
       # assignment_lhs_identifier:a
       # assignment_rhs_atom:b
       # single_assignment:a
+      # whole_span:1
 
 # ----------------------------------------------------------------------------------------
 # collatz_print.py
@@ -14,6 +15,7 @@ def print_collatz(n): # added_block_label (-> +7)
                       # function_argument:n
                       # function_argument_flavor:arg
                       # function_returning_nothing:print_collatz (-> +7)
+                      # whole_span:8 (-> +7)
     while n != 1: # comparison_operator:NotEq
                   # literal:1
                   # loop:while (-> +5)
@@ -77,6 +79,7 @@ def print_collatz(n): # added_block_label (-> +7)
 # ----------------------------------------------------------------------------------------
 import collatz_print # import_internally:collatz_print
                      # import_module_internally:collatz_print
+                     # whole_span:10 (-> +9)
 for i in range(1, 101): # call_argument:1
                         # call_argument:101
                         # for:i (-> +8)
@@ -146,6 +149,7 @@ for i in range(1, 101): # call_argument:1
 # ----------------------------------------------------------------------------------------
 import fizzbuzz # import_internally:fizzbuzz
                 # import_module_internally:fizzbuzz
+                # whole_span:3 (-> +2)
 def is_even(n): # function:is_even (-> +1)
                 # function_argument:n
                 # function_argument_flavor:arg
