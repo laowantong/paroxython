@@ -96,17 +96,15 @@ class Recommendations:
         spans_to_html = enumeration_to_txt_factory(span_column_width, "_imported_")
         display_count = lambda n: f"{n} program" + ("" if n == 1 else "s")
 
+        sorting_key = None
         if sorting_strategy == "by_cost_and_sloc":
             sorting_key = lambda x: (x[0], len(self.programs[x[1]]["source"].split("\n")))
         elif sorting_strategy == "lexicographic":
             sorting_key = lambda x: x[1]
-        else:
-            sorting_key = None
 
+        grouping_key = lambda x: f"(default: no group)"
         if grouping_strategy == "by_cost_interval":
             grouping_key = cost_interval
-        else:
-            grouping_key = lambda x: f"(default: no group)"
 
         # Group resulting programs by cost interval, and sort each group by increasing difficulty.
 

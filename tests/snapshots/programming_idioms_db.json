@@ -1117,7 +1117,6 @@
       },
       "taxons": {
         "call/function/f": [[5,5]],
-        "call/method/Lock": [[2,2]],
         "call/method/acquire": [[3,3]],
         "call/method/release": [[7,7]],
         "library/standard/threading": [[1,1]],
@@ -2298,7 +2297,6 @@
         "whole_span:2": [[1,2]]
       },
       "taxons": {
-        "call/method/Random": [[2,2]],
         "library/standard/random": [[1,1]],
         "metadata/sloc/2": [[1,2]],
         "variable/assignment/single": [[2,2]]
@@ -2318,7 +2316,6 @@
         "whole_span:2": [[1,2]]
       },
       "taxons": {
-        "call/method/Random": [[2,2]],
         "library/standard/random": [[1,1]],
         "metadata/sloc/2": [[1,2]],
         "variable/assignment/single": [[2,2]]
@@ -4368,7 +4365,6 @@
         "whole_span:2": [[1,2]]
       },
       "taxons": {
-        "call/method/TemporaryFile": [[2,2]],
         "library/standard/tempfile": [[1,1]],
         "metadata/sloc/2": [[1,2]],
         "variable/assignment/single": [[2,2]]
@@ -4388,7 +4384,6 @@
         "whole_span:2": [[1,2]]
       },
       "taxons": {
-        "call/method/TemporaryDirectory": [[2,2]],
         "library/standard/tempfile": [[1,1]],
         "metadata/sloc/2": [[1,2]],
         "variable/assignment/single": [[2,2]]
@@ -5008,7 +5003,6 @@
         "whole_span:3": [[1,3]]
       },
       "taxons": {
-        "call/method/Path": [[2,2]],
         "call/method/unlink": [[3,3]],
         "library/standard/pathlib": [[1,1]],
         "metadata/sloc/3": [[1,3]],
@@ -5641,7 +5635,6 @@
         "whole_span:4": [[1,4]]
       },
       "taxons": {
-        "call/method/Request": [[3,3]],
         "call/method/chaining": [[2,2]],
         "call/method/encode": [[2,2]],
         "call/method/urlencode": [[2,2]],
@@ -6050,7 +6043,6 @@
         "whole_span:3": [[1,3]]
       },
       "taxons": {
-        "call/method/Timer": [[2,2]],
         "call/method/start": [[3,3]],
         "library/standard/threading": [[1,1]],
         "metadata/sloc/3": [[1,3]],
@@ -12361,28 +12353,6 @@
     "call/function/xrange": [
       "026.0194-create-a-2-dimensional-array.py",
       "027.0192-create-a-3-dimensional-array.py"
-    ],
-    "call/method/Lock": [
-      "033.1420-atomically-read-and-update-variable.py"
-    ],
-    "call/method/Path": [
-      "155.2147-delete-file.py"
-    ],
-    "call/method/Random": [
-      "069.1086-seed-random-generator.py",
-      "070.1087-use-clock-as-random-generator-seed.py"
-    ],
-    "call/method/Request": [
-      "174.2687-make-http-post-request.py"
-    ],
-    "call/method/TemporaryDirectory": [
-      "139.2162-create-temp-directory.py"
-    ],
-    "call/method/TemporaryFile": [
-      "138.2161-create-temp-file.py"
-    ],
-    "call/method/Timer": [
-      "185.2820-execute-function-in-30-seconds.py"
     ],
     "call/method/abspath": [
       "107.2139-get-folder-containing-current-program.py"

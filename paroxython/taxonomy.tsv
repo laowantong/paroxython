@@ -7,7 +7,7 @@ call/function/\1	external_free_call:(?!abs|delattr|hash|memoryview|all|help|min|
 call/function/builtin/\1	external_free_call:(abs|delattr|hash|memoryview|all|help|min|setattr|any|dir|hex|next|slice|ascii|divmod|id|object|sorted|bin|enumerate|input|oct|staticmethod|eval|open|str|breakpoint|exec|isinstance|ord|sum|filter|issubclass|pow|super|iter|print|callable|format|len|property|type|chr|range|vars|classmethod|getattr|locals|repr|zip|compile|globals|map|reversed|__import__|hasattr|max|round)
 call/function/builtin/casting/\1	external_free_call:(int|bool|float|complex|str|tuple|bytes|list|bytearray|set|frozenset|dict)
 call/function/without_arguments	free_call_without_arguments:[[:lower:]].*
-call/method/\1	member_call:(.+)
+call/method/\1	member_call:([[:lower:]].*)
 call/method/chaining	method_chaining
 class	class:.+
 flow/assertion	assertion
@@ -155,7 +155,6 @@ test/identity/not	comparison_operator:IsNot
 test/inequality	comparison_operator:(Lt|LtE|Gt|GtE)
 test/inequality/chained/\1	chained_inequalities:(\d+)
 test/yoda	yoda_comparison:(Eq|NotEq|Is|IsNot)
-topic/\1	topic:(.+)
 type/boolean	external_free_call:bool
 type/boolean/literal/false	literal:False
 type/boolean/literal/true	literal:True

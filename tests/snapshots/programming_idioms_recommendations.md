@@ -43,7 +43,7 @@
     - [`030.0189-parallelize-execution-of-1000-independent-tasks.py`](#program-0300189-parallelize-execution-of-1000-independent-taskspy-learning-cost-734375)
     - [`031.0188-recursive-factorial-simple.py`](#program-0310188-recursive-factorial-simplepy-learning-cost-928125)
     - [`032.0196-integer-exponentiation-by-squaring.py`](#program-0320196-integer-exponentiation-by-squaringpy-learning-cost-25)
-    - [`033.1420-atomically-read-and-update-variable.py`](#program-0331420-atomically-read-and-update-variablepy-learning-cost-525)
+    - [`033.1420-atomically-read-and-update-variable.py`](#program-0331420-atomically-read-and-update-variablepy-learning-cost-4375)
     - [`034.0625-create-a-set-of-objects.py`](#program-0340625-create-a-set-of-objectspy-learning-cost-559375)
     - [`035.0667-first-class-function--compose.py`](#program-0350667-first-class-function--composepy-learning-cost-4875)
     - [`036.0670-first-class-function--generic-composition.py`](#program-0360670-first-class-function--generic-compositionpy-learning-cost-4875)
@@ -84,8 +84,8 @@
     - [`066.0672-big-integer-exponentiation.py`](#program-0660672-big-integer-exponentiationpy-learning-cost-175)
     - [`067.1426-binomial-coefficient-n-choose-k.py`](#program-0671426-binomial-coefficient-n-choose-kpy-learning-cost-5125)
     - [`068.2271-create-a-bitset.py`](#program-0682271-create-a-bitsetpy-learning-cost-89375)
-    - [`069.1086-seed-random-generator.py`](#program-0691086-seed-random-generatorpy-learning-cost-2625)
-    - [`070.1087-use-clock-as-random-generator-seed.py`](#program-0701087-use-clock-as-random-generator-seedpy-learning-cost-2625)
+    - [`069.1086-seed-random-generator.py`](#program-0691086-seed-random-generatorpy-learning-cost-175)
+    - [`070.1087-use-clock-as-random-generator-seed.py`](#program-0701087-use-clock-as-random-generator-seedpy-learning-cost-175)
     - [`071.0379-echo-program-implementation.py`](#program-0710379-echo-program-implementationpy-learning-cost-79375)
     - [`073.0673-create-a-factory.py`](#program-0730673-create-a-factorypy-learning-cost-50625)
     - [`074.0674-compute-gcd.py`](#program-0740674-compute-gcdpy-learning-cost-26875)
@@ -158,8 +158,8 @@
     - [`135.2158-remove-item-from-list-by-its-value.py`](#program-1352158-remove-item-from-list-by-its-valuepy-learning-cost-0875)
     - [`136.2141-remove-all-occurrences-of-a-value-from-a-list.py`](#program-1362141-remove-all-occurrences-of-a-value-from-a-listpy-learning-cost-175)
     - [`137.1823-check-if-string-contains-only-digits.py`](#program-1371823-check-if-string-contains-only-digitspy-learning-cost-2625)
-    - [`138.2161-create-temp-file.py`](#program-1382161-create-temp-filepy-learning-cost-2625)
-    - [`139.2162-create-temp-directory.py`](#program-1392162-create-temp-directorypy-learning-cost-2625)
+    - [`138.2161-create-temp-file.py`](#program-1382161-create-temp-filepy-learning-cost-175)
+    - [`139.2162-create-temp-directory.py`](#program-1392162-create-temp-directorypy-learning-cost-175)
     - [`140.2156-delete-map-entry.py`](#program-1402156-delete-map-entrypy-learning-cost-175)
     - [`141.2159-iterate-in-sequence-over-two-lists.py`](#program-1412159-iterate-in-sequence-over-two-listspy-learning-cost-45)
     - [`142.2151-hexadecimal-digits-of-an-integer.py`](#program-1422151-hexadecimal-digits-of-an-integerpy-learning-cost-18125)
@@ -178,7 +178,7 @@
     - [`153.1980-concatenate-string-with-integer.py`](#program-1531980-concatenate-string-with-integerpy-learning-cost-35625)
     - [`154.2155-halfway-between-two-hex-color-codes.py`](#program-1542155-halfway-between-two-hex-color-codespy-learning-cost-1171875)
     - [`154.2292-halfway-between-two-hex-color-codes.py`](#program-1542292-halfway-between-two-hex-color-codespy-learning-cost-280)
-    - [`155.2147-delete-file.py`](#program-1552147-delete-filepy-learning-cost-35)
+    - [`155.2147-delete-file.py`](#program-1552147-delete-filepy-learning-cost-2625)
     - [`156.2148-format-integer-with-zero-padding.py`](#program-1562148-format-integer-with-zero-paddingpy-learning-cost-275)
     - [`157.2150-declare-constant-string.py`](#program-1572150-declare-constant-stringpy-learning-cost-26875)
     - [`158.2163-random-sublist.py`](#program-1582163-random-sublistpy-learning-cost-2625)
@@ -202,7 +202,7 @@
     - [`173.2427-format-a-number-with-grouped-thousands.py`](#program-1732427-format-a-number-with-grouped-thousandspy-learning-cost-275)
     - [`173.2428-format-a-number-with-grouped-thousands.py`](#program-1732428-format-a-number-with-grouped-thousandspy-learning-cost-275)
     - [`173.2429-format-a-number-with-grouped-thousands.py`](#program-1732429-format-a-number-with-grouped-thousandspy-learning-cost-275)
-    - [`174.2687-make-http-post-request.py`](#program-1742687-make-http-post-requestpy-learning-cost-89375)
+    - [`174.2687-make-http-post-request.py`](#program-1742687-make-http-post-requestpy-learning-cost-80625)
     - [`175.2613-bytes-to-hex-string.py`](#program-1752613-bytes-to-hex-stringpy-learning-cost-175)
     - [`176.2614-hex-string-to-byte-array.py`](#program-1762614-hex-string-to-byte-arraypy-learning-cost-175)
     - [`177.2709-find-files-with-a-given-list-of-filename-extensions.py`](#program-1772709-find-files-with-a-given-list-of-filename-extensionspy-learning-cost-86875)
@@ -215,7 +215,7 @@
     - [`182.2658-quine-program.py`](#program-1822658-quine-programpy-learning-cost-45)
     - [`183.3025-make-http-put-request.py`](#program-1833025-make-http-put-requestpy-learning-cost-540625)
     - [`184.2701-tomorrow.py`](#program-1842701-tomorrowpy-learning-cost-54375)
-    - [`185.2820-execute-function-in-30-seconds.py`](#program-1852820-execute-function-in-30-secondspy-learning-cost-63125)
+    - [`185.2820-execute-function-in-30-seconds.py`](#program-1852820-execute-function-in-30-secondspy-learning-cost-54375)
     - [`186.2699-exit-program-cleanly.py`](#program-1862699-exit-program-cleanlypy-learning-cost-271875)
     - [`187.3261-disjoint-set.py`](#program-1873261-disjoint-setpy-learning-cost-1746875)
     - [`188.3171-matrix-multiplication.py`](#program-1883171-matrix-multiplicationpy-learning-cost-2625)
@@ -947,7 +947,7 @@
 | 0 | `metadata/sloc/2` | 1-2 |
 ---
 
-### Program `033.1420-atomically-read-and-update-variable.py` (learning cost 5.25)
+### Program `033.1420-atomically-read-and-update-variable.py` (learning cost 4.375)
 
 ```python
 1   import threading
@@ -962,7 +962,6 @@
 | Cost  | Taxon | Lines |
 |----|----|----|
 | 0.875 | `call/function/f` | 5 |
-| 0.875 | `call/method/Lock` | 2 |
 | 0.875 | `call/method/acquire` | 3 |
 | 0.875 | `call/method/release` | 7 |
 | 0.875 | `library/standard/threading` | 1 |
@@ -1692,7 +1691,7 @@
 | 0 | `metadata/sloc/3` | 1-3 |
 ---
 
-### Program `069.1086-seed-random-generator.py` (learning cost 2.625)
+### Program `069.1086-seed-random-generator.py` (learning cost 1.75)
 
 ```python
 1   import random
@@ -1701,13 +1700,12 @@
 
 | Cost  | Taxon | Lines |
 |----|----|----|
-| 0.875 | `call/method/Random` | 2 |
 | 0.875 | `library/standard/random` | 1 |
 | 0.875 | `variable/assignment/single` | 2 |
 | 0 | `metadata/sloc/2` | 1-2 |
 ---
 
-### Program `070.1087-use-clock-as-random-generator-seed.py` (learning cost 2.625)
+### Program `070.1087-use-clock-as-random-generator-seed.py` (learning cost 1.75)
 
 ```python
 1   import random
@@ -1716,7 +1714,6 @@
 
 | Cost  | Taxon | Lines |
 |----|----|----|
-| 0.875 | `call/method/Random` | 2 |
 | 0.875 | `library/standard/random` | 1 |
 | 0.875 | `variable/assignment/single` | 2 |
 | 0 | `metadata/sloc/2` | 1-2 |
@@ -3002,7 +2999,7 @@
 | 0 | `metadata/sloc/1` | 1 |
 ---
 
-### Program `138.2161-create-temp-file.py` (learning cost 2.625)
+### Program `138.2161-create-temp-file.py` (learning cost 1.75)
 
 ```python
 1   import tempfile
@@ -3011,13 +3008,12 @@
 
 | Cost  | Taxon | Lines |
 |----|----|----|
-| 0.875 | `call/method/TemporaryFile` | 2 |
 | 0.875 | `library/standard/tempfile` | 1 |
 | 0.875 | `variable/assignment/single` | 2 |
 | 0 | `metadata/sloc/2` | 1-2 |
 ---
 
-### Program `139.2162-create-temp-directory.py` (learning cost 2.625)
+### Program `139.2162-create-temp-directory.py` (learning cost 1.75)
 
 ```python
 1   import tempfile
@@ -3026,7 +3022,6 @@
 
 | Cost  | Taxon | Lines |
 |----|----|----|
-| 0.875 | `call/method/TemporaryDirectory` | 2 |
 | 0.875 | `library/standard/tempfile` | 1 |
 | 0.875 | `variable/assignment/single` | 2 |
 | 0 | `metadata/sloc/2` | 1-2 |
@@ -3375,7 +3370,7 @@
 | 0 | `metadata/sloc/15` | 1-15 |
 ---
 
-### Program `155.2147-delete-file.py` (learning cost 3.5)
+### Program `155.2147-delete-file.py` (learning cost 2.625)
 
 ```python
 1   import pathlib
@@ -3385,7 +3380,6 @@
 
 | Cost  | Taxon | Lines |
 |----|----|----|
-| 0.875 | `call/method/Path` | 2 |
 | 0.875 | `call/method/unlink` | 3 |
 | 0.875 | `library/standard/pathlib` | 1 |
 | 0.875 | `variable/assignment/single` | 2 |
@@ -3768,7 +3762,7 @@
 | 0 | `metadata/sloc/1` | 1 |
 ---
 
-### Program `174.2687-make-http-post-request.py` (learning cost 8.9375)
+### Program `174.2687-make-http-post-request.py` (learning cost 8.0625)
 
 ```python
 1   from urllib import request, parse
@@ -3779,7 +3773,6 @@
 
 | Cost  | Taxon | Lines |
 |----|----|----|
-| 0.875 | `call/method/Request` | 3 |
 | 0.875 | `call/method/chaining` | 2 |
 | 0.875 | `call/method/encode` | 2 |
 | 0.875 | `call/method/urlencode` | 2 |
@@ -4014,7 +4007,7 @@
 | 0 | `metadata/sloc/2` | 1-2 |
 ---
 
-### Program `185.2820-execute-function-in-30-seconds.py` (learning cost 6.3125)
+### Program `185.2820-execute-function-in-30-seconds.py` (learning cost 5.4375)
 
 ```python
 1   import threading
@@ -4024,7 +4017,6 @@
 
 | Cost  | Taxon | Lines |
 |----|----|----|
-| 0.875 | `call/method/Timer` | 2 |
 | 0.875 | `call/method/start` | 3 |
 | 0.875 | `library/standard/threading` | 1 |
 | 0.9375 | `type/number/floating_point/literal` | 2 |
