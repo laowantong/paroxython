@@ -36,11 +36,12 @@
         "comparison_operator:Eq": [[4,4]],
         "comparison_operator:NotEq": [[2,2]],
         "divisibility_test:2": [[4,4]],
+        "external_free_call:print": [[3,3],[8,8]],
+        "free_call:print": [[3,3],[8,8]],
+        "free_call_without_result:print": [[3,3],[8,8]],
         "function:print_collatz": [[1,8]],
         "function_argument:n": [[1,1]],
         "function_argument_flavor:arg": [[1,1]],
-        "function_call:print": [[3,3],[8,8]],
-        "function_call_without_result:print": [[3,3],[8,8]],
         "function_returning_nothing:print_collatz": [[1,8]],
         "if": [[4,7]],
         "if_else_branch": [[7,7]],
@@ -109,11 +110,13 @@
         "divisibility_test:15": [[3,3]],
         "divisibility_test:3": [[5,5]],
         "divisibility_test:5": [[7,7]],
+        "external_free_call:print": [[4,4],[6,6],[8,8],[10,10]],
+        "external_free_call:range": [[2,2]],
         "for:i": [[2,10]],
         "for_range:1:101": [[2,10]],
-        "function_call:print": [[4,4],[6,6],[8,8],[10,10]],
-        "function_call:range": [[2,2]],
-        "function_call_without_result:print": [[4,4],[6,6],[8,8],[10,10]],
+        "free_call:print": [[4,4],[6,6],[8,8],[10,10]],
+        "free_call:range": [[2,2]],
+        "free_call_without_result:print": [[4,4],[6,6],[8,8],[10,10]],
         "if": [[3,10],[5,10],[7,10]],
         "if_elif_branch": [[6,6],[8,8]],
         "if_else_branch": [[10,10]],
@@ -277,10 +280,28 @@
     "divisibility_test:5": [
       "fizzbuzz.py"
     ],
+    "external_free_call:print": [
+      "collatz_print.py",
+      "fizzbuzz.py"
+    ],
+    "external_free_call:range": [
+      "fizzbuzz.py"
+    ],
     "for:i": [
       "fizzbuzz.py"
     ],
     "for_range:1:101": [
+      "fizzbuzz.py"
+    ],
+    "free_call:print": [
+      "collatz_print.py",
+      "fizzbuzz.py"
+    ],
+    "free_call:range": [
+      "fizzbuzz.py"
+    ],
+    "free_call_without_result:print": [
+      "collatz_print.py",
       "fizzbuzz.py"
     ],
     "function:is_even": [
@@ -296,17 +317,6 @@
     "function_argument_flavor:arg": [
       "collatz_print.py",
       "is_even.py"
-    ],
-    "function_call:print": [
-      "collatz_print.py",
-      "fizzbuzz.py"
-    ],
-    "function_call:range": [
-      "fizzbuzz.py"
-    ],
-    "function_call_without_result:print": [
-      "collatz_print.py",
-      "fizzbuzz.py"
     ],
     "function_returning_nothing:print_collatz": [
       "collatz_print.py"

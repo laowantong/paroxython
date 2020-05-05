@@ -23,8 +23,9 @@ def print_collatz(n): # added_block_label (-> +7)
                   # suggest_constant_definition
                   # while (-> +5)
         print(n) # call_argument:n
-                 # function_call:print
-                 # function_call_without_result:print
+                 # external_free_call:print
+                 # free_call:print
+                 # free_call_without_result:print
         if n % 2 == 0: # added_label_on_line_4
                        # binary_operator:Mod
                        # comparison_operator:Eq
@@ -71,8 +72,9 @@ def print_collatz(n): # added_block_label (-> +7)
                           # update_by_assignment_with:Add
                           # update_with:Add
     print(n) # call_argument:n
-             # function_call:print
-             # function_call_without_result:print
+             # external_free_call:print
+             # free_call:print
+             # free_call_without_result:print
 
 # ----------------------------------------------------------------------------------------
 # fizzbuzz.py
@@ -82,9 +84,10 @@ import collatz_print # import_internally:collatz_print
                      # whole_span:10 (-> +9)
 for i in range(1, 101): # call_argument:1
                         # call_argument:101
+                        # external_free_call:range
                         # for:i (-> +8)
                         # for_range:1:101 (-> +8)
-                        # function_call:range
+                        # free_call:range
                         # literal:1
                         # literal:101
                         # loop:for (-> +8)
@@ -102,8 +105,9 @@ for i in range(1, 101): # call_argument:1
                     # modulo_operator
                     # suggest_constant_definition
         print("FizzBuzz") # call_argument:
-                          # function_call:print
-                          # function_call_without_result:print
+                          # external_free_call:print
+                          # free_call:print
+                          # free_call_without_result:print
                           # if_then_branch
                           # literal:Str
     elif i % 3 == 0: # binary_operator:Mod
@@ -118,8 +122,9 @@ for i in range(1, 101): # call_argument:1
                      # modulo_operator
                      # suggest_constant_definition
         print("Fizz") # call_argument:
-                      # function_call:print
-                      # function_call_without_result:print
+                      # external_free_call:print
+                      # free_call:print
+                      # free_call_without_result:print
                       # if_elif_branch
                       # literal:Str
     elif i % 5 == 0: # binary_operator:Mod
@@ -134,14 +139,16 @@ for i in range(1, 101): # call_argument:1
                      # modulo_operator
                      # suggest_constant_definition
         print("Buzz") # call_argument:
-                      # function_call:print
-                      # function_call_without_result:print
+                      # external_free_call:print
+                      # free_call:print
+                      # free_call_without_result:print
                       # if_elif_branch
                       # literal:Str
     else: # 
         print(i) # call_argument:i
-                 # function_call:print
-                 # function_call_without_result:print
+                 # external_free_call:print
+                 # free_call:print
+                 # free_call_without_result:print
                  # if_else_branch
 
 # ----------------------------------------------------------------------------------------

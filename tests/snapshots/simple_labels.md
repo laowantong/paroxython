@@ -31,19 +31,22 @@
 - divisibility_test:2 / is_even.py / 3
 - divisibility_test:3 / fizzbuzz.py / 5
 - divisibility_test:5 / fizzbuzz.py / 7
+- external_free_call:print / collatz_print.py / 3, 8
+- external_free_call:print / fizzbuzz.py / 4, 6, 8, 10
+- external_free_call:range / fizzbuzz.py / 2
 - for:i / fizzbuzz.py / 2-10
 - for_range:1:101 / fizzbuzz.py / 2-10
+- free_call:print / collatz_print.py / 3, 8
+- free_call:print / fizzbuzz.py / 4, 6, 8, 10
+- free_call:range / fizzbuzz.py / 2
+- free_call_without_result:print / collatz_print.py / 3, 8
+- free_call_without_result:print / fizzbuzz.py / 4, 6, 8, 10
 - function:is_even / is_even.py / 2-3
 - function:print_collatz / collatz_print.py / 1-8
 - function_argument:n / collatz_print.py / 1
 - function_argument:n / is_even.py / 2
 - function_argument_flavor:arg / collatz_print.py / 1
 - function_argument_flavor:arg / is_even.py / 2
-- function_call:print / collatz_print.py / 3, 8
-- function_call:print / fizzbuzz.py / 4, 6, 8, 10
-- function_call:range / fizzbuzz.py / 2
-- function_call_without_result:print / collatz_print.py / 3, 8
-- function_call_without_result:print / fizzbuzz.py / 4, 6, 8, 10
 - function_returning_nothing:print_collatz / collatz_print.py / 1-8
 - function_returning_something:is_even / is_even.py / 2-3
 - if / collatz_print.py / 4-7
@@ -146,6 +149,7 @@
 - divisibility_test
 - empty_literal
 - except
+- external_free_call
 - f_string
 - filtered_comprehension
 - find_best_element
@@ -155,16 +159,16 @@
 - for_indexes
 - for_indexes_elements
 - for_range
+- free_call
+- free_call_without_arguments
+- free_call_without_result
+- free_tail_call
 - function
 - function_argument
 - function_argument_flavor
-- function_call
-- function_call_without_arguments
-- function_call_without_result
 - function_decorator
 - function_returning_nothing
 - function_returning_something
-- function_tail_call
 - function_without_arguments
 - generator
 - get_valid_input
@@ -180,6 +184,7 @@
 - index_arithmetic
 - infinite_while
 - instance_method|class_method|static_method
+- internal_free_call
 - lambda_function
 - literal
 - loop
@@ -187,10 +192,10 @@
 - loop_with_early_exit
 - loop_with_else
 - loop_with_late_exit
+- member_call
+- member_call_object
+- member_call_without_result
 - method
-- method_call
-- method_call_object
-- method_call_without_result
 - method_chaining
 - negate
 - negative_index
@@ -227,8 +232,8 @@
 - update_by_assignment_with
 - update_by_augmented_assignment
 - update_by_augmented_assignment_with
-- update_by_method_call
-- update_by_method_call_with
+- update_by_member_call
+- update_by_member_call_with
 - update_with
 - yield
 - yoda_comparison

@@ -67,7 +67,11 @@ def derivation_map(text):
             for label_pattern in label_patterns:
                 if regex.fullmatch(label_pattern, label_name):
                     return label_pattern
-            raise ValueError(f"Unable to match '{label_name}' with a known pattern")
+            raise ValueError(
+                f"Unable to match '{label_name}' with a known pattern. "
+                "If a section '#### Feature `{label_name}`' do exist in spec.md, "
+                "check that the previous section has all the required subsections."
+            )
 
         return label_name_to_pattern
 

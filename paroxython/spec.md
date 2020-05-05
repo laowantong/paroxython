@@ -37,6 +37,8 @@
       - [Feature `free_call_without_result`](#feature-free_call_without_result)
       - [Feature `free_call_without_arguments`](#feature-free_call_without_arguments)
       - [Feature `free_tail_call`](#feature-free_tail_call)
+      - [Feature `internal_free_call` (SQL)](#feature-internal_free_call)
+      - [Feature `external_free_call` (SQL)](#feature-external_free_call)
     - [Calls of the form `identifier.callable(arguments)`](#calls-of-the-form-identifiercallablearguments)
       - [Feature `member_call`](#feature-member_call)
       - [Feature `member_call_without_result`](#feature-member_call_without_result)
@@ -1378,7 +1380,9 @@ We use the term _free call_, as opposed to _member call_ (dot notation).
 
 [⬇️ feature `body_recursive_function`](#feature-body_recursive_function)  
 [⬇️ feature `deeply_recursive_function`](#feature-deeply_recursive_function)  
+[⬇️ feature `external_free_call`](#feature-external_free_call)  
 [⬇️ feature `higher-order function`](#feature-higher-order-function)  
+[⬇️ feature `internal_free_call`](#feature-internal_free_call)  
 [⬇️ feature `range`](#feature-range)  
 [⬇️ feature `recursive_function`](#feature-recursive_function)  
 
@@ -1543,6 +1547,98 @@ _Remark._ Since the short-circuit expression `c and foo(m)` is equivalent to the
 | Label | Lines |
 |:--|:--|
 | `free_tail_call:foo` | 2, 3, 4, 5, 6, 7, 8, 8 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `internal_free_call`
+
+##### Derivations
+
+[⬆️ feature `free_call`](#feature-free_call)  
+[⬆️ feature `function`](#feature-function)  
+[⬇️ feature `external_free_call`](#feature-external_free_call)  
+
+##### Specification
+
+```sql
+SELECT "internal_free_call",
+       c.name_suffix,
+       c.span,
+       c.path
+FROM t_function f
+JOIN t_free_call c USING (name_suffix)
+```
+
+##### Example
+
+```python
+1   from external import bizz
+2   
+3   def foo():
+4       def buzz():
+5           pass
+6   
+7   foo()
+8   bar()
+9   buzz()
+10  bizz()
+11  
+12  def bar():
+13      pass
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `internal_free_call:bar` | 8 |
+| `internal_free_call:buzz` | 9 |
+| `internal_free_call:foo` | 7 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `external_free_call`
+
+##### Derivations
+
+[⬆️ feature `free_call`](#feature-free_call)  
+[⬆️ feature `internal_free_call`](#feature-internal_free_call)  
+
+##### Specification
+
+```sql
+SELECT "external_free_call",
+       c.name_suffix,
+       c.span,
+       c.path
+FROM t_free_call c
+LEFT JOIN t_internal_free_call USING(name_suffix)
+WHERE t_internal_free_call.name_suffix IS NULL
+```
+
+##### Example
+
+```python
+1   from external import bizz
+2   
+3   def foo():
+4       def buzz():
+5           pass
+6   
+7   foo()
+8   bar()
+9   buzz()
+10  bizz()
+11  
+12  def bar():
+13      pass
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `external_free_call:bizz` | 10 |
 
 --------------------------------------------------------------------------------
 
@@ -2948,6 +3044,7 @@ In Python, the term "function" encompasses any type of subroutine, be it a metho
 [⬇️ feature `generator`](#feature-generator)  
 [⬇️ feature `higher-order function`](#feature-higher-order-function)  
 [⬇️ feature `if_guard`](#feature-if_guard)  
+[⬇️ feature `internal_free_call`](#feature-internal_free_call)  
 [⬇️ feature `method`](#feature-method)  
 [⬇️ feature `recursive_function`](#feature-recursive_function)  
 
