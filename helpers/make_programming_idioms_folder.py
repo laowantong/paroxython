@@ -14,7 +14,7 @@ title_to_slug = title_to_slug_factory()
 
 algos = json.loads(Path("tests/data/programming-idioms.org.2019-09-28_23-33.json").read_text())
 
-base_path = Path("tests/data/sanity")
+base_path = Path("tests/data/programming_idioms")
 if base_path.is_dir():
     shutil.rmtree(base_path)
 elif base_path.exists():
@@ -56,7 +56,7 @@ for algo in algos:
             ]
         ).replace("\n\n\n", "\n\n")
 
-        path = base_path / f"{algo['Id']:03}.{program['Id']}-{slug}.py"
+        path = base_path / f"{algo['Id']:03}.{program['Id']:04}-{slug}.py"
         try:
             source = format_str(source, mode=FileMode())
         except Exception:

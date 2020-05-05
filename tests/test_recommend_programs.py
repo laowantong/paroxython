@@ -80,11 +80,16 @@ def test_recommend_program(capsys):
 
 
 def test_recommend_programming_idioms(capsys):
-    path = Path("tests/snapshots/sanity_db.json")
+    path = Path("tests/snapshots/programming_idioms_db.json")
     rec = Recommendations(db=json.loads(path.read_text()))
     rec.run_pipeline()
-    output_path = path.parent / "sanity_recommendations.md"
-    make_snapshot(output_path, rec.get_markdown(), capsys)
+    output_path = path.parent / "programming_idioms_recommendations.md"
+    rec.get_markdown()  # for coverage
+    make_snapshot(
+        output_path,
+        rec.get_markdown(sorting_strategy="lexicographic", grouping_strategy="no_group"),
+        capsys,
+    )
 
 
 if __name__ == "__main__":

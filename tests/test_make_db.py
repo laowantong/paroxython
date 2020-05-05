@@ -14,8 +14,8 @@ def test_snapshot_simple_db(capsys):
 
 
 def test_snapshot_programming_idioms_db(capsys):
-    db = Database(Path("tests/data/sanity"), ignore_timestamps=True)
-    make_snapshot(Path("tests/snapshots/sanity_db.json"), db.get_json(), capsys)
+    db = Database(Path("tests/data/programming_idioms"), ignore_timestamps=True)
+    make_snapshot(Path("tests/snapshots/programming_idioms_db.json"), db.get_json(), capsys)
 
 
 if __name__ == "__main__":

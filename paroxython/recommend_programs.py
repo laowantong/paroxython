@@ -82,23 +82,39 @@ class Recommendations:
 
         self.assessed_programs = self.assess_costs(self.selected_programs)
 
-    def get_markdown(self, span_column_width=30) -> str:
+    def get_markdown(
+        self,
+        span_column_width=30,
+        sorting_strategy="by_cost_and_sloc",
+        grouping_strategy="by_cost_interval",
+    ) -> str:
         """Reiterate on the commands, now populated by the results, and output them."""
 
         # Define some helper functions.
 
         title_to_slug = title_to_slug_factory()
         spans_to_html = enumeration_to_txt_factory(span_column_width, "_imported_")
-        by_cost_and_sloc = lambda x: (x[0], len(self.programs[x[1]]["source"].split("\n")))
         display_count = lambda n: f"{n} program" + ("" if n == 1 else "s")
+
+        if sorting_strategy == "by_cost_and_sloc":
+            sorting_key = lambda x: (x[0], len(self.programs[x[1]]["source"].split("\n")))
+        elif sorting_strategy == "lexicographic":
+            sorting_key = lambda x: x[1]
+        else:
+            sorting_key = None
+
+        if grouping_strategy == "by_cost_interval":
+            grouping_key = cost_interval
+        else:
+            grouping_key = lambda x: f"(default: no group)"
 
         # Group resulting programs by cost interval, and sort each group by increasing difficulty.
 
         toc_data: Dict[str, AssessedPrograms] = defaultdict(list)
         for (cost, program) in self.assessed_programs:
-            toc_data[cost_interval(cost)].append((cost, program))
+            toc_data[grouping_key(cost)].append((cost, program))
         for costs_and_program_names in toc_data.values():
-            costs_and_program_names.sort(key=by_cost_and_sloc)
+            costs_and_program_names.sort(key=sorting_key)
 
         # Accumulate simultaneously the TOC and the contents.
 
