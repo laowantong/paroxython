@@ -21,8 +21,8 @@ def test_initial_values():
         "literal:Set": ["call/function/builtin/casting/set", "type/set"],
         "if": ["flow/conditional"],
         "if_else": ["flow/conditional/else"],
-        "function_call:list": ["type/container/list"],
-        "method_call:difference_update": ["type/set"],
+        "free_call:list": ["type/container/list"],
+        "member_call:difference_update": ["type/set"],
     }
     print(t.compiled_label_names)
     assert t.compiled_label_names[0][1] == "call/function/builtin/casting/\\1"
@@ -33,7 +33,7 @@ def test_get_taxon_name_list():
     assert t.get_taxon_name_list("if") == ["flow/conditional"]
     assert t.get_taxon_name_list("comparison_operator:Gt") == ["test/inequality"]
     assert t.get_taxon_name_list("label_with_no_corresponding_taxon") == []
-    assert t.get_taxon_name_list("function_call:list") == [
+    assert t.get_taxon_name_list("free_call:list") == [
         "type/container/list",
         "call/function/builtin/casting/list",
     ]
@@ -117,7 +117,7 @@ def test_call():
         Program(
             name="algo2",
             labels=[
-                Label("method_call:difference_update", [S(1, 1), S(1, 1), S(2, 5)]),
+                Label("member_call:difference_update", [S(1, 1), S(1, 1), S(2, 5)]),
                 Label("literal:Set", [S(1, 1), S(2, 5)]),
             ],
             taxons=[],

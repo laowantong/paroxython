@@ -25,14 +25,14 @@ type_methods = {
 }
 print()
 
-print(f"call/function/builtin/casting/\\1<tab>function_call:({'|'.join(type_names)})")
+print(f"call/function/builtin/casting/\\1<tab>free_call:({'|'.join(type_names)})")
 
 
 def compute(suffix, names_1, names_2):
     set_1 = reduce(set.union, map(type_methods.get, names_1.split()))
     set_2 = set().union(*map(type_methods.get, names_2.split()))
     label_pattern = "|".join(sorted(set_1 - set_2))
-    print(f"call/method/{suffix}/\\1<tab>method_call:({label_pattern})")
+    print(f"call/method/{suffix}/\\1<tab>member_call:({label_pattern})")
 
 
 compute("number", "int bool float complex", "str tuple bytes list bytearray set frozenset dict")

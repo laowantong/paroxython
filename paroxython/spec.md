@@ -29,16 +29,19 @@
       - [Feature `divisibility_test`](#feature-divisibility_test)
       - [Feature `short_circuit`](#feature-short_circuit)
   - [Calls](#calls)
-      - [Feature `function_call`](#feature-function_call)
-      - [Feature `function_call_without_result`](#feature-function_call_without_result)
-      - [Feature `function_call_without_arguments`](#feature-function_call_without_arguments)
-      - [Feature `function_tail_call`](#feature-function_tail_call)
+    - [Generalities](#generalities)
       - [Feature `call_argument`](#feature-call_argument)
-      - [Feature `method_call`](#feature-method_call)
-      - [Feature `method_call_without_result`](#feature-method_call_without_result)
-      - [Feature `method_call_object`](#feature-method_call_object)
-      - [Feature `method_chaining`](#feature-method_chaining)
       - [Feature `composition`](#feature-composition)
+    - [Calls of the form `callable(arguments)`](#calls-of-the-form-callablearguments)
+      - [Feature `free_call`](#feature-free_call)
+      - [Feature `free_call_without_result`](#feature-free_call_without_result)
+      - [Feature `free_call_without_arguments`](#feature-free_call_without_arguments)
+      - [Feature `free_tail_call`](#feature-free_tail_call)
+    - [Calls of the form `identifier.callable(arguments)`](#calls-of-the-form-identifiercallablearguments)
+      - [Feature `member_call`](#feature-member_call)
+      - [Feature `member_call_without_result`](#feature-member_call_without_result)
+      - [Feature `member_call_object`](#feature-member_call_object)
+      - [Feature `method_chaining`](#feature-method_chaining)
   - [Iterables](#iterables)
       - [Feature `range` (SQL)](#feature-range)
       - [Feature `comprehension`](#feature-comprehension)
@@ -61,11 +64,11 @@
     - [Assignment idioms](#assignment-idioms)
       - [Feature `update_by_assignment` (SQL)](#feature-update_by_assignment)
       - [Feature `update_by_augmented_assignment` (SQL)](#feature-update_by_augmented_assignment)
-      - [Feature `update_by_method_call` (SQL)](#feature-update_by_method_call)
+      - [Feature `update_by_member_call` (SQL)](#feature-update_by_member_call)
       - [Feature `update` (SQL)](#feature-update)
       - [Feature `update_by_assignment_with` (SQL)](#feature-update_by_assignment_with)
       - [Feature `update_by_augmented_assignment_with` (SQL)](#feature-update_by_augmented_assignment_with)
-      - [Feature `update_by_method_call_with` (SQL)](#feature-update_by_method_call_with)
+      - [Feature `update_by_member_call_with` (SQL)](#feature-update_by_member_call_with)
       - [Feature `update_with` (SQL)](#feature-update_with)
       - [Feature `increment`](#feature-increment)
       - [Feature `swap`](#feature-swap)
@@ -269,11 +272,11 @@ Generally speaking, all _falsey_ constants (i.e., whose [truth value](https://do
 - null integer: `literal:0`;
 - null floating-point number: `literal:0.0`;
 - null complex number: `literal:0j`;
-- empty string: `function_call_without_arguments:str` or `empty_literal:Str`;
-- empty tuple: `function_call_without_arguments:tuple` or `empty_literal:Tuple`;
-- empty list: `function_call_without_arguments:list` or `empty_literal:List`;
-- empty dictionary: `function_call_without_arguments:dict` or `empty_literal:Dict`;
-- empty set: `function_call_without_arguments:set`;
+- empty string: `free_call_without_arguments:str` or `empty_literal:Str`;
+- empty tuple: `free_call_without_arguments:tuple` or `empty_literal:Tuple`;
+- empty list: `free_call_without_arguments:list` or `empty_literal:List`;
+- empty dictionary: `free_call_without_arguments:dict` or `empty_literal:Dict`;
+- empty set: `free_call_without_arguments:set`;
 - empty range: `range:0`.
 
 ##### Specification
@@ -1261,9 +1264,114 @@ When the value of the left operand suffices to determine the value of a boolean 
 
 ## Calls
 
+### Generalities
+
 --------------------------------------------------------------------------------
 
-#### Feature `function_call`
+#### Feature `call_argument`
+
+Match any argument of a free call or a member call. Suffix this argument when it is **atomic**, _i.e._ either:
+- an identifier,
+- a number literal,
+- `True`, `False` or `None`.
+Otherwise, suffix it with an empty string.
+
+##### Derivations
+
+[⬇️ feature `range`](#feature-range)  
+[⬇️ feature `update_by_member_call`](#feature-update_by_member_call)  
+
+##### Specification
+
+```re
+           ^(.*)/_type=Call
+(
+\n(?:\1.+\n)*?\1/(?P<_1>args/\d+)/_pos=(?P<POS>.+)
+\n            \1/(?P=_1)         /(   # the next line denotes either an atomic argument
+                                    (value|n|id)?=(?P<SUFFIX>.+) # capture it as suffix
+                                    | # or a non-atomic argument
+                                    (?P<SUFFIX>).+ # "capture" an empty suffix
+                                  )
+)+ # at least one argument
+```
+
+##### Example
+
+```python
+1   bar() # no match
+2   foo("a string") # empty suffix
+3   foo(None)
+4   foo(True)
+5   foo(42)
+6   buzz(x, 42)
+7   buzz((x, 42))
+8   fizz(foobar(x), 42) # empty suffix for the first argument
+9   foo(a, b, c)
+10  foo.bar(bizz, buzz)
+11  def fun_def(f, g): # no match
+12      f(g)
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `call_argument:` | 2, 7, 8 |
+| `call_argument:None` | 3 |
+| `call_argument:True` | 4 |
+| `call_argument:42` | 5, 6, 8 |
+| `call_argument:x` | 6, 8 |
+| `call_argument:a` | 9 |
+| `call_argument:b` | 9 |
+| `call_argument:c` | 9 |
+| `call_argument:bizz` | 10 |
+| `call_argument:buzz` | 10 |
+| `call_argument:g` | 12 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `composition`
+
+Apply a function or a method to an expression involving the result of another function or method application, without using an intermediate variable.
+
+##### Specification
+
+```re
+           ^(.*)/_type=Call
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
+\n(?:\1.+\n)* \1/args/.*/_type=Call
+```
+
+##### Example
+
+```python
+1   print(len("hello, world"))
+2   print("hello, world") # no match
+3   print(a + abs(b))
+4   print(s.upper())
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `composition` | 1, 3, 4 |
+
+--------------------------------------------------------------------------------
+
+### Calls of the form `callable(arguments)`
+
+In Python, this form can denote:
+
+- the application of a function (generator, etc.);
+- the instanciation of a class (whose name should be CamelCased), including Exceptions;
+- the invocation of the method `__call__` of an object.
+
+We use the term _free call_, as opposed to _member call_ (dot notation).
+
+--------------------------------------------------------------------------------
+
+#### Feature `free_call`
 
 ##### Derivations
 
@@ -1288,22 +1396,22 @@ When the value of the left operand suffices to determine the value of a boolean 
 2   bar()
 3   buzz(x, 2)
 4   fizz(foobar(x), 2)
-5   baz.qux() # no match, see feature method_call
+5   baz.qux() # no match, see feature member_call
 ```
 
 ##### Matches
 
 | Label | Lines |
 |:--|:--|
-| `function_call:foo` | 1 |
-| `function_call:bar` | 2 |
-| `function_call:buzz` | 3 |
-| `function_call:fizz` | 4 |
-| `function_call:foobar` | 4 |
+| `free_call:foo` | 1 |
+| `free_call:bar` | 2 |
+| `free_call:buzz` | 3 |
+| `free_call:fizz` | 4 |
+| `free_call:foobar` | 4 |
 
 --------------------------------------------------------------------------------
 
-#### Feature `function_call_without_result`
+#### Feature `free_call_without_result`
 
 ##### Specification
 
@@ -1328,11 +1436,11 @@ When the value of the left operand suffices to determine the value of a boolean 
 
 | Label | Lines |
 |:--|:--|
-| `function_call_without_result:fizz` | 4 |
+| `free_call_without_result:fizz` | 4 |
 
 --------------------------------------------------------------------------------
 
-#### Feature `function_call_without_arguments`
+#### Feature `free_call_without_arguments`
 
 ##### Specification
 
@@ -1356,11 +1464,11 @@ When the value of the left operand suffices to determine the value of a boolean 
 
 | Label | Lines |
 |:--|:--|
-| `function_call_without_arguments:foo` | 1 |
+| `free_call_without_arguments:foo` | 1 |
 
 --------------------------------------------------------------------------------
 
-#### Feature `function_tail_call`
+#### Feature `free_tail_call`
 
 A tail-call is a call whose result is immediately returned, without any further calculation. This property is not interesting as such, but will be used below as a basis for the recognition of tail-recursive functions.
 
@@ -1433,78 +1541,25 @@ _Remark._ Since the short-circuit expression `c and foo(m)` is equivalent to the
 
 | Label | Lines |
 |:--|:--|
-| `function_tail_call:foo` | 2, 3, 4, 5, 6, 7, 8, 8 |
+| `free_tail_call:foo` | 2, 3, 4, 5, 6, 7, 8, 8 |
 
 --------------------------------------------------------------------------------
 
-#### Feature `call_argument`
+### Calls of the form `identifier.callable(arguments)`
 
-Match any argument of a function or a method call. Suffix this argument when it is **atomic**, _i.e._ either:
-- an identifier,
-- a number literal,
-- `True`, `False` or `None`.
-Otherwise, suffix it with an empty string.
-
-##### Derivations
-
-[⬇️ feature `range`](#feature-range)  
-[⬇️ feature `update_by_method_call`](#feature-update_by_method_call)  
-
-##### Specification
-
-```re
-           ^(.*)/_type=Call
-(
-\n(?:\1.+\n)*?\1/(?P<_1>args/\d+)/_pos=(?P<POS>.+)
-\n            \1/(?P=_1)         /(   # the next line denotes either an atomic argument
-                                    (value|n|id)?=(?P<SUFFIX>.+) # capture it as suffix
-                                    | # or a non-atomic argument
-                                    (?P<SUFFIX>).+ # "capture" an empty suffix
-                                  )
-)+ # at least one argument
-```
-
-##### Example
-
-```python
-1   bar() # no match
-2   foo("a string") # empty suffix
-3   foo(None)
-4   foo(True)
-5   foo(42)
-6   buzz(x, 42)
-7   buzz((x, 42))
-8   fizz(foobar(x), 42) # empty suffix for the first argument
-9   foo(a, b, c)
-10  foo.bar(bizz, buzz)
-11  def fun_def(f, g): # no match
-12      f(g)
-```
-
-##### Matches
-
-| Label | Lines |
-|:--|:--|
-| `call_argument:` | 2, 7, 8 |
-| `call_argument:None` | 3 |
-| `call_argument:True` | 4 |
-| `call_argument:42` | 5, 6, 8 |
-| `call_argument:x` | 6, 8 |
-| `call_argument:a` | 9 |
-| `call_argument:b` | 9 |
-| `call_argument:c` | 9 |
-| `call_argument:bizz` | 10 |
-| `call_argument:buzz` | 10 |
-| `call_argument:g` | 12 |
+In Python, `identifier` can be the name of:
+- a class instance (here, `callable` is a method name);
+- a module (inside which `callable(arguments)` would be a free call);
+- a `namedtuple` instance (in the rare case where an element would be callable).
 
 --------------------------------------------------------------------------------
 
-#### Feature `method_call`
+#### Feature `member_call`
 
 ##### Derivations
 
-[⬇️ feature `update_by_method_call`](#feature-update_by_method_call)  
-[⬇️ feature `update_by_method_call_with`](#feature-update_by_method_call_with)  
+[⬇️ feature `update_by_member_call`](#feature-update_by_member_call)  
+[⬇️ feature `update_by_member_call_with`](#feature-update_by_member_call_with)  
 
 ##### Specification
 
@@ -1526,11 +1581,11 @@ Otherwise, suffix it with an empty string.
 
 | Label | Lines |
 |:--|:--|
-| `method_call:index` | 1 |
+| `member_call:index` | 1 |
 
 --------------------------------------------------------------------------------
 
-#### Feature `method_call_without_result`
+#### Feature `member_call_without_result`
 
 ##### Specification
 
@@ -1555,15 +1610,15 @@ Otherwise, suffix it with an empty string.
 
 | Label | Lines |
 |:--|:--|
-| `method_call_without_result:qux` | 5 |
+| `member_call_without_result:qux` | 5 |
 
 --------------------------------------------------------------------------------
 
-#### Feature `method_call_object`
+#### Feature `member_call_object`
 
 ##### Derivations
 
-[⬇️ feature `update_by_method_call`](#feature-update_by_method_call)  
+[⬇️ feature `update_by_member_call`](#feature-update_by_member_call)  
 
 ##### Specification
 
@@ -1586,7 +1641,7 @@ Otherwise, suffix it with an empty string.
 
 | Label | Lines |
 |:--|:--|
-| `method_call_object:seq` | 1 |
+| `member_call_object:seq` | 1 |
 
 --------------------------------------------------------------------------------
 
@@ -1616,35 +1671,6 @@ Otherwise, suffix it with an empty string.
 
 --------------------------------------------------------------------------------
 
-#### Feature `composition`
-
-Apply a function or a method to an expression involving the result of another function or method application, without using an intermediate variable.
-
-##### Specification
-
-```re
-           ^(.*)/_type=Call
-\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)* \1/args/.*/_type=Call
-```
-
-##### Example
-
-```python
-1   print(len("hello, world"))
-2   print("hello, world") # no match
-3   print(a + abs(b))
-4   print(s.upper())
-```
-
-##### Matches
-
-| Label | Lines |
-|:--|:--|
-| `composition` | 1, 3, 4 |
-
---------------------------------------------------------------------------------
-
 ## Iterables
 
 --------------------------------------------------------------------------------
@@ -1656,7 +1682,7 @@ Match a call to `range()` and suffix it by its [_atomic_](#feature-call_argument
 ##### Derivations
 
 [⬆️ feature `call_argument`](#feature-call_argument)  
-[⬆️ feature `function_call`](#feature-function_call)  
+[⬆️ feature `free_call`](#feature-free_call)  
 [⬇️ feature `for_range`](#feature-for_range)  
 
 ##### Specification
@@ -1674,7 +1700,7 @@ FROM -- Only a subquery permits to sort the arguments before grouping them toget
           END AS name_suffix,
           f.span AS span,
           f.path AS path
-   FROM t_function_call f
+   FROM t_free_call f
    JOIN t_call_argument arg ON (arg.path GLOB f.path || "*-")
    WHERE f.name_suffix = "range"
      AND length(f.path) + 4 = length(arg.path) -- Ensure that arg is a (direct) argument of range().
@@ -2352,27 +2378,27 @@ GROUP BY op.span,
 
 --------------------------------------------------------------------------------
 
-#### Feature `update_by_method_call`
+#### Feature `update_by_member_call`
 
 The method must mutate the object it is applied on. Obviously, only a handful of such methods can be statically detected.
 
 ##### Derivations
 
 [⬆️ feature `call_argument`](#feature-call_argument)  
-[⬆️ feature `method_call`](#feature-method_call)  
-[⬆️ feature `method_call_object`](#feature-method_call_object)  
+[⬆️ feature `member_call`](#feature-member_call)  
+[⬆️ feature `member_call_object`](#feature-member_call_object)  
 [⬇️ feature `update`](#feature-update)  
-[⬇️ feature `update_by_method_call_with`](#feature-update_by_method_call_with)  
+[⬇️ feature `update_by_member_call_with`](#feature-update_by_member_call_with)  
 
 ##### Specification
 
 ```sql
-SELECT "update_by_method_call",
+SELECT "update_by_member_call",
        lhs_acc.name_suffix || ":" || rhs_var.name_suffix,
        op.span,
        op.path
-FROM t_method_call AS op
-JOIN t_method_call_object AS lhs_acc ON (lhs_acc.path GLOB op.path || "*-")
+FROM t_member_call AS op
+JOIN t_member_call_object AS lhs_acc ON (lhs_acc.path GLOB op.path || "*-")
 JOIN t_call_argument AS rhs_var ON (rhs_var.path GLOB op.path || "*-")
 WHERE rhs_var.name_suffix != ""
   AND op.name_suffix REGEXP "(append|extend|insert|add|update|remove|pop)$"
@@ -2392,8 +2418,8 @@ GROUP BY op.span,
 
 | Label | Lines |
 |:--|:--|
-| `update_by_method_call:foo:a` | 1 |
-| `update_by_method_call:seq:s` | 2 |
+| `update_by_member_call:foo:a` | 1 |
+| `update_by_member_call:seq:s` | 2 |
 
 --------------------------------------------------------------------------------
 
@@ -2405,7 +2431,7 @@ Match the update of a variable `x` and capture its name in the first part of the
 
 [⬆️ feature `update_by_assignment`](#feature-update_by_assignment)  
 [⬆️ feature `update_by_augmented_assignment`](#feature-update_by_augmented_assignment)  
-[⬆️ feature `update_by_method_call`](#feature-update_by_method_call)  
+[⬆️ feature `update_by_member_call`](#feature-update_by_member_call)  
 [⬇️ feature `accumulate_elements`](#feature-accumulate_elements)  
 [⬇️ feature `accumulate_inputs`](#feature-accumulate_inputs)  
 [⬇️ feature `accumulate_some_elements`](#feature-accumulate_some_elements)  
@@ -2420,7 +2446,7 @@ SELECT "update",
 FROM t
 WHERE name_prefix IN ("update_by_assignment",
                       "update_by_augmented_assignment",
-                      "update_by_method_call")
+                      "update_by_member_call")
 ```
 
 ##### Example
@@ -2546,23 +2572,23 @@ GROUP BY path
 
 --------------------------------------------------------------------------------
 
-#### Feature `update_by_method_call_with`
+#### Feature `update_by_member_call_with`
 
 ##### Derivations
 
-[⬆️ feature `method_call`](#feature-method_call)  
-[⬆️ feature `update_by_method_call`](#feature-update_by_method_call)  
+[⬆️ feature `member_call`](#feature-member_call)  
+[⬆️ feature `update_by_member_call`](#feature-update_by_member_call)  
 [⬇️ feature `update_with`](#feature-update_with)  
 
 ##### Specification
 
 ```sql
-SELECT "update_by_method_call_with",
+SELECT "update_by_member_call_with",
        op.name_suffix,
        op.span,
        op.path
-FROM t_method_call AS op
-JOIN t_update_by_method_call USING (path)
+FROM t_member_call AS op
+JOIN t_update_by_member_call USING (path)
 GROUP BY op.path
 ```
 
@@ -2577,7 +2603,7 @@ GROUP BY op.path
 
 | Label | Lines |
 |:--|:--|
-| `update_by_method_call_with:append` | 1, 2 |
+| `update_by_member_call_with:append` | 1, 2 |
 
 --------------------------------------------------------------------------------
 
@@ -2587,7 +2613,7 @@ GROUP BY op.path
 
 [⬆️ feature `update_by_assignment_with`](#feature-update_by_assignment_with)  
 [⬆️ feature `update_by_augmented_assignment_with`](#feature-update_by_augmented_assignment_with)  
-[⬆️ feature `update_by_method_call_with`](#feature-update_by_method_call_with)  
+[⬆️ feature `update_by_member_call_with`](#feature-update_by_member_call_with)  
 [⬇️ feature `accumulate_elements`](#feature-accumulate_elements)  
 [⬇️ feature `accumulate_some_elements`](#feature-accumulate_some_elements)  
 
@@ -2601,7 +2627,7 @@ SELECT "update_with",
 FROM t
 WHERE name_prefix IN ("update_by_assignment_with",
                       "update_by_augmented_assignment_with",
-                      "update_by_method_call_with")
+                      "update_by_member_call_with")
 ```
 
 ##### Example
@@ -3494,9 +3520,9 @@ Match a function having another function as an argument, at least when the latte
 
 ##### Derivations
 
+[⬆️ feature `free_call`](#feature-free_call)  
 [⬆️ feature `function`](#feature-function)  
 [⬆️ feature `function_argument`](#feature-function_argument)  
-[⬆️ feature `function_call`](#feature-function_call)  
 
 ##### Specification
 
@@ -3507,8 +3533,8 @@ SELECT "higher_order_function",
        f.path
 FROM t_function f
 JOIN t_function_argument a ON (a.path GLOB f.path || "*-")
-JOIN t_function_call c ON (c.name_suffix = a.name_suffix
-                           AND c.path GLOB f.path || "*-")
+JOIN t_free_call c ON (c.name_suffix = a.name_suffix
+                       AND c.path GLOB f.path || "*-")
 GROUP BY f.path,
          a.name_suffix
 ```
@@ -3542,8 +3568,8 @@ GROUP BY f.path,
 
 ##### Derivations
 
+[⬆️ feature `free_call`](#feature-free_call)  
 [⬆️ feature `function`](#feature-function)  
-[⬆️ feature `function_call`](#feature-function_call)  
 [⬇️ feature `body_recursive_function`](#feature-body_recursive_function)  
 [⬇️ feature `tail_recursive_function`](#feature-tail_recursive_function)  
 
@@ -3555,7 +3581,7 @@ SELECT "recursive_function",
        f.span,
        f.path
 FROM t_function f
-JOIN t_function_call c ON (c.path GLOB f.path || "*-")
+JOIN t_free_call c ON (c.path GLOB f.path || "*-")
 WHERE c.name_suffix = f.name_suffix
 ```
 
@@ -3581,8 +3607,8 @@ Any function `f` which features a nested call to itself (`f(..., f(...), ...)`),
 
 ##### Derivations
 
+[⬆️ feature `free_call`](#feature-free_call)  
 [⬆️ feature `function`](#feature-function)  
-[⬆️ feature `function_call`](#feature-function_call)  
 
 ##### Specification
 
@@ -3592,8 +3618,8 @@ SELECT "deeply_recursive_function",
        f.span,
        f.path
 FROM t_function f
-JOIN t_function_call c1 ON (c1.path GLOB f.path || "*-")
-JOIN t_function_call c2 ON (c2.path GLOB c1.path || "*-")
+JOIN t_free_call c1 ON (c1.path GLOB f.path || "*-")
+JOIN t_free_call c2 ON (c2.path GLOB c1.path || "*-")
 WHERE c1.name_suffix = f.name_suffix
   AND c2.name_suffix = f.name_suffix
 ```
@@ -3618,12 +3644,12 @@ WHERE c1.name_suffix = f.name_suffix
 
 A function is body-recursive if and only if at least one of its recursive calls is not a tail call.
 
-**BUG.** Since the procedure tail calls are not recognized by `function_tail_call`, the tail recursive procedures are incorrectly labelled as body recursive.
+**BUG.** Since the procedure tail calls are not recognized by `free_tail_call`, the tail recursive procedures are incorrectly labelled as body recursive.
 
 ##### Derivations
 
-[⬆️ feature `function_call`](#feature-function_call)  
-[⬆️ feature `function_tail_call`](#feature-function_tail_call)  
+[⬆️ feature `free_call`](#feature-free_call)  
+[⬆️ feature `free_tail_call`](#feature-free_tail_call)  
 [⬆️ feature `recursive_function`](#feature-recursive_function)  
 [⬇️ feature `tail_recursive_function`](#feature-tail_recursive_function)  
 
@@ -3635,12 +3661,12 @@ SELECT "body_recursive_function",
        t_recursive_function.span,
        t_recursive_function.path
 FROM t_recursive_function
-JOIN t_function_call ON (t_function_call.path GLOB t_recursive_function.path || "*-")
-WHERE t_function_call.name_suffix = t_recursive_function.name_suffix
+JOIN t_free_call ON (t_free_call.path GLOB t_recursive_function.path || "*-")
+WHERE t_free_call.name_suffix = t_recursive_function.name_suffix
   AND NOT EXISTS
     (SELECT 1
-     FROM t_function_tail_call
-     WHERE t_function_tail_call.path = t_function_call.path )
+     FROM t_free_tail_call
+     WHERE t_free_tail_call.path = t_free_call.path )
 GROUP BY t_recursive_function.span
 ```
 
