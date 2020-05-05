@@ -58,16 +58,16 @@ def test_include_taxons():
     print(set(dbf.selected_programs.keys()))
     assert set(dbf.selected_programs.keys()) == {"collatz_print.py"}
 
-    # "operator/arithmetic/modulo" and "type/elementary/number/integer" are both featured on
+    # "operator/arithmetic/modulo" and "type/number/integer/literal" are both featured on
     # the same line in all programs except assignment.py
     dbf = ProgramFilter(db)
-    dbf.include_taxons({("equals", "operator/arithmetic/modulo", "type/elementary/number/integer")})
+    dbf.include_taxons({("equals", "operator/arithmetic/modulo", "type/number/integer/literal")})
     print(set(dbf.selected_programs.keys()))
     assert set(dbf.selected_programs.keys()) == {"collatz_print.py", "is_even.py", "fizzbuzz.py"}
 
     # The same with "x == y" instead of "equals"
     dbf = ProgramFilter(db)
-    dbf.include_taxons({("x == y", "operator/arithmetic/modulo", "type/elementary/number/integer")})
+    dbf.include_taxons({("equals", "operator/arithmetic/modulo", "type/number/integer/literal")})
     print(set(dbf.selected_programs.keys()))
     assert set(dbf.selected_programs.keys()) == {"collatz_print.py", "is_even.py", "fizzbuzz.py"}
 
@@ -104,7 +104,7 @@ def test_impart_taxons():
     # Imparting a triple doesn't make much sense. Currently, it comes down to imparting the two
     # taxons, and ignoring the predicate.
     dbf = ProgramFilter(db)
-    dbf.impart_taxons({("equals", "operator/arithmetic/modulo", "type/elementary/number/integer")})
+    dbf.impart_taxons({("equals", "operator/arithmetic/modulo", "type/number/integer")})
     print(set(dbf.selected_programs.keys()))
     assert set(dbf.selected_programs.keys()) == {
         "assignment.py",
@@ -118,9 +118,8 @@ def test_impart_taxons():
         "operator/arithmetic",
         "operator/arithmetic/modulo",
         "type",
-        "type/elementary",
-        "type/elementary/number",
-        "type/elementary/number/integer",
+        "type/number",
+        "type/number/integer",
     }
 
 

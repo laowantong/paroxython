@@ -68,10 +68,10 @@ def test_exclude_taxons():
     print(set(dbf.selected_programs.keys()))
     assert set(dbf.selected_programs.keys()) == {"assignment.py"}
 
-    # "type/elementary/string" is featured by fizzbuzz.py, and indirectly by is_even.py. Therefore,
-    # excluding this taxon keeps only assignment.py and collatz_print.py
+    # "type/sequence/string/literal" is featured by fizzbuzz.py, and indirectly by is_even.py.
+    # Therefore, excluding this taxon keeps only assignment.py and collatz_print.py
     dbf = ProgramFilter(db)
-    dbf.exclude_taxons({"type/elementary/string"})
+    dbf.exclude_taxons({"type/sequence/string/literal"})
     print(set(dbf.selected_programs.keys()))
     assert set(dbf.selected_programs.keys()) == {"assignment.py", "collatz_print.py"}
 
@@ -100,10 +100,10 @@ def test_include_taxons():
     print(set(dbf.selected_programs.keys()))
     assert set(dbf.selected_programs.keys()) == {"collatz_print.py", "fizzbuzz.py"}
 
-    # "type/elementary/string" is directly featured by fizzbuzz.py only. Therefore, including this
-    # taxon keeps only fizzbuzz.py
+    # "type/sequence/string/literal" is directly featured by fizzbuzz.py only. Therefore, including
+    # this taxon keeps only fizzbuzz.py
     dbf = ProgramFilter(db)
-    dbf.include_taxons({"type/elementary/string"})
+    dbf.include_taxons({"type/sequence/string/literal"})
     print(set(dbf.selected_programs.keys()))
     assert set(dbf.selected_programs.keys()) == {"fizzbuzz.py"}
 

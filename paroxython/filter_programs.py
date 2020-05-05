@@ -1,3 +1,4 @@
+import sys
 from itertools import product
 from typing import Set
 
@@ -75,7 +76,7 @@ class ProgramFilter:
             # Ignore all other characters
             s = regex.sub(r"[^xy<=≤]", "", s)
             if s != predicate:
-                print(f"Warning: predicate '{predicate}' normalized into '{s}'.")
+                print(f"Warning: predicate '{predicate}' normalized into '{s}'.", file=sys.stderr)
             if s not in compare_spans:  # pragma: no cover
                 raise ValueError(f"Malformed predicate '{predicate}' in the pipeline.")
         return TaxonTriple(predicate=s, name_1=name_1, name_2=name_2)
@@ -116,7 +117,10 @@ class ProgramFilter:
                 result.add(program_name)
                 no_match = False
         if no_match:
-            print(f"Warning: the pattern '{pattern}' doesn't match any existing program.")
+            print(
+                f"Warning: the pattern '{pattern}' doesn't match any existing program.",
+                file=sys.stderr,
+            )
         return result
 
     def preprocess_programs(self, programs: ProgramNames) -> ProgramNames:
@@ -171,7 +175,10 @@ class ProgramFilter:
                 result.add(taxon_name)
                 no_match = False
         if no_match:
-            print(f"Warning: the pattern '{pattern}' doesn't match any existing taxon.")
+            print(
+                f"Warning: the pattern '{pattern}' doesn't match any existing taxon.",
+                file=sys.stderr,
+            )
         return result
 
     def preprocess_taxons(self, taxons: TaxonNamesOrTriples) -> TaxonNamesOrTriples:
@@ -213,7 +220,7 @@ class ProgramFilter:
             if isinstance(taxon, str):
                 self.impart_taxon_name(taxon)
             else:  # ignore the predicate and impart the two taxons
-                print(f"Warning: predicate '{taxon[0]}' ignored.")
+                print(f"Warning: predicate '{taxon[0]}' ignored.", file=sys.stderr)
                 self.impart_taxon_name(taxon[1])
                 self.impart_taxon_name(taxon[2])
 

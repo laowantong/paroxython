@@ -3,6 +3,6 @@ call/function/builtin/casting/\1	free_call:(list|dict)
 flow/conditional	if
 flow/conditional/else	if_else
 test/inequality	comparison_operator:(Lt|LtE|Gt|GtE)
-type/container/list	free_call:list
-type/set	literal:Set
-type/set	member_call:difference_update
+type/sequence/list	free_call:list
+type/non_sequence/set	literal:Set
+type/non_sequence/set	member_call:difference_update

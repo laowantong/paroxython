@@ -18,11 +18,11 @@ S = lambda i, j: Span(i, j)  # shortcut for Span(i, j)
 def test_initial_values():
     print(t.literal_label_names)
     assert t.literal_label_names == {
-        "literal:Set": ["call/function/builtin/casting/set", "type/set"],
+        "literal:Set": ["call/function/builtin/casting/set", "type/non_sequence/set"],
         "if": ["flow/conditional"],
         "if_else": ["flow/conditional/else"],
-        "free_call:list": ["type/container/list"],
-        "member_call:difference_update": ["type/set"],
+        "free_call:list": ["type/sequence/list"],
+        "member_call:difference_update": ["type/non_sequence/set"],
     }
     print(t.compiled_label_names)
     assert t.compiled_label_names[0][1] == "call/function/builtin/casting/\\1"
@@ -34,7 +34,7 @@ def test_get_taxon_name_list():
     assert t.get_taxon_name_list("comparison_operator:Gt") == ["test/inequality"]
     assert t.get_taxon_name_list("label_with_no_corresponding_taxon") == []
     assert t.get_taxon_name_list("free_call:list") == [
-        "type/container/list",
+        "type/sequence/list",
         "call/function/builtin/casting/list",
     ]
 
@@ -135,7 +135,7 @@ def test_call():
         ],
         "algo2": [
             ("call/function/builtin/casting/set", C({S(1, 1): 1, S(2, 5): 1})),
-            ("type/set", C({S(1, 1): 3, S(2, 5): 2})),
+            ("type/non_sequence/set", C({S(1, 1): 3, S(2, 5): 2})),
         ],
     }
 

@@ -67,18 +67,6 @@ def test_collect():
     assert "Labelling 4 programs." in result
     assert "Mapping taxonomy on 4 programs." in result
     assert f"Writing {db_path}." in result
-    actual_db = json.loads(db_path.read_text())
-    assert actual_db["programs"].keys() == expected_db["programs"].keys()
-    assert actual_db["taxons"] == expected_db["taxons"]
-    assert actual_db["labels"] == expected_db["labels"]
-    assert (
-        actual_db["programs"]["collatz_print.py"]["labels"]
-        == expected_db["programs"]["collatz_print.py"]["labels"]
-    )
-    assert (
-        actual_db["programs"]["collatz_print.py"]["taxons"]
-        == expected_db["programs"]["collatz_print.py"]["taxons"]
-    )
 
 
 def test_collect_options():
