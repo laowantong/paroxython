@@ -327,7 +327,7 @@
         "method_call_without_result:shuffle": [[2,2]]
       },
       "taxons": {
-        "call/method": [[2,2]],
+        "call/method/shuffle": [[2,2]],
         "library/standard/random": [[1,1]]
       }
     },
@@ -359,7 +359,7 @@
         "method_call_without_result:choice": [[2,2]]
       },
       "taxons": {
-        "call/method": [[2,2]],
+        "call/method/choice": [[2,2]],
         "library/standard/random": [[1,1]]
       }
     },
@@ -390,11 +390,12 @@
       },
       "taxons": {
         "call/function/builtin/print": [[2,2]],
-        "call/method/dict/items": [[1,1]],
+        "call/method/items": [[1,1]],
         "flow/loop/exit/late": [[1,1],[2,2]],
         "flow/loop/for": [[1,1]],
         "flow/loop/for/nested/1": [[2,2]],
-        "io/standard/print": [[2,2]]
+        "io/standard/print": [[2,2]],
+        "type/container/dictionary": [[1,1]]
       }
     },
     "014.185-pick-uniformly-a-random-floating-point-number-in-ab.py": {
@@ -415,7 +416,7 @@
         "return": [[3,3]]
       },
       "taxons": {
-        "call/method": [[3,3]],
+        "call/method/randrange": [[3,3]],
         "library/standard/random": [[1,1]],
         "subroutine/argument/arg": [[2,2],[2,2]],
         "subroutine/function": [[2,3]]
@@ -434,7 +435,7 @@
         "method_call_without_result:uniform": [[2,2]]
       },
       "taxons": {
-        "call/method": [[2,2]],
+        "call/method/uniform": [[2,2]],
         "library/standard/random": [[1,1]]
       }
     },
@@ -451,7 +452,7 @@
         "method_call_without_result:randint": [[2,2]]
       },
       "taxons": {
-        "call/method": [[2,2]],
+        "call/method/randint": [[2,2]],
         "library/standard/random": [[1,1]]
       }
     },
@@ -607,7 +608,8 @@
         "method_call_without_result:reverse": [[1,1]]
       },
       "taxons": {
-        "call/method/sequence/list/reverse": [[1,1]]
+        "call/method/reverse": [[1,1]],
+        "type/container/list": [[1,1]]
       }
     },
     "020.573-return-two-values.py": {
@@ -640,7 +642,7 @@
       },
       "taxons": {
         "call/function/builtin/enumerate": [[2,2]],
-        "call/method/sequence/index": [[4,4]],
+        "call/method/index": [[4,4]],
         "flow/conditional/no_else": [[3,4]],
         "flow/loop/exit/early/return": [[2,2]],
         "flow/loop/exit/late": [[4,4]],
@@ -649,7 +651,8 @@
         "flow/loop/for/nested/1": [[4,4]],
         "subroutine/argument/arg": [[1,1],[1,1]],
         "subroutine/function": [[1,4]],
-        "test/belonging": [[3,3]]
+        "test/belonging": [[3,3]],
+        "type/container/sequence": [[4,4]]
       }
     },
     "021.84-swap-values-of-variables-a-and-b.py": {
@@ -705,7 +708,8 @@
         "single_assignment:s": [[1,1]]
       },
       "taxons": {
-        "call/method/sequence/string/format": [[1,1]],
+        "call/method/format": [[1,1]],
+        "type/container/string": [[1,1]],
         "type/elementary/string": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
@@ -755,7 +759,8 @@
       "taxons": {
         "call/function": [[3,3]],
         "call/function/without_arguments": [[2,2]],
-        "call/method": [[5,5],[6,6]],
+        "call/method/put": [[6,6]],
+        "call/method/start": [[5,5]],
         "library/third_party/Queue": [[1,1]],
         "type/elementary/boolean/true": [[4,4]],
         "type/elementary/string": [[6,6]],
@@ -833,7 +838,7 @@
         "single_assignment:x": [[2,2]]
       },
       "taxons": {
-        "call/method": [[2,2]],
+        "call/method/zeros": [[2,2]],
         "library/third_party/numpy": [[1,1]],
         "variable/assignment/single": [[2,2]]
       }
@@ -904,7 +909,7 @@
       "taxons": {
         "call/function/builtin/range": [[3,3]],
         "call/function/without_arguments": [[2,2]],
-        "call/method": [[4,4]],
+        "call/method/apply_async": [[4,4]],
         "flow/loop/exit/late": [[3,4]],
         "flow/loop/for/arithmetic/start": [[3,4]],
         "library/standard/multiprocessing/Pool": [[1,1]],
@@ -995,7 +1000,9 @@
       },
       "taxons": {
         "call/function": [[5,5]],
-        "call/method": [[2,2],[3,3],[7,7]],
+        "call/method/Lock": [[2,2]],
+        "call/method/acquire": [[3,3]],
+        "call/method/release": [[7,7]],
         "library/standard/threading": [[1,1]],
         "variable/assignment/single": [[2,2],[5,5]]
       }
@@ -1230,8 +1237,8 @@
       "taxons": {
         "call/function": [[13,13]],
         "call/function/builtin/zip": [[10,10]],
-        "call/method": [[8,8]],
-        "call/method/set/add": [[11,11],[12,12]],
+        "call/method/add": [[11,11],[12,12]],
+        "call/method/make_path": [[8,8]],
         "class": [[2,3],[4,12]],
         "flow/loop/exit/late": [[7,8],[10,10],[12,12]],
         "flow/loop/for": [[10,10]],
@@ -1246,6 +1253,7 @@
         "subroutine/procedure": [[5,8],[9,12]],
         "subscript/index": [[11,11],[12,12]],
         "subscript/slice/start": [[10,10]],
+        "type/container/set": [[11,11],[12,12]],
         "type/container/tuple": [[13,13],[13,13]],
         "type/elementary/number/integer": [[10,10],[13,13],[13,13],[13,13],[13,13],[13,13],[13,13]],
         "type/elementary/number/integer/zero": [[13,13]],
@@ -1275,9 +1283,10 @@
         "slice_upper:": [[1,1]]
       },
       "taxons": {
-        "call/method": [[1,1]],
-        "call/method/sequence/string/encode": [[1,1]],
+        "call/method/decode": [[1,1]],
+        "call/method/encode": [[1,1]],
         "subscript/slice/step/backwards": [[1,1]],
+        "type/container/string": [[1,1]],
         "type/elementary/number/integer": [[1,1]],
         "type/elementary/string": [[1,1],[1,1]],
         "variable/assignment/single": [[1,1]]
@@ -1516,7 +1525,8 @@
         "update_with:insert": [[1,1]]
       },
       "taxons": {
-        "call/method/sequence/list/insert": [[1,1]]
+        "call/method/insert": [[1,1]],
+        "type/container/list": [[1,1]]
       }
     },
     "045.570-pause-execution-for-5-seconds.py": {
@@ -1532,7 +1542,7 @@
         "method_call_without_result:sleep": [[2,2]]
       },
       "taxons": {
-        "call/method": [[2,2]],
+        "call/method/sleep": [[2,2]],
         "library/standard/time": [[1,1]],
         "type/elementary/number/integer": [[2,2]]
       }
@@ -1604,7 +1614,8 @@
         "single_assignment:chunks": [[1,1]]
       },
       "taxons": {
-        "call/method/sequence/string/split": [[1,1]],
+        "call/method/split": [[1,1]],
+        "type/container/string": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
     },
@@ -1644,8 +1655,9 @@
         "method_call:values": [[1,1]]
       },
       "taxons": {
-        "call/method/dict/values": [[1,1]],
-        "test/belonging": [[1,1]]
+        "call/method/values": [[1,1]],
+        "test/belonging": [[1,1]],
+        "type/container/dictionary": [[1,1]]
       }
     },
     "053.1933-join-a-list-of-strings.py": {
@@ -1668,7 +1680,8 @@
       "taxons": {
         "call/composition": [[1,1]],
         "call/function/builtin/map": [[1,1]],
-        "call/method/sequence/string/join": [[1,1]],
+        "call/method/join": [[1,1]],
+        "type/container/string": [[1,1]],
         "type/elementary/string": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
@@ -1686,7 +1699,8 @@
         "single_assignment:y": [[1,1]]
       },
       "taxons": {
-        "call/method/sequence/string/join": [[1,1]],
+        "call/method/join": [[1,1]],
+        "type/container/string": [[1,1]],
         "type/elementary/string": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
@@ -1759,7 +1773,7 @@
         "call/function": [[4,4]],
         "call/function/builtin/print": [[6,6]],
         "call/function/builtin/range": [[5,5]],
-        "call/method": [[5,5]],
+        "call/method/map": [[5,5]],
         "io/standard/print": [[6,6]],
         "library/standard/multiprocessing/Pool": [[1,1]],
         "operator/arithmetic/multiplication": [[3,3]],
@@ -1821,7 +1835,7 @@
       },
       "taxons": {
         "call/function/builtin/open": [[1,1]],
-        "call/method": [[1,1]],
+        "call/method/read": [[1,1]],
         "io/file/open": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
@@ -1879,7 +1893,7 @@
         "single_assignment:d": [[2,2]]
       },
       "taxons": {
-        "call/method": [[2,2]],
+        "call/method/now": [[2,2]],
         "library/standard/datetime": [[1,1]],
         "variable/assignment/single": [[2,2]]
       }
@@ -1897,7 +1911,8 @@
         "single_assignment:i": [[1,1]]
       },
       "taxons": {
-        "call/method/sequence/string/find": [[1,1]],
+        "call/method/find": [[1,1]],
+        "type/container/string": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
     },
@@ -1916,7 +1931,8 @@
         "single_assignment:x2": [[1,1]]
       },
       "taxons": {
-        "call/method/sequence/string/replace": [[1,1]],
+        "call/method/replace": [[1,1]],
+        "type/container/string": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
     },
@@ -1952,7 +1968,8 @@
         "single_assignment:s": [[1,1]]
       },
       "taxons": {
-        "call/method/sequence/string/format": [[1,1]],
+        "call/method/format": [[1,1]],
+        "type/container/string": [[1,1]],
         "type/elementary/string": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
@@ -1993,7 +2010,7 @@
         "return": [[3,3]]
       },
       "taxons": {
-        "call/method": [[3,3],[3,3],[3,3]],
+        "call/method/factorial": [[3,3],[3,3],[3,3]],
         "library/standard/math": [[1,1]],
         "operator/arithmetic/integer_division": [[3,3],[3,3]],
         "operator/arithmetic/substraction": [[3,3]],
@@ -2028,7 +2045,7 @@
         "call/composition": [[3,3],[3,3]],
         "call/function/builtin/casting/bytearray": [[3,3]],
         "call/function/builtin/casting/int": [[3,3]],
-        "call/method": [[3,3]],
+        "call/method/ceil": [[3,3]],
         "library/standard/__future__/division": [[1,1]],
         "library/standard/math": [[2,2]],
         "operator/arithmetic/division": [[3,3]],
@@ -2052,7 +2069,7 @@
         "single_assignment:rand": [[2,2]]
       },
       "taxons": {
-        "call/method": [[2,2]],
+        "call/method/Random": [[2,2]],
         "library/standard/random": [[1,1]],
         "variable/assignment/single": [[2,2]]
       }
@@ -2070,7 +2087,7 @@
         "single_assignment:rand": [[2,2]]
       },
       "taxons": {
-        "call/method": [[2,2]],
+        "call/method/Random": [[2,2]],
         "library/standard/random": [[1,1]],
         "variable/assignment/single": [[2,2]]
       }
@@ -2096,10 +2113,11 @@
       "taxons": {
         "call/composition": [[2,2]],
         "call/function/builtin/print": [[2,2]],
-        "call/method/sequence/string/join": [[2,2]],
+        "call/method/join": [[2,2]],
         "io/standard/print": [[2,2]],
         "library/standard/sys": [[1,1]],
         "subscript/slice/start": [[2,2]],
+        "type/container/string": [[2,2]],
         "type/elementary/number/integer": [[2,2]],
         "type/elementary/string": [[2,2]]
       }
@@ -2198,7 +2216,8 @@
         "single_assignment:s": [[1,1]]
       },
       "taxons": {
-        "call/method/sequence/string/format": [[1,1]],
+        "call/method/format": [[1,1]],
+        "type/container/string": [[1,1]],
         "type/elementary/string": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
@@ -2330,7 +2349,8 @@
         "single_assignment:count": [[1,1]]
       },
       "taxons": {
-        "call/method/sequence/count": [[1,1]],
+        "call/method/count": [[1,1]],
+        "type/container/sequence": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
     },
@@ -2349,7 +2369,7 @@
         "single_assignment:r": [[2,2]]
       },
       "taxons": {
-        "call/method": [[2,2]],
+        "call/method/compile": [[2,2]],
         "library/standard/re": [[1,1]],
         "type/elementary/string": [[2,2]],
         "variable/assignment/single": [[2,2]]
@@ -2371,7 +2391,8 @@
       },
       "taxons": {
         "call/function/builtin/bin": [[1,1]],
-        "call/method/sequence/count": [[1,1]],
+        "call/method/count": [[1,1]],
+        "type/container/sequence": [[1,1]],
         "type/elementary/string": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
@@ -2425,7 +2446,7 @@
         "method_call_without_result:exit": [[2,2]]
       },
       "taxons": {
-        "call/method": [[2,2]],
+        "call/method/exit": [[2,2]],
         "library/standard/sys": [[1,1]],
         "type/elementary/number/integer": [[2,2]]
       }
@@ -2516,7 +2537,7 @@
       },
       "taxons": {
         "call/function/builtin/open": [[2,2]],
-        "call/method": [[3,3]],
+        "call/method/load": [[3,3]],
         "io/file/open": [[2,2]],
         "library/standard/json": [[1,1]],
         "type/elementary/string": [[2,2],[2,2]],
@@ -2540,7 +2561,7 @@
       },
       "taxons": {
         "call/function/builtin/open": [[2,2]],
-        "call/method": [[3,3]],
+        "call/method/dump": [[3,3]],
         "io/file/open": [[2,2]],
         "library/standard/json": [[1,1]],
         "type/elementary/string": [[2,2],[2,2]]
@@ -2617,7 +2638,7 @@
         "single_assignment:x": [[2,2]]
       },
       "taxons": {
-        "call/method": [[2,2]],
+        "call/method/getsize": [[2,2]],
         "library/standard/os": [[1,1]],
         "variable/assignment/single": [[2,2]]
       }
@@ -2635,7 +2656,8 @@
         "single_assignment:b": [[1,1]]
       },
       "taxons": {
-        "call/method/sequence/string/startswith": [[1,1]],
+        "call/method/startswith": [[1,1]],
+        "type/container/string": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
     },
@@ -2652,7 +2674,8 @@
         "single_assignment:b": [[1,1]]
       },
       "taxons": {
-        "call/method/sequence/string/endswith": [[1,1]],
+        "call/method/endswith": [[1,1]],
+        "type/container/string": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
     },
@@ -2671,7 +2694,7 @@
         "single_assignment:d": [[2,2]]
       },
       "taxons": {
-        "call/method": [[2,2]],
+        "call/method/fromtimestamp": [[2,2]],
         "library/standard/datetime": [[1,1]],
         "variable/assignment/single": [[2,2]]
       }
@@ -2706,7 +2729,7 @@
       },
       "taxons": {
         "call/function": [[2,2]],
-        "call/method": [[3,3]],
+        "call/method/strftime": [[3,3]],
         "library/standard/datetime/date": [[1,1]],
         "type/elementary/number/integer": [[2,2],[2,2],[2,2]],
         "type/elementary/string": [[3,3]],
@@ -2732,7 +2755,8 @@
         "single_assignment:x": [[3,3]]
       },
       "taxons": {
-        "call/method": [[2,2],[3,3]],
+        "call/method/isoformat": [[3,3]],
+        "call/method/today": [[2,2]],
         "library/standard/datetime/date": [[1,1]],
         "variable/assignment/single": [[2,2],[3,3]]
       }
@@ -2747,7 +2771,8 @@
         "method_call_without_result:sort": [[1,1]]
       },
       "taxons": {
-        "call/method/sequence/list/sort": [[1,1]]
+        "call/method/sort": [[1,1]],
+        "type/container/list": [[1,1]]
       }
     },
     "101.2172-load-from-http-get-request-into-a-string.py": {
@@ -2765,7 +2790,8 @@
         "single_assignment:s": [[3,3]]
       },
       "taxons": {
-        "call/method": [[2,2],[3,3]],
+        "call/method/read": [[3,3]],
+        "call/method/urlopen": [[2,2]],
         "library/standard/urllib.request": [[1,1]],
         "variable/assignment/single": [[3,3]]
       }
@@ -2788,7 +2814,7 @@
         "parallel_assignment:2": [[2,2]]
       },
       "taxons": {
-        "call/method": [[2,2]],
+        "call/method/urlretrieve": [[2,2]],
         "library/standard/urllib": [[1,1]],
         "type/container/tuple/assignment": [[2,2]],
         "type/elementary/string": [[2,2]],
@@ -2810,7 +2836,7 @@
         "single_assignment:x": [[2,2]]
       },
       "taxons": {
-        "call/method": [[2,2]],
+        "call/method/parse": [[2,2]],
         "library/third_party/lxml.etree": [[1,1]],
         "type/elementary/string": [[2,2]],
         "variable/assignment/single": [[2,2]]
@@ -2865,7 +2891,7 @@
       "taxons": {
         "call/function": [[10,10]],
         "call/function/builtin/print": [[12,12]],
-        "call/method": [[11,11]],
+        "call/method/serialize": [[11,11]],
         "class": [[2,9]],
         "io/standard/print": [[12,12]],
         "library/third_party/pyxser": [[1,1]],
@@ -2913,7 +2939,7 @@
         "single_assignment:dir": [[2,2]]
       },
       "taxons": {
-        "call/method": [[2,2]],
+        "call/method/getcwd": [[2,2]],
         "library/standard/os": [[1,1]],
         "variable/assignment/single": [[2,2]]
       }
@@ -2937,7 +2963,8 @@
       },
       "taxons": {
         "call/composition": [[2,2]],
-        "call/method": [[2,2],[2,2]],
+        "call/method/abspath": [[2,2]],
+        "call/method/dirname": [[2,2]],
         "library/standard/os": [[1,1]],
         "variable/assignment/single": [[2,2]]
       }
@@ -2983,7 +3010,7 @@
         "single_assignment:n": [[2,2]]
       },
       "taxons": {
-        "call/method": [[2,2]],
+        "call/method/asizeof": [[2,2]],
         "library/third_party/pympler.asizeof": [[1,1]],
         "variable/assignment/single": [[2,2]]
       }
@@ -3002,8 +3029,9 @@
         "single_assignment:blank": [[1,1]]
       },
       "taxons": {
-        "call/method/sequence/string/strip": [[1,1]],
+        "call/method/strip": [[1,1]],
         "test/equality": [[1,1]],
+        "type/container/string": [[1,1]],
         "type/elementary/string/empty": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
@@ -3022,7 +3050,7 @@
         "method_call_without_result:call": [[2,2]]
       },
       "taxons": {
-        "call/method": [[2,2]],
+        "call/method/call": [[2,2]],
         "library/standard/subprocess": [[1,1]],
         "type/container/list": [[2,2]],
         "type/elementary/string": [[2,2],[2,2],[2,2]]
@@ -3075,11 +3103,12 @@
         "call/composition": [[1,1]],
         "call/function/builtin/print": [[2,2]],
         "call/function/builtin/sorted": [[1,1]],
-        "call/method/dict/items": [[1,1]],
+        "call/method/items": [[1,1]],
         "flow/loop/exit/late": [[1,1],[2,2]],
         "flow/loop/for": [[1,1]],
         "flow/loop/for/nested/1": [[2,2]],
-        "io/standard/print": [[2,2]]
+        "io/standard/print": [[2,2]],
+        "type/container/dictionary": [[1,1]]
       }
     },
     "114.2273-test-deep-equality.py": {
@@ -3133,7 +3162,8 @@
         "single_assignment:s2": [[1,1]]
       },
       "taxons": {
-        "call/method/sequence/string/replace": [[1,1]],
+        "call/method/replace": [[1,1]],
+        "type/container/string": [[1,1]],
         "type/elementary/string/empty": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
@@ -3261,8 +3291,8 @@
         "call/function/builtin/casting/set": [[2,2]],
         "call/function/builtin/print": [[8,8]],
         "call/function/without_arguments": [[2,2]],
-        "call/method/sequence/list/append": [[7,7]],
-        "call/method/set/add": [[6,6]],
+        "call/method/add": [[6,6]],
+        "call/method/append": [[7,7]],
         "flow/conditional/no_else": [[5,7]],
         "flow/loop/exit/late": [[4,7]],
         "flow/loop/for/elements": [[4,7]],
@@ -3270,8 +3300,9 @@
         "pattern/elements/accumulate/in_list/filtered": [[4,7]],
         "pattern/elements/accumulate/in_set/filtered": [[4,7]],
         "test/belonging/not": [[5,5]],
-        "type/container/list": [[1,1]],
+        "type/container/list": [[1,1],[7,7]],
         "type/container/list/empty": [[3,3]],
+        "type/container/set": [[6,6]],
         "type/container/set/empty": [[2,2]],
         "type/elementary/string": [[1,1],[1,1],[1,1],[1,1]],
         "variable/assignment/single": [[1,1],[2,2],[3,3]]
@@ -3339,7 +3370,9 @@
       },
       "taxons": {
         "call/function/builtin/print": [[7,7]],
-        "call/method": [[3,3],[4,4],[6,6]],
+        "call/method/bind": [[4,4]],
+        "call/method/recvfrom": [[6,6]],
+        "call/method/socket": [[3,3]],
         "flow/loop/exit/late": [[5,7]],
         "flow/loop/while/infinite": [[5,7]],
         "io/standard/print": [[7,7]],
@@ -3459,7 +3492,7 @@
       },
       "taxons": {
         "call/function/builtin/len": [[4,4]],
-        "call/method": [[3,3]],
+        "call/method/bisect_left": [[3,3]],
         "library/standard/bisect": [[1,1]],
         "operator/boolean/and": [[4,4]],
         "operator/ternary": [[4,4]],
@@ -3497,7 +3530,7 @@
       "taxons": {
         "call/function/builtin/print": [[5,5]],
         "call/function/without_arguments": [[3,3]],
-        "call/method": [[2,2],[4,4]],
+        "call/method/perf_counter": [[2,2],[4,4]],
         "io/standard/print": [[5,5]],
         "library/standard/time": [[1,1]],
         "operator/arithmetic/substraction": [[5,5]],
@@ -3541,7 +3574,7 @@
         "single_assignment:foo": [[2,2]]
       },
       "taxons": {
-        "call/method": [[2,2]],
+        "call/method/load_module": [[2,2]],
         "library/standard/imp": [[1,1]],
         "type/elementary/string": [[2,2],[2,2]],
         "variable/assignment/single": [[2,2]]
@@ -3597,8 +3630,8 @@
       },
       "taxons": {
         "call/function": [[5,5]],
-        "call/method/sequence/list/append": [[9,9]],
-        "call/method/set_or_list/pop": [[4,4]],
+        "call/method/append": [[9,9]],
+        "call/method/pop": [[4,4]],
         "flow/conditional/no_else": [[7,9]],
         "flow/loop/exit/late": [[3,9],[6,9]],
         "flow/loop/for/elements": [[6,9]],
@@ -3607,6 +3640,7 @@
         "subroutine/argument/arg": [[1,1],[1,1]],
         "subroutine/higher_order": [[1,9]],
         "subroutine/procedure": [[1,9]],
+        "type/container/list": [[9,9]],
         "type/elementary/boolean/true": [[8,8]],
         "type/elementary/number/integer/zero": [[4,4]],
         "variable/assignment": [[8,8]],
@@ -3668,9 +3702,9 @@
         "call/function": [[4,4],[7,7]],
         "call/function/builtin/casting/set": [[3,3]],
         "call/function/without_arguments": [[3,3]],
-        "call/method": [[6,6]],
-        "call/method/sequence/list/extend": [[9,9]],
-        "call/method/set/add": [[8,8]],
+        "call/method/add": [[8,8]],
+        "call/method/extend": [[9,9]],
+        "call/method/popleft": [[6,6]],
         "flow/loop/exit/late": [[5,9]],
         "flow/loop/while": [[5,9]],
         "library/standard/collections/deque": [[1,1]],
@@ -3678,6 +3712,8 @@
         "subroutine/higher_order": [[2,9]],
         "subroutine/procedure": [[2,9]],
         "test/belonging/not": [[9,9]],
+        "type/container/list": [[9,9]],
+        "type/container/set": [[8,8]],
         "type/container/set/empty": [[3,3]],
         "variable/assignment/single": [[3,3],[4,4],[6,6]]
       }
@@ -3732,15 +3768,17 @@
         "call/function": [[6,6]],
         "call/function/builtin/casting/set": [[2,2]],
         "call/function/without_arguments": [[2,2]],
-        "call/method/sequence/list/extend": [[8,8]],
-        "call/method/set/add": [[7,7]],
-        "call/method/set_or_list/pop": [[5,5]],
+        "call/method/add": [[7,7]],
+        "call/method/extend": [[8,8]],
+        "call/method/pop": [[5,5]],
         "flow/loop/exit/late": [[4,8]],
         "flow/loop/while": [[4,8]],
         "subroutine/argument/arg": [[1,1],[1,1]],
         "subroutine/higher_order": [[1,8]],
         "subroutine/procedure": [[1,8]],
         "test/belonging/not": [[8,8]],
+        "type/container/list": [[8,8]],
+        "type/container/set": [[7,7]],
         "type/container/set/empty": [[2,2]],
         "variable/assignment/single": [[2,2],[3,3],[5,5]]
       }
@@ -3795,7 +3833,7 @@
         "single_assignment:duration": [[2,2]]
       },
       "taxons": {
-        "call/method": [[2,2]],
+        "call/method/timeit": [[2,2]],
         "library/standard/timeit": [[1,1]],
         "type/elementary/string": [[2,2],[2,2]],
         "variable/assignment/single": [[2,2]]
@@ -3814,8 +3852,9 @@
         "single_assignment:ok": [[1,1]]
       },
       "taxons": {
-        "call/method/sequence/string/lower": [[1,1],[1,1]],
+        "call/method/lower": [[1,1],[1,1]],
         "test/belonging": [[1,1]],
+        "type/container/string": [[1,1],[1,1]],
         "variable/assignment/single": [[1,1]]
       }
     },
@@ -3848,7 +3887,7 @@
         "update_with:remove": [[1,1]]
       },
       "taxons": {
-        "call/method/set_or_list/remove": [[1,1]]
+        "call/method/remove": [[1,1]]
       }
     },
     "136.2141-remove-all-occurrences-of-a-value-from-a-list.py": {
@@ -3882,7 +3921,8 @@
         "single_assignment:b": [[1,1]]
       },
       "taxons": {
-        "call/method/sequence/string/isdigit": [[1,1]],
+        "call/method/isdigit": [[1,1]],
+        "type/container/string": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
     },
@@ -3899,7 +3939,7 @@
         "single_assignment:file": [[2,2]]
       },
       "taxons": {
-        "call/method": [[2,2]],
+        "call/method/TemporaryFile": [[2,2]],
         "library/standard/tempfile": [[1,1]],
         "variable/assignment/single": [[2,2]]
       }
@@ -3917,7 +3957,7 @@
         "single_assignment:td": [[2,2]]
       },
       "taxons": {
-        "call/method": [[2,2]],
+        "call/method/TemporaryDirectory": [[2,2]],
         "library/standard/tempfile": [[1,1]],
         "variable/assignment/single": [[2,2]]
       }
@@ -3940,7 +3980,7 @@
         "update_with:pop": [[1,1]]
       },
       "taxons": {
-        "call/method/set_or_list/pop": [[1,1]],
+        "call/method/pop": [[1,1]],
         "type/elementary/null": [[1,1]]
       }
     },
@@ -4018,7 +4058,7 @@
         "single_assignment:b": [[2,2]]
       },
       "taxons": {
-        "call/method": [[2,2]],
+        "call/method/exists": [[2,2]],
         "library/standard/os": [[1,1]],
         "variable/assignment/single": [[2,2]]
       }
@@ -4040,7 +4080,7 @@
       },
       "taxons": {
         "call/function": [[2,2]],
-        "call/method": [[2,2]],
+        "call/method/exists": [[2,2]],
         "library/standard/pathlib/Path": [[1,1]],
         "variable/assignment/single": [[2,2]]
       }
@@ -4069,7 +4109,9 @@
         "single_assignment:logger": [[5,5]]
       },
       "taxons": {
-        "call/method": [[2,2],[5,5],[6,6]],
+        "call/method/basicConfig": [[2,2]],
+        "call/method/getLogger": [[5,5]],
+        "call/method/info": [[6,6]],
         "library/standard/logging": [[1,1]],
         "library/standard/sys": [[1,1]],
         "type/elementary/string": [[3,3],[5,5]],
@@ -4099,7 +4141,8 @@
         "single_assignment:s": [[2,2]]
       },
       "taxons": {
-        "call/method": [[3,3],[4,4]],
+        "call/method/atof": [[4,4]],
+        "call/method/setlocale": [[3,3]],
         "library/standard/locale": [[1,1]],
         "type/elementary/string": [[2,2],[3,3]],
         "variable/assignment/single": [[2,2],[4,4]]
@@ -4155,7 +4198,7 @@
         "single_assignment:t": [[2,2]]
       },
       "taxons": {
-        "call/method": [[2,2]],
+        "call/method/sub": [[2,2]],
         "library/standard/re": [[1,1]],
         "type/elementary/string": [[2,2]],
         "type/elementary/string/empty": [[2,2]],
@@ -4182,9 +4225,10 @@
         "call/function/builtin/input": [[1,1]],
         "call/function/builtin/map": [[1,1]],
         "call/function/without_arguments": [[1,1]],
-        "call/method/sequence/string/split": [[1,1]],
+        "call/method/split": [[1,1]],
         "io/standard/input": [[1,1]],
-        "type/container/list": [[1,1]]
+        "type/container/list": [[1,1]],
+        "type/container/string": [[1,1]]
       }
     },
     "150.2154-remove-trailing-slash.py": {
@@ -4200,7 +4244,8 @@
         "single_assignment:p": [[1,1]]
       },
       "taxons": {
-        "call/method/sequence/string/rstrip": [[1,1]],
+        "call/method/rstrip": [[1,1]],
+        "type/container/string": [[1,1]],
         "type/elementary/string": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
@@ -4234,10 +4279,11 @@
         "update_with": [[3,3]]
       },
       "taxons": {
-        "call/method/sequence/string/endswith": [[2,2]],
+        "call/method/endswith": [[2,2]],
         "flow/conditional/no_else": [[2,3]],
         "library/standard/os": [[1,1]],
         "subscript/slice/stop": [[3,3]],
+        "type/container/string": [[2,2]],
         "type/elementary/number/integer": [[3,3]],
         "variable/assignment/single": [[3,3]]
       }
@@ -4270,7 +4316,8 @@
         "single_assignment:t": [[1,1]]
       },
       "taxons": {
-        "call/method/sequence/string/format": [[1,1]],
+        "call/method/format": [[1,1]],
+        "type/container/string": [[1,1]],
         "type/elementary/string": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
@@ -4330,11 +4377,12 @@
       "taxons": {
         "call/function/builtin/casting/int": [[1,1],[2,2]],
         "call/function/builtin/range": [[1,1],[2,2]],
-        "call/method/sequence/string/format": [[3,3]],
+        "call/method/format": [[3,3]],
         "operator/arithmetic/addition": [[1,1],[2,2],[3,3],[3,3],[3,3]],
         "operator/arithmetic/integer_division": [[3,3],[3,3],[3,3]],
         "subscript/slice/start": [[1,1],[2,2]],
         "subscript/slice/stop": [[1,1],[2,2]],
+        "type/container/string": [[3,3]],
         "type/container/tuple/assignment": [[1,1],[2,2]],
         "type/elementary/number/integer": [[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[2,2],[2,2],[2,2],[2,2],[2,2],[2,2],[3,3],[3,3],[3,3]],
         "type/elementary/string": [[3,3]],
@@ -4428,9 +4476,12 @@
         "call/function/builtin/len": [[6,6]],
         "call/function/builtin/print": [[12,12],[14,14],[15,15]],
         "call/function/builtin/range": [[6,6]],
-        "call/method": [[5,5],[9,9],[11,11],[13,13]],
+        "call/method/array": [[5,5]],
+        "call/method/astype": [[9,9]],
         "call/method/chaining": [[5,5]],
-        "call/method/sequence/string/join": [[10,10]],
+        "call/method/from_str": [[11,11],[13,13]],
+        "call/method/join": [[10,10]],
+        "call/method/view": [[5,5]],
         "class": [[2,10]],
         "io/standard/print": [[12,12],[14,14],[15,15]],
         "library/third_party/numpy": [[1,1]],
@@ -4445,6 +4496,7 @@
         "subroutine/method/naming/magic": [[8,10]],
         "subscript/slice/start": [[6,6]],
         "subscript/slice/stop": [[6,6]],
+        "type/container/string": [[10,10]],
         "type/elementary/number/integer": [[6,6],[6,6],[6,6],[6,6],[6,6],[15,15]],
         "type/elementary/string": [[10,10],[10,10],[11,11],[13,13]],
         "type/elementary/string/empty": [[10,10]],
@@ -4469,7 +4521,8 @@
         "single_assignment:path": [[2,2]]
       },
       "taxons": {
-        "call/method": [[2,2],[3,3]],
+        "call/method/Path": [[2,2]],
+        "call/method/unlink": [[3,3]],
         "library/standard/pathlib": [[1,1]],
         "variable/assignment/single": [[2,2]]
       }
@@ -4525,7 +4578,7 @@
         "single_assignment:y": [[2,2]]
       },
       "taxons": {
-        "call/method": [[2,2]],
+        "call/method/sample": [[2,2]],
         "library/standard/random": [[1,1]],
         "variable/assignment/single": [[2,2]]
       }
@@ -4755,7 +4808,7 @@
         "method_call_without_result:open": [[2,2]]
       },
       "taxons": {
-        "call/method": [[2,2]],
+        "call/method/open": [[2,2]],
         "library/standard/webbrowser": [[1,1]]
       }
     },
@@ -4816,9 +4869,10 @@
       },
       "taxons": {
         "call/function/builtin/len": [[1,1]],
-        "call/method/sequence/string/startswith": [[1,1]],
+        "call/method/startswith": [[1,1]],
         "operator/boolean/and": [[1,1]],
         "subscript/slice/start": [[1,1]],
+        "type/container/string": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
     },
@@ -4835,7 +4889,8 @@
         "single_assignment:t": [[1,1]]
       },
       "taxons": {
-        "call/method/sequence/string/lstrip": [[1,1]],
+        "call/method/lstrip": [[1,1]],
+        "type/container/string": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
     },
@@ -4859,8 +4914,9 @@
         "single_assignment:t": [[1,1]]
       },
       "taxons": {
-        "call/method/sequence/string/rsplit": [[1,1]],
+        "call/method/rsplit": [[1,1]],
         "subscript/index": [[1,1]],
+        "type/container/string": [[1,1]],
         "type/elementary/number/integer": [[1,1]],
         "type/elementary/number/integer/zero": [[1,1]],
         "variable/assignment/single": [[1,1]]
@@ -4879,7 +4935,8 @@
         "single_assignment:t": [[1,1]]
       },
       "taxons": {
-        "call/method/sequence/string/rstrip": [[1,1]],
+        "call/method/rstrip": [[1,1]],
+        "type/container/string": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
     },
@@ -4929,7 +4986,8 @@
         "update_with:append": [[1,1]]
       },
       "taxons": {
-        "call/method/sequence/list/append": [[1,1]]
+        "call/method/append": [[1,1]],
+        "type/container/list": [[1,1]]
       }
     },
     "172.2442-insert-entry-in-map.py": {
@@ -5026,11 +5084,14 @@
         "single_assignment:resp": [[4,4]]
       },
       "taxons": {
-        "call/method": [[2,2],[3,3],[4,4]],
+        "call/method/Request": [[3,3]],
         "call/method/chaining": [[2,2]],
-        "call/method/sequence/string/encode": [[2,2]],
+        "call/method/encode": [[2,2]],
+        "call/method/urlencode": [[2,2]],
+        "call/method/urlopen": [[4,4]],
         "library/standard/urllib/parse": [[1,1]],
         "library/standard/urllib/request": [[1,1]],
+        "type/container/string": [[2,2]],
         "type/elementary/string": [[2,2],[3,3]],
         "variable/assignment/single": [[2,2],[3,3],[4,4]]
       }
@@ -5046,7 +5107,7 @@
         "single_assignment:s": [[1,1]]
       },
       "taxons": {
-        "call/method": [[1,1]],
+        "call/method/hex": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
     },
@@ -5063,7 +5124,7 @@
         "single_assignment:a": [[1,1]]
       },
       "taxons": {
-        "call/method": [[1,1]],
+        "call/method/fromhex": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
     },
@@ -5097,7 +5158,8 @@
         "single_assignment:extensions": [[2,2]]
       },
       "taxons": {
-        "call/method": [[3,3],[3,3]],
+        "call/method/listdir": [[3,3]],
+        "call/method/splitext": [[3,3]],
         "library/standard/os": [[1,1]],
         "subscript/index": [[3,3]],
         "test/belonging": [[3,3]],
@@ -5139,10 +5201,12 @@
         "single_assignment:filtered_files": [[3,3]]
       },
       "taxons": {
-        "call/method": [[5,5],[7,7]],
-        "call/method/sequence/string/format": [[4,4]],
+        "call/method/format": [[4,4]],
+        "call/method/match": [[7,7]],
+        "call/method/walk": [[5,5]],
         "library/standard/os": [[2,2]],
         "library/standard/re": [[1,1]],
+        "type/container/string": [[4,4]],
         "type/elementary/string": [[4,4],[7,7]],
         "variable/assignment/single": [[3,3]]
       }
@@ -5171,7 +5235,8 @@
       "taxons": {
         "call/composition": [[3,3],[3,3]],
         "call/function/builtin/casting/list": [[3,3]],
-        "call/method": [[3,3],[3,3]],
+        "call/method/chain": [[3,3]],
+        "call/method/glob": [[3,3]],
         "library/standard/glob": [[1,1]],
         "library/standard/itertools": [[2,2]],
         "operator/string/format": [[3,3]],
@@ -5280,7 +5345,7 @@
         "single_assignment:x": [[2,2]]
       },
       "taxons": {
-        "call/method": [[2,2]],
+        "call/method/listdir": [[2,2]],
         "library/standard/os": [[1,1]],
         "variable/assignment/single": [[2,2]]
       }
@@ -5339,7 +5404,7 @@
         "single_assignment:r": [[6,6]]
       },
       "taxons": {
-        "call/method": [[6,6]],
+        "call/method/put": [[6,6]],
         "library/third_party/requests": [[2,2]],
         "type/container/dictionary/empty": [[5,5]],
         "type/container/tuple/assignment": [[7,7]],
@@ -5365,7 +5430,7 @@
       },
       "taxons": {
         "call/function": [[2,2]],
-        "call/method": [[2,2]],
+        "call/method/today": [[2,2]],
         "library/standard/datetime/date": [[1,1]],
         "library/standard/datetime/timedelta": [[1,1]],
         "operator/arithmetic/addition": [[2,2]],
@@ -5396,7 +5461,8 @@
         "single_assignment:timer": [[2,2]]
       },
       "taxons": {
-        "call/method": [[2,2],[3,3]],
+        "call/method/Timer": [[2,2]],
+        "call/method/start": [[3,3]],
         "library/standard/threading": [[1,1]],
         "type/container/tuple": [[2,2]],
         "type/elementary/number/floating_point": [[2,2]],
@@ -5417,7 +5483,7 @@
         "method_call_without_result:exit": [[2,2]]
       },
       "taxons": {
-        "call/method": [[2,2]],
+        "call/method/exit": [[2,2]],
         "library/standard/sys": [[1,1]],
         "type/elementary/number/integer/zero": [[2,2]]
       }
@@ -5489,7 +5555,8 @@
       },
       "taxons": {
         "call/function/builtin/range": [[4,4]],
-        "call/method": [[9,9],[12,12],[12,12],[14,14],[15,15],[15,15]],
+        "call/method/find_set": [[9,9],[12,12],[12,12],[15,15],[15,15]],
+        "call/method/is_same_set": [[14,14]],
         "class": [[1,15]],
         "flow/conditional": [[6,10]],
         "flow/conditional/else": [[9,10]],
@@ -5547,7 +5614,7 @@
         "single_assignment:c": [[2,2]]
       },
       "taxons": {
-        "call/method": [[2,2]],
+        "call/method/matmul": [[2,2]],
         "library/third_party/numpy": [[1,1]],
         "variable/assignment/single": [[2,2]]
       }
@@ -5613,7 +5680,7 @@
       },
       "taxons": {
         "call/function/builtin/open": [[1,1]],
-        "call/method": [[2,2]],
+        "call/method/readlines": [[2,2]],
         "io/file/open": [[1,1]],
         "variable/assignment/single": [[2,2]]
       }
@@ -11063,122 +11130,131 @@
       "162.2164-execute-procedures-depending-on-options.py",
       "191.3403-check-if-any-value-in-a-list-is-larger-than-a-limit.py"
     ],
-    "call/method": [
-      "010.1478-shuffle-a-list.py",
-      "011.47-pick-a-random-element-from-a-list.py",
-      "014.185-pick-uniformly-a-random-floating-point-number-in-ab.py",
-      "014.3410-pick-uniformly-a-random-floating-point-number-in-ab.py",
-      "015.184-pick-uniformly-a-random-integer-in-ab.py",
-      "025.195-send-a-value-to-another-thread.py",
-      "027.193-create-a-3-dimensional-array.py",
-      "030.189-parallelize-execution-of-1000-independent-tasks.py",
-      "033.1420-atomically-read-and-update-variable.py",
-      "040.2279-graph-with-adjacency-lists.py",
-      "041.187-reverse-a-string.py",
-      "045.570-pause-execution-for-5-seconds.py",
-      "056.1424-launch-1000-parallel-tasks-and-wait-for-completion.py",
-      "058.665-extract-file-content-to-a-string.py",
-      "061.576-get-current-date.py",
-      "067.1426-binomial-coefficient-n-choose-k.py",
-      "068.2271-create-a-bitset.py",
+    "call/method/Lock": [
+      "033.1420-atomically-read-and-update-variable.py"
+    ],
+    "call/method/Path": [
+      "155.2147-delete-file.py"
+    ],
+    "call/method/Random": [
       "069.1086-seed-random-generator.py",
-      "070.1087-use-clock-as-random-generator-seed.py",
-      "083.1805-regex-with-character-repetition.py",
-      "087.1139-stop-program.py",
-      "091.1098-load-json-file-into-struct.py",
-      "092.1100-save-object-into-json-file.py",
-      "095.2140-get-file-size.py",
-      "098.2142-epoch-seconds-to-date-object.py",
-      "099.1429-format-date-yyyy-mm-dd.py",
-      "099.2693-format-date-yyyy-mm-dd.py",
-      "101.2172-load-from-http-get-request-into-a-string.py",
-      "102.2173-load-from-http-get-request-into-a-file.py",
-      "103.2276-load-xml-file-into-struct.py",
-      "104.3264-save-object-into-xml-file.py",
-      "106.2039-get-program-working-directory.py",
-      "107.2139-get-folder-containing-current-program.py",
-      "109.2280-number-of-bytes-of-a-type.py",
-      "111.2168-launch-other-program.py",
-      "121.3029-udp-listen-and-read.py",
-      "124.2152-binary-search-for-a-value-in-sorted-array.py",
-      "125.2167-measure-function-call-duration.py",
-      "127.2274-source-code-inclusion.py",
+      "070.1087-use-clock-as-random-generator-seed.py"
+    ],
+    "call/method/Request": [
+      "174.2687-make-http-post-request.py"
+    ],
+    "call/method/TemporaryDirectory": [
+      "139.2162-create-temp-directory.py"
+    ],
+    "call/method/TemporaryFile": [
+      "138.2161-create-temp-file.py"
+    ],
+    "call/method/Timer": [
+      "185.2820-execute-function-in-30-seconds.py"
+    ],
+    "call/method/abspath": [
+      "107.2139-get-folder-containing-current-program.py"
+    ],
+    "call/method/acquire": [
+      "033.1420-atomically-read-and-update-variable.py"
+    ],
+    "call/method/add": [
+      "040.2279-graph-with-adjacency-lists.py",
+      "119.3263-deduplicate-list.py",
       "129.2282-breadth-first-traversing-in-a-graph.py",
-      "132.2040-measure-duration-of-procedure-execution.py",
-      "138.2161-create-temp-file.py",
-      "139.2162-create-temp-directory.py",
-      "144.2145-check-if-file-exists.py",
-      "144.2915-check-if-file-exists.py",
-      "145.1822-print-log-line-with-datetime.py",
-      "146.1825-convert-string-to-floating-point-number.py",
-      "147.2171-remove-all-non-ascii-characters.py",
-      "154.2292-halfway-between-two-hex-color-codes.py",
-      "155.2147-delete-file.py",
-      "158.2163-random-sublist.py",
-      "164.2169-open-url-in-default-browser.py",
-      "174.2687-make-http-post-request.py",
-      "175.2613-bytes-to-hex-string.py",
-      "176.2614-hex-string-to-byte-array.py",
-      "177.2709-find-files-with-a-given-list-of-filename-extensions.py",
-      "177.2725-find-files-with-a-given-list-of-filename-extensions.py",
-      "177.3241-find-files-with-a-given-list-of-filename-extensions.py",
-      "180.2612-list-files-in-directory.py",
-      "183.3025-make-http-put-request.py",
-      "184.2701-tomorrow.py",
-      "185.2820-execute-function-in-30-seconds.py",
-      "186.2699-exit-program-cleanly.py",
-      "187.3261-disjoint-set.py",
-      "188.3284-matrix-multiplication.py",
-      "197.3457-get-a-list-of-lines-from-a-file.py"
+      "130.2283-depth-first-traversing-in-a-graph.py"
+    ],
+    "call/method/append": [
+      "119.3263-deduplicate-list.py",
+      "128.2085-breadth-first-traversing-of-a-tree.py",
+      "171.2446-add-an-element-at-the-end-of-a-list.py"
+    ],
+    "call/method/apply_async": [
+      "030.189-parallelize-execution-of-1000-independent-tasks.py"
+    ],
+    "call/method/array": [
+      "154.2292-halfway-between-two-hex-color-codes.py"
+    ],
+    "call/method/asizeof": [
+      "109.2280-number-of-bytes-of-a-type.py"
+    ],
+    "call/method/astype": [
+      "154.2292-halfway-between-two-hex-color-codes.py"
+    ],
+    "call/method/atof": [
+      "146.1825-convert-string-to-floating-point-number.py"
+    ],
+    "call/method/basicConfig": [
+      "145.1822-print-log-line-with-datetime.py"
+    ],
+    "call/method/bind": [
+      "121.3029-udp-listen-and-read.py"
+    ],
+    "call/method/bisect_left": [
+      "124.2152-binary-search-for-a-value-in-sorted-array.py"
+    ],
+    "call/method/call": [
+      "111.2168-launch-other-program.py"
+    ],
+    "call/method/ceil": [
+      "068.2271-create-a-bitset.py"
+    ],
+    "call/method/chain": [
+      "177.3241-find-files-with-a-given-list-of-filename-extensions.py"
     ],
     "call/method/chaining": [
       "154.2292-halfway-between-two-hex-color-codes.py",
       "174.2687-make-http-post-request.py"
     ],
-    "call/method/dict/items": [
-      "013.574-iterate-over-map-keys-and-values.py",
-      "113.2157-iterate-over-map-entries-ordered-by-values.py"
+    "call/method/choice": [
+      "011.47-pick-a-random-element-from-a-list.py"
     ],
-    "call/method/dict/values": [
-      "052.666-check-if-map-contains-value.py"
+    "call/method/compile": [
+      "083.1805-regex-with-character-repetition.py"
     ],
-    "call/method/sequence/count": [
+    "call/method/count": [
       "082.1096-count-substring-occurrences.py",
       "084.1940-count-bits-set-in-integer-binary-representation.py"
     ],
-    "call/method/sequence/index": [
-      "020.573-return-two-values.py"
+    "call/method/decode": [
+      "041.187-reverse-a-string.py"
     ],
-    "call/method/sequence/list/append": [
-      "119.3263-deduplicate-list.py",
-      "128.2085-breadth-first-traversing-of-a-tree.py",
-      "171.2446-add-an-element-at-the-end-of-a-list.py"
+    "call/method/dirname": [
+      "107.2139-get-folder-containing-current-program.py"
     ],
-    "call/method/sequence/list/extend": [
-      "129.2282-breadth-first-traversing-in-a-graph.py",
-      "130.2283-depth-first-traversing-in-a-graph.py"
+    "call/method/dump": [
+      "092.1100-save-object-into-json-file.py"
     ],
-    "call/method/sequence/list/insert": [
-      "044.190-insert-element-in-list.py"
-    ],
-    "call/method/sequence/list/reverse": [
-      "019.3164-reverse-a-list.py"
-    ],
-    "call/method/sequence/list/sort": [
-      "100.1142-sort-by-a-comparator.py"
-    ],
-    "call/method/sequence/string/encode": [
+    "call/method/encode": [
       "041.187-reverse-a-string.py",
       "174.2687-make-http-post-request.py"
     ],
-    "call/method/sequence/string/endswith": [
+    "call/method/endswith": [
       "097.1095-check-string-suffix.py",
       "151.2166-remove-string-trailing-path-separator.py"
     ],
-    "call/method/sequence/string/find": [
+    "call/method/exists": [
+      "144.2145-check-if-file-exists.py",
+      "144.2915-check-if-file-exists.py"
+    ],
+    "call/method/exit": [
+      "087.1139-stop-program.py",
+      "186.2699-exit-program-cleanly.py"
+    ],
+    "call/method/extend": [
+      "129.2282-breadth-first-traversing-in-a-graph.py",
+      "130.2283-depth-first-traversing-in-a-graph.py"
+    ],
+    "call/method/factorial": [
+      "067.1426-binomial-coefficient-n-choose-k.py"
+    ],
+    "call/method/find": [
       "062.1091-find-substring-position.py"
     ],
-    "call/method/sequence/string/format": [
+    "call/method/find_set": [
+      "187.3261-disjoint-set.py"
+    ],
+    "call/method/format": [
       "023.1102-convert-real-number-to-string-with-2-decimal-places.py",
       "065.1085-format-decimal-number.py",
       "076.1083-binary-digits-from-an-integer.py",
@@ -11186,56 +11262,225 @@
       "154.2155-halfway-between-two-hex-color-codes.py",
       "177.2725-find-files-with-a-given-list-of-filename-extensions.py"
     ],
-    "call/method/sequence/string/isdigit": [
+    "call/method/from_str": [
+      "154.2292-halfway-between-two-hex-color-codes.py"
+    ],
+    "call/method/fromhex": [
+      "176.2614-hex-string-to-byte-array.py"
+    ],
+    "call/method/fromtimestamp": [
+      "098.2142-epoch-seconds-to-date-object.py"
+    ],
+    "call/method/getLogger": [
+      "145.1822-print-log-line-with-datetime.py"
+    ],
+    "call/method/getcwd": [
+      "106.2039-get-program-working-directory.py"
+    ],
+    "call/method/getsize": [
+      "095.2140-get-file-size.py"
+    ],
+    "call/method/glob": [
+      "177.3241-find-files-with-a-given-list-of-filename-extensions.py"
+    ],
+    "call/method/hex": [
+      "175.2613-bytes-to-hex-string.py"
+    ],
+    "call/method/index": [
+      "020.573-return-two-values.py"
+    ],
+    "call/method/info": [
+      "145.1822-print-log-line-with-datetime.py"
+    ],
+    "call/method/insert": [
+      "044.190-insert-element-in-list.py"
+    ],
+    "call/method/is_same_set": [
+      "187.3261-disjoint-set.py"
+    ],
+    "call/method/isdigit": [
       "137.1823-check-if-string-contains-only-digits.py"
     ],
-    "call/method/sequence/string/join": [
+    "call/method/isoformat": [
+      "099.2693-format-date-yyyy-mm-dd.py"
+    ],
+    "call/method/items": [
+      "013.574-iterate-over-map-keys-and-values.py",
+      "113.2157-iterate-over-map-entries-ordered-by-values.py"
+    ],
+    "call/method/join": [
       "053.1933-join-a-list-of-strings.py",
       "053.240-join-a-list-of-strings.py",
       "071.379-echo-program-implementation.py",
       "154.2292-halfway-between-two-hex-color-codes.py"
     ],
-    "call/method/sequence/string/lower": [
+    "call/method/listdir": [
+      "177.2709-find-files-with-a-given-list-of-filename-extensions.py",
+      "180.2612-list-files-in-directory.py"
+    ],
+    "call/method/load": [
+      "091.1098-load-json-file-into-struct.py"
+    ],
+    "call/method/load_module": [
+      "127.2274-source-code-inclusion.py"
+    ],
+    "call/method/lower": [
       "133.2160-case-insensitive-string-contains.py"
     ],
-    "call/method/sequence/string/lstrip": [
+    "call/method/lstrip": [
       "167.3175-trim-prefix.py"
     ],
-    "call/method/sequence/string/replace": [
-      "063.1088-replace-fragment-of-a-string.py",
-      "116.1257-remove-occurrences-of-word-from-string.py"
+    "call/method/make_path": [
+      "040.2279-graph-with-adjacency-lists.py"
     ],
-    "call/method/sequence/string/rsplit": [
-      "168.2277-trim-suffix.py"
+    "call/method/map": [
+      "056.1424-launch-1000-parallel-tasks-and-wait-for-completion.py"
     ],
-    "call/method/sequence/string/rstrip": [
-      "150.2154-remove-trailing-slash.py",
-      "168.3174-trim-suffix.py"
+    "call/method/match": [
+      "177.2725-find-files-with-a-given-list-of-filename-extensions.py"
     ],
-    "call/method/sequence/string/split": [
-      "049.242-split-a-space-separated-string.py",
-      "148.1829-read-list-of-integer-numbers-from-stdin.py"
+    "call/method/matmul": [
+      "188.3284-matrix-multiplication.py"
     ],
-    "call/method/sequence/string/startswith": [
-      "096.1094-check-string-prefix.py",
-      "167.2611-trim-prefix.py"
+    "call/method/now": [
+      "061.576-get-current-date.py"
     ],
-    "call/method/sequence/string/strip": [
-      "110.1455-check-if-string-is-blank.py"
+    "call/method/open": [
+      "164.2169-open-url-in-default-browser.py"
     ],
-    "call/method/set/add": [
-      "040.2279-graph-with-adjacency-lists.py",
-      "119.3263-deduplicate-list.py",
-      "129.2282-breadth-first-traversing-in-a-graph.py",
-      "130.2283-depth-first-traversing-in-a-graph.py"
+    "call/method/parse": [
+      "103.2276-load-xml-file-into-struct.py"
     ],
-    "call/method/set_or_list/pop": [
+    "call/method/perf_counter": [
+      "125.2167-measure-function-call-duration.py"
+    ],
+    "call/method/pop": [
       "128.2085-breadth-first-traversing-of-a-tree.py",
       "130.2283-depth-first-traversing-in-a-graph.py",
       "140.2156-delete-map-entry.py"
     ],
-    "call/method/set_or_list/remove": [
+    "call/method/popleft": [
+      "129.2282-breadth-first-traversing-in-a-graph.py"
+    ],
+    "call/method/put": [
+      "025.195-send-a-value-to-another-thread.py",
+      "183.3025-make-http-put-request.py"
+    ],
+    "call/method/randint": [
+      "015.184-pick-uniformly-a-random-integer-in-ab.py"
+    ],
+    "call/method/randrange": [
+      "014.185-pick-uniformly-a-random-floating-point-number-in-ab.py"
+    ],
+    "call/method/read": [
+      "058.665-extract-file-content-to-a-string.py",
+      "101.2172-load-from-http-get-request-into-a-string.py"
+    ],
+    "call/method/readlines": [
+      "197.3457-get-a-list-of-lines-from-a-file.py"
+    ],
+    "call/method/recvfrom": [
+      "121.3029-udp-listen-and-read.py"
+    ],
+    "call/method/release": [
+      "033.1420-atomically-read-and-update-variable.py"
+    ],
+    "call/method/remove": [
       "135.2158-remove-item-from-list-by-its-value.py"
+    ],
+    "call/method/replace": [
+      "063.1088-replace-fragment-of-a-string.py",
+      "116.1257-remove-occurrences-of-word-from-string.py"
+    ],
+    "call/method/reverse": [
+      "019.3164-reverse-a-list.py"
+    ],
+    "call/method/rsplit": [
+      "168.2277-trim-suffix.py"
+    ],
+    "call/method/rstrip": [
+      "150.2154-remove-trailing-slash.py",
+      "168.3174-trim-suffix.py"
+    ],
+    "call/method/sample": [
+      "158.2163-random-sublist.py"
+    ],
+    "call/method/serialize": [
+      "104.3264-save-object-into-xml-file.py"
+    ],
+    "call/method/setlocale": [
+      "146.1825-convert-string-to-floating-point-number.py"
+    ],
+    "call/method/shuffle": [
+      "010.1478-shuffle-a-list.py"
+    ],
+    "call/method/sleep": [
+      "045.570-pause-execution-for-5-seconds.py"
+    ],
+    "call/method/socket": [
+      "121.3029-udp-listen-and-read.py"
+    ],
+    "call/method/sort": [
+      "100.1142-sort-by-a-comparator.py"
+    ],
+    "call/method/split": [
+      "049.242-split-a-space-separated-string.py",
+      "148.1829-read-list-of-integer-numbers-from-stdin.py"
+    ],
+    "call/method/splitext": [
+      "177.2709-find-files-with-a-given-list-of-filename-extensions.py"
+    ],
+    "call/method/start": [
+      "025.195-send-a-value-to-another-thread.py",
+      "185.2820-execute-function-in-30-seconds.py"
+    ],
+    "call/method/startswith": [
+      "096.1094-check-string-prefix.py",
+      "167.2611-trim-prefix.py"
+    ],
+    "call/method/strftime": [
+      "099.1429-format-date-yyyy-mm-dd.py"
+    ],
+    "call/method/strip": [
+      "110.1455-check-if-string-is-blank.py"
+    ],
+    "call/method/sub": [
+      "147.2171-remove-all-non-ascii-characters.py"
+    ],
+    "call/method/timeit": [
+      "132.2040-measure-duration-of-procedure-execution.py"
+    ],
+    "call/method/today": [
+      "099.2693-format-date-yyyy-mm-dd.py",
+      "184.2701-tomorrow.py"
+    ],
+    "call/method/uniform": [
+      "014.3410-pick-uniformly-a-random-floating-point-number-in-ab.py"
+    ],
+    "call/method/unlink": [
+      "155.2147-delete-file.py"
+    ],
+    "call/method/urlencode": [
+      "174.2687-make-http-post-request.py"
+    ],
+    "call/method/urlopen": [
+      "101.2172-load-from-http-get-request-into-a-string.py",
+      "174.2687-make-http-post-request.py"
+    ],
+    "call/method/urlretrieve": [
+      "102.2173-load-from-http-get-request-into-a-file.py"
+    ],
+    "call/method/values": [
+      "052.666-check-if-map-contains-value.py"
+    ],
+    "call/method/view": [
+      "154.2292-halfway-between-two-hex-color-codes.py"
+    ],
+    "call/method/walk": [
+      "177.2725-find-files-with-a-given-list-of-filename-extensions.py"
+    ],
+    "call/method/zeros": [
+      "027.193-create-a-3-dimensional-array.py"
     ],
     "class": [
       "005.663-create-a-2d-point-data-structure.py",
@@ -11930,18 +12175,28 @@
       "178.2615-check-if-point-is-inside-rectangle.py"
     ],
     "type/container/dictionary": [
-      "008.39-initialize-a-new-map-associative-array.py"
+      "008.39-initialize-a-new-map-associative-array.py",
+      "013.574-iterate-over-map-keys-and-values.py",
+      "052.666-check-if-map-contains-value.py",
+      "113.2157-iterate-over-map-entries-ordered-by-values.py"
     ],
     "type/container/dictionary/empty": [
       "183.3025-make-http-put-request.py"
     ],
     "type/container/list": [
       "017.1103-create-a-tree-data-structure.py",
+      "019.3164-reverse-a-list.py",
       "043.2733-break-outer-loop.py",
+      "044.190-insert-element-in-list.py",
+      "100.1142-sort-by-a-comparator.py",
       "111.2168-launch-other-program.py",
       "119.1253-deduplicate-list.py",
       "119.3263-deduplicate-list.py",
+      "128.2085-breadth-first-traversing-of-a-tree.py",
+      "129.2282-breadth-first-traversing-in-a-graph.py",
+      "130.2283-depth-first-traversing-in-a-graph.py",
       "148.1829-read-list-of-integer-numbers-from-stdin.py",
+      "171.2446-add-an-element-at-the-end-of-a-list.py",
       "177.2709-find-files-with-a-given-list-of-filename-extensions.py",
       "177.3241-find-files-with-a-given-list-of-filename-extensions.py",
       "187.3261-disjoint-set.py"
@@ -11950,16 +12205,55 @@
       "119.3263-deduplicate-list.py",
       "159.2281-trie.py"
     ],
+    "type/container/sequence": [
+      "020.573-return-two-values.py",
+      "082.1096-count-substring-occurrences.py",
+      "084.1940-count-bits-set-in-integer-binary-representation.py"
+    ],
     "type/container/set": [
       "034.625-create-a-set-of-objects.py",
+      "040.2279-graph-with-adjacency-lists.py",
       "118.1254-list-to-set.py",
       "118.3266-list-to-set.py",
-      "119.1253-deduplicate-list.py"
+      "119.1253-deduplicate-list.py",
+      "119.3263-deduplicate-list.py",
+      "129.2282-breadth-first-traversing-in-a-graph.py",
+      "130.2283-depth-first-traversing-in-a-graph.py"
     ],
     "type/container/set/empty": [
       "119.3263-deduplicate-list.py",
       "129.2282-breadth-first-traversing-in-a-graph.py",
       "130.2283-depth-first-traversing-in-a-graph.py"
+    ],
+    "type/container/string": [
+      "023.1102-convert-real-number-to-string-with-2-decimal-places.py",
+      "041.187-reverse-a-string.py",
+      "049.242-split-a-space-separated-string.py",
+      "053.1933-join-a-list-of-strings.py",
+      "053.240-join-a-list-of-strings.py",
+      "062.1091-find-substring-position.py",
+      "063.1088-replace-fragment-of-a-string.py",
+      "065.1085-format-decimal-number.py",
+      "071.379-echo-program-implementation.py",
+      "076.1083-binary-digits-from-an-integer.py",
+      "096.1094-check-string-prefix.py",
+      "097.1095-check-string-suffix.py",
+      "110.1455-check-if-string-is-blank.py",
+      "116.1257-remove-occurrences-of-word-from-string.py",
+      "133.2160-case-insensitive-string-contains.py",
+      "137.1823-check-if-string-contains-only-digits.py",
+      "148.1829-read-list-of-integer-numbers-from-stdin.py",
+      "150.2154-remove-trailing-slash.py",
+      "151.2166-remove-string-trailing-path-separator.py",
+      "153.1980-concatenate-string-with-integer.py",
+      "154.2155-halfway-between-two-hex-color-codes.py",
+      "154.2292-halfway-between-two-hex-color-codes.py",
+      "167.2611-trim-prefix.py",
+      "167.3175-trim-prefix.py",
+      "168.2277-trim-suffix.py",
+      "168.3174-trim-suffix.py",
+      "174.2687-make-http-post-request.py",
+      "177.2725-find-files-with-a-given-list-of-filename-extensions.py"
     ],
     "type/container/tuple": [
       "040.2279-graph-with-adjacency-lists.py",
