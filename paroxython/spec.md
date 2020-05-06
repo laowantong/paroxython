@@ -3508,7 +3508,8 @@ _Remark._ The span starts from the first decorator.
            ^(.*)/_type=FunctionDef
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 (
-\n(?:\1.+\n)*?\1/decorator_list/\d+/id=(?P<SUFFIX>.+)
+\n(?:\1.+\n)*?\1/(?P<_1>decorator_list/\d+)/_pos=(?P<POS>.+)  # force len(d["POS"]) != len(d["SUFFIX"])
+\n(?:\1.+\n)*?\1/(?P=_1)                   /id=(?P<SUFFIX>.+)
 )+
 \n(?:\1.+\n)* \1/.+/_pos=(?P<POS>.+)
 ```
@@ -3521,6 +3522,10 @@ _Remark._ The span starts from the first decorator.
 3   @bar
 4   def qux(*args, **kwargs):
 5       pass
+6   @clip
+7   @crap
+8   def bang(*args, **kwargs):
+9       pass
 ```
 
 _Remark._ The span and the path are the same as those of the function.
@@ -3531,6 +3536,8 @@ _Remark._ The span and the path are the same as those of the function.
 |:--|:--|
 | `function_decorator:bar` | 1-5 |
 | `function_decorator:bizz` | 1-5 |
+| `function_decorator:clip` | 6-9 |
+| `function_decorator:crap` | 6-9 |
 | `function_decorator:foo` | 1-5 |
 
 --------------------------------------------------------------------------------
@@ -4380,7 +4387,8 @@ Match sequential loops, along with their iteration variable(s).
            ^(.*)/_type=For
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 (
-\n(?:\1.+\n)*?\1/target/(.+/)?id=(?P<SUFFIX>.+)
+\n(?:\1.+\n)*?\1/(?P<_1>target(/.+)?)/_pos=(?P<POS>.+) # force len(d["POS"]) != len(d["SUFFIX"])
+\n(?:\1.+\n)*?\1/(?P=_1)             /id=(?P<SUFFIX>.+)
 )+
 \n(?:\1.+\n)* \1/.*/_pos=(?P<POS>.+)
 ```
@@ -4395,8 +4403,8 @@ Match sequential loops, along with their iteration variable(s).
 5           pass
 6       else:
 7           pass
-8   # for (i, j) in enumerate(seq):
-9   #     pass
+8   for (i, j) in enumerate(seq):
+9       pass
 ```
 
 ##### Matches
@@ -4408,6 +4416,8 @@ Match sequential loops, along with their iteration variable(s).
 | `for:a` | 4-7 |
 | `for:b` | 4-7 |
 | `for:c` | 4-7 |
+| `for:i` | 8-9 |
+| `for:j` | 8-9 |
 
 --------------------------------------------------------------------------------
 
@@ -4466,6 +4476,7 @@ SELECT "loop",
 FROM t
 WHERE name_prefix IN ("for",
                       "while")
+GROUP BY path
 ```
 
 ##### Example
@@ -4476,6 +4487,10 @@ WHERE name_prefix IN ("for",
 3           pass
 4       for x in s:
 5           pass
+6
+7   for (i, x) in enumerate(seq):
+8       if foo(x):
+9           bar(i)
 ```
 
 ##### Matches
@@ -4483,7 +4498,7 @@ WHERE name_prefix IN ("for",
 | Label | Lines |
 |:--|:--|
 | `loop:while` | 1-5, 2-3 |
-| `loop:for` | 4-5 |
+| `loop:for` | 4-5, 7-9 |
 
 --------------------------------------------------------------------------------
 

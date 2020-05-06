@@ -11,7 +11,7 @@
     - [`004.2921-create-a-function-which-returns-the-square-of-an-integer.py`](#program-0042921-create-a-function-which-returns-the-square-of-an-integerpy-learning-cost-34375)
     - [`005.0663-create-a-2d-point-data-structure.py`](#program-0050663-create-a-2d-point-data-structurepy-learning-cost-14375)
     - [`006.0032-iterate-over-list-values.py`](#program-0060032-iterate-over-list-valuespy-learning-cost-275)
-    - [`007.0183-iterate-over-list-indexes-and-values.py`](#program-0070183-iterate-over-list-indexes-and-valuespy-learning-cost-740625)
+    - [`007.0183-iterate-over-list-indexes-and-values.py`](#program-0070183-iterate-over-list-indexes-and-valuespy-learning-cost-64375)
     - [`008.0039-initialize-a-new-map-associative-array.py`](#program-0080039-initialize-a-new-map-associative-arraypy-learning-cost-36875)
     - [`009.1410-create-a-binary-tree-data-structure.py`](#program-0091410-create-a-binary-tree-data-structurepy-learning-cost-5625)
     - [`009.3176-create-a-binary-tree-data-structure.py`](#program-0093176-create-a-binary-tree-data-structurepy-learning-cost-475)
@@ -19,7 +19,7 @@
     - [`010.1478-shuffle-a-list.py`](#program-0101478-shuffle-a-listpy-learning-cost-175)
     - [`011.0047-pick-a-random-element-from-a-list.py`](#program-0110047-pick-a-random-element-from-a-listpy-learning-cost-175)
     - [`012.0181-check-if-list-contains-a-value.py`](#program-0120181-check-if-list-contains-a-valuepy-learning-cost-075)
-    - [`013.0574-iterate-over-map-keys-and-values.py`](#program-0130574-iterate-over-map-keys-and-valuespy-learning-cost-728125)
+    - [`013.0574-iterate-over-map-keys-and-values.py`](#program-0130574-iterate-over-map-keys-and-valuespy-learning-cost-63125)
     - [`014.0185-pick-uniformly-a-random-floating-point-number-in-ab.py`](#program-0140185-pick-uniformly-a-random-floating-point-number-in-abpy-learning-cost-3375)
     - [`014.3410-pick-uniformly-a-random-floating-point-number-in-ab.py`](#program-0143410-pick-uniformly-a-random-floating-point-number-in-abpy-learning-cost-175)
     - [`015.0184-pick-uniformly-a-random-integer-in-ab.py`](#program-0150184-pick-uniformly-a-random-integer-in-abpy-learning-cost-175)
@@ -29,7 +29,7 @@
     - [`019.0197-reverse-a-list.py`](#program-0190197-reverse-a-listpy-learning-cost-18125)
     - [`019.1983-reverse-a-list.py`](#program-0191983-reverse-a-listpy-learning-cost-275)
     - [`019.3164-reverse-a-list.py`](#program-0193164-reverse-a-listpy-learning-cost-175)
-    - [`020.0573-return-two-values.py`](#program-0200573-return-two-valuespy-learning-cost-114375)
+    - [`020.0573-return-two-values.py`](#program-0200573-return-two-valuespy-learning-cost-953125)
     - [`021.0084-swap-values-of-variables-a-and-b.py`](#program-0210084-swap-values-of-variables-a-and-bpy-learning-cost-1875)
     - [`022.0243-convert-string-to-integer.py`](#program-0220243-convert-string-to-integerpy-learning-cost-271875)
     - [`023.1102-convert-real-number-to-string-with-2-decimal-places.py`](#program-0231102-convert-real-number-to-string-with-2-decimal-placespy-learning-cost-35625)
@@ -50,13 +50,13 @@
     - [`037.0671-currying.py`](#program-0370671-curryingpy-learning-cost-85625)
     - [`038.0186-extract-a-substring.py`](#program-0380186-extract-a-substringpy-learning-cost-2625)
     - [`039.0571-check-if-string-contains-a-word.py`](#program-0390571-check-if-string-contains-a-wordpy-learning-cost-1625)
-    - [`040.2279-graph-with-adjacency-lists.py`](#program-0402279-graph-with-adjacency-listspy-learning-cost-216875)
+    - [`040.2279-graph-with-adjacency-lists.py`](#program-0402279-graph-with-adjacency-listspy-learning-cost-2071875)
     - [`041.0187-reverse-a-string.py`](#program-0410187-reverse-a-stringpy-learning-cost-63125)
     - [`041.2714-reverse-a-string.py`](#program-0412714-reverse-a-stringpy-learning-cost-275)
     - [`042.1264-continue-outer-loop.py`](#program-0421264-continue-outer-looppy-learning-cost-909375)
     - [`042.3168-continue-outer-loop.py`](#program-0423168-continue-outer-looppy-learning-cost-628125)
     - [`043.0676-break-outer-loop.py`](#program-0430676-break-outer-looppy-learning-cost-1103125)
-    - [`043.2733-break-outer-loop.py`](#program-0432733-break-outer-looppy-learning-cost-1684375)
+    - [`043.2733-break-outer-loop.py`](#program-0432733-break-outer-looppy-learning-cost-15875)
     - [`044.0190-insert-element-in-list.py`](#program-0440190-insert-element-in-listpy-learning-cost-175)
     - [`045.0570-pause-execution-for-5-seconds.py`](#program-0450570-pause-execution-for-5-secondspy-learning-cost-26875)
     - [`046.0191-extract-beginning-of-string-prefix.py`](#program-0460191-extract-beginning-of-string-prefixpy-learning-cost-26875)
@@ -129,7 +129,7 @@
     - [`110.1455-check-if-string-is-blank.py`](#program-1101455-check-if-string-is-blankpy-learning-cost-434375)
     - [`111.2168-launch-other-program.py`](#program-1112168-launch-other-programpy-learning-cost-3625)
     - [`112.2144-iterate-over-map-entries-ordered-by-keys.py`](#program-1122144-iterate-over-map-entries-ordered-by-keyspy-learning-cost-53125)
-    - [`113.2157-iterate-over-map-entries-ordered-by-values.py`](#program-1132157-iterate-over-map-entries-ordered-by-valuespy-learning-cost-896875)
+    - [`113.2157-iterate-over-map-entries-ordered-by-values.py`](#program-1132157-iterate-over-map-entries-ordered-by-valuespy-learning-cost-80)
     - [`114.2273-test-deep-equality.py`](#program-1142273-test-deep-equalitypy-learning-cost-1625)
     - [`115.2138-compare-dates.py`](#program-1152138-compare-datespy-learning-cost-25)
     - [`116.1257-remove-occurrences-of-word-from-string.py`](#program-1161257-remove-occurrences-of-word-from-stringpy-learning-cost-359375)
@@ -187,7 +187,7 @@
     - [`161.2098-multiply-all-the-elements-of-a-list.py`](#program-1612098-multiply-all-the-elements-of-a-listpy-learning-cost-175)
     - [`162.2164-execute-procedures-depending-on-options.py`](#program-1622164-execute-procedures-depending-on-optionspy-learning-cost-7875)
     - [`163.2170-print-list-elements-by-group-of-2.py`](#program-1632170-print-list-elements-by-group-of-2py-learning-cost-725)
-    - [`163.3177-print-list-elements-by-group-of-2.py`](#program-1633177-print-list-elements-by-group-of-2py-learning-cost-1334375)
+    - [`163.3177-print-list-elements-by-group-of-2.py`](#program-1633177-print-list-elements-by-group-of-2py-learning-cost-12375)
     - [`164.2169-open-url-in-default-browser.py`](#program-1642169-open-url-in-default-browserpy-learning-cost-175)
     - [`165.2149-last-element-of-list.py`](#program-1652149-last-element-of-listpy-learning-cost-35)
     - [`166.2272-concatenate-two-lists.py`](#program-1662272-concatenate-two-listspy-learning-cost-175)
@@ -404,7 +404,7 @@
 | 0 | `metadata/sloc/2` | 1-2 |
 ---
 
-### Program `007.0183-iterate-over-list-indexes-and-values.py` (learning cost 7.40625)
+### Program `007.0183-iterate-over-list-indexes-and-values.py` (learning cost 6.4375)
 
 ```python
 1   for i, x in enumerate(items):
@@ -415,10 +415,9 @@
 |----|----|----|
 | 0.9375 | `call/function/builtin/enumerate` | 1 |
 | 0.9375 | `call/function/builtin/print` | 2 |
-| 0.9375 | `flow/loop/exit/late` | 1, 2 |
-| 0.875 | `flow/loop/for` | 1 |
+| 0.9375 | `flow/loop/exit/late` | 1-2 |
+| 0.875 | `flow/loop/for` | 1-2 |
 | 0.9375 | `flow/loop/for/elements_and_indexes` | 1-2 |
-| 0.96875 | `flow/loop/for/nested/1` | 2 |
 | 0.875 | `io/standard/print` | 2 |
 | 0.9375 | `type/sequence/tuple/literal` | 1 |
 | 0 | `metadata/sloc/2` | 1-2 |
@@ -536,7 +535,7 @@
 | 0 | `metadata/sloc/1` | 1 |
 ---
 
-### Program `013.0574-iterate-over-map-keys-and-values.py` (learning cost 7.28125)
+### Program `013.0574-iterate-over-map-keys-and-values.py` (learning cost 6.3125)
 
 ```python
 1   for k, v in mymap.items():
@@ -547,9 +546,8 @@
 |----|----|----|
 | 0.9375 | `call/function/builtin/print` | 2 |
 | 0.875 | `call/method/items` | 1 |
-| 0.9375 | `flow/loop/exit/late` | 1, 2 |
-| 0.875 | `flow/loop/for` | 1 |
-| 0.96875 | `flow/loop/for/nested/1` | 2 |
+| 0.9375 | `flow/loop/exit/late` | 1-2 |
+| 0.875 | `flow/loop/for` | 1-2 |
 | 0.875 | `io/standard/print` | 2 |
 | 0.875 | `type/non_sequence/dictionary` | 1 |
 | 0.9375 | `type/sequence/tuple/literal` | 1 |
@@ -712,7 +710,7 @@
 | 0 | `metadata/sloc/1` | 1 |
 ---
 
-### Program `020.0573-return-two-values.py` (learning cost 11.4375)
+### Program `020.0573-return-two-values.py` (learning cost 9.53125)
 
 ```python
 1   def search(m, x):
@@ -726,11 +724,9 @@
 | 0.9375 | `call/function/builtin/enumerate` | 2 |
 | 0.875 | `call/method/index` | 4 |
 | 0.875 | `flow/conditional/no_else` | 3-4 |
-| 0.96875 | `flow/loop/exit/early/return` | 2 |
-| 0.9375 | `flow/loop/exit/late` | 4 |
-| 0.875 | `flow/loop/for` | 2 |
+| 0.96875 | `flow/loop/exit/early/return` | 2-4 |
+| 0.875 | `flow/loop/for` | 2-4 |
 | 0.9375 | `flow/loop/for/elements_and_indexes` | 2-4 |
-| 0.96875 | `flow/loop/for/nested/1` | 4 |
 | 0.875 | `subroutine/argument/arg` | 1, 1 |
 | 0.75 | `subroutine/function` | 1-4 |
 | 0.75 | `test/belonging` | 3 |
@@ -1084,7 +1080,7 @@
 | 0 | `metadata/sloc/1` | 1 |
 ---
 
-### Program `040.2279-graph-with-adjacency-lists.py` (learning cost 21.6875)
+### Program `040.2279-graph-with-adjacency-lists.py` (learning cost 20.71875)
 
 ```python
 1   from collections import defaultdict
@@ -1109,10 +1105,9 @@
 | 0.875 | `call/method/add` | 11, 12 |
 | 0.875 | `call/method/make_path` | 8 |
 | 0.5 | `class` | 2-3, 4-12 |
-| 0.9375 | `flow/loop/exit/late` | 7-8, 10, 12 |
-| 0.875 | `flow/loop/for` | 10 |
+| 0.9375 | `flow/loop/exit/late` | 7-8, 10-12 |
+| 0.875 | `flow/loop/for` | 10-12 |
 | 0.9375 | `flow/loop/for/elements` | 7-8 |
-| 0.96875 | `flow/loop/for/nested/1` | 12 |
 | 0.75 | `flow/null_operation` | 3 |
 | 0.9375 | `library/standard/collections/defaultdict` | 1 |
 | 0.875 | `subroutine/argument/arg` | 5, 9, 9 |
@@ -1248,7 +1243,7 @@
 | 0 | `metadata/sloc/11` | 1-11 |
 ---
 
-### Program `043.2733-break-outer-loop.py` (learning cost 16.84375)
+### Program `043.2733-break-outer-loop.py` (learning cost 15.875)
 
 ```python
 1   def loop_breaking(m, v):
@@ -1267,12 +1262,11 @@
 | 0.9375 | `call/function/builtin/enumerate` | 2, 3 |
 | 0.9375 | `call/function/builtin/print` | 7 |
 | 0.875 | `flow/conditional/no_else` | 4-5 |
-| 0.96875 | `flow/loop/exit/early/return` | 3 |
-| 0.9375 | `flow/loop/exit/late` | 2, 5 |
-| 0.875 | `flow/loop/for` | 2, 5 |
+| 0.96875 | `flow/loop/exit/early/return` | 3-5 |
+| 0.9375 | `flow/loop/exit/late` | 2-5 |
+| 0.875 | `flow/loop/for` | 2-5, 3-5 |
 | 0.9375 | `flow/loop/for/elements_and_indexes` | 2-5, 3-5 |
-| 0.96875 | `flow/loop/for/nested/1` | 3 |
-| 0.96875 | `flow/loop/for/nested/4` | 5 |
+| 0.96875 | `flow/loop/for/nested/4` | 3-5 |
 | 0.875 | `io/standard/print` | 7 |
 | 0.875 | `subroutine/argument/arg` | 1, 1 |
 | 0.75 | `subroutine/function` | 1-6 |
@@ -2447,7 +2441,7 @@
 | 0 | `metadata/sloc/2` | 1-2 |
 ---
 
-### Program `113.2157-iterate-over-map-entries-ordered-by-values.py` (learning cost 8.96875)
+### Program `113.2157-iterate-over-map-entries-ordered-by-values.py` (learning cost 8.0)
 
 ```python
 1   for x, k in sorted((x, k) for k, x in mymap.items()):
@@ -2460,9 +2454,8 @@
 | 0.9375 | `call/function/builtin/print` | 2 |
 | 0.9375 | `call/function/builtin/sorted` | 1 |
 | 0.875 | `call/method/items` | 1 |
-| 0.9375 | `flow/loop/exit/late` | 1, 2 |
-| 0.875 | `flow/loop/for` | 1 |
-| 0.96875 | `flow/loop/for/nested/1` | 2 |
+| 0.9375 | `flow/loop/exit/late` | 1-2 |
+| 0.875 | `flow/loop/for` | 1-2 |
 | 0.875 | `io/standard/print` | 2 |
 | 0.875 | `type/non_sequence/dictionary` | 1 |
 | 0.9375 | `type/sequence/tuple/literal` | 1, 1, 1 |
@@ -3549,7 +3542,7 @@
 | 0 | `metadata/sloc/2` | 1-2 |
 ---
 
-### Program `163.3177-print-list-elements-by-group-of-2.py` (learning cost 13.34375)
+### Program `163.3177-print-list-elements-by-group-of-2.py` (learning cost 12.375)
 
 ```python
 1   from itertools import tee
@@ -3568,9 +3561,8 @@
 | 0.9375 | `call/function/builtin/print` | 7 |
 | 0.9375 | `call/function/builtin/zip` | 5 |
 | 0.875 | `call/function/tee` | 3 |
-| 0.9375 | `flow/loop/exit/late` | 6, 7 |
-| 0.875 | `flow/loop/for` | 6 |
-| 0.96875 | `flow/loop/for/nested/1` | 7 |
+| 0.9375 | `flow/loop/exit/late` | 6-7 |
+| 0.875 | `flow/loop/for` | 6-7 |
 | 0.875 | `io/standard/print` | 7 |
 | 0.9375 | `library/standard/itertools/tee` | 1 |
 | 0.875 | `subroutine/argument/arg` | 2 |

@@ -47,7 +47,6 @@ for match in extract_examples(parse.spec_path):
 @pytest.mark.parametrize("label_name, actual_results, expected_results", examples)
 def test_example(label_name, actual_results, expected_results):
     keys = set(actual_results.keys())
-    print(actual_results)
     for (expected_label_name, expected_spans) in expected_results:
         assert expected_label_name in keys
         actual_spans = ", ".join(map(couple_to_string, actual_results[expected_label_name]))

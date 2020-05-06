@@ -88,6 +88,9 @@ class ProgramParser:
                 d = match.capturesdict()
                 if d.get("SUFFIX"):  # there is a "SUFFIX" key and its value is not []
                     if len(d["POS"]) == len(d["SUFFIX"]):
+                        # When there are as many matched positions as suffixes, associate them
+                        # in parallel. See features `for` and `decorator_list` for a workaround for
+                        # a problem which can occur with features spanning several lines.
                         for (suffix, pos) in zip(d["SUFFIX"], d["POS"]):
                             try_to_bind(LabelName(f"{label_name}:{suffix}"), pos_to_span([pos]))
                     else:
