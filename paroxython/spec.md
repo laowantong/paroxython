@@ -1090,15 +1090,20 @@ JOIN t_literal lit ON (c.span = lit.span
                        AND c.path GLOB "*-2-1-"
                        AND lit.path GLOB "*-0-")
 WHERE substr(c.path, 1, length(c.path)-4) == substr(lit.path, 1, length(lit.path)-2)
+  AND c.path NOT IN -- ensure that the RHS is not itself a literal
+    (SELECT path
+     FROM t_literal)
 ```
 
 ##### Example
 
 ```python
-1   assert 0 == x
+1   assert 0 == x # match
 2   assert x == 0 # no match
-3   if "A" <= symbol <= "Z" or "needle" not in haystack:
+3   if "A" <= symbol <= "Z": # match: filtered out on the taxonomy level
 4       pass
+5   assert (a, b) == (c, d) # no match, since the RHS is a literal too
+6   assert "needle" not in haystack # match: filtered out on the taxonomy level
 ```
 
 ##### Matches
@@ -1106,8 +1111,8 @@ WHERE substr(c.path, 1, length(c.path)-4) == substr(lit.path, 1, length(lit.path
 | Label | Lines |
 |:--|:--|
 | `yoda_comparison:Eq` | 1 |
-| `yoda_comparison:NotIn` | 3 |
 | `yoda_comparison:LtE` | 3 |
+| `yoda_comparison:NotIn` | 6 |
 
 --------------------------------------------------------------------------------
 

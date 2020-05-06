@@ -682,7 +682,7 @@ def kthPermutation(k, n): # function:kthPermutation (-> +13), function_argument:
 # ----------------------------------------------------------------------------------------
 import math # import:math, import_module:math, whole_span:9 (-> +8)
 def res(x, y): # function:res (-> +7), function_argument:x, function_argument:y, function_argument_flavor:arg, function_returning_something:res (-> +7)
-    if 0 not in (x, y): # comparison_operator:NotIn, if (-> +6), if_test_atom:0, if_test_atom:x, if_test_atom:y, literal:0, literal:Tuple, yoda_comparison:NotIn
+    if 0 not in (x, y): # comparison_operator:NotIn, if (-> +6), if_test_atom:0, if_test_atom:x, if_test_atom:y, literal:0, literal:Tuple
         return y * math.log10(x) # binary_operator:Mult, call_argument:x, if_then_branch, member_call:log10, multiplication_operator, return
     else:
         if x == 0: # comparison_operator:Eq, if (-> +3), if_test_atom:0, if_test_atom:x, literal:0
