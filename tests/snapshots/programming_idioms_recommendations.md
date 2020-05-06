@@ -1266,7 +1266,7 @@
 | 0.9375 | `flow/loop/exit/late` | 2-5 |
 | 0.875 | `flow/loop/for` | 2-5, 3-5 |
 | 0.9375 | `flow/loop/for/elements_and_indexes` | 2-5, 3-5 |
-| 0.96875 | `flow/loop/for/nested/4` | 3-5 |
+| 0.96875 | `flow/loop/for/nested/1` | 3-5 |
 | 0.875 | `io/standard/print` | 7 |
 | 0.875 | `subroutine/argument/arg` | 1, 1 |
 | 0.75 | `subroutine/function` | 1-6 |

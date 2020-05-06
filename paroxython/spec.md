@@ -4752,7 +4752,7 @@ Match a `for` statement nested in _n_ other `for` statements, suffixing it by _n
 
 ```sql
 SELECT "nested_for",
-       count(*),
+       count(DISTINCT outer_loop.span),
        inner_loop.span,
        inner_loop.path
 FROM t_for outer_loop
@@ -4770,13 +4770,16 @@ ORDER BY inner_loop.span_start
 4           for x_3 in seq_3:
 5               pass
 6       pass
+7   for (i1, i2) in enumerate(seq):
+8       for (j1, j2) in enumerate(seq):
+9           pass
 ```
 
 ##### Matches
 
 | Label | Lines |
 |:--|:--|
-| `nested_for:1` | 2-5 |
+| `nested_for:1` | 2-5, 8-9 |
 | `nested_for:2` | 4-5 |
 
 --------------------------------------------------------------------------------
