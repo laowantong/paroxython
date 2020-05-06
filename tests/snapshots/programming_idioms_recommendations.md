@@ -53,10 +53,10 @@
     - [`040.2279-graph-with-adjacency-lists.py`](#program-0402279-graph-with-adjacency-listspy-learning-cost-2071875)
     - [`041.0187-reverse-a-string.py`](#program-0410187-reverse-a-stringpy-learning-cost-63125)
     - [`041.2714-reverse-a-string.py`](#program-0412714-reverse-a-stringpy-learning-cost-275)
-    - [`042.1264-continue-outer-loop.py`](#program-0421264-continue-outer-looppy-learning-cost-909375)
+    - [`042.1264-continue-outer-loop.py`](#program-0421264-continue-outer-looppy-learning-cost-9125)
     - [`042.3168-continue-outer-loop.py`](#program-0423168-continue-outer-looppy-learning-cost-628125)
-    - [`043.0676-break-outer-loop.py`](#program-0430676-break-outer-looppy-learning-cost-1103125)
-    - [`043.2733-break-outer-loop.py`](#program-0432733-break-outer-looppy-learning-cost-15875)
+    - [`043.0676-break-outer-loop.py`](#program-0430676-break-outer-looppy-learning-cost-110625)
+    - [`043.2733-break-outer-loop.py`](#program-0432733-break-outer-looppy-learning-cost-149375)
     - [`044.0190-insert-element-in-list.py`](#program-0440190-insert-element-in-listpy-learning-cost-175)
     - [`045.0570-pause-execution-for-5-seconds.py`](#program-0450570-pause-execution-for-5-secondspy-learning-cost-26875)
     - [`046.0191-extract-beginning-of-string-prefix.py`](#program-0460191-extract-beginning-of-string-prefixpy-learning-cost-26875)
@@ -1159,7 +1159,7 @@
 | 0 | `metadata/sloc/1` | 1 |
 ---
 
-### Program `042.1264-continue-outer-loop.py` (learning cost 9.09375)
+### Program `042.1264-continue-outer-loop.py` (learning cost 9.125)
 
 ```python
 1   for v in a:
@@ -1179,7 +1179,7 @@
 | 0.875 | `flow/conditional/no_else` | 4-5 |
 | 0.9375 | `flow/exception/catch/Exception` | 2-8 |
 | 0.9375 | `flow/exception/raise/Exception` | 2-8 |
-| 0.9375 | `flow/loop/exit/late` | 1-8, 3-5 |
+| 0.96875 | `flow/loop/exit/early/raise` | 1-8, 3-5 |
 | 0.9375 | `flow/loop/for/elements` | 1-8, 3-5 |
 | 0.96875 | `flow/loop/for/nested/1` | 3-5 |
 | 0.875 | `io/standard/print` | 6 |
@@ -1209,7 +1209,7 @@
 | 0 | `metadata/sloc/5` | 1-5 |
 ---
 
-### Program `043.0676-break-outer-loop.py` (learning cost 11.03125)
+### Program `043.0676-break-outer-loop.py` (learning cost 11.0625)
 
 ```python
 1   class BreakOuterLoop(Exception):
@@ -1231,7 +1231,7 @@
 | 0.875 | `flow/conditional/no_else` | 7-9 |
 | 0.9375 | `flow/exception/catch/` | 3-11 |
 | 0.9375 | `flow/exception/raise/` | 3-11 |
-| 0.9375 | `flow/loop/exit/late` | 5-9, 6-9 |
+| 0.96875 | `flow/loop/exit/early/raise` | 5-9, 6-9 |
 | 0.9375 | `flow/loop/for/elements` | 5-9 |
 | 0.96875 | `flow/loop/for/nested/1` | 6-9 |
 | 0.75 | `flow/null_operation` | 2, 11 |
@@ -1243,7 +1243,7 @@
 | 0 | `metadata/sloc/11` | 1-11 |
 ---
 
-### Program `043.2733-break-outer-loop.py` (learning cost 15.875)
+### Program `043.2733-break-outer-loop.py` (learning cost 14.9375)
 
 ```python
 1   def loop_breaking(m, v):
@@ -1262,8 +1262,7 @@
 | 0.9375 | `call/function/builtin/enumerate` | 2, 3 |
 | 0.9375 | `call/function/builtin/print` | 7 |
 | 0.875 | `flow/conditional/no_else` | 4-5 |
-| 0.96875 | `flow/loop/exit/early/return` | 3-5 |
-| 0.9375 | `flow/loop/exit/late` | 2-5 |
+| 0.96875 | `flow/loop/exit/early/return` | 2-5, 3-5 |
 | 0.875 | `flow/loop/for` | 2-5, 3-5 |
 | 0.9375 | `flow/loop/for/elements_and_indexes` | 2-5, 3-5 |
 | 0.96875 | `flow/loop/for/nested/1` | 3-5 |

@@ -189,9 +189,12 @@
 - literal
 - loop
 - loop_else
+- loop_with_break
 - loop_with_early_exit
 - loop_with_else
 - loop_with_late_exit
+- loop_with_raise
+- loop_with_return
 - member_call
 - member_call_object
 - member_call_without_result

@@ -129,6 +129,9 @@
     - [Non-sequential loops](#non-sequential-loops)
       - [Feature `infinite_while`](#feature-infinite_while)
     - [Loop exit](#loop-exit)
+      - [Feature `loop_with_raise` (SQL)](#feature-loop_with_raise)
+      - [Feature `loop_with_return` (SQL)](#feature-loop_with_return)
+      - [Feature `loop_with_break` (SQL)](#feature-loop_with_break)
       - [Feature `loop_with_early_exit` (SQL)](#feature-loop_with_early_exit)
       - [Feature `loop_with_else` (SQL)](#feature-loop_with_else)
       - [Feature `loop_with_late_exit` (SQL)](#feature-loop_with_late_exit)
@@ -3108,7 +3111,7 @@ Match `return` statements and, when the returned object is an [_atom_](#feature-
 [⬇️ feature `function_returning_something`](#feature-function_returning_something)  
 [⬇️ feature `get_valid_input`](#feature-get_valid_input)  
 [⬇️ feature `if_guard`](#feature-if_guard)  
-[⬇️ feature `loop_with_early_exit`](#feature-loop_with_early_exit)  
+[⬇️ feature `loop_with_return`](#feature-loop_with_return)  
 [⬇️ feature `universal_quantification|existential_quantification`](#feature-universal_quantificationexistential_quantification)  
 
 ##### Specification
@@ -4462,9 +4465,11 @@ Match sequential loops, along with their iteration variable(s).
 [⬆️ feature `for`](#feature-for)  
 [⬆️ feature `while`](#feature-while)  
 [⬇️ feature `count_elements|count_states`](#feature-count_elementscount_states)  
-[⬇️ feature `loop_with_early_exit`](#feature-loop_with_early_exit)  
+[⬇️ feature `loop_with_break`](#feature-loop_with_break)  
 [⬇️ feature `loop_with_else`](#feature-loop_with_else)  
 [⬇️ feature `loop_with_late_exit`](#feature-loop_with_late_exit)  
+[⬇️ feature `loop_with_raise`](#feature-loop_with_raise)  
+[⬇️ feature `loop_with_return`](#feature-loop_with_return)  
 
 ##### Specification
 
@@ -4506,7 +4511,7 @@ GROUP BY path
 
 ##### Derivations
 
-[⬇️ feature `loop_with_early_exit`](#feature-loop_with_early_exit)  
+[⬇️ feature `loop_with_break`](#feature-loop_with_break)  
 
 ##### Specification
 
@@ -4917,33 +4922,152 @@ Match an infinite loop denoted by `while True` (preferred) or `while 1`.
 
 --------------------------------------------------------------------------------
 
-#### Feature `loop_with_early_exit`
+#### Feature `loop_with_raise`
+
+##### Derivations
+
+[⬆️ feature `loop`](#feature-loop)  
+[⬆️ feature `raise`](#feature-raise)  
+[⬇️ feature `loop_with_early_exit`](#feature-loop_with_early_exit)  
+
+##### Specification
+
+```sql
+SELECT "loop_with_raise",
+       l.name_suffix,
+       l.span,
+       l.path
+FROM t_loop l
+JOIN t_raise r ON (r.path GLOB l.path || "*-")
+GROUP BY l.rowid
+```
+
+##### Example
+
+```python
+1   def fail():
+2       for x in seq:
+3           if foobar(x):
+4               raise ValueError
+5   
+6   def fail_2():
+7       for y in seq: # match: false positive
+8           try:
+9               for z in seq:
+10                  if foobar(x):
+11                      raise ValueError
+12          except:
+13              pass
+```
+
+_LIMITATION._ False positive when the exception is catch inside the outer loop.
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `loop_with_raise:for` | 2-4, 7-13, 9-11 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `loop_with_return`
+
+##### Derivations
+
+[⬆️ feature `loop`](#feature-loop)  
+[⬆️ feature `return`](#feature-return)  
+[⬇️ feature `loop_with_early_exit`](#feature-loop_with_early_exit)  
+
+##### Specification
+
+```sql
+SELECT "loop_with_return",
+       l.name_suffix,
+       l.span,
+       l.path
+FROM t_loop l
+JOIN t_return r ON (r.path GLOB l.path || "*-")
+GROUP BY l.rowid
+```
+
+##### Example
+
+```python
+1   def func():
+2       for x in seq_x:
+3           for y in seq_y:
+4               while foo():
+5                   if bar():
+6                       return
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `loop_with_return:for` | 2-6, 3-6 |
+| `loop_with_return:while` | 4-6 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `loop_with_break`
 
 ##### Derivations
 
 [⬆️ feature `break`](#feature-break)  
 [⬆️ feature `loop`](#feature-loop)  
-[⬆️ feature `return`](#feature-return)  
+[⬇️ feature `loop_with_early_exit`](#feature-loop_with_early_exit)  
+
+##### Specification
+
+```sql
+SELECT "loop_with_break",
+       l.name_suffix,
+       max(l.span_start) || "-" || min(l.span_end),
+       max(l.path)
+FROM t_loop l
+JOIN t_break b ON (b.path GLOB l.path || "*-")
+GROUP BY b.rowid
+```
+
+##### Example
+
+```python
+1   def func():
+2       for x in seq_x:
+3           for y in seq_y:
+4               if foo():
+5                   break
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `loop_with_break:for` | 3-5 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `loop_with_early_exit`
+
+##### Derivations
+
+[⬆️ feature `loop_with_break`](#feature-loop_with_break)  
+[⬆️ feature `loop_with_raise`](#feature-loop_with_raise)  
+[⬆️ feature `loop_with_return`](#feature-loop_with_return)  
 [⬇️ feature `loop_with_late_exit`](#feature-loop_with_late_exit)  
 
 ##### Specification
 
 ```sql
 SELECT "loop_with_early_exit",
-       name_suffix || ":" || b_name_suffix,
-       span,
-       path
-FROM t_loop
-JOIN
-  (SELECT b.name_prefix AS b_name_suffix,
-          max(l.span_start) AS span_start
-   FROM t_loop l
-   JOIN
-     (SELECT *
-      FROM t_break
-      UNION ALL SELECT *
-      FROM t_return) b ON (b.path GLOB l.path || "*-")
-   GROUP BY b.rowid) USING (span_start)
+       name_suffix || ":" || substr(name_prefix, 11), -- 11 == length("loop_with_") + 1
+ span,
+ path
+FROM t
+WHERE t.name_prefix IN ("loop_with_raise",
+                        "loop_with_return",
+                        "loop_with_break")
 ```
 
 ##### Example
@@ -4968,7 +5092,7 @@ JOIN
 17  def fail():
 18      for x in seq:
 19          if foobar(x):
-20              raise ValueError # LIMITATION: no match
+20              raise ValueError
 ```
 
 ##### Matches
@@ -4976,8 +5100,9 @@ JOIN
 | Label | Lines |
 |:--|:--|
 | `loop_with_early_exit:for:break` | 2-8 |
-| `loop_with_early_exit:for:return` | 11-13 |
 | `loop_with_early_exit:while:break` | 6-8 |
+| `loop_with_early_exit:for:raise` | 18-20 |
+| `loop_with_early_exit:for:return` | 10-16, 11-13 |
 | `loop_with_early_exit:while:return` | 14-16 |
 
 --------------------------------------------------------------------------------
@@ -5156,6 +5281,7 @@ WHERE l2.span IS NULL
 
 ##### Derivations
 
+[⬇️ feature `loop_with_raise`](#feature-loop_with_raise)  
 [⬇️ feature `try_raise|try_except`](#feature-try_raisetry_except)  
 
 ##### Specification
