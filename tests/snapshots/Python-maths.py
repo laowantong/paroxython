@@ -2,19 +2,19 @@
 # 3n+1.py
 # ----------------------------------------------------------------------------------------
 from typing import Tuple, List # import:typing:List, import:typing:Tuple, import_module:typing, import_name:List, import_name:Tuple, whole_span:128 (-> +127)
-def n31(a: int) -> Tuple[List[int], int]: # function:n31 (-> +12), function_argument:a, function_argument_flavor:arg, function_returning_something:n31 (-> +12), index:_, index:int, nested_index:2
+def n31(a: int) -> Tuple[List[int], int]: # function:n31 (-> +12), function_argument:a, function_argument_flavor:arg, function_returning_something:n31 (-> +12), index:_, index:int, literal:Tuple, nested_index:2
     if not isinstance(a, int): # call_argument:a, call_argument:int, external_free_call:isinstance, free_call:isinstance, if (-> +1), if_test_atom:a, if_test_atom:int, if_without_else (-> +1), unary_operator:Not
         raise TypeError("Must be int, not {0}".format(type(a).__name__)) # call_argument:, call_argument:a, composition, external_free_call:TypeError, external_free_call:type, free_call:TypeError, free_call:type, if_then_branch, literal:Str, member_call:format, raise:TypeError
     if a < 1: # comparison_operator:Lt, if (-> +1), if_test_atom:1, if_test_atom:a, if_without_else (-> +1), literal:1
         raise ValueError("Given integer must be greater than 1, not {0}".format(a)) # call_argument:, call_argument:a, composition, external_free_call:ValueError, free_call:ValueError, if_then_branch, literal:Str, member_call:format, raise:ValueError
-    path = [a] # assignment, assignment_lhs_identifier:path, assignment_rhs_atom:a, single_assignment:path
+    path = [a] # assignment, assignment_lhs_identifier:path, assignment_rhs_atom:a, literal:List, single_assignment:path
     while a != 1: # comparison_operator:NotEq, literal:1, loop:while (-> +5), loop_with_late_exit:while (-> +5), while (-> +5)
         if a % 2 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, if (-> +3), if_test_atom:0, if_test_atom:2, if_test_atom:a, literal:0, literal:2, modulo_operator, verbose_conditional_assignment (-> +3)
             a = a // 2 # assignment:FloorDiv, assignment_lhs_identifier:a, assignment_rhs_atom:2, assignment_rhs_atom:a, binary_operator:FloorDiv, if_then_branch, literal:2, single_assignment:a, suggest_augmented_assignment, update:a:2, update_by_assignment:a:2, update_by_assignment_with:FloorDiv, update_with:FloorDiv
         else:
             a = 3 * a + 1 # addition_operator, assignment:Add, assignment_lhs_identifier:a, assignment_rhs_atom:1, assignment_rhs_atom:3, assignment_rhs_atom:a, binary_operator:Add, binary_operator:Mult, if_else_branch, literal:1, literal:3, multiplication_operator, single_assignment:a, suggest_constant_definition, update:a:1, update:a:3, update_by_assignment:a:1, update_by_assignment:a:3, update_by_assignment_with:Add, update_with:Add
-        path += [a] # assignment_lhs_identifier:path, assignment_rhs_atom:a, augmented_assignment:Add, update:path:a, update_by_augmented_assignment:path:a, update_by_augmented_assignment_with:Add, update_with:Add
-    return path, len(path) # call_argument:path, external_free_call:len, free_call:len, return
+        path += [a] # assignment_lhs_identifier:path, assignment_rhs_atom:a, augmented_assignment:Add, concatenation_operator:List, literal:List, update:path:a, update_by_augmented_assignment:path:a, update_by_augmented_assignment_with:Add, update_with:Add
+    return path, len(path) # call_argument:path, external_free_call:len, free_call:len, literal:Tuple, return
 def test_n31(): # function:test_n31 (-> +113), function_returning_nothing:test_n31 (-> +113), function_without_arguments:test_n31 (-> +113)
     assert n31(4) == ([4, 2, 1], 3) # assertion, call_argument:4, comparison_operator:Eq, free_call:n31, internal_free_call:n31, literal:1, literal:2, literal:3, literal:4, literal:List, literal:Tuple, suggest_constant_definition
     assert n31(11) == ([11, 34, 17, 52, 26, 13, 40, 20, 10, 5, 16, 8, 4, 2, 1], 15) # assertion, call_argument:11, comparison_operator:Eq, free_call:n31, internal_free_call:n31, literal:1, literal:10, literal:11, literal:13, literal:15, literal:16, literal:17, literal:2, literal:20, literal:26, literal:34, literal:4, literal:40, literal:5, literal:52, literal:8, literal:List, literal:Tuple, suggest_constant_definition
@@ -305,7 +305,7 @@ def ceil(x) -> int: # function:ceil (-> +2), function_argument:x, function_argum
 # collatz_sequence.py
 # ----------------------------------------------------------------------------------------
 def collatz_sequence(n): # function:collatz_sequence (-> +8), function_argument:n, function_argument_flavor:arg, function_returning_something:collatz_sequence (-> +8), whole_span:14 (-> +13)
-    sequence = [n] # assignment, assignment_lhs_identifier:sequence, assignment_rhs_atom:n, single_assignment:sequence
+    sequence = [n] # assignment, assignment_lhs_identifier:sequence, assignment_rhs_atom:n, literal:List, single_assignment:sequence
     while n != 1: # comparison_operator:NotEq, literal:1, loop:while (-> +5), loop_with_late_exit:while (-> +5), while (-> +5)
         if n % 2 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, if (-> +3), if_test_atom:0, if_test_atom:2, if_test_atom:n, literal:0, literal:2, modulo_operator
             n //= 2 # assignment_lhs_identifier:n, assignment_rhs_atom:2, augmented_assignment:FloorDiv, if_then_branch, literal:2, update:n:2, update_by_augmented_assignment:n:2, update_by_augmented_assignment_with:FloorDiv, update_with:FloorDiv
@@ -317,7 +317,7 @@ def main(): # function:main (-> +4), function_returning_nothing:main (-> +4), fu
     n = 43 # assignment:43, assignment_lhs_identifier:n, assignment_rhs_atom:43, literal:43, single_assignment:n, suggest_constant_definition
     sequence = collatz_sequence(n) # assignment:collatz_sequence, assignment_lhs_identifier:sequence, assignment_rhs_atom:n, call_argument:n, free_call:collatz_sequence, internal_free_call:collatz_sequence, single_assignment:sequence
     print(sequence) # call_argument:sequence, external_free_call:print, free_call:print, free_call_without_result:print
-    print("collatz sequence from %d took %d steps." % (n, len(sequence))) # binary_operator:Mod, call_argument:, call_argument:sequence, composition, external_free_call:len, external_free_call:print, free_call:len, free_call:print, free_call_without_result:print, literal:Str, string_formatting_operator
+    print("collatz sequence from %d took %d steps." % (n, len(sequence))) # binary_operator:Mod, call_argument:, call_argument:sequence, composition, external_free_call:len, external_free_call:print, free_call:len, free_call:print, free_call_without_result:print, literal:Str, literal:Tuple, string_formatting_operator
 
 # ----------------------------------------------------------------------------------------
 # explicit_euler.py
@@ -325,7 +325,7 @@ def main(): # function:main (-> +4), function_returning_nothing:main (-> +4), fu
 import numpy as np # import:numpy, import_module:numpy, whole_span:10 (-> +9)
 def explicit_euler(ode_func, y0, x0, stepsize, x_end): # function:explicit_euler (-> +8), function_argument:ode_func, function_argument:stepsize, function_argument:x0, function_argument:x_end, function_argument:y0, function_argument_flavor:arg, function_returning_something:explicit_euler (-> +8), higher_order_function:ode_func (-> +8)
     N = int(np.ceil((x_end - x0) / stepsize)) # assignment:int, assignment_lhs_identifier:N, assignment_rhs_atom:np, assignment_rhs_atom:stepsize, assignment_rhs_atom:x0, assignment_rhs_atom:x_end, binary_operator:Div, binary_operator:Sub, call_argument:, composition, external_free_call:int, free_call:int, member_call:ceil, single_assignment:N
-    y = np.zeros((N + 1,)) # addition_operator, assignment:zeros, assignment_lhs_identifier:y, assignment_rhs_atom:1, assignment_rhs_atom:N, assignment_rhs_atom:np, binary_operator:Add, call_argument:, literal:1, member_call:zeros, single_assignment:y
+    y = np.zeros((N + 1,)) # addition_operator, assignment:zeros, assignment_lhs_identifier:y, assignment_rhs_atom:1, assignment_rhs_atom:N, assignment_rhs_atom:np, binary_operator:Add, call_argument:, literal:1, literal:Tuple, member_call:zeros, single_assignment:y
     y[0] = y0 # assignment, assignment_lhs_identifier:y, assignment_rhs_atom:y0, index:0, literal:0
     x = x0 # assignment, assignment_lhs_identifier:x, assignment_rhs_atom:x0, single_assignment:x
     for k in range(N): # accumulate_all_elements:Add (-> +2), accumulate_elements:Add (-> +2), call_argument:N, external_free_call:range, for:k (-> +2), for_range:N (-> +2), free_call:range, loop:for (-> +2), loop_with_late_exit:for (-> +2), range:N
@@ -365,9 +365,9 @@ def extended_euclidean_algorithm(m, n): # function:extended_euclidean_algorithm 
         b = t - q * b # assignment:Sub, assignment_lhs_identifier:b, assignment_rhs_atom:b, assignment_rhs_atom:q, assignment_rhs_atom:t, binary_operator:Mult, binary_operator:Sub, multiplication_operator, single_assignment:b, update:b:q, update:b:t, update_by_assignment:b:q, update_by_assignment:b:t, update_by_assignment_with:Sub, update_with:Sub
     pair = None # assignment:None, assignment_lhs_identifier:pair, assignment_rhs_atom:None, literal:None, single_assignment:pair
     if m > n: # comparison_operator:Gt, if (-> +3), if_test_atom:m, if_test_atom:n, verbose_conditional_assignment (-> +3)
-        pair = (a, b) # assignment, assignment_lhs_identifier:pair, assignment_rhs_atom:a, assignment_rhs_atom:b, if_then_branch, single_assignment:pair
+        pair = (a, b) # assignment, assignment_lhs_identifier:pair, assignment_rhs_atom:a, assignment_rhs_atom:b, if_then_branch, literal:Tuple, single_assignment:pair
     else:
-        pair = (b, a) # assignment, assignment_lhs_identifier:pair, assignment_rhs_atom:a, assignment_rhs_atom:b, if_else_branch, single_assignment:pair
+        pair = (b, a) # assignment, assignment_lhs_identifier:pair, assignment_rhs_atom:a, assignment_rhs_atom:b, if_else_branch, literal:Tuple, single_assignment:pair
     return pair # return:pair
 def main(): # function:main (-> +6), function_returning_nothing:main (-> +6), function_without_arguments:main (-> +6)
     if len(sys.argv) < 3: # call_argument:, comparison_operator:Lt, external_free_call:len, free_call:len, if (-> +2), if_test_atom:3, if_test_atom:sys, if_without_else (-> +2), literal:3, suggest_constant_definition
@@ -481,7 +481,7 @@ def fib_iterative(n): # function_argument:n, function_argument_flavor:arg
         seq_out = [0, 1] # assignment, assignment_lhs_identifier:seq_out, assignment_rhs_atom:0, assignment_rhs_atom:1, if_then_branch (-> +5), literal:0, literal:1, literal:List, single_assignment:seq_out
         a, b = 0, 1 # assignment, assignment_lhs_identifier:a, assignment_lhs_identifier:b, assignment_rhs_atom:0, assignment_rhs_atom:1, literal:0, literal:1, literal:Tuple, parallel_assignment:2
         for _ in range(n - len(seq_out)): # binary_operator:Sub, call_argument:, call_argument:seq_out, composition, external_free_call:len, external_free_call:range, for:_ (-> +2), for_range:_ (-> +2), free_call:len, free_call:range, loop:for (-> +2), loop_with_late_exit:for (-> +2), range:_
-            a, b = b, a + b # addition_operator, assignment, assignment_lhs_identifier:a, assignment_lhs_identifier:b, assignment_rhs_atom:a, assignment_rhs_atom:b, binary_operator:Add, parallel_assignment:2, slide, update:a:b, update:b:a, update_by_assignment:a:b, update_by_assignment:b:a, update_by_assignment_with, update_with
+            a, b = b, a + b # addition_operator, assignment, assignment_lhs_identifier:a, assignment_lhs_identifier:b, assignment_rhs_atom:a, assignment_rhs_atom:b, binary_operator:Add, literal:Tuple, parallel_assignment:2, slide, update:a:b, update:b:a, update_by_assignment:a:b, update_by_assignment:b:a, update_by_assignment_with, update_with
             seq_out.append(b) # call_argument:b, member_call:append, member_call_object:seq_out, member_call_without_result:append, update:seq_out:b, update_by_member_call:seq_out:b, update_by_member_call_with:append, update_with:append
         return seq_out # return:seq_out
 @timer_decorator # decorated_function:fib_formula (-> +13), function:fib_formula (-> +13), function_decorator:timer_decorator (-> +13), function_returning_something:fib_formula (-> +13)
@@ -580,7 +580,7 @@ def greatest_common_divisor(a, b): # function:greatest_common_divisor (-> +1), f
     return b if a == 0 else greatest_common_divisor(b % a, a) # binary_operator:Mod, call_argument:, call_argument:a, comparison_operator:Eq, conditional_expression, free_call:greatest_common_divisor, free_tail_call:greatest_common_divisor, internal_free_call:greatest_common_divisor, literal:0, modulo_operator, return
 def gcd_by_iterative(x, y): # function:gcd_by_iterative (-> +3), function_argument:x, function_argument:y, function_argument_flavor:arg, function_returning_something:gcd_by_iterative (-> +3)
     while y: # loop:while (-> +1), loop_with_late_exit:while (-> +1), while (-> +1)
-        x, y = y, x % y # assignment, assignment_lhs_identifier:x, assignment_lhs_identifier:y, assignment_rhs_atom:x, assignment_rhs_atom:y, binary_operator:Mod, modulo_operator, parallel_assignment:2, slide, update:x:y, update:y:x, update_by_assignment:x:y, update_by_assignment:y:x, update_by_assignment_with, update_with
+        x, y = y, x % y # assignment, assignment_lhs_identifier:x, assignment_lhs_identifier:y, assignment_rhs_atom:x, assignment_rhs_atom:y, binary_operator:Mod, literal:Tuple, modulo_operator, parallel_assignment:2, slide, update:x:y, update:y:x, update_by_assignment:x:y, update_by_assignment:y:x, update_by_assignment_with, update_with
     return x # return:x
 def main(): # function:main (-> +10), function_returning_nothing:main (-> +10), function_without_arguments:main (-> +10)
     try: # try (-> +9), try_except:IndexError (-> +9), try_except:UnboundLocalError (-> +9), try_except:ValueError (-> +9)
@@ -591,7 +591,7 @@ def main(): # function:main (-> +10), function_returning_nothing:main (-> +10), 
             f"greatest_common_divisor({num_1}, {num_2}) = {greatest_common_divisor(num_1, num_2)}" # call_argument:, call_argument:num_1, call_argument:num_2, f_string, free_call:greatest_common_divisor, internal_free_call:greatest_common_divisor, literal:Str
         )
         print(f"By iterative gcd({num_1}, {num_2}) = {gcd_by_iterative(num_1, num_2)}") # call_argument:, call_argument:num_1, call_argument:num_2, composition, external_free_call:print, f_string, free_call:gcd_by_iterative, free_call:print, free_call_without_result:print, internal_free_call:gcd_by_iterative, literal:Str
-    except (IndexError, UnboundLocalError, ValueError): # except:IndexError, except:UnboundLocalError, except:ValueError
+    except (IndexError, UnboundLocalError, ValueError): # except:IndexError, except:UnboundLocalError, except:ValueError, literal:Tuple
         print("Wrong input") # call_argument:, external_free_call:print, free_call:print, free_call_without_result:print, literal:Str
 
 # ----------------------------------------------------------------------------------------
@@ -633,7 +633,7 @@ def jaccard_similariy(setA, setB, alternativeUnion=False): # function:jaccard_si
         else:
             union = len(setA.union(setB)) # assignment:len, assignment_lhs_identifier:union, assignment_rhs_atom:setA, assignment_rhs_atom:setB, call_argument:, call_argument:setB, composition, external_free_call:len, free_call:len, if_else_branch, member_call:union, single_assignment:union
         return intersection / union # binary_operator:Div, return
-    if isinstance(setA, (list, tuple)) and isinstance(setB, (list, tuple)): # boolean_operator:And, call_argument:, call_argument:setA, call_argument:setB, external_free_call:isinstance, free_call:isinstance, if (-> +6), if_test_atom:list, if_test_atom:setA, if_test_atom:setB, if_test_atom:tuple, if_without_else (-> +6)
+    if isinstance(setA, (list, tuple)) and isinstance(setB, (list, tuple)): # boolean_operator:And, call_argument:, call_argument:setA, call_argument:setB, external_free_call:isinstance, free_call:isinstance, if (-> +6), if_test_atom:list, if_test_atom:setA, if_test_atom:setB, if_test_atom:tuple, if_without_else (-> +6), literal:Tuple
         intersection = [element for element in setA if element in setB] # assignment, assignment_lhs_identifier:intersection, assignment_rhs_atom:element, assignment_rhs_atom:setA, assignment_rhs_atom:setB, comparison_operator:In, comprehension:List, comprehension_for_count:1, filtered_comprehension, if_then_branch (-> +5), single_assignment:intersection
         if alternativeUnion: # if (-> +3), nested_if:1 (-> +3), verbose_conditional_assignment (-> +3)
             union = len(setA) + len(setB) # addition_operator, assignment:Add, assignment_lhs_identifier:union, assignment_rhs_atom:setA, assignment_rhs_atom:setB, binary_operator:Add, call_argument:setA, call_argument:setB, external_free_call:len, free_call:len, if_then_branch, single_assignment:union
@@ -650,8 +650,8 @@ def karatsuba(a, b): # body_recursive_function:karatsuba (-> +11), function:kara
     else:
         m1 = max(len(str(a)), len(str(b))) # assignment:max, assignment_lhs_identifier:m1, assignment_rhs_atom:a, assignment_rhs_atom:b, call_argument:, call_argument:a, call_argument:b, composition, external_free_call:len, external_free_call:max, external_free_call:str, free_call:len, free_call:max, free_call:str, if_else_branch (-> +7), single_assignment:m1
         m2 = m1 // 2 # assignment:FloorDiv, assignment_lhs_identifier:m2, assignment_rhs_atom:2, assignment_rhs_atom:m1, binary_operator:FloorDiv, literal:2, single_assignment:m2
-        a1, a2 = divmod(a, 10 ** m2) # assignment:divmod, assignment_lhs_identifier:a1, assignment_lhs_identifier:a2, assignment_rhs_atom:10, assignment_rhs_atom:a, assignment_rhs_atom:m2, binary_operator:Pow, call_argument:, call_argument:a, external_free_call:divmod, free_call:divmod, literal:10, parallel_assignment:2, suggest_constant_definition
-        b1, b2 = divmod(b, 10 ** m2) # assignment:divmod, assignment_lhs_identifier:b1, assignment_lhs_identifier:b2, assignment_rhs_atom:10, assignment_rhs_atom:b, assignment_rhs_atom:m2, binary_operator:Pow, call_argument:, call_argument:b, external_free_call:divmod, free_call:divmod, literal:10, parallel_assignment:2, suggest_constant_definition
+        a1, a2 = divmod(a, 10 ** m2) # assignment:divmod, assignment_lhs_identifier:a1, assignment_lhs_identifier:a2, assignment_rhs_atom:10, assignment_rhs_atom:a, assignment_rhs_atom:m2, binary_operator:Pow, call_argument:, call_argument:a, external_free_call:divmod, free_call:divmod, literal:10, literal:Tuple, parallel_assignment:2, suggest_constant_definition
+        b1, b2 = divmod(b, 10 ** m2) # assignment:divmod, assignment_lhs_identifier:b1, assignment_lhs_identifier:b2, assignment_rhs_atom:10, assignment_rhs_atom:b, assignment_rhs_atom:m2, binary_operator:Pow, call_argument:, call_argument:b, external_free_call:divmod, free_call:divmod, literal:10, literal:Tuple, parallel_assignment:2, suggest_constant_definition
         x = karatsuba(a2, b2) # assignment:karatsuba, assignment_lhs_identifier:x, assignment_rhs_atom:a2, assignment_rhs_atom:b2, call_argument:a2, call_argument:b2, free_call:karatsuba, internal_free_call:karatsuba, single_assignment:x
         y = karatsuba((a1 + a2), (b1 + b2)) # addition_operator, assignment:karatsuba, assignment_lhs_identifier:y, assignment_rhs_atom:a1, assignment_rhs_atom:a2, assignment_rhs_atom:b1, assignment_rhs_atom:b2, binary_operator:Add, call_argument:, free_call:karatsuba, internal_free_call:karatsuba, single_assignment:y
         z = karatsuba(a1, b1) # assignment:karatsuba, assignment_lhs_identifier:z, assignment_rhs_atom:a1, assignment_rhs_atom:b1, call_argument:a1, call_argument:b1, free_call:karatsuba, internal_free_call:karatsuba, single_assignment:z
@@ -671,7 +671,7 @@ def kthPermutation(k, n): # function:kthPermutation (-> +13), function_argument:
     elements = list(range(n)) # assignment:list, assignment_lhs_identifier:elements, assignment_rhs_atom:n, call_argument:, call_argument:n, composition, external_free_call:list, external_free_call:range, free_call:list, free_call:range, range:n, single_assignment:elements
     while factorials: # loop:while (-> +4), loop_with_late_exit:while (-> +4), while (-> +4)
         factorial = factorials.pop() # assignment:pop, assignment_lhs_identifier:factorial, assignment_rhs_atom:factorials, member_call:pop, single_assignment:factorial
-        number, k = divmod(k, factorial) # assignment:divmod, assignment_lhs_identifier:k, assignment_lhs_identifier:number, assignment_rhs_atom:factorial, assignment_rhs_atom:k, call_argument:factorial, call_argument:k, external_free_call:divmod, free_call:divmod, parallel_assignment:2, update:k:factorial, update_by_assignment:k:factorial, update_by_assignment_with:divmod, update_with:divmod
+        number, k = divmod(k, factorial) # assignment:divmod, assignment_lhs_identifier:k, assignment_lhs_identifier:number, assignment_rhs_atom:factorial, assignment_rhs_atom:k, call_argument:factorial, call_argument:k, external_free_call:divmod, free_call:divmod, literal:Tuple, parallel_assignment:2, update:k:factorial, update_by_assignment:k:factorial, update_by_assignment_with:divmod, update_with:divmod
         permutation.append(elements[number]) # call_argument:, index:number, member_call:append, member_call_object:permutation, member_call_without_result:append
         elements.remove(elements[number]) # call_argument:, index:number, member_call:remove, member_call_object:elements, member_call_without_result:remove
     permutation.append(elements[0]) # call_argument:, index:0, literal:0, member_call:append, member_call_object:permutation, member_call_without_result:append
@@ -682,7 +682,7 @@ def kthPermutation(k, n): # function:kthPermutation (-> +13), function_argument:
 # ----------------------------------------------------------------------------------------
 import math # import:math, import_module:math, whole_span:9 (-> +8)
 def res(x, y): # function:res (-> +7), function_argument:x, function_argument:y, function_argument_flavor:arg, function_returning_something:res (-> +7)
-    if 0 not in (x, y): # comparison_operator:NotIn, if (-> +6), if_test_atom:0, if_test_atom:x, if_test_atom:y, literal:0, yoda_comparison:NotIn
+    if 0 not in (x, y): # comparison_operator:NotIn, if (-> +6), if_test_atom:0, if_test_atom:x, if_test_atom:y, literal:0, literal:Tuple, yoda_comparison:NotIn
         return y * math.log10(x) # binary_operator:Mult, call_argument:x, if_then_branch, member_call:log10, multiplication_operator, return
     else:
         if x == 0: # comparison_operator:Eq, if (-> +3), if_test_atom:0, if_test_atom:x, literal:0
@@ -714,7 +714,7 @@ class TestLeastCommonMultiple(unittest.TestCase): # class:TestLeastCommonMultipl
     ]
     expected_results = [20, 195, 124, 210, 1462, 60, 300, 50, 18] # assignment, assignment_lhs_identifier:expected_results, assignment_rhs_atom:124, assignment_rhs_atom:1462, assignment_rhs_atom:18, assignment_rhs_atom:195, assignment_rhs_atom:20, assignment_rhs_atom:210, assignment_rhs_atom:300, assignment_rhs_atom:50, assignment_rhs_atom:60, literal:124, literal:1462, literal:18, literal:195, literal:20, literal:210, literal:300, literal:50, literal:60, literal:List, single_assignment:expected_results, suggest_constant_definition
     def test_lcm_function(self): # function:test_lcm_function (-> +4), function_argument:self, function_argument_flavor:arg, function_returning_nothing:test_lcm_function (-> +4), instance_method:test_lcm_function (-> +4), method:test_lcm_function (-> +4)
-        for i, (first_num, second_num) in enumerate(self.test_inputs): # call_argument:, external_free_call:enumerate, for:first_num (-> +3), for:i (-> +3), for:second_num (-> +3), for_indexes_elements (-> +3), free_call:enumerate, loop:for (-> +3), loop_with_late_exit:for (-> +3)
+        for i, (first_num, second_num) in enumerate(self.test_inputs): # call_argument:, external_free_call:enumerate, for:first_num (-> +3), for:i (-> +3), for:second_num (-> +3), for_indexes_elements (-> +3), free_call:enumerate, literal:Tuple, loop:for (-> +3), loop_with_late_exit:for (-> +3)
             actual_result = find_lcm(first_num, second_num) # assignment:find_lcm, assignment_lhs_identifier:actual_result, assignment_rhs_atom:first_num, assignment_rhs_atom:second_num, call_argument:first_num, call_argument:second_num, free_call:find_lcm, internal_free_call:find_lcm, single_assignment:actual_result
             with self.subTest(i=i): # member_call:subTest
                 self.assertEqual(actual_result, self.expected_results[i]) # call_argument:, call_argument:actual_result, index:i, member_call:assertEqual, member_call_object:self, member_call_without_result:assertEqual
@@ -773,7 +773,7 @@ def simple_fibonacci(n, f1, f2): # function:simple_fibonacci (-> +11), function_
     fn_2 = f2 # assignment, assignment_lhs_identifier:fn_2, assignment_rhs_atom:f2, single_assignment:fn_2
     n -= 2 # assignment_lhs_identifier:n, assignment_rhs_atom:2, augmented_assignment:Sub, literal:2, update:n:2, update_by_augmented_assignment:n:2, update_by_augmented_assignment_with:Sub, update_with:Sub
     while n > 0: # comparison_operator:Gt, literal:0, loop:while (-> +2), loop_with_late_exit:while (-> +2), while (-> +2)
-        fn_1, fn_2 = fn_1 + fn_2, fn_1 # addition_operator, assignment, assignment_lhs_identifier:fn_1, assignment_lhs_identifier:fn_2, assignment_rhs_atom:fn_1, assignment_rhs_atom:fn_2, binary_operator:Add, parallel_assignment:2, update:fn_1:fn_2, update:fn_2:fn_1, update_by_assignment:fn_1:fn_2, update_by_assignment:fn_2:fn_1, update_by_assignment_with, update_with
+        fn_1, fn_2 = fn_1 + fn_2, fn_1 # addition_operator, assignment, assignment_lhs_identifier:fn_1, assignment_lhs_identifier:fn_2, assignment_rhs_atom:fn_1, assignment_rhs_atom:fn_2, binary_operator:Add, literal:Tuple, parallel_assignment:2, update:fn_1:fn_2, update:fn_2:fn_1, update_by_assignment:fn_1:fn_2, update_by_assignment:fn_2:fn_1, update_by_assignment_with, update_with
         n -= 1 # assignment_lhs_identifier:n, assignment_rhs_atom:1, augmented_assignment:Sub, literal:1, update:n:1, update_by_augmented_assignment:n:1, update_by_augmented_assignment_with:Sub, update_with:Sub
     return fn_1 # return:fn_1
 def matrix_exponentiation_time(): # function:matrix_exponentiation_time (-> +8), function_returning_something:matrix_exponentiation_time (-> +8), function_without_arguments:matrix_exponentiation_time (-> +8)
@@ -836,7 +836,7 @@ def calc_derivative(f, a, h=0.001): # function:calc_derivative (-> +1), function
     return (f(a + h) - f(a - h)) / (2 * h) # addition_operator, binary_operator:Add, binary_operator:Div, binary_operator:Mult, binary_operator:Sub, call_argument:, external_free_call:f, free_call:f, literal:2, multiplication_operator, return
 def newton_raphson(f, x0=0, maxiter=100, step=0.0001, maxerror=1e-6, logsteps=False): # function:newton_raphson (-> +17), function_argument:f, function_argument:logsteps, function_argument:maxerror, function_argument:maxiter, function_argument:step, function_argument:x0, function_argument_flavor:arg, function_returning_something:newton_raphson (-> +17), higher_order_function:f (-> +17), literal:0, literal:0.0001, literal:100, literal:1e-06, literal:False
     a = x0 # assignment, assignment_lhs_identifier:a, assignment_rhs_atom:x0, single_assignment:a
-    steps = [a] # assignment, assignment_lhs_identifier:steps, assignment_rhs_atom:a, single_assignment:steps
+    steps = [a] # assignment, assignment_lhs_identifier:steps, assignment_rhs_atom:a, literal:List, single_assignment:steps
     error = abs(f(a)) # assignment:abs, assignment_lhs_identifier:error, assignment_rhs_atom:a, call_argument:, call_argument:a, composition, external_free_call:abs, external_free_call:f, free_call:abs, free_call:f, single_assignment:error
     f1 = lambda x: calc_derivative(f, x, h=step) # assignment, assignment_lhs_identifier:f1, assignment_rhs_atom:f, assignment_rhs_atom:step, assignment_rhs_atom:x, call_argument:f, call_argument:x, free_call:calc_derivative, function_argument:x, function_argument_flavor:arg, internal_free_call:calc_derivative, lambda_function, single_assignment:f1
     for _ in range(maxiter): # call_argument:maxiter, external_free_call:range, for:_ (-> +9), for_range:maxiter (-> +9), free_call:range, loop:for (-> +9), loop_with_early_exit:for:break (-> +9), loop_with_else:for (-> +9), range:maxiter
@@ -850,8 +850,8 @@ def newton_raphson(f, x0=0, maxiter=100, step=0.0001, maxerror=1e-6, logsteps=Fa
     else:
         raise ValueError("Iteration limit reached, no converging solution found") # call_argument:, external_free_call:ValueError, free_call:ValueError, literal:Str, loop_else, raise:ValueError
     if logsteps: # if (-> +1), if_guard (-> +1), if_without_else (-> +1)
-        return a, error, steps # if_then_branch, return
-    return a, error # return
+        return a, error, steps # if_then_branch, literal:Tuple, return
+    return a, error # literal:Tuple, return
 
 # ----------------------------------------------------------------------------------------
 # perfect_square.py
@@ -865,7 +865,7 @@ def perfect_square(num: int) -> bool: # function:perfect_square (-> +1), functio
 # ----------------------------------------------------------------------------------------
 from typing import Sequence # import:typing:Sequence, import_module:typing, import_name:Sequence, whole_span:8 (-> +7)
 def evaluate_poly(poly: Sequence[float], x: float) -> float: # function:evaluate_poly (-> +1), function_argument:poly, function_argument:x, function_argument_flavor:arg, function_returning_something:evaluate_poly (-> +1)
-    return sum(c * (x ** i) for i, c in enumerate(poly)) # binary_operator:Mult, binary_operator:Pow, call_argument:, call_argument:poly, composition, comprehension:Generator, comprehension_for_count:1, external_free_call:enumerate, external_free_call:sum, free_call:enumerate, free_call:sum, free_tail_call:sum, multiplication_operator, return
+    return sum(c * (x ** i) for i, c in enumerate(poly)) # binary_operator:Mult, binary_operator:Pow, call_argument:, call_argument:poly, composition, comprehension:Generator, comprehension_for_count:1, external_free_call:enumerate, external_free_call:sum, free_call:enumerate, free_call:sum, free_tail_call:sum, literal:Tuple, multiplication_operator, return
 def horner(poly: Sequence[float], x: float) -> float: # function:horner (-> +4), function_argument:poly, function_argument:x, function_argument_flavor:arg, function_returning_something:horner (-> +4)
     result = 0.0 # assignment:0.0, assignment_lhs_identifier:result, assignment_rhs_atom:0.0, literal:0.0, single_assignment:result, suggest_constant_definition
     for coeff in reversed(poly): # accumulate_all_elements:Add (-> +1), accumulate_elements:Add (-> +1), call_argument:poly, external_free_call:reversed, for:coeff (-> +1), free_call:reversed, loop:for (-> +1), loop_with_late_exit:for (-> +1)
@@ -964,39 +964,39 @@ def prime_sieve_eratosthenes(num): # function:prime_sieve_eratosthenes (-> +10),
 # ----------------------------------------------------------------------------------------
 import numpy as np # import:numpy, import_module:numpy, whole_span:18 (-> +17)
 def qr_householder(A): # function:qr_householder (-> +16), function_argument:A, function_argument_flavor:arg, function_returning_something:qr_householder (-> +16)
-    m, n = A.shape # assignment, assignment_lhs_identifier:m, assignment_lhs_identifier:n, assignment_rhs_atom:A, parallel_assignment:2
+    m, n = A.shape # assignment, assignment_lhs_identifier:m, assignment_lhs_identifier:n, assignment_rhs_atom:A, literal:Tuple, parallel_assignment:2
     t = min(m, n) # assignment:min, assignment_lhs_identifier:t, assignment_rhs_atom:m, assignment_rhs_atom:n, call_argument:m, call_argument:n, external_free_call:min, free_call:min, single_assignment:t
     Q = np.eye(m) # assignment:eye, assignment_lhs_identifier:Q, assignment_rhs_atom:m, assignment_rhs_atom:np, call_argument:m, member_call:eye, single_assignment:Q
     R = A.copy() # assignment:copy, assignment_lhs_identifier:R, assignment_rhs_atom:A, member_call:copy, single_assignment:R
     for k in range(t - 1): # accumulate_all_elements:block (-> +10), accumulate_elements:block (-> +10), binary_operator:Sub, call_argument:, external_free_call:range, for:k (-> +10), for_range:_ (-> +10), free_call:range, literal:1, loop:for (-> +10), loop_with_late_exit:for (-> +10), range:_
-        x = R[k:, [k]] # assignment, assignment_lhs_identifier:x, assignment_rhs_atom:R, assignment_rhs_atom:k, single_assignment:x
+        x = R[k:, [k]] # assignment, assignment_lhs_identifier:x, assignment_rhs_atom:R, assignment_rhs_atom:k, literal:List, single_assignment:x
         e1 = np.zeros_like(x) # assignment:zeros_like, assignment_lhs_identifier:e1, assignment_rhs_atom:np, assignment_rhs_atom:x, call_argument:x, member_call:zeros_like, single_assignment:e1
         e1[0] = 1.0 # assignment:1.0, assignment_lhs_identifier:e1, assignment_rhs_atom:1.0, index:0, literal:0, literal:1.0, suggest_constant_definition
         alpha = np.linalg.norm(x) # assignment:norm, assignment_lhs_identifier:alpha, assignment_rhs_atom:np, assignment_rhs_atom:x, call_argument:x, member_call:norm, single_assignment:alpha
         v = x + np.sign(x[0]) * alpha * e1 # addition_operator, assignment:Add, assignment_lhs_identifier:v, assignment_rhs_atom:0, assignment_rhs_atom:alpha, assignment_rhs_atom:e1, assignment_rhs_atom:np, assignment_rhs_atom:x, binary_operator:Add, binary_operator:Mult, call_argument:, index:0, literal:0, member_call:sign, multiplication_operator, single_assignment:v
         v /= np.linalg.norm(v) # assignment_lhs_identifier:v, assignment_rhs_atom:np, assignment_rhs_atom:v, augmented_assignment:Div, call_argument:v, member_call:norm, update:v:np, update:v:v, update_by_augmented_assignment:v:np, update_by_augmented_assignment:v:v, update_by_augmented_assignment_with:Div, update_with:Div
         Q_k = np.eye(m - k) - 2.0 * v @ v.T # assignment:Sub, assignment_lhs_identifier:Q_k, assignment_rhs_atom:2.0, assignment_rhs_atom:k, assignment_rhs_atom:m, assignment_rhs_atom:np, assignment_rhs_atom:v, binary_operator:MatMult, binary_operator:Mult, binary_operator:Sub, call_argument:, literal:2.0, member_call:eye, multiplication_operator, single_assignment:Q_k, suggest_constant_definition
-        Q_k = np.block([[np.eye(k), np.zeros((k, m - k))], [np.zeros((m - k, k)), Q_k]]) # assignment:block, assignment_lhs_identifier:Q_k, assignment_rhs_atom:Q_k, assignment_rhs_atom:k, assignment_rhs_atom:m, assignment_rhs_atom:np, binary_operator:Sub, call_argument:, call_argument:k, composition, member_call:block, member_call:eye, member_call:zeros, single_assignment:Q_k, update:Q_k:k, update:Q_k:m, update:Q_k:np, update_by_assignment:Q_k:k, update_by_assignment:Q_k:m, update_by_assignment:Q_k:np, update_by_assignment_with:block, update_with:block
+        Q_k = np.block([[np.eye(k), np.zeros((k, m - k))], [np.zeros((m - k, k)), Q_k]]) # assignment:block, assignment_lhs_identifier:Q_k, assignment_rhs_atom:Q_k, assignment_rhs_atom:k, assignment_rhs_atom:m, assignment_rhs_atom:np, binary_operator:Sub, call_argument:, call_argument:k, composition, literal:List, literal:Tuple, member_call:block, member_call:eye, member_call:zeros, single_assignment:Q_k, update:Q_k:k, update:Q_k:m, update:Q_k:np, update_by_assignment:Q_k:k, update_by_assignment:Q_k:m, update_by_assignment:Q_k:np, update_by_assignment_with:block, update_with:block
         Q = Q @ Q_k.T # assignment:MatMult, assignment_lhs_identifier:Q, assignment_rhs_atom:Q, assignment_rhs_atom:Q_k, binary_operator:MatMult, single_assignment:Q, suggest_augmented_assignment, update:Q:Q_k, update_by_assignment:Q:Q_k, update_by_assignment_with:MatMult, update_with:MatMult
         R = Q_k @ R # assignment:MatMult, assignment_lhs_identifier:R, assignment_rhs_atom:Q_k, assignment_rhs_atom:R, binary_operator:MatMult, single_assignment:R, update:R:Q_k, update_by_assignment:R:Q_k, update_by_assignment_with:MatMult, update_with:MatMult
-    return Q, R # return
+    return Q, R # literal:Tuple, return
 
 # ----------------------------------------------------------------------------------------
 # quadratic_equations_complex_numbers.py
 # ----------------------------------------------------------------------------------------
 from math import sqrt # import:math:sqrt, import_module:math, import_name:sqrt, whole_span:16 (-> +15)
 from typing import Tuple # import:typing:Tuple, import_module:typing, import_name:Tuple
-def QuadraticEquation(a: int, b: int, c: int) -> Tuple[str, str]: # function:QuadraticEquation (-> +10), function_argument:a, function_argument:b, function_argument:c, function_argument_flavor:arg, function_returning_something:QuadraticEquation (-> +10), index:_
+def QuadraticEquation(a: int, b: int, c: int) -> Tuple[str, str]: # function:QuadraticEquation (-> +10), function_argument:a, function_argument:b, function_argument:c, function_argument_flavor:arg, function_returning_something:QuadraticEquation (-> +10), index:_, literal:Tuple
     if a == 0: # comparison_operator:Eq, if (-> +1), if_test_atom:0, if_test_atom:a, if_without_else (-> +1), literal:0
         raise ValueError("Coefficient 'a' must not be zero for quadratic equations.") # call_argument:, external_free_call:ValueError, free_call:ValueError, if_then_branch, literal:Str, raise:ValueError
     delta = b * b - 4 * a * c # assignment:Sub, assignment_lhs_identifier:delta, assignment_rhs_atom:4, assignment_rhs_atom:a, assignment_rhs_atom:b, assignment_rhs_atom:c, binary_operator:Mult, binary_operator:Sub, literal:4, multiplication_operator, single_assignment:delta, suggest_constant_definition
     if delta >= 0: # comparison_operator:GtE, if (-> +1), if_guard (-> +1), if_test_atom:0, if_test_atom:delta, if_without_else (-> +1), literal:0
-        return str((-b + sqrt(delta)) / (2 * a)), str((-b - sqrt(delta)) / (2 * a)) # addition_operator, binary_operator:Add, binary_operator:Div, binary_operator:Mult, binary_operator:Sub, call_argument:, call_argument:delta, composition, external_free_call:sqrt, external_free_call:str, free_call:sqrt, free_call:str, if_then_branch, literal:2, multiplication_operator, return, unary_operator:USub
+        return str((-b + sqrt(delta)) / (2 * a)), str((-b - sqrt(delta)) / (2 * a)) # addition_operator, binary_operator:Add, binary_operator:Div, binary_operator:Mult, binary_operator:Sub, call_argument:, call_argument:delta, composition, external_free_call:sqrt, external_free_call:str, free_call:sqrt, free_call:str, if_then_branch, literal:2, literal:Tuple, multiplication_operator, return, unary_operator:USub
     snd = sqrt(-delta) # assignment:sqrt, assignment_lhs_identifier:snd, assignment_rhs_atom:delta, call_argument:, external_free_call:sqrt, free_call:sqrt, single_assignment:snd, unary_operator:USub
     if b == 0: # comparison_operator:Eq, if (-> +1), if_guard (-> +1), if_test_atom:0, if_test_atom:b, if_without_else (-> +1), literal:0
-        return f"({snd} * i) / 2", f"({snd} * i) / {2 * a}" # binary_operator:Mult, if_then_branch, literal:2, literal:Str, multiplication_operator, return
+        return f"({snd} * i) / 2", f"({snd} * i) / {2 * a}" # binary_operator:Mult, if_then_branch, literal:2, literal:Str, literal:Tuple, multiplication_operator, return
     b = -abs(b) # assignment, assignment_lhs_identifier:b, assignment_rhs_atom:b, call_argument:b, external_free_call:abs, free_call:abs, single_assignment:b, unary_operator:USub
-    return f"({b}+{snd} * i) / 2", f"({b}+{snd} * i) / {2 * a}" # binary_operator:Mult, literal:2, literal:Str, multiplication_operator, return
+    return f"({b}+{snd} * i) / 2", f"({b}+{snd} * i) / {2 * a}" # binary_operator:Mult, literal:2, literal:Str, literal:Tuple, multiplication_operator, return
 def main(): # function:main (-> +2), function_returning_nothing:main (-> +2), function_without_arguments:main (-> +2)
     solutions = QuadraticEquation(a=5, b=6, c=1) # assignment:QuadraticEquation, assignment_lhs_identifier:solutions, assignment_rhs_atom:1, assignment_rhs_atom:5, assignment_rhs_atom:6, free_call:QuadraticEquation, internal_free_call:QuadraticEquation, literal:1, literal:5, literal:6, single_assignment:solutions, suggest_constant_definition
     print("The equation solutions are: {} and {}".format(*solutions)) # call_argument:, composition, external_free_call:print, free_call:print, free_call_without_result:print, literal:Str, member_call:format
@@ -1027,9 +1027,9 @@ class FFT: # class:FFT (-> +89)
         self.product = self.__multiply() # assignment:__multiply, assignment_lhs_identifier:self, assignment_rhs_atom:self, member_call:__multiply
     def __DFT(self, which): # function:__DFT (-> +23), function_argument:self, function_argument:which, function_argument_flavor:arg, function_returning_something:__DFT (-> +23), instance_method:__DFT (-> +23), method:__DFT (-> +23)
         if which == "A": # comparison_operator:Eq, if (-> +3), if_test_atom:which, literal:Str, verbose_conditional_assignment (-> +3)
-            dft = [[x] for x in self.polyA] # assignment, assignment_lhs_identifier:dft, assignment_rhs_atom:self, assignment_rhs_atom:x, comprehension:List, comprehension_for_count:1, if_then_branch, single_assignment:dft
+            dft = [[x] for x in self.polyA] # assignment, assignment_lhs_identifier:dft, assignment_rhs_atom:self, assignment_rhs_atom:x, comprehension:List, comprehension_for_count:1, if_then_branch, literal:List, single_assignment:dft
         else:
-            dft = [[x] for x in self.polyB] # assignment, assignment_lhs_identifier:dft, assignment_rhs_atom:self, assignment_rhs_atom:x, comprehension:List, comprehension_for_count:1, if_else_branch, single_assignment:dft
+            dft = [[x] for x in self.polyB] # assignment, assignment_lhs_identifier:dft, assignment_rhs_atom:self, assignment_rhs_atom:x, comprehension:List, comprehension_for_count:1, if_else_branch, literal:List, single_assignment:dft
         if len(dft) <= 1: # call_argument:dft, comparison_operator:LtE, external_free_call:len, free_call:len, if (-> +1), if_guard (-> +1), if_test_atom:1, if_test_atom:dft, if_without_else (-> +1), literal:1
             return dft[0] # if_then_branch, index:0, literal:0, return
         next_ncol = self.C_max_length // 2 # assignment:FloorDiv, assignment_lhs_identifier:next_ncol, assignment_rhs_atom:2, assignment_rhs_atom:self, binary_operator:FloorDiv, literal:2, single_assignment:next_ncol
@@ -1052,7 +1052,7 @@ class FFT: # class:FFT (-> +89)
     def __multiply(self): # function:__multiply (-> +35), function_argument:self, function_argument_flavor:arg, function_returning_something:__multiply (-> +35), instance_method:__multiply (-> +35), method:__multiply (-> +35)
         dftA = self.__DFT("A") # assignment:__DFT, assignment_lhs_identifier:dftA, assignment_rhs_atom:self, call_argument:, literal:Str, member_call:__DFT, single_assignment:dftA
         dftB = self.__DFT("B") # assignment:__DFT, assignment_lhs_identifier:dftB, assignment_rhs_atom:self, call_argument:, literal:Str, member_call:__DFT, single_assignment:dftB
-        inverseC = [[dftA[i] * dftB[i] for i in range(self.C_max_length)]] # assignment, assignment_lhs_identifier:inverseC, assignment_rhs_atom:dftA, assignment_rhs_atom:dftB, assignment_rhs_atom:i, assignment_rhs_atom:self, binary_operator:Mult, call_argument:, comprehension:List, comprehension_for_count:1, external_free_call:range, free_call:range, index:i, multiplication_operator, range:_, single_assignment:inverseC
+        inverseC = [[dftA[i] * dftB[i] for i in range(self.C_max_length)]] # assignment, assignment_lhs_identifier:inverseC, assignment_rhs_atom:dftA, assignment_rhs_atom:dftB, assignment_rhs_atom:i, assignment_rhs_atom:self, binary_operator:Mult, call_argument:, comprehension:List, comprehension_for_count:1, external_free_call:range, free_call:range, index:i, literal:List, multiplication_operator, range:_, single_assignment:inverseC
         del dftA # unbinding:dftA
         del dftB # unbinding:dftB
         if len(inverseC[0]) <= 1: # call_argument:, comparison_operator:LtE, external_free_call:len, free_call:len, if (-> +1), if_guard (-> +1), if_test_atom:0, if_test_atom:1, if_test_atom:inverseC, if_without_else (-> +1), index:0, literal:0, literal:1
@@ -1087,15 +1087,15 @@ class FFT: # class:FFT (-> +89)
         return inverseC # return:inverseC
     def __str__(self): # function:__str__ (-> +10), function_argument:self, function_argument_flavor:arg, function_returning_something:__str__ (-> +10), instance_method:__str__ (-> +10), method:__str__ (-> +10)
         A = "A = " + " + ".join( # assignment:Add, assignment_lhs_identifier:A, binary_operator:Add, composition, concatenation_operator:Str, literal:Str, member_call:join, single_assignment:A
-            f"{coef}*x^{i}" for coef, i in enumerate(self.polyA[: self.len_A]) # assignment_rhs_atom:coef, assignment_rhs_atom:i, assignment_rhs_atom:self, call_argument:, comprehension:Generator, comprehension_for_count:1, external_free_call:enumerate, free_call:enumerate, literal:Str, slice::_:, slice_lower:, slice_step:, slice_upper:_
+            f"{coef}*x^{i}" for coef, i in enumerate(self.polyA[: self.len_A]) # assignment_rhs_atom:coef, assignment_rhs_atom:i, assignment_rhs_atom:self, call_argument:, comprehension:Generator, comprehension_for_count:1, external_free_call:enumerate, free_call:enumerate, literal:Str, literal:Tuple, slice::_:, slice_lower:, slice_step:, slice_upper:_
         )
         B = "B = " + " + ".join( # assignment:Add, assignment_lhs_identifier:B, binary_operator:Add, composition, concatenation_operator:Str, literal:Str, member_call:join, single_assignment:B
-            f"{coef}*x^{i}" for coef, i in enumerate(self.polyB[: self.len_B]) # assignment_rhs_atom:coef, assignment_rhs_atom:i, assignment_rhs_atom:self, call_argument:, comprehension:Generator, comprehension_for_count:1, external_free_call:enumerate, free_call:enumerate, literal:Str, slice::_:, slice_lower:, slice_step:, slice_upper:_
+            f"{coef}*x^{i}" for coef, i in enumerate(self.polyB[: self.len_B]) # assignment_rhs_atom:coef, assignment_rhs_atom:i, assignment_rhs_atom:self, call_argument:, comprehension:Generator, comprehension_for_count:1, external_free_call:enumerate, free_call:enumerate, literal:Str, literal:Tuple, slice::_:, slice_lower:, slice_step:, slice_upper:_
         )
         C = "A*B = " + " + ".join( # assignment:Add, assignment_lhs_identifier:C, binary_operator:Add, composition, concatenation_operator:Str, literal:Str, member_call:join, single_assignment:C
-            f"{coef}*x^{i}" for coef, i in enumerate(self.product) # assignment_rhs_atom:coef, assignment_rhs_atom:i, assignment_rhs_atom:self, call_argument:, comprehension:Generator, comprehension_for_count:1, external_free_call:enumerate, free_call:enumerate, literal:Str
+            f"{coef}*x^{i}" for coef, i in enumerate(self.product) # assignment_rhs_atom:coef, assignment_rhs_atom:i, assignment_rhs_atom:self, call_argument:, comprehension:Generator, comprehension_for_count:1, external_free_call:enumerate, free_call:enumerate, literal:Str, literal:Tuple
         )
-        return "\n".join((A, B, C)) # call_argument:, literal:Str, member_call:join, return
+        return "\n".join((A, B, C)) # call_argument:, literal:Str, literal:Tuple, member_call:join, return
 
 # ----------------------------------------------------------------------------------------
 # runge_kutta.py
@@ -1103,7 +1103,7 @@ class FFT: # class:FFT (-> +89)
 import numpy as np # import:numpy, import_module:numpy, whole_span:14 (-> +13)
 def runge_kutta(f, y0, x0, h, x_end): # function:runge_kutta (-> +12), function_argument:f, function_argument:h, function_argument:x0, function_argument:x_end, function_argument:y0, function_argument_flavor:arg, function_returning_something:runge_kutta (-> +12), higher_order_function:f (-> +12)
     N = int(np.ceil((x_end - x0) / h)) # assignment:int, assignment_lhs_identifier:N, assignment_rhs_atom:h, assignment_rhs_atom:np, assignment_rhs_atom:x0, assignment_rhs_atom:x_end, binary_operator:Div, binary_operator:Sub, call_argument:, composition, external_free_call:int, free_call:int, member_call:ceil, single_assignment:N
-    y = np.zeros((N + 1,)) # addition_operator, assignment:zeros, assignment_lhs_identifier:y, assignment_rhs_atom:1, assignment_rhs_atom:N, assignment_rhs_atom:np, binary_operator:Add, call_argument:, literal:1, member_call:zeros, single_assignment:y
+    y = np.zeros((N + 1,)) # addition_operator, assignment:zeros, assignment_lhs_identifier:y, assignment_rhs_atom:1, assignment_rhs_atom:N, assignment_rhs_atom:np, binary_operator:Add, call_argument:, literal:1, literal:Tuple, member_call:zeros, single_assignment:y
     y[0] = y0 # assignment, assignment_lhs_identifier:y, assignment_rhs_atom:y0, index:0, literal:0
     x = x0 # assignment, assignment_lhs_identifier:x, assignment_rhs_atom:x0, single_assignment:x
     for k in range(N): # accumulate_all_elements:Add (-> +6), accumulate_elements:Add (-> +6), call_argument:N, external_free_call:range, for:k (-> +6), for_range:N (-> +6), free_call:range, loop:for (-> +6), loop_with_late_exit:for (-> +6), range:N
@@ -1212,7 +1212,7 @@ def main(): # function:main (-> +6), function_returning_nothing:main (-> +6), fu
     a = 0.0 # assignment:0.0, assignment_lhs_identifier:a, assignment_rhs_atom:0.0, literal:0.0, single_assignment:a, suggest_constant_definition
     b = 1.0 # assignment:1.0, assignment_lhs_identifier:b, assignment_rhs_atom:1.0, literal:1.0, single_assignment:b, suggest_constant_definition
     steps = 10.0 # assignment:10.0, assignment_lhs_identifier:steps, assignment_rhs_atom:10.0, literal:10.0, single_assignment:steps, suggest_constant_definition
-    boundary = [a, b] # assignment, assignment_lhs_identifier:boundary, assignment_rhs_atom:a, assignment_rhs_atom:b, single_assignment:boundary
+    boundary = [a, b] # assignment, assignment_lhs_identifier:boundary, assignment_rhs_atom:a, assignment_rhs_atom:b, literal:List, single_assignment:boundary
     y = method_2(boundary, steps) # assignment:method_2, assignment_lhs_identifier:y, assignment_rhs_atom:boundary, assignment_rhs_atom:steps, call_argument:boundary, call_argument:steps, free_call:method_2, internal_free_call:method_2, single_assignment:y
     print("y = {0}".format(y)) # call_argument:, call_argument:y, composition, external_free_call:print, free_call:print, free_call_without_result:print, literal:Str, member_call:format
 
@@ -1267,7 +1267,7 @@ def main(): # function:main (-> +6), function_returning_nothing:main (-> +6), fu
     a = 0.0 # assignment:0.0, assignment_lhs_identifier:a, assignment_rhs_atom:0.0, literal:0.0, single_assignment:a, suggest_constant_definition
     b = 1.0 # assignment:1.0, assignment_lhs_identifier:b, assignment_rhs_atom:1.0, literal:1.0, single_assignment:b, suggest_constant_definition
     steps = 10.0 # assignment:10.0, assignment_lhs_identifier:steps, assignment_rhs_atom:10.0, literal:10.0, single_assignment:steps, suggest_constant_definition
-    boundary = [a, b] # assignment, assignment_lhs_identifier:boundary, assignment_rhs_atom:a, assignment_rhs_atom:b, single_assignment:boundary
+    boundary = [a, b] # assignment, assignment_lhs_identifier:boundary, assignment_rhs_atom:a, assignment_rhs_atom:b, literal:List, single_assignment:boundary
     y = method_1(boundary, steps) # assignment:method_1, assignment_lhs_identifier:y, assignment_rhs_atom:boundary, assignment_rhs_atom:steps, call_argument:boundary, call_argument:steps, free_call:method_1, internal_free_call:method_1, single_assignment:y
     print("y = {0}".format(y)) # call_argument:, call_argument:y, composition, external_free_call:print, free_call:print, free_call_without_result:print, literal:Str, member_call:format
 

@@ -185,7 +185,7 @@
 
 #### Feature `literal`
 
-Match `None`, `True`, `False`, and literal numbers, strings, tuples, dictionaries, sets and lists. For the first four, suffix with the literal value.
+Match `None`, `True`, `False`, and literal numbers, strings, tuples, dictionaries, sets and lists. For the first four, suffix with the literal value. For the others, there is no guarantee that the value is a constant.
 
 Further categorization of numeric literals does not require to construct a sophisticated regular expression: the heavy lifting is already made in the given AST, which stores them under normalized form:
 - integer literals are just sequences of digits, with an optional minus sign `-`;
@@ -210,16 +210,9 @@ Further categorization of numeric literals does not require to construct a sophi
                        Num
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/n=(?P<SUFFIX>.+)
-|   # match strings
-                       (?P<SUFFIX>Str)
+|   # match strings and containers
+                       (?P<SUFFIX>Str|Tuple|Dict|Set|List)
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-|   # match containers
-                       (?P<SUFFIX>Tuple|Dict|Set|List)
-\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-    (
-    \n\1/.*(?<!/id)=.* # ensure that there is no identifier below
-    )+
-    \n(?!\1)
 )
 ```
 
@@ -235,7 +228,7 @@ Further categorization of numeric literals does not require to construct a sophi
 7   {1, 2, 3}
 8   True and False
 9   None
-10  {a, b, c} # no match
+10  {a, b, c}
 11  [1, 2, 3]
 12  -42
 13  [1, {2, 3}, {"a": "b", "c": "d"}]
@@ -252,11 +245,11 @@ Further categorization of numeric literals does not require to construct a sophi
 | `literal:Str` | 3, 13, 13, 13, 13, 15, 15 |
 | `literal:1` | 4, 4, 7, 11, 13 |
 | `literal:Tuple` | 4 |
-| `literal:List` | 5, 11, 13 |
+| `literal:List` | 5, 11, 13, 14 |
 | `literal:Dict` | 6, 13, 15 |
 | `literal:2` | 7, 11, 13 |
 | `literal:3` | 7, 11, 13 |
-| `literal:Set` | 7, 13 |
+| `literal:Set` | 7, 10, 13 |
 | `literal:False` | 8 |
 | `literal:True` | 8 |
 | `literal:None` | 9 |

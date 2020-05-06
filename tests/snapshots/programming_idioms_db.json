@@ -254,6 +254,7 @@
         "free_call:enumerate": [[1,1]],
         "free_call:print": [[2,2]],
         "free_call_without_result:print": [[2,2]],
+        "literal:Tuple": [[1,1]],
         "loop:for": [[1,1],[2,2]],
         "loop_with_late_exit:for": [[1,1],[2,2]],
         "nested_for:1": [[2,2]],
@@ -267,7 +268,8 @@
         "flow/loop/for/elements_and_indexes": [[1,2]],
         "flow/loop/for/nested/1": [[2,2]],
         "io/standard/print": [[2,2]],
-        "metadata/sloc/2": [[1,2]]
+        "metadata/sloc/2": [[1,2]],
+        "type/sequence/tuple/literal": [[1,1]]
       }
     },
     "008.0039-initialize-a-new-map-associative-array.py": {
@@ -433,6 +435,7 @@
         "for:v": [[2,2]],
         "free_call:print": [[2,2]],
         "free_call_without_result:print": [[2,2]],
+        "literal:Tuple": [[1,1]],
         "loop:for": [[1,1],[2,2]],
         "loop_with_late_exit:for": [[1,1],[2,2]],
         "member_call:items": [[1,1]],
@@ -447,7 +450,8 @@
         "flow/loop/for/nested/1": [[2,2]],
         "io/standard/print": [[2,2]],
         "metadata/sloc/2": [[1,2]],
-        "type/non_sequence/dictionary": [[1,1]]
+        "type/non_sequence/dictionary": [[1,1]],
+        "type/sequence/tuple/literal": [[1,1]]
       }
     },
     "014.0185-pick-uniformly-a-random-floating-point-number-in-ab.py": {
@@ -712,6 +716,7 @@
         "if_test_atom:x": [[3,3]],
         "if_then_branch": [[4,4]],
         "if_without_else": [[3,4]],
+        "literal:Tuple": [[2,2],[4,4]],
         "loop:for": [[2,2],[4,4]],
         "loop_with_early_exit:for:return": [[2,2]],
         "loop_with_late_exit:for": [[4,4]],
@@ -733,7 +738,8 @@
         "subroutine/argument/arg": [[1,1],[1,1]],
         "subroutine/function": [[1,4]],
         "test/belonging": [[3,3]],
-        "type/sequence": [[4,4]]
+        "type/sequence": [[4,4]],
+        "type/sequence/tuple/literal": [[2,2],[4,4]]
       }
     },
     "021.0084-swap-values-of-variables-a-and-b.py": {
@@ -745,6 +751,7 @@
         "assignment_lhs_identifier:b": [[1,1]],
         "assignment_rhs_atom:a": [[1,1]],
         "assignment_rhs_atom:b": [[1,1]],
+        "literal:Tuple": [[1,1],[1,1]],
         "parallel_assignment:2": [[1,1]],
         "swap": [[1,1]],
         "update:a:b": [[1,1]],
@@ -757,6 +764,7 @@
       },
       "taxons": {
         "metadata/sloc/1": [[1,1]],
+        "type/sequence/tuple/literal": [[1,1],[1,1]],
         "variable/assignment/parallel/swap": [[1,1]]
       }
     },
@@ -933,6 +941,7 @@
         "call_argument:": [[2,2]],
         "import:numpy": [[1,1]],
         "import_module:numpy": [[1,1]],
+        "literal:Tuple": [[2,2]],
         "member_call:zeros": [[2,2]],
         "single_assignment:x": [[2,2]],
         "whole_span:2": [[1,2]]
@@ -941,6 +950,7 @@
         "call/method/zeros": [[2,2]],
         "library/third_party/numpy": [[1,1]],
         "metadata/sloc/2": [[1,2]],
+        "type/sequence/tuple/literal": [[2,2]],
         "variable/assignment/single": [[2,2]]
       }
     },
@@ -1006,6 +1016,7 @@
         "import_name:Pool": [[1,1]],
         "literal:1": [[3,3]],
         "literal:1001": [[3,3]],
+        "literal:List": [[4,4]],
         "loop:for": [[3,4]],
         "loop_with_late_exit:for": [[3,4]],
         "member_call:apply_async": [[4,4]],
@@ -1024,6 +1035,7 @@
         "library/standard/multiprocessing/Pool": [[1,1]],
         "metadata/sloc/4": [[1,4]],
         "type/number/integer/literal": [[3,3],[3,3]],
+        "type/sequence/list/literal": [[4,4]],
         "variable/assignment/single": [[2,2]]
       }
     },
@@ -1357,7 +1369,7 @@
         "literal:2": [[13,13],[13,13]],
         "literal:3": [[13,13]],
         "literal:4": [[13,13]],
-        "literal:Tuple": [[13,13],[13,13]],
+        "literal:Tuple": [[10,10],[13,13],[13,13]],
         "loop:for": [[7,8],[10,10],[12,12]],
         "loop_with_late_exit:for": [[7,8],[10,10],[12,12]],
         "member_call:add": [[11,11],[12,12]],
@@ -1399,7 +1411,7 @@
         "type/non_sequence/set": [[11,11],[12,12]],
         "type/number/integer/literal": [[10,10],[13,13],[13,13],[13,13],[13,13],[13,13],[13,13]],
         "type/number/integer/literal/zero": [[13,13]],
-        "type/sequence/tuple/literal": [[13,13],[13,13]],
+        "type/sequence/tuple/literal": [[10,10],[13,13],[13,13]],
         "variable/assignment": [[6,6]],
         "variable/assignment/constant": [[13,13]],
         "variable/assignment/single": [[13,13]]
@@ -1565,6 +1577,7 @@
         "index:column": [[7,7]],
         "index:row": [[6,6],[7,7]],
         "literal:None": [[4,4]],
+        "literal:Tuple": [[8,8]],
         "loop:for": [[5,9],[6,9]],
         "loop_with_late_exit:for": [[5,9],[6,9]],
         "nested_for:1": [[6,9]],
@@ -1590,6 +1603,7 @@
         "subscript/index": [[6,6],[7,7],[7,7]],
         "test/equality": [[7,7]],
         "type/null/literal": [[4,4]],
+        "type/sequence/tuple/literal": [[8,8]],
         "variable/assignment/single": [[4,4],[8,8]]
       }
     },
@@ -1636,7 +1650,7 @@
         "literal:9": [[7,7]],
         "literal:List": [[7,7],[7,7],[7,7]],
         "literal:None": [[6,6]],
-        "literal:Tuple": [[7,7]],
+        "literal:Tuple": [[2,2],[3,3],[5,5],[7,7]],
         "loop:for": [[2,2],[3,3],[5,5]],
         "loop_with_early_exit:for:return": [[3,3]],
         "loop_with_late_exit:for": [[2,2],[5,5]],
@@ -1666,7 +1680,7 @@
         "type/null/literal": [[6,6]],
         "type/number/integer/literal": [[7,7],[7,7],[7,7],[7,7],[7,7],[7,7],[7,7],[7,7],[7,7],[7,7]],
         "type/sequence/list/literal": [[7,7],[7,7],[7,7]],
-        "type/sequence/tuple/literal": [[7,7]]
+        "type/sequence/tuple/literal": [[2,2],[3,3],[5,5],[7,7]]
       }
     },
     "044.0190-insert-element-in-list.py": {
@@ -3124,6 +3138,7 @@
         "import:urllib": [[1,1]],
         "import_module:urllib": [[1,1]],
         "literal:Str": [[2,2]],
+        "literal:Tuple": [[2,2]],
         "member_call:urlretrieve": [[2,2]],
         "parallel_assignment:2": [[2,2]],
         "whole_span:2": [[1,2]]
@@ -3133,6 +3148,7 @@
         "library/standard/urllib": [[1,1]],
         "metadata/sloc/2": [[1,2]],
         "type/sequence/string/literal": [[2,2]],
+        "type/sequence/tuple/literal": [[2,2]],
         "variable/assignment/parallel": [[2,2]]
       }
     },
@@ -3437,6 +3453,7 @@
         "free_call:print": [[2,2]],
         "free_call:sorted": [[1,1]],
         "free_call_without_result:print": [[2,2]],
+        "literal:Tuple": [[1,1],[1,1],[1,1]],
         "loop:for": [[1,1],[2,2]],
         "loop_with_late_exit:for": [[1,1],[2,2]],
         "member_call:items": [[1,1]],
@@ -3453,7 +3470,8 @@
         "flow/loop/for/nested/1": [[2,2]],
         "io/standard/print": [[2,2]],
         "metadata/sloc/2": [[1,2]],
-        "type/non_sequence/dictionary": [[1,1]]
+        "type/non_sequence/dictionary": [[1,1]],
+        "type/sequence/tuple/literal": [[1,1],[1,1],[1,1]]
       }
     },
     "114.2273-test-deep-equality.py": {
@@ -3728,6 +3746,7 @@
         "literal:1024": [[6,6]],
         "literal:Str": [[2,2],[7,7]],
         "literal:True": [[5,5]],
+        "literal:Tuple": [[4,4],[6,6]],
         "loop:while": [[5,7]],
         "loop_with_late_exit:while": [[5,7]],
         "member_call:bind": [[4,4]],
@@ -3755,6 +3774,7 @@
         "type/boolean/literal/true": [[5,5]],
         "type/number/integer/literal": [[6,6]],
         "type/sequence/string/literal": [[2,2],[7,7]],
+        "type/sequence/tuple/literal": [[4,4],[6,6]],
         "variable/assignment/constant": [[2,2]],
         "variable/assignment/parallel": [[6,6]],
         "variable/assignment/single": [[2,2],[3,3]]
@@ -3775,6 +3795,7 @@
         "external_free_call:range": [[2,2]],
         "free_call:range": [[2,2]],
         "literal:4": [[2,2]],
+        "literal:Tuple": [[2,2]],
         "parallel_assignment:4": [[2,2]],
         "range:4": [[2,2]],
         "suggest_constant_definition": [[2,2]],
@@ -3785,6 +3806,7 @@
         "class": [[1,2]],
         "metadata/sloc/2": [[1,2]],
         "type/number/integer/literal": [[2,2]],
+        "type/sequence/tuple/literal": [[2,2]],
         "variable/assignment/constant": [[2,2],[2,2],[2,2],[2,2]],
         "variable/assignment/parallel/more_than_two": [[2,2]]
       }
@@ -4003,6 +4025,7 @@
         "if_then_branch": [[8,9]],
         "if_without_else": [[7,9]],
         "literal:0": [[4,4]],
+        "literal:List": [[2,2]],
         "literal:True": [[8,8]],
         "loop:for": [[6,9]],
         "loop:while": [[3,9]],
@@ -4038,6 +4061,7 @@
         "type/boolean/literal/true": [[8,8]],
         "type/number/integer/literal/zero": [[4,4]],
         "type/sequence/list": [[9,9]],
+        "type/sequence/list/literal": [[2,2]],
         "variable/assignment": [[8,8]],
         "variable/assignment/constant": [[2,2]],
         "variable/assignment/single": [[2,2],[4,4]]
@@ -4078,6 +4102,7 @@
         "import:collections:deque": [[1,1]],
         "import_module:collections": [[1,1]],
         "import_name:deque": [[1,1]],
+        "literal:List": [[4,4]],
         "loop:while": [[5,9]],
         "loop_with_late_exit:while": [[5,9]],
         "member_call:add": [[8,8]],
@@ -4115,6 +4140,7 @@
         "test/belonging/not": [[9,9]],
         "type/non_sequence/set": [[3,3],[8,8]],
         "type/sequence/list": [[9,9]],
+        "type/sequence/list/literal": [[4,4]],
         "variable/assignment/single": [[3,3],[4,4],[6,6]]
       }
     },
@@ -4148,6 +4174,7 @@
         "function_argument_flavor:arg": [[1,1],[1,1]],
         "function_returning_nothing:depth_first": [[1,8]],
         "higher_order_function:f": [[1,8]],
+        "literal:List": [[3,3]],
         "loop:while": [[4,8]],
         "loop_with_late_exit:while": [[4,8]],
         "member_call:add": [[7,7]],
@@ -4183,6 +4210,7 @@
         "test/belonging/not": [[8,8]],
         "type/non_sequence/set": [[2,2],[7,7]],
         "type/sequence/list": [[8,8]],
+        "type/sequence/list/literal": [[3,3]],
         "variable/assignment/single": [[2,2],[3,3],[5,5]]
       }
     },
@@ -4284,11 +4312,13 @@
         "assignment_rhs_atom:a": [[1,1]],
         "assignment_rhs_atom:b": [[1,1]],
         "assignment_rhs_atom:c": [[1,1]],
+        "literal:List": [[1,1]],
         "single_assignment:items": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxons": {
         "metadata/sloc/1": [[1,1]],
+        "type/sequence/list/literal": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
     },
@@ -4836,6 +4866,7 @@
         "literal:2": [[1,1],[1,1],[2,2],[2,2],[3,3],[3,3],[3,3]],
         "literal:6": [[1,1],[2,2]],
         "literal:Str": [[3,3]],
+        "literal:Tuple": [[1,1],[2,2]],
         "member_call:format": [[3,3]],
         "parallel_assignment:3": [[1,1],[2,2]],
         "range:1:6:2": [[1,1],[2,2]],
@@ -4859,6 +4890,7 @@
         "type/number/integer/literal": [[1,1],[1,1],[1,1],[1,1],[1,1],[2,2],[2,2],[2,2],[2,2],[2,2],[3,3],[3,3],[3,3]],
         "type/sequence/string": [[3,3]],
         "type/sequence/string/literal": [[3,3]],
+        "type/sequence/tuple/literal": [[1,1],[2,2]],
         "variable/assignment/parallel/more_than_two": [[1,1],[2,2]],
         "variable/assignment/single": [[3,3]]
       }
@@ -5287,6 +5319,7 @@
         "import_name:tee": [[1,1]],
         "internal_free_call:pairwise": [[6,6]],
         "literal:None": [[4,4]],
+        "literal:Tuple": [[3,3],[6,6]],
         "loop:for": [[6,6],[7,7]],
         "loop_with_late_exit:for": [[6,6],[7,7]],
         "nested_for:1": [[7,7]],
@@ -5309,6 +5342,7 @@
         "subroutine/argument/arg": [[2,2]],
         "subroutine/function": [[2,5]],
         "type/null/literal": [[4,4]],
+        "type/sequence/tuple/literal": [[3,3],[6,6]],
         "variable/assignment/parallel": [[3,3]]
       }
     },
@@ -5752,6 +5786,7 @@
         "import_module:os": [[2,2]],
         "import_module:re": [[1,1]],
         "literal:Str": [[4,4],[7,7]],
+        "literal:Tuple": [[5,5]],
         "member_call:format": [[4,4]],
         "member_call:match": [[7,7]],
         "member_call:walk": [[5,5]],
@@ -5767,6 +5802,7 @@
         "metadata/sloc/7": [[1,7]],
         "type/sequence/string": [[4,4]],
         "type/sequence/string/literal": [[4,4],[7,7]],
+        "type/sequence/tuple/literal": [[5,5]],
         "variable/assignment/single": [[3,3]]
       }
     },
@@ -5849,6 +5885,7 @@
         "binary_operator:Add": [[1,1],[1,1]],
         "binary_operator:Div": [[1,1],[1,1]],
         "literal:2": [[1,1],[1,1]],
+        "literal:Tuple": [[1,1]],
         "single_assignment:center": [[1,1]],
         "whole_span:1": [[1,1]]
       },
@@ -5857,6 +5894,7 @@
         "operator/arithmetic/addition": [[1,1],[1,1]],
         "operator/arithmetic/division": [[1,1],[1,1]],
         "type/number/integer/literal": [[1,1],[1,1]],
+        "type/sequence/tuple/literal": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
     },
@@ -5971,8 +6009,9 @@
         "empty_literal:Dict": [[5,5]],
         "import:requests": [[2,2]],
         "import_module:requests": [[2,2]],
-        "literal:Dict": [[5,5]],
+        "literal:Dict": [[4,4],[5,5]],
         "literal:Str": [[3,3],[4,4]],
+        "literal:Tuple": [[7,7],[7,7]],
         "member_call:put": [[6,6]],
         "parallel_assignment:2": [[7,7]],
         "single_assignment:content_type": [[3,3]],
@@ -5985,8 +6024,10 @@
         "call/method/put": [[6,6]],
         "library/third_party/requests": [[2,2]],
         "metadata/sloc/7": [[1,7]],
+        "type/non_sequence/dictionary/literal": [[4,4]],
         "type/non_sequence/dictionary/literal/empty": [[5,5]],
         "type/sequence/string/literal": [[3,3],[4,4]],
+        "type/sequence/tuple/literal": [[7,7],[7,7]],
         "variable/assignment/parallel": [[7,7]],
         "variable/assignment/single": [[3,3],[4,4],[5,5],[6,6]]
       }
@@ -6125,6 +6166,7 @@
         "instance_method:union_set": [[13,15]],
         "literal:0": [[3,3]],
         "literal:List": [[3,3]],
+        "literal:Tuple": [[15,15],[15,15]],
         "member_call:find_set": [[9,9],[12,12],[12,12],[15,15],[15,15]],
         "member_call:is_same_set": [[14,14]],
         "method:__init__": [[2,4]],
@@ -6160,6 +6202,7 @@
         "test/equality": [[6,6],[12,12]],
         "type/number/integer/literal/zero": [[3,3]],
         "type/sequence/list/literal": [[3,3]],
+        "type/sequence/tuple/literal": [[15,15],[15,15]],
         "variable/assignment": [[3,3],[4,4],[9,9]],
         "variable/assignment/parallel": [[15,15]]
       }
@@ -10298,9 +10341,14 @@
       "086.1004-check-if-integer-multiplication-will-overflow.py"
     ],
     "literal:List": [
+      "030.0189-parallelize-execution-of-1000-independent-tasks.py",
       "043.2733-break-outer-loop.py",
       "111.2168-launch-other-program.py",
       "119.3263-deduplicate-list.py",
+      "128.2085-breadth-first-traversing-of-a-tree.py",
+      "129.2282-breadth-first-traversing-in-a-graph.py",
+      "130.2283-depth-first-traversing-in-a-graph.py",
+      "134.1850-create-a-new-list.py",
       "159.2281-trie.py",
       "177.2709-find-files-with-a-given-list-of-filename-extensions.py",
       "177.3241-find-files-with-a-given-list-of-filename-extensions.py",
@@ -10388,10 +10436,26 @@
       "128.2085-breadth-first-traversing-of-a-tree.py"
     ],
     "literal:Tuple": [
+      "007.0183-iterate-over-list-indexes-and-values.py",
+      "013.0574-iterate-over-map-keys-and-values.py",
+      "020.0573-return-two-values.py",
+      "021.0084-swap-values-of-variables-a-and-b.py",
+      "027.0193-create-a-3-dimensional-array.py",
       "040.2279-graph-with-adjacency-lists.py",
+      "043.0676-break-outer-loop.py",
       "043.2733-break-outer-loop.py",
+      "102.2173-load-from-http-get-request-into-a-file.py",
+      "113.2157-iterate-over-map-entries-ordered-by-values.py",
+      "121.3029-udp-listen-and-read.py",
+      "122.1453-declare-enumeration.py",
       "126.2137-multiple-return-values.py",
-      "185.2820-execute-function-in-30-seconds.py"
+      "154.2155-halfway-between-two-hex-color-codes.py",
+      "163.3177-print-list-elements-by-group-of-2.py",
+      "177.2725-find-files-with-a-given-list-of-filename-extensions.py",
+      "179.2688-get-center-of-a-rectangle.py",
+      "183.3025-make-http-put-request.py",
+      "185.2820-execute-function-in-30-seconds.py",
+      "187.3261-disjoint-set.py"
     ],
     "loop:for": [
       "002.0011-print-hello-10-times.py",
@@ -13643,7 +13707,8 @@
       "113.2157-iterate-over-map-entries-ordered-by-values.py"
     ],
     "type/non_sequence/dictionary/literal": [
-      "008.0039-initialize-a-new-map-associative-array.py"
+      "008.0039-initialize-a-new-map-associative-array.py",
+      "183.3025-make-http-put-request.py"
     ],
     "type/non_sequence/dictionary/literal/empty": [
       "183.3025-make-http-put-request.py"
@@ -13766,9 +13831,14 @@
       "177.3241-find-files-with-a-given-list-of-filename-extensions.py"
     ],
     "type/sequence/list/literal": [
+      "030.0189-parallelize-execution-of-1000-independent-tasks.py",
       "043.2733-break-outer-loop.py",
       "111.2168-launch-other-program.py",
       "119.3263-deduplicate-list.py",
+      "128.2085-breadth-first-traversing-of-a-tree.py",
+      "129.2282-breadth-first-traversing-in-a-graph.py",
+      "130.2283-depth-first-traversing-in-a-graph.py",
+      "134.1850-create-a-new-list.py",
       "177.2709-find-files-with-a-given-list-of-filename-extensions.py",
       "177.3241-find-files-with-a-given-list-of-filename-extensions.py",
       "187.3261-disjoint-set.py"
@@ -13875,10 +13945,26 @@
       "154.2292-halfway-between-two-hex-color-codes.py"
     ],
     "type/sequence/tuple/literal": [
+      "007.0183-iterate-over-list-indexes-and-values.py",
+      "013.0574-iterate-over-map-keys-and-values.py",
+      "020.0573-return-two-values.py",
+      "021.0084-swap-values-of-variables-a-and-b.py",
+      "027.0193-create-a-3-dimensional-array.py",
       "040.2279-graph-with-adjacency-lists.py",
+      "043.0676-break-outer-loop.py",
       "043.2733-break-outer-loop.py",
+      "102.2173-load-from-http-get-request-into-a-file.py",
+      "113.2157-iterate-over-map-entries-ordered-by-values.py",
+      "121.3029-udp-listen-and-read.py",
+      "122.1453-declare-enumeration.py",
       "126.2137-multiple-return-values.py",
-      "185.2820-execute-function-in-30-seconds.py"
+      "154.2155-halfway-between-two-hex-color-codes.py",
+      "163.3177-print-list-elements-by-group-of-2.py",
+      "177.2725-find-files-with-a-given-list-of-filename-extensions.py",
+      "179.2688-get-center-of-a-rectangle.py",
+      "183.3025-make-http-put-request.py",
+      "185.2820-execute-function-in-30-seconds.py",
+      "187.3261-disjoint-set.py"
     ],
     "variable/assignment": [
       "009.1410-create-a-binary-tree-data-structure.py",
