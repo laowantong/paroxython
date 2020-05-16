@@ -3,15 +3,12 @@
 [![Checked with mypy](https://img.shields.io/badge/typing-mypy-brightgreen)](http://mypy-lang.org/)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/73432ed4c5294326ba6279bbbb0fe2e6)](https://www.codacy.com/manual/laowantong/paroxython)
 [![Updates](https://pyup.io/repos/github/laowantong/paroxython/shield.svg)](https://pyup.io/repos/github/laowantong/paroxython/)
-<br>
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/paroxython)
 [![GitHub Release](https://img.shields.io/github/release/laowantong/paroxython.svg?style=flat)]()
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/laowantong/paroxython)
 [![GitHub commit activity](https://img.shields.io/github/commit-activity/y/laowantong/paroxython.svg?style=flat)]()
-<br>
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-# Paroxython
 
 ## Presentation
 

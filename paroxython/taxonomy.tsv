@@ -197,6 +197,7 @@ variable/assignment/conditional/compact	compact_conditional_assignment
 variable/assignment/conditional/corrective	corrective_conditional_assignment
 variable/assignment/conditional/verbose	verbose_conditional_assignment
 variable/assignment/constant	assignment_lhs_identifier:[[:upper:]0-9_]+
+variable/assignment/negate	negate
 variable/assignment/parallel	parallel_assignment:\d+
 variable/assignment/parallel/more_than_two	parallel_assignment:(?!2$)\d+
 variable/assignment/parallel/slide	slide

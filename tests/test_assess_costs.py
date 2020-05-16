@@ -6,28 +6,28 @@ import pytest
 import context
 from paroxython.assess_costs import (
     LearningCostAssessor,
-    depths_to_cost_length,
-    depths_to_cost_zeno,
+    range_to_cost_linear,
+    range_to_cost_zeno,
 )
 
 
-def test_depths_to_cost_zeno():
-    assert depths_to_cost_zeno(0, 0) == 0
-    assert depths_to_cost_zeno(42, 42) == 0
-    assert depths_to_cost_zeno(0, 1) == (1 / 2)
-    assert depths_to_cost_zeno(0, 2) == (1 / 2 + 1 / 4)
-    assert depths_to_cost_zeno(0, 3) == (1 / 2 + 1 / 4 + 1 / 8)
-    assert depths_to_cost_zeno(1, 4) == (1 / 4 + 1 / 8 + 1 / 16)
+def test_range_to_cost_zeno():
+    assert range_to_cost_zeno(0, 0) == 0
+    assert range_to_cost_zeno(42, 42) == 0
+    assert range_to_cost_zeno(0, 1) == (1 / 2)
+    assert range_to_cost_zeno(0, 2) == (1 / 2 + 1 / 4)
+    assert range_to_cost_zeno(0, 3) == (1 / 2 + 1 / 4 + 1 / 8)
+    assert range_to_cost_zeno(1, 4) == (1 / 4 + 1 / 8 + 1 / 16)
 
 
-def test_depths_to_cost_length():
-    assert depths_to_cost_length(3, 5) == 2
+def test_range_to_cost_linear():
+    assert range_to_cost_linear(3, 5) == 2
 
 
 def test_taxon_cost():
     imparted_knowledge = {"O", "O/J", "X", "X/S", "X/S/M", "X/S/M/L"}
     assess = LearningCostAssessor(imparted_knowledge)
-    assess.set_cost_assessment_strategy("length")
+    assess.set_cost_assessment_strategy("linear")
     assert assess.taxon_cost("O") == 0
     assert assess.taxon_cost("O/C") == 1
     assert assess.taxon_cost("O/C/F") == 2

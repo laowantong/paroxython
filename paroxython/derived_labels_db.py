@@ -7,6 +7,8 @@ import regex  # type: ignore
 from .goodies import couple_to_string
 from .user_types import Label, LabelName, Labels, LabelsSpans, Query, Span
 
+__pdoc__ = {"DB.prerequisites": False}
+
 
 class DB:
 

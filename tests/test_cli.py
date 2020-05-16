@@ -114,7 +114,7 @@ def test_recommend():
     result_text = result_path.read_text()
     assert result_text == Path("tests/data/dummy/recommendations.md").read_text()
 
-    run(f"recommend -o {result_path} -p {pipe_path} -c length {db_path}")
+    run(f"recommend -o {result_path} -p {pipe_path} -c linear {db_path}")
     result_text = result_path.read_text()
     assert "1 program of learning cost in [1, 2[" in result_text
     assert "1 program of learning cost in [4, 8[" in result_text

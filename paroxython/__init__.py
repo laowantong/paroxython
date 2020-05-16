@@ -1,8 +1,12 @@
-"""Declare the magic stuff paroxython iff the module is loaded as an IPython extension."""
+"""
+.. include:: ../README.md
+"""
+
 
 import sys
 
 if "ipykernel" in sys.modules:
+    # Declare the magic stuff paroxython iff the module is loaded as an IPython extension.
 
     from IPython.core.magic import Magics, line_cell_magic, magics_class  # type: ignore
     from IPython.display import Markdown, display  # type: ignore

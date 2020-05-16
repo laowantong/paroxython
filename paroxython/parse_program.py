@@ -11,6 +11,10 @@ from .derived_labels_db import DB
 from .flatten_ast import flatten_ast
 from .user_types import Label, LabelName, Labels, LabelsSpans, Program, Query, Source, Span
 
+__pdoc__ = {
+    "find_all_features": False,
+}
+
 
 def _simplify_negative_literals() -> Callable:
     sub = regex.compile(

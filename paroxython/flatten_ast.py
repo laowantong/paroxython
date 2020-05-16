@@ -3,6 +3,10 @@ from typing import Any
 
 import regex  # type: ignore
 
+__pdoc__ = {
+    "remove_context": False,
+}
+
 remove_context = regex.compile(r", ctx=.+?\(\)").sub
 
 

@@ -16,7 +16,7 @@ from .user_types import (
     TaxonsSpans,
 )
 
-sub_slash_sequences = regex.compile(r"//+").sub
+_sub_slash_sequences = regex.compile(r"//+").sub
 
 
 class Taxonomy:
@@ -48,7 +48,7 @@ class Taxonomy:
         for (rex, taxon_name) in self.compiled_label_names:
             if rex.match(label_name):
                 s = rex.sub(taxon_name, label_name)  # cf. note above
-                s = sub_slash_sequences("/", s)
+                s = _sub_slash_sequences("/", s)
                 result.append(s)
         return result
 

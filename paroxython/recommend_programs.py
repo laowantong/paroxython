@@ -9,7 +9,7 @@ from .assess_costs import LearningCostAssessor
 from .filter_programs import ProgramFilter
 from .goodies import (
     add_line_numbers,
-    cost_interval,
+    cost_bucket,
     couple_to_string,
     enumeration_to_txt_factory,
     title_to_slug_factory,
@@ -86,7 +86,7 @@ class Recommendations:
         self,
         span_column_width=30,
         sorting_strategy="by_cost_and_sloc",
-        grouping_strategy="by_cost_interval",
+        grouping_strategy="by_cost_bucket",
     ) -> str:
         """Reiterate on the commands, now populated by the results, and output them."""
 
@@ -103,10 +103,10 @@ class Recommendations:
             sorting_key = lambda x: x[1]
 
         grouping_key = lambda x: f"(default: no group)"
-        if grouping_strategy == "by_cost_interval":
-            grouping_key = cost_interval
+        if grouping_strategy == "by_cost_bucket":
+            grouping_key = cost_bucket
 
-        # Group resulting programs by cost interval, and sort each group by increasing difficulty.
+        # Group resulting programs into cost buckets, and sort each group by increasing difficulty.
 
         toc_data: Dict[str, AssessedPrograms] = defaultdict(list)
         for (cost, program) in self.assessed_programs:

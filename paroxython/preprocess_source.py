@@ -7,6 +7,17 @@ import regex  # type: ignore
 
 from .user_types import LabelName, LabelsSpans, Source, Span
 
+__pdoc__ = {
+    "sub_main": False,
+    "sub_first_comments": False,
+    "sub_blank_lines": False,
+    "sub_pass": False,
+    "sub_final_pass": False,
+    "subn_paroxython_comment": False,
+    "match_isolated_hints": False,
+    "replace_hints": False,
+}
+
 HINT_COMMENT = "# paroxython:"
 
 sub_main = regex.compile(r"(?ms)^if +__name__ *== *.__main__. *:.+").sub
