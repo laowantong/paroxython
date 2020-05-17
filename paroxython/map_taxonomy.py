@@ -25,7 +25,7 @@ class Taxonomy:
     def __init__(self, taxonomy_path: Optional[Path] = None, *args, **kwargs) -> None:
         """Read the taxonomy specifications, and make some pre-processing."""
         is_literal = regex.compile(r"[\w:.]+").fullmatch
-        taxonomy_path = taxonomy_path or Path(dirname(__file__)) / "taxonomy.tsv"
+        taxonomy_path = taxonomy_path or Path(dirname(__file__)) / "resources" / "taxonomy.tsv"
         tsv = taxonomy_path.read_text().partition("-- EOF")[0].strip()
         self.literal_label_names: Dict[LabelName, TaxonNames] = defaultdict(list)
         self.compiled_label_names = []

@@ -38,7 +38,7 @@ find_all_features = regex.compile(
         """
 ).findall
 
-DEFAULT_SPEC_PATH = Path(dirname(__file__)) / "spec.md"
+DEFAULT_SPEC_PATH = Path(dirname(__file__)) / "resources" / "spec.md"
 
 
 class ProgramParser:
