@@ -76,9 +76,20 @@ def resolve_new_types():
     Path("docs/user_types.html").unlink()
 
 
+def suppress_sources():
+    filenames = ("index.html", "resources/index.html")
+    base_path = Path("docs/")
+    for filename in filenames:
+        path = base_path / filename
+        source = path.read_text()
+        source = regex.sub(r'(?ms)^<details class="source">.+?^</details>\n', "", source)
+        path.write_text(source)
+
+
 def main():
     generate_html()
     resolve_new_types()
+    suppress_sources()
 
 
 if __name__ == "__main__":

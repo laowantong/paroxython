@@ -1,4 +1,4 @@
-r"""Assess the learning cost associated with the introduction of given programs.
+r"""Assess the learning cost associated with the introduction of the given programs.
 
 Each program has been previously found to implement a number of notions represented by a list of
 taxons of the form: \(\textrm{segment}_0/\textrm{segment}_1/.../\textrm{segment}_n\), e.g.,

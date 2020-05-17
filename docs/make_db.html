@@ -29,7 +29,7 @@
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L0-L268" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L0-L284" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">import json
 import sqlite3
@@ -208,7 +208,23 @@ def prepared(tags: Labels) -&gt; LabelsPoorSpans:
 def prepared(tags: Taxons) -&gt; TaxonsPoorSpans:
     ...  # pragma: no cover
 def prepared(tags):
-    &#34;&#34;&#34;Prepare the spans for serialization.&#34;&#34;&#34;
+    &#34;&#34;&#34;Prepare the spans for serialization.
+
+    Args:
+        tags (Labels): The tags to be serialized.
+        tags (Taxons): The taxons to be serialized.
+
+    Returns:
+        LabelPoorSpans|TaxonsPoorSpans:
+            A dictionary mapping tag names with the list of their spans, transformed into simple
+            lists of two integers.
+
+    .. note::
+          Overloaded to support two different combinations of argument types: Mypy can check that
+          passing `Labels` (resp. `Taxons`) to the function returns `LabelsPoorSpans` (resp.
+          `TaxonsPoorSpans`).
+          See [the documentation](https://docs.python.org/3/library/typing.html#typing.overload).
+    &#34;&#34;&#34;
     result: Union[LabelsPoorSpans, TaxonsPoorSpans] = {}
     for (tag_name, spans) in tags:
         result[tag_name] = [span[:2] for span in sorted(set(spans))]
@@ -241,7 +257,7 @@ def collect_taxons(programs: Programs) -&gt; TaxonInfos:
     return result
 
 
-def compute_direct_importations(programs) -&gt; ProgramToPrograms:
+def compute_direct_importations(programs: Programs) -&gt; ProgramToPrograms:
     &#34;&#34;&#34;Associate each program to the set of its direct internal imports.&#34;&#34;&#34;
     importations: Dict = {program.name: set() for program in programs}
     for program in programs:
@@ -317,7 +333,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L247-L252" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L263-L268" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def collect_exportations(exportations: ProgramToPrograms) -&gt; ProgramToPrograms:
     &#34;&#34;&#34;Iterate through the exportations to collect them.&#34;&#34;&#34;
@@ -335,7 +351,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L186-L192" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L202-L208" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def collect_labels(programs: Programs) -&gt; LabelInfos:
     &#34;&#34;&#34;Iterate through programs to collect all their labels.&#34;&#34;&#34;
@@ -354,7 +370,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L202-L208" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L218-L224" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def collect_taxons(programs: Programs) -&gt; TaxonInfos:
     &#34;&#34;&#34;Iterate through programs to collect all their taxons.&#34;&#34;&#34;
@@ -373,7 +389,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L222-L235" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L238-L251" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def complete_and_collect_importations(importations: ProgramToPrograms) -&gt; ProgramToPrograms:
     &#34;&#34;&#34;Complete the direct internal imports with indirect ones.&#34;&#34;&#34;
@@ -392,16 +408,16 @@ if __name__ == &#34;__main__&#34;:
 </details>
 </dd>
 <dt id="paroxython.make_db.compute_direct_importations"><code class="name flex">
-<span>def <span class="ident">compute_direct_importations</span></span>(<span>programs) ‑> Dict[ProgramName, List[ProgramName]]</span>
+<span>def <span class="ident">compute_direct_importations</span></span>(<span>programs: List[Program]) ‑> Dict[ProgramName, List[ProgramName]]</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Associate each program to the set of its direct internal imports.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L211-L219" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L227-L235" class="git-link">Browse git</a>
 </summary>
-<pre><code class="python">def compute_direct_importations(programs) -&gt; ProgramToPrograms:
+<pre><code class="python">def compute_direct_importations(programs: Programs) -&gt; ProgramToPrograms:
     &#34;&#34;&#34;Associate each program to the set of its direct internal imports.&#34;&#34;&#34;
     importations: Dict = {program.name: set() for program in programs}
     for program in programs:
@@ -420,7 +436,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L238-L244" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L254-L260" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def compute_exportations(programs: Programs, importations: ProgramToPrograms) -&gt; ProgramToPrograms:
     &#34;&#34;&#34;Invert `importations` to construct `exportations`.&#34;&#34;&#34;
@@ -439,7 +455,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L195-L199" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L211-L215" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def map_labels_on_taxons(programs: Programs, taxonomy: Taxonomy) -&gt; None:
     &#34;&#34;&#34;Translate labels into taxons on a list of program names.&#34;&#34;&#34;
@@ -452,14 +468,50 @@ if __name__ == &#34;__main__&#34;:
 <span>def <span class="ident">prepared</span></span>(<span>tags)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Prepare the spans for serialization.</p></div>
+<div class="desc"><p>Prepare the spans for serialization.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>tags</code></strong> :&ensp;<code>Labels</code></dt>
+<dd>The tags to be serialized.</dd>
+<dt><strong><code>tags</code></strong> :&ensp;<code>Taxons</code></dt>
+<dd>The taxons to be serialized.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>LabelPoorSpans|TaxonsPoorSpans:</code></dt>
+<dd>A dictionary mapping tag names with the list of their spans, transformed into simple
+lists of two integers.</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Overloaded to support two different combinations of argument types: Mypy can check that
+passing <code>Labels</code> (resp. <code>Taxons</code>) to the function returns <code>LabelsPoorSpans</code> (resp.
+<code>TaxonsPoorSpans</code>).
+See <a href="https://docs.python.org/3/library/typing.html#typing.overload">the documentation</a>.</p>
+</div></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L177-L182" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L177-L198" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def prepared(tags):
-    &#34;&#34;&#34;Prepare the spans for serialization.&#34;&#34;&#34;
+    &#34;&#34;&#34;Prepare the spans for serialization.
+
+    Args:
+        tags (Labels): The tags to be serialized.
+        tags (Taxons): The taxons to be serialized.
+
+    Returns:
+        LabelPoorSpans|TaxonsPoorSpans:
+            A dictionary mapping tag names with the list of their spans, transformed into simple
+            lists of two integers.
+
+    .. note::
+          Overloaded to support two different combinations of argument types: Mypy can check that
+          passing `Labels` (resp. `Taxons`) to the function returns `LabelsPoorSpans` (resp.
+          `TaxonsPoorSpans`).
+          See [the documentation](https://docs.python.org/3/library/typing.html#typing.overload).
+    &#34;&#34;&#34;
     result: Union[LabelsPoorSpans, TaxonsPoorSpans] = {}
     for (tag_name, spans) in tags:
         result[tag_name] = [span[:2] for span in sorted(set(spans))]

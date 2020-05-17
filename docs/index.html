@@ -69,61 +69,13 @@ print(&quot;Hello World!&quot;)
 </table>
 <h1 id="how-it-works">How it works</h1>
 <p><img alt="" src="flow.png"></p>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/__init__.py#L0-L41" class="git-link">Browse git</a>
-</summary>
-<pre><code class="python">&#34;&#34;&#34;
-.. include:: ../README.md
-   :start-after: ![](docs/logo.png)
-   :end-before: # Documentation
-
-&lt;br&gt;
-
-# How it works
-
-.. image:: flow.png
-&#34;&#34;&#34;
-
-
-import sys
-
-if &#34;ipykernel&#34; in sys.modules:
-    # Declare the magic stuff paroxython iff the module is loaded as an IPython extension.
-
-    from IPython.core.magic import Magics, line_cell_magic, magics_class  # type: ignore
-    from IPython.display import Markdown, display  # type: ignore
-
-    from .cli.cli_tag import main
-
-    def load_ipython_extension(ipython):
-        ipython.register_magics(ParoxythonMagics)
-
-    @magics_class
-    class ParoxythonMagics(Magics):
-        @line_cell_magic
-        def paroxython(self, line, source=None):
-            &#34;&#34;&#34;
-            Tag a Python code cell and output the table of its taxons or labels.
-
-            In cell mode:
-                %%paroxython [labels]
-                ... Python source code ...
-            &#34;&#34;&#34;
-            if source:
-                args = set(line.lower().split())
-                tags = &#34;Label&#34; if args.intersection([&#34;label&#34;, &#34;labels&#34;]) else &#34;Taxon&#34;
-                source = f&#34;# Compensate the offset of the magic command.\n{source}&#34;
-                display(Markdown(main(source, tags=tags)))</code></pre>
-</details>
 </section>
 <section>
 <h2 class="section-title" id="header-submodules">Sub-modules</h2>
 <dl>
 <dt><code class="name"><a title="paroxython.assess_costs" href="assess_costs.html">paroxython.assess_costs</a></code></dt>
 <dd>
-<div class="desc"><p>Assess the learning cost associated with the introduction of given programs …</p></div>
+<div class="desc"><p>Assess the learning cost associated with the introduction of the given programs …</p></div>
 </dd>
 <dt><code class="name"><a title="paroxython.cli" href="cli/index.html">paroxython.cli</a></code></dt>
 <dd>

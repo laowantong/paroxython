@@ -175,7 +175,23 @@ def prepared(tags: Labels) -> LabelsPoorSpans:
 def prepared(tags: Taxons) -> TaxonsPoorSpans:
     ...  # pragma: no cover
 def prepared(tags):
-    """Prepare the spans for serialization."""
+    """Prepare the spans for serialization.
+
+    Args:
+        tags (Labels): The tags to be serialized.
+        tags (Taxons): The taxons to be serialized.
+
+    Returns:
+        LabelPoorSpans|TaxonsPoorSpans:
+            A dictionary mapping tag names with the list of their spans, transformed into simple
+            lists of two integers.
+
+    .. note::
+          Overloaded to support two different combinations of argument types: Mypy can check that
+          passing `Labels` (resp. `Taxons`) to the function returns `LabelsPoorSpans` (resp.
+          `TaxonsPoorSpans`).
+          See [the documentation](https://docs.python.org/3/library/typing.html#typing.overload).
+    """
     result: Union[LabelsPoorSpans, TaxonsPoorSpans] = {}
     for (tag_name, spans) in tags:
         result[tag_name] = [span[:2] for span in sorted(set(spans))]
@@ -208,7 +224,7 @@ def collect_taxons(programs: Programs) -> TaxonInfos:
     return result
 
 
-def compute_direct_importations(programs) -> ProgramToPrograms:
+def compute_direct_importations(programs: Programs) -> ProgramToPrograms:
     """Associate each program to the set of its direct internal imports."""
     importations: Dict = {program.name: set() for program in programs}
     for program in programs:
