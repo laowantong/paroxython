@@ -29,7 +29,7 @@
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/2563d3b1da7935a202edce2df5f2e315072bbf2e/paroxython/derived_labels_db.py#L0-L73" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/derived_labels_db.py#L0-L73" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">import sqlite3
 from collections import defaultdict
@@ -124,7 +124,7 @@ class DB:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/2563d3b1da7935a202edce2df5f2e315072bbf2e/paroxython/derived_labels_db.py#L13-L74" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/derived_labels_db.py#L13-L74" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class DB:
 
@@ -218,7 +218,7 @@ class DB:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/2563d3b1da7935a202edce2df5f2e315072bbf2e/paroxython/derived_labels_db.py#L34-L37" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/derived_labels_db.py#L34-L37" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def create(self, labels: Labels) -&gt; None:
     self.c.execute(DB.creation_query)
@@ -234,7 +234,7 @@ class DB:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/2563d3b1da7935a202edce2df5f2e315072bbf2e/paroxython/derived_labels_db.py#L61-L64" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/derived_labels_db.py#L61-L64" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def delete(self) -&gt; None:
     self.c.execute(&#34;DROP TABLE t&#34;)
@@ -243,14 +243,14 @@ class DB:
 </details>
 </dd>
 <dt id="paroxython.derived_labels_db.DB.read"><code class="name flex">
-<span>def <span class="ident">read</span></span>(<span>self, query: <function NewType.<locals>.new_type at 0x10b2839e0>) -> List[<a title="paroxython.user_types.Label" href="user_types.html#paroxython.user_types.Label">Label</a>]</span>
+<span>def <span class="ident">read</span></span>(<span>self, query: <function NewType.<locals>.new_type at 0x11151d9e0>) -> List[<a title="paroxython.user_types.Label" href="user_types.html#paroxython.user_types.Label">Label</a>]</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/2563d3b1da7935a202edce2df5f2e315072bbf2e/paroxython/derived_labels_db.py#L39-L50" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/derived_labels_db.py#L39-L50" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def read(self, query: Query) -&gt; Labels:
     groups: LabelsSpans = defaultdict(list)
@@ -274,7 +274,7 @@ class DB:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/2563d3b1da7935a202edce2df5f2e315072bbf2e/paroxython/derived_labels_db.py#L52-L59" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/derived_labels_db.py#L52-L59" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def update(self, labels: Labels) -&gt; None:
     values = []
@@ -293,8 +293,8 @@ class DB:
 </article>
 <nav id="sidebar">
 <header>
-<a class="homelink" rel="home" title="Paroxython Home" href="../../docs/">
-<img src="https://github.com/laowantong/paroxython/blob/master/docs/logo.png?raw=true" alt="Paroxython logo">
+<a class="homelink" rel="home" title="Paroxython Home" href="index.html">
+<img src="logo.png" alt="Paroxython logo">
 </a>
 </header>
 <div class="gcse-search" style="height: 70px"

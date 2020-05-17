@@ -29,7 +29,7 @@
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/2563d3b1da7935a202edce2df5f2e315072bbf2e/paroxython/user_types.py#L0-L117" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/user_types.py#L0-L117" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">from typing import Counter as Bag
 from typing import Dict, List, NamedTuple, NewType, Set, Tuple, Union
@@ -179,7 +179,7 @@ dict(one=1, two=2)</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/2563d3b1da7935a202edce2df5f2e315072bbf2e/paroxython/user_types.py#L98-L102" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/user_types.py#L98-L102" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class Command(TypedDict):
     operation: Literal[&#34;impart&#34;, &#34;exclude&#34;, &#34;include&#34;]
@@ -211,7 +211,7 @@ dict(one=1, two=2)</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/2563d3b1da7935a202edce2df5f2e315072bbf2e/paroxython/user_types.py#L80-L85" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/user_types.py#L80-L85" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class JsonDatabase(TypedDict):
     programs: ProgramInfos
@@ -227,14 +227,14 @@ dict(one=1, two=2)</p></div>
 </dd>
 <dt id="paroxython.user_types.Label"><code class="flex name class">
 <span>class <span class="ident">Label</span></span>
-<span>(</span><span>name: <function NewType.<locals>.new_type at 0x10b28d830>, spans: List[<a title="paroxython.user_types.Span" href="#paroxython.user_types.Span">Span</a>])</span>
+<span>(</span><span>name: <function NewType.<locals>.new_type at 0x111527830>, spans: List[<a title="paroxython.user_types.Span" href="#paroxython.user_types.Span">Span</a>])</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Label(name, spans)</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/2563d3b1da7935a202edce2df5f2e315072bbf2e/paroxython/user_types.py#L24-L26" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/user_types.py#L24-L26" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class Label(NamedTuple):
     name: LabelName
@@ -246,7 +246,7 @@ dict(one=1, two=2)</p></div>
 </ul>
 <h3>Instance variables</h3>
 <dl>
-<dt id="paroxython.user_types.Label.name"><code class="name">var <span class="ident">name</span> : <function NewType.<locals>.new_type at 0x10b28d830></code></dt>
+<dt id="paroxython.user_types.Label.name"><code class="name">var <span class="ident">name</span> : <function NewType.<locals>.new_type at 0x111527830></code></dt>
 <dd>
 <div class="desc"><p>Alias for field number 0</p></div>
 </dd>
@@ -258,14 +258,14 @@ dict(one=1, two=2)</p></div>
 </dd>
 <dt id="paroxython.user_types.Program"><code class="flex name class">
 <span>class <span class="ident">Program</span></span>
-<span>(</span><span>labels: List[<a title="paroxython.user_types.Label" href="#paroxython.user_types.Label">Label</a>], taxons: List[<a title="paroxython.user_types.Taxon" href="#paroxython.user_types.Taxon">Taxon</a>], addition: Dict[LabelName, List[paroxython.user_types.Span]], deletion: Dict[LabelName, List[paroxython.user_types.Span]], name: <function NewType.<locals>.new_type at 0x10b291440> = '', source: <function NewType.<locals>.new_type at 0x10b283a70> = '')</span>
+<span>(</span><span>labels: List[<a title="paroxython.user_types.Label" href="#paroxython.user_types.Label">Label</a>], taxons: List[<a title="paroxython.user_types.Taxon" href="#paroxython.user_types.Taxon">Taxon</a>], addition: Dict[LabelName, List[paroxython.user_types.Span]], deletion: Dict[LabelName, List[paroxython.user_types.Span]], name: <function NewType.<locals>.new_type at 0x11152b440> = '', source: <function NewType.<locals>.new_type at 0x11151da70> = '')</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Program(labels, taxons, addition, deletion, name, source)</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/2563d3b1da7935a202edce2df5f2e315072bbf2e/paroxython/user_types.py#L52-L58" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/user_types.py#L52-L58" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class Program(NamedTuple):
     labels: Labels
@@ -293,11 +293,11 @@ dict(one=1, two=2)</p></div>
 <dd>
 <div class="desc"><p>Alias for field number 0</p></div>
 </dd>
-<dt id="paroxython.user_types.Program.name"><code class="name">var <span class="ident">name</span> : <function NewType.<locals>.new_type at 0x10b291440></code></dt>
+<dt id="paroxython.user_types.Program.name"><code class="name">var <span class="ident">name</span> : <function NewType.<locals>.new_type at 0x11152b440></code></dt>
 <dd>
 <div class="desc"><p>Alias for field number 4</p></div>
 </dd>
-<dt id="paroxython.user_types.Program.source"><code class="name">var <span class="ident">source</span> : <function NewType.<locals>.new_type at 0x10b283a70></code></dt>
+<dt id="paroxython.user_types.Program.source"><code class="name">var <span class="ident">source</span> : <function NewType.<locals>.new_type at 0x11151da70></code></dt>
 <dd>
 <div class="desc"><p>Alias for field number 5</p></div>
 </dd>
@@ -326,7 +326,7 @@ dict(one=1, two=2)</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/2563d3b1da7935a202edce2df5f2e315072bbf2e/paroxython/user_types.py#L69-L73" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/user_types.py#L69-L73" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class ProgramRecord(TypedDict):
     timestamp: str
@@ -348,7 +348,7 @@ dict(one=1, two=2)</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/2563d3b1da7935a202edce2df5f2e315072bbf2e/paroxython/user_types.py#L14-L17" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/user_types.py#L14-L17" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class Span(NamedTuple):
     start: int
@@ -377,14 +377,14 @@ dict(one=1, two=2)</p></div>
 </dd>
 <dt id="paroxython.user_types.Taxon"><code class="flex name class">
 <span>class <span class="ident">Taxon</span></span>
-<span>(</span><span>name: <function NewType.<locals>.new_type at 0x10b283b00>, spans: Counter[<a title="paroxython.user_types.Span" href="#paroxython.user_types.Span">Span</a>])</span>
+<span>(</span><span>name: <function NewType.<locals>.new_type at 0x11151db00>, spans: Counter[<a title="paroxython.user_types.Span" href="#paroxython.user_types.Span">Span</a>])</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Taxon(name, spans)</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/2563d3b1da7935a202edce2df5f2e315072bbf2e/paroxython/user_types.py#L38-L40" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/user_types.py#L38-L40" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class Taxon(NamedTuple):
     name: TaxonName
@@ -396,7 +396,7 @@ dict(one=1, two=2)</p></div>
 </ul>
 <h3>Instance variables</h3>
 <dl>
-<dt id="paroxython.user_types.Taxon.name"><code class="name">var <span class="ident">name</span> : <function NewType.<locals>.new_type at 0x10b283b00></code></dt>
+<dt id="paroxython.user_types.Taxon.name"><code class="name">var <span class="ident">name</span> : <function NewType.<locals>.new_type at 0x11151db00></code></dt>
 <dd>
 <div class="desc"><p>Alias for field number 0</p></div>
 </dd>
@@ -408,14 +408,14 @@ dict(one=1, two=2)</p></div>
 </dd>
 <dt id="paroxython.user_types.TaxonTriple"><code class="flex name class">
 <span>class <span class="ident">TaxonTriple</span></span>
-<span>(</span><span>predicate: str, name_1: <function NewType.<locals>.new_type at 0x10b283b00>, name_2: <function NewType.<locals>.new_type at 0x10b283b00>)</span>
+<span>(</span><span>predicate: str, name_1: <function NewType.<locals>.new_type at 0x11151db00>, name_2: <function NewType.<locals>.new_type at 0x11151db00>)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>TaxonTriple(predicate, name_1, name_2)</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/2563d3b1da7935a202edce2df5f2e315072bbf2e/paroxython/user_types.py#L104-L107" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/user_types.py#L104-L107" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class TaxonTriple(NamedTuple): #  cf. https://en.wikipedia.org/wiki/Semantic_triple
     predicate: str
@@ -428,11 +428,11 @@ dict(one=1, two=2)</p></div>
 </ul>
 <h3>Instance variables</h3>
 <dl>
-<dt id="paroxython.user_types.TaxonTriple.name_1"><code class="name">var <span class="ident">name_1</span> : <function NewType.<locals>.new_type at 0x10b283b00></code></dt>
+<dt id="paroxython.user_types.TaxonTriple.name_1"><code class="name">var <span class="ident">name_1</span> : <function NewType.<locals>.new_type at 0x11151db00></code></dt>
 <dd>
 <div class="desc"><p>Alias for field number 1</p></div>
 </dd>
-<dt id="paroxython.user_types.TaxonTriple.name_2"><code class="name">var <span class="ident">name_2</span> : <function NewType.<locals>.new_type at 0x10b283b00></code></dt>
+<dt id="paroxython.user_types.TaxonTriple.name_2"><code class="name">var <span class="ident">name_2</span> : <function NewType.<locals>.new_type at 0x11151db00></code></dt>
 <dd>
 <div class="desc"><p>Alias for field number 2</p></div>
 </dd>
@@ -447,8 +447,8 @@ dict(one=1, two=2)</p></div>
 </article>
 <nav id="sidebar">
 <header>
-<a class="homelink" rel="home" title="Paroxython Home" href="../../docs/">
-<img src="https://github.com/laowantong/paroxython/blob/master/docs/logo.png?raw=true" alt="Paroxython logo">
+<a class="homelink" rel="home" title="Paroxython Home" href="index.html">
+<img src="logo.png" alt="Paroxython logo">
 </a>
 </header>
 <div class="gcse-search" style="height: 70px"

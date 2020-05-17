@@ -29,7 +29,7 @@
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/2563d3b1da7935a202edce2df5f2e315072bbf2e/paroxython/preprocess_source.py#L0-L174" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L0-L174" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">from collections import defaultdict
 from token import DEDENT, INDENT, NEWLINE, STRING
@@ -216,14 +216,14 @@ if __name__ == &#34;__main__&#34;:
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
 <dt id="paroxython.preprocess_source.centrifugate_hints"><code class="name flex">
-<span>def <span class="ident">centrifugate_hints</span></span>(<span>source: <function NewType.<locals>.new_type at 0x10b283a70>) -> <function NewType.<locals>.new_type at 0x10b283a70></span>
+<span>def <span class="ident">centrifugate_hints</span></span>(<span>source: <function NewType.<locals>.new_type at 0x11151da70>) -> <function NewType.<locals>.new_type at 0x11151da70></span>
 </code></dt>
 <dd>
 <div class="desc"><p>Transform the isolated hints into all-encompassing hints.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/2563d3b1da7935a202edce2df5f2e315072bbf2e/paroxython/preprocess_source.py#L140-L158" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L140-L158" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def centrifugate_hints(source: Source) -&gt; Source:
     &#34;&#34;&#34;Transform the isolated hints into all-encompassing hints.&#34;&#34;&#34;
@@ -254,7 +254,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/2563d3b1da7935a202edce2df5f2e315072bbf2e/paroxython/preprocess_source.py#L31-L35" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L31-L35" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def cleanup_factory(cleanup_strategy: str) -&gt; Callable[[Source], Source]:
     cleanup = lambda source: source
@@ -264,14 +264,14 @@ if __name__ == &#34;__main__&#34;:
 </details>
 </dd>
 <dt id="paroxython.preprocess_source.collect_hints"><code class="name flex">
-<span>def <span class="ident">collect_hints</span></span>(<span>source: <function NewType.<locals>.new_type at 0x10b283a70>) -> Tuple[Dict[LabelName, List[<a title="paroxython.user_types.Span" href="user_types.html#paroxython.user_types.Span">Span</a>]], Dict[LabelName, List[<a title="paroxython.user_types.Span" href="user_types.html#paroxython.user_types.Span">Span</a>]]]</span>
+<span>def <span class="ident">collect_hints</span></span>(<span>source: <function NewType.<locals>.new_type at 0x11151da70>) -> Tuple[Dict[LabelName, List[<a title="paroxython.user_types.Span" href="user_types.html#paroxython.user_types.Span">Span</a>]], Dict[LabelName, List[<a title="paroxython.user_types.Span" href="user_types.html#paroxython.user_types.Span">Span</a>]]]</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Schedule for addition or deletion the hints appearing in the comments.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/2563d3b1da7935a202edce2df5f2e315072bbf2e/paroxython/preprocess_source.py#L104-L134" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L104-L134" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def collect_hints(source: Source) -&gt; Tuple[LabelsSpans, LabelsSpans]:
     &#34;&#34;&#34;Schedule for addition or deletion the hints appearing in the comments.&#34;&#34;&#34;
@@ -307,14 +307,14 @@ if __name__ == &#34;__main__&#34;:
 </details>
 </dd>
 <dt id="paroxython.preprocess_source.full_cleaning"><code class="name flex">
-<span>def <span class="ident">full_cleaning</span></span>(<span>source: <function NewType.<locals>.new_type at 0x10b283a70>) -> <function NewType.<locals>.new_type at 0x10b283a70></span>
+<span>def <span class="ident">full_cleaning</span></span>(<span>source: <function NewType.<locals>.new_type at 0x11151da70>) -> <function NewType.<locals>.new_type at 0x11151da70></span>
 </code></dt>
 <dd>
 <div class="desc"></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/2563d3b1da7935a202edce2df5f2e315072bbf2e/paroxython/preprocess_source.py#L38-L65" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L38-L65" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def full_cleaning(source: Source) -&gt; Source:
     result = []
@@ -347,14 +347,14 @@ if __name__ == &#34;__main__&#34;:
 </details>
 </dd>
 <dt id="paroxython.preprocess_source.remove_hints"><code class="name flex">
-<span>def <span class="ident">remove_hints</span></span>(<span>source: <function NewType.<locals>.new_type at 0x10b283a70>) -> <function NewType.<locals>.new_type at 0x10b283a70></span>
+<span>def <span class="ident">remove_hints</span></span>(<span>source: <function NewType.<locals>.new_type at 0x11151da70>) -> <function NewType.<locals>.new_type at 0x11151da70></span>
 </code></dt>
 <dd>
 <div class="desc"></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/2563d3b1da7935a202edce2df5f2e315072bbf2e/paroxython/preprocess_source.py#L164-L165" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L164-L165" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def remove_hints(source: Source) -&gt; Source:
     return replace_hints(&#34;&#34;, source).strip()</code></pre>
@@ -374,7 +374,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/2563d3b1da7935a202edce2df5f2e315072bbf2e/paroxython/preprocess_source.py#L68-L98" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L68-L98" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class HintBuffer:
     &#34;&#34;&#34;Layer on the operations of appending, opening and closing an hint.&#34;&#34;&#34;
@@ -411,14 +411,14 @@ if __name__ == &#34;__main__&#34;:
 <h3>Methods</h3>
 <dl>
 <dt id="paroxython.preprocess_source.HintBuffer.append_hint"><code class="name flex">
-<span>def <span class="ident">append_hint</span></span>(<span>self, label_name: <function NewType.<locals>.new_type at 0x10b28d830>, line_number: int) -> NoneType</span>
+<span>def <span class="ident">append_hint</span></span>(<span>self, label_name: <function NewType.<locals>.new_type at 0x111527830>, line_number: int) -> NoneType</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Label a span consisting in the given line number.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/2563d3b1da7935a202edce2df5f2e315072bbf2e/paroxython/preprocess_source.py#L76-L78" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L76-L78" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def append_hint(self, label_name: LabelName, line_number: int) -&gt; None:
     &#34;&#34;&#34;Label a span consisting in the given line number.&#34;&#34;&#34;
@@ -426,14 +426,14 @@ if __name__ == &#34;__main__&#34;:
 </details>
 </dd>
 <dt id="paroxython.preprocess_source.HintBuffer.close_hint"><code class="name flex">
-<span>def <span class="ident">close_hint</span></span>(<span>self, label_name: <function NewType.<locals>.new_type at 0x10b28d830>, line_number: int) -> NoneType</span>
+<span>def <span class="ident">close_hint</span></span>(<span>self, label_name: <function NewType.<locals>.new_type at 0x111527830>, line_number: int) -> NoneType</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Label a span opened above and closed on the given line number.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/2563d3b1da7935a202edce2df5f2e315072bbf2e/paroxython/preprocess_source.py#L87-L89" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L87-L89" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def close_hint(self, label_name: LabelName, line_number: int) -&gt; None:
     &#34;&#34;&#34;Label a span opened above and closed on the given line number.&#34;&#34;&#34;
@@ -448,7 +448,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/2563d3b1da7935a202edce2df5f2e315072bbf2e/paroxython/preprocess_source.py#L91-L94" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L91-L94" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def ensure_stack_is_empty(self) -&gt; None:
     &#34;&#34;&#34;Raise an error iff there remains at least one open label.&#34;&#34;&#34;
@@ -457,14 +457,14 @@ if __name__ == &#34;__main__&#34;:
 </details>
 </dd>
 <dt id="paroxython.preprocess_source.HintBuffer.get_champion"><code class="name flex">
-<span>def <span class="ident">get_champion</span></span>(<span>self, label_name: <function NewType.<locals>.new_type at 0x10b28d830>) -> List[Tuple[int, <a title="paroxython.preprocess_source.HintBuffer" href="#paroxython.preprocess_source.HintBuffer">HintBuffer</a>]]</span>
+<span>def <span class="ident">get_champion</span></span>(<span>self, label_name: <function NewType.<locals>.new_type at 0x111527830>) -> List[Tuple[int, <a title="paroxython.preprocess_source.HintBuffer" href="#paroxython.preprocess_source.HintBuffer">HintBuffer</a>]]</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Return the last line number (if any) of the opening label, plus itself.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/2563d3b1da7935a202edce2df5f2e315072bbf2e/paroxython/preprocess_source.py#L83-L85" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L83-L85" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def get_champion(self, label_name: LabelName) -&gt; List[Tuple[int, &#34;HintBuffer&#34;]]:
     &#34;&#34;&#34;Return the last line number (if any) of the opening label, plus itself.&#34;&#34;&#34;
@@ -479,7 +479,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/2563d3b1da7935a202edce2df5f2e315072bbf2e/paroxython/preprocess_source.py#L96-L98" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L96-L98" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def get_result(self) -&gt; LabelsSpans:
     &#34;&#34;&#34;Return the result with sorted spans.&#34;&#34;&#34;
@@ -487,14 +487,14 @@ if __name__ == &#34;__main__&#34;:
 </details>
 </dd>
 <dt id="paroxython.preprocess_source.HintBuffer.open_hint"><code class="name flex">
-<span>def <span class="ident">open_hint</span></span>(<span>self, label_name: <function NewType.<locals>.new_type at 0x10b28d830>, line_number: int) -> NoneType</span>
+<span>def <span class="ident">open_hint</span></span>(<span>self, label_name: <function NewType.<locals>.new_type at 0x111527830>, line_number: int) -> NoneType</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/2563d3b1da7935a202edce2df5f2e315072bbf2e/paroxython/preprocess_source.py#L80-L81" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L80-L81" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def open_hint(self, label_name: LabelName, line_number: int) -&gt; None:
     self.stack[label_name].append(line_number)</code></pre>
@@ -507,8 +507,8 @@ if __name__ == &#34;__main__&#34;:
 </article>
 <nav id="sidebar">
 <header>
-<a class="homelink" rel="home" title="Paroxython Home" href="../../docs/">
-<img src="https://github.com/laowantong/paroxython/blob/master/docs/logo.png?raw=true" alt="Paroxython logo">
+<a class="homelink" rel="home" title="Paroxython Home" href="index.html">
+<img src="logo.png" alt="Paroxython logo">
 </a>
 </header>
 <div class="gcse-search" style="height: 70px"

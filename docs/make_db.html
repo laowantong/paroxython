@@ -29,7 +29,7 @@
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/2563d3b1da7935a202edce2df5f2e315072bbf2e/paroxython/make_db.py#L0-L268" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L0-L268" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">import json
 import sqlite3
@@ -317,7 +317,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/2563d3b1da7935a202edce2df5f2e315072bbf2e/paroxython/make_db.py#L247-L252" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L247-L252" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def collect_exportations(exportations: ProgramToPrograms) -&gt; ProgramToPrograms:
     &#34;&#34;&#34;Iterate through the exportations to collect them.&#34;&#34;&#34;
@@ -335,7 +335,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/2563d3b1da7935a202edce2df5f2e315072bbf2e/paroxython/make_db.py#L186-L192" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L186-L192" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def collect_labels(programs: Programs) -&gt; LabelInfos:
     &#34;&#34;&#34;Iterate through programs to collect all their labels.&#34;&#34;&#34;
@@ -354,7 +354,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/2563d3b1da7935a202edce2df5f2e315072bbf2e/paroxython/make_db.py#L202-L208" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L202-L208" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def collect_taxons(programs: Programs) -&gt; TaxonInfos:
     &#34;&#34;&#34;Iterate through programs to collect all their taxons.&#34;&#34;&#34;
@@ -373,7 +373,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/2563d3b1da7935a202edce2df5f2e315072bbf2e/paroxython/make_db.py#L222-L235" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L222-L235" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def complete_and_collect_importations(importations: ProgramToPrograms) -&gt; ProgramToPrograms:
     &#34;&#34;&#34;Complete the direct internal imports with indirect ones.&#34;&#34;&#34;
@@ -399,7 +399,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/2563d3b1da7935a202edce2df5f2e315072bbf2e/paroxython/make_db.py#L211-L219" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L211-L219" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def compute_direct_importations(programs) -&gt; ProgramToPrograms:
     &#34;&#34;&#34;Associate each program to the set of its direct internal imports.&#34;&#34;&#34;
@@ -420,7 +420,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/2563d3b1da7935a202edce2df5f2e315072bbf2e/paroxython/make_db.py#L238-L244" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L238-L244" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def compute_exportations(programs: Programs, importations: ProgramToPrograms) -&gt; ProgramToPrograms:
     &#34;&#34;&#34;Invert `importations` to construct `exportations`.&#34;&#34;&#34;
@@ -439,7 +439,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/2563d3b1da7935a202edce2df5f2e315072bbf2e/paroxython/make_db.py#L195-L199" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L195-L199" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def map_labels_on_taxons(programs: Programs, taxonomy: Taxonomy) -&gt; None:
     &#34;&#34;&#34;Translate labels into taxons on a list of program names.&#34;&#34;&#34;
@@ -456,7 +456,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/2563d3b1da7935a202edce2df5f2e315072bbf2e/paroxython/make_db.py#L177-L182" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L177-L182" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def prepared(tags):
     &#34;&#34;&#34;Prepare the spans for serialization.&#34;&#34;&#34;
@@ -480,7 +480,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/2563d3b1da7935a202edce2df5f2e315072bbf2e/paroxython/make_db.py#L29-L167" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L29-L167" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class Database:
     def __init__(self, directory: Path, ignore_timestamps=False, *args, **kwargs) -&gt; None:
@@ -632,7 +632,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/2563d3b1da7935a202edce2df5f2e315072bbf2e/paroxython/make_db.py#L64-L75" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L64-L75" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def get_json(self) -&gt; str:
     &#34;&#34;&#34;Dump the data to JSON, reduce each list of spans to one line.&#34;&#34;&#34;
@@ -656,7 +656,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/2563d3b1da7935a202edce2df5f2e315072bbf2e/paroxython/make_db.py#L77-L80" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L77-L80" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def write_json(self, db_path: Optional[Path] = None) -&gt; None:
     db_path = db_path or self.default_json_db_path
@@ -672,7 +672,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/2563d3b1da7935a202edce2df5f2e315072bbf2e/paroxython/make_db.py#L82-L167" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L82-L167" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def write_sqlite(self, db_path: Optional[Path] = None) -&gt; None:
     db_path = db_path or self.default_sqlite_db_path
@@ -769,8 +769,8 @@ if __name__ == &#34;__main__&#34;:
 </article>
 <nav id="sidebar">
 <header>
-<a class="homelink" rel="home" title="Paroxython Home" href="../../docs/">
-<img src="https://github.com/laowantong/paroxython/blob/master/docs/logo.png?raw=true" alt="Paroxython logo">
+<a class="homelink" rel="home" title="Paroxython Home" href="index.html">
+<img src="logo.png" alt="Paroxython logo">
 </a>
 </header>
 <div class="gcse-search" style="height: 70px"

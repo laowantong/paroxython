@@ -29,7 +29,7 @@
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/2563d3b1da7935a202edce2df5f2e315072bbf2e/paroxython/filter_programs.py#L0-L237" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L0-L237" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">import sys
 from itertools import product
@@ -292,7 +292,7 @@ them) can only shrink, and the imparted knowledge (initially empty) can only inc
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/2563d3b1da7935a202edce2df5f2e315072bbf2e/paroxython/filter_programs.py#L25-L238" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L25-L238" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class ProgramFilter:
     &#34;&#34;&#34;Evolve a set of selected programs and a set of imparted knowledge.&#34;&#34;&#34;
@@ -512,14 +512,14 @@ them) can only shrink, and the imparted knowledge (initially empty) can only inc
 <h3>Static methods</h3>
 <dl>
 <dt id="paroxython.filter_programs.ProgramFilter.normalized_triple"><code class="name flex">
-<span>def <span class="ident">normalized_triple</span></span>(<span>predicate: str, name_1: <function NewType.<locals>.new_type at 0x10b283b00>, name_2: <function NewType.<locals>.new_type at 0x10b283b00>) -> <a title="paroxython.user_types.TaxonTriple" href="user_types.html#paroxython.user_types.TaxonTriple">TaxonTriple</a></span>
+<span>def <span class="ident">normalized_triple</span></span>(<span>predicate: str, name_1: <function NewType.<locals>.new_type at 0x11151db00>, name_2: <function NewType.<locals>.new_type at 0x11151db00>) -> <a title="paroxython.user_types.TaxonTriple" href="user_types.html#paroxython.user_types.TaxonTriple">TaxonTriple</a></span>
 </code></dt>
 <dd>
 <div class="desc"><p>Ensure that the given predicate is correct or can be salvaged, and return a triple.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/2563d3b1da7935a202edce2df5f2e315072bbf2e/paroxython/filter_programs.py#L66-L82" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L66-L82" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@staticmethod
 def normalized_triple(predicate: str, name_1: TaxonName, name_2: TaxonName) -&gt; TaxonTriple:
@@ -551,7 +551,7 @@ def normalized_triple(predicate: str, name_1: TaxonName, name_2: TaxonName) -&gt
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/2563d3b1da7935a202edce2df5f2e315072bbf2e/paroxython/filter_programs.py#L148-L154" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L148-L154" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def exclude_programs(self, programs: ProgramNameSet) -&gt; None:
     &#34;&#34;&#34;Deselect the programs found among the given ones or imported by them.&#34;&#34;&#34;
@@ -570,7 +570,7 @@ def normalized_triple(predicate: str, name_1: TaxonName, name_2: TaxonName) -&gt
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/2563d3b1da7935a202edce2df5f2e315072bbf2e/paroxython/filter_programs.py#L227-L231" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L227-L231" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def exclude_taxons(self, taxons: TaxonNamesOrTriples) -&gt; None:
     &#34;&#34;&#34;Deselect the programs featuring (directly or not) at least one given taxon.&#34;&#34;&#34;
@@ -589,7 +589,7 @@ def normalized_triple(predicate: str, name_1: TaxonName, name_2: TaxonName) -&gt
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/2563d3b1da7935a202edce2df5f2e315072bbf2e/paroxython/filter_programs.py#L136-L146" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L136-L146" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def impart_programs(self, programs: ProgramNameSet) -&gt; None:
     &#34;&#34;&#34;Deselect the programs found in the given ones.
@@ -605,14 +605,14 @@ def normalized_triple(predicate: str, name_1: TaxonName, name_2: TaxonName) -&gt
 </details>
 </dd>
 <dt id="paroxython.filter_programs.ProgramFilter.impart_taxon_name"><code class="name flex">
-<span>def <span class="ident">impart_taxon_name</span></span>(<span>self, taxon: <function NewType.<locals>.new_type at 0x10b283b00>) -> NoneType</span>
+<span>def <span class="ident">impart_taxon_name</span></span>(<span>self, taxon: <function NewType.<locals>.new_type at 0x11151db00>) -> NoneType</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Enrich the imparted knowledge with all the prefixes of the given taxon.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/2563d3b1da7935a202edce2df5f2e315072bbf2e/paroxython/filter_programs.py#L210-L215" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L210-L215" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def impart_taxon_name(self, taxon: TaxonName) -&gt; None:
     &#34;&#34;&#34;Enrich the imparted knowledge with all the prefixes of the given taxon.&#34;&#34;&#34;
@@ -630,7 +630,7 @@ def normalized_triple(predicate: str, name_1: TaxonName, name_2: TaxonName) -&gt
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/2563d3b1da7935a202edce2df5f2e315072bbf2e/paroxython/filter_programs.py#L217-L225" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L217-L225" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def impart_taxons(self, taxons: TaxonNamesOrTriples) -&gt; None:
     &#34;&#34;&#34;Enrich the imparted knowledge with all the prefixes of the given taxons.&#34;&#34;&#34;
@@ -651,7 +651,7 @@ def normalized_triple(predicate: str, name_1: TaxonName, name_2: TaxonName) -&gt
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/2563d3b1da7935a202edce2df5f2e315072bbf2e/paroxython/filter_programs.py#L156-L164" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L156-L164" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def include_programs(self, programs: ProgramNameSet) -&gt; None:
     &#34;&#34;&#34;Deselect the programs neither found among the given ones or those they import.&#34;&#34;&#34;
@@ -672,7 +672,7 @@ def normalized_triple(predicate: str, name_1: TaxonName, name_2: TaxonName) -&gt
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/2563d3b1da7935a202edce2df5f2e315072bbf2e/paroxython/filter_programs.py#L233-L238" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L233-L238" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def include_taxons(self, taxons: TaxonNamesOrTriples) -&gt; None:
     &#34;&#34;&#34;Deselect the programs not featuring any given taxon.&#34;&#34;&#34;
@@ -690,7 +690,7 @@ def normalized_triple(predicate: str, name_1: TaxonName, name_2: TaxonName) -&gt
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/2563d3b1da7935a202edce2df5f2e315072bbf2e/paroxython/filter_programs.py#L110-L124" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L110-L124" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def match_against_existing_programs(self, pattern: str) -&gt; ProgramNameSet:
     &#34;&#34;&#34;Enumerate all the existing programs matching the given pattern.&#34;&#34;&#34;
@@ -717,7 +717,7 @@ def normalized_triple(predicate: str, name_1: TaxonName, name_2: TaxonName) -&gt
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/2563d3b1da7935a202edce2df5f2e315072bbf2e/paroxython/filter_programs.py#L168-L182" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L168-L182" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def match_against_existing_taxons(self, pattern: str) -&gt; TaxonNameSet:
     &#34;&#34;&#34;Enumerate all the existing taxons matching the given pattern.&#34;&#34;&#34;
@@ -744,7 +744,7 @@ def normalized_triple(predicate: str, name_1: TaxonName, name_2: TaxonName) -&gt
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/2563d3b1da7935a202edce2df5f2e315072bbf2e/paroxython/filter_programs.py#L126-L134" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L126-L134" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def preprocess_programs(self, programs: ProgramNames) -&gt; ProgramNames:
     &#34;&#34;&#34;Return all the program names matching at least one of the given regex patterns.&#34;&#34;&#34;
@@ -765,7 +765,7 @@ def normalized_triple(predicate: str, name_1: TaxonName, name_2: TaxonName) -&gt
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/2563d3b1da7935a202edce2df5f2e315072bbf2e/paroxython/filter_programs.py#L184-L208" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L184-L208" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def preprocess_taxons(self, taxons: TaxonNamesOrTriples) -&gt; TaxonNamesOrTriples:
     &#34;&#34;&#34;Parse the taxons and the triples and try to match them with existing taxon names.&#34;&#34;&#34;
@@ -802,7 +802,7 @@ def normalized_triple(predicate: str, name_1: TaxonName, name_2: TaxonName) -&gt
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/2563d3b1da7935a202edce2df5f2e315072bbf2e/paroxython/filter_programs.py#L84-L89" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L84-L89" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def programs_of_taxon(self, taxon: TaxonNameOrTriple) -&gt; ProgramNameSet:
     &#34;&#34;&#34;Dispatch computation to the appropriate method, depending of the actual taxon type.&#34;&#34;&#34;
@@ -820,7 +820,7 @@ def normalized_triple(predicate: str, name_1: TaxonName, name_2: TaxonName) -&gt
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/2563d3b1da7935a202edce2df5f2e315072bbf2e/paroxython/filter_programs.py#L91-L106" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L91-L106" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def programs_of_taxon_triple(self, taxon: TaxonTriple) -&gt; ProgramNameSet:
     &#34;&#34;&#34;Return the programs where two given taxons satisfy a given predicate.&#34;&#34;&#34;
@@ -848,7 +848,7 @@ def normalized_triple(predicate: str, name_1: TaxonName, name_2: TaxonName) -&gt
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/2563d3b1da7935a202edce2df5f2e315072bbf2e/paroxython/filter_programs.py#L58-L64" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L58-L64" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def programs_of_taxons(self, taxons: TaxonNamesOrTriples, follow: bool) -&gt; ProgramNameSet:
     &#34;&#34;&#34;Return the programs featuring (optionally by importation) any given taxon.&#34;&#34;&#34;
@@ -867,7 +867,7 @@ def normalized_triple(predicate: str, name_1: TaxonName, name_2: TaxonName) -&gt
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/2563d3b1da7935a202edce2df5f2e315072bbf2e/paroxython/filter_programs.py#L50-L56" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L50-L56" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def taxons_of_programs(self, programs: ProgramNameSet) -&gt; TaxonNameSet:
     &#34;&#34;&#34;Return the taxon names featured (directly or not) by the given programs.&#34;&#34;&#34;
@@ -885,8 +885,8 @@ def normalized_triple(predicate: str, name_1: TaxonName, name_2: TaxonName) -&gt
 </article>
 <nav id="sidebar">
 <header>
-<a class="homelink" rel="home" title="Paroxython Home" href="../../docs/">
-<img src="https://github.com/laowantong/paroxython/blob/master/docs/logo.png?raw=true" alt="Paroxython logo">
+<a class="homelink" rel="home" title="Paroxython Home" href="index.html">
+<img src="logo.png" alt="Paroxython logo">
 </a>
 </header>
 <div class="gcse-search" style="height: 70px"
