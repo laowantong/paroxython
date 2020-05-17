@@ -12,9 +12,7 @@
 
 ![](docs/logo.png)
 
-# Presentation
-
-Paroxython is an open-source tool which automatically finds and tags algorithmic features (such as assignments, nested loops, tail-recursive functions, etc.) in a collection of small Python programs, typically gathered for educational purposes (e.g., examples, patterns, exercise corrections).
+Paroxython is a command-line tool which finds and tags algorithmic features (such as assignments, nested loops, tail-recursive functions, etc.) in a collection of small Python programs, typically gathered for educational purposes (e.g., examples, patterns, exercise corrections).
 
 Each tag consists in a free-form label associated with its spanning lines. These labels are then mapped onto a knowledge taxonomy designed by the teacher with basic order constraints in mind (e.g., the fact that the introduction of the concept of early exit must come after that of loop, which itself requires that of control flow, is expressed with the following taxon: flow/loop/exit/early).
 
@@ -26,28 +24,34 @@ Source-codes, labels and taxons are stored in a database, which can finally be f
 pip install paroxython
 ```
 
-## Test-drive
+# Test-drive
 
-### Terminal
+## Terminal
 ```
 paroxython --help
 ```
 
-### Jupyter notebook
+## Jupyter notebook
+
+Load the magic command:
 
 ```
 %load_ext paroxython
 ```
+
+Run it on a cell of Python code:
 
 ```
 %%paroxython
 print("Hello World!")
 ```
 
+Output:
+
 | Taxon | Lines |
 |:--|:--|
-| io/standard/print | 1 |
-| type/elementary/string | 1 |
+| io/standard/print | 2 |
+| type/elementary/string | 2 |
 
 
 # Documentation

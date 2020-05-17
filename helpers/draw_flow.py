@@ -14,16 +14,21 @@ base = "docs/flow"
 find_all = regex.compile(fr"(?m)^from \.({'|'.join(names)}) import").findall
 
 Path(f"{base}.dot").write_text(
-    "digraph G {\nnode [shape=box fontname=Courier style=filled fillcolor=cornsilk]\n%s\n}\n"
+    """digraph G {
+        node [shape=box fontname=Menlo fontsize=16 style="rounded,filled" textcolor="#646464" fillcolor="#F5CA41" color="#B38D01" penwidth=2]
+        edge [penwidth=2 color="#646464"]
+        %s
+    }
+    """
     % "\n".join(
         [
-            '"*_db.json" [shape=cylinder fillcolor=moccasin]',
-            '"*_db.sqlite" [shape=cylinder fillcolor=moccasin]',
-            '"spec.md" [shape=note fillcolor=moccasin]',
-            '"*_pipe.py" [shape=note fillcolor=moccasin]',
-            '"taxonomy.tsv" [shape=note fillcolor=moccasin]',
-            '"source files" [shape=folder fillcolor=moccasin]',
-            # '"sqlite_queries" [shape=folder fillcolor=moccasin]',
+            '"*_db.json" [shape=cylinder fillcolor="#CCCCCC" color="#646464" penwidth=1]',
+            '"*_db.sqlite" [shape=cylinder fillcolor="#CCCCCC" color="#646464" penwidth=1]',
+            '"spec.md" [shape=note fillcolor="#CCCCCC" color="#646464" penwidth=1]',
+            '"*_pipe.py" [shape=note fillcolor="#CCCCCC" color="#646464" penwidth=1]',
+            '"taxonomy.tsv" [shape=note fillcolor="#CCCCCC" color="#646464" penwidth=1]',
+            '"source files" [shape=folder fillcolor="#CCCCCC" color="#646464" penwidth=1]',
+            # '"sqlite_queries" [shape=folder fillcolor="#CCCCCC" color="#646464" penwidth=1]',
             'make_db -> "*_db.json"',
             'make_db -> "*_db.sqlite"',
             # '"*_db.sqlite" -> sqlite_queries',
@@ -35,7 +40,6 @@ Path(f"{base}.dot").write_text(
             # Add invisible edges to make the layout more compact
             # "sqlite_queries -> recommend_programs  [style=invis]",
             '"*_db.sqlite" -> "*_pipe.py"  [style=invis]',
-            'list_programs -> "*_db.json"  [style=invis]',
             "compare_spans -> assess_costs  [style=invis]",
         ]
         + [

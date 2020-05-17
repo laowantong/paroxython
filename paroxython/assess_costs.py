@@ -41,8 +41,9 @@ def range_to_cost_zeno(start: int, stop: int) -> float:
 
     <center><a title="Jim.belk / Public domain" href="https://commons.wikimedia.org/wiki/File:Geometric_Segment.svg"><img width="256" alt="Geometric Segment" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Geometric_Segment.svg/256px-Geometric_Segment.svg.png"></a></center>
 
-    **Example.** If `flow/loop` is already imparted, the learning cost of
-    `flow/loop/exit/early/break` will be:
+    Example:
+        If `flow/loop` is already imparted, the learning cost of `flow/loop/exit/early/break` will
+        be:
 
     >>> range_to_cost_zeno(2, 5)
     0.21875

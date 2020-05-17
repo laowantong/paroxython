@@ -1,5 +1,13 @@
 """
 .. include:: ../README.md
+   :start-after: ![](docs/logo.png)
+   :end-before: # Documentation
+
+<br>
+
+# How it works
+
+.. image:: flow.png
 """
 
 
