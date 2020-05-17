@@ -234,7 +234,7 @@ if __name__ == &#34;__main__&#34;:
 <dl>
 <dt id="paroxython.recommend_programs.Recommendations"><code class="flex name class">
 <span>class <span class="ident">Recommendations</span></span>
-<span>(</span><span>db: <a title="paroxython.user_types.JsonDatabase" href="user_types.html#paroxython.user_types.JsonDatabase">JsonDatabase</a>, commands: Union[List[paroxython.user_types.Command], NoneType] = None, base_path: Union[pathlib.Path, NoneType] = None, cost_assessment_strategy: typing_extensions.Literal['zeno', 'linear'] = 'zeno')</span>
+<span>(</span><span>db: JsonDatabase, commands: Union[List[Command], NoneType] = None, base_path: Union[pathlib.Path, NoneType] = None, cost_assessment_strategy: Literal['zeno', 'linear'] = 'zeno')</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
@@ -403,7 +403,7 @@ if __name__ == &#34;__main__&#34;:
 <h3>Methods</h3>
 <dl>
 <dt id="paroxython.recommend_programs.Recommendations.get_markdown"><code class="name flex">
-<span>def <span class="ident">get_markdown</span></span>(<span>self, span_column_width=30, sorting_strategy='by_cost_and_sloc', grouping_strategy='by_cost_bucket') -> str</span>
+<span>def <span class="ident">get_markdown</span></span>(<span>self, span_column_width=30, sorting_strategy='by_cost_and_sloc', grouping_strategy='by_cost_bucket') ‑> str</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Reiterate on the commands, now populated by the results, and output them.</p></div>
@@ -506,7 +506,7 @@ if __name__ == &#34;__main__&#34;:
 </details>
 </dd>
 <dt id="paroxython.recommend_programs.Recommendations.run_pipeline"><code class="name flex">
-<span>def <span class="ident">run_pipeline</span></span>(<span>self) -> NoneType</span>
+<span>def <span class="ident">run_pipeline</span></span>(<span>self) ‑> NoneType</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Evolve recommended programs, imparted knowledge and log accross pipeline commands.</p></div>

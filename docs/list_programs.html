@@ -29,7 +29,7 @@
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/list_programs.py#L0-L76" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/list_programs.py#L0-L77" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">from pathlib import Path
 from typing import Iterator
@@ -67,9 +67,10 @@ def get_program(source: Source, relative_path: Path = None) -&gt; Program:
     &#34;&#34;&#34;Construct a `Program` of its `Source` and relative `Path`.
 
     The result consists in:
-    - the program `Path`, empty or relative to the directory passed to list_programs()
-    - its centrifugated `Source`,
-    - the hints scheduled for addition or deletion.
+
+    - the program `Path`, empty or relative to the directory passed to `list_programs()`;
+    - its centrifugated `Source`;
+    - the hints scheduled for addition or deletion;
     - its `labels`, currently empty, to be later populated by label_programs.py.
     &#34;&#34;&#34;
     source = centrifugate_hints(source)
@@ -118,7 +119,7 @@ if __name__ == &#34;__main__&#34;:
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
 <dt id="paroxython.list_programs.generate_program_paths"><code class="name flex">
-<span>def <span class="ident">generate_program_paths</span></span>(<span>directory: pathlib.Path, glob_pattern: str = '', exclude_pattern: str = '', *args, **kwargs) -> Iterator[pathlib.Path]</span>
+<span>def <span class="ident">generate_program_paths</span></span>(<span>directory: pathlib.Path, glob_pattern: str = '', exclude_pattern: str = '', *args, **kwargs) ‑> Iterator[pathlib.Path]</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Generate recursively the paths of all Python files of a given directory.</p></div>
@@ -140,27 +141,30 @@ if __name__ == &#34;__main__&#34;:
 </details>
 </dd>
 <dt id="paroxython.list_programs.get_program"><code class="name flex">
-<span>def <span class="ident">get_program</span></span>(<span>source: <function NewType.<locals>.new_type at 0x10eff7a70>, relative_path: pathlib.Path = None) -> <a title="paroxython.user_types.Program" href="user_types.html#paroxython.user_types.Program">Program</a></span>
+<span>def <span class="ident">get_program</span></span>(<span>source: Source, relative_path: pathlib.Path = None) ‑> Program</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Construct a <code>Program</code> of its <code>Source</code> and relative <code>Path</code>.</p>
-<p>The result consists in:
-- the program <code>Path</code>, empty or relative to the directory passed to list_programs()
-- its centrifugated <code>Source</code>,
-- the hints scheduled for addition or deletion.
-- its <code>labels</code>, currently empty, to be later populated by label_programs.py.</p></div>
+<p>The result consists in:</p>
+<ul>
+<li>the program <code>Path</code>, empty or relative to the directory passed to <code><a title="paroxython.list_programs.list_programs" href="#paroxython.list_programs.list_programs">list_programs()</a></code>;</li>
+<li>its centrifugated <code>Source</code>;</li>
+<li>the hints scheduled for addition or deletion;</li>
+<li>its <code>labels</code>, currently empty, to be later populated by label_programs.py.</li>
+</ul></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/list_programs.py#L33-L52" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/list_programs.py#L33-L53" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def get_program(source: Source, relative_path: Path = None) -&gt; Program:
     &#34;&#34;&#34;Construct a `Program` of its `Source` and relative `Path`.
 
     The result consists in:
-    - the program `Path`, empty or relative to the directory passed to list_programs()
-    - its centrifugated `Source`,
-    - the hints scheduled for addition or deletion.
+
+    - the program `Path`, empty or relative to the directory passed to `list_programs()`;
+    - its centrifugated `Source`;
+    - the hints scheduled for addition or deletion;
     - its `labels`, currently empty, to be later populated by label_programs.py.
     &#34;&#34;&#34;
     source = centrifugate_hints(source)
@@ -177,14 +181,14 @@ if __name__ == &#34;__main__&#34;:
 </details>
 </dd>
 <dt id="paroxython.list_programs.iterate_and_print_programs"><code class="name flex">
-<span>def <span class="ident">iterate_and_print_programs</span></span>(<span>programs: List[<a title="paroxython.user_types.Program" href="user_types.html#paroxython.user_types.Program">Program</a>]) -> Iterator[<a title="paroxython.user_types.Program" href="user_types.html#paroxython.user_types.Program">Program</a>]</span>
+<span>def <span class="ident">iterate_and_print_programs</span></span>(<span>programs: List[Program]) ‑> Iterator[Program]</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Wrap the iteration of programs into a logger.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/list_programs.py#L55-L63" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/list_programs.py#L56-L64" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def iterate_and_print_programs(programs: Programs) -&gt; Iterator[Program]:
     &#34;&#34;&#34;Wrap the iteration of programs into a logger.&#34;&#34;&#34;
@@ -198,7 +202,7 @@ if __name__ == &#34;__main__&#34;:
 </details>
 </dd>
 <dt id="paroxython.list_programs.list_programs"><code class="name flex">
-<span>def <span class="ident">list_programs</span></span>(<span>directory: pathlib.Path, cleanup_strategy: str = 'full', *args, **kwargs) -> List[<a title="paroxython.user_types.Program" href="user_types.html#paroxython.user_types.Program">Program</a>]</span>
+<span>def <span class="ident">list_programs</span></span>(<span>directory: pathlib.Path, cleanup_strategy: str = 'full', *args, **kwargs) ‑> List[Program]</span>
 </code></dt>
 <dd>
 <div class="desc"><p>List recursively all Python <code>Programs</code> of a given directory.</p></div>

@@ -137,7 +137,7 @@ def couple_to_string(couple: Union[Span, Tuple[int, int]]) -&gt; str:
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
 <dt id="paroxython.goodies.add_line_numbers"><code class="name flex">
-<span>def <span class="ident">add_line_numbers</span></span>(<span>source: str) -> str</span>
+<span>def <span class="ident">add_line_numbers</span></span>(<span>source: str) ‑> str</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Return a numbered version of the given source-code. Result readable up to 999 lines.</p></div>
@@ -152,7 +152,7 @@ def couple_to_string(couple: Union[Span, Tuple[int, int]]) -&gt; str:
 </details>
 </dd>
 <dt id="paroxython.goodies.cost_bucket"><code class="name flex">
-<span>def <span class="ident">cost_bucket</span></span>(<span>cost: int) -> str</span>
+<span>def <span class="ident">cost_bucket</span></span>(<span>cost: int) ‑> str</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Among a predetermined set of intervals, return that including the given positive number.</p>
@@ -191,7 +191,7 @@ recommendation report.</p>
 </details>
 </dd>
 <dt id="paroxython.goodies.couple_to_string"><code class="name flex">
-<span>def <span class="ident">couple_to_string</span></span>(<span>couple: Union[paroxython.user_types.Span, Tuple[int, int]]) -> str</span>
+<span>def <span class="ident">couple_to_string</span></span>(<span>couple: Union[Span, Tuple[int, int]]) ‑> str</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Return a deduplicated string representation of the given couple or span.</p>
@@ -222,7 +222,7 @@ recommendation report.</p>
 </dd>
 <dt id="paroxython.goodies.enumeration_to_txt_factory"><code class="name flex">
 <span>def <span class="ident">enumeration_to_txt_factory</span></span>(<span>width: int = 20, default_string: str = '', sep: str = &#x27;&lt;br&gt;&#x27;, template: str = &#x27;&lt;details&gt;&lt;summary&gt;{summary}&lt;/summary&gt;{details}&lt;/details&gt;&#x27;, initial_indent: str = '
-') -> Callable[[str], str]</span>
+') ‑> Callable[[str], str]</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Return a function formatting an enumeration string on a given column width.</p></div>

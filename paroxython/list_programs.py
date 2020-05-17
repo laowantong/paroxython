@@ -34,9 +34,10 @@ def get_program(source: Source, relative_path: Path = None) -> Program:
     """Construct a `Program` of its `Source` and relative `Path`.
 
     The result consists in:
-    - the program `Path`, empty or relative to the directory passed to list_programs()
-    - its centrifugated `Source`,
-    - the hints scheduled for addition or deletion.
+
+    - the program `Path`, empty or relative to the directory passed to `list_programs()`;
+    - its centrifugated `Source`;
+    - the hints scheduled for addition or deletion;
     - its `labels`, currently empty, to be later populated by label_programs.py.
     """
     source = centrifugate_hints(source)

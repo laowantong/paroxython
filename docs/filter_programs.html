@@ -282,7 +282,7 @@ class ProgramFilter:
 <dl>
 <dt id="paroxython.filter_programs.ProgramFilter"><code class="flex name class">
 <span>class <span class="ident">ProgramFilter</span></span>
-<span>(</span><span>db: <a title="paroxython.user_types.JsonDatabase" href="user_types.html#paroxython.user_types.JsonDatabase">JsonDatabase</a>)</span>
+<span>(</span><span>db: JsonDatabase)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Evolve a set of selected programs and a set of imparted knowledge.</p>
@@ -512,7 +512,7 @@ them) can only shrink, and the imparted knowledge (initially empty) can only inc
 <h3>Static methods</h3>
 <dl>
 <dt id="paroxython.filter_programs.ProgramFilter.normalized_triple"><code class="name flex">
-<span>def <span class="ident">normalized_triple</span></span>(<span>predicate: str, name_1: <function NewType.<locals>.new_type at 0x10eff7b00>, name_2: <function NewType.<locals>.new_type at 0x10eff7b00>) -> <a title="paroxython.user_types.TaxonTriple" href="user_types.html#paroxython.user_types.TaxonTriple">TaxonTriple</a></span>
+<span>def <span class="ident">normalized_triple</span></span>(<span>predicate: str, name_1: TaxonName, name_2: TaxonName) ‑> TaxonTriple</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Ensure that the given predicate is correct or can be salvaged, and return a triple.</p></div>
@@ -544,7 +544,7 @@ def normalized_triple(predicate: str, name_1: TaxonName, name_2: TaxonName) -&gt
 <h3>Methods</h3>
 <dl>
 <dt id="paroxython.filter_programs.ProgramFilter.exclude_programs"><code class="name flex">
-<span>def <span class="ident">exclude_programs</span></span>(<span>self, programs: Set[ProgramName]) -> NoneType</span>
+<span>def <span class="ident">exclude_programs</span></span>(<span>self, programs: Set[ProgramName]) ‑> NoneType</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Deselect the programs found among the given ones or imported by them.</p></div>
@@ -563,7 +563,7 @@ def normalized_triple(predicate: str, name_1: TaxonName, name_2: TaxonName) -&gt
 </details>
 </dd>
 <dt id="paroxython.filter_programs.ProgramFilter.exclude_taxons"><code class="name flex">
-<span>def <span class="ident">exclude_taxons</span></span>(<span>self, taxons: List[Union[TaxonName, paroxython.user_types.TaxonTriple]]) -> NoneType</span>
+<span>def <span class="ident">exclude_taxons</span></span>(<span>self, taxons: List[Union[TaxonName, TaxonTriple]]) ‑> NoneType</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Deselect the programs featuring (directly or not) at least one given taxon.</p></div>
@@ -580,7 +580,7 @@ def normalized_triple(predicate: str, name_1: TaxonName, name_2: TaxonName) -&gt
 </details>
 </dd>
 <dt id="paroxython.filter_programs.ProgramFilter.impart_programs"><code class="name flex">
-<span>def <span class="ident">impart_programs</span></span>(<span>self, programs: Set[ProgramName]) -> NoneType</span>
+<span>def <span class="ident">impart_programs</span></span>(<span>self, programs: Set[ProgramName]) ‑> NoneType</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Deselect the programs found in the given ones.</p>
@@ -605,7 +605,7 @@ def normalized_triple(predicate: str, name_1: TaxonName, name_2: TaxonName) -&gt
 </details>
 </dd>
 <dt id="paroxython.filter_programs.ProgramFilter.impart_taxon_name"><code class="name flex">
-<span>def <span class="ident">impart_taxon_name</span></span>(<span>self, taxon: <function NewType.<locals>.new_type at 0x10eff7b00>) -> NoneType</span>
+<span>def <span class="ident">impart_taxon_name</span></span>(<span>self, taxon: TaxonName) ‑> NoneType</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Enrich the imparted knowledge with all the prefixes of the given taxon.</p></div>
@@ -623,7 +623,7 @@ def normalized_triple(predicate: str, name_1: TaxonName, name_2: TaxonName) -&gt
 </details>
 </dd>
 <dt id="paroxython.filter_programs.ProgramFilter.impart_taxons"><code class="name flex">
-<span>def <span class="ident">impart_taxons</span></span>(<span>self, taxons: List[Union[TaxonName, paroxython.user_types.TaxonTriple]]) -> NoneType</span>
+<span>def <span class="ident">impart_taxons</span></span>(<span>self, taxons: List[Union[TaxonName, TaxonTriple]]) ‑> NoneType</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Enrich the imparted knowledge with all the prefixes of the given taxons.</p></div>
@@ -644,7 +644,7 @@ def normalized_triple(predicate: str, name_1: TaxonName, name_2: TaxonName) -&gt
 </details>
 </dd>
 <dt id="paroxython.filter_programs.ProgramFilter.include_programs"><code class="name flex">
-<span>def <span class="ident">include_programs</span></span>(<span>self, programs: Set[ProgramName]) -> NoneType</span>
+<span>def <span class="ident">include_programs</span></span>(<span>self, programs: Set[ProgramName]) ‑> NoneType</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Deselect the programs neither found among the given ones or those they import.</p></div>
@@ -665,7 +665,7 @@ def normalized_triple(predicate: str, name_1: TaxonName, name_2: TaxonName) -&gt
 </details>
 </dd>
 <dt id="paroxython.filter_programs.ProgramFilter.include_taxons"><code class="name flex">
-<span>def <span class="ident">include_taxons</span></span>(<span>self, taxons: List[Union[TaxonName, paroxython.user_types.TaxonTriple]]) -> NoneType</span>
+<span>def <span class="ident">include_taxons</span></span>(<span>self, taxons: List[Union[TaxonName, TaxonTriple]]) ‑> NoneType</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Deselect the programs not featuring any given taxon.</p></div>
@@ -683,7 +683,7 @@ def normalized_triple(predicate: str, name_1: TaxonName, name_2: TaxonName) -&gt
 </details>
 </dd>
 <dt id="paroxython.filter_programs.ProgramFilter.match_against_existing_programs"><code class="name flex">
-<span>def <span class="ident">match_against_existing_programs</span></span>(<span>self, pattern: str) -> Set[ProgramName]</span>
+<span>def <span class="ident">match_against_existing_programs</span></span>(<span>self, pattern: str) ‑> Set[ProgramName]</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Enumerate all the existing programs matching the given pattern.</p></div>
@@ -710,7 +710,7 @@ def normalized_triple(predicate: str, name_1: TaxonName, name_2: TaxonName) -&gt
 </details>
 </dd>
 <dt id="paroxython.filter_programs.ProgramFilter.match_against_existing_taxons"><code class="name flex">
-<span>def <span class="ident">match_against_existing_taxons</span></span>(<span>self, pattern: str) -> Set[TaxonName]</span>
+<span>def <span class="ident">match_against_existing_taxons</span></span>(<span>self, pattern: str) ‑> Set[TaxonName]</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Enumerate all the existing taxons matching the given pattern.</p></div>
@@ -737,7 +737,7 @@ def normalized_triple(predicate: str, name_1: TaxonName, name_2: TaxonName) -&gt
 </details>
 </dd>
 <dt id="paroxython.filter_programs.ProgramFilter.preprocess_programs"><code class="name flex">
-<span>def <span class="ident">preprocess_programs</span></span>(<span>self, programs: List[ProgramName]) -> List[ProgramName]</span>
+<span>def <span class="ident">preprocess_programs</span></span>(<span>self, programs: List[ProgramName]) ‑> List[ProgramName]</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Return all the program names matching at least one of the given regex patterns.</p></div>
@@ -758,7 +758,7 @@ def normalized_triple(predicate: str, name_1: TaxonName, name_2: TaxonName) -&gt
 </details>
 </dd>
 <dt id="paroxython.filter_programs.ProgramFilter.preprocess_taxons"><code class="name flex">
-<span>def <span class="ident">preprocess_taxons</span></span>(<span>self, taxons: List[Union[TaxonName, paroxython.user_types.TaxonTriple]]) -> List[Union[TaxonName, <a title="paroxython.user_types.TaxonTriple" href="user_types.html#paroxython.user_types.TaxonTriple">TaxonTriple</a>]]</span>
+<span>def <span class="ident">preprocess_taxons</span></span>(<span>self, taxons: List[Union[TaxonName, TaxonTriple]]) ‑> List[Union[TaxonName, TaxonTriple]]</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Parse the taxons and the triples and try to match them with existing taxon names.</p></div>
@@ -795,7 +795,7 @@ def normalized_triple(predicate: str, name_1: TaxonName, name_2: TaxonName) -&gt
 </details>
 </dd>
 <dt id="paroxython.filter_programs.ProgramFilter.programs_of_taxon"><code class="name flex">
-<span>def <span class="ident">programs_of_taxon</span></span>(<span>self, taxon: Union[TaxonName, paroxython.user_types.TaxonTriple]) -> Set[ProgramName]</span>
+<span>def <span class="ident">programs_of_taxon</span></span>(<span>self, taxon: Union[TaxonName, TaxonTriple]) ‑> Set[ProgramName]</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Dispatch computation to the appropriate method, depending of the actual taxon type.</p></div>
@@ -813,7 +813,7 @@ def normalized_triple(predicate: str, name_1: TaxonName, name_2: TaxonName) -&gt
 </details>
 </dd>
 <dt id="paroxython.filter_programs.ProgramFilter.programs_of_taxon_triple"><code class="name flex">
-<span>def <span class="ident">programs_of_taxon_triple</span></span>(<span>self, taxon: <a title="paroxython.user_types.TaxonTriple" href="user_types.html#paroxython.user_types.TaxonTriple">TaxonTriple</a>) -> Set[ProgramName]</span>
+<span>def <span class="ident">programs_of_taxon_triple</span></span>(<span>self, taxon: TaxonTriple) ‑> Set[ProgramName]</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Return the programs where two given taxons satisfy a given predicate.</p></div>
@@ -841,7 +841,7 @@ def normalized_triple(predicate: str, name_1: TaxonName, name_2: TaxonName) -&gt
 </details>
 </dd>
 <dt id="paroxython.filter_programs.ProgramFilter.programs_of_taxons"><code class="name flex">
-<span>def <span class="ident">programs_of_taxons</span></span>(<span>self, taxons: List[Union[TaxonName, paroxython.user_types.TaxonTriple]], follow: bool) -> Set[ProgramName]</span>
+<span>def <span class="ident">programs_of_taxons</span></span>(<span>self, taxons: List[Union[TaxonName, TaxonTriple]], follow: bool) ‑> Set[ProgramName]</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Return the programs featuring (optionally by importation) any given taxon.</p></div>
@@ -860,7 +860,7 @@ def normalized_triple(predicate: str, name_1: TaxonName, name_2: TaxonName) -&gt
 </details>
 </dd>
 <dt id="paroxython.filter_programs.ProgramFilter.taxons_of_programs"><code class="name flex">
-<span>def <span class="ident">taxons_of_programs</span></span>(<span>self, programs: Set[ProgramName]) -> Set[TaxonName]</span>
+<span>def <span class="ident">taxons_of_programs</span></span>(<span>self, programs: Set[ProgramName]) ‑> Set[TaxonName]</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Return the taxon names featured (directly or not) by the given programs.</p></div>

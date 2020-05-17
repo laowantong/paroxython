@@ -183,7 +183,7 @@ class LearningCostAssessor:
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
 <dt id="paroxython.assess_costs.range_to_cost_linear"><code class="name flex">
-<span>def <span class="ident">range_to_cost_linear</span></span>(<span>start: int, stop: int) -> float</span>
+<span>def <span class="ident">range_to_cost_linear</span></span>(<span>start: int, stop: int) ‑> float</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Return the length of the slice between <code>start</code> (inclusive) and <code>stop</code> (exclusive).</p></div>
@@ -200,7 +200,7 @@ def range_to_cost_linear(start: int, stop: int) -&gt; float:
 </details>
 </dd>
 <dt id="paroxython.assess_costs.range_to_cost_zeno"><code class="name flex">
-<span>def <span class="ident">range_to_cost_zeno</span></span>(<span>start: int, stop: int) -> float</span>
+<span>def <span class="ident">range_to_cost_zeno</span></span>(<span>start: int, stop: int) ‑> float</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Calculate the sum of the given slice of a <a href="https://en.wikipedia.org/wiki/Zeno%27s_paradoxes#Dichotomy_paradox">Zeno's geometric series</a>.</p>
@@ -342,7 +342,7 @@ introduced so far.</dd>
 <h3>Methods</h3>
 <dl>
 <dt id="paroxython.assess_costs.LearningCostAssessor.__call__"><code class="name flex">
-<span>def <span class="ident">__call__</span></span>(<span>self, programs: Dict[ProgramName, List[TaxonName]]) -> List[Tuple[float, ProgramName]]</span>
+<span>def <span class="ident">__call__</span></span>(<span>self, programs: Dict[ProgramName, List[TaxonName]]) ‑> List[Tuple[float, ProgramName]]</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Associate the given programs with the total learning cost of their taxons.</p>
@@ -379,7 +379,7 @@ of taxon names.</dd>
 </details>
 </dd>
 <dt id="paroxython.assess_costs.LearningCostAssessor.set_cost_assessment_strategy"><code class="name flex">
-<span>def <span class="ident">set_cost_assessment_strategy</span></span>(<span>self, strategy: typing_extensions.Literal['zeno', 'linear'] = 'zeno') -> NoneType</span>
+<span>def <span class="ident">set_cost_assessment_strategy</span></span>(<span>self, strategy: Literal['zeno', 'linear'] = 'zeno') ‑> NoneType</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Set the function to be used for the learning cost calculation.</p>
@@ -427,7 +427,7 @@ of taxon names.</dd>
 </details>
 </dd>
 <dt id="paroxython.assess_costs.LearningCostAssessor.taxon_cost"><code class="name flex">
-<span>def <span class="ident">taxon_cost</span></span>(<span>self, taxon: <function NewType.<locals>.new_type at 0x10eff7b00>) -> float</span>
+<span>def <span class="ident">taxon_cost</span></span>(<span>self, taxon: TaxonName) ‑> float</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Evaluate the learning cost of a given taxon.</p>

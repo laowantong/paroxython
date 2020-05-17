@@ -310,7 +310,7 @@ if __name__ == &#34;__main__&#34;:
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
 <dt id="paroxython.make_db.collect_exportations"><code class="name flex">
-<span>def <span class="ident">collect_exportations</span></span>(<span>exportations: Dict[ProgramName, List[ProgramName]]) -> Dict[ProgramName, List[ProgramName]]</span>
+<span>def <span class="ident">collect_exportations</span></span>(<span>exportations: Dict[ProgramName, List[ProgramName]]) ‑> Dict[ProgramName, List[ProgramName]]</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Iterate through the exportations to collect them.</p></div>
@@ -328,7 +328,7 @@ if __name__ == &#34;__main__&#34;:
 </details>
 </dd>
 <dt id="paroxython.make_db.collect_labels"><code class="name flex">
-<span>def <span class="ident">collect_labels</span></span>(<span>programs: List[<a title="paroxython.user_types.Program" href="user_types.html#paroxython.user_types.Program">Program</a>]) -> Dict[LabelName, List[ProgramName]]</span>
+<span>def <span class="ident">collect_labels</span></span>(<span>programs: List[Program]) ‑> Dict[LabelName, List[ProgramName]]</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Iterate through programs to collect all their labels.</p></div>
@@ -347,7 +347,7 @@ if __name__ == &#34;__main__&#34;:
 </details>
 </dd>
 <dt id="paroxython.make_db.collect_taxons"><code class="name flex">
-<span>def <span class="ident">collect_taxons</span></span>(<span>programs: List[<a title="paroxython.user_types.Program" href="user_types.html#paroxython.user_types.Program">Program</a>]) -> Dict[TaxonName, List[ProgramName]]</span>
+<span>def <span class="ident">collect_taxons</span></span>(<span>programs: List[Program]) ‑> Dict[TaxonName, List[ProgramName]]</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Iterate through programs to collect all their taxons.</p></div>
@@ -366,7 +366,7 @@ if __name__ == &#34;__main__&#34;:
 </details>
 </dd>
 <dt id="paroxython.make_db.complete_and_collect_importations"><code class="name flex">
-<span>def <span class="ident">complete_and_collect_importations</span></span>(<span>importations: Dict[ProgramName, List[ProgramName]]) -> Dict[ProgramName, List[ProgramName]]</span>
+<span>def <span class="ident">complete_and_collect_importations</span></span>(<span>importations: Dict[ProgramName, List[ProgramName]]) ‑> Dict[ProgramName, List[ProgramName]]</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Complete the direct internal imports with indirect ones.</p></div>
@@ -392,7 +392,7 @@ if __name__ == &#34;__main__&#34;:
 </details>
 </dd>
 <dt id="paroxython.make_db.compute_direct_importations"><code class="name flex">
-<span>def <span class="ident">compute_direct_importations</span></span>(<span>programs) -> Dict[ProgramName, List[ProgramName]]</span>
+<span>def <span class="ident">compute_direct_importations</span></span>(<span>programs) ‑> Dict[ProgramName, List[ProgramName]]</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Associate each program to the set of its direct internal imports.</p></div>
@@ -413,7 +413,7 @@ if __name__ == &#34;__main__&#34;:
 </details>
 </dd>
 <dt id="paroxython.make_db.compute_exportations"><code class="name flex">
-<span>def <span class="ident">compute_exportations</span></span>(<span>programs: List[<a title="paroxython.user_types.Program" href="user_types.html#paroxython.user_types.Program">Program</a>], importations: Dict[ProgramName, List[ProgramName]]) -> Dict[ProgramName, List[ProgramName]]</span>
+<span>def <span class="ident">compute_exportations</span></span>(<span>programs: List[Program], importations: Dict[ProgramName, List[ProgramName]]) ‑> Dict[ProgramName, List[ProgramName]]</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Invert <code>importations</code> to construct <code>exportations</code>.</p></div>
@@ -432,7 +432,7 @@ if __name__ == &#34;__main__&#34;:
 </details>
 </dd>
 <dt id="paroxython.make_db.map_labels_on_taxons"><code class="name flex">
-<span>def <span class="ident">map_labels_on_taxons</span></span>(<span>programs: List[<a title="paroxython.user_types.Program" href="user_types.html#paroxython.user_types.Program">Program</a>], taxonomy: <a title="paroxython.map_taxonomy.Taxonomy" href="map_taxonomy.html#paroxython.map_taxonomy.Taxonomy">Taxonomy</a>) -> NoneType</span>
+<span>def <span class="ident">map_labels_on_taxons</span></span>(<span>programs: List[Program], taxonomy: <a title="paroxython.map_taxonomy.Taxonomy" href="map_taxonomy.html#paroxython.map_taxonomy.Taxonomy">Taxonomy</a>) ‑> NoneType</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Translate labels into taxons on a list of program names.</p></div>
@@ -625,7 +625,7 @@ if __name__ == &#34;__main__&#34;:
 <h3>Methods</h3>
 <dl>
 <dt id="paroxython.make_db.Database.get_json"><code class="name flex">
-<span>def <span class="ident">get_json</span></span>(<span>self) -> str</span>
+<span>def <span class="ident">get_json</span></span>(<span>self) ‑> str</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Dump the data to JSON, reduce each list of spans to one line.</p></div>
@@ -649,7 +649,7 @@ if __name__ == &#34;__main__&#34;:
 </details>
 </dd>
 <dt id="paroxython.make_db.Database.write_json"><code class="name flex">
-<span>def <span class="ident">write_json</span></span>(<span>self, db_path: Union[pathlib.Path, NoneType] = None) -> NoneType</span>
+<span>def <span class="ident">write_json</span></span>(<span>self, db_path: Union[pathlib.Path, NoneType] = None) ‑> NoneType</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
@@ -665,7 +665,7 @@ if __name__ == &#34;__main__&#34;:
 </details>
 </dd>
 <dt id="paroxython.make_db.Database.write_sqlite"><code class="name flex">
-<span>def <span class="ident">write_sqlite</span></span>(<span>self, db_path: Union[pathlib.Path, NoneType] = None) -> NoneType</span>
+<span>def <span class="ident">write_sqlite</span></span>(<span>self, db_path: Union[pathlib.Path, NoneType] = None) ‑> NoneType</span>
 </code></dt>
 <dd>
 <div class="desc"></div>

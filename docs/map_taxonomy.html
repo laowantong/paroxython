@@ -229,7 +229,7 @@ if __name__ == &#34;__main__&#34;:
 <h3>Static methods</h3>
 <dl>
 <dt id="paroxython.map_taxonomy.Taxonomy.deduplicated_taxons"><code class="name flex">
-<span>def <span class="ident">deduplicated_taxons</span></span>(<span>taxons: List[<a title="paroxython.user_types.Taxon" href="user_types.html#paroxython.user_types.Taxon">Taxon</a>]) -> List[<a title="paroxython.user_types.Taxon" href="user_types.html#paroxython.user_types.Taxon">Taxon</a>]</span>
+<span>def <span class="ident">deduplicated_taxons</span></span>(<span>taxons: List[Taxon]) ‑> List[Taxon]</span>
 </code></dt>
 <dd>
 <div class="desc"><p>If taxon t2 has taxon t1 as a prefix, remove their common spans from t1.</p></div>
@@ -265,7 +265,7 @@ def deduplicated_taxons(taxons: Taxons) -&gt; Taxons:
 <h3>Methods</h3>
 <dl>
 <dt id="paroxython.map_taxonomy.Taxonomy.get_taxon_name_list"><code class="name flex">
-<span>def <span class="ident">get_taxon_name_list</span></span>(<span>self, label_name: <function NewType.<locals>.new_type at 0x10f001830>) -> List[TaxonName]</span>
+<span>def <span class="ident">get_taxon_name_list</span></span>(<span>self, label_name: LabelName) ‑> List[TaxonName]</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Translate a label name into a list of taxon names.</p></div>
@@ -289,7 +289,7 @@ def get_taxon_name_list(self, label_name: LabelName) -&gt; TaxonNames:
 </details>
 </dd>
 <dt id="paroxython.map_taxonomy.Taxonomy.to_taxons"><code class="name flex">
-<span>def <span class="ident">to_taxons</span></span>(<span>self, labels: List[<a title="paroxython.user_types.Label" href="user_types.html#paroxython.user_types.Label">Label</a>]) -> List[<a title="paroxython.user_types.Taxon" href="user_types.html#paroxython.user_types.Taxon">Taxon</a>]</span>
+<span>def <span class="ident">to_taxons</span></span>(<span>self, labels: List[Label]) ‑> List[Taxon]</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Translate a list of labels to a list of taxons with their spans in a bag.</p></div>
