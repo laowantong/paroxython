@@ -197,9 +197,9 @@ Further categorization of numeric literals does not require to construct a sophi
 
 ##### Derivations
 
-[⬇️ feature `concatenation_operator|replication_operator`](#feature-concatenation_operatorreplication_operator)  
-[⬇️ feature `string_formatting_operator`](#feature-string_formatting_operator)  
-[⬇️ feature `yoda_comparison`](#feature-yoda_comparison)  
+[⬇️ feature `concatenation_operator|replication_operator`](#feature-concatenation_operatorreplication_operator)
+[⬇️ feature `string_formatting_operator`](#feature-string_formatting_operator)
+[⬇️ feature `yoda_comparison`](#feature-yoda_comparison)
 
 ##### Specification
 
@@ -323,7 +323,7 @@ Match an index in a sequence type or a key in a dictionary type, and suffix it b
 
 ##### Derivations
 
-[⬇️ feature `nested_index`](#feature-nested_index)  
+[⬇️ feature `nested_index`](#feature-nested_index)
 
 ##### Specification
 
@@ -371,7 +371,7 @@ by accessing the _i_-th list of _m_ (`m[i]`), then the _j_-th cell of this list 
 
 ##### Derivations
 
-[⬆️ feature `index`](#feature-index)  
+[⬆️ feature `index`](#feature-index)
 
 ##### Specification
 
@@ -493,7 +493,7 @@ Match the lower bound of a slice, and suffix it by either `""` if it is omitted,
 
 ##### Derivations
 
-[⬇️ feature `slice`](#feature-slice)  
+[⬇️ feature `slice`](#feature-slice)
 
 ##### Specification
 
@@ -547,7 +547,7 @@ Match the upper bound of a slice, and suffix it by either `""` if it is omitted,
 
 ##### Derivations
 
-[⬇️ feature `slice`](#feature-slice)  
+[⬇️ feature `slice`](#feature-slice)
 
 ##### Specification
 
@@ -600,7 +600,7 @@ Match the step of a slice, and suffix it by either `""` if it is omitted, an int
 
 ##### Derivations
 
-[⬇️ feature `slice`](#feature-slice)  
+[⬇️ feature `slice`](#feature-slice)
 
 ##### Specification
 
@@ -653,9 +653,9 @@ Match a slice, and suffix it with three parts, either empty, atomic or replaced 
 
 ##### Derivations
 
-[⬆️ feature `slice_lower`](#feature-slice_lower)  
-[⬆️ feature `slice_step`](#feature-slice_step)  
-[⬆️ feature `slice_upper`](#feature-slice_upper)  
+[⬆️ feature `slice_lower`](#feature-slice_lower)
+[⬆️ feature `slice_step`](#feature-slice_step)
+[⬆️ feature `slice_upper`](#feature-slice_upper)
 
 ##### Specification
 
@@ -736,11 +736,11 @@ _Remark._ A negative literal is represented in the AST by a node `UnaryOp` with 
 
 ##### Derivations
 
-[⬇️ feature `addition_operator`](#feature-addition_operator)  
-[⬇️ feature `concatenation_operator|replication_operator`](#feature-concatenation_operatorreplication_operator)  
-[⬇️ feature `modulo_operator`](#feature-modulo_operator)  
-[⬇️ feature `multiplication_operator`](#feature-multiplication_operator)  
-[⬇️ feature `string_formatting_operator`](#feature-string_formatting_operator)  
+[⬇️ feature `addition_operator`](#feature-addition_operator)
+[⬇️ feature `concatenation_operator|replication_operator`](#feature-concatenation_operatorreplication_operator)
+[⬇️ feature `modulo_operator`](#feature-modulo_operator)
+[⬇️ feature `multiplication_operator`](#feature-multiplication_operator)
+[⬇️ feature `string_formatting_operator`](#feature-string_formatting_operator)
 
 ##### Specification
 
@@ -796,11 +796,11 @@ Match replication operators whose one operand is either a string, a list or a tu
 
 ##### Derivations
 
-[⬆️ feature `augmented_assignment`](#feature-augmented_assignment)  
-[⬆️ feature `binary_operator`](#feature-binary_operator)  
-[⬆️ feature `literal`](#feature-literal)  
-[⬇️ feature `addition_operator`](#feature-addition_operator)  
-[⬇️ feature `multiplication_operator`](#feature-multiplication_operator)  
+[⬆️ feature `augmented_assignment`](#feature-augmented_assignment)
+[⬆️ feature `binary_operator`](#feature-binary_operator)
+[⬆️ feature `literal`](#feature-literal)
+[⬇️ feature `addition_operator`](#feature-addition_operator)
+[⬇️ feature `multiplication_operator`](#feature-multiplication_operator)
 
 ##### Specification
 
@@ -857,9 +857,9 @@ Match old-style `%` operators whose left operand is a string **literal**.
 
 ##### Derivations
 
-[⬆️ feature `binary_operator`](#feature-binary_operator)  
-[⬆️ feature `literal`](#feature-literal)  
-[⬇️ feature `modulo_operator`](#feature-modulo_operator)  
+[⬆️ feature `binary_operator`](#feature-binary_operator)
+[⬆️ feature `literal`](#feature-literal)
+[⬇️ feature `modulo_operator`](#feature-modulo_operator)
 
 ##### Specification
 
@@ -897,8 +897,8 @@ An addition operator is a binary operator `Add` which has not be classified as a
 
 ##### Derivations
 
-[⬆️ feature `binary_operator`](#feature-binary_operator)  
-[⬆️ feature `concatenation_operator|replication_operator`](#feature-concatenation_operatorreplication_operator)  
+[⬆️ feature `binary_operator`](#feature-binary_operator)
+[⬆️ feature `concatenation_operator|replication_operator`](#feature-concatenation_operatorreplication_operator)
 
 ##### Specification
 
@@ -936,8 +936,8 @@ A multiplication operator is a binary operator `Mult` which has not be classifie
 
 ##### Derivations
 
-[⬆️ feature `binary_operator`](#feature-binary_operator)  
-[⬆️ feature `concatenation_operator|replication_operator`](#feature-concatenation_operatorreplication_operator)  
+[⬆️ feature `binary_operator`](#feature-binary_operator)
+[⬆️ feature `concatenation_operator|replication_operator`](#feature-concatenation_operatorreplication_operator)
 
 ##### Specification
 
@@ -974,8 +974,8 @@ A modulo operator is a binary operator `Mod` which has not be classified as an o
 
 ##### Derivations
 
-[⬆️ feature `binary_operator`](#feature-binary_operator)  
-[⬆️ feature `string_formatting_operator`](#feature-string_formatting_operator)  
+[⬆️ feature `binary_operator`](#feature-binary_operator)
+[⬆️ feature `string_formatting_operator`](#feature-string_formatting_operator)
 
 ##### Specification
 
@@ -1043,8 +1043,8 @@ _Remark._ `Not` is not a boolean operator in Python. To match it, use [feature `
 
 ##### Derivations
 
-[⬇️ feature `chained_equalities|chained_inequalities`](#feature-chained_equalitieschained_inequalities)  
-[⬇️ feature `yoda_comparison`](#feature-yoda_comparison)  
+[⬇️ feature `chained_equalities|chained_inequalities`](#feature-chained_equalitieschained_inequalities)
+[⬇️ feature `yoda_comparison`](#feature-yoda_comparison)
 
 ##### Specification
 
@@ -1078,8 +1078,8 @@ The so-called Yoda style puts the literal operand on the left side of a comparis
 
 ##### Derivations
 
-[⬆️ feature `comparison_operator`](#feature-comparison_operator)  
-[⬆️ feature `literal`](#feature-literal)  
+[⬆️ feature `comparison_operator`](#feature-comparison_operator)
+[⬆️ feature `literal`](#feature-literal)
 
 ##### Specification
 
@@ -1123,7 +1123,7 @@ WHERE substr(c.path, 1, length(c.path)-4) == substr(lit.path, 1, length(lit.path
 
 ##### Derivations
 
-[⬇️ feature `chained_equalities|chained_inequalities`](#feature-chained_equalitieschained_inequalities)  
+[⬇️ feature `chained_equalities|chained_inequalities`](#feature-chained_equalitieschained_inequalities)
 
 ##### Specification
 
@@ -1154,8 +1154,8 @@ WHERE substr(c.path, 1, length(c.path)-4) == substr(lit.path, 1, length(lit.path
 
 ##### Derivations
 
-[⬆️ feature `chained_comparison`](#feature-chained_comparison)  
-[⬆️ feature `comparison_operator`](#feature-comparison_operator)  
+[⬆️ feature `chained_comparison`](#feature-chained_comparison)
+[⬆️ feature `comparison_operator`](#feature-comparison_operator)
 
 ##### Specification
 
@@ -1282,8 +1282,8 @@ Otherwise, suffix it with an empty string.
 
 ##### Derivations
 
-[⬇️ feature `range`](#feature-range)  
-[⬇️ feature `update_by_member_call`](#feature-update_by_member_call)  
+[⬇️ feature `range`](#feature-range)
+[⬇️ feature `update_by_member_call`](#feature-update_by_member_call)
 
 ##### Specification
 
@@ -1379,13 +1379,13 @@ We use the term _free call_, as opposed to _member call_ (dot notation).
 
 ##### Derivations
 
-[⬇️ feature `body_recursive_function`](#feature-body_recursive_function)  
-[⬇️ feature `deeply_recursive_function`](#feature-deeply_recursive_function)  
-[⬇️ feature `external_free_call`](#feature-external_free_call)  
-[⬇️ feature `higher-order function`](#feature-higher-order-function)  
-[⬇️ feature `internal_free_call`](#feature-internal_free_call)  
-[⬇️ feature `range`](#feature-range)  
-[⬇️ feature `recursive_function`](#feature-recursive_function)  
+[⬇️ feature `body_recursive_function`](#feature-body_recursive_function)
+[⬇️ feature `deeply_recursive_function`](#feature-deeply_recursive_function)
+[⬇️ feature `external_free_call`](#feature-external_free_call)
+[⬇️ feature `higher-order function`](#feature-higher-order-function)
+[⬇️ feature `internal_free_call`](#feature-internal_free_call)
+[⬇️ feature `range`](#feature-range)
+[⬇️ feature `recursive_function`](#feature-recursive_function)
 
 ##### Specification
 
@@ -1480,13 +1480,13 @@ A tail-call is a call whose result is immediately returned, without any further 
 
 ##### Derivations
 
-[⬇️ feature `body_recursive_function`](#feature-body_recursive_function)  
+[⬇️ feature `body_recursive_function`](#feature-body_recursive_function)
 
 ##### Specification
 
 ```re
            ^(.*)/_type=Return
-\n(?:\1.+\n)*?\1/value/( 
+\n(?:\1.+\n)*?\1/value/(
                        _type=Call
 \n(?:\1.+\n)*?\1/value/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/value/func/_type=Name
@@ -1526,11 +1526,11 @@ A tail-call is a call whose result is immediately returned, without any further 
 13      return (1, bar())    # no match
 14      return {1: bar()}    # no match
 15      return {bar(): 1}    # no match
-16  
+16
 17  def useless_assignment():
-18      a = bar(n) 
+18      a = bar(n)
 19      return a # LIMITATION: no match
-20  
+20
 21  def procedure():
 22      if c1:
 23          if c2:
@@ -1555,9 +1555,9 @@ _Remark._ Since the short-circuit expression `c and foo(m)` is equivalent to the
 
 ##### Derivations
 
-[⬆️ feature `free_call`](#feature-free_call)  
-[⬆️ feature `function`](#feature-function)  
-[⬇️ feature `external_free_call`](#feature-external_free_call)  
+[⬆️ feature `free_call`](#feature-free_call)
+[⬆️ feature `function`](#feature-function)
+[⬇️ feature `external_free_call`](#feature-external_free_call)
 
 ##### Specification
 
@@ -1574,16 +1574,16 @@ JOIN t_free_call c USING (name_suffix)
 
 ```python
 1   from external import bizz
-2   
+2
 3   def foo():
 4       def buzz():
 5           pass
-6   
+6
 7   foo()
 8   bar()
 9   buzz()
 10  bizz()
-11  
+11
 12  def bar():
 13      pass
 ```
@@ -1602,8 +1602,8 @@ JOIN t_free_call c USING (name_suffix)
 
 ##### Derivations
 
-[⬆️ feature `free_call`](#feature-free_call)  
-[⬆️ feature `internal_free_call`](#feature-internal_free_call)  
+[⬆️ feature `free_call`](#feature-free_call)
+[⬆️ feature `internal_free_call`](#feature-internal_free_call)
 
 ##### Specification
 
@@ -1621,16 +1621,16 @@ WHERE t_internal_free_call.name_suffix IS NULL
 
 ```python
 1   from external import bizz
-2   
+2
 3   def foo():
 4       def buzz():
 5           pass
-6   
+6
 7   foo()
 8   bar()
 9   buzz()
 10  bizz()
-11  
+11
 12  def bar():
 13      pass
 ```
@@ -1656,8 +1656,8 @@ In Python, `identifier` can be the name of:
 
 ##### Derivations
 
-[⬇️ feature `update_by_member_call`](#feature-update_by_member_call)  
-[⬇️ feature `update_by_member_call_with`](#feature-update_by_member_call_with)  
+[⬇️ feature `update_by_member_call`](#feature-update_by_member_call)
+[⬇️ feature `update_by_member_call_with`](#feature-update_by_member_call_with)
 
 ##### Specification
 
@@ -1716,7 +1716,7 @@ In Python, `identifier` can be the name of:
 
 ##### Derivations
 
-[⬇️ feature `update_by_member_call`](#feature-update_by_member_call)  
+[⬇️ feature `update_by_member_call`](#feature-update_by_member_call)
 
 ##### Specification
 
@@ -1779,9 +1779,9 @@ Match a call to `range()` and suffix it by its [_atomic_](#feature-call_argument
 
 ##### Derivations
 
-[⬆️ feature `call_argument`](#feature-call_argument)  
-[⬆️ feature `free_call`](#feature-free_call)  
-[⬇️ feature `for_range`](#feature-for_range)  
+[⬆️ feature `call_argument`](#feature-call_argument)
+[⬆️ feature `free_call`](#feature-free_call)
+[⬇️ feature `for_range`](#feature-for_range)
 
 ##### Specification
 
@@ -2003,8 +2003,8 @@ Match a comprehension with an `if` clause.
 
 ##### Derivations
 
-[⬇️ feature `update_by_assignment`](#feature-update_by_assignment)  
-[⬇️ feature `update_by_assignment_with`](#feature-update_by_assignment_with)  
+[⬇️ feature `update_by_assignment`](#feature-update_by_assignment)
+[⬇️ feature `update_by_assignment_with`](#feature-update_by_assignment_with)
 
 ##### Specification
 
@@ -2095,7 +2095,7 @@ Deleting a name removes the binding of that name from the local or global namesp
 
 ##### Derivations
 
-[⬇️ feature `find_best_element`](#feature-find_best_element)  
+[⬇️ feature `find_best_element`](#feature-find_best_element)
 
 ##### Specification
 
@@ -2159,9 +2159,9 @@ Match a tuple unpacking assignment, and suffix it with the tuple size.
 
 ##### Derivations
 
-[⬇️ feature `concatenation_operator|replication_operator`](#feature-concatenation_operatorreplication_operator)  
-[⬇️ feature `update_by_augmented_assignment`](#feature-update_by_augmented_assignment)  
-[⬇️ feature `update_by_augmented_assignment_with`](#feature-update_by_augmented_assignment_with)  
+[⬇️ feature `concatenation_operator|replication_operator`](#feature-concatenation_operatorreplication_operator)
+[⬇️ feature `update_by_augmented_assignment`](#feature-update_by_augmented_assignment)
+[⬇️ feature `update_by_augmented_assignment_with`](#feature-update_by_augmented_assignment_with)
 
 ##### Specification
 
@@ -2250,13 +2250,13 @@ Capture any identifier appearing on the left hand side of an assignment (possibl
 
 ##### Derivations
 
-[⬇️ feature `accumulate_inputs`](#feature-accumulate_inputs)  
-[⬇️ feature `count_elements|count_states`](#feature-count_elementscount_states)  
-[⬇️ feature `count_inputs`](#feature-count_inputs)  
-[⬇️ feature `find_best_element`](#feature-find_best_element)  
-[⬇️ feature `get_valid_input`](#feature-get_valid_input)  
-[⬇️ feature `update_by_assignment`](#feature-update_by_assignment)  
-[⬇️ feature `update_by_augmented_assignment`](#feature-update_by_augmented_assignment)  
+[⬇️ feature `accumulate_inputs`](#feature-accumulate_inputs)
+[⬇️ feature `count_elements|count_states`](#feature-count_elementscount_states)
+[⬇️ feature `count_inputs`](#feature-count_inputs)
+[⬇️ feature `find_best_element`](#feature-find_best_element)
+[⬇️ feature `get_valid_input`](#feature-get_valid_input)
+[⬇️ feature `update_by_assignment`](#feature-update_by_assignment)
+[⬇️ feature `update_by_augmented_assignment`](#feature-update_by_augmented_assignment)
 
 ##### Specification
 
@@ -2317,9 +2317,9 @@ Capture any [_atom_](#feature-call_argument) appearing on the right hand side of
 
 ##### Derivations
 
-[⬇️ feature `find_best_element`](#feature-find_best_element)  
-[⬇️ feature `update_by_assignment`](#feature-update_by_assignment)  
-[⬇️ feature `update_by_augmented_assignment`](#feature-update_by_augmented_assignment)  
+[⬇️ feature `find_best_element`](#feature-find_best_element)
+[⬇️ feature `update_by_assignment`](#feature-update_by_assignment)
+[⬇️ feature `update_by_augmented_assignment`](#feature-update_by_augmented_assignment)
 
 ##### Specification
 
@@ -2376,11 +2376,11 @@ Match the reassignment of a variable `x` and capture its name in the first part 
 
 ##### Derivations
 
-[⬆️ feature `assignment`](#feature-assignment)  
-[⬆️ feature `assignment_lhs_identifier`](#feature-assignment_lhs_identifier)  
-[⬆️ feature `assignment_rhs_atom`](#feature-assignment_rhs_atom)  
-[⬇️ feature `update`](#feature-update)  
-[⬇️ feature `update_by_assignment_with`](#feature-update_by_assignment_with)  
+[⬆️ feature `assignment`](#feature-assignment)
+[⬆️ feature `assignment_lhs_identifier`](#feature-assignment_lhs_identifier)
+[⬆️ feature `assignment_rhs_atom`](#feature-assignment_rhs_atom)
+[⬇️ feature `update`](#feature-update)
+[⬇️ feature `update_by_assignment_with`](#feature-update_by_assignment_with)
 
 ##### Specification
 
@@ -2429,11 +2429,11 @@ Match the augmented assignment of a variable `x` and capture its name in the fir
 
 ##### Derivations
 
-[⬆️ feature `assignment_lhs_identifier`](#feature-assignment_lhs_identifier)  
-[⬆️ feature `assignment_rhs_atom`](#feature-assignment_rhs_atom)  
-[⬆️ feature `augmented_assignment`](#feature-augmented_assignment)  
-[⬇️ feature `update`](#feature-update)  
-[⬇️ feature `update_by_augmented_assignment_with`](#feature-update_by_augmented_assignment_with)  
+[⬆️ feature `assignment_lhs_identifier`](#feature-assignment_lhs_identifier)
+[⬆️ feature `assignment_rhs_atom`](#feature-assignment_rhs_atom)
+[⬆️ feature `augmented_assignment`](#feature-augmented_assignment)
+[⬇️ feature `update`](#feature-update)
+[⬇️ feature `update_by_augmented_assignment_with`](#feature-update_by_augmented_assignment_with)
 
 ##### Specification
 
@@ -2482,11 +2482,11 @@ The method must mutate the object it is applied on. Obviously, only a handful of
 
 ##### Derivations
 
-[⬆️ feature `call_argument`](#feature-call_argument)  
-[⬆️ feature `member_call`](#feature-member_call)  
-[⬆️ feature `member_call_object`](#feature-member_call_object)  
-[⬇️ feature `update`](#feature-update)  
-[⬇️ feature `update_by_member_call_with`](#feature-update_by_member_call_with)  
+[⬆️ feature `call_argument`](#feature-call_argument)
+[⬆️ feature `member_call`](#feature-member_call)
+[⬆️ feature `member_call_object`](#feature-member_call_object)
+[⬇️ feature `update`](#feature-update)
+[⬇️ feature `update_by_member_call_with`](#feature-update_by_member_call_with)
 
 ##### Specification
 
@@ -2527,12 +2527,12 @@ Match the update of a variable `x` and capture its name in the first part of the
 
 ##### Derivations
 
-[⬆️ feature `update_by_assignment`](#feature-update_by_assignment)  
-[⬆️ feature `update_by_augmented_assignment`](#feature-update_by_augmented_assignment)  
-[⬆️ feature `update_by_member_call`](#feature-update_by_member_call)  
-[⬇️ feature `accumulate_elements`](#feature-accumulate_elements)  
-[⬇️ feature `accumulate_inputs`](#feature-accumulate_inputs)  
-[⬇️ feature `accumulate_some_elements`](#feature-accumulate_some_elements)  
+[⬆️ feature `update_by_assignment`](#feature-update_by_assignment)
+[⬆️ feature `update_by_augmented_assignment`](#feature-update_by_augmented_assignment)
+[⬆️ feature `update_by_member_call`](#feature-update_by_member_call)
+[⬇️ feature `accumulate_elements`](#feature-accumulate_elements)
+[⬇️ feature `accumulate_inputs`](#feature-accumulate_inputs)
+[⬇️ feature `accumulate_some_elements`](#feature-accumulate_some_elements)
 
 ##### Specification
 
@@ -2554,13 +2554,13 @@ WHERE name_prefix IN ("update_by_assignment",
 2   foo += a
 3   foo.append(a)
 4   foo += [a]
-5   
+5
 6   bar = bar.mult(5)
 7   bar = mult(bar, 5)
-8   
+8
 9   fizz = fizz.upper() # no match
 10  fizz.process(a) # no match
-11  
+11
 12  buzz += a + b + c
 13  s *= (x - 1) / x
 14  c[j] += c[i- 1]
@@ -2595,9 +2595,9 @@ WHERE name_prefix IN ("update_by_assignment",
 
 ##### Derivations
 
-[⬆️ feature `assignment`](#feature-assignment)  
-[⬆️ feature `update_by_assignment`](#feature-update_by_assignment)  
-[⬇️ feature `update_with`](#feature-update_with)  
+[⬆️ feature `assignment`](#feature-assignment)
+[⬆️ feature `update_by_assignment`](#feature-update_by_assignment)
+[⬇️ feature `update_with`](#feature-update_with)
 
 ##### Specification
 
@@ -2635,9 +2635,9 @@ GROUP BY op.path
 
 ##### Derivations
 
-[⬆️ feature `augmented_assignment`](#feature-augmented_assignment)  
-[⬆️ feature `update_by_augmented_assignment`](#feature-update_by_augmented_assignment)  
-[⬇️ feature `update_with`](#feature-update_with)  
+[⬆️ feature `augmented_assignment`](#feature-augmented_assignment)
+[⬆️ feature `update_by_augmented_assignment`](#feature-update_by_augmented_assignment)
+[⬇️ feature `update_with`](#feature-update_with)
 
 ##### Specification
 
@@ -2674,9 +2674,9 @@ GROUP BY path
 
 ##### Derivations
 
-[⬆️ feature `member_call`](#feature-member_call)  
-[⬆️ feature `update_by_member_call`](#feature-update_by_member_call)  
-[⬇️ feature `update_with`](#feature-update_with)  
+[⬆️ feature `member_call`](#feature-member_call)
+[⬆️ feature `update_by_member_call`](#feature-update_by_member_call)
+[⬇️ feature `update_with`](#feature-update_with)
 
 ##### Specification
 
@@ -2709,11 +2709,11 @@ GROUP BY op.path
 
 ##### Derivations
 
-[⬆️ feature `update_by_assignment_with`](#feature-update_by_assignment_with)  
-[⬆️ feature `update_by_augmented_assignment_with`](#feature-update_by_augmented_assignment_with)  
-[⬆️ feature `update_by_member_call_with`](#feature-update_by_member_call_with)  
-[⬇️ feature `accumulate_elements`](#feature-accumulate_elements)  
-[⬇️ feature `accumulate_some_elements`](#feature-accumulate_some_elements)  
+[⬆️ feature `update_by_assignment_with`](#feature-update_by_assignment_with)
+[⬆️ feature `update_by_augmented_assignment_with`](#feature-update_by_augmented_assignment_with)
+[⬆️ feature `update_by_member_call_with`](#feature-update_by_member_call_with)
+[⬇️ feature `accumulate_elements`](#feature-accumulate_elements)
+[⬇️ feature `accumulate_some_elements`](#feature-accumulate_some_elements)
 
 ##### Specification
 
@@ -2735,13 +2735,13 @@ WHERE name_prefix IN ("update_by_assignment_with",
 2   foo += a
 3   foo.append(a)
 4   foo += [a]
-5   
+5
 6   bar = bar.mult(5)
 7   bar = mult(bar, 5)
-8   
+8
 9   fizz = fizz.upper() # no match
 10  fizz.process(a) # no match
-11  
+11
 12  buzz += a + b + c
 13  s *= (x - 1) / x
 14  c[j] += c[i- 1]
@@ -2766,8 +2766,8 @@ WHERE name_prefix IN ("update_by_assignment_with",
 
 ##### Derivations
 
-[⬇️ feature `count_elements|count_states`](#feature-count_elementscount_states)  
-[⬇️ feature `count_inputs`](#feature-count_inputs)  
+[⬇️ feature `count_elements|count_states`](#feature-count_elementscount_states)
+[⬇️ feature `count_inputs`](#feature-count_inputs)
 
 ##### Specification
 
@@ -2837,7 +2837,7 @@ Swap two variables or two elements of an array with a 2-element tuple or list.
 2   [a, b] = [b, a]
 3   (a[0], a[1]) = (a[1], a[0])
 4   (a[i], a[i + 1]) = (a[i + 1], a[i])
-5   
+5
 6   aux = x # LIMITATION: no match for the traditional method with a temporary variable
 7   x = y
 8   y = aux
@@ -3012,7 +3012,7 @@ Assign a “default” value to a variable, then if a certain condition is satis
 1   double = 2 * int(number[-i - 1])
 2   if double > 9:
 3       double -= 9
-4   
+4
 5   double = 2 * int(number[-i - 1])
 6   if double > 9:
 7       double = double - 9
@@ -3038,16 +3038,16 @@ In Python, the term "function" encompasses any type of subroutine, be it a metho
 
 ##### Derivations
 
-[⬇️ feature `closure`](#feature-closure)  
-[⬇️ feature `deeply_recursive_function`](#feature-deeply_recursive_function)  
-[⬇️ feature `function_returning_nothing`](#feature-function_returning_nothing)  
-[⬇️ feature `function_returning_something`](#feature-function_returning_something)  
-[⬇️ feature `generator`](#feature-generator)  
-[⬇️ feature `higher-order function`](#feature-higher-order-function)  
-[⬇️ feature `if_guard`](#feature-if_guard)  
-[⬇️ feature `internal_free_call`](#feature-internal_free_call)  
-[⬇️ feature `method`](#feature-method)  
-[⬇️ feature `recursive_function`](#feature-recursive_function)  
+[⬇️ feature `closure`](#feature-closure)
+[⬇️ feature `deeply_recursive_function`](#feature-deeply_recursive_function)
+[⬇️ feature `function_returning_nothing`](#feature-function_returning_nothing)
+[⬇️ feature `function_returning_something`](#feature-function_returning_something)
+[⬇️ feature `generator`](#feature-generator)
+[⬇️ feature `higher-order function`](#feature-higher-order-function)
+[⬇️ feature `if_guard`](#feature-if_guard)
+[⬇️ feature `internal_free_call`](#feature-internal_free_call)
+[⬇️ feature `method`](#feature-method)
+[⬇️ feature `recursive_function`](#feature-recursive_function)
 
 ##### Specification
 
@@ -3104,15 +3104,15 @@ Match `return` statements and, when the returned object is an [_atom_](#feature-
 
 ##### Derivations
 
-[⬇️ feature `accumulate_inputs`](#feature-accumulate_inputs)  
-[⬇️ feature `closure`](#feature-closure)  
-[⬇️ feature `count_inputs`](#feature-count_inputs)  
-[⬇️ feature `find_first_element`](#feature-find_first_element)  
-[⬇️ feature `function_returning_something`](#feature-function_returning_something)  
-[⬇️ feature `get_valid_input`](#feature-get_valid_input)  
-[⬇️ feature `if_guard`](#feature-if_guard)  
-[⬇️ feature `loop_with_return`](#feature-loop_with_return)  
-[⬇️ feature `universal_quantification|existential_quantification`](#feature-universal_quantificationexistential_quantification)  
+[⬇️ feature `accumulate_inputs`](#feature-accumulate_inputs)
+[⬇️ feature `closure`](#feature-closure)
+[⬇️ feature `count_inputs`](#feature-count_inputs)
+[⬇️ feature `find_first_element`](#feature-find_first_element)
+[⬇️ feature `function_returning_something`](#feature-function_returning_something)
+[⬇️ feature `get_valid_input`](#feature-get_valid_input)
+[⬇️ feature `if_guard`](#feature-if_guard)
+[⬇️ feature `loop_with_return`](#feature-loop_with_return)
+[⬇️ feature `universal_quantification|existential_quantification`](#feature-universal_quantificationexistential_quantification)
 
 ##### Specification
 
@@ -3157,7 +3157,7 @@ Match `yield` and `yieldfrom` _[expressions](https://docs.python.org/3/reference
 
 ##### Derivations
 
-[⬇️ feature `generator`](#feature-generator)  
+[⬇️ feature `generator`](#feature-generator)
 
 ##### Specification
 
@@ -3201,9 +3201,9 @@ Match `yield` and `yieldfrom` _[expressions](https://docs.python.org/3/reference
 
 ##### Derivations
 
-[⬆️ feature `function`](#feature-function)  
-[⬆️ feature `yield`](#feature-yield)  
-[⬇️ feature `function_returning_nothing`](#feature-function_returning_nothing)  
+[⬆️ feature `function`](#feature-function)
+[⬆️ feature `yield`](#feature-yield)
+[⬇️ feature `function_returning_nothing`](#feature-function_returning_nothing)
 
 ##### Specification
 
@@ -3243,9 +3243,9 @@ A function returning at least one value distinct from `None` is the smallest `fu
 
 ##### Derivations
 
-[⬆️ feature `function`](#feature-function)  
-[⬆️ feature `return`](#feature-return)  
-[⬇️ feature `function_returning_nothing`](#feature-function_returning_nothing)  
+[⬆️ feature `function`](#feature-function)
+[⬆️ feature `return`](#feature-return)
+[⬇️ feature `function_returning_nothing`](#feature-function_returning_nothing)
 
 ##### Specification
 
@@ -3305,9 +3305,9 @@ A function returning nothing (_aka_ a procedure) is a function which is neither 
 
 ##### Derivations
 
-[⬆️ feature `function`](#feature-function)  
-[⬆️ feature `function_returning_something`](#feature-function_returning_something)  
-[⬆️ feature `generator`](#feature-generator)  
+[⬆️ feature `function`](#feature-function)
+[⬆️ feature `function_returning_something`](#feature-function_returning_something)
+[⬆️ feature `generator`](#feature-generator)
 
 ##### Specification
 
@@ -3365,8 +3365,8 @@ WHERE t.span IS NULL
 
 ##### Derivations
 
-[⬇️ feature `higher-order function`](#feature-higher-order-function)  
-[⬇️ feature `instance_method|class_method|static_method`](#feature-instance_methodclass_methodstatic_method)  
+[⬇️ feature `higher-order function`](#feature-higher-order-function)
+[⬇️ feature `instance_method|class_method|static_method`](#feature-instance_methodclass_methodstatic_method)
 
 ##### Specification
 
@@ -3452,13 +3452,13 @@ _Remark._ The actual name of an argument can be retrieved by joining with `funct
 ```python
 1   def bizz():
 2       pass
-3   
+3
 4   def foo(a, b="c"): # no match
 5       pass
-6   
+6
 7   def bar(b="c"): # no match
 8       pass
-9   
+9
 10  def qux(*args, **kwargs): # no match
 11      pass
 ```
@@ -3585,8 +3585,8 @@ Function enclosing the definition of an inner function and returning it. Beware 
 
 ##### Derivations
 
-[⬆️ feature `function`](#feature-function)  
-[⬆️ feature `return`](#feature-return)  
+[⬆️ feature `function`](#feature-function)
+[⬆️ feature `return`](#feature-return)
 
 ##### Specification
 
@@ -3626,9 +3626,9 @@ Match a function having another function as an argument, at least when the latte
 
 ##### Derivations
 
-[⬆️ feature `free_call`](#feature-free_call)  
-[⬆️ feature `function`](#feature-function)  
-[⬆️ feature `function_argument`](#feature-function_argument)  
+[⬆️ feature `free_call`](#feature-free_call)
+[⬆️ feature `function`](#feature-function)
+[⬆️ feature `function_argument`](#feature-function_argument)
 
 ##### Specification
 
@@ -3674,10 +3674,10 @@ GROUP BY f.path,
 
 ##### Derivations
 
-[⬆️ feature `free_call`](#feature-free_call)  
-[⬆️ feature `function`](#feature-function)  
-[⬇️ feature `body_recursive_function`](#feature-body_recursive_function)  
-[⬇️ feature `tail_recursive_function`](#feature-tail_recursive_function)  
+[⬆️ feature `free_call`](#feature-free_call)
+[⬆️ feature `function`](#feature-function)
+[⬇️ feature `body_recursive_function`](#feature-body_recursive_function)
+[⬇️ feature `tail_recursive_function`](#feature-tail_recursive_function)
 
 ##### Specification
 
@@ -3713,8 +3713,8 @@ Any function `f` which features a nested call to itself (`f(..., f(...), ...)`),
 
 ##### Derivations
 
-[⬆️ feature `free_call`](#feature-free_call)  
-[⬆️ feature `function`](#feature-function)  
+[⬆️ feature `free_call`](#feature-free_call)
+[⬆️ feature `function`](#feature-function)
 
 ##### Specification
 
@@ -3754,10 +3754,10 @@ A function is body-recursive if and only if at least one of its recursive calls 
 
 ##### Derivations
 
-[⬆️ feature `free_call`](#feature-free_call)  
-[⬆️ feature `free_tail_call`](#feature-free_tail_call)  
-[⬆️ feature `recursive_function`](#feature-recursive_function)  
-[⬇️ feature `tail_recursive_function`](#feature-tail_recursive_function)  
+[⬆️ feature `free_call`](#feature-free_call)
+[⬆️ feature `free_tail_call`](#feature-free_tail_call)
+[⬆️ feature `recursive_function`](#feature-recursive_function)
+[⬇️ feature `tail_recursive_function`](#feature-tail_recursive_function)
 
 ##### Specification
 
@@ -3784,10 +3784,10 @@ GROUP BY t_recursive_function.span
 3           return a
 4       else:
 5           return gcd(b, a % b)
-6   
+6
 7   def gcd(a, b): # no match
 8       return (gcd(b, a % b) if b else a)
-9   
+9
 10  def ack(m, n): # body-recursive
 11      if m == 0:
 12          return n + 1
@@ -3795,7 +3795,7 @@ GROUP BY t_recursive_function.span
 14          return ack(m-1, 1)
 15      else:
 16          return ack(m-1, ack(m, n-1))
-17  
+17
 18  def divisor_count(n): # no match (not recursive)
 19      def recurs(candidates): # body_recursive
 20          if len(candidates) == 0:
@@ -3804,7 +3804,7 @@ GROUP BY t_recursive_function.span
 23              return 1 + recurs(candidates[1:])
 24          return recurs(candidates[1:])
 25      return recurs(range(1, n+1))
-26  
+26
 27  def place(x = 1, y = 1, queens = []): # BUG: incorrectly labelled as body recursive
 28      if x > SIZE:
 29          print(queens)
@@ -3831,8 +3831,8 @@ A function is tail-recursive if and only if all its recursive calls are tail cal
 
 ##### Derivations
 
-[⬆️ feature `body_recursive_function`](#feature-body_recursive_function)  
-[⬆️ feature `recursive_function`](#feature-recursive_function)  
+[⬆️ feature `body_recursive_function`](#feature-body_recursive_function)
+[⬆️ feature `recursive_function`](#feature-recursive_function)
 
 ##### Specification
 
@@ -3856,10 +3856,10 @@ _LIMITATION._ Currently, the tail recursive procedures (_i.e._, without `return`
 3           return a
 4       else:
 5           return gcd(b, a % b)
-6   
+6
 7   def gcd(a, b):
 8       return (gcd(b, a % b) if b else a)
-9   
+9
 10  def ack(m, n):
 11      if m == 0:
 12          return n + 1
@@ -3867,7 +3867,7 @@ _LIMITATION._ Currently, the tail recursive procedures (_i.e._, without `return`
 14          return ack(m-1, 1)
 15      else:
 16          return ack(m-1, ack(m, n-1))
-17  
+17
 18  def divisor_count(n):
 19      def recurs(candidates):
 20          if len(candidates) == 0:
@@ -3876,7 +3876,7 @@ _LIMITATION._ Currently, the tail recursive procedures (_i.e._, without `return`
 23              return 1 + recurs(candidates[1:])
 24          return recurs(candidates[1:])
 25      return recurs(range(1, n+1))
-26  
+26
 27  def place(x = 1, y = 1, queens = []):
 28      if x > SIZE:
 29          print(queens)
@@ -3905,15 +3905,15 @@ Match an entire conditional (from the `if` clause to the last line of its body).
 
 ##### Derivations
 
-[⬇️ feature `accumulate_inputs`](#feature-accumulate_inputs)  
-[⬇️ feature `accumulate_some_elements`](#feature-accumulate_some_elements)  
-[⬇️ feature `count_inputs`](#feature-count_inputs)  
-[⬇️ feature `find_best_element`](#feature-find_best_element)  
-[⬇️ feature `find_first_element`](#feature-find_first_element)  
-[⬇️ feature `get_valid_input`](#feature-get_valid_input)  
-[⬇️ feature `if_without_else`](#feature-if_without_else)  
-[⬇️ feature `nested_if`](#feature-nested_if)  
-[⬇️ feature `universal_quantification|existential_quantification`](#feature-universal_quantificationexistential_quantification)  
+[⬇️ feature `accumulate_inputs`](#feature-accumulate_inputs)
+[⬇️ feature `accumulate_some_elements`](#feature-accumulate_some_elements)
+[⬇️ feature `count_inputs`](#feature-count_inputs)
+[⬇️ feature `find_best_element`](#feature-find_best_element)
+[⬇️ feature `find_first_element`](#feature-find_first_element)
+[⬇️ feature `get_valid_input`](#feature-get_valid_input)
+[⬇️ feature `if_without_else`](#feature-if_without_else)
+[⬇️ feature `nested_if`](#feature-nested_if)
+[⬇️ feature `universal_quantification|existential_quantification`](#feature-universal_quantificationexistential_quantification)
 
 ##### Specification
 
@@ -3970,12 +3970,12 @@ Match and suffix any [atom](#feature-call_argument) present in the condition of 
 
 ##### Derivations
 
-[⬇️ feature `accumulate_inputs`](#feature-accumulate_inputs)  
-[⬇️ feature `count_inputs`](#feature-count_inputs)  
-[⬇️ feature `find_best_element`](#feature-find_best_element)  
-[⬇️ feature `find_first_element`](#feature-find_first_element)  
-[⬇️ feature `get_valid_input`](#feature-get_valid_input)  
-[⬇️ feature `universal_quantification|existential_quantification`](#feature-universal_quantificationexistential_quantification)  
+[⬇️ feature `accumulate_inputs`](#feature-accumulate_inputs)
+[⬇️ feature `count_inputs`](#feature-count_inputs)
+[⬇️ feature `find_best_element`](#feature-find_best_element)
+[⬇️ feature `find_first_element`](#feature-find_first_element)
+[⬇️ feature `get_valid_input`](#feature-get_valid_input)
+[⬇️ feature `universal_quantification|existential_quantification`](#feature-universal_quantificationexistential_quantification)
 
 ##### Specification
 
@@ -4016,8 +4016,8 @@ Match the body of the branch “`then`” of an `if` statement.
 
 ##### Derivations
 
-[⬇️ feature `if_without_else`](#feature-if_without_else)  
-[⬇️ feature `nested_if`](#feature-nested_if)  
+[⬇️ feature `if_without_else`](#feature-if_without_else)
+[⬇️ feature `nested_if`](#feature-nested_if)
 
 ##### Specification
 
@@ -4075,7 +4075,7 @@ Match the body of an `elif` clause, which is (or could be rewritten as) an `else
 
 ##### Derivations
 
-[⬇️ feature `nested_if`](#feature-nested_if)  
+[⬇️ feature `nested_if`](#feature-nested_if)
 
 ##### Specification
 
@@ -4135,7 +4135,7 @@ Match the body of the possible `else` branch of an `if` statement.
 
 ##### Derivations
 
-[⬇️ feature `nested_if`](#feature-nested_if)  
+[⬇️ feature `nested_if`](#feature-nested_if)
 
 ##### Specification
 
@@ -4190,9 +4190,9 @@ Match the body of the possible `else` branch of an `if` statement.
 
 ##### Derivations
 
-[⬆️ feature `if`](#feature-if)  
-[⬆️ feature `if_then_branch`](#feature-if_then_branch)  
-[⬇️ feature `if_guard`](#feature-if_guard)  
+[⬆️ feature `if`](#feature-if)
+[⬆️ feature `if_then_branch`](#feature-if_then_branch)
+[⬇️ feature `if_guard`](#feature-if_guard)
 
 ##### Specification
 
@@ -4252,9 +4252,9 @@ Condition 2 is probably too weak in numerous situations, but in case of false po
 
 ##### Derivations
 
-[⬆️ feature `function`](#feature-function)  
-[⬆️ feature `if_without_else`](#feature-if_without_else)  
-[⬆️ feature `return`](#feature-return)  
+[⬆️ feature `function`](#feature-function)
+[⬆️ feature `if_without_else`](#feature-if_without_else)
+[⬆️ feature `return`](#feature-return)
 
 ##### Specification
 
@@ -4306,10 +4306,10 @@ Match an `if` clause nested in _n_ other `if` clauses, suffixing it by _n_.
 
 ##### Derivations
 
-[⬆️ feature `if`](#feature-if)  
-[⬆️ feature `if_elif_branch`](#feature-if_elif_branch)  
-[⬆️ feature `if_else_branch`](#feature-if_else_branch)  
-[⬆️ feature `if_then_branch`](#feature-if_then_branch)  
+[⬆️ feature `if`](#feature-if)
+[⬆️ feature `if_elif_branch`](#feature-if_elif_branch)
+[⬆️ feature `if_else_branch`](#feature-if_else_branch)
+[⬆️ feature `if_then_branch`](#feature-if_then_branch)
 
 ##### Specification
 
@@ -4375,14 +4375,14 @@ Match sequential loops, along with their iteration variable(s).
 
 ##### Derivations
 
-[⬇️ feature `accumulate_elements`](#feature-accumulate_elements)  
-[⬇️ feature `accumulate_some_elements`](#feature-accumulate_some_elements)  
-[⬇️ feature `find_best_element`](#feature-find_best_element)  
-[⬇️ feature `find_first_element`](#feature-find_first_element)  
-[⬇️ feature `for_range`](#feature-for_range)  
-[⬇️ feature `loop`](#feature-loop)  
-[⬇️ feature `nested_for`](#feature-nested_for)  
-[⬇️ feature `universal_quantification|existential_quantification`](#feature-universal_quantificationexistential_quantification)  
+[⬇️ feature `accumulate_elements`](#feature-accumulate_elements)
+[⬇️ feature `accumulate_some_elements`](#feature-accumulate_some_elements)
+[⬇️ feature `find_best_element`](#feature-find_best_element)
+[⬇️ feature `find_first_element`](#feature-find_first_element)
+[⬇️ feature `for_range`](#feature-for_range)
+[⬇️ feature `loop`](#feature-loop)
+[⬇️ feature `nested_for`](#feature-nested_for)
+[⬇️ feature `universal_quantification|existential_quantification`](#feature-universal_quantificationexistential_quantification)
 
 ##### Specification
 
@@ -4428,7 +4428,7 @@ Match sequential loops, along with their iteration variable(s).
 
 ##### Derivations
 
-[⬇️ feature `loop`](#feature-loop)  
+[⬇️ feature `loop`](#feature-loop)
 
 ##### Specification
 
@@ -4462,14 +4462,14 @@ Match sequential loops, along with their iteration variable(s).
 
 ##### Derivations
 
-[⬆️ feature `for`](#feature-for)  
-[⬆️ feature `while`](#feature-while)  
-[⬇️ feature `count_elements|count_states`](#feature-count_elementscount_states)  
-[⬇️ feature `loop_with_break`](#feature-loop_with_break)  
-[⬇️ feature `loop_with_else`](#feature-loop_with_else)  
-[⬇️ feature `loop_with_late_exit`](#feature-loop_with_late_exit)  
-[⬇️ feature `loop_with_raise`](#feature-loop_with_raise)  
-[⬇️ feature `loop_with_return`](#feature-loop_with_return)  
+[⬆️ feature `for`](#feature-for)
+[⬆️ feature `while`](#feature-while)
+[⬇️ feature `count_elements|count_states`](#feature-count_elementscount_states)
+[⬇️ feature `loop_with_break`](#feature-loop_with_break)
+[⬇️ feature `loop_with_else`](#feature-loop_with_else)
+[⬇️ feature `loop_with_late_exit`](#feature-loop_with_late_exit)
+[⬇️ feature `loop_with_raise`](#feature-loop_with_raise)
+[⬇️ feature `loop_with_return`](#feature-loop_with_return)
 
 ##### Specification
 
@@ -4511,7 +4511,7 @@ GROUP BY path
 
 ##### Derivations
 
-[⬇️ feature `loop_with_break`](#feature-loop_with_break)  
+[⬇️ feature `loop_with_break`](#feature-loop_with_break)
 
 ##### Specification
 
@@ -4543,7 +4543,7 @@ GROUP BY path
 
 ##### Derivations
 
-[⬇️ feature `loop_with_else`](#feature-loop_with_else)  
+[⬇️ feature `loop_with_else`](#feature-loop_with_else)
 
 ##### Specification
 
@@ -4643,8 +4643,8 @@ Iterate over a range object.
 
 ##### Derivations
 
-[⬆️ feature `for`](#feature-for)  
-[⬆️ feature `range`](#feature-range)  
+[⬆️ feature `for`](#feature-for)
+[⬆️ feature `range`](#feature-range)
 
 ##### Specification
 
@@ -4751,7 +4751,7 @@ Match a `for` statement nested in _n_ other `for` statements, suffixing it by _n
 
 ##### Derivations
 
-[⬆️ feature `for`](#feature-for)  
+[⬆️ feature `for`](#feature-for)
 
 ##### Specification
 
@@ -4885,9 +4885,9 @@ Match an infinite loop denoted by `while True` (preferred) or `while 1`.
 
 ##### Derivations
 
-[⬇️ feature `accumulate_inputs`](#feature-accumulate_inputs)  
-[⬇️ feature `count_inputs`](#feature-count_inputs)  
-[⬇️ feature `get_valid_input`](#feature-get_valid_input)  
+[⬇️ feature `accumulate_inputs`](#feature-accumulate_inputs)
+[⬇️ feature `count_inputs`](#feature-count_inputs)
+[⬇️ feature `get_valid_input`](#feature-get_valid_input)
 
 ##### Specification
 
@@ -4926,9 +4926,9 @@ Match an infinite loop denoted by `while True` (preferred) or `while 1`.
 
 ##### Derivations
 
-[⬆️ feature `loop`](#feature-loop)  
-[⬆️ feature `raise`](#feature-raise)  
-[⬇️ feature `loop_with_early_exit`](#feature-loop_with_early_exit)  
+[⬆️ feature `loop`](#feature-loop)
+[⬆️ feature `raise`](#feature-raise)
+[⬇️ feature `loop_with_early_exit`](#feature-loop_with_early_exit)
 
 ##### Specification
 
@@ -4949,7 +4949,7 @@ GROUP BY l.rowid
 2       for x in seq:
 3           if foobar(x):
 4               raise ValueError
-5   
+5
 6   def fail_2():
 7       for y in seq: # match: false positive
 8           try:
@@ -4974,9 +4974,9 @@ _LIMITATION._ False positive when the exception is catch inside the outer loop.
 
 ##### Derivations
 
-[⬆️ feature `loop`](#feature-loop)  
-[⬆️ feature `return`](#feature-return)  
-[⬇️ feature `loop_with_early_exit`](#feature-loop_with_early_exit)  
+[⬆️ feature `loop`](#feature-loop)
+[⬆️ feature `return`](#feature-return)
+[⬇️ feature `loop_with_early_exit`](#feature-loop_with_early_exit)
 
 ##### Specification
 
@@ -5014,9 +5014,9 @@ GROUP BY l.rowid
 
 ##### Derivations
 
-[⬆️ feature `break`](#feature-break)  
-[⬆️ feature `loop`](#feature-loop)  
-[⬇️ feature `loop_with_early_exit`](#feature-loop_with_early_exit)  
+[⬆️ feature `break`](#feature-break)
+[⬆️ feature `loop`](#feature-loop)
+[⬇️ feature `loop_with_early_exit`](#feature-loop_with_early_exit)
 
 ##### Specification
 
@@ -5052,10 +5052,10 @@ GROUP BY b.rowid
 
 ##### Derivations
 
-[⬆️ feature `loop_with_break`](#feature-loop_with_break)  
-[⬆️ feature `loop_with_raise`](#feature-loop_with_raise)  
-[⬆️ feature `loop_with_return`](#feature-loop_with_return)  
-[⬇️ feature `loop_with_late_exit`](#feature-loop_with_late_exit)  
+[⬆️ feature `loop_with_break`](#feature-loop_with_break)
+[⬆️ feature `loop_with_raise`](#feature-loop_with_raise)
+[⬆️ feature `loop_with_return`](#feature-loop_with_return)
+[⬇️ feature `loop_with_late_exit`](#feature-loop_with_late_exit)
 
 ##### Specification
 
@@ -5111,8 +5111,8 @@ WHERE t.name_prefix IN ("loop_with_raise",
 
 ##### Derivations
 
-[⬆️ feature `loop`](#feature-loop)  
-[⬆️ feature `loop_else`](#feature-loop_else)  
+[⬆️ feature `loop`](#feature-loop)
+[⬆️ feature `loop_else`](#feature-loop_else)
 
 ##### Specification
 
@@ -5154,8 +5154,8 @@ A loop without early exit.
 
 ##### Derivations
 
-[⬆️ feature `loop`](#feature-loop)  
-[⬆️ feature `loop_with_early_exit`](#feature-loop_with_early_exit)  
+[⬆️ feature `loop`](#feature-loop)
+[⬆️ feature `loop_with_early_exit`](#feature-loop_with_early_exit)
 
 ##### Specification
 
@@ -5247,7 +5247,7 @@ WHERE l2.span IS NULL
 
 ##### Derivations
 
-[⬇️ feature `try_raise|try_except`](#feature-try_raisetry_except)  
+[⬇️ feature `try_raise|try_except`](#feature-try_raisetry_except)
 
 ##### Specification
 
@@ -5281,8 +5281,8 @@ WHERE l2.span IS NULL
 
 ##### Derivations
 
-[⬇️ feature `loop_with_raise`](#feature-loop_with_raise)  
-[⬇️ feature `try_raise|try_except`](#feature-try_raisetry_except)  
+[⬇️ feature `loop_with_raise`](#feature-loop_with_raise)
+[⬇️ feature `try_raise|try_except`](#feature-try_raisetry_except)
 
 ##### Specification
 
@@ -5329,7 +5329,7 @@ WHERE l2.span IS NULL
 
 ##### Derivations
 
-[⬇️ feature `try_raise|try_except`](#feature-try_raisetry_except)  
+[⬇️ feature `try_raise|try_except`](#feature-try_raisetry_except)
 
 ##### Specification
 
@@ -5376,9 +5376,9 @@ WHERE l2.span IS NULL
 
 ##### Derivations
 
-[⬆️ feature `except`](#feature-except)  
-[⬆️ feature `raise`](#feature-raise)  
-[⬆️ feature `try`](#feature-try)  
+[⬆️ feature `except`](#feature-except)
+[⬆️ feature `raise`](#feature-raise)
+[⬆️ feature `try`](#feature-try)
 
 ##### Specification
 
@@ -5432,7 +5432,7 @@ Match a class definition.
 
 ##### Derivations
 
-[⬇️ feature `method`](#feature-method)  
+[⬇️ feature `method`](#feature-method)
 
 ##### Specification
 
@@ -5449,10 +5449,10 @@ Match a class definition.
 1   class MyClass:
 2       """A simple example class"""
 3       i = 12345
-4   
+4
 5       def f(self):
 6           return 'hello world'
-7   
+7
 8   instance = MyClass()
 ```
 
@@ -5468,9 +5468,9 @@ Match a class definition.
 
 ##### Derivations
 
-[⬆️ feature `class`](#feature-class)  
-[⬆️ feature `function`](#feature-function)  
-[⬇️ feature `instance_method|class_method|static_method`](#feature-instance_methodclass_methodstatic_method)  
+[⬆️ feature `class`](#feature-class)
+[⬆️ feature `function`](#feature-function)
+[⬇️ feature `instance_method|class_method|static_method`](#feature-instance_methodclass_methodstatic_method)
 
 ##### Specification
 
@@ -5487,14 +5487,14 @@ JOIN t_function f ON (f.path GLOB c.path || "*-*-")
 
 ```python
 1   class MyClass:
-2   
+2
 3       def an_instance_method(self, a, b, c):
 4           pass
-5   
+5
 6       @staticmethod
 7       def a_static_method(f, g):
 8           pass
-9   
+9
 10      @classmethod
 11      def a_class_method(cls, d, e):
 12          pass
@@ -5514,8 +5514,8 @@ JOIN t_function f ON (f.path GLOB c.path || "*-*-")
 
 ##### Derivations
 
-[⬆️ feature `function_argument`](#feature-function_argument)  
-[⬆️ feature `method`](#feature-method)  
+[⬆️ feature `function_argument`](#feature-function_argument)
+[⬆️ feature `method`](#feature-method)
 
 ##### Specification
 
@@ -5540,14 +5540,14 @@ _Remark._: the presence of a decorator `classmethod` or `staticmethod` is unchec
 
 ```python
 1   class MyClass:
-2   
+2
 3       def an_instance_method(self, a, b, c):
 4           pass
-5   
+5
 6       @classmethod
 7       def a_class_method(cls, d, e):
 8           pass
-9   
+9
 10      @staticmethod
 11      def a_static_method(f, g):
 12          pass
@@ -5571,7 +5571,7 @@ _Remark._: the presence of a decorator `classmethod` or `staticmethod` is unchec
 
 ##### Derivations
 
-[⬇️ feature `import`](#feature-import)  
+[⬇️ feature `import`](#feature-import)
 
 ##### Specification
 
@@ -5617,7 +5617,7 @@ _Remark._: the presence of a decorator `classmethod` or `staticmethod` is unchec
 
 ##### Derivations
 
-[⬇️ feature `import`](#feature-import)  
+[⬇️ feature `import`](#feature-import)
 
 ##### Specification
 
@@ -5658,8 +5658,8 @@ Suffixed by the imported module and, if any, the imported name. In most cases, c
 
 ##### Derivations
 
-[⬆️ feature `import_module`](#feature-import_module)  
-[⬆️ feature `import_name`](#feature-import_name)  
+[⬆️ feature `import_module`](#feature-import_module)
+[⬆️ feature `import_name`](#feature-import_name)
 
 ##### Specification
 
@@ -5714,9 +5714,9 @@ Counting the elements of a sequence (`for`), or the states of an evolution (`whi
 
 ##### Derivations
 
-[⬆️ feature `assignment_lhs_identifier`](#feature-assignment_lhs_identifier)  
-[⬆️ feature `increment`](#feature-increment)  
-[⬆️ feature `loop`](#feature-loop)  
+[⬆️ feature `assignment_lhs_identifier`](#feature-assignment_lhs_identifier)
+[⬆️ feature `increment`](#feature-increment)
+[⬆️ feature `loop`](#feature-loop)
 
 ##### Specification
 
@@ -5784,10 +5784,10 @@ An accumulator is iteratively updated from its previous value and that of the it
 
 ##### Derivations
 
-[⬆️ feature `for`](#feature-for)  
-[⬆️ feature `update`](#feature-update)  
-[⬆️ feature `update_with`](#feature-update_with)  
-[⬇️ feature `accumulate_all_elements`](#feature-accumulate_all_elements)  
+[⬆️ feature `for`](#feature-for)
+[⬆️ feature `update`](#feature-update)
+[⬆️ feature `update_with`](#feature-update_with)
+[⬇️ feature `accumulate_all_elements`](#feature-accumulate_all_elements)
 
 ##### Specification
 
@@ -5811,37 +5811,37 @@ WHERE t_update.name_suffix GLOB "*:" || t_for.name_suffix
 4           acc = element + acc
 5           seed += 1
 6       return acc
-7   
+7
 8   for i in range(10):
 9       acc_1 = combine(acc_1, i)
 10      if condition:
 11          acc_2 += i
 12      else:
 13          acc_2 -= i
-14  
+14
 15  for element in elements:
 16      print("foo")
 17      if predicate(element):
 18          print("bar")
 19          acc.append(element)
 20      print("fiz")
-21  
+21
 22  power = 1
 23  for x1 in seq1:
 24      acc = set()
 25      for x2 in seq2:
 26          acc.add(x2)
 27          power *= 2 # LIMITATION: no match, since this update does not make use of the iteration variable
-28  
+28
 29  for i in range(10):
 30      acc //= foo(bar, i)
-31  
+31
 32  for i in range(10): # no match
 33      foo(acc, bar, i)
-34  
+34
 35  for i in range(10): # no match
 36      print(foobar, i)
-37  
+37
 38  for c in string:
 39      c = c.upper() # no match: this is the iteration variable, not an accumulator
 40      print(c)
@@ -5866,11 +5866,11 @@ Restriction of [feature `accumulate_elements`](#feature-accumulate_elements) . T
 
 ##### Derivations
 
-[⬆️ feature `for`](#feature-for)  
-[⬆️ feature `if`](#feature-if)  
-[⬆️ feature `update`](#feature-update)  
-[⬆️ feature `update_with`](#feature-update_with)  
-[⬇️ feature `accumulate_all_elements`](#feature-accumulate_all_elements)  
+[⬆️ feature `for`](#feature-for)
+[⬆️ feature `if`](#feature-if)
+[⬆️ feature `update`](#feature-update)
+[⬆️ feature `update_with`](#feature-update_with)
+[⬇️ feature `accumulate_all_elements`](#feature-accumulate_all_elements)
 
 ##### Specification
 
@@ -5896,14 +5896,14 @@ GROUP BY t_update.path
 4           acc = element + acc
 5           seed += 1
 6       return acc
-7   
+7
 8   for i in range(10):
 9       acc_1 = combine(acc_1, i)
 10      if condition:
 11          acc_2 += i
 12      else:
 13          acc_2 -= i
-14  
+14
 15  for element in elements:
 16      print("foo")
 17      if predicate_1(element):
@@ -5929,8 +5929,8 @@ Difference between features [`accumulate_elements`](#feature-accumulate_elements
 
 ##### Derivations
 
-[⬆️ feature `accumulate_elements`](#feature-accumulate_elements)  
-[⬆️ feature `accumulate_some_elements`](#feature-accumulate_some_elements)  
+[⬆️ feature `accumulate_elements`](#feature-accumulate_elements)
+[⬆️ feature `accumulate_some_elements`](#feature-accumulate_some_elements)
 
 ##### Specification
 
@@ -5956,14 +5956,14 @@ WHERE NOT EXISTS
 4           acc = element + acc
 5           seed += 1
 6       return acc
-7   
+7
 8   for i in range(10):
 9       acc_1 = combine(acc_1, i)
 10      if condition:
 11          acc_2 += i
 12      else:
 13          acc_2 -= i
-14  
+14
 15  for element in elements:
 16      print("foo")
 17      if predicate_1(element):
@@ -5988,12 +5988,12 @@ An accumulation pattern that, from a given collection, returns the best element 
 
 ##### Derivations
 
-[⬆️ feature `assignment_lhs_identifier`](#feature-assignment_lhs_identifier)  
-[⬆️ feature `assignment_rhs_atom`](#feature-assignment_rhs_atom)  
-[⬆️ feature `for`](#feature-for)  
-[⬆️ feature `if`](#feature-if)  
-[⬆️ feature `if_test_atom`](#feature-if_test_atom)  
-[⬆️ feature `single_assignment`](#feature-single_assignment)  
+[⬆️ feature `assignment_lhs_identifier`](#feature-assignment_lhs_identifier)
+[⬆️ feature `assignment_rhs_atom`](#feature-assignment_rhs_atom)
+[⬆️ feature `for`](#feature-for)
+[⬆️ feature `if`](#feature-if)
+[⬆️ feature `if_test_atom`](#feature-if_test_atom)
+[⬆️ feature `single_assignment`](#feature-single_assignment)
 
 ##### Specification
 
@@ -6029,14 +6029,14 @@ WHERE NOT EXISTS -- Ensure that there is no...
 4           if is_better(element, candidate):
 5               candidate = element
 6       return candidate
-7   
+7
 8   def find_maximum_element(elements):
 9       candidate = element[0]
 10      for element in elements:
 11          if candidate > element:
 12              candidate = element
 13      return candidate
-14  
+14
 15  def longest_progression(elements):
 16      previous, *elements = elements
 17      candidate = [previous]
@@ -6050,12 +6050,12 @@ WHERE NOT EXISTS -- Ensure that there is no...
 25                  best = candidate
 26          previous = element # paroxython: ...find_best_element:element:best
 27      return best
-28  
+28
 29  greatest = 0
 30  for (i, (a, b)) in enumerate(couples, 1):
 31      if b * log(a) > greatest:
 32          greatest = b * log(a)
-33  
+33
 34  for digit in word:
 35      if digit == previous_digit == "1":
 36          previous_digit = None
@@ -6086,10 +6086,10 @@ Check whether all elements of a collection satisfy a predicate (universal quanti
 
 ##### Derivations
 
-[⬆️ feature `for`](#feature-for)  
-[⬆️ feature `if`](#feature-if)  
-[⬆️ feature `if_test_atom`](#feature-if_test_atom)  
-[⬆️ feature `return`](#feature-return)  
+[⬆️ feature `for`](#feature-for)
+[⬆️ feature `if`](#feature-if)
+[⬆️ feature `if_test_atom`](#feature-if_test_atom)
+[⬆️ feature `return`](#feature-return)
 
 ##### Specification
 
@@ -6120,7 +6120,7 @@ _Remark._ The `return` statement following the loop is untested, which allows to
 3           if not is_good(element):
 4               return False
 5       return True
-6   
+6
 7   def some_elements_satisfy(elements):
 8       for element in elements:
 9           if is_good(element):
@@ -6150,10 +6150,10 @@ Linear search. Return the first element of a sequence satisfying a predicate.
 
 ##### Derivations
 
-[⬆️ feature `for`](#feature-for)  
-[⬆️ feature `if`](#feature-if)  
-[⬆️ feature `if_test_atom`](#feature-if_test_atom)  
-[⬆️ feature `return`](#feature-return)  
+[⬆️ feature `for`](#feature-for)
+[⬆️ feature `if`](#feature-if)
+[⬆️ feature `if_test_atom`](#feature-if_test_atom)
+[⬆️ feature `return`](#feature-return)
 
 ##### Specification
 
@@ -6207,11 +6207,11 @@ Interrogate a stream of inputs up to a valid value, and returning it.
 
 ##### Derivations
 
-[⬆️ feature `assignment_lhs_identifier`](#feature-assignment_lhs_identifier)  
-[⬆️ feature `if`](#feature-if)  
-[⬆️ feature `if_test_atom`](#feature-if_test_atom)  
-[⬆️ feature `infinite_while`](#feature-infinite_while)  
-[⬆️ feature `return`](#feature-return)  
+[⬆️ feature `assignment_lhs_identifier`](#feature-assignment_lhs_identifier)
+[⬆️ feature `if`](#feature-if)
+[⬆️ feature `if_test_atom`](#feature-if_test_atom)
+[⬆️ feature `infinite_while`](#feature-infinite_while)
+[⬆️ feature `return`](#feature-return)
 
 ##### Specification
 
@@ -6255,12 +6255,12 @@ Count inputs until a sentinel value is encountered.
 
 ##### Derivations
 
-[⬆️ feature `assignment_lhs_identifier`](#feature-assignment_lhs_identifier)  
-[⬆️ feature `if`](#feature-if)  
-[⬆️ feature `if_test_atom`](#feature-if_test_atom)  
-[⬆️ feature `increment`](#feature-increment)  
-[⬆️ feature `infinite_while`](#feature-infinite_while)  
-[⬆️ feature `return`](#feature-return)  
+[⬆️ feature `assignment_lhs_identifier`](#feature-assignment_lhs_identifier)
+[⬆️ feature `if`](#feature-if)
+[⬆️ feature `if_test_atom`](#feature-if_test_atom)
+[⬆️ feature `increment`](#feature-increment)
+[⬆️ feature `infinite_while`](#feature-infinite_while)
+[⬆️ feature `return`](#feature-return)
 
 ##### Specification
 
@@ -6312,12 +6312,12 @@ Accumulate a stream of inputs until a sentinel value is encountered.
 
 ##### Derivations
 
-[⬆️ feature `assignment_lhs_identifier`](#feature-assignment_lhs_identifier)  
-[⬆️ feature `if`](#feature-if)  
-[⬆️ feature `if_test_atom`](#feature-if_test_atom)  
-[⬆️ feature `infinite_while`](#feature-infinite_while)  
-[⬆️ feature `return`](#feature-return)  
-[⬆️ feature `update`](#feature-update)  
+[⬆️ feature `assignment_lhs_identifier`](#feature-assignment_lhs_identifier)
+[⬆️ feature `if`](#feature-if)
+[⬆️ feature `if_test_atom`](#feature-if_test_atom)
+[⬆️ feature `infinite_while`](#feature-infinite_while)
+[⬆️ feature `return`](#feature-return)
+[⬆️ feature `update`](#feature-update)
 
 ##### Specification
 
@@ -6348,7 +6348,7 @@ JOIN t_update acc ON (acc.span_start > t_if.span_start -- which is updated after
 5           if is_sentinel(x, y):
 6               return acc
 7           acc = combine(x, acc)
-8   
+8
 9   def accumulate_inputs():
 10      acc = seed
 11      while True:
@@ -6356,7 +6356,7 @@ JOIN t_update acc ON (acc.span_start > t_if.span_start -- which is updated after
 13          if x > y:
 14              return acc
 15          acc += abs(x)
-16  
+16
 17  def accumulate_inputs():
 18      acc = seed
 19      while True:
@@ -6364,7 +6364,7 @@ JOIN t_update acc ON (acc.span_start > t_if.span_start -- which is updated after
 21          if x > y:
 22              return acc
 23          foobar(acc, x) # paroxython: update:acc:x
-24  
+24
 25  def accumulate_inputs():
 26      acc = []
 27      while True:

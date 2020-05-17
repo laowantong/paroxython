@@ -10,7 +10,9 @@
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## Presentation
+![](docs/logo.png)
+
+# Presentation
 
 Paroxython is an open-source tool which automatically finds and tags algorithmic features (such as assignments, nested loops, tail-recursive functions, etc.) in a collection of small Python programs, typically gathered for educational purposes (e.g., examples, patterns, exercise corrections).
 
@@ -18,7 +20,7 @@ Each tag consists in a free-form label associated with its spanning lines. These
 
 Source-codes, labels and taxons are stored in a database, which can finally be filtered through a pipeline of inclusion, exclusion and impartment commands on programs or taxons.
 
-## Installation
+# Installation
 
 ```
 pip install paroxython
@@ -42,6 +44,12 @@ paroxython --help
 print("Hello World!")
 ```
 
-## Documentation
+| Taxon | Lines |
+|:--|:--|
+| io/standard/print | 1 |
+| type/elementary/string | 1 |
+
+
+# Documentation
 
 Coming soon.

@@ -19,12 +19,15 @@ from functools import lru_cache
 
 from .user_types import TaxonName, TaxonNameSet, ProgramTaxonNames, AssessedPrograms, Literal
 
-__pdoc__ = {"LearningCostAssessor.__call__": True}
+__pdoc__ = {
+    "LearningCostAssessor.__call__": True,
+}
 
 
 @lru_cache(maxsize=None)  # NB: memoization needed for consistency with mypy's typing
 def range_to_cost_linear(start: int, stop: int) -> float:
-    """Return the length of the slice between `start` (inclusive) and `stop` (exclusive)."""
+    """Return the length of the slice between `start` (inclusive) and `stop` (exclusive).
+    """
     return float(stop - start)
 
 
@@ -52,18 +55,26 @@ def range_to_cost_zeno(start: int, stop: int) -> float:
 
 
 class LearningCostAssessor:
-    """Evaluate the learning costs of programs with respect to the given imparted knowledge."""
-
     def __init__(self, imparted_knowledge: TaxonNameSet) -> None:
+        """Evaluate the learning costs of programs with respect to the given imparted knowledge.
+
+        Args:
+            imparted_knowledge (TaxonNameSet): A set of taxon names, representing all the notions
+                introduced so far.
+        """
         self.imparted_knowledge = imparted_knowledge
 
     def set_cost_assessment_strategy(self, strategy: Literal["zeno", "linear"] = "zeno") -> None:
-        """Select the function to be used for the learning cost calculation.
+        """Set the function to be used for the learning cost calculation.
 
-        Possible values:
+        Args:
+            strategy (str, optional): Either:
 
-        - `"zeno"`: `range_to_cost_zeno`.
-        - `"linear"`: `range_to_cost_linear`.
+                - `"zeno"`: `range_to_cost_zeno` (default).
+                - `"linear"`: `range_to_cost_linear`.
+
+        Raises:
+            NotImplementedError: Raised in case of unknown strategy.
         """
         if strategy.lower() == "zeno":
             self.range_to_cost = range_to_cost_zeno
@@ -78,8 +89,14 @@ class LearningCostAssessor:
     def taxon_cost(self, taxon: TaxonName) -> float:
         """Evaluate the learning cost of a given taxon.
 
-        The bounds of the not-yet-imparted suffix are extracted and passed to the cost assessment
-        function.
+        The bounds of the not-yet-imparted suffix of the taxon are extracted and passed to the cost
+        assessment function.
+
+        Args:
+            taxon (TaxonName): The taxon to be costed.
+
+        Returns:
+            float: The learning cost of the taxon.
 
         .. note::
           The learning cost of a taxon prefixed by `"metadata/"` is assumed to be zero.
@@ -98,7 +115,12 @@ class LearningCostAssessor:
     def __call__(self, programs: ProgramTaxonNames) -> AssessedPrograms:
         """Associate the given programs with the total learning cost of their taxons.
 
-        Return a list of tuples `(total_cost, ProgramName)` sorted by increasing cost.
+        Args:
+            programs (ProgramTaxonNames): A dictionary associating each program name with a list
+                of taxon names.
+
+        Returns:
+            AssessedPrograms: A list of tuples `(total_cost, ProgramName)` sorted by increasing cost.
         """
         return sorted(
             (sum(map(self.taxon_cost, taxon_names)), program_name)
