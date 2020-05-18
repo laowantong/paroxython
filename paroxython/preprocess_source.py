@@ -29,6 +29,15 @@ subn_paroxython_comment = regex.compile(r"(?i)#\s*paroxython\s*:\s*").subn
 
 
 def cleanup_factory(cleanup_strategy: str) -> Callable[[Source], Source]:
+    """Select the transformation to be applied to a given source-code.
+
+    Args:
+        cleanup_strategy (str): The name of the transformation. Currently, any other name than
+            `"full"` (corresponding to `full_cleaning()` comes down to the identity function).
+
+    Returns:
+        Callable[[Source], Source]: A function that will clean up a given source-code.
+    """
     cleanup = lambda source: source
     if cleanup_strategy == "full":
         cleanup = lambda source: sub_main("", full_cleaning(source))
@@ -174,7 +183,25 @@ match_isolated_hints = regex.compile(fr"\s*{HINT_COMMENT} (.+)").match
 
 
 def centrifugate_hints(source: Source) -> Source:
-    """Transform the isolated hints into all-encompassing hints."""
+    """Transform the isolated hints into all-encompassing hints.
+
+    When a hint is isolated on its own line, it is considered to extend to the entire program.
+    This transformation makes such hints open on the first line and close on the last line.
+
+    Args:
+        source (Source): The source to be centrifugated.
+
+    Returns:
+        Source: A centrifugated source.
+
+    Examples:
+        - Some isolated hints.
+        <div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_centrifugate_hints.py?slice=10:17&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_centrifugate_hints.py?slice=18:23&footer=0"></script></div></div>
+        - Some trailing isolated hints.
+        <div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_centrifugate_hints.py?slice=26:33&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_centrifugate_hints.py?slice=34:39&footer=0"></script></div></div>
+        - No isolated hints.
+        <div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_centrifugate_hints.py?slice=42:47&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_centrifugate_hints.py?slice=48:53&footer=0"></script></div></div>
+    """
     lines = []
     hints: Set[str] = set()
     for line in source.split("\n"):

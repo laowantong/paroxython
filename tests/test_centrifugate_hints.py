@@ -1,4 +1,5 @@
 import pytest
+from pathlib import Path
 
 import regex  # type: ignore
 
@@ -6,7 +7,7 @@ import context
 from paroxython.preprocess_source import centrifugate_hints
 
 sources = r"""
-<<< some isolated hints
+<<< Some isolated hints.
 foo = bar # paroxython: hint_1 hint_2
 # paroxython: hint_3
 fizz = [
@@ -22,7 +23,7 @@ fizz = [
 ] # paroxython: ...hint_3 ...hint_5
 >>>
 
-<<< some trailing isolated hints
+<<< Some trailing isolated hints.
 foo = bar # paroxython: hint_1 hint_2
 fizz = [
     "foo",
@@ -38,7 +39,7 @@ fizz = [
 ] # paroxython: hint_4 ...hint_5 ...hint_6
 >>>
 
-<<< no isolated hints
+<<< No isolated hints.
 foo = bar # paroxython: hint_1 hint_2
 fizz = [
     "foo",
@@ -62,3 +63,28 @@ def test_centrifugate_hints(title, original, expected):
     result = centrifugate_hints(original)
     print(result)
     assert result == expected
+
+
+def test_update_docstring():
+    offset = 10
+    result = []
+    for (title, original, expected) in examples:
+        result.append(f"- {title}")
+        i1 = offset
+        i2 = i1 + original.count("\n") + 1
+        j1 = i2 + 1
+        j2 = j1 + expected.count("\n") + 1
+        result.append(
+            f"""<div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_centrifugate_hints.py?slice={i1}:{i2}&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_centrifugate_hints.py?slice={j1}:{j2}&footer=0"></script></div></div>"""
+        )
+        print(i1, i2, j1, j2)
+        offset = j2 + 3
+    result = "\n        ".join(result)
+    path = Path("paroxython/preprocess_source.py")
+    source = path.read_text()
+    source = regex.sub(
+        r'(?sm)^(def centrifugate_hints.+?Examples:\n).+?^(\s+""")',
+        fr"\1        {result}\n\2",
+        source,
+    )
+    path.write_text(source)

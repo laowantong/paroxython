@@ -29,7 +29,7 @@
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L0-L210" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L0-L237" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">from collections import defaultdict
 from token import DEDENT, INDENT, NEWLINE, STRING
@@ -210,11 +210,22 @@ if __name__ == &#34;__main__&#34;:
 <span>def <span class="ident">cleanup_factory</span></span>(<span>cleanup_strategy: str) ‑> Callable[[Source], Source]</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Select the transformation to be applied to a given source-code.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>cleanup_strategy</code></strong> :&ensp;<code>str</code></dt>
+<dd>The name of the transformation. Currently, any other name than
+<code>"full"</code> (corresponding to <code><a title="paroxython.preprocess_source.full_cleaning" href="#paroxython.preprocess_source.full_cleaning">full_cleaning()</a></code> comes down to the identity function).</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>Callable[[Source], Source]</code></dt>
+<dd>A function that will clean up a given source-code.</dd>
+</dl></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L31-L35" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L31-L44" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def cleanup_factory(cleanup_strategy: str) -&gt; Callable[[Source], Source]:
     cleanup = lambda source: source
@@ -271,7 +282,7 @@ indentation level.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L38-L101" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L47-L110" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def full_cleaning(source: Source) -&gt; Source:
     result = []
@@ -311,7 +322,7 @@ indentation level.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L140-L170" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L149-L179" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def collect_hints(source: Source) -&gt; Tuple[LabelsSpans, LabelsSpans]:
     addition = HintBuffer(&#34;addition&#34;)
@@ -349,11 +360,32 @@ indentation level.</p>
 <span>def <span class="ident">centrifugate_hints</span></span>(<span>source: Source) ‑> Source</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Transform the isolated hints into all-encompassing hints.</p></div>
+<div class="desc"><p>Transform the isolated hints into all-encompassing hints.</p>
+<p>When a hint is isolated on its own line, it is considered to extend to the entire program.
+This transformation makes such hints open on the first line and close on the last line.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>source</code></strong> :&ensp;<code>Source</code></dt>
+<dd>The source to be centrifugated.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>Source</code></dt>
+<dd>A centrifugated source.</dd>
+</dl>
+<h2 id="examples">Examples</h2>
+<ul>
+<li>Some isolated hints.
+<div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_centrifugate_hints.py?slice=10:17&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_centrifugate_hints.py?slice=18:23&footer=0"></script></div></div></li>
+<li>Some trailing isolated hints.
+<div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_centrifugate_hints.py?slice=26:33&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_centrifugate_hints.py?slice=34:39&footer=0"></script></div></div></li>
+<li>No isolated hints.
+<div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_centrifugate_hints.py?slice=42:47&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_centrifugate_hints.py?slice=48:53&footer=0"></script></div></div></li>
+</ul></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L176-L194" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L185-L221" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def centrifugate_hints(source: Source) -&gt; Source:
     lines = []
@@ -383,7 +415,7 @@ indentation level.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L200-L201" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L227-L228" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def remove_hints(source: Source) -&gt; Source:
     return replace_hints(&#34;&#34;, source).strip()</code></pre>
@@ -403,7 +435,7 @@ indentation level.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L104-L134" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L113-L143" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">class HintBuffer:
     def __init__(self, description: str) -&gt; None:
@@ -440,7 +472,7 @@ indentation level.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L112-L114" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L121-L123" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def append_hint(self, label_name: LabelName, line_number: int) -&gt; None:
     self.result[label_name].append(Span(line_number, line_number))</code></pre>
@@ -454,7 +486,7 @@ indentation level.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L116-L117" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L125-L126" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def open_hint(self, label_name: LabelName, line_number: int) -&gt; None:
     self.stack[label_name].append(line_number)</code></pre>
@@ -468,7 +500,7 @@ indentation level.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L119-L121" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L128-L130" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def get_champion(self, label_name: LabelName) -&gt; List[Tuple[int, &#34;HintBuffer&#34;]]:
     return [(self.stack[label_name][-1], self)] if self.stack[label_name] else []</code></pre>
@@ -482,7 +514,7 @@ indentation level.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L123-L125" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L132-L134" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def close_hint(self, label_name: LabelName, line_number: int) -&gt; None:
     self.result[label_name].append(Span(self.stack[label_name].pop(), line_number))</code></pre>
@@ -496,7 +528,7 @@ indentation level.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L127-L130" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L136-L139" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def ensure_stack_is_empty(self) -&gt; None:
     if any(self.stack.values()):
@@ -511,7 +543,7 @@ indentation level.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L132-L134" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L141-L143" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def get_result(self) -&gt; LabelsSpans:
     return {k: sorted(v) for (k, v) in self.result.items()}</code></pre>
