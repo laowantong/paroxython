@@ -95,7 +95,7 @@ def strip_docstrings():
 def embed_code_with_line_numbers():
     path = Path("docs/index.html")
     source = path.read_text()
-    embed = Path("docs/fibonacci.html").read_text()
+    embed = '<script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Flaowantong%2Fparoxython%2Fblob%2Fmaster%2Fdocs%2Ffibonacci.py&style=github&showBorder=on&showLineNumbers=on"></script>'
     source = regex.sub(r"(?s) \(line numbers.+?</pre>", fr":</p>\n{embed}", source)
     path.write_text(source)
 

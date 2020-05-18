@@ -52,7 +52,6 @@ Run it on a cell of Python code (line numbers added for clarity):
 8	    return result
 ```
 
-Output:
 
 | Taxon | Lines |
 |:--|--:|
