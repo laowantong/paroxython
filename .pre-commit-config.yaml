@@ -21,5 +21,5 @@ repos:
     rev: 19.10b0
     hooks:
     -   id: black
-        exclude: tests/snapshots/*|tests/data/programming_idioms/*|docs/fibonacci.py
+        exclude: tests/snapshots/*|tests/data/programming_idioms/*
         args: [--line-length=100]

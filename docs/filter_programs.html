@@ -488,241 +488,40 @@ def normalized_triple(predicate: str, name_1: TaxonName, name_2: TaxonName) -&gt
 </dl>
 <h3>Methods</h3>
 <dl>
-<dt id="paroxython.filter_programs.ProgramFilter.exclude_programs"><code class="name flex">
-<span>def <span class="ident">exclude_programs</span></span>(<span>self, programs: Set[ProgramName]) ‑> NoneType</span>
+<dt id="paroxython.filter_programs.ProgramFilter.taxons_of_programs"><code class="name flex">
+<span>def <span class="ident">taxons_of_programs</span></span>(<span>self, programs: Set[ProgramName]) ‑> Set[TaxonName]</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Deselect the programs found among the given ones or imported by them.</p></div>
+<div class="desc"><p>Return the taxon names featured (directly or not) by the given programs.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L148-L154" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L50-L56" class="git-link">Browse GitHub</a>
 </summary>
-<pre><code class="python">def exclude_programs(self, programs: ProgramNameSet) -&gt; None:
-    for program in programs:
-        self.selected_programs.pop(program, None)
-    for program in list(self.selected_programs):
-        if programs.intersection(self.db_importations[program]):
-            self.selected_programs.pop(program, None)</code></pre>
-</details>
-</dd>
-<dt id="paroxython.filter_programs.ProgramFilter.exclude_taxons"><code class="name flex">
-<span>def <span class="ident">exclude_taxons</span></span>(<span>self, taxons: List[Union[TaxonName, TaxonTriple]]) ‑> NoneType</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Deselect the programs featuring (directly or not) at least one given taxon.</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L227-L231" class="git-link">Browse GitHub</a>
-</summary>
-<pre><code class="python">def exclude_taxons(self, taxons: TaxonNamesOrTriples) -&gt; None:
-    programs = self.programs_of_taxons(taxons, follow=True)
-    for program in programs:
-        self.selected_programs.pop(program, None)</code></pre>
-</details>
-</dd>
-<dt id="paroxython.filter_programs.ProgramFilter.impart_programs"><code class="name flex">
-<span>def <span class="ident">impart_programs</span></span>(<span>self, programs: Set[ProgramName]) ‑> NoneType</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Deselect the programs found in the given ones.</p>
-<p>Additionally, enrich the imparted knowledge with all the prefixes of the taxons featured
-(directly or not) by these programs.</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L136-L146" class="git-link">Browse GitHub</a>
-</summary>
-<pre><code class="python">def impart_programs(self, programs: ProgramNameSet) -&gt; None:
-    for program in programs:
-        self.selected_programs.pop(program, None)
-        if program in self.db_programs:
-            for imported_program in self.db_importations[program]:
-                self.selected_programs.pop(imported_program, None)
-    self.impart_taxons(self.taxons_of_programs(programs))  # type: ignore</code></pre>
-</details>
-</dd>
-<dt id="paroxython.filter_programs.ProgramFilter.impart_taxon_name"><code class="name flex">
-<span>def <span class="ident">impart_taxon_name</span></span>(<span>self, taxon: TaxonName) ‑> NoneType</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Enrich the imparted knowledge with all the prefixes of the given taxon.</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L210-L215" class="git-link">Browse GitHub</a>
-</summary>
-<pre><code class="python">def impart_taxon_name(self, taxon: TaxonName) -&gt; None:
-    segments = taxon.split(&#34;/&#34;)
-    for i in range(len(segments)):
-        prefix = &#34;/&#34;.join(segments[: i + 1])
-        self.imparted_knowledge.add(TaxonName(prefix))</code></pre>
-</details>
-</dd>
-<dt id="paroxython.filter_programs.ProgramFilter.impart_taxons"><code class="name flex">
-<span>def <span class="ident">impart_taxons</span></span>(<span>self, taxons: List[Union[TaxonName, TaxonTriple]]) ‑> NoneType</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Enrich the imparted knowledge with all the prefixes of the given taxons.</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L217-L225" class="git-link">Browse GitHub</a>
-</summary>
-<pre><code class="python">def impart_taxons(self, taxons: TaxonNamesOrTriples) -&gt; None:
-    for taxon in taxons:
-        if isinstance(taxon, str):
-            self.impart_taxon_name(taxon)
-        else:  # ignore the predicate and impart the two taxons
-            print(f&#34;Warning: predicate &#39;{taxon[0]}&#39; ignored.&#34;, file=sys.stderr)
-            self.impart_taxon_name(taxon[1])
-            self.impart_taxon_name(taxon[2])</code></pre>
-</details>
-</dd>
-<dt id="paroxython.filter_programs.ProgramFilter.include_programs"><code class="name flex">
-<span>def <span class="ident">include_programs</span></span>(<span>self, programs: Set[ProgramName]) ‑> NoneType</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Deselect the programs neither found among the given ones or those they import.</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L156-L164" class="git-link">Browse GitHub</a>
-</summary>
-<pre><code class="python">def include_programs(self, programs: ProgramNameSet) -&gt; None:
-    extended_programs: ProgramNameSet = set(programs)  # make a copy to ensure purity
+<pre><code class="python">def taxons_of_programs(self, programs: ProgramNameSet) -&gt; TaxonNameSet:
+    taxons: TaxonNameSet = set()
     for program in programs:
         if program in self.db_programs:
-            extended_programs.update(self.db_importations[program])
-    for program in list(self.selected_programs):
-        if program not in extended_programs:
-            self.selected_programs.pop(program, None)</code></pre>
+            taxons.update(self.db_programs[program][&#34;taxons&#34;])
+    return taxons</code></pre>
 </details>
 </dd>
-<dt id="paroxython.filter_programs.ProgramFilter.include_taxons"><code class="name flex">
-<span>def <span class="ident">include_taxons</span></span>(<span>self, taxons: List[Union[TaxonName, TaxonTriple]]) ‑> NoneType</span>
+<dt id="paroxython.filter_programs.ProgramFilter.programs_of_taxons"><code class="name flex">
+<span>def <span class="ident">programs_of_taxons</span></span>(<span>self, taxons: List[Union[TaxonName, TaxonTriple]], follow: bool) ‑> Set[ProgramName]</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Deselect the programs not featuring any given taxon.</p></div>
+<div class="desc"><p>Return the programs featuring (optionally by importation) any given taxon.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L233-L238" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L58-L64" class="git-link">Browse GitHub</a>
 </summary>
-<pre><code class="python">def include_taxons(self, taxons: TaxonNamesOrTriples) -&gt; None:
-    programs = self.programs_of_taxons(taxons, follow=False)
-    for program in list(self.selected_programs):
-        if program not in programs:
-            self.selected_programs.pop(program, None)</code></pre>
-</details>
-</dd>
-<dt id="paroxython.filter_programs.ProgramFilter.match_against_existing_programs"><code class="name flex">
-<span>def <span class="ident">match_against_existing_programs</span></span>(<span>self, pattern: str) ‑> Set[ProgramName]</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Enumerate all the existing programs matching the given pattern.</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L110-L124" class="git-link">Browse GitHub</a>
-</summary>
-<pre><code class="python">def match_against_existing_programs(self, pattern: str) -&gt; ProgramNameSet:
-    result: ProgramNameSet = set()
-    fullmatch = regex.compile(pattern).fullmatch
-    no_match = True
-    for program_name in self.db_programs:
-        if fullmatch(program_name):
-            result.add(program_name)
-            no_match = False
-    if no_match:
-        print(
-            f&#34;Warning: the pattern &#39;{pattern}&#39; doesn&#39;t match any existing program.&#34;,
-            file=sys.stderr,
-        )
-    return result</code></pre>
-</details>
-</dd>
-<dt id="paroxython.filter_programs.ProgramFilter.match_against_existing_taxons"><code class="name flex">
-<span>def <span class="ident">match_against_existing_taxons</span></span>(<span>self, pattern: str) ‑> Set[TaxonName]</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Enumerate all the existing taxons matching the given pattern.</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L168-L182" class="git-link">Browse GitHub</a>
-</summary>
-<pre><code class="python">def match_against_existing_taxons(self, pattern: str) -&gt; TaxonNameSet:
-    result: TaxonNameSet = set()
-    fullmatch = regex.compile(pattern).fullmatch
-    no_match = True
-    for taxon_name in self.db_taxons:
-        if fullmatch(taxon_name):
-            result.add(taxon_name)
-            no_match = False
-    if no_match:
-        print(
-            f&#34;Warning: the pattern &#39;{pattern}&#39; doesn&#39;t match any existing taxon.&#34;,
-            file=sys.stderr,
-        )
-    return result</code></pre>
-</details>
-</dd>
-<dt id="paroxython.filter_programs.ProgramFilter.preprocess_programs"><code class="name flex">
-<span>def <span class="ident">preprocess_programs</span></span>(<span>self, programs: List[ProgramName]) ‑> List[ProgramName]</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Return all the program names matching at least one of the given regex patterns.</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L126-L134" class="git-link">Browse GitHub</a>
-</summary>
-<pre><code class="python">def preprocess_programs(self, programs: ProgramNames) -&gt; ProgramNames:
-    result: Set[ProgramName] = set()
-    for program in programs:
-        if program in self.db_programs:
-            result.add(program)
-        else:
-            result.update(self.match_against_existing_programs(program))
-    return sorted(result)</code></pre>
-</details>
-</dd>
-<dt id="paroxython.filter_programs.ProgramFilter.preprocess_taxons"><code class="name flex">
-<span>def <span class="ident">preprocess_taxons</span></span>(<span>self, taxons: List[Union[TaxonName, TaxonTriple]]) ‑> List[Union[TaxonName, TaxonTriple]]</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Parse the taxons and the triples and try to match them with existing taxon names.</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L184-L208" class="git-link">Browse GitHub</a>
-</summary>
-<pre><code class="python">def preprocess_taxons(self, taxons: TaxonNamesOrTriples) -&gt; TaxonNamesOrTriples:
-    result: Set[TaxonNameOrTriple] = set()
-    for taxon in taxons:
-        if isinstance(taxon, str):
-            # The taxon is a name or a pattern.
-            if taxon in self.db_taxons:
-                # If it is an existing name, keep it.
-                result.add(taxon)
-            else:
-                # Otherwise, process it as a pattern, and add all its matches.
-                result.update(self.match_against_existing_taxons(taxon))
-        else:
-            # The taxon is a triple.
-            (predicate, name_1, name_2) = taxon
-            if name_1 in self.db_taxons and name_2 in self.db_taxons:
-                # If both names are existing, keep the triple.
-                result.add(taxon)
-            else:
-                # Otherwise, process them as patterns, and add the product of their matches.
-                taxons_1 = self.match_against_existing_taxons(name_1)
-                taxons_2 = self.match_against_existing_taxons(name_2)
-                for (name_1, name_2) in product(taxons_1, taxons_2):
-                    result.add(TaxonTriple(predicate, name_1, name_2))
-    return sorted(result)</code></pre>
+<pre><code class="python">def programs_of_taxons(self, taxons: TaxonNamesOrTriples, follow: bool) -&gt; ProgramNameSet:
+    programs: ProgramNameSet = set()
+    programs.update(*map(self.programs_of_taxon, taxons))
+    if follow:
+        programs.update(*(self.db_exportations[program] for program in programs))
+    return programs</code></pre>
 </details>
 </dd>
 <dt id="paroxython.filter_programs.ProgramFilter.programs_of_taxon"><code class="name flex">
@@ -769,40 +568,241 @@ def normalized_triple(predicate: str, name_1: TaxonName, name_2: TaxonName) -&gt
     return programs</code></pre>
 </details>
 </dd>
-<dt id="paroxython.filter_programs.ProgramFilter.programs_of_taxons"><code class="name flex">
-<span>def <span class="ident">programs_of_taxons</span></span>(<span>self, taxons: List[Union[TaxonName, TaxonTriple]], follow: bool) ‑> Set[ProgramName]</span>
+<dt id="paroxython.filter_programs.ProgramFilter.match_against_existing_programs"><code class="name flex">
+<span>def <span class="ident">match_against_existing_programs</span></span>(<span>self, pattern: str) ‑> Set[ProgramName]</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Return the programs featuring (optionally by importation) any given taxon.</p></div>
+<div class="desc"><p>Enumerate all the existing programs matching the given pattern.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L58-L64" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L110-L124" class="git-link">Browse GitHub</a>
 </summary>
-<pre><code class="python">def programs_of_taxons(self, taxons: TaxonNamesOrTriples, follow: bool) -&gt; ProgramNameSet:
-    programs: ProgramNameSet = set()
-    programs.update(*map(self.programs_of_taxon, taxons))
-    if follow:
-        programs.update(*(self.db_exportations[program] for program in programs))
-    return programs</code></pre>
+<pre><code class="python">def match_against_existing_programs(self, pattern: str) -&gt; ProgramNameSet:
+    result: ProgramNameSet = set()
+    fullmatch = regex.compile(pattern).fullmatch
+    no_match = True
+    for program_name in self.db_programs:
+        if fullmatch(program_name):
+            result.add(program_name)
+            no_match = False
+    if no_match:
+        print(
+            f&#34;Warning: the pattern &#39;{pattern}&#39; doesn&#39;t match any existing program.&#34;,
+            file=sys.stderr,
+        )
+    return result</code></pre>
 </details>
 </dd>
-<dt id="paroxython.filter_programs.ProgramFilter.taxons_of_programs"><code class="name flex">
-<span>def <span class="ident">taxons_of_programs</span></span>(<span>self, programs: Set[ProgramName]) ‑> Set[TaxonName]</span>
+<dt id="paroxython.filter_programs.ProgramFilter.preprocess_programs"><code class="name flex">
+<span>def <span class="ident">preprocess_programs</span></span>(<span>self, programs: List[ProgramName]) ‑> List[ProgramName]</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Return the taxon names featured (directly or not) by the given programs.</p></div>
+<div class="desc"><p>Return all the program names matching at least one of the given regex patterns.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L50-L56" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L126-L134" class="git-link">Browse GitHub</a>
 </summary>
-<pre><code class="python">def taxons_of_programs(self, programs: ProgramNameSet) -&gt; TaxonNameSet:
-    taxons: TaxonNameSet = set()
+<pre><code class="python">def preprocess_programs(self, programs: ProgramNames) -&gt; ProgramNames:
+    result: Set[ProgramName] = set()
     for program in programs:
         if program in self.db_programs:
-            taxons.update(self.db_programs[program][&#34;taxons&#34;])
-    return taxons</code></pre>
+            result.add(program)
+        else:
+            result.update(self.match_against_existing_programs(program))
+    return sorted(result)</code></pre>
+</details>
+</dd>
+<dt id="paroxython.filter_programs.ProgramFilter.impart_programs"><code class="name flex">
+<span>def <span class="ident">impart_programs</span></span>(<span>self, programs: Set[ProgramName]) ‑> NoneType</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Deselect the programs found in the given ones.</p>
+<p>Additionally, enrich the imparted knowledge with all the prefixes of the taxons featured
+(directly or not) by these programs.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L136-L146" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">def impart_programs(self, programs: ProgramNameSet) -&gt; None:
+    for program in programs:
+        self.selected_programs.pop(program, None)
+        if program in self.db_programs:
+            for imported_program in self.db_importations[program]:
+                self.selected_programs.pop(imported_program, None)
+    self.impart_taxons(self.taxons_of_programs(programs))  # type: ignore</code></pre>
+</details>
+</dd>
+<dt id="paroxython.filter_programs.ProgramFilter.exclude_programs"><code class="name flex">
+<span>def <span class="ident">exclude_programs</span></span>(<span>self, programs: Set[ProgramName]) ‑> NoneType</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Deselect the programs found among the given ones or imported by them.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L148-L154" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">def exclude_programs(self, programs: ProgramNameSet) -&gt; None:
+    for program in programs:
+        self.selected_programs.pop(program, None)
+    for program in list(self.selected_programs):
+        if programs.intersection(self.db_importations[program]):
+            self.selected_programs.pop(program, None)</code></pre>
+</details>
+</dd>
+<dt id="paroxython.filter_programs.ProgramFilter.include_programs"><code class="name flex">
+<span>def <span class="ident">include_programs</span></span>(<span>self, programs: Set[ProgramName]) ‑> NoneType</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Deselect the programs neither found among the given ones or those they import.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L156-L164" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">def include_programs(self, programs: ProgramNameSet) -&gt; None:
+    extended_programs: ProgramNameSet = set(programs)  # make a copy to ensure purity
+    for program in programs:
+        if program in self.db_programs:
+            extended_programs.update(self.db_importations[program])
+    for program in list(self.selected_programs):
+        if program not in extended_programs:
+            self.selected_programs.pop(program, None)</code></pre>
+</details>
+</dd>
+<dt id="paroxython.filter_programs.ProgramFilter.match_against_existing_taxons"><code class="name flex">
+<span>def <span class="ident">match_against_existing_taxons</span></span>(<span>self, pattern: str) ‑> Set[TaxonName]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Enumerate all the existing taxons matching the given pattern.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L168-L182" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">def match_against_existing_taxons(self, pattern: str) -&gt; TaxonNameSet:
+    result: TaxonNameSet = set()
+    fullmatch = regex.compile(pattern).fullmatch
+    no_match = True
+    for taxon_name in self.db_taxons:
+        if fullmatch(taxon_name):
+            result.add(taxon_name)
+            no_match = False
+    if no_match:
+        print(
+            f&#34;Warning: the pattern &#39;{pattern}&#39; doesn&#39;t match any existing taxon.&#34;,
+            file=sys.stderr,
+        )
+    return result</code></pre>
+</details>
+</dd>
+<dt id="paroxython.filter_programs.ProgramFilter.preprocess_taxons"><code class="name flex">
+<span>def <span class="ident">preprocess_taxons</span></span>(<span>self, taxons: List[Union[TaxonName, TaxonTriple]]) ‑> List[Union[TaxonName, TaxonTriple]]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Parse the taxons and the triples and try to match them with existing taxon names.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L184-L208" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">def preprocess_taxons(self, taxons: TaxonNamesOrTriples) -&gt; TaxonNamesOrTriples:
+    result: Set[TaxonNameOrTriple] = set()
+    for taxon in taxons:
+        if isinstance(taxon, str):
+            # The taxon is a name or a pattern.
+            if taxon in self.db_taxons:
+                # If it is an existing name, keep it.
+                result.add(taxon)
+            else:
+                # Otherwise, process it as a pattern, and add all its matches.
+                result.update(self.match_against_existing_taxons(taxon))
+        else:
+            # The taxon is a triple.
+            (predicate, name_1, name_2) = taxon
+            if name_1 in self.db_taxons and name_2 in self.db_taxons:
+                # If both names are existing, keep the triple.
+                result.add(taxon)
+            else:
+                # Otherwise, process them as patterns, and add the product of their matches.
+                taxons_1 = self.match_against_existing_taxons(name_1)
+                taxons_2 = self.match_against_existing_taxons(name_2)
+                for (name_1, name_2) in product(taxons_1, taxons_2):
+                    result.add(TaxonTriple(predicate, name_1, name_2))
+    return sorted(result)</code></pre>
+</details>
+</dd>
+<dt id="paroxython.filter_programs.ProgramFilter.impart_taxon_name"><code class="name flex">
+<span>def <span class="ident">impart_taxon_name</span></span>(<span>self, taxon: TaxonName) ‑> NoneType</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Enrich the imparted knowledge with all the prefixes of the given taxon.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L210-L215" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">def impart_taxon_name(self, taxon: TaxonName) -&gt; None:
+    segments = taxon.split(&#34;/&#34;)
+    for i in range(len(segments)):
+        prefix = &#34;/&#34;.join(segments[: i + 1])
+        self.imparted_knowledge.add(TaxonName(prefix))</code></pre>
+</details>
+</dd>
+<dt id="paroxython.filter_programs.ProgramFilter.impart_taxons"><code class="name flex">
+<span>def <span class="ident">impart_taxons</span></span>(<span>self, taxons: List[Union[TaxonName, TaxonTriple]]) ‑> NoneType</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Enrich the imparted knowledge with all the prefixes of the given taxons.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L217-L225" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">def impart_taxons(self, taxons: TaxonNamesOrTriples) -&gt; None:
+    for taxon in taxons:
+        if isinstance(taxon, str):
+            self.impart_taxon_name(taxon)
+        else:  # ignore the predicate and impart the two taxons
+            print(f&#34;Warning: predicate &#39;{taxon[0]}&#39; ignored.&#34;, file=sys.stderr)
+            self.impart_taxon_name(taxon[1])
+            self.impart_taxon_name(taxon[2])</code></pre>
+</details>
+</dd>
+<dt id="paroxython.filter_programs.ProgramFilter.exclude_taxons"><code class="name flex">
+<span>def <span class="ident">exclude_taxons</span></span>(<span>self, taxons: List[Union[TaxonName, TaxonTriple]]) ‑> NoneType</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Deselect the programs featuring (directly or not) at least one given taxon.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L227-L231" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">def exclude_taxons(self, taxons: TaxonNamesOrTriples) -&gt; None:
+    programs = self.programs_of_taxons(taxons, follow=True)
+    for program in programs:
+        self.selected_programs.pop(program, None)</code></pre>
+</details>
+</dd>
+<dt id="paroxython.filter_programs.ProgramFilter.include_taxons"><code class="name flex">
+<span>def <span class="ident">include_taxons</span></span>(<span>self, taxons: List[Union[TaxonName, TaxonTriple]]) ‑> NoneType</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Deselect the programs not featuring any given taxon.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L233-L238" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">def include_taxons(self, taxons: TaxonNamesOrTriples) -&gt; None:
+    programs = self.programs_of_taxons(taxons, follow=False)
+    for program in list(self.selected_programs):
+        if program not in programs:
+            self.selected_programs.pop(program, None)</code></pre>
 </details>
 </dd>
 </dl>
@@ -835,22 +835,22 @@ data-gaCategoryParameter="paroxython.filter_programs">
 <li>
 <h4><code><a title="paroxython.filter_programs.ProgramFilter" href="#paroxython.filter_programs.ProgramFilter">ProgramFilter</a></code></h4>
 <ul class="">
-<li><code><a title="paroxython.filter_programs.ProgramFilter.exclude_programs" href="#paroxython.filter_programs.ProgramFilter.exclude_programs">exclude_programs</a></code></li>
-<li><code><a title="paroxython.filter_programs.ProgramFilter.exclude_taxons" href="#paroxython.filter_programs.ProgramFilter.exclude_taxons">exclude_taxons</a></code></li>
-<li><code><a title="paroxython.filter_programs.ProgramFilter.impart_programs" href="#paroxython.filter_programs.ProgramFilter.impart_programs">impart_programs</a></code></li>
-<li><code><a title="paroxython.filter_programs.ProgramFilter.impart_taxon_name" href="#paroxython.filter_programs.ProgramFilter.impart_taxon_name">impart_taxon_name</a></code></li>
-<li><code><a title="paroxython.filter_programs.ProgramFilter.impart_taxons" href="#paroxython.filter_programs.ProgramFilter.impart_taxons">impart_taxons</a></code></li>
-<li><code><a title="paroxython.filter_programs.ProgramFilter.include_programs" href="#paroxython.filter_programs.ProgramFilter.include_programs">include_programs</a></code></li>
-<li><code><a title="paroxython.filter_programs.ProgramFilter.include_taxons" href="#paroxython.filter_programs.ProgramFilter.include_taxons">include_taxons</a></code></li>
-<li><code><a title="paroxython.filter_programs.ProgramFilter.match_against_existing_programs" href="#paroxython.filter_programs.ProgramFilter.match_against_existing_programs">match_against_existing_programs</a></code></li>
-<li><code><a title="paroxython.filter_programs.ProgramFilter.match_against_existing_taxons" href="#paroxython.filter_programs.ProgramFilter.match_against_existing_taxons">match_against_existing_taxons</a></code></li>
 <li><code><a title="paroxython.filter_programs.ProgramFilter.normalized_triple" href="#paroxython.filter_programs.ProgramFilter.normalized_triple">normalized_triple</a></code></li>
-<li><code><a title="paroxython.filter_programs.ProgramFilter.preprocess_programs" href="#paroxython.filter_programs.ProgramFilter.preprocess_programs">preprocess_programs</a></code></li>
-<li><code><a title="paroxython.filter_programs.ProgramFilter.preprocess_taxons" href="#paroxython.filter_programs.ProgramFilter.preprocess_taxons">preprocess_taxons</a></code></li>
+<li><code><a title="paroxython.filter_programs.ProgramFilter.taxons_of_programs" href="#paroxython.filter_programs.ProgramFilter.taxons_of_programs">taxons_of_programs</a></code></li>
+<li><code><a title="paroxython.filter_programs.ProgramFilter.programs_of_taxons" href="#paroxython.filter_programs.ProgramFilter.programs_of_taxons">programs_of_taxons</a></code></li>
 <li><code><a title="paroxython.filter_programs.ProgramFilter.programs_of_taxon" href="#paroxython.filter_programs.ProgramFilter.programs_of_taxon">programs_of_taxon</a></code></li>
 <li><code><a title="paroxython.filter_programs.ProgramFilter.programs_of_taxon_triple" href="#paroxython.filter_programs.ProgramFilter.programs_of_taxon_triple">programs_of_taxon_triple</a></code></li>
-<li><code><a title="paroxython.filter_programs.ProgramFilter.programs_of_taxons" href="#paroxython.filter_programs.ProgramFilter.programs_of_taxons">programs_of_taxons</a></code></li>
-<li><code><a title="paroxython.filter_programs.ProgramFilter.taxons_of_programs" href="#paroxython.filter_programs.ProgramFilter.taxons_of_programs">taxons_of_programs</a></code></li>
+<li><code><a title="paroxython.filter_programs.ProgramFilter.match_against_existing_programs" href="#paroxython.filter_programs.ProgramFilter.match_against_existing_programs">match_against_existing_programs</a></code></li>
+<li><code><a title="paroxython.filter_programs.ProgramFilter.preprocess_programs" href="#paroxython.filter_programs.ProgramFilter.preprocess_programs">preprocess_programs</a></code></li>
+<li><code><a title="paroxython.filter_programs.ProgramFilter.impart_programs" href="#paroxython.filter_programs.ProgramFilter.impart_programs">impart_programs</a></code></li>
+<li><code><a title="paroxython.filter_programs.ProgramFilter.exclude_programs" href="#paroxython.filter_programs.ProgramFilter.exclude_programs">exclude_programs</a></code></li>
+<li><code><a title="paroxython.filter_programs.ProgramFilter.include_programs" href="#paroxython.filter_programs.ProgramFilter.include_programs">include_programs</a></code></li>
+<li><code><a title="paroxython.filter_programs.ProgramFilter.match_against_existing_taxons" href="#paroxython.filter_programs.ProgramFilter.match_against_existing_taxons">match_against_existing_taxons</a></code></li>
+<li><code><a title="paroxython.filter_programs.ProgramFilter.preprocess_taxons" href="#paroxython.filter_programs.ProgramFilter.preprocess_taxons">preprocess_taxons</a></code></li>
+<li><code><a title="paroxython.filter_programs.ProgramFilter.impart_taxon_name" href="#paroxython.filter_programs.ProgramFilter.impart_taxon_name">impart_taxon_name</a></code></li>
+<li><code><a title="paroxython.filter_programs.ProgramFilter.impart_taxons" href="#paroxython.filter_programs.ProgramFilter.impart_taxons">impart_taxons</a></code></li>
+<li><code><a title="paroxython.filter_programs.ProgramFilter.exclude_taxons" href="#paroxython.filter_programs.ProgramFilter.exclude_taxons">exclude_taxons</a></code></li>
+<li><code><a title="paroxython.filter_programs.ProgramFilter.include_taxons" href="#paroxython.filter_programs.ProgramFilter.include_taxons">include_taxons</a></code></li>
 </ul>
 </li>
 </ul>

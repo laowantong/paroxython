@@ -115,6 +115,40 @@ def couple_to_string(couple: Union[Span, Tuple[int, int]]) -&gt; str:
 <section>
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
+<dt id="paroxython.goodies.title_to_slug_factory"><code class="name flex">
+<span>def <span class="ident">title_to_slug_factory</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/goodies.py#L12-L33" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">def title_to_slug_factory():
+    slug_counts = defaultdict(int)
+    cache = {}
+
+    def title_to_slug(title, deduplicate=False):
+        title = title.strip()
+        if title not in cache:
+            slug = normalize(&#34;NFD&#34;, title.lower()).encode(&#34;ASCII&#34;, &#34;ignore&#34;).decode(&#34;ASCII&#34;)
+            slug = slug.replace(&#34; &#34;, &#34;-&#34;)
+            slug = regex.sub(r&#34;[^\w-]&#34;, &#34;&#34;, slug)
+            cache[title] = slug
+        if deduplicate:
+            slug = cache[title]
+            slug_counts[slug] += 1
+            slug = f&#34;{slug}-{slug_counts[slug] - 1}&#34;
+            slug_counts[slug] += 1
+            slug = slug.rstrip(&#34;-0&#34;)
+            return slug
+        else:
+            return cache[title]
+
+    return title_to_slug</code></pre>
+</details>
+</dd>
 <dt id="paroxython.goodies.add_line_numbers"><code class="name flex">
 <span>def <span class="ident">add_line_numbers</span></span>(<span>source: str) ‑> str</span>
 </code></dt>
@@ -127,6 +161,37 @@ def couple_to_string(couple: Union[Span, Tuple[int, int]]) -&gt; str:
 </summary>
 <pre><code class="python">def add_line_numbers(source: str) -&gt; str:
     return &#34;\n&#34;.join(f&#34;{n: &lt;4}{line}&#34; for (n, line) in enumerate(source.split(&#34;\n&#34;), 1))</code></pre>
+</details>
+</dd>
+<dt id="paroxython.goodies.enumeration_to_txt_factory"><code class="name flex">
+<span>def <span class="ident">enumeration_to_txt_factory</span></span>(<span>width: int = 20, default_string: str = '', sep: str = &#x27;&lt;br&gt;&#x27;, template: str = &#x27;&lt;details&gt;&lt;summary&gt;{summary}&lt;/summary&gt;{details}&lt;/details&gt;&#x27;, initial_indent: str = '
+') ‑> Callable[[str], str]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return a function formatting an enumeration string on a given column width.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/goodies.py#L41-L60" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">def enumeration_to_txt_factory(
+    width: int = 20,
+    default_string: str = &#34;&#34;,
+    sep: str = &#34;&lt;br&gt;&#34;,
+    template: str = &#34;&lt;details&gt;&lt;summary&gt;{summary}&lt;/summary&gt;{details}&lt;/details&gt;&#34;,
+    initial_indent: str = &#34;   &#34;,  # take into account the details marker
+) -&gt; Callable[[str], str]:
+    def enumeration_to_txt(s: str) -&gt; str:
+        if not s:
+            return default_string
+        if len(s) &lt;= width:
+            return s
+        lines = wrap(s, width, initial_indent=initial_indent)
+        summary = lines[0][len(initial_indent) :]
+        details = sep.join(lines[1:])
+        return template.format(summary=summary, details=details)
+
+    return enumeration_to_txt</code></pre>
 </details>
 </dd>
 <dt id="paroxython.goodies.cost_bucket"><code class="name flex">
@@ -180,71 +245,6 @@ recommendation report.</p>
     return f&#34;{couple[0]}&#34; + (&#34;&#34; if couple[0] == couple[1] else f&#34;-{couple[1]}&#34;)</code></pre>
 </details>
 </dd>
-<dt id="paroxython.goodies.enumeration_to_txt_factory"><code class="name flex">
-<span>def <span class="ident">enumeration_to_txt_factory</span></span>(<span>width: int = 20, default_string: str = '', sep: str = &#x27;&lt;br&gt;&#x27;, template: str = &#x27;&lt;details&gt;&lt;summary&gt;{summary}&lt;/summary&gt;{details}&lt;/details&gt;&#x27;, initial_indent: str = '
-') ‑> Callable[[str], str]</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Return a function formatting an enumeration string on a given column width.</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/goodies.py#L41-L60" class="git-link">Browse GitHub</a>
-</summary>
-<pre><code class="python">def enumeration_to_txt_factory(
-    width: int = 20,
-    default_string: str = &#34;&#34;,
-    sep: str = &#34;&lt;br&gt;&#34;,
-    template: str = &#34;&lt;details&gt;&lt;summary&gt;{summary}&lt;/summary&gt;{details}&lt;/details&gt;&#34;,
-    initial_indent: str = &#34;   &#34;,  # take into account the details marker
-) -&gt; Callable[[str], str]:
-    def enumeration_to_txt(s: str) -&gt; str:
-        if not s:
-            return default_string
-        if len(s) &lt;= width:
-            return s
-        lines = wrap(s, width, initial_indent=initial_indent)
-        summary = lines[0][len(initial_indent) :]
-        details = sep.join(lines[1:])
-        return template.format(summary=summary, details=details)
-
-    return enumeration_to_txt</code></pre>
-</details>
-</dd>
-<dt id="paroxython.goodies.title_to_slug_factory"><code class="name flex">
-<span>def <span class="ident">title_to_slug_factory</span></span>(<span>)</span>
-</code></dt>
-<dd>
-<div class="desc"></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/goodies.py#L12-L33" class="git-link">Browse GitHub</a>
-</summary>
-<pre><code class="python">def title_to_slug_factory():
-    slug_counts = defaultdict(int)
-    cache = {}
-
-    def title_to_slug(title, deduplicate=False):
-        title = title.strip()
-        if title not in cache:
-            slug = normalize(&#34;NFD&#34;, title.lower()).encode(&#34;ASCII&#34;, &#34;ignore&#34;).decode(&#34;ASCII&#34;)
-            slug = slug.replace(&#34; &#34;, &#34;-&#34;)
-            slug = regex.sub(r&#34;[^\w-]&#34;, &#34;&#34;, slug)
-            cache[title] = slug
-        if deduplicate:
-            slug = cache[title]
-            slug_counts[slug] += 1
-            slug = f&#34;{slug}-{slug_counts[slug] - 1}&#34;
-            slug_counts[slug] += 1
-            slug = slug.rstrip(&#34;-0&#34;)
-            return slug
-        else:
-            return cache[title]
-
-    return title_to_slug</code></pre>
-</details>
-</dd>
 </dl>
 </section>
 <section>
@@ -272,11 +272,11 @@ data-gaCategoryParameter="paroxython.goodies">
 </li>
 <li><h3><a href="#header-functions">Functions</a></h3>
 <ul class="">
+<li><code><a title="paroxython.goodies.title_to_slug_factory" href="#paroxython.goodies.title_to_slug_factory">title_to_slug_factory</a></code></li>
 <li><code><a title="paroxython.goodies.add_line_numbers" href="#paroxython.goodies.add_line_numbers">add_line_numbers</a></code></li>
+<li><code><a title="paroxython.goodies.enumeration_to_txt_factory" href="#paroxython.goodies.enumeration_to_txt_factory">enumeration_to_txt_factory</a></code></li>
 <li><code><a title="paroxython.goodies.cost_bucket" href="#paroxython.goodies.cost_bucket">cost_bucket</a></code></li>
 <li><code><a title="paroxython.goodies.couple_to_string" href="#paroxython.goodies.couple_to_string">couple_to_string</a></code></li>
-<li><code><a title="paroxython.goodies.enumeration_to_txt_factory" href="#paroxython.goodies.enumeration_to_txt_factory">enumeration_to_txt_factory</a></code></li>
-<li><code><a title="paroxython.goodies.title_to_slug_factory" href="#paroxython.goodies.title_to_slug_factory">title_to_slug_factory</a></code></li>
 </ul>
 </li>
 </ul>

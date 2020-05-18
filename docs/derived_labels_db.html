@@ -191,10 +191,6 @@ class DB:
 </details>
 <h3>Class variables</h3>
 <dl>
-<dt id="paroxython.derived_labels_db.DB.addition_query"><code class="name">var <span class="ident">addition_query</span></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
 <dt id="paroxython.derived_labels_db.DB.columns"><code class="name">var <span class="ident">columns</span></code></dt>
 <dd>
 <div class="desc"></div>
@@ -204,6 +200,10 @@ class DB:
 <div class="desc"></div>
 </dd>
 <dt id="paroxython.derived_labels_db.DB.update_query"><code class="name">var <span class="ident">update_query</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="paroxython.derived_labels_db.DB.addition_query"><code class="name">var <span class="ident">addition_query</span></code></dt>
 <dd>
 <div class="desc"></div>
 </dd>
@@ -224,22 +224,6 @@ class DB:
     self.c.execute(DB.creation_query)
     self.update(labels)
     self.added_table_labels: Dict[LabelName, int] = defaultdict(int)</code></pre>
-</details>
-</dd>
-<dt id="paroxython.derived_labels_db.DB.delete"><code class="name flex">
-<span>def <span class="ident">delete</span></span>(<span>self) ‑> NoneType</span>
-</code></dt>
-<dd>
-<div class="desc"></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/derived_labels_db.py#L61-L64" class="git-link">Browse GitHub</a>
-</summary>
-<pre><code class="python">def delete(self) -&gt; None:
-    self.c.execute(&#34;DROP TABLE t&#34;)
-    for label_name in self.added_table_labels:
-        self.c.execute(f&#34;DROP TABLE t_{label_name}&#34;)</code></pre>
 </details>
 </dd>
 <dt id="paroxython.derived_labels_db.DB.read"><code class="name flex">
@@ -286,6 +270,22 @@ class DB:
     self.c.executemany(DB.update_query, values)</code></pre>
 </details>
 </dd>
+<dt id="paroxython.derived_labels_db.DB.delete"><code class="name flex">
+<span>def <span class="ident">delete</span></span>(<span>self) ‑> NoneType</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/derived_labels_db.py#L61-L64" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">def delete(self) -&gt; None:
+    self.c.execute(&#34;DROP TABLE t&#34;)
+    for label_name in self.added_table_labels:
+        self.c.execute(f&#34;DROP TABLE t_{label_name}&#34;)</code></pre>
+</details>
+</dd>
 </dl>
 </dd>
 </dl>
@@ -316,14 +316,14 @@ data-gaCategoryParameter="paroxython.derived_labels_db">
 <li>
 <h4><code><a title="paroxython.derived_labels_db.DB" href="#paroxython.derived_labels_db.DB">DB</a></code></h4>
 <ul class="two-column">
-<li><code><a title="paroxython.derived_labels_db.DB.addition_query" href="#paroxython.derived_labels_db.DB.addition_query">addition_query</a></code></li>
-<li><code><a title="paroxython.derived_labels_db.DB.columns" href="#paroxython.derived_labels_db.DB.columns">columns</a></code></li>
 <li><code><a title="paroxython.derived_labels_db.DB.create" href="#paroxython.derived_labels_db.DB.create">create</a></code></li>
-<li><code><a title="paroxython.derived_labels_db.DB.creation_query" href="#paroxython.derived_labels_db.DB.creation_query">creation_query</a></code></li>
-<li><code><a title="paroxython.derived_labels_db.DB.delete" href="#paroxython.derived_labels_db.DB.delete">delete</a></code></li>
 <li><code><a title="paroxython.derived_labels_db.DB.read" href="#paroxython.derived_labels_db.DB.read">read</a></code></li>
 <li><code><a title="paroxython.derived_labels_db.DB.update" href="#paroxython.derived_labels_db.DB.update">update</a></code></li>
+<li><code><a title="paroxython.derived_labels_db.DB.delete" href="#paroxython.derived_labels_db.DB.delete">delete</a></code></li>
+<li><code><a title="paroxython.derived_labels_db.DB.columns" href="#paroxython.derived_labels_db.DB.columns">columns</a></code></li>
+<li><code><a title="paroxython.derived_labels_db.DB.creation_query" href="#paroxython.derived_labels_db.DB.creation_query">creation_query</a></code></li>
 <li><code><a title="paroxython.derived_labels_db.DB.update_query" href="#paroxython.derived_labels_db.DB.update_query">update_query</a></code></li>
+<li><code><a title="paroxython.derived_labels_db.DB.addition_query" href="#paroxython.derived_labels_db.DB.addition_query">addition_query</a></code></li>
 </ul>
 </li>
 </ul>

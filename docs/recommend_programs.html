@@ -394,6 +394,54 @@ if __name__ == &#34;__main__&#34;:
 </details>
 <h3>Methods</h3>
 <dl>
+<dt id="paroxython.recommend_programs.Recommendations.run_pipeline"><code class="name flex">
+<span>def <span class="ident">run_pipeline</span></span>(<span>self) ‑> NoneType</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Evolve recommended programs, imparted knowledge and log accross pipeline commands.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L46-L83" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">def run_pipeline(self) -&gt; None:
+    current = set(self.programs)
+    print(f&#34;\nProcessing {len(self.commands)} commands on {len(current)} programs.&#34;)
+
+    # Execute sequentially all the commands of the pipeline
+    for command in self.commands:
+
+        # The patterns fed to a command can either be a list of strings...
+        data = command[&#34;source&#34;]
+        if not isinstance(data, list):  # ... or a shell command printing them on stdout
+            data = (
+                subprocess.run(
+                    str(data).format(base_path=self.base_path),  # str() needed by mypy
+                    stdout=subprocess.PIPE,  # From Python 3.7, these two arguments can be
+                    stderr=subprocess.PIPE,  # ... replaced by: capture_output=True
+                    encoding=&#34;utf-8&#34;,
+                    shell=True,
+                    check=True,
+                )
+                .stdout.strip()
+                .split(&#34;\n&#34;)
+            )
+
+        # If needed, replace the resulting strings by the matched names of programs or taxons
+        data = self.method(&#34;preprocess_{programs_or_taxons}&#34;.format(**command), data)
+
+        # Apply to them a method whose name depends on both the operation and the name category
+        self.method(&#34;{operation}_{programs_or_taxons}&#34;.format(**command), set(data))
+
+        # Update the statistics of the filter state for the last operation
+        (previous, current) = (current, set(self.selected_programs))
+        command[&#34;filtered_out&#34;] = sorted(previous - current)
+        action = &#34;{operation}/{programs_or_taxons}&#34;.format(**command)
+        print(f&#34;  {len(current)} programs remaining after executing {action}.&#34;)
+
+    self.assessed_programs = self.assess_costs(self.selected_programs)</code></pre>
+</details>
+</dd>
 <dt id="paroxython.recommend_programs.Recommendations.get_markdown"><code class="name flex">
 <span>def <span class="ident">get_markdown</span></span>(<span>self, span_column_width=30, sorting_strategy='by_cost_and_sloc', grouping_strategy='by_cost_bucket') ‑> str</span>
 </code></dt>
@@ -495,54 +543,6 @@ if __name__ == &#34;__main__&#34;:
     return &#34;\n&#34;.join(toc + contents + summary)</code></pre>
 </details>
 </dd>
-<dt id="paroxython.recommend_programs.Recommendations.run_pipeline"><code class="name flex">
-<span>def <span class="ident">run_pipeline</span></span>(<span>self) ‑> NoneType</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Evolve recommended programs, imparted knowledge and log accross pipeline commands.</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L46-L83" class="git-link">Browse GitHub</a>
-</summary>
-<pre><code class="python">def run_pipeline(self) -&gt; None:
-    current = set(self.programs)
-    print(f&#34;\nProcessing {len(self.commands)} commands on {len(current)} programs.&#34;)
-
-    # Execute sequentially all the commands of the pipeline
-    for command in self.commands:
-
-        # The patterns fed to a command can either be a list of strings...
-        data = command[&#34;source&#34;]
-        if not isinstance(data, list):  # ... or a shell command printing them on stdout
-            data = (
-                subprocess.run(
-                    str(data).format(base_path=self.base_path),  # str() needed by mypy
-                    stdout=subprocess.PIPE,  # From Python 3.7, these two arguments can be
-                    stderr=subprocess.PIPE,  # ... replaced by: capture_output=True
-                    encoding=&#34;utf-8&#34;,
-                    shell=True,
-                    check=True,
-                )
-                .stdout.strip()
-                .split(&#34;\n&#34;)
-            )
-
-        # If needed, replace the resulting strings by the matched names of programs or taxons
-        data = self.method(&#34;preprocess_{programs_or_taxons}&#34;.format(**command), data)
-
-        # Apply to them a method whose name depends on both the operation and the name category
-        self.method(&#34;{operation}_{programs_or_taxons}&#34;.format(**command), set(data))
-
-        # Update the statistics of the filter state for the last operation
-        (previous, current) = (current, set(self.selected_programs))
-        command[&#34;filtered_out&#34;] = sorted(previous - current)
-        action = &#34;{operation}/{programs_or_taxons}&#34;.format(**command)
-        print(f&#34;  {len(current)} programs remaining after executing {action}.&#34;)
-
-    self.assessed_programs = self.assess_costs(self.selected_programs)</code></pre>
-</details>
-</dd>
 </dl>
 </dd>
 </dl>
@@ -573,8 +573,8 @@ data-gaCategoryParameter="paroxython.recommend_programs">
 <li>
 <h4><code><a title="paroxython.recommend_programs.Recommendations" href="#paroxython.recommend_programs.Recommendations">Recommendations</a></code></h4>
 <ul class="">
-<li><code><a title="paroxython.recommend_programs.Recommendations.get_markdown" href="#paroxython.recommend_programs.Recommendations.get_markdown">get_markdown</a></code></li>
 <li><code><a title="paroxython.recommend_programs.Recommendations.run_pipeline" href="#paroxython.recommend_programs.Recommendations.run_pipeline">run_pipeline</a></code></li>
+<li><code><a title="paroxython.recommend_programs.Recommendations.get_markdown" href="#paroxython.recommend_programs.Recommendations.get_markdown">get_markdown</a></code></li>
 </ul>
 </li>
 </ul>

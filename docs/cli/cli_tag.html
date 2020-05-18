@@ -105,28 +105,6 @@ def cli_wrapper(args):
 <section>
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
-<dt id="paroxython.cli.cli_tag.cli_wrapper"><code class="name flex">
-<span>def <span class="ident">cli_wrapper</span></span>(<span>args)</span>
-</code></dt>
-<dd>
-<div class="desc"></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli_tag.py#L57-L66" class="git-link">Browse GitHub</a>
-</summary>
-<pre><code class="python">def cli_wrapper(args):
-    path = Path(args[&#34;FILENAME&#34;])
-    result = main(
-        source=Source(path.read_text()),
-        tags=&#34;Label&#34; if args[&#34;--labels&#34;] else &#34;Taxon&#34;,
-        relative_path=path.parent,
-        output_format=args[&#34;--format&#34;],
-        taxonomy_path=Path(args[&#34;--taxonomy&#34;]) if args[&#34;--taxonomy&#34;] else None,
-    )
-    print(result)</code></pre>
-</details>
-</dd>
 <dt id="paroxython.cli.cli_tag.main"><code class="name flex">
 <span>def <span class="ident">main</span></span>(<span>source: Source, tags: Literal['Taxon', 'Label'] = 'Taxon', relative_path: pathlib.Path = PosixPath('.'), output_format: Literal['md', 'tsv'] = 'md', taxonomy_path: Union[pathlib.Path, NoneType] = None) ‑> str</span>
 </code></dt>
@@ -166,6 +144,28 @@ def cli_wrapper(args):
     return &#34;\n&#34;.join(result)</code></pre>
 </details>
 </dd>
+<dt id="paroxython.cli.cli_tag.cli_wrapper"><code class="name flex">
+<span>def <span class="ident">cli_wrapper</span></span>(<span>args)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli_tag.py#L57-L66" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">def cli_wrapper(args):
+    path = Path(args[&#34;FILENAME&#34;])
+    result = main(
+        source=Source(path.read_text()),
+        tags=&#34;Label&#34; if args[&#34;--labels&#34;] else &#34;Taxon&#34;,
+        relative_path=path.parent,
+        output_format=args[&#34;--format&#34;],
+        taxonomy_path=Path(args[&#34;--taxonomy&#34;]) if args[&#34;--taxonomy&#34;] else None,
+    )
+    print(result)</code></pre>
+</details>
+</dd>
 </dl>
 </section>
 <section>
@@ -193,8 +193,8 @@ data-gaCategoryParameter="paroxython.cli.cli_tag">
 </li>
 <li><h3><a href="#header-functions">Functions</a></h3>
 <ul class="">
-<li><code><a title="paroxython.cli.cli_tag.cli_wrapper" href="#paroxython.cli.cli_tag.cli_wrapper">cli_wrapper</a></code></li>
 <li><code><a title="paroxython.cli.cli_tag.main" href="#paroxython.cli.cli_tag.main">main</a></code></li>
+<li><code><a title="paroxython.cli.cli_tag.cli_wrapper" href="#paroxython.cli.cli_tag.cli_wrapper">cli_wrapper</a></code></li>
 </ul>
 </li>
 </ul>

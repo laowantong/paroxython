@@ -35,24 +35,43 @@ paroxython --help
 
 Load the magic command:
 
-```
+```python
 %load_ext paroxython
 ```
 
-Run it on a cell of Python code:
+Run it on a cell of Python code (line numbers added for clarity):
 
-```
-%%paroxython
-print("Hello World!")
+```python
+1	%%paroxython
+2	def fibonacci(n):
+3	    result = []
+4	    (a, b) = (0, 1)
+5	    while a < n:
+6	        result.append(a)
+7	        (a, b) = (b, a + b)
+8	    return result
 ```
 
 Output:
 
 | Taxon | Lines |
-|:--|:--|
-| io/standard/print | 2 |
-| type/elementary/string | 2 |
-
+|:--|--:|
+| `call/method/append` | 6 |
+| `flow/loop/exit/late` | 5-7 |
+| `flow/loop/while` | 5-7 |
+| `metadata/sloc/8` | 2-8 |
+| `operator/arithmetic/addition` | 7 |
+| `subroutine/argument/arg` | 2 |
+| `subroutine/function` | 2-8 |
+| `test/inequality` | 5 |
+| `type/number/integer/literal` | 4 |
+| `type/number/integer/literal/zero` | 4 |
+| `type/sequence/list` | 6 |
+| `type/sequence/list/literal/empty` | 3 |
+| `type/sequence/tuple/literal` | 4, 4, 7, 7 |
+| `variable/assignment/parallel` | 4 |
+| `variable/assignment/parallel/slide` | 7 |
+| `variable/assignment/single` | 3 |
 
 # Documentation
 

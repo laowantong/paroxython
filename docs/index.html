@@ -38,32 +38,94 @@
 </code></pre>
 <h2 id="jupyter-notebook">Jupyter notebook</h2>
 <p>Load the magic command:</p>
-<pre><code>%load_ext paroxython
+<pre><code class="python">%load_ext paroxython
 </code></pre>
 <p>Run it on a cell of Python code:</p>
-<pre><code>%%paroxython
-print(&quot;Hello World!&quot;)
-</code></pre>
+<!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:none;padding:0;"><table style="width: 100%"><tr><td><pre style="margin: 0; line-height: 125%">1<br>2<br>3<br>4<br>5<br>6<br>7<br>8</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #333333">%%</span>paroxython
+<span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">fibonacci</span>(n):
+    result <span style="color: #333333">=</span> []
+    (a, b) <span style="color: #333333">=</span> (<span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">1</span>)
+    <span style="color: #008800; font-weight: bold">while</span> a <span style="color: #333333">&lt;</span> n:
+        result<span style="color: #333333">.</span>append(a)
+        (a, b) <span style="color: #333333">=</span> (b, a <span style="color: #333333">+</span> b)
+    <span style="color: #008800; font-weight: bold">return</span> result
+</pre></td></tr></table></div>
 <p>Output:</p>
 <table>
 <thead>
 <tr>
 <th align="left">Taxon</th>
-<th align="left">Lines</th>
+<th align="right">Lines</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="left">io/standard/print</td>
-<td align="left">2</td>
+<td align="left"><code>call/method/append</code></td>
+<td align="right">6</td>
 </tr>
 <tr>
-<td align="left">type/elementary/string</td>
-<td align="left">2</td>
+<td align="left"><code>flow/loop/exit/late</code></td>
+<td align="right">5-7</td>
+</tr>
+<tr>
+<td align="left"><code>flow/loop/while</code></td>
+<td align="right">5-7</td>
+</tr>
+<tr>
+<td align="left"><code>metadata/sloc/8</code></td>
+<td align="right">2-8</td>
+</tr>
+<tr>
+<td align="left"><code>operator/arithmetic/addition</code></td>
+<td align="right">7</td>
+</tr>
+<tr>
+<td align="left"><code>subroutine/argument/arg</code></td>
+<td align="right">2</td>
+</tr>
+<tr>
+<td align="left"><code>subroutine/function</code></td>
+<td align="right">2-8</td>
+</tr>
+<tr>
+<td align="left"><code>test/inequality</code></td>
+<td align="right">5</td>
+</tr>
+<tr>
+<td align="left"><code>type/number/integer/literal</code></td>
+<td align="right">4</td>
+</tr>
+<tr>
+<td align="left"><code>type/number/integer/literal/zero</code></td>
+<td align="right">4</td>
+</tr>
+<tr>
+<td align="left"><code>type/sequence/list</code></td>
+<td align="right">6</td>
+</tr>
+<tr>
+<td align="left"><code>type/sequence/list/literal/empty</code></td>
+<td align="right">3</td>
+</tr>
+<tr>
+<td align="left"><code>type/sequence/tuple/literal</code></td>
+<td align="right">4, 4, 7, 7</td>
+</tr>
+<tr>
+<td align="left"><code>variable/assignment/parallel</code></td>
+<td align="right">4</td>
+</tr>
+<tr>
+<td align="left"><code>variable/assignment/parallel/slide</code></td>
+<td align="right">7</td>
+</tr>
+<tr>
+<td align="left"><code>variable/assignment/single</code></td>
+<td align="right">3</td>
 </tr>
 <tr>
 <td align="left"><br></td>
-<td align="left"></td>
+<td align="right"></td>
 </tr>
 </tbody>
 </table>

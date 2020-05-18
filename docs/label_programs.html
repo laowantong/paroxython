@@ -166,6 +166,67 @@ if __name__ == &#34;__main__&#34;:
 </details>
 <h3>Methods</h3>
 <dl>
+<dt id="paroxython.label_programs.ProgramLabeller.label_programs"><code class="name flex">
+<span>def <span class="ident">label_programs</span></span>(<span>self, directory: pathlib.Path, *args, **kwargs) ‑> NoneType</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Complete all fields of a list of programs.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/label_programs.py#L17-L26" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">def label_programs(self, directory: Path, *args, **kwargs) -&gt; None:
+    self.directory = directory
+    self.programs = list_programs(self.directory, *args, **kwargs)
+    self.internal_program_names = {p.name for p in self.programs}
+    print(f&#34;Labelling {len(self.programs)} programs.&#34;)
+    for program in iterate_and_print_programs(self.programs):
+        self.label_program(program)
+    for program in self.programs:
+        self.tweak_internal_import_labels(program)</code></pre>
+</details>
+</dd>
+<dt id="paroxython.label_programs.ProgramLabeller.label_program"><code class="name flex">
+<span>def <span class="ident">label_program</span></span>(<span>self, program: Program) ‑> NoneType</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Compute the labels of a given program and store the result in its <code>labels</code> field.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/label_programs.py#L28-L34" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">def label_program(self, program: Program) -&gt; None:
+    label_dict: LabelsSpans = defaultdict(list)
+    for (label_name, spans) in self.parse(program):
+        for span in spans:
+            insort(label_dict[label_name], span)
+    program.labels[:] = [Label(name, span) for (name, span) in label_dict.items()]</code></pre>
+</details>
+</dd>
+<dt id="paroxython.label_programs.ProgramLabeller.tweak_internal_import_labels"><code class="name flex">
+<span>def <span class="ident">tweak_internal_import_labels</span></span>(<span>self, program: Program) ‑> NoneType</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Modify the appropriate labels in-place to mark internal importations.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/label_programs.py#L36-L46" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">def tweak_internal_import_labels(self, program: Program) -&gt; None:
+    for (i, label) in enumerate(program.labels):
+        if label.name.startswith((&#34;import:&#34;, &#34;import_module:&#34;)):
+            parts = label.name.split(&#34;:&#34;)
+            imported_name = ProgramName(f&#34;{parts[1]}.py&#34;)
+            if imported_name in self.internal_program_names:
+                program.labels[i] = Label(
+                    name=LabelName(f&#34;{parts[0]}_internally:{&#39;:&#39;.join(parts[1:])}&#34;),
+                    spans=label.spans,
+                )</code></pre>
+</details>
+</dd>
 <dt id="paroxython.label_programs.ProgramLabeller.generate_labelled_sources"><code class="name flex">
 <span>def <span class="ident">generate_labelled_sources</span></span>(<span>self, *args, **kwargs) ‑> Iterator</span>
 </code></dt>
@@ -191,67 +252,6 @@ if __name__ == &#34;__main__&#34;:
             if comment:
                 lines[i] += &#34; # &#34; + &#34;, &#34;.join(sorted(comment))
         yield Source(&#34;\n&#34;.join(lines + [&#34;&#34;]))</code></pre>
-</details>
-</dd>
-<dt id="paroxython.label_programs.ProgramLabeller.label_program"><code class="name flex">
-<span>def <span class="ident">label_program</span></span>(<span>self, program: Program) ‑> NoneType</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Compute the labels of a given program and store the result in its <code>labels</code> field.</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/label_programs.py#L28-L34" class="git-link">Browse GitHub</a>
-</summary>
-<pre><code class="python">def label_program(self, program: Program) -&gt; None:
-    label_dict: LabelsSpans = defaultdict(list)
-    for (label_name, spans) in self.parse(program):
-        for span in spans:
-            insort(label_dict[label_name], span)
-    program.labels[:] = [Label(name, span) for (name, span) in label_dict.items()]</code></pre>
-</details>
-</dd>
-<dt id="paroxython.label_programs.ProgramLabeller.label_programs"><code class="name flex">
-<span>def <span class="ident">label_programs</span></span>(<span>self, directory: pathlib.Path, *args, **kwargs) ‑> NoneType</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Complete all fields of a list of programs.</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/label_programs.py#L17-L26" class="git-link">Browse GitHub</a>
-</summary>
-<pre><code class="python">def label_programs(self, directory: Path, *args, **kwargs) -&gt; None:
-    self.directory = directory
-    self.programs = list_programs(self.directory, *args, **kwargs)
-    self.internal_program_names = {p.name for p in self.programs}
-    print(f&#34;Labelling {len(self.programs)} programs.&#34;)
-    for program in iterate_and_print_programs(self.programs):
-        self.label_program(program)
-    for program in self.programs:
-        self.tweak_internal_import_labels(program)</code></pre>
-</details>
-</dd>
-<dt id="paroxython.label_programs.ProgramLabeller.tweak_internal_import_labels"><code class="name flex">
-<span>def <span class="ident">tweak_internal_import_labels</span></span>(<span>self, program: Program) ‑> NoneType</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Modify the appropriate labels in-place to mark internal importations.</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/label_programs.py#L36-L46" class="git-link">Browse GitHub</a>
-</summary>
-<pre><code class="python">def tweak_internal_import_labels(self, program: Program) -&gt; None:
-    for (i, label) in enumerate(program.labels):
-        if label.name.startswith((&#34;import:&#34;, &#34;import_module:&#34;)):
-            parts = label.name.split(&#34;:&#34;)
-            imported_name = ProgramName(f&#34;{parts[1]}.py&#34;)
-            if imported_name in self.internal_program_names:
-                program.labels[i] = Label(
-                    name=LabelName(f&#34;{parts[0]}_internally:{&#39;:&#39;.join(parts[1:])}&#34;),
-                    spans=label.spans,
-                )</code></pre>
 </details>
 </dd>
 </dl>
@@ -284,10 +284,10 @@ data-gaCategoryParameter="paroxython.label_programs">
 <li>
 <h4><code><a title="paroxython.label_programs.ProgramLabeller" href="#paroxython.label_programs.ProgramLabeller">ProgramLabeller</a></code></h4>
 <ul class="">
-<li><code><a title="paroxython.label_programs.ProgramLabeller.generate_labelled_sources" href="#paroxython.label_programs.ProgramLabeller.generate_labelled_sources">generate_labelled_sources</a></code></li>
-<li><code><a title="paroxython.label_programs.ProgramLabeller.label_program" href="#paroxython.label_programs.ProgramLabeller.label_program">label_program</a></code></li>
 <li><code><a title="paroxython.label_programs.ProgramLabeller.label_programs" href="#paroxython.label_programs.ProgramLabeller.label_programs">label_programs</a></code></li>
+<li><code><a title="paroxython.label_programs.ProgramLabeller.label_program" href="#paroxython.label_programs.ProgramLabeller.label_program">label_program</a></code></li>
 <li><code><a title="paroxython.label_programs.ProgramLabeller.tweak_internal_import_labels" href="#paroxython.label_programs.ProgramLabeller.tweak_internal_import_labels">tweak_internal_import_labels</a></code></li>
+<li><code><a title="paroxython.label_programs.ProgramLabeller.generate_labelled_sources" href="#paroxython.label_programs.ProgramLabeller.generate_labelled_sources">generate_labelled_sources</a></code></li>
 </ul>
 </li>
 </ul>

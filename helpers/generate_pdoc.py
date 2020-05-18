@@ -92,11 +92,20 @@ def strip_docstrings():
         path.write_text(source)
 
 
+def embed_code_with_line_numbers():
+    path = Path("docs/index.html")
+    source = path.read_text()
+    embed = Path("docs/fibonacci.html").read_text()
+    source = regex.sub(r"(?s) \(line numbers.+?</pre>", fr":</p>\n{embed}", source)
+    path.write_text(source)
+
+
 def main():
     generate_html()
     resolve_new_types()
     remove_blacklisted_sources()
     strip_docstrings()
+    embed_code_with_line_numbers()
 
 
 if __name__ == "__main__":

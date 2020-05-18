@@ -297,137 +297,6 @@ if __name__ == &#34;__main__&#34;:
 <section>
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
-<dt id="paroxython.make_db.collect_exportations"><code class="name flex">
-<span>def <span class="ident">collect_exportations</span></span>(<span>exportations: Dict[ProgramName, List[ProgramName]]) ‑> Dict[ProgramName, List[ProgramName]]</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Iterate through the exportations to collect them.</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L263-L268" class="git-link">Browse GitHub</a>
-</summary>
-<pre><code class="python">def collect_exportations(exportations: ProgramToPrograms) -&gt; ProgramToPrograms:
-    result: ProgramToPrograms = {}
-    for (exporting_name, exported_names) in exportations.items():
-        result[exporting_name] = sorted(exported_names)
-    return result</code></pre>
-</details>
-</dd>
-<dt id="paroxython.make_db.collect_labels"><code class="name flex">
-<span>def <span class="ident">collect_labels</span></span>(<span>programs: List[Program]) ‑> Dict[LabelName, List[ProgramName]]</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Iterate through programs to collect all their labels.</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L202-L208" class="git-link">Browse GitHub</a>
-</summary>
-<pre><code class="python">def collect_labels(programs: Programs) -&gt; LabelInfos:
-    result: LabelInfos = defaultdict(list)
-    for program in programs:
-        for label in program.labels:
-            result[label.name].append(program.name)
-    return result</code></pre>
-</details>
-</dd>
-<dt id="paroxython.make_db.collect_taxons"><code class="name flex">
-<span>def <span class="ident">collect_taxons</span></span>(<span>programs: List[Program]) ‑> Dict[TaxonName, List[ProgramName]]</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Iterate through programs to collect all their taxons.</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L218-L224" class="git-link">Browse GitHub</a>
-</summary>
-<pre><code class="python">def collect_taxons(programs: Programs) -&gt; TaxonInfos:
-    result: TaxonInfos = defaultdict(list)
-    for program in programs:
-        for taxon in program.taxons:
-            result[taxon.name].append(program.name)
-    return result</code></pre>
-</details>
-</dd>
-<dt id="paroxython.make_db.complete_and_collect_importations"><code class="name flex">
-<span>def <span class="ident">complete_and_collect_importations</span></span>(<span>importations: Dict[ProgramName, List[ProgramName]]) ‑> Dict[ProgramName, List[ProgramName]]</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Complete the direct internal imports with indirect ones.</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L238-L251" class="git-link">Browse GitHub</a>
-</summary>
-<pre><code class="python">def complete_and_collect_importations(importations: ProgramToPrograms) -&gt; ProgramToPrograms:
-    @lru_cache(maxsize=None)
-    def complete_internal_imports(program_name: ProgramName) -&gt; ProgramNameSet:
-        result: ProgramNameSet = set(importations.get(program_name, []))
-        for imported in list(result):  # traverse a copy
-            result.update(complete_internal_imports(imported))
-        return result
-
-    completed_importations: ProgramToPrograms = {}
-    for program_name in list(importations.keys()):
-        completed_importations[program_name] = sorted(complete_internal_imports(program_name))
-    return completed_importations</code></pre>
-</details>
-</dd>
-<dt id="paroxython.make_db.compute_direct_importations"><code class="name flex">
-<span>def <span class="ident">compute_direct_importations</span></span>(<span>programs: List[Program]) ‑> Dict[ProgramName, List[ProgramName]]</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Associate each program to the set of its direct internal imports.</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L227-L235" class="git-link">Browse GitHub</a>
-</summary>
-<pre><code class="python">def compute_direct_importations(programs: Programs) -&gt; ProgramToPrograms:
-    importations: Dict = {program.name: set() for program in programs}
-    for program in programs:
-        for label in program.labels:
-            match = regex.match(r&#34;import_internally:([^:]+)&#34;, label.name)
-            if match:  # Python 3.8: use assignement-expression
-                importations[program.name].add(f&#34;{match[1]}.py&#34;)
-    return importations</code></pre>
-</details>
-</dd>
-<dt id="paroxython.make_db.compute_exportations"><code class="name flex">
-<span>def <span class="ident">compute_exportations</span></span>(<span>programs: List[Program], importations: Dict[ProgramName, List[ProgramName]]) ‑> Dict[ProgramName, List[ProgramName]]</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Invert <code>importations</code> to construct <code>exportations</code>.</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L254-L260" class="git-link">Browse GitHub</a>
-</summary>
-<pre><code class="python">def compute_exportations(programs: Programs, importations: ProgramToPrograms) -&gt; ProgramToPrograms:
-    exportations: Dict = {program.name: set() for program in programs}
-    for (importing_name, imported_names) in importations.items():
-        for imported_name in imported_names:
-            exportations[imported_name].add(importing_name)
-    return exportations</code></pre>
-</details>
-</dd>
-<dt id="paroxython.make_db.map_labels_on_taxons"><code class="name flex">
-<span>def <span class="ident">map_labels_on_taxons</span></span>(<span>programs: List[Program], taxonomy: <a title="paroxython.map_taxonomy.Taxonomy" href="map_taxonomy.html#paroxython.map_taxonomy.Taxonomy">Taxonomy</a>) ‑> NoneType</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Translate labels into taxons on a list of program names.</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L211-L215" class="git-link">Browse GitHub</a>
-</summary>
-<pre><code class="python">def map_labels_on_taxons(programs: Programs, taxonomy: Taxonomy) -&gt; None:
-    print(f&#34;Mapping taxonomy on {len(programs)} programs.&#34;)
-    for program in iterate_and_print_programs(programs):
-        program.taxons[:] = taxonomy.to_taxons(program.labels)</code></pre>
-</details>
-</dd>
 <dt id="paroxython.make_db.prepared"><code class="name flex">
 <span>def <span class="ident">prepared</span></span>(<span>tags)</span>
 </code></dt>
@@ -462,6 +331,137 @@ See <a href="https://docs.python.org/3/library/typing.html#typing.overload">the 
     result: Union[LabelsPoorSpans, TaxonsPoorSpans] = {}
     for (tag_name, spans) in tags:
         result[tag_name] = [span[:2] for span in sorted(set(spans))]
+    return result</code></pre>
+</details>
+</dd>
+<dt id="paroxython.make_db.collect_labels"><code class="name flex">
+<span>def <span class="ident">collect_labels</span></span>(<span>programs: List[Program]) ‑> Dict[LabelName, List[ProgramName]]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Iterate through programs to collect all their labels.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L202-L208" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">def collect_labels(programs: Programs) -&gt; LabelInfos:
+    result: LabelInfos = defaultdict(list)
+    for program in programs:
+        for label in program.labels:
+            result[label.name].append(program.name)
+    return result</code></pre>
+</details>
+</dd>
+<dt id="paroxython.make_db.map_labels_on_taxons"><code class="name flex">
+<span>def <span class="ident">map_labels_on_taxons</span></span>(<span>programs: List[Program], taxonomy: <a title="paroxython.map_taxonomy.Taxonomy" href="map_taxonomy.html#paroxython.map_taxonomy.Taxonomy">Taxonomy</a>) ‑> NoneType</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Translate labels into taxons on a list of program names.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L211-L215" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">def map_labels_on_taxons(programs: Programs, taxonomy: Taxonomy) -&gt; None:
+    print(f&#34;Mapping taxonomy on {len(programs)} programs.&#34;)
+    for program in iterate_and_print_programs(programs):
+        program.taxons[:] = taxonomy.to_taxons(program.labels)</code></pre>
+</details>
+</dd>
+<dt id="paroxython.make_db.collect_taxons"><code class="name flex">
+<span>def <span class="ident">collect_taxons</span></span>(<span>programs: List[Program]) ‑> Dict[TaxonName, List[ProgramName]]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Iterate through programs to collect all their taxons.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L218-L224" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">def collect_taxons(programs: Programs) -&gt; TaxonInfos:
+    result: TaxonInfos = defaultdict(list)
+    for program in programs:
+        for taxon in program.taxons:
+            result[taxon.name].append(program.name)
+    return result</code></pre>
+</details>
+</dd>
+<dt id="paroxython.make_db.compute_direct_importations"><code class="name flex">
+<span>def <span class="ident">compute_direct_importations</span></span>(<span>programs: List[Program]) ‑> Dict[ProgramName, List[ProgramName]]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Associate each program to the set of its direct internal imports.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L227-L235" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">def compute_direct_importations(programs: Programs) -&gt; ProgramToPrograms:
+    importations: Dict = {program.name: set() for program in programs}
+    for program in programs:
+        for label in program.labels:
+            match = regex.match(r&#34;import_internally:([^:]+)&#34;, label.name)
+            if match:  # Python 3.8: use assignement-expression
+                importations[program.name].add(f&#34;{match[1]}.py&#34;)
+    return importations</code></pre>
+</details>
+</dd>
+<dt id="paroxython.make_db.complete_and_collect_importations"><code class="name flex">
+<span>def <span class="ident">complete_and_collect_importations</span></span>(<span>importations: Dict[ProgramName, List[ProgramName]]) ‑> Dict[ProgramName, List[ProgramName]]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Complete the direct internal imports with indirect ones.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L238-L251" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">def complete_and_collect_importations(importations: ProgramToPrograms) -&gt; ProgramToPrograms:
+    @lru_cache(maxsize=None)
+    def complete_internal_imports(program_name: ProgramName) -&gt; ProgramNameSet:
+        result: ProgramNameSet = set(importations.get(program_name, []))
+        for imported in list(result):  # traverse a copy
+            result.update(complete_internal_imports(imported))
+        return result
+
+    completed_importations: ProgramToPrograms = {}
+    for program_name in list(importations.keys()):
+        completed_importations[program_name] = sorted(complete_internal_imports(program_name))
+    return completed_importations</code></pre>
+</details>
+</dd>
+<dt id="paroxython.make_db.compute_exportations"><code class="name flex">
+<span>def <span class="ident">compute_exportations</span></span>(<span>programs: List[Program], importations: Dict[ProgramName, List[ProgramName]]) ‑> Dict[ProgramName, List[ProgramName]]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Invert <code>importations</code> to construct <code>exportations</code>.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L254-L260" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">def compute_exportations(programs: Programs, importations: ProgramToPrograms) -&gt; ProgramToPrograms:
+    exportations: Dict = {program.name: set() for program in programs}
+    for (importing_name, imported_names) in importations.items():
+        for imported_name in imported_names:
+            exportations[imported_name].add(importing_name)
+    return exportations</code></pre>
+</details>
+</dd>
+<dt id="paroxython.make_db.collect_exportations"><code class="name flex">
+<span>def <span class="ident">collect_exportations</span></span>(<span>exportations: Dict[ProgramName, List[ProgramName]]) ‑> Dict[ProgramName, List[ProgramName]]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Iterate through the exportations to collect them.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L263-L268" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">def collect_exportations(exportations: ProgramToPrograms) -&gt; ProgramToPrograms:
+    result: ProgramToPrograms = {}
+    for (exporting_name, exported_names) in exportations.items():
+        result[exporting_name] = sorted(exported_names)
     return result</code></pre>
 </details>
 </dd>
@@ -784,14 +784,14 @@ data-gaCategoryParameter="paroxython.make_db">
 </li>
 <li><h3><a href="#header-functions">Functions</a></h3>
 <ul class="">
-<li><code><a title="paroxython.make_db.collect_exportations" href="#paroxython.make_db.collect_exportations">collect_exportations</a></code></li>
-<li><code><a title="paroxython.make_db.collect_labels" href="#paroxython.make_db.collect_labels">collect_labels</a></code></li>
-<li><code><a title="paroxython.make_db.collect_taxons" href="#paroxython.make_db.collect_taxons">collect_taxons</a></code></li>
-<li><code><a title="paroxython.make_db.complete_and_collect_importations" href="#paroxython.make_db.complete_and_collect_importations">complete_and_collect_importations</a></code></li>
-<li><code><a title="paroxython.make_db.compute_direct_importations" href="#paroxython.make_db.compute_direct_importations">compute_direct_importations</a></code></li>
-<li><code><a title="paroxython.make_db.compute_exportations" href="#paroxython.make_db.compute_exportations">compute_exportations</a></code></li>
-<li><code><a title="paroxython.make_db.map_labels_on_taxons" href="#paroxython.make_db.map_labels_on_taxons">map_labels_on_taxons</a></code></li>
 <li><code><a title="paroxython.make_db.prepared" href="#paroxython.make_db.prepared">prepared</a></code></li>
+<li><code><a title="paroxython.make_db.collect_labels" href="#paroxython.make_db.collect_labels">collect_labels</a></code></li>
+<li><code><a title="paroxython.make_db.map_labels_on_taxons" href="#paroxython.make_db.map_labels_on_taxons">map_labels_on_taxons</a></code></li>
+<li><code><a title="paroxython.make_db.collect_taxons" href="#paroxython.make_db.collect_taxons">collect_taxons</a></code></li>
+<li><code><a title="paroxython.make_db.compute_direct_importations" href="#paroxython.make_db.compute_direct_importations">compute_direct_importations</a></code></li>
+<li><code><a title="paroxython.make_db.complete_and_collect_importations" href="#paroxython.make_db.complete_and_collect_importations">complete_and_collect_importations</a></code></li>
+<li><code><a title="paroxython.make_db.compute_exportations" href="#paroxython.make_db.compute_exportations">compute_exportations</a></code></li>
+<li><code><a title="paroxython.make_db.collect_exportations" href="#paroxython.make_db.collect_exportations">collect_exportations</a></code></li>
 </ul>
 </li>
 <li><h3><a href="#header-classes">Classes</a></h3>

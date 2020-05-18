@@ -7,4 +7,5 @@ search_query = '''
     inurl:github.com/laowantong/paroxython
 '''
 
+sort_identifiers = False
 %>

@@ -106,6 +106,26 @@ if __name__ == &#34;__main__&#34;:
 <section>
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
+<dt id="paroxython.list_programs.list_programs"><code class="name flex">
+<span>def <span class="ident">list_programs</span></span>(<span>directory: pathlib.Path, cleanup_strategy: str = 'full', *args, **kwargs) ‑> List[Program]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>List recursively all Python <code>Programs</code> of a given directory.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/list_programs.py#L10-L18" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">def list_programs(directory: Path, cleanup_strategy: str = &#34;full&#34;, *args, **kwargs) -&gt; Programs:
+    result: Programs = []
+    cleanup = cleanup_factory(cleanup_strategy)
+    for program_path in generate_program_paths(directory, *args, **kwargs):
+        source = cleanup(Source(program_path.read_text()))
+        relative_path = program_path.relative_to(directory)
+        result.append(get_program(source, relative_path))
+    return result</code></pre>
+</details>
+</dd>
 <dt id="paroxython.list_programs.generate_program_paths"><code class="name flex">
 <span>def <span class="ident">generate_program_paths</span></span>(<span>directory: pathlib.Path, glob_pattern: str = '', exclude_pattern: str = '', *args, **kwargs) ‑> Iterator[pathlib.Path]</span>
 </code></dt>
@@ -178,26 +198,6 @@ if __name__ == &#34;__main__&#34;:
         yield program</code></pre>
 </details>
 </dd>
-<dt id="paroxython.list_programs.list_programs"><code class="name flex">
-<span>def <span class="ident">list_programs</span></span>(<span>directory: pathlib.Path, cleanup_strategy: str = 'full', *args, **kwargs) ‑> List[Program]</span>
-</code></dt>
-<dd>
-<div class="desc"><p>List recursively all Python <code>Programs</code> of a given directory.</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/list_programs.py#L10-L18" class="git-link">Browse GitHub</a>
-</summary>
-<pre><code class="python">def list_programs(directory: Path, cleanup_strategy: str = &#34;full&#34;, *args, **kwargs) -&gt; Programs:
-    result: Programs = []
-    cleanup = cleanup_factory(cleanup_strategy)
-    for program_path in generate_program_paths(directory, *args, **kwargs):
-        source = cleanup(Source(program_path.read_text()))
-        relative_path = program_path.relative_to(directory)
-        result.append(get_program(source, relative_path))
-    return result</code></pre>
-</details>
-</dd>
 </dl>
 </section>
 <section>
@@ -225,10 +225,10 @@ data-gaCategoryParameter="paroxython.list_programs">
 </li>
 <li><h3><a href="#header-functions">Functions</a></h3>
 <ul class="">
+<li><code><a title="paroxython.list_programs.list_programs" href="#paroxython.list_programs.list_programs">list_programs</a></code></li>
 <li><code><a title="paroxython.list_programs.generate_program_paths" href="#paroxython.list_programs.generate_program_paths">generate_program_paths</a></code></li>
 <li><code><a title="paroxython.list_programs.get_program" href="#paroxython.list_programs.get_program">get_program</a></code></li>
 <li><code><a title="paroxython.list_programs.iterate_and_print_programs" href="#paroxython.list_programs.iterate_and_print_programs">iterate_and_print_programs</a></code></li>
-<li><code><a title="paroxython.list_programs.list_programs" href="#paroxython.list_programs.list_programs">list_programs</a></code></li>
 </ul>
 </li>
 </ul>

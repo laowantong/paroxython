@@ -206,36 +206,6 @@ if __name__ == &#34;__main__&#34;:
 <section>
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
-<dt id="paroxython.preprocess_source.centrifugate_hints"><code class="name flex">
-<span>def <span class="ident">centrifugate_hints</span></span>(<span>source: Source) ‑> Source</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Transform the isolated hints into all-encompassing hints.</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L140-L158" class="git-link">Browse GitHub</a>
-</summary>
-<pre><code class="python">def centrifugate_hints(source: Source) -&gt; Source:
-    lines = []
-    hints: Set[str] = set()
-    for line in source.split(&#34;\n&#34;):
-        m = match_isolated_hints(line)
-        if m:
-            hints.update(m[1].split())
-        else:
-            lines.append(line)
-    if not hints:
-        return source
-    for i in (0, -1):
-        if f&#34; {HINT_COMMENT}&#34; not in lines[i]:
-            lines[i] += f&#34; {HINT_COMMENT}&#34;
-    for hint in sorted(hints):
-        lines[0] += f&#34; {hint}...&#34;
-        lines[-1] += f&#34; ...{hint}&#34;
-    return Source(&#34;\n&#34;.join(lines))</code></pre>
-</details>
-</dd>
 <dt id="paroxython.preprocess_source.cleanup_factory"><code class="name flex">
 <span>def <span class="ident">cleanup_factory</span></span>(<span>cleanup_strategy: str) ‑> Callable[[Source], Source]</span>
 </code></dt>
@@ -251,6 +221,46 @@ if __name__ == &#34;__main__&#34;:
     if cleanup_strategy == &#34;full&#34;:
         cleanup = lambda source: sub_main(&#34;&#34;, full_cleaning(source))
     return cleanup</code></pre>
+</details>
+</dd>
+<dt id="paroxython.preprocess_source.full_cleaning"><code class="name flex">
+<span>def <span class="ident">full_cleaning</span></span>(<span>source: Source) ‑> Source</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L38-L65" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">def full_cleaning(source: Source) -&gt; Source:
+    result = []
+    previous_token = INDENT
+    (previous_end_row, previous_end_col) = (-1, 0)
+    lines = iter(sub_first_comments(&#34;&#34;, source).replace(&#34;\t&#34;, &#34;    &#34;).split(&#34;\n&#34;))
+    for token_info in generate_tokens(lambda: next(lines) + &#34;\n&#34;):
+        (token, string, (start_row, start_col), (end_row, end_col), _) = token_info
+        if start_row &gt; previous_end_row:
+            previous_end_col = 0
+        result.append(&#34; &#34; * max(0, start_col - previous_end_col))
+        if token == COMMENT:
+            (string, n) = subn_paroxython_comment(f&#34;{HINT_COMMENT} &#34;, string)
+            if n == 0:
+                continue
+            result.append(string)
+        elif token == STRING and previous_token in (INDENT, DEDENT, NEWLINE):
+            result.append(&#34;pass\n&#34;)  # replace the docstring by a pass statement
+        else:
+            result.append(string)
+        if (previous_token, token) == (NEWLINE, NL):
+            previous_token = NEWLINE
+        else:
+            previous_token = token
+        (previous_end_row, previous_end_col) = (end_row, end_col)
+    text = &#34;&#34;.join(result).strip()
+    text = sub_blank_lines(&#34;\n&#34;, text)
+    text = sub_pass(r&#34;\1&#34;, text)  # suppress most useless pass statements
+    return Source(text)</code></pre>
 </details>
 </dd>
 <dt id="paroxython.preprocess_source.collect_hints"><code class="name flex">
@@ -295,44 +305,34 @@ if __name__ == &#34;__main__&#34;:
     return (addition.get_result(), deletion.get_result())</code></pre>
 </details>
 </dd>
-<dt id="paroxython.preprocess_source.full_cleaning"><code class="name flex">
-<span>def <span class="ident">full_cleaning</span></span>(<span>source: Source) ‑> Source</span>
+<dt id="paroxython.preprocess_source.centrifugate_hints"><code class="name flex">
+<span>def <span class="ident">centrifugate_hints</span></span>(<span>source: Source) ‑> Source</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Transform the isolated hints into all-encompassing hints.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L38-L65" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L140-L158" class="git-link">Browse GitHub</a>
 </summary>
-<pre><code class="python">def full_cleaning(source: Source) -&gt; Source:
-    result = []
-    previous_token = INDENT
-    (previous_end_row, previous_end_col) = (-1, 0)
-    lines = iter(sub_first_comments(&#34;&#34;, source).replace(&#34;\t&#34;, &#34;    &#34;).split(&#34;\n&#34;))
-    for token_info in generate_tokens(lambda: next(lines) + &#34;\n&#34;):
-        (token, string, (start_row, start_col), (end_row, end_col), _) = token_info
-        if start_row &gt; previous_end_row:
-            previous_end_col = 0
-        result.append(&#34; &#34; * max(0, start_col - previous_end_col))
-        if token == COMMENT:
-            (string, n) = subn_paroxython_comment(f&#34;{HINT_COMMENT} &#34;, string)
-            if n == 0:
-                continue
-            result.append(string)
-        elif token == STRING and previous_token in (INDENT, DEDENT, NEWLINE):
-            result.append(&#34;pass\n&#34;)  # replace the docstring by a pass statement
+<pre><code class="python">def centrifugate_hints(source: Source) -&gt; Source:
+    lines = []
+    hints: Set[str] = set()
+    for line in source.split(&#34;\n&#34;):
+        m = match_isolated_hints(line)
+        if m:
+            hints.update(m[1].split())
         else:
-            result.append(string)
-        if (previous_token, token) == (NEWLINE, NL):
-            previous_token = NEWLINE
-        else:
-            previous_token = token
-        (previous_end_row, previous_end_col) = (end_row, end_col)
-    text = &#34;&#34;.join(result).strip()
-    text = sub_blank_lines(&#34;\n&#34;, text)
-    text = sub_pass(r&#34;\1&#34;, text)  # suppress most useless pass statements
-    return Source(text)</code></pre>
+            lines.append(line)
+    if not hints:
+        return source
+    for i in (0, -1):
+        if f&#34; {HINT_COMMENT}&#34; not in lines[i]:
+            lines[i] += f&#34; {HINT_COMMENT}&#34;
+    for hint in sorted(hints):
+        lines[0] += f&#34; {hint}...&#34;
+        lines[-1] += f&#34; ...{hint}&#34;
+    return Source(&#34;\n&#34;.join(lines))</code></pre>
 </details>
 </dd>
 <dt id="paroxython.preprocess_source.remove_hints"><code class="name flex">
@@ -406,6 +406,34 @@ if __name__ == &#34;__main__&#34;:
     self.result[label_name].append(Span(line_number, line_number))</code></pre>
 </details>
 </dd>
+<dt id="paroxython.preprocess_source.HintBuffer.open_hint"><code class="name flex">
+<span>def <span class="ident">open_hint</span></span>(<span>self, label_name: LabelName, line_number: int) ‑> NoneType</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L80-L81" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">def open_hint(self, label_name: LabelName, line_number: int) -&gt; None:
+    self.stack[label_name].append(line_number)</code></pre>
+</details>
+</dd>
+<dt id="paroxython.preprocess_source.HintBuffer.get_champion"><code class="name flex">
+<span>def <span class="ident">get_champion</span></span>(<span>self, label_name: LabelName) ‑> List[Tuple[int, <a title="paroxython.preprocess_source.HintBuffer" href="#paroxython.preprocess_source.HintBuffer">HintBuffer</a>]]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return the last line number (if any) of the opening label, plus itself.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L83-L85" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">def get_champion(self, label_name: LabelName) -&gt; List[Tuple[int, &#34;HintBuffer&#34;]]:
+    return [(self.stack[label_name][-1], self)] if self.stack[label_name] else []</code></pre>
+</details>
+</dd>
 <dt id="paroxython.preprocess_source.HintBuffer.close_hint"><code class="name flex">
 <span>def <span class="ident">close_hint</span></span>(<span>self, label_name: LabelName, line_number: int) ‑> NoneType</span>
 </code></dt>
@@ -435,20 +463,6 @@ if __name__ == &#34;__main__&#34;:
         raise ValueError(f&#34;Unmatched opening hints for {self.description}: {self.stack}.&#34;)</code></pre>
 </details>
 </dd>
-<dt id="paroxython.preprocess_source.HintBuffer.get_champion"><code class="name flex">
-<span>def <span class="ident">get_champion</span></span>(<span>self, label_name: LabelName) ‑> List[Tuple[int, <a title="paroxython.preprocess_source.HintBuffer" href="#paroxython.preprocess_source.HintBuffer">HintBuffer</a>]]</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Return the last line number (if any) of the opening label, plus itself.</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L83-L85" class="git-link">Browse GitHub</a>
-</summary>
-<pre><code class="python">def get_champion(self, label_name: LabelName) -&gt; List[Tuple[int, &#34;HintBuffer&#34;]]:
-    return [(self.stack[label_name][-1], self)] if self.stack[label_name] else []</code></pre>
-</details>
-</dd>
 <dt id="paroxython.preprocess_source.HintBuffer.get_result"><code class="name flex">
 <span>def <span class="ident">get_result</span></span>(<span>self) ‑> Dict[LabelName, List[Span]]</span>
 </code></dt>
@@ -461,20 +475,6 @@ if __name__ == &#34;__main__&#34;:
 </summary>
 <pre><code class="python">def get_result(self) -&gt; LabelsSpans:
     return {k: sorted(v) for (k, v) in self.result.items()}</code></pre>
-</details>
-</dd>
-<dt id="paroxython.preprocess_source.HintBuffer.open_hint"><code class="name flex">
-<span>def <span class="ident">open_hint</span></span>(<span>self, label_name: LabelName, line_number: int) ‑> NoneType</span>
-</code></dt>
-<dd>
-<div class="desc"></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L80-L81" class="git-link">Browse GitHub</a>
-</summary>
-<pre><code class="python">def open_hint(self, label_name: LabelName, line_number: int) -&gt; None:
-    self.stack[label_name].append(line_number)</code></pre>
 </details>
 </dd>
 </dl>
@@ -504,10 +504,10 @@ data-gaCategoryParameter="paroxython.preprocess_source">
 </li>
 <li><h3><a href="#header-functions">Functions</a></h3>
 <ul class="">
-<li><code><a title="paroxython.preprocess_source.centrifugate_hints" href="#paroxython.preprocess_source.centrifugate_hints">centrifugate_hints</a></code></li>
 <li><code><a title="paroxython.preprocess_source.cleanup_factory" href="#paroxython.preprocess_source.cleanup_factory">cleanup_factory</a></code></li>
-<li><code><a title="paroxython.preprocess_source.collect_hints" href="#paroxython.preprocess_source.collect_hints">collect_hints</a></code></li>
 <li><code><a title="paroxython.preprocess_source.full_cleaning" href="#paroxython.preprocess_source.full_cleaning">full_cleaning</a></code></li>
+<li><code><a title="paroxython.preprocess_source.collect_hints" href="#paroxython.preprocess_source.collect_hints">collect_hints</a></code></li>
+<li><code><a title="paroxython.preprocess_source.centrifugate_hints" href="#paroxython.preprocess_source.centrifugate_hints">centrifugate_hints</a></code></li>
 <li><code><a title="paroxython.preprocess_source.remove_hints" href="#paroxython.preprocess_source.remove_hints">remove_hints</a></code></li>
 </ul>
 </li>
@@ -517,11 +517,11 @@ data-gaCategoryParameter="paroxython.preprocess_source">
 <h4><code><a title="paroxython.preprocess_source.HintBuffer" href="#paroxython.preprocess_source.HintBuffer">HintBuffer</a></code></h4>
 <ul class="">
 <li><code><a title="paroxython.preprocess_source.HintBuffer.append_hint" href="#paroxython.preprocess_source.HintBuffer.append_hint">append_hint</a></code></li>
+<li><code><a title="paroxython.preprocess_source.HintBuffer.open_hint" href="#paroxython.preprocess_source.HintBuffer.open_hint">open_hint</a></code></li>
+<li><code><a title="paroxython.preprocess_source.HintBuffer.get_champion" href="#paroxython.preprocess_source.HintBuffer.get_champion">get_champion</a></code></li>
 <li><code><a title="paroxython.preprocess_source.HintBuffer.close_hint" href="#paroxython.preprocess_source.HintBuffer.close_hint">close_hint</a></code></li>
 <li><code><a title="paroxython.preprocess_source.HintBuffer.ensure_stack_is_empty" href="#paroxython.preprocess_source.HintBuffer.ensure_stack_is_empty">ensure_stack_is_empty</a></code></li>
-<li><code><a title="paroxython.preprocess_source.HintBuffer.get_champion" href="#paroxython.preprocess_source.HintBuffer.get_champion">get_champion</a></code></li>
 <li><code><a title="paroxython.preprocess_source.HintBuffer.get_result" href="#paroxython.preprocess_source.HintBuffer.get_result">get_result</a></code></li>
-<li><code><a title="paroxython.preprocess_source.HintBuffer.open_hint" href="#paroxython.preprocess_source.HintBuffer.open_hint">open_hint</a></code></li>
 </ul>
 </li>
 </ul>
