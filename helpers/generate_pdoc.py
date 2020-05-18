@@ -23,13 +23,9 @@ def generate_html():
         if path.is_dir():
             shutil.rmtree(path)
 
-    subprocess.run(
-        f"pdoc {pdoc_options} paroxython", shell=True, check=True,
-    )
+    subprocess.run(f"pdoc {pdoc_options} paroxython", shell=True)
 
-    subprocess.run(
-        f"mv docs/paroxython/* docs; rmdir docs/paroxython/", shell=True, check=True,
-    )
+    subprocess.run(f"mv docs/paroxython/* docs; rmdir docs/paroxython/", shell=True)
 
 
 def resolve_new_types():
@@ -77,7 +73,7 @@ def resolve_new_types():
 
 
 def remove_blacklisted_sources():
-    filenames = ("index.html", "resources/index.html")
+    filenames = ("index.html",)
     base_path = Path("docs/")
     for filename in filenames:
         path = base_path / filename

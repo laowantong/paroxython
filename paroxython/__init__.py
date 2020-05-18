@@ -8,6 +8,14 @@
 # How it works
 
 .. image:: flow.png
+
+# Pattern specifications
+
+Browse [spec.md](https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md) on GitHub.
+
+# Default Taxonomy
+
+Browse [taxonomy.tsv](https://github.com/laowantong/paroxython/blob/master/paroxython/resources/taxonomy.tsv) on GitHub.
 """
 
 

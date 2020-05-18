@@ -29,7 +29,7 @@ class Taxonomy:
         tsv = taxonomy_path.read_text().partition("-- EOF")[0].strip()
         self.literal_label_names: Dict[LabelName, TaxonNames] = defaultdict(list)
         self.compiled_label_names = []
-        for line in sorted(tsv.split("\n")):
+        for line in sorted(tsv.split("\n")[1:]):
             (taxon_name, label_pattern) = line.strip().split(maxsplit=1)
             if is_literal(label_pattern):
                 self.literal_label_names[LabelName(label_pattern)].append(TaxonName(taxon_name))
