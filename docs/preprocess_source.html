@@ -29,7 +29,7 @@
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L0-L174" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L0-L210" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">from collections import defaultdict
 from token import DEDENT, INDENT, NEWLINE, STRING
@@ -227,11 +227,51 @@ if __name__ == &#34;__main__&#34;:
 <span>def <span class="ident">full_cleaning</span></span>(<span>source: Source) ‑> Source</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Suppress all comments, docstrings, etc. from the given source-code.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>source</code></strong> :&ensp;<code>Source</code></dt>
+<dd>The source to be cleaned.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>Source</code></dt>
+<dd>The cleaned source.</dd>
+</dl>
+<h2 id="example">Example</h2>
+<ul>
+<li>Blank lines are suppressed.
+<div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="http://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=8:13&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="http://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=14:16&footer=0"></script></div></div></li>
+<li>Normal inline comments are suppressed.
+<div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="http://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=19:24&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="http://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=25:30&footer=0"></script></div></div></li>
+<li>Commented lines are suppressed.
+<div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="http://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=33:43&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="http://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=44:47&footer=0"></script></div></div></li>
+<li>Shebang are suppressed.
+<div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="http://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=50:52&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="http://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=53:54&footer=0"></script></div></div></li>
+<li>Encoding declaration is suppressed.
+<div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="http://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=57:59&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="http://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=60:61&footer=0"></script></div></div></li>
+<li>Docstrings of classes and functions are suppressed.
+<div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="http://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=64:75&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="http://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=76:81&footer=0"></script></div></div></li>
+<li>Docstrings of modules are suppressed.
+<div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="http://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=84:94&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="http://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=95:99&footer=0"></script></div></div></li>
+<li>A <code>pass</code> statement is added to empty classes if needed.
+<div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="http://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=102:107&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="http://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=108:110&footer=0"></script></div></div></li>
+<li>Useless <code>pass</code> statements are suppressed.
+<div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="http://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=113:121&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="http://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=122:128&footer=0"></script></div></div></li>
+<li>Mixes of comments and docstrings are suppressed.
+<div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="http://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=131:135&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="http://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=136:137&footer=0"></script></div></div></li>
+<li>Paroxython's label hints are <strong>preserved</strong>.
+<div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="http://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=140:146&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="http://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=147:153&footer=0"></script></div></div></li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Useless pass statements are preserved when they are not followed
+by a line with a same indentation level.</p>
+</div></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L38-L65" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L38-L101" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def full_cleaning(source: Source) -&gt; Source:
     result = []
@@ -271,7 +311,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L104-L134" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L140-L170" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def collect_hints(source: Source) -&gt; Tuple[LabelsSpans, LabelsSpans]:
     addition = HintBuffer(&#34;addition&#34;)
@@ -313,7 +353,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L140-L158" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L176-L194" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def centrifugate_hints(source: Source) -&gt; Source:
     lines = []
@@ -343,7 +383,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L164-L165" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L200-L201" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def remove_hints(source: Source) -&gt; Source:
     return replace_hints(&#34;&#34;, source).strip()</code></pre>
@@ -363,7 +403,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L68-L98" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L104-L134" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">class HintBuffer:
     def __init__(self, description: str) -&gt; None:
@@ -400,7 +440,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L76-L78" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L112-L114" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def append_hint(self, label_name: LabelName, line_number: int) -&gt; None:
     self.result[label_name].append(Span(line_number, line_number))</code></pre>
@@ -414,7 +454,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L80-L81" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L116-L117" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def open_hint(self, label_name: LabelName, line_number: int) -&gt; None:
     self.stack[label_name].append(line_number)</code></pre>
@@ -428,7 +468,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L83-L85" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L119-L121" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def get_champion(self, label_name: LabelName) -&gt; List[Tuple[int, &#34;HintBuffer&#34;]]:
     return [(self.stack[label_name][-1], self)] if self.stack[label_name] else []</code></pre>
@@ -442,7 +482,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L87-L89" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L123-L125" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def close_hint(self, label_name: LabelName, line_number: int) -&gt; None:
     self.result[label_name].append(Span(self.stack[label_name].pop(), line_number))</code></pre>
@@ -456,7 +496,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L91-L94" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L127-L130" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def ensure_stack_is_empty(self) -&gt; None:
     if any(self.stack.values()):
@@ -471,7 +511,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L96-L98" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L132-L134" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def get_result(self) -&gt; LabelsSpans:
     return {k: sorted(v) for (k, v) in self.result.items()}</code></pre>

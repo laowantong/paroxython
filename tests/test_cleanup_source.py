@@ -1,11 +1,27 @@
 import pytest
 import regex  # type: ignore
+from pathlib import Path
 
 import context
 from paroxython.preprocess_source import cleanup_factory
 
+# This test suite is automatically injected into the docstring of `preprocess_source.py`.
+# Modifying the position of the following assignment may require updating the function
+# `test_update_docstring()`.
+
 sources = r'''
-<<< inline comments
+<<< Empty or blank lines are suppressed.
+foo = bar
+
+
+bar = buzz
+
+---
+foo = bar
+bar = buzz
+>>>
+
+<<< Normal inline comments are suppressed.
 foo = bar # lorem ipsum
 fizz = [
     "foo", # lorem
@@ -19,7 +35,7 @@ fizz = [
 ]
 >>>
 
-<<< commented lines
+<<< Commented lines are suppressed.
 # lorem ipsum
 # dolor amet
 def foo(bar):
@@ -36,21 +52,21 @@ def foo(bar):
         return []
 >>>
 
-<<< shebang
+<<< Shebang are suppressed.
 #!/usr/bin/env python
 foobar()
 ---
 foobar()
 >>>
 
-<<< encoding
+<<< Encoding declaration is suppressed.
 # coding=utf8
 foobar()
 ---
 foobar()
 >>>
 
-<<< function and class docstrings
+<<< Docstrings of classes and functions are suppressed.
 class Foo:
     """Lorem.
 
@@ -70,7 +86,7 @@ def bar():
     return 2
 >>>
 
-<<< module docstrings
+<<< Docstrings of modules are suppressed.
 """Lorem.
 
 Ipsum Dolor."""
@@ -88,7 +104,7 @@ elit.
 """
 >>>
 
-<<< empty class
+<<< A `pass` statement is added to empty classes if needed.
 class Foo:
     """Lorem.
 
@@ -99,7 +115,7 @@ class Foo:
     pass
 >>>
 
-<<< pass statements
+<<< Useless `pass` statements are suppressed.
 foo()
 pass
 if bar():
@@ -115,10 +131,9 @@ if bar():
 else:
     foobar()
     pass
->>> BUG: useless pass statements are kept when they are not followed
-         by a line with a same indentation level.
+>>>
 
-<<< Comment followed by a docstring
+<<< Mixes of comments and docstrings are suppressed.
 # Lorem
 # Ipsum
 """Dolor."""
@@ -127,7 +142,7 @@ foobar()
 foobar()
 >>>
 
-<<< paroxython label hints
+<<< Paroxython's label hints are **preserved**.
 foo = bar # paroxython: hint_1 hint_2
 # paroxython: hint_3
 fizz = [
@@ -154,6 +169,29 @@ def test_full_cleaning(title, original, expected):
     result = cleanup(original)
     print(result)
     assert result == expected
+
+
+def test_update_docstring():
+    offset = 8
+    result = []
+    for (title, original, expected) in examples:
+        result.append(f"- {title}")
+        i1 = offset
+        i2 = i1 + original.count("\n") + 1
+        j1 = i2 + 1
+        j2 = j1 + expected.count("\n") + 1
+        result.append(
+            f"""<div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="http://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice={i1}:{i2}&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="http://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice={j1}:{j2}&footer=0"></script></div></div>"""
+        )
+        print(i1, i2, j1, j2)
+        offset = j2 + 3
+    result = "\n        ".join(result)
+    path = Path("paroxython/preprocess_source.py")
+    source = path.read_text()
+    source = regex.sub(
+        r"(?sm)^(def cleanup_factory.+?Example:\n).+?^(    \n)", fr"\1        {result}\n\2", source
+    )
+    path.write_text(source)
 
 
 if __name__ == "__main__":
