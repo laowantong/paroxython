@@ -181,7 +181,7 @@ def test_update_docstring():
         j1 = i2 + 1
         j2 = j1 + expected.count("\n") + 1
         result.append(
-            f"""<div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="http://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice={i1}:{i2}&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="http://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice={j1}:{j2}&footer=0"></script></div></div>"""
+            f"""<div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice={i1}:{i2}&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice={j1}:{j2}&footer=0"></script></div></div>"""
         )
         print(i1, i2, j1, j2)
         offset = j2 + 3
