@@ -46,23 +46,7 @@ whose last version is at <a href="https://bit.ly/2Yu0LqU.">https://bit.ly/2Yu0Lq
 <span>Expand source code</span>
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli_tag.py#L0-L65" class="git-link">Browse git</a>
 </summary>
-<pre><code class="python">&#34;&#34;&#34;
-USAGE:
-    paroxython tag [options] FILENAME
-
-OPTIONS:
-    -f --format=FORMAT  Format of the output, either &#34;md&#34; (Markdown)
-                        or &#34;tsv&#34; (Tab SeparatedValues). [default: md]
-    -l --labels         Output the labels instead of the taxons.
-    -t --taxonomy=PATH  The path of a TSV file mapping labels onto taxons.
-                        If not specified, use the included copy of the table
-                        whose last version is at https://bit.ly/2Yu0LqU.
-
-DESCRIPTION:
-    Tag one Python file and output the table of its taxons or labels.
-&#34;&#34;&#34;
-
-from pathlib import Path
+<pre><code class="python">from pathlib import Path
 from typing import List, Tuple, Optional
 from typing_extensions import Literal
 

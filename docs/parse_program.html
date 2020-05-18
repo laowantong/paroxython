@@ -51,11 +51,6 @@ __pdoc__ = {
 
 def _simplify_negative_literals() -&gt; Callable:
     sub = regex.compile(
-        r&#34;&#34;&#34;(?mx)
-                    ^(.*?)/_type=UnaryOp
-            (\n(?:.+\n)*?)\1/op/_type=USub
-             \n(?:.+\n)*? \1/operand/n=(.+)
-        &#34;&#34;&#34;
     ).sub
     return lambda flat_ast: sub(r&#34;\1/_type=Num\2\1/n=-\3&#34;, flat_ast)
 
@@ -64,21 +59,13 @@ simplify_negative_literals = _simplify_negative_literals()
 
 
 find_all_features = regex.compile(
-    r&#34;&#34;&#34;(?msx)
-            ^\#{4}\s+Feature\s+`(.+?)` # capture the label&#39;s pattern
-            .+?\#{5}\s+Specification # ensure the next pattern is in the Specification section
-            .+?```(.*?)\n+(.*?)\n``` # capture the language and the pattern
-        &#34;&#34;&#34;
 ).findall
 
 DEFAULT_SPEC_PATH = Path(dirname(__file__)) / &#34;resources&#34; / &#34;spec.md&#34;
 
 
 class ProgramParser:
-    &#34;&#34;&#34;Compile the given feature specifications, and search them in a Program.&#34;&#34;&#34;
-
     def __init__(self, spec_path: Path = DEFAULT_SPEC_PATH) -&gt; None:
-        &#34;&#34;&#34;Compile the features to search.&#34;&#34;&#34;
         self.spec_path = spec_path
         text = self.spec_path.read_text()
         self.features: Dict[LabelName, regex.Pattern] = {}
@@ -93,17 +80,13 @@ class ProgramParser:
         self.db = DB()
 
     def __call__(self, program: Program, yield_failed_matches: bool = False) -&gt; Labels:
-        &#34;&#34;&#34;Analyze a given source and return its labels and their spans.&#34;&#34;&#34;
-
         def try_to_bind(label_name: LabelName, span: Span) -&gt; None:
-            &#34;&#34;&#34;Bind a name with a span, unless this binding is scheduled for deletion.&#34;&#34;&#34;
             try:
                 program.deletion[label_name].remove(Span(span.start, span.end))
             except (KeyError, ValueError):
                 result[label_name].append(span)
 
         def pos_to_span(pos: List[str]) -&gt; Span:
-            &#34;&#34;&#34;Convert into a span a list of strings of the form f&#34;{line_number}:{path}&#34;.&#34;&#34;&#34;
             (start, path) = pos[0].split(&#34;:&#34;)
             (end, _) = pos[-1].split(&#34;:&#34;)
             return Span(int(start), int(end), path)
@@ -216,10 +199,7 @@ if __name__ == &#34;__main__&#34;:
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L44-L123" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class ProgramParser:
-    &#34;&#34;&#34;Compile the given feature specifications, and search them in a Program.&#34;&#34;&#34;
-
     def __init__(self, spec_path: Path = DEFAULT_SPEC_PATH) -&gt; None:
-        &#34;&#34;&#34;Compile the features to search.&#34;&#34;&#34;
         self.spec_path = spec_path
         text = self.spec_path.read_text()
         self.features: Dict[LabelName, regex.Pattern] = {}
@@ -234,17 +214,13 @@ if __name__ == &#34;__main__&#34;:
         self.db = DB()
 
     def __call__(self, program: Program, yield_failed_matches: bool = False) -&gt; Labels:
-        &#34;&#34;&#34;Analyze a given source and return its labels and their spans.&#34;&#34;&#34;
-
         def try_to_bind(label_name: LabelName, span: Span) -&gt; None:
-            &#34;&#34;&#34;Bind a name with a span, unless this binding is scheduled for deletion.&#34;&#34;&#34;
             try:
                 program.deletion[label_name].remove(Span(span.start, span.end))
             except (KeyError, ValueError):
                 result[label_name].append(span)
 
         def pos_to_span(pos: List[str]) -&gt; Span:
-            &#34;&#34;&#34;Convert into a span a list of strings of the form f&#34;{line_number}:{path}&#34;.&#34;&#34;&#34;
             (start, path) = pos[0].split(&#34;:&#34;)
             (end, _) = pos[-1].split(&#34;:&#34;)
             return Span(int(start), int(end), path)

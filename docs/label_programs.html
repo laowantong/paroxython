@@ -42,13 +42,10 @@ from .user_types import Label, LabelName, LabelsSpans, Program, ProgramName, Sou
 
 
 class ProgramLabeller:
-    &#34;&#34;&#34;Populate the labels of one or more programs.&#34;&#34;&#34;
-
     def __init__(self):
         self.parse = ProgramParser()
 
     def label_programs(self, directory: Path, *args, **kwargs) -&gt; None:
-        &#34;&#34;&#34;Complete all fields of a list of programs.&#34;&#34;&#34;
         self.directory = directory
         self.programs = list_programs(self.directory, *args, **kwargs)
         self.internal_program_names = {p.name for p in self.programs}
@@ -59,7 +56,6 @@ class ProgramLabeller:
             self.tweak_internal_import_labels(program)
 
     def label_program(self, program: Program) -&gt; None:
-        &#34;&#34;&#34;Compute the labels of a given program and store the result in its `labels` field.&#34;&#34;&#34;
         label_dict: LabelsSpans = defaultdict(list)
         for (label_name, spans) in self.parse(program):
             for span in spans:
@@ -67,7 +63,6 @@ class ProgramLabeller:
         program.labels[:] = [Label(name, span) for (name, span) in label_dict.items()]
 
     def tweak_internal_import_labels(self, program: Program) -&gt; None:
-        &#34;&#34;&#34;Modify the appropriate labels in-place to mark internal importations.&#34;&#34;&#34;
         for (i, label) in enumerate(program.labels):
             if label.name.startswith((&#34;import:&#34;, &#34;import_module:&#34;)):
                 parts = label.name.split(&#34;:&#34;)
@@ -79,7 +74,6 @@ class ProgramLabeller:
                     )
 
     def generate_labelled_sources(self, *args, **kwargs) -&gt; Iterator:
-        &#34;&#34;&#34;For each program, yield its source with its labels in comment.&#34;&#34;&#34;
         separator = &#34;-&#34; * 88
         for program in self.programs:
             yield Source(f&#34;# {separator}\n# {program.name}\n# {separator}&#34;)
@@ -123,13 +117,10 @@ if __name__ == &#34;__main__&#34;:
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/label_programs.py#L11-L63" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class ProgramLabeller:
-    &#34;&#34;&#34;Populate the labels of one or more programs.&#34;&#34;&#34;
-
     def __init__(self):
         self.parse = ProgramParser()
 
     def label_programs(self, directory: Path, *args, **kwargs) -&gt; None:
-        &#34;&#34;&#34;Complete all fields of a list of programs.&#34;&#34;&#34;
         self.directory = directory
         self.programs = list_programs(self.directory, *args, **kwargs)
         self.internal_program_names = {p.name for p in self.programs}
@@ -140,7 +131,6 @@ if __name__ == &#34;__main__&#34;:
             self.tweak_internal_import_labels(program)
 
     def label_program(self, program: Program) -&gt; None:
-        &#34;&#34;&#34;Compute the labels of a given program and store the result in its `labels` field.&#34;&#34;&#34;
         label_dict: LabelsSpans = defaultdict(list)
         for (label_name, spans) in self.parse(program):
             for span in spans:
@@ -148,7 +138,6 @@ if __name__ == &#34;__main__&#34;:
         program.labels[:] = [Label(name, span) for (name, span) in label_dict.items()]
 
     def tweak_internal_import_labels(self, program: Program) -&gt; None:
-        &#34;&#34;&#34;Modify the appropriate labels in-place to mark internal importations.&#34;&#34;&#34;
         for (i, label) in enumerate(program.labels):
             if label.name.startswith((&#34;import:&#34;, &#34;import_module:&#34;)):
                 parts = label.name.split(&#34;:&#34;)
@@ -160,7 +149,6 @@ if __name__ == &#34;__main__&#34;:
                     )
 
     def generate_labelled_sources(self, *args, **kwargs) -&gt; Iterator:
-        &#34;&#34;&#34;For each program, yield its source with its labels in comment.&#34;&#34;&#34;
         separator = &#34;-&#34; * 88
         for program in self.programs:
             yield Source(f&#34;# {separator}\n# {program.name}\n# {separator}&#34;)
@@ -189,7 +177,6 @@ if __name__ == &#34;__main__&#34;:
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/label_programs.py#L48-L63" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def generate_labelled_sources(self, *args, **kwargs) -&gt; Iterator:
-    &#34;&#34;&#34;For each program, yield its source with its labels in comment.&#34;&#34;&#34;
     separator = &#34;-&#34; * 88
     for program in self.programs:
         yield Source(f&#34;# {separator}\n# {program.name}\n# {separator}&#34;)
@@ -217,7 +204,6 @@ if __name__ == &#34;__main__&#34;:
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/label_programs.py#L28-L34" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def label_program(self, program: Program) -&gt; None:
-    &#34;&#34;&#34;Compute the labels of a given program and store the result in its `labels` field.&#34;&#34;&#34;
     label_dict: LabelsSpans = defaultdict(list)
     for (label_name, spans) in self.parse(program):
         for span in spans:
@@ -236,7 +222,6 @@ if __name__ == &#34;__main__&#34;:
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/label_programs.py#L17-L26" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def label_programs(self, directory: Path, *args, **kwargs) -&gt; None:
-    &#34;&#34;&#34;Complete all fields of a list of programs.&#34;&#34;&#34;
     self.directory = directory
     self.programs = list_programs(self.directory, *args, **kwargs)
     self.internal_program_names = {p.name for p in self.programs}
@@ -258,7 +243,6 @@ if __name__ == &#34;__main__&#34;:
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/label_programs.py#L36-L46" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def tweak_internal_import_labels(self, program: Program) -&gt; None:
-    &#34;&#34;&#34;Modify the appropriate labels in-place to mark internal importations.&#34;&#34;&#34;
     for (i, label) in enumerate(program.labels):
         if label.name.startswith((&#34;import:&#34;, &#34;import_module:&#34;)):
             parts = label.name.split(&#34;:&#34;)

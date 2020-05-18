@@ -44,24 +44,7 @@ two zero-based indexes <code>start</code> (inclusive) and <code>stop</code> (exc
 <span>Expand source code</span>
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/assess_costs.py#L0-L128" class="git-link">Browse git</a>
 </summary>
-<pre><code class="python">r&#34;&#34;&#34;Assess the learning cost associated with the introduction of the given programs.
-
-Each program has been previously found to implement a number of notions represented by a list of
-taxons of the form: \(\textrm{segment}_0/\textrm{segment}_1/.../\textrm{segment}_n\), e.g.,
-`flow/loop/exit/early/break`.
-
-Furthermore, the notions already imparted may cover a certain **prefix** of such a taxon, e.g.
-`flow/loop`. The learning cost should therefore not take it into account.
-
-The cost of the remaining segments, here `exit/early/break`, is approximated by a function taking
-two zero-based indexes `start` (inclusive) and `stop` (exclusive), and returning a floating number. Currently, only two such functions are provided:
-
-1. `range_to_cost_linear()`, which simply counts the number of segments;
-2. `range_to_cost_zeno()`, which calculates the sum of a decreasing function of the positions
-   (with the assumption that the introduction of a sub-concept costs half that of its parent concept).
-&#34;&#34;&#34;
-
-from functools import lru_cache
+<pre><code class="python">from functools import lru_cache
 
 from .user_types import TaxonName, TaxonNameSet, ProgramTaxonNames, AssessedPrograms, Literal
 
@@ -72,57 +55,19 @@ __pdoc__ = {
 
 @lru_cache(maxsize=None)  # NB: memoization needed for consistency with mypy&#39;s typing
 def range_to_cost_linear(start: int, stop: int) -&gt; float:
-    &#34;&#34;&#34;Return the length of the slice between `start` (inclusive) and `stop` (exclusive).
-    &#34;&#34;&#34;
     return float(stop - start)
 
 
 @lru_cache(maxsize=None)
 def range_to_cost_zeno(start: int, stop: int) -&gt; float:
-    r&#34;&#34;&#34;Calculate the sum of the given slice of a [Zeno&#39;s geometric series](https://en.wikipedia.org/wiki/Zeno%27s_paradoxes#Dichotomy_paradox).
-
-    Specifically: $$\sum_{i=\textrm{start}}^{\textrm{stop}-1}{\frac{1}{2^{i+1}}}$$
-
-    Since it converges absolutely towards 1, the returned value is in the interval \([0, 1[\).
-
-    &lt;center&gt;&lt;a title=&#34;Jim.belk / Public domain&#34; href=&#34;https://commons.wikimedia.org/wiki/File:Geometric_Segment.svg&#34;&gt;&lt;img width=&#34;256&#34; alt=&#34;Geometric Segment&#34; src=&#34;https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Geometric_Segment.svg/256px-Geometric_Segment.svg.png&#34;&gt;&lt;/a&gt;&lt;/center&gt;
-
-    Example:
-        If `flow/loop` is already imparted, the learning cost of `flow/loop/exit/early/break` will
-        be:
-
-    &gt;&gt;&gt; range_to_cost_zeno(2, 5)
-    0.21875
-
-    Indeed,
-    \(\frac{1}{2^3}+\frac{1}{2^4}+\frac{1}{2^5}=\frac{1}{8}+\frac{1}{16}+\frac{1}{32}=0.21875\).
-
-    &#34;&#34;&#34;
     return sum(2 ** ~i for i in range(start, stop))
 
 
 class LearningCostAssessor:
     def __init__(self, imparted_knowledge: TaxonNameSet) -&gt; None:
-        &#34;&#34;&#34;Evaluate the learning costs of programs with respect to the given imparted knowledge.
-
-        Args:
-            imparted_knowledge (TaxonNameSet): A set of taxon names, representing all the notions
-                introduced so far.
-        &#34;&#34;&#34;
         self.imparted_knowledge = imparted_knowledge
 
     def set_cost_assessment_strategy(self, strategy: Literal[&#34;zeno&#34;, &#34;linear&#34;] = &#34;zeno&#34;) -&gt; None:
-        &#34;&#34;&#34;Set the function to be used for the learning cost calculation.
-
-        Args:
-            strategy (str, optional): Either:
-
-                - `&#34;zeno&#34;`: `range_to_cost_zeno` (default).
-                - `&#34;linear&#34;`: `range_to_cost_linear`.
-
-        Raises:
-            NotImplementedError: Raised in case of unknown strategy.
-        &#34;&#34;&#34;
         if strategy.lower() == &#34;zeno&#34;:
             self.range_to_cost = range_to_cost_zeno
         elif strategy == &#34;linear&#34;:
@@ -134,20 +79,6 @@ class LearningCostAssessor:
 
     @lru_cache(maxsize=None)
     def taxon_cost(self, taxon: TaxonName) -&gt; float:
-        &#34;&#34;&#34;Evaluate the learning cost of a given taxon.
-
-        The bounds of the not-yet-imparted suffix of the taxon are extracted and passed to the cost
-        assessment function.
-
-        Args:
-            taxon (TaxonName): The taxon to be costed.
-
-        Returns:
-            float: The learning cost of the taxon.
-
-        .. note::
-          The learning cost of a taxon prefixed by `&#34;metadata/&#34;` is assumed to be zero.
-        &#34;&#34;&#34;
         if taxon.startswith(&#34;metadata/&#34;):
             return 0
         (start, stop) = (0, 0)
@@ -160,15 +91,6 @@ class LearningCostAssessor:
         return self.range_to_cost(start, stop)
 
     def __call__(self, programs: ProgramTaxonNames) -&gt; AssessedPrograms:
-        &#34;&#34;&#34;Associate the given programs with the total learning cost of their taxons.
-
-        Args:
-            programs (ProgramTaxonNames): A dictionary associating each program name with a list
-                of taxon names.
-
-        Returns:
-            AssessedPrograms: A list of tuples `(total_cost, ProgramName)` sorted by increasing cost.
-        &#34;&#34;&#34;
         return sorted(
             (sum(map(self.taxon_cost, taxon_names)), program_name)
             for (program_name, taxon_names) in programs.items()
@@ -194,8 +116,6 @@ class LearningCostAssessor:
 </summary>
 <pre><code class="python">@lru_cache(maxsize=None)  # NB: memoization needed for consistency with mypy&#39;s typing
 def range_to_cost_linear(start: int, stop: int) -&gt; float:
-    &#34;&#34;&#34;Return the length of the slice between `start` (inclusive) and `stop` (exclusive).
-    &#34;&#34;&#34;
     return float(stop - start)</code></pre>
 </details>
 </dd>
@@ -222,25 +142,6 @@ be:</p>
 </summary>
 <pre><code class="python">@lru_cache(maxsize=None)
 def range_to_cost_zeno(start: int, stop: int) -&gt; float:
-    r&#34;&#34;&#34;Calculate the sum of the given slice of a [Zeno&#39;s geometric series](https://en.wikipedia.org/wiki/Zeno%27s_paradoxes#Dichotomy_paradox).
-
-    Specifically: $$\sum_{i=\textrm{start}}^{\textrm{stop}-1}{\frac{1}{2^{i+1}}}$$
-
-    Since it converges absolutely towards 1, the returned value is in the interval \([0, 1[\).
-
-    &lt;center&gt;&lt;a title=&#34;Jim.belk / Public domain&#34; href=&#34;https://commons.wikimedia.org/wiki/File:Geometric_Segment.svg&#34;&gt;&lt;img width=&#34;256&#34; alt=&#34;Geometric Segment&#34; src=&#34;https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Geometric_Segment.svg/256px-Geometric_Segment.svg.png&#34;&gt;&lt;/a&gt;&lt;/center&gt;
-
-    Example:
-        If `flow/loop` is already imparted, the learning cost of `flow/loop/exit/early/break` will
-        be:
-
-    &gt;&gt;&gt; range_to_cost_zeno(2, 5)
-    0.21875
-
-    Indeed,
-    \(\frac{1}{2^3}+\frac{1}{2^4}+\frac{1}{2^5}=\frac{1}{8}+\frac{1}{16}+\frac{1}{32}=0.21875\).
-
-    &#34;&#34;&#34;
     return sum(2 ** ~i for i in range(start, stop))</code></pre>
 </details>
 </dd>
@@ -268,26 +169,9 @@ introduced so far.</dd>
 </summary>
 <pre><code class="python">class LearningCostAssessor:
     def __init__(self, imparted_knowledge: TaxonNameSet) -&gt; None:
-        &#34;&#34;&#34;Evaluate the learning costs of programs with respect to the given imparted knowledge.
-
-        Args:
-            imparted_knowledge (TaxonNameSet): A set of taxon names, representing all the notions
-                introduced so far.
-        &#34;&#34;&#34;
         self.imparted_knowledge = imparted_knowledge
 
     def set_cost_assessment_strategy(self, strategy: Literal[&#34;zeno&#34;, &#34;linear&#34;] = &#34;zeno&#34;) -&gt; None:
-        &#34;&#34;&#34;Set the function to be used for the learning cost calculation.
-
-        Args:
-            strategy (str, optional): Either:
-
-                - `&#34;zeno&#34;`: `range_to_cost_zeno` (default).
-                - `&#34;linear&#34;`: `range_to_cost_linear`.
-
-        Raises:
-            NotImplementedError: Raised in case of unknown strategy.
-        &#34;&#34;&#34;
         if strategy.lower() == &#34;zeno&#34;:
             self.range_to_cost = range_to_cost_zeno
         elif strategy == &#34;linear&#34;:
@@ -299,20 +183,6 @@ introduced so far.</dd>
 
     @lru_cache(maxsize=None)
     def taxon_cost(self, taxon: TaxonName) -&gt; float:
-        &#34;&#34;&#34;Evaluate the learning cost of a given taxon.
-
-        The bounds of the not-yet-imparted suffix of the taxon are extracted and passed to the cost
-        assessment function.
-
-        Args:
-            taxon (TaxonName): The taxon to be costed.
-
-        Returns:
-            float: The learning cost of the taxon.
-
-        .. note::
-          The learning cost of a taxon prefixed by `&#34;metadata/&#34;` is assumed to be zero.
-        &#34;&#34;&#34;
         if taxon.startswith(&#34;metadata/&#34;):
             return 0
         (start, stop) = (0, 0)
@@ -325,15 +195,6 @@ introduced so far.</dd>
         return self.range_to_cost(start, stop)
 
     def __call__(self, programs: ProgramTaxonNames) -&gt; AssessedPrograms:
-        &#34;&#34;&#34;Associate the given programs with the total learning cost of their taxons.
-
-        Args:
-            programs (ProgramTaxonNames): A dictionary associating each program name with a list
-                of taxon names.
-
-        Returns:
-            AssessedPrograms: A list of tuples `(total_cost, ProgramName)` sorted by increasing cost.
-        &#34;&#34;&#34;
         return sorted(
             (sum(map(self.taxon_cost, taxon_names)), program_name)
             for (program_name, taxon_names) in programs.items()
@@ -363,15 +224,6 @@ of taxon names.</dd>
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/assess_costs.py#L116-L129" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def __call__(self, programs: ProgramTaxonNames) -&gt; AssessedPrograms:
-    &#34;&#34;&#34;Associate the given programs with the total learning cost of their taxons.
-
-    Args:
-        programs (ProgramTaxonNames): A dictionary associating each program name with a list
-            of taxon names.
-
-    Returns:
-        AssessedPrograms: A list of tuples `(total_cost, ProgramName)` sorted by increasing cost.
-    &#34;&#34;&#34;
     return sorted(
         (sum(map(self.taxon_cost, taxon_names)), program_name)
         for (program_name, taxon_names) in programs.items()
@@ -405,17 +257,6 @@ of taxon names.</dd>
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/assess_costs.py#L68-L87" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def set_cost_assessment_strategy(self, strategy: Literal[&#34;zeno&#34;, &#34;linear&#34;] = &#34;zeno&#34;) -&gt; None:
-    &#34;&#34;&#34;Set the function to be used for the learning cost calculation.
-
-    Args:
-        strategy (str, optional): Either:
-
-            - `&#34;zeno&#34;`: `range_to_cost_zeno` (default).
-            - `&#34;linear&#34;`: `range_to_cost_linear`.
-
-    Raises:
-        NotImplementedError: Raised in case of unknown strategy.
-    &#34;&#34;&#34;
     if strategy.lower() == &#34;zeno&#34;:
         self.range_to_cost = range_to_cost_zeno
     elif strategy == &#34;linear&#34;:
@@ -454,20 +295,6 @@ assessment function.</p>
 </summary>
 <pre><code class="python">@lru_cache(maxsize=None)
 def taxon_cost(self, taxon: TaxonName) -&gt; float:
-    &#34;&#34;&#34;Evaluate the learning cost of a given taxon.
-
-    The bounds of the not-yet-imparted suffix of the taxon are extracted and passed to the cost
-    assessment function.
-
-    Args:
-        taxon (TaxonName): The taxon to be costed.
-
-    Returns:
-        float: The learning cost of the taxon.
-
-    .. note::
-      The learning cost of a taxon prefixed by `&#34;metadata/&#34;` is assumed to be zero.
-    &#34;&#34;&#34;
     if taxon.startswith(&#34;metadata/&#34;):
         return 0
     (start, stop) = (0, 0)

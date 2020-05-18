@@ -76,7 +76,7 @@ def resolve_new_types():
     Path("docs/user_types.html").unlink()
 
 
-def suppress_sources():
+def remove_blacklisted_sources():
     filenames = ("index.html", "resources/index.html")
     base_path = Path("docs/")
     for filename in filenames:
@@ -86,10 +86,20 @@ def suppress_sources():
         path.write_text(source)
 
 
+def strip_docstrings():
+    sub_code = regex.compile(r'(?ms)^(<pre><code class="python">)(.+?)(</code></pre>)').sub
+    sub_docstrings = regex.compile(r"(?ms)^\s*r?&#34;&#34;&#34;.+?&#34;&#34;&#34;\n+").sub
+    for path in Path("docs/").rglob("*.html"):
+        source = path.read_text()
+        source = sub_code(lambda m: m[1] + sub_docstrings("", m[2]) + m[3], source)
+        path.write_text(source)
+
+
 def main():
     generate_html()
     resolve_new_types()
-    suppress_sources()
+    remove_blacklisted_sources()
+    strip_docstrings()
 
 
 if __name__ == "__main__":

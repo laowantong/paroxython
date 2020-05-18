@@ -41,7 +41,6 @@ from .user_types import Program, ProgramName, Programs, Source
 
 
 def list_programs(directory: Path, cleanup_strategy: str = &#34;full&#34;, *args, **kwargs) -&gt; Programs:
-    &#34;&#34;&#34;List recursively all Python `Programs` of a given directory.&#34;&#34;&#34;
     result: Programs = []
     cleanup = cleanup_factory(cleanup_strategy)
     for program_path in generate_program_paths(directory, *args, **kwargs):
@@ -54,7 +53,6 @@ def list_programs(directory: Path, cleanup_strategy: str = &#34;full&#34;, *args
 def generate_program_paths(
     directory: Path, glob_pattern: str = &#34;&#34;, exclude_pattern: str = &#34;&#34;, *args, **kwargs,
 ) -&gt; Iterator[Path]:
-    &#34;&#34;&#34;Generate recursively the paths of all Python files of a given directory.&#34;&#34;&#34;
     glob_pattern = glob_pattern or &#34;**/*.py&#34;
     exclude_pattern = exclude_pattern or r&#34;^(__init__|setup|.*[-_]tests?)\.py$&#34;
     match_excluded = regex.compile(exclude_pattern).fullmatch
@@ -64,15 +62,6 @@ def generate_program_paths(
 
 
 def get_program(source: Source, relative_path: Path = None) -&gt; Program:
-    &#34;&#34;&#34;Construct a `Program` of its `Source` and relative `Path`.
-
-    The result consists in:
-
-    - the program `Path`, empty or relative to the directory passed to `list_programs()`;
-    - its centrifugated `Source`;
-    - the hints scheduled for addition or deletion;
-    - its `labels`, currently empty, to be later populated by label_programs.py.
-    &#34;&#34;&#34;
     source = centrifugate_hints(source)
     (addition, deletion) = collect_hints(source)
     source = remove_hints(source)
@@ -87,7 +76,6 @@ def get_program(source: Source, relative_path: Path = None) -&gt; Program:
 
 
 def iterate_and_print_programs(programs: Programs) -&gt; Iterator[Program]:
-    &#34;&#34;&#34;Wrap the iteration of programs into a logger.&#34;&#34;&#34;
     blanks = &#34;&#34;
     for (i, program) in enumerate(programs, 1):
         print(f&#34;\r{blanks}\r{i: 5} {program.name}&#34;, end=&#34;&#34;, flush=True)
@@ -131,7 +119,6 @@ if __name__ == &#34;__main__&#34;:
 <pre><code class="python">def generate_program_paths(
     directory: Path, glob_pattern: str = &#34;&#34;, exclude_pattern: str = &#34;&#34;, *args, **kwargs,
 ) -&gt; Iterator[Path]:
-    &#34;&#34;&#34;Generate recursively the paths of all Python files of a given directory.&#34;&#34;&#34;
     glob_pattern = glob_pattern or &#34;**/*.py&#34;
     exclude_pattern = exclude_pattern or r&#34;^(__init__|setup|.*[-_]tests?)\.py$&#34;
     match_excluded = regex.compile(exclude_pattern).fullmatch
@@ -158,15 +145,6 @@ if __name__ == &#34;__main__&#34;:
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/list_programs.py#L33-L53" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def get_program(source: Source, relative_path: Path = None) -&gt; Program:
-    &#34;&#34;&#34;Construct a `Program` of its `Source` and relative `Path`.
-
-    The result consists in:
-
-    - the program `Path`, empty or relative to the directory passed to `list_programs()`;
-    - its centrifugated `Source`;
-    - the hints scheduled for addition or deletion;
-    - its `labels`, currently empty, to be later populated by label_programs.py.
-    &#34;&#34;&#34;
     source = centrifugate_hints(source)
     (addition, deletion) = collect_hints(source)
     source = remove_hints(source)
@@ -191,7 +169,6 @@ if __name__ == &#34;__main__&#34;:
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/list_programs.py#L56-L64" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def iterate_and_print_programs(programs: Programs) -&gt; Iterator[Program]:
-    &#34;&#34;&#34;Wrap the iteration of programs into a logger.&#34;&#34;&#34;
     blanks = &#34;&#34;
     for (i, program) in enumerate(programs, 1):
         print(f&#34;\r{blanks}\r{i: 5} {program.name}&#34;, end=&#34;&#34;, flush=True)
@@ -212,7 +189,6 @@ if __name__ == &#34;__main__&#34;:
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/list_programs.py#L10-L18" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def list_programs(directory: Path, cleanup_strategy: str = &#34;full&#34;, *args, **kwargs) -&gt; Programs:
-    &#34;&#34;&#34;List recursively all Python `Programs` of a given directory.&#34;&#34;&#34;
     result: Programs = []
     cleanup = cleanup_factory(cleanup_strategy)
     for program_path in generate_program_paths(directory, *args, **kwargs):

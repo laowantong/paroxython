@@ -99,35 +99,28 @@ def full_cleaning(source: Source) -&gt; Source:
 
 
 class HintBuffer:
-    &#34;&#34;&#34;Layer on the operations of appending, opening and closing an hint.&#34;&#34;&#34;
-
     def __init__(self, description: str) -&gt; None:
         self.result: LabelsSpans = defaultdict(list)
         self.stack: Dict[LabelName, List[int]] = defaultdict(list)
         self.description = description
 
     def append_hint(self, label_name: LabelName, line_number: int) -&gt; None:
-        &#34;&#34;&#34;Label a span consisting in the given line number.&#34;&#34;&#34;
         self.result[label_name].append(Span(line_number, line_number))
 
     def open_hint(self, label_name: LabelName, line_number: int) -&gt; None:
         self.stack[label_name].append(line_number)
 
     def get_champion(self, label_name: LabelName) -&gt; List[Tuple[int, &#34;HintBuffer&#34;]]:
-        &#34;&#34;&#34;Return the last line number (if any) of the opening label, plus itself.&#34;&#34;&#34;
         return [(self.stack[label_name][-1], self)] if self.stack[label_name] else []
 
     def close_hint(self, label_name: LabelName, line_number: int) -&gt; None:
-        &#34;&#34;&#34;Label a span opened above and closed on the given line number.&#34;&#34;&#34;
         self.result[label_name].append(Span(self.stack[label_name].pop(), line_number))
 
     def ensure_stack_is_empty(self) -&gt; None:
-        &#34;&#34;&#34;Raise an error iff there remains at least one open label.&#34;&#34;&#34;
         if any(self.stack.values()):
             raise ValueError(f&#34;Unmatched opening hints for {self.description}: {self.stack}.&#34;)
 
     def get_result(self) -&gt; LabelsSpans:
-        &#34;&#34;&#34;Return the result with sorted spans.&#34;&#34;&#34;
         return {k: sorted(v) for (k, v) in self.result.items()}
 
 
@@ -135,7 +128,6 @@ label_pattern = regex.compile(r&#34;^(\W*)([\w:]+)(\W*)$&#34;)
 
 
 def collect_hints(source: Source) -&gt; Tuple[LabelsSpans, LabelsSpans]:
-    &#34;&#34;&#34;Schedule for addition or deletion the hints appearing in the comments.&#34;&#34;&#34;
     addition = HintBuffer(&#34;addition&#34;)
     deletion = HintBuffer(&#34;deletion&#34;)
     for (i, line) in enumerate(source.split(&#34;\n&#34;), 1):
@@ -171,7 +163,6 @@ match_isolated_hints = regex.compile(fr&#34;\s*{HINT_COMMENT} (.+)&#34;).match
 
 
 def centrifugate_hints(source: Source) -&gt; Source:
-    &#34;&#34;&#34;Transform the isolated hints into all-encompassing hints.&#34;&#34;&#34;
     lines = []
     hints: Set[str] = set()
     for line in source.split(&#34;\n&#34;):
@@ -226,7 +217,6 @@ if __name__ == &#34;__main__&#34;:
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L140-L158" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def centrifugate_hints(source: Source) -&gt; Source:
-    &#34;&#34;&#34;Transform the isolated hints into all-encompassing hints.&#34;&#34;&#34;
     lines = []
     hints: Set[str] = set()
     for line in source.split(&#34;\n&#34;):
@@ -274,7 +264,6 @@ if __name__ == &#34;__main__&#34;:
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L104-L134" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def collect_hints(source: Source) -&gt; Tuple[LabelsSpans, LabelsSpans]:
-    &#34;&#34;&#34;Schedule for addition or deletion the hints appearing in the comments.&#34;&#34;&#34;
     addition = HintBuffer(&#34;addition&#34;)
     deletion = HintBuffer(&#34;deletion&#34;)
     for (i, line) in enumerate(source.split(&#34;\n&#34;), 1):
@@ -377,35 +366,28 @@ if __name__ == &#34;__main__&#34;:
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L68-L98" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class HintBuffer:
-    &#34;&#34;&#34;Layer on the operations of appending, opening and closing an hint.&#34;&#34;&#34;
-
     def __init__(self, description: str) -&gt; None:
         self.result: LabelsSpans = defaultdict(list)
         self.stack: Dict[LabelName, List[int]] = defaultdict(list)
         self.description = description
 
     def append_hint(self, label_name: LabelName, line_number: int) -&gt; None:
-        &#34;&#34;&#34;Label a span consisting in the given line number.&#34;&#34;&#34;
         self.result[label_name].append(Span(line_number, line_number))
 
     def open_hint(self, label_name: LabelName, line_number: int) -&gt; None:
         self.stack[label_name].append(line_number)
 
     def get_champion(self, label_name: LabelName) -&gt; List[Tuple[int, &#34;HintBuffer&#34;]]:
-        &#34;&#34;&#34;Return the last line number (if any) of the opening label, plus itself.&#34;&#34;&#34;
         return [(self.stack[label_name][-1], self)] if self.stack[label_name] else []
 
     def close_hint(self, label_name: LabelName, line_number: int) -&gt; None:
-        &#34;&#34;&#34;Label a span opened above and closed on the given line number.&#34;&#34;&#34;
         self.result[label_name].append(Span(self.stack[label_name].pop(), line_number))
 
     def ensure_stack_is_empty(self) -&gt; None:
-        &#34;&#34;&#34;Raise an error iff there remains at least one open label.&#34;&#34;&#34;
         if any(self.stack.values()):
             raise ValueError(f&#34;Unmatched opening hints for {self.description}: {self.stack}.&#34;)
 
     def get_result(self) -&gt; LabelsSpans:
-        &#34;&#34;&#34;Return the result with sorted spans.&#34;&#34;&#34;
         return {k: sorted(v) for (k, v) in self.result.items()}</code></pre>
 </details>
 <h3>Methods</h3>
@@ -421,7 +403,6 @@ if __name__ == &#34;__main__&#34;:
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L76-L78" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def append_hint(self, label_name: LabelName, line_number: int) -&gt; None:
-    &#34;&#34;&#34;Label a span consisting in the given line number.&#34;&#34;&#34;
     self.result[label_name].append(Span(line_number, line_number))</code></pre>
 </details>
 </dd>
@@ -436,7 +417,6 @@ if __name__ == &#34;__main__&#34;:
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L87-L89" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def close_hint(self, label_name: LabelName, line_number: int) -&gt; None:
-    &#34;&#34;&#34;Label a span opened above and closed on the given line number.&#34;&#34;&#34;
     self.result[label_name].append(Span(self.stack[label_name].pop(), line_number))</code></pre>
 </details>
 </dd>
@@ -451,7 +431,6 @@ if __name__ == &#34;__main__&#34;:
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L91-L94" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def ensure_stack_is_empty(self) -&gt; None:
-    &#34;&#34;&#34;Raise an error iff there remains at least one open label.&#34;&#34;&#34;
     if any(self.stack.values()):
         raise ValueError(f&#34;Unmatched opening hints for {self.description}: {self.stack}.&#34;)</code></pre>
 </details>
@@ -467,7 +446,6 @@ if __name__ == &#34;__main__&#34;:
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L83-L85" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def get_champion(self, label_name: LabelName) -&gt; List[Tuple[int, &#34;HintBuffer&#34;]]:
-    &#34;&#34;&#34;Return the last line number (if any) of the opening label, plus itself.&#34;&#34;&#34;
     return [(self.stack[label_name][-1], self)] if self.stack[label_name] else []</code></pre>
 </details>
 </dd>
@@ -482,7 +460,6 @@ if __name__ == &#34;__main__&#34;:
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L96-L98" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def get_result(self) -&gt; LabelsSpans:
-    &#34;&#34;&#34;Return the result with sorted spans.&#34;&#34;&#34;
     return {k: sorted(v) for (k, v) in self.result.items()}</code></pre>
 </details>
 </dd>

@@ -56,15 +56,7 @@ from .user_types import (
 
 
 class ProgramFilter:
-    &#34;&#34;&#34;Evolve a set of selected programs and a set of imparted knowledge.&#34;&#34;&#34;
-
     def __init__(self, db: JsonDatabase) -&gt; None:
-        &#34;&#34;&#34;Initialize the state of the filter (selected programs + imparted knowledge).
-
-        During the evolution of the filter, the set of the selected programs (initially all of
-        them) can only shrink, and the imparted knowledge (initially empty) can only increase.
-        &#34;&#34;&#34;
-
         # Create some shortcuts to the database.
         self.db_programs: ProgramInfos = db[&#34;programs&#34;]
         self.db_taxons: TaxonInfos = db[&#34;taxons&#34;]
@@ -81,7 +73,6 @@ class ProgramFilter:
     # Select programs from the taxons they feature, and vice versa.
 
     def taxons_of_programs(self, programs: ProgramNameSet) -&gt; TaxonNameSet:
-        &#34;&#34;&#34;Return the taxon names featured (directly or not) by the given programs.&#34;&#34;&#34;
         taxons: TaxonNameSet = set()
         for program in programs:
             if program in self.db_programs:
@@ -89,7 +80,6 @@ class ProgramFilter:
         return taxons
 
     def programs_of_taxons(self, taxons: TaxonNamesOrTriples, follow: bool) -&gt; ProgramNameSet:
-        &#34;&#34;&#34;Return the programs featuring (optionally by importation) any given taxon.&#34;&#34;&#34;
         programs: ProgramNameSet = set()
         programs.update(*map(self.programs_of_taxon, taxons))
         if follow:
@@ -98,7 +88,6 @@ class ProgramFilter:
 
     @staticmethod
     def normalized_triple(predicate: str, name_1: TaxonName, name_2: TaxonName) -&gt; TaxonTriple:
-        &#34;&#34;&#34;Ensure that the given predicate is correct or can be salvaged, and return a triple.&#34;&#34;&#34;
         s = predicate.lower().strip()
         if s not in compare_spans:
             # If there is only one x (resp. y), expand it into x≤x (resp. y≤y)
@@ -115,14 +104,12 @@ class ProgramFilter:
         return TaxonTriple(predicate=s, name_1=name_1, name_2=name_2)
 
     def programs_of_taxon(self, taxon: TaxonNameOrTriple) -&gt; ProgramNameSet:
-        &#34;&#34;&#34;Dispatch computation to the appropriate method, depending of the actual taxon type.&#34;&#34;&#34;
         if isinstance(taxon, str):
             return set(self.db_taxons.get(TaxonName(taxon), []))
         else:
             return self.programs_of_taxon_triple(self.normalized_triple(*taxon))
 
     def programs_of_taxon_triple(self, taxon: TaxonTriple) -&gt; ProgramNameSet:
-        &#34;&#34;&#34;Return the programs where two given taxons satisfy a given predicate.&#34;&#34;&#34;
         # Compute the set of programs which feature both taxons
         programs_featuring_1 = set(self.db_taxons.get(taxon.name_1, []))
         programs_featuring_2 = set(self.db_taxons.get(taxon.name_2, []))
@@ -141,7 +128,6 @@ class ProgramFilter:
     # Update the state of the filter by applying set operations with the given programs.
 
     def match_against_existing_programs(self, pattern: str) -&gt; ProgramNameSet:
-        &#34;&#34;&#34;Enumerate all the existing programs matching the given pattern.&#34;&#34;&#34;
         result: ProgramNameSet = set()
         fullmatch = regex.compile(pattern).fullmatch
         no_match = True
@@ -157,7 +143,6 @@ class ProgramFilter:
         return result
 
     def preprocess_programs(self, programs: ProgramNames) -&gt; ProgramNames:
-        &#34;&#34;&#34;Return all the program names matching at least one of the given regex patterns.&#34;&#34;&#34;
         result: Set[ProgramName] = set()
         for program in programs:
             if program in self.db_programs:
@@ -167,10 +152,6 @@ class ProgramFilter:
         return sorted(result)
 
     def impart_programs(self, programs: ProgramNameSet) -&gt; None:
-        &#34;&#34;&#34;Deselect the programs found in the given ones.
-
-        Additionally, enrich the imparted knowledge with all the prefixes of the taxons featured
-        (directly or not) by these programs.&#34;&#34;&#34;
         for program in programs:
             self.selected_programs.pop(program, None)
             if program in self.db_programs:
@@ -179,7 +160,6 @@ class ProgramFilter:
         self.impart_taxons(self.taxons_of_programs(programs))  # type: ignore
 
     def exclude_programs(self, programs: ProgramNameSet) -&gt; None:
-        &#34;&#34;&#34;Deselect the programs found among the given ones or imported by them.&#34;&#34;&#34;
         for program in programs:
             self.selected_programs.pop(program, None)
         for program in list(self.selected_programs):
@@ -187,7 +167,6 @@ class ProgramFilter:
                 self.selected_programs.pop(program, None)
 
     def include_programs(self, programs: ProgramNameSet) -&gt; None:
-        &#34;&#34;&#34;Deselect the programs neither found among the given ones or those they import.&#34;&#34;&#34;
         extended_programs: ProgramNameSet = set(programs)  # make a copy to ensure purity
         for program in programs:
             if program in self.db_programs:
@@ -199,7 +178,6 @@ class ProgramFilter:
     # Update the state of the filter by applying set operations with the given taxons.
 
     def match_against_existing_taxons(self, pattern: str) -&gt; TaxonNameSet:
-        &#34;&#34;&#34;Enumerate all the existing taxons matching the given pattern.&#34;&#34;&#34;
         result: TaxonNameSet = set()
         fullmatch = regex.compile(pattern).fullmatch
         no_match = True
@@ -215,7 +193,6 @@ class ProgramFilter:
         return result
 
     def preprocess_taxons(self, taxons: TaxonNamesOrTriples) -&gt; TaxonNamesOrTriples:
-        &#34;&#34;&#34;Parse the taxons and the triples and try to match them with existing taxon names.&#34;&#34;&#34;
         result: Set[TaxonNameOrTriple] = set()
         for taxon in taxons:
             if isinstance(taxon, str):
@@ -241,14 +218,12 @@ class ProgramFilter:
         return sorted(result)
 
     def impart_taxon_name(self, taxon: TaxonName) -&gt; None:
-        &#34;&#34;&#34;Enrich the imparted knowledge with all the prefixes of the given taxon.&#34;&#34;&#34;
         segments = taxon.split(&#34;/&#34;)
         for i in range(len(segments)):
             prefix = &#34;/&#34;.join(segments[: i + 1])
             self.imparted_knowledge.add(TaxonName(prefix))
 
     def impart_taxons(self, taxons: TaxonNamesOrTriples) -&gt; None:
-        &#34;&#34;&#34;Enrich the imparted knowledge with all the prefixes of the given taxons.&#34;&#34;&#34;
         for taxon in taxons:
             if isinstance(taxon, str):
                 self.impart_taxon_name(taxon)
@@ -258,13 +233,11 @@ class ProgramFilter:
                 self.impart_taxon_name(taxon[2])
 
     def exclude_taxons(self, taxons: TaxonNamesOrTriples) -&gt; None:
-        &#34;&#34;&#34;Deselect the programs featuring (directly or not) at least one given taxon.&#34;&#34;&#34;
         programs = self.programs_of_taxons(taxons, follow=True)
         for program in programs:
             self.selected_programs.pop(program, None)
 
     def include_taxons(self, taxons: TaxonNamesOrTriples) -&gt; None:
-        &#34;&#34;&#34;Deselect the programs not featuring any given taxon.&#34;&#34;&#34;
         programs = self.programs_of_taxons(taxons, follow=False)
         for program in list(self.selected_programs):
             if program not in programs:
@@ -295,15 +268,7 @@ them) can only shrink, and the imparted knowledge (initially empty) can only inc
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L25-L238" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class ProgramFilter:
-    &#34;&#34;&#34;Evolve a set of selected programs and a set of imparted knowledge.&#34;&#34;&#34;
-
     def __init__(self, db: JsonDatabase) -&gt; None:
-        &#34;&#34;&#34;Initialize the state of the filter (selected programs + imparted knowledge).
-
-        During the evolution of the filter, the set of the selected programs (initially all of
-        them) can only shrink, and the imparted knowledge (initially empty) can only increase.
-        &#34;&#34;&#34;
-
         # Create some shortcuts to the database.
         self.db_programs: ProgramInfos = db[&#34;programs&#34;]
         self.db_taxons: TaxonInfos = db[&#34;taxons&#34;]
@@ -320,7 +285,6 @@ them) can only shrink, and the imparted knowledge (initially empty) can only inc
     # Select programs from the taxons they feature, and vice versa.
 
     def taxons_of_programs(self, programs: ProgramNameSet) -&gt; TaxonNameSet:
-        &#34;&#34;&#34;Return the taxon names featured (directly or not) by the given programs.&#34;&#34;&#34;
         taxons: TaxonNameSet = set()
         for program in programs:
             if program in self.db_programs:
@@ -328,7 +292,6 @@ them) can only shrink, and the imparted knowledge (initially empty) can only inc
         return taxons
 
     def programs_of_taxons(self, taxons: TaxonNamesOrTriples, follow: bool) -&gt; ProgramNameSet:
-        &#34;&#34;&#34;Return the programs featuring (optionally by importation) any given taxon.&#34;&#34;&#34;
         programs: ProgramNameSet = set()
         programs.update(*map(self.programs_of_taxon, taxons))
         if follow:
@@ -337,7 +300,6 @@ them) can only shrink, and the imparted knowledge (initially empty) can only inc
 
     @staticmethod
     def normalized_triple(predicate: str, name_1: TaxonName, name_2: TaxonName) -&gt; TaxonTriple:
-        &#34;&#34;&#34;Ensure that the given predicate is correct or can be salvaged, and return a triple.&#34;&#34;&#34;
         s = predicate.lower().strip()
         if s not in compare_spans:
             # If there is only one x (resp. y), expand it into x≤x (resp. y≤y)
@@ -354,14 +316,12 @@ them) can only shrink, and the imparted knowledge (initially empty) can only inc
         return TaxonTriple(predicate=s, name_1=name_1, name_2=name_2)
 
     def programs_of_taxon(self, taxon: TaxonNameOrTriple) -&gt; ProgramNameSet:
-        &#34;&#34;&#34;Dispatch computation to the appropriate method, depending of the actual taxon type.&#34;&#34;&#34;
         if isinstance(taxon, str):
             return set(self.db_taxons.get(TaxonName(taxon), []))
         else:
             return self.programs_of_taxon_triple(self.normalized_triple(*taxon))
 
     def programs_of_taxon_triple(self, taxon: TaxonTriple) -&gt; ProgramNameSet:
-        &#34;&#34;&#34;Return the programs where two given taxons satisfy a given predicate.&#34;&#34;&#34;
         # Compute the set of programs which feature both taxons
         programs_featuring_1 = set(self.db_taxons.get(taxon.name_1, []))
         programs_featuring_2 = set(self.db_taxons.get(taxon.name_2, []))
@@ -380,7 +340,6 @@ them) can only shrink, and the imparted knowledge (initially empty) can only inc
     # Update the state of the filter by applying set operations with the given programs.
 
     def match_against_existing_programs(self, pattern: str) -&gt; ProgramNameSet:
-        &#34;&#34;&#34;Enumerate all the existing programs matching the given pattern.&#34;&#34;&#34;
         result: ProgramNameSet = set()
         fullmatch = regex.compile(pattern).fullmatch
         no_match = True
@@ -396,7 +355,6 @@ them) can only shrink, and the imparted knowledge (initially empty) can only inc
         return result
 
     def preprocess_programs(self, programs: ProgramNames) -&gt; ProgramNames:
-        &#34;&#34;&#34;Return all the program names matching at least one of the given regex patterns.&#34;&#34;&#34;
         result: Set[ProgramName] = set()
         for program in programs:
             if program in self.db_programs:
@@ -406,10 +364,6 @@ them) can only shrink, and the imparted knowledge (initially empty) can only inc
         return sorted(result)
 
     def impart_programs(self, programs: ProgramNameSet) -&gt; None:
-        &#34;&#34;&#34;Deselect the programs found in the given ones.
-
-        Additionally, enrich the imparted knowledge with all the prefixes of the taxons featured
-        (directly or not) by these programs.&#34;&#34;&#34;
         for program in programs:
             self.selected_programs.pop(program, None)
             if program in self.db_programs:
@@ -418,7 +372,6 @@ them) can only shrink, and the imparted knowledge (initially empty) can only inc
         self.impart_taxons(self.taxons_of_programs(programs))  # type: ignore
 
     def exclude_programs(self, programs: ProgramNameSet) -&gt; None:
-        &#34;&#34;&#34;Deselect the programs found among the given ones or imported by them.&#34;&#34;&#34;
         for program in programs:
             self.selected_programs.pop(program, None)
         for program in list(self.selected_programs):
@@ -426,7 +379,6 @@ them) can only shrink, and the imparted knowledge (initially empty) can only inc
                 self.selected_programs.pop(program, None)
 
     def include_programs(self, programs: ProgramNameSet) -&gt; None:
-        &#34;&#34;&#34;Deselect the programs neither found among the given ones or those they import.&#34;&#34;&#34;
         extended_programs: ProgramNameSet = set(programs)  # make a copy to ensure purity
         for program in programs:
             if program in self.db_programs:
@@ -438,7 +390,6 @@ them) can only shrink, and the imparted knowledge (initially empty) can only inc
     # Update the state of the filter by applying set operations with the given taxons.
 
     def match_against_existing_taxons(self, pattern: str) -&gt; TaxonNameSet:
-        &#34;&#34;&#34;Enumerate all the existing taxons matching the given pattern.&#34;&#34;&#34;
         result: TaxonNameSet = set()
         fullmatch = regex.compile(pattern).fullmatch
         no_match = True
@@ -454,7 +405,6 @@ them) can only shrink, and the imparted knowledge (initially empty) can only inc
         return result
 
     def preprocess_taxons(self, taxons: TaxonNamesOrTriples) -&gt; TaxonNamesOrTriples:
-        &#34;&#34;&#34;Parse the taxons and the triples and try to match them with existing taxon names.&#34;&#34;&#34;
         result: Set[TaxonNameOrTriple] = set()
         for taxon in taxons:
             if isinstance(taxon, str):
@@ -480,14 +430,12 @@ them) can only shrink, and the imparted knowledge (initially empty) can only inc
         return sorted(result)
 
     def impart_taxon_name(self, taxon: TaxonName) -&gt; None:
-        &#34;&#34;&#34;Enrich the imparted knowledge with all the prefixes of the given taxon.&#34;&#34;&#34;
         segments = taxon.split(&#34;/&#34;)
         for i in range(len(segments)):
             prefix = &#34;/&#34;.join(segments[: i + 1])
             self.imparted_knowledge.add(TaxonName(prefix))
 
     def impart_taxons(self, taxons: TaxonNamesOrTriples) -&gt; None:
-        &#34;&#34;&#34;Enrich the imparted knowledge with all the prefixes of the given taxons.&#34;&#34;&#34;
         for taxon in taxons:
             if isinstance(taxon, str):
                 self.impart_taxon_name(taxon)
@@ -497,13 +445,11 @@ them) can only shrink, and the imparted knowledge (initially empty) can only inc
                 self.impart_taxon_name(taxon[2])
 
     def exclude_taxons(self, taxons: TaxonNamesOrTriples) -&gt; None:
-        &#34;&#34;&#34;Deselect the programs featuring (directly or not) at least one given taxon.&#34;&#34;&#34;
         programs = self.programs_of_taxons(taxons, follow=True)
         for program in programs:
             self.selected_programs.pop(program, None)
 
     def include_taxons(self, taxons: TaxonNamesOrTriples) -&gt; None:
-        &#34;&#34;&#34;Deselect the programs not featuring any given taxon.&#34;&#34;&#34;
         programs = self.programs_of_taxons(taxons, follow=False)
         for program in list(self.selected_programs):
             if program not in programs:
@@ -523,7 +469,6 @@ them) can only shrink, and the imparted knowledge (initially empty) can only inc
 </summary>
 <pre><code class="python">@staticmethod
 def normalized_triple(predicate: str, name_1: TaxonName, name_2: TaxonName) -&gt; TaxonTriple:
-    &#34;&#34;&#34;Ensure that the given predicate is correct or can be salvaged, and return a triple.&#34;&#34;&#34;
     s = predicate.lower().strip()
     if s not in compare_spans:
         # If there is only one x (resp. y), expand it into x≤x (resp. y≤y)
@@ -554,7 +499,6 @@ def normalized_triple(predicate: str, name_1: TaxonName, name_2: TaxonName) -&gt
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L148-L154" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def exclude_programs(self, programs: ProgramNameSet) -&gt; None:
-    &#34;&#34;&#34;Deselect the programs found among the given ones or imported by them.&#34;&#34;&#34;
     for program in programs:
         self.selected_programs.pop(program, None)
     for program in list(self.selected_programs):
@@ -573,7 +517,6 @@ def normalized_triple(predicate: str, name_1: TaxonName, name_2: TaxonName) -&gt
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L227-L231" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def exclude_taxons(self, taxons: TaxonNamesOrTriples) -&gt; None:
-    &#34;&#34;&#34;Deselect the programs featuring (directly or not) at least one given taxon.&#34;&#34;&#34;
     programs = self.programs_of_taxons(taxons, follow=True)
     for program in programs:
         self.selected_programs.pop(program, None)</code></pre>
@@ -592,10 +535,6 @@ def normalized_triple(predicate: str, name_1: TaxonName, name_2: TaxonName) -&gt
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L136-L146" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def impart_programs(self, programs: ProgramNameSet) -&gt; None:
-    &#34;&#34;&#34;Deselect the programs found in the given ones.
-
-    Additionally, enrich the imparted knowledge with all the prefixes of the taxons featured
-    (directly or not) by these programs.&#34;&#34;&#34;
     for program in programs:
         self.selected_programs.pop(program, None)
         if program in self.db_programs:
@@ -615,7 +554,6 @@ def normalized_triple(predicate: str, name_1: TaxonName, name_2: TaxonName) -&gt
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L210-L215" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def impart_taxon_name(self, taxon: TaxonName) -&gt; None:
-    &#34;&#34;&#34;Enrich the imparted knowledge with all the prefixes of the given taxon.&#34;&#34;&#34;
     segments = taxon.split(&#34;/&#34;)
     for i in range(len(segments)):
         prefix = &#34;/&#34;.join(segments[: i + 1])
@@ -633,7 +571,6 @@ def normalized_triple(predicate: str, name_1: TaxonName, name_2: TaxonName) -&gt
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L217-L225" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def impart_taxons(self, taxons: TaxonNamesOrTriples) -&gt; None:
-    &#34;&#34;&#34;Enrich the imparted knowledge with all the prefixes of the given taxons.&#34;&#34;&#34;
     for taxon in taxons:
         if isinstance(taxon, str):
             self.impart_taxon_name(taxon)
@@ -654,7 +591,6 @@ def normalized_triple(predicate: str, name_1: TaxonName, name_2: TaxonName) -&gt
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L156-L164" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def include_programs(self, programs: ProgramNameSet) -&gt; None:
-    &#34;&#34;&#34;Deselect the programs neither found among the given ones or those they import.&#34;&#34;&#34;
     extended_programs: ProgramNameSet = set(programs)  # make a copy to ensure purity
     for program in programs:
         if program in self.db_programs:
@@ -675,7 +611,6 @@ def normalized_triple(predicate: str, name_1: TaxonName, name_2: TaxonName) -&gt
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L233-L238" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def include_taxons(self, taxons: TaxonNamesOrTriples) -&gt; None:
-    &#34;&#34;&#34;Deselect the programs not featuring any given taxon.&#34;&#34;&#34;
     programs = self.programs_of_taxons(taxons, follow=False)
     for program in list(self.selected_programs):
         if program not in programs:
@@ -693,7 +628,6 @@ def normalized_triple(predicate: str, name_1: TaxonName, name_2: TaxonName) -&gt
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L110-L124" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def match_against_existing_programs(self, pattern: str) -&gt; ProgramNameSet:
-    &#34;&#34;&#34;Enumerate all the existing programs matching the given pattern.&#34;&#34;&#34;
     result: ProgramNameSet = set()
     fullmatch = regex.compile(pattern).fullmatch
     no_match = True
@@ -720,7 +654,6 @@ def normalized_triple(predicate: str, name_1: TaxonName, name_2: TaxonName) -&gt
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L168-L182" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def match_against_existing_taxons(self, pattern: str) -&gt; TaxonNameSet:
-    &#34;&#34;&#34;Enumerate all the existing taxons matching the given pattern.&#34;&#34;&#34;
     result: TaxonNameSet = set()
     fullmatch = regex.compile(pattern).fullmatch
     no_match = True
@@ -747,7 +680,6 @@ def normalized_triple(predicate: str, name_1: TaxonName, name_2: TaxonName) -&gt
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L126-L134" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def preprocess_programs(self, programs: ProgramNames) -&gt; ProgramNames:
-    &#34;&#34;&#34;Return all the program names matching at least one of the given regex patterns.&#34;&#34;&#34;
     result: Set[ProgramName] = set()
     for program in programs:
         if program in self.db_programs:
@@ -768,7 +700,6 @@ def normalized_triple(predicate: str, name_1: TaxonName, name_2: TaxonName) -&gt
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L184-L208" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def preprocess_taxons(self, taxons: TaxonNamesOrTriples) -&gt; TaxonNamesOrTriples:
-    &#34;&#34;&#34;Parse the taxons and the triples and try to match them with existing taxon names.&#34;&#34;&#34;
     result: Set[TaxonNameOrTriple] = set()
     for taxon in taxons:
         if isinstance(taxon, str):
@@ -805,7 +736,6 @@ def normalized_triple(predicate: str, name_1: TaxonName, name_2: TaxonName) -&gt
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L84-L89" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def programs_of_taxon(self, taxon: TaxonNameOrTriple) -&gt; ProgramNameSet:
-    &#34;&#34;&#34;Dispatch computation to the appropriate method, depending of the actual taxon type.&#34;&#34;&#34;
     if isinstance(taxon, str):
         return set(self.db_taxons.get(TaxonName(taxon), []))
     else:
@@ -823,7 +753,6 @@ def normalized_triple(predicate: str, name_1: TaxonName, name_2: TaxonName) -&gt
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L91-L106" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def programs_of_taxon_triple(self, taxon: TaxonTriple) -&gt; ProgramNameSet:
-    &#34;&#34;&#34;Return the programs where two given taxons satisfy a given predicate.&#34;&#34;&#34;
     # Compute the set of programs which feature both taxons
     programs_featuring_1 = set(self.db_taxons.get(taxon.name_1, []))
     programs_featuring_2 = set(self.db_taxons.get(taxon.name_2, []))
@@ -851,7 +780,6 @@ def normalized_triple(predicate: str, name_1: TaxonName, name_2: TaxonName) -&gt
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L58-L64" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def programs_of_taxons(self, taxons: TaxonNamesOrTriples, follow: bool) -&gt; ProgramNameSet:
-    &#34;&#34;&#34;Return the programs featuring (optionally by importation) any given taxon.&#34;&#34;&#34;
     programs: ProgramNameSet = set()
     programs.update(*map(self.programs_of_taxon, taxons))
     if follow:
@@ -870,7 +798,6 @@ def normalized_triple(predicate: str, name_1: TaxonName, name_2: TaxonName) -&gt
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L50-L56" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def taxons_of_programs(self, programs: ProgramNameSet) -&gt; TaxonNameSet:
-    &#34;&#34;&#34;Return the taxon names featured (directly or not) by the given programs.&#34;&#34;&#34;
     taxons: TaxonNameSet = set()
     for program in programs:
         if program in self.db_programs:

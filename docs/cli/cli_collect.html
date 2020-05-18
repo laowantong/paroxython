@@ -64,39 +64,7 @@ whose last version is at <a href="https://bit.ly/2Yu0LqU.">https://bit.ly/2Yu0Lq
 <span>Expand source code</span>
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli_collect.py#L0-L50" class="git-link">Browse git</a>
 </summary>
-<pre><code class="python">r&#34;&#34;&#34;
-USAGE:
-    paroxython collect [options] DIRECTORY
-
-OPTIONS:
-    -c --cleanup=STR    Transformation to be applied to the source-code
-                        before processing. [default: full]
-                        Currently available:
-                        • full: remove all blank lines, docstrings and
-                                comments (except Paroxython hints).
-                        • none: no transformation is applied.
-    -e --exclude=REGEX  Filter out any file whose name fully matches this
-                        regular expression. NB: --glob precedes --exclude.
-                        [default: &#34;^(__init__|setup|.*[-_]tests?)\.py$&#34;]
-    -g --glob=PATTERN   The names of the collected files must match this
-                        Unix-like glob pattern (not a regular expression).
-                        Special syntax: &#34;**/&#34; prefix means “this directory
-                        and all subdirectories, recursively”. [default:
-                        &#34;**/*.py&#34;]
-    -o --output=PATH    The path of the resulting database. If not
-                        specified, create a JSON file under the name
-                        &#34;DIRECTORY_db.json&#34;. Otherwise, use the extension
-                        (either &#34;.json&#34; or &#34;.sqlite&#34;) to decide the format
-                        of the database. [default: ]
-    -t --taxonomy=PATH  The path of a TSV file mapping labels onto taxons.
-                        If not specified, use the included copy of the table
-                        whose last version is at https://bit.ly/2Yu0LqU.
-
-DESCRIPTION:
-    Walk a directory, tag its Python files and make a database of the results.
-&#34;&#34;&#34;
-
-from pathlib import Path
+<pre><code class="python">from pathlib import Path
 
 from ..make_db import Database
 

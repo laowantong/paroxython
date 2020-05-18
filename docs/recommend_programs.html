@@ -77,8 +77,6 @@ class Recommendations:
         self.taxon_cost = self.assess_costs.taxon_cost
 
     def run_pipeline(self) -&gt; None:
-        &#34;&#34;&#34;Evolve recommended programs, imparted knowledge and log accross pipeline commands.&#34;&#34;&#34;
-
         current = set(self.programs)
         print(f&#34;\nProcessing {len(self.commands)} commands on {len(current)} programs.&#34;)
 
@@ -121,8 +119,6 @@ class Recommendations:
         sorting_strategy=&#34;by_cost_and_sloc&#34;,
         grouping_strategy=&#34;by_cost_bucket&#34;,
     ) -&gt; str:
-        &#34;&#34;&#34;Reiterate on the commands, now populated by the results, and output them.&#34;&#34;&#34;
-
         # Define some helper functions.
 
         title_to_slug = title_to_slug_factory()
@@ -270,8 +266,6 @@ if __name__ == &#34;__main__&#34;:
         self.taxon_cost = self.assess_costs.taxon_cost
 
     def run_pipeline(self) -&gt; None:
-        &#34;&#34;&#34;Evolve recommended programs, imparted knowledge and log accross pipeline commands.&#34;&#34;&#34;
-
         current = set(self.programs)
         print(f&#34;\nProcessing {len(self.commands)} commands on {len(current)} programs.&#34;)
 
@@ -314,8 +308,6 @@ if __name__ == &#34;__main__&#34;:
         sorting_strategy=&#34;by_cost_and_sloc&#34;,
         grouping_strategy=&#34;by_cost_bucket&#34;,
     ) -&gt; str:
-        &#34;&#34;&#34;Reiterate on the commands, now populated by the results, and output them.&#34;&#34;&#34;
-
         # Define some helper functions.
 
         title_to_slug = title_to_slug_factory()
@@ -418,8 +410,6 @@ if __name__ == &#34;__main__&#34;:
     sorting_strategy=&#34;by_cost_and_sloc&#34;,
     grouping_strategy=&#34;by_cost_bucket&#34;,
 ) -&gt; str:
-    &#34;&#34;&#34;Reiterate on the commands, now populated by the results, and output them.&#34;&#34;&#34;
-
     # Define some helper functions.
 
     title_to_slug = title_to_slug_factory()
@@ -516,8 +506,6 @@ if __name__ == &#34;__main__&#34;:
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L46-L83" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def run_pipeline(self) -&gt; None:
-    &#34;&#34;&#34;Evolve recommended programs, imparted knowledge and log accross pipeline commands.&#34;&#34;&#34;
-
     current = set(self.programs)
     print(f&#34;\nProcessing {len(self.commands)} commands on {len(current)} programs.&#34;)
 

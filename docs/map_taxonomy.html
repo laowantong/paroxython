@@ -53,10 +53,7 @@ _sub_slash_sequences = regex.compile(r&#34;//+&#34;).sub
 
 
 class Taxonomy:
-    &#34;&#34;&#34;Translate labels into taxons on a list of program paths.&#34;&#34;&#34;
-
     def __init__(self, taxonomy_path: Optional[Path] = None, *args, **kwargs) -&gt; None:
-        &#34;&#34;&#34;Read the taxonomy specifications, and make some pre-processing.&#34;&#34;&#34;
         is_literal = regex.compile(r&#34;[\w:.]+&#34;).fullmatch
         taxonomy_path = taxonomy_path or Path(dirname(__file__)) / &#34;resources&#34; / &#34;taxonomy.tsv&#34;
         tsv = taxonomy_path.read_text().partition(&#34;-- EOF&#34;)[0].strip()
@@ -74,7 +71,6 @@ class Taxonomy:
 
     @lru_cache(maxsize=None)
     def get_taxon_name_list(self, label_name: LabelName) -&gt; TaxonNames:
-        &#34;&#34;&#34;Translate a label name into a list of taxon names.&#34;&#34;&#34;
         result: TaxonNames = []
         if label_name in self.literal_label_names:
             result.extend(self.literal_label_names[label_name])
@@ -86,7 +82,6 @@ class Taxonomy:
         return result
 
     def to_taxons(self, labels: Labels) -&gt; Taxons:
-        &#34;&#34;&#34;Translate a list of labels to a list of taxons with their spans in a bag.&#34;&#34;&#34;
         acc: TaxonsSpans = defaultdict(Counter)
         for (label_name, spans) in labels:
             for taxon_name in self.get_taxon_name_list(label_name):
@@ -96,7 +91,6 @@ class Taxonomy:
 
     @staticmethod
     def deduplicated_taxons(taxons: Taxons) -&gt; Taxons:
-        &#34;&#34;&#34;If taxon t2 has taxon t1 as a prefix, remove their common spans from t1.&#34;&#34;&#34;
         if len(taxons) == 0:
             return []
         for (i, (name, spans)) in enumerate(taxons[1:], 1):
@@ -156,10 +150,7 @@ if __name__ == &#34;__main__&#34;:
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L22-L84" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class Taxonomy:
-    &#34;&#34;&#34;Translate labels into taxons on a list of program paths.&#34;&#34;&#34;
-
     def __init__(self, taxonomy_path: Optional[Path] = None, *args, **kwargs) -&gt; None:
-        &#34;&#34;&#34;Read the taxonomy specifications, and make some pre-processing.&#34;&#34;&#34;
         is_literal = regex.compile(r&#34;[\w:.]+&#34;).fullmatch
         taxonomy_path = taxonomy_path or Path(dirname(__file__)) / &#34;resources&#34; / &#34;taxonomy.tsv&#34;
         tsv = taxonomy_path.read_text().partition(&#34;-- EOF&#34;)[0].strip()
@@ -177,7 +168,6 @@ if __name__ == &#34;__main__&#34;:
 
     @lru_cache(maxsize=None)
     def get_taxon_name_list(self, label_name: LabelName) -&gt; TaxonNames:
-        &#34;&#34;&#34;Translate a label name into a list of taxon names.&#34;&#34;&#34;
         result: TaxonNames = []
         if label_name in self.literal_label_names:
             result.extend(self.literal_label_names[label_name])
@@ -189,7 +179,6 @@ if __name__ == &#34;__main__&#34;:
         return result
 
     def to_taxons(self, labels: Labels) -&gt; Taxons:
-        &#34;&#34;&#34;Translate a list of labels to a list of taxons with their spans in a bag.&#34;&#34;&#34;
         acc: TaxonsSpans = defaultdict(Counter)
         for (label_name, spans) in labels:
             for taxon_name in self.get_taxon_name_list(label_name):
@@ -199,7 +188,6 @@ if __name__ == &#34;__main__&#34;:
 
     @staticmethod
     def deduplicated_taxons(taxons: Taxons) -&gt; Taxons:
-        &#34;&#34;&#34;If taxon t2 has taxon t1 as a prefix, remove their common spans from t1.&#34;&#34;&#34;
         if len(taxons) == 0:
             return []
         for (i, (name, spans)) in enumerate(taxons[1:], 1):
@@ -240,7 +228,6 @@ if __name__ == &#34;__main__&#34;:
 </summary>
 <pre><code class="python">@staticmethod
 def deduplicated_taxons(taxons: Taxons) -&gt; Taxons:
-    &#34;&#34;&#34;If taxon t2 has taxon t1 as a prefix, remove their common spans from t1.&#34;&#34;&#34;
     if len(taxons) == 0:
         return []
     for (i, (name, spans)) in enumerate(taxons[1:], 1):
@@ -276,7 +263,6 @@ def deduplicated_taxons(taxons: Taxons) -&gt; Taxons:
 </summary>
 <pre><code class="python">@lru_cache(maxsize=None)
 def get_taxon_name_list(self, label_name: LabelName) -&gt; TaxonNames:
-    &#34;&#34;&#34;Translate a label name into a list of taxon names.&#34;&#34;&#34;
     result: TaxonNames = []
     if label_name in self.literal_label_names:
         result.extend(self.literal_label_names[label_name])
@@ -299,7 +285,6 @@ def get_taxon_name_list(self, label_name: LabelName) -&gt; TaxonNames:
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L55-L62" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def to_taxons(self, labels: Labels) -&gt; Taxons:
-    &#34;&#34;&#34;Translate a list of labels to a list of taxons with their spans in a bag.&#34;&#34;&#34;
     acc: TaxonsSpans = defaultdict(Counter)
     for (label_name, spans) in labels:
         for taxon_name in self.get_taxon_name_list(label_name):

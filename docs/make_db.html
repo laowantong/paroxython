@@ -61,8 +61,6 @@ from .user_types import (
 
 class Database:
     def __init__(self, directory: Path, ignore_timestamps=False, *args, **kwargs) -&gt; None:
-        &#34;&#34;&#34;Collect all infos pertaining to the programs, the labels and the taxons.&#34;&#34;&#34;
-
         self.default_json_db_path = directory.parent / f&#34;{directory.name}_db.json&#34;
         self.default_sqlite_db_path = directory.parent / f&#34;{directory.name}_db.sqlite&#34;
 
@@ -95,7 +93,6 @@ class Database:
             }
 
     def get_json(self) -&gt; str:
-        &#34;&#34;&#34;Dump the data to JSON, reduce each list of spans to one line.&#34;&#34;&#34;
         data = {
             &#34;programs&#34;: self.programs_infos,
             &#34;labels&#34;: dict(sorted(self.labels.items())),
@@ -208,23 +205,6 @@ def prepared(tags: Labels) -&gt; LabelsPoorSpans:
 def prepared(tags: Taxons) -&gt; TaxonsPoorSpans:
     ...  # pragma: no cover
 def prepared(tags):
-    &#34;&#34;&#34;Prepare the spans for serialization.
-
-    Args:
-        tags (Labels): The tags to be serialized.
-        tags (Taxons): The taxons to be serialized.
-
-    Returns:
-        LabelPoorSpans|TaxonsPoorSpans:
-            A dictionary mapping tag names with the list of their spans, transformed into simple
-            lists of two integers.
-
-    .. note::
-          Overloaded to support two different combinations of argument types: Mypy can check that
-          passing `Labels` (resp. `Taxons`) to the function returns `LabelsPoorSpans` (resp.
-          `TaxonsPoorSpans`).
-          See [the documentation](https://docs.python.org/3/library/typing.html#typing.overload).
-    &#34;&#34;&#34;
     result: Union[LabelsPoorSpans, TaxonsPoorSpans] = {}
     for (tag_name, spans) in tags:
         result[tag_name] = [span[:2] for span in sorted(set(spans))]
@@ -233,7 +213,6 @@ def prepared(tags):
 
 
 def collect_labels(programs: Programs) -&gt; LabelInfos:
-    &#34;&#34;&#34;Iterate through programs to collect all their labels.&#34;&#34;&#34;
     result: LabelInfos = defaultdict(list)
     for program in programs:
         for label in program.labels:
@@ -242,14 +221,12 @@ def collect_labels(programs: Programs) -&gt; LabelInfos:
 
 
 def map_labels_on_taxons(programs: Programs, taxonomy: Taxonomy) -&gt; None:
-    &#34;&#34;&#34;Translate labels into taxons on a list of program names.&#34;&#34;&#34;
     print(f&#34;Mapping taxonomy on {len(programs)} programs.&#34;)
     for program in iterate_and_print_programs(programs):
         program.taxons[:] = taxonomy.to_taxons(program.labels)
 
 
 def collect_taxons(programs: Programs) -&gt; TaxonInfos:
-    &#34;&#34;&#34;Iterate through programs to collect all their taxons.&#34;&#34;&#34;
     result: TaxonInfos = defaultdict(list)
     for program in programs:
         for taxon in program.taxons:
@@ -258,7 +235,6 @@ def collect_taxons(programs: Programs) -&gt; TaxonInfos:
 
 
 def compute_direct_importations(programs: Programs) -&gt; ProgramToPrograms:
-    &#34;&#34;&#34;Associate each program to the set of its direct internal imports.&#34;&#34;&#34;
     importations: Dict = {program.name: set() for program in programs}
     for program in programs:
         for label in program.labels:
@@ -269,8 +245,6 @@ def compute_direct_importations(programs: Programs) -&gt; ProgramToPrograms:
 
 
 def complete_and_collect_importations(importations: ProgramToPrograms) -&gt; ProgramToPrograms:
-    &#34;&#34;&#34;Complete the direct internal imports with indirect ones.&#34;&#34;&#34;
-
     @lru_cache(maxsize=None)
     def complete_internal_imports(program_name: ProgramName) -&gt; ProgramNameSet:
         result: ProgramNameSet = set(importations.get(program_name, []))
@@ -285,7 +259,6 @@ def complete_and_collect_importations(importations: ProgramToPrograms) -&gt; Pro
 
 
 def compute_exportations(programs: Programs, importations: ProgramToPrograms) -&gt; ProgramToPrograms:
-    &#34;&#34;&#34;Invert `importations` to construct `exportations`.&#34;&#34;&#34;
     exportations: Dict = {program.name: set() for program in programs}
     for (importing_name, imported_names) in importations.items():
         for imported_name in imported_names:
@@ -294,7 +267,6 @@ def compute_exportations(programs: Programs, importations: ProgramToPrograms) -&
 
 
 def collect_exportations(exportations: ProgramToPrograms) -&gt; ProgramToPrograms:
-    &#34;&#34;&#34;Iterate through the exportations to collect them.&#34;&#34;&#34;
     result: ProgramToPrograms = {}
     for (exporting_name, exported_names) in exportations.items():
         result[exporting_name] = sorted(exported_names)
@@ -336,7 +308,6 @@ if __name__ == &#34;__main__&#34;:
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L263-L268" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def collect_exportations(exportations: ProgramToPrograms) -&gt; ProgramToPrograms:
-    &#34;&#34;&#34;Iterate through the exportations to collect them.&#34;&#34;&#34;
     result: ProgramToPrograms = {}
     for (exporting_name, exported_names) in exportations.items():
         result[exporting_name] = sorted(exported_names)
@@ -354,7 +325,6 @@ if __name__ == &#34;__main__&#34;:
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L202-L208" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def collect_labels(programs: Programs) -&gt; LabelInfos:
-    &#34;&#34;&#34;Iterate through programs to collect all their labels.&#34;&#34;&#34;
     result: LabelInfos = defaultdict(list)
     for program in programs:
         for label in program.labels:
@@ -373,7 +343,6 @@ if __name__ == &#34;__main__&#34;:
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L218-L224" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def collect_taxons(programs: Programs) -&gt; TaxonInfos:
-    &#34;&#34;&#34;Iterate through programs to collect all their taxons.&#34;&#34;&#34;
     result: TaxonInfos = defaultdict(list)
     for program in programs:
         for taxon in program.taxons:
@@ -392,8 +361,6 @@ if __name__ == &#34;__main__&#34;:
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L238-L251" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def complete_and_collect_importations(importations: ProgramToPrograms) -&gt; ProgramToPrograms:
-    &#34;&#34;&#34;Complete the direct internal imports with indirect ones.&#34;&#34;&#34;
-
     @lru_cache(maxsize=None)
     def complete_internal_imports(program_name: ProgramName) -&gt; ProgramNameSet:
         result: ProgramNameSet = set(importations.get(program_name, []))
@@ -418,7 +385,6 @@ if __name__ == &#34;__main__&#34;:
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L227-L235" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def compute_direct_importations(programs: Programs) -&gt; ProgramToPrograms:
-    &#34;&#34;&#34;Associate each program to the set of its direct internal imports.&#34;&#34;&#34;
     importations: Dict = {program.name: set() for program in programs}
     for program in programs:
         for label in program.labels:
@@ -439,7 +405,6 @@ if __name__ == &#34;__main__&#34;:
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L254-L260" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def compute_exportations(programs: Programs, importations: ProgramToPrograms) -&gt; ProgramToPrograms:
-    &#34;&#34;&#34;Invert `importations` to construct `exportations`.&#34;&#34;&#34;
     exportations: Dict = {program.name: set() for program in programs}
     for (importing_name, imported_names) in importations.items():
         for imported_name in imported_names:
@@ -458,7 +423,6 @@ if __name__ == &#34;__main__&#34;:
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L211-L215" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def map_labels_on_taxons(programs: Programs, taxonomy: Taxonomy) -&gt; None:
-    &#34;&#34;&#34;Translate labels into taxons on a list of program names.&#34;&#34;&#34;
     print(f&#34;Mapping taxonomy on {len(programs)} programs.&#34;)
     for program in iterate_and_print_programs(programs):
         program.taxons[:] = taxonomy.to_taxons(program.labels)</code></pre>
@@ -495,23 +459,6 @@ See <a href="https://docs.python.org/3/library/typing.html#typing.overload">the 
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L177-L198" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def prepared(tags):
-    &#34;&#34;&#34;Prepare the spans for serialization.
-
-    Args:
-        tags (Labels): The tags to be serialized.
-        tags (Taxons): The taxons to be serialized.
-
-    Returns:
-        LabelPoorSpans|TaxonsPoorSpans:
-            A dictionary mapping tag names with the list of their spans, transformed into simple
-            lists of two integers.
-
-    .. note::
-          Overloaded to support two different combinations of argument types: Mypy can check that
-          passing `Labels` (resp. `Taxons`) to the function returns `LabelsPoorSpans` (resp.
-          `TaxonsPoorSpans`).
-          See [the documentation](https://docs.python.org/3/library/typing.html#typing.overload).
-    &#34;&#34;&#34;
     result: Union[LabelsPoorSpans, TaxonsPoorSpans] = {}
     for (tag_name, spans) in tags:
         result[tag_name] = [span[:2] for span in sorted(set(spans))]
@@ -536,8 +483,6 @@ See <a href="https://docs.python.org/3/library/typing.html#typing.overload">the 
 </summary>
 <pre><code class="python">class Database:
     def __init__(self, directory: Path, ignore_timestamps=False, *args, **kwargs) -&gt; None:
-        &#34;&#34;&#34;Collect all infos pertaining to the programs, the labels and the taxons.&#34;&#34;&#34;
-
         self.default_json_db_path = directory.parent / f&#34;{directory.name}_db.json&#34;
         self.default_sqlite_db_path = directory.parent / f&#34;{directory.name}_db.sqlite&#34;
 
@@ -570,7 +515,6 @@ See <a href="https://docs.python.org/3/library/typing.html#typing.overload">the 
             }
 
     def get_json(self) -&gt; str:
-        &#34;&#34;&#34;Dump the data to JSON, reduce each list of spans to one line.&#34;&#34;&#34;
         data = {
             &#34;programs&#34;: self.programs_infos,
             &#34;labels&#34;: dict(sorted(self.labels.items())),
@@ -687,7 +631,6 @@ See <a href="https://docs.python.org/3/library/typing.html#typing.overload">the 
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L64-L75" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def get_json(self) -&gt; str:
-    &#34;&#34;&#34;Dump the data to JSON, reduce each list of spans to one line.&#34;&#34;&#34;
     data = {
         &#34;programs&#34;: self.programs_infos,
         &#34;labels&#34;: dict(sorted(self.labels.items())),

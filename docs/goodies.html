@@ -67,7 +67,6 @@ def title_to_slug_factory():
 
 
 def add_line_numbers(source: str) -&gt; str:
-    &#34;&#34;&#34;Return a numbered version of the given source-code. Result readable up to 999 lines.&#34;&#34;&#34;
     return &#34;\n&#34;.join(f&#34;{n: &lt;4}{line}&#34; for (n, line) in enumerate(source.split(&#34;\n&#34;), 1))
 
 
@@ -78,8 +77,6 @@ def enumeration_to_txt_factory(
     template: str = &#34;&lt;details&gt;&lt;summary&gt;{summary}&lt;/summary&gt;{details}&lt;/details&gt;&#34;,
     initial_indent: str = &#34;   &#34;,  # take into account the details marker
 ) -&gt; Callable[[str], str]:
-    &#34;&#34;&#34;Return a function formatting an enumeration string on a given column width.&#34;&#34;&#34;
-
     def enumeration_to_txt(s: str) -&gt; str:
         if not s:
             return default_string
@@ -94,15 +91,6 @@ def enumeration_to_txt_factory(
 
 
 def cost_bucket(cost: int) -&gt; str:
-    &#34;&#34;&#34;Among a predetermined set of intervals, return that including the given positive number.
-
-    The intervals are `[0, 0]`, `]0, 0.25[`, `[0.25, 0.5[`, `[0.5, 1[`, `[1, 2[`, `[2,
-    4[`, `[4, 8[`, and so on. The result is returned as a string ready to be included in the
-    recommendation report.
-
-    &gt;&gt;&gt; cost_bucket(0.75)
-    &#34;in [0.5, 1[&#34;
-    &#34;&#34;&#34;
     if cost == 0:
         return &#34;0&#34;
     if cost &lt; 0.25:
@@ -117,15 +105,6 @@ def cost_bucket(cost: int) -&gt; str:
 
 
 def couple_to_string(couple: Union[Span, Tuple[int, int]]) -&gt; str:
-    &#34;&#34;&#34;Return a deduplicated string representation of the given couple or span.
-
-    &gt;&gt;&gt; couple_to_string((12, 15))
-    &#34;12-15&#34;
-    &gt;&gt;&gt; couple_to_string((12, 12))
-    &#34;12&#34;
-    &gt;&gt;&gt; couple_to_string(Span(12, 15))
-    &#34;12-15&#34;
-    &#34;&#34;&#34;
     return f&#34;{couple[0]}&#34; + (&#34;&#34; if couple[0] == couple[1] else f&#34;-{couple[1]}&#34;)</code></pre>
 </details>
 </section>
@@ -147,7 +126,6 @@ def couple_to_string(couple: Union[Span, Tuple[int, int]]) -&gt; str:
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/goodies.py#L36-L38" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def add_line_numbers(source: str) -&gt; str:
-    &#34;&#34;&#34;Return a numbered version of the given source-code. Result readable up to 999 lines.&#34;&#34;&#34;
     return &#34;\n&#34;.join(f&#34;{n: &lt;4}{line}&#34; for (n, line) in enumerate(source.split(&#34;\n&#34;), 1))</code></pre>
 </details>
 </dd>
@@ -168,15 +146,6 @@ recommendation report.</p>
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/goodies.py#L63-L83" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def cost_bucket(cost: int) -&gt; str:
-    &#34;&#34;&#34;Among a predetermined set of intervals, return that including the given positive number.
-
-    The intervals are `[0, 0]`, `]0, 0.25[`, `[0.25, 0.5[`, `[0.5, 1[`, `[1, 2[`, `[2,
-    4[`, `[4, 8[`, and so on. The result is returned as a string ready to be included in the
-    recommendation report.
-
-    &gt;&gt;&gt; cost_bucket(0.75)
-    &#34;in [0.5, 1[&#34;
-    &#34;&#34;&#34;
     if cost == 0:
         return &#34;0&#34;
     if cost &lt; 0.25:
@@ -208,15 +177,6 @@ recommendation report.</p>
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/goodies.py#L86-L96" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def couple_to_string(couple: Union[Span, Tuple[int, int]]) -&gt; str:
-    &#34;&#34;&#34;Return a deduplicated string representation of the given couple or span.
-
-    &gt;&gt;&gt; couple_to_string((12, 15))
-    &#34;12-15&#34;
-    &gt;&gt;&gt; couple_to_string((12, 12))
-    &#34;12&#34;
-    &gt;&gt;&gt; couple_to_string(Span(12, 15))
-    &#34;12-15&#34;
-    &#34;&#34;&#34;
     return f&#34;{couple[0]}&#34; + (&#34;&#34; if couple[0] == couple[1] else f&#34;-{couple[1]}&#34;)</code></pre>
 </details>
 </dd>
@@ -238,8 +198,6 @@ recommendation report.</p>
     template: str = &#34;&lt;details&gt;&lt;summary&gt;{summary}&lt;/summary&gt;{details}&lt;/details&gt;&#34;,
     initial_indent: str = &#34;   &#34;,  # take into account the details marker
 ) -&gt; Callable[[str], str]:
-    &#34;&#34;&#34;Return a function formatting an enumeration string on a given column width.&#34;&#34;&#34;
-
     def enumeration_to_txt(s: str) -&gt; str:
         if not s:
             return default_string
