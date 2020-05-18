@@ -88,6 +88,7 @@ def strip_docstrings():
     for path in Path("docs/").rglob("*.html"):
         source = path.read_text()
         source = sub_code(lambda m: m[1] + sub_docstrings("", m[2]) + m[3], source)
+        source = source.replace('"git-link">Browse git</a>', '"git-link">Browse GitHub</a>')
         path.write_text(source)
 
 

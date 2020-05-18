@@ -42,7 +42,7 @@ two zero-based indexes <code>start</code> (inclusive) and <code>stop</code> (exc
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/assess_costs.py#L0-L128" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/assess_costs.py#L0-L128" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">from functools import lru_cache
 
@@ -112,7 +112,7 @@ class LearningCostAssessor:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/assess_costs.py#L27-L31" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/assess_costs.py#L27-L31" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">@lru_cache(maxsize=None)  # NB: memoization needed for consistency with mypy&#39;s typing
 def range_to_cost_linear(start: int, stop: int) -&gt; float:
@@ -138,7 +138,7 @@ be:</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/assess_costs.py#L34-L55" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/assess_costs.py#L34-L55" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">@lru_cache(maxsize=None)
 def range_to_cost_zeno(start: int, stop: int) -&gt; float:
@@ -165,7 +165,7 @@ introduced so far.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/assess_costs.py#L58-L129" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/assess_costs.py#L58-L129" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">class LearningCostAssessor:
     def __init__(self, imparted_knowledge: TaxonNameSet) -&gt; None:
@@ -221,7 +221,7 @@ of taxon names.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/assess_costs.py#L116-L129" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/assess_costs.py#L116-L129" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def __call__(self, programs: ProgramTaxonNames) -&gt; AssessedPrograms:
     return sorted(
@@ -254,7 +254,7 @@ of taxon names.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/assess_costs.py#L68-L87" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/assess_costs.py#L68-L87" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def set_cost_assessment_strategy(self, strategy: Literal[&#34;zeno&#34;, &#34;linear&#34;] = &#34;zeno&#34;) -&gt; None:
     if strategy.lower() == &#34;zeno&#34;:
@@ -291,7 +291,7 @@ assessment function.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/assess_costs.py#L89-L114" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/assess_costs.py#L89-L114" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">@lru_cache(maxsize=None)
 def taxon_cost(self, taxon: TaxonName) -&gt; float:

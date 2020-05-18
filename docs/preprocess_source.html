@@ -29,7 +29,7 @@
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L0-L174" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L0-L174" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">from collections import defaultdict
 from token import DEDENT, INDENT, NEWLINE, STRING
@@ -214,7 +214,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L140-L158" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L140-L158" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def centrifugate_hints(source: Source) -&gt; Source:
     lines = []
@@ -244,7 +244,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L31-L35" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L31-L35" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def cleanup_factory(cleanup_strategy: str) -&gt; Callable[[Source], Source]:
     cleanup = lambda source: source
@@ -261,7 +261,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L104-L134" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L104-L134" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def collect_hints(source: Source) -&gt; Tuple[LabelsSpans, LabelsSpans]:
     addition = HintBuffer(&#34;addition&#34;)
@@ -303,7 +303,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L38-L65" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L38-L65" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def full_cleaning(source: Source) -&gt; Source:
     result = []
@@ -343,7 +343,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L164-L165" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L164-L165" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def remove_hints(source: Source) -&gt; Source:
     return replace_hints(&#34;&#34;, source).strip()</code></pre>
@@ -363,7 +363,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L68-L98" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L68-L98" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">class HintBuffer:
     def __init__(self, description: str) -&gt; None:
@@ -400,7 +400,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L76-L78" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L76-L78" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def append_hint(self, label_name: LabelName, line_number: int) -&gt; None:
     self.result[label_name].append(Span(line_number, line_number))</code></pre>
@@ -414,7 +414,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L87-L89" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L87-L89" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def close_hint(self, label_name: LabelName, line_number: int) -&gt; None:
     self.result[label_name].append(Span(self.stack[label_name].pop(), line_number))</code></pre>
@@ -428,7 +428,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L91-L94" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L91-L94" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def ensure_stack_is_empty(self) -&gt; None:
     if any(self.stack.values()):
@@ -443,7 +443,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L83-L85" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L83-L85" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def get_champion(self, label_name: LabelName) -&gt; List[Tuple[int, &#34;HintBuffer&#34;]]:
     return [(self.stack[label_name][-1], self)] if self.stack[label_name] else []</code></pre>
@@ -457,7 +457,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L96-L98" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L96-L98" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def get_result(self) -&gt; LabelsSpans:
     return {k: sorted(v) for (k, v) in self.result.items()}</code></pre>
@@ -471,7 +471,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L80-L81" class="git-link">Browse git</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L80-L81" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def open_hint(self, label_name: LabelName, line_number: int) -&gt; None:
     self.stack[label_name].append(line_number)</code></pre>

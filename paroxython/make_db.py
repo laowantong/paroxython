@@ -189,7 +189,7 @@ def prepared(tags):
     .. note::
           Overloaded to support two different combinations of argument types: Mypy can check that
           passing `Labels` (resp. `Taxons`) to the function returns `LabelsPoorSpans` (resp.
-          `TaxonsPoorSpans`).
+          `TaxonsPoorSpans`). Browse GitHub to see the actual overloaded functions.
           See [the documentation](https://docs.python.org/3/library/typing.html#typing.overload).
     """
     result: Union[LabelsPoorSpans, TaxonsPoorSpans] = {}
