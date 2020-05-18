@@ -36,7 +36,7 @@ def cleanup_factory(cleanup_strategy: str) -> Callable[[Source], Source]:
 
 
 def full_cleaning(source: Source) -> Source:
-    """Suppress all comments, docstrings, etc. from the given source-code.
+    """Removes as much noise (comments, etc.) as possible in the given source-code.
 
     Args:
         source (Source): The source to be cleaned.
@@ -44,33 +44,33 @@ def full_cleaning(source: Source) -> Source:
     Returns:
         Source: The cleaned source.
 
-    Example:
-        - Blank lines are suppressed.
-        <div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="http://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=8:13&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="http://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=14:16&footer=0"></script></div></div>
+    Examples:
+        - Empty or blank lines are suppressed.
+        <div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="http://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=13:18&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="http://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=19:21&footer=0"></script></div></div>
         - Normal inline comments are suppressed.
-        <div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="http://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=19:24&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="http://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=25:30&footer=0"></script></div></div>
+        <div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="http://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=24:29&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="http://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=30:35&footer=0"></script></div></div>
         - Commented lines are suppressed.
-        <div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="http://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=33:43&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="http://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=44:47&footer=0"></script></div></div>
-        - Shebang are suppressed.
-        <div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="http://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=50:52&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="http://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=53:54&footer=0"></script></div></div>
+        <div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="http://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=38:48&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="http://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=49:52&footer=0"></script></div></div>
+        - Shebang is suppressed.
+        <div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="http://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=55:57&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="http://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=58:59&footer=0"></script></div></div>
         - Encoding declaration is suppressed.
-        <div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="http://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=57:59&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="http://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=60:61&footer=0"></script></div></div>
+        <div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="http://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=62:64&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="http://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=65:66&footer=0"></script></div></div>
         - Docstrings of classes and functions are suppressed.
-        <div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="http://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=64:75&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="http://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=76:81&footer=0"></script></div></div>
+        <div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="http://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=69:80&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="http://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=81:86&footer=0"></script></div></div>
         - Docstrings of modules are suppressed.
-        <div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="http://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=84:94&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="http://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=95:99&footer=0"></script></div></div>
+        <div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="http://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=89:99&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="http://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=100:104&footer=0"></script></div></div>
         - A `pass` statement is added to empty classes if needed.
-        <div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="http://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=102:107&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="http://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=108:110&footer=0"></script></div></div>
+        <div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="http://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=107:112&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="http://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=113:115&footer=0"></script></div></div>
         - Useless `pass` statements are suppressed.
-        <div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="http://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=113:121&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="http://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=122:128&footer=0"></script></div></div>
+        <div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="http://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=118:126&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="http://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=127:133&footer=0"></script></div></div>
         - Mixes of comments and docstrings are suppressed.
-        <div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="http://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=131:135&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="http://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=136:137&footer=0"></script></div></div>
+        <div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="http://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=136:140&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="http://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=141:142&footer=0"></script></div></div>
         - Paroxython's label hints are **preserved**.
-        <div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="http://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=140:146&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="http://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=147:153&footer=0"></script></div></div>
+        <div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="http://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=145:151&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="http://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=152:158&footer=0"></script></div></div>
 
     .. warning::
-        Useless pass statements are preserved when they are not followed
-        by a line with a same indentation level.
+        Useless pass statements are preserved when they are not followed by a line with a same
+        indentation level.
     """
     result = []
     previous_token = INDENT

@@ -52,7 +52,7 @@ def foo(bar):
         return []
 >>>
 
-<<< Shebang are suppressed.
+<<< Shebang is suppressed.
 #!/usr/bin/env python
 foobar()
 ---
@@ -172,7 +172,7 @@ def test_full_cleaning(title, original, expected):
 
 
 def test_update_docstring():
-    offset = 8
+    offset = 13
     result = []
     for (title, original, expected) in examples:
         result.append(f"- {title}")
@@ -189,7 +189,7 @@ def test_update_docstring():
     path = Path("paroxython/preprocess_source.py")
     source = path.read_text()
     source = regex.sub(
-        r"(?sm)^(def cleanup_factory.+?Example:\n).+?^(    \n)", fr"\1        {result}\n\2", source
+        r"(?sm)^(def cleanup_factory.+?Examples:\n).+?^\n", fr"\1        {result}\n\n", source
     )
     path.write_text(source)
 
