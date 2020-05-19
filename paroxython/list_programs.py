@@ -7,27 +7,26 @@ from .preprocess_source import Cleanup, centrifugate_hints, collect_hints, remov
 from .user_types import Program, ProgramName, Programs, Source
 
 
-def list_programs(directory: Path, cleanup_strategy: str = "full", *args, **kwargs) -> Programs:
-    """List recursively all Python `Programs` of a given directory."""
+def list_programs(
+    directory: Path,
+    cleanup_strategy: str = "full",
+    glob_pattern: str = "",
+    exclude_pattern: str = "",
+    *args,
+    **kwargs,
+) -> Programs:
+    """List recursively all Python `Program`s of a given directory."""
     result: Programs = []
     cleanup = Cleanup(cleanup_strategy)
-    for program_path in generate_program_paths(directory, *args, **kwargs):
-        source = cleanup.run(Source(program_path.read_text()))
-        relative_path = program_path.relative_to(directory)
-        result.append(get_program(source, relative_path))
-    return result
-
-
-def generate_program_paths(
-    directory: Path, glob_pattern: str = "", exclude_pattern: str = "", *args, **kwargs,
-) -> Iterator[Path]:
-    """Generate recursively the paths of all Python files of a given directory."""
     glob_pattern = glob_pattern or "**/*.py"
     exclude_pattern = exclude_pattern or r"^(__init__|setup|.*[-_]tests?)\.py$"
     match_excluded = regex.compile(exclude_pattern).fullmatch
     for program_path in sorted(directory.rglob(glob_pattern)):
         if not match_excluded(program_path.name):
-            yield program_path
+            source = cleanup.run(Source(program_path.read_text()))
+            relative_path = program_path.relative_to(directory)
+            result.append(get_program(source, relative_path))
+    return result
 
 
 def get_program(source: Source, relative_path: Path = None) -> Program:
