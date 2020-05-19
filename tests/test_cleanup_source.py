@@ -3,7 +3,7 @@ import regex  # type: ignore
 from pathlib import Path
 
 import context
-from paroxython.preprocess_source import cleanup_factory
+from paroxython.preprocess_source import Cleanup
 
 # This test suite is automatically injected into the docstring of `preprocess_source.py`.
 # Modifying the position of the following assignment may require updating the function
@@ -142,25 +142,34 @@ foobar()
 foobar()
 >>>
 
-<<< Paroxython's label hints are **preserved**.
-foo = bar # paroxython: hint_1 hint_2
-# paroxython: hint_3
+<<< Paroxython's label hints are **preserved** and **normalized**.
+foo = bar #   Paroxython   :   hint_1   hint_2
+#paroxython: hint_3
 fizz = [
     "foo", # lorem
     "bar", # paroxython: hint_4
 ]
 ---
-foo = bar # paroxython: hint_1 hint_2
+foo = bar # paroxython: hint_1   hint_2
 # paroxython: hint_3
 fizz = [
     "foo",
     "bar", # paroxython: hint_4
 ]
 >>>
+
+<<< `if __name__ == "__main__":` part is suppressed.
+foo = bar
+if __name__ == "__main__":
+    bar == foo
+---
+foo = bar
+>>>
 '''
+
 source_rex = regex.compile(r"(?ms)^<<< ([^\n]+)\n(.+?)\n---\n(.+?)\n>>>")
 examples = [m for m in source_rex.findall(sources)]
-cleanup = cleanup_factory("full")
+cleanup = Cleanup("full").run
 
 
 @pytest.mark.parametrize("title, original, expected", examples)
@@ -185,12 +194,13 @@ def test_update_docstring():
         )
         print(i1, i2, j1, j2)
         offset = j2 + 3
-    result = "\n        ".join(result)
+    result = "\n            ".join(result)
     path = Path("paroxython/preprocess_source.py")
     source = path.read_text()
-    source = regex.sub(
-        r"(?sm)^(def cleanup_factory.+?Examples:\n).+?^\n", fr"\1        {result}\n\n", source
+    (source, n) = regex.subn(
+        r"(?sm)^(\s*def full_cleaning.+?Examples:\n).+?^\n", fr"\1            {result}\n\n", source
     )
+    assert n == 1
     path.write_text(source)
 
 

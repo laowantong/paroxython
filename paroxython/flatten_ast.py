@@ -1,16 +1,15 @@
 from typed_ast import ast3 as ast
-from typing import Any
+from typing import Any, Callable
 
 import regex  # type: ignore
 
-__pdoc__ = {
-    "remove_context": False,
-}
 
-remove_context = regex.compile(r", ctx=.+?\(\)").sub
-
-
-def flatten_ast(node: Any, prefix="", path="") -> str:
+def flatten_ast(
+    node: Any,
+    prefix: str = "",
+    path: str = "",
+    remove_context: Callable = regex.compile(r", ctx=.+?\(\)").sub,
+) -> str:
     if isinstance(node, ast.AST):
         acc = [f"{prefix}/_type={type(node).__name__}\n"]
         if isinstance(node, ast.expr):

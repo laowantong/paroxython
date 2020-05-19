@@ -36,15 +36,15 @@ from typing import Iterator
 
 import regex  # type: ignore
 
-from .preprocess_source import cleanup_factory, centrifugate_hints, collect_hints, remove_hints
+from .preprocess_source import Cleanup, centrifugate_hints, collect_hints, remove_hints
 from .user_types import Program, ProgramName, Programs, Source
 
 
 def list_programs(directory: Path, cleanup_strategy: str = &#34;full&#34;, *args, **kwargs) -&gt; Programs:
     result: Programs = []
-    cleanup = cleanup_factory(cleanup_strategy)
+    cleanup = Cleanup(cleanup_strategy)
     for program_path in generate_program_paths(directory, *args, **kwargs):
-        source = cleanup(Source(program_path.read_text()))
+        source = cleanup.run(Source(program_path.read_text()))
         relative_path = program_path.relative_to(directory)
         result.append(get_program(source, relative_path))
     return result
@@ -118,9 +118,9 @@ if __name__ == &#34;__main__&#34;:
 </summary>
 <pre><code class="python">def list_programs(directory: Path, cleanup_strategy: str = &#34;full&#34;, *args, **kwargs) -&gt; Programs:
     result: Programs = []
-    cleanup = cleanup_factory(cleanup_strategy)
+    cleanup = Cleanup(cleanup_strategy)
     for program_path in generate_program_paths(directory, *args, **kwargs):
-        source = cleanup(Source(program_path.read_text()))
+        source = cleanup.run(Source(program_path.read_text()))
         relative_path = program_path.relative_to(directory)
         result.append(get_program(source, relative_path))
     return result</code></pre>
@@ -206,7 +206,7 @@ if __name__ == &#34;__main__&#34;:
 <nav id="sidebar">
 <header>
 <a class="homelink" rel="home" title="Paroxython Home" href="index.html">
-<img src="logo.png" alt="Paroxython logo">
+<img src="resources/logo.png" alt="Paroxython logo">
 </a>
 </header>
 <div class="gcse-search" style="height: 70px"

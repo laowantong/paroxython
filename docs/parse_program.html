@@ -29,13 +29,13 @@
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L0-L144" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L0-L145" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">from collections import defaultdict
 from os.path import dirname
 from pathlib import Path
 from typed_ast import ast3 as ast
-from typing import Callable, Dict, List
+from typing import Callable, Dict, List, Iterator, Tuple
 
 
 import regex  # type: ignore
@@ -44,22 +44,23 @@ from .derived_labels_db import DB
 from .flatten_ast import flatten_ast
 from .user_types import Label, LabelName, Labels, LabelsSpans, Program, Query, Source, Span
 
-__pdoc__ = {
-    &#34;find_all_features&#34;: False,
-}
+__pdoc__ = {&#34;ProgramParser.__call__&#34;: True}
+
+def simplify_negative_literals(
+    flat_ast: str,
+    sub=regex.compile(
+    ).sub,
+) -&gt; str:
+    return sub(r&#34;\1/_type=Num\2\1/n=-\3&#34;, flat_ast)
 
 
-def _simplify_negative_literals() -&gt; Callable:
-    sub = regex.compile(
-    ).sub
-    return lambda flat_ast: sub(r&#34;\1/_type=Num\2\1/n=-\3&#34;, flat_ast)
+def find_all_features(
+    text: str,
+    find_all=regex.compile(
+    ).findall,
+) -&gt; Iterator[Tuple[LabelName, str, str]]:
+    return find_all(text)
 
-
-simplify_negative_literals = _simplify_negative_literals()
-
-
-find_all_features = regex.compile(
-).findall
 
 DEFAULT_SPEC_PATH = Path(dirname(__file__)) / &#34;resources&#34; / &#34;spec.md&#34;
 
@@ -76,7 +77,7 @@ class ProgramParser:
             if language == &#34;re&#34;:
                 self.features[label_name] = regex.compile(f&#34;(?mx){pattern}&#34;)
             elif language == &#34;sql&#34;:
-                self.queries[label_name] = pattern
+                self.queries[label_name] = Query(pattern)
         self.db = DB()
 
     def __call__(self, program: Program, yield_failed_matches: bool = False) -&gt; Labels:
@@ -169,16 +170,39 @@ if __name__ == &#34;__main__&#34;:
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
 <dt id="paroxython.parse_program.simplify_negative_literals"><code class="name flex">
-<span>def <span class="ident">simplify_negative_literals</span></span>(<span>flat_ast)</span>
+<span>def <span class="ident">simplify_negative_literals</span></span>(<span>flat_ast: str, sub=&lt;built-in method sub of _regex.Pattern object&gt;) ‑> str</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L27-L27" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L16-L26" class="git-link">Browse GitHub</a>
 </summary>
-<pre><code class="python">return lambda flat_ast: sub(r&#34;\1/_type=Num\2\1/n=-\3&#34;, flat_ast)</code></pre>
+<pre><code class="python">def simplify_negative_literals(
+    flat_ast: str,
+    sub=regex.compile(
+    ).sub,
+) -&gt; str:
+    return sub(r&#34;\1/_type=Num\2\1/n=-\3&#34;, flat_ast)</code></pre>
+</details>
+</dd>
+<dt id="paroxython.parse_program.find_all_features"><code class="name flex">
+<span>def <span class="ident">find_all_features</span></span>(<span>text: str, find_all=&lt;built-in method findall of _regex.Pattern object&gt;) ‑> Iterator[Tuple[LabelName, str, str]]</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L29-L39" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">def find_all_features(
+    text: str,
+    find_all=regex.compile(
+    ).findall,
+) -&gt; Iterator[Tuple[LabelName, str, str]]:
+    return find_all(text)</code></pre>
 </details>
 </dd>
 </dl>
@@ -196,7 +220,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L44-L123" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L45-L124" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">class ProgramParser:
     def __init__(self, spec_path: Path = DEFAULT_SPEC_PATH) -&gt; None:
@@ -210,7 +234,7 @@ if __name__ == &#34;__main__&#34;:
             if language == &#34;re&#34;:
                 self.features[label_name] = regex.compile(f&#34;(?mx){pattern}&#34;)
             elif language == &#34;sql&#34;:
-                self.queries[label_name] = pattern
+                self.queries[label_name] = Query(pattern)
         self.db = DB()
 
     def __call__(self, program: Program, yield_failed_matches: bool = False) -&gt; Labels:
@@ -272,6 +296,79 @@ if __name__ == &#34;__main__&#34;:
 
         return sorted(labels)</code></pre>
 </details>
+<h3>Methods</h3>
+<dl>
+<dt id="paroxython.parse_program.ProgramParser.__call__"><code class="name flex">
+<span>def <span class="ident">__call__</span></span>(<span>self, program: Program, yield_failed_matches: bool = False) ‑> List[Label]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Analyze a given source and return its labels and their spans.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L63-L124" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">def __call__(self, program: Program, yield_failed_matches: bool = False) -&gt; Labels:
+    def try_to_bind(label_name: LabelName, span: Span) -&gt; None:
+        try:
+            program.deletion[label_name].remove(Span(span.start, span.end))
+        except (KeyError, ValueError):
+            result[label_name].append(span)
+
+    def pos_to_span(pos: List[str]) -&gt; Span:
+        (start, path) = pos[0].split(&#34;:&#34;)
+        (end, _) = pos[-1].split(&#34;:&#34;)
+        return Span(int(start), int(end), path)
+
+    try:
+        tree = ast.parse(program.source)
+    except (SyntaxError, ValueError) as exception:
+        return [Label(LabelName(f&#34;ast_construction:{type(exception).__name__}&#34;), [])]
+    self.flat_ast = simplify_negative_literals(flatten_ast(tree))
+
+    labels: Labels = []
+    for (label_name, rex) in self.features.items():
+        result: LabelsSpans = defaultdict(list)
+        for candidate in list(program.addition):
+            if candidate == label_name or candidate.startswith(f&#34;{label_name}:&#34;):
+                result[candidate] = program.addition.pop(candidate)
+        d = None
+        for match in rex.finditer(self.flat_ast, overlapped=True):
+            d = match.capturesdict()
+            if d.get(&#34;SUFFIX&#34;):  # there is a &#34;SUFFIX&#34; key and its value is not []
+                if len(d[&#34;POS&#34;]) == len(d[&#34;SUFFIX&#34;]):
+                    # When there are as many matched positions as suffixes, associate them
+                    # in parallel. See features `for` and `decorator_list` for a workaround for
+                    # a problem which can occur with features spanning several lines.
+                    for (suffix, pos) in zip(d[&#34;SUFFIX&#34;], d[&#34;POS&#34;]):
+                        try_to_bind(LabelName(f&#34;{label_name}:{suffix}&#34;), pos_to_span([pos]))
+                else:
+                    span = pos_to_span(d[&#34;POS&#34;])
+                    for suffix in d[&#34;SUFFIX&#34;]:
+                        try_to_bind(LabelName(f&#34;{label_name}:{suffix}&#34;), span)
+            else:
+                try_to_bind(label_name, pos_to_span(d[&#34;POS&#34;]))
+        if yield_failed_matches and not d:
+            labels.append(Label(label_name, []))
+        else:
+            labels.extend(Label(*item) for item in result.items())
+
+    labels.extend(Label(*item) for item in program.addition.items())
+
+    self.db.create(labels)
+    for (candidate_label, query) in self.queries.items():
+        derived_labels = self.db.read(query)
+        if derived_labels:
+            self.db.update(derived_labels)
+            labels.extend(derived_labels)
+        elif yield_failed_matches:
+            labels.append(Label(candidate_label, []))
+    self.db.delete()
+
+    return sorted(labels)</code></pre>
+</details>
+</dd>
+</dl>
 </dd>
 </dl>
 </section>
@@ -279,7 +376,7 @@ if __name__ == &#34;__main__&#34;:
 <nav id="sidebar">
 <header>
 <a class="homelink" rel="home" title="Paroxython Home" href="index.html">
-<img src="logo.png" alt="Paroxython logo">
+<img src="resources/logo.png" alt="Paroxython logo">
 </a>
 </header>
 <div class="gcse-search" style="height: 70px"
@@ -299,12 +396,16 @@ data-gaCategoryParameter="paroxython.parse_program">
 <li><h3><a href="#header-functions">Functions</a></h3>
 <ul class="">
 <li><code><a title="paroxython.parse_program.simplify_negative_literals" href="#paroxython.parse_program.simplify_negative_literals">simplify_negative_literals</a></code></li>
+<li><code><a title="paroxython.parse_program.find_all_features" href="#paroxython.parse_program.find_all_features">find_all_features</a></code></li>
 </ul>
 </li>
 <li><h3><a href="#header-classes">Classes</a></h3>
 <ul>
 <li>
 <h4><code><a title="paroxython.parse_program.ProgramParser" href="#paroxython.parse_program.ProgramParser">ProgramParser</a></code></h4>
+<ul class="">
+<li><code><a title="paroxython.parse_program.ProgramParser.__call__" href="#paroxython.parse_program.ProgramParser.__call__">__call__</a></code></li>
+</ul>
 </li>
 </ul>
 </li>

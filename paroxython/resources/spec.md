@@ -1238,7 +1238,7 @@ _Remark._ Note the user-defined function `REGEXP` in the `WHERE`clause. It calls
 
 #### Feature `short_circuit`
 
-When the value of the left operand suffices to determine the value of a boolean expression, short-circuit evaluation skips the right operand. This behaviour is sometimes desirable or even required, but Paroxython currently cannot detect the case: so, when commutating the operands would result in an error or a performance penalty, you should add manually the hint `# paroxython: short_circuit` in the source-code. The suffix shoud be either `And`, `Or` or omitted.
+When the value of the left operand suffices to determine the value of a boolean expression, short-circuit evaluation skips the right operand. This behaviour is sometimes desirable or even required, but Paroxython currently cannot detect the case: so, when commutating the operands would result in an error or a performance penalty, you should add manually the hint `# paroxython: short_circuit` in the source code. The suffix shoud be either `And`, `Or` or omitted.
 
 ##### Specification
 

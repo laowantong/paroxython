@@ -7,7 +7,7 @@ import context
 from paroxython.preprocess_source import centrifugate_hints
 
 sources = r"""
-<<< Some isolated hints.
+<<< Some isolated hints (`hint_3` and `hint_5` are centrifugated).
 foo = bar # paroxython: hint_1 hint_2
 # paroxython: hint_3
 fizz = [
@@ -23,7 +23,7 @@ fizz = [
 ] # paroxython: ...hint_3 ...hint_5
 >>>
 
-<<< Some trailing isolated hints.
+<<< Some trailing isolated hints (`hint_5` and `hint_6` are centrifugated).
 foo = bar # paroxython: hint_1 hint_2
 fizz = [
     "foo",
@@ -39,7 +39,7 @@ fizz = [
 ] # paroxython: hint_4 ...hint_5 ...hint_6
 >>>
 
-<<< No isolated hints.
+<<< No isolated hints (no centrifugation of the existing hints).
 foo = bar # paroxython: hint_1 hint_2
 fizz = [
     "foo",

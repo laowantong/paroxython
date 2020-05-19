@@ -22,7 +22,7 @@ DESCRIPTION:
     order constraints in mind (e.g., the fact that the introduction of the
     concept of early exit must come after that of loop, which itself requires
     that of control flow, is expressed with the following taxon:
-    flow/loop/exit/early). Source-codes, labels and taxons are stored in a
+    flow/loop/exit/early). Source codes, labels and taxons are stored in a
     database, which can finally be filtered through a pipeline of inclusion,
     exclusion and impartment commands on programs or taxons.
 

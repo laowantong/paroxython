@@ -31,7 +31,7 @@ for algo in algos:
             continue
         comment = "\n# ".join(program["AuthorComment"].split("\n"))
 
-        # Manually “fix” some source-codes
+        # Manually “fix” some source codes
         source = regex.sub(r"print +([^\(].*)\n", r"print(\1)\n", program["CodeBlock"] + "\n")
         if program["Id"] == 2687:
             source = source.replace("<your data dict>", "'<your data dict>'")

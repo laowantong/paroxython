@@ -28,7 +28,7 @@
 <section id="section-intro">
 <p>Paroxython is a command-line tool which finds and tags algorithmic features (such as assignments, nested loops, tail-recursive functions, etc.) in a collection of small Python programs, typically gathered for educational purposes (e.g., examples, patterns, exercise corrections).</p>
 <p>Each tag consists in a free-form label associated with its spanning lines. These labels are then mapped onto a knowledge taxonomy designed by the teacher with basic order constraints in mind (e.g., the fact that the introduction of the concept of early exit must come after that of loop, which itself requires that of control flow, is expressed with the following taxon: flow/loop/exit/early).</p>
-<p>Source-codes, labels and taxons are stored in a database, which can finally be filtered through a pipeline of inclusion, exclusion and impartment commands on programs or taxons.</p>
+<p>Source codes, labels and taxons are stored in a database, which can finally be filtered through a pipeline of inclusion, exclusion and impartment commands on programs or taxons.</p>
 <h1 id="installation">Installation</h1>
 <pre><code>pip install paroxython
 </code></pre>
@@ -121,11 +121,24 @@
 </tbody>
 </table>
 <h1 id="how-it-works">How it works</h1>
-<p><img alt="" src="flow.png"></p>
+<p><img alt="" src="resources/flow.png"></p>
 <h1 id="pattern-specifications">Pattern specifications</h1>
 <p>Browse <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md">spec.md</a> on GitHub.</p>
 <h1 id="default-taxonomy">Default Taxonomy</h1>
 <p>Browse <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/taxonomy.tsv">taxonomy.tsv</a> on GitHub.</p>
+<h1 id="user-types">User types</h1>
+<p>Paroxython makes heavy use of Python 3.5+ <a href="https://docs.python.org/3/library/typing.html">type hints</a>.
+They are documented directly in the source code.
+Browse <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/user_types.py">user_types.py</a> on GitHub.</p>
+<h1 id="glossary">Glossary</h1>
+<ul>
+<li>Hint:</li>
+<li>Label:</li>
+<li>Span:</li>
+<li>Tag:</li>
+<li>Taxon:</li>
+<li>Taxonomy:</li>
+</ul>
 </section>
 <section>
 <h2 class="section-title" id="header-submodules">Sub-modules</h2>
@@ -180,7 +193,11 @@
 </dd>
 <dt><code class="name"><a title="paroxython.preprocess_source" href="preprocess_source.html">paroxython.preprocess_source</a></code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Several functions declare a compiled and bound regex pattern as an optional argument. It is not
+meant to be provided by the caller …</p>
+</div></div>
 </dd>
 <dt><code class="name"><a title="paroxython.recommend_programs" href="recommend_programs.html">paroxython.recommend_programs</a></code></dt>
 <dd>
@@ -201,7 +218,7 @@
 <nav id="sidebar">
 <header>
 <a class="homelink" rel="home" title="Paroxython Home" href="index.html">
-<img src="logo.png" alt="Paroxython logo">
+<img src="resources/logo.png" alt="Paroxython logo">
 </a>
 </header>
 <div class="gcse-search" style="height: 70px"
@@ -220,6 +237,8 @@ data-gaCategoryParameter="paroxython">
 <li><a href="#how-it-works">How it works</a></li>
 <li><a href="#pattern-specifications">Pattern specifications</a></li>
 <li><a href="#default-taxonomy">Default Taxonomy</a></li>
+<li><a href="#user-types">User types</a></li>
+<li><a href="#glossary">Glossary</a></li>
 </ul>
 </div>
 <ul id="index">

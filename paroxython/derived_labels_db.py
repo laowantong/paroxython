@@ -1,13 +1,11 @@
 import sqlite3
 from collections import defaultdict
-from typing import Dict
+from typing import Dict, Callable
 
 import regex  # type: ignore
 
 from .goodies import couple_to_string
 from .user_types import Label, LabelName, Labels, LabelsSpans, Query, Span
-
-__pdoc__ = {"DB.prerequisites": False}
 
 
 class DB:
@@ -22,25 +20,28 @@ class DB:
         "span_end INTEGER",
         "path TEXT",
     )
-    creation_query = f"CREATE TABLE t ({','.join(columns)})"
-    update_query = f"INSERT INTO t VALUES ({','.join('?' * len(columns))})"
-    addition_query = "CREATE TABLE t_{0} AS SELECT * FROM t WHERE name_prefix = '{0}'"
-    prerequisites = regex.compile(r"(?m)\b(?:FROM|JOIN) t_(\w+)").findall
 
     def __init__(self):
         self.c = sqlite3.connect(":memory:")
         self.c.create_function("regexp", 2, lambda rex, s: bool(regex.match(rex, s)))
 
-    def create(self, labels: Labels) -> None:
-        self.c.execute(DB.creation_query)
+    def create(
+        self, labels: Labels, creation_query: str = f"CREATE TABLE t ({','.join(columns)})"
+    ) -> None:
+        self.c.execute(creation_query)
         self.update(labels)
         self.added_table_labels: Dict[LabelName, int] = defaultdict(int)
 
-    def read(self, query: Query) -> Labels:
+    def read(
+        self,
+        query: Query,
+        prerequisites: Callable = regex.compile(r"(?m)\b(?:FROM|JOIN) t_(\w+)").findall,
+        addition_query: str = "CREATE TABLE t_{0} AS SELECT * FROM t WHERE name_prefix = '{0}'",
+    ) -> Labels:
         groups: LabelsSpans = defaultdict(list)
-        for label_name in DB.prerequisites(query):
+        for label_name in prerequisites(query):
             if label_name not in self.added_table_labels:
-                self.c.execute(DB.addition_query.format(label_name))
+                self.c.execute(addition_query.format(label_name))
                 self.c.commit()
             self.added_table_labels[label_name] += 1
         for (name_prefix, name_suffix, span_string, path) in self.c.execute(query):
@@ -49,14 +50,18 @@ class DB:
             groups[label_name].append(Span(int(span[0]), int(span[-1]), path))
         return [Label(*item) for item in groups.items()]
 
-    def update(self, labels: Labels) -> None:
+    def update(
+        self,
+        labels: Labels,
+        update_query: str = f"INSERT INTO t VALUES ({','.join('?' * len(columns))})",
+    ) -> None:
         values = []
         for (name, spans) in labels:
             for span in spans:
                 (prefix, _, suffix) = name.partition(":")
                 span_string = couple_to_string(span)
                 values.append((name, prefix, suffix, span_string, span.start, span.end, span.path))
-        self.c.executemany(DB.update_query, values)
+        self.c.executemany(update_query, values)
 
     def delete(self) -> None:
         self.c.execute("DROP TABLE t")

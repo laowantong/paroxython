@@ -2,7 +2,7 @@ from collections import defaultdict
 from os.path import dirname
 from pathlib import Path
 from typed_ast import ast3 as ast
-from typing import Callable, Dict, List
+from typing import Callable, Dict, List, Iterator, Tuple
 
 
 import regex  # type: ignore
@@ -11,32 +11,34 @@ from .derived_labels_db import DB
 from .flatten_ast import flatten_ast
 from .user_types import Label, LabelName, Labels, LabelsSpans, Program, Query, Source, Span
 
-__pdoc__ = {
-    "find_all_features": False,
-}
+__pdoc__ = {"ProgramParser.__call__": True}
 
 
-def _simplify_negative_literals() -> Callable:
-    sub = regex.compile(
+def simplify_negative_literals(
+    flat_ast: str,
+    sub=regex.compile(
         r"""(?mx)
                     ^(.*?)/_type=UnaryOp
             (\n(?:.+\n)*?)\1/op/_type=USub
              \n(?:.+\n)*? \1/operand/n=(.+)
         """
-    ).sub
-    return lambda flat_ast: sub(r"\1/_type=Num\2\1/n=-\3", flat_ast)
+    ).sub,
+) -> str:
+    return sub(r"\1/_type=Num\2\1/n=-\3", flat_ast)
 
 
-simplify_negative_literals = _simplify_negative_literals()
+def find_all_features(
+    text: str,
+    find_all=regex.compile(
+        r"""(?msx)
+        ^\#{4}\s+Feature\s+`(.+?)` # capture the label's pattern
+        .+?\#{5}\s+Specification # ensure the next pattern is in the Specification section
+        .+?```(.*?)\n+(.*?)\n``` # capture the language and the pattern
+    """
+    ).findall,
+) -> Iterator[Tuple[LabelName, str, str]]:
+    return find_all(text)
 
-
-find_all_features = regex.compile(
-    r"""(?msx)
-            ^\#{4}\s+Feature\s+`(.+?)` # capture the label's pattern
-            .+?\#{5}\s+Specification # ensure the next pattern is in the Specification section
-            .+?```(.*?)\n+(.*?)\n``` # capture the language and the pattern
-        """
-).findall
 
 DEFAULT_SPEC_PATH = Path(dirname(__file__)) / "resources" / "spec.md"
 
@@ -56,7 +58,7 @@ class ProgramParser:
             if language == "re":
                 self.features[label_name] = regex.compile(f"(?mx){pattern}")
             elif language == "sql":
-                self.queries[label_name] = pattern
+                self.queries[label_name] = Query(pattern)
         self.db = DB()
 
     def __call__(self, program: Program, yield_failed_matches: bool = False) -> Labels:

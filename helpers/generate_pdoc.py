@@ -18,7 +18,7 @@ def generate_html():
 
     base_path = Path("docs")
 
-    for directory_name in ("resources", "cli"):
+    for directory_name in ("cli",):
         path = base_path / directory_name
         if path.is_dir():
             shutil.rmtree(path)

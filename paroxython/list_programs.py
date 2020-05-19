@@ -3,16 +3,16 @@ from typing import Iterator
 
 import regex  # type: ignore
 
-from .preprocess_source import cleanup_factory, centrifugate_hints, collect_hints, remove_hints
+from .preprocess_source import Cleanup, centrifugate_hints, collect_hints, remove_hints
 from .user_types import Program, ProgramName, Programs, Source
 
 
 def list_programs(directory: Path, cleanup_strategy: str = "full", *args, **kwargs) -> Programs:
     """List recursively all Python `Programs` of a given directory."""
     result: Programs = []
-    cleanup = cleanup_factory(cleanup_strategy)
+    cleanup = Cleanup(cleanup_strategy)
     for program_path in generate_program_paths(directory, *args, **kwargs):
-        source = cleanup(Source(program_path.read_text()))
+        source = cleanup.run(Source(program_path.read_text()))
         relative_path = program_path.relative_to(directory)
         result.append(get_program(source, relative_path))
     return result

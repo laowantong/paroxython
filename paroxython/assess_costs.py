@@ -19,9 +19,7 @@ from functools import lru_cache
 
 from .user_types import TaxonName, TaxonNameSet, ProgramTaxonNames, AssessedPrograms, Literal
 
-__pdoc__ = {
-    "LearningCostAssessor.__call__": True,
-}
+__pdoc__ = {"LearningCostAssessor.__call__": True}
 
 
 @lru_cache(maxsize=None)  # NB: memoization needed for consistency with mypy's typing

@@ -3,7 +3,7 @@ USAGE:
     paroxython collect [options] DIRECTORY
 
 OPTIONS:
-    -c --cleanup=STR    Transformation to be applied to the source-code
+    -c --cleanup=STR    Transformation to be applied to the source code
                         before processing. [default: full]
                         Currently available:
                         • full: remove all blank lines, docstrings and

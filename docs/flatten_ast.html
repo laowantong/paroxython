@@ -29,21 +29,20 @@
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L0-L50" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L0-L49" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">from typed_ast import ast3 as ast
-from typing import Any
+from typing import Any, Callable
 
 import regex  # type: ignore
 
-__pdoc__ = {
-    &#34;remove_context&#34;: False,
-}
 
-remove_context = regex.compile(r&#34;, ctx=.+?\(\)&#34;).sub
-
-
-def flatten_ast(node: Any, prefix=&#34;&#34;, path=&#34;&#34;) -&gt; str:
+def flatten_ast(
+    node: Any,
+    prefix: str = &#34;&#34;,
+    path: str = &#34;&#34;,
+    remove_context: Callable = regex.compile(r&#34;, ctx=.+?\(\)&#34;).sub,
+) -&gt; str:
     if isinstance(node, ast.AST):
         acc = [f&#34;{prefix}/_type={type(node).__name__}\n&#34;]
         if isinstance(node, ast.expr):
@@ -92,16 +91,21 @@ if __name__ == &#34;__main__&#34;:
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
 <dt id="paroxython.flatten_ast.flatten_ast"><code class="name flex">
-<span>def <span class="ident">flatten_ast</span></span>(<span>node: Any, prefix='', path='') ‑> str</span>
+<span>def <span class="ident">flatten_ast</span></span>(<span>node: Any, prefix: str = '', path: str = '', remove_context: Callable = &lt;built-in method sub of _regex.Pattern object&gt;) ‑> str</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L13-L45" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L7-L44" class="git-link">Browse GitHub</a>
 </summary>
-<pre><code class="python">def flatten_ast(node: Any, prefix=&#34;&#34;, path=&#34;&#34;) -&gt; str:
+<pre><code class="python">def flatten_ast(
+    node: Any,
+    prefix: str = &#34;&#34;,
+    path: str = &#34;&#34;,
+    remove_context: Callable = regex.compile(r&#34;, ctx=.+?\(\)&#34;).sub,
+) -&gt; str:
     if isinstance(node, ast.AST):
         acc = [f&#34;{prefix}/_type={type(node).__name__}\n&#34;]
         if isinstance(node, ast.expr):
@@ -144,7 +148,7 @@ if __name__ == &#34;__main__&#34;:
 <nav id="sidebar">
 <header>
 <a class="homelink" rel="home" title="Paroxython Home" href="index.html">
-<img src="logo.png" alt="Paroxython logo">
+<img src="resources/logo.png" alt="Paroxython logo">
 </a>
 </header>
 <div class="gcse-search" style="height: 70px"

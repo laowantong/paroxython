@@ -98,7 +98,7 @@ class JsonDatabase(TypedDict):
 class Command(TypedDict):
     operation: Literal["impart", "exclude", "include"]
     programs_or_taxons: Literal["programs", "taxons"]
-    source: Union[str, List[str]] # not source-code, but source of the data
+    source: Union[str, List[str]] # not source code, but source of the data
     filtered_out: ProgramNames # to be populated by the execution of the command
 
 class TaxonTriple(NamedTuple): #  cf. https://en.wikipedia.org/wiki/Semantic_triple
