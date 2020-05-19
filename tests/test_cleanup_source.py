@@ -177,6 +177,7 @@ def test_full_cleaning(title, original, expected):
     print(title)
     result = cleanup(original)
     print(result)
+    print(r"\s*".join(regex.split(r"\b", HINT_COMMENT.replace(" ", ""))) + r"\s*")
     assert result == expected
 
 
