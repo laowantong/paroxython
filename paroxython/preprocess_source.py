@@ -15,7 +15,6 @@ import regex  # type: ignore
 from .user_types import LabelName, LabelsSpans, Source, Span
 
 HINT_COMMENT = "# paroxython:"
-FUZZY_HINT_COMMENT = r"\s*".join(regex.split(r"\b", regex.sub(r"\s+", "", HINT_COMMENT))) + r"\s*"
 
 
 class Cleanup:
@@ -131,7 +130,7 @@ class Cleanup:
     def normalize_paroxython_comments(
         source: str,
         subn: Callable = regex.compile(
-            r"\s*".join(regex.split(r"\b", HINT_COMMENT.replace(" ", ""))) + r"\s*",
+            r"\s*".join(regex.split(r"(\w+)", HINT_COMMENT.replace(" ", ""))) + r"\s*",
             regex.IGNORECASE,
         ).subn,
     ) -> str:
