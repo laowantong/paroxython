@@ -5,9 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.8.1" />
 <title>paroxython.preprocess_source API documentation</title>
-<meta name="description" content=".. tip::
-Several functions declare a compiled and bound regex pattern as an optional argument. It is not
-meant to be provided by the caller …" />
+<meta name="description" content="Bring together everything relative to the pre-processing of a given source code …" />
 <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
 <link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
@@ -28,16 +26,51 @@ meant to be provided by the caller …" />
 <h1 class="title">Module <code>paroxython.preprocess_source</code></h1>
 </header>
 <section id="section-intro">
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>Several functions declare a compiled and bound regex pattern as an optional argument. It is not
-meant to be provided by the caller. Its default value will be used systematically, with the
+<p>Bring together everything relative to the pre-processing of a given source code.</p>
+<h1 id="cleaning">Cleaning</h1>
+<p>A useful, albeit not essential, step is to cleanse the code of all its algorithmically irrelevant
+features (blank lines, comments, docstrings, etc.). Lots of examples are provided in the <code><a title="paroxython.preprocess_source.Cleanup" href="#paroxython.preprocess_source.Cleanup">Cleanup</a></code>
+class documentation. Be aware that a certain category of comment is preserved at this stage, the
+so-called “manual hints”, presented in the next paragraph.</p>
+<h1 id="manual-hints">Manual hints</h1>
+<p>On a given source code, the labelling algorithm may sometimes produce false positives or false
+negatives. Moreover, the semantics of some features may be subjective (e.g., <code>topic:fun</code>) or beyond
+the capabilities of Paroxython (e.g., deciding the relevance of the <code>short_circuit</code> property of a
+boolean condition). In any case, the user has the possibility to manually label certain lines of
+their source code to hint either the presence or absence of a given feature.</p>
+<p>The addition of a label is hinted by a comment starting with <code># paroxython:</code>.</p>
+<pre><code class="python">&gt;&gt;&gt; if i &lt; len(s) and s[i] == x: # paroxython: +short_circuit:And
+</code></pre>
+<p>Note that <code>short_circuit:And</code> is a label (of the kind defined, but not necessarily included in
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md">spec.md</a>), and
+not a taxon. It will be later converted into one or more taxons (according to the mapping of
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/taxonomy.tsv">taxonomy.tsv</a>).</p>
+<p>To delete a label, prefix it with a minus symbol. For instance, the following hint requalifies an
+addition into a concatenation:</p>
+<pre><code class="python">&gt;&gt;&gt; print(a + b) # paroxython: -addition_operator +concatenation_operator
+</code></pre>
+<p>If a label should span over several lines, it is hinted on the first line with a <code>&hellip;</code> suffix
+(meaning “to be continued”), and on the last line with a <code>&hellip;</code> prefix (meaning“continuing”). In the
+following example, a label <code>super_loop</code> is manually substituted to the calculated label <code>loop:for</code>:</p>
+<pre><code class="python">&gt;&gt;&gt; for x in s: # paroxython: +super_loop... -loop:for...
+...     foo()
+...     bar() # paroxython: ...super_loop ...loop:for
+</code></pre>
+<p>Of course, the opening and the closing of a spanning label must be correctly balanced.</p>
+<p>Some tolerances exist for the syntax:</p>
+<ul>
+<li><code>+</code> can be omitted.</li>
+<li><code>&hellip;</code> (three dots) can be written <code>…</code> (HORIZONTAL ELLIPSIS, U+2026).</li>
+<li><code># paroxython:</code> is neither space- nor case-sensitive.</li>
+</ul>
+<h1 id="implementation-note">Implementation note</h1>
+<p>Several functions or methods declare a compiled and bound regex pattern as an optional argument. It
+is not meant to be provided by the caller. Its default value will be used systematically, with the
 benefit of being evaluated only once.</p>
-</div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L0-L297" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L0-L362" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">from collections import defaultdict
 from token import DEDENT, INDENT, NEWLINE, STRING
@@ -96,8 +129,7 @@ class Cleanup:
 
     @staticmethod
     def suppress_name_equals_main_stuff(
-        source: str,
-        sub: Callable = regex.compile(r&#34;(?ms)^if +__name__ *== *.__main__. *:.+&#34;).sub
+        source: str, sub: Callable = regex.compile(r&#34;(?ms)^if +__name__ *== *.__main__. *:.+&#34;).sub
     ) -&gt; str:
         return sub(&#34;&#34;, source)
 
@@ -105,7 +137,7 @@ class Cleanup:
     def normalize_paroxython_comments(
         source: str,
         subn: Callable = regex.compile(
-            r&#34;\s*&#34;.join(regex.split(r&#34;\b&#34;, regex.sub(r&#34;\s+&#34;, &#34;&#34;, HINT_COMMENT))) + r&#34;\s*&#34;,
+            r&#34;\s*&#34;.join(regex.split(r&#34;(\w+)&#34;, HINT_COMMENT.replace(&#34; &#34;, &#34;&#34;))) + r&#34;\s*&#34;,
             regex.IGNORECASE,
         ).subn,
     ) -&gt; str:
@@ -120,6 +152,28 @@ class Cleanup:
         source: str, sub: Callable = regex.compile(r&#34;(?m)^( *)pass\n\1(?!\s)&#34;).sub,
     ) -&gt; str:
         return sub(r&#34;\1&#34;, source)
+
+
+def centrifugate_hints(
+    source: Source, match_isolated_hints: Callable = regex.compile(fr&#34;\s*{HINT_COMMENT} (.+)&#34;).match
+) -&gt; Source:
+    lines = []
+    hints: Set[str] = set()
+    for line in source.split(&#34;\n&#34;):
+        m = match_isolated_hints(line)
+        if m:
+            hints.update(m[1].split())
+        else:
+            lines.append(line)
+    if not hints:
+        return source
+    for i in (0, -1):
+        if f&#34; {HINT_COMMENT}&#34; not in lines[i]:
+            lines[i] += f&#34; {HINT_COMMENT}&#34;
+    for hint in sorted(hints):
+        lines[0] += f&#34; {hint}...&#34;
+        lines[-1] += f&#34; ...{hint}&#34;
+    return Source(&#34;\n&#34;.join(lines))
 
 
 class HintBuffer:
@@ -148,11 +202,9 @@ class HintBuffer:
         return {k: sorted(v) for (k, v) in self.result.items()}
 
 
-def match_label(hint: str, match: Callable = regex.compile(r&#34;^(\W*)([\w:]+)(\W*)$&#34;).match):
-    return match(hint)
-
-
-def collect_hints(source: Source) -&gt; Tuple[LabelsSpans, LabelsSpans]:
+def collect_hints(
+    source: Source, match_label: Callable = regex.compile(r&#34;^(\W*)([\w:]+)(\W*)$&#34;).match
+) -&gt; Tuple[LabelsSpans, LabelsSpans]:
     addition = HintBuffer(&#34;addition&#34;)
     deletion = HintBuffer(&#34;deletion&#34;)
     for (i, line) in enumerate(source.split(&#34;\n&#34;), 1):
@@ -184,32 +236,6 @@ def collect_hints(source: Source) -&gt; Tuple[LabelsSpans, LabelsSpans]:
     return (addition.get_result(), deletion.get_result())
 
 
-def match_isolated_hints(
-    line: str, match: Callable = regex.compile(fr&#34;\s*{HINT_COMMENT} (.+)&#34;).match
-) -&gt; str:
-    return match(line)
-
-
-def centrifugate_hints(source: Source) -&gt; Source:
-    lines = []
-    hints: Set[str] = set()
-    for line in source.split(&#34;\n&#34;):
-        m = match_isolated_hints(line)
-        if m:
-            hints.update(m[1].split())
-        else:
-            lines.append(line)
-    if not hints:
-        return source
-    for i in (0, -1):
-        if f&#34; {HINT_COMMENT}&#34; not in lines[i]:
-            lines[i] += f&#34; {HINT_COMMENT}&#34;
-    for hint in sorted(hints):
-        lines[0] += f&#34; {hint}...&#34;
-        lines[-1] += f&#34; ...{hint}&#34;
-    return Source(&#34;\n&#34;.join(lines))
-
-
 def remove_hints(
     source: Source, sub_hints: Callable = regex.compile(fr&#34;\s*{HINT_COMMENT} .*&#34;).sub,
 ) -&gt; Source:
@@ -234,31 +260,109 @@ if __name__ == &#34;__main__&#34;:
 <section>
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
-<dt id="paroxython.preprocess_source.match_label"><code class="name flex">
-<span>def <span class="ident">match_label</span></span>(<span>hint: str, match: Callable = &lt;built-in method match of _regex.Pattern object&gt;)</span>
+<dt id="paroxython.preprocess_source.centrifugate_hints"><code class="name flex">
+<span>def <span class="ident">centrifugate_hints</span></span>(<span>source: Source, match_isolated_hints: Callable = &lt;built-in method match of _regex.Pattern object&gt;) ‑> Source</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Transform the isolated hints into all-encompassing hints.</p>
+<p>When a hint is isolated on its own line, it is considered to extend to the entire program.
+These hints are moved to both ends of the source (centrifugated), and made open on the first
+line and close on the last line.</p>
+<h2 id="examples">Examples</h2>
+<ul>
+<li>Some isolated hints (<code>hint_3</code> and <code>hint_5</code> are centrifugated).
+<div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_centrifugate_hints.py?slice=10:17&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_centrifugate_hints.py?slice=18:23&footer=0"></script></div></div></li>
+<li>Some trailing isolated hints (<code>hint_5</code> and <code>hint_6</code> are centrifugated).
+<div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_centrifugate_hints.py?slice=26:33&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_centrifugate_hints.py?slice=34:39&footer=0"></script></div></div></li>
+<li>No isolated hints (no centrifugation of the existing hints).
+<div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_centrifugate_hints.py?slice=42:47&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_centrifugate_hints.py?slice=48:53&footer=0"></script></div></div></li>
+</ul>
+<p>All examples above automatically extracted from
+<a href="https://github.com/laowantong/paroxython/blob/master/tests/test_centrifugate_hints.py">test_centrifugate_hints.py</a>.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L191-L192" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L201-L237" class="git-link">Browse GitHub</a>
 </summary>
-<pre><code class="python">def match_label(hint: str, match: Callable = regex.compile(r&#34;^(\W*)([\w:]+)(\W*)$&#34;).match):
-    return match(hint)</code></pre>
+<pre><code class="python">def centrifugate_hints(
+    source: Source, match_isolated_hints: Callable = regex.compile(fr&#34;\s*{HINT_COMMENT} (.+)&#34;).match
+) -&gt; Source:
+    lines = []
+    hints: Set[str] = set()
+    for line in source.split(&#34;\n&#34;):
+        m = match_isolated_hints(line)
+        if m:
+            hints.update(m[1].split())
+        else:
+            lines.append(line)
+    if not hints:
+        return source
+    for i in (0, -1):
+        if f&#34; {HINT_COMMENT}&#34; not in lines[i]:
+            lines[i] += f&#34; {HINT_COMMENT}&#34;
+    for hint in sorted(hints):
+        lines[0] += f&#34; {hint}...&#34;
+        lines[-1] += f&#34; ...{hint}&#34;
+    return Source(&#34;\n&#34;.join(lines))</code></pre>
 </details>
 </dd>
 <dt id="paroxython.preprocess_source.collect_hints"><code class="name flex">
-<span>def <span class="ident">collect_hints</span></span>(<span>source: Source) ‑> Tuple[Dict[LabelName, List[Span]], Dict[LabelName, List[Span]]]</span>
+<span>def <span class="ident">collect_hints</span></span>(<span>source: Source, match_label: Callable = &lt;built-in method match of _regex.Pattern object&gt;) ‑> Tuple[Dict[LabelName, List[Span]], Dict[LabelName, List[Span]]]</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Schedule for addition or deletion the hints appearing in the comments.</p></div>
+<div class="desc"><p>Schedule for addition or deletion the hints appearing in the comments.</p>
+<p>On this stage, the source code is scanned for manual hints. They are set aside in two separate
+containers (depending on whether the user intends to add or remove them). They will later be
+used to tweak the labelling results obtained by static analysis.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>source</code></strong> :&ensp;<code>Source</code></dt>
+<dd>[description]</dd>
+<dt><strong><code>match_label</code></strong> :&ensp;<code>Callable</code>, optional</dt>
+<dd>A function matching a label composed of alphanumeric
+characters and colons.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>ValueError</code></dt>
+<dd>Raised in various cases of malformed input.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>Tuple[LabelsSpans, LabelsSpans]</code></dt>
+<dd>A couple of dictionaries associating labels with lists of
+spans. The first [resp. second] member collects the labels that the source code author
+has manually added [resp. suppressed].</dd>
+</dl>
+<h2 id="example">Example</h2>
+<pre><code class="python">&gt;&gt;&gt; source = '''
+...     1   foo() # paroxython: +hint_1...
+...     2   bar() # paroxython: hint_2 hint_3 -hint_4
+...     3   biz() # paroxython: ...hint_1
+...     4   buz() # paroxython: -hint_2
+... '''
+&gt;&gt;&gt; collect_hints(source)
+(
+    {
+        &quot;hint_1&quot;: [Span(start=1, end=3)],
+        &quot;hint_2&quot;: [Span(start=2, end=2)],
+        &quot;hint_3&quot;: [Span(start=2, end=2)],
+    },
+    {
+        &quot;hint_2&quot;: [Span(start=4, end=4)],
+        &quot;hint_4&quot;: [Span(start=2, end=2)],
+    },
+)
+</code></pre>
+<p>```</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L195-L225" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L274-L345" class="git-link">Browse GitHub</a>
 </summary>
-<pre><code class="python">def collect_hints(source: Source) -&gt; Tuple[LabelsSpans, LabelsSpans]:
+<pre><code class="python">def collect_hints(
+    source: Source, match_label: Callable = regex.compile(r&#34;^(\W*)([\w:]+)(\W*)$&#34;).match
+) -&gt; Tuple[LabelsSpans, LabelsSpans]:
     addition = HintBuffer(&#34;addition&#34;)
     deletion = HintBuffer(&#34;deletion&#34;)
     for (i, line) in enumerate(source.split(&#34;\n&#34;), 1):
@@ -290,95 +394,15 @@ if __name__ == &#34;__main__&#34;:
     return (addition.get_result(), deletion.get_result())</code></pre>
 </details>
 </dd>
-<dt id="paroxython.preprocess_source.match_isolated_hints"><code class="name flex">
-<span>def <span class="ident">match_isolated_hints</span></span>(<span>line: str, match: Callable = &lt;built-in method match of _regex.Pattern object&gt;) ‑> str</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Match all hints isolated on their own lines.</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L228-L232" class="git-link">Browse GitHub</a>
-</summary>
-<pre><code class="python">def match_isolated_hints(
-    line: str, match: Callable = regex.compile(fr&#34;\s*{HINT_COMMENT} (.+)&#34;).match
-) -&gt; str:
-    return match(line)</code></pre>
-</details>
-</dd>
-<dt id="paroxython.preprocess_source.centrifugate_hints"><code class="name flex">
-<span>def <span class="ident">centrifugate_hints</span></span>(<span>source: Source) ‑> Source</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Transform the isolated hints into all-encompassing hints.</p>
-<p>When a hint is isolated on its own line, it is considered to extend to the entire program.
-These hints are moved to both ends of the source, and made open on the first line and close on
-the last line.</p>
-<h2 id="args">Args</h2>
-<dl>
-<dt><strong><code>source</code></strong> :&ensp;<code>Source</code></dt>
-<dd>The source to be centrifugated.</dd>
-</dl>
-<h2 id="returns">Returns</h2>
-<dl>
-<dt><code>Source</code></dt>
-<dd>A centrifugated source.</dd>
-</dl>
-<h2 id="examples">Examples</h2>
-<ul>
-<li>Some isolated hints (<code>hint_3</code> and <code>hint_5</code> are centrifugated).
-<div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_centrifugate_hints.py?slice=10:17&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_centrifugate_hints.py?slice=18:23&footer=0"></script></div></div></li>
-<li>Some trailing isolated hints (<code>hint_5</code> and <code>hint_6</code> are centrifugated).
-<div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_centrifugate_hints.py?slice=26:33&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_centrifugate_hints.py?slice=34:39&footer=0"></script></div></div></li>
-<li>No isolated hints (no centrifugation of the existing hints).
-<div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_centrifugate_hints.py?slice=42:47&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_centrifugate_hints.py?slice=48:53&footer=0"></script></div></div></li>
-</ul></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L235-L272" class="git-link">Browse GitHub</a>
-</summary>
-<pre><code class="python">def centrifugate_hints(source: Source) -&gt; Source:
-    lines = []
-    hints: Set[str] = set()
-    for line in source.split(&#34;\n&#34;):
-        m = match_isolated_hints(line)
-        if m:
-            hints.update(m[1].split())
-        else:
-            lines.append(line)
-    if not hints:
-        return source
-    for i in (0, -1):
-        if f&#34; {HINT_COMMENT}&#34; not in lines[i]:
-            lines[i] += f&#34; {HINT_COMMENT}&#34;
-    for hint in sorted(hints):
-        lines[0] += f&#34; {hint}...&#34;
-        lines[-1] += f&#34; ...{hint}&#34;
-    return Source(&#34;\n&#34;.join(lines))</code></pre>
-</details>
-</dd>
 <dt id="paroxython.preprocess_source.remove_hints"><code class="name flex">
 <span>def <span class="ident">remove_hints</span></span>(<span>source: Source, sub_hints: Callable = &lt;built-in method sub of _regex.Pattern object&gt;) ‑> Source</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Remove all Paroxython hints from the given source.</p>
-<h2 id="args">Args</h2>
-<dl>
-<dt><strong><code>source</code></strong> :&ensp;<code>Source</code></dt>
-<dd>The source, already processed for its hints.</dd>
-<dt><strong><code>replace_hints</code></strong> :&ensp;<code>Callable</code>, optional</dt>
-<dd>A function replacing all hints.</dd>
-</dl>
-<h2 id="returns">Returns</h2>
-<dl>
-<dt><code>Source</code></dt>
-<dd>The source deprived from its hints.</dd>
-</dl></div>
+<div class="desc"><p>Once they are collected, remove all Paroxython hints from the given source.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L275-L287" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L348-L352" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def remove_hints(
     source: Source, sub_hints: Callable = regex.compile(fr&#34;\s*{HINT_COMMENT} .*&#34;).sub,
@@ -412,7 +436,7 @@ the last line.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L20-L155" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L67-L198" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">class Cleanup:
     def __init__(self, cleanup_strategy: str):
@@ -459,8 +483,7 @@ the last line.</p>
 
     @staticmethod
     def suppress_name_equals_main_stuff(
-        source: str,
-        sub: Callable = regex.compile(r&#34;(?ms)^if +__name__ *== *.__main__. *:.+&#34;).sub
+        source: str, sub: Callable = regex.compile(r&#34;(?ms)^if +__name__ *== *.__main__. *:.+&#34;).sub
     ) -&gt; str:
         return sub(&#34;&#34;, source)
 
@@ -468,7 +491,7 @@ the last line.</p>
     def normalize_paroxython_comments(
         source: str,
         subn: Callable = regex.compile(
-            r&#34;\s*&#34;.join(regex.split(r&#34;\b&#34;, regex.sub(r&#34;\s+&#34;, &#34;&#34;, HINT_COMMENT))) + r&#34;\s*&#34;,
+            r&#34;\s*&#34;.join(regex.split(r&#34;(\w+)&#34;, HINT_COMMENT.replace(&#34; &#34;, &#34;&#34;))) + r&#34;\s*&#34;,
             regex.IGNORECASE,
         ).subn,
     ) -&gt; str:
@@ -501,16 +524,6 @@ process).</li>
 <li>Suppress empty or blank lines.</li>
 <li>Suppress useless <code>pass</code> statements.</li>
 </ol>
-<h2 id="args">Args</h2>
-<dl>
-<dt><strong><code>source</code></strong> :&ensp;<code>Source</code></dt>
-<dd>The source to be cleaned.</dd>
-</dl>
-<h2 id="returns">Returns</h2>
-<dl>
-<dt><code>Source</code></dt>
-<dd>The cleaned source.</dd>
-</dl>
 <h2 id="examples">Examples</h2>
 <ul>
 <li>Empty or blank lines are suppressed.
@@ -538,6 +551,8 @@ process).</li>
 <li><code>if __name__ == "__main__":</code> part is suppressed.
 <div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=161:164&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=165:166&footer=0"></script></div></div></li>
 </ul>
+<p>All examples above automatically extracted from
+<a href="https://github.com/laowantong/paroxython/blob/master/tests/test_cleanup_source.py">test_cleanup_source.py</a>.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Useless pass statements are preserved when they are not followed by a line with a same
@@ -546,7 +561,7 @@ indentation level.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L37-L115" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L84-L159" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">@staticmethod
 def full_cleaning(source: Source) -&gt; Source:
@@ -590,7 +605,7 @@ def full_cleaning(source: Source) -&gt; Source:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L117-L120" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L161-L164" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">@staticmethod
 def suppress_first_comments(source: str, sub=regex.compile(r&#34;\A(#.*\n)*&#34;).sub) -&gt; str:
@@ -605,12 +620,11 @@ def suppress_first_comments(source: str, sub=regex.compile(r&#34;\A(#.*\n)*&#34;
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L122-L128" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L166-L171" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">@staticmethod
 def suppress_name_equals_main_stuff(
-    source: str,
-    sub: Callable = regex.compile(r&#34;(?ms)^if +__name__ *== *.__main__. *:.+&#34;).sub
+    source: str, sub: Callable = regex.compile(r&#34;(?ms)^if +__name__ *== *.__main__. *:.+&#34;).sub
 ) -&gt; str:
     return sub(&#34;&#34;, source)</code></pre>
 </details>
@@ -625,13 +639,13 @@ pattern will be <code>r"(?i)#\s*paroxython\s*:\s*"</code>.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L130-L143" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L173-L186" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">@staticmethod
 def normalize_paroxython_comments(
     source: str,
     subn: Callable = regex.compile(
-        r&#34;\s*&#34;.join(regex.split(r&#34;\b&#34;, regex.sub(r&#34;\s+&#34;, &#34;&#34;, HINT_COMMENT))) + r&#34;\s*&#34;,
+        r&#34;\s*&#34;.join(regex.split(r&#34;(\w+)&#34;, HINT_COMMENT.replace(&#34; &#34;, &#34;&#34;))) + r&#34;\s*&#34;,
         regex.IGNORECASE,
     ).subn,
 ) -&gt; str:
@@ -646,7 +660,7 @@ def normalize_paroxython_comments(
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L145-L148" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L188-L191" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">@staticmethod
 def suppress_blank_lines(source: str, sub: Callable = regex.compile(r&#34;\s*\n&#34;).sub) -&gt; str:
@@ -661,7 +675,7 @@ def suppress_blank_lines(source: str, sub: Callable = regex.compile(r&#34;\s*\n&
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L150-L155" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L193-L198" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">@staticmethod
 def suppress_useless_pass_statements(
@@ -677,11 +691,11 @@ def suppress_useless_pass_statements(
 <span>(</span><span>description: str)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Layer on the operations of appending, opening and closing an hint.</p></div>
+<div class="desc"><p>Layer on the operations of appending, opening and closing a hint, used by <code><a title="paroxython.preprocess_source.collect_hints" href="#paroxython.preprocess_source.collect_hints">collect_hints()</a></code>.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L158-L188" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L240-L271" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">class HintBuffer:
     def __init__(self, description: str) -&gt; None:
@@ -718,7 +732,7 @@ def suppress_useless_pass_statements(
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L166-L168" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L248-L250" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def append_hint(self, label_name: LabelName, line_number: int) -&gt; None:
     self.result[label_name].append(Span(line_number, line_number))</code></pre>
@@ -728,11 +742,11 @@ def suppress_useless_pass_statements(
 <span>def <span class="ident">open_hint</span></span>(<span>self, label_name: LabelName, line_number: int) ‑> NoneType</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Store the line number associated with a given opening hint.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L170-L171" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L252-L254" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def open_hint(self, label_name: LabelName, line_number: int) -&gt; None:
     self.stack[label_name].append(line_number)</code></pre>
@@ -746,7 +760,7 @@ def suppress_useless_pass_statements(
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L173-L175" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L256-L258" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def get_champion(self, label_name: LabelName) -&gt; List[Tuple[int, &#34;HintBuffer&#34;]]:
     return [(self.stack[label_name][-1], self)] if self.stack[label_name] else []</code></pre>
@@ -760,7 +774,7 @@ def suppress_useless_pass_statements(
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L177-L179" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L260-L262" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def close_hint(self, label_name: LabelName, line_number: int) -&gt; None:
     self.result[label_name].append(Span(self.stack[label_name].pop(), line_number))</code></pre>
@@ -774,7 +788,7 @@ def suppress_useless_pass_statements(
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L181-L184" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L264-L267" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def ensure_stack_is_empty(self) -&gt; None:
     if any(self.stack.values()):
@@ -789,7 +803,7 @@ def suppress_useless_pass_statements(
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L186-L188" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L269-L271" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def get_result(self) -&gt; LabelsSpans:
     return {k: sorted(v) for (k, v) in self.result.items()}</code></pre>
@@ -812,7 +826,11 @@ data-gaCategoryParameter="paroxython.preprocess_source">
 </div>
 <h1>Index</h1>
 <div class="toc">
-<ul></ul>
+<ul>
+<li><a href="#cleaning">Cleaning</a></li>
+<li><a href="#manual-hints">Manual hints</a></li>
+<li><a href="#implementation-note">Implementation note</a></li>
+</ul>
 </div>
 <ul id="index">
 <li><h3>Super-module</h3>
@@ -822,10 +840,8 @@ data-gaCategoryParameter="paroxython.preprocess_source">
 </li>
 <li><h3><a href="#header-functions">Functions</a></h3>
 <ul class="">
-<li><code><a title="paroxython.preprocess_source.match_label" href="#paroxython.preprocess_source.match_label">match_label</a></code></li>
-<li><code><a title="paroxython.preprocess_source.collect_hints" href="#paroxython.preprocess_source.collect_hints">collect_hints</a></code></li>
-<li><code><a title="paroxython.preprocess_source.match_isolated_hints" href="#paroxython.preprocess_source.match_isolated_hints">match_isolated_hints</a></code></li>
 <li><code><a title="paroxython.preprocess_source.centrifugate_hints" href="#paroxython.preprocess_source.centrifugate_hints">centrifugate_hints</a></code></li>
+<li><code><a title="paroxython.preprocess_source.collect_hints" href="#paroxython.preprocess_source.collect_hints">collect_hints</a></code></li>
 <li><code><a title="paroxython.preprocess_source.remove_hints" href="#paroxython.preprocess_source.remove_hints">remove_hints</a></code></li>
 </ul>
 </li>

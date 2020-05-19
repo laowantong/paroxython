@@ -1,8 +1,55 @@
 """
-.. tip::
-    Several functions declare a compiled and bound regex pattern as an optional argument. It is not
-    meant to be provided by the caller. Its default value will be used systematically, with the
-    benefit of being evaluated only once.
+Bring together everything relative to the pre-processing of a given source code.
+
+# Cleaning
+
+A useful, albeit not essential, step is to cleanse the code of all its algorithmically irrelevant
+features (blank lines, comments, docstrings, etc.). Lots of examples are provided in the `Cleanup`
+class documentation. Be aware that a certain category of comment is preserved at this stage, the
+so-called “manual hints”, presented in the next paragraph.
+
+# Manual hints
+
+On a given source code, the labelling algorithm may sometimes produce false positives or false
+negatives. Moreover, the semantics of some features may be subjective (e.g., `topic:fun`) or beyond
+the capabilities of Paroxython (e.g., deciding the relevance of the `short_circuit` property of a
+boolean condition). In any case, the user has the possibility to manually label certain lines of
+their source code to hint either the presence or absence of a given feature.
+
+The addition of a label is hinted by a comment starting with `# paroxython:`.
+
+>>> if i < len(s) and s[i] == x: # paroxython: +short_circuit:And
+
+Note that `short_circuit:And` is a label (of the kind defined, but not necessarily included in
+[spec.md](https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md)), and
+not a taxon. It will be later converted into one or more taxons (according to the mapping of
+[taxonomy.tsv](https://github.com/laowantong/paroxython/blob/master/paroxython/resources/taxonomy.tsv)).
+
+To delete a label, prefix it with a minus symbol. For instance, the following hint requalifies an
+addition into a concatenation:
+
+>>> print(a + b) # paroxython: -addition_operator +concatenation_operator
+
+If a label should span over several lines, it is hinted on the first line with a `...` suffix
+(meaning “to be continued”), and on the last line with a `...` prefix (meaning“continuing”). In the
+following example, a label `super_loop` is manually substituted to the calculated label `loop:for`:
+
+>>> for x in s: # paroxython: +super_loop... -loop:for...
+...     foo()
+...     bar() # paroxython: ...super_loop ...loop:for
+
+Of course, the opening and the closing of a spanning label must be correctly balanced.
+
+Some tolerances exist for the syntax:
+
+- `+` can be omitted.
+- `...` (three dots) can be written `…` (HORIZONTAL ELLIPSIS, U+2026).
+- `# paroxython:` is neither space- nor case-sensitive.
+
+# Implementation note
+Several functions or methods declare a compiled and bound regex pattern as an optional argument. It
+is not meant to be provided by the caller. Its default value will be used systematically, with the
+benefit of being evaluated only once.
 """
 
 from collections import defaultdict
@@ -47,12 +94,6 @@ class Cleanup:
         6. Suppress empty or blank lines.
         7. Suppress useless `pass` statements.
 
-        Args:
-            source (Source): The source to be cleaned.
-
-        Returns:
-            Source: The cleaned source.
-
         Examples:
             - Empty or blank lines are suppressed.
             <div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=13:18&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=19:21&footer=0"></script></div></div>
@@ -78,6 +119,9 @@ class Cleanup:
             <div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=145:151&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=152:158&footer=0"></script></div></div>
             - `if __name__ == "__main__":` part is suppressed.
             <div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=161:164&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=165:166&footer=0"></script></div></div>
+
+            All examples above automatically extracted from
+            [test_cleanup_source.py](https://github.com/laowantong/paroxython/blob/master/tests/test_cleanup_source.py).
 
         .. warning::
             Useless pass statements are preserved when they are not followed by a line with a same
@@ -154,8 +198,47 @@ class Cleanup:
         return sub(r"\1", source)
 
 
+def centrifugate_hints(
+    source: Source, match_isolated_hints: Callable = regex.compile(fr"\s*{HINT_COMMENT} (.+)").match
+) -> Source:
+    """Transform the isolated hints into all-encompassing hints.
+
+    When a hint is isolated on its own line, it is considered to extend to the entire program.
+    These hints are moved to both ends of the source (centrifugated), and made open on the first
+    line and close on the last line.
+
+    Examples:
+        - Some isolated hints (`hint_3` and `hint_5` are centrifugated).
+        <div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_centrifugate_hints.py?slice=10:17&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_centrifugate_hints.py?slice=18:23&footer=0"></script></div></div>
+        - Some trailing isolated hints (`hint_5` and `hint_6` are centrifugated).
+        <div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_centrifugate_hints.py?slice=26:33&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_centrifugate_hints.py?slice=34:39&footer=0"></script></div></div>
+        - No isolated hints (no centrifugation of the existing hints).
+        <div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_centrifugate_hints.py?slice=42:47&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_centrifugate_hints.py?slice=48:53&footer=0"></script></div></div>
+
+        All examples above automatically extracted from
+        [test_centrifugate_hints.py](https://github.com/laowantong/paroxython/blob/master/tests/test_centrifugate_hints.py).
+    """
+    lines = []
+    hints: Set[str] = set()
+    for line in source.split("\n"):
+        m = match_isolated_hints(line)
+        if m:
+            hints.update(m[1].split())
+        else:
+            lines.append(line)
+    if not hints:
+        return source
+    for i in (0, -1):
+        if f" {HINT_COMMENT}" not in lines[i]:
+            lines[i] += f" {HINT_COMMENT}"
+    for hint in sorted(hints):
+        lines[0] += f" {hint}..."
+        lines[-1] += f" ...{hint}"
+    return Source("\n".join(lines))
+
+
 class HintBuffer:
-    """Layer on the operations of appending, opening and closing an hint."""
+    """Layer on the operations of appending, opening and closing a hint, used by `collect_hints`."""
 
     def __init__(self, description: str) -> None:
         self.result: LabelsSpans = defaultdict(list)
@@ -167,6 +250,7 @@ class HintBuffer:
         self.result[label_name].append(Span(line_number, line_number))
 
     def open_hint(self, label_name: LabelName, line_number: int) -> None:
+        """Store the line number associated with a given opening hint."""
         self.stack[label_name].append(line_number)
 
     def get_champion(self, label_name: LabelName) -> List[Tuple[int, "HintBuffer"]]:
@@ -187,12 +271,49 @@ class HintBuffer:
         return {k: sorted(v) for (k, v) in self.result.items()}
 
 
-def match_label(hint: str, match: Callable = regex.compile(r"^(\W*)([\w:]+)(\W*)$").match):
-    return match(hint)
+def collect_hints(
+    source: Source, match_label: Callable = regex.compile(r"^(\W*)([\w:]+)(\W*)$").match
+) -> Tuple[LabelsSpans, LabelsSpans]:
+    """Schedule for addition or deletion the hints appearing in the comments.
 
+    On this stage, the source code is scanned for manual hints. They are set aside in two separate
+    containers (depending on whether the user intends to add or remove them). They will later be
+    used to tweak the labelling results obtained by static analysis.
 
-def collect_hints(source: Source) -> Tuple[LabelsSpans, LabelsSpans]:
-    """Schedule for addition or deletion the hints appearing in the comments."""
+    Args:
+        source (Source): [description]
+        match_label (Callable, optional): A function matching a label composed of alphanumeric
+            characters and colons.
+
+    Raises:
+        ValueError: Raised in various cases of malformed input.
+
+    Returns:
+        Tuple[LabelsSpans, LabelsSpans]: A couple of dictionaries associating labels with lists of
+            spans. The first [resp. second] member collects the labels that the source code author
+            has manually added [resp. suppressed].
+
+    Example:
+        >>> source = '''
+        ...     1   foo() # paroxython: +hint_1...
+        ...     2   bar() # paroxython: hint_2 hint_3 -hint_4
+        ...     3   biz() # paroxython: ...hint_1
+        ...     4   buz() # paroxython: -hint_2
+        ... '''
+        >>> collect_hints(source)
+        (
+            {
+                "hint_1": [Span(start=1, end=3)],
+                "hint_2": [Span(start=2, end=2)],
+                "hint_3": [Span(start=2, end=2)],
+            },
+            {
+                "hint_2": [Span(start=4, end=4)],
+                "hint_4": [Span(start=2, end=2)],
+            },
+        )
+        ```
+    """
     addition = HintBuffer("addition")
     deletion = HintBuffer("deletion")
     for (i, line) in enumerate(source.split("\n"), 1):
@@ -224,65 +345,10 @@ def collect_hints(source: Source) -> Tuple[LabelsSpans, LabelsSpans]:
     return (addition.get_result(), deletion.get_result())
 
 
-def match_isolated_hints(
-    line: str, match: Callable = regex.compile(fr"\s*{HINT_COMMENT} (.+)").match
-) -> str:
-    """Match all hints isolated on their own lines."""
-    return match(line)
-
-
-def centrifugate_hints(source: Source) -> Source:
-    """Transform the isolated hints into all-encompassing hints.
-
-    When a hint is isolated on its own line, it is considered to extend to the entire program.
-    These hints are moved to both ends of the source, and made open on the first line and close on
-    the last line.
-
-    Args:
-        source (Source): The source to be centrifugated.
-
-    Returns:
-        Source: A centrifugated source.
-
-    Examples:
-        - Some isolated hints (`hint_3` and `hint_5` are centrifugated).
-        <div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_centrifugate_hints.py?slice=10:17&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_centrifugate_hints.py?slice=18:23&footer=0"></script></div></div>
-        - Some trailing isolated hints (`hint_5` and `hint_6` are centrifugated).
-        <div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_centrifugate_hints.py?slice=26:33&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_centrifugate_hints.py?slice=34:39&footer=0"></script></div></div>
-        - No isolated hints (no centrifugation of the existing hints).
-        <div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_centrifugate_hints.py?slice=42:47&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_centrifugate_hints.py?slice=48:53&footer=0"></script></div></div>
-    """
-    lines = []
-    hints: Set[str] = set()
-    for line in source.split("\n"):
-        m = match_isolated_hints(line)
-        if m:
-            hints.update(m[1].split())
-        else:
-            lines.append(line)
-    if not hints:
-        return source
-    for i in (0, -1):
-        if f" {HINT_COMMENT}" not in lines[i]:
-            lines[i] += f" {HINT_COMMENT}"
-    for hint in sorted(hints):
-        lines[0] += f" {hint}..."
-        lines[-1] += f" ...{hint}"
-    return Source("\n".join(lines))
-
-
 def remove_hints(
     source: Source, sub_hints: Callable = regex.compile(fr"\s*{HINT_COMMENT} .*").sub,
 ) -> Source:
-    """Remove all Paroxython hints from the given source.
-
-    Args:
-        source (Source): The source, already processed for its hints.
-        replace_hints (Callable, optional): A function replacing all hints.
-
-    Returns:
-        Source: The source deprived from its hints.
-    """
+    """Once they are collected, remove all Paroxython hints from the given source."""
     return Source(sub_hints("", source).strip())
 
 

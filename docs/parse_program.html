@@ -29,7 +29,7 @@
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L0-L145" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L0-L146" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">from collections import defaultdict
 from os.path import dirname
@@ -45,6 +45,7 @@ from .flatten_ast import flatten_ast
 from .user_types import Label, LabelName, Labels, LabelsSpans, Program, Query, Source, Span
 
 __pdoc__ = {&#34;ProgramParser.__call__&#34;: True}
+
 
 def simplify_negative_literals(
     flat_ast: str,
@@ -177,7 +178,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L16-L26" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L17-L27" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def simplify_negative_literals(
     flat_ast: str,
@@ -195,7 +196,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L29-L39" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L30-L40" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def find_all_features(
     text: str,
@@ -220,7 +221,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L45-L124" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L46-L125" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">class ProgramParser:
     def __init__(self, spec_path: Path = DEFAULT_SPEC_PATH) -&gt; None:
@@ -306,7 +307,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L63-L124" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L64-L125" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def __call__(self, program: Program, yield_failed_matches: bool = False) -&gt; Labels:
     def try_to_bind(label_name: LabelName, span: Span) -&gt; None:

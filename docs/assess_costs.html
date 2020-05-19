@@ -42,7 +42,7 @@ two zero-based indexes <code>start</code> (inclusive) and <code>stop</code> (exc
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/assess_costs.py#L0-L126" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/assess_costs.py#L0-L120" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">from functools import lru_cache
 
@@ -163,7 +163,7 @@ introduced so far.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/assess_costs.py#L56-L127" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/assess_costs.py#L56-L121" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">class LearningCostAssessor:
     def __init__(self, imparted_knowledge: TaxonNameSet) -&gt; None:
@@ -244,16 +244,6 @@ introduced so far.</dd>
 <div class="desc"><p>Evaluate the learning cost of a given taxon.</p>
 <p>The bounds of the not-yet-imparted suffix of the taxon are extracted and passed to the cost
 assessment function.</p>
-<h2 id="args">Args</h2>
-<dl>
-<dt><strong><code>taxon</code></strong> :&ensp;<code>TaxonName</code></dt>
-<dd>The taxon to be costed.</dd>
-</dl>
-<h2 id="returns">Returns</h2>
-<dl>
-<dt><code>float</code></dt>
-<dd>The learning cost of the taxon.</dd>
-</dl>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The learning cost of a taxon prefixed by <code>"metadata/"</code> is assumed to be zero.</p>
@@ -261,7 +251,7 @@ assessment function.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/assess_costs.py#L87-L112" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/assess_costs.py#L87-L106" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">@lru_cache(maxsize=None)
 def taxon_cost(self, taxon: TaxonName) -&gt; float:
@@ -296,7 +286,7 @@ of taxon names.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/assess_costs.py#L114-L127" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/assess_costs.py#L108-L121" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def __call__(self, programs: ProgramTaxonNames) -&gt; AssessedPrograms:
     return sorted(

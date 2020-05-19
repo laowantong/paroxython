@@ -178,8 +178,7 @@ def prepared(tags):
     """Prepare the spans for serialization.
 
     Args:
-        tags (Labels): The tags to be serialized.
-        tags (Taxons): The taxons to be serialized.
+        tags (Labels|Taxons): The tags or taxons to be serialized.
 
     Returns:
         LabelPoorSpans|TaxonsPoorSpans:

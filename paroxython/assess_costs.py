@@ -91,12 +91,6 @@ class LearningCostAssessor:
         The bounds of the not-yet-imparted suffix of the taxon are extracted and passed to the cost
         assessment function.
 
-        Args:
-            taxon (TaxonName): The taxon to be costed.
-
-        Returns:
-            float: The learning cost of the taxon.
-
         .. note::
           The learning cost of a taxon prefixed by `"metadata/"` is assumed to be zero.
         """

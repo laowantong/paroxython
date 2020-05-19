@@ -82,9 +82,8 @@ def test_update_docstring():
     result = "\n        ".join(result)
     path = Path("paroxython/preprocess_source.py")
     source = path.read_text()
-    source = regex.sub(
-        r'(?sm)^(def centrifugate_hints.+?Examples:\n).+?^(\s+""")',
-        fr"\1        {result}\n\2",
-        source,
+    (source, n) = regex.subn(
+        r"(?sm)^(def centrifugate_hints.+?Examples:\n).+?^ *\n", fr"\1        {result}\n\n", source,
     )
+    assert n == 1
     path.write_text(source)

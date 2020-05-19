@@ -29,7 +29,7 @@
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L0-L284" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L0-L283" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">import json
 import sqlite3
@@ -303,12 +303,7 @@ if __name__ == &#34;__main__&#34;:
 <dd>
 <div class="desc"><p>Prepare the spans for serialization.</p>
 <h2 id="args">Args</h2>
-<dl>
-<dt><strong><code>tags</code></strong> :&ensp;<code>Labels</code></dt>
-<dd>The tags to be serialized.</dd>
-<dt><strong><code>tags</code></strong> :&ensp;<code>Taxons</code></dt>
-<dd>The taxons to be serialized.</dd>
-</dl>
+<p>tags (Labels|Taxons): The tags or taxons to be serialized.</p>
 <h2 id="returns">Returns</h2>
 <dl>
 <dt><code>LabelPoorSpans|TaxonsPoorSpans:</code></dt>
@@ -325,7 +320,7 @@ See <a href="https://docs.python.org/3/library/typing.html#typing.overload">the 
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L177-L198" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L177-L197" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def prepared(tags):
     result: Union[LabelsPoorSpans, TaxonsPoorSpans] = {}
@@ -342,7 +337,7 @@ See <a href="https://docs.python.org/3/library/typing.html#typing.overload">the 
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L202-L208" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L201-L207" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def collect_labels(programs: Programs) -&gt; LabelInfos:
     result: LabelInfos = defaultdict(list)
@@ -360,7 +355,7 @@ See <a href="https://docs.python.org/3/library/typing.html#typing.overload">the 
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L211-L215" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L210-L214" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def map_labels_on_taxons(programs: Programs, taxonomy: Taxonomy) -&gt; None:
     print(f&#34;Mapping taxonomy on {len(programs)} programs.&#34;)
@@ -376,7 +371,7 @@ See <a href="https://docs.python.org/3/library/typing.html#typing.overload">the 
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L218-L224" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L217-L223" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def collect_taxons(programs: Programs) -&gt; TaxonInfos:
     result: TaxonInfos = defaultdict(list)
@@ -394,7 +389,7 @@ See <a href="https://docs.python.org/3/library/typing.html#typing.overload">the 
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L227-L235" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L226-L234" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def compute_direct_importations(programs: Programs) -&gt; ProgramToPrograms:
     importations: Dict = {program.name: set() for program in programs}
@@ -414,7 +409,7 @@ See <a href="https://docs.python.org/3/library/typing.html#typing.overload">the 
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L238-L251" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L237-L250" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def complete_and_collect_importations(importations: ProgramToPrograms) -&gt; ProgramToPrograms:
     @lru_cache(maxsize=None)
@@ -438,7 +433,7 @@ See <a href="https://docs.python.org/3/library/typing.html#typing.overload">the 
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L254-L260" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L253-L259" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def compute_exportations(programs: Programs, importations: ProgramToPrograms) -&gt; ProgramToPrograms:
     exportations: Dict = {program.name: set() for program in programs}
@@ -456,7 +451,7 @@ See <a href="https://docs.python.org/3/library/typing.html#typing.overload">the 
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L263-L268" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L262-L267" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def collect_exportations(exportations: ProgramToPrograms) -&gt; ProgramToPrograms:
     result: ProgramToPrograms = {}
