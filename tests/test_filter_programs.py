@@ -41,7 +41,7 @@ def test_taxons_of_programs():
 
 def test_preprocess_taxons():
     dbf = ProgramFilter(db)
-    names = ["X/S/M.*", "O(?!/C).*", "Y/E", "non_matching_pattern"]
+    names = ["X/S/M", "O(?!/C)", "Y/E$", "non_matching_pattern"]
     taxons = dbf.preprocess_taxons(names)
     print(sorted(taxons))
     assert taxons == [
@@ -58,9 +58,9 @@ def test_preprocess_taxons():
         "Y/E",
     ]
     names = [
-        ("O/J", "never mind", "Y/E"),
-        (r"X/S/M/L/R/D.*", "whatever", r"O/N.*"),
-        (r"X/S/M/L/R.*", "who cares", r"O/N"),
+        ("O/J$", "never mind", "Y/E$"),
+        (r"X/S/M/L/R/D", "whatever", r"O/N"),
+        (r"X/S/M/L/R", "who cares", r"O/N$"),
     ]
     taxons = dbf.preprocess_taxons(names)
     print(sorted(taxons))

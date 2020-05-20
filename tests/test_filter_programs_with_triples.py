@@ -80,7 +80,7 @@ def test_include_taxons():
     # "test/equality" is inside "subroutine/function" in is_even.py and inside
     # "subroutine/procedure" in collatz_print.py. Both will be included.
     dbf = ProgramFilter(db)
-    taxons = dbf.preprocess_taxons([("test/equality", "inside", "subroutine/.*")])
+    taxons = dbf.preprocess_taxons([("test/equality$", "inside", "subroutine")])
     print(taxons)
     assert taxons == [
         ("test/equality", "inside", "subroutine/argument/arg"),

@@ -131,10 +131,10 @@ class ProgramFilter:
     def match_against_existing_programs(self, pattern: str) -> ProgramNameSet:
         """Enumerate all the existing programs matching the given pattern."""
         result: ProgramNameSet = set()
-        fullmatch = regex.compile(pattern).fullmatch
+        match = regex.compile(fr"{pattern}\b").match
         no_match = True
         for program_name in self.db_programs:
-            if fullmatch(program_name):
+            if match(program_name):
                 result.add(program_name)
                 no_match = False
         if no_match:
@@ -189,10 +189,10 @@ class ProgramFilter:
     def match_against_existing_taxons(self, pattern: str) -> TaxonNameSet:
         """Enumerate all the existing taxons matching the given pattern."""
         result: TaxonNameSet = set()
-        fullmatch = regex.compile(pattern).fullmatch
+        match = regex.compile(fr"{pattern}\b").match
         no_match = True
         for taxon_name in self.db_taxons:
-            if fullmatch(taxon_name):
+            if match(taxon_name):
                 result.add(taxon_name)
                 no_match = False
         if no_match:
@@ -215,26 +215,18 @@ class ProgramFilter:
                     taxon = TaxonName(taxon[1:].strip())
                 else:
                     negate = ""
-                positive_taxons = set()
-                if taxon in self.db_taxons:
-                    # If it is an existing name, keep it.
-                    positive_taxons.add(taxon)
-                else:
-                    # Otherwise, process it as a pattern, and add all its matches.
-                    positive_taxons.update(self.match_against_existing_taxons(taxon))
-                result.update(TaxonName(negate + s) for s in positive_taxons)
+                # Process it systymatically as a pattern, and add all its matches.
+                result.update(
+                    TaxonName(negate + s) for s in self.match_against_existing_taxons(taxon)
+                )
             else:
                 # The taxon is a triple.
                 (name_1, predicate, name_2) = taxon
-                if name_1 in self.db_taxons and name_2 in self.db_taxons:
-                    # If both names are existing, keep the triple.
+                # Process them systematically as patterns, and add the product of their matches.
+                taxons_1 = self.match_against_existing_taxons(name_1)
+                taxons_2 = self.match_against_existing_taxons(name_2)
+                for (name_1, name_2) in product(taxons_1, taxons_2):
                     result.add(TaxonTriple(name_1, predicate, name_2))
-                else:
-                    # Otherwise, process them as patterns, and add the product of their matches.
-                    taxons_1 = self.match_against_existing_taxons(name_1)
-                    taxons_2 = self.match_against_existing_taxons(name_2)
-                    for (name_1, name_2) in product(taxons_1, taxons_2):
-                        result.add(TaxonTriple(name_1, predicate, name_2))
         return sorted(result, key=str)
 
     def impart_taxon_name(self, taxon: TaxonName) -> None:
