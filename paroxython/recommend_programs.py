@@ -66,6 +66,7 @@ interesting enough, or that could get you kicked out of your college, etc.
 ...             "alpha_go.py",
 ...             "hello_world_of_pain.py",
 ...             "gob_s_program.py",
+...         ],
 ...     },
 ... ]
 
@@ -82,6 +83,7 @@ recursivity (`subroutine/recursive`), dictionary (`type/non_sequence/dictionary`
 ...         "source": [
 ...             "subroutine/recursive",
 ...             "type/non_sequence",
+...         ],
 ...     },
 ... ]
 
@@ -103,6 +105,7 @@ the same time, but at least one. Any other program will be rejected.
 ...         "source": [
 ...             "flow/conditional",
 ...             "operator/ternary",
+...         ],
 ...     },
 ... ]
 
@@ -112,13 +115,15 @@ Basically, you provide Paroxython with a list of programs already studied in cla
 new programs that implement only old concepts. This requires the exclusion of all programs
 featuring at least one concept that has not been seen in any of the programs already seen. It may
 sound a little complicated, because it is. But don't panic. Remember that Paroxython always
-presents its recommendations by increasing cost. All you have to do is ask it to list all the
+orders its recommendations by increasing cost. All you have to do is ask it to list all the
 programs that have not been introduced. The programs you are interested in will appear at the top
 of the results, under the zero-learning cost section. Moreover, inside each section, they will be
 sorted by increasing size ([SLOC](https://en.wikipedia.org/wiki/Source_lines_of_code)), which can
 be a reasonable proxy for their difficulty. But in the end, you, the teacher, are the judge.
 Paroxython will not select the exercises for your exam, let alone correct them. It is just there to
-remind you of some possibilities that might not have occurred to you at the right time.
+remind you of some possibilities that might not have occurred to you at the right time, and to
+ensure that your exam contains only algorithmic features that you introduced in class, which might
+save you some awkward conversations with your students later on.
 
 Since this is the last filter in our tutorial, let's summarize what we've seen by chaining several
 commands together:

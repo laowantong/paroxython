@@ -86,6 +86,7 @@ interesting enough, or that could get you kicked out of your college, etc.</p>
 ...             &quot;alpha_go.py&quot;,
 ...             &quot;hello_world_of_pain.py&quot;,
 ...             &quot;gob_s_program.py&quot;,
+...         ],
 ...     },
 ... ]
 </code></pre>
@@ -100,6 +101,7 @@ recursivity (<code>subroutine/recursive</code>), dictionary (<code>type/non_sequ
 ...         &quot;source&quot;: [
 ...             &quot;subroutine/recursive&quot;,
 ...             &quot;type/non_sequence&quot;,
+...         ],
 ...     },
 ... ]
 </code></pre>
@@ -120,6 +122,7 @@ the same time, but at least one. Any other program will be rejected.</p>
 ...         &quot;source&quot;: [
 ...             &quot;flow/conditional&quot;,
 ...             &quot;operator/ternary&quot;,
+...         ],
 ...     },
 ... ]
 </code></pre>
@@ -128,13 +131,15 @@ the same time, but at least one. Any other program will be rejected.</p>
 new programs that implement only old concepts. This requires the exclusion of all programs
 featuring at least one concept that has not been seen in any of the programs already seen. It may
 sound a little complicated, because it is. But don't panic. Remember that Paroxython always
-presents its recommendations by increasing cost. All you have to do is ask it to list all the
+orders its recommendations by increasing cost. All you have to do is ask it to list all the
 programs that have not been introduced. The programs you are interested in will appear at the top
 of the results, under the zero-learning cost section. Moreover, inside each section, they will be
 sorted by increasing size (<a href="https://en.wikipedia.org/wiki/Source_lines_of_code">SLOC</a>), which can
 be a reasonable proxy for their difficulty. But in the end, you, the teacher, are the judge.
 Paroxython will not select the exercises for your exam, let alone correct them. It is just there to
-remind you of some possibilities that might not have occurred to you at the right time.</p>
+remind you of some possibilities that might not have occurred to you at the right time, and to
+ensure that your exam contains only algorithmic features that you introduced in class, which might
+save you some awkward conversations with your students later on.</p>
 <p>Since this is the last filter in our tutorial, let's summarize what we've seen by chaining several
 commands together:</p>
 <ol>
@@ -183,7 +188,7 @@ expressions, semantic triples, span algebra) in the next section (coming soon).<
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L0-L357" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L0-L362" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">import subprocess
 from collections import defaultdict
@@ -391,7 +396,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L188-L343" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L193-L348" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">class Recommendations:
     def __init__(
@@ -556,7 +561,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L214-L251" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L219-L256" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def run_pipeline(self) -&gt; None:
     current = set(self.programs)
@@ -604,7 +609,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L253-L343" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L258-L348" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def get_markdown(
     self,
