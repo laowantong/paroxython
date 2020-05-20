@@ -97,9 +97,12 @@ class ProgramFilter:
         return TaxonTriplet(name_1=name_1, predicate=bounded_predicate, name_2=name_2)
 
     def programs_of_taxon(self, taxon: TaxonNameOrTriple) -> ProgramNameSet:
-        """Dispatch computation to the appropriate method, depending of the actual taxon type."""
+        """Dispatch computation to the appropriate method, depending on the actual taxon type."""
         if isinstance(taxon, str):
-            return set(self.db_taxons.get(TaxonName(taxon), []))
+            if taxon.startswith("!"):
+                return set(self.db_programs) - set(self.db_taxons.get(TaxonName(taxon[1:]), []))
+            else:
+                return set(self.db_taxons.get(TaxonName(taxon), []))
         else:
             return self.programs_of_taxon_triplet(self.triple_to_triplet(*taxon))
 
@@ -205,25 +208,34 @@ class ProgramFilter:
         for taxon in taxons:
             if isinstance(taxon, str):
                 # The taxon is a name or a pattern.
+                negate = "!"
+                if taxon.startswith("not "):
+                    taxon = TaxonName(taxon[4:].strip())
+                elif taxon.startswith("!"):
+                    taxon = TaxonName(taxon[1:].strip())
+                else:
+                    negate = ""
+                positive_taxons = set()
                 if taxon in self.db_taxons:
                     # If it is an existing name, keep it.
-                    result.add(taxon)
+                    positive_taxons.add(taxon)
                 else:
                     # Otherwise, process it as a pattern, and add all its matches.
-                    result.update(self.match_against_existing_taxons(taxon))
+                    positive_taxons.update(self.match_against_existing_taxons(taxon))
+                result.update(TaxonName(negate + s) for s in positive_taxons)
             else:
                 # The taxon is a triple.
                 (name_1, predicate, name_2) = taxon
                 if name_1 in self.db_taxons and name_2 in self.db_taxons:
                     # If both names are existing, keep the triple.
-                    result.add(taxon)
+                    result.add(TaxonTriple(name_1, predicate, name_2))
                 else:
                     # Otherwise, process them as patterns, and add the product of their matches.
                     taxons_1 = self.match_against_existing_taxons(name_1)
                     taxons_2 = self.match_against_existing_taxons(name_2)
                     for (name_1, name_2) in product(taxons_1, taxons_2):
                         result.add(TaxonTriple(name_1, predicate, name_2))
-        return sorted(result)
+        return sorted(result, key=str)
 
     def impart_taxon_name(self, taxon: TaxonName) -> None:
         """Enrich the imparted knowledge with all the prefixes of the given taxon."""

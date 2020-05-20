@@ -137,7 +137,7 @@ def test_impart_taxons():
     }
 
 
-def test_negate():
+def test_negate_triple():
     # "io/standard/print" and "flow/loop/exit/late" are both featured by collatz_print.py and
     # fizzbuzz.py. In collatz_print.py the print statements are both inside and outside the loop,
     # but in fizzbuzz.py, all print statement are inside the loop. Consequently, the unique print
@@ -165,6 +165,26 @@ def test_negate():
     dbf.exclude_taxons({("io/standard/print", "!(y1 ≤ x1 ≤ x2 ≤ y1)", "flow/loop/exit/late")})
     print(set(dbf.selected_programs.keys()))
     assert set(dbf.selected_programs.keys()) == {"assignment.py"}
+
+
+def test_negate_taxon():
+    # Keep all programs which feature a subroutine definition (i.e., collatz_print.py and
+    # is_even.py) or no assignment (i.e., fizzbuzz.py and is_even.py). The result is the union of
+    # these sets.
+    dbf = ProgramFilter(db)
+    dbf.include_taxons(
+        ["subroutine/function", "subroutine/procedure", "!variable/assignment/single"]
+    )
+    print(set(dbf.selected_programs.keys()))
+    assert set(dbf.selected_programs.keys()) == {"collatz_print.py", "is_even.py", "fizzbuzz.py"}
+    # Negating a taxon dont't make previously excluded programs reenter in the result
+    dbf = ProgramFilter(db)
+    dbf.exclude_programs({"is_even.py"})
+    dbf.include_taxons(
+        ["subroutine/function", "subroutine/procedure", "!variable/assignment/single"]
+    )
+    print(set(dbf.selected_programs.keys()))
+    assert set(dbf.selected_programs.keys()) == {"collatz_print.py", "fizzbuzz.py"}
 
 
 if __name__ == "__main__":
