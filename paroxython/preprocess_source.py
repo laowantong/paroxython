@@ -130,10 +130,11 @@ class Cleanup:
         result = []
         previous_token = INDENT
         (previous_end_row, previous_end_col) = (-1, 0)
-        source = Cleanup.suppress_first_comments(source)
-        source = Cleanup.suppress_name_equals_main_stuff(source)
-        source = source.replace("\t", "    ")
-        lines = iter(source.split("\n"))
+        text = str(source)
+        text = Cleanup.suppress_first_comments(text)
+        text = Cleanup.suppress_name_equals_main_stuff(text)
+        text = text.replace("\t", "    ")
+        lines = iter(text.split("\n"))
         for token_info in generate_tokens(lambda: next(lines) + "\n"):
             (token, string, (start_row, start_col), (end_row, end_col), _) = token_info
             if start_row > previous_end_row:
