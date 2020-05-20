@@ -98,6 +98,20 @@ def test_include_taxons():
     print(set(dbf.selected_programs.keys()))
     assert set(dbf.selected_programs.keys()) == set()
 
+    # "type/number/integer/literal" appears twice on the same line in fizzbuzz.py and
+    # collatz_print.py
+    dbf = ProgramFilter(db)
+    dbf.include_taxons([("is", "type/number/integer/literal", "type/number/integer/literal")])
+    print(set(dbf.selected_programs.keys()))
+    assert set(dbf.selected_programs.keys()) == {"fizzbuzz.py", "collatz_print.py"}
+
+    # "call/function/builtin/print" may appear several times in the same program, but never
+    # on the same line.
+    dbf = ProgramFilter(db)
+    dbf.include_taxons([("is", "call/function/builtin/print", "call/function/builtin/print")])
+    print(set(dbf.selected_programs.keys()))
+    assert set(dbf.selected_programs.keys()) == set()
+
 
 def test_impart_taxons():
 

@@ -1,5 +1,5 @@
 import sys
-from itertools import product
+from itertools import product, permutations
 from typing import Set
 
 import regex  # type: ignore
@@ -99,7 +99,11 @@ class ProgramFilter:
         for program in programs_featuring_1 & programs_featuring_2:
             spans_1 = self.db_programs[program]["taxons"][taxon.name_1]
             spans_2 = self.db_programs[program]["taxons"][taxon.name_2]
-            for (span_1, span_2) in product(spans_1, spans_2):
+            if taxon.name_1 == taxon.name_2:
+                couples = permutations(spans_1, 2)  # = product(spans_1, spans_2) w/o diagonal
+            else:
+                couples = product(spans_1, spans_2)
+            for (span_1, span_2) in couples:
                 if predicate(span_1, span_2):
                     programs.add(program)
                     break
