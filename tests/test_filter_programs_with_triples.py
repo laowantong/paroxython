@@ -137,5 +137,35 @@ def test_impart_taxons():
     }
 
 
+def test_negate():
+    # "io/standard/print" and "flow/loop/exit/late" are both featured by collatz_print.py and
+    # fizzbuzz.py. In collatz_print.py the print statements are both inside and outside the loop,
+    # but in fizzbuzz.py, all print statement are inside the loop. Consequently, the unique print
+    # statement not inside a loop is featured by collatz_print.py only. Note that assignment.py
+    # and is_even.py are not included in the result, since they don't feature (at least directly)
+    # the two taxons.
+    dbf = ProgramFilter(db)
+    dbf.include_taxons({("io/standard/print", "not inside", "flow/loop/exit/late")})
+    print(set(dbf.selected_programs.keys()))
+    assert set(dbf.selected_programs.keys()) == {"collatz_print.py"}
+    # For the excluding filter, as usual, the importations are taken into account. collatz_print.py
+    # is excluded for featuring a print statement inside a loop, and fizzbuzz.py and is_even.py are
+    # excluded for importing collatz_print.py. The only remaining program is assignment.py.
+    dbf = ProgramFilter(db)
+    dbf.exclude_taxons({("io/standard/print", "not inside", "flow/loop/exit/late")})
+    print(set(dbf.selected_programs.keys()))
+    assert set(dbf.selected_programs.keys()) == {"assignment.py"}
+    # The not operator can appear anywhere, even if it's not syntactically correct.
+    dbf = ProgramFilter(db)
+    dbf.exclude_taxons({("io/standard/print", "inside not", "flow/loop/exit/late")})
+    print(set(dbf.selected_programs.keys()))
+    assert set(dbf.selected_programs.keys()) == {"assignment.py"}
+    # It can be replaced by a "!" symbol, and of course the other normalization rules still apply.
+    dbf = ProgramFilter(db)
+    dbf.exclude_taxons({("io/standard/print", "!(y1 ≤ x1 ≤ x2 ≤ y1)", "flow/loop/exit/late")})
+    print(set(dbf.selected_programs.keys()))
+    assert set(dbf.selected_programs.keys()) == {"assignment.py"}
+
+
 if __name__ == "__main__":
     pytest.main(["-qq", "tests/test_filter_programs_with_triples.py"])

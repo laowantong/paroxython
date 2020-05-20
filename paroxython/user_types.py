@@ -1,5 +1,5 @@
 from typing import Counter as Bag
-from typing import Dict, List, NamedTuple, NewType, Set, Tuple, Union
+from typing import Dict, List, NamedTuple, NewType, Set, Tuple, Union, Callable
 
 from typing_extensions import TypedDict, Literal  # Python 3.8: import directly from typing
 
@@ -108,6 +108,11 @@ class TaxonTriple(NamedTuple): #  cf. https://en.wikipedia.org/wiki/Semantic_tri
 
 TaxonNameOrTriple = Union[TaxonName, TaxonTriple]
 TaxonNamesOrTriples = List[TaxonNameOrTriple]
+
+class TaxonTriplet(NamedTuple): #  warning: a triplet is a triple with a bounded predicate
+    name_1: TaxonName
+    predicate: Callable[[PoorSpan, PoorSpan], bool]
+    name_2: TaxonName
 
 
 # Recommendations

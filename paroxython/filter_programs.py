@@ -19,6 +19,7 @@ from .user_types import (
     TaxonNameSet,
     TaxonNamesOrTriples,
     TaxonTriple,
+    TaxonTriplet,
 )
 
 
@@ -64,8 +65,17 @@ class ProgramFilter:
         return programs
 
     @staticmethod
-    def normalized_triple(name_1: TaxonName, predicate: str, name_2: TaxonName) -> TaxonTriple:
-        """Ensure that the given predicate is correct or can be salvaged, and return a triple."""
+    def triple_to_triplet(name_1: TaxonName, predicate: str, name_2: TaxonName) -> TaxonTriplet:
+        """Ensure that the given predicate is correct or can be salvaged, and return a triplet."""
+        negated = True
+        if predicate.startswith("!"):
+            predicate = predicate[1:]
+        elif regex.search(r"\bnot ", predicate):
+            predicate = predicate.replace("not ", "")
+        elif regex.search(r" not\b", predicate):
+            predicate = predicate.replace(" not", "")
+        else:
+            negated = False
         s = predicate.lower().strip()
         if s not in compare_spans:
             # If there is only one x (resp. y), expand it into x≤x (resp. y≤y)
@@ -79,22 +89,26 @@ class ProgramFilter:
                 print(f"Warning: predicate '{predicate}' normalized into '{s}'.", file=sys.stderr)
             if s not in compare_spans:  # pragma: no cover
                 raise ValueError(f"Malformed predicate '{predicate}' in the pipeline.")
-        return TaxonTriple(name_1=name_1, predicate=s, name_2=name_2)
+        prebounded_predicate = compare_spans[s]
+        if negated:
+            bounded_predicate = lambda x, y: not (prebounded_predicate(x, y))
+        else:
+            bounded_predicate = prebounded_predicate
+        return TaxonTriplet(name_1=name_1, predicate=bounded_predicate, name_2=name_2)
 
     def programs_of_taxon(self, taxon: TaxonNameOrTriple) -> ProgramNameSet:
         """Dispatch computation to the appropriate method, depending of the actual taxon type."""
         if isinstance(taxon, str):
             return set(self.db_taxons.get(TaxonName(taxon), []))
         else:
-            return self.programs_of_taxon_triple(self.normalized_triple(*taxon))
+            return self.programs_of_taxon_triplet(self.triple_to_triplet(*taxon))
 
-    def programs_of_taxon_triple(self, taxon: TaxonTriple) -> ProgramNameSet:
+    def programs_of_taxon_triplet(self, taxon: TaxonTriplet) -> ProgramNameSet:
         """Return the programs where two given taxons satisfy a given predicate."""
         # Compute the set of programs which feature both taxons
         programs_featuring_1 = set(self.db_taxons.get(taxon.name_1, []))
         programs_featuring_2 = set(self.db_taxons.get(taxon.name_2, []))
         # Keep only the subset of taxons which satisfy the predicate
-        predicate = compare_spans[taxon.predicate]
         programs: ProgramNameSet = set()
         for program in programs_featuring_1 & programs_featuring_2:
             spans_1 = self.db_programs[program]["taxons"][taxon.name_1]
@@ -104,7 +118,7 @@ class ProgramFilter:
             else:
                 couples = product(spans_1, spans_2)
             for (span_1, span_2) in couples:
-                if predicate(span_1, span_2):
+                if taxon.predicate(span_1, span_2):
                     programs.add(program)
                     break
         return programs
