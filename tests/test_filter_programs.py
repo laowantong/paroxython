@@ -58,21 +58,21 @@ def test_preprocess_taxons():
         "Y/E",
     ]
     names = [
-        ("never mind", "O/J", "Y/E"),
-        ("whatever", r"X/S/M/L/R/D.*", r"O/N.*"),
-        ("who cares", r"X/S/M/L/R.*", r"O/N"),
+        ("O/J", "never mind", "Y/E"),
+        (r"X/S/M/L/R/D.*", "whatever", r"O/N.*"),
+        (r"X/S/M/L/R.*", "who cares", r"O/N"),
     ]
     taxons = dbf.preprocess_taxons(names)
     print(sorted(taxons))
     assert taxons == [
-        ("never mind", "O/J", "Y/E"),
-        ("whatever", "X/S/M/L/R/D", "O/N"),
-        ("whatever", "X/S/M/L/R/D", "O/N/P"),
-        ("whatever", "X/S/M/L/R/D/A", "O/N"),
-        ("whatever", "X/S/M/L/R/D/A", "O/N/P"),
-        ("who cares", "X/S/M/L/R", "O/N"),
-        ("who cares", "X/S/M/L/R/D", "O/N"),
-        ("who cares", "X/S/M/L/R/D/A", "O/N"),
+        ("O/J", "never mind", "Y/E"),
+        ("X/S/M/L/R", "who cares", "O/N"),
+        ("X/S/M/L/R/D", "whatever", "O/N"),
+        ("X/S/M/L/R/D", "whatever", "O/N/P"),
+        ("X/S/M/L/R/D", "who cares", "O/N"),
+        ("X/S/M/L/R/D/A", "whatever", "O/N"),
+        ("X/S/M/L/R/D/A", "whatever", "O/N/P"),
+        ("X/S/M/L/R/D/A", "who cares", "O/N"),
     ]
 
 

@@ -16,7 +16,7 @@ def test_exclude_taxons():
     # collatz_print.py, it appears after a taxon "io/standard/print". Consequently, it should be excluded
     # from the results, along with the programs which import it: fizzbuzz.py and is_even.py.
     dbf = ProgramFilter(db)
-    dbf.exclude_taxons({("after", "variable/assignment/single", "io/standard/print")})
+    dbf.exclude_taxons({("variable/assignment/single", "after", "io/standard/print")})
     print(set(dbf.selected_programs.keys()))
     assert set(dbf.selected_programs.keys()) == {"assignment.py"}
 
@@ -25,20 +25,20 @@ def test_exclude_taxons():
     # excluding this taxon keeps only assignment.py.
     dbf = ProgramFilter(db)
     dbf.exclude_taxons(
-        {("equals", "operator/arithmetic/addition", "operator/arithmetic/multiplication")}
+        {("operator/arithmetic/addition", "equals", "operator/arithmetic/multiplication")}
     )
     print(set(dbf.selected_programs.keys()))
     assert set(dbf.selected_programs.keys()) == {"assignment.py"}
 
     # "test/equality" is inside "subroutine/function" in is_even.py, which is not imported anywhere.
     dbf = ProgramFilter(db)
-    dbf.exclude_taxons({("inside", "test/equality", "subroutine/function")})
+    dbf.exclude_taxons({("test/equality", "inside", "subroutine/function")})
     print(set(dbf.selected_programs.keys()))
     assert set(dbf.selected_programs.keys()) == {"collatz_print.py", "assignment.py", "fizzbuzz.py"}
 
     # "call/function/builtin/range" is not inside "flow/conditional" anywhere.
     dbf = ProgramFilter(db)
-    dbf.exclude_taxons([("inside", "call/function/builtin/range", "flow/conditional")])
+    dbf.exclude_taxons([("call/function/builtin/range", "inside", "flow/conditional")])
     print(set(dbf.selected_programs.keys()))
     assert set(dbf.selected_programs.keys()) == {
         "is_even.py",
@@ -54,39 +54,39 @@ def test_include_taxons():
     # collatz_print.py, it appears after a taxon "io/standard/print". Consequently, it should be included
     # in the results, but not the programs which import it: fizzbuzz.py and is_even.py.
     dbf = ProgramFilter(db)
-    dbf.include_taxons({("after", "variable/assignment/single", "io/standard/print")})
+    dbf.include_taxons({("variable/assignment/single", "after", "io/standard/print")})
     print(set(dbf.selected_programs.keys()))
     assert set(dbf.selected_programs.keys()) == {"collatz_print.py"}
 
     # "operator/arithmetic/modulo" and "type/number/integer/literal" are both featured on
     # the same line in all programs except assignment.py
     dbf = ProgramFilter(db)
-    dbf.include_taxons({("equals", "operator/arithmetic/modulo", "type/number/integer/literal")})
+    dbf.include_taxons({("operator/arithmetic/modulo", "equals", "type/number/integer/literal")})
     print(set(dbf.selected_programs.keys()))
     assert set(dbf.selected_programs.keys()) == {"collatz_print.py", "is_even.py", "fizzbuzz.py"}
 
     # The same with "x == y" instead of "equals"
     dbf = ProgramFilter(db)
-    dbf.include_taxons({("equals", "operator/arithmetic/modulo", "type/number/integer/literal")})
+    dbf.include_taxons({("operator/arithmetic/modulo", "equals", "type/number/integer/literal")})
     print(set(dbf.selected_programs.keys()))
     assert set(dbf.selected_programs.keys()) == {"collatz_print.py", "is_even.py", "fizzbuzz.py"}
 
     # "test/equality" is inside "subroutine/function" in is_even.py, which is not imported anywhere.
     dbf = ProgramFilter(db)
-    dbf.include_taxons({("inside", "test/equality", "subroutine/function")})
+    dbf.include_taxons({("test/equality", "inside", "subroutine/function")})
     print(set(dbf.selected_programs.keys()))
     assert set(dbf.selected_programs.keys()) == {"is_even.py"}
 
     # "test/equality" is inside "subroutine/function" in is_even.py and inside
     # "subroutine/procedure" in collatz_print.py. Both will be included.
     dbf = ProgramFilter(db)
-    taxons = dbf.preprocess_taxons([("inside", "test/equality", "subroutine/.*")])
+    taxons = dbf.preprocess_taxons([("test/equality", "inside", "subroutine/.*")])
     print(taxons)
     assert taxons == [
-        ("inside", "test/equality", "subroutine/argument/arg"),
-        ("inside", "test/equality", "subroutine/function"),
-        ("inside", "test/equality", "subroutine/predicate"),
-        ("inside", "test/equality", "subroutine/procedure"),
+        ("test/equality", "inside", "subroutine/argument/arg"),
+        ("test/equality", "inside", "subroutine/function"),
+        ("test/equality", "inside", "subroutine/predicate"),
+        ("test/equality", "inside", "subroutine/procedure"),
     ]
     dbf.include_taxons(taxons)
     print(set(dbf.selected_programs.keys()))
@@ -94,21 +94,21 @@ def test_include_taxons():
 
     # "call/function/builtin/range" is not inside "flow/conditional" anywhere.
     dbf = ProgramFilter(db)
-    dbf.include_taxons([("inside", "call/function/builtin/range", "flow/conditional")])
+    dbf.include_taxons([("call/function/builtin/range", "inside", "flow/conditional")])
     print(set(dbf.selected_programs.keys()))
     assert set(dbf.selected_programs.keys()) == set()
 
     # "type/number/integer/literal" appears twice on the same line in fizzbuzz.py and
     # collatz_print.py
     dbf = ProgramFilter(db)
-    dbf.include_taxons([("is", "type/number/integer/literal", "type/number/integer/literal")])
+    dbf.include_taxons([("type/number/integer/literal", "is", "type/number/integer/literal")])
     print(set(dbf.selected_programs.keys()))
     assert set(dbf.selected_programs.keys()) == {"fizzbuzz.py", "collatz_print.py"}
 
     # "call/function/builtin/print" may appear several times in the same program, but never
     # on the same line.
     dbf = ProgramFilter(db)
-    dbf.include_taxons([("is", "call/function/builtin/print", "call/function/builtin/print")])
+    dbf.include_taxons([("call/function/builtin/print", "is", "call/function/builtin/print")])
     print(set(dbf.selected_programs.keys()))
     assert set(dbf.selected_programs.keys()) == set()
 
@@ -118,7 +118,7 @@ def test_impart_taxons():
     # Imparting a triple doesn't make much sense. Currently, it comes down to imparting the two
     # taxons, and ignoring the predicate.
     dbf = ProgramFilter(db)
-    dbf.impart_taxons({("equals", "operator/arithmetic/modulo", "type/number/integer")})
+    dbf.impart_taxons({("operator/arithmetic/modulo", "equals", "type/number/integer")})
     print(set(dbf.selected_programs.keys()))
     assert set(dbf.selected_programs.keys()) == {
         "assignment.py",

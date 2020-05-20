@@ -64,7 +64,7 @@ class ProgramFilter:
         return programs
 
     @staticmethod
-    def normalized_triple(predicate: str, name_1: TaxonName, name_2: TaxonName) -> TaxonTriple:
+    def normalized_triple(name_1: TaxonName, predicate: str, name_2: TaxonName) -> TaxonTriple:
         """Ensure that the given predicate is correct or can be salvaged, and return a triple."""
         s = predicate.lower().strip()
         if s not in compare_spans:
@@ -79,7 +79,7 @@ class ProgramFilter:
                 print(f"Warning: predicate '{predicate}' normalized into '{s}'.", file=sys.stderr)
             if s not in compare_spans:  # pragma: no cover
                 raise ValueError(f"Malformed predicate '{predicate}' in the pipeline.")
-        return TaxonTriple(predicate=s, name_1=name_1, name_2=name_2)
+        return TaxonTriple(name_1=name_1, predicate=s, name_2=name_2)
 
     def programs_of_taxon(self, taxon: TaxonNameOrTriple) -> ProgramNameSet:
         """Dispatch computation to the appropriate method, depending of the actual taxon type."""
@@ -199,7 +199,7 @@ class ProgramFilter:
                     result.update(self.match_against_existing_taxons(taxon))
             else:
                 # The taxon is a triple.
-                (predicate, name_1, name_2) = taxon
+                (name_1, predicate, name_2) = taxon
                 if name_1 in self.db_taxons and name_2 in self.db_taxons:
                     # If both names are existing, keep the triple.
                     result.add(taxon)
@@ -208,7 +208,7 @@ class ProgramFilter:
                     taxons_1 = self.match_against_existing_taxons(name_1)
                     taxons_2 = self.match_against_existing_taxons(name_2)
                     for (name_1, name_2) in product(taxons_1, taxons_2):
-                        result.add(TaxonTriple(predicate, name_1, name_2))
+                        result.add(TaxonTriple(name_1, predicate, name_2))
         return sorted(result)
 
     def impart_taxon_name(self, taxon: TaxonName) -> None:
@@ -224,8 +224,8 @@ class ProgramFilter:
             if isinstance(taxon, str):
                 self.impart_taxon_name(taxon)
             else:  # ignore the predicate and impart the two taxons
-                print(f"Warning: predicate '{taxon[0]}' ignored.", file=sys.stderr)
-                self.impart_taxon_name(taxon[1])
+                self.impart_taxon_name(taxon[0])
+                print(f"Warning: predicate '{taxon[1]}' ignored.", file=sys.stderr)
                 self.impart_taxon_name(taxon[2])
 
     def exclude_taxons(self, taxons: TaxonNamesOrTriples) -> None:

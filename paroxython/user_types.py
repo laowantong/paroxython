@@ -102,8 +102,8 @@ class Command(TypedDict):
     filtered_out: ProgramNames # to be populated by the execution of the command
 
 class TaxonTriple(NamedTuple): #  cf. https://en.wikipedia.org/wiki/Semantic_triple
-    predicate: str
     name_1: TaxonName
+    predicate: str
     name_2: TaxonName
 
 TaxonNameOrTriple = Union[TaxonName, TaxonTriple]
