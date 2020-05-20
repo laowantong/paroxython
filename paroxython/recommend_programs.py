@@ -121,7 +121,7 @@ of the results, under the zero-learning cost section. Moreover, inside each sect
 sorted by increasing size ([SLOC](https://en.wikipedia.org/wiki/Source_lines_of_code)), which can
 be a reasonable proxy for their difficulty. But in the end, you, the teacher, are the judge.
 Paroxython will not select the exercises for your exam, let alone correct them. It is just there to
-remind you of some possibilities that might not have occurred to you at the right time, and to
+remind you of some possibilities you might not have thought of at the right time, and to
 ensure that your exam contains only algorithmic features that you introduced in class, which might
 save you some awkward conversations with your students later on.
 
