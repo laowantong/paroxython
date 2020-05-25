@@ -84,8 +84,8 @@ recursivity (`subroutine/recursive`), dictionary (`type/non_sequence/dictionary`
 ... ]
 
 .. note::
-    Paroxython relies on the last three characters of an element to determine whether it is a
-    program (ending with `".py"`) or a taxon.
+    Paroxython relies on the last three characters of a `"source"` item to decide whether it is a
+    Python program (ending with `".py"`) or a taxon (like here).
 
 .. tip::
     Since the two latter taxons share a common prefix and Python doesn't provide other non-sequence
@@ -245,7 +245,7 @@ class Recommendations:
                 continue
 
             # Retrieve the patterns
-            patterns = self.retrieve_patterns_from_source(command.get("source", []))
+            patterns = self.retrieve_patterns_from_source(command.get("source", []), operation, i)
             if not patterns:
                 print_warning(f"operation {i} ({operation}) is ignored (no data).")
                 continue
@@ -263,7 +263,14 @@ class Recommendations:
 
         self.assessed_programs = self.assess_costs(self.selected_programs)
 
-    def retrieve_patterns_from_source(self, data: Union[str, List[str]]) -> List[str]:
+    def retrieve_patterns_from_source(
+        # fmt: off
+        self,
+        data: Union[str, List[str]],
+        operation: Operation,
+        i: int
+        # fmt: on
+    ) -> List[str]:
         """Retrieve the patterns on which the operation will be applied."""
         if isinstance(data, list):  # The JSON object can either be a list of strings...
             return data
@@ -282,6 +289,7 @@ class Recommendations:
             )
             return result
         else:
+            print_warning(f"unable to interpret the pattern of operation {i} ({operation}).")
             return []
 
     def compute_new_taxons_and_programs(

@@ -62,7 +62,6 @@ def test_tag_options():
 
 def test_collect():
     db_path = Path("tests/data/simple_db.json")
-    expected_db = json.loads(db_path.read_text())
     result = run("collect tests/data/simple")
     assert "Labelling 4 programs." in result
     assert "Mapping taxonomy on 4 programs." in result

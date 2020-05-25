@@ -211,7 +211,9 @@ def test_recommend_simple_programs():
             "operation": "exclude",
             "source": [
                 "flow/conditional/else/if",  # Although not recommended, it is possible to mix
-                "assignment.py",  # taxons and programs (ending with ".py") in a same command.
+                "assignment.py"  # taxons and programs (ending with ".py") in a same command.
+                # Crucially, this avoid to specify whether the command should be applied on
+                # taxons or programs.
             ],
         }
     ]
@@ -318,6 +320,39 @@ def test_recommend_simple_programs():
         {
             "operation": "impart",  # Imparting triples is currently not supported (ignored).
             "source": [("variable/assignment", "inside", "flow/loop"),],
+        }
+    ]
+    rec = Recommendations(db, commands=commands)
+    rec.run_pipeline()
+    assert rec.selected_programs.keys() == {
+        "assignment.py",
+        "collatz.py",
+        "fizzbuzz.py",
+        "is_even.py",
+    }
+    assert not rec.imparted_knowledge
+
+    commands = [{"operation": "include", "source": 42,}]  # malformed source => ignored command
+    rec = Recommendations(db, commands=commands)
+    rec.run_pipeline()
+    assert rec.selected_programs.keys() == {
+        "assignment.py",
+        "collatz.py",
+        "fizzbuzz.py",
+        "is_even.py",
+    }
+    assert not rec.imparted_knowledge
+
+    commands = [{"operation": "include", "source": [42],}]  # malformed pattern => ignored pattern
+    rec = Recommendations(db, commands=commands)
+    rec.run_pipeline()
+    assert rec.selected_programs.keys() == set()
+    assert not rec.imparted_knowledge
+
+    commands = [
+        {
+            "operation": "undefined_command",  # an undefined command is ignored
+            "source": "assignment.py",
         }
     ]
     rec = Recommendations(db, commands=commands)

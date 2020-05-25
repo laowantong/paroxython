@@ -28,8 +28,8 @@ def normalize_predicate(predicate: str) -> Tuple[Predicate, bool]:
         predicate = predicate.replace("<=", "≤").replace("==", "=")
         # Ignore all other characters
         predicate = regex.sub(r"[^xy<=≤]", "", predicate)
-        if predicate != predicate:
+        if predicate != predicate:  # pragma: no cover
             print_warning(f"predicate '{predicate}' normalized into '{predicate}'.")
-        if predicate not in compare_spans:  # pragma: no cover
+        if predicate not in compare_spans:
             raise ValueError(f"Malformed predicate '{predicate}' in the pipeline.")
     return (compare_spans[predicate], negated)
