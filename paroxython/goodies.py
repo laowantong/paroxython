@@ -1,3 +1,4 @@
+import sys
 from collections import defaultdict
 from math import log2
 from textwrap import wrap
@@ -94,3 +95,7 @@ def couple_to_string(couple: Union[Span, Tuple[int, int]]) -> str:
     "12-15"
     """
     return f"{couple[0]}" + ("" if couple[0] == couple[1] else f"-{couple[1]}")
+
+
+def print_warning(message: str):
+    print(f"Warning: {message}", file=sys.stderr)

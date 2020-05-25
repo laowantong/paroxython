@@ -13,12 +13,12 @@ def test_list_programs():
     assert program.source == "a = b"
 
     program = next(result)
-    assert program.name == "collatz_print.py"
+    assert program.name == "collatz.py"
     assert program.source.startswith("def print_collatz(n):")
 
     program = next(result)
     assert program.name == "fizzbuzz.py"
-    assert program.source.startswith("import collatz_print")
+    assert program.source.startswith("import collatz")
 
     program = next(result)
     assert program.name == "is_even.py"

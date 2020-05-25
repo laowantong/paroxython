@@ -695,7 +695,7 @@
       ],
       "binary_operator:FloorDiv": []
     },
-    "collatz_print.py",
+    "collatz.py",
     "def print_collatz(n):\n    while n != 1:\n        print(n)\n        if n % 2 == 0:\n            n = n // 2\n        else:\n            n = 3 * n + 1\n    print(n)"
   ],
   [
@@ -1061,7 +1061,7 @@
         ]
       ],
       [
-        "import_internally:collatz_print",
+        "import_internally:collatz",
         [
           [
             1,
@@ -1071,7 +1071,7 @@
         ]
       ],
       [
-        "import_module_internally:collatz_print",
+        "import_module_internally:collatz",
         [
           [
             1,
@@ -1255,7 +1255,7 @@
     {},
     {},
     "fizzbuzz.py",
-    "import collatz_print\nfor i in range(1, 101):\n    if i % 15 == 0:\n        print(\"FizzBuzz\")\n    elif i % 3 == 0:\n        print(\"Fizz\")\n    elif i % 5 == 0:\n        print(\"Buzz\")\n    else:\n        print(i)"
+    "import collatz\nfor i in range(1, 101):\n    if i % 15 == 0:\n        print(\"FizzBuzz\")\n    elif i % 3 == 0:\n        print(\"Fizz\")\n    elif i % 5 == 0:\n        print(\"Buzz\")\n    else:\n        print(i)"
   ],
   [
     [

@@ -29,10 +29,10 @@
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L0-L237" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L0-L260" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">import sys
-from itertools import product
+from itertools import product, permutations
 from typing import Set
 
 import regex  # type: ignore
@@ -52,6 +52,7 @@ from .user_types import (
     TaxonNameSet,
     TaxonNamesOrTriples,
     TaxonTriple,
+    TaxonTriplet,
 )
 
 
@@ -87,7 +88,16 @@ class ProgramFilter:
         return programs
 
     @staticmethod
-    def normalized_triple(predicate: str, name_1: TaxonName, name_2: TaxonName) -&gt; TaxonTriple:
+    def triple_to_triplet(name_1: TaxonName, predicate: str, name_2: TaxonName) -&gt; TaxonTriplet:
+        negated = True
+        if predicate.startswith(&#34;!&#34;):
+            predicate = predicate[1:]
+        elif regex.search(r&#34;\bnot &#34;, predicate):
+            predicate = predicate.replace(&#34;not &#34;, &#34;&#34;)
+        elif regex.search(r&#34; not\b&#34;, predicate):
+            predicate = predicate.replace(&#34; not&#34;, &#34;&#34;)
+        else:
+            negated = False
         s = predicate.lower().strip()
         if s not in compare_spans:
             # If there is only one x (resp. y), expand it into x≤x (resp. y≤y)
@@ -101,26 +111,37 @@ class ProgramFilter:
                 print(f&#34;Warning: predicate &#39;{predicate}&#39; normalized into &#39;{s}&#39;.&#34;, file=sys.stderr)
             if s not in compare_spans:  # pragma: no cover
                 raise ValueError(f&#34;Malformed predicate &#39;{predicate}&#39; in the pipeline.&#34;)
-        return TaxonTriple(predicate=s, name_1=name_1, name_2=name_2)
+        prebounded_predicate = compare_spans[s]
+        if negated:
+            bounded_predicate = lambda x, y: not (prebounded_predicate(x, y))
+        else:
+            bounded_predicate = prebounded_predicate
+        return TaxonTriplet(name_1=name_1, predicate=bounded_predicate, name_2=name_2)
 
     def programs_of_taxon(self, taxon: TaxonNameOrTriple) -&gt; ProgramNameSet:
         if isinstance(taxon, str):
-            return set(self.db_taxons.get(TaxonName(taxon), []))
+            if taxon.startswith(&#34;!&#34;):
+                return set(self.db_programs) - set(self.db_taxons.get(TaxonName(taxon[1:]), []))
+            else:
+                return set(self.db_taxons.get(TaxonName(taxon), []))
         else:
-            return self.programs_of_taxon_triple(self.normalized_triple(*taxon))
+            return self.programs_of_taxon_triplet(self.triple_to_triplet(*taxon))
 
-    def programs_of_taxon_triple(self, taxon: TaxonTriple) -&gt; ProgramNameSet:
+    def programs_of_taxon_triplet(self, taxon: TaxonTriplet) -&gt; ProgramNameSet:
         # Compute the set of programs which feature both taxons
         programs_featuring_1 = set(self.db_taxons.get(taxon.name_1, []))
         programs_featuring_2 = set(self.db_taxons.get(taxon.name_2, []))
         # Keep only the subset of taxons which satisfy the predicate
-        predicate = compare_spans[taxon.predicate]
         programs: ProgramNameSet = set()
         for program in programs_featuring_1 &amp; programs_featuring_2:
             spans_1 = self.db_programs[program][&#34;taxons&#34;][taxon.name_1]
             spans_2 = self.db_programs[program][&#34;taxons&#34;][taxon.name_2]
-            for (span_1, span_2) in product(spans_1, spans_2):
-                if predicate(span_1, span_2):
+            if taxon.name_1 == taxon.name_2:
+                couples = permutations(spans_1, 2)  # = product(spans_1, spans_2) w/o diagonal
+            else:
+                couples = product(spans_1, spans_2)
+            for (span_1, span_2) in couples:
+                if taxon.predicate(span_1, span_2):
                     programs.add(program)
                     break
         return programs
@@ -129,10 +150,10 @@ class ProgramFilter:
 
     def match_against_existing_programs(self, pattern: str) -&gt; ProgramNameSet:
         result: ProgramNameSet = set()
-        fullmatch = regex.compile(pattern).fullmatch
+        match = regex.compile(fr&#34;{pattern}\b&#34;).match
         no_match = True
         for program_name in self.db_programs:
-            if fullmatch(program_name):
+            if match(program_name):
                 result.add(program_name)
                 no_match = False
         if no_match:
@@ -179,10 +200,10 @@ class ProgramFilter:
 
     def match_against_existing_taxons(self, pattern: str) -&gt; TaxonNameSet:
         result: TaxonNameSet = set()
-        fullmatch = regex.compile(pattern).fullmatch
+        match = regex.compile(fr&#34;{pattern}\b&#34;).match
         no_match = True
         for taxon_name in self.db_taxons:
-            if fullmatch(taxon_name):
+            if match(taxon_name):
                 result.add(taxon_name)
                 no_match = False
         if no_match:
@@ -197,25 +218,27 @@ class ProgramFilter:
         for taxon in taxons:
             if isinstance(taxon, str):
                 # The taxon is a name or a pattern.
-                if taxon in self.db_taxons:
-                    # If it is an existing name, keep it.
-                    result.add(taxon)
-                else:
-                    # Otherwise, process it as a pattern, and add all its matches.
-                    result.update(self.match_against_existing_taxons(taxon))
+                result.update(self.match_against_existing_taxons(taxon))
+                # negate = &#34;!&#34;
+                # if taxon.startswith(&#34;not &#34;):
+                #     taxon = TaxonName(taxon[4:].strip())
+                # elif taxon.startswith(&#34;!&#34;):
+                #     taxon = TaxonName(taxon[1:].strip())
+                # else:
+                #     negate = &#34;&#34;
+                # # Process it systymatically as a pattern, and add all its matches.
+                # result.update(
+                #     TaxonName(negate + s) for s in self.match_against_existing_taxons(taxon)
+                # )
             else:
                 # The taxon is a triple.
-                (predicate, name_1, name_2) = taxon
-                if name_1 in self.db_taxons and name_2 in self.db_taxons:
-                    # If both names are existing, keep the triple.
-                    result.add(taxon)
-                else:
-                    # Otherwise, process them as patterns, and add the product of their matches.
-                    taxons_1 = self.match_against_existing_taxons(name_1)
-                    taxons_2 = self.match_against_existing_taxons(name_2)
-                    for (name_1, name_2) in product(taxons_1, taxons_2):
-                        result.add(TaxonTriple(predicate, name_1, name_2))
-        return sorted(result)
+                (name_1, predicate, name_2) = taxon
+                # Process them systematically as patterns, and add the product of their matches.
+                taxons_1 = self.match_against_existing_taxons(name_1)
+                taxons_2 = self.match_against_existing_taxons(name_2)
+                for (name_1, name_2) in product(taxons_1, taxons_2):
+                    result.add(TaxonTriple(name_1, predicate, name_2))
+        return sorted(result, key=str)
 
     def impart_taxon_name(self, taxon: TaxonName) -&gt; None:
         segments = taxon.split(&#34;/&#34;)
@@ -228,8 +251,8 @@ class ProgramFilter:
             if isinstance(taxon, str):
                 self.impart_taxon_name(taxon)
             else:  # ignore the predicate and impart the two taxons
-                print(f&#34;Warning: predicate &#39;{taxon[0]}&#39; ignored.&#34;, file=sys.stderr)
-                self.impart_taxon_name(taxon[1])
+                self.impart_taxon_name(taxon[0])
+                print(f&#34;Warning: predicate &#39;{taxon[1]}&#39; ignored.&#34;, file=sys.stderr)
                 self.impart_taxon_name(taxon[2])
 
     def exclude_taxons(self, taxons: TaxonNamesOrTriples) -&gt; None:
@@ -265,7 +288,7 @@ them) can only shrink, and the imparted knowledge (initially empty) can only inc
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L25-L238" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L26-L261" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">class ProgramFilter:
     def __init__(self, db: JsonDatabase) -&gt; None:
@@ -299,7 +322,16 @@ them) can only shrink, and the imparted knowledge (initially empty) can only inc
         return programs
 
     @staticmethod
-    def normalized_triple(predicate: str, name_1: TaxonName, name_2: TaxonName) -&gt; TaxonTriple:
+    def triple_to_triplet(name_1: TaxonName, predicate: str, name_2: TaxonName) -&gt; TaxonTriplet:
+        negated = True
+        if predicate.startswith(&#34;!&#34;):
+            predicate = predicate[1:]
+        elif regex.search(r&#34;\bnot &#34;, predicate):
+            predicate = predicate.replace(&#34;not &#34;, &#34;&#34;)
+        elif regex.search(r&#34; not\b&#34;, predicate):
+            predicate = predicate.replace(&#34; not&#34;, &#34;&#34;)
+        else:
+            negated = False
         s = predicate.lower().strip()
         if s not in compare_spans:
             # If there is only one x (resp. y), expand it into x≤x (resp. y≤y)
@@ -313,26 +345,37 @@ them) can only shrink, and the imparted knowledge (initially empty) can only inc
                 print(f&#34;Warning: predicate &#39;{predicate}&#39; normalized into &#39;{s}&#39;.&#34;, file=sys.stderr)
             if s not in compare_spans:  # pragma: no cover
                 raise ValueError(f&#34;Malformed predicate &#39;{predicate}&#39; in the pipeline.&#34;)
-        return TaxonTriple(predicate=s, name_1=name_1, name_2=name_2)
+        prebounded_predicate = compare_spans[s]
+        if negated:
+            bounded_predicate = lambda x, y: not (prebounded_predicate(x, y))
+        else:
+            bounded_predicate = prebounded_predicate
+        return TaxonTriplet(name_1=name_1, predicate=bounded_predicate, name_2=name_2)
 
     def programs_of_taxon(self, taxon: TaxonNameOrTriple) -&gt; ProgramNameSet:
         if isinstance(taxon, str):
-            return set(self.db_taxons.get(TaxonName(taxon), []))
+            if taxon.startswith(&#34;!&#34;):
+                return set(self.db_programs) - set(self.db_taxons.get(TaxonName(taxon[1:]), []))
+            else:
+                return set(self.db_taxons.get(TaxonName(taxon), []))
         else:
-            return self.programs_of_taxon_triple(self.normalized_triple(*taxon))
+            return self.programs_of_taxon_triplet(self.triple_to_triplet(*taxon))
 
-    def programs_of_taxon_triple(self, taxon: TaxonTriple) -&gt; ProgramNameSet:
+    def programs_of_taxon_triplet(self, taxon: TaxonTriplet) -&gt; ProgramNameSet:
         # Compute the set of programs which feature both taxons
         programs_featuring_1 = set(self.db_taxons.get(taxon.name_1, []))
         programs_featuring_2 = set(self.db_taxons.get(taxon.name_2, []))
         # Keep only the subset of taxons which satisfy the predicate
-        predicate = compare_spans[taxon.predicate]
         programs: ProgramNameSet = set()
         for program in programs_featuring_1 &amp; programs_featuring_2:
             spans_1 = self.db_programs[program][&#34;taxons&#34;][taxon.name_1]
             spans_2 = self.db_programs[program][&#34;taxons&#34;][taxon.name_2]
-            for (span_1, span_2) in product(spans_1, spans_2):
-                if predicate(span_1, span_2):
+            if taxon.name_1 == taxon.name_2:
+                couples = permutations(spans_1, 2)  # = product(spans_1, spans_2) w/o diagonal
+            else:
+                couples = product(spans_1, spans_2)
+            for (span_1, span_2) in couples:
+                if taxon.predicate(span_1, span_2):
                     programs.add(program)
                     break
         return programs
@@ -341,10 +384,10 @@ them) can only shrink, and the imparted knowledge (initially empty) can only inc
 
     def match_against_existing_programs(self, pattern: str) -&gt; ProgramNameSet:
         result: ProgramNameSet = set()
-        fullmatch = regex.compile(pattern).fullmatch
+        match = regex.compile(fr&#34;{pattern}\b&#34;).match
         no_match = True
         for program_name in self.db_programs:
-            if fullmatch(program_name):
+            if match(program_name):
                 result.add(program_name)
                 no_match = False
         if no_match:
@@ -391,10 +434,10 @@ them) can only shrink, and the imparted knowledge (initially empty) can only inc
 
     def match_against_existing_taxons(self, pattern: str) -&gt; TaxonNameSet:
         result: TaxonNameSet = set()
-        fullmatch = regex.compile(pattern).fullmatch
+        match = regex.compile(fr&#34;{pattern}\b&#34;).match
         no_match = True
         for taxon_name in self.db_taxons:
-            if fullmatch(taxon_name):
+            if match(taxon_name):
                 result.add(taxon_name)
                 no_match = False
         if no_match:
@@ -409,25 +452,27 @@ them) can only shrink, and the imparted knowledge (initially empty) can only inc
         for taxon in taxons:
             if isinstance(taxon, str):
                 # The taxon is a name or a pattern.
-                if taxon in self.db_taxons:
-                    # If it is an existing name, keep it.
-                    result.add(taxon)
-                else:
-                    # Otherwise, process it as a pattern, and add all its matches.
-                    result.update(self.match_against_existing_taxons(taxon))
+                result.update(self.match_against_existing_taxons(taxon))
+                # negate = &#34;!&#34;
+                # if taxon.startswith(&#34;not &#34;):
+                #     taxon = TaxonName(taxon[4:].strip())
+                # elif taxon.startswith(&#34;!&#34;):
+                #     taxon = TaxonName(taxon[1:].strip())
+                # else:
+                #     negate = &#34;&#34;
+                # # Process it systymatically as a pattern, and add all its matches.
+                # result.update(
+                #     TaxonName(negate + s) for s in self.match_against_existing_taxons(taxon)
+                # )
             else:
                 # The taxon is a triple.
-                (predicate, name_1, name_2) = taxon
-                if name_1 in self.db_taxons and name_2 in self.db_taxons:
-                    # If both names are existing, keep the triple.
-                    result.add(taxon)
-                else:
-                    # Otherwise, process them as patterns, and add the product of their matches.
-                    taxons_1 = self.match_against_existing_taxons(name_1)
-                    taxons_2 = self.match_against_existing_taxons(name_2)
-                    for (name_1, name_2) in product(taxons_1, taxons_2):
-                        result.add(TaxonTriple(predicate, name_1, name_2))
-        return sorted(result)
+                (name_1, predicate, name_2) = taxon
+                # Process them systematically as patterns, and add the product of their matches.
+                taxons_1 = self.match_against_existing_taxons(name_1)
+                taxons_2 = self.match_against_existing_taxons(name_2)
+                for (name_1, name_2) in product(taxons_1, taxons_2):
+                    result.add(TaxonTriple(name_1, predicate, name_2))
+        return sorted(result, key=str)
 
     def impart_taxon_name(self, taxon: TaxonName) -&gt; None:
         segments = taxon.split(&#34;/&#34;)
@@ -440,8 +485,8 @@ them) can only shrink, and the imparted knowledge (initially empty) can only inc
             if isinstance(taxon, str):
                 self.impart_taxon_name(taxon)
             else:  # ignore the predicate and impart the two taxons
-                print(f&#34;Warning: predicate &#39;{taxon[0]}&#39; ignored.&#34;, file=sys.stderr)
-                self.impart_taxon_name(taxon[1])
+                self.impart_taxon_name(taxon[0])
+                print(f&#34;Warning: predicate &#39;{taxon[1]}&#39; ignored.&#34;, file=sys.stderr)
                 self.impart_taxon_name(taxon[2])
 
     def exclude_taxons(self, taxons: TaxonNamesOrTriples) -&gt; None:
@@ -457,18 +502,27 @@ them) can only shrink, and the imparted knowledge (initially empty) can only inc
 </details>
 <h3>Static methods</h3>
 <dl>
-<dt id="paroxython.filter_programs.ProgramFilter.normalized_triple"><code class="name flex">
-<span>def <span class="ident">normalized_triple</span></span>(<span>predicate: str, name_1: TaxonName, name_2: TaxonName) ‑> TaxonTriple</span>
+<dt id="paroxython.filter_programs.ProgramFilter.triple_to_triplet"><code class="name flex">
+<span>def <span class="ident">triple_to_triplet</span></span>(<span>name_1: TaxonName, predicate: str, name_2: TaxonName) ‑> TaxonTriplet</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Ensure that the given predicate is correct or can be salvaged, and return a triple.</p></div>
+<div class="desc"><p>Ensure that the given predicate is correct or can be salvaged, and return a triplet.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L66-L82" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L67-L97" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">@staticmethod
-def normalized_triple(predicate: str, name_1: TaxonName, name_2: TaxonName) -&gt; TaxonTriple:
+def triple_to_triplet(name_1: TaxonName, predicate: str, name_2: TaxonName) -&gt; TaxonTriplet:
+    negated = True
+    if predicate.startswith(&#34;!&#34;):
+        predicate = predicate[1:]
+    elif regex.search(r&#34;\bnot &#34;, predicate):
+        predicate = predicate.replace(&#34;not &#34;, &#34;&#34;)
+    elif regex.search(r&#34; not\b&#34;, predicate):
+        predicate = predicate.replace(&#34; not&#34;, &#34;&#34;)
+    else:
+        negated = False
     s = predicate.lower().strip()
     if s not in compare_spans:
         # If there is only one x (resp. y), expand it into x≤x (resp. y≤y)
@@ -482,7 +536,12 @@ def normalized_triple(predicate: str, name_1: TaxonName, name_2: TaxonName) -&gt
             print(f&#34;Warning: predicate &#39;{predicate}&#39; normalized into &#39;{s}&#39;.&#34;, file=sys.stderr)
         if s not in compare_spans:  # pragma: no cover
             raise ValueError(f&#34;Malformed predicate &#39;{predicate}&#39; in the pipeline.&#34;)
-    return TaxonTriple(predicate=s, name_1=name_1, name_2=name_2)</code></pre>
+    prebounded_predicate = compare_spans[s]
+    if negated:
+        bounded_predicate = lambda x, y: not (prebounded_predicate(x, y))
+    else:
+        bounded_predicate = prebounded_predicate
+    return TaxonTriplet(name_1=name_1, predicate=bounded_predicate, name_2=name_2)</code></pre>
 </details>
 </dd>
 </dl>
@@ -496,7 +555,7 @@ def normalized_triple(predicate: str, name_1: TaxonName, name_2: TaxonName) -&gt
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L50-L56" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L51-L57" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def taxons_of_programs(self, programs: ProgramNameSet) -&gt; TaxonNameSet:
     taxons: TaxonNameSet = set()
@@ -514,7 +573,7 @@ def normalized_triple(predicate: str, name_1: TaxonName, name_2: TaxonName) -&gt
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L58-L64" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L59-L65" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def programs_of_taxons(self, taxons: TaxonNamesOrTriples, follow: bool) -&gt; ProgramNameSet:
     programs: ProgramNameSet = set()
@@ -528,41 +587,47 @@ def normalized_triple(predicate: str, name_1: TaxonName, name_2: TaxonName) -&gt
 <span>def <span class="ident">programs_of_taxon</span></span>(<span>self, taxon: Union[TaxonName, TaxonTriple]) ‑> Set[ProgramName]</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Dispatch computation to the appropriate method, depending of the actual taxon type.</p></div>
+<div class="desc"><p>Dispatch computation to the appropriate method, depending on the actual taxon type.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L84-L89" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L99-L107" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def programs_of_taxon(self, taxon: TaxonNameOrTriple) -&gt; ProgramNameSet:
     if isinstance(taxon, str):
-        return set(self.db_taxons.get(TaxonName(taxon), []))
+        if taxon.startswith(&#34;!&#34;):
+            return set(self.db_programs) - set(self.db_taxons.get(TaxonName(taxon[1:]), []))
+        else:
+            return set(self.db_taxons.get(TaxonName(taxon), []))
     else:
-        return self.programs_of_taxon_triple(self.normalized_triple(*taxon))</code></pre>
+        return self.programs_of_taxon_triplet(self.triple_to_triplet(*taxon))</code></pre>
 </details>
 </dd>
-<dt id="paroxython.filter_programs.ProgramFilter.programs_of_taxon_triple"><code class="name flex">
-<span>def <span class="ident">programs_of_taxon_triple</span></span>(<span>self, taxon: TaxonTriple) ‑> Set[ProgramName]</span>
+<dt id="paroxython.filter_programs.ProgramFilter.programs_of_taxon_triplet"><code class="name flex">
+<span>def <span class="ident">programs_of_taxon_triplet</span></span>(<span>self, taxon: TaxonTriplet) ‑> Set[ProgramName]</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Return the programs where two given taxons satisfy a given predicate.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L91-L106" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L109-L127" class="git-link">Browse GitHub</a>
 </summary>
-<pre><code class="python">def programs_of_taxon_triple(self, taxon: TaxonTriple) -&gt; ProgramNameSet:
+<pre><code class="python">def programs_of_taxon_triplet(self, taxon: TaxonTriplet) -&gt; ProgramNameSet:
     # Compute the set of programs which feature both taxons
     programs_featuring_1 = set(self.db_taxons.get(taxon.name_1, []))
     programs_featuring_2 = set(self.db_taxons.get(taxon.name_2, []))
     # Keep only the subset of taxons which satisfy the predicate
-    predicate = compare_spans[taxon.predicate]
     programs: ProgramNameSet = set()
     for program in programs_featuring_1 &amp; programs_featuring_2:
         spans_1 = self.db_programs[program][&#34;taxons&#34;][taxon.name_1]
         spans_2 = self.db_programs[program][&#34;taxons&#34;][taxon.name_2]
-        for (span_1, span_2) in product(spans_1, spans_2):
-            if predicate(span_1, span_2):
+        if taxon.name_1 == taxon.name_2:
+            couples = permutations(spans_1, 2)  # = product(spans_1, spans_2) w/o diagonal
+        else:
+            couples = product(spans_1, spans_2)
+        for (span_1, span_2) in couples:
+            if taxon.predicate(span_1, span_2):
                 programs.add(program)
                 break
     return programs</code></pre>
@@ -576,14 +641,14 @@ def normalized_triple(predicate: str, name_1: TaxonName, name_2: TaxonName) -&gt
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L110-L124" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L131-L145" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def match_against_existing_programs(self, pattern: str) -&gt; ProgramNameSet:
     result: ProgramNameSet = set()
-    fullmatch = regex.compile(pattern).fullmatch
+    match = regex.compile(fr&#34;{pattern}\b&#34;).match
     no_match = True
     for program_name in self.db_programs:
-        if fullmatch(program_name):
+        if match(program_name):
             result.add(program_name)
             no_match = False
     if no_match:
@@ -602,7 +667,7 @@ def normalized_triple(predicate: str, name_1: TaxonName, name_2: TaxonName) -&gt
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L126-L134" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L147-L155" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def preprocess_programs(self, programs: ProgramNames) -&gt; ProgramNames:
     result: Set[ProgramName] = set()
@@ -624,7 +689,7 @@ def normalized_triple(predicate: str, name_1: TaxonName, name_2: TaxonName) -&gt
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L136-L146" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L157-L167" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def impart_programs(self, programs: ProgramNameSet) -&gt; None:
     for program in programs:
@@ -643,7 +708,7 @@ def normalized_triple(predicate: str, name_1: TaxonName, name_2: TaxonName) -&gt
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L148-L154" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L169-L175" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def exclude_programs(self, programs: ProgramNameSet) -&gt; None:
     for program in programs:
@@ -661,7 +726,7 @@ def normalized_triple(predicate: str, name_1: TaxonName, name_2: TaxonName) -&gt
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L156-L164" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L177-L185" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def include_programs(self, programs: ProgramNameSet) -&gt; None:
     extended_programs: ProgramNameSet = set(programs)  # make a copy to ensure purity
@@ -681,14 +746,14 @@ def normalized_triple(predicate: str, name_1: TaxonName, name_2: TaxonName) -&gt
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L168-L182" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L189-L203" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def match_against_existing_taxons(self, pattern: str) -&gt; TaxonNameSet:
     result: TaxonNameSet = set()
-    fullmatch = regex.compile(pattern).fullmatch
+    match = regex.compile(fr&#34;{pattern}\b&#34;).match
     no_match = True
     for taxon_name in self.db_taxons:
-        if fullmatch(taxon_name):
+        if match(taxon_name):
             result.add(taxon_name)
             no_match = False
     if no_match:
@@ -707,32 +772,34 @@ def normalized_triple(predicate: str, name_1: TaxonName, name_2: TaxonName) -&gt
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L184-L208" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L205-L231" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def preprocess_taxons(self, taxons: TaxonNamesOrTriples) -&gt; TaxonNamesOrTriples:
     result: Set[TaxonNameOrTriple] = set()
     for taxon in taxons:
         if isinstance(taxon, str):
             # The taxon is a name or a pattern.
-            if taxon in self.db_taxons:
-                # If it is an existing name, keep it.
-                result.add(taxon)
-            else:
-                # Otherwise, process it as a pattern, and add all its matches.
-                result.update(self.match_against_existing_taxons(taxon))
+            result.update(self.match_against_existing_taxons(taxon))
+            # negate = &#34;!&#34;
+            # if taxon.startswith(&#34;not &#34;):
+            #     taxon = TaxonName(taxon[4:].strip())
+            # elif taxon.startswith(&#34;!&#34;):
+            #     taxon = TaxonName(taxon[1:].strip())
+            # else:
+            #     negate = &#34;&#34;
+            # # Process it systymatically as a pattern, and add all its matches.
+            # result.update(
+            #     TaxonName(negate + s) for s in self.match_against_existing_taxons(taxon)
+            # )
         else:
             # The taxon is a triple.
-            (predicate, name_1, name_2) = taxon
-            if name_1 in self.db_taxons and name_2 in self.db_taxons:
-                # If both names are existing, keep the triple.
-                result.add(taxon)
-            else:
-                # Otherwise, process them as patterns, and add the product of their matches.
-                taxons_1 = self.match_against_existing_taxons(name_1)
-                taxons_2 = self.match_against_existing_taxons(name_2)
-                for (name_1, name_2) in product(taxons_1, taxons_2):
-                    result.add(TaxonTriple(predicate, name_1, name_2))
-    return sorted(result)</code></pre>
+            (name_1, predicate, name_2) = taxon
+            # Process them systematically as patterns, and add the product of their matches.
+            taxons_1 = self.match_against_existing_taxons(name_1)
+            taxons_2 = self.match_against_existing_taxons(name_2)
+            for (name_1, name_2) in product(taxons_1, taxons_2):
+                result.add(TaxonTriple(name_1, predicate, name_2))
+    return sorted(result, key=str)</code></pre>
 </details>
 </dd>
 <dt id="paroxython.filter_programs.ProgramFilter.impart_taxon_name"><code class="name flex">
@@ -743,7 +810,7 @@ def normalized_triple(predicate: str, name_1: TaxonName, name_2: TaxonName) -&gt
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L210-L215" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L233-L238" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def impart_taxon_name(self, taxon: TaxonName) -&gt; None:
     segments = taxon.split(&#34;/&#34;)
@@ -760,15 +827,15 @@ def normalized_triple(predicate: str, name_1: TaxonName, name_2: TaxonName) -&gt
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L217-L225" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L240-L248" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def impart_taxons(self, taxons: TaxonNamesOrTriples) -&gt; None:
     for taxon in taxons:
         if isinstance(taxon, str):
             self.impart_taxon_name(taxon)
         else:  # ignore the predicate and impart the two taxons
-            print(f&#34;Warning: predicate &#39;{taxon[0]}&#39; ignored.&#34;, file=sys.stderr)
-            self.impart_taxon_name(taxon[1])
+            self.impart_taxon_name(taxon[0])
+            print(f&#34;Warning: predicate &#39;{taxon[1]}&#39; ignored.&#34;, file=sys.stderr)
             self.impart_taxon_name(taxon[2])</code></pre>
 </details>
 </dd>
@@ -780,7 +847,7 @@ def normalized_triple(predicate: str, name_1: TaxonName, name_2: TaxonName) -&gt
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L227-L231" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L250-L254" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def exclude_taxons(self, taxons: TaxonNamesOrTriples) -&gt; None:
     programs = self.programs_of_taxons(taxons, follow=True)
@@ -796,7 +863,7 @@ def normalized_triple(predicate: str, name_1: TaxonName, name_2: TaxonName) -&gt
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L233-L238" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L256-L261" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def include_taxons(self, taxons: TaxonNamesOrTriples) -&gt; None:
     programs = self.programs_of_taxons(taxons, follow=False)
@@ -835,11 +902,11 @@ data-gaCategoryParameter="paroxython.filter_programs">
 <li>
 <h4><code><a title="paroxython.filter_programs.ProgramFilter" href="#paroxython.filter_programs.ProgramFilter">ProgramFilter</a></code></h4>
 <ul class="">
-<li><code><a title="paroxython.filter_programs.ProgramFilter.normalized_triple" href="#paroxython.filter_programs.ProgramFilter.normalized_triple">normalized_triple</a></code></li>
+<li><code><a title="paroxython.filter_programs.ProgramFilter.triple_to_triplet" href="#paroxython.filter_programs.ProgramFilter.triple_to_triplet">triple_to_triplet</a></code></li>
 <li><code><a title="paroxython.filter_programs.ProgramFilter.taxons_of_programs" href="#paroxython.filter_programs.ProgramFilter.taxons_of_programs">taxons_of_programs</a></code></li>
 <li><code><a title="paroxython.filter_programs.ProgramFilter.programs_of_taxons" href="#paroxython.filter_programs.ProgramFilter.programs_of_taxons">programs_of_taxons</a></code></li>
 <li><code><a title="paroxython.filter_programs.ProgramFilter.programs_of_taxon" href="#paroxython.filter_programs.ProgramFilter.programs_of_taxon">programs_of_taxon</a></code></li>
-<li><code><a title="paroxython.filter_programs.ProgramFilter.programs_of_taxon_triple" href="#paroxython.filter_programs.ProgramFilter.programs_of_taxon_triple">programs_of_taxon_triple</a></code></li>
+<li><code><a title="paroxython.filter_programs.ProgramFilter.programs_of_taxon_triplet" href="#paroxython.filter_programs.ProgramFilter.programs_of_taxon_triplet">programs_of_taxon_triplet</a></code></li>
 <li><code><a title="paroxython.filter_programs.ProgramFilter.match_against_existing_programs" href="#paroxython.filter_programs.ProgramFilter.match_against_existing_programs">match_against_existing_programs</a></code></li>
 <li><code><a title="paroxython.filter_programs.ProgramFilter.preprocess_programs" href="#paroxython.filter_programs.ProgramFilter.preprocess_programs">preprocess_programs</a></code></li>
 <li><code><a title="paroxython.filter_programs.ProgramFilter.impart_programs" href="#paroxython.filter_programs.ProgramFilter.impart_programs">impart_programs</a></code></li>

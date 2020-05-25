@@ -81,21 +81,21 @@ def test_collect_options():
     db = json.loads(db_path.read_text())
     assert "\n\n" in db["programs"]["fizzbuzz.py"]["source"]  # not cleaned up
 
-    rex = r".+_.+"  # exclude collatz_print.py, is_even.py
+    rex = r".+_.+"  # exclude is_even.py
+    result = run(f'collect -o {db_path} --exclude "{rex}" tests/data/simple')
+    assert "Labelling 3 programs." in result
+
+    rex = r".+n.?\.py"  # exclude assignment.py, is_even.py
     result = run(f'collect -o {db_path} --exclude "{rex}" tests/data/simple')
     assert "Labelling 2 programs." in result
 
-    rex = r".+n.?\.py"  # exclude assignment.py, collatz_print.py, is_even.py
-    result = run(f'collect -o {db_path} --exclude "{rex}" tests/data/simple')
-    assert "Labelling 1 programs." in result
-
-    glob = r"*n*.py"  # include assignment.py, collatz_print.py, is_even.py
+    glob = r"*n*.py"  # include assignment.py, is_even.py
     result = run(f'collect -o {db_path} --glob "{glob}" tests/data/simple')
-    assert "Labelling 3 programs." in result
+    assert "Labelling 2 programs." in result
 
     result = run(f"collect -o {db_path} -t tests/data/dummy/taxonomy.tsv tests/data/simple")
     db = json.loads(db_path.read_text())
-    assert db["taxons"] == {"flow/conditional": ["collatz_print.py", "fizzbuzz.py"]}
+    assert db["taxons"] == {"flow/conditional": ["collatz.py", "fizzbuzz.py"]}
 
     db_path.unlink()
 

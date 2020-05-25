@@ -17,7 +17,14 @@ two zero-based indexes `start` (inclusive) and `stop` (exclusive), and returning
 
 from functools import lru_cache
 
-from .user_types import TaxonName, TaxonNameSet, ProgramTaxonNames, AssessedPrograms, Literal
+from .user_types import (
+    AssessedPrograms,
+    AssessmentStrategy,
+    Literal,
+    ProgramTaxonNames,
+    TaxonName,
+    TaxonNameSet,
+)
 
 __pdoc__ = {"LearningCostAssessor.__call__": True}
 
@@ -63,7 +70,7 @@ class LearningCostAssessor:
         """
         self.imparted_knowledge = imparted_knowledge
 
-    def set_cost_assessment_strategy(self, strategy: Literal["zeno", "linear"] = "zeno") -> None:
+    def set_cost_assessment_strategy(self, strategy: AssessmentStrategy = "zeno") -> None:
         """Set the function to be used for the learning cost calculation.
 
         Args:
@@ -115,7 +122,10 @@ class LearningCostAssessor:
         Returns:
             AssessedPrograms: A list of tuples `(total_cost, ProgramName)` sorted by increasing cost.
         """
-        return sorted(
-            (sum(map(self.taxon_cost, taxon_names)), program_name)
-            for (program_name, taxon_names) in programs.items()
-        )
+        result = []
+        for (program_name, taxon_names) in programs.items():
+            total_cost = 0.0
+            for taxon_name in taxon_names:
+                total_cost += self.taxon_cost(taxon_name)
+            result.append((total_cost, program_name))
+        return sorted(result)

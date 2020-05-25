@@ -37,13 +37,15 @@ list of each and every taxon it implements.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>The point is that the resulting list is sorted by increasing learning cost. This should give
-you a rough idea of the angle of attack to adopt in your first classes.</p>
+you a rough idea of the pedagogical angle of attack to adopt in your first classes.</p>
 </div>
 <h3 id="imparted-knowledge">Imparted knowledge</h3>
-<p>In your first session, you introduced your students to the <code>hello_world.py</code>,
+<ul>
+<li>Suppose that, in your first session, you introduced your students to the <code>hello_world.py</code>,
 <code>wheat_and_chessboard.py</code> and <code>euler_005_smallest_multiple.py</code> programs. Not only Paroxython should
 no longer recommend these programs, but the cost of learning the associated concepts should be
-considered as zero when they are encountered again in the future.</p>
+considered as zero when they are encountered again in the future.</li>
+</ul>
 <pre><code class="python">&gt;&gt;&gt; [
 ...     {
 ...         &quot;operation&quot;: &quot;impart&quot;,
@@ -56,10 +58,12 @@ considered as zero when they are encountered again in the future.</p>
 ...     },
 ... ]
 </code></pre>
-<p>You intervene after an introductory course given by a colleague. She gives you a folder (named
-<code>"CS_101"</code>), which contains the programs she has studied with her class. Since you are secretly in
-love, you assume, somewhat foolishly, that the concepts they implement are mastered by your new
-students.</p>
+<ul>
+<li>Suppose that you intervene after an introductory course given by a colleague. She gives you a
+folder (named <code>"CS_101"</code>), which contains the programs she has studied with her class. Since you
+are secretly in love, you assume, somewhat foolishly, that the concepts they implement are
+mastered by your new students.</li>
+</ul>
 <pre><code class="python">&gt;&gt;&gt; [
 ...     {
 ...         &quot;operation&quot;: &quot;impart&quot;,
@@ -72,7 +76,7 @@ students.</p>
 <p class="admonition-title">Tip</p>
 <p>As you can see, rather than maintaining a <strong>list</strong> of programs or concepts in the <code>"source"</code>
 field, you may provide a <strong>string</strong>. Paroxython will interpret it as a shell command, and
-expect it to display on <code>stdout</code> the required list of items, one per line.</p>
+expect it to print on <code>stdout</code> the required list of items (programs or taxons), one per line.</p>
 </div>
 <h3 id="blacklisted-programs">Blacklisted programs</h3>
 <p>You want to filter out all programs reserved for an exam, or too complex, or not pedagogically
@@ -129,17 +133,18 @@ the same time, but at least one. Any other program will be rejected.</p>
 <h3 id="preparing-an-assignment">Preparing an assignment</h3>
 <p>Basically, you provide Paroxython with a list of programs already studied in class, and it suggests
 new programs that implement only old concepts. This requires the exclusion of all programs
-featuring at least one concept that has not been seen in any of the programs already seen. It may
-sound a little complicated, because it is. But don't panic. Remember that Paroxython always
-orders its recommendations by increasing cost. All you have to do is ask it to list all the
-programs that have not been introduced. The programs you are interested in will appear at the top
-of the results, under the zero-learning cost section. Moreover, inside each section, they will be
-sorted by increasing size (<a href="https://en.wikipedia.org/wiki/Source_lines_of_code">SLOC</a>), which can
-be a reasonable proxy for their difficulty. But in the end, you, the teacher, are the judge.
-Paroxython will not select the exercises for your exam, let alone correct them. It is just there to
-remind you of some possibilities you might not have thought of at the right time, and to
-ensure that your exam contains only algorithmic features that you introduced in class, which might
-save you some awkward conversations with your students later on.</p>
+featuring at least one concept that has not been seen in any of the programs already seen.</p>
+<p>It may sound a little complicated, because it is. But don't panic. Remember that Paroxython always
+orders its recommendations by increasing cost. Thus, all you have to do is ask it to list the
+programs that have not been introduced yet. The programs you want to choose among will appear at
+the top of the results, under the zero-learning cost section. Moreover, inside each section, they
+will be sorted by increasing size (<a href="https://en.wikipedia.org/wiki/Source_lines_of_code">SLOC</a>),
+which can be a reasonable proxy for their difficulty.</p>
+<p>But in the end, you, the teacher, are the judge. Paroxython is not going to set up a test for you,
+let alone grade the answers. It is just here to remind you of some possibilities you might not have
+thought of at the right time, and to give you some confidence that the exercises require no concept
+you have not pre-introduced in class, which later on might save you some awkward conversations with
+your dear students.</p>
 <p>Since this is the last filter in our tutorial, let's summarize what we've seen by chaining several
 commands together:</p>
 <ol>
@@ -188,7 +193,7 @@ expressions, semantic triples, span algebra) in the next section (coming soon).<
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L0-L362" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L0-L365" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">import subprocess
 from collections import defaultdict
@@ -396,7 +401,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L193-L348" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L196-L351" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">class Recommendations:
     def __init__(
@@ -561,7 +566,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L219-L256" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L222-L259" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def run_pipeline(self) -&gt; None:
     current = set(self.programs)
@@ -609,7 +614,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L258-L348" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L261-L351" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def get_markdown(
     self,

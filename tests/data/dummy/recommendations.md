@@ -21,7 +21,7 @@
 9   9   O/C/H/B  O/J
 ```
 
-| Cost  | Taxon | Lines |
+| Cost  | Taxon | Location |
 |----|----|----|
 | 0 | `O` | 7 |
 | 0 | `O/C/F/U` | 5 |
@@ -56,7 +56,7 @@
 9   9   X/S/M/L/R/D  X/S/M/L/V  Y/T/Q  O/C/H/B/I
 ```
 
-| Cost  | Taxon | Lines |
+| Cost  | Taxon | Location |
 |----|----|----|
 | 0 | `O` | 2, 6 |
 | 0 | `O/C` | 7 |
@@ -90,14 +90,14 @@
 </details>
 
 <details>
-  <summary>8 remaining after impart/programs has filtered out 1 program.</summary>
+  <summary>8 remaining after operation 1 (impart) has filtered out 1 program.</summary>
   <ol>
     <li><code>prg8.py</code></li>
   </ol>
 </details>
 
 <details>
-  <summary>6 remaining after exclude/programs has filtered out 2 programs.</summary>
+  <summary>6 remaining after operation 2 (exclude) has filtered out 2 programs.</summary>
   <ol>
     <li><code>prg7.py</code></li>
     <li><code>prg9.py</code></li>
@@ -105,7 +105,7 @@
 </details>
 
 <details>
-  <summary>3 remaining after exclude/taxons has filtered out 3 programs.</summary>
+  <summary>3 remaining after operation 3 (exclude) has filtered out 3 programs.</summary>
   <ol>
     <li><code>prg4.py</code></li>
     <li><code>prg5.py</code></li>
@@ -114,7 +114,7 @@
 </details>
 
 <details>
-  <summary>2 remaining after include/taxons has filtered out 1 program.</summary>
+  <summary>2 remaining after operation 4 (include) has filtered out 1 program.</summary>
   <ol>
     <li><code>prg1.py</code></li>
   </ol>

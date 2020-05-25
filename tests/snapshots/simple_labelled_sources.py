@@ -8,7 +8,7 @@ a = b # assignment
       # whole_span:1
 
 # ----------------------------------------------------------------------------------------
-# collatz_print.py
+# collatz.py
 # ----------------------------------------------------------------------------------------
 def print_collatz(n): # added_block_label (-> +7)
                       # function:print_collatz (-> +7)
@@ -79,9 +79,9 @@ def print_collatz(n): # added_block_label (-> +7)
 # ----------------------------------------------------------------------------------------
 # fizzbuzz.py
 # ----------------------------------------------------------------------------------------
-import collatz_print # import_internally:collatz_print
-                     # import_module_internally:collatz_print
-                     # whole_span:10 (-> +9)
+import collatz # import_internally:collatz
+               # import_module_internally:collatz
+               # whole_span:10 (-> +9)
 for i in range(1, 101): # call_argument:1
                         # call_argument:101
                         # external_free_call:range

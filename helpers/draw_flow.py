@@ -10,7 +10,7 @@ paths = list(
     if not str(path).endswith(("user_types.py", "goodies.py", "span.py", "analyze_one.py"))
 )
 names = [str(path)[len("paroxython/") : -3] for path in paths]
-base = "docs/flow"
+base = "docs/resources/flow"
 find_all = regex.compile(fr"(?m)^from \.({'|'.join(names)}) import").findall
 
 Path(f"{base}.dot").write_text(
@@ -40,7 +40,7 @@ Path(f"{base}.dot").write_text(
             # Add invisible edges to make the layout more compact
             # "sqlite_queries -> recommend_programs  [style=invis]",
             '"*_db.sqlite" -> "*_pipe.py"  [style=invis]',
-            "compare_spans -> assess_costs  [style=invis]",
+            # "compare_spans -> assess_costs  [style=invis]",
         ]
         + [
             f"{imported_name} -> {name}"

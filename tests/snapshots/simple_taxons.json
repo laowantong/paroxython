@@ -1,15 +1,17 @@
 {
   "assignment.py": {
+    "metadata/program": "1",
     "metadata/sloc/1": "1",
     "variable/assignment/single": "1"
   },
-  "collatz_print.py": {
+  "collatz.py": {
     "call/function/builtin/print": "3 8",
     "flow/conditional": "4-7",
     "flow/conditional/else": "7",
     "flow/loop/exit/late": "2-7",
     "flow/loop/while": "2-7",
     "io/standard/print": "3 8",
+    "metadata/program": "1-8",
     "metadata/sloc/8": "1-8",
     "operator/arithmetic/addition": "7",
     "operator/arithmetic/modulo": "4",
@@ -34,6 +36,7 @@
     "flow/loop/for/arithmetic/start": "2-10",
     "io/standard/print": "4 6 8 10",
     "library/personal": "1",
+    "metadata/program": "1-10",
     "metadata/sloc/10": "1-10",
     "operator/arithmetic/modulo": "3 5 7",
     "test/equality": "3 5 7",
@@ -43,6 +46,7 @@
   },
   "is_even.py": {
     "library/personal": "1",
+    "metadata/program": "1-3",
     "metadata/sloc/3": "1-3",
     "operator/arithmetic/modulo": "3",
     "subroutine/argument/arg": "2",

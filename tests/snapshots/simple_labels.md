@@ -1,117 +1,117 @@
 # Present labels
 
-- addition_operator / collatz_print.py / 7
+- addition_operator / collatz.py / 7
 - assignment / assignment.py / 1
-- assignment:Add / collatz_print.py / 7
-- assignment:FloorDiv / collatz_print.py / 5
+- assignment:Add / collatz.py / 7
+- assignment:FloorDiv / collatz.py / 5
 - assignment_lhs_identifier:a / assignment.py / 1
-- assignment_lhs_identifier:n / collatz_print.py / 5, 7
-- assignment_rhs_atom:1 / collatz_print.py / 7
-- assignment_rhs_atom:2 / collatz_print.py / 5
-- assignment_rhs_atom:3 / collatz_print.py / 7
+- assignment_lhs_identifier:n / collatz.py / 5, 7
+- assignment_rhs_atom:1 / collatz.py / 7
+- assignment_rhs_atom:2 / collatz.py / 5
+- assignment_rhs_atom:3 / collatz.py / 7
 - assignment_rhs_atom:b / assignment.py / 1
-- assignment_rhs_atom:n / collatz_print.py / 5, 7
-- binary_operator:Add / collatz_print.py / 7
-- binary_operator:FloorDiv / collatz_print.py / 5
-- binary_operator:Mod / collatz_print.py / 4
+- assignment_rhs_atom:n / collatz.py / 5, 7
+- binary_operator:Add / collatz.py / 7
+- binary_operator:FloorDiv / collatz.py / 5
+- binary_operator:Mod / collatz.py / 4
 - binary_operator:Mod / fizzbuzz.py / 3, 5, 7
 - binary_operator:Mod / is_even.py / 3
-- binary_operator:Mult / collatz_print.py / 7
+- binary_operator:Mult / collatz.py / 7
 - call_argument: / fizzbuzz.py / 4, 6, 8
 - call_argument:1 / fizzbuzz.py / 2
 - call_argument:101 / fizzbuzz.py / 2
 - call_argument:i / fizzbuzz.py / 10
-- call_argument:n / collatz_print.py / 3, 8
-- comparison_operator:Eq / collatz_print.py / 4
+- call_argument:n / collatz.py / 3, 8
+- comparison_operator:Eq / collatz.py / 4
 - comparison_operator:Eq / fizzbuzz.py / 3, 5, 7
 - comparison_operator:Eq / is_even.py / 3
-- comparison_operator:NotEq / collatz_print.py / 2
+- comparison_operator:NotEq / collatz.py / 2
 - divisibility_test:15 / fizzbuzz.py / 3
-- divisibility_test:2 / collatz_print.py / 4
+- divisibility_test:2 / collatz.py / 4
 - divisibility_test:2 / is_even.py / 3
 - divisibility_test:3 / fizzbuzz.py / 5
 - divisibility_test:5 / fizzbuzz.py / 7
-- external_free_call:print / collatz_print.py / 3, 8
+- external_free_call:print / collatz.py / 3, 8
 - external_free_call:print / fizzbuzz.py / 4, 6, 8, 10
 - external_free_call:range / fizzbuzz.py / 2
 - for:i / fizzbuzz.py / 2-10
 - for_range:1:101 / fizzbuzz.py / 2-10
-- free_call:print / collatz_print.py / 3, 8
+- free_call:print / collatz.py / 3, 8
 - free_call:print / fizzbuzz.py / 4, 6, 8, 10
 - free_call:range / fizzbuzz.py / 2
-- free_call_without_result:print / collatz_print.py / 3, 8
+- free_call_without_result:print / collatz.py / 3, 8
 - free_call_without_result:print / fizzbuzz.py / 4, 6, 8, 10
 - function:is_even / is_even.py / 2-3
-- function:print_collatz / collatz_print.py / 1-8
-- function_argument:n / collatz_print.py / 1
+- function:print_collatz / collatz.py / 1-8
+- function_argument:n / collatz.py / 1
 - function_argument:n / is_even.py / 2
-- function_argument_flavor:arg / collatz_print.py / 1
+- function_argument_flavor:arg / collatz.py / 1
 - function_argument_flavor:arg / is_even.py / 2
-- function_returning_nothing:print_collatz / collatz_print.py / 1-8
+- function_returning_nothing:print_collatz / collatz.py / 1-8
 - function_returning_something:is_even / is_even.py / 2-3
-- if / collatz_print.py / 4-7
+- if / collatz.py / 4-7
 - if / fizzbuzz.py / 3-10, 5-10, 7-10
 - if_elif_branch / fizzbuzz.py / 6, 8
-- if_else_branch / collatz_print.py / 7
+- if_else_branch / collatz.py / 7
 - if_else_branch / fizzbuzz.py / 10
-- if_test_atom:0 / collatz_print.py / 4
+- if_test_atom:0 / collatz.py / 4
 - if_test_atom:0 / fizzbuzz.py / 3, 5, 7
 - if_test_atom:15 / fizzbuzz.py / 3
-- if_test_atom:2 / collatz_print.py / 4
+- if_test_atom:2 / collatz.py / 4
 - if_test_atom:3 / fizzbuzz.py / 5
 - if_test_atom:5 / fizzbuzz.py / 7
 - if_test_atom:i / fizzbuzz.py / 3, 5, 7
-- if_test_atom:n / collatz_print.py / 4
-- if_then_branch / collatz_print.py / 5
+- if_test_atom:n / collatz.py / 4
+- if_then_branch / collatz.py / 5
 - if_then_branch / fizzbuzz.py / 4
-- import:collatz_print / fizzbuzz.py / 1
+- import:collatz / fizzbuzz.py / 1
 - import:fizzbuzz / is_even.py / 1
-- import_module:collatz_print / fizzbuzz.py / 1
+- import_module:collatz / fizzbuzz.py / 1
 - import_module:fizzbuzz / is_even.py / 1
-- literal:0 / collatz_print.py / 4
+- literal:0 / collatz.py / 4
 - literal:0 / fizzbuzz.py / 3, 5, 7
 - literal:0 / is_even.py / 3
-- literal:1 / collatz_print.py / 2, 7
+- literal:1 / collatz.py / 2, 7
 - literal:1 / fizzbuzz.py / 2
 - literal:101 / fizzbuzz.py / 2
 - literal:15 / fizzbuzz.py / 3
-- literal:2 / collatz_print.py / 4, 5
+- literal:2 / collatz.py / 4, 5
 - literal:2 / is_even.py / 3
-- literal:3 / collatz_print.py / 7
+- literal:3 / collatz.py / 7
 - literal:3 / fizzbuzz.py / 5
 - literal:5 / fizzbuzz.py / 7
 - literal:Str / fizzbuzz.py / 4, 6, 8
 - loop:for / fizzbuzz.py / 2-10
-- loop:while / collatz_print.py / 2-7
+- loop:while / collatz.py / 2-7
 - loop_with_late_exit:for / fizzbuzz.py / 2-10
-- loop_with_late_exit:while / collatz_print.py / 2-7
-- modulo_operator / collatz_print.py / 4
+- loop_with_late_exit:while / collatz.py / 2-7
+- modulo_operator / collatz.py / 4
 - modulo_operator / fizzbuzz.py / 3, 5, 7
 - modulo_operator / is_even.py / 3
-- multiplication_operator / collatz_print.py / 7
+- multiplication_operator / collatz.py / 7
 - range:1:101 / fizzbuzz.py / 2
 - return / is_even.py / 3
 - single_assignment:a / assignment.py / 1
-- single_assignment:n / collatz_print.py / 5, 7
-- suggest_augmented_assignment / collatz_print.py / 5
-- suggest_constant_definition / collatz_print.py / 7
+- single_assignment:n / collatz.py / 5, 7
+- suggest_augmented_assignment / collatz.py / 5
+- suggest_constant_definition / collatz.py / 7
 - suggest_constant_definition / fizzbuzz.py / 3, 5, 7
-- update:n:1 / collatz_print.py / 7
-- update:n:2 / collatz_print.py / 5
-- update:n:3 / collatz_print.py / 7
-- update_by_assignment:n:1 / collatz_print.py / 7
-- update_by_assignment:n:2 / collatz_print.py / 5
-- update_by_assignment:n:3 / collatz_print.py / 7
-- update_by_assignment_with:Add / collatz_print.py / 7
-- update_by_assignment_with:FloorDiv / collatz_print.py / 5
-- update_with:Add / collatz_print.py / 7
-- update_with:FloorDiv / collatz_print.py / 5
-- verbose_conditional_assignment / collatz_print.py / 4-7
-- while / collatz_print.py / 2-7
+- update:n:1 / collatz.py / 7
+- update:n:2 / collatz.py / 5
+- update:n:3 / collatz.py / 7
+- update_by_assignment:n:1 / collatz.py / 7
+- update_by_assignment:n:2 / collatz.py / 5
+- update_by_assignment:n:3 / collatz.py / 7
+- update_by_assignment_with:Add / collatz.py / 7
+- update_by_assignment_with:FloorDiv / collatz.py / 5
+- update_with:Add / collatz.py / 7
+- update_with:FloorDiv / collatz.py / 5
+- verbose_conditional_assignment / collatz.py / 4-7
+- while / collatz.py / 2-7
 - whole_span:1 / assignment.py / 1
 - whole_span:10 / fizzbuzz.py / 1-10
 - whole_span:3 / is_even.py / 1-3
-- whole_span:8 / collatz_print.py / 1-8
+- whole_span:8 / collatz.py / 1-8
 
 # Absent labels
 

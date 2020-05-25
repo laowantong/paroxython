@@ -13,11 +13,11 @@ list of each and every taxon it implements.
 
 .. tip::
     The point is that the resulting list is sorted by increasing learning cost. This should give
-    you a rough idea of the angle of attack to adopt in your first classes.
+    you a rough idea of the pedagogical angle of attack to adopt in your first classes.
 
 ### Imparted knowledge
 
-In your first session, you introduced your students to the `hello_world.py`,
+- Suppose that, in your first session, you introduced your students to the `hello_world.py`,
 `wheat_and_chessboard.py` and `euler_005_smallest_multiple.py` programs. Not only Paroxython should
 no longer recommend these programs, but the cost of learning the associated concepts should be
 considered as zero when they are encountered again in the future.
@@ -25,7 +25,6 @@ considered as zero when they are encountered again in the future.
 >>> [
 ...     {
 ...         "operation": "impart",
-...         "programs_or_taxons": "programs",
 ...         "source": [
 ...             "hello_world.py",
 ...             "wheat_and_chessboard.py",
@@ -34,15 +33,14 @@ considered as zero when they are encountered again in the future.
 ...     },
 ... ]
 
-You intervene after an introductory course given by a colleague. She gives you a folder (named
-`"CS_101"`), which contains the programs she has studied with her class. Since you are secretly in
-love, you assume, somewhat foolishly, that the concepts they implement are mastered by your new
-students.
+- Suppose that you intervene after an introductory course given by a colleague. She gives you a
+  folder (named `"CS_101"`), which contains the programs she has studied with her class. Since you
+  are secretly in love, you assume, somewhat foolishly, that the concepts they implement are
+  mastered by your new students.
 
 >>> [
 ...     {
 ...         "operation": "impart",
-...         "programs_or_taxons": "programs",
 ...         "source": "find CS_101 -path '*.py'",
 ...     },
 ... ]
@@ -50,7 +48,7 @@ students.
 .. tip::
     As you can see, rather than maintaining a **list** of programs or concepts in the `"source"`
     field, you may provide a **string**. Paroxython will interpret it as a shell command, and
-    expect it to display on `stdout` the required list of items, one per line.
+    expect it to print on `stdout` the required list of items (programs or taxons), one per line.
 
 ### Blacklisted programs
 
@@ -60,7 +58,6 @@ interesting enough, or that could get you kicked out of your college, etc.
 >>> [
 ...     {
 ...         "operation": "exclude",
-...         "programs_or_taxons": "programs",
 ...         "source": [
 ...             "fizzbuzz.py",
 ...             "alpha_go.py",
@@ -79,13 +76,16 @@ recursivity (`subroutine/recursive`), dictionary (`type/non_sequence/dictionary`
 >>> [
 ...     {
 ...         "operation": "exclude",
-...         "programs_or_taxons": "taxons",
 ...         "source": [
 ...             "subroutine/recursive",
 ...             "type/non_sequence",
 ...         ],
 ...     },
 ... ]
+
+.. note::
+    Paroxython relies on the last three characters of an element to determine whether it is a
+    program (ending with `".py"`) or a taxon.
 
 .. tip::
     Since the two latter taxons share a common prefix and Python doesn't provide other non-sequence
@@ -101,7 +101,6 @@ the same time, but at least one. Any other program will be rejected.
 >>> [
 ...     {
 ...         "operation": "include",
-...         "programs_or_taxons": "taxons",
 ...         "source": [
 ...             "flow/conditional",
 ...             "operator/ternary",
@@ -113,17 +112,20 @@ the same time, but at least one. Any other program will be rejected.
 
 Basically, you provide Paroxython with a list of programs already studied in class, and it suggests
 new programs that implement only old concepts. This requires the exclusion of all programs
-featuring at least one concept that has not been seen in any of the programs already seen. It may
-sound a little complicated, because it is. But don't panic. Remember that Paroxython always
-orders its recommendations by increasing cost. All you have to do is ask it to list all the
-programs that have not been introduced. The programs you are interested in will appear at the top
-of the results, under the zero-learning cost section. Moreover, inside each section, they will be
-sorted by increasing size ([SLOC](https://en.wikipedia.org/wiki/Source_lines_of_code)), which can
-be a reasonable proxy for their difficulty. But in the end, you, the teacher, are the judge.
-Paroxython will not select the exercises for your exam, let alone correct them. It is just there to
-remind you of some possibilities you might not have thought of at the right time, and to
-ensure that your exam contains only algorithmic features that you introduced in class, which might
-save you some awkward conversations with your students later on.
+featuring at least one concept that has not been seen in any of the programs already seen.
+
+It may sound a little complicated, because it is. But don't panic. Remember that Paroxython always
+orders its recommendations by increasing cost. Thus, all you have to do is ask it to list the
+programs that have not been introduced yet. The programs you want to choose among will appear at
+the top of the results, under the zero-learning cost section. Moreover, inside each section, they
+will be sorted by increasing size ([SLOC](https://en.wikipedia.org/wiki/Source_lines_of_code)),
+which can be a reasonable proxy for their difficulty.
+
+But in the end, you, the teacher, are the judge. Paroxython is not going to set up a test for you,
+let alone grade the answers. It is just here to remind you of some possibilities you might not have
+thought of at the right time, and to give you some confidence that the exercises require no concept
+you have not pre-introduced in class, which later on might save you some awkward conversations with
+your dear students.
 
 Since this is the last filter in our tutorial, let's summarize what we've seen by chaining several
 commands together:
@@ -139,12 +141,10 @@ commands together:
 >>> [
 ...     {
 ...         "operation": "impart",
-...         "programs_or_taxons": "programs",
 ...         "source": "python helpers/parse_syllabus.py {base_path}/timeline.txt",
 ...     },
 ...     {
 ...         "operation": "exclude",
-...         "programs_or_taxons": "programs",
 ...         "source": [
 ...             "foo.py",
 ...             "bar.py",
@@ -153,7 +153,6 @@ commands together:
 ...     },
 ...     {
 ...         "operation": "include",
-...         "programs_or_taxons": "taxons",
 ...         "source": [
 ...             "pattern/elements/accumulate",
 ...             "topic/game",
@@ -174,7 +173,7 @@ expressions, semantic triples, span algebra) in the next section (coming soon).
 import subprocess
 from collections import defaultdict
 from pathlib import Path
-from typing import Dict, List, Optional
+from typing import Callable, Dict, List, Optional, Tuple, Union
 
 from typing_extensions import Literal
 
@@ -185,9 +184,20 @@ from .goodies import (
     cost_bucket,
     couple_to_string,
     enumeration_to_txt_factory,
+    print_warning,
     title_to_slug_factory,
 )
-from .user_types import AssessedPrograms, Command, JsonDatabase, ProgramNames
+from .normalize_predicate import normalize_predicate
+from .user_types import (
+    AssessedPrograms,
+    AssessmentStrategy,
+    Command,
+    JsonDatabase,
+    Operation,
+    ProgramNames,
+    ProgramNameSet,
+    TaxonNameSet,
+)
 
 
 class Recommendations:
@@ -196,7 +206,7 @@ class Recommendations:
         db: JsonDatabase,
         commands: Optional[List[Command]] = None,
         base_path: Optional[Path] = None,
-        cost_assessment_strategy: Literal["zeno", "linear"] = "zeno",
+        cost_assessment_strategy: AssessmentStrategy = "zeno",
     ) -> None:
 
         self.commands = commands or []
@@ -207,9 +217,12 @@ class Recommendations:
         self.programs = program_filter.db_programs
         self.selected_programs = program_filter.selected_programs
         self.imparted_knowledge = program_filter.imparted_knowledge
-
-        # hide the ugliness of dynamic method calls by defining an ad hoc function
-        self.method = lambda method_name, *args: getattr(program_filter, method_name)(*args)
+        self.get_programs_from_program_pattern = program_filter.get_programs_from_program_pattern
+        self.get_taxons_from_taxon_pattern = program_filter.get_taxons_from_taxon_pattern
+        self.taxons_of_programs = program_filter.taxons_of_programs
+        self.programs_of_taxons = program_filter.programs_of_taxons
+        self.programs_of_triple = program_filter.programs_of_triple
+        self.update_filter = program_filter.update_filter
 
         # copy locally some attributes and methods or a LearningCostAssessor instance
         self.assess_costs = LearningCostAssessor(self.imparted_knowledge)
@@ -223,37 +236,92 @@ class Recommendations:
         print(f"\nProcessing {len(self.commands)} commands on {len(current)} programs.")
 
         # Execute sequentially all the commands of the pipeline
-        for command in self.commands:
+        for (i, command) in enumerate(self.commands, 1):
 
-            # The patterns fed to a command can either be a list of strings...
-            data = command["source"]
-            if not isinstance(data, list):  # ... or a shell command printing them on stdout
-                data = (
-                    subprocess.run(
-                        str(data).format(base_path=self.base_path),  # str() needed by mypy
-                        stdout=subprocess.PIPE,  # From Python 3.7, these two arguments can be
-                        stderr=subprocess.PIPE,  # ... replaced by: capture_output=True
-                        encoding="utf-8",
-                        shell=True,
-                        check=True,
-                    )
-                    .stdout.strip()
-                    .split("\n")
-                )
+            # Retrieve the operation
+            operation = command.get("operation")
+            if operation not in ("include", "exclude", "impart"):
+                print_warning(f"operation {i} ({operation}) is ignored (unknown).")
+                continue
 
-            # If needed, replace the resulting strings by the matched names of programs or taxons
-            data = self.method("preprocess_{programs_or_taxons}".format(**command), data)
+            # Retrieve the patterns
+            patterns = self.retrieve_patterns_from_source(command.get("source", []))
+            if not patterns:
+                print_warning(f"operation {i} ({operation}) is ignored (no data).")
+                continue
 
-            # Apply to them a method whose name depends on both the operation and the name category
-            self.method("{operation}_{programs_or_taxons}".format(**command), set(data))
+            # Compute the sets from which the program selection and knowledge will be updated
+            (taxons, programs) = self.compute_new_taxons_and_programs(operation, patterns, i)
+
+            # Update the selected programs and optionally impart the associated taxons
+            self.update_filter(operation, taxons, programs)
 
             # Update the statistics of the filter state for the last operation
             (previous, current) = (current, set(self.selected_programs))
             command["filtered_out"] = sorted(previous - current)
-            action = "{operation}/{programs_or_taxons}".format(**command)
-            print(f"  {len(current)} programs remaining after executing {action}.")
+            print(f"  {len(current)} programs remaining after operation {i} ({operation}).")
 
         self.assessed_programs = self.assess_costs(self.selected_programs)
+
+    def retrieve_patterns_from_source(self, data: Union[str, List[str]]) -> List[str]:
+        """Retrieve the patterns on which the operation will be applied."""
+        if isinstance(data, list):  # The JSON object can either be a list of strings...
+            return data
+        elif isinstance(data, str):  # ... or a shell command printing them on stdout
+            result = (
+                subprocess.run(
+                    str(data).format(base_path=self.base_path),  # str() needed by mypy
+                    stdout=subprocess.PIPE,  # From Python 3.7, these two arguments can be
+                    stderr=subprocess.PIPE,  # ... replaced by: capture_output=True
+                    encoding="utf-8",
+                    shell=True,
+                    check=True,
+                )
+                .stdout.strip()
+                .split("\n")
+            )
+            return result
+        else:
+            return []
+
+    def compute_new_taxons_and_programs(
+        # fmt: off
+        self,
+        operation: Operation,
+        patterns: List[str],
+        i: int,
+        # fmt: on
+    ) -> Tuple[TaxonNameSet, ProgramNameSet]:
+        """Compute the programs and the taxons targeted by the operation application."""
+        new_taxons: TaxonNameSet = set()
+        new_programs: ProgramNameSet = set()
+        for pattern in patterns:
+            taxons: TaxonNameSet = set()
+            programs: ProgramNameSet = set()
+            if isinstance(pattern, str):
+                if pattern.endswith(".py"):
+                    programs = self.get_programs_from_program_pattern(pattern)
+                    taxons = self.taxons_of_programs(programs, operation == "exclude")
+                else:
+                    taxons = self.get_taxons_from_taxon_pattern(pattern)
+                    if operation != "impart":
+                        programs = self.programs_of_taxons(taxons, operation == "exclude")
+            elif isinstance(pattern, (list, tuple)) and len(pattern) == 3:
+                if operation == "impart":
+                    print_warning(f"operation {i} pattern '{pattern}' is ignored (imparted).")
+                else:
+                    (pattern_1, raw_predicate, pattern_2) = pattern
+                    (predicate, negated) = normalize_predicate(raw_predicate)
+                    programs = self.programs_of_triple(pattern_1, predicate, pattern_2)
+                    if negated:
+                        taxons_1 = self.get_taxons_from_taxon_pattern(pattern_1)
+                        programs_1 = self.programs_of_taxons(taxons_1)
+                        programs = programs_1 - programs
+            else:
+                print_warning(f"operation {i} pattern '{pattern}' is ignored (malformed).")
+            new_taxons.update(taxons)
+            new_programs.update(programs)
+        return (new_taxons, new_programs)
 
     def get_markdown(
         self,
@@ -304,7 +372,7 @@ class Recommendations:
                 toc.append(f"    - [`{program_name}`](#{title_to_slug(title)})")
                 contents.append(f"\n### {title}")
                 contents.append(f"\n```python\n{add_line_numbers(program_info['source'])}\n```")
-                contents.append("\n| Cost  | Taxon | Lines |")
+                contents.append("\n| Cost  | Taxon | Location |")
                 contents.append("|" + "----|" * 3)
                 items = sorted(
                     program_info["taxons"].items(),
@@ -334,8 +402,8 @@ class Recommendations:
         remainder = len(self.programs)
         summary: List[str] = [f"\n# Summary"]
         summary.append(programs_to_html(f"{remainder} initially", list(self.programs)))
-        for command in self.commands:
-            action = "{operation}/{programs_or_taxons}".format(**command)
+        for (i, command) in enumerate(self.commands, 1):
+            action = f"operation {i} ({command['operation']})"
             removed = len(command["filtered_out"])
             remainder -= removed
             summary.append(

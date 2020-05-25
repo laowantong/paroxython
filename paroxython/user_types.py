@@ -95,29 +95,20 @@ class JsonDatabase(TypedDict):
 # - trailing commas;
 # - comments!
 
+Operation = Literal["include", "exclude", "impart"]
+
 class Command(TypedDict):
-    operation: Literal["impart", "exclude", "include"]
-    programs_or_taxons: Literal["programs", "taxons"]
+    operation: Operation
     source: Union[str, List[str]] # not source code, but source of the data
     filtered_out: ProgramNames # to be populated by the execution of the command
 
-class TaxonTriple(NamedTuple): #  cf. https://en.wikipedia.org/wiki/Semantic_triple
-    name_1: TaxonName
-    predicate: str
-    name_2: TaxonName
-
-TaxonNameOrTriple = Union[TaxonName, TaxonTriple]
-TaxonNamesOrTriples = List[TaxonNameOrTriple]
-
-class TaxonTriplet(NamedTuple): #  warning: a triplet is a triple with a bounded predicate
-    name_1: TaxonName
-    predicate: Callable[[PoorSpan, PoorSpan], bool]
-    name_2: TaxonName
-
+Predicate = Callable[[int, int], bool]
 
 # Recommendations
 
 ProgramTaxonNames = Dict[ProgramName, TaxonNames]
 AssessedPrograms = List[Tuple[float, ProgramName]]
+
+AssessmentStrategy = Literal["zeno", "linear"]
 
 # fmt:on
