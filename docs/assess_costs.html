@@ -42,11 +42,18 @@ two zero-based indexes <code>start</code> (inclusive) and <code>stop</code> (exc
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/assess_costs.py#L0-L120" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/assess_costs.py#L0-L130" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">from functools import lru_cache
 
-from .user_types import TaxonName, TaxonNameSet, ProgramTaxonNames, AssessedPrograms, Literal
+from .user_types import (
+    AssessedPrograms,
+    AssessmentStrategy,
+    Literal,
+    ProgramTaxonNames,
+    TaxonName,
+    TaxonNameSet,
+)
 
 __pdoc__ = {&#34;LearningCostAssessor.__call__&#34;: True}
 
@@ -65,7 +72,7 @@ class LearningCostAssessor:
     def __init__(self, imparted_knowledge: TaxonNameSet) -&gt; None:
         self.imparted_knowledge = imparted_knowledge
 
-    def set_cost_assessment_strategy(self, strategy: Literal[&#34;zeno&#34;, &#34;linear&#34;] = &#34;zeno&#34;) -&gt; None:
+    def set_cost_assessment_strategy(self, strategy: AssessmentStrategy = &#34;zeno&#34;) -&gt; None:
         if strategy.lower() == &#34;zeno&#34;:
             self.range_to_cost = range_to_cost_zeno
         elif strategy == &#34;linear&#34;:
@@ -89,10 +96,13 @@ class LearningCostAssessor:
         return self.range_to_cost(start, stop)
 
     def __call__(self, programs: ProgramTaxonNames) -&gt; AssessedPrograms:
-        return sorted(
-            (sum(map(self.taxon_cost, taxon_names)), program_name)
-            for (program_name, taxon_names) in programs.items()
-        )</code></pre>
+        result = []
+        for (program_name, taxon_names) in programs.items():
+            total_cost = 0.0
+            for taxon_name in taxon_names:
+                total_cost += self.taxon_cost(taxon_name)
+            result.append((total_cost, program_name))
+        return sorted(result)</code></pre>
 </details>
 </section>
 <section>
@@ -110,7 +120,7 @@ class LearningCostAssessor:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/assess_costs.py#L25-L29" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/assess_costs.py#L32-L36" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">@lru_cache(maxsize=None)  # NB: memoization needed for consistency with mypy&#39;s typing
 def range_to_cost_linear(start: int, stop: int) -&gt; float:
@@ -136,7 +146,7 @@ be:</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/assess_costs.py#L32-L53" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/assess_costs.py#L39-L60" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">@lru_cache(maxsize=None)
 def range_to_cost_zeno(start: int, stop: int) -&gt; float:
@@ -163,13 +173,13 @@ introduced so far.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/assess_costs.py#L56-L121" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/assess_costs.py#L63-L131" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">class LearningCostAssessor:
     def __init__(self, imparted_knowledge: TaxonNameSet) -&gt; None:
         self.imparted_knowledge = imparted_knowledge
 
-    def set_cost_assessment_strategy(self, strategy: Literal[&#34;zeno&#34;, &#34;linear&#34;] = &#34;zeno&#34;) -&gt; None:
+    def set_cost_assessment_strategy(self, strategy: AssessmentStrategy = &#34;zeno&#34;) -&gt; None:
         if strategy.lower() == &#34;zeno&#34;:
             self.range_to_cost = range_to_cost_zeno
         elif strategy == &#34;linear&#34;:
@@ -193,10 +203,13 @@ introduced so far.</dd>
         return self.range_to_cost(start, stop)
 
     def __call__(self, programs: ProgramTaxonNames) -&gt; AssessedPrograms:
-        return sorted(
-            (sum(map(self.taxon_cost, taxon_names)), program_name)
-            for (program_name, taxon_names) in programs.items()
-        )</code></pre>
+        result = []
+        for (program_name, taxon_names) in programs.items():
+            total_cost = 0.0
+            for taxon_name in taxon_names:
+                total_cost += self.taxon_cost(taxon_name)
+            result.append((total_cost, program_name))
+        return sorted(result)</code></pre>
 </details>
 <h3>Methods</h3>
 <dl>
@@ -224,9 +237,9 @@ introduced so far.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/assess_costs.py#L66-L85" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/assess_costs.py#L73-L92" class="git-link">Browse GitHub</a>
 </summary>
-<pre><code class="python">def set_cost_assessment_strategy(self, strategy: Literal[&#34;zeno&#34;, &#34;linear&#34;] = &#34;zeno&#34;) -&gt; None:
+<pre><code class="python">def set_cost_assessment_strategy(self, strategy: AssessmentStrategy = &#34;zeno&#34;) -&gt; None:
     if strategy.lower() == &#34;zeno&#34;:
         self.range_to_cost = range_to_cost_zeno
     elif strategy == &#34;linear&#34;:
@@ -251,7 +264,7 @@ assessment function.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/assess_costs.py#L87-L106" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/assess_costs.py#L94-L113" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">@lru_cache(maxsize=None)
 def taxon_cost(self, taxon: TaxonName) -&gt; float:
@@ -286,13 +299,16 @@ of taxon names.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/assess_costs.py#L108-L121" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/assess_costs.py#L115-L131" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def __call__(self, programs: ProgramTaxonNames) -&gt; AssessedPrograms:
-    return sorted(
-        (sum(map(self.taxon_cost, taxon_names)), program_name)
-        for (program_name, taxon_names) in programs.items()
-    )</code></pre>
+    result = []
+    for (program_name, taxon_names) in programs.items():
+        total_cost = 0.0
+        for taxon_name in taxon_names:
+            total_cost += self.taxon_cost(taxon_name)
+        result.append((total_cost, program_name))
+    return sorted(result)</code></pre>
 </details>
 </dd>
 </dl>

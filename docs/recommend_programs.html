@@ -49,7 +49,6 @@ considered as zero when they are encountered again in the future.</li>
 <pre><code class="python">&gt;&gt;&gt; [
 ...     {
 ...         &quot;operation&quot;: &quot;impart&quot;,
-...         &quot;programs_or_taxons&quot;: &quot;programs&quot;,
 ...         &quot;source&quot;: [
 ...             &quot;hello_world.py&quot;,
 ...             &quot;wheat_and_chessboard.py&quot;,
@@ -67,7 +66,6 @@ mastered by your new students.</li>
 <pre><code class="python">&gt;&gt;&gt; [
 ...     {
 ...         &quot;operation&quot;: &quot;impart&quot;,
-...         &quot;programs_or_taxons&quot;: &quot;programs&quot;,
 ...         &quot;source&quot;: &quot;find CS_101 -path '*.py'&quot;,
 ...     },
 ... ]
@@ -84,7 +82,6 @@ interesting enough, or that could get you kicked out of your college, etc.</p>
 <pre><code class="python">&gt;&gt;&gt; [
 ...     {
 ...         &quot;operation&quot;: &quot;exclude&quot;,
-...         &quot;programs_or_taxons&quot;: &quot;programs&quot;,
 ...         &quot;source&quot;: [
 ...             &quot;fizzbuzz.py&quot;,
 ...             &quot;alpha_go.py&quot;,
@@ -101,7 +98,6 @@ recursivity (<code>subroutine/recursive</code>), dictionary (<code>type/non_sequ
 <pre><code class="python">&gt;&gt;&gt; [
 ...     {
 ...         &quot;operation&quot;: &quot;exclude&quot;,
-...         &quot;programs_or_taxons&quot;: &quot;taxons&quot;,
 ...         &quot;source&quot;: [
 ...             &quot;subroutine/recursive&quot;,
 ...             &quot;type/non_sequence&quot;,
@@ -109,6 +105,11 @@ recursivity (<code>subroutine/recursive</code>), dictionary (<code>type/non_sequ
 ...     },
 ... ]
 </code></pre>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Paroxython relies on the last three characters of a <code>"source"</code> item to decide whether it is a
+Python program (ending with <code>".py"</code>) or a taxon (like here).</p>
+</div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>Since the two latter taxons share a common prefix and Python doesn't provide other non-sequence
@@ -122,7 +123,6 @@ the same time, but at least one. Any other program will be rejected.</p>
 <pre><code class="python">&gt;&gt;&gt; [
 ...     {
 ...         &quot;operation&quot;: &quot;include&quot;,
-...         &quot;programs_or_taxons&quot;: &quot;taxons&quot;,
 ...         &quot;source&quot;: [
 ...             &quot;flow/conditional&quot;,
 ...             &quot;operator/ternary&quot;,
@@ -159,12 +159,10 @@ parent of the directory containing the programs of your personal database.</li>
 <pre><code class="python">&gt;&gt;&gt; [
 ...     {
 ...         &quot;operation&quot;: &quot;impart&quot;,
-...         &quot;programs_or_taxons&quot;: &quot;programs&quot;,
 ...         &quot;source&quot;: &quot;python helpers/parse_syllabus.py {base_path}/timeline.txt&quot;,
 ...     },
 ...     {
 ...         &quot;operation&quot;: &quot;exclude&quot;,
-...         &quot;programs_or_taxons&quot;: &quot;programs&quot;,
 ...         &quot;source&quot;: [
 ...             &quot;foo.py&quot;,
 ...             &quot;bar.py&quot;,
@@ -173,7 +171,6 @@ parent of the directory containing the programs of your personal database.</li>
 ...     },
 ...     {
 ...         &quot;operation&quot;: &quot;include&quot;,
-...         &quot;programs_or_taxons&quot;: &quot;taxons&quot;,
 ...         &quot;source&quot;: [
 ...             &quot;pattern/elements/accumulate&quot;,
 ...             &quot;topic/game&quot;,
@@ -193,12 +190,12 @@ expressions, semantic triples, span algebra) in the next section (coming soon).<
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L0-L365" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L0-L438" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">import subprocess
 from collections import defaultdict
 from pathlib import Path
-from typing import Dict, List, Optional
+from typing import Callable, Dict, List, Optional, Tuple, Union
 
 from typing_extensions import Literal
 
@@ -209,9 +206,20 @@ from .goodies import (
     cost_bucket,
     couple_to_string,
     enumeration_to_txt_factory,
+    print_warning,
     title_to_slug_factory,
 )
-from .user_types import AssessedPrograms, Command, JsonDatabase, ProgramNames
+from .normalize_predicate import normalize_predicate
+from .user_types import (
+    AssessedPrograms,
+    AssessmentStrategy,
+    Command,
+    JsonDatabase,
+    Operation,
+    ProgramNames,
+    ProgramNameSet,
+    TaxonNameSet,
+)
 
 
 class Recommendations:
@@ -220,7 +228,7 @@ class Recommendations:
         db: JsonDatabase,
         commands: Optional[List[Command]] = None,
         base_path: Optional[Path] = None,
-        cost_assessment_strategy: Literal[&#34;zeno&#34;, &#34;linear&#34;] = &#34;zeno&#34;,
+        cost_assessment_strategy: AssessmentStrategy = &#34;zeno&#34;,
     ) -&gt; None:
 
         self.commands = commands or []
@@ -231,9 +239,12 @@ class Recommendations:
         self.programs = program_filter.db_programs
         self.selected_programs = program_filter.selected_programs
         self.imparted_knowledge = program_filter.imparted_knowledge
-
-        # hide the ugliness of dynamic method calls by defining an ad hoc function
-        self.method = lambda method_name, *args: getattr(program_filter, method_name)(*args)
+        self.get_programs_from_program_pattern = program_filter.get_programs_from_program_pattern
+        self.get_taxons_from_taxon_pattern = program_filter.get_taxons_from_taxon_pattern
+        self.taxons_of_programs = program_filter.taxons_of_programs
+        self.programs_of_taxons = program_filter.programs_of_taxons
+        self.programs_of_triple = program_filter.programs_of_triple
+        self.update_filter = program_filter.update_filter
 
         # copy locally some attributes and methods or a LearningCostAssessor instance
         self.assess_costs = LearningCostAssessor(self.imparted_knowledge)
@@ -245,37 +256,98 @@ class Recommendations:
         print(f&#34;\nProcessing {len(self.commands)} commands on {len(current)} programs.&#34;)
 
         # Execute sequentially all the commands of the pipeline
-        for command in self.commands:
+        for (i, command) in enumerate(self.commands, 1):
 
-            # The patterns fed to a command can either be a list of strings...
-            data = command[&#34;source&#34;]
-            if not isinstance(data, list):  # ... or a shell command printing them on stdout
-                data = (
-                    subprocess.run(
-                        str(data).format(base_path=self.base_path),  # str() needed by mypy
-                        stdout=subprocess.PIPE,  # From Python 3.7, these two arguments can be
-                        stderr=subprocess.PIPE,  # ... replaced by: capture_output=True
-                        encoding=&#34;utf-8&#34;,
-                        shell=True,
-                        check=True,
-                    )
-                    .stdout.strip()
-                    .split(&#34;\n&#34;)
-                )
+            # Retrieve the operation
+            operation = command.get(&#34;operation&#34;)
+            if operation not in (&#34;include&#34;, &#34;exclude&#34;, &#34;impart&#34;):
+                print_warning(f&#34;operation {i} ({operation}) is ignored (unknown).&#34;)
+                continue
 
-            # If needed, replace the resulting strings by the matched names of programs or taxons
-            data = self.method(&#34;preprocess_{programs_or_taxons}&#34;.format(**command), data)
+            # Retrieve the patterns
+            patterns = self.retrieve_patterns_from_source(command.get(&#34;source&#34;, []), operation, i)
+            if not patterns:
+                print_warning(f&#34;operation {i} ({operation}) is ignored (no data).&#34;)
+                continue
 
-            # Apply to them a method whose name depends on both the operation and the name category
-            self.method(&#34;{operation}_{programs_or_taxons}&#34;.format(**command), set(data))
+            # Compute the sets from which the program selection and knowledge will be updated
+            (taxons, programs) = self.compute_new_taxons_and_programs(operation, patterns, i)
+
+            # Update the selected programs and optionally impart the associated taxons
+            self.update_filter(operation, taxons, programs)
 
             # Update the statistics of the filter state for the last operation
             (previous, current) = (current, set(self.selected_programs))
             command[&#34;filtered_out&#34;] = sorted(previous - current)
-            action = &#34;{operation}/{programs_or_taxons}&#34;.format(**command)
-            print(f&#34;  {len(current)} programs remaining after executing {action}.&#34;)
+            print(f&#34;  {len(current)} programs remaining after operation {i} ({operation}).&#34;)
 
         self.assessed_programs = self.assess_costs(self.selected_programs)
+
+    def retrieve_patterns_from_source(
+        # fmt: off
+        self,
+        data: Union[str, List[str]],
+        operation: Operation,
+        i: int
+        # fmt: on
+    ) -&gt; List[str]:
+        if isinstance(data, list):  # The JSON object can either be a list of strings...
+            return data
+        elif isinstance(data, str):  # ... or a shell command printing them on stdout
+            result = (
+                subprocess.run(
+                    str(data).format(base_path=self.base_path),  # str() needed by mypy
+                    stdout=subprocess.PIPE,  # From Python 3.7, these two arguments can be
+                    stderr=subprocess.PIPE,  # ... replaced by: capture_output=True
+                    encoding=&#34;utf-8&#34;,
+                    shell=True,
+                    check=True,
+                )
+                .stdout.strip()
+                .split(&#34;\n&#34;)
+            )
+            return result
+        else:
+            print_warning(f&#34;unable to interpret the pattern of operation {i} ({operation}).&#34;)
+            return []
+
+    def compute_new_taxons_and_programs(
+        # fmt: off
+        self,
+        operation: Operation,
+        patterns: List[str],
+        i: int,
+        # fmt: on
+    ) -&gt; Tuple[TaxonNameSet, ProgramNameSet]:
+        new_taxons: TaxonNameSet = set()
+        new_programs: ProgramNameSet = set()
+        for pattern in patterns:
+            taxons: TaxonNameSet = set()
+            programs: ProgramNameSet = set()
+            if isinstance(pattern, str):
+                if pattern.endswith(&#34;.py&#34;):
+                    programs = self.get_programs_from_program_pattern(pattern)
+                    taxons = self.taxons_of_programs(programs, operation == &#34;exclude&#34;)
+                else:
+                    taxons = self.get_taxons_from_taxon_pattern(pattern)
+                    if operation != &#34;impart&#34;:
+                        programs = self.programs_of_taxons(taxons, operation == &#34;exclude&#34;)
+            elif isinstance(pattern, (list, tuple)) and len(pattern) == 3:
+                if operation == &#34;impart&#34;:
+                    print_warning(f&#34;operation {i} pattern &#39;{pattern}&#39; is ignored (imparted).&#34;)
+                else:
+                    (pattern_1, raw_predicate, pattern_2) = pattern
+                    (predicate, negated) = normalize_predicate(raw_predicate)
+                    programs = self.programs_of_triple(pattern_1, predicate, pattern_2)
+                    if negated:
+                        taxons_1 = self.get_taxons_from_taxon_pattern(pattern_1)
+                        programs_1 = self.programs_of_taxons(taxons_1)
+                        programs = programs_1 - programs
+            else:
+                print_warning(f&#34;operation {i} pattern &#39;{pattern}&#39; is ignored (malformed).&#34;)
+            new_taxons.update(taxons)
+            new_programs.update(programs)
+        return (new_taxons, new_programs)
 
     def get_markdown(
         self,
@@ -324,7 +396,7 @@ class Recommendations:
                 toc.append(f&#34;    - [`{program_name}`](#{title_to_slug(title)})&#34;)
                 contents.append(f&#34;\n### {title}&#34;)
                 contents.append(f&#34;\n```python\n{add_line_numbers(program_info[&#39;source&#39;])}\n```&#34;)
-                contents.append(&#34;\n| Cost  | Taxon | Lines |&#34;)
+                contents.append(&#34;\n| Cost  | Taxon | Location |&#34;)
                 contents.append(&#34;|&#34; + &#34;----|&#34; * 3)
                 items = sorted(
                     program_info[&#34;taxons&#34;].items(),
@@ -354,8 +426,8 @@ class Recommendations:
         remainder = len(self.programs)
         summary: List[str] = [f&#34;\n# Summary&#34;]
         summary.append(programs_to_html(f&#34;{remainder} initially&#34;, list(self.programs)))
-        for command in self.commands:
-            action = &#34;{operation}/{programs_or_taxons}&#34;.format(**command)
+        for (i, command) in enumerate(self.commands, 1):
+            action = f&#34;operation {i} ({command[&#39;operation&#39;]})&#34;
             removed = len(command[&#34;filtered_out&#34;])
             remainder -= removed
             summary.append(
@@ -401,7 +473,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L196-L351" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L203-L424" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">class Recommendations:
     def __init__(
@@ -409,7 +481,7 @@ if __name__ == &#34;__main__&#34;:
         db: JsonDatabase,
         commands: Optional[List[Command]] = None,
         base_path: Optional[Path] = None,
-        cost_assessment_strategy: Literal[&#34;zeno&#34;, &#34;linear&#34;] = &#34;zeno&#34;,
+        cost_assessment_strategy: AssessmentStrategy = &#34;zeno&#34;,
     ) -&gt; None:
 
         self.commands = commands or []
@@ -420,9 +492,12 @@ if __name__ == &#34;__main__&#34;:
         self.programs = program_filter.db_programs
         self.selected_programs = program_filter.selected_programs
         self.imparted_knowledge = program_filter.imparted_knowledge
-
-        # hide the ugliness of dynamic method calls by defining an ad hoc function
-        self.method = lambda method_name, *args: getattr(program_filter, method_name)(*args)
+        self.get_programs_from_program_pattern = program_filter.get_programs_from_program_pattern
+        self.get_taxons_from_taxon_pattern = program_filter.get_taxons_from_taxon_pattern
+        self.taxons_of_programs = program_filter.taxons_of_programs
+        self.programs_of_taxons = program_filter.programs_of_taxons
+        self.programs_of_triple = program_filter.programs_of_triple
+        self.update_filter = program_filter.update_filter
 
         # copy locally some attributes and methods or a LearningCostAssessor instance
         self.assess_costs = LearningCostAssessor(self.imparted_knowledge)
@@ -434,37 +509,98 @@ if __name__ == &#34;__main__&#34;:
         print(f&#34;\nProcessing {len(self.commands)} commands on {len(current)} programs.&#34;)
 
         # Execute sequentially all the commands of the pipeline
-        for command in self.commands:
+        for (i, command) in enumerate(self.commands, 1):
 
-            # The patterns fed to a command can either be a list of strings...
-            data = command[&#34;source&#34;]
-            if not isinstance(data, list):  # ... or a shell command printing them on stdout
-                data = (
-                    subprocess.run(
-                        str(data).format(base_path=self.base_path),  # str() needed by mypy
-                        stdout=subprocess.PIPE,  # From Python 3.7, these two arguments can be
-                        stderr=subprocess.PIPE,  # ... replaced by: capture_output=True
-                        encoding=&#34;utf-8&#34;,
-                        shell=True,
-                        check=True,
-                    )
-                    .stdout.strip()
-                    .split(&#34;\n&#34;)
-                )
+            # Retrieve the operation
+            operation = command.get(&#34;operation&#34;)
+            if operation not in (&#34;include&#34;, &#34;exclude&#34;, &#34;impart&#34;):
+                print_warning(f&#34;operation {i} ({operation}) is ignored (unknown).&#34;)
+                continue
 
-            # If needed, replace the resulting strings by the matched names of programs or taxons
-            data = self.method(&#34;preprocess_{programs_or_taxons}&#34;.format(**command), data)
+            # Retrieve the patterns
+            patterns = self.retrieve_patterns_from_source(command.get(&#34;source&#34;, []), operation, i)
+            if not patterns:
+                print_warning(f&#34;operation {i} ({operation}) is ignored (no data).&#34;)
+                continue
 
-            # Apply to them a method whose name depends on both the operation and the name category
-            self.method(&#34;{operation}_{programs_or_taxons}&#34;.format(**command), set(data))
+            # Compute the sets from which the program selection and knowledge will be updated
+            (taxons, programs) = self.compute_new_taxons_and_programs(operation, patterns, i)
+
+            # Update the selected programs and optionally impart the associated taxons
+            self.update_filter(operation, taxons, programs)
 
             # Update the statistics of the filter state for the last operation
             (previous, current) = (current, set(self.selected_programs))
             command[&#34;filtered_out&#34;] = sorted(previous - current)
-            action = &#34;{operation}/{programs_or_taxons}&#34;.format(**command)
-            print(f&#34;  {len(current)} programs remaining after executing {action}.&#34;)
+            print(f&#34;  {len(current)} programs remaining after operation {i} ({operation}).&#34;)
 
         self.assessed_programs = self.assess_costs(self.selected_programs)
+
+    def retrieve_patterns_from_source(
+        # fmt: off
+        self,
+        data: Union[str, List[str]],
+        operation: Operation,
+        i: int
+        # fmt: on
+    ) -&gt; List[str]:
+        if isinstance(data, list):  # The JSON object can either be a list of strings...
+            return data
+        elif isinstance(data, str):  # ... or a shell command printing them on stdout
+            result = (
+                subprocess.run(
+                    str(data).format(base_path=self.base_path),  # str() needed by mypy
+                    stdout=subprocess.PIPE,  # From Python 3.7, these two arguments can be
+                    stderr=subprocess.PIPE,  # ... replaced by: capture_output=True
+                    encoding=&#34;utf-8&#34;,
+                    shell=True,
+                    check=True,
+                )
+                .stdout.strip()
+                .split(&#34;\n&#34;)
+            )
+            return result
+        else:
+            print_warning(f&#34;unable to interpret the pattern of operation {i} ({operation}).&#34;)
+            return []
+
+    def compute_new_taxons_and_programs(
+        # fmt: off
+        self,
+        operation: Operation,
+        patterns: List[str],
+        i: int,
+        # fmt: on
+    ) -&gt; Tuple[TaxonNameSet, ProgramNameSet]:
+        new_taxons: TaxonNameSet = set()
+        new_programs: ProgramNameSet = set()
+        for pattern in patterns:
+            taxons: TaxonNameSet = set()
+            programs: ProgramNameSet = set()
+            if isinstance(pattern, str):
+                if pattern.endswith(&#34;.py&#34;):
+                    programs = self.get_programs_from_program_pattern(pattern)
+                    taxons = self.taxons_of_programs(programs, operation == &#34;exclude&#34;)
+                else:
+                    taxons = self.get_taxons_from_taxon_pattern(pattern)
+                    if operation != &#34;impart&#34;:
+                        programs = self.programs_of_taxons(taxons, operation == &#34;exclude&#34;)
+            elif isinstance(pattern, (list, tuple)) and len(pattern) == 3:
+                if operation == &#34;impart&#34;:
+                    print_warning(f&#34;operation {i} pattern &#39;{pattern}&#39; is ignored (imparted).&#34;)
+                else:
+                    (pattern_1, raw_predicate, pattern_2) = pattern
+                    (predicate, negated) = normalize_predicate(raw_predicate)
+                    programs = self.programs_of_triple(pattern_1, predicate, pattern_2)
+                    if negated:
+                        taxons_1 = self.get_taxons_from_taxon_pattern(pattern_1)
+                        programs_1 = self.programs_of_taxons(taxons_1)
+                        programs = programs_1 - programs
+            else:
+                print_warning(f&#34;operation {i} pattern &#39;{pattern}&#39; is ignored (malformed).&#34;)
+            new_taxons.update(taxons)
+            new_programs.update(programs)
+        return (new_taxons, new_programs)
 
     def get_markdown(
         self,
@@ -513,7 +649,7 @@ if __name__ == &#34;__main__&#34;:
                 toc.append(f&#34;    - [`{program_name}`](#{title_to_slug(title)})&#34;)
                 contents.append(f&#34;\n### {title}&#34;)
                 contents.append(f&#34;\n```python\n{add_line_numbers(program_info[&#39;source&#39;])}\n```&#34;)
-                contents.append(&#34;\n| Cost  | Taxon | Lines |&#34;)
+                contents.append(&#34;\n| Cost  | Taxon | Location |&#34;)
                 contents.append(&#34;|&#34; + &#34;----|&#34; * 3)
                 items = sorted(
                     program_info[&#34;taxons&#34;].items(),
@@ -543,8 +679,8 @@ if __name__ == &#34;__main__&#34;:
         remainder = len(self.programs)
         summary: List[str] = [f&#34;\n# Summary&#34;]
         summary.append(programs_to_html(f&#34;{remainder} initially&#34;, list(self.programs)))
-        for command in self.commands:
-            action = &#34;{operation}/{programs_or_taxons}&#34;.format(**command)
+        for (i, command) in enumerate(self.commands, 1):
+            action = f&#34;operation {i} ({command[&#39;operation&#39;]})&#34;
             removed = len(command[&#34;filtered_out&#34;])
             remainder -= removed
             summary.append(
@@ -566,44 +702,127 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L222-L259" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L232-L264" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def run_pipeline(self) -&gt; None:
     current = set(self.programs)
     print(f&#34;\nProcessing {len(self.commands)} commands on {len(current)} programs.&#34;)
 
     # Execute sequentially all the commands of the pipeline
-    for command in self.commands:
+    for (i, command) in enumerate(self.commands, 1):
 
-        # The patterns fed to a command can either be a list of strings...
-        data = command[&#34;source&#34;]
-        if not isinstance(data, list):  # ... or a shell command printing them on stdout
-            data = (
-                subprocess.run(
-                    str(data).format(base_path=self.base_path),  # str() needed by mypy
-                    stdout=subprocess.PIPE,  # From Python 3.7, these two arguments can be
-                    stderr=subprocess.PIPE,  # ... replaced by: capture_output=True
-                    encoding=&#34;utf-8&#34;,
-                    shell=True,
-                    check=True,
-                )
-                .stdout.strip()
-                .split(&#34;\n&#34;)
-            )
+        # Retrieve the operation
+        operation = command.get(&#34;operation&#34;)
+        if operation not in (&#34;include&#34;, &#34;exclude&#34;, &#34;impart&#34;):
+            print_warning(f&#34;operation {i} ({operation}) is ignored (unknown).&#34;)
+            continue
 
-        # If needed, replace the resulting strings by the matched names of programs or taxons
-        data = self.method(&#34;preprocess_{programs_or_taxons}&#34;.format(**command), data)
+        # Retrieve the patterns
+        patterns = self.retrieve_patterns_from_source(command.get(&#34;source&#34;, []), operation, i)
+        if not patterns:
+            print_warning(f&#34;operation {i} ({operation}) is ignored (no data).&#34;)
+            continue
 
-        # Apply to them a method whose name depends on both the operation and the name category
-        self.method(&#34;{operation}_{programs_or_taxons}&#34;.format(**command), set(data))
+        # Compute the sets from which the program selection and knowledge will be updated
+        (taxons, programs) = self.compute_new_taxons_and_programs(operation, patterns, i)
+
+        # Update the selected programs and optionally impart the associated taxons
+        self.update_filter(operation, taxons, programs)
 
         # Update the statistics of the filter state for the last operation
         (previous, current) = (current, set(self.selected_programs))
         command[&#34;filtered_out&#34;] = sorted(previous - current)
-        action = &#34;{operation}/{programs_or_taxons}&#34;.format(**command)
-        print(f&#34;  {len(current)} programs remaining after executing {action}.&#34;)
+        print(f&#34;  {len(current)} programs remaining after operation {i} ({operation}).&#34;)
 
     self.assessed_programs = self.assess_costs(self.selected_programs)</code></pre>
+</details>
+</dd>
+<dt id="paroxython.recommend_programs.Recommendations.retrieve_patterns_from_source"><code class="name flex">
+<span>def <span class="ident">retrieve_patterns_from_source</span></span>(<span>self, data: Union[str, List[str]], operation: Literal['include', 'exclude', 'impart'], i: int) ‑> List[str]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Retrieve the patterns on which the operation will be applied.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L266-L293" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">def retrieve_patterns_from_source(
+    # fmt: off
+    self,
+    data: Union[str, List[str]],
+    operation: Operation,
+    i: int
+    # fmt: on
+) -&gt; List[str]:
+    if isinstance(data, list):  # The JSON object can either be a list of strings...
+        return data
+    elif isinstance(data, str):  # ... or a shell command printing them on stdout
+        result = (
+            subprocess.run(
+                str(data).format(base_path=self.base_path),  # str() needed by mypy
+                stdout=subprocess.PIPE,  # From Python 3.7, these two arguments can be
+                stderr=subprocess.PIPE,  # ... replaced by: capture_output=True
+                encoding=&#34;utf-8&#34;,
+                shell=True,
+                check=True,
+            )
+            .stdout.strip()
+            .split(&#34;\n&#34;)
+        )
+        return result
+    else:
+        print_warning(f&#34;unable to interpret the pattern of operation {i} ({operation}).&#34;)
+        return []</code></pre>
+</details>
+</dd>
+<dt id="paroxython.recommend_programs.Recommendations.compute_new_taxons_and_programs"><code class="name flex">
+<span>def <span class="ident">compute_new_taxons_and_programs</span></span>(<span>self, operation: Literal['include', 'exclude', 'impart'], patterns: List[str], i: int) ‑> Tuple[Set[TaxonName], Set[ProgramName]]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Compute the programs and the taxons targeted by the operation application.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L295-L332" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">def compute_new_taxons_and_programs(
+    # fmt: off
+    self,
+    operation: Operation,
+    patterns: List[str],
+    i: int,
+    # fmt: on
+) -&gt; Tuple[TaxonNameSet, ProgramNameSet]:
+    new_taxons: TaxonNameSet = set()
+    new_programs: ProgramNameSet = set()
+    for pattern in patterns:
+        taxons: TaxonNameSet = set()
+        programs: ProgramNameSet = set()
+        if isinstance(pattern, str):
+            if pattern.endswith(&#34;.py&#34;):
+                programs = self.get_programs_from_program_pattern(pattern)
+                taxons = self.taxons_of_programs(programs, operation == &#34;exclude&#34;)
+            else:
+                taxons = self.get_taxons_from_taxon_pattern(pattern)
+                if operation != &#34;impart&#34;:
+                    programs = self.programs_of_taxons(taxons, operation == &#34;exclude&#34;)
+        elif isinstance(pattern, (list, tuple)) and len(pattern) == 3:
+            if operation == &#34;impart&#34;:
+                print_warning(f&#34;operation {i} pattern &#39;{pattern}&#39; is ignored (imparted).&#34;)
+            else:
+                (pattern_1, raw_predicate, pattern_2) = pattern
+                (predicate, negated) = normalize_predicate(raw_predicate)
+                programs = self.programs_of_triple(pattern_1, predicate, pattern_2)
+                if negated:
+                    taxons_1 = self.get_taxons_from_taxon_pattern(pattern_1)
+                    programs_1 = self.programs_of_taxons(taxons_1)
+                    programs = programs_1 - programs
+        else:
+            print_warning(f&#34;operation {i} pattern &#39;{pattern}&#39; is ignored (malformed).&#34;)
+        new_taxons.update(taxons)
+        new_programs.update(programs)
+    return (new_taxons, new_programs)</code></pre>
 </details>
 </dd>
 <dt id="paroxython.recommend_programs.Recommendations.get_markdown"><code class="name flex">
@@ -614,7 +833,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L261-L351" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L334-L424" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def get_markdown(
     self,
@@ -663,7 +882,7 @@ if __name__ == &#34;__main__&#34;:
             toc.append(f&#34;    - [`{program_name}`](#{title_to_slug(title)})&#34;)
             contents.append(f&#34;\n### {title}&#34;)
             contents.append(f&#34;\n```python\n{add_line_numbers(program_info[&#39;source&#39;])}\n```&#34;)
-            contents.append(&#34;\n| Cost  | Taxon | Lines |&#34;)
+            contents.append(&#34;\n| Cost  | Taxon | Location |&#34;)
             contents.append(&#34;|&#34; + &#34;----|&#34; * 3)
             items = sorted(
                 program_info[&#34;taxons&#34;].items(),
@@ -693,8 +912,8 @@ if __name__ == &#34;__main__&#34;:
     remainder = len(self.programs)
     summary: List[str] = [f&#34;\n# Summary&#34;]
     summary.append(programs_to_html(f&#34;{remainder} initially&#34;, list(self.programs)))
-    for command in self.commands:
-        action = &#34;{operation}/{programs_or_taxons}&#34;.format(**command)
+    for (i, command) in enumerate(self.commands, 1):
+        action = f&#34;operation {i} ({command[&#39;operation&#39;]})&#34;
         removed = len(command[&#34;filtered_out&#34;])
         remainder -= removed
         summary.append(
@@ -751,6 +970,8 @@ data-gaCategoryParameter="paroxython.recommend_programs">
 <h4><code><a title="paroxython.recommend_programs.Recommendations" href="#paroxython.recommend_programs.Recommendations">Recommendations</a></code></h4>
 <ul class="">
 <li><code><a title="paroxython.recommend_programs.Recommendations.run_pipeline" href="#paroxython.recommend_programs.Recommendations.run_pipeline">run_pipeline</a></code></li>
+<li><code><a title="paroxython.recommend_programs.Recommendations.retrieve_patterns_from_source" href="#paroxython.recommend_programs.Recommendations.retrieve_patterns_from_source">retrieve_patterns_from_source</a></code></li>
+<li><code><a title="paroxython.recommend_programs.Recommendations.compute_new_taxons_and_programs" href="#paroxython.recommend_programs.Recommendations.compute_new_taxons_and_programs">compute_new_taxons_and_programs</a></code></li>
 <li><code><a title="paroxython.recommend_programs.Recommendations.get_markdown" href="#paroxython.recommend_programs.Recommendations.get_markdown">get_markdown</a></code></li>
 </ul>
 </li>

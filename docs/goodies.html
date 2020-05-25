@@ -29,9 +29,10 @@
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/goodies.py#L0-L95" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/goodies.py#L0-L100" class="git-link">Browse GitHub</a>
 </summary>
-<pre><code class="python">from collections import defaultdict
+<pre><code class="python">import sys
+from collections import defaultdict
 from math import log2
 from textwrap import wrap
 from typing import Callable, Tuple, Union
@@ -105,7 +106,11 @@ def cost_bucket(cost: int) -&gt; str:
 
 
 def couple_to_string(couple: Union[Span, Tuple[int, int]]) -&gt; str:
-    return f&#34;{couple[0]}&#34; + (&#34;&#34; if couple[0] == couple[1] else f&#34;-{couple[1]}&#34;)</code></pre>
+    return f&#34;{couple[0]}&#34; + (&#34;&#34; if couple[0] == couple[1] else f&#34;-{couple[1]}&#34;)
+
+
+def print_warning(message: str):
+    print(f&#34;Warning: {message}&#34;, file=sys.stderr)</code></pre>
 </details>
 </section>
 <section>
@@ -123,7 +128,7 @@ def couple_to_string(couple: Union[Span, Tuple[int, int]]) -&gt; str:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/goodies.py#L12-L33" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/goodies.py#L13-L34" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def title_to_slug_factory():
     slug_counts = defaultdict(int)
@@ -157,7 +162,7 @@ def couple_to_string(couple: Union[Span, Tuple[int, int]]) -&gt; str:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/goodies.py#L36-L38" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/goodies.py#L37-L39" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def add_line_numbers(source: str) -&gt; str:
     return &#34;\n&#34;.join(f&#34;{n: &lt;4}{line}&#34; for (n, line) in enumerate(source.split(&#34;\n&#34;), 1))</code></pre>
@@ -172,7 +177,7 @@ def couple_to_string(couple: Union[Span, Tuple[int, int]]) -&gt; str:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/goodies.py#L41-L60" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/goodies.py#L42-L61" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def enumeration_to_txt_factory(
     width: int = 20,
@@ -208,7 +213,7 @@ recommendation report.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/goodies.py#L63-L83" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/goodies.py#L64-L84" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def cost_bucket(cost: int) -&gt; str:
     if cost == 0:
@@ -239,10 +244,24 @@ recommendation report.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/goodies.py#L86-L96" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/goodies.py#L87-L97" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def couple_to_string(couple: Union[Span, Tuple[int, int]]) -&gt; str:
     return f&#34;{couple[0]}&#34; + (&#34;&#34; if couple[0] == couple[1] else f&#34;-{couple[1]}&#34;)</code></pre>
+</details>
+</dd>
+<dt id="paroxython.goodies.print_warning"><code class="name flex">
+<span>def <span class="ident">print_warning</span></span>(<span>message: str)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/goodies.py#L100-L101" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">def print_warning(message: str):
+    print(f&#34;Warning: {message}&#34;, file=sys.stderr)</code></pre>
 </details>
 </dd>
 </dl>
@@ -277,6 +296,7 @@ data-gaCategoryParameter="paroxython.goodies">
 <li><code><a title="paroxython.goodies.enumeration_to_txt_factory" href="#paroxython.goodies.enumeration_to_txt_factory">enumeration_to_txt_factory</a></code></li>
 <li><code><a title="paroxython.goodies.cost_bucket" href="#paroxython.goodies.cost_bucket">cost_bucket</a></code></li>
 <li><code><a title="paroxython.goodies.couple_to_string" href="#paroxython.goodies.couple_to_string">couple_to_string</a></code></li>
+<li><code><a title="paroxython.goodies.print_warning" href="#paroxython.goodies.print_warning">print_warning</a></code></li>
 </ul>
 </li>
 </ul>
