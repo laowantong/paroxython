@@ -351,14 +351,3 @@ def remove_hints(
 ) -> Source:
     """Once they are collected, remove all Paroxython hints from the given source."""
     return Source(sub_hints("", source).strip())
-
-
-if __name__ == "__main__":
-    source = open("../Python/maths/matrix_exponentiation.py").read()
-    lines = source.split("\n")
-    lines[13] += f" {HINT_COMMENT} test"
-    source = Source("\n".join(lines))
-    cleanup = Cleanup("full").run
-    print(source)
-    print("-" * 80)
-    print(cleanup(source))

@@ -7,7 +7,7 @@ import context
 from paroxython.filter_programs import ProgramFilter
 
 
-db = json.loads(Path("tests/data/dummy/db.json").read_text())
+db = json.loads(Path("examples/dummy/programs_db.json").read_text())
 
 
 def test_init():

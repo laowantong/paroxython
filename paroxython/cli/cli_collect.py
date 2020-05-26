@@ -38,6 +38,7 @@ from ..make_db import Database
 def cli_wrapper(args):
     db = Database(
         directory=Path(args["DIRECTORY"]),
+        ignore_timestamps=False,
         cleanup_strategy=args["--cleanup"],
         exclude_pattern=args["--exclude"],
         glob_pattern=args["--glob"],

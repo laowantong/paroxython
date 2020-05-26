@@ -1,8 +1,8 @@
 {
   "programs": {
     "01_hello_world.py": {
-      "timestamp": "2020-05-25 22:40:17.061282",
-      "source": "print ('Hello, world!')",
+      "timestamp": "ignored",
+      "source": "print(\"Hello, world!\")",
       "labels": {
         "call_argument:": [[1,1]],
         "external_free_call:print": [[1,1]],
@@ -20,8 +20,8 @@
       }
     },
     "02_input_ name.py": {
-      "timestamp": "2020-05-25 22:40:58.637958",
-      "source": "name = input('What is your name?\\n')\nprint ('Hi, %s.' % name)",
+      "timestamp": "ignored",
+      "source": "name = input(\"What is your name?\\n\")\nprint(\"Hi, %s.\" % name)",
       "labels": {
         "assignment:input": [[1,1]],
         "assignment_lhs_identifier:name": [[1,1]],
@@ -50,8 +50,8 @@
       }
     },
     "03_friends.py": {
-      "timestamp": "2020-05-25 22:41:35.087543",
-      "source": "friends = ['john', 'pat', 'gary', 'michael']\nfor i, name in enumerate(friends):\n    print (\"iteration {iteration} is {name}\".format(iteration=i, name=name))",
+      "timestamp": "ignored",
+      "source": "friends = [\"john\", \"pat\", \"gary\", \"michael\"]\nfor i, name in enumerate(friends):\n    print(\"iteration {iteration} is {name}\".format(iteration=i, name=name))",
       "labels": {
         "assignment": [[1,1]],
         "assignment_lhs_identifier:friends": [[1,1]],
@@ -94,8 +94,8 @@
       }
     },
     "04_fibonacci.py": {
-      "timestamp": "2020-05-25 22:42:10.314796",
-      "source": "parents, babies = (1, 1)\nwhile babies < 100:\n    print ('This generation has {0} babies'.format(babies))\n    parents, babies = (babies, parents + babies)",
+      "timestamp": "ignored",
+      "source": "parents, babies = (1, 1)\nwhile babies < 100:\n    print(\"This generation has {} babies\".format(babies))\n    parents, babies = (babies, parents + babies)",
       "labels": {
         "addition_operator": [[4,4]],
         "assignment": [[1,1],[4,4]],
@@ -150,8 +150,8 @@
       }
     },
     "05_greet.py": {
-      "timestamp": "2020-05-25 22:42:43.475949",
-      "source": "def greet(name):\n    print ('Hello', name)\ngreet('Jack')\ngreet('Jill')\ngreet('Bob')",
+      "timestamp": "ignored",
+      "source": "def greet(name):\n    print(\"Hello\", name)\ngreet(\"Jack\")\ngreet(\"Jill\")\ngreet(\"Bob\")",
       "labels": {
         "call_argument:": [[2,2],[3,3],[4,4],[5,5]],
         "call_argument:name": [[2,2]],
@@ -180,8 +180,8 @@
       }
     },
     "06_regex.py": {
-      "timestamp": "2020-05-25 22:43:29.763016",
-      "source": "import re\nfor test_string in ['555-1212', 'ILL-EGAL']:\n    if re.match(r'^\\d{3}-\\d{4}$', test_string):\n        print (test_string, 'is a valid US local phone number')\n    else:\n        print (test_string, 'rejected')",
+      "timestamp": "ignored",
+      "source": "import re\nfor test_string in [\"555-1212\", \"ILL-EGAL\"]:\n    if re.match(r\"^\\d{3}-\\d{4}$\", test_string):\n        print(test_string, \"is a valid US local phone number\")\n    else:\n        print(test_string, \"rejected\")",
       "labels": {
         "call_argument:": [[3,3],[4,4],[6,6]],
         "call_argument:test_string": [[3,3],[4,4],[6,6]],
@@ -218,9 +218,65 @@
         "type/sequence/string/literal": [[2,2],[2,2],[3,3],[4,4],[6,6]]
       }
     },
+    "07_grocery_bill.py": {
+      "timestamp": "ignored",
+      "source": "prices = {'apple': 0.40, 'banana': 0.50}\nmy_purchase = {\n    'apple': 1,\n    'banana': 6}\ngrocery_bill = sum(prices[fruit] * my_purchase[fruit]\n                   for fruit in my_purchase)\nprint ('I owe the grocer $%.2f' % grocery_bill)",
+      "labels": {
+        "assignment": [[1,1],[2,2]],
+        "assignment:sum": [[5,5]],
+        "assignment_lhs_identifier:grocery_bill": [[5,5]],
+        "assignment_lhs_identifier:my_purchase": [[2,2]],
+        "assignment_lhs_identifier:prices": [[1,1]],
+        "assignment_rhs_atom:0.4": [[1,1]],
+        "assignment_rhs_atom:0.5": [[1,1]],
+        "assignment_rhs_atom:1": [[3,3]],
+        "assignment_rhs_atom:6": [[4,4]],
+        "assignment_rhs_atom:fruit": [[5,5],[5,5],[6,6]],
+        "assignment_rhs_atom:my_purchase": [[5,5],[6,6]],
+        "assignment_rhs_atom:prices": [[5,5]],
+        "binary_operator:Mod": [[7,7]],
+        "binary_operator:Mult": [[5,5]],
+        "call_argument:": [[5,5],[7,7]],
+        "comprehension:Generator": [[5,5]],
+        "comprehension_for_count:1": [[5,5]],
+        "external_free_call:print": [[7,7]],
+        "external_free_call:sum": [[5,5]],
+        "free_call:print": [[7,7]],
+        "free_call:sum": [[5,5]],
+        "free_call_without_result:print": [[7,7]],
+        "index:fruit": [[5,5],[5,5]],
+        "literal:0.4": [[1,1]],
+        "literal:0.5": [[1,1]],
+        "literal:1": [[3,3]],
+        "literal:6": [[4,4]],
+        "literal:Dict": [[1,1],[2,2]],
+        "literal:Str": [[1,1],[1,1],[3,3],[4,4],[7,7]],
+        "multiplication_operator": [[5,5]],
+        "single_assignment:grocery_bill": [[5,5]],
+        "single_assignment:my_purchase": [[2,2]],
+        "single_assignment:prices": [[1,1]],
+        "string_formatting_operator": [[7,7]],
+        "whole_span:7": [[1,7]]
+      },
+      "taxons": {
+        "call/function/builtin/print": [[7,7]],
+        "call/function/builtin/sum": [[5,5]],
+        "io/standard/print": [[7,7]],
+        "metadata/program": [[1,7]],
+        "metadata/sloc/7": [[1,7]],
+        "operator/arithmetic/multiplication": [[5,5]],
+        "operator/string/format": [[7,7]],
+        "subscript/index": [[5,5],[5,5]],
+        "type/non_sequence/dictionary/literal": [[1,1],[2,2]],
+        "type/number/floating_point/literal": [[1,1],[1,1]],
+        "type/number/integer/literal": [[3,3],[4,4]],
+        "type/sequence/string/literal": [[1,1],[1,1],[3,3],[4,4],[7,7]],
+        "variable/assignment/single": [[1,1],[2,2],[5,5]]
+      }
+    },
     "08_arguments.py": {
-      "timestamp": "2020-05-25 22:45:26.748631",
-      "source": "import sys\ntry:\n    total = sum(int(arg) for arg in sys.argv[1:])\n    print ('sum =', total)\nexcept ValueError:\n    print ('Please supply integer arguments')",
+      "timestamp": "ignored",
+      "source": "import sys\ntry:\n    total = sum(int(arg) for arg in sys.argv[1:])\n    print(\"sum =\", total)\nexcept ValueError:\n    print(\"Please supply integer arguments\")",
       "labels": {
         "assignment:sum": [[3,3]],
         "assignment_lhs_identifier:total": [[3,3]],
@@ -272,8 +328,8 @@
       }
     },
     "09_indent.py": {
-      "timestamp": "2020-05-25 22:46:21.458091",
-      "source": "import glob\npython_files = glob.glob('*.py')\nfor file_name in sorted(python_files):\n    print ('    ------' + file_name)\n    with open(file_name) as f:\n        for line in f:\n            print ('    ' + line.rstrip())\n    print()",
+      "timestamp": "ignored",
+      "source": "import glob\npython_files = glob.glob(\"*.py\")\nfor file_name in sorted(python_files):\n    print(\"    ------\" + file_name)\n    with open(file_name) as f:\n        for line in f:\n            print(\"    \" + line.rstrip())\n    print()",
       "labels": {
         "assignment:glob": [[2,2]],
         "assignment_lhs_identifier:python_files": [[2,2]],
@@ -330,140 +386,140 @@
       }
     },
     "10_time.py": {
-      "timestamp": "2020-05-25 22:46:56.215464",
-      "source": "from time import localtime\nactivities = {8: 'Sleeping',\n              9: 'Commuting',\n              17: 'Working',\n              18: 'Commuting',\n              20: 'Eating',\n              22: 'Resting' }\ntime_now = localtime()\nhour = time_now.tm_hour\nfor activity_time in sorted(activities.keys()):\n    if hour < activity_time:\n        print (activities[activity_time])\n        break\nelse:\n    print ('Unknown, AFK or sleeping!')",
+      "timestamp": "ignored",
+      "source": "from time import localtime\nactivities = {\n    8: \"Sleeping\",\n    9: \"Commuting\",\n    17: \"Working\",\n    18: \"Commuting\",\n    20: \"Eating\",\n    22: \"Resting\",\n}\ntime_now = localtime()\nhour = time_now.tm_hour\nfor activity_time in sorted(activities.keys()):\n    if hour < activity_time:\n        print(activities[activity_time])\n        break\nelse:\n    print(\"Unknown, AFK or sleeping!\")",
       "labels": {
-        "assignment": [[2,2],[9,9]],
-        "assignment:localtime": [[8,8]],
+        "assignment": [[2,2],[11,11]],
+        "assignment:localtime": [[10,10]],
         "assignment_lhs_identifier:activities": [[2,2]],
-        "assignment_lhs_identifier:hour": [[9,9]],
-        "assignment_lhs_identifier:time_now": [[8,8]],
-        "assignment_rhs_atom:17": [[4,4]],
-        "assignment_rhs_atom:18": [[5,5]],
-        "assignment_rhs_atom:20": [[6,6]],
-        "assignment_rhs_atom:22": [[7,7]],
-        "assignment_rhs_atom:8": [[2,2]],
-        "assignment_rhs_atom:9": [[3,3]],
-        "assignment_rhs_atom:time_now": [[9,9]],
-        "break": [[13,13]],
-        "call_argument:": [[10,10],[12,12],[15,15]],
-        "comparison_operator:Lt": [[11,11]],
-        "composition": [[10,10]],
-        "external_free_call:localtime": [[8,8]],
-        "external_free_call:print": [[12,12],[15,15]],
-        "external_free_call:sorted": [[10,10]],
-        "for:activity_time": [[10,15]],
-        "free_call:localtime": [[8,8]],
-        "free_call:print": [[12,12],[15,15]],
-        "free_call:sorted": [[10,10]],
-        "free_call_without_arguments:localtime": [[8,8]],
-        "free_call_without_result:print": [[12,12],[15,15]],
-        "if": [[11,13]],
-        "if_test_atom:activity_time": [[11,11]],
-        "if_test_atom:hour": [[11,11]],
-        "if_then_branch": [[12,13]],
-        "if_without_else": [[11,13]],
+        "assignment_lhs_identifier:hour": [[11,11]],
+        "assignment_lhs_identifier:time_now": [[10,10]],
+        "assignment_rhs_atom:17": [[5,5]],
+        "assignment_rhs_atom:18": [[6,6]],
+        "assignment_rhs_atom:20": [[7,7]],
+        "assignment_rhs_atom:22": [[8,8]],
+        "assignment_rhs_atom:8": [[3,3]],
+        "assignment_rhs_atom:9": [[4,4]],
+        "assignment_rhs_atom:time_now": [[11,11]],
+        "break": [[15,15]],
+        "call_argument:": [[12,12],[14,14],[17,17]],
+        "comparison_operator:Lt": [[13,13]],
+        "composition": [[12,12]],
+        "external_free_call:localtime": [[10,10]],
+        "external_free_call:print": [[14,14],[17,17]],
+        "external_free_call:sorted": [[12,12]],
+        "for:activity_time": [[12,17]],
+        "free_call:localtime": [[10,10]],
+        "free_call:print": [[14,14],[17,17]],
+        "free_call:sorted": [[12,12]],
+        "free_call_without_arguments:localtime": [[10,10]],
+        "free_call_without_result:print": [[14,14],[17,17]],
+        "if": [[13,15]],
+        "if_test_atom:activity_time": [[13,13]],
+        "if_test_atom:hour": [[13,13]],
+        "if_then_branch": [[14,15]],
+        "if_without_else": [[13,15]],
         "import:time:localtime": [[1,1]],
         "import_module:time": [[1,1]],
         "import_name:localtime": [[1,1]],
-        "index:activity_time": [[12,12]],
-        "literal:17": [[4,4]],
-        "literal:18": [[5,5]],
-        "literal:20": [[6,6]],
-        "literal:22": [[7,7]],
-        "literal:8": [[2,2]],
-        "literal:9": [[3,3]],
+        "index:activity_time": [[14,14]],
+        "literal:17": [[5,5]],
+        "literal:18": [[6,6]],
+        "literal:20": [[7,7]],
+        "literal:22": [[8,8]],
+        "literal:8": [[3,3]],
+        "literal:9": [[4,4]],
         "literal:Dict": [[2,2]],
-        "literal:Str": [[2,2],[3,3],[4,4],[5,5],[6,6],[7,7],[15,15]],
-        "loop:for": [[10,15]],
-        "loop_else": [[15,15]],
-        "loop_with_break:for": [[10,15]],
-        "loop_with_early_exit:for:break": [[10,15]],
-        "loop_with_else:for": [[10,15]],
-        "member_call:keys": [[10,10]],
+        "literal:Str": [[3,3],[4,4],[5,5],[6,6],[7,7],[8,8],[17,17]],
+        "loop:for": [[12,17]],
+        "loop_else": [[17,17]],
+        "loop_with_break:for": [[12,17]],
+        "loop_with_early_exit:for:break": [[12,17]],
+        "loop_with_else:for": [[12,17]],
+        "member_call:keys": [[12,12]],
         "single_assignment:activities": [[2,2]],
-        "single_assignment:hour": [[9,9]],
-        "single_assignment:time_now": [[8,8]],
-        "whole_span:15": [[1,15]]
+        "single_assignment:hour": [[11,11]],
+        "single_assignment:time_now": [[10,10]],
+        "whole_span:17": [[1,17]]
       },
       "taxons": {
-        "call/composition": [[10,10]],
-        "call/function/builtin/print": [[12,12],[15,15]],
-        "call/function/builtin/sorted": [[10,10]],
-        "call/function/localtime": [[8,8]],
-        "call/function/without_arguments": [[8,8]],
-        "call/method/keys": [[10,10]],
-        "flow/conditional/no_else": [[11,13]],
-        "flow/loop/exit/early/break/else": [[10,15]],
-        "flow/loop/for": [[10,15]],
-        "io/standard/print": [[12,12],[15,15]],
+        "call/composition": [[12,12]],
+        "call/function/builtin/print": [[14,14],[17,17]],
+        "call/function/builtin/sorted": [[12,12]],
+        "call/function/localtime": [[10,10]],
+        "call/function/without_arguments": [[10,10]],
+        "call/method/keys": [[12,12]],
+        "flow/conditional/no_else": [[13,15]],
+        "flow/loop/exit/early/break/else": [[12,17]],
+        "flow/loop/for": [[12,17]],
+        "io/standard/print": [[14,14],[17,17]],
         "library/standard/time/localtime": [[1,1]],
-        "metadata/program": [[1,15]],
-        "metadata/sloc/15": [[1,15]],
-        "subscript/index": [[12,12]],
-        "test/inequality": [[11,11]],
-        "type/non_sequence/dictionary": [[10,10]],
+        "metadata/program": [[1,17]],
+        "metadata/sloc/17": [[1,17]],
+        "subscript/index": [[14,14]],
+        "test/inequality": [[13,13]],
+        "type/non_sequence/dictionary": [[12,12]],
         "type/non_sequence/dictionary/literal": [[2,2]],
-        "type/number/integer/literal": [[2,2],[3,3],[4,4],[5,5],[6,6],[7,7]],
-        "type/sequence/string/literal": [[2,2],[3,3],[4,4],[5,5],[6,6],[7,7],[15,15]],
-        "variable/assignment/single": [[2,2],[8,8],[9,9]]
+        "type/number/integer/literal": [[3,3],[4,4],[5,5],[6,6],[7,7],[8,8]],
+        "type/sequence/string/literal": [[3,3],[4,4],[5,5],[6,6],[7,7],[8,8],[17,17]],
+        "variable/assignment/single": [[2,2],[10,10],[11,11]]
       }
     },
     "11_bottles.py": {
-      "timestamp": "2020-05-25 22:47:54.374492",
-      "source": "REFRAIN = '''\n%d bottles of beer on the wall,\n%d bottles of beer,\ntake one down, pass it around,\n%d bottles of beer on the wall!\n'''\nbottles_of_beer = 9\nwhile bottles_of_beer > 1:\n    print (REFRAIN % (bottles_of_beer, bottles_of_beer,\n        bottles_of_beer - 1))\n    bottles_of_beer -= 1",
+      "timestamp": "ignored",
+      "source": "REFRAIN = \"\"\"\n%d bottles of beer on the wall,\n%d bottles of beer,\ntake one down, pass it around,\n%d bottles of beer on the wall!\n\"\"\"\nbottles_of_beer = 9\nwhile bottles_of_beer > 1:\n    print(REFRAIN % (bottles_of_beer, bottles_of_beer, bottles_of_beer - 1))\n    bottles_of_beer -= 1",
       "labels": {
         "assignment": [[1,1]],
         "assignment:9": [[7,7]],
         "assignment_lhs_identifier:REFRAIN": [[1,1]],
-        "assignment_lhs_identifier:bottles_of_beer": [[7,7],[11,11]],
-        "assignment_rhs_atom:1": [[11,11]],
+        "assignment_lhs_identifier:bottles_of_beer": [[7,7],[10,10]],
+        "assignment_rhs_atom:1": [[10,10]],
         "assignment_rhs_atom:9": [[7,7]],
-        "augmented_assignment:Sub": [[11,11]],
+        "augmented_assignment:Sub": [[10,10]],
         "binary_operator:Mod": [[9,9]],
-        "binary_operator:Sub": [[10,10]],
+        "binary_operator:Sub": [[9,9]],
         "call_argument:": [[9,9]],
         "comparison_operator:Gt": [[8,8]],
         "external_free_call:print": [[9,9]],
         "free_call:print": [[9,9]],
         "free_call_without_result:print": [[9,9]],
-        "literal:1": [[8,8],[10,10],[11,11]],
+        "literal:1": [[8,8],[9,9],[10,10]],
         "literal:9": [[7,7]],
         "literal:Str": [[6,6]],
         "literal:Tuple": [[9,9]],
-        "loop:while": [[8,11]],
-        "loop_with_late_exit:while": [[8,11]],
+        "loop:while": [[8,10]],
+        "loop_with_late_exit:while": [[8,10]],
         "modulo_operator": [[9,9]],
         "single_assignment:REFRAIN": [[1,1]],
         "single_assignment:bottles_of_beer": [[7,7]],
         "suggest_constant_definition": [[7,7]],
-        "update:bottles_of_beer:1": [[11,11]],
-        "update_by_augmented_assignment:bottles_of_beer:1": [[11,11]],
-        "update_by_augmented_assignment_with:Sub": [[11,11]],
-        "update_with:Sub": [[11,11]],
-        "while": [[8,11]],
-        "whole_span:11": [[1,11]]
+        "update:bottles_of_beer:1": [[10,10]],
+        "update_by_augmented_assignment:bottles_of_beer:1": [[10,10]],
+        "update_by_augmented_assignment_with:Sub": [[10,10]],
+        "update_with:Sub": [[10,10]],
+        "while": [[8,10]],
+        "whole_span:10": [[1,10]]
       },
       "taxons": {
         "call/function/builtin/print": [[9,9]],
-        "flow/loop/exit/late": [[8,11]],
-        "flow/loop/while": [[8,11]],
+        "flow/loop/exit/late": [[8,10]],
+        "flow/loop/while": [[8,10]],
         "io/standard/print": [[9,9]],
-        "metadata/program": [[1,11]],
-        "metadata/sloc/11": [[1,11]],
+        "metadata/program": [[1,10]],
+        "metadata/sloc/10": [[1,10]],
         "operator/arithmetic/modulo": [[9,9]],
-        "operator/arithmetic/substraction": [[10,10]],
+        "operator/arithmetic/substraction": [[9,9]],
         "test/inequality": [[8,8]],
-        "type/number/integer/literal": [[7,7],[8,8],[10,10],[11,11]],
+        "type/number/integer/literal": [[7,7],[8,8],[9,9],[10,10]],
         "type/sequence/string/literal": [[6,6]],
         "type/sequence/tuple/literal": [[9,9]],
-        "variable/assignment/augmented/Sub": [[11,11]],
+        "variable/assignment/augmented/Sub": [[10,10]],
         "variable/assignment/constant": [[1,1]],
         "variable/assignment/single": [[1,1],[7,7]]
       }
     },
     "12_classes.py": {
-      "timestamp": "2020-05-25 22:49:30.913707",
+      "timestamp": "ignored",
       "source": "class BankAccount(object):\n    def __init__(self, initial_balance=0):\n        self.balance = initial_balance\n    def deposit(self, amount):\n        self.balance += amount\n    def withdraw(self, amount):\n        self.balance -= amount\n    def overdrawn(self):\n        return self.balance < 0\nmy_account = BankAccount(15)\nmy_account.withdraw(50)\nprint(my_account.balance, my_account.overdrawn())",
       "labels": {
         "assignment": [[3,3]],
@@ -548,7 +604,7 @@
       }
     },
     "13_unit_testing.py": {
-      "timestamp": "2020-05-25 22:49:21.688857",
+      "timestamp": "ignored",
       "source": "import unittest\ndef median(pool):\n    copy = sorted(pool)\n    size = len(copy)\n    if size % 2 == 1:\n        return copy[int((size - 1) / 2)]\n    else:\n        return (copy[int(size / 2 - 1)] + copy[int(size / 2)]) / 2\nclass TestMedian(unittest.TestCase):\n    def testMedian(self):\n        self.assertEqual(median([2, 9, 9, 7, 9, 2, 4, 5, 8]), 7)",
       "labels": {
         "addition_operator": [[8,8]],
@@ -645,7 +701,7 @@
       }
     },
     "14_median.py": {
-      "timestamp": "2020-05-25 22:50:02.867534",
+      "timestamp": "ignored",
       "source": "def median(pool):\n    copy = sorted(pool)\n    size = len(copy)\n    if size % 2 == 1:\n        return copy[int((size - 1) / 2)]\n    else:\n        return (copy[int(size / 2 - 1)] + copy[int(size / 2)]) / 2",
       "labels": {
         "addition_operator": [[7,7]],
@@ -712,7 +768,7 @@
       }
     },
     "15_itertools_groupby.py": {
-      "timestamp": "2020-05-25 22:51:01.379833",
+      "timestamp": "ignored",
       "source": "from itertools import groupby\nlines = \"\"\"\nThis is the\nfirst paragraph.\nThis is the second.\n\"\"\".splitlines()\nfor has_chars, frags in groupby(lines, bool):\n    if has_chars:\n        print(\" \".join(frags))",
       "labels": {
         "assignment:splitlines": [[2,2]],
@@ -764,8 +820,8 @@
       }
     },
     "16_csv.py": {
-      "timestamp": "2020-05-25 22:52:00.602908",
-      "source": "import csv\ndef cmp(a, b):\n    return (a > b) - (a < b)\nwith open(\"stocks.csv\", \"w\", newline=\"\") as stocksFileW:\n    writer = csv.writer(stocksFileW)\n    writer.writerows(\n        [\n            [\"GOOG\", \"Google, Inc.\", 505.24, 0.47, 0.09],\n            [\"YHOO\", \"Yahoo! Inc.\", 27.38, 0.33, 1.22],\n            [\"CNET\", \"CNET Networks, Inc.\", 8.62, -0.13, -1.4901],\n        ]\n    )\nwith open(\"stocks.csv\", \"r\") as stocksFile:\n    stocks = csv.reader(stocksFile)\n    status_labels = {-1: \"down\", 0: \"unchanged\", 1: \"up\"}\n    for ticker, name, price, change, pct in stocks:\n        status = status_labels[cmp(float(change), 0.0)]\n        print(\"%s is %s (%.2f)\" % (name, status, float(pct)))",
+      "timestamp": "ignored",
+      "source": "import csv\ndef cmp(a, b):\n    return (a > b) - (a < b)\nwith open(\"stocks.csv\", \"w\", newline=\"\") as stocksFileW:\n    writer = csv.writer(stocksFileW)\n    writer.writerows(\n        [\n            [\"GOOG\", \"Google, Inc.\", 505.24, 0.47, 0.09],\n            [\"YHOO\", \"Yahoo! Inc.\", 27.38, 0.33, 1.22],\n            [\"CNET\", \"CNET Networks, Inc.\", 8.62, -0.13, -1.4901],\n        ]\n    )\nwith open(\"stocks.csv\", \"r\") as stocksFile:\n    stocks = csv.reader(stocksFile)\n    status_labels = {-1: \"down\", 0: \"unchanged\", 1: \"up\"}\n    for ticker, name, price, change, pct in stocks:\n        status = status_labels[cmp(float(change), 0.0)]\n        print(\"{} is {} ({:.2f})\".format(name, status, float(pct)))",
       "labels": {
         "assignment": [[15,15],[17,17]],
         "assignment:reader": [[14,14]],
@@ -783,17 +839,18 @@
         "assignment_rhs_atom:status_labels": [[17,17]],
         "assignment_rhs_atom:stocksFile": [[14,14]],
         "assignment_rhs_atom:stocksFileW": [[5,5]],
-        "binary_operator:Mod": [[18,18]],
         "binary_operator:Sub": [[3,3]],
-        "call_argument:": [[4,4],[4,4],[7,7],[13,13],[13,13],[17,17],[18,18]],
+        "call_argument:": [[4,4],[4,4],[7,7],[13,13],[13,13],[17,17],[18,18],[18,18]],
         "call_argument:0.0": [[17,17]],
         "call_argument:change": [[17,17]],
+        "call_argument:name": [[18,18]],
         "call_argument:pct": [[18,18]],
+        "call_argument:status": [[18,18]],
         "call_argument:stocksFile": [[14,14]],
         "call_argument:stocksFileW": [[5,5]],
         "comparison_operator:Gt": [[3,3]],
         "comparison_operator:Lt": [[3,3]],
-        "composition": [[17,17],[18,18]],
+        "composition": [[17,17],[18,18],[18,18]],
         "empty_literal:Str": [[4,4]],
         "external_free_call:float": [[17,17],[18,18]],
         "external_free_call:open": [[4,4],[13,13]],
@@ -834,9 +891,10 @@
         "literal:Dict": [[15,15]],
         "literal:List": [[7,7],[8,8],[9,9],[10,10]],
         "literal:Str": [[4,4],[4,4],[4,4],[8,8],[8,8],[9,9],[9,9],[10,10],[10,10],[13,13],[13,13],[15,15],[15,15],[15,15],[18,18]],
-        "literal:Tuple": [[16,16],[18,18]],
+        "literal:Tuple": [[16,16]],
         "loop:for": [[16,18]],
         "loop_with_late_exit:for": [[16,18]],
+        "member_call:format": [[18,18]],
         "member_call:reader": [[14,14]],
         "member_call:writer": [[5,5]],
         "member_call:writerows": [[6,6]],
@@ -847,16 +905,16 @@
         "single_assignment:status_labels": [[15,15]],
         "single_assignment:stocks": [[14,14]],
         "single_assignment:writer": [[5,5]],
-        "string_formatting_operator": [[18,18]],
         "suggest_constant_definition": [[8,8],[8,8],[8,8],[9,9],[9,9],[9,9],[10,10],[10,10],[10,10],[17,17]],
         "whole_span:18": [[1,18]]
       },
       "taxons": {
-        "call/composition": [[17,17],[18,18]],
+        "call/composition": [[17,17],[18,18],[18,18]],
         "call/function": [[17,17]],
         "call/function/builtin/casting/float": [[17,17],[18,18]],
         "call/function/builtin/open": [[4,4],[13,13]],
         "call/function/builtin/print": [[18,18]],
+        "call/method/format": [[18,18]],
         "call/method/reader": [[14,14]],
         "call/method/writer": [[5,5]],
         "call/method/writerows": [[6,6]],
@@ -869,7 +927,6 @@
         "metadata/program": [[1,18]],
         "metadata/sloc/18": [[1,18]],
         "operator/arithmetic/substraction": [[3,3]],
-        "operator/string/format": [[18,18]],
         "subroutine/argument/arg": [[2,2],[2,2]],
         "subroutine/function": [[2,3]],
         "subscript/index": [[17,17]],
@@ -881,14 +938,15 @@
         "type/number/integer/literal": [[15,15],[15,15]],
         "type/number/integer/literal/zero": [[15,15]],
         "type/sequence/list/literal": [[7,7],[8,8],[9,9],[10,10]],
+        "type/sequence/string": [[18,18]],
         "type/sequence/string/literal": [[4,4],[4,4],[8,8],[8,8],[9,9],[9,9],[10,10],[10,10],[13,13],[13,13],[15,15],[15,15],[15,15],[18,18]],
         "type/sequence/string/literal/empty": [[4,4]],
-        "type/sequence/tuple/literal": [[16,16],[18,18]],
+        "type/sequence/tuple/literal": [[16,16]],
         "variable/assignment/single": [[5,5],[14,14],[15,15],[17,17]]
       }
     },
     "18_queens.py": {
-      "timestamp": "2020-05-25 22:52:33.483939",
+      "timestamp": "ignored",
       "source": "BOARD_SIZE = 8\ndef under_attack(col, queens):\n    left = right = col\n    for r, c in reversed(queens):\n        left, right = left - 1, right + 1\n        if c in (left, col, right):\n            return True\n    return False\ndef solve(n):\n    if n == 0:\n        return [[]]\n    smaller_solutions = solve(n - 1)\n    return [\n        solution + [(n, i + 1)]\n        for i in range(BOARD_SIZE)\n        for solution in smaller_solutions\n        if not under_attack(i + 1, solution)\n    ]\nfor answer in solve(BOARD_SIZE):\n    print(answer)",
       "labels": {
         "addition_operator": [[5,5],[17,17]],
@@ -1023,7 +1081,7 @@
       }
     },
     "20_prime_numbers.py": {
-      "timestamp": "2020-05-25 22:53:22.108146",
+      "timestamp": "ignored",
       "source": "import itertools\ndef iter_primes():\n    numbers = itertools.count(2)\n    while True:\n        prime = next(numbers)\n        yield prime\n        numbers = filter(prime.__rmod__, numbers)\nfor p in iter_primes():\n    if p > 1000:\n        break\n    print(p)",
       "labels": {
         "assignment:count": [[3,3]],
@@ -1108,12 +1166,11 @@
       }
     },
     "21_xml_html_parsing.py": {
-      "timestamp": "2020-05-25 22:54:11.440598",
-      "source": "dinner_recipe = \"\"\"<html><body><table>\n<tr><th>amt</th><th>unit</th><th>item</th></tr>\n<tr><td>24</td><td>slices</td><td>baguette</td></tr>\n<tr><td>2+</td><td>tbsp</td><td>olive oil</td></tr>\n<tr><td>1</td><td>cup</td><td>tomatoes</td></tr>\n<tr><td>1</td><td>jar</td><td>pesto</td></tr>\n</table></body></html>\"\"\"\nimport xml.etree.ElementTree as etree\ntree = etree.fromstring(dinner_recipe)\npantry = set([\"olive oil\", \"pesto\"])\nfor ingredient in tree.getiterator(\"tr\"):\n    amt, unit, item = ingredient\n    if item.tag == \"td\" and item.text not in pantry:\n        print(\"%s: %s %s\" % (item.text, amt.text, unit.text))",
+      "timestamp": "ignored",
+      "source": "dinner_recipe = \"\"\"<html><body><table>\n<tr><th>amt</th><th>unit</th><th>item</th></tr>\n<tr><td>24</td><td>slices</td><td>baguette</td></tr>\n<tr><td>2+</td><td>tbsp</td><td>olive oil</td></tr>\n<tr><td>1</td><td>cup</td><td>tomatoes</td></tr>\n<tr><td>1</td><td>jar</td><td>pesto</td></tr>\n</table></body></html>\"\"\"\nimport xml.etree.ElementTree as etree\ntree = etree.fromstring(dinner_recipe)\npantry = {\"olive oil\", \"pesto\"}\nfor ingredient in tree.getiterator(\"tr\"):\n    amt, unit, item = ingredient\n    if item.tag == \"td\" and item.text not in pantry:\n        print(\"{}: {} {}\".format(item.text, amt.text, unit.text))",
       "labels": {
-        "assignment": [[1,1],[12,12]],
+        "assignment": [[1,1],[10,10],[12,12]],
         "assignment:fromstring": [[9,9]],
-        "assignment:set": [[10,10]],
         "assignment_lhs_identifier:amt": [[12,12]],
         "assignment_lhs_identifier:dinner_recipe": [[1,1]],
         "assignment_lhs_identifier:item": [[12,12]],
@@ -1123,17 +1180,15 @@
         "assignment_rhs_atom:dinner_recipe": [[9,9]],
         "assignment_rhs_atom:etree": [[9,9]],
         "assignment_rhs_atom:ingredient": [[12,12]],
-        "binary_operator:Mod": [[14,14]],
         "boolean_operator:And": [[13,13]],
-        "call_argument:": [[10,10],[11,11],[14,14]],
+        "call_argument:": [[11,11],[14,14],[14,14],[14,14],[14,14]],
         "call_argument:dinner_recipe": [[9,9]],
         "comparison_operator:Eq": [[13,13]],
         "comparison_operator:NotIn": [[13,13]],
+        "composition": [[14,14]],
         "external_free_call:print": [[14,14]],
-        "external_free_call:set": [[10,10]],
         "for:ingredient": [[11,14]],
         "free_call:print": [[14,14]],
-        "free_call:set": [[10,10]],
         "free_call_without_result:print": [[14,14]],
         "if": [[13,14]],
         "if_test_atom:item": [[13,13],[13,13]],
@@ -1142,23 +1197,24 @@
         "if_without_else": [[13,14]],
         "import:xml.etree.ElementTree": [[8,8]],
         "import_module:xml.etree.ElementTree": [[8,8]],
-        "literal:List": [[10,10]],
+        "literal:Set": [[10,10]],
         "literal:Str": [[7,7],[10,10],[10,10],[11,11],[13,13],[14,14]],
-        "literal:Tuple": [[12,12],[14,14]],
+        "literal:Tuple": [[12,12]],
         "loop:for": [[11,14]],
         "loop_with_late_exit:for": [[11,14]],
+        "member_call:format": [[14,14]],
         "member_call:fromstring": [[9,9]],
         "member_call:getiterator": [[11,11]],
         "parallel_assignment:3": [[12,12]],
         "single_assignment:dinner_recipe": [[1,1]],
         "single_assignment:pantry": [[10,10]],
         "single_assignment:tree": [[9,9]],
-        "string_formatting_operator": [[14,14]],
         "whole_span:14": [[1,14]]
       },
       "taxons": {
-        "call/function/builtin/casting/set": [[10,10]],
+        "call/composition": [[14,14]],
         "call/function/builtin/print": [[14,14]],
+        "call/method/format": [[14,14]],
         "call/method/fromstring": [[9,9]],
         "call/method/getiterator": [[11,11]],
         "flow/conditional/no_else": [[13,14]],
@@ -1169,20 +1225,19 @@
         "metadata/program": [[1,14]],
         "metadata/sloc/14": [[1,14]],
         "operator/boolean/and": [[13,13]],
-        "operator/string/format": [[14,14]],
         "test/belonging/not": [[13,13]],
         "test/equality": [[13,13]],
-        "type/non_sequence/set": [[10,10]],
-        "type/sequence/list/literal": [[10,10]],
+        "type/non_sequence/set/literal": [[10,10]],
+        "type/sequence/string": [[14,14]],
         "type/sequence/string/literal": [[7,7],[10,10],[10,10],[11,11],[13,13],[14,14]],
-        "type/sequence/tuple/literal": [[12,12],[14,14]],
+        "type/sequence/tuple/literal": [[12,12]],
         "variable/assignment/parallel/more_than_two": [[12,12]],
         "variable/assignment/single": [[1,1],[9,9],[10,10]]
       }
     },
     "28_queens.py": {
-      "timestamp": "2020-05-25 22:54:49.314429",
-      "source": "BOARD_SIZE = 8\nclass BailOut(Exception):\n    pass\ndef validate(queens):\n    left = right = col = queens[-1]\n    for r in reversed(queens[:-1]):\n        left, right = left-1, right+1\n        if r in (left, col, right):\n            raise BailOut\ndef add_queen(queens):\n    for i in range(BOARD_SIZE):\n        test_queens = queens + [i]\n        try:\n            validate(test_queens)\n            if len(test_queens) == BOARD_SIZE:\n                return test_queens\n            else:\n                return add_queen(test_queens)\n        except BailOut:\n            pass\n    raise BailOut\nqueens = add_queen([])\nprint (queens)\nprint (\"\\n\".join(\". \"*q + \"Q \" + \". \"*(BOARD_SIZE-q-1) for q in queens))",
+      "timestamp": "ignored",
+      "source": "BOARD_SIZE = 8\nclass BailOut(Exception):\n    pass\ndef validate(queens):\n    left = right = col = queens[-1]\n    for r in reversed(queens[:-1]):\n        left, right = left - 1, right + 1\n        if r in (left, col, right):\n            raise BailOut\ndef add_queen(queens):\n    for i in range(BOARD_SIZE):\n        test_queens = queens + [i]\n        try:\n            validate(test_queens)\n            if len(test_queens) == BOARD_SIZE:\n                return test_queens\n            else:\n                return add_queen(test_queens)\n        except BailOut:\n            pass\n    raise BailOut\nqueens = add_queen([])\nprint(queens)\nprint(\"\\n\".join(\". \" * q + \"Q \" + \". \" * (BOARD_SIZE - q - 1) for q in queens))",
       "labels": {
         "addition_operator": [[7,7]],
         "assignment": [[5,5],[7,7]],
@@ -1346,8 +1401,8 @@
       }
     },
     "33_guess_the_number.py": {
-      "timestamp": "2020-05-25 22:56:07.442394",
-      "source": "import random\nguesses_made = 0\nname = input(\"Hello! What is your name?\\n\")\nnumber = random.randint(1, 20)\nprint(\"Well, {0}, I am thinking of a number between 1 and 20.\".format(name))\nwhile guesses_made < 6:\n    guess = int(input(\"Take a guess: \"))\n    guesses_made += 1\n    if guess < number:\n        print(\"Your guess is too low.\")\n    if guess > number:\n        print(\"Your guess is too high.\")\n    if guess == number:\n        break\nif guess == number:\n    print(\"Good job, {0}! You guessed my number in {1} guesses!\".format(name, guesses_made))\nelse:\n    print(\"Nope. The number I was thinking of was {0}\".format(number))",
+      "timestamp": "ignored",
+      "source": "import random\nguesses_made = 0\nname = input(\"Hello! What is your name?\\n\")\nnumber = random.randint(1, 20)\nprint(\"Well, {}, I am thinking of a number between 1 and 20.\".format(name))\nwhile guesses_made < 6:\n    guess = int(input(\"Take a guess: \"))\n    guesses_made += 1\n    if guess < number:\n        print(\"Your guess is too low.\")\n    if guess > number:\n        print(\"Your guess is too high.\")\n    if guess == number:\n        break\nif guess == number:\n    print(\"Good job, {}! You guessed my number in {} guesses!\".format(name, guesses_made))\nelse:\n    print(\"Nope. The number I was thinking of was {}\".format(number))",
       "labels": {
         "assignment:0": [[2,2]],
         "assignment:input": [[3,3]],
@@ -1452,6 +1507,7 @@
     "assignment": [
       "03_friends.py",
       "04_fibonacci.py",
+      "07_grocery_bill.py",
       "10_time.py",
       "11_bottles.py",
       "12_classes.py",
@@ -1514,9 +1570,6 @@
     "assignment:reader": [
       "16_csv.py"
     ],
-    "assignment:set": [
-      "21_xml_html_parsing.py"
-    ],
     "assignment:solve": [
       "18_queens.py"
     ],
@@ -1528,6 +1581,7 @@
       "15_itertools_groupby.py"
     ],
     "assignment:sum": [
+      "07_grocery_bill.py",
       "08_arguments.py"
     ],
     "assignment:writer": [
@@ -1565,6 +1619,9 @@
     "assignment_lhs_identifier:friends": [
       "03_friends.py"
     ],
+    "assignment_lhs_identifier:grocery_bill": [
+      "07_grocery_bill.py"
+    ],
     "assignment_lhs_identifier:guess": [
       "33_guess_the_number.py"
     ],
@@ -1587,6 +1644,9 @@
     "assignment_lhs_identifier:my_account": [
       "12_classes.py"
     ],
+    "assignment_lhs_identifier:my_purchase": [
+      "07_grocery_bill.py"
+    ],
     "assignment_lhs_identifier:name": [
       "02_input_ name.py",
       "33_guess_the_number.py"
@@ -1602,6 +1662,9 @@
     ],
     "assignment_lhs_identifier:parents": [
       "04_fibonacci.py"
+    ],
+    "assignment_lhs_identifier:prices": [
+      "07_grocery_bill.py"
     ],
     "assignment_lhs_identifier:prime": [
       "20_prime_numbers.py"
@@ -1664,8 +1727,15 @@
     "assignment_rhs_atom:0.0": [
       "16_csv.py"
     ],
+    "assignment_rhs_atom:0.4": [
+      "07_grocery_bill.py"
+    ],
+    "assignment_rhs_atom:0.5": [
+      "07_grocery_bill.py"
+    ],
     "assignment_rhs_atom:1": [
       "04_fibonacci.py",
+      "07_grocery_bill.py",
       "08_arguments.py",
       "11_bottles.py",
       "16_csv.py",
@@ -1691,6 +1761,9 @@
     ],
     "assignment_rhs_atom:22": [
       "10_time.py"
+    ],
+    "assignment_rhs_atom:6": [
+      "07_grocery_bill.py"
     ],
     "assignment_rhs_atom:8": [
       "10_time.py",
@@ -1729,6 +1802,9 @@
     "assignment_rhs_atom:etree": [
       "21_xml_html_parsing.py"
     ],
+    "assignment_rhs_atom:fruit": [
+      "07_grocery_bill.py"
+    ],
     "assignment_rhs_atom:glob": [
       "09_indent.py"
     ],
@@ -1748,6 +1824,9 @@
       "18_queens.py",
       "28_queens.py"
     ],
+    "assignment_rhs_atom:my_purchase": [
+      "07_grocery_bill.py"
+    ],
     "assignment_rhs_atom:n": [
       "18_queens.py"
     ],
@@ -1760,6 +1839,9 @@
     "assignment_rhs_atom:pool": [
       "13_unit_testing.py",
       "14_median.py"
+    ],
+    "assignment_rhs_atom:prices": [
+      "07_grocery_bill.py"
     ],
     "assignment_rhs_atom:prime": [
       "20_prime_numbers.py"
@@ -1811,13 +1893,13 @@
     ],
     "binary_operator:Mod": [
       "02_input_ name.py",
+      "07_grocery_bill.py",
       "11_bottles.py",
       "13_unit_testing.py",
-      "14_median.py",
-      "16_csv.py",
-      "21_xml_html_parsing.py"
+      "14_median.py"
     ],
     "binary_operator:Mult": [
+      "07_grocery_bill.py",
       "28_queens.py"
     ],
     "binary_operator:Sub": [
@@ -1846,6 +1928,7 @@
       "04_fibonacci.py",
       "05_greet.py",
       "06_regex.py",
+      "07_grocery_bill.py",
       "08_arguments.py",
       "09_indent.py",
       "10_time.py",
@@ -1925,6 +2008,7 @@
     ],
     "call_argument:name": [
       "05_greet.py",
+      "16_csv.py",
       "33_guess_the_number.py"
     ],
     "call_argument:number": [
@@ -1952,6 +2036,9 @@
     ],
     "call_argument:solution": [
       "18_queens.py"
+    ],
+    "call_argument:status": [
+      "16_csv.py"
     ],
     "call_argument:stocksFile": [
       "16_csv.py"
@@ -2019,10 +2106,12 @@
       "13_unit_testing.py",
       "15_itertools_groupby.py",
       "16_csv.py",
+      "21_xml_html_parsing.py",
       "28_queens.py",
       "33_guess_the_number.py"
     ],
     "comprehension:Generator": [
+      "07_grocery_bill.py",
       "08_arguments.py",
       "28_queens.py"
     ],
@@ -2030,6 +2119,7 @@
       "18_queens.py"
     ],
     "comprehension_for_count:1": [
+      "07_grocery_bill.py",
       "08_arguments.py",
       "28_queens.py"
     ],
@@ -2114,6 +2204,7 @@
       "04_fibonacci.py",
       "05_greet.py",
       "06_regex.py",
+      "07_grocery_bill.py",
       "08_arguments.py",
       "09_indent.py",
       "10_time.py",
@@ -2135,9 +2226,6 @@
       "18_queens.py",
       "28_queens.py"
     ],
-    "external_free_call:set": [
-      "21_xml_html_parsing.py"
-    ],
     "external_free_call:sorted": [
       "09_indent.py",
       "10_time.py",
@@ -2145,6 +2233,7 @@
       "14_median.py"
     ],
     "external_free_call:sum": [
+      "07_grocery_bill.py",
       "08_arguments.py"
     ],
     "filtered_comprehension": [
@@ -2276,6 +2365,7 @@
       "04_fibonacci.py",
       "05_greet.py",
       "06_regex.py",
+      "07_grocery_bill.py",
       "08_arguments.py",
       "09_indent.py",
       "10_time.py",
@@ -2297,9 +2387,6 @@
       "18_queens.py",
       "28_queens.py"
     ],
-    "free_call:set": [
-      "21_xml_html_parsing.py"
-    ],
     "free_call:solve": [
       "18_queens.py"
     ],
@@ -2310,6 +2397,7 @@
       "14_median.py"
     ],
     "free_call:sum": [
+      "07_grocery_bill.py",
       "08_arguments.py"
     ],
     "free_call:under_attack": [
@@ -2337,6 +2425,7 @@
       "04_fibonacci.py",
       "05_greet.py",
       "06_regex.py",
+      "07_grocery_bill.py",
       "08_arguments.py",
       "09_indent.py",
       "10_time.py",
@@ -2674,6 +2763,9 @@
     "index:activity_time": [
       "10_time.py"
     ],
+    "index:fruit": [
+      "07_grocery_bill.py"
+    ],
     "infinite_while": [
       "20_prime_numbers.py"
     ],
@@ -2741,11 +2833,18 @@
     "literal:0.33": [
       "16_csv.py"
     ],
+    "literal:0.4": [
+      "07_grocery_bill.py"
+    ],
     "literal:0.47": [
       "16_csv.py"
     ],
+    "literal:0.5": [
+      "07_grocery_bill.py"
+    ],
     "literal:1": [
       "04_fibonacci.py",
+      "07_grocery_bill.py",
       "08_arguments.py",
       "11_bottles.py",
       "13_unit_testing.py",
@@ -2801,6 +2900,7 @@
       "16_csv.py"
     ],
     "literal:6": [
+      "07_grocery_bill.py",
       "33_guess_the_number.py"
     ],
     "literal:7": [
@@ -2821,6 +2921,7 @@
       "13_unit_testing.py"
     ],
     "literal:Dict": [
+      "07_grocery_bill.py",
       "10_time.py",
       "16_csv.py"
     ],
@@ -2833,8 +2934,10 @@
       "13_unit_testing.py",
       "16_csv.py",
       "18_queens.py",
-      "21_xml_html_parsing.py",
       "28_queens.py"
+    ],
+    "literal:Set": [
+      "21_xml_html_parsing.py"
     ],
     "literal:Str": [
       "01_hello_world.py",
@@ -2843,6 +2946,7 @@
       "04_fibonacci.py",
       "05_greet.py",
       "06_regex.py",
+      "07_grocery_bill.py",
       "08_arguments.py",
       "09_indent.py",
       "10_time.py",
@@ -2942,6 +3046,8 @@
     "member_call:format": [
       "03_friends.py",
       "04_fibonacci.py",
+      "16_csv.py",
+      "21_xml_html_parsing.py",
       "33_guess_the_number.py"
     ],
     "member_call:fromstring": [
@@ -3025,6 +3131,9 @@
       "13_unit_testing.py",
       "14_median.py"
     ],
+    "multiplication_operator": [
+      "07_grocery_bill.py"
+    ],
     "negative_index:-1": [
       "28_queens.py"
     ],
@@ -3098,6 +3207,9 @@
     "single_assignment:friends": [
       "03_friends.py"
     ],
+    "single_assignment:grocery_bill": [
+      "07_grocery_bill.py"
+    ],
     "single_assignment:guess": [
       "33_guess_the_number.py"
     ],
@@ -3113,6 +3225,9 @@
     "single_assignment:my_account": [
       "12_classes.py"
     ],
+    "single_assignment:my_purchase": [
+      "07_grocery_bill.py"
+    ],
     "single_assignment:name": [
       "02_input_ name.py",
       "33_guess_the_number.py"
@@ -3125,6 +3240,9 @@
     ],
     "single_assignment:pantry": [
       "21_xml_html_parsing.py"
+    ],
+    "single_assignment:prices": [
+      "07_grocery_bill.py"
     ],
     "single_assignment:prime": [
       "20_prime_numbers.py"
@@ -3193,8 +3311,7 @@
     ],
     "string_formatting_operator": [
       "02_input_ name.py",
-      "16_csv.py",
-      "21_xml_html_parsing.py"
+      "07_grocery_bill.py"
     ],
     "suggest_constant_definition": [
       "11_bottles.py",
@@ -3327,8 +3444,10 @@
     "whole_span:1": [
       "01_hello_world.py"
     ],
+    "whole_span:10": [
+      "11_bottles.py"
+    ],
     "whole_span:11": [
-      "11_bottles.py",
       "13_unit_testing.py",
       "20_prime_numbers.py"
     ],
@@ -3338,7 +3457,7 @@
     "whole_span:14": [
       "21_xml_html_parsing.py"
     ],
-    "whole_span:15": [
+    "whole_span:17": [
       "10_time.py"
     ],
     "whole_span:18": [
@@ -3368,6 +3487,7 @@
       "08_arguments.py"
     ],
     "whole_span:7": [
+      "07_grocery_bill.py",
       "14_median.py"
     ],
     "whole_span:8": [
@@ -3394,6 +3514,7 @@
       "13_unit_testing.py",
       "15_itertools_groupby.py",
       "16_csv.py",
+      "21_xml_html_parsing.py",
       "28_queens.py",
       "33_guess_the_number.py"
     ],
@@ -3412,9 +3533,6 @@
       "13_unit_testing.py",
       "14_median.py",
       "33_guess_the_number.py"
-    ],
-    "call/function/builtin/casting/set": [
-      "21_xml_html_parsing.py"
     ],
     "call/function/builtin/enumerate": [
       "03_friends.py"
@@ -3445,6 +3563,7 @@
       "04_fibonacci.py",
       "05_greet.py",
       "06_regex.py",
+      "07_grocery_bill.py",
       "08_arguments.py",
       "09_indent.py",
       "10_time.py",
@@ -3473,6 +3592,7 @@
       "14_median.py"
     ],
     "call/function/builtin/sum": [
+      "07_grocery_bill.py",
       "08_arguments.py"
     ],
     "call/function/groupby": [
@@ -3495,6 +3615,8 @@
     "call/method/format": [
       "03_friends.py",
       "04_fibonacci.py",
+      "16_csv.py",
+      "21_xml_html_parsing.py",
       "33_guess_the_number.py"
     ],
     "call/method/fromstring": [
@@ -3654,6 +3776,7 @@
       "04_fibonacci.py",
       "05_greet.py",
       "06_regex.py",
+      "07_grocery_bill.py",
       "08_arguments.py",
       "09_indent.py",
       "10_time.py",
@@ -3704,6 +3827,7 @@
       "04_fibonacci.py",
       "05_greet.py",
       "06_regex.py",
+      "07_grocery_bill.py",
       "08_arguments.py",
       "09_indent.py",
       "10_time.py",
@@ -3722,8 +3846,10 @@
     "metadata/sloc/1": [
       "01_hello_world.py"
     ],
+    "metadata/sloc/10": [
+      "11_bottles.py"
+    ],
     "metadata/sloc/11": [
-      "11_bottles.py",
       "13_unit_testing.py",
       "20_prime_numbers.py"
     ],
@@ -3733,7 +3859,7 @@
     "metadata/sloc/14": [
       "21_xml_html_parsing.py"
     ],
-    "metadata/sloc/15": [
+    "metadata/sloc/17": [
       "10_time.py"
     ],
     "metadata/sloc/18": [
@@ -3763,6 +3889,7 @@
       "08_arguments.py"
     ],
     "metadata/sloc/7": [
+      "07_grocery_bill.py",
       "14_median.py"
     ],
     "metadata/sloc/8": [
@@ -3786,6 +3913,9 @@
       "11_bottles.py",
       "13_unit_testing.py",
       "14_median.py"
+    ],
+    "operator/arithmetic/multiplication": [
+      "07_grocery_bill.py"
     ],
     "operator/arithmetic/substraction": [
       "11_bottles.py",
@@ -3811,8 +3941,7 @@
     ],
     "operator/string/format": [
       "02_input_ name.py",
-      "16_csv.py",
-      "21_xml_html_parsing.py"
+      "07_grocery_bill.py"
     ],
     "operator/string/replication": [
       "28_queens.py"
@@ -3866,6 +3995,7 @@
       "28_queens.py"
     ],
     "subscript/index": [
+      "07_grocery_bill.py",
       "10_time.py",
       "13_unit_testing.py",
       "14_median.py",
@@ -3920,16 +4050,18 @@
       "10_time.py"
     ],
     "type/non_sequence/dictionary/literal": [
+      "07_grocery_bill.py",
       "10_time.py",
       "16_csv.py"
     ],
-    "type/non_sequence/set": [
+    "type/non_sequence/set/literal": [
       "21_xml_html_parsing.py"
     ],
     "type/number/floating_point": [
       "16_csv.py"
     ],
     "type/number/floating_point/literal": [
+      "07_grocery_bill.py",
       "16_csv.py"
     ],
     "type/number/floating_point/literal/zero": [
@@ -3943,6 +4075,7 @@
     ],
     "type/number/integer/literal": [
       "04_fibonacci.py",
+      "07_grocery_bill.py",
       "08_arguments.py",
       "10_time.py",
       "11_bottles.py",
@@ -3970,7 +4103,6 @@
       "13_unit_testing.py",
       "16_csv.py",
       "18_queens.py",
-      "21_xml_html_parsing.py",
       "28_queens.py"
     ],
     "type/sequence/list/literal/empty": [
@@ -3982,6 +4114,8 @@
       "04_fibonacci.py",
       "09_indent.py",
       "15_itertools_groupby.py",
+      "16_csv.py",
+      "21_xml_html_parsing.py",
       "28_queens.py",
       "33_guess_the_number.py"
     ],
@@ -3992,6 +4126,7 @@
       "04_fibonacci.py",
       "05_greet.py",
       "06_regex.py",
+      "07_grocery_bill.py",
       "08_arguments.py",
       "09_indent.py",
       "10_time.py",
@@ -4049,6 +4184,7 @@
     "variable/assignment/single": [
       "02_input_ name.py",
       "03_friends.py",
+      "07_grocery_bill.py",
       "08_arguments.py",
       "09_indent.py",
       "10_time.py",
@@ -4072,6 +4208,7 @@
     "04_fibonacci.py": [],
     "05_greet.py": [],
     "06_regex.py": [],
+    "07_grocery_bill.py": [],
     "08_arguments.py": [],
     "09_indent.py": [],
     "10_time.py": [],
@@ -4094,6 +4231,7 @@
     "04_fibonacci.py": [],
     "05_greet.py": [],
     "06_regex.py": [],
+    "07_grocery_bill.py": [],
     "08_arguments.py": [],
     "09_indent.py": [],
     "10_time.py": [],

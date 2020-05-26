@@ -27,7 +27,7 @@ from .user_types import (
 
 
 class Database:
-    def __init__(self, directory: Path, ignore_timestamps=False, *args, **kwargs) -> None:
+    def __init__(self, directory: Path, ignore_timestamps=True, *args, **kwargs) -> None:
         """Collect all infos pertaining to the programs, the labels and the taxons."""
 
         self.default_json_db_path = directory.parent / f"{directory.name}_db.json"
@@ -270,10 +270,8 @@ def collect_exportations(exportations: ProgramToPrograms) -> ProgramToPrograms:
 if __name__ == "__main__":
     # fmt:off
     directories = [
-        # "../Python/project_euler",
-        # "../Python/maths",
+        "examples/simple/programs",
         "../algo/programs",
-        # "paroxython"
     ]
     # fmt:on
     print()

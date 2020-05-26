@@ -22,14 +22,14 @@ class ProgramEncoder(json.JSONEncoder):
 
 
 labeller = ProgramLabeller()
-labeller.label_programs(Path("tests/data/simple"))
+labeller.label_programs(Path("examples/mini/programs"))
 
 
 def test_label_programs(capsys):
     result = labeller.programs
     text = json.dumps(result, cls=ProgramEncoder, indent=2)
     text = regex.sub(r"\s*\[\s+(\d+),\s+(\d+)\s+\](,?)\s+", r"[\1,\2]\3", text)
-    make_snapshot(Path("tests/snapshots/simple_labelled_programs.json"), text, capsys)
+    make_snapshot(Path("examples/mini/labelled_programs.json"), text, capsys)
 
 
 def test_generate_labelled_sources(capsys):
@@ -47,7 +47,27 @@ def test_generate_labelled_sources(capsys):
                     result.append(f"{source} # {label}")
                     source = " " * len(source)
             result.append("")
-    make_snapshot(Path("tests/snapshots/simple_labelled_sources.py"), "\n".join(result), capsys)
+    make_snapshot(Path("examples/mini/labelled_sources.py"), "\n".join(result), capsys)
+
+
+def test_update_snapshots(capsys):
+    # fmt: off
+    directories = [
+        "examples/idioms/programs",
+        "examples/mini/programs",
+        "examples/simple/programs",
+        "../algo/programs",
+    ]
+    # fmt: on
+    labeller = ProgramLabeller()
+    for directory in directories:
+        path = Path(directory)
+        if not path.is_dir():
+            continue
+        labeller.label_programs(path)
+        output_path = Path(path.parent, path.parts[-1] + "_with_labels.py")
+        acc = [result for result in labeller.generate_labelled_sources()]
+        make_snapshot(output_path, "\n".join(acc), capsys)
 
 
 if __name__ == "__main__":

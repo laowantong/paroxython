@@ -1,7 +1,7 @@
 """Dump the contents of two test files:
 
-1. tests/data/dummy/taxons_and_programs.txt
-2. tests/data/dummy/db.txt
+1. examples/dummy/taxons_and_programs.txt
+2. examples/dummy/programs_db.txt
 """
 
 import random
@@ -51,12 +51,12 @@ def dump_dummy_taxons_and_programs():
             result.append(f"{j}   {line}")
         result.append("")
     result.append("")
-    output_path = Path("tests/data/dummy/taxons_and_programs.txt")
+    output_path = Path("examples/dummy/taxons_and_programs.txt")
     output_path.write_text("\n".join(result))
 
 
 def dump_dummy_db():
-    text = Path("tests/data/dummy/taxons_and_programs.txt").read_text()
+    text = Path("examples/dummy/taxons_and_programs.txt").read_text()
     taxon_names = regex.search(r"(?ms)^TAXONS\n(.+?)\n\n", text)[1].split()
     program_names_and_sources = regex.findall(r"(?ms)^(prg\d+\.py)\n(.+?)\n\n", text)
     data = {
@@ -82,7 +82,7 @@ def dump_dummy_db():
         data["taxons"][taxon_name] = sorted(program_names)
     text = json.dumps(data, indent=2)
     text = regex.sub(r"\s*\[\s+(\d+),\s+(\d+)\s+\](,?)\s+", r"[\1,\2]\3", text)
-    output_path = Path("tests/data/dummy/db.json")
+    output_path = Path("examples/dummy/programs_db.json")
     output_path.write_text(text + "\n")
 
 

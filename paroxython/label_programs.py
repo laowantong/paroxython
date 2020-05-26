@@ -65,6 +65,6 @@ class ProgramLabeller:
 
 if __name__ == "__main__":
     labeller = ProgramLabeller()
-    labeller.label_programs(Path("../Python/project_euler"))
+    labeller.label_programs(Path("examples/simple/programs"))
     for result in labeller.generate_labelled_sources():
         print(result)
