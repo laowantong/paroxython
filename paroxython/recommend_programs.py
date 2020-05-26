@@ -173,9 +173,7 @@ expressions, semantic triples, span algebra) in the next section (coming soon).
 import subprocess
 from collections import defaultdict
 from pathlib import Path
-from typing import Callable, Dict, List, Optional, Tuple, Union
-
-from typing_extensions import Literal
+from typing import Dict, List, Optional, Tuple, Union
 
 from .assess_costs import LearningCostAssessor
 from .filter_programs import ProgramFilter

@@ -3,9 +3,6 @@ import subprocess
 from pathlib import Path
 
 import pytest
-from paroxython.cli import cli
-
-import context
 
 
 def run(command_suffix):

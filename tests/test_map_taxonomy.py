@@ -1,5 +1,5 @@
 import json
-from collections import Counter as C
+from collections import Counter as c
 from pathlib import Path
 
 import pytest
@@ -45,59 +45,59 @@ def test_to_taxons():
         Label("comparison_operator:Lt", [S(1, 1), S(3, 3), S(2, 2)]),
     ]
     assert t.to_taxons(labels) == [
-        ("flow/conditional", C({S(1, 1): 2, S(2, 5): 1})),
-        ("test/inequality", C({S(2, 2): 1, S(3, 3): 1, S(1, 1): 1})),
+        ("flow/conditional", c({S(1, 1): 2, S(2, 5): 1})),
+        ("test/inequality", c({S(2, 2): 1, S(3, 3): 1, S(1, 1): 1})),
     ]
 
 
 def test_deduplicated_taxons():
     assert t.deduplicated_taxons([]) == []
     taxons = [
-        ("flow/conditional", C({S(1, 1): 2, S(2, 5): 1})),
-        ("flow/conditional/else", C({S(1, 1): 1, S(2, 5): 1})),
-        ("test/inequality", C({S(2, 2): 1, S(3, 3): 1, S(1, 1): 1})),
+        ("flow/conditional", c({S(1, 1): 2, S(2, 5): 1})),
+        ("flow/conditional/else", c({S(1, 1): 1, S(2, 5): 1})),
+        ("test/inequality", c({S(2, 2): 1, S(3, 3): 1, S(1, 1): 1})),
     ]
     result = t.deduplicated_taxons(taxons)
     print(result)
     assert result == [
-        ("flow/conditional", C({S(1, 1): 1})),
-        ("flow/conditional/else", C({S(1, 1): 1, S(2, 5): 1})),
-        ("test/inequality", C({S(2, 2): 1, S(3, 3): 1, S(1, 1): 1})),
+        ("flow/conditional", c({S(1, 1): 1})),
+        ("flow/conditional/else", c({S(1, 1): 1, S(2, 5): 1})),
+        ("test/inequality", c({S(2, 2): 1, S(3, 3): 1, S(1, 1): 1})),
     ]
 
 
 def test_deduplicated_taxons_with_deletion():
     taxons = [
-        ("flow", C({S(1, 1): 2, S(2, 5): 1})),
-        ("flow/conditional", C({S(1, 1): 2, S(2, 5): 1})),
-        ("flow/conditional/else", C({S(1, 1): 2, S(2, 5): 1})),
+        ("flow", c({S(1, 1): 2, S(2, 5): 1})),
+        ("flow/conditional", c({S(1, 1): 2, S(2, 5): 1})),
+        ("flow/conditional/else", c({S(1, 1): 2, S(2, 5): 1})),
     ]
     result = t.deduplicated_taxons(taxons)
     print(result)
     assert result == [
-        ("flow/conditional/else", C({S(1, 1): 2, S(2, 5): 1})),
+        ("flow/conditional/else", c({S(1, 1): 2, S(2, 5): 1})),
     ]
     taxons = [
-        ("flow", C({S(1, 1): 2, S(2, 5): 2})),
-        ("flow/conditional", C({S(1, 1): 2, S(2, 5): 1})),
-        ("flow/conditional/else", C({S(1, 1): 2, S(2, 5): 1})),
+        ("flow", c({S(1, 1): 2, S(2, 5): 2})),
+        ("flow/conditional", c({S(1, 1): 2, S(2, 5): 1})),
+        ("flow/conditional/else", c({S(1, 1): 2, S(2, 5): 1})),
     ]
     result = t.deduplicated_taxons(taxons)
     print(result)
     assert result == [
-        ("flow", C({S(2, 5): 1})),
-        ("flow/conditional/else", C({S(1, 1): 2, S(2, 5): 1})),
+        ("flow", c({S(2, 5): 1})),
+        ("flow/conditional/else", c({S(1, 1): 2, S(2, 5): 1})),
     ]
     taxons = [
-        ("flow", C({S(1, 1): 2, S(2, 5): 2})),
-        ("flow/conditional", C({S(1, 1): 1, S(2, 5): 1})),
-        ("flow/loop", C({S(1, 1): 1, S(2, 5): 1})),
+        ("flow", c({S(1, 1): 2, S(2, 5): 2})),
+        ("flow/conditional", c({S(1, 1): 1, S(2, 5): 1})),
+        ("flow/loop", c({S(1, 1): 1, S(2, 5): 1})),
     ]
     result = t.deduplicated_taxons(taxons)
     print(result)
     assert result == [
-        ("flow/conditional", C({S(1, 1): 1, S(2, 5): 1})),
-        ("flow/loop", C({S(1, 1): 1, S(2, 5): 1})),
+        ("flow/conditional", c({S(1, 1): 1, S(2, 5): 1})),
+        ("flow/loop", c({S(1, 1): 1, S(2, 5): 1})),
     ]
 
 
@@ -129,13 +129,13 @@ def test_call():
     print(result)
     assert result == {
         "algo1": [
-            ("flow/conditional", C({S(1, 1): 1})),
-            ("flow/conditional/else", C({S(1, 1): 1, S(2, 5): 1})),
-            ("test/inequality", C({S(2, 2): 1, S(3, 3): 1, S(1, 1): 1})),
+            ("flow/conditional", c({S(1, 1): 1})),
+            ("flow/conditional/else", c({S(1, 1): 1, S(2, 5): 1})),
+            ("test/inequality", c({S(2, 2): 1, S(3, 3): 1, S(1, 1): 1})),
         ],
         "algo2": [
-            ("call/function/builtin/casting/set", C({S(1, 1): 1, S(2, 5): 1})),
-            ("type/non_sequence/set", C({S(1, 1): 3, S(2, 5): 2})),
+            ("call/function/builtin/casting/set", c({S(1, 1): 1, S(2, 5): 1})),
+            ("type/non_sequence/set", c({S(1, 1): 3, S(2, 5): 2})),
         ],
     }
 

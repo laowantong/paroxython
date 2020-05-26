@@ -2,7 +2,7 @@ from collections import defaultdict
 from os.path import dirname
 from pathlib import Path
 from typed_ast import ast3 as ast
-from typing import Callable, Dict, List, Iterator, Tuple
+from typing import Dict, List, Iterator, Tuple
 
 
 import regex  # type: ignore

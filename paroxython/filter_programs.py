@@ -1,23 +1,18 @@
-import sys
 from itertools import permutations, product
-from typing import Iterator, List, Set, Tuple, Union
+from typing import Iterator
 
 import regex  # type: ignore
 
 from .user_types import (
     JsonDatabase,
     Operation,
-    PoorSpan,
     Predicate,
     ProgramInfos,
-    ProgramName,
-    ProgramNames,
     ProgramNameSet,
     ProgramTaxonNames,
     ProgramToPrograms,
     TaxonInfos,
     TaxonName,
-    TaxonNames,
     TaxonNameSet,
     TaxonsPoorSpans,
 )

@@ -20,7 +20,6 @@ from functools import lru_cache
 from .user_types import (
     AssessedPrograms,
     AssessmentStrategy,
-    Literal,
     ProgramTaxonNames,
     TaxonName,
     TaxonNameSet,
