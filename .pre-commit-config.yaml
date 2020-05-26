@@ -5,9 +5,9 @@ repos:
     rev: v2.4.0
     hooks:
     -   id: trailing-whitespace
-        exclude: paroxython/resources/spec.md|tests/snapshots/*|tests/data/dummy/*|tests/data/programming_idioms/*
+        exclude: paroxython/resources/spec.md|examples/*
     -   id: end-of-file-fixer
-        exclude: docs/.*\.html|tests/snapshots/*|tests/data/dummy_taxons_and_programs\.txt|tests/data/programming_idioms/*
+        exclude: docs/.*\.html|examples/*
     -   id: check-yaml
     -   id: check-added-large-files
     -   id: check-json
@@ -16,10 +16,9 @@ repos:
     rev: v1.25.2
     hooks:
     -   id: pyupgrade
-        exclude: tests/snapshots/*
 -   repo: https://github.com/psf/black
     rev: 19.10b0
     hooks:
     -   id: black
-        exclude: tests/snapshots/*|tests/data/programming_idioms/*|docs/resources/fibonacci.py
+        exclude: examples/*|docs/resources/fibonacci.py
         args: [--line-length=100]

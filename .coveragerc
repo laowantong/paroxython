@@ -12,6 +12,7 @@ omit =
     paroxython/make_snapshots.py
     paroxython/compare_spans.py
     tests/*
+    examples/*
 [report]
 exclude_lines =
     pragma: no cover
