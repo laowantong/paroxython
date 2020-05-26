@@ -8,13 +8,13 @@ from black import FileMode, format_str
 import regex  # type: ignore
 
 import context
-from goodies import title_to_slug_factory
+from paroxython.goodies import title_to_slug_factory
 
 title_to_slug = title_to_slug_factory()
 
-algos = json.loads(Path("tests/data/programming-idioms.org.2019-09-28_23-33.json").read_text())
+algos = json.loads(Path("helpers/programming-idioms.org.2019-09-28_23-33.json").read_text())
 
-base_path = Path("tests/data/programming_idioms")
+base_path = Path("examples/idioms/programs")
 if base_path.is_dir():
     shutil.rmtree(base_path)
 elif base_path.exists():
@@ -65,7 +65,7 @@ for algo in algos:
         count += 1
 print(f"Dumped {count} programs in '{base_path.resolve()}' directory.")
 
-(base_path / "__read-me.md").write_text(
+(base_path / ".." / "read_me.md").write_text(
     f"""\
 This collection of Python snippets originates from a snapshot of the CC BY-SA 3.0 Unported
 Licensed database of https://www.programming-idioms.org, provided by the author of the engine,

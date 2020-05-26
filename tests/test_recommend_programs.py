@@ -12,9 +12,9 @@ from paroxython.recommend_programs import Recommendations
 
 def test_recommend_program(capsys):
     rec = Recommendations(
-        commands=literal_eval(Path("tests/data/dummy/pipe.py").read_text()),
-        db=json.loads(Path("tests/data/dummy/db.json").read_text()),
-        base_path=Path("tests/data/dummy/"),
+        commands=literal_eval(Path("examples/dummy/pipe.py").read_text()),
+        db=json.loads(Path("examples/dummy/programs_db.json").read_text()),
+        base_path=Path("examples/dummy/"),
     )
     rec.run_pipeline()
     print(rec.selected_programs)
@@ -76,14 +76,14 @@ def test_recommend_program(capsys):
         "O/C/H/B/I": 0.03125,
     }
     text = rec.get_markdown(span_column_width=10)
-    make_snapshot(Path("tests/data/dummy/recommendations.md"), text, capsys)
+    make_snapshot(Path("examples/dummy/programs_recommendations.md"), text, capsys)
 
 
 def test_recommend_programming_idioms(capsys):
-    path = Path("tests/snapshots/programming_idioms_db.json")
+    path = Path("examples/idioms/programs_db.json")
     rec = Recommendations(db=json.loads(path.read_text()))
     rec.run_pipeline()
-    output_path = path.parent / "programming_idioms_recommendations.md"
+    output_path = path.parent / "programs_recommendations.md"
     rec.get_markdown()  # for coverage
     make_snapshot(
         output_path,
@@ -92,8 +92,8 @@ def test_recommend_programming_idioms(capsys):
     )
 
 
-def test_recommend_simple_programs():
-    db = json.loads(Path("tests/snapshots/simple_db.json").read_text())
+def test_recommend_mini_programs():
+    db = json.loads(Path("examples/mini/programs_db.json").read_text())
     proper_taxons = {}
     for program in ["assignment.py", "collatz.py", "fizzbuzz.py", "is_even.py"]:
         proper_taxons[program] = set(db["programs"][program]["taxons"])

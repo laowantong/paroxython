@@ -50,7 +50,7 @@ def test_taxon_cost():
 
 
 def test_get_sorted_recommandations():
-    db = json.loads(Path("tests/data/dummy/db.json").read_text())
+    db = json.loads(Path("examples/dummy/programs_db.json").read_text())
     imparted_knowledge = {"O", "O/J", "X", "X/S", "X/S/M", "X/S/M/L"}
     assess = LearningCostAssessor(imparted_knowledge)
     assess.set_cost_assessment_strategy("zeno")

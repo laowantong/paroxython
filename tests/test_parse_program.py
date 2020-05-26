@@ -80,7 +80,7 @@ def test_label_presence(capsys):
     all_names = set()
     present_names = set()
     result = []
-    for program in list_programs(Path("tests/data/simple/")):
+    for program in list_programs(Path("examples/mini/programs/")):
         labels = parse(
             Program(source=program.source, labels=[], taxons=[], addition={}, deletion={}),
             yield_failed_matches=True,
@@ -95,7 +95,7 @@ def test_label_presence(capsys):
     present = "\n- ".join(sorted(result))
     absent = "\n- ".join(sorted(all_names - present_names))
     text = f"# Present labels\n\n- {present}\n\n# Absent labels\n\n- {absent}\n"
-    make_snapshot(Path("tests/snapshots/simple_labels.md"), text, capsys)
+    make_snapshot(Path("examples/mini/labels.md"), text, capsys)
 
 
 if __name__ == "__main__":

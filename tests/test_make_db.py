@@ -7,15 +7,15 @@ from make_snapshot import make_snapshot
 from paroxython.make_db import Database
 
 
-def test_snapshot_simple_db(capsys):
-    db = Database(Path("tests/data/simple"), ignore_timestamps=True)
-    make_snapshot(Path("tests/snapshots/simple_db.json"), db.get_json(), capsys)
-    db.write_sqlite(Path("tests/snapshots/simple_db.sqlite"))
+def test_snapshot_mini_db(capsys):
+    db = Database(Path("examples/mini/programs"))
+    make_snapshot(Path("examples/mini/programs_db.json"), db.get_json(), capsys)
+    db.write_sqlite(Path("examples/mini/programs_db.sqlite"))
 
 
 def test_snapshot_programming_idioms_db(capsys):
-    db = Database(Path("tests/data/programming_idioms"), ignore_timestamps=True)
-    make_snapshot(Path("tests/snapshots/programming_idioms_db.json"), db.get_json(), capsys)
+    db = Database(Path("examples/idioms/programs"))
+    make_snapshot(Path("examples/idioms/programs_db.json"), db.get_json(), capsys)
 
 
 if __name__ == "__main__":

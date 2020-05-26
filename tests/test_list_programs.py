@@ -6,7 +6,7 @@ from paroxython.list_programs import list_programs
 
 
 def test_list_programs():
-    result = iter(list_programs(Path("tests/data/simple")))
+    result = iter(list_programs(Path("examples/mini/programs/")))
 
     program = next(result)
     assert program.name == "assignment.py"

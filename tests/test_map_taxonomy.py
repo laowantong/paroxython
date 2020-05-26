@@ -11,7 +11,7 @@ from paroxython.label_programs import ProgramLabeller
 from paroxython.map_taxonomy import Taxonomy
 from paroxython.user_types import Label, Program, Span
 
-t = Taxonomy(Path("tests/data/dummy/taxonomy.tsv"))
+t = Taxonomy(Path("examples/dummy/taxonomy.tsv"))
 S = lambda i, j: Span(i, j)  # shortcut for Span(i, j)
 
 
@@ -140,18 +140,18 @@ def test_call():
     }
 
 
-def test_snapshot_simple_taxons(capsys):
+def test_snapshot_mini_taxons(capsys):
     taxonomy = Taxonomy()
     acc = {}
     labeller = ProgramLabeller()
-    labeller.label_programs(Path("tests/data/simple"))
+    labeller.label_programs(Path("examples/mini/programs"))
     for program in labeller.programs:
         taxons = taxonomy.to_taxons(program.labels)
         acc[program.name] = {
             name: " ".join(map(couple_to_string, sorted(set(spans)))) for (name, spans) in taxons
         }
     result = json.dumps(acc, indent=2)
-    make_snapshot(Path("tests/snapshots/simple_taxons.json"), result, capsys)
+    make_snapshot(Path("examples/mini/taxons.json"), result, capsys)
 
 
 if __name__ == "__main__":

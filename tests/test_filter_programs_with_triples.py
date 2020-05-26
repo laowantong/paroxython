@@ -8,7 +8,7 @@ from paroxython.filter_programs import ProgramFilter
 from paroxython.normalize_predicate import normalize_predicate
 from paroxython.compare_spans import compare_spans
 
-db = json.loads(Path("tests/snapshots/simple_db.json").read_text())
+db = json.loads(Path("examples/mini/programs_db.json").read_text())
 
 
 def test_programs_of_triple():
