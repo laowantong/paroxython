@@ -1,5 +1,5 @@
 import json
-from collections import Counter as C
+from collections import Counter as c
 from pathlib import Path
 
 import pytest
@@ -11,7 +11,7 @@ from paroxython.label_programs import ProgramLabeller
 from paroxython.map_taxonomy import Taxonomy
 from paroxython.user_types import Label, Program, Span
 
-t = Taxonomy(Path("tests/data/dummy/taxonomy.tsv"))
+t = Taxonomy(Path("examples/dummy/taxonomy.tsv"))
 S = lambda i, j: Span(i, j)  # shortcut for Span(i, j)
 
 
@@ -45,59 +45,59 @@ def test_to_taxons():
         Label("comparison_operator:Lt", [S(1, 1), S(3, 3), S(2, 2)]),
     ]
     assert t.to_taxons(labels) == [
-        ("flow/conditional", C({S(1, 1): 2, S(2, 5): 1})),
-        ("test/inequality", C({S(2, 2): 1, S(3, 3): 1, S(1, 1): 1})),
+        ("flow/conditional", c({S(1, 1): 2, S(2, 5): 1})),
+        ("test/inequality", c({S(2, 2): 1, S(3, 3): 1, S(1, 1): 1})),
     ]
 
 
 def test_deduplicated_taxons():
     assert t.deduplicated_taxons([]) == []
     taxons = [
-        ("flow/conditional", C({S(1, 1): 2, S(2, 5): 1})),
-        ("flow/conditional/else", C({S(1, 1): 1, S(2, 5): 1})),
-        ("test/inequality", C({S(2, 2): 1, S(3, 3): 1, S(1, 1): 1})),
+        ("flow/conditional", c({S(1, 1): 2, S(2, 5): 1})),
+        ("flow/conditional/else", c({S(1, 1): 1, S(2, 5): 1})),
+        ("test/inequality", c({S(2, 2): 1, S(3, 3): 1, S(1, 1): 1})),
     ]
     result = t.deduplicated_taxons(taxons)
     print(result)
     assert result == [
-        ("flow/conditional", C({S(1, 1): 1})),
-        ("flow/conditional/else", C({S(1, 1): 1, S(2, 5): 1})),
-        ("test/inequality", C({S(2, 2): 1, S(3, 3): 1, S(1, 1): 1})),
+        ("flow/conditional", c({S(1, 1): 1})),
+        ("flow/conditional/else", c({S(1, 1): 1, S(2, 5): 1})),
+        ("test/inequality", c({S(2, 2): 1, S(3, 3): 1, S(1, 1): 1})),
     ]
 
 
 def test_deduplicated_taxons_with_deletion():
     taxons = [
-        ("flow", C({S(1, 1): 2, S(2, 5): 1})),
-        ("flow/conditional", C({S(1, 1): 2, S(2, 5): 1})),
-        ("flow/conditional/else", C({S(1, 1): 2, S(2, 5): 1})),
+        ("flow", c({S(1, 1): 2, S(2, 5): 1})),
+        ("flow/conditional", c({S(1, 1): 2, S(2, 5): 1})),
+        ("flow/conditional/else", c({S(1, 1): 2, S(2, 5): 1})),
     ]
     result = t.deduplicated_taxons(taxons)
     print(result)
     assert result == [
-        ("flow/conditional/else", C({S(1, 1): 2, S(2, 5): 1})),
+        ("flow/conditional/else", c({S(1, 1): 2, S(2, 5): 1})),
     ]
     taxons = [
-        ("flow", C({S(1, 1): 2, S(2, 5): 2})),
-        ("flow/conditional", C({S(1, 1): 2, S(2, 5): 1})),
-        ("flow/conditional/else", C({S(1, 1): 2, S(2, 5): 1})),
+        ("flow", c({S(1, 1): 2, S(2, 5): 2})),
+        ("flow/conditional", c({S(1, 1): 2, S(2, 5): 1})),
+        ("flow/conditional/else", c({S(1, 1): 2, S(2, 5): 1})),
     ]
     result = t.deduplicated_taxons(taxons)
     print(result)
     assert result == [
-        ("flow", C({S(2, 5): 1})),
-        ("flow/conditional/else", C({S(1, 1): 2, S(2, 5): 1})),
+        ("flow", c({S(2, 5): 1})),
+        ("flow/conditional/else", c({S(1, 1): 2, S(2, 5): 1})),
     ]
     taxons = [
-        ("flow", C({S(1, 1): 2, S(2, 5): 2})),
-        ("flow/conditional", C({S(1, 1): 1, S(2, 5): 1})),
-        ("flow/loop", C({S(1, 1): 1, S(2, 5): 1})),
+        ("flow", c({S(1, 1): 2, S(2, 5): 2})),
+        ("flow/conditional", c({S(1, 1): 1, S(2, 5): 1})),
+        ("flow/loop", c({S(1, 1): 1, S(2, 5): 1})),
     ]
     result = t.deduplicated_taxons(taxons)
     print(result)
     assert result == [
-        ("flow/conditional", C({S(1, 1): 1, S(2, 5): 1})),
-        ("flow/loop", C({S(1, 1): 1, S(2, 5): 1})),
+        ("flow/conditional", c({S(1, 1): 1, S(2, 5): 1})),
+        ("flow/loop", c({S(1, 1): 1, S(2, 5): 1})),
     ]
 
 
@@ -129,29 +129,29 @@ def test_call():
     print(result)
     assert result == {
         "algo1": [
-            ("flow/conditional", C({S(1, 1): 1})),
-            ("flow/conditional/else", C({S(1, 1): 1, S(2, 5): 1})),
-            ("test/inequality", C({S(2, 2): 1, S(3, 3): 1, S(1, 1): 1})),
+            ("flow/conditional", c({S(1, 1): 1})),
+            ("flow/conditional/else", c({S(1, 1): 1, S(2, 5): 1})),
+            ("test/inequality", c({S(2, 2): 1, S(3, 3): 1, S(1, 1): 1})),
         ],
         "algo2": [
-            ("call/function/builtin/casting/set", C({S(1, 1): 1, S(2, 5): 1})),
-            ("type/non_sequence/set", C({S(1, 1): 3, S(2, 5): 2})),
+            ("call/function/builtin/casting/set", c({S(1, 1): 1, S(2, 5): 1})),
+            ("type/non_sequence/set", c({S(1, 1): 3, S(2, 5): 2})),
         ],
     }
 
 
-def test_snapshot_simple_taxons(capsys):
+def test_snapshot_mini_taxons(capsys):
     taxonomy = Taxonomy()
     acc = {}
     labeller = ProgramLabeller()
-    labeller.label_programs(Path("tests/data/simple"))
+    labeller.label_programs(Path("examples/mini/programs"))
     for program in labeller.programs:
         taxons = taxonomy.to_taxons(program.labels)
         acc[program.name] = {
             name: " ".join(map(couple_to_string, sorted(set(spans)))) for (name, spans) in taxons
         }
     result = json.dumps(acc, indent=2)
-    make_snapshot(Path("tests/snapshots/simple_taxons.json"), result, capsys)
+    make_snapshot(Path("examples/mini/taxons.json"), result, capsys)
 
 
 if __name__ == "__main__":

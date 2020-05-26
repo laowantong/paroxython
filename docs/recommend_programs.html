@@ -1,0 +1,987 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.8.1" />
+<title>paroxython.recommend_programs API documentation</title>
+<meta name="description" content="Getting recommendations …" />
+<link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
+<link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+<style>.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script async src="https://cse.google.com/cse.js?cx=017837193012385208679:pey8ky8gdqw"></script>
+<style>.gsc-control-cse {padding:0 !important;margin-top:1em}</style>
+<script async src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS_CHTML'></script>
+<style>.homelink{display:block}.homelink:hover{color:inherit}.homelink img{margin:auto;margin-bottom:.3em}</style>
+<link rel="canonical" href="https://pdoc3.github.io/pdoc/doc/paroxython/recommend_programs.html">
+<link rel="icon" href="https://pdoc.github.io/pdoc/logo.png">
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>paroxython.recommend_programs</code></h1>
+</header>
+<section id="section-intro">
+<h1 id="getting-recommendations">Getting recommendations</h1>
+<h2 id="teacher-stories">Teacher stories</h2>
+<h3 id="covering-your-bases">Covering your base(s)</h3>
+<p>Our simplest pipeline has no command: it just lists the programs of your database, without any
+filter. This could produce a rather long document, since each source code is printed, along with a
+list of each and every taxon it implements.</p>
+<pre><code class="python">&gt;&gt;&gt; []
+</code></pre>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>The point is that the resulting list is sorted by increasing learning cost. This should give
+you a rough idea of the pedagogical angle of attack to adopt in your first classes.</p>
+</div>
+<h3 id="imparted-knowledge">Imparted knowledge</h3>
+<ul>
+<li>Suppose that, in your first session, you introduced your students to the <code>hello_world.py</code>,
+<code>wheat_and_chessboard.py</code> and <code>euler_005_smallest_multiple.py</code> programs. Not only Paroxython should
+no longer recommend these programs, but the cost of learning the associated concepts should be
+considered as zero when they are encountered again in the future.</li>
+</ul>
+<pre><code class="python">&gt;&gt;&gt; [
+...     {
+...         &quot;operation&quot;: &quot;impart&quot;,
+...         &quot;source&quot;: [
+...             &quot;hello_world.py&quot;,
+...             &quot;wheat_and_chessboard.py&quot;,
+...             &quot;euler_005_smallest_multiple.py&quot;,
+...         ],
+...     },
+... ]
+</code></pre>
+<ul>
+<li>Suppose that you intervene after an introductory course given by a colleague. She gives you a
+folder (named <code>"CS_101"</code>), which contains the programs she has studied with her class. Since you
+are secretly in love, you assume, somewhat foolishly, that the concepts they implement are
+mastered by your new students.</li>
+</ul>
+<pre><code class="python">&gt;&gt;&gt; [
+...     {
+...         &quot;operation&quot;: &quot;impart&quot;,
+...         &quot;source&quot;: &quot;find CS_101 -path '*.py'&quot;,
+...     },
+... ]
+</code></pre>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>As you can see, rather than maintaining a <strong>list</strong> of programs or concepts in the <code>"source"</code>
+field, you may provide a <strong>string</strong>. Paroxython will interpret it as a shell command, and
+expect it to print on <code>stdout</code> the required list of items (programs or taxons), one per line.</p>
+</div>
+<h3 id="blacklisted-programs">Blacklisted programs</h3>
+<p>You want to filter out all programs reserved for an exam, or too complex, or not pedagogically
+interesting enough, or that could get you kicked out of your college, etc.</p>
+<pre><code class="python">&gt;&gt;&gt; [
+...     {
+...         &quot;operation&quot;: &quot;exclude&quot;,
+...         &quot;source&quot;: [
+...             &quot;fizzbuzz.py&quot;,
+...             &quot;alpha_go.py&quot;,
+...             &quot;hello_world_of_pain.py&quot;,
+...             &quot;gob_s_program.py&quot;,
+...         ],
+...     },
+... ]
+</code></pre>
+<h3 id="concepts-to-be-introduced-later-or-never">Concepts to be introduced later (or never)</h3>
+<p>For the time being, you don't want to be recommended any program requiring the concepts of
+recursivity (<code>subroutine/recursive</code>), dictionary (<code>type/non_sequence/dictionary</code>) or set
+(<code>type/non_sequence/set</code>).</p>
+<pre><code class="python">&gt;&gt;&gt; [
+...     {
+...         &quot;operation&quot;: &quot;exclude&quot;,
+...         &quot;source&quot;: [
+...             &quot;subroutine/recursive&quot;,
+...             &quot;type/non_sequence&quot;,
+...         ],
+...     },
+... ]
+</code></pre>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Paroxython relies on the last three characters of a <code>"source"</code> item to decide whether it is a
+Python program (ending with <code>".py"</code>) or a taxon (like here).</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Since the two latter taxons share a common prefix and Python doesn't provide other non-sequence
+type, it is enough to exclude all taxons starting with <code>type/non_sequence</code>.</p>
+</div>
+<h3 id="concepts-to-be-introduced-now">Concepts to be introduced now</h3>
+<p>Your next class will be devoted to conditional constructs. Thus, you need to go through programs
+featuring taxons prefixed by <code>flow/conditional</code> or even, why not, some conditional expressions
+(<code>operator/ternary</code>). The suggested programs do not necessarily have to implement both concepts at
+the same time, but at least one. Any other program will be rejected.</p>
+<pre><code class="python">&gt;&gt;&gt; [
+...     {
+...         &quot;operation&quot;: &quot;include&quot;,
+...         &quot;source&quot;: [
+...             &quot;flow/conditional&quot;,
+...             &quot;operator/ternary&quot;,
+...         ],
+...     },
+... ]
+</code></pre>
+<h3 id="preparing-an-assignment">Preparing an assignment</h3>
+<p>Basically, you provide Paroxython with a list of programs already studied in class, and it suggests
+new programs that implement only old concepts. This requires the exclusion of all programs
+featuring at least one concept that has not been seen in any of the programs already seen.</p>
+<p>It may sound a little complicated, because it is. But don't panic. Remember that Paroxython always
+orders its recommendations by increasing cost. Thus, all you have to do is ask it to list the
+programs that have not been introduced yet. The programs you want to choose among will appear at
+the top of the results, under the zero-learning cost section. Moreover, inside each section, they
+will be sorted by increasing size (<a href="https://en.wikipedia.org/wiki/Source_lines_of_code">SLOC</a>),
+which can be a reasonable proxy for their difficulty.</p>
+<p>But in the end, you, the teacher, are the judge. Paroxython is not going to set up a test for you,
+let alone grade the answers. It is just here to remind you of some possibilities you might not have
+thought of at the right time, and to give you some confidence that the exercises require no concept
+you have not pre-introduced in class, which later on might save you some awkward conversations with
+your dear students.</p>
+<p>Since this is the last filter in our tutorial, let's summarize what we've seen by chaining several
+commands together:</p>
+<ol>
+<li><strong>Impart</strong> the previous knowledge by extracting all the programs listed in the <code>"timeline.txt"</code>
+file that you update after each session. You can adapt the script
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/helpers/parse_syllabus.py"><code>parse_syllabus.py</code></a>
+to your own needs. If you wish, you can use the <code>base_path</code> variable, which represents the
+parent of the directory containing the programs of your personal database.</li>
+<li><strong>Exclude</strong> some irrelevant programs.</li>
+<li><strong>Include</strong> the concepts that you want to test during your exam.</li>
+</ol>
+<pre><code class="python">&gt;&gt;&gt; [
+...     {
+...         &quot;operation&quot;: &quot;impart&quot;,
+...         &quot;source&quot;: &quot;python helpers/parse_syllabus.py {base_path}/timeline.txt&quot;,
+...     },
+...     {
+...         &quot;operation&quot;: &quot;exclude&quot;,
+...         &quot;source&quot;: [
+...             &quot;foo.py&quot;,
+...             &quot;bar.py&quot;,
+...             # &quot;buzz.py&quot;,
+...         ],
+...     },
+...     {
+...         &quot;operation&quot;: &quot;include&quot;,
+...         &quot;source&quot;: [
+...             &quot;pattern/elements/accumulate&quot;,
+...             &quot;topic/game&quot;,
+...             &quot;type/sequence/list&quot;,
+...         ],
+...     },
+... ]
+</code></pre>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>This command pipeline is <em>not</em> a JSON file, but a Python program, or more restrictively a
+Python <strong>expression</strong>. As such, it offers several amenities you surely know and love: comments,
+trailing commas, r-strings, etc.</p>
+</div>
+<p>This is the end of our pipeline tutorial. Read on for more advanced features (negations, regular
+expressions, semantic triples, span algebra) in the next section (coming soon).</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L0-L436" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">import subprocess
+from collections import defaultdict
+from pathlib import Path
+from typing import Dict, List, Optional, Tuple, Union
+
+from .assess_costs import LearningCostAssessor
+from .filter_programs import ProgramFilter
+from .goodies import (
+    add_line_numbers,
+    cost_bucket,
+    couple_to_string,
+    enumeration_to_txt_factory,
+    print_warning,
+    title_to_slug_factory,
+)
+from .normalize_predicate import normalize_predicate
+from .user_types import (
+    AssessedPrograms,
+    AssessmentStrategy,
+    Command,
+    JsonDatabase,
+    Operation,
+    ProgramNames,
+    ProgramNameSet,
+    TaxonNameSet,
+)
+
+
+class Recommendations:
+    def __init__(
+        self,
+        db: JsonDatabase,
+        commands: Optional[List[Command]] = None,
+        base_path: Optional[Path] = None,
+        cost_assessment_strategy: AssessmentStrategy = &#34;zeno&#34;,
+    ) -&gt; None:
+
+        self.commands = commands or []
+        self.base_path = base_path
+
+        # copy locally some attributes and methods or a ProgramFilter instance
+        program_filter = ProgramFilter(db)
+        self.programs = program_filter.db_programs
+        self.selected_programs = program_filter.selected_programs
+        self.imparted_knowledge = program_filter.imparted_knowledge
+        self.get_programs_from_program_pattern = program_filter.get_programs_from_program_pattern
+        self.get_taxons_from_taxon_pattern = program_filter.get_taxons_from_taxon_pattern
+        self.taxons_of_programs = program_filter.taxons_of_programs
+        self.programs_of_taxons = program_filter.programs_of_taxons
+        self.programs_of_triple = program_filter.programs_of_triple
+        self.update_filter = program_filter.update_filter
+
+        # copy locally some attributes and methods or a LearningCostAssessor instance
+        self.assess_costs = LearningCostAssessor(self.imparted_knowledge)
+        self.assess_costs.set_cost_assessment_strategy(cost_assessment_strategy)
+        self.taxon_cost = self.assess_costs.taxon_cost
+
+    def run_pipeline(self) -&gt; None:
+        current = set(self.programs)
+        print(f&#34;\nProcessing {len(self.commands)} commands on {len(current)} programs.&#34;)
+
+        # Execute sequentially all the commands of the pipeline
+        for (i, command) in enumerate(self.commands, 1):
+
+            # Retrieve the operation
+            operation = command.get(&#34;operation&#34;)
+            if operation not in (&#34;include&#34;, &#34;exclude&#34;, &#34;impart&#34;):
+                print_warning(f&#34;operation {i} ({operation}) is ignored (unknown).&#34;)
+                continue
+
+            # Retrieve the patterns
+            patterns = self.retrieve_patterns_from_source(command.get(&#34;source&#34;, []), operation, i)
+            if not patterns:
+                print_warning(f&#34;operation {i} ({operation}) is ignored (no data).&#34;)
+                continue
+
+            # Compute the sets from which the program selection and knowledge will be updated
+            (taxons, programs) = self.compute_new_taxons_and_programs(operation, patterns, i)
+
+            # Update the selected programs and optionally impart the associated taxons
+            self.update_filter(operation, taxons, programs)
+
+            # Update the statistics of the filter state for the last operation
+            (previous, current) = (current, set(self.selected_programs))
+            command[&#34;filtered_out&#34;] = sorted(previous - current)
+            print(f&#34;  {len(current)} programs remaining after operation {i} ({operation}).&#34;)
+
+        self.assessed_programs = self.assess_costs(self.selected_programs)
+
+    def retrieve_patterns_from_source(
+        # fmt: off
+        self,
+        data: Union[str, List[str]],
+        operation: Operation,
+        i: int
+        # fmt: on
+    ) -&gt; List[str]:
+        if isinstance(data, list):  # The JSON object can either be a list of strings...
+            return data
+        elif isinstance(data, str):  # ... or a shell command printing them on stdout
+            result = (
+                subprocess.run(
+                    str(data).format(base_path=self.base_path),  # str() needed by mypy
+                    stdout=subprocess.PIPE,  # From Python 3.7, these two arguments can be
+                    stderr=subprocess.PIPE,  # ... replaced by: capture_output=True
+                    encoding=&#34;utf-8&#34;,
+                    shell=True,
+                    check=True,
+                )
+                .stdout.strip()
+                .split(&#34;\n&#34;)
+            )
+            return result
+        else:
+            print_warning(f&#34;unable to interpret the pattern of operation {i} ({operation}).&#34;)
+            return []
+
+    def compute_new_taxons_and_programs(
+        # fmt: off
+        self,
+        operation: Operation,
+        patterns: List[str],
+        i: int,
+        # fmt: on
+    ) -&gt; Tuple[TaxonNameSet, ProgramNameSet]:
+        new_taxons: TaxonNameSet = set()
+        new_programs: ProgramNameSet = set()
+        for pattern in patterns:
+            taxons: TaxonNameSet = set()
+            programs: ProgramNameSet = set()
+            if isinstance(pattern, str):
+                if pattern.endswith(&#34;.py&#34;):
+                    programs = self.get_programs_from_program_pattern(pattern)
+                    taxons = self.taxons_of_programs(programs, operation == &#34;exclude&#34;)
+                else:
+                    taxons = self.get_taxons_from_taxon_pattern(pattern)
+                    if operation != &#34;impart&#34;:
+                        programs = self.programs_of_taxons(taxons, operation == &#34;exclude&#34;)
+            elif isinstance(pattern, (list, tuple)) and len(pattern) == 3:
+                if operation == &#34;impart&#34;:
+                    print_warning(f&#34;operation {i} pattern &#39;{pattern}&#39; is ignored (imparted).&#34;)
+                else:
+                    (pattern_1, raw_predicate, pattern_2) = pattern
+                    (predicate, negated) = normalize_predicate(raw_predicate)
+                    programs = self.programs_of_triple(pattern_1, predicate, pattern_2)
+                    if negated:
+                        taxons_1 = self.get_taxons_from_taxon_pattern(pattern_1)
+                        programs_1 = self.programs_of_taxons(taxons_1)
+                        programs = programs_1 - programs
+            else:
+                print_warning(f&#34;operation {i} pattern &#39;{pattern}&#39; is ignored (malformed).&#34;)
+            new_taxons.update(taxons)
+            new_programs.update(programs)
+        return (new_taxons, new_programs)
+
+    def get_markdown(
+        self,
+        span_column_width=30,
+        sorting_strategy=&#34;by_cost_and_sloc&#34;,
+        grouping_strategy=&#34;by_cost_bucket&#34;,
+    ) -&gt; str:
+        # Define some helper functions.
+
+        title_to_slug = title_to_slug_factory()
+        spans_to_html = enumeration_to_txt_factory(span_column_width, &#34;_imported_&#34;)
+        display_count = lambda n: f&#34;{n} program&#34; + (&#34;&#34; if n == 1 else &#34;s&#34;)
+
+        sorting_key = None
+        if sorting_strategy == &#34;by_cost_and_sloc&#34;:
+            sorting_key = lambda x: (x[0], len(self.programs[x[1]][&#34;source&#34;].split(&#34;\n&#34;)))
+        elif sorting_strategy == &#34;lexicographic&#34;:
+            sorting_key = lambda x: x[1]
+
+        grouping_key = lambda x: f&#34;(default: no group)&#34;
+        if grouping_strategy == &#34;by_cost_bucket&#34;:
+            grouping_key = cost_bucket
+
+        # Group resulting programs into cost buckets, and sort each group by increasing difficulty.
+
+        toc_data: Dict[str, AssessedPrograms] = defaultdict(list)
+        for (cost, program) in self.assessed_programs:
+            toc_data[grouping_key(cost)].append((cost, program))
+        for costs_and_program_names in toc_data.values():
+            costs_and_program_names.sort(key=sorting_key)
+
+        # Accumulate simultaneously the TOC and the contents.
+
+        toc: List[str] = [&#34;# Table of contents&#34;]
+        contents: List[str] = [f&#34;# Recommended programs&#34;]
+
+        for (bounds, costs_and_program_names) in toc_data.items():
+
+            title = f&#34;{display_count(len(costs_and_program_names))} of learning cost {bounds}&#34;
+            toc.append(f&#34;- [`{title}`](#{title_to_slug(title)})&#34;)
+            contents.append(f&#34;\n## {title}&#34;)
+
+            for (cost, program_name) in costs_and_program_names:
+                program_info = self.programs[program_name]
+                title = f&#34;Program `{program_name}` (learning cost {cost})&#34;
+                toc.append(f&#34;    - [`{program_name}`](#{title_to_slug(title)})&#34;)
+                contents.append(f&#34;\n### {title}&#34;)
+                contents.append(f&#34;\n```python\n{add_line_numbers(program_info[&#39;source&#39;])}\n```&#34;)
+                contents.append(&#34;\n| Cost  | Taxon | Location |&#34;)
+                contents.append(&#34;|&#34; + &#34;----|&#34; * 3)
+                items = sorted(
+                    program_info[&#34;taxons&#34;].items(),
+                    key=lambda x: f&#34;~{x[0]}&#34; if x[0].startswith(&#34;metadata/&#34;) else x[0],
+                )
+                for (taxon_name, spans) in items:
+                    taxon_cost = self.taxon_cost(taxon_name)
+                    s = spans_to_html(&#34;, &#34;.join(map(couple_to_string, spans)))
+                    contents.append(f&#34;| {taxon_cost} | `{taxon_name}` | {s} |&#34;)
+                contents.append(&#34;\n---&#34;)
+
+        def programs_to_html(description: str, programs: ProgramNames) -&gt; str:
+            details = []
+            if programs:
+                description = description.replace(&#34; 1 programs&#34;, &#34; 1 program&#34;)
+                details = [&#34;&lt;ol&gt;&#34;]
+                for program in sorted(programs):
+                    details.append(f&#34;  &lt;li&gt;&lt;code&gt;{program}&lt;/code&gt;&lt;/li&gt;&#34;)
+                details.append(&#34;&lt;/ol&gt;&#34;)
+            return (
+                &#34;&lt;details&gt;\n&#34;
+                + f&#34;  &lt;summary&gt;{description}.&lt;/summary&gt;\n  &#34;
+                + &#34;\n  &#34;.join(details)
+                + &#34;\n&lt;/details&gt;\n&#34;
+            )
+
+        remainder = len(self.programs)
+        summary: List[str] = [f&#34;\n# Summary&#34;]
+        summary.append(programs_to_html(f&#34;{remainder} initially&#34;, list(self.programs)))
+        for (i, command) in enumerate(self.commands, 1):
+            action = f&#34;operation {i} ({command[&#39;operation&#39;]})&#34;
+            removed = len(command[&#34;filtered_out&#34;])
+            remainder -= removed
+            summary.append(
+                programs_to_html(
+                    f&#34;{remainder} remaining after {action} has filtered out {removed} programs&#34;,
+                    command[&#34;filtered_out&#34;],
+                )
+            )
+
+        return &#34;\n&#34;.join(toc + contents + summary)
+
+
+if __name__ == &#34;__main__&#34;:
+    ast = __import__(&#34;ast&#34;)
+    json = __import__(&#34;json&#34;)
+    program_path = Path(&#34;../algo/programs&#34;)
+    rec = Recommendations(
+        commands=ast.literal_eval(Path(f&#34;{program_path}_pipe.py&#34;).read_text()),
+        db=json.loads(Path(f&#34;{program_path}_db.json&#34;).read_text()),
+        base_path=program_path.parent,
+    )
+    rec.run_pipeline()
+    output_path = Path(f&#34;{program_path}_recommendations.md&#34;)
+    output_path.write_text(rec.get_markdown())
+    print(f&#34;Dumped: {output_path.resolve()}.\n&#34;)</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="paroxython.recommend_programs.Recommendations"><code class="flex name class">
+<span>class <span class="ident">Recommendations</span></span>
+<span>(</span><span>db: JsonDatabase, commands: Union[List[Command], NoneType] = None, base_path: Union[pathlib.Path, NoneType] = None, cost_assessment_strategy: Literal['zeno', 'linear'] = 'zeno')</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L201-L422" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">class Recommendations:
+    def __init__(
+        self,
+        db: JsonDatabase,
+        commands: Optional[List[Command]] = None,
+        base_path: Optional[Path] = None,
+        cost_assessment_strategy: AssessmentStrategy = &#34;zeno&#34;,
+    ) -&gt; None:
+
+        self.commands = commands or []
+        self.base_path = base_path
+
+        # copy locally some attributes and methods or a ProgramFilter instance
+        program_filter = ProgramFilter(db)
+        self.programs = program_filter.db_programs
+        self.selected_programs = program_filter.selected_programs
+        self.imparted_knowledge = program_filter.imparted_knowledge
+        self.get_programs_from_program_pattern = program_filter.get_programs_from_program_pattern
+        self.get_taxons_from_taxon_pattern = program_filter.get_taxons_from_taxon_pattern
+        self.taxons_of_programs = program_filter.taxons_of_programs
+        self.programs_of_taxons = program_filter.programs_of_taxons
+        self.programs_of_triple = program_filter.programs_of_triple
+        self.update_filter = program_filter.update_filter
+
+        # copy locally some attributes and methods or a LearningCostAssessor instance
+        self.assess_costs = LearningCostAssessor(self.imparted_knowledge)
+        self.assess_costs.set_cost_assessment_strategy(cost_assessment_strategy)
+        self.taxon_cost = self.assess_costs.taxon_cost
+
+    def run_pipeline(self) -&gt; None:
+        current = set(self.programs)
+        print(f&#34;\nProcessing {len(self.commands)} commands on {len(current)} programs.&#34;)
+
+        # Execute sequentially all the commands of the pipeline
+        for (i, command) in enumerate(self.commands, 1):
+
+            # Retrieve the operation
+            operation = command.get(&#34;operation&#34;)
+            if operation not in (&#34;include&#34;, &#34;exclude&#34;, &#34;impart&#34;):
+                print_warning(f&#34;operation {i} ({operation}) is ignored (unknown).&#34;)
+                continue
+
+            # Retrieve the patterns
+            patterns = self.retrieve_patterns_from_source(command.get(&#34;source&#34;, []), operation, i)
+            if not patterns:
+                print_warning(f&#34;operation {i} ({operation}) is ignored (no data).&#34;)
+                continue
+
+            # Compute the sets from which the program selection and knowledge will be updated
+            (taxons, programs) = self.compute_new_taxons_and_programs(operation, patterns, i)
+
+            # Update the selected programs and optionally impart the associated taxons
+            self.update_filter(operation, taxons, programs)
+
+            # Update the statistics of the filter state for the last operation
+            (previous, current) = (current, set(self.selected_programs))
+            command[&#34;filtered_out&#34;] = sorted(previous - current)
+            print(f&#34;  {len(current)} programs remaining after operation {i} ({operation}).&#34;)
+
+        self.assessed_programs = self.assess_costs(self.selected_programs)
+
+    def retrieve_patterns_from_source(
+        # fmt: off
+        self,
+        data: Union[str, List[str]],
+        operation: Operation,
+        i: int
+        # fmt: on
+    ) -&gt; List[str]:
+        if isinstance(data, list):  # The JSON object can either be a list of strings...
+            return data
+        elif isinstance(data, str):  # ... or a shell command printing them on stdout
+            result = (
+                subprocess.run(
+                    str(data).format(base_path=self.base_path),  # str() needed by mypy
+                    stdout=subprocess.PIPE,  # From Python 3.7, these two arguments can be
+                    stderr=subprocess.PIPE,  # ... replaced by: capture_output=True
+                    encoding=&#34;utf-8&#34;,
+                    shell=True,
+                    check=True,
+                )
+                .stdout.strip()
+                .split(&#34;\n&#34;)
+            )
+            return result
+        else:
+            print_warning(f&#34;unable to interpret the pattern of operation {i} ({operation}).&#34;)
+            return []
+
+    def compute_new_taxons_and_programs(
+        # fmt: off
+        self,
+        operation: Operation,
+        patterns: List[str],
+        i: int,
+        # fmt: on
+    ) -&gt; Tuple[TaxonNameSet, ProgramNameSet]:
+        new_taxons: TaxonNameSet = set()
+        new_programs: ProgramNameSet = set()
+        for pattern in patterns:
+            taxons: TaxonNameSet = set()
+            programs: ProgramNameSet = set()
+            if isinstance(pattern, str):
+                if pattern.endswith(&#34;.py&#34;):
+                    programs = self.get_programs_from_program_pattern(pattern)
+                    taxons = self.taxons_of_programs(programs, operation == &#34;exclude&#34;)
+                else:
+                    taxons = self.get_taxons_from_taxon_pattern(pattern)
+                    if operation != &#34;impart&#34;:
+                        programs = self.programs_of_taxons(taxons, operation == &#34;exclude&#34;)
+            elif isinstance(pattern, (list, tuple)) and len(pattern) == 3:
+                if operation == &#34;impart&#34;:
+                    print_warning(f&#34;operation {i} pattern &#39;{pattern}&#39; is ignored (imparted).&#34;)
+                else:
+                    (pattern_1, raw_predicate, pattern_2) = pattern
+                    (predicate, negated) = normalize_predicate(raw_predicate)
+                    programs = self.programs_of_triple(pattern_1, predicate, pattern_2)
+                    if negated:
+                        taxons_1 = self.get_taxons_from_taxon_pattern(pattern_1)
+                        programs_1 = self.programs_of_taxons(taxons_1)
+                        programs = programs_1 - programs
+            else:
+                print_warning(f&#34;operation {i} pattern &#39;{pattern}&#39; is ignored (malformed).&#34;)
+            new_taxons.update(taxons)
+            new_programs.update(programs)
+        return (new_taxons, new_programs)
+
+    def get_markdown(
+        self,
+        span_column_width=30,
+        sorting_strategy=&#34;by_cost_and_sloc&#34;,
+        grouping_strategy=&#34;by_cost_bucket&#34;,
+    ) -&gt; str:
+        # Define some helper functions.
+
+        title_to_slug = title_to_slug_factory()
+        spans_to_html = enumeration_to_txt_factory(span_column_width, &#34;_imported_&#34;)
+        display_count = lambda n: f&#34;{n} program&#34; + (&#34;&#34; if n == 1 else &#34;s&#34;)
+
+        sorting_key = None
+        if sorting_strategy == &#34;by_cost_and_sloc&#34;:
+            sorting_key = lambda x: (x[0], len(self.programs[x[1]][&#34;source&#34;].split(&#34;\n&#34;)))
+        elif sorting_strategy == &#34;lexicographic&#34;:
+            sorting_key = lambda x: x[1]
+
+        grouping_key = lambda x: f&#34;(default: no group)&#34;
+        if grouping_strategy == &#34;by_cost_bucket&#34;:
+            grouping_key = cost_bucket
+
+        # Group resulting programs into cost buckets, and sort each group by increasing difficulty.
+
+        toc_data: Dict[str, AssessedPrograms] = defaultdict(list)
+        for (cost, program) in self.assessed_programs:
+            toc_data[grouping_key(cost)].append((cost, program))
+        for costs_and_program_names in toc_data.values():
+            costs_and_program_names.sort(key=sorting_key)
+
+        # Accumulate simultaneously the TOC and the contents.
+
+        toc: List[str] = [&#34;# Table of contents&#34;]
+        contents: List[str] = [f&#34;# Recommended programs&#34;]
+
+        for (bounds, costs_and_program_names) in toc_data.items():
+
+            title = f&#34;{display_count(len(costs_and_program_names))} of learning cost {bounds}&#34;
+            toc.append(f&#34;- [`{title}`](#{title_to_slug(title)})&#34;)
+            contents.append(f&#34;\n## {title}&#34;)
+
+            for (cost, program_name) in costs_and_program_names:
+                program_info = self.programs[program_name]
+                title = f&#34;Program `{program_name}` (learning cost {cost})&#34;
+                toc.append(f&#34;    - [`{program_name}`](#{title_to_slug(title)})&#34;)
+                contents.append(f&#34;\n### {title}&#34;)
+                contents.append(f&#34;\n```python\n{add_line_numbers(program_info[&#39;source&#39;])}\n```&#34;)
+                contents.append(&#34;\n| Cost  | Taxon | Location |&#34;)
+                contents.append(&#34;|&#34; + &#34;----|&#34; * 3)
+                items = sorted(
+                    program_info[&#34;taxons&#34;].items(),
+                    key=lambda x: f&#34;~{x[0]}&#34; if x[0].startswith(&#34;metadata/&#34;) else x[0],
+                )
+                for (taxon_name, spans) in items:
+                    taxon_cost = self.taxon_cost(taxon_name)
+                    s = spans_to_html(&#34;, &#34;.join(map(couple_to_string, spans)))
+                    contents.append(f&#34;| {taxon_cost} | `{taxon_name}` | {s} |&#34;)
+                contents.append(&#34;\n---&#34;)
+
+        def programs_to_html(description: str, programs: ProgramNames) -&gt; str:
+            details = []
+            if programs:
+                description = description.replace(&#34; 1 programs&#34;, &#34; 1 program&#34;)
+                details = [&#34;&lt;ol&gt;&#34;]
+                for program in sorted(programs):
+                    details.append(f&#34;  &lt;li&gt;&lt;code&gt;{program}&lt;/code&gt;&lt;/li&gt;&#34;)
+                details.append(&#34;&lt;/ol&gt;&#34;)
+            return (
+                &#34;&lt;details&gt;\n&#34;
+                + f&#34;  &lt;summary&gt;{description}.&lt;/summary&gt;\n  &#34;
+                + &#34;\n  &#34;.join(details)
+                + &#34;\n&lt;/details&gt;\n&#34;
+            )
+
+        remainder = len(self.programs)
+        summary: List[str] = [f&#34;\n# Summary&#34;]
+        summary.append(programs_to_html(f&#34;{remainder} initially&#34;, list(self.programs)))
+        for (i, command) in enumerate(self.commands, 1):
+            action = f&#34;operation {i} ({command[&#39;operation&#39;]})&#34;
+            removed = len(command[&#34;filtered_out&#34;])
+            remainder -= removed
+            summary.append(
+                programs_to_html(
+                    f&#34;{remainder} remaining after {action} has filtered out {removed} programs&#34;,
+                    command[&#34;filtered_out&#34;],
+                )
+            )
+
+        return &#34;\n&#34;.join(toc + contents + summary)</code></pre>
+</details>
+<h3>Methods</h3>
+<dl>
+<dt id="paroxython.recommend_programs.Recommendations.run_pipeline"><code class="name flex">
+<span>def <span class="ident">run_pipeline</span></span>(<span>self) ‑> NoneType</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Evolve recommended programs, imparted knowledge and log accross pipeline commands.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L230-L262" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">def run_pipeline(self) -&gt; None:
+    current = set(self.programs)
+    print(f&#34;\nProcessing {len(self.commands)} commands on {len(current)} programs.&#34;)
+
+    # Execute sequentially all the commands of the pipeline
+    for (i, command) in enumerate(self.commands, 1):
+
+        # Retrieve the operation
+        operation = command.get(&#34;operation&#34;)
+        if operation not in (&#34;include&#34;, &#34;exclude&#34;, &#34;impart&#34;):
+            print_warning(f&#34;operation {i} ({operation}) is ignored (unknown).&#34;)
+            continue
+
+        # Retrieve the patterns
+        patterns = self.retrieve_patterns_from_source(command.get(&#34;source&#34;, []), operation, i)
+        if not patterns:
+            print_warning(f&#34;operation {i} ({operation}) is ignored (no data).&#34;)
+            continue
+
+        # Compute the sets from which the program selection and knowledge will be updated
+        (taxons, programs) = self.compute_new_taxons_and_programs(operation, patterns, i)
+
+        # Update the selected programs and optionally impart the associated taxons
+        self.update_filter(operation, taxons, programs)
+
+        # Update the statistics of the filter state for the last operation
+        (previous, current) = (current, set(self.selected_programs))
+        command[&#34;filtered_out&#34;] = sorted(previous - current)
+        print(f&#34;  {len(current)} programs remaining after operation {i} ({operation}).&#34;)
+
+    self.assessed_programs = self.assess_costs(self.selected_programs)</code></pre>
+</details>
+</dd>
+<dt id="paroxython.recommend_programs.Recommendations.retrieve_patterns_from_source"><code class="name flex">
+<span>def <span class="ident">retrieve_patterns_from_source</span></span>(<span>self, data: Union[str, List[str]], operation: Literal['include', 'exclude', 'impart'], i: int) ‑> List[str]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Retrieve the patterns on which the operation will be applied.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L264-L291" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">def retrieve_patterns_from_source(
+    # fmt: off
+    self,
+    data: Union[str, List[str]],
+    operation: Operation,
+    i: int
+    # fmt: on
+) -&gt; List[str]:
+    if isinstance(data, list):  # The JSON object can either be a list of strings...
+        return data
+    elif isinstance(data, str):  # ... or a shell command printing them on stdout
+        result = (
+            subprocess.run(
+                str(data).format(base_path=self.base_path),  # str() needed by mypy
+                stdout=subprocess.PIPE,  # From Python 3.7, these two arguments can be
+                stderr=subprocess.PIPE,  # ... replaced by: capture_output=True
+                encoding=&#34;utf-8&#34;,
+                shell=True,
+                check=True,
+            )
+            .stdout.strip()
+            .split(&#34;\n&#34;)
+        )
+        return result
+    else:
+        print_warning(f&#34;unable to interpret the pattern of operation {i} ({operation}).&#34;)
+        return []</code></pre>
+</details>
+</dd>
+<dt id="paroxython.recommend_programs.Recommendations.compute_new_taxons_and_programs"><code class="name flex">
+<span>def <span class="ident">compute_new_taxons_and_programs</span></span>(<span>self, operation: Literal['include', 'exclude', 'impart'], patterns: List[str], i: int) ‑> Tuple[Set[TaxonName], Set[ProgramName]]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Compute the programs and the taxons targeted by the operation application.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L293-L330" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">def compute_new_taxons_and_programs(
+    # fmt: off
+    self,
+    operation: Operation,
+    patterns: List[str],
+    i: int,
+    # fmt: on
+) -&gt; Tuple[TaxonNameSet, ProgramNameSet]:
+    new_taxons: TaxonNameSet = set()
+    new_programs: ProgramNameSet = set()
+    for pattern in patterns:
+        taxons: TaxonNameSet = set()
+        programs: ProgramNameSet = set()
+        if isinstance(pattern, str):
+            if pattern.endswith(&#34;.py&#34;):
+                programs = self.get_programs_from_program_pattern(pattern)
+                taxons = self.taxons_of_programs(programs, operation == &#34;exclude&#34;)
+            else:
+                taxons = self.get_taxons_from_taxon_pattern(pattern)
+                if operation != &#34;impart&#34;:
+                    programs = self.programs_of_taxons(taxons, operation == &#34;exclude&#34;)
+        elif isinstance(pattern, (list, tuple)) and len(pattern) == 3:
+            if operation == &#34;impart&#34;:
+                print_warning(f&#34;operation {i} pattern &#39;{pattern}&#39; is ignored (imparted).&#34;)
+            else:
+                (pattern_1, raw_predicate, pattern_2) = pattern
+                (predicate, negated) = normalize_predicate(raw_predicate)
+                programs = self.programs_of_triple(pattern_1, predicate, pattern_2)
+                if negated:
+                    taxons_1 = self.get_taxons_from_taxon_pattern(pattern_1)
+                    programs_1 = self.programs_of_taxons(taxons_1)
+                    programs = programs_1 - programs
+        else:
+            print_warning(f&#34;operation {i} pattern &#39;{pattern}&#39; is ignored (malformed).&#34;)
+        new_taxons.update(taxons)
+        new_programs.update(programs)
+    return (new_taxons, new_programs)</code></pre>
+</details>
+</dd>
+<dt id="paroxython.recommend_programs.Recommendations.get_markdown"><code class="name flex">
+<span>def <span class="ident">get_markdown</span></span>(<span>self, span_column_width=30, sorting_strategy='by_cost_and_sloc', grouping_strategy='by_cost_bucket') ‑> str</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Reiterate on the commands, now populated by the results, and output them.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L332-L422" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">def get_markdown(
+    self,
+    span_column_width=30,
+    sorting_strategy=&#34;by_cost_and_sloc&#34;,
+    grouping_strategy=&#34;by_cost_bucket&#34;,
+) -&gt; str:
+    # Define some helper functions.
+
+    title_to_slug = title_to_slug_factory()
+    spans_to_html = enumeration_to_txt_factory(span_column_width, &#34;_imported_&#34;)
+    display_count = lambda n: f&#34;{n} program&#34; + (&#34;&#34; if n == 1 else &#34;s&#34;)
+
+    sorting_key = None
+    if sorting_strategy == &#34;by_cost_and_sloc&#34;:
+        sorting_key = lambda x: (x[0], len(self.programs[x[1]][&#34;source&#34;].split(&#34;\n&#34;)))
+    elif sorting_strategy == &#34;lexicographic&#34;:
+        sorting_key = lambda x: x[1]
+
+    grouping_key = lambda x: f&#34;(default: no group)&#34;
+    if grouping_strategy == &#34;by_cost_bucket&#34;:
+        grouping_key = cost_bucket
+
+    # Group resulting programs into cost buckets, and sort each group by increasing difficulty.
+
+    toc_data: Dict[str, AssessedPrograms] = defaultdict(list)
+    for (cost, program) in self.assessed_programs:
+        toc_data[grouping_key(cost)].append((cost, program))
+    for costs_and_program_names in toc_data.values():
+        costs_and_program_names.sort(key=sorting_key)
+
+    # Accumulate simultaneously the TOC and the contents.
+
+    toc: List[str] = [&#34;# Table of contents&#34;]
+    contents: List[str] = [f&#34;# Recommended programs&#34;]
+
+    for (bounds, costs_and_program_names) in toc_data.items():
+
+        title = f&#34;{display_count(len(costs_and_program_names))} of learning cost {bounds}&#34;
+        toc.append(f&#34;- [`{title}`](#{title_to_slug(title)})&#34;)
+        contents.append(f&#34;\n## {title}&#34;)
+
+        for (cost, program_name) in costs_and_program_names:
+            program_info = self.programs[program_name]
+            title = f&#34;Program `{program_name}` (learning cost {cost})&#34;
+            toc.append(f&#34;    - [`{program_name}`](#{title_to_slug(title)})&#34;)
+            contents.append(f&#34;\n### {title}&#34;)
+            contents.append(f&#34;\n```python\n{add_line_numbers(program_info[&#39;source&#39;])}\n```&#34;)
+            contents.append(&#34;\n| Cost  | Taxon | Location |&#34;)
+            contents.append(&#34;|&#34; + &#34;----|&#34; * 3)
+            items = sorted(
+                program_info[&#34;taxons&#34;].items(),
+                key=lambda x: f&#34;~{x[0]}&#34; if x[0].startswith(&#34;metadata/&#34;) else x[0],
+            )
+            for (taxon_name, spans) in items:
+                taxon_cost = self.taxon_cost(taxon_name)
+                s = spans_to_html(&#34;, &#34;.join(map(couple_to_string, spans)))
+                contents.append(f&#34;| {taxon_cost} | `{taxon_name}` | {s} |&#34;)
+            contents.append(&#34;\n---&#34;)
+
+    def programs_to_html(description: str, programs: ProgramNames) -&gt; str:
+        details = []
+        if programs:
+            description = description.replace(&#34; 1 programs&#34;, &#34; 1 program&#34;)
+            details = [&#34;&lt;ol&gt;&#34;]
+            for program in sorted(programs):
+                details.append(f&#34;  &lt;li&gt;&lt;code&gt;{program}&lt;/code&gt;&lt;/li&gt;&#34;)
+            details.append(&#34;&lt;/ol&gt;&#34;)
+        return (
+            &#34;&lt;details&gt;\n&#34;
+            + f&#34;  &lt;summary&gt;{description}.&lt;/summary&gt;\n  &#34;
+            + &#34;\n  &#34;.join(details)
+            + &#34;\n&lt;/details&gt;\n&#34;
+        )
+
+    remainder = len(self.programs)
+    summary: List[str] = [f&#34;\n# Summary&#34;]
+    summary.append(programs_to_html(f&#34;{remainder} initially&#34;, list(self.programs)))
+    for (i, command) in enumerate(self.commands, 1):
+        action = f&#34;operation {i} ({command[&#39;operation&#39;]})&#34;
+        removed = len(command[&#34;filtered_out&#34;])
+        remainder -= removed
+        summary.append(
+            programs_to_html(
+                f&#34;{remainder} remaining after {action} has filtered out {removed} programs&#34;,
+                command[&#34;filtered_out&#34;],
+            )
+        )
+
+    return &#34;\n&#34;.join(toc + contents + summary)</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<header>
+<a class="homelink" rel="home" title="Paroxython Home" href="index.html">
+<img src="resources/logo.png" alt="Paroxython logo">
+</a>
+</header>
+<div class="gcse-search" style="height: 70px"
+data-as_oq="site:laowantong/paroxython.github.io inurl:github.com/laowantong/paroxython"
+data-gaCategoryParameter="paroxython.recommend_programs">
+</div>
+<h1>Index</h1>
+<div class="toc">
+<ul>
+<li><a href="#getting-recommendations">Getting recommendations</a><ul>
+<li><a href="#teacher-stories">Teacher stories</a><ul>
+<li><a href="#covering-your-bases">Covering your base(s)</a></li>
+<li><a href="#imparted-knowledge">Imparted knowledge</a></li>
+<li><a href="#blacklisted-programs">Blacklisted programs</a></li>
+<li><a href="#concepts-to-be-introduced-later-or-never">Concepts to be introduced later (or never)</a></li>
+<li><a href="#concepts-to-be-introduced-now">Concepts to be introduced now</a></li>
+<li><a href="#preparing-an-assignment">Preparing an assignment</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="paroxython" href="index.html">paroxython</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="paroxython.recommend_programs.Recommendations" href="#paroxython.recommend_programs.Recommendations">Recommendations</a></code></h4>
+<ul class="">
+<li><code><a title="paroxython.recommend_programs.Recommendations.run_pipeline" href="#paroxython.recommend_programs.Recommendations.run_pipeline">run_pipeline</a></code></li>
+<li><code><a title="paroxython.recommend_programs.Recommendations.retrieve_patterns_from_source" href="#paroxython.recommend_programs.Recommendations.retrieve_patterns_from_source">retrieve_patterns_from_source</a></code></li>
+<li><code><a title="paroxython.recommend_programs.Recommendations.compute_new_taxons_and_programs" href="#paroxython.recommend_programs.Recommendations.compute_new_taxons_and_programs">compute_new_taxons_and_programs</a></code></li>
+<li><code><a title="paroxython.recommend_programs.Recommendations.get_markdown" href="#paroxython.recommend_programs.Recommendations.get_markdown">get_markdown</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.8.1</a>.</p>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad()</script>
+</body>
+</html>

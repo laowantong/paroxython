@@ -3,7 +3,7 @@ USAGE:
     paroxython collect [options] DIRECTORY
 
 OPTIONS:
-    -c --cleanup=STR    Transformation to be applied to the source-code
+    -c --cleanup=STR    Transformation to be applied to the source code
                         before processing. [default: full]
                         Currently available:
                         • full: remove all blank lines, docstrings and
@@ -38,6 +38,7 @@ from ..make_db import Database
 def cli_wrapper(args):
     db = Database(
         directory=Path(args["DIRECTORY"]),
+        ignore_timestamps=False,
         cleanup_strategy=args["--cleanup"],
         exclude_pattern=args["--exclude"],
         glob_pattern=args["--glob"],

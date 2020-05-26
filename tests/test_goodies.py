@@ -2,11 +2,13 @@ import pytest
 
 import context
 from paroxython.goodies import (
-    title_to_slug_factory,
     add_line_numbers,
+    cost_bucket,
+    couple_to_string,
     enumeration_to_txt_factory,
-    cost_interval,
+    title_to_slug_factory,
 )
+from paroxython.user_types import Span
 
 
 def test_non_ascii_title_to_slug_factory():
@@ -71,19 +73,19 @@ def test_enumeration_to_txt():
     )
 
 
-def test_cost_interval():
+def test_cost_bucket():
     values = [i / 8 for i in range(20)]
-    result = list(zip(values, map(cost_interval, values)))
+    result = list(zip(values, map(cost_bucket, values)))
     print(result)
     assert result == [
         (0.0, "0"),
         (0.125, "in ]0, 0.25["),
-        (0.25, "in ]0.25, 0.5["),
-        (0.375, "in ]0.25, 0.5["),
-        (0.5, "in ]0.5, 1["),
-        (0.625, "in ]0.5, 1["),
-        (0.75, "in ]0.5, 1["),
-        (0.875, "in ]0.5, 1["),
+        (0.25, "in [0.25, 0.5["),
+        (0.375, "in [0.25, 0.5["),
+        (0.5, "in [0.5, 1["),
+        (0.625, "in [0.5, 1["),
+        (0.75, "in [0.5, 1["),
+        (0.875, "in [0.5, 1["),
         (1.0, "in [1, 2["),
         (1.125, "in [1, 2["),
         (1.25, "in [1, 2["),
@@ -106,6 +108,12 @@ def test_add_line_numbers():
         result
         == "1   0\n2   1\n3   2\n4   3\n5   4\n6   5\n7   6\n8   7\n9   8\n10  9\n11  10\n12  11\n13  12\n14  13\n15  14"
     )
+
+
+def test_couple_to_string():
+    assert couple_to_string((12, 15)) == "12-15"
+    assert couple_to_string((12, 12)) == "12"
+    assert couple_to_string(Span(12, 15)) == "12-15"
 
 
 if __name__ == "__main__":

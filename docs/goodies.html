@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.8.1" />
+<title>paroxython.goodies API documentation</title>
+<meta name="description" content="" />
+<link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
+<link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+<style>.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script async src="https://cse.google.com/cse.js?cx=017837193012385208679:pey8ky8gdqw"></script>
+<style>.gsc-control-cse {padding:0 !important;margin-top:1em}</style>
+<script async src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS_CHTML'></script>
+<style>.homelink{display:block}.homelink:hover{color:inherit}.homelink img{margin:auto;margin-bottom:.3em}</style>
+<link rel="canonical" href="https://pdoc3.github.io/pdoc/doc/paroxython/goodies.html">
+<link rel="icon" href="https://pdoc.github.io/pdoc/logo.png">
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>paroxython.goodies</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/goodies.py#L0-L100" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">import sys
+from collections import defaultdict
+from math import log2
+from textwrap import wrap
+from typing import Callable, Tuple, Union
+from unicodedata import normalize
+
+import regex  # type: ignore
+
+from .user_types import Span
+
+
+def title_to_slug_factory():
+    slug_counts = defaultdict(int)
+    cache = {}
+
+    def title_to_slug(title, deduplicate=False):
+        title = title.strip()
+        if title not in cache:
+            slug = normalize(&#34;NFD&#34;, title.lower()).encode(&#34;ASCII&#34;, &#34;ignore&#34;).decode(&#34;ASCII&#34;)
+            slug = slug.replace(&#34; &#34;, &#34;-&#34;)
+            slug = regex.sub(r&#34;[^\w-]&#34;, &#34;&#34;, slug)
+            cache[title] = slug
+        if deduplicate:
+            slug = cache[title]
+            slug_counts[slug] += 1
+            slug = f&#34;{slug}-{slug_counts[slug] - 1}&#34;
+            slug_counts[slug] += 1
+            slug = slug.rstrip(&#34;-0&#34;)
+            return slug
+        else:
+            return cache[title]
+
+    return title_to_slug
+
+
+def add_line_numbers(source: str) -&gt; str:
+    return &#34;\n&#34;.join(f&#34;{n: &lt;4}{line}&#34; for (n, line) in enumerate(source.split(&#34;\n&#34;), 1))
+
+
+def enumeration_to_txt_factory(
+    width: int = 20,
+    default_string: str = &#34;&#34;,
+    sep: str = &#34;&lt;br&gt;&#34;,
+    template: str = &#34;&lt;details&gt;&lt;summary&gt;{summary}&lt;/summary&gt;{details}&lt;/details&gt;&#34;,
+    initial_indent: str = &#34;   &#34;,  # take into account the details marker
+) -&gt; Callable[[str], str]:
+    def enumeration_to_txt(s: str) -&gt; str:
+        if not s:
+            return default_string
+        if len(s) &lt;= width:
+            return s
+        lines = wrap(s, width, initial_indent=initial_indent)
+        summary = lines[0][len(initial_indent) :]
+        details = sep.join(lines[1:])
+        return template.format(summary=summary, details=details)
+
+    return enumeration_to_txt
+
+
+def cost_bucket(cost: int) -&gt; str:
+    if cost == 0:
+        return &#34;0&#34;
+    if cost &lt; 0.25:
+        return &#34;in ]0, 0.25[&#34;
+    if cost &lt; 0.5:
+        return &#34;in [0.25, 0.5[&#34;
+    if cost &lt; 1:
+        return &#34;in [0.5, 1[&#34;
+    upper = 2 ** int(log2(cost))
+    lower = 2 ** int(log2(cost) + 1)
+    return f&#34;in [{upper}, {lower}[&#34;
+
+
+def couple_to_string(couple: Union[Span, Tuple[int, int]]) -&gt; str:
+    return f&#34;{couple[0]}&#34; + (&#34;&#34; if couple[0] == couple[1] else f&#34;-{couple[1]}&#34;)
+
+
+def print_warning(message: str):
+    print(f&#34;Warning: {message}&#34;, file=sys.stderr)</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="paroxython.goodies.title_to_slug_factory"><code class="name flex">
+<span>def <span class="ident">title_to_slug_factory</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/goodies.py#L13-L34" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">def title_to_slug_factory():
+    slug_counts = defaultdict(int)
+    cache = {}
+
+    def title_to_slug(title, deduplicate=False):
+        title = title.strip()
+        if title not in cache:
+            slug = normalize(&#34;NFD&#34;, title.lower()).encode(&#34;ASCII&#34;, &#34;ignore&#34;).decode(&#34;ASCII&#34;)
+            slug = slug.replace(&#34; &#34;, &#34;-&#34;)
+            slug = regex.sub(r&#34;[^\w-]&#34;, &#34;&#34;, slug)
+            cache[title] = slug
+        if deduplicate:
+            slug = cache[title]
+            slug_counts[slug] += 1
+            slug = f&#34;{slug}-{slug_counts[slug] - 1}&#34;
+            slug_counts[slug] += 1
+            slug = slug.rstrip(&#34;-0&#34;)
+            return slug
+        else:
+            return cache[title]
+
+    return title_to_slug</code></pre>
+</details>
+</dd>
+<dt id="paroxython.goodies.add_line_numbers"><code class="name flex">
+<span>def <span class="ident">add_line_numbers</span></span>(<span>source: str) ‑> str</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return a numbered version of the given source code. Result readable up to 999 lines.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/goodies.py#L37-L39" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">def add_line_numbers(source: str) -&gt; str:
+    return &#34;\n&#34;.join(f&#34;{n: &lt;4}{line}&#34; for (n, line) in enumerate(source.split(&#34;\n&#34;), 1))</code></pre>
+</details>
+</dd>
+<dt id="paroxython.goodies.enumeration_to_txt_factory"><code class="name flex">
+<span>def <span class="ident">enumeration_to_txt_factory</span></span>(<span>width: int = 20, default_string: str = '', sep: str = &#x27;&lt;br&gt;&#x27;, template: str = &#x27;&lt;details&gt;&lt;summary&gt;{summary}&lt;/summary&gt;{details}&lt;/details&gt;&#x27;, initial_indent: str = '
+') ‑> Callable[[str], str]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return a function formatting an enumeration string on a given column width.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/goodies.py#L42-L61" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">def enumeration_to_txt_factory(
+    width: int = 20,
+    default_string: str = &#34;&#34;,
+    sep: str = &#34;&lt;br&gt;&#34;,
+    template: str = &#34;&lt;details&gt;&lt;summary&gt;{summary}&lt;/summary&gt;{details}&lt;/details&gt;&#34;,
+    initial_indent: str = &#34;   &#34;,  # take into account the details marker
+) -&gt; Callable[[str], str]:
+    def enumeration_to_txt(s: str) -&gt; str:
+        if not s:
+            return default_string
+        if len(s) &lt;= width:
+            return s
+        lines = wrap(s, width, initial_indent=initial_indent)
+        summary = lines[0][len(initial_indent) :]
+        details = sep.join(lines[1:])
+        return template.format(summary=summary, details=details)
+
+    return enumeration_to_txt</code></pre>
+</details>
+</dd>
+<dt id="paroxython.goodies.cost_bucket"><code class="name flex">
+<span>def <span class="ident">cost_bucket</span></span>(<span>cost: int) ‑> str</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Among a predetermined set of intervals, return that including the given positive number.</p>
+<p>The intervals are <code>[0, 0]</code>, <code>]0, 0.25[</code>, <code>[0.25, 0.5[</code>, <code>[0.5, 1[</code>, <code>[1, 2[</code>, <code>[2,
+4[</code>, <code>[4, 8[</code>, and so on. The result is returned as a string ready to be included in the
+recommendation report.</p>
+<pre><code class="python">&gt;&gt;&gt; cost_bucket(0.75)
+&quot;in [0.5, 1[&quot;
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/goodies.py#L64-L84" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">def cost_bucket(cost: int) -&gt; str:
+    if cost == 0:
+        return &#34;0&#34;
+    if cost &lt; 0.25:
+        return &#34;in ]0, 0.25[&#34;
+    if cost &lt; 0.5:
+        return &#34;in [0.25, 0.5[&#34;
+    if cost &lt; 1:
+        return &#34;in [0.5, 1[&#34;
+    upper = 2 ** int(log2(cost))
+    lower = 2 ** int(log2(cost) + 1)
+    return f&#34;in [{upper}, {lower}[&#34;</code></pre>
+</details>
+</dd>
+<dt id="paroxython.goodies.couple_to_string"><code class="name flex">
+<span>def <span class="ident">couple_to_string</span></span>(<span>couple: Union[Span, Tuple[int, int]]) ‑> str</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return a deduplicated string representation of the given couple or span.</p>
+<pre><code class="python">&gt;&gt;&gt; couple_to_string((12, 15))
+&quot;12-15&quot;
+&gt;&gt;&gt; couple_to_string((12, 12))
+&quot;12&quot;
+&gt;&gt;&gt; couple_to_string(Span(12, 15))
+&quot;12-15&quot;
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/goodies.py#L87-L97" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">def couple_to_string(couple: Union[Span, Tuple[int, int]]) -&gt; str:
+    return f&#34;{couple[0]}&#34; + (&#34;&#34; if couple[0] == couple[1] else f&#34;-{couple[1]}&#34;)</code></pre>
+</details>
+</dd>
+<dt id="paroxython.goodies.print_warning"><code class="name flex">
+<span>def <span class="ident">print_warning</span></span>(<span>message: str)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/goodies.py#L100-L101" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">def print_warning(message: str):
+    print(f&#34;Warning: {message}&#34;, file=sys.stderr)</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<header>
+<a class="homelink" rel="home" title="Paroxython Home" href="index.html">
+<img src="resources/logo.png" alt="Paroxython logo">
+</a>
+</header>
+<div class="gcse-search" style="height: 70px"
+data-as_oq="site:laowantong/paroxython.github.io inurl:github.com/laowantong/paroxython"
+data-gaCategoryParameter="paroxython.goodies">
+</div>
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="paroxython" href="index.html">paroxython</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="paroxython.goodies.title_to_slug_factory" href="#paroxython.goodies.title_to_slug_factory">title_to_slug_factory</a></code></li>
+<li><code><a title="paroxython.goodies.add_line_numbers" href="#paroxython.goodies.add_line_numbers">add_line_numbers</a></code></li>
+<li><code><a title="paroxython.goodies.enumeration_to_txt_factory" href="#paroxython.goodies.enumeration_to_txt_factory">enumeration_to_txt_factory</a></code></li>
+<li><code><a title="paroxython.goodies.cost_bucket" href="#paroxython.goodies.cost_bucket">cost_bucket</a></code></li>
+<li><code><a title="paroxython.goodies.couple_to_string" href="#paroxython.goodies.couple_to_string">couple_to_string</a></code></li>
+<li><code><a title="paroxython.goodies.print_warning" href="#paroxython.goodies.print_warning">print_warning</a></code></li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.8.1</a>.</p>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad()</script>
+</body>
+</html>

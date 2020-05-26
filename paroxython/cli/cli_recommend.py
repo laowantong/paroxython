@@ -8,10 +8,10 @@ OPTIONS:
                         [default: ]
     -c --cost=STR       Learning cost assessment strategy. [default: zeno]
                         Currently available:
-                        • zeno: the i-th segment of a taxon, if not already
+                        • zeno: the i-th edge of a taxon, if not already
                                 imparted, costs 2^(-i). For instance, the taxon
                                 old/new/new will costs 2^-2 + 2^-3 = 0.375.
-                        • length: simply count the number of new segments.
+                        • linear: simply count the number of new edges.
     -o --output=PATH    The path of the resulting report. If it is omitted, and
                         DB_PATH is of the form PREFIX_db.json, a value of
                         PREFIX_recommendations.json is used. [default: ]

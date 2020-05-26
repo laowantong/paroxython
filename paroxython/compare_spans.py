@@ -195,6 +195,7 @@ compare_spans.update(
 compare_spans.update(
     {
         "inside": compare_spans["during"],
+        "includes": compare_spans["contains"],
         "is": compare_spans["equal"],
         "equals": compare_spans["equal"],
         "is after": compare_spans["after"],

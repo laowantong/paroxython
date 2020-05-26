@@ -16,7 +16,7 @@ from .user_types import (
     TaxonsSpans,
 )
 
-sub_slash_sequences = regex.compile(r"//+").sub
+_sub_slash_sequences = regex.compile(r"//+").sub
 
 
 class Taxonomy:
@@ -25,11 +25,11 @@ class Taxonomy:
     def __init__(self, taxonomy_path: Optional[Path] = None, *args, **kwargs) -> None:
         """Read the taxonomy specifications, and make some pre-processing."""
         is_literal = regex.compile(r"[\w:.]+").fullmatch
-        taxonomy_path = taxonomy_path or Path(dirname(__file__)) / "taxonomy.tsv"
+        taxonomy_path = taxonomy_path or Path(dirname(__file__)) / "resources" / "taxonomy.tsv"
         tsv = taxonomy_path.read_text().partition("-- EOF")[0].strip()
         self.literal_label_names: Dict[LabelName, TaxonNames] = defaultdict(list)
         self.compiled_label_names = []
-        for line in sorted(tsv.split("\n")):
+        for line in sorted(tsv.split("\n")[1:]):
             (taxon_name, label_pattern) = line.strip().split(maxsplit=1)
             if is_literal(label_pattern):
                 self.literal_label_names[LabelName(label_pattern)].append(TaxonName(taxon_name))
@@ -48,7 +48,7 @@ class Taxonomy:
         for (rex, taxon_name) in self.compiled_label_names:
             if rex.match(label_name):
                 s = rex.sub(taxon_name, label_name)  # cf. note above
-                s = sub_slash_sequences("/", s)
+                s = _sub_slash_sequences("/", s)
                 result.append(s)
         return result
 
@@ -89,7 +89,7 @@ if __name__ == "__main__":
     from .label_programs import ProgramLabeller
 
     labeller = ProgramLabeller()
-    labeller.label_programs(Path("../Python/project_euler"))
+    labeller.label_programs(Path("examples/simple/programs"))
     taxonomy = Taxonomy()
     for program in labeller.programs:
         taxons = taxonomy.to_taxons(program.labels)

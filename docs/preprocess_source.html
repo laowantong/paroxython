@@ -1,0 +1,875 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.8.1" />
+<title>paroxython.preprocess_source API documentation</title>
+<meta name="description" content="Bring together everything relative to the pre-processing of a given source code …" />
+<link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
+<link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+<style>.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script async src="https://cse.google.com/cse.js?cx=017837193012385208679:pey8ky8gdqw"></script>
+<style>.gsc-control-cse {padding:0 !important;margin-top:1em}</style>
+<script async src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS_CHTML'></script>
+<style>.homelink{display:block}.homelink:hover{color:inherit}.homelink img{margin:auto;margin-bottom:.3em}</style>
+<link rel="canonical" href="https://pdoc3.github.io/pdoc/doc/paroxython/preprocess_source.html">
+<link rel="icon" href="https://pdoc.github.io/pdoc/logo.png">
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>paroxython.preprocess_source</code></h1>
+</header>
+<section id="section-intro">
+<p>Bring together everything relative to the pre-processing of a given source code.</p>
+<h1 id="cleaning">Cleaning</h1>
+<p>A useful, albeit not essential, step is to cleanse the code of all its algorithmically irrelevant
+features (blank lines, comments, docstrings, etc.). Lots of examples are provided in the <code><a title="paroxython.preprocess_source.Cleanup" href="#paroxython.preprocess_source.Cleanup">Cleanup</a></code>
+class documentation. Be aware that a certain category of comment is preserved at this stage, the
+so-called “manual hints”, presented in the next paragraph.</p>
+<h1 id="manual-hints">Manual hints</h1>
+<p>On a given source code, the labelling algorithm may sometimes produce false positives or false
+negatives. Moreover, the semantics of some features may be subjective (e.g., <code>topic:fun</code>) or beyond
+the capabilities of Paroxython (e.g., deciding the relevance of the <code>short_circuit</code> property of a
+boolean condition). In any case, the user has the possibility to manually label certain lines of
+their source code to hint either the presence or absence of a given feature.</p>
+<p>The addition of a label is hinted by a comment starting with <code># paroxython:</code>.</p>
+<pre><code class="python">&gt;&gt;&gt; if i &lt; len(s) and s[i] == x: # paroxython: +short_circuit:And
+</code></pre>
+<p>Note that <code>short_circuit:And</code> is a label (of the kind defined, but not necessarily included in
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md">spec.md</a>), and
+not a taxon. It will be later converted into one or more taxons (according to the mapping of
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/taxonomy.tsv">taxonomy.tsv</a>).</p>
+<p>To delete a label, prefix it with a minus symbol. For instance, the following hint requalifies an
+addition into a concatenation:</p>
+<pre><code class="python">&gt;&gt;&gt; print(a + b) # paroxython: -addition_operator +concatenation_operator
+</code></pre>
+<p>If a label should span over several lines, it is hinted on the first line with a <code>&hellip;</code> suffix
+(meaning “to be continued”), and on the last line with a <code>&hellip;</code> prefix (meaning“continuing”). In the
+following example, a label <code>super_loop</code> is manually substituted to the calculated label <code>loop:for</code>:</p>
+<pre><code class="python">&gt;&gt;&gt; for x in s: # paroxython: +super_loop... -loop:for...
+...     foo()
+...     bar() # paroxython: ...super_loop ...loop:for
+</code></pre>
+<p>Of course, the opening and the closing of a spanning label must be correctly balanced.</p>
+<p>Some tolerances exist for the syntax:</p>
+<ul>
+<li><code>+</code> can be omitted.</li>
+<li><code>&hellip;</code> (three dots) can be written <code>…</code> (HORIZONTAL ELLIPSIS, U+2026).</li>
+<li><code># paroxython:</code> is neither space- nor case-sensitive.</li>
+</ul>
+<h1 id="implementation-note">Implementation note</h1>
+<p>Several functions or methods declare a compiled and bound regex pattern as an optional argument. It
+is not meant to be provided by the caller. Its default value will be used systematically, with the
+benefit of being evaluated only once.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L0-L352" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">from collections import defaultdict
+from token import DEDENT, INDENT, NEWLINE, STRING
+from tokenize import COMMENT, NL, generate_tokens
+from typing import Callable, Dict, List, Tuple, Set
+
+import regex  # type: ignore
+
+from .user_types import LabelName, LabelsSpans, Source, Span
+
+HINT_COMMENT = &#34;# paroxython:&#34;
+
+
+class Cleanup:
+    def __init__(self, cleanup_strategy: str):
+        self.run = lambda source: source
+        if cleanup_strategy == &#34;full&#34;:
+            self.run = Cleanup.full_cleaning
+
+    @staticmethod
+    def full_cleaning(source: Source) -&gt; Source:
+        result = []
+        previous_token = INDENT
+        (previous_end_row, previous_end_col) = (-1, 0)
+        text = str(source)
+        text = Cleanup.suppress_first_comments(text)
+        text = Cleanup.suppress_name_equals_main_stuff(text)
+        text = text.replace(&#34;\t&#34;, &#34;    &#34;)
+        lines = iter(text.split(&#34;\n&#34;))
+        for token_info in generate_tokens(lambda: next(lines) + &#34;\n&#34;):
+            (token, string, (start_row, start_col), (end_row, end_col), _) = token_info
+            if start_row &gt; previous_end_row:
+                previous_end_col = 0
+            result.append(&#34; &#34; * max(0, start_col - previous_end_col))
+            if token == COMMENT:
+                (string, n) = Cleanup.normalize_paroxython_comments(string)
+                if n == 0:
+                    continue
+                result.append(string)
+            elif token == STRING and previous_token in (INDENT, DEDENT, NEWLINE):
+                result.append(&#34;pass\n&#34;)  # replace the docstring by a pass statement
+            else:
+                result.append(string)
+            if (previous_token, token) == (NEWLINE, NL):
+                previous_token = NEWLINE
+            else:
+                previous_token = token
+            (previous_end_row, previous_end_col) = (end_row, end_col)
+        text = &#34;&#34;.join(result).strip()
+        text = Cleanup.suppress_blank_lines(text)
+        text = Cleanup.suppress_useless_pass_statements(text)
+        return Source(text)
+
+    @staticmethod
+    def suppress_first_comments(source: str, sub=regex.compile(r&#34;\A(#.*\n)*&#34;).sub) -&gt; str:
+        return sub(&#34;&#34;, source)
+
+    @staticmethod
+    def suppress_name_equals_main_stuff(
+        source: str, sub: Callable = regex.compile(r&#34;(?ms)^if +__name__ *== *.__main__. *:.+&#34;).sub
+    ) -&gt; str:
+        return sub(&#34;&#34;, source)
+
+    @staticmethod
+    def normalize_paroxython_comments(
+        source: str,
+        subn: Callable = regex.compile(
+            r&#34;\s*&#34;.join(regex.split(r&#34;(\w+)&#34;, HINT_COMMENT.replace(&#34; &#34;, &#34;&#34;))) + r&#34;\s*&#34;,
+            regex.IGNORECASE,
+        ).subn,
+    ) -&gt; str:
+        return subn(f&#34;{HINT_COMMENT} &#34;, source)
+
+    @staticmethod
+    def suppress_blank_lines(source: str, sub: Callable = regex.compile(r&#34;\s*\n&#34;).sub) -&gt; str:
+        return sub(&#34;\n&#34;, source)
+
+    @staticmethod
+    def suppress_useless_pass_statements(
+        source: str, sub: Callable = regex.compile(r&#34;(?m)^( *)pass\n\1(?!\s)&#34;).sub,
+    ) -&gt; str:
+        return sub(r&#34;\1&#34;, source)
+
+
+def centrifugate_hints(
+    source: Source, match_isolated_hints: Callable = regex.compile(fr&#34;\s*{HINT_COMMENT} (.+)&#34;).match
+) -&gt; Source:
+    lines = []
+    hints: Set[str] = set()
+    for line in source.split(&#34;\n&#34;):
+        m = match_isolated_hints(line)
+        if m:
+            hints.update(m[1].split())
+        else:
+            lines.append(line)
+    if not hints:
+        return source
+    for i in (0, -1):
+        if f&#34; {HINT_COMMENT}&#34; not in lines[i]:
+            lines[i] += f&#34; {HINT_COMMENT}&#34;
+    for hint in sorted(hints):
+        lines[0] += f&#34; {hint}...&#34;
+        lines[-1] += f&#34; ...{hint}&#34;
+    return Source(&#34;\n&#34;.join(lines))
+
+
+class HintBuffer:
+    def __init__(self, description: str) -&gt; None:
+        self.result: LabelsSpans = defaultdict(list)
+        self.stack: Dict[LabelName, List[int]] = defaultdict(list)
+        self.description = description
+
+    def append_hint(self, label_name: LabelName, line_number: int) -&gt; None:
+        self.result[label_name].append(Span(line_number, line_number))
+
+    def open_hint(self, label_name: LabelName, line_number: int) -&gt; None:
+        self.stack[label_name].append(line_number)
+
+    def get_champion(self, label_name: LabelName) -&gt; List[Tuple[int, &#34;HintBuffer&#34;]]:
+        return [(self.stack[label_name][-1], self)] if self.stack[label_name] else []
+
+    def close_hint(self, label_name: LabelName, line_number: int) -&gt; None:
+        self.result[label_name].append(Span(self.stack[label_name].pop(), line_number))
+
+    def ensure_stack_is_empty(self) -&gt; None:
+        if any(self.stack.values()):
+            raise ValueError(f&#34;Unmatched opening hints for {self.description}: {self.stack}.&#34;)
+
+    def get_result(self) -&gt; LabelsSpans:
+        return {k: sorted(v) for (k, v) in self.result.items()}
+
+
+def collect_hints(
+    source: Source, match_label: Callable = regex.compile(r&#34;^(\W*)([\w:]+)(\W*)$&#34;).match
+) -&gt; Tuple[LabelsSpans, LabelsSpans]:
+    addition = HintBuffer(&#34;addition&#34;)
+    deletion = HintBuffer(&#34;deletion&#34;)
+    for (i, line) in enumerate(source.split(&#34;\n&#34;), 1):
+        (_, separator, hints) = line.partition(f&#34;{HINT_COMMENT} &#34;)
+        if not separator:
+            continue
+        for hint in hints.split():
+            (before, label, after) = match_label(hint).groups()
+            hint_parts = f&#34;{before}/{label}/{after}&#34;
+            if before in (&#34;&#34;, &#34;+&#34;, &#34;-&#34;):
+                buffer = deletion if before == &#34;-&#34; else addition
+                if after == &#34;&#34;:
+                    buffer.append_hint(label, i)
+                elif after in (&#34;...&#34;, &#34;…&#34;):
+                    buffer.open_hint(label, i)
+                else:
+                    raise ValueError(f&#34;Illegal last part  for hint &#39;{hint_parts}&#39; on line {i}.&#34;)
+            elif before in (&#34;...&#34;, &#34;…&#34;):
+                if after:
+                    raise ValueError(f&#34;Illegal last part for hint &#39;{hint_parts}&#39; on line {i}.&#34;)
+                champions = addition.get_champion(label) + deletion.get_champion(label)
+                if not champions:
+                    raise ValueError(f&#34;Unmatched closing hint &#39;{hint_parts}&#39; on line {i}.&#34;)
+                max(champions)[1].close_hint(label, i)
+            else:
+                raise ValueError(f&#34;Illegal first part for hint &#39;{hint_parts}&#39; on line {i}.&#34;)
+    addition.ensure_stack_is_empty()
+    deletion.ensure_stack_is_empty()
+    return (addition.get_result(), deletion.get_result())
+
+
+def remove_hints(
+    source: Source, sub_hints: Callable = regex.compile(fr&#34;\s*{HINT_COMMENT} .*&#34;).sub,
+) -&gt; Source:
+    return Source(sub_hints(&#34;&#34;, source).strip())</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="paroxython.preprocess_source.centrifugate_hints"><code class="name flex">
+<span>def <span class="ident">centrifugate_hints</span></span>(<span>source: Source, match_isolated_hints: Callable = &lt;built-in method match of _regex.Pattern object&gt;) ‑> Source</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Transform the isolated hints into all-encompassing hints.</p>
+<p>When a hint is isolated on its own line, it is considered to extend to the entire program.
+These hints are moved to both ends of the source (centrifugated), and made open on the first
+line and close on the last line.</p>
+<h2 id="examples">Examples</h2>
+<ul>
+<li>Some isolated hints (<code>hint_3</code> and <code>hint_5</code> are centrifugated).
+<div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_centrifugate_hints.py?slice=10:17&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_centrifugate_hints.py?slice=18:23&footer=0"></script></div></div></li>
+<li>Some trailing isolated hints (<code>hint_5</code> and <code>hint_6</code> are centrifugated).
+<div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_centrifugate_hints.py?slice=26:33&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_centrifugate_hints.py?slice=34:39&footer=0"></script></div></div></li>
+<li>No isolated hints (no centrifugation of the existing hints).
+<div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_centrifugate_hints.py?slice=42:47&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_centrifugate_hints.py?slice=48:53&footer=0"></script></div></div></li>
+</ul>
+<p>All examples above automatically extracted from
+<a href="https://github.com/laowantong/paroxython/blob/master/tests/test_centrifugate_hints.py">test_centrifugate_hints.py</a>.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L202-L238" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">def centrifugate_hints(
+    source: Source, match_isolated_hints: Callable = regex.compile(fr&#34;\s*{HINT_COMMENT} (.+)&#34;).match
+) -&gt; Source:
+    lines = []
+    hints: Set[str] = set()
+    for line in source.split(&#34;\n&#34;):
+        m = match_isolated_hints(line)
+        if m:
+            hints.update(m[1].split())
+        else:
+            lines.append(line)
+    if not hints:
+        return source
+    for i in (0, -1):
+        if f&#34; {HINT_COMMENT}&#34; not in lines[i]:
+            lines[i] += f&#34; {HINT_COMMENT}&#34;
+    for hint in sorted(hints):
+        lines[0] += f&#34; {hint}...&#34;
+        lines[-1] += f&#34; ...{hint}&#34;
+    return Source(&#34;\n&#34;.join(lines))</code></pre>
+</details>
+</dd>
+<dt id="paroxython.preprocess_source.collect_hints"><code class="name flex">
+<span>def <span class="ident">collect_hints</span></span>(<span>source: Source, match_label: Callable = &lt;built-in method match of _regex.Pattern object&gt;) ‑> Tuple[Dict[LabelName, List[Span]], Dict[LabelName, List[Span]]]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Schedule for addition or deletion the hints appearing in the comments.</p>
+<p>On this stage, the source code is scanned for manual hints. They are set aside in two separate
+containers (depending on whether the user intends to add or remove them). They will later be
+used to tweak the labelling results obtained by static analysis.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>source</code></strong> :&ensp;<code>Source</code></dt>
+<dd>[description]</dd>
+<dt><strong><code>match_label</code></strong> :&ensp;<code>Callable</code>, optional</dt>
+<dd>A function matching a label composed of alphanumeric
+characters and colons.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>ValueError</code></dt>
+<dd>Raised in various cases of malformed input.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>Tuple[LabelsSpans, LabelsSpans]</code></dt>
+<dd>A couple of dictionaries associating labels with lists of
+spans. The first [resp. second] member collects the labels that the source code author
+has manually added [resp. suppressed].</dd>
+</dl>
+<h2 id="example">Example</h2>
+<pre><code class="python">&gt;&gt;&gt; source = '''
+...     1   foo() # paroxython: +hint_1...
+...     2   bar() # paroxython: hint_2 hint_3 -hint_4
+...     3   biz() # paroxython: ...hint_1
+...     4   buz() # paroxython: -hint_2
+... '''
+&gt;&gt;&gt; collect_hints(source)
+(
+    {
+        &quot;hint_1&quot;: [Span(start=1, end=3)],
+        &quot;hint_2&quot;: [Span(start=2, end=2)],
+        &quot;hint_3&quot;: [Span(start=2, end=2)],
+    },
+    {
+        &quot;hint_2&quot;: [Span(start=4, end=4)],
+        &quot;hint_4&quot;: [Span(start=2, end=2)],
+    },
+)
+</code></pre>
+<p>```</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L275-L346" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">def collect_hints(
+    source: Source, match_label: Callable = regex.compile(r&#34;^(\W*)([\w:]+)(\W*)$&#34;).match
+) -&gt; Tuple[LabelsSpans, LabelsSpans]:
+    addition = HintBuffer(&#34;addition&#34;)
+    deletion = HintBuffer(&#34;deletion&#34;)
+    for (i, line) in enumerate(source.split(&#34;\n&#34;), 1):
+        (_, separator, hints) = line.partition(f&#34;{HINT_COMMENT} &#34;)
+        if not separator:
+            continue
+        for hint in hints.split():
+            (before, label, after) = match_label(hint).groups()
+            hint_parts = f&#34;{before}/{label}/{after}&#34;
+            if before in (&#34;&#34;, &#34;+&#34;, &#34;-&#34;):
+                buffer = deletion if before == &#34;-&#34; else addition
+                if after == &#34;&#34;:
+                    buffer.append_hint(label, i)
+                elif after in (&#34;...&#34;, &#34;…&#34;):
+                    buffer.open_hint(label, i)
+                else:
+                    raise ValueError(f&#34;Illegal last part  for hint &#39;{hint_parts}&#39; on line {i}.&#34;)
+            elif before in (&#34;...&#34;, &#34;…&#34;):
+                if after:
+                    raise ValueError(f&#34;Illegal last part for hint &#39;{hint_parts}&#39; on line {i}.&#34;)
+                champions = addition.get_champion(label) + deletion.get_champion(label)
+                if not champions:
+                    raise ValueError(f&#34;Unmatched closing hint &#39;{hint_parts}&#39; on line {i}.&#34;)
+                max(champions)[1].close_hint(label, i)
+            else:
+                raise ValueError(f&#34;Illegal first part for hint &#39;{hint_parts}&#39; on line {i}.&#34;)
+    addition.ensure_stack_is_empty()
+    deletion.ensure_stack_is_empty()
+    return (addition.get_result(), deletion.get_result())</code></pre>
+</details>
+</dd>
+<dt id="paroxython.preprocess_source.remove_hints"><code class="name flex">
+<span>def <span class="ident">remove_hints</span></span>(<span>source: Source, sub_hints: Callable = &lt;built-in method sub of _regex.Pattern object&gt;) ‑> Source</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Once they are collected, remove all Paroxython hints from the given source.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L349-L353" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">def remove_hints(
+    source: Source, sub_hints: Callable = regex.compile(fr&#34;\s*{HINT_COMMENT} .*&#34;).sub,
+) -&gt; Source:
+    return Source(sub_hints(&#34;&#34;, source).strip())</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="paroxython.preprocess_source.Cleanup"><code class="flex name class">
+<span>class <span class="ident">Cleanup</span></span>
+<span>(</span><span>cleanup_strategy: str)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Collection of cleaning static methods to be applied to a source code.</p>
+<p>The constructor selects the desired transformation.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>cleanup_strategy</code></strong> :&ensp;<code>str</code></dt>
+<dd>The name of the transformation. Currently, any other name than
+<code>"full"</code> (corresponding to <code>full_cleaning()</code> comes down to the identity function).</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>Callable[[Source], Source]</code></dt>
+<dd>A function that will clean up a given source code.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L67-L199" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">class Cleanup:
+    def __init__(self, cleanup_strategy: str):
+        self.run = lambda source: source
+        if cleanup_strategy == &#34;full&#34;:
+            self.run = Cleanup.full_cleaning
+
+    @staticmethod
+    def full_cleaning(source: Source) -&gt; Source:
+        result = []
+        previous_token = INDENT
+        (previous_end_row, previous_end_col) = (-1, 0)
+        text = str(source)
+        text = Cleanup.suppress_first_comments(text)
+        text = Cleanup.suppress_name_equals_main_stuff(text)
+        text = text.replace(&#34;\t&#34;, &#34;    &#34;)
+        lines = iter(text.split(&#34;\n&#34;))
+        for token_info in generate_tokens(lambda: next(lines) + &#34;\n&#34;):
+            (token, string, (start_row, start_col), (end_row, end_col), _) = token_info
+            if start_row &gt; previous_end_row:
+                previous_end_col = 0
+            result.append(&#34; &#34; * max(0, start_col - previous_end_col))
+            if token == COMMENT:
+                (string, n) = Cleanup.normalize_paroxython_comments(string)
+                if n == 0:
+                    continue
+                result.append(string)
+            elif token == STRING and previous_token in (INDENT, DEDENT, NEWLINE):
+                result.append(&#34;pass\n&#34;)  # replace the docstring by a pass statement
+            else:
+                result.append(string)
+            if (previous_token, token) == (NEWLINE, NL):
+                previous_token = NEWLINE
+            else:
+                previous_token = token
+            (previous_end_row, previous_end_col) = (end_row, end_col)
+        text = &#34;&#34;.join(result).strip()
+        text = Cleanup.suppress_blank_lines(text)
+        text = Cleanup.suppress_useless_pass_statements(text)
+        return Source(text)
+
+    @staticmethod
+    def suppress_first_comments(source: str, sub=regex.compile(r&#34;\A(#.*\n)*&#34;).sub) -&gt; str:
+        return sub(&#34;&#34;, source)
+
+    @staticmethod
+    def suppress_name_equals_main_stuff(
+        source: str, sub: Callable = regex.compile(r&#34;(?ms)^if +__name__ *== *.__main__. *:.+&#34;).sub
+    ) -&gt; str:
+        return sub(&#34;&#34;, source)
+
+    @staticmethod
+    def normalize_paroxython_comments(
+        source: str,
+        subn: Callable = regex.compile(
+            r&#34;\s*&#34;.join(regex.split(r&#34;(\w+)&#34;, HINT_COMMENT.replace(&#34; &#34;, &#34;&#34;))) + r&#34;\s*&#34;,
+            regex.IGNORECASE,
+        ).subn,
+    ) -&gt; str:
+        return subn(f&#34;{HINT_COMMENT} &#34;, source)
+
+    @staticmethod
+    def suppress_blank_lines(source: str, sub: Callable = regex.compile(r&#34;\s*\n&#34;).sub) -&gt; str:
+        return sub(&#34;\n&#34;, source)
+
+    @staticmethod
+    def suppress_useless_pass_statements(
+        source: str, sub: Callable = regex.compile(r&#34;(?m)^( *)pass\n\1(?!\s)&#34;).sub,
+    ) -&gt; str:
+        return sub(r&#34;\1&#34;, source)</code></pre>
+</details>
+<h3>Static methods</h3>
+<dl>
+<dt id="paroxython.preprocess_source.Cleanup.full_cleaning"><code class="name flex">
+<span>def <span class="ident">full_cleaning</span></span>(<span>source: Source) ‑> Source</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Remove as much noise (comments, etc.) as possible in the given source code.</p>
+<ol>
+<li>Suppress initial comments.</li>
+<li>Suppress <code>if __name__ == '__main__'</code> part.</li>
+<li>Replace tabulations with spaces.</li>
+<li>Normalize Paroxython hint comments.</li>
+<li>Replace docstrings with <code>pass</code> statements (most of which being suppressed at the end of the
+process).</li>
+<li>Suppress empty or blank lines.</li>
+<li>Suppress useless <code>pass</code> statements.</li>
+</ol>
+<h2 id="examples">Examples</h2>
+<ul>
+<li>Empty or blank lines are suppressed.
+<div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=13:18&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=19:21&footer=0"></script></div></div></li>
+<li>Normal inline comments are suppressed.
+<div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=24:29&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=30:35&footer=0"></script></div></div></li>
+<li>Commented lines are suppressed.
+<div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=38:48&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=49:52&footer=0"></script></div></div></li>
+<li>Shebang is suppressed.
+<div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=55:57&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=58:59&footer=0"></script></div></div></li>
+<li>Encoding declaration is suppressed.
+<div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=62:64&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=65:66&footer=0"></script></div></div></li>
+<li>Docstrings of classes and functions are suppressed.
+<div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=69:80&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=81:86&footer=0"></script></div></div></li>
+<li>Docstrings of modules are suppressed.
+<div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=89:99&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=100:104&footer=0"></script></div></div></li>
+<li>A <code>pass</code> statement is added to empty classes if needed.
+<div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=107:112&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=113:115&footer=0"></script></div></div></li>
+<li>Useless <code>pass</code> statements are suppressed.
+<div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=118:126&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=127:133&footer=0"></script></div></div></li>
+<li>Mixes of comments and docstrings are suppressed.
+<div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=136:140&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=141:142&footer=0"></script></div></div></li>
+<li>Paroxython's label hints are <strong>preserved</strong> and <strong>normalized</strong>.
+<div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=145:151&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=152:158&footer=0"></script></div></div></li>
+<li><code>if __name__ == "__main__":</code> part is suppressed.
+<div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=161:164&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=165:166&footer=0"></script></div></div></li>
+</ul>
+<p>All examples above automatically extracted from
+<a href="https://github.com/laowantong/paroxython/blob/master/tests/test_cleanup_source.py">test_cleanup_source.py</a>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Useless pass statements are preserved when they are not followed by a line with a same
+indentation level.</p>
+</div></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L84-L160" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">@staticmethod
+def full_cleaning(source: Source) -&gt; Source:
+    result = []
+    previous_token = INDENT
+    (previous_end_row, previous_end_col) = (-1, 0)
+    text = str(source)
+    text = Cleanup.suppress_first_comments(text)
+    text = Cleanup.suppress_name_equals_main_stuff(text)
+    text = text.replace(&#34;\t&#34;, &#34;    &#34;)
+    lines = iter(text.split(&#34;\n&#34;))
+    for token_info in generate_tokens(lambda: next(lines) + &#34;\n&#34;):
+        (token, string, (start_row, start_col), (end_row, end_col), _) = token_info
+        if start_row &gt; previous_end_row:
+            previous_end_col = 0
+        result.append(&#34; &#34; * max(0, start_col - previous_end_col))
+        if token == COMMENT:
+            (string, n) = Cleanup.normalize_paroxython_comments(string)
+            if n == 0:
+                continue
+            result.append(string)
+        elif token == STRING and previous_token in (INDENT, DEDENT, NEWLINE):
+            result.append(&#34;pass\n&#34;)  # replace the docstring by a pass statement
+        else:
+            result.append(string)
+        if (previous_token, token) == (NEWLINE, NL):
+            previous_token = NEWLINE
+        else:
+            previous_token = token
+        (previous_end_row, previous_end_col) = (end_row, end_col)
+    text = &#34;&#34;.join(result).strip()
+    text = Cleanup.suppress_blank_lines(text)
+    text = Cleanup.suppress_useless_pass_statements(text)
+    return Source(text)</code></pre>
+</details>
+</dd>
+<dt id="paroxython.preprocess_source.Cleanup.suppress_first_comments"><code class="name flex">
+<span>def <span class="ident">suppress_first_comments</span></span>(<span>source: str, sub=&lt;built-in method sub of _regex.Pattern object&gt;) ‑> str</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Replace all comments placed on the first lines of the source code.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L162-L165" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">@staticmethod
+def suppress_first_comments(source: str, sub=regex.compile(r&#34;\A(#.*\n)*&#34;).sub) -&gt; str:
+    return sub(&#34;&#34;, source)</code></pre>
+</details>
+</dd>
+<dt id="paroxython.preprocess_source.Cleanup.suppress_name_equals_main_stuff"><code class="name flex">
+<span>def <span class="ident">suppress_name_equals_main_stuff</span></span>(<span>source: str, sub: Callable = &lt;built-in method sub of _regex.Pattern object&gt;) ‑> str</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Suppress <code>if __name__ == '__main__'</code> part.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L167-L172" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">@staticmethod
+def suppress_name_equals_main_stuff(
+    source: str, sub: Callable = regex.compile(r&#34;(?ms)^if +__name__ *== *.__main__. *:.+&#34;).sub
+) -&gt; str:
+    return sub(&#34;&#34;, source)</code></pre>
+</details>
+</dd>
+<dt id="paroxython.preprocess_source.Cleanup.normalize_paroxython_comments"><code class="name flex">
+<span>def <span class="ident">normalize_paroxython_comments</span></span>(<span>source: str, subn: Callable = &lt;built-in method subn of _regex.Pattern object&gt;) ‑> str</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Replace and count all the hint comment strings, made space- and case-insensitive.</p>
+<p>For instance, if <code>HINT_COMMENT</code> is <code>"# paroxython:"</code> (its default value), the actual search
+pattern will be <code>r"(?i)#\s*paroxython\s*:\s*"</code>.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L174-L187" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">@staticmethod
+def normalize_paroxython_comments(
+    source: str,
+    subn: Callable = regex.compile(
+        r&#34;\s*&#34;.join(regex.split(r&#34;(\w+)&#34;, HINT_COMMENT.replace(&#34; &#34;, &#34;&#34;))) + r&#34;\s*&#34;,
+        regex.IGNORECASE,
+    ).subn,
+) -&gt; str:
+    return subn(f&#34;{HINT_COMMENT} &#34;, source)</code></pre>
+</details>
+</dd>
+<dt id="paroxython.preprocess_source.Cleanup.suppress_blank_lines"><code class="name flex">
+<span>def <span class="ident">suppress_blank_lines</span></span>(<span>source: str, sub: Callable = &lt;built-in method sub of _regex.Pattern object&gt;) ‑> str</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Suppress all empty or blank lines in the given source.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L189-L192" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">@staticmethod
+def suppress_blank_lines(source: str, sub: Callable = regex.compile(r&#34;\s*\n&#34;).sub) -&gt; str:
+    return sub(&#34;\n&#34;, source)</code></pre>
+</details>
+</dd>
+<dt id="paroxython.preprocess_source.Cleanup.suppress_useless_pass_statements"><code class="name flex">
+<span>def <span class="ident">suppress_useless_pass_statements</span></span>(<span>source: str, sub: Callable = &lt;built-in method sub of _regex.Pattern object&gt;) ‑> str</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Suppress all <code>pass</code> statements followed by a line with a same level of indentation.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L194-L199" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">@staticmethod
+def suppress_useless_pass_statements(
+    source: str, sub: Callable = regex.compile(r&#34;(?m)^( *)pass\n\1(?!\s)&#34;).sub,
+) -&gt; str:
+    return sub(r&#34;\1&#34;, source)</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="paroxython.preprocess_source.HintBuffer"><code class="flex name class">
+<span>class <span class="ident">HintBuffer</span></span>
+<span>(</span><span>description: str)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Layer on the operations of appending, opening and closing a hint, used by <code><a title="paroxython.preprocess_source.collect_hints" href="#paroxython.preprocess_source.collect_hints">collect_hints()</a></code>.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L241-L272" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">class HintBuffer:
+    def __init__(self, description: str) -&gt; None:
+        self.result: LabelsSpans = defaultdict(list)
+        self.stack: Dict[LabelName, List[int]] = defaultdict(list)
+        self.description = description
+
+    def append_hint(self, label_name: LabelName, line_number: int) -&gt; None:
+        self.result[label_name].append(Span(line_number, line_number))
+
+    def open_hint(self, label_name: LabelName, line_number: int) -&gt; None:
+        self.stack[label_name].append(line_number)
+
+    def get_champion(self, label_name: LabelName) -&gt; List[Tuple[int, &#34;HintBuffer&#34;]]:
+        return [(self.stack[label_name][-1], self)] if self.stack[label_name] else []
+
+    def close_hint(self, label_name: LabelName, line_number: int) -&gt; None:
+        self.result[label_name].append(Span(self.stack[label_name].pop(), line_number))
+
+    def ensure_stack_is_empty(self) -&gt; None:
+        if any(self.stack.values()):
+            raise ValueError(f&#34;Unmatched opening hints for {self.description}: {self.stack}.&#34;)
+
+    def get_result(self) -&gt; LabelsSpans:
+        return {k: sorted(v) for (k, v) in self.result.items()}</code></pre>
+</details>
+<h3>Methods</h3>
+<dl>
+<dt id="paroxython.preprocess_source.HintBuffer.append_hint"><code class="name flex">
+<span>def <span class="ident">append_hint</span></span>(<span>self, label_name: LabelName, line_number: int) ‑> NoneType</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Label a span consisting in the given line number.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L249-L251" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">def append_hint(self, label_name: LabelName, line_number: int) -&gt; None:
+    self.result[label_name].append(Span(line_number, line_number))</code></pre>
+</details>
+</dd>
+<dt id="paroxython.preprocess_source.HintBuffer.open_hint"><code class="name flex">
+<span>def <span class="ident">open_hint</span></span>(<span>self, label_name: LabelName, line_number: int) ‑> NoneType</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Store the line number associated with a given opening hint.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L253-L255" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">def open_hint(self, label_name: LabelName, line_number: int) -&gt; None:
+    self.stack[label_name].append(line_number)</code></pre>
+</details>
+</dd>
+<dt id="paroxython.preprocess_source.HintBuffer.get_champion"><code class="name flex">
+<span>def <span class="ident">get_champion</span></span>(<span>self, label_name: LabelName) ‑> List[Tuple[int, <a title="paroxython.preprocess_source.HintBuffer" href="#paroxython.preprocess_source.HintBuffer">HintBuffer</a>]]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return the last line number (if any) of the opening label, plus itself.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L257-L259" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">def get_champion(self, label_name: LabelName) -&gt; List[Tuple[int, &#34;HintBuffer&#34;]]:
+    return [(self.stack[label_name][-1], self)] if self.stack[label_name] else []</code></pre>
+</details>
+</dd>
+<dt id="paroxython.preprocess_source.HintBuffer.close_hint"><code class="name flex">
+<span>def <span class="ident">close_hint</span></span>(<span>self, label_name: LabelName, line_number: int) ‑> NoneType</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Label a span opened above and closed on the given line number.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L261-L263" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">def close_hint(self, label_name: LabelName, line_number: int) -&gt; None:
+    self.result[label_name].append(Span(self.stack[label_name].pop(), line_number))</code></pre>
+</details>
+</dd>
+<dt id="paroxython.preprocess_source.HintBuffer.ensure_stack_is_empty"><code class="name flex">
+<span>def <span class="ident">ensure_stack_is_empty</span></span>(<span>self) ‑> NoneType</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Raise an error iff there remains at least one open label.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L265-L268" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">def ensure_stack_is_empty(self) -&gt; None:
+    if any(self.stack.values()):
+        raise ValueError(f&#34;Unmatched opening hints for {self.description}: {self.stack}.&#34;)</code></pre>
+</details>
+</dd>
+<dt id="paroxython.preprocess_source.HintBuffer.get_result"><code class="name flex">
+<span>def <span class="ident">get_result</span></span>(<span>self) ‑> Dict[LabelName, List[Span]]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return the result with sorted spans.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L270-L272" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">def get_result(self) -&gt; LabelsSpans:
+    return {k: sorted(v) for (k, v) in self.result.items()}</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<header>
+<a class="homelink" rel="home" title="Paroxython Home" href="index.html">
+<img src="resources/logo.png" alt="Paroxython logo">
+</a>
+</header>
+<div class="gcse-search" style="height: 70px"
+data-as_oq="site:laowantong/paroxython.github.io inurl:github.com/laowantong/paroxython"
+data-gaCategoryParameter="paroxython.preprocess_source">
+</div>
+<h1>Index</h1>
+<div class="toc">
+<ul>
+<li><a href="#cleaning">Cleaning</a></li>
+<li><a href="#manual-hints">Manual hints</a></li>
+<li><a href="#implementation-note">Implementation note</a></li>
+</ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="paroxython" href="index.html">paroxython</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="paroxython.preprocess_source.centrifugate_hints" href="#paroxython.preprocess_source.centrifugate_hints">centrifugate_hints</a></code></li>
+<li><code><a title="paroxython.preprocess_source.collect_hints" href="#paroxython.preprocess_source.collect_hints">collect_hints</a></code></li>
+<li><code><a title="paroxython.preprocess_source.remove_hints" href="#paroxython.preprocess_source.remove_hints">remove_hints</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="paroxython.preprocess_source.Cleanup" href="#paroxython.preprocess_source.Cleanup">Cleanup</a></code></h4>
+<ul class="">
+<li><code><a title="paroxython.preprocess_source.Cleanup.full_cleaning" href="#paroxython.preprocess_source.Cleanup.full_cleaning">full_cleaning</a></code></li>
+<li><code><a title="paroxython.preprocess_source.Cleanup.suppress_first_comments" href="#paroxython.preprocess_source.Cleanup.suppress_first_comments">suppress_first_comments</a></code></li>
+<li><code><a title="paroxython.preprocess_source.Cleanup.suppress_name_equals_main_stuff" href="#paroxython.preprocess_source.Cleanup.suppress_name_equals_main_stuff">suppress_name_equals_main_stuff</a></code></li>
+<li><code><a title="paroxython.preprocess_source.Cleanup.normalize_paroxython_comments" href="#paroxython.preprocess_source.Cleanup.normalize_paroxython_comments">normalize_paroxython_comments</a></code></li>
+<li><code><a title="paroxython.preprocess_source.Cleanup.suppress_blank_lines" href="#paroxython.preprocess_source.Cleanup.suppress_blank_lines">suppress_blank_lines</a></code></li>
+<li><code><a title="paroxython.preprocess_source.Cleanup.suppress_useless_pass_statements" href="#paroxython.preprocess_source.Cleanup.suppress_useless_pass_statements">suppress_useless_pass_statements</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="paroxython.preprocess_source.HintBuffer" href="#paroxython.preprocess_source.HintBuffer">HintBuffer</a></code></h4>
+<ul class="">
+<li><code><a title="paroxython.preprocess_source.HintBuffer.append_hint" href="#paroxython.preprocess_source.HintBuffer.append_hint">append_hint</a></code></li>
+<li><code><a title="paroxython.preprocess_source.HintBuffer.open_hint" href="#paroxython.preprocess_source.HintBuffer.open_hint">open_hint</a></code></li>
+<li><code><a title="paroxython.preprocess_source.HintBuffer.get_champion" href="#paroxython.preprocess_source.HintBuffer.get_champion">get_champion</a></code></li>
+<li><code><a title="paroxython.preprocess_source.HintBuffer.close_hint" href="#paroxython.preprocess_source.HintBuffer.close_hint">close_hint</a></code></li>
+<li><code><a title="paroxython.preprocess_source.HintBuffer.ensure_stack_is_empty" href="#paroxython.preprocess_source.HintBuffer.ensure_stack_is_empty">ensure_stack_is_empty</a></code></li>
+<li><code><a title="paroxython.preprocess_source.HintBuffer.get_result" href="#paroxython.preprocess_source.HintBuffer.get_result">get_result</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.8.1</a>.</p>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad()</script>
+</body>
+</html>

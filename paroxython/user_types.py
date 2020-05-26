@@ -1,5 +1,5 @@
 from typing import Counter as Bag
-from typing import Dict, List, NamedTuple, NewType, Set, Tuple, Union
+from typing import Dict, List, NamedTuple, NewType, Set, Tuple, Union, Callable
 
 from typing_extensions import TypedDict, Literal  # Python 3.8: import directly from typing
 
@@ -95,24 +95,20 @@ class JsonDatabase(TypedDict):
 # - trailing commas;
 # - comments!
 
+Operation = Literal["include", "exclude", "impart"]
+
 class Command(TypedDict):
-    operation: Literal["impart", "exclude", "include"]
-    programs_or_taxons: Literal["programs", "taxons"]
-    source: Union[str, List[str]] # not source-code, but source of the data
+    operation: Operation
+    source: Union[str, List[str]] # not source code, but source of the data
     filtered_out: ProgramNames # to be populated by the execution of the command
 
-class TaxonTriple(NamedTuple): #  cf. https://en.wikipedia.org/wiki/Semantic_triple
-    predicate: str
-    name_1: TaxonName
-    name_2: TaxonName
-
-TaxonNameOrTriple = Union[TaxonName, TaxonTriple]
-TaxonNamesOrTriples = List[TaxonNameOrTriple]
-
+Predicate = Callable[[int, int], bool]
 
 # Recommendations
 
 ProgramTaxonNames = Dict[ProgramName, TaxonNames]
 AssessedPrograms = List[Tuple[float, ProgramName]]
+
+AssessmentStrategy = Literal["zeno", "linear"]
 
 # fmt:on

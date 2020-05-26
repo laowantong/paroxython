@@ -27,7 +27,7 @@ from .user_types import (
 
 
 class Database:
-    def __init__(self, directory: Path, ignore_timestamps=False, *args, **kwargs) -> None:
+    def __init__(self, directory: Path, ignore_timestamps=True, *args, **kwargs) -> None:
         """Collect all infos pertaining to the programs, the labels and the taxons."""
 
         self.default_json_db_path = directory.parent / f"{directory.name}_db.json"
@@ -175,7 +175,22 @@ def prepared(tags: Labels) -> LabelsPoorSpans:
 def prepared(tags: Taxons) -> TaxonsPoorSpans:
     ...  # pragma: no cover
 def prepared(tags):
-    """Prepare the spans for serialization."""
+    """Prepare the spans for serialization.
+
+    Args:
+        tags (Labels|Taxons): The tags or taxons to be serialized.
+
+    Returns:
+        LabelPoorSpans|TaxonsPoorSpans:
+            A dictionary mapping tag names with the list of their spans, transformed into simple
+            lists of two integers.
+
+    .. note::
+          Overloaded to support two different combinations of argument types: Mypy can check that
+          passing `Labels` (resp. `Taxons`) to the function returns `LabelsPoorSpans` (resp.
+          `TaxonsPoorSpans`). Browse GitHub to see the actual overloaded functions.
+          See [the documentation](https://docs.python.org/3/library/typing.html#typing.overload).
+    """
     result: Union[LabelsPoorSpans, TaxonsPoorSpans] = {}
     for (tag_name, spans) in tags:
         result[tag_name] = [span[:2] for span in sorted(set(spans))]
@@ -208,7 +223,7 @@ def collect_taxons(programs: Programs) -> TaxonInfos:
     return result
 
 
-def compute_direct_importations(programs) -> ProgramToPrograms:
+def compute_direct_importations(programs: Programs) -> ProgramToPrograms:
     """Associate each program to the set of its direct internal imports."""
     importations: Dict = {program.name: set() for program in programs}
     for program in programs:
@@ -255,10 +270,8 @@ def collect_exportations(exportations: ProgramToPrograms) -> ProgramToPrograms:
 if __name__ == "__main__":
     # fmt:off
     directories = [
-        # "../Python/project_euler",
-        # "../Python/maths",
+        "examples/simple/programs",
         "../algo/programs",
-        # "paroxython"
     ]
     # fmt:on
     print()
