@@ -390,7 +390,7 @@ class Recommendations:
                     taxon_cost = self.taxon_cost(taxon_name)
                     s = spans_to_html(", ".join(map(couple_to_string, spans)))
                     contents.append(f"| {taxon_cost} | `{taxon_name}` | {s} |")
-                contents.append("---")
+                contents.append("\n---")
 
         def programs_to_html(description: str, programs: ProgramNames) -> str:
             details = []

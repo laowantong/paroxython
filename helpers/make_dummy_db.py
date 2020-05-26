@@ -1,7 +1,7 @@
 """Dump the contents of two test files:
 
 1. examples/dummy/taxons_and_programs.txt
-2. examples/dummy/programs_db.txt
+2. examples/dummy/programs_db.json
 """
 
 import random
