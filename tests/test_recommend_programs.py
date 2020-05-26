@@ -123,15 +123,15 @@ def test_recommend_mini_programs():
 
     # A command excluding a sequence is equivalent to a sequence of excluding commands
     commands = [
-        {"operation": "exclude", "source": ["assignment.py",],},
-        {"operation": "exclude", "source": ["fizzbuzz.py",],},
+        {"operation": "exclude", "source": ["assignment.py"]},
+        {"operation": "exclude", "source": ["fizzbuzz.py"]},
     ]
     rec = Recommendations(db, commands=commands)
     rec.run_pipeline()
     assert rec.selected_programs.keys() == {"collatz.py"}
     assert not rec.imparted_knowledge
 
-    commands = [{"operation": "include", "source": ["this_program_does_not_exist.py",],}]
+    commands = [{"operation": "include", "source": ["this_program_does_not_exist.py"]}]
     rec = Recommendations(db, commands=commands)
     rec.run_pipeline()
     assert not rec.selected_programs.keys()
@@ -153,8 +153,8 @@ def test_recommend_mini_programs():
 
     # A command including a sequence is not equivalent to a sequence of including commands
     commands = [
-        {"operation": "include", "source": ["assignment.py",],},
-        {"operation": "include", "source": ["fizzbuzz.py",],},
+        {"operation": "include", "source": ["assignment.py"]},
+        {"operation": "include", "source": ["fizzbuzz.py"]},
     ]
     rec = Recommendations(db, commands=commands)
     rec.run_pipeline()
@@ -237,7 +237,7 @@ def test_recommend_mini_programs():
     assert rec.selected_programs.keys() == {"assignment.py", "collatz.py"}
     assert not rec.imparted_knowledge
 
-    commands = [{"operation": "include", "source": ["this_taxon_does_not_exist",],}]
+    commands = [{"operation": "include", "source": ["this_taxon_does_not_exist"]}]
     rec = Recommendations(db, commands=commands)
     rec.run_pipeline()
     assert not rec.selected_programs.keys()
@@ -362,6 +362,252 @@ def test_recommend_mini_programs():
         "collatz.py",
         "fizzbuzz.py",
         "is_even.py",
+    }
+    assert not rec.imparted_knowledge
+
+    commands = [
+        {
+            "operation": "exclude",
+            "source": [
+                ("variable/assignment/single", "after", "io/standard/print"),
+                # collatz.py and fizzbuzz.py have an assignment after a print.
+                # is_even.py imports fizzbuzz.py.
+                # Consequently, these three programs are excluded.
+            ],
+        }
+    ]
+    rec = Recommendations(db, commands=commands)
+    rec.run_pipeline()
+    assert rec.selected_programs.keys() == {"assignment.py"}
+    assert not rec.imparted_knowledge
+
+    commands = [
+        {
+            "operation": "exclude",
+            "source": [
+                ("operator/arithmetic/addition", "equals", "operator/arithmetic/multiplication"),
+                # "operator/arithmetic/addition" and "operator/arithmetic/multiplication" are both
+                # featured on the same line of collatz.py, and indirectly by fizzbuzz.py and
+                # is_even.py. Therefore, excluding this taxon keeps only assignment.py.
+            ],
+        }
+    ]
+    rec = Recommendations(db, commands=commands)
+    rec.run_pipeline()
+    assert rec.selected_programs.keys() == {"assignment.py"}
+    assert not rec.imparted_knowledge
+
+    commands = [
+        {
+            "operation": "exclude",
+            "source": [
+                ("test/equality", "inside", "subroutine/function"),
+                # "test/equality" is inside "subroutine/function" in is_even.py, which is not
+                # imported anywhere.
+            ],
+        }
+    ]
+    rec = Recommendations(db, commands=commands)
+    rec.run_pipeline()
+    assert rec.selected_programs.keys() == {"collatz.py", "assignment.py", "fizzbuzz.py"}
+    assert not rec.imparted_knowledge
+
+    commands = [
+        {
+            "operation": "exclude",
+            "source": [
+                ("call/function/builtin/range", "inside", "flow/conditional"),
+                # "call/function/builtin/range" is not inside "flow/conditional" anywhere.
+            ],
+        }
+    ]
+    rec = Recommendations(db, commands=commands)
+    rec.run_pipeline()
+    assert rec.selected_programs.keys() == {
+        "is_even.py",
+        "fizzbuzz.py",
+        "assignment.py",
+        "collatz.py",
+    }
+    assert not rec.imparted_knowledge
+
+    commands = [
+        {
+            "operation": "include",
+            "source": [
+                ("variable/assignment/single", "after", "io/standard/print"),
+                # The taxon "variable/assignment/single" is featured by assignment.py and
+                # collatz.py. In collatz.py, it appears after a taxon "io/standard/print".
+                # Consequently, it should be included in the results, but not the programs which
+                # import it: fizzbuzz.py and is_even.py.
+            ],
+        }
+    ]
+    rec = Recommendations(db, commands=commands)
+    rec.run_pipeline()
+    assert rec.selected_programs.keys() == {"collatz.py"}
+    assert not rec.imparted_knowledge
+
+    commands = [
+        {
+            "operation": "include",
+            "source": [
+                ("operator/arithmetic/modulo", "equals", "type/number/integer/literal"),
+                # "operator/arithmetic/modulo" and "type/number/integer/literal" are both featured
+                # on the same line in all programs except assignment.py
+            ],
+        }
+    ]
+    rec = Recommendations(db, commands=commands)
+    rec.run_pipeline()
+    assert rec.selected_programs.keys() == {"collatz.py", "is_even.py", "fizzbuzz.py"}
+    assert not rec.imparted_knowledge
+
+    commands = [
+        {
+            "operation": "include",
+            "source": [
+                ("operator/arithmetic/modulo", "x == y", "type/number/integer/literal"),
+                # The same with "x == y" instead of "equals"
+            ],
+        }
+    ]
+    rec = Recommendations(db, commands=commands)
+    rec.run_pipeline()
+    assert rec.selected_programs.keys() == {"collatz.py", "is_even.py", "fizzbuzz.py"}
+    assert not rec.imparted_knowledge
+
+    commands = [
+        {
+            "operation": "include",
+            "source": [
+                ("test/equality", "inside", "subroutine/function"),
+                # "test/equality" is inside "subroutine/function" in is_even.py, which is not
+                # imported anywhere.
+            ],
+        }
+    ]
+    rec = Recommendations(db, commands=commands)
+    rec.run_pipeline()
+    assert rec.selected_programs.keys() == {"is_even.py"}
+    assert not rec.imparted_knowledge
+
+    commands = [
+        {
+            "operation": "include",
+            "source": [
+                ("test/equality$", "inside", "subroutine"),
+                # "test/equality" (strictly, note the dollar sign) is inside "subroutine/function"
+                # in is_even.py and inside "subroutine/procedure" in collatz.py. Both will be
+                # included.
+            ],
+        }
+    ]
+    rec = Recommendations(db, commands=commands)
+    rec.run_pipeline()
+    assert rec.selected_programs.keys() == {"collatz.py", "is_even.py"}
+    assert not rec.imparted_knowledge
+
+    commands = [
+        {
+            "operation": "include",
+            "source": [
+                ("call/function/builtin/range", "inside", "flow/conditional"),
+                # "call/function/builtin/range" is not inside "flow/conditional" anywhere.
+            ],
+        }
+    ]
+    rec = Recommendations(db, commands=commands)
+    rec.run_pipeline()
+    assert not rec.selected_programs.keys()
+    assert not rec.imparted_knowledge
+
+    commands = [
+        {
+            "operation": "include",
+            "source": [
+                ("call/function/builtin/print", "is", "call/function/builtin/print"),
+                # "call/function/builtin/print" may appear several times in the same program, but
+                # never on the same line.
+            ],
+        }
+    ]
+    rec = Recommendations(db, commands=commands)
+    rec.run_pipeline()
+    assert not rec.selected_programs.keys()
+    assert not rec.imparted_knowledge
+
+    commands = [
+        {
+            "operation": "include",
+            "source": [
+                ("type/number/integer/literal$", "is", "type/number/integer/literal$"),
+                # "type/number/integer/literal" appears twice on the same line in fizzbuzz.py and
+                # collatz.py
+            ],
+        }
+    ]
+    rec = Recommendations(db, commands=commands)
+    rec.run_pipeline()
+    assert rec.selected_programs.keys() == {"fizzbuzz.py", "collatz.py"}
+    assert not rec.imparted_knowledge
+
+    commands = [
+        {
+            "operation": "include",
+            "source": [
+                ("type/number/integer/literal$", "is", "type/number/integer/literal$"),
+                # "type/number/integer/literal" appears twice on the same line in fizzbuzz.py and
+                # collatz.py
+            ],
+        }
+    ]
+    rec = Recommendations(db, commands=commands)
+    rec.run_pipeline()
+    assert rec.selected_programs.keys() == {"fizzbuzz.py", "collatz.py"}
+    assert not rec.imparted_knowledge
+
+    commands = [
+        {
+            "operation": "include",
+            "source": [
+                ("io/standard/print", "not inside", "flow/loop/exit/late"),
+                # A print statement is featured inside a loop by both collatz.py and fizzbuzz.py.
+                # Note that, in collatz.py, there exists a print statement which is not inside the
+                # loop. This doesn't make it satisfy the predicate. Firstly, the set of the
+                # programs satisfying "print inside loop" (i. e., collatz.py and fizzbuzz.py) is
+                # calculated. The result is the difference between the set of the programs
+                # featuring the first taxon (collatz.py and fizzbuzz.py) and the former. Note that
+                # assignment.py and is_even.py are not included in the result, since they don't
+                # feature (at least directly) "io/standard/print".
+            ],
+        }
+    ]
+    rec = Recommendations(db, commands=commands)
+    rec.run_pipeline()
+    assert not rec.selected_programs.keys()
+    assert not rec.imparted_knowledge
+
+    commands = [
+        {
+            "operation": "exclude",
+            "source": [
+                ("io/standard/print", "not inside", "flow/loop/exit/late"),
+                # Excluding the programs where a print statement does not appear inside a loop
+                # does not exclude those which don't feature the print statement (assignment.py and
+                # is_even.py), nor those where at least one print statement appears inside a loop
+                # (fizzbuzz.py and collatz.py).
+            ],
+        }
+    ]
+    rec = Recommendations(db, commands=commands)
+    rec.run_pipeline()
+    print(rec.selected_programs.keys())
+    assert rec.selected_programs.keys() == {
+        "is_even.py",
+        "fizzbuzz.py",
+        "assignment.py",
+        "collatz.py",
     }
     assert not rec.imparted_knowledge
 
