@@ -70,7 +70,7 @@ benefit of being evaluated only once.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L0-L363" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L0-L352" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">from collections import defaultdict
 from token import DEDENT, INDENT, NEWLINE, STRING
@@ -240,18 +240,7 @@ def collect_hints(
 def remove_hints(
     source: Source, sub_hints: Callable = regex.compile(fr&#34;\s*{HINT_COMMENT} .*&#34;).sub,
 ) -&gt; Source:
-    return Source(sub_hints(&#34;&#34;, source).strip())
-
-
-if __name__ == &#34;__main__&#34;:
-    source = open(&#34;../Python/maths/matrix_exponentiation.py&#34;).read()
-    lines = source.split(&#34;\n&#34;)
-    lines[13] += f&#34; {HINT_COMMENT} test&#34;
-    source = Source(&#34;\n&#34;.join(lines))
-    cleanup = Cleanup(&#34;full&#34;).run
-    print(source)
-    print(&#34;-&#34; * 80)
-    print(cleanup(source))</code></pre>
+    return Source(sub_hints(&#34;&#34;, source).strip())</code></pre>
 </details>
 </section>
 <section>

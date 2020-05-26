@@ -29,7 +29,7 @@
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L0-L283" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L0-L281" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">import json
 import sqlite3
@@ -60,7 +60,7 @@ from .user_types import (
 
 
 class Database:
-    def __init__(self, directory: Path, ignore_timestamps=False, *args, **kwargs) -&gt; None:
+    def __init__(self, directory: Path, ignore_timestamps=True, *args, **kwargs) -&gt; None:
         self.default_json_db_path = directory.parent / f&#34;{directory.name}_db.json&#34;
         self.default_sqlite_db_path = directory.parent / f&#34;{directory.name}_db.sqlite&#34;
 
@@ -276,10 +276,8 @@ def collect_exportations(exportations: ProgramToPrograms) -&gt; ProgramToProgram
 if __name__ == &#34;__main__&#34;:
     # fmt:off
     directories = [
-        # &#34;../Python/project_euler&#34;,
-        # &#34;../Python/maths&#34;,
+        &#34;examples/simple/programs&#34;,
         &#34;../algo/programs&#34;,
-        # &#34;paroxython&#34;
     ]
     # fmt:on
     print()
@@ -467,7 +465,7 @@ See <a href="https://docs.python.org/3/library/typing.html#typing.overload">the 
 <dl>
 <dt id="paroxython.make_db.Database"><code class="flex name class">
 <span>class <span class="ident">Database</span></span>
-<span>(</span><span>directory: pathlib.Path, ignore_timestamps=False, *args, **kwargs)</span>
+<span>(</span><span>directory: pathlib.Path, ignore_timestamps=True, *args, **kwargs)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Collect all infos pertaining to the programs, the labels and the taxons.</p></div>
@@ -477,7 +475,7 @@ See <a href="https://docs.python.org/3/library/typing.html#typing.overload">the 
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L29-L167" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">class Database:
-    def __init__(self, directory: Path, ignore_timestamps=False, *args, **kwargs) -&gt; None:
+    def __init__(self, directory: Path, ignore_timestamps=True, *args, **kwargs) -&gt; None:
         self.default_json_db_path = directory.parent / f&#34;{directory.name}_db.json&#34;
         self.default_sqlite_db_path = directory.parent / f&#34;{directory.name}_db.sqlite&#34;
 

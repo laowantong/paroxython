@@ -190,14 +190,12 @@ expressions, semantic triples, span algebra) in the next section (coming soon).<
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L0-L438" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L0-L436" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">import subprocess
 from collections import defaultdict
 from pathlib import Path
-from typing import Callable, Dict, List, Optional, Tuple, Union
-
-from typing_extensions import Literal
+from typing import Dict, List, Optional, Tuple, Union
 
 from .assess_costs import LearningCostAssessor
 from .filter_programs import ProgramFilter
@@ -406,7 +404,7 @@ class Recommendations:
                     taxon_cost = self.taxon_cost(taxon_name)
                     s = spans_to_html(&#34;, &#34;.join(map(couple_to_string, spans)))
                     contents.append(f&#34;| {taxon_cost} | `{taxon_name}` | {s} |&#34;)
-                contents.append(&#34;---&#34;)
+                contents.append(&#34;\n---&#34;)
 
         def programs_to_html(description: str, programs: ProgramNames) -&gt; str:
             details = []
@@ -473,7 +471,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L203-L424" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L201-L422" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">class Recommendations:
     def __init__(
@@ -659,7 +657,7 @@ if __name__ == &#34;__main__&#34;:
                     taxon_cost = self.taxon_cost(taxon_name)
                     s = spans_to_html(&#34;, &#34;.join(map(couple_to_string, spans)))
                     contents.append(f&#34;| {taxon_cost} | `{taxon_name}` | {s} |&#34;)
-                contents.append(&#34;---&#34;)
+                contents.append(&#34;\n---&#34;)
 
         def programs_to_html(description: str, programs: ProgramNames) -&gt; str:
             details = []
@@ -702,7 +700,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L232-L264" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L230-L262" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def run_pipeline(self) -&gt; None:
     current = set(self.programs)
@@ -745,7 +743,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L266-L293" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L264-L291" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def retrieve_patterns_from_source(
     # fmt: off
@@ -784,7 +782,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L295-L332" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L293-L330" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def compute_new_taxons_and_programs(
     # fmt: off
@@ -833,7 +831,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L334-L424" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L332-L422" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def get_markdown(
     self,
@@ -892,7 +890,7 @@ if __name__ == &#34;__main__&#34;:
                 taxon_cost = self.taxon_cost(taxon_name)
                 s = spans_to_html(&#34;, &#34;.join(map(couple_to_string, spans)))
                 contents.append(f&#34;| {taxon_cost} | `{taxon_name}` | {s} |&#34;)
-            contents.append(&#34;---&#34;)
+            contents.append(&#34;\n---&#34;)
 
     def programs_to_html(description: str, programs: ProgramNames) -&gt; str:
         details = []

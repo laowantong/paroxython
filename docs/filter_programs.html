@@ -29,28 +29,23 @@
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L0-L193" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L0-L188" class="git-link">Browse GitHub</a>
 </summary>
-<pre><code class="python">import sys
-from itertools import permutations, product
-from typing import Iterator, List, Set, Tuple, Union
+<pre><code class="python">from itertools import permutations, product
+from typing import Iterator
 
 import regex  # type: ignore
 
 from .user_types import (
     JsonDatabase,
     Operation,
-    PoorSpan,
     Predicate,
     ProgramInfos,
-    ProgramName,
-    ProgramNames,
     ProgramNameSet,
     ProgramTaxonNames,
     ProgramToPrograms,
     TaxonInfos,
     TaxonName,
-    TaxonNames,
     TaxonNameSet,
     TaxonsPoorSpans,
 )
@@ -231,7 +226,7 @@ them) can only shrink, and the imparted knowledge (initially empty) can only inc
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L27-L194" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L22-L189" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">class ProgramFilter:
     def __init__(self, db: JsonDatabase) -&gt; None:
@@ -395,7 +390,7 @@ them) can only shrink, and the imparted knowledge (initially empty) can only inc
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L63-L74" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L58-L69" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def get_taxons_from_taxon_pattern(self, pattern: str) -&gt; TaxonNameSet:
     result: TaxonNameSet = set()
@@ -418,7 +413,7 @@ them) can only shrink, and the imparted knowledge (initially empty) can only inc
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L76-L87" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L71-L82" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def get_programs_from_program_pattern(self, pattern: str) -&gt; ProgramNameSet:
     result: ProgramNameSet = set()
@@ -441,7 +436,7 @@ them) can only shrink, and the imparted knowledge (initially empty) can only inc
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L91-L99" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L86-L94" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def taxons_of_programs(self, programs: ProgramNameSet, follow: bool = False) -&gt; TaxonNameSet:
     taxons: TaxonNameSet = set()
@@ -461,7 +456,7 @@ them) can only shrink, and the imparted knowledge (initially empty) can only inc
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L101-L109" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L96-L104" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def programs_of_taxons(self, taxons: TaxonNameSet, follow: bool = False) -&gt; ProgramNameSet:
     programs: ProgramNameSet = set()
@@ -481,7 +476,7 @@ them) can only shrink, and the imparted knowledge (initially empty) can only inc
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L128-L148" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L123-L143" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def programs_of_triple(
     # fmt: off
@@ -513,7 +508,7 @@ them) can only shrink, and the imparted knowledge (initially empty) can only inc
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L152-L159" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L147-L154" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def exclude_programs(self, programs: ProgramNameSet, follow: bool) -&gt; None:
     for program in programs:
@@ -532,7 +527,7 @@ them) can only shrink, and the imparted knowledge (initially empty) can only inc
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L161-L165" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L156-L160" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def include_programs(self, programs: ProgramNameSet) -&gt; None:
     for selected_program in list(self.selected_programs):
@@ -548,7 +543,7 @@ them) can only shrink, and the imparted knowledge (initially empty) can only inc
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L169-L175" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L164-L170" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def impart_taxons(self, taxons: TaxonNameSet) -&gt; None:
     for taxon in taxons:
@@ -566,7 +561,7 @@ them) can only shrink, and the imparted knowledge (initially empty) can only inc
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L179-L194" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L174-L189" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def update_filter(
     # fmt: off

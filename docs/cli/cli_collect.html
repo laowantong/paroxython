@@ -62,7 +62,7 @@ whose last version is at <a href="https://bit.ly/2Yu0LqU.">https://bit.ly/2Yu0Lq
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli_collect.py#L0-L50" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli_collect.py#L0-L51" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">from pathlib import Path
 
@@ -72,6 +72,7 @@ from ..make_db import Database
 def cli_wrapper(args):
     db = Database(
         directory=Path(args[&#34;DIRECTORY&#34;]),
+        ignore_timestamps=False,
         cleanup_strategy=args[&#34;--cleanup&#34;],
         exclude_pattern=args[&#34;--exclude&#34;],
         glob_pattern=args[&#34;--glob&#34;],
@@ -100,11 +101,12 @@ def cli_wrapper(args):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli_collect.py#L38-L51" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli_collect.py#L38-L52" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def cli_wrapper(args):
     db = Database(
         directory=Path(args[&#34;DIRECTORY&#34;]),
+        ignore_timestamps=False,
         cleanup_strategy=args[&#34;--cleanup&#34;],
         exclude_pattern=args[&#34;--exclude&#34;],
         glob_pattern=args[&#34;--glob&#34;],

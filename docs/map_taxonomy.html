@@ -116,7 +116,7 @@ if __name__ == &#34;__main__&#34;:
     from .label_programs import ProgramLabeller
 
     labeller = ProgramLabeller()
-    labeller.label_programs(Path(&#34;../Python/project_euler&#34;))
+    labeller.label_programs(Path(&#34;examples/simple/programs&#34;))
     taxonomy = Taxonomy()
     for program in labeller.programs:
         taxons = taxonomy.to_taxons(program.labels)
