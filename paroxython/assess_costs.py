@@ -1,16 +1,16 @@
 r"""Assess the learning cost associated with the introduction of the given programs.
 
 Each program has been previously found to implement a number of notions represented by a list of
-taxons of the form: \(\textrm{segment}_0/\textrm{segment}_1/.../\textrm{segment}_n\), e.g.,
+taxons of the form: \(\textrm{edge}_0/\textrm{edge}_1/.../\textrm{edge}_n\), e.g.,
 `flow/loop/exit/early/break`.
 
 Furthermore, the notions already imparted may cover a certain **prefix** of such a taxon, e.g.
 `flow/loop`. The learning cost should therefore not take it into account.
 
-The cost of the remaining segments, here `exit/early/break`, is approximated by a function taking
+The cost of the remaining edges, here `exit/early/break`, is approximated by a function taking
 two zero-based indexes `start` (inclusive) and `stop` (exclusive), and returning a floating number. Currently, only two such functions are provided:
 
-1. `range_to_cost_linear()`, which simply counts the number of segments;
+1. `range_to_cost_linear()`, which simply counts the number of edges;
 2. `range_to_cost_zeno()`, which calculates the sum of a decreasing function of the positions
    (with the assumption that the introduction of a sub-concept costs half that of its parent concept).
 """
@@ -104,10 +104,10 @@ class LearningCostAssessor:
             return 0
         (start, stop) = (0, 0)
         if taxon not in self.imparted_knowledge:
-            segments = taxon.split("/")
-            stop = len(segments)
+            edges = taxon.split("/")
+            stop = len(edges)
             for start in range(stop - 1, -1, -1):
-                if "/".join(segments[:start]) in self.imparted_knowledge:
+                if "/".join(edges[:start]) in self.imparted_knowledge:
                     break
         return self.range_to_cost(start, stop)
 

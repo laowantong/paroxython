@@ -181,9 +181,9 @@ class ProgramFilter:
 
     def impart_taxons(self, taxons: TaxonNameSet) -&gt; None:
         for taxon in taxons:
-            segments = taxon.split(&#34;/&#34;)
-            for i in range(len(segments)):
-                prefix = &#34;/&#34;.join(segments[: i + 1])
+            edges = taxon.split(&#34;/&#34;)
+            for i in range(len(edges)):
+                prefix = &#34;/&#34;.join(edges[: i + 1])
                 self.imparted_knowledge.add(TaxonName(prefix))
 
     # Dispatch the update to one of the three above methods
@@ -357,9 +357,9 @@ them) can only shrink, and the imparted knowledge (initially empty) can only inc
 
     def impart_taxons(self, taxons: TaxonNameSet) -&gt; None:
         for taxon in taxons:
-            segments = taxon.split(&#34;/&#34;)
-            for i in range(len(segments)):
-                prefix = &#34;/&#34;.join(segments[: i + 1])
+            edges = taxon.split(&#34;/&#34;)
+            for i in range(len(edges)):
+                prefix = &#34;/&#34;.join(edges[: i + 1])
                 self.imparted_knowledge.add(TaxonName(prefix))
 
     # Dispatch the update to one of the three above methods
@@ -547,9 +547,9 @@ them) can only shrink, and the imparted knowledge (initially empty) can only inc
 </summary>
 <pre><code class="python">def impart_taxons(self, taxons: TaxonNameSet) -&gt; None:
     for taxon in taxons:
-        segments = taxon.split(&#34;/&#34;)
-        for i in range(len(segments)):
-            prefix = &#34;/&#34;.join(segments[: i + 1])
+        edges = taxon.split(&#34;/&#34;)
+        for i in range(len(edges)):
+            prefix = &#34;/&#34;.join(edges[: i + 1])
             self.imparted_knowledge.add(TaxonName(prefix))</code></pre>
 </details>
 </dd>

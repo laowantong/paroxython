@@ -164,9 +164,9 @@ class ProgramFilter:
     def impart_taxons(self, taxons: TaxonNameSet) -> None:
         """Enrich the imparted knowledge with all the prefixes of the given taxons."""
         for taxon in taxons:
-            segments = taxon.split("/")
-            for i in range(len(segments)):
-                prefix = "/".join(segments[: i + 1])
+            edges = taxon.split("/")
+            for i in range(len(edges)):
+                prefix = "/".join(edges[: i + 1])
                 self.imparted_knowledge.add(TaxonName(prefix))
 
     # Dispatch the update to one of the three above methods

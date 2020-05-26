@@ -332,7 +332,7 @@ def test_recommend_mini_programs():
     }
     assert not rec.imparted_knowledge
 
-    commands = [{"operation": "include", "source": 42,}]  # malformed source => ignored command
+    commands = [{"operation": "include", "source": 42}]  # malformed source => ignored command
     rec = Recommendations(db, commands=commands)
     rec.run_pipeline()
     assert rec.selected_programs.keys() == {
@@ -343,7 +343,7 @@ def test_recommend_mini_programs():
     }
     assert not rec.imparted_knowledge
 
-    commands = [{"operation": "include", "source": [42],}]  # malformed pattern => ignored pattern
+    commands = [{"operation": "include", "source": [42]}]  # malformed pattern => ignored pattern
     rec = Recommendations(db, commands=commands)
     rec.run_pipeline()
     assert rec.selected_programs.keys() == set()

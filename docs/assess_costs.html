@@ -28,14 +28,14 @@
 <section id="section-intro">
 <p>Assess the learning cost associated with the introduction of the given programs.</p>
 <p>Each program has been previously found to implement a number of notions represented by a list of
-taxons of the form: <span><span class="MathJax_Preview">\textrm{segment}_0/\textrm{segment}_1/.../\textrm{segment}_n</span><script type="math/tex">\textrm{segment}_0/\textrm{segment}_1/.../\textrm{segment}_n</script></span>, e.g.,
+taxons of the form: <span><span class="MathJax_Preview">\textrm{edge}_0/\textrm{edge}_1/.../\textrm{edge}_n</span><script type="math/tex">\textrm{edge}_0/\textrm{edge}_1/.../\textrm{edge}_n</script></span>, e.g.,
 <code>flow/loop/exit/early/break</code>.</p>
 <p>Furthermore, the notions already imparted may cover a certain <strong>prefix</strong> of such a taxon, e.g.
 <code>flow/loop</code>. The learning cost should therefore not take it into account.</p>
-<p>The cost of the remaining segments, here <code>exit/early/break</code>, is approximated by a function taking
+<p>The cost of the remaining edges, here <code>exit/early/break</code>, is approximated by a function taking
 two zero-based indexes <code>start</code> (inclusive) and <code>stop</code> (exclusive), and returning a floating number. Currently, only two such functions are provided:</p>
 <ol>
-<li><code><a title="paroxython.assess_costs.range_to_cost_linear" href="#paroxython.assess_costs.range_to_cost_linear">range_to_cost_linear()</a></code>, which simply counts the number of segments;</li>
+<li><code><a title="paroxython.assess_costs.range_to_cost_linear" href="#paroxython.assess_costs.range_to_cost_linear">range_to_cost_linear()</a></code>, which simply counts the number of edges;</li>
 <li><code><a title="paroxython.assess_costs.range_to_cost_zeno" href="#paroxython.assess_costs.range_to_cost_zeno">range_to_cost_zeno()</a></code>, which calculates the sum of a decreasing function of the positions
 (with the assumption that the introduction of a sub-concept costs half that of its parent concept).</li>
 </ol>
@@ -87,10 +87,10 @@ class LearningCostAssessor:
             return 0
         (start, stop) = (0, 0)
         if taxon not in self.imparted_knowledge:
-            segments = taxon.split(&#34;/&#34;)
-            stop = len(segments)
+            edges = taxon.split(&#34;/&#34;)
+            stop = len(edges)
             for start in range(stop - 1, -1, -1):
-                if &#34;/&#34;.join(segments[:start]) in self.imparted_knowledge:
+                if &#34;/&#34;.join(edges[:start]) in self.imparted_knowledge:
                     break
         return self.range_to_cost(start, stop)
 
@@ -194,10 +194,10 @@ introduced so far.</dd>
             return 0
         (start, stop) = (0, 0)
         if taxon not in self.imparted_knowledge:
-            segments = taxon.split(&#34;/&#34;)
-            stop = len(segments)
+            edges = taxon.split(&#34;/&#34;)
+            stop = len(edges)
             for start in range(stop - 1, -1, -1):
-                if &#34;/&#34;.join(segments[:start]) in self.imparted_knowledge:
+                if &#34;/&#34;.join(edges[:start]) in self.imparted_knowledge:
                     break
         return self.range_to_cost(start, stop)
 
@@ -271,10 +271,10 @@ def taxon_cost(self, taxon: TaxonName) -&gt; float:
         return 0
     (start, stop) = (0, 0)
     if taxon not in self.imparted_knowledge:
-        segments = taxon.split(&#34;/&#34;)
-        stop = len(segments)
+        edges = taxon.split(&#34;/&#34;)
+        stop = len(edges)
         for start in range(stop - 1, -1, -1):
-            if &#34;/&#34;.join(segments[:start]) in self.imparted_knowledge:
+            if &#34;/&#34;.join(edges[:start]) in self.imparted_knowledge:
                 break
     return self.range_to_cost(start, stop)</code></pre>
 </details>
