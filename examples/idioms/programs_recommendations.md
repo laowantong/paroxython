@@ -242,6 +242,7 @@
 | 0.9375 | `type/sequence/string/literal` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
+
 ---
 
 ### Program `001.1159-print-hello-world.py` (learning cost 2.75)
@@ -257,6 +258,7 @@
 | 0.9375 | `type/sequence/string/literal` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `002.0011-print-hello-10-times.py` (learning cost 6.5)
@@ -277,6 +279,7 @@
 | 0.9375 | `type/sequence/string/literal` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
+
 ---
 
 ### Program `002.1493-print-hello-10-times.py` (learning cost 4.5625)
@@ -294,6 +297,7 @@
 | 0.9375 | `type/sequence/string/literal` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `002.3117-print-hello-10-times.py` (learning cost 4.5625)
@@ -311,6 +315,7 @@
 | 0.9375 | `type/sequence/string/literal` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `003.0019-create-a-procedure.py` (learning cost 5.25)
@@ -330,6 +335,7 @@
 | 0.9375 | `type/sequence/string/literal` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
+
 ---
 
 ### Program `003.2372-create-a-procedure.py` (learning cost 2.375)
@@ -346,6 +352,7 @@
 | 0.75 | `subroutine/procedure` | 1-2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
+
 ---
 
 ### Program `004.0024-create-a-function-which-returns-the-square-of-an-integer.py` (learning cost 2.5)
@@ -362,6 +369,7 @@
 | 0.75 | `subroutine/function` | 1-2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
+
 ---
 
 ### Program `004.2921-create-a-function-which-returns-the-square-of-an-integer.py` (learning cost 3.4375)
@@ -379,6 +387,7 @@
 | 0.9375 | `type/number/integer/literal` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
+
 ---
 
 ### Program `005.0663-create-a-2d-point-data-structure.py` (learning cost 1.4375)
@@ -397,6 +406,7 @@
 | 0.9375 | `library/standard/dataclasses/dataclass` | 1 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
+
 ---
 
 ### Program `006.0032-iterate-over-list-values.py` (learning cost 2.75)
@@ -413,6 +423,7 @@
 | 0.9375 | `flow/loop/for/elements` | 1-2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
+
 ---
 
 ### Program `007.0183-iterate-over-list-indexes-and-values.py` (learning cost 6.4375)
@@ -433,6 +444,7 @@
 | 0.9375 | `type/sequence/tuple/literal` | 1 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
+
 ---
 
 ### Program `008.0039-initialize-a-new-map-associative-array.py` (learning cost 3.6875)
@@ -449,6 +461,7 @@
 | 0.875 | `variable/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `009.1410-create-a-binary-tree-data-structure.py` (learning cost 5.625)
@@ -472,6 +485,7 @@
 | 0.75 | `variable/assignment` | 3, 4, 5 |
 | 0 | `metadata/program` | 1-5 |
 | 0 | `metadata/sloc/5` | 1-5 |
+
 ---
 
 ### Program `009.3176-create-a-binary-tree-data-structure.py` (learning cost 4.75)
@@ -494,6 +508,7 @@
 | 0.75 | `variable/assignment` | 3, 4, 5 |
 | 0 | `metadata/program` | 1-5 |
 | 0 | `metadata/sloc/5` | 1-5 |
+
 ---
 
 ### Program `010.0182-shuffle-a-list.py` (learning cost 1.8125)
@@ -509,6 +524,7 @@
 | 0.9375 | `library/standard/random/shuffle` | 1 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
+
 ---
 
 ### Program `010.1478-shuffle-a-list.py` (learning cost 1.75)
@@ -524,6 +540,7 @@
 | 0.875 | `library/standard/random` | 1 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
+
 ---
 
 ### Program `011.0047-pick-a-random-element-from-a-list.py` (learning cost 1.75)
@@ -539,6 +556,7 @@
 | 0.875 | `library/standard/random` | 1 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
+
 ---
 
 ### Program `012.0181-check-if-list-contains-a-value.py` (learning cost 0.75)
@@ -552,6 +570,7 @@
 | 0.75 | `test/belonging` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `013.0574-iterate-over-map-keys-and-values.py` (learning cost 6.3125)
@@ -572,6 +591,7 @@
 | 0.9375 | `type/sequence/tuple/literal` | 1 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
+
 ---
 
 ### Program `014.0185-pick-uniformly-a-random-floating-point-number-in-ab.py` (learning cost 3.375)
@@ -590,6 +610,7 @@
 | 0.75 | `subroutine/function` | 2-3 |
 | 0 | `metadata/program` | 1-3 |
 | 0 | `metadata/sloc/3` | 1-3 |
+
 ---
 
 ### Program `014.3410-pick-uniformly-a-random-floating-point-number-in-ab.py` (learning cost 1.75)
@@ -605,6 +626,7 @@
 | 0.875 | `library/standard/random` | 1 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
+
 ---
 
 ### Program `015.0184-pick-uniformly-a-random-integer-in-ab.py` (learning cost 1.75)
@@ -620,6 +642,7 @@
 | 0.875 | `library/standard/random` | 1 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
+
 ---
 
 ### Program `016.1530-depth-first-traversing-of-a-binary-tree.py` (learning cost 8.25)
@@ -647,6 +670,7 @@
 | 0.875 | `type/null/literal` | 2 |
 | 0 | `metadata/program` | 1-6 |
 | 0 | `metadata/sloc/6` | 1-6 |
+
 ---
 
 ### Program `017.1103-create-a-tree-data-structure.py` (learning cost 7.46875)
@@ -671,6 +695,7 @@
 | 0.75 | `variable/assignment` | 3, 4 |
 | 0 | `metadata/program` | 1-4 |
 | 0 | `metadata/sloc/4` | 1-4 |
+
 ---
 
 ### Program `018.2084-depth-first-traversing-of-a-tree.py` (learning cost 6.75)
@@ -694,6 +719,7 @@
 | 0.875 | `subroutine/recursive/body` | 1-4 |
 | 0 | `metadata/program` | 1-4 |
 | 0 | `metadata/sloc/4` | 1-4 |
+
 ---
 
 ### Program `019.0197-reverse-a-list.py` (learning cost 1.8125)
@@ -708,6 +734,7 @@
 | 0.875 | `variable/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `019.1983-reverse-a-list.py` (learning cost 2.75)
@@ -723,6 +750,7 @@
 | 0.875 | `variable/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `019.3164-reverse-a-list.py` (learning cost 1.75)
@@ -737,6 +765,7 @@
 | 0.875 | `type/sequence/list` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `020.0573-return-two-values.py` (learning cost 9.53125)
@@ -763,6 +792,7 @@
 | 0.9375 | `type/sequence/tuple/literal` | 2, 4 |
 | 0 | `metadata/program` | 1-4 |
 | 0 | `metadata/sloc/4` | 1-4 |
+
 ---
 
 ### Program `021.0084-swap-values-of-variables-a-and-b.py` (learning cost 1.875)
@@ -777,6 +807,7 @@
 | 0.9375 | `variable/assignment/parallel/swap` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `022.0243-convert-string-to-integer.py` (learning cost 2.71875)
@@ -792,6 +823,7 @@
 | 0.875 | `variable/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `023.1102-convert-real-number-to-string-with-2-decimal-places.py` (learning cost 3.5625)
@@ -808,6 +840,7 @@
 | 0.875 | `variable/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `024.0664-assign-to-string-the-japanese-word-.py` (learning cost 1.8125)
@@ -822,6 +855,7 @@
 | 0.875 | `variable/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `025.0195-send-a-value-to-another-thread.py` (learning cost 7.875)
@@ -848,6 +882,7 @@
 | 0.875 | `variable/assignment/single` | 2, 3 |
 | 0 | `metadata/program` | 1-6 |
 | 0 | `metadata/sloc/6` | 1-6 |
+
 ---
 
 ### Program `026.0194-create-a-2-dimensional-array.py` (learning cost 2.71875)
@@ -863,6 +898,7 @@
 | 0.875 | `variable/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `027.0192-create-a-3-dimensional-array.py` (learning cost 2.71875)
@@ -878,6 +914,7 @@
 | 0.875 | `variable/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `027.0193-create-a-3-dimensional-array.py` (learning cost 3.5625)
@@ -895,6 +932,7 @@
 | 0.875 | `variable/assignment/single` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
+
 ---
 
 ### Program `028.0350-sort-by-a-property.py` (learning cost 2.6875)
@@ -910,6 +948,7 @@
 | 0.875 | `variable/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `029.0199-remove-item-from-list-by-its-index.py` (learning cost 0.75)
@@ -923,6 +962,7 @@
 | 0.75 | `subscript/index` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `030.0189-parallelize-execution-of-1000-independent-tasks.py` (learning cost 8.28125)
@@ -947,6 +987,7 @@
 | 0.875 | `variable/assignment/single` | 2 |
 | 0 | `metadata/program` | 1-4 |
 | 0 | `metadata/sloc/4` | 1-4 |
+
 ---
 
 ### Program `031.0188-recursive-factorial-simple.py` (learning cost 9.28125)
@@ -974,6 +1015,7 @@
 | 0.96875 | `type/number/integer/literal/zero` | 2 |
 | 0 | `metadata/program` | 1-5 |
 | 0 | `metadata/sloc/5` | 1-5 |
+
 ---
 
 ### Program `032.0196-integer-exponentiation-by-squaring.py` (learning cost 2.5)
@@ -990,6 +1032,7 @@
 | 0.75 | `subroutine/function` | 1-2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
+
 ---
 
 ### Program `033.1420-atomically-read-and-update-variable.py` (learning cost 4.375)
@@ -1013,6 +1056,7 @@
 | 0.875 | `variable/assignment/single` | 2, 5 |
 | 0 | `metadata/program` | 1-7 |
 | 0 | `metadata/sloc/7` | 1-7 |
+
 ---
 
 ### Program `034.0625-create-a-set-of-objects.py` (learning cost 5.59375)
@@ -1034,6 +1078,7 @@
 | 0.875 | `variable/assignment/single` | 3 |
 | 0 | `metadata/program` | 1-3 |
 | 0 | `metadata/sloc/3` | 1-3 |
+
 ---
 
 ### Program `035.0667-first-class-function--compose.py` (learning cost 4.875)
@@ -1053,6 +1098,7 @@
 | 0.75 | `subroutine/higher_order` | 1-2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
+
 ---
 
 ### Program `036.0670-first-class-function--generic-composition.py` (learning cost 4.875)
@@ -1072,6 +1118,7 @@
 | 0.75 | `subroutine/higher_order` | 1-2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
+
 ---
 
 ### Program `037.0671-currying.py` (learning cost 8.5625)
@@ -1099,6 +1146,7 @@
 | 0.9375 | `type/number/integer/literal` | 6, 6 |
 | 0 | `metadata/program` | 1-6 |
 | 0 | `metadata/sloc/6` | 1-6 |
+
 ---
 
 ### Program `038.0186-extract-a-substring.py` (learning cost 2.625)
@@ -1114,6 +1162,7 @@
 | 0.875 | `variable/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `039.0571-check-if-string-contains-a-word.py` (learning cost 1.625)
@@ -1128,6 +1177,7 @@
 | 0.875 | `variable/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `040.2279-graph-with-adjacency-lists.py` (learning cost 20.71875)
@@ -1176,6 +1226,7 @@
 | 0.875 | `variable/assignment/single` | 13 |
 | 0 | `metadata/program` | 1-13 |
 | 0 | `metadata/sloc/13` | 1-13 |
+
 ---
 
 ### Program `041.0187-reverse-a-string.py` (learning cost 6.3125)
@@ -1195,6 +1246,7 @@
 | 0.875 | `variable/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `041.2714-reverse-a-string.py` (learning cost 2.75)
@@ -1210,6 +1262,7 @@
 | 0.875 | `variable/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `042.1264-continue-outer-loop.py` (learning cost 9.125)
@@ -1239,6 +1292,7 @@
 | 0.75 | `test/equality` | 4 |
 | 0 | `metadata/program` | 1-8 |
 | 0 | `metadata/sloc/8` | 1-8 |
+
 ---
 
 ### Program `042.3168-continue-outer-loop.py` (learning cost 6.28125)
@@ -1262,6 +1316,7 @@
 | 0.75 | `test/equality` | 3 |
 | 0 | `metadata/program` | 1-5 |
 | 0 | `metadata/sloc/5` | 1-5 |
+
 ---
 
 ### Program `043.0676-break-outer-loop.py` (learning cost 11.0625)
@@ -1297,6 +1352,7 @@
 | 0.875 | `variable/assignment/single` | 4, 8 |
 | 0 | `metadata/program` | 1-11 |
 | 0 | `metadata/sloc/11` | 1-11 |
+
 ---
 
 ### Program `043.2733-break-outer-loop.py` (learning cost 14.9375)
@@ -1332,6 +1388,7 @@
 | 0.9375 | `type/sequence/tuple/literal` | 2, 3, 5, 7 |
 | 0 | `metadata/program` | 1-7 |
 | 0 | `metadata/sloc/7` | 1-7 |
+
 ---
 
 ### Program `044.0190-insert-element-in-list.py` (learning cost 1.75)
@@ -1346,6 +1403,7 @@
 | 0.875 | `type/sequence/list` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `045.0570-pause-execution-for-5-seconds.py` (learning cost 2.6875)
@@ -1362,6 +1420,7 @@
 | 0.9375 | `type/number/integer/literal` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
+
 ---
 
 ### Program `046.0191-extract-beginning-of-string-prefix.py` (learning cost 2.6875)
@@ -1377,6 +1436,7 @@
 | 0.875 | `variable/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `047.0198-extract-string-suffix.py` (learning cost 2.6875)
@@ -1392,6 +1452,7 @@
 | 0.875 | `variable/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `048.0210-multi-line-string-literal.py` (learning cost 1.8125)
@@ -1408,6 +1469,7 @@
 | 0.875 | `variable/assignment/single` | 1 |
 | 0 | `metadata/program` | 1-3 |
 | 0 | `metadata/sloc/3` | 1-3 |
+
 ---
 
 ### Program `049.0242-split-a-space-separated-string.py` (learning cost 2.625)
@@ -1423,6 +1485,7 @@
 | 0.875 | `variable/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `050.0572-make-an-infinite-loop.py` (learning cost 3.5625)
@@ -1440,6 +1503,7 @@
 | 0.9375 | `type/boolean/literal/true` | 1 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
+
 ---
 
 ### Program `051.0230-check-if-map-contains-key.py` (learning cost 0.75)
@@ -1453,6 +1517,7 @@
 | 0.75 | `test/belonging` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `052.0666-check-if-map-contains-value.py` (learning cost 2.5)
@@ -1468,6 +1533,7 @@
 | 0.875 | `type/non_sequence/dictionary` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `053.0240-join-a-list-of-strings.py` (learning cost 3.5625)
@@ -1484,6 +1550,7 @@
 | 0.875 | `variable/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `053.1933-join-a-list-of-strings.py` (learning cost 5.25)
@@ -1502,6 +1569,7 @@
 | 0.875 | `variable/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `054.0241-compute-sum-of-integers.py` (learning cost 1.8125)
@@ -1516,6 +1584,7 @@
 | 0.875 | `variable/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `055.0575-convert-integer-to-string.py` (learning cost 3.65625)
@@ -1532,6 +1601,7 @@
 | 0.875 | `variable/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `056.1424-launch-1000-parallel-tasks-and-wait-for-completion.py` (learning cost 9.8125)
@@ -1560,6 +1630,7 @@
 | 0.9375 | `type/sequence/string/literal` | 6 |
 | 0 | `metadata/program` | 1-6 |
 | 0 | `metadata/sloc/6` | 1-6 |
+
 ---
 
 ### Program `057.0260-filter-list.py` (learning cost 1.8125)
@@ -1574,6 +1645,7 @@
 | 0.875 | `variable/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `057.3173-filter-list.py` (learning cost 1.75)
@@ -1588,6 +1660,7 @@
 | 0.875 | `variable/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `058.0665-extract-file-content-to-a-string.py` (learning cost 3.5625)
@@ -1604,6 +1677,7 @@
 | 0.875 | `variable/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `059.0668-write-to-standard-error-stream.py` (learning cost 3.625)
@@ -1621,6 +1695,7 @@
 | 0.9375 | `type/sequence/string/literal` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
+
 ---
 
 ### Program `060.1084-read-command-line-argument.py` (learning cost 3.4375)
@@ -1638,6 +1713,7 @@
 | 0.875 | `variable/assignment/single` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
+
 ---
 
 ### Program `061.0576-get-current-date.py` (learning cost 2.625)
@@ -1654,6 +1730,7 @@
 | 0.875 | `variable/assignment/single` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
+
 ---
 
 ### Program `062.1091-find-substring-position.py` (learning cost 2.625)
@@ -1669,6 +1746,7 @@
 | 0.875 | `variable/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `063.1088-replace-fragment-of-a-string.py` (learning cost 2.625)
@@ -1684,6 +1762,7 @@
 | 0.875 | `variable/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `064.0274-big-integer--value-3-power-247.py` (learning cost 2.6875)
@@ -1699,6 +1778,7 @@
 | 0.875 | `variable/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `065.1085-format-decimal-number.py` (learning cost 3.5625)
@@ -1715,6 +1795,7 @@
 | 0.875 | `variable/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `066.0672-big-integer-exponentiation.py` (learning cost 1.75)
@@ -1729,6 +1810,7 @@
 | 0.875 | `variable/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `067.1426-binomial-coefficient-n-choose-k.py` (learning cost 5.125)
@@ -1749,6 +1831,7 @@
 | 0.75 | `subroutine/function` | 2-3 |
 | 0 | `metadata/program` | 1-3 |
 | 0 | `metadata/sloc/3` | 1-3 |
+
 ---
 
 ### Program `068.2271-create-a-bitset.py` (learning cost 8.9375)
@@ -1773,6 +1856,7 @@
 | 0.875 | `variable/assignment/single` | 3 |
 | 0 | `metadata/program` | 1-3 |
 | 0 | `metadata/sloc/3` | 1-3 |
+
 ---
 
 ### Program `069.1086-seed-random-generator.py` (learning cost 1.75)
@@ -1788,6 +1872,7 @@
 | 0.875 | `variable/assignment/single` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
+
 ---
 
 ### Program `070.1087-use-clock-as-random-generator-seed.py` (learning cost 1.75)
@@ -1803,6 +1888,7 @@
 | 0.875 | `variable/assignment/single` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
+
 ---
 
 ### Program `071.0379-echo-program-implementation.py` (learning cost 7.9375)
@@ -1825,6 +1911,7 @@
 | 0.9375 | `type/sequence/string/literal` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
+
 ---
 
 ### Program `073.0673-create-a-factory.py` (learning cost 5.0625)
@@ -1845,6 +1932,7 @@
 | 0.75 | `subroutine/higher_order` | 1-3 |
 | 0 | `metadata/program` | 1-3 |
 | 0 | `metadata/sloc/3` | 1-3 |
+
 ---
 
 ### Program `074.0674-compute-gcd.py` (learning cost 2.6875)
@@ -1861,6 +1949,7 @@
 | 0.875 | `variable/assignment/single` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
+
 ---
 
 ### Program `075.0675-compute-lcm.py` (learning cost 4.4375)
@@ -1879,6 +1968,7 @@
 | 0.875 | `variable/assignment/single` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
+
 ---
 
 ### Program `076.1083-binary-digits-from-an-integer.py` (learning cost 3.5625)
@@ -1895,6 +1985,7 @@
 | 0.875 | `variable/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `077.1093-complex-number.py` (learning cost 4.5)
@@ -1913,6 +2004,7 @@
 | 0.875 | `variable/assignment/single` | 1, 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
+
 ---
 
 ### Program `078.1089-do-while-loop.py` (learning cost 6.34375)
@@ -1935,6 +2027,7 @@
 | 0.9375 | `type/boolean/literal/true` | 1 |
 | 0 | `metadata/program` | 1-4 |
 | 0 | `metadata/sloc/4` | 1-4 |
+
 ---
 
 ### Program `079.1090-convert-integer-to-floating-point-number.py` (learning cost 2.71875)
@@ -1950,6 +2043,7 @@
 | 0.875 | `variable/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `080.1092-truncate-floating-point-number-to-integer.py` (learning cost 2.71875)
@@ -1965,6 +2059,7 @@
 | 0.875 | `variable/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `081.2270-round-floating-point-number-to-integer.py` (learning cost 4.53125)
@@ -1982,6 +2077,7 @@
 | 0.875 | `variable/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `082.1096-count-substring-occurrences.py` (learning cost 2.5)
@@ -1997,6 +2093,7 @@
 | 0.875 | `variable/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `083.1805-regex-with-character-repetition.py` (learning cost 3.5625)
@@ -2014,6 +2111,7 @@
 | 0.875 | `variable/assignment/single` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
+
 ---
 
 ### Program `084.1940-count-bits-set-in-integer-binary-representation.py` (learning cost 4.375)
@@ -2031,6 +2129,7 @@
 | 0.875 | `variable/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `085.1003-check-if-integer-addition-will-overflow.py` (learning cost 2.5625)
@@ -2047,6 +2146,7 @@
 | 0.9375 | `type/boolean/literal/false` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
+
 ---
 
 ### Program `086.1004-check-if-integer-multiplication-will-overflow.py` (learning cost 2.5625)
@@ -2063,6 +2163,7 @@
 | 0.9375 | `type/boolean/literal/false` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
+
 ---
 
 ### Program `087.1139-stop-program.py` (learning cost 2.6875)
@@ -2079,6 +2180,7 @@
 | 0.9375 | `type/number/integer/literal` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
+
 ---
 
 ### Program `088.2143-allocate-1m-bytes.py` (learning cost 2.78125)
@@ -2094,6 +2196,7 @@
 | 0.875 | `variable/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `089.1097-handle-invalid-argument.py` (learning cost 1.875)
@@ -2108,6 +2211,7 @@
 | 0.9375 | `type/sequence/string/literal` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `090.1099-read-only-outside.py` (learning cost 7.21875)
@@ -2134,6 +2238,7 @@
 | 0.75 | `variable/assignment` | 3 |
 | 0 | `metadata/program` | 1-6 |
 | 0 | `metadata/sloc/6` | 1-6 |
+
 ---
 
 ### Program `091.1098-load-json-file-into-struct.py` (learning cost 5.375)
@@ -2154,6 +2259,7 @@
 | 0.875 | `variable/assignment/single` | 3 |
 | 0 | `metadata/program` | 1-3 |
 | 0 | `metadata/sloc/3` | 1-3 |
+
 ---
 
 ### Program `092.1100-save-object-into-json-file.py` (learning cost 4.5)
@@ -2173,6 +2279,7 @@
 | 0.9375 | `type/sequence/string/literal` | 2, 2 |
 | 0 | `metadata/program` | 1-3 |
 | 0 | `metadata/sloc/3` | 1-3 |
+
 ---
 
 ### Program `093.1082-pass-a-runnable-procedure-as-parameter.py` (learning cost 5.0625)
@@ -2193,6 +2300,7 @@
 | 0.75 | `subroutine/higher_order` | 2-3 |
 | 0 | `metadata/program` | 1-3 |
 | 0 | `metadata/sloc/3` | 1-3 |
+
 ---
 
 ### Program `094.1101-print-type-of-variable.py` (learning cost 3.5)
@@ -2209,6 +2317,7 @@
 | 0.875 | `io/standard/print` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `094.1864-print-type-of-variable.py` (learning cost 1.8125)
@@ -2223,6 +2332,7 @@
 | 0.875 | `io/standard/print` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `095.2140-get-file-size.py` (learning cost 2.625)
@@ -2239,6 +2349,7 @@
 | 0.875 | `variable/assignment/single` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
+
 ---
 
 ### Program `096.1094-check-string-prefix.py` (learning cost 2.625)
@@ -2254,6 +2365,7 @@
 | 0.875 | `variable/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `097.1095-check-string-suffix.py` (learning cost 2.625)
@@ -2269,6 +2381,7 @@
 | 0.875 | `variable/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `098.2142-epoch-seconds-to-date-object.py` (learning cost 2.625)
@@ -2285,6 +2398,7 @@
 | 0.875 | `variable/assignment/single` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
+
 ---
 
 ### Program `099.1429-format-date-yyyy-mm-dd.py` (learning cost 5.4375)
@@ -2305,6 +2419,7 @@
 | 0.875 | `variable/assignment/single` | 2, 3 |
 | 0 | `metadata/program` | 1-3 |
 | 0 | `metadata/sloc/3` | 1-3 |
+
 ---
 
 ### Program `099.2693-format-date-yyyy-mm-dd.py` (learning cost 3.5625)
@@ -2323,6 +2438,7 @@
 | 0.875 | `variable/assignment/single` | 2, 3 |
 | 0 | `metadata/program` | 1-3 |
 | 0 | `metadata/sloc/3` | 1-3 |
+
 ---
 
 ### Program `100.1142-sort-by-a-comparator.py` (learning cost 1.75)
@@ -2337,6 +2453,7 @@
 | 0.875 | `type/sequence/list` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `101.2172-load-from-http-get-request-into-a-string.py` (learning cost 3.5)
@@ -2355,6 +2472,7 @@
 | 0.875 | `variable/assignment/single` | 3 |
 | 0 | `metadata/program` | 1-3 |
 | 0 | `metadata/sloc/3` | 1-3 |
+
 ---
 
 ### Program `102.2173-load-from-http-get-request-into-a-file.py` (learning cost 4.5)
@@ -2373,6 +2491,7 @@
 | 0.875 | `variable/assignment/parallel` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
+
 ---
 
 ### Program `103.2276-load-xml-file-into-struct.py` (learning cost 3.5625)
@@ -2390,6 +2509,7 @@
 | 0.875 | `variable/assignment/single` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
+
 ---
 
 ### Program `104.3264-save-object-into-xml-file.py` (learning cost 11.875)
@@ -2427,6 +2547,7 @@
 | 0.875 | `variable/assignment/single` | 3, 4, 5, 10, 11 |
 | 0 | `metadata/program` | 1-12 |
 | 0 | `metadata/sloc/12` | 1-12 |
+
 ---
 
 ### Program `105.1804-current-executable-name.py` (learning cost 3.46875)
@@ -2444,6 +2565,7 @@
 | 0.875 | `variable/assignment/single` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
+
 ---
 
 ### Program `106.2039-get-program-working-directory.py` (learning cost 2.625)
@@ -2460,6 +2582,7 @@
 | 0.875 | `variable/assignment/single` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
+
 ---
 
 ### Program `107.2139-get-folder-containing-current-program.py` (learning cost 4.25)
@@ -2478,6 +2601,7 @@
 | 0.875 | `variable/assignment/single` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
+
 ---
 
 ### Program `108.1291-determine-if-variable-name-is-defined.py` (learning cost 6.1875)
@@ -2498,6 +2622,7 @@
 | 0.9375 | `type/sequence/string/literal` | 1 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
+
 ---
 
 ### Program `109.2280-number-of-bytes-of-a-type.py` (learning cost 2.625)
@@ -2514,6 +2639,7 @@
 | 0.875 | `variable/assignment/single` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
+
 ---
 
 ### Program `110.1455-check-if-string-is-blank.py` (learning cost 4.34375)
@@ -2531,6 +2657,7 @@
 | 0.875 | `variable/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `111.2168-launch-other-program.py` (learning cost 3.625)
@@ -2548,6 +2675,7 @@
 | 0.9375 | `type/sequence/string/literal` | 2, 2, 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
+
 ---
 
 ### Program `112.2144-iterate-over-map-entries-ordered-by-keys.py` (learning cost 5.3125)
@@ -2567,6 +2695,7 @@
 | 0.75 | `subscript/index` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
+
 ---
 
 ### Program `113.2157-iterate-over-map-entries-ordered-by-values.py` (learning cost 8.0)
@@ -2589,6 +2718,7 @@
 | 0.9375 | `type/sequence/tuple/literal` | 1, 1, 1 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
+
 ---
 
 ### Program `114.2273-test-deep-equality.py` (learning cost 1.625)
@@ -2603,6 +2733,7 @@
 | 0.875 | `variable/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `115.2138-compare-dates.py` (learning cost 2.5)
@@ -2619,6 +2750,7 @@
 | 0.875 | `variable/assignment/single` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
+
 ---
 
 ### Program `116.1257-remove-occurrences-of-word-from-string.py` (learning cost 3.59375)
@@ -2635,6 +2767,7 @@
 | 0.875 | `variable/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `117.1297-get-list-size.py` (learning cost 1.8125)
@@ -2649,6 +2782,7 @@
 | 0.875 | `variable/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `118.1254-list-to-set.py` (learning cost 2.71875)
@@ -2664,6 +2798,7 @@
 | 0.875 | `variable/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `118.3266-list-to-set.py` (learning cost 1.84375)
@@ -2678,6 +2813,7 @@
 | 0.875 | `type/non_sequence/set` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `119.1253-deduplicate-list.py` (learning cost 5.3125)
@@ -2696,6 +2832,7 @@
 | 0.875 | `variable/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `119.3263-deduplicate-list.py` (learning cost 16.4375)
@@ -2733,6 +2870,7 @@
 | 0.875 | `variable/assignment/single` | 1, 2, 3 |
 | 0 | `metadata/program` | 1-8 |
 | 0 | `metadata/sloc/8` | 1-8 |
+
 ---
 
 ### Program `120.1479-read-integer-from-stdin.py` (learning cost 5.28125)
@@ -2751,6 +2889,7 @@
 | 0.875 | `variable/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `121.3029-udp-listen-and-read.py` (learning cost 13.5625)
@@ -2784,6 +2923,7 @@
 | 0.875 | `variable/assignment/single` | 2, 3 |
 | 0 | `metadata/program` | 1-7 |
 | 0 | `metadata/sloc/7` | 1-7 |
+
 ---
 
 ### Program `122.1453-declare-enumeration.py` (learning cost 5.125)
@@ -2803,6 +2943,7 @@
 | 0.9375 | `variable/assignment/parallel/more_than_two` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
+
 ---
 
 ### Program `122.1454-declare-enumeration.py` (learning cost 4.125)
@@ -2825,6 +2966,7 @@
 | 0.875 | `variable/assignment/single` | 3, 4, 5, 6 |
 | 0 | `metadata/program` | 1-6 |
 | 0 | `metadata/sloc/6` | 1-6 |
+
 ---
 
 ### Program `123.2146-assert-condition.py` (learning cost 0.75)
@@ -2838,6 +2980,7 @@
 | 0.75 | `flow/assertion` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `124.2152-binary-search-for-a-value-in-sorted-array.py` (learning cost 10.125)
@@ -2865,6 +3008,7 @@
 | 0.875 | `variable/assignment/single` | 3 |
 | 0 | `metadata/program` | 1-4 |
 | 0 | `metadata/sloc/4` | 1-4 |
+
 ---
 
 ### Program `125.2167-measure-function-call-duration.py` (learning cost 8.0)
@@ -2890,6 +3034,7 @@
 | 0.875 | `variable/assignment/single` | 2, 4 |
 | 0 | `metadata/program` | 1-5 |
 | 0 | `metadata/sloc/5` | 1-5 |
+
 ---
 
 ### Program `126.2137-multiple-return-values.py` (learning cost 4.4375)
@@ -2908,6 +3053,7 @@
 | 0.9375 | `type/sequence/tuple/literal` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
+
 ---
 
 ### Program `127.2274-source-code-inclusion.py` (learning cost 3.5625)
@@ -2925,6 +3071,7 @@
 | 0.875 | `variable/assignment/single` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
+
 ---
 
 ### Program `128.2085-breadth-first-traversing-of-a-tree.py` (learning cost 15.71875)
@@ -2963,6 +3110,7 @@
 | 0.875 | `variable/assignment/single` | 2, 4 |
 | 0 | `metadata/program` | 1-9 |
 | 0 | `metadata/sloc/9` | 1-9 |
+
 ---
 
 ### Program `129.2282-breadth-first-traversing-in-a-graph.py` (learning cost 15.78125)
@@ -3001,6 +3149,7 @@
 | 0.875 | `variable/assignment/single` | 3, 4, 6 |
 | 0 | `metadata/program` | 1-9 |
 | 0 | `metadata/sloc/9` | 1-9 |
+
 ---
 
 ### Program `130.2283-depth-first-traversing-in-a-graph.py` (learning cost 13.96875)
@@ -3036,6 +3185,7 @@
 | 0.875 | `variable/assignment/single` | 2, 3, 5 |
 | 0 | `metadata/program` | 1-8 |
 | 0 | `metadata/sloc/8` | 1-8 |
+
 ---
 
 ### Program `131.2083-successive-conditions.py` (learning cost 1.625)
@@ -3050,6 +3200,7 @@
 | 0.875 | `type/null/literal` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `131.2766-successive-conditions.py` (learning cost 5.1875)
@@ -3073,6 +3224,7 @@
 | 0.9375 | `flow/conditional/else/if` | 4, 6 |
 | 0 | `metadata/program` | 1-6 |
 | 0 | `metadata/sloc/6` | 1-6 |
+
 ---
 
 ### Program `132.2040-measure-duration-of-procedure-execution.py` (learning cost 3.5625)
@@ -3090,6 +3242,7 @@
 | 0.875 | `variable/assignment/single` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
+
 ---
 
 ### Program `133.2160-case-insensitive-string-contains.py` (learning cost 3.375)
@@ -3106,6 +3259,7 @@
 | 0.875 | `variable/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `134.1850-create-a-new-list.py` (learning cost 1.8125)
@@ -3120,6 +3274,7 @@
 | 0.875 | `variable/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `135.2158-remove-item-from-list-by-its-value.py` (learning cost 0.875)
@@ -3133,6 +3288,7 @@
 | 0.875 | `call/method/remove` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `136.2141-remove-all-occurrences-of-a-value-from-a-list.py` (learning cost 1.75)
@@ -3147,6 +3303,7 @@
 | 0.875 | `variable/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `137.1823-check-if-string-contains-only-digits.py` (learning cost 2.625)
@@ -3162,6 +3319,7 @@
 | 0.875 | `variable/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `138.2161-create-temp-file.py` (learning cost 1.75)
@@ -3177,6 +3335,7 @@
 | 0.875 | `variable/assignment/single` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
+
 ---
 
 ### Program `139.2162-create-temp-directory.py` (learning cost 1.75)
@@ -3192,6 +3351,7 @@
 | 0.875 | `variable/assignment/single` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
+
 ---
 
 ### Program `140.2156-delete-map-entry.py` (learning cost 1.75)
@@ -3206,6 +3366,7 @@
 | 0.875 | `type/null/literal` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `141.2159-iterate-in-sequence-over-two-lists.py` (learning cost 4.5)
@@ -3224,6 +3385,7 @@
 | 0.875 | `operator/arithmetic/addition` | 1 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
+
 ---
 
 ### Program `142.2151-hexadecimal-digits-of-an-integer.py` (learning cost 1.8125)
@@ -3238,6 +3400,7 @@
 | 0.875 | `variable/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `143.2256-iterate-alternatively-over-two-lists.py` (learning cost 4.5625)
@@ -3256,6 +3419,7 @@
 | 0.875 | `io/standard/print` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
+
 ---
 
 ### Program `144.2145-check-if-file-exists.py` (learning cost 2.625)
@@ -3272,6 +3436,7 @@
 | 0.875 | `variable/assignment/single` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
+
 ---
 
 ### Program `144.2915-check-if-file-exists.py` (learning cost 3.5625)
@@ -3289,6 +3454,7 @@
 | 0.875 | `variable/assignment/single` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
+
 ---
 
 ### Program `145.1822-print-log-line-with-datetime.py` (learning cost 6.1875)
@@ -3313,6 +3479,7 @@
 | 0.875 | `variable/assignment/single` | 5 |
 | 0 | `metadata/program` | 1-6 |
 | 0 | `metadata/sloc/6` | 1-6 |
+
 ---
 
 ### Program `146.1825-convert-string-to-floating-point-number.py` (learning cost 4.4375)
@@ -3333,6 +3500,7 @@
 | 0.875 | `variable/assignment/single` | 2, 4 |
 | 0 | `metadata/program` | 1-4 |
 | 0 | `metadata/sloc/4` | 1-4 |
+
 ---
 
 ### Program `146.1826-convert-string-to-floating-point-number.py` (learning cost 2.71875)
@@ -3348,6 +3516,7 @@
 | 0.875 | `variable/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `146.2739-convert-string-to-floating-point-number.py` (learning cost 2.78125)
@@ -3363,6 +3532,7 @@
 | 0.9375 | `type/sequence/string/literal` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `147.2171-remove-all-non-ascii-characters.py` (learning cost 4.53125)
@@ -3381,6 +3551,7 @@
 | 0.875 | `variable/assignment/single` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
+
 ---
 
 ### Program `148.1829-read-list-of-integer-numbers-from-stdin.py` (learning cost 7.96875)
@@ -3402,6 +3573,7 @@
 | 0.875 | `type/sequence/string` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `150.2154-remove-trailing-slash.py` (learning cost 3.5625)
@@ -3418,6 +3590,7 @@
 | 0.875 | `variable/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `151.2166-remove-string-trailing-path-separator.py` (learning cost 6.1875)
@@ -3439,6 +3612,7 @@
 | 0.875 | `variable/assignment/single` | 3 |
 | 0 | `metadata/program` | 1-3 |
 | 0 | `metadata/sloc/3` | 1-3 |
+
 ---
 
 ### Program `152.2153-turn-a-character-into-a-string.py` (learning cost 0.875)
@@ -3452,6 +3626,7 @@
 | 0.875 | `variable/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `153.1980-concatenate-string-with-integer.py` (learning cost 3.5625)
@@ -3468,6 +3643,7 @@
 | 0.875 | `variable/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `154.2155-halfway-between-two-hex-color-codes.py` (learning cost 12.65625)
@@ -3496,6 +3672,7 @@
 | 0.875 | `variable/assignment/single` | 3 |
 | 0 | `metadata/program` | 1-3 |
 | 0 | `metadata/sloc/3` | 1-3 |
+
 ---
 
 ### Program `154.2292-halfway-between-two-hex-color-codes.py` (learning cost 28.0)
@@ -3554,6 +3731,7 @@
 | 0.875 | `variable/assignment/single` | 9, 11, 13 |
 | 0 | `metadata/program` | 1-15 |
 | 0 | `metadata/sloc/15` | 1-15 |
+
 ---
 
 ### Program `155.2147-delete-file.py` (learning cost 2.625)
@@ -3571,6 +3749,7 @@
 | 0.875 | `variable/assignment/single` | 2 |
 | 0 | `metadata/program` | 1-3 |
 | 0 | `metadata/sloc/3` | 1-3 |
+
 ---
 
 ### Program `156.2148-format-integer-with-zero-padding.py` (learning cost 2.75)
@@ -3586,6 +3765,7 @@
 | 0.875 | `variable/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `157.2150-declare-constant-string.py` (learning cost 2.6875)
@@ -3601,6 +3781,7 @@
 | 0.875 | `variable/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `158.2163-random-sublist.py` (learning cost 2.625)
@@ -3617,6 +3798,7 @@
 | 0.875 | `variable/assignment/single` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
+
 ---
 
 ### Program `159.2281-trie.py` (learning cost 6.59375)
@@ -3641,6 +3823,7 @@
 | 0.75 | `variable/assignment` | 3, 4, 5 |
 | 0 | `metadata/program` | 1-5 |
 | 0 | `metadata/sloc/5` | 1-5 |
+
 ---
 
 ### Program `160.2165-detect-if-32-bit-or-64-bit-architecture.py` (learning cost 7.6875)
@@ -3666,6 +3849,7 @@
 | 0.9375 | `type/number/integer/literal` | 2, 2 |
 | 0 | `metadata/program` | 1-5 |
 | 0 | `metadata/sloc/5` | 1-5 |
+
 ---
 
 ### Program `161.2098-multiply-all-the-elements-of-a-list.py` (learning cost 1.75)
@@ -3680,6 +3864,7 @@
 | 0.875 | `variable/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `162.2164-execute-procedures-depending-on-options.py` (learning cost 7.875)
@@ -3705,6 +3890,7 @@
 | 0.9375 | `type/sequence/string/literal` | 2, 4 |
 | 0 | `metadata/program` | 1-5 |
 | 0 | `metadata/sloc/5` | 1-5 |
+
 ---
 
 ### Program `163.2170-print-list-elements-by-group-of-2.py` (learning cost 7.25)
@@ -3726,6 +3912,7 @@
 | 0.9375 | `type/number/integer/literal` | 1, 1, 1 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
+
 ---
 
 ### Program `163.3177-print-list-elements-by-group-of-2.py` (learning cost 12.375)
@@ -3758,6 +3945,7 @@
 | 0.875 | `variable/assignment/parallel` | 3 |
 | 0 | `metadata/program` | 1-7 |
 | 0 | `metadata/sloc/7` | 1-7 |
+
 ---
 
 ### Program `164.2169-open-url-in-default-browser.py` (learning cost 1.75)
@@ -3773,6 +3961,7 @@
 | 0.875 | `library/standard/webbrowser` | 1 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
+
 ---
 
 ### Program `165.2149-last-element-of-list.py` (learning cost 3.5)
@@ -3789,6 +3978,7 @@
 | 0.875 | `variable/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `166.2272-concatenate-two-lists.py` (learning cost 1.75)
@@ -3803,6 +3993,7 @@
 | 0.875 | `variable/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `167.2611-trim-prefix.py` (learning cost 5.3125)
@@ -3821,6 +4012,7 @@
 | 0.875 | `variable/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `167.3175-trim-prefix.py` (learning cost 2.625)
@@ -3836,6 +4028,7 @@
 | 0.875 | `variable/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `168.2277-trim-suffix.py` (learning cost 5.28125)
@@ -3854,6 +4047,7 @@
 | 0.875 | `variable/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `168.3174-trim-suffix.py` (learning cost 2.625)
@@ -3869,6 +4063,7 @@
 | 0.875 | `variable/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `169.2233-string-length.py` (learning cost 1.8125)
@@ -3883,6 +4078,7 @@
 | 0.875 | `variable/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `170.2275-get-map-size.py` (learning cost 1.8125)
@@ -3897,6 +4093,7 @@
 | 0.875 | `variable/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `171.2446-add-an-element-at-the-end-of-a-list.py` (learning cost 1.75)
@@ -3911,6 +4108,7 @@
 | 0.875 | `type/sequence/list` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `172.2442-insert-entry-in-map.py` (learning cost 1.5)
@@ -3925,6 +4123,7 @@
 | 0.75 | `variable/assignment` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `173.2427-format-a-number-with-grouped-thousands.py` (learning cost 2.75)
@@ -3940,6 +4139,7 @@
 | 0.9375 | `type/sequence/string/literal` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `173.2428-format-a-number-with-grouped-thousands.py` (learning cost 2.75)
@@ -3955,6 +4155,7 @@
 | 0.9375 | `type/sequence/string/literal` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `173.2429-format-a-number-with-grouped-thousands.py` (learning cost 2.75)
@@ -3970,6 +4171,7 @@
 | 0.9375 | `type/sequence/string/literal` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `174.2687-make-http-post-request.py` (learning cost 8.0625)
@@ -3994,6 +4196,7 @@
 | 0.875 | `variable/assignment/single` | 2, 3, 4 |
 | 0 | `metadata/program` | 1-4 |
 | 0 | `metadata/sloc/4` | 1-4 |
+
 ---
 
 ### Program `175.2613-bytes-to-hex-string.py` (learning cost 1.75)
@@ -4008,6 +4211,7 @@
 | 0.875 | `variable/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `176.2614-hex-string-to-byte-array.py` (learning cost 1.75)
@@ -4022,6 +4226,7 @@
 | 0.875 | `variable/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `177.2709-find-files-with-a-given-list-of-filename-extensions.py` (learning cost 8.6875)
@@ -4046,6 +4251,7 @@
 | 0.875 | `variable/assignment/single` | 2, 3 |
 | 0 | `metadata/program` | 1-3 |
 | 0 | `metadata/sloc/3` | 1-3 |
+
 ---
 
 ### Program `177.2725-find-files-with-a-given-list-of-filename-extensions.py` (learning cost 8.0)
@@ -4074,6 +4280,7 @@
 | 0.875 | `variable/assignment/single` | 3 |
 | 0 | `metadata/program` | 1-7 |
 | 0 | `metadata/sloc/7` | 1-7 |
+
 ---
 
 ### Program `177.3241-find-files-with-a-given-list-of-filename-extensions.py` (learning cost 8.84375)
@@ -4098,6 +4305,7 @@
 | 0.9375 | `type/sequence/string/literal` | 3, 3, 3, 3 |
 | 0 | `metadata/program` | 1-3 |
 | 0 | `metadata/sloc/3` | 1-3 |
+
 ---
 
 ### Program `178.2615-check-if-point-is-inside-rectangle.py` (learning cost 3.4375)
@@ -4114,6 +4322,7 @@
 | 0.875 | `variable/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `179.2688-get-center-of-a-rectangle.py` (learning cost 4.5)
@@ -4131,6 +4340,7 @@
 | 0.875 | `variable/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `179.2689-get-center-of-a-rectangle.py` (learning cost 7.1875)
@@ -4153,6 +4363,7 @@
 | 0.875 | `variable/assignment/single` | 2, 3 |
 | 0 | `metadata/program` | 1-3 |
 | 0 | `metadata/sloc/3` | 1-3 |
+
 ---
 
 ### Program `180.2612-list-files-in-directory.py` (learning cost 2.625)
@@ -4169,6 +4380,7 @@
 | 0.875 | `variable/assignment/single` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
+
 ---
 
 ### Program `182.2658-quine-program.py` (learning cost 4.5)
@@ -4187,6 +4399,7 @@
 | 0.875 | `variable/assignment/single` | 1 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
+
 ---
 
 ### Program `183.3025-make-http-put-request.py` (learning cost 7.28125)
@@ -4213,6 +4426,7 @@
 | 0.875 | `variable/assignment/single` | 3, 4, 5, 6 |
 | 0 | `metadata/program` | 1-7 |
 | 0 | `metadata/sloc/7` | 1-7 |
+
 ---
 
 ### Program `184.2701-tomorrow.py` (learning cost 5.4375)
@@ -4232,6 +4446,7 @@
 | 0.9375 | `type/number/integer/literal` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
+
 ---
 
 ### Program `185.2820-execute-function-in-30-seconds.py` (learning cost 5.4375)
@@ -4252,6 +4467,7 @@
 | 0.875 | `variable/assignment/single` | 2 |
 | 0 | `metadata/program` | 1-3 |
 | 0 | `metadata/sloc/3` | 1-3 |
+
 ---
 
 ### Program `186.2699-exit-program-cleanly.py` (learning cost 2.71875)
@@ -4268,6 +4484,7 @@
 | 0.96875 | `type/number/integer/literal/zero` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
+
 ---
 
 ### Program `187.3261-disjoint-set.py` (learning cost 18.40625)
@@ -4316,6 +4533,7 @@
 | 0.875 | `variable/assignment/parallel` | 15 |
 | 0 | `metadata/program` | 1-15 |
 | 0 | `metadata/sloc/15` | 1-15 |
+
 ---
 
 ### Program `188.3171-matrix-multiplication.py` (learning cost 2.625)
@@ -4332,6 +4550,7 @@
 | 0.875 | `variable/assignment/single` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
+
 ---
 
 ### Program `188.3284-matrix-multiplication.py` (learning cost 2.625)
@@ -4348,6 +4567,7 @@
 | 0.875 | `variable/assignment/single` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
+
 ---
 
 ### Program `189.3236-filter-and-transform-list.py` (learning cost 2.625)
@@ -4363,6 +4583,7 @@
 | 0.875 | `variable/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
+
 ---
 
 ### Program `191.3403-check-if-any-value-in-a-list-is-larger-than-a-limit.py` (learning cost 4.3125)
@@ -4381,6 +4602,7 @@
 | 0.75 | `test/inequality` | 1 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
+
 ---
 
 ### Program `197.3457-get-a-list-of-lines-from-a-file.py` (learning cost 3.5625)
@@ -4398,6 +4620,7 @@
 | 0.875 | `variable/assignment/single` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
+
 ---
 
 # Summary
