@@ -46,13 +46,10 @@ for test_string in ["555-1212", "ILL-EGAL"]: # for:test_string (-> +4), literal:
 # ----------------------------------------------------------------------------------------
 # 07_grocery_bill.py
 # ----------------------------------------------------------------------------------------
-prices = {'apple': 0.40, 'banana': 0.50} # assignment, assignment_lhs_identifier:prices, assignment_rhs_atom:0.4, assignment_rhs_atom:0.5, literal:0.4, literal:0.5, literal:Dict, literal:Str, single_assignment:prices, whole_span:7 (-> +6)
-my_purchase = { # assignment, assignment_lhs_identifier:my_purchase, literal:Dict, single_assignment:my_purchase
-    'apple': 1, # assignment_rhs_atom:1, literal:1, literal:Str
-    'banana': 6} # assignment_rhs_atom:6, literal:6, literal:Str
-grocery_bill = sum(prices[fruit] * my_purchase[fruit] # assignment:sum, assignment_lhs_identifier:grocery_bill, assignment_rhs_atom:fruit, assignment_rhs_atom:my_purchase, assignment_rhs_atom:prices, binary_operator:Mult, call_argument:, comprehension:Generator, comprehension_for_count:1, external_free_call:sum, free_call:sum, index:fruit, multiplication_operator, single_assignment:grocery_bill
-                   for fruit in my_purchase) # assignment_rhs_atom:fruit, assignment_rhs_atom:my_purchase
-print ('I owe the grocer $%.2f' % grocery_bill) # binary_operator:Mod, call_argument:, external_free_call:print, free_call:print, free_call_without_result:print, literal:Str, string_formatting_operator
+prices = {"apple": 0.40, "banana": 0.50} # assignment, assignment_lhs_identifier:prices, assignment_rhs_atom:0.4, assignment_rhs_atom:0.5, literal:0.4, literal:0.5, literal:Dict, literal:Str, single_assignment:prices, whole_span:4 (-> +3)
+my_purchase = {"apple": 1, "banana": 6} # assignment, assignment_lhs_identifier:my_purchase, assignment_rhs_atom:1, assignment_rhs_atom:6, literal:1, literal:6, literal:Dict, literal:Str, single_assignment:my_purchase
+grocery_bill = sum(prices[fruit] * my_purchase[fruit] for fruit in my_purchase) # assignment:sum, assignment_lhs_identifier:grocery_bill, assignment_rhs_atom:fruit, assignment_rhs_atom:my_purchase, assignment_rhs_atom:prices, binary_operator:Mult, call_argument:, comprehension:Generator, comprehension_for_count:1, external_free_call:sum, free_call:sum, index:fruit, multiplication_operator, single_assignment:grocery_bill
+print("I owe the grocer $%.2f" % grocery_bill) # binary_operator:Mod, call_argument:, external_free_call:print, free_call:print, free_call_without_result:print, literal:Str, string_formatting_operator
 
 # ----------------------------------------------------------------------------------------
 # 08_arguments.py
