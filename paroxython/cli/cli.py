@@ -43,6 +43,7 @@ CONTACT:
 """
 import sys
 from importlib import import_module
+import pkg_resources
 
 from docopt import docopt  # type: ignore
 
@@ -52,7 +53,8 @@ if sys.version < "3.6":  # pragma: no cover
 
 
 def main():
-    args = docopt(__doc__, version="paroxython version 0.1.0", options_first=True)
+    version = pkg_resources.get_distribution("paroxython").version
+    args = docopt(__doc__, version=f"paroxython version {version}", options_first=True)
     command_name = args["COMMAND"].lower()
     command_args = [command_name] + args["ARGS"]
     if command_name not in ("tag", "recommend", "collect"):
