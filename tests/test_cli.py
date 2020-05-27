@@ -41,7 +41,7 @@ def test_cli():
 def test_tag():
     result = run("tag examples/mini/programs/assignment.py")
     assert "| Taxon | Lines |" in result
-    assert "| variable/assignment/single | 1 |" in result
+    assert "| `variable/assignment/single` | 1 |" in result
 
 
 def test_tag_options():
@@ -51,15 +51,15 @@ def test_tag_options():
 
     result = run("tag --labels examples/mini/programs/assignment.py")
     assert "| Label | Lines |" in result
-    assert "| single_assignment:a | 1 |" in result
+    assert "| `single_assignment:a` | 1 |" in result
 
     result = run("tag --taxonomy examples/dummy/taxonomy.tsv examples/mini/programs/fizzbuzz.py")
-    assert "| flow/conditional | 4-11, 6-11, 8-11 |" in result
+    assert "| `flow/conditional` | 4-11, 6-11, 8-11 |" in result
 
 
 def test_collect():
     db_path = Path("examples/mini/programs_db.json")
-    result = run("collect examples/mini/programs")
+    result = run("collect --no_timestamp examples/mini/programs")
     assert "Labelling 4 programs." in result
     assert "Mapping taxonomy on 4 programs." in result
     assert f"Writing {db_path}." in result

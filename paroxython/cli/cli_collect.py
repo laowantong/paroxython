@@ -22,6 +22,7 @@ OPTIONS:
                         "DIRECTORY_db.json". Otherwise, use the extension
                         (either ".json" or ".sqlite") to decide the format
                         of the database. [default: ]
+    --no_timestamp      Don't store program's last modification times.
     -t --taxonomy=PATH  The path of a TSV file mapping labels onto taxons.
                         If not specified, use the included copy of the table
                         whose last version is at https://bit.ly/2Yu0LqU.
@@ -38,7 +39,7 @@ from ..make_db import Database
 def cli_wrapper(args):
     db = Database(
         directory=Path(args["DIRECTORY"]),
-        ignore_timestamps=False,
+        ignore_timestamps=args["--no_timestamp"],
         cleanup_strategy=args["--cleanup"],
         exclude_pattern=args["--exclude"],
         glob_pattern=args["--glob"],
