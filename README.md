@@ -18,22 +18,19 @@ Each tag consists in a free-form label associated with its spanning lines. These
 
 Source codes, labels and taxons are stored in a database, which can finally be filtered through a pipeline of inclusion, exclusion and impartment commands on programs or taxons.
 
-# Installation
+# Installation and test-drive
 
 ```
 pip install paroxython
 ```
 
-# Test-drive
+The following command should print a help message and exit:
 
-## Terminal
 ```
 paroxython --help
 ```
 
-## Jupyter notebook
-
-Load the magic command:
+Under Jupyter notebook, you should first load the magic command:
 
 ```python
 %load_ext paroxython
@@ -52,8 +49,7 @@ Run it on a cell of Python code (line numbers added for clarity):
 8       return result
 ```
 
-
-| `Taxon` | Lines |
+| Taxon | Lines |
 |:--|:--|
 | `call/method/append` | 6 |
 | `flow/loop/exit/late` | 5-7 |

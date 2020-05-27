@@ -44,7 +44,7 @@ whose last version is at <a href="https://bit.ly/2Yu0LqU.">https://bit.ly/2Yu0Lq
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli_tag.py#L0-L65" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli_tag.py#L0-L66" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">from pathlib import Path
 from typing import List, Tuple, Optional
@@ -79,7 +79,8 @@ def main(
             s = &#34;, &#34;.join(map(couple_to_string, sorted(taxon_spans.elements())))
             couples.append((taxon_name, s))
     if output_format == &#34;md&#34;:
-        result = [f&#34;| {tag} | {lines} |&#34; for (tag, lines) in couples]
+        result = [f&#34;| `{tag}` | {lines} |&#34; for (tag, lines) in couples]
+        result[0] = result[0].replace(&#34;`&#34;, &#34;&#34;)
         result[1:1] = [&#34;|:--|:--|&#34;]
     else:
         result = [f&#34;{tag}\t{lines}&#34; for (tag, lines) in couples]
@@ -113,7 +114,7 @@ def cli_wrapper(args):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli_tag.py#L28-L54" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli_tag.py#L28-L55" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def main(
     source: Source,
@@ -137,7 +138,8 @@ def cli_wrapper(args):
             s = &#34;, &#34;.join(map(couple_to_string, sorted(taxon_spans.elements())))
             couples.append((taxon_name, s))
     if output_format == &#34;md&#34;:
-        result = [f&#34;| {tag} | {lines} |&#34; for (tag, lines) in couples]
+        result = [f&#34;| `{tag}` | {lines} |&#34; for (tag, lines) in couples]
+        result[0] = result[0].replace(&#34;`&#34;, &#34;&#34;)
         result[1:1] = [&#34;|:--|:--|&#34;]
     else:
         result = [f&#34;{tag}\t{lines}&#34; for (tag, lines) in couples]
@@ -152,7 +154,7 @@ def cli_wrapper(args):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli_tag.py#L57-L66" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli_tag.py#L58-L67" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def cli_wrapper(args):
     path = Path(args[&#34;FILENAME&#34;])

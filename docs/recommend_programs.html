@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.8.1" />
 <title>paroxython.recommend_programs API documentation</title>
-<meta name="description" content="Getting recommendations …" />
+<meta name="description" content="" />
 <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
 <link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
@@ -26,171 +26,10 @@
 <h1 class="title">Module <code>paroxython.recommend_programs</code></h1>
 </header>
 <section id="section-intro">
-<h1 id="getting-recommendations">Getting recommendations</h1>
-<h2 id="teacher-stories">Teacher stories</h2>
-<h3 id="covering-your-bases">Covering your base(s)</h3>
-<p>Our simplest pipeline has no command: it just lists the programs of your database, without any
-filter. This could produce a rather long document, since each source code is printed, along with a
-list of each and every taxon it implements.</p>
-<pre><code class="python">&gt;&gt;&gt; []
-</code></pre>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>The point is that the resulting list is sorted by increasing learning cost. This should give
-you a rough idea of the pedagogical angle of attack to adopt in your first classes.</p>
-</div>
-<h3 id="imparted-knowledge">Imparted knowledge</h3>
-<ul>
-<li>Suppose that, in your first session, you introduced your students to the <code>hello_world.py</code>,
-<code>wheat_and_chessboard.py</code> and <code>euler_005_smallest_multiple.py</code> programs. Not only Paroxython should
-no longer recommend these programs, but the cost of learning the associated concepts should be
-considered as zero when they are encountered again in the future.</li>
-</ul>
-<pre><code class="python">&gt;&gt;&gt; [
-...     {
-...         &quot;operation&quot;: &quot;impart&quot;,
-...         &quot;source&quot;: [
-...             &quot;hello_world.py&quot;,
-...             &quot;wheat_and_chessboard.py&quot;,
-...             &quot;euler_005_smallest_multiple.py&quot;,
-...         ],
-...     },
-... ]
-</code></pre>
-<ul>
-<li>Suppose that you intervene after an introductory course given by a colleague. She gives you a
-folder (named <code>"CS_101"</code>), which contains the programs she has studied with her class. Since you
-are secretly in love, you assume, somewhat foolishly, that the concepts they implement are
-mastered by your new students.</li>
-</ul>
-<pre><code class="python">&gt;&gt;&gt; [
-...     {
-...         &quot;operation&quot;: &quot;impart&quot;,
-...         &quot;source&quot;: &quot;find CS_101 -path '*.py'&quot;,
-...     },
-... ]
-</code></pre>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>As you can see, rather than maintaining a <strong>list</strong> of programs or concepts in the <code>"source"</code>
-field, you may provide a <strong>string</strong>. Paroxython will interpret it as a shell command, and
-expect it to print on <code>stdout</code> the required list of items (programs or taxons), one per line.</p>
-</div>
-<h3 id="blacklisted-programs">Blacklisted programs</h3>
-<p>You want to filter out all programs reserved for an exam, or too complex, or not pedagogically
-interesting enough, or that could get you kicked out of your college, etc.</p>
-<pre><code class="python">&gt;&gt;&gt; [
-...     {
-...         &quot;operation&quot;: &quot;exclude&quot;,
-...         &quot;source&quot;: [
-...             &quot;fizzbuzz.py&quot;,
-...             &quot;alpha_go.py&quot;,
-...             &quot;hello_world_of_pain.py&quot;,
-...             &quot;gob_s_program.py&quot;,
-...         ],
-...     },
-... ]
-</code></pre>
-<h3 id="concepts-to-be-introduced-later-or-never">Concepts to be introduced later (or never)</h3>
-<p>For the time being, you don't want to be recommended any program requiring the concepts of
-recursivity (<code>subroutine/recursive</code>), dictionary (<code>type/non_sequence/dictionary</code>) or set
-(<code>type/non_sequence/set</code>).</p>
-<pre><code class="python">&gt;&gt;&gt; [
-...     {
-...         &quot;operation&quot;: &quot;exclude&quot;,
-...         &quot;source&quot;: [
-...             &quot;subroutine/recursive&quot;,
-...             &quot;type/non_sequence&quot;,
-...         ],
-...     },
-... ]
-</code></pre>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Paroxython relies on the last three characters of a <code>"source"</code> item to decide whether it is a
-Python program (ending with <code>".py"</code>) or a taxon (like here).</p>
-</div>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>Since the two latter taxons share a common prefix and Python doesn't provide other non-sequence
-type, it is enough to exclude all taxons starting with <code>type/non_sequence</code>.</p>
-</div>
-<h3 id="concepts-to-be-introduced-now">Concepts to be introduced now</h3>
-<p>Your next class will be devoted to conditional constructs. Thus, you need to go through programs
-featuring taxons prefixed by <code>flow/conditional</code> or even, why not, some conditional expressions
-(<code>operator/ternary</code>). The suggested programs do not necessarily have to implement both concepts at
-the same time, but at least one. Any other program will be rejected.</p>
-<pre><code class="python">&gt;&gt;&gt; [
-...     {
-...         &quot;operation&quot;: &quot;include&quot;,
-...         &quot;source&quot;: [
-...             &quot;flow/conditional&quot;,
-...             &quot;operator/ternary&quot;,
-...         ],
-...     },
-... ]
-</code></pre>
-<h3 id="preparing-an-assignment">Preparing an assignment</h3>
-<p>Basically, you provide Paroxython with a list of programs already studied in class, and it suggests
-new programs that implement only old concepts. This requires the exclusion of all programs
-featuring at least one concept that has not been seen in any of the programs already seen.</p>
-<p>It may sound a little complicated, because it is. But don't panic. Remember that Paroxython always
-orders its recommendations by increasing cost. Thus, all you have to do is ask it to list the
-programs that have not been introduced yet. The programs you want to choose among will appear at
-the top of the results, under the zero-learning cost section. Moreover, inside each section, they
-will be sorted by increasing size (<a href="https://en.wikipedia.org/wiki/Source_lines_of_code">SLOC</a>),
-which can be a reasonable proxy for their difficulty.</p>
-<p>But in the end, you, the teacher, are the judge. Paroxython is not going to set up a test for you,
-let alone grade the answers. It is just here to remind you of some possibilities you might not have
-thought of at the right time, and to give you some confidence that the exercises require no concept
-you have not pre-introduced in class, which later on might save you some awkward conversations with
-your dear students.</p>
-<p>Since this is the last filter in our tutorial, let's summarize what we've seen by chaining several
-commands together:</p>
-<ol>
-<li><strong>Impart</strong> the previous knowledge by extracting all the programs listed in the <code>"timeline.txt"</code>
-file that you update after each session. You can adapt the script
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/helpers/parse_syllabus.py"><code>parse_syllabus.py</code></a>
-to your own needs. If you wish, you can use the <code>base_path</code> variable, which represents the
-parent of the directory containing the programs of your personal database.</li>
-<li><strong>Exclude</strong> some irrelevant programs.</li>
-<li><strong>Include</strong> the concepts that you want to test during your exam.</li>
-</ol>
-<pre><code class="python">&gt;&gt;&gt; [
-...     {
-...         &quot;operation&quot;: &quot;impart&quot;,
-...         &quot;source&quot;: &quot;python helpers/parse_syllabus.py {base_path}/timeline.txt&quot;,
-...     },
-...     {
-...         &quot;operation&quot;: &quot;exclude&quot;,
-...         &quot;source&quot;: [
-...             &quot;foo.py&quot;,
-...             &quot;bar.py&quot;,
-...             # &quot;buzz.py&quot;,
-...         ],
-...     },
-...     {
-...         &quot;operation&quot;: &quot;include&quot;,
-...         &quot;source&quot;: [
-...             &quot;pattern/elements/accumulate&quot;,
-...             &quot;topic/game&quot;,
-...             &quot;type/sequence/list&quot;,
-...         ],
-...     },
-... ]
-</code></pre>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>This command pipeline is <em>not</em> a JSON file, but a Python program, or more restrictively a
-Python <strong>expression</strong>. As such, it offers several amenities you surely know and love: comments,
-trailing commas, r-strings, etc.</p>
-</div>
-<p>This is the end of our pipeline tutorial. Read on for more advanced features (negations, regular
-expressions, semantic triples, span algebra) in the next section (coming soon).</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L0-L436" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L0-L267" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">import subprocess
 from collections import defaultdict
@@ -471,7 +310,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L201-L422" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L32-L253" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">class Recommendations:
     def __init__(
@@ -700,7 +539,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L230-L262" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L61-L93" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def run_pipeline(self) -&gt; None:
     current = set(self.programs)
@@ -743,7 +582,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L264-L291" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L95-L122" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def retrieve_patterns_from_source(
     # fmt: off
@@ -782,7 +621,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L293-L330" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L124-L161" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def compute_new_taxons_and_programs(
     # fmt: off
@@ -831,7 +670,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L332-L422" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L163-L253" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def get_markdown(
     self,
@@ -941,20 +780,7 @@ data-gaCategoryParameter="paroxython.recommend_programs">
 </div>
 <h1>Index</h1>
 <div class="toc">
-<ul>
-<li><a href="#getting-recommendations">Getting recommendations</a><ul>
-<li><a href="#teacher-stories">Teacher stories</a><ul>
-<li><a href="#covering-your-bases">Covering your base(s)</a></li>
-<li><a href="#imparted-knowledge">Imparted knowledge</a></li>
-<li><a href="#blacklisted-programs">Blacklisted programs</a></li>
-<li><a href="#concepts-to-be-introduced-later-or-never">Concepts to be introduced later (or never)</a></li>
-<li><a href="#concepts-to-be-introduced-now">Concepts to be introduced now</a></li>
-<li><a href="#preparing-an-assignment">Preparing an assignment</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+<ul></ul>
 </div>
 <ul id="index">
 <li><h3>Super-module</h3>

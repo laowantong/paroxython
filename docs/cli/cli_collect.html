@@ -44,15 +44,17 @@ regular expression. NB: &ndash;glob precedes &ndash;exclude.
 -g &ndash;glob=PATTERN
 The names of the collected files must match this
 Unix-like glob pattern (not a regular expression).
-Special syntax: "</em><em>/" prefix means “this directory
+Special syntax: "<strong>/" prefix means “this directory
 and all subdirectories, recursively”. [default:
-"</em><em>/</em>.py"]
+"</strong>/</em>.py"]
 -o &ndash;output=PATH
 The path of the resulting database. If not
 specified, create a JSON file under the name
 "DIRECTORY_db.json". Otherwise, use the extension
 (either ".json" or ".sqlite") to decide the format
 of the database. [default: ]
+&ndash;no_timestamp
+Don't store program's last modification times.
 -t &ndash;taxonomy=PATH
 The path of a TSV file mapping labels onto taxons.
 If not specified, use the included copy of the table
@@ -62,7 +64,7 @@ whose last version is at <a href="https://bit.ly/2Yu0LqU.">https://bit.ly/2Yu0Lq
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli_collect.py#L0-L51" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli_collect.py#L0-L52" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">from pathlib import Path
 
@@ -72,7 +74,7 @@ from ..make_db import Database
 def cli_wrapper(args):
     db = Database(
         directory=Path(args[&#34;DIRECTORY&#34;]),
-        ignore_timestamps=False,
+        ignore_timestamps=args[&#34;--no_timestamp&#34;],
         cleanup_strategy=args[&#34;--cleanup&#34;],
         exclude_pattern=args[&#34;--exclude&#34;],
         glob_pattern=args[&#34;--glob&#34;],
@@ -101,12 +103,12 @@ def cli_wrapper(args):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli_collect.py#L38-L52" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli_collect.py#L39-L53" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def cli_wrapper(args):
     db = Database(
         directory=Path(args[&#34;DIRECTORY&#34;]),
-        ignore_timestamps=False,
+        ignore_timestamps=args[&#34;--no_timestamp&#34;],
         cleanup_strategy=args[&#34;--cleanup&#34;],
         exclude_pattern=args[&#34;--exclude&#34;],
         glob_pattern=args[&#34;--glob&#34;],
