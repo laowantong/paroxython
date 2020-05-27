@@ -14,7 +14,7 @@
 
 Paroxython is a command-line tool which finds and tags algorithmic features (such as assignments, nested loops, tail-recursive functions, etc.) in a collection of small Python programs, typically gathered for educational purposes (e.g., examples, patterns, exercise corrections).
 
-Each tag consists in a free-form label associated with its spanning lines. These labels are then mapped onto a knowledge taxonomy designed by the teacher with basic order constraints in mind (e.g., the fact that the introduction of the concept of early exit must come after that of loop, which itself requires that of control flow, is expressed with the following taxon: flow/loop/exit/early).
+Each tag consists in a free-form label associated with its spanning lines. These labels are then mapped onto a knowledge taxonomy designed by the teacher with basic order constraints in mind (e.g., the fact that the introduction of the concept of early exit must come after that of loop, which itself requires that of control flow, is expressed with the following taxon: `flow/loop/exit/early`).
 
 Source codes, labels and taxons are stored in a database, which can finally be filtered through a pipeline of inclusion, exclusion and impartment commands on programs or taxons.
 
@@ -42,22 +42,23 @@ Load the magic command:
 Run it on a cell of Python code (line numbers added for clarity):
 
 ```python
-1	%%paroxython
-2	def fibonacci(n):
-3	    result = []
-4	    (a, b) = (0, 1)
-5	    while a < n:
-6	        result.append(a)
-7	        (a, b) = (b, a + b)
-8	    return result
+1   %%paroxython
+2   def fibonacci(n):
+3       result = []
+4       (a, b) = (0, 1)
+5       while a < n:
+6           result.append(a)
+7           (a, b) = (b, a + b)
+8       return result
 ```
 
 
-| Taxon | Lines |
-|:--|--:|
+| `Taxon` | Lines |
+|:--|:--|
 | `call/method/append` | 6 |
 | `flow/loop/exit/late` | 5-7 |
 | `flow/loop/while` | 5-7 |
+| `metadata/program` | 2-8 |
 | `metadata/sloc/8` | 2-8 |
 | `operator/arithmetic/addition` | 7 |
 | `subroutine/argument/arg` | 2 |

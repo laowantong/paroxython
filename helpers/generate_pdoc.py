@@ -1,7 +1,39 @@
-from pathlib import Path
 import shutil
 import subprocess
+from pathlib import Path
+
 import regex  # type: ignore
+
+import context
+
+from paroxython.goodies import add_line_numbers
+from paroxython.cli.cli_tag import main as tag_program
+
+
+def update_readme_example():
+    source = Path("docs/resources/fibonacci.py").read_text().strip()
+    readme_path = Path("README.md")
+    readme_text = readme_path.read_text()
+    (readme_text, n) = regex.subn(
+        # fmt: off
+        r"(?sm)^1   %%paroxython.+?(?=\n```)",
+        add_line_numbers(source),
+        readme_text,
+        count=1,
+        # fmt: on
+    )
+    assert n == 1, "Example program not found."
+    (readme_text, n) = regex.subn(
+        # fmt: off
+        r"(?sm)^\| Taxon \| Lines \|.+?(?=\n\n)",
+        tag_program(f"# {source}"),
+        readme_text,
+        count=1,
+        # fmt: on
+    )
+    print()
+    assert n == 1, "Example table not found."
+    readme_path.write_text(readme_text)
 
 
 def generate_html():
@@ -101,6 +133,7 @@ def embed_code_with_line_numbers():
 
 
 def main():
+    update_readme_example()
     generate_html()
     resolve_new_types()
     remove_blacklisted_sources()

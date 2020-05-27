@@ -47,7 +47,7 @@ def main(
             s = ", ".join(map(couple_to_string, sorted(taxon_spans.elements())))
             couples.append((taxon_name, s))
     if output_format == "md":
-        result = [f"| {tag} | {lines} |" for (tag, lines) in couples]
+        result = [f"| `{tag}` | {lines} |" for (tag, lines) in couples]
         result[1:1] = ["|:--|:--|"]
     else:
         result = [f"{tag}\t{lines}" for (tag, lines) in couples]
