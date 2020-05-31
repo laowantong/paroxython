@@ -31,19 +31,19 @@ result.append(
 
 compare_spans.update(
     {  #                                              Allen's symbols
+        "equals": compare_spans["x=y≤x=y"],  #             =
+        "starts": compare_spans["x=y≤x≤y"],  #             s
+        "during": compare_spans["y≤x≤x≤y"],  #             d
+        "finishes": compare_spans["y≤x≤x=y"],  #           f
         "before": compare_spans["x≤x≤y≤y"],  #             <
-        "equal": compare_spans["x=y≤x=y"],  #              =
         "meets": compare_spans["x≤x=y≤y"],  #              m
         "overlaps": compare_spans["x≤y≤x≤y"],  #           o
-        "during": compare_spans["y≤x≤x≤y"],  #             d
-        "starts": compare_spans["x=y≤x≤y"],  #             s
-        "finishes": compare_spans["y≤x≤x=y"],  #           f
+        "started by": compare_spans["y=x≤y≤x"],  #         si
+        "contains": compare_spans["x≤y≤y≤x"],  #           di
+        "finished by": compare_spans["x≤y≤y=x"],  #        fi
         "after": compare_spans["y≤y≤x≤x"],  #              >
         "met by": compare_spans["y≤y=x≤x"],  #             mi
         "overlapped by": compare_spans["y≤x≤y≤x"],  #      oi
-        "contains": compare_spans["x≤y≤y≤x"],  #           di
-        "started by": compare_spans["y=x≤y≤x"],  #         si
-        "finished by": compare_spans["x≤y≤y=x"],  #        fi
     }
 )
 
@@ -51,11 +51,11 @@ compare_spans.update(
 
 compare_spans.update(
     {
+        "ended by": compare_spans["finished by"],
+        "ends": compare_spans["finishes"],
+        "equal": compare_spans["equals"],
         "inside": compare_spans["during"],
-        "is": compare_spans["equal"],
-        "equals": compare_spans["equal"],
-        "is after": compare_spans["after"],
-        "is before": compare_spans["before"],
+        "is": compare_spans["equals"],
     }
 )
 """

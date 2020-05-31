@@ -74,7 +74,7 @@ class Recommendations:
                 continue
 
             # Retrieve the patterns
-            patterns = self.retrieve_patterns_from_source(command.get("source", []), operation, i)
+            patterns = self.retrieve_patterns_from_source(command.get("data", []), operation, i)
             if not patterns:
                 print_warning(f"operation {i} ({operation}) is ignored (no data).")
                 continue
@@ -241,12 +241,12 @@ class Recommendations:
         summary.append(programs_to_html(f"{remainder} initially", list(self.programs)))
         for (i, command) in enumerate(self.commands, 1):
             action = f"operation {i} ({command['operation']})"
-            removed = len(command["filtered_out"])
+            removed = len(command.get("filtered_out", []))
             remainder -= removed
             summary.append(
                 programs_to_html(
                     f"{remainder} remaining after {action} has filtered out {removed} programs",
-                    command["filtered_out"],
+                    command.get("filtered_out", []),
                 )
             )
 

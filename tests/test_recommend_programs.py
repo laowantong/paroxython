@@ -110,7 +110,7 @@ def test_recommend_mini_programs():
     commands = [
         {
             "operation": "exclude",
-            "source": [
+            "data": [
                 "assignment.py",
                 "fizzbuzz.py",  # imported by is_even.py, consequently excluded
             ],
@@ -123,15 +123,15 @@ def test_recommend_mini_programs():
 
     # A command excluding a sequence is equivalent to a sequence of excluding commands
     commands = [
-        {"operation": "exclude", "source": ["assignment.py"]},
-        {"operation": "exclude", "source": ["fizzbuzz.py"]},
+        {"operation": "exclude", "data": ["assignment.py"]},
+        {"operation": "exclude", "data": ["fizzbuzz.py"]},
     ]
     rec = Recommendations(db, commands=commands)
     rec.run_pipeline()
     assert rec.selected_programs.keys() == {"collatz.py"}
     assert not rec.imparted_knowledge
 
-    commands = [{"operation": "include", "source": ["this_program_does_not_exist.py"]}]
+    commands = [{"operation": "include", "data": ["this_program_does_not_exist.py"]}]
     rec = Recommendations(db, commands=commands)
     rec.run_pipeline()
     assert not rec.selected_programs.keys()
@@ -140,7 +140,7 @@ def test_recommend_mini_programs():
     commands = [
         {
             "operation": "include",
-            "source": [
+            "data": [
                 "assignment.py",
                 "fizzbuzz.py",  # imported by is_even.py, which nevertheless will not be included
             ],
@@ -153,8 +153,8 @@ def test_recommend_mini_programs():
 
     # A command including a sequence is not equivalent to a sequence of including commands
     commands = [
-        {"operation": "include", "source": ["assignment.py"]},
-        {"operation": "include", "source": ["fizzbuzz.py"]},
+        {"operation": "include", "data": ["assignment.py"]},
+        {"operation": "include", "data": ["fizzbuzz.py"]},
     ]
     rec = Recommendations(db, commands=commands)
     rec.run_pipeline()
@@ -164,7 +164,7 @@ def test_recommend_mini_programs():
     commands = [
         {
             "operation": "impart",
-            "source": [
+            "data": [
                 "assignment.py",  # exclude it, and impart its taxons
                 "fizzbuzz.py",  # idem, but ignore its imports or exports
             ],
@@ -181,7 +181,7 @@ def test_recommend_mini_programs():
     commands = [
         {
             "operation": "exclude",
-            "source": [
+            "data": [
                 "variable/assignment/single",  # featured directly by assignment.py
                 # and collatz.py, which is imported by fizzbuzz.py and is_even.py
             ],
@@ -195,7 +195,7 @@ def test_recommend_mini_programs():
     commands = [
         {
             "operation": "exclude",
-            "source": [
+            "data": [
                 "flow/conditional/else/if",  # featured directly by fizzbuzz.py,
                 # which is imported by is_even.py
             ],
@@ -209,7 +209,7 @@ def test_recommend_mini_programs():
     commands = [
         {
             "operation": "exclude",
-            "source": [
+            "data": [
                 "flow/conditional/else/if",  # Although not recommended, it is possible to mix
                 "assignment.py"  # taxons and programs (ending with ".py") in a same command.
                 # Crucially, this avoid to specify whether the command should be applied on
@@ -225,7 +225,7 @@ def test_recommend_mini_programs():
     commands = [
         {
             "operation": "include",
-            "source": [
+            "data": [
                 "variable/assignment/single",  # featured by assignment.py and collatz.py
                 # Although the latter is imported by both fizzbuzz.py and is_even.py, they are
                 # not included in the result
@@ -237,7 +237,7 @@ def test_recommend_mini_programs():
     assert rec.selected_programs.keys() == {"assignment.py", "collatz.py"}
     assert not rec.imparted_knowledge
 
-    commands = [{"operation": "include", "source": ["this_taxon_does_not_exist"]}]
+    commands = [{"operation": "include", "data": ["this_taxon_does_not_exist"]}]
     rec = Recommendations(db, commands=commands)
     rec.run_pipeline()
     assert not rec.selected_programs.keys()
@@ -246,7 +246,7 @@ def test_recommend_mini_programs():
     commands = [
         {
             "operation": "include",
-            "source": [
+            "data": [
                 ("variable/assignment", "inside", "flow/loop"),  # featured by collatz.py only
             ],
         }
@@ -259,7 +259,7 @@ def test_recommend_mini_programs():
     commands = [
         {
             "operation": "exclude",
-            "source": [
+            "data": [
                 ("variable/assignment", "inside", "flow/loop"),  # featured by collatz.py,
                 # and indirectly by fizzbuzz.py and is_even.py
             ],
@@ -273,7 +273,7 @@ def test_recommend_mini_programs():
     commands = [
         {
             "operation": "include",
-            "source": [
+            "data": [
                 ("variable/assignment", "not inside", "flow/loop"),  # Must read as:
                 # Include all programs featuring an assignment, except those where this assignment
                 # is inside a loop. Hence, this includes assignment.py, even if it does not feature
@@ -289,7 +289,7 @@ def test_recommend_mini_programs():
     commands = [
         {
             "operation": "include",
-            "source": [
+            "data": [
                 ("variable/assignment", "inside", "metadata/program"),  # This comes down to
                 # including all programs featuring an assignment.
             ],
@@ -304,7 +304,7 @@ def test_recommend_mini_programs():
     commands = [
         {
             "operation": "include",
-            "source": [
+            "data": [
                 ("variable/assignment", "not inside", "metadata/program"),  # This comes down to
                 # exclude all programs either featuring or not featuring an assignment!
             ],
@@ -319,7 +319,7 @@ def test_recommend_mini_programs():
     commands = [
         {
             "operation": "impart",  # Imparting triples is currently not supported (ignored).
-            "source": [("variable/assignment", "inside", "flow/loop"),],
+            "data": [("variable/assignment", "inside", "flow/loop"),],
         }
     ]
     rec = Recommendations(db, commands=commands)
@@ -332,7 +332,7 @@ def test_recommend_mini_programs():
     }
     assert not rec.imparted_knowledge
 
-    commands = [{"operation": "include", "source": 42}]  # malformed source => ignored command
+    commands = [{"operation": "include", "data": 42}]  # malformed source => ignored command
     rec = Recommendations(db, commands=commands)
     rec.run_pipeline()
     assert rec.selected_programs.keys() == {
@@ -343,7 +343,7 @@ def test_recommend_mini_programs():
     }
     assert not rec.imparted_knowledge
 
-    commands = [{"operation": "include", "source": [42]}]  # malformed pattern => ignored pattern
+    commands = [{"operation": "include", "data": [42]}]  # malformed pattern => ignored pattern
     rec = Recommendations(db, commands=commands)
     rec.run_pipeline()
     assert rec.selected_programs.keys() == set()
@@ -352,7 +352,7 @@ def test_recommend_mini_programs():
     commands = [
         {
             "operation": "undefined_command",  # an undefined command is ignored
-            "source": "assignment.py",
+            "data": "assignment.py",
         }
     ]
     rec = Recommendations(db, commands=commands)
@@ -368,7 +368,7 @@ def test_recommend_mini_programs():
     commands = [
         {
             "operation": "exclude",
-            "source": [
+            "data": [
                 ("variable/assignment/single", "after", "io/standard/print"),
                 # collatz.py and fizzbuzz.py have an assignment after a print.
                 # is_even.py imports fizzbuzz.py.
@@ -384,7 +384,7 @@ def test_recommend_mini_programs():
     commands = [
         {
             "operation": "exclude",
-            "source": [
+            "data": [
                 ("operator/arithmetic/addition", "equals", "operator/arithmetic/multiplication"),
                 # "operator/arithmetic/addition" and "operator/arithmetic/multiplication" are both
                 # featured on the same line of collatz.py, and indirectly by fizzbuzz.py and
@@ -400,7 +400,7 @@ def test_recommend_mini_programs():
     commands = [
         {
             "operation": "exclude",
-            "source": [
+            "data": [
                 ("test/equality", "inside", "subroutine/function"),
                 # "test/equality" is inside "subroutine/function" in is_even.py, which is not
                 # imported anywhere.
@@ -415,7 +415,7 @@ def test_recommend_mini_programs():
     commands = [
         {
             "operation": "exclude",
-            "source": [
+            "data": [
                 ("call/function/builtin/range", "inside", "flow/conditional"),
                 # "call/function/builtin/range" is not inside "flow/conditional" anywhere.
             ],
@@ -434,7 +434,7 @@ def test_recommend_mini_programs():
     commands = [
         {
             "operation": "include",
-            "source": [
+            "data": [
                 ("variable/assignment/single", "after", "io/standard/print"),
                 # The taxon "variable/assignment/single" is featured by assignment.py and
                 # collatz.py. In collatz.py, it appears after a taxon "io/standard/print".
@@ -451,7 +451,7 @@ def test_recommend_mini_programs():
     commands = [
         {
             "operation": "include",
-            "source": [
+            "data": [
                 ("operator/arithmetic/modulo", "equals", "type/number/integer/literal"),
                 # "operator/arithmetic/modulo" and "type/number/integer/literal" are both featured
                 # on the same line in all programs except assignment.py
@@ -466,7 +466,7 @@ def test_recommend_mini_programs():
     commands = [
         {
             "operation": "include",
-            "source": [
+            "data": [
                 ("operator/arithmetic/modulo", "x == y", "type/number/integer/literal"),
                 # The same with "x == y" instead of "equals"
             ],
@@ -480,7 +480,7 @@ def test_recommend_mini_programs():
     commands = [
         {
             "operation": "include",
-            "source": [
+            "data": [
                 ("test/equality", "inside", "subroutine/function"),
                 # "test/equality" is inside "subroutine/function" in is_even.py, which is not
                 # imported anywhere.
@@ -495,7 +495,7 @@ def test_recommend_mini_programs():
     commands = [
         {
             "operation": "include",
-            "source": [
+            "data": [
                 ("test/equality$", "inside", "subroutine"),
                 # "test/equality" (strictly, note the dollar sign) is inside "subroutine/function"
                 # in is_even.py and inside "subroutine/procedure" in collatz.py. Both will be
@@ -511,7 +511,7 @@ def test_recommend_mini_programs():
     commands = [
         {
             "operation": "include",
-            "source": [
+            "data": [
                 ("call/function/builtin/range", "inside", "flow/conditional"),
                 # "call/function/builtin/range" is not inside "flow/conditional" anywhere.
             ],
@@ -525,7 +525,7 @@ def test_recommend_mini_programs():
     commands = [
         {
             "operation": "include",
-            "source": [
+            "data": [
                 ("call/function/builtin/print", "is", "call/function/builtin/print"),
                 # "call/function/builtin/print" may appear several times in the same program, but
                 # never on the same line.
@@ -540,7 +540,7 @@ def test_recommend_mini_programs():
     commands = [
         {
             "operation": "include",
-            "source": [
+            "data": [
                 ("type/number/integer/literal$", "is", "type/number/integer/literal$"),
                 # "type/number/integer/literal" appears twice on the same line in fizzbuzz.py and
                 # collatz.py
@@ -555,7 +555,7 @@ def test_recommend_mini_programs():
     commands = [
         {
             "operation": "include",
-            "source": [
+            "data": [
                 ("type/number/integer/literal$", "is", "type/number/integer/literal$"),
                 # "type/number/integer/literal" appears twice on the same line in fizzbuzz.py and
                 # collatz.py
@@ -570,7 +570,7 @@ def test_recommend_mini_programs():
     commands = [
         {
             "operation": "include",
-            "source": [
+            "data": [
                 ("io/standard/print", "not inside", "flow/loop/exit/late"),
                 # A print statement is featured inside a loop by both collatz.py and fizzbuzz.py.
                 # Note that, in collatz.py, there exists a print statement which is not inside the
@@ -591,7 +591,7 @@ def test_recommend_mini_programs():
     commands = [
         {
             "operation": "exclude",
-            "source": [
+            "data": [
                 ("io/standard/print", "not inside", "flow/loop/exit/late"),
                 # Excluding the programs where a print statement does not appear inside a loop
                 # does not exclude those which don't feature the print statement (assignment.py and
