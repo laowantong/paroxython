@@ -20,14 +20,17 @@ def normalize_predicate(predicate: str) -> Tuple[Predicate, bool]:
     else:
         negated = False
     predicate = predicate.strip()
+    predicate = regex.sub(r" is\b|\bis ", "", predicate)
     if predicate not in compare_spans:
-        # If there is only one x (resp. y), expand it into x≤x (resp. y≤y)
-        predicate = regex.sub(r"^([^x]*)x([^x]*)$", r"\1x≤x\2", predicate)
-        predicate = regex.sub(r"^([^y]*)y([^y]*)$", r"\1y≤y\2", predicate)
         # Convert usual comparison operators
         predicate = predicate.replace("<=", "≤").replace("==", "=")
         # Ignore all other characters
         predicate = regex.sub(r"[^xy<=≤]", "", predicate)
+        # Treat the special case of identity
+        predicate = regex.sub(r"^(x=y|y=)$", "x=y≤x=y", predicate)
+        # If there is only one x (resp. y), expand it into x≤x (resp. y≤y)
+        predicate = regex.sub(r"^([^x]*)x([^x]*)$", r"\1x≤x\2", predicate)
+        predicate = regex.sub(r"^([^y]*)y([^y]*)$", r"\1y≤y\2", predicate)
         if predicate != predicate:  # pragma: no cover
             print_warning(f"predicate '{predicate}' normalized into '{predicate}'.")
         if predicate not in compare_spans:
