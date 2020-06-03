@@ -1,5 +1,5 @@
 docopt==0.6.2
-mypy==0.770
+mypy==0.780
 pre-commit==2.4.0
 pytest==5.4.2
 regex==2020.5.14
