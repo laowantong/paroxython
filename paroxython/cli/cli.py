@@ -25,7 +25,12 @@ if sys.version < "3.6":  # pragma: no cover
 
 
 def main():
-    version = pkg_resources.get_distribution("paroxython").version
+    try:
+        distribution = pkg_resources.get_distribution("paroxython")
+    except pkg_resources.DistributionNotFound:
+        version = "unknown"  # For tests during CI
+    else:  # pragma: no cover
+        version = distribution.version
     args = docopt(__doc__, version=f"paroxython version {version}", options_first=True)
     command_name = args["COMMAND"].lower()
     command_args = [command_name] + args["ARGS"]
