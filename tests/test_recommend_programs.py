@@ -573,43 +573,205 @@ def test_recommend_mini_programs():
             "data": [
                 ("io/standard/print", "not inside", "flow/loop/exit/late"),
                 # A print statement is featured inside a loop by both collatz.py and fizzbuzz.py.
-                # Note that, in collatz.py, there exists a print statement which is not inside the
-                # loop. This doesn't make it satisfy the predicate. Firstly, the set of the
-                # programs satisfying "print inside loop" (i. e., collatz.py and fizzbuzz.py) is
-                # calculated. The result is the difference between the set of the programs
-                # featuring the first taxon (collatz.py and fizzbuzz.py) and the former. Note that
-                # assignment.py and is_even.py are not included in the result, since they don't
-                # feature (at least directly) "io/standard/print".
+                # However, in collatz.py, there exists a print statement which is not inside the
+                # loop. This makes it satisfy the predicate. Note that assignment.py and is_even.py
+                # are not included in the result, since they don't feature (at least directly)
+                # "io/standard/print".
             ],
         }
     ]
     rec = Recommendations(db, commands=commands)
     rec.run_pipeline()
-    assert not rec.selected_programs.keys()
+    assert rec.selected_programs.keys() == {"collatz.py"}
     assert not rec.imparted_knowledge
 
     commands = [
         {
             "operation": "exclude",
             "data": [
-                ("io/standard/print", "not inside", "flow/loop/exit/late"),
-                # Excluding the programs where a print statement does not appear inside a loop
-                # does not exclude those which don't feature the print statement (assignment.py and
-                # is_even.py), nor those where at least one print statement appears inside a loop
-                # (fizzbuzz.py and collatz.py).
+                ("io/standard/print", "not inside", "flow/loop"),
+                # Exclude the programs which feature a print statement outside a loop. This does
+                # not exclude assignment.py, which does not feature a print statement. This
+                # excludes collatz, which features a print statement outside a loop, even if it
+                # also features a print statement inside a loop. fizzbuzz.py and is_even.py are
+                # excluded too, since they import collatz.py
             ],
         }
     ]
     rec = Recommendations(db, commands=commands)
     rec.run_pipeline()
     print(rec.selected_programs.keys())
-    assert rec.selected_programs.keys() == {
-        "is_even.py",
-        "fizzbuzz.py",
-        "assignment.py",
-        "collatz.py",
-    }
+    assert rec.selected_programs.keys() == {"assignment.py"}
     assert not rec.imparted_knowledge
+
+
+db = json.loads(Path("examples/simple/programs_db.json").read_text())
+
+
+holds_loop = "flow/loop"
+holds_cond = "flow/conditional"
+lacks_cond = ("metadata/program", "not contains", "flow/conditional")
+p0 = "01_hello_world.py"  # [ ] loop [ ] test
+p1 = "03_friends.py"  #     [X] loop [ ] test
+p2 = "14_median.py"  #      [ ] loop [X] test
+p3 = "06_regex.py"  #       [X] loop [X] test
+base_1 = [p0, p1, p2, p3]
+
+# fmt: off
+pipelines_1 = [
+    ({        p2, p3}, [("include",     [holds_cond])]),
+    ({p0, p1,       }, [("exclude",     [holds_cond])]),
+    ({    p1,     p3}, [("include",     [holds_loop])]),
+    ({p0,     p2,   }, [("exclude",     [holds_loop])]),
+    ({    p1, p2, p3}, [("include",     [holds_loop, holds_cond])]),
+    ({p0,           }, [("exclude",     [holds_loop, holds_cond])]),
+    ({            p3}, [("include all", [holds_loop, holds_cond])]),
+    ({p0, p1, p2,   }, [("exclude all", [holds_loop, holds_cond])]),
+    ({p0, p1,     p3}, [("include",     [holds_loop, lacks_cond])]),
+    ({        p2,   }, [("exclude",     [holds_loop, lacks_cond])]),
+    ({    p1,       }, [("include all", [holds_loop, lacks_cond])]),
+    ({p0,     p2, p3}, [("exclude all", [holds_loop, lacks_cond])]),
+    ({p0,         p3}, [("include",     [holds_loop, lacks_cond]),
+                        ("exclude all", [holds_loop, lacks_cond])]),
+    ({    p1, p2,   }, [("include",     [holds_loop, holds_cond]),
+                        ("exclude all", [holds_loop, holds_cond])]),
+    ({p0, p1, p2, p3}, []),
+]
+# fmt: on
+
+
+@pytest.mark.parametrize("expected_programs, commands", pipelines_1)
+def test_recommend_simple_programs_1(expected_programs, commands):
+    rec = Recommendations(
+        db,
+        commands=(
+            [{"operation": operation, "data": data} for (operation, data) in commands]
+            + [{"operation": "include", "data": base_1}]
+        ),
+    )
+    rec.run_pipeline()
+    print(rec.selected_programs.keys())
+    assert rec.selected_programs.keys() == expected_programs
+
+
+holds_subroutine = "subroutine"
+holds_assignment = "variable/assignment"
+holds_asg_in_sub = ("variable/assignment", "inside", "subroutine")
+lacks_assignment = ("metadata/program", "not contains", "variable/assignment")
+lacks_subroutine = ("metadata/program", "not contains", "subroutine")
+lacks_asg_or_sub = ("metadata/program", "not contains", "subroutine|variable/assignment")
+lacks_asg_in_sub = ("subroutine", "not contains", "variable/assignment")
+p0 = "01_hello_world.py"  # [ ] subroutine [ ] assignment [ ] inside *
+p1 = "05_greet.py"  # [X] subroutine [ ] assignment [ ] inside
+p2 = "02_input_ name.py"  # [ ] subroutine [X] assignment [ ] inside
+p3 = "16_csv.py"  # [X] subroutine [X] assignment [ ] inside *
+p4 = "12_classes.py"  # [X] subroutine [X] assignment [X] inside
+base_2 = [p0, p1, p2, p3, p4]
+
+# fmt: off
+pipelines_2 = [
+    ({    p1, p2, p3, p4}, [("include",     [holds_subroutine, holds_assignment])]),
+    ({p0,               }, [("exclude",     [holds_subroutine, holds_assignment])]),
+    ({    p1,           }, [("include all", [holds_subroutine, lacks_assignment])]),
+    ({p0,     p2, p3, p4}, [("exclude all", [holds_subroutine, lacks_assignment])]),
+    ({p0, p1,     p3, p4}, [("include",     [holds_subroutine, lacks_assignment])]),
+    ({        p2,       }, [("exclude",     [holds_subroutine, lacks_assignment])]),
+    ({p0, p1, p2,     p4}, [("include",     [holds_asg_in_sub, lacks_subroutine, lacks_assignment])]),
+    ({            p3    }, [("exclude",     [holds_asg_in_sub, lacks_subroutine, lacks_assignment])]),
+    ({                p4}, [("include",     [holds_asg_in_sub])]),
+    ({p0, p1, p2, p3    }, [("exclude",     [holds_asg_in_sub])]),
+    ({        p2, p3, p4}, [("include",     [holds_assignment])]),
+    ({p0, p1,           }, [("exclude",     [holds_assignment])]),
+    ({    p1,     p3, p4}, [("include",     [holds_subroutine])]),
+    ({p0,     p2,       }, [("exclude",     [holds_subroutine])]),
+    ({p0, p1,         p4}, [("include",     [holds_asg_in_sub, lacks_assignment])]),
+    ({        p2, p3    }, [("exclude",     [holds_asg_in_sub, lacks_assignment])]),
+    ({            p3, p4}, [("include all", [holds_subroutine, holds_assignment])]),
+    ({p0, p1, p2,       }, [("exclude all", [holds_subroutine, holds_assignment])]),
+    ({p0,             p4}, [("include",     [lacks_asg_or_sub, holds_asg_in_sub])]),
+    ({    p1, p2, p3    }, [("exclude",     [lacks_asg_or_sub, holds_asg_in_sub])]),
+    ({p0,     p2,     p4}, [("include",     [holds_asg_in_sub, lacks_subroutine])]),
+    ({    p1,     p3,   }, [("exclude",     [holds_asg_in_sub, lacks_subroutine])]),
+    ({        p2,     p4}, [("include",     [holds_asg_in_sub, lacks_subroutine]),
+                            ("exclude",     [lacks_asg_or_sub])]),
+    ({p0, p1,     p3    }, [("include",     [holds_subroutine, lacks_assignment]),
+                            ("exclude",     [holds_asg_in_sub])]),
+    ({    p1,         p4}, [("include",     [holds_asg_in_sub, lacks_assignment]),
+                            ("exclude",     [lacks_asg_or_sub])]),
+    ({p0,     p2, p3    }, [("include",     [holds_assignment, lacks_subroutine]),
+                            ("exclude",     [holds_asg_in_sub])]),
+    ({    p1, p2,       }, [("include",     [holds_subroutine, holds_assignment]),
+                            ("exclude all", [holds_subroutine, holds_assignment])]),
+    ({p0,         p3, p4}, [("include",     [holds_subroutine, lacks_assignment]),
+                            ("exclude all", [holds_subroutine, lacks_assignment])]),
+    ({p0,         p3    }, [("include",     [holds_subroutine, lacks_assignment]),
+                            ("exclude all", [holds_subroutine, lacks_assignment]),
+                            ("exclude",     [holds_asg_in_sub])]),
+    ({    p1, p2,     p4}, [("include",     [holds_asg_in_sub, lacks_subroutine, lacks_assignment]),
+                            ("exclude", [lacks_asg_or_sub])]),
+    ({p0, p1, p2, p3, p4}, []),
+]
+# fmt: on
+
+
+@pytest.mark.parametrize("expected_programs, commands", pipelines_2)
+def test_recommend_simple_programs_2(expected_programs, commands):
+    rec = Recommendations(
+        db,
+        commands=(
+            [{"operation": operation, "data": data} for (operation, data) in commands]
+            + [{"operation": "include", "data": base_2}]
+        ),
+    )
+    rec.run_pipeline()
+    print(rec.selected_programs.keys())
+    assert rec.selected_programs.keys() == expected_programs
+
+
+holds_parallel_tuple = "variable/assignment/parallel"
+holds_ordinary_tuple = ("type/sequence/tuple", "is not", "variable/assignment/parallel")
+lacks_parallel_tuple = ("metadata/program", "not contains", "variable/assignment/parallel")
+p0 = "01_hello_world.py"  # [ ] ordinary tuple [ ] parallel tuple
+p1 = "11_bottles.py"  #     [X] ordinary tuple [ ] parallel tuple
+p2 = "04_fibonacci.py"  #   [ ] ordinary tuple [X] parallel tuple
+p3 = "18_queens.py"  #      [X] ordinary tuple [X] parallel tuple
+base_3 = [p0, p1, p2, p3]
+
+# fmt: off
+pipelines_3 = [
+    ({        p2, p3}, [("include",     [holds_parallel_tuple])]),
+    ({p0, p1,       }, [("exclude",     [holds_parallel_tuple])]),
+    ({    p1,     p3}, [("include",     [holds_ordinary_tuple])]),
+    ({p0,     p2,   }, [("exclude",     [holds_ordinary_tuple])]),
+    ({    p1, p2, p3}, [("include",     [holds_parallel_tuple, holds_ordinary_tuple])]),
+    ({p0,           }, [("exclude",     [holds_parallel_tuple, holds_ordinary_tuple])]),
+    ({            p3}, [("include all", [holds_parallel_tuple, holds_ordinary_tuple])]),
+    ({p0, p1, p2,   }, [("exclude all", [holds_parallel_tuple, holds_ordinary_tuple])]),
+    ({p0, p1,     p3}, [("include",     [lacks_parallel_tuple, holds_ordinary_tuple])]),
+    ({        p2,   }, [("exclude",     [lacks_parallel_tuple, holds_ordinary_tuple])]),
+    ({    p1,       }, [("include all", [lacks_parallel_tuple, holds_ordinary_tuple])]),
+    ({p0,     p2, p3}, [("exclude all", [lacks_parallel_tuple, holds_ordinary_tuple])]),
+    ({p0,         p3}, [("include",     [lacks_parallel_tuple, holds_ordinary_tuple]),
+                        ("exclude all", [lacks_parallel_tuple, holds_ordinary_tuple])]),
+    ({    p1, p2,   }, [("include",     [holds_parallel_tuple, holds_ordinary_tuple]),
+                        ("exclude all", [holds_parallel_tuple, holds_ordinary_tuple])]),
+    ({p0, p1, p2, p3}, []),
+]
+# fmt: on
+
+
+@pytest.mark.parametrize("expected_programs, commands", pipelines_3)
+def test_recommend_simple_programs_3(expected_programs, commands):
+    rec = Recommendations(
+        db,
+        commands=(
+            [{"operation": operation, "data": data} for (operation, data) in commands]
+            + [{"operation": "include", "data": base_3}]
+        ),
+    )
+    rec.run_pipeline()
+    print(rec.selected_programs.keys())
+    assert rec.selected_programs.keys() == expected_programs
 
 
 if __name__ == "__main__":

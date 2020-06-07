@@ -95,11 +95,11 @@ class JsonDatabase(TypedDict):
 # - trailing commas;
 # - comments!
 
-Operation = Literal["include", "exclude", "impart"]
+Operation = NewType("Operation", str)
 
 class Command(TypedDict):
     operation: Operation
-    source: Union[str, List[str]] # not source code, but source of the data
+    data: Union[str, List[str]] # not source code, but source of the data
     filtered_out: ProgramNames # to be populated by the execution of the command
 
 Predicate = Callable[[int, int], bool]

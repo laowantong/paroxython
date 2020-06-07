@@ -1,7 +1,9 @@
 from itertools import permutations, product
-from typing import Iterator
+from typing import Iterator, Dict, Tuple
 
 import regex  # type: ignore
+
+from collections import defaultdict
 
 from .user_types import (
     JsonDatabase,
@@ -129,17 +131,66 @@ class ProgramFilter:
         # fmt: on
     ) -> ProgramNameSet:
         """Return the programs where two given taxons satisfy a given predicate."""
-        result: ProgramNameSet = set()
         taxons_1 = self.get_taxons_from_taxon_pattern(taxon_pattern_1)
         taxons_2 = self.get_taxons_from_taxon_pattern(taxon_pattern_2)
         programs_1 = self.programs_of_taxons(taxons_1)
         programs_2 = self.programs_of_taxons(taxons_2)
+        result: ProgramNameSet = set()
         for program in programs_1 & programs_2:  # for each program featuring both taxon sets
             spans = self.db_programs[program]["taxons"]
             for (span_1, span_2) in self._iterate_on_spans(spans, taxons_1, taxons_2):
                 if predicate(span_1, span_2):
                     result.add(program)
                     break
+        return result
+
+    def programs_of_negated_triple(
+        # fmt: off
+        self,
+        taxon_pattern_1: str,
+        predicate: Predicate,
+        taxon_pattern_2: str,
+        # fmt: on
+    ) -> ProgramNameSet:
+        """Return the programs where one occurrence of two taxons don't satisfy the predicate.
+
+        ..warning::
+            Return also all programs featuring at least one taxon_1, but no taxon_2.
+
+        For each span s_1 of taxon_1, there exists no span s_2 of taxon_2 s.t. predicate(s_1, s_2).
+
+        Examples:
+        If the predicate is "taxon_1 not inside taxon_2", the program p consisting in:
+
+        - `"taxon_2{taxon_1}"` is rejected
+        - `"taxon_1"` is accepted
+        - `"taxon_2"` is rejected (no taxon_1)
+        - `"taxon_1{taxon_2}"` is accepted
+        - `"taxon_1 taxon_2{taxon_1}"` is accepted (∃ (s_1, s_2) | taxon_1 not inside taxon_2)
+        - `"taxon_1 taxon_2{taxon_1} taxon_2{}"` is accepted
+
+        If the predicate is "taxon_2 not contains taxon_1" (sic), the program p consisting in:
+
+        - `"taxon_2{taxon_1}"` is rejected
+        - `"taxon_1"` is rejected (no taxon_2)
+        - `"taxon_2"` is accepted
+        - `"taxon_1{taxon_2}"` is accepted
+        - `"taxon_1 taxon_2{taxon_1}"` is accepted (∃ (s_2, s_1) | taxon_2 not contains taxon_1)
+        - `"taxon_1 taxon_2{taxon_1} taxon_2{}"` is accepted
+        """
+        taxons_1 = self.get_taxons_from_taxon_pattern(taxon_pattern_1)
+        taxons_2 = self.get_taxons_from_taxon_pattern(taxon_pattern_2)
+        programs_1 = self.programs_of_taxons(taxons_1)
+        programs_2 = self.programs_of_taxons(taxons_2)
+        result: ProgramNameSet = programs_1
+        for program in programs_1 & programs_2:  # for each program featuring both taxon sets
+            spans = self.db_programs[program]["taxons"]
+            exists_span_2_satisfying_predicate: Dict[Tuple, bool] = defaultdict(bool)
+            for (span_1, span_2) in self._iterate_on_spans(spans, taxons_1, taxons_2):
+                exists_span_2_satisfying_predicate[tuple(span_1)] |= predicate(span_1, span_2)
+            if all(exists_span_2_satisfying_predicate.values()):
+                # for all span_1, there is at least one span_2 such that predicate(span_1, span_2)
+                result.remove(program)
         return result
 
     # Update the state of the filter by applying set operations with the given programs.

@@ -42,8 +42,8 @@ non_working_examples = [
     "notis after",
     "foobar",
     "is after_not",
-    "x≤x≤x=y",
-    "x>y",
+    "x≤x≤x=y",  # three x's
+    "x>y",  # write "x<y" instead
 ]
 
 

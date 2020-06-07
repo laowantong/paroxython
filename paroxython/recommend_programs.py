@@ -2,9 +2,12 @@
 """
 
 import subprocess
+from collections import Counter as counter
 from collections import defaultdict
 from pathlib import Path
-from typing import Dict, List, Optional, Tuple, Union
+from typing import Counter, Dict, List, Optional, Tuple, Union
+
+import regex  # type: ignore
 
 from .assess_costs import LearningCostAssessor
 from .filter_programs import ProgramFilter
@@ -23,6 +26,7 @@ from .user_types import (
     Command,
     JsonDatabase,
     Operation,
+    ProgramName,
     ProgramNames,
     ProgramNameSet,
     TaxonNameSet,
@@ -51,6 +55,7 @@ class Recommendations:
         self.taxons_of_programs = program_filter.taxons_of_programs
         self.programs_of_taxons = program_filter.programs_of_taxons
         self.programs_of_triple = program_filter.programs_of_triple
+        self.programs_of_negated_triple = program_filter.programs_of_negated_triple
         self.update_filter = program_filter.update_filter
 
         # copy locally some attributes and methods or a LearningCostAssessor instance
@@ -68,7 +73,14 @@ class Recommendations:
         for (i, command) in enumerate(self.commands, 1):
 
             # Retrieve the operation
-            operation = command.get("operation")
+            try:
+                operation = command["operation"]
+            except KeyError:
+                print_warning(f"operation {i} is ignored (not specified).")
+                continue
+            (operation, n) = regex.subn(" all", "", operation)
+            any_or_all = "all" if n == 1 else "any"
+            operation = Operation(operation.replace(" any", ""))
             if operation not in ("include", "exclude", "impart"):
                 print_warning(f"operation {i} ({operation}) is ignored (unknown).")
                 continue
@@ -80,7 +92,7 @@ class Recommendations:
                 continue
 
             # Compute the sets from which the program selection and knowledge will be updated
-            (taxons, programs) = self.compute_new_taxons_and_programs(operation, patterns, i)
+            (taxons, programs) = self.new_taxons_and_programs(operation, patterns, i, any_or_all)
 
             # Update the selected programs and optionally impart the associated taxons
             self.update_filter(operation, taxons, programs)
@@ -121,17 +133,19 @@ class Recommendations:
             print_warning(f"unable to interpret the pattern of operation {i} ({operation}).")
             return []
 
-    def compute_new_taxons_and_programs(
+    def new_taxons_and_programs(
         # fmt: off
         self,
         operation: Operation,
         patterns: List[str],
         i: int,
+        any_or_all="any"
         # fmt: on
     ) -> Tuple[TaxonNameSet, ProgramNameSet]:
         """Compute the programs and the taxons targeted by the operation application."""
         new_taxons: TaxonNameSet = set()
         new_programs: ProgramNameSet = set()
+        pattern_count_by_program: Counter[ProgramName] = counter()
         for pattern in patterns:
             taxons: TaxonNameSet = set()
             programs: ProgramNameSet = set()
@@ -146,18 +160,22 @@ class Recommendations:
             elif isinstance(pattern, (list, tuple)) and len(pattern) == 3:
                 if operation == "impart":
                     print_warning(f"operation {i} pattern '{pattern}' is ignored (imparted).")
-                else:
-                    (pattern_1, raw_predicate, pattern_2) = pattern
-                    (predicate, negated) = normalize_predicate(raw_predicate)
-                    programs = self.programs_of_triple(pattern_1, predicate, pattern_2)
-                    if negated:
-                        taxons_1 = self.get_taxons_from_taxon_pattern(pattern_1)
-                        programs_1 = self.programs_of_taxons(taxons_1)
-                        programs = programs_1 - programs
+                    continue
+                (pattern_1, raw_predicate, pattern_2) = pattern
+                (predicate, negated) = normalize_predicate(raw_predicate)
+                f = self.programs_of_negated_triple if negated else self.programs_of_triple
+                programs = f(pattern_1, predicate, pattern_2)
             else:
                 print_warning(f"operation {i} pattern '{pattern}' is ignored (malformed).")
             new_taxons.update(taxons)
             new_programs.update(programs)
+            pattern_count_by_program.update(programs)
+        if any_or_all == "all":
+            new_programs.difference_update(
+                program
+                for (program, count) in pattern_count_by_program.items()
+                if len(patterns) != count
+            )
         return (new_taxons, new_programs)
 
     def get_markdown(
