@@ -54,6 +54,7 @@ compare_spans.update(
         "ended by": compare_spans["finished by"],
         "ends": compare_spans["finishes"],
         "equal": compare_spans["equals"],
+        "in": compare_spans["during"],
         "inside": compare_spans["during"],
         "is": compare_spans["equals"],
     }
