@@ -1,7 +1,7 @@
 docopt==0.6.2
-mypy==0.770
+mypy==0.780
 pre-commit==2.4.0
-pytest==5.4.2
+pytest==5.4.3
 regex==2020.6.7
 sqlparse==0.3.1
 typed-ast==1.4.1
