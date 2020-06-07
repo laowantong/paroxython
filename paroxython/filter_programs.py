@@ -1,15 +1,18 @@
+from collections import Counter as counter
+from collections import defaultdict
 from itertools import permutations, product
-from typing import Iterator, Dict, Tuple
+from typing import Counter, Dict, Iterator, List, Tuple
 
 import regex  # type: ignore
 
-from collections import defaultdict
-
+from .goodies import print_warning
+from .normalize_predicate import normalize_predicate
 from .user_types import (
     JsonDatabase,
     Operation,
     Predicate,
     ProgramInfos,
+    ProgramName,
     ProgramNameSet,
     ProgramTaxonNames,
     ProgramToPrograms,
@@ -18,7 +21,6 @@ from .user_types import (
     TaxonNameSet,
     TaxonsPoorSpans,
 )
-from .goodies import print_warning
 
 
 class ProgramFilter:
@@ -226,15 +228,49 @@ class ProgramFilter:
         # fmt: off
         self,
         operation: Operation,
-        taxons: TaxonNameSet,
-        programs: ProgramNameSet,
+        patterns: List[str],
+        i: int,
+        any_or_all="any"
         # fmt: on
     ) -> None:
         """Update the selected programs and optionally impart the associated taxons."""
+        new_taxons: TaxonNameSet = set()
+        new_programs: ProgramNameSet = set()
+        pattern_count_by_program: Counter[ProgramName] = counter()
+        for pattern in patterns:
+            taxons: TaxonNameSet = set()
+            programs: ProgramNameSet = set()
+            if isinstance(pattern, str):
+                if pattern.endswith(".py"):
+                    programs = self.get_programs_from_program_pattern(pattern)
+                    taxons = self.taxons_of_programs(programs, operation == "exclude")
+                else:
+                    taxons = self.get_taxons_from_taxon_pattern(pattern)
+                    if operation != "impart":
+                        programs = self.programs_of_taxons(taxons, operation == "exclude")
+            elif isinstance(pattern, (list, tuple)) and len(pattern) == 3:
+                if operation == "impart":
+                    print_warning(f"operation {i} pattern '{pattern}' is ignored (imparted).")
+                    continue
+                (pattern_1, raw_predicate, pattern_2) = pattern
+                (predicate, negated) = normalize_predicate(raw_predicate)
+                f = self.programs_of_negated_triple if negated else self.programs_of_triple
+                programs = f(pattern_1, predicate, pattern_2)
+            else:
+                print_warning(f"operation {i} pattern '{pattern}' is ignored (malformed).")
+            new_taxons.update(taxons)
+            new_programs.update(programs)
+            pattern_count_by_program.update(programs)
+        if any_or_all == "all":
+            new_programs.difference_update(
+                program
+                for (program, count) in pattern_count_by_program.items()
+                if len(patterns) != count
+            )
         if operation == "include":
-            self.include_programs(programs)
+            self.include_programs(new_programs)
         elif operation == "exclude":
-            self.exclude_programs(programs, follow=True)
+            self.exclude_programs(new_programs, follow=True)
         elif operation == "impart":
-            self.exclude_programs(programs, follow=False)
-            self.impart_taxons(taxons)
+            self.exclude_programs(new_programs, follow=False)
+            self.impart_taxons(new_taxons)

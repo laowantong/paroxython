@@ -60,13 +60,9 @@ def range_to_cost_zeno(start: int, stop: int) -> float:
 
 
 class LearningCostAssessor:
-    def __init__(self, imparted_knowledge: TaxonNameSet) -> None:
-        """Evaluate the learning costs of programs with respect to the given imparted knowledge.
+    """Evaluate the learning costs of programs with respect to the given imparted knowledge."""
 
-        Args:
-            imparted_knowledge (TaxonNameSet): A set of taxon names, representing all the notions
-                introduced so far.
-        """
+    def set_imparted_knowledge(self, imparted_knowledge: TaxonNameSet) -> None:
         self.imparted_knowledge = imparted_knowledge
 
     def set_cost_assessment_strategy(self, strategy: AssessmentStrategy = "zeno") -> None:

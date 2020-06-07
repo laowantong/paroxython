@@ -58,7 +58,7 @@ def test_recommend_program(capsys):
         ["prg4.py", "prg5.py", "prg6.py"],
         ["prg1.py"],
     ]
-    costs = {taxon: rec.taxon_cost(taxon) for taxon in rec.selected_programs["prg2.py"]}
+    costs = {taxon: rec.assess.taxon_cost(taxon) for taxon in rec.selected_programs["prg2.py"]}
     print(costs)
     assert costs == {
         "O/N/P": 0,
@@ -204,7 +204,6 @@ def test_recommend_mini_programs():
     rec = Recommendations(db, commands=commands)
     rec.run_pipeline()
     assert rec.selected_programs.keys() == {"assignment.py", "collatz.py"}
-    assert not rec.imparted_knowledge
 
     commands = [
         {

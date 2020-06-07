@@ -26,7 +26,8 @@ def test_range_to_cost_linear():
 
 def test_taxon_cost():
     imparted_knowledge = {"O", "O/J", "X", "X/S", "X/S/M", "X/S/M/L"}
-    assess = LearningCostAssessor(imparted_knowledge)
+    assess = LearningCostAssessor()
+    assess.set_imparted_knowledge(imparted_knowledge)
     assess.set_cost_assessment_strategy("linear")
     assert assess.taxon_cost("O") == 0
     assert assess.taxon_cost("O/C") == 1
@@ -52,7 +53,8 @@ def test_taxon_cost():
 def test_get_sorted_recommandations():
     db = json.loads(Path("examples/dummy/programs_db.json").read_text())
     imparted_knowledge = {"O", "O/J", "X", "X/S", "X/S/M", "X/S/M/L"}
-    assess = LearningCostAssessor(imparted_knowledge)
+    assess = LearningCostAssessor()
+    assess.set_imparted_knowledge(imparted_knowledge)
     assess.set_cost_assessment_strategy("zeno")
     programs_taxons = {program: list(info["taxons"]) for (program, info) in db["programs"].items()}
     result = assess(programs_taxons)
