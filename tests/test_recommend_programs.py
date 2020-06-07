@@ -349,6 +349,17 @@ def test_recommend_mini_programs():
     assert rec.selected_programs.keys() == set()
     assert not rec.imparted_knowledge
 
+    commands = [{"data": []}]  # a command without operation is ignored
+    rec = Recommendations(db, commands=commands)
+    rec.run_pipeline()
+    assert rec.selected_programs.keys() == {
+        "assignment.py",
+        "collatz.py",
+        "fizzbuzz.py",
+        "is_even.py",
+    }
+    assert not rec.imparted_knowledge
+
     commands = [
         {
             "operation": "undefined_command",  # an undefined command is ignored
