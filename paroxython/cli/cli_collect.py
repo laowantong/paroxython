@@ -1,8 +1,12 @@
-r"""
+r"""Walk a directory, tag its Python files and make a database of the results.
+
 USAGE:
+    ```
     paroxython collect [options] DIRECTORY
+    ```
 
 OPTIONS:
+    ```plain
     -c --cleanup=STR    Transformation to be applied to the source code
                         before processing. [default: full]
                         Currently available:
@@ -26,9 +30,7 @@ OPTIONS:
     -t --taxonomy=PATH  The path of a TSV file mapping labels onto taxons.
                         If not specified, use the included copy of the table
                         whose last version is at https://bit.ly/2Yu0LqU.
-
-DESCRIPTION:
-    Walk a directory, tag its Python files and make a database of the results.
+    ```
 """
 
 from pathlib import Path

@@ -28,9 +28,9 @@
 <section id="section-intro">
 <p>Assess the learning cost associated with the introduction of the given programs.</p>
 <p>Each program has been previously found to implement a number of notions represented by a list of
-taxons of the form: <span><span class="MathJax_Preview">\textrm{edge}_0/\textrm{edge}_1/.../\textrm{edge}_n</span><script type="math/tex">\textrm{edge}_0/\textrm{edge}_1/.../\textrm{edge}_n</script></span>, e.g.,
+taxons of the form: <span><span class="MathJax_Preview">\textrm{edge}_0/\textrm{edge}_1/.../\textrm{edge}_n</span><script type="math/tex">\textrm{edge}_0/\textrm{edge}_1/.../\textrm{edge}_n</script></span>, <em>e.g.</em>,
 <code>flow/loop/exit/early/break</code>.</p>
-<p>Furthermore, the notions already imparted may cover a certain <strong>prefix</strong> of such a taxon, e.g.
+<p>Furthermore, the notions already imparted may cover a certain <strong>prefix</strong> of such a taxon, <em>e.g.</em>
 <code>flow/loop</code>. The learning cost should therefore not take it into account.</p>
 <p>The cost of the remaining edges, here <code>exit/early/break</code>, is approximated by a function taking
 two zero-based indexes <code>start</code> (inclusive) and <code>stop</code> (exclusive), and returning a floating number. Currently, only two such functions are provided:</p>
@@ -42,14 +42,15 @@ two zero-based indexes <code>start</code> (inclusive) and <code>stop</code> (exc
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/assess_costs.py#L0-L129" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/assess_costs.py#L0-L127" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">from functools import lru_cache
 
 from .user_types import (
     AssessedPrograms,
     AssessmentStrategy,
-    ProgramTaxonNames,
+    ProgramInfos,
+    ProgramNameSet,
     TaxonName,
     TaxonNameSet,
 )
@@ -68,7 +69,10 @@ def range_to_cost_zeno(start: int, stop: int) -&gt; float:
 
 
 class LearningCostAssessor:
-    def __init__(self, imparted_knowledge: TaxonNameSet) -&gt; None:
+    def __init__(self, programs: ProgramInfos):
+        self.programs = programs
+
+    def set_imparted_knowledge(self, imparted_knowledge: TaxonNameSet) -&gt; None:
         self.imparted_knowledge = imparted_knowledge
 
     def set_cost_assessment_strategy(self, strategy: AssessmentStrategy = &#34;zeno&#34;) -&gt; None:
@@ -94,11 +98,11 @@ class LearningCostAssessor:
                     break
         return self.range_to_cost(start, stop)
 
-    def __call__(self, programs: ProgramTaxonNames) -&gt; AssessedPrograms:
+    def __call__(self, selected_programs: ProgramNameSet) -&gt; AssessedPrograms:
         result = []
-        for (program_name, taxon_names) in programs.items():
+        for program_name in selected_programs:
             total_cost = 0.0
-            for taxon_name in taxon_names:
+            for taxon_name in self.programs[program_name][&#34;taxons&#34;]:
                 total_cost += self.taxon_cost(taxon_name)
             result.append((total_cost, program_name))
         return sorted(result)</code></pre>
@@ -119,7 +123,7 @@ class LearningCostAssessor:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/assess_costs.py#L31-L35" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/assess_costs.py#L32-L35" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">@lru_cache(maxsize=None)  # NB: memoization needed for consistency with mypy&#39;s typing
 def range_to_cost_linear(start: int, stop: int) -&gt; float:
@@ -159,23 +163,20 @@ def range_to_cost_zeno(start: int, stop: int) -&gt; float:
 <dl>
 <dt id="paroxython.assess_costs.LearningCostAssessor"><code class="flex name class">
 <span>class <span class="ident">LearningCostAssessor</span></span>
-<span>(</span><span>imparted_knowledge: Set[TaxonName])</span>
+<span>(</span><span>programs: Dict[ProgramName, ProgramRecord])</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Evaluate the learning costs of programs with respect to the given imparted knowledge.</p>
-<h2 id="args">Args</h2>
-<dl>
-<dt><strong><code>imparted_knowledge</code></strong> :&ensp;<code>TaxonNameSet</code></dt>
-<dd>A set of taxon names, representing all the notions
-introduced so far.</dd>
-</dl></div>
+<div class="desc"><p>Evaluate the learning costs of programs with respect to the given imparted knowledge.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/assess_costs.py#L62-L130" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/assess_costs.py#L62-L128" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">class LearningCostAssessor:
-    def __init__(self, imparted_knowledge: TaxonNameSet) -&gt; None:
+    def __init__(self, programs: ProgramInfos):
+        self.programs = programs
+
+    def set_imparted_knowledge(self, imparted_knowledge: TaxonNameSet) -&gt; None:
         self.imparted_knowledge = imparted_knowledge
 
     def set_cost_assessment_strategy(self, strategy: AssessmentStrategy = &#34;zeno&#34;) -&gt; None:
@@ -201,17 +202,31 @@ introduced so far.</dd>
                     break
         return self.range_to_cost(start, stop)
 
-    def __call__(self, programs: ProgramTaxonNames) -&gt; AssessedPrograms:
+    def __call__(self, selected_programs: ProgramNameSet) -&gt; AssessedPrograms:
         result = []
-        for (program_name, taxon_names) in programs.items():
+        for program_name in selected_programs:
             total_cost = 0.0
-            for taxon_name in taxon_names:
+            for taxon_name in self.programs[program_name][&#34;taxons&#34;]:
                 total_cost += self.taxon_cost(taxon_name)
             result.append((total_cost, program_name))
         return sorted(result)</code></pre>
 </details>
 <h3>Methods</h3>
 <dl>
+<dt id="paroxython.assess_costs.LearningCostAssessor.set_imparted_knowledge"><code class="name flex">
+<span>def <span class="ident">set_imparted_knowledge</span></span>(<span>self, imparted_knowledge: Set[TaxonName]) ‑> NoneType</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/assess_costs.py#L68-L69" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">def set_imparted_knowledge(self, imparted_knowledge: TaxonNameSet) -&gt; None:
+    self.imparted_knowledge = imparted_knowledge</code></pre>
+</details>
+</dd>
 <dt id="paroxython.assess_costs.LearningCostAssessor.set_cost_assessment_strategy"><code class="name flex">
 <span>def <span class="ident">set_cost_assessment_strategy</span></span>(<span>self, strategy: Literal['zeno', 'linear'] = 'zeno') ‑> NoneType</span>
 </code></dt>
@@ -236,7 +251,7 @@ introduced so far.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/assess_costs.py#L72-L91" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/assess_costs.py#L71-L90" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def set_cost_assessment_strategy(self, strategy: AssessmentStrategy = &#34;zeno&#34;) -&gt; None:
     if strategy.lower() == &#34;zeno&#34;:
@@ -263,7 +278,7 @@ assessment function.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/assess_costs.py#L93-L112" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/assess_costs.py#L92-L111" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">@lru_cache(maxsize=None)
 def taxon_cost(self, taxon: TaxonName) -&gt; float:
@@ -280,15 +295,14 @@ def taxon_cost(self, taxon: TaxonName) -&gt; float:
 </details>
 </dd>
 <dt id="paroxython.assess_costs.LearningCostAssessor.__call__"><code class="name flex">
-<span>def <span class="ident">__call__</span></span>(<span>self, programs: Dict[ProgramName, List[TaxonName]]) ‑> List[Tuple[float, ProgramName]]</span>
+<span>def <span class="ident">__call__</span></span>(<span>self, selected_programs: Set[ProgramName]) ‑> List[Tuple[float, ProgramName]]</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Associate the given programs with the total learning cost of their taxons.</p>
+<div class="desc"><p>Associate the given selected programs with the total learning cost of their taxons.</p>
 <h2 id="args">Args</h2>
 <dl>
-<dt><strong><code>programs</code></strong> :&ensp;<code>ProgramTaxonNames</code></dt>
-<dd>A dictionary associating each program name with a list
-of taxon names.</dd>
+<dt><strong><code>selected_programs</code></strong> :&ensp;<code>ProgramNameSet</code></dt>
+<dd>A set of program names.</dd>
 </dl>
 <h2 id="returns">Returns</h2>
 <dl>
@@ -298,13 +312,13 @@ of taxon names.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/assess_costs.py#L114-L130" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/assess_costs.py#L113-L128" class="git-link">Browse GitHub</a>
 </summary>
-<pre><code class="python">def __call__(self, programs: ProgramTaxonNames) -&gt; AssessedPrograms:
+<pre><code class="python">def __call__(self, selected_programs: ProgramNameSet) -&gt; AssessedPrograms:
     result = []
-    for (program_name, taxon_names) in programs.items():
+    for program_name in selected_programs:
         total_cost = 0.0
-        for taxon_name in taxon_names:
+        for taxon_name in self.programs[program_name][&#34;taxons&#34;]:
             total_cost += self.taxon_cost(taxon_name)
         result.append((total_cost, program_name))
     return sorted(result)</code></pre>
@@ -318,7 +332,7 @@ of taxon names.</dd>
 <nav id="sidebar">
 <header>
 <a class="homelink" rel="home" title="Paroxython Home" href="index.html">
-<img src="resources/logo.png" alt="Paroxython logo">
+<img src="https://laowantong.github.io/paroxython/resources/logo.png" alt="Paroxython logo">
 </a>
 </header>
 <div class="gcse-search" style="height: 70px"
@@ -346,6 +360,7 @@ data-gaCategoryParameter="paroxython.assess_costs">
 <li>
 <h4><code><a title="paroxython.assess_costs.LearningCostAssessor" href="#paroxython.assess_costs.LearningCostAssessor">LearningCostAssessor</a></code></h4>
 <ul class="">
+<li><code><a title="paroxython.assess_costs.LearningCostAssessor.set_imparted_knowledge" href="#paroxython.assess_costs.LearningCostAssessor.set_imparted_knowledge">set_imparted_knowledge</a></code></li>
 <li><code><a title="paroxython.assess_costs.LearningCostAssessor.set_cost_assessment_strategy" href="#paroxython.assess_costs.LearningCostAssessor.set_cost_assessment_strategy">set_cost_assessment_strategy</a></code></li>
 <li><code><a title="paroxython.assess_costs.LearningCostAssessor.taxon_cost" href="#paroxython.assess_costs.LearningCostAssessor.taxon_cost">taxon_cost</a></code></li>
 <li><code><a title="paroxython.assess_costs.LearningCostAssessor.__call__" href="#paroxython.assess_costs.LearningCostAssessor.__call__">__call__</a></code></li>

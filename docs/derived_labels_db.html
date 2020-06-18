@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.8.1" />
 <title>paroxython.derived_labels_db API documentation</title>
-<meta name="description" content="" />
+<meta name="description" content="An in-memory database collecting the labels of a given program …" />
 <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
 <link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
@@ -26,14 +26,69 @@
 <h1 class="title">Module <code>paroxython.derived_labels_db</code></h1>
 </header>
 <section id="section-intro">
+<p>An in-memory database collecting the labels of a given program.</p>
+<h3 id="main-table">Main table</h3>
+<p>The database is not really relational. It merely consists in a table <code>t</code> where each row is a
+distinct occurrence of every label featured by a given program. Initially, <code>t</code> is populated with
+the labels found by the queries specified by a regular expression of <code>spec.md</code>.</p>
+<p>The SQL queries are then executed, and the resulting labels (known as <em>derived</em>) inserted into <code>t</code>
+as they are found.</p>
+<p>Note that the results of a given SQL query may themselves be required by a subsequent SQL query.</p>
+<h4 id="example">Example</h4>
+<p>The following simple SQL query of <code>spec.md</code> finds the loops of a program. The resulting label names
+(<em>e.g.</em>, <code>"loop:while"</code>) consist in a fixed prefix <code>"loop"</code> and a suffix denoting the category of
+the loop (either <code>"for"</code> or <code>"while"</code>).</p>
+<pre><code class="sql">SELECT &quot;loop&quot;,
+    name_prefix,
+    span,
+    path
+FROM t
+WHERE name_prefix IN (&quot;for&quot;, &quot;while&quot;)
+GROUP BY path
+</code></pre>
+<p>The execution of this query comes after the evaluation of all regular expressions, in particular
+those collecting the features <code>"for"</code> and <code>"while"</code>. It simply gathers them under the prefix
+<code>"loop"</code>, and qualifies them by their category.</p>
+<p>The resulting labels will later be used by other SQL queries to search for features such as
+<code>"loop_with_break"</code>, <code>"loop_with_late_exit"</code>, <code>"loop_with_else"</code>, and so on.</p>
+<h3 id="subtables">Subtables</h3>
+<p>For simplicity and performance reasons, a bunch of subtables are extracted on the fly from <code>t</code>.
+Actually, every time a query relies on a non-existing table named <code>t_PREFIX</code>, this table is
+dynamically created as the set of rows of <code>t</code> whose value on column <code>name_prefix</code> is <code>PREFIX</code>.</p>
+<h4 id="example_1">Example</h4>
+<p>The following SQL query of <code>spec.md</code> relies on the previous one to find the loops featuring a
+<code>break</code> statement. It is more complicated, since it suffixes <code>"loop_with_break"</code> with the span of
+the smallest enclosing loop. Anyway, it relies on the results of both the previous SQL query and a
+trivial regular expression matching the <code>break</code> statements.</p>
+<pre><code class="sql">SELECT &quot;loop_with_break&quot;,
+    l.name_suffix,
+    max(l.span_start) || &quot;-&quot; || min(l.span_end),
+    max(l.path)
+FROM t_loop l
+JOIN t_break b ON (b.path GLOB l.path || &quot;*-&quot;)
+GROUP BY b.rowid
+</code></pre>
+<p>Instead of referring the corresponding rows in <code>t</code> (which would complicate the query), two
+subtables restricted to them are referred, <code>t_loop</code> and <code>t_break</code>. For example, if a <code>t_loop</code>
+subtable does not exist yet, the system extracts it from <code>t</code> by executing:</p>
+<pre><code class="sql">CREATE TABLE t_loop AS
+SELECT *
+FROM t
+WHERE name_prefix = 'loop'
+</code></pre>
+<p>The newly created table is then available for all subsequent queries that may need it, which can
+significantly speed up their execution.</p>
+<h3 id="note">Note</h3>
+<p>Using views instead of tables turns out to be slightly slower. Also, for whatever mysterious
+reason, several queries produce an incorrect result.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/derived_labels_db.py#L0-L78" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/derived_labels_db.py#L0-L220" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">import sqlite3
 from collections import defaultdict
-from typing import Dict, Callable
+from typing import Set, Callable
 
 import regex  # type: ignore
 
@@ -53,52 +108,59 @@ class DB:
         &#34;span_end INTEGER&#34;,
         &#34;path TEXT&#34;,
     )
-
     def __init__(self):
         self.c = sqlite3.connect(&#34;:memory:&#34;)
-        self.c.create_function(&#34;regexp&#34;, 2, lambda rex, s: bool(regex.match(rex, s)))
+        self.c.create_function(&#34;regexp&#34;, narg=2, func=lambda rex, s: bool(regex.match(rex, s)))
+        # References:
+        # - https://www.sqlite.org/inmemorydb.html
+        # - https://www.sqlite.org/lang_expr.html#regexp
+        # - https://docs.python.org/3/library/sqlite3.html#sqlite3.Connection.create_function
 
     def create(
-        self, labels: Labels, creation_query: str = f&#34;CREATE TABLE t ({&#39;,&#39;.join(columns)})&#34;
+        self,
+        labels: Labels,
+        create_main_table: str = f&#34;CREATE TABLE t ({&#39;,&#39;.join(columns)})&#34;,  # never provided
     ) -&gt; None:
-        self.c.execute(creation_query)
+        self.c.execute(create_main_table)
         self.update(labels)
-        self.added_table_labels: Dict[LabelName, int] = defaultdict(int)
+        self.subtables: Set[LabelName] = set()
 
     def read(
         self,
         query: Query,
         prerequisites: Callable = regex.compile(r&#34;(?m)\b(?:FROM|JOIN) t_(\w+)&#34;).findall,
-        addition_query: str = &#34;CREATE TABLE t_{0} AS SELECT * FROM t WHERE name_prefix = &#39;{0}&#39;&#34;,
+        create_subtable: str = &#34;CREATE TABLE t_{0} AS SELECT * FROM t WHERE name_prefix = &#39;{0}&#39;&#34;,
     ) -&gt; Labels:
-        groups: LabelsSpans = defaultdict(list)
+        # Parse the prerequisites of the query, and create the corresponding subtables if needed.
         for label_name in prerequisites(query):
-            if label_name not in self.added_table_labels:
-                self.c.execute(addition_query.format(label_name))
-                self.c.commit()
-            self.added_table_labels[label_name] += 1
+            if label_name not in self.subtables:
+                self.c.execute(create_subtable.format(label_name))
+            self.subtables.add(label_name)
+        self.c.commit()
+        # Execute the query and return the resulting labels.
+        labels_spans: LabelsSpans = defaultdict(list)
         for (name_prefix, name_suffix, span_string, path) in self.c.execute(query):
             label_name = f&#34;{name_prefix}:{name_suffix}&#34; if name_suffix != &#34;&#34; else name_prefix
             span = span_string.split(&#34;-&#34;)
-            groups[label_name].append(Span(int(span[0]), int(span[-1]), path))
-        return [Label(*item) for item in groups.items()]
+            labels_spans[label_name].append(Span(int(span[0]), int(span[-1]), path))
+        return [Label(*label_spans) for label_spans in labels_spans.items()]
 
     def update(
         self,
         labels: Labels,
         update_query: str = f&#34;INSERT INTO t VALUES ({&#39;,&#39;.join(&#39;?&#39; * len(columns))})&#34;,
     ) -&gt; None:
-        values = []
+        rows = []
         for (name, spans) in labels:
             for span in spans:
-                (prefix, _, suffix) = name.partition(&#34;:&#34;)
+                (prefix, _, suffix) = name.partition(&#34;:&#34;)  # split on the first colon
                 span_string = couple_to_string(span)
-                values.append((name, prefix, suffix, span_string, span.start, span.end, span.path))
-        self.c.executemany(update_query, values)
+                rows.append((name, prefix, suffix, span_string, span.start, span.end, span.path))
+        self.c.executemany(update_query, rows)
 
     def delete(self) -&gt; None:
         self.c.execute(&#34;DROP TABLE t&#34;)
-        for label_name in self.added_table_labels:
+        for label_name in self.subtables:
             self.c.execute(f&#34;DROP TABLE t_{label_name}&#34;)
 
     def __str__(self) -&gt; str:  # pragma: no cover
@@ -129,7 +191,7 @@ class DB:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/derived_labels_db.py#L11-L79" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/derived_labels_db.py#L90-L221" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">class DB:
 
@@ -143,52 +205,59 @@ class DB:
         &#34;span_end INTEGER&#34;,
         &#34;path TEXT&#34;,
     )
-
     def __init__(self):
         self.c = sqlite3.connect(&#34;:memory:&#34;)
-        self.c.create_function(&#34;regexp&#34;, 2, lambda rex, s: bool(regex.match(rex, s)))
+        self.c.create_function(&#34;regexp&#34;, narg=2, func=lambda rex, s: bool(regex.match(rex, s)))
+        # References:
+        # - https://www.sqlite.org/inmemorydb.html
+        # - https://www.sqlite.org/lang_expr.html#regexp
+        # - https://docs.python.org/3/library/sqlite3.html#sqlite3.Connection.create_function
 
     def create(
-        self, labels: Labels, creation_query: str = f&#34;CREATE TABLE t ({&#39;,&#39;.join(columns)})&#34;
+        self,
+        labels: Labels,
+        create_main_table: str = f&#34;CREATE TABLE t ({&#39;,&#39;.join(columns)})&#34;,  # never provided
     ) -&gt; None:
-        self.c.execute(creation_query)
+        self.c.execute(create_main_table)
         self.update(labels)
-        self.added_table_labels: Dict[LabelName, int] = defaultdict(int)
+        self.subtables: Set[LabelName] = set()
 
     def read(
         self,
         query: Query,
         prerequisites: Callable = regex.compile(r&#34;(?m)\b(?:FROM|JOIN) t_(\w+)&#34;).findall,
-        addition_query: str = &#34;CREATE TABLE t_{0} AS SELECT * FROM t WHERE name_prefix = &#39;{0}&#39;&#34;,
+        create_subtable: str = &#34;CREATE TABLE t_{0} AS SELECT * FROM t WHERE name_prefix = &#39;{0}&#39;&#34;,
     ) -&gt; Labels:
-        groups: LabelsSpans = defaultdict(list)
+        # Parse the prerequisites of the query, and create the corresponding subtables if needed.
         for label_name in prerequisites(query):
-            if label_name not in self.added_table_labels:
-                self.c.execute(addition_query.format(label_name))
-                self.c.commit()
-            self.added_table_labels[label_name] += 1
+            if label_name not in self.subtables:
+                self.c.execute(create_subtable.format(label_name))
+            self.subtables.add(label_name)
+        self.c.commit()
+        # Execute the query and return the resulting labels.
+        labels_spans: LabelsSpans = defaultdict(list)
         for (name_prefix, name_suffix, span_string, path) in self.c.execute(query):
             label_name = f&#34;{name_prefix}:{name_suffix}&#34; if name_suffix != &#34;&#34; else name_prefix
             span = span_string.split(&#34;-&#34;)
-            groups[label_name].append(Span(int(span[0]), int(span[-1]), path))
-        return [Label(*item) for item in groups.items()]
+            labels_spans[label_name].append(Span(int(span[0]), int(span[-1]), path))
+        return [Label(*label_spans) for label_spans in labels_spans.items()]
 
     def update(
         self,
         labels: Labels,
         update_query: str = f&#34;INSERT INTO t VALUES ({&#39;,&#39;.join(&#39;?&#39; * len(columns))})&#34;,
     ) -&gt; None:
-        values = []
+        rows = []
         for (name, spans) in labels:
             for span in spans:
-                (prefix, _, suffix) = name.partition(&#34;:&#34;)
+                (prefix, _, suffix) = name.partition(&#34;:&#34;)  # split on the first colon
                 span_string = couple_to_string(span)
-                values.append((name, prefix, suffix, span_string, span.start, span.end, span.path))
-        self.c.executemany(update_query, values)
+                rows.append((name, prefix, suffix, span_string, span.start, span.end, span.path))
+        self.c.executemany(update_query, rows)
 
     def delete(self) -&gt; None:
         self.c.execute(&#34;DROP TABLE t&#34;)
-        for label_name in self.added_table_labels:
+        for label_name in self.subtables:
             self.c.execute(f&#34;DROP TABLE t_{label_name}&#34;)
 
     def __str__(self) -&gt; str:  # pragma: no cover
@@ -205,95 +274,220 @@ class DB:
 <dl>
 <dt id="paroxython.derived_labels_db.DB.columns"><code class="name">var <span class="ident">columns</span></code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>The structure of the main table <code>t</code>, consisting of the following columns:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Column</th>
+<th align="left">Type</th>
+<th align="left">Description and example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>rowid</code></td>
+<td align="left"><code>INTEGER</code></td>
+<td align="left">Primary key (automatically generated)</td>
+</tr>
+<tr>
+<td align="left"><code>name</code></td>
+<td align="left"><code>TEXT</code></td>
+<td align="left">Complete name of the label, <em>e.g.</em></td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"><code>"loop_with_early_exit:for:break"</code></td>
+</tr>
+<tr>
+<td align="left"><code>name_prefix</code></td>
+<td align="left"><code>TEXT</code></td>
+<td align="left">Its prefix (part before the first colon, here</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"><code>"loop_with_early_exit"</code></td>
+</tr>
+<tr>
+<td align="left"><code>name_suffix</code></td>
+<td align="left"><code>TEXT</code></td>
+<td align="left">Its suffix (may contain one or more colons),</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">here <code>"for:break"</code></td>
+</tr>
+<tr>
+<td align="left"><code>span</code></td>
+<td align="left"><code>TEXT</code></td>
+<td align="left">Numbers of the first and last lines of the</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">feature as a dash-separated string, <em>e.g.</em> <code>"2-8"</code></td>
+</tr>
+<tr>
+<td align="left"><code>span_start</code></td>
+<td align="left"><code>INTEGER</code></td>
+<td align="left">Its first line number, here <code>2</code></td>
+</tr>
+<tr>
+<td align="left"><code>span_end</code></td>
+<td align="left"><code>INTEGER</code></td>
+<td align="left">Its first line number, here <code>8</code></td>
+</tr>
+<tr>
+<td align="left"><code>path</code></td>
+<td align="left"><code>TEXT</code></td>
+<td align="left">String encoding the beginning of the feature</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">as its path from the root of the AST, <em>e.g.</em></td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"><code>"3-5-3-0-1-2-2-1-"</code></td>
+</tr>
+</tbody>
+</table></div>
 </dd>
 </dl>
 <h3>Methods</h3>
 <dl>
 <dt id="paroxython.derived_labels_db.DB.create"><code class="name flex">
-<span>def <span class="ident">create</span></span>(<span>self, labels: List[Label], creation_query: str = 'CREATE TABLE t (name TEXT,name_prefix TEXT,name_suffix TEXT,span TEXT,span_start INTEGER,span_end INTEGER,path TEXT)') ‑> NoneType</span>
+<span>def <span class="ident">create</span></span>(<span>self, labels: List[Label], create_main_table: str = 'CREATE TABLE t (name TEXT,name_prefix TEXT,name_suffix TEXT,span TEXT,span_start INTEGER,span_end INTEGER,path TEXT)') ‑> NoneType</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Create the main table and populate it with regex-specified labels.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>labels</code></strong> :&ensp;<code>Labels</code></dt>
+<dd>The label names and spans featured by a certain program. Only those
+specified by a regular expression in <code>spec.md</code> are included. It is the very purpose
+of this module to add the remaining ones, specified by a SQL query.</dd>
+<dt><strong><code>create_main_table</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>The SQL query creating the table. Not to be
+explicitly provided. Defaults to <code>f"CREATE TABLE t ({','.join(columns)})"</code>.</dd>
+</dl></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/derived_labels_db.py#L28-L33" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/derived_labels_db.py#L130-L146" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def create(
-    self, labels: Labels, creation_query: str = f&#34;CREATE TABLE t ({&#39;,&#39;.join(columns)})&#34;
+    self,
+    labels: Labels,
+    create_main_table: str = f&#34;CREATE TABLE t ({&#39;,&#39;.join(columns)})&#34;,  # never provided
 ) -&gt; None:
-    self.c.execute(creation_query)
+    self.c.execute(create_main_table)
     self.update(labels)
-    self.added_table_labels: Dict[LabelName, int] = defaultdict(int)</code></pre>
+    self.subtables: Set[LabelName] = set()</code></pre>
 </details>
 </dd>
 <dt id="paroxython.derived_labels_db.DB.read"><code class="name flex">
-<span>def <span class="ident">read</span></span>(<span>self, query: Query, prerequisites: Callable = &lt;built-in method findall of _regex.Pattern object&gt;, addition_query: str = "CREATE TABLE t_{0} AS SELECT * FROM t WHERE name_prefix = '{0}'") ‑> List[Label]</span>
+<span>def <span class="ident">read</span></span>(<span>self, query: Query, prerequisites: Callable = &lt;built-in method findall of _regex.Pattern object&gt;, create_subtable: str = "CREATE TABLE t_{0} AS SELECT * FROM t WHERE name_prefix = '{0}'") ‑> List[Label]</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Apply the given SQL query to the currently known labels, and returns the new labels.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>query</code></strong> :&ensp;<code>Query</code></dt>
+<dd>The SQL specification of a certain feature, as defined in <code>spec.md</code>.</dd>
+<dt><strong><code>prerequisites</code></strong> :&ensp;<code>Callable</code>, optional</dt>
+<dd>A function taking an SQL query, and returning the
+table names referred to in the FROM clause. Not to be explicitly provided.
+Defaults to <code>regex.compile(r"(?m)\b(?:FROM|JOIN) t_(\w+)").findall</code>.</dd>
+<dt><strong><code>create_subtable</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>The SQL query creating a subtable from a label prefix.
+Not to be explicitly provided. Defaults to
+<code>"CREATE TABLE t_{0} AS SELECT * FROM t WHERE name_prefix = '{0}'"</code>.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>Labels</code></dt>
+<dd>The additional labels found by the given SQL query.</dd>
+</dl>
+<h2 id="note">Note</h2>
+<p>As a side-effect, create in the database any non-existing subtable of <code>t</code> referred to
+as a prerequisite.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/derived_labels_db.py#L35-L51" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/derived_labels_db.py#L148-L184" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def read(
     self,
     query: Query,
     prerequisites: Callable = regex.compile(r&#34;(?m)\b(?:FROM|JOIN) t_(\w+)&#34;).findall,
-    addition_query: str = &#34;CREATE TABLE t_{0} AS SELECT * FROM t WHERE name_prefix = &#39;{0}&#39;&#34;,
+    create_subtable: str = &#34;CREATE TABLE t_{0} AS SELECT * FROM t WHERE name_prefix = &#39;{0}&#39;&#34;,
 ) -&gt; Labels:
-    groups: LabelsSpans = defaultdict(list)
+    # Parse the prerequisites of the query, and create the corresponding subtables if needed.
     for label_name in prerequisites(query):
-        if label_name not in self.added_table_labels:
-            self.c.execute(addition_query.format(label_name))
-            self.c.commit()
-        self.added_table_labels[label_name] += 1
+        if label_name not in self.subtables:
+            self.c.execute(create_subtable.format(label_name))
+        self.subtables.add(label_name)
+    self.c.commit()
+    # Execute the query and return the resulting labels.
+    labels_spans: LabelsSpans = defaultdict(list)
     for (name_prefix, name_suffix, span_string, path) in self.c.execute(query):
         label_name = f&#34;{name_prefix}:{name_suffix}&#34; if name_suffix != &#34;&#34; else name_prefix
         span = span_string.split(&#34;-&#34;)
-        groups[label_name].append(Span(int(span[0]), int(span[-1]), path))
-    return [Label(*item) for item in groups.items()]</code></pre>
+        labels_spans[label_name].append(Span(int(span[0]), int(span[-1]), path))
+    return [Label(*label_spans) for label_spans in labels_spans.items()]</code></pre>
 </details>
 </dd>
 <dt id="paroxython.derived_labels_db.DB.update"><code class="name flex">
 <span>def <span class="ident">update</span></span>(<span>self, labels: List[Label], update_query: str = 'INSERT INTO t VALUES (?,?,?,?,?,?,?)') ‑> NoneType</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Insert a set of labels into the main table <code>t</code>.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>labels</code></strong> :&ensp;<code>Labels</code></dt>
+<dd>The labels to be inserted.</dd>
+<dt><strong><code>update_query</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>The SQL query inserting a row in <code>t</code>. Not to be
+explicitly provided. Defaults to <code>f"INSERT INTO t VALUES ({','.join('?' *
+len(columns))})"</code>.</dd>
+</dl></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/derived_labels_db.py#L53-L64" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/derived_labels_db.py#L186-L205" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def update(
     self,
     labels: Labels,
     update_query: str = f&#34;INSERT INTO t VALUES ({&#39;,&#39;.join(&#39;?&#39; * len(columns))})&#34;,
 ) -&gt; None:
-    values = []
+    rows = []
     for (name, spans) in labels:
         for span in spans:
-            (prefix, _, suffix) = name.partition(&#34;:&#34;)
+            (prefix, _, suffix) = name.partition(&#34;:&#34;)  # split on the first colon
             span_string = couple_to_string(span)
-            values.append((name, prefix, suffix, span_string, span.start, span.end, span.path))
-    self.c.executemany(update_query, values)</code></pre>
+            rows.append((name, prefix, suffix, span_string, span.start, span.end, span.path))
+    self.c.executemany(update_query, rows)</code></pre>
 </details>
 </dd>
 <dt id="paroxython.derived_labels_db.DB.delete"><code class="name flex">
 <span>def <span class="ident">delete</span></span>(<span>self) ‑> NoneType</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Empty the database after having executed all the SQL queries.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/derived_labels_db.py#L66-L69" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/derived_labels_db.py#L207-L211" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def delete(self) -&gt; None:
     self.c.execute(&#34;DROP TABLE t&#34;)
-    for label_name in self.added_table_labels:
+    for label_name in self.subtables:
         self.c.execute(f&#34;DROP TABLE t_{label_name}&#34;)</code></pre>
 </details>
 </dd>
@@ -305,7 +499,7 @@ class DB:
 <nav id="sidebar">
 <header>
 <a class="homelink" rel="home" title="Paroxython Home" href="index.html">
-<img src="resources/logo.png" alt="Paroxython logo">
+<img src="https://laowantong.github.io/paroxython/resources/logo.png" alt="Paroxython logo">
 </a>
 </header>
 <div class="gcse-search" style="height: 70px"
@@ -314,7 +508,17 @@ data-gaCategoryParameter="paroxython.derived_labels_db">
 </div>
 <h1>Index</h1>
 <div class="toc">
-<ul></ul>
+<ul>
+<li><a href="#main-table">Main table</a><ul>
+<li><a href="#example">Example</a></li>
+</ul>
+</li>
+<li><a href="#subtables">Subtables</a><ul>
+<li><a href="#example_1">Example</a></li>
+</ul>
+</li>
+<li><a href="#note">Note</a></li>
+</ul>
 </div>
 <ul id="index">
 <li><h3>Super-module</h3>

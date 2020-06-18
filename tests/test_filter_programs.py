@@ -13,7 +13,7 @@ db = json.loads(Path("examples/dummy/programs_db.json").read_text())
 def test_init():
     dbf = ProgramFilter(db)
     print(dbf.selected_programs)
-    assert dbf.selected_programs.keys() == db["programs"].keys()
+    assert dbf.selected_programs == db["programs"].keys()
     assert not dbf.imparted_knowledge
 
 
@@ -90,7 +90,7 @@ def test_exclude_programs():
     programs = {"prg1.py", "prg2.py", "non_existing_program"}
     dbf.exclude_programs(programs, follow=True)
     print(sorted(dbf.selected_programs))
-    assert dbf.selected_programs.keys() == set(db["programs"]) - set(programs)
+    assert dbf.selected_programs == set(db["programs"]) - set(programs)
 
 
 def test_include_programs():
@@ -98,7 +98,7 @@ def test_include_programs():
     programs = {"prg1.py", "prg2.py", "non_existing_program"}
     dbf.include_programs(programs)
     print(sorted(dbf.selected_programs))
-    assert dbf.selected_programs.keys() == {"prg1.py", "prg2.py"}
+    assert dbf.selected_programs == {"prg1.py", "prg2.py"}
 
 
 if __name__ == "__main__":

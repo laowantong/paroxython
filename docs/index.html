@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.8.1" />
 <title>paroxython API documentation</title>
-<meta name="description" content="Paroxython is a command-line tool which finds and tags algorithmic features (such as assignments, nested loops, tail-recursive functions, etc.) in a …" />
+<meta name="description" content="Paroxython is a command-line tool which finds and tags algorithmic features (such as assignments, nested loops, tail-recursive functions, etc.) in a." />
 <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
 <link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
@@ -26,8 +26,8 @@
 <h1 class="title">Package <code>paroxython</code></h1>
 </header>
 <section id="section-intro">
-<p>Paroxython is a command-line tool which finds and tags algorithmic features (such as assignments, nested loops, tail-recursive functions, etc.) in a collection of small Python programs, typically gathered for educational purposes (e.g., examples, patterns, exercise corrections).</p>
-<p>Each tag consists in a free-form label associated with its spanning lines. These labels are then mapped onto a knowledge taxonomy designed by the teacher with basic order constraints in mind (e.g., the fact that the introduction of the concept of early exit must come after that of loop, which itself requires that of control flow, is expressed with the following taxon: <code>flow/loop/exit/early</code>).</p>
+<p>Paroxython is a command-line tool which finds and tags algorithmic features (such as assignments, nested loops, tail-recursive functions, etc.) in a collection of small Python programs, typically gathered for educational purposes (<em>e.g.</em>, examples, patterns, exercise corrections).</p>
+<p>Each tag consists in a free-form label associated with its spanning lines. These labels are then mapped onto a knowledge taxonomy designed by the teacher with basic order constraints in mind (<em>e.g.</em>, the fact that the introduction of the concept of early exit must come after that of loop, which itself requires that of control flow, is expressed with the following taxon: <code>flow/loop/exit/early</code>).</p>
 <p>Source codes, labels and taxons are stored in a database, which can finally be filtered through a pipeline of inclusion, exclusion and impartment commands on programs or taxons.</p>
 <h1 id="installation-and-test-drive">Installation and test-drive</h1>
 <pre><code>pip install paroxython
@@ -149,7 +149,7 @@ considered as zero when they are encountered again in the future.</p>
 <pre><code class="python">&gt;&gt;&gt; [
 ...     {
 ...         &quot;operation&quot;: &quot;impart&quot;,
-...         &quot;source&quot;: [
+...         &quot;data&quot;: [
 ...             &quot;hello_world.py&quot;,
 ...             &quot;wheat_and_chessboard.py&quot;,
 ...             &quot;euler_005_smallest_multiple.py&quot;,
@@ -165,13 +165,13 @@ by your new students.</p>
 <pre><code class="python">&gt;&gt;&gt; [
 ...     {
 ...         &quot;operation&quot;: &quot;impart&quot;,
-...         &quot;source&quot;: &quot;find CS_101 -path '*.py'&quot;,
+...         &quot;data&quot;: &quot;find CS_101 -path '*.py'&quot;,
 ...     },
 ... ]
 </code></pre>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>As you can see, rather than maintaining a <strong>list</strong> of programs or concepts in the <code>"source"</code>
+<p>As you can see, rather than maintaining a <strong>list</strong> of programs or concepts in the <code>"data"</code>
 field, you may provide a <strong>string</strong>. Paroxython will interpret it as a shell command, and
 expect it to print on <code>stdout</code> the required list of items (programs or taxons), one per line.</p>
 </div>
@@ -181,7 +181,7 @@ interesting enough, or that could get you kicked out of your college, etc.</p>
 <pre><code class="python">&gt;&gt;&gt; [
 ...     {
 ...         &quot;operation&quot;: &quot;exclude&quot;,
-...         &quot;source&quot;: [
+...         &quot;data&quot;: [
 ...             &quot;fizzbuzz.py&quot;,
 ...             &quot;alpha_go.py&quot;,
 ...             &quot;hello_world_of_pain.py&quot;,
@@ -197,7 +197,7 @@ recursivity (<code>subroutine/recursive</code>), dictionary (<code>type/non_sequ
 <pre><code class="python">&gt;&gt;&gt; [
 ...     {
 ...         &quot;operation&quot;: &quot;exclude&quot;,
-...         &quot;source&quot;: [
+...         &quot;data&quot;: [
 ...             &quot;subroutine/recursive&quot;,
 ...             &quot;type/non_sequence&quot;,
 ...         ],
@@ -206,7 +206,7 @@ recursivity (<code>subroutine/recursive</code>), dictionary (<code>type/non_sequ
 </code></pre>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Paroxython relies on the last three characters of a <code>"source"</code> item to decide whether it is a
+<p>Paroxython relies on the last three characters of a <code>"data"</code> item to decide whether it is a
 Python program (ending with <code>".py"</code>) or a taxon (like here).</p>
 </div>
 <div class="admonition tip">
@@ -222,7 +222,7 @@ the same time, but at least one. Any other program will be rejected.</p>
 <pre><code class="python">&gt;&gt;&gt; [
 ...     {
 ...         &quot;operation&quot;: &quot;include&quot;,
-...         &quot;source&quot;: [
+...         &quot;data&quot;: [
 ...             &quot;flow/conditional&quot;,
 ...             &quot;operator/ternary&quot;,
 ...         ],
@@ -258,11 +258,11 @@ parent of the directory containing the programs of your personal database.</li>
 <pre><code class="python">&gt;&gt;&gt; [
 ...     {
 ...         &quot;operation&quot;: &quot;impart&quot;,
-...         &quot;source&quot;: &quot;python helpers/parse_syllabus.py {base_path}/timeline.txt&quot;,
+...         &quot;data&quot;: &quot;python helpers/parse_syllabus.py {base_path}/timeline.txt&quot;,
 ...     },
 ...     {
 ...         &quot;operation&quot;: &quot;exclude&quot;,
-...         &quot;source&quot;: [
+...         &quot;data&quot;: [
 ...             &quot;foo.py&quot;,
 ...             &quot;bar.py&quot;,
 ...             # &quot;buzz.py&quot;,
@@ -270,7 +270,7 @@ parent of the directory containing the programs of your personal database.</li>
 ...     },
 ...     {
 ...         &quot;operation&quot;: &quot;include&quot;,
-...         &quot;source&quot;: [
+...         &quot;data&quot;: [
 ...             &quot;pattern/elements/accumulate&quot;,
 ...             &quot;topic/game&quot;,
 ...             &quot;type/sequence/list&quot;,
@@ -284,57 +284,341 @@ parent of the directory containing the programs of your personal database.</li>
 Python <strong>expression</strong>. As such, it offers several amenities you surely know and love: comments,
 trailing commas, r-strings, etc.</p>
 </div>
-<p>This is the end of our pipeline tutorial. Read on for more advanced features (negations, regular
-expressions, semantic triples, span algebra) in the next section (coming soon).</p>
-<h2 id="deep-in-the-pipeline">Deep in the pipeline</h2>
-<h3 id="how-the-recommendation-system-works">How the recommendation system works</h3>
-<h4 id="evolving-the-selected-programs">Evolving the selected programs</h4>
-<h4 id="evolving-the-imparted-knowledge">Evolving the imparted knowledge</h4>
-<h3 id="regular-expression-patterns">Regular expression patterns</h3>
-<h3 id="semantic-triples">Semantic triples</h3>
-<h4 id="span-algebra">Span algebra</h4>
-<p>Allen's interval algebra (1983) defines 13 basic operators which capture all possible relations between two temporal intervals.</p>
+<p>This is the end of our pipeline tutorial. Read on for more advanced features (regular
+expressions, span algebra, semantic triples, negations) in the <a href="#deep-in-the-pipeline">next section</a>.</p>
+<h1 id="deep-in-the-pipeline">Deep in the pipeline</h1>
+<p>This part describes in some details how the recommendation system works. It assumes you've already read the <a href="#getting-recommendations">tutorial on recommendations</a>. First of all, let us recall the example of the pipeline we gave at the end.</p>
+<pre><code class="python">&gt;&gt;&gt; [
+...     {
+...         &quot;operation&quot;: &quot;impart&quot;,
+...         &quot;data&quot;: &quot;python helpers/parse_syllabus.py {base_path}/timeline.txt&quot;,
+...     },
+...     {
+...         &quot;operation&quot;: &quot;exclude&quot;,
+...         &quot;data&quot;: [
+...             &quot;foo.py&quot;,
+...             &quot;bar.py&quot;,
+...             # &quot;buzz.py&quot;,
+...         ],
+...     },
+...     {
+...         &quot;operation&quot;: &quot;include&quot;,
+...         &quot;data&quot;: [
+...             &quot;pattern/elements/accumulate&quot;,
+...             &quot;topic/game&quot;,
+...             &quot;type/sequence/list&quot;,
+...         ],
+...     },
+... ]
+</code></pre>
+<h2 id="regular-expression-patterns">Regular expression patterns</h2>
+<p>The first thing to clarify is that the strings which constitute the <code>data</code> lists are not simple names, but “descriptions” of names. These descriptions, or <strong>patterns</strong>, are written in the language of regular expressions, and more precisely in the dialect implemented by the third-party module <a href="https://pypi.org/project/regex/">regex</a><sup id="fnref:regex-credits"><a class="footnote-ref" href="#fn:regex-credits" rel="footnote">1</a></sup>.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If you don't know how to write regular expressions, the good news is that you don't have to worry. When they do not contain certain special characters, they are self-descriptive. That means, for instance, that the string <code>"type/sequence/list"</code> happens to be a regular expression which precisely describes (or ”matches”) the string <code>"type/sequence/list"</code>. This is the case for all strings that are only made up of so-called <em>literal</em> characters.</p>
+<p>As a matter of fact, all the characters that can appear in a taxon are literal. We advise you to avoid non-literal characters in your program names as well. What are they? Essentially: <code>.^$*+?{}\[]</code>. Depending on your operating system, some are already illegal in filenames anyway. To tell the truth, the first one (the dot) is an integral part of most filenames, as an extension separator. However, it turns out that it basically means “any character”, which of course includes the dot itself. So, the regular expression <code>"hello_world.py"</code> matches the filename <code>"hello_world.py"</code>, and the fact that it matches <code>"hello_world/py"</code> and <code>"hello_worldapy"</code> shouldn't be a real problem. In any case, you can always prefix (or <em>escape</em>) a non-literal character with a backslash <code>"\"</code> to make it literal (here, <code>"hello_world\.py"</code>): that's all you'll need to know about regular expressions.</p>
+</div>
+<p>The second thing to clarify is that a given datum will match any string <strong>starting</strong> with it. Thus, <code>"type/sequence/list"</code> will match not only <code>"type/sequence/list"</code>, but <code>"type/sequence/list/empty"</code> and <code>"type/sequence/list/supercalifragilisticexpialidocious"</code> too. The same applies to program names. For example, in our personal database, all programs from the Euler project start with <code>"euler_"</code>. The datum <code>"euler_"</code> will then match all of them.</p>
+<p>In terms of regular expressions, that means that, under the hood, Paroxython invokes <a href="https://docs.python.org/3/library/re.html#search-vs-match"><code>match()</code> instead of <code>search()</code></a>. In the rare cases where you want to restrict the matching to the datum itself, simply suffix it with a dollar sign, i.e., <code>"type/sequence/list$"</code>.</p>
+<h2 id="execution-of-a-pipeline">Execution of a pipeline</h2>
+<p>A pipeline is a set (or list, but the order is not important) of commands which apply sequentially to a database of programs. It returns:</p>
+<ul>
+<li>a list of recommended programs;</li>
+<li>an estimation of the learning cost of each concept (i.e., taxon) they implement.</li>
+</ul>
+<p>The set of commands constitutes a pipeline that evolves both:</p>
+<ul>
+<li>a selection of programs (initially all those in the database);</li>
+<li>a body of imparted knowledge (initially empty).</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>During this process, the program selection can never increase, and the imparted knowledge can never decrease.</p>
+</div>
+<p>A command consists of:</p>
+<ul>
+<li>an operation among <code>"include"</code>, <code>"exclude"</code> and <code>"impart"</code>;</li>
+<li>the data to which it applies, each datum being:<ul>
+<li>either a program pattern,</li>
+<li>or a taxon pattern,</li>
+<li>or a relationship between two taxon patterns (more on this in the <a href="#semantic-triples">Semantic triples</a> section).</li>
+</ul>
+</li>
+</ul>
+<p>The application of a command to a datum is done in three stages:</p>
+<ol>
+<li>An auxiliary set of programs is calculated.</li>
+<li>The set of recommended programs (the <strong>selection</strong>) is updated.</li>
+<li>A new set of taxons may be “learned”, i.e., added to the body of imparted knowledge.</li>
+</ol>
+<p>Note that each stage depends on both the operation and the nature of the datum to which it applies. Let us detail every possible case:</p>
+<h3 id="include-command"><code>"include"</code> command</h3>
+<p>Its purpose is to keep only those selected programs that satisfy a given condition.</p>
+<ol>
+<li>The auxiliary set contains any program such that:<ul>
+<li>either its name matches the given pattern,</li>
+<li>or its source code features the given taxon or relationship.</li>
+</ul>
+</li>
+<li>The selection is then restricted to its <strong>intersection</strong> with the auxiliary set.</li>
+<li>The imparted knowledge is unchanged.</li>
+</ol>
+<h3 id="exclude-command"><code>"exclude"</code> command</h3>
+<p>Its purpose is to filter out of the selection the programs which satisfy a given condition.</p>
+<ol>
+<li>The same auxiliary set of programs as above (<code>"include"</code>) is calculated, but further extended to whatever program imports (either directly or indirectly) at least one of its elements. Indeed, when the teacher wants to exclude a certain program, any program that requires it should be excluded as well.</li>
+<li>The selection is then restricted to its <strong>difference</strong> with the auxiliary set.</li>
+<li>The imparted knowledge is unchanged.</li>
+</ol>
+<h3 id="impart-command"><code>"impart"</code> command</h3>
+<p>Its main purpose is to track the acquisition of new knowledge. However, if this knowledge is provided by a given set of programs, there is no more need to keep them in the selection of recommended programs.</p>
+<ol>
+<li>The auxiliary set contains all programs whose name matches the given pattern, plus those which import (either directly or indirectly) at least one of them. In other words, it is the same as above (<code>"exclude"</code>), but only in the case where the input is a program pattern. In all other cases, this auxiliary set will be empty.</li>
+<li>The selection is then restricted to its <strong>difference</strong> with the auxiliary set (same as above for <code>"exclude"</code>).</li>
+<li>There are three cases:<ol>
+<li>If the input is a program pattern, all the taxons featured in a program whose name matches this pattern are added to the body of imparted knowledge.</li>
+<li>If the input is a taxon pattern, all the taxons matching this pattern are added to the body of imparted knowledge.</li>
+<li>Otherwise, the body of imparted knowledge is unchanged.</li>
+</ol>
+</li>
+</ol>
+<h2 id="semantic-triples">Semantic triples</h2>
+<h3 id="span-algebra">Span algebra</h3>
+<p>Being given a program <span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span> of <span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span> lines, any couple <span><span class="MathJax_Preview">(i_1, i_2) </span><script type="math/tex">(i_1, i_2) </script></span> of line numbers such that <span><span class="MathJax_Preview">1 \leq i_1 \leq i_2 \leq n</span><script type="math/tex">1 \leq i_1 \leq i_2 \leq n</script></span> represents a <strong>span</strong> of <span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span>. When Paroxython finds a taxon <span><span class="MathJax_Preview">t</span><script type="math/tex">t</script></span> in <span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span>, it doesn't just say whether <span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span> features <span><span class="MathJax_Preview">t</span><script type="math/tex">t</script></span> or not: it returns the list of spans where <span><span class="MathJax_Preview">t</span><script type="math/tex">t</script></span> occurs.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Any taxon starting with <code>metadata</code> is considered by convention to span the entire program.</p>
+</div>
+<p>It is sometimes interesting to know how the spans of two taxons of the same program are located relatively to each other.</p>
+<ul>
+<li>For instance, a <code>print</code> statement whose span is inside the span of a function indicates that this function has a side-effect.</li>
+<li>A less trivial application stems from the fact that our taxonomy is multi-dimensional: each algorithmic feature can be associated with several taxons at the same time, characterizing it it along several facets, or dimensions. For instance, the taxons <code>flow/loop</code> and <code>flow/loop/while</code> describe the category of a loop; whereas the taxons <code>flow/loop/exit/early</code> and <code>flow/loop/exit/late</code> describe its exit behavior. These dimensions are independent and, although it is entirely possible to do so, our default taxonomy does not list the results of the cross-product (i.e., <code>flow/loop/exit/early</code>, <code>flow/loop/exit/late</code>, <code>flow/loop/while/exit/early</code> and <code>flow/loop/while/exit/late</code>). Querying an hypothetical taxon <code>flow/loop/exit/early</code> (or <code>flow/loop/exit/early/for</code>, by the way) comes down to querying the taxons <code>flow/loop</code> spanning the same lines as <code>flow/loop/exit/early</code>.</li>
+</ul>
+<p>To express a relation <span><span class="MathJax_Preview">\mathfrak{R}</span><script type="math/tex">\mathfrak{R}</script></span> between the spans of two taxons, we start from the algebra devised in 1983 by James F. Allen in his seminal paper (<a href="http://cse.unl.edu/~choueiry/Documents/Allen-CACM1983.pdf">PDF</a>) about temporal intervals<sup id="fnref:Allen1983"><a class="footnote-ref" href="#fn:Allen1983" rel="footnote">2</a></sup>. The so-called Allen's interval algebra defines 13 basic operators which capture all possible relations between two intervals <span><span class="MathJax_Preview">X=(x_1, x_2)</span><script type="math/tex">X=(x_1, x_2)</script></span> and <span><span class="MathJax_Preview">Y=(y_1, y_2)</span><script type="math/tex">Y=(y_1, y_2)</script></span>. The table below uses his terminology:</p>
 <table>
 <thead>
 <tr>
-<th><span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span> &nbsp; <code>......#####.........</code> &nbsp;</th>
-<th></th>
+<th align="center">Examples</th>
+<th align="center"><span><span class="MathJax_Preview">\mathfrak{R}</span><script type="math/tex">\mathfrak{R}</script></span> on endpoints</th>
+<th align="center"><span><span class="MathJax_Preview">X \mathbin{\mathfrak{R}} Y</span><script type="math/tex">X \mathbin{\mathfrak{R}} Y</script></span></th>
+<th align="center"><span><span class="MathJax_Preview">Y \mathbin{\mathfrak{R}} X</span><script type="math/tex">Y \mathbin{\mathfrak{R}} X</script></span></th>
+<th align="center">Keys</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><span><span class="MathJax_Preview">y</span><script type="math/tex">y</script></span> &nbsp; <code>......#####.........</code> &nbsp;</td>
-<td>&nbsp; <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span> is <strong>equal</strong> to <span><span class="MathJax_Preview">y</span><script type="math/tex">y</script></span></td>
+<td align="center"><code>......XXXXX.........</code> &nbsp;</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
 </tr>
 <tr>
-<td><span><span class="MathJax_Preview">y</span><script type="math/tex">y</script></span> &nbsp; <code>.............#####..</code> &nbsp;</td>
-<td>&nbsp; <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span> takes place <strong>before</strong> <span><span class="MathJax_Preview">y</span><script type="math/tex">y</script></span></td>
+<td align="center"><code>......YYYYY.........</code> &nbsp;</td>
+<td align="center"><span><span class="MathJax_Preview">x_1 = y_1 \leq x_2 = y_2</span><script type="math/tex">x_1 = y_1 \leq x_2 = y_2</script></span>
+&nbsp;</td>
+<td align="center"><span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span> <code>"equals"</code> <span><span class="MathJax_Preview">Y</span><script type="math/tex">Y</script></span>
+&nbsp;</td>
+<td align="center"><span><span class="MathJax_Preview">Y</span><script type="math/tex">Y</script></span> <code>"equals"</code> <span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span>
+&nbsp;</td>
+<td align="center"><code>"x=y≤x=y"</code></td>
 </tr>
 <tr>
-<td><span><span class="MathJax_Preview">y</span><script type="math/tex">y</script></span> &nbsp; <code>...........#####....</code> &nbsp;</td>
-<td>&nbsp; <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span> <strong>meets</strong> <span><span class="MathJax_Preview">y</span><script type="math/tex">y</script></span></td>
+<td align="center"><code>......YYYYYYYYY.....</code> &nbsp;</td>
+<td align="center"><span><span class="MathJax_Preview">x_1 = y_1 \leq x_2 \leq y_2</span><script type="math/tex">x_1 = y_1 \leq x_2 \leq y_2</script></span>
+&nbsp;</td>
+<td align="center"><span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span> <code>"starts"</code> <span><span class="MathJax_Preview">Y</span><script type="math/tex">Y</script></span>
+&nbsp;</td>
+<td align="center"><span><span class="MathJax_Preview">Y</span><script type="math/tex">Y</script></span> <code>"started by"</code> <span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span>
+&nbsp;</td>
+<td align="center"><code>"x=y≤x≤y"</code></td>
 </tr>
 <tr>
-<td><span><span class="MathJax_Preview">y</span><script type="math/tex">y</script></span> &nbsp; <code>.........#####......</code> &nbsp;</td>
-<td>&nbsp; <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span> <strong>overlaps</strong> with <span><span class="MathJax_Preview">y</span><script type="math/tex">y</script></span></td>
+<td align="center"><code>....YYYYYYYYY.......</code> &nbsp;</td>
+<td align="center"><span><span class="MathJax_Preview">y_1 \leq x_1 \leq x_2 \leq y_2</span><script type="math/tex">y_1 \leq x_1 \leq x_2 \leq y_2</script></span> &nbsp;</td>
+<td align="center"><span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span> <code>"during"</code> <span><span class="MathJax_Preview">Y</span><script type="math/tex">Y</script></span>
+&nbsp;</td>
+<td align="center"><span><span class="MathJax_Preview">Y</span><script type="math/tex">Y</script></span> <code>"contains"</code> <span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span>
+&nbsp;</td>
+<td align="center"><code>"y≤x≤x≤y"</code></td>
 </tr>
 <tr>
-<td><span><span class="MathJax_Preview">y</span><script type="math/tex">y</script></span> &nbsp; <code>......########......</code> &nbsp;</td>
-<td>&nbsp; <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span> <strong>starts</strong> <span><span class="MathJax_Preview">y</span><script type="math/tex">y</script></span></td>
+<td align="center"><code>..YYYYYYYYY.........</code> &nbsp;</td>
+<td align="center"><span><span class="MathJax_Preview">y_1 \leq x_1 \leq x_2 = y_2</span><script type="math/tex">y_1 \leq x_1 \leq x_2 = y_2</script></span>
+&nbsp;</td>
+<td align="center"><span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span> <code>"finishes"</code> <span><span class="MathJax_Preview">Y</span><script type="math/tex">Y</script></span>
+&nbsp;</td>
+<td align="center"><span><span class="MathJax_Preview">Y</span><script type="math/tex">Y</script></span> <code>"finished by"</code> <span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span>
+&nbsp;</td>
+<td align="center"><code>"y≤x≤x=y"</code></td>
 </tr>
 <tr>
-<td><span><span class="MathJax_Preview">y</span><script type="math/tex">y</script></span> &nbsp; <code>....##########......</code> &nbsp;</td>
-<td>&nbsp; <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span> <strong>during</strong> <span><span class="MathJax_Preview">y</span><script type="math/tex">y</script></span></td>
+<td align="center"><code>......|...|..YYYYY..</code> &nbsp;</td>
+<td align="center"><span><span class="MathJax_Preview">x_1 \leq x_2 \leq y_1 \leq y_2</span><script type="math/tex">x_1 \leq x_2 \leq y_1 \leq y_2</script></span> &nbsp;</td>
+<td align="center"><span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span> <code>"before"</code> <span><span class="MathJax_Preview">Y</span><script type="math/tex">Y</script></span>
+&nbsp;</td>
+<td align="center"><span><span class="MathJax_Preview">Y</span><script type="math/tex">Y</script></span> <code>"after"</code> <span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span>
+&nbsp;</td>
+<td align="center"><code>"x≤x≤y≤y"</code></td>
 </tr>
 <tr>
-<td><span><span class="MathJax_Preview">y</span><script type="math/tex">y</script></span> &nbsp; <code>...#########........</code> &nbsp;</td>
-<td>&nbsp; <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span> <strong>finishes</strong> <span><span class="MathJax_Preview">y</span><script type="math/tex">y</script></span></td>
+<td align="center"><code>......|...|YYYYY....</code> &nbsp;</td>
+<td align="center"><span><span class="MathJax_Preview">x_1 \leq x_2 = y_1 \leq y_2</span><script type="math/tex">x_1 \leq x_2 = y_1 \leq y_2</script></span>
+&nbsp;</td>
+<td align="center"><span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span> <code>"meets"</code> <span><span class="MathJax_Preview">Y</span><script type="math/tex">Y</script></span>
+&nbsp;</td>
+<td align="center"><span><span class="MathJax_Preview">Y</span><script type="math/tex">Y</script></span> <code>"met by"</code> <span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span>
+&nbsp;</td>
+<td align="center"><code>"x≤x=y≤y"</code></td>
+</tr>
+<tr>
+<td align="center"><code>......|..YYYYY......</code> &nbsp;</td>
+<td align="center"><span><span class="MathJax_Preview">x_1 \leq y_1 \leq x_2 \leq y_2</span><script type="math/tex">x_1 \leq y_1 \leq x_2 \leq y_2</script></span> &nbsp;</td>
+<td align="center"><span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span> <code>"overlaps"</code> <span><span class="MathJax_Preview">Y</span><script type="math/tex">Y</script></span>
+&nbsp;</td>
+<td align="center"><span><span class="MathJax_Preview">Y</span><script type="math/tex">Y</script></span> <code>"overlapped by"</code> <span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span> &nbsp;</td>
+<td align="center"><code>"x≤y≤x≤y"</code></td>
 </tr>
 </tbody>
 </table>
-<h4 id="positive-semantic-triples">Positive semantic triples</h4>
-<h4 id="negative-semantic-triples">Negative semantic triples</h4>
-<p><br></p>
+<p>These well-known operators apply quite nicely to our spans, with the following adjustments:</p>
+<p><strong>Synonyms.</strong> The 13 operator names, whose some don't make much sense in a non-temporal context, are extended
+with a number of synonyms, such as <code>"inside"</code> for <code>"during"</code>, and <code>"equal"</code> or <code>"is"</code> for
+<code>"equals"</code>. The current list can be found
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/compare_spans.py#L195">here</a>.</p>
+<p><strong>Non-strict inequalities.</strong> In the above table, contrary to the convention on time intervals, we
+consider the inequalities to be large. In a program, most features span exactly one (logical) line
+(i.e., <span><span class="MathJax_Preview">x_1=x_2</span><script type="math/tex">x_1=x_2</script></span>): this is simply not possible with the original relations on endpoints. Besides,
+when we look for a function which
+<strong>contains</strong> a loop, we are generally not interested in whether
+the loop <strong>finishes</strong> on the last line. Blind adherence to strictness convention would force us to
+express our query as a disjunction of these two relations for the following program to be selected:</p>
+<pre><code class="python">1   def first_missing_non_negative(l):
+2       elements = set(l)
+3       for natural in range(len(elements) + 1):
+4           if natural not in elements:
+5               return natural
+</code></pre>
+<p><strong>Strict inequalities.</strong> In addition to the existing relations, all combinations of strict and non-strict
+conditions are generated, for instance <span><span class="MathJax_Preview">x_1 &lt; x_2 &lt; y_1 \leq y_2</span><script type="math/tex">x_1 < x_2 < y_1 \leq y_2</script></span>. That adds up to 162 in total<sup id="fnref:predicate_count"><a class="footnote-ref" href="#fn:predicate_count" rel="footnote">3</a></sup>.</p>
+<p><strong>Keys.</strong> As we use many more operators than Allen, giving an English name to every single one is not an option. Paroxython actually identifies them by a unique key (see the last column of the table above) calculated like this:</p>
+<ol>
+<li>Start from the chain of equalities and inequalities that defines the relations between the two spans' endpoints: <span><span class="MathJax_Preview">y_1 &lt; x_1 = y_2 \leq x_2</span><script type="math/tex">y_1 < x_1 = y_2 \leq x_2</script></span>.</li>
+<li>Drop the indices (since, for a given <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span> or <span><span class="MathJax_Preview">y</span><script type="math/tex">y</script></span>, indice <span><span class="MathJax_Preview">1</span><script type="math/tex">1</script></span> always comes before indice <span><span class="MathJax_Preview">2</span><script type="math/tex">2</script></span>, no information is lost): <span><span class="MathJax_Preview">y &lt; x = y \leq x</span><script type="math/tex">y < x = y \leq x</script></span>.</li>
+<li>Rewrite the formula using only the five characters <code>"="</code>, <code>"&lt;"</code>, <code>"≤"</code>, <code>"x"</code> and <code>"y"</code>: <code>y&lt;x=y≤x</code>.</li>
+</ol>
+<p><strong>Key normalization.</strong>
+Paroxython tries to be tolerant with the user input. The verb <code>"is"</code> is ignored, except when it constitutes the whole string (thus, <code>"is after"</code> comes down to <code>"after"</code>). When an operator is not an Allen's name or a predefined synonym, the following normalization process is applied:</p>
+<ol>
+<li>Replace any <code>&lt;=</code> by <code>≤</code>.</li>
+<li>Replace any <code>==</code> by <code>=</code>.</li>
+<li>Strip all characters distinct from <code>"="</code>, <code>"&lt;"</code>, <code>"≤"</code>, <code>"x"</code> and <code>"y"</code>.</li>
+<li>If the string is <code>"x=y"</code> or <code>"y=x"</code>, replace it by <code>"x=y≤x=y"</code>.</li>
+<li>If the string contains only one <code>x</code> (resp. <code>y</code>), expand it into <code>x≤x</code> (resp. <code>y≤y</code>).</li>
+</ol>
+<p>This allows the user to be understood when entering formulas like
+<code>x == y</code>, <code>x &lt;= y</code> or <code>y1 &lt; x1 == x2 &lt;= y2</code>.</p>
+<h3 id="positive-semantic-triples">Positive semantic triples</h3>
+<p>A pipeline command can apply not only to programs and taxons, but also to relationships between two taxons. Being given an operator <span><span class="MathJax_Preview">\mathfrak{R}</span><script type="math/tex">\mathfrak{R}</script></span> and two taxons <span><span class="MathJax_Preview">t_1</span><script type="math/tex">t_1</script></span> and <span><span class="MathJax_Preview">t_2</span><script type="math/tex">t_2</script></span>, the statement <span><span class="MathJax_Preview">t_1 \mathbin{\mathfrak{R}} t_2</span><script type="math/tex">t_1 \mathbin{\mathfrak{R}} t_2</script></span> will be codified in the form of the <em>subject–predicate–object</em> expression <span><span class="MathJax_Preview">(t_1, \mathfrak{R}, t_2)</span><script type="math/tex">(t_1, \mathfrak{R}, t_2)</script></span>, which can be entered as a mere Python tuple <code>(t1, R, t2)</code>. For instance, the following pipeline command will only keep programs featuring a conditional inside a loop <strong>or</strong> (inclusive) ended by a <code>return</code> statement.</p>
+<pre><code class="python">    {
+        &quot;operation&quot;: &quot;include&quot;,
+        &quot;data&quot;: [
+            (&quot;flow/loop&quot;, &quot;contains&quot;, &quot;flow/conditional&quot;),
+            (&quot;flow/conditional&quot;, &quot;finished by&quot;, &quot;TODO/return&quot;),
+        ]
+    },
+</code></pre>
+<p>It is currently not possible to chain several operators with shared operands, for example to keep only the programs that feature a conditional inside a loop <strong>and</strong> ended by a <code>return</code> statement: the quintuple <code>("flow/loop", "contains", "flow/conditional", "finished by", "TODO/return")</code> would raise an error. As it stands, the best that we can do is to chain the commands themselves:</p>
+<pre><code class="python">    {
+        &quot;operation&quot;: &quot;include&quot;,
+        &quot;data&quot;: [
+            (&quot;flow/loop&quot;, &quot;contains&quot;, &quot;flow/conditional&quot;),
+        ]
+    },
+    {
+        &quot;operation&quot;: &quot;include&quot;,
+        &quot;data&quot;: [
+            (&quot;flow/conditional&quot;, &quot;finished by&quot;, &quot;TODO/return&quot;),
+        ]
+    },
+    {
+        &quot;operation&quot;: &quot;include&quot;,
+        &quot;data&quot;: [
+            (&quot;TODO/return&quot;, &quot;contains&quot;, &quot;flow/loop&quot;),
+        ]
+    },
+</code></pre>
+<p>This keeps only the programs that feature a conditional inside a loop <strong>and</strong> a conditional ended by a <code>return</code> statement <strong>and</strong> a <code>return</code> statement inside a loop. The result is a subset of the previous one, but may still include programs where the two loops, conditionals or <code>return</code> statements are distinct.</p>
+<h3 id="negative-semantic-triples">Negative semantic triples</h3>
+<p>Avec notre système, certaines conditions ne peuvent être exprimées qu'en introduisant la possibilité de nier les relations.</p>
+<p>Supposons que vous, en tant qu'enseignant, souhaitiez inclure dans votre cours sur l'affectation la notion d'affectation parallèle, par exemple pour introduire l'échange sans variable auxiliaire:</p>
+<pre><code class="python">(a, b) = (b, a)
+</code></pre>
+<p>Dans la taxonomie, cette notion est répertoriée à la fois comme cas particulier de l'affectation de variable (taxon <span><span class="MathJax_Preview">t_1 = </span><script type="math/tex">t_1 = </script></span> <code>variable/assignment/parallel</code>) et comme faisant appel à la notion de tuple: taxon ((t_2 = ) <code>type/sequence/tuple</code>. Or, vous souhaitez n'introduire officiellement les tuples que bien plus tard dans votre cours. Vous souhaitez donc exclure des recommandations tout programme mettant en œuvre un tuple, sauf si celui-ci intervient dans une affectation parallèle. L'ensemble <span><span class="MathJax_Preview">\mathcal{P}</span><script type="math/tex">\mathcal{P}</script></span> des programmes peut être partitionné en quatre sous-ensembles:</p>
+<ul>
+<li><span><span class="MathJax_Preview">\mathcal{P}_0</span><script type="math/tex">\mathcal{P}_0</script></span> l'ensemble des programmes ne mettant en œuvre aucun tuple (donc a fortiori aucune affectation parallèle).</li>
+<li><span><span class="MathJax_Preview">\mathcal{P}_1</span><script type="math/tex">\mathcal{P}_1</script></span> l'ensemble des programmes mettant en œuvre un ou plusieurs tuples, mais systématiquement dans le cadre d'une affectation parallèle.</li>
+<li><span><span class="MathJax_Preview">\mathcal{P}_2</span><script type="math/tex">\mathcal{P}_2</script></span> l'ensemble des programmes mettant en œuvre deux tuples ou plus, avec au moins un dans le cadre d'une affectation parallèle, et au moins un au-dehors.</li>
+<li><span><span class="MathJax_Preview">\mathcal{P}_3</span><script type="math/tex">\mathcal{P}_3</script></span> l'ensemble des programmes mettant en œuvre un ou plusieurs tuples, mais aucun dans le cadre d'une affectation parallèle.</li>
+</ul>
+<p>Paroxython doit donc nous recommander tous les programmes de <span><span class="MathJax_Preview">\mathcal{P}_0 \cup \mathcal{P}_1</span><script type="math/tex">\mathcal{P}_0 \cup \mathcal{P}_1</script></span>, mais aucun de <span><span class="MathJax_Preview">\mathcal{P}_2 \cup \mathcal{P}_3</span><script type="math/tex">\mathcal{P}_2 \cup \mathcal{P}_3</script></span>.</p>
+<p>Le pipeline suivant ne donne <strong>pas</strong> le résultat cherché. La première opération restreint la sélection à <span><span class="MathJax_Preview">\mathcal{P}_1 \cup \mathcal{P}_2</span><script type="math/tex">\mathcal{P}_1 \cup \mathcal{P}_2</script></span>. La seconde en retire <span><span class="MathJax_Preview">\mathcal{P}_2</span><script type="math/tex">\mathcal{P}_2</script></span>. Le résultat est donc <span><span class="MathJax_Preview">\mathcal{P}_1</span><script type="math/tex">\mathcal{P}_1</script></span>:</p>
+<pre><code class="python">    {
+        &quot;operation&quot;: &quot;include&quot;,
+        &quot;data&quot;: [
+            &quot;variable/assignment/parallel&quot;,
+        ]
+    },
+    {
+        &quot;operation&quot;: &quot;exclude&quot;,
+        &quot;data&quot;: [
+            &quot;type/sequence/tuple&quot;,
+        ]
+    },
+</code></pre>
+<p>Dans cette deuxième tentative, le deuxième datum est un motif d'expression régulière qui couvre n'importe quel taxon ne commençant pas par <code>"type/sequence/tuple"</code>. Or, tout programme comporte au moins un taxon satisfaisant à cette propriété. Le résultat est donc <span><span class="MathJax_Preview">\mathcal{P}</span><script type="math/tex">\mathcal{P}</script></span>.</p>
+<pre><code class="python">    {
+        &quot;operation&quot;: &quot;include&quot;,
+        &quot;data&quot;: [
+            &quot;variable/assignment/parallel&quot;,
+            &quot;(?!type/sequence/tuple)&quot;,
+        ]
+    },
+</code></pre>
+<p>Si l'on applique l'opération inverse sur la contraposée, le résultat est vide. En effet, le premier datum exclut tous les programmes qui comportent au moins un taxon qui n'est pas une affectation parallèle.</p>
+<pre><code class="python">    {
+        &quot;operation&quot;: &quot;exclude&quot;,
+        &quot;data&quot;: [
+            &quot;(?!variable/assignment/parallel)&quot;,
+            &quot;type/sequence/tuple&quot;,
+        ]
+    },
+</code></pre>
+<p>Le pipeline suivant ne garde que les programmes comportant au moins un tuple qui est une affectation parallèle, soit <span><span class="MathJax_Preview">\mathcal{P}_1</span><script type="math/tex">\mathcal{P}_1</script></span> \cup \mathcal{P}_2):</p>
+<pre><code class="python">    {
+        &quot;operation&quot;: &quot;include&quot;,
+        &quot;data&quot;: [
+            (&quot;type/sequence/tuple&quot;, &quot;is&quot;, &quot;variable/assignment/parallel&quot;),
+        ]
+    },
+</code></pre>
+<p>Il est en fait équivalent à:</p>
+<pre><code class="python">    {
+        &quot;operation&quot;: &quot;include&quot;,
+        &quot;data&quot;: [
+            &quot;variable/assignment/parallel&quot;,
+        ]
+    },
+</code></pre>
+<pre><code class="python">    {
+        &quot;operation&quot;: &quot;exclude&quot;,
+        &quot;data&quot;: [
+            (&quot;type/sequence/tuple&quot;, &quot;is not&quot;, &quot;variable/assignment/parallel&quot;),
+        ]
+    },
+</code></pre>
+<p>Cependant, vous ne souhaitez introduire officiellement
+<br></p>
 <h1 id="under-the-hood">Under the hood</h1>
 <h2 id="flow">Flow</h2>
 <p><img alt="" src="resources/flow.png"></p>
@@ -355,29 +639,45 @@ Browse <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/
 <li>Taxon:</li>
 <li>Taxonomy:</li>
 </ul>
+<div class="footnote">
+<hr>
+<ol>
+<li id="fn:regex-credits">
+<p>This module appears to be here to stay, since it is proeminently featured at the top of the more mundane standard library <a href="https://docs.python.org/3/library/re.html">re</a>.
+Thanks and kudos to the author, Matthew Barnett: without his awesome work, many parts of our code would have been much tougher to write, and much slower to execute.&#160;<a class="footnote-backref" href="#fnref:regex-credits" rev="footnote" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:Allen1983">
+<p>Allen, James F. (26 Nov. 1983). <em>Maintaining knowledge about temporal intervals</em>. Communications of the ACM. 26 (11): 832–843. doi:10.1145/182.358434&#160;<a class="footnote-backref" href="#fnref:Allen1983" rev="footnote" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:predicate_count">
+<p><span><span class="MathJax_Preview">162 = 6 \times 27</span><script type="math/tex">162 = 6 \times 27</script></span>, where <span><span class="MathJax_Preview">6</span><script type="math/tex">6</script></span> is the number of distinct permutations of the quadruple <span><span class="MathJax_Preview">(x, x, y, y)</span><script type="math/tex">(x, x, y, y)</script></span>, and <span><span class="MathJax_Preview">27=3^3</span><script type="math/tex">27=3^3</script></span> the number of elements of the triple auto-product of <span><span class="MathJax_Preview">3</span><script type="math/tex">3</script></span> symbols (<code>=</code>, <code>≤</code> and <code>&lt;</code>).&#160;<a class="footnote-backref" href="#fnref:predicate_count" rev="footnote" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
 </section>
 <section>
 <h2 class="section-title" id="header-submodules">Sub-modules</h2>
 <dl>
 <dt><code class="name"><a title="paroxython.assess_costs" href="assess_costs.html">paroxython.assess_costs</a></code></dt>
 <dd>
-<div class="desc"><p>Assess the learning cost associated with the introduction of the given programs …</p></div>
+<div class="desc"><p>Assess the learning cost associated with the introduction of the given programs.</p></div>
 </dd>
 <dt><code class="name"><a title="paroxython.cli" href="cli/index.html">paroxython.cli</a></code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Command line interface for the main functionalities of Paroxython.</p></div>
 </dd>
 <dt><code class="name"><a title="paroxython.compare_spans" href="compare_spans.html">paroxython.compare_spans</a></code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>A dictionary of predicates listing all possible relations between two intervals
+<span><span class="MathJax_Preview">(x_1, x_2)</span><script type="math/tex">(x_1, x_2)</script></span> and <span><span class="MathJax_Preview">(y_1, y_2)</span><script type="math/tex">(y_1, y_2)</script></span>.</p></div>
 </dd>
 <dt><code class="name"><a title="paroxython.derived_labels_db" href="derived_labels_db.html">paroxython.derived_labels_db</a></code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>An in-memory database collecting the labels of a given program.</p></div>
 </dd>
 <dt><code class="name"><a title="paroxython.filter_programs" href="filter_programs.html">paroxython.filter_programs</a></code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Evolve a set of selected programs and a set of taxons representing the imparted knowledge.</p></div>
 </dd>
 <dt><code class="name"><a title="paroxython.flatten_ast" href="flatten_ast.html">paroxython.flatten_ast</a></code></dt>
 <dd>
@@ -385,7 +685,7 @@ Browse <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/
 </dd>
 <dt><code class="name"><a title="paroxython.goodies" href="goodies.html">paroxython.goodies</a></code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>A grab bag of various generic functions and factories.</p></div>
 </dd>
 <dt><code class="name"><a title="paroxython.label_programs" href="label_programs.html">paroxython.label_programs</a></code></dt>
 <dd>
@@ -405,7 +705,7 @@ Browse <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/
 </dd>
 <dt><code class="name"><a title="paroxython.normalize_predicate" href="normalize_predicate.html">paroxython.normalize_predicate</a></code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Process an input string to interpret it as a known predicate.</p></div>
 </dd>
 <dt><code class="name"><a title="paroxython.parse_program" href="parse_program.html">paroxython.parse_program</a></code></dt>
 <dd>
@@ -413,7 +713,7 @@ Browse <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/
 </dd>
 <dt><code class="name"><a title="paroxython.preprocess_source" href="preprocess_source.html">paroxython.preprocess_source</a></code></dt>
 <dd>
-<div class="desc"><p>Bring together everything relative to the pre-processing of a given source code …</p></div>
+<div class="desc"><p>Bring together everything relative to the pre-processing of a given source code.</p></div>
 </dd>
 <dt><code class="name"><a title="paroxython.recommend_programs" href="recommend_programs.html">paroxython.recommend_programs</a></code></dt>
 <dd>
@@ -434,7 +734,7 @@ Browse <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/
 <nav id="sidebar">
 <header>
 <a class="homelink" rel="home" title="Paroxython Home" href="index.html">
-<img src="resources/logo.png" alt="Paroxython logo">
+<img src="https://laowantong.github.io/paroxython/resources/logo.png" alt="Paroxython logo">
 </a>
 </header>
 <div class="gcse-search" style="height: 70px"
@@ -459,19 +759,20 @@ data-gaCategoryParameter="paroxython">
 <li><a href="#preparing-an-assignment">Preparing an assignment</a></li>
 </ul>
 </li>
-<li><a href="#deep-in-the-pipeline">Deep in the pipeline</a><ul>
-<li><a href="#how-the-recommendation-system-works">How the recommendation system works</a><ul>
-<li><a href="#evolving-the-selected-programs">Evolving the selected programs</a></li>
-<li><a href="#evolving-the-imparted-knowledge">Evolving the imparted knowledge</a></li>
 </ul>
 </li>
+<li><a href="#deep-in-the-pipeline">Deep in the pipeline</a><ul>
 <li><a href="#regular-expression-patterns">Regular expression patterns</a></li>
+<li><a href="#execution-of-a-pipeline">Execution of a pipeline</a><ul>
+<li><a href="#include-command">"include" command</a></li>
+<li><a href="#exclude-command">"exclude" command</a></li>
+<li><a href="#impart-command">"impart" command</a></li>
+</ul>
+</li>
 <li><a href="#semantic-triples">Semantic triples</a><ul>
 <li><a href="#span-algebra">Span algebra</a></li>
 <li><a href="#positive-semantic-triples">Positive semantic triples</a></li>
 <li><a href="#negative-semantic-triples">Negative semantic triples</a></li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>

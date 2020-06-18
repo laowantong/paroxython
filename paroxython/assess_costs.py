@@ -1,10 +1,10 @@
 r"""Assess the learning cost associated with the introduction of the given programs.
 
 Each program has been previously found to implement a number of notions represented by a list of
-taxons of the form: \(\textrm{edge}_0/\textrm{edge}_1/.../\textrm{edge}_n\), e.g.,
+taxons of the form: \(\textrm{edge}_0/\textrm{edge}_1/.../\textrm{edge}_n\), _e.g._,
 `flow/loop/exit/early/break`.
 
-Furthermore, the notions already imparted may cover a certain **prefix** of such a taxon, e.g.
+Furthermore, the notions already imparted may cover a certain **prefix** of such a taxon, _e.g._
 `flow/loop`. The learning cost should therefore not take it into account.
 
 The cost of the remaining edges, here `exit/early/break`, is approximated by a function taking
@@ -20,7 +20,8 @@ from functools import lru_cache
 from .user_types import (
     AssessedPrograms,
     AssessmentStrategy,
-    ProgramTaxonNames,
+    ProgramInfos,
+    ProgramNameSet,
     TaxonName,
     TaxonNameSet,
 )
@@ -30,8 +31,7 @@ __pdoc__ = {"LearningCostAssessor.__call__": True}
 
 @lru_cache(maxsize=None)  # NB: memoization needed for consistency with mypy's typing
 def range_to_cost_linear(start: int, stop: int) -> float:
-    """Return the length of the slice between `start` (inclusive) and `stop` (exclusive).
-    """
+    """Return the length of the slice between `start` (inclusive) and `stop` (exclusive)."""
     return float(stop - start)
 
 
@@ -61,6 +61,9 @@ def range_to_cost_zeno(start: int, stop: int) -> float:
 
 class LearningCostAssessor:
     """Evaluate the learning costs of programs with respect to the given imparted knowledge."""
+
+    def __init__(self, programs: ProgramInfos):
+        self.programs = programs
 
     def set_imparted_knowledge(self, imparted_knowledge: TaxonNameSet) -> None:
         self.imparted_knowledge = imparted_knowledge
@@ -107,20 +110,19 @@ class LearningCostAssessor:
                     break
         return self.range_to_cost(start, stop)
 
-    def __call__(self, programs: ProgramTaxonNames) -> AssessedPrograms:
-        """Associate the given programs with the total learning cost of their taxons.
+    def __call__(self, selected_programs: ProgramNameSet) -> AssessedPrograms:
+        """Associate the given selected programs with the total learning cost of their taxons.
 
         Args:
-            programs (ProgramTaxonNames): A dictionary associating each program name with a list
-                of taxon names.
+            selected_programs (ProgramNameSet): A set of program names.
 
         Returns:
             AssessedPrograms: A list of tuples `(total_cost, ProgramName)` sorted by increasing cost.
         """
         result = []
-        for (program_name, taxon_names) in programs.items():
+        for program_name in selected_programs:
             total_cost = 0.0
-            for taxon_name in taxon_names:
+            for taxon_name in self.programs[program_name]["taxons"]:
                 total_cost += self.taxon_cost(taxon_name)
             result.append((total_cost, program_name))
         return sorted(result)

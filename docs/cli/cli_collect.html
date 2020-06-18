@@ -5,8 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.8.1" />
 <title>paroxython.cli.cli_collect API documentation</title>
-<meta name="description" content="USAGE:
-paroxython collect [options] DIRECTORY …" />
+<meta name="description" content="Walk a directory, tag its Python files and make a database of the results …" />
 <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
 <link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
@@ -27,44 +26,39 @@ paroxython collect [options] DIRECTORY …" />
 <h1 class="title">Module <code>paroxython.cli.cli_collect</code></h1>
 </header>
 <section id="section-intro">
-<h2 id="usage">Usage</h2>
-<p>paroxython collect [options] DIRECTORY</p>
-<h2 id="options">Options</h2>
-<p>-c &ndash;cleanup=STR
-Transformation to be applied to the source code
-before processing. [default: full]
-Currently available:
-• full: remove all blank lines, docstrings and
-comments (except Paroxython hints).
-• none: no transformation is applied.
--e &ndash;exclude=REGEX
-Filter out any file whose name fully matches this
-regular expression. NB: &ndash;glob precedes &ndash;exclude.
-[default: "^(<strong>init</strong>|setup|.<em>[-_]tests?).py$"]
--g &ndash;glob=PATTERN
-The names of the collected files must match this
-Unix-like glob pattern (not a regular expression).
-Special syntax: "<strong>/" prefix means “this directory
-and all subdirectories, recursively”. [default:
-"</strong>/</em>.py"]
--o &ndash;output=PATH
-The path of the resulting database. If not
-specified, create a JSON file under the name
-"DIRECTORY_db.json". Otherwise, use the extension
-(either ".json" or ".sqlite") to decide the format
-of the database. [default: ]
-&ndash;no_timestamp
-Don't store program's last modification times.
--t &ndash;taxonomy=PATH
-The path of a TSV file mapping labels onto taxons.
-If not specified, use the included copy of the table
-whose last version is at <a href="https://bit.ly/2Yu0LqU.">https://bit.ly/2Yu0LqU.</a></p>
-<h2 id="description">Description</h2>
 <p>Walk a directory, tag its Python files and make a database of the results.</p>
+<h2 id="usage">Usage</h2>
+<pre><code>paroxython collect [options] DIRECTORY
+</code></pre>
+<h2 id="options">Options</h2>
+<pre><code class="plain">-c --cleanup=STR    Transformation to be applied to the source code
+                    before processing. [default: full]
+                    Currently available:
+                    • full: remove all blank lines, docstrings and
+                            comments (except Paroxython hints).
+                    • none: no transformation is applied.
+-e --exclude=REGEX  Filter out any file whose name fully matches this
+                    regular expression. NB: --glob precedes --exclude.
+                    [default: &quot;^(__init__|setup|.*[-_]tests?)\.py$&quot;]
+-g --glob=PATTERN   The names of the collected files must match this
+                    Unix-like glob pattern (not a regular expression).
+                    Special syntax: &quot;**/&quot; prefix means “this directory
+                    and all subdirectories, recursively”. [default:
+                    &quot;**/*.py&quot;]
+-o --output=PATH    The path of the resulting database. If not
+                    specified, create a JSON file under the name
+                    &quot;DIRECTORY_db.json&quot;. Otherwise, use the extension
+                    (either &quot;.json&quot; or &quot;.sqlite&quot;) to decide the format
+                    of the database. [default: ]
+--no_timestamp      Don't store program's last modification times.
+-t --taxonomy=PATH  The path of a TSV file mapping labels onto taxons.
+                    If not specified, use the included copy of the table
+                    whose last version is at https://bit.ly/2Yu0LqU.
+</code></pre>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli_collect.py#L0-L52" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli_collect.py#L0-L54" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">from pathlib import Path
 
@@ -103,7 +97,7 @@ def cli_wrapper(args):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli_collect.py#L39-L53" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli_collect.py#L41-L55" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def cli_wrapper(args):
     db = Database(
@@ -130,7 +124,7 @@ def cli_wrapper(args):
 <nav id="sidebar">
 <header>
 <a class="homelink" rel="home" title="Paroxython Home" href="index.html">
-<img src="resources/logo.png" alt="Paroxython logo">
+<img src="https://laowantong.github.io/paroxython/resources/logo.png" alt="Paroxython logo">
 </a>
 </header>
 <div class="gcse-search" style="height: 70px"

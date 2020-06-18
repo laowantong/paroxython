@@ -29,7 +29,7 @@
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L0-L100" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L0-L102" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">from collections import Counter, defaultdict
 from pathlib import Path
@@ -49,8 +49,6 @@ from .user_types import (
     TaxonsSpans,
 )
 
-_sub_slash_sequences = regex.compile(r&#34;//+&#34;).sub
-
 
 class Taxonomy:
     def __init__(self, taxonomy_path: Optional[Path] = None, *args, **kwargs) -&gt; None:
@@ -67,17 +65,21 @@ class Taxonomy:
                 self.compiled_label_names.append((regex.compile(label_pattern + &#34;$&#34;), taxon_name))
                 # note: &#34;$&#34; is necessary: regex.fullmatch() has no regex.fullsub() counterpart
 
-    cache: Dict[LabelName, TaxonNames] = {}
-
     @lru_cache(maxsize=None)
-    def get_taxon_name_list(self, label_name: LabelName) -&gt; TaxonNames:
+    def get_taxon_name_list(
+        # fmt: off
+        self,
+        label_name: LabelName,
+        sub_slash_sequences=regex.compile(r&#34;//+&#34;).sub,
+        # fmt: on
+    ) -&gt; TaxonNames:
         result: TaxonNames = []
         if label_name in self.literal_label_names:
             result.extend(self.literal_label_names[label_name])
         for (rex, taxon_name) in self.compiled_label_names:
             if rex.match(label_name):
                 s = rex.sub(taxon_name, label_name)  # cf. note above
-                s = _sub_slash_sequences(&#34;/&#34;, s)
+                s = sub_slash_sequences(&#34;/&#34;, s)
                 result.append(s)
         return result
 
@@ -147,7 +149,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L22-L84" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L20-L86" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">class Taxonomy:
     def __init__(self, taxonomy_path: Optional[Path] = None, *args, **kwargs) -&gt; None:
@@ -164,17 +166,21 @@ if __name__ == &#34;__main__&#34;:
                 self.compiled_label_names.append((regex.compile(label_pattern + &#34;$&#34;), taxon_name))
                 # note: &#34;$&#34; is necessary: regex.fullmatch() has no regex.fullsub() counterpart
 
-    cache: Dict[LabelName, TaxonNames] = {}
-
     @lru_cache(maxsize=None)
-    def get_taxon_name_list(self, label_name: LabelName) -&gt; TaxonNames:
+    def get_taxon_name_list(
+        # fmt: off
+        self,
+        label_name: LabelName,
+        sub_slash_sequences=regex.compile(r&#34;//+&#34;).sub,
+        # fmt: on
+    ) -&gt; TaxonNames:
         result: TaxonNames = []
         if label_name in self.literal_label_names:
             result.extend(self.literal_label_names[label_name])
         for (rex, taxon_name) in self.compiled_label_names:
             if rex.match(label_name):
                 s = rex.sub(taxon_name, label_name)  # cf. note above
-                s = _sub_slash_sequences(&#34;/&#34;, s)
+                s = sub_slash_sequences(&#34;/&#34;, s)
                 result.append(s)
         return result
 
@@ -207,13 +213,6 @@ if __name__ == &#34;__main__&#34;:
                 result.append(Taxon(name, spans))
         return result</code></pre>
 </details>
-<h3>Class variables</h3>
-<dl>
-<dt id="paroxython.map_taxonomy.Taxonomy.cache"><code class="name">var <span class="ident">cache</span> : Dict[LabelName, List[TaxonName]]</code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-</dl>
 <h3>Static methods</h3>
 <dl>
 <dt id="paroxython.map_taxonomy.Taxonomy.deduplicated_taxons"><code class="name flex">
@@ -224,7 +223,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L64-L84" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L66-L86" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">@staticmethod
 def deduplicated_taxons(taxons: Taxons) -&gt; Taxons:
@@ -252,24 +251,30 @@ def deduplicated_taxons(taxons: Taxons) -&gt; Taxons:
 <h3>Methods</h3>
 <dl>
 <dt id="paroxython.map_taxonomy.Taxonomy.get_taxon_name_list"><code class="name flex">
-<span>def <span class="ident">get_taxon_name_list</span></span>(<span>self, label_name: LabelName) ‑> List[TaxonName]</span>
+<span>def <span class="ident">get_taxon_name_list</span></span>(<span>self, label_name: LabelName, sub_slash_sequences=&lt;built-in method sub of _regex.Pattern object&gt;) ‑> List[TaxonName]</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Translate a label name into a list of taxon names.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L42-L53" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L38-L55" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">@lru_cache(maxsize=None)
-def get_taxon_name_list(self, label_name: LabelName) -&gt; TaxonNames:
+def get_taxon_name_list(
+    # fmt: off
+    self,
+    label_name: LabelName,
+    sub_slash_sequences=regex.compile(r&#34;//+&#34;).sub,
+    # fmt: on
+) -&gt; TaxonNames:
     result: TaxonNames = []
     if label_name in self.literal_label_names:
         result.extend(self.literal_label_names[label_name])
     for (rex, taxon_name) in self.compiled_label_names:
         if rex.match(label_name):
             s = rex.sub(taxon_name, label_name)  # cf. note above
-            s = _sub_slash_sequences(&#34;/&#34;, s)
+            s = sub_slash_sequences(&#34;/&#34;, s)
             result.append(s)
     return result</code></pre>
 </details>
@@ -282,7 +287,7 @@ def get_taxon_name_list(self, label_name: LabelName) -&gt; TaxonNames:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L55-L62" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L57-L64" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def to_taxons(self, labels: Labels) -&gt; Taxons:
     acc: TaxonsSpans = defaultdict(Counter)
@@ -301,7 +306,7 @@ def get_taxon_name_list(self, label_name: LabelName) -&gt; TaxonNames:
 <nav id="sidebar">
 <header>
 <a class="homelink" rel="home" title="Paroxython Home" href="index.html">
-<img src="resources/logo.png" alt="Paroxython logo">
+<img src="https://laowantong.github.io/paroxython/resources/logo.png" alt="Paroxython logo">
 </a>
 </header>
 <div class="gcse-search" style="height: 70px"
@@ -326,7 +331,6 @@ data-gaCategoryParameter="paroxython.map_taxonomy">
 <li><code><a title="paroxython.map_taxonomy.Taxonomy.deduplicated_taxons" href="#paroxython.map_taxonomy.Taxonomy.deduplicated_taxons">deduplicated_taxons</a></code></li>
 <li><code><a title="paroxython.map_taxonomy.Taxonomy.get_taxon_name_list" href="#paroxython.map_taxonomy.Taxonomy.get_taxon_name_list">get_taxon_name_list</a></code></li>
 <li><code><a title="paroxython.map_taxonomy.Taxonomy.to_taxons" href="#paroxython.map_taxonomy.Taxonomy.to_taxons">to_taxons</a></code></li>
-<li><code><a title="paroxython.map_taxonomy.Taxonomy.cache" href="#paroxython.map_taxonomy.Taxonomy.cache">cache</a></code></li>
 </ul>
 </li>
 </ul>

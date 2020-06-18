@@ -3709,7 +3709,7 @@ WHERE c.name_suffix = f.name_suffix
 
 #### Feature `deeply_recursive_function`
 
-Any function `f` which features a nested call to itself (`f(..., f(...), ...)`), e.g. the [Ackermann function](https://en.wikipedia.org/wiki/Ackermann_function).
+Any function `f` which features a nested call to itself (`f(..., f(...), ...)`), _e.g._ the [Ackermann function](https://en.wikipedia.org/wiki/Ackermann_function).
 
 ##### Derivations
 
@@ -3846,7 +3846,7 @@ LEFT JOIN t_body_recursive_function USING (span)
 WHERE t_body_recursive_function.rowid IS NULL
 ```
 
-_LIMITATION._ Currently, the tail recursive procedures (_i.e._, without `return`, e.g. the drawing of a fractal) are not recognized.
+_LIMITATION._ Currently, the tail recursive procedures (_i.e._, without `return`, _e.g._ the drawing of a fractal) are not recognized.
 
 ##### Example
 
@@ -6513,7 +6513,7 @@ May be rewritten as:
 2   a += b + c
 ```
 
-- Line 3, note that the `+` binary operator is not necessarily commutative, e.g. on strings.
+- Line 3, note that the `+` binary operator is not necessarily commutative, _e.g._ on strings.
 - Some cases like line 4 should be matched, check the associativity rules.
 
 ##### Matches

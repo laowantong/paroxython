@@ -5,8 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.8.1" />
 <title>paroxython.cli.cli_tag API documentation</title>
-<meta name="description" content="USAGE:
-paroxython tag [options] FILENAME …" />
+<meta name="description" content="Tag one Python file and output the table of its taxons or labels …" />
 <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
 <link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
@@ -27,24 +26,22 @@ paroxython tag [options] FILENAME …" />
 <h1 class="title">Module <code>paroxython.cli.cli_tag</code></h1>
 </header>
 <section id="section-intro">
-<h2 id="usage">Usage</h2>
-<p>paroxython tag [options] FILENAME</p>
-<h2 id="options">Options</h2>
-<p>-f &ndash;format=FORMAT
-Format of the output, either "md" (Markdown)
-or "tsv" (Tab SeparatedValues). [default: md]
--l &ndash;labels
-Output the labels instead of the taxons.
--t &ndash;taxonomy=PATH
-The path of a TSV file mapping labels onto taxons.
-If not specified, use the included copy of the table
-whose last version is at <a href="https://bit.ly/2Yu0LqU.">https://bit.ly/2Yu0LqU.</a></p>
-<h2 id="description">Description</h2>
 <p>Tag one Python file and output the table of its taxons or labels.</p>
+<h2 id="usage">Usage</h2>
+<pre><code>paroxython tag [options] FILENAME
+</code></pre>
+<h2 id="options">Options</h2>
+<pre><code class="plain">-f --format=FORMAT  Format of the output, either &quot;md&quot; (Markdown)
+                    or &quot;tsv&quot; (Tab Separated Values). [default: md]
+-l --labels         Output the labels instead of the taxons.
+-t --taxonomy=PATH  The path of a TSV file mapping labels onto taxons.
+                    If not specified, use the included copy of the table
+                    whose last version is at https://bit.ly/2Yu0LqU.
+</code></pre>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli_tag.py#L0-L66" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli_tag.py#L0-L68" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">from pathlib import Path
 from typing import List, Tuple, Optional
@@ -114,7 +111,7 @@ def cli_wrapper(args):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli_tag.py#L28-L55" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli_tag.py#L30-L57" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def main(
     source: Source,
@@ -154,7 +151,7 @@ def cli_wrapper(args):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli_tag.py#L58-L67" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli_tag.py#L60-L69" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def cli_wrapper(args):
     path = Path(args[&#34;FILENAME&#34;])
@@ -176,7 +173,7 @@ def cli_wrapper(args):
 <nav id="sidebar">
 <header>
 <a class="homelink" rel="home" title="Paroxython Home" href="index.html">
-<img src="resources/logo.png" alt="Paroxython logo">
+<img src="https://laowantong.github.io/paroxython/resources/logo.png" alt="Paroxython logo">
 </a>
 </header>
 <div class="gcse-search" style="height: 70px"

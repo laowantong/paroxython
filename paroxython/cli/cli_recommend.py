@@ -1,11 +1,15 @@
-"""
+"""Read and execute a pipeline of commands and report the learning costs.
+
 USAGE:
+    ```
     paroxython recommend [options] DB_PATH
+    ```
 
 OPTIONS:
-    -b --base=PATH      Value accessible by any shell command of the pipeline.
-                        If not specified, this is parent directory of DB_PATH.
-                        [default: ]
+    ```plain
+    -b --base=PATH      Value accessible, under the name "base", by any shell
+                        command of the pipeline. If not specified, this is the
+                        parent directory of DB_PATH. [default: ]
     -c --cost=STR       Learning cost assessment strategy. [default: zeno]
                         Currently available:
                         • zeno: the i-th edge of a taxon, if not already
@@ -19,10 +23,7 @@ OPTIONS:
                         DB_PATH is of the form PREFIX_db.json, a value of
                         PREFIX_pipe.py is used. If the associated file is
                         missing or malformed, no filter is applied. [default: ]
-
-
-DESCRIPTION:
-    Walk a directory, tag its Python files and make a database of the results.
+    ```
 """
 
 import json

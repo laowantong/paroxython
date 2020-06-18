@@ -32,7 +32,7 @@ considered as zero when they are encountered again in the future.
 >>> [
 ...     {
 ...         "operation": "impart",
-...         "source": [
+...         "data": [
 ...             "hello_world.py",
 ...             "wheat_and_chessboard.py",
 ...             "euler_005_smallest_multiple.py",
@@ -50,12 +50,12 @@ by your new students.
 >>> [
 ...     {
 ...         "operation": "impart",
-...         "source": "find CS_101 -path '*.py'",
+...         "data": "find CS_101 -path '*.py'",
 ...     },
 ... ]
 
 .. tip::
-    As you can see, rather than maintaining a **list** of programs or concepts in the `"source"`
+    As you can see, rather than maintaining a **list** of programs or concepts in the `"data"`
     field, you may provide a **string**. Paroxython will interpret it as a shell command, and
     expect it to print on `stdout` the required list of items (programs or taxons), one per line.
 
@@ -67,7 +67,7 @@ interesting enough, or that could get you kicked out of your college, etc.
 >>> [
 ...     {
 ...         "operation": "exclude",
-...         "source": [
+...         "data": [
 ...             "fizzbuzz.py",
 ...             "alpha_go.py",
 ...             "hello_world_of_pain.py",
@@ -85,7 +85,7 @@ recursivity (`subroutine/recursive`), dictionary (`type/non_sequence/dictionary`
 >>> [
 ...     {
 ...         "operation": "exclude",
-...         "source": [
+...         "data": [
 ...             "subroutine/recursive",
 ...             "type/non_sequence",
 ...         ],
@@ -93,7 +93,7 @@ recursivity (`subroutine/recursive`), dictionary (`type/non_sequence/dictionary`
 ... ]
 
 .. note::
-    Paroxython relies on the last three characters of a `"source"` item to decide whether it is a
+    Paroxython relies on the last three characters of a `"data"` item to decide whether it is a
     Python program (ending with `".py"`) or a taxon (like here).
 
 .. tip::
@@ -110,7 +110,7 @@ the same time, but at least one. Any other program will be rejected.
 >>> [
 ...     {
 ...         "operation": "include",
-...         "source": [
+...         "data": [
 ...             "flow/conditional",
 ...             "operator/ternary",
 ...         ],
@@ -150,11 +150,11 @@ commands together:
 >>> [
 ...     {
 ...         "operation": "impart",
-...         "source": "python helpers/parse_syllabus.py {base_path}/timeline.txt",
+...         "data": "python helpers/parse_syllabus.py {base_path}/timeline.txt",
 ...     },
 ...     {
 ...         "operation": "exclude",
-...         "source": [
+...         "data": [
 ...             "foo.py",
 ...             "bar.py",
 ...             # "buzz.py",
@@ -162,7 +162,7 @@ commands together:
 ...     },
 ...     {
 ...         "operation": "include",
-...         "source": [
+...         "data": [
 ...             "pattern/elements/accumulate",
 ...             "topic/game",
 ...             "type/sequence/list",
@@ -175,5 +175,5 @@ commands together:
     Python **expression**. As such, it offers several amenities you surely know and love: comments,
     trailing commas, r-strings, etc.
 
-This is the end of our pipeline tutorial. Read on for more advanced features (negations, regular
-expressions, semantic triples, span algebra) in the next section (coming soon).
+This is the end of our pipeline tutorial. Read on for more advanced features (regular
+expressions, span algebra, semantic triples, negations) in the [next section](#deep-in-the-pipeline).

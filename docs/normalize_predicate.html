@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.8.1" />
 <title>paroxython.normalize_predicate API documentation</title>
-<meta name="description" content="" />
+<meta name="description" content="Process an input string to interpret it as a known predicate." />
 <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
 <link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
@@ -26,10 +26,11 @@
 <h1 class="title">Module <code>paroxython.normalize_predicate</code></h1>
 </header>
 <section id="section-intro">
+<p>Process an input string to interpret it as a known predicate.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/normalize_predicate.py#L0-L34" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/normalize_predicate.py#L0-L67" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">from typing import Tuple
 
@@ -51,17 +52,20 @@ def normalize_predicate(predicate: str) -&gt; Tuple[Predicate, bool]:
         predicate = predicate.replace(&#34; not&#34;, &#34;&#34;)
     else:
         negated = False
-    predicate = predicate.strip()
+    original = predicate = predicate.strip()
+    predicate = regex.sub(r&#34; is\b|\bis &#34;, &#34;&#34;, predicate)
     if predicate not in compare_spans:
-        # If there is only one x (resp. y), expand it into x≤x (resp. y≤y)
-        predicate = regex.sub(r&#34;^([^x]*)x([^x]*)$&#34;, r&#34;\1x≤x\2&#34;, predicate)
-        predicate = regex.sub(r&#34;^([^y]*)y([^y]*)$&#34;, r&#34;\1y≤y\2&#34;, predicate)
         # Convert usual comparison operators
         predicate = predicate.replace(&#34;&lt;=&#34;, &#34;≤&#34;).replace(&#34;==&#34;, &#34;=&#34;)
         # Ignore all other characters
         predicate = regex.sub(r&#34;[^xy&lt;=≤]&#34;, &#34;&#34;, predicate)
-        if predicate != predicate:  # pragma: no cover
-            print_warning(f&#34;predicate &#39;{predicate}&#39; normalized into &#39;{predicate}&#39;.&#34;)
+        # Treat the special case of identity
+        predicate = regex.sub(r&#34;^(x=y|y=)$&#34;, &#34;x=y≤x=y&#34;, predicate)
+        # If there is only one x (resp. y), expand it into x≤x (resp. y≤y)
+        predicate = regex.sub(r&#34;^([^x]*)x([^x]*)$&#34;, r&#34;\1x≤x\2&#34;, predicate)
+        predicate = regex.sub(r&#34;^([^y]*)y([^y]*)$&#34;, r&#34;\1y≤y\2&#34;, predicate)
+        if original != predicate:  # pragma: no cover
+            print_warning(f&#34;predicate &#39;{original}&#39; normalized into &#39;{predicate}&#39;.&#34;)
         if predicate not in compare_spans:
             raise ValueError(f&#34;Malformed predicate &#39;{predicate}&#39; in the pipeline.&#34;)
     return (compare_spans[predicate], negated)</code></pre>
@@ -78,11 +82,48 @@ def normalize_predicate(predicate: str) -&gt; Tuple[Predicate, bool]:
 <span>def <span class="ident">normalize_predicate</span></span>(<span>predicate: str) ‑> Tuple[Callable[[int, int], bool], bool]</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Ensure that the given predicate is correct or can be salvaged.</p></div>
+<div class="desc"><p>Ensure that the given predicate is correct or can be salvaged.</p>
+<h2 id="description">Description</h2>
+<p>The system first determines whether the predicate is negated or not, which can be expressed
+either by an exclamation mark prefix or the word “not”. In this case, the negation marker
+is extracted from the given string.</p>
+<p>The resulting string is then normalized, <em>i.e.</em> replaced by a key of the dictionary
+<code>compare_spans</code> defined in <code><a title="paroxython.compare_spans" href="compare_spans.html">paroxython.compare_spans</a></code>.
+The verb <code>"is"</code> is ignored, except when it constitutes the whole string (thus, <code>"is after"</code> comes down to <code>"after"</code>). When an operator is not an Allen's name or a predefined synonym, the following normalization process is applied:</p>
+<ol>
+<li>Replace any <code>&lt;=</code> by <code>≤</code>.</li>
+<li>Replace any <code>==</code> by <code>=</code>.</li>
+<li>Strip all characters distinct from <code>"="</code>, <code>"&lt;"</code>, <code>"≤"</code>, <code>"x"</code> and <code>"y"</code>.</li>
+<li>If the string is <code>"x=y"</code> or <code>"y=x"</code>, replace it by <code>"x=y≤x=y"</code>.</li>
+<li>If the string contains only one <code>x</code> (resp. <code>y</code>), expand it into <code>x≤x</code> (resp. <code>y≤y</code>).</li>
+</ol>
+<p>This allows the user to be understood when entering formulas like
+<code>x == y</code>, <code>x &lt;= y</code> or <code>y1 &lt; x1 == x2 &lt;= y2</code>.</p>
+<h2 id="examples">Examples</h2>
+<p>Browse
+<a href="https://github.com/laowantong/paroxython/blob/master/tests/test_normalize_predicate.py"><code>test_normalize_predicate.py</code></a>
+on GitHub.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>predicate</code></strong> :&ensp;<code>str</code></dt>
+<dd>Plain string to be interpreted as a predicate.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>ValueError</code></dt>
+<dd>Raised when the input string is malformed beyond recognition.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>Tuple[Predicate, bool]</code></dt>
+<dd>A tuple whose first member is a function (more precisely, a value
+of the dictionary <code>compare_spans</code>), and second member is a boolean indicating whether
+the result of this predicate must be negated.</dd>
+</dl></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/normalize_predicate.py#L10-L35" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/normalize_predicate.py#L12-L68" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def normalize_predicate(predicate: str) -&gt; Tuple[Predicate, bool]:
     predicate = predicate.lower().strip()
@@ -95,17 +136,20 @@ def normalize_predicate(predicate: str) -&gt; Tuple[Predicate, bool]:
         predicate = predicate.replace(&#34; not&#34;, &#34;&#34;)
     else:
         negated = False
-    predicate = predicate.strip()
+    original = predicate = predicate.strip()
+    predicate = regex.sub(r&#34; is\b|\bis &#34;, &#34;&#34;, predicate)
     if predicate not in compare_spans:
-        # If there is only one x (resp. y), expand it into x≤x (resp. y≤y)
-        predicate = regex.sub(r&#34;^([^x]*)x([^x]*)$&#34;, r&#34;\1x≤x\2&#34;, predicate)
-        predicate = regex.sub(r&#34;^([^y]*)y([^y]*)$&#34;, r&#34;\1y≤y\2&#34;, predicate)
         # Convert usual comparison operators
         predicate = predicate.replace(&#34;&lt;=&#34;, &#34;≤&#34;).replace(&#34;==&#34;, &#34;=&#34;)
         # Ignore all other characters
         predicate = regex.sub(r&#34;[^xy&lt;=≤]&#34;, &#34;&#34;, predicate)
-        if predicate != predicate:  # pragma: no cover
-            print_warning(f&#34;predicate &#39;{predicate}&#39; normalized into &#39;{predicate}&#39;.&#34;)
+        # Treat the special case of identity
+        predicate = regex.sub(r&#34;^(x=y|y=)$&#34;, &#34;x=y≤x=y&#34;, predicate)
+        # If there is only one x (resp. y), expand it into x≤x (resp. y≤y)
+        predicate = regex.sub(r&#34;^([^x]*)x([^x]*)$&#34;, r&#34;\1x≤x\2&#34;, predicate)
+        predicate = regex.sub(r&#34;^([^y]*)y([^y]*)$&#34;, r&#34;\1y≤y\2&#34;, predicate)
+        if original != predicate:  # pragma: no cover
+            print_warning(f&#34;predicate &#39;{original}&#39; normalized into &#39;{predicate}&#39;.&#34;)
         if predicate not in compare_spans:
             raise ValueError(f&#34;Malformed predicate &#39;{predicate}&#39; in the pipeline.&#34;)
     return (compare_spans[predicate], negated)</code></pre>
@@ -119,7 +163,7 @@ def normalize_predicate(predicate: str) -&gt; Tuple[Predicate, bool]:
 <nav id="sidebar">
 <header>
 <a class="homelink" rel="home" title="Paroxython Home" href="index.html">
-<img src="resources/logo.png" alt="Paroxython logo">
+<img src="https://laowantong.github.io/paroxython/resources/logo.png" alt="Paroxython logo">
 </a>
 </header>
 <div class="gcse-search" style="height: 70px"

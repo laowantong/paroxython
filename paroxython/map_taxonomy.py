@@ -16,8 +16,6 @@ from .user_types import (
     TaxonsSpans,
 )
 
-_sub_slash_sequences = regex.compile(r"//+").sub
-
 
 class Taxonomy:
     """Translate labels into taxons on a list of program paths."""
@@ -37,10 +35,14 @@ class Taxonomy:
                 self.compiled_label_names.append((regex.compile(label_pattern + "$"), taxon_name))
                 # note: "$" is necessary: regex.fullmatch() has no regex.fullsub() counterpart
 
-    cache: Dict[LabelName, TaxonNames] = {}
-
     @lru_cache(maxsize=None)
-    def get_taxon_name_list(self, label_name: LabelName) -> TaxonNames:
+    def get_taxon_name_list(
+        # fmt: off
+        self,
+        label_name: LabelName,
+        sub_slash_sequences=regex.compile(r"//+").sub,
+        # fmt: on
+    ) -> TaxonNames:
         """Translate a label name into a list of taxon names."""
         result: TaxonNames = []
         if label_name in self.literal_label_names:
@@ -48,7 +50,7 @@ class Taxonomy:
         for (rex, taxon_name) in self.compiled_label_names:
             if rex.match(label_name):
                 s = rex.sub(taxon_name, label_name)  # cf. note above
-                s = _sub_slash_sequences("/", s)
+                s = sub_slash_sequences("/", s)
                 result.append(s)
         return result
 

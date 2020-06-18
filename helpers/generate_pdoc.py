@@ -67,6 +67,7 @@ def resolve_new_types():
         ("assess_costs", "taxon", "TaxonName"),
         ("map_taxonomy", "label_name", "LabelName"),
         ("derived_labels_db", "query", "Query"),
+        ("filter_programs", "operation", "Operation"),
     ]
     result = {}
     for (filename, trigger, type_name) in data:
@@ -132,6 +133,13 @@ def embed_code_with_line_numbers():
     path.write_text(source)
 
 
+def cleanup_index():
+    for path in Path("docs/").rglob("index.html"):
+        source = path.read_text()
+        source = source.replace(" …", ".")
+        path.write_text(source)
+
+
 def main():
     update_readme_example()
     generate_html()
@@ -139,6 +147,7 @@ def main():
     remove_blacklisted_sources()
     strip_docstrings()
     embed_code_with_line_numbers()
+    cleanup_index()
 
 
 if __name__ == "__main__":

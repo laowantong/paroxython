@@ -5,8 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.8.1" />
 <title>paroxython.cli.cli_recommend API documentation</title>
-<meta name="description" content="USAGE:
-paroxython recommend [options] DB_PATH …" />
+<meta name="description" content="Read and execute a pipeline of commands and report the learning costs …" />
 <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
 <link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
@@ -27,35 +26,32 @@ paroxython recommend [options] DB_PATH …" />
 <h1 class="title">Module <code>paroxython.cli.cli_recommend</code></h1>
 </header>
 <section id="section-intro">
+<p>Read and execute a pipeline of commands and report the learning costs.</p>
 <h2 id="usage">Usage</h2>
-<p>paroxython recommend [options] DB_PATH</p>
+<pre><code>paroxython recommend [options] DB_PATH
+</code></pre>
 <h2 id="options">Options</h2>
-<p>-b &ndash;base=PATH
-Value accessible by any shell command of the pipeline.
-If not specified, this is parent directory of DB_PATH.
-[default: ]
--c &ndash;cost=STR
-Learning cost assessment strategy. [default: zeno]
-Currently available:
-• zeno: the i-th edge of a taxon, if not already
-imparted, costs 2^(-i). For instance, the taxon
-old/new/new will costs 2^-2 + 2^-3 = 0.375.
-• linear: simply count the number of new edges.
--o &ndash;output=PATH
-The path of the resulting report. If it is omitted, and
-DB_PATH is of the form PREFIX_db.json, a value of
-PREFIX_recommendations.json is used. [default: ]
--p &ndash;pipe=PATH
-Path of the command pipeline. If it is omitted, and
-DB_PATH is of the form PREFIX_db.json, a value of
-PREFIX_pipe.py is used. If the associated file is
-missing or malformed, no filter is applied. [default: ]</p>
-<h2 id="description">Description</h2>
-<p>Walk a directory, tag its Python files and make a database of the results.</p>
+<pre><code class="plain">-b --base=PATH      Value accessible, under the name &quot;base&quot;, by any shell
+                    command of the pipeline. If not specified, this is the
+                    parent directory of DB_PATH. [default: ]
+-c --cost=STR       Learning cost assessment strategy. [default: zeno]
+                    Currently available:
+                    • zeno: the i-th edge of a taxon, if not already
+                            imparted, costs 2^(-i). For instance, the taxon
+                            old/new/new will costs 2^-2 + 2^-3 = 0.375.
+                    • linear: simply count the number of new edges.
+-o --output=PATH    The path of the resulting report. If it is omitted, and
+                    DB_PATH is of the form PREFIX_db.json, a value of
+                    PREFIX_recommendations.json is used. [default: ]
+-p --pipe=PATH      Path of the command pipeline. If it is omitted, and
+                    DB_PATH is of the form PREFIX_db.json, a value of
+                    PREFIX_pipe.py is used. If the associated file is
+                    missing or malformed, no filter is applied. [default: ]
+</code></pre>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli_recommend.py#L0-L61" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli_recommend.py#L0-L62" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">import json
 import sys
@@ -109,7 +105,7 @@ def cli_wrapper(args):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli_recommend.py#L38-L62" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli_recommend.py#L39-L63" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def cli_wrapper(args):
     db_path = Path(args[&#34;DB_PATH&#34;])
@@ -146,7 +142,7 @@ def cli_wrapper(args):
 <nav id="sidebar">
 <header>
 <a class="homelink" rel="home" title="Paroxython Home" href="index.html">
-<img src="resources/logo.png" alt="Paroxython logo">
+<img src="https://laowantong.github.io/paroxython/resources/logo.png" alt="Paroxython logo">
 </a>
 </header>
 <div class="gcse-search" style="height: 70px"

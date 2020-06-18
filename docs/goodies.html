@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.8.1" />
 <title>paroxython.goodies API documentation</title>
-<meta name="description" content="" />
+<meta name="description" content="A grab bag of various generic functions and factories." />
 <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
 <link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
@@ -26,16 +26,17 @@
 <h1 class="title">Module <code>paroxython.goodies</code></h1>
 </header>
 <section id="section-intro">
+<p>A grab bag of various generic functions and factories.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/goodies.py#L0-L100" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/goodies.py#L0-L152" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">import sys
 from collections import defaultdict
 from math import log2
 from textwrap import wrap
-from typing import Callable, Tuple, Union
+from typing import Callable, Dict, Optional, Tuple, Union
 from unicodedata import normalize
 
 import regex  # type: ignore
@@ -43,9 +44,9 @@ import regex  # type: ignore
 from .user_types import Span
 
 
-def title_to_slug_factory():
-    slug_counts = defaultdict(int)
-    cache = {}
+def title_to_slug_factory() -&gt; Callable:
+    slug_counts: Dict[str, int] = defaultdict(int)
+    cache: Dict[str, str] = {}
 
     def title_to_slug(title, deduplicate=False):
         title = title.strip()
@@ -76,15 +77,15 @@ def enumeration_to_txt_factory(
     default_string: str = &#34;&#34;,
     sep: str = &#34;&lt;br&gt;&#34;,
     template: str = &#34;&lt;details&gt;&lt;summary&gt;{summary}&lt;/summary&gt;{details}&lt;/details&gt;&#34;,
-    initial_indent: str = &#34;   &#34;,  # take into account the details marker
+    initial_indent: int = 3,  # take into account the details marker
 ) -&gt; Callable[[str], str]:
     def enumeration_to_txt(s: str) -&gt; str:
         if not s:
             return default_string
         if len(s) &lt;= width:
             return s
-        lines = wrap(s, width, initial_indent=initial_indent)
-        summary = lines[0][len(initial_indent) :]
+        lines = wrap(s, width, initial_indent=&#34; &#34; * initial_indent)
+        summary = lines[0][initial_indent:]
         details = sep.join(lines[1:])
         return template.format(summary=summary, details=details)
 
@@ -121,18 +122,28 @@ def print_warning(message: str):
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
 <dt id="paroxython.goodies.title_to_slug_factory"><code class="name flex">
-<span>def <span class="ident">title_to_slug_factory</span></span>(<span>)</span>
+<span>def <span class="ident">title_to_slug_factory</span></span>(<span>) ‑> Callable</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Return a function mapping a string to the appropriate slug, optionally disambiguated.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>Callable[[str, Optional[bool]]]</code></dt>
+<dd>A function taking a string and an optional boolean
+<code>deduplicate</code> (default: <code>False</code>). If <code>True</code>, when two or more strings produce the same
+slug, a numeric suffix is added to the second one (<code>"-1"</code>), the third one (<code>"-2"</code>), and
+so on.</dd>
+</dl>
+<h2 id="examples">Examples</h2>
+<p>See <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/tests/test_goodies.py"><code>test_goodies.py</code></a>.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/goodies.py#L13-L34" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/goodies.py#L15-L47" class="git-link">Browse GitHub</a>
 </summary>
-<pre><code class="python">def title_to_slug_factory():
-    slug_counts = defaultdict(int)
-    cache = {}
+<pre><code class="python">def title_to_slug_factory() -&gt; Callable:
+    slug_counts: Dict[str, int] = defaultdict(int)
+    cache: Dict[str, str] = {}
 
     def title_to_slug(title, deduplicate=False):
         title = title.strip()
@@ -162,37 +173,87 @@ def print_warning(message: str):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/goodies.py#L37-L39" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/goodies.py#L50-L52" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def add_line_numbers(source: str) -&gt; str:
     return &#34;\n&#34;.join(f&#34;{n: &lt;4}{line}&#34; for (n, line) in enumerate(source.split(&#34;\n&#34;), 1))</code></pre>
 </details>
 </dd>
 <dt id="paroxython.goodies.enumeration_to_txt_factory"><code class="name flex">
-<span>def <span class="ident">enumeration_to_txt_factory</span></span>(<span>width: int = 20, default_string: str = '', sep: str = &#x27;&lt;br&gt;&#x27;, template: str = &#x27;&lt;details&gt;&lt;summary&gt;{summary}&lt;/summary&gt;{details}&lt;/details&gt;&#x27;, initial_indent: str = '
-') ‑> Callable[[str], str]</span>
+<span>def <span class="ident">enumeration_to_txt_factory</span></span>(<span>width: int = 20, default_string: str = '', sep: str = &#x27;&lt;br&gt;&#x27;, template: str = &#x27;&lt;details&gt;&lt;summary&gt;{summary}&lt;/summary&gt;{details}&lt;/details&gt;&#x27;, initial_indent: int = 3) ‑> Callable[[str], str]</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Return a function formatting an enumeration string on a given column width.</p></div>
+<div class="desc"><p>Return a function formatting an enumeration on a given column width.</p>
+<p>This function is used by <code>recommend_programs.get_markdown()</code> to limit the width of the last
+column of the Markdown tables, as in the following example:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Cost</th>
+<th align="left">Taxon</th>
+<th align="left">Location</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">0.9375</td>
+<td align="left"><code>type/number/integer/literal</code></td>
+<td align="left"><details><summary>1, 1, 1, 1, </summary>1, 1, 2, 2, 2, <br>2, 2, 3, 3, 3</details></td>
+</tr>
+</tbody>
+</table>
+<p>The enumeration, given as a string, is wrapped onto one or several lines of at most <code>width</code>
+characters. The first line and the remaining ones are formatted separately according to the
+given <code>template</code>.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>width</code></strong> :&ensp;<code>int</code>, optional</dt>
+<dd>Column width.
+Defaults to <code>20</code>.</dd>
+<dt><strong><code>default_string</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>String to return when the enumeration is empty.
+Defaults to <code>""</code>.</dd>
+<dt><strong><code>sep</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>Separator between wrapped lines.
+Defaults to <code>"&lt;br&gt;"</code>.</dd>
+<dt><strong><code>template</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>A formatting string on the first line (referred as <code>summary</code>)
+and the remaining ones (referred as <code>details</code>).
+Defaults to <code>"&lt;details&gt;&lt;summary&gt;{summary}&lt;/summary&gt;{details}&lt;/details&gt;"</code>.</dd>
+<dt><strong><code>initial_indent</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>Approximate space-width of the detail marker (<em>e.g.</em>,
+<code>"▶︎ "</code>).
+Defaults to <code>3</code>.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>Callable[[str], str]</code></dt>
+<dd>Function returning a wrapped version of a given string.</dd>
+</dl>
+<h2 id="example">Example</h2>
+<pre><code class="python">&gt;&gt;&gt; enumeration_to_txt = enumeration_to_txt_factory(7)  # create the function
+&gt;&gt;&gt; enumeration_to_txt(&quot;1, 2, 3, 4, 5-6, 7, 8, 9&quot;)      # use it
+&quot;&lt;details&gt;&lt;summary&gt;1,&lt;/summary&gt;2, 3,&lt;br&gt;4, 5-6,&lt;br&gt;7, 8, 9&lt;/details&gt;&quot;
+</code></pre></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/goodies.py#L42-L61" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/goodies.py#L55-L108" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def enumeration_to_txt_factory(
     width: int = 20,
     default_string: str = &#34;&#34;,
     sep: str = &#34;&lt;br&gt;&#34;,
     template: str = &#34;&lt;details&gt;&lt;summary&gt;{summary}&lt;/summary&gt;{details}&lt;/details&gt;&#34;,
-    initial_indent: str = &#34;   &#34;,  # take into account the details marker
+    initial_indent: int = 3,  # take into account the details marker
 ) -&gt; Callable[[str], str]:
     def enumeration_to_txt(s: str) -&gt; str:
         if not s:
             return default_string
         if len(s) &lt;= width:
             return s
-        lines = wrap(s, width, initial_indent=initial_indent)
-        summary = lines[0][len(initial_indent) :]
+        lines = wrap(s, width, initial_indent=&#34; &#34; * initial_indent)
+        summary = lines[0][initial_indent:]
         details = sep.join(lines[1:])
         return template.format(summary=summary, details=details)
 
@@ -203,17 +264,20 @@ def print_warning(message: str):
 <span>def <span class="ident">cost_bucket</span></span>(<span>cost: int) ‑> str</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Among a predetermined set of intervals, return that including the given positive number.</p>
-<p>The intervals are <code>[0, 0]</code>, <code>]0, 0.25[</code>, <code>[0.25, 0.5[</code>, <code>[0.5, 1[</code>, <code>[1, 2[</code>, <code>[2,
-4[</code>, <code>[4, 8[</code>, and so on. The result is returned as a string ready to be included in the
+<div class="desc"><p>Return an interval including a given positive number.</p>
+<p>The intervals are predefined as <span><span class="MathJax_Preview">[0, 0], ]0, 0.25[, [2^{i-2}, 2^{i-1}[, \dots</span><script type="math/tex">[0, 0], ]0, 0.25[, [2^{i-2}, 2^{i-1}[, \dots</script></span> for all
+natural numbers <span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>. The result is returned as a string ready to be included in the
 recommendation report.</p>
-<pre><code class="python">&gt;&gt;&gt; cost_bucket(0.75)
+<h2 id="examples">Examples</h2>
+<pre><code class="python">&gt;&gt;&gt; cost_bucket(0)
+&quot;0&quot;
+&gt;&gt;&gt; cost_bucket(0.75)
 &quot;in [0.5, 1[&quot;
 </code></pre></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/goodies.py#L64-L84" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/goodies.py#L111-L134" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def cost_bucket(cost: int) -&gt; str:
     if cost == 0:
@@ -234,6 +298,7 @@ recommendation report.</p>
 </code></dt>
 <dd>
 <div class="desc"><p>Return a deduplicated string representation of the given couple or span.</p>
+<h2 id="examples">Examples</h2>
 <pre><code class="python">&gt;&gt;&gt; couple_to_string((12, 15))
 &quot;12-15&quot;
 &gt;&gt;&gt; couple_to_string((12, 12))
@@ -244,7 +309,7 @@ recommendation report.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/goodies.py#L87-L97" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/goodies.py#L137-L148" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def couple_to_string(couple: Union[Span, Tuple[int, int]]) -&gt; str:
     return f&#34;{couple[0]}&#34; + (&#34;&#34; if couple[0] == couple[1] else f&#34;-{couple[1]}&#34;)</code></pre>
@@ -254,11 +319,11 @@ recommendation report.</p>
 <span>def <span class="ident">print_warning</span></span>(<span>message: str)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Print the given message on <code>sys.stderr</code>.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/goodies.py#L100-L101" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/goodies.py#L151-L153" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def print_warning(message: str):
     print(f&#34;Warning: {message}&#34;, file=sys.stderr)</code></pre>
@@ -272,7 +337,7 @@ recommendation report.</p>
 <nav id="sidebar">
 <header>
 <a class="homelink" rel="home" title="Paroxython Home" href="index.html">
-<img src="resources/logo.png" alt="Paroxython logo">
+<img src="https://laowantong.github.io/paroxython/resources/logo.png" alt="Paroxython logo">
 </a>
 </header>
 <div class="gcse-search" style="height: 70px"

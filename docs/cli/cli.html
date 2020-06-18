@@ -5,8 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.8.1" />
 <title>paroxython.cli.cli API documentation</title>
-<meta name="description" content="USAGE:
-paroxython [--version] [--help] COMMAND [ARGS...] …" />
+<meta name="description" content="Command line interface for the main functionalities of Paroxython …" />
 <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
 <link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
@@ -27,23 +26,23 @@ paroxython [--version] [--help] COMMAND [ARGS...] …" />
 <h1 class="title">Module <code>paroxython.cli.cli</code></h1>
 </header>
 <section id="section-intro">
+<p>Command line interface for the main functionalities of Paroxython.</p>
 <h2 id="usage">Usage</h2>
-<p>paroxython [&ndash;version] [&ndash;help] COMMAND [ARGS&hellip;]</p>
+<pre><code>paroxython [--version] [--help] COMMAND [ARGS...]
+</code></pre>
 <h2 id="commands">Commands</h2>
-<p>tag
-Tag one Python file and output the table of its taxons or
-labels.
-collect
-Walk a directory, tag its Python files and make a JSON
-database of the results.
-recommend
-Read and execute a pipeline of commands and report the learning
-costs.</p>
-<p>Type 'paroxython COMMAND &ndash;help' for more information on a specific command.</p>
+<pre><code class="plain">tag         Tag one Python file and output the table of its taxons or
+            labels.
+collect     Walk a directory, tag its Python files and make a JSON
+            database of the results.
+recommend   Read and execute a pipeline of commands and report the learning
+            costs.
+</code></pre>
+<p>Type `paroxython COMMAND &ndash;help for more information on a specific command.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli.py#L0-L38" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli.py#L0-L54" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">#! /usr/bin/env python
 import sys
@@ -51,6 +50,7 @@ from importlib import import_module
 import pkg_resources
 
 from docopt import docopt  # type: ignore
+import regex  # type: ignore
 
 if sys.version &lt; &#34;3.6&#34;:  # pragma: no cover
     print(f&#34;Paroxython requires Python 3.6 or later to run.\nThis version is {sys.version}.&#34;)
@@ -58,13 +58,23 @@ if sys.version &lt; &#34;3.6&#34;:  # pragma: no cover
 
 
 def main():
-    version = pkg_resources.get_distribution(&#34;paroxython&#34;).version
+    global __doc__
+    __doc__ = regex.sub(r&#34;(?m)^ *```.*\n&#34;, &#34;&#34;, __doc__)  # suppress Markdown code delimiters
+    try:
+        distribution = pkg_resources.get_distribution(&#34;paroxython&#34;)
+    except pkg_resources.DistributionNotFound:
+        version = &#34;unknown&#34;  # For tests during CI
+    else:  # pragma: no cover
+        version = distribution.version
     args = docopt(__doc__, version=f&#34;paroxython version {version}&#34;, options_first=True)
+    if not args.get(&#34;COMMAND&#34;):
+        sys.exit(__doc__)
     command_name = args[&#34;COMMAND&#34;].lower()
     command_args = [command_name] + args[&#34;ARGS&#34;]
     if command_name not in (&#34;tag&#34;, &#34;recommend&#34;, &#34;collect&#34;):
         sys.exit(f&#34;{command_name} is not a valid command. Type &#39;paroxython --help&#39;.&#34;)
     command = import_module(f&#34;paroxython.cli.cli_{command_name}&#34;, &#34;cli_wrapper&#34;)
+    command.__doc__ = regex.sub(r&#34;(?m)^ *```.*\n&#34;, &#34;&#34;, command.__doc__)
     command.cli_wrapper(docopt(command.__doc__, argv=command_args))
 
 
@@ -87,16 +97,26 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli.py#L27-L35" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli.py#L33-L51" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def main():
-    version = pkg_resources.get_distribution(&#34;paroxython&#34;).version
+    global __doc__
+    __doc__ = regex.sub(r&#34;(?m)^ *```.*\n&#34;, &#34;&#34;, __doc__)  # suppress Markdown code delimiters
+    try:
+        distribution = pkg_resources.get_distribution(&#34;paroxython&#34;)
+    except pkg_resources.DistributionNotFound:
+        version = &#34;unknown&#34;  # For tests during CI
+    else:  # pragma: no cover
+        version = distribution.version
     args = docopt(__doc__, version=f&#34;paroxython version {version}&#34;, options_first=True)
+    if not args.get(&#34;COMMAND&#34;):
+        sys.exit(__doc__)
     command_name = args[&#34;COMMAND&#34;].lower()
     command_args = [command_name] + args[&#34;ARGS&#34;]
     if command_name not in (&#34;tag&#34;, &#34;recommend&#34;, &#34;collect&#34;):
         sys.exit(f&#34;{command_name} is not a valid command. Type &#39;paroxython --help&#39;.&#34;)
     command = import_module(f&#34;paroxython.cli.cli_{command_name}&#34;, &#34;cli_wrapper&#34;)
+    command.__doc__ = regex.sub(r&#34;(?m)^ *```.*\n&#34;, &#34;&#34;, command.__doc__)
     command.cli_wrapper(docopt(command.__doc__, argv=command_args))</code></pre>
 </details>
 </dd>
@@ -108,7 +128,7 @@ if __name__ == &#34;__main__&#34;:
 <nav id="sidebar">
 <header>
 <a class="homelink" rel="home" title="Paroxython Home" href="index.html">
-<img src="resources/logo.png" alt="Paroxython logo">
+<img src="https://laowantong.github.io/paroxython/resources/logo.png" alt="Paroxython logo">
 </a>
 </header>
 <div class="gcse-search" style="height: 70px"

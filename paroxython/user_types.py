@@ -99,14 +99,13 @@ Operation = NewType("Operation", str)
 
 class Command(TypedDict):
     operation: Operation
-    data: Union[str, List[str]] # not source code, but source of the data
+    data: Union[str, List[str]]
     filtered_out: ProgramNames # to be populated by the execution of the command
 
 Predicate = Callable[[int, int], bool]
 
 # Recommendations
 
-ProgramTaxonNames = Dict[ProgramName, TaxonNames]
 AssessedPrograms = List[Tuple[float, ProgramName]]
 
 AssessmentStrategy = Literal["zeno", "linear"]

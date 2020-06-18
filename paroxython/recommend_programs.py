@@ -48,7 +48,7 @@ class Recommendations:
         self.selected_programs = program_filter.selected_programs
         self.imparted_knowledge = program_filter.imparted_knowledge
         self.update_filter = program_filter.update_filter
-        self.assess = LearningCostAssessor()
+        self.assess = LearningCostAssessor(self.programs)
         self.assess.set_cost_assessment_strategy(cost_assessment_strategy)
 
     def run_pipeline(self) -> None:

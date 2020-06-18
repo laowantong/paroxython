@@ -1,17 +1,19 @@
-"""
+"""Tag one Python file and output the table of its taxons or labels.
+
 USAGE:
+    ```
     paroxython tag [options] FILENAME
+    ```
 
 OPTIONS:
+    ```plain
     -f --format=FORMAT  Format of the output, either "md" (Markdown)
-                        or "tsv" (Tab SeparatedValues). [default: md]
+                        or "tsv" (Tab Separated Values). [default: md]
     -l --labels         Output the labels instead of the taxons.
     -t --taxonomy=PATH  The path of a TSV file mapping labels onto taxons.
                         If not specified, use the included copy of the table
                         whose last version is at https://bit.ly/2Yu0LqU.
-
-DESCRIPTION:
-    Tag one Python file and output the table of its taxons or labels.
+    ```
 """
 
 from pathlib import Path
