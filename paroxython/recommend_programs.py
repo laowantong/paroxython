@@ -4,7 +4,7 @@
 import subprocess
 from collections import defaultdict
 from pathlib import Path
-from typing import Dict, List, Optional, Tuple, Union
+from typing import Dict, List, Optional, Union
 
 import regex  # type: ignore
 
@@ -25,9 +25,12 @@ from .user_types import (
     JsonDatabase,
     Operation,
     ProgramNames,
-    ProgramNameSet,
     TaxonNameSet,
 )
+
+
+class MalformedData(Exception):
+    ...
 
 
 class Recommendations:
@@ -67,20 +70,24 @@ class Recommendations:
                 print_warning(f"operation {i} is ignored (not specified).")
                 continue
             (operation, n) = regex.subn(" all", "", operation)
-            any_or_all = "all" if n == 1 else "any"
+            quantifier = "all" if n == 1 else "any"
             operation = Operation(operation.replace(" any", ""))
             if operation not in ("include", "exclude", "impart"):
                 print_warning(f"operation {i} ({operation}) is ignored (unknown).")
                 continue
 
-            # Retrieve the patterns
-            patterns = self.retrieve_patterns_from_source(command.get("data", []), operation, i)
-            if not patterns:
+            # Retrieve the data
+            try:
+                data = self.parse_data(command.get("data", []), operation)
+            except MalformedData:
+                print_warning(f"unable to interpret the data of operation {i} ({operation}).")
+                continue
+            if not data:
                 print_warning(f"operation {i} ({operation}) is ignored (no data).")
                 continue
 
             # Update the selected programs and optionally impart the associated taxons
-            self.update_filter(operation, patterns, i, any_or_all)
+            self.update_filter(data, operation, quantifier)
 
             # Update the statistics of the filter state for the last operation
             (previous, current) = (current, set(self.selected_programs))
@@ -90,19 +97,12 @@ class Recommendations:
         self.assess.set_imparted_knowledge(self.imparted_knowledge)
         self.assessed_programs = self.assess(self.selected_programs)
 
-    def retrieve_patterns_from_source(
-        # fmt: off
-        self,
-        data: Union[str, List[str]],
-        operation: Operation,
-        i: int
-        # fmt: on
-    ) -> List[str]:
-        """Retrieve the patterns on which the operation will be applied."""
+    def parse_data(self, data: Union[str, List[str]], operation: Operation) -> List[str]:
+        """Retrieve the data on which the operation will be applied."""
         if isinstance(data, list):  # The JSON object can either be a list of strings...
             return data
         elif isinstance(data, str):  # ... or a shell command printing them on stdout
-            result = (
+            return (
                 subprocess.run(
                     str(data).format(base_path=self.base_path),  # str() needed by mypy
                     stdout=subprocess.PIPE,  # From Python 3.7, these two arguments can be
@@ -114,10 +114,8 @@ class Recommendations:
                 .stdout.strip()
                 .split("\n")
             )
-            return result
         else:
-            print_warning(f"unable to interpret the pattern of operation {i} ({operation}).")
-            return []
+            raise MalformedData
 
     def get_markdown(
         self,

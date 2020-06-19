@@ -29,12 +29,12 @@
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L0-L226" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L0-L224" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">import subprocess
 from collections import defaultdict
 from pathlib import Path
-from typing import Dict, List, Optional, Tuple, Union
+from typing import Dict, List, Optional, Union
 
 import regex  # type: ignore
 
@@ -55,9 +55,12 @@ from .user_types import (
     JsonDatabase,
     Operation,
     ProgramNames,
-    ProgramNameSet,
     TaxonNameSet,
 )
+
+
+class MalformedData(Exception):
+    ...
 
 
 class Recommendations:
@@ -95,20 +98,24 @@ class Recommendations:
                 print_warning(f&#34;operation {i} is ignored (not specified).&#34;)
                 continue
             (operation, n) = regex.subn(&#34; all&#34;, &#34;&#34;, operation)
-            any_or_all = &#34;all&#34; if n == 1 else &#34;any&#34;
+            quantifier = &#34;all&#34; if n == 1 else &#34;any&#34;
             operation = Operation(operation.replace(&#34; any&#34;, &#34;&#34;))
             if operation not in (&#34;include&#34;, &#34;exclude&#34;, &#34;impart&#34;):
                 print_warning(f&#34;operation {i} ({operation}) is ignored (unknown).&#34;)
                 continue
 
-            # Retrieve the patterns
-            patterns = self.retrieve_patterns_from_source(command.get(&#34;data&#34;, []), operation, i)
-            if not patterns:
+            # Retrieve the data
+            try:
+                data = self.parse_data(command.get(&#34;data&#34;, []), operation)
+            except MalformedData:
+                print_warning(f&#34;unable to interpret the data of operation {i} ({operation}).&#34;)
+                continue
+            if not data:
                 print_warning(f&#34;operation {i} ({operation}) is ignored (no data).&#34;)
                 continue
 
             # Update the selected programs and optionally impart the associated taxons
-            self.update_filter(operation, patterns, i, any_or_all)
+            self.update_filter(data, operation, quantifier)
 
             # Update the statistics of the filter state for the last operation
             (previous, current) = (current, set(self.selected_programs))
@@ -118,18 +125,11 @@ class Recommendations:
         self.assess.set_imparted_knowledge(self.imparted_knowledge)
         self.assessed_programs = self.assess(self.selected_programs)
 
-    def retrieve_patterns_from_source(
-        # fmt: off
-        self,
-        data: Union[str, List[str]],
-        operation: Operation,
-        i: int
-        # fmt: on
-    ) -&gt; List[str]:
+    def parse_data(self, data: Union[str, List[str]], operation: Operation) -&gt; List[str]:
         if isinstance(data, list):  # The JSON object can either be a list of strings...
             return data
         elif isinstance(data, str):  # ... or a shell command printing them on stdout
-            result = (
+            return (
                 subprocess.run(
                     str(data).format(base_path=self.base_path),  # str() needed by mypy
                     stdout=subprocess.PIPE,  # From Python 3.7, these two arguments can be
@@ -141,10 +141,8 @@ class Recommendations:
                 .stdout.strip()
                 .split(&#34;\n&#34;)
             )
-            return result
         else:
-            print_warning(f&#34;unable to interpret the pattern of operation {i} ({operation}).&#34;)
-            return []
+            raise MalformedData
 
     def get_markdown(
         self,
@@ -261,6 +259,26 @@ if __name__ == &#34;__main__&#34;:
 <section>
 <h2 class="section-title" id="header-classes">Classes</h2>
 <dl>
+<dt id="paroxython.recommend_programs.MalformedData"><code class="flex name class">
+<span>class <span class="ident">MalformedData</span></span>
+<span>(</span><span>...)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Common base class for all non-exit exceptions.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L32-L33" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">class MalformedData(Exception):
+    ...</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>builtins.Exception</li>
+<li>builtins.BaseException</li>
+</ul>
+</dd>
 <dt id="paroxython.recommend_programs.Recommendations"><code class="flex name class">
 <span>class <span class="ident">Recommendations</span></span>
 <span>(</span><span>db: JsonDatabase, commands: Union[List[Command], NoneType] = None, base_path: Union[pathlib.Path, NoneType] = None, cost_assessment_strategy: Literal['zeno', 'linear'] = 'zeno')</span>
@@ -270,7 +288,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L33-L212" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L36-L210" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">class Recommendations:
     def __init__(
@@ -307,20 +325,24 @@ if __name__ == &#34;__main__&#34;:
                 print_warning(f&#34;operation {i} is ignored (not specified).&#34;)
                 continue
             (operation, n) = regex.subn(&#34; all&#34;, &#34;&#34;, operation)
-            any_or_all = &#34;all&#34; if n == 1 else &#34;any&#34;
+            quantifier = &#34;all&#34; if n == 1 else &#34;any&#34;
             operation = Operation(operation.replace(&#34; any&#34;, &#34;&#34;))
             if operation not in (&#34;include&#34;, &#34;exclude&#34;, &#34;impart&#34;):
                 print_warning(f&#34;operation {i} ({operation}) is ignored (unknown).&#34;)
                 continue
 
-            # Retrieve the patterns
-            patterns = self.retrieve_patterns_from_source(command.get(&#34;data&#34;, []), operation, i)
-            if not patterns:
+            # Retrieve the data
+            try:
+                data = self.parse_data(command.get(&#34;data&#34;, []), operation)
+            except MalformedData:
+                print_warning(f&#34;unable to interpret the data of operation {i} ({operation}).&#34;)
+                continue
+            if not data:
                 print_warning(f&#34;operation {i} ({operation}) is ignored (no data).&#34;)
                 continue
 
             # Update the selected programs and optionally impart the associated taxons
-            self.update_filter(operation, patterns, i, any_or_all)
+            self.update_filter(data, operation, quantifier)
 
             # Update the statistics of the filter state for the last operation
             (previous, current) = (current, set(self.selected_programs))
@@ -330,18 +352,11 @@ if __name__ == &#34;__main__&#34;:
         self.assess.set_imparted_knowledge(self.imparted_knowledge)
         self.assessed_programs = self.assess(self.selected_programs)
 
-    def retrieve_patterns_from_source(
-        # fmt: off
-        self,
-        data: Union[str, List[str]],
-        operation: Operation,
-        i: int
-        # fmt: on
-    ) -&gt; List[str]:
+    def parse_data(self, data: Union[str, List[str]], operation: Operation) -&gt; List[str]:
         if isinstance(data, list):  # The JSON object can either be a list of strings...
             return data
         elif isinstance(data, str):  # ... or a shell command printing them on stdout
-            result = (
+            return (
                 subprocess.run(
                     str(data).format(base_path=self.base_path),  # str() needed by mypy
                     stdout=subprocess.PIPE,  # From Python 3.7, these two arguments can be
@@ -353,10 +368,8 @@ if __name__ == &#34;__main__&#34;:
                 .stdout.strip()
                 .split(&#34;\n&#34;)
             )
-            return result
         else:
-            print_warning(f&#34;unable to interpret the pattern of operation {i} ({operation}).&#34;)
-            return []
+            raise MalformedData
 
     def get_markdown(
         self,
@@ -458,7 +471,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L54-L91" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L57-L98" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def run_pipeline(self) -&gt; None:
     current = set(self.programs)
@@ -474,20 +487,24 @@ if __name__ == &#34;__main__&#34;:
             print_warning(f&#34;operation {i} is ignored (not specified).&#34;)
             continue
         (operation, n) = regex.subn(&#34; all&#34;, &#34;&#34;, operation)
-        any_or_all = &#34;all&#34; if n == 1 else &#34;any&#34;
+        quantifier = &#34;all&#34; if n == 1 else &#34;any&#34;
         operation = Operation(operation.replace(&#34; any&#34;, &#34;&#34;))
         if operation not in (&#34;include&#34;, &#34;exclude&#34;, &#34;impart&#34;):
             print_warning(f&#34;operation {i} ({operation}) is ignored (unknown).&#34;)
             continue
 
-        # Retrieve the patterns
-        patterns = self.retrieve_patterns_from_source(command.get(&#34;data&#34;, []), operation, i)
-        if not patterns:
+        # Retrieve the data
+        try:
+            data = self.parse_data(command.get(&#34;data&#34;, []), operation)
+        except MalformedData:
+            print_warning(f&#34;unable to interpret the data of operation {i} ({operation}).&#34;)
+            continue
+        if not data:
             print_warning(f&#34;operation {i} ({operation}) is ignored (no data).&#34;)
             continue
 
         # Update the selected programs and optionally impart the associated taxons
-        self.update_filter(operation, patterns, i, any_or_all)
+        self.update_filter(data, operation, quantifier)
 
         # Update the statistics of the filter state for the last operation
         (previous, current) = (current, set(self.selected_programs))
@@ -498,28 +515,21 @@ if __name__ == &#34;__main__&#34;:
     self.assessed_programs = self.assess(self.selected_programs)</code></pre>
 </details>
 </dd>
-<dt id="paroxython.recommend_programs.Recommendations.retrieve_patterns_from_source"><code class="name flex">
-<span>def <span class="ident">retrieve_patterns_from_source</span></span>(<span>self, data: Union[str, List[str]], operation: Operation, i: int) ‑> List[str]</span>
+<dt id="paroxython.recommend_programs.Recommendations.parse_data"><code class="name flex">
+<span>def <span class="ident">parse_data</span></span>(<span>self, data: Union[str, List[str]], operation: Operation) ‑> List[str]</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Retrieve the patterns on which the operation will be applied.</p></div>
+<div class="desc"><p>Retrieve the data on which the operation will be applied.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L93-L120" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L100-L118" class="git-link">Browse GitHub</a>
 </summary>
-<pre><code class="python">def retrieve_patterns_from_source(
-    # fmt: off
-    self,
-    data: Union[str, List[str]],
-    operation: Operation,
-    i: int
-    # fmt: on
-) -&gt; List[str]:
+<pre><code class="python">def parse_data(self, data: Union[str, List[str]], operation: Operation) -&gt; List[str]:
     if isinstance(data, list):  # The JSON object can either be a list of strings...
         return data
     elif isinstance(data, str):  # ... or a shell command printing them on stdout
-        result = (
+        return (
             subprocess.run(
                 str(data).format(base_path=self.base_path),  # str() needed by mypy
                 stdout=subprocess.PIPE,  # From Python 3.7, these two arguments can be
@@ -531,10 +541,8 @@ if __name__ == &#34;__main__&#34;:
             .stdout.strip()
             .split(&#34;\n&#34;)
         )
-        return result
     else:
-        print_warning(f&#34;unable to interpret the pattern of operation {i} ({operation}).&#34;)
-        return []</code></pre>
+        raise MalformedData</code></pre>
 </details>
 </dd>
 <dt id="paroxython.recommend_programs.Recommendations.get_markdown"><code class="name flex">
@@ -545,7 +553,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L122-L212" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L120-L210" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def get_markdown(
     self,
@@ -666,10 +674,13 @@ data-gaCategoryParameter="paroxython.recommend_programs">
 <li><h3><a href="#header-classes">Classes</a></h3>
 <ul>
 <li>
+<h4><code><a title="paroxython.recommend_programs.MalformedData" href="#paroxython.recommend_programs.MalformedData">MalformedData</a></code></h4>
+</li>
+<li>
 <h4><code><a title="paroxython.recommend_programs.Recommendations" href="#paroxython.recommend_programs.Recommendations">Recommendations</a></code></h4>
 <ul class="">
 <li><code><a title="paroxython.recommend_programs.Recommendations.run_pipeline" href="#paroxython.recommend_programs.Recommendations.run_pipeline">run_pipeline</a></code></li>
-<li><code><a title="paroxython.recommend_programs.Recommendations.retrieve_patterns_from_source" href="#paroxython.recommend_programs.Recommendations.retrieve_patterns_from_source">retrieve_patterns_from_source</a></code></li>
+<li><code><a title="paroxython.recommend_programs.Recommendations.parse_data" href="#paroxython.recommend_programs.Recommendations.parse_data">parse_data</a></code></li>
 <li><code><a title="paroxython.recommend_programs.Recommendations.get_markdown" href="#paroxython.recommend_programs.Recommendations.get_markdown">get_markdown</a></code></li>
 </ul>
 </li>

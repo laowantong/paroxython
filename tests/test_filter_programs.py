@@ -39,10 +39,10 @@ def test_taxons_of_programs():
     assert taxons == prg8_taxons | prg9_taxons
 
 
-def test_get_taxons_from_taxon_pattern():
+def test_taxons_of_pattern():
     dbf = ProgramFilter(db)
     names = ["X/S/M", "O(?!/C)", "Y/E$", "non_matching_pattern"]
-    taxons = set().union(*(dbf.get_taxons_from_taxon_pattern(name) for name in names))
+    taxons = set().union(*(dbf.taxons_of_pattern(name) for name in names))
     print(sorted(taxons))
     assert sorted(taxons) == [
         "O",
@@ -77,10 +77,10 @@ def test_impart_taxons():
     }
 
 
-def test_get_programs_from_program_pattern():
+def test_programs_of_pattern():
     dbf = ProgramFilter(db)
     names = [r"prg[1-3]\.py", r"prg[7-9]\.py", "non_matching_pattern"]
-    programs = set().union(*(dbf.get_programs_from_program_pattern(name) for name in names))
+    programs = set().union(*(dbf.programs_of_pattern(name) for name in names))
     print(sorted(programs))
     assert sorted(programs) == ["prg1.py", "prg2.py", "prg3.py", "prg7.py", "prg8.py", "prg9.py"]
 

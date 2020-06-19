@@ -4,7 +4,7 @@ import sys
 from collections import defaultdict
 from math import log2
 from textwrap import wrap
-from typing import Callable, Dict, Optional, Tuple, Union
+from typing import Callable, Dict, Tuple, Union
 from unicodedata import normalize
 
 import regex  # type: ignore

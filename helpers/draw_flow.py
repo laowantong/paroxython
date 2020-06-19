@@ -50,3 +50,19 @@ Path(f"{base}.dot").write_text(
     )
 )
 os.system(f"dot -Tpng {base}.dot > {base}.png; rm {base}.dot")
+
+base = "docs/resources/filter_flow"
+text = Path("paroxython/filter_programs.py").read_text()
+text = regex.search(r"(?s)<graphviz>(.+)</graphviz>", text)[1]
+text = text.replace("# ", "        ")
+
+Path(f"{base}.dot").write_text(
+    f"""digraph G {{
+        node [shape=box fontname=Menlo fontsize=16 style="rounded,filled" textcolor="#646464" fillcolor="#F5CA41" color="#B38D01" penwidth=2]
+        edge [penwidth=2 color="#646464"]
+        rankdir=LR;
+        {text}
+    }}
+    """
+)
+os.system(f"dot -Tpng {base}.dot > {base}.png; rm {base}.dot")

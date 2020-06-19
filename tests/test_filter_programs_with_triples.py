@@ -136,8 +136,8 @@ def test_programs_of_negated_triple(triple, expected_programs):
     assert programs == expected_programs
 
 
-def test__iterate_on_spans():
-    call = lambda *args: list(ProgramFilter._iterate_on_spans(*args))
+def test_iterate_on_spans():
+    call = lambda *args: list(dbf.iterate_on_spans(*args))
     result = call(
         {"a1": [1], "b1": [2, 3], "c1": [4, 5, 6], "a2": [7], "b2": [8, 9]},
         # The two following arguments are normally of type set,
