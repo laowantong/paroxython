@@ -28,7 +28,7 @@
 <section id="section-intro">
 <p>Paroxython is a command-line tool which finds and tags algorithmic features (such as assignments, nested loops, tail-recursive functions, etc.) in a collection of small Python programs, typically gathered for educational purposes (<em>e.g.</em>, examples, patterns, exercise corrections).</p>
 <p>Each tag consists in a free-form label associated with its spanning lines. These labels are then mapped onto a knowledge taxonomy designed by the teacher with basic order constraints in mind (<em>e.g.</em>, the fact that the introduction of the concept of early exit must come after that of loop, which itself requires that of control flow, is expressed with the following taxon: <code>flow/loop/exit/early</code>).</p>
-<p>Source codes, labels and taxons are stored in a database, which can finally be filtered through a pipeline of inclusion, exclusion and impartment commands on programs or taxons.</p>
+<p>Source codes, labels and taxa are stored in a database, which can finally be filtered through a pipeline of inclusion, exclusion and impartment commands on programs or taxa.</p>
 <h1 id="installation-and-test-drive">Installation and test-drive</h1>
 <pre><code>pip install paroxython
 </code></pre>
@@ -173,7 +173,7 @@ by your new students.</p>
 <p class="admonition-title">Tip</p>
 <p>As you can see, rather than maintaining a <strong>list</strong> of programs or concepts in the <code>"data"</code>
 field, you may provide a <strong>string</strong>. Paroxython will interpret it as a shell command, and
-expect it to print on <code>stdout</code> the required list of items (programs or taxons), one per line.</p>
+expect it to print on <code>stdout</code> the required list of items (programs or taxa), one per line.</p>
 </div>
 <h3 id="blacklisting-programs">Blacklisting programs</h3>
 <p>You want to filter out all programs reserved for an exam, or too complex, or not pedagogically
@@ -211,12 +211,12 @@ Python program (ending with <code>".py"</code>) or a taxon (like here).</p>
 </div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>Since the two latter taxons share a common prefix and Python doesn't provide other non-sequence
-type, it is enough to exclude all taxons starting with <code>type/non_sequence</code>.</p>
+<p>Since the two latter taxa share a common prefix and Python doesn't provide other non-sequence
+type, it is enough to exclude all taxa starting with <code>type/non_sequence</code>.</p>
 </div>
 <h3 id="concepts-to-be-introduced-now">Concepts to be introduced now</h3>
 <p>Your next class will be devoted to conditional constructs. Thus, you need to go through programs
-featuring taxons prefixed by <code>flow/conditional</code> or even, why not, some conditional expressions
+featuring taxa prefixed by <code>flow/conditional</code> or even, why not, some conditional expressions
 (<code>operator/ternary</code>). The suggested programs do not necessarily have to implement both concepts at
 the same time, but at least one. Any other program will be rejected.</p>
 <pre><code class="python">&gt;&gt;&gt; [
@@ -349,7 +349,7 @@ expressions, span algebra, semantic triples, negations) in the <a href="#deep-in
 <ol>
 <li>An auxiliary set of programs is calculated.</li>
 <li>The set of recommended programs (the <strong>selection</strong>) is updated.</li>
-<li>A new set of taxons may be “learned”, i.e., added to the body of imparted knowledge.</li>
+<li>A new set of taxa may be “learned”, i.e., added to the body of imparted knowledge.</li>
 </ol>
 <p>Note that each stage depends on both the operation and the nature of the datum to which it applies. Let us detail every possible case:</p>
 <h3 id="include-command"><code>"include"</code> command</h3>
@@ -376,8 +376,8 @@ expressions, span algebra, semantic triples, negations) in the <a href="#deep-in
 <li>The auxiliary set contains all programs whose name matches the given pattern, plus those which import (either directly or indirectly) at least one of them. In other words, it is the same as above (<code>"exclude"</code>), but only in the case where the input is a program pattern. In all other cases, this auxiliary set will be empty.</li>
 <li>The selection is then restricted to its <strong>difference</strong> with the auxiliary set (same as above for <code>"exclude"</code>).</li>
 <li>There are three cases:<ol>
-<li>If the input is a program pattern, all the taxons featured in a program whose name matches this pattern are added to the body of imparted knowledge.</li>
-<li>If the input is a taxon pattern, all the taxons matching this pattern are added to the body of imparted knowledge.</li>
+<li>If the input is a program pattern, all the taxa featured in a program whose name matches this pattern are added to the body of imparted knowledge.</li>
+<li>If the input is a taxon pattern, all the taxa matching this pattern are added to the body of imparted knowledge.</li>
 <li>Otherwise, the body of imparted knowledge is unchanged.</li>
 </ol>
 </li>
@@ -389,12 +389,12 @@ expressions, span algebra, semantic triples, negations) in the <a href="#deep-in
 <p class="admonition-title">Note</p>
 <p>Any taxon starting with <code>metadata</code> is considered by convention to span the entire program.</p>
 </div>
-<p>It is sometimes interesting to know how the spans of two taxons of the same program are located relatively to each other.</p>
+<p>It is sometimes interesting to know how the spans of two taxa of the same program are located relatively to each other.</p>
 <ul>
 <li>For instance, a <code>print</code> statement whose span is inside the span of a function indicates that this function has a side-effect.</li>
-<li>A less trivial application stems from the fact that our taxonomy is multi-dimensional: each algorithmic feature can be associated with several taxons at the same time, characterizing it it along several facets, or dimensions. For instance, the taxons <code>flow/loop</code> and <code>flow/loop/while</code> describe the category of a loop; whereas the taxons <code>flow/loop/exit/early</code> and <code>flow/loop/exit/late</code> describe its exit behavior. These dimensions are independent and, although it is entirely possible to do so, our default taxonomy does not list the results of the cross-product (i.e., <code>flow/loop/exit/early</code>, <code>flow/loop/exit/late</code>, <code>flow/loop/while/exit/early</code> and <code>flow/loop/while/exit/late</code>). Querying an hypothetical taxon <code>flow/loop/exit/early</code> (or <code>flow/loop/exit/early/for</code>, by the way) comes down to querying the taxons <code>flow/loop</code> spanning the same lines as <code>flow/loop/exit/early</code>.</li>
+<li>A less trivial application stems from the fact that our taxonomy is multi-dimensional: each algorithmic feature can be associated with several taxa at the same time, characterizing it it along several facets, or dimensions. For instance, the taxa <code>flow/loop</code> and <code>flow/loop/while</code> describe the category of a loop; whereas the taxa <code>flow/loop/exit/early</code> and <code>flow/loop/exit/late</code> describe its exit behavior. These dimensions are independent and, although it is entirely possible to do so, our default taxonomy does not list the results of the cross-product (i.e., <code>flow/loop/exit/early</code>, <code>flow/loop/exit/late</code>, <code>flow/loop/while/exit/early</code> and <code>flow/loop/while/exit/late</code>). Querying an hypothetical taxon <code>flow/loop/exit/early</code> (or <code>flow/loop/exit/early/for</code>, by the way) comes down to querying the taxa <code>flow/loop</code> spanning the same lines as <code>flow/loop/exit/early</code>.</li>
 </ul>
-<p>To express a relation <span><span class="MathJax_Preview">\mathfrak{R}</span><script type="math/tex">\mathfrak{R}</script></span> between the spans of two taxons, we start from the algebra devised in 1983 by James F. Allen in his seminal paper (<a href="http://cse.unl.edu/~choueiry/Documents/Allen-CACM1983.pdf">PDF</a>) about temporal intervals<sup id="fnref:Allen1983"><a class="footnote-ref" href="#fn:Allen1983">2</a></sup>. The so-called Allen's interval algebra defines 13 basic operators which capture all possible relations between two intervals <span><span class="MathJax_Preview">X=(x_1, x_2)</span><script type="math/tex">X=(x_1, x_2)</script></span> and <span><span class="MathJax_Preview">Y=(y_1, y_2)</span><script type="math/tex">Y=(y_1, y_2)</script></span>. The table below uses his terminology:</p>
+<p>To express a relation <span><span class="MathJax_Preview">\mathfrak{R}</span><script type="math/tex">\mathfrak{R}</script></span> between the spans of two taxa, we start from the algebra devised in 1983 by James F. Allen in his seminal paper (<a href="http://cse.unl.edu/~choueiry/Documents/Allen-CACM1983.pdf">PDF</a>) about temporal intervals<sup id="fnref:Allen1983"><a class="footnote-ref" href="#fn:Allen1983">2</a></sup>. The so-called Allen's interval algebra defines 13 basic operators which capture all possible relations between two intervals <span><span class="MathJax_Preview">X=(x_1, x_2)</span><script type="math/tex">X=(x_1, x_2)</script></span> and <span><span class="MathJax_Preview">Y=(y_1, y_2)</span><script type="math/tex">Y=(y_1, y_2)</script></span>. The table below uses his terminology:</p>
 <table>
 <thead>
 <tr>
@@ -519,7 +519,7 @@ Paroxython tries to be tolerant with the user input. The verb <code>"is"</code> 
 <p>This allows the user to be understood when entering formulas like
 <code>x == y</code>, <code>x &lt;= y</code> or <code>y1 &lt; x1 == x2 &lt;= y2</code>.</p>
 <h3 id="positive-semantic-triples">Positive semantic triples</h3>
-<p>A pipeline command can apply not only to programs and taxons, but also to relationships between two taxons. Being given an operator <span><span class="MathJax_Preview">\mathfrak{R}</span><script type="math/tex">\mathfrak{R}</script></span> and two taxons <span><span class="MathJax_Preview">t_1</span><script type="math/tex">t_1</script></span> and <span><span class="MathJax_Preview">t_2</span><script type="math/tex">t_2</script></span>, the statement <span><span class="MathJax_Preview">t_1 \mathbin{\mathfrak{R}} t_2</span><script type="math/tex">t_1 \mathbin{\mathfrak{R}} t_2</script></span> will be codified in the form of the <em>subject–predicate–object</em> expression <span><span class="MathJax_Preview">(t_1, \mathfrak{R}, t_2)</span><script type="math/tex">(t_1, \mathfrak{R}, t_2)</script></span>, which can be entered as a mere Python tuple <code>(t1, R, t2)</code>. For instance, the following pipeline command will only keep programs featuring a conditional inside a loop <strong>or</strong> (inclusive) ended by a <code>return</code> statement.</p>
+<p>A pipeline command can apply not only to programs and taxa, but also to relationships between two taxa. Being given an operator <span><span class="MathJax_Preview">\mathfrak{R}</span><script type="math/tex">\mathfrak{R}</script></span> and two taxa <span><span class="MathJax_Preview">t_1</span><script type="math/tex">t_1</script></span> and <span><span class="MathJax_Preview">t_2</span><script type="math/tex">t_2</script></span>, the statement <span><span class="MathJax_Preview">t_1 \mathbin{\mathfrak{R}} t_2</span><script type="math/tex">t_1 \mathbin{\mathfrak{R}} t_2</script></span> will be codified in the form of the <em>subject–predicate–object</em> expression <span><span class="MathJax_Preview">(t_1, \mathfrak{R}, t_2)</span><script type="math/tex">(t_1, \mathfrak{R}, t_2)</script></span>, which can be entered as a mere Python tuple <code>(t1, R, t2)</code>. For instance, the following pipeline command will only keep programs featuring a conditional inside a loop <strong>or</strong> (inclusive) ended by a <code>return</code> statement.</p>
 <pre><code class="python">    {
         &quot;operation&quot;: &quot;include&quot;,
         &quot;data&quot;: [
@@ -677,7 +677,7 @@ Thanks and kudos to the author, Matthew Barnett: without his awesome work, many 
 </dd>
 <dt><code class="name"><a title="paroxython.filter_programs" href="filter_programs.html">paroxython.filter_programs</a></code></dt>
 <dd>
-<div class="desc"><p>Evolve a set of selected programs and a set of taxons representing the imparted knowledge.</p></div>
+<div class="desc"><p>Evolve a set of selected programs and a set of taxa representing the imparted knowledge.</p></div>
 </dd>
 <dt><code class="name"><a title="paroxython.flatten_ast" href="flatten_ast.html">paroxython.flatten_ast</a></code></dt>
 <dd>

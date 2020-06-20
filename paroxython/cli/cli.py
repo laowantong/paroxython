@@ -8,7 +8,7 @@ USAGE:
 
 COMMANDS:
     ```plain
-    tag         Tag one Python file and output the table of its taxons or
+    tag         Tag one Python file and output the table of its taxa or
                 labels.
     collect     Walk a directory, tag its Python files and make a JSON
                 database of the results.

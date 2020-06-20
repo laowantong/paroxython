@@ -16,7 +16,7 @@ Paroxython is a command-line tool which finds and tags algorithmic features (suc
 
 Each tag consists in a free-form label associated with its spanning lines. These labels are then mapped onto a knowledge taxonomy designed by the teacher with basic order constraints in mind (_e.g._, the fact that the introduction of the concept of early exit must come after that of loop, which itself requires that of control flow, is expressed with the following taxon: `flow/loop/exit/early`).
 
-Source codes, labels and taxons are stored in a database, which can finally be filtered through a pipeline of inclusion, exclusion and impartment commands on programs or taxons.
+Source codes, labels and taxa are stored in a database, which can finally be filtered through a pipeline of inclusion, exclusion and impartment commands on programs or taxa.
 
 # Installation and test-drive
 

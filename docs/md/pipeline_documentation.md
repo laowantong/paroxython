@@ -69,7 +69,7 @@ The application of a command to a datum is done in three stages:
 
 1. An auxiliary set of programs is calculated.
 2. The set of recommended programs (the **selection**) is updated.
-3. A new set of taxons may be “learned”, i.e., added to the body of imparted knowledge.
+3. A new set of taxa may be “learned”, i.e., added to the body of imparted knowledge.
 
 Note that each stage depends on both the operation and the nature of the datum to which it applies. Let us detail every possible case:
 
@@ -98,8 +98,8 @@ Its main purpose is to track the acquisition of new knowledge. However, if this 
 1. The auxiliary set contains all programs whose name matches the given pattern, plus those which import (either directly or indirectly) at least one of them. In other words, it is the same as above (`"exclude"`), but only in the case where the input is a program pattern. In all other cases, this auxiliary set will be empty.
 2. The selection is then restricted to its **difference** with the auxiliary set (same as above for `"exclude"`).
 3. There are three cases:
-    1. If the input is a program pattern, all the taxons featured in a program whose name matches this pattern are added to the body of imparted knowledge.
-    2. If the input is a taxon pattern, all the taxons matching this pattern are added to the body of imparted knowledge.
+    1. If the input is a program pattern, all the taxa featured in a program whose name matches this pattern are added to the body of imparted knowledge.
+    2. If the input is a taxon pattern, all the taxa matching this pattern are added to the body of imparted knowledge.
     3. Otherwise, the body of imparted knowledge is unchanged.
 
 
@@ -111,12 +111,12 @@ Being given a program \(p\) of \(n\) lines, any couple \((i_1, i_2) \) of line n
 ..note::
     Any taxon starting with `metadata` is considered by convention to span the entire program.
 
-It is sometimes interesting to know how the spans of two taxons of the same program are located relatively to each other.
+It is sometimes interesting to know how the spans of two taxa of the same program are located relatively to each other.
 
 - For instance, a `print` statement whose span is inside the span of a function indicates that this function has a side-effect.
-- A less trivial application stems from the fact that our taxonomy is multi-dimensional: each algorithmic feature can be associated with several taxons at the same time, characterizing it it along several facets, or dimensions. For instance, the taxons `flow/loop` and `flow/loop/while` describe the category of a loop; whereas the taxons `flow/loop/exit/early` and `flow/loop/exit/late` describe its exit behavior. These dimensions are independent and, although it is entirely possible to do so, our default taxonomy does not list the results of the cross-product (i.e., `flow/loop/exit/early`, `flow/loop/exit/late`, `flow/loop/while/exit/early` and `flow/loop/while/exit/late`). Querying an hypothetical taxon `flow/loop/exit/early` (or `flow/loop/exit/early/for`, by the way) comes down to querying the taxons `flow/loop` spanning the same lines as `flow/loop/exit/early`.
+- A less trivial application stems from the fact that our taxonomy is multi-dimensional: each algorithmic feature can be associated with several taxa at the same time, characterizing it it along several facets, or dimensions. For instance, the taxa `flow/loop` and `flow/loop/while` describe the category of a loop; whereas the taxa `flow/loop/exit/early` and `flow/loop/exit/late` describe its exit behavior. These dimensions are independent and, although it is entirely possible to do so, our default taxonomy does not list the results of the cross-product (i.e., `flow/loop/exit/early`, `flow/loop/exit/late`, `flow/loop/while/exit/early` and `flow/loop/while/exit/late`). Querying an hypothetical taxon `flow/loop/exit/early` (or `flow/loop/exit/early/for`, by the way) comes down to querying the taxa `flow/loop` spanning the same lines as `flow/loop/exit/early`.
 
-To express a relation \(\mathfrak{R}\) between the spans of two taxons, we start from the algebra devised in 1983 by James F. Allen in his seminal paper ([PDF](http://cse.unl.edu/~choueiry/Documents/Allen-CACM1983.pdf)) about temporal intervals[^Allen1983]. The so-called Allen's interval algebra defines 13 basic operators which capture all possible relations between two intervals \(X=(x_1, x_2)\) and \(Y=(y_1, y_2)\). The table below uses his terminology:
+To express a relation \(\mathfrak{R}\) between the spans of two taxa, we start from the algebra devised in 1983 by James F. Allen in his seminal paper ([PDF](http://cse.unl.edu/~choueiry/Documents/Allen-CACM1983.pdf)) about temporal intervals[^Allen1983]. The so-called Allen's interval algebra defines 13 basic operators which capture all possible relations between two intervals \(X=(x_1, x_2)\) and \(Y=(y_1, y_2)\). The table below uses his terminology:
 
 [^Allen1983]:
     Allen, James F. (26 Nov. 1983). _Maintaining knowledge about temporal intervals_. Communications of the ACM. 26 (11): 832–843. doi:10.1145/182.358434
@@ -179,7 +179,7 @@ This allows the user to be understood when entering formulas like  `x == y`, `x 
 
 ### Positive semantic triples
 
-A pipeline command can apply not only to programs and taxons, but also to relationships between two taxons. Being given an operator \(\mathfrak{R}\) and two taxons \(t_1\) and \(t_2\), the statement \(t_1 \mathbin{\mathfrak{R}} t_2\) will be codified in the form of the _subject–predicate–object_ expression \((t_1, \mathfrak{R}, t_2)\), which can be entered as a mere Python tuple `(t1, R, t2)`. For instance, the following pipeline command will only keep programs featuring a conditional inside a loop **or** (inclusive) ended by a `return` statement.
+A pipeline command can apply not only to programs and taxa, but also to relationships between two taxa. Being given an operator \(\mathfrak{R}\) and two taxa \(t_1\) and \(t_2\), the statement \(t_1 \mathbin{\mathfrak{R}} t_2\) will be codified in the form of the _subject–predicate–object_ expression \((t_1, \mathfrak{R}, t_2)\), which can be entered as a mere Python tuple `(t1, R, t2)`. For instance, the following pipeline command will only keep programs featuring a conditional inside a loop **or** (inclusive) ended by a `return` statement.
 
 ```python
     {

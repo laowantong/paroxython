@@ -22,7 +22,7 @@ The addition of a label is hinted by a comment starting with `# paroxython:`.
 
 Note that `short_circuit:And` is a label (of the kind defined, but not necessarily included in
 [spec.md](https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md)), and
-not a taxon. It will be later converted into one or more taxons (according to the mapping of
+not a taxon. It will be later converted into one or more taxa (according to the mapping of
 [taxonomy.tsv](https://github.com/laowantong/paroxython/blob/master/paroxython/resources/taxonomy.tsv)).
 
 To delete a label, prefix it with a minus symbol. For instance, the following hint requalifies an

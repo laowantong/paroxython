@@ -27,7 +27,7 @@ OPTIONS:
                         (either ".json" or ".sqlite") to decide the format
                         of the database. [default: ]
     --no_timestamp      Don't store program's last modification times.
-    -t --taxonomy=PATH  The path of a TSV file mapping labels onto taxons.
+    -t --taxonomy=PATH  The path of a TSV file mapping labels onto taxa.
                         If not specified, use the included copy of the table
                         whose last version is at https://bit.ly/2Yu0LqU.
     ```

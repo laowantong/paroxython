@@ -1,7 +1,7 @@
 r"""Assess the learning cost associated with the introduction of the given programs.
 
 Each program has been previously found to implement a number of notions represented by a list of
-taxons of the form: \(\textrm{edge}_0/\textrm{edge}_1/.../\textrm{edge}_n\), _e.g._,
+taxa of the form: \(\textrm{edge}_0/\textrm{edge}_1/.../\textrm{edge}_n\), _e.g._,
 `flow/loop/exit/early/break`.
 
 Furthermore, the notions already imparted may cover a certain **prefix** of such a taxon, _e.g._
@@ -111,7 +111,7 @@ class LearningCostAssessor:
         return self.range_to_cost(start, stop)
 
     def __call__(self, selected_programs: ProgramNameSet) -> AssessedPrograms:
-        """Associate the given selected programs with the total learning cost of their taxons.
+        """Associate the given selected programs with the total learning cost of their taxa.
 
         Args:
             selected_programs (ProgramNameSet): A set of program names.
@@ -122,7 +122,7 @@ class LearningCostAssessor:
         result = []
         for program_name in selected_programs:
             total_cost = 0.0
-            for taxon_name in self.programs[program_name]["taxons"]:
+            for taxon_name in self.programs[program_name]["taxa"]:
                 total_cost += self.taxon_cost(taxon_name)
             result.append((total_cost, program_name))
         return sorted(result)

@@ -39,25 +39,25 @@ def test_get_taxon_name_list():
     ]
 
 
-def test_to_taxons():
+def test_to_taxa():
     labels = [
         Label("if", [S(1, 1), S(1, 1), S(2, 5)]),
         Label("comparison_operator:Lt", [S(1, 1), S(3, 3), S(2, 2)]),
     ]
-    assert t.to_taxons(labels) == [
+    assert t.to_taxa(labels) == [
         ("flow/conditional", c({S(1, 1): 2, S(2, 5): 1})),
         ("test/inequality", c({S(2, 2): 1, S(3, 3): 1, S(1, 1): 1})),
     ]
 
 
-def test_deduplicated_taxons():
-    assert t.deduplicated_taxons([]) == []
-    taxons = [
+def test_deduplicated_taxa():
+    assert t.deduplicated_taxa([]) == []
+    taxa = [
         ("flow/conditional", c({S(1, 1): 2, S(2, 5): 1})),
         ("flow/conditional/else", c({S(1, 1): 1, S(2, 5): 1})),
         ("test/inequality", c({S(2, 2): 1, S(3, 3): 1, S(1, 1): 1})),
     ]
-    result = t.deduplicated_taxons(taxons)
+    result = t.deduplicated_taxa(taxa)
     print(result)
     assert result == [
         ("flow/conditional", c({S(1, 1): 1})),
@@ -66,34 +66,34 @@ def test_deduplicated_taxons():
     ]
 
 
-def test_deduplicated_taxons_with_deletion():
-    taxons = [
+def test_deduplicated_taxa_with_deletion():
+    taxa = [
         ("flow", c({S(1, 1): 2, S(2, 5): 1})),
         ("flow/conditional", c({S(1, 1): 2, S(2, 5): 1})),
         ("flow/conditional/else", c({S(1, 1): 2, S(2, 5): 1})),
     ]
-    result = t.deduplicated_taxons(taxons)
+    result = t.deduplicated_taxa(taxa)
     print(result)
     assert result == [
         ("flow/conditional/else", c({S(1, 1): 2, S(2, 5): 1})),
     ]
-    taxons = [
+    taxa = [
         ("flow", c({S(1, 1): 2, S(2, 5): 2})),
         ("flow/conditional", c({S(1, 1): 2, S(2, 5): 1})),
         ("flow/conditional/else", c({S(1, 1): 2, S(2, 5): 1})),
     ]
-    result = t.deduplicated_taxons(taxons)
+    result = t.deduplicated_taxa(taxa)
     print(result)
     assert result == [
         ("flow", c({S(2, 5): 1})),
         ("flow/conditional/else", c({S(1, 1): 2, S(2, 5): 1})),
     ]
-    taxons = [
+    taxa = [
         ("flow", c({S(1, 1): 2, S(2, 5): 2})),
         ("flow/conditional", c({S(1, 1): 1, S(2, 5): 1})),
         ("flow/loop", c({S(1, 1): 1, S(2, 5): 1})),
     ]
-    result = t.deduplicated_taxons(taxons)
+    result = t.deduplicated_taxa(taxa)
     print(result)
     assert result == [
         ("flow/conditional", c({S(1, 1): 1, S(2, 5): 1})),
@@ -110,7 +110,7 @@ def test_call():
                 Label("if_else", [S(1, 1), S(2, 5)]),
                 Label("comparison_operator:Lt", [S(1, 1), S(3, 3), S(2, 2)]),
             ],
-            taxons=[],
+            taxa=[],
             addition={},
             deletion={},
         ),
@@ -120,12 +120,12 @@ def test_call():
                 Label("member_call:difference_update", [S(1, 1), S(1, 1), S(2, 5)]),
                 Label("literal:Set", [S(1, 1), S(2, 5)]),
             ],
-            taxons=[],
+            taxa=[],
             addition={},
             deletion={},
         ),
     ]
-    result = {program.name: t.to_taxons(program.labels) for program in programs}
+    result = {program.name: t.to_taxa(program.labels) for program in programs}
     print(result)
     assert result == {
         "algo1": [
@@ -140,18 +140,18 @@ def test_call():
     }
 
 
-def test_snapshot_mini_taxons(capsys):
+def test_snapshot_mini_taxa(capsys):
     taxonomy = Taxonomy()
     acc = {}
     labeller = ProgramLabeller()
     labeller.label_programs(Path("examples/mini/programs"))
     for program in labeller.programs:
-        taxons = taxonomy.to_taxons(program.labels)
+        taxa = taxonomy.to_taxa(program.labels)
         acc[program.name] = {
-            name: " ".join(map(couple_to_string, sorted(set(spans)))) for (name, spans) in taxons
+            name: " ".join(map(couple_to_string, sorted(set(spans)))) for (name, spans) in taxa
         }
     result = json.dumps(acc, indent=2)
-    make_snapshot(Path("examples/mini/taxons.json"), result, capsys)
+    make_snapshot(Path("examples/mini/taxa.json"), result, capsys)
 
 
 if __name__ == "__main__":

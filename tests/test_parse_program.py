@@ -38,7 +38,7 @@ for match in extract_examples(parse.spec_path):
     source = centrifugate_hints(source)
     (addition, deletion) = collect_hints(source)
     source = remove_hints(source)
-    program = Program(source=source, labels=[], taxons=[], addition=addition, deletion=deletion)
+    program = Program(source=source, labels=[], taxa=[], addition=addition, deletion=deletion)
     actual_results = dict(parse(program))
     expected_results = list(zip(match.captures("LABELS"), match.captures("LINES")))
     examples.append((label_name, actual_results, expected_results))
@@ -68,7 +68,7 @@ def test_at_least_one_example_is_provided_for_each_feature():
 
 def test_malformed_example():
     source = "if foo():\nbar() # wrong indentation"
-    result = parse(Program(source=source, labels=[], taxons=[], addition={}, deletion={}))
+    result = parse(Program(source=source, labels=[], taxa=[], addition={}, deletion={}))
     print(result)
     assert result[0].name in (
         "ast_construction:IndentationError",  # under Python 3.7 ast standard library
@@ -82,7 +82,7 @@ def test_label_presence(capsys):
     result = []
     for program in list_programs(Path("examples/mini/programs/")):
         labels = parse(
-            Program(source=program.source, labels=[], taxons=[], addition={}, deletion={}),
+            Program(source=program.source, labels=[], taxa=[], addition={}, deletion={}),
             yield_failed_matches=True,
         )
         for (name, spans) in labels:

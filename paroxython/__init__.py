@@ -58,7 +58,7 @@ if "ipykernel" in sys.modules:
         @line_cell_magic
         def paroxython(self, line, source=None):
             """
-            Tag a Python code cell and output the table of its taxons or labels.
+            Tag a Python code cell and output the table of its taxa or labels.
 
             In cell mode:
                 %%paroxython [labels] [raw]

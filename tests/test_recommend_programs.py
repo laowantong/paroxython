@@ -56,7 +56,7 @@ def test_recommend_program(capsys):
         ["prg4.py", "prg5.py", "prg6.py"],
         ["prg1.py"],
     ]
-    costs = {taxon: rec.assess.taxon_cost(taxon) for taxon in rec.programs["prg2.py"]["taxons"]}
+    costs = {taxon: rec.assess.taxon_cost(taxon) for taxon in rec.programs["prg2.py"]["taxa"]}
     print(costs)
     assert costs == {
         "O/N/P": 0,
@@ -92,17 +92,17 @@ def test_recommend_programming_idioms(capsys):
 
 def test_recommend_mini_programs():
     db = json.loads(Path("examples/mini/programs_db.json").read_text())
-    proper_taxons = {}
+    proper_taxa = {}
     for program in ["assignment.py", "collatz.py", "fizzbuzz.py", "is_even.py"]:
-        proper_taxons[program] = set(db["programs"][program]["taxons"])
+        proper_taxa[program] = set(db["programs"][program]["taxa"])
 
     rec = Recommendations(db)  # Warning: initialization modifies the db by side-effect.
-    # The taxons of some programs are now augmented with the taxons of those they import,
-    # associated with an empty list of spans. Exception: metadata taxons are not imported.
-    original = proper_taxons["fizzbuzz.py"] | proper_taxons["collatz.py"]
+    # The taxa of some programs are now augmented with the taxa of those they import,
+    # associated with an empty list of spans. Exception: metadata taxa are not imported.
+    original = proper_taxa["fizzbuzz.py"] | proper_taxa["collatz.py"]
     assert all(
         taxon.startswith("metadata")
-        for taxon in original.difference(db["programs"]["fizzbuzz.py"]["taxons"])
+        for taxon in original.difference(db["programs"]["fizzbuzz.py"]["taxa"])
     )
 
     commands = [
@@ -163,7 +163,7 @@ def test_recommend_mini_programs():
         {
             "operation": "impart",
             "data": [
-                "assignment.py",  # exclude it, and impart its taxons
+                "assignment.py",  # exclude it, and impart its taxa
                 "fizzbuzz.py",  # idem, but ignore its imports or exports
             ],
         }
@@ -171,10 +171,10 @@ def test_recommend_mini_programs():
     rec = Recommendations(db, commands=commands)
     rec.run_pipeline()
     assert rec.selected_programs == {"collatz.py", "is_even.py"}
-    assert proper_taxons["assignment.py"].issubset(rec.imparted_knowledge)
-    assert proper_taxons["fizzbuzz.py"].issubset(rec.imparted_knowledge)
-    assert not proper_taxons["is_even.py"].issubset(rec.imparted_knowledge)
-    assert not proper_taxons["collatz.py"].issubset(rec.imparted_knowledge)
+    assert proper_taxa["assignment.py"].issubset(rec.imparted_knowledge)
+    assert proper_taxa["fizzbuzz.py"].issubset(rec.imparted_knowledge)
+    assert not proper_taxa["is_even.py"].issubset(rec.imparted_knowledge)
+    assert not proper_taxa["collatz.py"].issubset(rec.imparted_knowledge)
 
     commands = [
         {
@@ -208,9 +208,9 @@ def test_recommend_mini_programs():
             "operation": "exclude",
             "data": [
                 "flow/conditional/else/if",  # Although not recommended, it is possible to mix
-                "assignment.py"  # taxons and programs (ending with ".py") in a same command.
+                "assignment.py"  # taxa and programs (ending with ".py") in a same command.
                 # Crucially, this avoid to specify whether the command should be applied on
-                # taxons or programs.
+                # taxa or programs.
             ],
         }
     ]

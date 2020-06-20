@@ -86,7 +86,7 @@ class Recommendations:
                 print_warning(f"operation {i} ({operation}) is ignored (no data).")
                 continue
 
-            # Update the selected programs and optionally impart the associated taxons
+            # Update the selected programs and optionally impart the associated taxa
             self.update_filter(data, operation, quantifier)
 
             # Update the statistics of the filter state for the last operation
@@ -169,7 +169,7 @@ class Recommendations:
                 contents.append("\n| Cost  | Taxon | Location |")
                 contents.append("|" + "----|" * 3)
                 items = sorted(
-                    program_info["taxons"].items(),
+                    program_info["taxa"].items(),
                     key=lambda x: f"~{x[0]}" if x[0].startswith("metadata/") else x[0],
                 )
                 for (taxon_name, spans) in items:

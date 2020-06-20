@@ -21,42 +21,42 @@ def test_init():
     }
 
 
-def test_taxons_of_programs():
+def test_taxa_of_programs():
     dbf = ProgramFilter(db)
     # collatz is imported by fizzbuzz
-    subset_taxons = dbf.taxons_of_programs({"collatz.py"}, follow=False)
-    subset_taxons = set(filter(lambda x: not x.startswith("metadata/"), subset_taxons))
-    print(sorted(subset_taxons))
+    subset_taxa = dbf.taxa_of_programs({"collatz.py"}, follow=False)
+    subset_taxa = set(filter(lambda x: not x.startswith("metadata/"), subset_taxa))
+    print(sorted(subset_taxa))
     print()
     # when following the importations...
-    superset_taxons = dbf.taxons_of_programs({"fizzbuzz.py"}, follow=True)
-    superset_taxons = set(filter(lambda x: not x.startswith("metadata/"), superset_taxons))
-    print(sorted(superset_taxons))
-    # in addition to its own taxons, fizzbuzz features all those of collatz...
-    assert superset_taxons.issuperset(subset_taxons)
-    assert len(superset_taxons - subset_taxons) > 0
+    superset_taxa = dbf.taxa_of_programs({"fizzbuzz.py"}, follow=True)
+    superset_taxa = set(filter(lambda x: not x.startswith("metadata/"), superset_taxa))
+    print(sorted(superset_taxa))
+    # in addition to its own taxa, fizzbuzz features all those of collatz...
+    assert superset_taxa.issuperset(subset_taxa)
+    assert len(superset_taxa - subset_taxa) > 0
     # when not following the importations...
-    own_taxons = dbf.taxons_of_programs({"fizzbuzz.py"}, follow=False)
-    own_taxons = set(filter(lambda x: not x.startswith("metadata/"), own_taxons))
-    print(sorted(own_taxons))
-    assert superset_taxons.issuperset(own_taxons)
-    assert len(superset_taxons - own_taxons) > 0
+    own_taxa = dbf.taxa_of_programs({"fizzbuzz.py"}, follow=False)
+    own_taxa = set(filter(lambda x: not x.startswith("metadata/"), own_taxa))
+    print(sorted(own_taxa))
+    assert superset_taxa.issuperset(own_taxa)
+    assert len(superset_taxa - own_taxa) > 0
 
 
-def test_programs_of_taxons():
+def test_programs_of_taxa():
     dbf = ProgramFilter(db)
-    taxons = {"variable/assignment/single"}
+    taxa = {"variable/assignment/single"}
 
     # The taxon "variable/assignment/single" is featured by assignment.py and collatz.py.
     # This corresponds to follow=False. It is indirectly featured by fizzbuzz.py (which imports
     # collatz.py) and by is_even.py (which imports fizzbuzz.py). Their addition corresponds
     # to follow=True.
 
-    programs = dbf.programs_of_taxons(taxons)
+    programs = dbf.programs_of_taxa(taxa)
     print(set(programs))
     assert set(programs) == {"assignment.py", "collatz.py"}
 
-    programs = dbf.programs_of_taxons(taxons, follow=True)
+    programs = dbf.programs_of_taxa(taxa, follow=True)
     print(set(programs))
     assert set(programs) == {
         "assignment.py",
@@ -66,76 +66,76 @@ def test_programs_of_taxons():
     }
 
 
-def test_exclude_taxons():
+def test_exclude_taxa():
 
     # The taxon "variable/assignment/single" is featured by assignment.py and collatz.py. It
     # is indirectly featured by fizzbuzz.py (which imports collatz.py) and by is_even.py
     # (which imports fizzbuzz.py). Therefore, excluding this taxon excludes all four programs.
     dbf = ProgramFilter(db)
-    dbf.exclude_programs(dbf.programs_of_taxons({"variable/assignment/single"}), follow=True)
+    dbf.exclude_programs(dbf.programs_of_taxa({"variable/assignment/single"}), follow=True)
     print(dbf.selected_programs)
     assert dbf.selected_programs == set()
 
     # "operator/arithmetic/addition" is featured by collatz.py, and indirectly by fizzbuzz.py
     # and is_even.py. Therefore, excluding this taxon keeps only assignment.py.
     dbf = ProgramFilter(db)
-    dbf.exclude_programs(dbf.programs_of_taxons({"io/standard/print"}), follow=True)
+    dbf.exclude_programs(dbf.programs_of_taxa({"io/standard/print"}), follow=True)
     print(dbf.selected_programs)
     assert dbf.selected_programs == {"assignment.py"}
 
     # "flow/conditional" is featured by collatz.py, fizzbuzz.py, and indirectly by
     # is_even.py. Therefore, excluding this taxon keeps only assignment.py.
     dbf = ProgramFilter(db)
-    dbf.exclude_programs(dbf.programs_of_taxons({"flow/conditional"}), follow=True)
+    dbf.exclude_programs(dbf.programs_of_taxa({"flow/conditional"}), follow=True)
     print(dbf.selected_programs)
     assert dbf.selected_programs == {"assignment.py"}
 
     # "type/sequence/string/literal" is featured by fizzbuzz.py, and indirectly by is_even.py.
     # Therefore, excluding this taxon keeps only assignment.py and collatz.py
     dbf = ProgramFilter(db)
-    dbf.exclude_programs(dbf.programs_of_taxons({"type/sequence/string/literal"}), follow=True)
+    dbf.exclude_programs(dbf.programs_of_taxa({"type/sequence/string/literal"}), follow=True)
     print(dbf.selected_programs)
     assert dbf.selected_programs == {"assignment.py", "collatz.py"}
 
 
-def test_include_taxons():
+def test_include_taxa():
 
     # The taxon "variable/assignment/single" is directly featured by assignment.py and
     # collatz.py, but only indirectly by the other programs, which therefore cannot be
-    # included in the result. Note that this behavior contrasts with that of exclude_taxons.
+    # included in the result. Note that this behavior contrasts with that of exclude_taxa.
     dbf = ProgramFilter(db)
-    dbf.include_programs(dbf.programs_of_taxons({"variable/assignment/single"}))
+    dbf.include_programs(dbf.programs_of_taxa({"variable/assignment/single"}))
     print(dbf.selected_programs)
     assert dbf.selected_programs == {"assignment.py", "collatz.py"}
 
     # "operator/arithmetic/addition" is directly featured by collatz.py only. Therefore,
     # including this taxon keeps only collatz.py.
     dbf = ProgramFilter(db)
-    dbf.include_programs(dbf.programs_of_taxons({"operator/arithmetic/addition"}))
+    dbf.include_programs(dbf.programs_of_taxa({"operator/arithmetic/addition"}))
     print(dbf.selected_programs)
     assert dbf.selected_programs == {"collatz.py"}
 
     # "flow/conditional" is featured by collatz.py, fizzbuzz.py, and indirectly by
     # is_even.py. Therefore, including this taxon keeps only the former two.
     dbf = ProgramFilter(db)
-    dbf.include_programs(dbf.programs_of_taxons({"flow/conditional"}))
+    dbf.include_programs(dbf.programs_of_taxa({"flow/conditional"}))
     print(dbf.selected_programs)
     assert dbf.selected_programs == {"collatz.py", "fizzbuzz.py"}
 
     # "type/sequence/string/literal" is directly featured by fizzbuzz.py only. Therefore, including
     # this taxon keeps only fizzbuzz.py
     dbf = ProgramFilter(db)
-    dbf.include_programs(dbf.programs_of_taxons({"type/sequence/string/literal"}))
+    dbf.include_programs(dbf.programs_of_taxa({"type/sequence/string/literal"}))
     print(dbf.selected_programs)
     assert dbf.selected_programs == {"fizzbuzz.py"}
 
 
-def test_impart_taxons():
+def test_impart_taxa():
 
-    # Imparting a knowledge decreases the learning cost of the corresponding taxons, but has no
+    # Imparting a knowledge decreases the learning cost of the corresponding taxa, but has no
     # effect whatsoever on the selected programs.
     dbf = ProgramFilter(db)
-    dbf.impart_taxons({"flow/conditional"})
+    dbf.impart_taxa({"flow/conditional"})
     print(dbf.selected_programs)
     assert dbf.selected_programs == {
         "assignment.py",

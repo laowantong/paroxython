@@ -91,7 +91,7 @@ def test_collect_options():
 
     result = run(f"collect -o {db_path} -t examples/dummy/taxonomy.tsv examples/mini/programs")
     db = json.loads(db_path.read_text())
-    assert db["taxons"] == {"flow/conditional": ["collatz.py", "fizzbuzz.py"]}
+    assert db["taxa"] == {"flow/conditional": ["collatz.py", "fizzbuzz.py"]}
 
     db_path.unlink()
 

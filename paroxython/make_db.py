@@ -21,14 +21,14 @@ from .user_types import (
     Programs,
     ProgramToPrograms,
     TaxonInfos,
-    Taxons,
-    TaxonsPoorSpans,
+    Taxa,
+    TaxaPoorSpans,
 )
 
 
 class Database:
     def __init__(self, directory: Path, ignore_timestamps=True, *args, **kwargs) -> None:
-        """Collect all infos pertaining to the programs, the labels and the taxons."""
+        """Collect all infos pertaining to the programs, the labels and the taxa."""
 
         self.default_json_db_path = directory.parent / f"{directory.name}_db.json"
         self.default_sqlite_db_path = directory.parent / f"{directory.name}_db.sqlite"
@@ -39,8 +39,8 @@ class Database:
         self.labels = collect_labels(programs)
 
         taxonomy = Taxonomy(*args, **kwargs)
-        map_labels_on_taxons(programs, taxonomy)
-        self.taxons = collect_taxons(programs)
+        map_labels_on_taxa(programs, taxonomy)
+        self.taxa = collect_taxa(programs)
 
         importations = compute_direct_importations(programs)
         self.importations = complete_and_collect_importations(importations)
@@ -58,7 +58,7 @@ class Database:
                 "timestamp": get_timestamp(directory / program.name),
                 "source": program.source,
                 "labels": prepared(program.labels),
-                "taxons": prepared(program.taxons),
+                "taxa": prepared(program.taxa),
             }
 
     def get_json(self) -> str:
@@ -66,7 +66,7 @@ class Database:
         data = {
             "programs": self.programs_infos,
             "labels": dict(sorted(self.labels.items())),
-            "taxons": dict(sorted(self.taxons.items())),
+            "taxa": dict(sorted(self.taxa.items())),
             "importations": dict(self.importations.items()),
             "exportations": dict(self.exportations.items()),
         }
@@ -102,7 +102,7 @@ class Database:
                             path,
                         )
                     )
-            for (taxon_name, spans) in info["taxons"].items():
+            for (taxon_name, spans) in info["taxa"].items():
                 for span in spans:
                     taxon_rows.append(
                         (
@@ -172,26 +172,26 @@ class Database:
 def prepared(tags: Labels) -> LabelsPoorSpans:
     ...  # pragma: no cover
 @overload
-def prepared(tags: Taxons) -> TaxonsPoorSpans:
+def prepared(tags: Taxa) -> TaxaPoorSpans:
     ...  # pragma: no cover
 def prepared(tags):
     """Prepare the spans for serialization.
 
     Args:
-        tags (Labels|Taxons): The tags or taxons to be serialized.
+        tags (Labels|Taxa): The tags or taxa to be serialized.
 
     Returns:
-        LabelPoorSpans|TaxonsPoorSpans:
+        LabelPoorSpans|TaxaPoorSpans:
             A dictionary mapping tag names with the list of their spans, transformed into simple
             lists of two integers.
 
     .. note::
           Overloaded to support two different combinations of argument types: Mypy can check that
-          passing `Labels` (resp. `Taxons`) to the function returns `LabelsPoorSpans` (resp.
-          `TaxonsPoorSpans`). Browse GitHub to see the actual overloaded functions.
+          passing `Labels` (resp. `Taxa`) to the function returns `LabelsPoorSpans` (resp.
+          `TaxaPoorSpans`). Browse GitHub to see the actual overloaded functions.
           See [the documentation](https://docs.python.org/3/library/typing.html#typing.overload).
     """
-    result: Union[LabelsPoorSpans, TaxonsPoorSpans] = {}
+    result: Union[LabelsPoorSpans, TaxaPoorSpans] = {}
     for (tag_name, spans) in tags:
         result[tag_name] = [span[:2] for span in sorted(set(spans))]
     return result
@@ -207,18 +207,18 @@ def collect_labels(programs: Programs) -> LabelInfos:
     return result
 
 
-def map_labels_on_taxons(programs: Programs, taxonomy: Taxonomy) -> None:
-    """Translate labels into taxons on a list of program names."""
+def map_labels_on_taxa(programs: Programs, taxonomy: Taxonomy) -> None:
+    """Translate labels into taxa on a list of program names."""
     print(f"Mapping taxonomy on {len(programs)} programs.")
     for program in iterate_and_print_programs(programs):
-        program.taxons[:] = taxonomy.to_taxons(program.labels)
+        program.taxa[:] = taxonomy.to_taxa(program.labels)
 
 
-def collect_taxons(programs: Programs) -> TaxonInfos:
-    """Iterate through programs to collect all their taxons."""
+def collect_taxa(programs: Programs) -> TaxonInfos:
+    """Iterate through programs to collect all their taxa."""
     result: TaxonInfos = defaultdict(list)
     for program in programs:
-        for taxon in program.taxons:
+        for taxon in program.taxa:
             result[taxon.name].append(program.name)
     return result
 

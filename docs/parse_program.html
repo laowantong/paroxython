@@ -151,7 +151,7 @@ if __name__ == &#34;__main__&#34;:
         source = regex.sub(r&#34;(?m)^.{1,4}&#34;, &#34;&#34;, source)
     for (i, line) in enumerate(source.split(&#34;\n&#34;), 1):
         print(f&#34;{i:&lt;4}{line}&#34;)
-    program = Program(source=Source(source), labels=[], taxons=[], addition={}, deletion={})
+    program = Program(source=Source(source), labels=[], taxa=[], addition={}, deletion={})
     print()
     parse = ProgramParser()
     acc = []

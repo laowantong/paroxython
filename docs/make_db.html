@@ -54,8 +54,8 @@ from .user_types import (
     Programs,
     ProgramToPrograms,
     TaxonInfos,
-    Taxons,
-    TaxonsPoorSpans,
+    Taxa,
+    TaxaPoorSpans,
 )
 
 
@@ -70,8 +70,8 @@ class Database:
         self.labels = collect_labels(programs)
 
         taxonomy = Taxonomy(*args, **kwargs)
-        map_labels_on_taxons(programs, taxonomy)
-        self.taxons = collect_taxons(programs)
+        map_labels_on_taxa(programs, taxonomy)
+        self.taxa = collect_taxa(programs)
 
         importations = compute_direct_importations(programs)
         self.importations = complete_and_collect_importations(importations)
@@ -89,14 +89,14 @@ class Database:
                 &#34;timestamp&#34;: get_timestamp(directory / program.name),
                 &#34;source&#34;: program.source,
                 &#34;labels&#34;: prepared(program.labels),
-                &#34;taxons&#34;: prepared(program.taxons),
+                &#34;taxa&#34;: prepared(program.taxa),
             }
 
     def get_json(self) -&gt; str:
         data = {
             &#34;programs&#34;: self.programs_infos,
             &#34;labels&#34;: dict(sorted(self.labels.items())),
-            &#34;taxons&#34;: dict(sorted(self.taxons.items())),
+            &#34;taxa&#34;: dict(sorted(self.taxa.items())),
             &#34;importations&#34;: dict(self.importations.items()),
             &#34;exportations&#34;: dict(self.exportations.items()),
         }
@@ -132,7 +132,7 @@ class Database:
                             path,
                         )
                     )
-            for (taxon_name, spans) in info[&#34;taxons&#34;].items():
+            for (taxon_name, spans) in info[&#34;taxa&#34;].items():
                 for span in spans:
                     taxon_rows.append(
                         (
@@ -202,10 +202,10 @@ class Database:
 def prepared(tags: Labels) -&gt; LabelsPoorSpans:
     ...  # pragma: no cover
 @overload
-def prepared(tags: Taxons) -&gt; TaxonsPoorSpans:
+def prepared(tags: Taxa) -&gt; TaxaPoorSpans:
     ...  # pragma: no cover
 def prepared(tags):
-    result: Union[LabelsPoorSpans, TaxonsPoorSpans] = {}
+    result: Union[LabelsPoorSpans, TaxaPoorSpans] = {}
     for (tag_name, spans) in tags:
         result[tag_name] = [span[:2] for span in sorted(set(spans))]
     return result
@@ -220,16 +220,16 @@ def collect_labels(programs: Programs) -&gt; LabelInfos:
     return result
 
 
-def map_labels_on_taxons(programs: Programs, taxonomy: Taxonomy) -&gt; None:
+def map_labels_on_taxa(programs: Programs, taxonomy: Taxonomy) -&gt; None:
     print(f&#34;Mapping taxonomy on {len(programs)} programs.&#34;)
     for program in iterate_and_print_programs(programs):
-        program.taxons[:] = taxonomy.to_taxons(program.labels)
+        program.taxa[:] = taxonomy.to_taxa(program.labels)
 
 
-def collect_taxons(programs: Programs) -&gt; TaxonInfos:
+def collect_taxa(programs: Programs) -&gt; TaxonInfos:
     result: TaxonInfos = defaultdict(list)
     for program in programs:
-        for taxon in program.taxons:
+        for taxon in program.taxa:
             result[taxon.name].append(program.name)
     return result
 
@@ -301,18 +301,18 @@ if __name__ == &#34;__main__&#34;:
 <dd>
 <div class="desc"><p>Prepare the spans for serialization.</p>
 <h2 id="args">Args</h2>
-<p>tags (Labels|Taxons): The tags or taxons to be serialized.</p>
+<p>tags (Labels|Taxa): The tags or taxa to be serialized.</p>
 <h2 id="returns">Returns</h2>
 <dl>
-<dt><code>LabelPoorSpans|TaxonsPoorSpans:</code></dt>
+<dt><code>LabelPoorSpans|TaxaPoorSpans:</code></dt>
 <dd>A dictionary mapping tag names with the list of their spans, transformed into simple
 lists of two integers.</dd>
 </dl>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Overloaded to support two different combinations of argument types: Mypy can check that
-passing <code>Labels</code> (resp. <code>Taxons</code>) to the function returns <code>LabelsPoorSpans</code> (resp.
-<code>TaxonsPoorSpans</code>). Browse GitHub to see the actual overloaded functions.
+passing <code>Labels</code> (resp. <code>Taxa</code>) to the function returns <code>LabelsPoorSpans</code> (resp.
+<code>TaxaPoorSpans</code>). Browse GitHub to see the actual overloaded functions.
 See <a href="https://docs.python.org/3/library/typing.html#typing.overload">the documentation</a>.</p>
 </div></div>
 <details class="source">
@@ -321,7 +321,7 @@ See <a href="https://docs.python.org/3/library/typing.html#typing.overload">the 
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L177-L197" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def prepared(tags):
-    result: Union[LabelsPoorSpans, TaxonsPoorSpans] = {}
+    result: Union[LabelsPoorSpans, TaxaPoorSpans] = {}
     for (tag_name, spans) in tags:
         result[tag_name] = [span[:2] for span in sorted(set(spans))]
     return result</code></pre>
@@ -345,36 +345,36 @@ See <a href="https://docs.python.org/3/library/typing.html#typing.overload">the 
     return result</code></pre>
 </details>
 </dd>
-<dt id="paroxython.make_db.map_labels_on_taxons"><code class="name flex">
-<span>def <span class="ident">map_labels_on_taxons</span></span>(<span>programs: List[Program], taxonomy: <a title="paroxython.map_taxonomy.Taxonomy" href="map_taxonomy.html#paroxython.map_taxonomy.Taxonomy">Taxonomy</a>) ‑> NoneType</span>
+<dt id="paroxython.make_db.map_labels_on_taxa"><code class="name flex">
+<span>def <span class="ident">map_labels_on_taxa</span></span>(<span>programs: List[Program], taxonomy: <a title="paroxython.map_taxonomy.Taxonomy" href="map_taxonomy.html#paroxython.map_taxonomy.Taxonomy">Taxonomy</a>) ‑> NoneType</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Translate labels into taxons on a list of program names.</p></div>
+<div class="desc"><p>Translate labels into taxa on a list of program names.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L210-L214" class="git-link">Browse GitHub</a>
 </summary>
-<pre><code class="python">def map_labels_on_taxons(programs: Programs, taxonomy: Taxonomy) -&gt; None:
+<pre><code class="python">def map_labels_on_taxa(programs: Programs, taxonomy: Taxonomy) -&gt; None:
     print(f&#34;Mapping taxonomy on {len(programs)} programs.&#34;)
     for program in iterate_and_print_programs(programs):
-        program.taxons[:] = taxonomy.to_taxons(program.labels)</code></pre>
+        program.taxa[:] = taxonomy.to_taxa(program.labels)</code></pre>
 </details>
 </dd>
-<dt id="paroxython.make_db.collect_taxons"><code class="name flex">
-<span>def <span class="ident">collect_taxons</span></span>(<span>programs: List[Program]) ‑> Dict[TaxonName, List[ProgramName]]</span>
+<dt id="paroxython.make_db.collect_taxa"><code class="name flex">
+<span>def <span class="ident">collect_taxa</span></span>(<span>programs: List[Program]) ‑> Dict[TaxonName, List[ProgramName]]</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Iterate through programs to collect all their taxons.</p></div>
+<div class="desc"><p>Iterate through programs to collect all their taxa.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L217-L223" class="git-link">Browse GitHub</a>
 </summary>
-<pre><code class="python">def collect_taxons(programs: Programs) -&gt; TaxonInfos:
+<pre><code class="python">def collect_taxa(programs: Programs) -&gt; TaxonInfos:
     result: TaxonInfos = defaultdict(list)
     for program in programs:
-        for taxon in program.taxons:
+        for taxon in program.taxa:
             result[taxon.name].append(program.name)
     return result</code></pre>
 </details>
@@ -468,7 +468,7 @@ See <a href="https://docs.python.org/3/library/typing.html#typing.overload">the 
 <span>(</span><span>directory: pathlib.Path, ignore_timestamps=True, *args, **kwargs)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Collect all infos pertaining to the programs, the labels and the taxons.</p></div>
+<div class="desc"><p>Collect all infos pertaining to the programs, the labels and the taxa.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -485,8 +485,8 @@ See <a href="https://docs.python.org/3/library/typing.html#typing.overload">the 
         self.labels = collect_labels(programs)
 
         taxonomy = Taxonomy(*args, **kwargs)
-        map_labels_on_taxons(programs, taxonomy)
-        self.taxons = collect_taxons(programs)
+        map_labels_on_taxa(programs, taxonomy)
+        self.taxa = collect_taxa(programs)
 
         importations = compute_direct_importations(programs)
         self.importations = complete_and_collect_importations(importations)
@@ -504,14 +504,14 @@ See <a href="https://docs.python.org/3/library/typing.html#typing.overload">the 
                 &#34;timestamp&#34;: get_timestamp(directory / program.name),
                 &#34;source&#34;: program.source,
                 &#34;labels&#34;: prepared(program.labels),
-                &#34;taxons&#34;: prepared(program.taxons),
+                &#34;taxa&#34;: prepared(program.taxa),
             }
 
     def get_json(self) -&gt; str:
         data = {
             &#34;programs&#34;: self.programs_infos,
             &#34;labels&#34;: dict(sorted(self.labels.items())),
-            &#34;taxons&#34;: dict(sorted(self.taxons.items())),
+            &#34;taxa&#34;: dict(sorted(self.taxa.items())),
             &#34;importations&#34;: dict(self.importations.items()),
             &#34;exportations&#34;: dict(self.exportations.items()),
         }
@@ -547,7 +547,7 @@ See <a href="https://docs.python.org/3/library/typing.html#typing.overload">the 
                             path,
                         )
                     )
-            for (taxon_name, spans) in info[&#34;taxons&#34;].items():
+            for (taxon_name, spans) in info[&#34;taxa&#34;].items():
                 for span in spans:
                     taxon_rows.append(
                         (
@@ -627,7 +627,7 @@ See <a href="https://docs.python.org/3/library/typing.html#typing.overload">the 
     data = {
         &#34;programs&#34;: self.programs_infos,
         &#34;labels&#34;: dict(sorted(self.labels.items())),
-        &#34;taxons&#34;: dict(sorted(self.taxons.items())),
+        &#34;taxa&#34;: dict(sorted(self.taxa.items())),
         &#34;importations&#34;: dict(self.importations.items()),
         &#34;exportations&#34;: dict(self.exportations.items()),
     }
@@ -685,7 +685,7 @@ See <a href="https://docs.python.org/3/library/typing.html#typing.overload">the 
                         path,
                     )
                 )
-        for (taxon_name, spans) in info[&#34;taxons&#34;].items():
+        for (taxon_name, spans) in info[&#34;taxa&#34;].items():
             for span in spans:
                 taxon_rows.append(
                     (
@@ -779,8 +779,8 @@ data-gaCategoryParameter="paroxython.make_db">
 <ul class="">
 <li><code><a title="paroxython.make_db.prepared" href="#paroxython.make_db.prepared">prepared</a></code></li>
 <li><code><a title="paroxython.make_db.collect_labels" href="#paroxython.make_db.collect_labels">collect_labels</a></code></li>
-<li><code><a title="paroxython.make_db.map_labels_on_taxons" href="#paroxython.make_db.map_labels_on_taxons">map_labels_on_taxons</a></code></li>
-<li><code><a title="paroxython.make_db.collect_taxons" href="#paroxython.make_db.collect_taxons">collect_taxons</a></code></li>
+<li><code><a title="paroxython.make_db.map_labels_on_taxa" href="#paroxython.make_db.map_labels_on_taxa">map_labels_on_taxa</a></code></li>
+<li><code><a title="paroxython.make_db.collect_taxa" href="#paroxython.make_db.collect_taxa">collect_taxa</a></code></li>
 <li><code><a title="paroxython.make_db.compute_direct_importations" href="#paroxython.make_db.compute_direct_importations">compute_direct_importations</a></code></li>
 <li><code><a title="paroxython.make_db.complete_and_collect_importations" href="#paroxython.make_db.complete_and_collect_importations">complete_and_collect_importations</a></code></li>
 <li><code><a title="paroxython.make_db.compute_exportations" href="#paroxython.make_db.compute_exportations">compute_exportations</a></code></li>

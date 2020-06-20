@@ -57,7 +57,7 @@ by your new students.
 .. tip::
     As you can see, rather than maintaining a **list** of programs or concepts in the `"data"`
     field, you may provide a **string**. Paroxython will interpret it as a shell command, and
-    expect it to print on `stdout` the required list of items (programs or taxons), one per line.
+    expect it to print on `stdout` the required list of items (programs or taxa), one per line.
 
 ### Blacklisting programs
 
@@ -97,13 +97,13 @@ recursivity (`subroutine/recursive`), dictionary (`type/non_sequence/dictionary`
     Python program (ending with `".py"`) or a taxon (like here).
 
 .. tip::
-    Since the two latter taxons share a common prefix and Python doesn't provide other non-sequence
-    type, it is enough to exclude all taxons starting with `type/non_sequence`.
+    Since the two latter taxa share a common prefix and Python doesn't provide other non-sequence
+    type, it is enough to exclude all taxa starting with `type/non_sequence`.
 
 ### Concepts to be introduced now
 
 Your next class will be devoted to conditional constructs. Thus, you need to go through programs
-featuring taxons prefixed by `flow/conditional` or even, why not, some conditional expressions
+featuring taxa prefixed by `flow/conditional` or even, why not, some conditional expressions
 (`operator/ternary`). The suggested programs do not necessarily have to implement both concepts at
 the same time, but at least one. Any other program will be rejected.
 

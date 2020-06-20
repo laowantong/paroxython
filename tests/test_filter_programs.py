@@ -17,34 +17,34 @@ def test_init():
     assert not dbf.imparted_knowledge
 
 
-def test_programs_of_taxons():
+def test_programs_of_taxa():
     dbf = ProgramFilter(db)
-    taxons = {"X/S/M/L/R/D/A", "X/S/M/L/R/D", "non_existing_taxon"}
-    programs = dbf.programs_of_taxons(taxons, follow=False)
+    taxa = {"X/S/M/L/R/D/A", "X/S/M/L/R/D", "non_existing_taxon"}
+    programs = dbf.programs_of_taxa(taxa, follow=False)
     print(sorted(programs))
     for (db_program, db_program_data) in db["programs"].items():
-        if taxons.intersection(db_program_data["taxons"]):
+        if taxa.intersection(db_program_data["taxa"]):
             assert db_program in programs
         else:
             assert db_program not in programs
 
 
-def test_taxons_of_programs():
+def test_taxa_of_programs():
     dbf = ProgramFilter(db)
     programs = {"prg8.py", "prg9.py", "non_existing_program"}
-    taxons = dbf.taxons_of_programs(programs)
-    prg8_taxons = set(dbf.db_programs["prg8.py"]["taxons"])
-    prg9_taxons = set(dbf.db_programs["prg9.py"]["taxons"])
-    print(sorted(taxons))
-    assert taxons == prg8_taxons | prg9_taxons
+    taxa = dbf.taxa_of_programs(programs)
+    prg8_taxa = set(dbf.db_programs["prg8.py"]["taxa"])
+    prg9_taxa = set(dbf.db_programs["prg9.py"]["taxa"])
+    print(sorted(taxa))
+    assert taxa == prg8_taxa | prg9_taxa
 
 
-def test_taxons_of_pattern():
+def test_taxa_of_pattern():
     dbf = ProgramFilter(db)
     names = ["X/S/M", "O(?!/C)", "Y/E$", "non_matching_pattern"]
-    taxons = set().union(*(dbf.taxons_of_pattern(name) for name in names))
-    print(sorted(taxons))
-    assert sorted(taxons) == [
+    taxa = set().union(*(dbf.taxa_of_pattern(name) for name in names))
+    print(sorted(taxa))
+    assert sorted(taxa) == [
         "O",
         "O/J",
         "O/N",
@@ -59,10 +59,10 @@ def test_taxons_of_pattern():
     ]
 
 
-def test_impart_taxons():
+def test_impart_taxa():
     dbf = ProgramFilter(db)
-    taxons = ["O/J", "X/S/M/L", "non/existing/taxon"]
-    dbf.impart_taxons(taxons)
+    taxa = ["O/J", "X/S/M/L", "non/existing/taxon"]
+    dbf.impart_taxa(taxa)
     print(sorted(dbf.imparted_knowledge))
     assert dbf.imparted_knowledge == {
         "O",

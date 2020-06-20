@@ -12,13 +12,13 @@ from .user_types import (
     Taxon,
     TaxonName,
     TaxonNames,
-    Taxons,
-    TaxonsSpans,
+    Taxa,
+    TaxaSpans,
 )
 
 
 class Taxonomy:
-    """Translate labels into taxons on a list of program paths."""
+    """Translate labels into taxa on a list of program paths."""
 
     def __init__(self, taxonomy_path: Optional[Path] = None, *args, **kwargs) -> None:
         """Read the taxonomy specifications, and make some pre-processing."""
@@ -54,23 +54,23 @@ class Taxonomy:
                 result.append(s)
         return result
 
-    def to_taxons(self, labels: Labels) -> Taxons:
-        """Translate a list of labels to a list of taxons with their spans in a bag."""
-        acc: TaxonsSpans = defaultdict(Counter)
+    def to_taxa(self, labels: Labels) -> Taxa:
+        """Translate a list of labels to a list of taxa with their spans in a bag."""
+        acc: TaxaSpans = defaultdict(Counter)
         for (label_name, spans) in labels:
             for taxon_name in self.get_taxon_name_list(label_name):
                 acc[taxon_name].update(spans)
-        taxons = [Taxon(name, spans) for (name, spans) in sorted(acc.items())]
-        return self.deduplicated_taxons(taxons)
+        taxa = [Taxon(name, spans) for (name, spans) in sorted(acc.items())]
+        return self.deduplicated_taxa(taxa)
 
     @staticmethod
-    def deduplicated_taxons(taxons: Taxons) -> Taxons:
+    def deduplicated_taxa(taxa: Taxa) -> Taxa:
         """If taxon t2 has taxon t1 as a prefix, remove their common spans from t1."""
-        if len(taxons) == 0:
+        if len(taxa) == 0:
             return []
-        for (i, (name, spans)) in enumerate(taxons[1:], 1):
+        for (i, (name, spans)) in enumerate(taxa[1:], 1):
             for j in range(i - 1, -1, -1):
-                (previous_name, previous_spans) = taxons[j]
+                (previous_name, previous_spans) = taxa[j]
                 common_prefix = commonpath((name, previous_name))
                 if not common_prefix:
                     break
@@ -79,7 +79,7 @@ class Taxonomy:
                     previous_spans.subtract(spans)
                     spans = difference
         result = []
-        for (name, spans) in taxons:
+        for (name, spans) in taxa:
             spans += Counter()  # suppress items whose count <= 0
             if spans:  # if any item remains in the bag
                 result.append(Taxon(name, spans))
@@ -94,10 +94,10 @@ if __name__ == "__main__":
     labeller.label_programs(Path("examples/simple/programs"))
     taxonomy = Taxonomy()
     for program in labeller.programs:
-        taxons = taxonomy.to_taxons(program.labels)
-        if not taxons:
+        taxa = taxonomy.to_taxa(program.labels)
+        if not taxa:
             continue
-        width = min(40, max(len(" ".join(map(str, taxon.spans))) for taxon in taxons))
-        for (name, spans) in taxons:
+        width = min(40, max(len(" ".join(map(str, taxon.spans))) for taxon in taxa))
+        for (name, spans) in taxa:
             span_string = " ".join(map(couple_to_string, sorted(set(spans))))
             print(f"{span_string:>{width}}\t{name}")

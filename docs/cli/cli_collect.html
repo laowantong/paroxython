@@ -37,8 +37,8 @@
                     • full: remove all blank lines, docstrings and
                             comments (except Paroxython hints).
                     • none: no transformation is applied.
--e --exclude=REGEX  Filter out any file whose name fully matches this
-                    regular expression. NB: --glob precedes --exclude.
+-e --skip=REGEX     Filter out any file whose name fully matches this
+                    regular expression. NB: --glob precedes --skip.
                     [default: &quot;^(__init__|setup|.*[-_]tests?)\.py$&quot;]
 -g --glob=PATTERN   The names of the collected files must match this
                     Unix-like glob pattern (not a regular expression).
@@ -51,7 +51,7 @@
                     (either &quot;.json&quot; or &quot;.sqlite&quot;) to decide the format
                     of the database. [default: ]
 --no_timestamp      Don't store program's last modification times.
--t --taxonomy=PATH  The path of a TSV file mapping labels onto taxons.
+-t --taxonomy=PATH  The path of a TSV file mapping labels onto taxa.
                     If not specified, use the included copy of the table
                     whose last version is at https://bit.ly/2Yu0LqU.
 </code></pre>
@@ -70,7 +70,7 @@ def cli_wrapper(args):
         directory=Path(args[&#34;DIRECTORY&#34;]),
         ignore_timestamps=args[&#34;--no_timestamp&#34;],
         cleanup_strategy=args[&#34;--cleanup&#34;],
-        skip_pattern=args[&#34;--exclude&#34;],
+        skip_pattern=args[&#34;--skip&#34;],
         glob_pattern=args[&#34;--glob&#34;],
         taxonomy_path=Path(args[&#34;--taxonomy&#34;]) if args[&#34;--taxonomy&#34;] else None,
     )
@@ -104,7 +104,7 @@ def cli_wrapper(args):
         directory=Path(args[&#34;DIRECTORY&#34;]),
         ignore_timestamps=args[&#34;--no_timestamp&#34;],
         cleanup_strategy=args[&#34;--cleanup&#34;],
-        skip_pattern=args[&#34;--exclude&#34;],
+        skip_pattern=args[&#34;--skip&#34;],
         glob_pattern=args[&#34;--glob&#34;],
         taxonomy_path=Path(args[&#34;--taxonomy&#34;]) if args[&#34;--taxonomy&#34;] else None,
     )

@@ -29,7 +29,7 @@ Labels = List[Label]
 LabelsSpans = Dict[LabelName, List[Span]]
 
 
-# Taxons
+# Taxa
 
 TaxonName = NewType("TaxonName", str)
 TaxonNames = List[TaxonName]
@@ -39,8 +39,8 @@ class Taxon(NamedTuple):
     name: TaxonName
     spans: Bag[Span]
 
-Taxons = List[Taxon]
-TaxonsSpans = Dict[TaxonName, Bag[Span]]
+Taxa = List[Taxon]
+TaxaSpans = Dict[TaxonName, Bag[Span]]
 
 
 # Programs
@@ -51,26 +51,26 @@ ProgramNameSet = Set[ProgramName]
 
 class Program(NamedTuple):
     labels: Labels
-    taxons: Taxons
+    taxa: Taxa
     addition: LabelsSpans
     deletion: LabelsSpans
     name: ProgramName = ProgramName("")
     source: Source = Source("")
 
 Programs = List[Program]
-ProgramTaxons = Dict[ProgramName, Taxons]
+ProgramTaxa = Dict[ProgramName, Taxa]
 
 # Serialization-ready types used for the JSON database
 
 PoorSpan = Tuple[int, int]
 LabelsPoorSpans = Dict[LabelName, List[PoorSpan]]
-TaxonsPoorSpans = Dict[TaxonName, List[PoorSpan]]
+TaxaPoorSpans = Dict[TaxonName, List[PoorSpan]]
 
 class ProgramRecord(TypedDict):
     timestamp: str
     source: Source
     labels: LabelsPoorSpans
-    taxons: TaxonsPoorSpans
+    taxa: TaxaPoorSpans
 
 ProgramInfos = Dict[ProgramName, ProgramRecord]
 LabelInfos = Dict[LabelName, ProgramNames]
@@ -80,7 +80,7 @@ ProgramToPrograms = Dict[ProgramName, ProgramNames]
 class JsonDatabase(TypedDict):
     programs: ProgramInfos
     labels: LabelInfos
-    taxons: TaxonInfos
+    taxa: TaxonInfos
     importations: ProgramToPrograms
     exportations: ProgramToPrograms
 

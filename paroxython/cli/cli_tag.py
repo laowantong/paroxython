@@ -1,4 +1,4 @@
-"""Tag one Python file and output the table of its taxons or labels.
+"""Tag one Python file and output the table of its taxa or labels.
 
 USAGE:
     ```
@@ -9,8 +9,8 @@ OPTIONS:
     ```plain
     -f --format=FORMAT  Format of the output, either "md" (Markdown)
                         or "tsv" (Tab Separated Values). [default: md]
-    -l --labels         Output the labels instead of the taxons.
-    -t --taxonomy=PATH  The path of a TSV file mapping labels onto taxons.
+    -l --labels         Output the labels instead of the taxa.
+    -t --taxonomy=PATH  The path of a TSV file mapping labels onto taxa.
                         If not specified, use the included copy of the table
                         whose last version is at https://bit.ly/2Yu0LqU.
     ```
@@ -44,8 +44,8 @@ def main(
             couples.append((label_name, s))
     else:
         taxonomy = Taxonomy(taxonomy_path)
-        taxons = taxonomy.to_taxons(program.labels)
-        for (taxon_name, taxon_spans) in sorted(taxons):
+        taxa = taxonomy.to_taxa(program.labels)
+        for (taxon_name, taxon_spans) in sorted(taxa):
             s = ", ".join(map(couple_to_string, sorted(taxon_spans.elements())))
             couples.append((taxon_name, s))
     if output_format == "md":

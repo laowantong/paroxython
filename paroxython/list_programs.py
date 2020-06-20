@@ -79,7 +79,7 @@ def get_program(source: Source, relative_path: Path = None) -> Program:
         - `labels` (type `List[Label]`, where each `Label` consists in a label name and a list of
             spans). This list is created empty here, to be later populated by
             `paroxython.label_programs.ProgramLabeller`.
-        - `taxons` (type `List[Taxons]`, where each `Taxon` consists in a taxon name and a bag of
+        - `taxa` (type `List[Taxa]`, where each `Taxon` consists in a taxon name and a bag of
             spans). This list is created empty here, to be later calculated from the labels by
             `paroxython.map_taxonomy.Taxonomy`.
     """
@@ -92,7 +92,7 @@ def get_program(source: Source, relative_path: Path = None) -> Program:
         addition=addition,
         deletion=deletion,
         labels=[],
-        taxons=[],
+        taxa=[],
     )
 
 

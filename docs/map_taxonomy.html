@@ -45,8 +45,8 @@ from .user_types import (
     Taxon,
     TaxonName,
     TaxonNames,
-    Taxons,
-    TaxonsSpans,
+    Taxa,
+    TaxaSpans,
 )
 
 
@@ -83,21 +83,21 @@ class Taxonomy:
                 result.append(s)
         return result
 
-    def to_taxons(self, labels: Labels) -&gt; Taxons:
-        acc: TaxonsSpans = defaultdict(Counter)
+    def to_taxa(self, labels: Labels) -&gt; Taxa:
+        acc: TaxaSpans = defaultdict(Counter)
         for (label_name, spans) in labels:
             for taxon_name in self.get_taxon_name_list(label_name):
                 acc[taxon_name].update(spans)
-        taxons = [Taxon(name, spans) for (name, spans) in sorted(acc.items())]
-        return self.deduplicated_taxons(taxons)
+        taxa = [Taxon(name, spans) for (name, spans) in sorted(acc.items())]
+        return self.deduplicated_taxa(taxa)
 
     @staticmethod
-    def deduplicated_taxons(taxons: Taxons) -&gt; Taxons:
-        if len(taxons) == 0:
+    def deduplicated_taxa(taxa: Taxa) -&gt; Taxa:
+        if len(taxa) == 0:
             return []
-        for (i, (name, spans)) in enumerate(taxons[1:], 1):
+        for (i, (name, spans)) in enumerate(taxa[1:], 1):
             for j in range(i - 1, -1, -1):
-                (previous_name, previous_spans) = taxons[j]
+                (previous_name, previous_spans) = taxa[j]
                 common_prefix = commonpath((name, previous_name))
                 if not common_prefix:
                     break
@@ -106,7 +106,7 @@ class Taxonomy:
                     previous_spans.subtract(spans)
                     spans = difference
         result = []
-        for (name, spans) in taxons:
+        for (name, spans) in taxa:
             spans += Counter()  # suppress items whose count &lt;= 0
             if spans:  # if any item remains in the bag
                 result.append(Taxon(name, spans))
@@ -121,11 +121,11 @@ if __name__ == &#34;__main__&#34;:
     labeller.label_programs(Path(&#34;examples/simple/programs&#34;))
     taxonomy = Taxonomy()
     for program in labeller.programs:
-        taxons = taxonomy.to_taxons(program.labels)
-        if not taxons:
+        taxa = taxonomy.to_taxa(program.labels)
+        if not taxa:
             continue
-        width = min(40, max(len(&#34; &#34;.join(map(str, taxon.spans))) for taxon in taxons))
-        for (name, spans) in taxons:
+        width = min(40, max(len(&#34; &#34;.join(map(str, taxon.spans))) for taxon in taxa))
+        for (name, spans) in taxa:
             span_string = &#34; &#34;.join(map(couple_to_string, sorted(set(spans))))
             print(f&#34;{span_string:&gt;{width}}\t{name}&#34;)</code></pre>
 </details>
@@ -144,7 +144,7 @@ if __name__ == &#34;__main__&#34;:
 <span>(</span><span>taxonomy_path: Union[pathlib.Path, NoneType] = None, *args, **kwargs)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Translate labels into taxons on a list of program paths.</p>
+<div class="desc"><p>Translate labels into taxa on a list of program paths.</p>
 <p>Read the taxonomy specifications, and make some pre-processing.</p></div>
 <details class="source">
 <summary>
@@ -184,21 +184,21 @@ if __name__ == &#34;__main__&#34;:
                 result.append(s)
         return result
 
-    def to_taxons(self, labels: Labels) -&gt; Taxons:
-        acc: TaxonsSpans = defaultdict(Counter)
+    def to_taxa(self, labels: Labels) -&gt; Taxa:
+        acc: TaxaSpans = defaultdict(Counter)
         for (label_name, spans) in labels:
             for taxon_name in self.get_taxon_name_list(label_name):
                 acc[taxon_name].update(spans)
-        taxons = [Taxon(name, spans) for (name, spans) in sorted(acc.items())]
-        return self.deduplicated_taxons(taxons)
+        taxa = [Taxon(name, spans) for (name, spans) in sorted(acc.items())]
+        return self.deduplicated_taxa(taxa)
 
     @staticmethod
-    def deduplicated_taxons(taxons: Taxons) -&gt; Taxons:
-        if len(taxons) == 0:
+    def deduplicated_taxa(taxa: Taxa) -&gt; Taxa:
+        if len(taxa) == 0:
             return []
-        for (i, (name, spans)) in enumerate(taxons[1:], 1):
+        for (i, (name, spans)) in enumerate(taxa[1:], 1):
             for j in range(i - 1, -1, -1):
-                (previous_name, previous_spans) = taxons[j]
+                (previous_name, previous_spans) = taxa[j]
                 common_prefix = commonpath((name, previous_name))
                 if not common_prefix:
                     break
@@ -207,7 +207,7 @@ if __name__ == &#34;__main__&#34;:
                     previous_spans.subtract(spans)
                     spans = difference
         result = []
-        for (name, spans) in taxons:
+        for (name, spans) in taxa:
             spans += Counter()  # suppress items whose count &lt;= 0
             if spans:  # if any item remains in the bag
                 result.append(Taxon(name, spans))
@@ -215,8 +215,8 @@ if __name__ == &#34;__main__&#34;:
 </details>
 <h3>Static methods</h3>
 <dl>
-<dt id="paroxython.map_taxonomy.Taxonomy.deduplicated_taxons"><code class="name flex">
-<span>def <span class="ident">deduplicated_taxons</span></span>(<span>taxons: List[Taxon]) ‑> List[Taxon]</span>
+<dt id="paroxython.map_taxonomy.Taxonomy.deduplicated_taxa"><code class="name flex">
+<span>def <span class="ident">deduplicated_taxa</span></span>(<span>taxa: List[Taxon]) ‑> List[Taxon]</span>
 </code></dt>
 <dd>
 <div class="desc"><p>If taxon t2 has taxon t1 as a prefix, remove their common spans from t1.</p></div>
@@ -226,12 +226,12 @@ if __name__ == &#34;__main__&#34;:
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L66-L86" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">@staticmethod
-def deduplicated_taxons(taxons: Taxons) -&gt; Taxons:
-    if len(taxons) == 0:
+def deduplicated_taxa(taxa: Taxa) -&gt; Taxa:
+    if len(taxa) == 0:
         return []
-    for (i, (name, spans)) in enumerate(taxons[1:], 1):
+    for (i, (name, spans)) in enumerate(taxa[1:], 1):
         for j in range(i - 1, -1, -1):
-            (previous_name, previous_spans) = taxons[j]
+            (previous_name, previous_spans) = taxa[j]
             common_prefix = commonpath((name, previous_name))
             if not common_prefix:
                 break
@@ -240,7 +240,7 @@ def deduplicated_taxons(taxons: Taxons) -&gt; Taxons:
                 previous_spans.subtract(spans)
                 spans = difference
     result = []
-    for (name, spans) in taxons:
+    for (name, spans) in taxa:
         spans += Counter()  # suppress items whose count &lt;= 0
         if spans:  # if any item remains in the bag
             result.append(Taxon(name, spans))
@@ -279,23 +279,23 @@ def get_taxon_name_list(
     return result</code></pre>
 </details>
 </dd>
-<dt id="paroxython.map_taxonomy.Taxonomy.to_taxons"><code class="name flex">
-<span>def <span class="ident">to_taxons</span></span>(<span>self, labels: List[Label]) ‑> List[Taxon]</span>
+<dt id="paroxython.map_taxonomy.Taxonomy.to_taxa"><code class="name flex">
+<span>def <span class="ident">to_taxa</span></span>(<span>self, labels: List[Label]) ‑> List[Taxon]</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Translate a list of labels to a list of taxons with their spans in a bag.</p></div>
+<div class="desc"><p>Translate a list of labels to a list of taxa with their spans in a bag.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L57-L64" class="git-link">Browse GitHub</a>
 </summary>
-<pre><code class="python">def to_taxons(self, labels: Labels) -&gt; Taxons:
-    acc: TaxonsSpans = defaultdict(Counter)
+<pre><code class="python">def to_taxa(self, labels: Labels) -&gt; Taxa:
+    acc: TaxaSpans = defaultdict(Counter)
     for (label_name, spans) in labels:
         for taxon_name in self.get_taxon_name_list(label_name):
             acc[taxon_name].update(spans)
-    taxons = [Taxon(name, spans) for (name, spans) in sorted(acc.items())]
-    return self.deduplicated_taxons(taxons)</code></pre>
+    taxa = [Taxon(name, spans) for (name, spans) in sorted(acc.items())]
+    return self.deduplicated_taxa(taxa)</code></pre>
 </details>
 </dd>
 </dl>
@@ -328,9 +328,9 @@ data-gaCategoryParameter="paroxython.map_taxonomy">
 <li>
 <h4><code><a title="paroxython.map_taxonomy.Taxonomy" href="#paroxython.map_taxonomy.Taxonomy">Taxonomy</a></code></h4>
 <ul class="">
-<li><code><a title="paroxython.map_taxonomy.Taxonomy.deduplicated_taxons" href="#paroxython.map_taxonomy.Taxonomy.deduplicated_taxons">deduplicated_taxons</a></code></li>
+<li><code><a title="paroxython.map_taxonomy.Taxonomy.deduplicated_taxa" href="#paroxython.map_taxonomy.Taxonomy.deduplicated_taxa">deduplicated_taxa</a></code></li>
 <li><code><a title="paroxython.map_taxonomy.Taxonomy.get_taxon_name_list" href="#paroxython.map_taxonomy.Taxonomy.get_taxon_name_list">get_taxon_name_list</a></code></li>
-<li><code><a title="paroxython.map_taxonomy.Taxonomy.to_taxons" href="#paroxython.map_taxonomy.Taxonomy.to_taxons">to_taxons</a></code></li>
+<li><code><a title="paroxython.map_taxonomy.Taxonomy.to_taxa" href="#paroxython.map_taxonomy.Taxonomy.to_taxa">to_taxa</a></code></li>
 </ul>
 </li>
 </ul>
