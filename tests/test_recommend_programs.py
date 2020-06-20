@@ -181,6 +181,19 @@ def test_recommend_mini_programs():
     assert not proper_taxa["is_even.py"].issubset(rec.imparted_knowledge)
     assert not proper_taxa["collatz.py"].issubset(rec.imparted_knowledge)
 
+    commands = [{"operation": "impart", "data": ["operator/arithmetic"]}]
+    rec = Recommendations(db, commands=commands)
+    rec.run_pipeline()
+    assert rec.selected_programs == {"assignment.py", "collatz.py", "fizzbuzz.py", "is_even.py"}
+    print(rec.imparted_knowledge)
+    assert rec.imparted_knowledge == {
+        "operator/arithmetic/multiplication",
+        "operator/arithmetic/modulo",
+        "operator",
+        "operator/arithmetic",
+        "operator/arithmetic/addition",
+    }
+
     commands = [
         {
             "operation": "exclude",
