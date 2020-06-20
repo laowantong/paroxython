@@ -70,7 +70,7 @@ def cli_wrapper(args):
         directory=Path(args[&#34;DIRECTORY&#34;]),
         ignore_timestamps=args[&#34;--no_timestamp&#34;],
         cleanup_strategy=args[&#34;--cleanup&#34;],
-        exclude_pattern=args[&#34;--exclude&#34;],
+        skip_pattern=args[&#34;--exclude&#34;],
         glob_pattern=args[&#34;--glob&#34;],
         taxonomy_path=Path(args[&#34;--taxonomy&#34;]) if args[&#34;--taxonomy&#34;] else None,
     )
@@ -104,7 +104,7 @@ def cli_wrapper(args):
         directory=Path(args[&#34;DIRECTORY&#34;]),
         ignore_timestamps=args[&#34;--no_timestamp&#34;],
         cleanup_strategy=args[&#34;--cleanup&#34;],
-        exclude_pattern=args[&#34;--exclude&#34;],
+        skip_pattern=args[&#34;--exclude&#34;],
         glob_pattern=args[&#34;--glob&#34;],
         taxonomy_path=Path(args[&#34;--taxonomy&#34;]) if args[&#34;--taxonomy&#34;] else None,
     )

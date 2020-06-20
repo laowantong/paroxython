@@ -1,3 +1,5 @@
+"""Scan a directory for Python programs and yield the corresponding `Program` objects."""
+
 from pathlib import Path
 from typing import Iterator
 
@@ -11,17 +13,34 @@ def list_programs(
     directory: Path,
     cleanup_strategy: str = "full",
     glob_pattern: str = "",
-    exclude_pattern: str = "",
+    skip_pattern: str = "",
     *args,
     **kwargs,
 ) -> Programs:
-    """List recursively all Python `Program`s of a given directory."""
+    """List (by default recursively) all Python programs of a given directory.
+
+    Args:
+        directory (Path): The directory to search.
+        cleanup_strategy (str, optional): Describes how to clean the source codes. Passed to
+            `paroxython.preprocess_source.Cleanup`. Defaults to `"full"`.
+        glob_pattern (str, optional): Describes which files to yield in `directory`. Passed to the
+            standard library `pathlib`'s
+            [`Path.glob()`](https://docs.python.org/3/library/pathlib.html#pathlib.Path.glob).
+            If empty, replaced by `"**/*.py"`, which means “all Python source files in `directory`
+            and all its subdirectories, recursively”. Defaults to `""`.
+        skip_pattern (str, optional): Describes how to filter out the yielded files. If empty,
+            skip any file whose name is `"__init__.py"`, `"setup.py"` or ends with `"-test.py"`,
+            `"-tests.py"`, `"_test.py"` or `"_tests.py"`. Defaults to `""`.
+
+    Returns:
+        Programs: A list of `Program` objects as constructed by `get_program`.
+    """
     result: Programs = []
     cleanup = Cleanup(cleanup_strategy)
     glob_pattern = glob_pattern or "**/*.py"
-    exclude_pattern = exclude_pattern or r"^(__init__|setup|.*[-_]tests?)\.py$"
-    match_excluded = regex.compile(exclude_pattern).fullmatch
-    for program_path in sorted(directory.rglob(glob_pattern)):
+    skip_pattern = skip_pattern or r"^(__init__|setup|.*[-_]tests?)\.py$"
+    match_excluded = regex.compile(skip_pattern).fullmatch
+    for program_path in sorted(directory.glob(glob_pattern)):
         if not match_excluded(program_path.name):
             source = cleanup.run(Source(program_path.read_text()))
             relative_path = program_path.relative_to(directory)
@@ -30,14 +49,39 @@ def list_programs(
 
 
 def get_program(source: Source, relative_path: Path = None) -> Program:
-    """Construct a `Program` of its `Source` and relative `Path`.
+    """Construct a fresh `Program` object from its source code and (optionally) relative path.
 
-    The result consists in:
+    Description:
+        At this stage, the source code is already preprocessed by `paroxython.preprocess_source`,
+        which among other things means it has been stripped from all its comments, except those
+        consisting of one or several manual hints. The following operations are then carried out:
 
-    - the program `Path`, empty or relative to the directory passed to `list_programs()`;
-    - its centrifugated `Source`;
-    - the hints scheduled for addition or deletion;
-    - its `labels`, currently empty, to be later populated by label_programs.py.
+        1. Centrifugate the all-encompassing hints found in the source code (see
+            `paroxython.preprocess_source.centrifugate_hints`).
+        2. Collect all hints, determining whether they must be added to or removed from the
+            labels which will later be found by `paroxython.label_programs.ProgramLabeller`.
+        3. Remove all hints from the source code.
+        4. Return a new `Program` (details below).
+
+    Args:
+        source (Source): A source code, already preprocessed.
+        relative_path (Path, optional): A path relative to the directory passed to
+            `list_programs()`. Can be omitted for testing purposes or when the source code is
+            the contents of a Jupyter Notebook's cell. Defaults to None.
+
+    Returns:
+        Program: A `NamedTuple` consisting in the following fields:
+        - `name` (type `ProgramName`, derived from `str`): the program path, either empty or
+            relative to the directory passed to `list_programs()`;
+        - `source` (type `Source`, derived from `str`): its code source, fully cleaned up;
+        - `addition` (type `Dict[LabelName, List[Span]]`): the manual hints scheduled for addition;
+        - `deletion` (type `Dict[LabelName, List[Span]]`): the manual hints scheduled for deletion;
+        - `labels` (type `List[Label]`, where each `Label` consists in a label name and a list of
+            spans). This list is created empty here, to be later populated by
+            `paroxython.label_programs.ProgramLabeller`.
+        - `taxons` (type `List[Taxons]`, where each `Taxon` consists in a taxon name and a bag of
+            spans). This list is created empty here, to be later calculated from the labels by
+            `paroxython.map_taxonomy.Taxonomy`.
     """
     source = centrifugate_hints(source)
     (addition, deletion) = collect_hints(source)
@@ -53,7 +97,19 @@ def get_program(source: Source, relative_path: Path = None) -> Program:
 
 
 def iterate_and_print_programs(programs: Programs) -> Iterator[Program]:
-    """Wrap the iteration of programs into a logger."""
+    """Iterate on a list of programs while printing their names as a side effect.
+
+    Args:
+        programs (Programs): A list of `Program` objects, as returned by `list_programs`.
+
+    Yields:
+        Iterator[Program]: The same `Program` objects in the same order.
+
+    Note:
+        This simple wrapper should print the name of each program over the previous one to avoid
+        flooding the screen. Unfortunately, this may result in even more flood if your console
+        does not support [ANSI escape codes](https://en.wikipedia.org/wiki/ANSI_escape_code).
+    """
     blanks = ""
     for (i, program) in enumerate(programs, 1):
         print(f"\r{blanks}\r{i: 5} {program.name}", end="", flush=True)
@@ -68,7 +124,7 @@ if __name__ == "__main__":
     directory = Path("../Algo/programs/")
     for program in list_programs(
         directory,
-        exclude_pattern=r"^(__init__|setup|.*[-_]tests?|quiz_.*)\.py$",
+        skip_pattern=r"^(__init__|setup|.*[-_]tests?|quiz_.*)\.py$",
         cleanup_strategy="full",
     ):
         path = directory / program.name

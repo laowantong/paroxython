@@ -78,11 +78,11 @@ def test_collect_options():
     assert "\n\n" in db["programs"]["fizzbuzz.py"]["source"]  # not cleaned up
 
     rex = r".+_.+"  # exclude is_even.py
-    result = run(f'collect -o {db_path} --exclude "{rex}" examples/mini/programs')
+    result = run(f'collect -o {db_path} --skip "{rex}" examples/mini/programs')
     assert "Labelling 3 programs." in result
 
     rex = r".+n.?\.py"  # exclude assignment.py, is_even.py
-    result = run(f'collect -o {db_path} --exclude "{rex}" examples/mini/programs')
+    result = run(f'collect -o {db_path} --skip "{rex}" examples/mini/programs')
     assert "Labelling 2 programs." in result
 
     glob = r"*n*.py"  # include assignment.py, is_even.py

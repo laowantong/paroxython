@@ -312,7 +312,7 @@ expressions, span algebra, semantic triples, negations) in the <a href="#deep-in
 ... ]
 </code></pre>
 <h2 id="regular-expression-patterns">Regular expression patterns</h2>
-<p>The first thing to clarify is that the strings which constitute the <code>data</code> lists are not simple names, but “descriptions” of names. These descriptions, or <strong>patterns</strong>, are written in the language of regular expressions, and more precisely in the dialect implemented by the third-party module <a href="https://pypi.org/project/regex/">regex</a><sup id="fnref:regex-credits"><a class="footnote-ref" href="#fn:regex-credits" rel="footnote">1</a></sup>.</p>
+<p>The first thing to clarify is that the strings which constitute the <code>data</code> lists are not simple names, but “descriptions” of names. These descriptions, or <strong>patterns</strong>, are written in the language of regular expressions, and more precisely in the dialect implemented by the third-party module <a href="https://pypi.org/project/regex/">regex</a><sup id="fnref:regex-credits"><a class="footnote-ref" href="#fn:regex-credits">1</a></sup>.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>If you don't know how to write regular expressions, the good news is that you don't have to worry. When they do not contain certain special characters, they are self-descriptive. That means, for instance, that the string <code>"type/sequence/list"</code> happens to be a regular expression which precisely describes (or ”matches”) the string <code>"type/sequence/list"</code>. This is the case for all strings that are only made up of so-called <em>literal</em> characters.</p>
@@ -394,7 +394,7 @@ expressions, span algebra, semantic triples, negations) in the <a href="#deep-in
 <li>For instance, a <code>print</code> statement whose span is inside the span of a function indicates that this function has a side-effect.</li>
 <li>A less trivial application stems from the fact that our taxonomy is multi-dimensional: each algorithmic feature can be associated with several taxons at the same time, characterizing it it along several facets, or dimensions. For instance, the taxons <code>flow/loop</code> and <code>flow/loop/while</code> describe the category of a loop; whereas the taxons <code>flow/loop/exit/early</code> and <code>flow/loop/exit/late</code> describe its exit behavior. These dimensions are independent and, although it is entirely possible to do so, our default taxonomy does not list the results of the cross-product (i.e., <code>flow/loop/exit/early</code>, <code>flow/loop/exit/late</code>, <code>flow/loop/while/exit/early</code> and <code>flow/loop/while/exit/late</code>). Querying an hypothetical taxon <code>flow/loop/exit/early</code> (or <code>flow/loop/exit/early/for</code>, by the way) comes down to querying the taxons <code>flow/loop</code> spanning the same lines as <code>flow/loop/exit/early</code>.</li>
 </ul>
-<p>To express a relation <span><span class="MathJax_Preview">\mathfrak{R}</span><script type="math/tex">\mathfrak{R}</script></span> between the spans of two taxons, we start from the algebra devised in 1983 by James F. Allen in his seminal paper (<a href="http://cse.unl.edu/~choueiry/Documents/Allen-CACM1983.pdf">PDF</a>) about temporal intervals<sup id="fnref:Allen1983"><a class="footnote-ref" href="#fn:Allen1983" rel="footnote">2</a></sup>. The so-called Allen's interval algebra defines 13 basic operators which capture all possible relations between two intervals <span><span class="MathJax_Preview">X=(x_1, x_2)</span><script type="math/tex">X=(x_1, x_2)</script></span> and <span><span class="MathJax_Preview">Y=(y_1, y_2)</span><script type="math/tex">Y=(y_1, y_2)</script></span>. The table below uses his terminology:</p>
+<p>To express a relation <span><span class="MathJax_Preview">\mathfrak{R}</span><script type="math/tex">\mathfrak{R}</script></span> between the spans of two taxons, we start from the algebra devised in 1983 by James F. Allen in his seminal paper (<a href="http://cse.unl.edu/~choueiry/Documents/Allen-CACM1983.pdf">PDF</a>) about temporal intervals<sup id="fnref:Allen1983"><a class="footnote-ref" href="#fn:Allen1983">2</a></sup>. The so-called Allen's interval algebra defines 13 basic operators which capture all possible relations between two intervals <span><span class="MathJax_Preview">X=(x_1, x_2)</span><script type="math/tex">X=(x_1, x_2)</script></span> and <span><span class="MathJax_Preview">Y=(y_1, y_2)</span><script type="math/tex">Y=(y_1, y_2)</script></span>. The table below uses his terminology:</p>
 <table>
 <thead>
 <tr>
@@ -500,7 +500,7 @@ express our query as a disjunction of these two relations for the following prog
 5               return natural
 </code></pre>
 <p><strong>Strict inequalities.</strong> In addition to the existing relations, all combinations of strict and non-strict
-conditions are generated, for instance <span><span class="MathJax_Preview">x_1 &lt; x_2 &lt; y_1 \leq y_2</span><script type="math/tex">x_1 < x_2 < y_1 \leq y_2</script></span>. That adds up to 162 in total<sup id="fnref:predicate_count"><a class="footnote-ref" href="#fn:predicate_count" rel="footnote">3</a></sup>.</p>
+conditions are generated, for instance <span><span class="MathJax_Preview">x_1 &lt; x_2 &lt; y_1 \leq y_2</span><script type="math/tex">x_1 < x_2 < y_1 \leq y_2</script></span>. That adds up to 162 in total<sup id="fnref:predicate_count"><a class="footnote-ref" href="#fn:predicate_count">3</a></sup>.</p>
 <p><strong>Keys.</strong> As we use many more operators than Allen, giving an English name to every single one is not an option. Paroxython actually identifies them by a unique key (see the last column of the table above) calculated like this:</p>
 <ol>
 <li>Start from the chain of equalities and inequalities that defines the relations between the two spans' endpoints: <span><span class="MathJax_Preview">y_1 &lt; x_1 = y_2 \leq x_2</span><script type="math/tex">y_1 < x_1 = y_2 \leq x_2</script></span>.</li>
@@ -644,13 +644,13 @@ Browse <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/
 <ol>
 <li id="fn:regex-credits">
 <p>This module appears to be here to stay, since it is proeminently featured at the top of the more mundane standard library <a href="https://docs.python.org/3/library/re.html">re</a>.
-Thanks and kudos to the author, Matthew Barnett: without his awesome work, many parts of our code would have been much tougher to write, and much slower to execute.&#160;<a class="footnote-backref" href="#fnref:regex-credits" rev="footnote" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+Thanks and kudos to the author, Matthew Barnett: without his awesome work, many parts of our code would have been much tougher to write, and much slower to execute.&#160;<a class="footnote-backref" href="#fnref:regex-credits" title="Jump back to footnote 1 in the text">&#8617;</a></p>
 </li>
 <li id="fn:Allen1983">
-<p>Allen, James F. (26 Nov. 1983). <em>Maintaining knowledge about temporal intervals</em>. Communications of the ACM. 26 (11): 832–843. doi:10.1145/182.358434&#160;<a class="footnote-backref" href="#fnref:Allen1983" rev="footnote" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+<p>Allen, James F. (26 Nov. 1983). <em>Maintaining knowledge about temporal intervals</em>. Communications of the ACM. 26 (11): 832–843. doi:10.1145/182.358434&#160;<a class="footnote-backref" href="#fnref:Allen1983" title="Jump back to footnote 2 in the text">&#8617;</a></p>
 </li>
 <li id="fn:predicate_count">
-<p><span><span class="MathJax_Preview">162 = 6 \times 27</span><script type="math/tex">162 = 6 \times 27</script></span>, where <span><span class="MathJax_Preview">6</span><script type="math/tex">6</script></span> is the number of distinct permutations of the quadruple <span><span class="MathJax_Preview">(x, x, y, y)</span><script type="math/tex">(x, x, y, y)</script></span>, and <span><span class="MathJax_Preview">27=3^3</span><script type="math/tex">27=3^3</script></span> the number of elements of the triple auto-product of <span><span class="MathJax_Preview">3</span><script type="math/tex">3</script></span> symbols (<code>=</code>, <code>≤</code> and <code>&lt;</code>).&#160;<a class="footnote-backref" href="#fnref:predicate_count" rev="footnote" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+<p><span><span class="MathJax_Preview">162 = 6 \times 27</span><script type="math/tex">162 = 6 \times 27</script></span>, where <span><span class="MathJax_Preview">6</span><script type="math/tex">6</script></span> is the number of distinct permutations of the quadruple <span><span class="MathJax_Preview">(x, x, y, y)</span><script type="math/tex">(x, x, y, y)</script></span>, and <span><span class="MathJax_Preview">27=3^3</span><script type="math/tex">27=3^3</script></span> the number of elements of the triple auto-product of <span><span class="MathJax_Preview">3</span><script type="math/tex">3</script></span> symbols (<code>=</code>, <code>≤</code> and <code>&lt;</code>).&#160;<a class="footnote-backref" href="#fnref:predicate_count" title="Jump back to footnote 3 in the text">&#8617;</a></p>
 </li>
 </ol>
 </div>
@@ -693,7 +693,7 @@ Thanks and kudos to the author, Matthew Barnett: without his awesome work, many 
 </dd>
 <dt><code class="name"><a title="paroxython.list_programs" href="list_programs.html">paroxython.list_programs</a></code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Scan a directory for Python programs and yield the corresponding <code>Program</code> objects.</p></div>
 </dd>
 <dt><code class="name"><a title="paroxython.make_db" href="make_db.html">paroxython.make_db</a></code></dt>
 <dd>

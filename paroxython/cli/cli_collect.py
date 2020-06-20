@@ -13,8 +13,8 @@ OPTIONS:
                         • full: remove all blank lines, docstrings and
                                 comments (except Paroxython hints).
                         • none: no transformation is applied.
-    -e --exclude=REGEX  Filter out any file whose name fully matches this
-                        regular expression. NB: --glob precedes --exclude.
+    -e --skip=REGEX     Filter out any file whose name fully matches this
+                        regular expression. NB: --glob precedes --skip.
                         [default: "^(__init__|setup|.*[-_]tests?)\.py$"]
     -g --glob=PATTERN   The names of the collected files must match this
                         Unix-like glob pattern (not a regular expression).
@@ -43,7 +43,7 @@ def cli_wrapper(args):
         directory=Path(args["DIRECTORY"]),
         ignore_timestamps=args["--no_timestamp"],
         cleanup_strategy=args["--cleanup"],
-        exclude_pattern=args["--exclude"],
+        skip_pattern=args["--skip"],
         glob_pattern=args["--glob"],
         taxonomy_path=Path(args["--taxonomy"]) if args["--taxonomy"] else None,
     )

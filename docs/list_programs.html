@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.8.1" />
 <title>paroxython.list_programs API documentation</title>
-<meta name="description" content="" />
+<meta name="description" content="Scan a directory for Python programs and yield the corresponding `Program` objects." />
 <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
 <link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
@@ -26,10 +26,11 @@
 <h1 class="title">Module <code>paroxython.list_programs</code></h1>
 </header>
 <section id="section-intro">
+<p>Scan a directory for Python programs and yield the corresponding <code>Program</code> objects.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/list_programs.py#L0-L76" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/list_programs.py#L0-L132" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">from pathlib import Path
 from typing import Iterator
@@ -44,16 +45,16 @@ def list_programs(
     directory: Path,
     cleanup_strategy: str = &#34;full&#34;,
     glob_pattern: str = &#34;&#34;,
-    exclude_pattern: str = &#34;&#34;,
+    skip_pattern: str = &#34;&#34;,
     *args,
     **kwargs,
 ) -&gt; Programs:
     result: Programs = []
     cleanup = Cleanup(cleanup_strategy)
     glob_pattern = glob_pattern or &#34;**/*.py&#34;
-    exclude_pattern = exclude_pattern or r&#34;^(__init__|setup|.*[-_]tests?)\.py$&#34;
-    match_excluded = regex.compile(exclude_pattern).fullmatch
-    for program_path in sorted(directory.rglob(glob_pattern)):
+    skip_pattern = skip_pattern or r&#34;^(__init__|setup|.*[-_]tests?)\.py$&#34;
+    match_excluded = regex.compile(skip_pattern).fullmatch
+    for program_path in sorted(directory.glob(glob_pattern)):
         if not match_excluded(program_path.name):
             source = cleanup.run(Source(program_path.read_text()))
             relative_path = program_path.relative_to(directory)
@@ -90,7 +91,7 @@ if __name__ == &#34;__main__&#34;:
     directory = Path(&#34;../Algo/programs/&#34;)
     for program in list_programs(
         directory,
-        exclude_pattern=r&#34;^(__init__|setup|.*[-_]tests?|quiz_.*)\.py$&#34;,
+        skip_pattern=r&#34;^(__init__|setup|.*[-_]tests?|quiz_.*)\.py$&#34;,
         cleanup_strategy=&#34;full&#34;,
     ):
         path = directory / program.name
@@ -107,29 +108,52 @@ if __name__ == &#34;__main__&#34;:
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
 <dt id="paroxython.list_programs.list_programs"><code class="name flex">
-<span>def <span class="ident">list_programs</span></span>(<span>directory: pathlib.Path, cleanup_strategy: str = 'full', glob_pattern: str = '', exclude_pattern: str = '', *args, **kwargs) ‑> List[Program]</span>
+<span>def <span class="ident">list_programs</span></span>(<span>directory: pathlib.Path, cleanup_strategy: str = 'full', glob_pattern: str = '', skip_pattern: str = '', *args, **kwargs) ‑> List[Program]</span>
 </code></dt>
 <dd>
-<div class="desc"><p>List recursively all Python <code>Program</code>s of a given directory.</p></div>
+<div class="desc"><p>List (by default recursively) all Python programs of a given directory.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>directory</code></strong> :&ensp;<code>Path</code></dt>
+<dd>The directory to search.</dd>
+<dt><strong><code>cleanup_strategy</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>Describes how to clean the source codes. Passed to
+<code><a title="paroxython.preprocess_source.Cleanup" href="preprocess_source.html#paroxython.preprocess_source.Cleanup">Cleanup</a></code>. Defaults to <code>"full"</code>.</dd>
+<dt><strong><code>glob_pattern</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>Describes which files to yield in <code>directory</code>. Passed to the
+standard library <code>pathlib</code>'s
+<a href="https://docs.python.org/3/library/pathlib.html#pathlib.Path.glob"><code>Path.glob()</code></a>.
+If empty, replaced by <code>"**/*.py"</code>, which means “all Python source files in <code>directory</code>
+and all its subdirectories, recursively”. Defaults to <code>""</code>.</dd>
+<dt><strong><code>skip_pattern</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>Describes how to filter out the yielded files. If empty,
+skip any file whose name is <code>"__init__.py"</code>, <code>"setup.py"</code> or ends with <code>"-test.py"</code>,
+<code>"-tests.py"</code>, <code>"_test.py"</code> or <code>"_tests.py"</code>. Defaults to <code>""</code>.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>Programs</code></dt>
+<dd>A list of <code>Program</code> objects as constructed by <code><a title="paroxython.list_programs.get_program" href="#paroxython.list_programs.get_program">get_program()</a></code>.</dd>
+</dl></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/list_programs.py#L10-L29" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/list_programs.py#L12-L48" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def list_programs(
     directory: Path,
     cleanup_strategy: str = &#34;full&#34;,
     glob_pattern: str = &#34;&#34;,
-    exclude_pattern: str = &#34;&#34;,
+    skip_pattern: str = &#34;&#34;,
     *args,
     **kwargs,
 ) -&gt; Programs:
     result: Programs = []
     cleanup = Cleanup(cleanup_strategy)
     glob_pattern = glob_pattern or &#34;**/*.py&#34;
-    exclude_pattern = exclude_pattern or r&#34;^(__init__|setup|.*[-_]tests?)\.py$&#34;
-    match_excluded = regex.compile(exclude_pattern).fullmatch
-    for program_path in sorted(directory.rglob(glob_pattern)):
+    skip_pattern = skip_pattern or r&#34;^(__init__|setup|.*[-_]tests?)\.py$&#34;
+    match_excluded = regex.compile(skip_pattern).fullmatch
+    for program_path in sorted(directory.glob(glob_pattern)):
         if not match_excluded(program_path.name):
             source = cleanup.run(Source(program_path.read_text()))
             relative_path = program_path.relative_to(directory)
@@ -141,18 +165,50 @@ if __name__ == &#34;__main__&#34;:
 <span>def <span class="ident">get_program</span></span>(<span>source: Source, relative_path: pathlib.Path = None) ‑> Program</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Construct a <code>Program</code> of its <code>Source</code> and relative <code>Path</code>.</p>
-<p>The result consists in:</p>
+<div class="desc"><p>Construct a fresh <code>Program</code> object from its source code and (optionally) relative path.</p>
+<h2 id="description">Description</h2>
+<p>At this stage, the source code is already preprocessed by <code><a title="paroxython.preprocess_source" href="preprocess_source.html">paroxython.preprocess_source</a></code>,
+which among other things means it has been stripped from all its comments, except those
+consisting of one or several manual hints. The following operations are then carried out:</p>
+<ol>
+<li>Centrifugate the all-encompassing hints found in the source code (see
+<code><a title="paroxython.preprocess_source.centrifugate_hints" href="preprocess_source.html#paroxython.preprocess_source.centrifugate_hints">centrifugate_hints()</a></code>).</li>
+<li>Collect all hints, determining whether they must be added to or removed from the
+labels which will later be found by <code><a title="paroxython.label_programs.ProgramLabeller" href="label_programs.html#paroxython.label_programs.ProgramLabeller">ProgramLabeller</a></code>.</li>
+<li>Remove all hints from the source code.</li>
+<li>Return a new <code>Program</code> (details below).</li>
+</ol>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>source</code></strong> :&ensp;<code>Source</code></dt>
+<dd>A source code, already preprocessed.</dd>
+<dt><strong><code>relative_path</code></strong> :&ensp;<code>Path</code>, optional</dt>
+<dd>A path relative to the directory passed to
+<code><a title="paroxython.list_programs.list_programs" href="#paroxython.list_programs.list_programs">list_programs()</a></code>. Can be omitted for testing purposes or when the source code is
+the contents of a Jupyter Notebook's cell. Defaults to None.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>Program</code></dt>
+<dd>A <code>NamedTuple</code> consisting in the following fields:</dd>
+</dl>
 <ul>
-<li>the program <code>Path</code>, empty or relative to the directory passed to <code><a title="paroxython.list_programs.list_programs" href="#paroxython.list_programs.list_programs">list_programs()</a></code>;</li>
-<li>its centrifugated <code>Source</code>;</li>
-<li>the hints scheduled for addition or deletion;</li>
-<li>its <code>labels</code>, currently empty, to be later populated by label_programs.py.</li>
+<li><code>name</code> (type <code>ProgramName</code>, derived from <code>str</code>): the program path, either empty or
+relative to the directory passed to <code><a title="paroxython.list_programs.list_programs" href="#paroxython.list_programs.list_programs">list_programs()</a></code>;</li>
+<li><code>source</code> (type <code>Source</code>, derived from <code>str</code>): its code source, fully cleaned up;</li>
+<li><code>addition</code> (type <code>Dict[LabelName, List[Span]]</code>): the manual hints scheduled for addition;</li>
+<li><code>deletion</code> (type <code>Dict[LabelName, List[Span]]</code>): the manual hints scheduled for deletion;</li>
+<li><code>labels</code> (type <code>List[Label]</code>, where each <code>Label</code> consists in a label name and a list of
+spans). This list is created empty here, to be later populated by
+<code><a title="paroxython.label_programs.ProgramLabeller" href="label_programs.html#paroxython.label_programs.ProgramLabeller">ProgramLabeller</a></code>.</li>
+<li><code>taxons</code> (type <code>List[Taxons]</code>, where each <code>Taxon</code> consists in a taxon name and a bag of
+spans). This list is created empty here, to be later calculated from the labels by
+<code><a title="paroxython.map_taxonomy.Taxonomy" href="map_taxonomy.html#paroxython.map_taxonomy.Taxonomy">Taxonomy</a></code>.</li>
 </ul></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/list_programs.py#L32-L52" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/list_programs.py#L51-L96" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def get_program(source: Source, relative_path: Path = None) -&gt; Program:
     source = centrifugate_hints(source)
@@ -172,11 +228,25 @@ if __name__ == &#34;__main__&#34;:
 <span>def <span class="ident">iterate_and_print_programs</span></span>(<span>programs: List[Program]) ‑> Iterator[Program]</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Wrap the iteration of programs into a logger.</p></div>
+<div class="desc"><p>Iterate on a list of programs while printing their names as a side effect.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>programs</code></strong> :&ensp;<code>Programs</code></dt>
+<dd>A list of <code>Program</code> objects, as returned by <code><a title="paroxython.list_programs.list_programs" href="#paroxython.list_programs.list_programs">list_programs()</a></code>.</dd>
+</dl>
+<h2 id="yields">Yields</h2>
+<dl>
+<dt><code>Iterator[Program]</code></dt>
+<dd>The same <code>Program</code> objects in the same order.</dd>
+</dl>
+<h2 id="note">Note</h2>
+<p>This simple wrapper should print the name of each program over the previous one to avoid
+flooding the screen. Unfortunately, this may result in even more flood if your console
+does not support <a href="https://en.wikipedia.org/wiki/ANSI_escape_code">ANSI escape codes</a>.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/list_programs.py#L55-L63" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/list_programs.py#L99-L119" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def iterate_and_print_programs(programs: Programs) -&gt; Iterator[Program]:
     blanks = &#34;&#34;

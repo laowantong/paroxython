@@ -40,7 +40,7 @@ applied on them during the execution of the pipeline (see <code><a title="paroxy
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L0-L588" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L0-L589" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">from collections import Counter as counter
 from collections import defaultdict
@@ -264,6 +264,7 @@ class ProgramFilter:
                     yield from permutations(spans[taxon_1], 2)
                 else:
                     yield from product(spans[taxon_1], spans[taxon_2])
+
 
 # &lt;graphviz&gt;
 # &#34;__init__&#34; -&gt; &#34;define_shortcuts&#34;
@@ -837,7 +838,7 @@ accumulated in the result;</li>
 <li>or a taxon name pattern. All programs featuring at least one taxon matching it
 are accumulated in the result. If the operation is <code>"exclude"</code>, this set is
 extended to the programs which import (either directly or by transitivity) at
-least one of its members; </li>
+least one of its members;</li>
 </ul>
 </li>
 <li>a triple consisting in a “subject” pattern, a predicate (positive or negative)
@@ -1041,7 +1042,7 @@ no tuple, which would certainly not correspond to the user's intention.</p>
 <h2 id="examples">Examples</h2>
 <p>If the predicate is <code>"taxon_1 not inside taxon_2"</code>, any program consisting in:</p>
 <ul>
-<li><code>"taxon_2{taxon_1}"</code><sup id="fnref:braces"><a class="footnote-ref" href="#fn:braces" rel="footnote">1</a></sup> is rejected;</li>
+<li><code>"taxon_2{taxon_1}"</code><sup id="fnref:braces"><a class="footnote-ref" href="#fn:braces">1</a></sup> is rejected;</li>
 <li><code>"taxon_1"</code> is <strong>accepted</strong> (although there is no <code>taxon_2</code>);</li>
 <li><code>"taxon_2"</code> is <strong>rejected</strong> (no <code>taxon_1</code>);</li>
 <li><code>"taxon_1{taxon_2}"</code> is accepted;</li>
@@ -1066,7 +1067,7 @@ is not strictly equivalent to <code>"taxon_2 not contains taxon_1"</code>.</p>
 <ol>
 <li id="fn:braces">
 <p>In these examples, the braces are used to denote the fact that the span of a
-certain taxon is included in that of another taxon.&#160;<a class="footnote-backref" href="#fnref:braces" rev="footnote" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+certain taxon is included in that of another taxon.&#160;<a class="footnote-backref" href="#fnref:braces" title="Jump back to footnote 1 in the text">&#8617;</a></p>
 </li>
 </ol>
 </div></div>
