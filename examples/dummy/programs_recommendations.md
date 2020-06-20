@@ -92,14 +92,34 @@
 </details>
 
 <details>
-  <summary>8 remaining after operation 1 (impart) has filtered out 1 program.</summary>
+  <summary>9 remaining after operation 1 (None) has filtered out 0 programs.</summary>
+  
+</details>
+
+<details>
+  <summary>9 remaining after operation 2 (foobar) has filtered out 0 programs.</summary>
+  
+</details>
+
+<details>
+  <summary>9 remaining after operation 3 (exclude) has filtered out 0 programs.</summary>
+  
+</details>
+
+<details>
+  <summary>9 remaining after operation 4 (exclude) has filtered out 0 programs.</summary>
+  
+</details>
+
+<details>
+  <summary>8 remaining after operation 5 (impart) has filtered out 1 program.</summary>
   <ol>
     <li><code>prg8.py</code></li>
   </ol>
 </details>
 
 <details>
-  <summary>6 remaining after operation 2 (exclude) has filtered out 2 programs.</summary>
+  <summary>6 remaining after operation 6 (exclude) has filtered out 2 programs.</summary>
   <ol>
     <li><code>prg7.py</code></li>
     <li><code>prg9.py</code></li>
@@ -107,7 +127,7 @@
 </details>
 
 <details>
-  <summary>3 remaining after operation 3 (exclude) has filtered out 3 programs.</summary>
+  <summary>3 remaining after operation 7 (exclude) has filtered out 3 programs.</summary>
   <ol>
     <li><code>prg4.py</code></li>
     <li><code>prg5.py</code></li>
@@ -116,7 +136,7 @@
 </details>
 
 <details>
-  <summary>2 remaining after operation 4 (include) has filtered out 1 program.</summary>
+  <summary>2 remaining after operation 8 (include) has filtered out 1 program.</summary>
   <ol>
     <li><code>prg1.py</code></li>
   </ol>

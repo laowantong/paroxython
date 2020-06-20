@@ -36,6 +36,8 @@ def test_cli():
     assert "OPTIONS" in result
     with pytest.raises(subprocess.CalledProcessError):
         run("foobar")
+    with pytest.raises(subprocess.CalledProcessError):
+        run("")
 
 
 def test_tag():

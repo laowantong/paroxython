@@ -197,7 +197,7 @@ class Recommendations:
         summary: List[str] = [f"\n# Summary"]
         summary.append(programs_to_html(f"{remainder} initially", list(self.programs)))
         for (i, command) in enumerate(self.commands, 1):
-            action = f"operation {i} ({command['operation']})"
+            action = f"operation {i} ({command.get('operation')})"
             removed = len(command.get("filtered_out", []))
             remainder -= removed
             summary.append(
