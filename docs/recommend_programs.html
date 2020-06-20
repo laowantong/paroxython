@@ -222,7 +222,7 @@ class Recommendations:
         summary: List[str] = [f&#34;\n# Summary&#34;]
         summary.append(programs_to_html(f&#34;{remainder} initially&#34;, list(self.programs)))
         for (i, command) in enumerate(self.commands, 1):
-            action = f&#34;operation {i} ({command[&#39;operation&#39;]})&#34;
+            action = f&#34;operation {i} ({command.get(&#39;operation&#39;)})&#34;
             removed = len(command.get(&#34;filtered_out&#34;, []))
             remainder -= removed
             summary.append(
@@ -449,7 +449,7 @@ if __name__ == &#34;__main__&#34;:
         summary: List[str] = [f&#34;\n# Summary&#34;]
         summary.append(programs_to_html(f&#34;{remainder} initially&#34;, list(self.programs)))
         for (i, command) in enumerate(self.commands, 1):
-            action = f&#34;operation {i} ({command[&#39;operation&#39;]})&#34;
+            action = f&#34;operation {i} ({command.get(&#39;operation&#39;)})&#34;
             removed = len(command.get(&#34;filtered_out&#34;, []))
             remainder -= removed
             summary.append(
@@ -633,7 +633,7 @@ if __name__ == &#34;__main__&#34;:
     summary: List[str] = [f&#34;\n# Summary&#34;]
     summary.append(programs_to_html(f&#34;{remainder} initially&#34;, list(self.programs)))
     for (i, command) in enumerate(self.commands, 1):
-        action = f&#34;operation {i} ({command[&#39;operation&#39;]})&#34;
+        action = f&#34;operation {i} ({command.get(&#39;operation&#39;)})&#34;
         removed = len(command.get(&#34;filtered_out&#34;, []))
         remainder -= removed
         summary.append(
