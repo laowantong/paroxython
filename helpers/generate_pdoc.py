@@ -63,7 +63,6 @@ def generate_html():
 def resolve_new_types():
     data = [
         ("user_types", "source", "Source"),
-        ("user_types", r"Span\]\], name", "ProgramName"),
         ("assess_costs", "taxon", "TaxonName"),
         ("map_taxonomy", "label_name", "LabelName"),
         ("derived_labels_db", "query", "Query"),
@@ -73,7 +72,7 @@ def resolve_new_types():
     for (filename, trigger, type_name) in data:
         source = Path(f"docs/{filename}.html").read_text()
         match = regex.search(
-            fr"{trigger}: (<function NewType\.<locals>\.new_type at 0x\w+?>)", source
+            fr"{trigger}(?:</span> )?: (<function NewType\.<locals>\.new_type at 0x\w+?>)", source
         )
         result[type_name] = match[1]
         print(f"{match[1]} -> {type_name}")

@@ -123,14 +123,14 @@ To express a relation \(\mathfrak{R}\) between the spans of two taxa, we start f
 
 | Examples | \(\mathfrak{R}\) on endpoints | \(X \mathbin{\mathfrak{R}} Y\)  | \(Y \mathbin{\mathfrak{R}} X\)  | Keys |
 |:----:|:----:|:----:|:----:|:----:|
-| `......XXXXX.........` &nbsp; | | |
-| `......YYYYY.........` &nbsp; | \(x_1 = y_1 \leq x_2 = y_2\)       &nbsp; | \(X\) `"equals"` \(Y\)    &nbsp; | \(Y\) `"equals"` \(X\)        &nbsp; | `"x=y≤x=y"`
-| `......YYYYYYYYY.....` &nbsp; | \(x_1 = y_1 \leq x_2 \leq y_2\)    &nbsp; | \(X\) `"starts"` \(Y\)    &nbsp; | \(Y\) `"started by"` \(X\)    &nbsp; | `"x=y≤x≤y"`
-| `....YYYYYYYYY.......` &nbsp; | \(y_1 \leq x_1 \leq x_2 \leq y_2\) &nbsp; | \(X\) `"during"` \(Y\)    &nbsp; | \(Y\) `"contains"` \(X\)      &nbsp; | `"y≤x≤x≤y"`
-| `..YYYYYYYYY.........` &nbsp; | \(y_1 \leq x_1 \leq x_2 = y_2\)    &nbsp; | \(X\) `"finishes"` \(Y\)  &nbsp; | \(Y\) `"finished by"` \(X\)   &nbsp; | `"y≤x≤x=y"`
-| `......|...|..YYYYY..` &nbsp; | \(x_1 \leq x_2 \leq y_1 \leq y_2\) &nbsp; | \(X\) `"before"` \(Y\)    &nbsp; | \(Y\) `"after"` \(X\)         &nbsp; | `"x≤x≤y≤y"`
-| `......|...|YYYYY....` &nbsp; | \(x_1 \leq x_2 = y_1 \leq y_2\)    &nbsp; | \(X\) `"meets"` \(Y\)     &nbsp; | \(Y\) `"met by"` \(X\)        &nbsp; | `"x≤x=y≤y"`
-| `......|..YYYYY......` &nbsp; | \(x_1 \leq y_1 \leq x_2 \leq y_2\) &nbsp; | \(X\) `"overlaps"` \(Y\)  &nbsp; | \(Y\) `"overlapped by"` \(X\) &nbsp; | `"x≤y≤x≤y"`
+| `....XXXXX........` &nbsp; | | |
+| `....YYYYY........` &nbsp; | \(x_1 = y_1 \leq x_2 = y_2\)       &nbsp; | \(X\) `equals` \(Y\)    &nbsp; | \(Y\) `equals` \(X\)        &nbsp; | `x=y≤x=y`
+| `....YYYYYYYYY....` &nbsp; | \(x_1 = y_1 \leq x_2 \leq y_2\)    &nbsp; | \(X\) `starts` \(Y\)    &nbsp; | \(Y\) `started by` \(X\)    &nbsp; | `x=y≤x≤y`
+| `..YYYYYYYYY......` &nbsp; | \(y_1 \leq x_1 \leq x_2 \leq y_2\) &nbsp; | \(X\) `during` \(Y\)    &nbsp; | \(Y\) `contains` \(X\)      &nbsp; | `y≤x≤x≤y`
+| `.YYYYYYYY........` &nbsp; | \(y_1 \leq x_1 \leq x_2 = y_2\)    &nbsp; | \(X\) `finishes` \(Y\)  &nbsp; | \(Y\) `finished by` \(X\)   &nbsp; | `y≤x≤x=y`
+| `....|...|..YYYYY.` &nbsp; | \(x_1 \leq x_2 \leq y_1 \leq y_2\) &nbsp; | \(X\) `before` \(Y\)    &nbsp; | \(Y\) `after` \(X\)         &nbsp; | `x≤x≤y≤y`
+| `....|...|YYYYY...` &nbsp; | \(x_1 \leq x_2 = y_1 \leq y_2\)    &nbsp; | \(X\) `meets` \(Y\)     &nbsp; | \(Y\) `met by` \(X\)        &nbsp; | `x≤x=y≤y`
+| `....|..YYYYY.....` &nbsp; | \(x_1 \leq y_1 \leq x_2 \leq y_2\) &nbsp; | \(X\) `overlaps` \(Y\)  &nbsp; | \(Y\) `overlapped by` \(X\) &nbsp; | `x≤y≤x≤y`
 
 These well-known operators apply quite nicely to our spans, with the following adjustments:
 
