@@ -48,23 +48,12 @@ class Taxonomy:
                 # note: "$" is necessary: regex.fullmatch() has no regex.fullsub() counterpart
 
     @lru_cache(maxsize=None)
-    def get_taxon_name_list(
-        # fmt: off
-        self,
-        label_name: LabelName,
-        sub_slash_sequences: Callable=regex.compile(r"//+").sub,
-        # fmt: on
-    ) -> TaxonNames:
-        """Translate a label name into a list of taxon names.
-        """
-        result: TaxonNames = []
-        if label_name in self.literal_label_names:
-            result.extend(self.literal_label_names[label_name])
+    def get_taxon_name_list(self, label_name: LabelName,) -> TaxonNames:
+        """Translate a label name into a list of taxon names."""
+        result: TaxonNames = self.literal_label_names.get(label_name, [])
         for (rex, taxon_name) in self.compiled_label_names:
             if rex.match(label_name):
-                s = rex.sub(taxon_name, label_name)  # cf. note above
-                s = sub_slash_sequences("/", s)
-                result.append(s)
+                result.append(rex.sub(taxon_name, label_name))
         return result
 
     def to_taxa(self, labels: Labels) -> Taxa:
