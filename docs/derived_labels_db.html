@@ -367,7 +367,7 @@ class DB:
 <h3>Methods</h3>
 <dl>
 <dt id="paroxython.derived_labels_db.DB.create"><code class="name flex">
-<span>def <span class="ident">create</span></span>(<span>self, labels: List[Label], create_main_table: str = 'CREATE TABLE t (name TEXT,name_prefix TEXT,name_suffix TEXT,span TEXT,span_start INTEGER,span_end INTEGER,path TEXT)') ‑> NoneType</span>
+<span>def <span class="ident">create</span></span>(<span>self, <br>labels: List[Label], <br>create_main_table: str = 'CREATE TABLE t (name TEXT,name_prefix TEXT,name_suffix TEXT,span TEXT,span_start INTEGER,span_end INTEGER,path TEXT)'<br>) ‑> NoneType</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Create the main table and populate it with regex-specified labels.</p>
@@ -397,7 +397,7 @@ explicitly provided. Defaults to <code>f"CREATE TABLE t ({','.join(columns)})"</
 </details>
 </dd>
 <dt id="paroxython.derived_labels_db.DB.read"><code class="name flex">
-<span>def <span class="ident">read</span></span>(<span>self, query: Query, prerequisites: Callable = &lt;built-in method findall of _regex.Pattern object&gt;, create_subtable: str = "CREATE TABLE t_{0} AS SELECT * FROM t WHERE name_prefix = '{0}'") ‑> List[Label]</span>
+<span>def <span class="ident">read</span></span>(<span>self, <br>query: Query, <br>prerequisites: Callable = &lt;built-in method findall of regex&gt;, <br>create_subtable: str = "CREATE TABLE t_{0} AS SELECT * FROM t WHERE name_prefix = '{0}'"<br>) ‑> List[Label]</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Apply the given SQL query to the currently known labels, and returns the new labels.</p>
@@ -449,7 +449,7 @@ as a prerequisite.</p></div>
 </details>
 </dd>
 <dt id="paroxython.derived_labels_db.DB.update"><code class="name flex">
-<span>def <span class="ident">update</span></span>(<span>self, labels: List[Label], update_query: str = 'INSERT INTO t VALUES (?,?,?,?,?,?,?)') ‑> NoneType</span>
+<span>def <span class="ident">update</span></span>(<span>self, <br>labels: List[Label], <br>update_query: str = 'INSERT INTO t VALUES (?,?,?,?,?,?,?)'<br>) ‑> NoneType</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Insert a set of labels into the main table <code>t</code>.</p>

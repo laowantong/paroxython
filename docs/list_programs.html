@@ -114,7 +114,7 @@ if __name__ == &#34;__main__&#34;:
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
 <dt id="paroxython.list_programs.list_programs"><code class="name flex">
-<span>def <span class="ident">list_programs</span></span>(<span>directory: pathlib.Path, cleanup_strategy: str = 'full', glob_pattern: str = '', skip_pattern: str = '', *args, **kwargs) ‑> List[Program]</span>
+<span>def <span class="ident">list_programs</span></span>(<span>directory: pathlib.Path, <br>cleanup_strategy: str = 'full', <br>glob_pattern: str = '', <br>skip_pattern: str = '', *args, **kwargs<br>) ‑> List[Program]</span>
 </code></dt>
 <dd>
 <div class="desc"><p>List (by default recursively) all Python programs of a given directory.</p>
@@ -168,7 +168,7 @@ skip any file whose name is <code>"__init__.py"</code>, <code>"setup.py"</code> 
 </details>
 </dd>
 <dt id="paroxython.list_programs.get_program"><code class="name flex">
-<span>def <span class="ident">get_program</span></span>(<span>source: Source, relative_path: pathlib.Path = None) ‑> Program</span>
+<span>def <span class="ident">get_program</span></span>(<span>source: Source, <br>relative_path: pathlib.Path = None<br>) ‑> Program</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Construct a fresh <code>Program</code> object from its source code and (optionally) relative path.</p>

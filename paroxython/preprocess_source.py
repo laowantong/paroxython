@@ -1,14 +1,14 @@
 """
 Bring together everything relative to the pre-processing of a given source code.
 
-# Cleaning
+## Cleaning
 
 A useful, albeit not essential, step is to cleanse the code of all its algorithmically irrelevant
 features (blank lines, comments, docstrings, etc.). Lots of examples are provided in the `Cleanup`
-class documentation. Be aware that a certain category of comment is preserved at this stage, the
-so-called “manual hints”, presented in the next paragraph.
+class documentation. Be aware that a certain category of comment is intentionally preserved at this
+stage, the so-called “manual hints”, presented in the next paragraph.
 
-# Manual hints
+## Manual hints
 
 On a given source code, the labelling algorithm may sometimes produce false positives or false
 negatives. Moreover, the semantics of some features may be subjective (_e.g._, `topic:fun`) or beyond
@@ -31,7 +31,7 @@ addition into a concatenation:
 >>> print(a + b) # paroxython: -addition_operator +concatenation_operator
 
 If a label should span over several lines, it is hinted on the first line with a `...` suffix
-(meaning “to be continued”), and on the last line with a `...` prefix (meaning“continuing”). In the
+(meaning “to be continued”), and on the last line with a `...` prefix (meaning “continuing”). In the
 following example, a label `super_loop` is manually substituted to the calculated label `loop:for`:
 
 >>> for x in s: # paroxython: +super_loop... -loop:for...
@@ -46,7 +46,7 @@ Some tolerances exist for the syntax:
 - `...` (three dots) can be written `…` (HORIZONTAL ELLIPSIS, U+2026).
 - `# paroxython:` is neither space- nor case-sensitive.
 
-# Implementation note
+## Implementation note
 Several functions or methods declare a compiled and bound regex pattern as an optional argument. It
 is not meant to be provided by the caller. Its default value will be used systematically, with the
 benefit of being evaluated only once.
@@ -132,7 +132,7 @@ class Cleanup:
         (previous_end_row, previous_end_col) = (-1, 0)
         text = str(source)
         text = Cleanup.suppress_first_comments(text)
-        text = Cleanup.suppress_name_equals_main_stuff(text)
+        text = Cleanup.suppress_main_guard(text)
         text = text.replace("\t", "    ")
         lines = iter(text.split("\n"))
         for token_info in generate_tokens(lambda: next(lines) + "\n"):
@@ -160,12 +160,14 @@ class Cleanup:
         return Source(text)
 
     @staticmethod
-    def suppress_first_comments(source: str, sub=regex.compile(r"\A(#.*\n)*").sub) -> str:
+    def suppress_first_comments(
+        source: str, sub: Callable = regex.compile(r"\A(#.*\n)*").sub
+    ) -> str:
         """Replace all comments placed on the first lines of the source code."""
         return sub("", source)
 
     @staticmethod
-    def suppress_name_equals_main_stuff(
+    def suppress_main_guard(
         source: str, sub: Callable = regex.compile(r"(?ms)^if +__name__ *== *.__main__. *:.+").sub
     ) -> str:
         """Suppress `if __name__ == '__main__'` part."""

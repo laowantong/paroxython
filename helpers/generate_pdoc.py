@@ -94,8 +94,7 @@ def resolve_new_types():
         )
         source = source.replace("paroxython.user_types.", "")
         source = source.replace("typing_extensions.", "")
-        source = source.replace(" -> ", " ‑> ")  # non-breaking hyphen
-        source = source.replace(" —> ", " ‑> ")  # non-breaking hyphen
+        source = source.replace("_regex.Pattern object", "regex")
         path.write_text(source)
     path = Path("docs/index.html")
     source = path.read_text()
@@ -139,6 +138,17 @@ def cleanup_index():
         path.write_text(source)
 
 
+def insert_line_breaks():
+    sub_args = regex.compile(
+        r'(?m)^(<span>def <span class="ident">\w+</span></span>\(<span>.+?)(,.+\) ‑>)'
+    ).sub
+    sub_arg = regex.compile(r"(\w+:|\) ‑>)").sub
+    for path in Path("docs/").rglob("*.html"):
+        source = path.read_text()
+        source = sub_args(lambda m: m[1] + sub_arg(r"<br>\1", m[2]), source)
+        path.write_text(source)
+
+
 def main():
     update_readme_example()
     generate_html()
@@ -147,6 +157,7 @@ def main():
     strip_docstrings()
     embed_code_with_line_numbers()
     cleanup_index()
+    insert_line_breaks()
 
 
 if __name__ == "__main__":

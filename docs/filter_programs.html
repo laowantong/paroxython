@@ -515,7 +515,7 @@ class ProgramFilter:
 <h3>Methods</h3>
 <dl>
 <dt id="paroxython.filter_programs.ProgramFilter.__init__"><code class="name flex">
-<span>def <span class="ident">__init__</span></span>(<span>self, db: JsonDatabase) ‑> NoneType</span>
+<span>def <span class="ident">__init__</span></span>(<span>self, <br>db: JsonDatabase<br>) ‑> NoneType</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Call <code>define_shortcuts()</code>,
@@ -532,7 +532,7 @@ class ProgramFilter:
 </details>
 </dd>
 <dt id="paroxython.filter_programs.ProgramFilter.define_shortcuts"><code class="name flex">
-<span>def <span class="ident">define_shortcuts</span></span>(<span>self, db: JsonDatabase) ‑> NoneType</span>
+<span>def <span class="ident">define_shortcuts</span></span>(<span>self, <br>db: JsonDatabase<br>) ‑> NoneType</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Define some attributes that point directly to the main parts of the database.</p></div>
@@ -617,7 +617,7 @@ copy.</li>
 </details>
 </dd>
 <dt id="paroxython.filter_programs.ProgramFilter.taxa_of_pattern"><code class="name flex">
-<span>def <span class="ident">taxa_of_pattern</span></span>(<span>self, pattern: str) ‑> Set[TaxonName]</span>
+<span>def <span class="ident">taxa_of_pattern</span></span>(<span>self, <br>pattern: str<br>) ‑> Set[TaxonName]</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Find all the existing taxa matching the given regular expression pattern.</p>
@@ -637,7 +637,7 @@ copy.</li>
 </details>
 </dd>
 <dt id="paroxython.filter_programs.ProgramFilter.programs_of_pattern"><code class="name flex">
-<span>def <span class="ident">programs_of_pattern</span></span>(<span>self, pattern: str) ‑> Set[ProgramName]</span>
+<span>def <span class="ident">programs_of_pattern</span></span>(<span>self, <br>pattern: str<br>) ‑> Set[ProgramName]</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Find all the existing programs matching the given regular expression pattern.</p>
@@ -657,7 +657,7 @@ copy.</li>
 </details>
 </dd>
 <dt id="paroxython.filter_programs.ProgramFilter.taxa_of_programs"><code class="name flex">
-<span>def <span class="ident">taxa_of_programs</span></span>(<span>self, programs: Set[ProgramName], follow: bool = False) ‑> Set[TaxonName]</span>
+<span>def <span class="ident">taxa_of_programs</span></span>(<span>self, <br>programs: Set[ProgramName], <br>follow: bool = False<br>) ‑> Set[TaxonName]</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Return the taxa featured (or optionally imported) by any given program.</p>
@@ -696,7 +696,7 @@ True
 </details>
 </dd>
 <dt id="paroxython.filter_programs.ProgramFilter.programs_of_taxa"><code class="name flex">
-<span>def <span class="ident">programs_of_taxa</span></span>(<span>self, taxa: Set[TaxonName], follow: bool = False) ‑> Set[ProgramName]</span>
+<span>def <span class="ident">programs_of_taxa</span></span>(<span>self, <br>taxa: Set[TaxonName], <br>follow: bool = False<br>) ‑> Set[ProgramName]</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Return the programs featuring (or optionally importing) any given taxon.</p>
@@ -731,7 +731,7 @@ featuring at least one taxon. Defaults to <code>False</code>.</dd>
 </details>
 </dd>
 <dt id="paroxython.filter_programs.ProgramFilter.update_filter"><code class="name flex">
-<span>def <span class="ident">update_filter</span></span>(<span>self, data: List, operation: Operation, quantifier: str) ‑> NoneType</span>
+<span>def <span class="ident">update_filter</span></span>(<span>self, <br>data: List, <br>operation: Operation, <br>quantifier: str<br>) ‑> NoneType</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Update the selected programs and optionally impart the associated taxa.</p>
@@ -786,7 +786,7 @@ and/or predicates (triples).</dd>
 </details>
 </dd>
 <dt id="paroxython.filter_programs.ProgramFilter.programs_and_taxa_to_impart"><code class="name flex">
-<span>def <span class="ident">programs_and_taxa_to_impart</span></span>(<span>self, data: List[str]) ‑> Tuple[Set[ProgramName], Set[TaxonName]]</span>
+<span>def <span class="ident">programs_and_taxa_to_impart</span></span>(<span>self, <br>data: List[str]<br>) ‑> Tuple[Set[ProgramName], Set[TaxonName]]</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Calculate the sets of programs and taxa that meet at least one of the data criteria.</p>
@@ -831,7 +831,7 @@ operation <code>"impart"</code> does not support predicate criteria.</dd>
 </details>
 </dd>
 <dt id="paroxython.filter_programs.ProgramFilter.programs_to_include_or_exclude"><code class="name flex">
-<span>def <span class="ident">programs_to_include_or_exclude</span></span>(<span>self, data: List, follow: bool) ‑> Counter[ProgramName]</span>
+<span>def <span class="ident">programs_to_include_or_exclude</span></span>(<span>self, <br>data: List, <br>follow: bool<br>) ‑> Counter[ProgramName]</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Calculate the set of programs that meet at least one of the data criteria.</p>
@@ -892,7 +892,7 @@ of criteria it meets.</dd>
 </details>
 </dd>
 <dt id="paroxython.filter_programs.ProgramFilter.impart_taxa"><code class="name flex">
-<span>def <span class="ident">impart_taxa</span></span>(<span>self, taxa: Set[TaxonName]) ‑> NoneType</span>
+<span>def <span class="ident">impart_taxa</span></span>(<span>self, <br>taxa: Set[TaxonName]<br>) ‑> NoneType</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Enrich the imparted knowledge with all the prefixes of the given taxa.</p>
@@ -917,7 +917,7 @@ instance, imparting a taxon <code>a/b/c</code>, will impart taxa <code>a</code> 
 </details>
 </dd>
 <dt id="paroxython.filter_programs.ProgramFilter.include_programs"><code class="name flex">
-<span>def <span class="ident">include_programs</span></span>(<span>self, programs: Set[ProgramName]) ‑> NoneType</span>
+<span>def <span class="ident">include_programs</span></span>(<span>self, <br>programs: Set[ProgramName]<br>) ‑> NoneType</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Deselect the programs not found among the given ones.</p>
@@ -938,7 +938,7 @@ filtered out.</dd>
 </details>
 </dd>
 <dt id="paroxython.filter_programs.ProgramFilter.exclude_programs"><code class="name flex">
-<span>def <span class="ident">exclude_programs</span></span>(<span>self, programs: Set[ProgramName], follow: bool) ‑> NoneType</span>
+<span>def <span class="ident">exclude_programs</span></span>(<span>self, <br>programs: Set[ProgramName], <br>follow: bool<br>) ‑> NoneType</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Deselect the programs found among the given ones or (optionally) importing them.</p>
@@ -963,7 +963,7 @@ by transitivity) at least one member of the given <code>programs</code>.</dd>
 </details>
 </dd>
 <dt id="paroxython.filter_programs.ProgramFilter.programs_of_triple"><code class="name flex">
-<span>def <span class="ident">programs_of_triple</span></span>(<span>self, taxon_pattern_1: str, predicate: Callable[[int, int], bool], taxon_pattern_2: str) ‑> Set[ProgramName]</span>
+<span>def <span class="ident">programs_of_triple</span></span>(<span>self, <br>taxon_pattern_1: str, <br>predicate: Callable[[int, int], bool], <br>taxon_pattern_2: str<br>) ‑> Set[ProgramName]</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Return the programs where two given taxa satisfy a given predicate.</p>
@@ -1013,7 +1013,7 @@ span <code>s_2</code> of <code>taxon_2</code> for which <code>predicate(s_1, s_2
 </details>
 </dd>
 <dt id="paroxython.filter_programs.ProgramFilter.programs_of_negated_triple"><code class="name flex">
-<span>def <span class="ident">programs_of_negated_triple</span></span>(<span>self, taxon_pattern_1: str, predicate: Callable[[int, int], bool], taxon_pattern_2: str) ‑> Set[ProgramName]</span>
+<span>def <span class="ident">programs_of_negated_triple</span></span>(<span>self, <br>taxon_pattern_1: str, <br>predicate: Callable[[int, int], bool], <br>taxon_pattern_2: str<br>) ‑> Set[ProgramName]</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Return the programs where at least one occurrence of two taxa violates the predicate.</p>
@@ -1107,7 +1107,7 @@ certain taxon is included in that of another taxon.&#160;<a class="footnote-back
 </details>
 </dd>
 <dt id="paroxython.filter_programs.ProgramFilter.iterate_on_spans"><code class="name flex">
-<span>def <span class="ident">iterate_on_spans</span></span>(<span>self, spans: Dict[TaxonName, List[Tuple[int, int]]], taxa_1: Set[TaxonName], taxa_2: Set[TaxonName]) ‑> Iterator</span>
+<span>def <span class="ident">iterate_on_spans</span></span>(<span>self, <br>spans: Dict[TaxonName, List[Tuple[int, int]]], <br>taxa_1: Set[TaxonName], <br>taxa_2: Set[TaxonName]<br>) ‑> Iterator</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Generate all relevant couples of spans for the given “subject” and ”object” taxa.</p>

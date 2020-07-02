@@ -173,7 +173,7 @@ if __name__ == &#34;__main__&#34;:
 <h3>Methods</h3>
 <dl>
 <dt id="paroxython.label_programs.ProgramLabeller.label_programs"><code class="name flex">
-<span>def <span class="ident">label_programs</span></span>(<span>self, directory: pathlib.Path, *args, **kwargs) ‑> NoneType</span>
+<span>def <span class="ident">label_programs</span></span>(<span>self, <br>directory: pathlib.Path, *args, **kwargs<br>) ‑> NoneType</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Complete all fields of a list of programs.</p></div>
@@ -194,7 +194,7 @@ if __name__ == &#34;__main__&#34;:
 </details>
 </dd>
 <dt id="paroxython.label_programs.ProgramLabeller.label_program"><code class="name flex">
-<span>def <span class="ident">label_program</span></span>(<span>self, program: Program) ‑> NoneType</span>
+<span>def <span class="ident">label_program</span></span>(<span>self, <br>program: Program<br>) ‑> NoneType</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Compute the labels of a given program and store the result in its <code>labels</code> field.</p></div>
@@ -212,7 +212,7 @@ if __name__ == &#34;__main__&#34;:
 </details>
 </dd>
 <dt id="paroxython.label_programs.ProgramLabeller.tweak_internal_import_labels"><code class="name flex">
-<span>def <span class="ident">tweak_internal_import_labels</span></span>(<span>self, program: Program) ‑> NoneType</span>
+<span>def <span class="ident">tweak_internal_import_labels</span></span>(<span>self, <br>program: Program<br>) ‑> NoneType</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Modify the appropriate labels in-place to mark internal importations.</p></div>
@@ -234,7 +234,7 @@ if __name__ == &#34;__main__&#34;:
 </details>
 </dd>
 <dt id="paroxython.label_programs.ProgramLabeller.generate_labelled_sources"><code class="name flex">
-<span>def <span class="ident">generate_labelled_sources</span></span>(<span>self, *args, **kwargs) ‑> Iterator</span>
+<span>def <span class="ident">generate_labelled_sources</span></span>(<span>self, *args, **kwargs<br>) ‑> Iterator</span>
 </code></dt>
 <dd>
 <div class="desc"><p>For each program, yield its source with its labels in comment.</p></div>

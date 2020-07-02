@@ -257,7 +257,7 @@ def deduplicated_taxa(taxa: Taxa) -&gt; Taxa:
 <h3>Methods</h3>
 <dl>
 <dt id="paroxython.map_taxonomy.Taxonomy.get_taxon_name_list"><code class="name flex">
-<span>def <span class="ident">get_taxon_name_list</span></span>(<span>self, label_name: LabelName, sub_slash_sequences=&lt;built-in method sub of _regex.Pattern object&gt;) ‑> List[TaxonName]</span>
+<span>def <span class="ident">get_taxon_name_list</span></span>(<span>self, <br>label_name: LabelName, sub_slash_sequences=&lt;built-in method sub of regex&gt;<br>) ‑> List[TaxonName]</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Translate a label name into a list of taxon names.</p></div>
@@ -286,7 +286,7 @@ def get_taxon_name_list(
 </details>
 </dd>
 <dt id="paroxython.map_taxonomy.Taxonomy.to_taxa"><code class="name flex">
-<span>def <span class="ident">to_taxa</span></span>(<span>self, labels: List[Label]) ‑> List[Taxon]</span>
+<span>def <span class="ident">to_taxa</span></span>(<span>self, <br>labels: List[Label]<br>) ‑> List[Taxon]</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Translate a list of labels to a list of taxa with their spans in a bag.</p></div>
