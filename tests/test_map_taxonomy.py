@@ -8,7 +8,7 @@ import context
 from make_snapshot import make_snapshot
 from paroxython.goodies import couple_to_string
 from paroxython.label_programs import ProgramLabeller
-from paroxython.map_taxonomy import Taxonomy
+from paroxython.map_taxonomy import Taxonomy, deduplicated_taxa
 from paroxython.user_types import Label, Program, Span
 
 t = Taxonomy(Path("examples/dummy/taxonomy.tsv"))
@@ -51,13 +51,13 @@ def test_to_taxa():
 
 
 def test_deduplicated_taxa():
-    assert t.deduplicated_taxa([]) == []
+    assert deduplicated_taxa([]) == []
     taxa = [
         ("flow/conditional", c({S(1, 1): 2, S(2, 5): 1})),
         ("flow/conditional/else", c({S(1, 1): 1, S(2, 5): 1})),
         ("test/inequality", c({S(2, 2): 1, S(3, 3): 1, S(1, 1): 1})),
     ]
-    result = t.deduplicated_taxa(taxa)
+    result = deduplicated_taxa(taxa)
     print(result)
     assert result == [
         ("flow/conditional", c({S(1, 1): 1})),
@@ -72,7 +72,7 @@ def test_deduplicated_taxa_with_deletion():
         ("flow/conditional", c({S(1, 1): 2, S(2, 5): 1})),
         ("flow/conditional/else", c({S(1, 1): 2, S(2, 5): 1})),
     ]
-    result = t.deduplicated_taxa(taxa)
+    result = deduplicated_taxa(taxa)
     print(result)
     assert result == [
         ("flow/conditional/else", c({S(1, 1): 2, S(2, 5): 1})),
@@ -82,7 +82,7 @@ def test_deduplicated_taxa_with_deletion():
         ("flow/conditional", c({S(1, 1): 2, S(2, 5): 1})),
         ("flow/conditional/else", c({S(1, 1): 2, S(2, 5): 1})),
     ]
-    result = t.deduplicated_taxa(taxa)
+    result = deduplicated_taxa(taxa)
     print(result)
     assert result == [
         ("flow", c({S(2, 5): 1})),
@@ -93,7 +93,7 @@ def test_deduplicated_taxa_with_deletion():
         ("flow/conditional", c({S(1, 1): 1, S(2, 5): 1})),
         ("flow/loop", c({S(1, 1): 1, S(2, 5): 1})),
     ]
-    result = t.deduplicated_taxa(taxa)
+    result = deduplicated_taxa(taxa)
     print(result)
     assert result == [
         ("flow/conditional", c({S(1, 1): 1, S(2, 5): 1})),

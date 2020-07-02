@@ -142,7 +142,7 @@ def insert_line_breaks():
     sub_args = regex.compile(
         r'(?m)^(<span>def <span class="ident">\w+</span></span>\(<span>.+?)(,.+\) ‑>)'
     ).sub
-    sub_arg = regex.compile(r"(\w+:|\) ‑>)").sub
+    sub_arg = regex.compile(r"(\w+:|\) ‑>|\*\*?\w+)").sub
     for path in Path("docs/").rglob("*.html"):
         source = path.read_text()
         source = sub_args(lambda m: m[1] + sub_arg(r"<br>\1", m[2]), source)
