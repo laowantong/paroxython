@@ -55,7 +55,7 @@
     - [`041.2714-reverse-a-string.py`](#program-0412714-reverse-a-stringpy-learning-cost-275)
     - [`042.1264-continue-outer-loop.py`](#program-0421264-continue-outer-looppy-learning-cost-9125)
     - [`042.3168-continue-outer-loop.py`](#program-0423168-continue-outer-looppy-learning-cost-628125)
-    - [`043.0676-break-outer-loop.py`](#program-0430676-break-outer-looppy-learning-cost-110625)
+    - [`043.0676-break-outer-loop.py`](#program-0430676-break-outer-looppy-learning-cost-120)
     - [`043.2733-break-outer-loop.py`](#program-0432733-break-outer-looppy-learning-cost-149375)
     - [`044.0190-insert-element-in-list.py`](#program-0440190-insert-element-in-listpy-learning-cost-175)
     - [`045.0570-pause-execution-for-5-seconds.py`](#program-0450570-pause-execution-for-5-secondspy-learning-cost-26875)
@@ -1319,7 +1319,7 @@
 
 ---
 
-### Program `043.0676-break-outer-loop.py` (learning cost 11.0625)
+### Program `043.0676-break-outer-loop.py` (learning cost 12.0)
 
 ```python
 1   class BreakOuterLoop(Exception):
@@ -1345,7 +1345,8 @@
 | 0.9375 | `flow/loop/for/elements` | 5-9 |
 | 0.96875 | `flow/loop/for/nested/1` | 6-9 |
 | 0.75 | `flow/null_operation` | 2, 11 |
-| 0.75 | `subscript/index` | 6, 7, 7 |
+| 0.75 | `subscript/index` | 6, 7 |
+| 0.9375 | `subscript/index/shape/2` | 7 |
 | 0.75 | `test/equality` | 7 |
 | 0.875 | `type/null/literal` | 4 |
 | 0.9375 | `type/sequence/tuple/literal` | 8 |
