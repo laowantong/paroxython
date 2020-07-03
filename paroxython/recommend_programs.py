@@ -28,8 +28,15 @@ from .user_types import (
     TaxonNameSet,
 )
 
+__pdoc__ = {
+    "Recommendations.__init__": True,
+    "Recommendations": "TODO.",
+}
+
 
 class MalformedData(Exception):
+    """Raised when the field `"data"` of a pipeline command cannot be interpreted."""
+
     ...
 
 
@@ -41,23 +48,32 @@ class Recommendations:
         base_path: Optional[Path] = None,
         cost_assessment_strategy: AssessmentStrategy = "zeno",
     ) -> None:
+        """TODO.
+
+        Args:
+            db (JsonDatabase): [description]
+            commands (Optional[List[Command]], optional): [description]. Defaults to `None`.
+            base_path (Optional[Path], optional): [description]. Defaults to `None`.
+            cost_assessment_strategy (AssessmentStrategy, optional): [description]. Defaults to `"zeno"`.
+        """
 
         self.commands = commands or []
         self.base_path = base_path
 
-        # copy locally some attributes and methods or a ProgramFilter instance
+        # copy locally some attributes and methods of a ProgramFilter instance
         program_filter = ProgramFilter(db)
-        self.programs = program_filter.db_programs
+        self.db_programs = program_filter.db_programs
         self.selected_programs = program_filter.selected_programs
         self.imparted_knowledge = program_filter.imparted_knowledge
         self.update_filter = program_filter.update_filter
-        self.assess = LearningCostAssessor(self.programs)
+
+        self.assess = LearningCostAssessor(self.db_programs)
         self.assess.set_cost_assessment_strategy(cost_assessment_strategy)
 
     def run_pipeline(self) -> None:
         """Evolve recommended programs, imparted knowledge and log accross pipeline commands."""
 
-        current = set(self.programs)
+        current = set(self.db_programs)
         print(f"\nProcessing {len(self.commands)} commands on {len(current)} programs.")
 
         # Execute sequentially all the commands of the pipeline
@@ -119,9 +135,9 @@ class Recommendations:
 
     def get_markdown(
         self,
-        span_column_width=30,
-        sorting_strategy="by_cost_and_sloc",
-        grouping_strategy="by_cost_bucket",
+        span_column_width: int = 30,
+        sorting_strategy: str = "by_cost_and_sloc",
+        grouping_strategy: str = "by_cost_bucket",
     ) -> str:
         """Reiterate on the commands, now populated by the results, and output them."""
 
@@ -133,7 +149,7 @@ class Recommendations:
 
         sorting_key = None
         if sorting_strategy == "by_cost_and_sloc":
-            sorting_key = lambda x: (x[0], len(self.programs[x[1]]["source"].split("\n")))
+            sorting_key = lambda x: (x[0], len(self.db_programs[x[1]]["source"].split("\n")))
         elif sorting_strategy == "lexicographic":
             sorting_key = lambda x: x[1]
 
@@ -161,7 +177,7 @@ class Recommendations:
             contents.append(f"\n## {title}")
 
             for (cost, program_name) in costs_and_program_names:
-                program_info = self.programs[program_name]
+                program_info = self.db_programs[program_name]
                 title = f"Program `{program_name}` (learning cost {cost})"
                 toc.append(f"    - [`{program_name}`](#{title_to_slug(title)})")
                 contents.append(f"\n### {title}")
@@ -193,9 +209,9 @@ class Recommendations:
                 + "\n</details>\n"
             )
 
-        remainder = len(self.programs)
+        remainder = len(self.db_programs)
         summary: List[str] = [f"\n# Summary"]
-        summary.append(programs_to_html(f"{remainder} initially", list(self.programs)))
+        summary.append(programs_to_html(f"{remainder} initially", list(self.db_programs)))
         for (i, command) in enumerate(self.commands, 1):
             action = f"operation {i} ({command.get('operation')})"
             removed = len(command.get("filtered_out", []))

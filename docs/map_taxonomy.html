@@ -36,7 +36,7 @@ body.gsc-overflow-hidden #sidebar {overflow: visible;}
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L0-L197" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L0-L212" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">from collections import Counter, defaultdict
 from pathlib import Path
@@ -83,21 +83,11 @@ class Taxonomy:
                 # note: &#34;$&#34; is necessary: regex.fullmatch() has no regex.fullsub() counterpart
 
     @lru_cache(maxsize=None)
-    def get_taxon_name_list(
-        # fmt: off
-        self,
-        label_name: LabelName,
-        sub_slash_sequences: Callable=regex.compile(r&#34;//+&#34;).sub,
-        # fmt: on
-    ) -&gt; TaxonNames:
-        result: TaxonNames = []
-        if label_name in self.literal_label_names:
-            result.extend(self.literal_label_names[label_name])
+    def get_taxon_name_list(self, label_name: LabelName,) -&gt; TaxonNames:
+        result: TaxonNames = self.literal_label_names.get(label_name, [])
         for (rex, taxon_name) in self.compiled_label_names:
             if rex.match(label_name):
-                s = rex.sub(taxon_name, label_name)  # cf. note above
-                s = sub_slash_sequences(&#34;/&#34;, s)
-                result.append(s)
+                result.append(rex.sub(taxon_name, label_name))
         return result
 
     def to_taxa(self, labels: Labels) -&gt; Taxa:
@@ -169,7 +159,7 @@ if __name__ == &#34;__main__&#34;:
 5           n = 3 * n + 1
 </code></pre>
 <p>It features exactly one literal integer on lines 1 and 3, and exactly two on lines 2 and 5.
-Moreover, one of the literal of line 2 is zero. Therefore, the program is originally tagged
+Moreover, one of the literals of line 2 is zero. Therefore, the program is originally tagged
 with the following two couples (among others):</p>
 <pre><code class="python">[
     ...
@@ -187,8 +177,8 @@ with the following two couples (among others):</p>
 </code></pre>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>In the dictionary above, <code>(5, 5): 2</code> reads: “the taxon <code>"type/number/integer/literal"</code>
-has 2 distinct occurrences spanning the lines 5 to 5” (namely, <code>3</code> and <code>1</code>). Such a
+<p>In the dictionary above, <code>(5, 5): 2</code> means that the taxon <code>"type/number/integer/literal"</code>
+has 2 distinct occurrences spanning the lines 5 to 5 (namely, <code>3</code> and <code>1</code>). Such a
 “counter” dictionary is called a <em>bag</em>, or <em>multiset</em>.</p>
 </div>
 <p>Now, every occurrence of a given taxon <strong>is</strong> an occurrence of any of its prefix. For
@@ -242,7 +232,7 @@ a bag (multiset) of its spans.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L80-L181" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L95-L196" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def deduplicated_taxa(taxa: Taxa) -&gt; Taxa:
     if len(taxa) &lt; 2:
@@ -279,7 +269,7 @@ a bag (multiset) of its spans.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L29-L77" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L29-L92" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">class Taxonomy:
     def __init__(
@@ -302,21 +292,11 @@ a bag (multiset) of its spans.</dd>
                 # note: &#34;$&#34; is necessary: regex.fullmatch() has no regex.fullsub() counterpart
 
     @lru_cache(maxsize=None)
-    def get_taxon_name_list(
-        # fmt: off
-        self,
-        label_name: LabelName,
-        sub_slash_sequences: Callable=regex.compile(r&#34;//+&#34;).sub,
-        # fmt: on
-    ) -&gt; TaxonNames:
-        result: TaxonNames = []
-        if label_name in self.literal_label_names:
-            result.extend(self.literal_label_names[label_name])
+    def get_taxon_name_list(self, label_name: LabelName,) -&gt; TaxonNames:
+        result: TaxonNames = self.literal_label_names.get(label_name, [])
         for (rex, taxon_name) in self.compiled_label_names:
             if rex.match(label_name):
-                s = rex.sub(taxon_name, label_name)  # cf. note above
-                s = sub_slash_sequences(&#34;/&#34;, s)
-                result.append(s)
+                result.append(rex.sub(taxon_name, label_name))
         return result
 
     def to_taxa(self, labels: Labels) -&gt; Taxa:
@@ -333,11 +313,40 @@ a bag (multiset) of its spans.</dd>
 <span>def <span class="ident">__init__</span></span>(<span>self, <br>taxonomy_path: Union[pathlib.Path, NoneType] = None, <br>is_literal: Callable = &lt;built-in method fullmatch of regex&gt;, <br>*args, <br>**kwargs<br>) ‑> NoneType</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Read the taxonomy specifications, and make some pre-processing.</p></div>
+<div class="desc"><p>Read and pre-process the taxonomy specifications.</p>
+<h2 id="description">Description</h2>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>taxonomy_path</code></strong> :&ensp;<code>Optional[Path]</code>, optional</dt>
+<dd>The path of a two-columns TSV file
+associating label (search) patterns with taxon (replacement) patterns. For better
+readability, the taxa are listed on the first column, and the corresponding labels
+(sometimes very long) on the second column. If not specified, the
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/taxonomy.tsv">default taxonomy</a>
+is used. Defaults to <code>None</code>.</dd>
+<dt><strong><code>is_literal</code></strong> :&ensp;<code>Callable</code>, optional</dt>
+<dd>
+<p>A predicate telling whether a given regular expression
+pattern is literal or not. It will be matched successively against every label
+pattern of the taxonomy TSV file (second column). For instance, the label pattern
+<code>"external_free_call:print"</code> is literal, and then matches only itself. Conversely,
+the label pattern <code>"internal_free_call:[[:upper:]].*"</code> contains some non-literal
+characters such as <code>"["</code> and <code>"*"</code>, and then must be compiled into a regular
+expression. By default, a pattern is considered to be literal if it contains only
+letters, digits, underscores, hyphens, colons and <strong>dots</strong>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The latter actually goes against the semantics of regular expressions. In case
+that's a problem, it is always possible to force the interpretation of a pattern
+as non-literal by enclosing it in parentheses.</p>
+</div>
+<p>Defaults to <code>regex.compile(r"[\w:.]+").fullmatch</code>.</p>
+</dd>
+</dl></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L30-L47" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L30-L73" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def __init__(
     self,
@@ -359,31 +368,21 @@ a bag (multiset) of its spans.</dd>
 </details>
 </dd>
 <dt id="paroxython.map_taxonomy.Taxonomy.get_taxon_name_list"><code class="name flex">
-<span>def <span class="ident">get_taxon_name_list</span></span>(<span>self, <br>label_name: LabelName, <br>sub_slash_sequences: Callable = &lt;built-in method sub of regex&gt;<br>) ‑> List[TaxonName]</span>
+<span>def <span class="ident">get_taxon_name_list</span></span>(<span>self, <br>label_name: LabelName<br>) ‑> List[TaxonName]</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Translate a label name into a list of taxon names.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L50-L68" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L76-L83" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">@lru_cache(maxsize=None)
-def get_taxon_name_list(
-    # fmt: off
-    self,
-    label_name: LabelName,
-    sub_slash_sequences: Callable=regex.compile(r&#34;//+&#34;).sub,
-    # fmt: on
-) -&gt; TaxonNames:
-    result: TaxonNames = []
-    if label_name in self.literal_label_names:
-        result.extend(self.literal_label_names[label_name])
+def get_taxon_name_list(self, label_name: LabelName,) -&gt; TaxonNames:
+    result: TaxonNames = self.literal_label_names.get(label_name, [])
     for (rex, taxon_name) in self.compiled_label_names:
         if rex.match(label_name):
-            s = rex.sub(taxon_name, label_name)  # cf. note above
-            s = sub_slash_sequences(&#34;/&#34;, s)
-            result.append(s)
+            result.append(rex.sub(taxon_name, label_name))
     return result</code></pre>
 </details>
 </dd>
@@ -395,7 +394,7 @@ def get_taxon_name_list(
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L70-L77" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L85-L92" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def to_taxa(self, labels: Labels) -&gt; Taxa:
     acc: TaxaSpans = defaultdict(Counter)

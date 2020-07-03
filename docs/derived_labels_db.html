@@ -36,7 +36,8 @@ body.gsc-overflow-hidden #sidebar {overflow: visible;}
 <h3 id="main-table">Main table</h3>
 <p>The database is not really relational. It merely consists in a table <code>t</code> where each row is a
 distinct occurrence of every label featured by a given program. Initially, <code>t</code> is populated with
-the labels found by the queries specified by a regular expression of <code>spec.md</code>.</p>
+the labels found by the queries specified by a regular expression of
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md"><code>spec.md</code></a>.</p>
 <p>The SQL queries are then executed, and the resulting labels (known as <em>derived</em>) inserted into <code>t</code>
 as they are found.</p>
 <p>Note that the results of a given SQL query may themselves be required by a subsequent SQL query.</p>
@@ -90,7 +91,7 @@ reason, several queries produce an incorrect result.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/derived_labels_db.py#L0-L220" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/derived_labels_db.py#L0-L221" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">import sqlite3
 from collections import defaultdict
@@ -110,8 +111,8 @@ class DB:
         &#34;name_prefix TEXT&#34;,
         &#34;name_suffix TEXT&#34;,
         &#34;span TEXT&#34;,
-        &#34;span_start INTEGER&#34;,
-        &#34;span_end INTEGER&#34;,
+        &#34;span_start INT&#34;,
+        &#34;span_end INT&#34;,
         &#34;path TEXT&#34;,
     )
     def __init__(self):
@@ -197,7 +198,7 @@ class DB:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/derived_labels_db.py#L90-L221" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/derived_labels_db.py#L91-L222" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">class DB:
 
@@ -207,8 +208,8 @@ class DB:
         &#34;name_prefix TEXT&#34;,
         &#34;name_suffix TEXT&#34;,
         &#34;span TEXT&#34;,
-        &#34;span_start INTEGER&#34;,
-        &#34;span_end INTEGER&#34;,
+        &#34;span_start INT&#34;,
+        &#34;span_end INT&#34;,
         &#34;path TEXT&#34;,
     )
     def __init__(self):
@@ -292,7 +293,7 @@ class DB:
 <tbody>
 <tr>
 <td align="left"><code>rowid</code></td>
-<td align="left"><code>INTEGER</code></td>
+<td align="left"><code>INT</code></td>
 <td align="left">Primary key (automatically generated)</td>
 </tr>
 <tr>
@@ -333,16 +334,16 @@ class DB:
 <tr>
 <td align="left"></td>
 <td align="left"></td>
-<td align="left">feature as a dash-separated string, <em>e.g.</em> <code>"2-8"</code></td>
+<td align="left">feature as a hyphen-separated string, <em>e.g.</em> <code>"2-8"</code></td>
 </tr>
 <tr>
 <td align="left"><code>span_start</code></td>
-<td align="left"><code>INTEGER</code></td>
+<td align="left"><code>INT</code></td>
 <td align="left">Its first line number, here <code>2</code></td>
 </tr>
 <tr>
 <td align="left"><code>span_end</code></td>
-<td align="left"><code>INTEGER</code></td>
+<td align="left"><code>INT</code></td>
 <td align="left">Its first line number, here <code>8</code></td>
 </tr>
 <tr>
@@ -367,7 +368,7 @@ class DB:
 <h3>Methods</h3>
 <dl>
 <dt id="paroxython.derived_labels_db.DB.create"><code class="name flex">
-<span>def <span class="ident">create</span></span>(<span>self, <br>labels: List[Label], <br>create_main_table: str = 'CREATE TABLE t (name TEXT,name_prefix TEXT,name_suffix TEXT,span TEXT,span_start INTEGER,span_end INTEGER,path TEXT)'<br>) ‑> NoneType</span>
+<span>def <span class="ident">create</span></span>(<span>self, <br>labels: List[Label], <br>create_main_table: str = 'CREATE TABLE t (name TEXT,name_prefix TEXT,name_suffix TEXT,span TEXT,span_start INT,span_end INT,path TEXT)'<br>) ‑> NoneType</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Create the main table and populate it with regex-specified labels.</p>
@@ -384,7 +385,7 @@ explicitly provided. Defaults to <code>f"CREATE TABLE t ({','.join(columns)})"</
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/derived_labels_db.py#L130-L146" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/derived_labels_db.py#L131-L147" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def create(
     self,
@@ -425,7 +426,7 @@ as a prerequisite.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/derived_labels_db.py#L148-L184" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/derived_labels_db.py#L149-L185" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def read(
     self,
@@ -465,7 +466,7 @@ len(columns))})"</code>.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/derived_labels_db.py#L186-L205" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/derived_labels_db.py#L187-L206" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def update(
     self,
@@ -489,7 +490,7 @@ len(columns))})"</code>.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/derived_labels_db.py#L207-L211" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/derived_labels_db.py#L208-L212" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def delete(self) -&gt; None:
     self.c.execute(&#34;DROP TABLE t&#34;)

@@ -4,7 +4,8 @@
 
 The database is not really relational. It merely consists in a table `t` where each row is a
 distinct occurrence of every label featured by a given program. Initially, `t` is populated with
-the labels found by the queries specified by a regular expression of `spec.md`.
+the labels found by the queries specified by a regular expression of
+[`spec.md`](https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md).
 
 The SQL queries are then executed, and the resulting labels (known as _derived_) inserted into `t`
 as they are found.
@@ -95,28 +96,28 @@ class DB:
         "name_prefix TEXT",
         "name_suffix TEXT",
         "span TEXT",
-        "span_start INTEGER",
-        "span_end INTEGER",
+        "span_start INT",
+        "span_end INT",
         "path TEXT",
     )
     """The structure of the main table `t`, consisting of the following columns:
 
-    Column        | Type      | Description and example
-    :-------------|:----------|:----------------------------------------------
-    `rowid`       | `INTEGER` | Primary key (automatically generated)
-    `name`        | `TEXT`    | Complete name of the label, _e.g._
-                  |           | `"loop_with_early_exit:for:break"`
-    `name_prefix` | `TEXT`    | Its prefix (part before the first colon, here
-                  |           | `"loop_with_early_exit"`
-    `name_suffix` | `TEXT`    | Its suffix (may contain one or more colons),
-                  |           | here `"for:break"`
-    `span`        | `TEXT`    | Numbers of the first and last lines of the
-                  |           | feature as a dash-separated string, _e.g._ `"2-8"`
-    `span_start`  | `INTEGER` | Its first line number, here `2`
-    `span_end`    | `INTEGER` | Its first line number, here `8`
-    `path`        | `TEXT`    | String encoding the beginning of the feature
-                  |           | as its path from the root of the AST, _e.g._
-                  |           | `"3-5-3-0-1-2-2-1-"`
+    Column        | Type   | Description and example
+    :-------------|:-------|:----------------------------------------------
+    `rowid`       | `INT`  | Primary key (automatically generated)
+    `name`        | `TEXT` | Complete name of the label, _e.g._
+                  |        | `"loop_with_early_exit:for:break"`
+    `name_prefix` | `TEXT` | Its prefix (part before the first colon, here
+                  |        | `"loop_with_early_exit"`
+    `name_suffix` | `TEXT` | Its suffix (may contain one or more colons),
+                  |        | here `"for:break"`
+    `span`        | `TEXT` | Numbers of the first and last lines of the
+                  |        | feature as a hyphen-separated string, _e.g._ `"2-8"`
+    `span_start`  | `INT`  | Its first line number, here `2`
+    `span_end`    | `INT`  | Its first line number, here `8`
+    `path`        | `TEXT` | String encoding the beginning of the feature
+                  |        | as its path from the root of the AST, _e.g._
+                  |        | `"3-5-3-0-1-2-2-1-"`
     """
 
     def __init__(self):

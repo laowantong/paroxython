@@ -35,7 +35,7 @@ body.gsc-overflow-hidden #sidebar {overflow: visible;}
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L0-L224" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L0-L238" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">import subprocess
 from collections import defaultdict
@@ -64,6 +64,10 @@ from .user_types import (
     TaxonNameSet,
 )
 
+__pdoc__ = {
+    &#34;Recommendations.__init__&#34;: True,
+    &#34;Recommendations&#34;: &#34;TODO.&#34;,
+}
 
 class MalformedData(Exception):
     ...
@@ -77,21 +81,21 @@ class Recommendations:
         base_path: Optional[Path] = None,
         cost_assessment_strategy: AssessmentStrategy = &#34;zeno&#34;,
     ) -&gt; None:
-
         self.commands = commands or []
         self.base_path = base_path
 
-        # copy locally some attributes and methods or a ProgramFilter instance
+        # copy locally some attributes and methods of a ProgramFilter instance
         program_filter = ProgramFilter(db)
-        self.programs = program_filter.db_programs
+        self.db_programs = program_filter.db_programs
         self.selected_programs = program_filter.selected_programs
         self.imparted_knowledge = program_filter.imparted_knowledge
         self.update_filter = program_filter.update_filter
-        self.assess = LearningCostAssessor(self.programs)
+
+        self.assess = LearningCostAssessor(self.db_programs)
         self.assess.set_cost_assessment_strategy(cost_assessment_strategy)
 
     def run_pipeline(self) -&gt; None:
-        current = set(self.programs)
+        current = set(self.db_programs)
         print(f&#34;\nProcessing {len(self.commands)} commands on {len(current)} programs.&#34;)
 
         # Execute sequentially all the commands of the pipeline
@@ -152,9 +156,9 @@ class Recommendations:
 
     def get_markdown(
         self,
-        span_column_width=30,
-        sorting_strategy=&#34;by_cost_and_sloc&#34;,
-        grouping_strategy=&#34;by_cost_bucket&#34;,
+        span_column_width: int = 30,
+        sorting_strategy: str = &#34;by_cost_and_sloc&#34;,
+        grouping_strategy: str = &#34;by_cost_bucket&#34;,
     ) -&gt; str:
         # Define some helper functions.
 
@@ -164,7 +168,7 @@ class Recommendations:
 
         sorting_key = None
         if sorting_strategy == &#34;by_cost_and_sloc&#34;:
-            sorting_key = lambda x: (x[0], len(self.programs[x[1]][&#34;source&#34;].split(&#34;\n&#34;)))
+            sorting_key = lambda x: (x[0], len(self.db_programs[x[1]][&#34;source&#34;].split(&#34;\n&#34;)))
         elif sorting_strategy == &#34;lexicographic&#34;:
             sorting_key = lambda x: x[1]
 
@@ -192,7 +196,7 @@ class Recommendations:
             contents.append(f&#34;\n## {title}&#34;)
 
             for (cost, program_name) in costs_and_program_names:
-                program_info = self.programs[program_name]
+                program_info = self.db_programs[program_name]
                 title = f&#34;Program `{program_name}` (learning cost {cost})&#34;
                 toc.append(f&#34;    - [`{program_name}`](#{title_to_slug(title)})&#34;)
                 contents.append(f&#34;\n### {title}&#34;)
@@ -224,9 +228,9 @@ class Recommendations:
                 + &#34;\n&lt;/details&gt;\n&#34;
             )
 
-        remainder = len(self.programs)
+        remainder = len(self.db_programs)
         summary: List[str] = [f&#34;\n# Summary&#34;]
-        summary.append(programs_to_html(f&#34;{remainder} initially&#34;, list(self.programs)))
+        summary.append(programs_to_html(f&#34;{remainder} initially&#34;, list(self.db_programs)))
         for (i, command) in enumerate(self.commands, 1):
             action = f&#34;operation {i} ({command.get(&#39;operation&#39;)})&#34;
             removed = len(command.get(&#34;filtered_out&#34;, []))
@@ -270,11 +274,11 @@ if __name__ == &#34;__main__&#34;:
 <span>(</span><span>...)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Common base class for all non-exit exceptions.</p></div>
+<div class="desc"><p>Raised when the field <code>"data"</code> of a pipeline command cannot be interpreted.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L32-L33" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L36-L38" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">class MalformedData(Exception):
     ...</code></pre>
@@ -287,14 +291,13 @@ if __name__ == &#34;__main__&#34;:
 </dd>
 <dt id="paroxython.recommend_programs.Recommendations"><code class="flex name class">
 <span>class <span class="ident">Recommendations</span></span>
-<span>(</span><span>db: JsonDatabase, commands: Union[List[Command], NoneType] = None, base_path: Union[pathlib.Path, NoneType] = None, cost_assessment_strategy: Literal['zeno', 'linear'] = 'zeno')</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>TODO.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L36-L210" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L41-L224" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">class Recommendations:
     def __init__(
@@ -304,21 +307,21 @@ if __name__ == &#34;__main__&#34;:
         base_path: Optional[Path] = None,
         cost_assessment_strategy: AssessmentStrategy = &#34;zeno&#34;,
     ) -&gt; None:
-
         self.commands = commands or []
         self.base_path = base_path
 
-        # copy locally some attributes and methods or a ProgramFilter instance
+        # copy locally some attributes and methods of a ProgramFilter instance
         program_filter = ProgramFilter(db)
-        self.programs = program_filter.db_programs
+        self.db_programs = program_filter.db_programs
         self.selected_programs = program_filter.selected_programs
         self.imparted_knowledge = program_filter.imparted_knowledge
         self.update_filter = program_filter.update_filter
-        self.assess = LearningCostAssessor(self.programs)
+
+        self.assess = LearningCostAssessor(self.db_programs)
         self.assess.set_cost_assessment_strategy(cost_assessment_strategy)
 
     def run_pipeline(self) -&gt; None:
-        current = set(self.programs)
+        current = set(self.db_programs)
         print(f&#34;\nProcessing {len(self.commands)} commands on {len(current)} programs.&#34;)
 
         # Execute sequentially all the commands of the pipeline
@@ -379,9 +382,9 @@ if __name__ == &#34;__main__&#34;:
 
     def get_markdown(
         self,
-        span_column_width=30,
-        sorting_strategy=&#34;by_cost_and_sloc&#34;,
-        grouping_strategy=&#34;by_cost_bucket&#34;,
+        span_column_width: int = 30,
+        sorting_strategy: str = &#34;by_cost_and_sloc&#34;,
+        grouping_strategy: str = &#34;by_cost_bucket&#34;,
     ) -&gt; str:
         # Define some helper functions.
 
@@ -391,7 +394,7 @@ if __name__ == &#34;__main__&#34;:
 
         sorting_key = None
         if sorting_strategy == &#34;by_cost_and_sloc&#34;:
-            sorting_key = lambda x: (x[0], len(self.programs[x[1]][&#34;source&#34;].split(&#34;\n&#34;)))
+            sorting_key = lambda x: (x[0], len(self.db_programs[x[1]][&#34;source&#34;].split(&#34;\n&#34;)))
         elif sorting_strategy == &#34;lexicographic&#34;:
             sorting_key = lambda x: x[1]
 
@@ -419,7 +422,7 @@ if __name__ == &#34;__main__&#34;:
             contents.append(f&#34;\n## {title}&#34;)
 
             for (cost, program_name) in costs_and_program_names:
-                program_info = self.programs[program_name]
+                program_info = self.db_programs[program_name]
                 title = f&#34;Program `{program_name}` (learning cost {cost})&#34;
                 toc.append(f&#34;    - [`{program_name}`](#{title_to_slug(title)})&#34;)
                 contents.append(f&#34;\n### {title}&#34;)
@@ -451,9 +454,9 @@ if __name__ == &#34;__main__&#34;:
                 + &#34;\n&lt;/details&gt;\n&#34;
             )
 
-        remainder = len(self.programs)
+        remainder = len(self.db_programs)
         summary: List[str] = [f&#34;\n# Summary&#34;]
-        summary.append(programs_to_html(f&#34;{remainder} initially&#34;, list(self.programs)))
+        summary.append(programs_to_html(f&#34;{remainder} initially&#34;, list(self.db_programs)))
         for (i, command) in enumerate(self.commands, 1):
             action = f&#34;operation {i} ({command.get(&#39;operation&#39;)})&#34;
             removed = len(command.get(&#34;filtered_out&#34;, []))
@@ -469,6 +472,48 @@ if __name__ == &#34;__main__&#34;:
 </details>
 <h3>Methods</h3>
 <dl>
+<dt id="paroxython.recommend_programs.Recommendations.__init__"><code class="name flex">
+<span>def <span class="ident">__init__</span></span>(<span>self, <br>db: JsonDatabase, <br>commands: Union[List[Command], NoneType] = None, <br>base_path: Union[pathlib.Path, NoneType] = None, <br>cost_assessment_strategy: Literal['zeno', 'linear'] = 'zeno'<br>) ‑> NoneType</span>
+</code></dt>
+<dd>
+<div class="desc"><p>TODO.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>db</code></strong> :&ensp;<code>JsonDatabase</code></dt>
+<dd>[description]</dd>
+<dt><strong><code>commands</code></strong> :&ensp;<code>Optional[List[Command]]</code>, optional</dt>
+<dd>[description]. Defaults to <code>None</code>.</dd>
+<dt><strong><code>base_path</code></strong> :&ensp;<code>Optional[Path]</code>, optional</dt>
+<dd>[description]. Defaults to <code>None</code>.</dd>
+<dt><strong><code>cost_assessment_strategy</code></strong> :&ensp;<code>AssessmentStrategy</code>, optional</dt>
+<dd>[description]. Defaults to <code>"zeno"</code>.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L42-L69" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">def __init__(
+    self,
+    db: JsonDatabase,
+    commands: Optional[List[Command]] = None,
+    base_path: Optional[Path] = None,
+    cost_assessment_strategy: AssessmentStrategy = &#34;zeno&#34;,
+) -&gt; None:
+    self.commands = commands or []
+    self.base_path = base_path
+
+    # copy locally some attributes and methods of a ProgramFilter instance
+    program_filter = ProgramFilter(db)
+    self.db_programs = program_filter.db_programs
+    self.selected_programs = program_filter.selected_programs
+    self.imparted_knowledge = program_filter.imparted_knowledge
+    self.update_filter = program_filter.update_filter
+
+    self.assess = LearningCostAssessor(self.db_programs)
+    self.assess.set_cost_assessment_strategy(cost_assessment_strategy)</code></pre>
+</details>
+</dd>
 <dt id="paroxython.recommend_programs.Recommendations.run_pipeline"><code class="name flex">
 <span>def <span class="ident">run_pipeline</span></span>(<span>self) ‑> NoneType</span>
 </code></dt>
@@ -477,10 +522,10 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L57-L98" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L71-L112" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def run_pipeline(self) -&gt; None:
-    current = set(self.programs)
+    current = set(self.db_programs)
     print(f&#34;\nProcessing {len(self.commands)} commands on {len(current)} programs.&#34;)
 
     # Execute sequentially all the commands of the pipeline
@@ -529,7 +574,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L100-L118" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L114-L132" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def parse_data(self, data: Union[str, List[str]], operation: Operation) -&gt; List[str]:
     if isinstance(data, list):  # The JSON object can either be a list of strings...
@@ -552,20 +597,20 @@ if __name__ == &#34;__main__&#34;:
 </details>
 </dd>
 <dt id="paroxython.recommend_programs.Recommendations.get_markdown"><code class="name flex">
-<span>def <span class="ident">get_markdown</span></span>(<span>self, span_column_width=30, sorting_strategy='by_cost_and_sloc', grouping_strategy='by_cost_bucket'<br>) ‑> str</span>
+<span>def <span class="ident">get_markdown</span></span>(<span>self, <br>span_column_width: int = 30, <br>sorting_strategy: str = 'by_cost_and_sloc', <br>grouping_strategy: str = 'by_cost_bucket'<br>) ‑> str</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Reiterate on the commands, now populated by the results, and output them.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L120-L210" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L134-L224" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def get_markdown(
     self,
-    span_column_width=30,
-    sorting_strategy=&#34;by_cost_and_sloc&#34;,
-    grouping_strategy=&#34;by_cost_bucket&#34;,
+    span_column_width: int = 30,
+    sorting_strategy: str = &#34;by_cost_and_sloc&#34;,
+    grouping_strategy: str = &#34;by_cost_bucket&#34;,
 ) -&gt; str:
     # Define some helper functions.
 
@@ -575,7 +620,7 @@ if __name__ == &#34;__main__&#34;:
 
     sorting_key = None
     if sorting_strategy == &#34;by_cost_and_sloc&#34;:
-        sorting_key = lambda x: (x[0], len(self.programs[x[1]][&#34;source&#34;].split(&#34;\n&#34;)))
+        sorting_key = lambda x: (x[0], len(self.db_programs[x[1]][&#34;source&#34;].split(&#34;\n&#34;)))
     elif sorting_strategy == &#34;lexicographic&#34;:
         sorting_key = lambda x: x[1]
 
@@ -603,7 +648,7 @@ if __name__ == &#34;__main__&#34;:
         contents.append(f&#34;\n## {title}&#34;)
 
         for (cost, program_name) in costs_and_program_names:
-            program_info = self.programs[program_name]
+            program_info = self.db_programs[program_name]
             title = f&#34;Program `{program_name}` (learning cost {cost})&#34;
             toc.append(f&#34;    - [`{program_name}`](#{title_to_slug(title)})&#34;)
             contents.append(f&#34;\n### {title}&#34;)
@@ -635,9 +680,9 @@ if __name__ == &#34;__main__&#34;:
             + &#34;\n&lt;/details&gt;\n&#34;
         )
 
-    remainder = len(self.programs)
+    remainder = len(self.db_programs)
     summary: List[str] = [f&#34;\n# Summary&#34;]
-    summary.append(programs_to_html(f&#34;{remainder} initially&#34;, list(self.programs)))
+    summary.append(programs_to_html(f&#34;{remainder} initially&#34;, list(self.db_programs)))
     for (i, command) in enumerate(self.commands, 1):
         action = f&#34;operation {i} ({command.get(&#39;operation&#39;)})&#34;
         removed = len(command.get(&#34;filtered_out&#34;, []))
@@ -685,6 +730,7 @@ data-gaCategoryParameter="paroxython.recommend_programs">
 <li>
 <h4><code><a title="paroxython.recommend_programs.Recommendations" href="#paroxython.recommend_programs.Recommendations">Recommendations</a></code></h4>
 <ul class="">
+<li><code><a title="paroxython.recommend_programs.Recommendations.__init__" href="#paroxython.recommend_programs.Recommendations.__init__">__init__</a></code></li>
 <li><code><a title="paroxython.recommend_programs.Recommendations.run_pipeline" href="#paroxython.recommend_programs.Recommendations.run_pipeline">run_pipeline</a></code></li>
 <li><code><a title="paroxython.recommend_programs.Recommendations.parse_data" href="#paroxython.recommend_programs.Recommendations.parse_data">parse_data</a></code></li>
 <li><code><a title="paroxython.recommend_programs.Recommendations.get_markdown" href="#paroxython.recommend_programs.Recommendations.get_markdown">get_markdown</a></code></li>

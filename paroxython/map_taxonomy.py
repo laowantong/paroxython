@@ -34,7 +34,33 @@ class Taxonomy:
         *args,
         **kwargs,
     ) -> None:
-        """Read the taxonomy specifications, and make some pre-processing."""
+        r"""Read and pre-process the taxonomy specifications.
+
+        Description:
+
+
+        Args:
+            taxonomy_path (Optional[Path], optional): The path of a two-columns TSV file
+                associating label (search) patterns with taxon (replacement) patterns. For better
+                readability, the taxa are listed on the first column, and the corresponding labels
+                (sometimes very long) on the second column. If not specified, the
+                [default taxonomy](https://github.com/laowantong/paroxython/blob/master/paroxython/resources/taxonomy.tsv)
+                is used. Defaults to `None`.
+            is_literal (Callable, optional): A predicate telling whether a given regular expression
+                pattern is literal or not. It will be matched successively against every label
+                pattern of the taxonomy TSV file (second column). For instance, the label pattern
+                `"external_free_call:print"` is literal, and then matches only itself. Conversely,
+                the label pattern `"internal_free_call:[[:upper:]].*"` contains some non-literal
+                characters such as `"["` and `"*"`, and then must be compiled into a regular
+                expression. By default, a pattern is considered to be literal if it contains only
+                letters, digits, underscores, hyphens, colons and **dots**.
+
+                ..note::
+                    The latter actually goes against the semantics of regular expressions. In case
+                    that's a problem, it is always possible to force the interpretation of a pattern
+                    as non-literal by enclosing it in parentheses.
+                Defaults to `regex.compile(r"[\w:.]+").fullmatch`.
+        """
         taxonomy_path = taxonomy_path or Path(dirname(__file__)) / "resources" / "taxonomy.tsv"
         tsv = taxonomy_path.read_text().partition("-- EOF")[0].strip()
         self.literal_label_names: Dict[LabelName, TaxonNames] = defaultdict(list)
@@ -79,7 +105,7 @@ def deduplicated_taxa(taxa: Taxa) -> Taxa:
         5           n = 3 * n + 1
         ```
         It features exactly one literal integer on lines 1 and 3, and exactly two on lines 2 and 5.
-        Moreover, one of the literal of line 2 is zero. Therefore, the program is originally tagged
+        Moreover, one of the literals of line 2 is zero. Therefore, the program is originally tagged
         with the following two couples (among others):
         ```python
         [
@@ -97,8 +123,8 @@ def deduplicated_taxa(taxa: Taxa) -> Taxa:
         ]
         ```
         ..tip::
-            In the dictionary above, `(5, 5): 2` reads: “the taxon `"type/number/integer/literal"`
-            has 2 distinct occurrences spanning the lines 5 to 5” (namely, `3` and `1`). Such a
+            In the dictionary above, `(5, 5): 2` means that the taxon `"type/number/integer/literal"`
+            has 2 distinct occurrences spanning the lines 5 to 5 (namely, `3` and `1`). Such a
             “counter” dictionary is called a _bag_, or _multiset_.
 
         Now, every occurrence of a given taxon **is** an occurrence of any of its prefix. For
