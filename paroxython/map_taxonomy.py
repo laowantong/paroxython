@@ -4,18 +4,21 @@ Translate labels into taxa on a list of program paths.
 
 from collections import Counter, defaultdict
 from pathlib import Path
-from typing import Callable, Dict, Optional
+from typing import Callable, Dict, List, Optional, Tuple
+from typing import Pattern as RegexPattern
 from os.path import commonpath, dirname
 from functools import lru_cache
 
 import regex  # type: ignore
 
 from .user_types import (
-    LabelName,
+    LabelPattern,
     Labels,
     Taxon,
     TaxonName,
     TaxonNames,
+    TaxonPattern,
+    TaxonPatterns,
     Taxa,
     TaxaSpans,
 )
@@ -37,7 +40,11 @@ class Taxonomy:
         r"""Read and pre-process the taxonomy specifications.
 
         Description:
-
+            1. Read the taxonomy, falling back to the provided default
+            [`taxonomy.tsv`](https://github.com/laowantong/paroxython/blob/master/paroxython/resources/taxonomy.tsv).
+            2. Drop the part starting with the string `"-- EOF"`, if any (this pre-processing
+            allows you to leave notes or drafts at the end of the file).
+            3.
 
         Args:
             taxonomy_path (Optional[Path], optional): The path of a two-columns TSV file
@@ -59,34 +66,36 @@ class Taxonomy:
                     The latter actually goes against the semantics of regular expressions. In case
                     that's a problem, it is always possible to force the interpretation of a pattern
                     as non-literal by enclosing it in parentheses.
+
                 Defaults to `regex.compile(r"[\w:.]+").fullmatch`.
         """
         taxonomy_path = taxonomy_path or Path(dirname(__file__)) / "resources" / "taxonomy.tsv"
         tsv = taxonomy_path.read_text().partition("-- EOF")[0].strip()
-        self.literal_label_names: Dict[LabelName, TaxonNames] = defaultdict(list)
-        self.compiled_label_names = []
+        self.literal_labels: Dict[LabelPattern, TaxonNames] = defaultdict(list)
+        self.compiled_labels: List[Tuple[RegexPattern, TaxonPattern]] = []
         for line in sorted(tsv.split("\n")[1:]):
-            (taxon_name, label_pattern) = line.strip().split(maxsplit=1)
+            (taxon_value, label_value) = line.strip().split(maxsplit=1)
+            (taxon_pattern, label_pattern) = (TaxonPattern(taxon_value), LabelPattern(label_value))
             if is_literal(label_pattern):
-                self.literal_label_names[LabelName(label_pattern)].append(TaxonName(taxon_name))
+                self.literal_labels[label_pattern].append(TaxonName(taxon_pattern))
             else:
-                self.compiled_label_names.append((regex.compile(label_pattern + "$"), taxon_name))
+                self.compiled_labels.append((regex.compile(f"{label_pattern}$"), taxon_pattern))
                 # note: "$" is necessary: regex.fullmatch() has no regex.fullsub() counterpart
 
     @lru_cache(maxsize=None)
-    def get_taxon_name_list(self, label_name: LabelName,) -> TaxonNames:
-        """Translate a label name into a list of taxon names."""
-        result: TaxonNames = self.literal_label_names.get(label_name, [])
-        for (rex, taxon_name) in self.compiled_label_names:
-            if rex.match(label_name):
-                result.append(rex.sub(taxon_name, label_name))
+    def get_taxon_name_list(self, label_pattern: LabelPattern) -> TaxonNames:
+        """Translate a label pattern into a list of taxon names."""
+        result: TaxonNames = self.literal_labels.get(label_pattern, [])
+        for (rex, taxon_pattern) in self.compiled_labels:
+            if rex.match(label_pattern):
+                result.append(rex.sub(taxon_pattern, label_pattern))
         return result
 
     def to_taxa(self, labels: Labels) -> Taxa:
         """Translate a list of labels to a list of taxa with their spans in a bag."""
         acc: TaxaSpans = defaultdict(Counter)
-        for (label_name, spans) in labels:
-            for taxon_name in self.get_taxon_name_list(label_name):
+        for (label_pattern, spans) in labels:
+            for taxon_name in self.get_taxon_name_list(label_pattern):
                 acc[taxon_name].update(spans)
         taxa = [Taxon(name, spans) for (name, spans) in sorted(acc.items())]
         return deduplicated_taxa(taxa)

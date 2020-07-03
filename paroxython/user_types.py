@@ -28,6 +28,7 @@ class Label(NamedTuple):
 Labels = List[Label]
 LabelsSpans = Dict[LabelName, List[Span]]
 
+LabelPattern = NewType("LabelPattern", str)
 
 # Taxa
 
@@ -42,6 +43,8 @@ class Taxon(NamedTuple):
 Taxa = List[Taxon]
 TaxaSpans = Dict[TaxonName, Bag[Span]]
 
+TaxonPattern = NewType("TaxonPattern", str)
+TaxonPatterns = List[TaxonPattern]
 
 # Programs
 

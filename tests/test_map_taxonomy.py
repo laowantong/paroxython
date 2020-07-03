@@ -16,17 +16,17 @@ S = lambda i, j: Span(i, j)  # shortcut for Span(i, j)
 
 
 def test_initial_values():
-    print(t.literal_label_names)
-    assert t.literal_label_names == {
+    print(t.literal_labels)
+    assert t.literal_labels == {
         "literal:Set": ["call/function/builtin/casting/set", "type/non_sequence/set"],
         "if": ["flow/conditional"],
         "if_else": ["flow/conditional/else"],
         "free_call:list": ["type/sequence/list"],
         "member_call:difference_update": ["type/non_sequence/set"],
     }
-    print(t.compiled_label_names)
-    assert t.compiled_label_names[0][1] == "call/function/builtin/casting/\\1"
-    assert t.compiled_label_names[1][1] == "test/inequality"
+    print(t.compiled_labels)
+    assert t.compiled_labels[0][1] == "call/function/builtin/casting/\\1"
+    assert t.compiled_labels[1][1] == "test/inequality"
 
 
 def test_get_taxon_name_list():

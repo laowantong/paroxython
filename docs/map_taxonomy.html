@@ -36,22 +36,25 @@ body.gsc-overflow-hidden #sidebar {overflow: visible;}
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L0-L212" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L0-L221" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">from collections import Counter, defaultdict
 from pathlib import Path
-from typing import Callable, Dict, Optional
+from typing import Callable, Dict, List, Optional, Tuple
+from typing import Pattern as RegexPattern
 from os.path import commonpath, dirname
 from functools import lru_cache
 
 import regex  # type: ignore
 
 from .user_types import (
-    LabelName,
+    LabelPattern,
     Labels,
     Taxon,
     TaxonName,
     TaxonNames,
+    TaxonPattern,
+    TaxonPatterns,
     Taxa,
     TaxaSpans,
 )
@@ -72,28 +75,29 @@ class Taxonomy:
     ) -&gt; None:
         taxonomy_path = taxonomy_path or Path(dirname(__file__)) / &#34;resources&#34; / &#34;taxonomy.tsv&#34;
         tsv = taxonomy_path.read_text().partition(&#34;-- EOF&#34;)[0].strip()
-        self.literal_label_names: Dict[LabelName, TaxonNames] = defaultdict(list)
-        self.compiled_label_names = []
+        self.literal_labels: Dict[LabelPattern, TaxonNames] = defaultdict(list)
+        self.compiled_labels: List[Tuple[RegexPattern, TaxonPattern]] = []
         for line in sorted(tsv.split(&#34;\n&#34;)[1:]):
-            (taxon_name, label_pattern) = line.strip().split(maxsplit=1)
+            (taxon_value, label_value) = line.strip().split(maxsplit=1)
+            (taxon_pattern, label_pattern) = (TaxonPattern(taxon_value), LabelPattern(label_value))
             if is_literal(label_pattern):
-                self.literal_label_names[LabelName(label_pattern)].append(TaxonName(taxon_name))
+                self.literal_labels[label_pattern].append(TaxonName(taxon_pattern))
             else:
-                self.compiled_label_names.append((regex.compile(label_pattern + &#34;$&#34;), taxon_name))
+                self.compiled_labels.append((regex.compile(f&#34;{label_pattern}$&#34;), taxon_pattern))
                 # note: &#34;$&#34; is necessary: regex.fullmatch() has no regex.fullsub() counterpart
 
     @lru_cache(maxsize=None)
-    def get_taxon_name_list(self, label_name: LabelName,) -&gt; TaxonNames:
-        result: TaxonNames = self.literal_label_names.get(label_name, [])
-        for (rex, taxon_name) in self.compiled_label_names:
-            if rex.match(label_name):
-                result.append(rex.sub(taxon_name, label_name))
+    def get_taxon_name_list(self, label_pattern: LabelPattern) -&gt; TaxonNames:
+        result: TaxonNames = self.literal_labels.get(label_pattern, [])
+        for (rex, taxon_pattern) in self.compiled_labels:
+            if rex.match(label_pattern):
+                result.append(rex.sub(taxon_pattern, label_pattern))
         return result
 
     def to_taxa(self, labels: Labels) -&gt; Taxa:
         acc: TaxaSpans = defaultdict(Counter)
-        for (label_name, spans) in labels:
-            for taxon_name in self.get_taxon_name_list(label_name):
+        for (label_pattern, spans) in labels:
+            for taxon_name in self.get_taxon_name_list(label_pattern):
                 acc[taxon_name].update(spans)
         taxa = [Taxon(name, spans) for (name, spans) in sorted(acc.items())]
         return deduplicated_taxa(taxa)
@@ -232,7 +236,7 @@ a bag (multiset) of its spans.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L95-L196" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L104-L205" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def deduplicated_taxa(taxa: Taxa) -&gt; Taxa:
     if len(taxa) &lt; 2:
@@ -269,7 +273,7 @@ a bag (multiset) of its spans.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L29-L92" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L32-L101" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">class Taxonomy:
     def __init__(
@@ -281,28 +285,29 @@ a bag (multiset) of its spans.</dd>
     ) -&gt; None:
         taxonomy_path = taxonomy_path or Path(dirname(__file__)) / &#34;resources&#34; / &#34;taxonomy.tsv&#34;
         tsv = taxonomy_path.read_text().partition(&#34;-- EOF&#34;)[0].strip()
-        self.literal_label_names: Dict[LabelName, TaxonNames] = defaultdict(list)
-        self.compiled_label_names = []
+        self.literal_labels: Dict[LabelPattern, TaxonNames] = defaultdict(list)
+        self.compiled_labels: List[Tuple[RegexPattern, TaxonPattern]] = []
         for line in sorted(tsv.split(&#34;\n&#34;)[1:]):
-            (taxon_name, label_pattern) = line.strip().split(maxsplit=1)
+            (taxon_value, label_value) = line.strip().split(maxsplit=1)
+            (taxon_pattern, label_pattern) = (TaxonPattern(taxon_value), LabelPattern(label_value))
             if is_literal(label_pattern):
-                self.literal_label_names[LabelName(label_pattern)].append(TaxonName(taxon_name))
+                self.literal_labels[label_pattern].append(TaxonName(taxon_pattern))
             else:
-                self.compiled_label_names.append((regex.compile(label_pattern + &#34;$&#34;), taxon_name))
+                self.compiled_labels.append((regex.compile(f&#34;{label_pattern}$&#34;), taxon_pattern))
                 # note: &#34;$&#34; is necessary: regex.fullmatch() has no regex.fullsub() counterpart
 
     @lru_cache(maxsize=None)
-    def get_taxon_name_list(self, label_name: LabelName,) -&gt; TaxonNames:
-        result: TaxonNames = self.literal_label_names.get(label_name, [])
-        for (rex, taxon_name) in self.compiled_label_names:
-            if rex.match(label_name):
-                result.append(rex.sub(taxon_name, label_name))
+    def get_taxon_name_list(self, label_pattern: LabelPattern) -&gt; TaxonNames:
+        result: TaxonNames = self.literal_labels.get(label_pattern, [])
+        for (rex, taxon_pattern) in self.compiled_labels:
+            if rex.match(label_pattern):
+                result.append(rex.sub(taxon_pattern, label_pattern))
         return result
 
     def to_taxa(self, labels: Labels) -&gt; Taxa:
         acc: TaxaSpans = defaultdict(Counter)
-        for (label_name, spans) in labels:
-            for taxon_name in self.get_taxon_name_list(label_name):
+        for (label_pattern, spans) in labels:
+            for taxon_name in self.get_taxon_name_list(label_pattern):
                 acc[taxon_name].update(spans)
         taxa = [Taxon(name, spans) for (name, spans) in sorted(acc.items())]
         return deduplicated_taxa(taxa)</code></pre>
@@ -315,6 +320,13 @@ a bag (multiset) of its spans.</dd>
 <dd>
 <div class="desc"><p>Read and pre-process the taxonomy specifications.</p>
 <h2 id="description">Description</h2>
+<ol>
+<li>Read the taxonomy, falling back to the provided default
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/taxonomy.tsv"><code>taxonomy.tsv</code></a>.</li>
+<li>Drop the part starting with the string <code>"-- EOF"</code>, if any (this pre-processing
+allows you to leave notes or drafts at the end of the file).</li>
+<li></li>
+</ol>
 <h2 id="args">Args</h2>
 <dl>
 <dt><strong><code>taxonomy_path</code></strong> :&ensp;<code>Optional[Path]</code>, optional</dt>
@@ -346,7 +358,7 @@ as non-literal by enclosing it in parentheses.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L30-L73" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L33-L82" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def __init__(
     self,
@@ -357,32 +369,33 @@ as non-literal by enclosing it in parentheses.</p>
 ) -&gt; None:
     taxonomy_path = taxonomy_path or Path(dirname(__file__)) / &#34;resources&#34; / &#34;taxonomy.tsv&#34;
     tsv = taxonomy_path.read_text().partition(&#34;-- EOF&#34;)[0].strip()
-    self.literal_label_names: Dict[LabelName, TaxonNames] = defaultdict(list)
-    self.compiled_label_names = []
+    self.literal_labels: Dict[LabelPattern, TaxonNames] = defaultdict(list)
+    self.compiled_labels: List[Tuple[RegexPattern, TaxonPattern]] = []
     for line in sorted(tsv.split(&#34;\n&#34;)[1:]):
-        (taxon_name, label_pattern) = line.strip().split(maxsplit=1)
+        (taxon_value, label_value) = line.strip().split(maxsplit=1)
+        (taxon_pattern, label_pattern) = (TaxonPattern(taxon_value), LabelPattern(label_value))
         if is_literal(label_pattern):
-            self.literal_label_names[LabelName(label_pattern)].append(TaxonName(taxon_name))
+            self.literal_labels[label_pattern].append(TaxonName(taxon_pattern))
         else:
-            self.compiled_label_names.append((regex.compile(label_pattern + &#34;$&#34;), taxon_name))</code></pre>
+            self.compiled_labels.append((regex.compile(f&#34;{label_pattern}$&#34;), taxon_pattern))</code></pre>
 </details>
 </dd>
 <dt id="paroxython.map_taxonomy.Taxonomy.get_taxon_name_list"><code class="name flex">
-<span>def <span class="ident">get_taxon_name_list</span></span>(<span>self, <br>label_name: LabelName<br>) ‑> List[TaxonName]</span>
+<span>def <span class="ident">get_taxon_name_list</span></span>(<span>self, <br>label_pattern: LabelPattern<br>) ‑> List[TaxonName]</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Translate a label name into a list of taxon names.</p></div>
+<div class="desc"><p>Translate a label pattern into a list of taxon names.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L76-L83" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L85-L92" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">@lru_cache(maxsize=None)
-def get_taxon_name_list(self, label_name: LabelName,) -&gt; TaxonNames:
-    result: TaxonNames = self.literal_label_names.get(label_name, [])
-    for (rex, taxon_name) in self.compiled_label_names:
-        if rex.match(label_name):
-            result.append(rex.sub(taxon_name, label_name))
+def get_taxon_name_list(self, label_pattern: LabelPattern) -&gt; TaxonNames:
+    result: TaxonNames = self.literal_labels.get(label_pattern, [])
+    for (rex, taxon_pattern) in self.compiled_labels:
+        if rex.match(label_pattern):
+            result.append(rex.sub(taxon_pattern, label_pattern))
     return result</code></pre>
 </details>
 </dd>
@@ -394,12 +407,12 @@ def get_taxon_name_list(self, label_name: LabelName,) -&gt; TaxonNames:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L85-L92" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L94-L101" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def to_taxa(self, labels: Labels) -&gt; Taxa:
     acc: TaxaSpans = defaultdict(Counter)
-    for (label_name, spans) in labels:
-        for taxon_name in self.get_taxon_name_list(label_name):
+    for (label_pattern, spans) in labels:
+        for taxon_name in self.get_taxon_name_list(label_pattern):
             acc[taxon_name].update(spans)
     taxa = [Taxon(name, spans) for (name, spans) in sorted(acc.items())]
     return deduplicated_taxa(taxa)</code></pre>
