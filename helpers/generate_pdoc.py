@@ -65,7 +65,6 @@ def resolve_new_types():
         ("user_types", "source", "Source"),
         ("assess_costs", "taxon", "TaxonName"),
         ("preprocess_source", "label_name", "LabelName"),
-        ("map_taxonomy", "label_pattern", "LabelPattern"),
         ("derived_labels_db", "query", "Query"),
         ("filter_programs", "operation", "Operation"),
     ]

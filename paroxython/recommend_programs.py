@@ -25,7 +25,6 @@ from .user_types import (
     JsonDatabase,
     Operation,
     ProgramNames,
-    TaxonNameSet,
 )
 
 __pdoc__ = {

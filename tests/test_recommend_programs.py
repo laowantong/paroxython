@@ -334,7 +334,7 @@ def test_recommend_mini_programs():
     commands = [
         {
             "operation": "impart",  # Imparting triples is currently not supported (ignored).
-            "data": [("variable/assignment", "inside", "flow/loop"),],
+            "data": [("variable/assignment", "inside", "flow/loop")],
         }
     ]
     rec = Recommendations(db, commands=commands)
