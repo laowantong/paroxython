@@ -285,11 +285,11 @@ Generally speaking, all _falsey_ constants (i.e., whose [truth value](https://do
 (
                        (?P<SUFFIX>Str)
 \n(?:\1.+\n)* \1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)* \1/s=''
+\n(?:\1.+\n)* \1/s=(?=\n) # empty string
 |
                        (?P<SUFFIX>Tuple|List|Dict)
 \n(?:\1.+\n)* \1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)* \1/(elts|keys)/length=0
+\n(?:\1.+\n)* \1/(elts|keys)/_length=0
 )
 ```
 
@@ -1130,7 +1130,7 @@ WHERE substr(c.path, 1, length(c.path)-4) == substr(lit.path, 1, length(lit.path
 ```re
            ^(.*)/_type=Compare
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/comparators/length=(?!1\n)(?P<SUFFIX>.+)
+\n(?:\1.+\n)*?\1/comparators/_length=(?!1\n)(?P<SUFFIX>.+)
 ```
 
 ##### Example
@@ -1210,7 +1210,7 @@ _Remark._ Note the user-defined function `REGEXP` in the `WHERE`clause. It calls
 (   # try to match the % right operand with a number
 \n(?:\1.+\n)*?\1/left/right/n=(?P<SUFFIX>.+)
 )?
-\n(?:\1.+\n)*?\1/ops/length=1
+\n(?:\1.+\n)*?\1/ops/_length=1
 \n(?:\1.+\n)*?\1/ops/1/_type=(Eq|NotEq)
 ```
 
@@ -1454,8 +1454,8 @@ We use the term _free call_, as opposed to _member call_ (dot notation).
            ^(.*)/_type=Call
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/func/id=(?P<SUFFIX>.+)
-\n(?:\1.+\n)*?\1/args/length=0
-\n(?:\1.+\n)*?\1/keywords/length=0
+\n(?:\1.+\n)*?\1/args/_length=0
+\n(?:\1.+\n)*?\1/keywords/_length=0
 ```
 
 ##### Example
@@ -1493,7 +1493,7 @@ A tail-call is a call whose result is immediately returned, without any further 
 \n(?:\1.+\n)*?\1/value/func/id=(?P<SUFFIX>.+)
                        |
                        _type=BoolOp
-\n(?:\1.+\n)*?\1/value/values/length=(?P<LENGTH>\d+)
+\n(?:\1.+\n)*?\1/value/values/_length=(?P<LENGTH>\d+)
 \n(?:\1.+\n)*?\1/value/values/(?P=LENGTH)/_type=Call
 \n(?:\1.+\n)*?\1/value/values/(?P=LENGTH)/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/value/values/(?P=LENGTH)/func/id=(?P<SUFFIX>.+)
@@ -1872,7 +1872,7 @@ Suffix the number of `for` clauses in a given comprehension.
 ```re
            ^(.*)/_type=(ListComp|DictComp|SetComp|GeneratorExp)
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/generators/length=(?P<SUFFIX>\d+)
+\n(?:\1.+\n)*?\1/generators/_length=(?P<SUFFIX>\d+)
 ```
 
 ##### Example
@@ -2102,7 +2102,7 @@ Deleting a name removes the binding of that name from the local or global namesp
 ```re
            ^(.*)/_type=Assign
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/assigntargets/length=1
+\n(?:\1.+\n)*?\1/assigntargets/_length=1
 \n(?:\1.+\n)*?\1/assigntargets/1/id=(?P<SUFFIX>.+)
 ```
 
@@ -2133,9 +2133,9 @@ Match a tuple unpacking assignment, and suffix it with the tuple size.
 ```re
            ^(.*)/_type=Assign
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/assigntargets/length=1
+\n(?:\1.+\n)*?\1/assigntargets/_length=1
 \n(?:\1.+\n)*?\1/assigntargets/1/_type=Tuple
-\n(?:\1.+\n)*?\1/assigntargets/1/elts/length=(?P<SUFFIX>.+)
+\n(?:\1.+\n)*?\1/assigntargets/1/elts/_length=(?P<SUFFIX>.+)
 ```
 
 ##### Example
@@ -2225,7 +2225,7 @@ Match a tuple unpacking assignment, and suffix it with the tuple size.
 ```re
            ^(.*)/_type=Assign
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/assigntargets/length=(?!1\n).+
+\n(?:\1.+\n)*?\1/assigntargets/_length=(?!1\n).+
 ```
 
 ##### Example
@@ -2925,10 +2925,10 @@ A conditional statement whose each branch consists solely in a assignment to the
 ```re
            ^(.*)/_type=If
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/body/length=1
+\n(?:\1.+\n)*?\1/body/_length=1
 \n(?:\1.+\n)*?\1/body/1/_type=Assign
 \n(?:\1.+\n)*?\1/body/1/assigntargets/1/_hash=(?P<HASH>.+)
-\n(?:\1.+\n)*?\1/orelse/length=1
+\n(?:\1.+\n)*?\1/orelse/_length=1
 \n(?:\1.+\n)*?\1/orelse/1/_type=Assign
 \n(?:\1.+\n)*?\1/orelse/1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/orelse/1/assigntargets/1/_hash=(?P=HASH)
@@ -2999,11 +2999,11 @@ Assign a “default” value to a variable, then if a certain condition is satis
 \n(?:\1/(?P=_1).+\n)*?\1/(?P=_1)/_pos=(?P<POS>.+)
 \n(?:\1/(?P=_1).+\n)*?\1/(?P=_1)/assigntargets/1/_hash=(?P<HASH>.+)
 \n(?:\1/(?P=_1).+\n)*?\1/(?P<_2>\d+)/_type=If
-\n(?:\1/(?P=_2).+\n)*?\1/(?P=_2)    /body/length=1
+\n(?:\1/(?P=_2).+\n)*?\1/(?P=_2)    /body/_length=1
 \n(?:\1/(?P=_2).+\n)*?\1/(?P=_2)    /body/1/_type=(?:Aug)?Assign
 \n(?:\1/(?P=_2).+\n)*?\1/(?P=_2)    /body/1/_pos=(?P<POS>.+)
 \n(?:\1/(?P=_2).+\n)*?\1/(?P=_2)    /body/1/assigntarget(s/1)?/_hash=(?P=HASH)
-\n(?:\1/(?P=_2).+\n)*?\1/(?P=_2)    /orelse/length=0
+\n(?:\1/(?P=_2).+\n)*?\1/(?P=_2)    /orelse/_length=0
 ```
 
 ##### Example
@@ -3440,9 +3440,9 @@ _Remark._ The actual name of an argument can be retrieved by joining with `funct
            ^(.*)/_type=FunctionDef
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/name=(?P<SUFFIX>.+)
-\n(?:\1.+\n)*?\1/args/args/length=0
+\n(?:\1.+\n)*?\1/args/args/_length=0
 \n(?:\1.+\n)*?\1/args/vararg=None
-\n(?:\1.+\n)*?\1/args/kwonlyargs/length=0
+\n(?:\1.+\n)*?\1/args/kwonlyargs/_length=0
 \n(?:\1.+\n)*?\1/args/kwarg=None
 \n(?:\1.+\n)* \1/.+/_pos=(?P<POS>.+)
 ```
@@ -3479,7 +3479,7 @@ _Remark._ The actual name of an argument can be retrieved by joining with `funct
            ^(.*)/_type=FunctionDef
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/name=(?P<SUFFIX>.+)
-\n(?:\1.+\n)*?\1/decorator_list/length=(?!0\n).+
+\n(?:\1.+\n)*?\1/decorator_list/_length=(?!0\n).+
 \n(?:\1.+\n)* \1/.+/_pos=(?P<POS>.+)
 ```
 
@@ -4025,7 +4025,7 @@ Match the body of the branch “`then`” of an `if` statement.
 (^  # capture any body block
                    .*/body/\d+
 |   # capture any orelse block whose length is greater than 1
-    (?<!length=1\n).*/orelse/\d+
+    (?<!_length=1\n).*/orelse/\d+
 )
                 /_type=If
 \n(?:\1.+\n)*?\1/body/1/_pos=(?P<POS>.+)
@@ -4080,7 +4080,7 @@ Match the body of an `elif` clause, which is (or could be rewritten as) an `else
 ##### Specification
 
 ```re
-           ^(.*)/orelse/length=1
+           ^(.*)/orelse/_length=1
 \n(?:\1.+\n)*?\1/orelse/1/_type=If
 \n(?:\1.+\n)*?\1/orelse/1/body/1/_pos=(?P<POS>.+)
 (
@@ -4143,10 +4143,10 @@ Match the body of the possible `else` branch of an `if` statement.
            ^(.*)/_type=If
 \n(?:\1.+\n)*?\1/orelse/
 (   # there is at least two statements in the else branch,
-                        length=\d+(?<![01])
+                        _length=\d+(?<![01])
 \n(?:\1.+\n)*?\1/orelse/1/_pos=(?P<POS>.+)
 |   # or only one, but distinct from If (otherwise, this is an elif)
-                        length=1
+                        _length=1
 \n(?:\1.+\n)*?\1/orelse/1/_type=.+?(?<!If)
 \n(?:\1.+\n)*?\1/orelse/1/_pos=(?P<POS>.+)
 )
@@ -4723,10 +4723,10 @@ Iterate over index numbers of a collection.
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/iter/_type=Call
 \n(?:\1.+\n)*?\1/iter/func/id=range
-\n(?:\1.+\n)*?\1/iter/args/length=1
+\n(?:\1.+\n)*?\1/iter/args/_length=1
 \n(?:\1.+\n)*?\1/iter/args/1/_type=Call
 \n(?:\1.+\n)*?\1/iter/args/1/func/id=len
-\n(?:\1.+\n)*?\1/iter/keywords/length=0
+\n(?:\1.+\n)*?\1/iter/keywords/_length=0
 \n(?:\1.+\n)* \1/.*/_pos=(?P<POS>.+)
 ```
 
@@ -4801,19 +4801,19 @@ A `for` loop with a counter `i` and a nested `for` loop which makes `i` iteratio
 \n(?:\1.+\n)*?\1/target/id=(?P<VAR>.+) # capture iteration variable
 \n(?:\1.+\n)*?\1/iter/_type=Call
 \n(?:\1.+\n)*?\1/iter/func/id=range
-\n(?:\1.+\n)*?\1/iter/args/length=1 # only range(arg1)
+\n(?:\1.+\n)*?\1/iter/args/_length=1 # only range(arg1)
 (   # i goes from 0 to n, and j from 0 to i
 \n(?:\1.+\n)* \1/(?P<_1>(?:body|orelse)/\d+)/_type=For
 \n(?:\1.+\n)*?\1/(?P=_1)                    /iter/_type=Call
 \n(?:\1.+\n)*?\1/(?P=_1)                    /iter/func/id=range
-\n(?:\1.+\n)*?\1/(?P=_1)                    /iter/args/length=1 # only range(arg1)
+\n(?:\1.+\n)*?\1/(?P=_1)                    /iter/args/_length=1 # only range(arg1)
 \n(?:\1.+\n)* \1/(?P=_1)                    /iter/args/1.*/id=(?P=VAR) # match iteration variable
 |   # i goes from 0 to n, and j from i to n
 \n(?:\1.+\n)*?\1/iter/args/1/_hash=(?P<STOP>.+) # capture stop expression
 \n(?:\1.+\n)* \1/(?P<_1>(?:body|orelse)/\d+)/_type=For
 \n(?:\1.+\n)*?\1/(?P=_1)                    /iter/_type=Call
 \n(?:\1.+\n)*?\1/(?P=_1)                    /iter/func/id=range
-\n(?:\1.+\n)*?\1/(?P=_1)                    /iter/args/length=2 # only range(arg1, arg2)
+\n(?:\1.+\n)*?\1/(?P=_1)                    /iter/args/_length=2 # only range(arg1, arg2)
 \n(?:\1.+\n)* \1/(?P=_1)                    /iter/args/1(/.+)*/id=(?P=VAR) # match iteration variable
 \n(?:\1.+\n)* \1/(?P=_1)                    /iter/args/2(/.+)*/_hash=(?P=STOP) # match stop expression
 )
@@ -5579,7 +5579,7 @@ _Remark._: the presence of a decorator `classmethod` or `staticmethod` is unchec
            ^(.*)/_type=Import(From)?
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 (
-\n(?:\1.+\n)*?\1/module='(?P<SUFFIX>.+)'
+\n(?:\1.+\n)*?\1/module=(?!None\n)(?P<SUFFIX>.+)
 |
 (
 \n(?:\1.+\n)*?\1/names/\d+/name=(?P<SUFFIX>.+)
@@ -5624,7 +5624,7 @@ _Remark._: the presence of a decorator `classmethod` or `staticmethod` is unchec
 ```re
            ^(.*)/_type=ImportFrom
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/module='.+'
+\n(?:\1.+\n)*?\1/module=(?!None\n).+
 (
 \n(?:\1.+\n)*?\1/names/\d+/name=(?P<SUFFIX>.+)
 )+
@@ -6491,7 +6491,7 @@ When the RHS of an assignment consists in a binary operation whose left operand 
 ```re
            ^(.*)/_type=Assign
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/assigntargets/length=1
+\n(?:\1.+\n)*?\1/assigntargets/_length=1
 \n(?:\1.+\n)*?\1/assigntargets/1/id=(?P<TARGET>.+)
 \n(?:\1.+\n)*?\1/assignvalue/_type=BinOp
 \n(?:\1.+\n)*?\1/assignvalue/left/id=(?P=TARGET)\b

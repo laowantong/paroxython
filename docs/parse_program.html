@@ -35,7 +35,7 @@ body.gsc-overflow-hidden #sidebar {overflow: visible;}
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L0-L146" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L0-L147" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">from collections import defaultdict
 from os.path import dirname
@@ -47,7 +47,7 @@ from typing import Dict, List, Iterator, Tuple
 import regex  # type: ignore
 
 from .derived_labels_db import DB
-from .flatten_ast import flatten_ast
+from .flatten_ast import flatten_ast, pseudo_hash
 from .user_types import Label, LabelName, Labels, LabelsSpans, Program, Query, Source, Span
 
 __pdoc__ = {&#34;ProgramParser.__call__&#34;: True}
@@ -103,6 +103,7 @@ class ProgramParser:
             tree = ast.parse(program.source)
         except (SyntaxError, ValueError) as exception:
             return [Label(LabelName(f&#34;ast_construction:{type(exception).__name__}&#34;), [])]
+        pseudo_hash.reset()
         self.flat_ast = simplify_negative_literals(flatten_ast(tree))
 
         labels: Labels = []
@@ -227,7 +228,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L46-L125" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L46-L126" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">class ProgramParser:
     def __init__(self, spec_path: Path = DEFAULT_SPEC_PATH) -&gt; None:
@@ -260,6 +261,7 @@ if __name__ == &#34;__main__&#34;:
             tree = ast.parse(program.source)
         except (SyntaxError, ValueError) as exception:
             return [Label(LabelName(f&#34;ast_construction:{type(exception).__name__}&#34;), [])]
+        pseudo_hash.reset()
         self.flat_ast = simplify_negative_literals(flatten_ast(tree))
 
         labels: Labels = []
@@ -313,7 +315,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L64-L125" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L64-L126" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def __call__(self, program: Program, yield_failed_matches: bool = False) -&gt; Labels:
     def try_to_bind(label_name: LabelName, span: Span) -&gt; None:
@@ -331,6 +333,7 @@ if __name__ == &#34;__main__&#34;:
         tree = ast.parse(program.source)
     except (SyntaxError, ValueError) as exception:
         return [Label(LabelName(f&#34;ast_construction:{type(exception).__name__}&#34;), [])]
+    pseudo_hash.reset()
     self.flat_ast = simplify_negative_literals(flatten_ast(tree))
 
     labels: Labels = []

@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.8.3" />
 <title>paroxython.flatten_ast API documentation</title>
-<meta name="description" content="" />
+<meta name="description" content="Return a non-recursive, multiline dump of the AST (with some tweaks) …" />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
 <link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/github.min.css" crossorigin>
@@ -32,12 +32,158 @@ body.gsc-overflow-hidden #sidebar {overflow: visible;}
 <h1 class="title">Module <code>paroxython.flatten_ast</code></h1>
 </header>
 <section id="section-intro">
+<p>Return a non-recursive, multiline dump of the AST (with some tweaks).</p>
+<h2 id="motivation-and-purpose">Motivation and purpose</h2>
+<p><a href="https://en.wikipedia.org/wiki/Static_program_analysis">Static analysis</a> tools like Paroxython
+generally start with the <a href="https://en.wikipedia.org/wiki/Abstract_syntax_tree">AST</a> (abstract syntax
+tree) of the program to analyze. For instance, when the string:</p>
+<pre><code class="python">'print(&quot;hello, world&quot;)'
+</code></pre>
+<p>&hellip; is fed to the function <code>ast3.parse()</code> of the module
+<a href="https://github.com/python/typed_ast"><code>typed_ast</code></a>, the following object is returned:</p>
+<pre><code class="plain">                           Module()
+                              |
+                              | body[0]
+                              |
+                            Expr()
+                              |
+                              | value
+                              |
+                            Call()
+                             / \
+                       func /   \ args[0]
+                           /     \
+Name(id='print', ctx=Load())     Str(s='hello, world', kind='')
+</code></pre>
+<p>The purpose of the function <code><a title="paroxython.flatten_ast.flatten_ast" href="#paroxython.flatten_ast.flatten_ast">flatten_ast()</a></code> is to transform this nested structure into a
+pre-ordered sequence of text lines, each of which consisting in a key-value pair. A key is the
+complete path from the root of the AST to either a node (<em>e.g.</em>, <code>Name()</code>) or a node attribute
+(<em>e.g.</em>, <code>id</code>). The associated value comes after an equals sign (<code>=</code>):</p>
+<pre><code class="plain">/_type=Module
+/body/_length=1
+/body/1/_type=Expr
+/body/1/_pos=1:1-
+/body/1/value/_type=Call
+/body/1/value/_hash=0x00000001
+/body/1/value/_pos=1:1-0-
+/body/1/value/func/_type=Name
+/body/1/value/func/_hash=0x00000002
+/body/1/value/func/_pos=1:1-0-0-
+/body/1/value/func/id=print
+/body/1/value/func/ctx/_type=Load
+/body/1/value/args/_length=1
+/body/1/value/args/1/_type=Str
+/body/1/value/args/1/_hash=0x00000003
+/body/1/value/args/1/_pos=1:1-0-1-1-
+/body/1/value/args/1/s=hello, world
+/body/1/value/args/1/kind=
+/body/1/value/keywords/_length=0
+/type_ignores/_length=0
+</code></pre>
+<p>Obviously, such a representation is quite verbose. But it encapsulates in every single line the
+whole nesting information we need to understand its context. Since the recursion is linearly
+encoded, requesting it does not require recursion any more. This makes <a href="https://en.wikipedia.org/wiki/Regular_expression">regular
+expressions</a> a natural candidate for the request
+language<sup id="fnref:regex-recursion"><a class="footnote-ref" href="#fn:regex-recursion" rel="footnote">1</a></sup>. This is the choice we made for the present version of Paroxython. The
+regular expression patterns are processed in <code>Paroxython.parse_program.py</code> on the basis of the
+definitions listed in
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md"><code>spec.md</code></a>.</p>
+<p>For instance, the following regular expression matches and localizes nested function calls (<em>e.g.</em>,
+<code>foo(bar(42))</code>) without any recursion:</p>
+<pre><code class="re">           ^(.*)                    # Capture the path originating from the root...
+                /_type=Call         #  ... to the nesting call.
+\n(?:\1.+\n)*?\1                    # Skip any number of attributes of this call...
+                /_pos=(?P&lt;POS&gt;.+)   # ... until we find and capture its line number.
+\n(?:\1.+\n)* \1                    # Skip any number of...
+                /args/.*            # ... arguments of this call...
+                        /_type=Call # ... until we find a nested call.
+</code></pre>
+<p>When the first call is found, continuing in the subtree is a simple matter of restricting the search
+to the block of lines that share the same prefix (referred by <code>\1</code>).</p>
+<p>That's the general principle. In the next section, we enumerate the tweaks we make to the generation
+of this text to make it more suitable for the regular expression parsing.</p>
+<h2 id="implementation-details">Implementation details</h2>
+<h3 id="field-reordering">Field reordering</h3>
+<p>Somewhat counterintuitively, in the original AST, several pieces of information pertaining to a
+function signature or decoration are rejected <em>after</em> the body of the function. As a result, we
+lose the interesting property that the line numbers cannot decrease. We fix this by making <code>body</code>
+the last field of a function definition
+(see <a href="https://github.com/laowantong/paroxython/issues/4">issue #4</a>).</p>
+<h3 id="children-numbering">Children numbering</h3>
+<p>A counter is inserted between each node and its children. Starting from 1 makes possible to find
+the last one by matching its number with the (previously captured) length of the list.</p>
+<h3 id="field-disambiguation">Field disambiguation</h3>
+<p>Accross the AST, the same fields are sometimes used in different contexts. To make it easier or
+even possible to detect certain features, their usage is disambiguated by applying the following
+renaming rules:</p>
+<ul>
+<li><code>orelse</code>: used for both loop and conditional <code>else</code> branches. Replace the former with <code>loopelse</code>.</li>
+<li><code>target</code>: used for assignment, comprehension, etc. Replace the former with <code>assigntarget</code>.</li>
+<li><code>targets</code>: used for augmented assignment, deletion, etc. Replace the former with <code>assigntargets</code>.</li>
+<li><code>value</code>: used for assignment (augmented or not), comprehension, etc. Replace the former ones with
+<code>assignvalue</code>.</li>
+</ul>
+<p>Thus, in the output, there is no more need to search for the context of a field in the previous or
+following lines.</p>
+<h3 id="added-fields">Added fields</h3>
+<ul>
+<li><code>_type</code>: stores the name of the node (<em>e.g.</em>, <code>Module</code>, <code>Expr</code>, <code>Call</code>).</li>
+<li><code>_pos</code>: stores the line number (extracted from the attribute <code>lineno</code> of the node, if
+any<sup id="fnref:lineno"><a class="footnote-ref" href="#fn:lineno" rel="footnote">2</a></sup>), followed by a colon <code>:</code>, followed by the path from the root of the AST to this
+node. A path is coded as a sequence of positive integers, hyphen-separated and ended by a hyphen.
+Its fundamental property is: node <span><span class="MathJax_Preview">n_2</span><script type="math/tex">n_2</script></span> is nested within node <span><span class="MathJax_Preview">n_1</span><script type="math/tex">n_1</script></span> iff the path of <span><span class="MathJax_Preview">n_1</span><script type="math/tex">n_1</script></span>
+is a prefix of the path of <span><span class="MathJax_Preview">n_2</span><script type="math/tex">n_2</script></span>.</li>
+<li><code>_hash</code>: see next section.</li>
+</ul>
+<h3 id="expression-decontextualization-and-hashing">Expression decontextualization and hashing</h3>
+<p>In order to detect certain features, such as
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md#feature-swap"><code>swap</code></a>:</p>
+<pre><code class="python">(a[i], a[j]) = (a[j], a[i])
+</code></pre>
+<p>&hellip; we need to recognize a given expression accross its different occurrences. The dump of its AST
+is used for this. For instance, in the following statement:</p>
+<pre><code class="python">a[i] = 42
+</code></pre>
+<p>&hellip; the expression <code>a[i]</code> is dumped as the string:</p>
+<pre><code class="python">&quot;Subscript(value=Name(id='a', ctx=Load()), slice=Index(value=Name(id='i', ctx=Load())), ctx=Store())&quot;
+</code></pre>
+<p>However, in the following statement:</p>
+<pre><code class="python">    return a[i]
+</code></pre>
+<p>&hellip; the same expression <code>a[i]</code> is dumped as the string:</p>
+<pre><code class="python">&quot;Subscript(value=Name(id='a', ctx=Load()), slice=Index(value=Name(id='i', ctx=Load())), ctx=Load())&quot;
+</code></pre>
+<p>As you can see, these two strings are not equal, due to the fact that the dump specifies not only
+<em>which</em> expressions are used, but <em>how</em> they are used: this is the purpose of the field <code>ctx</code>. Once
+this context is removed, both strings become:</p>
+<pre><code class="python">&quot;Subscript(value=Name(id='a'), slice=Index(value=Name(id='i')))&quot;
+</code></pre>
+<p>They can now be represented by the same hash value<sup id="fnref:pseudo-hash"><a class="footnote-ref" href="#fn:pseudo-hash" rel="footnote">3</a></sup>, stored in the added field <code>_hash</code>.</p>
+<div class="footnote">
+<hr>
+<ol>
+<li id="fn:regex-recursion">
+<p>Although nowadays, numerous flavours of regex engines support recursion,
+the complexity of writing, reading and maintaining any pattern using it would quickly go through the
+roof.&#160;<a class="footnote-backref" href="#fnref:regex-recursion" rev="footnote" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:lineno">
+<p>Numerous nodes, <em>e.g.</em> <code>Module</code>, <code>Store</code>, <code>Load</code>, <code>Lt</code>, <code>Add</code>, are not associated with a
+line number.&#160;<a class="footnote-backref" href="#fnref:lineno" rev="footnote" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:pseudo-hash">
+<p>Actually, to avoid dealing with hash randomization in the unit tests, we use a function which
+merely increments a counter and associates it with any newly encountered string.&#160;<a class="footnote-backref" href="#fnref:pseudo-hash" rev="footnote" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L0-L49" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L0-L268" class="git-link">Browse GitHub</a>
 </summary>
-<pre><code class="python">from typed_ast import ast3 as ast
+<pre><code class="python">from functools import lru_cache
+from typed_ast import ast3 as ast
 from typing import Any, Callable
 
 import regex  # type: ignore
@@ -53,35 +199,54 @@ def flatten_ast(
         acc = [f&#34;{prefix}/_type={type(node).__name__}\n&#34;]
         if isinstance(node, ast.expr):
             node_repr = remove_context(&#34;&#34;, ast.dump(node))
-            expr_hash = hex(hash(node_repr) &amp; 0xFFFFFFFF)
-            acc.append(f&#34;{prefix}/_hash={expr_hash}\n&#34;)
+            acc.append(f&#34;{prefix}/_hash={pseudo_hash(node_repr)}\n&#34;)
         if &#34;lineno&#34; in node._attributes:
             acc.append(f&#34;{prefix}/_pos={node.lineno}:{path[2:]}\n&#34;)
         fields = ast.iter_fields(node)
         if isinstance(node, ast.FunctionDef):
-            # reject `body` behind `decorator_list` and `returns`, whose line number is those of `def` clause
+            # make `body` the last item of a `def` clause
             fields = iter(sorted(fields, key=lambda c: c[0] == &#34;body&#34;))
         for (i, (name, x)) in enumerate(fields):
             if name == &#34;orelse&#34; and isinstance(node, (ast.For, ast.While, ast.AsyncFor)):
-                name = &#34;loopelse&#34;  # this makes the &#34;orelse&#34; clause specific to conditionals
+                name = &#34;loopelse&#34;  # make the `orelse` clause specific to conditionals
             elif name == &#34;targets&#34; and isinstance(node, ast.Assign):
-                name = &#34;assigntargets&#34;
+                name = &#34;assigntargets&#34;  # `targets` is also used for `Delete`, etc.
             elif name == &#34;target&#34; and isinstance(node, ast.AugAssign):
-                name = &#34;assigntarget&#34;
+                name = &#34;assigntarget&#34;  # `target` is also used for comprehension, etc.
             elif name == &#34;value&#34; and isinstance(node, (ast.Assign, ast.AugAssign)):
-                name = &#34;assignvalue&#34;
+                name = &#34;assignvalue&#34;  # `value` is also used for comprehension, etc.
             acc.append(flatten_ast(x, f&#34;{prefix}/{name}&#34;, f&#34;{path}{i}-&#34;))
         return &#34;&#34;.join(acc)
     elif isinstance(node, list):
-        acc = [f&#34;{prefix}/length={len(node)}\n&#34;]
-        for (i, x) in enumerate(node, 1):
+        acc = [f&#34;{prefix}/_length={len(node)}\n&#34;]
+        for (i, x) in enumerate(node, 1):  # number the children from 1
             acc.append(flatten_ast(x, f&#34;{prefix}/{i}&#34;, f&#34;{path}{i}-&#34;))
         return &#34;&#34;.join(acc)
-    elif prefix.endswith((&#34;/s&#34;, &#34;/module&#34;)):
-        return f&#34;&#34;&#34;{prefix}={repr(node)}\n&#34;&#34;&#34;
     else:
+        # If the node is a terminal value, dump it unquoted
         return f&#34;&#34;&#34;{prefix}={repr(node).strip(&#34;&#39;&#34;)}\n&#34;&#34;&#34;
 
+
+__pdoc__ = {&#34;PseudoHashFactory.__call__&#34;: True}
+
+
+class PseudoHashFactory:
+    def __init__(self):
+        self.reset()
+
+    def reset(self):
+        self.i = 0
+        self.cache = {}
+
+    def __call__(self, x):
+        if x not in self.cache:
+            self.i += 1
+            self.cache[x] = f&#34;0x{self.i:04x}&#34;
+            # 4.294.967.296 distinct expressions per program ought to be enough for anybody.
+        return self.cache[x]
+
+
+pseudo_hash = PseudoHashFactory()
 
 if __name__ == &#34;__main__&#34;:
     Path = __import__(&#34;pathlib&#34;).Path
@@ -100,11 +265,28 @@ if __name__ == &#34;__main__&#34;:
 <span>def <span class="ident">flatten_ast</span></span>(<span>node: Any, <br>prefix: str = '', <br>path: str = '', <br>remove_context: Callable = &lt;built-in method sub of regex&gt;<br>) ‑> str</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Return a non-recursive, multiline dump of the AST (with some tweaks).</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>node</code></strong> :&ensp;<code>Any</code></dt>
+<dd>The node to traverse recusively (in pre-order). Initially, the whole AST.</dd>
+<dt><strong><code>prefix</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>The prefix of the current line to dump. Defaults to <code>""</code>.</dd>
+<dt><strong><code>path</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>The path of the current node. Defaults to <code>""</code>.</dd>
+<dt><strong><code>remove_context</code></strong> :&ensp;<code>Callable</code>, optional</dt>
+<dd>A function removing the node context encoded in the
+result of <code>ast3.dump()</code>. Defaults to <code>regex.compile(r", ctx=.+?\(\)").sub</code>.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>str</code></dt>
+<dd>A flat representation of the given node.</dd>
+</dl></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L7-L44" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L191-L238" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def flatten_ast(
     node: Any,
@@ -116,39 +298,102 @@ if __name__ == &#34;__main__&#34;:
         acc = [f&#34;{prefix}/_type={type(node).__name__}\n&#34;]
         if isinstance(node, ast.expr):
             node_repr = remove_context(&#34;&#34;, ast.dump(node))
-            expr_hash = hex(hash(node_repr) &amp; 0xFFFFFFFF)
-            acc.append(f&#34;{prefix}/_hash={expr_hash}\n&#34;)
+            acc.append(f&#34;{prefix}/_hash={pseudo_hash(node_repr)}\n&#34;)
         if &#34;lineno&#34; in node._attributes:
             acc.append(f&#34;{prefix}/_pos={node.lineno}:{path[2:]}\n&#34;)
         fields = ast.iter_fields(node)
         if isinstance(node, ast.FunctionDef):
-            # reject `body` behind `decorator_list` and `returns`, whose line number is those of `def` clause
+            # make `body` the last item of a `def` clause
             fields = iter(sorted(fields, key=lambda c: c[0] == &#34;body&#34;))
         for (i, (name, x)) in enumerate(fields):
             if name == &#34;orelse&#34; and isinstance(node, (ast.For, ast.While, ast.AsyncFor)):
-                name = &#34;loopelse&#34;  # this makes the &#34;orelse&#34; clause specific to conditionals
+                name = &#34;loopelse&#34;  # make the `orelse` clause specific to conditionals
             elif name == &#34;targets&#34; and isinstance(node, ast.Assign):
-                name = &#34;assigntargets&#34;
+                name = &#34;assigntargets&#34;  # `targets` is also used for `Delete`, etc.
             elif name == &#34;target&#34; and isinstance(node, ast.AugAssign):
-                name = &#34;assigntarget&#34;
+                name = &#34;assigntarget&#34;  # `target` is also used for comprehension, etc.
             elif name == &#34;value&#34; and isinstance(node, (ast.Assign, ast.AugAssign)):
-                name = &#34;assignvalue&#34;
+                name = &#34;assignvalue&#34;  # `value` is also used for comprehension, etc.
             acc.append(flatten_ast(x, f&#34;{prefix}/{name}&#34;, f&#34;{path}{i}-&#34;))
         return &#34;&#34;.join(acc)
     elif isinstance(node, list):
-        acc = [f&#34;{prefix}/length={len(node)}\n&#34;]
-        for (i, x) in enumerate(node, 1):
+        acc = [f&#34;{prefix}/_length={len(node)}\n&#34;]
+        for (i, x) in enumerate(node, 1):  # number the children from 1
             acc.append(flatten_ast(x, f&#34;{prefix}/{i}&#34;, f&#34;{path}{i}-&#34;))
         return &#34;&#34;.join(acc)
-    elif prefix.endswith((&#34;/s&#34;, &#34;/module&#34;)):
-        return f&#34;&#34;&#34;{prefix}={repr(node)}\n&#34;&#34;&#34;
     else:
+        # If the node is a terminal value, dump it unquoted
         return f&#34;&#34;&#34;{prefix}={repr(node).strip(&#34;&#39;&#34;)}\n&#34;&#34;&#34;</code></pre>
 </details>
 </dd>
 </dl>
 </section>
 <section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="paroxython.flatten_ast.PseudoHashFactory"><code class="flex name class">
+<span>class <span class="ident">PseudoHashFactory</span></span>
+</code></dt>
+<dd>
+<div class="desc"><p>A factory that creates a deterministic replacement for the <code>hash()</code> builtin function.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L244-L261" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">class PseudoHashFactory:
+    def __init__(self):
+        self.reset()
+
+    def reset(self):
+        self.i = 0
+        self.cache = {}
+
+    def __call__(self, x):
+        if x not in self.cache:
+            self.i += 1
+            self.cache[x] = f&#34;0x{self.i:04x}&#34;
+            # 4.294.967.296 distinct expressions per program ought to be enough for anybody.
+        return self.cache[x]</code></pre>
+</details>
+<h3>Methods</h3>
+<dl>
+<dt id="paroxython.flatten_ast.PseudoHashFactory.reset"><code class="name flex">
+<span>def <span class="ident">reset</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Restart the global counter and empties the cache.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L250-L253" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">def reset(self):
+    self.i = 0
+    self.cache = {}</code></pre>
+</details>
+</dd>
+<dt id="paroxython.flatten_ast.PseudoHashFactory.__call__"><code class="name flex">
+<span>def <span class="ident">__call__</span></span>(<span>self, x)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return an 4-digits hexadecimal identifier for the given immutable value.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L255-L261" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">def __call__(self, x):
+    if x not in self.cache:
+        self.i += 1
+        self.cache[x] = f&#34;0x{self.i:04x}&#34;
+        # 4.294.967.296 distinct expressions per program ought to be enough for anybody.
+    return self.cache[x]</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
 </section>
 </article>
 <nav id="sidebar">
@@ -163,7 +408,17 @@ data-gaCategoryParameter="paroxython.flatten_ast">
 </div>
 <h1>Index</h1>
 <div class="toc">
-<ul></ul>
+<ul>
+<li><a href="#motivation-and-purpose">Motivation and purpose</a></li>
+<li><a href="#implementation-details">Implementation details</a><ul>
+<li><a href="#field-reordering">Field reordering</a></li>
+<li><a href="#children-numbering">Children numbering</a></li>
+<li><a href="#field-disambiguation">Field disambiguation</a></li>
+<li><a href="#added-fields">Added fields</a></li>
+<li><a href="#expression-decontextualization-and-hashing">Expression decontextualization and hashing</a></li>
+</ul>
+</li>
+</ul>
 </div>
 <ul id="index">
 <li><h3>Super-module</h3>
@@ -174,6 +429,17 @@ data-gaCategoryParameter="paroxython.flatten_ast">
 <li><h3><a href="#header-functions">Functions</a></h3>
 <ul class="">
 <li><code><a title="paroxython.flatten_ast.flatten_ast" href="#paroxython.flatten_ast.flatten_ast">flatten_ast</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="paroxython.flatten_ast.PseudoHashFactory" href="#paroxython.flatten_ast.PseudoHashFactory">PseudoHashFactory</a></code></h4>
+<ul class="">
+<li><code><a title="paroxython.flatten_ast.PseudoHashFactory.reset" href="#paroxython.flatten_ast.PseudoHashFactory.reset">reset</a></code></li>
+<li><code><a title="paroxython.flatten_ast.PseudoHashFactory.__call__" href="#paroxython.flatten_ast.PseudoHashFactory.__call__">__call__</a></code></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

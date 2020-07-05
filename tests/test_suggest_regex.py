@@ -10,19 +10,19 @@ sources = r"""
 /body/0/_pos=1
 /body/0/iter/_type='Call'
 /body/0/iter/func/id='range'
-/body/0/iter/args/length=1
+/body/0/iter/args/_length=1
 /body/0/iter/args/0/_type='Call'
 /body/0/iter/args/0/func/id='len'
-/body/0/iter/keywords/length=0
+/body/0/iter/keywords/_length=0
 ---
            ^(.*)/_type='For'
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/iter/_type='Call'
 \n(?:\1.+\n)*?\1/iter/func/id='range'
-\n(?:\1.+\n)*?\1/iter/args/length=1
+\n(?:\1.+\n)*?\1/iter/args/_length=1
 \n(?:\1.+\n)*?\1/iter/args/0/_type='Call'
 \n(?:\1.+\n)*?\1/iter/args/0/func/id='len'
-\n(?:\1.+\n)*?\1/iter/keywords/length=0
+\n(?:\1.+\n)*?\1/iter/keywords/_length=0
 >>>
 
 <<< Capture and match a given value among ("name", "id", "_hash", "_ids")

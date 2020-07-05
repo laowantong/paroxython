@@ -8,7 +8,7 @@ from typing import Dict, List, Iterator, Tuple
 import regex  # type: ignore
 
 from .derived_labels_db import DB
-from .flatten_ast import flatten_ast
+from .flatten_ast import flatten_ast, pseudo_hash
 from .user_types import Label, LabelName, Labels, LabelsSpans, Program, Query, Source, Span
 
 __pdoc__ = {"ProgramParser.__call__": True}
@@ -81,6 +81,7 @@ class ProgramParser:
             tree = ast.parse(program.source)
         except (SyntaxError, ValueError) as exception:
             return [Label(LabelName(f"ast_construction:{type(exception).__name__}"), [])]
+        pseudo_hash.reset()
         self.flat_ast = simplify_negative_literals(flatten_ast(tree))
 
         labels: Labels = []
