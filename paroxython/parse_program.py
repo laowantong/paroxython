@@ -1,3 +1,5 @@
+r"""TODO. Compile the given feature specifications, and search them in a Program."""
+
 from collections import defaultdict
 from os.path import dirname
 from pathlib import Path
@@ -11,7 +13,11 @@ from .derived_labels_db import DB
 from .flatten_ast import flatten_ast
 from .user_types import Label, LabelName, Labels, LabelsSpans, Program, Query, Source, Span
 
-__pdoc__ = {"ProgramParser.__call__": True}
+__pdoc__ = {
+    "ProgramParser": "",
+    "ProgramParser.__init__": True,
+    "ProgramParser.__call__": True,
+}
 
 
 def find_all_features(
@@ -45,8 +51,6 @@ DEFAULT_SPEC_PATH = Path(dirname(__file__)) / "resources" / "spec.md"
 
 
 class ProgramParser:
-    """Compile the given feature specifications, and search them in a Program."""
-
     def __init__(self, spec_path: Path = DEFAULT_SPEC_PATH) -> None:
         """Compile the features to search."""
         self.spec_path = spec_path

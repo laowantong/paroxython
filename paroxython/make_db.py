@@ -1,3 +1,5 @@
+"""TODO. Collect all infos pertaining to the programs, the labels and the taxa."""
+
 import json
 import sqlite3
 from collections import defaultdict
@@ -25,10 +27,20 @@ from .user_types import (
     TaxaPoorSpans,
 )
 
+__pdoc__ = {
+    "Database": "",
+    "Database.__init__": True,
+}
+
 
 class Database:
-    def __init__(self, directory: Path, ignore_timestamps=True, *args, **kwargs) -> None:
-        """Collect all infos pertaining to the programs, the labels and the taxa."""
+    def __init__(self, directory: Path, ignore_timestamps: bool = True, *args, **kwargs) -> None:
+        """[summary]
+
+        Args:
+            directory (Path): [description]
+            ignore_timestamps (bool, optional): [description]. Defaults to True.
+        """
 
         self.default_json_db_path = directory.parent / f"{directory.name}_db.json"
         self.default_sqlite_db_path = directory.parent / f"{directory.name}_db.sqlite"
@@ -57,12 +69,12 @@ class Database:
             self.programs_infos[program.name] = {
                 "timestamp": get_timestamp(directory / program.name),
                 "source": program.source,
-                "labels": prepared(program.labels),
-                "taxa": prepared(program.taxa),
+                "labels": prepared_labels(program.labels),
+                "taxa": prepared_taxa(program.taxa),
             }
 
     def get_json(self) -> str:
-        """Dump the data to JSON, reduce each list of spans to one line."""
+        """Dump the data to JSON, and reduce each list of spans to one line."""
         data = {
             "programs": self.programs_infos,
             "labels": dict(sorted(self.labels.items())),
@@ -167,35 +179,75 @@ class Database:
         connexion.close()
 
 
-# fmt: off
-@overload
-def prepared(tags: Labels) -> LabelsPoorSpans:
-    ...  # pragma: no cover
-@overload
-def prepared(tags: Taxa) -> TaxaPoorSpans:
-    ...  # pragma: no cover
-def prepared(tags):
-    """Prepare the spans for serialization.
+def prepared_labels(labels: Labels) -> LabelsPoorSpans:
+    """Prepare the labels for serialization.
 
     Args:
-        tags (Labels|Taxa): The tags or taxa to be serialized.
+        labels (Labels): The list of labels to be serialized. Each label consists in a name and a
+            **list** of spans. Each span is a triple starting with a start and an end.
 
     Returns:
-        LabelPoorSpans|TaxaPoorSpans:
-            A dictionary mapping tag names with the list of their spans, transformed into simple
-            lists of two integers.
+        LabelPoorSpans:
+            A dictionary mapping the label names with the list of their spans, transformed into
+            simple lists of two integers.
 
-    .. note::
-          Overloaded to support two different combinations of argument types: Mypy can check that
-          passing `Labels` (resp. `Taxa`) to the function returns `LabelsPoorSpans` (resp.
-          `TaxaPoorSpans`). Browse GitHub to see the actual overloaded functions.
-          See [the documentation](https://docs.python.org/3/library/typing.html#typing.overload).
+    Example:
+        >>> prepared_labels([
+        ...     ("name_1", [
+        ...             Span(start=1, end=2, path="foo"),
+        ...             Span(start=1, end=2, path="bar"),  # note the duplicate
+        ...         ]),
+        ...     ("name_2", [
+        ...             Span(start=2, end=4, path="fizz"),
+        ...             Span(start=6, end=7, path="buzz"),
+        ...         ]),
+        ...     ("name_3", [Span(start=5, end=5, path="foobar")]),
+        ... ])
+        {
+            "name_1": [(1, 2)],  # deduplicated
+            "name_2": [(2, 4), (6, 7)],
+            "name_3": [(5, 5)],
+        }
     """
-    result: Union[LabelsPoorSpans, TaxaPoorSpans] = {}
-    for (tag_name, spans) in tags:
-        result[tag_name] = [span[:2] for span in sorted(set(spans))]
+    result: LabelsPoorSpans = {}
+    for (label_name, spans) in labels:
+        result[label_name] = [span[:2] for span in sorted(set(spans))]
     return result
-# fmt: on
+
+
+def prepared_taxa(taxa: Taxa) -> TaxaPoorSpans:
+    """Prepare the taxa for serialization.
+
+    Args:
+        taxa (Taxa): The list of taxa to be serialized. Each taxon consists in a name and a
+            **bag** of spans. Each span is a triple starting with a start and an end.
+
+    Returns:
+        TaxonPoorSpans:
+            A dictionary mapping the taxon names with the list of their spans, transformed into
+            simple lists of two integers.
+
+    Example:
+        >>> prepared_taxa([
+        ...     ("name_1", Counter({
+        ...             Span(start=1, end=2, path="foo"): 2,  # note the duplicate
+        ...         })),
+        ...     ("name_2", Counter({
+        ...             Span(start=2, end=4, path="fizz"): 1,
+        ...             Span(start=6, end=7, path="buzz"): 1,
+        ...         })),
+        ...     ("name_3", Counter({Span(start=5, end=5, path="foobar"): 1}))
+        ... ])
+        {
+            "name_1": [(1, 2)],  # deduplicated
+            "name_2": [(2, 4), (6, 7)],
+            "name_3": [(5, 5)],
+        }
+    """
+    result: TaxaPoorSpans = {}
+    for (taxon_name, spans) in taxa:
+        result[taxon_name] = [span[:2] for span in sorted(spans)]
+    return result
 
 
 def collect_labels(programs: Programs) -> LabelInfos:
