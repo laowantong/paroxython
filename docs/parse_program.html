@@ -35,7 +35,7 @@ body.gsc-overflow-hidden #sidebar {overflow: visible;}
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L0-L148" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L0-L147" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">from collections import defaultdict
 from os.path import dirname
@@ -56,6 +56,10 @@ __pdoc__ = {&#34;ProgramParser.__call__&#34;: True}
 def find_all_features(
     text: str,
     find_all: Callable = regex.compile(
+        r&#34;(?ms)&#34;
+        r&#34;^\#{4}\s+Feature\s+`(.+?)`&#34;  # capture the label&#39;s name
+        r&#34;.+?\#{5}\s+Specification&#34;  # ensure the sequel is in the Specification section
+        r&#34;.+?```(.*?)\n+(.*?)\n```&#34;  # capture the language and the request
     ).findall,
 ) -&gt; Iterator[Tuple[LabelName, str, str]]:
     return find_all(text)
@@ -188,20 +192,24 @@ if __name__ == &#34;__main__&#34;:
 <dd>
 <p>An iterator yielding all matching triples of the form:</p>
 <ol>
-<li><code>LabelName</code>,</li>
+<li>label name pattern (<em>e.g.</em>, <code>"try"</code> or <code>"try_raise|try_except"</code>),</li>
 <li>language (currently, <code>"re"</code> or <code>"sql"</code>),</li>
-<li>request (currently, regular expression pattern or SQL query).</li>
+<li>request (respectively, a regular expression pattern or an SQL query).</li>
 </ol>
 </dd>
 </dl></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L17-L42" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L17-L41" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def find_all_features(
     text: str,
     find_all: Callable = regex.compile(
+        r&#34;(?ms)&#34;
+        r&#34;^\#{4}\s+Feature\s+`(.+?)`&#34;  # capture the label&#39;s name
+        r&#34;.+?\#{5}\s+Specification&#34;  # ensure the sequel is in the Specification section
+        r&#34;.+?```(.*?)\n+(.*?)\n```&#34;  # capture the language and the request
     ).findall,
 ) -&gt; Iterator[Tuple[LabelName, str, str]]:
     return find_all(text)</code></pre>
@@ -222,7 +230,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L48-L127" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L47-L126" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">class ProgramParser:
     def __init__(self, spec_path: Path = DEFAULT_SPEC_PATH) -&gt; None:
@@ -308,7 +316,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L66-L127" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L65-L126" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def __call__(self, program: Program, yield_failed_matches: bool = False) -&gt; Labels:
     def try_to_bind(label_name: LabelName, span: Span) -&gt; None:

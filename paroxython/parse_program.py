@@ -17,11 +17,10 @@ __pdoc__ = {"ProgramParser.__call__": True}
 def find_all_features(
     text: str,
     find_all: Callable = regex.compile(
-        r"""(?msx)
-        ^\#{4}\s+Feature\s+`(.+?)` # capture the label's name
-        .+?\#{5}\s+Specification # ensure the sequel is in the Specification section
-        .+?```(.*?)\n+(.*?)\n``` # capture the language and the request
-    """
+        r"(?ms)"
+        r"^\#{4}\s+Feature\s+`(.+?)`"  # capture the label's name
+        r".+?\#{5}\s+Specification"  # ensure the sequel is in the Specification section
+        r".+?```(.*?)\n+(.*?)\n```"  # capture the language and the request
     ).findall,
 ) -> Iterator[Tuple[LabelName, str, str]]:
     """Iterate on all triples defining an algorithmic feature in the given specification text.
@@ -35,9 +34,9 @@ def find_all_features(
     Returns:
         Iterator[Tuple[LabelName, str, str]]: An iterator yielding all matching triples of the form:
 
-            1. `LabelName`,
+            1. label name pattern (_e.g._, `"try"` or `"try_raise|try_except"`),
             2. language (currently, `"re"` or `"sql"`),
-            3. request (currently, regular expression pattern or SQL query).
+            3. request (respectively, a regular expression pattern or an SQL query).
     """
     return find_all(text)
 
