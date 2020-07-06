@@ -235,7 +235,7 @@ given at the start of the section.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L0-L428" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L0-L429" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">from collections import Counter, defaultdict
 from pathlib import Path
@@ -435,7 +435,7 @@ a bag (multiset) of its spans.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L311-L412" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L312-L413" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def deduplicated_taxa(taxa: Taxa) -&gt; Taxa:
     if len(taxa) &lt; 2:
@@ -472,7 +472,7 @@ a bag (multiset) of its spans.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L183-L308" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L183-L309" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">class Taxonomy:
     def __init__(
@@ -543,7 +543,8 @@ letters, digits, underscores, hyphens, colons and <strong>dots</strong>.</p>
 that's a problem, it is always possible to force the interpretation of a pattern
 as non-literal by enclosing it in parentheses.</p>
 </div>
-<p>Defaults to <code>regex.compile(r"[\w:.]+").fullmatch</code>.</p>
+<p><a href="index.html#default-argument-trick">Not to be explicitly provided.</a>
+Defaults to <code>regex.compile(r"[\w:.]+").fullmatch</code>.</p>
 </dd>
 </dl>
 <h2 id="description">Description</h2>
@@ -572,7 +573,7 @@ As an associative list, it only allows O(n) lookups a given label pattern.</li>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L184-L246" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L184-L247" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def __init__(
     self,
@@ -640,7 +641,7 @@ same label more than one time
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L249-L286" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L250-L287" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">@lru_cache(maxsize=None)
 def get_taxon_name_list(self, label_name: LabelName) -&gt; TaxonNames:
@@ -674,7 +675,7 @@ returns them deduplicated (cf. <code><a title="paroxython.map_taxonomy.deduplica
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L288-L308" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L289-L309" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def to_taxa(self, labels: Labels) -&gt; Taxa:
     acc: TaxaSpans = defaultdict(Counter)

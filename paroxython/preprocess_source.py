@@ -45,11 +45,6 @@ Some tolerances exist for the syntax:
 - `+` can be omitted.
 - `...` (three dots) can be written `…` (HORIZONTAL ELLIPSIS, U+2026).
 - `# paroxython:` is neither space- nor case-sensitive.
-
-## Implementation note
-Several functions or methods declare a compiled and bound regex pattern as an optional argument. It
-is not meant to be provided by the caller. Its default value will be used systematically, with the
-benefit of being evaluated only once.
 """
 
 from collections import defaultdict
@@ -163,14 +158,20 @@ class Cleanup:
     def suppress_first_comments(
         source: str, sub: Callable = regex.compile(r"\A(#.*\n)*").sub
     ) -> str:
-        """Replace all comments placed on the first lines of the source code."""
+        """Replace all comments placed on the first lines of the source code.
+
+        Argument `sub` [not to be explicitly provided.](index.html#default-argument-trick)
+        """
         return sub("", source)
 
     @staticmethod
     def suppress_main_guard(
         source: str, sub: Callable = regex.compile(r"(?ms)^if +__name__ *== *.__main__. *:.+").sub
     ) -> str:
-        """Suppress `if __name__ == '__main__'` part."""
+        """Suppress `if __name__ == '__main__'` part.
+
+        Argument `sub` [not to be explicitly provided.](index.html#default-argument-trick)
+        """
         return sub("", source)
 
     @staticmethod
@@ -185,19 +186,27 @@ class Cleanup:
 
         For instance, if `HINT_COMMENT` is `"# paroxython:"` (its default value), the actual search
         pattern will be `r"(?i)#\s*paroxython\s*:\s*"`.
+
+        Argument `subn` [not to be explicitly provided.](index.html#default-argument-trick)
         """
         return subn(f"{HINT_COMMENT} ", source)
 
     @staticmethod
     def suppress_blank_lines(source: str, sub: Callable = regex.compile(r"\s*\n").sub) -> str:
-        """Suppress all empty or blank lines in the given source."""
+        """Suppress all empty or blank lines in the given source.
+
+        Argument `sub` [not to be explicitly provided.](index.html#default-argument-trick)
+        """
         return sub("\n", source)
 
     @staticmethod
     def suppress_useless_pass_statements(
         source: str, sub: Callable = regex.compile(r"(?m)^( *)pass\n\1(?!\s)").sub,
     ) -> str:
-        """Suppress all `pass` statements followed by a line with a same level of indentation."""
+        """Suppress all `pass` statements followed by a line with a same level of indentation.
+
+        Argument `sub` [not to be explicitly provided.](index.html#default-argument-trick)
+        """
         return sub(r"\1", source)
 
 
@@ -220,6 +229,8 @@ def centrifugate_hints(
 
         All examples above automatically extracted from
         [test_centrifugate_hints.py](https://github.com/laowantong/paroxython/blob/master/tests/test_centrifugate_hints.py).
+
+        Argument `match_isolated_hints` [not to be explicitly provided.](index.html#default-argument-trick)
     """
     lines = []
     hints: Set[str] = set()
@@ -286,7 +297,7 @@ def collect_hints(
     Args:
         source (Source): [description]
         match_label (Callable, optional): A function matching a label composed of alphanumeric
-            characters and colons.
+            characters and colons. [Not to be explicitly provided.](index.html#default-argument-trick)
 
     Raises:
         ValueError: Raised in various cases of malformed input.
@@ -351,5 +362,8 @@ def collect_hints(
 def remove_hints(
     source: Source, sub_hints: Callable = regex.compile(fr"\s*{HINT_COMMENT} .*").sub,
 ) -> Source:
-    """Once they are collected, remove all Paroxython hints from the given source."""
+    """Once they are collected, remove all Paroxython hints from the given source.
+
+    Argument `sub_hints` [not to be explicitly provided.](index.html#default-argument-trick)
+    """
     return Source(sub_hints("", source).strip())

@@ -1,13 +1,15 @@
 import shutil
 import subprocess
+from os.path import dirname
 from pathlib import Path
 
 import regex  # type: ignore
 
 import context
-
-from paroxython.goodies import add_line_numbers
 from paroxython.cli.cli_tag import main as tag_program
+from paroxython.goodies import add_line_numbers
+
+PATH = f"{Path(dirname(__file__)).parent}"
 
 
 def update_readme_example():
@@ -95,6 +97,7 @@ def resolve_new_types():
         source = source.replace("paroxython.user_types.", "")
         source = source.replace("typing_extensions.", "")
         source = source.replace("_regex.Pattern object", "regex")
+        source = source.replace(PATH, ".")
         path.write_text(source)
     path = Path("docs/index.html")
     source = path.read_text()

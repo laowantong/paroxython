@@ -157,11 +157,12 @@ class DB:
         Args:
             query (Query): The SQL specification of a certain feature, as defined in `spec.md`.
             prerequisites (Callable, optional): A function taking an SQL query, and returning the
-                table names referred to in the FROM clause. Not to be explicitly provided.
+                table names referred to in the FROM clause.
+                [Not to be explicitly provided.](index.html#default-argument-trick)
                 Defaults to `regex.compile(r"(?m)\b(?:FROM|JOIN) t_(\w+)").findall`.
             create_subtable (str, optional): The SQL query creating a subtable from a label prefix.
-                Not to be explicitly provided. Defaults to
-                `"CREATE TABLE t_{0} AS SELECT * FROM t WHERE name_prefix = '{0}'"`.
+                Not to be explicitly provided.
+                Defaults to `"CREATE TABLE t_{0} AS SELECT * FROM t WHERE name_prefix = '{0}'"`.
 
         Returns:
             Labels: The additional labels found by the given SQL query.

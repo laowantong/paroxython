@@ -2,41 +2,43 @@ from collections import defaultdict
 from os.path import dirname
 from pathlib import Path
 from typed_ast import ast3 as ast
-from typing import Dict, List, Iterator, Tuple
+from typing import Callable, Dict, List, Iterator, Tuple
 
 
 import regex  # type: ignore
 
 from .derived_labels_db import DB
-from .flatten_ast import flatten_ast, pseudo_hash
+from .flatten_ast import flatten_ast
 from .user_types import Label, LabelName, Labels, LabelsSpans, Program, Query, Source, Span
 
 __pdoc__ = {"ProgramParser.__call__": True}
 
 
-def simplify_negative_literals(
-    flat_ast: str,
-    sub=regex.compile(
-        r"""(?mx)
-                    ^(.*?)/_type=UnaryOp
-            (\n(?:.+\n)*?)\1/op/_type=USub
-             \n(?:.+\n)*? \1/operand/n=(.+)
-        """
-    ).sub,
-) -> str:
-    return sub(r"\1/_type=Num\2\1/n=-\3", flat_ast)
-
-
 def find_all_features(
     text: str,
-    find_all=regex.compile(
+    find_all: Callable = regex.compile(
         r"""(?msx)
-        ^\#{4}\s+Feature\s+`(.+?)` # capture the label's pattern
-        .+?\#{5}\s+Specification # ensure the next pattern is in the Specification section
-        .+?```(.*?)\n+(.*?)\n``` # capture the language and the pattern
+        ^\#{4}\s+Feature\s+`(.+?)` # capture the label's name
+        .+?\#{5}\s+Specification # ensure the sequel is in the Specification section
+        .+?```(.*?)\n+(.*?)\n``` # capture the language and the request
     """
     ).findall,
 ) -> Iterator[Tuple[LabelName, str, str]]:
+    """Iterate on all triples defining an algorithmic feature in the given specification text.
+
+    Args:
+        text (str): Normally, the contents of
+            [`spec.md`](https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md).
+        find_all (Callable, optional): A function finding all feature-defining triples of the text.
+            [Not to be explicitly provided.](index.html#default-argument-trick)
+
+    Returns:
+        Iterator[Tuple[LabelName, str, str]]: An iterator yielding all matching triples of the form:
+
+            1. `LabelName`,
+            2. language (currently, `"re"` or `"sql"`),
+            3. request (currently, regular expression pattern or SQL query).
+    """
     return find_all(text)
 
 
@@ -81,8 +83,7 @@ class ProgramParser:
             tree = ast.parse(program.source)
         except (SyntaxError, ValueError) as exception:
             return [Label(LabelName(f"ast_construction:{type(exception).__name__}"), [])]
-        pseudo_hash.reset()
-        self.flat_ast = simplify_negative_literals(flatten_ast(tree))
+        self.flat_ast = flatten_ast(tree)
 
         labels: Labels = []
         for (label_name, rex) in self.features.items():

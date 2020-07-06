@@ -225,6 +225,17 @@ print("hello, world")
 /type_ignores/_length=0
 >>>
 
+<<< Example of negative literal
+-42
+---
+/body/1/_type=Expr
+/body/1/_pos=1:1-
+/body/1/value/_type=Num
+/body/1/value/_hash=0x0001
+/body/1/value/_pos=1:1-0-
+/body/1/value/n=-42
+>>>
+
 <<< Example of complete program (full output)
 def fibonacci(n):
     result = []

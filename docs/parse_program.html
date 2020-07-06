@@ -35,35 +35,27 @@ body.gsc-overflow-hidden #sidebar {overflow: visible;}
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L0-L147" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L0-L148" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">from collections import defaultdict
 from os.path import dirname
 from pathlib import Path
 from typed_ast import ast3 as ast
-from typing import Dict, List, Iterator, Tuple
+from typing import Callable, Dict, List, Iterator, Tuple
 
 
 import regex  # type: ignore
 
 from .derived_labels_db import DB
-from .flatten_ast import flatten_ast, pseudo_hash
+from .flatten_ast import flatten_ast
 from .user_types import Label, LabelName, Labels, LabelsSpans, Program, Query, Source, Span
 
 __pdoc__ = {&#34;ProgramParser.__call__&#34;: True}
 
 
-def simplify_negative_literals(
-    flat_ast: str,
-    sub=regex.compile(
-    ).sub,
-) -&gt; str:
-    return sub(r&#34;\1/_type=Num\2\1/n=-\3&#34;, flat_ast)
-
-
 def find_all_features(
     text: str,
-    find_all=regex.compile(
+    find_all: Callable = regex.compile(
     ).findall,
 ) -&gt; Iterator[Tuple[LabelName, str, str]]:
     return find_all(text)
@@ -103,8 +95,7 @@ class ProgramParser:
             tree = ast.parse(program.source)
         except (SyntaxError, ValueError) as exception:
             return [Label(LabelName(f&#34;ast_construction:{type(exception).__name__}&#34;), [])]
-        pseudo_hash.reset()
-        self.flat_ast = simplify_negative_literals(flatten_ast(tree))
+        self.flat_ast = flatten_ast(tree)
 
         labels: Labels = []
         for (label_name, rex) in self.features.items():
@@ -177,37 +168,40 @@ if __name__ == &#34;__main__&#34;:
 <section>
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
-<dt id="paroxython.parse_program.simplify_negative_literals"><code class="name flex">
-<span>def <span class="ident">simplify_negative_literals</span></span>(<span>flat_ast: str, sub=&lt;built-in method sub of regex&gt;<br>) ‑> str</span>
-</code></dt>
-<dd>
-<div class="desc"></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L17-L27" class="git-link">Browse GitHub</a>
-</summary>
-<pre><code class="python">def simplify_negative_literals(
-    flat_ast: str,
-    sub=regex.compile(
-    ).sub,
-) -&gt; str:
-    return sub(r&#34;\1/_type=Num\2\1/n=-\3&#34;, flat_ast)</code></pre>
-</details>
-</dd>
 <dt id="paroxython.parse_program.find_all_features"><code class="name flex">
-<span>def <span class="ident">find_all_features</span></span>(<span>text: str, find_all=&lt;built-in method findall of regex&gt;<br>) ‑> Iterator[Tuple[LabelName, str, str]]</span>
+<span>def <span class="ident">find_all_features</span></span>(<span>text: str, <br>find_all: Callable = &lt;built-in method findall of regex&gt;<br>) ‑> Iterator[Tuple[LabelName, str, str]]</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Iterate on all triples defining an algorithmic feature in the given specification text.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>text</code></strong> :&ensp;<code>str</code></dt>
+<dd>Normally, the contents of
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md"><code>spec.md</code></a>.</dd>
+<dt><strong><code>find_all</code></strong> :&ensp;<code>Callable</code>, optional</dt>
+<dd>A function finding all feature-defining triples of the text.
+<a href="index.html#default-argument-trick">Not to be explicitly provided.</a></dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>Iterator[Tuple[LabelName, str, str]]</code></dt>
+<dd>
+<p>An iterator yielding all matching triples of the form:</p>
+<ol>
+<li><code>LabelName</code>,</li>
+<li>language (currently, <code>"re"</code> or <code>"sql"</code>),</li>
+<li>request (currently, regular expression pattern or SQL query).</li>
+</ol>
+</dd>
+</dl></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L30-L40" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L17-L42" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def find_all_features(
     text: str,
-    find_all=regex.compile(
+    find_all: Callable = regex.compile(
     ).findall,
 ) -&gt; Iterator[Tuple[LabelName, str, str]]:
     return find_all(text)</code></pre>
@@ -220,7 +214,7 @@ if __name__ == &#34;__main__&#34;:
 <dl>
 <dt id="paroxython.parse_program.ProgramParser"><code class="flex name class">
 <span>class <span class="ident">ProgramParser</span></span>
-<span>(</span><span>spec_path: pathlib.Path = PosixPath('/Users/aristide/Dropbox/git/paroxython/paroxython/resources/spec.md'))</span>
+<span>(</span><span>spec_path: pathlib.Path = PosixPath('./paroxython/resources/spec.md'))</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Compile the given feature specifications, and search them in a Program.</p>
@@ -228,7 +222,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L46-L126" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L48-L127" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">class ProgramParser:
     def __init__(self, spec_path: Path = DEFAULT_SPEC_PATH) -&gt; None:
@@ -261,8 +255,7 @@ if __name__ == &#34;__main__&#34;:
             tree = ast.parse(program.source)
         except (SyntaxError, ValueError) as exception:
             return [Label(LabelName(f&#34;ast_construction:{type(exception).__name__}&#34;), [])]
-        pseudo_hash.reset()
-        self.flat_ast = simplify_negative_literals(flatten_ast(tree))
+        self.flat_ast = flatten_ast(tree)
 
         labels: Labels = []
         for (label_name, rex) in self.features.items():
@@ -315,7 +308,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L64-L126" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L66-L127" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def __call__(self, program: Program, yield_failed_matches: bool = False) -&gt; Labels:
     def try_to_bind(label_name: LabelName, span: Span) -&gt; None:
@@ -333,8 +326,7 @@ if __name__ == &#34;__main__&#34;:
         tree = ast.parse(program.source)
     except (SyntaxError, ValueError) as exception:
         return [Label(LabelName(f&#34;ast_construction:{type(exception).__name__}&#34;), [])]
-    pseudo_hash.reset()
-    self.flat_ast = simplify_negative_literals(flatten_ast(tree))
+    self.flat_ast = flatten_ast(tree)
 
     labels: Labels = []
     for (label_name, rex) in self.features.items():
@@ -405,7 +397,6 @@ data-gaCategoryParameter="paroxython.parse_program">
 </li>
 <li><h3><a href="#header-functions">Functions</a></h3>
 <ul class="">
-<li><code><a title="paroxython.parse_program.simplify_negative_literals" href="#paroxython.parse_program.simplify_negative_literals">simplify_negative_literals</a></code></li>
 <li><code><a title="paroxython.parse_program.find_all_features" href="#paroxython.parse_program.find_all_features">find_all_features</a></code></li>
 </ul>
 </li>

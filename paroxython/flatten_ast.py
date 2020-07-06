@@ -63,7 +63,7 @@ whole nesting information we need to understand its context. Since the recursion
 encoded, requesting it does not require recursion any more. This makes [regular
 expressions](https://en.wikipedia.org/wiki/Regular_expression) a natural candidate for the request
 language[^regex-recursion]. This is the choice we made for the present version of Paroxython. The
-regular expression patterns are processed in `Paroxython.parse_program.py` on the basis of the
+regular expression patterns are processed in `paroxython.parse_program` on the basis of the
 definitions listed in
 [`spec.md`](https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md).
 
@@ -88,7 +88,7 @@ When the first call is found, continuing in the subtree is a simple matter of re
 to the block of lines that share the same prefix (referred by `\1`).
 
 That's the general principle. In the next section, we enumerate the tweaks we make to the generation
-of this text to make it more suitable for the regular expression parsing.
+of this text to make it more suitable for regular expression parsing.
 
 ## Implementation details
 
@@ -141,8 +141,8 @@ In order to detect certain features, such as
 ```python
 (a[i], a[j]) = (a[j], a[i])
 ```
-... we need to recognize a given expression accross its different occurrences. The dump of its AST
-is used for this. For instance, in the following statement:
+... we need to recognize a given expression accross its different occurrences. The function
+`typed_ast.ast3.dump()` is used for this. For instance, in the following statement:
 
 ```python
 a[i] = 42
@@ -179,29 +179,78 @@ They can now be represented by the same hash value[^pseudo-hash], stored in the 
 [^pseudo-hash]:
     Actually, to avoid dealing with hash randomization in the unit tests, we use a function which
     merely increments a counter and associates it with any newly encountered string.
+
+### Negative literal simplification
+
+Normally, the AST structure of a numeric literal depends on its sign. For instance, 42 is parsed
+as:
+```python
+Expr(value=Num(n=42))
+```
+... while -42 is parsed as:
+
+```python
+Expr(value=UnaryOp(op=USub(), operand=Num(n=42)))
+```
+
+To unify the further treatment of numbers, the function `simplify_negative_literals` post-processes
+the generated flat representation to transform this kind of output:
+
+```plain
+/body/1/_type=Expr
+/body/1/_pos=1:1-
+/body/1/value/_type=UnaryOp
+/body/1/value/_hash=0x0001
+/body/1/value/_pos=1:1-0-
+/body/1/value/op/_type=USub
+/body/1/value/operand/_type=Num
+/body/1/value/operand/_hash=0x0002
+/body/1/value/operand/_pos=1:1-0-1-
+/body/1/value/operand/n=42
+```
+
+into this one:
+
+```plain
+/body/1/_type=Expr
+/body/1/_pos=1:1-
+/body/1/value/_type=Num
+/body/1/value/_hash=0x0001
+/body/1/value/_pos=1:1-0-
+/body/1/value/n=-42
+```
 """
 
-from functools import lru_cache
 from typed_ast import ast3 as ast
 from typing import Any, Callable
 
 import regex  # type: ignore
 
 
-def flatten_ast(
+def flatten_ast(tree) -> str:
+    r"""Return a non-recursive, multiline dump of the AST (with some tweaks)."""
+    pseudo_hash.reset()
+    flat_ast = flatten_node(tree)
+    flat_ast = simplify_negative_literals(flat_ast)
+    return flat_ast
+
+
+def flatten_node(
     node: Any,
     prefix: str = "",
     path: str = "",
     remove_context: Callable = regex.compile(r", ctx=.+?\(\)").sub,
 ) -> str:
-    r"""Return a non-recursive, multiline dump of the AST (with some tweaks).
+    r"""Traverse recursively (in pre-order) the given AST node and flatten its subtree.
 
     Args:
-        node (Any): The node to traverse recusively (in pre-order). Initially, the whole AST.
+        node (Any): The node to traverse. Initially, the whole AST.
         prefix (str, optional): The prefix of the current line to dump. Defaults to `""`.
         path (str, optional): The path of the current node. Defaults to `""`.
         remove_context (Callable, optional): A function removing the node context encoded in the
-            result of `ast3.dump()`. Defaults to `regex.compile(r", ctx=.+?\(\)").sub`.
+            result of `ast3.dump()`.
+            [Not to be explicitly provided.](index.html#default-argument-trick)
+            Defaults to `regex.compile(r", ctx=.+?\(\)").sub`.
 
     Returns:
         str: A flat representation of the given node.
@@ -226,16 +275,33 @@ def flatten_ast(
                 name = "assigntarget"  # `target` is also used for comprehension, etc.
             elif name == "value" and isinstance(node, (ast.Assign, ast.AugAssign)):
                 name = "assignvalue"  # `value` is also used for comprehension, etc.
-            acc.append(flatten_ast(x, f"{prefix}/{name}", f"{path}{i}-"))
+            acc.append(flatten_node(x, f"{prefix}/{name}", f"{path}{i}-"))
         return "".join(acc)
     elif isinstance(node, list):
         acc = [f"{prefix}/_length={len(node)}\n"]
         for (i, x) in enumerate(node, 1):  # number the children from 1
-            acc.append(flatten_ast(x, f"{prefix}/{i}", f"{path}{i}-"))
+            acc.append(flatten_node(x, f"{prefix}/{i}", f"{path}{i}-"))
         return "".join(acc)
     else:
         # If the node is a terminal value, dump it unquoted
         return f"""{prefix}={repr(node).strip("'")}\n"""
+
+
+def simplify_negative_literals(
+    flat_ast: str,
+    sub: Callable = regex.compile(
+        r"""(?mx)
+                    ^(.*?)/_type=UnaryOp
+            (\n(?:.+\n)*?)\1/op/_type=USub
+             \n(?:.+\n)*? \1/operand/n=(.+)
+        """
+    ).sub,
+) -> str:
+    """Apply [negative literal simplification](#negative-literal-simplification) on a given flat ast.
+
+    Argument `sub` [not to be explicitly provided.](index.html#default-argument-trick)
+    """
+    return sub(r"\1/_type=Num\2\1/n=-\3", flat_ast)
 
 
 __pdoc__ = {"PseudoHashFactory.__call__": True}
@@ -253,7 +319,7 @@ class PseudoHashFactory:
         self.cache = {}
 
     def __call__(self, x):
-        """Return an 4-digits hexadecimal identifier for the given immutable value."""
+        """Return a 4-digits hexadecimal identifier for the given immutable value."""
         if x not in self.cache:
             self.i += 1
             self.cache[x] = f"0x{self.i:04x}"

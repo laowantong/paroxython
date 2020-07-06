@@ -91,7 +91,7 @@ reason, several queries produce an incorrect result.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/derived_labels_db.py#L0-L221" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/derived_labels_db.py#L0-L222" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">import sqlite3
 from collections import defaultdict
@@ -198,7 +198,7 @@ class DB:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/derived_labels_db.py#L91-L222" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/derived_labels_db.py#L91-L223" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">class DB:
 
@@ -408,12 +408,13 @@ explicitly provided. Defaults to <code>f"CREATE TABLE t ({','.join(columns)})"</
 <dd>The SQL specification of a certain feature, as defined in <code>spec.md</code>.</dd>
 <dt><strong><code>prerequisites</code></strong> :&ensp;<code>Callable</code>, optional</dt>
 <dd>A function taking an SQL query, and returning the
-table names referred to in the FROM clause. Not to be explicitly provided.
+table names referred to in the FROM clause.
+<a href="index.html#default-argument-trick">Not to be explicitly provided.</a>
 Defaults to <code>regex.compile(r"(?m)\b(?:FROM|JOIN) t_(\w+)").findall</code>.</dd>
 <dt><strong><code>create_subtable</code></strong> :&ensp;<code>str</code>, optional</dt>
 <dd>The SQL query creating a subtable from a label prefix.
-Not to be explicitly provided. Defaults to
-<code>"CREATE TABLE t_{0} AS SELECT * FROM t WHERE name_prefix = '{0}'"</code>.</dd>
+Not to be explicitly provided.
+Defaults to <code>"CREATE TABLE t_{0} AS SELECT * FROM t WHERE name_prefix = '{0}'"</code>.</dd>
 </dl>
 <h2 id="returns">Returns</h2>
 <dl>
@@ -426,7 +427,7 @@ as a prerequisite.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/derived_labels_db.py#L149-L185" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/derived_labels_db.py#L149-L186" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def read(
     self,
@@ -466,7 +467,7 @@ len(columns))})"</code>.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/derived_labels_db.py#L187-L206" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/derived_labels_db.py#L188-L207" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def update(
     self,
@@ -490,7 +491,7 @@ len(columns))})"</code>.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/derived_labels_db.py#L208-L212" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/derived_labels_db.py#L209-L213" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def delete(self) -&gt; None:
     self.c.execute(&#34;DROP TABLE t&#34;)

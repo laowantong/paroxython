@@ -37,6 +37,14 @@ Browse [user_types.py](https://github.com/laowantong/paroxython/blob/master/paro
 - Tag:
 - Taxon:
 - Taxonomy:
+
+## Default argument trick
+
+Several functions or methods declare a compiled and bound regex pattern as an optional argument
+(see `paroxython.preprocess_source.Cleanup.suppress_first_comments` for an example). Such arguments
+are not meant to be provided by the caller. Their default value will be used systematically, with
+the benefit of being evaluated only once. This is arguably better for both performance and
+encapsulation. More details on [Stack Overflow](https://stackoverflow.com/a/30688691/173003).
 """
 
 

@@ -85,7 +85,7 @@ whole nesting information we need to understand its context. Since the recursion
 encoded, requesting it does not require recursion any more. This makes <a href="https://en.wikipedia.org/wiki/Regular_expression">regular
 expressions</a> a natural candidate for the request
 language<sup id="fnref:regex-recursion"><a class="footnote-ref" href="#fn:regex-recursion" rel="footnote">1</a></sup>. This is the choice we made for the present version of Paroxython. The
-regular expression patterns are processed in <code>Paroxython.parse_program.py</code> on the basis of the
+regular expression patterns are processed in <code><a title="paroxython.parse_program" href="parse_program.html">paroxython.parse_program</a></code> on the basis of the
 definitions listed in
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md"><code>spec.md</code></a>.</p>
 <p>For instance, the following regular expression matches and localizes nested function calls (<em>e.g.</em>,
@@ -101,7 +101,7 @@ definitions listed in
 <p>When the first call is found, continuing in the subtree is a simple matter of restricting the search
 to the block of lines that share the same prefix (referred by <code>\1</code>).</p>
 <p>That's the general principle. In the next section, we enumerate the tweaks we make to the generation
-of this text to make it more suitable for the regular expression parsing.</p>
+of this text to make it more suitable for regular expression parsing.</p>
 <h2 id="implementation-details">Implementation details</h2>
 <h3 id="field-reordering">Field reordering</h3>
 <p>Somewhat counterintuitively, in the original AST, several pieces of information pertaining to a
@@ -140,8 +140,8 @@ is a prefix of the path of <span><span class="MathJax_Preview">n_2</span><script
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md#feature-swap"><code>swap</code></a>:</p>
 <pre><code class="python">(a[i], a[j]) = (a[j], a[i])
 </code></pre>
-<p>&hellip; we need to recognize a given expression accross its different occurrences. The dump of its AST
-is used for this. For instance, in the following statement:</p>
+<p>&hellip; we need to recognize a given expression accross its different occurrences. The function
+<code>typed_ast.ast3.dump()</code> is used for this. For instance, in the following statement:</p>
 <pre><code class="python">a[i] = 42
 </code></pre>
 <p>&hellip; the expression <code>a[i]</code> is dumped as the string:</p>
@@ -159,6 +159,35 @@ this context is removed, both strings become:</p>
 <pre><code class="python">&quot;Subscript(value=Name(id='a'), slice=Index(value=Name(id='i')))&quot;
 </code></pre>
 <p>They can now be represented by the same hash value<sup id="fnref:pseudo-hash"><a class="footnote-ref" href="#fn:pseudo-hash" rel="footnote">3</a></sup>, stored in the added field <code>_hash</code>.</p>
+<h3 id="negative-literal-simplification">Negative literal simplification</h3>
+<p>Normally, the AST structure of a numeric literal depends on its sign. For instance, 42 is parsed
+as:</p>
+<pre><code class="python">Expr(value=Num(n=42))
+</code></pre>
+<p>&hellip; while -42 is parsed as:</p>
+<pre><code class="python">Expr(value=UnaryOp(op=USub(), operand=Num(n=42)))
+</code></pre>
+<p>To unify the further treatment of numbers, the function <code><a title="paroxython.flatten_ast.simplify_negative_literals" href="#paroxython.flatten_ast.simplify_negative_literals">simplify_negative_literals()</a></code> post-processes
+the generated flat representation to transform this kind of output:</p>
+<pre><code class="plain">/body/1/_type=Expr
+/body/1/_pos=1:1-
+/body/1/value/_type=UnaryOp
+/body/1/value/_hash=0x0001
+/body/1/value/_pos=1:1-0-
+/body/1/value/op/_type=USub
+/body/1/value/operand/_type=Num
+/body/1/value/operand/_hash=0x0002
+/body/1/value/operand/_pos=1:1-0-1-
+/body/1/value/operand/n=42
+</code></pre>
+<p>into this one:</p>
+<pre><code class="plain">/body/1/_type=Expr
+/body/1/_pos=1:1-
+/body/1/value/_type=Num
+/body/1/value/_hash=0x0001
+/body/1/value/_pos=1:1-0-
+/body/1/value/n=-42
+</code></pre>
 <div class="footnote">
 <hr>
 <ol>
@@ -180,16 +209,22 @@ merely increments a counter and associates it with any newly encountered string.
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L0-L268" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L0-L334" class="git-link">Browse GitHub</a>
 </summary>
-<pre><code class="python">from functools import lru_cache
-from typed_ast import ast3 as ast
+<pre><code class="python">from typed_ast import ast3 as ast
 from typing import Any, Callable
 
 import regex  # type: ignore
 
 
-def flatten_ast(
+def flatten_ast(tree) -&gt; str:
+    pseudo_hash.reset()
+    flat_ast = flatten_node(tree)
+    flat_ast = simplify_negative_literals(flat_ast)
+    return flat_ast
+
+
+def flatten_node(
     node: Any,
     prefix: str = &#34;&#34;,
     path: str = &#34;&#34;,
@@ -215,16 +250,24 @@ def flatten_ast(
                 name = &#34;assigntarget&#34;  # `target` is also used for comprehension, etc.
             elif name == &#34;value&#34; and isinstance(node, (ast.Assign, ast.AugAssign)):
                 name = &#34;assignvalue&#34;  # `value` is also used for comprehension, etc.
-            acc.append(flatten_ast(x, f&#34;{prefix}/{name}&#34;, f&#34;{path}{i}-&#34;))
+            acc.append(flatten_node(x, f&#34;{prefix}/{name}&#34;, f&#34;{path}{i}-&#34;))
         return &#34;&#34;.join(acc)
     elif isinstance(node, list):
         acc = [f&#34;{prefix}/_length={len(node)}\n&#34;]
         for (i, x) in enumerate(node, 1):  # number the children from 1
-            acc.append(flatten_ast(x, f&#34;{prefix}/{i}&#34;, f&#34;{path}{i}-&#34;))
+            acc.append(flatten_node(x, f&#34;{prefix}/{i}&#34;, f&#34;{path}{i}-&#34;))
         return &#34;&#34;.join(acc)
     else:
         # If the node is a terminal value, dump it unquoted
         return f&#34;&#34;&#34;{prefix}={repr(node).strip(&#34;&#39;&#34;)}\n&#34;&#34;&#34;
+
+
+def simplify_negative_literals(
+    flat_ast: str,
+    sub: Callable = regex.compile(
+    ).sub,
+) -&gt; str:
+    return sub(r&#34;\1/_type=Num\2\1/n=-\3&#34;, flat_ast)
 
 
 __pdoc__ = {&#34;PseudoHashFactory.__call__&#34;: True}
@@ -262,21 +305,40 @@ if __name__ == &#34;__main__&#34;:
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
 <dt id="paroxython.flatten_ast.flatten_ast"><code class="name flex">
-<span>def <span class="ident">flatten_ast</span></span>(<span>node: Any, <br>prefix: str = '', <br>path: str = '', <br>remove_context: Callable = &lt;built-in method sub of regex&gt;<br>) ‑> str</span>
+<span>def <span class="ident">flatten_ast</span></span>(<span>tree) ‑> str</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Return a non-recursive, multiline dump of the AST (with some tweaks).</p>
+<div class="desc"><p>Return a non-recursive, multiline dump of the AST (with some tweaks).</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L230-L235" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">def flatten_ast(tree) -&gt; str:
+    pseudo_hash.reset()
+    flat_ast = flatten_node(tree)
+    flat_ast = simplify_negative_literals(flat_ast)
+    return flat_ast</code></pre>
+</details>
+</dd>
+<dt id="paroxython.flatten_ast.flatten_node"><code class="name flex">
+<span>def <span class="ident">flatten_node</span></span>(<span>node: Any, <br>prefix: str = '', <br>path: str = '', <br>remove_context: Callable = &lt;built-in method sub of regex&gt;<br>) ‑> str</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Traverse recursively (in pre-order) the given AST node and flatten its subtree.</p>
 <h2 id="args">Args</h2>
 <dl>
 <dt><strong><code>node</code></strong> :&ensp;<code>Any</code></dt>
-<dd>The node to traverse recusively (in pre-order). Initially, the whole AST.</dd>
+<dd>The node to traverse. Initially, the whole AST.</dd>
 <dt><strong><code>prefix</code></strong> :&ensp;<code>str</code>, optional</dt>
 <dd>The prefix of the current line to dump. Defaults to <code>""</code>.</dd>
 <dt><strong><code>path</code></strong> :&ensp;<code>str</code>, optional</dt>
 <dd>The path of the current node. Defaults to <code>""</code>.</dd>
 <dt><strong><code>remove_context</code></strong> :&ensp;<code>Callable</code>, optional</dt>
 <dd>A function removing the node context encoded in the
-result of <code>ast3.dump()</code>. Defaults to <code>regex.compile(r", ctx=.+?\(\)").sub</code>.</dd>
+result of <code>ast3.dump()</code>.
+<a href="index.html#default-argument-trick">Not to be explicitly provided.</a>
+Defaults to <code>regex.compile(r", ctx=.+?\(\)").sub</code>.</dd>
 </dl>
 <h2 id="returns">Returns</h2>
 <dl>
@@ -286,9 +348,9 @@ result of <code>ast3.dump()</code>. Defaults to <code>regex.compile(r", ctx=.+?\
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L191-L238" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L238-L287" class="git-link">Browse GitHub</a>
 </summary>
-<pre><code class="python">def flatten_ast(
+<pre><code class="python">def flatten_node(
     node: Any,
     prefix: str = &#34;&#34;,
     path: str = &#34;&#34;,
@@ -314,16 +376,35 @@ result of <code>ast3.dump()</code>. Defaults to <code>regex.compile(r", ctx=.+?\
                 name = &#34;assigntarget&#34;  # `target` is also used for comprehension, etc.
             elif name == &#34;value&#34; and isinstance(node, (ast.Assign, ast.AugAssign)):
                 name = &#34;assignvalue&#34;  # `value` is also used for comprehension, etc.
-            acc.append(flatten_ast(x, f&#34;{prefix}/{name}&#34;, f&#34;{path}{i}-&#34;))
+            acc.append(flatten_node(x, f&#34;{prefix}/{name}&#34;, f&#34;{path}{i}-&#34;))
         return &#34;&#34;.join(acc)
     elif isinstance(node, list):
         acc = [f&#34;{prefix}/_length={len(node)}\n&#34;]
         for (i, x) in enumerate(node, 1):  # number the children from 1
-            acc.append(flatten_ast(x, f&#34;{prefix}/{i}&#34;, f&#34;{path}{i}-&#34;))
+            acc.append(flatten_node(x, f&#34;{prefix}/{i}&#34;, f&#34;{path}{i}-&#34;))
         return &#34;&#34;.join(acc)
     else:
         # If the node is a terminal value, dump it unquoted
         return f&#34;&#34;&#34;{prefix}={repr(node).strip(&#34;&#39;&#34;)}\n&#34;&#34;&#34;</code></pre>
+</details>
+</dd>
+<dt id="paroxython.flatten_ast.simplify_negative_literals"><code class="name flex">
+<span>def <span class="ident">simplify_negative_literals</span></span>(<span>flat_ast: str, <br>sub: Callable = &lt;built-in method sub of regex&gt;<br>) ‑> str</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Apply <a href="#negative-literal-simplification">negative literal simplification</a> on a given flat ast.</p>
+<p>Argument <code>sub</code> <a href="index.html#default-argument-trick">not to be explicitly provided.</a></p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L290-L304" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">def simplify_negative_literals(
+    flat_ast: str,
+    sub: Callable = regex.compile(
+    ).sub,
+) -&gt; str:
+    return sub(r&#34;\1/_type=Num\2\1/n=-\3&#34;, flat_ast)</code></pre>
 </details>
 </dd>
 </dl>
@@ -339,7 +420,7 @@ result of <code>ast3.dump()</code>. Defaults to <code>regex.compile(r", ctx=.+?\
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L244-L261" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L310-L327" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">class PseudoHashFactory:
     def __init__(self):
@@ -366,7 +447,7 @@ result of <code>ast3.dump()</code>. Defaults to <code>regex.compile(r", ctx=.+?\
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L250-L253" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L316-L319" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def reset(self):
     self.i = 0
@@ -377,11 +458,11 @@ result of <code>ast3.dump()</code>. Defaults to <code>regex.compile(r", ctx=.+?\
 <span>def <span class="ident">__call__</span></span>(<span>self, x)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Return an 4-digits hexadecimal identifier for the given immutable value.</p></div>
+<div class="desc"><p>Return a 4-digits hexadecimal identifier for the given immutable value.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L255-L261" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L321-L327" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def __call__(self, x):
     if x not in self.cache:
@@ -416,6 +497,7 @@ data-gaCategoryParameter="paroxython.flatten_ast">
 <li><a href="#field-disambiguation">Field disambiguation</a></li>
 <li><a href="#added-fields">Added fields</a></li>
 <li><a href="#expression-decontextualization-and-hashing">Expression decontextualization and hashing</a></li>
+<li><a href="#negative-literal-simplification">Negative literal simplification</a></li>
 </ul>
 </li>
 </ul>
@@ -429,6 +511,8 @@ data-gaCategoryParameter="paroxython.flatten_ast">
 <li><h3><a href="#header-functions">Functions</a></h3>
 <ul class="">
 <li><code><a title="paroxython.flatten_ast.flatten_ast" href="#paroxython.flatten_ast.flatten_ast">flatten_ast</a></code></li>
+<li><code><a title="paroxython.flatten_ast.flatten_node" href="#paroxython.flatten_ast.flatten_node">flatten_node</a></code></li>
+<li><code><a title="paroxython.flatten_ast.simplify_negative_literals" href="#paroxython.flatten_ast.simplify_negative_literals">simplify_negative_literals</a></code></li>
 </ul>
 </li>
 <li><h3><a href="#header-classes">Classes</a></h3>
