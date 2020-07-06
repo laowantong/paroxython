@@ -36,9 +36,9 @@ body.gsc-overflow-hidden #sidebar {overflow: visible;}
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/normalize_predicate.py#L0-L67" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/normalize_predicate.py#L0-L82" class="git-link">Browse GitHub</a>
 </summary>
-<pre><code class="python">from typing import Tuple
+<pre><code class="python">from typing import Callable, Tuple
 
 import regex  # type: ignore
 
@@ -47,29 +47,34 @@ from .goodies import print_warning
 from .user_types import Predicate
 
 
-def normalize_predicate(predicate: str) -&gt; Tuple[Predicate, bool]:
+def normalize_predicate(
+    predicate: str,
+    search_not_1: Callable = regex.compile(r&#34;not\s+&#34;).search,
+    search_not_2: Callable = regex.compile(r&#34;\s+not&#34;).search,
+    sub_is: Callable = regex.compile(r&#34; is\b|\bis &#34;).sub,
+    sub_forbidden_chars: Callable = regex.compile(r&#34;[^xy&lt;=≤]&#34;).sub,
+    sub_identity: Callable = regex.compile(r&#34;^(x=y|y=x)$&#34;).sub,
+    sub_one_x: Callable = regex.compile(r&#34;^([^x]*)x([^x]*)$&#34;).sub,
+    sub_one_y: Callable = regex.compile(r&#34;^([^y]*)y([^y]*)$&#34;).sub,
+) -&gt; Tuple[Predicate, bool]:
     predicate = predicate.lower().strip()
     negated = True
     if predicate.startswith(&#34;!&#34;):
         predicate = predicate[1:]
-    elif regex.search(r&#34;not\s+&#34;, predicate):
+    elif search_not_1(predicate):
         predicate = predicate.replace(&#34;not &#34;, &#34;&#34;)
-    elif regex.search(r&#34;\s+not&#34;, predicate):
+    elif search_not_2(predicate):
         predicate = predicate.replace(&#34; not&#34;, &#34;&#34;)
     else:
         negated = False
     original = predicate = predicate.strip()
-    predicate = regex.sub(r&#34; is\b|\bis &#34;, &#34;&#34;, predicate)
+    predicate = sub_is(&#34;&#34;, predicate) # Suppress &#34;is&#34; when it is followed or preceded by a space.
     if predicate not in compare_spans:
-        # Convert usual comparison operators
-        predicate = predicate.replace(&#34;&lt;=&#34;, &#34;≤&#34;).replace(&#34;==&#34;, &#34;=&#34;)
-        # Ignore all other characters
-        predicate = regex.sub(r&#34;[^xy&lt;=≤]&#34;, &#34;&#34;, predicate)
-        # Treat the special case of identity
-        predicate = regex.sub(r&#34;^(x=y|y=)$&#34;, &#34;x=y≤x=y&#34;, predicate)
-        # If there is only one x (resp. y), expand it into x≤x (resp. y≤y)
-        predicate = regex.sub(r&#34;^([^x]*)x([^x]*)$&#34;, r&#34;\1x≤x\2&#34;, predicate)
-        predicate = regex.sub(r&#34;^([^y]*)y([^y]*)$&#34;, r&#34;\1y≤y\2&#34;, predicate)
+        predicate = predicate.replace(&#34;&lt;=&#34;, &#34;≤&#34;).replace(&#34;==&#34;, &#34;=&#34;)  # Convert usual operators.
+        predicate = sub_forbidden_chars(&#34;&#34;, predicate)  # Ignore all other characters.
+        predicate = sub_identity(&#34;x=y≤x=y&#34;, predicate)  # Treat the special case of identity.
+        predicate = sub_one_x(r&#34;\1x≤x\2&#34;, predicate)  # If there is only one x, expand it into x≤x.
+        predicate = sub_one_y(r&#34;\1y≤y\2&#34;, predicate)  # If there is only one y, expand it into y≤y.
         if original != predicate:  # pragma: no cover
             print_warning(f&#34;predicate &#39;{original}&#39; normalized into &#39;{predicate}&#39;.&#34;)
         if predicate not in compare_spans:
@@ -85,7 +90,7 @@ def normalize_predicate(predicate: str) -&gt; Tuple[Predicate, bool]:
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
 <dt id="paroxython.normalize_predicate.normalize_predicate"><code class="name flex">
-<span>def <span class="ident">normalize_predicate</span></span>(<span>predicate: str) ‑> Tuple[Callable[[int, int], bool], bool]</span>
+<span>def <span class="ident">normalize_predicate</span></span>(<span>predicate: str, <br>search_not_1: Callable = &lt;built-in method search of regex&gt;, <br>search_not_2: Callable = &lt;built-in method search of regex&gt;, <br>sub_is: Callable = &lt;built-in method sub of regex&gt;, <br>sub_forbidden_chars: Callable = &lt;built-in method sub of regex&gt;, <br>sub_identity: Callable = &lt;built-in method sub of regex&gt;, <br>sub_one_x: Callable = &lt;built-in method sub of regex&gt;, <br>sub_one_y: Callable = &lt;built-in method sub of regex&gt;<br>) ‑> Tuple[Callable[[int, int], bool], bool]</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Ensure that the given predicate is correct or can be salvaged.</p>
@@ -113,7 +118,23 @@ on GitHub.</p>
 <dl>
 <dt><strong><code>predicate</code></strong> :&ensp;<code>str</code></dt>
 <dd>Plain string to be interpreted as a predicate.</dd>
+<dt><strong><code>search_not_1</code></strong> :&ensp;<code>Callable</code>, optional</dt>
+<dd>Function searching <code>"not "</code>.</dd>
+<dt><strong><code>search_not_2</code></strong> :&ensp;<code>Callable</code>, optional</dt>
+<dd>Function searching <code>" not"</code>.</dd>
+<dt><strong><code>sub_is</code></strong> :&ensp;<code>Callable</code>, optional</dt>
+<dd>Function replacing <code>" is"</code> or <code>"is "</code>.</dd>
+<dt><strong><code>sub_forbidden_chars</code></strong> :&ensp;<code>Callable</code>, optional</dt>
+<dd>Function replacing all characters not in <code>"xy&lt;=≤"</code>.</dd>
+<dt><strong><code>sub_identity</code></strong> :&ensp;<code>Callable</code>, optional</dt>
+<dd>Function replacing <code>"x=y"</code> or <code>"y=x"</code>.</dd>
+<dt><strong><code>sub_one_x</code></strong> :&ensp;<code>Callable</code>, optional</dt>
+<dd>Function replacing isolated<code>"x"</code>.</dd>
+<dt><strong><code>sub_one_y</code></strong> :&ensp;<code>Callable</code>, optional</dt>
+<dd>Function replacing isolated<code>"y"</code>.</dd>
 </dl>
+<h2 id="note">Note</h2>
+<p><a href="index.html#default-argument-trick">No default argument to be explicitly provided.</a></p>
 <h2 id="raises">Raises</h2>
 <dl>
 <dt><code>ValueError</code></dt>
@@ -129,31 +150,36 @@ the result of this predicate must be negated.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/normalize_predicate.py#L12-L68" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/normalize_predicate.py#L12-L83" class="git-link">Browse GitHub</a>
 </summary>
-<pre><code class="python">def normalize_predicate(predicate: str) -&gt; Tuple[Predicate, bool]:
+<pre><code class="python">def normalize_predicate(
+    predicate: str,
+    search_not_1: Callable = regex.compile(r&#34;not\s+&#34;).search,
+    search_not_2: Callable = regex.compile(r&#34;\s+not&#34;).search,
+    sub_is: Callable = regex.compile(r&#34; is\b|\bis &#34;).sub,
+    sub_forbidden_chars: Callable = regex.compile(r&#34;[^xy&lt;=≤]&#34;).sub,
+    sub_identity: Callable = regex.compile(r&#34;^(x=y|y=x)$&#34;).sub,
+    sub_one_x: Callable = regex.compile(r&#34;^([^x]*)x([^x]*)$&#34;).sub,
+    sub_one_y: Callable = regex.compile(r&#34;^([^y]*)y([^y]*)$&#34;).sub,
+) -&gt; Tuple[Predicate, bool]:
     predicate = predicate.lower().strip()
     negated = True
     if predicate.startswith(&#34;!&#34;):
         predicate = predicate[1:]
-    elif regex.search(r&#34;not\s+&#34;, predicate):
+    elif search_not_1(predicate):
         predicate = predicate.replace(&#34;not &#34;, &#34;&#34;)
-    elif regex.search(r&#34;\s+not&#34;, predicate):
+    elif search_not_2(predicate):
         predicate = predicate.replace(&#34; not&#34;, &#34;&#34;)
     else:
         negated = False
     original = predicate = predicate.strip()
-    predicate = regex.sub(r&#34; is\b|\bis &#34;, &#34;&#34;, predicate)
+    predicate = sub_is(&#34;&#34;, predicate) # Suppress &#34;is&#34; when it is followed or preceded by a space.
     if predicate not in compare_spans:
-        # Convert usual comparison operators
-        predicate = predicate.replace(&#34;&lt;=&#34;, &#34;≤&#34;).replace(&#34;==&#34;, &#34;=&#34;)
-        # Ignore all other characters
-        predicate = regex.sub(r&#34;[^xy&lt;=≤]&#34;, &#34;&#34;, predicate)
-        # Treat the special case of identity
-        predicate = regex.sub(r&#34;^(x=y|y=)$&#34;, &#34;x=y≤x=y&#34;, predicate)
-        # If there is only one x (resp. y), expand it into x≤x (resp. y≤y)
-        predicate = regex.sub(r&#34;^([^x]*)x([^x]*)$&#34;, r&#34;\1x≤x\2&#34;, predicate)
-        predicate = regex.sub(r&#34;^([^y]*)y([^y]*)$&#34;, r&#34;\1y≤y\2&#34;, predicate)
+        predicate = predicate.replace(&#34;&lt;=&#34;, &#34;≤&#34;).replace(&#34;==&#34;, &#34;=&#34;)  # Convert usual operators.
+        predicate = sub_forbidden_chars(&#34;&#34;, predicate)  # Ignore all other characters.
+        predicate = sub_identity(&#34;x=y≤x=y&#34;, predicate)  # Treat the special case of identity.
+        predicate = sub_one_x(r&#34;\1x≤x\2&#34;, predicate)  # If there is only one x, expand it into x≤x.
+        predicate = sub_one_y(r&#34;\1y≤y\2&#34;, predicate)  # If there is only one y, expand it into y≤y.
         if original != predicate:  # pragma: no cover
             print_warning(f&#34;predicate &#39;{original}&#39; normalized into &#39;{predicate}&#39;.&#34;)
         if predicate not in compare_spans:

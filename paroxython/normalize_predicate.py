@@ -1,6 +1,6 @@
 """Process an input string to interpret it as a known predicate."""
 
-from typing import Tuple
+from typing import Callable, Tuple
 
 import regex  # type: ignore
 
@@ -9,7 +9,16 @@ from .goodies import print_warning
 from .user_types import Predicate
 
 
-def normalize_predicate(predicate: str) -> Tuple[Predicate, bool]:
+def normalize_predicate(
+    predicate: str,
+    search_not_1: Callable = regex.compile(r"not\s+").search,
+    search_not_2: Callable = regex.compile(r"\s+not").search,
+    sub_is: Callable = regex.compile(r" is\b|\bis ").sub,
+    sub_forbidden_chars: Callable = regex.compile(r"[^xy<=≤]").sub,
+    sub_identity: Callable = regex.compile(r"^(x=y|y=x)$").sub,
+    sub_one_x: Callable = regex.compile(r"^([^x]*)x([^x]*)$").sub,
+    sub_one_y: Callable = regex.compile(r"^([^y]*)y([^y]*)$").sub,
+) -> Tuple[Predicate, bool]:
     """Ensure that the given predicate is correct or can be salvaged.
 
     Description:
@@ -30,6 +39,16 @@ def normalize_predicate(predicate: str) -> Tuple[Predicate, bool]:
 
     Args:
         predicate (str): Plain string to be interpreted as a predicate.
+        search_not_1 (Callable, optional): Function searching `"not "`.
+        search_not_2 (Callable, optional): Function searching `" not"`.
+        sub_is (Callable, optional): Function replacing `" is"` or `"is "`.
+        sub_forbidden_chars (Callable, optional): Function replacing all characters not in `"xy<=≤"`.
+        sub_identity (Callable, optional): Function replacing `"x=y"` or `"y=x"`.
+        sub_one_x (Callable, optional): Function replacing isolated`"x"`.
+        sub_one_y (Callable, optional): Function replacing isolated`"y"`.
+
+    Note:
+        [No default argument to be explicitly provided.](index.html#default-argument-trick)
 
     Raises:
         ValueError: Raised when the input string is malformed beyond recognition.
@@ -43,24 +62,20 @@ def normalize_predicate(predicate: str) -> Tuple[Predicate, bool]:
     negated = True
     if predicate.startswith("!"):
         predicate = predicate[1:]
-    elif regex.search(r"not\s+", predicate):
+    elif search_not_1(predicate):
         predicate = predicate.replace("not ", "")
-    elif regex.search(r"\s+not", predicate):
+    elif search_not_2(predicate):
         predicate = predicate.replace(" not", "")
     else:
         negated = False
     original = predicate = predicate.strip()
-    predicate = regex.sub(r" is\b|\bis ", "", predicate)
+    predicate = sub_is("", predicate)  # Suppress "is" when it is followed or preceded by a space.
     if predicate not in compare_spans:
-        # Convert usual comparison operators
-        predicate = predicate.replace("<=", "≤").replace("==", "=")
-        # Ignore all other characters
-        predicate = regex.sub(r"[^xy<=≤]", "", predicate)
-        # Treat the special case of identity
-        predicate = regex.sub(r"^(x=y|y=)$", "x=y≤x=y", predicate)
-        # If there is only one x (resp. y), expand it into x≤x (resp. y≤y)
-        predicate = regex.sub(r"^([^x]*)x([^x]*)$", r"\1x≤x\2", predicate)
-        predicate = regex.sub(r"^([^y]*)y([^y]*)$", r"\1y≤y\2", predicate)
+        predicate = predicate.replace("<=", "≤").replace("==", "=")  # Convert usual operators.
+        predicate = sub_forbidden_chars("", predicate)  # Ignore all other characters.
+        predicate = sub_identity("x=y≤x=y", predicate)  # Treat the special case of identity.
+        predicate = sub_one_x(r"\1x≤x\2", predicate)  # If there is only one x, expand it into x≤x.
+        predicate = sub_one_y(r"\1y≤y\2", predicate)  # If there is only one y, expand it into y≤y.
         if original != predicate:  # pragma: no cover
             print_warning(f"predicate '{original}' normalized into '{predicate}'.")
         if predicate not in compare_spans:

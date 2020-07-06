@@ -32,6 +32,7 @@ class ProgramLabeller:
             for span in spans:
                 insort(label_dict[label_name], span)
         program.labels[:] = [Label(name, span) for (name, span) in label_dict.items()]
+        # `program` being a tuple, modifying its fields can only be done in place.
 
     def tweak_internal_import_labels(self, program: Program) -> None:
         """Modify the appropriate labels in-place to mark internal importations."""

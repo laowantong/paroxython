@@ -6,7 +6,7 @@ from collections import defaultdict
 from datetime import datetime
 from functools import lru_cache
 from pathlib import Path
-from typing import List, Optional, Tuple, Union, overload, Dict
+from typing import Callable, List, Optional, Tuple, Union, overload, Dict
 
 import regex  # type: ignore
 
@@ -184,12 +184,12 @@ def prepared_labels(labels: Labels) -> LabelsPoorSpans:
 
     Args:
         labels (Labels): The list of labels to be serialized. Each label consists in a name and a
-            **list** of spans. Each span is a triple starting with a start and an end.
+            **list** of spans. Each span is a tuple starting by the actual range of line numbers.
 
     Returns:
         LabelPoorSpans:
             A dictionary mapping the label names with the list of their spans, transformed into
-            simple lists of two integers.
+            simple couples of integers.
 
     Example:
         >>> prepared_labels([
@@ -211,7 +211,7 @@ def prepared_labels(labels: Labels) -> LabelsPoorSpans:
     """
     result: LabelsPoorSpans = {}
     for (label_name, spans) in labels:
-        result[label_name] = [span[:2] for span in sorted(set(spans))]
+        result[label_name] = [(span.start, span.end) for span in sorted(set(spans))]
     return result
 
 
@@ -220,12 +220,12 @@ def prepared_taxa(taxa: Taxa) -> TaxaPoorSpans:
 
     Args:
         taxa (Taxa): The list of taxa to be serialized. Each taxon consists in a name and a
-            **bag** of spans. Each span is a triple starting with a start and an end.
+            **bag** of spans. Each span is a tuple starting by the actual range of line numbers.
 
     Returns:
         TaxonPoorSpans:
             A dictionary mapping the taxon names with the list of their spans, transformed into
-            simple lists of two integers.
+            simple couples of integers.
 
     Example:
         >>> prepared_taxa([
@@ -246,7 +246,7 @@ def prepared_taxa(taxa: Taxa) -> TaxaPoorSpans:
     """
     result: TaxaPoorSpans = {}
     for (taxon_name, spans) in taxa:
-        result[taxon_name] = [span[:2] for span in sorted(spans)]
+        result[taxon_name] = [(span.start, span.end) for span in sorted(spans)]
     return result
 
 
@@ -264,6 +264,7 @@ def map_labels_on_taxa(programs: Programs, taxonomy: Taxonomy) -> None:
     print(f"Mapping taxonomy on {len(programs)} programs.")
     for program in iterate_and_print_programs(programs):
         program.taxa[:] = taxonomy.to_taxa(program.labels)
+        # `program` being a tuple, modifying its fields can only be done in place.
 
 
 def collect_taxa(programs: Programs) -> TaxonInfos:
@@ -275,12 +276,14 @@ def collect_taxa(programs: Programs) -> TaxonInfos:
     return result
 
 
-def compute_direct_importations(programs: Programs) -> ProgramToPrograms:
+def compute_direct_importations(
+    programs: Programs, match_import: Callable = regex.compile(r"import_internally:([^:]+)").match
+) -> ProgramToPrograms:
     """Associate each program to the set of its direct internal imports."""
     importations: Dict = {program.name: set() for program in programs}
     for program in programs:
         for label in program.labels:
-            match = regex.match(r"import_internally:([^:]+)", label.name)
+            match = match_import(label.name)
             if match:  # Python 3.8: use assignement-expression
                 importations[program.name].add(f"{match[1]}.py")
     return importations

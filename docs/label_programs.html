@@ -35,7 +35,7 @@ body.gsc-overflow-hidden #sidebar {overflow: visible;}
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/label_programs.py#L0-L69" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/label_programs.py#L0-L70" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">from bisect import insort
 from collections import defaultdict
@@ -67,6 +67,7 @@ class ProgramLabeller:
             for span in spans:
                 insort(label_dict[label_name], span)
         program.labels[:] = [Label(name, span) for (name, span) in label_dict.items()]
+        # `program` being a tuple, modifying its fields can only be done in place.
 
     def tweak_internal_import_labels(self, program: Program) -&gt; None:
         for (i, label) in enumerate(program.labels):
@@ -120,7 +121,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/label_programs.py#L11-L63" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/label_programs.py#L11-L64" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">class ProgramLabeller:
     def __init__(self):
@@ -142,6 +143,7 @@ if __name__ == &#34;__main__&#34;:
             for span in spans:
                 insort(label_dict[label_name], span)
         program.labels[:] = [Label(name, span) for (name, span) in label_dict.items()]
+        # `program` being a tuple, modifying its fields can only be done in place.
 
     def tweak_internal_import_labels(self, program: Program) -&gt; None:
         for (i, label) in enumerate(program.labels):
@@ -219,7 +221,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/label_programs.py#L36-L46" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/label_programs.py#L37-L47" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def tweak_internal_import_labels(self, program: Program) -&gt; None:
     for (i, label) in enumerate(program.labels):
@@ -241,7 +243,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/label_programs.py#L48-L63" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/label_programs.py#L49-L64" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def generate_labelled_sources(self, *args, **kwargs) -&gt; Iterator:
     separator = &#34;-&#34; * 88
