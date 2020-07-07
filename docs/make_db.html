@@ -36,7 +36,7 @@ body.gsc-overflow-hidden #sidebar {overflow: visible;}
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L0-L336" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L0-L354" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">import json
 import sqlite3
@@ -72,16 +72,16 @@ __pdoc__ = {
 
 
 class Database:
-    def __init__(self, directory: Path, ignore_timestamps: bool = True, *args, **kwargs) -&gt; None:
+    def __init__(self, directory: Path, ignore_timestamps: bool = True, **kwargs) -&gt; None:
         self.default_json_db_path = directory.parent / f&#34;{directory.name}_db.json&#34;
         self.default_sqlite_db_path = directory.parent / f&#34;{directory.name}_db.sqlite&#34;
 
         labeller = ProgramLabeller()
-        labeller.label_programs(directory, *args, **kwargs)
+        labeller.label_programs(directory, **kwargs)
         programs: Programs = labeller.programs
         self.labels = collect_labels(programs)
 
-        taxonomy = Taxonomy(*args, **kwargs)
+        taxonomy = Taxonomy(**kwargs)
         map_labels_on_taxa(programs, taxonomy)
         self.taxa = collect_taxa(programs)
 
@@ -231,19 +231,19 @@ def collect_labels(programs: Programs) -&gt; LabelInfos:
     return result
 
 
-def map_labels_on_taxa(programs: Programs, taxonomy: Taxonomy) -&gt; None:
-    print(f&#34;Mapping taxonomy on {len(programs)} programs.&#34;)
-    for program in iterate_and_print_programs(programs):
-        program.taxa[:] = taxonomy.to_taxa(program.labels)
-        # `program` being a tuple, modifying its fields can only be done in place.
-
-
 def collect_taxa(programs: Programs) -&gt; TaxonInfos:
     result: TaxonInfos = defaultdict(list)
     for program in programs:
         for taxon in program.taxa:
             result[taxon.name].append(program.name)
     return result
+
+
+def map_labels_on_taxa(programs: Programs, taxonomy: Taxonomy) -&gt; None:
+    print(f&#34;Mapping taxonomy on {len(programs)} programs.&#34;)
+    for program in iterate_and_print_programs(programs):
+        program.taxa[:] = taxonomy.to_taxa(program.labels)
+        # `program` being a tuple, modifying its fields can only be done in place.
 
 
 def compute_direct_importations(
@@ -345,7 +345,7 @@ simple couples of integers.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L182-L215" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L186-L219" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def prepared_labels(labels: Labels) -&gt; LabelsPoorSpans:
     result: LabelsPoorSpans = {}
@@ -389,7 +389,7 @@ simple couples of integers.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L218-L250" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L222-L254" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def prepared_taxa(taxa: Taxa) -&gt; TaxaPoorSpans:
     result: TaxaPoorSpans = {}
@@ -402,17 +402,55 @@ simple couples of integers.</p>
 <span>def <span class="ident">collect_labels</span></span>(<span>programs: List[Program]) ‑> Dict[LabelName, List[ProgramName]]</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Iterate through programs to collect all their labels.</p></div>
+<div class="desc"><p>Iterate through the given programs to collect all their labels.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>programs</code></strong> :&ensp;<code>Programs</code></dt>
+<dd>A list of programs. Required fields: <code>name</code> and <code>labels</code>.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>LabelInfos</code></dt>
+<dd>A dictionary mapping each label name to the names of the programs featuring it.</dd>
+</dl></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L253-L259" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L257-L270" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def collect_labels(programs: Programs) -&gt; LabelInfos:
     result: LabelInfos = defaultdict(list)
     for program in programs:
         for label in program.labels:
             result[label.name].append(program.name)
+    return result</code></pre>
+</details>
+</dd>
+<dt id="paroxython.make_db.collect_taxa"><code class="name flex">
+<span>def <span class="ident">collect_taxa</span></span>(<span>programs: List[Program]) ‑> Dict[TaxonName, List[ProgramName]]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Iterate through programs to collect all their taxa.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>programs</code></strong> :&ensp;<code>Programs</code></dt>
+<dd>A list of programs. Required fields: <code>name</code> and <code>taxa</code>.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>TaxonInfos</code></dt>
+<dd>A dictionary mapping each taxon name to the names of the programs featuring it.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L273-L286" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">def collect_taxa(programs: Programs) -&gt; TaxonInfos:
+    result: TaxonInfos = defaultdict(list)
+    for program in programs:
+        for taxon in program.taxa:
+            result[taxon.name].append(program.name)
     return result</code></pre>
 </details>
 </dd>
@@ -424,30 +462,12 @@ simple couples of integers.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L262-L266" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L289-L293" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def map_labels_on_taxa(programs: Programs, taxonomy: Taxonomy) -&gt; None:
     print(f&#34;Mapping taxonomy on {len(programs)} programs.&#34;)
     for program in iterate_and_print_programs(programs):
         program.taxa[:] = taxonomy.to_taxa(program.labels)</code></pre>
-</details>
-</dd>
-<dt id="paroxython.make_db.collect_taxa"><code class="name flex">
-<span>def <span class="ident">collect_taxa</span></span>(<span>programs: List[Program]) ‑> Dict[TaxonName, List[ProgramName]]</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Iterate through programs to collect all their taxa.</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L270-L276" class="git-link">Browse GitHub</a>
-</summary>
-<pre><code class="python">def collect_taxa(programs: Programs) -&gt; TaxonInfos:
-    result: TaxonInfos = defaultdict(list)
-    for program in programs:
-        for taxon in program.taxa:
-            result[taxon.name].append(program.name)
-    return result</code></pre>
 </details>
 </dd>
 <dt id="paroxython.make_db.compute_direct_importations"><code class="name flex">
@@ -458,7 +478,7 @@ simple couples of integers.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L279-L289" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L297-L307" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def compute_direct_importations(
     programs: Programs, match_import: Callable = regex.compile(r&#34;import_internally:([^:]+)&#34;).match
@@ -480,7 +500,7 @@ simple couples of integers.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L292-L305" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L310-L323" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def complete_and_collect_importations(importations: ProgramToPrograms) -&gt; ProgramToPrograms:
     @lru_cache(maxsize=None)
@@ -504,7 +524,7 @@ simple couples of integers.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L308-L314" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L326-L332" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def compute_exportations(programs: Programs, importations: ProgramToPrograms) -&gt; ProgramToPrograms:
     exportations: Dict = {program.name: set() for program in programs}
@@ -522,7 +542,7 @@ simple couples of integers.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L317-L322" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L335-L340" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def collect_exportations(exportations: ProgramToPrograms) -&gt; ProgramToPrograms:
     result: ProgramToPrograms = {}
@@ -544,19 +564,19 @@ simple couples of integers.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L36-L179" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L36-L183" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">class Database:
-    def __init__(self, directory: Path, ignore_timestamps: bool = True, *args, **kwargs) -&gt; None:
+    def __init__(self, directory: Path, ignore_timestamps: bool = True, **kwargs) -&gt; None:
         self.default_json_db_path = directory.parent / f&#34;{directory.name}_db.json&#34;
         self.default_sqlite_db_path = directory.parent / f&#34;{directory.name}_db.sqlite&#34;
 
         labeller = ProgramLabeller()
-        labeller.label_programs(directory, *args, **kwargs)
+        labeller.label_programs(directory, **kwargs)
         programs: Programs = labeller.programs
         self.labels = collect_labels(programs)
 
-        taxonomy = Taxonomy(*args, **kwargs)
+        taxonomy = Taxonomy(**kwargs)
         map_labels_on_taxa(programs, taxonomy)
         self.taxa = collect_taxa(programs)
 
@@ -686,7 +706,7 @@ simple couples of integers.</p>
 <h3>Methods</h3>
 <dl>
 <dt id="paroxython.make_db.Database.__init__"><code class="name flex">
-<span>def <span class="ident">__init__</span></span>(<span>self, <br>directory: pathlib.Path, <br>ignore_timestamps: bool = True, <br>*args, <br>**kwargs<br>) ‑> NoneType</span>
+<span>def <span class="ident">__init__</span></span>(<span>self, <br>directory: pathlib.Path, <br>ignore_timestamps: bool = True, <br>**kwargs<br>) ‑> NoneType</span>
 </code></dt>
 <dd>
 <div class="desc"><p>[summary]</p>
@@ -696,22 +716,27 @@ simple couples of integers.</p>
 <dd>[description]</dd>
 <dt><strong><code>ignore_timestamps</code></strong> :&ensp;<code>bool</code>, optional</dt>
 <dd>[description]. Defaults to True.</dd>
+<dt><strong><code>**kwargs</code></strong></dt>
+<dd>May include the keyword arguments <code>cleanup_strategy</code>, <code>skip_pattern</code>,
+<code>glob_pattern</code>, transmitted to <code><a title="paroxython.list_programs.list_programs" href="list_programs.html#paroxython.list_programs.list_programs">list_programs()</a></code> through
+<code><a title="paroxython.label_programs.ProgramLabeller.label_programs" href="label_programs.html#paroxython.label_programs.ProgramLabeller.label_programs">ProgramLabeller.label_programs()</a></code>, and
+<code>taxonomy_path</code>, transmitted to <code><a title="paroxython.map_taxonomy.Taxonomy" href="map_taxonomy.html#paroxython.map_taxonomy.Taxonomy">Taxonomy</a></code>.</dd>
 </dl></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L37-L74" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L37-L78" class="git-link">Browse GitHub</a>
 </summary>
-<pre><code class="python">def __init__(self, directory: Path, ignore_timestamps: bool = True, *args, **kwargs) -&gt; None:
+<pre><code class="python">def __init__(self, directory: Path, ignore_timestamps: bool = True, **kwargs) -&gt; None:
     self.default_json_db_path = directory.parent / f&#34;{directory.name}_db.json&#34;
     self.default_sqlite_db_path = directory.parent / f&#34;{directory.name}_db.sqlite&#34;
 
     labeller = ProgramLabeller()
-    labeller.label_programs(directory, *args, **kwargs)
+    labeller.label_programs(directory, **kwargs)
     programs: Programs = labeller.programs
     self.labels = collect_labels(programs)
 
-    taxonomy = Taxonomy(*args, **kwargs)
+    taxonomy = Taxonomy(**kwargs)
     map_labels_on_taxa(programs, taxonomy)
     self.taxa = collect_taxa(programs)
 
@@ -743,7 +768,7 @@ simple couples of integers.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L76-L87" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L80-L91" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def get_json(self) -&gt; str:
     data = {
@@ -766,7 +791,7 @@ simple couples of integers.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L89-L92" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L93-L96" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def write_json(self, db_path: Optional[Path] = None) -&gt; None:
     db_path = db_path or self.default_json_db_path
@@ -782,7 +807,7 @@ simple couples of integers.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L94-L179" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L98-L183" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def write_sqlite(self, db_path: Optional[Path] = None) -&gt; None:
     db_path = db_path or self.default_sqlite_db_path
@@ -902,8 +927,8 @@ data-gaCategoryParameter="paroxython.make_db">
 <li><code><a title="paroxython.make_db.prepared_labels" href="#paroxython.make_db.prepared_labels">prepared_labels</a></code></li>
 <li><code><a title="paroxython.make_db.prepared_taxa" href="#paroxython.make_db.prepared_taxa">prepared_taxa</a></code></li>
 <li><code><a title="paroxython.make_db.collect_labels" href="#paroxython.make_db.collect_labels">collect_labels</a></code></li>
-<li><code><a title="paroxython.make_db.map_labels_on_taxa" href="#paroxython.make_db.map_labels_on_taxa">map_labels_on_taxa</a></code></li>
 <li><code><a title="paroxython.make_db.collect_taxa" href="#paroxython.make_db.collect_taxa">collect_taxa</a></code></li>
+<li><code><a title="paroxython.make_db.map_labels_on_taxa" href="#paroxython.make_db.map_labels_on_taxa">map_labels_on_taxa</a></code></li>
 <li><code><a title="paroxython.make_db.compute_direct_importations" href="#paroxython.make_db.compute_direct_importations">compute_direct_importations</a></code></li>
 <li><code><a title="paroxython.make_db.complete_and_collect_importations" href="#paroxython.make_db.complete_and_collect_importations">complete_and_collect_importations</a></code></li>
 <li><code><a title="paroxython.make_db.compute_exportations" href="#paroxython.make_db.compute_exportations">compute_exportations</a></code></li>

@@ -68,7 +68,7 @@ def normalize_predicate(
     else:
         negated = False
     original = predicate = predicate.strip()
-    predicate = sub_is(&#34;&#34;, predicate) # Suppress &#34;is&#34; when it is followed or preceded by a space.
+    predicate = sub_is(&#34;&#34;, predicate)  # Suppress &#34;is&#34; when it is followed or preceded by a space.
     if predicate not in compare_spans:
         predicate = predicate.replace(&#34;&lt;=&#34;, &#34;≤&#34;).replace(&#34;==&#34;, &#34;=&#34;)  # Convert usual operators.
         predicate = sub_forbidden_chars(&#34;&#34;, predicate)  # Ignore all other characters.
@@ -173,7 +173,7 @@ the result of this predicate must be negated.</dd>
     else:
         negated = False
     original = predicate = predicate.strip()
-    predicate = sub_is(&#34;&#34;, predicate) # Suppress &#34;is&#34; when it is followed or preceded by a space.
+    predicate = sub_is(&#34;&#34;, predicate)  # Suppress &#34;is&#34; when it is followed or preceded by a space.
     if predicate not in compare_spans:
         predicate = predicate.replace(&#34;&lt;=&#34;, &#34;≤&#34;).replace(&#34;==&#34;, &#34;=&#34;)  # Convert usual operators.
         predicate = sub_forbidden_chars(&#34;&#34;, predicate)  # Ignore all other characters.

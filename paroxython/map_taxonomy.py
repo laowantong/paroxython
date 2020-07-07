@@ -185,7 +185,6 @@ class Taxonomy:
         self,
         taxonomy_path: Optional[Path] = None,
         is_literal: Callable = regex.compile(r"[\w:.]+").fullmatch,
-        *args,
         **kwargs,
     ) -> None:
         r"""Read and pre-process the taxonomy specifications.

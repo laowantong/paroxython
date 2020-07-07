@@ -52,7 +52,6 @@ def list_programs(
     cleanup_strategy: str = &#34;full&#34;,
     glob_pattern: str = &#34;&#34;,
     skip_pattern: str = &#34;&#34;,
-    *args,
     **kwargs,
 ) -&gt; Programs:
     result: Programs = []
@@ -114,7 +113,7 @@ if __name__ == &#34;__main__&#34;:
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
 <dt id="paroxython.list_programs.list_programs"><code class="name flex">
-<span>def <span class="ident">list_programs</span></span>(<span>directory: pathlib.Path, <br>cleanup_strategy: str = 'full', <br>glob_pattern: str = '', <br>skip_pattern: str = '', <br>*args, <br>**kwargs<br>) ‑> List[Program]</span>
+<span>def <span class="ident">list_programs</span></span>(<span>directory: pathlib.Path, <br>cleanup_strategy: str = 'full', <br>glob_pattern: str = '', <br>skip_pattern: str = '', <br>**kwargs<br>) ‑> List[Program]</span>
 </code></dt>
 <dd>
 <div class="desc"><p>List (by default recursively) all Python programs of a given directory.</p>
@@ -135,6 +134,8 @@ and all its subdirectories, recursively”. Defaults to <code>""</code>.</dd>
 <dd>Describes how to filter out the yielded files. If empty,
 skip any file whose name is <code>"__init__.py"</code>, <code>"setup.py"</code> or ends with <code>"-test.py"</code>,
 <code>"-tests.py"</code>, <code>"_test.py"</code> or <code>"_tests.py"</code>. Defaults to <code>""</code>.</dd>
+<dt><strong><code>**kwargs</code></strong></dt>
+<dd>Ignored keyword arguments.</dd>
 </dl>
 <h2 id="returns">Returns</h2>
 <dl>
@@ -151,7 +152,6 @@ skip any file whose name is <code>"__init__.py"</code>, <code>"setup.py"</code> 
     cleanup_strategy: str = &#34;full&#34;,
     glob_pattern: str = &#34;&#34;,
     skip_pattern: str = &#34;&#34;,
-    *args,
     **kwargs,
 ) -&gt; Programs:
     result: Programs = []

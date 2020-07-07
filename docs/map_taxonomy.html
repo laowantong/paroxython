@@ -235,7 +235,7 @@ given at the start of the section.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L0-L429" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L0-L428" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">from collections import Counter, defaultdict
 from pathlib import Path
@@ -269,7 +269,6 @@ class Taxonomy:
         self,
         taxonomy_path: Optional[Path] = None,
         is_literal: Callable = regex.compile(r&#34;[\w:.]+&#34;).fullmatch,
-        *args,
         **kwargs,
     ) -&gt; None:
         taxonomy_path = taxonomy_path or Path(dirname(__file__)) / &#34;resources&#34; / &#34;taxonomy.tsv&#34;
@@ -435,7 +434,7 @@ a bag (multiset) of its spans.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L312-L413" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L311-L412" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def deduplicated_taxa(taxa: Taxa) -&gt; Taxa:
     if len(taxa) &lt; 2:
@@ -472,14 +471,13 @@ a bag (multiset) of its spans.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L183-L309" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L183-L308" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">class Taxonomy:
     def __init__(
         self,
         taxonomy_path: Optional[Path] = None,
         is_literal: Callable = regex.compile(r&#34;[\w:.]+&#34;).fullmatch,
-        *args,
         **kwargs,
     ) -&gt; None:
         taxonomy_path = taxonomy_path or Path(dirname(__file__)) / &#34;resources&#34; / &#34;taxonomy.tsv&#34;
@@ -514,7 +512,7 @@ a bag (multiset) of its spans.</dd>
 <h3>Methods</h3>
 <dl>
 <dt id="paroxython.map_taxonomy.Taxonomy.__init__"><code class="name flex">
-<span>def <span class="ident">__init__</span></span>(<span>self, <br>taxonomy_path: Union[pathlib.Path, NoneType] = None, <br>is_literal: Callable = &lt;built-in method fullmatch of regex&gt;, <br>*args, <br>**kwargs<br>) ‑> NoneType</span>
+<span>def <span class="ident">__init__</span></span>(<span>self, <br>taxonomy_path: Union[pathlib.Path, NoneType] = None, <br>is_literal: Callable = &lt;built-in method fullmatch of regex&gt;, <br>**kwargs<br>) ‑> NoneType</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Read and pre-process the taxonomy specifications.</p>
@@ -573,13 +571,12 @@ As an associative list, it only allows O(n) lookups a given label pattern.</li>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L184-L247" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L184-L246" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def __init__(
     self,
     taxonomy_path: Optional[Path] = None,
     is_literal: Callable = regex.compile(r&#34;[\w:.]+&#34;).fullmatch,
-    *args,
     **kwargs,
 ) -&gt; None:
     taxonomy_path = taxonomy_path or Path(dirname(__file__)) / &#34;resources&#34; / &#34;taxonomy.tsv&#34;
@@ -641,7 +638,7 @@ same label more than one time
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L250-L287" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L249-L286" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">@lru_cache(maxsize=None)
 def get_taxon_name_list(self, label_name: LabelName) -&gt; TaxonNames:
@@ -675,7 +672,7 @@ returns them deduplicated (cf. <code><a title="paroxython.map_taxonomy.deduplica
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L289-L309" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L288-L308" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def to_taxa(self, labels: Labels) -&gt; Taxa:
     acc: TaxaSpans = defaultdict(Counter)

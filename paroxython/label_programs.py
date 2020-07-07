@@ -14,10 +14,16 @@ class ProgramLabeller:
     def __init__(self):
         self.parse = ProgramParser()
 
-    def label_programs(self, directory: Path, *args, **kwargs) -> None:
-        """Complete all fields of a list of programs."""
+    def label_programs(self, directory: Path, **kwargs) -> None:
+        """TODO
+
+        Args:
+            directory (Path): [description]
+            **kwargs: May include the keyword arguments `cleanup_strategy`, `skip_pattern`,
+                `glob_pattern`, transmitted to `paroxython.list_programs.list_programs`.
+        """
         self.directory = directory
-        self.programs = list_programs(self.directory, *args, **kwargs)
+        self.programs = list_programs(self.directory, **kwargs)
         self.internal_program_names = {p.name for p in self.programs}
         print(f"Labelling {len(self.programs)} programs.")
         for program in iterate_and_print_programs(self.programs):
@@ -46,7 +52,7 @@ class ProgramLabeller:
                         spans=label.spans,
                     )
 
-    def generate_labelled_sources(self, *args, **kwargs) -> Iterator:
+    def generate_labelled_sources(self, **kwargs) -> Iterator:
         """For each program, yield its source with its labels in comment."""
         separator = "-" * 88
         for program in self.programs:

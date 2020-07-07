@@ -39,13 +39,14 @@ from ..make_db import Database
 
 
 def cli_wrapper(args):
+    taxonomy_path = Path(args["--taxonomy"]) if args["--taxonomy"] else None
     db = Database(
         directory=Path(args["DIRECTORY"]),
         ignore_timestamps=args["--no_timestamp"],
-        cleanup_strategy=args["--cleanup"],
-        skip_pattern=args["--skip"],
-        glob_pattern=args["--glob"],
-        taxonomy_path=Path(args["--taxonomy"]) if args["--taxonomy"] else None,
+        cleanup_strategy=args["--cleanup"],  # -> list_programs
+        skip_pattern=args["--skip"],  # -> list_programs
+        glob_pattern=args["--glob"],  # -> list_programs
+        taxonomy_path=taxonomy_path,  # -> Taxonomy
     )
     if not args["--output"]:
         db.write_json()

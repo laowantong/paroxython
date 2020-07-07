@@ -34,23 +34,27 @@ __pdoc__ = {
 
 
 class Database:
-    def __init__(self, directory: Path, ignore_timestamps: bool = True, *args, **kwargs) -> None:
-        """[summary]
+    def __init__(self, directory: Path, ignore_timestamps: bool = True, **kwargs) -> None:
+        """TODO
 
         Args:
             directory (Path): [description]
             ignore_timestamps (bool, optional): [description]. Defaults to True.
+            **kwargs: May include the keyword arguments `cleanup_strategy`, `skip_pattern`,
+                `glob_pattern`, transmitted to `paroxython.list_programs.list_programs` through
+                `paroxython.label_programs.ProgramLabeller.label_programs`, and
+                `taxonomy_path`, transmitted to `paroxython.map_taxonomy.Taxonomy`.
         """
 
         self.default_json_db_path = directory.parent / f"{directory.name}_db.json"
         self.default_sqlite_db_path = directory.parent / f"{directory.name}_db.sqlite"
 
         labeller = ProgramLabeller()
-        labeller.label_programs(directory, *args, **kwargs)
+        labeller.label_programs(directory, **kwargs)
         programs: Programs = labeller.programs
         self.labels = collect_labels(programs)
 
-        taxonomy = Taxonomy(*args, **kwargs)
+        taxonomy = Taxonomy(**kwargs)
         map_labels_on_taxa(programs, taxonomy)
         self.taxa = collect_taxa(programs)
 
@@ -251,11 +255,34 @@ def prepared_taxa(taxa: Taxa) -> TaxaPoorSpans:
 
 
 def collect_labels(programs: Programs) -> LabelInfos:
-    """Iterate through programs to collect all their labels."""
+    """Iterate through the given programs to collect all their labels.
+
+    Args:
+        programs (Programs): A list of programs. Required fields: `name` and `labels`.
+
+    Returns:
+        LabelInfos: A dictionary mapping each label name to the names of the programs featuring it.
+    """
     result: LabelInfos = defaultdict(list)
     for program in programs:
         for label in program.labels:
             result[label.name].append(program.name)
+    return result
+
+
+def collect_taxa(programs: Programs) -> TaxonInfos:
+    """Iterate through programs to collect all their taxa.
+
+    Args:
+        programs (Programs): A list of programs. Required fields: `name` and `taxa`.
+
+    Returns:
+        TaxonInfos: A dictionary mapping each taxon name to the names of the programs featuring it.
+    """
+    result: TaxonInfos = defaultdict(list)
+    for program in programs:
+        for taxon in program.taxa:
+            result[taxon.name].append(program.name)
     return result
 
 
@@ -265,15 +292,6 @@ def map_labels_on_taxa(programs: Programs, taxonomy: Taxonomy) -> None:
     for program in iterate_and_print_programs(programs):
         program.taxa[:] = taxonomy.to_taxa(program.labels)
         # `program` being a tuple, modifying its fields can only be done in place.
-
-
-def collect_taxa(programs: Programs) -> TaxonInfos:
-    """Iterate through programs to collect all their taxa."""
-    result: TaxonInfos = defaultdict(list)
-    for program in programs:
-        for taxon in program.taxa:
-            result[taxon.name].append(program.name)
-    return result
 
 
 def compute_direct_importations(

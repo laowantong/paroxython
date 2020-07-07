@@ -51,9 +51,9 @@ class ProgramLabeller:
     def __init__(self):
         self.parse = ProgramParser()
 
-    def label_programs(self, directory: Path, *args, **kwargs) -&gt; None:
+    def label_programs(self, directory: Path, **kwargs) -&gt; None:
         self.directory = directory
-        self.programs = list_programs(self.directory, *args, **kwargs)
+        self.programs = list_programs(self.directory, **kwargs)
         self.internal_program_names = {p.name for p in self.programs}
         print(f&#34;Labelling {len(self.programs)} programs.&#34;)
         for program in iterate_and_print_programs(self.programs):
@@ -80,7 +80,7 @@ class ProgramLabeller:
                         spans=label.spans,
                     )
 
-    def generate_labelled_sources(self, *args, **kwargs) -&gt; Iterator:
+    def generate_labelled_sources(self, **kwargs) -&gt; Iterator:
         separator = &#34;-&#34; * 88
         for program in self.programs:
             yield Source(f&#34;# {separator}\n# {program.name}\n# {separator}&#34;)
@@ -127,9 +127,9 @@ if __name__ == &#34;__main__&#34;:
     def __init__(self):
         self.parse = ProgramParser()
 
-    def label_programs(self, directory: Path, *args, **kwargs) -&gt; None:
+    def label_programs(self, directory: Path, **kwargs) -&gt; None:
         self.directory = directory
-        self.programs = list_programs(self.directory, *args, **kwargs)
+        self.programs = list_programs(self.directory, **kwargs)
         self.internal_program_names = {p.name for p in self.programs}
         print(f&#34;Labelling {len(self.programs)} programs.&#34;)
         for program in iterate_and_print_programs(self.programs):
@@ -156,7 +156,7 @@ if __name__ == &#34;__main__&#34;:
                         spans=label.spans,
                     )
 
-    def generate_labelled_sources(self, *args, **kwargs) -&gt; Iterator:
+    def generate_labelled_sources(self, **kwargs) -&gt; Iterator:
         separator = &#34;-&#34; * 88
         for program in self.programs:
             yield Source(f&#34;# {separator}\n# {program.name}\n# {separator}&#34;)
@@ -175,7 +175,7 @@ if __name__ == &#34;__main__&#34;:
 <h3>Methods</h3>
 <dl>
 <dt id="paroxython.label_programs.ProgramLabeller.label_programs"><code class="name flex">
-<span>def <span class="ident">label_programs</span></span>(<span>self, <br>directory: pathlib.Path, <br>*args, <br>**kwargs<br>) ‑> NoneType</span>
+<span>def <span class="ident">label_programs</span></span>(<span>self, <br>directory: pathlib.Path, <br>**kwargs<br>) ‑> NoneType</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Complete all fields of a list of programs.</p></div>
@@ -184,9 +184,9 @@ if __name__ == &#34;__main__&#34;:
 <span>Expand source code</span>
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/label_programs.py#L17-L26" class="git-link">Browse GitHub</a>
 </summary>
-<pre><code class="python">def label_programs(self, directory: Path, *args, **kwargs) -&gt; None:
+<pre><code class="python">def label_programs(self, directory: Path, **kwargs) -&gt; None:
     self.directory = directory
-    self.programs = list_programs(self.directory, *args, **kwargs)
+    self.programs = list_programs(self.directory, **kwargs)
     self.internal_program_names = {p.name for p in self.programs}
     print(f&#34;Labelling {len(self.programs)} programs.&#34;)
     for program in iterate_and_print_programs(self.programs):
@@ -236,7 +236,7 @@ if __name__ == &#34;__main__&#34;:
 </details>
 </dd>
 <dt id="paroxython.label_programs.ProgramLabeller.generate_labelled_sources"><code class="name flex">
-<span>def <span class="ident">generate_labelled_sources</span></span>(<span>self, <br>*args, <br>**kwargs<br>) ‑> Iterator</span>
+<span>def <span class="ident">generate_labelled_sources</span></span>(<span>self, <br>**kwargs<br>) ‑> Iterator</span>
 </code></dt>
 <dd>
 <div class="desc"><p>For each program, yield its source with its labels in comment.</p></div>
@@ -245,7 +245,7 @@ if __name__ == &#34;__main__&#34;:
 <span>Expand source code</span>
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/label_programs.py#L49-L64" class="git-link">Browse GitHub</a>
 </summary>
-<pre><code class="python">def generate_labelled_sources(self, *args, **kwargs) -&gt; Iterator:
+<pre><code class="python">def generate_labelled_sources(self, **kwargs) -&gt; Iterator:
     separator = &#34;-&#34; * 88
     for program in self.programs:
         yield Source(f&#34;# {separator}\n# {program.name}\n# {separator}&#34;)

@@ -14,7 +14,6 @@ def list_programs(
     cleanup_strategy: str = "full",
     glob_pattern: str = "",
     skip_pattern: str = "",
-    *args,
     **kwargs,
 ) -> Programs:
     """List (by default recursively) all Python programs of a given directory.
@@ -31,6 +30,7 @@ def list_programs(
         skip_pattern (str, optional): Describes how to filter out the yielded files. If empty,
             skip any file whose name is `"__init__.py"`, `"setup.py"` or ends with `"-test.py"`,
             `"-tests.py"`, `"_test.py"` or `"_tests.py"`. Defaults to `""`.
+        **kwargs: Ignored keyword arguments.
 
     Returns:
         Programs: A list of `Program` objects as constructed by `get_program`.
