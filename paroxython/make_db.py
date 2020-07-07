@@ -11,7 +11,7 @@ from typing import Callable, List, Optional, Tuple, Union, overload, Dict
 import regex  # type: ignore
 
 from .goodies import add_line_numbers
-from .label_programs import ProgramLabeller, iterate_and_print_programs
+from .label_programs import labelled_programs, iterate_and_print_programs
 from .map_taxonomy import Taxonomy
 from .user_types import (
     LabelInfos,
@@ -38,20 +38,18 @@ class Database:
         """TODO
 
         Args:
-            directory (Path): [description]
+            directory (Path): The directory to walk, containing some Python programs.
             ignore_timestamps (bool, optional): [description]. Defaults to True.
             **kwargs: May include the keyword arguments `cleanup_strategy`, `skip_pattern`,
                 `glob_pattern`, transmitted to `paroxython.list_programs.list_programs` through
-                `paroxython.label_programs.ProgramLabeller.label_programs`, and
-                `taxonomy_path`, transmitted to `paroxython.map_taxonomy.Taxonomy`.
+                `paroxython.label_programs.labelled_programs`, and `taxonomy_path`, transmitted to
+                `paroxython.map_taxonomy.Taxonomy`.
         """
 
         self.default_json_db_path = directory.parent / f"{directory.name}_db.json"
         self.default_sqlite_db_path = directory.parent / f"{directory.name}_db.sqlite"
 
-        labeller = ProgramLabeller()
-        labeller.label_programs(directory, **kwargs)
-        programs: Programs = labeller.programs
+        programs: Programs = labelled_programs(directory, **kwargs)
         self.labels = collect_labels(programs)
 
         taxonomy = Taxonomy(**kwargs)

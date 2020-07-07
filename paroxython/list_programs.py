@@ -59,7 +59,7 @@ def get_program(source: Source, relative_path: Path = None) -> Program:
         1. Centrifugate the all-encompassing hints found in the source code (see
             `paroxython.preprocess_source.centrifugate_hints`).
         2. Collect all hints, determining whether they must be added to or removed from the
-            labels which will later be found by `paroxython.label_programs.ProgramLabeller`.
+            labels which will later be found by `paroxython.label_programs.labelled_programs`.
         3. Remove all hints from the source code.
         4. Return a new `Program` (details below).
 
@@ -78,7 +78,7 @@ def get_program(source: Source, relative_path: Path = None) -> Program:
         - `deletion` (type `Dict[LabelName, List[Span]]`): the manual hints scheduled for deletion;
         - `labels` (type `List[Label]`, where each `Label` consists in a label name and a list of
             spans). This list is created empty here, to be later populated by
-            `paroxython.label_programs.ProgramLabeller`.
+            `paroxython.label_programs.labelled_programs`.
         - `taxa` (type `List[Taxa]`, where each `Taxon` consists in a taxon name and a bag of
             spans). This list is created empty here, to be later calculated from the labels by
             `paroxython.map_taxonomy.Taxonomy`.

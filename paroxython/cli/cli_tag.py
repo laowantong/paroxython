@@ -21,7 +21,7 @@ from typing import List, Tuple, Optional
 from typing_extensions import Literal
 
 from ..goodies import couple_to_string
-from ..label_programs import ProgramLabeller
+from ..parse_program import ProgramParser
 from ..list_programs import get_program
 from ..map_taxonomy import Taxonomy
 from ..user_types import Source
@@ -35,8 +35,8 @@ def main(
     taxonomy_path: Optional[Path] = None,
 ) -> str:
     program = get_program(source, relative_path)
-    labeller = ProgramLabeller()
-    labeller.label_program(program)
+    parse = ProgramParser()
+    program.labels[:] = parse(program)
     couples: List[Tuple[str, str]] = [(tags, "Lines")]
     if tags == "Label":
         for (label_name, label_spans) in sorted(program.labels):

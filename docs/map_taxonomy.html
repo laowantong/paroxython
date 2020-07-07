@@ -235,7 +235,7 @@ given at the start of the section.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L0-L428" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L0-L426" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">from collections import Counter, defaultdict
 from pathlib import Path
@@ -325,12 +325,10 @@ def deduplicated_taxa(taxa: Taxa) -&gt; Taxa:
 
 if __name__ == &#34;__main__&#34;:
     from .goodies import couple_to_string
-    from .label_programs import ProgramLabeller
+    from .label_programs import labelled_programs
 
-    labeller = ProgramLabeller()
-    labeller.label_programs(Path(&#34;examples/simple/programs&#34;))
     taxonomy = Taxonomy()
-    for program in labeller.programs:
+    for program in labelled_programs(Path(&#34;examples/simple/programs&#34;)):
         taxa = taxonomy.to_taxa(program.labels)
         if not taxa:
             continue

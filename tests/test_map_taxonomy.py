@@ -7,7 +7,7 @@ import pytest
 import context
 from make_snapshot import make_snapshot
 from paroxython.goodies import couple_to_string
-from paroxython.label_programs import ProgramLabeller
+from paroxython.label_programs import labelled_programs
 from paroxython.map_taxonomy import Taxonomy, deduplicated_taxa
 from paroxython.user_types import Label, Program, Span
 
@@ -143,9 +143,8 @@ def test_call():
 def test_snapshot_mini_taxa(capsys):
     taxonomy = Taxonomy()
     acc = {}
-    labeller = ProgramLabeller()
-    labeller.label_programs(Path("examples/mini/programs"))
-    for program in labeller.programs:
+    programs = labelled_programs(Path("examples/mini/programs"))
+    for program in programs:
         taxa = taxonomy.to_taxa(program.labels)
         acc[program.name] = {
             name: " ".join(map(couple_to_string, sorted(set(spans)))) for (name, spans) in taxa

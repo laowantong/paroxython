@@ -414,12 +414,10 @@ def deduplicated_taxa(taxa: Taxa) -> Taxa:
 
 if __name__ == "__main__":
     from .goodies import couple_to_string
-    from .label_programs import ProgramLabeller
+    from .label_programs import labelled_programs
 
-    labeller = ProgramLabeller()
-    labeller.label_programs(Path("examples/simple/programs"))
     taxonomy = Taxonomy()
-    for program in labeller.programs:
+    for program in labelled_programs(Path("examples/simple/programs")):
         taxa = taxonomy.to_taxa(program.labels)
         if not taxa:
             continue

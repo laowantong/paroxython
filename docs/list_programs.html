@@ -180,7 +180,7 @@ consisting of one or several manual hints. The following operations are then car
 <li>Centrifugate the all-encompassing hints found in the source code (see
 <code><a title="paroxython.preprocess_source.centrifugate_hints" href="preprocess_source.html#paroxython.preprocess_source.centrifugate_hints">centrifugate_hints()</a></code>).</li>
 <li>Collect all hints, determining whether they must be added to or removed from the
-labels which will later be found by <code><a title="paroxython.label_programs.ProgramLabeller" href="label_programs.html#paroxython.label_programs.ProgramLabeller">ProgramLabeller</a></code>.</li>
+labels which will later be found by <code><a title="paroxython.label_programs.labelled_programs" href="label_programs.html#paroxython.label_programs.labelled_programs">labelled_programs()</a></code>.</li>
 <li>Remove all hints from the source code.</li>
 <li>Return a new <code>Program</code> (details below).</li>
 </ol>
@@ -206,7 +206,7 @@ relative to the directory passed to <code><a title="paroxython.list_programs.lis
 <li><code>deletion</code> (type <code>Dict[LabelName, List[Span]]</code>): the manual hints scheduled for deletion;</li>
 <li><code>labels</code> (type <code>List[Label]</code>, where each <code>Label</code> consists in a label name and a list of
 spans). This list is created empty here, to be later populated by
-<code><a title="paroxython.label_programs.ProgramLabeller" href="label_programs.html#paroxython.label_programs.ProgramLabeller">ProgramLabeller</a></code>.</li>
+<code><a title="paroxython.label_programs.labelled_programs" href="label_programs.html#paroxython.label_programs.labelled_programs">labelled_programs()</a></code>.</li>
 <li><code>taxa</code> (type <code>List[Taxa]</code>, where each <code>Taxon</code> consists in a taxon name and a bag of
 spans). This list is created empty here, to be later calculated from the labels by
 <code><a title="paroxython.map_taxonomy.Taxonomy" href="map_taxonomy.html#paroxython.map_taxonomy.Taxonomy">Taxonomy</a></code>.</li>

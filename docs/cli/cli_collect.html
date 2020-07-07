@@ -72,14 +72,14 @@ from ..make_db import Database
 
 
 def cli_wrapper(args):
-    taxonomy_path = (Path(args[&#34;--taxonomy&#34;]) if args[&#34;--taxonomy&#34;] else None)
+    taxonomy_path = Path(args[&#34;--taxonomy&#34;]) if args[&#34;--taxonomy&#34;] else None
     db = Database(
         directory=Path(args[&#34;DIRECTORY&#34;]),
         ignore_timestamps=args[&#34;--no_timestamp&#34;],
-        cleanup_strategy=args[&#34;--cleanup&#34;], # -&gt; list_programs
-        skip_pattern=args[&#34;--skip&#34;], # -&gt; list_programs
-        glob_pattern=args[&#34;--glob&#34;], # -&gt; list_programs
-        taxonomy_path=taxonomy_path, # -&gt; Taxonomy
+        cleanup_strategy=args[&#34;--cleanup&#34;],  # -&gt; list_programs
+        skip_pattern=args[&#34;--skip&#34;],  # -&gt; list_programs
+        glob_pattern=args[&#34;--glob&#34;],  # -&gt; list_programs
+        taxonomy_path=taxonomy_path,  # -&gt; Taxonomy
     )
     if not args[&#34;--output&#34;]:
         db.write_json()
@@ -107,14 +107,14 @@ def cli_wrapper(args):
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli_collect.py#L41-L56" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def cli_wrapper(args):
-    taxonomy_path = (Path(args[&#34;--taxonomy&#34;]) if args[&#34;--taxonomy&#34;] else None)
+    taxonomy_path = Path(args[&#34;--taxonomy&#34;]) if args[&#34;--taxonomy&#34;] else None
     db = Database(
         directory=Path(args[&#34;DIRECTORY&#34;]),
         ignore_timestamps=args[&#34;--no_timestamp&#34;],
-        cleanup_strategy=args[&#34;--cleanup&#34;], # -&gt; list_programs
-        skip_pattern=args[&#34;--skip&#34;], # -&gt; list_programs
-        glob_pattern=args[&#34;--glob&#34;], # -&gt; list_programs
-        taxonomy_path=taxonomy_path, # -&gt; Taxonomy
+        cleanup_strategy=args[&#34;--cleanup&#34;],  # -&gt; list_programs
+        skip_pattern=args[&#34;--skip&#34;],  # -&gt; list_programs
+        glob_pattern=args[&#34;--glob&#34;],  # -&gt; list_programs
+        taxonomy_path=taxonomy_path,  # -&gt; Taxonomy
     )
     if not args[&#34;--output&#34;]:
         db.write_json()
