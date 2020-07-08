@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.8.3" />
 <title>paroxython.make_db API documentation</title>
-<meta name="description" content="TODO. Collect all infos pertaining to the programs, the labels and the taxa." />
+<meta name="description" content="Collect all infos pertaining to the programs, labels and taxa, and dump them in a database." />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
 <link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/github.min.css" crossorigin>
@@ -32,19 +32,20 @@ body.gsc-overflow-hidden #sidebar {overflow: visible;}
 <h1 class="title">Module <code>paroxython.make_db</code></h1>
 </header>
 <section id="section-intro">
-<p>TODO. Collect all infos pertaining to the programs, the labels and the taxa.</p>
+<p>Collect all infos pertaining to the programs, labels and taxa, and dump them in a database.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L0-L352" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L0-L555" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">import json
 import sqlite3
+from bisect import insort
 from collections import defaultdict
 from datetime import datetime
 from functools import lru_cache
 from pathlib import Path
-from typing import Callable, List, Optional, Tuple, Union, overload, Dict
+from typing import Callable, List, Optional, Tuple, Dict
 
 import regex  # type: ignore
 
@@ -72,27 +73,21 @@ __pdoc__ = {
 
 
 class Database:
-    def __init__(self, directory: Path, ignore_timestamps: bool = True, **kwargs) -&gt; None:
-        self.default_json_db_path = directory.parent / f&#34;{directory.name}_db.json&#34;
-        self.default_sqlite_db_path = directory.parent / f&#34;{directory.name}_db.sqlite&#34;
-
+    def __init__(self, directory: Path, ignore_timestamps: bool = False, **kwargs) -&gt; None:
+        self.directory = directory
         programs: Programs = labelled_programs(directory, **kwargs)
         self.labels = collect_labels(programs)
 
-        taxonomy = Taxonomy(**kwargs)
-        map_labels_on_taxa(programs, taxonomy)
+        map_labels_on_taxa(programs, Taxonomy(**kwargs))
         self.taxa = collect_taxa(programs)
 
         importations = compute_direct_importations(programs)
         self.importations = complete_and_collect_importations(importations)
-
-        exportations = compute_exportations(programs, self.importations)
-        self.exportations = collect_exportations(exportations)
+        self.exportations = compute_and_collect_exportations(programs, self.importations)
 
         get_timestamp = lambda path: str(datetime.fromtimestamp(path.stat().st_mtime))
         if ignore_timestamps:
-            get_timestamp = lambda path: &#34;ignored&#34;
-
+            get_timestamp = lambda path: &#34;&#34;
         self.programs_infos: ProgramInfos = {}
         for program in programs:
             self.programs_infos[program.name] = {
@@ -115,12 +110,12 @@ class Database:
         return text
 
     def write_json(self, db_path: Optional[Path] = None) -&gt; None:
-        db_path = db_path or self.default_json_db_path
+        db_path = db_path or self.directory.parent / f&#34;{self.directory.name}_db.json&#34;
         print(f&#34;Writing {db_path}.&#34;)
         db_path.write_text(self.get_json())
 
     def write_sqlite(self, db_path: Optional[Path] = None) -&gt; None:
-        db_path = db_path or self.default_sqlite_db_path
+        db_path = db_path or self.directory.parent / f&#34;{self.directory.name}_db.sqlite&#34;
         print(f&#34;Writing {db_path}.&#34;)
         program_rows: List[Tuple] = []
         label_rows: List[Tuple] = []
@@ -159,15 +154,14 @@ class Database:
         connexion = sqlite3.connect(str(db_path))  # str() for Python 3.6 compatibility
         c = connexion.cursor()
 
+        fill = lambda columns: &#34;,&#34;.join(&#34;?&#34; * len(columns))
         program_columns = (
             &#34;program TEXT PRIMARY KEY&#34;,
             &#34;timestamp TEXT&#34;,
             &#34;source TEXT&#34;,
         )
         c.execute(f&#34;CREATE TABLE program ({&#39;,&#39;.join(program_columns)})&#34;)
-        c.executemany(
-            f&#34;INSERT INTO program VALUES ({&#39;,&#39;.join(&#39;?&#39; * len(program_columns))})&#34;, program_rows,
-        )
+        c.executemany(f&#34;INSERT INTO program VALUES ({fill(program_columns)})&#34;, program_rows)
 
         label_columns = (
             # use rowid as primary key
@@ -183,9 +177,7 @@ class Database:
             f&#34;CREATE TABLE label ({&#39;,&#39;.join(label_columns)},&#34;
             &#34;FOREIGN KEY (program) REFERENCES program (program))&#34;
         )
-        c.executemany(
-            f&#34;INSERT INTO label VALUES ({&#39;,&#39;.join(&#39;?&#39; * len(label_columns))})&#34;, label_rows,
-        )
+        c.executemany(f&#34;INSERT INTO label VALUES ({fill(label_columns)})&#34;, label_rows)
 
         taxon_columns = (
             # use rowid as primary key
@@ -199,26 +191,10 @@ class Database:
             f&#34;CREATE TABLE taxon ({&#39;,&#39;.join(taxon_columns)},&#34;
             &#34;FOREIGN KEY (program) REFERENCES program (program))&#34;
         )
-        c.executemany(
-            f&#34;INSERT INTO taxon VALUES ({&#39;,&#39;.join(&#39;?&#39; * len(taxon_columns))})&#34;, taxon_rows,
-        )
+        c.executemany(f&#34;INSERT INTO taxon VALUES ({fill(taxon_columns)})&#34;, taxon_rows)
 
         connexion.commit()
         connexion.close()
-
-
-def prepared_labels(labels: Labels) -&gt; LabelsPoorSpans:
-    result: LabelsPoorSpans = {}
-    for (label_name, spans) in labels:
-        result[label_name] = [(span.start, span.end) for span in sorted(set(spans))]
-    return result
-
-
-def prepared_taxa(taxa: Taxa) -&gt; TaxaPoorSpans:
-    result: TaxaPoorSpans = {}
-    for (taxon_name, spans) in taxa:
-        result[taxon_name] = [(span.start, span.end) for span in sorted(spans)]
-    return result
 
 
 def collect_labels(programs: Programs) -&gt; LabelInfos:
@@ -229,19 +205,19 @@ def collect_labels(programs: Programs) -&gt; LabelInfos:
     return result
 
 
+def map_labels_on_taxa(programs: Programs, taxonomy: Taxonomy) -&gt; None:
+    print(f&#34;Mapping taxonomy on {len(programs)} programs.&#34;)
+    for program in iterate_and_print_programs(programs):
+        program.taxa[:] = taxonomy.to_taxa(program.labels)
+        # `program` being a tuple, modifying its fields can only be done in place.
+
+
 def collect_taxa(programs: Programs) -&gt; TaxonInfos:
     result: TaxonInfos = defaultdict(list)
     for program in programs:
         for taxon in program.taxa:
             result[taxon.name].append(program.name)
     return result
-
-
-def map_labels_on_taxa(programs: Programs, taxonomy: Taxonomy) -&gt; None:
-    print(f&#34;Mapping taxonomy on {len(programs)} programs.&#34;)
-    for program in iterate_and_print_programs(programs):
-        program.taxa[:] = taxonomy.to_taxa(program.labels)
-        # `program` being a tuple, modifying its fields can only be done in place.
 
 
 def compute_direct_importations(
@@ -270,18 +246,28 @@ def complete_and_collect_importations(importations: ProgramToPrograms) -&gt; Pro
     return completed_importations
 
 
-def compute_exportations(programs: Programs, importations: ProgramToPrograms) -&gt; ProgramToPrograms:
-    exportations: Dict = {program.name: set() for program in programs}
+def compute_and_collect_exportations(
+    programs: Programs, importations: ProgramToPrograms
+) -&gt; ProgramToPrograms:
+    exportations: ProgramToPrograms = {program.name: [] for program in programs}
     for (importing_name, imported_names) in importations.items():
         for imported_name in imported_names:
-            exportations[imported_name].add(importing_name)
+            if importing_name not in exportations[imported_name]:
+                insort(exportations[imported_name], importing_name)
     return exportations
 
 
-def collect_exportations(exportations: ProgramToPrograms) -&gt; ProgramToPrograms:
-    result: ProgramToPrograms = {}
-    for (exporting_name, exported_names) in exportations.items():
-        result[exporting_name] = sorted(exported_names)
+def prepared_labels(labels: Labels) -&gt; LabelsPoorSpans:
+    result: LabelsPoorSpans = {}
+    for (label_name, spans) in labels:
+        result[label_name] = [(span.start, span.end) for span in sorted(set(spans))]
+    return result
+
+
+def prepared_taxa(taxa: Taxa) -&gt; TaxaPoorSpans:
+    result: TaxaPoorSpans = {}
+    for (taxon_name, spans) in taxa:
+        result[taxon_name] = [(span.start, span.end) for span in sorted(spans)]
     return result
 
 
@@ -307,6 +293,199 @@ if __name__ == &#34;__main__&#34;:
 <section>
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
+<dt id="paroxython.make_db.collect_labels"><code class="name flex">
+<span>def <span class="ident">collect_labels</span></span>(<span>programs: List[Program]) ‑> Dict[LabelName, List[ProgramName]]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Iterate through the given programs to collect all their labels.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>programs</code></strong> :&ensp;<code>Programs</code></dt>
+<dd>A list of <code>Program</code> objects, with their <code>name</code> and <code>labels</code> fields
+already populated.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>LabelInfos</code></dt>
+<dd>A dictionary mapping each label name to the names of the programs featuring it.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L348-L362" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">def collect_labels(programs: Programs) -&gt; LabelInfos:
+    result: LabelInfos = defaultdict(list)
+    for program in programs:
+        for label in program.labels:
+            result[label.name].append(program.name)
+    return result</code></pre>
+</details>
+</dd>
+<dt id="paroxython.make_db.map_labels_on_taxa"><code class="name flex">
+<span>def <span class="ident">map_labels_on_taxa</span></span>(<span>programs: List[Program], <br>taxonomy: <a title="paroxython.map_taxonomy.Taxonomy" href="map_taxonomy.html#paroxython.map_taxonomy.Taxonomy">Taxonomy</a><br>) ‑> NoneType</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Populate the <code>taxa</code> fields of the given <code>programs</code> with the translations of their labels.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>programs</code></strong> :&ensp;<code>Programs</code></dt>
+<dd>A list of <code>Program</code> objects with their <code>labels</code> field populated.</dd>
+<dt><strong><code>taxonomy</code></strong> :&ensp;<code>Taxonomy</code></dt>
+<dd>A “translator” of label names into taxon names.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L365-L374" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">def map_labels_on_taxa(programs: Programs, taxonomy: Taxonomy) -&gt; None:
+    print(f&#34;Mapping taxonomy on {len(programs)} programs.&#34;)
+    for program in iterate_and_print_programs(programs):
+        program.taxa[:] = taxonomy.to_taxa(program.labels)</code></pre>
+</details>
+</dd>
+<dt id="paroxython.make_db.collect_taxa"><code class="name flex">
+<span>def <span class="ident">collect_taxa</span></span>(<span>programs: List[Program]) ‑> Dict[TaxonName, List[ProgramName]]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Iterate through the given programs to collect all their taxa.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>programs</code></strong> :&ensp;<code>Programs</code></dt>
+<dd>A list of <code>Program</code> objects, with their <code>name</code> and <code>taxa</code> fields
+already populated.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>TaxonInfos</code></dt>
+<dd>A dictionary mapping each taxon name to the names of the programs featuring it.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L378-L392" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">def collect_taxa(programs: Programs) -&gt; TaxonInfos:
+    result: TaxonInfos = defaultdict(list)
+    for program in programs:
+        for taxon in program.taxa:
+            result[taxon.name].append(program.name)
+    return result</code></pre>
+</details>
+</dd>
+<dt id="paroxython.make_db.compute_direct_importations"><code class="name flex">
+<span>def <span class="ident">compute_direct_importations</span></span>(<span>programs: List[Program], <br>match_import: Callable = &lt;built-in method match of regex&gt;<br>) ‑> Dict[ProgramName, List[ProgramName]]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Associate each given labelled program to the set of its direct internal imports.</p>
+<h2 id="description">Description</h2>
+<p>Iterate through the programs, retrieve their labels starting with <code>"import_internally"</code>
+and collect the names of the involved programs.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>programs</code></strong> :&ensp;<code>Programs</code></dt>
+<dd>A list of labelled <code>Program</code> objects.</dd>
+<dt><strong><code>match_import</code></strong> :&ensp;<code>Callable</code>, optional</dt>
+<dd>A function taking a label name and, in
+the case it starts with <code>"import_internally:"</code>, returns a match object whose
+first group is the name of the imported program.
+<a href="index.html#default-argument-trick">Not to be explicitly provided.</a></dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>ProgramToPrograms</code></dt>
+<dd>A dictionary mapping every program name to the list of the names of
+the internal programs it imports directly.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L395-L421" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">def compute_direct_importations(
+    programs: Programs, match_import: Callable = regex.compile(r&#34;import_internally:([^:]+)&#34;).match
+) -&gt; ProgramToPrograms:
+    importations: Dict = {program.name: set() for program in programs}
+    for program in programs:
+        for label in program.labels:
+            match = match_import(label.name)
+            if match:  # Python 3.8: use assignement-expression
+                importations[program.name].add(f&#34;{match[1]}.py&#34;)
+    return importations</code></pre>
+</details>
+</dd>
+<dt id="paroxython.make_db.complete_and_collect_importations"><code class="name flex">
+<span>def <span class="ident">complete_and_collect_importations</span></span>(<span>importations: Dict[ProgramName, List[ProgramName]]<br>) ‑> Dict[ProgramName, List[ProgramName]]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Complete the direct internal imports with indirect ones.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>importations</code></strong> :&ensp;<code>ProgramToPrograms</code></dt>
+<dd>A dictionary mapping every program name to the list
+of the names of the internal programs it imports directly.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>ProgramToPrograms</code></dt>
+<dd>A dictionary mapping every program name to the sorted list of the
+names of the internal programs it imports either directly or indirectly.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L424-L446" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">def complete_and_collect_importations(importations: ProgramToPrograms) -&gt; ProgramToPrograms:
+    @lru_cache(maxsize=None)
+    def complete_internal_imports(program_name: ProgramName) -&gt; ProgramNameSet:
+        result: ProgramNameSet = set(importations.get(program_name, []))
+        for imported in list(result):  # traverse a copy
+            result.update(complete_internal_imports(imported))
+        return result
+
+    completed_importations: ProgramToPrograms = {}
+    for program_name in list(importations.keys()):
+        completed_importations[program_name] = sorted(complete_internal_imports(program_name))
+    return completed_importations</code></pre>
+</details>
+</dd>
+<dt id="paroxython.make_db.compute_and_collect_exportations"><code class="name flex">
+<span>def <span class="ident">compute_and_collect_exportations</span></span>(<span>programs: List[Program], <br>importations: Dict[ProgramName, List[ProgramName]]<br>) ‑> Dict[ProgramName, List[ProgramName]]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Invert <code>importations</code> to construct <code>exportations</code>.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>programs</code></strong> :&ensp;<code>Programs</code></dt>
+<dd>A list of named <code>Program</code> objects.</dd>
+<dt><strong><code>importations</code></strong> :&ensp;<code>ProgramToPrograms</code></dt>
+<dd>A dictionary mapping every program name to the list of
+the names of the internal programs it imports either directly or indirectly.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>ProgramToPrograms</code></dt>
+<dd>A dictionary mapping every program name to the sorted list of the names
+of the internal programs it is imported by, either directly or indirectly.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L449-L468" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">def compute_and_collect_exportations(
+    programs: Programs, importations: ProgramToPrograms
+) -&gt; ProgramToPrograms:
+    exportations: ProgramToPrograms = {program.name: [] for program in programs}
+    for (importing_name, imported_names) in importations.items():
+        for imported_name in imported_names:
+            if importing_name not in exportations[imported_name]:
+                insort(exportations[imported_name], importing_name)
+    return exportations</code></pre>
+</details>
+</dd>
 <dt id="paroxython.make_db.prepared_labels"><code class="name flex">
 <span>def <span class="ident">prepared_labels</span></span>(<span>labels: List[Label]) ‑> Dict[LabelName, List[Tuple[int, int]]]</span>
 </code></dt>
@@ -326,7 +505,8 @@ simple couples of integers.</p>
 <pre><code class="python">&gt;&gt;&gt; prepared_labels([
 ...     (&quot;name_1&quot;, [
 ...             Span(start=1, end=2, path=&quot;foo&quot;),
-...             Span(start=1, end=2, path=&quot;bar&quot;),  # note the duplicate
+...             Span(start=1, end=2, path=&quot;foo&quot;),  # note the duplicate
+...             Span(start=1, end=2, path=&quot;bar&quot;),  # note the difference
 ...         ]),
 ...     (&quot;name_2&quot;, [
 ...             Span(start=2, end=4, path=&quot;fizz&quot;),
@@ -335,7 +515,7 @@ simple couples of integers.</p>
 ...     (&quot;name_3&quot;, [Span(start=5, end=5, path=&quot;foobar&quot;)]),
 ... ])
 {
-    &quot;name_1&quot;: [(1, 2)],  # deduplicated
+    &quot;name_1&quot;: [(1, 2), (1, 2)],  # deduplicated
     &quot;name_2&quot;: [(2, 4), (6, 7)],
     &quot;name_3&quot;: [(5, 5)],
 }
@@ -343,7 +523,7 @@ simple couples of integers.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L184-L217" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L471-L505" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def prepared_labels(labels: Labels) -&gt; LabelsPoorSpans:
     result: LabelsPoorSpans = {}
@@ -371,6 +551,7 @@ simple couples of integers.</p>
 <pre><code class="python">&gt;&gt;&gt; prepared_taxa([
 ...     (&quot;name_1&quot;, Counter({
 ...             Span(start=1, end=2, path=&quot;foo&quot;): 2,  # note the duplicate
+...             Span(start=1, end=2, path=&quot;bar&quot;): 1,
 ...         })),
 ...     (&quot;name_2&quot;, Counter({
 ...             Span(start=2, end=4, path=&quot;fizz&quot;): 1,
@@ -379,7 +560,7 @@ simple couples of integers.</p>
 ...     (&quot;name_3&quot;, Counter({Span(start=5, end=5, path=&quot;foobar&quot;): 1}))
 ... ])
 {
-    &quot;name_1&quot;: [(1, 2)],  # deduplicated
+    &quot;name_1&quot;: [(1, 2), (1, 2)],  # deduplicated
     &quot;name_2&quot;: [(2, 4), (6, 7)],
     &quot;name_3&quot;: [(5, 5)],
 }
@@ -387,165 +568,12 @@ simple couples of integers.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L220-L252" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L508-L541" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def prepared_taxa(taxa: Taxa) -&gt; TaxaPoorSpans:
     result: TaxaPoorSpans = {}
     for (taxon_name, spans) in taxa:
         result[taxon_name] = [(span.start, span.end) for span in sorted(spans)]
-    return result</code></pre>
-</details>
-</dd>
-<dt id="paroxython.make_db.collect_labels"><code class="name flex">
-<span>def <span class="ident">collect_labels</span></span>(<span>programs: List[Program]) ‑> Dict[LabelName, List[ProgramName]]</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Iterate through the given programs to collect all their labels.</p>
-<h2 id="args">Args</h2>
-<dl>
-<dt><strong><code>programs</code></strong> :&ensp;<code>Programs</code></dt>
-<dd>A list of programs. Required fields: <code>name</code> and <code>labels</code>.</dd>
-</dl>
-<h2 id="returns">Returns</h2>
-<dl>
-<dt><code>LabelInfos</code></dt>
-<dd>A dictionary mapping each label name to the names of the programs featuring it.</dd>
-</dl></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L255-L268" class="git-link">Browse GitHub</a>
-</summary>
-<pre><code class="python">def collect_labels(programs: Programs) -&gt; LabelInfos:
-    result: LabelInfos = defaultdict(list)
-    for program in programs:
-        for label in program.labels:
-            result[label.name].append(program.name)
-    return result</code></pre>
-</details>
-</dd>
-<dt id="paroxython.make_db.collect_taxa"><code class="name flex">
-<span>def <span class="ident">collect_taxa</span></span>(<span>programs: List[Program]) ‑> Dict[TaxonName, List[ProgramName]]</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Iterate through programs to collect all their taxa.</p>
-<h2 id="args">Args</h2>
-<dl>
-<dt><strong><code>programs</code></strong> :&ensp;<code>Programs</code></dt>
-<dd>A list of programs. Required fields: <code>name</code> and <code>taxa</code>.</dd>
-</dl>
-<h2 id="returns">Returns</h2>
-<dl>
-<dt><code>TaxonInfos</code></dt>
-<dd>A dictionary mapping each taxon name to the names of the programs featuring it.</dd>
-</dl></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L271-L284" class="git-link">Browse GitHub</a>
-</summary>
-<pre><code class="python">def collect_taxa(programs: Programs) -&gt; TaxonInfos:
-    result: TaxonInfos = defaultdict(list)
-    for program in programs:
-        for taxon in program.taxa:
-            result[taxon.name].append(program.name)
-    return result</code></pre>
-</details>
-</dd>
-<dt id="paroxython.make_db.map_labels_on_taxa"><code class="name flex">
-<span>def <span class="ident">map_labels_on_taxa</span></span>(<span>programs: List[Program], <br>taxonomy: <a title="paroxython.map_taxonomy.Taxonomy" href="map_taxonomy.html#paroxython.map_taxonomy.Taxonomy">Taxonomy</a><br>) ‑> NoneType</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Translate labels into taxa on a list of program names.</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L287-L291" class="git-link">Browse GitHub</a>
-</summary>
-<pre><code class="python">def map_labels_on_taxa(programs: Programs, taxonomy: Taxonomy) -&gt; None:
-    print(f&#34;Mapping taxonomy on {len(programs)} programs.&#34;)
-    for program in iterate_and_print_programs(programs):
-        program.taxa[:] = taxonomy.to_taxa(program.labels)</code></pre>
-</details>
-</dd>
-<dt id="paroxython.make_db.compute_direct_importations"><code class="name flex">
-<span>def <span class="ident">compute_direct_importations</span></span>(<span>programs: List[Program], <br>match_import: Callable = &lt;built-in method match of regex&gt;<br>) ‑> Dict[ProgramName, List[ProgramName]]</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Associate each program to the set of its direct internal imports.</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L295-L305" class="git-link">Browse GitHub</a>
-</summary>
-<pre><code class="python">def compute_direct_importations(
-    programs: Programs, match_import: Callable = regex.compile(r&#34;import_internally:([^:]+)&#34;).match
-) -&gt; ProgramToPrograms:
-    importations: Dict = {program.name: set() for program in programs}
-    for program in programs:
-        for label in program.labels:
-            match = match_import(label.name)
-            if match:  # Python 3.8: use assignement-expression
-                importations[program.name].add(f&#34;{match[1]}.py&#34;)
-    return importations</code></pre>
-</details>
-</dd>
-<dt id="paroxython.make_db.complete_and_collect_importations"><code class="name flex">
-<span>def <span class="ident">complete_and_collect_importations</span></span>(<span>importations: Dict[ProgramName, List[ProgramName]]<br>) ‑> Dict[ProgramName, List[ProgramName]]</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Complete the direct internal imports with indirect ones.</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L308-L321" class="git-link">Browse GitHub</a>
-</summary>
-<pre><code class="python">def complete_and_collect_importations(importations: ProgramToPrograms) -&gt; ProgramToPrograms:
-    @lru_cache(maxsize=None)
-    def complete_internal_imports(program_name: ProgramName) -&gt; ProgramNameSet:
-        result: ProgramNameSet = set(importations.get(program_name, []))
-        for imported in list(result):  # traverse a copy
-            result.update(complete_internal_imports(imported))
-        return result
-
-    completed_importations: ProgramToPrograms = {}
-    for program_name in list(importations.keys()):
-        completed_importations[program_name] = sorted(complete_internal_imports(program_name))
-    return completed_importations</code></pre>
-</details>
-</dd>
-<dt id="paroxython.make_db.compute_exportations"><code class="name flex">
-<span>def <span class="ident">compute_exportations</span></span>(<span>programs: List[Program], <br>importations: Dict[ProgramName, List[ProgramName]]<br>) ‑> Dict[ProgramName, List[ProgramName]]</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Invert <code>importations</code> to construct <code>exportations</code>.</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L324-L330" class="git-link">Browse GitHub</a>
-</summary>
-<pre><code class="python">def compute_exportations(programs: Programs, importations: ProgramToPrograms) -&gt; ProgramToPrograms:
-    exportations: Dict = {program.name: set() for program in programs}
-    for (importing_name, imported_names) in importations.items():
-        for imported_name in imported_names:
-            exportations[imported_name].add(importing_name)
-    return exportations</code></pre>
-</details>
-</dd>
-<dt id="paroxython.make_db.collect_exportations"><code class="name flex">
-<span>def <span class="ident">collect_exportations</span></span>(<span>exportations: Dict[ProgramName, List[ProgramName]]<br>) ‑> Dict[ProgramName, List[ProgramName]]</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Iterate through the exportations to collect them.</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L333-L338" class="git-link">Browse GitHub</a>
-</summary>
-<pre><code class="python">def collect_exportations(exportations: ProgramToPrograms) -&gt; ProgramToPrograms:
-    result: ProgramToPrograms = {}
-    for (exporting_name, exported_names) in exportations.items():
-        result[exporting_name] = sorted(exported_names)
     return result</code></pre>
 </details>
 </dd>
@@ -562,30 +590,24 @@ simple couples of integers.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L36-L181" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L37-L345" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">class Database:
-    def __init__(self, directory: Path, ignore_timestamps: bool = True, **kwargs) -&gt; None:
-        self.default_json_db_path = directory.parent / f&#34;{directory.name}_db.json&#34;
-        self.default_sqlite_db_path = directory.parent / f&#34;{directory.name}_db.sqlite&#34;
-
+    def __init__(self, directory: Path, ignore_timestamps: bool = False, **kwargs) -&gt; None:
+        self.directory = directory
         programs: Programs = labelled_programs(directory, **kwargs)
         self.labels = collect_labels(programs)
 
-        taxonomy = Taxonomy(**kwargs)
-        map_labels_on_taxa(programs, taxonomy)
+        map_labels_on_taxa(programs, Taxonomy(**kwargs))
         self.taxa = collect_taxa(programs)
 
         importations = compute_direct_importations(programs)
         self.importations = complete_and_collect_importations(importations)
-
-        exportations = compute_exportations(programs, self.importations)
-        self.exportations = collect_exportations(exportations)
+        self.exportations = compute_and_collect_exportations(programs, self.importations)
 
         get_timestamp = lambda path: str(datetime.fromtimestamp(path.stat().st_mtime))
         if ignore_timestamps:
-            get_timestamp = lambda path: &#34;ignored&#34;
-
+            get_timestamp = lambda path: &#34;&#34;
         self.programs_infos: ProgramInfos = {}
         for program in programs:
             self.programs_infos[program.name] = {
@@ -608,12 +630,12 @@ simple couples of integers.</p>
         return text
 
     def write_json(self, db_path: Optional[Path] = None) -&gt; None:
-        db_path = db_path or self.default_json_db_path
+        db_path = db_path or self.directory.parent / f&#34;{self.directory.name}_db.json&#34;
         print(f&#34;Writing {db_path}.&#34;)
         db_path.write_text(self.get_json())
 
     def write_sqlite(self, db_path: Optional[Path] = None) -&gt; None:
-        db_path = db_path or self.default_sqlite_db_path
+        db_path = db_path or self.directory.parent / f&#34;{self.directory.name}_db.sqlite&#34;
         print(f&#34;Writing {db_path}.&#34;)
         program_rows: List[Tuple] = []
         label_rows: List[Tuple] = []
@@ -652,15 +674,14 @@ simple couples of integers.</p>
         connexion = sqlite3.connect(str(db_path))  # str() for Python 3.6 compatibility
         c = connexion.cursor()
 
+        fill = lambda columns: &#34;,&#34;.join(&#34;?&#34; * len(columns))
         program_columns = (
             &#34;program TEXT PRIMARY KEY&#34;,
             &#34;timestamp TEXT&#34;,
             &#34;source TEXT&#34;,
         )
         c.execute(f&#34;CREATE TABLE program ({&#39;,&#39;.join(program_columns)})&#34;)
-        c.executemany(
-            f&#34;INSERT INTO program VALUES ({&#39;,&#39;.join(&#39;?&#39; * len(program_columns))})&#34;, program_rows,
-        )
+        c.executemany(f&#34;INSERT INTO program VALUES ({fill(program_columns)})&#34;, program_rows)
 
         label_columns = (
             # use rowid as primary key
@@ -676,9 +697,7 @@ simple couples of integers.</p>
             f&#34;CREATE TABLE label ({&#39;,&#39;.join(label_columns)},&#34;
             &#34;FOREIGN KEY (program) REFERENCES program (program))&#34;
         )
-        c.executemany(
-            f&#34;INSERT INTO label VALUES ({&#39;,&#39;.join(&#39;?&#39; * len(label_columns))})&#34;, label_rows,
-        )
+        c.executemany(f&#34;INSERT INTO label VALUES ({fill(label_columns)})&#34;, label_rows)
 
         taxon_columns = (
             # use rowid as primary key
@@ -692,9 +711,7 @@ simple couples of integers.</p>
             f&#34;CREATE TABLE taxon ({&#39;,&#39;.join(taxon_columns)},&#34;
             &#34;FOREIGN KEY (program) REFERENCES program (program))&#34;
         )
-        c.executemany(
-            f&#34;INSERT INTO taxon VALUES ({&#39;,&#39;.join(&#39;?&#39; * len(taxon_columns))})&#34;, taxon_rows,
-        )
+        c.executemany(f&#34;INSERT INTO taxon VALUES ({fill(taxon_columns)})&#34;, taxon_rows)
 
         connexion.commit()
         connexion.close()</code></pre>
@@ -702,48 +719,64 @@ simple couples of integers.</p>
 <h3>Methods</h3>
 <dl>
 <dt id="paroxython.make_db.Database.__init__"><code class="name flex">
-<span>def <span class="ident">__init__</span></span>(<span>self, <br>directory: pathlib.Path, <br>ignore_timestamps: bool = True, <br>**kwargs<br>) ‑> NoneType</span>
+<span>def <span class="ident">__init__</span></span>(<span>self, <br>directory: pathlib.Path, <br>ignore_timestamps: bool = False, <br>**kwargs<br>) ‑> NoneType</span>
 </code></dt>
 <dd>
-<div class="desc"><p>TODO</p>
+<div class="desc"><p>Construct and populate the complete database of program features.</p>
 <h2 id="args">Args</h2>
 <dl>
 <dt><strong><code>directory</code></strong> :&ensp;<code>Path</code></dt>
-<dd>The directory to walk, containing some Python programs.</dd>
+<dd>The directory to walk (by default, recursively), containing the
+Python programs of interest.</dd>
 <dt><strong><code>ignore_timestamps</code></strong> :&ensp;<code>bool</code>, optional</dt>
-<dd>[description]. Defaults to True.</dd>
+<dd>Don't store the last modification dates of these
+programms. Since the database snapshots generated by our tests are placed under
+version control, this prevents Git from tracking irrelevant differences. Defaults
+to <code>False</code>.</dd>
 <dt><strong><code>**kwargs</code></strong></dt>
 <dd>May include the keyword arguments <code>cleanup_strategy</code>, <code>skip_pattern</code>,
 <code>glob_pattern</code>, transmitted to <code><a title="paroxython.list_programs.list_programs" href="list_programs.html#paroxython.list_programs.list_programs">list_programs()</a></code> through
 <code><a title="paroxython.label_programs.labelled_programs" href="label_programs.html#paroxython.label_programs.labelled_programs">labelled_programs()</a></code>, and <code>taxonomy_path</code>, transmitted to
 <code><a title="paroxython.map_taxonomy.Taxonomy" href="map_taxonomy.html#paroxython.map_taxonomy.Taxonomy">Taxonomy</a></code>.</dd>
-</dl></div>
+</dl>
+<h2 id="description">Description</h2>
+<ol>
+<li>Create a list <code>programs</code> of <code>Program</code> objects, labelled by
+<code><a title="paroxython.label_programs.labelled_programs" href="label_programs.html#paroxython.label_programs.labelled_programs">labelled_programs()</a></code>.</li>
+<li>Create a dictionary <code>self.labels</code> mapping each label name to the names of the
+programs featuring it (<code><a title="paroxython.make_db.collect_labels" href="#paroxython.make_db.collect_labels">collect_labels()</a></code>).</li>
+<li>Map the labels to taxa (<code><a title="paroxython.map_taxonomy.Taxonomy" href="map_taxonomy.html#paroxython.map_taxonomy.Taxonomy">Taxonomy</a></code>), and populate the field
+<code>taxa</code> of <code>programs</code> (<code><a title="paroxython.make_db.map_labels_on_taxa" href="#paroxython.make_db.map_labels_on_taxa">map_labels_on_taxa()</a></code>).</li>
+<li>Create a dictionary <code>self.taxa</code> mapping each taxon name to the names of the
+programs featuring it (<code><a title="paroxython.make_db.collect_taxa" href="#paroxython.make_db.collect_taxa">collect_taxa()</a></code>).</li>
+<li>Create a dictionary <code>self.importations</code> mapping each program name to the names
+of the programs importing it, both directly (<code><a title="paroxython.make_db.compute_direct_importations" href="#paroxython.make_db.compute_direct_importations">compute_direct_importations()</a></code>) and
+indirectly (<code><a title="paroxython.make_db.complete_and_collect_importations" href="#paroxython.make_db.complete_and_collect_importations">complete_and_collect_importations()</a></code>).</li>
+<li>Invert the previous dictionary to create a dictionary <code>self.exportations</code>
+(<code><a title="paroxython.make_db.compute_and_collect_exportations" href="#paroxython.make_db.compute_and_collect_exportations">compute_and_collect_exportations()</a></code>).</li>
+<li>Gather in <code>self.programs_infos</code> each program timestamp, source, labels and taxa as
+a serialization-ready dictionary indexed by program names.</li>
+</ol></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L37-L76" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L38-L92" class="git-link">Browse GitHub</a>
 </summary>
-<pre><code class="python">def __init__(self, directory: Path, ignore_timestamps: bool = True, **kwargs) -&gt; None:
-    self.default_json_db_path = directory.parent / f&#34;{directory.name}_db.json&#34;
-    self.default_sqlite_db_path = directory.parent / f&#34;{directory.name}_db.sqlite&#34;
-
+<pre><code class="python">def __init__(self, directory: Path, ignore_timestamps: bool = False, **kwargs) -&gt; None:
+    self.directory = directory
     programs: Programs = labelled_programs(directory, **kwargs)
     self.labels = collect_labels(programs)
 
-    taxonomy = Taxonomy(**kwargs)
-    map_labels_on_taxa(programs, taxonomy)
+    map_labels_on_taxa(programs, Taxonomy(**kwargs))
     self.taxa = collect_taxa(programs)
 
     importations = compute_direct_importations(programs)
     self.importations = complete_and_collect_importations(importations)
-
-    exportations = compute_exportations(programs, self.importations)
-    self.exportations = collect_exportations(exportations)
+    self.exportations = compute_and_collect_exportations(programs, self.importations)
 
     get_timestamp = lambda path: str(datetime.fromtimestamp(path.stat().st_mtime))
     if ignore_timestamps:
-        get_timestamp = lambda path: &#34;ignored&#34;
-
+        get_timestamp = lambda path: &#34;&#34;
     self.programs_infos: ProgramInfos = {}
     for program in programs:
         self.programs_infos[program.name] = {
@@ -758,11 +791,69 @@ simple couples of integers.</p>
 <span>def <span class="ident">get_json</span></span>(<span>self) ‑> str</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Dump the data to JSON, and reduce each list of spans to one line.</p></div>
+<div class="desc"><p>Dump the constructed <code><a title="paroxython.make_db.Database" href="#paroxython.make_db.Database">Database</a></code> object as a JSON string.</p>
+<h2 id="description">Description</h2>
+<p>The JSON schema is as follows:</p>
+<pre><code class="json">{
+    &quot;programs&quot;: {
+        &quot;program_1.py&quot; : {
+            &quot;timestamp&quot;: &quot;1970-01-01&quot;,
+            &quot;source&quot;: &quot;print('hello')\nprint('world')\n&quot;,
+            &quot;labels&quot;: {
+                &quot;label_1&quot;: [[span_start_1, span_end_1], ...],
+                ...
+            },
+            &quot;taxa: {
+                &quot;taxon_1&quot;: [[span_start_1, span_end_1], ...],
+                ...
+            }
+        },
+        ...
+    }
+    &quot;labels&quot;: {
+        &quot;label_1&quot;: [&quot;program_1.py&quot;, &quot;program_2.py&quot;, ...],
+        ...
+    },
+    &quot;taxa&quot;: {
+        &quot;taxon_1&quot;: [&quot;program_1.py&quot;, &quot;program_2.py&quot;, ...],
+        ...
+    },
+    &quot;importations&quot;: {
+        &quot;program_1.py&quot;: [&quot;program_2.py&quot;, &quot;program_3.py&quot;, ...],
+        ...
+    },
+    &quot;exportations&quot;: {
+        &quot;program_1.py&quot;: [],
+        &quot;program_2.py&quot;: [&quot;program_1.py&quot;, ...],
+        ...
+    }
+}
+</code></pre>
+<p>All fields have already been calculated during the construction of the instance.</p>
+<h2 id="note">Note</h2>
+<p>For readability purposes, the output of <code>json.dumps()</code> is reformatted to fit each span
+list on a single line, <em>e.g.</em>:</p>
+<pre><code class="json">            &quot;flow/loop/exit/late&quot;: [
+                [
+                    3,
+                    8
+                ],
+                [
+                    6,
+                    7
+                ]
+            ],
+</code></pre>
+<p>&hellip; is unwrap as:</p>
+<pre><code class="json">            &quot;flow/loop/exit/late&quot;: [[3,8],[6,7]],
+</code></pre>
+<h2 id="example">Example</h2>
+<p>See the <a href="https://github.com/laowantong/paroxython/blob/master/examples/mini/programs_db.json">JSON database</a>
+constructed from the programs of this <a href="https://github.com/laowantong/paroxython/tree/master/examples/mini/programs">directory</a>.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L78-L89" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L94-L174" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def get_json(self) -&gt; str:
     data = {
@@ -781,14 +872,21 @@ simple couples of integers.</p>
 <span>def <span class="ident">write_json</span></span>(<span>self, <br>db_path: Union[pathlib.Path, NoneType] = None<br>) ‑> NoneType</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Call <code><a title="paroxython.make_db.Database.get_json" href="#paroxython.make_db.Database.get_json">Database.get_json()</a></code> and write the result to a file.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>db_path</code></strong> :&ensp;<code>Optional[Path]</code>, optional</dt>
+<dd>If not provided, and the directory provided to the
+class constructor is <code>"foobar"</code>, falls back to <code>"foobar_db.json"</code> in the same parent
+directory. Defaults to <code>None</code>.</dd>
+</dl></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L91-L94" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L176-L186" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def write_json(self, db_path: Optional[Path] = None) -&gt; None:
-    db_path = db_path or self.default_json_db_path
+    db_path = db_path or self.directory.parent / f&#34;{self.directory.name}_db.json&#34;
     print(f&#34;Writing {db_path}.&#34;)
     db_path.write_text(self.get_json())</code></pre>
 </details>
@@ -797,14 +895,79 @@ simple couples of integers.</p>
 <span>def <span class="ident">write_sqlite</span></span>(<span>self, <br>db_path: Union[pathlib.Path, NoneType] = None<br>) ‑> NoneType</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Dump the constructed <code><a title="paroxython.make_db.Database" href="#paroxython.make_db.Database">Database</a></code> object as a SQLite database (experimental).</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>db_path</code></strong> :&ensp;<code>Optional[Path]</code>, optional</dt>
+<dd>If not provided, and the directory provided to the
+class constructor is <code>"foobar"</code>, falls back to <code>"foobar_db.sqlite"</code> in the same
+parent directory. Defaults to <code>None</code>.</dd>
+</dl>
+<h2 id="description">Description</h2>
+<p>The relational schema is as follows:</p>
+<pre><code class="sql">CREATE TABLE program (
+    program TEXT PRIMARY KEY,
+    timestamp TEXT,
+    source TEXT
+);
+CREATE TABLE label (
+    -- use rowid as primary key
+    name TEXT,
+    name_prefix TEXT,
+    name_suffix TEXT,
+    span TEXT,
+    span_start INTEGER,
+    span_end INTEGER,
+    program TEXT,
+    FOREIGN KEY (program) REFERENCES program (program)
+);
+CREATE TABLE taxon (
+    -- use rowid as primary key
+    name TEXT,
+    span TEXT,
+    span_start INTEGER,
+    span_end INTEGER,
+    program TEXT,
+    FOREIGN KEY (program) REFERENCES program (program)
+);
+</code></pre>
+<p>Having a relational version of the database means that it can be queried with SQL.
+Here is an example of such a query:</p>
+<pre><code class="sql">SELECT
+    name AS taxon,
+    program,
+    group_concat(span, &quot;, &quot;) AS spans,
+    source
+FROM program
+JOIN taxon USING (program)
+WHERE name GLOB &quot;type/non_sequence/dictionary/*&quot;
+GROUP BY name, program
+</code></pre>
+<p>On the provided
+<a href="https://github.com/laowantong/paroxython/tree/master/examples/simple/programs">simple programs</a>,
+its execution results in:</p>
+<p><img alt="" src="resources/sql_query_example.png"></p>
+<h2 id="note">Note</h2>
+<p>The same list of programs can be obtained by feeding
+<code><a title="paroxython.recommend_programs.Recommendations.run_pipeline" href="recommend_programs.html#paroxython.recommend_programs.Recommendations.run_pipeline">Recommendations.run_pipeline()</a></code>
+with the following command:</p>
+<pre><code class="python">    {
+        &quot;operation&quot;: &quot;include&quot;,
+        &quot;data&quot;: [&quot;type/non_sequence/dictionary/&quot;]
+    }
+</code></pre>
+<p>Although SQL should be familiar to almost everyone in our target audience, and might
+“make complex things possible”, the current minimalistic schema arguably does not
+”make simple things simple”. Some denormalization should ease the process, but so far
+we have prioritized the development of the pipeline system. The relational database
+generation may be a dead-end, and is currently not used anywhere in Paroxython.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L96-L181" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L188-L345" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def write_sqlite(self, db_path: Optional[Path] = None) -&gt; None:
-    db_path = db_path or self.default_sqlite_db_path
+    db_path = db_path or self.directory.parent / f&#34;{self.directory.name}_db.sqlite&#34;
     print(f&#34;Writing {db_path}.&#34;)
     program_rows: List[Tuple] = []
     label_rows: List[Tuple] = []
@@ -843,15 +1006,14 @@ simple couples of integers.</p>
     connexion = sqlite3.connect(str(db_path))  # str() for Python 3.6 compatibility
     c = connexion.cursor()
 
+    fill = lambda columns: &#34;,&#34;.join(&#34;?&#34; * len(columns))
     program_columns = (
         &#34;program TEXT PRIMARY KEY&#34;,
         &#34;timestamp TEXT&#34;,
         &#34;source TEXT&#34;,
     )
     c.execute(f&#34;CREATE TABLE program ({&#39;,&#39;.join(program_columns)})&#34;)
-    c.executemany(
-        f&#34;INSERT INTO program VALUES ({&#39;,&#39;.join(&#39;?&#39; * len(program_columns))})&#34;, program_rows,
-    )
+    c.executemany(f&#34;INSERT INTO program VALUES ({fill(program_columns)})&#34;, program_rows)
 
     label_columns = (
         # use rowid as primary key
@@ -867,9 +1029,7 @@ simple couples of integers.</p>
         f&#34;CREATE TABLE label ({&#39;,&#39;.join(label_columns)},&#34;
         &#34;FOREIGN KEY (program) REFERENCES program (program))&#34;
     )
-    c.executemany(
-        f&#34;INSERT INTO label VALUES ({&#39;,&#39;.join(&#39;?&#39; * len(label_columns))})&#34;, label_rows,
-    )
+    c.executemany(f&#34;INSERT INTO label VALUES ({fill(label_columns)})&#34;, label_rows)
 
     taxon_columns = (
         # use rowid as primary key
@@ -883,9 +1043,7 @@ simple couples of integers.</p>
         f&#34;CREATE TABLE taxon ({&#39;,&#39;.join(taxon_columns)},&#34;
         &#34;FOREIGN KEY (program) REFERENCES program (program))&#34;
     )
-    c.executemany(
-        f&#34;INSERT INTO taxon VALUES ({&#39;,&#39;.join(&#39;?&#39; * len(taxon_columns))})&#34;, taxon_rows,
-    )
+    c.executemany(f&#34;INSERT INTO taxon VALUES ({fill(taxon_columns)})&#34;, taxon_rows)
 
     connexion.commit()
     connexion.close()</code></pre>
@@ -918,15 +1076,14 @@ data-gaCategoryParameter="paroxython.make_db">
 </li>
 <li><h3><a href="#header-functions">Functions</a></h3>
 <ul class="">
-<li><code><a title="paroxython.make_db.prepared_labels" href="#paroxython.make_db.prepared_labels">prepared_labels</a></code></li>
-<li><code><a title="paroxython.make_db.prepared_taxa" href="#paroxython.make_db.prepared_taxa">prepared_taxa</a></code></li>
 <li><code><a title="paroxython.make_db.collect_labels" href="#paroxython.make_db.collect_labels">collect_labels</a></code></li>
-<li><code><a title="paroxython.make_db.collect_taxa" href="#paroxython.make_db.collect_taxa">collect_taxa</a></code></li>
 <li><code><a title="paroxython.make_db.map_labels_on_taxa" href="#paroxython.make_db.map_labels_on_taxa">map_labels_on_taxa</a></code></li>
+<li><code><a title="paroxython.make_db.collect_taxa" href="#paroxython.make_db.collect_taxa">collect_taxa</a></code></li>
 <li><code><a title="paroxython.make_db.compute_direct_importations" href="#paroxython.make_db.compute_direct_importations">compute_direct_importations</a></code></li>
 <li><code><a title="paroxython.make_db.complete_and_collect_importations" href="#paroxython.make_db.complete_and_collect_importations">complete_and_collect_importations</a></code></li>
-<li><code><a title="paroxython.make_db.compute_exportations" href="#paroxython.make_db.compute_exportations">compute_exportations</a></code></li>
-<li><code><a title="paroxython.make_db.collect_exportations" href="#paroxython.make_db.collect_exportations">collect_exportations</a></code></li>
+<li><code><a title="paroxython.make_db.compute_and_collect_exportations" href="#paroxython.make_db.compute_and_collect_exportations">compute_and_collect_exportations</a></code></li>
+<li><code><a title="paroxython.make_db.prepared_labels" href="#paroxython.make_db.prepared_labels">prepared_labels</a></code></li>
+<li><code><a title="paroxython.make_db.prepared_taxa" href="#paroxython.make_db.prepared_taxa">prepared_taxa</a></code></li>
 </ul>
 </li>
 <li><h3><a href="#header-classes">Classes</a></h3>

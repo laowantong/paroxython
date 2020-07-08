@@ -1,7 +1,7 @@
 {
   "programs": {
     "001.0003-print-hello-world.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "from __future__ import print_function\nprint(\"Hello World\")",
       "labels": {
         "call_argument:": [[2,2]],
@@ -24,7 +24,7 @@
       }
     },
     "001.1159-print-hello-world.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "print(\"Hello World\")",
       "labels": {
         "call_argument:": [[1,1]],
@@ -43,7 +43,7 @@
       }
     },
     "002.0011-print-hello-10-times.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "for i in range(10):\n    print(\"Hello\")",
       "labels": {
         "call_argument:": [[2,2]],
@@ -75,7 +75,7 @@
       }
     },
     "002.1493-print-hello-10-times.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "print(\"Hello\\n\" * 10)",
       "labels": {
         "binary_operator:Mult": [[1,1]],
@@ -99,7 +99,7 @@
       }
     },
     "002.3117-print-hello-10-times.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "print(\"Hello\\n\" * 10)",
       "labels": {
         "binary_operator:Mult": [[1,1]],
@@ -123,7 +123,7 @@
       }
     },
     "003.0019-create-a-procedure.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "def finish(name):\n    print(\"My job here is done. Goodbye \" + name)",
       "labels": {
         "binary_operator:Add": [[2,2]],
@@ -151,7 +151,7 @@
       }
     },
     "003.2372-create-a-procedure.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "def a():\n    pass",
       "labels": {
         "function:a": [[1,2]],
@@ -169,7 +169,7 @@
       }
     },
     "004.0024-create-a-function-which-returns-the-square-of-an-integer.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "def square(x):\n    return x * x",
       "labels": {
         "binary_operator:Mult": [[2,2]],
@@ -190,7 +190,7 @@
       }
     },
     "004.2921-create-a-function-which-returns-the-square-of-an-integer.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "def square(x):\n    return x ** 2",
       "labels": {
         "binary_operator:Pow": [[2,2]],
@@ -212,7 +212,7 @@
       }
     },
     "005.0663-create-a-2d-point-data-structure.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "from dataclasses import dataclass\n@dataclass\nclass Point:\n    x: float\n    y: float",
       "labels": {
         "class:Point": [[2,2]],
@@ -229,7 +229,7 @@
       }
     },
     "006.0032-iterate-over-list-values.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "for x in items:\n    doSomething(x)",
       "labels": {
         "call_argument:x": [[2,2]],
@@ -251,7 +251,7 @@
       }
     },
     "007.0183-iterate-over-list-indexes-and-values.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "for i, x in enumerate(items):\n    print(i, x)",
       "labels": {
         "call_argument:i": [[2,2]],
@@ -283,7 +283,7 @@
       }
     },
     "008.0039-initialize-a-new-map-associative-array.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "x = {\"one\": 1, \"two\": 2}",
       "labels": {
         "assignment": [[1,1]],
@@ -307,7 +307,7 @@
       }
     },
     "009.1410-create-a-binary-tree-data-structure.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "class Node:\n    def __init__(self, data):\n        self.data = data\n        self.left = None\n        self.right = None",
       "labels": {
         "assignment": [[3,3]],
@@ -339,7 +339,7 @@
       }
     },
     "009.3176-create-a-binary-tree-data-structure.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "class Node:\n    def __init__(self, data, left_child, right_child):\n        self.data = data\n        self._left_child = left_child\n        self._right_child = right_child",
       "labels": {
         "assignment": [[3,3],[4,4],[5,5]],
@@ -371,7 +371,7 @@
       }
     },
     "010.0182-shuffle-a-list.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "from random import shuffle\nshuffle(x)",
       "labels": {
         "call_argument:x": [[2,2]],
@@ -391,7 +391,7 @@
       }
     },
     "010.1478-shuffle-a-list.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "import random\nrandom.shuffle(list)",
       "labels": {
         "call_argument:list": [[2,2]],
@@ -410,7 +410,7 @@
       }
     },
     "011.0047-pick-a-random-element-from-a-list.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "import random\nrandom.choice(x)",
       "labels": {
         "call_argument:x": [[2,2]],
@@ -429,7 +429,7 @@
       }
     },
     "012.0181-check-if-list-contains-a-value.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "x in list",
       "labels": {
         "comparison_operator:In": [[1,1]],
@@ -442,7 +442,7 @@
       }
     },
     "013.0574-iterate-over-map-keys-and-values.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "for k, v in mymap.items():\n    print(k, v)",
       "labels": {
         "call_argument:k": [[2,2]],
@@ -471,7 +471,7 @@
       }
     },
     "014.0185-pick-uniformly-a-random-floating-point-number-in-ab.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "import random\ndef pick(a, b):\n    return random.randrange(a, b)",
       "labels": {
         "call_argument:a": [[3,3]],
@@ -498,7 +498,7 @@
       }
     },
     "014.3410-pick-uniformly-a-random-floating-point-number-in-ab.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "import random\nrandom.uniform(a, b)",
       "labels": {
         "call_argument:a": [[2,2]],
@@ -518,7 +518,7 @@
       }
     },
     "015.0184-pick-uniformly-a-random-integer-in-ab.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "import random\nrandom.randint(a, b)",
       "labels": {
         "call_argument:a": [[2,2]],
@@ -538,7 +538,7 @@
       }
     },
     "016.1530-depth-first-traversing-of-a-binary-tree.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "def dfs(bt):\n    if bt is None:\n        return\n    dfs(bt.left)\n    f(bt)\n    dfs(bt.right)",
       "labels": {
         "body_recursive_function:dfs": [[1,6]],
@@ -582,7 +582,7 @@
       }
     },
     "017.1103-create-a-tree-data-structure.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "class Node(object):\n    def __init__(self, value, *children):\n        self.value = value\n        self.children = list(children)",
       "labels": {
         "assignment": [[3,3]],
@@ -620,7 +620,7 @@
       }
     },
     "018.2084-depth-first-traversing-of-a-tree.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "def DFS(f, root):\n    f(root)\n    for child in root:\n        DFS(f, child)",
       "labels": {
         "body_recursive_function:DFS": [[1,4]],
@@ -660,7 +660,7 @@
       }
     },
     "019.0197-reverse-a-list.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "x = reversed(x)",
       "labels": {
         "assignment:reversed": [[1,1]],
@@ -680,7 +680,7 @@
       }
     },
     "019.1983-reverse-a-list.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "y = x[::-1]",
       "labels": {
         "assignment": [[1,1]],
@@ -704,7 +704,7 @@
       }
     },
     "019.3164-reverse-a-list.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "x.reverse()",
       "labels": {
         "member_call:reverse": [[1,1]],
@@ -720,7 +720,7 @@
       }
     },
     "020.0573-return-two-values.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "def search(m, x):\n    for idx, item in enumerate(m):\n        if x in item:\n            return idx, item.index(x)",
       "labels": {
         "call_argument:m": [[2,2]],
@@ -766,7 +766,7 @@
       }
     },
     "021.0084-swap-values-of-variables-a-and-b.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "a, b = b, a",
       "labels": {
         "assignment": [[1,1]],
@@ -793,7 +793,7 @@
       }
     },
     "022.0243-convert-string-to-integer.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "i = int(s)",
       "labels": {
         "assignment:int": [[1,1]],
@@ -814,7 +814,7 @@
       }
     },
     "023.1102-convert-real-number-to-string-with-2-decimal-places.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "s = \"{:.2f}\".format(x)",
       "labels": {
         "assignment:format": [[1,1]],
@@ -836,7 +836,7 @@
       }
     },
     "024.0664-assign-to-string-the-japanese-word-.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "s = \"\u30cd\u30b3\"",
       "labels": {
         "assignment": [[1,1]],
@@ -853,7 +853,7 @@
       }
     },
     "025.0195-send-a-value-to-another-thread.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "import Queue\nq = Queue()\nt = Thread(target=worker)\nt.daemon = True\nt.start()\nq.put(\"Alan\")",
       "labels": {
         "assignment:Queue": [[2,2]],
@@ -898,7 +898,7 @@
       }
     },
     "026.0194-create-a-2-dimensional-array.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "x = [[0 for j in xrange(n)] for i in xrange(m)]",
       "labels": {
         "assignment": [[1,1]],
@@ -927,7 +927,7 @@
       }
     },
     "027.0192-create-a-3-dimensional-array.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "x = [[[0 for k in xrange(p)] for j in xrange(n)] for i in xrange(m)]",
       "labels": {
         "assignment": [[1,1]],
@@ -959,7 +959,7 @@
       }
     },
     "027.0193-create-a-3-dimensional-array.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "import numpy\nx = numpy.zeros((m, n, p))",
       "labels": {
         "assignment:zeros": [[2,2]],
@@ -986,7 +986,7 @@
       }
     },
     "028.0350-sort-by-a-property.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "items = sorted(items, key=lambda x: x.p)",
       "labels": {
         "assignment:sorted": [[1,1]],
@@ -1015,7 +1015,7 @@
       }
     },
     "029.0199-remove-item-from-list-by-its-index.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "del items[i]",
       "labels": {
         "index:i": [[1,1]],
@@ -1028,7 +1028,7 @@
       }
     },
     "030.0189-parallelize-execution-of-1000-independent-tasks.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "from multiprocessing import Pool\npool = Pool()\nfor i in range(1, 1001):\n    pool.apply_async(f, [i])",
       "labels": {
         "assignment:Pool": [[2,2]],
@@ -1074,7 +1074,7 @@
       }
     },
     "031.0188-recursive-factorial-simple.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "def f(i):\n    if i == 0:\n        return 1\n    else:\n        return i * f(i - 1)",
       "labels": {
         "binary_operator:Mult": [[5,5]],
@@ -1118,7 +1118,7 @@
       }
     },
     "032.0196-integer-exponentiation-by-squaring.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "def exp(x, n):\n    return x ** n",
       "labels": {
         "binary_operator:Pow": [[2,2]],
@@ -1139,7 +1139,7 @@
       }
     },
     "033.1420-atomically-read-and-update-variable.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "import threading\nlock = threading.Lock()\nlock.acquire()\ntry:\n    x = f(x)\nfinally:\n    lock.release()",
       "labels": {
         "assignment:Lock": [[2,2]],
@@ -1174,7 +1174,7 @@
       }
     },
     "034.0625-create-a-set-of-objects.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "class T(object):\n    pass\nx = set(T())",
       "labels": {
         "assignment:set": [[3,3]],
@@ -1204,7 +1204,7 @@
       }
     },
     "035.0667-first-class-function--compose.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "def compose(f, g):\n    return lambda a: g(f(a))",
       "labels": {
         "call_argument:": [[2,2]],
@@ -1238,7 +1238,7 @@
       }
     },
     "036.0670-first-class-function--generic-composition.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "def compose(f, g):\n    return lambda x: g(f(x))",
       "labels": {
         "call_argument:": [[2,2]],
@@ -1272,7 +1272,7 @@
       }
     },
     "037.0671-currying.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "from functools import partial\ndef f(a):\n    def add(b):\n        return a + b\n    return add\nprint(f(2)(1))",
       "labels": {
         "addition_operator": [[4,4]],
@@ -1320,7 +1320,7 @@
       }
     },
     "038.0186-extract-a-substring.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "t = s[i:j]",
       "labels": {
         "assignment": [[1,1]],
@@ -1344,7 +1344,7 @@
       }
     },
     "039.0571-check-if-string-contains-a-word.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "ok = word in s",
       "labels": {
         "assignment": [[1,1]],
@@ -1363,7 +1363,7 @@
       }
     },
     "040.2279-graph-with-adjacency-lists.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "from collections import defaultdict\nclass Vertex(set):\n    pass\nclass Graph(defaultdict):\n    def __init__(self, *paths):\n        self.default_factory = Vertex\n        for path in paths:\n            self.make_path(path)\n    def make_path(self, labels):\n        for l1, l2 in zip(labels, labels[1:]):\n            self[l1].add(l2)\n            self[l2].add(l1)\nG = Graph((0, 1, 2, 3), (1, 4, 2))",
       "labels": {
         "assignment": [[6,6]],
@@ -1460,7 +1460,7 @@
       }
     },
     "041.0187-reverse-a-string.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "t = s.decode(\"utf8\")[::-1].encode(\"utf8\")",
       "labels": {
         "assignment:encode": [[1,1]],
@@ -1493,7 +1493,7 @@
       }
     },
     "041.2714-reverse-a-string.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "t = s[::-1]",
       "labels": {
         "assignment": [[1,1]],
@@ -1517,7 +1517,7 @@
       }
     },
     "042.1264-continue-outer-loop.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "for v in a:\n    try:\n        for u in b:\n            if v == u:\n                raise Exception()\n        print(v)\n    except Exception:\n        continue",
       "labels": {
         "call_argument:v": [[6,6]],
@@ -1564,7 +1564,7 @@
       }
     },
     "042.3168-continue-outer-loop.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "for v in a:\n    for v_ in b:\n        if v == v_:\n            continue\n        print(v)",
       "labels": {
         "call_argument:v": [[5,5]],
@@ -1599,7 +1599,7 @@
       }
     },
     "043.0676-break-outer-loop.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "class BreakOuterLoop(Exception):\n    pass\ntry:\n    position = None\n    for row in m:\n        for column in m[row]:\n            if m[row][column] == v:\n                position = (row, column)\n                raise BreakOuterLoop\nexcept BreakOuterLoop:\n    pass",
       "labels": {
         "assignment": [[8,8]],
@@ -1658,7 +1658,7 @@
       }
     },
     "043.2733-break-outer-loop.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "def loop_breaking(m, v):\n    for i, row in enumerate(m):\n        for j, value in enumerate(row):\n            if value == v:\n                return (i, j)\n    return None\nprint(loop_breaking(([1, 2, 3], [4, 5, 6], [7, 8, 9]), 6))",
       "labels": {
         "call_argument:": [[7,7],[7,7]],
@@ -1732,7 +1732,7 @@
       }
     },
     "044.0190-insert-element-in-list.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "s.insert(i, x)",
       "labels": {
         "call_argument:i": [[1,1]],
@@ -1756,7 +1756,7 @@
       }
     },
     "045.0570-pause-execution-for-5-seconds.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "import time\ntime.sleep(5)",
       "labels": {
         "call_argument:5": [[2,2]],
@@ -1777,7 +1777,7 @@
       }
     },
     "046.0191-extract-beginning-of-string-prefix.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "t = s[:5]",
       "labels": {
         "assignment": [[1,1]],
@@ -1801,7 +1801,7 @@
       }
     },
     "047.0198-extract-string-suffix.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "t = s[-5:]",
       "labels": {
         "assignment": [[1,1]],
@@ -1825,7 +1825,7 @@
       }
     },
     "048.0210-multi-line-string-literal.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "s = \"\"\"Huey\nDewey\nLouie\"\"\"",
       "labels": {
         "assignment": [[1,1]],
@@ -1842,7 +1842,7 @@
       }
     },
     "049.0242-split-a-space-separated-string.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "chunks = s.split()",
       "labels": {
         "assignment:split": [[1,1]],
@@ -1861,7 +1861,7 @@
       }
     },
     "050.0572-make-an-infinite-loop.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "while True:\n    pass",
       "labels": {
         "infinite_while": [[1,2]],
@@ -1882,7 +1882,7 @@
       }
     },
     "051.0230-check-if-map-contains-key.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "k in m",
       "labels": {
         "comparison_operator:In": [[1,1]],
@@ -1895,7 +1895,7 @@
       }
     },
     "052.0666-check-if-map-contains-value.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "v in map.values()",
       "labels": {
         "comparison_operator:In": [[1,1]],
@@ -1911,7 +1911,7 @@
       }
     },
     "053.0240-join-a-list-of-strings.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "y = \", \".join(x)",
       "labels": {
         "assignment:join": [[1,1]],
@@ -1933,7 +1933,7 @@
       }
     },
     "053.1933-join-a-list-of-strings.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "y = \", \".join(map(str, x))",
       "labels": {
         "assignment:join": [[1,1]],
@@ -1963,7 +1963,7 @@
       }
     },
     "054.0241-compute-sum-of-integers.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "s = sum(x)",
       "labels": {
         "assignment:sum": [[1,1]],
@@ -1983,7 +1983,7 @@
       }
     },
     "055.0575-convert-integer-to-string.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "s = str(i)",
       "labels": {
         "assignment:str": [[1,1]],
@@ -2005,7 +2005,7 @@
       }
     },
     "056.1424-launch-1000-parallel-tasks-and-wait-for-completion.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "from multiprocessing import Pool\ndef f(i):\n    i * i\nwith Pool(processes) as p:\n    p.map(func=f, iterable=range(1, 1001))\nprint(\"Finished\")",
       "labels": {
         "binary_operator:Mult": [[3,3]],
@@ -2055,7 +2055,7 @@
       }
     },
     "057.0260-filter-list.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "y = filter(p, x)",
       "labels": {
         "assignment:filter": [[1,1]],
@@ -2077,7 +2077,7 @@
       }
     },
     "057.3173-filter-list.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "y = [element for element in x if p(element)]",
       "labels": {
         "assignment": [[1,1]],
@@ -2101,7 +2101,7 @@
       }
     },
     "058.0665-extract-file-content-to-a-string.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "lines = open(f).read()",
       "labels": {
         "assignment:read": [[1,1]],
@@ -2124,7 +2124,7 @@
       }
     },
     "059.0668-write-to-standard-error-stream.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "import sys\nprint(x, \"is negative\", file=sys.stderr)",
       "labels": {
         "call_argument:": [[2,2]],
@@ -2147,7 +2147,7 @@
       }
     },
     "060.1084-read-command-line-argument.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "import sys\nx = sys.argv[1]",
       "labels": {
         "assignment": [[2,2]],
@@ -2171,7 +2171,7 @@
       }
     },
     "061.0576-get-current-date.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "import datetime\nd = datetime.datetime.now()",
       "labels": {
         "assignment:now": [[2,2]],
@@ -2192,7 +2192,7 @@
       }
     },
     "062.1091-find-substring-position.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "i = x.find(y)",
       "labels": {
         "assignment:find": [[1,1]],
@@ -2213,7 +2213,7 @@
       }
     },
     "063.1088-replace-fragment-of-a-string.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "x2 = x.replace(y, z)",
       "labels": {
         "assignment:replace": [[1,1]],
@@ -2236,7 +2236,7 @@
       }
     },
     "064.0274-big-integer--value-3-power-247.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "x = 3 ** 247",
       "labels": {
         "assignment:Pow": [[1,1]],
@@ -2258,7 +2258,7 @@
       }
     },
     "065.1085-format-decimal-number.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "s = \"{:.1%}\".format(x)",
       "labels": {
         "assignment:format": [[1,1]],
@@ -2280,7 +2280,7 @@
       }
     },
     "066.0672-big-integer-exponentiation.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "z = x ** n",
       "labels": {
         "assignment:Pow": [[1,1]],
@@ -2299,7 +2299,7 @@
       }
     },
     "067.1426-binomial-coefficient-n-choose-k.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "import math\ndef binom(n, k):\n    return math.factorial(n) // math.factorial(k) // math.factorial(n - k)",
       "labels": {
         "binary_operator:FloorDiv": [[3,3],[3,3]],
@@ -2330,7 +2330,7 @@
       }
     },
     "068.2271-create-a-bitset.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "from __future__ import division\nimport math\nx = bytearray(int(math.ceil(n / 8.0)))",
       "labels": {
         "assignment:bytearray": [[3,3]],
@@ -2371,7 +2371,7 @@
       }
     },
     "069.1086-seed-random-generator.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "import random\nrand = random.Random(s)",
       "labels": {
         "assignment:Random": [[2,2]],
@@ -2393,7 +2393,7 @@
       }
     },
     "070.1087-use-clock-as-random-generator-seed.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "import random\nrand = random.Random()",
       "labels": {
         "assignment:Random": [[2,2]],
@@ -2413,7 +2413,7 @@
       }
     },
     "071.0379-echo-program-implementation.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "import sys\nprint(\" \".join(sys.argv[1:]))",
       "labels": {
         "call_argument:": [[2,2],[2,2]],
@@ -2447,7 +2447,7 @@
       }
     },
     "073.0673-create-a-factory.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "def fact(a_class, str_):\n    if issubclass(a_class, Parent):\n        return a_class(str_)",
       "labels": {
         "call_argument:Parent": [[2,2]],
@@ -2484,7 +2484,7 @@
       }
     },
     "074.0674-compute-gcd.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "from fractions import gcd\nx = gcd(a, b)",
       "labels": {
         "assignment:gcd": [[2,2]],
@@ -2510,7 +2510,7 @@
       }
     },
     "075.0675-compute-lcm.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "from fractions import gcd\nx = (a * b) // gcd(a, b)",
       "labels": {
         "assignment:FloorDiv": [[2,2]],
@@ -2541,7 +2541,7 @@
       }
     },
     "076.1083-binary-digits-from-an-integer.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "s = \"{:b}\".format(x)",
       "labels": {
         "assignment:format": [[1,1]],
@@ -2563,7 +2563,7 @@
       }
     },
     "077.1093-complex-number.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "x = 3j - 2\ny = x * 1j",
       "labels": {
         "assignment:Mult": [[2,2]],
@@ -2595,7 +2595,7 @@
       }
     },
     "078.1089-do-while-loop.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "while True:\n    do_something()\n    if not c:\n        break",
       "labels": {
         "break": [[4,4]],
@@ -2629,7 +2629,7 @@
       }
     },
     "079.1090-convert-integer-to-floating-point-number.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "y = float(x)",
       "labels": {
         "assignment:float": [[1,1]],
@@ -2650,7 +2650,7 @@
       }
     },
     "080.1092-truncate-floating-point-number-to-integer.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "y = int(x)",
       "labels": {
         "assignment:int": [[1,1]],
@@ -2671,7 +2671,7 @@
       }
     },
     "081.2270-round-floating-point-number-to-integer.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "y = int(x + 0.5)",
       "labels": {
         "addition_operator": [[1,1]],
@@ -2698,7 +2698,7 @@
       }
     },
     "082.1096-count-substring-occurrences.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "count = s.count(t)",
       "labels": {
         "assignment:count": [[1,1]],
@@ -2719,7 +2719,7 @@
       }
     },
     "083.1805-regex-with-character-repetition.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "import re\nr = re.compile(r\"htt+p\")",
       "labels": {
         "assignment:compile": [[2,2]],
@@ -2743,7 +2743,7 @@
       }
     },
     "084.1940-count-bits-set-in-integer-binary-representation.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "c = bin(i).count(\"1\")",
       "labels": {
         "assignment:count": [[1,1]],
@@ -2769,7 +2769,7 @@
       }
     },
     "085.1003-check-if-integer-addition-will-overflow.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "def adding_will_overflow(x, y):\n    return False",
       "labels": {
         "function:adding_will_overflow": [[1,2]],
@@ -2790,7 +2790,7 @@
       }
     },
     "086.1004-check-if-integer-multiplication-will-overflow.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "def multiplyWillOverflow(x, y):\n    return False",
       "labels": {
         "function:multiplyWillOverflow": [[1,2]],
@@ -2811,7 +2811,7 @@
       }
     },
     "087.1139-stop-program.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "import sys\nsys.exit(1)",
       "labels": {
         "call_argument:1": [[2,2]],
@@ -2832,7 +2832,7 @@
       }
     },
     "088.2143-allocate-1m-bytes.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "buf = bytearray(1000000)",
       "labels": {
         "assignment:bytearray": [[1,1]],
@@ -2854,7 +2854,7 @@
       }
     },
     "089.1097-handle-invalid-argument.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "raise ValueError(\"x is invalid\")",
       "labels": {
         "call_argument:": [[1,1]],
@@ -2872,7 +2872,7 @@
       }
     },
     "090.1099-read-only-outside.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "class Foo(object):\n    def __init__(self):\n        self._x = 0\n    @property\n    def x(self):\n        return self._x",
       "labels": {
         "assignment:0": [[3,3]],
@@ -2910,7 +2910,7 @@
       }
     },
     "091.1098-load-json-file-into-struct.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "import json\nwith open(\"data.json\", \"r\") as input:\n    x = json.load(input)",
       "labels": {
         "assignment:load": [[3,3]],
@@ -2940,7 +2940,7 @@
       }
     },
     "092.1100-save-object-into-json-file.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "import json\nwith open(\"data.json\", \"w\") as output:\n    json.dump(x, output)",
       "labels": {
         "call_argument:": [[2,2],[2,2]],
@@ -2967,7 +2967,7 @@
       }
     },
     "093.1082-pass-a-runnable-procedure-as-parameter.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "from __future__ import print_function\ndef control(f):\n    return f()",
       "labels": {
         "external_free_call:f": [[3,3]],
@@ -2997,7 +2997,7 @@
       }
     },
     "094.1101-print-type-of-variable.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "print(type(x))",
       "labels": {
         "call_argument:": [[1,1]],
@@ -3020,7 +3020,7 @@
       }
     },
     "094.1864-print-type-of-variable.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "print(x.__class__)",
       "labels": {
         "call_argument:": [[1,1]],
@@ -3037,7 +3037,7 @@
       }
     },
     "095.2140-get-file-size.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "import os\nx = os.path.getsize(path)",
       "labels": {
         "assignment:getsize": [[2,2]],
@@ -3060,7 +3060,7 @@
       }
     },
     "096.1094-check-string-prefix.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "b = s.startswith(prefix)",
       "labels": {
         "assignment:startswith": [[1,1]],
@@ -3081,7 +3081,7 @@
       }
     },
     "097.1095-check-string-suffix.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "b = s.endswith(suffix)",
       "labels": {
         "assignment:endswith": [[1,1]],
@@ -3102,7 +3102,7 @@
       }
     },
     "098.2142-epoch-seconds-to-date-object.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "import datetime\nd = datetime.date.fromtimestamp(ts)",
       "labels": {
         "assignment:fromtimestamp": [[2,2]],
@@ -3125,7 +3125,7 @@
       }
     },
     "099.1429-format-date-yyyy-mm-dd.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "from datetime import date\nd = date(2016, 9, 28)\nx = d.strftime(\"%Y-%m-%d\")",
       "labels": {
         "assignment:date": [[2,2]],
@@ -3166,7 +3166,7 @@
       }
     },
     "099.2693-format-date-yyyy-mm-dd.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "from datetime import date\nd = date.today()\nx = d.isoformat()",
       "labels": {
         "assignment:isoformat": [[3,3]],
@@ -3194,7 +3194,7 @@
       }
     },
     "100.1142-sort-by-a-comparator.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "items.sort(c)",
       "labels": {
         "call_argument:c": [[1,1]],
@@ -3211,7 +3211,7 @@
       }
     },
     "101.2172-load-from-http-get-request-into-a-string.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "import urllib.request\nwith urllib.request.urlopen(u) as f:\n    s = f.read()",
       "labels": {
         "assignment:read": [[3,3]],
@@ -3235,7 +3235,7 @@
       }
     },
     "102.2173-load-from-http-get-request-into-a-file.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "import urllib\nfilename, headers = urllib.request.urlretrieve(u, \"result.txt\")",
       "labels": {
         "assignment:urlretrieve": [[2,2]],
@@ -3264,7 +3264,7 @@
       }
     },
     "103.2276-load-xml-file-into-struct.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "import lxml.etree\nx = lxml.etree.parse(\"data.xml\")",
       "labels": {
         "assignment:parse": [[2,2]],
@@ -3288,7 +3288,7 @@
       }
     },
     "104.3264-save-object-into-xml-file.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "import pyxser as pyx\nclass TestClass(object):\n    a = None\n    b = None\n    c = None\n    def __init__(self, a, b, c):\n        self.a = a\n        self.b = b\n        self.c = c\ntst = TestClass(\"var_a\", \"var_b\", \"var_c\")\nser = pyx.serialize(obj=tst, enc=\"utf-8\")\nprint(ser)",
       "labels": {
         "assignment": [[7,7],[8,8],[9,9]],
@@ -3356,7 +3356,7 @@
       }
     },
     "105.1804-current-executable-name.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "import sys\ns = sys.argv[0]",
       "labels": {
         "assignment": [[2,2]],
@@ -3380,7 +3380,7 @@
       }
     },
     "106.2039-get-program-working-directory.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "import os\ndir = os.getcwd()",
       "labels": {
         "assignment:getcwd": [[2,2]],
@@ -3401,7 +3401,7 @@
       }
     },
     "107.2139-get-folder-containing-current-program.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "import os\ndir = os.path.dirname(os.path.abspath(__file__))",
       "labels": {
         "assignment:dirname": [[2,2]],
@@ -3429,7 +3429,7 @@
       }
     },
     "108.1291-determine-if-variable-name-is-defined.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "if \"x\" in locals():\n    print(x)",
       "labels": {
         "call_argument:x": [[2,2]],
@@ -3460,7 +3460,7 @@
       }
     },
     "109.2280-number-of-bytes-of-a-type.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "import pympler.asizeof\nn = pympler.asizeof.asizeof(t)",
       "labels": {
         "assignment:asizeof": [[2,2]],
@@ -3483,7 +3483,7 @@
       }
     },
     "110.1455-check-if-string-is-blank.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "blank = s.strip() == \"\"",
       "labels": {
         "assignment": [[1,1]],
@@ -3507,7 +3507,7 @@
       }
     },
     "111.2168-launch-other-program.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "import subprocess\nsubprocess.call([\"x\", \"a\", \"b\"])",
       "labels": {
         "call_argument:": [[2,2]],
@@ -3530,7 +3530,7 @@
       }
     },
     "112.2144-iterate-over-map-entries-ordered-by-keys.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "for k in sorted(mymap):\n    print(mymap[k])",
       "labels": {
         "call_argument:": [[2,2]],
@@ -3558,7 +3558,7 @@
       }
     },
     "113.2157-iterate-over-map-entries-ordered-by-values.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "for x, k in sorted((x, k) for k, x in mymap.items()):\n    print(k, x)",
       "labels": {
         "call_argument:": [[1,1]],
@@ -3595,7 +3595,7 @@
       }
     },
     "114.2273-test-deep-equality.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "b = x == y",
       "labels": {
         "assignment": [[1,1]],
@@ -3614,7 +3614,7 @@
       }
     },
     "115.2138-compare-dates.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "import datetime\nb = d1 < d2",
       "labels": {
         "assignment": [[2,2]],
@@ -3636,7 +3636,7 @@
       }
     },
     "116.1257-remove-occurrences-of-word-from-string.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "s2 = s1.replace(w, \"\")",
       "labels": {
         "assignment:replace": [[1,1]],
@@ -3661,7 +3661,7 @@
       }
     },
     "117.1297-get-list-size.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "n = len(x)",
       "labels": {
         "assignment:len": [[1,1]],
@@ -3681,7 +3681,7 @@
       }
     },
     "118.1254-list-to-set.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "y = set(x)",
       "labels": {
         "assignment:set": [[1,1]],
@@ -3702,7 +3702,7 @@
       }
     },
     "118.3266-list-to-set.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "set(x)",
       "labels": {
         "call_argument:x": [[1,1]],
@@ -3719,7 +3719,7 @@
       }
     },
     "119.1253-deduplicate-list.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "x = list(set(x))",
       "labels": {
         "assignment:list": [[1,1]],
@@ -3747,7 +3747,7 @@
       }
     },
     "119.3263-deduplicate-list.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "elements = [\"b\", \"a\", \"b\", \"c\"]\nunique_set = set()\nelements_unique = []\nfor i in elements:\n    if i not in unique_set:\n        unique_set.add(i)\n        elements_unique.append(i)\nprint(elements_unique)",
       "labels": {
         "accumulate_elements:add": [[4,7]],
@@ -3823,7 +3823,7 @@
       }
     },
     "120.1479-read-integer-from-stdin.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "input_var = int(raw_input(\"Input Prompting String: \"))",
       "labels": {
         "assignment:int": [[1,1]],
@@ -3850,7 +3850,7 @@
       }
     },
     "121.3029-udp-listen-and-read.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "import socket\nUDP_IP = \"127.0.0.1\"\nsock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)\nsock.bind((UDP_IP, p))\nwhile True:\n    data, addr = sock.recvfrom(1024)\n    print(\"received message:\", data)",
       "labels": {
         "assignment": [[2,2]],
@@ -3911,7 +3911,7 @@
       }
     },
     "122.1453-declare-enumeration.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "class Suit:\n    SPADES, HEARTS, DIAMONDS, CLUBS = range(4)",
       "labels": {
         "assignment:range": [[2,2]],
@@ -3943,7 +3943,7 @@
       }
     },
     "122.1454-declare-enumeration.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "from enum import Enum\nclass Suit(Enum):\n    SPADES = 1\n    HEARTS = 2\n    DIAMONDS = 3\n    CLUBS = 4",
       "labels": {
         "assignment:1": [[3,3]],
@@ -3984,7 +3984,7 @@
       }
     },
     "123.2146-assert-condition.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "assert isConsistent",
       "labels": {
         "assertion": [[1,1]],
@@ -3997,7 +3997,7 @@
       }
     },
     "124.2152-binary-search-for-a-value-in-sorted-array.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "import bisect\ndef binarySearch(a, x):\n    i = bisect.bisect_left(a, x)\n    return i if i != len(a) and a[i] == x else -1",
       "labels": {
         "assignment:bisect_left": [[3,3]],
@@ -4045,7 +4045,7 @@
       }
     },
     "125.2167-measure-function-call-duration.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "import time\nt1 = time.perf_counter()\nfoo()\nt2 = time.perf_counter()\nprint(\"Seconds:\", t2 - t1)",
       "labels": {
         "assignment:perf_counter": [[2,2],[4,4]],
@@ -4084,7 +4084,7 @@
       }
     },
     "126.2137-multiple-return-values.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "def foo():\n    return \"string\", True",
       "labels": {
         "function:foo": [[1,2]],
@@ -4107,7 +4107,7 @@
       }
     },
     "127.2274-source-code-inclusion.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "import imp\nfoo = imp.load_module(\"foobody\", \"foobody.txt\").foo",
       "labels": {
         "assignment": [[2,2]],
@@ -4132,7 +4132,7 @@
       }
     },
     "128.2085-breadth-first-traversing-of-a-tree.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "def BFS(f, root):\n    Q = [root]\n    while Q:\n        n = Q.pop(0)\n        f(n)\n        for child in n:\n            if not n.discovered:\n                n.discovered = True\n                Q.append(n)",
       "labels": {
         "assignment": [[2,2]],
@@ -4206,7 +4206,7 @@
       }
     },
     "129.2282-breadth-first-traversing-in-a-graph.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "from collections import deque\ndef breadth_first(start, f):\n    seen = set()\n    q = deque([start])\n    while q:\n        vertex = q.popleft()\n        f(vertex)\n        seen.add(vertex)\n        q.extend(v for v in vertex.adjacent if v not in seen)",
       "labels": {
         "assignment:deque": [[4,4]],
@@ -4284,7 +4284,7 @@
       }
     },
     "130.2283-depth-first-traversing-in-a-graph.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "def depth_first(start, f):\n    seen = set()\n    stack = [start]\n    while stack:\n        vertex = stack.pop()\n        f(vertex)\n        seen.add(vertex)\n        stack.extend(v for v in vertex.adjacent if v not in seen)",
       "labels": {
         "assignment": [[3,3]],
@@ -4355,7 +4355,7 @@
       }
     },
     "131.2083-successive-conditions.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "f1 if c1 else f2 if c2 else f3 if c3 else None",
       "labels": {
         "conditional_expression": [[1,1],[1,1],[1,1]],
@@ -4370,7 +4370,7 @@
       }
     },
     "131.2766-successive-conditions.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "if c1:\n    f1()\nelif c2:\n    f2()\nelif c3:\n    f3()",
       "labels": {
         "external_free_call:f1": [[2,2]],
@@ -4402,7 +4402,7 @@
       }
     },
     "132.2040-measure-duration-of-procedure-execution.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "import timeit\nduration = timeit.timeit(\"f()\", setup=\"from __main__ import f\")",
       "labels": {
         "assignment:timeit": [[2,2]],
@@ -4426,7 +4426,7 @@
       }
     },
     "133.2160-case-insensitive-string-contains.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "ok = word.lower() in s.lower()",
       "labels": {
         "assignment": [[1,1]],
@@ -4448,7 +4448,7 @@
       }
     },
     "134.1850-create-a-new-list.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "items = [a, b, c]",
       "labels": {
         "assignment": [[1,1]],
@@ -4468,7 +4468,7 @@
       }
     },
     "135.2158-remove-item-from-list-by-its-value.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "items.remove(x)",
       "labels": {
         "call_argument:x": [[1,1]],
@@ -4488,7 +4488,7 @@
       }
     },
     "136.2141-remove-all-occurrences-of-a-value-from-a-list.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "newlist = [item for item in items if item != x]",
       "labels": {
         "assignment": [[1,1]],
@@ -4511,7 +4511,7 @@
       }
     },
     "137.1823-check-if-string-contains-only-digits.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "b = s.isdigit()",
       "labels": {
         "assignment:isdigit": [[1,1]],
@@ -4530,7 +4530,7 @@
       }
     },
     "138.2161-create-temp-file.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "import tempfile\nfile = tempfile.TemporaryFile()",
       "labels": {
         "assignment:TemporaryFile": [[2,2]],
@@ -4550,7 +4550,7 @@
       }
     },
     "139.2162-create-temp-directory.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "import tempfile\ntd = tempfile.TemporaryDirectory()",
       "labels": {
         "assignment:TemporaryDirectory": [[2,2]],
@@ -4570,7 +4570,7 @@
       }
     },
     "140.2156-delete-map-entry.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "m.pop(k, None)",
       "labels": {
         "call_argument:None": [[1,1]],
@@ -4595,7 +4595,7 @@
       }
     },
     "141.2159-iterate-in-sequence-over-two-lists.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "for x in items1 + items2:\n    print(x)",
       "labels": {
         "addition_operator": [[1,1]],
@@ -4620,7 +4620,7 @@
       }
     },
     "142.2151-hexadecimal-digits-of-an-integer.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "s = hex(x)",
       "labels": {
         "assignment:hex": [[1,1]],
@@ -4640,7 +4640,7 @@
       }
     },
     "143.2256-iterate-alternatively-over-two-lists.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "for pair in zip(item1, item2):\n    print(pair)",
       "labels": {
         "call_argument:item1": [[1,1]],
@@ -4667,7 +4667,7 @@
       }
     },
     "144.2145-check-if-file-exists.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "import os\nb = os.path.exists(fp)",
       "labels": {
         "assignment:exists": [[2,2]],
@@ -4690,7 +4690,7 @@
       }
     },
     "144.2915-check-if-file-exists.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "from pathlib import Path\nb = Path(fp).exists()",
       "labels": {
         "assignment:exists": [[2,2]],
@@ -4716,7 +4716,7 @@
       }
     },
     "145.1822-print-log-line-with-datetime.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "import sys, logging\nlogging.basicConfig(\n    stream=sys.stdout, level=logging.DEBUG, format=\"%(asctime)-15s %(message)s\"\n)\nlogger = logging.getLogger(\"NAME OF LOGGER\")\nlogger.info(msg)",
       "labels": {
         "assignment:getLogger": [[5,5]],
@@ -4752,7 +4752,7 @@
       }
     },
     "146.1825-convert-string-to-floating-point-number.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "import locale\ns = u\"545,2222\"\nlocale.setlocale(locale.LC_ALL, \"de\")\nf = locale.atof(s)",
       "labels": {
         "assignment": [[2,2]],
@@ -4785,7 +4785,7 @@
       }
     },
     "146.1826-convert-string-to-floating-point-number.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "f = float(s)",
       "labels": {
         "assignment:float": [[1,1]],
@@ -4806,7 +4806,7 @@
       }
     },
     "146.2739-convert-string-to-floating-point-number.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "float(\"1.3\")",
       "labels": {
         "call_argument:": [[1,1]],
@@ -4825,7 +4825,7 @@
       }
     },
     "147.2171-remove-all-non-ascii-characters.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "import re\nt = re.sub(\"[^\\u0000-\\u007f]\", \"\", s)",
       "labels": {
         "assignment:sub": [[2,2]],
@@ -4853,7 +4853,7 @@
       }
     },
     "148.1829-read-list-of-integer-numbers-from-stdin.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "list(map(int, input().split()))",
       "labels": {
         "call_argument:": [[1,1],[1,1]],
@@ -4885,7 +4885,7 @@
       }
     },
     "150.2154-remove-trailing-slash.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "p = p.rstrip(\"/\")",
       "labels": {
         "assignment:rstrip": [[1,1]],
@@ -4907,7 +4907,7 @@
       }
     },
     "151.2166-remove-string-trailing-path-separator.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "import os\nif p.endswith(os.sep):\n    p = p[:-1]",
       "labels": {
         "assignment": [[3,3]],
@@ -4948,7 +4948,7 @@
       }
     },
     "152.2153-turn-a-character-into-a-string.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "s = c",
       "labels": {
         "assignment": [[1,1]],
@@ -4964,7 +4964,7 @@
       }
     },
     "153.1980-concatenate-string-with-integer.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "t = \"{}{}\".format(s, i)",
       "labels": {
         "assignment:format": [[1,1]],
@@ -4988,7 +4988,7 @@
       }
     },
     "154.2155-halfway-between-two-hex-color-codes.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "r1, g1, b1 = [int(c1[p : p + 2], 16) for p in range(1, 6, 2)]\nr2, g2, b2 = [int(c2[p : p + 2], 16) for p in range(1, 6, 2)]\nc = \"#{:02x}{:02x}{:02x}\".format((r1 + r2) // 2, (g1 + g2) // 2, (b1 + b2) // 2)",
       "labels": {
         "addition_operator": [[1,1],[2,2],[3,3],[3,3],[3,3]],
@@ -5063,7 +5063,7 @@
       }
     },
     "154.2292-halfway-between-two-hex-color-codes.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "import numpy\nclass RGB(numpy.ndarray):\n    @classmethod\n    def from_str(cls, rgbstr):\n        return numpy.array(\n            [int(rgbstr[i : i + 2], 16) for i in range(1, len(rgbstr), 2)]\n        ).view(cls)\n    def __str__(self):\n        self = self.astype(numpy.uint8)\n        return \"#\" + \"\".join(format(n, \"x\") for n in self)\nc1 = RGB.from_str(\"#a1b1c1\")\nprint(c1)\nc2 = RGB.from_str(\"#1A1B1C\")\nprint(c2)\nprint((c1 + c2) / 2)",
       "labels": {
         "addition_operator": [[6,6],[15,15]],
@@ -5185,7 +5185,7 @@
       }
     },
     "155.2147-delete-file.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "import pathlib\npath = pathlib.Path(_filepath)\npath.unlink()",
       "labels": {
         "assignment:Path": [[2,2]],
@@ -5211,7 +5211,7 @@
       }
     },
     "156.2148-format-integer-with-zero-padding.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "s = format(\"03d\", i)",
       "labels": {
         "assignment:format": [[1,1]],
@@ -5234,7 +5234,7 @@
       }
     },
     "157.2150-declare-constant-string.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "PLANET = \"Earth\"",
       "labels": {
         "assignment": [[1,1]],
@@ -5252,7 +5252,7 @@
       }
     },
     "158.2163-random-sublist.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "import random\ny = random.sample(x, k)",
       "labels": {
         "assignment:sample": [[2,2]],
@@ -5277,7 +5277,7 @@
       }
     },
     "159.2281-trie.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "class Trie:\n    def __init__(self, prefix, value=None):\n        self.prefix = prefix\n        self.children = []\n        self.value = value",
       "labels": {
         "assignment": [[3,3],[4,4],[5,5]],
@@ -5312,7 +5312,7 @@
       }
     },
     "160.2165-detect-if-32-bit-or-64-bit-architecture.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "import sys\nif sys.maxsize > 2 ** 32:\n    f64()\nelse:\n    f32()",
       "labels": {
         "binary_operator:Pow": [[2,2]],
@@ -5352,7 +5352,7 @@
       }
     },
     "161.2098-multiply-all-the-elements-of-a-list.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "elements = [c * x for x in elements]",
       "labels": {
         "assignment": [[1,1]],
@@ -5381,7 +5381,7 @@
       }
     },
     "162.2164-execute-procedures-depending-on-options.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "import sys\nif \"b\" in sys.argv[1:]:\n    bat()\nif \"f\" in sys.argv[1:]:\n    fox()",
       "labels": {
         "comparison_operator:In": [[2,2],[4,4]],
@@ -5424,7 +5424,7 @@
       }
     },
     "163.2170-print-list-elements-by-group-of-2.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "for x in zip(list[::2], list[1::2]):\n    print(x)",
       "labels": {
         "call_argument:": [[1,1],[1,1]],
@@ -5461,7 +5461,7 @@
       }
     },
     "163.3177-print-list-elements-by-group-of-2.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "from itertools import tee\ndef pairwise(iterable):\n    a, b = tee(iterable)\n    next(b, None)\n    return zip(a, b)\nfor a, b in pairwise(list):\n    print(a, b)",
       "labels": {
         "assignment:tee": [[3,3]],
@@ -5523,7 +5523,7 @@
       }
     },
     "164.2169-open-url-in-default-browser.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "import webbrowser\nwebbrowser.open(s)",
       "labels": {
         "call_argument:s": [[2,2]],
@@ -5542,7 +5542,7 @@
       }
     },
     "165.2149-last-element-of-list.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "x = items[-1]",
       "labels": {
         "assignment": [[1,1]],
@@ -5565,7 +5565,7 @@
       }
     },
     "166.2272-concatenate-two-lists.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "ab = a + b",
       "labels": {
         "addition_operator": [[1,1]],
@@ -5585,7 +5585,7 @@
       }
     },
     "167.2611-trim-prefix.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "t = s[s.startswith(p) and len(p) :]",
       "labels": {
         "assignment": [[1,1]],
@@ -5616,7 +5616,7 @@
       }
     },
     "167.3175-trim-prefix.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "t = s.lstrip(p)",
       "labels": {
         "assignment:lstrip": [[1,1]],
@@ -5637,7 +5637,7 @@
       }
     },
     "168.2277-trim-suffix.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "t = s.rsplit(w, 1)[0]",
       "labels": {
         "assignment": [[1,1]],
@@ -5668,7 +5668,7 @@
       }
     },
     "168.3174-trim-suffix.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "t = s.rstrip(w)",
       "labels": {
         "assignment:rstrip": [[1,1]],
@@ -5689,7 +5689,7 @@
       }
     },
     "169.2233-string-length.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "n = len(s)",
       "labels": {
         "assignment:len": [[1,1]],
@@ -5709,7 +5709,7 @@
       }
     },
     "170.2275-get-map-size.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "n = len(mymap)",
       "labels": {
         "assignment:len": [[1,1]],
@@ -5729,7 +5729,7 @@
       }
     },
     "171.2446-add-an-element-at-the-end-of-a-list.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "s.append(x)",
       "labels": {
         "call_argument:x": [[1,1]],
@@ -5750,7 +5750,7 @@
       }
     },
     "172.2442-insert-entry-in-map.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "m[k] = v",
       "labels": {
         "assignment": [[1,1]],
@@ -5767,7 +5767,7 @@
       }
     },
     "173.2427-format-a-number-with-grouped-thousands.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "print(\"f'{1000:,}'\")",
       "labels": {
         "call_argument:": [[1,1]],
@@ -5786,7 +5786,7 @@
       }
     },
     "173.2428-format-a-number-with-grouped-thousands.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "print(\"format(1000, ',')\")",
       "labels": {
         "call_argument:": [[1,1]],
@@ -5805,7 +5805,7 @@
       }
     },
     "173.2429-format-a-number-with-grouped-thousands.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "print(\"'{:,}'.format(1000)\")",
       "labels": {
         "call_argument:": [[1,1]],
@@ -5824,7 +5824,7 @@
       }
     },
     "174.2687-make-http-post-request.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "from urllib import request, parse\ndata = parse.urlencode(\"<your data dict>\").encode()\nreq = request.Request(u, data=data, method=\"POST\")\nresp = request.urlopen(req)",
       "labels": {
         "assignment:Request": [[3,3]],
@@ -5873,7 +5873,7 @@
       }
     },
     "175.2613-bytes-to-hex-string.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "s = a.hex()",
       "labels": {
         "assignment:hex": [[1,1]],
@@ -5891,7 +5891,7 @@
       }
     },
     "176.2614-hex-string-to-byte-array.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "a = bytearray.fromhex(s)",
       "labels": {
         "assignment:fromhex": [[1,1]],
@@ -5911,7 +5911,7 @@
       }
     },
     "177.2709-find-files-with-a-given-list-of-filename-extensions.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "import os\nextensions = [\".jpg\", \".jpeg\", \".png\"]\nL = [f for f in os.listdir(D) if os.path.splitext(f)[1] in extensions]",
       "labels": {
         "assignment": [[2,2],[3,3]],
@@ -5956,7 +5956,7 @@
       }
     },
     "177.2725-find-files-with-a-given-list-of-filename-extensions.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "import re\nimport os\nfiltered_files = [\n    \"{}/{}\".format(dirpath, filename)\n    for dirpath, _, filenames in os.walk(D)\n    for filename in filenames\n    if re.match(r\"^.*\\.(?:jpg|jpeg|png)$\", filename)\n]",
       "labels": {
         "assignment": [[3,3]],
@@ -6002,7 +6002,7 @@
       }
     },
     "177.3241-find-files-with-a-given-list-of-filename-extensions.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "import glob\nimport itertools\nlist(itertools.chain(*(glob.glob(\"*/**.%s\" % ext) for ext in [\"jpg\", \"jpeg\", \"png\"])))",
       "labels": {
         "binary_operator:Mod": [[3,3]],
@@ -6040,7 +6040,7 @@
       }
     },
     "178.2615-check-if-point-is-inside-rectangle.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "b = (x1 < x < x2) and (y1 < y < y2)",
       "labels": {
         "assignment": [[1,1]],
@@ -6068,7 +6068,7 @@
       }
     },
     "179.2688-get-center-of-a-rectangle.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "center = ((x1 + x2) / 2, (y1 + y2) / 2)",
       "labels": {
         "addition_operator": [[1,1],[1,1]],
@@ -6097,7 +6097,7 @@
       }
     },
     "179.2689-get-center-of-a-rectangle.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "from collections import namedtuple\nPoint = namedtuple(\"Point\", \"x y\")\ncenter = Point((x1 + x2) / 2, (y1 + y2) / 2)",
       "labels": {
         "addition_operator": [[3,3],[3,3]],
@@ -6140,7 +6140,7 @@
       }
     },
     "180.2612-list-files-in-directory.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "import os\nx = os.listdir(d)",
       "labels": {
         "assignment:listdir": [[2,2]],
@@ -6163,7 +6163,7 @@
       }
     },
     "182.2658-quine-program.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "s = \"s = %r\\nprint(s%%s)\"\nprint(s % s)",
       "labels": {
         "assignment": [[1,1]],
@@ -6189,7 +6189,7 @@
       }
     },
     "183.3025-make-http-put-request.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "requests\nimport requests\ncontent_type = \"text/plain\"\nheaders = {\"Content-Type\": content_type}\ndata = {}\nr = requests.put(url, headers=headers, data=data)\nstatus_code, content = r.status_code, r.content",
       "labels": {
         "assignment": [[3,3],[4,4],[5,5],[7,7]],
@@ -6235,7 +6235,7 @@
       }
     },
     "184.2701-tomorrow.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "from datetime import date, timedelta\ndate.today() + timedelta(days=1)",
       "labels": {
         "addition_operator": [[2,2]],
@@ -6263,7 +6263,7 @@
       }
     },
     "185.2820-execute-function-in-30-seconds.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "import threading\ntimer = threading.Timer(30.0, f, args=(42,))\ntimer.start()",
       "labels": {
         "assignment:Timer": [[2,2]],
@@ -6298,7 +6298,7 @@
       }
     },
     "186.2699-exit-program-cleanly.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "import sys\nsys.exit(0)",
       "labels": {
         "call_argument:0": [[2,2]],
@@ -6319,7 +6319,7 @@
       }
     },
     "187.3261-disjoint-set.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "class UnionFind:\n    def __init__(self, size):\n        self.rank = [0] * size\n        self.p = [i for i in range(size)]\n    def find_set(self, i):\n        if self.p[i] == i:\n            return i\n        else:\n            self.p[i] = self.find_set(self.p[i])\n            return self.p[i]\n    def is_same_set(self, i, j):\n        return self.find_set(i) == self.find_set(j)\n    def union_set(self, i, j):\n        if not self.is_same_set(i, j):\n            x, y = self.find_set(i), self.find_set(j)",
       "labels": {
         "assignment": [[4,4],[15,15]],
@@ -6414,7 +6414,7 @@
       }
     },
     "188.3171-matrix-multiplication.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "import numpy as np\nc = a @ b",
       "labels": {
         "assignment:MatMult": [[2,2]],
@@ -6436,7 +6436,7 @@
       }
     },
     "188.3284-matrix-multiplication.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "import numpy as np\nc = np.matmul(a, b)",
       "labels": {
         "assignment:matmul": [[2,2]],
@@ -6461,7 +6461,7 @@
       }
     },
     "189.3236-filter-and-transform-list.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "y = [T(e) for e in x if P(e)]",
       "labels": {
         "assignment": [[1,1]],
@@ -6488,7 +6488,7 @@
       }
     },
     "191.3403-check-if-any-value-in-a-list-is-larger-than-a-limit.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "if any(v > x for v in a):\n    f()",
       "labels": {
         "call_argument:": [[1,1]],
@@ -6520,7 +6520,7 @@
       }
     },
     "197.3457-get-a-list-of-lines-from-a-file.py": {
-      "timestamp": "ignored",
+      "timestamp": "",
       "source": "with open(path) as f:\n    lines = f.readlines()",
       "labels": {
         "assignment:readlines": [[2,2]],

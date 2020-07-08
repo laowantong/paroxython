@@ -26,7 +26,7 @@ OPTIONS:
                         "DIRECTORY_db.json". Otherwise, use the extension
                         (either ".json" or ".sqlite") to decide the format
                         of the database. [default: ]
-    --no_timestamp      Don't store program's last modification times.
+    --no_timestamp      Don't store programs' last modification date.
     -t --taxonomy=PATH  The path of a TSV file mapping labels onto taxa.
                         If not specified, use the included copy of the table
                         whose last version is at https://bit.ly/3dZmc7C.

@@ -1,6 +1,5 @@
 """List all the programs of a given directory, with their field `labels` populated."""
 
-from collections import defaultdict
 from pathlib import Path
 from typing import Callable, Iterator, List, Set
 
@@ -8,7 +7,7 @@ import regex  # type: ignore
 
 from .list_programs import iterate_and_print_programs, list_programs
 from .parse_program import ProgramParser
-from .user_types import Label, LabelName, LabelsSpans, ProgramName, Programs, Source
+from .user_types import Label, LabelName, Programs, Source
 
 
 def labelled_programs(
@@ -21,8 +20,8 @@ def labelled_programs(
     Args:
         directory (Path): The directory to walk, containing some Python programs.
         search_imported_program_name (Callable, optional): A function taking a label name and, in
-            the case it starts with `"import:"` or `"import_module:"`, return a match object whose
-            first group is the name of the imported program.
+            the case it starts with `"import:"` or `"import_module:"`, returns a match object
+            whose first group is the name of the imported program.
             [Not to be explicitly provided.](index.html#default-argument-trick)
         **kwargs: May include the keyword arguments `cleanup_strategy`, `skip_pattern`,
             `glob_pattern`, transmitted to `paroxython.list_programs.list_programs`.

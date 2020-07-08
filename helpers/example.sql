@@ -1,9 +1,10 @@
 -- SQLite
-select
-    name as label,
-    group_concat(span, ", ") as spans,
+SELECT
+    name AS taxon,
+    program,
+    group_concat(span, ", ") AS spans,
     source
-from program
-join label using (program)
-where name GLOB "*accumulate*"
-group by name, program
+FROM program
+JOIN taxon USING (program)
+WHERE name GLOB "type/non_sequence/dictionary/*"
+GROUP BY name, program

@@ -36,18 +36,16 @@ body.gsc-overflow-hidden #sidebar {overflow: visible;}
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/label_programs.py#L0-L81" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/label_programs.py#L0-L79" class="git-link">Browse GitHub</a>
 </summary>
-<pre><code class="python">from collections import defaultdict
-from pathlib import Path
+<pre><code class="python">from pathlib import Path
 from typing import Callable, Iterator, List, Set
 
 import regex  # type: ignore
 
 from .list_programs import iterate_and_print_programs, list_programs
 from .parse_program import ProgramParser
-from .user_types import (Label, LabelName, LabelsSpans, ProgramName, Programs,
-                         Source)
+from .user_types import Label, LabelName, Programs, Source
 
 
 def labelled_programs(
@@ -60,7 +58,7 @@ def labelled_programs(
     parse = ProgramParser()
     print(f&#34;Labelling {len(programs)} programs.&#34;)
     for program in iterate_and_print_programs(programs):
-        program.labels[:] = parse(program) # populate this field in place with [:]
+        program.labels[:] = parse(program)  # populate this field in place with [:]
         for (i, label) in enumerate(program.labels):
             m = search_imported_program_name(label.name)
             if m and f&#34;{m[1]}.py&#34; in internal_program_names:
@@ -110,8 +108,8 @@ if __name__ == &#34;__main__&#34;:
 <dd>The directory to walk, containing some Python programs.</dd>
 <dt><strong><code>search_imported_program_name</code></strong> :&ensp;<code>Callable</code>, optional</dt>
 <dd>A function taking a label name and, in
-the case it starts with <code>"import:"</code> or <code>"import_module:"</code>, return a match object whose
-first group is the name of the imported program.
+the case it starts with <code>"import:"</code> or <code>"import_module:"</code>, returns a match object
+whose first group is the name of the imported program.
 <a href="index.html#default-argument-trick">Not to be explicitly provided.</a></dd>
 <dt><strong><code>**kwargs</code></strong></dt>
 <dd>May include the keyword arguments <code>cleanup_strategy</code>, <code>skip_pattern</code>,
@@ -125,7 +123,7 @@ this very list. For instance, a label <code>"import:my_program"</code> would be 
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/label_programs.py#L15-L47" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/label_programs.py#L13-L45" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def labelled_programs(
     directory: Path,
@@ -137,7 +135,7 @@ this very list. For instance, a label <code>"import:my_program"</code> would be 
     parse = ProgramParser()
     print(f&#34;Labelling {len(programs)} programs.&#34;)
     for program in iterate_and_print_programs(programs):
-        program.labels[:] = parse(program) # populate this field in place with [:]
+        program.labels[:] = parse(program)  # populate this field in place with [:]
         for (i, label) in enumerate(program.labels):
             m = search_imported_program_name(label.name)
             if m and f&#34;{m[1]}.py&#34; in internal_program_names:
@@ -167,7 +165,7 @@ this very list. For instance, a label <code>"import:my_program"</code> would be 
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/label_programs.py#L50-L76" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/label_programs.py#L48-L74" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def generate_labelled_sources(programs: Programs) -&gt; Iterator:
     separator = &#34;-&#34; * 88
