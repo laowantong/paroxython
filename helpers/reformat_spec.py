@@ -79,15 +79,24 @@ def derivation_map(text):
     derived_into = defaultdict(set)
     all_features = find_all_features(text)
     label_name_to_pattern = label_converter([feature[0] for feature in all_features])
+    sql_features = {
+        label_pattern: i
+        for (i, (label_pattern, language, _)) in enumerate(all_features)
+        if language == "sql"
+    }
     for (label_pattern, language, query) in all_features:
-        if language == "re":
+        if language != "sql":
             continue
+        i = sql_features[label_pattern]
         for m in find_iter_derivations(query):
             derived_label_patterns = [
                 label_name_to_pattern(x) for x in m.captures("REQUIRED_LABEL_NAME")
             ]
             derived_from[label_pattern].update(derived_label_patterns)
             for derived_label_pattern in derived_label_patterns:
+                j = sql_features.get(derived_label_pattern)
+                if j is not None and i < j:
+                    raise ValueError(f"'{label_pattern}' should precede '{derived_label_pattern}'!")
                 derived_into[derived_label_pattern].add(label_pattern)
     keys = set(derived_from).union(derived_into)
     result = {}
