@@ -66,6 +66,7 @@ class ProgramFilter:
         """Select all programs and define the imparted knowledge as empty."""
         self.imparted_knowledge: TaxonNameSet = set()
         self.selected_programs: ProgramNameSet = set(self.db_programs)
+        self.hidden_taxa: TaxonNameSet = set()
 
     def add_imported_taxa(self) -> None:
         """Copy under each program the taxa it featured by importation.
@@ -203,6 +204,9 @@ class ProgramFilter:
                 - calculate the appropriate sets of programs and taxa;
                 - remove these programs from `self.selected_programs`;
                 - add these taxa to `self.imparted_knowledge`.
+            - If the operation is `"hide"`:
+                - calculate the appropriate sets of programs and taxa;
+                - add these taxa to `self.hidden_taxa`.
             - Otherwise (the operation is either `"include"` or `"exclude"`):
                 - calculate the appropriate bag of programs: this bag counts, for each program,
                     the number of criteria they meet (maximum: size of `data`);
@@ -216,13 +220,16 @@ class ProgramFilter:
         Args:
             data (List): A list of criteria, _i.e._, a mix of regular expression patterns (strings)
                 and/or predicates (triples).
-            operation (Operation): Either `"impart"`, `"include"` or `"exclude"`.
+            operation (Operation): Either `"impart"`, `"hide"`, `"include"` or `"exclude"`.
             quantifier (str): Either `"any"` or `"all"`.
         """
-        if operation == "impart":
-            (program_set, taxon_set) = self.programs_and_taxa_to_impart(data)
-            self.exclude_programs(program_set, follow=False)
-            self.impart_taxa(taxon_set)
+        if operation in ("impart", "hide"):
+            (program_set, taxon_set) = self.programs_and_taxa_of_patterns(data, operation)
+            if operation == "impart":
+                self.exclude_programs(program_set, follow=False)
+                self.impart_taxa(taxon_set)
+            else:
+                self.hidden_taxa.update(taxon_set)
         else:
             program_bag = self.programs_to_include_or_exclude(data, follow=(operation == "exclude"))
             if quantifier == "all":
@@ -232,7 +239,9 @@ class ProgramFilter:
             else:  # necessarily "exclude"
                 self.exclude_programs(set(program_bag), follow=True)
 
-    def programs_and_taxa_to_impart(self, data: List[str]) -> Tuple[ProgramNameSet, TaxonNameSet]:
+    def programs_and_taxa_of_patterns(
+        self, data: List[str], operation: Operation
+    ) -> Tuple[ProgramNameSet, TaxonNameSet]:
         """Calculate the sets of programs and taxa that meet at least one of the data criteria.
 
         Description:
@@ -245,6 +254,7 @@ class ProgramFilter:
         Args:
             data (List[str]): A list of regular expression patterns (strings). Note that the
                 operation `"impart"` does not support predicate criteria.
+            operation (Operation): Either `"impart"` or `"hide"`.
 
         Returns:
             Tuple[ProgramNameSet, TaxonNameSet]: The couple of accumulated programs and taxa.
@@ -261,7 +271,7 @@ class ProgramFilter:
                     taxa = self.taxa_of_pattern(datum)
                 resulting_taxa.update(taxa)
             else:
-                print_warning(f"datum {repr(datum)} cannot be imparted.")
+                print_warning(f"datum {repr(datum)} cannot be interpreted for '{operation}''.")
         return (resulting_programs, resulting_taxa)
 
     def programs_to_include_or_exclude(self, data: List, follow: bool) -> Counter[ProgramName]:
@@ -568,10 +578,10 @@ class ProgramFilter:
 # "__init__" -> "init_filter_state"
 # "__init__" -> "add_imported_taxa"
 # "init_filter_state" -> "taxa_of_programs"  [style=invis]
-# "update_filter" -> "programs_and_taxa_to_impart"
-# "programs_and_taxa_to_impart" -> "programs_of_pattern"
-# "programs_and_taxa_to_impart" -> "taxa_of_programs"
-# "programs_and_taxa_to_impart" -> "taxa_of_pattern"
+# "update_filter" -> "programs_and_taxa_of_patterns"
+# "programs_and_taxa_of_patterns" -> "programs_of_pattern"
+# "programs_and_taxa_of_patterns" -> "taxa_of_programs"
+# "programs_and_taxa_of_patterns" -> "taxa_of_pattern"
 # "update_filter" -> "programs_to_include_or_exclude"
 # "programs_to_include_or_exclude" -> "programs_of_pattern"
 # "programs_to_include_or_exclude" -> "programs_of_taxa"

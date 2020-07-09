@@ -35,7 +35,7 @@ body.gsc-overflow-hidden #sidebar {overflow: visible;}
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L0-L239" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L0-L242" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">import subprocess
 from collections import defaultdict
@@ -89,6 +89,7 @@ class Recommendations:
         self.db_programs = program_filter.db_programs
         self.selected_programs = program_filter.selected_programs
         self.imparted_knowledge = program_filter.imparted_knowledge
+        self.hidden_taxa = program_filter.hidden_taxa
         self.update_filter = program_filter.update_filter
 
         self.assess = LearningCostAssessor(self.db_programs)
@@ -110,7 +111,7 @@ class Recommendations:
             (operation, n) = regex.subn(&#34; all&#34;, &#34;&#34;, operation)
             quantifier = &#34;all&#34; if n == 1 else &#34;any&#34;
             operation = Operation(operation.replace(&#34; any&#34;, &#34;&#34;))
-            if operation not in (&#34;include&#34;, &#34;exclude&#34;, &#34;impart&#34;):
+            if operation not in (&#34;include&#34;, &#34;exclude&#34;, &#34;impart&#34;, &#34;hide&#34;):
                 print_warning(f&#34;operation {i} ({operation}) is ignored (unknown).&#34;)
                 continue
 
@@ -208,6 +209,8 @@ class Recommendations:
                     key=lambda x: f&#34;~{x[0]}&#34; if x[0].startswith(&#34;metadata/&#34;) else x[0],
                 )
                 for (taxon_name, spans) in items:
+                    if taxon_name in self.hidden_taxa:
+                        continue
                     taxon_cost = self.assess.taxon_cost(taxon_name)
                     s = spans_to_html(&#34;, &#34;.join(map(couple_to_string, spans)))
                     contents.append(f&#34;| {taxon_cost} | `{taxon_name}` | {s} |&#34;)
@@ -297,7 +300,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L42-L225" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L42-L228" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">class Recommendations:
     def __init__(
@@ -315,6 +318,7 @@ if __name__ == &#34;__main__&#34;:
         self.db_programs = program_filter.db_programs
         self.selected_programs = program_filter.selected_programs
         self.imparted_knowledge = program_filter.imparted_knowledge
+        self.hidden_taxa = program_filter.hidden_taxa
         self.update_filter = program_filter.update_filter
 
         self.assess = LearningCostAssessor(self.db_programs)
@@ -336,7 +340,7 @@ if __name__ == &#34;__main__&#34;:
             (operation, n) = regex.subn(&#34; all&#34;, &#34;&#34;, operation)
             quantifier = &#34;all&#34; if n == 1 else &#34;any&#34;
             operation = Operation(operation.replace(&#34; any&#34;, &#34;&#34;))
-            if operation not in (&#34;include&#34;, &#34;exclude&#34;, &#34;impart&#34;):
+            if operation not in (&#34;include&#34;, &#34;exclude&#34;, &#34;impart&#34;, &#34;hide&#34;):
                 print_warning(f&#34;operation {i} ({operation}) is ignored (unknown).&#34;)
                 continue
 
@@ -434,6 +438,8 @@ if __name__ == &#34;__main__&#34;:
                     key=lambda x: f&#34;~{x[0]}&#34; if x[0].startswith(&#34;metadata/&#34;) else x[0],
                 )
                 for (taxon_name, spans) in items:
+                    if taxon_name in self.hidden_taxa:
+                        continue
                     taxon_cost = self.assess.taxon_cost(taxon_name)
                     s = spans_to_html(&#34;, &#34;.join(map(couple_to_string, spans)))
                     contents.append(f&#34;| {taxon_cost} | `{taxon_name}` | {s} |&#34;)
@@ -491,7 +497,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L43-L70" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L43-L71" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def __init__(
     self,
@@ -508,6 +514,7 @@ if __name__ == &#34;__main__&#34;:
     self.db_programs = program_filter.db_programs
     self.selected_programs = program_filter.selected_programs
     self.imparted_knowledge = program_filter.imparted_knowledge
+    self.hidden_taxa = program_filter.hidden_taxa
     self.update_filter = program_filter.update_filter
 
     self.assess = LearningCostAssessor(self.db_programs)
@@ -522,7 +529,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L72-L113" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L73-L114" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def run_pipeline(self) -&gt; None:
     current = set(self.db_programs)
@@ -540,7 +547,7 @@ if __name__ == &#34;__main__&#34;:
         (operation, n) = regex.subn(&#34; all&#34;, &#34;&#34;, operation)
         quantifier = &#34;all&#34; if n == 1 else &#34;any&#34;
         operation = Operation(operation.replace(&#34; any&#34;, &#34;&#34;))
-        if operation not in (&#34;include&#34;, &#34;exclude&#34;, &#34;impart&#34;):
+        if operation not in (&#34;include&#34;, &#34;exclude&#34;, &#34;impart&#34;, &#34;hide&#34;):
             print_warning(f&#34;operation {i} ({operation}) is ignored (unknown).&#34;)
             continue
 
@@ -574,7 +581,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L115-L133" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L116-L134" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def parse_data(self, data: Union[str, List[str]], operation: Operation) -&gt; List[str]:
     if isinstance(data, list):  # The JSON object can either be a list of strings...
@@ -604,7 +611,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L135-L225" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L136-L228" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def get_markdown(
     self,
@@ -660,6 +667,8 @@ if __name__ == &#34;__main__&#34;:
                 key=lambda x: f&#34;~{x[0]}&#34; if x[0].startswith(&#34;metadata/&#34;) else x[0],
             )
             for (taxon_name, spans) in items:
+                if taxon_name in self.hidden_taxa:
+                    continue
                 taxon_cost = self.assess.taxon_cost(taxon_name)
                 s = spans_to_html(&#34;, &#34;.join(map(couple_to_string, spans)))
                 contents.append(f&#34;| {taxon_cost} | `{taxon_name}` | {s} |&#34;)

@@ -26,7 +26,6 @@
 | 0 | `O` | 7 |
 | 0 | `O/C/F/U` | 5 |
 | 0 | `O/C/H` | 5 |
-| 0 | `O/C/H/B` | 3, 9 |
 | 0 | `O/J` | 5, 9 |
 | 0 | `O/N/P` | 1, 6 |
 | 0 | `X/K` | 1 |
@@ -61,8 +60,6 @@
 |----|----|----|
 | 0 | `O` | 2, 6 |
 | 0 | `O/C` | 7 |
-| 0 | `O/C/H/B` | 3 |
-| 0.03125 | `O/C/H/B/I` | 9 |
 | 0 | `O/N/P` | 1 |
 | 0.25 | `X/G` | 8 |
 | 0 | `X/S/M` | 6 |
@@ -140,4 +137,9 @@
   <ol>
     <li><code>prg1.py</code></li>
   </ol>
+</details>
+
+<details>
+  <summary>2 remaining after operation 9 (hide) has filtered out 0 programs.</summary>
+  
 </details>

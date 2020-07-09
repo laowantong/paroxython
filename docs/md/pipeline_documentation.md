@@ -59,17 +59,18 @@ The set of commands constitutes a pipeline that evolves both:
 
 A command consists of:
 
-- an operation among `"include"`, `"exclude"` and `"impart"`;
+- an operation among `"include"`, `"exclude"`, `"impart"` and `"hide"`;
 - the data to which it applies, each datum being:
     - either a program pattern,
     - or a taxon pattern,
     - or a relationship between two taxon patterns (more on this in the [Semantic triples](#semantic-triples) section).
 
-The application of a command to a datum is done in three stages:
+The application of a command to a datum is done in four stages:
 
 1. An auxiliary set of programs is calculated.
 2. The set of recommended programs (the **selection**) is updated.
 3. A new set of taxa may be “learned”, i.e., added to the body of imparted knowledge.
+4. The set of taxa to hide is updated.
 
 Note that each stage depends on both the operation and the nature of the datum to which it applies. Let us detail every possible case:
 
@@ -102,6 +103,9 @@ Its main purpose is to track the acquisition of new knowledge. However, if this 
     2. If the input is a taxon pattern, all the taxa matching this pattern are added to the body of imparted knowledge.
     3. Otherwise, the body of imparted knowledge is unchanged.
 
+### `"hide"` command
+
+This is the simplest command of all. It merely accumulates the designated taxa, without other effect on the filter. In the final stage, the accumulated taxa will be filtered out of the generated tables of recommended programs. Note that the learning costs are not affected whatsoever. Even if a taxon is hidden, its individual cost continues to contribute towards the total cost of a program.
 
 ## Semantic triples
 ### Span algebra

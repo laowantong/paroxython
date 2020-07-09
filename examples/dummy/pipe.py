@@ -7,4 +7,5 @@
     {"operation": "exclude", "data": ["prg7.py", "prg9.py"]},
     {"operation": "exclude", "data": ["X/S/M/L/R/D/.*"]},
     {"operation": "include", "data": ["O/C.*"]},
+    {"operation": "hide", "data": ["O/C/H/B"]},
 ]

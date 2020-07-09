@@ -34,7 +34,7 @@ body.gsc-overflow-hidden #sidebar {overflow: visible;}
 <section id="section-intro">
 <p>Paroxython is a command-line tool which finds and tags algorithmic features (such as assignments, nested loops, tail-recursive functions, etc.) in a collection of small Python programs, typically gathered for educational purposes (<em>e.g.</em>, examples, patterns, exercise corrections).</p>
 <p>Each tag consists in a free-form label associated with its spanning lines. These labels are then mapped onto a knowledge taxonomy designed by the teacher with basic order constraints in mind (<em>e.g.</em>, the fact that the introduction of the concept of early exit must come after that of loop, which itself requires that of control flow, is expressed with the following taxon: <code>flow/loop/exit/early</code>).</p>
-<p>Source codes, labels and taxa are stored in a database, which can finally be filtered through a pipeline of inclusion, exclusion and impartment commands on programs or taxa.</p>
+<p>Source codes, labels and taxa are stored in a database, which can finally be filtered through a pipeline of inclusion, exclusion, impartment and hiding commands on programs or taxa.</p>
 <h1 id="installation-and-test-drive">Installation and test-drive</h1>
 <pre><code>pip install paroxython
 </code></pre>
@@ -343,7 +343,7 @@ expressions, span algebra, semantic triples, negations) in the <a href="#deep-in
 </div>
 <p>A command consists of:</p>
 <ul>
-<li>an operation among <code>"include"</code>, <code>"exclude"</code> and <code>"impart"</code>;</li>
+<li>an operation among <code>"include"</code>, <code>"exclude"</code>, <code>"impart"</code> and <code>"hide"</code>;</li>
 <li>the data to which it applies, each datum being:<ul>
 <li>either a program pattern,</li>
 <li>or a taxon pattern,</li>
@@ -351,11 +351,12 @@ expressions, span algebra, semantic triples, negations) in the <a href="#deep-in
 </ul>
 </li>
 </ul>
-<p>The application of a command to a datum is done in three stages:</p>
+<p>The application of a command to a datum is done in four stages:</p>
 <ol>
 <li>An auxiliary set of programs is calculated.</li>
 <li>The set of recommended programs (the <strong>selection</strong>) is updated.</li>
 <li>A new set of taxa may be “learned”, i.e., added to the body of imparted knowledge.</li>
+<li>The set of taxa to hide is updated.</li>
 </ol>
 <p>Note that each stage depends on both the operation and the nature of the datum to which it applies. Let us detail every possible case:</p>
 <h3 id="include-command"><code>"include"</code> command</h3>
@@ -388,6 +389,8 @@ expressions, span algebra, semantic triples, negations) in the <a href="#deep-in
 </ol>
 </li>
 </ol>
+<h3 id="hide-command"><code>"hide"</code> command</h3>
+<p>This is the simplest command of all. It merely accumulates the designated taxa, without other effect on the filter. In the final stage, the accumulated taxa will be filtered out of the generated tables of recommended programs. Note that the learning costs are not affected whatsoever. Even if a taxon is hidden, its individual cost continues to contribute towards the total cost of a program.</p>
 <h2 id="semantic-triples">Semantic triples</h2>
 <h3 id="span-algebra">Span algebra</h3>
 <p>Being given a program <span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span> of <span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span> lines, any couple <span><span class="MathJax_Preview">(i_1, i_2) </span><script type="math/tex">(i_1, i_2) </script></span> of line numbers such that <span><span class="MathJax_Preview">1 \leq i_1 \leq i_2 \leq n</span><script type="math/tex">1 \leq i_1 \leq i_2 \leq n</script></span> represents a <strong>span</strong> of <span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span>. When Paroxython finds a taxon <span><span class="MathJax_Preview">t</span><script type="math/tex">t</script></span> in <span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span>, it doesn't just say whether <span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span> features <span><span class="MathJax_Preview">t</span><script type="math/tex">t</script></span> or not: it returns the list of spans where <span><span class="MathJax_Preview">t</span><script type="math/tex">t</script></span> occurs.</p>
@@ -779,6 +782,7 @@ data-gaCategoryParameter="paroxython">
 <li><a href="#include-command">"include" command</a></li>
 <li><a href="#exclude-command">"exclude" command</a></li>
 <li><a href="#impart-command">"impart" command</a></li>
+<li><a href="#hide-command">"hide" command</a></li>
 </ul>
 </li>
 <li><a href="#semantic-triples">Semantic triples</a><ul>

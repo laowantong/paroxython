@@ -64,6 +64,7 @@ class Recommendations:
         self.db_programs = program_filter.db_programs
         self.selected_programs = program_filter.selected_programs
         self.imparted_knowledge = program_filter.imparted_knowledge
+        self.hidden_taxa = program_filter.hidden_taxa
         self.update_filter = program_filter.update_filter
 
         self.assess = LearningCostAssessor(self.db_programs)
@@ -87,7 +88,7 @@ class Recommendations:
             (operation, n) = regex.subn(" all", "", operation)
             quantifier = "all" if n == 1 else "any"
             operation = Operation(operation.replace(" any", ""))
-            if operation not in ("include", "exclude", "impart"):
+            if operation not in ("include", "exclude", "impart", "hide"):
                 print_warning(f"operation {i} ({operation}) is ignored (unknown).")
                 continue
 
@@ -188,6 +189,8 @@ class Recommendations:
                     key=lambda x: f"~{x[0]}" if x[0].startswith("metadata/") else x[0],
                 )
                 for (taxon_name, spans) in items:
+                    if taxon_name in self.hidden_taxa:
+                        continue
                     taxon_cost = self.assess.taxon_cost(taxon_name)
                     s = spans_to_html(", ".join(map(couple_to_string, spans)))
                     contents.append(f"| {taxon_cost} | `{taxon_name}` | {s} |")

@@ -60,6 +60,7 @@ def test_recommend_program(capsys):
         ["prg7.py", "prg9.py"],
         ["prg4.py", "prg5.py", "prg6.py"],
         ["prg1.py"],
+        [],
     ]
     costs = {taxon: rec.assess.taxon_cost(taxon) for taxon in rec.db_programs["prg2.py"]["taxa"]}
     print(costs)
