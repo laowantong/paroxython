@@ -259,9 +259,10 @@ class Database:
 
             Although SQL should be familiar to almost everyone in our target audience, and might
             “make complex things possible”, the current minimalistic schema arguably does not
-            ”make simple things simple”. Some denormalization should ease the process, but so far
-            we have prioritized the development of the pipeline system. The relational database
-            generation may be a dead-end, and is currently not used anywhere in Paroxython.
+            ”make simple things simple” (to paraphrase Alan Kay). Some denormalization should ease
+            the process, but so far we have prioritized the development of the pipeline system. The
+            relational database generation may be a dead-end, and is currently not used anywhere in
+            Paroxython.
         """
         db_path = db_path or self.directory.parent / f"{self.directory.name}_db.sqlite"
         print(f"Writing {db_path}.")

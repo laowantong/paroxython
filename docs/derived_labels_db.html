@@ -103,7 +103,7 @@ from .goodies import couple_to_string
 from .user_types import Label, LabelName, Labels, LabelsSpans, Query, Span
 
 
-class DB:
+class DerivedLabelsDatabase:
 
     columns = (
         # use rowid as primary key:
@@ -190,8 +190,8 @@ class DB:
 <section>
 <h2 class="section-title" id="header-classes">Classes</h2>
 <dl>
-<dt id="paroxython.derived_labels_db.DB"><code class="flex name class">
-<span>class <span class="ident">DB</span></span>
+<dt id="paroxython.derived_labels_db.DerivedLabelsDatabase"><code class="flex name class">
+<span>class <span class="ident">DerivedLabelsDatabase</span></span>
 </code></dt>
 <dd>
 <div class="desc"></div>
@@ -200,7 +200,7 @@ class DB:
 <span>Expand source code</span>
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/derived_labels_db.py#L91-L223" class="git-link">Browse GitHub</a>
 </summary>
-<pre><code class="python">class DB:
+<pre><code class="python">class DerivedLabelsDatabase:
 
     columns = (
         # use rowid as primary key:
@@ -279,7 +279,7 @@ class DB:
 </details>
 <h3>Class variables</h3>
 <dl>
-<dt id="paroxython.derived_labels_db.DB.columns"><code class="name">var <span class="ident">columns</span></code></dt>
+<dt id="paroxython.derived_labels_db.DerivedLabelsDatabase.columns"><code class="name">var <span class="ident">columns</span></code></dt>
 <dd>
 <div class="desc"><p>The structure of the main table <code>t</code>, consisting of the following columns:</p>
 <table>
@@ -367,7 +367,7 @@ class DB:
 </dl>
 <h3>Methods</h3>
 <dl>
-<dt id="paroxython.derived_labels_db.DB.create"><code class="name flex">
+<dt id="paroxython.derived_labels_db.DerivedLabelsDatabase.create"><code class="name flex">
 <span>def <span class="ident">create</span></span>(<span>self, <br>labels: List[Label], <br>create_main_table: str = 'CREATE TABLE t (name TEXT,name_prefix TEXT,name_suffix TEXT,span TEXT,span_start INT,span_end INT,path TEXT)'<br>) ‑> NoneType</span>
 </code></dt>
 <dd>
@@ -397,7 +397,7 @@ explicitly provided. Defaults to <code>f"CREATE TABLE t ({','.join(columns)})"</
     self.subtables: Set[LabelName] = set()</code></pre>
 </details>
 </dd>
-<dt id="paroxython.derived_labels_db.DB.read"><code class="name flex">
+<dt id="paroxython.derived_labels_db.DerivedLabelsDatabase.read"><code class="name flex">
 <span>def <span class="ident">read</span></span>(<span>self, <br>query: Query, <br>prerequisites: Callable = &lt;built-in method findall of regex&gt;, <br>create_subtable: str = "CREATE TABLE t_{0} AS SELECT * FROM t WHERE name_prefix = '{0}'"<br>) ‑> List[Label]</span>
 </code></dt>
 <dd>
@@ -450,7 +450,7 @@ as a prerequisite.</p></div>
     return [Label(*label_spans) for label_spans in labels_spans.items()]</code></pre>
 </details>
 </dd>
-<dt id="paroxython.derived_labels_db.DB.update"><code class="name flex">
+<dt id="paroxython.derived_labels_db.DerivedLabelsDatabase.update"><code class="name flex">
 <span>def <span class="ident">update</span></span>(<span>self, <br>labels: List[Label], <br>update_query: str = 'INSERT INTO t VALUES (?,?,?,?,?,?,?)'<br>) ‑> NoneType</span>
 </code></dt>
 <dd>
@@ -483,7 +483,7 @@ len(columns))})"</code>.</dd>
     self.c.executemany(update_query, rows)</code></pre>
 </details>
 </dd>
-<dt id="paroxython.derived_labels_db.DB.delete"><code class="name flex">
+<dt id="paroxython.derived_labels_db.DerivedLabelsDatabase.delete"><code class="name flex">
 <span>def <span class="ident">delete</span></span>(<span>self) ‑> NoneType</span>
 </code></dt>
 <dd>
@@ -537,13 +537,13 @@ data-gaCategoryParameter="paroxython.derived_labels_db">
 <li><h3><a href="#header-classes">Classes</a></h3>
 <ul>
 <li>
-<h4><code><a title="paroxython.derived_labels_db.DB" href="#paroxython.derived_labels_db.DB">DB</a></code></h4>
+<h4><code><a title="paroxython.derived_labels_db.DerivedLabelsDatabase" href="#paroxython.derived_labels_db.DerivedLabelsDatabase">DerivedLabelsDatabase</a></code></h4>
 <ul class="">
-<li><code><a title="paroxython.derived_labels_db.DB.create" href="#paroxython.derived_labels_db.DB.create">create</a></code></li>
-<li><code><a title="paroxython.derived_labels_db.DB.read" href="#paroxython.derived_labels_db.DB.read">read</a></code></li>
-<li><code><a title="paroxython.derived_labels_db.DB.update" href="#paroxython.derived_labels_db.DB.update">update</a></code></li>
-<li><code><a title="paroxython.derived_labels_db.DB.delete" href="#paroxython.derived_labels_db.DB.delete">delete</a></code></li>
-<li><code><a title="paroxython.derived_labels_db.DB.columns" href="#paroxython.derived_labels_db.DB.columns">columns</a></code></li>
+<li><code><a title="paroxython.derived_labels_db.DerivedLabelsDatabase.create" href="#paroxython.derived_labels_db.DerivedLabelsDatabase.create">create</a></code></li>
+<li><code><a title="paroxython.derived_labels_db.DerivedLabelsDatabase.read" href="#paroxython.derived_labels_db.DerivedLabelsDatabase.read">read</a></code></li>
+<li><code><a title="paroxython.derived_labels_db.DerivedLabelsDatabase.update" href="#paroxython.derived_labels_db.DerivedLabelsDatabase.update">update</a></code></li>
+<li><code><a title="paroxython.derived_labels_db.DerivedLabelsDatabase.delete" href="#paroxython.derived_labels_db.DerivedLabelsDatabase.delete">delete</a></code></li>
+<li><code><a title="paroxython.derived_labels_db.DerivedLabelsDatabase.columns" href="#paroxython.derived_labels_db.DerivedLabelsDatabase.columns">columns</a></code></li>
 </ul>
 </li>
 </ul>

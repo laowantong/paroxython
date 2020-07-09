@@ -228,7 +228,11 @@ import regex  # type: ignore
 
 
 def flatten_ast(tree) -> str:
-    r"""Return a non-recursive, multiline dump of the AST (with some tweaks)."""
+    """Return a non-recursive, multiline dump of the AST (with some tweaks).
+
+    A simple wrapper around the recursive function `flatten_node`, with a call to
+    `simplify_negative_literals` as post-processing.
+    """
     pseudo_hash.reset()
     flat_ast = flatten_node(tree)
     flat_ast = simplify_negative_literals(flat_ast)
@@ -297,7 +301,7 @@ def simplify_negative_literals(
         """
     ).sub,
 ) -> str:
-    """Apply [negative literal simplification](#negative-literal-simplification) on a given flat ast.
+    """[Simplify the negative literals](#negative-literal-simplification) of a given flat AST.
 
     Argument `sub` [not to be explicitly provided.](index.html#default-argument-trick)
     """

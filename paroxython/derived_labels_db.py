@@ -88,7 +88,7 @@ from .goodies import couple_to_string
 from .user_types import Label, LabelName, Labels, LabelsSpans, Query, Span
 
 
-class DB:
+class DerivedLabelsDatabase:
 
     columns = (
         # use rowid as primary key:

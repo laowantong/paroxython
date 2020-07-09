@@ -6,13 +6,13 @@ import context
 from make_snapshot import make_snapshot
 from paroxython.goodies import couple_to_string
 from paroxython.list_programs import list_programs
-from paroxython.parse_program import ProgramParser
+from paroxython.parse_program import ProgramParser, get_bindings
 from paroxython.preprocess_source import (
     centrifugate_hints,
     collect_hints,
     remove_hints,
 )
-from paroxython.user_types import Program
+from paroxython.user_types import Program, Span
 from helpers.reformat_spec import reformat_spec
 
 
@@ -96,6 +96,82 @@ def test_label_presence(capsys):
     absent = "\n- ".join(sorted(all_names - present_names))
     text = f"# Present labels\n\n- {present}\n\n# Absent labels\n\n- {absent}\n"
     make_snapshot(Path("examples/mini/labels.md"), text, capsys)
+
+
+label_captures = [
+    {  # 0 SUFFIX and 1 POS
+        "name": "null_operation",
+        "captures": {"POS": ["4:1-3-1-5-1-"]},
+        "expected": [("null_operation", Span(start=4, end=4, path="1-3-1-5-1-"))],
+    },
+    {  # 1 empty SUFFIX and 1 POS
+        "name": "divisibility_test",
+        "captures": {"POS": ["15:3-5-1-2-1-0-"], "SUFFIX": []},
+        "expected": [("divisibility_test", Span(start=15, end=15, path="3-5-1-2-1-0-"))],
+    },
+    {  # 0 SUFFIX and n POS, with n > 1
+        "name": "while",
+        "captures": {"POS": ["11:2-", "16:2-1-4-2-1-2-"]},
+        "expected": [("while", Span(start=11, end=16, path="2-"))],
+    },
+    {  # 1 empty SUFFIX and n POS, with n > 1
+        "name": "foobar",
+        "captures": {"POS": ["11:2-", "16:2-1-4-2-1-2-"]},
+        "expected": [("foobar", Span(start=11, end=16, path="2-"))],
+    },
+    {  # 1 SUFFIX and 1 POS
+        "name": "literal",
+        "captures": {"POS": ["16:3-5-1-2-1-1-1-0-"], "SUFFIX": ["False"]},
+        "expected": [("literal:False", Span(start=16, end=16, path="3-5-1-2-1-1-1-0-"))],
+    },
+    {  # 1 SUFFIX and n POS, with n > 1
+        "name": "for",
+        "captures": {"POS": ["1:1-", "5:1-0-", "10:1-2-3-2-"], "SUFFIX": ["i"]},
+        "expected": [("for:i", Span(start=1, end=10, path="1-"))],
+    },
+    {  # n SUFFIX and 1 POS, with n > 1
+        "name": "import_module",
+        "captures": {"POS": ["1:1-"], "SUFFIX": ["m1", "m2", "m3"]},
+        "expected": [
+            ("import_module:m1", Span(start=1, end=1, path="1-")),
+            ("import_module:m2", Span(start=1, end=1, path="1-")),
+            ("import_module:m3", Span(start=1, end=1, path="1-")),
+        ],
+    },
+    {  # n SUFFIX and n POS, with n > 1
+        "name": "if_test_atom",
+        "captures": {
+            "POS": ["31:5-2-1-0-0-0-", "31:5-2-1-0-0-2-1-1-", "31:5-2-1-0-2-1-"],
+            "SUFFIX": ["b", "a", "greatest"],
+        },
+        "expected": [
+            ("if_test_atom:b", Span(start=31, end=31, path="5-2-1-0-0-0-")),
+            ("if_test_atom:a", Span(start=31, end=31, path="5-2-1-0-0-2-1-1-")),
+            ("if_test_atom:greatest", Span(start=31, end=31, path="5-2-1-0-2-1-")),
+        ],
+    },
+    {  # n SUFFIX and more POS, with n > 1
+        "name": "function_decorator",
+        "captures": {
+            "POS": ["1:1-", "1:1-2-1-", "2:1-2-2-", "3:1-2-3-", "5:1-5-1-"],
+            "SUFFIX": ["bizz", "foo", "bar"],
+        },
+        "expected": [
+            ("function_decorator:bizz", Span(start=1, end=5, path="1-")),
+            ("function_decorator:foo", Span(start=1, end=5, path="1-")),
+            ("function_decorator:bar", Span(start=1, end=5, path="1-")),
+        ],
+    },
+]
+label_captures = (d.values() for d in label_captures)
+
+
+@pytest.mark.parametrize("name, captures, expected", label_captures)
+def test_get_bindings(name, captures, expected):
+    print(name)
+    result = list(get_bindings(name, captures))
+    print(result)
+    assert result == expected
 
 
 if __name__ == "__main__":

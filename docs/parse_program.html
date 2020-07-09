@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.8.3" />
 <title>paroxython.parse_program API documentation</title>
-<meta name="description" content="TODO. Compile the given feature specifications, and search them in a Program." />
+<meta name="description" content="Search a program for the features specified in `spec.md`." />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
 <link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/github.min.css" crossorigin>
@@ -32,11 +32,11 @@ body.gsc-overflow-hidden #sidebar {overflow: visible;}
 <h1 class="title">Module <code>paroxython.parse_program</code></h1>
 </header>
 <section id="section-intro">
-<p>TODO. Compile the given feature specifications, and search them in a Program.</p>
+<p>Search a program for the features specified in <code>spec.md</code>.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L0-L151" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L0-L339" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">from collections import defaultdict
 from os.path import dirname
@@ -47,7 +47,7 @@ from typing import Callable, Dict, List, Iterator, Tuple
 
 import regex  # type: ignore
 
-from .derived_labels_db import DB
+from .derived_labels_db import DerivedLabelsDatabase
 from .flatten_ast import flatten_ast
 from .user_types import Label, LabelName, Labels, LabelsSpans, Program, Query, Source, Span
 
@@ -55,22 +55,49 @@ __pdoc__ = {
     &#34;ProgramParser&#34;: &#34;&#34;,
     &#34;ProgramParser.__init__&#34;: True,
     &#34;ProgramParser.__call__&#34;: True,
+    &#34;foobar&#34;: True,
 }
 
 
 def find_all_features(
-    text: str,
+    specifications: str,
     find_all: Callable = regex.compile(
         r&#34;(?ms)&#34;
-        r&#34;^\#{4}\s+Feature\s+`(.+?)`&#34;  # capture the label&#39;s name
+        r&#34;^\#{4}\s+Feature\s+`(.+?)`&#34;  # capture the label&#39;s pattern
         r&#34;.+?\#{5}\s+Specification&#34;  # ensure the sequel is in the Specification section
-        r&#34;.+?```(.*?)\n+(.*?)\n```&#34;  # capture the language and the request
+        r&#34;.+?```(.*?)\n+(.*?)\n?```&#34;  # capture the language and the specification
     ).findall,
 ) -&gt; Iterator[Tuple[LabelName, str, str]]:
-    return find_all(text)
+    return find_all(specifications)
+
+
+def pos_to_span(pos: List[str]) -&gt; Span:
+    (start, path) = pos[0].split(&#34;:&#34;)
+    (end, _) = pos[-1].split(&#34;:&#34;)
+    return Span(int(start), int(end), path)
 
 
 DEFAULT_SPEC_PATH = Path(dirname(__file__)) / &#34;resources&#34; / &#34;spec.md&#34;
+
+
+def get_bindings(
+    label_prefix: LabelName, captures: Dict[str, List[str]]
+) -&gt; Iterator[Tuple[LabelName, Span]]:
+    if captures.get(&#34;SUFFIX&#34;):
+        # There is a &#34;SUFFIX&#34; key and its value is not `[]`.
+        if len(captures[&#34;POS&#34;]) == len(captures[&#34;SUFFIX&#34;]):
+            # When there are as many matched positions as suffixes, associate them in parallel.
+            for (suffix, pos) in zip(captures[&#34;SUFFIX&#34;], captures[&#34;POS&#34;]):
+                yield (LabelName(f&#34;{label_prefix}:{suffix}&#34;), pos_to_span([pos]))
+        else:
+            # When there are more or less matched positions than suffixes, interpret the positions
+            # as defining a unique span, and associate it with each suffix.
+            span = pos_to_span(captures[&#34;POS&#34;])
+            for suffix in captures[&#34;SUFFIX&#34;]:
+                yield (LabelName(f&#34;{label_prefix}:{suffix}&#34;), span)
+    else:
+        # There is no &#34;SUFFIX&#34; key or its value is `[]`.
+        yield (label_prefix, pos_to_span(captures[&#34;POS&#34;]))
 
 
 class ProgramParser:
@@ -79,73 +106,60 @@ class ProgramParser:
         text = self.spec_path.read_text()
         self.features: Dict[LabelName, regex.Pattern] = {}
         self.queries: Dict[LabelName, Query] = {}
-        for (label_name, language, pattern) in find_all_features(text):
-            if label_name in self.features:
-                raise ValueError(f&#34;Duplicated name &#39;{label_name}&#39;!&#34;)  # pragma: no cover
+        for (label_pattern, language, specification) in find_all_features(text):
+            if label_pattern in self.features:  # pragma: no cover
+                raise ValueError(f&#34;Duplicated name &#39;{label_pattern}&#39;!&#34;)
             if language == &#34;re&#34;:
-                self.features[label_name] = regex.compile(f&#34;(?mx){pattern}&#34;)
+                self.features[label_pattern] = regex.compile(f&#34;(?mx){specification}&#34;).finditer
             elif language == &#34;sql&#34;:
-                self.queries[label_name] = Query(pattern)
-        self.db = DB()
+                self.queries[label_pattern] = Query(specification)
+            elif specification.strip() != &#34;&#34;:  # pragma: no cover
+                raise ValueError(f&#34;Unknow language &#39;{language}&#39; for &#39;{label_pattern}&#39;!&#34;)
+        self.derived_labels_database = DerivedLabelsDatabase()
 
     def __call__(self, program: Program, yield_failed_matches: bool = False) -&gt; Labels:
-        def try_to_bind(label_name: LabelName, span: Span) -&gt; None:
-            try:
-                program.deletion[label_name].remove(Span(span.start, span.end))
-            except (KeyError, ValueError):
-                result[label_name].append(span)
-
-        def pos_to_span(pos: List[str]) -&gt; Span:
-            (start, path) = pos[0].split(&#34;:&#34;)
-            (end, _) = pos[-1].split(&#34;:&#34;)
-            return Span(int(start), int(end), path)
-
+        # If the program can be parsed, flatten its AST.
         try:
             tree = ast.parse(program.source)
         except (SyntaxError, ValueError) as exception:
             return [Label(LabelName(f&#34;ast_construction:{type(exception).__name__}&#34;), [])]
         self.flat_ast = flatten_ast(tree)
 
-        labels: Labels = []
-        for (label_name, rex) in self.features.items():
-            result: LabelsSpans = defaultdict(list)
-            for candidate in list(program.addition):
-                if candidate == label_name or candidate.startswith(f&#34;{label_name}:&#34;):
-                    result[candidate] = program.addition.pop(candidate)
-            d = None
-            for match in rex.finditer(self.flat_ast, overlapped=True):
-                d = match.capturesdict()
-                if d.get(&#34;SUFFIX&#34;):  # there is a &#34;SUFFIX&#34; key and its value is not []
-                    if len(d[&#34;POS&#34;]) == len(d[&#34;SUFFIX&#34;]):
-                        # When there are as many matched positions as suffixes, associate them
-                        # in parallel. See features `for` and `decorator_list` for a workaround for
-                        # a problem which can occur with features spanning several lines.
-                        for (suffix, pos) in zip(d[&#34;SUFFIX&#34;], d[&#34;POS&#34;]):
-                            try_to_bind(LabelName(f&#34;{label_name}:{suffix}&#34;), pos_to_span([pos]))
-                    else:
-                        span = pos_to_span(d[&#34;POS&#34;])
-                        for suffix in d[&#34;SUFFIX&#34;]:
-                            try_to_bind(LabelName(f&#34;{label_name}:{suffix}&#34;), span)
-                else:
-                    try_to_bind(label_name, pos_to_span(d[&#34;POS&#34;]))
-            if yield_failed_matches and not d:
-                labels.append(Label(label_name, []))
-            else:
-                labels.extend(Label(*item) for item in result.items())
+        # Search the flat AST for every feature which is specified by a regular expression.
+        labels: LabelsSpans = defaultdict(list)
+        for (label_prefix, finditer) in self.features.items():
+            failed_match = True
+            for match in finditer(self.flat_ast, overlapped=True):
+                failed_match = False
+                for (label_name, span) in get_bindings(label_prefix, match.capturesdict()):
+                    try:  # Unless this binding is scheduled for deletion...
+                        program.deletion[label_name].remove(Span(span.start, span.end))
+                    except (KeyError, ValueError):  # ... actually bind the name with the span.
+                        labels[label_name].append(span)
+            if yield_failed_matches and failed_match:
+                labels[label_prefix] = []
 
-        labels.extend(Label(*item) for item in program.addition.items())
+        # Update the matching features with those featured for addition.
+        for (label_name, spans) in program.addition.items():
+            labels[label_name].extend(spans)
+            labels[label_name].sort()
 
-        self.db.create(labels)
-        for (candidate_label, query) in self.queries.items():
-            derived_labels = self.db.read(query)
+        # Now, use the features found so far to derive all those specified by an SQL query.
+        result = [Label(*item) for item in labels.items()]
+        self.derived_labels_database.create(result)  # The search is seeded with the know features.
+        for (label_pattern, query) in self.queries.items():
+            # Try to derive, from the DB current state, some label names matching `label_pattern`.
+            derived_labels = self.derived_labels_database.read(query)
             if derived_labels:
-                self.db.update(derived_labels)
-                labels.extend(derived_labels)
+                # Bingo! update the DB state and the result with the new labels.
+                self.derived_labels_database.update(derived_labels)
+                result.extend(derived_labels)
             elif yield_failed_matches:
-                labels.append(Label(candidate_label, []))
-        self.db.delete()
+                result.append(Label(label_pattern, []))
+        # Empty the DB to make it ready for the next program.
+        self.derived_labels_database.delete()
 
-        return sorted(labels)
+        return sorted(result)
 
 
 if __name__ == &#34;__main__&#34;:
@@ -178,13 +192,13 @@ if __name__ == &#34;__main__&#34;:
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
 <dt id="paroxython.parse_program.find_all_features"><code class="name flex">
-<span>def <span class="ident">find_all_features</span></span>(<span>text: str, <br>find_all: Callable = &lt;built-in method findall of regex&gt;<br>) ‑> Iterator[Tuple[LabelName, str, str]]</span>
+<span>def <span class="ident">find_all_features</span></span>(<span>specifications: str, <br>find_all: Callable = &lt;built-in method findall of regex&gt;<br>) ‑> Iterator[Tuple[LabelName, str, str]]</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Iterate on all triples defining an algorithmic feature in the given specification text.</p>
 <h2 id="args">Args</h2>
 <dl>
-<dt><strong><code>text</code></strong> :&ensp;<code>str</code></dt>
+<dt><strong><code>specifications</code></strong> :&ensp;<code>str</code></dt>
 <dd>Normally, the contents of
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md"><code>spec.md</code></a>.</dd>
 <dt><strong><code>find_all</code></strong> :&ensp;<code>Callable</code>, optional</dt>
@@ -199,25 +213,198 @@ if __name__ == &#34;__main__&#34;:
 <ol>
 <li>label name pattern (<em>e.g.</em>, <code>"try"</code> or <code>"try_raise|try_except"</code>),</li>
 <li>language (currently, <code>"re"</code> or <code>"sql"</code>),</li>
-<li>request (respectively, a regular expression pattern or an SQL query).</li>
+<li>specification (respectively, a regular expression pattern or an SQL query).</li>
 </ol>
 </dd>
 </dl></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L23-L47" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L24-L48" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def find_all_features(
-    text: str,
+    specifications: str,
     find_all: Callable = regex.compile(
         r&#34;(?ms)&#34;
-        r&#34;^\#{4}\s+Feature\s+`(.+?)`&#34;  # capture the label&#39;s name
+        r&#34;^\#{4}\s+Feature\s+`(.+?)`&#34;  # capture the label&#39;s pattern
         r&#34;.+?\#{5}\s+Specification&#34;  # ensure the sequel is in the Specification section
-        r&#34;.+?```(.*?)\n+(.*?)\n```&#34;  # capture the language and the request
+        r&#34;.+?```(.*?)\n+(.*?)\n?```&#34;  # capture the language and the specification
     ).findall,
 ) -&gt; Iterator[Tuple[LabelName, str, str]]:
-    return find_all(text)</code></pre>
+    return find_all(specifications)</code></pre>
+</details>
+</dd>
+<dt id="paroxython.parse_program.pos_to_span"><code class="name flex">
+<span>def <span class="ident">pos_to_span</span></span>(<span>pos: List[str]) ‑> Span</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Convert a list of positions (as captured in a specification string) into a single span.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>pos</code></strong> :&ensp;<code>List[str]</code></dt>
+<dd>A non-empty list of strings of the form <code>f"{line_number}:{path}"</code></dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>Span</code></dt>
+<dd>
+<p>A named tuple consisting of:</p>
+<ul>
+<li><code>start</code>: the line number extracted from the first string;</li>
+<li><code>end</code>: the line number extracted from the last string (the same as <code>start</code> if there
+is only one string);</li>
+<li><code>path</code>: the path extracted from the first string.</li>
+</ul>
+<p>Note that all other substrings, if any, are ignored.</p>
+</dd>
+</dl>
+<h2 id="examples">Examples</h2>
+<pre><code class="python">&gt;&gt;&gt; pos_to_span([&quot;1:path_1&quot;])
+Span(1, 1, &quot;path_1&quot;)
+&gt;&gt;&gt; pos_to_span([&quot;1:path_1&quot;, &quot;2:path_2&quot;])
+Span(1, 2, &quot;path_1&quot;)
+&gt;&gt;&gt; pos_to_span([&quot;1:path_1&quot;, &quot;2:path_2&quot;, &quot;3:path_3&quot;, &quot;4:path_4&quot;])
+Span(1, 4, &quot;path_1&quot;)
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L51-L77" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">def pos_to_span(pos: List[str]) -&gt; Span:
+    (start, path) = pos[0].split(&#34;:&#34;)
+    (end, _) = pos[-1].split(&#34;:&#34;)
+    return Span(int(start), int(end), path)</code></pre>
+</details>
+</dd>
+<dt id="paroxython.parse_program.get_bindings"><code class="name flex">
+<span>def <span class="ident">get_bindings</span></span>(<span>label_prefix: LabelName, <br>captures: Dict[str, List[str]]<br>) ‑> Iterator[Tuple[LabelName, Span]]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Analyze the matches of a feature, and bind the corresponding names and spans.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>label_prefix</code></strong> :&ensp;<code>LabelName</code></dt>
+<dd>The name of a feature specified by a regular expression. Note that
+such a name is literal: contrary to those defined by an SQL query, they cannot include
+the alternation meta-character (<code>"|"</code>).</dd>
+<dt><strong><code>captures</code></strong> :&ensp;<code>Dict[str, List[str]]</code></dt>
+<dd>A dictionary of the named groups and lists of all the
+captures of those groups, as matched by the function <code>regex.finditer()</code>. Contains a
+non-empty entry <code>"POS"</code> and, optionally, an entry <code>"SUFFIX"</code>. All other entries are
+ignored.</dd>
+</dl>
+<h2 id="yields">Yields</h2>
+<dl>
+<dt><code>Iterator[Tuple[LabelName, Span]]</code></dt>
+<dd>At least one binding between a label name and a span.</dd>
+</dl>
+<h2 id="examples">Examples</h2>
+<p>The simplest cases happen when there is one or several <code>"POS"</code>, but no <code>"SUFFIX"</code>:</p>
+<pre><code class="python">&gt;&gt;&gt; get_bindings(&quot;null_operation&quot;, {&quot;POS&quot;: [&quot;4:1-3-1-5-1-&quot;]})
+(&quot;null_operation&quot;, Span(start=4, end=4, path=&quot;1-3-1-5-1-&quot;))
+&gt;&gt;&gt; get_bindings(&quot;while&quot;, {&quot;POS&quot;: [&quot;11:2-&quot;, &quot;16:2-1-4-2-1-2-&quot;]})
+(&quot;while&quot;, Span(start=11, end=16, path=&quot;2-&quot;))
+&gt;&gt;&gt; get_bindings(&quot;divisibility_test&quot;, {
+...     &quot;POS&quot;: [&quot;15:3-5-1-2-1-0-&quot;],
+...     &quot;SUFFIX&quot;: []
+... })
+(&quot;divisibility_test&quot;, Span(start=15, end=15, path=&quot;3-5-1-2-1-0-&quot;))
+</code></pre>
+<p>When there are as many <code>"POS"</code> than <code>"SUFFIX"</code>, they are binded pairwise. The
+resulting spans cannot span multiple lines:</p>
+<pre><code class="python">&gt;&gt;&gt; get_bindings(&quot;literal&quot;, {
+...     &quot;POS&quot;: [&quot;16:3-5-1-2-1-1-1-0-&quot;],
+...     &quot;SUFFIX&quot;: [&quot;False&quot;],
+... })
+(&quot;literal:False&quot;, Span(start=16, end=16, path=&quot;3-5-1-2-1-1-1-0-&quot;))
+&gt;&gt;&gt; get_bindings(&quot;if_test_atom&quot;, {
+...     &quot;POS&quot;: [&quot;31:5-2-1-0-0-0-&quot;, &quot;31:5-2-1-0-0-2-1-1-&quot;, &quot;31:5-2-1-0-2-1-&quot;],
+...     &quot;SUFFIX&quot;: [&quot;b&quot;, &quot;a&quot;, &quot;greatest&quot;],
+... })
+(&quot;if_test_atom:b&quot;, Span(start=31, end=31, path=&quot;5-2-1-0-0-0-&quot;))
+(&quot;if_test_atom:a&quot;, Span(start=31, end=31, path=&quot;5-2-1-0-0-2-1-1-&quot;))
+(&quot;if_test_atom:greatest&quot;, Span(start=31, end=31, path=&quot;5-2-1-0-2-1-&quot;))
+</code></pre>
+<p>In all other cases, <code>"POS"</code> is interpreted as delimiting only one occurrence (which can span
+multiple lines), and associated repeatedly with the different suffixes:</p>
+<pre><code class="python">&gt;&gt;&gt; get_bindings(&quot;import_module&quot;, {&quot;POS&quot;: [&quot;1:1-&quot;], &quot;SUFFIX&quot;: [&quot;m1&quot;, &quot;m2&quot;, &quot;m3&quot;]})
+(&quot;import_module:m1&quot;, Span(start=1, end=1, path=&quot;1-&quot;))
+(&quot;import_module:m2&quot;, Span(start=1, end=1, path=&quot;1-&quot;))
+(&quot;import_module:m3&quot;, Span(start=1, end=1, path=&quot;1-&quot;))
+&gt;&gt;&gt; get_bindings(&quot;function_decorator&quot;, {
+...     &quot;POS&quot;: [&quot;1:1-&quot;, &quot;1:1-2-1-&quot;, &quot;2:1-2-2-&quot;, &quot;3:1-2-3-&quot;, &quot;5:1-5-1-&quot;],
+...     &quot;SUFFIX&quot;: [&quot;bizz&quot;, &quot;foo&quot;, &quot;bar&quot;],
+... })
+(&quot;function_decorator:bizz&quot;, Span(start=1, end=5, path=&quot;1-&quot;)),
+(&quot;function_decorator:foo&quot;, Span(start=1, end=5, path=&quot;1-&quot;)),
+(&quot;function_decorator:bar&quot;, Span(start=1, end=5, path=&quot;1-&quot;)),
+</code></pre>
+<h2 id="warning">Warning</h2>
+<p>Consider the problem of detecting the feature <code>for</code> in the following program:</p>
+<pre><code class="python">for (i, j) in seq:
+    pass
+</code></pre>
+<p>With such a multi-line feature, it is normally enough to capture <strong>two</strong> positions, namely
+those of its start (1) and its end (2). However, in this case we want to suffix <code>for</code> with
+the names of the <strong>two</strong> iterations variables (<code>for:i</code> and <code>for:j</code>). If we devise the
+regular expression specification without special care:</p>
+<pre><code class="re">        ^(.*)/_type=For
+\n(?:\1.+\n)*?\1/_pos=(?P&lt;POS&gt;.+)
+(
+\n(?:\1.+\n)*?\1/target(/.+)?/id=(?P&lt;SUFFIX&gt;.+)
+)+
+\n(?:\1.+\n)* \1/.*/_pos=(?P&lt;POS&gt;.+)
+</code></pre>
+<p>&hellip; as many positions as there are suffixes will be passed to the present function:</p>
+<pre><code class="python">&gt;&gt;&gt; get_bindings(&quot;for&quot;, {'POS': ['1:1-', '2:1-2-1-'], 'SUFFIX': ['i', 'j']})
+(&quot;for:i&quot;, Span(start=1, end=1, path=&quot;1-&quot;))
+(&quot;for:j&quot;, Span(start=2, end=2, path=&quot;1-2-1-&quot;))
+</code></pre>
+<p>&hellip; which will result in two (wrong) bindings instead of one. The workaround implemented in
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md#feature-for">spec.md</a>
+consists in capturing as many supplementary positions as iteration variables:</p>
+<pre><code class="re">        ^(.*)/_type=For
+\n(?:\1.+\n)*?\1/_pos=(?P&lt;POS&gt;.+)
+(
+\n(?:\1.+\n)*?\1/(?P&lt;_1&gt;target(/.+)?)/_pos=(?P&lt;POS&gt;.+)
+\n(?:\1.+\n)*?\1/(?P=_1)             /id=(?P&lt;SUFFIX&gt;.+)
+)+
+\n(?:\1.+\n)* \1/.*/_pos=(?P&lt;POS&gt;.+)
+</code></pre>
+<p>So, there are now two more positions in the captured dictionary. Since they are not at the
+ends of the list, they are ignored by <code><a title="paroxython.parse_program.pos_to_span" href="#paroxython.parse_program.pos_to_span">pos_to_span()</a></code>, and the result is now correct:</p>
+<pre><code class="python">&gt;&gt;&gt; get_bindings(&quot;for&quot;, {
+...     'POS': ['1:1-', '1:1-0-0-1-', '1:1-0-0-2-', '2:1-2-1-'],
+...      '_1': ['target/elts/1', 'target/elts/2'],  # ignored at this level
+...      'SUFFIX': ['i', 'j']
+... })
+(&quot;for:i&quot;, Span(start=1, end=2, path=&quot;1-&quot;))
+(&quot;for:j&quot;, Span(start=1, end=2, path=&quot;1-&quot;))
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L83-L211" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">def get_bindings(
+    label_prefix: LabelName, captures: Dict[str, List[str]]
+) -&gt; Iterator[Tuple[LabelName, Span]]:
+    if captures.get(&#34;SUFFIX&#34;):
+        # There is a &#34;SUFFIX&#34; key and its value is not `[]`.
+        if len(captures[&#34;POS&#34;]) == len(captures[&#34;SUFFIX&#34;]):
+            # When there are as many matched positions as suffixes, associate them in parallel.
+            for (suffix, pos) in zip(captures[&#34;SUFFIX&#34;], captures[&#34;POS&#34;]):
+                yield (LabelName(f&#34;{label_prefix}:{suffix}&#34;), pos_to_span([pos]))
+        else:
+            # When there are more or less matched positions than suffixes, interpret the positions
+            # as defining a unique span, and associate it with each suffix.
+            span = pos_to_span(captures[&#34;POS&#34;])
+            for suffix in captures[&#34;SUFFIX&#34;]:
+                yield (LabelName(f&#34;{label_prefix}:{suffix}&#34;), span)
+    else:
+        # There is no &#34;SUFFIX&#34; key or its value is `[]`.
+        yield (label_prefix, pos_to_span(captures[&#34;POS&#34;]))</code></pre>
 </details>
 </dd>
 </dl>
@@ -233,7 +420,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L53-L130" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L214-L318" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">class ProgramParser:
     def __init__(self, spec_path: Path = DEFAULT_SPEC_PATH) -&gt; None:
@@ -241,73 +428,60 @@ if __name__ == &#34;__main__&#34;:
         text = self.spec_path.read_text()
         self.features: Dict[LabelName, regex.Pattern] = {}
         self.queries: Dict[LabelName, Query] = {}
-        for (label_name, language, pattern) in find_all_features(text):
-            if label_name in self.features:
-                raise ValueError(f&#34;Duplicated name &#39;{label_name}&#39;!&#34;)  # pragma: no cover
+        for (label_pattern, language, specification) in find_all_features(text):
+            if label_pattern in self.features:  # pragma: no cover
+                raise ValueError(f&#34;Duplicated name &#39;{label_pattern}&#39;!&#34;)
             if language == &#34;re&#34;:
-                self.features[label_name] = regex.compile(f&#34;(?mx){pattern}&#34;)
+                self.features[label_pattern] = regex.compile(f&#34;(?mx){specification}&#34;).finditer
             elif language == &#34;sql&#34;:
-                self.queries[label_name] = Query(pattern)
-        self.db = DB()
+                self.queries[label_pattern] = Query(specification)
+            elif specification.strip() != &#34;&#34;:  # pragma: no cover
+                raise ValueError(f&#34;Unknow language &#39;{language}&#39; for &#39;{label_pattern}&#39;!&#34;)
+        self.derived_labels_database = DerivedLabelsDatabase()
 
     def __call__(self, program: Program, yield_failed_matches: bool = False) -&gt; Labels:
-        def try_to_bind(label_name: LabelName, span: Span) -&gt; None:
-            try:
-                program.deletion[label_name].remove(Span(span.start, span.end))
-            except (KeyError, ValueError):
-                result[label_name].append(span)
-
-        def pos_to_span(pos: List[str]) -&gt; Span:
-            (start, path) = pos[0].split(&#34;:&#34;)
-            (end, _) = pos[-1].split(&#34;:&#34;)
-            return Span(int(start), int(end), path)
-
+        # If the program can be parsed, flatten its AST.
         try:
             tree = ast.parse(program.source)
         except (SyntaxError, ValueError) as exception:
             return [Label(LabelName(f&#34;ast_construction:{type(exception).__name__}&#34;), [])]
         self.flat_ast = flatten_ast(tree)
 
-        labels: Labels = []
-        for (label_name, rex) in self.features.items():
-            result: LabelsSpans = defaultdict(list)
-            for candidate in list(program.addition):
-                if candidate == label_name or candidate.startswith(f&#34;{label_name}:&#34;):
-                    result[candidate] = program.addition.pop(candidate)
-            d = None
-            for match in rex.finditer(self.flat_ast, overlapped=True):
-                d = match.capturesdict()
-                if d.get(&#34;SUFFIX&#34;):  # there is a &#34;SUFFIX&#34; key and its value is not []
-                    if len(d[&#34;POS&#34;]) == len(d[&#34;SUFFIX&#34;]):
-                        # When there are as many matched positions as suffixes, associate them
-                        # in parallel. See features `for` and `decorator_list` for a workaround for
-                        # a problem which can occur with features spanning several lines.
-                        for (suffix, pos) in zip(d[&#34;SUFFIX&#34;], d[&#34;POS&#34;]):
-                            try_to_bind(LabelName(f&#34;{label_name}:{suffix}&#34;), pos_to_span([pos]))
-                    else:
-                        span = pos_to_span(d[&#34;POS&#34;])
-                        for suffix in d[&#34;SUFFIX&#34;]:
-                            try_to_bind(LabelName(f&#34;{label_name}:{suffix}&#34;), span)
-                else:
-                    try_to_bind(label_name, pos_to_span(d[&#34;POS&#34;]))
-            if yield_failed_matches and not d:
-                labels.append(Label(label_name, []))
-            else:
-                labels.extend(Label(*item) for item in result.items())
+        # Search the flat AST for every feature which is specified by a regular expression.
+        labels: LabelsSpans = defaultdict(list)
+        for (label_prefix, finditer) in self.features.items():
+            failed_match = True
+            for match in finditer(self.flat_ast, overlapped=True):
+                failed_match = False
+                for (label_name, span) in get_bindings(label_prefix, match.capturesdict()):
+                    try:  # Unless this binding is scheduled for deletion...
+                        program.deletion[label_name].remove(Span(span.start, span.end))
+                    except (KeyError, ValueError):  # ... actually bind the name with the span.
+                        labels[label_name].append(span)
+            if yield_failed_matches and failed_match:
+                labels[label_prefix] = []
 
-        labels.extend(Label(*item) for item in program.addition.items())
+        # Update the matching features with those featured for addition.
+        for (label_name, spans) in program.addition.items():
+            labels[label_name].extend(spans)
+            labels[label_name].sort()
 
-        self.db.create(labels)
-        for (candidate_label, query) in self.queries.items():
-            derived_labels = self.db.read(query)
+        # Now, use the features found so far to derive all those specified by an SQL query.
+        result = [Label(*item) for item in labels.items()]
+        self.derived_labels_database.create(result)  # The search is seeded with the know features.
+        for (label_pattern, query) in self.queries.items():
+            # Try to derive, from the DB current state, some label names matching `label_pattern`.
+            derived_labels = self.derived_labels_database.read(query)
             if derived_labels:
-                self.db.update(derived_labels)
-                labels.extend(derived_labels)
+                # Bingo! update the DB state and the result with the new labels.
+                self.derived_labels_database.update(derived_labels)
+                result.extend(derived_labels)
             elif yield_failed_matches:
-                labels.append(Label(candidate_label, []))
-        self.db.delete()
+                result.append(Label(label_pattern, []))
+        # Empty the DB to make it ready for the next program.
+        self.derived_labels_database.delete()
 
-        return sorted(labels)</code></pre>
+        return sorted(result)</code></pre>
 </details>
 <h3>Methods</h3>
 <dl>
@@ -315,95 +489,130 @@ if __name__ == &#34;__main__&#34;:
 <span>def <span class="ident">__init__</span></span>(<span>self, <br>spec_path: pathlib.Path = PosixPath('./paroxython/resources/spec.md')<br>) ‑> NoneType</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Compile the features to search.</p></div>
+<div class="desc"><p>Collect the features specified at <code>spec_path</code>.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>spec_path</code></strong> :&ensp;<code>Path</code>, optional</dt>
+<dd>The path of the specification file. Defaults to
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md">spec.md</a>.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>ValueError</code></dt>
+<dd>Fail when a given feature appears multiple times in the specification file,
+and when the language is not <code>"re"</code> or <code>"sql"</code>, and the specification is non-empty.</dd>
+</dl>
+<h2 id="description">Description</h2>
+<p>Some features are searched for with a regular expression, some with an SQL query.
+Distribute them in their respective dictionary. Compile the regular expressions and
+pre-bind the appropriate method. Create an instance of the database of derived labels.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L54-L67" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L215-L244" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def __init__(self, spec_path: Path = DEFAULT_SPEC_PATH) -&gt; None:
     self.spec_path = spec_path
     text = self.spec_path.read_text()
     self.features: Dict[LabelName, regex.Pattern] = {}
     self.queries: Dict[LabelName, Query] = {}
-    for (label_name, language, pattern) in find_all_features(text):
-        if label_name in self.features:
-            raise ValueError(f&#34;Duplicated name &#39;{label_name}&#39;!&#34;)  # pragma: no cover
+    for (label_pattern, language, specification) in find_all_features(text):
+        if label_pattern in self.features:  # pragma: no cover
+            raise ValueError(f&#34;Duplicated name &#39;{label_pattern}&#39;!&#34;)
         if language == &#34;re&#34;:
-            self.features[label_name] = regex.compile(f&#34;(?mx){pattern}&#34;)
+            self.features[label_pattern] = regex.compile(f&#34;(?mx){specification}&#34;).finditer
         elif language == &#34;sql&#34;:
-            self.queries[label_name] = Query(pattern)
-    self.db = DB()</code></pre>
+            self.queries[label_pattern] = Query(specification)
+        elif specification.strip() != &#34;&#34;:  # pragma: no cover
+            raise ValueError(f&#34;Unknow language &#39;{language}&#39; for &#39;{label_pattern}&#39;!&#34;)
+    self.derived_labels_database = DerivedLabelsDatabase()</code></pre>
 </details>
 </dd>
 <dt id="paroxython.parse_program.ProgramParser.__call__"><code class="name flex">
 <span>def <span class="ident">__call__</span></span>(<span>self, <br>program: Program, <br>yield_failed_matches: bool = False<br>) ‑> List[Label]</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Analyze a given source and return its labels and their spans.</p></div>
+<div class="desc"><p>Parse a given program and return its labels with their spans.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>program</code></strong> :&ensp;<code>Program</code></dt>
+<dd>A <code>Program</code> object, with its fields <code>source</code>, <code>addition</code> and
+<code>deletion</code> populated.</dd>
+<dt><strong><code>yield_failed_matches</code></strong> :&ensp;<code>bool</code>, optional</dt>
+<dd>If <code>True</code>, add to the returned labels those
+which have not been found in the program. Each one is associated with an empty
+list of spans. For testing purposes only. Defaults to <code>False</code>.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>Labels</code></dt>
+<dd>A sorted list of labels, associating each label name with its spans.</dd>
+</dl>
+<h2 id="description">Description</h2>
+<ol>
+<li>Parse the given program. If this fails, return a list consisting in a single label,
+<code>"ast_construction:"</code>, followed by the error name. Otherwise, flatten the resulting
+AST.</li>
+<li>Search the flat AST for every feature which is specified by a regular expression.
+Take care to avoid adding those features which are scheduled for deletion at the same
+span.</li>
+<li>Update the matching features with those featured for addition.</li>
+<li>Use the features found so far to derive (directly and indirectly) all those specified
+by an SQL query.</li>
+<li>Return the found features.</li>
+</ol>
+<h2 id="note">Note</h2>
+<p>The computation of the derived features is done in a single pass, which require them to
+be in a correct dependency order. This order is checked by <code>helpers/reformat_spec.py</code>,
+which is executed each time the tests are launched.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L69-L130" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L246-L318" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def __call__(self, program: Program, yield_failed_matches: bool = False) -&gt; Labels:
-    def try_to_bind(label_name: LabelName, span: Span) -&gt; None:
-        try:
-            program.deletion[label_name].remove(Span(span.start, span.end))
-        except (KeyError, ValueError):
-            result[label_name].append(span)
-
-    def pos_to_span(pos: List[str]) -&gt; Span:
-        (start, path) = pos[0].split(&#34;:&#34;)
-        (end, _) = pos[-1].split(&#34;:&#34;)
-        return Span(int(start), int(end), path)
-
+    # If the program can be parsed, flatten its AST.
     try:
         tree = ast.parse(program.source)
     except (SyntaxError, ValueError) as exception:
         return [Label(LabelName(f&#34;ast_construction:{type(exception).__name__}&#34;), [])]
     self.flat_ast = flatten_ast(tree)
 
-    labels: Labels = []
-    for (label_name, rex) in self.features.items():
-        result: LabelsSpans = defaultdict(list)
-        for candidate in list(program.addition):
-            if candidate == label_name or candidate.startswith(f&#34;{label_name}:&#34;):
-                result[candidate] = program.addition.pop(candidate)
-        d = None
-        for match in rex.finditer(self.flat_ast, overlapped=True):
-            d = match.capturesdict()
-            if d.get(&#34;SUFFIX&#34;):  # there is a &#34;SUFFIX&#34; key and its value is not []
-                if len(d[&#34;POS&#34;]) == len(d[&#34;SUFFIX&#34;]):
-                    # When there are as many matched positions as suffixes, associate them
-                    # in parallel. See features `for` and `decorator_list` for a workaround for
-                    # a problem which can occur with features spanning several lines.
-                    for (suffix, pos) in zip(d[&#34;SUFFIX&#34;], d[&#34;POS&#34;]):
-                        try_to_bind(LabelName(f&#34;{label_name}:{suffix}&#34;), pos_to_span([pos]))
-                else:
-                    span = pos_to_span(d[&#34;POS&#34;])
-                    for suffix in d[&#34;SUFFIX&#34;]:
-                        try_to_bind(LabelName(f&#34;{label_name}:{suffix}&#34;), span)
-            else:
-                try_to_bind(label_name, pos_to_span(d[&#34;POS&#34;]))
-        if yield_failed_matches and not d:
-            labels.append(Label(label_name, []))
-        else:
-            labels.extend(Label(*item) for item in result.items())
+    # Search the flat AST for every feature which is specified by a regular expression.
+    labels: LabelsSpans = defaultdict(list)
+    for (label_prefix, finditer) in self.features.items():
+        failed_match = True
+        for match in finditer(self.flat_ast, overlapped=True):
+            failed_match = False
+            for (label_name, span) in get_bindings(label_prefix, match.capturesdict()):
+                try:  # Unless this binding is scheduled for deletion...
+                    program.deletion[label_name].remove(Span(span.start, span.end))
+                except (KeyError, ValueError):  # ... actually bind the name with the span.
+                    labels[label_name].append(span)
+        if yield_failed_matches and failed_match:
+            labels[label_prefix] = []
 
-    labels.extend(Label(*item) for item in program.addition.items())
+    # Update the matching features with those featured for addition.
+    for (label_name, spans) in program.addition.items():
+        labels[label_name].extend(spans)
+        labels[label_name].sort()
 
-    self.db.create(labels)
-    for (candidate_label, query) in self.queries.items():
-        derived_labels = self.db.read(query)
+    # Now, use the features found so far to derive all those specified by an SQL query.
+    result = [Label(*item) for item in labels.items()]
+    self.derived_labels_database.create(result)  # The search is seeded with the know features.
+    for (label_pattern, query) in self.queries.items():
+        # Try to derive, from the DB current state, some label names matching `label_pattern`.
+        derived_labels = self.derived_labels_database.read(query)
         if derived_labels:
-            self.db.update(derived_labels)
-            labels.extend(derived_labels)
+            # Bingo! update the DB state and the result with the new labels.
+            self.derived_labels_database.update(derived_labels)
+            result.extend(derived_labels)
         elif yield_failed_matches:
-            labels.append(Label(candidate_label, []))
-    self.db.delete()
+            result.append(Label(label_pattern, []))
+    # Empty the DB to make it ready for the next program.
+    self.derived_labels_database.delete()
 
-    return sorted(labels)</code></pre>
+    return sorted(result)</code></pre>
 </details>
 </dd>
 </dl>
@@ -434,6 +643,8 @@ data-gaCategoryParameter="paroxython.parse_program">
 <li><h3><a href="#header-functions">Functions</a></h3>
 <ul class="">
 <li><code><a title="paroxython.parse_program.find_all_features" href="#paroxython.parse_program.find_all_features">find_all_features</a></code></li>
+<li><code><a title="paroxython.parse_program.pos_to_span" href="#paroxython.parse_program.pos_to_span">pos_to_span</a></code></li>
+<li><code><a title="paroxython.parse_program.get_bindings" href="#paroxython.parse_program.get_bindings">get_bindings</a></code></li>
 </ul>
 </li>
 <li><h3><a href="#header-classes">Classes</a></h3>

@@ -27,7 +27,7 @@ programs = labelled_programs(Path("examples/mini/programs"))
 def test_label_programs(capsys):
     result = programs
     text = json.dumps(result, cls=ProgramEncoder, indent=2)
-    text = regex.sub(r"\s*\[\s+(\d+),\s+(\d+)\s+\](,?)\s+", r"[\1,\2]\3", text)
+    text = regex.sub(r'\s*\[\s+(\d+),\s+(\d+),\s+(".*?")\s+\](,?)\s*', r"[\1,\2,\3]\4", text)
     make_snapshot(Path("examples/mini/labelled_programs.json"), text, capsys)
 
 

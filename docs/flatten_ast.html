@@ -209,7 +209,7 @@ merely increments a counter and associates it with any newly encountered string.
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L0-L334" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L0-L338" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">from typed_ast import ast3 as ast
 from typing import Any, Callable
@@ -308,11 +308,13 @@ if __name__ == &#34;__main__&#34;:
 <span>def <span class="ident">flatten_ast</span></span>(<span>tree) ‑> str</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Return a non-recursive, multiline dump of the AST (with some tweaks).</p></div>
+<div class="desc"><p>Return a non-recursive, multiline dump of the AST (with some tweaks).</p>
+<p>A simple wrapper around the recursive function <code><a title="paroxython.flatten_ast.flatten_node" href="#paroxython.flatten_ast.flatten_node">flatten_node()</a></code>, with a call to
+<code><a title="paroxython.flatten_ast.simplify_negative_literals" href="#paroxython.flatten_ast.simplify_negative_literals">simplify_negative_literals()</a></code> as post-processing.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L230-L235" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L230-L239" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def flatten_ast(tree) -&gt; str:
     pseudo_hash.reset()
@@ -348,7 +350,7 @@ Defaults to <code>regex.compile(r", ctx=.+?\(\)").sub</code>.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L238-L287" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L242-L291" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def flatten_node(
     node: Any,
@@ -392,12 +394,12 @@ Defaults to <code>regex.compile(r", ctx=.+?\(\)").sub</code>.</dd>
 <span>def <span class="ident">simplify_negative_literals</span></span>(<span>flat_ast: str, <br>sub: Callable = &lt;built-in method sub of regex&gt;<br>) ‑> str</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Apply <a href="#negative-literal-simplification">negative literal simplification</a> on a given flat ast.</p>
+<div class="desc"><p><a href="#negative-literal-simplification">Simplify the negative literals</a> of a given flat AST.</p>
 <p>Argument <code>sub</code> <a href="index.html#default-argument-trick">not to be explicitly provided.</a></p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L290-L304" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L294-L308" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def simplify_negative_literals(
     flat_ast: str,
@@ -420,7 +422,7 @@ Defaults to <code>regex.compile(r", ctx=.+?\(\)").sub</code>.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L310-L327" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L314-L331" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">class PseudoHashFactory:
     def __init__(self):
@@ -447,7 +449,7 @@ Defaults to <code>regex.compile(r", ctx=.+?\(\)").sub</code>.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L316-L319" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L320-L323" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def reset(self):
     self.i = 0
@@ -462,7 +464,7 @@ Defaults to <code>regex.compile(r", ctx=.+?\(\)").sub</code>.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L321-L327" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L325-L331" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def __call__(self, x):
     if x not in self.cache:
