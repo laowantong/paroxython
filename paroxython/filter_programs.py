@@ -26,6 +26,7 @@ import regex  # type: ignore
 from .goodies import print_warning
 from .normalize_predicate import normalize_predicate
 from .user_types import (
+    Criterion,
     JsonDatabase,
     Operation,
     Predicate,
@@ -196,8 +197,8 @@ class ProgramFilter:
 
     # Update the state of the filter by applying set operations with the given programs or taxa.
 
-    def update_filter(self, data: List, operation: Operation, quantifier: str) -> None:
-        """Update the selected programs and optionally impart the associated taxa.
+    def update_filter(self, data: List[Criterion], operation: Operation, quantifier: str) -> None:
+        """Update the selected programs and/or impart the associated taxa and/or mark them as hidden.
 
         Description:
             - If the operation is `"impart"`:
@@ -218,20 +219,21 @@ class ProgramFilter:
                     are excluded too.
 
         Args:
-            data (List): A list of criteria, _i.e._, a mix of regular expression patterns (strings)
-                and/or predicates (triples).
+            data (List[Criterion]): A list of criteria, _i.e._, a mix of regular expression
+                patterns (strings) and/or predicates (triples).
             operation (Operation): Either `"impart"`, `"hide"`, `"include"` or `"exclude"`.
             quantifier (str): Either `"any"` or `"all"`.
         """
         if operation in ("impart", "hide"):
-            (program_set, taxon_set) = self.programs_and_taxa_of_patterns(data, operation)
+            patterns = [str(datum) for datum in data]
+            (program_set, taxon_set) = self.programs_and_taxa_of_patterns(patterns, operation)
             if operation == "impart":
                 self.exclude_programs(program_set, follow=False)
                 self.impart_taxa(taxon_set)
             else:
                 self.hidden_taxa.update(taxon_set)
         else:
-            program_bag = self.programs_to_include_or_exclude(data, follow=(operation == "exclude"))
+            program_bag = self.programs_of_criteria(data, follow=(operation == "exclude"))
             if quantifier == "all":
                 program_bag -= counter({program: len(data) - 1 for program in program_bag})
             if operation == "include":
@@ -274,7 +276,7 @@ class ProgramFilter:
                 print_warning(f"datum {repr(datum)} cannot be interpreted for '{operation}''.")
         return (resulting_programs, resulting_taxa)
 
-    def programs_to_include_or_exclude(self, data: List, follow: bool) -> Counter[ProgramName]:
+    def programs_of_criteria(self, data: List[Criterion], follow: bool) -> Counter[ProgramName]:
         """Calculate the set of programs that meet at least one of the data criteria.
 
         Description:
@@ -293,8 +295,8 @@ class ProgramFilter:
                 `ProgramFilter.programs_of_negated_triple`.
 
         Args:
-            data (List): A list of criteria, _i.e._, a mix of regular expression patterns (strings)
-                and/or predicates (triples).
+            data (List[Criterion]): A list of criteria, _i.e._, a mix of regular expression patterns
+                (strings) and/or predicates (triples).
             follow (bool): If `True`, extend the result with all the programs which import (either
                 directly or by transitivity) at least one program meeting a data criterion.
 
@@ -582,15 +584,15 @@ class ProgramFilter:
 # "programs_and_taxa_of_patterns" -> "programs_of_pattern"
 # "programs_and_taxa_of_patterns" -> "taxa_of_programs"
 # "programs_and_taxa_of_patterns" -> "taxa_of_pattern"
-# "update_filter" -> "programs_to_include_or_exclude"
-# "programs_to_include_or_exclude" -> "programs_of_pattern"
-# "programs_to_include_or_exclude" -> "programs_of_taxa"
-# "programs_to_include_or_exclude" -> "taxa_of_pattern"
-# "programs_to_include_or_exclude" -> "programs_of_triple"
+# "update_filter" -> "programs_of_criteria"
+# "programs_of_criteria" -> "programs_of_pattern"
+# "programs_of_criteria" -> "programs_of_taxa"
+# "programs_of_criteria" -> "taxa_of_pattern"
+# "programs_of_criteria" -> "programs_of_triple"
 # "programs_of_triple" -> "taxa_of_pattern"
 # "programs_of_triple" -> "programs_of_taxa"
 # "programs_of_triple" -> "iterate_on_spans"
-# "programs_to_include_or_exclude" -> "programs_of_negated_triple"
+# "programs_of_criteria" -> "programs_of_negated_triple"
 # "programs_of_negated_triple" -> "taxa_of_pattern"
 # "programs_of_negated_triple" -> "programs_of_taxa"
 # "programs_of_negated_triple" -> "iterate_on_spans"

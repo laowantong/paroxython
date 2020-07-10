@@ -89,26 +89,6 @@
 </details>
 
 <details>
-  <summary>9 remaining after operation 1 (None) has filtered out 0 programs.</summary>
-  
-</details>
-
-<details>
-  <summary>9 remaining after operation 2 (foobar) has filtered out 0 programs.</summary>
-  
-</details>
-
-<details>
-  <summary>9 remaining after operation 3 (exclude) has filtered out 0 programs.</summary>
-  
-</details>
-
-<details>
-  <summary>9 remaining after operation 4 (exclude) has filtered out 0 programs.</summary>
-  
-</details>
-
-<details>
   <summary>8 remaining after operation 5 (impart) has filtered out 1 program.</summary>
   <ol>
     <li><code>prg8.py</code></li>

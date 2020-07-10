@@ -46,7 +46,7 @@ applied on them during the execution of the pipeline (see <code><a title="paroxy
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L0-L599" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L0-L607" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">from collections import Counter as counter
 from collections import defaultdict
@@ -58,6 +58,7 @@ import regex  # type: ignore
 from .goodies import print_warning
 from .normalize_predicate import normalize_predicate
 from .user_types import (
+    Criterion,
     JsonDatabase,
     Operation,
     Predicate,
@@ -147,9 +148,10 @@ class ProgramFilter:
 
     # Update the state of the filter by applying set operations with the given programs or taxa.
 
-    def update_filter(self, data: List, operation: Operation, quantifier: str) -&gt; None:
+    def update_filter(self, data: List[Criterion], operation: Operation, quantifier: str) -&gt; None:
         if operation in (&#34;impart&#34;, &#34;hide&#34;):
-            (program_set, taxon_set) = self.programs_and_taxa_of_patterns(data, operation)
+            patterns = [str(datum) for datum in data]
+            (program_set, taxon_set) = self.programs_and_taxa_of_patterns(patterns, operation)
             if operation == &#34;impart&#34;:
                 self.exclude_programs(program_set, follow=False)
                 self.impart_taxa(taxon_set)
@@ -182,7 +184,13 @@ class ProgramFilter:
                 print_warning(f&#34;datum {repr(datum)} cannot be interpreted for &#39;{operation}&#39;&#39;.&#34;)
         return (resulting_programs, resulting_taxa)
 
-    def programs_to_include_or_exclude(self, data: List, follow: bool) -&gt; Counter[ProgramName]:
+    def programs_to_include_or_exclude(
+        # fmt: off
+        self,
+        data: List[Criterion],
+        follow: bool
+        # fmt: on
+    ) -&gt; Counter[ProgramName]:
         resulting_programs: Counter[ProgramName] = counter()
         for datum in data:
             if isinstance(datum, str):
@@ -322,7 +330,7 @@ class ProgramFilter:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L48-L573" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L49-L581" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">class ProgramFilter:
 
@@ -394,9 +402,10 @@ class ProgramFilter:
 
     # Update the state of the filter by applying set operations with the given programs or taxa.
 
-    def update_filter(self, data: List, operation: Operation, quantifier: str) -&gt; None:
+    def update_filter(self, data: List[Criterion], operation: Operation, quantifier: str) -&gt; None:
         if operation in (&#34;impart&#34;, &#34;hide&#34;):
-            (program_set, taxon_set) = self.programs_and_taxa_of_patterns(data, operation)
+            patterns = [str(datum) for datum in data]
+            (program_set, taxon_set) = self.programs_and_taxa_of_patterns(patterns, operation)
             if operation == &#34;impart&#34;:
                 self.exclude_programs(program_set, follow=False)
                 self.impart_taxa(taxon_set)
@@ -429,7 +438,13 @@ class ProgramFilter:
                 print_warning(f&#34;datum {repr(datum)} cannot be interpreted for &#39;{operation}&#39;&#39;.&#34;)
         return (resulting_programs, resulting_taxa)
 
-    def programs_to_include_or_exclude(self, data: List, follow: bool) -&gt; Counter[ProgramName]:
+    def programs_to_include_or_exclude(
+        # fmt: off
+        self,
+        data: List[Criterion],
+        follow: bool
+        # fmt: on
+    ) -&gt; Counter[ProgramName]:
         resulting_programs: Counter[ProgramName] = counter()
         for datum in data:
             if isinstance(datum, str):
@@ -535,7 +550,7 @@ class ProgramFilter:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L52-L56" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L53-L57" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def __init__(self, db: JsonDatabase) -&gt; None:
     self.define_shortcuts(db)
@@ -551,7 +566,7 @@ class ProgramFilter:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L58-L63" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L59-L64" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def define_shortcuts(self, db: JsonDatabase) -&gt; None:
     self.db_programs: ProgramInfos = db[&#34;programs&#34;]
@@ -568,7 +583,7 @@ class ProgramFilter:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L65-L69" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L66-L70" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def init_filter_state(self) -&gt; None:
     self.imparted_knowledge: TaxonNameSet = set()
@@ -615,7 +630,7 @@ copy.</li>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L71-L117" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L72-L118" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def add_imported_taxa(self) -&gt; None:
     for (exporter, importers) in self.db_exportations.items():
@@ -639,7 +654,7 @@ copy.</li>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L121-L131" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L122-L132" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def taxa_of_pattern(self, pattern: str) -&gt; TaxonNameSet:
     match = regex.compile(fr&#34;{pattern}\b&#34;).match
@@ -659,7 +674,7 @@ copy.</li>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L133-L143" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L134-L144" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def programs_of_pattern(self, pattern: str) -&gt; ProgramNameSet:
     match = regex.compile(fr&#34;{pattern}&#34;).match
@@ -695,7 +710,7 @@ True
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L147-L172" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L148-L173" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def taxa_of_programs(self, programs: ProgramNameSet, follow: bool = False) -&gt; TaxonNameSet:
     taxa: TaxonNameSet = set()
@@ -731,7 +746,7 @@ featuring at least one taxon. Defaults to <code>False</code>.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L174-L195" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L175-L196" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def programs_of_taxa(self, taxa: TaxonNameSet, follow: bool = False) -&gt; ProgramNameSet:
     programs: ProgramNameSet = set()
@@ -744,10 +759,10 @@ featuring at least one taxon. Defaults to <code>False</code>.</dd>
 </details>
 </dd>
 <dt id="paroxython.filter_programs.ProgramFilter.update_filter"><code class="name flex">
-<span>def <span class="ident">update_filter</span></span>(<span>self, <br>data: List, <br>operation: Operation, <br>quantifier: str<br>) ‑> NoneType</span>
+<span>def <span class="ident">update_filter</span></span>(<span>self, <br>data: List[Union[str, Tuple[str, str, str]]], <br>operation: Operation, <br>quantifier: str<br>) ‑> NoneType</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Update the selected programs and optionally impart the associated taxa.</p>
+<div class="desc"><p>Update the selected programs and/or impart the associated taxa and/or mark them as hidden.</p>
 <h2 id="description">Description</h2>
 <ul>
 <li>If the operation is <code>"impart"</code>:<ul>
@@ -775,9 +790,9 @@ are excluded too.</li>
 </ul>
 <h2 id="args">Args</h2>
 <dl>
-<dt><strong><code>data</code></strong> :&ensp;<code>List</code></dt>
-<dd>A list of criteria, <em>i.e.</em>, a mix of regular expression patterns (strings)
-and/or predicates (triples).</dd>
+<dt><strong><code>data</code></strong> :&ensp;<code>List[Criterion]</code></dt>
+<dd>A list of criteria, <em>i.e.</em>, a mix of regular expression
+patterns (strings) and/or predicates (triples).</dd>
 <dt><strong><code>operation</code></strong> :&ensp;<code>Operation</code></dt>
 <dd>Either <code>"impart"</code>, <code>"hide"</code>, <code>"include"</code> or <code>"exclude"</code>.</dd>
 <dt><strong><code>quantifier</code></strong> :&ensp;<code>str</code></dt>
@@ -786,11 +801,12 @@ and/or predicates (triples).</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L199-L240" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L200-L242" class="git-link">Browse GitHub</a>
 </summary>
-<pre><code class="python">def update_filter(self, data: List, operation: Operation, quantifier: str) -&gt; None:
+<pre><code class="python">def update_filter(self, data: List[Criterion], operation: Operation, quantifier: str) -&gt; None:
     if operation in (&#34;impart&#34;, &#34;hide&#34;):
-        (program_set, taxon_set) = self.programs_and_taxa_of_patterns(data, operation)
+        patterns = [str(datum) for datum in data]
+        (program_set, taxon_set) = self.programs_and_taxa_of_patterns(patterns, operation)
         if operation == &#34;impart&#34;:
             self.exclude_programs(program_set, follow=False)
             self.impart_taxa(taxon_set)
@@ -834,7 +850,7 @@ operation <code>"impart"</code> does not support predicate criteria.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L242-L275" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L244-L277" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def programs_and_taxa_of_patterns(
     self, data: List[str], operation: Operation
@@ -856,7 +872,7 @@ operation <code>"impart"</code> does not support predicate criteria.</dd>
 </details>
 </dd>
 <dt id="paroxython.filter_programs.ProgramFilter.programs_to_include_or_exclude"><code class="name flex">
-<span>def <span class="ident">programs_to_include_or_exclude</span></span>(<span>self, <br>data: List, <br>follow: bool<br>) ‑> Counter[ProgramName]</span>
+<span>def <span class="ident">programs_to_include_or_exclude</span></span>(<span>self, <br>data: List[Union[str, Tuple[str, str, str]]], <br>follow: bool<br>) ‑> Counter[ProgramName]</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Calculate the set of programs that meet at least one of the data criteria.</p>
@@ -879,9 +895,9 @@ and an ”object” pattern. This predicate is normalized and, depending on its
 </ul>
 <h2 id="args">Args</h2>
 <dl>
-<dt><strong><code>data</code></strong> :&ensp;<code>List</code></dt>
-<dd>A list of criteria, <em>i.e.</em>, a mix of regular expression patterns (strings)
-and/or predicates (triples).</dd>
+<dt><strong><code>data</code></strong> :&ensp;<code>List[Criterion]</code></dt>
+<dd>A list of criteria, <em>i.e.</em>, a mix of regular expression patterns
+(strings) and/or predicates (triples).</dd>
 <dt><strong><code>follow</code></strong> :&ensp;<code>bool</code></dt>
 <dd>If <code>True</code>, extend the result with all the programs which import (either
 directly or by transitivity) at least one program meeting a data criterion.</dd>
@@ -895,9 +911,15 @@ of criteria it meets.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L277-L320" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L279-L328" class="git-link">Browse GitHub</a>
 </summary>
-<pre><code class="python">def programs_to_include_or_exclude(self, data: List, follow: bool) -&gt; Counter[ProgramName]:
+<pre><code class="python">def programs_to_include_or_exclude(
+    # fmt: off
+    self,
+    data: List[Criterion],
+    follow: bool
+    # fmt: on
+) -&gt; Counter[ProgramName]:
     resulting_programs: Counter[ProgramName] = counter()
     for datum in data:
         if isinstance(datum, str):
@@ -931,7 +953,7 @@ instance, imparting a taxon <code>a/b/c</code>, will impart taxa <code>a</code> 
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L322-L335" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L330-L343" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def impart_taxa(self, taxa: TaxonNameSet) -&gt; None:
     for taxon in taxa:
@@ -956,7 +978,7 @@ filtered out.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L337-L345" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L345-L353" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def include_programs(self, programs: ProgramNameSet) -&gt; None:
     self.selected_programs.intersection_update(programs)</code></pre>
@@ -978,7 +1000,7 @@ by transitivity) at least one member of the given <code>programs</code>.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L347-L358" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L355-L366" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def exclude_programs(self, programs: ProgramNameSet, follow: bool) -&gt; None:
     self.selected_programs.difference_update(programs)
@@ -1013,7 +1035,7 @@ span <code>s_2</code> of <code>taxon_2</code> for which <code>predicate(s_1, s_2
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L362-L395" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L370-L403" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def programs_of_triple(
     # fmt: off
@@ -1105,7 +1127,7 @@ certain taxon is included in that of another taxon.&#160;<a class="footnote-back
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L397-L474" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L405-L482" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def programs_of_negated_triple(
     # fmt: off
@@ -1222,7 +1244,7 @@ for <code>((1, 1), (1, 1))</code>):</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L476-L573" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L484-L581" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def iterate_on_spans(
     # fmt: off

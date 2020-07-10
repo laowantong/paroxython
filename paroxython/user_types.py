@@ -100,9 +100,11 @@ class JsonDatabase(TypedDict):
 
 Operation = NewType("Operation", str)
 
+Criterion = Union[str, Tuple[str, str, str]] # either a pattern or a semantic triple
+
 class Command(TypedDict):
     operation: Operation
-    data: Union[str, List[str]]
+    data: Union[str, List[Criterion]]
     filtered_out: ProgramNames # to be populated by the execution of the command
 
 Predicate = Callable[[int, int], bool]

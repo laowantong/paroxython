@@ -12,11 +12,10 @@ from paroxython.recommend_programs import Recommendations
 
 def test_recommend_program(capsys):
     rec = Recommendations(
-        commands=literal_eval(Path("examples/dummy/pipe.py").read_text()),
         db=json.loads(Path("examples/dummy/programs_db.json").read_text()),
         base_path=Path("examples/dummy/"),
     )
-    rec.run_pipeline()
+    rec.run_pipeline(literal_eval(Path("examples/dummy/pipe.py").read_text()))
     print(rec.selected_programs)
     assert rec.selected_programs == {
         "prg2.py",
@@ -50,17 +49,13 @@ def test_recommend_program(capsys):
         # "X/S/M/L",
         # "Y/E",
     }
-    print([p.get("filtered_out", []) for p in rec.commands])
-    assert [p.get("filtered_out", []) for p in rec.commands] == [
-        [],
-        [],
-        [],
-        [],
-        ["prg8.py"],
-        ["prg7.py", "prg9.py"],
-        ["prg4.py", "prg5.py", "prg6.py"],
-        ["prg1.py"],
-        [],
+    print(rec.result)
+    assert rec.result == [
+        (5, "impart", ["prg8.py"]),
+        (6, "exclude", ["prg7.py", "prg9.py"]),
+        (7, "exclude", ["prg4.py", "prg5.py", "prg6.py"]),
+        (8, "include", ["prg1.py"]),
+        (9, "hide", []),
     ]
     costs = {taxon: rec.assess.taxon_cost(taxon) for taxon in rec.db_programs["prg2.py"]["taxa"]}
     print(costs)
@@ -102,9 +97,7 @@ def test_recommend_mini_programs():
     for program in ["assignment.py", "collatz.py", "fizzbuzz.py", "is_even.py"]:
         proper_taxa[program] = set(db["programs"][program]["taxa"])
 
-    rec = Recommendations(db)  # Warning: initialization modifies the db by side-effect.
-    # The taxa of some programs are now augmented with the taxa of those they import,
-    # associated with an empty list of spans. Exception: metadata taxa are not imported.
+    rec = Recommendations(db)
     original = proper_taxa["fizzbuzz.py"] | proper_taxa["collatz.py"]
     assert all(
         taxon.startswith("metadata")
@@ -120,8 +113,8 @@ def test_recommend_mini_programs():
             ],
         }
     ]
-    rec = Recommendations(db, commands=commands)
-    rec.run_pipeline()
+    rec = Recommendations(db)
+    rec.run_pipeline(commands)
     assert rec.selected_programs == {"collatz.py"}
     assert not rec.imparted_knowledge
 
@@ -130,14 +123,14 @@ def test_recommend_mini_programs():
         {"operation": "exclude", "data": ["assignment.py"]},
         {"operation": "exclude", "data": ["fizzbuzz.py"]},
     ]
-    rec = Recommendations(db, commands=commands)
-    rec.run_pipeline()
+    rec = Recommendations(db)
+    rec.run_pipeline(commands)
     assert rec.selected_programs == {"collatz.py"}
     assert not rec.imparted_knowledge
 
     commands = [{"operation": "include", "data": ["this_program_does_not_exist.py"]}]
-    rec = Recommendations(db, commands=commands)
-    rec.run_pipeline()
+    rec = Recommendations(db)
+    rec.run_pipeline(commands)
     assert not rec.selected_programs
     assert not rec.imparted_knowledge
 
@@ -150,8 +143,8 @@ def test_recommend_mini_programs():
             ],
         }
     ]
-    rec = Recommendations(db, commands=commands)
-    rec.run_pipeline()
+    rec = Recommendations(db)
+    rec.run_pipeline(commands)
     assert rec.selected_programs == {"assignment.py", "fizzbuzz.py"}
     assert not rec.imparted_knowledge
 
@@ -160,8 +153,8 @@ def test_recommend_mini_programs():
         {"operation": "include", "data": ["assignment.py"]},
         {"operation": "include", "data": ["fizzbuzz.py"]},
     ]
-    rec = Recommendations(db, commands=commands)
-    rec.run_pipeline()
+    rec = Recommendations(db)
+    rec.run_pipeline(commands)
     assert not rec.selected_programs
     assert not rec.imparted_knowledge
 
@@ -174,8 +167,8 @@ def test_recommend_mini_programs():
             ],
         }
     ]
-    rec = Recommendations(db, commands=commands)
-    rec.run_pipeline()
+    rec = Recommendations(db)
+    rec.run_pipeline(commands)
     assert rec.selected_programs == {"collatz.py", "is_even.py"}
     assert proper_taxa["assignment.py"].issubset(rec.imparted_knowledge)
     assert proper_taxa["fizzbuzz.py"].issubset(rec.imparted_knowledge)
@@ -183,8 +176,8 @@ def test_recommend_mini_programs():
     assert not proper_taxa["collatz.py"].issubset(rec.imparted_knowledge)
 
     commands = [{"operation": "impart", "data": ["operator/arithmetic"]}]
-    rec = Recommendations(db, commands=commands)
-    rec.run_pipeline()
+    rec = Recommendations(db)
+    rec.run_pipeline(commands)
     assert rec.selected_programs == {"assignment.py", "collatz.py", "fizzbuzz.py", "is_even.py"}
     print(rec.imparted_knowledge)
     assert rec.imparted_knowledge == {
@@ -204,8 +197,8 @@ def test_recommend_mini_programs():
             ],
         }
     ]
-    rec = Recommendations(db, commands=commands)
-    rec.run_pipeline()
+    rec = Recommendations(db)
+    rec.run_pipeline(commands)
     assert not rec.selected_programs
     assert not rec.imparted_knowledge
 
@@ -218,8 +211,8 @@ def test_recommend_mini_programs():
             ],
         }
     ]
-    rec = Recommendations(db, commands=commands)
-    rec.run_pipeline()
+    rec = Recommendations(db)
+    rec.run_pipeline(commands)
     assert rec.selected_programs == {"assignment.py", "collatz.py"}
 
     commands = [
@@ -233,8 +226,8 @@ def test_recommend_mini_programs():
             ],
         }
     ]
-    rec = Recommendations(db, commands=commands)
-    rec.run_pipeline()
+    rec = Recommendations(db)
+    rec.run_pipeline(commands)
     assert rec.selected_programs == {"collatz.py"}
     assert not rec.imparted_knowledge
 
@@ -248,14 +241,14 @@ def test_recommend_mini_programs():
             ],
         }
     ]
-    rec = Recommendations(db, commands=commands)
-    rec.run_pipeline()
+    rec = Recommendations(db)
+    rec.run_pipeline(commands)
     assert rec.selected_programs == {"assignment.py", "collatz.py"}
     assert not rec.imparted_knowledge
 
     commands = [{"operation": "include", "data": ["this_taxon_does_not_exist"]}]
-    rec = Recommendations(db, commands=commands)
-    rec.run_pipeline()
+    rec = Recommendations(db)
+    rec.run_pipeline(commands)
     assert not rec.selected_programs
     assert not rec.imparted_knowledge
 
@@ -267,8 +260,8 @@ def test_recommend_mini_programs():
             ],
         }
     ]
-    rec = Recommendations(db, commands=commands)
-    rec.run_pipeline()
+    rec = Recommendations(db)
+    rec.run_pipeline(commands)
     assert rec.selected_programs == {"collatz.py"}
     assert not rec.imparted_knowledge
 
@@ -281,8 +274,8 @@ def test_recommend_mini_programs():
             ],
         }
     ]
-    rec = Recommendations(db, commands=commands)
-    rec.run_pipeline()
+    rec = Recommendations(db)
+    rec.run_pipeline(commands)
     assert rec.selected_programs == {"assignment.py"}
     assert not rec.imparted_knowledge
 
@@ -297,8 +290,8 @@ def test_recommend_mini_programs():
             ],
         }
     ]
-    rec = Recommendations(db, commands=commands)
-    rec.run_pipeline()
+    rec = Recommendations(db)
+    rec.run_pipeline(commands)
     assert rec.selected_programs == {"assignment.py"}
     assert not rec.imparted_knowledge
 
@@ -311,8 +304,8 @@ def test_recommend_mini_programs():
             ],
         }
     ]
-    rec = Recommendations(db, commands=commands)
-    rec.run_pipeline()
+    rec = Recommendations(db)
+    rec.run_pipeline(commands)
     print(rec.selected_programs)
     assert rec.selected_programs == {"assignment.py", "collatz.py"}
     assert not rec.imparted_knowledge
@@ -326,8 +319,8 @@ def test_recommend_mini_programs():
             ],
         }
     ]
-    rec = Recommendations(db, commands=commands)
-    rec.run_pipeline()
+    rec = Recommendations(db)
+    rec.run_pipeline(commands)
     print(rec.selected_programs)
     assert not rec.selected_programs
     assert not rec.imparted_knowledge
@@ -338,8 +331,8 @@ def test_recommend_mini_programs():
             "data": [("variable/assignment", "inside", "flow/loop")],
         }
     ]
-    rec = Recommendations(db, commands=commands)
-    rec.run_pipeline()
+    rec = Recommendations(db)
+    rec.run_pipeline(commands)
     assert rec.selected_programs == {
         "assignment.py",
         "collatz.py",
@@ -349,8 +342,8 @@ def test_recommend_mini_programs():
     assert not rec.imparted_knowledge
 
     commands = [{"operation": "include", "data": 42}]  # malformed source => ignored command
-    rec = Recommendations(db, commands=commands)
-    rec.run_pipeline()
+    rec = Recommendations(db)
+    rec.run_pipeline(commands)
     assert rec.selected_programs == {
         "assignment.py",
         "collatz.py",
@@ -360,14 +353,14 @@ def test_recommend_mini_programs():
     assert not rec.imparted_knowledge
 
     commands = [{"operation": "include", "data": [42]}]  # malformed pattern => ignored pattern
-    rec = Recommendations(db, commands=commands)
-    rec.run_pipeline()
+    rec = Recommendations(db)
+    rec.run_pipeline(commands)
     assert rec.selected_programs == set()
     assert not rec.imparted_knowledge
 
     commands = [{"data": []}]  # a command without operation is ignored
-    rec = Recommendations(db, commands=commands)
-    rec.run_pipeline()
+    rec = Recommendations(db)
+    rec.run_pipeline(commands)
     assert rec.selected_programs == {
         "assignment.py",
         "collatz.py",
@@ -382,8 +375,8 @@ def test_recommend_mini_programs():
             "data": "assignment.py",
         }
     ]
-    rec = Recommendations(db, commands=commands)
-    rec.run_pipeline()
+    rec = Recommendations(db)
+    rec.run_pipeline(commands)
     assert rec.selected_programs == {
         "assignment.py",
         "collatz.py",
@@ -403,8 +396,8 @@ def test_recommend_mini_programs():
             ],
         }
     ]
-    rec = Recommendations(db, commands=commands)
-    rec.run_pipeline()
+    rec = Recommendations(db)
+    rec.run_pipeline(commands)
     assert rec.selected_programs == {"assignment.py"}
     assert not rec.imparted_knowledge
 
@@ -419,8 +412,8 @@ def test_recommend_mini_programs():
             ],
         }
     ]
-    rec = Recommendations(db, commands=commands)
-    rec.run_pipeline()
+    rec = Recommendations(db)
+    rec.run_pipeline(commands)
     assert rec.selected_programs == {"assignment.py"}
     assert not rec.imparted_knowledge
 
@@ -434,8 +427,8 @@ def test_recommend_mini_programs():
             ],
         }
     ]
-    rec = Recommendations(db, commands=commands)
-    rec.run_pipeline()
+    rec = Recommendations(db)
+    rec.run_pipeline(commands)
     assert rec.selected_programs == {"collatz.py", "assignment.py", "fizzbuzz.py"}
     assert not rec.imparted_knowledge
 
@@ -448,8 +441,8 @@ def test_recommend_mini_programs():
             ],
         }
     ]
-    rec = Recommendations(db, commands=commands)
-    rec.run_pipeline()
+    rec = Recommendations(db)
+    rec.run_pipeline(commands)
     assert rec.selected_programs == {
         "is_even.py",
         "fizzbuzz.py",
@@ -470,8 +463,8 @@ def test_recommend_mini_programs():
             ],
         }
     ]
-    rec = Recommendations(db, commands=commands)
-    rec.run_pipeline()
+    rec = Recommendations(db)
+    rec.run_pipeline(commands)
     assert rec.selected_programs == {"collatz.py"}
     assert not rec.imparted_knowledge
 
@@ -485,8 +478,8 @@ def test_recommend_mini_programs():
             ],
         }
     ]
-    rec = Recommendations(db, commands=commands)
-    rec.run_pipeline()
+    rec = Recommendations(db)
+    rec.run_pipeline(commands)
     assert rec.selected_programs == {"collatz.py", "is_even.py", "fizzbuzz.py"}
     assert not rec.imparted_knowledge
 
@@ -499,8 +492,8 @@ def test_recommend_mini_programs():
             ],
         }
     ]
-    rec = Recommendations(db, commands=commands)
-    rec.run_pipeline()
+    rec = Recommendations(db)
+    rec.run_pipeline(commands)
     assert rec.selected_programs == {"collatz.py", "is_even.py", "fizzbuzz.py"}
     assert not rec.imparted_knowledge
 
@@ -514,8 +507,8 @@ def test_recommend_mini_programs():
             ],
         }
     ]
-    rec = Recommendations(db, commands=commands)
-    rec.run_pipeline()
+    rec = Recommendations(db)
+    rec.run_pipeline(commands)
     assert rec.selected_programs == {"is_even.py"}
     assert not rec.imparted_knowledge
 
@@ -530,8 +523,8 @@ def test_recommend_mini_programs():
             ],
         }
     ]
-    rec = Recommendations(db, commands=commands)
-    rec.run_pipeline()
+    rec = Recommendations(db)
+    rec.run_pipeline(commands)
     assert rec.selected_programs == {"collatz.py", "is_even.py"}
     assert not rec.imparted_knowledge
 
@@ -544,8 +537,8 @@ def test_recommend_mini_programs():
             ],
         }
     ]
-    rec = Recommendations(db, commands=commands)
-    rec.run_pipeline()
+    rec = Recommendations(db)
+    rec.run_pipeline(commands)
     assert not rec.selected_programs
     assert not rec.imparted_knowledge
 
@@ -559,8 +552,8 @@ def test_recommend_mini_programs():
             ],
         }
     ]
-    rec = Recommendations(db, commands=commands)
-    rec.run_pipeline()
+    rec = Recommendations(db)
+    rec.run_pipeline(commands)
     assert not rec.selected_programs
     assert not rec.imparted_knowledge
 
@@ -574,8 +567,8 @@ def test_recommend_mini_programs():
             ],
         }
     ]
-    rec = Recommendations(db, commands=commands)
-    rec.run_pipeline()
+    rec = Recommendations(db)
+    rec.run_pipeline(commands)
     assert rec.selected_programs == {"fizzbuzz.py", "collatz.py"}
     assert not rec.imparted_knowledge
 
@@ -589,8 +582,8 @@ def test_recommend_mini_programs():
             ],
         }
     ]
-    rec = Recommendations(db, commands=commands)
-    rec.run_pipeline()
+    rec = Recommendations(db)
+    rec.run_pipeline(commands)
     assert rec.selected_programs == {"fizzbuzz.py", "collatz.py"}
     assert not rec.imparted_knowledge
 
@@ -607,8 +600,8 @@ def test_recommend_mini_programs():
             ],
         }
     ]
-    rec = Recommendations(db, commands=commands)
-    rec.run_pipeline()
+    rec = Recommendations(db)
+    rec.run_pipeline(commands)
     assert rec.selected_programs == {"collatz.py"}
     assert not rec.imparted_knowledge
 
@@ -625,8 +618,8 @@ def test_recommend_mini_programs():
             ],
         }
     ]
-    rec = Recommendations(db, commands=commands)
-    rec.run_pipeline()
+    rec = Recommendations(db)
+    rec.run_pipeline(commands)
     print(rec.selected_programs)
     assert rec.selected_programs == {"assignment.py"}
     assert not rec.imparted_knowledge
@@ -669,14 +662,11 @@ pipelines_1 = [
 
 @pytest.mark.parametrize("expected_programs, commands", pipelines_1)
 def test_recommend_simple_programs_1(expected_programs, commands):
-    rec = Recommendations(
-        db,
-        commands=(
-            [{"operation": operation, "data": data} for (operation, data) in commands]
-            + [{"operation": "include", "data": base_1}]
-        ),
+    rec = Recommendations(db,)
+    rec.run_pipeline(
+        [{"operation": operation, "data": data} for (operation, data) in commands]
+        + [{"operation": "include", "data": base_1}]
     )
-    rec.run_pipeline()
     print(rec.selected_programs)
     assert rec.selected_programs == expected_programs
 
@@ -743,14 +733,11 @@ pipelines_2 = [
 
 @pytest.mark.parametrize("expected_programs, commands", pipelines_2)
 def test_recommend_simple_programs_2(expected_programs, commands):
-    rec = Recommendations(
-        db,
-        commands=(
-            [{"operation": operation, "data": data} for (operation, data) in commands]
-            + [{"operation": "include", "data": base_2}]
-        ),
+    rec = Recommendations(db,)
+    rec.run_pipeline(
+        [{"operation": operation, "data": data} for (operation, data) in commands]
+        + [{"operation": "include", "data": base_2}]
     )
-    rec.run_pipeline()
     print(rec.selected_programs)
     assert rec.selected_programs == expected_programs
 
@@ -789,14 +776,11 @@ pipelines_3 = [
 
 @pytest.mark.parametrize("expected_programs, commands", pipelines_3)
 def test_recommend_simple_programs_3(expected_programs, commands):
-    rec = Recommendations(
-        db,
-        commands=(
-            [{"operation": operation, "data": data} for (operation, data) in commands]
-            + [{"operation": "include", "data": base_3}]
-        ),
+    rec = Recommendations(db,)
+    rec.run_pipeline(
+        [{"operation": operation, "data": data} for (operation, data) in commands]
+        + [{"operation": "include", "data": base_3}]
     )
-    rec.run_pipeline()
     print(rec.selected_programs)
     assert rec.selected_programs == expected_programs
 

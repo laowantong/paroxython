@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.8.3" />
 <title>paroxython.recommend_programs API documentation</title>
-<meta name="description" content="" />
+<meta name="description" content="A wrapper around `paroxython.filter_programs.ProgramFilter`, feeding it with commands and assessing
+the learning costs of its output …" />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
 <link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/github.min.css" crossorigin>
@@ -32,15 +33,40 @@ body.gsc-overflow-hidden #sidebar {overflow: visible;}
 <h1 class="title">Module <code>paroxython.recommend_programs</code></h1>
 </header>
 <section id="section-intro">
+<p>A wrapper around <code><a title="paroxython.filter_programs.ProgramFilter" href="filter_programs.html#paroxython.filter_programs.ProgramFilter">ProgramFilter</a></code>, feeding it with commands and assessing
+the learning costs of its output.</p>
+<h2 id="description">Description</h2>
+<p>The recommendation system is initialized with a database created by <code><a title="paroxython.make_db" href="make_db.html">paroxython.make_db</a></code>. It parses
+the given pipeline
+(<a href="https://github.com/laowantong/paroxython/blob/master/examples/dummy/pipe.py">example</a>), checks
+its commands and submits them to the filter, which in response updates three sets:</p>
+<ul>
+<li><code>selected_programs</code>, the recommended programs;</li>
+<li><code>imparted_knowledge</code>, the taxa modelizing the imparted knowledge;</li>
+<li><code>hidden_taxa</code>, the taxa to be removed from the final output.</li>
+</ul>
+<p>When the pipeline is exhausted, it retrieves their values, compute the associated learning costs,
+and produces a Markdown report
+(<a href="https://github.com/laowantong/paroxython/blob/master/examples/simple/programs_recommendations.md">example</a>)
+whose each section consists in:</p>
+<ul>
+<li>the name of a recommended program;</li>
+<li>its total learning cost;</li>
+<li>its source code;</li>
+<li>the table of its taxa, lexicographically sorted, and accompanied by their spans and individual
+learning cost.</li>
+</ul>
+<p>To maximize their utility, these sections are grouped by cost range, and each group is sorted by
+increasing total cost and <a href="https://en.wikipedia.org/wiki/Source_lines_of_code">SLOC</a>.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L0-L242" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L0-L318" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">import subprocess
 from collections import defaultdict
 from pathlib import Path
-from typing import Dict, List, Optional, Union
+from typing import Dict, List, Optional, Tuple, Union
 
 import regex  # type: ignore
 
@@ -56,16 +82,17 @@ from .goodies import (
 )
 from .user_types import (
     AssessedPrograms,
-    AssessmentStrategy,
     Command,
+    Criterion,
     JsonDatabase,
     Operation,
     ProgramNames,
 )
 
 __pdoc__ = {
+    &#34;MalformedData&#34;: False,
+    &#34;Recommendations&#34;: &#34;&#34;,
     &#34;Recommendations.__init__&#34;: True,
-    &#34;Recommendations&#34;: &#34;TODO.&#34;,
 }
 
 
@@ -74,14 +101,7 @@ class MalformedData(Exception):
 
 
 class Recommendations:
-    def __init__(
-        self,
-        db: JsonDatabase,
-        commands: Optional[List[Command]] = None,
-        base_path: Optional[Path] = None,
-        **kwargs,
-    ) -&gt; None:
-        self.commands = commands or []
+    def __init__(self, db: JsonDatabase, base_path: Optional[Path] = None, **kwargs,) -&gt; None:
         self.base_path = base_path
 
         # copy locally some attributes and methods of a ProgramFilter instance
@@ -93,13 +113,15 @@ class Recommendations:
         self.update_filter = program_filter.update_filter
 
         self.assess = LearningCostAssessor(self.db_programs, **kwargs)
+        self.result: List[Tuple[int, Operation, ProgramNames]] = []
 
-    def run_pipeline(self) -&gt; None:
+    def run_pipeline(self, commands: Optional[List[Command]] = None) -&gt; None:
+        commands = commands or []
         current = set(self.db_programs)
-        print(f&#34;\nProcessing {len(self.commands)} commands on {len(current)} programs.&#34;)
+        print(f&#34;\nProcessing {len(commands)} commands on {len(current)} programs.&#34;)
 
         # Execute sequentially all the commands of the pipeline
-        for (i, command) in enumerate(self.commands, 1):
+        for (i, command) in enumerate(commands, 1):
 
             # Retrieve the operation
             try:
@@ -124,33 +146,36 @@ class Recommendations:
                 print_warning(f&#34;operation {i} ({operation}) is ignored (no data).&#34;)
                 continue
 
-            # Update the selected programs and optionally impart the associated taxa
+            # Update the selected programs and optionally impart or hide the associated taxa
             self.update_filter(data, operation, quantifier)
 
-            # Update the statistics of the filter state for the last operation
+            # Log the statistics of the filter state for the last operation
             (previous, current) = (current, set(self.selected_programs))
-            command[&#34;filtered_out&#34;] = sorted(previous - current)
+            self.result.append((i, operation, sorted(previous - current)))
             print(f&#34;  {len(current)} programs remaining after operation {i} ({operation}).&#34;)
 
         self.assess.set_imparted_knowledge(self.imparted_knowledge)
         self.assessed_programs = self.assess(self.selected_programs)
 
-    def parse_data(self, data: Union[str, List[str]], operation: Operation) -&gt; List[str]:
-        if isinstance(data, list):  # The JSON object can either be a list of strings...
+    def parse_data(
+        # fmt: off
+        self,
+        data: Union[str, List[Criterion]],
+        operation: Operation
+        # fmt: on
+    ) -&gt; List[Criterion]:
+        if isinstance(data, list):  # The object can either be a list of criteria...
             return data
         elif isinstance(data, str):  # ... or a shell command printing them on stdout
-            return (
-                subprocess.run(
-                    str(data).format(base_path=self.base_path),  # str() needed by mypy
-                    stdout=subprocess.PIPE,  # From Python 3.7, these two arguments can be
-                    stderr=subprocess.PIPE,  # ... replaced by: capture_output=True
-                    encoding=&#34;utf-8&#34;,
-                    shell=True,
-                    check=True,
-                )
-                .stdout.strip()
-                .split(&#34;\n&#34;)
+            criteria = subprocess.run(
+                str(data).format(base_path=self.base_path),  # str() needed by mypy
+                stdout=subprocess.PIPE,  # From Python 3.7, these two arguments can be
+                stderr=subprocess.PIPE,  # ... replaced by: capture_output=True
+                encoding=&#34;utf-8&#34;,
+                shell=True,
+                check=True,
             )
+            return [criterion for criterion in criteria.stdout.strip().split(&#34;\n&#34;)]
         else:
             raise MalformedData
 
@@ -230,19 +255,13 @@ class Recommendations:
                 + &#34;\n&lt;/details&gt;\n&#34;
             )
 
-        remainder = len(self.db_programs)
+        n = len(self.db_programs)
         summary: List[str] = [f&#34;\n# Summary&#34;]
-        summary.append(programs_to_html(f&#34;{remainder} initially&#34;, list(self.db_programs)))
-        for (i, command) in enumerate(self.commands, 1):
-            action = f&#34;operation {i} ({command.get(&#39;operation&#39;)})&#34;
-            removed = len(command.get(&#34;filtered_out&#34;, []))
-            remainder -= removed
-            summary.append(
-                programs_to_html(
-                    f&#34;{remainder} remaining after {action} has filtered out {removed} programs&#34;,
-                    command.get(&#34;filtered_out&#34;, []),
-                )
-            )
+        summary.append(programs_to_html(f&#34;{n} initially&#34;, list(self.db_programs)))
+        for (i, operation, removed_programs) in self.result:
+            n -= len(removed_programs)
+            title = f&#34;{n} remaining after operation {i} ({operation}) has filtered out {len(removed_programs)} programs&#34;
+            summary.append(programs_to_html(title, removed_programs))
 
         return &#34;\n&#34;.join(toc + contents + summary)
 
@@ -252,11 +271,10 @@ if __name__ == &#34;__main__&#34;:
     json = __import__(&#34;json&#34;)
     program_path = Path(&#34;../algo/programs&#34;)
     rec = Recommendations(
-        commands=ast.literal_eval(Path(f&#34;{program_path}_pipe.py&#34;).read_text()),
         db=json.loads(Path(f&#34;{program_path}_db.json&#34;).read_text()),
         base_path=program_path.parent,
     )
-    rec.run_pipeline()
+    rec.run_pipeline(ast.literal_eval(Path(f&#34;{program_path}_pipe.py&#34;).read_text()))
     output_path = Path(f&#34;{program_path}_recommendations.md&#34;)
     output_path.write_text(rec.get_markdown())
     print(f&#34;Dumped: {output_path.resolve()}.\n&#34;)</code></pre>
@@ -271,45 +289,18 @@ if __name__ == &#34;__main__&#34;:
 <section>
 <h2 class="section-title" id="header-classes">Classes</h2>
 <dl>
-<dt id="paroxython.recommend_programs.MalformedData"><code class="flex name class">
-<span>class <span class="ident">MalformedData</span></span>
-<span>(</span><span>...)</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Raised when the field <code>"data"</code> of a pipeline command cannot be interpreted.</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L36-L39" class="git-link">Browse GitHub</a>
-</summary>
-<pre><code class="python">class MalformedData(Exception):
-    ...</code></pre>
-</details>
-<h3>Ancestors</h3>
-<ul class="hlist">
-<li>builtins.Exception</li>
-<li>builtins.BaseException</li>
-</ul>
-</dd>
 <dt id="paroxython.recommend_programs.Recommendations"><code class="flex name class">
 <span>class <span class="ident">Recommendations</span></span>
 </code></dt>
 <dd>
-<div class="desc"><p>TODO.</p></div>
+<div class="desc"></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L42-L228" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L68-L305" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">class Recommendations:
-    def __init__(
-        self,
-        db: JsonDatabase,
-        commands: Optional[List[Command]] = None,
-        base_path: Optional[Path] = None,
-        **kwargs,
-    ) -&gt; None:
-        self.commands = commands or []
+    def __init__(self, db: JsonDatabase, base_path: Optional[Path] = None, **kwargs,) -&gt; None:
         self.base_path = base_path
 
         # copy locally some attributes and methods of a ProgramFilter instance
@@ -321,13 +312,15 @@ if __name__ == &#34;__main__&#34;:
         self.update_filter = program_filter.update_filter
 
         self.assess = LearningCostAssessor(self.db_programs, **kwargs)
+        self.result: List[Tuple[int, Operation, ProgramNames]] = []
 
-    def run_pipeline(self) -&gt; None:
+    def run_pipeline(self, commands: Optional[List[Command]] = None) -&gt; None:
+        commands = commands or []
         current = set(self.db_programs)
-        print(f&#34;\nProcessing {len(self.commands)} commands on {len(current)} programs.&#34;)
+        print(f&#34;\nProcessing {len(commands)} commands on {len(current)} programs.&#34;)
 
         # Execute sequentially all the commands of the pipeline
-        for (i, command) in enumerate(self.commands, 1):
+        for (i, command) in enumerate(commands, 1):
 
             # Retrieve the operation
             try:
@@ -352,33 +345,36 @@ if __name__ == &#34;__main__&#34;:
                 print_warning(f&#34;operation {i} ({operation}) is ignored (no data).&#34;)
                 continue
 
-            # Update the selected programs and optionally impart the associated taxa
+            # Update the selected programs and optionally impart or hide the associated taxa
             self.update_filter(data, operation, quantifier)
 
-            # Update the statistics of the filter state for the last operation
+            # Log the statistics of the filter state for the last operation
             (previous, current) = (current, set(self.selected_programs))
-            command[&#34;filtered_out&#34;] = sorted(previous - current)
+            self.result.append((i, operation, sorted(previous - current)))
             print(f&#34;  {len(current)} programs remaining after operation {i} ({operation}).&#34;)
 
         self.assess.set_imparted_knowledge(self.imparted_knowledge)
         self.assessed_programs = self.assess(self.selected_programs)
 
-    def parse_data(self, data: Union[str, List[str]], operation: Operation) -&gt; List[str]:
-        if isinstance(data, list):  # The JSON object can either be a list of strings...
+    def parse_data(
+        # fmt: off
+        self,
+        data: Union[str, List[Criterion]],
+        operation: Operation
+        # fmt: on
+    ) -&gt; List[Criterion]:
+        if isinstance(data, list):  # The object can either be a list of criteria...
             return data
         elif isinstance(data, str):  # ... or a shell command printing them on stdout
-            return (
-                subprocess.run(
-                    str(data).format(base_path=self.base_path),  # str() needed by mypy
-                    stdout=subprocess.PIPE,  # From Python 3.7, these two arguments can be
-                    stderr=subprocess.PIPE,  # ... replaced by: capture_output=True
-                    encoding=&#34;utf-8&#34;,
-                    shell=True,
-                    check=True,
-                )
-                .stdout.strip()
-                .split(&#34;\n&#34;)
+            criteria = subprocess.run(
+                str(data).format(base_path=self.base_path),  # str() needed by mypy
+                stdout=subprocess.PIPE,  # From Python 3.7, these two arguments can be
+                stderr=subprocess.PIPE,  # ... replaced by: capture_output=True
+                encoding=&#34;utf-8&#34;,
+                shell=True,
+                check=True,
             )
+            return [criterion for criterion in criteria.stdout.strip().split(&#34;\n&#34;)]
         else:
             raise MalformedData
 
@@ -458,54 +454,49 @@ if __name__ == &#34;__main__&#34;:
                 + &#34;\n&lt;/details&gt;\n&#34;
             )
 
-        remainder = len(self.db_programs)
+        n = len(self.db_programs)
         summary: List[str] = [f&#34;\n# Summary&#34;]
-        summary.append(programs_to_html(f&#34;{remainder} initially&#34;, list(self.db_programs)))
-        for (i, command) in enumerate(self.commands, 1):
-            action = f&#34;operation {i} ({command.get(&#39;operation&#39;)})&#34;
-            removed = len(command.get(&#34;filtered_out&#34;, []))
-            remainder -= removed
-            summary.append(
-                programs_to_html(
-                    f&#34;{remainder} remaining after {action} has filtered out {removed} programs&#34;,
-                    command.get(&#34;filtered_out&#34;, []),
-                )
-            )
+        summary.append(programs_to_html(f&#34;{n} initially&#34;, list(self.db_programs)))
+        for (i, operation, removed_programs) in self.result:
+            n -= len(removed_programs)
+            title = f&#34;{n} remaining after operation {i} ({operation}) has filtered out {len(removed_programs)} programs&#34;
+            summary.append(programs_to_html(title, removed_programs))
 
         return &#34;\n&#34;.join(toc + contents + summary)</code></pre>
 </details>
 <h3>Methods</h3>
 <dl>
 <dt id="paroxython.recommend_programs.Recommendations.__init__"><code class="name flex">
-<span>def <span class="ident">__init__</span></span>(<span>self, <br>db: JsonDatabase, <br>commands: Union[List[Command], NoneType] = None, <br>base_path: Union[pathlib.Path, NoneType] = None, <br>**kwargs<br>) ‑> NoneType</span>
+<span>def <span class="ident">__init__</span></span>(<span>self, <br>db: JsonDatabase, <br>base_path: Union[pathlib.Path, NoneType] = None, <br>**kwargs<br>) ‑> NoneType</span>
 </code></dt>
 <dd>
-<div class="desc"><p>TODO.</p>
+<div class="desc"><p>Initialize a recommendation system for the given database of programs tagged with taxa.</p>
 <h2 id="args">Args</h2>
 <dl>
 <dt><strong><code>db</code></strong> :&ensp;<code>JsonDatabase</code></dt>
-<dd>[description]</dd>
-<dt><strong><code>commands</code></strong> :&ensp;<code>Optional[List[Command]]</code>, optional</dt>
-<dd>[description]. Defaults to <code>None</code>.</dd>
+<dd>A Python dictionary containing the JSON structure constructed by
+<code><a title="paroxython.make_db.Database" href="make_db.html#paroxython.make_db.Database">Database</a></code>, <em>i.e.</em> the result of the parsing, labelling and
+taxon-ifying of a set of programs
+(<a href="https://github.com/laowantong/paroxython/blob/master/examples/simple/programs_db.json">example</a>).
+The execution relies on the fields <code>programs</code>, <code>taxa</code>, <code>importations</code> and
+<code>exportations</code>, but ignores the field <code>labels</code>.</dd>
 <dt><strong><code>base_path</code></strong> :&ensp;<code>Optional[Path]</code>, optional</dt>
-<dd>[description]. Defaults to <code>None</code>.</dd>
+<dd>A path, accessible from any optional shell command
+under the name <code>"{base_path}"</code>. Defaults to <code>None</code>.</dd>
 <dt><strong><code>**kwargs</code></strong></dt>
 <dd>May include the keyword argument <code>assessment_strategy</code>, transmitted to
 <code><a title="paroxython.assess_costs.LearningCostAssessor" href="assess_costs.html#paroxython.assess_costs.LearningCostAssessor">LearningCostAssessor</a></code>.</dd>
-</dl></div>
+</dl>
+<h2 id="warning">Warning</h2>
+<p><code>db</code> is modified by side-effect. After initialization, the taxa of some programs have
+been augmented with the taxa of those they import, associated with an empty list of
+spans. Exception: the taxa starting with <code>"metadata/"</code> are not imported.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L43-L71" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L69-L101" class="git-link">Browse GitHub</a>
 </summary>
-<pre><code class="python">def __init__(
-    self,
-    db: JsonDatabase,
-    commands: Optional[List[Command]] = None,
-    base_path: Optional[Path] = None,
-    **kwargs,
-) -&gt; None:
-    self.commands = commands or []
+<pre><code class="python">def __init__(self, db: JsonDatabase, base_path: Optional[Path] = None, **kwargs,) -&gt; None:
     self.base_path = base_path
 
     # copy locally some attributes and methods of a ProgramFilter instance
@@ -516,25 +507,55 @@ if __name__ == &#34;__main__&#34;:
     self.hidden_taxa = program_filter.hidden_taxa
     self.update_filter = program_filter.update_filter
 
-    self.assess = LearningCostAssessor(self.db_programs, **kwargs)</code></pre>
+    self.assess = LearningCostAssessor(self.db_programs, **kwargs)
+    self.result: List[Tuple[int, Operation, ProgramNames]] = []</code></pre>
 </details>
 </dd>
 <dt id="paroxython.recommend_programs.Recommendations.run_pipeline"><code class="name flex">
-<span>def <span class="ident">run_pipeline</span></span>(<span>self) ‑> NoneType</span>
+<span>def <span class="ident">run_pipeline</span></span>(<span>self, <br>commands: Union[List[Command], NoneType] = None<br>) ‑> NoneType</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Evolve recommended programs, imparted knowledge and log accross pipeline commands.</p></div>
+<div class="desc"><p>Evolve the state of the filter accross pipeline commands.</p>
+<h2 id="description">Description</h2>
+<p>Execute sequentially all the commands of the pipeline. For each command:</p>
+<ol>
+<li>Retrieve the operation (<code>"include"</code>, <code>"exclude"</code>, <code>"impart"</code> or <code>"hide"</code>, with an
+optional suffix <code>" any"</code> (implicit) or <code>" all"</code>).</li>
+<li>Retrieve the data by calling <code><a title="paroxython.recommend_programs.Recommendations.parse_data" href="#paroxython.recommend_programs.Recommendations.parse_data">Recommendations.parse_data()</a></code>.</li>
+<li>Update the selected programs and/or impart the associated taxa and/or mark them as
+hidden.</li>
+<li>Log the newly filtered out programs in <code>self.result</code>.</li>
+</ol>
+<p>Finally, compute the learning costs of the remaining selected programs based on the
+imparted knowledge.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>commands</code></strong> :&ensp;<code>Optional[List[Command]]</code>, optional</dt>
+<dd>
+<p>A list of dictionaries with two
+mandatories entries:</p>
+<ul>
+<li><code>"operation"</code>: a string among <code>"include"</code>, <code>"exclude"</code>, <code>"impart"</code> and <code>"hide"</code>,
+with optionally a suffix <code>" any"</code> (implicit) or <code>" all"</code>.</li>
+<li><code>"data"</code>: either a string consisting in a shell-command, or an heterogeneous list
+optionally mixing strings (patterns matching either program names or taxon
+names) and triples of strings (of the form subject, predicate, object).</li>
+</ul>
+<p>Defaults to <code>None</code>, which is treated as an empty list.</p>
+</dd>
+</dl></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L73-L114" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L103-L170" class="git-link">Browse GitHub</a>
 </summary>
-<pre><code class="python">def run_pipeline(self) -&gt; None:
+<pre><code class="python">def run_pipeline(self, commands: Optional[List[Command]] = None) -&gt; None:
+    commands = commands or []
     current = set(self.db_programs)
-    print(f&#34;\nProcessing {len(self.commands)} commands on {len(current)} programs.&#34;)
+    print(f&#34;\nProcessing {len(commands)} commands on {len(current)} programs.&#34;)
 
     # Execute sequentially all the commands of the pipeline
-    for (i, command) in enumerate(self.commands, 1):
+    for (i, command) in enumerate(commands, 1):
 
         # Retrieve the operation
         try:
@@ -559,12 +580,12 @@ if __name__ == &#34;__main__&#34;:
             print_warning(f&#34;operation {i} ({operation}) is ignored (no data).&#34;)
             continue
 
-        # Update the selected programs and optionally impart the associated taxa
+        # Update the selected programs and optionally impart or hide the associated taxa
         self.update_filter(data, operation, quantifier)
 
-        # Update the statistics of the filter state for the last operation
+        # Log the statistics of the filter state for the last operation
         (previous, current) = (current, set(self.selected_programs))
-        command[&#34;filtered_out&#34;] = sorted(previous - current)
+        self.result.append((i, operation, sorted(previous - current)))
         print(f&#34;  {len(current)} programs remaining after operation {i} ({operation}).&#34;)
 
     self.assess.set_imparted_knowledge(self.imparted_knowledge)
@@ -572,31 +593,62 @@ if __name__ == &#34;__main__&#34;:
 </details>
 </dd>
 <dt id="paroxython.recommend_programs.Recommendations.parse_data"><code class="name flex">
-<span>def <span class="ident">parse_data</span></span>(<span>self, <br>data: Union[str, List[str]], <br>operation: Operation<br>) ‑> List[str]</span>
+<span>def <span class="ident">parse_data</span></span>(<span>self, <br>data: Union[str, List[Union[str, Tuple[str, str, str]]]], <br>operation: Operation<br>) ‑> List[Union[str, Tuple[str, str, str]]]</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Retrieve the data on which the operation will be applied.</p></div>
+<div class="desc"><p>Retrieve the list of criteria to which to apply the given operation.</p>
+<h2 id="description">Description</h2>
+<p>In case <code>data</code> is a list of criteria, return it unchanged. Otherwise, if it is a string,
+execute it as a shell command, capture its output and return it as a list of strings.
+Otherwise, fail.</p>
+<h2 id="note">Note</h2>
+<p>A shell command cannot produce semantic triples. Its output is necessarily interpreted
+as a list of patterns.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>data</code></strong> :&ensp;<code>Union[str, List[Criterion]]</code></dt>
+<dd>Either a shell command (<code>str</code>) or a list of
+criteria. A criterion is either a pattern (<code>str</code>) or a semantic triple
+(<code>Tuple[str, str, str]</code>) subject, predicate, object.</dd>
+<dt><strong><code>operation</code></strong> :&ensp;<code>Operation</code></dt>
+<dd>Either <code>"include"</code>, <code>"exclude"</code>, <code>"impart"</code> or <code>"hide"</code>
+(note that the optional suffix <code>" all"</code> has been previously suppressed).</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>MalformedData</code></dt>
+<dd>Indicates that the field <code>"data"</code> of a pipeline command cannot
+be interpreted.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>List[Criterion]</code></dt>
+<dd>A list of criteria.</dd>
+</dl></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L116-L134" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L172-L217" class="git-link">Browse GitHub</a>
 </summary>
-<pre><code class="python">def parse_data(self, data: Union[str, List[str]], operation: Operation) -&gt; List[str]:
-    if isinstance(data, list):  # The JSON object can either be a list of strings...
+<pre><code class="python">def parse_data(
+    # fmt: off
+    self,
+    data: Union[str, List[Criterion]],
+    operation: Operation
+    # fmt: on
+) -&gt; List[Criterion]:
+    if isinstance(data, list):  # The object can either be a list of criteria...
         return data
     elif isinstance(data, str):  # ... or a shell command printing them on stdout
-        return (
-            subprocess.run(
-                str(data).format(base_path=self.base_path),  # str() needed by mypy
-                stdout=subprocess.PIPE,  # From Python 3.7, these two arguments can be
-                stderr=subprocess.PIPE,  # ... replaced by: capture_output=True
-                encoding=&#34;utf-8&#34;,
-                shell=True,
-                check=True,
-            )
-            .stdout.strip()
-            .split(&#34;\n&#34;)
+        criteria = subprocess.run(
+            str(data).format(base_path=self.base_path),  # str() needed by mypy
+            stdout=subprocess.PIPE,  # From Python 3.7, these two arguments can be
+            stderr=subprocess.PIPE,  # ... replaced by: capture_output=True
+            encoding=&#34;utf-8&#34;,
+            shell=True,
+            check=True,
         )
+        return [criterion for criterion in criteria.stdout.strip().split(&#34;\n&#34;)]
     else:
         raise MalformedData</code></pre>
 </details>
@@ -605,11 +657,11 @@ if __name__ == &#34;__main__&#34;:
 <span>def <span class="ident">get_markdown</span></span>(<span>self, <br>span_column_width: int = 30, <br>sorting_strategy: str = 'by_cost_and_sloc', <br>grouping_strategy: str = 'by_cost_bucket'<br>) ‑> str</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Reiterate on the commands, now populated by the results, and output them.</p></div>
+<div class="desc"><p>Iterate on the results. Group, sort and output them.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L136-L228" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L219-L305" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def get_markdown(
     self,
@@ -687,19 +739,13 @@ if __name__ == &#34;__main__&#34;:
             + &#34;\n&lt;/details&gt;\n&#34;
         )
 
-    remainder = len(self.db_programs)
+    n = len(self.db_programs)
     summary: List[str] = [f&#34;\n# Summary&#34;]
-    summary.append(programs_to_html(f&#34;{remainder} initially&#34;, list(self.db_programs)))
-    for (i, command) in enumerate(self.commands, 1):
-        action = f&#34;operation {i} ({command.get(&#39;operation&#39;)})&#34;
-        removed = len(command.get(&#34;filtered_out&#34;, []))
-        remainder -= removed
-        summary.append(
-            programs_to_html(
-                f&#34;{remainder} remaining after {action} has filtered out {removed} programs&#34;,
-                command.get(&#34;filtered_out&#34;, []),
-            )
-        )
+    summary.append(programs_to_html(f&#34;{n} initially&#34;, list(self.db_programs)))
+    for (i, operation, removed_programs) in self.result:
+        n -= len(removed_programs)
+        title = f&#34;{n} remaining after operation {i} ({operation}) has filtered out {len(removed_programs)} programs&#34;
+        summary.append(programs_to_html(title, removed_programs))
 
     return &#34;\n&#34;.join(toc + contents + summary)</code></pre>
 </details>
@@ -721,7 +767,9 @@ data-gaCategoryParameter="paroxython.recommend_programs">
 </div>
 <h1>Index</h1>
 <div class="toc">
-<ul></ul>
+<ul>
+<li><a href="#description">Description</a></li>
+</ul>
 </div>
 <ul id="index">
 <li><h3>Super-module</h3>
@@ -731,9 +779,6 @@ data-gaCategoryParameter="paroxython.recommend_programs">
 </li>
 <li><h3><a href="#header-classes">Classes</a></h3>
 <ul>
-<li>
-<h4><code><a title="paroxython.recommend_programs.MalformedData" href="#paroxython.recommend_programs.MalformedData">MalformedData</a></code></h4>
-</li>
 <li>
 <h4><code><a title="paroxython.recommend_programs.Recommendations" href="#paroxython.recommend_programs.Recommendations">Recommendations</a></code></h4>
 <ul class="">

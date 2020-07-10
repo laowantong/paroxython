@@ -1,10 +1,37 @@
 """
+A wrapper around `paroxython.filter_programs.ProgramFilter`, feeding it with commands and assessing
+the learning costs of its output.
+
+## Description
+
+The recommendation system is initialized with a database created by `paroxython.make_db`. It parses
+the given pipeline
+([example](https://github.com/laowantong/paroxython/blob/master/examples/dummy/pipe.py)), checks
+its commands and submits them to the filter, which in response updates three sets:
+
+- `selected_programs`, the recommended programs;
+- `imparted_knowledge`, the taxa modelizing the imparted knowledge;
+- `hidden_taxa`, the taxa to be removed from the final output.
+
+When the pipeline is exhausted, it retrieves their values, compute the associated learning costs,
+and produces a Markdown report
+([example](https://github.com/laowantong/paroxython/blob/master/examples/simple/programs_recommendations.md))
+whose each section consists in:
+
+- the name of a recommended program;
+- its total learning cost;
+- its source code;
+- the table of its taxa, lexicographically sorted, and accompanied by their spans and individual
+  learning cost.
+
+To maximize their utility, these sections are grouped by cost range, and each group is sorted by
+increasing total cost and [SLOC](https://en.wikipedia.org/wiki/Source_lines_of_code).
 """
 
 import subprocess
 from collections import defaultdict
 from pathlib import Path
-from typing import Dict, List, Optional, Union
+from typing import Dict, List, Optional, Tuple, Union
 
 import regex  # type: ignore
 
@@ -20,44 +47,46 @@ from .goodies import (
 )
 from .user_types import (
     AssessedPrograms,
-    AssessmentStrategy,
     Command,
+    Criterion,
     JsonDatabase,
     Operation,
     ProgramNames,
 )
 
 __pdoc__ = {
+    "MalformedData": False,
+    "Recommendations": "",
     "Recommendations.__init__": True,
-    "Recommendations": "TODO.",
 }
 
 
 class MalformedData(Exception):
-    """Raised when the field `"data"` of a pipeline command cannot be interpreted."""
-
     ...
 
 
 class Recommendations:
-    def __init__(
-        self,
-        db: JsonDatabase,
-        commands: Optional[List[Command]] = None,
-        base_path: Optional[Path] = None,
-        **kwargs,
-    ) -> None:
-        """TODO.
+    def __init__(self, db: JsonDatabase, base_path: Optional[Path] = None, **kwargs,) -> None:
+        """Initialize a recommendation system for the given database of programs tagged with taxa.
 
         Args:
-            db (JsonDatabase): [description]
-            commands (Optional[List[Command]], optional): [description]. Defaults to `None`.
-            base_path (Optional[Path], optional): [description]. Defaults to `None`.
+            db (JsonDatabase): A Python dictionary containing the JSON structure constructed by
+                `paroxython.make_db.Database`, _i.e._ the result of the parsing, labelling and
+                taxon-ifying of a set of programs
+                ([example](https://github.com/laowantong/paroxython/blob/master/examples/simple/programs_db.json)).
+                The execution relies on the fields `programs`, `taxa`, `importations` and
+                `exportations`, but ignores the field `labels`.
+            base_path (Optional[Path], optional): A path, accessible from any optional shell command
+                under the name `"{base_path}"`. Defaults to `None`.
             **kwargs: May include the keyword argument `assessment_strategy`, transmitted to
                 `paroxython.assess_costs.LearningCostAssessor`.
+
+        Warning:
+            `db` is modified by side-effect. After initialization, the taxa of some programs have
+            been augmented with the taxa of those they import, associated with an empty list of
+            spans. Exception: the taxa starting with `"metadata/"` are not imported.
         """
 
-        self.commands = commands or []
         self.base_path = base_path
 
         # copy locally some attributes and methods of a ProgramFilter instance
@@ -69,15 +98,42 @@ class Recommendations:
         self.update_filter = program_filter.update_filter
 
         self.assess = LearningCostAssessor(self.db_programs, **kwargs)
+        self.result: List[Tuple[int, Operation, ProgramNames]] = []
 
-    def run_pipeline(self) -> None:
-        """Evolve recommended programs, imparted knowledge and log accross pipeline commands."""
+    def run_pipeline(self, commands: Optional[List[Command]] = None) -> None:
+        """Evolve the state of the filter accross pipeline commands.
 
+        Description:
+            Execute sequentially all the commands of the pipeline. For each command:
+
+            1. Retrieve the operation (`"include"`, `"exclude"`, `"impart"` or `"hide"`, with an
+              optional suffix `" any"` (implicit) or `" all"`).
+            2. Retrieve the data by calling `Recommendations.parse_data`.
+            3. Update the selected programs and/or impart the associated taxa and/or mark them as
+              hidden.
+            4. Log the newly filtered out programs in `self.result`.
+
+            Finally, compute the learning costs of the remaining selected programs based on the
+            imparted knowledge.
+
+        Args:
+            commands (Optional[List[Command]], optional): A list of dictionaries with two
+                mandatories entries:
+
+                - `"operation"`: a string among `"include"`, `"exclude"`, `"impart"` and `"hide"`,
+                    with optionally a suffix `" any"` (implicit) or `" all"`.
+                - `"data"`: either a string consisting in a shell-command, or an heterogeneous list
+                    optionally mixing strings (patterns matching either program names or taxon
+                    names) and triples of strings (of the form subject, predicate, object).
+
+                Defaults to `None`, which is treated as an empty list.
+        """
+        commands = commands or []
         current = set(self.db_programs)
-        print(f"\nProcessing {len(self.commands)} commands on {len(current)} programs.")
+        print(f"\nProcessing {len(commands)} commands on {len(current)} programs.")
 
         # Execute sequentially all the commands of the pipeline
-        for (i, command) in enumerate(self.commands, 1):
+        for (i, command) in enumerate(commands, 1):
 
             # Retrieve the operation
             try:
@@ -102,34 +158,61 @@ class Recommendations:
                 print_warning(f"operation {i} ({operation}) is ignored (no data).")
                 continue
 
-            # Update the selected programs and optionally impart the associated taxa
+            # Update the selected programs and optionally impart or hide the associated taxa
             self.update_filter(data, operation, quantifier)
 
-            # Update the statistics of the filter state for the last operation
+            # Log the statistics of the filter state for the last operation
             (previous, current) = (current, set(self.selected_programs))
-            command["filtered_out"] = sorted(previous - current)
+            self.result.append((i, operation, sorted(previous - current)))
             print(f"  {len(current)} programs remaining after operation {i} ({operation}).")
 
         self.assess.set_imparted_knowledge(self.imparted_knowledge)
         self.assessed_programs = self.assess(self.selected_programs)
 
-    def parse_data(self, data: Union[str, List[str]], operation: Operation) -> List[str]:
-        """Retrieve the data on which the operation will be applied."""
-        if isinstance(data, list):  # The JSON object can either be a list of strings...
+    def parse_data(
+        # fmt: off
+        self,
+        data: Union[str, List[Criterion]],
+        operation: Operation
+        # fmt: on
+    ) -> List[Criterion]:
+        """Retrieve the list of criteria to which to apply the given operation.
+
+        Description:
+            In case `data` is a list of criteria, return it unchanged. Otherwise, if it is a string,
+            execute it as a shell command, capture its output and return it as a list of strings.
+            Otherwise, fail.
+
+        Note:
+            A shell command cannot produce semantic triples. Its output is necessarily interpreted
+            as a list of patterns.
+
+        Args:
+            data (Union[str, List[Criterion]]): Either a shell command (`str`) or a list of
+                criteria. A criterion is either a pattern (`str`) or a semantic triple
+                (`Tuple[str, str, str]`) subject, predicate, object.
+            operation (Operation): Either `"include"`, `"exclude"`, `"impart"` or `"hide"`
+                (note that the optional suffix `" all"` has been previously suppressed).
+
+        Raises:
+            MalformedData: Indicates that the field `"data"` of a pipeline command cannot
+                be interpreted.
+
+        Returns:
+            List[Criterion]: A list of criteria.
+        """
+        if isinstance(data, list):  # The object can either be a list of criteria...
             return data
         elif isinstance(data, str):  # ... or a shell command printing them on stdout
-            return (
-                subprocess.run(
-                    str(data).format(base_path=self.base_path),  # str() needed by mypy
-                    stdout=subprocess.PIPE,  # From Python 3.7, these two arguments can be
-                    stderr=subprocess.PIPE,  # ... replaced by: capture_output=True
-                    encoding="utf-8",
-                    shell=True,
-                    check=True,
-                )
-                .stdout.strip()
-                .split("\n")
+            criteria = subprocess.run(
+                str(data).format(base_path=self.base_path),  # str() needed by mypy
+                stdout=subprocess.PIPE,  # From Python 3.7, these two arguments can be
+                stderr=subprocess.PIPE,  # ... replaced by: capture_output=True
+                encoding="utf-8",
+                shell=True,
+                check=True,
             )
+            return [criterion for criterion in criteria.stdout.strip().split("\n")]
         else:
             raise MalformedData
 
@@ -139,7 +222,7 @@ class Recommendations:
         sorting_strategy: str = "by_cost_and_sloc",
         grouping_strategy: str = "by_cost_bucket",
     ) -> str:
-        """Reiterate on the commands, now populated by the results, and output them."""
+        """Iterate on the results. Group, sort and output them."""
 
         # Define some helper functions.
 
@@ -211,19 +294,13 @@ class Recommendations:
                 + "\n</details>\n"
             )
 
-        remainder = len(self.db_programs)
+        n = len(self.db_programs)
         summary: List[str] = [f"\n# Summary"]
-        summary.append(programs_to_html(f"{remainder} initially", list(self.db_programs)))
-        for (i, command) in enumerate(self.commands, 1):
-            action = f"operation {i} ({command.get('operation')})"
-            removed = len(command.get("filtered_out", []))
-            remainder -= removed
-            summary.append(
-                programs_to_html(
-                    f"{remainder} remaining after {action} has filtered out {removed} programs",
-                    command.get("filtered_out", []),
-                )
-            )
+        summary.append(programs_to_html(f"{n} initially", list(self.db_programs)))
+        for (i, operation, removed_programs) in self.result:
+            n -= len(removed_programs)
+            title = f"{n} remaining after operation {i} ({operation}) has filtered out {len(removed_programs)} programs"
+            summary.append(programs_to_html(title, removed_programs))
 
         return "\n".join(toc + contents + summary)
 
@@ -233,11 +310,9 @@ if __name__ == "__main__":
     json = __import__("json")
     program_path = Path("../algo/programs")
     rec = Recommendations(
-        commands=ast.literal_eval(Path(f"{program_path}_pipe.py").read_text()),
-        db=json.loads(Path(f"{program_path}_db.json").read_text()),
-        base_path=program_path.parent,
+        db=json.loads(Path(f"{program_path}_db.json").read_text()), base_path=program_path.parent,
     )
-    rec.run_pipeline()
+    rec.run_pipeline(ast.literal_eval(Path(f"{program_path}_pipe.py").read_text()))
     output_path = Path(f"{program_path}_recommendations.md")
     output_path.write_text(rec.get_markdown())
     print(f"Dumped: {output_path.resolve()}.\n")

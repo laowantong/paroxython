@@ -57,7 +57,7 @@ body.gsc-overflow-hidden #sidebar {overflow: visible;}
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli_recommend.py#L0-L62" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli_recommend.py#L0-L61" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">import json
 import sys
@@ -86,11 +86,10 @@ def cli_wrapper(args):
         commands = []
     rec = Recommendations(
         db=json.loads(db_path.read_text()),
-        commands=commands,
         base_path=Path(args[&#34;--base&#34;] or parent_path),
         assessment_strategy=args[&#34;--cost&#34;],
     )
-    rec.run_pipeline()
+    rec.run_pipeline(commands)
     output_path = Path(args[&#34;--output&#34;] or parent_path / f&#34;{prefix}_recommendations.md&#34;)
     output_path.write_text(rec.get_markdown())
     print(f&#34;Dumped: {output_path.resolve()}.\n&#34;)</code></pre>
@@ -111,7 +110,7 @@ def cli_wrapper(args):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli_recommend.py#L39-L63" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli_recommend.py#L39-L62" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def cli_wrapper(args):
     db_path = Path(args[&#34;DB_PATH&#34;])
@@ -130,11 +129,10 @@ def cli_wrapper(args):
         commands = []
     rec = Recommendations(
         db=json.loads(db_path.read_text()),
-        commands=commands,
         base_path=Path(args[&#34;--base&#34;] or parent_path),
         assessment_strategy=args[&#34;--cost&#34;],
     )
-    rec.run_pipeline()
+    rec.run_pipeline(commands)
     output_path = Path(args[&#34;--output&#34;] or parent_path / f&#34;{prefix}_recommendations.md&#34;)
     output_path.write_text(rec.get_markdown())
     print(f&#34;Dumped: {output_path.resolve()}.\n&#34;)</code></pre>

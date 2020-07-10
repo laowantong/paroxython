@@ -53,11 +53,10 @@ def cli_wrapper(args):
         commands = []
     rec = Recommendations(
         db=json.loads(db_path.read_text()),
-        commands=commands,
         base_path=Path(args["--base"] or parent_path),
         assessment_strategy=args["--cost"],
     )
-    rec.run_pipeline()
+    rec.run_pipeline(commands)
     output_path = Path(args["--output"] or parent_path / f"{prefix}_recommendations.md")
     output_path.write_text(rec.get_markdown())
     print(f"Dumped: {output_path.resolve()}.\n")
