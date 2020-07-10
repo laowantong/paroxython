@@ -63,6 +63,7 @@ if "ipykernel" in sys.modules:
 
     @magics_class
     class ParoxythonMagics(Magics):
+        @staticmethod
         @line_cell_magic
         def paroxython(self, line, source=None):
             """

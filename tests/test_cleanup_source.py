@@ -161,7 +161,7 @@ fizz = [
 <<< `if __name__ == "__main__":` part is suppressed.
 foo = bar
 if __name__ == "__main__":
-    bar == foo
+    bar = foo
 ---
 foo = bar
 >>>

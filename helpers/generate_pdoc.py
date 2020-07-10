@@ -8,6 +8,7 @@ import regex  # type: ignore
 import context
 from paroxython.cli.cli_tag import main as tag_program
 from paroxython.goodies import add_line_numbers
+from paroxython.preprocess_source import Cleanup
 
 PATH = f"{Path(dirname(__file__)).parent}"
 
@@ -152,6 +153,29 @@ def insert_line_breaks():
         path.write_text(source)
 
 
+def compute_stats():
+    readme_path = Path("README.md")
+    readme_text = readme_path.read_text()
+    cleanup = Cleanup("full")
+    directories = ["paroxython", "tests", "helpers"]
+    for directory in directories:
+        total = 0
+        for program_path in Path(directory).glob("**/*.py"):
+            source = program_path.read_text()
+            # Work around a weird error:
+            # tokenize.TokenError: ('EOF in multi-line string', (12, 10))
+            source = source.replace('if __name__ == "__main__":\n    bar = foo', "pass\npass")
+            source = cleanup.run(source)
+            total += source.count("\n")
+        print(f"{directory}: {total} SLOC")
+        total = 100 * round(total / 100)
+        (readme_text, n) = regex.subn(
+            fr"(?m)^(!\[{directory} SLOC\].+?)~\d+(%20SLOC)", fr"\1~{total}\2", readme_text
+        )
+        assert n > 0, f"Unable to create badge for '{directory}' SLOC."
+    readme_path.write_text(readme_text)
+
+
 def main():
     update_readme_example()
     generate_html()
@@ -161,6 +185,7 @@ def main():
     embed_code_with_line_numbers()
     cleanup_index()
     insert_line_breaks()
+    compute_stats()
 
 
 if __name__ == "__main__":

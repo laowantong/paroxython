@@ -73,7 +73,7 @@ def main():
     else:  # pragma: no cover
         version = distribution.version
     args = docopt(__doc__, version=f&#34;paroxython version {version}&#34;, options_first=True)
-    if not args.get(&#34;COMMAND&#34;):
+    if not args.get(&#34;COMMAND&#34;):  # pragma: no cover
         sys.exit(__doc__)
     command_name = args[&#34;COMMAND&#34;].lower()
     command_args = [command_name] + args[&#34;ARGS&#34;]
@@ -115,7 +115,7 @@ if __name__ == &#34;__main__&#34;:
     else:  # pragma: no cover
         version = distribution.version
     args = docopt(__doc__, version=f&#34;paroxython version {version}&#34;, options_first=True)
-    if not args.get(&#34;COMMAND&#34;):
+    if not args.get(&#34;COMMAND&#34;):  # pragma: no cover
         sys.exit(__doc__)
     command_name = args[&#34;COMMAND&#34;].lower()
     command_args = [command_name] + args[&#34;ARGS&#34;]
