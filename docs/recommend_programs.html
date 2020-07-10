@@ -61,7 +61,7 @@ increasing total cost and <a href="https://en.wikipedia.org/wiki/Source_lines_of
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L0-L318" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L0-L317" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">import subprocess
 from collections import defaultdict
@@ -271,8 +271,7 @@ if __name__ == &#34;__main__&#34;:
     json = __import__(&#34;json&#34;)
     program_path = Path(&#34;../algo/programs&#34;)
     rec = Recommendations(
-        db=json.loads(Path(f&#34;{program_path}_db.json&#34;).read_text()),
-        base_path=program_path.parent,
+        db=json.loads(Path(f&#34;{program_path}_db.json&#34;).read_text()), base_path=program_path.parent,
     )
     rec.run_pipeline(ast.literal_eval(Path(f&#34;{program_path}_pipe.py&#34;).read_text()))
     output_path = Path(f&#34;{program_path}_recommendations.md&#34;)

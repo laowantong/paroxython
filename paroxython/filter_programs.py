@@ -226,7 +226,7 @@ class ProgramFilter:
         """
         if operation in ("impart", "hide"):
             patterns = [str(datum) for datum in data]
-            (program_set, taxon_set) = self.programs_and_taxa_of_patterns(patterns, operation)
+            (program_set, taxon_set) = self.programs_and_taxa_of_patterns(patterns)
             if operation == "impart":
                 self.exclude_programs(program_set, follow=False)
                 self.impart_taxa(taxon_set)
@@ -241,10 +241,8 @@ class ProgramFilter:
             else:  # necessarily "exclude"
                 self.exclude_programs(set(program_bag), follow=True)
 
-    def programs_and_taxa_of_patterns(
-        self, data: List[str], operation: Operation
-    ) -> Tuple[ProgramNameSet, TaxonNameSet]:
-        """Calculate the sets of programs and taxa that meet at least one of the data criteria.
+    def programs_and_taxa_of_patterns(self, data: List[str]) -> Tuple[ProgramNameSet, TaxonNameSet]:
+        """Calculate the sets of programs and taxa matching at least one of the data patterns.
 
         Description:
             Each data criterion is a string which is interpreted either as:
@@ -254,9 +252,7 @@ class ProgramFilter:
             - or a taxon name pattern. All taxa matching it are accumulated in the result.
 
         Args:
-            data (List[str]): A list of regular expression patterns (strings). Note that the
-                operation `"impart"` does not support predicate criteria.
-            operation (Operation): Either `"impart"` or `"hide"`.
+            data (List[str]): A list of regular expression patterns (strings).
 
         Returns:
             Tuple[ProgramNameSet, TaxonNameSet]: The couple of accumulated programs and taxa.
@@ -264,16 +260,13 @@ class ProgramFilter:
         resulting_taxa: TaxonNameSet = set()
         resulting_programs: ProgramNameSet = set()
         for datum in data:
-            if isinstance(datum, str):
-                if datum.endswith(".py"):
-                    programs = self.programs_of_pattern(datum)
-                    taxa = self.taxa_of_programs(programs, follow=False)
-                    resulting_programs.update(programs)
-                else:
-                    taxa = self.taxa_of_pattern(datum)
-                resulting_taxa.update(taxa)
+            if datum.endswith(".py"):
+                programs = self.programs_of_pattern(datum)
+                taxa = self.taxa_of_programs(programs, follow=False)
+                resulting_programs.update(programs)
             else:
-                print_warning(f"datum {repr(datum)} cannot be interpreted for '{operation}''.")
+                taxa = self.taxa_of_pattern(datum)
+            resulting_taxa.update(taxa)
         return (resulting_programs, resulting_taxa)
 
     def programs_of_criteria(self, data: List[Criterion], follow: bool) -> Counter[ProgramName]:
