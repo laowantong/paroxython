@@ -26,7 +26,11 @@ from .user_types import (
     TaxonNameSet,
 )
 
-__pdoc__ = {"LearningCostAssessor.__call__": True}
+__pdoc__ = {
+    "LearningCostAssessor.__call__": True,
+    "LearningCostAssessor.__init__": True,
+    "LearningCostAssessor": "",
+}
 
 
 @lru_cache(maxsize=None)  # NB: memoization needed for consistency with mypy's typing
@@ -62,32 +66,30 @@ def range_to_cost_zeno(start: int, stop: int) -> float:
 class LearningCostAssessor:
     """Evaluate the learning costs of programs with respect to the given imparted knowledge."""
 
-    def __init__(self, programs: ProgramInfos):
-        self.programs = programs
-
-    def set_imparted_knowledge(self, imparted_knowledge: TaxonNameSet) -> None:
-        self.imparted_knowledge = imparted_knowledge
-
-    def set_cost_assessment_strategy(self, strategy: AssessmentStrategy = "zeno") -> None:
-        """Set the function to be used for the learning cost calculation.
+    def __init__(self, programs: ProgramInfos, assessment_strategy: AssessmentStrategy = "zeno"):
+        """Set the programs and the function to be used for the learning cost calculation.
 
         Args:
-            strategy (str, optional): Either:
+            assessment_strategy (str, optional): Either:
 
                 - `"zeno"`: `range_to_cost_zeno` (default).
                 - `"linear"`: `range_to_cost_linear`.
 
         Raises:
-            NotImplementedError: Raised in case of unknown strategy.
+            NotImplementedError: Raised in case of unknown assessment_strategy.
         """
-        if strategy.lower() == "zeno":
+        self.programs = programs
+        if assessment_strategy.lower() == "zeno":
             self.range_to_cost = range_to_cost_zeno
-        elif strategy == "linear":
+        elif assessment_strategy == "linear":
             self.range_to_cost = range_to_cost_linear
         else:
             raise NotImplementedError
         self.range_to_cost.cache_clear()
         self.taxon_cost.cache_clear()
+
+    def set_imparted_knowledge(self, imparted_knowledge: TaxonNameSet) -> None:
+        self.imparted_knowledge = imparted_knowledge
 
     @lru_cache(maxsize=None)
     def taxon_cost(self, taxon: TaxonName) -> float:

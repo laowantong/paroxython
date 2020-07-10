@@ -85,10 +85,10 @@ def cli_wrapper(args):
     else:
         commands = []
     rec = Recommendations(
-        commands=commands,
         db=json.loads(db_path.read_text()),
+        commands=commands,
         base_path=Path(args[&#34;--base&#34;] or parent_path),
-        cost_assessment_strategy=args[&#34;--cost&#34;],
+        assessment_strategy=args[&#34;--cost&#34;],
     )
     rec.run_pipeline()
     output_path = Path(args[&#34;--output&#34;] or parent_path / f&#34;{prefix}_recommendations.md&#34;)
@@ -129,10 +129,10 @@ def cli_wrapper(args):
     else:
         commands = []
     rec = Recommendations(
-        commands=commands,
         db=json.loads(db_path.read_text()),
+        commands=commands,
         base_path=Path(args[&#34;--base&#34;] or parent_path),
-        cost_assessment_strategy=args[&#34;--cost&#34;],
+        assessment_strategy=args[&#34;--cost&#34;],
     )
     rec.run_pipeline()
     output_path = Path(args[&#34;--output&#34;] or parent_path / f&#34;{prefix}_recommendations.md&#34;)

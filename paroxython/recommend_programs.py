@@ -45,7 +45,7 @@ class Recommendations:
         db: JsonDatabase,
         commands: Optional[List[Command]] = None,
         base_path: Optional[Path] = None,
-        cost_assessment_strategy: AssessmentStrategy = "zeno",
+        **kwargs,
     ) -> None:
         """TODO.
 
@@ -53,7 +53,8 @@ class Recommendations:
             db (JsonDatabase): [description]
             commands (Optional[List[Command]], optional): [description]. Defaults to `None`.
             base_path (Optional[Path], optional): [description]. Defaults to `None`.
-            cost_assessment_strategy (AssessmentStrategy, optional): [description]. Defaults to `"zeno"`.
+            **kwargs: May include the keyword argument `assessment_strategy`, transmitted to
+                `paroxython.assess_costs.LearningCostAssessor`.
         """
 
         self.commands = commands or []
@@ -67,8 +68,7 @@ class Recommendations:
         self.hidden_taxa = program_filter.hidden_taxa
         self.update_filter = program_filter.update_filter
 
-        self.assess = LearningCostAssessor(self.db_programs)
-        self.assess.set_cost_assessment_strategy(cost_assessment_strategy)
+        self.assess = LearningCostAssessor(self.db_programs, **kwargs)
 
     def run_pipeline(self) -> None:
         """Evolve recommended programs, imparted knowledge and log accross pipeline commands."""

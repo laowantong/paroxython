@@ -79,7 +79,7 @@ class Recommendations:
         db: JsonDatabase,
         commands: Optional[List[Command]] = None,
         base_path: Optional[Path] = None,
-        cost_assessment_strategy: AssessmentStrategy = &#34;zeno&#34;,
+        **kwargs,
     ) -&gt; None:
         self.commands = commands or []
         self.base_path = base_path
@@ -92,8 +92,7 @@ class Recommendations:
         self.hidden_taxa = program_filter.hidden_taxa
         self.update_filter = program_filter.update_filter
 
-        self.assess = LearningCostAssessor(self.db_programs)
-        self.assess.set_cost_assessment_strategy(cost_assessment_strategy)
+        self.assess = LearningCostAssessor(self.db_programs, **kwargs)
 
     def run_pipeline(self) -&gt; None:
         current = set(self.db_programs)
@@ -308,7 +307,7 @@ if __name__ == &#34;__main__&#34;:
         db: JsonDatabase,
         commands: Optional[List[Command]] = None,
         base_path: Optional[Path] = None,
-        cost_assessment_strategy: AssessmentStrategy = &#34;zeno&#34;,
+        **kwargs,
     ) -&gt; None:
         self.commands = commands or []
         self.base_path = base_path
@@ -321,8 +320,7 @@ if __name__ == &#34;__main__&#34;:
         self.hidden_taxa = program_filter.hidden_taxa
         self.update_filter = program_filter.update_filter
 
-        self.assess = LearningCostAssessor(self.db_programs)
-        self.assess.set_cost_assessment_strategy(cost_assessment_strategy)
+        self.assess = LearningCostAssessor(self.db_programs, **kwargs)
 
     def run_pipeline(self) -&gt; None:
         current = set(self.db_programs)
@@ -479,7 +477,7 @@ if __name__ == &#34;__main__&#34;:
 <h3>Methods</h3>
 <dl>
 <dt id="paroxython.recommend_programs.Recommendations.__init__"><code class="name flex">
-<span>def <span class="ident">__init__</span></span>(<span>self, <br>db: JsonDatabase, <br>commands: Union[List[Command], NoneType] = None, <br>base_path: Union[pathlib.Path, NoneType] = None, <br>cost_assessment_strategy: Literal['zeno', 'linear'] = 'zeno'<br>) ‑> NoneType</span>
+<span>def <span class="ident">__init__</span></span>(<span>self, <br>db: JsonDatabase, <br>commands: Union[List[Command], NoneType] = None, <br>base_path: Union[pathlib.Path, NoneType] = None, <br>**kwargs<br>) ‑> NoneType</span>
 </code></dt>
 <dd>
 <div class="desc"><p>TODO.</p>
@@ -491,8 +489,9 @@ if __name__ == &#34;__main__&#34;:
 <dd>[description]. Defaults to <code>None</code>.</dd>
 <dt><strong><code>base_path</code></strong> :&ensp;<code>Optional[Path]</code>, optional</dt>
 <dd>[description]. Defaults to <code>None</code>.</dd>
-<dt><strong><code>cost_assessment_strategy</code></strong> :&ensp;<code>AssessmentStrategy</code>, optional</dt>
-<dd>[description]. Defaults to <code>"zeno"</code>.</dd>
+<dt><strong><code>**kwargs</code></strong></dt>
+<dd>May include the keyword argument <code>assessment_strategy</code>, transmitted to
+<code><a title="paroxython.assess_costs.LearningCostAssessor" href="assess_costs.html#paroxython.assess_costs.LearningCostAssessor">LearningCostAssessor</a></code>.</dd>
 </dl></div>
 <details class="source">
 <summary>
@@ -504,7 +503,7 @@ if __name__ == &#34;__main__&#34;:
     db: JsonDatabase,
     commands: Optional[List[Command]] = None,
     base_path: Optional[Path] = None,
-    cost_assessment_strategy: AssessmentStrategy = &#34;zeno&#34;,
+    **kwargs,
 ) -&gt; None:
     self.commands = commands or []
     self.base_path = base_path
@@ -517,8 +516,7 @@ if __name__ == &#34;__main__&#34;:
     self.hidden_taxa = program_filter.hidden_taxa
     self.update_filter = program_filter.update_filter
 
-    self.assess = LearningCostAssessor(self.db_programs)
-    self.assess.set_cost_assessment_strategy(cost_assessment_strategy)</code></pre>
+    self.assess = LearningCostAssessor(self.db_programs, **kwargs)</code></pre>
 </details>
 </dd>
 <dt id="paroxython.recommend_programs.Recommendations.run_pipeline"><code class="name flex">

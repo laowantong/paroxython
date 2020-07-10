@@ -52,10 +52,10 @@ def cli_wrapper(args):
     else:
         commands = []
     rec = Recommendations(
-        commands=commands,
         db=json.loads(db_path.read_text()),
+        commands=commands,
         base_path=Path(args["--base"] or parent_path),
-        cost_assessment_strategy=args["--cost"],
+        assessment_strategy=args["--cost"],
     )
     rec.run_pipeline()
     output_path = Path(args["--output"] or parent_path / f"{prefix}_recommendations.md")
