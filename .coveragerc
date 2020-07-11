@@ -2,7 +2,7 @@
 omit =
     helpers/context.py
     helpers/draw_flow.py
-    helpers/generate_pdoc.py
+    helpers/build_pdoc.py
     helpers/make_dummy_db.py
     helpers/make_compare_spans.py
     helpers/reformat_spec.py
