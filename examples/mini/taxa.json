@@ -52,6 +52,7 @@
     "subroutine/argument/arg": "2",
     "subroutine/function": "2-3",
     "subroutine/predicate": "2-3",
+    "subroutine/return/something": "3",
     "test/divisibility/parity": "3",
     "test/equality": "3",
     "type/number/integer/literal": "3",

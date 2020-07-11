@@ -226,7 +226,8 @@
         "metadata/sloc/2": [[1,2]],
         "operator/arithmetic/multiplication": [[2,2]],
         "subroutine/argument/arg": [[1,1]],
-        "subroutine/function": [[1,2]]
+        "subroutine/function": [[1,2]],
+        "subroutine/return/something": [[2,2]]
       }
     },
     "004.2921-create-a-function-which-returns-the-square-of-an-integer.py": {
@@ -254,6 +255,7 @@
         "operator/arithmetic/power": [[2,2]],
         "subroutine/argument/arg": [[1,1]],
         "subroutine/function": [[1,2]],
+        "subroutine/return/something": [[2,2]],
         "type/number/integer/literal": [[2,2]]
       }
     },
@@ -601,7 +603,8 @@
         "metadata/program": [[1,3]],
         "metadata/sloc/3": [[1,3]],
         "subroutine/argument/arg": [[2,2],[2,2]],
-        "subroutine/function": [[2,3]]
+        "subroutine/function": [[2,3]],
+        "subroutine/return/something": [[3,3]]
       }
     },
     "014.3410-pick-uniformly-a-random-floating-point-number-in-ab.py": {
@@ -704,6 +707,7 @@
         "subroutine/procedure": [[1,6]],
         "subroutine/recursive": [[1,6]],
         "subroutine/recursive/body": [[1,6]],
+        "subroutine/return/nothing": [[3,3]],
         "test/identity": [[2,2]],
         "type/null/literal": [[2,2]]
       }
@@ -921,6 +925,7 @@
         "metadata/sloc/4": [[1,4]],
         "subroutine/argument/arg": [[1,1],[1,1]],
         "subroutine/function": [[1,4]],
+        "subroutine/return/something": [[4,4]],
         "test/belonging": [[3,3]],
         "type/sequence": [[4,4]],
         "type/sequence/tuple/literal": [[2,2],[4,4]]
@@ -1339,6 +1344,7 @@
         "subroutine/argument/arg": [[1,1]],
         "subroutine/function": [[1,5]],
         "subroutine/recursive/body": [[1,5]],
+        "subroutine/return/something": [[5,5]],
         "test/equality": [[2,2]],
         "type/number/integer/literal": [[3,3],[5,5]],
         "type/number/integer/literal/zero": [[2,2]]
@@ -1367,7 +1373,8 @@
         "metadata/sloc/2": [[1,2]],
         "operator/arithmetic/power": [[2,2]],
         "subroutine/argument/arg": [[1,1],[1,1]],
-        "subroutine/function": [[1,2]]
+        "subroutine/function": [[1,2]],
+        "subroutine/return/something": [[2,2]]
       }
     },
     "033.1420-atomically-read-and-update-variable.py": {
@@ -1482,7 +1489,8 @@
         "subroutine/argument/arg": [[1,1],[1,1],[2,2]],
         "subroutine/function": [[1,2]],
         "subroutine/function/anonymous": [[2,2]],
-        "subroutine/higher_order": [[1,2]]
+        "subroutine/higher_order": [[1,2]],
+        "subroutine/return/something": [[2,2]]
       }
     },
     "036.0670-first-class-function--generic-composition.py": {
@@ -1522,7 +1530,8 @@
         "subroutine/argument/arg": [[1,1],[1,1],[2,2]],
         "subroutine/function": [[1,2]],
         "subroutine/function/anonymous": [[2,2]],
-        "subroutine/higher_order": [[1,2]]
+        "subroutine/higher_order": [[1,2]],
+        "subroutine/return/something": [[2,2]]
       }
     },
     "037.0671-currying.py": {
@@ -1579,6 +1588,7 @@
         "subroutine/argument/arg": [[2,2],[3,3]],
         "subroutine/function": [[2,5],[3,4]],
         "subroutine/nested/closure": [[2,5]],
+        "subroutine/return/something": [[4,4]],
         "type/number/integer/literal": [[6,6],[6,6]]
       }
     },
@@ -2057,6 +2067,8 @@
         "metadata/sloc/7": [[1,7]],
         "subroutine/argument/arg": [[1,1],[1,1]],
         "subroutine/function": [[1,6]],
+        "subroutine/return/nothing": [[6,6]],
+        "subroutine/return/something": [[5,5]],
         "test/equality": [[4,4]],
         "type/null/literal": [[6,6]],
         "type/number/integer/literal": [[7,7],[7,7],[7,7],[7,7],[7,7],[7,7],[7,7],[7,7],[7,7],[7,7]],
@@ -2776,7 +2788,8 @@
         "operator/arithmetic/integer_division": [[3,3],[3,3]],
         "operator/arithmetic/substraction": [[3,3]],
         "subroutine/argument/arg": [[2,2],[2,2]],
-        "subroutine/function": [[2,3]]
+        "subroutine/function": [[2,3]],
+        "subroutine/return/something": [[3,3]]
       }
     },
     "068.2271-create-a-bitset.py": {
@@ -2962,7 +2975,8 @@
         "metadata/sloc/3": [[1,3]],
         "subroutine/argument/arg": [[1,1],[1,1]],
         "subroutine/function": [[1,3]],
-        "subroutine/higher_order": [[1,3]]
+        "subroutine/higher_order": [[1,3]],
+        "subroutine/return/something": [[3,3]]
       }
     },
     "074.0674-compute-gcd.py": {
@@ -3467,6 +3481,7 @@
         "subroutine/method/flavor/instance": [[2,3],[4,6]],
         "subroutine/method/naming/magic": [[2,3]],
         "subroutine/procedure": [[2,3]],
+        "subroutine/return/something": [[6,6]],
         "type/number/integer/literal/zero": [[3,3]],
         "variable/assignment": [[3,3]]
       }
@@ -3575,7 +3590,8 @@
         "metadata/sloc/3": [[1,3]],
         "subroutine/argument/arg": [[2,2]],
         "subroutine/function": [[2,3]],
-        "subroutine/higher_order": [[2,3]]
+        "subroutine/higher_order": [[2,3]],
+        "subroutine/return/something": [[3,3]]
       }
     },
     "094.1101-print-type-of-variable.py": {
@@ -4814,6 +4830,7 @@
         "operator/ternary": [[4,4]],
         "subroutine/argument/arg": [[2,2],[2,2]],
         "subroutine/function": [[2,4]],
+        "subroutine/return/something": [[4,4]],
         "subscript/index": [[4,4]],
         "test/equality": [[4,4]],
         "test/equality/not": [[4,4]],
@@ -4891,6 +4908,7 @@
         "metadata/sloc/2": [[1,2]],
         "subroutine/argument/no": [[1,2]],
         "subroutine/function": [[1,2]],
+        "subroutine/return/something": [[2,2]],
         "type/boolean/literal/true": [[2,2]],
         "type/sequence/string/literal": [[2,2]],
         "type/sequence/tuple/literal": [[2,2]]
@@ -6151,6 +6169,7 @@
         "subroutine/method/flavor/class": [[3,7]],
         "subroutine/method/flavor/instance": [[8,10]],
         "subroutine/method/naming/magic": [[8,10]],
+        "subroutine/return/something": [[5,5],[10,10]],
         "subscript/slice/start": [[6,6]],
         "subscript/slice/stop": [[6,6]],
         "type/number/integer": [[6,6]],
@@ -6560,6 +6579,7 @@
         "metadata/sloc/7": [[1,7]],
         "subroutine/argument/arg": [[2,2]],
         "subroutine/function": [[2,5]],
+        "subroutine/return/something": [[5,5]],
         "type/null/literal": [[4,4]],
         "type/sequence/tuple/literal": [[3,3],[6,6]],
         "variable/assignment/parallel": [[3,3]]
@@ -7621,6 +7641,7 @@
         "subroutine/method/naming/magic": [[2,4]],
         "subroutine/predicate": [[11,12]],
         "subroutine/procedure": [[2,4],[13,15]],
+        "subroutine/return/something": [[10,10],[12,12]],
         "subscript/index": [[6,6],[9,9],[9,9],[10,10]],
         "test/equality": [[6,6],[12,12]],
         "type/number/integer/literal/zero": [[3,3]],
@@ -16580,6 +16601,31 @@
       "016.1530-depth-first-traversing-of-a-binary-tree.py",
       "018.2084-depth-first-traversing-of-a-tree.py",
       "031.0188-recursive-factorial-simple.py"
+    ],
+    "subroutine/return/nothing": [
+      "016.1530-depth-first-traversing-of-a-binary-tree.py",
+      "043.2733-break-outer-loop.py"
+    ],
+    "subroutine/return/something": [
+      "004.0024-create-a-function-which-returns-the-square-of-an-integer.py",
+      "004.2921-create-a-function-which-returns-the-square-of-an-integer.py",
+      "014.0185-pick-uniformly-a-random-floating-point-number-in-ab.py",
+      "020.0573-return-two-values.py",
+      "031.0188-recursive-factorial-simple.py",
+      "032.0196-integer-exponentiation-by-squaring.py",
+      "035.0667-first-class-function--compose.py",
+      "036.0670-first-class-function--generic-composition.py",
+      "037.0671-currying.py",
+      "043.2733-break-outer-loop.py",
+      "067.1426-binomial-coefficient-n-choose-k.py",
+      "073.0673-create-a-factory.py",
+      "090.1099-read-only-outside.py",
+      "093.1082-pass-a-runnable-procedure-as-parameter.py",
+      "124.2152-binary-search-for-a-value-in-sorted-array.py",
+      "126.2137-multiple-return-values.py",
+      "154.2292-halfway-between-two-hex-color-codes.py",
+      "163.3177-print-list-elements-by-group-of-2.py",
+      "187.3261-disjoint-set.py"
     ],
     "subscript/index": [
       "029.0199-remove-item-from-list-by-its-index.py",

@@ -136,6 +136,8 @@ subroutine/recursive	recursive_function:.+
 subroutine/recursive/body	body_recursive_function:.+
 subroutine/recursive/deep	deeply_recursive_function:.+
 subroutine/recursive/tail	tail_recursive_function:.+
+subroutine/return/nothing	return:None
+subroutine/return/something	return\b(?!:None\b)
 subroutine/test	function:.+_tests?
 subroutine/test	function:test_.+
 subscript/index	index:.+

@@ -527,11 +527,11 @@ Paroxython tries to be tolerant with the user input. The verb <code>"is"</code> 
         &quot;operation&quot;: &quot;include&quot;,
         &quot;data&quot;: [
             (&quot;flow/loop&quot;, &quot;contains&quot;, &quot;flow/conditional&quot;),
-            (&quot;flow/conditional&quot;, &quot;finished by&quot;, &quot;TODO/return&quot;),
+            (&quot;flow/conditional&quot;, &quot;finished by&quot;, &quot;subroutine/return&quot;),
         ]
     },
 </code></pre>
-<p>It is currently not possible to chain several operators with shared operands, for example to keep only the programs that feature a conditional inside a loop <strong>and</strong> ended by a <code>return</code> statement: the quintuple <code>("flow/loop", "contains", "flow/conditional", "finished by", "TODO/return")</code> would raise an error. As it stands, the best that we can do is to chain the commands themselves:</p>
+<p>It is currently not possible to chain several operators with shared operands, for example to keep only the programs that feature a conditional inside a loop <strong>and</strong> ended by a <code>return</code> statement: the quintuple <code>("flow/loop", "contains", "flow/conditional", "finished by", "subroutine/return")</code> would raise an error. As it stands, the best that we can do is to chain the commands themselves:</p>
 <pre><code class="python">    {
         &quot;operation&quot;: &quot;include&quot;,
         &quot;data&quot;: [
@@ -541,13 +541,13 @@ Paroxython tries to be tolerant with the user input. The verb <code>"is"</code> 
     {
         &quot;operation&quot;: &quot;include&quot;,
         &quot;data&quot;: [
-            (&quot;flow/conditional&quot;, &quot;finished by&quot;, &quot;TODO/return&quot;),
+            (&quot;flow/conditional&quot;, &quot;finished by&quot;, &quot;subroutine/return&quot;),
         ]
     },
     {
         &quot;operation&quot;: &quot;include&quot;,
         &quot;data&quot;: [
-            (&quot;TODO/return&quot;, &quot;contains&quot;, &quot;flow/loop&quot;),
+            (&quot;subroutine/return&quot;, &quot;contains&quot;, &quot;flow/loop&quot;),
         ]
     },
 </code></pre>

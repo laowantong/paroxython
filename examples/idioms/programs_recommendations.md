@@ -7,8 +7,8 @@
     - [`002.3117-print-hello-10-times.py`](#program-0023117-print-hello-10-timespy-learning-cost-45625)
     - [`003.0019-create-a-procedure.py`](#program-0030019-create-a-procedurepy-learning-cost-525)
     - [`003.2372-create-a-procedure.py`](#program-0032372-create-a-procedurepy-learning-cost-2375)
-    - [`004.0024-create-a-function-which-returns-the-square-of-an-integer.py`](#program-0040024-create-a-function-which-returns-the-square-of-an-integerpy-learning-cost-25)
-    - [`004.2921-create-a-function-which-returns-the-square-of-an-integer.py`](#program-0042921-create-a-function-which-returns-the-square-of-an-integerpy-learning-cost-34375)
+    - [`004.0024-create-a-function-which-returns-the-square-of-an-integer.py`](#program-0040024-create-a-function-which-returns-the-square-of-an-integerpy-learning-cost-3375)
+    - [`004.2921-create-a-function-which-returns-the-square-of-an-integer.py`](#program-0042921-create-a-function-which-returns-the-square-of-an-integerpy-learning-cost-43125)
     - [`005.0663-create-a-2d-point-data-structure.py`](#program-0050663-create-a-2d-point-data-structurepy-learning-cost-14375)
     - [`006.0032-iterate-over-list-values.py`](#program-0060032-iterate-over-list-valuespy-learning-cost-275)
     - [`007.0183-iterate-over-list-indexes-and-values.py`](#program-0070183-iterate-over-list-indexes-and-valuespy-learning-cost-64375)
@@ -20,16 +20,16 @@
     - [`011.0047-pick-a-random-element-from-a-list.py`](#program-0110047-pick-a-random-element-from-a-listpy-learning-cost-175)
     - [`012.0181-check-if-list-contains-a-value.py`](#program-0120181-check-if-list-contains-a-valuepy-learning-cost-075)
     - [`013.0574-iterate-over-map-keys-and-values.py`](#program-0130574-iterate-over-map-keys-and-valuespy-learning-cost-63125)
-    - [`014.0185-pick-uniformly-a-random-floating-point-number-in-ab.py`](#program-0140185-pick-uniformly-a-random-floating-point-number-in-abpy-learning-cost-3375)
+    - [`014.0185-pick-uniformly-a-random-floating-point-number-in-ab.py`](#program-0140185-pick-uniformly-a-random-floating-point-number-in-abpy-learning-cost-425)
     - [`014.3410-pick-uniformly-a-random-floating-point-number-in-ab.py`](#program-0143410-pick-uniformly-a-random-floating-point-number-in-abpy-learning-cost-175)
     - [`015.0184-pick-uniformly-a-random-integer-in-ab.py`](#program-0150184-pick-uniformly-a-random-integer-in-abpy-learning-cost-175)
-    - [`016.1530-depth-first-traversing-of-a-binary-tree.py`](#program-0161530-depth-first-traversing-of-a-binary-treepy-learning-cost-825)
+    - [`016.1530-depth-first-traversing-of-a-binary-tree.py`](#program-0161530-depth-first-traversing-of-a-binary-treepy-learning-cost-9125)
     - [`017.1103-create-a-tree-data-structure.py`](#program-0171103-create-a-tree-data-structurepy-learning-cost-746875)
     - [`018.2084-depth-first-traversing-of-a-tree.py`](#program-0182084-depth-first-traversing-of-a-treepy-learning-cost-675)
     - [`019.0197-reverse-a-list.py`](#program-0190197-reverse-a-listpy-learning-cost-18125)
     - [`019.1983-reverse-a-list.py`](#program-0191983-reverse-a-listpy-learning-cost-275)
     - [`019.3164-reverse-a-list.py`](#program-0193164-reverse-a-listpy-learning-cost-175)
-    - [`020.0573-return-two-values.py`](#program-0200573-return-two-valuespy-learning-cost-953125)
+    - [`020.0573-return-two-values.py`](#program-0200573-return-two-valuespy-learning-cost-1040625)
     - [`021.0084-swap-values-of-variables-a-and-b.py`](#program-0210084-swap-values-of-variables-a-and-bpy-learning-cost-1875)
     - [`022.0243-convert-string-to-integer.py`](#program-0220243-convert-string-to-integerpy-learning-cost-271875)
     - [`023.1102-convert-real-number-to-string-with-2-decimal-places.py`](#program-0231102-convert-real-number-to-string-with-2-decimal-placespy-learning-cost-35625)
@@ -41,13 +41,13 @@
     - [`028.0350-sort-by-a-property.py`](#program-0280350-sort-by-a-propertypy-learning-cost-35625)
     - [`029.0199-remove-item-from-list-by-its-index.py`](#program-0290199-remove-item-from-list-by-its-indexpy-learning-cost-15)
     - [`030.0189-parallelize-execution-of-1000-independent-tasks.py`](#program-0300189-parallelize-execution-of-1000-independent-taskspy-learning-cost-828125)
-    - [`031.0188-recursive-factorial-simple.py`](#program-0310188-recursive-factorial-simplepy-learning-cost-928125)
-    - [`032.0196-integer-exponentiation-by-squaring.py`](#program-0320196-integer-exponentiation-by-squaringpy-learning-cost-25)
+    - [`031.0188-recursive-factorial-simple.py`](#program-0310188-recursive-factorial-simplepy-learning-cost-1015625)
+    - [`032.0196-integer-exponentiation-by-squaring.py`](#program-0320196-integer-exponentiation-by-squaringpy-learning-cost-3375)
     - [`033.1420-atomically-read-and-update-variable.py`](#program-0331420-atomically-read-and-update-variablepy-learning-cost-4375)
     - [`034.0625-create-a-set-of-objects.py`](#program-0340625-create-a-set-of-objectspy-learning-cost-559375)
-    - [`035.0667-first-class-function--compose.py`](#program-0350667-first-class-function--composepy-learning-cost-575)
-    - [`036.0670-first-class-function--generic-composition.py`](#program-0360670-first-class-function--generic-compositionpy-learning-cost-575)
-    - [`037.0671-currying.py`](#program-0370671-curryingpy-learning-cost-85625)
+    - [`035.0667-first-class-function--compose.py`](#program-0350667-first-class-function--composepy-learning-cost-6625)
+    - [`036.0670-first-class-function--generic-composition.py`](#program-0360670-first-class-function--generic-compositionpy-learning-cost-6625)
+    - [`037.0671-currying.py`](#program-0370671-curryingpy-learning-cost-94375)
     - [`038.0186-extract-a-substring.py`](#program-0380186-extract-a-substringpy-learning-cost-2625)
     - [`039.0571-check-if-string-contains-a-word.py`](#program-0390571-check-if-string-contains-a-wordpy-learning-cost-1625)
     - [`040.2279-graph-with-adjacency-lists.py`](#program-0402279-graph-with-adjacency-listspy-learning-cost-2071875)
@@ -56,7 +56,7 @@
     - [`042.1264-continue-outer-loop.py`](#program-0421264-continue-outer-looppy-learning-cost-100)
     - [`042.3168-continue-outer-loop.py`](#program-0423168-continue-outer-looppy-learning-cost-715625)
     - [`043.0676-break-outer-loop.py`](#program-0430676-break-outer-looppy-learning-cost-120)
-    - [`043.2733-break-outer-loop.py`](#program-0432733-break-outer-looppy-learning-cost-149375)
+    - [`043.2733-break-outer-loop.py`](#program-0432733-break-outer-looppy-learning-cost-166875)
     - [`044.0190-insert-element-in-list.py`](#program-0440190-insert-element-in-listpy-learning-cost-175)
     - [`045.0570-pause-execution-for-5-seconds.py`](#program-0450570-pause-execution-for-5-secondspy-learning-cost-26875)
     - [`046.0191-extract-beginning-of-string-prefix.py`](#program-0460191-extract-beginning-of-string-prefixpy-learning-cost-26875)
@@ -82,12 +82,12 @@
     - [`064.0274-big-integer--value-3-power-247.py`](#program-0640274-big-integer--value-3-power-247py-learning-cost-26875)
     - [`065.1085-format-decimal-number.py`](#program-0651085-format-decimal-numberpy-learning-cost-35625)
     - [`066.0672-big-integer-exponentiation.py`](#program-0660672-big-integer-exponentiationpy-learning-cost-175)
-    - [`067.1426-binomial-coefficient-n-choose-k.py`](#program-0671426-binomial-coefficient-n-choose-kpy-learning-cost-5125)
+    - [`067.1426-binomial-coefficient-n-choose-k.py`](#program-0671426-binomial-coefficient-n-choose-kpy-learning-cost-60)
     - [`068.2271-create-a-bitset.py`](#program-0682271-create-a-bitsetpy-learning-cost-89375)
     - [`069.1086-seed-random-generator.py`](#program-0691086-seed-random-generatorpy-learning-cost-175)
     - [`070.1087-use-clock-as-random-generator-seed.py`](#program-0701087-use-clock-as-random-generator-seedpy-learning-cost-175)
     - [`071.0379-echo-program-implementation.py`](#program-0710379-echo-program-implementationpy-learning-cost-79375)
-    - [`073.0673-create-a-factory.py`](#program-0730673-create-a-factorypy-learning-cost-50625)
+    - [`073.0673-create-a-factory.py`](#program-0730673-create-a-factorypy-learning-cost-59375)
     - [`074.0674-compute-gcd.py`](#program-0740674-compute-gcdpy-learning-cost-26875)
     - [`075.0675-compute-lcm.py`](#program-0750675-compute-lcmpy-learning-cost-44375)
     - [`076.1083-binary-digits-from-an-integer.py`](#program-0761083-binary-digits-from-an-integerpy-learning-cost-35625)
@@ -104,10 +104,10 @@
     - [`087.1139-stop-program.py`](#program-0871139-stop-programpy-learning-cost-26875)
     - [`088.2143-allocate-1m-bytes.py`](#program-0882143-allocate-1m-bytespy-learning-cost-278125)
     - [`089.1097-handle-invalid-argument.py`](#program-0891097-handle-invalid-argumentpy-learning-cost-1875)
-    - [`090.1099-read-only-outside.py`](#program-0901099-read-only-outsidepy-learning-cost-721875)
+    - [`090.1099-read-only-outside.py`](#program-0901099-read-only-outsidepy-learning-cost-809375)
     - [`091.1098-load-json-file-into-struct.py`](#program-0911098-load-json-file-into-structpy-learning-cost-5375)
     - [`092.1100-save-object-into-json-file.py`](#program-0921100-save-object-into-json-filepy-learning-cost-45)
-    - [`093.1082-pass-a-runnable-procedure-as-parameter.py`](#program-0931082-pass-a-runnable-procedure-as-parameterpy-learning-cost-50625)
+    - [`093.1082-pass-a-runnable-procedure-as-parameter.py`](#program-0931082-pass-a-runnable-procedure-as-parameterpy-learning-cost-59375)
     - [`094.1101-print-type-of-variable.py`](#program-0941101-print-type-of-variablepy-learning-cost-35)
     - [`094.1864-print-type-of-variable.py`](#program-0941864-print-type-of-variablepy-learning-cost-18125)
     - [`095.2140-get-file-size.py`](#program-0952140-get-file-sizepy-learning-cost-2625)
@@ -143,9 +143,9 @@
     - [`122.1453-declare-enumeration.py`](#program-1221453-declare-enumerationpy-learning-cost-5125)
     - [`122.1454-declare-enumeration.py`](#program-1221454-declare-enumerationpy-learning-cost-4125)
     - [`123.2146-assert-condition.py`](#program-1232146-assert-conditionpy-learning-cost-075)
-    - [`124.2152-binary-search-for-a-value-in-sorted-array.py`](#program-1242152-binary-search-for-a-value-in-sorted-arraypy-learning-cost-10125)
+    - [`124.2152-binary-search-for-a-value-in-sorted-array.py`](#program-1242152-binary-search-for-a-value-in-sorted-arraypy-learning-cost-110)
     - [`125.2167-measure-function-call-duration.py`](#program-1252167-measure-function-call-durationpy-learning-cost-80)
-    - [`126.2137-multiple-return-values.py`](#program-1262137-multiple-return-valuespy-learning-cost-44375)
+    - [`126.2137-multiple-return-values.py`](#program-1262137-multiple-return-valuespy-learning-cost-53125)
     - [`127.2274-source-code-inclusion.py`](#program-1272274-source-code-inclusionpy-learning-cost-35625)
     - [`128.2085-breadth-first-traversing-of-a-tree.py`](#program-1282085-breadth-first-traversing-of-a-treepy-learning-cost-1571875)
     - [`129.2282-breadth-first-traversing-in-a-graph.py`](#program-1292282-breadth-first-traversing-in-a-graphpy-learning-cost-1578125)
@@ -177,7 +177,7 @@
     - [`152.2153-turn-a-character-into-a-string.py`](#program-1522153-turn-a-character-into-a-stringpy-learning-cost-0875)
     - [`153.1980-concatenate-string-with-integer.py`](#program-1531980-concatenate-string-with-integerpy-learning-cost-35625)
     - [`154.2155-halfway-between-two-hex-color-codes.py`](#program-1542155-halfway-between-two-hex-color-codespy-learning-cost-1265625)
-    - [`154.2292-halfway-between-two-hex-color-codes.py`](#program-1542292-halfway-between-two-hex-color-codespy-learning-cost-280)
+    - [`154.2292-halfway-between-two-hex-color-codes.py`](#program-1542292-halfway-between-two-hex-color-codespy-learning-cost-28875)
     - [`155.2147-delete-file.py`](#program-1552147-delete-filepy-learning-cost-2625)
     - [`156.2148-format-integer-with-zero-padding.py`](#program-1562148-format-integer-with-zero-paddingpy-learning-cost-275)
     - [`157.2150-declare-constant-string.py`](#program-1572150-declare-constant-stringpy-learning-cost-26875)
@@ -187,7 +187,7 @@
     - [`161.2098-multiply-all-the-elements-of-a-list.py`](#program-1612098-multiply-all-the-elements-of-a-listpy-learning-cost-175)
     - [`162.2164-execute-procedures-depending-on-options.py`](#program-1622164-execute-procedures-depending-on-optionspy-learning-cost-7875)
     - [`163.2170-print-list-elements-by-group-of-2.py`](#program-1632170-print-list-elements-by-group-of-2py-learning-cost-725)
-    - [`163.3177-print-list-elements-by-group-of-2.py`](#program-1633177-print-list-elements-by-group-of-2py-learning-cost-12375)
+    - [`163.3177-print-list-elements-by-group-of-2.py`](#program-1633177-print-list-elements-by-group-of-2py-learning-cost-1325)
     - [`164.2169-open-url-in-default-browser.py`](#program-1642169-open-url-in-default-browserpy-learning-cost-175)
     - [`165.2149-last-element-of-list.py`](#program-1652149-last-element-of-listpy-learning-cost-35)
     - [`166.2272-concatenate-two-lists.py`](#program-1662272-concatenate-two-listspy-learning-cost-175)
@@ -217,7 +217,7 @@
     - [`184.2701-tomorrow.py`](#program-1842701-tomorrowpy-learning-cost-54375)
     - [`185.2820-execute-function-in-30-seconds.py`](#program-1852820-execute-function-in-30-secondspy-learning-cost-54375)
     - [`186.2699-exit-program-cleanly.py`](#program-1862699-exit-program-cleanlypy-learning-cost-271875)
-    - [`187.3261-disjoint-set.py`](#program-1873261-disjoint-setpy-learning-cost-1840625)
+    - [`187.3261-disjoint-set.py`](#program-1873261-disjoint-setpy-learning-cost-1928125)
     - [`188.3171-matrix-multiplication.py`](#program-1883171-matrix-multiplicationpy-learning-cost-2625)
     - [`188.3284-matrix-multiplication.py`](#program-1883284-matrix-multiplicationpy-learning-cost-2625)
     - [`189.3236-filter-and-transform-list.py`](#program-1893236-filter-and-transform-listpy-learning-cost-2625)
@@ -355,7 +355,7 @@
 
 ---
 
-### Program `004.0024-create-a-function-which-returns-the-square-of-an-integer.py` (learning cost 2.5)
+### Program `004.0024-create-a-function-which-returns-the-square-of-an-integer.py` (learning cost 3.375)
 
 ```python
 1   def square(x):
@@ -367,12 +367,13 @@
 | 0.875 | `operator/arithmetic/multiplication` | 2 |
 | 0.875 | `subroutine/argument/arg` | 1 |
 | 0.75 | `subroutine/function` | 1-2 |
+| 0.875 | `subroutine/return/something` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
 
 ---
 
-### Program `004.2921-create-a-function-which-returns-the-square-of-an-integer.py` (learning cost 3.4375)
+### Program `004.2921-create-a-function-which-returns-the-square-of-an-integer.py` (learning cost 4.3125)
 
 ```python
 1   def square(x):
@@ -384,6 +385,7 @@
 | 0.875 | `operator/arithmetic/power` | 2 |
 | 0.875 | `subroutine/argument/arg` | 1 |
 | 0.75 | `subroutine/function` | 1-2 |
+| 0.875 | `subroutine/return/something` | 2 |
 | 0.9375 | `type/number/integer/literal` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
@@ -594,7 +596,7 @@
 
 ---
 
-### Program `014.0185-pick-uniformly-a-random-floating-point-number-in-ab.py` (learning cost 3.375)
+### Program `014.0185-pick-uniformly-a-random-floating-point-number-in-ab.py` (learning cost 4.25)
 
 ```python
 1   import random
@@ -608,6 +610,7 @@
 | 0.875 | `library/standard/random` | 1 |
 | 0.875 | `subroutine/argument/arg` | 2, 2 |
 | 0.75 | `subroutine/function` | 2-3 |
+| 0.875 | `subroutine/return/something` | 3 |
 | 0 | `metadata/program` | 1-3 |
 | 0 | `metadata/sloc/3` | 1-3 |
 
@@ -645,7 +648,7 @@
 
 ---
 
-### Program `016.1530-depth-first-traversing-of-a-binary-tree.py` (learning cost 8.25)
+### Program `016.1530-depth-first-traversing-of-a-binary-tree.py` (learning cost 9.125)
 
 ```python
 1   def dfs(bt):
@@ -666,6 +669,7 @@
 | 0.75 | `subroutine/procedure` | 1-6 |
 | 0.75 | `subroutine/recursive` | 1-6 |
 | 0.875 | `subroutine/recursive/body` | 1-6 |
+| 0.875 | `subroutine/return/nothing` | 3 |
 | 0.75 | `test/identity` | 2 |
 | 0.875 | `type/null/literal` | 2 |
 | 0 | `metadata/program` | 1-6 |
@@ -768,7 +772,7 @@
 
 ---
 
-### Program `020.0573-return-two-values.py` (learning cost 9.53125)
+### Program `020.0573-return-two-values.py` (learning cost 10.40625)
 
 ```python
 1   def search(m, x):
@@ -787,6 +791,7 @@
 | 0.9375 | `flow/loop/for/elements_and_indexes` | 2-4 |
 | 0.875 | `subroutine/argument/arg` | 1, 1 |
 | 0.75 | `subroutine/function` | 1-4 |
+| 0.875 | `subroutine/return/something` | 4 |
 | 0.75 | `test/belonging` | 3 |
 | 0.75 | `type/sequence` | 4 |
 | 0.9375 | `type/sequence/tuple/literal` | 2, 4 |
@@ -992,7 +997,7 @@
 
 ---
 
-### Program `031.0188-recursive-factorial-simple.py` (learning cost 9.28125)
+### Program `031.0188-recursive-factorial-simple.py` (learning cost 10.15625)
 
 ```python
 1   def f(i):
@@ -1012,6 +1017,7 @@
 | 0.875 | `subroutine/argument/arg` | 1 |
 | 0.75 | `subroutine/function` | 1-5 |
 | 0.875 | `subroutine/recursive/body` | 1-5 |
+| 0.875 | `subroutine/return/something` | 5 |
 | 0.75 | `test/equality` | 2 |
 | 0.9375 | `type/number/integer/literal` | 3, 5 |
 | 0.96875 | `type/number/integer/literal/zero` | 2 |
@@ -1020,7 +1026,7 @@
 
 ---
 
-### Program `032.0196-integer-exponentiation-by-squaring.py` (learning cost 2.5)
+### Program `032.0196-integer-exponentiation-by-squaring.py` (learning cost 3.375)
 
 ```python
 1   def exp(x, n):
@@ -1032,6 +1038,7 @@
 | 0.875 | `operator/arithmetic/power` | 2 |
 | 0.875 | `subroutine/argument/arg` | 1, 1 |
 | 0.75 | `subroutine/function` | 1-2 |
+| 0.875 | `subroutine/return/something` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
 
@@ -1083,7 +1090,7 @@
 
 ---
 
-### Program `035.0667-first-class-function--compose.py` (learning cost 5.75)
+### Program `035.0667-first-class-function--compose.py` (learning cost 6.625)
 
 ```python
 1   def compose(f, g):
@@ -1099,12 +1106,13 @@
 | 0.75 | `subroutine/function` | 1-2 |
 | 0.875 | `subroutine/function/anonymous` | 2 |
 | 0.75 | `subroutine/higher_order` | 1-2 |
+| 0.875 | `subroutine/return/something` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
 
 ---
 
-### Program `036.0670-first-class-function--generic-composition.py` (learning cost 5.75)
+### Program `036.0670-first-class-function--generic-composition.py` (learning cost 6.625)
 
 ```python
 1   def compose(f, g):
@@ -1120,12 +1128,13 @@
 | 0.75 | `subroutine/function` | 1-2 |
 | 0.875 | `subroutine/function/anonymous` | 2 |
 | 0.75 | `subroutine/higher_order` | 1-2 |
+| 0.875 | `subroutine/return/something` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
 
 ---
 
-### Program `037.0671-currying.py` (learning cost 8.5625)
+### Program `037.0671-currying.py` (learning cost 9.4375)
 
 ```python
 1   from functools import partial
@@ -1147,6 +1156,7 @@
 | 0.875 | `subroutine/argument/arg` | 2, 3 |
 | 0.75 | `subroutine/function` | 2-5, 3-4 |
 | 0.875 | `subroutine/nested/closure` | 2-5 |
+| 0.875 | `subroutine/return/something` | 4 |
 | 0.9375 | `type/number/integer/literal` | 6, 6 |
 | 0 | `metadata/program` | 1-6 |
 | 0 | `metadata/sloc/6` | 1-6 |
@@ -1362,7 +1372,7 @@
 
 ---
 
-### Program `043.2733-break-outer-loop.py` (learning cost 14.9375)
+### Program `043.2733-break-outer-loop.py` (learning cost 16.6875)
 
 ```python
 1   def loop_breaking(m, v):
@@ -1388,6 +1398,8 @@
 | 0.875 | `io/standard/print` | 7 |
 | 0.875 | `subroutine/argument/arg` | 1, 1 |
 | 0.75 | `subroutine/function` | 1-6 |
+| 0.875 | `subroutine/return/nothing` | 6 |
+| 0.875 | `subroutine/return/something` | 5 |
 | 0.75 | `test/equality` | 4 |
 | 0.875 | `type/null/literal` | 6 |
 | 0.9375 | `type/number/integer/literal` | 7, 7, 7, 7, 7, 7, 7, 7, 7, 7 |
@@ -1820,7 +1832,7 @@
 
 ---
 
-### Program `067.1426-binomial-coefficient-n-choose-k.py` (learning cost 5.125)
+### Program `067.1426-binomial-coefficient-n-choose-k.py` (learning cost 6.0)
 
 ```python
 1   import math
@@ -1836,6 +1848,7 @@
 | 0.875 | `operator/arithmetic/substraction` | 3 |
 | 0.875 | `subroutine/argument/arg` | 2, 2 |
 | 0.75 | `subroutine/function` | 2-3 |
+| 0.875 | `subroutine/return/something` | 3 |
 | 0 | `metadata/program` | 1-3 |
 | 0 | `metadata/sloc/3` | 1-3 |
 
@@ -1921,7 +1934,7 @@
 
 ---
 
-### Program `073.0673-create-a-factory.py` (learning cost 5.0625)
+### Program `073.0673-create-a-factory.py` (learning cost 5.9375)
 
 ```python
 1   def fact(a_class, str_):
@@ -1937,6 +1950,7 @@
 | 0.875 | `subroutine/argument/arg` | 1, 1 |
 | 0.75 | `subroutine/function` | 1-3 |
 | 0.75 | `subroutine/higher_order` | 1-3 |
+| 0.875 | `subroutine/return/something` | 3 |
 | 0 | `metadata/program` | 1-3 |
 | 0 | `metadata/sloc/3` | 1-3 |
 
@@ -2221,7 +2235,7 @@
 
 ---
 
-### Program `090.1099-read-only-outside.py` (learning cost 7.21875)
+### Program `090.1099-read-only-outside.py` (learning cost 8.09375)
 
 ```python
 1   class Foo(object):
@@ -2241,6 +2255,7 @@
 | 0.9375 | `subroutine/method/flavor/instance` | 2-3, 4-6 |
 | 0.9375 | `subroutine/method/naming/magic` | 2-3 |
 | 0.75 | `subroutine/procedure` | 2-3 |
+| 0.875 | `subroutine/return/something` | 6 |
 | 0.96875 | `type/number/integer/literal/zero` | 3 |
 | 0.75 | `variable/assignment` | 3 |
 | 0 | `metadata/program` | 1-6 |
@@ -2289,7 +2304,7 @@
 
 ---
 
-### Program `093.1082-pass-a-runnable-procedure-as-parameter.py` (learning cost 5.0625)
+### Program `093.1082-pass-a-runnable-procedure-as-parameter.py` (learning cost 5.9375)
 
 ```python
 1   from __future__ import print_function
@@ -2305,6 +2320,7 @@
 | 0.875 | `subroutine/argument/arg` | 2 |
 | 0.75 | `subroutine/function` | 2-3 |
 | 0.75 | `subroutine/higher_order` | 2-3 |
+| 0.875 | `subroutine/return/something` | 3 |
 | 0 | `metadata/program` | 1-3 |
 | 0 | `metadata/sloc/3` | 1-3 |
 
@@ -2990,7 +3006,7 @@
 
 ---
 
-### Program `124.2152-binary-search-for-a-value-in-sorted-array.py` (learning cost 10.125)
+### Program `124.2152-binary-search-for-a-value-in-sorted-array.py` (learning cost 11.0)
 
 ```python
 1   import bisect
@@ -3008,6 +3024,7 @@
 | 0.75 | `operator/ternary` | 4 |
 | 0.875 | `subroutine/argument/arg` | 2, 2 |
 | 0.75 | `subroutine/function` | 2-4 |
+| 0.875 | `subroutine/return/something` | 4 |
 | 0.75 | `subscript/index` | 4 |
 | 0.75 | `test/equality` | 4 |
 | 0.875 | `test/equality/not` | 4 |
@@ -3044,7 +3061,7 @@
 
 ---
 
-### Program `126.2137-multiple-return-values.py` (learning cost 4.4375)
+### Program `126.2137-multiple-return-values.py` (learning cost 5.3125)
 
 ```python
 1   def foo():
@@ -3055,6 +3072,7 @@
 |----|----|----|
 | 0.875 | `subroutine/argument/no` | 1-2 |
 | 0.75 | `subroutine/function` | 1-2 |
+| 0.875 | `subroutine/return/something` | 2 |
 | 0.9375 | `type/boolean/literal/true` | 2 |
 | 0.9375 | `type/sequence/string/literal` | 2 |
 | 0.9375 | `type/sequence/tuple/literal` | 2 |
@@ -3682,7 +3700,7 @@
 
 ---
 
-### Program `154.2292-halfway-between-two-hex-color-codes.py` (learning cost 28.0)
+### Program `154.2292-halfway-between-two-hex-color-codes.py` (learning cost 28.875)
 
 ```python
 1   import numpy
@@ -3728,6 +3746,7 @@
 | 0.9375 | `subroutine/method/flavor/class` | 3-7 |
 | 0.9375 | `subroutine/method/flavor/instance` | 8-10 |
 | 0.9375 | `subroutine/method/naming/magic` | 8-10 |
+| 0.875 | `subroutine/return/something` | 5, 10 |
 | 0.875 | `subscript/slice/start` | 6 |
 | 0.875 | `subscript/slice/stop` | 6 |
 | 0.875 | `type/number/integer` | 6 |
@@ -3922,7 +3941,7 @@
 
 ---
 
-### Program `163.3177-print-list-elements-by-group-of-2.py` (learning cost 12.375)
+### Program `163.3177-print-list-elements-by-group-of-2.py` (learning cost 13.25)
 
 ```python
 1   from itertools import tee
@@ -3947,6 +3966,7 @@
 | 0.9375 | `library/standard/itertools/tee` | 1 |
 | 0.875 | `subroutine/argument/arg` | 2 |
 | 0.75 | `subroutine/function` | 2-5 |
+| 0.875 | `subroutine/return/something` | 5 |
 | 0.875 | `type/null/literal` | 4 |
 | 0.9375 | `type/sequence/tuple/literal` | 3, 6 |
 | 0.875 | `variable/assignment/parallel` | 3 |
@@ -4494,7 +4514,7 @@
 
 ---
 
-### Program `187.3261-disjoint-set.py` (learning cost 18.40625)
+### Program `187.3261-disjoint-set.py` (learning cost 19.28125)
 
 ```python
 1   class UnionFind:
@@ -4531,6 +4551,7 @@
 | 0.9375 | `subroutine/method/naming/magic` | 2-4 |
 | 0.75 | `subroutine/predicate` | 11-12 |
 | 0.75 | `subroutine/procedure` | 2-4, 13-15 |
+| 0.875 | `subroutine/return/something` | 10, 12 |
 | 0.75 | `subscript/index` | 6, 9, 9, 10 |
 | 0.75 | `test/equality` | 6, 12 |
 | 0.96875 | `type/number/integer/literal/zero` | 3 |

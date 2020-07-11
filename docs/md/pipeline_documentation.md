@@ -190,12 +190,12 @@ A pipeline command can apply not only to programs and taxa, but also to relation
         "operation": "include",
         "data": [
             ("flow/loop", "contains", "flow/conditional"),
-            ("flow/conditional", "finished by", "TODO/return"),
+            ("flow/conditional", "finished by", "subroutine/return"),
         ]
     },
 ```
 
-It is currently not possible to chain several operators with shared operands, for example to keep only the programs that feature a conditional inside a loop **and** ended by a `return` statement: the quintuple `("flow/loop", "contains", "flow/conditional", "finished by", "TODO/return")` would raise an error. As it stands, the best that we can do is to chain the commands themselves:
+It is currently not possible to chain several operators with shared operands, for example to keep only the programs that feature a conditional inside a loop **and** ended by a `return` statement: the quintuple `("flow/loop", "contains", "flow/conditional", "finished by", "subroutine/return")` would raise an error. As it stands, the best that we can do is to chain the commands themselves:
 
 ```python
     {
@@ -207,13 +207,13 @@ It is currently not possible to chain several operators with shared operands, fo
     {
         "operation": "include",
         "data": [
-            ("flow/conditional", "finished by", "TODO/return"),
+            ("flow/conditional", "finished by", "subroutine/return"),
         ]
     },
     {
         "operation": "include",
         "data": [
-            ("TODO/return", "contains", "flow/loop"),
+            ("subroutine/return", "contains", "flow/loop"),
         ]
     },
 ```
