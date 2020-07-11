@@ -76,7 +76,7 @@ def normalize_predicate(
         predicate = sub_identity("x=y≤x=y", predicate)  # Treat the special case of identity.
         predicate = sub_one_x(r"\1x≤x\2", predicate)  # If there is only one x, expand it into x≤x.
         predicate = sub_one_y(r"\1y≤y\2", predicate)  # If there is only one y, expand it into y≤y.
-        if original != predicate:  # pragma: no cover
+        if original != predicate:
             print_warning(f"predicate '{original}' normalized into '{predicate}'.")
         if predicate not in compare_spans:
             raise ValueError(f"Malformed predicate '{predicate}' in the pipeline.")

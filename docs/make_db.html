@@ -274,7 +274,7 @@ if __name__ == &#34;__main__&#34;:
     # fmt:on
     print()
     for directory in directories:
-        db = Database(Path(directory))
+        db = Database(Path(directory), ignore_timestamps=True)
         db.write_json()
         db.write_sqlite()
     print()</code></pre>
