@@ -63,8 +63,6 @@ class Cleanup:
     def __init__(self, cleanup_strategy: str):
         """Collection of cleaning static methods to be applied to a source code.
 
-        The constructor selects the desired transformation.
-
         Args:
             cleanup_strategy (str): The name of the transformation. Currently, any other name than
                 `"full"` (corresponding to `full_cleaning()` comes down to the identity function).
@@ -80,14 +78,15 @@ class Cleanup:
     def full_cleaning(source: Source) -> Source:
         r"""Remove as much noise (comments, etc.) as possible in the given source code.
 
-        1. Suppress initial comments.
-        2. Suppress `if __name__ == '__main__'` part.
-        3. Replace tabulations with spaces.
-        4. Normalize Paroxython hint comments.
-        5. Replace docstrings with `pass` statements (most of which being suppressed at the end of the
-        process).
-        6. Suppress empty or blank lines.
-        7. Suppress useless `pass` statements.
+        Description:
+            1. Suppress initial comments.
+            2. Suppress `if __name__ == '__main__'` part.
+            3. Replace tabulations with spaces.
+            4. Normalize Paroxython hint comments.
+            5. Replace docstrings with `pass` statements (most of which being suppressed at the end
+               of the process).
+            6. Suppress empty or blank lines.
+            7. Suppress useless `pass` statements.
 
         Examples:
             - Empty or blank lines are suppressed.
@@ -215,9 +214,10 @@ def centrifugate_hints(
 ) -> Source:
     """Transform the isolated hints into all-encompassing hints.
 
-    When a hint is isolated on its own line, it is considered to extend to the entire program.
-    These hints are moved to both ends of the source (centrifugated), and made open on the first
-    line and close on the last line.
+    Description:
+        When a hint is isolated on its own line, it is considered to extend to the entire program.
+        These hints are moved to both ends of the source (centrifugated), and made open on the
+        first line and close on the last line.
 
     Examples:
         - Some isolated hints (`hint_3` and `hint_5` are centrifugated).
@@ -290,12 +290,13 @@ def collect_hints(
 ) -> Tuple[LabelsSpans, LabelsSpans]:
     """Schedule for addition or deletion the hints appearing in the comments.
 
-    On this stage, the source code is scanned for manual hints. They are set aside in two separate
-    containers (depending on whether the user intends to add or remove them). They will later be
-    used to tweak the labelling results obtained by static analysis.
+    Description:
+        On this stage, the source code is scanned for manual hints. They are set aside in two
+        separate containers (depending on whether the user intends to add or remove them). They
+        will later be used to tweak the labelling results obtained by static analysis.
 
     Args:
-        source (Source): [description]
+        source (Source): A source code.
         match_label (Callable, optional): A function matching a label composed of alphanumeric
             characters and colons. [Not to be explicitly provided.](index.html#default-argument-trick)
 

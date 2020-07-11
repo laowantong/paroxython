@@ -43,8 +43,8 @@ such translations.
 - Label: `("addition_operator", [(7, 7, "...")])`.
 - Taxon: `("operator/arithmetic/addition", {(7, 7, "..."): 1})`.
 
-Note that, unlike a label, a taxon may feature one or several slashes which indicate the nesting
-of notions. Taxa are relevant for the teacher percisely because they offer a first structuring of
+Note that, unlike a label, a taxon may feature one or several slashes, which indicate the nesting
+of notions. Taxa are relevant for the teacher precisely because they offer a first structuration of
 otherwise scattered knowledge.
 
 Both label and taxon are couples. The second member is slightly more complicated than a list of
