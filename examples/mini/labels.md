@@ -89,6 +89,37 @@
 - modulo_operator / fizzbuzz.py / 3, 5, 7
 - modulo_operator / is_even.py / 3
 - multiplication_operator / collatz.py / 7
+- node:Assign / assignment.py / 1
+- node:Assign / collatz.py / 5, 7
+- node:BinOp / collatz.py / 4, 5, 7, 7
+- node:BinOp / fizzbuzz.py / 3, 5, 7
+- node:BinOp / is_even.py / 3
+- node:Call / collatz.py / 3, 8
+- node:Call / fizzbuzz.py / 2, 4, 6, 8, 10
+- node:Compare / collatz.py / 2, 4
+- node:Compare / fizzbuzz.py / 3, 5, 7
+- node:Compare / is_even.py / 3
+- node:Expr / collatz.py / 3, 8
+- node:Expr / fizzbuzz.py / 4, 6, 8, 10
+- node:For / fizzbuzz.py / 2-10
+- node:FunctionDef / collatz.py / 1-8
+- node:FunctionDef / is_even.py / 2-3
+- node:If / collatz.py / 4-7
+- node:If / fizzbuzz.py / 3-10, 5-10, 7-10
+- node:Import / fizzbuzz.py / 1
+- node:Import / is_even.py / 1
+- node:Name / assignment.py / 1, 1
+- node:Name / collatz.py / 2, 3, 3, 4, 5, 5, 7, 7, 8, 8
+- node:Name / fizzbuzz.py / 2, 2, 3, 4, 5, 6, 7, 8, 10, 10
+- node:Name / is_even.py / 3
+- node:Num / collatz.py / 2, 4, 4, 5, 7, 7
+- node:Num / fizzbuzz.py / 2, 2, 3, 3, 5, 5, 7, 7
+- node:Num / is_even.py / 3, 3
+- node:Return / is_even.py / 3
+- node:Str / fizzbuzz.py / 4, 6, 8
+- node:While / collatz.py / 2-7
+- node:arg / collatz.py / 1
+- node:arg / is_even.py / 2
 - range:1:101 / fizzbuzz.py / 2
 - return / is_even.py / 3
 - single_assignment:a / assignment.py / 1
@@ -107,7 +138,6 @@
 - update_with:Add / collatz.py / 7
 - update_with:FloorDiv / collatz.py / 5
 - verbose_conditional_assignment / collatz.py / 4-7
-- while / collatz.py / 2-7
 - whole_span:1 / assignment.py / 1
 - whole_span:10 / fizzbuzz.py / 1-10
 - whole_span:3 / is_even.py / 1-3
@@ -119,14 +149,12 @@
 - accumulate_elements
 - accumulate_inputs
 - accumulate_some_elements
-- assertion
 - assignment_lhs_identifier
 - assignment_rhs_atom
 - augmented_assignment
 - binary_operator
 - body_recursive_function
 - boolean_operator
-- break
 - call_argument
 - chained_assignment
 - chained_comparison
@@ -139,8 +167,6 @@
 - comprehension
 - comprehension_for_count
 - concatenation_operator|replication_operator
-- conditional_expression
-- continue
 - corrective_conditional_assignment
 - count_elements|count_states
 - count_inputs
@@ -150,7 +176,6 @@
 - empty_literal
 - except
 - external_free_call
-- f_string
 - filtered_comprehension
 - find_best_element
 - find_first_element
@@ -185,7 +210,6 @@
 - infinite_while
 - instance_method|class_method|static_method
 - internal_free_call
-- lambda_function
 - literal
 - loop
 - loop_else
@@ -206,7 +230,6 @@
 - nested_function
 - nested_if
 - nested_index
-- null_operation
 - parallel_assignment
 - raise
 - range
@@ -225,7 +248,6 @@
 - swap
 - tail_recursive_function
 - triangular_nested_for
-- try
 - try_raise|try_except
 - unary_operator
 - unbinding

@@ -325,7 +325,7 @@ expressions, span algebra, semantic triples, negations) in the <a href="#deep-in
 <p>As a matter of fact, all the characters that can appear in a taxon are literal. We advise you to avoid non-literal characters in your program names as well. What are they? Essentially: <code>.^$*+?{}\[]</code>. Depending on your operating system, some are already illegal in filenames anyway. To tell the truth, the first one (the dot) is an integral part of most filenames, as an extension separator. However, it turns out that it basically means “any character”, which of course includes the dot itself. So, the regular expression <code>"hello_world.py"</code> matches the filename <code>"hello_world.py"</code>, and the fact that it matches <code>"hello_world/py"</code> and <code>"hello_worldapy"</code> shouldn't be a real problem. In any case, you can always prefix (or <em>escape</em>) a non-literal character with a backslash <code>"\"</code> to make it literal (here, <code>"hello_world\.py"</code>): that's all you'll need to know about regular expressions.</p>
 </div>
 <p>The second thing to clarify is that a given datum will match any string <strong>starting</strong> with it. Thus, <code>"type/sequence/list"</code> will match not only <code>"type/sequence/list"</code>, but <code>"type/sequence/list/empty"</code> and <code>"type/sequence/list/supercalifragilisticexpialidocious"</code> too. The same applies to program names. For example, in our personal database, all programs from the Euler project start with <code>"euler_"</code>. The datum <code>"euler_"</code> will then match all of them.</p>
-<p>In terms of regular expressions, that means that, under the hood, Paroxython invokes <a href="https://docs.python.org/3/library/re.html#search-vs-match"><code>match()</code> instead of <code>search()</code></a>. In the rare cases where you want to restrict the matching to the datum itself, simply suffix it with a dollar sign, i.e., <code>"type/sequence/list$"</code>.</p>
+<p>In terms of regular expressions, that means that, under the hood, Paroxython invokes <a href="https://docs.python.org/3/library/re.html#search-vs-match"><code>match()</code> instead of <code>search()</code></a>. In the rare cases where you want to restrict the matching to the datum itself, simply suffix it with a dollar sign, <em>i.e.</em>, <code>"type/sequence/list$"</code>.</p>
 <h2 id="execution-of-a-pipeline">Execution of a pipeline</h2>
 <p>A pipeline is a set (or list, but the order is not important) of commands which apply sequentially to a database of programs. It returns:</p>
 <ul>
@@ -658,7 +658,7 @@ encapsulation. More details on <a href="https://stackoverflow.com/a/30688691/173
 <hr>
 <ol>
 <li id="fn:regex-credits">
-<p>This module appears to be here to stay, since it is proeminently featured at the top of the more mundane standard library <a href="https://docs.python.org/3/library/re.html">re</a>.
+<p>This module appears to be here to stay, since it is proeminently featured in the documentation of the more mundane standard library <a href="https://docs.python.org/3/library/re.html">re</a>.
 Thanks and kudos to the author, Matthew Barnett: without his awesome work, many parts of our code would have been much tougher to write, and much slower to execute.&#160;<a class="footnote-backref" href="#fnref:regex-credits" rev="footnote" title="Jump back to footnote 1 in the text">&#8617;</a></p>
 </li>
 <li id="fn:Allen1983">

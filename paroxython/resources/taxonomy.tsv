@@ -11,7 +11,7 @@ call/function/without_arguments	free_call_without_arguments:[[:lower:]].*
 call/method/\1	member_call:([[:lower:]].*)
 call/method/chaining	method_chaining
 class	class:.+
-flow/assertion	assertion
+flow/assertion	node:Assert
 flow/conditional	if
 flow/conditional/else	if_else_branch
 flow/conditional/else/if	if_elif_branch
@@ -21,10 +21,11 @@ flow/conditional/no_else	if_without_else
 flow/exception/catch/\1	try_except(?::(BaseException|SystemExit|KeyboardInterrupt|GeneratorExit|Exception|StopIteration|StopAsyncIteration|ArithmeticError|FloatingPointError|OverflowError|ZeroDivisionError|AssertionError|AttributeError|BufferError|EOFError|ImportError|ModuleNotFoundError|LookupError|IndexError|KeyError|MemoryError|NameError|UnboundLocalError|OSError|BlockingIOError|ChildProcessError|ConnectionError|BrokenPipeError|ConnectionAbortedError|ConnectionRefusedError|ConnectionResetError|FileExistsError|FileNotFoundError|InterruptedError|IsADirectoryError|NotADirectoryError|PermissionError|ProcessLookupError|TimeoutError|ReferenceError|RuntimeError|NotImplementedError|RecursionError|SyntaxError|IndentationError|TabError|SystemError|TypeError|ValueError|UnicodeError|UnicodeDecodeError|UnicodeEncodeError|UnicodeTranslateError|Warning|DeprecationWarning|PendingDeprecationWarning|RuntimeWarning|SyntaxWarning|UserWarning|FutureWarning|ImportWarning|UnicodeWarning|BytesWarning|ResourceWarning))?.*
 flow/exception/raise/\1	try_raise(?::(BaseException|SystemExit|KeyboardInterrupt|GeneratorExit|Exception|StopIteration|StopAsyncIteration|ArithmeticError|FloatingPointError|OverflowError|ZeroDivisionError|AssertionError|AttributeError|BufferError|EOFError|ImportError|ModuleNotFoundError|LookupError|IndexError|KeyError|MemoryError|NameError|UnboundLocalError|OSError|BlockingIOError|ChildProcessError|ConnectionError|BrokenPipeError|ConnectionAbortedError|ConnectionRefusedError|ConnectionResetError|FileExistsError|FileNotFoundError|InterruptedError|IsADirectoryError|NotADirectoryError|PermissionError|ProcessLookupError|TimeoutError|ReferenceError|RuntimeError|NotImplementedError|RecursionError|SyntaxError|IndentationError|TabError|SystemError|TypeError|ValueError|UnicodeError|UnicodeDecodeError|UnicodeEncodeError|UnicodeTranslateError|Warning|DeprecationWarning|PendingDeprecationWarning|RuntimeWarning|SyntaxWarning|UserWarning|FutureWarning|ImportWarning|UnicodeWarning|BytesWarning|ResourceWarning))?.*
 flow/loop	loop:.+
+flow/loop/continue	node:Continue
 flow/loop/exit/early/\1	loop_with_early_exit:.+:(.+)
 flow/loop/exit/early/break/else	loop_with_else:.+
 flow/loop/exit/late	loop_with_late_exit:.+
-flow/loop/for	for:(.+)
+flow/loop/for	loop:for
 flow/loop/for/arithmetic	for_range:[^:]+
 flow/loop/for/arithmetic/start	for_range:[^:]+:[^:]+
 flow/loop/for/arithmetic/start/step	for_range:[^:]+:[^:]+:[^:]+
@@ -35,9 +36,9 @@ flow/loop/for/indexes	for_indexes
 flow/loop/for/nested/\1	nested_for:(.+)
 flow/loop/for/nested/square	square_nested_for
 flow/loop/for/nested/triangular	triangular_nested_for
-flow/loop/while	while
+flow/loop/while	loop:while
 flow/loop/while/infinite	infinite_while
-flow/null_operation	null_operation
+flow/null_operation	node:Pass
 io/file/open	external_free_call:open
 io/standard/input	external_free_call:input
 io/standard/print	external_free_call:print
@@ -77,7 +78,7 @@ operator/matrix/multiplication	binary_operator:MatMult
 operator/string/concatenation	concatenation_operator:Str
 operator/string/format	string_formatting_operator
 operator/string/replication	replication_operator:Str
-operator/ternary	conditional_expression
+operator/ternary	node:IfExp
 operator/tuple/concatenation	concatenation_operator:Tuple
 operator/tuple/replication	replication_operator:Tuple
 pattern/elements/accumulate	accumulate_all_elements/b.+
@@ -117,6 +118,7 @@ subroutine/argument/\1	function_argument_flavor:(.+)
 subroutine/argument/no	function_without_arguments:.+
 subroutine/decorated	decorated_function:.+
 subroutine/function	function_returning_something:.+
+subroutine/function/anonymous	node:Lambda
 subroutine/generator	generator:.+
 subroutine/higher_order	higher_order_function:.+
 subroutine/method/flavor/class	class_method:.+
@@ -188,7 +190,7 @@ type/sequence/string	external_free_call:str
 type/sequence/string	member_call:(capitalize|casefold|center|encode|endswith|expandtabs|find|format|format_map|isalnum|isalpha|isascii|isdecimal|isdigit|isidentifier|islower|isnumeric|isprintable|isspace|istitle|isupper|join|ljust|lower|lstrip|maketrans|partition|replace|rfind|rindex|rjust|rpartition|rsplit|rstrip|split|splitlines|startswith|strip|swapcase|title|translate|upper|zfill)
 type/sequence/string/literal	literal:Str
 type/sequence/string/literal/empty	empty_literal:Str
-type/sequence/string/literal/formatted	f_string
+type/sequence/string/literal/formatted	node:JoinedStr
 type/sequence/tuple	external_free_call:tuple
 type/sequence/tuple/literal	literal:Tuple
 type/sequence/tuple/literal/empty	empty_literal:Tuple
@@ -206,7 +208,8 @@ variable/assignment/parallel/more_than_two	parallel_assignment:(?!2$)\d+
 variable/assignment/parallel/slide	slide
 variable/assignment/parallel/swap	swap
 variable/assignment/single	single_assignment:.+
-variable/unbinding	unbinding:.+
+variable/deletion	node:Delete
+variable/deletion/unbinding	unbinding:.+
 -- EOF	EOF
 io/standard/print/multiple	TODO
 io/standard/print/newline	TODO

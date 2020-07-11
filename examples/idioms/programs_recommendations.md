@@ -38,23 +38,23 @@
     - [`026.0194-create-a-2-dimensional-array.py`](#program-0260194-create-a-2-dimensional-arraypy-learning-cost-271875)
     - [`027.0192-create-a-3-dimensional-array.py`](#program-0270192-create-a-3-dimensional-arraypy-learning-cost-271875)
     - [`027.0193-create-a-3-dimensional-array.py`](#program-0270193-create-a-3-dimensional-arraypy-learning-cost-35625)
-    - [`028.0350-sort-by-a-property.py`](#program-0280350-sort-by-a-propertypy-learning-cost-26875)
-    - [`029.0199-remove-item-from-list-by-its-index.py`](#program-0290199-remove-item-from-list-by-its-indexpy-learning-cost-075)
+    - [`028.0350-sort-by-a-property.py`](#program-0280350-sort-by-a-propertypy-learning-cost-35625)
+    - [`029.0199-remove-item-from-list-by-its-index.py`](#program-0290199-remove-item-from-list-by-its-indexpy-learning-cost-15)
     - [`030.0189-parallelize-execution-of-1000-independent-tasks.py`](#program-0300189-parallelize-execution-of-1000-independent-taskspy-learning-cost-828125)
     - [`031.0188-recursive-factorial-simple.py`](#program-0310188-recursive-factorial-simplepy-learning-cost-928125)
     - [`032.0196-integer-exponentiation-by-squaring.py`](#program-0320196-integer-exponentiation-by-squaringpy-learning-cost-25)
     - [`033.1420-atomically-read-and-update-variable.py`](#program-0331420-atomically-read-and-update-variablepy-learning-cost-4375)
     - [`034.0625-create-a-set-of-objects.py`](#program-0340625-create-a-set-of-objectspy-learning-cost-559375)
-    - [`035.0667-first-class-function--compose.py`](#program-0350667-first-class-function--composepy-learning-cost-4875)
-    - [`036.0670-first-class-function--generic-composition.py`](#program-0360670-first-class-function--generic-compositionpy-learning-cost-4875)
+    - [`035.0667-first-class-function--compose.py`](#program-0350667-first-class-function--composepy-learning-cost-575)
+    - [`036.0670-first-class-function--generic-composition.py`](#program-0360670-first-class-function--generic-compositionpy-learning-cost-575)
     - [`037.0671-currying.py`](#program-0370671-curryingpy-learning-cost-85625)
     - [`038.0186-extract-a-substring.py`](#program-0380186-extract-a-substringpy-learning-cost-2625)
     - [`039.0571-check-if-string-contains-a-word.py`](#program-0390571-check-if-string-contains-a-wordpy-learning-cost-1625)
     - [`040.2279-graph-with-adjacency-lists.py`](#program-0402279-graph-with-adjacency-listspy-learning-cost-2071875)
     - [`041.0187-reverse-a-string.py`](#program-0410187-reverse-a-stringpy-learning-cost-63125)
     - [`041.2714-reverse-a-string.py`](#program-0412714-reverse-a-stringpy-learning-cost-275)
-    - [`042.1264-continue-outer-loop.py`](#program-0421264-continue-outer-looppy-learning-cost-9125)
-    - [`042.3168-continue-outer-loop.py`](#program-0423168-continue-outer-looppy-learning-cost-628125)
+    - [`042.1264-continue-outer-loop.py`](#program-0421264-continue-outer-looppy-learning-cost-100)
+    - [`042.3168-continue-outer-loop.py`](#program-0423168-continue-outer-looppy-learning-cost-715625)
     - [`043.0676-break-outer-loop.py`](#program-0430676-break-outer-looppy-learning-cost-120)
     - [`043.2733-break-outer-loop.py`](#program-0432733-break-outer-looppy-learning-cost-149375)
     - [`044.0190-insert-element-in-list.py`](#program-0440190-insert-element-in-listpy-learning-cost-175)
@@ -935,7 +935,7 @@
 
 ---
 
-### Program `028.0350-sort-by-a-property.py` (learning cost 2.6875)
+### Program `028.0350-sort-by-a-property.py` (learning cost 3.5625)
 
 ```python
 1   items = sorted(items, key=lambda x: x.p)
@@ -945,13 +945,14 @@
 |----|----|----|
 | 0.9375 | `call/function/builtin/sorted` | 1 |
 | 0.875 | `subroutine/argument/arg` | 1 |
+| 0.875 | `subroutine/function/anonymous` | 1 |
 | 0.875 | `variable/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
 
 ---
 
-### Program `029.0199-remove-item-from-list-by-its-index.py` (learning cost 0.75)
+### Program `029.0199-remove-item-from-list-by-its-index.py` (learning cost 1.5)
 
 ```python
 1   del items[i]
@@ -960,6 +961,7 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.75 | `subscript/index` | 1 |
+| 0.75 | `variable/deletion` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
 
@@ -1081,7 +1083,7 @@
 
 ---
 
-### Program `035.0667-first-class-function--compose.py` (learning cost 4.875)
+### Program `035.0667-first-class-function--compose.py` (learning cost 5.75)
 
 ```python
 1   def compose(f, g):
@@ -1095,13 +1097,14 @@
 | 0.875 | `call/function/g` | 2 |
 | 0.875 | `subroutine/argument/arg` | 1, 1, 2 |
 | 0.75 | `subroutine/function` | 1-2 |
+| 0.875 | `subroutine/function/anonymous` | 2 |
 | 0.75 | `subroutine/higher_order` | 1-2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
 
 ---
 
-### Program `036.0670-first-class-function--generic-composition.py` (learning cost 4.875)
+### Program `036.0670-first-class-function--generic-composition.py` (learning cost 5.75)
 
 ```python
 1   def compose(f, g):
@@ -1115,6 +1118,7 @@
 | 0.875 | `call/function/g` | 2 |
 | 0.875 | `subroutine/argument/arg` | 1, 1, 2 |
 | 0.75 | `subroutine/function` | 1-2 |
+| 0.875 | `subroutine/function/anonymous` | 2 |
 | 0.75 | `subroutine/higher_order` | 1-2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
@@ -1265,7 +1269,7 @@
 
 ---
 
-### Program `042.1264-continue-outer-loop.py` (learning cost 9.125)
+### Program `042.1264-continue-outer-loop.py` (learning cost 10.0)
 
 ```python
 1   for v in a:
@@ -1285,6 +1289,7 @@
 | 0.875 | `flow/conditional/no_else` | 4-5 |
 | 0.9375 | `flow/exception/catch/Exception` | 2-8 |
 | 0.9375 | `flow/exception/raise/Exception` | 2-8 |
+| 0.875 | `flow/loop/continue` | 8 |
 | 0.96875 | `flow/loop/exit/early/raise` | 1-8, 3-5 |
 | 0.9375 | `flow/loop/for/elements` | 1-8, 3-5 |
 | 0.96875 | `flow/loop/for/nested/1` | 3-5 |
@@ -1295,7 +1300,7 @@
 
 ---
 
-### Program `042.3168-continue-outer-loop.py` (learning cost 6.28125)
+### Program `042.3168-continue-outer-loop.py` (learning cost 7.15625)
 
 ```python
 1   for v in a:
@@ -1309,6 +1314,7 @@
 |----|----|----|
 | 0.9375 | `call/function/builtin/print` | 5 |
 | 0.875 | `flow/conditional/no_else` | 3-4 |
+| 0.875 | `flow/loop/continue` | 4 |
 | 0.9375 | `flow/loop/exit/late` | 1-5, 2-5 |
 | 0.9375 | `flow/loop/for/elements` | 1-5, 2-5 |
 | 0.96875 | `flow/loop/for/nested/1` | 2-5 |
@@ -1376,7 +1382,7 @@
 | 0.9375 | `call/function/builtin/print` | 7 |
 | 0.875 | `flow/conditional/no_else` | 4-5 |
 | 0.96875 | `flow/loop/exit/early/return` | 2-5, 3-5 |
-| 0.875 | `flow/loop/for` | 2-5, 3-5 |
+| 0.875 | `flow/loop/for` | 2-5 |
 | 0.9375 | `flow/loop/for/elements_and_indexes` | 2-5, 3-5 |
 | 0.96875 | `flow/loop/for/nested/1` | 3-5 |
 | 0.875 | `io/standard/print` | 7 |

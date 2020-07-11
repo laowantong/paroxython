@@ -30,7 +30,7 @@ This part describes in some details how the recommendation system works. It assu
 The first thing to clarify is that the strings which constitute the `data` lists are not simple names, but “descriptions” of names. These descriptions, or **patterns**, are written in the language of regular expressions, and more precisely in the dialect implemented by the third-party module [regex](https://pypi.org/project/regex/)[^regex-credits].
 
 [^regex-credits]:
-    This module appears to be here to stay, since it is proeminently featured at the top of the more mundane standard library [re](https://docs.python.org/3/library/re.html).
+    This module appears to be here to stay, since it is proeminently featured in the documentation of the more mundane standard library [re](https://docs.python.org/3/library/re.html).
     Thanks and kudos to the author, Matthew Barnett: without his awesome work, many parts of our code would have been much tougher to write, and much slower to execute.
 
 ..tip::
@@ -40,7 +40,7 @@ The first thing to clarify is that the strings which constitute the `data` lists
 
 The second thing to clarify is that a given datum will match any string **starting** with it. Thus, `"type/sequence/list"` will match not only `"type/sequence/list"`, but `"type/sequence/list/empty"` and `"type/sequence/list/supercalifragilisticexpialidocious"` too. The same applies to program names. For example, in our personal database, all programs from the Euler project start with `"euler_"`. The datum `"euler_"` will then match all of them.
 
-In terms of regular expressions, that means that, under the hood, Paroxython invokes [`match()` instead of `search()`](https://docs.python.org/3/library/re.html#search-vs-match). In the rare cases where you want to restrict the matching to the datum itself, simply suffix it with a dollar sign, i.e., `"type/sequence/list$"`.
+In terms of regular expressions, that means that, under the hood, Paroxython invokes [`match()` instead of `search()`](https://docs.python.org/3/library/re.html#search-vs-match). In the rare cases where you want to restrict the matching to the datum itself, simply suffix it with a dollar sign, _i.e._, `"type/sequence/list$"`.
 
 ## Execution of a pipeline
 

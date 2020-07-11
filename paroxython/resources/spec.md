@@ -1,3 +1,5 @@
+- [AST](#ast)
+      - [Feature `node`](#feature-node)
 - [Expressions](#expressions)
   - [Literals](#literals)
       - [Feature `literal`](#feature-literal)
@@ -14,7 +16,6 @@
   - [Operators](#operators)
       - [Feature `unary_operator`](#feature-unary_operator)
       - [Feature `binary_operator`](#feature-binary_operator)
-      - [Feature `conditional_expression`](#feature-conditional_expression)
       - [Feature `concatenation_operator|replication_operator` (SQL)](#feature-concatenation_operatorreplication_operator)
       - [Feature `string_formatting_operator` (SQL)](#feature-string_formatting_operator)
       - [Feature `addition_operator` (SQL)](#feature-addition_operator)
@@ -49,9 +50,6 @@
       - [Feature `comprehension`](#feature-comprehension)
       - [Feature `comprehension_for_count`](#feature-comprehension_for_count)
       - [Feature `filtered_comprehension`](#feature-filtered_comprehension)
-  - [Various](#various)
-      - [Feature `lambda_function`](#feature-lambda_function)
-      - [Feature `f_string`](#feature-f_string)
 - [Statements](#statements)
   - [Bindings](#bindings)
       - [Feature `assignment`](#feature-assignment)
@@ -102,7 +100,7 @@
       - [Feature `body_recursive_function` (SQL)](#feature-body_recursive_function)
       - [Feature `tail_recursive_function` (SQL)](#feature-tail_recursive_function)
   - [Conditionals](#conditionals)
-      - [Feature `if`](#feature-if)
+      - [Feature `if` (SQL)](#feature-if)
       - [Feature `if_test_atom`](#feature-if_test_atom)
       - [Feature `if_then_branch`](#feature-if_then_branch)
       - [Feature `if_elif_branch`](#feature-if_elif_branch)
@@ -113,11 +111,8 @@
   - [Iterations](#iterations)
     - [Iteration keywords](#iteration-keywords)
       - [Feature `for`](#feature-for)
-      - [Feature `while`](#feature-while)
       - [Feature `loop` (SQL)](#feature-loop)
-      - [Feature `break`](#feature-break)
       - [Feature `loop_else`](#feature-loop_else)
-      - [Feature `continue`](#feature-continue)
     - [Sequential loops](#sequential-loops)
       - [Feature `for_each`](#feature-for_each)
       - [Feature `for_range` (SQL)](#feature-for_range)
@@ -135,11 +130,7 @@
       - [Feature `loop_with_early_exit` (SQL)](#feature-loop_with_early_exit)
       - [Feature `loop_with_else` (SQL)](#feature-loop_with_else)
       - [Feature `loop_with_late_exit` (SQL)](#feature-loop_with_late_exit)
-  - [Various statements](#various-statements)
-      - [Feature `assertion`](#feature-assertion)
-      - [Feature `null_operation`](#feature-null_operation)
     - [Exceptions](#exceptions)
-      - [Feature `try`](#feature-try)
       - [Feature `raise`](#feature-raise)
       - [Feature `except`](#feature-except)
       - [Feature `try_raise|try_except` (SQL)](#feature-try_raisetry_except)
@@ -179,6 +170,100 @@
       - [Feature `suggest_constant_definition`](#feature-suggest_constant_definition)
   - [Subroutines](#subroutines)
       - [Feature `suggest_condition_return`](#feature-suggest_condition_return)
+
+# AST
+
+--------------------------------------------------------------------------------
+
+#### Feature `node`
+
+Match the name of every node of the AST. This covers most of the [Python keywords]((https://docs.python.org/3/reference/lexical_analysis.html#keywords)), and may avoid writing specialized definitions for some simple statements (_e.g._, `break`, `assert`), and some constructs spanning multiple lines (_e.g._, `if`, `while`).
+
+##### Derivations
+
+[⬇️ feature `if`](#feature-if)  
+[⬇️ feature `loop`](#feature-loop)  
+[⬇️ feature `loop_with_break`](#feature-loop_with_break)  
+[⬇️ feature `try_raise|try_except`](#feature-try_raisetry_except)  
+
+##### Specification
+
+```re
+           ^(.*)/_type=(?P<SUFFIX>.+)
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
+(
+\n(?:\1.+\n)* \1/.*/_pos=(?P<POS>.+)
+)?
+```
+
+##### Example
+
+```python
+1   from os import *
+2   def k(z):
+3       def c():
+4           return None
+5           nonlocal z
+6   class F:
+7       pass
+8   global b
+9   with open(devnull) as b:
+10      while b:
+11          if 1 and 0 is 0:
+12              continue
+13          elif 1:
+14              0
+15          else:
+16              for d in []:
+17                  yield not d
+18                  del d
+19                  break
+20      try:
+21          raise 1 or False
+22      except:
+23          assert True
+24      finally:
+25          (lambda j: 0)
+```
+
+Credit: Zach Gates, _Minimal program using all Python 3.4 keywords_, Code Golf Stack Exchange, 2016 ([link](https://codegolf.stackexchange.com/a/75901/96158)).
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `node:Assert` | 23 |
+| `node:BoolOp` | 11, 21 |
+| `node:Break` | 19 |
+| `node:Call` | 9 |
+| `node:ClassDef` | 6-7 |
+| `node:Compare` | 11 |
+| `node:Continue` | 12 |
+| `node:Delete` | 18 |
+| `node:ExceptHandler` | 22-23 |
+| `node:Expr` | 14, 17, 25 |
+| `node:For` | 16-19 |
+| `node:FunctionDef` | 2-5, 3-5 |
+| `node:Global` | 8 |
+| `node:If` | 11-19, 13-19 |
+| `node:ImportFrom` | 1 |
+| `node:Lambda` | 25 |
+| `node:List` | 16 |
+| `node:Name` | 9, 9, 9, 10, 16, 17, 18 |
+| `node:NameConstant` | 4, 21, 23 |
+| `node:Nonlocal` | 5 |
+| `node:Num` | 11, 11, 11, 13, 14, 21, 25 |
+| `node:Pass` | 7 |
+| `node:Raise` | 21 |
+| `node:Return` | 4 |
+| `node:Try` | 20-25 |
+| `node:UnaryOp` | 17 |
+| `node:While` | 10-19 |
+| `node:With` | 9-25 |
+| `node:Yield` | 17 |
+| `node:arg` | 2, 25 |
+
+--------------------------------------------------------------------------------
 
 # Expressions
 
@@ -762,31 +847,6 @@ _Remark._ A negative literal is represented in the AST by a node `UnaryOp` with 
 |:--|:--|
 | `binary_operator:Pow` | 1 |
 | `binary_operator:Sub` | 1 |
-
---------------------------------------------------------------------------------
-
-#### Feature `conditional_expression`
-
-Match the so-called ternary operator.
-
-##### Specification
-
-```re
-           ^(.*)/_type=IfExp
-\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-```
-
-##### Example
-
-```python
-1   foo if c else bar
-```
-
-##### Matches
-
-| Label | Lines |
-|:--|:--|
-| `conditional_expression` | 1 |
 
 --------------------------------------------------------------------------------
 
@@ -1943,56 +2003,6 @@ Match a comprehension with an `if` clause.
 
 --------------------------------------------------------------------------------
 
-## Various
-
---------------------------------------------------------------------------------
-
-#### Feature `lambda_function`
-
-##### Specification
-
-```re
-           ^(.*)/_type=Lambda
-\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-```
-
-##### Example
-
-```python
-1   lambda x: x + 1
-```
-
-##### Matches
-
-| Label | Lines |
-|:--|:--|
-| `lambda_function` | 1 |
-
---------------------------------------------------------------------------------
-
-#### Feature `f_string`
-
-##### Specification
-
-```re
-           ^(.*)/value/args/1/_type=JoinedStr
-\n(?:\1.+\n)*?\1/value/args/1/_pos=(?P<POS>.+)
-```
-
-##### Example
-
-```python
-1   print(f"hello, {world}")
-```
-
-##### Matches
-
-| Label | Lines |
-|:--|:--|
-| `f_string` | 1 |
-
---------------------------------------------------------------------------------
-
 # Statements
 
 ## Bindings
@@ -2082,6 +2092,7 @@ Deleting a name removes the binding of that name from the local or global namesp
 
 | Label | Lines |
 |:--|:--|
+| `node:Delete` | 1, 2, 3, 4, 5, 6 |
 | `unbinding:a` | 1 |
 | `unbinding:b` | 2 |
 | `unbinding:c` | 2 |
@@ -3903,8 +3914,11 @@ _LIMITATION._ Currently, the tail recursive procedures (_i.e._, without `return`
 
 Match an entire conditional (from the `if` clause to the last line of its body).
 
+A synonym of feature `node:If`.
+
 ##### Derivations
 
+[⬆️ feature `node`](#feature-node)  
 [⬇️ feature `accumulate_inputs`](#feature-accumulate_inputs)  
 [⬇️ feature `accumulate_some_elements`](#feature-accumulate_some_elements)  
 [⬇️ feature `count_inputs`](#feature-count_inputs)  
@@ -3917,10 +3931,13 @@ Match an entire conditional (from the `if` clause to the last line of its body).
 
 ##### Specification
 
-```re
-           ^(.*)/_type=If
-\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)* \1/.+/_pos=(?P<POS>.+)
+```sql
+SELECT "if",
+       "",
+       t.span,
+       t.path
+FROM t
+WHERE t.name = "node:If"
 ```
 
 ##### Example
@@ -3961,6 +3978,7 @@ else:
 | Label | Lines |
 |:--|:--|
 | `if` | 1-10, 2-3, 4-10, 5-6, 8-9 |
+| `node:If` | 1-10, 2-3, 4-10, 5-6, 8-9 |
 
 --------------------------------------------------------------------------------
 
@@ -4380,7 +4398,6 @@ Match sequential loops, along with their iteration variable(s).
 [⬇️ feature `find_best_element`](#feature-find_best_element)  
 [⬇️ feature `find_first_element`](#feature-find_first_element)  
 [⬇️ feature `for_range`](#feature-for_range)  
-[⬇️ feature `loop`](#feature-loop)  
 [⬇️ feature `nested_for`](#feature-nested_for)  
 [⬇️ feature `universal_quantification|existential_quantification`](#feature-universal_quantificationexistential_quantification)  
 
@@ -4424,46 +4441,11 @@ Match sequential loops, along with their iteration variable(s).
 
 --------------------------------------------------------------------------------
 
-#### Feature `while`
-
-##### Derivations
-
-[⬇️ feature `loop`](#feature-loop)  
-
-##### Specification
-
-```re
-           ^(.*)/_type=While
-\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)* \1/.*/_pos=(?P<POS>.+)
-```
-
-##### Example
-
-```python
-1   while foo():
-2       while bar():
-3           pass
-4       while biz():
-5           pass
-6       else:
-7           pass
-```
-
-##### Matches
-
-| Label | Lines |
-|:--|:--|
-| `while` | 1-7, 2-3, 4-7 |
-
---------------------------------------------------------------------------------
-
 #### Feature `loop`
 
 ##### Derivations
 
-[⬆️ feature `for`](#feature-for)  
-[⬆️ feature `while`](#feature-while)  
+[⬆️ feature `node`](#feature-node)  
 [⬇️ feature `count_elements|count_states`](#feature-count_elementscount_states)  
 [⬇️ feature `loop_with_break`](#feature-loop_with_break)  
 [⬇️ feature `loop_with_else`](#feature-loop_with_else)  
@@ -4475,12 +4457,12 @@ Match sequential loops, along with their iteration variable(s).
 
 ```sql
 SELECT "loop",
-       name_prefix,
+       lower(name_suffix),
        span,
        path
 FROM t
-WHERE name_prefix IN ("for",
-                      "while")
+WHERE name IN ("node:For",
+               "node:While")
 GROUP BY path
 ```
 
@@ -4507,38 +4489,6 @@ GROUP BY path
 
 --------------------------------------------------------------------------------
 
-#### Feature `break`
-
-##### Derivations
-
-[⬇️ feature `loop_with_break`](#feature-loop_with_break)  
-
-##### Specification
-
-```re
-           ^(.*)/_type=Break
-\n            \1/_pos=(?P<POS>.+)
-```
-
-##### Example
-
-```python
-1   for x in seq:
-2       if foo():
-3           break
-4   else:
-5       bar()
-6       biz()
-```
-
-##### Matches
-
-| Label | Lines |
-|:--|:--|
-| `break` | 3 |
-
---------------------------------------------------------------------------------
-
 #### Feature `loop_else`
 
 ##### Derivations
@@ -4548,8 +4498,7 @@ GROUP BY path
 ##### Specification
 
 ```re
-  ^(.*/loopelse)/1/_type=.+
-\n            \1/1/_pos=(?P<POS>.+)
+  ^(.*/loopelse)/1/_pos=(?P<POS>.+)
 (
 \n(?:\1.+\n)+ \1/.*_pos=(?P<POS>.+)
 )*
@@ -4571,34 +4520,6 @@ GROUP BY path
 | Label | Lines |
 |:--|:--|
 | `loop_else` | 5-6 |
-
---------------------------------------------------------------------------------
-
-#### Feature `continue`
-
-##### Specification
-
-```re
-           ^(.*)/_type=Continue
-\n            \1/_pos=(?P<POS>.+)
-```
-
-##### Example
-
-```python
-1   for x in seq:
-2       if foo():
-3           continue
-4       if bar():
-5           continue
-6       pass
-```
-
-##### Matches
-
-| Label | Lines |
-|:--|:--|
-| `continue` | 3, 5 |
 
 --------------------------------------------------------------------------------
 
@@ -5014,8 +4935,8 @@ GROUP BY l.rowid
 
 ##### Derivations
 
-[⬆️ feature `break`](#feature-break)  
 [⬆️ feature `loop`](#feature-loop)  
+[⬆️ feature `node`](#feature-node)  
 [⬇️ feature `loop_with_early_exit`](#feature-loop_with_early_exit)  
 
 ##### Specification
@@ -5026,7 +4947,8 @@ SELECT "loop_with_break",
        max(l.span_start) || "-" || min(l.span_end),
        max(l.path)
 FROM t_loop l
-JOIN t_break b ON (b.path GLOB l.path || "*-")
+JOIN t_node b ON (b.name_suffix="Break"
+                  AND b.path GLOB l.path || "*-")
 GROUP BY b.rowid
 ```
 
@@ -5188,92 +5110,7 @@ WHERE l2.span IS NULL
 
 --------------------------------------------------------------------------------
 
-## Various statements
-
---------------------------------------------------------------------------------
-
-#### Feature `assertion`
-
-##### Specification
-
-```re
-           ^(.*)/_type=Assert
-\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-```
-
-##### Example
-
-```python
-1   assert a == 42
-```
-
-##### Matches
-
-| Label | Lines |
-|:--|:--|
-| `assertion` | 1 |
-
---------------------------------------------------------------------------------
-
-#### Feature `null_operation`
-
-##### Specification
-
-```re
-           ^(.*)/_type=Pass
-\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-```
-
-##### Example
-
-```python
-1   def foobar():
-2       pass
-```
-
-##### Matches
-
-| Label | Lines |
-|:--|:--|
-| `null_operation` | 2 |
-
---------------------------------------------------------------------------------
-
 ### Exceptions
-
---------------------------------------------------------------------------------
-
-#### Feature `try`
-
-##### Derivations
-
-[⬇️ feature `try_raise|try_except`](#feature-try_raisetry_except)  
-
-##### Specification
-
-```re
-           ^(.*)/_type=Try
-\n(?:\1.+\n)* \1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)* \1/.*/_pos=(?P<POS>.+)
-```
-
-##### Example
-
-```python
-1   try:
-2       try:
-3           raise e1
-4       except e1:
-5           raise e2
-6   except e2:
-7       pass
-```
-
-##### Matches
-
-| Label | Lines |
-|:--|:--|
-| `try` | 1-7, 2-5 |
 
 --------------------------------------------------------------------------------
 
@@ -5377,8 +5214,8 @@ WHERE l2.span IS NULL
 ##### Derivations
 
 [⬆️ feature `except`](#feature-except)  
+[⬆️ feature `node`](#feature-node)  
 [⬆️ feature `raise`](#feature-raise)  
-[⬆️ feature `try`](#feature-try)  
 
 ##### Specification
 
@@ -5387,9 +5224,10 @@ SELECT "try_" || e.name_prefix,
        e.name_suffix,
        max(t.span_start) || "-" || min(t.span_end),
        max(t.path)
-FROM t_try t
+FROM t_node t
 JOIN t e ON (e.path GLOB t.path || "*-")
-WHERE e.name_prefix IN ("raise",
+WHERE t.name_suffix = "Try"
+  AND e.name_prefix IN ("raise",
                         "except")
 GROUP BY e.rowid
 ```
