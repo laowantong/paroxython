@@ -40,7 +40,7 @@ applied on them during the execution of the pipeline (see <code><a title="paroxy
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L0-L594" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L0-L606" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">from collections import Counter as counter
 from collections import defaultdict
@@ -142,9 +142,11 @@ class ProgramFilter:
 
     # Update the state of the filter by applying set operations with the given programs or taxa.
 
-    def update_filter(self, data: List[Criterion], operation: Operation, quantifier: str) -&gt; None:
+    def update_filter(
+        self, criteria: List[Criterion], operation: Operation, quantifier: str
+    ) -&gt; None:
         if operation in (&#34;impart&#34;, &#34;hide&#34;):
-            patterns = [str(datum) for datum in data]
+            patterns = [str(criterion) for criterion in criteria]
             (program_set, taxon_set) = self.programs_and_taxa_of_patterns(patterns)
             if operation == &#34;impart&#34;:
                 self.exclude_programs(program_set, follow=False)
@@ -152,43 +154,46 @@ class ProgramFilter:
             else:
                 self.hidden_taxa.update(taxon_set)
         else:
-            program_bag = self.programs_of_criteria(data, follow=(operation == &#34;exclude&#34;))
+            program_bag = self.programs_of_criteria(criteria, follow=(operation == &#34;exclude&#34;))
             if quantifier == &#34;all&#34;:
-                program_bag -= counter({program: len(data) - 1 for program in program_bag})
+                program_bag -= counter({program: len(criteria) - 1 for program in program_bag})
             if operation == &#34;include&#34;:
                 self.include_programs(set(program_bag))
             else:  # necessarily &#34;exclude&#34;
                 self.exclude_programs(set(program_bag), follow=True)
 
-    def programs_and_taxa_of_patterns(self, data: List[str]) -&gt; Tuple[ProgramNameSet, TaxonNameSet]:
+    def programs_and_taxa_of_patterns(
+        self, patterns: List[str]
+    ) -&gt; Tuple[ProgramNameSet, TaxonNameSet]:
         resulting_taxa: TaxonNameSet = set()
         resulting_programs: ProgramNameSet = set()
-        for datum in data:
-            if datum.endswith(&#34;.py&#34;):
-                programs = self.programs_of_pattern(datum)
+        for pattern in patterns:
+            if pattern.endswith(&#34;.py&#34;):
+                programs = self.programs_of_pattern(pattern)
                 taxa = self.taxa_of_programs(programs, follow=False)
                 resulting_programs.update(programs)
             else:
-                taxa = self.taxa_of_pattern(datum)
+                taxa = self.taxa_of_pattern(pattern)
             resulting_taxa.update(taxa)
         return (resulting_programs, resulting_taxa)
 
-    def programs_of_criteria(self, data: List[Criterion], follow: bool) -&gt; Counter[ProgramName]:
+    def programs_of_criteria(self, criteria: List[Criterion], follow: bool) -&gt; Counter[ProgramName]:
         resulting_programs: Counter[ProgramName] = counter()
-        for datum in data:
-            if isinstance(datum, str):
-                if datum.endswith(&#34;.py&#34;):
-                    programs = self.programs_of_pattern(datum)
-                else:
-                    programs = self.programs_of_taxa(self.taxa_of_pattern(datum), follow=follow)
+        for criterion in criteria:
+            if isinstance(criterion, str):  # the criterion is a pattern
+                if criterion.endswith(&#34;.py&#34;):  # the pattern is a program pattern
+                    programs = self.programs_of_pattern(criterion)
+                else:  # the pattern is a label pattern
+                    taxa = self.taxa_of_pattern(criterion)
+                    programs = self.programs_of_taxa(taxa, follow=follow)
                 resulting_programs.update(programs)
-            elif isinstance(datum, (list, tuple)) and len(datum) == 3:
-                (pattern_1, raw_predicate, pattern_2) = datum
+            elif isinstance(criterion, (list, tuple)) and len(criterion) == 3:
+                (pattern_1, raw_predicate, pattern_2) = criterion
                 (predicate, negated) = normalize_predicate(raw_predicate)
                 function = self.programs_of_negated_triple if negated else self.programs_of_triple
                 resulting_programs.update(function(pattern_1, predicate, pattern_2))
             else:
-                print_warning(f&#34;datum {repr(datum)} cannot be included or excluded.&#34;)
+                print_warning(f&#34;criterion {repr(criterion)} cannot be included or excluded.&#34;)
         return resulting_programs
 
     def impart_taxa(self, taxa: TaxonNameSet) -&gt; None:
@@ -313,7 +318,7 @@ class ProgramFilter:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L49-L568" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L49-L580" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">class ProgramFilter:
 
@@ -385,9 +390,11 @@ class ProgramFilter:
 
     # Update the state of the filter by applying set operations with the given programs or taxa.
 
-    def update_filter(self, data: List[Criterion], operation: Operation, quantifier: str) -&gt; None:
+    def update_filter(
+        self, criteria: List[Criterion], operation: Operation, quantifier: str
+    ) -&gt; None:
         if operation in (&#34;impart&#34;, &#34;hide&#34;):
-            patterns = [str(datum) for datum in data]
+            patterns = [str(criterion) for criterion in criteria]
             (program_set, taxon_set) = self.programs_and_taxa_of_patterns(patterns)
             if operation == &#34;impart&#34;:
                 self.exclude_programs(program_set, follow=False)
@@ -395,43 +402,46 @@ class ProgramFilter:
             else:
                 self.hidden_taxa.update(taxon_set)
         else:
-            program_bag = self.programs_of_criteria(data, follow=(operation == &#34;exclude&#34;))
+            program_bag = self.programs_of_criteria(criteria, follow=(operation == &#34;exclude&#34;))
             if quantifier == &#34;all&#34;:
-                program_bag -= counter({program: len(data) - 1 for program in program_bag})
+                program_bag -= counter({program: len(criteria) - 1 for program in program_bag})
             if operation == &#34;include&#34;:
                 self.include_programs(set(program_bag))
             else:  # necessarily &#34;exclude&#34;
                 self.exclude_programs(set(program_bag), follow=True)
 
-    def programs_and_taxa_of_patterns(self, data: List[str]) -&gt; Tuple[ProgramNameSet, TaxonNameSet]:
+    def programs_and_taxa_of_patterns(
+        self, patterns: List[str]
+    ) -&gt; Tuple[ProgramNameSet, TaxonNameSet]:
         resulting_taxa: TaxonNameSet = set()
         resulting_programs: ProgramNameSet = set()
-        for datum in data:
-            if datum.endswith(&#34;.py&#34;):
-                programs = self.programs_of_pattern(datum)
+        for pattern in patterns:
+            if pattern.endswith(&#34;.py&#34;):
+                programs = self.programs_of_pattern(pattern)
                 taxa = self.taxa_of_programs(programs, follow=False)
                 resulting_programs.update(programs)
             else:
-                taxa = self.taxa_of_pattern(datum)
+                taxa = self.taxa_of_pattern(pattern)
             resulting_taxa.update(taxa)
         return (resulting_programs, resulting_taxa)
 
-    def programs_of_criteria(self, data: List[Criterion], follow: bool) -&gt; Counter[ProgramName]:
+    def programs_of_criteria(self, criteria: List[Criterion], follow: bool) -&gt; Counter[ProgramName]:
         resulting_programs: Counter[ProgramName] = counter()
-        for datum in data:
-            if isinstance(datum, str):
-                if datum.endswith(&#34;.py&#34;):
-                    programs = self.programs_of_pattern(datum)
-                else:
-                    programs = self.programs_of_taxa(self.taxa_of_pattern(datum), follow=follow)
+        for criterion in criteria:
+            if isinstance(criterion, str):  # the criterion is a pattern
+                if criterion.endswith(&#34;.py&#34;):  # the pattern is a program pattern
+                    programs = self.programs_of_pattern(criterion)
+                else:  # the pattern is a label pattern
+                    taxa = self.taxa_of_pattern(criterion)
+                    programs = self.programs_of_taxa(taxa, follow=follow)
                 resulting_programs.update(programs)
-            elif isinstance(datum, (list, tuple)) and len(datum) == 3:
-                (pattern_1, raw_predicate, pattern_2) = datum
+            elif isinstance(criterion, (list, tuple)) and len(criterion) == 3:
+                (pattern_1, raw_predicate, pattern_2) = criterion
                 (predicate, negated) = normalize_predicate(raw_predicate)
                 function = self.programs_of_negated_triple if negated else self.programs_of_triple
                 resulting_programs.update(function(pattern_1, predicate, pattern_2))
             else:
-                print_warning(f&#34;datum {repr(datum)} cannot be included or excluded.&#34;)
+                print_warning(f&#34;criterion {repr(criterion)} cannot be included or excluded.&#34;)
         return resulting_programs
 
     def impart_taxa(self, taxa: TaxonNameSet) -&gt; None:
@@ -731,7 +741,7 @@ featuring at least one taxon. Defaults to <code>False</code>.</dd>
 </details>
 </dd>
 <dt id="paroxython.filter_programs.ProgramFilter.update_filter"><code class="name flex">
-<span>def <span class="ident">update_filter</span></span>(<span>self, <br>data: List[Union[str, Tuple[str, str, str]]], <br>operation: Operation, <br>quantifier: str<br>) ‑> NoneType</span>
+<span>def <span class="ident">update_filter</span></span>(<span>self, <br>criteria: List[Union[str, Tuple[str, str, str]]], <br>operation: Operation, <br>quantifier: str<br>) ‑> NoneType</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Update the selected programs and/or impart the associated taxa and/or mark them as hidden.</p>
@@ -750,7 +760,7 @@ featuring at least one taxon. Defaults to <code>False</code>.</dd>
 </li>
 <li>Otherwise (the operation is either <code>"include"</code> or <code>"exclude"</code>):<ul>
 <li>calculate the appropriate bag of programs: this bag counts, for each program,
-the number of criteria they meet (maximum: size of <code>data</code>);</li>
+the number of criteria they meet (maximum: size of <code>criteria</code>);</li>
 <li>if <code>quantifier</code> is <code>"all"</code>, remove from this bag all programs which do not
 meet at least one criterion;</li>
 <li>include or exclude the resulting programs. Note that the <code>"exclude"</code> operation
@@ -762,7 +772,7 @@ are excluded too.</li>
 </ul>
 <h2 id="args">Args</h2>
 <dl>
-<dt><strong><code>data</code></strong> :&ensp;<code>List[Criterion]</code></dt>
+<dt><strong><code>criteria</code></strong> :&ensp;<code>List[Criterion]</code></dt>
 <dd>A list of criteria, <em>i.e.</em>, a mix of regular expression
 patterns (strings) and/or predicates (triples).</dd>
 <dt><strong><code>operation</code></strong> :&ensp;<code>Operation</code></dt>
@@ -773,11 +783,13 @@ patterns (strings) and/or predicates (triples).</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L200-L242" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L200-L244" class="git-link">Browse GitHub</a>
 </summary>
-<pre><code class="python">def update_filter(self, data: List[Criterion], operation: Operation, quantifier: str) -&gt; None:
+<pre><code class="python">def update_filter(
+    self, criteria: List[Criterion], operation: Operation, quantifier: str
+) -&gt; None:
     if operation in (&#34;impart&#34;, &#34;hide&#34;):
-        patterns = [str(datum) for datum in data]
+        patterns = [str(criterion) for criterion in criteria]
         (program_set, taxon_set) = self.programs_and_taxa_of_patterns(patterns)
         if operation == &#34;impart&#34;:
             self.exclude_programs(program_set, follow=False)
@@ -785,9 +797,9 @@ patterns (strings) and/or predicates (triples).</dd>
         else:
             self.hidden_taxa.update(taxon_set)
     else:
-        program_bag = self.programs_of_criteria(data, follow=(operation == &#34;exclude&#34;))
+        program_bag = self.programs_of_criteria(criteria, follow=(operation == &#34;exclude&#34;))
         if quantifier == &#34;all&#34;:
-            program_bag -= counter({program: len(data) - 1 for program in program_bag})
+            program_bag -= counter({program: len(criteria) - 1 for program in program_bag})
         if operation == &#34;include&#34;:
             self.include_programs(set(program_bag))
         else:  # necessarily &#34;exclude&#34;
@@ -795,12 +807,12 @@ patterns (strings) and/or predicates (triples).</dd>
 </details>
 </dd>
 <dt id="paroxython.filter_programs.ProgramFilter.programs_and_taxa_of_patterns"><code class="name flex">
-<span>def <span class="ident">programs_and_taxa_of_patterns</span></span>(<span>self, <br>data: List[str]<br>) ‑> Tuple[Set[ProgramName], Set[TaxonName]]</span>
+<span>def <span class="ident">programs_and_taxa_of_patterns</span></span>(<span>self, <br>patterns: List[str]<br>) ‑> Tuple[Set[ProgramName], Set[TaxonName]]</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Calculate the sets of programs and taxa matching at least one of the data patterns.</p>
+<div class="desc"><p>Calculate the sets of programs and taxa matching at least one of the patterns.</p>
 <h2 id="description">Description</h2>
-<p>Each data criterion is a string which is interpreted either as:</p>
+<p>Each pattern is a string which is interpreted either as:</p>
 <ul>
 <li>a program name pattern (ending with <code>".py"</code>). All programs matching it are accumulated
 in the result, along with any taxon they feature, directly or by importation;</li>
@@ -808,7 +820,7 @@ in the result, along with any taxon they feature, directly or by importation;</l
 </ul>
 <h2 id="args">Args</h2>
 <dl>
-<dt><strong><code>data</code></strong> :&ensp;<code>List[str]</code></dt>
+<dt><strong><code>patterns</code></strong> :&ensp;<code>List[str]</code></dt>
 <dd>A list of regular expression patterns (strings).</dd>
 </dl>
 <h2 id="returns">Returns</h2>
@@ -819,29 +831,31 @@ in the result, along with any taxon they feature, directly or by importation;</l
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L244-L270" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L246-L274" class="git-link">Browse GitHub</a>
 </summary>
-<pre><code class="python">def programs_and_taxa_of_patterns(self, data: List[str]) -&gt; Tuple[ProgramNameSet, TaxonNameSet]:
+<pre><code class="python">def programs_and_taxa_of_patterns(
+    self, patterns: List[str]
+) -&gt; Tuple[ProgramNameSet, TaxonNameSet]:
     resulting_taxa: TaxonNameSet = set()
     resulting_programs: ProgramNameSet = set()
-    for datum in data:
-        if datum.endswith(&#34;.py&#34;):
-            programs = self.programs_of_pattern(datum)
+    for pattern in patterns:
+        if pattern.endswith(&#34;.py&#34;):
+            programs = self.programs_of_pattern(pattern)
             taxa = self.taxa_of_programs(programs, follow=False)
             resulting_programs.update(programs)
         else:
-            taxa = self.taxa_of_pattern(datum)
+            taxa = self.taxa_of_pattern(pattern)
         resulting_taxa.update(taxa)
     return (resulting_programs, resulting_taxa)</code></pre>
 </details>
 </dd>
 <dt id="paroxython.filter_programs.ProgramFilter.programs_of_criteria"><code class="name flex">
-<span>def <span class="ident">programs_of_criteria</span></span>(<span>self, <br>data: List[Union[str, Tuple[str, str, str]]], <br>follow: bool<br>) ‑> Counter[ProgramName]</span>
+<span>def <span class="ident">programs_of_criteria</span></span>(<span>self, <br>criteria: List[Union[str, Tuple[str, str, str]]], <br>follow: bool<br>) ‑> Counter[ProgramName]</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Calculate the set of programs that meet at least one of the data criteria.</p>
+<div class="desc"><p>Calculate the set of programs that meet at least one of the criteria criteria.</p>
 <h2 id="description">Description</h2>
-<p>Each data criterion may be either:</p>
+<p>Each criteria criterion may be either:</p>
 <ul>
 <li>a string, which will be interpreted either as:<ul>
 <li>a program name pattern (ending with <code>".py"</code>). All programs matching it are
@@ -859,12 +873,12 @@ and an ”object” pattern. This predicate is normalized and, depending on its
 </ul>
 <h2 id="args">Args</h2>
 <dl>
-<dt><strong><code>data</code></strong> :&ensp;<code>List[Criterion]</code></dt>
-<dd>A list of criteria, <em>i.e.</em>, a mix of regular expression patterns
-(strings) and/or predicates (triples).</dd>
+<dt><strong><code>criteria</code></strong> :&ensp;<code>List[Criterion]</code></dt>
+<dd>A list of criteria, <em>i.e.</em>, a mix of regular expression
+patterns (strings) and/or predicates (triples).</dd>
 <dt><strong><code>follow</code></strong> :&ensp;<code>bool</code></dt>
 <dd>If <code>True</code>, extend the result with all the programs which import (either
-directly or by transitivity) at least one program meeting a data criterion.</dd>
+directly or by transitivity) at least one program meeting a criterion.</dd>
 </dl>
 <h2 id="returns">Returns</h2>
 <dl>
@@ -875,24 +889,25 @@ of criteria it meets.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L272-L315" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L276-L320" class="git-link">Browse GitHub</a>
 </summary>
-<pre><code class="python">def programs_of_criteria(self, data: List[Criterion], follow: bool) -&gt; Counter[ProgramName]:
+<pre><code class="python">def programs_of_criteria(self, criteria: List[Criterion], follow: bool) -&gt; Counter[ProgramName]:
     resulting_programs: Counter[ProgramName] = counter()
-    for datum in data:
-        if isinstance(datum, str):
-            if datum.endswith(&#34;.py&#34;):
-                programs = self.programs_of_pattern(datum)
-            else:
-                programs = self.programs_of_taxa(self.taxa_of_pattern(datum), follow=follow)
+    for criterion in criteria:
+        if isinstance(criterion, str):  # the criterion is a pattern
+            if criterion.endswith(&#34;.py&#34;):  # the pattern is a program pattern
+                programs = self.programs_of_pattern(criterion)
+            else:  # the pattern is a label pattern
+                taxa = self.taxa_of_pattern(criterion)
+                programs = self.programs_of_taxa(taxa, follow=follow)
             resulting_programs.update(programs)
-        elif isinstance(datum, (list, tuple)) and len(datum) == 3:
-            (pattern_1, raw_predicate, pattern_2) = datum
+        elif isinstance(criterion, (list, tuple)) and len(criterion) == 3:
+            (pattern_1, raw_predicate, pattern_2) = criterion
             (predicate, negated) = normalize_predicate(raw_predicate)
             function = self.programs_of_negated_triple if negated else self.programs_of_triple
             resulting_programs.update(function(pattern_1, predicate, pattern_2))
         else:
-            print_warning(f&#34;datum {repr(datum)} cannot be included or excluded.&#34;)
+            print_warning(f&#34;criterion {repr(criterion)} cannot be included or excluded.&#34;)
     return resulting_programs</code></pre>
 </details>
 </dd>
@@ -911,7 +926,7 @@ instance, imparting a taxon <code>a/b/c</code>, will impart taxa <code>a</code> 
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L317-L330" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L322-L335" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def impart_taxa(self, taxa: TaxonNameSet) -&gt; None:
     for taxon in taxa:
@@ -936,7 +951,7 @@ filtered out.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L332-L340" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L337-L345" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def include_programs(self, programs: ProgramNameSet) -&gt; None:
     self.selected_programs.intersection_update(programs)</code></pre>
@@ -958,7 +973,7 @@ by transitivity) at least one member of the given <code>programs</code>.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L342-L353" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L347-L358" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def exclude_programs(self, programs: ProgramNameSet, follow: bool) -&gt; None:
     self.selected_programs.difference_update(programs)
@@ -993,7 +1008,7 @@ span <code>s_2</code> of <code>taxon_2</code> for which <code>predicate(s_1, s_2
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L357-L390" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L362-L395" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def programs_of_triple(
     # fmt: off
@@ -1021,37 +1036,35 @@ span <code>s_2</code> of <code>taxon_2</code> for which <code>predicate(s_1, s_2
 <span>def <span class="ident">programs_of_negated_triple</span></span>(<span>self, <br>taxon_pattern_1: str, <br>predicate: Callable[[int, int], bool], <br>taxon_pattern_2: str<br>) ‑> Set[ProgramName]</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Return the programs where at least one occurrence of two taxa violates the predicate.</p>
+<div class="desc"><p>Return the programs where the given predicate is not satisfied.</p>
 <h2 id="args">Args</h2>
 <p>The same arguments as <code><a title="paroxython.filter_programs.ProgramFilter.programs_of_triple" href="#paroxython.filter_programs.ProgramFilter.programs_of_triple">ProgramFilter.programs_of_triple()</a></code>, including the fact that the
 predicate is expressed in <strong>positive</strong> form.</p>
 <h2 id="returns">Returns</h2>
 <dl>
 <dt><code>ProgramNameSet</code></dt>
-<dd>The programs such that, for each span <code>s_1</code> of <code>taxon_1</code>, there
-exists no span <code>s_2</code> of <code>taxon_2</code> for which <code>predicate(s_1, s_2)</code> is verified.</dd>
+<dd>The sets of programs which feature at least one taxon matching
+<code>taxon_pattern_1</code>, and such that, for any
+span <code>s_1</code> of such a taxon, there exists
+no span <code>s_2</code> of a taxon matching <code>taxon_pattern_2</code> for which <code>predicate(s_1, s_2)</code>
+is verified.</dd>
 </dl>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>Returns also all programs featuring at least one <code>taxon_1</code>, but no <code>taxon_2</code>. Indeed,
-suppose the user wants to exclude all the programs featuring at least one tuple which
-is not used in a parallel assignment. Let us call the two types of tuples “ordinary”
-and “parallel”. This function will return a set of programs where:</p>
-<ul>
-<li>there is at least one tuple, but no parallel tuple (<em>i.e.</em>, all tuples are ordinary);</li>
-<li>or there is at least one ordinary tuple (<em>i.e.</em>, one tuple which is not parallel).</li>
-</ul>
-<p>Excluding these two sets keeps only the programs where:</p>
-<ul>
-<li>there is no tuple;</li>
-<li>or all tuples are parallel.</li>
-</ul>
-<p>If, in the first stage, the function did not return the programs featuring at least one
-tuple, but no parallel tuple, the second stage would exclude all the programs featuring
-no tuple, which would certainly not correspond to the user's intention.</p>
+<p>Note that the result includes all programs featuring at least one taxon matching
+<code>taxon_pattern_1</code>, but no taxon matching <code>taxon_pattern_2</code>. For instance, suppose the
+original (negative) triple is:</p>
+<p><code>("subroutine", "not contains", "variable/assignment")</code></p>
+<p>The function will return the (disjoint) union of these two sets:</p>
+<ol>
+<li>The programs featuring at least one subroutine, but no assignment at all.</li>
+<li>The programs featuring some subroutines, some assignments, but no assignment
+inside a subroutine.</li>
+</ol>
 </div>
 <h2 id="examples">Examples</h2>
-<p>If the predicate is <code>"taxon_1 not inside taxon_2"</code>, any program consisting in:</p>
+<p>If the original (negative) predicate is <code>"taxon_pattern_1 not inside taxon_pattern_2"</code>,
+any program consisting in:</p>
 <ul>
 <li><code>"taxon_2{taxon_1}"</code><sup id="fnref:braces"><a class="footnote-ref" href="#fn:braces" rel="footnote">1</a></sup> is rejected;</li>
 <li><code>"taxon_1"</code> is <strong>accepted</strong> (although there is no <code>taxon_2</code>);</li>
@@ -1061,7 +1074,8 @@ no tuple, which would certainly not correspond to the user's intention.</p>
 that <code>taxon_1</code> is not inside <code>taxon_2</code>);</li>
 <li><code>"taxon_1 taxon_2{taxon_1} taxon_2{}"</code> is accepted.</li>
 </ul>
-<p>If the predicate is <code>"taxon_2 not contains taxon_1"</code> (sic), any program consisting in:</p>
+<p>If the predicate is <code>"taxon_pattern_2 not contains taxon_pattern_1"</code> (sic), any program
+consisting in:</p>
 <ul>
 <li><code>"taxon_2{taxon_1}"</code> is rejected;</li>
 <li><code>"taxon_1"</code> is <strong>rejected</strong> (no <code>taxon_2</code>);</li>
@@ -1071,8 +1085,13 @@ that <code>taxon_1</code> is not inside <code>taxon_2</code>);</li>
 that <code>taxon_2</code> does not contain <code>taxon_1</code>);</li>
 <li><code>"taxon_1 taxon_2{taxon_1} taxon_2{}"</code> is accepted.</li>
 </ul>
-<p>Note that, due to the rule explained in the warning above, <code>"taxon_1 not inside taxon_2"</code>
-is not strictly equivalent to <code>"taxon_2 not contains taxon_1"</code>.</p>
+<p>Note that, due to the rule explained in the warning above,
+<code>"taxon_pattern_1 not inside taxon_pattern_2"</code>
+is not equivalent to
+<code>"taxon_pattern_2 not contains taxon_pattern_1"</code>
+(differences in <strong>bold</strong>).</p>
+<p>However, if <code>taxon_pattern_2</code> is <code>"metadata/program"</code>, which is featured by all
+programs, these two forms become equivalent again.</p>
 <div class="footnote">
 <hr>
 <ol>
@@ -1085,7 +1104,7 @@ certain taxon is included in that of another taxon.&#160;<a class="footnote-back
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L392-L469" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L397-L481" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def programs_of_negated_triple(
     # fmt: off
@@ -1202,7 +1221,7 @@ for <code>((1, 1), (1, 1))</code>):</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L471-L568" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L483-L580" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def iterate_on_spans(
     # fmt: off

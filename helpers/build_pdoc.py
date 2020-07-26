@@ -53,14 +53,15 @@ def generate_html():
 
     base_path = Path("docs")
 
-    for directory_name in ("cli",):
+    directory_names = ("cli", "docs_user_manual", "docs_developer_manual")
+    for directory_name in directory_names:
         path = base_path / directory_name
         if path.is_dir():
             shutil.rmtree(path)
 
     subprocess.run(f"pdoc {pdoc_options} paroxython", shell=True)
 
-    subprocess.run(f"mv docs/paroxython/* docs; rmdir docs/paroxython/", shell=True)
+    subprocess.run(f"mv -f docs/paroxython/* docs; rmdir docs/paroxython/", shell=True)
 
 
 def resolve_new_types():
@@ -176,6 +177,47 @@ def compute_stats():
     readme_path.write_text(readme_text)
 
 
+def patch_prose():
+    index_path = Path("docs/index.html")
+    index_text = index_path.read_text()
+    for title in ("cli", "User manual", "Developer manual"):
+        slug = title if title == "cli" else "docs_" + title.lower().replace(" ", "_")
+        path = Path("docs") / slug / "index.html"
+        text = path.read_text()
+        if title != "cli":
+            (text, n) = regex.subn(
+                f"""<h1 class="title">Module <code>paroxython.{slug}</code></h1>""",
+                f"""<h1 class="title">{title}</h1>""",
+                text,
+            )
+            assert n == 1, f"Unable to change the title of {slug}!"
+            (text, n) = regex.subn(f"<h1>Index</h1>", f"<h1>{title}</h1>", text,)
+            assert n == 1, f"Unable to change the title of {slug} in nav!"
+            (text, n) = regex.subn(fr"""(?s)</div>\n<ul id="index">.+</ul>\n""", "", text)
+            assert n == 1, f"Unable to suppress the index section in prose {slug}'s nav!"
+            href = title.lower().replace(" ", "-")
+            (index_text, n) = regex.subn(f"#{href}", f"{slug}/index.html", index_text)
+            assert n == 1, f"Unable to patch main url for {slug}!"
+            (index_text, n) = regex.subn(f"""<h1 id="{href}".+\n""", "", index_text)
+            assert n == 1, f"Unable to remove section title for {slug}!"
+            (index_text, n) = regex.subn(
+                fr"""<li><code><a title="paroxython.{slug}".+\n""", "", index_text
+            )
+            assert n == 1, f"Unable to remove nav url for {slug}!"
+            (index_text, n) = regex.subn(
+                fr"""(?s)<dt><code class="name"><a title="paroxython\.{slug}".+?</dd>\n""",
+                "",
+                index_text,
+            )
+            assert n == 1, f"Unable to remove module section for {slug}!"
+        (text, n) = regex.subn(fr"""(?s)<details class="source">.+</details>\n""", "", text)
+        assert n == 1, f"Unable to suppress the source code in prose {slug}!"
+        (text, n) = regex.subn("""href="index.html">""", """href="../index.html">""", text,)
+        assert n == 1, f"Unable to patch the Home url in {slug}!"
+        path.write_text(text)
+        index_path.write_text(index_text)
+
+
 def main():
     update_readme_example()
     generate_html()
@@ -185,6 +227,7 @@ def main():
     embed_code_with_line_numbers()
     cleanup_index()
     insert_line_breaks()
+    patch_prose()
     compute_stats()
 
 

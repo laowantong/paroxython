@@ -22,7 +22,7 @@ def labelled_programs(
         search_imported_program_name (Callable, optional): A function taking a label name and, in
             the case it starts with `"import:"` or `"import_module:"`, returns a match object
             whose first group is the name of the imported program.
-            [Not to be explicitly provided.](index.html#default-argument-trick)
+            [Not to be explicitly provided.](docs_developer_manual/index.html#default-argument-trick)
         **kwargs: May include the keyword arguments `cleanup_strategy`, `skip_pattern`,
             `glob_pattern`, transmitted to `paroxython.list_programs.list_programs`.
     Note:

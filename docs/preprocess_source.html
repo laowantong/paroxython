@@ -268,7 +268,7 @@ first line and close on the last line.</p>
 </ul>
 <p>All examples above automatically extracted from
 <a href="https://github.com/laowantong/paroxython/blob/master/tests/test_centrifugate_hints.py">test_centrifugate_hints.py</a>.</p>
-<p>Argument <code>match_isolated_hints</code> <a href="index.html#default-argument-trick">not to be explicitly provided.</a></p></div>
+<p>Argument <code>match_isolated_hints</code> <a href="docs_developer_manual/index.html#default-argument-trick">not to be explicitly provided.</a></p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -311,7 +311,7 @@ will later be used to tweak the labelling results obtained by static analysis.</
 <dd>A source code.</dd>
 <dt><strong><code>match_label</code></strong> :&ensp;<code>Callable</code>, optional</dt>
 <dd>A function matching a label composed of alphanumeric
-characters and colons. <a href="index.html#default-argument-trick">Not to be explicitly provided.</a></dd>
+characters and colons. <a href="docs_developer_manual/index.html#default-argument-trick">Not to be explicitly provided.</a></dd>
 </dl>
 <h2 id="raises">Raises</h2>
 <dl>
@@ -390,7 +390,7 @@ has manually added [resp. suppressed].</dd>
 </code></dt>
 <dd>
 <div class="desc"><p>Once they are collected, remove all Paroxython hints from the given source.</p>
-<p>Argument <code>sub_hints</code> <a href="index.html#default-argument-trick">not to be explicitly provided.</a></p></div>
+<p>Argument <code>sub_hints</code> <a href="docs_developer_manual/index.html#default-argument-trick">not to be explicitly provided.</a></p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -598,7 +598,7 @@ def full_cleaning(source: Source) -&gt; Source:
 </code></dt>
 <dd>
 <div class="desc"><p>Replace all comments placed on the first lines of the source code.</p>
-<p>Argument <code>sub</code> <a href="index.html#default-argument-trick">not to be explicitly provided.</a></p></div>
+<p>Argument <code>sub</code> <a href="docs_developer_manual/index.html#default-argument-trick">not to be explicitly provided.</a></p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -616,7 +616,7 @@ def suppress_first_comments(
 </code></dt>
 <dd>
 <div class="desc"><p>Suppress <code>if __name__ == '__main__'</code> part.</p>
-<p>Argument <code>sub</code> <a href="index.html#default-argument-trick">not to be explicitly provided.</a></p></div>
+<p>Argument <code>sub</code> <a href="docs_developer_manual/index.html#default-argument-trick">not to be explicitly provided.</a></p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -636,7 +636,7 @@ def suppress_main_guard(
 <div class="desc"><p>Replace and count all the hint comment strings, made space- and case-insensitive.</p>
 <p>For instance, if <code>HINT_COMMENT</code> is <code>"# paroxython:"</code> (its default value), the actual search
 pattern will be <code>r"(?i)#\s*paroxython\s*:\s*"</code>.</p>
-<p>Argument <code>subn</code> <a href="index.html#default-argument-trick">not to be explicitly provided.</a></p></div>
+<p>Argument <code>subn</code> <a href="docs_developer_manual/index.html#default-argument-trick">not to be explicitly provided.</a></p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -658,7 +658,7 @@ def normalize_paroxython_comments(
 </code></dt>
 <dd>
 <div class="desc"><p>Suppress all empty or blank lines in the given source.</p>
-<p>Argument <code>sub</code> <a href="index.html#default-argument-trick">not to be explicitly provided.</a></p></div>
+<p>Argument <code>sub</code> <a href="docs_developer_manual/index.html#default-argument-trick">not to be explicitly provided.</a></p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -674,7 +674,7 @@ def suppress_blank_lines(source: str, sub: Callable = regex.compile(r&#34;\s*\n&
 </code></dt>
 <dd>
 <div class="desc"><p>Suppress all <code>pass</code> statements followed by a line with a same level of indentation.</p>
-<p>Argument <code>sub</code> <a href="index.html#default-argument-trick">not to be explicitly provided.</a></p></div>
+<p>Argument <code>sub</code> <a href="docs_developer_manual/index.html#default-argument-trick">not to be explicitly provided.</a></p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>

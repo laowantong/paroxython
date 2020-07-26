@@ -384,7 +384,7 @@ and collect the names of the involved programs.</p>
 <dd>A function taking a label name and, in
 the case it starts with <code>"import_internally:"</code>, returns a match object whose
 first group is the name of the imported program.
-<a href="index.html#default-argument-trick">Not to be explicitly provided.</a></dd>
+<a href="docs_developer_manual/index.html#default-argument-trick">Not to be explicitly provided.</a></dd>
 </dl>
 <h2 id="returns">Returns</h2>
 <dl>
@@ -893,9 +893,9 @@ directory. Defaults to <code>None</code>.</dd>
 <h2 id="args">Args</h2>
 <dl>
 <dt><strong><code>db_path</code></strong> :&ensp;<code>Optional[Path]</code>, optional</dt>
-<dd>If not provided, and the directory provided to the
-class constructor is <code>"foobar"</code>, falls back to <code>"foobar_db.sqlite"</code> in the same
-parent directory. Defaults to <code>None</code>.</dd>
+<dd>The path of the SQLite database. If not provided,
+and the directory provided to the class constructor is <code>"foobar"</code>, falls back to
+<code>"foobar_db.sqlite"</code> in the same parent directory. Defaults to <code>None</code>.</dd>
 </dl>
 <h2 id="description">Description</h2>
 <p>The relational schema is as follows:</p>

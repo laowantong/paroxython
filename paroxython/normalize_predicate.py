@@ -48,7 +48,7 @@ def normalize_predicate(
         sub_one_y (Callable, optional): Function replacing isolated`"y"`.
 
     Note:
-        [No default argument to be explicitly provided.](index.html#default-argument-trick)
+        [No default argument to be explicitly provided.](docs_developer_manual/index.html#default-argument-trick)
 
     Raises:
         ValueError: Raised when the input string is malformed beyond recognition.

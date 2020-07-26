@@ -210,7 +210,7 @@ class Taxonomy:
                     that's a problem, it is always possible to force the interpretation of a pattern
                     as non-literal by enclosing it in parentheses.
 
-                [Not to be explicitly provided.](index.html#default-argument-trick)
+                [Not to be explicitly provided.](docs_developer_manual/index.html#default-argument-trick)
                 Defaults to `regex.compile(r"[\w:.]+").fullmatch`.
 
         Description:

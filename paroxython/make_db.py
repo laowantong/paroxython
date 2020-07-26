@@ -189,9 +189,9 @@ class Database:
         """Dump the constructed `Database` object as a SQLite database (experimental).
 
         Args:
-            db_path (Optional[Path], optional): If not provided, and the directory provided to the
-                class constructor is `"foobar"`, falls back to `"foobar_db.sqlite"` in the same
-                parent directory. Defaults to `None`.
+            db_path (Optional[Path], optional): The path of the SQLite database. If not provided,
+                and the directory provided to the class constructor is `"foobar"`, falls back to
+                `"foobar_db.sqlite"` in the same parent directory. Defaults to `None`.
 
         Description:
             The relational schema is as follows:
@@ -407,7 +407,7 @@ def compute_direct_importations(
         match_import (Callable, optional):  A function taking a label name and, in
             the case it starts with `"import_internally:"`, returns a match object whose
             first group is the name of the imported program.
-            [Not to be explicitly provided.](index.html#default-argument-trick)
+            [Not to be explicitly provided.](docs_developer_manual/index.html#default-argument-trick)
 
     Returns:
         ProgramToPrograms: A dictionary mapping every program name to the list of the names of

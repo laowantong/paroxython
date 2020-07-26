@@ -159,7 +159,7 @@ class Cleanup:
     ) -> str:
         """Replace all comments placed on the first lines of the source code.
 
-        Argument `sub` [not to be explicitly provided.](index.html#default-argument-trick)
+        Argument `sub` [not to be explicitly provided.](docs_developer_manual/index.html#default-argument-trick)
         """
         return sub("", source)
 
@@ -169,7 +169,7 @@ class Cleanup:
     ) -> str:
         """Suppress `if __name__ == '__main__'` part.
 
-        Argument `sub` [not to be explicitly provided.](index.html#default-argument-trick)
+        Argument `sub` [not to be explicitly provided.](docs_developer_manual/index.html#default-argument-trick)
         """
         return sub("", source)
 
@@ -186,7 +186,7 @@ class Cleanup:
         For instance, if `HINT_COMMENT` is `"# paroxython:"` (its default value), the actual search
         pattern will be `r"(?i)#\s*paroxython\s*:\s*"`.
 
-        Argument `subn` [not to be explicitly provided.](index.html#default-argument-trick)
+        Argument `subn` [not to be explicitly provided.](docs_developer_manual/index.html#default-argument-trick)
         """
         return subn(f"{HINT_COMMENT} ", source)
 
@@ -194,7 +194,7 @@ class Cleanup:
     def suppress_blank_lines(source: str, sub: Callable = regex.compile(r"\s*\n").sub) -> str:
         """Suppress all empty or blank lines in the given source.
 
-        Argument `sub` [not to be explicitly provided.](index.html#default-argument-trick)
+        Argument `sub` [not to be explicitly provided.](docs_developer_manual/index.html#default-argument-trick)
         """
         return sub("\n", source)
 
@@ -204,7 +204,7 @@ class Cleanup:
     ) -> str:
         """Suppress all `pass` statements followed by a line with a same level of indentation.
 
-        Argument `sub` [not to be explicitly provided.](index.html#default-argument-trick)
+        Argument `sub` [not to be explicitly provided.](docs_developer_manual/index.html#default-argument-trick)
         """
         return sub(r"\1", source)
 
@@ -230,7 +230,7 @@ def centrifugate_hints(
         All examples above automatically extracted from
         [test_centrifugate_hints.py](https://github.com/laowantong/paroxython/blob/master/tests/test_centrifugate_hints.py).
 
-        Argument `match_isolated_hints` [not to be explicitly provided.](index.html#default-argument-trick)
+        Argument `match_isolated_hints` [not to be explicitly provided.](docs_developer_manual/index.html#default-argument-trick)
     """
     lines = []
     hints: Set[str] = set()
@@ -298,7 +298,7 @@ def collect_hints(
     Args:
         source (Source): A source code.
         match_label (Callable, optional): A function matching a label composed of alphanumeric
-            characters and colons. [Not to be explicitly provided.](index.html#default-argument-trick)
+            characters and colons. [Not to be explicitly provided.](docs_developer_manual/index.html#default-argument-trick)
 
     Raises:
         ValueError: Raised in various cases of malformed input.
@@ -365,6 +365,6 @@ def remove_hints(
 ) -> Source:
     """Once they are collected, remove all Paroxython hints from the given source.
 
-    Argument `sub_hints` [not to be explicitly provided.](index.html#default-argument-trick)
+    Argument `sub_hints` [not to be explicitly provided.](docs_developer_manual/index.html#default-argument-trick)
     """
     return Source(sub_hints("", source).strip())
