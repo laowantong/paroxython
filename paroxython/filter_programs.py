@@ -197,7 +197,9 @@ class ProgramFilter:
 
     # Update the state of the filter by applying set operations with the given programs or taxa.
 
-    def update_filter(self, data: List[Criterion], operation: Operation, quantifier: str) -> None:
+    def update_filter(
+        self, criteria: List[Criterion], operation: Operation, quantifier: str
+    ) -> None:
         """Update the selected programs and/or impart the associated taxa and/or mark them as hidden.
 
         Description:
@@ -210,7 +212,7 @@ class ProgramFilter:
                 - add these taxa to `self.hidden_taxa`.
             - Otherwise (the operation is either `"include"` or `"exclude"`):
                 - calculate the appropriate bag of programs: this bag counts, for each program,
-                    the number of criteria they meet (maximum: size of `data`);
+                    the number of criteria they meet (maximum: size of `criteria`);
                 - if `quantifier` is `"all"`, remove from this bag all programs which do not
                     meet at least one criterion;
                 - include or exclude the resulting programs. Note that the `"exclude"` operation
@@ -219,13 +221,13 @@ class ProgramFilter:
                     are excluded too.
 
         Args:
-            data (List[Criterion]): A list of criteria, _i.e._, a mix of regular expression
+            criteria (List[Criterion]): A list of criteria, _i.e._, a mix of regular expression
                 patterns (strings) and/or predicates (triples).
             operation (Operation): Either `"impart"`, `"hide"`, `"include"` or `"exclude"`.
             quantifier (str): Either `"any"` or `"all"`.
         """
         if operation in ("impart", "hide"):
-            patterns = [str(datum) for datum in data]
+            patterns = [str(criterion) for criterion in criteria]
             (program_set, taxon_set) = self.programs_and_taxa_of_patterns(patterns)
             if operation == "impart":
                 self.exclude_programs(program_set, follow=False)
@@ -233,47 +235,49 @@ class ProgramFilter:
             else:
                 self.hidden_taxa.update(taxon_set)
         else:
-            program_bag = self.programs_of_criteria(data, follow=(operation == "exclude"))
+            program_bag = self.programs_of_criteria(criteria, follow=(operation == "exclude"))
             if quantifier == "all":
-                program_bag -= counter({program: len(data) - 1 for program in program_bag})
+                program_bag -= counter({program: len(criteria) - 1 for program in program_bag})
             if operation == "include":
                 self.include_programs(set(program_bag))
             else:  # necessarily "exclude"
                 self.exclude_programs(set(program_bag), follow=True)
 
-    def programs_and_taxa_of_patterns(self, data: List[str]) -> Tuple[ProgramNameSet, TaxonNameSet]:
-        """Calculate the sets of programs and taxa matching at least one of the data patterns.
+    def programs_and_taxa_of_patterns(
+        self, patterns: List[str]
+    ) -> Tuple[ProgramNameSet, TaxonNameSet]:
+        """Calculate the sets of programs and taxa matching at least one of the patterns.
 
         Description:
-            Each data criterion is a string which is interpreted either as:
+            Each pattern is a string which is interpreted either as:
 
             - a program name pattern (ending with `".py"`). All programs matching it are accumulated
                 in the result, along with any taxon they feature, directly or by importation;
             - or a taxon name pattern. All taxa matching it are accumulated in the result.
 
         Args:
-            data (List[str]): A list of regular expression patterns (strings).
+            patterns (List[str]): A list of regular expression patterns (strings).
 
         Returns:
             Tuple[ProgramNameSet, TaxonNameSet]: The couple of accumulated programs and taxa.
         """
         resulting_taxa: TaxonNameSet = set()
         resulting_programs: ProgramNameSet = set()
-        for datum in data:
-            if datum.endswith(".py"):
-                programs = self.programs_of_pattern(datum)
+        for pattern in patterns:
+            if pattern.endswith(".py"):
+                programs = self.programs_of_pattern(pattern)
                 taxa = self.taxa_of_programs(programs, follow=False)
                 resulting_programs.update(programs)
             else:
-                taxa = self.taxa_of_pattern(datum)
+                taxa = self.taxa_of_pattern(pattern)
             resulting_taxa.update(taxa)
         return (resulting_programs, resulting_taxa)
 
-    def programs_of_criteria(self, data: List[Criterion], follow: bool) -> Counter[ProgramName]:
-        """Calculate the set of programs that meet at least one of the data criteria.
+    def programs_of_criteria(self, criteria: List[Criterion], follow: bool) -> Counter[ProgramName]:
+        """Calculate the set of programs that meet at least one of the criteria criteria.
 
         Description:
-            Each data criterion may be either:
+            Each criteria criterion may be either:
 
             - a string, which will be interpreted either as:
                 - a program name pattern (ending with `".py"`). All programs matching it are
@@ -288,30 +292,31 @@ class ProgramFilter:
                 `ProgramFilter.programs_of_negated_triple`.
 
         Args:
-            data (List[Criterion]): A list of criteria, _i.e._, a mix of regular expression patterns
-                (strings) and/or predicates (triples).
+            criteria (List[Criterion]): A list of criteria, _i.e._, a mix of regular expression
+                patterns (strings) and/or predicates (triples).
             follow (bool): If `True`, extend the result with all the programs which import (either
-                directly or by transitivity) at least one program meeting a data criterion.
+                directly or by transitivity) at least one program meeting a criterion.
 
         Returns:
             Counter[ProgramName]: A bag (multiset) counting, for each resulting program, the number
                 of criteria it meets.
         """
         resulting_programs: Counter[ProgramName] = counter()
-        for datum in data:
-            if isinstance(datum, str):
-                if datum.endswith(".py"):
-                    programs = self.programs_of_pattern(datum)
-                else:
-                    programs = self.programs_of_taxa(self.taxa_of_pattern(datum), follow=follow)
+        for criterion in criteria:
+            if isinstance(criterion, str):  # the criterion is a pattern
+                if criterion.endswith(".py"):  # the pattern is a program pattern
+                    programs = self.programs_of_pattern(criterion)
+                else:  # the pattern is a label pattern
+                    taxa = self.taxa_of_pattern(criterion)
+                    programs = self.programs_of_taxa(taxa, follow=follow)
                 resulting_programs.update(programs)
-            elif isinstance(datum, (list, tuple)) and len(datum) == 3:
-                (pattern_1, raw_predicate, pattern_2) = datum
+            elif isinstance(criterion, (list, tuple)) and len(criterion) == 3:
+                (pattern_1, raw_predicate, pattern_2) = criterion
                 (predicate, negated) = normalize_predicate(raw_predicate)
                 function = self.programs_of_negated_triple if negated else self.programs_of_triple
                 resulting_programs.update(function(pattern_1, predicate, pattern_2))
             else:
-                print_warning(f"datum {repr(datum)} cannot be included or excluded.")
+                print_warning(f"criterion {repr(criterion)} cannot be included or excluded.")
         return resulting_programs
 
     def impart_taxa(self, taxa: TaxonNameSet) -> None:
@@ -397,36 +402,36 @@ class ProgramFilter:
         taxon_pattern_2: str,
         # fmt: on
     ) -> ProgramNameSet:
-        """Return the programs where at least one occurrence of two taxa violates the predicate.
+        r"""Return the programs where the given predicate is not satisfied.
 
         Args:
             The same arguments as `ProgramFilter.programs_of_triple()`, including the fact that the
             predicate is expressed in **positive** form.
 
         Returns:
-            ProgramNameSet: The programs such that, for each span `s_1` of `taxon_1`, there
-                exists no span `s_2` of `taxon_2` for which `predicate(s_1, s_2)` is verified.
+            ProgramNameSet: The sets of programs which feature at least one taxon matching
+                `taxon_pattern_1`, and such that, for any  span `s_1` of such a taxon, there exists
+                no span `s_2` of a taxon matching `taxon_pattern_2` for which `predicate(s_1, s_2)`
+                is verified.
 
         ..warning::
-            Returns also all programs featuring at least one `taxon_1`, but no `taxon_2`. Indeed,
-            suppose the user wants to exclude all the programs featuring at least one tuple which
-            is not used in a parallel assignment. Let us call the two types of tuples “ordinary”
-            and “parallel”. This function will return a set of programs where:
+            Note that the result includes all programs featuring at least one taxon matching
+            `taxon_pattern_1`, but no taxon matching `taxon_pattern_2`. For instance, suppose the
+            original (negative) triple is:
 
-            - there is at least one tuple, but no parallel tuple (_i.e._, all tuples are ordinary);
-            - or there is at least one ordinary tuple (_i.e._, one tuple which is not parallel).
+            ```
+            ("subroutine", "not contains", "variable/assignment")
+            ```
 
-            Excluding these two sets keeps only the programs where:
+            The function will return the (disjoint) union of these two sets:
 
-            - there is no tuple;
-            - or all tuples are parallel.
-
-            If, in the first stage, the function did not return the programs featuring at least one
-            tuple, but no parallel tuple, the second stage would exclude all the programs featuring
-            no tuple, which would certainly not correspond to the user's intention.
+            1. The programs featuring at least one subroutine, but no assignment at all.
+            2. The programs featuring some subroutines, some assignments, but no assignment
+              inside a subroutine.
 
         Examples:
-            If the predicate is `"taxon_1 not inside taxon_2"`, any program consisting in:
+            If the original (negative) predicate is `"taxon_pattern_1 not inside taxon_pattern_2"`,
+            any program consisting in:
 
             - `"taxon_2{taxon_1}"`[^braces] is rejected;
             - `"taxon_1"` is **accepted** (although there is no `taxon_2`);
@@ -436,7 +441,8 @@ class ProgramFilter:
               that `taxon_1` is not inside `taxon_2`);
             - `"taxon_1 taxon_2{taxon_1} taxon_2{}"` is accepted.
 
-            If the predicate is `"taxon_2 not contains taxon_1"` (sic), any program consisting in:
+            If the predicate is `"taxon_pattern_2 not contains taxon_pattern_1"` (sic), any program
+            consisting in:
 
             - `"taxon_2{taxon_1}"` is rejected;
             - `"taxon_1"` is **rejected** (no `taxon_2`);
@@ -446,8 +452,14 @@ class ProgramFilter:
               that `taxon_2` does not contain `taxon_1`);
             - `"taxon_1 taxon_2{taxon_1} taxon_2{}"` is accepted.
 
-            Note that, due to the rule explained in the warning above, `"taxon_1 not inside taxon_2"`
-            is not strictly equivalent to `"taxon_2 not contains taxon_1"`.
+            Note that, due to the rule explained in the warning above,
+            `"taxon_pattern_1 not inside taxon_pattern_2"`
+            is not equivalent to
+            `"taxon_pattern_2 not contains taxon_pattern_1"`
+            (differences in **bold**).
+
+            However, if `taxon_pattern_2` is `"metadata/program"`, which is featured by all
+            programs, these two forms become equivalent again.
 
             [^braces]:
                 In these examples, the braces are used to denote the fact that the span of a
