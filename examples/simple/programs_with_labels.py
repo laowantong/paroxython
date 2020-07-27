@@ -4,7 +4,7 @@
 print("Hello, world!") # call_argument:, external_free_call:print, free_call:print, free_call_without_result:print, literal:Str, node:Call, node:Expr, node:Name, node:Str, whole_span:1
 
 # ----------------------------------------------------------------------------------------
-# 02_input_ name.py
+# 02_input_name.py
 # ----------------------------------------------------------------------------------------
 name = input("What is your name?\n") # assignment:input, assignment_lhs_identifier:name, call_argument:, external_free_call:input, free_call:input, literal:Str, node:Assign, node:Call, node:Name, node:Str, single_assignment:name, whole_span:2 (-> +1)
 print("Hi, %s." % name) # binary_operator:Mod, call_argument:, external_free_call:print, free_call:print, free_call_without_result:print, literal:Str, node:BinOp, node:Call, node:Expr, node:Name, node:Str, string_formatting_operator
