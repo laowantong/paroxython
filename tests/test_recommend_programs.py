@@ -637,34 +637,33 @@ def test_recommend_mini_programs():
 db = json.loads(Path("examples/simple/programs_db.json").read_text())
 
 
-holds_loop = "flow/loop"
-holds_cond = "flow/conditional"
-lacks_cond = ("metadata/program", "not contains", "flow/conditional")
-p0 = "01_hello_world.py"  # [ ] loop [ ] test
-p1 = "03_friends.py"  #     [X] loop [ ] test
-p2 = "14_median.py"  #      [ ] loop [X] test
-p3 = "06_regex.py"  #       [X] loop [X] test
+a = "flow/conditional"
+b = "flow/loop"
+_a = ("metadata/program", "not contains", "flow/conditional")
+_b = ("metadata/program", "not contains", "flow/loop")
+p0 = "01_hello_world.py"  # [ ] loop [ ] conditional
+p1 = "03_friends.py"  #     [X] loop [ ] conditional
+p2 = "14_median.py"  #      [ ] loop [X] conditional
+p3 = "06_regex.py"  #       [X] loop [X] conditional
 base_1 = [p0, p1, p2, p3]
 
 # fmt: off
 pipelines_1 = [
-    ({        p2, p3}, [("include",     [holds_cond])]),
-    ({p0, p1,       }, [("exclude",     [holds_cond])]),
-    ({    p1,     p3}, [("include",     [holds_loop])]),
-    ({p0,     p2,   }, [("exclude",     [holds_loop])]),
-    ({    p1, p2, p3}, [("include",     [holds_loop, holds_cond])]),
-    ({p0,           }, [("exclude",     [holds_loop, holds_cond])]),
-    ({            p3}, [("include all", [holds_loop, holds_cond])]),
-    ({p0, p1, p2,   }, [("exclude all", [holds_loop, holds_cond])]),
-    ({p0, p1,     p3}, [("include",     [holds_loop, lacks_cond])]),
-    ({        p2,   }, [("exclude",     [holds_loop, lacks_cond])]),
-    ({    p1,       }, [("include all", [holds_loop, lacks_cond])]),
-    ({p0,     p2, p3}, [("exclude all", [holds_loop, lacks_cond])]),
-    ({p0,         p3}, [("include",     [holds_loop, lacks_cond]),
-                        ("exclude all", [holds_loop, lacks_cond])]),
-    ({    p1, p2,   }, [("include",     [holds_loop, holds_cond]),
-                        ("exclude all", [holds_loop, holds_cond])]),
-    ({p0, p1, p2, p3}, []),
+    ({        p2, p3}, [("include", [a])]), # a
+    ({p0, p1,       }, [("include", [_a])]), # ~a
+    ({    p1,     p3}, [("include", [b])]), # b
+    ({p0,     p2,   }, [("include", [_b])]), # ~b
+    ({    p1, p2, p3}, [("include", [a, b])]), #  a | b
+    ({p0,           }, [("include", [_a]), ("include", [_b])]), #  ~a & ~b
+    ({            p3}, [("include", [a]), ("include", [b])]), #  a & b
+    ({p0, p1, p2,   }, [("include", [_a, _b])]), #  ~a | ~b
+    ({p0, p1,     p3}, [("include", [_a, b])]), # ~a | b
+    ({        p2,   }, [("include", [a]), ("include", [_b])]), # a & ~b
+    ({    p1,       }, [("include", [_a]), ("include", [b])]), # ~a & b
+    ({p0,     p2, p3}, [("include", [a, _b])]), # a | ~b
+    ({p0,         p3}, [("include", [_a, b]), ("include", [a, _b])]), # (~a | b) & (a | ~b)
+    ({    p1, p2,   }, [("include", [a, b]), ("include", [_a, _b])]), # (a | b) & (~a | ~b)
+    ({p0, p1, p2, p3}, [("include", [a, _a]), ("include", [b, _b])]), # (a | ~a) & (b | ~b)
 ]
 # fmt: on
 
@@ -688,10 +687,10 @@ lacks_subroutine = ("metadata/program", "not contains", "subroutine")
 lacks_asg_or_sub = ("metadata/program", "not contains", "subroutine|variable/assignment")
 lacks_asg_in_sub = ("subroutine", "not contains", "variable/assignment")
 p0 = "01_hello_world.py"  # [ ] subroutine [ ] assignment [ ] inside *
-p1 = "05_greet.py"  # [X] subroutine [ ] assignment [ ] inside
+p1 = "05_greet.py"  #       [X] subroutine [ ] assignment [ ] inside
 p2 = "02_input_ name.py"  # [ ] subroutine [X] assignment [ ] inside
-p3 = "16_csv.py"  # [X] subroutine [X] assignment [ ] inside *
-p4 = "12_classes.py"  # [X] subroutine [X] assignment [X] inside
+p3 = "16_csv.py"  #         [X] subroutine [X] assignment [ ] inside *
+p4 = "12_classes.py"  #     [X] subroutine [X] assignment [X] inside
 base_2 = [p0, p1, p2, p3, p4]
 
 # fmt: off
@@ -734,7 +733,7 @@ pipelines_2 = [
                             ("exclude all", [holds_subroutine, lacks_assignment]),
                             ("exclude",     [holds_asg_in_sub])]),
     ({    p1, p2,     p4}, [("include",     [holds_asg_in_sub, lacks_subroutine, lacks_assignment]),
-                            ("exclude", [lacks_asg_or_sub])]),
+                            ("exclude",     [lacks_asg_or_sub])]),
     ({p0, p1, p2, p3, p4}, []),
 ]
 # fmt: on
