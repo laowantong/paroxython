@@ -200,7 +200,7 @@ def solve(n): # body_recursive_function:solve (-> +8), function:solve (-> +8), f
     if n == 0: # comparison_operator:Eq, if (-> +1), if_guard (-> +1), if_test_atom:0, if_test_atom:n, if_without_else (-> +1), literal:0, node:Compare, node:If (-> +1), node:Name, node:Num
         return [[]] # empty_literal:List, if_then_branch, literal:List, node:List, node:Return, return
     smaller_solutions = solve(n - 1) # assignment:solve, assignment_lhs_identifier:smaller_solutions, assignment_rhs_atom:1, assignment_rhs_atom:n, binary_operator:Sub, call_argument:, free_call:solve, internal_free_call:solve, literal:1, node:Assign, node:BinOp, node:Call, node:Name, node:Num, single_assignment:smaller_solutions
-    return [ # node:Return (-> +4), return
+    return [ # node:Return (-> +4), return (-> +4)
         solution + [(n, i + 1)] # binary_operator:Add, comprehension:List, comprehension_for_count:2, concatenation_operator:List, literal:1, literal:List, literal:Tuple, node:BinOp, node:List, node:ListComp (-> +3), node:Name, node:Num, node:Tuple
         for i in range(BOARD_SIZE) # call_argument:BOARD_SIZE, external_free_call:range, free_call:range, node:Call, node:Name, range:BOARD_SIZE
         for solution in smaller_solutions # node:Name

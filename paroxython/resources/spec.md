@@ -3131,6 +3131,9 @@ Match `return` statements and, when the returned object is an [_atom_](#feature-
            ^(.*)/_type=Return
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 (
+\n(?:\1.+\n)* \1/.*/_pos=(?P<POS>.+)
+)?
+(
 \n(?:\1.+\n)*?\1/value(/value|/n|/id)?=(?P<SUFFIX>.+)
 )?
 ```
@@ -3148,6 +3151,17 @@ Match `return` statements and, when the returned object is an [_atom_](#feature-
 8       return None
 9       return
 10      return "foobar"
+11      return ( # several lines
+12                a,
+13                b,
+14                c,
+15      ) # BUG: last line incorrectly excluded
+16      return foo( # several lines
+17                a
+18      ).bar() # BUG: last line incorrectly excluded
+19      return foo( # several lines
+20                a
+21      ).bar(42) # last line correctly included
 ```
 
 ##### Matches
@@ -3155,7 +3169,7 @@ Match `return` statements and, when the returned object is an [_atom_](#feature-
 | Label | Lines |
 |:--|:--|
 | `return:a` | 2 |
-| `return` | 3, 4, 5, 10 |
+| `return` | 3, 4, 5, 10, 11-14, 16-17, 19-21 |
 | `return:2` | 6 |
 | `return:True` | 7 |
 | `return:None` | 8, 9 |

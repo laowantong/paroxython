@@ -3746,7 +3746,7 @@
 | 0.9375 | `subroutine/method/flavor/class` | 3-7 |
 | 0.9375 | `subroutine/method/flavor/instance` | 8-10 |
 | 0.9375 | `subroutine/method/naming/magic` | 8-10 |
-| 0.875 | `subroutine/return/something` | 5, 10 |
+| 0.875 | `subroutine/return/something` | 5-7, 10 |
 | 0.875 | `subscript/slice/start` | 6 |
 | 0.875 | `subscript/slice/stop` | 6 |
 | 0.875 | `type/number/integer` | 6 |
