@@ -104,6 +104,12 @@ def resolve_new_types():
     path = Path("docs/index.html")
     source = path.read_text()
     source = regex.sub(r"(?m)^.+paroxython\.user_types.+\n", "", source)
+    (source, n) = regex.subn(
+        r"""(<section>\n)(</section>\n</article>)""",
+        r"""\1<h3 class="section-title" id="flow">Internal dependencies</h3>\n<p><img alt="" src="resources/flow.png"></p>\n\2""",
+        source,
+    )
+    assert n == 1
     path.write_text(source)
     Path("docs/user_types.html").unlink()
 

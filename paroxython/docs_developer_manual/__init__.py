@@ -1,7 +1,4 @@
 """
-## Flow
-.. image:: ../resources/flow.png
-
 ## Pattern specifications
 
 Browse [spec.md](https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md) on GitHub.
