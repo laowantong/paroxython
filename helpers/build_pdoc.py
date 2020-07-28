@@ -224,8 +224,32 @@ def patch_prose():
         index_path.write_text(index_text)
 
 
+def update_github_links():
+    count = 2
+    source = Path("tests/test_recommend_programs.py").read_text()
+    path = Path("docs/md/pipeline_documentation.md")
+    text = path.read_text()
+    (text, n) = regex.subn(
+        r"test_recommend_programs.py#L\d+-L\d+", f"test_recommend_programs.py#L-L", text
+    )
+    assert n == count
+    for i in range(1, count + 1):
+        start = source.partition(f"# extract_{i} (start)")[0].count("\n") + 2
+        stop = source.partition(f"# extract_{i} (stop)")[0].count("\n")
+        assert start < stop
+        (text, n) = regex.subn(
+            r"test_recommend_programs.py#L-L",
+            f"test_recommend_programs.py#L{start}-L{stop}",
+            text,
+            count=1,
+        )
+        assert n == 1
+    path.write_text(text)
+
+
 def main():
     update_readme_example()
+    update_github_links()
     generate_html()
     resolve_new_types()
     remove_blacklisted_sources()

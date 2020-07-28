@@ -409,61 +409,13 @@ class ProgramFilter:
             predicate is expressed in **positive** form.
 
         Returns:
-            ProgramNameSet: The sets of programs which feature at least one taxon matching
+            ProgramNameSet: The set of programs which feature at least one taxon matching
                 `taxon_pattern_1`, and such that, for any  span `s_1` of such a taxon, there exists
                 no span `s_2` of a taxon matching `taxon_pattern_2` for which `predicate(s_1, s_2)`
                 is verified.
 
-        ..warning::
-            Note that the result includes all programs featuring at least one taxon matching
-            `taxon_pattern_1`, but no taxon matching `taxon_pattern_2`. For instance, suppose the
-            original (negative) triple is:
-
-            ```
-            ("subroutine", "not contains", "variable/assignment")
-            ```
-
-            The function will return the (disjoint) union of these two sets:
-
-            1. The programs featuring at least one subroutine, but no assignment at all.
-            2. The programs featuring some subroutines, some assignments, but no assignment
-              inside a subroutine.
-
-        Examples:
-            If the original (negative) predicate is `"taxon_pattern_1 not inside taxon_pattern_2"`,
-            any program consisting in:
-
-            - `"taxon_2{taxon_1}"`[^braces] is rejected;
-            - `"taxon_1"` is **accepted** (although there is no `taxon_2`);
-            - `"taxon_2"` is **rejected** (no `taxon_1`);
-            - `"taxon_1{taxon_2}"` is accepted;
-            - `"taxon_1 taxon_2{taxon_1}"` is accepted (there exists a couple (`s_1`, `s_2`) such
-              that `taxon_1` is not inside `taxon_2`);
-            - `"taxon_1 taxon_2{taxon_1} taxon_2{}"` is accepted.
-
-            If the predicate is `"taxon_pattern_2 not contains taxon_pattern_1"` (sic), any program
-            consisting in:
-
-            - `"taxon_2{taxon_1}"` is rejected;
-            - `"taxon_1"` is **rejected** (no `taxon_2`);
-            - `"taxon_2"` is **accepted** (although there is no `taxon_1`);
-            - `"taxon_1{taxon_2}"` is accepted;
-            - `"taxon_1 taxon_2{taxon_1}"` is accepted (there exists a couple (`s_1`, `s_2`) such
-              that `taxon_2` does not contain `taxon_1`);
-            - `"taxon_1 taxon_2{taxon_1} taxon_2{}"` is accepted.
-
-            Note that, due to the rule explained in the warning above,
-            `"taxon_pattern_1 not inside taxon_pattern_2"`
-            is not equivalent to
-            `"taxon_pattern_2 not contains taxon_pattern_1"`
-            (differences in **bold**).
-
-            However, if `taxon_pattern_2` is `"metadata/program"`, which is featured by all
-            programs, these two forms become equivalent again.
-
-            [^braces]:
-                In these examples, the braces are used to denote the fact that the span of a
-                certain taxon is included in that of another taxon.
+        Details:
+            See the [pipeline documentation](docs_user_manual/index.html#general-semantics-of-the-negation).
         """
         taxa_1 = self.taxa_of_pattern(taxon_pattern_1)
         taxa_2 = self.taxa_of_pattern(taxon_pattern_2)

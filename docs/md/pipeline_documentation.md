@@ -34,13 +34,13 @@ The first thing to clarify is that the strings which constitute the `data` lists
     Thanks and kudos to the author, Matthew Barnett: without his awesome work, many parts of our code would have been much tougher to write, and much slower to execute.
 
 ..tip::
-    If you don't know how to write regular expressions, the good news is that you don't have to worry. When they do not contain certain special characters, they are self-descriptive. That means, for instance, that the string `"type/sequence/list"` happens to be a regular expression which precisely describes (or ”matches”) the string `"type/sequence/list"`. This is the case for all strings that are only made up of so-called _literal_ characters.
+    If you don't know how to write regular expressions, the good news is that you don't have to worry. Unless they contain certain special characters, they are self-descriptive. That means, for instance, that the string `"type/sequence/list"` happens to be a regular expression which precisely describes (or ”matches”) the string `"type/sequence/list"`. This is the case for all strings that are only made up of so-called _literal_ characters.
 
     As a matter of fact, all the characters that can appear in a taxon are literal. We advise you to avoid non-literal characters in your program names as well. What are they? Essentially: `.^$*+?{}\[]`. Depending on your operating system, some are already illegal in filenames anyway. To tell the truth, the first one (the dot) is an integral part of most filenames, as an extension separator. However, it turns out that it basically means “any character”, which of course includes the dot itself. So, the regular expression `"hello_world.py"` matches the filename `"hello_world.py"`, and the fact that it matches `"hello_world/py"` and `"hello_worldapy"` shouldn't be a real problem. In any case, you can always prefix (or _escape_) a non-literal character with a backslash `"\"` to make it literal (here, `"hello_world\.py"`): that's all you'll need to know about regular expressions.
 
-The second thing to clarify is that a given pattern will match any string **starting** with it. Thus, `"type/sequence/list"` will match not only `"type/sequence/list"`, but `"type/sequence/list/empty"` and `"type/sequence/list/supercalifragilisticexpialidocious"` too. The same applies to program names. For example, in our personal database, all programs from the Euler project start with `"euler_"`. The pattern `"euler_"` will then match all of them.
+The second thing to clarify is that a given pattern will match any string **starting** with it. Thus, `"type/sequence/list"` will match not only `"type/sequence/list"`, but `"type/sequence/list/empty"` and `"type/sequence/list/supercalifragilisticexpialidocious"` too. The same applies to program names. For example, in our personal database, all programs from [Project Euler](https://projecteuler.net) start with `"euler_"`. The pattern `"euler_"` will then match all of them.
 
-In terms of regular expressions, that means that, under the hood, Paroxython invokes [`match()` instead of `search()`](https://docs.python.org/3/library/re.html#search-vs-match). In the rare cases where you want to restrict the whole matching to the pattern itself, simply suffix it with a dollar sign, _i.e._, `"type/sequence/list$"`.
+In terms of regular expressions, it means that, under the hood, Paroxython invokes [`match()` instead of `search()`](https://docs.python.org/3/library/re.html#search-vs-match). In the rare cases where you want to restrict the whole matching to the pattern itself, simply suffix it with a dollar sign, _i.e._, `"type/sequence/list$"`.
 
 ## Execution of a pipeline
 
@@ -141,24 +141,20 @@ Unlike `"include all"`, this variant actually expands the semantics of the syste
 
 Its main purpose is to track the acquisition of new knowledge. However, if this knowledge is provided by a given set of programs, there is no more need to keep them in the selection of recommended programs.
 
-1. The auxiliary set contains all programs whose name matches at least one of the given pattern (relationships are not supported), plus those which import (either directly or indirectly) at least one of them. In other words, it is the same as above (`"exclude"`), but only in the case where the criterion is a program pattern. In all other cases, this auxiliary set will be empty.
+1. The auxiliary set contains all programs whose name matches at least one of the given patterns (relationships are not supported), plus those which import (either directly or indirectly) at least one of them. In other words, it is the same as above (`"exclude"`), but only in the case where the criterion is a program pattern. In all other cases, this auxiliary set will be empty.
 2. The selection is then restricted to its **difference** with the auxiliary set (same as above for `"exclude"`).
 3. There are three cases:
     1. If the criterion is a program pattern, all the taxa featured in a program whose name matches this pattern are added to the body of imparted knowledge.
     2. If the criterion is a taxon pattern, all the taxa matching this pattern are added to the body of imparted knowledge.
     3. Otherwise, the body of imparted knowledge is unchanged.
 
-**`"impart all"` variant**
-
-Not supported.
+The `"impart all"` variant is not supported, and treated as `"impart"`.
 
 ### `"hide"` command
 
 This is the simplest command of all. It merely accumulates the taxa matching the given patterns (relationships are not supported), without other effect on the filter. In the final stage, the accumulated taxa will be filtered out of the generated tables of recommended programs. Note that the learning costs are not affected whatsoever. Even if a taxon is hidden, its individual cost continues to contribute towards the total cost of a program.
 
-**`"hide all"` variant**
-
-Not supported.
+The `"hide all"` variant is not supported, and treated as `"hide"`.
 
 ## Semantic triples
 
@@ -238,7 +234,19 @@ This allows the user to be understood when entering formulas like  `x == y`, `x 
 
 ### Positive semantic triples
 
-A pipeline command can apply not only to patterns of programs and taxa, but also to relationships between two patterns of taxa. Being given an operator \(\mathfrak{R}\) and two taxon patterns \(t_1\) and \(t_2\), the statement \(t_1 \mathbin{\mathfrak{R}} t_2\) will be codified in the form of the _subject–predicate–object_ expression \((t_1, \mathfrak{R}, t_2)\), which can be entered as a mere Python tuple `(t1, R, t2)`. For instance, the following pipeline command will only keep programs featuring a conditional inside a loop **or** (inclusive) ended by a `return` statement (like the function `first_missing_non_negative()` given above).
+A pipeline command can apply not only to patterns of programs and taxa, but also to relationships between the spans of two taxon patterns. Being given an operator \(\mathfrak{R}\) and two taxon patterns \(t_1\) and \(t_2\), the statement \(t_1 \mathbin{\mathfrak{R}} t_2\) will be codified in the form of the _subject–predicate–object_ expression \((t_1, \mathfrak{R}, t_2)\), which can be entered as a mere Python tuple `(t1, R, t2)`. The simplest semantic triple is:
+
+```python
+("metadata/program", "contains", taxon_pattern)
+```
+
+It matches all programs where the span of the taxon `"metadata/program"` includes the span of a given `taxon_pattern`. Since, by definition, every program features one taxon `"metadata/program"`, whose span encompasses the whole program, this is strictly equivalent to:
+
+```python
+taxon_pattern
+```
+
+And now for something completely different: the following pipeline command will only keep programs featuring a conditional inside a loop **or** (inclusive) ended by a `return` statement (the function `first_missing_non_negative()` given above satisfies these two criteria).
 
 ```python
     {
@@ -277,101 +285,162 @@ This keeps only the programs that feature a conditional inside a loop **and** a 
 
 ### Negative semantic triples
 
-Our pipeline system takes a set of programs as input, and produces a subset of those programs as output.
+It is possible to negate the predicate of a semantic triple, either by prefixing it by an exclamation mark (_e.g._, `"!x≤y≤y≤x"`, or `"!contains"`), or by adding the word _not_ (_e.g_, `"not x≤y≤y≤x"`, `"not contains"`,  or `"contains not"`), whether it's grammatically correct or not.
 
-With our pipeline system,
+#### Expressing the absence of a taxon
 
-Avec notre système, certaines conditions ne peuvent être exprimées qu'en introduisant la possibilité de nier les relations.
+Here again, the simplest _negated_ semantic triple is:
 
-Supposons que vous, en tant qu'enseignant, souhaitiez inclure dans votre cours sur l'affectation la notion d'affectation parallèle, par exemple pour introduire l'échange sans variable auxiliaire:
+```python
+("metadata/program", "not contains", taxon_pattern)
+```
+
+On a set of **independent programs** (_i.e._, not importing each other), there is a strict equivalence between:
+
+```python
+    {
+        "operation": "include",
+        "data": [
+            ("metadata/program", "not contains", taxon_pattern)
+        ]
+    },
+```
+
+and:
+
+```python
+    {
+        "operation": "exclude",
+        "data": [
+            taxon_pattern
+        ]
+    },
+```
+
+And, conversely, between:
+
+```python
+    {
+        "operation": "include",
+        "data": [
+            taxon_pattern
+        ]
+    },
+```
+
+and:
+
+```python
+    {
+        "operation": "exclude",
+        "data": [
+            ("metadata/program", "not contains", taxon_pattern)
+        ]
+    },
+```
+
+This property may be used to select the programs that include any subset of a given set of taxa. This can be done in a systematic way by converting[^to_cnf] the corresponding logical formula in [conjunctive normal form](https://en.wikipedia.org/wiki/Conjunctive_normal_form), and transforming each clause into a separate `"include"` command.
+
+[^to_cnf]:
+    Automate the conversion with the function [`to_cnf()`](https://github.com/sympy/sympy/blob/58e1e9abade7c38c66871fd06bf76ebac8c1df78/sympy/logic/boolalg.py#L1691-L1730) of [SymPy](https://www.sympy.org/en/index.html).
+
+For instance, consider the two taxa `"flow/conditional"` and `"flow/loop"`. To keep only the programs that feature either a conditional (denoted by the literal \(a\)) or a loop (denoted by the literal \(b\)), but not both of them, express first the formula in CNF: \((a \lor b) \land (\neg a \lor \neg b)\), then translate it into:
+
+```python
+    {
+        "operation": "include",
+        "data": [
+            "flow/conditional",
+            "flow/loop",
+        ]
+    }, # keep only the programs that feature either a conditional or a loop
+    {
+        "operation": "include",
+        "data": [
+            ("metadata/program", "not contains", "flow/conditional"),
+            ("metadata/program", "not contains", "flow/loop"),
+        ]
+    }, # among them, keep only those that feature no conditional or no loop
+```
+
+For two taxa, there are a total of 16 combinations, listed and tested [here](https://github.com/laowantong/paroxython/blob/master/tests/test_recommend_programs.py#L674-L703).
+<!---
+The previous link is automatically updated by build_pdoc.py.
+-->
+
+However, on a set on **interdependent programs**, `"exclude"` is not the opposite of `"include"` anymore: [as already explained](#exclude-command), excluding a program excludes also the programs which import it. Consequently, _including_ the programs that do not feature a given taxon will filter out those which feature it _directly_; but _excluding_ the programs that do feature this taxon will filter out those which feature it either directly or _indirectly_ (by importation).
+
+#### General semantics of the negation
+
+The semantic triple:
+
+```python
+(taxon_pattern_1, not predicate, taxon_pattern_2)
+```
+
+... describe the set of programs which feature at least one taxon matching `taxon_pattern_1`, and such that, for any  span `s_1` of such a taxon, there exists no span `s_2` of a taxon matching `taxon_pattern_2` for which `predicate(s_1, s_2)` is verified.
+
+..warning::
+    Note that the result includes also all programs featuring at least one taxon matching `taxon_pattern_1`, but no taxon matching `taxon_pattern_2`. For instance, suppose the original (negative) triple is:
+
+    ```
+    ("subroutine", "not contains", "variable/assignment")
+    ```
+
+    The function will return the (disjoint) union of these two sets:
+
+    1. The programs featuring at least one subroutine, but no assignment at all.
+    2. The programs featuring at least one subroutine, at least one assignment, but no assignment inside a subroutine.
+
+For example, if the original (negative) predicate is `"taxon_pattern_1 not inside taxon_pattern_2"`, any program consisting in:
+
+- `"taxon_2{taxon_1}"`[^braces] is rejected;
+- `"taxon_1"` is **accepted** (although there is no `taxon_2`);
+- `"taxon_2"` is **rejected** (no `taxon_1`);
+- `"taxon_1{taxon_2}"` is accepted;
+- `"taxon_1 taxon_2{taxon_1}"` is accepted (there exists a couple (`s_1`, `s_2`) such
+    that `taxon_1` is not inside `taxon_2`);
+- `"taxon_1 taxon_2{taxon_1} taxon_2{}"` is accepted.
+
+[^braces]:
+    In these examples, the braces are used to denote the fact that the span of a certain taxon is included in that of another taxon.
+
+If the predicate is `"taxon_pattern_2 not contains taxon_pattern_1"` (sic), any program consisting in:
+
+- `"taxon_2{taxon_1}"` is rejected;
+- `"taxon_1"` is **rejected** (no `taxon_2`);
+- `"taxon_2"` is **accepted** (although there is no `taxon_1`);
+- `"taxon_1{taxon_2}"` is accepted;
+- `"taxon_1 taxon_2{taxon_1}"` is accepted (there exists a couple (`s_1`, `s_2`) such
+    that `taxon_2` does not contain `taxon_1`);
+- `"taxon_1 taxon_2{taxon_1} taxon_2{}"` is accepted.
+
+Note that, due to the rule explained in the warning above, `"taxon_pattern_1 not inside taxon_pattern_2"` is not equivalent to `"taxon_pattern_2 not contains taxon_pattern_1"` (differences in **bold**). However, if `taxon_pattern_2` is `"metadata/program"`, which is featured by all programs, these two forms become equivalent again.
+
+#### A practical example
+
+Suppose you want your course on the assignment statements to include the concept of parallel assignment, for example to introduce swapping without an auxiliary variable:
 
 ```python
 (a, b) = (b, a)
 ```
 
-Dans la taxonomie, cette notion est répertoriée à la fois comme cas particulier de l'affectation de variable (taxon \(t_1 = \) `variable/assignment/parallel`) et comme faisant appel à la notion de tuple: taxon (\(t_2 = \) `type/sequence/tuple`. Or, vous souhaitez n'introduire officiellement les tuples que bien plus tard dans votre cours. Vous souhaitez donc exclure des recommandations tout programme mettant en œuvre un tuple, sauf si celui-ci intervient dans une affectation parallèle. L'ensemble \(\mathcal{P}\) des programmes peut être partitionné en quatre sous-ensembles:
+In the taxonomy, this concept is listed as a special case of both tuple (taxon \(t_1 = \) `"type/sequence/tuple"`) and variable assignment (taxon \(t_2 = \) `"variable/assignment/parallel"`).
 
-- \(\mathcal{P}_0\) l'ensemble des programmes ne mettant en œuvre aucun tuple (donc a fortiori aucune affectation parallèle).
-- \(\mathcal{P}_1\) l'ensemble des programmes mettant en œuvre un ou plusieurs tuples, mais systématiquement dans le cadre d'une affectation parallèle.
-- \(\mathcal{P}_2\) l'ensemble des programmes mettant en œuvre deux tuples ou plus, avec au moins un dans le cadre d'une affectation parallèle, et au moins un au-dehors.
-- \(\mathcal{P}_3\) l'ensemble des programmes mettant en œuvre un ou plusieurs tuples, mais aucun dans le cadre d'une affectation parallèle.
-
-Paroxython doit donc nous recommander tous les programmes de \(\mathcal{P}_0 \cup \mathcal{P}_1\), mais aucun de \(\mathcal{P}_2 \cup \mathcal{P}_3\).
-
-Le pipeline suivant ne donne **pas** le résultat cherché. La première opération restreint la sélection à \(\mathcal{P}_1 \cup \mathcal{P}_2\). La seconde en retire \(\mathcal{P}_2\). Le résultat est donc \(\mathcal{P}_1\):
-
-```python
-    {
-        "operation": "include",
-        "data": [
-            "variable/assignment/parallel",
-        ]
-    },
-    {
-        "operation": "exclude",
-        "data": [
-            "type/sequence/tuple",
-        ]
-    },
-```
-
-Dans cette deuxième tentative, le deuxième datum est un motif d'expression régulière qui couvre n'importe quel taxon ne commençant pas par `"type/sequence/tuple"`. Or, tout programme comporte au moins un taxon satisfaisant à cette propriété. Le résultat est donc \(\mathcal{P}\).
-
-```python
-    {
-        "operation": "include",
-        "data": [
-            "variable/assignment/parallel",
-            "(?!type/sequence/tuple)",
-        ]
-    },
-```
-
-Si l'on applique l'opération inverse sur la contraposée, le résultat est vide. En effet, le premier datum exclut tous les programmes qui comportent au moins un taxon qui n'est pas une affectation parallèle.
+ However, you want to introduce officially the abstract data type “tuple” only much later in your course. You therefore wish to exclude from the recommendations any program implementing a tuple, unless it is part of a parallel assignment. The following command will make the trick:
 
 ```python
     {
         "operation": "exclude",
         "data": [
-            "(?!variable/assignment/parallel)",
-            "type/sequence/tuple",
+            ("type/sequence/tuple", "is not", "variable/assignment/parallel")
         ]
     },
 ```
 
-Le pipeline suivant ne garde que les programmes comportant au moins un tuple qui est une affectation parallèle, soit \(\mathcal{P}_1\) \cup \mathcal{P}_2\):
+The triple describes the set of programs which feature at least one tuple, and such that there is no tuple's span coinciding with a parallel assignment's span. In other words, the set of programs which feature at least one “non parallel” tuple. When we exclude these programs, those which remain either feature no tuple, or only the ones involved in a parallel assignment.
 
-```python
-    {
-        "operation": "include",
-        "data": [
-            ("type/sequence/tuple", "is", "variable/assignment/parallel"),
-        ]
-    },
-```
-
-Il est en fait équivalent à:
-
-```python
-    {
-        "operation": "include",
-        "data": [
-            "variable/assignment/parallel",
-        ]
-    },
-```
-
-
-
-```python
-    {
-        "operation": "exclude",
-        "data": [
-            ("type/sequence/tuple", "is not", "variable/assignment/parallel"),
-        ]
-    },
-```
-
-
-
-Cependant, vous ne souhaitez introduire officiellement
+The other combinations are listed and tested [here](https://github.com/laowantong/paroxython/blob/master/tests/test_recommend_programs.py#L790-L819).
+<!---
+The previous link is automatically updated by build_pdoc.py.
+-->

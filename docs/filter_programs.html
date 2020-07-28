@@ -40,7 +40,7 @@ applied on them during the execution of the pipeline (see <code><a title="paroxy
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L0-L606" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L0-L558" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">from collections import Counter as counter
 from collections import defaultdict
@@ -318,7 +318,7 @@ class ProgramFilter:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L49-L580" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L49-L532" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">class ProgramFilter:
 
@@ -1043,68 +1043,18 @@ predicate is expressed in <strong>positive</strong> form.</p>
 <h2 id="returns">Returns</h2>
 <dl>
 <dt><code>ProgramNameSet</code></dt>
-<dd>The sets of programs which feature at least one taxon matching
+<dd>The set of programs which feature at least one taxon matching
 <code>taxon_pattern_1</code>, and such that, for any
 span <code>s_1</code> of such a taxon, there exists
 no span <code>s_2</code> of a taxon matching <code>taxon_pattern_2</code> for which <code>predicate(s_1, s_2)</code>
 is verified.</dd>
 </dl>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Note that the result includes all programs featuring at least one taxon matching
-<code>taxon_pattern_1</code>, but no taxon matching <code>taxon_pattern_2</code>. For instance, suppose the
-original (negative) triple is:</p>
-<p><code>("subroutine", "not contains", "variable/assignment")</code></p>
-<p>The function will return the (disjoint) union of these two sets:</p>
-<ol>
-<li>The programs featuring at least one subroutine, but no assignment at all.</li>
-<li>The programs featuring some subroutines, some assignments, but no assignment
-inside a subroutine.</li>
-</ol>
-</div>
-<h2 id="examples">Examples</h2>
-<p>If the original (negative) predicate is <code>"taxon_pattern_1 not inside taxon_pattern_2"</code>,
-any program consisting in:</p>
-<ul>
-<li><code>"taxon_2{taxon_1}"</code><sup id="fnref:braces"><a class="footnote-ref" href="#fn:braces" rel="footnote">1</a></sup> is rejected;</li>
-<li><code>"taxon_1"</code> is <strong>accepted</strong> (although there is no <code>taxon_2</code>);</li>
-<li><code>"taxon_2"</code> is <strong>rejected</strong> (no <code>taxon_1</code>);</li>
-<li><code>"taxon_1{taxon_2}"</code> is accepted;</li>
-<li><code>"taxon_1 taxon_2{taxon_1}"</code> is accepted (there exists a couple (<code>s_1</code>, <code>s_2</code>) such
-that <code>taxon_1</code> is not inside <code>taxon_2</code>);</li>
-<li><code>"taxon_1 taxon_2{taxon_1} taxon_2{}"</code> is accepted.</li>
-</ul>
-<p>If the predicate is <code>"taxon_pattern_2 not contains taxon_pattern_1"</code> (sic), any program
-consisting in:</p>
-<ul>
-<li><code>"taxon_2{taxon_1}"</code> is rejected;</li>
-<li><code>"taxon_1"</code> is <strong>rejected</strong> (no <code>taxon_2</code>);</li>
-<li><code>"taxon_2"</code> is <strong>accepted</strong> (although there is no <code>taxon_1</code>);</li>
-<li><code>"taxon_1{taxon_2}"</code> is accepted;</li>
-<li><code>"taxon_1 taxon_2{taxon_1}"</code> is accepted (there exists a couple (<code>s_1</code>, <code>s_2</code>) such
-that <code>taxon_2</code> does not contain <code>taxon_1</code>);</li>
-<li><code>"taxon_1 taxon_2{taxon_1} taxon_2{}"</code> is accepted.</li>
-</ul>
-<p>Note that, due to the rule explained in the warning above,
-<code>"taxon_pattern_1 not inside taxon_pattern_2"</code>
-is not equivalent to
-<code>"taxon_pattern_2 not contains taxon_pattern_1"</code>
-(differences in <strong>bold</strong>).</p>
-<p>However, if <code>taxon_pattern_2</code> is <code>"metadata/program"</code>, which is featured by all
-programs, these two forms become equivalent again.</p>
-<div class="footnote">
-<hr>
-<ol>
-<li id="fn:braces">
-<p>In these examples, the braces are used to denote the fact that the span of a
-certain taxon is included in that of another taxon.&#160;<a class="footnote-backref" href="#fnref:braces" rev="footnote" title="Jump back to footnote 1 in the text">&#8617;</a></p>
-</li>
-</ol>
-</div></div>
+<h2 id="details">Details</h2>
+<p>See the <a href="docs_user_manual/index.html#general-semantics-of-the-negation">pipeline documentation</a>.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L397-L481" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L397-L433" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def programs_of_negated_triple(
     # fmt: off
@@ -1221,7 +1171,7 @@ for <code>((1, 1), (1, 1))</code>):</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L483-L580" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L435-L532" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def iterate_on_spans(
     # fmt: off

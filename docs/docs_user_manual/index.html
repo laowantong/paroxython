@@ -218,11 +218,11 @@ expressions, span algebra, semantic triples, negations) in the <a href="#deep-in
 <p>The first thing to clarify is that the strings which constitute the <code>data</code> lists are not simple names, but “descriptions” of names. These descriptions, or <strong>patterns</strong>, are written in the language of regular expressions, and more precisely in the dialect implemented by the third-party module <a href="https://pypi.org/project/regex/">regex</a><sup id="fnref:regex-credits"><a class="footnote-ref" href="#fn:regex-credits" rel="footnote">1</a></sup>.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>If you don't know how to write regular expressions, the good news is that you don't have to worry. When they do not contain certain special characters, they are self-descriptive. That means, for instance, that the string <code>"type/sequence/list"</code> happens to be a regular expression which precisely describes (or ”matches”) the string <code>"type/sequence/list"</code>. This is the case for all strings that are only made up of so-called <em>literal</em> characters.</p>
+<p>If you don't know how to write regular expressions, the good news is that you don't have to worry. Unless they contain certain special characters, they are self-descriptive. That means, for instance, that the string <code>"type/sequence/list"</code> happens to be a regular expression which precisely describes (or ”matches”) the string <code>"type/sequence/list"</code>. This is the case for all strings that are only made up of so-called <em>literal</em> characters.</p>
 <p>As a matter of fact, all the characters that can appear in a taxon are literal. We advise you to avoid non-literal characters in your program names as well. What are they? Essentially: <code>.^$*+?{}\[]</code>. Depending on your operating system, some are already illegal in filenames anyway. To tell the truth, the first one (the dot) is an integral part of most filenames, as an extension separator. However, it turns out that it basically means “any character”, which of course includes the dot itself. So, the regular expression <code>"hello_world.py"</code> matches the filename <code>"hello_world.py"</code>, and the fact that it matches <code>"hello_world/py"</code> and <code>"hello_worldapy"</code> shouldn't be a real problem. In any case, you can always prefix (or <em>escape</em>) a non-literal character with a backslash <code>"\"</code> to make it literal (here, <code>"hello_world\.py"</code>): that's all you'll need to know about regular expressions.</p>
 </div>
-<p>The second thing to clarify is that a given pattern will match any string <strong>starting</strong> with it. Thus, <code>"type/sequence/list"</code> will match not only <code>"type/sequence/list"</code>, but <code>"type/sequence/list/empty"</code> and <code>"type/sequence/list/supercalifragilisticexpialidocious"</code> too. The same applies to program names. For example, in our personal database, all programs from the Euler project start with <code>"euler_"</code>. The pattern <code>"euler_"</code> will then match all of them.</p>
-<p>In terms of regular expressions, that means that, under the hood, Paroxython invokes <a href="https://docs.python.org/3/library/re.html#search-vs-match"><code>match()</code> instead of <code>search()</code></a>. In the rare cases where you want to restrict the whole matching to the pattern itself, simply suffix it with a dollar sign, <em>i.e.</em>, <code>"type/sequence/list$"</code>.</p>
+<p>The second thing to clarify is that a given pattern will match any string <strong>starting</strong> with it. Thus, <code>"type/sequence/list"</code> will match not only <code>"type/sequence/list"</code>, but <code>"type/sequence/list/empty"</code> and <code>"type/sequence/list/supercalifragilisticexpialidocious"</code> too. The same applies to program names. For example, in our personal database, all programs from <a href="https://projecteuler.net">Project Euler</a> start with <code>"euler_"</code>. The pattern <code>"euler_"</code> will then match all of them.</p>
+<p>In terms of regular expressions, it means that, under the hood, Paroxython invokes <a href="https://docs.python.org/3/library/re.html#search-vs-match"><code>match()</code> instead of <code>search()</code></a>. In the rare cases where you want to restrict the whole matching to the pattern itself, simply suffix it with a dollar sign, <em>i.e.</em>, <code>"type/sequence/list$"</code>.</p>
 <h2 id="execution-of-a-pipeline">Execution of a pipeline</h2>
 <p>A pipeline is a set (or list, but the order is not important) of commands which apply sequentially to a database of program tags. It returns:</p>
 <ul>
@@ -313,7 +313,7 @@ expressions, span algebra, semantic triples, negations) in the <a href="#deep-in
 <h3 id="impart-command"><code>"impart"</code> command</h3>
 <p>Its main purpose is to track the acquisition of new knowledge. However, if this knowledge is provided by a given set of programs, there is no more need to keep them in the selection of recommended programs.</p>
 <ol>
-<li>The auxiliary set contains all programs whose name matches at least one of the given pattern (relationships are not supported), plus those which import (either directly or indirectly) at least one of them. In other words, it is the same as above (<code>"exclude"</code>), but only in the case where the criterion is a program pattern. In all other cases, this auxiliary set will be empty.</li>
+<li>The auxiliary set contains all programs whose name matches at least one of the given patterns (relationships are not supported), plus those which import (either directly or indirectly) at least one of them. In other words, it is the same as above (<code>"exclude"</code>), but only in the case where the criterion is a program pattern. In all other cases, this auxiliary set will be empty.</li>
 <li>The selection is then restricted to its <strong>difference</strong> with the auxiliary set (same as above for <code>"exclude"</code>).</li>
 <li>There are three cases:<ol>
 <li>If the criterion is a program pattern, all the taxa featured in a program whose name matches this pattern are added to the body of imparted knowledge.</li>
@@ -322,12 +322,10 @@ expressions, span algebra, semantic triples, negations) in the <a href="#deep-in
 </ol>
 </li>
 </ol>
-<p><strong><code>"impart all"</code> variant</strong></p>
-<p>Not supported.</p>
+<p>The <code>"impart all"</code> variant is not supported, and treated as <code>"impart"</code>.</p>
 <h3 id="hide-command"><code>"hide"</code> command</h3>
 <p>This is the simplest command of all. It merely accumulates the taxa matching the given patterns (relationships are not supported), without other effect on the filter. In the final stage, the accumulated taxa will be filtered out of the generated tables of recommended programs. Note that the learning costs are not affected whatsoever. Even if a taxon is hidden, its individual cost continues to contribute towards the total cost of a program.</p>
-<p><strong><code>"hide all"</code> variant</strong></p>
-<p>Not supported.</p>
+<p>The <code>"hide all"</code> variant is not supported, and treated as <code>"hide"</code>.</p>
 <h2 id="semantic-triples">Semantic triples</h2>
 <h3 id="span-algebra">Span algebra</h3>
 <p>Being given a program <span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span> of <span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span> lines, a couple <span><span class="MathJax_Preview">(i_1, i_2) </span><script type="math/tex">(i_1, i_2) </script></span> of line numbers such that <span><span class="MathJax_Preview">1 \leq i_1 \leq i_2 \leq n</span><script type="math/tex">1 \leq i_1 \leq i_2 \leq n</script></span> represents a <strong>span</strong> of <span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span>. When Paroxython finds a taxon <span><span class="MathJax_Preview">t</span><script type="math/tex">t</script></span> in <span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span>, it doesn't just say whether <span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span> features <span><span class="MathJax_Preview">t</span><script type="math/tex">t</script></span> or not: it returns the list of spans where <span><span class="MathJax_Preview">t</span><script type="math/tex">t</script></span> occurs.</p>
@@ -465,7 +463,13 @@ Paroxython tries (cf. <code><a title="paroxython.normalize_predicate.normalize_p
 <p>This allows the user to be understood when entering formulas like
 <code>x == y</code>, <code>x &lt;= y</code> or <code>y1 &lt; x1 == x2 &lt;= y2</code>.</p>
 <h3 id="positive-semantic-triples">Positive semantic triples</h3>
-<p>A pipeline command can apply not only to patterns of programs and taxa, but also to relationships between two patterns of taxa. Being given an operator <span><span class="MathJax_Preview">\mathfrak{R}</span><script type="math/tex">\mathfrak{R}</script></span> and two taxon patterns <span><span class="MathJax_Preview">t_1</span><script type="math/tex">t_1</script></span> and <span><span class="MathJax_Preview">t_2</span><script type="math/tex">t_2</script></span>, the statement <span><span class="MathJax_Preview">t_1 \mathbin{\mathfrak{R}} t_2</span><script type="math/tex">t_1 \mathbin{\mathfrak{R}} t_2</script></span> will be codified in the form of the <em>subject–predicate–object</em> expression <span><span class="MathJax_Preview">(t_1, \mathfrak{R}, t_2)</span><script type="math/tex">(t_1, \mathfrak{R}, t_2)</script></span>, which can be entered as a mere Python tuple <code>(t1, R, t2)</code>. For instance, the following pipeline command will only keep programs featuring a conditional inside a loop <strong>or</strong> (inclusive) ended by a <code>return</code> statement (like the function <code>first_missing_non_negative()</code> given above).</p>
+<p>A pipeline command can apply not only to patterns of programs and taxa, but also to relationships between the spans of two taxon patterns. Being given an operator <span><span class="MathJax_Preview">\mathfrak{R}</span><script type="math/tex">\mathfrak{R}</script></span> and two taxon patterns <span><span class="MathJax_Preview">t_1</span><script type="math/tex">t_1</script></span> and <span><span class="MathJax_Preview">t_2</span><script type="math/tex">t_2</script></span>, the statement <span><span class="MathJax_Preview">t_1 \mathbin{\mathfrak{R}} t_2</span><script type="math/tex">t_1 \mathbin{\mathfrak{R}} t_2</script></span> will be codified in the form of the <em>subject–predicate–object</em> expression <span><span class="MathJax_Preview">(t_1, \mathfrak{R}, t_2)</span><script type="math/tex">(t_1, \mathfrak{R}, t_2)</script></span>, which can be entered as a mere Python tuple <code>(t1, R, t2)</code>. The simplest semantic triple is:</p>
+<pre><code class="python">(&quot;metadata/program&quot;, &quot;contains&quot;, taxon_pattern)
+</code></pre>
+<p>It matches all programs where the span of the taxon <code>"metadata/program"</code> includes the span of a given <code>taxon_pattern</code>. Since, by definition, every program features one taxon <code>"metadata/program"</code>, whose span encompasses the whole program, this is strictly equivalent to:</p>
+<pre><code class="python">taxon_pattern
+</code></pre>
+<p>And now for something completely different: the following pipeline command will only keep programs featuring a conditional inside a loop <strong>or</strong> (inclusive) ended by a <code>return</code> statement (the function <code>first_missing_non_negative()</code> given above satisfies these two criteria).</p>
 <pre><code class="python">    {
         &quot;operation&quot;: &quot;include&quot;,
         &quot;data&quot;: [
@@ -496,76 +500,121 @@ Paroxython tries (cf. <code><a title="paroxython.normalize_predicate.normalize_p
 </code></pre>
 <p>This keeps only the programs that feature a conditional inside a loop <strong>and</strong> a conditional ended by a <code>return</code> statement <strong>and</strong> a <code>return</code> statement inside a loop. The result is a subset of the previous one, but may still include programs where the two loops, conditionals or <code>return</code> statements are distinct.</p>
 <h3 id="negative-semantic-triples">Negative semantic triples</h3>
-<p>Our pipeline system takes a set of programs as input, and produces a subset of those programs as output.</p>
-<p>With our pipeline system,</p>
-<p>Avec notre système, certaines conditions ne peuvent être exprimées qu'en introduisant la possibilité de nier les relations.</p>
-<p>Supposons que vous, en tant qu'enseignant, souhaitiez inclure dans votre cours sur l'affectation la notion d'affectation parallèle, par exemple pour introduire l'échange sans variable auxiliaire:</p>
+<p>It is possible to negate the predicate of a semantic triple, either by prefixing it by an exclamation mark (<em>e.g.</em>, <code>"!x≤y≤y≤x"</code>, or <code>"!contains"</code>), or by adding the word <em>not</em> (<em>e.g</em>, <code>"not x≤y≤y≤x"</code>, <code>"not contains"</code>,
+or <code>"contains not"</code>), whether it's grammatically correct or not.</p>
+<h4 id="expressing-the-absence-of-a-taxon">Expressing the absence of a taxon</h4>
+<p>Here again, the simplest <em>negated</em> semantic triple is:</p>
+<pre><code class="python">(&quot;metadata/program&quot;, &quot;not contains&quot;, taxon_pattern)
+</code></pre>
+<p>On a set of <strong>independent programs</strong> (<em>i.e.</em>, not importing each other), there is a strict equivalence between:</p>
+<pre><code class="python">    {
+        &quot;operation&quot;: &quot;include&quot;,
+        &quot;data&quot;: [
+            (&quot;metadata/program&quot;, &quot;not contains&quot;, taxon_pattern)
+        ]
+    },
+</code></pre>
+<p>and:</p>
+<pre><code class="python">    {
+        &quot;operation&quot;: &quot;exclude&quot;,
+        &quot;data&quot;: [
+            taxon_pattern
+        ]
+    },
+</code></pre>
+<p>And, conversely, between:</p>
+<pre><code class="python">    {
+        &quot;operation&quot;: &quot;include&quot;,
+        &quot;data&quot;: [
+            taxon_pattern
+        ]
+    },
+</code></pre>
+<p>and:</p>
+<pre><code class="python">    {
+        &quot;operation&quot;: &quot;exclude&quot;,
+        &quot;data&quot;: [
+            (&quot;metadata/program&quot;, &quot;not contains&quot;, taxon_pattern)
+        ]
+    },
+</code></pre>
+<p>This property may be used to select the programs that include any subset of a given set of taxa. This can be done in a systematic way by converting<sup id="fnref:to_cnf"><a class="footnote-ref" href="#fn:to_cnf" rel="footnote">4</a></sup> the corresponding logical formula in <a href="https://en.wikipedia.org/wiki/Conjunctive_normal_form">conjunctive normal form</a>, and transforming each clause into a separate <code>"include"</code> command.</p>
+<p>For instance, consider the two taxa <code>"flow/conditional"</code> and <code>"flow/loop"</code>. To keep only the programs that feature either a conditional (denoted by the literal <span><span class="MathJax_Preview">a</span><script type="math/tex">a</script></span>) or a loop (denoted by the literal <span><span class="MathJax_Preview">b</span><script type="math/tex">b</script></span>), but not both of them, express first the formula in CNF: <span><span class="MathJax_Preview">(a \lor b) \land (\neg a \lor \neg b)</span><script type="math/tex">(a \lor b) \land (\neg a \lor \neg b)</script></span>, then translate it into:</p>
+<pre><code class="python">    {
+        &quot;operation&quot;: &quot;include&quot;,
+        &quot;data&quot;: [
+            &quot;flow/conditional&quot;,
+            &quot;flow/loop&quot;,
+        ]
+    }, # keep only the programs that feature either a conditional or a loop
+    {
+        &quot;operation&quot;: &quot;include&quot;,
+        &quot;data&quot;: [
+            (&quot;metadata/program&quot;, &quot;not contains&quot;, &quot;flow/conditional&quot;),
+            (&quot;metadata/program&quot;, &quot;not contains&quot;, &quot;flow/loop&quot;),
+        ]
+    }, # among them, keep only those that feature no conditional or no loop
+</code></pre>
+<p>For two taxa, there are a total of 16 combinations, listed and tested <a href="https://github.com/laowantong/paroxython/blob/master/tests/test_recommend_programs.py#L674-L703">here</a>.
+<!---
+The previous link is automatically updated by build_pdoc.py.
+--></p>
+<p>However, on a set on <strong>interdependent programs</strong>, <code>"exclude"</code> is not the opposite of <code>"include"</code> anymore: <a href="#exclude-command">as already explained</a>, excluding a program excludes also the programs which import it. Consequently, <em>including</em> the programs that do not feature a given taxon will filter out those which feature it <em>directly</em>; but <em>excluding</em> the programs that do feature this taxon will filter out those which feature it either directly or <em>indirectly</em> (by importation).</p>
+<h4 id="general-semantics-of-the-negation">General semantics of the negation</h4>
+<p>The semantic triple:</p>
+<pre><code class="python">(taxon_pattern_1, not predicate, taxon_pattern_2)
+</code></pre>
+<p>&hellip; describe the set of programs which feature at least one taxon matching <code>taxon_pattern_1</code>, and such that, for any
+span <code>s_1</code> of such a taxon, there exists no span <code>s_2</code> of a taxon matching <code>taxon_pattern_2</code> for which <code>predicate(s_1, s_2)</code> is verified.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Note that the result includes also all programs featuring at least one taxon matching <code>taxon_pattern_1</code>, but no taxon matching <code>taxon_pattern_2</code>. For instance, suppose the original (negative) triple is:</p>
+<p><code>("subroutine", "not contains", "variable/assignment")</code></p>
+<p>The function will return the (disjoint) union of these two sets:</p>
+<ol>
+<li>The programs featuring at least one subroutine, but no assignment at all.</li>
+<li>The programs featuring at least one subroutine, at least one assignment, but no assignment inside a subroutine.</li>
+</ol>
+</div>
+<p>For example, if the original (negative) predicate is <code>"taxon_pattern_1 not inside taxon_pattern_2"</code>, any program consisting in:</p>
+<ul>
+<li><code>"taxon_2{taxon_1}"</code><sup id="fnref:braces"><a class="footnote-ref" href="#fn:braces" rel="footnote">5</a></sup> is rejected;</li>
+<li><code>"taxon_1"</code> is <strong>accepted</strong> (although there is no <code>taxon_2</code>);</li>
+<li><code>"taxon_2"</code> is <strong>rejected</strong> (no <code>taxon_1</code>);</li>
+<li><code>"taxon_1{taxon_2}"</code> is accepted;</li>
+<li><code>"taxon_1 taxon_2{taxon_1}"</code> is accepted (there exists a couple (<code>s_1</code>, <code>s_2</code>) such
+that <code>taxon_1</code> is not inside <code>taxon_2</code>);</li>
+<li><code>"taxon_1 taxon_2{taxon_1} taxon_2{}"</code> is accepted.</li>
+</ul>
+<p>If the predicate is <code>"taxon_pattern_2 not contains taxon_pattern_1"</code> (sic), any program consisting in:</p>
+<ul>
+<li><code>"taxon_2{taxon_1}"</code> is rejected;</li>
+<li><code>"taxon_1"</code> is <strong>rejected</strong> (no <code>taxon_2</code>);</li>
+<li><code>"taxon_2"</code> is <strong>accepted</strong> (although there is no <code>taxon_1</code>);</li>
+<li><code>"taxon_1{taxon_2}"</code> is accepted;</li>
+<li><code>"taxon_1 taxon_2{taxon_1}"</code> is accepted (there exists a couple (<code>s_1</code>, <code>s_2</code>) such
+that <code>taxon_2</code> does not contain <code>taxon_1</code>);</li>
+<li><code>"taxon_1 taxon_2{taxon_1} taxon_2{}"</code> is accepted.</li>
+</ul>
+<p>Note that, due to the rule explained in the warning above, <code>"taxon_pattern_1 not inside taxon_pattern_2"</code> is not equivalent to <code>"taxon_pattern_2 not contains taxon_pattern_1"</code> (differences in <strong>bold</strong>). However, if <code>taxon_pattern_2</code> is <code>"metadata/program"</code>, which is featured by all programs, these two forms become equivalent again.</p>
+<h4 id="a-practical-example">A practical example</h4>
+<p>Suppose you want your course on the assignment statements to include the concept of parallel assignment, for example to introduce swapping without an auxiliary variable:</p>
 <pre><code class="python">(a, b) = (b, a)
 </code></pre>
-<p>Dans la taxonomie, cette notion est répertoriée à la fois comme cas particulier de l'affectation de variable (taxon <span><span class="MathJax_Preview">t_1 = </span><script type="math/tex">t_1 = </script></span> <code>variable/assignment/parallel</code>) et comme faisant appel à la notion de tuple: taxon ((t_2 = ) <code>type/sequence/tuple</code>. Or, vous souhaitez n'introduire officiellement les tuples que bien plus tard dans votre cours. Vous souhaitez donc exclure des recommandations tout programme mettant en œuvre un tuple, sauf si celui-ci intervient dans une affectation parallèle. L'ensemble <span><span class="MathJax_Preview">\mathcal{P}</span><script type="math/tex">\mathcal{P}</script></span> des programmes peut être partitionné en quatre sous-ensembles:</p>
-<ul>
-<li><span><span class="MathJax_Preview">\mathcal{P}_0</span><script type="math/tex">\mathcal{P}_0</script></span> l'ensemble des programmes ne mettant en œuvre aucun tuple (donc a fortiori aucune affectation parallèle).</li>
-<li><span><span class="MathJax_Preview">\mathcal{P}_1</span><script type="math/tex">\mathcal{P}_1</script></span> l'ensemble des programmes mettant en œuvre un ou plusieurs tuples, mais systématiquement dans le cadre d'une affectation parallèle.</li>
-<li><span><span class="MathJax_Preview">\mathcal{P}_2</span><script type="math/tex">\mathcal{P}_2</script></span> l'ensemble des programmes mettant en œuvre deux tuples ou plus, avec au moins un dans le cadre d'une affectation parallèle, et au moins un au-dehors.</li>
-<li><span><span class="MathJax_Preview">\mathcal{P}_3</span><script type="math/tex">\mathcal{P}_3</script></span> l'ensemble des programmes mettant en œuvre un ou plusieurs tuples, mais aucun dans le cadre d'une affectation parallèle.</li>
-</ul>
-<p>Paroxython doit donc nous recommander tous les programmes de <span><span class="MathJax_Preview">\mathcal{P}_0 \cup \mathcal{P}_1</span><script type="math/tex">\mathcal{P}_0 \cup \mathcal{P}_1</script></span>, mais aucun de <span><span class="MathJax_Preview">\mathcal{P}_2 \cup \mathcal{P}_3</span><script type="math/tex">\mathcal{P}_2 \cup \mathcal{P}_3</script></span>.</p>
-<p>Le pipeline suivant ne donne <strong>pas</strong> le résultat cherché. La première opération restreint la sélection à <span><span class="MathJax_Preview">\mathcal{P}_1 \cup \mathcal{P}_2</span><script type="math/tex">\mathcal{P}_1 \cup \mathcal{P}_2</script></span>. La seconde en retire <span><span class="MathJax_Preview">\mathcal{P}_2</span><script type="math/tex">\mathcal{P}_2</script></span>. Le résultat est donc <span><span class="MathJax_Preview">\mathcal{P}_1</span><script type="math/tex">\mathcal{P}_1</script></span>:</p>
-<pre><code class="python">    {
-        &quot;operation&quot;: &quot;include&quot;,
-        &quot;data&quot;: [
-            &quot;variable/assignment/parallel&quot;,
-        ]
-    },
-    {
-        &quot;operation&quot;: &quot;exclude&quot;,
-        &quot;data&quot;: [
-            &quot;type/sequence/tuple&quot;,
-        ]
-    },
-</code></pre>
-<p>Dans cette deuxième tentative, le deuxième datum est un motif d'expression régulière qui couvre n'importe quel taxon ne commençant pas par <code>"type/sequence/tuple"</code>. Or, tout programme comporte au moins un taxon satisfaisant à cette propriété. Le résultat est donc <span><span class="MathJax_Preview">\mathcal{P}</span><script type="math/tex">\mathcal{P}</script></span>.</p>
-<pre><code class="python">    {
-        &quot;operation&quot;: &quot;include&quot;,
-        &quot;data&quot;: [
-            &quot;variable/assignment/parallel&quot;,
-            &quot;(?!type/sequence/tuple)&quot;,
-        ]
-    },
-</code></pre>
-<p>Si l'on applique l'opération inverse sur la contraposée, le résultat est vide. En effet, le premier datum exclut tous les programmes qui comportent au moins un taxon qui n'est pas une affectation parallèle.</p>
+<p>In the taxonomy, this concept is listed as a special case of both tuple (taxon <span><span class="MathJax_Preview">t_1 = </span><script type="math/tex">t_1 = </script></span> <code>"type/sequence/tuple"</code>) and variable assignment (taxon <span><span class="MathJax_Preview">t_2 = </span><script type="math/tex">t_2 = </script></span> <code>"variable/assignment/parallel"</code>).</p>
+<p>However, you want to introduce officially the abstract data type “tuple” only much later in your course. You therefore wish to exclude from the recommendations any program implementing a tuple, unless it is part of a parallel assignment. The following command will make the trick:</p>
 <pre><code class="python">    {
         &quot;operation&quot;: &quot;exclude&quot;,
         &quot;data&quot;: [
-            &quot;(?!variable/assignment/parallel)&quot;,
-            &quot;type/sequence/tuple&quot;,
+            (&quot;type/sequence/tuple&quot;, &quot;is not&quot;, &quot;variable/assignment/parallel&quot;)
         ]
     },
 </code></pre>
-<p>Le pipeline suivant ne garde que les programmes comportant au moins un tuple qui est une affectation parallèle, soit <span><span class="MathJax_Preview">\mathcal{P}_1</span><script type="math/tex">\mathcal{P}_1</script></span> \cup \mathcal{P}_2):</p>
-<pre><code class="python">    {
-        &quot;operation&quot;: &quot;include&quot;,
-        &quot;data&quot;: [
-            (&quot;type/sequence/tuple&quot;, &quot;is&quot;, &quot;variable/assignment/parallel&quot;),
-        ]
-    },
-</code></pre>
-<p>Il est en fait équivalent à:</p>
-<pre><code class="python">    {
-        &quot;operation&quot;: &quot;include&quot;,
-        &quot;data&quot;: [
-            &quot;variable/assignment/parallel&quot;,
-        ]
-    },
-</code></pre>
-<pre><code class="python">    {
-        &quot;operation&quot;: &quot;exclude&quot;,
-        &quot;data&quot;: [
-            (&quot;type/sequence/tuple&quot;, &quot;is not&quot;, &quot;variable/assignment/parallel&quot;),
-        ]
-    },
-</code></pre>
-<p>Cependant, vous ne souhaitez introduire officiellement</p>
+<p>The triple describes the set of programs which feature at least one tuple, and such that there is no tuple's span coinciding with a parallel assignment's span. In other words, the set of programs which feature at least one “non parallel” tuple. When we exclude these programs, those which remain either feature no tuple, or only the ones involved in a parallel assignment.</p>
+<p>The other combinations are listed and tested <a href="https://github.com/laowantong/paroxython/blob/master/tests/test_recommend_programs.py#L790-L819">here</a>.
+<!---
+The previous link is automatically updated by build_pdoc.py.
+--></p>
 <div class="footnote">
 <hr>
 <ol>
@@ -578,6 +627,12 @@ Thanks and kudos to the author, Matthew Barnett: without his awesome work, many 
 </li>
 <li id="fn:predicate_count">
 <p><span><span class="MathJax_Preview">162 = 6 \times 27</span><script type="math/tex">162 = 6 \times 27</script></span>, where <span><span class="MathJax_Preview">6</span><script type="math/tex">6</script></span> is the number of distinct permutations of the quadruple <span><span class="MathJax_Preview">(x, x, y, y)</span><script type="math/tex">(x, x, y, y)</script></span>, and <span><span class="MathJax_Preview">27=3^3</span><script type="math/tex">27=3^3</script></span> the number of elements of the triple auto-product of <span><span class="MathJax_Preview">3</span><script type="math/tex">3</script></span> symbols (<code>=</code>, <code>≤</code> and <code>&lt;</code>).&#160;<a class="footnote-backref" href="#fnref:predicate_count" rev="footnote" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:to_cnf">
+<p>Automate the conversion with the function <a href="https://github.com/sympy/sympy/blob/58e1e9abade7c38c66871fd06bf76ebac8c1df78/sympy/logic/boolalg.py#L1691-L1730"><code>to_cnf()</code></a> of <a href="https://www.sympy.org/en/index.html">SymPy</a>.&#160;<a class="footnote-backref" href="#fnref:to_cnf" rev="footnote" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+<li id="fn:braces">
+<p>In these examples, the braces are used to denote the fact that the span of a certain taxon is included in that of another taxon.&#160;<a class="footnote-backref" href="#fnref:braces" rev="footnote" title="Jump back to footnote 5 in the text">&#8617;</a></p>
 </li>
 </ol>
 </div>
@@ -625,7 +680,12 @@ Thanks and kudos to the author, Matthew Barnett: without his awesome work, many 
 <li><a href="#semantic-triples">Semantic triples</a><ul>
 <li><a href="#span-algebra">Span algebra</a></li>
 <li><a href="#positive-semantic-triples">Positive semantic triples</a></li>
-<li><a href="#negative-semantic-triples">Negative semantic triples</a></li>
+<li><a href="#negative-semantic-triples">Negative semantic triples</a><ul>
+<li><a href="#expressing-the-absence-of-a-taxon">Expressing the absence of a taxon</a></li>
+<li><a href="#general-semantics-of-the-negation">General semantics of the negation</a></li>
+<li><a href="#a-practical-example">A practical example</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

@@ -226,11 +226,45 @@ def test_recommend_mini_programs():
 
     commands = [
         {
+            "operation": "include",
+            "data": [
+                ("metadata/program", "not contains", "flow/conditional/else/if"),
+                # There is a subtle difference with the previous one, since "exclude" follows the
+                # importations, while "include" does not.
+            ],
+        }
+    ]
+    rec = Recommendations(db)
+    rec.run_pipeline(commands)
+    assert rec.selected_programs == {"assignment.py", "collatz.py", "is_even.py"}
+
+    commands = [{"operation": "include", "data": ["flow/conditional/else/if",],}]
+    rec = Recommendations(db)
+    rec.run_pipeline(commands)
+    assert rec.selected_programs == {"fizzbuzz.py"}
+
+    commands = [
+        {
+            "operation": "exclude",
+            "data": [
+                ("metadata/program", "not contains", "flow/conditional/else/if"),
+                # "assignment.py", "is_even.py", "collatz.py" are excluded since they don't feature
+                # an `elif`. "fizzbuzz.py" features an `elif`, but is excluded since it imports an
+                # excluded program ("collatz.py").
+            ],
+        }
+    ]
+    rec = Recommendations(db)
+    rec.run_pipeline(commands)
+    assert not rec.selected_programs
+
+    commands = [
+        {
             "operation": "exclude",
             "data": [
                 "flow/conditional/else/if",  # Although not recommended, it is possible to mix
                 "assignment.py"  # taxa and programs (ending with ".py") in a same command.
-                # Crucially, this avoid to specify whether the command should be applied on
+                # Crucially, this avoids to specify whether the command should be applied on
                 # taxa or programs.
             ],
         }
@@ -636,7 +670,7 @@ def test_recommend_mini_programs():
 
 db = json.loads(Path("examples/simple/programs_db.json").read_text())
 
-
+# extract_1 (start)
 a = "flow/conditional"
 b = "flow/loop"
 _a = ("metadata/program", "not contains", "flow/conditional")
@@ -649,6 +683,7 @@ base_1 = [p0, p1, p2, p3]
 
 # fmt: off
 pipelines_1 = [
+    (set()           , [("include", [a]), ("include", [_a])]), # a & ~a
     ({        p2, p3}, [("include", [a])]), # a
     ({p0, p1,       }, [("include", [_a])]), # ~a
     ({    p1,     p3}, [("include", [b])]), # b
@@ -666,6 +701,7 @@ pipelines_1 = [
     ({p0, p1, p2, p3}, [("include", [a, _a]), ("include", [b, _b])]), # (a | ~a) & (b | ~b)
 ]
 # fmt: on
+# extract_1 (stop)
 
 
 @pytest.mark.parametrize("expected_programs, commands", pipelines_1)
@@ -750,6 +786,7 @@ def test_recommend_simple_programs_2(expected_programs, commands):
     assert rec.selected_programs == expected_programs
 
 
+# extract_2 (start)
 holds_parallel_tuple = "variable/assignment/parallel"
 holds_ordinary_tuple = ("type/sequence/tuple", "is not", "variable/assignment/parallel")
 lacks_parallel_tuple = ("metadata/program", "not contains", "variable/assignment/parallel")
@@ -780,6 +817,7 @@ pipelines_3 = [
     ({p0, p1, p2, p3}, []),
 ]
 # fmt: on
+# extract_2 (stop)
 
 
 @pytest.mark.parametrize("expected_programs, commands", pipelines_3)
