@@ -1,8 +1,5 @@
 docopt==0.6.2
-mypy==0.782
-pre-commit==2.6.0
 pytest==5.4.3
 regex==2020.7.14
-sqlparse==0.3.1
 typed-ast==1.4.1
 typing-extensions==3.7.4.2
