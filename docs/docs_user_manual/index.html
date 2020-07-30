@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.8.3" />
 <title>paroxython.docs_user_manual API documentation</title>
-<meta name="description" content="Getting recommendations." />
+<meta name="description" content="Pipeline tutorial: getting recommendations." />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
 <link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/github.min.css" crossorigin>
@@ -26,11 +26,9 @@
 <h1 class="title">User manual</h1>
 </header>
 <section id="section-intro">
-<h2 id="getting-recommendations">Getting recommendations</h2>
-<p>This tutorial walks you through a series of little “teacher stories” to illustrate how to write
-the pipeline of commands used by Paroxython's recommendation system. You run it on command line
-with:</p>
-<pre><code class="shell">paroxython --pipe='path/to/your/pipe.py' 'path/to/your/programs/db.json'
+<h2 id="pipeline-tutorial-getting-recommendations">Pipeline tutorial: getting recommendations</h2>
+<p>This tutorial walks you through a series of little “teacher stories” to illustrate how to write the pipeline of commands used by Paroxython's recommendation system. You run it on command line with:</p>
+<pre><code class="shell">paroxython recommend -p='path/to/your/pipe.py' 'path/to/your/programs/db.json'
 </code></pre>
 <h3 id="covering-your-bases">Covering your base(s)</h3>
 <p>Our simplest pipeline has no command: it just lists the programs of your database, without any
@@ -190,7 +188,7 @@ trailing commas, r-strings, etc.</p>
 <p>This is the end of our pipeline tutorial. Read on for more advanced features (regular
 expressions, span algebra, semantic triples, negations) in the <a href="#deep-in-the-pipeline">next section</a>.</p>
 <h1 id="deep-in-the-pipeline">Deep in the pipeline</h1>
-<p>This part describes in some details how the recommendation system works. It assumes you've already read the <a href="#getting-recommendations">tutorial on recommendations</a>. First of all, let us recall the example of the pipeline we gave at the end.</p>
+<p>This part describes in some details how the recommendation system works. It assumes you've already read the <a href="#pipeline-tutorial-getting-recommendations">tutorial on recommendations</a>. First of all, let us recall the example of the pipeline we gave at the end.</p>
 <pre><code class="python">&gt;&gt;&gt; [
 ...     {
 ...         &quot;operation&quot;: &quot;impart&quot;,
@@ -437,11 +435,11 @@ when we look for a function which
 <strong>contains</strong> a loop, we are generally not interested in whether
 the loop <strong>finishes</strong> on the last line. Blind adherence to strictness convention would force us to
 express our query as a disjunction of these two relations for the following program to be selected:</p>
-<pre><code class="python">1   def first_missing_non_negative(l):
-2       elements = set(l)
-3       for natural in range(len(elements) + 1):
-4           if natural not in elements:
-5               return natural
+<pre><code class="python">def first_missing_non_negative(l):
+    elements = set(l)
+    for natural in range(len(elements) + 1):
+        if natural not in elements:
+            return natural
 </code></pre>
 <p><strong>Strict inequalities.</strong> In addition to the existing relations, all combinations of strict and non-strict
 conditions are generated, for instance <span><span class="MathJax_Preview">x_1 &lt; x_2 &lt; y_1 \leq y_2</span><script type="math/tex">x_1 < x_2 < y_1 \leq y_2</script></span>. That adds up to 162 in total<sup id="fnref:predicate_count"><a class="footnote-ref" href="#fn:predicate_count" rel="footnote">3</a></sup>.</p>
@@ -539,7 +537,7 @@ or <code>"contains not"</code>), whether it's grammatically correct or not.</p>
     },
 </code></pre>
 <p>This property may be used to select the programs that include any subset of a given set of taxa. This can be done in a systematic way by converting<sup id="fnref:to_cnf"><a class="footnote-ref" href="#fn:to_cnf" rel="footnote">4</a></sup> the corresponding logical formula in <a href="https://en.wikipedia.org/wiki/Conjunctive_normal_form">conjunctive normal form</a>, and transforming each clause into a separate <code>"include"</code> command.</p>
-<p>For instance, consider the two taxa <code>"flow/conditional"</code> and <code>"flow/loop"</code>. To keep only the programs that feature either a conditional (denoted by the literal <span><span class="MathJax_Preview">a</span><script type="math/tex">a</script></span>) or a loop (denoted by the literal <span><span class="MathJax_Preview">b</span><script type="math/tex">b</script></span>), but not both of them, express first the formula in CNF: <span><span class="MathJax_Preview">(a \lor b) \land (\neg a \lor \neg b)</span><script type="math/tex">(a \lor b) \land (\neg a \lor \neg b)</script></span>, then translate it into:</p>
+<p>For instance, consider the two taxa <code>"flow/conditional"</code> and <code>"flow/loop"</code>. To keep only the programs that feature either a conditional (denoted by the literal <span><span class="MathJax_Preview">a</span><script type="math/tex">a</script></span>) or a loop (denoted by the literal <span><span class="MathJax_Preview">b</span><script type="math/tex">b</script></span>), but not both of them, express first the formula in <abbr title="Conjunctive Normal Form">CNF</abbr>: <span><span class="MathJax_Preview">(a \lor b) \land (\neg a \lor \neg b)</span><script type="math/tex">(a \lor b) \land (\neg a \lor \neg b)</script></span>, then translate it into:</p>
 <pre><code class="python">    {
         &quot;operation&quot;: &quot;include&quot;,
         &quot;data&quot;: [
@@ -601,7 +599,7 @@ that <code>taxon_2</code> does not contain <code>taxon_1</code>);</li>
 <p>Suppose you want your course on the assignment statements to include the concept of parallel assignment, for example to introduce swapping without an auxiliary variable:</p>
 <pre><code class="python">(a, b) = (b, a)
 </code></pre>
-<p>In the taxonomy, this concept is listed as a special case of both tuple (taxon <span><span class="MathJax_Preview">t_1 = </span><script type="math/tex">t_1 = </script></span> <code>"type/sequence/tuple"</code>) and variable assignment (taxon <span><span class="MathJax_Preview">t_2 = </span><script type="math/tex">t_2 = </script></span> <code>"variable/assignment/parallel"</code>).</p>
+<p>In the taxonomy, this concept is listed as a special case of both tuple (<code>"type/sequence/tuple"</code>) and variable assignment (<code>"variable/assignment/parallel"</code>).</p>
 <p>However, you want to introduce officially the abstract data type “tuple” only much later in your course. You therefore wish to exclude from the recommendations any program implementing a tuple, unless it is part of a parallel assignment. The following command will make the trick:</p>
 <pre><code class="python">    {
         &quot;operation&quot;: &quot;exclude&quot;,
@@ -632,7 +630,7 @@ Thanks and kudos to the author, Matthew Barnett: without his awesome work, many 
 <p>Automate the conversion with the function <a href="https://github.com/sympy/sympy/blob/58e1e9abade7c38c66871fd06bf76ebac8c1df78/sympy/logic/boolalg.py#L1691-L1730"><code>to_cnf()</code></a> of <a href="https://www.sympy.org/en/index.html">SymPy</a>.&#160;<a class="footnote-backref" href="#fnref:to_cnf" rev="footnote" title="Jump back to footnote 4 in the text">&#8617;</a></p>
 </li>
 <li id="fn:braces">
-<p>In these examples, the braces are used to denote the fact that the span of a certain taxon is included in that of another taxon.&#160;<a class="footnote-backref" href="#fnref:braces" rev="footnote" title="Jump back to footnote 5 in the text">&#8617;</a></p>
+<p>In these examples, the braces denote the fact that the span of a certain taxon is included in that of another taxon.&#160;<a class="footnote-backref" href="#fnref:braces" rev="footnote" title="Jump back to footnote 5 in the text">&#8617;</a></p>
 </li>
 </ol>
 </div>
@@ -655,7 +653,7 @@ Thanks and kudos to the author, Matthew Barnett: without his awesome work, many 
 <h1>User manual</h1>
 <div class="toc">
 <ul>
-<li><a href="#getting-recommendations">Getting recommendations</a><ul>
+<li><a href="#pipeline-tutorial-getting-recommendations">Pipeline tutorial: getting recommendations</a><ul>
 <li><a href="#covering-your-bases">Covering your base(s)</a></li>
 <li><a href="#imparting-knowledge">Imparting knowledge</a><ul>
 <li><a href="#tracking-the-progress-of-your-course">Tracking the progress of your course</a></li>

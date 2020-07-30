@@ -706,7 +706,7 @@ pipelines_1 = [
 
 @pytest.mark.parametrize("expected_programs, commands", pipelines_1)
 def test_recommend_simple_programs_1(expected_programs, commands):
-    rec = Recommendations(db,)
+    rec = Recommendations(db)
     rec.run_pipeline(
         [{"operation": operation, "data": data} for (operation, data) in commands]
         + [{"operation": "include", "data": base_1}]
@@ -777,7 +777,7 @@ pipelines_2 = [
 
 @pytest.mark.parametrize("expected_programs, commands", pipelines_2)
 def test_recommend_simple_programs_2(expected_programs, commands):
-    rec = Recommendations(db,)
+    rec = Recommendations(db)
     rec.run_pipeline(
         [{"operation": operation, "data": data} for (operation, data) in commands]
         + [{"operation": "include", "data": base_2}]
@@ -822,7 +822,7 @@ pipelines_3 = [
 
 @pytest.mark.parametrize("expected_programs, commands", pipelines_3)
 def test_recommend_simple_programs_3(expected_programs, commands):
-    rec = Recommendations(db,)
+    rec = Recommendations(db)
     rec.run_pipeline(
         [{"operation": operation, "data": data} for (operation, data) in commands]
         + [{"operation": "include", "data": base_3}]

@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.8.3" />
 <title>paroxython.docs_developer_manual API documentation</title>
-<meta name="description" content="Pattern specifications." />
+<meta name="description" content="Bird view." />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
 <link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/github.min.css" crossorigin>
@@ -26,29 +26,106 @@
 <h1 class="title">Developer manual</h1>
 </header>
 <section id="section-intro">
-<h2 id="pattern-specifications">Pattern specifications</h2>
-<p>Browse <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md">spec.md</a> on GitHub.</p>
-<h2 id="default-taxonomy">Default Taxonomy</h2>
-<p>Browse <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/taxonomy.tsv">taxonomy.tsv</a> on GitHub.</p>
-<h2 id="user-types">User types</h2>
-<p>Paroxython makes heavy use of Python 3.5+ <a href="https://docs.python.org/3/library/typing.html">type hints</a>.
-They are documented directly in the source code.
-Browse <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/user_types.py">user_types.py</a> on GitHub.</p>
+<h2 id="bird-view">Bird view</h2>
+<p>First, scroll the navigation panel until the whole program structure appear (depending on your browser, you may need to click on it and use arrow keys).</p>
+<p>navigation panel</p>
+<p>In the diagram on the left, Python modules appear in yellowish (extension <code>".py"</code> omitted), input files and folders in reddish, and output files and databases in green.</p>
+<h3 id="first-step-tagging-a-collection-of-programs">First step: tagging a collection of programs</h3>
+<dl>
+<dt><code>source files</code> (Browse a copy of <a href="https://github.com/laowantong/paroxython/blob/master/examples/simple/programs">wiki.python.org simple programs</a> on GitHub)</dt>
+<dd>It all starts with the folder you dig into when you need a Python program for your students, to use it either as an example or an exercise.</dd>
+<dt><code><a title="paroxython.preprocess_source" href="../preprocess_source.html">paroxython.preprocess_source</a></code></dt>
+<dd>Takes a source code as an input and returns it without comments, docstrings, blank lines, etc.</dd>
+<dt><code><a title="paroxython.list_programs" href="../list_programs.html">paroxython.list_programs</a></code></dt>
+<dd>
+<p>Walks this folder and returns the list of its source codes, prepared with the help of:</p>
+</dd>
+<dt><code><a title="paroxython.flatten_ast" href="../flatten_ast.html">paroxython.flatten_ast</a></code></dt>
+<dd>todo</dd>
+<dt><code>spec.md</code> (Browse <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md">default specifications</a> on GitHub)</dt>
+<dd>todo</dd>
+<dt><code><a title="paroxython.parse_program" href="../parse_program.html">paroxython.parse_program</a></code></dt>
+<dd>todo</dd>
+<dt><code><a title="paroxython.label_programs" href="../label_programs.html">paroxython.label_programs</a></code></dt>
+<dd>todo</dd>
+<dt><code>taxonomy.tsv</code> (Browse <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/taxonomy.tsv">default taxonomy</a> on GitHub)</dt>
+<dd>todo</dd>
+<dt><code><a title="paroxython.map_taxonomy" href="../map_taxonomy.html">paroxython.map_taxonomy</a></code></dt>
+<dd>todo</dd>
+<dt><code><a title="paroxython.make_db" href="../make_db.html">paroxython.make_db</a></code></dt>
+<dd>todo</dd>
+<dt><code>*_db.json</code></dt>
+<dd>todo</dd>
+<dt><code>*_db.sqlite</code></dt>
+<dd>todo</dd>
+</dl>
+<h3 id="second-step-getting-program-recommendations">Second step: getting program recommendations</h3>
+<dl>
+<dt><code><a title="paroxython.compare_spans" href="../compare_spans.html">paroxython.compare_spans</a></code></dt>
+<dd>todo</dd>
+<dt><code><a title="paroxython.normalize_predicate" href="../normalize_predicate.html">paroxython.normalize_predicate</a></code></dt>
+<dd>todo</dd>
+<dt><code>*_pipe.py</code></dt>
+<dd>todo</dd>
+<dt><code><a title="paroxython.filter_programs" href="../filter_programs.html">paroxython.filter_programs</a></code></dt>
+<dd>todo</dd>
+<dt><code><a title="paroxython.assess_costs" href="../assess_costs.html">paroxython.assess_costs</a></code></dt>
+<dd>todo</dd>
+<dt><code><a title="paroxython.recommend_programs" href="../recommend_programs.html">paroxython.recommend_programs</a></code></dt>
+<dd>todo</dd>
+<dt><code>*_recommendations.md</code></dt>
+<dd>todo</dd>
+</dl>
+<p>Over the years, you have accumulated dozens of programs, some suitable for beginners, others requiring more advanced knowledge.</p>
+<p>to show or have your students write a program illustrating a particular concept.</p>
+<p>a folder containing all the programs you have prepared for your students, and from which you would like to get recommendations.</p>
 <h2 id="glossary">Glossary</h2>
 <ul>
-<li>Hint:</li>
+<li>(Manual) hint:</li>
 <li>Label:</li>
 <li>Span:</li>
 <li>Tag:</li>
 <li>Taxon:</li>
 <li>Taxonomy:</li>
+<li>Criterion:</li>
+<li>Pattern:</li>
+<li>Data:</li>
+<li>(Semantic) triple:</li>
+<li>Predicate:</li>
+<li>Command:</li>
+<li>Pipeline:</li>
 </ul>
-<h2 id="default-argument-trick">Default argument trick</h2>
-<p>Several functions or methods declare a compiled and bound regex pattern as an optional argument
-(see <code><a title="paroxython.normalize_predicate.normalize_predicate" href="../normalize_predicate.html#paroxython.normalize_predicate.normalize_predicate">normalize_predicate()</a></code> for an example). Such arguments
-are not meant to be provided by the caller. Their default value will be used systematically, with
-the benefit of being evaluated only once. This is arguably better for both performance and
-encapsulation. More details on <a href="https://stackoverflow.com/a/30688691/173003">Stack Overflow</a>.</p>
+<h2 id="helper-programs">Helper programs</h2>
+<p>Currently, please don't expect the same level of code quality, documentation and testing than those of the user-facing parts of this package.</p>
+<dl>
+<dt><a href="https://github.com/laowantong/paroxython/blob/master/helpers/build_pdoc.py"><code>build_pdoc.py</code></a></dt>
+<dd>Builds this documentation with the excellent <a href="https://pdoc3.github.io/pdoc/">pdoc3</a>, and applies a number of patches to tailor the result to our needs.</dd>
+<dt><a href="https://github.com/laowantong/paroxython/blob/master/helpers/context.py"><code>context.py</code></a></dt>
+<dd>todo</dd>
+<dt><a href="https://github.com/laowantong/paroxython/blob/master/helpers/draw_flow.py"><code>draw_flow.py</code></a></dt>
+<dd>Generates the diagrams on the present page and <code><a title="paroxython.filter_programs" href="../filter_programs.html">paroxython.filter_programs</a></code>. Automatically called by <code>build_doc.py</code>.</dd>
+<dt><a href="https://github.com/laowantong/paroxython/blob/master/helpers/example.sql"><code>example.sql</code></a></dt>
+<dd>todo</dd>
+<dt><a href="https://github.com/laowantong/paroxython/blob/master/helpers/make_compare_spans.py"><code>make_compare_spans.py</code></a></dt>
+<dd>Generates the Python module <code><a title="paroxython.compare_spans" href="../compare_spans.html">paroxython.compare_spans</a></code>. Must be launched manually.</dd>
+<dt><a href="https://github.com/laowantong/paroxython/blob/master/helpers/make_dummy_db.py"><code>make_dummy_db.py</code></a></dt>
+<dd>Generates <a href="https://github.com/laowantong/paroxython/blob/master/examples/dummy/taxa_and_programs.txt"><code>taxa_and_programs.txt</code></a> and, from this file, <a href="https://github.com/laowantong/paroxython/blob/master/examples/dummy/programs_db.json"><code>programs_db.json</code></a>, used as a dummy example in various tests.</dd>
+<dt><a href="https://github.com/laowantong/paroxython/blob/master/helpers/make_programming_idioms_folder.py"><code>make_programming_idioms_folder.py</code></a></dt>
+<dd>Populates the example directory <a href="https://github.com/laowantong/paroxython/blob/master/examples/dummy/idioms/programs"><code>idioms/programs</code></a>, with a broad variety of code snippets snapshotted from the amazing repository <a href="https://www.programming-idioms.org">Programming Idioms</a> of Valentin Deleplace. More info in the directory <a href="https://github.com/laowantong/paroxython/blob/master/examples/idioms/read_me.md"><code>read_me.md</code></a>.</dd>
+<dt><a href="https://github.com/laowantong/paroxython/blob/master/helpers/parse_syllabus.py"><code>parse_syllabus.py</code></a></dt>
+<dd>todo</dd>
+<dt><a href="https://github.com/laowantong/paroxython/blob/master/helpers/print_taxon_patterns.py"><code>print_taxon_patterns.py</code></a></dt>
+<dd>todo</dd>
+<dt><a href="https://github.com/laowantong/paroxython/blob/master/helpers/reformat_spec.py"><code>reformat_spec.py</code></a></dt>
+<dd>todo</dd>
+<dt><a href="https://github.com/laowantong/paroxython/blob/master/helpers/suggest_regex.py"><code>suggest_regex.py</code></a></dt>
+<dd>todo</dd>
+</dl>
+<h2 id="implementation-notes">Implementation notes</h2>
+<h3 id="user-types">User types</h3>
+<p>Paroxython makes heavy use of Python 3.5+ <a href="https://docs.python.org/3/library/typing.html">type hints</a>. They are documented directly in the source code. Browse <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/user_types.py">user_types.py</a> on GitHub.</p>
+<h3 id="default-argument-trick">Default argument trick</h3>
+<p>Several functions or methods declare a compiled and bound regex pattern as an optional argument (see <code><a title="paroxython.normalize_predicate.normalize_predicate" href="../normalize_predicate.html#paroxython.normalize_predicate.normalize_predicate">normalize_predicate()</a></code> for an example). Such arguments are not meant to be provided by the caller. Their default value will be used systematically, with the benefit of being evaluated only once. This is arguably better for both performance and encapsulation. More details on <a href="https://stackoverflow.com/a/30688691/173003">Stack Overflow</a>.</p>
 </section>
 <section>
 </section>
@@ -68,13 +145,20 @@ encapsulation. More details on <a href="https://stackoverflow.com/a/30688691/173
 <h1>Developer manual</h1>
 <div class="toc">
 <ul>
-<li><a href="#pattern-specifications">Pattern specifications</a></li>
-<li><a href="#default-taxonomy">Default Taxonomy</a></li>
-<li><a href="#user-types">User types</a></li>
+<li><a href="#bird-view">Bird view</a><ul>
+<li><a href="#first-step-tagging-a-collection-of-programs">First step: tagging a collection of programs</a></li>
+<li><a href="#second-step-getting-program-recommendations">Second step: getting program recommendations</a></li>
+</ul>
+</li>
 <li><a href="#glossary">Glossary</a></li>
+<li><a href="#helper-programs">Helper programs</a></li>
+<li><a href="#implementation-notes">Implementation notes</a><ul>
+<li><a href="#user-types">User types</a></li>
 <li><a href="#default-argument-trick">Default argument trick</a></li>
 </ul>
-</nav>
+</li>
+</ul>
+<p><img alt="" src="../resources/flow.png"></p></nav>
 </main>
 <footer id="footer">
 <p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.8.3</a>.</p>

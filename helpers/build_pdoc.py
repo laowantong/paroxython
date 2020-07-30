@@ -10,6 +10,8 @@ from paroxython.cli.cli_tag import main as tag_program
 from paroxython.goodies import add_line_numbers
 from paroxython.preprocess_source import Cleanup
 
+import helpers.draw_flow
+
 PATH = f"{Path(dirname(__file__)).parent}"
 
 
@@ -247,6 +249,14 @@ def update_github_links():
     path.write_text(text)
 
 
+def inject_flow_diagram_in_nav():
+    path = Path("docs/docs_developer_manual/index.html")
+    text = path.read_text()
+    (text, n) = regex.subn(r"(</nav>)", r'<p><img alt="" src="../resources/flow.png"></p>\1', text)
+    assert n == 1
+    path.write_text(text)
+
+
 def main():
     update_readme_example()
     update_github_links()
@@ -258,6 +268,7 @@ def main():
     cleanup_index()
     insert_line_breaks()
     patch_prose()
+    inject_flow_diagram_in_nav()
     compute_stats()
 
 

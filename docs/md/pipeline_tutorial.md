@@ -1,11 +1,9 @@
-## Getting recommendations
+## Pipeline tutorial: getting recommendations
 
-This tutorial walks you through a series of little “teacher stories” to illustrate how to write
-the pipeline of commands used by Paroxython's recommendation system. You run it on command line
-with:
+This tutorial walks you through a series of little “teacher stories” to illustrate how to write the pipeline of commands used by Paroxython's recommendation system. You run it on command line with:
 
 ```shell
-paroxython --pipe='path/to/your/pipe.py' 'path/to/your/programs/db.json'
+paroxython recommend -p='path/to/your/pipe.py' 'path/to/your/programs/db.json'
 ```
 
 ### Covering your base(s)

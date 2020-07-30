@@ -1,6 +1,6 @@
 # Deep in the pipeline
 
-This part describes in some details how the recommendation system works. It assumes you've already read the [tutorial on recommendations](#getting-recommendations). First of all, let us recall the example of the pipeline we gave at the end.
+This part describes in some details how the recommendation system works. It assumes you've already read the [tutorial on recommendations](#pipeline-tutorial-getting-recommendations). First of all, let us recall the example of the pipeline we gave at the end.
 
 >>> [
 ...     {
@@ -202,11 +202,11 @@ the loop **finishes** on the last line. Blind adherence to strictness convention
 express our query as a disjunction of these two relations for the following program to be selected:
 
 ```python
-1   def first_missing_non_negative(l):
-2       elements = set(l)
-3       for natural in range(len(elements) + 1):
-4           if natural not in elements:
-5               return natural
+def first_missing_non_negative(l):
+    elements = set(l)
+    for natural in range(len(elements) + 1):
+        if natural not in elements:
+            return natural
 ```
 
 **Strict inequalities.** In addition to the existing relations, all combinations of strict and non-strict
@@ -346,6 +346,8 @@ This property may be used to select the programs that include any subset of a gi
 
 For instance, consider the two taxa `"flow/conditional"` and `"flow/loop"`. To keep only the programs that feature either a conditional (denoted by the literal \(a\)) or a loop (denoted by the literal \(b\)), but not both of them, express first the formula in CNF: \((a \lor b) \land (\neg a \lor \neg b)\), then translate it into:
 
+*[CNF]: Conjunctive Normal Form
+
 ```python
     {
         "operation": "include",
@@ -403,7 +405,7 @@ For example, if the original (negative) predicate is `"taxon_pattern_1 not insid
 - `"taxon_1 taxon_2{taxon_1} taxon_2{}"` is accepted.
 
 [^braces]:
-    In these examples, the braces are used to denote the fact that the span of a certain taxon is included in that of another taxon.
+    In these examples, the braces denote the fact that the span of a certain taxon is included in that of another taxon.
 
 If the predicate is `"taxon_pattern_2 not contains taxon_pattern_1"` (sic), any program consisting in:
 
@@ -425,7 +427,7 @@ Suppose you want your course on the assignment statements to include the concept
 (a, b) = (b, a)
 ```
 
-In the taxonomy, this concept is listed as a special case of both tuple (taxon \(t_1 = \) `"type/sequence/tuple"`) and variable assignment (taxon \(t_2 = \) `"variable/assignment/parallel"`).
+In the taxonomy, this concept is listed as a special case of both tuple (`"type/sequence/tuple"`) and variable assignment (`"variable/assignment/parallel"`).
 
  However, you want to introduce officially the abstract data type “tuple” only much later in your course. You therefore wish to exclude from the recommendations any program implementing a tuple, unless it is part of a parallel assignment. The following command will make the trick:
 
