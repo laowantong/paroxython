@@ -7636,10 +7636,10 @@
         "operator/boolean/not": [[14,14]],
         "operator/list/replication": [[3,3]],
         "subroutine/argument/arg": [[2,2],[2,2],[5,5],[5,5],[11,11],[11,11],[11,11],[13,13],[13,13],[13,13]],
-        "subroutine/function": [[5,10],[11,12]],
+        "subroutine/function": [[5,10]],
+        "subroutine/function/predicate": [[11,12]],
         "subroutine/method/flavor/instance": [[2,4],[5,10],[11,12],[13,15]],
         "subroutine/method/naming/magic": [[2,4]],
-        "subroutine/predicate": [[11,12]],
         "subroutine/procedure": [[2,4],[13,15]],
         "subroutine/return/something": [[10,10],[12,12]],
         "subscript/index": [[6,6],[9,9],[9,9],[10,10]],
@@ -16535,6 +16535,9 @@
       "035.0667-first-class-function--compose.py",
       "036.0670-first-class-function--generic-composition.py"
     ],
+    "subroutine/function/predicate": [
+      "187.3261-disjoint-set.py"
+    ],
     "subroutine/higher_order": [
       "018.2084-depth-first-traversing-of-a-tree.py",
       "035.0667-first-class-function--compose.py",
@@ -16572,9 +16575,6 @@
     ],
     "subroutine/nested/closure": [
       "037.0671-currying.py"
-    ],
-    "subroutine/predicate": [
-      "187.3261-disjoint-set.py"
     ],
     "subroutine/procedure": [
       "003.0019-create-a-procedure.py",

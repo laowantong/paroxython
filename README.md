@@ -15,7 +15,7 @@
 
 ![](docs/resources/logo.png)
 
-Paroxython is a command-line tool which finds and tags algorithmic features (such as assignments, nested loops, tail-recursive functions, etc.) in a collection of small Python programs, typically gathered for educational purposes (_e.g._, examples, patterns, exercise corrections).
+Paroxython is a set of command-line tools which finds and tags algorithmic features (such as assignments, nested loops, tail-recursive functions, etc.) in a collection of small Python programs, typically gathered for educational purposes (_e.g._, examples, patterns, exercise corrections).
 
 Each tag consists in a free-form label associated with its spanning lines. These labels are then mapped onto a knowledge taxonomy designed by the teacher with basic order constraints in mind (_e.g._, the fact that the introduction of the concept of early exit must come after that of loop, which itself requires that of control flow, is expressed with the following taxon: `flow/loop/exit/early`).
 

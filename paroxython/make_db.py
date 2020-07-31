@@ -156,11 +156,9 @@ class Database:
                         "flow/loop/exit/late": [[3,8],[6,7]],
             ```
 
-
-
         Example:
-            See the [JSON database](https://github.com/laowantong/paroxython/blob/master/examples/mini/programs_db.json)
-            constructed from the programs of this [directory](https://github.com/laowantong/paroxython/tree/master/examples/mini/programs).
+            See the [JSON database](https://repo/examples/mini/programs_db.json) constructed from
+            the programs of this [directory](https://repo/examples/mini/programs).
         """
         data = {
             "programs": self.programs_infos,
@@ -240,7 +238,7 @@ class Database:
             ```
 
             On the provided
-            [simple programs](https://github.com/laowantong/paroxython/tree/master/examples/simple/programs),
+            [simple programs](https://repo/examples/simple/programs),
             its execution results in:
 
             ![](resources/sql_query_example.png)

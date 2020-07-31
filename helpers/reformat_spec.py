@@ -1,6 +1,8 @@
-"""Read the contents of resources/spec.md, normalize its formatting and write it back.
+"""
+Read the contents of resources/spec.md, normalize its formatting and write it back.
 
 The following operations are carried out:
+
 - The old clickable table of contents (if any) is replaced by a new one.
 - The spaces and separators between sections are homogeneized.
 - The SQL requests are reformatted (courtesy of the python-sqlparse library).

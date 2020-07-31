@@ -29,9 +29,8 @@
 <p>Translate labels into taxa.</p>
 <h2 id="description">Description</h2>
 <p>This translation comes after <code><a title="paroxython.label_programs" href="label_programs.html">paroxython.label_programs</a></code> has tagged a program with the <strong>labels</strong>
-defined in
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md"><code>spec.md</code></a>.
-Its purpose is to convert these labels into the <strong>taxa</strong> defined (by default) in
+defined in <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md"><code>spec.md</code></a>. Its purpose is to convert these
+labels into the <strong>taxa</strong> defined (by default) in
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/taxonomy.tsv"><code>taxonomy.tsv</code></a>.</p>
 <h2 id="example">Example</h2>
 <p>Let's return to the Jupyter notebook's cell given in the introduction:</p>
@@ -229,7 +228,7 @@ given at the start of the section.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L0-L426" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L0-L425" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">from collections import Counter, defaultdict
 from pathlib import Path
@@ -426,7 +425,7 @@ a bag (multiset) of its spans.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L311-L412" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L310-L411" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def deduplicated_taxa(taxa: Taxa) -&gt; Taxa:
     if len(taxa) &lt; 2:
@@ -463,7 +462,7 @@ a bag (multiset) of its spans.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L183-L308" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L182-L307" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">class Taxonomy:
     def __init__(
@@ -511,7 +510,7 @@ a bag (multiset) of its spans.</dd>
 <h2 id="args">Args</h2>
 <dl>
 <dt><strong><code>taxonomy_path</code></strong> :&ensp;<code>Optional[Path]</code>, optional</dt>
-<dd>The path of a two-columns TSV file
+<dd>The path of a two-columns <abbr title="Tab Separated Values">TSV</abbr> file
 associating label (search) patterns with taxon (replacement) patterns. For better
 readability, the taxa are listed on the first column, and the corresponding labels
 (sometimes very long) on the second column. If not specified, the
@@ -521,7 +520,7 @@ is used. Defaults to <code>None</code>.</dd>
 <dd>
 <p>A predicate telling whether a given regular expression
 pattern is literal or not. It will be matched successively against every label
-pattern of the taxonomy TSV file (second column). For instance, the label pattern
+pattern of the taxonomy <abbr title="Tab Separated Values">TSV</abbr> file (second column). For instance, the label pattern
 <code>"external_free_call:print"</code> is literal, and then matches only itself. Conversely,
 the label pattern <code>"internal_free_call:[[:upper:]].*"</code> contains some non-literal
 characters such as <code>"["</code> and <code>"*"</code>, and then must be compiled into a regular
@@ -563,7 +562,7 @@ As an associative list, it only allows O(n) lookups a given label pattern.</li>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L184-L246" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L183-L245" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def __init__(
     self,
@@ -630,7 +629,7 @@ same label more than one time
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L249-L286" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L248-L285" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">@lru_cache(maxsize=None)
 def get_taxon_name_list(self, label_name: LabelName) -&gt; TaxonNames:
@@ -664,7 +663,7 @@ returns them deduplicated (cf. <code><a title="paroxython.map_taxonomy.deduplica
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L288-L308" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L287-L307" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def to_taxa(self, labels: Labels) -&gt; Taxa:
     acc: TaxaSpans = defaultdict(Counter)

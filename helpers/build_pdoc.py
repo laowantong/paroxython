@@ -257,10 +257,20 @@ def inject_flow_diagram_in_nav():
     path.write_text(text)
 
 
+def expand_repo_urls():
+    for path in Path("docs/").rglob("*.html"):
+        source = path.read_text()
+        source = source.replace(
+            "https://repo/", "https://github.com/laowantong/paroxython/blob/master/"
+        )
+        path.write_text(source)
+
+
 def main():
     update_readme_example()
     update_github_links()
     generate_html()
+    expand_repo_urls()
     resolve_new_types()
     remove_blacklisted_sources()
     strip_docstrings()

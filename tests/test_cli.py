@@ -104,7 +104,7 @@ def test_collect_options():
     db_path.unlink()
 
 
-def test_recommend():
+def test_recommend_dummy_programs():
     pipe_path = Path("examples/dummy/pipe.py")
     db_path = Path("examples/dummy/programs_db.json")
     result_path = Path("examples/dummy/temp_recommendations.md")
@@ -127,6 +127,11 @@ def test_recommend():
 
     with pytest.raises(subprocess.CalledProcessError):
         run(f"recommend -p paroxython/goodies.py {db_path}")  # malformed
+
+
+def test_recommend_simple_programs():
+    run("collect --no_timestamp examples/simple/programs")
+    run("recommend examples/simple/programs_db.json")
 
 
 if __name__ == "__main__":

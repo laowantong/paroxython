@@ -30,7 +30,7 @@
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L0-L556" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L0-L554" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">import json
 import sqlite3
@@ -306,7 +306,7 @@ already populated.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L349-L363" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L347-L361" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def collect_labels(programs: Programs) -&gt; LabelInfos:
     result: LabelInfos = defaultdict(list)
@@ -331,7 +331,7 @@ already populated.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L366-L375" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L364-L373" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def map_labels_on_taxa(programs: Programs, taxonomy: Taxonomy) -&gt; None:
     print(f&#34;Mapping taxonomy on {len(programs)} programs.&#34;)
@@ -358,7 +358,7 @@ already populated.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L379-L393" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L377-L391" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def collect_taxa(programs: Programs) -&gt; TaxonInfos:
     result: TaxonInfos = defaultdict(list)
@@ -395,7 +395,7 @@ the internal programs it imports directly.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L396-L422" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L394-L420" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def compute_direct_importations(
     programs: Programs, match_import: Callable = regex.compile(r&#34;import_internally:([^:]+)&#34;).match
@@ -429,7 +429,7 @@ names of the internal programs it imports either directly or indirectly.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L425-L447" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L423-L445" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def complete_and_collect_importations(importations: ProgramToPrograms) -&gt; ProgramToPrograms:
     @lru_cache(maxsize=None)
@@ -467,7 +467,7 @@ of the internal programs it is imported by, either directly or indirectly.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L450-L469" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L448-L467" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def compute_and_collect_exportations(
     programs: Programs, importations: ProgramToPrograms
@@ -517,7 +517,7 @@ simple couples of integers.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L472-L506" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L470-L504" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def prepared_labels(labels: Labels) -&gt; LabelsPoorSpans:
     result: LabelsPoorSpans = {}
@@ -562,7 +562,7 @@ simple couples of integers.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L509-L542" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L507-L540" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def prepared_taxa(taxa: Taxa) -&gt; TaxaPoorSpans:
     result: TaxaPoorSpans = {}
@@ -584,7 +584,7 @@ simple couples of integers.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L37-L346" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L37-L344" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">class Database:
     def __init__(self, directory: Path, ignore_timestamps: bool = False, **kwargs) -&gt; None:
@@ -785,9 +785,9 @@ a serialization-ready dictionary indexed by program names.</li>
 <span>def <span class="ident">get_json</span></span>(<span>self) ‑> str</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Dump the constructed <code><a title="paroxython.make_db.Database" href="#paroxython.make_db.Database">Database</a></code> object as a JSON string.</p>
+<div class="desc"><p>Dump the constructed <code><a title="paroxython.make_db.Database" href="#paroxython.make_db.Database">Database</a></code> object as a <abbr title="JavaScript Object Notation">JSON</abbr> string.</p>
 <h2 id="description">Description</h2>
-<p>The JSON schema is as follows:</p>
+<p>The <abbr title="JavaScript Object Notation">JSON</abbr> schema is as follows:</p>
 <pre><code class="json">{
     &quot;programs&quot;: {
         &quot;program_1.py&quot; : {
@@ -842,12 +842,12 @@ list on a single line, <em>e.g.</em>:</p>
 <pre><code class="json">            &quot;flow/loop/exit/late&quot;: [[3,8],[6,7]],
 </code></pre>
 <h2 id="example">Example</h2>
-<p>See the <a href="https://github.com/laowantong/paroxython/blob/master/examples/mini/programs_db.json">JSON database</a>
-constructed from the programs of this <a href="https://github.com/laowantong/paroxython/tree/master/examples/mini/programs">directory</a>.</p></div>
+<p>See the <a href="https://github.com/laowantong/paroxython/blob/master/examples/mini/programs_db.json"><abbr title="JavaScript Object Notation">JSON</abbr> database</a> constructed from
+the programs of this <a href="https://github.com/laowantong/paroxython/blob/master/examples/mini/programs">directory</a>.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L94-L174" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L94-L172" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def get_json(self) -&gt; str:
     data = {
@@ -877,7 +877,7 @@ directory. Defaults to <code>None</code>.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L176-L186" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L174-L184" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def write_json(self, db_path: Optional[Path] = None) -&gt; None:
     db_path = db_path or self.directory.parent / f&#34;{self.directory.name}_db.json&#34;
@@ -925,7 +925,7 @@ CREATE TABLE taxon (
     FOREIGN KEY (program) REFERENCES program (program)
 );
 </code></pre>
-<p>Having a relational version of the database means that it can be queried with SQL.
+<p>Having a relational version of the database means that it can be queried with <abbr title="Structured Query Language">SQL</abbr>.
 Here is an example of such a query:</p>
 <pre><code class="sql">SELECT
     name AS taxon,
@@ -938,7 +938,7 @@ WHERE name GLOB &quot;type/non_sequence/dictionary/*&quot;
 GROUP BY name, program
 </code></pre>
 <p>On the provided
-<a href="https://github.com/laowantong/paroxython/tree/master/examples/simple/programs">simple programs</a>,
+<a href="https://github.com/laowantong/paroxython/blob/master/examples/simple/programs">simple programs</a>,
 its execution results in:</p>
 <p><img alt="" src="resources/sql_query_example.png"></p>
 <h2 id="note">Note</h2>
@@ -950,7 +950,7 @@ with the following command:</p>
         &quot;data&quot;: [&quot;type/non_sequence/dictionary/&quot;]
     }
 </code></pre>
-<p>Although SQL should be familiar to almost everyone in our target audience, and might
+<p>Although <abbr title="Structured Query Language">SQL</abbr> should be familiar to almost everyone in our target audience, and might
 “make complex things possible”, the current minimalistic schema arguably does not
 ”make simple things simple” (to paraphrase Alan Kay). Some denormalization should ease
 the process, but so far we have prioritized the development of the pipeline system. The
@@ -959,7 +959,7 @@ Paroxython.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L188-L346" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L186-L344" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def write_sqlite(self, db_path: Optional[Path] = None) -&gt; None:
     db_path = db_path or self.directory.parent / f&#34;{self.directory.name}_db.sqlite&#34;

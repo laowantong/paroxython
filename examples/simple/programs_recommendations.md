@@ -3,7 +3,7 @@
     - [`01_hello_world.py`](#program-01_hello_worldpy-learning-cost-275)
 - [`2 programs of learning cost in [4, 8[`](#2-programs-of-learning-cost-in-4-8)
     - [`05_greet.py`](#program-05_greetpy-learning-cost-5125)
-    - [`02_input_ name.py`](#program-02_input_-namepy-learning-cost-63125)
+    - [`02_input_name.py`](#program-02_input_namepy-learning-cost-63125)
 - [`9 programs of learning cost in [8, 16[`](#9-programs-of-learning-cost-in-8-16)
     - [`06_regex.py`](#program-06_regexpy-learning-cost-8875)
     - [`07_grocery_bill.py`](#program-07_grocery_billpy-learning-cost-9875)
@@ -70,7 +70,7 @@
 
 ---
 
-### Program `02_input_ name.py` (learning cost 6.3125)
+### Program `02_input_name.py` (learning cost 6.3125)
 
 ```python
 1   name = input("What is your name?\n")
@@ -771,7 +771,7 @@
 | 0.875 | `subroutine/argument/arg` | 2, 2, 9 |
 | 0.75 | `subroutine/function` | 2-8, 9-17 |
 | 0.875 | `subroutine/recursive/body` | 9-17 |
-| 0.875 | `subroutine/return/something` | 11, 13 |
+| 0.875 | `subroutine/return/something` | 11, 13-17 |
 | 0.75 | `test/belonging` | 6 |
 | 0.75 | `test/equality` | 10 |
 | 0.9375 | `type/boolean/literal/false` | 8 |
@@ -876,7 +876,7 @@
   <summary>21 initially.</summary>
   <ol>
     <li><code>01_hello_world.py</code></li>
-    <li><code>02_input_ name.py</code></li>
+    <li><code>02_input_name.py</code></li>
     <li><code>03_friends.py</code></li>
     <li><code>04_fibonacci.py</code></li>
     <li><code>05_greet.py</code></li>

@@ -217,7 +217,7 @@
     - [`184.2701-tomorrow.py`](#program-1842701-tomorrowpy-learning-cost-54375)
     - [`185.2820-execute-function-in-30-seconds.py`](#program-1852820-execute-function-in-30-secondspy-learning-cost-54375)
     - [`186.2699-exit-program-cleanly.py`](#program-1862699-exit-program-cleanlypy-learning-cost-271875)
-    - [`187.3261-disjoint-set.py`](#program-1873261-disjoint-setpy-learning-cost-1928125)
+    - [`187.3261-disjoint-set.py`](#program-1873261-disjoint-setpy-learning-cost-1940625)
     - [`188.3171-matrix-multiplication.py`](#program-1883171-matrix-multiplicationpy-learning-cost-2625)
     - [`188.3284-matrix-multiplication.py`](#program-1883284-matrix-multiplicationpy-learning-cost-2625)
     - [`189.3236-filter-and-transform-list.py`](#program-1893236-filter-and-transform-listpy-learning-cost-2625)
@@ -4514,7 +4514,7 @@
 
 ---
 
-### Program `187.3261-disjoint-set.py` (learning cost 19.28125)
+### Program `187.3261-disjoint-set.py` (learning cost 19.40625)
 
 ```python
 1   class UnionFind:
@@ -4546,10 +4546,10 @@
 | 0.875 | `operator/boolean/not` | 14 |
 | 0.875 | `operator/list/replication` | 3 |
 | 0.875 | `subroutine/argument/arg` | <details><summary>2, 2, 5, 5, 11, 11, 11, 13,</summary>13, 13</details> |
-| 0.75 | `subroutine/function` | 5-10, 11-12 |
+| 0.75 | `subroutine/function` | 5-10 |
+| 0.875 | `subroutine/function/predicate` | 11-12 |
 | 0.9375 | `subroutine/method/flavor/instance` | 2-4, 5-10, 11-12, 13-15 |
 | 0.9375 | `subroutine/method/naming/magic` | 2-4 |
-| 0.75 | `subroutine/predicate` | 11-12 |
 | 0.75 | `subroutine/procedure` | 2-4, 13-15 |
 | 0.875 | `subroutine/return/something` | 10, 12 |
 | 0.75 | `subscript/index` | 6, 9, 9, 10 |

@@ -26,10 +26,10 @@
 <h1 class="title">Module <code>paroxython.flatten_ast</code></h1>
 </header>
 <section id="section-intro">
-<p>Return a non-recursive, multiline dump of the AST (with some tweaks).</p>
+<p>Return a non-recursive, multiline dump of the <abbr title="Abstract Syntax Tree">AST</abbr> (with some tweaks).</p>
 <h2 id="motivation-and-purpose">Motivation and purpose</h2>
 <p><a href="https://en.wikipedia.org/wiki/Static_program_analysis">Static analysis</a> tools like Paroxython
-generally start with the <a href="https://en.wikipedia.org/wiki/Abstract_syntax_tree">AST</a> (abstract syntax
+generally start with the <a href="https://en.wikipedia.org/wiki/Abstract_syntax_tree"><abbr title="Abstract Syntax Tree">AST</abbr></a> (abstract syntax
 tree) of the program to analyze. For instance, when the string:</p>
 <pre><code class="python">'print(&quot;hello, world&quot;)'
 </code></pre>
@@ -51,7 +51,7 @@ Name(id='print', ctx=Load())     Str(s='hello, world', kind='')
 </code></pre>
 <p>The purpose of the function <code><a title="paroxython.flatten_ast.flatten_ast" href="#paroxython.flatten_ast.flatten_ast">flatten_ast()</a></code> is to transform this nested structure into a
 pre-ordered sequence of text lines, each of which consisting in a key-value pair. A key is the
-complete path from the root of the AST to either a node (<em>e.g.</em>, <code>Name()</code>) or a node attribute
+complete path from the root of the <abbr title="Abstract Syntax Tree">AST</abbr> to either a node (<em>e.g.</em>, <code>Name()</code>) or a node attribute
 (<em>e.g.</em>, <code>id</code>). The associated value comes after an equals sign (<code>=</code>):</p>
 <pre><code class="plain">/_type=Module
 /body/_length=1
@@ -78,7 +78,7 @@ complete path from the root of the AST to either a node (<em>e.g.</em>, <code>Na
 whole nesting information we need to understand its context. Since the recursion is linearly
 encoded, requesting it does not require recursion any more. This makes <a href="https://en.wikipedia.org/wiki/Regular_expression">regular
 expressions</a> a natural candidate for the request
-language<sup id="fnref:regex-recursion"><a class="footnote-ref" href="#fn:regex-recursion" rel="footnote">1</a></sup>. This is the choice we made for the present version of Paroxython. The
+language<sup id="fnref:regex-recursion"><a class="footnote-ref" href="#fn:regex-recursion">1</a></sup>. This is the choice we made for the present version of Paroxython. The
 regular expression patterns are processed in <code><a title="paroxython.parse_program" href="parse_program.html">paroxython.parse_program</a></code> on the basis of the
 definitions listed in
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md"><code>spec.md</code></a>.</p>
@@ -98,7 +98,7 @@ to the block of lines that share the same prefix (referred by <code>\1</code>).<
 of this text to make it more suitable for regular expression parsing.</p>
 <h2 id="implementation-details">Implementation details</h2>
 <h3 id="field-reordering">Field reordering</h3>
-<p>Somewhat counterintuitively, in the original AST, several pieces of information pertaining to a
+<p>Somewhat counterintuitively, in the original <abbr title="Abstract Syntax Tree">AST</abbr>, several pieces of information pertaining to a
 function signature or decoration are rejected <em>after</em> the body of the function. As a result, we
 lose the interesting property that the line numbers cannot decrease. We fix this by making <code>body</code>
 the last field of a function definition
@@ -107,7 +107,7 @@ the last field of a function definition
 <p>A counter is inserted between each node and its children. Starting from 1 makes possible to find
 the last one by matching its number with the (previously captured) length of the list.</p>
 <h3 id="field-disambiguation">Field disambiguation</h3>
-<p>Accross the AST, the same fields are sometimes used in different contexts. To make it easier or
+<p>Accross the <abbr title="Abstract Syntax Tree">AST</abbr>, the same fields are sometimes used in different contexts. To make it easier or
 even possible to detect certain features, their usage is disambiguated by applying the following
 renaming rules:</p>
 <ul>
@@ -123,7 +123,7 @@ following lines.</p>
 <ul>
 <li><code>_type</code>: stores the name of the node (<em>e.g.</em>, <code>Module</code>, <code>Expr</code>, <code>Call</code>).</li>
 <li><code>_pos</code>: stores the line number (extracted from the attribute <code>lineno</code> of the node, if
-any<sup id="fnref:lineno"><a class="footnote-ref" href="#fn:lineno" rel="footnote">2</a></sup>), followed by a colon <code>:</code>, followed by the path from the root of the AST to this
+any<sup id="fnref:lineno"><a class="footnote-ref" href="#fn:lineno">2</a></sup>), followed by a colon <code>:</code>, followed by the path from the root of the <abbr title="Abstract Syntax Tree">AST</abbr> to this
 node. A path is coded as a sequence of positive integers, hyphen-separated and ended by a hyphen.
 Its fundamental property is: node <span><span class="MathJax_Preview">n_2</span><script type="math/tex">n_2</script></span> is nested within node <span><span class="MathJax_Preview">n_1</span><script type="math/tex">n_1</script></span> iff the path of <span><span class="MathJax_Preview">n_1</span><script type="math/tex">n_1</script></span>
 is a prefix of the path of <span><span class="MathJax_Preview">n_2</span><script type="math/tex">n_2</script></span>.</li>
@@ -152,9 +152,9 @@ is a prefix of the path of <span><span class="MathJax_Preview">n_2</span><script
 this context is removed, both strings become:</p>
 <pre><code class="python">&quot;Subscript(value=Name(id='a'), slice=Index(value=Name(id='i')))&quot;
 </code></pre>
-<p>They can now be represented by the same hash value<sup id="fnref:pseudo-hash"><a class="footnote-ref" href="#fn:pseudo-hash" rel="footnote">3</a></sup>, stored in the added field <code>_hash</code>.</p>
+<p>They can now be represented by the same hash value<sup id="fnref:pseudo-hash"><a class="footnote-ref" href="#fn:pseudo-hash">3</a></sup>, stored in the added field <code>_hash</code>.</p>
 <h3 id="negative-literal-simplification">Negative literal simplification</h3>
-<p>Normally, the AST structure of a numeric literal depends on its sign. For instance, 42 is parsed
+<p>Normally, the <abbr title="Abstract Syntax Tree">AST</abbr> structure of a numeric literal depends on its sign. For instance, 42 is parsed
 as:</p>
 <pre><code class="python">Expr(value=Num(n=42))
 </code></pre>
@@ -188,15 +188,15 @@ the generated flat representation to transform this kind of output:</p>
 <li id="fn:regex-recursion">
 <p>Although nowadays, numerous flavours of regex engines support recursion,
 the complexity of writing, reading and maintaining any pattern using it would quickly go through the
-roof.&#160;<a class="footnote-backref" href="#fnref:regex-recursion" rev="footnote" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+roof.&#160;<a class="footnote-backref" href="#fnref:regex-recursion" title="Jump back to footnote 1 in the text">&#8617;</a></p>
 </li>
 <li id="fn:lineno">
 <p>Numerous nodes, <em>e.g.</em> <code>Module</code>, <code>Store</code>, <code>Load</code>, <code>Lt</code>, <code>Add</code>, are not associated with a
-line number.&#160;<a class="footnote-backref" href="#fnref:lineno" rev="footnote" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+line number.&#160;<a class="footnote-backref" href="#fnref:lineno" title="Jump back to footnote 2 in the text">&#8617;</a></p>
 </li>
 <li id="fn:pseudo-hash">
 <p>Actually, to avoid dealing with hash randomization in the unit tests, we use a function which
-merely increments a counter and associates it with any newly encountered string.&#160;<a class="footnote-backref" href="#fnref:pseudo-hash" rev="footnote" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+merely increments a counter and associates it with any newly encountered string.&#160;<a class="footnote-backref" href="#fnref:pseudo-hash" title="Jump back to footnote 3 in the text">&#8617;</a></p>
 </li>
 </ol>
 </div>
@@ -302,7 +302,7 @@ if __name__ == &#34;__main__&#34;:
 <span>def <span class="ident">flatten_ast</span></span>(<span>tree) ‑> str</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Return a non-recursive, multiline dump of the AST (with some tweaks).</p>
+<div class="desc"><p>Return a non-recursive, multiline dump of the <abbr title="Abstract Syntax Tree">AST</abbr> (with some tweaks).</p>
 <p>A simple wrapper around the recursive function <code><a title="paroxython.flatten_ast.flatten_node" href="#paroxython.flatten_ast.flatten_node">flatten_node()</a></code>, with a call to
 <code><a title="paroxython.flatten_ast.simplify_negative_literals" href="#paroxython.flatten_ast.simplify_negative_literals">simplify_negative_literals()</a></code> as post-processing.</p></div>
 <details class="source">
@@ -321,11 +321,11 @@ if __name__ == &#34;__main__&#34;:
 <span>def <span class="ident">flatten_node</span></span>(<span>node: Any, <br>prefix: str = '', <br>path: str = '', <br>remove_context: Callable = &lt;built-in method sub of regex&gt;<br>) ‑> str</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Traverse recursively (in pre-order) the given AST node and flatten its subtree.</p>
+<div class="desc"><p>Traverse recursively (in pre-order) the given <abbr title="Abstract Syntax Tree">AST</abbr> node and flatten its subtree.</p>
 <h2 id="args">Args</h2>
 <dl>
 <dt><strong><code>node</code></strong> :&ensp;<code>Any</code></dt>
-<dd>The node to traverse. Initially, the whole AST.</dd>
+<dd>The node to traverse. Initially, the whole <abbr title="Abstract Syntax Tree">AST</abbr>.</dd>
 <dt><strong><code>prefix</code></strong> :&ensp;<code>str</code>, optional</dt>
 <dd>The prefix of the current line to dump. Defaults to <code>""</code>.</dd>
 <dt><strong><code>path</code></strong> :&ensp;<code>str</code>, optional</dt>
@@ -388,7 +388,7 @@ Defaults to <code>regex.compile(r", ctx=.+?\(\)").sub</code>.</dd>
 <span>def <span class="ident">simplify_negative_literals</span></span>(<span>flat_ast: str, <br>sub: Callable = &lt;built-in method sub of regex&gt;<br>) ‑> str</span>
 </code></dt>
 <dd>
-<div class="desc"><p><a href="#negative-literal-simplification">Simplify the negative literals</a> of a given flat AST.</p>
+<div class="desc"><p><a href="#negative-literal-simplification">Simplify the negative literals</a> of a given flat <abbr title="Abstract Syntax Tree">AST</abbr>.</p>
 <p>Argument <code>sub</code> <a href="docs_developer_manual/index.html#default-argument-trick">not to be explicitly provided.</a></p></div>
 <details class="source">
 <summary>

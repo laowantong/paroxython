@@ -30,11 +30,11 @@ def find_all_features(
         r".+?```(.*?)\n+(.*?)\n?```"  # capture the language and the specification
     ).findall,
 ) -> Iterator[Tuple[LabelName, str, str]]:
-    """Iterate on all triples defining an algorithmic feature in the given specification text.
+    """Iterate on all tuples defining an algorithmic feature in the given specification text.
 
     Args:
         specifications (str): Normally, the contents of
-            [`spec.md`](https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md).
+            [`spec.md`](https://repo/paroxython/resources/spec.md).
         find_all (Callable, optional): A function finding all feature-defining triples of the text.
             [Not to be explicitly provided.](docs_developer_manual/index.html#default-argument-trick)
 
@@ -170,8 +170,8 @@ def get_bindings(
         ("for:j", Span(start=2, end=2, path="1-2-1-"))
 
         ... which will result in two (wrong) bindings instead of one. The workaround implemented in
-        [spec.md](https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md#feature-for)
-        consists in capturing as many supplementary positions as iteration variables:
+        [spec.md](https://repo/paroxython/resources/spec.md#feature-for) consists in capturing as
+        many supplementary positions as iteration variables:
 
         ```re
                 ^(.*)/_type=For
@@ -217,7 +217,7 @@ class ProgramParser:
 
         Args:
             spec_path (Path, optional): The path of the specification file. Defaults to
-                [spec.md](https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md).
+                [spec.md](https://repo/paroxython/resources/spec.md).
 
         Raises:
             ValueError: Fail when a given feature appears multiple times in the specification file,

@@ -1,12 +1,12 @@
 """
 A wrapper around `paroxython.filter_programs.ProgramFilter`, feeding it with commands and assessing
-the learning costs of its output.
+the learning costs of its final state.
 
 ## Description
 
 The recommendation system is initialized with a database created by `paroxython.make_db`. It parses
 the given pipeline
-([example](https://github.com/laowantong/paroxython/blob/master/examples/dummy/pipe.py)), checks
+([example](https://repo/examples/dummy/pipe.py)), checks
 its commands and submits them to the filter, which in response updates three sets:
 
 - `selected_programs`, the recommended programs;
@@ -15,7 +15,7 @@ its commands and submits them to the filter, which in response updates three set
 
 When the pipeline is exhausted, it retrieves their values, compute the associated learning costs,
 and produces a Markdown report
-([example](https://github.com/laowantong/paroxython/blob/master/examples/simple/programs_recommendations.md))
+([example](https://repo/examples/simple/programs_recommendations.md))
 whose each section consists in:
 
 - the name of a recommended program;
@@ -73,7 +73,7 @@ class Recommendations:
             db (JsonDatabase): A Python dictionary containing the JSON structure constructed by
                 `paroxython.make_db.Database`, _i.e._ the result of the parsing, labelling and
                 taxon-ifying of a set of programs
-                ([example](https://github.com/laowantong/paroxython/blob/master/examples/simple/programs_db.json)).
+                ([example](https://repo/examples/simple/programs_db.json)).
                 The execution relies on the fields `programs`, `taxa`, `importations` and
                 `exportations`, but ignores the field `labels`.
             base_path (Optional[Path], optional): A path, accessible from any optional shell command
@@ -117,14 +117,14 @@ class Recommendations:
             imparted knowledge.
 
         Args:
-            commands (Optional[List[Command]], optional): A list of dictionaries with two
-                mandatories entries:
+            commands (Optional[List[Command]], optional): A list of dictionaries with two mandatory
+                entries:
 
                 - `"operation"`: a string among `"include"`, `"exclude"`, `"impart"` and `"hide"`,
-                    with optionally a suffix `" any"` (implicit) or `" all"`.
-                - `"data"`: either a string consisting in a shell-command, or an heterogeneous list
-                    optionally mixing strings (patterns matching either program names or taxon
-                    names) and triples of strings (of the form subject, predicate, object).
+                    with an optional suffix `" any"` (implicit) or `" all"`.
+                - `"data"`: either a string consisting in a shell command, or an heterogeneous list
+                    of _criteria_: patterns (matching either program names or taxon names) or
+                    semantic triples (of the form subject, predicate, object).
 
                 Defaults to `None`, which is treated as an empty list.
         """

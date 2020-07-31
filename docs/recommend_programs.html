@@ -6,7 +6,7 @@
 <meta name="generator" content="pdoc 0.8.3" />
 <title>paroxython.recommend_programs API documentation</title>
 <meta name="description" content="A wrapper around `paroxython.filter_programs.ProgramFilter`, feeding it with commands and assessing
-the learning costs of its output …" />
+the learning costs of its final state …" />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
 <link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/github.min.css" crossorigin>
@@ -28,7 +28,7 @@ the learning costs of its output …" />
 </header>
 <section id="section-intro">
 <p>A wrapper around <code><a title="paroxython.filter_programs.ProgramFilter" href="filter_programs.html#paroxython.filter_programs.ProgramFilter">ProgramFilter</a></code>, feeding it with commands and assessing
-the learning costs of its output.</p>
+the learning costs of its final state.</p>
 <h2 id="description">Description</h2>
 <p>The recommendation system is initialized with a database created by <code><a title="paroxython.make_db" href="make_db.html">paroxython.make_db</a></code>. It parses
 the given pipeline
@@ -51,7 +51,7 @@ whose each section consists in:</p>
 learning cost.</li>
 </ul>
 <p>To maximize their utility, these sections are grouped by cost range, and each group is sorted by
-increasing total cost and <a href="https://en.wikipedia.org/wiki/Source_lines_of_code">SLOC</a>.</p>
+increasing total cost and <a href="https://en.wikipedia.org/wiki/Source_lines_of_code"><abbr title="Source Lines Of Code">SLOC</abbr></a>.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -467,7 +467,7 @@ if __name__ == &#34;__main__&#34;:
 <h2 id="args">Args</h2>
 <dl>
 <dt><strong><code>db</code></strong> :&ensp;<code>JsonDatabase</code></dt>
-<dd>A Python dictionary containing the JSON structure constructed by
+<dd>A Python dictionary containing the <abbr title="JavaScript Object Notation">JSON</abbr> structure constructed by
 <code><a title="paroxython.make_db.Database" href="make_db.html#paroxython.make_db.Database">Database</a></code>, <em>i.e.</em> the result of the parsing, labelling and
 taxon-ifying of a set of programs
 (<a href="https://github.com/laowantong/paroxython/blob/master/examples/simple/programs_db.json">example</a>).
@@ -525,14 +525,14 @@ imparted knowledge.</p>
 <dl>
 <dt><strong><code>commands</code></strong> :&ensp;<code>Optional[List[Command]]</code>, optional</dt>
 <dd>
-<p>A list of dictionaries with two
-mandatories entries:</p>
+<p>A list of dictionaries with two mandatory
+entries:</p>
 <ul>
 <li><code>"operation"</code>: a string among <code>"include"</code>, <code>"exclude"</code>, <code>"impart"</code> and <code>"hide"</code>,
-with optionally a suffix <code>" any"</code> (implicit) or <code>" all"</code>.</li>
-<li><code>"data"</code>: either a string consisting in a shell-command, or an heterogeneous list
-optionally mixing strings (patterns matching either program names or taxon
-names) and triples of strings (of the form subject, predicate, object).</li>
+with an optional suffix <code>" any"</code> (implicit) or <code>" all"</code>.</li>
+<li><code>"data"</code>: either a string consisting in a shell command, or an heterogeneous list
+of <em>criteria</em>: patterns (matching either program names or taxon names) or
+semantic triples (of the form subject, predicate, object).</li>
 </ul>
 <p>Defaults to <code>None</code>, which is treated as an empty list.</p>
 </dd>

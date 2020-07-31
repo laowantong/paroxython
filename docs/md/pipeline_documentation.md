@@ -191,7 +191,7 @@ These well-known operators apply quite nicely to our spans, with the following a
 **Synonyms.** The 13 operator names, whose some don't make much sense in a non-temporal context, are extended
 with a number of synonyms, such as `"inside"` for `"during"`, and `"equal"` or `"is"` for
 `"equals"`. The current list can be found
-[here](https://github.com/laowantong/paroxython/blob/master/paroxython/compare_spans.py#L195).
+[here](https://repo/paroxython/compare_spans.py#L195).
 
 
 **Non-strict inequalities.** In the above table, contrary to the convention on time intervals, we
@@ -365,7 +365,7 @@ For instance, consider the two taxa `"flow/conditional"` and `"flow/loop"`. To k
     }, # among them, keep only those that feature no conditional or no loop
 ```
 
-For two taxa, there are a total of 16 combinations, listed and tested [here](https://github.com/laowantong/paroxython/blob/master/tests/test_recommend_programs.py#L674-L703).
+For two taxa, there are a total of 16 combinations, listed and tested [here](https://repo/tests/test_recommend_programs.py#L674-L703).
 <!---
 The previous link is automatically updated by build_pdoc.py.
 -->
@@ -442,7 +442,7 @@ In the taxonomy, this concept is listed as a special case of both tuple (`"type/
 
 The triple describes the set of programs which feature at least one tuple, and such that there is no tuple's span coinciding with a parallel assignment's span. In other words, the set of programs which feature at least one “non parallel” tuple. When we exclude these programs, those which remain either feature no tuple, or only the ones involved in a parallel assignment.
 
-The other combinations are listed and tested [here](https://github.com/laowantong/paroxython/blob/master/tests/test_recommend_programs.py#L790-L819).
+The other combinations are listed and tested [here](https://repo/tests/test_recommend_programs.py#L790-L819).
 <!---
 The previous link is automatically updated by build_pdoc.py.
 -->

@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.8.3" />
 <title>paroxython API documentation</title>
-<meta name="description" content="Paroxython is a command-line tool which finds and tags algorithmic features (such as assignments, nested loops, tail-recursive functions, etc.) in a." />
+<meta name="description" content="Paroxython is a set of command-line tools which finds and tags algorithmic features (such as assignments, nested loops, tail-recursive functions,." />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
 <link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/github.min.css" crossorigin>
@@ -26,7 +26,7 @@
 <h1 class="title">Package <code>paroxython</code></h1>
 </header>
 <section id="section-intro">
-<p>Paroxython is a command-line tool which finds and tags algorithmic features (such as assignments, nested loops, tail-recursive functions, etc.) in a collection of small Python programs, typically gathered for educational purposes (<em>e.g.</em>, examples, patterns, exercise corrections).</p>
+<p>Paroxython is a set of command-line tools which finds and tags algorithmic features (such as assignments, nested loops, tail-recursive functions, etc.) in a collection of small Python programs, typically gathered for educational purposes (<em>e.g.</em>, examples, patterns, exercise corrections).</p>
 <p>Each tag consists in a free-form label associated with its spanning lines. These labels are then mapped onto a knowledge taxonomy designed by the teacher with basic order constraints in mind (<em>e.g.</em>, the fact that the introduction of the concept of early exit must come after that of loop, which itself requires that of control flow, is expressed with the following taxon: <code>flow/loop/exit/early</code>).</p>
 <p>Source codes, labels and taxa are stored in a database, which can finally be filtered through a pipeline of inclusion, exclusion, impartment and hiding commands on programs or taxa.</p>
 <h1 id="installation-and-test-drive">Installation and test-drive</h1>
@@ -186,7 +186,7 @@
 <dt><code class="name"><a title="paroxython.recommend_programs" href="recommend_programs.html">paroxython.recommend_programs</a></code></dt>
 <dd>
 <div class="desc"><p>A wrapper around <code><a title="paroxython.filter_programs.ProgramFilter" href="filter_programs.html#paroxython.filter_programs.ProgramFilter">ProgramFilter</a></code>, feeding it with commands and assessing
-the learning costs of its output.</p></div>
+the learning costs of its final state.</p></div>
 </dd>
 <dd>
 <div class="desc"></div>

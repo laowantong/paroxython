@@ -27,105 +27,227 @@
 </header>
 <section id="section-intro">
 <h2 id="bird-view">Bird view</h2>
-<p>First, scroll the navigation panel until the whole program structure appear (depending on your browser, you may need to click on it and use arrow keys).</p>
-<p>navigation panel</p>
-<p>In the diagram on the left, Python modules appear in yellowish (extension <code>".py"</code> omitted), input files and folders in reddish, and output files and databases in green.</p>
-<h3 id="first-step-tagging-a-collection-of-programs">First step: tagging a collection of programs</h3>
+<p>This section mainly describes how the different parts of Paroxython (code, data, results) are integrated. For details on the functioning of an individual module, click on its name, which refers to the documentation page. The input and output files are linked to real examples.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>On a sufficiently large screen, scroll the navigation panel until the whole program structure appears (depending on your browser, you may need to click it and use arrow keys). The following short descriptions aim to make the explanations a bit more fluid by roughly following the requirement order (imported modules and input data), from top to bottom in the diagram. Python modules appear in yellowish (extension <code>".py"</code> omitted), input files and folders in reddish, and output files and databases in green.</p>
+</div>
+<h3 id="first-stage-tagging-a-collection-of-programs">First stage: tagging a collection of programs</h3>
 <dl>
-<dt><code>source files</code> (Browse a copy of <a href="https://github.com/laowantong/paroxython/blob/master/examples/simple/programs">wiki.python.org simple programs</a> on GitHub)</dt>
+<dt><a href="https://github.com/laowantong/paroxython/blob/master/examples/simple/programs"><code>source files</code></a> (click to browse a copy of Python Wiki's <a href="https://wiki.python.org/moin/SimplePrograms">21 simple programs</a> on GitHub)</dt>
 <dd>It all starts with the folder you dig into when you need a Python program for your students, to use it either as an example or an exercise.</dd>
 <dt><code><a title="paroxython.preprocess_source" href="../preprocess_source.html">paroxython.preprocess_source</a></code></dt>
-<dd>Takes a source code as an input and returns it without comments, docstrings, blank lines, etc.</dd>
+<dd>These programs are not parsed exactly as they are. The may contain textual metadata (comments, docstrings, blank lines) which are not useful for the purpose of tagging their algorithmic features, and can be suppressed. Conversely, some of their lines may entirely consist of a hint manually added by the user to denote an all-encompassing feature (<em>e.g.</em>, <code>topic:cryptography</code>). Such manual hints need to be “centrifugated”, <em>i.e.</em> moved to both ends of the source, making them open on the first line and close on the last line of code. This module deals with the cleaning and the centrifugation of a given program.</dd>
 <dt><code><a title="paroxython.list_programs" href="../list_programs.html">paroxython.list_programs</a></code></dt>
-<dd>
-<p>Walks this folder and returns the list of its source codes, prepared with the help of:</p>
-</dd>
+<dd>We are now able to walk through the <code>source files</code> and return the list of their preprocessed source codes.</dd>
 <dt><code><a title="paroxython.flatten_ast" href="../flatten_ast.html">paroxython.flatten_ast</a></code></dt>
-<dd>todo</dd>
-<dt><code>spec.md</code> (Browse <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md">default specifications</a> on GitHub)</dt>
-<dd>todo</dd>
+<dd>The first stage of <a href="https://en.wikipedia.org/wiki/Static_program_analysis">static analysis</a> often consists in constructing the <a href="https://en.wikipedia.org/wiki/Abstract_syntax_tree">Abstract Syntax Tree</a> of the code to parse. Here, we go a step further by transforming this <abbr title="Abstract Syntax Tree">AST</abbr> into a sequence of text lines, each one consisting of the whole path from the tree root to the current node. Some additional transformations are made on the fly, in order to simplify, or even make possible, the writing of regular expressions that match the algorithmic features we are interested in.</dd>
+<dt><a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md"><code>spec.md</code></a> (click to browse the default specifications on GitHub)</dt>
+<dd>This input file is quite special. It serves three distinct roles:</dd>
+<dd>
+<ol>
+<li>As its name suggests, it specifies what features to look for, and how to find them in a given source code. The specifications are expressed either as <a href="https://en.wikipedia.org/wiki/Regular_expression">regular expressions</a> on the flattened version of the <abbr title="Abstract Syntax Tree">AST</abbr>, or as <a href="https://en.wikipedia.org/wiki/SQL"><abbr title="Structured Query Language">SQL</abbr></a> queries on the features found so far (either as a regular expression match or in the table resulting from a previous query).</li>
+<li>The <a href="https://en.wikipedia.org/wiki/Markdown">Markdown</a> format (extension <code>".md"</code>) is an unusual choice for a specification file. The reason for such a deviation is that this file also acts as documentation. Each formal specification is illustrated with numerous examples, and possibly with explanations, warnings, links to prerequisite or derived features, etc.</li>
+<li>Finally, this file is also used as a test base. When <a href="https://github.com/laowantong/paroxython/blob/master/tests/test_parse_program.py"><code>test_parse_program.py</code></a> is executed, each specification is tested on the examples provided, and its outcome checked against the expected results.</li>
+</ol>
+</dd>
+<dt><code><a title="paroxython.derived_labels_db" href="../derived_labels_db.html">paroxython.derived_labels_db</a></code></dt>
+<dd>As they are found in a given source code, the features described by <code>spec.md</code> are stored in an in-memory database, as labels with a prefix, possibly a suffix, and a span (consisting of their first and last line numbers, as well as a unique identifier to pinpoint their precise location within the <abbr title="Abstract Syntax Tree">AST</abbr>). The storage of these labels is used dynamically to search for so-called derived features, which themselves are necessarily specified by <abbr title="Structured Query Language">SQL</abbr> queries.</dd>
 <dt><code><a title="paroxython.parse_program" href="../parse_program.html">paroxython.parse_program</a></code></dt>
-<dd>todo</dd>
+<dd>
+<p>This module mainly consists of a function which flattens a given (preprocessed) program, parses it along the specifications defined in <code>spec.md</code>, and returns the list of its labels with their spans.</p>
+<p><strong>Warning.</strong> The binding of a regular expression-specified multi-line feature with its spans may reveal somewhat tricky. Make sure to understand the explanations of <code><a title="paroxython.parse_program.get_bindings" href="../parse_program.html#paroxython.parse_program.get_bindings">get_bindings()</a></code> in the case where your home-made regular expression yields unexpected results.</p>
+</dd>
 <dt><code><a title="paroxython.label_programs" href="../label_programs.html">paroxython.label_programs</a></code></dt>
-<dd>todo</dd>
-<dt><code>taxonomy.tsv</code> (Browse <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/taxonomy.tsv">default taxonomy</a> on GitHub)</dt>
-<dd>todo</dd>
+<dd>The main function of this module not only maps <code><a title="paroxython.parse_program" href="../parse_program.html">paroxython.parse_program</a></code> on the list returned by <code><a title="paroxython.list_programs" href="../list_programs.html">paroxython.list_programs</a></code>, transforming it into a list of <em>labelled</em> programs, but tweaks all the labels which mark an importation of an “internal” module, <em>i.e</em>, a program belonging to this very list. For instance, a label <code>"import:my_program"</code> would be transformed into <code>"import_internally:my_program"</code>, while <code>"import:itertools"</code> would be left untouched.</dd>
+<dt><a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/taxonomy.tsv"><code>taxonomy.tsv</code></a> (click to browse the default taxonomy on GitHub)</dt>
+<dd>
+<p>The labels produced so far are nothing more than an intermediate result. A number of them have only been useful for deriving other labels, and can now be ignored. Those that remain must be transformed into taxa.
+A taxon is the structured version of one or more labels. For instance, the label <code>"if_without_else"</code> will maps onto the taxon <code>"flow/conditional/no_else"</code>, which conveniently tells us that a conditional without an else branch is a subcase of a conditional, itself being a subcase of a control flow.</p>
+<p>The file <code>taxonomy.tsv</code> is a simple two-columns associative <abbr title="Tab Separated Values">TSV</abbr> array which maps label <em>patterns</em> onto taxons. Since some label patterns are rather long regular expressions, the columns are swapped: the <em>second</em> column lists the labels patterns to search; the <em>first</em> columns, the taxa to be substituted. For instance, the row:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Taxa (replacement patterns)</th>
+<th align="left">Labels (search patterns)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>flow/loop/exit/early/\1</code><sup id="fnref:match_group"><a class="footnote-ref" href="#fn:match_group">1</a></sup></td>
+<td align="left"><code>loop_with_early_exit:.+:(.+)</code></td>
+</tr>
+</tbody>
+</table>
+<p>&hellip; will trigger the following transformations into taxa:</p>
+<p><code>loop_with_early_exit:for:break</code>
+-&gt;
+<code>flow/loop/exit/early/break</code>
+<code>loop_with_early_exit:while:break</code>
+-&gt;
+<code>flow/loop/exit/early/break</code>
+<code>loop_with_early_exit:for:return</code>
+-&gt;
+<code>flow/loop/exit/early/return</code>
+<code>loop_with_early_exit:while:return</code>
+-&gt;
+<code>flow/loop/exit/early/return</code>
+<code>loop_with_early_exit:for:raise</code>
+-&gt;
+<code>flow/loop/exit/early/raise</code>
+<code>loop_with_early_exit:while:raise</code>
+-&gt;
+<code>flow/loop/exit/early/raise</code></p>
+</dd>
 <dt><code><a title="paroxython.map_taxonomy" href="../map_taxonomy.html">paroxython.map_taxonomy</a></code></dt>
-<dd>todo</dd>
+<dd>
+<p>In addition to applying the transformations defined in <code>taxonomy.tsv</code> to a given list of labels, the main method of this module, <code><a title="paroxython.map_taxonomy.Taxonomy.to_taxa" href="../map_taxonomy.html#paroxython.map_taxonomy.Taxonomy.to_taxa">Taxonomy.to_taxa()</a></code>, operates a deduplication of the resulting taxa.</p>
+<p>Indeed, a same feature is often described by several labels, for instance, the <code>for</code> loop of the following program:</p>
+</dd>
+<dt><pre><code class="python">    for x in range(10):
+        print(&quot;foo&quot;)
+        if bar(x):
+           break
+</code></pre></dt>
+<dd>
+<p>&hellip; will be associated with no less than six labels (remember that most of them were only useful during the execution of <code><a title="paroxython.derived_labels_db" href="../derived_labels_db.html">paroxython.derived_labels_db</a></code>):</p>
+<ol>
+<li><code>"for_range:10"</code></li>
+<li><code>"loop_with_early_exit:for:break"</code></li>
+<li><code>"loop:for"</code></li>
+<li><code>"for:x"</code></li>
+<li><code>"loop_with_break:for"</code></li>
+<li><code>"node:For"</code></li>
+</ol>
+<p>The last three of these are ignored, since they do not define any mapping in <code>taxonomy.tsv</code>. The remaining three are mapped respectively onto:</p>
+<ol>
+<li><code>"flow/loop/for/arithmetic"</code></li>
+<li><code>"flow/loop/exit/early/break"</code></li>
+<li><code>"flow/loop"</code></li>
+</ol>
+<p>The latter is a suffix of (at least) another one: as an overly broad categorization of the feature, it can be discarded. Only the former two will go into the deduplicated result: they indeed categorize the feature along two partially distinct dimensions (the iteration domain and the nature of the exit).</p>
+</dd>
 <dt><code><a title="paroxython.make_db" href="../make_db.html">paroxython.make_db</a></code></dt>
-<dd>todo</dd>
-<dt><code>*_db.json</code></dt>
-<dd>todo</dd>
-<dt><code>*_db.sqlite</code></dt>
-<dd>todo</dd>
-</dl>
-<h3 id="second-step-getting-program-recommendations">Second step: getting program recommendations</h3>
-<dl>
-<dt><code><a title="paroxython.compare_spans" href="../compare_spans.html">paroxython.compare_spans</a></code></dt>
-<dd>todo</dd>
-<dt><code><a title="paroxython.normalize_predicate" href="../normalize_predicate.html">paroxython.normalize_predicate</a></code></dt>
-<dd>todo</dd>
-<dt><code>*_pipe.py</code></dt>
-<dd>todo</dd>
-<dt><code><a title="paroxython.filter_programs" href="../filter_programs.html">paroxython.filter_programs</a></code></dt>
-<dd>todo</dd>
-<dt><code><a title="paroxython.assess_costs" href="../assess_costs.html">paroxython.assess_costs</a></code></dt>
-<dd>todo</dd>
-<dt><code><a title="paroxython.recommend_programs" href="../recommend_programs.html">paroxython.recommend_programs</a></code></dt>
-<dd>todo</dd>
-<dt><code>*_recommendations.md</code></dt>
-<dd>todo</dd>
-</dl>
-<p>Over the years, you have accumulated dozens of programs, some suitable for beginners, others requiring more advanced knowledge.</p>
-<p>to show or have your students write a program illustrating a particular concept.</p>
-<p>a folder containing all the programs you have prepared for your students, and from which you would like to get recommendations.</p>
-<h2 id="glossary">Glossary</h2>
+<dd>This is the main user-facing module of the first stage, invoked on command line by:</dd>
+<dt><pre><code>paroxython collect DIRECTORY
+</code></pre></dt>
+<dd>
+<p>It walks through the input directory, labels its programs and maps these labels onto the default taxonomy (or yours). Along this process, the labels <code>"import_internally"</code>, calculated by <code><a title="paroxython.label_programs" href="../label_programs.html">paroxython.label_programs</a></code>, are used to list, for each program, those of the input directory that it imports or by which it is imported (either directly or indirectly).</p>
+<p>Finally, the results are stored as a NoSQL (<abbr title="JavaScript Object Notation">JSON</abbr>) or relational (SQLite) database.</p>
+</dd>
+<dt><a href="https://github.com/laowantong/paroxython/blob/master/examples/simple/programs_db.json"><code>*_db.json</code></a> (click to browse the database of <a href="https://github.com/laowantong/paroxython/blob/master/examples/simple/programs">21 simple programs</a>).</dt>
+<dd>
+<p>Generated by <code><a title="paroxython.make_db.Database.get_json" href="../make_db.html#paroxython.make_db.Database.get_json">Database.get_json()</a></code> as a dictionary (or, in <abbr title="JavaScript Object Notation">JSON</abbr> parlance, <em>object</em>) with the following keys:</p>
 <ul>
-<li>(Manual) hint:</li>
-<li>Label:</li>
-<li>Span:</li>
-<li>Tag:</li>
-<li>Taxon:</li>
-<li>Taxonomy:</li>
-<li>Criterion:</li>
-<li>Pattern:</li>
-<li>Data:</li>
-<li>(Semantic) triple:</li>
-<li>Predicate:</li>
-<li>Command:</li>
-<li>Pipeline:</li>
+<li><code>"programs"</code>: maps each program name to the timestamp of its last modification, its cleaned up source code, the list of its labels with their poor<sup id="fnref:poor_span"><a class="footnote-ref" href="#fn:poor_span">2</a></sup> spans, and that of its taxons with their poor spans;</li>
+<li><code>"labels"</code>: maps each label to the programs that feature it;</li>
+<li><code>"taxa"</code>: maps each taxon to the programs that feature it;</li>
+<li><code>"importations"</code>: maps each program to the programs that import it;</li>
+<li><code>"exportations"</code>: maps each program to the programs by which it is imported.</li>
 </ul>
-<h2 id="helper-programs">Helper programs</h2>
-<p>Currently, please don't expect the same level of code quality, documentation and testing than those of the user-facing parts of this package.</p>
+<p>Note that the labels are not used thereafter: they are stored only for logging purposes.</p>
+</dd>
+<dt><code>*_db.sqlite</code></dt>
+<dd>An experimental relational version of the above <abbr title="JavaScript Object Notation">JSON</abbr> database. Also generated by <code><a title="paroxython.make_db" href="../make_db.html">paroxython.make_db</a></code>, but currently unused. See <code><a title="paroxython.make_db.Database.write_sqlite" href="../make_db.html#paroxython.make_db.Database.write_sqlite">Database.write_sqlite()</a></code> for its schema and an example query. Not under version control.</dd>
+</dl>
+<h3 id="second-stage-getting-recommendations">Second stage: getting recommendations</h3>
 <dl>
-<dt><a href="https://github.com/laowantong/paroxython/blob/master/helpers/build_pdoc.py"><code>build_pdoc.py</code></a></dt>
-<dd>Builds this documentation with the excellent <a href="https://pdoc3.github.io/pdoc/">pdoc3</a>, and applies a number of patches to tailor the result to our needs.</dd>
-<dt><a href="https://github.com/laowantong/paroxython/blob/master/helpers/context.py"><code>context.py</code></a></dt>
-<dd>todo</dd>
-<dt><a href="https://github.com/laowantong/paroxython/blob/master/helpers/draw_flow.py"><code>draw_flow.py</code></a></dt>
-<dd>Generates the diagrams on the present page and <code><a title="paroxython.filter_programs" href="../filter_programs.html">paroxython.filter_programs</a></code>. Automatically called by <code>build_doc.py</code>.</dd>
-<dt><a href="https://github.com/laowantong/paroxython/blob/master/helpers/example.sql"><code>example.sql</code></a></dt>
-<dd>todo</dd>
+<dt><a href="https://github.com/laowantong/paroxython/blob/master/examples/simple/programs_pipe.py"><code>*_pipe.py</code></a> (click to browse an example pipeline to be executed on the <a href="https://github.com/laowantong/paroxython/blob/master/examples/simple/programs_db.json">database</a> of <a href="https://github.com/laowantong/paroxython/blob/master/examples/simple/programs">21 simple programs</a>)</dt>
+<dd>To get program recommendations, you first create a pipeline, <em>i.e.</em>, a Python file consisting in a list of filtering commands to be applied on a <abbr title="JavaScript Object Notation">JSON</abbr> database generated by <code><a title="paroxython.make_db" href="../make_db.html">paroxython.make_db</a></code>. Each command is a dictionary with two keys:</dd>
+<dd>
+<ul>
+<li><code>"operation"</code>: a string among <code>"include"</code>, <code>"exclude"</code>, <code>"impart"</code> and <code>"hide"</code>, with an optional suffix <code>" any"</code> (implicit) or <code>" all"</code>.</li>
+<li><code>"data"</code>: either a string consisting in a shell command, or an heterogeneous list of <em>criteria</em>: patterns (matching either program names or taxon names) or semantic triples (of the form subject, predicate, object).</li>
+</ul>
+</dd>
+<dd>
+<p>The interpretation of a predicate is not immediate, and is the object of the next two modules.</p>
+</dd>
+<dt><code><a title="paroxython.compare_spans" href="../compare_spans.html">paroxython.compare_spans</a></code></dt>
+<dd>A dictionary of predicates listing all possible relations between two intervals <span><span class="MathJax_Preview">(x_1, x_2)</span><script type="math/tex">(x_1, x_2)</script></span> and <span><span class="MathJax_Preview">(y_1, y_2)</span><script type="math/tex">(y_1, y_2)</script></span>. The keys of these predicates are expected to be used as the second term of a semantic triple expressing a relationship between the spans of two features. Generated by <a href="https://github.com/laowantong/paroxython/blob/master/helpers/make_compare_spans.py"><code>make_compare_spans.py</code></a>.</dd>
+<dt><code><a title="paroxython.normalize_predicate" href="../normalize_predicate.html">paroxython.normalize_predicate</a></code></dt>
+<dd>A thin layer between <code><a title="paroxython.compare_spans" href="../compare_spans.html">paroxython.compare_spans</a></code> and <code><a title="paroxython.filter_programs" href="../filter_programs.html">paroxython.filter_programs</a></code>, this function tries to recognize as a key a predicate given by the user. In the case the predicate is negative (<em>e.g.</em>, <code>"not inside"</code>), strip it from the predicate (<code>"inside</code>"). Returns the corresponding lambda function along with a boolean indicating whether it was negated or not.</dd>
+<dt><code><a title="paroxython.filter_programs" href="../filter_programs.html">paroxython.filter_programs</a></code></dt>
+<dd>
+<p>Probably the most complex part of Paroxython. A filter instance is initialized with a <abbr title="JavaScript Object Notation">JSON</abbr> database of tagged programs. It is characterized by the state of three attributes:</p>
+<ul>
+<li><code>"selected_programs"</code>: the programs to be recommended, initially all of them.</li>
+<li><code>"imparted_knowledge"</code>: the concepts (<em>i.e.</em>, taxa) that have already been presented to your students, and therefore have a learning cost of zero. Initially empty.</li>
+<li><code>"hidden_taxa"</code>: the taxa you are not interested in seeing in the resulting tables. It's just a display thing, with no effect on the actual filtering, and then may be omitted in some descriptions. Initially empty.</li>
+</ul>
+<p>The filter responds to the pipeline commands sent to <code><a title="paroxython.filter_programs.ProgramFilter.update_filter" href="../filter_programs.html#paroxython.filter_programs.ProgramFilter.update_filter">ProgramFilter.update_filter()</a></code> by evolving the contents of these three sets.</p>
+</dd>
+<dt><code><a title="paroxython.assess_costs" href="../assess_costs.html">paroxython.assess_costs</a></code></dt>
+<dd>The costs in question are the learning costs. The final state of the imparted knowledge calculated by <code><a title="paroxython.filter_programs" href="../filter_programs.html">paroxython.filter_programs</a></code> is used to initialize the constructor after all the pipeline commands have been executed. The main method <code><a title="paroxython.assess_costs.LearningCostAssessor.__call__" href="../assess_costs.html#paroxython.assess_costs.LearningCostAssessor.__call__">LearningCostAssessor.__call__()</a></code> is then invoked with the remaining recommended programs.</dd>
+<dt><code><a title="paroxython.recommend_programs" href="../recommend_programs.html">paroxython.recommend_programs</a></code></dt>
+<dd>The user-facing module of the second stage, called on command line by:</dd>
+<dt><pre><code>paroxython recommend -p pipeline_path DB_PATH
+</code></pre></dt>
+<dd>
+<p>A simple wrapper around <code><a title="paroxython.filter_programs.ProgramFilter" href="../filter_programs.html#paroxython.filter_programs.ProgramFilter">ProgramFilter</a></code>, with report capabilities. For each command of the pipeline, it checks the validity of its operation and data, and sends them to <code><a title="paroxython.filter_programs.ProgramFilter.update_filter" href="../filter_programs.html#paroxython.filter_programs.ProgramFilter.update_filter">ProgramFilter.update_filter()</a></code>. When the pipeline is exhausted, it invokes <code><a title="paroxython.assess_costs.LearningCostAssessor.__call__" href="../assess_costs.html#paroxython.assess_costs.LearningCostAssessor.__call__">LearningCostAssessor.__call__()</a></code> to compute the relevant learning costs.</p>
+</dd>
+<dd>
+<p>At the end, a call to <code><a title="paroxython.recommend_programs.Recommendations.get_markdown" href="../recommend_programs.html#paroxython.recommend_programs.Recommendations.get_markdown">Recommendations.get_markdown()</a></code> creates a report of the results.</p>
+</dd>
+<dt><a href="https://github.com/laowantong/paroxython/blob/master/examples/simple/programs_recommendations.py"><code>*_recommendations.md</code></a> (click to browse the report of the execution of the above <a href="https://github.com/laowantong/paroxython/blob/master/examples/simple/programs_pipe.py">pipeline</a>)</dt>
+<dd>The final report sorts the recommended programs by increasing learning cost and <abbr title="Source Lines Of Code">SLOC</abbr>, and group them into predefined cost intervals<sup id="fnref:cost_bucket"><a class="footnote-ref" href="#fn:cost_bucket">3</a></sup>. It includes a table of contents, and a summary of which program has been filtered at what stage of the pipeline execution.</dd>
+</dl>
+<h2 id="helper-programs">Helper programs</h2>
+<p>During the development process of Paroxython, it proved useful to create a number of additional scripts to make the final program easier to write, test or understand. None of these scripts are meant to be run by the end user: as such they are are not included by <code>pip install</code>. But if you have to modify the source code to better meet your personal expectations, or are interested in collaborating on the project, some of them are definitely a must<sup id="fnref:disclaimer"><a class="footnote-ref" href="#fn:disclaimer">4</a></sup>.</p>
+<h3 id="code-generators">Code generators</h3>
+<dl>
 <dt><a href="https://github.com/laowantong/paroxython/blob/master/helpers/make_compare_spans.py"><code>make_compare_spans.py</code></a></dt>
-<dd>Generates the Python module <code><a title="paroxython.compare_spans" href="../compare_spans.html">paroxython.compare_spans</a></code>. Must be launched manually.</dd>
+<dd>Generates the source code of the module <code><a title="paroxython.compare_spans" href="../compare_spans.html">paroxython.compare_spans</a></code>. Must be launched manually.</dd>
+<dt><a href="https://github.com/laowantong/paroxython/blob/master/helpers/print_taxon_patterns.py"><code>print_taxon_patterns.py</code></a></dt>
+<dd>A one-shot script that computes and prints some lines to paste in <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/taxonomy.tsv"><code>taxonomy.tsv</code></a>. It uses the <a href="https://python.readthedocs.io/en/stable/reference/datamodel.html">Python type hierarchy</a> to determine, when possible, the type of an object based on the name of the method applied to it.</dd>
+<dt><a href="https://github.com/laowantong/paroxython/blob/master/helpers/reformat_spec.py"><code>reformat_spec.py</code></a></dt>
+<dd>Reads the contents of <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md"><code>spec.md</code></a>, normalizes its formatting and writes it back. The goal is to ensure the consistency of the document and the validity of its numerous internal links, as well as to avoid authors wasting time with formatting details. Launched automatically by <a href="https://github.com/laowantong/paroxython/blob/master/tests/test_parse_program.py"><code>test_parse_program.py</code></a>.</dd>
+<dt><a href="https://github.com/laowantong/paroxython/blob/master/helpers/suggest_regex.py"><code>suggest_regex.py</code></a></dt>
+<dd>The regular expression patterns of <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md"><code>spec.md</code></a> use a rather limited and repetitive array of techniques. This program aims to partially automate their production. Given the <code>flat_ast.txt</code> outputted by <a href="https://github.com/laowantong/paroxython/blob/master/helpers/parse_source.py"><code>parse_source.py</code></a> (cf. testing helper below), extract the lines that characterize the feature to be recognized, and save them in the <code>sandbox</code> folder under the name <code>flat_ast_selection.txt</code>. The script will then print a regular expression that matches this selection.</dd>
+</dl>
+<h3 id="testing">Testing</h3>
+<dl>
 <dt><a href="https://github.com/laowantong/paroxython/blob/master/helpers/make_dummy_db.py"><code>make_dummy_db.py</code></a></dt>
 <dd>Generates <a href="https://github.com/laowantong/paroxython/blob/master/examples/dummy/taxa_and_programs.txt"><code>taxa_and_programs.txt</code></a> and, from this file, <a href="https://github.com/laowantong/paroxython/blob/master/examples/dummy/programs_db.json"><code>programs_db.json</code></a>, used as a dummy example in various tests.</dd>
 <dt><a href="https://github.com/laowantong/paroxython/blob/master/helpers/make_programming_idioms_folder.py"><code>make_programming_idioms_folder.py</code></a></dt>
-<dd>Populates the example directory <a href="https://github.com/laowantong/paroxython/blob/master/examples/dummy/idioms/programs"><code>idioms/programs</code></a>, with a broad variety of code snippets snapshotted from the amazing repository <a href="https://www.programming-idioms.org">Programming Idioms</a> of Valentin Deleplace. More info in the directory <a href="https://github.com/laowantong/paroxython/blob/master/examples/idioms/read_me.md"><code>read_me.md</code></a>.</dd>
+<dd>Populates the example directory <a href="https://github.com/laowantong/paroxython/blob/master/examples/idioms/programs"><code>idioms/programs</code></a>, with the broad variety of code snippets snapshotted from the amazing <a href="https://www.programming-idioms.org">Programming Idioms</a> website of Valentin Deleplace. More info <a href="https://github.com/laowantong/paroxython/blob/master/examples/idioms/read_me.md"><code>here</code></a>.</dd>
+<dt><a href="https://github.com/laowantong/paroxython/blob/master/helpers/parse_source.py"><code>parse_source.py</code></a></dt>
+<dd>A wrapper around <code><a title="paroxython.parse_program" href="../parse_program.html">paroxython.parse_program</a></code> that allows you to quickly test the labelling of a given source code. This one must be placed under the name <code>source.py</code> in a <code>sandbox</code>
+directory (unversioned). The flattened version of its <abbr title="Abstract Syntax Tree">AST</abbr> is generated as <code>flat_ast.txt</code> in the same folder, while its label table is displayed in Markdown format. All of this may streamline the work on <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md"><code>spec.md</code></a>.</dd>
+</dl>
+<h3 id="documentation-builders-and-examples">Documentation builders and examples</h3>
+<dl>
+<dt><a href="https://github.com/laowantong/paroxython/blob/master/helpers/build_pdoc.py"><code>build_pdoc.py</code></a></dt>
+<dd>Builds this documentation with the excellent <a href="https://pdoc3.github.io/pdoc/">pdoc3</a> command line tool, and applies a number of patches to tailor the result to our needs.</dd>
+<dt><a href="https://github.com/laowantong/paroxython/blob/master/helpers/draw_flow.py"><code>draw_flow.py</code></a></dt>
+<dd>Generates the diagrams on the present page and <code><a title="paroxython.filter_programs" href="../filter_programs.html">paroxython.filter_programs</a></code>. Launched automatically by <a href="https://github.com/laowantong/paroxython/blob/master/helpers/build_pdoc.py"><code>build_pdoc.py</code></a>.</dd>
+<dt><a href="https://github.com/laowantong/paroxython/blob/master/helpers/example.sql"><code>example.sql</code></a></dt>
+<dd>An example of query on the experimental SQLite database generated by <code><a title="paroxython.make_db" href="../make_db.html">paroxython.make_db</a></code>.</dd>
 <dt><a href="https://github.com/laowantong/paroxython/blob/master/helpers/parse_syllabus.py"><code>parse_syllabus.py</code></a></dt>
-<dd>todo</dd>
-<dt><a href="https://github.com/laowantong/paroxython/blob/master/helpers/print_taxon_patterns.py"><code>print_taxon_patterns.py</code></a></dt>
-<dd>todo</dd>
-<dt><a href="https://github.com/laowantong/paroxython/blob/master/helpers/reformat_spec.py"><code>reformat_spec.py</code></a></dt>
-<dd>todo</dd>
-<dt><a href="https://github.com/laowantong/paroxython/blob/master/helpers/suggest_regex.py"><code>suggest_regex.py</code></a></dt>
-<dd>todo</dd>
+<dd>This script is invoked in the first example of the <a href="../../docs/docs_user_manual/index.html#deep-in-the-pipeline">pipeline documentation</a>. This is the one that the main author of Paroxython relies on to automatically extract the list of the “imparted” programs from a textual timeline he updates after each lesson. The script starts by dropping all the text following the <code>"# EOF</code> tag. In the remaining part, it matches all the Python programs filenames which are preceded by a <code>"+"</code> symbol and possibly a bracketed string (for instance <code>"+ [mandatory] homework.py"</code>). Of course, if you use other conventions, you will have to come up with your own custom script. It can be written in any other language (<em>e.g.</em>, Perl, bash, etc.), as long as it prints a list of program names on <a href="https://en.wikipedia.org/wiki/Standard_streams#Standard_output_(stdout)">stdout</a>.</dd>
 </dl>
 <h2 id="implementation-notes">Implementation notes</h2>
 <h3 id="user-types">User types</h3>
 <p>Paroxython makes heavy use of Python 3.5+ <a href="https://docs.python.org/3/library/typing.html">type hints</a>. They are documented directly in the source code. Browse <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/user_types.py">user_types.py</a> on GitHub.</p>
 <h3 id="default-argument-trick">Default argument trick</h3>
 <p>Several functions or methods declare a compiled and bound regex pattern as an optional argument (see <code><a title="paroxython.normalize_predicate.normalize_predicate" href="../normalize_predicate.html#paroxython.normalize_predicate.normalize_predicate">normalize_predicate()</a></code> for an example). Such arguments are not meant to be provided by the caller. Their default value will be used systematically, with the benefit of being evaluated only once. This is arguably better for both performance and encapsulation. More details on <a href="https://stackoverflow.com/a/30688691/173003">Stack Overflow</a>.</p>
+<div class="footnote">
+<hr>
+<ol>
+<li id="fn:match_group">
+<p>In the replacement pattern, <code>"\1"</code> denotes the 1st captured group (in parentheses) of the search pattern.&#160;<a class="footnote-backref" href="#fnref:match_group" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:poor_span">
+<p>The <em>poor</em> span of a feature's occurrence is its span, deprived from the last member (location in the <abbr title="Abstract Syntax Tree">AST</abbr>).&#160;<a class="footnote-backref" href="#fnref:poor_span" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:cost_bucket">
+<p>The intervals are predefined as <span><span class="MathJax_Preview">[0, 0], ]0, 0.25[, [2^{i-2}, 2^{i-1}[, \dots</span><script type="math/tex">[0, 0], ]0, 0.25[, [2^{i-2}, 2^{i-1}[, \dots</script></span> for all natural numbers <span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>.&#160;<a class="footnote-backref" href="#fnref:cost_bucket" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:disclaimer">
+<p>However, in the current state of things, please don't expect the same level of code quality, documentation and testing than in the user-facing parts of the package.&#160;<a class="footnote-backref" href="#fnref:disclaimer" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
 </section>
 <section>
 </section>
@@ -146,12 +268,16 @@
 <div class="toc">
 <ul>
 <li><a href="#bird-view">Bird view</a><ul>
-<li><a href="#first-step-tagging-a-collection-of-programs">First step: tagging a collection of programs</a></li>
-<li><a href="#second-step-getting-program-recommendations">Second step: getting program recommendations</a></li>
+<li><a href="#first-stage-tagging-a-collection-of-programs">First stage: tagging a collection of programs</a></li>
+<li><a href="#second-stage-getting-recommendations">Second stage: getting recommendations</a></li>
 </ul>
 </li>
-<li><a href="#glossary">Glossary</a></li>
-<li><a href="#helper-programs">Helper programs</a></li>
+<li><a href="#helper-programs">Helper programs</a><ul>
+<li><a href="#code-generators">Code generators</a></li>
+<li><a href="#testing">Testing</a></li>
+<li><a href="#documentation-builders-and-examples">Documentation builders and examples</a></li>
+</ul>
+</li>
 <li><a href="#implementation-notes">Implementation notes</a><ul>
 <li><a href="#user-types">User types</a></li>
 <li><a href="#default-argument-trick">Default argument trick</a></li>

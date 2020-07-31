@@ -23,7 +23,7 @@ def normalize_predicate(
 
     Description:
         The system first determines whether the predicate is negated or not, which can be expressed
-        either by an exclamation mark prefix or the word “not”. In this case, the negation marker
+        either by an exclamation mark prefix or the word “not”. In both cases, the negation marker
         is extracted from the given string.
 
         The resulting string is then normalized, _i.e._ replaced by a key of the dictionary
@@ -34,7 +34,7 @@ def normalize_predicate(
 
     Examples:
         Browse
-        [`test_normalize_predicate.py`](https://github.com/laowantong/paroxython/blob/master/tests/test_normalize_predicate.py)
+        [`test_normalize_predicate.py`](https://repo/tests/test_normalize_predicate.py)
         on GitHub.
 
     Args:

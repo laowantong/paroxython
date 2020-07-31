@@ -21,9 +21,9 @@ The addition of a label is hinted by a comment starting with `# paroxython:`.
 >>> if i < len(s) and s[i] == x: # paroxython: +short_circuit:And
 
 Note that `short_circuit:And` is a label (of the kind defined, but not necessarily included in
-[spec.md](https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md)), and
+[spec.md](https://repo/paroxython/resources/spec.md)), and
 not a taxon. It will be later converted into one or more taxa (according to the mapping of
-[taxonomy.tsv](https://github.com/laowantong/paroxython/blob/master/paroxython/resources/taxonomy.tsv)).
+[taxonomy.tsv](https://repo/paroxython/resources/taxonomy.tsv)).
 
 To delete a label, prefix it with a minus symbol. For instance, the following hint requalifies an
 addition into a concatenation:
@@ -115,7 +115,7 @@ class Cleanup:
             <div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=161:164&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=165:166&footer=0"></script></div></div>
 
             All examples above automatically extracted from
-            [test_cleanup_source.py](https://github.com/laowantong/paroxython/blob/master/tests/test_cleanup_source.py).
+            [test_cleanup_source.py](https://repo/tests/test_cleanup_source.py).
 
         .. warning::
             Useless pass statements are preserved when they are not followed by a line with a same
@@ -228,7 +228,7 @@ def centrifugate_hints(
         <div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_centrifugate_hints.py?slice=42:47&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_centrifugate_hints.py?slice=48:53&footer=0"></script></div></div>
 
         All examples above automatically extracted from
-        [test_centrifugate_hints.py](https://github.com/laowantong/paroxython/blob/master/tests/test_centrifugate_hints.py).
+        [test_centrifugate_hints.py](https://repo/tests/test_centrifugate_hints.py).
 
         Argument `match_isolated_hints` [not to be explicitly provided.](docs_developer_manual/index.html#default-argument-trick)
     """

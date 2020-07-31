@@ -226,7 +226,7 @@ Match the name of every node of the AST. This covers most of the [Python keyword
 25          (lambda j: 0)
 ```
 
-Credit: Zach Gates, _Minimal program using all Python 3.4 keywords_, Code Golf Stack Exchange, 2016 ([link](https://codegolf.stackexchange.com/a/75901/96158)).
+**Credit.** Zach Gates, _Minimal program using all Python 3.4 keywords_, Code Golf Stack Exchange, 2016 ([link](https://codegolf.stackexchange.com/a/75901/96158)).
 
 ##### Matches
 

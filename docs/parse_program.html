@@ -189,7 +189,7 @@ if __name__ == &#34;__main__&#34;:
 <span>def <span class="ident">find_all_features</span></span>(<span>specifications: str, <br>find_all: Callable = &lt;built-in method findall of regex&gt;<br>) ‑> Iterator[Tuple[LabelName, str, str]]</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Iterate on all triples defining an algorithmic feature in the given specification text.</p>
+<div class="desc"><p>Iterate on all tuples defining an algorithmic feature in the given specification text.</p>
 <h2 id="args">Args</h2>
 <dl>
 <dt><strong><code>specifications</code></strong> :&ensp;<code>str</code></dt>
@@ -207,7 +207,7 @@ if __name__ == &#34;__main__&#34;:
 <ol>
 <li>label name pattern (<em>e.g.</em>, <code>"try"</code> or <code>"try_raise|try_except"</code>),</li>
 <li>language (currently, <code>"re"</code> or <code>"sql"</code>),</li>
-<li>specification (respectively, a regular expression pattern or an SQL query).</li>
+<li>specification (respectively, a regular expression pattern or an <abbr title="Structured Query Language">SQL</abbr> query).</li>
 </ol>
 </dd>
 </dl></div>
@@ -280,7 +280,7 @@ Span(1, 4, &quot;path_1&quot;)
 <dl>
 <dt><strong><code>label_prefix</code></strong> :&ensp;<code>LabelName</code></dt>
 <dd>The name of a feature specified by a regular expression. Note that
-such a name is literal: contrary to those defined by an SQL query, they cannot include
+such a name is literal: contrary to those defined by an <abbr title="Structured Query Language">SQL</abbr> query, they cannot include
 the alternation meta-character (<code>"|"</code>).</dd>
 <dt><strong><code>captures</code></strong> :&ensp;<code>Dict[str, List[str]]</code></dt>
 <dd>A dictionary of the named groups and lists of all the
@@ -356,8 +356,8 @@ regular expression specification without special care:</p>
 (&quot;for:j&quot;, Span(start=2, end=2, path=&quot;1-2-1-&quot;))
 </code></pre>
 <p>&hellip; which will result in two (wrong) bindings instead of one. The workaround implemented in
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md#feature-for">spec.md</a>
-consists in capturing as many supplementary positions as iteration variables:</p>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md#feature-for">spec.md</a> consists in capturing as
+many supplementary positions as iteration variables:</p>
 <pre><code class="re">        ^(.*)/_type=For
 \n(?:\1.+\n)*?\1/_pos=(?P&lt;POS&gt;.+)
 (
@@ -480,7 +480,7 @@ ends of the list, they are ignored by <code><a title="paroxython.parse_program.p
 <h3>Methods</h3>
 <dl>
 <dt id="paroxython.parse_program.ProgramParser.__init__"><code class="name flex">
-<span>def <span class="ident">__init__</span></span>(<span>self, <br>spec_path: pathlib.Path = PosixPath('./paroxython/resources/spec.md')<br>) ‑> NoneType</span>
+<span>def <span class="ident">__init__</span></span>(<span>self, <br>spec_path: pathlib.Path = PosixPath('/Users/aristide/Dropbox/git/paroxython/paroxython/resources/spec.md')<br>) ‑> NoneType</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Collect the features specified at <code>spec_path</code>.</p>
@@ -497,7 +497,7 @@ ends of the list, they are ignored by <code><a title="paroxython.parse_program.p
 and when the language is not <code>"re"</code> or <code>"sql"</code>, and the specification is non-empty.</dd>
 </dl>
 <h2 id="description">Description</h2>
-<p>Some features are searched for with a regular expression, some with an SQL query.
+<p>Some features are searched for with a regular expression, some with an <abbr title="Structured Query Language">SQL</abbr> query.
 Distribute them in their respective dictionary. Compile the regular expressions and
 pre-bind the appropriate method. Create an instance of the database of derived labels.</p></div>
 <details class="source">
@@ -546,13 +546,13 @@ list of spans. For testing purposes only. Defaults to <code>False</code>.</dd>
 <ol>
 <li>Parse the given program. If this fails, return a list consisting in a single label,
 <code>"ast_construction:"</code>, followed by the error name. Otherwise, flatten the resulting
-AST.</li>
-<li>Search the flat AST for every feature which is specified by a regular expression.
+<abbr title="Abstract Syntax Tree">AST</abbr>.</li>
+<li>Search the flat <abbr title="Abstract Syntax Tree">AST</abbr> for every feature which is specified by a regular expression.
 Take care to avoid adding those features which are scheduled for deletion at the same
 span.</li>
 <li>Update the matching features with those featured for addition.</li>
 <li>Use the features found so far to derive (directly and indirectly) all those specified
-by an SQL query.</li>
+by an <abbr title="Structured Query Language">SQL</abbr> query.</li>
 <li>Return the found features.</li>
 </ol>
 <h2 id="note">Note</h2>

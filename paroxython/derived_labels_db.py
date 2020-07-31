@@ -5,7 +5,7 @@
 The database is not really relational. It merely consists in a table `t` where each row is a
 distinct occurrence of every label featured by a given program. Initially, `t` is populated with
 the labels found by the queries specified by a regular expression of
-[`spec.md`](https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md).
+[`spec.md`](https://repo/paroxython/resources/spec.md).
 
 The SQL queries are then executed, and the resulting labels (known as _derived_) inserted into `t`
 as they are found.

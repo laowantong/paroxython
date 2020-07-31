@@ -218,8 +218,7 @@
         "metadata/sloc/3": [[1,3]],
         "operator/arithmetic/modulo": [[3,3]],
         "subroutine/argument/arg": [[2,2]],
-        "subroutine/function": [[2,3]],
-        "subroutine/predicate": [[2,3]],
+        "subroutine/function/predicate": [[2,3]],
         "subroutine/return/something": [[3,3]],
         "test/divisibility/parity": [[3,3]],
         "test/equality": [[3,3]],
@@ -656,10 +655,7 @@
       "collatz.py",
       "is_even.py"
     ],
-    "subroutine/function": [
-      "is_even.py"
-    ],
-    "subroutine/predicate": [
+    "subroutine/function/predicate": [
       "is_even.py"
     ],
     "subroutine/procedure": [

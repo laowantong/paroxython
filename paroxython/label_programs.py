@@ -56,7 +56,7 @@ def generate_labelled_sources(programs: Programs) -> Iterator:
 
     Note:
         This function is for testing purposes only. See an example of the result in
-        [labelled_sources.py](https://github.com/laowantong/paroxython/blob/master/examples/mini/labelled_sources.py).
+        [labelled_sources.py](https://repo/examples/mini/labelled_sources.py).
     """
     separator = "-" * 88
     for program in programs:

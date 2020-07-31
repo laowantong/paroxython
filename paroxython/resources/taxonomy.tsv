@@ -119,6 +119,7 @@ subroutine/argument/no	function_without_arguments:.+
 subroutine/decorated	decorated_function:.+
 subroutine/function	function_returning_something:.+
 subroutine/function/anonymous	node:Lambda
+subroutine/function/predicate	function:(is|are|has|have|can|may|must|needs)_.+
 subroutine/generator	generator:.+
 subroutine/higher_order	higher_order_function:.+
 subroutine/method/flavor/class	class_method:.+
@@ -130,7 +131,6 @@ subroutine/method/naming/internal_use/name_mangling	method:__.+(?<!__)
 subroutine/method/naming/magic	method:__.+__
 subroutine/nested	nested_function:.+
 subroutine/nested/closure	closure:.+
-subroutine/predicate	function:(is|are|has|have|can|may|must|needs)_.+
 subroutine/procedure	function_returning_nothing:.+
 subroutine/recursive	recursive_function:.+
 subroutine/recursive/body	body_recursive_function:.+

@@ -65,8 +65,8 @@ class ProgramFilter:
 
     def init_filter_state(self) -> None:
         """Select all programs and define the imparted knowledge as empty."""
-        self.imparted_knowledge: TaxonNameSet = set()
         self.selected_programs: ProgramNameSet = set(self.db_programs)
+        self.imparted_knowledge: TaxonNameSet = set()
         self.hidden_taxa: TaxonNameSet = set()
 
     def add_imported_taxa(self) -> None:
@@ -198,7 +198,12 @@ class ProgramFilter:
     # Update the state of the filter by applying set operations with the given programs or taxa.
 
     def update_filter(
-        self, criteria: List[Criterion], operation: Operation, quantifier: str
+        # fmt: off
+        self,
+        criteria: List[Criterion],
+        operation: Operation,
+        quantifier: str
+        # fmt: on
     ) -> None:
         """Update the selected programs and/or impart the associated taxa and/or mark them as hidden.
 

@@ -65,7 +65,7 @@ expressions](https://en.wikipedia.org/wiki/Regular_expression) a natural candida
 language[^regex-recursion]. This is the choice we made for the present version of Paroxython. The
 regular expression patterns are processed in `paroxython.parse_program` on the basis of the
 definitions listed in
-[`spec.md`](https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md).
+[`spec.md`](https://repo/paroxython/resources/spec.md).
 
 [^regex-recursion]: Although nowadays, numerous flavours of regex engines support recursion,
 the complexity of writing, reading and maintaining any pattern using it would quickly go through the
@@ -136,7 +136,7 @@ following lines.
 ### Expression decontextualization and hashing
 
 In order to detect certain features, such as
-[`swap`](https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md#feature-swap):
+[`swap`](https://repo/paroxython/resources/spec.md#feature-swap):
 
 ```python
 (a[i], a[j]) = (a[j], a[i])

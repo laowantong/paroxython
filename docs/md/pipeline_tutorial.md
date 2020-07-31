@@ -1,9 +1,11 @@
 ## Pipeline tutorial: getting recommendations
 
-This tutorial walks you through a series of little “teacher stories” to illustrate how to write the pipeline of commands used by Paroxython's recommendation system. You run it on command line with:
+This tutorial walks you through a series of little “teacher stories” to illustrate how to write the pipeline of commands used by Paroxython's recommendation system.
 
-```shell
-paroxython recommend -p='path/to/your/pipe.py' 'path/to/your/programs/db.json'
+You run this pipeline on command line with:
+
+```
+paroxython recommend -p 'path/to/your/pipe.py' 'path/to/your/programs/db.json'
 ```
 
 ### Covering your base(s)
@@ -139,7 +141,7 @@ commands together:
 
 1. **Impart** the previous knowledge by extracting all the programs listed in the `"timeline.txt"`
    file that you update after each session. You can adapt the script
-   [`parse_syllabus.py`](https://github.com/laowantong/paroxython/blob/master/paroxython/helpers/parse_syllabus.py)
+   [`parse_syllabus.py`](https://repo/paroxython/helpers/parse_syllabus.py)
    to your own needs. If you wish, you can use the `base_path` variable, which represents the
    parent of the directory containing the programs of your personal database.
 2. **Exclude** some irrelevant programs.

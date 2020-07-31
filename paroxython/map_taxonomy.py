@@ -4,10 +4,9 @@ Translate labels into taxa.
 ## Description
 
 This translation comes after `paroxython.label_programs` has tagged a program with the **labels**
-defined in
-[`spec.md`](https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md).
-Its purpose is to convert these labels into the **taxa** defined (by default) in
-[`taxonomy.tsv`](https://github.com/laowantong/paroxython/blob/master/paroxython/resources/taxonomy.tsv).
+defined in [`spec.md`](https://repo/paroxython/resources/spec.md). Its purpose is to convert these
+labels into the **taxa** defined (by default) in
+[`taxonomy.tsv`](https://repo/paroxython/resources/taxonomy.tsv).
 
 ## Example
 
@@ -71,7 +70,7 @@ any metacharacter, more on that below).
 At first glance, the label `"binary_operator:Add"` may seem redundant with `"addition_operator"`,
 and one may wonder why it was generated at all. In fact, the former was used to calculate the
 latter.
-In [`spec.md`](https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md),
+In [`spec.md`](https://repo/paroxython/resources/spec.md),
 the definition of `"addition_operator"` is introduced by these words: “An addition operator is a
 binary operator `Add` which has not be classified as a concatenation operator”.
 
@@ -194,7 +193,7 @@ class Taxonomy:
                 associating label (search) patterns with taxon (replacement) patterns. For better
                 readability, the taxa are listed on the first column, and the corresponding labels
                 (sometimes very long) on the second column. If not specified, the
-                [default taxonomy](https://github.com/laowantong/paroxython/blob/master/paroxython/resources/taxonomy.tsv)
+                [default taxonomy](https://repo/paroxython/resources/taxonomy.tsv)
                 is used. Defaults to `None`.
             is_literal (Callable, optional): A predicate telling whether a given regular expression
                 pattern is literal or not. It will be matched successively against every label
@@ -215,7 +214,7 @@ class Taxonomy:
 
         Description:
             1. Read the taxonomy, falling back to the provided default
-            [`taxonomy.tsv`](https://github.com/laowantong/paroxython/blob/master/paroxython/resources/taxonomy.tsv).
+            [`taxonomy.tsv`](https://repo/paroxython/resources/taxonomy.tsv).
             2. Drop the part starting with the string `"-- EOF"`, if any (this pre-processing
             allows you to leave notes or drafts at the end of the file).
             3. Distribute the remaining rows into two different accumulators, depending on the
