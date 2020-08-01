@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
-<meta name="generator" content="pdoc 0.8.3" />
+<meta name="generator" content="pdoc 0.8.4" />
 <title>paroxython.flatten_ast API documentation</title>
 <meta name="description" content="Return a non-recursive, multiline dump of the AST (with some tweaks) …" />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
@@ -78,7 +78,7 @@ complete path from the root of the <abbr title="Abstract Syntax Tree">AST</abbr>
 whole nesting information we need to understand its context. Since the recursion is linearly
 encoded, requesting it does not require recursion any more. This makes <a href="https://en.wikipedia.org/wiki/Regular_expression">regular
 expressions</a> a natural candidate for the request
-language<sup id="fnref:regex-recursion"><a class="footnote-ref" href="#fn:regex-recursion">1</a></sup>. This is the choice we made for the present version of Paroxython. The
+language<sup id="fnref:regex-recursion"><a class="footnote-ref" href="#fn:regex-recursion" rel="footnote">1</a></sup>. This is the choice we made for the present version of Paroxython. The
 regular expression patterns are processed in <code><a title="paroxython.parse_program" href="parse_program.html">paroxython.parse_program</a></code> on the basis of the
 definitions listed in
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md"><code>spec.md</code></a>.</p>
@@ -123,7 +123,7 @@ following lines.</p>
 <ul>
 <li><code>_type</code>: stores the name of the node (<em>e.g.</em>, <code>Module</code>, <code>Expr</code>, <code>Call</code>).</li>
 <li><code>_pos</code>: stores the line number (extracted from the attribute <code>lineno</code> of the node, if
-any<sup id="fnref:lineno"><a class="footnote-ref" href="#fn:lineno">2</a></sup>), followed by a colon <code>:</code>, followed by the path from the root of the <abbr title="Abstract Syntax Tree">AST</abbr> to this
+any<sup id="fnref:lineno"><a class="footnote-ref" href="#fn:lineno" rel="footnote">2</a></sup>), followed by a colon <code>:</code>, followed by the path from the root of the <abbr title="Abstract Syntax Tree">AST</abbr> to this
 node. A path is coded as a sequence of positive integers, hyphen-separated and ended by a hyphen.
 Its fundamental property is: node <span><span class="MathJax_Preview">n_2</span><script type="math/tex">n_2</script></span> is nested within node <span><span class="MathJax_Preview">n_1</span><script type="math/tex">n_1</script></span> iff the path of <span><span class="MathJax_Preview">n_1</span><script type="math/tex">n_1</script></span>
 is a prefix of the path of <span><span class="MathJax_Preview">n_2</span><script type="math/tex">n_2</script></span>.</li>
@@ -152,7 +152,7 @@ is a prefix of the path of <span><span class="MathJax_Preview">n_2</span><script
 this context is removed, both strings become:</p>
 <pre><code class="python">&quot;Subscript(value=Name(id='a'), slice=Index(value=Name(id='i')))&quot;
 </code></pre>
-<p>They can now be represented by the same hash value<sup id="fnref:pseudo-hash"><a class="footnote-ref" href="#fn:pseudo-hash">3</a></sup>, stored in the added field <code>_hash</code>.</p>
+<p>They can now be represented by the same hash value<sup id="fnref:pseudo-hash"><a class="footnote-ref" href="#fn:pseudo-hash" rel="footnote">3</a></sup>, stored in the added field <code>_hash</code>.</p>
 <h3 id="negative-literal-simplification">Negative literal simplification</h3>
 <p>Normally, the <abbr title="Abstract Syntax Tree">AST</abbr> structure of a numeric literal depends on its sign. For instance, 42 is parsed
 as:</p>
@@ -188,15 +188,15 @@ the generated flat representation to transform this kind of output:</p>
 <li id="fn:regex-recursion">
 <p>Although nowadays, numerous flavours of regex engines support recursion,
 the complexity of writing, reading and maintaining any pattern using it would quickly go through the
-roof.&#160;<a class="footnote-backref" href="#fnref:regex-recursion" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+roof.&#160;<a class="footnote-backref" href="#fnref:regex-recursion" rev="footnote" title="Jump back to footnote 1 in the text">&#8617;</a></p>
 </li>
 <li id="fn:lineno">
 <p>Numerous nodes, <em>e.g.</em> <code>Module</code>, <code>Store</code>, <code>Load</code>, <code>Lt</code>, <code>Add</code>, are not associated with a
-line number.&#160;<a class="footnote-backref" href="#fnref:lineno" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+line number.&#160;<a class="footnote-backref" href="#fnref:lineno" rev="footnote" title="Jump back to footnote 2 in the text">&#8617;</a></p>
 </li>
 <li id="fn:pseudo-hash">
 <p>Actually, to avoid dealing with hash randomization in the unit tests, we use a function which
-merely increments a counter and associates it with any newly encountered string.&#160;<a class="footnote-backref" href="#fnref:pseudo-hash" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+merely increments a counter and associates it with any newly encountered string.&#160;<a class="footnote-backref" href="#fnref:pseudo-hash" rev="footnote" title="Jump back to footnote 3 in the text">&#8617;</a></p>
 </li>
 </ol>
 </div>
@@ -522,7 +522,7 @@ Defaults to <code>regex.compile(r", ctx=.+?\(\)").sub</code>.</dd>
 </nav>
 </main>
 <footer id="footer">
-<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.8.3</a>.</p>
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.8.4</a>.</p>
 </footer>
 </body>
 </html>

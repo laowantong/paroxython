@@ -1,6 +1,6 @@
 ## Bird view
 
-This section mainly describes how the different parts of Paroxython (code, data, results) are integrated. For details on the functioning of an individual module, click on its name, which refers to the documentation page. The input and output files are linked to real examples.
+This section mainly describes how the different parts of Paroxython (code, data, results) are integrated. For details on the functioning of an individual module, click its name: it refers to the documentation page. The input and output files are linked to real examples.
 
 ..tip::
     On a sufficiently large screen, scroll the navigation panel until the whole program structure appears (depending on your browser, you may need to click it and use arrow keys). The following short descriptions aim to make the explanations a bit more fluid by roughly following the requirement order (imported modules and input data), from top to bottom in the diagram. Python modules appear in yellowish (extension `".py"` omitted), input files and folders in reddish, and output files and databases in green.
@@ -41,7 +41,7 @@ This section mainly describes how the different parts of Paroxython (code, data,
 :   The labels produced so far are nothing more than an intermediate result. A number of them have only been useful for deriving other labels, and can now be ignored. Those that remain must be transformed into taxa.
     A taxon is the structured version of one or more labels. For instance, the label `"if_without_else"` will maps onto the taxon `"flow/conditional/no_else"`, which conveniently tells us that a conditional without an else branch is a subcase of a conditional, itself being a subcase of a control flow.
 
-    The file `taxonomy.tsv` is a simple two-columns associative TSV array which maps label _patterns_ onto taxons. Since some label patterns are rather long regular expressions, the columns are swapped: the _second_ column lists the labels patterns to search; the _first_ columns, the taxa to be substituted. For instance, the row:
+    The file [`taxonomy.tsv`](https://repo/paroxython/resources/taxonomy.tsv) is a simple two-columns associative TSV array which maps label _patterns_ onto taxons. Since some label patterns are rather long regular expressions, the columns are swapped: the _second_ column lists the labels patterns to search; the _first_ columns, the taxa to be substituted. For instance, the row:
 
     | Taxa (replacement patterns) | Labels (search patterns) |
     |:--|:--|
@@ -60,7 +60,7 @@ This section mainly describes how the different parts of Paroxython (code, data,
     In the replacement pattern, `"\1"` denotes the 1st captured group (in parentheses) of the search pattern.
 
 `paroxython.map_taxonomy`
-:   In addition to applying the transformations defined in `taxonomy.tsv` to a given list of labels, the main method of this module, `paroxython.map_taxonomy.Taxonomy.to_taxa`, operates a deduplication of the resulting taxa.
+:   In addition to applying the transformations defined in [`taxonomy.tsv`](https://repo/paroxython/resources/taxonomy.tsv) to a given list of labels, the main method of this module, `paroxython.map_taxonomy.Taxonomy.to_taxa`, operates a deduplication of the resulting taxa.
 
     Indeed, a same feature is often described by several labels, for instance, the `for` loop of the following program:
 
@@ -80,7 +80,7 @@ This section mainly describes how the different parts of Paroxython (code, data,
     1. `"loop_with_break:for"`
     1. `"node:For"`
 
-    The last three of these are ignored, since they do not define any mapping in `taxonomy.tsv`. The remaining three are mapped respectively onto:
+    The last three of these are ignored, since they do not define any mapping in [`taxonomy.tsv`](https://repo/paroxython/resources/taxonomy.tsv). The remaining three are mapped respectively onto:
 
     1. `"flow/loop/for/arithmetic"`
     1. `"flow/loop/exit/early/break"`

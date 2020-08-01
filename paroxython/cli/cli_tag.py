@@ -11,8 +11,8 @@ OPTIONS:
                         or "tsv" (Tab Separated Values). [default: md]
     -l --labels         Output the labels instead of the taxa.
     -t --taxonomy=PATH  The path of a TSV file mapping labels onto taxa.
-                        If not specified, use the included copy of the table
-                        whose last version is at https://bit.ly/3dZmc7C.
+                        If not specified, use the included default taxonomy:
+                        https://github.com/laowantong/paroxython/blob/0.3.0/paroxython/resources/taxonomy.tsv
     ```
 """
 

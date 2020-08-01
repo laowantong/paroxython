@@ -266,8 +266,23 @@ def expand_repo_urls():
         path.write_text(source)
 
 
+def update_version_number():
+    text = Path("pyproject.toml").read_text()
+    version = regex.search(r'(?<=version = ").+?(?=")', text)[0]
+    print(f"Release version: {version}")
+    for path in ["paroxython/cli/cli_tag.py", "paroxython/cli/cli_collect.py"]:
+        path = Path(path)
+        source = path.read_text()
+        (source, n) = regex.subn(
+            r"(?<=https://github\.com/laowantong/paroxython/blob/)[^/]+", version, source
+        )
+        assert n == 1, path
+        path.write_text(source)
+
+
 def main():
     update_readme_example()
+    update_version_number()
     update_github_links()
     generate_html()
     expand_repo_urls()
