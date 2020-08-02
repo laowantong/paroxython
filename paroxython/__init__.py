@@ -29,7 +29,7 @@ if "ipykernel" in sys.modules:
     class ParoxythonMagics(Magics):
         @staticmethod
         @line_cell_magic
-        def paroxython(self, line, source=None):
+        def paroxython(line, source=None):
             """
             Tag a Python code cell and output the table of its taxa or labels.
 
