@@ -1,6 +1,5 @@
 import pytest
 
-import context
 from paroxython.goodies import couple_to_string
 from paroxython.preprocess_source import collect_hints, HINT_COMMENT
 

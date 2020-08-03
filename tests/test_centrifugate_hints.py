@@ -3,7 +3,6 @@ from pathlib import Path
 
 import regex  # type: ignore
 
-import context
 from paroxython.preprocess_source import centrifugate_hints
 
 sources = r"""
@@ -87,3 +86,7 @@ def test_update_docstring():
     )
     assert n == 1
     path.write_text(source)
+
+
+if __name__ == "__main__":
+    pytest.main(["-qq", __import__("sys").argv[0]])

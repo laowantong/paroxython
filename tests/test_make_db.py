@@ -3,8 +3,7 @@ from collections import Counter
 
 import pytest
 
-import context
-from make_snapshot import make_snapshot
+from .make_snapshot import make_snapshot
 from paroxython.make_db import Database, prepared_labels, prepared_taxa
 from paroxython.user_types import Span
 

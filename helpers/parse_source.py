@@ -1,5 +1,3 @@
-import context
-
 from pathlib import Path
 
 import regex  # type: ignore

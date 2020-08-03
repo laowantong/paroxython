@@ -1,7 +1,6 @@
 import pytest
 import regex  # type: ignore
 
-import context
 from helpers.suggest_regex import Suggestion
 
 sources = r"""

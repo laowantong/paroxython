@@ -20,7 +20,6 @@ from functools import lru_cache
 import regex  # type: ignore
 import sqlparse
 
-import context
 from paroxython.goodies import title_to_slug_factory
 from paroxython.parse_program import ProgramParser, find_all_features
 

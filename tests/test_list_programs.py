@@ -1,7 +1,6 @@
 from pathlib import Path
 import pytest
 
-import context
 from paroxython.list_programs import list_programs
 
 

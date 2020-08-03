@@ -1,6 +1,5 @@
 import pytest
 
-import context
 from paroxython.normalize_predicate import normalize_predicate
 from paroxython.compare_spans import compare_spans
 

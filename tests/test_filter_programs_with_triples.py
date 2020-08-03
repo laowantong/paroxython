@@ -3,7 +3,6 @@ from pathlib import Path
 
 import pytest
 
-import context
 from paroxython.filter_programs import ProgramFilter
 from paroxython.compare_spans import compare_spans
 

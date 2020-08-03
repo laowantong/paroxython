@@ -2,7 +2,6 @@ import pytest
 import regex  # type: ignore
 from pathlib import Path
 
-import context
 from paroxython.preprocess_source import Cleanup
 
 # This test suite is automatically injected into the docstring of `preprocess_source.py`.

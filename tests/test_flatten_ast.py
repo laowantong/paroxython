@@ -2,7 +2,6 @@ import pytest
 import regex
 from typed_ast import ast3 as ast
 
-import context
 from paroxython.flatten_ast import flatten_ast, pseudo_hash
 
 sources = r"""
