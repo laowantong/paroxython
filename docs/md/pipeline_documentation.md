@@ -1,6 +1,6 @@
 # Deep in the pipeline
 
-This part describes in some details how the recommendation system works. It assumes you've already read the [tutorial on recommendations](#pipeline-tutorial-getting-recommendations). First of all, let us recall the example of the pipeline we gave at the end.
+This part describes in some details how the recommendation system works. It assumes you've already read the [tutorial on recommendations](#pipeline-tutorial-getting-recommendations). First of all, let us recall the example of pipeline we gave at the end.
 
 >>> [
 ...     {

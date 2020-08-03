@@ -175,5 +175,4 @@ commands together:
     Python **expression**. As such, it offers several amenities you surely know and love: comments,
     trailing commas, r-strings, etc.
 
-This is the end of our pipeline tutorial. Read on for more advanced features (regular
-expressions, span algebra, semantic triples, negations) in the [next section](#deep-in-the-pipeline).
+This is the end of our pipeline tutorial. If you dare, [read on](#deep-in-the-pipeline) for more advanced features (regular expressions, span algebra, semantic triples, negations).

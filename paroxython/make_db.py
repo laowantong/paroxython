@@ -95,46 +95,11 @@ class Database:
         r"""Dump the constructed `Database` object as a JSON string.
 
         Description:
-            The JSON schema is as follows:
+            Schema and purpose [in the user manual](docs_user_manual/index.html#the-json-database).
 
-            ```json
-            {
-                "programs": {
-                    "program_1.py" : {
-                        "timestamp": "1970-01-01",
-                        "source": "print('hello')\nprint('world')\n",
-                        "labels": {
-                            "label_1": [[span_start_1, span_end_1], ...],
-                            ...
-                        },
-                        "taxa: {
-                            "taxon_1": [[span_start_1, span_end_1], ...],
-                            ...
-                        }
-                    },
-                    ...
-                }
-                "labels": {
-                    "label_1": ["program_1.py", "program_2.py", ...],
-                    ...
-                },
-                "taxa": {
-                    "taxon_1": ["program_1.py", "program_2.py", ...],
-                    ...
-                },
-                "importations": {
-                    "program_1.py": ["program_2.py", "program_3.py", ...],
-                    ...
-                },
-                "exportations": {
-                    "program_1.py": [],
-                    "program_2.py": ["program_1.py", ...],
-                    ...
-                }
-            }
-            ```
-
-            All fields have already been calculated during the construction of the instance.
+        Example:
+            See the [JSON database](https://repo/examples/mini/programs_db.json) constructed from
+            the programs of this [directory](https://repo/examples/mini/programs).
 
         Note:
             For readability purposes, the output of `json.dumps()` is reformatted to fit each span
@@ -155,10 +120,6 @@ class Database:
             ```json
                         "flow/loop/exit/late": [[3,8],[6,7]],
             ```
-
-        Example:
-            See the [JSON database](https://repo/examples/mini/programs_db.json) constructed from
-            the programs of this [directory](https://repo/examples/mini/programs).
         """
         data = {
             "programs": self.programs_infos,
@@ -192,75 +153,8 @@ class Database:
                 `"foobar_db.sqlite"` in the same parent directory. Defaults to `None`.
 
         Description:
-            The relational schema is as follows:
-
-            ```sql
-            CREATE TABLE program (
-                program TEXT PRIMARY KEY,
-                timestamp TEXT,
-                source TEXT
-            );
-            CREATE TABLE label (
-                -- use rowid as primary key
-                name TEXT,
-                name_prefix TEXT,
-                name_suffix TEXT,
-                span TEXT,
-                span_start INTEGER,
-                span_end INTEGER,
-                program TEXT,
-                FOREIGN KEY (program) REFERENCES program (program)
-            );
-            CREATE TABLE taxon (
-                -- use rowid as primary key
-                name TEXT,
-                span TEXT,
-                span_start INTEGER,
-                span_end INTEGER,
-                program TEXT,
-                FOREIGN KEY (program) REFERENCES program (program)
-            );
-            ```
-
-            Having a relational version of the database means that it can be queried with SQL.
-            Here is an example of such a query:
-
-            ```sql
-            SELECT
-                name AS taxon,
-                program,
-                group_concat(span, ", ") AS spans,
-                source
-            FROM program
-            JOIN taxon USING (program)
-            WHERE name GLOB "type/non_sequence/dictionary/*"
-            GROUP BY name, program
-            ```
-
-            On the provided
-            [simple programs](https://repo/examples/simple/programs),
-            its execution results in:
-
-            ![](resources/sql_query_example.png)
-
-        Note:
-            The same list of programs can be obtained by feeding
-            `paroxython.recommend_programs.Recommendations.run_pipeline`
-            with the following command:
-
-            ```python
-                {
-                    "operation": "include",
-                    "data": ["type/non_sequence/dictionary/"]
-                }
-            ```
-
-            Although SQL should be familiar to almost everyone in our target audience, and might
-            “make complex things possible”, the current minimalistic schema arguably does not
-            ”make simple things simple” (to paraphrase Alan Kay). Some denormalization should ease
-            the process, but so far we have prioritized the development of the pipeline system. The
-            relational database generation may be a dead-end, and is currently not used anywhere in
-            Paroxython.
+            Schema, purpose and example queries
+            [in the user manual](docs_user_manual/index.html#the-sqlite-database).
         """
         db_path = db_path or self.directory.parent / f"{self.directory.name}_db.sqlite"
         print(f"Writing {db_path}.")
