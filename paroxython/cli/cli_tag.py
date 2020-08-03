@@ -20,11 +20,11 @@ from pathlib import Path
 from typing import List, Tuple, Optional
 from typing_extensions import Literal
 
-from ..goodies import couple_to_string
-from ..parse_program import ProgramParser
-from ..list_programs import get_program
-from ..map_taxonomy import Taxonomy
-from ..user_types import Source
+from paroxython.goodies import couple_to_string
+from paroxython.parse_program import ProgramParser
+from paroxython.list_programs import get_program
+from paroxython.map_taxonomy import Taxonomy
+from paroxython.user_types import Source
 
 
 def main(

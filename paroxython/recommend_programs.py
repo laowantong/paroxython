@@ -35,9 +35,9 @@ from typing import Dict, List, Optional, Tuple, Union
 
 import regex  # type: ignore
 
-from .assess_costs import LearningCostAssessor
-from .filter_programs import ProgramFilter
-from .goodies import (
+from paroxython.assess_costs import LearningCostAssessor
+from paroxython.filter_programs import ProgramFilter
+from paroxython.goodies import (
     add_line_numbers,
     cost_bucket,
     couple_to_string,
@@ -45,7 +45,7 @@ from .goodies import (
     print_warning,
     title_to_slug_factory,
 )
-from .user_types import (
+from paroxython.user_types import (
     AssessedPrograms,
     Command,
     Criterion,

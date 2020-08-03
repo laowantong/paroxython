@@ -5,8 +5,8 @@ from typing import Iterator
 
 import regex  # type: ignore
 
-from .preprocess_source import Cleanup, centrifugate_hints, collect_hints, remove_hints
-from .user_types import Program, ProgramName, Programs, Source
+from paroxython.preprocess_source import Cleanup, centrifugate_hints, collect_hints, remove_hints
+from paroxython.user_types import Program, ProgramName, Programs, Source
 
 
 def list_programs(

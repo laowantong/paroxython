@@ -4,9 +4,9 @@ from typing import Callable, Tuple
 
 import regex  # type: ignore
 
-from .compare_spans import compare_spans
-from .goodies import print_warning
-from .user_types import Predicate
+from paroxython.compare_spans import compare_spans
+from paroxython.goodies import print_warning
+from paroxython.user_types import Predicate
 
 
 def normalize_predicate(

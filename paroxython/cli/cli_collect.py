@@ -35,7 +35,7 @@ OPTIONS:
 
 from pathlib import Path
 
-from ..make_db import Database
+from paroxython.make_db import Database
 
 
 def cli_wrapper(args):

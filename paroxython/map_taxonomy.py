@@ -161,7 +161,7 @@ from functools import lru_cache
 
 import regex  # type: ignore
 
-from .user_types import (
+from paroxython.user_types import (
     LabelName,
     LabelPattern,
     Labels,
@@ -412,8 +412,8 @@ def deduplicated_taxa(taxa: Taxa) -> Taxa:
 
 
 if __name__ == "__main__":
-    from .goodies import couple_to_string
-    from .label_programs import labelled_programs
+    from paroxython.goodies import couple_to_string
+    from paroxython.label_programs import labelled_programs
 
     taxonomy = Taxonomy()
     for program in labelled_programs(Path("examples/simple/programs")):
