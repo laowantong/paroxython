@@ -90,15 +90,6 @@ def test_recommend_programming_idioms(capsys):
     )
 
 
-def test_recommend_simple_programs(capsys):
-    path = Path("examples/simple/programs_db.json")
-    rec = Recommendations(db=json.loads(path.read_text()))
-    rec.run_pipeline()
-    output_path = path.parent / "programs_recommendations.md"
-    markdown = rec.get_markdown()
-    make_snapshot(output_path, markdown, capsys)
-
-
 def test_recommend_mini_programs():
     db = json.loads(Path("examples/mini/programs_db.json").read_text())
     proper_taxa = {}

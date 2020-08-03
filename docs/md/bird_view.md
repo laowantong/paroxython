@@ -134,11 +134,11 @@ paroxython collect DIRECTORY
 :   A thin layer between `paroxython.compare_spans` and `paroxython.filter_programs`, this function tries to recognize as a key a predicate given by the user. In the case the predicate is negative (_e.g._, `"not inside"`), strip it from the predicate (`"inside`"). Returns the corresponding lambda function along with a boolean indicating whether it was negated or not.
 
 `paroxython.filter_programs`
-:   Probably the most complex part of Paroxython. A filter instance is initialized with a JSON database of tagged programs. It is characterized by the state of three attributes:
+:   Probably the most complex part of Paroxython. A filter instance is initialized with a JSON database of tagged programs. It is characterized by the state of the following attributes:
 
     - `"selected_programs"`: the programs to be recommended, initially all of them.
     - `"imparted_knowledge"`: the concepts (_i.e._, taxa) that have already been presented to your students, and therefore have a learning cost of zero. Initially empty.
-    - `"hidden_taxa"`: the taxa you are not interested in seeing in the resulting tables. It's just a display thing, with no effect on the actual filtering, and then may be omitted in some descriptions. Initially empty.
+    - `"hidden_taxa"` / `"hidden_programs"`: the programs and/or taxa you are not interested in seeing in the resulting tables. It's just a display thing, with no effect on the actual filtering. Initially empty.
 
     The filter responds to the pipeline commands sent to `paroxython.filter_programs.ProgramFilter.update_filter` by evolving the contents of these three sets.
 

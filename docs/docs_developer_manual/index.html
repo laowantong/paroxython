@@ -169,11 +169,11 @@ A taxon is the structured version of one or more labels. For instance, the label
 <dd>A thin layer between <code><a title="paroxython.compare_spans" href="../compare_spans.html">paroxython.compare_spans</a></code> and <code><a title="paroxython.filter_programs" href="../filter_programs.html">paroxython.filter_programs</a></code>, this function tries to recognize as a key a predicate given by the user. In the case the predicate is negative (<em>e.g.</em>, <code>"not inside"</code>), strip it from the predicate (<code>"inside</code>"). Returns the corresponding lambda function along with a boolean indicating whether it was negated or not.</dd>
 <dt><code><a title="paroxython.filter_programs" href="../filter_programs.html">paroxython.filter_programs</a></code></dt>
 <dd>
-<p>Probably the most complex part of Paroxython. A filter instance is initialized with a <abbr title="JavaScript Object Notation">JSON</abbr> database of tagged programs. It is characterized by the state of three attributes:</p>
+<p>Probably the most complex part of Paroxython. A filter instance is initialized with a <abbr title="JavaScript Object Notation">JSON</abbr> database of tagged programs. It is characterized by the state of the following attributes:</p>
 <ul>
 <li><code>"selected_programs"</code>: the programs to be recommended, initially all of them.</li>
 <li><code>"imparted_knowledge"</code>: the concepts (<em>i.e.</em>, taxa) that have already been presented to your students, and therefore have a learning cost of zero. Initially empty.</li>
-<li><code>"hidden_taxa"</code>: the taxa you are not interested in seeing in the resulting tables. It's just a display thing, with no effect on the actual filtering, and then may be omitted in some descriptions. Initially empty.</li>
+<li><code>"hidden_taxa"</code> / <code>"hidden_programs"</code>: the programs and/or taxa you are not interested in seeing in the resulting tables. It's just a display thing, with no effect on the actual filtering. Initially empty.</li>
 </ul>
 <p>The filter responds to the pipeline commands sent to <code><a title="paroxython.filter_programs.ProgramFilter.update_filter" href="../filter_programs.html#paroxython.filter_programs.ProgramFilter.update_filter">ProgramFilter.update_filter()</a></code> by evolving the contents of these three sets.</p>
 </dd>

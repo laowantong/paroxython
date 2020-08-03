@@ -55,7 +55,7 @@ increasing total cost and <a href="https://en.wikipedia.org/wiki/Source_lines_of
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L0-L317" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L0-L320" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">import subprocess
 from collections import defaultdict
@@ -64,9 +64,9 @@ from typing import Dict, List, Optional, Tuple, Union
 
 import regex  # type: ignore
 
-from .assess_costs import LearningCostAssessor
-from .filter_programs import ProgramFilter
-from .goodies import (
+from paroxython.assess_costs import LearningCostAssessor
+from paroxython.filter_programs import ProgramFilter
+from paroxython.goodies import (
     add_line_numbers,
     cost_bucket,
     couple_to_string,
@@ -74,7 +74,7 @@ from .goodies import (
     print_warning,
     title_to_slug_factory,
 )
-from .user_types import (
+from paroxython.user_types import (
     AssessedPrograms,
     Command,
     Criterion,
@@ -104,6 +104,7 @@ class Recommendations:
         self.selected_programs = program_filter.selected_programs
         self.imparted_knowledge = program_filter.imparted_knowledge
         self.hidden_taxa = program_filter.hidden_taxa
+        self.hidden_programs = program_filter.hidden_programs
         self.update_filter = program_filter.update_filter
 
         self.assess = LearningCostAssessor(self.db_programs, **kwargs)
@@ -140,7 +141,7 @@ class Recommendations:
                 print_warning(f&#34;operation {i} ({operation}) is ignored (no data).&#34;)
                 continue
 
-            # Update the selected programs and optionally impart or hide the associated taxa
+            # Update the state of the filter: selected / hidden programs, imparted / hidden taxa
             self.update_filter(data, operation, quantifier)
 
             # Log the statistics of the filter state for the last operation
@@ -198,8 +199,10 @@ class Recommendations:
         # Group resulting programs into cost buckets, and sort each group by increasing difficulty.
 
         toc_data: Dict[str, AssessedPrograms] = defaultdict(list)
-        for (cost, program) in self.assessed_programs:
-            toc_data[grouping_key(cost)].append((cost, program))
+        for (cost, program_name) in self.assessed_programs:
+            if program_name in self.hidden_programs:
+                continue
+            toc_data[grouping_key(cost)].append((cost, program_name))
         for costs_and_program_names in toc_data.values():
             costs_and_program_names.sort(key=sorting_key)
 
@@ -290,7 +293,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L68-L305" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L68-L308" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">class Recommendations:
     def __init__(self, db: JsonDatabase, base_path: Optional[Path] = None, **kwargs,) -&gt; None:
@@ -302,6 +305,7 @@ if __name__ == &#34;__main__&#34;:
         self.selected_programs = program_filter.selected_programs
         self.imparted_knowledge = program_filter.imparted_knowledge
         self.hidden_taxa = program_filter.hidden_taxa
+        self.hidden_programs = program_filter.hidden_programs
         self.update_filter = program_filter.update_filter
 
         self.assess = LearningCostAssessor(self.db_programs, **kwargs)
@@ -338,7 +342,7 @@ if __name__ == &#34;__main__&#34;:
                 print_warning(f&#34;operation {i} ({operation}) is ignored (no data).&#34;)
                 continue
 
-            # Update the selected programs and optionally impart or hide the associated taxa
+            # Update the state of the filter: selected / hidden programs, imparted / hidden taxa
             self.update_filter(data, operation, quantifier)
 
             # Log the statistics of the filter state for the last operation
@@ -396,8 +400,10 @@ if __name__ == &#34;__main__&#34;:
         # Group resulting programs into cost buckets, and sort each group by increasing difficulty.
 
         toc_data: Dict[str, AssessedPrograms] = defaultdict(list)
-        for (cost, program) in self.assessed_programs:
-            toc_data[grouping_key(cost)].append((cost, program))
+        for (cost, program_name) in self.assessed_programs:
+            if program_name in self.hidden_programs:
+                continue
+            toc_data[grouping_key(cost)].append((cost, program_name))
         for costs_and_program_names in toc_data.values():
             costs_and_program_names.sort(key=sorting_key)
 
@@ -487,7 +493,7 @@ spans. Exception: the taxa starting with <code>"metadata/"</code> are not import
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L69-L101" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L69-L102" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def __init__(self, db: JsonDatabase, base_path: Optional[Path] = None, **kwargs,) -&gt; None:
     self.base_path = base_path
@@ -498,6 +504,7 @@ spans. Exception: the taxa starting with <code>"metadata/"</code> are not import
     self.selected_programs = program_filter.selected_programs
     self.imparted_knowledge = program_filter.imparted_knowledge
     self.hidden_taxa = program_filter.hidden_taxa
+    self.hidden_programs = program_filter.hidden_programs
     self.update_filter = program_filter.update_filter
 
     self.assess = LearningCostAssessor(self.db_programs, **kwargs)
@@ -515,8 +522,8 @@ spans. Exception: the taxa starting with <code>"metadata/"</code> are not import
 <li>Retrieve the operation (<code>"include"</code>, <code>"exclude"</code>, <code>"impart"</code> or <code>"hide"</code>, with an
 optional suffix <code>" any"</code> (implicit) or <code>" all"</code>).</li>
 <li>Retrieve the data by calling <code><a title="paroxython.recommend_programs.Recommendations.parse_data" href="#paroxython.recommend_programs.Recommendations.parse_data">Recommendations.parse_data()</a></code>.</li>
-<li>Update the selected programs and/or impart the associated taxa and/or mark them as
-hidden.</li>
+<li>Update the selected programs and/or impart the associated taxa and/or mark the
+programs or taxa as hidden.</li>
 <li>Log the newly filtered out programs in <code>self.result</code>.</li>
 </ol>
 <p>Finally, compute the learning costs of the remaining selected programs based on the
@@ -540,7 +547,7 @@ semantic triples (of the form subject, predicate, object).</li>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L103-L170" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L104-L171" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def run_pipeline(self, commands: Optional[List[Command]] = None) -&gt; None:
     commands = commands or []
@@ -573,7 +580,7 @@ semantic triples (of the form subject, predicate, object).</li>
             print_warning(f&#34;operation {i} ({operation}) is ignored (no data).&#34;)
             continue
 
-        # Update the selected programs and optionally impart or hide the associated taxa
+        # Update the state of the filter: selected / hidden programs, imparted / hidden taxa
         self.update_filter(data, operation, quantifier)
 
         # Log the statistics of the filter state for the last operation
@@ -621,7 +628,7 @@ be interpreted.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L172-L217" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L173-L218" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def parse_data(
     # fmt: off
@@ -654,7 +661,7 @@ be interpreted.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L219-L305" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L220-L308" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def get_markdown(
     self,
@@ -681,8 +688,10 @@ be interpreted.</dd>
     # Group resulting programs into cost buckets, and sort each group by increasing difficulty.
 
     toc_data: Dict[str, AssessedPrograms] = defaultdict(list)
-    for (cost, program) in self.assessed_programs:
-        toc_data[grouping_key(cost)].append((cost, program))
+    for (cost, program_name) in self.assessed_programs:
+        if program_name in self.hidden_programs:
+            continue
+        toc_data[grouping_key(cost)].append((cost, program_name))
     for costs_and_program_names in toc_data.values():
         costs_and_program_names.sort(key=sorting_key)
 

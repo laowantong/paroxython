@@ -7,7 +7,7 @@
 [![GitHub Release](https://img.shields.io/github/release/laowantong/paroxython.svg?style=flat)]()
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/laowantong/paroxython)
 ![paroxython SLOC](https://img.shields.io/badge/main%20program-~1600%20SLOC-blue)
-![tests SLOC](https://img.shields.io/badge/tests-~2700%20SLOC-blue)
+![tests SLOC](https://img.shields.io/badge/tests-~2600%20SLOC-blue)
 ![helpers SLOC](https://img.shields.io/badge/helpers-~800%20SLOC-blue)
 [![GitHub commit activity](https://img.shields.io/github/commit-activity/y/laowantong/paroxython.svg?style=flat)]()
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)

@@ -32,6 +32,7 @@
         "operation": "hide",
         "data": [
             "io",
+            r".*test.*\.py",
         ],
     },
 ]

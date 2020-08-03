@@ -70,7 +70,7 @@ Combining the operation with a criterion is done in four stages:
 1. An auxiliary set of programs is calculated.
 2. The set of recommended programs (the **selection**) is updated.
 3. A new set of taxa may be “learned”, i.e., added to the body of imparted knowledge.
-4. The set of taxa to hide in the final report may be updated.
+4. The set of taxa and programs to hide in the final report may be updated.
 
 Note that each stage depends on both the operation and the nature of the criterion to which it applies. Let us detail every possible case:
 
@@ -152,7 +152,11 @@ The `"impart all"` variant is not supported, and treated as `"impart"`.
 
 ### `"hide"` command
 
-This is the simplest command of all. It merely accumulates the taxa matching the given patterns (relationships are not supported), without other effect on the filter. In the final stage, the accumulated taxa will be filtered out of the generated tables of recommended programs. Note that the learning costs are not affected whatsoever. Even if a taxon is hidden, its individual cost continues to contribute towards the total cost of a program.
+This is the simplest command of all. It merely accumulates the programs or the taxa matching the given patterns (relationships are not supported), without other effect on the filter. In the final stage, the accumulated programs or taxa will be filtered out of report.
+
+**Notes.**
+- Excluding a program is equivalent to hiding it _plus_ every program importing it.
+- The learning costs are not affected whatsoever by the hiding of a taxon: its individual cost continues to contribute towards the total cost of a program.
 
 The `"hide all"` variant is not supported, and treated as `"hide"`.
 
@@ -365,7 +369,7 @@ For instance, consider the two taxa `"flow/conditional"` and `"flow/loop"`. To k
     }, # among them, keep only those that feature no conditional or no loop
 ```
 
-For two taxa, there are a total of 16 combinations, listed and tested [here](https://repo/tests/test_recommend_programs.py#L674-L703).
+For two taxa, there are a total of 16 combinations, listed and tested [here](https://repo/tests/test_recommend_programs.py#L664-L693).
 <!---
 The previous link is automatically updated by build_pdoc.py.
 -->
@@ -442,7 +446,7 @@ In the taxonomy, this concept is listed as a special case of both tuple (`"type/
 
 The triple describes the set of programs which feature at least one tuple, and such that there is no tuple's span coinciding with a parallel assignment's span. In other words, the set of programs which feature at least one “non parallel” tuple. When we exclude these programs, those which remain either feature no tuple, or only the ones involved in a parallel assignment.
 
-The other combinations are listed and tested [here](https://repo/tests/test_recommend_programs.py#L790-L819).
+The other combinations are listed and tested [here](https://repo/tests/test_recommend_programs.py#L780-L809).
 <!---
 The previous link is automatically updated by build_pdoc.py.
 -->

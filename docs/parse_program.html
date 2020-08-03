@@ -30,7 +30,7 @@
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L0-L339" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L0-L348" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">from collections import defaultdict
 from os.path import dirname
@@ -41,9 +41,18 @@ from typing import Callable, Dict, List, Iterator, Tuple
 
 import regex  # type: ignore
 
-from .derived_labels_db import DerivedLabelsDatabase
-from .flatten_ast import flatten_ast
-from .user_types import Label, LabelName, Labels, LabelsSpans, Program, Query, Source, Span
+from paroxython.derived_labels_db import DerivedLabelsDatabase
+from paroxython.flatten_ast import flatten_ast
+from paroxython.user_types import (
+    Label,
+    LabelName,
+    Labels,
+    LabelsSpans,
+    Program,
+    Query,
+    Source,
+    Span,
+)
 
 __pdoc__ = {
     &#34;ProgramParser&#34;: &#34;&#34;,
@@ -158,7 +167,7 @@ class ProgramParser:
 
 if __name__ == &#34;__main__&#34;:
     # Take an individual source, print its features and write its flat AST.
-    from .goodies import couple_to_string
+    from paroxython.goodies import couple_to_string
 
     path = Path(&#34;sandbox/source.py&#34;)
     source = path.read_text().strip()
@@ -214,7 +223,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L24-L48" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L33-L57" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def find_all_features(
     specifications: str,
@@ -263,7 +272,7 @@ Span(1, 4, &quot;path_1&quot;)
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L51-L77" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L60-L86" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def pos_to_span(pos: List[str]) -&gt; Span:
     (start, path) = pos[0].split(&#34;:&#34;)
@@ -379,7 +388,7 @@ ends of the list, they are ignored by <code><a title="paroxython.parse_program.p
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L83-L211" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L92-L220" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def get_bindings(
     label_prefix: LabelName, captures: Dict[str, List[str]]
@@ -414,7 +423,7 @@ ends of the list, they are ignored by <code><a title="paroxython.parse_program.p
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L214-L318" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L223-L327" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">class ProgramParser:
     def __init__(self, spec_path: Path = DEFAULT_SPEC_PATH) -&gt; None:
@@ -503,7 +512,7 @@ pre-bind the appropriate method. Create an instance of the database of derived l
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L215-L244" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L224-L253" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def __init__(self, spec_path: Path = DEFAULT_SPEC_PATH) -&gt; None:
     self.spec_path = spec_path
@@ -562,7 +571,7 @@ which is executed each time the tests are launched.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L246-L318" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L255-L327" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def __call__(self, program: Program, yield_failed_matches: bool = False) -&gt; Labels:
     # If the program can be parsed, flatten its AST.

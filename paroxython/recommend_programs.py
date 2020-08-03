@@ -95,6 +95,7 @@ class Recommendations:
         self.selected_programs = program_filter.selected_programs
         self.imparted_knowledge = program_filter.imparted_knowledge
         self.hidden_taxa = program_filter.hidden_taxa
+        self.hidden_programs = program_filter.hidden_programs
         self.update_filter = program_filter.update_filter
 
         self.assess = LearningCostAssessor(self.db_programs, **kwargs)
@@ -109,8 +110,8 @@ class Recommendations:
             1. Retrieve the operation (`"include"`, `"exclude"`, `"impart"` or `"hide"`, with an
               optional suffix `" any"` (implicit) or `" all"`).
             2. Retrieve the data by calling `Recommendations.parse_data`.
-            3. Update the selected programs and/or impart the associated taxa and/or mark them as
-              hidden.
+            3. Update the selected programs and/or impart the associated taxa and/or mark the
+              programs or taxa as hidden.
             4. Log the newly filtered out programs in `self.result`.
 
             Finally, compute the learning costs of the remaining selected programs based on the
@@ -158,7 +159,7 @@ class Recommendations:
                 print_warning(f"operation {i} ({operation}) is ignored (no data).")
                 continue
 
-            # Update the selected programs and optionally impart or hide the associated taxa
+            # Update the state of the filter: selected / hidden programs, imparted / hidden taxa
             self.update_filter(data, operation, quantifier)
 
             # Log the statistics of the filter state for the last operation
@@ -243,8 +244,10 @@ class Recommendations:
         # Group resulting programs into cost buckets, and sort each group by increasing difficulty.
 
         toc_data: Dict[str, AssessedPrograms] = defaultdict(list)
-        for (cost, program) in self.assessed_programs:
-            toc_data[grouping_key(cost)].append((cost, program))
+        for (cost, program_name) in self.assessed_programs:
+            if program_name in self.hidden_programs:
+                continue
+            toc_data[grouping_key(cost)].append((cost, program_name))
         for costs_and_program_names in toc_data.values():
             costs_and_program_names.sort(key=sorting_key)
 

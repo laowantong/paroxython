@@ -68,6 +68,7 @@ class ProgramFilter:
         self.selected_programs: ProgramNameSet = set(self.db_programs)
         self.imparted_knowledge: TaxonNameSet = set()
         self.hidden_taxa: TaxonNameSet = set()
+        self.hidden_programs: ProgramNameSet = set()
 
     def add_imported_taxa(self) -> None:
         """Copy under each program the taxa it featured by importation.
@@ -238,6 +239,7 @@ class ProgramFilter:
                 self.exclude_programs(program_set, follow=False)
                 self.impart_taxa(taxon_set)
             else:
+                self.hidden_programs.update(program_set)
                 self.hidden_taxa.update(taxon_set)
         else:
             program_bag = self.programs_of_criteria(criteria, follow=(operation == "exclude"))

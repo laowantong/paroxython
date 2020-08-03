@@ -11,7 +11,7 @@ paths = list(
 )
 names = [str(path)[len("paroxython/") : -3] for path in paths]
 base = "docs/resources/flow"
-find_all = regex.compile(fr"(?m)^from \.({'|'.join(names)}) import").findall
+find_all = regex.compile(fr"(?m)^from paroxython\.({'|'.join(names)}) import").findall
 
 Path(f"{base}.dot").write_text(
     """digraph G {
