@@ -13,7 +13,7 @@
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-![](../docs/resources/logo.png)
+![](docs/resources/logo.png)
 
 ### Introduction
 
@@ -81,7 +81,7 @@ In an ideal world, Paroxython could even put an end to the deadliest religious w
 
 The result is a list of program **recommendations** ordered by increasing learning cost.
 
-![](../docs/resources/readme_flow.png)
+![](docs/resources/readme_flow.png)
 
 This process is summarized above. Note that the label specification file is provided. For converting labels to taxa, a default taxonomy is also provided, but you may feel the need to tailor it to your own vision of your course. Initially, the pipeline can be left empty: the recommendations will then cover all programs, sorted by increasing level of knowledge.
 
