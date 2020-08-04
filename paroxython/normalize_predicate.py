@@ -26,7 +26,7 @@ def normalize_predicate(
         either by an exclamation mark prefix or the word “not”. In both cases, the negation marker
         is extracted from the given string.
 
-        The resulting string is then normalized, _i.e._ replaced by a key of the dictionary
+        The resulting string is then normalized, i.e. replaced by a key of the dictionary
         `compare_spans` defined in `paroxython.compare_spans`.
         .. include:: ../docs/md/pipeline_documentation.md
             :start-after: user input.

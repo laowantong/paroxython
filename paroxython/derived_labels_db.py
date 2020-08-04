@@ -15,7 +15,7 @@ Note that the results of a given SQL query may themselves be required by a subse
 #### Example
 
 The following simple SQL query of `spec.md` finds the loops of a program. The resulting label names
-(_e.g._, `"loop:while"`) consist in a fixed prefix `"loop"` and a suffix denoting the category of
+(e.g., `"loop:while"`) consist in a fixed prefix `"loop"` and a suffix denoting the category of
 the loop (either `"for"` or `"while"`).
 
 ```sql
@@ -105,18 +105,18 @@ class DerivedLabelsDatabase:
     Column        | Type   | Description and example
     :-------------|:-------|:----------------------------------------------
     `rowid`       | `INT`  | Primary key (automatically generated)
-    `name`        | `TEXT` | Complete name of the label, _e.g._
+    `name`        | `TEXT` | Complete name of the label, e.g.
                   |        | `"loop_with_early_exit:for:break"`
     `name_prefix` | `TEXT` | Its prefix (part before the first colon, here
                   |        | `"loop_with_early_exit"`
     `name_suffix` | `TEXT` | Its suffix (may contain one or more colons),
                   |        | here `"for:break"`
     `span`        | `TEXT` | Numbers of the first and last lines of the
-                  |        | feature as a hyphen-separated string, _e.g._ `"2-8"`
+                  |        | feature as a hyphen-separated string, e.g. `"2-8"`
     `span_start`  | `INT`  | Its first line number, here `2`
     `span_end`    | `INT`  | Its first line number, here `8`
     `path`        | `TEXT` | String encoding the beginning of the feature
-                  |        | as its path from the root of the AST, _e.g._
+                  |        | as its path from the root of the AST, e.g.
                   |        | `"3-5-3-0-1-2-2-1-"`
     """
 

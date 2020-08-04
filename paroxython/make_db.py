@@ -103,7 +103,7 @@ class Database:
 
         Note:
             For readability purposes, the output of `json.dumps()` is reformatted to fit each span
-            list on a single line, _e.g._:
+            list on a single line, e.g.:
             ```json
                         "flow/loop/exit/late": [
                             [

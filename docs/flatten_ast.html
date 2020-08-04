@@ -51,8 +51,8 @@ Name(id='print', ctx=Load())     Str(s='hello, world', kind='')
 </code></pre>
 <p>The purpose of the function <code><a title="paroxython.flatten_ast.flatten_ast" href="#paroxython.flatten_ast.flatten_ast">flatten_ast()</a></code> is to transform this nested structure into a
 pre-ordered sequence of text lines, each of which consisting in a key-value pair. A key is the
-complete path from the root of the <abbr title="Abstract Syntax Tree">AST</abbr> to either a node (<em>e.g.</em>, <code>Name()</code>) or a node attribute
-(<em>e.g.</em>, <code>id</code>). The associated value comes after an equals sign (<code>=</code>):</p>
+complete path from the root of the <abbr title="Abstract Syntax Tree">AST</abbr> to either a node (e.g., <code>Name()</code>) or a node attribute
+(e.g., <code>id</code>). The associated value comes after an equals sign (<code>=</code>):</p>
 <pre><code class="plain">/_type=Module
 /body/_length=1
 /body/1/_type=Expr
@@ -82,7 +82,7 @@ language<sup id="fnref:regex-recursion"><a class="footnote-ref" href="#fn:regex-
 regular expression patterns are processed in <code><a title="paroxython.parse_program" href="parse_program.html">paroxython.parse_program</a></code> on the basis of the
 definitions listed in
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md"><code>spec.md</code></a>.</p>
-<p>For instance, the following regular expression matches and localizes nested function calls (<em>e.g.</em>,
+<p>For instance, the following regular expression matches and localizes nested function calls (e.g.,
 <code>foo(bar(42))</code>) without any recursion:</p>
 <pre><code class="re">           ^(.*)                    # Capture the path originating from the root...
                 /_type=Call         #  ... to the nesting call.
@@ -121,7 +121,7 @@ renaming rules:</p>
 following lines.</p>
 <h3 id="added-fields">Added fields</h3>
 <ul>
-<li><code>_type</code>: stores the name of the node (<em>e.g.</em>, <code>Module</code>, <code>Expr</code>, <code>Call</code>).</li>
+<li><code>_type</code>: stores the name of the node (e.g., <code>Module</code>, <code>Expr</code>, <code>Call</code>).</li>
 <li><code>_pos</code>: stores the line number (extracted from the attribute <code>lineno</code> of the node, if
 any<sup id="fnref:lineno"><a class="footnote-ref" href="#fn:lineno" rel="footnote">2</a></sup>), followed by a colon <code>:</code>, followed by the path from the root of the <abbr title="Abstract Syntax Tree">AST</abbr> to this
 node. A path is coded as a sequence of positive integers, hyphen-separated and ended by a hyphen.
@@ -191,7 +191,7 @@ the complexity of writing, reading and maintaining any pattern using it would qu
 roof.&#160;<a class="footnote-backref" href="#fnref:regex-recursion" rev="footnote" title="Jump back to footnote 1 in the text">&#8617;</a></p>
 </li>
 <li id="fn:lineno">
-<p>Numerous nodes, <em>e.g.</em> <code>Module</code>, <code>Store</code>, <code>Load</code>, <code>Lt</code>, <code>Add</code>, are not associated with a
+<p>Numerous nodes, e.g. <code>Module</code>, <code>Store</code>, <code>Load</code>, <code>Lt</code>, <code>Add</code>, are not associated with a
 line number.&#160;<a class="footnote-backref" href="#fnref:lineno" rev="footnote" title="Jump back to footnote 2 in the text">&#8617;</a></p>
 </li>
 <li id="fn:pseudo-hash">

@@ -176,7 +176,7 @@ def compute_stats():
             source = cleanup.run(source)
             total += source.count("\n")
         print(f"{directory}: {total} SLOC")
-        total = 100 * round(total / 100)
+        total = 50 * round(total / 50)
         (readme_text, n) = regex.subn(
             fr"(?m)^(!\[{directory} SLOC\].+?)~\d+(%20SLOC)", fr"\1~{total}\2", readme_text
         )

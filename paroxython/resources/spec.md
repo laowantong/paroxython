@@ -177,7 +177,7 @@
 
 #### Feature `node`
 
-Match the name of every node of the AST. This covers most of the [Python keywords]((https://docs.python.org/3/reference/lexical_analysis.html#keywords)), and may avoid writing specialized definitions for some simple statements (_e.g._, `break`, `assert`), and some constructs spanning multiple lines (_e.g._, `if`, `while`).
+Match the name of every node of the AST. This covers most of the [Python keywords]((https://docs.python.org/3/reference/lexical_analysis.html#keywords)), and may avoid writing specialized definitions for some simple statements (e.g., `break`, `assert`), and some constructs spanning multiple lines (e.g., `if`, `while`).
 
 ##### Derivations
 
@@ -1334,7 +1334,7 @@ When the value of the left operand suffices to determine the value of a boolean 
 
 #### Feature `call_argument`
 
-Match any argument of a free call or a member call. Suffix this argument when it is **atomic**, _i.e._ either:
+Match any argument of a free call or a member call. Suffix this argument when it is **atomic**, i.e. either:
 - an identifier,
 - a number literal,
 - `True`, `False` or `None`.
@@ -3734,7 +3734,7 @@ WHERE c.name_suffix = f.name_suffix
 
 #### Feature `deeply_recursive_function`
 
-Any function `f` which features a nested call to itself (`f(..., f(...), ...)`), _e.g._ the [Ackermann function](https://en.wikipedia.org/wiki/Ackermann_function).
+Any function `f` which features a nested call to itself (`f(..., f(...), ...)`), e.g. the [Ackermann function](https://en.wikipedia.org/wiki/Ackermann_function).
 
 ##### Derivations
 
@@ -3871,7 +3871,7 @@ LEFT JOIN t_body_recursive_function USING (span)
 WHERE t_body_recursive_function.rowid IS NULL
 ```
 
-_LIMITATION._ Currently, the tail recursive procedures (_i.e._, without `return`, _e.g._ the drawing of a fractal) are not recognized.
+_LIMITATION._ Currently, the tail recursive procedures (i.e., without `return`, e.g. the drawing of a fractal) are not recognized.
 
 ##### Example
 
@@ -6365,7 +6365,7 @@ May be rewritten as:
 2   a += b + c
 ```
 
-- Line 3, note that the `+` binary operator is not necessarily commutative, _e.g._ on strings.
+- Line 3, note that the `+` binary operator is not necessarily commutative, e.g. on strings.
 - Some cases like line 4 should be matched, check the associativity rules.
 
 ##### Matches

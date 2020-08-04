@@ -50,7 +50,7 @@ def find_all_features(
     Returns:
         Iterator[Tuple[LabelName, str, str]]: An iterator yielding all matching triples of the form:
 
-            1. label name pattern (_e.g._, `"try"` or `"try_raise|try_except"`),
+            1. label name pattern (e.g., `"try"` or `"try_raise|try_except"`),
             2. language (currently, `"re"` or `"sql"`),
             3. specification (respectively, a regular expression pattern or an SQL query).
     """

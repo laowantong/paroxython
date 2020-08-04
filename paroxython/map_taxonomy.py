@@ -75,7 +75,7 @@ the definition of `"addition_operator"` is introduced by these words: “An addi
 binary operator `Add` which has not be classified as a concatenation operator”.
 
 This is a good example of label for internal use only. In the present stage, it is simply ignored
-(_i.e._, it has no entry in the taxonomy).
+(i.e., it has no entry in the taxonomy).
 
 ### 1-N mapping
 
@@ -143,7 +143,7 @@ Initially, the conversion produces as many redundant spans as for the labels:
     - `("variable/assignment/parallel/slide", {(7, 7): 1})`.
 
 However, because of the tree-like structuring of taxa, it is possible to remove those occurrences
-that are subject to further characterization (_e.g._, `variable/assignment/parallel` on line 7 is
+that are subject to further characterization (e.g., `variable/assignment/parallel` on line 7 is
 further characterized as `variable/assignment/parallel/slide`), resulting in the list of taxa
 given at the start of the section.
 

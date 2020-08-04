@@ -9,12 +9,12 @@ A dictionary of predicates listing all possible relations between two intervals
     code is regenerated.
 
 Each predicate of the dictionary `compare_spans` is identified by a key of seven characters among
-`"xy<≤="`, _e.g._ `"x=y≤x≤y"`. Several human-readable aliases are also provided:
+`"xy<≤="`, e.g. `"x=y≤x≤y"`. Several human-readable aliases are also provided:
 
 - the 13 terms `"equals"`, `"starts"`, `"during"`, etc. introduced by James F. Allen in his seminal
   paper ([PDF](http://cse.unl.edu/~choueiry/Documents/Allen-CACM1983.pdf)) about temporal
   intervals[^Allen1983];
-- some extra synonyms, _e.g._, `"in"` for `"during"` and `"is"` for `"equals"`.
+- some extra synonyms, e.g., `"in"` for `"during"` and `"is"` for `"equals"`.
 
 [^Allen1983]:
     Allen, James F. (26 Nov. 1983). _Maintaining knowledge about temporal intervals_.

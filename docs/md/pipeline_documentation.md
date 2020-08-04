@@ -40,7 +40,7 @@ The first thing to clarify is that the strings which constitute the `data` lists
 
 The second thing to clarify is that a given pattern will match any string **starting** with it. Thus, `"type/sequence/list"` will match not only `"type/sequence/list"`, but `"type/sequence/list/empty"` and `"type/sequence/list/supercalifragilisticexpialidocious"` too. The same applies to program names. For example, in our personal database, all programs from [Project Euler](https://projecteuler.net) start with `"euler_"`. The pattern `"euler_"` will then match all of them.
 
-In terms of regular expressions, it means that, under the hood, Paroxython invokes [`match()` instead of `search()`](https://docs.python.org/3/library/re.html#search-vs-match). In the rare cases where you want to restrict the whole matching to the pattern itself, simply suffix it with a dollar sign, _i.e._, `"type/sequence/list$"`.
+In terms of regular expressions, it means that, under the hood, Paroxython invokes [`match()` instead of `search()`](https://docs.python.org/3/library/re.html#search-vs-match). In the rare cases where you want to restrict the whole matching to the pattern itself, simply suffix it with a dollar sign, i.e., `"type/sequence/list$"`.
 
 ## Execution of a pipeline
 
@@ -289,7 +289,7 @@ This keeps only the programs that feature a conditional inside a loop **and** a 
 
 ### Negative semantic triples
 
-It is possible to negate the predicate of a semantic triple, either by prefixing it by an exclamation mark (_e.g._, `"!x≤y≤y≤x"`, or `"!contains"`), or by adding the word _not_ (_e.g_, `"not x≤y≤y≤x"`, `"not contains"`,  or `"contains not"`), whether it's grammatically correct or not.
+It is possible to negate the predicate of a semantic triple, either by prefixing it by an exclamation mark (e.g., `"!x≤y≤y≤x"`, or `"!contains"`), or by adding the word _not_ (_e.g_, `"not x≤y≤y≤x"`, `"not contains"`,  or `"contains not"`), whether it's grammatically correct or not.
 
 #### Expressing the absence of a taxon
 
@@ -299,7 +299,7 @@ Here again, the simplest _negated_ semantic triple is:
 ("metadata/program", "not contains", taxon_pattern)
 ```
 
-On a set of **independent programs** (_i.e._, not importing each other), there is a strict equivalence between:
+On a set of **independent programs** (i.e., not importing each other), there is a strict equivalence between:
 
 ```python
     {

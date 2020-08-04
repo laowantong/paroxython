@@ -82,7 +82,7 @@ def enumeration_to_txt_factory(
         template (str, optional): A formatting string on the first line (referred as `summary`)
             and the remaining ones (referred as `details`).
             Defaults to `"<details><summary>{summary}</summary>{details}</details>"`.
-        initial_indent (str, optional): Approximate space-width of the detail marker (_e.g._,
+        initial_indent (str, optional): Approximate space-width of the detail marker (e.g.,
             `"▶︎ "`).
             Defaults to `3`.
 

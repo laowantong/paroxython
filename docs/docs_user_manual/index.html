@@ -334,7 +334,7 @@ GROUP BY name, program
 <p>As a matter of fact, all the characters that can appear in a taxon are literal. We advise you to avoid non-literal characters in your program names as well. What are they? Essentially: <code>.^$*+?{}\[]</code>. Depending on your operating system, some are already illegal in filenames anyway. To tell the truth, the first one (the dot) is an integral part of most filenames, as an extension separator. However, it turns out that it basically means “any character”, which of course includes the dot itself. So, the regular expression <code>"hello_world.py"</code> matches the filename <code>"hello_world.py"</code>, and the fact that it matches <code>"hello_world/py"</code> and <code>"hello_worldapy"</code> shouldn't be a real problem. In any case, you can always prefix (or <em>escape</em>) a non-literal character with a backslash <code>"\"</code> to make it literal (here, <code>"hello_world\.py"</code>): that's all you'll need to know about regular expressions.</p>
 </div>
 <p>The second thing to clarify is that a given pattern will match any string <strong>starting</strong> with it. Thus, <code>"type/sequence/list"</code> will match not only <code>"type/sequence/list"</code>, but <code>"type/sequence/list/empty"</code> and <code>"type/sequence/list/supercalifragilisticexpialidocious"</code> too. The same applies to program names. For example, in our personal database, all programs from <a href="https://projecteuler.net">Project Euler</a> start with <code>"euler_"</code>. The pattern <code>"euler_"</code> will then match all of them.</p>
-<p>In terms of regular expressions, it means that, under the hood, Paroxython invokes <a href="https://docs.python.org/3/library/re.html#search-vs-match"><code>match()</code> instead of <code>search()</code></a>. In the rare cases where you want to restrict the whole matching to the pattern itself, simply suffix it with a dollar sign, <em>i.e.</em>, <code>"type/sequence/list$"</code>.</p>
+<p>In terms of regular expressions, it means that, under the hood, Paroxython invokes <a href="https://docs.python.org/3/library/re.html#search-vs-match"><code>match()</code> instead of <code>search()</code></a>. In the rare cases where you want to restrict the whole matching to the pattern itself, simply suffix it with a dollar sign, i.e., <code>"type/sequence/list$"</code>.</p>
 <h2 id="execution-of-a-pipeline">Execution of a pipeline</h2>
 <p>A pipeline is a set (or list, but the order is not important) of commands which apply sequentially to a database of program tags. It returns:</p>
 <ul>
@@ -615,13 +615,13 @@ Paroxython tries (cf. <code><a title="paroxython.normalize_predicate.normalize_p
 </code></pre>
 <p>This keeps only the programs that feature a conditional inside a loop <strong>and</strong> a conditional ended by a <code>return</code> statement <strong>and</strong> a <code>return</code> statement inside a loop. The result is a subset of the previous one, but may still include programs where the two loops, conditionals or <code>return</code> statements are distinct.</p>
 <h3 id="negative-semantic-triples">Negative semantic triples</h3>
-<p>It is possible to negate the predicate of a semantic triple, either by prefixing it by an exclamation mark (<em>e.g.</em>, <code>"!x≤y≤y≤x"</code>, or <code>"!contains"</code>), or by adding the word <em>not</em> (<em>e.g</em>, <code>"not x≤y≤y≤x"</code>, <code>"not contains"</code>,
+<p>It is possible to negate the predicate of a semantic triple, either by prefixing it by an exclamation mark (e.g., <code>"!x≤y≤y≤x"</code>, or <code>"!contains"</code>), or by adding the word <em>not</em> (<em>e.g</em>, <code>"not x≤y≤y≤x"</code>, <code>"not contains"</code>,
 or <code>"contains not"</code>), whether it's grammatically correct or not.</p>
 <h4 id="expressing-the-absence-of-a-taxon">Expressing the absence of a taxon</h4>
 <p>Here again, the simplest <em>negated</em> semantic triple is:</p>
 <pre><code class="python">(&quot;metadata/program&quot;, &quot;not contains&quot;, taxon_pattern)
 </code></pre>
-<p>On a set of <strong>independent programs</strong> (<em>i.e.</em>, not importing each other), there is a strict equivalence between:</p>
+<p>On a set of <strong>independent programs</strong> (i.e., not importing each other), there is a strict equivalence between:</p>
 <pre><code class="python">    {
         &quot;operation&quot;: &quot;include&quot;,
         &quot;data&quot;: [

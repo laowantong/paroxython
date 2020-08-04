@@ -71,7 +71,7 @@ class Recommendations:
 
         Args:
             db (JsonDatabase): A Python dictionary containing the JSON structure constructed by
-                `paroxython.make_db.Database`, _i.e._ the result of the parsing, labelling and
+                `paroxython.make_db.Database`, i.e. the result of the parsing, labelling and
                 taxon-ifying of a set of programs
                 ([example](https://repo/examples/simple/programs_db.json)).
                 The execution relies on the fields `programs`, `taxa`, `importations` and

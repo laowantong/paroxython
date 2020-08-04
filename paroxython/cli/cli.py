@@ -16,7 +16,7 @@ COMMANDS:
                 costs.
     ```
 
-Type `paroxython COMMAND --help for more information on a specific command.
+Type `paroxython COMMAND --help` for more information on a specific command.
 """
 import sys
 from importlib import import_module

@@ -788,7 +788,7 @@ are excluded too.</li>
 <h2 id="args">Args</h2>
 <dl>
 <dt><strong><code>criteria</code></strong> :&ensp;<code>List[Criterion]</code></dt>
-<dd>A list of criteria, <em>i.e.</em>, a mix of regular expression
+<dd>A list of criteria, i.e., a mix of regular expression
 patterns (strings) and/or predicates (triples).</dd>
 <dt><strong><code>operation</code></strong> :&ensp;<code>Operation</code></dt>
 <dd>Either <code>"impart"</code>, <code>"hide"</code>, <code>"include"</code> or <code>"exclude"</code>.</dd>
@@ -895,7 +895,7 @@ and an ”object” pattern. This predicate is normalized and, depending on its
 <h2 id="args">Args</h2>
 <dl>
 <dt><strong><code>criteria</code></strong> :&ensp;<code>List[Criterion]</code></dt>
-<dd>A list of criteria, <em>i.e.</em>, a mix of regular expression
+<dd>A list of criteria, i.e., a mix of regular expression
 patterns (strings) and/or predicates (triples).</dd>
 <dt><strong><code>follow</code></strong> :&ensp;<code>bool</code></dt>
 <dd>If <code>True</code>, extend the result with all the programs which import (either
@@ -1144,7 +1144,7 @@ occurrence).</dd>
 in common.</p>
 <p>Suppose first that the sets <code>taxa_1</code> and <code>taxa_2</code> have no common taxa. In this
 case, the couples of spans on which to check the predicate are obtained by a simple
-cross-product, <em>e.g.</em>:</p>
+cross-product, e.g.:</p>
 <pre><code class="python">&gt;&gt;&gt; iterate_on_spans(spans, {&quot;t1&quot;, &quot;t2&quot;}, {&quot;t3&quot;, &quot;t4&quot;})
 ((1, 1), (3, 3))  # t1 (1) ⨉ t3
 ((1, 1), (3, 3))  # t1 (2) ⨉ t3

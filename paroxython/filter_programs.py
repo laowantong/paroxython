@@ -227,7 +227,7 @@ class ProgramFilter:
                     are excluded too.
 
         Args:
-            criteria (List[Criterion]): A list of criteria, _i.e._, a mix of regular expression
+            criteria (List[Criterion]): A list of criteria, i.e., a mix of regular expression
                 patterns (strings) and/or predicates (triples).
             operation (Operation): Either `"impart"`, `"hide"`, `"include"` or `"exclude"`.
             quantifier (str): Either `"any"` or `"all"`.
@@ -299,7 +299,7 @@ class ProgramFilter:
                 `ProgramFilter.programs_of_negated_triple`.
 
         Args:
-            criteria (List[Criterion]): A list of criteria, _i.e._, a mix of regular expression
+            criteria (List[Criterion]): A list of criteria, i.e., a mix of regular expression
                 patterns (strings) and/or predicates (triples).
             follow (bool): If `True`, extend the result with all the programs which import (either
                 directly or by transitivity) at least one program meeting a criterion.
@@ -483,7 +483,7 @@ class ProgramFilter:
 
             Suppose first that the sets `taxa_1` and `taxa_2` have no common taxa. In this
             case, the couples of spans on which to check the predicate are obtained by a simple
-            cross-product, _e.g._:
+            cross-product, e.g.:
 
             >>> iterate_on_spans(spans, {"t1", "t2"}, {"t3", "t4"})
             ((1, 1), (3, 3))  # t1 (1) ⨉ t3

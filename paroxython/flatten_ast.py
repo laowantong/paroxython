@@ -32,8 +32,8 @@ Name(id='print', ctx=Load())     Str(s='hello, world', kind='')
 
 The purpose of the function `flatten_ast()` is to transform this nested structure into a
 pre-ordered sequence of text lines, each of which consisting in a key-value pair. A key is the
-complete path from the root of the AST to either a node (_e.g._, `Name()`) or a node attribute
-(_e.g._, `id`). The associated value comes after an equals sign (`=`):
+complete path from the root of the AST to either a node (e.g., `Name()`) or a node attribute
+(e.g., `id`). The associated value comes after an equals sign (`=`):
 
 ```plain
 /_type=Module
@@ -71,7 +71,7 @@ definitions listed in
 the complexity of writing, reading and maintaining any pattern using it would quickly go through the
 roof.
 
-For instance, the following regular expression matches and localizes nested function calls (_e.g._,
+For instance, the following regular expression matches and localizes nested function calls (e.g.,
 `foo(bar(42))`) without any recursion:
 
 ```re
@@ -122,7 +122,7 @@ following lines.
 
 ### Added fields
 
-- `_type`: stores the name of the node (_e.g._, `Module`, `Expr`, `Call`).
+- `_type`: stores the name of the node (e.g., `Module`, `Expr`, `Call`).
 - `_pos`: stores the line number (extracted from the attribute `lineno` of the node, if
   any[^lineno]), followed by a colon `:`, followed by the path from the root of the AST to this
   node. A path is coded as a sequence of positive integers, hyphen-separated and ended by a hyphen.
@@ -130,7 +130,7 @@ following lines.
   is a prefix of the path of \(n_2\).
 - `_hash`: see next section.
 
-[^lineno]: Numerous nodes, _e.g._ `Module`, `Store`, `Load`, `Lt`, `Add`, are not associated with a
+[^lineno]: Numerous nodes, e.g. `Module`, `Store`, `Load`, `Lt`, `Add`, are not associated with a
     line number.
 
 ### Expression decontextualization and hashing
