@@ -87,7 +87,7 @@ This process is summarized above. Note that the label specification file is prov
 
 #### Example
 
-Suppose that the directory `programs` contains [these simple programs](https://wiki.python.org/moin/SimplePrograms). First, build [this tag database](https://repo/examples/simple/programs_db.json):
+Suppose that the directory `programs` contains [these simple programs](https://wiki.python.org/moin/SimplePrograms). First, build [this tag database](https://github.com/laowantong/paroxython/blob/master/examples/simple/programs_db.json):
 
 ```shell
 > paroxython collect programs
@@ -96,7 +96,7 @@ Mapping taxonomy on 21 programs.
 Writing programs_db.json.
 ```
 
-Then, filter it through [this pipeline](https://repo/examples/simple/programs_pipe.py):
+Then, filter it through [this pipeline](https://github.com/laowantong/paroxython/blob/master/examples/simple/programs_pipe.py):
 
 ```shell
 > paroxython recommend -p programs_pipe.py programs_db.json
@@ -109,7 +109,7 @@ Processing 5 commands on 21 programs.
 Dumped: programs_recommendations.md.
 ```
 
-Et voilà [your recommendation report](https://repo/examples/simple/programs_recommendations.md)!
+Et voilà [your recommendation report](https://github.com/laowantong/paroxython/blob/master/examples/simple/programs_recommendations.md)!
 
 ----
 
