@@ -32,79 +32,65 @@
 <pre><code>paroxython recommend -p 'path/to/your/pipe.py' 'path/to/your/programs/db.json'
 </code></pre>
 <h3 id="covering-your-bases">Covering your base(s)</h3>
-<p>Our simplest pipeline has no command: it just lists the programs of your database, without any
-filter. This could produce a rather long document, since each source code is printed, along with a
-list of each and every taxon it implements. Here is the content of your <code>pipe.py</code>:</p>
-<pre><code class="python">&gt;&gt;&gt; []
+<p>Our simplest pipeline has no command: it just lists the programs of your database, without any filter. This could produce a rather long document, since each source code is printed, along with a list of each and every taxon it implements. Here is the content of your <code>pipe.py</code>:</p>
+<pre><code class="python">[]
 </code></pre>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>The point is that the resulting list is sorted by increasing learning cost. This should give
-you a rough idea of the pedagogical angle of attack to adopt in your first classes.</p>
+<p>The point is that the resulting list is sorted by increasing learning cost. This should give you a rough idea of the pedagogical angle of attack to adopt in your first classes.</p>
 </div>
 <h3 id="imparting-knowledge">Imparting knowledge</h3>
 <h4 id="tracking-the-progress-of-your-course">Tracking the progress of your course</h4>
-<p>Suppose that, in your first session, you have introduced your students to the <code>hello_world.py</code>,
-<code>wheat_and_chessboard.py</code> and <code>euler_005_smallest_multiple.py</code> programs. Not only Paroxython should
-no longer recommend these programs, but the cost of learning the associated concepts should be
-considered as zero when they are encountered again in the future.</p>
-<pre><code class="python">&gt;&gt;&gt; [
-...     {
-...         &quot;operation&quot;: &quot;impart&quot;,
-...         &quot;data&quot;: [
-...             &quot;hello_world.py&quot;,
-...             &quot;wheat_and_chessboard.py&quot;,
-...             &quot;euler_005_smallest_multiple.py&quot;,
-...         ],
-...     },
-... ]
+<p>Suppose that, in your first session, you have introduced your students to the <code>hello_world.py</code>, <code>wheat_and_chessboard.py</code> and <code>euler_005_smallest_multiple.py</code> programs. Not only Paroxython should no longer recommend these programs, but the cost of learning the associated concepts should be considered as zero when they are encountered again in the future.</p>
+<pre><code class="python">[
+  {
+    &quot;operation&quot;: &quot;impart&quot;,
+    &quot;data&quot;: [
+      &quot;hello_world.py&quot;,
+      &quot;wheat_and_chessboard.py&quot;,
+      &quot;euler_005_smallest_multiple.py&quot;,
+    ],
+  },
+]
 </code></pre>
 <h4 id="coming-after-another-course">Coming after another course</h4>
-<p>Suppose instead that you intervene after an introductory course given by a colleague. She gives you a
-folder (named <code>"CS_101"</code>), which contains the programs she has studied with her class. Since you
-are secretly in love, you assume, somewhat foolishly, that the concepts they implement are mastered
-by your new students.</p>
-<pre><code class="python">&gt;&gt;&gt; [
-...     {
-...         &quot;operation&quot;: &quot;impart&quot;,
-...         &quot;data&quot;: &quot;find CS_101 -path '*.py'&quot;,
-...     },
-... ]
+<p>Suppose instead that you intervene after an introductory course given by a colleague. She gives you a folder (named <code>"CS_101"</code>), which contains the programs she has studied with her class. Since you are secretly in love, you assume, somewhat foolishly, that the concepts they implement are mastered by your new students.</p>
+<pre><code class="python">[
+  {
+    &quot;operation&quot;: &quot;impart&quot;,
+    &quot;data&quot;: &quot;find CS_101 -path '*.py'&quot;,
+  },
+]
 </code></pre>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>As you can see, rather than maintaining a <strong>list</strong> of programs or concepts in the <code>"data"</code>
-field, you may provide a <strong>string</strong>. Paroxython will interpret it as a shell command, and
-expect it to print on <code>stdout</code> the required list of items (programs or taxa), one per line.</p>
+<p>As you can see, rather than maintaining a <strong>list</strong> of programs or concepts in the <code>"data"</code> field, you may provide a <strong>string</strong>. Paroxython will interpret it as a shell command, and expect it to print on <code>stdout</code> the required list of items (programs or taxa), one per line.</p>
 </div>
 <h3 id="blacklisting-programs">Blacklisting programs</h3>
-<p>You want to filter out all programs reserved for an exam, or too complex, or not pedagogically
-interesting enough, or that could get you kicked out of your college, etc.</p>
-<pre><code class="python">&gt;&gt;&gt; [
-...     {
-...         &quot;operation&quot;: &quot;exclude&quot;,
-...         &quot;data&quot;: [
-...             &quot;fizzbuzz.py&quot;,
-...             &quot;alpha_go.py&quot;,
-...             &quot;hello_world_of_pain.py&quot;,
-...             &quot;gob_s_program.py&quot;,
-...         ],
-...     },
-... ]
+<p>You want to filter out all programs reserved for an exam, or too complex, or not pedagogically interesting enough, or that could get you kicked out of your college, etc.</p>
+<pre><code class="python">[
+  {
+    &quot;operation&quot;: &quot;exclude&quot;,
+    &quot;data&quot;: [
+      &quot;fizzbuzz.py&quot;,
+      &quot;alpha_go.py&quot;,
+      &quot;hello_world_of_pain.py&quot;,
+      &quot;gob_s_program.py&quot;,
+    ],
+  },
+]
 </code></pre>
 <h3 id="concepts-to-be-introduced-later-or-never">Concepts to be introduced later (or never)</h3>
-<p>For the time being, you don't want to be recommended any program requiring the concepts of
-recursivity (<code>subroutine/recursive</code>), dictionary (<code>type/non_sequence/dictionary</code>) or set
-(<code>type/non_sequence/set</code>).</p>
-<pre><code class="python">&gt;&gt;&gt; [
-...     {
-...         &quot;operation&quot;: &quot;exclude&quot;,
-...         &quot;data&quot;: [
-...             &quot;subroutine/recursive&quot;,
-...             &quot;type/non_sequence&quot;,
-...         ],
-...     },
-... ]
+<p>For the time being, you don't want to be recommended any program requiring the concepts of recursivity (<code>subroutine/recursive</code>), dictionary (<code>type/non_sequence/dictionary</code>) or set (<code>type/non_sequence/set</code>).</p>
+<pre><code class="python">[
+  {
+    &quot;operation&quot;: &quot;exclude&quot;,
+    &quot;data&quot;: [
+      &quot;subroutine/recursive&quot;,
+      &quot;type/non_sequence&quot;,
+    ],
+  },
+]
 </code></pre>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -117,74 +103,53 @@ Python program (ending with <code>".py"</code>) or a taxon (like here).</p>
 type, it is enough to exclude all taxa starting with <code>type/non_sequence</code>.</p>
 </div>
 <h3 id="concepts-to-be-introduced-now">Concepts to be introduced now</h3>
-<p>Your next class will be devoted to conditional constructs. Thus, you need to go through programs
-featuring taxa prefixed by <code>flow/conditional</code> or even, why not, some conditional expressions
-(<code>operator/ternary</code>). The suggested programs do not necessarily have to implement both concepts at
-the same time, but at least one. Any other program will be rejected.</p>
-<pre><code class="python">&gt;&gt;&gt; [
-...     {
-...         &quot;operation&quot;: &quot;include&quot;,
-...         &quot;data&quot;: [
-...             &quot;flow/conditional&quot;,
-...             &quot;operator/ternary&quot;,
-...         ],
-...     },
-... ]
+<p>Your next class will be devoted to conditional constructs. Thus, you need to go through programs featuring taxa prefixed by <code>flow/conditional</code> or even, why not, some conditional expressions (<code>operator/ternary</code>). The suggested programs do not necessarily have to implement both concepts at the same time, but at least one. Any other program will be rejected.</p>
+<pre><code class="python">[
+  {
+    &quot;operation&quot;: &quot;include&quot;,
+    &quot;data&quot;: [
+      &quot;flow/conditional&quot;,
+      &quot;operator/ternary&quot;,
+    ],
+  },
+]
 </code></pre>
 <h3 id="preparing-an-assignment">Preparing an assignment</h3>
-<p>Basically, you provide Paroxython with a list of programs already studied in class, and it suggests
-new programs that implement only old concepts. This requires the exclusion of all programs
-featuring at least one concept that has not been seen in any of the programs already seen.</p>
-<p>It may sound a little complicated, because it is. But don't panic. Remember that Paroxython always
-orders its recommendations by increasing cost. Thus, all you have to do is ask it to list the
-programs that have not been introduced yet. The programs you want to choose among will appear at
-the top of the results, under the zero-learning cost section. Moreover, inside each section, they
-will be sorted by increasing size (<a href="https://en.wikipedia.org/wiki/Source_lines_of_code"><abbr title="Source Lines Of Code">SLOC</abbr></a>),
-which can be a reasonable proxy for their difficulty.</p>
-<p>But in the end, you, the teacher, are the judge. Paroxython is not going to set up a test for you,
-let alone grade the answers. It is just here to remind you of some possibilities you might not have
-thought of at the right time, and to give you some confidence that the exercises require no concept
-you have not pre-introduced in class, which later on might save you some awkward conversations with
-your dear students.</p>
-<p>Since this is the last filter in our tutorial, let's summarize what we've seen by chaining several
-commands together:</p>
+<p>Basically, you provide Paroxython with a list of programs already studied in class, and it suggests new programs that implement only old concepts. This requires the exclusion of all programs featuring at least one concept that has not been seen in any of the programs already seen.</p>
+<p>It may sound a little complicated, because it is. But don't panic. Remember that Paroxython always orders its recommendations by increasing cost. Thus, all you have to do is ask it to list the programs that have not been introduced yet. The programs you want to choose among will appear at the top of the results, under the zero-learning cost section. Moreover, inside each section, they will be sorted by increasing size (<a href="https://en.wikipedia.org/wiki/Source_lines_of_code"><abbr title="Source Lines Of Code">SLOC</abbr></a>), which can be a reasonable proxy for their difficulty.</p>
+<p>But in the end, you, the teacher, are the judge. Paroxython is not going to set up a test for you, let alone grade the answers. It is just here to remind you of some possibilities you might not have thought of at the right time, and to give you some confidence that the exercises require no concept you have not pre-introduced in class, which later on might save you some awkward conversations with your dear students.</p>
+<p>Since this is the last filter in our tutorial, let's summarize what we've seen by chaining several commands together:</p>
 <ol>
-<li><strong>Impart</strong> the previous knowledge by extracting all the programs listed in the <code>"timeline.txt"</code>
-file that you update after each session. You can adapt the script
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/helpers/parse_syllabus.py"><code>parse_syllabus.py</code></a>
-to your own needs. If you wish, you can use the <code>base_path</code> variable, which represents the
-parent of the directory containing the programs of your personal database.</li>
+<li><strong>Impart</strong> the previous knowledge by extracting all the programs listed in the <code>"timeline.txt"</code> file that you update after each session. You can adapt the script <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/helpers/parse_syllabus.py"><code>parse_syllabus.py</code></a> to your own needs. If you wish, you can use the <code>base_path</code> variable, which represents the parent of the directory containing the programs of your personal database.</li>
 <li><strong>Exclude</strong> some irrelevant programs.</li>
 <li><strong>Include</strong> the concepts that you want to test during your exam.</li>
 </ol>
-<pre><code class="python">&gt;&gt;&gt; [
-...     {
-...         &quot;operation&quot;: &quot;impart&quot;,
-...         &quot;data&quot;: &quot;python helpers/parse_syllabus.py {base_path}/timeline.txt&quot;,
-...     },
-...     {
-...         &quot;operation&quot;: &quot;exclude&quot;,
-...         &quot;data&quot;: [
-...             &quot;foo.py&quot;,
-...             &quot;bar.py&quot;,
-...             # &quot;buzz.py&quot;,
-...         ],
-...     },
-...     {
-...         &quot;operation&quot;: &quot;include&quot;,
-...         &quot;data&quot;: [
-...             &quot;pattern/elements/accumulate&quot;,
-...             &quot;topic/game&quot;,
-...             &quot;type/sequence/list&quot;,
-...         ],
-...     },
-... ]
+<pre><code class="python">[
+  {
+    &quot;operation&quot;: &quot;impart&quot;,
+    &quot;data&quot;: &quot;python helpers/parse_syllabus.py {base_path}/timeline.txt&quot;,
+  },
+  {
+    &quot;operation&quot;: &quot;exclude&quot;,
+    &quot;data&quot;: [
+      &quot;foo.py&quot;,
+      &quot;bar.py&quot;,
+      # &quot;buzz.py&quot;,
+    ],
+  },
+  {
+    &quot;operation&quot;: &quot;include&quot;,
+    &quot;data&quot;: [
+      &quot;pattern/elements/accumulate&quot;,
+      &quot;topic/game&quot;,
+      &quot;type/sequence/list&quot;,
+    ],
+  },
+]
 </code></pre>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>This command pipeline is <em>not</em> a <abbr title="JavaScript Object Notation">JSON</abbr> file, but a Python program, or more restrictively a
-Python <strong>expression</strong>. As such, it offers several amenities you surely know and love: comments,
-trailing commas, r-strings, etc.</p>
+<p>This command pipeline is <em>not</em> a <abbr title="JavaScript Object Notation">JSON</abbr> file, but a Python program, or more restrictively a Python <strong>expression</strong>. As such, it offers several amenities you surely know and love: comments, trailing commas, r-strings, etc.</p>
 </div>
 <p>This is the end of our pipeline tutorial. If you dare, <a href="#deep-in-the-pipeline">read on</a> for more advanced features (regular expressions, span algebra, semantic triples, negations).</p>
 <h2 id="tag-databases">Tag databases</h2>
@@ -304,26 +269,26 @@ GROUP BY name, program
 <h1 id="deep-in-the-pipeline">Deep in the pipeline</h1>
 <p>This part describes in some details how the recommendation system works. It assumes you've already read the <a href="#pipeline-tutorial-getting-recommendations">tutorial on recommendations</a>. First of all, let us recall the example of pipeline we gave at the end.</p>
 <pre><code class="python">&gt;&gt;&gt; [
-...     {
-...         &quot;operation&quot;: &quot;impart&quot;,
-...         &quot;data&quot;: &quot;python helpers/parse_syllabus.py {base_path}/timeline.txt&quot;,
-...     },
-...     {
-...         &quot;operation&quot;: &quot;exclude&quot;,
-...         &quot;data&quot;: [
-...             &quot;foo.py&quot;,
-...             &quot;bar.py&quot;,
-...             # &quot;buzz.py&quot;,
-...         ],
-...     },
-...     {
-...         &quot;operation&quot;: &quot;include&quot;,
-...         &quot;data&quot;: [
-...             &quot;pattern/elements/accumulate&quot;,
-...             &quot;topic/game&quot;,
-...             &quot;type/sequence/list&quot;,
-...         ],
-...     },
+...   {
+...     &quot;operation&quot;: &quot;impart&quot;,
+...     &quot;data&quot;: &quot;python helpers/parse_syllabus.py {base_path}/timeline.txt&quot;,
+...   },
+...   {
+...     &quot;operation&quot;: &quot;exclude&quot;,
+...     &quot;data&quot;: [
+...       &quot;foo.py&quot;,
+...       &quot;bar.py&quot;,
+...       # &quot;buzz.py&quot;,
+...     ],
+...   },
+...   {
+...     &quot;operation&quot;: &quot;include&quot;,
+...     &quot;data&quot;: [
+...       &quot;pattern/elements/accumulate&quot;,
+...       &quot;topic/game&quot;,
+...       &quot;type/sequence/list&quot;,
+...     ],
+...   },
 ... ]
 </code></pre>
 <h2 id="regular-expression-patterns">Regular expression patterns</h2>
@@ -386,20 +351,20 @@ GROUP BY name, program
 <p><strong><code>"include all"</code> variant</strong></p>
 <p>Its purpose is to keep only those selected programs that satisfy all given criteria.</p>
 <pre><code class="python">{
-    &quot;operation&quot;: &quot;include all&quot;,
-    &quot;data&quot;: [
-        criterion_1,
-        criterion_2,
-        ...,
-        criterion_n
-    ]
+  &quot;operation&quot;: &quot;include all&quot;,
+  &quot;data&quot;: [
+    criterion_1,
+    criterion_2,
+    ...,
+    criterion_n
+  ]
 }
 </code></pre>
 <p>&hellip; is equivalent to:</p>
-<pre><code class="python">    {&quot;operation&quot;: &quot;include&quot;, &quot;data&quot;: [criterion_1]},
-    {&quot;operation&quot;: &quot;include&quot;, &quot;data&quot;: [criterion_2]},
-    ...,
-    {&quot;operation&quot;: &quot;include&quot;, &quot;data&quot;: [criterion_n]}
+<pre><code class="python">  {&quot;operation&quot;: &quot;include&quot;, &quot;data&quot;: [criterion_1]},
+  {&quot;operation&quot;: &quot;include&quot;, &quot;data&quot;: [criterion_2]},
+  ...,
+  {&quot;operation&quot;: &quot;include&quot;, &quot;data&quot;: [criterion_n]}
 </code></pre>
 <h3 id="exclude-command"><code>"exclude"</code> command</h3>
 <p>Its purpose is to filter out of the selection the programs which satisfy at least one given criterion.</p>
@@ -412,13 +377,13 @@ GROUP BY name, program
 <p><strong><code>"exclude all"</code> variant</strong></p>
 <p>Unlike <code>"include all"</code>, this variant actually expands the semantics of the system.</p>
 <pre><code class="python">{
-    &quot;operation&quot;: &quot;exclude all&quot;,
-    &quot;data&quot;: [
-        criterion_1,
-        criterion_2,
-        ...,
-        criterion_n
-    ]
+  &quot;operation&quot;: &quot;exclude all&quot;,
+  &quot;data&quot;: [
+    criterion_1,
+    criterion_2,
+    ...,
+    criterion_n
+  ]
 }
 </code></pre>
 <p>&hellip; excludes the programs satisfying <strong>all</strong> the criteria. This cannot be transformed into a sequence of <code>"exclude"</code> commands, which would exclude the programs satisfying <strong>any</strong> of the criteria.</p>
@@ -437,9 +402,11 @@ GROUP BY name, program
 <p>The <code>"impart all"</code> variant is not supported, and treated as <code>"impart"</code>.</p>
 <h3 id="hide-command"><code>"hide"</code> command</h3>
 <p>This is the simplest command of all. It merely accumulates the programs or the taxa matching the given patterns (relationships are not supported), without other effect on the filter. In the final stage, the accumulated programs or taxa will be filtered out of report.</p>
-<p><strong>Notes.</strong>
-- Excluding a program is equivalent to hiding it <em>plus</em> every program importing it.
-- The learning costs are not affected whatsoever by the hiding of a taxon: its individual cost continues to contribute towards the total cost of a program.</p>
+<p><strong>Notes.</strong></p>
+<ul>
+<li>Excluding a program is equivalent to hiding it <em>plus</em> every program importing it.</li>
+<li>The learning costs are not affected whatsoever by the hiding of a taxon: its individual cost continues to contribute towards the total cost of a program.</li>
+</ul>
 <p>The <code>"hide all"</code> variant is not supported, and treated as <code>"hide"</code>.</p>
 <h2 id="semantic-triples">Semantic triples</h2>
 <h3 id="span-algebra">Span algebra</h3>
@@ -451,7 +418,7 @@ GROUP BY name, program
 <p>It is sometimes interesting to know how the spans of two taxa of the same program are located relatively to each other.</p>
 <ul>
 <li>For instance, a <code>print()</code> statement whose span is inside the span of a function indicates that this function has a side-effect.</li>
-<li>A less trivial application stems from the fact that our taxonomy is multi-dimensional: each algorithmic feature can be associated with several taxa at the same time, characterizing it it along several dimensions. For instance, the taxa <code>flow/loop</code> and <code>flow/loop/while</code> describe the category of a loop; whereas the taxa <code>flow/loop/exit/early</code> and <code>flow/loop/exit/late</code> describe its exit behavior. These dimensions are independent and, although it is entirely possible to do so, our default taxonomy does not list the results of the cross-product (i.e., <code>flow/loop/exit/early</code>, <code>flow/loop/exit/late</code>, <code>flow/loop/while/exit/early</code> and <code>flow/loop/while/exit/late</code>). Querying an hypothetical taxon <code>flow/loop/exit/early</code> (or <code>flow/loop/exit/early/for</code>, by the way) comes down to querying the taxa <code>flow/loop</code> spanning the same lines as <code>flow/loop/exit/early</code>.</li>
+<li>A less trivial application stems from the fact that our taxonomy is multi-dimensional: each algorithmic feature can be associated with several taxa at the same time, characterizing it it along several dimensions. For instance, the taxa <code>flow/loop/for</code> and <code>flow/loop/while</code> describe the category of a loop; whereas the taxa <code>flow/loop/exit/early</code> and <code>flow/loop/exit/late</code> describe its exit behavior. These dimensions are independent and, although it is entirely possible to do so, our default taxonomy does not list the results of the cross-product (i.e., <code>flow/loop/for/exit/early</code>, <code>flow/loop/for/exit/late</code>, <code>flow/loop/while/exit/early</code> and <code>flow/loop/while/exit/late</code>). Querying an hypothetical taxon <code>flow/loop/for/exit/early</code> (or <code>flow/loop/exit/early/for</code>, by the way) comes down to querying the taxa <code>flow/loop/for</code> spanning the same lines as <code>flow/loop/exit/early</code>.</li>
 </ul>
 <p>To express a relation <span><span class="MathJax_Preview">\mathfrak{R}</span><script type="math/tex">\mathfrak{R}</script></span> between the spans of two taxa, we start from the algebra devised in 1983 by James F. Allen in his seminal paper (<a href="http://cse.unl.edu/~choueiry/Documents/Allen-CACM1983.pdf">PDF</a>) about temporal intervals<sup id="fnref:Allen1983"><a class="footnote-ref" href="#fn:Allen1983" rel="footnote">2</a></sup>. The so-called Allen's interval algebra defines 13 basic operators which capture all possible relations between two intervals <span><span class="MathJax_Preview">X=(x_1, x_2)</span><script type="math/tex">X=(x_1, x_2)</script></span> and <span><span class="MathJax_Preview">Y=(y_1, y_2)</span><script type="math/tex">Y=(y_1, y_2)</script></span>. The table below uses his terminology:</p>
 <table>
@@ -578,40 +545,41 @@ Paroxython tries (cf. <code><a title="paroxython.normalize_predicate.normalize_p
 <p>This allows the user to be understood when entering formulas like
 <code>x == y</code>, <code>x &lt;= y</code> or <code>y1 &lt; x1 == x2 &lt;= y2</code>.</p>
 <h3 id="positive-semantic-triples">Positive semantic triples</h3>
-<p>A pipeline command can apply not only to patterns of programs and taxa, but also to relationships between the spans of two taxon patterns. Being given an operator <span><span class="MathJax_Preview">\mathfrak{R}</span><script type="math/tex">\mathfrak{R}</script></span> and two taxon patterns <span><span class="MathJax_Preview">t_1</span><script type="math/tex">t_1</script></span> and <span><span class="MathJax_Preview">t_2</span><script type="math/tex">t_2</script></span>, the statement <span><span class="MathJax_Preview">t_1 \mathbin{\mathfrak{R}} t_2</span><script type="math/tex">t_1 \mathbin{\mathfrak{R}} t_2</script></span> will be codified in the form of the <em>subject–predicate–object</em> expression <span><span class="MathJax_Preview">(t_1, \mathfrak{R}, t_2)</span><script type="math/tex">(t_1, \mathfrak{R}, t_2)</script></span>, which can be entered as a mere Python tuple <code>(t1, R, t2)</code>. The simplest semantic triple is:</p>
+<p>A pipeline command can apply not only to patterns of programs and taxa, but also to relationships between the spans of two taxon patterns. Being given an operator <span><span class="MathJax_Preview">\mathfrak{R}</span><script type="math/tex">\mathfrak{R}</script></span> and two taxon patterns <span><span class="MathJax_Preview">t_1</span><script type="math/tex">t_1</script></span> and <span><span class="MathJax_Preview">t_2</span><script type="math/tex">t_2</script></span>, the statement <span><span class="MathJax_Preview">t_1 \mathbin{\mathfrak{R}} t_2</span><script type="math/tex">t_1 \mathbin{\mathfrak{R}} t_2</script></span> will be codified in the form of the <em>subject–predicate–object</em> expression <span><span class="MathJax_Preview">(t_1, \mathfrak{R}, t_2)</span><script type="math/tex">(t_1, \mathfrak{R}, t_2)</script></span>, which can be entered as a mere Python tuple <code>(t1, R, t2)</code>.</p>
+<p>The simplest semantic triple is:</p>
 <pre><code class="python">(&quot;metadata/program&quot;, &quot;contains&quot;, taxon_pattern)
 </code></pre>
 <p>It matches all programs where the span of the taxon <code>"metadata/program"</code> includes the span of a given <code>taxon_pattern</code>. Since, by definition, every program features one taxon <code>"metadata/program"</code>, whose span encompasses the whole program, this is strictly equivalent to:</p>
 <pre><code class="python">taxon_pattern
 </code></pre>
 <p>And now for something completely different: the following pipeline command will only keep programs featuring a conditional inside a loop <strong>or</strong> (inclusive) ended by a <code>return</code> statement (the function <code>first_missing_non_negative()</code> given above satisfies these two criteria).</p>
-<pre><code class="python">    {
-        &quot;operation&quot;: &quot;include&quot;,
-        &quot;data&quot;: [
-            (&quot;flow/loop&quot;, &quot;contains&quot;, &quot;flow/conditional&quot;),
-            (&quot;flow/conditional&quot;, &quot;finished by&quot;, &quot;subroutine/return&quot;),
-        ]
-    },
+<pre><code class="python">  {
+    &quot;operation&quot;: &quot;include&quot;,
+    &quot;data&quot;: [
+      (&quot;flow/loop&quot;, &quot;contains&quot;, &quot;flow/conditional&quot;),
+      (&quot;flow/conditional&quot;, &quot;finished by&quot;, &quot;subroutine/return&quot;),
+    ]
+  },
 </code></pre>
-<p>It is currently not possible to chain several operators with shared operands, for example to keep only the programs that feature a conditional inside a loop <strong>and</strong> ended by a <code>return</code> statement: the quintuple <code>("flow/loop", "contains", "flow/conditional", "finished by", "subroutine/return")</code> would raise an error. As it stands, the best that we can do is to chain the commands themselves:</p>
-<pre><code class="python">    {
-        &quot;operation&quot;: &quot;include&quot;,
-        &quot;data&quot;: [
-            (&quot;flow/loop&quot;, &quot;contains&quot;, &quot;flow/conditional&quot;),
-        ]
-    },
-    {
-        &quot;operation&quot;: &quot;include&quot;,
-        &quot;data&quot;: [
-            (&quot;flow/conditional&quot;, &quot;finished by&quot;, &quot;subroutine/return&quot;),
-        ]
-    },
-    {
-        &quot;operation&quot;: &quot;include&quot;,
-        &quot;data&quot;: [
-            (&quot;subroutine/return&quot;, &quot;contains&quot;, &quot;flow/loop&quot;),
-        ]
-    },
+<p>It is currently not possible to chain several operators with shared operands, for example to keep only the programs that feature a conditional inside a loop <strong>and</strong> ended by a <code>return</code> statement: the quintuple <code>("flow/loop", "contains", "flow/conditional", "finished by", "subroutine/return")</code> would raise an error. As it stands, the best we can do is to chain the commands themselves:</p>
+<pre><code class="python">  {
+    &quot;operation&quot;: &quot;include&quot;,
+    &quot;data&quot;: [
+      (&quot;flow/loop&quot;, &quot;contains&quot;, &quot;flow/conditional&quot;),
+    ]
+  },
+  {
+    &quot;operation&quot;: &quot;include&quot;,
+    &quot;data&quot;: [
+      (&quot;flow/conditional&quot;, &quot;finished by&quot;, &quot;subroutine/return&quot;),
+    ]
+  },
+  {
+    &quot;operation&quot;: &quot;include&quot;,
+    &quot;data&quot;: [
+      (&quot;subroutine/return&quot;, &quot;contains&quot;, &quot;flow/loop&quot;),
+    ]
+  },
 </code></pre>
 <p>This keeps only the programs that feature a conditional inside a loop <strong>and</strong> a conditional ended by a <code>return</code> statement <strong>and</strong> a <code>return</code> statement inside a loop. The result is a subset of the previous one, but may still include programs where the two loops, conditionals or <code>return</code> statements are distinct.</p>
 <h3 id="negative-semantic-triples">Negative semantic triples</h3>
@@ -622,53 +590,53 @@ or <code>"contains not"</code>), whether it's grammatically correct or not.</p>
 <pre><code class="python">(&quot;metadata/program&quot;, &quot;not contains&quot;, taxon_pattern)
 </code></pre>
 <p>On a set of <strong>independent programs</strong> (i.e., not importing each other), there is a strict equivalence between:</p>
-<pre><code class="python">    {
-        &quot;operation&quot;: &quot;include&quot;,
-        &quot;data&quot;: [
-            (&quot;metadata/program&quot;, &quot;not contains&quot;, taxon_pattern)
-        ]
-    },
+<pre><code class="python">  {
+    &quot;operation&quot;: &quot;include&quot;,
+    &quot;data&quot;: [
+      (&quot;metadata/program&quot;, &quot;not contains&quot;, taxon_pattern)
+    ]
+  },
 </code></pre>
 <p>and:</p>
-<pre><code class="python">    {
-        &quot;operation&quot;: &quot;exclude&quot;,
-        &quot;data&quot;: [
-            taxon_pattern
-        ]
-    },
+<pre><code class="python">  {
+    &quot;operation&quot;: &quot;exclude&quot;,
+    &quot;data&quot;: [
+      taxon_pattern
+    ]
+  },
 </code></pre>
 <p>And, conversely, between:</p>
-<pre><code class="python">    {
-        &quot;operation&quot;: &quot;include&quot;,
-        &quot;data&quot;: [
-            taxon_pattern
-        ]
-    },
+<pre><code class="python">  {
+    &quot;operation&quot;: &quot;include&quot;,
+    &quot;data&quot;: [
+      taxon_pattern
+    ]
+  },
 </code></pre>
 <p>and:</p>
-<pre><code class="python">    {
-        &quot;operation&quot;: &quot;exclude&quot;,
-        &quot;data&quot;: [
-            (&quot;metadata/program&quot;, &quot;not contains&quot;, taxon_pattern)
-        ]
-    },
+<pre><code class="python">  {
+    &quot;operation&quot;: &quot;exclude&quot;,
+    &quot;data&quot;: [
+      (&quot;metadata/program&quot;, &quot;not contains&quot;, taxon_pattern)
+    ]
+  },
 </code></pre>
 <p>This property may be used to select the programs that include any subset of a given set of taxa. This can be done in a systematic way by converting<sup id="fnref:to_cnf"><a class="footnote-ref" href="#fn:to_cnf" rel="footnote">4</a></sup> the corresponding logical formula in <a href="https://en.wikipedia.org/wiki/Conjunctive_normal_form">conjunctive normal form</a>, and transforming each clause into a separate <code>"include"</code> command.</p>
 <p>For instance, consider the two taxa <code>"flow/conditional"</code> and <code>"flow/loop"</code>. To keep only the programs that feature either a conditional (denoted by the literal <span><span class="MathJax_Preview">a</span><script type="math/tex">a</script></span>) or a loop (denoted by the literal <span><span class="MathJax_Preview">b</span><script type="math/tex">b</script></span>), but not both of them, express first the formula in <abbr title="Conjunctive Normal Form">CNF</abbr>: <span><span class="MathJax_Preview">(a \lor b) \land (\neg a \lor \neg b)</span><script type="math/tex">(a \lor b) \land (\neg a \lor \neg b)</script></span>, then translate it into:</p>
-<pre><code class="python">    {
-        &quot;operation&quot;: &quot;include&quot;,
-        &quot;data&quot;: [
-            &quot;flow/conditional&quot;,
-            &quot;flow/loop&quot;,
-        ]
-    }, # keep only the programs that feature either a conditional or a loop
-    {
-        &quot;operation&quot;: &quot;include&quot;,
-        &quot;data&quot;: [
-            (&quot;metadata/program&quot;, &quot;not contains&quot;, &quot;flow/conditional&quot;),
-            (&quot;metadata/program&quot;, &quot;not contains&quot;, &quot;flow/loop&quot;),
-        ]
-    }, # among them, keep only those that feature no conditional or no loop
+<pre><code class="python">  {
+    &quot;operation&quot;: &quot;include&quot;,
+    &quot;data&quot;: [
+      &quot;flow/conditional&quot;,
+      &quot;flow/loop&quot;,
+    ]
+  }, # keep only the programs that feature either a conditional or a loop
+  {
+    &quot;operation&quot;: &quot;include&quot;,
+    &quot;data&quot;: [
+      (&quot;metadata/program&quot;, &quot;not contains&quot;, &quot;flow/conditional&quot;),
+      (&quot;metadata/program&quot;, &quot;not contains&quot;, &quot;flow/loop&quot;),
+    ]
+  }, # among them, keep only those that feature no conditional or no loop
 </code></pre>
 <p>For two taxa, there are a total of 16 combinations, listed and tested <a href="https://github.com/laowantong/paroxython/blob/master/tests/test_recommend_programs.py#L664-L693">here</a>.
 <!---
@@ -697,8 +665,7 @@ span <code>s_1</code> of such a taxon, there exists no span <code>s_2</code> of 
 <li><code>"taxon_1"</code> is <strong>accepted</strong> (although there is no <code>taxon_2</code>);</li>
 <li><code>"taxon_2"</code> is <strong>rejected</strong> (no <code>taxon_1</code>);</li>
 <li><code>"taxon_1{taxon_2}"</code> is accepted;</li>
-<li><code>"taxon_1 taxon_2{taxon_1}"</code> is accepted (there exists a couple (<code>s_1</code>, <code>s_2</code>) such
-that <code>taxon_1</code> is not inside <code>taxon_2</code>);</li>
+<li><code>"taxon_1 taxon_2{taxon_1}"</code> is accepted (there exists a couple (<code>s_1</code>, <code>s_2</code>) such that <code>taxon_1</code> is not inside <code>taxon_2</code>);</li>
 <li><code>"taxon_1 taxon_2{taxon_1} taxon_2{}"</code> is accepted.</li>
 </ul>
 <p>If the predicate is <code>"taxon_pattern_2 not contains taxon_pattern_1"</code> (sic), any program consisting in:</p>
@@ -707,8 +674,7 @@ that <code>taxon_1</code> is not inside <code>taxon_2</code>);</li>
 <li><code>"taxon_1"</code> is <strong>rejected</strong> (no <code>taxon_2</code>);</li>
 <li><code>"taxon_2"</code> is <strong>accepted</strong> (although there is no <code>taxon_1</code>);</li>
 <li><code>"taxon_1{taxon_2}"</code> is accepted;</li>
-<li><code>"taxon_1 taxon_2{taxon_1}"</code> is accepted (there exists a couple (<code>s_1</code>, <code>s_2</code>) such
-that <code>taxon_2</code> does not contain <code>taxon_1</code>);</li>
+<li><code>"taxon_1 taxon_2{taxon_1}"</code> is accepted (there exists a couple (<code>s_1</code>, <code>s_2</code>) such that <code>taxon_2</code> does not contain <code>taxon_1</code>);</li>
 <li><code>"taxon_1 taxon_2{taxon_1} taxon_2{}"</code> is accepted.</li>
 </ul>
 <p>Note that, due to the rule explained in the warning above, <code>"taxon_pattern_1 not inside taxon_pattern_2"</code> is not equivalent to <code>"taxon_pattern_2 not contains taxon_pattern_1"</code> (differences in <strong>bold</strong>). However, if <code>taxon_pattern_2</code> is <code>"metadata/program"</code>, which is featured by all programs, these two forms become equivalent again.</p>
@@ -718,12 +684,12 @@ that <code>taxon_2</code> does not contain <code>taxon_1</code>);</li>
 </code></pre>
 <p>In the taxonomy, this concept is listed as a special case of both tuple (<code>"type/sequence/tuple"</code>) and variable assignment (<code>"variable/assignment/parallel"</code>).</p>
 <p>However, you want to introduce officially the abstract data type “tuple” only much later in your course. You therefore wish to exclude from the recommendations any program implementing a tuple, unless it is part of a parallel assignment. The following command will make the trick:</p>
-<pre><code class="python">    {
-        &quot;operation&quot;: &quot;exclude&quot;,
-        &quot;data&quot;: [
-            (&quot;type/sequence/tuple&quot;, &quot;is not&quot;, &quot;variable/assignment/parallel&quot;)
-        ]
-    },
+<pre><code class="python">  {
+    &quot;operation&quot;: &quot;exclude&quot;,
+    &quot;data&quot;: [
+      (&quot;type/sequence/tuple&quot;, &quot;is not&quot;, &quot;variable/assignment/parallel&quot;)
+    ]
+  },
 </code></pre>
 <p>The triple describes the set of programs which feature at least one tuple, and such that there is no tuple's span coinciding with a parallel assignment's span. In other words, the set of programs which feature at least one “non parallel” tuple. When we exclude these programs, those which remain either feature no tuple, or only the ones involved in a parallel assignment.</p>
 <p>The other combinations are listed and tested <a href="https://github.com/laowantong/paroxython/blob/master/tests/test_recommend_programs.py#L780-L809">here</a>.

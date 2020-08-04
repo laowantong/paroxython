@@ -3,26 +3,26 @@
 This part describes in some details how the recommendation system works. It assumes you've already read the [tutorial on recommendations](#pipeline-tutorial-getting-recommendations). First of all, let us recall the example of pipeline we gave at the end.
 
 >>> [
-...     {
-...         "operation": "impart",
-...         "data": "python helpers/parse_syllabus.py {base_path}/timeline.txt",
-...     },
-...     {
-...         "operation": "exclude",
-...         "data": [
-...             "foo.py",
-...             "bar.py",
-...             # "buzz.py",
-...         ],
-...     },
-...     {
-...         "operation": "include",
-...         "data": [
-...             "pattern/elements/accumulate",
-...             "topic/game",
-...             "type/sequence/list",
-...         ],
-...     },
+...   {
+...     "operation": "impart",
+...     "data": "python helpers/parse_syllabus.py {base_path}/timeline.txt",
+...   },
+...   {
+...     "operation": "exclude",
+...     "data": [
+...       "foo.py",
+...       "bar.py",
+...       # "buzz.py",
+...     ],
+...   },
+...   {
+...     "operation": "include",
+...     "data": [
+...       "pattern/elements/accumulate",
+...       "topic/game",
+...       "type/sequence/list",
+...     ],
+...   },
 ... ]
 
 ## Regular expression patterns
@@ -92,23 +92,23 @@ Its purpose is to keep only those selected programs that satisfy all given crite
 
 ```python
 {
-    "operation": "include all",
-    "data": [
-        criterion_1,
-        criterion_2,
-        ...,
-        criterion_n
-    ]
+  "operation": "include all",
+  "data": [
+    criterion_1,
+    criterion_2,
+    ...,
+    criterion_n
+  ]
 }
 ```
 
 ... is equivalent to:
 
 ```python
-    {"operation": "include", "data": [criterion_1]},
-    {"operation": "include", "data": [criterion_2]},
-    ...,
-    {"operation": "include", "data": [criterion_n]}
+  {"operation": "include", "data": [criterion_1]},
+  {"operation": "include", "data": [criterion_2]},
+  ...,
+  {"operation": "include", "data": [criterion_n]}
 ```
 
 ### `"exclude"` command
@@ -125,13 +125,13 @@ Unlike `"include all"`, this variant actually expands the semantics of the syste
 
 ```python
 {
-    "operation": "exclude all",
-    "data": [
-        criterion_1,
-        criterion_2,
-        ...,
-        criterion_n
-    ]
+  "operation": "exclude all",
+  "data": [
+    criterion_1,
+    criterion_2,
+    ...,
+    criterion_n
+  ]
 }
 ```
 
@@ -155,6 +155,7 @@ The `"impart all"` variant is not supported, and treated as `"impart"`.
 This is the simplest command of all. It merely accumulates the programs or the taxa matching the given patterns (relationships are not supported), without other effect on the filter. In the final stage, the accumulated programs or taxa will be filtered out of report.
 
 **Notes.**
+
 - Excluding a program is equivalent to hiding it _plus_ every program importing it.
 - The learning costs are not affected whatsoever by the hiding of a taxon: its individual cost continues to contribute towards the total cost of a program.
 
@@ -172,7 +173,7 @@ Being given a program \(p\) of \(n\) lines, a couple \((i_1, i_2) \) of line num
 It is sometimes interesting to know how the spans of two taxa of the same program are located relatively to each other.
 
 - For instance, a `print()` statement whose span is inside the span of a function indicates that this function has a side-effect.
-- A less trivial application stems from the fact that our taxonomy is multi-dimensional: each algorithmic feature can be associated with several taxa at the same time, characterizing it it along several dimensions. For instance, the taxa `flow/loop` and `flow/loop/while` describe the category of a loop; whereas the taxa `flow/loop/exit/early` and `flow/loop/exit/late` describe its exit behavior. These dimensions are independent and, although it is entirely possible to do so, our default taxonomy does not list the results of the cross-product (i.e., `flow/loop/exit/early`, `flow/loop/exit/late`, `flow/loop/while/exit/early` and `flow/loop/while/exit/late`). Querying an hypothetical taxon `flow/loop/exit/early` (or `flow/loop/exit/early/for`, by the way) comes down to querying the taxa `flow/loop` spanning the same lines as `flow/loop/exit/early`.
+- A less trivial application stems from the fact that our taxonomy is multi-dimensional: each algorithmic feature can be associated with several taxa at the same time, characterizing it it along several dimensions. For instance, the taxa `flow/loop/for` and `flow/loop/while` describe the category of a loop; whereas the taxa `flow/loop/exit/early` and `flow/loop/exit/late` describe its exit behavior. These dimensions are independent and, although it is entirely possible to do so, our default taxonomy does not list the results of the cross-product (i.e., `flow/loop/for/exit/early`, `flow/loop/for/exit/late`, `flow/loop/while/exit/early` and `flow/loop/while/exit/late`). Querying an hypothetical taxon `flow/loop/for/exit/early` (or `flow/loop/exit/early/for`, by the way) comes down to querying the taxa `flow/loop/for` spanning the same lines as `flow/loop/exit/early`.
 
 To express a relation \(\mathfrak{R}\) between the spans of two taxa, we start from the algebra devised in 1983 by James F. Allen in his seminal paper ([PDF](http://cse.unl.edu/~choueiry/Documents/Allen-CACM1983.pdf)) about temporal intervals[^Allen1983]. The so-called Allen's interval algebra defines 13 basic operators which capture all possible relations between two intervals \(X=(x_1, x_2)\) and \(Y=(y_1, y_2)\). The table below uses his terminology:
 
@@ -238,7 +239,9 @@ This allows the user to be understood when entering formulas like  `x == y`, `x 
 
 ### Positive semantic triples
 
-A pipeline command can apply not only to patterns of programs and taxa, but also to relationships between the spans of two taxon patterns. Being given an operator \(\mathfrak{R}\) and two taxon patterns \(t_1\) and \(t_2\), the statement \(t_1 \mathbin{\mathfrak{R}} t_2\) will be codified in the form of the _subject–predicate–object_ expression \((t_1, \mathfrak{R}, t_2)\), which can be entered as a mere Python tuple `(t1, R, t2)`. The simplest semantic triple is:
+A pipeline command can apply not only to patterns of programs and taxa, but also to relationships between the spans of two taxon patterns. Being given an operator \(\mathfrak{R}\) and two taxon patterns \(t_1\) and \(t_2\), the statement \(t_1 \mathbin{\mathfrak{R}} t_2\) will be codified in the form of the _subject–predicate–object_ expression \((t_1, \mathfrak{R}, t_2)\), which can be entered as a mere Python tuple `(t1, R, t2)`.
+
+The simplest semantic triple is:
 
 ```python
 ("metadata/program", "contains", taxon_pattern)
@@ -253,36 +256,36 @@ taxon_pattern
 And now for something completely different: the following pipeline command will only keep programs featuring a conditional inside a loop **or** (inclusive) ended by a `return` statement (the function `first_missing_non_negative()` given above satisfies these two criteria).
 
 ```python
-    {
-        "operation": "include",
-        "data": [
-            ("flow/loop", "contains", "flow/conditional"),
-            ("flow/conditional", "finished by", "subroutine/return"),
-        ]
-    },
+  {
+    "operation": "include",
+    "data": [
+      ("flow/loop", "contains", "flow/conditional"),
+      ("flow/conditional", "finished by", "subroutine/return"),
+    ]
+  },
 ```
 
-It is currently not possible to chain several operators with shared operands, for example to keep only the programs that feature a conditional inside a loop **and** ended by a `return` statement: the quintuple `("flow/loop", "contains", "flow/conditional", "finished by", "subroutine/return")` would raise an error. As it stands, the best that we can do is to chain the commands themselves:
+It is currently not possible to chain several operators with shared operands, for example to keep only the programs that feature a conditional inside a loop **and** ended by a `return` statement: the quintuple `("flow/loop", "contains", "flow/conditional", "finished by", "subroutine/return")` would raise an error. As it stands, the best we can do is to chain the commands themselves:
 
 ```python
-    {
-        "operation": "include",
-        "data": [
-            ("flow/loop", "contains", "flow/conditional"),
-        ]
-    },
-    {
-        "operation": "include",
-        "data": [
-            ("flow/conditional", "finished by", "subroutine/return"),
-        ]
-    },
-    {
-        "operation": "include",
-        "data": [
-            ("subroutine/return", "contains", "flow/loop"),
-        ]
-    },
+  {
+    "operation": "include",
+    "data": [
+      ("flow/loop", "contains", "flow/conditional"),
+    ]
+  },
+  {
+    "operation": "include",
+    "data": [
+      ("flow/conditional", "finished by", "subroutine/return"),
+    ]
+  },
+  {
+    "operation": "include",
+    "data": [
+      ("subroutine/return", "contains", "flow/loop"),
+    ]
+  },
 ```
 
 This keeps only the programs that feature a conditional inside a loop **and** a conditional ended by a `return` statement **and** a `return` statement inside a loop. The result is a subset of the previous one, but may still include programs where the two loops, conditionals or `return` statements are distinct.
@@ -302,45 +305,45 @@ Here again, the simplest _negated_ semantic triple is:
 On a set of **independent programs** (i.e., not importing each other), there is a strict equivalence between:
 
 ```python
-    {
-        "operation": "include",
-        "data": [
-            ("metadata/program", "not contains", taxon_pattern)
-        ]
-    },
+  {
+    "operation": "include",
+    "data": [
+      ("metadata/program", "not contains", taxon_pattern)
+    ]
+  },
 ```
 
 and:
 
 ```python
-    {
-        "operation": "exclude",
-        "data": [
-            taxon_pattern
-        ]
-    },
+  {
+    "operation": "exclude",
+    "data": [
+      taxon_pattern
+    ]
+  },
 ```
 
 And, conversely, between:
 
 ```python
-    {
-        "operation": "include",
-        "data": [
-            taxon_pattern
-        ]
-    },
+  {
+    "operation": "include",
+    "data": [
+      taxon_pattern
+    ]
+  },
 ```
 
 and:
 
 ```python
-    {
-        "operation": "exclude",
-        "data": [
-            ("metadata/program", "not contains", taxon_pattern)
-        ]
-    },
+  {
+    "operation": "exclude",
+    "data": [
+      ("metadata/program", "not contains", taxon_pattern)
+    ]
+  },
 ```
 
 This property may be used to select the programs that include any subset of a given set of taxa. This can be done in a systematic way by converting[^to_cnf] the corresponding logical formula in [conjunctive normal form](https://en.wikipedia.org/wiki/Conjunctive_normal_form), and transforming each clause into a separate `"include"` command.
@@ -353,20 +356,20 @@ For instance, consider the two taxa `"flow/conditional"` and `"flow/loop"`. To k
 *[CNF]: Conjunctive Normal Form
 
 ```python
-    {
-        "operation": "include",
-        "data": [
-            "flow/conditional",
-            "flow/loop",
-        ]
-    }, # keep only the programs that feature either a conditional or a loop
-    {
-        "operation": "include",
-        "data": [
-            ("metadata/program", "not contains", "flow/conditional"),
-            ("metadata/program", "not contains", "flow/loop"),
-        ]
-    }, # among them, keep only those that feature no conditional or no loop
+  {
+    "operation": "include",
+    "data": [
+      "flow/conditional",
+      "flow/loop",
+    ]
+  }, # keep only the programs that feature either a conditional or a loop
+  {
+    "operation": "include",
+    "data": [
+      ("metadata/program", "not contains", "flow/conditional"),
+      ("metadata/program", "not contains", "flow/loop"),
+    ]
+  }, # among them, keep only those that feature no conditional or no loop
 ```
 
 For two taxa, there are a total of 16 combinations, listed and tested [here](https://repo/tests/test_recommend_programs.py#L664-L693).
@@ -404,8 +407,7 @@ For example, if the original (negative) predicate is `"taxon_pattern_1 not insid
 - `"taxon_1"` is **accepted** (although there is no `taxon_2`);
 - `"taxon_2"` is **rejected** (no `taxon_1`);
 - `"taxon_1{taxon_2}"` is accepted;
-- `"taxon_1 taxon_2{taxon_1}"` is accepted (there exists a couple (`s_1`, `s_2`) such
-    that `taxon_1` is not inside `taxon_2`);
+- `"taxon_1 taxon_2{taxon_1}"` is accepted (there exists a couple (`s_1`, `s_2`) such that `taxon_1` is not inside `taxon_2`);
 - `"taxon_1 taxon_2{taxon_1} taxon_2{}"` is accepted.
 
 [^braces]:
@@ -417,8 +419,7 @@ If the predicate is `"taxon_pattern_2 not contains taxon_pattern_1"` (sic), any 
 - `"taxon_1"` is **rejected** (no `taxon_2`);
 - `"taxon_2"` is **accepted** (although there is no `taxon_1`);
 - `"taxon_1{taxon_2}"` is accepted;
-- `"taxon_1 taxon_2{taxon_1}"` is accepted (there exists a couple (`s_1`, `s_2`) such
-    that `taxon_2` does not contain `taxon_1`);
+- `"taxon_1 taxon_2{taxon_1}"` is accepted (there exists a couple (`s_1`, `s_2`) such that `taxon_2` does not contain `taxon_1`);
 - `"taxon_1 taxon_2{taxon_1} taxon_2{}"` is accepted.
 
 Note that, due to the rule explained in the warning above, `"taxon_pattern_1 not inside taxon_pattern_2"` is not equivalent to `"taxon_pattern_2 not contains taxon_pattern_1"` (differences in **bold**). However, if `taxon_pattern_2` is `"metadata/program"`, which is featured by all programs, these two forms become equivalent again.
@@ -436,12 +437,12 @@ In the taxonomy, this concept is listed as a special case of both tuple (`"type/
  However, you want to introduce officially the abstract data type “tuple” only much later in your course. You therefore wish to exclude from the recommendations any program implementing a tuple, unless it is part of a parallel assignment. The following command will make the trick:
 
 ```python
-    {
-        "operation": "exclude",
-        "data": [
-            ("type/sequence/tuple", "is not", "variable/assignment/parallel")
-        ]
-    },
+  {
+    "operation": "exclude",
+    "data": [
+      ("type/sequence/tuple", "is not", "variable/assignment/parallel")
+    ]
+  },
 ```
 
 The triple describes the set of programs which feature at least one tuple, and such that there is no tuple's span coinciding with a parallel assignment's span. In other words, the set of programs which feature at least one “non parallel” tuple. When we exclude these programs, those which remain either feature no tuple, or only the ones involved in a parallel assignment.
