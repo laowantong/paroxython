@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.8.4" />
 <title>paroxython API documentation</title>
-<meta name="description" content="Paroxython is a set of command-line tools which finds and tags algorithmic features (such as assignments, nested loops, tail-recursive functions,." />
+<meta name="description" content="Will you ever read me?." />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
 <link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/github.min.css" crossorigin>
@@ -26,19 +26,101 @@
 <h1 class="title">Package <code>paroxython</code></h1>
 </header>
 <section id="section-intro">
-<p>Paroxython is a set of command-line tools which finds and tags algorithmic features (such as assignments, nested loops, tail-recursive functions, etc.) in a collection of small Python programs, typically gathered for educational purposes (<em>e.g.</em>, examples, patterns, exercise corrections).</p>
-<p>Each tag consists in a free-form label associated with its spanning lines. These labels are then mapped onto a knowledge taxonomy designed by the teacher with basic order constraints in mind (<em>e.g.</em>, the fact that the introduction of the concept of early exit must come after that of loop, which itself requires that of control flow, is expressed with the following taxon: <code>flow/loop/exit/early</code>).</p>
-<p>Source codes, labels and taxa are stored in a database, which can finally be filtered through a pipeline of inclusion, exclusion, impartment and hiding commands on programs or taxa.</p>
-<h1 id="installation-and-test-drive">Installation and test-drive</h1>
+<h1 id="will-you-ever-read-me">Will you ever read me?</h1>
+<h3 id="introduction">Introduction</h3>
+<p>Paroxython is a set of command line tools which <strong>tag</strong> a collection of Python programs and <strong>filter</strong> them by algorithmic features.</p>
+<h4 id="audience">Audience</h4>
+<p>You are a teacher, in charge of an introductory programming course in an educational institution. Over the years, you have accumulated many—far too many—programs and code snippets that may be of interest to your students.</p>
+<p>Or, as a seasoned developer, you would like to share your knowledge by helping a loved one learn how to code. A cursory search for pedagogical material yields an overwhelming amount of websites and repositories stuffed with Python programs of various levels (e.g.,
+<a href="https://github.com/TheAlgorithms/Python">1</a>,
+<a href="http://rosettacode.org/wiki/Category:Python">2</a>,
+<a href="https://www.programming-idioms.org/about#about-block-language-coverage">3</a>,
+<a href="https://github.com/codebasics/py">4</a>,
+<a href="https://github.com/keon/algorithms">5</a>,
+<a href="https://github.com/OmkarPathak/Python-Programs">6</a>,
+and a lot more from <a href="https://github.com/quobit/awesome-python-in-education">Awesome Python in Education</a>).</p>
+<p>In any case, the Python source codes you have gathered are typically
+<strong>numerous</strong> (hundreds or even thousands),
+<strong>reasonably sized</strong> (anything below 1000 SLOC),
+and <strong>educational</strong> in nature (e.g., snippets, examples, quizzes, exercise solutions, classic algorithms).
+The programming concepts you plan to teach remain relatively <strong>low level</strong> (e.g. assignments, nested loops, accumulation patterns, tail-recursive functions, etc.).</p>
+<p>If all that sounds familiar, keep reading me to see what Paroxython can do for you.</p>
+<h4 id="main-goals">Main goals</h4>
+<p>Paroxython aims to help you select, from your collection, the one program that suits your needs. For instance, it will gladly answer the following questions:</p>
+<ul>
+<li>How can this concept be illustrated?</li>
+<li>What problems use the same algorithmic and data structures as this one?</li>
+<li>What homework assignment should I give my students so they can practice the content of the last lesson?</li>
+</ul>
+<p>Since it knows what your class knows, it can recommend the right program at the right time:</p>
+<ul>
+<li>What would make a good review exercise?</li>
+<li>Which exercises can I give on this exam?</li>
+<li>What is the current learning cost of this example?</li>
+</ul>
+<p>In the long run, it may guide you and somehow make you rethink your course outline:</p>
+<ul>
+<li>What are the prerequisites for the concept of assignment?</li>
+<li>Do I have enough material to introduce subroutines before I even talk about conditionals and loops?</li>
+<li>Among the loops, which must come first: the most powerful (<code>while</code>), or the most useful (<code>for</code>)?</li>
+<li>How to logically structure this bunch of usual iterative patterns?</li>
+<li>What are the <em>basics</em>, exactly?</li>
+</ul>
+<p>All issues on which the author changed his mind since he started to work on this project!</p>
+<p>In an ideal world, Paroxython could even put an end to the deadliest religious wars, with rational, data-driven arguments:</p>
+<ul>
+<li>Father, is it a sin to exit early?</li>
+<li>Should a real byte use a mask?</li>
+</ul>
+<h4 id="how-it-works">How it works</h4>
+<ul>
+<li>Paroxython starts by building a tag <strong>database</strong> from a given folder of <strong>programs</strong>. Tagging these programs is a two-step process:<ul>
+<li>First, all features that meet the provided <strong>specifications</strong> are identified by free-form internal-use <strong>labels</strong> (e.g., <code>assignment_lhs_identifier:a</code> or <code>loop_with_late_exit:while</code>), and associated with their spanning lines (e.g., 4 or 5-7).</li>
+<li>These labels are then mapped onto a knowledge <strong>taxonomy</strong> designed with basic hierarchical constraints in mind (e.g., the fact that the introduction of the concept of early exit must come after that of loop, which itself requires that of control flow, is expressed with the following taxon: <code>flow/loop/exit/early</code>).</li>
+</ul>
+</li>
+<li>The tag database can finally be filtered through a <strong>pipeline</strong> of commands, for instance:<ul>
+<li><em>include</em> only the programs which feature a recursive function;</li>
+<li><em>exclude</em> this or that program which you are reserving for the exam;</li>
+<li>“<em>impart</em>” all programs studied so far, <em>i.e</em>, consider that all the notions they implement are acquired.</li>
+</ul>
+</li>
+</ul>
+<p>The result is a list of program <strong>recommendations</strong> ordered by increasing learning cost. </p>
+<p><img alt="" src="../docs/resources/readme_flow.png"></p>
+<p>This process is summarized above. Note that the label specification file is provided. For converting labels to taxa, a default taxonomy is also provided, but you may feel the need to tailor it to your own vision of your course. Initially, the pipeline can be left empty: the recommendations will then cover all programs, sorted by increasing level of knowledge.</p>
+<h4 id="example">Example</h4>
+<p>Suppose that the directory <code>programs</code> contains <a href="https://wiki.python.org/moin/SimplePrograms">these simple programs</a>. First, build <a href="https://github.com/laowantong/paroxython/blob/master/examples/simple/programs_db.json">this tag database</a>:</p>
+<pre><code class="shell">&gt; paroxython collect programs
+Labelling 21 programs.
+Mapping taxonomy on 21 programs.
+Writing programs_db.json.
+</code></pre>
+<p>Then, filter it through <a href="https://github.com/laowantong/paroxython/blob/master/examples/simple/programs_pipe.py">this pipeline</a>:</p>
+<pre><code class="shell">&gt; paroxython recommend -p programs_pipe.py programs_db.json
+Processing 5 commands on 21 programs.
+  19 programs remaining after operation 1 (impart).
+  18 programs remaining after operation 2 (exclude).
+  12 programs remaining after operation 3 (exclude).
+  10 programs remaining after operation 4 (include).
+  10 programs remaining after operation 5 (hide).
+Dumped: programs_recommendations.md.
+</code></pre>
+<p>Et voilà <a href="https://github.com/laowantong/paroxython/blob/master/examples/simple/programs_recommendations.md">your recommendation report</a>!</p>
+<hr>
+<h3 id="installation-and-test-drive">Installation and test-drive</h3>
+<h4 id="command-line">Command line</h4>
+<p>Much to no one's surprise:</p>
 <pre><code>pip install paroxython
 </code></pre>
 <p>The following command should print a help message and exit:</p>
 <pre><code>paroxython --help
 </code></pre>
-<p>Under Jupyter notebook, you should first load the magic command:</p>
+<h4 id="ipython-magic-command">IPython magic command</h4>
+<p>If you use Jupyter notebook/lab, you've also just installed a so-called magic command. Load it like this:</p>
 <pre><code class="python">%load_ext paroxython
 </code></pre>
-<p>Run it on a cell of Python code:</p>
+<p>And run it on a cell of Python code:</p>
 <script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Flaowantong%2Fparoxython%2Fblob%2Fmaster%2Fdocs%2Fresources%2Ffibonacci.py&style=github&showBorder=on&showLineNumbers=on"></script>
 <table>
 <thead>
@@ -211,7 +293,21 @@ the learning costs of its final state.</p></div>
 <h1>Index</h1>
 <div class="toc">
 <ul>
-<li><a href="#installation-and-test-drive">Installation and test-drive</a></li>
+<li><a href="#will-you-ever-read-me">Will you ever read me?</a><ul>
+<li><a href="#introduction">Introduction</a><ul>
+<li><a href="#audience">Audience</a></li>
+<li><a href="#main-goals">Main goals</a></li>
+<li><a href="#how-it-works">How it works</a></li>
+<li><a href="#example">Example</a></li>
+</ul>
+</li>
+<li><a href="#installation-and-test-drive">Installation and test-drive</a><ul>
+<li><a href="#command-line">Command line</a></li>
+<li><a href="#ipython-magic-command">IPython magic command</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li><a href="docs_user_manual/index.html">User manual</a></li>
 <li><a href="docs_developer_manual/index.html">Developer manual</a></li>
 </ul>

@@ -25,7 +25,7 @@ OPTIONS:
                         specified, create a JSON file under the name
                         "DIRECTORY_db.json". Otherwise, use the extension
                         (either ".json" or ".sqlite") to decide the format
-                        of the database. [default: ]
+                        of the tag database. [default: ]
     --no_timestamp      Don't store programs' last modification date.
     -t --taxonomy=PATH  The path of a TSV file mapping labels onto taxa.
                         If not specified, use the included default taxonomy:

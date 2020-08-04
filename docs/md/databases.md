@@ -8,7 +8,7 @@ paroxython collect -o DB_NAME DIRECTORY
 
 ... will create two types of databases, each with their own purpose.
 
-### The JSON database
+### The JSON tag database
 
 It is this type of so-called NoSQL database that Paroxython draws upon to recommend programs. Its schema is as follows:
 
@@ -49,7 +49,7 @@ It is this type of so-called NoSQL database that Paroxython draws upon to recomm
 }
 ```
 
-As an example, take a look on the [JSON database](https://repo/examples/simple/programs_db.json) of the Python Wiki's [21 simple programs](https://repo/examples/simple/programs).
+As an example, take a look on the [JSON tag database](https://repo/examples/simple/programs_db.json) of the Python Wiki's [21 simple programs](https://repo/examples/simple/programs).
 
 ### The SQLite database
 
@@ -83,7 +83,7 @@ CREATE TABLE taxon (
 );
 ```
 
-Having a relational version of the database means that it can be queried with SQL. Here is an example which returns the 20 most frequent taxa:
+Having a relational version of the tag database means that it can be queried with SQL. Here is an example which returns the 20 most frequent taxa:
 
 ```sql
 SELECT name AS taxon, count(*) AS occurrences

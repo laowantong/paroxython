@@ -28,7 +28,7 @@
 <section id="section-intro">
 <p>Evolve a set of selected programs and a set of taxa representing the imparted knowledge.</p>
 <h2 id="description">Description</h2>
-<p>Initially, all programs in the database are selected, and the imparted knowledge is empty.</p>
+<p>Initially, all programs in the tag database are selected, and the imparted knowledge is empty.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>As the filter evolves, the former set can only shrink, and the latter only increase.</p>
@@ -558,7 +558,7 @@ class ProgramFilter:
 <span>def <span class="ident">define_shortcuts</span></span>(<span>self, <br>db: JsonDatabase<br>) ‑> NoneType</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Define some attributes that point directly to the main parts of the database.</p></div>
+<div class="desc"><p>Define some attributes that point directly to the main parts of the tag database.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -594,7 +594,7 @@ class ProgramFilter:
 <dd>
 <div class="desc"><p>Copy under each program the taxa it featured by importation.</p>
 <h2 id="description">Description</h2>
-<p>Initially, the <abbr title="JavaScript Object Notation">JSON</abbr> database stores under each program all the taxa it features
+<p>Initially, the <abbr title="JavaScript Object Notation">JSON</abbr> tag database stores under each program all the taxa it features
 <em>directly</em>, for instance:</p>
 <pre><code>{
     &quot;programs&quot;: {

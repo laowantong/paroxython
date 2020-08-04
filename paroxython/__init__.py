@@ -1,7 +1,9 @@
 """
+# Will you ever read me?
+
 .. include:: ../README.md
    :start-after: ![](docs/resources/logo.png)
-   :end-before: # Documentation
+   :end-before: ## Documentation
 
 <br>
 

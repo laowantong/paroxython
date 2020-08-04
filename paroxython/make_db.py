@@ -98,7 +98,7 @@ class Database:
             Schema and purpose [in the user manual](docs_user_manual/index.html#the-json-database).
 
         Example:
-            See the [JSON database](https://repo/examples/mini/programs_db.json) constructed from
+            See the [JSON tag database](https://repo/examples/mini/programs_db.json) constructed from
             the programs of this [directory](https://repo/examples/mini/programs).
 
         Note:

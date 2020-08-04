@@ -5610,6 +5610,9 @@ GROUP BY inc.path
 14      index += 1
 15      for j in str(f):
 16          i += 1
+17  counts = [0] * 10
+18  for i in x:
+19      counts[i % 10] += 1
 ```
 
 ##### Matches
@@ -5619,8 +5622,9 @@ GROUP BY inc.path
 | `count_elements:c1` | 4-10 |
 | `count_elements:c2` | 4-10 |
 | `count_elements:c3` | 7-10 |
-| `count_elements:i` | 15-16 |
 | `count_states:index` | 11-16 |
+| `count_elements:i` | 15-16 |
+| `count_elements` | 18-19 |
 
 --------------------------------------------------------------------------------
 

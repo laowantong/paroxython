@@ -63,7 +63,7 @@ class Program(NamedTuple):
 Programs = List[Program]
 ProgramTaxa = Dict[ProgramName, Taxa]
 
-# Serialization-ready types used for the JSON database
+# Serialization-ready types used for the JSON tag database
 
 PoorSpan = Tuple[int, int]
 LabelsPoorSpans = Dict[LabelName, List[PoorSpan]]

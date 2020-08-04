@@ -51,7 +51,7 @@ A pipeline is a set (or list, but the order is not important) of commands which 
 
 The set of commands constitutes a pipeline that evolves both:
 
-- a selection of programs (initially all those in the database);
+- a selection of programs (initially all those in the tag database);
 - a body of imparted knowledge (initially empty).
 
 .. note::

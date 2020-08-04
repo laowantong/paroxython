@@ -192,7 +192,7 @@ trailing commas, r-strings, etc.</p>
 <pre><code>paroxython collect -o DB_NAME DIRECTORY
 </code></pre>
 <p>&hellip; will create two types of databases, each with their own purpose.</p>
-<h3 id="the-json-database">The <abbr title="JavaScript Object Notation">JSON</abbr> database</h3>
+<h3 id="the-json-tag-database">The <abbr title="JavaScript Object Notation">JSON</abbr> tag database</h3>
 <p>It is this type of so-called NoSQL database that Paroxython draws upon to recommend programs. Its schema is as follows:</p>
 <pre><code class="json">{
     &quot;programs&quot;: {
@@ -229,7 +229,7 @@ trailing commas, r-strings, etc.</p>
     }
 }
 </code></pre>
-<p>As an example, take a look on the <a href="https://github.com/laowantong/paroxython/blob/master/examples/simple/programs_db.json"><abbr title="JavaScript Object Notation">JSON</abbr> database</a> of the Python Wiki's <a href="https://github.com/laowantong/paroxython/blob/master/examples/simple/programs">21 simple programs</a>.</p>
+<p>As an example, take a look on the <a href="https://github.com/laowantong/paroxython/blob/master/examples/simple/programs_db.json"><abbr title="JavaScript Object Notation">JSON</abbr> tag database</a> of the Python Wiki's <a href="https://github.com/laowantong/paroxython/blob/master/examples/simple/programs">21 simple programs</a>.</p>
 <h3 id="the-sqlite-database">The SQLite database</h3>
 <p>This type of database is fundamentally agnostic, but lends itself quite well to statistics. The relational schema is as follows:</p>
 <pre><code class="sql">CREATE TABLE program (
@@ -258,7 +258,7 @@ CREATE TABLE taxon (
     FOREIGN KEY (program) REFERENCES program (program)
 );
 </code></pre>
-<p>Having a relational version of the database means that it can be queried with <abbr title="Structured Query Language">SQL</abbr>. Here is an example which returns the 20 most frequent taxa:</p>
+<p>Having a relational version of the tag database means that it can be queried with <abbr title="Structured Query Language">SQL</abbr>. Here is an example which returns the 20 most frequent taxa:</p>
 <pre><code class="sql">SELECT name AS taxon, count(*) AS occurrences
 FROM taxon
 GROUP BY name
@@ -343,7 +343,7 @@ GROUP BY name, program
 </ul>
 <p>The set of commands constitutes a pipeline that evolves both:</p>
 <ul>
-<li>a selection of programs (initially all those in the database);</li>
+<li>a selection of programs (initially all those in the tag database);</li>
 <li>a body of imparted knowledge (initially empty).</li>
 </ul>
 <div class="admonition note">
@@ -784,7 +784,7 @@ Thanks and kudos to the author, Matthew Barnett: without his awesome work, many 
 </ul>
 </li>
 <li><a href="#result-databases-of-tagged-programs">Result: databases of tagged programs</a><ul>
-<li><a href="#the-json-database">The JSON database</a></li>
+<li><a href="#the-json-tag-database">The JSON tag database</a></li>
 <li><a href="#the-sqlite-database">The SQLite database</a></li>
 </ul>
 </li>

@@ -75,6 +75,6 @@ def generate_labelled_sources(programs: Programs) -> Iterator:
 
 
 if __name__ == "__main__":
-    programs = labelled_programs(Path("examples/mini/programs"))
+    programs = labelled_programs(Path("docs/resources"))
     for result in generate_labelled_sources(programs):
         print(result)

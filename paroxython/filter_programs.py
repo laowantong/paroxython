@@ -1,7 +1,7 @@
 """Evolve a set of selected programs and a set of taxa representing the imparted knowledge.
 
 Description:
-    Initially, all programs in the database are selected, and the imparted knowledge is empty.
+    Initially, all programs in the tag database are selected, and the imparted knowledge is empty.
 
     ..note::
         As the filter evolves, the former set can only shrink, and the latter only increase.
@@ -57,7 +57,7 @@ class ProgramFilter:
         self.add_imported_taxa()
 
     def define_shortcuts(self, db: JsonDatabase) -> None:
-        """Define some attributes that point directly to the main parts of the database."""
+        """Define some attributes that point directly to the main parts of the tag database."""
         self.db_programs: ProgramInfos = db["programs"]
         self.db_taxa: TaxonInfos = db["taxa"]
         self.db_importations: ProgramToPrograms = db["importations"]
@@ -74,7 +74,7 @@ class ProgramFilter:
         """Copy under each program the taxa it featured by importation.
 
         Description:
-            Initially, the JSON database stores under each program all the taxa it features
+            Initially, the JSON tag database stores under each program all the taxa it features
             _directly_, for instance:
             ```
             {
