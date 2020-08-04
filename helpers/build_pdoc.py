@@ -278,6 +278,34 @@ def update_version_number():
         path.write_text(source)
 
 
+def link_manuals():
+    index_path = Path("docs/index.html")
+    index_text = index_path.read_text()
+    (index_text, n) = regex.subn(
+        '(<li><a href="docs_user_manual/index.html">User manual</a></li>)',
+        r"""\1
+        <ul>
+        <li><a href="docs_user_manual/index.html#pipeline-tutorial-getting-recommendations">Pipeline tutorial</a></li>
+        <li><a href="docs_user_manual/index.html#tag-databases">Tag databases</a></li>
+        <li><a href="docs_user_manual/index.html#deep-in-the-pipeline">Deep in the pipeline</a></li>
+        </ul>""",
+        index_text,
+    )
+    assert n == 1
+    (index_text, n) = regex.subn(
+        '(<li><a href="docs_developer_manual/index.html">Developer manual</a></li>)',
+        r"""\1
+        <ul>
+        <li><a href="docs_developer_manual/index.html#bird-view">Bird view</a></li>
+        <li><a href="docs_developer_manual/index.html#helper-programs">Helper programs</a></li>
+        <li><a href="docs_developer_manual/index.html#implementation-notes">Implementation notes</a></li>
+        </ul>""",
+        index_text,
+    )
+    assert n == 1
+    index_path.write_text(index_text)
+
+
 def main():
     update_readme_example()
     update_version_number()
@@ -292,6 +320,7 @@ def main():
     insert_line_breaks()
     patch_prose()
     inject_flow_diagram_in_nav()
+    link_manuals()
     compute_stats()
 
 

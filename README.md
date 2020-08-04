@@ -8,7 +8,7 @@
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/laowantong/paroxython)
 ![paroxython SLOC](https://img.shields.io/badge/main%20program-~1600%20SLOC-blue)
 ![tests SLOC](https://img.shields.io/badge/tests-~2650%20SLOC-blue)
-![helpers SLOC](https://img.shields.io/badge/helpers-~750%20SLOC-blue)
+![helpers SLOC](https://img.shields.io/badge/helpers-~800%20SLOC-blue)
 [![GitHub commit activity](https://img.shields.io/github/commit-activity/y/laowantong/paroxython.svg?style=flat)]()
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -172,6 +172,6 @@ And run it on a cell of Python code (line numbers added for clarity):
 
 ## Documentation
 
-- [User manual](docs/docs_user_manual/index.html) (under construction)
-- [Developer manual](docs/docs_developer_manual/index.html) (under construction)
-- [Module reference](docs/index.html#header-submodules)
+- [User manual](https://laowantong.github.io/paroxython/docs_user_manual/index.html)
+- [Developer manual](https://laowantong.github.io/paroxython/docs_developer_manual/index.html)
+- [Module reference](https://laowantong.github.io/paroxython/#header-submodules)
