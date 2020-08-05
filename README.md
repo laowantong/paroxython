@@ -149,7 +149,7 @@ If you use Jupyter notebook/lab, you've also just installed a so-called magic co
 %load_ext paroxython
 ```
 
-And run it on a cell of Python code (line numbers added for clarity):
+This should print `"Paroxython 0.4.4 loaded."`. Run it on a cell of Python code (line numbers added for clarity):
 
 ```python
 1   %%paroxython

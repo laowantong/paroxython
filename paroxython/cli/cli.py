@@ -20,7 +20,7 @@ Type `paroxython COMMAND --help` for more information on a specific command.
 """
 import sys
 from importlib import import_module
-import pkg_resources
+from .. import PAROXYTHON_VERSION
 
 from docopt import docopt  # type: ignore
 import regex  # type: ignore
@@ -33,13 +33,7 @@ if sys.version < "3.6":  # pragma: no cover
 def main():
     global __doc__
     __doc__ = regex.sub(r"(?m)^ *```.*\n", "", __doc__)  # suppress Markdown code delimiters
-    try:
-        distribution = pkg_resources.get_distribution("paroxython")
-    except pkg_resources.DistributionNotFound:
-        version = "unknown"  # For tests during CI
-    else:  # pragma: no cover
-        version = distribution.version
-    args = docopt(__doc__, version=f"paroxython version {version}", options_first=True)
+    args = docopt(__doc__, version=f"paroxython version {PAROXYTHON_VERSION}", options_first=True)
     if not args.get("COMMAND"):  # pragma: no cover
         sys.exit(__doc__)
     command_name = args["COMMAND"].lower()

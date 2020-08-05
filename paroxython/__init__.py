@@ -15,6 +15,12 @@
 
 
 import sys
+import pkg_resources
+
+try:
+    PAROXYTHON_VERSION = pkg_resources.get_distribution("paroxython").version
+except pkg_resources.DistributionNotFound:
+    PAROXYTHON_VERSION = "(unknown version)"  # For tests during CI
 
 if "ipykernel" in sys.modules:
     # Declare the magic stuff paroxython iff the module is loaded as an IPython extension.
@@ -26,6 +32,7 @@ if "ipykernel" in sys.modules:
 
     def load_ipython_extension(ipython):
         ipython.register_magics(ParoxythonMagics)
+        print(f"Paroxython {PAROXYTHON_VERSION} loaded.")
 
     @magics_class
     class ParoxythonMagics(Magics):

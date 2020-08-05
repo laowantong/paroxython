@@ -42,12 +42,12 @@ recommend   Read and execute a pipeline of commands and report the learning
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli.py#L0-L54" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli.py#L0-L48" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">#! /usr/bin/env python
 import sys
 from importlib import import_module
-import pkg_resources
+from .. import PAROXYTHON_VERSION
 
 from docopt import docopt  # type: ignore
 import regex  # type: ignore
@@ -60,13 +60,7 @@ if sys.version &lt; &#34;3.6&#34;:  # pragma: no cover
 def main():
     global __doc__
     __doc__ = regex.sub(r&#34;(?m)^ *```.*\n&#34;, &#34;&#34;, __doc__)  # suppress Markdown code delimiters
-    try:
-        distribution = pkg_resources.get_distribution(&#34;paroxython&#34;)
-    except pkg_resources.DistributionNotFound:
-        version = &#34;unknown&#34;  # For tests during CI
-    else:  # pragma: no cover
-        version = distribution.version
-    args = docopt(__doc__, version=f&#34;paroxython version {version}&#34;, options_first=True)
+    args = docopt(__doc__, version=f&#34;paroxython version {PAROXYTHON_VERSION}&#34;, options_first=True)
     if not args.get(&#34;COMMAND&#34;):  # pragma: no cover
         sys.exit(__doc__)
     command_name = args[&#34;COMMAND&#34;].lower()
@@ -97,18 +91,12 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli.py#L33-L51" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli.py#L33-L45" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def main():
     global __doc__
     __doc__ = regex.sub(r&#34;(?m)^ *```.*\n&#34;, &#34;&#34;, __doc__)  # suppress Markdown code delimiters
-    try:
-        distribution = pkg_resources.get_distribution(&#34;paroxython&#34;)
-    except pkg_resources.DistributionNotFound:
-        version = &#34;unknown&#34;  # For tests during CI
-    else:  # pragma: no cover
-        version = distribution.version
-    args = docopt(__doc__, version=f&#34;paroxython version {version}&#34;, options_first=True)
+    args = docopt(__doc__, version=f&#34;paroxython version {PAROXYTHON_VERSION}&#34;, options_first=True)
     if not args.get(&#34;COMMAND&#34;):  # pragma: no cover
         sys.exit(__doc__)
     command_name = args[&#34;COMMAND&#34;].lower()

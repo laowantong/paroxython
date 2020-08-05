@@ -14,6 +14,9 @@ import draw_flow
 
 PATH = f"{Path(dirname(__file__)).parent}"
 
+VERSION = regex.search(r'(?<=version = ").+?(?=")', Path("pyproject.toml").read_text())[0]
+print(f"Release version: {VERSION}")
+
 
 def update_readme_example():
     source = Path("docs/resources/fibonacci.py").read_text().strip()
@@ -36,6 +39,9 @@ def update_readme_example():
         count=1,
         # fmt: on
     )
+    assert n == 1
+    (readme_text, n) = regex.subn(r"(?m)(?<=Paroxython ).+(?= loaded)", VERSION, readme_text)
+    assert n == 1
     readme_path.write_text(readme_text)
 
 
@@ -266,14 +272,11 @@ def expand_repo_urls():
 
 
 def update_version_number():
-    text = Path("pyproject.toml").read_text()
-    version = regex.search(r'(?<=version = ").+?(?=")', text)[0]
-    print(f"Release version: {version}")
     for path in ["paroxython/cli/cli_tag.py", "paroxython/cli/cli_collect.py"]:
         path = Path(path)
         source = path.read_text()
         (source, n) = regex.subn(
-            r"(?<=https://github\.com/laowantong/paroxython/blob/)[^/]+", version, source
+            r"(?<=https://github\.com/laowantong/paroxython/blob/)[^/]+", VERSION, source
         )
         assert n == 1, path
         path.write_text(source)
