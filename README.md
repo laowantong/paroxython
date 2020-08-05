@@ -49,13 +49,13 @@ Paroxython aims to help you select, from your collection, the one program that s
 > - What problems use the same algorithmic and data structures as this one?
 > - What homework assignment should I give my students so they can practice the content of the last lesson?
 
-Since it knows what your class knows, it can recommend the right program at the right time:
+Knowing what your class knows, Paroxython can recommend the right program at the right time:
 
 > - What would make a good review exercise?
 > - Which exercises can I give on this exam?
 > - What is the current learning cost of this example?
 
-In the long run, it may guide you and somehow make you rethink your course outline:
+In the long run, Paroxython may guide you and somehow make you rethink your course outline:
 
 > - What are the prerequisites for the concept of assignment?
 > - Do I have enough material to introduce subroutines before I even talk about conditionals and loops?
@@ -88,9 +88,10 @@ Paroxython starts by building a **tag database** from a given folder of **progra
 - These labels are then mapped onto a knowledge **taxonomy** designed with basic hierarchical constraints in mind (e.g., the fact that the introduction of the concept of early exit must come after that of loop, which itself requires that of control flow, is expressed with the following taxon: `flow/loop/exit/early`).
 
 The tag database can finally be filtered through a **pipeline of commands**, for instance:
-    - _include_ only the programs which feature a recursive function;
-    - _exclude_ this or that program which you are reserving for the exam;
-    - “_impart_” all programs studied so far, _i.e_, consider that all the notions they implement are acquired.
+
+- _include_ only the programs which feature a recursive function;
+- _exclude_ this or that program which you are reserving for the exam;
+- “_impart_” all programs studied so far, _i.e_, consider that all the notions they implement are acquired.
 
 The result is a list of program **recommendations** ordered by increasing learning cost.
 
@@ -98,7 +99,7 @@ Note that the label specification file is provided. For converting labels to tax
 
 #### Example
 
-Suppose that the directory `programs` contains [these simple programs](https://wiki.python.org/moin/SimplePrograms). First, build [this tag database](https://github.com/laowantong/paroxython/blob/master/examples/simple/programs_db.json):
+Suppose that the `programs` directory contains [these simple programs](https://wiki.python.org/moin/SimplePrograms). First, build [this tag database](https://github.com/laowantong/paroxython/blob/master/examples/simple/programs_db.json):
 
 ```shell
 > paroxython collect programs
