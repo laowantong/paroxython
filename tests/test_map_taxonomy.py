@@ -4,7 +4,9 @@ from pathlib import Path
 
 import pytest
 
-from .make_snapshot import make_snapshot
+from make_snapshot import make_snapshot
+
+import context
 from paroxython.goodies import couple_to_string
 from paroxython.label_programs import labelled_programs
 from paroxython.map_taxonomy import Taxonomy, deduplicated_taxa

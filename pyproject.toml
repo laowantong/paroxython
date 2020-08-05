@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "paroxython"
-version = "0.4.2"
+version = "0.4.3"
 description = "Search Python code for algorithmic features"
 authors = ["Aristide Grange"]
 license = "MIT"

@@ -3,6 +3,7 @@ from pathlib import Path
 
 import pytest
 
+import context
 from paroxython.filter_programs import ProgramFilter
 
 

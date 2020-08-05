@@ -47,18 +47,23 @@ The programming concepts you plan to teach remain relatively <strong>low level</
 <p>If all that sounds familiar, keep reading me to see what Paroxython can do for you.</p>
 <h4 id="main-goals">Main goals</h4>
 <p>Paroxython aims to help you select, from your collection, the one program that suits your needs. For instance, it will gladly answer the following questions:</p>
+<blockquote>
 <ul>
 <li>How can this concept be illustrated?</li>
 <li>What problems use the same algorithmic and data structures as this one?</li>
 <li>What homework assignment should I give my students so they can practice the content of the last lesson?</li>
 </ul>
+</blockquote>
 <p>Since it knows what your class knows, it can recommend the right program at the right time:</p>
+<blockquote>
 <ul>
 <li>What would make a good review exercise?</li>
 <li>Which exercises can I give on this exam?</li>
 <li>What is the current learning cost of this example?</li>
 </ul>
+</blockquote>
 <p>In the long run, it may guide you and somehow make you rethink your course outline:</p>
+<blockquote>
 <ul>
 <li>What are the prerequisites for the concept of assignment?</li>
 <li>Do I have enough material to introduce subroutines before I even talk about conditionals and loops?</li>
@@ -66,29 +71,35 @@ The programming concepts you plan to teach remain relatively <strong>low level</
 <li>How to logically structure this bunch of usual iterative patterns?</li>
 <li>What are the <em>basics</em>, exactly?</li>
 </ul>
+</blockquote>
 <p>All issues on which the author changed his mind since he started to work on this project!</p>
 <p>In an ideal world, Paroxython could even put an end to the deadliest religious wars, with rational, data-driven arguments:</p>
+<blockquote>
 <ul>
 <li>Father, is it a sin to exit early?</li>
 <li>Should a real byte use a mask?</li>
 </ul>
+</blockquote>
 <h4 id="how-it-works">How it works</h4>
+<pre><code class="plain">Specifications
+     +
+   Programs  →  Labels
+                  +
+               Taxonomy  →  Tag database
+                                +
+                          Command pipeline  →  Recommendations
+</code></pre>
+<p>Paroxython starts by building a <strong>tag database</strong> from a given folder of <strong>programs</strong>. Tagging these programs is a two-step process:</p>
 <ul>
-<li>Paroxython starts by building a tag <strong>database</strong> from a given folder of <strong>programs</strong>. Tagging these programs is a two-step process:<ul>
 <li>First, all features that meet the provided <strong>specifications</strong> are identified by free-form internal-use <strong>labels</strong> (e.g., <code>assignment_lhs_identifier:a</code> or <code>loop_with_late_exit:while</code>), and associated with their spanning lines (e.g., 4 or 5-7).</li>
 <li>These labels are then mapped onto a knowledge <strong>taxonomy</strong> designed with basic hierarchical constraints in mind (e.g., the fact that the introduction of the concept of early exit must come after that of loop, which itself requires that of control flow, is expressed with the following taxon: <code>flow/loop/exit/early</code>).</li>
 </ul>
-</li>
-<li>The tag database can finally be filtered through a <strong>pipeline</strong> of commands, for instance:<ul>
-<li><em>include</em> only the programs which feature a recursive function;</li>
-<li><em>exclude</em> this or that program which you are reserving for the exam;</li>
-<li>“<em>impart</em>” all programs studied so far, <em>i.e</em>, consider that all the notions they implement are acquired.</li>
-</ul>
-</li>
-</ul>
+<p>The tag database can finally be filtered through a <strong>pipeline of commands</strong>, for instance:
+- <em>include</em> only the programs which feature a recursive function;
+- <em>exclude</em> this or that program which you are reserving for the exam;
+- “<em>impart</em>” all programs studied so far, <em>i.e</em>, consider that all the notions they implement are acquired.</p>
 <p>The result is a list of program <strong>recommendations</strong> ordered by increasing learning cost.</p>
-<p><img alt="" src="resources/readme_flow.png"></p>
-<p>This process is summarized above. Note that the label specification file is provided. For converting labels to taxa, a default taxonomy is also provided, but you may feel the need to tailor it to your own vision of your course. Initially, the pipeline can be left empty: the recommendations will then cover all programs, sorted by increasing level of knowledge.</p>
+<p>Note that the label specification file is provided. For converting labels to taxa, a default taxonomy is also provided, but you may feel the need to tailor it to your own vision of the course. Initially, the pipeline can be left empty: the recommendations will then cover all programs, sorted by increasing level of knowledge.</p>
 <h4 id="example">Example</h4>
 <p>Suppose that the directory <code>programs</code> contains <a href="https://wiki.python.org/moin/SimplePrograms">these simple programs</a>. First, build <a href="https://github.com/laowantong/paroxython/blob/master/examples/simple/programs_db.json">this tag database</a>:</p>
 <pre><code class="shell">&gt; paroxython collect programs

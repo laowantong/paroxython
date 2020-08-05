@@ -12,7 +12,7 @@
 [![GitHub commit activity](https://img.shields.io/github/commit-activity/y/laowantong/paroxython.svg?style=flat)]()
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-![Band-aid](https://img.shields.io/badge/NOT%C2%A0%C2%A0%F0%9F%85%B3%F0%9F%85%B4%F0%9F%85%B0%F0%9F%85%B3-YET-%23F3D9C5?labelColor=%23F3D9C5)
+![Band-aid](https://img.shields.io/badge/not%C2%A0%C2%A0%F0%9F%85%B3%F0%9F%85%B4%F0%9F%85%B0%F0%9F%85%B3-yet-%23F3D9C5?labelColor=%23F3D9C5)
 
 ![](docs/resources/logo.png)
 
@@ -45,46 +45,56 @@ If all that sounds familiar, keep reading me to see what Paroxython can do for y
 
 Paroxython aims to help you select, from your collection, the one program that suits your needs. For instance, it will gladly answer the following questions:
 
-- How can this concept be illustrated?
-- What problems use the same algorithmic and data structures as this one?
-- What homework assignment should I give my students so they can practice the content of the last lesson?
+> - How can this concept be illustrated?
+> - What problems use the same algorithmic and data structures as this one?
+> - What homework assignment should I give my students so they can practice the content of the last lesson?
 
 Since it knows what your class knows, it can recommend the right program at the right time:
 
-- What would make a good review exercise?
-- Which exercises can I give on this exam?
-- What is the current learning cost of this example?
+> - What would make a good review exercise?
+> - Which exercises can I give on this exam?
+> - What is the current learning cost of this example?
 
 In the long run, it may guide you and somehow make you rethink your course outline:
 
-- What are the prerequisites for the concept of assignment?
-- Do I have enough material to introduce subroutines before I even talk about conditionals and loops?
-- Among the loops, which must come first: the most powerful (`while`), or the most useful (`for`)?
-- How to logically structure this bunch of usual iterative patterns?
-- What are the _basics_, exactly?
+> - What are the prerequisites for the concept of assignment?
+> - Do I have enough material to introduce subroutines before I even talk about conditionals and loops?
+> - Among the loops, which must come first: the most powerful (`while`), or the most useful (`for`)?
+> - How to logically structure this bunch of usual iterative patterns?
+> - What are the _basics_, exactly?
 
 All issues on which the author changed his mind since he started to work on this project!
 
 In an ideal world, Paroxython could even put an end to the deadliest religious wars, with rational, data-driven arguments:
 
-- Father, is it a sin to exit early?
-- Should a real byte use a mask?
+> - Father, is it a sin to exit early?
+> - Should a real byte use a mask?
 
 #### How it works
 
-- Paroxython starts by building a tag **database** from a given folder of **programs**. Tagging these programs is a two-step process:
-    - First, all features that meet the provided **specifications** are identified by free-form internal-use **labels** (e.g., `assignment_lhs_identifier:a` or `loop_with_late_exit:while`), and associated with their spanning lines (e.g., 4 or 5-7).
-    - These labels are then mapped onto a knowledge **taxonomy** designed with basic hierarchical constraints in mind (e.g., the fact that the introduction of the concept of early exit must come after that of loop, which itself requires that of control flow, is expressed with the following taxon: `flow/loop/exit/early`).
-- The tag database can finally be filtered through a **pipeline** of commands, for instance:
+```plain
+Specifications
+     +
+   Programs  →  Labels
+                  +
+               Taxonomy  →  Tag database
+                                +
+                          Command pipeline  →  Recommendations
+```
+
+Paroxython starts by building a **tag database** from a given folder of **programs**. Tagging these programs is a two-step process:
+
+- First, all features that meet the provided **specifications** are identified by free-form internal-use **labels** (e.g., `assignment_lhs_identifier:a` or `loop_with_late_exit:while`), and associated with their spanning lines (e.g., 4 or 5-7).
+- These labels are then mapped onto a knowledge **taxonomy** designed with basic hierarchical constraints in mind (e.g., the fact that the introduction of the concept of early exit must come after that of loop, which itself requires that of control flow, is expressed with the following taxon: `flow/loop/exit/early`).
+
+The tag database can finally be filtered through a **pipeline of commands**, for instance:
     - _include_ only the programs which feature a recursive function;
     - _exclude_ this or that program which you are reserving for the exam;
     - “_impart_” all programs studied so far, _i.e_, consider that all the notions they implement are acquired.
 
 The result is a list of program **recommendations** ordered by increasing learning cost.
 
-![](docs/resources/readme_flow.png)
-
-This process is summarized above. Note that the label specification file is provided. For converting labels to taxa, a default taxonomy is also provided, but you may feel the need to tailor it to your own vision of your course. Initially, the pipeline can be left empty: the recommendations will then cover all programs, sorted by increasing level of knowledge.
+Note that the label specification file is provided. For converting labels to taxa, a default taxonomy is also provided, but you may feel the need to tailor it to your own vision of the course. Initially, the pipeline can be left empty: the recommendations will then cover all programs, sorted by increasing level of knowledge.
 
 #### Example
 
@@ -171,7 +181,7 @@ And run it on a cell of Python code (line numbers added for clarity):
 | `variable/assignment/parallel/slide` | 7 |
 | `variable/assignment/single` | 3 |
 
-## Documentation
+## Further reading
 
 - [User manual](https://laowantong.github.io/paroxython/docs_user_manual/index.html)
 - [Developer manual](https://laowantong.github.io/paroxython/docs_developer_manual/index.html)

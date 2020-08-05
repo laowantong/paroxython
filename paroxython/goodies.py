@@ -9,7 +9,7 @@ from unicodedata import normalize
 
 import regex  # type: ignore
 
-from paroxython.user_types import Span
+from .user_types import Span
 
 
 def title_to_slug_factory() -> Callable:

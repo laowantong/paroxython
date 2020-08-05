@@ -12,7 +12,7 @@ OPTIONS:
     -l --labels         Output the labels instead of the taxa.
     -t --taxonomy=PATH  The path of a TSV file mapping labels onto taxa.
                         If not specified, use the included default taxonomy:
-                        https://github.com/laowantong/paroxython/blob/0.4.2/paroxython/resources/taxonomy.tsv
+                        https://github.com/laowantong/paroxython/blob/0.4.3/paroxython/resources/taxonomy.tsv
     ```
 """
 
@@ -20,11 +20,11 @@ from pathlib import Path
 from typing import List, Tuple, Optional
 from typing_extensions import Literal
 
-from paroxython.goodies import couple_to_string
-from paroxython.parse_program import ProgramParser
-from paroxython.list_programs import get_program
-from paroxython.map_taxonomy import Taxonomy
-from paroxython.user_types import Source
+from ..goodies import couple_to_string
+from ..parse_program import ProgramParser
+from ..list_programs import get_program
+from ..map_taxonomy import Taxonomy
+from ..user_types import Source
 
 
 def main(

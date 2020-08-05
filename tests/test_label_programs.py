@@ -4,7 +4,9 @@ from pathlib import Path
 import pytest
 import regex
 
-from .make_snapshot import make_snapshot
+from make_snapshot import make_snapshot
+
+import context
 from paroxython.label_programs import labelled_programs, generate_labelled_sources
 from paroxython.user_types import Span, ProgramName
 

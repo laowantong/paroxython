@@ -4,8 +4,9 @@ from pathlib import Path
 
 import pytest
 
-from .make_snapshot import make_snapshot
+from make_snapshot import make_snapshot
 
+import context
 from paroxython.recommend_programs import Recommendations
 
 

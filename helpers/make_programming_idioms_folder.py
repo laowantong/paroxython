@@ -7,6 +7,7 @@ from black import FileMode, format_str
 
 import regex  # type: ignore
 
+import context
 from paroxython.goodies import title_to_slug_factory
 
 title_to_slug = title_to_slug_factory()

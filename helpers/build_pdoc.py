@@ -5,6 +5,7 @@ from pathlib import Path
 
 import regex  # type: ignore
 
+import context
 from paroxython.cli.cli_tag import main as tag_program
 from paroxython.goodies import add_line_numbers
 from paroxython.preprocess_source import Cleanup

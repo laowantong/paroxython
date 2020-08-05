@@ -6,11 +6,11 @@ Depending on the extension of `DB_NAME` (either `".json"` or `".sqlite"`), the c
 paroxython collect -o DB_NAME DIRECTORY
 ```
 
-... will create two types of databases, each with their own purpose.
+... will create two kinds of databases, each with their own purpose.
 
 ### The JSON tag database
 
-It is this type of so-called NoSQL database that Paroxython draws upon to recommend programs. Its schema is as follows:
+It is this type of so-called NoSQL database that Paroxython draws upon to recommend programs. Its schema is:
 
 ```json
 {
@@ -53,7 +53,7 @@ As an example, take a look on the [JSON tag database](https://repo/examples/simp
 
 ### The SQLite database
 
-This type of database is fundamentally agnostic, but lends itself quite well to statistics. The relational schema is as follows:
+This kind of database is fundamentally agnostic, but lends itself quite well to statistics. Its schema is:
 
 ```sql
 CREATE TABLE program (
@@ -93,7 +93,7 @@ ORDER BY occurrences DESC
 LIMIT 20
 ```
 
-More complex, a query comparing the number of occurrences of the two kinds of loop:
+More complex, a query comparing the number of occurrences of the loops `for` and `while`:
 
 ```sql
 SELECT (CASE SUBSTR(name, 11, 3) -- extract either "for" or "whi"
@@ -105,7 +105,6 @@ FROM taxon
 WHERE name LIKE "flow/loop/for%"
    OR name LIKE "flow/loop/while%"
 GROUP BY SUBSTR(name, 0, 14) -- cut the name three characters after "flow/loop/"
-ORDER BY occurrences DESC
 ```
 
 In theory, the relational database can also be used to select programs according to certain criteria:

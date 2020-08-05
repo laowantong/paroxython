@@ -29,13 +29,13 @@ OPTIONS:
     --no_timestamp      Don't store programs' last modification date.
     -t --taxonomy=PATH  The path of a TSV file mapping labels onto taxa.
                         If not specified, use the included default taxonomy:
-                        https://github.com/laowantong/paroxython/blob/0.4.2/paroxython/resources/taxonomy.tsv
+                        https://github.com/laowantong/paroxython/blob/0.4.3/paroxython/resources/taxonomy.tsv
     ```
 """
 
 from pathlib import Path
 
-from paroxython.make_db import Database
+from ..make_db import Database
 
 
 def cli_wrapper(args):

@@ -1,5 +1,6 @@
 import pytest
 
+import context
 from paroxython.goodies import (
     add_line_numbers,
     cost_bucket,

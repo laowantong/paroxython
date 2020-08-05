@@ -156,9 +156,9 @@ type, it is enough to exclude all taxa starting with <code>type/non_sequence</co
 <p>Depending on the extension of <code>DB_NAME</code> (either <code>".json"</code> or <code>".sqlite"</code>), the command:</p>
 <pre><code>paroxython collect -o DB_NAME DIRECTORY
 </code></pre>
-<p>&hellip; will create two types of databases, each with their own purpose.</p>
+<p>&hellip; will create two kinds of databases, each with their own purpose.</p>
 <h3 id="the-json-tag-database">The <abbr title="JavaScript Object Notation">JSON</abbr> tag database</h3>
-<p>It is this type of so-called NoSQL database that Paroxython draws upon to recommend programs. Its schema is as follows:</p>
+<p>It is this type of so-called NoSQL database that Paroxython draws upon to recommend programs. Its schema is:</p>
 <pre><code class="json">{
     &quot;programs&quot;: {
         &quot;program_1.py&quot; : {
@@ -196,7 +196,7 @@ type, it is enough to exclude all taxa starting with <code>type/non_sequence</co
 </code></pre>
 <p>As an example, take a look on the <a href="https://github.com/laowantong/paroxython/blob/master/examples/simple/programs_db.json"><abbr title="JavaScript Object Notation">JSON</abbr> tag database</a> of the Python Wiki's <a href="https://github.com/laowantong/paroxython/blob/master/examples/simple/programs">21 simple programs</a>.</p>
 <h3 id="the-sqlite-database">The SQLite database</h3>
-<p>This type of database is fundamentally agnostic, but lends itself quite well to statistics. The relational schema is as follows:</p>
+<p>This kind of database is fundamentally agnostic, but lends itself quite well to statistics. Its schema is:</p>
 <pre><code class="sql">CREATE TABLE program (
     program TEXT PRIMARY KEY,
     timestamp TEXT,
@@ -230,7 +230,7 @@ GROUP BY name
 ORDER BY occurrences DESC
 LIMIT 20
 </code></pre>
-<p>More complex, a query comparing the number of occurrences of the two kinds of loop:</p>
+<p>More complex, a query comparing the number of occurrences of the loops <code>for</code> and <code>while</code>:</p>
 <pre><code class="sql">SELECT (CASE SUBSTR(name, 11, 3) -- extract either &quot;for&quot; or &quot;whi&quot;
             WHEN &quot;for&quot; THEN &quot;for&quot; -- and replace it either by... itself
             ELSE &quot;while&quot; -- or by the complete name of the loop
@@ -240,7 +240,6 @@ FROM taxon
 WHERE name LIKE &quot;flow/loop/for%&quot;
    OR name LIKE &quot;flow/loop/while%&quot;
 GROUP BY SUBSTR(name, 0, 14) -- cut the name three characters after &quot;flow/loop/&quot;
-ORDER BY occurrences DESC
 </code></pre>
 <p>In theory, the relational database can also be used to select programs according to certain criteria:</p>
 <pre><code class="sql">SELECT
@@ -638,7 +637,7 @@ or <code>"contains not"</code>), whether it's grammatically correct or not.</p>
     ]
   }, # among them, keep only those that feature no conditional or no loop
 </code></pre>
-<p>For two taxa, there are a total of 16 combinations, listed and tested <a href="https://github.com/laowantong/paroxython/blob/master/tests/test_recommend_programs.py#L664-L693">here</a>.
+<p>For two taxa, there are a total of 16 combinations, listed and tested <a href="https://github.com/laowantong/paroxython/blob/master/tests/test_recommend_programs.py#L665-L694">here</a>.
 <!---
 The previous link is automatically updated by build_pdoc.py.
 --></p>
@@ -692,7 +691,7 @@ span <code>s_1</code> of such a taxon, there exists no span <code>s_2</code> of 
   },
 </code></pre>
 <p>The triple describes the set of programs which feature at least one tuple, and such that there is no tuple's span coinciding with a parallel assignment's span. In other words, the set of programs which feature at least one “non parallel” tuple. When we exclude these programs, those which remain either feature no tuple, or only the ones involved in a parallel assignment.</p>
-<p>The other combinations are listed and tested <a href="https://github.com/laowantong/paroxython/blob/master/tests/test_recommend_programs.py#L780-L809">here</a>.
+<p>The other combinations are listed and tested <a href="https://github.com/laowantong/paroxython/blob/master/tests/test_recommend_programs.py#L781-L810">here</a>.
 <!---
 The previous link is automatically updated by build_pdoc.py.
 --></p>

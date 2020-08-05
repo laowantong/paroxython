@@ -9,9 +9,9 @@ from typing import Callable, Dict, List, Iterator, Tuple
 
 import regex  # type: ignore
 
-from paroxython.derived_labels_db import DerivedLabelsDatabase
-from paroxython.flatten_ast import flatten_ast
-from paroxython.user_types import (
+from .derived_labels_db import DerivedLabelsDatabase
+from .flatten_ast import flatten_ast
+from .user_types import (
     Label,
     LabelName,
     Labels,
@@ -329,7 +329,7 @@ class ProgramParser:
 
 if __name__ == "__main__":
     # Take an individual source, print its features and write its flat AST.
-    from paroxython.goodies import couple_to_string
+    from .goodies import couple_to_string
 
     path = Path("sandbox/source.py")
     source = path.read_text().strip()

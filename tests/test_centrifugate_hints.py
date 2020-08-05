@@ -3,6 +3,7 @@ from pathlib import Path
 
 import regex  # type: ignore
 
+import context
 from paroxython.preprocess_source import centrifugate_hints
 
 sources = r"""

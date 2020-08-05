@@ -3,6 +3,7 @@ from pathlib import Path
 
 import pytest
 
+import context
 from paroxython.assess_costs import (
     LearningCostAssessor,
     range_to_cost_linear,

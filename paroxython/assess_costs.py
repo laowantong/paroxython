@@ -17,7 +17,7 @@ two zero-based indexes `start` (inclusive) and `stop` (exclusive), and returning
 
 from functools import lru_cache
 
-from paroxython.user_types import (
+from .user_types import (
     AssessedPrograms,
     AssessmentStrategy,
     ProgramInfos,

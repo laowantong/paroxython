@@ -23,9 +23,9 @@ from typing import Counter, Dict, Iterator, List, Tuple
 
 import regex  # type: ignore
 
-from paroxython.goodies import print_warning
-from paroxython.normalize_predicate import normalize_predicate
-from paroxython.user_types import (
+from .goodies import print_warning
+from .normalize_predicate import normalize_predicate
+from .user_types import (
     Criterion,
     JsonDatabase,
     Operation,

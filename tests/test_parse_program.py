@@ -2,7 +2,9 @@ from pathlib import Path
 import pytest
 import regex  # type: ignore
 
-from .make_snapshot import make_snapshot
+from make_snapshot import make_snapshot
+
+import context
 from paroxython.goodies import couple_to_string
 from paroxython.list_programs import list_programs
 from paroxython.parse_program import ProgramParser, get_bindings

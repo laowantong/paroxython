@@ -2,6 +2,7 @@ from pathlib import Path
 
 import regex  # type: ignore
 
+import context
 from paroxython.goodies import couple_to_string
 from paroxython.parse_program import ProgramParser
 from paroxython.user_types import Program, Source

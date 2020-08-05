@@ -5,9 +5,9 @@ from typing import Callable, Iterator, List, Set
 
 import regex  # type: ignore
 
-from paroxython.list_programs import iterate_and_print_programs, list_programs
-from paroxython.parse_program import ProgramParser
-from paroxython.user_types import Label, LabelName, Programs, Source
+from .list_programs import iterate_and_print_programs, list_programs
+from .parse_program import ProgramParser
+from .user_types import Label, LabelName, Programs, Source
 
 
 def labelled_programs(
