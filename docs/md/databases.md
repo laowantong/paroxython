@@ -51,7 +51,7 @@ It is this type of so-called NoSQL database that Paroxython draws upon to recomm
 
 As an example, take a look on the [JSON tag database](https://repo/examples/simple/programs_db.json) of the Python Wiki's [21 simple programs](https://repo/examples/simple/programs).
 
-### The SQLite database
+### The SQLite tag database
 
 This kind of database is fundamentally agnostic, but lends itself quite well to statistics. Its schema is:
 
@@ -63,9 +63,9 @@ CREATE TABLE program (
 );
 CREATE TABLE label (
     -- use rowid as primary key
-    name TEXT,
-    name_prefix TEXT,
-    name_suffix TEXT,
+    label TEXT,
+    label_prefix TEXT,
+    label_suffix TEXT,
     span TEXT,
     span_start INTEGER,
     span_end INTEGER,
@@ -74,7 +74,7 @@ CREATE TABLE label (
 );
 CREATE TABLE taxon (
     -- use rowid as primary key
-    name TEXT,
+    taxon TEXT,
     span TEXT,
     span_start INTEGER,
     span_end INTEGER,
@@ -86,9 +86,9 @@ CREATE TABLE taxon (
 Having a relational version of the tag database means that it can be queried with SQL. Here is an example which returns the 20 most frequent taxa:
 
 ```sql
-SELECT name AS taxon, count(*) AS occurrences
+SELECT taxon, count(*) AS occurrences
 FROM taxon
-GROUP BY name
+GROUP BY taxon
 ORDER BY occurrences DESC
 LIMIT 20
 ```
@@ -96,29 +96,29 @@ LIMIT 20
 More complex, a query comparing the number of occurrences of the loops `for` and `while`:
 
 ```sql
-SELECT (CASE SUBSTR(name, 11, 3) -- extract either "for" or "whi"
+SELECT (CASE SUBSTR(taxon, 11, 3) -- extract either "for" or "whi"
             WHEN "for" THEN "for" -- and replace it either by... itself
             ELSE "while" -- or by the complete name of the loop
         END) AS loop,
        COUNT(*) AS occurrences
 FROM taxon
-WHERE name LIKE "flow/loop/for%"
-   OR name LIKE "flow/loop/while%"
-GROUP BY SUBSTR(name, 0, 14) -- cut the name three characters after "flow/loop/"
+WHERE taxon LIKE "flow/loop/for%"
+   OR taxon LIKE "flow/loop/while%"
+GROUP BY SUBSTR(taxon, 0, 14) -- cut the taxon three characters after "flow/loop/"
 ```
 
 In theory, the relational database can also be used to select programs according to certain criteria:
 
 ```sql
 SELECT
-    name AS taxon,
+    taxon,
     program,
     group_concat(span, ", ") AS spans,
     source
 FROM program
 JOIN taxon USING (program)
-WHERE name GLOB "type/non_sequence/dictionary/*"
-GROUP BY name, program
+WHERE taxon GLOB "type/non_sequence/dictionary/*"
+GROUP BY taxon, program
 ```
 
 On the provided [simple programs](https://repo/examples/simple/programs), the execution yields:

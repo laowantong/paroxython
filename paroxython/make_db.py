@@ -206,9 +206,9 @@ class Database:
 
         label_columns = (
             # use rowid as primary key
-            "name TEXT",
-            "name_prefix TEXT",
-            "name_suffix TEXT",
+            "label TEXT",
+            "label_prefix TEXT",
+            "label_suffix TEXT",
             "span TEXT",
             "span_start INTEGER",
             "span_end INTEGER",
@@ -222,7 +222,7 @@ class Database:
 
         taxon_columns = (
             # use rowid as primary key
-            "name TEXT",
+            "taxon TEXT",
             "span TEXT",
             "span_start INTEGER",
             "span_end INTEGER",

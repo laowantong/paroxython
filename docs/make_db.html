@@ -159,9 +159,9 @@ class Database:
 
         label_columns = (
             # use rowid as primary key
-            &#34;name TEXT&#34;,
-            &#34;name_prefix TEXT&#34;,
-            &#34;name_suffix TEXT&#34;,
+            &#34;label TEXT&#34;,
+            &#34;label_prefix TEXT&#34;,
+            &#34;label_suffix TEXT&#34;,
             &#34;span TEXT&#34;,
             &#34;span_start INTEGER&#34;,
             &#34;span_end INTEGER&#34;,
@@ -175,7 +175,7 @@ class Database:
 
         taxon_columns = (
             # use rowid as primary key
-            &#34;name TEXT&#34;,
+            &#34;taxon TEXT&#34;,
             &#34;span TEXT&#34;,
             &#34;span_start INTEGER&#34;,
             &#34;span_end INTEGER&#34;,
@@ -679,9 +679,9 @@ simple couples of integers.</p>
 
         label_columns = (
             # use rowid as primary key
-            &#34;name TEXT&#34;,
-            &#34;name_prefix TEXT&#34;,
-            &#34;name_suffix TEXT&#34;,
+            &#34;label TEXT&#34;,
+            &#34;label_prefix TEXT&#34;,
+            &#34;label_suffix TEXT&#34;,
             &#34;span TEXT&#34;,
             &#34;span_start INTEGER&#34;,
             &#34;span_end INTEGER&#34;,
@@ -695,7 +695,7 @@ simple couples of integers.</p>
 
         taxon_columns = (
             # use rowid as primary key
-            &#34;name TEXT&#34;,
+            &#34;taxon TEXT&#34;,
             &#34;span TEXT&#34;,
             &#34;span_start INTEGER&#34;,
             &#34;span_end INTEGER&#34;,
@@ -920,9 +920,9 @@ and the directory provided to the class constructor is <code>"foobar"</code>, fa
 
     label_columns = (
         # use rowid as primary key
-        &#34;name TEXT&#34;,
-        &#34;name_prefix TEXT&#34;,
-        &#34;name_suffix TEXT&#34;,
+        &#34;label TEXT&#34;,
+        &#34;label_prefix TEXT&#34;,
+        &#34;label_suffix TEXT&#34;,
         &#34;span TEXT&#34;,
         &#34;span_start INTEGER&#34;,
         &#34;span_end INTEGER&#34;,
@@ -936,7 +936,7 @@ and the directory provided to the class constructor is <code>"foobar"</code>, fa
 
     taxon_columns = (
         # use rowid as primary key
-        &#34;name TEXT&#34;,
+        &#34;taxon TEXT&#34;,
         &#34;span TEXT&#34;,
         &#34;span_start INTEGER&#34;,
         &#34;span_end INTEGER&#34;,
