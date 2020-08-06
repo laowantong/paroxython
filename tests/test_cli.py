@@ -132,6 +132,8 @@ def test_recommend_dummy_programs():
 def test_recommend_simple_programs():
     run("collect --no_timestamp examples/simple/programs")
     run("recommend examples/simple/programs_db.json")
+    output = run("recommend -o stdout examples/simple/programs_db.json")
+    assert len(output.strip().split("\n")) == 9
 
 
 if __name__ == "__main__":
