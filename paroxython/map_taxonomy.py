@@ -3,9 +3,9 @@ Translate labels into taxa.
 
 ## Description
 
-This translation comes after `paroxython.label_programs` has tagged a program with the **labels**
-defined in [`spec.md`](https://repo/paroxython/resources/spec.md). Its purpose is to convert these
-labels into the **taxa** defined (by default) in
+This step comes after `paroxython.label_programs` has tagged a program with the **labels** specified
+in [`spec.md`](https://repo/paroxython/resources/spec.md). Its purpose is to convert these labels
+into **taxa** based on the rules defined (by default) in
 [`taxonomy.tsv`](https://repo/paroxython/resources/taxonomy.tsv).
 
 ## Example
@@ -23,8 +23,8 @@ Let's return to the Jupyter notebook's cell given in the introduction:
 8       return result
 ```
 
-Note that the magic cell-command `%%paroxython` has now a `labels` argument. This produces the
-following output (limited to the first four rows):
+Note that the magic cell-command `%%paroxython` is now called with a `labels` argument. This
+produces the following output (limited for brevity to its first four rows):
 
 | Label | Lines |
 |:--|:--|
@@ -33,74 +33,26 @@ following output (limited to the first four rows):
 | `assignment_lhs_identifier:a` | 4, 7 |
 | `assignment_lhs_identifier:b` | 4, 7 |
 
-These labels are low-level tags, intended for internal use only. The tags of interest to the end
-user, the taxons, are calculated from these by the present module. Let us provide some examples of
-such translations.
+These labels are low-level tags, intended for internal use only. They still need to be translated
+into the following taxa, which are the only tags of interest to the end user. For instance,
+`"addition_operator"` will be translated into `"operator/arithmetic/addition"` (note that, unlike
+a label, a taxon may feature one or several slashes, which indicate the nesting of notions). More
+examples are given in the dedicated [section](docs_user_manual/index.html#taxonomy) of the user manual.
 
-### 1-1 mapping
+In fact, both labels and taxa are couples:
 
 - Label: `("addition_operator", [(7, 7, "...")])`.
 - Taxon: `("operator/arithmetic/addition", {(7, 7, "..."): 1})`.
 
-Note that, unlike a label, a taxon may feature one or several slashes, which indicate the nesting
-of notions. Taxa are relevant for the teacher precisely because they offer a first structuration of
-otherwise scattered knowledge.
+The second member is slightly more complicated than a list of line numbers:
 
-Both label and taxon are couples. The second member is slightly more complicated than a list of
-line numbers. For a label, it is a list of triples consisting of the start and end of the spanning
-lines, and a third member, the path, which identifies unambiguously the start of the span. For a
-taxon, it is a **bag**, i.e. a dictionary associating such triples with the count of their
-occurrences in the program. The paths being left untouched by the conversion, we will omit them
-from now on.
+- For a label, it is a list of triples consisting of the start and end of the spanning lines,
+and a third member, the path (here denoted by the ellipsis), which identifies unambiguously the
+start of the span.
+- For a taxon, it is a **bag**, i.e. a dictionary associating such triples with the count of their
+occurrences in the program.
 
-The actual conversion was done because the taxonomy contains the row:
-
-Taxa (replacement patterns)    | Labels (search patterns)
-:------------------------------|:-----------------------
-`operator/arithmetic/addition` | `addition_operator`
-
-This is the simplest case, where both taxon and label patterns are literal (they don't contain
-any metacharacter, more on that below).
-
-### 1-0 mapping
-
-- Label: `("binary_operator:Add", [(7, 7)])`.
-- Taxon: none.
-
-At first glance, the label `"binary_operator:Add"` may seem redundant with `"addition_operator"`,
-and one may wonder why it was generated at all. In fact, the former was used to calculate the
-latter.
-In [`spec.md`](https://repo/paroxython/resources/spec.md),
-the definition of `"addition_operator"` is introduced by these words: “An addition operator is a
-binary operator `Add` which has not be classified as a concatenation operator”.
-
-This is a good example of label for internal use only. In the present stage, it is simply ignored
-(i.e., it has no entry in the taxonomy).
-
-### 1-N mapping
-
-- Label: `("whole_span:8", [(2, 8)])`.
-- Taxa:
-    - `("metadata/program", {(2, 8): 1})`.
-    - `("metadata/sloc/8", {(2, 8): 1})`.
-
-This is an example of a label which produces two taxa. Although it is not obvious, both have their
-uses. The first one is common to all programs, and provides an invariable access key to an
-all-encompassing span. The second one has a variable part, and can be used to filter programs by
-[size](https://en.wikipedia.org/wiki/Source_lines_of_code) (for example, in
-`paroxython.recommend_programs`, the pattern `metadata/sloc/[1-5]` will be used to filter out the
-programs that have more than 5 lines).
-
-This conversions are triggered by the following rows in the default taxonomy:
-
-Taxa (replacement patterns)    | Labels (search patterns)
-:------------------------------|:-----------------------
-`metadata/program` | `whole_span:.+`
-`metadata/sloc/\1` | `whole_span:(.+)`
-
-Note that, in the replacement pattern, `"\1"` is a
-[_backreference_](https://docs.python.org/3/library/re.html#re.sub) to the first captured group
-(in parentheses).
+The paths being left untouched by the conversion, we will omit them from now on.
 
 ### Deduplication
 

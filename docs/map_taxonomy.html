@@ -28,9 +28,9 @@
 <section id="section-intro">
 <p>Translate labels into taxa.</p>
 <h2 id="description">Description</h2>
-<p>This translation comes after <code><a title="paroxython.label_programs" href="label_programs.html">paroxython.label_programs</a></code> has tagged a program with the <strong>labels</strong>
-defined in <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md"><code>spec.md</code></a>. Its purpose is to convert these
-labels into the <strong>taxa</strong> defined (by default) in
+<p>This step comes after <code><a title="paroxython.label_programs" href="label_programs.html">paroxython.label_programs</a></code> has tagged a program with the <strong>labels</strong> specified
+in <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md"><code>spec.md</code></a>. Its purpose is to convert these labels
+into <strong>taxa</strong> based on the rules defined (by default) in
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/taxonomy.tsv"><code>taxonomy.tsv</code></a>.</p>
 <h2 id="example">Example</h2>
 <p>Let's return to the Jupyter notebook's cell given in the introduction:</p>
@@ -43,8 +43,8 @@ labels into the <strong>taxa</strong> defined (by default) in
 7           (a, b) = (b, a + b)
 8       return result
 </code></pre>
-<p>Note that the magic cell-command <code>%%paroxython</code> has now a <code>labels</code> argument. This produces the
-following output (limited to the first four rows):</p>
+<p>Note that the magic cell-command <code>%%paroxython</code> is now called with a <code>labels</code> argument. This
+produces the following output (limited for brevity to its first four rows):</p>
 <table>
 <thead>
 <tr>
@@ -71,90 +71,25 @@ following output (limited to the first four rows):</p>
 </tr>
 </tbody>
 </table>
-<p>These labels are low-level tags, intended for internal use only. The tags of interest to the end
-user, the taxons, are calculated from these by the present module. Let us provide some examples of
-such translations.</p>
-<h3 id="1-1-mapping">1-1 mapping</h3>
+<p>These labels are low-level tags, intended for internal use only. They still need to be translated
+into the following taxa, which are the only tags of interest to the end user. For instance,
+<code>"addition_operator"</code> will be translated into <code>"operator/arithmetic/addition"</code> (note that, unlike
+a label, a taxon may feature one or several slashes, which indicate the nesting of notions). More
+examples are given in the dedicated <a href="docs_user_manual/index.html#taxonomy">section</a> of the user manual.</p>
+<p>In fact, both labels and taxa are couples:</p>
 <ul>
 <li>Label: <code>("addition_operator", [(7, 7, "...")])</code>.</li>
 <li>Taxon: <code>("operator/arithmetic/addition", {(7, 7, "..."): 1})</code>.</li>
 </ul>
-<p>Note that, unlike a label, a taxon may feature one or several slashes, which indicate the nesting
-of notions. Taxa are relevant for the teacher precisely because they offer a first structuration of
-otherwise scattered knowledge.</p>
-<p>Both label and taxon are couples. The second member is slightly more complicated than a list of
-line numbers. For a label, it is a list of triples consisting of the start and end of the spanning
-lines, and a third member, the path, which identifies unambiguously the start of the span. For a
-taxon, it is a <strong>bag</strong>, i.e. a dictionary associating such triples with the count of their
-occurrences in the program. The paths being left untouched by the conversion, we will omit them
-from now on.</p>
-<p>The actual conversion was done because the taxonomy contains the row:</p>
-<table>
-<thead>
-<tr>
-<th align="left">Taxa (replacement patterns)</th>
-<th align="left">Labels (search patterns)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left"><code>operator/arithmetic/addition</code></td>
-<td align="left"><code>addition_operator</code></td>
-</tr>
-</tbody>
-</table>
-<p>This is the simplest case, where both taxon and label patterns are literal (they don't contain
-any metacharacter, more on that below).</p>
-<h3 id="1-0-mapping">1-0 mapping</h3>
+<p>The second member is slightly more complicated than a list of line numbers:</p>
 <ul>
-<li>Label: <code>("binary_operator:Add", [(7, 7)])</code>.</li>
-<li>Taxon: none.</li>
+<li>For a label, it is a list of triples consisting of the start and end of the spanning lines,
+and a third member, the path (here denoted by the ellipsis), which identifies unambiguously the
+start of the span.</li>
+<li>For a taxon, it is a <strong>bag</strong>, i.e. a dictionary associating such triples with the count of their
+occurrences in the program.</li>
 </ul>
-<p>At first glance, the label <code>"binary_operator:Add"</code> may seem redundant with <code>"addition_operator"</code>,
-and one may wonder why it was generated at all. In fact, the former was used to calculate the
-latter.
-In <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md"><code>spec.md</code></a>,
-the definition of <code>"addition_operator"</code> is introduced by these words: “An addition operator is a
-binary operator <code>Add</code> which has not be classified as a concatenation operator”.</p>
-<p>This is a good example of label for internal use only. In the present stage, it is simply ignored
-(i.e., it has no entry in the taxonomy).</p>
-<h3 id="1-n-mapping">1-N mapping</h3>
-<ul>
-<li>Label: <code>("whole_span:8", [(2, 8)])</code>.</li>
-<li>Taxa:<ul>
-<li><code>("metadata/program", {(2, 8): 1})</code>.</li>
-<li><code>("metadata/sloc/8", {(2, 8): 1})</code>.</li>
-</ul>
-</li>
-</ul>
-<p>This is an example of a label which produces two taxa. Although it is not obvious, both have their
-uses. The first one is common to all programs, and provides an invariable access key to an
-all-encompassing span. The second one has a variable part, and can be used to filter programs by
-<a href="https://en.wikipedia.org/wiki/Source_lines_of_code">size</a> (for example, in
-<code><a title="paroxython.recommend_programs" href="recommend_programs.html">paroxython.recommend_programs</a></code>, the pattern <code>metadata/sloc/[1-5]</code> will be used to filter out the
-programs that have more than 5 lines).</p>
-<p>This conversions are triggered by the following rows in the default taxonomy:</p>
-<table>
-<thead>
-<tr>
-<th align="left">Taxa (replacement patterns)</th>
-<th align="left">Labels (search patterns)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left"><code>metadata/program</code></td>
-<td align="left"><code>whole_span:.+</code></td>
-</tr>
-<tr>
-<td align="left"><code>metadata/sloc/\1</code></td>
-<td align="left"><code>whole_span:(.+)</code></td>
-</tr>
-</tbody>
-</table>
-<p>Note that, in the replacement pattern, <code>"\1"</code> is a
-<a href="https://docs.python.org/3/library/re.html#re.sub"><em>backreference</em></a> to the first captured group
-(in parentheses).</p>
+<p>The paths being left untouched by the conversion, we will omit them from now on.</p>
 <h3 id="deduplication">Deduplication</h3>
 <ul>
 <li>Labels:<ul>
@@ -228,7 +163,7 @@ given at the start of the section.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L0-L425" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L0-L377" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">from collections import Counter, defaultdict
 from pathlib import Path
@@ -425,7 +360,7 @@ a bag (multiset) of its spans.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L310-L411" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L262-L363" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def deduplicated_taxa(taxa: Taxa) -&gt; Taxa:
     if len(taxa) &lt; 2:
@@ -462,7 +397,7 @@ a bag (multiset) of its spans.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L182-L307" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L134-L259" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">class Taxonomy:
     def __init__(
@@ -562,7 +497,7 @@ As an associative list, it only allows O(n) lookups a given label pattern.</li>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L183-L245" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L135-L197" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def __init__(
     self,
@@ -629,7 +564,7 @@ same label more than one time
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L248-L285" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L200-L237" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">@lru_cache(maxsize=None)
 def get_taxon_name_list(self, label_name: LabelName) -&gt; TaxonNames:
@@ -663,7 +598,7 @@ returns them deduplicated (cf. <code><a title="paroxython.map_taxonomy.deduplica
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L287-L307" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L239-L259" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def to_taxa(self, labels: Labels) -&gt; Taxa:
     acc: TaxaSpans = defaultdict(Counter)
@@ -690,9 +625,6 @@ returns them deduplicated (cf. <code><a title="paroxython.map_taxonomy.deduplica
 <ul>
 <li><a href="#description">Description</a></li>
 <li><a href="#example">Example</a><ul>
-<li><a href="#1-1-mapping">1-1 mapping</a></li>
-<li><a href="#1-0-mapping">1-0 mapping</a></li>
-<li><a href="#1-n-mapping">1-N mapping</a></li>
 <li><a href="#deduplication">Deduplication</a></li>
 </ul>
 </li>

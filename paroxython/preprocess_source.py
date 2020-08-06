@@ -5,46 +5,23 @@ Bring together everything relative to the pre-processing of a given source code.
 
 A useful, albeit not essential, step is to cleanse the code of all its algorithmically irrelevant
 features (blank lines, comments, docstrings, etc.). Lots of examples are provided in the `Cleanup`
-class documentation. Be aware that a certain category of comment is intentionally preserved at this
-stage, the so-called “manual hints”, presented in the next paragraph.
+class documentation below.
 
-## Manual hints
+## Manual hints: preservation, centrifugation and scheduling
 
-On a given source code, the labelling algorithm may sometimes produce false positives or false
-negatives. Moreover, the semantics of some features may be subjective (e.g., `topic:fun`) or beyond
-the capabilities of Paroxython (e.g., deciding the relevance of the `short_circuit` property of a
-boolean condition). In any case, the user has the possibility to manually label certain lines of
-their source code to hint either the presence or absence of a given feature.
+Certain comments intentionally survive the cleaning step, the so-called “manual hints”, introduced
+[here](docs_user_manual/index.html#manual-hints).
 
-The addition of a label is hinted by a comment starting with `# paroxython:`.
+- If they appear at the end of a nonempty line of code, they are preserved as they are.
+- If they extend over an entire line (excluding the initial blanks), they are considered to be
+  featured by the entire program. They are replaced by two hints, one put at the beginning and
+  the other at the end of the source code, thus delimiting the totality of the program. This
+  operation is called “centrifugation”.
 
->>> if i < len(s) and s[i] == x: # paroxython: +short_circuit:And
-
-Note that `short_circuit:And` is a label (of the kind defined, but not necessarily included in
-[spec.md](https://repo/paroxython/resources/spec.md)), and
-not a taxon. It will be later converted into one or more taxa (according to the mapping of
-[taxonomy.tsv](https://repo/paroxython/resources/taxonomy.tsv)).
-
-To delete a label, prefix it with a minus symbol. For instance, the following hint requalifies an
-addition into a concatenation:
-
->>> print(a + b) # paroxython: -addition_operator +concatenation_operator
-
-If a label should span over several lines, it is hinted on the first line with a `...` suffix
-(meaning “to be continued”), and on the last line with a `...` prefix (meaning “continuing”). In the
-following example, a label `super_loop` is manually substituted to the calculated label `loop:for`:
-
->>> for x in s: # paroxython: +super_loop... -loop:for...
-...     foo()
-...     bar() # paroxython: ...super_loop ...loop:for
-
-Of course, the opening and the closing of a spanning label must be correctly balanced.
-
-Some tolerances exist for the syntax:
-
-- `+` can be omitted.
-- `...` (three dots) can be written `…` (HORIZONTAL ELLIPSIS, U+2026).
-- `# paroxython:` is neither space- nor case-sensitive.
+In either case, these hints were manually placed by the user to modify the behavior of Paroxython,
+by asking it either to add the taxa that it missed, or to delete those that it unduly produced. This
+is at this step that they are scheduled for addition or deletion (respectively). For the moment, the
+information is just stored: `paroxython.parse_program.ProgramParser` will process it when required.
 """
 
 from collections import defaultdict
@@ -231,6 +208,10 @@ def centrifugate_hints(
         [test_centrifugate_hints.py](https://repo/tests/test_centrifugate_hints.py).
 
         Argument `match_isolated_hints` [not to be explicitly provided.](docs_developer_manual/index.html#default-argument-trick)
+
+    <center>
+    <iframe src='https://gfycat.com/ifr/ExcellentKeyElver' frameborder='0' scrolling='no' width='320' height='266'></iframe>
+    </center>
     """
     lines = []
     hints: Set[str] = set()
@@ -298,7 +279,8 @@ def collect_hints(
     Args:
         source (Source): A source code.
         match_label (Callable, optional): A function matching a label composed of alphanumeric
-            characters and colons. [Not to be explicitly provided.](docs_developer_manual/index.html#default-argument-trick)
+            characters and colons.
+            [Not to be explicitly provided.](docs_developer_manual/index.html#default-argument-trick)
 
     Raises:
         ValueError: Raised in various cases of malformed input.
