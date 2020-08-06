@@ -19,7 +19,7 @@ OPTIONS:
     -g --glob=PATTERN   The names of the collected files must match this Unix-
                         like glob pattern (not a regular expression). Special
                         syntax: "**/" prefix means “this directory and all
-                        subdirectories, recursively”. [default: "**/*.py"]
+                        subdirectories, recursively”. [default: **/*.py]
     -o --output=PATH    The path of the resulting database. If not specified,
                         create a JSON file under the name "DIRECTORY_db.json".
                         Otherwise, use the extension (either ".json", ".sql"
@@ -59,5 +59,5 @@ def cli_wrapper(args):
         db.write_json()
     elif args["--output"].endswith(".json"):
         db.write_json(Path(args["--output"]))
-    elif args["--output"].endswith(".sqlite", ".sql"):
+    elif args["--output"].endswith((".sqlite", ".sql")):
         db.write_sqlite(Path(args["--output"]))
