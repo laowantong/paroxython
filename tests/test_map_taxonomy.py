@@ -12,7 +12,7 @@ from paroxython.label_programs import labelled_programs
 from paroxython.map_taxonomy import Taxonomy, deduplicated_taxa
 from paroxython.user_types import Label, Program, Span
 
-t = Taxonomy(Path("examples/dummy/taxonomy.tsv"))
+t = Taxonomy(Path("examples/mini/taxonomy.tsv"))
 S = lambda i, j: Span(i, j)  # shortcut for Span(i, j)
 
 

@@ -534,7 +534,8 @@
       "taxa": {
         "metadata/program": [[1,1]],
         "metadata/sloc/1": [[1,1]],
-        "test/belonging": [[1,1]]
+        "test/belonging": [[1,1]],
+        "type/boolean": [[1,1]]
       }
     },
     "013.0574-iterate-over-map-keys-and-values.py": {
@@ -709,6 +710,7 @@
         "subroutine/recursive/body": [[1,6]],
         "subroutine/return/nothing": [[3,3]],
         "test/identity": [[2,2]],
+        "type/boolean": [[2,2]],
         "type/null/literal": [[2,2]]
       }
     },
@@ -927,6 +929,7 @@
         "subroutine/function": [[1,4]],
         "subroutine/return/something": [[4,4]],
         "test/belonging": [[3,3]],
+        "type/boolean": [[3,3]],
         "type/sequence": [[4,4]],
         "type/sequence/tuple/literal": [[2,2],[4,4]]
       }
@@ -1079,7 +1082,7 @@
         "library/third_party/Queue": [[1,1]],
         "metadata/program": [[1,6]],
         "metadata/sloc/6": [[1,6]],
-        "type/boolean/literal/true": [[4,4]],
+        "type/boolean/literal/True": [[4,4]],
         "type/sequence/string/literal": [[6,6]],
         "variable/assignment": [[4,4]],
         "variable/assignment/single": [[2,2],[3,3]]
@@ -1346,6 +1349,7 @@
         "subroutine/recursive/body": [[1,5]],
         "subroutine/return/something": [[5,5]],
         "test/equality": [[2,2]],
+        "type/boolean": [[2,2]],
         "type/number/integer/literal": [[3,3],[5,5]],
         "type/number/integer/literal/zero": [[2,2]]
       }
@@ -1638,6 +1642,7 @@
         "metadata/program": [[1,1]],
         "metadata/sloc/1": [[1,1]],
         "test/belonging": [[1,1]],
+        "type/boolean": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
     },
@@ -1872,7 +1877,8 @@
         "io/standard/print": [[6,6]],
         "metadata/program": [[1,8]],
         "metadata/sloc/8": [[1,8]],
-        "test/equality": [[4,4]]
+        "test/equality": [[4,4]],
+        "type/boolean": [[4,4]]
       }
     },
     "042.3168-continue-outer-loop.py": {
@@ -1914,7 +1920,8 @@
         "io/standard/print": [[5,5]],
         "metadata/program": [[1,5]],
         "metadata/sloc/5": [[1,5]],
-        "test/equality": [[3,3]]
+        "test/equality": [[3,3]],
+        "type/boolean": [[3,3]]
       }
     },
     "043.0676-break-outer-loop.py": {
@@ -1982,6 +1989,7 @@
         "subscript/index": [[6,6],[7,7]],
         "subscript/index/shape/2": [[7,7]],
         "test/equality": [[7,7]],
+        "type/boolean": [[7,7]],
         "type/null/literal": [[4,4]],
         "type/sequence/tuple/literal": [[8,8]],
         "variable/assignment/single": [[4,4],[8,8]]
@@ -2070,6 +2078,7 @@
         "subroutine/return/nothing": [[6,6]],
         "subroutine/return/something": [[5,5]],
         "test/equality": [[4,4]],
+        "type/boolean": [[4,4]],
         "type/null/literal": [[6,6]],
         "type/number/integer/literal": [[7,7],[7,7],[7,7],[7,7],[7,7],[7,7],[7,7],[7,7],[7,7],[7,7]],
         "type/sequence/list/literal": [[7,7],[7,7],[7,7]],
@@ -2249,7 +2258,7 @@
         "flow/null_operation": [[2,2]],
         "metadata/program": [[1,2]],
         "metadata/sloc/2": [[1,2]],
-        "type/boolean/literal/true": [[1,1]]
+        "type/boolean/literal/True": [[1,1]]
       }
     },
     "051.0230-check-if-map-contains-key.py": {
@@ -2265,7 +2274,8 @@
       "taxa": {
         "metadata/program": [[1,1]],
         "metadata/sloc/1": [[1,1]],
-        "test/belonging": [[1,1]]
+        "test/belonging": [[1,1]],
+        "type/boolean": [[1,1]]
       }
     },
     "052.0666-check-if-map-contains-value.py": {
@@ -2286,6 +2296,7 @@
         "metadata/program": [[1,1]],
         "metadata/sloc/1": [[1,1]],
         "test/belonging": [[1,1]],
+        "type/boolean": [[1,1]],
         "type/non_sequence/dictionary": [[1,1]]
       }
     },
@@ -3145,7 +3156,7 @@
         "metadata/program": [[1,4]],
         "metadata/sloc/4": [[1,4]],
         "operator/boolean/not": [[3,3]],
-        "type/boolean/literal/true": [[1,1]]
+        "type/boolean/literal/True": [[1,1]]
       }
     },
     "079.1090-convert-integer-to-floating-point-number.py": {
@@ -3336,7 +3347,7 @@
         "metadata/sloc/2": [[1,2]],
         "subroutine/argument/arg": [[1,1],[1,1]],
         "subroutine/function": [[1,2]],
-        "type/boolean/literal/false": [[2,2]]
+        "type/boolean/literal/False": [[2,2]]
       }
     },
     "086.1004-check-if-integer-multiplication-will-overflow.py": {
@@ -3361,7 +3372,7 @@
         "metadata/sloc/2": [[1,2]],
         "subroutine/argument/arg": [[1,1],[1,1]],
         "subroutine/function": [[1,2]],
-        "type/boolean/literal/false": [[2,2]]
+        "type/boolean/literal/False": [[2,2]]
       }
     },
     "087.1139-stop-program.py": {
@@ -4147,6 +4158,7 @@
         "metadata/program": [[1,2]],
         "metadata/sloc/2": [[1,2]],
         "test/belonging": [[1,1]],
+        "type/boolean": [[1,1]],
         "type/sequence/string/literal": [[1,1]]
       }
     },
@@ -4203,6 +4215,7 @@
         "metadata/program": [[1,1]],
         "metadata/sloc/1": [[1,1]],
         "test/equality": [[1,1]],
+        "type/boolean": [[1,1]],
         "type/sequence/string": [[1,1]],
         "type/sequence/string/literal/empty": [[1,1]],
         "variable/assignment/single": [[1,1]]
@@ -4334,6 +4347,7 @@
         "metadata/program": [[1,1]],
         "metadata/sloc/1": [[1,1]],
         "test/equality": [[1,1]],
+        "type/boolean": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
     },
@@ -4360,6 +4374,7 @@
         "metadata/program": [[1,2]],
         "metadata/sloc/2": [[1,2]],
         "test/inequality": [[2,2]],
+        "type/boolean": [[2,2]],
         "variable/assignment/single": [[2,2]]
       }
     },
@@ -4569,6 +4584,7 @@
         "pattern/elements/accumulate/in_list/filtered": [[4,7]],
         "pattern/elements/accumulate/in_set/filtered": [[4,7]],
         "test/belonging/not": [[5,5]],
+        "type/boolean": [[5,5]],
         "type/non_sequence/set": [[2,2],[6,6]],
         "type/sequence/list": [[7,7]],
         "type/sequence/list/literal": [[1,1]],
@@ -4670,7 +4686,7 @@
         "library/standard/socket": [[1,1]],
         "metadata/program": [[1,7]],
         "metadata/sloc/7": [[1,7]],
-        "type/boolean/literal/true": [[5,5]],
+        "type/boolean/literal/True": [[5,5]],
         "type/number/integer/literal": [[6,6]],
         "type/sequence/string/literal": [[2,2],[7,7]],
         "type/sequence/tuple/literal": [[4,4],[6,6]],
@@ -4834,6 +4850,7 @@
         "subscript/index": [[4,4]],
         "test/equality": [[4,4]],
         "test/equality/not": [[4,4]],
+        "type/boolean": [[4,4],[4,4]],
         "type/number/integer/literal": [[4,4]],
         "variable/assignment/single": [[3,3]]
       }
@@ -4909,7 +4926,7 @@
         "subroutine/argument/no": [[1,2]],
         "subroutine/function": [[1,2]],
         "subroutine/return/something": [[2,2]],
-        "type/boolean/literal/true": [[2,2]],
+        "type/boolean/literal/True": [[2,2]],
         "type/sequence/string/literal": [[2,2]],
         "type/sequence/tuple/literal": [[2,2]]
       }
@@ -5023,7 +5040,7 @@
         "subroutine/argument/arg": [[1,1],[1,1]],
         "subroutine/higher_order": [[1,9]],
         "subroutine/procedure": [[1,9]],
-        "type/boolean/literal/true": [[8,8]],
+        "type/boolean/literal/True": [[8,8]],
         "type/number/integer/literal/zero": [[4,4]],
         "type/sequence/list": [[9,9]],
         "type/sequence/list/literal": [[2,2]],
@@ -5115,6 +5132,7 @@
         "subroutine/higher_order": [[2,9]],
         "subroutine/procedure": [[2,9]],
         "test/belonging/not": [[9,9]],
+        "type/boolean": [[9,9]],
         "type/non_sequence/set": [[3,3],[8,8]],
         "type/sequence/list": [[9,9]],
         "type/sequence/list/literal": [[4,4]],
@@ -5196,6 +5214,7 @@
         "subroutine/higher_order": [[1,8]],
         "subroutine/procedure": [[1,8]],
         "test/belonging/not": [[8,8]],
+        "type/boolean": [[8,8]],
         "type/non_sequence/set": [[2,2],[7,7]],
         "type/sequence/list": [[8,8]],
         "type/sequence/list/literal": [[3,3]],
@@ -5309,6 +5328,7 @@
         "metadata/program": [[1,1]],
         "metadata/sloc/1": [[1,1]],
         "test/belonging": [[1,1]],
+        "type/boolean": [[1,1]],
         "type/sequence/string": [[1,1],[1,1]],
         "variable/assignment/single": [[1,1]]
       }
@@ -5384,6 +5404,7 @@
         "metadata/program": [[1,1]],
         "metadata/sloc/1": [[1,1]],
         "test/equality/not": [[1,1]],
+        "type/boolean": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
     },
@@ -6379,6 +6400,7 @@
         "metadata/sloc/5": [[1,5]],
         "operator/arithmetic/power": [[2,2]],
         "test/inequality": [[2,2]],
+        "type/boolean": [[2,2]],
         "type/number/integer/literal": [[2,2],[2,2]]
       }
     },
@@ -6464,6 +6486,7 @@
         "metadata/sloc/5": [[1,5]],
         "subscript/slice/start": [[2,2],[4,4]],
         "test/belonging": [[2,2],[4,4]],
+        "type/boolean": [[2,2],[4,4]],
         "type/number/integer/literal": [[2,2],[4,4]],
         "type/sequence/string/literal": [[2,2],[4,4]]
       }
@@ -7093,6 +7116,7 @@
         "metadata/sloc/3": [[1,3]],
         "subscript/index": [[3,3]],
         "test/belonging": [[3,3]],
+        "type/boolean": [[3,3]],
         "type/number/integer/literal": [[3,3]],
         "type/sequence/list/literal": [[2,2]],
         "type/sequence/string/literal": [[2,2],[2,2],[2,2]],
@@ -7231,6 +7255,7 @@
         "operator/boolean/and": [[1,1]],
         "test/inequality": [[1,1],[1,1],[1,1],[1,1]],
         "test/inequality/chained/2": [[1,1],[1,1]],
+        "type/boolean": [[1,1],[1,1]],
         "variable/assignment/single": [[1,1]]
       }
     },
@@ -7644,6 +7669,7 @@
         "subroutine/return/something": [[10,10],[12,12]],
         "subscript/index": [[6,6],[9,9],[9,9],[10,10]],
         "test/equality": [[6,6],[12,12]],
+        "type/boolean": [[6,6],[12,12]],
         "type/number/integer/literal/zero": [[3,3]],
         "type/sequence/list/literal": [[3,3]],
         "type/sequence/tuple/literal": [[15,15],[15,15]],
@@ -7773,7 +7799,8 @@
         "flow/conditional/no_else": [[1,2]],
         "metadata/program": [[1,2]],
         "metadata/sloc/2": [[1,2]],
-        "test/inequality": [[1,1]]
+        "test/inequality": [[1,1]],
+        "type/boolean": [[1,1]]
       }
     },
     "197.3457-get-a-list-of-lines-from-a-file.py": {
@@ -16716,11 +16743,40 @@
     "test/inequality/chained/2": [
       "178.2615-check-if-point-is-inside-rectangle.py"
     ],
-    "type/boolean/literal/false": [
+    "type/boolean": [
+      "012.0181-check-if-list-contains-a-value.py",
+      "016.1530-depth-first-traversing-of-a-binary-tree.py",
+      "020.0573-return-two-values.py",
+      "031.0188-recursive-factorial-simple.py",
+      "039.0571-check-if-string-contains-a-word.py",
+      "042.1264-continue-outer-loop.py",
+      "042.3168-continue-outer-loop.py",
+      "043.0676-break-outer-loop.py",
+      "043.2733-break-outer-loop.py",
+      "051.0230-check-if-map-contains-key.py",
+      "052.0666-check-if-map-contains-value.py",
+      "108.1291-determine-if-variable-name-is-defined.py",
+      "110.1455-check-if-string-is-blank.py",
+      "114.2273-test-deep-equality.py",
+      "115.2138-compare-dates.py",
+      "119.3263-deduplicate-list.py",
+      "124.2152-binary-search-for-a-value-in-sorted-array.py",
+      "129.2282-breadth-first-traversing-in-a-graph.py",
+      "130.2283-depth-first-traversing-in-a-graph.py",
+      "133.2160-case-insensitive-string-contains.py",
+      "136.2141-remove-all-occurrences-of-a-value-from-a-list.py",
+      "160.2165-detect-if-32-bit-or-64-bit-architecture.py",
+      "162.2164-execute-procedures-depending-on-options.py",
+      "177.2709-find-files-with-a-given-list-of-filename-extensions.py",
+      "178.2615-check-if-point-is-inside-rectangle.py",
+      "187.3261-disjoint-set.py",
+      "191.3403-check-if-any-value-in-a-list-is-larger-than-a-limit.py"
+    ],
+    "type/boolean/literal/False": [
       "085.1003-check-if-integer-addition-will-overflow.py",
       "086.1004-check-if-integer-multiplication-will-overflow.py"
     ],
-    "type/boolean/literal/true": [
+    "type/boolean/literal/True": [
       "025.0195-send-a-value-to-another-thread.py",
       "050.0572-make-an-infinite-loop.py",
       "078.1089-do-while-loop.py",

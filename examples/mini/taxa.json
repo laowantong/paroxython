@@ -21,6 +21,7 @@
     "test/divisibility/parity": "4",
     "test/equality": "4",
     "test/equality/not": "2",
+    "type/boolean": "2 4",
     "type/number/integer/literal": "2 4 5 7 7",
     "type/number/integer/literal/zero": "4",
     "variable/assignment/conditional/verbose": "4-7",
@@ -40,6 +41,7 @@
     "metadata/sloc/10": "1-10",
     "operator/arithmetic/modulo": "3 5 7",
     "test/equality": "3 5 7",
+    "type/boolean": "3 5 7",
     "type/number/integer/literal": "2 2 3 5 7",
     "type/number/integer/literal/zero": "3 5 7",
     "type/sequence/string/literal": "4 6 8"
@@ -54,6 +56,7 @@
     "subroutine/return/something": "3",
     "test/divisibility/parity": "3",
     "test/equality": "3",
+    "type/boolean": "3",
     "type/number/integer/literal": "3",
     "type/number/integer/literal/zero": "3"
   }

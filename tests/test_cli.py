@@ -55,13 +55,15 @@ def test_tag_options():
     assert "| Label | Lines |" in result
     assert "| `single_assignment:a` | 1 |" in result
 
-    result = run("tag --taxonomy examples/dummy/taxonomy.tsv examples/mini/programs/fizzbuzz.py")
+    result = run("tag --taxonomy examples/mini/taxonomy.tsv examples/mini/programs/fizzbuzz.py")
     assert "| `flow/conditional` | 4-11, 6-11, 8-11 |" in result
 
 
 def test_collect():
     db_path = Path("examples/mini/programs_db.json")
-    result = run("collect --no_timestamp examples/mini/programs")
+    result = run(
+        "collect --no_timestamp -t paroxython/resources/taxonomy.tsv examples/mini/programs"
+    )
     assert "Labelling 4 programs." in result
     assert "Mapping taxonomy on 4 programs." in result
     assert f"Writing {db_path}." in result
@@ -91,7 +93,11 @@ def test_collect_options():
     result = run(f'collect -o {db_path} --glob "{glob}" examples/mini/programs')
     assert "Labelling 2 programs." in result
 
-    result = run(f"collect -o {db_path} -t examples/dummy/taxonomy.tsv examples/mini/programs")
+    result = run(f"collect -o {db_path} -t examples/mini/taxonomy.tsv examples/mini/programs")
+    db = json.loads(db_path.read_text())
+    assert db["taxa"] == {"flow/conditional": ["collatz.py", "fizzbuzz.py"]}
+
+    result = run(f"collect -o {db_path} examples/mini/programs")
     db = json.loads(db_path.read_text())
     assert db["taxa"] == {"flow/conditional": ["collatz.py", "fizzbuzz.py"]}
 

@@ -163,8 +163,9 @@ test/inequality	comparison_operator:(Lt|LtE|Gt|GtE)
 test/inequality/chained/\1	chained_inequalities:(\d+)
 test/yoda	yoda_comparison:(Eq|NotEq|Is|IsNot)
 type/boolean	external_free_call:bool
-type/boolean/literal/false	literal:False
-type/boolean/literal/true	literal:True
+type/boolean	node:Compare
+type/boolean/literal/False	literal:False
+type/boolean/literal/True	literal:True
 type/non_sequence/dictionary	external_free_call:dict
 type/non_sequence/dictionary	member_call:(fromkeys|get|items|keys|popitem|setdefault|values)
 type/non_sequence/dictionary/literal	literal:Dict
