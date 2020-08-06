@@ -1,4 +1,4 @@
-"""Collect all infos pertaining to the programs, labels and taxa, and dump them in a database."""
+"""Collect all infos pertaining to the programs, labels and taxa into a so-called tag database."""
 
 import json
 import sqlite3
@@ -99,7 +99,7 @@ class Database:
 
         Example:
             See the [JSON tag database](https://repo/examples/mini/programs_db.json) constructed from
-            the programs of this [directory](https://repo/examples/mini/programs).
+            the programs of [this](https://repo/examples/mini/programs) directory.
 
         Note:
             For readability purposes, the output of `json.dumps()` is reformatted to fit each span
@@ -437,8 +437,9 @@ def prepared_taxa(taxa: Taxa) -> TaxaPoorSpans:
 if __name__ == "__main__":
     # fmt:off
     directories = [
-        "examples/simple/programs",
-        "../algo/programs",
+        # "examples/simple/programs",
+        # "../algo/programs",
+        "../Python",
     ]
     # fmt:on
     print()

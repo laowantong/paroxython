@@ -1,15 +1,15 @@
 # Table of contents
 - [`4 programs of learning cost in [2, 4[`](#4-programs-of-learning-cost-in-2-4)
     - [`09_indent.py`](#program-09_indentpy-learning-cost-2375)
-    - [`04_fibonacci.py`](#program-04_fibonaccipy-learning-cost-26875)
     - [`08_arguments.py`](#program-08_argumentspy-learning-cost-28125)
-    - [`20_prime_numbers.py`](#program-20_prime_numberspy-learning-cost-35)
+    - [`04_fibonacci.py`](#program-04_fibonaccipy-learning-cost-29375)
+    - [`20_prime_numbers.py`](#program-20_prime_numberspy-learning-cost-375)
 - [`5 programs of learning cost in [4, 8[`](#5-programs-of-learning-cost-in-4-8)
-    - [`10_time.py`](#program-10_timepy-learning-cost-43125)
-    - [`21_xml_html_parsing.py`](#program-21_xml_html_parsingpy-learning-cost-50625)
-    - [`14_median.py`](#program-14_medianpy-learning-cost-56875)
-    - [`12_classes.py`](#program-12_classespy-learning-cost-578125)
-    - [`33_guess_the_number.py`](#program-33_guess_the_numberpy-learning-cost-578125)
+    - [`10_time.py`](#program-10_timepy-learning-cost-45625)
+    - [`21_xml_html_parsing.py`](#program-21_xml_html_parsingpy-learning-cost-53125)
+    - [`14_median.py`](#program-14_medianpy-learning-cost-59375)
+    - [`12_classes.py`](#program-12_classespy-learning-cost-603125)
+    - [`33_guess_the_number.py`](#program-33_guess_the_numberpy-learning-cost-603125)
 # Recommended programs
 
 ## 4 programs of learning cost in [2, 4[
@@ -46,7 +46,30 @@
 
 ---
 
-### Program `04_fibonacci.py` (learning cost 2.6875)
+### Program `08_arguments.py` (learning cost 2.8125)
+
+```python
+1   import sys
+2   try:
+3       total = sum(int(arg) for arg in sys.argv[1:])
+4       print("sum =", total)
+5   except ValueError:
+6       print("Please supply integer arguments")
+```
+
+| Cost  | Taxon | Location |
+|----|----|----|
+| 0 | `call/function/builtin/print` | 4, 6 |
+| 0 | `call/function/builtin/sum` | 3 |
+| 0 | `flow/exception/catch/ValueError` | 2-6 |
+| 0.875 | `library/standard/sys` | 1 |
+| 0.875 | `subscript/slice/start` | 3 |
+| 0 | `type/sequence/string/literal` | 4, 6 |
+| 0 | `metadata/sloc/6` | 1-6 |
+
+---
+
+### Program `04_fibonacci.py` (learning cost 2.9375)
 
 ```python
 1   parents, babies = (1, 1)
@@ -71,30 +94,7 @@
 
 ---
 
-### Program `08_arguments.py` (learning cost 2.8125)
-
-```python
-1   import sys
-2   try:
-3       total = sum(int(arg) for arg in sys.argv[1:])
-4       print("sum =", total)
-5   except ValueError:
-6       print("Please supply integer arguments")
-```
-
-| Cost  | Taxon | Location |
-|----|----|----|
-| 0 | `call/function/builtin/print` | 4, 6 |
-| 0 | `call/function/builtin/sum` | 3 |
-| 0 | `flow/exception/catch/ValueError` | 2-6 |
-| 0.875 | `library/standard/sys` | 1 |
-| 0.875 | `subscript/slice/start` | 3 |
-| 0 | `type/sequence/string/literal` | 4, 6 |
-| 0 | `metadata/sloc/6` | 1-6 |
-
----
-
-### Program `20_prime_numbers.py` (learning cost 3.5)
+### Program `20_prime_numbers.py` (learning cost 3.75)
 
 ```python
 1   import itertools
@@ -126,14 +126,14 @@
 | 0.375 | `subroutine/argument/no` | 2-7 |
 | 0.25 | `subroutine/generator` | 2-7 |
 | 0.75 | `test/inequality` | 9 |
-| 0.4375 | `type/boolean/literal/true` | 4 |
+| 0.4375 | `type/boolean/literal/True` | 4 |
 | 0 | `type/sequence` | 3 |
 
 ---
 
 ## 5 programs of learning cost in [4, 8[
 
-### Program `10_time.py` (learning cost 4.3125)
+### Program `10_time.py` (learning cost 4.5625)
 
 ```python
 1   from time import localtime
@@ -173,7 +173,7 @@
 
 ---
 
-### Program `21_xml_html_parsing.py` (learning cost 5.0625)
+### Program `21_xml_html_parsing.py` (learning cost 5.3125)
 
 ```python
 1   dinner_recipe = """<html><body><table>
@@ -213,7 +213,7 @@
 
 ---
 
-### Program `14_median.py` (learning cost 5.6875)
+### Program `14_median.py` (learning cost 5.9375)
 
 ```python
 1   def median(pool):
@@ -231,7 +231,7 @@
 
 ---
 
-### Program `12_classes.py` (learning cost 5.78125)
+### Program `12_classes.py` (learning cost 6.03125)
 
 ```python
 1   class BankAccount(object):
@@ -264,7 +264,7 @@
 
 ---
 
-### Program `33_guess_the_number.py` (learning cost 5.78125)
+### Program `33_guess_the_number.py` (learning cost 6.03125)
 
 ```python
 1   import random

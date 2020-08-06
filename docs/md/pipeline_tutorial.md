@@ -1,4 +1,7 @@
-## Pipeline tutorial: getting recommendations
+
+----
+
+# Pipeline tutorial: getting recommendations
 
 This tutorial walks you through a series of little “teacher stories” to illustrate how to write the pipeline of commands used by Paroxython's recommendation system.
 
@@ -8,7 +11,7 @@ You run this pipeline on command line with:
 paroxython recommend -p 'path/to/your/pipe.py' 'path/to/your/programs/db.json'
 ```
 
-### Covering your base(s)
+## Covering your base(s)
 
 Our simplest pipeline has no command: it just lists the programs of your database, without any filter. This could produce a rather long document, since each source code is printed, along with a list of each and every taxon it implements. Here is the content of your `pipe.py`:
 
@@ -19,9 +22,9 @@ Our simplest pipeline has no command: it just lists the programs of your databas
 .. tip::
     The point is that the resulting list is sorted by increasing learning cost. This should give you a rough idea of the pedagogical angle of attack to adopt in your first classes.
 
-### Imparting knowledge
+## Imparting knowledge
 
-#### Tracking the progress of your course
+### Tracking the progress of your course
 
 Suppose that, in your first session, you have introduced your students to the `hello_world.py`, `wheat_and_chessboard.py` and `euler_005_smallest_multiple.py` programs. Not only Paroxython should no longer recommend these programs, but the cost of learning the associated concepts should be considered as zero when they are encountered again in the future.
 
@@ -38,7 +41,7 @@ Suppose that, in your first session, you have introduced your students to the `h
 ]
 ```
 
-#### Coming after another course
+### Coming after another course
 
 Suppose instead that you intervene after an introductory course given by a colleague. She gives you a folder (named `"CS_101"`), which contains the programs she has studied with her class. Since you are secretly in love, you assume, somewhat foolishly, that the concepts they implement are mastered by your new students.
 
@@ -54,7 +57,7 @@ Suppose instead that you intervene after an introductory course given by a colle
 .. tip::
     As you can see, rather than maintaining a **list** of programs or concepts in the `"data"` field, you may provide a **string**. Paroxython will interpret it as a shell command, and expect it to print on `stdout` the required list of items (programs or taxa), one per line.
 
-### Blacklisting programs
+## Blacklisting programs
 
 You want to filter out all programs reserved for an exam, or too complex, or not pedagogically interesting enough, or that could get you kicked out of your college, etc.
 
@@ -72,7 +75,7 @@ You want to filter out all programs reserved for an exam, or too complex, or not
 ]
 ```
 
-### Concepts to be introduced later (or never)
+## Concepts to be introduced later (or never)
 
 For the time being, you don't want to be recommended any program requiring the concepts of recursivity (`subroutine/recursive`), dictionary (`type/non_sequence/dictionary`) or set (`type/non_sequence/set`).
 
@@ -96,7 +99,7 @@ For the time being, you don't want to be recommended any program requiring the c
     Since the two latter taxa share a common prefix and Python doesn't provide other non-sequence
     type, it is enough to exclude all taxa starting with `type/non_sequence`.
 
-### Concepts to be introduced now
+## Concepts to be introduced now
 
 Your next class will be devoted to conditional constructs. Thus, you need to go through programs featuring taxa prefixed by `flow/conditional` or even, why not, some conditional expressions (`operator/ternary`). The suggested programs do not necessarily have to implement both concepts at the same time, but at least one. Any other program will be rejected.
 
@@ -112,7 +115,7 @@ Your next class will be devoted to conditional constructs. Thus, you need to go 
 ]
 ```
 
-### Preparing an assignment
+## Preparing an assignment
 
 Basically, you provide Paroxython with a list of programs already studied in class, and it suggests new programs that implement only old concepts. This requires the exclusion of all programs featuring at least one concept that has not been seen in any of the programs already seen.
 
@@ -122,7 +125,7 @@ But in the end, you, the teacher, are the judge. Paroxython is not going to set 
 
 Since this is the last filter in our tutorial, let's summarize what we've seen by chaining several commands together:
 
-1. **Impart** the previous knowledge by extracting all the programs listed in the `"timeline.txt"` file that you update after each session. You can adapt the script [`parse_syllabus.py`](https://repo/paroxython/helpers/parse_syllabus.py) to your own needs. If you wish, you can use the `base_path` variable, which represents the parent of the directory containing the programs of your personal database.
+1. **Impart** the previous knowledge by extracting all the programs listed in the `"timeline.txt"` file that you update after each session. You can adapt the script [`parse_syllabus.py`](https://repo/helpers/parse_syllabus.py) to your own needs. If you wish, you can use the `base_path` variable, which represents the parent of the directory containing the programs of your personal database.
 2. **Exclude** some irrelevant programs.
 3. **Include** the concepts that you want to test during your exam.
 

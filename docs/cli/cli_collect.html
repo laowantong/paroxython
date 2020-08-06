@@ -31,8 +31,8 @@
 <pre><code>paroxython collect [options] DIRECTORY
 </code></pre>
 <h2 id="options">Options</h2>
-<pre><code class="plain">-c --cleanup=STR    Transformation to be applied to the source code
-                    before processing. [default: full]
+<pre><code class="plain">-c --cleanup=STR    Transformation to apply to the source code before
+                    processing. [default: full]
                     Currently available:
                     • full: remove all blank lines, docstrings and
                             comments (except Paroxython hints).
@@ -40,25 +40,25 @@
 -e --skip=REGEX     Filter out any file whose name fully matches this
                     regular expression. NB: --glob precedes --skip.
                     [default: &quot;^(__init__|setup|.*[-_]tests?)\.py$&quot;]
--g --glob=PATTERN   The names of the collected files must match this
-                    Unix-like glob pattern (not a regular expression).
-                    Special syntax: &quot;**/&quot; prefix means “this directory
-                    and all subdirectories, recursively”. [default:
-                    &quot;**/*.py&quot;]
--o --output=PATH    The path of the resulting database. If not
-                    specified, create a JSON file under the name
-                    &quot;DIRECTORY_db.json&quot;. Otherwise, use the extension
-                    (either &quot;.json&quot; or &quot;.sqlite&quot;) to decide the format
-                    of the tag database. [default: ]
+-g --glob=PATTERN   The names of the collected files must match this Unix-
+                    like glob pattern (not a regular expression). Special
+                    syntax: &quot;**/&quot; prefix means “this directory and all
+                    subdirectories, recursively”. [default: &quot;**/*.py&quot;]
+-o --output=PATH    The path of the resulting database. If not specified,
+                    create a JSON file under the name &quot;DIRECTORY_db.json&quot;.
+                    Otherwise, use the extension (either &quot;.json&quot;, &quot;.sql&quot;
+                    or &quot;.sqlite&quot;) to decide the format of the tag database.
+                    [default: ]
 --no_timestamp      Don't store programs' last modification date.
--t --taxonomy=PATH  The path of a TSV file mapping labels onto taxa.
-                    If not specified, use the included default taxonomy:
+-t --taxonomy=PATH  The path of a TSV file mapping labels onto taxa. If not
+                    specified, use the &quot;taxonomy.tsv&quot; present in DIRECTORY's
+                    parent. If absent, use the included default taxonomy:
                     &lt;https://github.com/laowantong/paroxython/blob/0.4.4/paroxython/resources/taxonomy.tsv&gt;
 </code></pre>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli_collect.py#L0-L55" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli_collect.py#L0-L62" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">from pathlib import Path
 
@@ -66,9 +66,16 @@ from ..make_db import Database
 
 
 def cli_wrapper(args):
-    taxonomy_path = Path(args[&#34;--taxonomy&#34;]) if args[&#34;--taxonomy&#34;] else None
+    directory = Path(args[&#34;DIRECTORY&#34;])
+    taxonomy = args.get(&#34;--taxonomy&#34;)
+    if taxonomy:
+        taxonomy_path = Path(taxonomy)
+    else:
+        taxonomy_path = directory.parent / &#34;taxonomy.tsv&#34;
+        if not taxonomy_path.is_file():
+            taxonomy_path = None
     db = Database(
-        directory=Path(args[&#34;DIRECTORY&#34;]),
+        directory=directory,
         ignore_timestamps=args[&#34;--no_timestamp&#34;],
         cleanup_strategy=args[&#34;--cleanup&#34;],  # -&gt; list_programs
         skip_pattern=args[&#34;--skip&#34;],  # -&gt; list_programs
@@ -79,7 +86,7 @@ def cli_wrapper(args):
         db.write_json()
     elif args[&#34;--output&#34;].endswith(&#34;.json&#34;):
         db.write_json(Path(args[&#34;--output&#34;]))
-    elif args[&#34;--output&#34;].endswith(&#34;.sqlite&#34;):
+    elif args[&#34;--output&#34;].endswith(&#34;.sqlite&#34;, &#34;.sql&#34;):
         db.write_sqlite(Path(args[&#34;--output&#34;]))</code></pre>
 </details>
 </section>
@@ -98,12 +105,19 @@ def cli_wrapper(args):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli_collect.py#L41-L56" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli_collect.py#L41-L63" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def cli_wrapper(args):
-    taxonomy_path = Path(args[&#34;--taxonomy&#34;]) if args[&#34;--taxonomy&#34;] else None
+    directory = Path(args[&#34;DIRECTORY&#34;])
+    taxonomy = args.get(&#34;--taxonomy&#34;)
+    if taxonomy:
+        taxonomy_path = Path(taxonomy)
+    else:
+        taxonomy_path = directory.parent / &#34;taxonomy.tsv&#34;
+        if not taxonomy_path.is_file():
+            taxonomy_path = None
     db = Database(
-        directory=Path(args[&#34;DIRECTORY&#34;]),
+        directory=directory,
         ignore_timestamps=args[&#34;--no_timestamp&#34;],
         cleanup_strategy=args[&#34;--cleanup&#34;],  # -&gt; list_programs
         skip_pattern=args[&#34;--skip&#34;],  # -&gt; list_programs
@@ -114,7 +128,7 @@ def cli_wrapper(args):
         db.write_json()
     elif args[&#34;--output&#34;].endswith(&#34;.json&#34;):
         db.write_json(Path(args[&#34;--output&#34;]))
-    elif args[&#34;--output&#34;].endswith(&#34;.sqlite&#34;):
+    elif args[&#34;--output&#34;].endswith(&#34;.sqlite&#34;, &#34;.sql&#34;):
         db.write_sqlite(Path(args[&#34;--output&#34;]))</code></pre>
 </details>
 </dd>

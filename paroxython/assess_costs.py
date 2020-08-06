@@ -4,8 +4,8 @@ Each program has been previously found to implement a number of notions represen
 taxa of the form: \(\textrm{edge}_0/\textrm{edge}_1/.../\textrm{edge}_n\), e.g.,
 `flow/loop/exit/early/break`.
 
-Furthermore, the notions already imparted may cover a certain **prefix** of such a taxon, e.g.
-`flow/loop`. The learning cost should therefore not take it into account.
+Furthermore, the notions already imparted may cover a certain **prefix** of such a taxon, here, e.g.
+`flow/loop`. The learning cost should therefore not take this into account.
 
 The cost of the remaining edges, here `exit/early/break`, is approximated by a function taking
 two zero-based indexes `start` (inclusive) and `stop` (exclusive), and returning a floating number. Currently, only two such functions are provided:

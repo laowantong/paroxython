@@ -11,6 +11,15 @@
 
 # [Developer manual](docs_developer_manual/index.html)
 
+# About
+
+## What's in a name?
+
+Far from being an arbitrary label, “Paroxython” can be justified as follows:
+
+1. It features both “Python” and “taxon”.
+2. According to Merriam-Webster, “paroxytone” denotes a word accented or stressed on the penult.
+3. “Paroxytone” translates as “paroxyton” in my mother tongue, and I fart in your general direction.
 """
 
 

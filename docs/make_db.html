@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.8.4" />
 <title>paroxython.make_db API documentation</title>
-<meta name="description" content="Collect all infos pertaining to the programs, labels and taxa, and dump them in a database." />
+<meta name="description" content="Collect all infos pertaining to the programs, labels and taxa into a so-called tag database." />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
 <link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/github.min.css" crossorigin>
@@ -26,11 +26,11 @@
 <h1 class="title">Module <code>paroxython.make_db</code></h1>
 </header>
 <section id="section-intro">
-<p>Collect all infos pertaining to the programs, labels and taxa, and dump them in a database.</p>
+<p>Collect all infos pertaining to the programs, labels and taxa into a so-called tag database.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L0-L448" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L0-L449" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">import json
 import sqlite3
@@ -268,8 +268,9 @@ def prepared_taxa(taxa: Taxa) -&gt; TaxaPoorSpans:
 if __name__ == &#34;__main__&#34;:
     # fmt:off
     directories = [
-        &#34;examples/simple/programs&#34;,
-        &#34;../algo/programs&#34;,
+        # &#34;examples/simple/programs&#34;,
+        # &#34;../algo/programs&#34;,
+        &#34;../Python&#34;,
     ]
     # fmt:on
     print()
@@ -790,7 +791,7 @@ a serialization-ready dictionary indexed by program names.</li>
 <p>Schema and purpose <a href="docs_user_manual/index.html#the-json-database">in the user manual</a>.</p>
 <h2 id="example">Example</h2>
 <p>See the <a href="https://github.com/laowantong/paroxython/blob/master/examples/mini/programs_db.json"><abbr title="JavaScript Object Notation">JSON</abbr> tag database</a> constructed from
-the programs of this <a href="https://github.com/laowantong/paroxython/blob/master/examples/mini/programs">directory</a>.</p>
+the programs of <a href="https://github.com/laowantong/paroxython/blob/master/examples/mini/programs">this</a> directory.</p>
 <h2 id="note">Note</h2>
 <p>For readability purposes, the output of <code>json.dumps()</code> is reformatted to fit each span
 list on a single line, e.g.:</p>

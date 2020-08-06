@@ -76,12 +76,11 @@ complete path from the root of the <abbr title="Abstract Syntax Tree">AST</abbr>
 </code></pre>
 <p>Obviously, such a representation is quite verbose. But it encapsulates in every single line the
 whole nesting information we need to understand its context. Since the recursion is linearly
-encoded, requesting it does not require recursion any more. This makes <a href="https://en.wikipedia.org/wiki/Regular_expression">regular
-expressions</a> a natural candidate for the request
-language<sup id="fnref:regex-recursion"><a class="footnote-ref" href="#fn:regex-recursion" rel="footnote">1</a></sup>. This is the choice we made for the present version of Paroxython. The
-regular expression patterns are processed in <code><a title="paroxython.parse_program" href="parse_program.html">paroxython.parse_program</a></code> on the basis of the
-definitions listed in
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md"><code>spec.md</code></a>.</p>
+encoded, requesting it does not require recursion any more. Non-recursive<sup id="fnref:regex-recursion"><a class="footnote-ref" href="#fn:regex-recursion" rel="footnote">1</a></sup>
+<a href="https://en.wikipedia.org/wiki/Regular_expression">regular expressions</a> become a natural candidate
+for the request language. The current version of Paroxython explores this option. The regular
+expression patterns are processed in <code><a title="paroxython.parse_program" href="parse_program.html">paroxython.parse_program</a></code> on the basis of the definitions
+listed in <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md"><code>spec.md</code></a>.</p>
 <p>For instance, the following regular expression matches and localizes nested function calls (e.g.,
 <code>foo(bar(42))</code>) without any recursion:</p>
 <pre><code class="re">           ^(.*)                    # Capture the path originating from the root...
@@ -203,7 +202,7 @@ merely increments a counter and associates it with any newly encountered string.
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L0-L338" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L0-L337" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">from typed_ast import ast3 as ast
 from typing import Any, Callable
@@ -308,7 +307,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L230-L239" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L229-L238" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def flatten_ast(tree) -&gt; str:
     pseudo_hash.reset()
@@ -344,7 +343,7 @@ Defaults to <code>regex.compile(r", ctx=.+?\(\)").sub</code>.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L242-L291" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L241-L290" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def flatten_node(
     node: Any,
@@ -393,7 +392,7 @@ Defaults to <code>regex.compile(r", ctx=.+?\(\)").sub</code>.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L294-L308" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L293-L307" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def simplify_negative_literals(
     flat_ast: str,
@@ -416,7 +415,7 @@ Defaults to <code>regex.compile(r", ctx=.+?\(\)").sub</code>.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L314-L331" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L313-L330" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">class PseudoHashFactory:
     def __init__(self):
@@ -443,7 +442,7 @@ Defaults to <code>regex.compile(r", ctx=.+?\(\)").sub</code>.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L320-L323" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L319-L322" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def reset(self):
     self.i = 0
@@ -458,7 +457,7 @@ Defaults to <code>regex.compile(r", ctx=.+?\(\)").sub</code>.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L325-L331" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L324-L330" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def __call__(self, x):
     if x not in self.cache:

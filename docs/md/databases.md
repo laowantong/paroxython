@@ -1,4 +1,7 @@
-## Tag databases
+<br>
+----
+
+# Tag databases
 
 Depending on the extension of `DB_NAME` (either `".json"` or `".sqlite"`), the command:
 
@@ -8,7 +11,7 @@ paroxython collect -o DB_NAME DIRECTORY
 
 ... will create two kinds of databases, each with their own purpose.
 
-### The JSON tag database
+## The JSON tag database
 
 It is this type of so-called NoSQL database that Paroxython draws upon to recommend programs. Its schema is:
 
@@ -51,7 +54,7 @@ It is this type of so-called NoSQL database that Paroxython draws upon to recomm
 
 As an example, take a look on the [JSON tag database](https://repo/examples/simple/programs_db.json) of the Python Wiki's [21 simple programs](https://repo/examples/simple/programs).
 
-### The SQLite tag database
+## The SQLite tag database
 
 This kind of database is fundamentally agnostic, but lends itself quite well to statistics. Its schema is:
 

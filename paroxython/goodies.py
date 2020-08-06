@@ -22,7 +22,7 @@ def title_to_slug_factory() -> Callable:
             so on.
 
     Examples:
-        See [`test_goodies.py`](https://repo/paroxython/tests/test_goodies.py).
+        See [`test_goodies.py`](https://repo/tests/test_goodies.py).
     """
     slug_counts: Dict[str, int] = defaultdict(int)
     cache: Dict[str, str] = {}

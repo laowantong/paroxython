@@ -60,12 +60,11 @@ complete path from the root of the AST to either a node (e.g., `Name()`) or a no
 
 Obviously, such a representation is quite verbose. But it encapsulates in every single line the
 whole nesting information we need to understand its context. Since the recursion is linearly
-encoded, requesting it does not require recursion any more. This makes [regular
-expressions](https://en.wikipedia.org/wiki/Regular_expression) a natural candidate for the request
-language[^regex-recursion]. This is the choice we made for the present version of Paroxython. The
-regular expression patterns are processed in `paroxython.parse_program` on the basis of the
-definitions listed in
-[`spec.md`](https://repo/paroxython/resources/spec.md).
+encoded, requesting it does not require recursion any more. Non-recursive[^regex-recursion]
+[regular expressions](https://en.wikipedia.org/wiki/Regular_expression) become a natural candidate
+for the request language. The current version of Paroxython explores this option. The regular
+expression patterns are processed in `paroxython.parse_program` on the basis of the definitions
+listed in [`spec.md`](https://repo/paroxython/resources/spec.md).
 
 [^regex-recursion]: Although nowadays, numerous flavours of regex engines support recursion,
 the complexity of writing, reading and maintaining any pattern using it would quickly go through the

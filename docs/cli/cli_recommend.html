@@ -35,7 +35,7 @@
 
     paroxython collect
 
-... and a pipeline of commands describing which concepts (taxons) are
+... and a pipeline of commands describing which concepts (taxa) are
 already known, which ones need to be illustrated or must be avoided. It
 results in a list of recommended programs, along with their total learning
 costs and the individual learning cost of each of the concepts they feature.
@@ -53,7 +53,9 @@ These results are presented in Markdown format.
                     • linear: simply count the number of new edges.
 -o --output=PATH    The path of the resulting report. If it is omitted, and
                     DB_PATH is of the form PREFIX_db.json, a value of
-                    PREFIX_recommendations.md is used. [default: ]
+                    PREFIX_recommendations.md is used. If it is STDOUT, the
+                    sorted list of recommended (but not hidden) programs, is
+                    printed on the standard output. [default: ]
 -p --pipe=PATH      Path of the command pipeline. If it is omitted, and
                     DB_PATH is of the form PREFIX_db.json, a value of
                     PREFIX_pipe.py is used. If the associated file is
@@ -62,7 +64,7 @@ These results are presented in Markdown format.
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli_recommend.py#L0-L75" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli_recommend.py#L0-L83" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">import json
 import sys
@@ -89,12 +91,18 @@ def cli_wrapper(args):
         sys.exit(f&#34;No pipeline at &#39;{pipeline_path}&#39;: aborted.&#34;)
     else:
         commands = []
+    stdout_backup = sys.stdout
+    if args[&#34;--output&#34;].upper() == &#34;STDOUT&#34;:
+        sys.stdout = sys.stderr
     rec = Recommendations(
         db=json.loads(db_path.read_text()),
         base_path=Path(args[&#34;--base&#34;] or parent_path),
         assessment_strategy=args[&#34;--cost&#34;],
     )
     rec.run_pipeline(commands)
+    if args[&#34;--output&#34;].upper() == &#34;STDOUT&#34;:
+        sys.stdout = stdout_backup
+        return print(&#34;\n&#34;.join(sorted(rec.selected_programs - rec.hidden_programs)))
     output_path = Path(args[&#34;--output&#34;] or parent_path / f&#34;{prefix}_recommendations.md&#34;)
     output_path.write_text(rec.get_markdown())
     print(f&#34;Dumped: {output_path.resolve()}.\n&#34;)</code></pre>
@@ -115,7 +123,7 @@ def cli_wrapper(args):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli_recommend.py#L53-L76" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli_recommend.py#L55-L84" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def cli_wrapper(args):
     db_path = Path(args[&#34;DB_PATH&#34;])
@@ -132,12 +140,18 @@ def cli_wrapper(args):
         sys.exit(f&#34;No pipeline at &#39;{pipeline_path}&#39;: aborted.&#34;)
     else:
         commands = []
+    stdout_backup = sys.stdout
+    if args[&#34;--output&#34;].upper() == &#34;STDOUT&#34;:
+        sys.stdout = sys.stderr
     rec = Recommendations(
         db=json.loads(db_path.read_text()),
         base_path=Path(args[&#34;--base&#34;] or parent_path),
         assessment_strategy=args[&#34;--cost&#34;],
     )
     rec.run_pipeline(commands)
+    if args[&#34;--output&#34;].upper() == &#34;STDOUT&#34;:
+        sys.stdout = stdout_backup
+        return print(&#34;\n&#34;.join(sorted(rec.selected_programs - rec.hidden_programs)))
     output_path = Path(args[&#34;--output&#34;] or parent_path / f&#34;{prefix}_recommendations.md&#34;)
     output_path.write_text(rec.get_markdown())
     print(f&#34;Dumped: {output_path.resolve()}.\n&#34;)</code></pre>

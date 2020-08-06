@@ -33,11 +33,11 @@ the learning costs of its final state.</p>
 <p>The recommendation system is initialized with a database created by <code><a title="paroxython.make_db" href="make_db.html">paroxython.make_db</a></code>. It parses
 the given pipeline
 (<a href="https://github.com/laowantong/paroxython/blob/master/examples/dummy/pipe.py">example</a>), checks
-its commands and submits them to the filter, which in response updates three sets:</p>
+its commands and submits them to the filter, which in response updates these sets:</p>
 <ul>
-<li><code>selected_programs</code>, the recommended programs;</li>
+<li><code>selected_programs</code>, the names of the recommended programs;</li>
 <li><code>imparted_knowledge</code>, the taxa modelizing the imparted knowledge;</li>
-<li><code>hidden_taxa</code>, the taxa to be removed from the final output.</li>
+<li><code>hidden_programs</code>/<code>hidden_taxa</code>, the programs/taxa to be removed from the final output.</li>
 </ul>
 <p>When the pipeline is exhausted, it retrieves their values, compute the associated learning costs,
 and produces a Markdown report

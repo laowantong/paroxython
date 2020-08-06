@@ -6,9 +6,9 @@
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/paroxython)
 [![GitHub Release](https://img.shields.io/github/release/laowantong/paroxython.svg?style=flat)]()
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/laowantong/paroxython)
-![paroxython SLOC](https://img.shields.io/badge/main%20program-~1600%20SLOC-blue)
+![paroxython SLOC](https://img.shields.io/badge/main%20program-~1650%20SLOC-blue)
 ![tests SLOC](https://img.shields.io/badge/tests-~2650%20SLOC-blue)
-![helpers SLOC](https://img.shields.io/badge/helpers-~800%20SLOC-blue)
+![helpers SLOC](https://img.shields.io/badge/helpers-~850%20SLOC-blue)
 [![GitHub commit activity](https://img.shields.io/github/commit-activity/y/laowantong/paroxython.svg?style=flat)]()
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -49,7 +49,7 @@ Paroxython aims to help you select, from your collection, the one program that s
 > - What problems use the same algorithmic and data structures as this one?
 > - What homework assignment should I give my students so they can practice the content of the last lesson?
 
-Knowing what your class knows, Paroxython can recommend the right program at the right time:
+Moreover, since Paroxython knows what your class knows, it can recommend the right program at the right time:
 
 > - What would make a good review exercise?
 > - Which exercises can I give on this exam?
@@ -149,7 +149,7 @@ If you use Jupyter notebook/lab, you've also just installed a so-called magic co
 %load_ext paroxython
 ```
 
-This should print `"Paroxython 0.4.4 loaded."`. Run it on a cell of Python code (line numbers added for clarity):
+This should print `"paroxython 0.4.4 loaded."`. Run it on a cell of Python code (line numbers added for clarity):
 
 ```python
 1   %%paroxython
@@ -173,6 +173,7 @@ This should print `"Paroxython 0.4.4 loaded."`. Run it on a cell of Python code 
 | `subroutine/argument/arg` | 2 |
 | `subroutine/function` | 2-8 |
 | `test/inequality` | 5 |
+| `type/boolean` | 5 |
 | `type/number/integer/literal` | 4 |
 | `type/number/integer/literal/zero` | 4 |
 | `type/sequence/list` | 6 |

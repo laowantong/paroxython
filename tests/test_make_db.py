@@ -43,8 +43,8 @@ def test_prepared_labels():
     }
 
 
-def test_prepared_taxons():
-    taxons = [
+def test_prepared_taxa():
+    taxa = [
         (
             "name_1",
             Counter({Span(start=1, end=2, path="foo"): 2, Span(start=1, end=2, path="bar"): 1}),
@@ -55,7 +55,7 @@ def test_prepared_taxons():
         ),
         ("name_3", Counter({Span(start=5, end=5, path="foobar"): 1})),
     ]
-    result = prepared_taxa(taxons)
+    result = prepared_taxa(taxa)
     print(result)
     assert result == {
         "name_1": [(1, 2), (1, 2)],

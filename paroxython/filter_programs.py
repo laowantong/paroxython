@@ -1,19 +1,15 @@
 """Evolve a set of selected programs and a set of taxa representing the imparted knowledge.
 
-Description:
-    Initially, all programs in the tag database are selected, and the imparted knowledge is empty.
-
-    ..note::
-        As the filter evolves, the former set can only shrink, and the latter only increase.
-
-    The class stores the state of these two sets and provides a collection of operators to be
-    applied on them during the execution of the pipeline (see `paroxython.recommend_programs`).
-
-## Internal calls
+The class stores the state of these two sets and provides a collection of operators to be applied
+on them during the execution of the pipeline (see `paroxython.recommend_programs`). Two additional
+sets, less important, are maintained: the programs and the taxa to be hidden during the display of
+the final result.
 
 .. image:: resources/filter_flow.png
 
-
+.. note::
+    Initially, all programs in the tag database are selected. The three others sets are empty. As
+    the filter evolves, the first set can only shrink, and the other ones only increase.
 """
 
 from collections import Counter as counter
@@ -281,10 +277,10 @@ class ProgramFilter:
         return (resulting_programs, resulting_taxa)
 
     def programs_of_criteria(self, criteria: List[Criterion], follow: bool) -> Counter[ProgramName]:
-        """Calculate the set of programs that meet at least one of the criteria criteria.
+        """Calculate the set of programs that meet at least one of the criteria.
 
         Description:
-            Each criteria criterion may be either:
+            Each criterion may be either:
 
             - a string, which will be interpreted either as:
                 - a program name pattern (ending with `".py"`). All programs matching it are
