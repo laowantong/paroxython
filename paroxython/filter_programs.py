@@ -230,11 +230,12 @@ class ProgramFilter:
         """
         if operation in ("impart", "hide"):
             patterns = [str(criterion) for criterion in criteria]
-            (program_set, taxon_set) = self.programs_and_taxa_of_patterns(patterns)
             if operation == "impart":
+                (program_set, taxon_set) = self.programs_and_taxa_of_patterns(patterns)
                 self.exclude_programs(program_set, follow=False)
                 self.impart_taxa(taxon_set)
             else:
+                (program_set, taxon_set) = self.programs_or_taxa_of_patterns(patterns)
                 self.hidden_programs.update(program_set)
                 self.hidden_taxa.update(taxon_set)
         else:
@@ -255,7 +256,8 @@ class ProgramFilter:
             Each pattern is a string which is interpreted either as:
 
             - a program name pattern (ending with `".py"`). All programs matching it are accumulated
-                in the result, along with any taxon they feature, directly or by importation;
+                in the result, _along with any taxon they feature, directly or by importation, this
+                being the only difference with `ProgramFilter.programs_or_taxa_of_patterns`_;
             - or a taxon name pattern. All taxa matching it are accumulated in the result.
 
         Args:
@@ -274,6 +276,19 @@ class ProgramFilter:
             else:
                 taxa = self.taxa_of_pattern(pattern)
             resulting_taxa.update(taxa)
+        return (resulting_programs, resulting_taxa)
+
+    def programs_or_taxa_of_patterns(
+        self, patterns: List[str]
+    ) -> Tuple[ProgramNameSet, TaxonNameSet]:
+        """See `ProgramFilter.programs_and_taxa_of_patterns`, minus the part in _italics_."""
+        resulting_taxa: TaxonNameSet = set()
+        resulting_programs: ProgramNameSet = set()
+        for pattern in patterns:
+            if pattern.endswith(".py"):
+                resulting_programs.update(self.programs_of_pattern(pattern))
+            else:
+                resulting_taxa.update(self.taxa_of_pattern(pattern))
         return (resulting_programs, resulting_taxa)
 
     def programs_of_criteria(self, criteria: List[Criterion], follow: bool) -> Counter[ProgramName]:
@@ -541,9 +556,12 @@ class ProgramFilter:
 # "__init__" -> "add_imported_taxa"
 # "init_filter_state" -> "taxa_of_programs"  [style=invis]
 # "update_filter" -> "programs_and_taxa_of_patterns"
+# "update_filter" -> "programs_or_taxa_of_patterns"
 # "programs_and_taxa_of_patterns" -> "programs_of_pattern"
 # "programs_and_taxa_of_patterns" -> "taxa_of_programs"
 # "programs_and_taxa_of_patterns" -> "taxa_of_pattern"
+# "programs_or_taxa_of_patterns" -> "programs_of_pattern"
+# "programs_or_taxa_of_patterns" -> "taxa_of_pattern"
 # "update_filter" -> "programs_of_criteria"
 # "programs_of_criteria" -> "programs_of_pattern"
 # "programs_of_criteria" -> "programs_of_taxa"

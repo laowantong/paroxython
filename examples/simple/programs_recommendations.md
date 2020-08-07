@@ -7,8 +7,8 @@
 - [`5 programs of learning cost in [4, 8[`](#5-programs-of-learning-cost-in-4-8)
     - [`10_time.py`](#program-10_timepy-learning-cost-45625)
     - [`21_xml_html_parsing.py`](#program-21_xml_html_parsingpy-learning-cost-53125)
+    - [`12_classes.py`](#program-12_classespy-learning-cost-553125)
     - [`14_median.py`](#program-14_medianpy-learning-cost-59375)
-    - [`12_classes.py`](#program-12_classespy-learning-cost-603125)
     - [`33_guess_the_number.py`](#program-33_guess_the_numberpy-learning-cost-603125)
 # Recommended programs
 
@@ -29,8 +29,10 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
+| 0.25 | `call/composition` | 7 |
 | 0 | `call/function/builtin/open` | 5 |
 | 0 | `call/function/builtin/print` | 4, 7, 8 |
+| 0 | `call/function/builtin/sorted` | 3 |
 | 0 | `call/function/without_arguments` | 8 |
 | 0.375 | `call/method/glob` | 2 |
 | 0.375 | `call/method/rstrip` | 7 |
@@ -42,6 +44,8 @@
 | 0.125 | `operator/string/concatenation` | 4, 7 |
 | 0 | `type/sequence/string` | 7 |
 | 0 | `type/sequence/string/literal` | 2, 4, 7 |
+| 0 | `variable/assignment/single` | 2 |
+| 0 | `metadata/program` | 1-8 |
 | 0 | `metadata/sloc/8` | 1-8 |
 
 ---
@@ -59,12 +63,18 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
+| 0.25 | `call/composition` | 3 |
+| 0 | `call/function/builtin/casting/int` | 3 |
 | 0 | `call/function/builtin/print` | 4, 6 |
 | 0 | `call/function/builtin/sum` | 3 |
 | 0 | `flow/exception/catch/ValueError` | 2-6 |
 | 0.875 | `library/standard/sys` | 1 |
 | 0.875 | `subscript/slice/start` | 3 |
+| 0.375 | `type/number/integer` | 3 |
+| 0.4375 | `type/number/integer/literal` | 3 |
 | 0 | `type/sequence/string/literal` | 4, 6 |
+| 0 | `variable/assignment/single` | 3 |
+| 0 | `metadata/program` | 1-6 |
 | 0 | `metadata/sloc/6` | 1-6 |
 
 ---
@@ -80,16 +90,21 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
+| 0.25 | `call/composition` | 3 |
 | 0 | `call/function/builtin/print` | 3 |
 | 0.375 | `call/method/format` | 3 |
 | 0 | `flow/loop/exit/late` | 2-4 |
 | 0 | `flow/loop/while` | 2-4 |
+| 0.375 | `operator/arithmetic/addition` | 4 |
 | 0.75 | `test/inequality` | 2 |
+| 0.25 | `type/boolean` | 2 |
+| 0.4375 | `type/number/integer/literal` | 1, 1, 2 |
 | 0 | `type/sequence/string` | 3 |
 | 0 | `type/sequence/string/literal` | 3 |
 | 0.1875 | `type/sequence/tuple/literal` | 1, 1, 4, 4 |
 | 0.125 | `variable/assignment/parallel` | 1 |
 | 0.1875 | `variable/assignment/parallel/slide` | 4 |
+| 0 | `metadata/program` | 1-4 |
 | 0 | `metadata/sloc/4` | 1-4 |
 
 ---
@@ -126,8 +141,13 @@
 | 0.375 | `subroutine/argument/no` | 2-7 |
 | 0.25 | `subroutine/generator` | 2-7 |
 | 0.75 | `test/inequality` | 9 |
+| 0.25 | `type/boolean` | 9 |
 | 0.4375 | `type/boolean/literal/True` | 4 |
+| 0.4375 | `type/number/integer/literal` | 3, 9 |
 | 0 | `type/sequence` | 3 |
+| 0 | `variable/assignment/single` | 3, 5, 7 |
+| 0 | `metadata/program` | 1-11 |
+| 0 | `metadata/sloc/11` | 1-11 |
 
 ---
 
@@ -157,7 +177,9 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
+| 0.25 | `call/composition` | 12 |
 | 0 | `call/function/builtin/print` | 14, 17 |
+| 0 | `call/function/builtin/sorted` | 12 |
 | 0 | `call/function/localtime` | 10 |
 | 0 | `call/function/without_arguments` | 10 |
 | 0.375 | `call/method/keys` | 12 |
@@ -165,10 +187,15 @@
 | 0 | `flow/loop/exit/early/break/else` | 12-17 |
 | 0 | `flow/loop/for` | 12-17 |
 | 0.9375 | `library/standard/time/localtime` | 1 |
+| 0.75 | `subscript/index` | 14 |
 | 0.75 | `test/inequality` | 13 |
+| 0.25 | `type/boolean` | 13 |
 | 0.375 | `type/non_sequence/dictionary` | 12 |
 | 0.4375 | `type/non_sequence/dictionary/literal` | 2 |
+| 0.4375 | `type/number/integer/literal` | 3, 4, 5, 6, 7, 8 |
 | 0 | `type/sequence/string/literal` | 3, 4, 5, 6, 7, 8, 17 |
+| 0 | `variable/assignment/single` | 2, 10, 11 |
+| 0 | `metadata/program` | 1-17 |
 | 0 | `metadata/sloc/17` | 1-17 |
 
 ---
@@ -194,6 +221,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
+| 0.25 | `call/composition` | 14 |
 | 0 | `call/function/builtin/print` | 14 |
 | 0.375 | `call/method/format` | 14 |
 | 0.375 | `call/method/fromstring` | 9 |
@@ -204,34 +232,20 @@
 | 0.875 | `library/standard/xml.etree.ElementTree` | 8 |
 | 0.375 | `operator/boolean/and` | 13 |
 | 0.875 | `test/belonging/not` | 13 |
+| 0.75 | `test/equality` | 13 |
+| 0.25 | `type/boolean` | 13, 13 |
 | 0.4375 | `type/non_sequence/set/literal` | 10 |
 | 0 | `type/sequence/string` | 14 |
 | 0 | `type/sequence/string/literal` | 7, 10, 10, 11, 13, 14 |
 | 0.1875 | `type/sequence/tuple/literal` | 12 |
 | 0.1875 | `variable/assignment/parallel/more_than_two` | 12 |
+| 0 | `variable/assignment/single` | 1, 9, 10 |
+| 0 | `metadata/program` | 1-14 |
 | 0 | `metadata/sloc/14` | 1-14 |
 
 ---
 
-### Program `14_median.py` (learning cost 5.9375)
-
-```python
-1   def median(pool):
-2       copy = sorted(pool)
-3       size = len(copy)
-4       if size % 2 == 1:
-5           return copy[int((size - 1) / 2)]
-6       else:
-7           return (copy[int(size / 2 - 1)] + copy[int(size / 2)]) / 2
-```
-
-| Cost  | Taxon | Location |
-|----|----|----|
-| 0 | `metadata/sloc/7` | 1-7 |
-
----
-
-### Program `12_classes.py` (learning cost 6.03125)
+### Program `12_classes.py` (learning cost 5.53125)
 
 ```python
 1   class BankAccount(object):
@@ -251,16 +265,64 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.375 | `call/class_constructor/BankAccount` | 10 |
+| 0.25 | `call/composition` | 12 |
 | 0 | `call/function/builtin/print` | 12 |
 | 0.375 | `call/method/overdrawn` | 12 |
 | 0.375 | `call/method/withdraw` | 11 |
+| 0.375 | `subroutine/argument/arg` | 2, 2, 4, 4, 6, 6, 8 |
+| 0.25 | `subroutine/function` | 8-9 |
+| 0.4375 | `subroutine/method/flavor/instance` | 2-3, 4-5, 6-7, 8-9 |
 | 0.4375 | `subroutine/method/naming/magic` | 2-3 |
+| 0 | `subroutine/procedure` | 2-3, 4-5, 6-7 |
+| 0.375 | `subroutine/return/something` | 9 |
 | 0.75 | `test/inequality` | 9 |
+| 0.25 | `type/boolean` | 9 |
+| 0.4375 | `type/number/integer/literal` | 10, 11 |
 | 0.46875 | `type/number/integer/literal/zero` | 2, 9 |
 | 0 | `variable/assignment` | 3 |
 | 0.1875 | `variable/assignment/augmented/Add` | 5 |
 | 0.1875 | `variable/assignment/augmented/Sub` | 7 |
+| 0 | `variable/assignment/single` | 10 |
+| 0 | `metadata/program` | 1-12 |
 | 0 | `metadata/sloc/12` | 1-12 |
+
+---
+
+### Program `14_median.py` (learning cost 5.9375)
+
+```python
+1   def median(pool):
+2       copy = sorted(pool)
+3       size = len(copy)
+4       if size % 2 == 1:
+5           return copy[int((size - 1) / 2)]
+6       else:
+7           return (copy[int(size / 2 - 1)] + copy[int(size / 2)]) / 2
+```
+
+| Cost  | Taxon | Location |
+|----|----|----|
+| 0 | `call/function/builtin/casting/int` | 5, 7, 7 |
+| 0 | `call/function/builtin/len` | 3 |
+| 0 | `call/function/builtin/sorted` | 2 |
+| 0 | `flow/conditional` | 4-7 |
+| 0 | `flow/conditional/else` | 7 |
+| 0.375 | `operator/arithmetic/addition` | 7 |
+| 0.375 | `operator/arithmetic/division` | 5, 7, 7, 7 |
+| 0.375 | `operator/arithmetic/modulo` | 4 |
+| 0.375 | `operator/arithmetic/substraction` | 5, 7 |
+| 0.375 | `subroutine/argument/arg` | 1 |
+| 0.25 | `subroutine/function` | 1-7 |
+| 0.375 | `subroutine/return/something` | 5, 7 |
+| 0.75 | `subscript/index` | 5, 7, 7 |
+| 0.875 | `test/divisibility/parity` | 4 |
+| 0.75 | `test/equality` | 4 |
+| 0.25 | `type/boolean` | 4 |
+| 0.375 | `type/number/integer` | 5, 7, 7 |
+| 0.4375 | `type/number/integer/literal` | 4, 4, 5, 5, 7, 7, 7, 7 |
+| 0 | `variable/assignment/single` | 2, 3 |
+| 0 | `metadata/program` | 1-7 |
+| 0 | `metadata/sloc/7` | 1-7 |
 
 ---
 
@@ -289,20 +351,30 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
+| 0.25 | `call/composition` | 5, 7, 16, 18 |
+| 0 | `call/function/builtin/casting/int` | 7 |
 | 0 | `call/function/builtin/input` | 3, 7 |
 | 0 | `call/function/builtin/print` | 5, 10, 12, 16, 18 |
 | 0.375 | `call/method/format` | 5, 16, 18 |
 | 0.375 | `call/method/randint` | 4 |
+| 0 | `flow/conditional` | 15-18 |
+| 0 | `flow/conditional/else` | 18 |
 | 0 | `flow/conditional/no_else` | 9-10, 11-12, 13-14 |
 | 0 | `flow/loop/exit/early/break` | 6-14 |
 | 0 | `flow/loop/while` | 6-14 |
 | 0.875 | `library/standard/random` | 1 |
 | 0.9375 | `pattern/states/accumulate/count` | 6-14 |
+| 0.75 | `test/equality` | 13, 15 |
 | 0.75 | `test/inequality` | 6, 9, 11 |
+| 0.25 | `type/boolean` | 6, 9, 11, 13, 15 |
+| 0.375 | `type/number/integer` | 7 |
+| 0.4375 | `type/number/integer/literal` | 4, 4, 6, 8 |
 | 0.46875 | `type/number/integer/literal/zero` | 2 |
 | 0 | `type/sequence/string` | 5, 16, 18 |
 | 0 | `type/sequence/string/literal` | 3, 5, 7, 10, 12, 16, 18 |
 | 0.1875 | `variable/assignment/augmented/Add` | 8 |
+| 0 | `variable/assignment/single` | 2, 3, 4, 7 |
+| 0 | `metadata/program` | 1-18 |
 | 0 | `metadata/sloc/18` | 1-18 |
 
 ---

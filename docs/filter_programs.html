@@ -41,7 +41,7 @@ the filter evolves, the first set can only shrink, and the other ones only incre
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L0-L561" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L0-L579" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">from collections import Counter as counter
 from collections import defaultdict
@@ -154,11 +154,12 @@ class ProgramFilter:
     ) -&gt; None:
         if operation in (&#34;impart&#34;, &#34;hide&#34;):
             patterns = [str(criterion) for criterion in criteria]
-            (program_set, taxon_set) = self.programs_and_taxa_of_patterns(patterns)
             if operation == &#34;impart&#34;:
+                (program_set, taxon_set) = self.programs_and_taxa_of_patterns(patterns)
                 self.exclude_programs(program_set, follow=False)
                 self.impart_taxa(taxon_set)
             else:
+                (program_set, taxon_set) = self.programs_or_taxa_of_patterns(patterns)
                 self.hidden_programs.update(program_set)
                 self.hidden_taxa.update(taxon_set)
         else:
@@ -183,6 +184,18 @@ class ProgramFilter:
             else:
                 taxa = self.taxa_of_pattern(pattern)
             resulting_taxa.update(taxa)
+        return (resulting_programs, resulting_taxa)
+
+    def programs_or_taxa_of_patterns(
+        self, patterns: List[str]
+    ) -&gt; Tuple[ProgramNameSet, TaxonNameSet]:
+        resulting_taxa: TaxonNameSet = set()
+        resulting_programs: ProgramNameSet = set()
+        for pattern in patterns:
+            if pattern.endswith(&#34;.py&#34;):
+                resulting_programs.update(self.programs_of_pattern(pattern))
+            else:
+                resulting_taxa.update(self.taxa_of_pattern(pattern))
         return (resulting_programs, resulting_taxa)
 
     def programs_of_criteria(self, criteria: List[Criterion], follow: bool) -&gt; Counter[ProgramName]:
@@ -288,9 +301,12 @@ class ProgramFilter:
 # &#34;__init__&#34; -&gt; &#34;add_imported_taxa&#34;
 # &#34;init_filter_state&#34; -&gt; &#34;taxa_of_programs&#34;  [style=invis]
 # &#34;update_filter&#34; -&gt; &#34;programs_and_taxa_of_patterns&#34;
+# &#34;update_filter&#34; -&gt; &#34;programs_or_taxa_of_patterns&#34;
 # &#34;programs_and_taxa_of_patterns&#34; -&gt; &#34;programs_of_pattern&#34;
 # &#34;programs_and_taxa_of_patterns&#34; -&gt; &#34;taxa_of_programs&#34;
 # &#34;programs_and_taxa_of_patterns&#34; -&gt; &#34;taxa_of_pattern&#34;
+# &#34;programs_or_taxa_of_patterns&#34; -&gt; &#34;programs_of_pattern&#34;
+# &#34;programs_or_taxa_of_patterns&#34; -&gt; &#34;taxa_of_pattern&#34;
 # &#34;update_filter&#34; -&gt; &#34;programs_of_criteria&#34;
 # &#34;programs_of_criteria&#34; -&gt; &#34;programs_of_pattern&#34;
 # &#34;programs_of_criteria&#34; -&gt; &#34;programs_of_taxa&#34;
@@ -326,7 +342,7 @@ class ProgramFilter:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L45-L535" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L45-L550" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">class ProgramFilter:
 
@@ -409,11 +425,12 @@ class ProgramFilter:
     ) -&gt; None:
         if operation in (&#34;impart&#34;, &#34;hide&#34;):
             patterns = [str(criterion) for criterion in criteria]
-            (program_set, taxon_set) = self.programs_and_taxa_of_patterns(patterns)
             if operation == &#34;impart&#34;:
+                (program_set, taxon_set) = self.programs_and_taxa_of_patterns(patterns)
                 self.exclude_programs(program_set, follow=False)
                 self.impart_taxa(taxon_set)
             else:
+                (program_set, taxon_set) = self.programs_or_taxa_of_patterns(patterns)
                 self.hidden_programs.update(program_set)
                 self.hidden_taxa.update(taxon_set)
         else:
@@ -438,6 +455,18 @@ class ProgramFilter:
             else:
                 taxa = self.taxa_of_pattern(pattern)
             resulting_taxa.update(taxa)
+        return (resulting_programs, resulting_taxa)
+
+    def programs_or_taxa_of_patterns(
+        self, patterns: List[str]
+    ) -&gt; Tuple[ProgramNameSet, TaxonNameSet]:
+        resulting_taxa: TaxonNameSet = set()
+        resulting_programs: ProgramNameSet = set()
+        for pattern in patterns:
+            if pattern.endswith(&#34;.py&#34;):
+                resulting_programs.update(self.programs_of_pattern(pattern))
+            else:
+                resulting_taxa.update(self.taxa_of_pattern(pattern))
         return (resulting_programs, resulting_taxa)
 
     def programs_of_criteria(self, criteria: List[Criterion], follow: bool) -&gt; Counter[ProgramName]:
@@ -799,7 +828,7 @@ patterns (strings) and/or predicates (triples).</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L197-L247" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L197-L248" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def update_filter(
     # fmt: off
@@ -811,11 +840,12 @@ patterns (strings) and/or predicates (triples).</dd>
 ) -&gt; None:
     if operation in (&#34;impart&#34;, &#34;hide&#34;):
         patterns = [str(criterion) for criterion in criteria]
-        (program_set, taxon_set) = self.programs_and_taxa_of_patterns(patterns)
         if operation == &#34;impart&#34;:
+            (program_set, taxon_set) = self.programs_and_taxa_of_patterns(patterns)
             self.exclude_programs(program_set, follow=False)
             self.impart_taxa(taxon_set)
         else:
+            (program_set, taxon_set) = self.programs_or_taxa_of_patterns(patterns)
             self.hidden_programs.update(program_set)
             self.hidden_taxa.update(taxon_set)
     else:
@@ -837,7 +867,8 @@ patterns (strings) and/or predicates (triples).</dd>
 <p>Each pattern is a string which is interpreted either as:</p>
 <ul>
 <li>a program name pattern (ending with <code>".py"</code>). All programs matching it are accumulated
-in the result, along with any taxon they feature, directly or by importation;</li>
+in the result, <em>along with any taxon they feature, directly or by importation, this
+being the only difference with <code><a title="paroxython.filter_programs.ProgramFilter.programs_or_taxa_of_patterns" href="#paroxython.filter_programs.ProgramFilter.programs_or_taxa_of_patterns">ProgramFilter.programs_or_taxa_of_patterns()</a></code></em>;</li>
 <li>or a taxon name pattern. All taxa matching it are accumulated in the result.</li>
 </ul>
 <h2 id="args">Args</h2>
@@ -853,7 +884,7 @@ in the result, along with any taxon they feature, directly or by importation;</l
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L249-L277" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L250-L279" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def programs_and_taxa_of_patterns(
     self, patterns: List[str]
@@ -868,6 +899,29 @@ in the result, along with any taxon they feature, directly or by importation;</l
         else:
             taxa = self.taxa_of_pattern(pattern)
         resulting_taxa.update(taxa)
+    return (resulting_programs, resulting_taxa)</code></pre>
+</details>
+</dd>
+<dt id="paroxython.filter_programs.ProgramFilter.programs_or_taxa_of_patterns"><code class="name flex">
+<span>def <span class="ident">programs_or_taxa_of_patterns</span></span>(<span>self, <br>patterns: List[str]<br>) ‑> Tuple[Set[ProgramName], Set[TaxonName]]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>See <code><a title="paroxython.filter_programs.ProgramFilter.programs_and_taxa_of_patterns" href="#paroxython.filter_programs.ProgramFilter.programs_and_taxa_of_patterns">ProgramFilter.programs_and_taxa_of_patterns()</a></code>, minus the part in <em>italics</em>.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L281-L292" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">def programs_or_taxa_of_patterns(
+    self, patterns: List[str]
+) -&gt; Tuple[ProgramNameSet, TaxonNameSet]:
+    resulting_taxa: TaxonNameSet = set()
+    resulting_programs: ProgramNameSet = set()
+    for pattern in patterns:
+        if pattern.endswith(&#34;.py&#34;):
+            resulting_programs.update(self.programs_of_pattern(pattern))
+        else:
+            resulting_taxa.update(self.taxa_of_pattern(pattern))
     return (resulting_programs, resulting_taxa)</code></pre>
 </details>
 </dd>
@@ -911,7 +965,7 @@ of criteria it meets.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L279-L323" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L294-L338" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def programs_of_criteria(self, criteria: List[Criterion], follow: bool) -&gt; Counter[ProgramName]:
     resulting_programs: Counter[ProgramName] = counter()
@@ -948,7 +1002,7 @@ instance, imparting a taxon <code>a/b/c</code>, will impart taxa <code>a</code> 
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L325-L338" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L340-L353" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def impart_taxa(self, taxa: TaxonNameSet) -&gt; None:
     for taxon in taxa:
@@ -973,7 +1027,7 @@ filtered out.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L340-L348" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L355-L363" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def include_programs(self, programs: ProgramNameSet) -&gt; None:
     self.selected_programs.intersection_update(programs)</code></pre>
@@ -995,7 +1049,7 @@ by transitivity) at least one member of the given <code>programs</code>.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L350-L361" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L365-L376" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def exclude_programs(self, programs: ProgramNameSet, follow: bool) -&gt; None:
     self.selected_programs.difference_update(programs)
@@ -1030,7 +1084,7 @@ span <code>s_2</code> of <code>taxon_2</code> for which <code>predicate(s_1, s_2
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L365-L398" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L380-L413" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def programs_of_triple(
     # fmt: off
@@ -1076,7 +1130,7 @@ is verified.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L400-L436" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L415-L451" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def programs_of_negated_triple(
     # fmt: off
@@ -1193,7 +1247,7 @@ for <code>((1, 1), (1, 1))</code>):</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L438-L535" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L453-L550" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def iterate_on_spans(
     # fmt: off
@@ -1247,6 +1301,7 @@ for <code>((1, 1), (1, 1))</code>):</p>
 <li><code><a title="paroxython.filter_programs.ProgramFilter.programs_of_taxa" href="#paroxython.filter_programs.ProgramFilter.programs_of_taxa">programs_of_taxa</a></code></li>
 <li><code><a title="paroxython.filter_programs.ProgramFilter.update_filter" href="#paroxython.filter_programs.ProgramFilter.update_filter">update_filter</a></code></li>
 <li><code><a title="paroxython.filter_programs.ProgramFilter.programs_and_taxa_of_patterns" href="#paroxython.filter_programs.ProgramFilter.programs_and_taxa_of_patterns">programs_and_taxa_of_patterns</a></code></li>
+<li><code><a title="paroxython.filter_programs.ProgramFilter.programs_or_taxa_of_patterns" href="#paroxython.filter_programs.ProgramFilter.programs_or_taxa_of_patterns">programs_or_taxa_of_patterns</a></code></li>
 <li><code><a title="paroxython.filter_programs.ProgramFilter.programs_of_criteria" href="#paroxython.filter_programs.ProgramFilter.programs_of_criteria">programs_of_criteria</a></code></li>
 <li><code><a title="paroxython.filter_programs.ProgramFilter.impart_taxa" href="#paroxython.filter_programs.ProgramFilter.impart_taxa">impart_taxa</a></code></li>
 <li><code><a title="paroxython.filter_programs.ProgramFilter.include_programs" href="#paroxython.filter_programs.ProgramFilter.include_programs">include_programs</a></code></li>
