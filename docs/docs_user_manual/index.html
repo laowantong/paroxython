@@ -341,7 +341,7 @@ GROUP BY taxon, program
 </ul>
 <p>The previous table extract represents the simplest case, where both taxon and label patterns are literal (they don't contain any metacharacter, more on that below).</p>
 <h3 id="1-0-mapping">1-0 mapping</h3>
-<p>At first glance, some of the labels generated during the first step seem redundant, e.g. <code>"binary_operator:Add"</code> and <code>"addition_operator"</code>. In fact, the former was used to calculate the latter. In <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md"><code>spec.md</code></a>, the definition of <code>"addition_operator"</code> is introduced by: </p>
+<p>At first glance, some of the labels generated during the first step seem redundant, e.g. <code>"binary_operator:Add"</code> and <code>"addition_operator"</code>. In fact, the former was used to calculate the latter. In <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md"><code>spec.md</code></a>, the definition of <code>"addition_operator"</code> is introduced by:</p>
 <blockquote>
 <p>An addition operator is a binary operator <code>Add</code> which has not be classified as a concatenation operator.</p>
 </blockquote>

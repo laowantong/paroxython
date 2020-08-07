@@ -5,7 +5,7 @@
             "01_hello_world.py",
             "02_input_name.py",
             "subroutine/procedure",
-            "call/function",
+            "appli/function",
             "flow",
         ],
     },

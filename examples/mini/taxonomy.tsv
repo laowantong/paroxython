@@ -1,6 +1,6 @@
 Taxa (replacement patterns)	Labels (search patterns)
-call/function/builtin/casting/set	literal:Set
-call/function/builtin/casting/\1	free_call:(list|dict)
+appli/function/builtin/casting/set	literal:Set
+appli/function/builtin/casting/\1	free_call:(list|dict)
 flow/conditional	if
 flow/conditional/else	if_else
 test/inequality	comparison_operator:(Lt|LtE|Gt|GtE)

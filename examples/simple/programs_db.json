@@ -16,7 +16,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "call/function/builtin/print": [[1,1]],
+        "appli/function/builtin/print": [[1,1]],
         "io/standard/print": [[1,1]],
         "metadata/program": [[1,1]],
         "metadata/sloc/1": [[1,1]],
@@ -48,8 +48,8 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "call/function/builtin/input": [[1,1]],
-        "call/function/builtin/print": [[2,2]],
+        "appli/function/builtin/input": [[1,1]],
+        "appli/function/builtin/print": [[2,2]],
         "io/standard/input": [[1,1]],
         "io/standard/print": [[2,2]],
         "metadata/program": [[1,2]],
@@ -95,10 +95,10 @@
         "whole_span:3": [[1,3]]
       },
       "taxa": {
-        "call/composition": [[3,3]],
-        "call/function/builtin/enumerate": [[2,2]],
-        "call/function/builtin/print": [[3,3]],
-        "call/method/format": [[3,3]],
+        "appli/composition": [[3,3]],
+        "appli/function/builtin/enumerate": [[2,2]],
+        "appli/function/builtin/print": [[3,3]],
+        "appli/method/format": [[3,3]],
         "flow/loop/exit/late": [[2,3]],
         "flow/loop/for": [[2,3]],
         "flow/loop/for/elements_and_indexes": [[2,3]],
@@ -160,9 +160,9 @@
         "whole_span:4": [[1,4]]
       },
       "taxa": {
-        "call/composition": [[3,3]],
-        "call/function/builtin/print": [[3,3]],
-        "call/method/format": [[3,3]],
+        "appli/composition": [[3,3]],
+        "appli/function/builtin/print": [[3,3]],
+        "appli/method/format": [[3,3]],
         "flow/loop/exit/late": [[2,4]],
         "flow/loop/while": [[2,4]],
         "io/standard/print": [[3,3]],
@@ -205,8 +205,8 @@
         "whole_span:5": [[1,5]]
       },
       "taxa": {
-        "call/function": [[3,3],[4,4],[5,5]],
-        "call/function/builtin/print": [[2,2]],
+        "appli/function": [[3,3],[4,4],[5,5]],
+        "appli/function/builtin/print": [[2,2]],
         "io/standard/print": [[2,2]],
         "metadata/program": [[1,5]],
         "metadata/sloc/5": [[1,5]],
@@ -249,8 +249,8 @@
         "whole_span:6": [[1,6]]
       },
       "taxa": {
-        "call/function/builtin/print": [[4,4],[6,6]],
-        "call/method/match": [[3,3]],
+        "appli/function/builtin/print": [[4,4],[6,6]],
+        "appli/method/match": [[3,3]],
         "flow/conditional": [[3,6]],
         "flow/conditional/else": [[6,6]],
         "flow/loop/exit/late": [[2,6]],
@@ -314,8 +314,8 @@
         "whole_span:4": [[1,4]]
       },
       "taxa": {
-        "call/function/builtin/print": [[4,4]],
-        "call/function/builtin/sum": [[3,3]],
+        "appli/function/builtin/print": [[4,4]],
+        "appli/function/builtin/sum": [[3,3]],
         "io/standard/print": [[4,4]],
         "metadata/program": [[1,4]],
         "metadata/sloc/4": [[1,4]],
@@ -377,10 +377,10 @@
         "whole_span:6": [[1,6]]
       },
       "taxa": {
-        "call/composition": [[3,3]],
-        "call/function/builtin/casting/int": [[3,3]],
-        "call/function/builtin/print": [[4,4],[6,6]],
-        "call/function/builtin/sum": [[3,3]],
+        "appli/composition": [[3,3]],
+        "appli/function/builtin/casting/int": [[3,3]],
+        "appli/function/builtin/print": [[4,4],[6,6]],
+        "appli/function/builtin/sum": [[3,3]],
         "flow/exception/catch/ValueError": [[2,6]],
         "io/standard/print": [[4,4],[6,6]],
         "library/standard/sys": [[1,1]],
@@ -439,13 +439,13 @@
         "whole_span:8": [[1,8]]
       },
       "taxa": {
-        "call/composition": [[7,7]],
-        "call/function/builtin/open": [[5,5]],
-        "call/function/builtin/print": [[4,4],[7,7],[8,8]],
-        "call/function/builtin/sorted": [[3,3]],
-        "call/function/without_arguments": [[8,8]],
-        "call/method/glob": [[2,2]],
-        "call/method/rstrip": [[7,7]],
+        "appli/composition": [[7,7]],
+        "appli/function/builtin/open": [[5,5]],
+        "appli/function/builtin/print": [[4,4],[7,7],[8,8]],
+        "appli/function/builtin/sorted": [[3,3]],
+        "appli/function/without_arguments": [[8,8]],
+        "appli/method/glob": [[2,2]],
+        "appli/method/rstrip": [[7,7]],
         "flow/loop/exit/late": [[3,8],[6,7]],
         "flow/loop/for": [[3,8]],
         "flow/loop/for/elements": [[6,7]],
@@ -532,12 +532,12 @@
         "whole_span:17": [[1,17]]
       },
       "taxa": {
-        "call/composition": [[12,12]],
-        "call/function/builtin/print": [[14,14],[17,17]],
-        "call/function/builtin/sorted": [[12,12]],
-        "call/function/localtime": [[10,10]],
-        "call/function/without_arguments": [[10,10]],
-        "call/method/keys": [[12,12]],
+        "appli/composition": [[12,12]],
+        "appli/function/builtin/print": [[14,14],[17,17]],
+        "appli/function/builtin/sorted": [[12,12]],
+        "appli/function/localtime": [[10,10]],
+        "appli/function/without_arguments": [[10,10]],
+        "appli/method/keys": [[12,12]],
         "flow/conditional/no_else": [[13,15]],
         "flow/loop/exit/early/break/else": [[12,17]],
         "flow/loop/for": [[12,17]],
@@ -601,7 +601,7 @@
         "whole_span:10": [[1,10]]
       },
       "taxa": {
-        "call/function/builtin/print": [[9,9]],
+        "appli/function/builtin/print": [[9,9]],
         "flow/loop/exit/late": [[8,10]],
         "flow/loop/while": [[8,10]],
         "io/standard/print": [[9,9]],
@@ -635,7 +635,6 @@
         "call_argument:": [[12,12],[12,12]],
         "call_argument:15": [[10,10]],
         "call_argument:50": [[11,11]],
-        "class:BankAccount": [[1,9]],
         "comparison_operator:Lt": [[9,9]],
         "composition": [[12,12]],
         "external_free_call:BankAccount": [[10,10]],
@@ -693,12 +692,11 @@
         "whole_span:12": [[1,12]]
       },
       "taxa": {
-        "call/class_constructor/BankAccount": [[10,10]],
-        "call/composition": [[12,12]],
-        "call/function/builtin/print": [[12,12]],
-        "call/method/overdrawn": [[12,12]],
-        "call/method/withdraw": [[11,11]],
-        "class": [[1,9]],
+        "appli/class_constructor/BankAccount": [[10,10]],
+        "appli/composition": [[12,12]],
+        "appli/function/builtin/print": [[12,12]],
+        "appli/method/overdrawn": [[12,12]],
+        "appli/method/withdraw": [[11,11]],
         "io/standard/print": [[12,12]],
         "metadata/program": [[1,12]],
         "metadata/sloc/12": [[1,12]],
@@ -737,7 +735,6 @@
         "call_argument:7": [[11,11]],
         "call_argument:copy": [[4,4]],
         "call_argument:pool": [[3,3]],
-        "class:TestMedian": [[9,11]],
         "comparison_operator:Eq": [[5,5]],
         "composition": [[11,11]],
         "divisibility_test:2": [[5,5]],
@@ -802,13 +799,12 @@
         "whole_span:11": [[1,11]]
       },
       "taxa": {
-        "call/composition": [[11,11]],
-        "call/function": [[11,11]],
-        "call/function/builtin/casting/int": [[6,6],[8,8],[8,8]],
-        "call/function/builtin/len": [[4,4]],
-        "call/function/builtin/sorted": [[3,3]],
-        "call/method/assertEqual": [[11,11]],
-        "class": [[9,11]],
+        "appli/composition": [[11,11]],
+        "appli/function": [[11,11]],
+        "appli/function/builtin/casting/int": [[6,6],[8,8],[8,8]],
+        "appli/function/builtin/len": [[4,4]],
+        "appli/function/builtin/sorted": [[3,3]],
+        "appli/method/assertEqual": [[11,11]],
         "flow/conditional": [[5,8]],
         "flow/conditional/else": [[8,8]],
         "library/standard/unittest": [[1,1]],
@@ -890,9 +886,9 @@
         "whole_span:7": [[1,7]]
       },
       "taxa": {
-        "call/function/builtin/casting/int": [[5,5],[7,7],[7,7]],
-        "call/function/builtin/len": [[3,3]],
-        "call/function/builtin/sorted": [[2,2]],
+        "appli/function/builtin/casting/int": [[5,5],[7,7],[7,7]],
+        "appli/function/builtin/len": [[3,3]],
+        "appli/function/builtin/sorted": [[2,2]],
         "flow/conditional": [[4,7]],
         "flow/conditional/else": [[7,7]],
         "metadata/program": [[1,7]],
@@ -957,11 +953,11 @@
         "whole_span:9": [[1,9]]
       },
       "taxa": {
-        "call/composition": [[9,9]],
-        "call/function/builtin/print": [[9,9]],
-        "call/function/groupby": [[7,7]],
-        "call/method/join": [[9,9]],
-        "call/method/splitlines": [[6,6]],
+        "appli/composition": [[9,9]],
+        "appli/function/builtin/print": [[9,9]],
+        "appli/function/groupby": [[7,7]],
+        "appli/method/join": [[9,9]],
+        "appli/method/splitlines": [[6,6]],
         "flow/conditional/no_else": [[8,9]],
         "flow/loop/exit/late": [[7,9]],
         "flow/loop/for": [[7,9]],
@@ -1084,15 +1080,15 @@
         "whole_span:18": [[1,18]]
       },
       "taxa": {
-        "call/composition": [[17,17],[18,18],[18,18]],
-        "call/function": [[17,17]],
-        "call/function/builtin/casting/float": [[17,17],[18,18]],
-        "call/function/builtin/open": [[4,4],[13,13]],
-        "call/function/builtin/print": [[18,18]],
-        "call/method/format": [[18,18]],
-        "call/method/reader": [[14,14]],
-        "call/method/writer": [[5,5]],
-        "call/method/writerows": [[6,6]],
+        "appli/composition": [[17,17],[18,18],[18,18]],
+        "appli/function": [[17,17]],
+        "appli/function/builtin/casting/float": [[17,17],[18,18]],
+        "appli/function/builtin/open": [[4,4],[13,13]],
+        "appli/function/builtin/print": [[18,18]],
+        "appli/method/format": [[18,18]],
+        "appli/method/reader": [[14,14]],
+        "appli/method/writer": [[5,5]],
+        "appli/method/writerows": [[6,6]],
         "flow/loop/exit/late": [[16,18]],
         "flow/loop/for/elements": [[16,18]],
         "io/file/open": [[4,4],[13,13]],
@@ -1238,10 +1234,10 @@
         "whole_span:20": [[1,20]]
       },
       "taxa": {
-        "call/function": [[12,12],[17,17],[19,19]],
-        "call/function/builtin/print": [[20,20]],
-        "call/function/builtin/range": [[15,15]],
-        "call/function/builtin/reversed": [[4,4]],
+        "appli/function": [[12,12],[17,17],[19,19]],
+        "appli/function/builtin/print": [[20,20]],
+        "appli/function/builtin/range": [[15,15]],
+        "appli/function/builtin/reversed": [[4,4]],
         "flow/conditional/guard": [[10,11]],
         "flow/conditional/no_else": [[6,7],[10,11]],
         "flow/loop/exit/early/return": [[4,7]],
@@ -1350,11 +1346,11 @@
         "yield:prime": [[6,6]]
       },
       "taxa": {
-        "call/function/builtin/filter": [[7,7]],
-        "call/function/builtin/next": [[5,5]],
-        "call/function/builtin/print": [[11,11]],
-        "call/function/without_arguments": [[8,8]],
-        "call/method/count": [[3,3]],
+        "appli/function/builtin/filter": [[7,7]],
+        "appli/function/builtin/next": [[5,5]],
+        "appli/function/builtin/print": [[11,11]],
+        "appli/function/without_arguments": [[8,8]],
+        "appli/method/count": [[3,3]],
         "flow/conditional/no_else": [[9,10]],
         "flow/loop/exit/early/break": [[8,11]],
         "flow/loop/exit/late": [[4,7]],
@@ -1434,11 +1430,11 @@
         "whole_span:14": [[1,14]]
       },
       "taxa": {
-        "call/composition": [[14,14]],
-        "call/function/builtin/print": [[14,14]],
-        "call/method/format": [[14,14]],
-        "call/method/fromstring": [[9,9]],
-        "call/method/getiterator": [[11,11]],
+        "appli/composition": [[14,14]],
+        "appli/function/builtin/print": [[14,14]],
+        "appli/method/format": [[14,14]],
+        "appli/method/fromstring": [[9,9]],
+        "appli/method/getiterator": [[11,11]],
         "flow/conditional/no_else": [[13,14]],
         "flow/loop/exit/late": [[11,14]],
         "flow/loop/for": [[11,14]],
@@ -1488,7 +1484,6 @@
         "call_argument:queens": [[23,23]],
         "call_argument:test_queens": [[14,14],[15,15],[18,18]],
         "chained_assignment": [[5,5]],
-        "class:BailOut": [[2,3]],
         "comparison_operator:Eq": [[15,15]],
         "comparison_operator:In": [[8,8]],
         "composition": [[24,24]],
@@ -1598,14 +1593,13 @@
         "whole_span:24": [[1,24]]
       },
       "taxa": {
-        "call/composition": [[24,24]],
-        "call/function": [[14,14],[18,18],[22,22]],
-        "call/function/builtin/len": [[15,15]],
-        "call/function/builtin/print": [[23,23],[24,24]],
-        "call/function/builtin/range": [[11,11]],
-        "call/function/builtin/reversed": [[6,6]],
-        "call/method/join": [[24,24]],
-        "class": [[2,3]],
+        "appli/composition": [[24,24]],
+        "appli/function": [[14,14],[18,18],[22,22]],
+        "appli/function/builtin/len": [[15,15]],
+        "appli/function/builtin/print": [[23,23],[24,24]],
+        "appli/function/builtin/range": [[11,11]],
+        "appli/function/builtin/reversed": [[6,6]],
+        "appli/method/join": [[24,24]],
         "flow/conditional": [[15,18]],
         "flow/conditional/else": [[18,18]],
         "flow/conditional/no_else": [[8,9]],
@@ -1724,12 +1718,12 @@
         "whole_span:18": [[1,18]]
       },
       "taxa": {
-        "call/composition": [[5,5],[7,7],[16,16],[18,18]],
-        "call/function/builtin/casting/int": [[7,7]],
-        "call/function/builtin/input": [[3,3],[7,7]],
-        "call/function/builtin/print": [[5,5],[10,10],[12,12],[16,16],[18,18]],
-        "call/method/format": [[5,5],[16,16],[18,18]],
-        "call/method/randint": [[4,4]],
+        "appli/composition": [[5,5],[7,7],[16,16],[18,18]],
+        "appli/function/builtin/casting/int": [[7,7]],
+        "appli/function/builtin/input": [[3,3],[7,7]],
+        "appli/function/builtin/print": [[5,5],[10,10],[12,12],[16,16],[18,18]],
+        "appli/method/format": [[5,5],[16,16],[18,18]],
+        "appli/method/randint": [[4,4]],
         "flow/conditional": [[15,18]],
         "flow/conditional/else": [[18,18]],
         "flow/conditional/no_else": [[9,10],[11,12],[13,14]],
@@ -2311,15 +2305,6 @@
     "chained_assignment": [
       "18_queens.py",
       "28_queens.py"
-    ],
-    "class:BailOut": [
-      "28_queens.py"
-    ],
-    "class:BankAccount": [
-      "12_classes.py"
-    ],
-    "class:TestMedian": [
-      "13_unit_testing.py"
     ],
     "comparison_operator:Eq": [
       "13_unit_testing.py",
@@ -4064,10 +4049,10 @@
     ]
   },
   "taxa": {
-    "call/class_constructor/BankAccount": [
+    "appli/class_constructor/BankAccount": [
       "12_classes.py"
     ],
-    "call/composition": [
+    "appli/composition": [
       "03_friends.py",
       "04_fibonacci.py",
       "08_arguments.py",
@@ -4081,45 +4066,45 @@
       "28_queens.py",
       "33_guess_the_number.py"
     ],
-    "call/function": [
+    "appli/function": [
       "05_greet.py",
       "13_unit_testing.py",
       "16_csv.py",
       "18_queens.py",
       "28_queens.py"
     ],
-    "call/function/builtin/casting/float": [
+    "appli/function/builtin/casting/float": [
       "16_csv.py"
     ],
-    "call/function/builtin/casting/int": [
+    "appli/function/builtin/casting/int": [
       "08_arguments.py",
       "13_unit_testing.py",
       "14_median.py",
       "33_guess_the_number.py"
     ],
-    "call/function/builtin/enumerate": [
+    "appli/function/builtin/enumerate": [
       "03_friends.py"
     ],
-    "call/function/builtin/filter": [
+    "appli/function/builtin/filter": [
       "20_prime_numbers.py"
     ],
-    "call/function/builtin/input": [
+    "appli/function/builtin/input": [
       "02_input_name.py",
       "33_guess_the_number.py"
     ],
-    "call/function/builtin/len": [
+    "appli/function/builtin/len": [
       "13_unit_testing.py",
       "14_median.py",
       "28_queens.py"
     ],
-    "call/function/builtin/next": [
+    "appli/function/builtin/next": [
       "20_prime_numbers.py"
     ],
-    "call/function/builtin/open": [
+    "appli/function/builtin/open": [
       "09_indent.py",
       "16_csv.py"
     ],
-    "call/function/builtin/print": [
+    "appli/function/builtin/print": [
       "01_hello_world.py",
       "02_input_name.py",
       "03_friends.py",
@@ -4140,95 +4125,90 @@
       "28_queens.py",
       "33_guess_the_number.py"
     ],
-    "call/function/builtin/range": [
+    "appli/function/builtin/range": [
       "18_queens.py",
       "28_queens.py"
     ],
-    "call/function/builtin/reversed": [
+    "appli/function/builtin/reversed": [
       "18_queens.py",
       "28_queens.py"
     ],
-    "call/function/builtin/sorted": [
+    "appli/function/builtin/sorted": [
       "09_indent.py",
       "10_time.py",
       "13_unit_testing.py",
       "14_median.py"
     ],
-    "call/function/builtin/sum": [
+    "appli/function/builtin/sum": [
       "07_grocery_bill.py",
       "08_arguments.py"
     ],
-    "call/function/groupby": [
+    "appli/function/groupby": [
       "15_itertools_groupby.py"
     ],
-    "call/function/localtime": [
+    "appli/function/localtime": [
       "10_time.py"
     ],
-    "call/function/without_arguments": [
+    "appli/function/without_arguments": [
       "09_indent.py",
       "10_time.py",
       "20_prime_numbers.py"
     ],
-    "call/method/assertEqual": [
+    "appli/method/assertEqual": [
       "13_unit_testing.py"
     ],
-    "call/method/count": [
+    "appli/method/count": [
       "20_prime_numbers.py"
     ],
-    "call/method/format": [
+    "appli/method/format": [
       "03_friends.py",
       "04_fibonacci.py",
       "16_csv.py",
       "21_xml_html_parsing.py",
       "33_guess_the_number.py"
     ],
-    "call/method/fromstring": [
+    "appli/method/fromstring": [
       "21_xml_html_parsing.py"
     ],
-    "call/method/getiterator": [
+    "appli/method/getiterator": [
       "21_xml_html_parsing.py"
     ],
-    "call/method/glob": [
+    "appli/method/glob": [
       "09_indent.py"
     ],
-    "call/method/join": [
+    "appli/method/join": [
       "15_itertools_groupby.py",
       "28_queens.py"
     ],
-    "call/method/keys": [
+    "appli/method/keys": [
       "10_time.py"
     ],
-    "call/method/match": [
+    "appli/method/match": [
       "06_regex.py"
     ],
-    "call/method/overdrawn": [
+    "appli/method/overdrawn": [
       "12_classes.py"
     ],
-    "call/method/randint": [
+    "appli/method/randint": [
       "33_guess_the_number.py"
     ],
-    "call/method/reader": [
+    "appli/method/reader": [
       "16_csv.py"
     ],
-    "call/method/rstrip": [
+    "appli/method/rstrip": [
       "09_indent.py"
     ],
-    "call/method/splitlines": [
+    "appli/method/splitlines": [
       "15_itertools_groupby.py"
     ],
-    "call/method/withdraw": [
+    "appli/method/withdraw": [
       "12_classes.py"
     ],
-    "call/method/writer": [
+    "appli/method/writer": [
       "16_csv.py"
     ],
-    "call/method/writerows": [
+    "appli/method/writerows": [
       "16_csv.py"
-    ],
-    "class": [
-      "12_classes.py",
-      "13_unit_testing.py",
-      "28_queens.py"
     ],
     "flow/conditional": [
       "06_regex.py",

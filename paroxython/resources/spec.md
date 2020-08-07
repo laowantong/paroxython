@@ -135,7 +135,6 @@
       - [Feature `except`](#feature-except)
       - [Feature `try_raise|try_except` (SQL)](#feature-try_raisetry_except)
   - [Class definitions](#class-definitions)
-      - [Feature `class`](#feature-class)
       - [Feature `method` (SQL)](#feature-method)
       - [Feature `instance_method|class_method|static_method` (SQL)](#feature-instance_methodclass_methodstatic_method)
   - [Modules](#modules)
@@ -184,6 +183,7 @@ Match the name of every node of the AST. This covers most of the [Python keyword
 [⬇️ feature `if`](#feature-if)  
 [⬇️ feature `loop`](#feature-loop)  
 [⬇️ feature `loop_with_break`](#feature-loop_with_break)  
+[⬇️ feature `method`](#feature-method)  
 [⬇️ feature `try_raise|try_except`](#feature-try_raisetry_except)  
 
 ##### Specification
@@ -5276,43 +5276,7 @@ GROUP BY e.rowid
 
 ## Class definitions
 
---------------------------------------------------------------------------------
-
-#### Feature `class`
-
-Match a class definition.
-
-##### Derivations
-
-[⬇️ feature `method`](#feature-method)  
-
-##### Specification
-
-```re
-           ^(.*)/_type=ClassDef
-\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/name=(?P<SUFFIX>.+)
-\n(?:\1.+\n)* \1/.+/_pos=(?P<POS>.+)
-```
-
-##### Example
-
-```python
-1   class MyClass:
-2       """A simple example class"""
-3       i = 12345
-4
-5       def f(self):
-6           return 'hello world'
-7
-8   instance = MyClass()
-```
-
-##### Matches
-
-| Label | Lines |
-|:--|:--|
-| `class:MyClass` | 1-6 |
+A class definition is already matched as `node:ClassDef`.
 
 --------------------------------------------------------------------------------
 
@@ -5320,8 +5284,8 @@ Match a class definition.
 
 ##### Derivations
 
-[⬆️ feature `class`](#feature-class)  
 [⬆️ feature `function`](#feature-function)  
+[⬆️ feature `node`](#feature-node)  
 [⬇️ feature `instance_method|class_method|static_method`](#feature-instance_methodclass_methodstatic_method)  
 
 ##### Specification
@@ -5331,8 +5295,9 @@ SELECT "method",
        f.name_suffix,
        f.span,
        f.path
-FROM t_class c
+FROM t_node c
 JOIN t_function f ON (f.path GLOB c.path || "*-*-")
+WHERE c.name_suffix = "ClassDef"
 ```
 
 ##### Example

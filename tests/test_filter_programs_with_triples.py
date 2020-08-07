@@ -29,7 +29,7 @@ triple_data = [
     ),
     (
         (
-            "call/function/builtin/range",  # this taxon is featured by fizzbuzz.py only
+            "appli/function/builtin/range",  # this taxon is featured by fizzbuzz.py only
             compare_spans["inside"],  # but not inside of
             "flow/conditional",  # that taxon
         ),
@@ -53,7 +53,7 @@ triple_data = [
     ),
     (
         (
-            "call",  # featured by collatz.py and fizzbuzz.py
+            "appli",  # featured by collatz.py and fizzbuzz.py
             compare_spans["inside"],  # but only inside
             "flow/conditional",  # a conditional in fizzbuzz.py
         ),
@@ -88,7 +88,7 @@ negated_triple_data = [
     ),
     (
         (
-            "call/function/builtin/range",  # this taxon is featured by fizzbuzz.py only
+            "appli/function/builtin/range",  # this taxon is featured by fizzbuzz.py only
             compare_spans["inside"],  # but not inside of
             "flow/conditional",  # that taxon
         ),
@@ -98,7 +98,7 @@ negated_triple_data = [
         (
             "flow/conditional",  # this taxon is featured by collatz.py and fizzbuzz.py
             compare_spans["contains"],  # but it never contains
-            "call/function/builtin/range",  # that taxon
+            "appli/function/builtin/range",  # that taxon
         ),
         {"collatz.py", "fizzbuzz.py"},  # distinct from the previous result!
     ),
@@ -120,7 +120,7 @@ negated_triple_data = [
     ),
     (
         (
-            "call",  # featured by collatz.py and fizzbuzz.py
+            "appli",  # featured by collatz.py and fizzbuzz.py
             compare_spans["inside"],  # in collatz, the two print() are not inside the conditional
             "flow/conditional",  # in fizzbuzz, although print() is inside, range() is not
         ),

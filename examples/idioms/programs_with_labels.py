@@ -53,7 +53,7 @@ def square(x): # function:square (-> +1), function_argument:x, function_argument
 # 005.0663-create-a-2d-point-data-structure.py
 # ----------------------------------------------------------------------------------------
 from dataclasses import dataclass # import:dataclasses:dataclass, import_module:dataclasses, import_name:dataclass, node:ImportFrom, whole_span:2 (-> +1)
-@dataclass # class:Point, node:ClassDef, node:Name
+@dataclass # node:ClassDef, node:Name
 class Point:
     x: float # node:AnnAssign, node:Name
     y: float # node:AnnAssign, node:Name
@@ -78,7 +78,7 @@ x = {"one": 1, "two": 2} # assignment, assignment_lhs_identifier:x, assignment_r
 # ----------------------------------------------------------------------------------------
 # 009.1410-create-a-binary-tree-data-structure.py
 # ----------------------------------------------------------------------------------------
-class Node: # class:Node (-> +4), node:ClassDef (-> +4), whole_span:5 (-> +4)
+class Node: # node:ClassDef (-> +4), whole_span:5 (-> +4)
     def __init__(self, data): # function:__init__ (-> +3), function_argument:data, function_argument:self, function_argument_flavor:arg, function_returning_nothing:__init__ (-> +3), instance_method:__init__ (-> +3), method:__init__ (-> +3), node:FunctionDef (-> +3), node:arg
         self.data = data # assignment, assignment_lhs_identifier:self, assignment_rhs_atom:data, node:Assign, node:Attribute, node:Name
         self.left = None # assignment:None, assignment_lhs_identifier:self, assignment_rhs_atom:None, literal:None, node:Assign, node:Attribute, node:Name, node:NameConstant
@@ -87,7 +87,7 @@ class Node: # class:Node (-> +4), node:ClassDef (-> +4), whole_span:5 (-> +4)
 # ----------------------------------------------------------------------------------------
 # 009.3176-create-a-binary-tree-data-structure.py
 # ----------------------------------------------------------------------------------------
-class Node: # class:Node (-> +4), node:ClassDef (-> +4), whole_span:5 (-> +4)
+class Node: # node:ClassDef (-> +4), whole_span:5 (-> +4)
     def __init__(self, data, left_child, right_child): # function:__init__ (-> +3), function_argument:data, function_argument:left_child, function_argument:right_child, function_argument:self, function_argument_flavor:arg, function_returning_nothing:__init__ (-> +3), instance_method:__init__ (-> +3), method:__init__ (-> +3), node:FunctionDef (-> +3), node:arg
         self.data = data # assignment, assignment_lhs_identifier:self, assignment_rhs_atom:data, node:Assign, node:Attribute, node:Name
         self._left_child = left_child # assignment, assignment_lhs_identifier:self, assignment_rhs_atom:left_child, node:Assign, node:Attribute, node:Name
@@ -154,7 +154,7 @@ def dfs(bt): # body_recursive_function:dfs (-> +5), function:dfs (-> +5), functi
 # ----------------------------------------------------------------------------------------
 # 017.1103-create-a-tree-data-structure.py
 # ----------------------------------------------------------------------------------------
-class Node(object): # class:Node (-> +3), node:ClassDef (-> +3), node:Name, whole_span:4 (-> +3)
+class Node(object): # node:ClassDef (-> +3), node:Name, whole_span:4 (-> +3)
     def __init__(self, value, *children): # function:__init__ (-> +2), function_argument:children, function_argument:self, function_argument:value, function_argument_flavor:arg, function_argument_flavor:vararg, function_returning_nothing:__init__ (-> +2), instance_method:__init__ (-> +2), method:__init__ (-> +2), node:FunctionDef (-> +2), node:arg
         self.value = value # assignment, assignment_lhs_identifier:self, assignment_rhs_atom:value, node:Assign, node:Attribute, node:Name
         self.children = list(children) # assignment:list, assignment_lhs_identifier:self, assignment_rhs_atom:children, call_argument:children, external_free_call:list, free_call:list, node:Assign, node:Attribute, node:Call, node:Name
@@ -283,7 +283,7 @@ finally:
 # ----------------------------------------------------------------------------------------
 # 034.0625-create-a-set-of-objects.py
 # ----------------------------------------------------------------------------------------
-class T(object): # class:T (-> +1), node:ClassDef (-> +1), node:Name, whole_span:3 (-> +2)
+class T(object): # node:ClassDef (-> +1), node:Name, whole_span:3 (-> +2)
     pass # node:Pass
 x = set(T()) # assignment:set, assignment_lhs_identifier:x, call_argument:, composition, external_free_call:T, external_free_call:set, free_call:T, free_call:set, free_call_without_arguments:T, node:Assign, node:Call, node:Name, single_assignment:x
 
@@ -323,9 +323,9 @@ ok = word in s # assignment, assignment_lhs_identifier:ok, assignment_rhs_atom:s
 # 040.2279-graph-with-adjacency-lists.py
 # ----------------------------------------------------------------------------------------
 from collections import defaultdict # import:collections:defaultdict, import_module:collections, import_name:defaultdict, node:ImportFrom, whole_span:13 (-> +12)
-class Vertex(set): # class:Vertex (-> +1), node:ClassDef (-> +1), node:Name
+class Vertex(set): # node:ClassDef (-> +1), node:Name
     pass # node:Pass
-class Graph(defaultdict): # class:Graph (-> +8), node:ClassDef (-> +8), node:Name
+class Graph(defaultdict): # node:ClassDef (-> +8), node:Name
     def __init__(self, *paths): # function:__init__ (-> +3), function_argument:paths, function_argument:self, function_argument_flavor:arg, function_argument_flavor:vararg, function_returning_nothing:__init__ (-> +3), instance_method:__init__ (-> +3), method:__init__ (-> +3), node:FunctionDef (-> +3), node:arg
         self.default_factory = Vertex # assignment, assignment_lhs_identifier:self, assignment_rhs_atom:Vertex, node:Assign, node:Attribute, node:Name
         for path in paths: # for:path (-> +1), for_each (-> +1), loop:for (-> +1), loop_with_late_exit:for (-> +1), node:For (-> +1), node:Name
@@ -370,7 +370,7 @@ for v in a: # for:v (-> +4), for_each (-> +4), loop:for (-> +4), loop_with_late_
 # ----------------------------------------------------------------------------------------
 # 043.0676-break-outer-loop.py
 # ----------------------------------------------------------------------------------------
-class BreakOuterLoop(Exception): # class:BreakOuterLoop (-> +1), node:ClassDef (-> +1), node:Name, whole_span:11 (-> +10)
+class BreakOuterLoop(Exception): # node:ClassDef (-> +1), node:Name, whole_span:11 (-> +10)
     pass # node:Pass
 try: # node:Try (-> +8), try_except:BreakOuterLoop (-> +8), try_raise:BreakOuterLoop (-> +8)
     position = None # assignment:None, assignment_lhs_identifier:position, assignment_rhs_atom:None, literal:None, node:Assign, node:Name, node:NameConstant, single_assignment:position
@@ -662,7 +662,7 @@ raise ValueError("x is invalid") # call_argument:, external_free_call:ValueError
 # ----------------------------------------------------------------------------------------
 # 090.1099-read-only-outside.py
 # ----------------------------------------------------------------------------------------
-class Foo(object): # class:Foo (-> +5), node:ClassDef (-> +5), node:Name, whole_span:6 (-> +5)
+class Foo(object): # node:ClassDef (-> +5), node:Name, whole_span:6 (-> +5)
     def __init__(self): # function:__init__ (-> +1), function_argument:self, function_argument_flavor:arg, function_returning_nothing:__init__ (-> +1), instance_method:__init__ (-> +1), method:__init__ (-> +1), node:FunctionDef (-> +1), node:arg
         self._x = 0 # assignment:0, assignment_lhs_identifier:self, assignment_rhs_atom:0, literal:0, node:Assign, node:Attribute, node:Name, node:Num
     @property # decorated_function:x (-> +2), function:x (-> +2), function_decorator:property (-> +2), function_returning_something:x (-> +2), instance_method:x (-> +2), method:x (-> +2), node:FunctionDef (-> +2), node:Name
@@ -764,7 +764,7 @@ x = lxml.etree.parse("data.xml") # assignment:parse, assignment_lhs_identifier:x
 # 104.3264-save-object-into-xml-file.py
 # ----------------------------------------------------------------------------------------
 import pyxser as pyx # import:pyxser, import_module:pyxser, node:Import, whole_span:12 (-> +11)
-class TestClass(object): # class:TestClass (-> +7), node:ClassDef (-> +7), node:Name
+class TestClass(object): # node:ClassDef (-> +7), node:Name
     a = None # assignment:None, assignment_lhs_identifier:a, assignment_rhs_atom:None, literal:None, node:Assign, node:Name, node:NameConstant, single_assignment:a
     b = None # assignment:None, assignment_lhs_identifier:b, assignment_rhs_atom:None, literal:None, node:Assign, node:Name, node:NameConstant, single_assignment:b
     c = None # assignment:None, assignment_lhs_identifier:c, assignment_rhs_atom:None, literal:None, node:Assign, node:Name, node:NameConstant, single_assignment:c
@@ -896,14 +896,14 @@ while True: # infinite_while (-> +2), literal:True, loop:while (-> +2), loop_wit
 # ----------------------------------------------------------------------------------------
 # 122.1453-declare-enumeration.py
 # ----------------------------------------------------------------------------------------
-class Suit: # class:Suit (-> +1), node:ClassDef (-> +1), whole_span:2 (-> +1)
+class Suit: # node:ClassDef (-> +1), whole_span:2 (-> +1)
     SPADES, HEARTS, DIAMONDS, CLUBS = range(4) # assignment:range, assignment_lhs_identifier:CLUBS, assignment_lhs_identifier:DIAMONDS, assignment_lhs_identifier:HEARTS, assignment_lhs_identifier:SPADES, assignment_rhs_atom:4, call_argument:4, external_free_call:range, free_call:range, literal:4, literal:Tuple, node:Assign, node:Call, node:Name, node:Num, node:Tuple, parallel_assignment:4, range:4, suggest_constant_definition
 
 # ----------------------------------------------------------------------------------------
 # 122.1454-declare-enumeration.py
 # ----------------------------------------------------------------------------------------
 from enum import Enum # import:enum:Enum, import_module:enum, import_name:Enum, node:ImportFrom, whole_span:6 (-> +5)
-class Suit(Enum): # class:Suit (-> +4), node:ClassDef (-> +4), node:Name
+class Suit(Enum): # node:ClassDef (-> +4), node:Name
     SPADES = 1 # assignment:1, assignment_lhs_identifier:SPADES, assignment_rhs_atom:1, literal:1, node:Assign, node:Name, node:Num, single_assignment:SPADES
     HEARTS = 2 # assignment:2, assignment_lhs_identifier:HEARTS, assignment_rhs_atom:2, literal:2, node:Assign, node:Name, node:Num, single_assignment:HEARTS
     DIAMONDS = 3 # assignment:3, assignment_lhs_identifier:DIAMONDS, assignment_rhs_atom:3, literal:3, node:Assign, node:Name, node:Num, single_assignment:DIAMONDS, suggest_constant_definition
@@ -1145,7 +1145,7 @@ c = "#{:02x}{:02x}{:02x}".format((r1 + r2) // 2, (g1 + g2) // 2, (b1 + b2) // 2)
 # 154.2292-halfway-between-two-hex-color-codes.py
 # ----------------------------------------------------------------------------------------
 import numpy # import:numpy, import_module:numpy, node:Import, whole_span:15 (-> +14)
-class RGB(numpy.ndarray): # class:RGB (-> +8), node:Attribute, node:ClassDef (-> +8), node:Name
+class RGB(numpy.ndarray): # node:Attribute, node:ClassDef (-> +8), node:Name
     @classmethod # class_method:from_str (-> +4), decorated_function:from_str (-> +4), function:from_str (-> +4), function_decorator:classmethod (-> +4), function_returning_something:from_str (-> +4), method:from_str (-> +4), node:FunctionDef (-> +4), node:Name
     def from_str(cls, rgbstr): # function_argument:cls, function_argument:rgbstr, function_argument_flavor:arg, node:arg
         return numpy.array( # composition, member_call:array, member_call:view, member_call_object:numpy, method_chaining, node:Attribute, node:Attribute (-> +1), node:Call (-> +1), node:Call (-> +2), node:Name, node:Return (-> +2), return (-> +2)
@@ -1186,7 +1186,7 @@ y = random.sample(x, k) # assignment:sample, assignment_lhs_identifier:y, assign
 # ----------------------------------------------------------------------------------------
 # 159.2281-trie.py
 # ----------------------------------------------------------------------------------------
-class Trie: # class:Trie (-> +4), node:ClassDef (-> +4), whole_span:5 (-> +4)
+class Trie: # node:ClassDef (-> +4), whole_span:5 (-> +4)
     def __init__(self, prefix, value=None): # function:__init__ (-> +3), function_argument:prefix, function_argument:self, function_argument:value, function_argument_flavor:arg, function_returning_nothing:__init__ (-> +3), instance_method:__init__ (-> +3), literal:None, method:__init__ (-> +3), node:FunctionDef (-> +3), node:NameConstant, node:arg
         self.prefix = prefix # assignment, assignment_lhs_identifier:self, assignment_rhs_atom:prefix, node:Assign, node:Attribute, node:Name
         self.children = [] # assignment, assignment_lhs_identifier:self, empty_literal:List, literal:List, node:Assign, node:Attribute, node:List, node:Name
@@ -1409,7 +1409,7 @@ sys.exit(0) # call_argument:0, literal:0, member_call:exit, member_call_object:s
 # ----------------------------------------------------------------------------------------
 # 187.3261-disjoint-set.py
 # ----------------------------------------------------------------------------------------
-class UnionFind: # class:UnionFind (-> +14), node:ClassDef (-> +14), whole_span:15 (-> +14)
+class UnionFind: # node:ClassDef (-> +14), whole_span:15 (-> +14)
     def __init__(self, size): # function:__init__ (-> +2), function_argument:self, function_argument:size, function_argument_flavor:arg, function_returning_nothing:__init__ (-> +2), instance_method:__init__ (-> +2), method:__init__ (-> +2), node:FunctionDef (-> +2), node:arg
         self.rank = [0] * size # assignment:Mult, assignment_lhs_identifier:self, assignment_rhs_atom:0, assignment_rhs_atom:size, binary_operator:Mult, literal:0, literal:List, node:Assign, node:Attribute, node:BinOp, node:List, node:Name, node:Num, replication_operator:List
         self.p = [i for i in range(size)] # assignment, assignment_lhs_identifier:self, assignment_rhs_atom:i, assignment_rhs_atom:size, call_argument:size, comprehension:List, comprehension_for_count:1, external_free_call:range, free_call:range, node:Assign, node:Attribute, node:Call, node:ListComp, node:Name, range:size

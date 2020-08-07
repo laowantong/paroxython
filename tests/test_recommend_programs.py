@@ -470,8 +470,8 @@ def test_recommend_mini_programs():
         {
             "operation": "exclude",
             "data": [
-                ("call/function/builtin/range", "inside", "flow/conditional"),
-                # "call/function/builtin/range" is not inside "flow/conditional" anywhere.
+                ("appli/function/builtin/range", "inside", "flow/conditional"),
+                # "appli/function/builtin/range" is not inside "flow/conditional" anywhere.
             ],
         }
     ]
@@ -566,8 +566,8 @@ def test_recommend_mini_programs():
         {
             "operation": "include",
             "data": [
-                ("call/function/builtin/range", "inside", "flow/conditional"),
-                # "call/function/builtin/range" is not inside "flow/conditional" anywhere.
+                ("appli/function/builtin/range", "inside", "flow/conditional"),
+                # "appli/function/builtin/range" is not inside "flow/conditional" anywhere.
             ],
         }
     ]
@@ -580,8 +580,8 @@ def test_recommend_mini_programs():
         {
             "operation": "include",
             "data": [
-                ("call/function/builtin/print", "is", "call/function/builtin/print"),
-                # "call/function/builtin/print" may appear several times in the same program, but
+                ("appli/function/builtin/print", "is", "appli/function/builtin/print"),
+                # "appli/function/builtin/print" may appear several times in the same program, but
                 # never on the same line.
             ],
         }

@@ -111,7 +111,7 @@ while bottles_of_beer > 1: # comparison_operator:Gt, literal:1, loop:while (-> +
 # ----------------------------------------------------------------------------------------
 # 12_classes.py
 # ----------------------------------------------------------------------------------------
-class BankAccount(object): # class:BankAccount (-> +8), node:ClassDef (-> +8), node:Name, whole_span:12 (-> +11)
+class BankAccount(object): # node:ClassDef (-> +8), node:Name, whole_span:12 (-> +11)
     def __init__(self, initial_balance=0): # function:__init__ (-> +1), function_argument:initial_balance, function_argument:self, function_argument_flavor:arg, function_returning_nothing:__init__ (-> +1), instance_method:__init__ (-> +1), literal:0, method:__init__ (-> +1), node:FunctionDef (-> +1), node:Num, node:arg
         self.balance = initial_balance # assignment, assignment_lhs_identifier:self, assignment_rhs_atom:initial_balance, node:Assign, node:Attribute, node:Name
     def deposit(self, amount): # function:deposit (-> +1), function_argument:amount, function_argument:self, function_argument_flavor:arg, function_returning_nothing:deposit (-> +1), instance_method:deposit (-> +1), method:deposit (-> +1), node:FunctionDef (-> +1), node:arg
@@ -135,7 +135,7 @@ def median(pool): # function:median (-> +6), function_argument:pool, function_ar
         return copy[int((size - 1) / 2)] # binary_operator:Div, binary_operator:Sub, call_argument:, external_free_call:int, free_call:int, if_then_branch, index:_, literal:1, literal:2, node:BinOp, node:Call, node:Name, node:Num, node:Return, node:Subscript, return
     else:
         return (copy[int(size / 2 - 1)] + copy[int(size / 2)]) / 2 # addition_operator, binary_operator:Add, binary_operator:Div, binary_operator:Sub, call_argument:, external_free_call:int, free_call:int, if_else_branch, index:_, literal:1, literal:2, node:BinOp, node:Call, node:Name, node:Num, node:Return, node:Subscript, return
-class TestMedian(unittest.TestCase): # class:TestMedian (-> +2), node:Attribute, node:ClassDef (-> +2), node:Name
+class TestMedian(unittest.TestCase): # node:Attribute, node:ClassDef (-> +2), node:Name
     def testMedian(self): # function:testMedian (-> +1), function_argument:self, function_argument_flavor:arg, function_returning_nothing:testMedian (-> +1), instance_method:testMedian (-> +1), method:testMedian (-> +1), node:FunctionDef (-> +1), node:arg
         self.assertEqual(median([2, 9, 9, 7, 9, 2, 4, 5, 8]), 7) # call_argument:, call_argument:7, composition, free_call:median, internal_free_call:median, literal:2, literal:4, literal:5, literal:7, literal:8, literal:9, literal:List, member_call:assertEqual, member_call_object:self, member_call_without_result:assertEqual, node:Attribute, node:Call, node:Expr, node:List, node:Name, node:Num, suggest_constant_definition
 
@@ -246,7 +246,7 @@ for ingredient in tree.getiterator("tr"): # call_argument:, for:ingredient (-> +
 # 28_queens.py
 # ----------------------------------------------------------------------------------------
 BOARD_SIZE = 8 # assignment:8, assignment_lhs_identifier:BOARD_SIZE, assignment_rhs_atom:8, literal:8, node:Assign, node:Name, node:Num, single_assignment:BOARD_SIZE, whole_span:24 (-> +23)
-class BailOut(Exception): # class:BailOut (-> +1), node:ClassDef (-> +1), node:Name
+class BailOut(Exception): # node:ClassDef (-> +1), node:Name
     pass # node:Pass
 def validate(queens): # function:validate (-> +5), function_argument:queens, function_argument_flavor:arg, function_returning_nothing:validate (-> +5), node:FunctionDef (-> +5), node:arg
     left = right = col = queens[-1] # assignment, assignment_lhs_identifier:col, assignment_lhs_identifier:left, assignment_lhs_identifier:right, assignment_rhs_atom:-1, assignment_rhs_atom:queens, chained_assignment, index:-1, literal:-1, negative_index:-1, node:Assign, node:Name, node:Num, node:Subscript

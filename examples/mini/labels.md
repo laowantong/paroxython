@@ -159,7 +159,6 @@
 - chained_assignment
 - chained_comparison
 - chained_equalities|chained_inequalities
-- class
 - closure
 - compact_conditional_assignment
 - comparison_operator
