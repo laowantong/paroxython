@@ -44,7 +44,7 @@
 | 0.125 | `operator/string/concatenation` | 4, 7 |
 | 0 | `type/sequence/string` | 7 |
 | 0 | `type/sequence/string/literal` | 2, 4, 7 |
-| 0 | `variable/assignment/single` | 2 |
+| 0 | `var/assignment/single` | 2 |
 | 0 | `metadata/program` | 1-8 |
 | 0 | `metadata/sloc/8` | 1-8 |
 
@@ -73,7 +73,7 @@
 | 0.375 | `type/number/integer` | 3 |
 | 0.4375 | `type/number/integer/literal` | 3 |
 | 0 | `type/sequence/string/literal` | 4, 6 |
-| 0 | `variable/assignment/single` | 3 |
+| 0 | `var/assignment/single` | 3 |
 | 0 | `metadata/program` | 1-6 |
 | 0 | `metadata/sloc/6` | 1-6 |
 
@@ -102,8 +102,8 @@
 | 0 | `type/sequence/string` | 3 |
 | 0 | `type/sequence/string/literal` | 3 |
 | 0.1875 | `type/sequence/tuple/literal` | 1, 1, 4, 4 |
-| 0.125 | `variable/assignment/parallel` | 1 |
-| 0.1875 | `variable/assignment/parallel/slide` | 4 |
+| 0.125 | `var/assignment/parallel` | 1 |
+| 0.1875 | `var/assignment/parallel/slide` | 4 |
 | 0 | `metadata/program` | 1-4 |
 | 0 | `metadata/sloc/4` | 1-4 |
 
@@ -145,7 +145,7 @@
 | 0.4375 | `type/boolean/literal/True` | 4 |
 | 0.4375 | `type/number/integer/literal` | 3, 9 |
 | 0 | `type/sequence` | 3 |
-| 0 | `variable/assignment/single` | 3, 5, 7 |
+| 0 | `var/assignment/single` | 3, 5, 7 |
 | 0 | `metadata/program` | 1-11 |
 | 0 | `metadata/sloc/11` | 1-11 |
 
@@ -194,7 +194,7 @@
 | 0.4375 | `type/non_sequence/dictionary/literal` | 2 |
 | 0.4375 | `type/number/integer/literal` | 3, 4, 5, 6, 7, 8 |
 | 0 | `type/sequence/string/literal` | 3, 4, 5, 6, 7, 8, 17 |
-| 0 | `variable/assignment/single` | 2, 10, 11 |
+| 0 | `var/assignment/single` | 2, 10, 11 |
 | 0 | `metadata/program` | 1-17 |
 | 0 | `metadata/sloc/17` | 1-17 |
 
@@ -238,8 +238,8 @@
 | 0 | `type/sequence/string` | 14 |
 | 0 | `type/sequence/string/literal` | 7, 10, 10, 11, 13, 14 |
 | 0.1875 | `type/sequence/tuple/literal` | 12 |
-| 0.1875 | `variable/assignment/parallel/more_than_two` | 12 |
-| 0 | `variable/assignment/single` | 1, 9, 10 |
+| 0.1875 | `var/assignment/parallel/more_than_two` | 12 |
+| 0 | `var/assignment/single` | 1, 9, 10 |
 | 0 | `metadata/program` | 1-14 |
 | 0 | `metadata/sloc/14` | 1-14 |
 
@@ -279,10 +279,10 @@
 | 0.25 | `type/boolean` | 9 |
 | 0.4375 | `type/number/integer/literal` | 10, 11 |
 | 0.46875 | `type/number/integer/literal/zero` | 2, 9 |
-| 0 | `variable/assignment` | 3 |
-| 0.1875 | `variable/assignment/augmented/Add` | 5 |
-| 0.1875 | `variable/assignment/augmented/Sub` | 7 |
-| 0 | `variable/assignment/single` | 10 |
+| 0 | `var/assignment` | 3 |
+| 0.1875 | `var/assignment/augmented/Add` | 5 |
+| 0.1875 | `var/assignment/augmented/Sub` | 7 |
+| 0 | `var/assignment/single` | 10 |
 | 0 | `metadata/program` | 1-12 |
 | 0 | `metadata/sloc/12` | 1-12 |
 
@@ -320,7 +320,7 @@
 | 0.25 | `type/boolean` | 4 |
 | 0.375 | `type/number/integer` | 5, 7, 7 |
 | 0.4375 | `type/number/integer/literal` | 4, 4, 5, 5, 7, 7, 7, 7 |
-| 0 | `variable/assignment/single` | 2, 3 |
+| 0 | `var/assignment/single` | 2, 3 |
 | 0 | `metadata/program` | 1-7 |
 | 0 | `metadata/sloc/7` | 1-7 |
 
@@ -372,8 +372,8 @@
 | 0.46875 | `type/number/integer/literal/zero` | 2 |
 | 0 | `type/sequence/string` | 5, 16, 18 |
 | 0 | `type/sequence/string/literal` | 3, 5, 7, 10, 12, 16, 18 |
-| 0.1875 | `variable/assignment/augmented/Add` | 8 |
-| 0 | `variable/assignment/single` | 2, 3, 4, 7 |
+| 0.1875 | `var/assignment/augmented/Add` | 8 |
+| 0 | `var/assignment/single` | 2, 3, 4, 7 |
 | 0 | `metadata/program` | 1-18 |
 | 0 | `metadata/sloc/18` | 1-18 |
 

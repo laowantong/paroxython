@@ -62,9 +62,9 @@ The paths being left untouched by the conversion, we will omit them from now on.
     - `("parallel_assignment", [(4, 4), (7, 7)])`.
     - `("slide", [(7, 7)])`.
 - Taxa:
-    - `("variable/assignment/single", {(3, 3): 1})`.
-    - `("variable/assignment/parallel", {(4, 4): 1})`.
-    - `("variable/assignment/parallel/slide", {(7, 7): 1})`.
+    - `("var/assignment/single", {(3, 3): 1})`.
+    - `("var/assignment/parallel", {(4, 4): 1})`.
+    - `("var/assignment/parallel/slide", {(7, 7): 1})`.
 
 The example program features three distinct assignments. They can be categorized into:
 
@@ -81,26 +81,26 @@ Enter the taxa, whose production is triggered by the following taxonomy rows:
 
 Taxa (replacement patterns)    | Labels (search patterns)
 :------------------------------|:-----------------------
-`variable/assignment` | `assignment\b.*`
-`variable/assignment/parallel` | `parallel_assignment:\d+`
-`variable/assignment/parallel/slide` | `slide`
-`variable/assignment/single` | `single_assignment:.+`
+`var/assignment` | `assignment\b.*`
+`var/assignment/parallel` | `parallel_assignment:\d+`
+`var/assignment/parallel/slide` | `slide`
+`var/assignment/single` | `single_assignment:.+`
 
 Initially, the conversion produces as many redundant spans as for the labels:
 
 - Taxa:
-    - `("variable/assignment", {(3, 3): 1, (4, 4): 1, (7, 7): 1})`.
-    - `("variable/assignment/single", {(3, 3): 1})`.
-    - `("variable/assignment/parallel", {(4, 4): 1, (7, 7): 1})`.
-    - `("variable/assignment/parallel/slide", {(7, 7): 1})`.
+    - `("var/assignment", {(3, 3): 1, (4, 4): 1, (7, 7): 1})`.
+    - `("var/assignment/single", {(3, 3): 1})`.
+    - `("var/assignment/parallel", {(4, 4): 1, (7, 7): 1})`.
+    - `("var/assignment/parallel/slide", {(7, 7): 1})`.
 
 However, because of the tree-like structuring of taxa, it is possible to remove those occurrences
-that are subject to further characterization (e.g., `variable/assignment/parallel` on line 7 is
-further characterized as `variable/assignment/parallel/slide`), resulting in the list of taxa
+that are subject to further characterization (e.g., `var/assignment/parallel` on line 7 is
+further characterized as `var/assignment/parallel/slide`), resulting in the list of taxa
 given at the start of the section.
 
 Note that the removal of spans has finally led to the elimination of the overly generic taxon
-`variable/assignment`.
+`var/assignment`.
 """
 
 

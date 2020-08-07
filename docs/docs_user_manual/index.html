@@ -797,7 +797,7 @@ span <code>s_1</code> of such a taxon, there exists no span <code>s_2</code> of 
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Note that the result includes also all programs featuring at least one taxon matching <code>taxon_pattern_1</code>, but no taxon matching <code>taxon_pattern_2</code>. For instance, suppose the original (negative) triple is:</p>
-<p><code>("abstr", "not contains", "variable/assignment")</code></p>
+<p><code>("abstr", "not contains", "var/assignment")</code></p>
 <p>The function will return the (disjoint) union of these two sets:</p>
 <ol>
 <li>The programs featuring at least one subroutine, but no assignment at all.</li>
@@ -827,12 +827,12 @@ span <code>s_1</code> of such a taxon, there exists no span <code>s_2</code> of 
 <p>Suppose you want your course on the assignment statements to include the concept of parallel assignment, for example to introduce swapping without an auxiliary variable:</p>
 <pre><code class="python">(a, b) = (b, a)
 </code></pre>
-<p>In the taxonomy, this concept is listed as a special case of both tuple (<code>"type/sequence/tuple"</code>) and variable assignment (<code>"variable/assignment/parallel"</code>).</p>
+<p>In the taxonomy, this concept is listed as a special case of both tuple (<code>"type/sequence/tuple"</code>) and variable assignment (<code>"var/assignment/parallel"</code>).</p>
 <p>However, you want to introduce officially the abstract data type “tuple” only much later in your course. You therefore wish to exclude from the recommendations any program implementing a tuple, unless it is part of a parallel assignment. The following command will make the trick:</p>
 <pre><code class="python">  {
     &quot;operation&quot;: &quot;exclude&quot;,
     &quot;data&quot;: [
-      (&quot;type/sequence/tuple&quot;, &quot;is not&quot;, &quot;variable/assignment/parallel&quot;)
+      (&quot;type/sequence/tuple&quot;, &quot;is not&quot;, &quot;var/assignment/parallel&quot;)
     ]
   },
 </code></pre>

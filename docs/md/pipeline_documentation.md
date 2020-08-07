@@ -393,7 +393,7 @@ The semantic triple:
     Note that the result includes also all programs featuring at least one taxon matching `taxon_pattern_1`, but no taxon matching `taxon_pattern_2`. For instance, suppose the original (negative) triple is:
 
     ```
-    ("abstr", "not contains", "variable/assignment")
+    ("abstr", "not contains", "var/assignment")
     ```
 
     The function will return the (disjoint) union of these two sets:
@@ -432,7 +432,7 @@ Suppose you want your course on the assignment statements to include the concept
 (a, b) = (b, a)
 ```
 
-In the taxonomy, this concept is listed as a special case of both tuple (`"type/sequence/tuple"`) and variable assignment (`"variable/assignment/parallel"`).
+In the taxonomy, this concept is listed as a special case of both tuple (`"type/sequence/tuple"`) and variable assignment (`"var/assignment/parallel"`).
 
  However, you want to introduce officially the abstract data type “tuple” only much later in your course. You therefore wish to exclude from the recommendations any program implementing a tuple, unless it is part of a parallel assignment. The following command will make the trick:
 
@@ -440,7 +440,7 @@ In the taxonomy, this concept is listed as a special case of both tuple (`"type/
   {
     "operation": "exclude",
     "data": [
-      ("type/sequence/tuple", "is not", "variable/assignment/parallel")
+      ("type/sequence/tuple", "is not", "var/assignment/parallel")
     ]
   },
 ```

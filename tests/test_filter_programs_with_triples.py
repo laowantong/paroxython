@@ -13,7 +13,7 @@ dbf = ProgramFilter(db)
 triple_data = [
     (
         (
-            "variable/assignment/single",  # featured by assignment.py and collatz.py
+            "var/assignment/single",  # featured by assignment.py and collatz.py
             compare_spans["after"],  # but after
             "io/standard/print",  # this taxon in collatz.py only.
         ),
@@ -72,7 +72,7 @@ def test_programs_of_triple(triple, expected_programs):
 negated_triple_data = [
     (
         (
-            "variable/assignment/single",  # featured by assignment.py and collatz.py
+            "var/assignment/single",  # featured by assignment.py and collatz.py
             compare_spans["after"],  # but after
             "io/standard/print",  # this taxon in collatz.py only.
         ),

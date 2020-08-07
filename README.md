@@ -178,9 +178,9 @@ This should print `"paroxython 0.4.4 loaded."`. Run it on a cell of Python code 
 | `type/sequence/list` | 6 |
 | `type/sequence/list/literal/empty` | 3 |
 | `type/sequence/tuple/literal` | 4, 4, 7, 7 |
-| `variable/assignment/parallel` | 4 |
-| `variable/assignment/parallel/slide` | 7 |
-| `variable/assignment/single` | 3 |
+| `var/assignment/parallel` | 4 |
+| `var/assignment/parallel/slide` | 7 |
+| `var/assignment/single` | 3 |
 
 ## Further reading
 

@@ -101,9 +101,9 @@ occurrences in the program.</li>
 </ul>
 </li>
 <li>Taxa:<ul>
-<li><code>("variable/assignment/single", {(3, 3): 1})</code>.</li>
-<li><code>("variable/assignment/parallel", {(4, 4): 1})</code>.</li>
-<li><code>("variable/assignment/parallel/slide", {(7, 7): 1})</code>.</li>
+<li><code>("var/assignment/single", {(3, 3): 1})</code>.</li>
+<li><code>("var/assignment/parallel", {(4, 4): 1})</code>.</li>
+<li><code>("var/assignment/parallel/slide", {(7, 7): 1})</code>.</li>
 </ul>
 </li>
 </ul>
@@ -128,19 +128,19 @@ assignment of line 7 is labelled three times, as <code>"assignment"</code>, <cod
 </thead>
 <tbody>
 <tr>
-<td align="left"><code>variable/assignment</code></td>
+<td align="left"><code>var/assignment</code></td>
 <td align="left"><code>assignment\b.*</code></td>
 </tr>
 <tr>
-<td align="left"><code>variable/assignment/parallel</code></td>
+<td align="left"><code>var/assignment/parallel</code></td>
 <td align="left"><code>parallel_assignment:\d+</code></td>
 </tr>
 <tr>
-<td align="left"><code>variable/assignment/parallel/slide</code></td>
+<td align="left"><code>var/assignment/parallel/slide</code></td>
 <td align="left"><code>slide</code></td>
 </tr>
 <tr>
-<td align="left"><code>variable/assignment/single</code></td>
+<td align="left"><code>var/assignment/single</code></td>
 <td align="left"><code>single_assignment:.+</code></td>
 </tr>
 </tbody>
@@ -148,19 +148,19 @@ assignment of line 7 is labelled three times, as <code>"assignment"</code>, <cod
 <p>Initially, the conversion produces as many redundant spans as for the labels:</p>
 <ul>
 <li>Taxa:<ul>
-<li><code>("variable/assignment", {(3, 3): 1, (4, 4): 1, (7, 7): 1})</code>.</li>
-<li><code>("variable/assignment/single", {(3, 3): 1})</code>.</li>
-<li><code>("variable/assignment/parallel", {(4, 4): 1, (7, 7): 1})</code>.</li>
-<li><code>("variable/assignment/parallel/slide", {(7, 7): 1})</code>.</li>
+<li><code>("var/assignment", {(3, 3): 1, (4, 4): 1, (7, 7): 1})</code>.</li>
+<li><code>("var/assignment/single", {(3, 3): 1})</code>.</li>
+<li><code>("var/assignment/parallel", {(4, 4): 1, (7, 7): 1})</code>.</li>
+<li><code>("var/assignment/parallel/slide", {(7, 7): 1})</code>.</li>
 </ul>
 </li>
 </ul>
 <p>However, because of the tree-like structuring of taxa, it is possible to remove those occurrences
-that are subject to further characterization (e.g., <code>variable/assignment/parallel</code> on line 7 is
-further characterized as <code>variable/assignment/parallel/slide</code>), resulting in the list of taxa
+that are subject to further characterization (e.g., <code>var/assignment/parallel</code> on line 7 is
+further characterized as <code>var/assignment/parallel/slide</code>), resulting in the list of taxa
 given at the start of the section.</p>
 <p>Note that the removal of spans has finally led to the elimination of the overly generic taxon
-<code>variable/assignment</code>.</p>
+<code>var/assignment</code>.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>

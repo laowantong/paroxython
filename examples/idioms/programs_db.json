@@ -367,7 +367,7 @@
         "type/non_sequence/dictionary/literal": [[1,1]],
         "type/number/integer/literal": [[1,1],[1,1]],
         "type/sequence/string/literal": [[1,1],[1,1]],
-        "variable/assignment/single": [[1,1]]
+        "var/assignment/single": [[1,1]]
       }
     },
     "009.1410-create-a-binary-tree-data-structure.py": {
@@ -404,7 +404,7 @@
         "metadata/program": [[1,5]],
         "metadata/sloc/5": [[1,5]],
         "type/null/literal": [[4,4],[5,5]],
-        "variable/assignment": [[3,3],[4,4],[5,5]]
+        "var/assignment": [[3,3],[4,4],[5,5]]
       }
     },
     "009.3176-create-a-binary-tree-data-structure.py": {
@@ -440,7 +440,7 @@
         "abstr/procedure": [[2,5]],
         "metadata/program": [[1,5]],
         "metadata/sloc/5": [[1,5]],
-        "variable/assignment": [[3,3],[4,4],[5,5]]
+        "var/assignment": [[3,3],[4,4],[5,5]]
       }
     },
     "010.0182-shuffle-a-list.py": {
@@ -748,7 +748,7 @@
         "metadata/program": [[1,4]],
         "metadata/sloc/4": [[1,4]],
         "type/sequence/list": [[4,4]],
-        "variable/assignment": [[3,3],[4,4]]
+        "var/assignment": [[3,3],[4,4]]
       }
     },
     "018.2084-depth-first-traversing-of-a-tree.py": {
@@ -817,7 +817,7 @@
         "appli/function/builtin/reversed": [[1,1]],
         "metadata/program": [[1,1]],
         "metadata/sloc/1": [[1,1]],
-        "variable/assignment/single": [[1,1]]
+        "var/assignment/single": [[1,1]]
       }
     },
     "019.1983-reverse-a-list.py": {
@@ -845,7 +845,7 @@
         "metadata/sloc/1": [[1,1]],
         "subscript/slice/step/backwards": [[1,1]],
         "type/number/integer/literal": [[1,1]],
-        "variable/assignment/single": [[1,1]]
+        "var/assignment/single": [[1,1]]
       }
     },
     "019.3164-reverse-a-list.py": {
@@ -953,7 +953,7 @@
         "metadata/program": [[1,1]],
         "metadata/sloc/1": [[1,1]],
         "type/sequence/tuple/literal": [[1,1],[1,1]],
-        "variable/assignment/parallel/swap": [[1,1]]
+        "var/assignment/parallel/swap": [[1,1]]
       }
     },
     "022.0243-convert-string-to-integer.py": {
@@ -977,7 +977,7 @@
         "metadata/program": [[1,1]],
         "metadata/sloc/1": [[1,1]],
         "type/number/integer": [[1,1]],
-        "variable/assignment/single": [[1,1]]
+        "var/assignment/single": [[1,1]]
       }
     },
     "023.1102-convert-real-number-to-string-with-2-decimal-places.py": {
@@ -1004,7 +1004,7 @@
         "metadata/sloc/1": [[1,1]],
         "type/sequence/string": [[1,1]],
         "type/sequence/string/literal": [[1,1]],
-        "variable/assignment/single": [[1,1]]
+        "var/assignment/single": [[1,1]]
       }
     },
     "024.0664-assign-to-string-the-japanese-word-.py": {
@@ -1024,7 +1024,7 @@
         "metadata/program": [[1,1]],
         "metadata/sloc/1": [[1,1]],
         "type/sequence/string/literal": [[1,1]],
-        "variable/assignment/single": [[1,1]]
+        "var/assignment/single": [[1,1]]
       }
     },
     "025.0195-send-a-value-to-another-thread.py": {
@@ -1076,8 +1076,8 @@
         "metadata/sloc/6": [[1,6]],
         "type/boolean/literal/True": [[4,4]],
         "type/sequence/string/literal": [[6,6]],
-        "variable/assignment": [[4,4]],
-        "variable/assignment/single": [[2,2],[3,3]]
+        "var/assignment": [[4,4]],
+        "var/assignment/single": [[2,2],[3,3]]
       }
     },
     "026.0194-create-a-2-dimensional-array.py": {
@@ -1111,7 +1111,7 @@
         "metadata/program": [[1,1]],
         "metadata/sloc/1": [[1,1]],
         "type/number/integer/literal/zero": [[1,1]],
-        "variable/assignment/single": [[1,1]]
+        "var/assignment/single": [[1,1]]
       }
     },
     "027.0192-create-a-3-dimensional-array.py": {
@@ -1148,7 +1148,7 @@
         "metadata/program": [[1,1]],
         "metadata/sloc/1": [[1,1]],
         "type/number/integer/literal/zero": [[1,1]],
-        "variable/assignment/single": [[1,1]]
+        "var/assignment/single": [[1,1]]
       }
     },
     "027.0193-create-a-3-dimensional-array.py": {
@@ -1181,7 +1181,7 @@
         "metadata/program": [[1,2]],
         "metadata/sloc/2": [[1,2]],
         "type/sequence/tuple/literal": [[2,2]],
-        "variable/assignment/single": [[2,2]]
+        "var/assignment/single": [[2,2]]
       }
     },
     "028.0350-sort-by-a-property.py": {
@@ -1216,7 +1216,7 @@
         "appli/function/builtin/sorted": [[1,1]],
         "metadata/program": [[1,1]],
         "metadata/sloc/1": [[1,1]],
-        "variable/assignment/single": [[1,1]]
+        "var/assignment/single": [[1,1]]
       }
     },
     "029.0199-remove-item-from-list-by-its-index.py": {
@@ -1233,7 +1233,7 @@
         "metadata/program": [[1,1]],
         "metadata/sloc/1": [[1,1]],
         "subscript/index": [[1,1]],
-        "variable/deletion": [[1,1]]
+        "var/deletion": [[1,1]]
       }
     },
     "030.0189-parallelize-execution-of-1000-independent-tasks.py": {
@@ -1288,7 +1288,7 @@
         "metadata/sloc/4": [[1,4]],
         "type/number/integer/literal": [[3,3],[3,3]],
         "type/sequence/list/literal": [[4,4]],
-        "variable/assignment/single": [[2,2]]
+        "var/assignment/single": [[2,2]]
       }
     },
     "031.0188-recursive-factorial-simple.py": {
@@ -1411,7 +1411,7 @@
         "library/standard/threading": [[1,1]],
         "metadata/program": [[1,7]],
         "metadata/sloc/7": [[1,7]],
-        "variable/assignment/single": [[2,2],[5,5]]
+        "var/assignment/single": [[2,2],[5,5]]
       }
     },
     "034.0625-create-a-set-of-objects.py": {
@@ -1443,7 +1443,7 @@
         "metadata/program": [[1,3]],
         "metadata/sloc/3": [[1,3]],
         "type/non_sequence/set": [[3,3]],
-        "variable/assignment/single": [[3,3]]
+        "var/assignment/single": [[3,3]]
       }
     },
     "035.0667-first-class-function--compose.py": {
@@ -1610,7 +1610,7 @@
         "metadata/sloc/1": [[1,1]],
         "subscript/slice/start": [[1,1]],
         "subscript/slice/stop": [[1,1]],
-        "variable/assignment/single": [[1,1]]
+        "var/assignment/single": [[1,1]]
       }
     },
     "039.0571-check-if-string-contains-a-word.py": {
@@ -1633,7 +1633,7 @@
         "metadata/sloc/1": [[1,1]],
         "test/belonging": [[1,1]],
         "type/boolean": [[1,1]],
-        "variable/assignment/single": [[1,1]]
+        "var/assignment/single": [[1,1]]
       }
     },
     "040.2279-graph-with-adjacency-lists.py": {
@@ -1738,9 +1738,9 @@
         "type/number/integer/literal": [[10,10],[13,13],[13,13],[13,13],[13,13],[13,13],[13,13]],
         "type/number/integer/literal/zero": [[13,13]],
         "type/sequence/tuple/literal": [[10,10],[13,13],[13,13]],
-        "variable/assignment": [[6,6]],
-        "variable/assignment/constant": [[13,13]],
-        "variable/assignment/single": [[13,13]]
+        "var/assignment": [[6,6]],
+        "var/assignment/constant": [[13,13]],
+        "var/assignment/single": [[13,13]]
       }
     },
     "041.0187-reverse-a-string.py": {
@@ -1780,7 +1780,7 @@
         "type/number/integer/literal": [[1,1]],
         "type/sequence/string": [[1,1]],
         "type/sequence/string/literal": [[1,1],[1,1]],
-        "variable/assignment/single": [[1,1]]
+        "var/assignment/single": [[1,1]]
       }
     },
     "041.2714-reverse-a-string.py": {
@@ -1808,7 +1808,7 @@
         "metadata/sloc/1": [[1,1]],
         "subscript/slice/step/backwards": [[1,1]],
         "type/number/integer/literal": [[1,1]],
-        "variable/assignment/single": [[1,1]]
+        "var/assignment/single": [[1,1]]
       }
     },
     "042.1264-continue-outer-loop.py": {
@@ -1977,7 +1977,7 @@
         "type/boolean": [[7,7]],
         "type/null/literal": [[4,4]],
         "type/sequence/tuple/literal": [[8,8]],
-        "variable/assignment/single": [[4,4],[8,8]]
+        "var/assignment/single": [[4,4],[8,8]]
       }
     },
     "043.2733-break-outer-loop.py": {
@@ -2150,7 +2150,7 @@
         "metadata/sloc/1": [[1,1]],
         "subscript/slice/stop": [[1,1]],
         "type/number/integer/literal": [[1,1]],
-        "variable/assignment/single": [[1,1]]
+        "var/assignment/single": [[1,1]]
       }
     },
     "047.0198-extract-string-suffix.py": {
@@ -2178,7 +2178,7 @@
         "metadata/sloc/1": [[1,1]],
         "subscript/slice/start": [[1,1]],
         "type/number/integer/literal": [[1,1]],
-        "variable/assignment/single": [[1,1]]
+        "var/assignment/single": [[1,1]]
       }
     },
     "048.0210-multi-line-string-literal.py": {
@@ -2198,7 +2198,7 @@
         "metadata/program": [[1,3]],
         "metadata/sloc/3": [[1,3]],
         "type/sequence/string/literal": [[3,3]],
-        "variable/assignment/single": [[1,1]]
+        "var/assignment/single": [[1,1]]
       }
     },
     "049.0242-split-a-space-separated-string.py": {
@@ -2221,7 +2221,7 @@
         "metadata/program": [[1,1]],
         "metadata/sloc/1": [[1,1]],
         "type/sequence/string": [[1,1]],
-        "variable/assignment/single": [[1,1]]
+        "var/assignment/single": [[1,1]]
       }
     },
     "050.0572-make-an-infinite-loop.py": {
@@ -2309,7 +2309,7 @@
         "metadata/sloc/1": [[1,1]],
         "type/sequence/string": [[1,1]],
         "type/sequence/string/literal": [[1,1]],
-        "variable/assignment/single": [[1,1]]
+        "var/assignment/single": [[1,1]]
       }
     },
     "053.1933-join-a-list-of-strings.py": {
@@ -2344,7 +2344,7 @@
         "metadata/sloc/1": [[1,1]],
         "type/sequence/string": [[1,1]],
         "type/sequence/string/literal": [[1,1]],
-        "variable/assignment/single": [[1,1]]
+        "var/assignment/single": [[1,1]]
       }
     },
     "054.0241-compute-sum-of-integers.py": {
@@ -2367,7 +2367,7 @@
         "appli/function/builtin/sum": [[1,1]],
         "metadata/program": [[1,1]],
         "metadata/sloc/1": [[1,1]],
-        "variable/assignment/single": [[1,1]]
+        "var/assignment/single": [[1,1]]
       }
     },
     "055.0575-convert-integer-to-string.py": {
@@ -2392,7 +2392,7 @@
         "metadata/program": [[1,1]],
         "metadata/sloc/1": [[1,1]],
         "type/sequence/string": [[1,1]],
-        "variable/assignment/single": [[1,1]]
+        "var/assignment/single": [[1,1]]
       }
     },
     "056.1424-launch-1000-parallel-tasks-and-wait-for-completion.py": {
@@ -2478,7 +2478,7 @@
         "appli/function/builtin/filter": [[1,1]],
         "metadata/program": [[1,1]],
         "metadata/sloc/1": [[1,1]],
-        "variable/assignment/single": [[1,1]]
+        "var/assignment/single": [[1,1]]
       }
     },
     "057.3173-filter-list.py": {
@@ -2506,7 +2506,7 @@
         "appli/function/p": [[1,1]],
         "metadata/program": [[1,1]],
         "metadata/sloc/1": [[1,1]],
-        "variable/assignment/single": [[1,1]]
+        "var/assignment/single": [[1,1]]
       }
     },
     "058.0665-extract-file-content-to-a-string.py": {
@@ -2533,7 +2533,7 @@
         "io/file/open": [[1,1]],
         "metadata/program": [[1,1]],
         "metadata/sloc/1": [[1,1]],
-        "variable/assignment/single": [[1,1]]
+        "var/assignment/single": [[1,1]]
       }
     },
     "059.0668-write-to-standard-error-stream.py": {
@@ -2592,7 +2592,7 @@
         "metadata/sloc/2": [[1,2]],
         "subscript/index": [[2,2]],
         "type/number/integer/literal": [[2,2]],
-        "variable/assignment/single": [[2,2]]
+        "var/assignment/single": [[2,2]]
       }
     },
     "061.0576-get-current-date.py": {
@@ -2618,7 +2618,7 @@
         "library/standard/datetime": [[1,1]],
         "metadata/program": [[1,2]],
         "metadata/sloc/2": [[1,2]],
-        "variable/assignment/single": [[2,2]]
+        "var/assignment/single": [[2,2]]
       }
     },
     "062.1091-find-substring-position.py": {
@@ -2643,7 +2643,7 @@
         "metadata/program": [[1,1]],
         "metadata/sloc/1": [[1,1]],
         "type/sequence/string": [[1,1]],
-        "variable/assignment/single": [[1,1]]
+        "var/assignment/single": [[1,1]]
       }
     },
     "063.1088-replace-fragment-of-a-string.py": {
@@ -2670,7 +2670,7 @@
         "metadata/program": [[1,1]],
         "metadata/sloc/1": [[1,1]],
         "type/sequence/string": [[1,1]],
-        "variable/assignment/single": [[1,1]]
+        "var/assignment/single": [[1,1]]
       }
     },
     "064.0274-big-integer--value-3-power-247.py": {
@@ -2696,7 +2696,7 @@
         "metadata/sloc/1": [[1,1]],
         "operator/arithmetic/power": [[1,1]],
         "type/number/integer/literal": [[1,1],[1,1]],
-        "variable/assignment/single": [[1,1]]
+        "var/assignment/single": [[1,1]]
       }
     },
     "065.1085-format-decimal-number.py": {
@@ -2723,7 +2723,7 @@
         "metadata/sloc/1": [[1,1]],
         "type/sequence/string": [[1,1]],
         "type/sequence/string/literal": [[1,1]],
-        "variable/assignment/single": [[1,1]]
+        "var/assignment/single": [[1,1]]
       }
     },
     "066.0672-big-integer-exponentiation.py": {
@@ -2745,7 +2745,7 @@
         "metadata/program": [[1,1]],
         "metadata/sloc/1": [[1,1]],
         "operator/arithmetic/power": [[1,1]],
-        "variable/assignment/single": [[1,1]]
+        "var/assignment/single": [[1,1]]
       }
     },
     "067.1426-binomial-coefficient-n-choose-k.py": {
@@ -2834,7 +2834,7 @@
         "operator/arithmetic/division": [[3,3]],
         "type/number/floating_point/literal": [[3,3]],
         "type/number/integer": [[3,3]],
-        "variable/assignment/single": [[3,3]]
+        "var/assignment/single": [[3,3]]
       }
     },
     "069.1086-seed-random-generator.py": {
@@ -2861,7 +2861,7 @@
         "library/standard/random": [[1,1]],
         "metadata/program": [[1,2]],
         "metadata/sloc/2": [[1,2]],
-        "variable/assignment/single": [[2,2]]
+        "var/assignment/single": [[2,2]]
       }
     },
     "070.1087-use-clock-as-random-generator-seed.py": {
@@ -2886,7 +2886,7 @@
         "library/standard/random": [[1,1]],
         "metadata/program": [[1,2]],
         "metadata/sloc/2": [[1,2]],
-        "variable/assignment/single": [[2,2]]
+        "var/assignment/single": [[2,2]]
       }
     },
     "071.0379-echo-program-implementation.py": {
@@ -3002,7 +3002,7 @@
         "library/standard/fractions/gcd": [[1,1]],
         "metadata/program": [[1,2]],
         "metadata/sloc/2": [[1,2]],
-        "variable/assignment/single": [[2,2]]
+        "var/assignment/single": [[2,2]]
       }
     },
     "075.0675-compute-lcm.py": {
@@ -3038,7 +3038,7 @@
         "metadata/sloc/2": [[1,2]],
         "operator/arithmetic/integer_division": [[2,2]],
         "operator/arithmetic/multiplication": [[2,2]],
-        "variable/assignment/single": [[2,2]]
+        "var/assignment/single": [[2,2]]
       }
     },
     "076.1083-binary-digits-from-an-integer.py": {
@@ -3065,7 +3065,7 @@
         "metadata/sloc/1": [[1,1]],
         "type/sequence/string": [[1,1]],
         "type/sequence/string/literal": [[1,1]],
-        "variable/assignment/single": [[1,1]]
+        "var/assignment/single": [[1,1]]
       }
     },
     "077.1093-complex-number.py": {
@@ -3101,7 +3101,7 @@
         "operator/arithmetic/substraction": [[1,1]],
         "type/number/complex/literal": [[1,1],[2,2]],
         "type/number/integer/literal": [[1,1]],
-        "variable/assignment/single": [[1,1],[2,2]]
+        "var/assignment/single": [[1,1],[2,2]]
       }
     },
     "078.1089-do-while-loop.py": {
@@ -3165,7 +3165,7 @@
         "metadata/program": [[1,1]],
         "metadata/sloc/1": [[1,1]],
         "type/number/floating_point": [[1,1]],
-        "variable/assignment/single": [[1,1]]
+        "var/assignment/single": [[1,1]]
       }
     },
     "080.1092-truncate-floating-point-number-to-integer.py": {
@@ -3189,7 +3189,7 @@
         "metadata/program": [[1,1]],
         "metadata/sloc/1": [[1,1]],
         "type/number/integer": [[1,1]],
-        "variable/assignment/single": [[1,1]]
+        "var/assignment/single": [[1,1]]
       }
     },
     "081.2270-round-floating-point-number-to-integer.py": {
@@ -3221,7 +3221,7 @@
         "operator/arithmetic/addition": [[1,1]],
         "type/number/floating_point/literal": [[1,1]],
         "type/number/integer": [[1,1]],
-        "variable/assignment/single": [[1,1]]
+        "var/assignment/single": [[1,1]]
       }
     },
     "082.1096-count-substring-occurrences.py": {
@@ -3246,7 +3246,7 @@
         "metadata/program": [[1,1]],
         "metadata/sloc/1": [[1,1]],
         "type/sequence": [[1,1]],
-        "variable/assignment/single": [[1,1]]
+        "var/assignment/single": [[1,1]]
       }
     },
     "083.1805-regex-with-character-repetition.py": {
@@ -3276,7 +3276,7 @@
         "metadata/program": [[1,2]],
         "metadata/sloc/2": [[1,2]],
         "type/sequence/string/literal": [[2,2]],
-        "variable/assignment/single": [[2,2]]
+        "var/assignment/single": [[2,2]]
       }
     },
     "084.1940-count-bits-set-in-integer-binary-representation.py": {
@@ -3307,7 +3307,7 @@
         "metadata/sloc/1": [[1,1]],
         "type/sequence": [[1,1]],
         "type/sequence/string/literal": [[1,1]],
-        "variable/assignment/single": [[1,1]]
+        "var/assignment/single": [[1,1]]
       }
     },
     "085.1003-check-if-integer-addition-will-overflow.py": {
@@ -3410,7 +3410,7 @@
         "metadata/program": [[1,1]],
         "metadata/sloc/1": [[1,1]],
         "type/number/integer/literal": [[1,1]],
-        "variable/assignment/single": [[1,1]]
+        "var/assignment/single": [[1,1]]
       }
     },
     "089.1097-handle-invalid-argument.py": {
@@ -3477,7 +3477,7 @@
         "metadata/program": [[1,6]],
         "metadata/sloc/6": [[1,6]],
         "type/number/integer/literal/zero": [[3,3]],
-        "variable/assignment": [[3,3]]
+        "var/assignment": [[3,3]]
       }
     },
     "091.1098-load-json-file-into-struct.py": {
@@ -3514,7 +3514,7 @@
         "metadata/program": [[1,3]],
         "metadata/sloc/3": [[1,3]],
         "type/sequence/string/literal": [[2,2],[2,2]],
-        "variable/assignment/single": [[3,3]]
+        "var/assignment/single": [[3,3]]
       }
     },
     "092.1100-save-object-into-json-file.py": {
@@ -3660,7 +3660,7 @@
         "library/standard/os": [[1,1]],
         "metadata/program": [[1,2]],
         "metadata/sloc/2": [[1,2]],
-        "variable/assignment/single": [[2,2]]
+        "var/assignment/single": [[2,2]]
       }
     },
     "096.1094-check-string-prefix.py": {
@@ -3685,7 +3685,7 @@
         "metadata/program": [[1,1]],
         "metadata/sloc/1": [[1,1]],
         "type/sequence/string": [[1,1]],
-        "variable/assignment/single": [[1,1]]
+        "var/assignment/single": [[1,1]]
       }
     },
     "097.1095-check-string-suffix.py": {
@@ -3710,7 +3710,7 @@
         "metadata/program": [[1,1]],
         "metadata/sloc/1": [[1,1]],
         "type/sequence/string": [[1,1]],
-        "variable/assignment/single": [[1,1]]
+        "var/assignment/single": [[1,1]]
       }
     },
     "098.2142-epoch-seconds-to-date-object.py": {
@@ -3738,7 +3738,7 @@
         "library/standard/datetime": [[1,1]],
         "metadata/program": [[1,2]],
         "metadata/sloc/2": [[1,2]],
-        "variable/assignment/single": [[2,2]]
+        "var/assignment/single": [[2,2]]
       }
     },
     "099.1429-format-date-yyyy-mm-dd.py": {
@@ -3786,7 +3786,7 @@
         "metadata/sloc/3": [[1,3]],
         "type/number/integer/literal": [[2,2],[2,2],[2,2]],
         "type/sequence/string/literal": [[3,3]],
-        "variable/assignment/single": [[2,2],[3,3]]
+        "var/assignment/single": [[2,2],[3,3]]
       }
     },
     "099.2693-format-date-yyyy-mm-dd.py": {
@@ -3819,7 +3819,7 @@
         "library/standard/datetime/date": [[1,1]],
         "metadata/program": [[1,3]],
         "metadata/sloc/3": [[1,3]],
-        "variable/assignment/single": [[2,2],[3,3]]
+        "var/assignment/single": [[2,2],[3,3]]
       }
     },
     "100.1142-sort-by-a-comparator.py": {
@@ -3870,7 +3870,7 @@
         "library/standard/urllib.request": [[1,1]],
         "metadata/program": [[1,3]],
         "metadata/sloc/3": [[1,3]],
-        "variable/assignment/single": [[3,3]]
+        "var/assignment/single": [[3,3]]
       }
     },
     "102.2173-load-from-http-get-request-into-a-file.py": {
@@ -3906,7 +3906,7 @@
         "metadata/sloc/2": [[1,2]],
         "type/sequence/string/literal": [[2,2]],
         "type/sequence/tuple/literal": [[2,2]],
-        "variable/assignment/parallel": [[2,2]]
+        "var/assignment/parallel": [[2,2]]
       }
     },
     "103.2276-load-xml-file-into-struct.py": {
@@ -3936,7 +3936,7 @@
         "metadata/program": [[1,2]],
         "metadata/sloc/2": [[1,2]],
         "type/sequence/string/literal": [[2,2]],
-        "variable/assignment/single": [[2,2]]
+        "var/assignment/single": [[2,2]]
       }
     },
     "104.3264-save-object-into-xml-file.py": {
@@ -4012,8 +4012,8 @@
         "metadata/sloc/12": [[1,12]],
         "type/null/literal": [[3,3],[4,4],[5,5]],
         "type/sequence/string/literal": [[10,10],[10,10],[10,10],[11,11]],
-        "variable/assignment": [[7,7],[8,8],[9,9]],
-        "variable/assignment/single": [[3,3],[4,4],[5,5],[10,10],[11,11]]
+        "var/assignment": [[7,7],[8,8],[9,9]],
+        "var/assignment/single": [[3,3],[4,4],[5,5],[10,10],[11,11]]
       }
     },
     "105.1804-current-executable-name.py": {
@@ -4043,7 +4043,7 @@
         "metadata/sloc/2": [[1,2]],
         "subscript/index": [[2,2]],
         "type/number/integer/literal/zero": [[2,2]],
-        "variable/assignment/single": [[2,2]]
+        "var/assignment/single": [[2,2]]
       }
     },
     "106.2039-get-program-working-directory.py": {
@@ -4069,7 +4069,7 @@
         "library/standard/os": [[1,1]],
         "metadata/program": [[1,2]],
         "metadata/sloc/2": [[1,2]],
-        "variable/assignment/single": [[2,2]]
+        "var/assignment/single": [[2,2]]
       }
     },
     "107.2139-get-folder-containing-current-program.py": {
@@ -4102,7 +4102,7 @@
         "library/standard/os": [[1,1]],
         "metadata/program": [[1,2]],
         "metadata/sloc/2": [[1,2]],
-        "variable/assignment/single": [[2,2]]
+        "var/assignment/single": [[2,2]]
       }
     },
     "108.1291-determine-if-variable-name-is-defined.py": {
@@ -4168,7 +4168,7 @@
         "library/third_party/pympler.asizeof": [[1,1]],
         "metadata/program": [[1,2]],
         "metadata/sloc/2": [[1,2]],
-        "variable/assignment/single": [[2,2]]
+        "var/assignment/single": [[2,2]]
       }
     },
     "110.1455-check-if-string-is-blank.py": {
@@ -4199,7 +4199,7 @@
         "type/boolean": [[1,1]],
         "type/sequence/string": [[1,1]],
         "type/sequence/string/literal/empty": [[1,1]],
-        "variable/assignment/single": [[1,1]]
+        "var/assignment/single": [[1,1]]
       }
     },
     "111.2168-launch-other-program.py": {
@@ -4329,7 +4329,7 @@
         "metadata/sloc/1": [[1,1]],
         "test/equality": [[1,1]],
         "type/boolean": [[1,1]],
-        "variable/assignment/single": [[1,1]]
+        "var/assignment/single": [[1,1]]
       }
     },
     "115.2138-compare-dates.py": {
@@ -4356,7 +4356,7 @@
         "metadata/sloc/2": [[1,2]],
         "test/inequality": [[2,2]],
         "type/boolean": [[2,2]],
-        "variable/assignment/single": [[2,2]]
+        "var/assignment/single": [[2,2]]
       }
     },
     "116.1257-remove-occurrences-of-word-from-string.py": {
@@ -4386,7 +4386,7 @@
         "metadata/sloc/1": [[1,1]],
         "type/sequence/string": [[1,1]],
         "type/sequence/string/literal/empty": [[1,1]],
-        "variable/assignment/single": [[1,1]]
+        "var/assignment/single": [[1,1]]
       }
     },
     "117.1297-get-list-size.py": {
@@ -4409,7 +4409,7 @@
         "appli/function/builtin/len": [[1,1]],
         "metadata/program": [[1,1]],
         "metadata/sloc/1": [[1,1]],
-        "variable/assignment/single": [[1,1]]
+        "var/assignment/single": [[1,1]]
       }
     },
     "118.1254-list-to-set.py": {
@@ -4433,7 +4433,7 @@
         "metadata/program": [[1,1]],
         "metadata/sloc/1": [[1,1]],
         "type/non_sequence/set": [[1,1]],
-        "variable/assignment/single": [[1,1]]
+        "var/assignment/single": [[1,1]]
       }
     },
     "118.3266-list-to-set.py": {
@@ -4484,7 +4484,7 @@
         "metadata/sloc/1": [[1,1]],
         "type/non_sequence/set": [[1,1]],
         "type/sequence/list": [[1,1]],
-        "variable/assignment/single": [[1,1]]
+        "var/assignment/single": [[1,1]]
       }
     },
     "119.3263-deduplicate-list.py": {
@@ -4571,7 +4571,7 @@
         "type/sequence/list/literal": [[1,1]],
         "type/sequence/list/literal/empty": [[3,3]],
         "type/sequence/string/literal": [[1,1],[1,1],[1,1],[1,1]],
-        "variable/assignment/single": [[1,1],[2,2],[3,3]]
+        "var/assignment/single": [[1,1],[2,2],[3,3]]
       }
     },
     "120.1479-read-integer-from-stdin.py": {
@@ -4602,7 +4602,7 @@
         "metadata/sloc/1": [[1,1]],
         "type/number/integer": [[1,1]],
         "type/sequence/string/literal": [[1,1]],
-        "variable/assignment/single": [[1,1]]
+        "var/assignment/single": [[1,1]]
       }
     },
     "121.3029-udp-listen-and-read.py": {
@@ -4671,9 +4671,9 @@
         "type/number/integer/literal": [[6,6]],
         "type/sequence/string/literal": [[2,2],[7,7]],
         "type/sequence/tuple/literal": [[4,4],[6,6]],
-        "variable/assignment/constant": [[2,2]],
-        "variable/assignment/parallel": [[6,6]],
-        "variable/assignment/single": [[2,2],[3,3]]
+        "var/assignment/constant": [[2,2]],
+        "var/assignment/parallel": [[6,6]],
+        "var/assignment/single": [[2,2],[3,3]]
       }
     },
     "122.1453-declare-enumeration.py": {
@@ -4708,8 +4708,8 @@
         "metadata/sloc/2": [[1,2]],
         "type/number/integer/literal": [[2,2]],
         "type/sequence/tuple/literal": [[2,2]],
-        "variable/assignment/constant": [[2,2],[2,2],[2,2],[2,2]],
-        "variable/assignment/parallel/more_than_two": [[2,2]]
+        "var/assignment/constant": [[2,2],[2,2],[2,2],[2,2]],
+        "var/assignment/parallel/more_than_two": [[2,2]]
       }
     },
     "122.1454-declare-enumeration.py": {
@@ -4752,8 +4752,8 @@
         "metadata/program": [[1,6]],
         "metadata/sloc/6": [[1,6]],
         "type/number/integer/literal": [[3,3],[4,4],[5,5],[6,6]],
-        "variable/assignment/constant": [[3,3],[4,4],[5,5],[6,6]],
-        "variable/assignment/single": [[3,3],[4,4],[5,5],[6,6]]
+        "var/assignment/constant": [[3,3],[4,4],[5,5],[6,6]],
+        "var/assignment/single": [[3,3],[4,4],[5,5],[6,6]]
       }
     },
     "123.2146-assert-condition.py": {
@@ -4829,7 +4829,7 @@
         "test/equality/not": [[4,4]],
         "type/boolean": [[4,4],[4,4]],
         "type/number/integer/literal": [[4,4]],
-        "variable/assignment/single": [[3,3]]
+        "var/assignment/single": [[3,3]]
       }
     },
     "125.2167-measure-function-call-duration.py": {
@@ -4876,7 +4876,7 @@
         "metadata/sloc/5": [[1,5]],
         "operator/arithmetic/substraction": [[5,5]],
         "type/sequence/string/literal": [[5,5]],
-        "variable/assignment/single": [[2,2],[4,4]]
+        "var/assignment/single": [[2,2],[4,4]]
       }
     },
     "126.2137-multiple-return-values.py": {
@@ -4936,7 +4936,7 @@
         "metadata/program": [[1,2]],
         "metadata/sloc/2": [[1,2]],
         "type/sequence/string/literal": [[2,2],[2,2]],
-        "variable/assignment/single": [[2,2]]
+        "var/assignment/single": [[2,2]]
       }
     },
     "128.2085-breadth-first-traversing-of-a-tree.py": {
@@ -5021,9 +5021,9 @@
         "type/number/integer/literal/zero": [[4,4]],
         "type/sequence/list": [[9,9]],
         "type/sequence/list/literal": [[2,2]],
-        "variable/assignment": [[8,8]],
-        "variable/assignment/constant": [[2,2]],
-        "variable/assignment/single": [[2,2],[4,4]]
+        "var/assignment": [[8,8]],
+        "var/assignment/constant": [[2,2]],
+        "var/assignment/single": [[2,2],[4,4]]
       }
     },
     "129.2282-breadth-first-traversing-in-a-graph.py": {
@@ -5113,7 +5113,7 @@
         "type/non_sequence/set": [[3,3],[8,8]],
         "type/sequence/list": [[9,9]],
         "type/sequence/list/literal": [[4,4]],
-        "variable/assignment/single": [[3,3],[4,4],[6,6]]
+        "var/assignment/single": [[3,3],[4,4],[6,6]]
       }
     },
     "130.2283-depth-first-traversing-in-a-graph.py": {
@@ -5195,7 +5195,7 @@
         "type/non_sequence/set": [[2,2],[7,7]],
         "type/sequence/list": [[8,8]],
         "type/sequence/list/literal": [[3,3]],
-        "variable/assignment/single": [[2,2],[3,3],[5,5]]
+        "var/assignment/single": [[2,2],[3,3],[5,5]]
       }
     },
     "131.2083-successive-conditions.py": {
@@ -5279,7 +5279,7 @@
         "metadata/program": [[1,2]],
         "metadata/sloc/2": [[1,2]],
         "type/sequence/string/literal": [[2,2],[2,2]],
-        "variable/assignment/single": [[2,2]]
+        "var/assignment/single": [[2,2]]
       }
     },
     "133.2160-case-insensitive-string-contains.py": {
@@ -5307,7 +5307,7 @@
         "test/belonging": [[1,1]],
         "type/boolean": [[1,1]],
         "type/sequence/string": [[1,1],[1,1]],
-        "variable/assignment/single": [[1,1]]
+        "var/assignment/single": [[1,1]]
       }
     },
     "134.1850-create-a-new-list.py": {
@@ -5330,7 +5330,7 @@
         "metadata/program": [[1,1]],
         "metadata/sloc/1": [[1,1]],
         "type/sequence/list/literal": [[1,1]],
-        "variable/assignment/single": [[1,1]]
+        "var/assignment/single": [[1,1]]
       }
     },
     "135.2158-remove-item-from-list-by-its-value.py": {
@@ -5382,7 +5382,7 @@
         "metadata/sloc/1": [[1,1]],
         "test/equality/not": [[1,1]],
         "type/boolean": [[1,1]],
-        "variable/assignment/single": [[1,1]]
+        "var/assignment/single": [[1,1]]
       }
     },
     "137.1823-check-if-string-contains-only-digits.py": {
@@ -5405,7 +5405,7 @@
         "metadata/program": [[1,1]],
         "metadata/sloc/1": [[1,1]],
         "type/sequence/string": [[1,1]],
-        "variable/assignment/single": [[1,1]]
+        "var/assignment/single": [[1,1]]
       }
     },
     "138.2161-create-temp-file.py": {
@@ -5430,7 +5430,7 @@
         "library/standard/tempfile": [[1,1]],
         "metadata/program": [[1,2]],
         "metadata/sloc/2": [[1,2]],
-        "variable/assignment/single": [[2,2]]
+        "var/assignment/single": [[2,2]]
       }
     },
     "139.2162-create-temp-directory.py": {
@@ -5455,7 +5455,7 @@
         "library/standard/tempfile": [[1,1]],
         "metadata/program": [[1,2]],
         "metadata/sloc/2": [[1,2]],
-        "variable/assignment/single": [[2,2]]
+        "var/assignment/single": [[2,2]]
       }
     },
     "140.2156-delete-map-entry.py": {
@@ -5538,7 +5538,7 @@
         "appli/function/builtin/hex": [[1,1]],
         "metadata/program": [[1,1]],
         "metadata/sloc/1": [[1,1]],
-        "variable/assignment/single": [[1,1]]
+        "var/assignment/single": [[1,1]]
       }
     },
     "143.2256-iterate-alternatively-over-two-lists.py": {
@@ -5597,7 +5597,7 @@
         "library/standard/os": [[1,1]],
         "metadata/program": [[1,2]],
         "metadata/sloc/2": [[1,2]],
-        "variable/assignment/single": [[2,2]]
+        "var/assignment/single": [[2,2]]
       }
     },
     "144.2915-check-if-file-exists.py": {
@@ -5628,7 +5628,7 @@
         "library/standard/pathlib/Path": [[1,1]],
         "metadata/program": [[1,2]],
         "metadata/sloc/2": [[1,2]],
-        "variable/assignment/single": [[2,2]]
+        "var/assignment/single": [[2,2]]
       }
     },
     "145.1822-print-log-line-with-datetime.py": {
@@ -5671,7 +5671,7 @@
         "metadata/program": [[1,6]],
         "metadata/sloc/6": [[1,6]],
         "type/sequence/string/literal": [[3,3],[5,5]],
-        "variable/assignment/single": [[5,5]]
+        "var/assignment/single": [[5,5]]
       }
     },
     "146.1825-convert-string-to-floating-point-number.py": {
@@ -5711,7 +5711,7 @@
         "metadata/program": [[1,4]],
         "metadata/sloc/4": [[1,4]],
         "type/sequence/string/literal": [[2,2],[3,3]],
-        "variable/assignment/single": [[2,2],[4,4]]
+        "var/assignment/single": [[2,2],[4,4]]
       }
     },
     "146.1826-convert-string-to-floating-point-number.py": {
@@ -5735,7 +5735,7 @@
         "metadata/program": [[1,1]],
         "metadata/sloc/1": [[1,1]],
         "type/number/floating_point": [[1,1]],
-        "variable/assignment/single": [[1,1]]
+        "var/assignment/single": [[1,1]]
       }
     },
     "146.2739-convert-string-to-floating-point-number.py": {
@@ -5792,7 +5792,7 @@
         "metadata/sloc/2": [[1,2]],
         "type/sequence/string/literal": [[2,2]],
         "type/sequence/string/literal/empty": [[2,2]],
-        "variable/assignment/single": [[2,2]]
+        "var/assignment/single": [[2,2]]
       }
     },
     "148.1829-read-list-of-integer-numbers-from-stdin.py": {
@@ -5855,7 +5855,7 @@
         "metadata/sloc/1": [[1,1]],
         "type/sequence/string": [[1,1]],
         "type/sequence/string/literal": [[1,1]],
-        "variable/assignment/single": [[1,1]]
+        "var/assignment/single": [[1,1]]
       }
     },
     "151.2166-remove-string-trailing-path-separator.py": {
@@ -5904,7 +5904,7 @@
         "subscript/slice/stop": [[3,3]],
         "type/number/integer/literal": [[3,3]],
         "type/sequence/string": [[2,2]],
-        "variable/assignment/single": [[3,3]]
+        "var/assignment/single": [[3,3]]
       }
     },
     "152.2153-turn-a-character-into-a-string.py": {
@@ -5922,7 +5922,7 @@
       "taxa": {
         "metadata/program": [[1,1]],
         "metadata/sloc/1": [[1,1]],
-        "variable/assignment/single": [[1,1]]
+        "var/assignment/single": [[1,1]]
       }
     },
     "153.1980-concatenate-string-with-integer.py": {
@@ -5951,7 +5951,7 @@
         "metadata/sloc/1": [[1,1]],
         "type/sequence/string": [[1,1]],
         "type/sequence/string/literal": [[1,1]],
-        "variable/assignment/single": [[1,1]]
+        "var/assignment/single": [[1,1]]
       }
     },
     "154.2155-halfway-between-two-hex-color-codes.py": {
@@ -6035,8 +6035,8 @@
         "type/sequence/string": [[3,3]],
         "type/sequence/string/literal": [[3,3]],
         "type/sequence/tuple/literal": [[1,1],[2,2]],
-        "variable/assignment/parallel/more_than_two": [[1,1],[2,2]],
-        "variable/assignment/single": [[3,3]]
+        "var/assignment/parallel/more_than_two": [[1,1],[2,2]],
+        "var/assignment/single": [[3,3]]
       }
     },
     "154.2292-halfway-between-two-hex-color-codes.py": {
@@ -6173,7 +6173,7 @@
         "type/sequence/string": [[10,10]],
         "type/sequence/string/literal": [[10,10],[10,10],[11,11],[13,13]],
         "type/sequence/string/literal/empty": [[10,10]],
-        "variable/assignment/single": [[9,9],[11,11],[13,13]]
+        "var/assignment/single": [[9,9],[11,11],[13,13]]
       }
     },
     "155.2147-delete-file.py": {
@@ -6205,7 +6205,7 @@
         "library/standard/pathlib": [[1,1]],
         "metadata/program": [[1,3]],
         "metadata/sloc/3": [[1,3]],
-        "variable/assignment/single": [[2,2]]
+        "var/assignment/single": [[2,2]]
       }
     },
     "156.2148-format-integer-with-zero-padding.py": {
@@ -6232,7 +6232,7 @@
         "metadata/program": [[1,1]],
         "metadata/sloc/1": [[1,1]],
         "type/sequence/string/literal": [[1,1]],
-        "variable/assignment/single": [[1,1]]
+        "var/assignment/single": [[1,1]]
       }
     },
     "157.2150-declare-constant-string.py": {
@@ -6252,8 +6252,8 @@
         "metadata/program": [[1,1]],
         "metadata/sloc/1": [[1,1]],
         "type/sequence/string/literal": [[1,1]],
-        "variable/assignment/constant": [[1,1]],
-        "variable/assignment/single": [[1,1]]
+        "var/assignment/constant": [[1,1]],
+        "var/assignment/single": [[1,1]]
       }
     },
     "158.2163-random-sublist.py": {
@@ -6283,7 +6283,7 @@
         "library/standard/random": [[1,1]],
         "metadata/program": [[1,2]],
         "metadata/sloc/2": [[1,2]],
-        "variable/assignment/single": [[2,2]]
+        "var/assignment/single": [[2,2]]
       }
     },
     "159.2281-trie.py": {
@@ -6324,7 +6324,7 @@
         "metadata/sloc/5": [[1,5]],
         "type/null/literal": [[2,2]],
         "type/sequence/list/literal/empty": [[4,4]],
-        "variable/assignment": [[3,3],[4,4],[5,5]]
+        "var/assignment": [[3,3],[4,4],[5,5]]
       }
     },
     "160.2165-detect-if-32-bit-or-64-bit-architecture.py": {
@@ -6407,7 +6407,7 @@
         "metadata/program": [[1,1]],
         "metadata/sloc/1": [[1,1]],
         "operator/arithmetic/multiplication": [[1,1]],
-        "variable/assignment/single": [[1,1]]
+        "var/assignment/single": [[1,1]]
       }
     },
     "162.2164-execute-procedures-depending-on-options.py": {
@@ -6578,7 +6578,7 @@
         "metadata/sloc/7": [[1,7]],
         "type/null/literal": [[4,4]],
         "type/sequence/tuple/literal": [[3,3],[6,6]],
-        "variable/assignment/parallel": [[3,3]]
+        "var/assignment/parallel": [[3,3]]
       }
     },
     "164.2169-open-url-in-default-browser.py": {
@@ -6629,7 +6629,7 @@
         "subscript/index": [[1,1]],
         "subscript/index/backwards/last": [[1,1]],
         "type/number/integer/literal": [[1,1]],
-        "variable/assignment/single": [[1,1]]
+        "var/assignment/single": [[1,1]]
       }
     },
     "166.2272-concatenate-two-lists.py": {
@@ -6652,7 +6652,7 @@
         "metadata/program": [[1,1]],
         "metadata/sloc/1": [[1,1]],
         "operator/arithmetic/addition": [[1,1]],
-        "variable/assignment/single": [[1,1]]
+        "var/assignment/single": [[1,1]]
       }
     },
     "167.2611-trim-prefix.py": {
@@ -6689,7 +6689,7 @@
         "operator/boolean/and": [[1,1]],
         "subscript/slice/start": [[1,1]],
         "type/sequence/string": [[1,1]],
-        "variable/assignment/single": [[1,1]]
+        "var/assignment/single": [[1,1]]
       }
     },
     "167.3175-trim-prefix.py": {
@@ -6714,7 +6714,7 @@
         "metadata/program": [[1,1]],
         "metadata/sloc/1": [[1,1]],
         "type/sequence/string": [[1,1]],
-        "variable/assignment/single": [[1,1]]
+        "var/assignment/single": [[1,1]]
       }
     },
     "168.2277-trim-suffix.py": {
@@ -6751,7 +6751,7 @@
         "type/number/integer/literal": [[1,1]],
         "type/number/integer/literal/zero": [[1,1]],
         "type/sequence/string": [[1,1]],
-        "variable/assignment/single": [[1,1]]
+        "var/assignment/single": [[1,1]]
       }
     },
     "168.3174-trim-suffix.py": {
@@ -6776,7 +6776,7 @@
         "metadata/program": [[1,1]],
         "metadata/sloc/1": [[1,1]],
         "type/sequence/string": [[1,1]],
-        "variable/assignment/single": [[1,1]]
+        "var/assignment/single": [[1,1]]
       }
     },
     "169.2233-string-length.py": {
@@ -6799,7 +6799,7 @@
         "appli/function/builtin/len": [[1,1]],
         "metadata/program": [[1,1]],
         "metadata/sloc/1": [[1,1]],
-        "variable/assignment/single": [[1,1]]
+        "var/assignment/single": [[1,1]]
       }
     },
     "170.2275-get-map-size.py": {
@@ -6822,7 +6822,7 @@
         "appli/function/builtin/len": [[1,1]],
         "metadata/program": [[1,1]],
         "metadata/sloc/1": [[1,1]],
-        "variable/assignment/single": [[1,1]]
+        "var/assignment/single": [[1,1]]
       }
     },
     "171.2446-add-an-element-at-the-end-of-a-list.py": {
@@ -6867,7 +6867,7 @@
         "metadata/program": [[1,1]],
         "metadata/sloc/1": [[1,1]],
         "subscript/index": [[1,1]],
-        "variable/assignment": [[1,1]]
+        "var/assignment": [[1,1]]
       }
     },
     "173.2427-format-a-number-with-grouped-thousands.py": {
@@ -6991,7 +6991,7 @@
         "metadata/sloc/4": [[1,4]],
         "type/sequence/string": [[2,2]],
         "type/sequence/string/literal": [[2,2],[3,3]],
-        "variable/assignment/single": [[2,2],[3,3],[4,4]]
+        "var/assignment/single": [[2,2],[3,3],[4,4]]
       }
     },
     "175.2613-bytes-to-hex-string.py": {
@@ -7013,7 +7013,7 @@
         "appli/method/hex": [[1,1]],
         "metadata/program": [[1,1]],
         "metadata/sloc/1": [[1,1]],
-        "variable/assignment/single": [[1,1]]
+        "var/assignment/single": [[1,1]]
       }
     },
     "176.2614-hex-string-to-byte-array.py": {
@@ -7037,7 +7037,7 @@
         "appli/method/fromhex": [[1,1]],
         "metadata/program": [[1,1]],
         "metadata/sloc/1": [[1,1]],
-        "variable/assignment/single": [[1,1]]
+        "var/assignment/single": [[1,1]]
       }
     },
     "177.2709-find-files-with-a-given-list-of-filename-extensions.py": {
@@ -7093,8 +7093,8 @@
         "type/number/integer/literal": [[3,3]],
         "type/sequence/list/literal": [[2,2]],
         "type/sequence/string/literal": [[2,2],[2,2],[2,2]],
-        "variable/assignment/constant": [[3,3]],
-        "variable/assignment/single": [[2,2],[3,3]]
+        "var/assignment/constant": [[3,3]],
+        "var/assignment/single": [[2,2],[3,3]]
       }
     },
     "177.2725-find-files-with-a-given-list-of-filename-extensions.py": {
@@ -7148,7 +7148,7 @@
         "type/sequence/string": [[4,4]],
         "type/sequence/string/literal": [[4,4],[7,7]],
         "type/sequence/tuple/literal": [[5,5]],
-        "variable/assignment/single": [[3,3]]
+        "var/assignment/single": [[3,3]]
       }
     },
     "177.3241-find-files-with-a-given-list-of-filename-extensions.py": {
@@ -7229,7 +7229,7 @@
         "test/inequality": [[1,1],[1,1],[1,1],[1,1]],
         "test/inequality/chained/2": [[1,1],[1,1]],
         "type/boolean": [[1,1],[1,1]],
-        "variable/assignment/single": [[1,1]]
+        "var/assignment/single": [[1,1]]
       }
     },
     "179.2688-get-center-of-a-rectangle.py": {
@@ -7263,7 +7263,7 @@
         "operator/arithmetic/division": [[1,1],[1,1]],
         "type/number/integer/literal": [[1,1],[1,1]],
         "type/sequence/tuple/literal": [[1,1]],
-        "variable/assignment/single": [[1,1]]
+        "var/assignment/single": [[1,1]]
       }
     },
     "179.2689-get-center-of-a-rectangle.py": {
@@ -7313,7 +7313,7 @@
         "operator/arithmetic/division": [[3,3],[3,3]],
         "type/number/integer/literal": [[3,3],[3,3]],
         "type/sequence/string/literal": [[2,2],[2,2]],
-        "variable/assignment/single": [[2,2],[3,3]]
+        "var/assignment/single": [[2,2],[3,3]]
       }
     },
     "180.2612-list-files-in-directory.py": {
@@ -7341,7 +7341,7 @@
         "library/standard/os": [[1,1]],
         "metadata/program": [[1,2]],
         "metadata/sloc/2": [[1,2]],
-        "variable/assignment/single": [[2,2]]
+        "var/assignment/single": [[2,2]]
       }
     },
     "182.2658-quine-program.py": {
@@ -7373,7 +7373,7 @@
         "metadata/sloc/2": [[1,2]],
         "operator/arithmetic/modulo": [[2,2]],
         "type/sequence/string/literal": [[1,1]],
-        "variable/assignment/single": [[1,1]]
+        "var/assignment/single": [[1,1]]
       }
     },
     "183.3025-make-http-put-request.py": {
@@ -7427,8 +7427,8 @@
         "type/non_sequence/dictionary/literal/empty": [[5,5]],
         "type/sequence/string/literal": [[3,3],[4,4]],
         "type/sequence/tuple/literal": [[7,7],[7,7]],
-        "variable/assignment/parallel": [[7,7]],
-        "variable/assignment/single": [[3,3],[4,4],[5,5],[6,6]]
+        "var/assignment/parallel": [[7,7]],
+        "var/assignment/single": [[3,3],[4,4],[5,5],[6,6]]
       }
     },
     "184.2701-tomorrow.py": {
@@ -7506,7 +7506,7 @@
         "type/number/floating_point/literal": [[2,2]],
         "type/number/integer/literal": [[2,2]],
         "type/sequence/tuple/literal": [[2,2]],
-        "variable/assignment/single": [[2,2]]
+        "var/assignment/single": [[2,2]]
       }
     },
     "186.2699-exit-program-cleanly.py": {
@@ -7644,8 +7644,8 @@
         "type/number/integer/literal/zero": [[3,3]],
         "type/sequence/list/literal": [[3,3]],
         "type/sequence/tuple/literal": [[15,15],[15,15]],
-        "variable/assignment": [[3,3],[4,4],[9,9]],
-        "variable/assignment/parallel": [[15,15]]
+        "var/assignment": [[3,3],[4,4],[9,9]],
+        "var/assignment/parallel": [[15,15]]
       }
     },
     "188.3171-matrix-multiplication.py": {
@@ -7671,7 +7671,7 @@
         "metadata/program": [[1,2]],
         "metadata/sloc/2": [[1,2]],
         "operator/matrix/multiplication": [[2,2]],
-        "variable/assignment/single": [[2,2]]
+        "var/assignment/single": [[2,2]]
       }
     },
     "188.3284-matrix-multiplication.py": {
@@ -7701,7 +7701,7 @@
         "library/third_party/numpy": [[1,1]],
         "metadata/program": [[1,2]],
         "metadata/sloc/2": [[1,2]],
-        "variable/assignment/single": [[2,2]]
+        "var/assignment/single": [[2,2]]
       }
     },
     "189.3236-filter-and-transform-list.py": {
@@ -7732,7 +7732,7 @@
         "appli/class_constructor/T": [[1,1]],
         "metadata/program": [[1,1]],
         "metadata/sloc/1": [[1,1]],
-        "variable/assignment/single": [[1,1]]
+        "var/assignment/single": [[1,1]]
       }
     },
     "191.3403-check-if-any-value-in-a-list-is-larger-than-a-limit.py": {
@@ -7799,7 +7799,7 @@
         "io/file/open": [[1,1]],
         "metadata/program": [[1,2]],
         "metadata/sloc/2": [[1,2]],
-        "variable/assignment/single": [[2,2]]
+        "var/assignment/single": [[2,2]]
       }
     }
   },
@@ -16965,7 +16965,7 @@
       "185.2820-execute-function-in-30-seconds.py",
       "187.3261-disjoint-set.py"
     ],
-    "variable/assignment": [
+    "var/assignment": [
       "009.1410-create-a-binary-tree-data-structure.py",
       "009.3176-create-a-binary-tree-data-structure.py",
       "017.1103-create-a-tree-data-structure.py",
@@ -16978,7 +16978,7 @@
       "172.2442-insert-entry-in-map.py",
       "187.3261-disjoint-set.py"
     ],
-    "variable/assignment/constant": [
+    "var/assignment/constant": [
       "040.2279-graph-with-adjacency-lists.py",
       "121.3029-udp-listen-and-read.py",
       "122.1453-declare-enumeration.py",
@@ -16987,21 +16987,21 @@
       "157.2150-declare-constant-string.py",
       "177.2709-find-files-with-a-given-list-of-filename-extensions.py"
     ],
-    "variable/assignment/parallel": [
+    "var/assignment/parallel": [
       "102.2173-load-from-http-get-request-into-a-file.py",
       "121.3029-udp-listen-and-read.py",
       "163.3177-print-list-elements-by-group-of-2.py",
       "183.3025-make-http-put-request.py",
       "187.3261-disjoint-set.py"
     ],
-    "variable/assignment/parallel/more_than_two": [
+    "var/assignment/parallel/more_than_two": [
       "122.1453-declare-enumeration.py",
       "154.2155-halfway-between-two-hex-color-codes.py"
     ],
-    "variable/assignment/parallel/swap": [
+    "var/assignment/parallel/swap": [
       "021.0084-swap-values-of-variables-a-and-b.py"
     ],
-    "variable/assignment/single": [
+    "var/assignment/single": [
       "008.0039-initialize-a-new-map-associative-array.py",
       "019.0197-reverse-a-list.py",
       "019.1983-reverse-a-list.py",
@@ -17135,7 +17135,7 @@
       "189.3236-filter-and-transform-list.py",
       "197.3457-get-a-list-of-lines-from-a-file.py"
     ],
-    "variable/deletion": [
+    "var/deletion": [
       "029.0199-remove-item-from-list-by-its-index.py"
     ]
   },

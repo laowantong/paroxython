@@ -19,13 +19,13 @@
         "operation": "exclude",
         "data": [
             "type/number/floating_point/literal",
-            ("type/sequence/tuple", "is not", "variable/assignment/parallel"),
+            ("type/sequence/tuple", "is not", "var/assignment/parallel"),
         ],
     },
     {
         "operation": "include",
         "data": [
-            "variable/assignment",
+            "var/assignment",
         ],
     },
     {

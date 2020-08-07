@@ -45,9 +45,9 @@ def test_taxa_of_programs():
 
 def test_programs_of_taxa():
     dbf = ProgramFilter(db)
-    taxa = {"variable/assignment/single"}
+    taxa = {"var/assignment/single"}
 
-    # The taxon "variable/assignment/single" is featured by assignment.py and collatz.py.
+    # The taxon "var/assignment/single" is featured by assignment.py and collatz.py.
     # This corresponds to follow=False. It is indirectly featured by fizzbuzz.py (which imports
     # collatz.py) and by is_even.py (which imports fizzbuzz.py). Their addition corresponds
     # to follow=True.
@@ -68,11 +68,11 @@ def test_programs_of_taxa():
 
 def test_exclude_taxa():
 
-    # The taxon "variable/assignment/single" is featured by assignment.py and collatz.py. It
+    # The taxon "var/assignment/single" is featured by assignment.py and collatz.py. It
     # is indirectly featured by fizzbuzz.py (which imports collatz.py) and by is_even.py
     # (which imports fizzbuzz.py). Therefore, excluding this taxon excludes all four programs.
     dbf = ProgramFilter(db)
-    dbf.exclude_programs(dbf.programs_of_taxa({"variable/assignment/single"}), follow=True)
+    dbf.exclude_programs(dbf.programs_of_taxa({"var/assignment/single"}), follow=True)
     print(dbf.selected_programs)
     assert dbf.selected_programs == set()
 
@@ -100,11 +100,11 @@ def test_exclude_taxa():
 
 def test_include_taxa():
 
-    # The taxon "variable/assignment/single" is directly featured by assignment.py and
+    # The taxon "var/assignment/single" is directly featured by assignment.py and
     # collatz.py, but only indirectly by the other programs, which therefore cannot be
     # included in the result. Note that this behavior contrasts with that of exclude_taxa.
     dbf = ProgramFilter(db)
-    dbf.include_programs(dbf.programs_of_taxa({"variable/assignment/single"}))
+    dbf.include_programs(dbf.programs_of_taxa({"var/assignment/single"}))
     print(dbf.selected_programs)
     assert dbf.selected_programs == {"assignment.py", "collatz.py"}
 

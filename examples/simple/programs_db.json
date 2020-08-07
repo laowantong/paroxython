@@ -56,7 +56,7 @@
         "metadata/sloc/2": [[1,2]],
         "operator/string/format": [[2,2]],
         "type/sequence/string/literal": [[1,1],[2,2]],
-        "variable/assignment/single": [[1,1]]
+        "var/assignment/single": [[1,1]]
       }
     },
     "03_friends.py": {
@@ -109,7 +109,7 @@
         "type/sequence/string": [[3,3]],
         "type/sequence/string/literal": [[1,1],[1,1],[1,1],[1,1],[3,3]],
         "type/sequence/tuple/literal": [[2,2]],
-        "variable/assignment/single": [[1,1]]
+        "var/assignment/single": [[1,1]]
       }
     },
     "04_fibonacci.py": {
@@ -175,8 +175,8 @@
         "type/sequence/string": [[3,3]],
         "type/sequence/string/literal": [[3,3]],
         "type/sequence/tuple/literal": [[1,1],[1,1],[4,4],[4,4]],
-        "variable/assignment/parallel": [[1,1]],
-        "variable/assignment/parallel/slide": [[4,4]]
+        "var/assignment/parallel": [[1,1]],
+        "var/assignment/parallel/slide": [[4,4]]
       }
     },
     "05_greet.py": {
@@ -326,7 +326,7 @@
         "type/number/floating_point/literal": [[1,1],[1,1]],
         "type/number/integer/literal": [[2,2],[2,2]],
         "type/sequence/string/literal": [[1,1],[1,1],[2,2],[2,2],[4,4]],
-        "variable/assignment/single": [[1,1],[2,2],[3,3]]
+        "var/assignment/single": [[1,1],[2,2],[3,3]]
       }
     },
     "08_arguments.py": {
@@ -390,7 +390,7 @@
         "type/number/integer": [[3,3]],
         "type/number/integer/literal": [[3,3]],
         "type/sequence/string/literal": [[4,4],[6,6]],
-        "variable/assignment/single": [[3,3]]
+        "var/assignment/single": [[3,3]]
       }
     },
     "09_indent.py": {
@@ -458,7 +458,7 @@
         "operator/string/concatenation": [[4,4],[7,7]],
         "type/sequence/string": [[7,7]],
         "type/sequence/string/literal": [[2,2],[4,4],[7,7]],
-        "variable/assignment/single": [[2,2]]
+        "var/assignment/single": [[2,2]]
       }
     },
     "10_time.py": {
@@ -552,7 +552,7 @@
         "type/non_sequence/dictionary/literal": [[2,2]],
         "type/number/integer/literal": [[3,3],[4,4],[5,5],[6,6],[7,7],[8,8]],
         "type/sequence/string/literal": [[3,3],[4,4],[5,5],[6,6],[7,7],[8,8],[17,17]],
-        "variable/assignment/single": [[2,2],[10,10],[11,11]]
+        "var/assignment/single": [[2,2],[10,10],[11,11]]
       }
     },
     "11_bottles.py": {
@@ -614,9 +614,9 @@
         "type/number/integer/literal": [[7,7],[8,8],[9,9],[10,10]],
         "type/sequence/string/literal": [[6,6]],
         "type/sequence/tuple/literal": [[9,9]],
-        "variable/assignment/augmented/Sub": [[10,10]],
-        "variable/assignment/constant": [[1,1]],
-        "variable/assignment/single": [[1,1],[7,7]]
+        "var/assignment/augmented/Sub": [[10,10]],
+        "var/assignment/constant": [[1,1]],
+        "var/assignment/single": [[1,1],[7,7]]
       }
     },
     "12_classes.py": {
@@ -710,10 +710,10 @@
         "type/boolean": [[9,9]],
         "type/number/integer/literal": [[10,10],[11,11]],
         "type/number/integer/literal/zero": [[2,2],[9,9]],
-        "variable/assignment": [[3,3]],
-        "variable/assignment/augmented/Add": [[5,5]],
-        "variable/assignment/augmented/Sub": [[7,7]],
-        "variable/assignment/single": [[10,10]]
+        "var/assignment": [[3,3]],
+        "var/assignment/augmented/Add": [[5,5]],
+        "var/assignment/augmented/Sub": [[7,7]],
+        "var/assignment/single": [[10,10]]
       }
     },
     "13_unit_testing.py": {
@@ -826,7 +826,7 @@
         "type/number/integer": [[6,6],[8,8],[8,8]],
         "type/number/integer/literal": [[5,5],[5,5],[6,6],[6,6],[8,8],[8,8],[8,8],[8,8],[11,11],[11,11],[11,11],[11,11],[11,11],[11,11],[11,11],[11,11],[11,11],[11,11]],
         "type/sequence/list/literal": [[11,11]],
-        "variable/assignment/single": [[3,3],[4,4]]
+        "var/assignment/single": [[3,3],[4,4]]
       }
     },
     "14_median.py": {
@@ -906,7 +906,7 @@
         "type/boolean": [[4,4]],
         "type/number/integer": [[5,5],[7,7],[7,7]],
         "type/number/integer/literal": [[4,4],[4,4],[5,5],[5,5],[7,7],[7,7],[7,7],[7,7]],
-        "variable/assignment/single": [[2,2],[3,3]]
+        "var/assignment/single": [[2,2],[3,3]]
       }
     },
     "15_itertools_groupby.py": {
@@ -968,7 +968,7 @@
         "type/sequence/string": [[6,6],[9,9]],
         "type/sequence/string/literal": [[6,6],[9,9]],
         "type/sequence/tuple/literal": [[7,7]],
-        "variable/assignment/single": [[2,2]]
+        "var/assignment/single": [[2,2]]
       }
     },
     "16_csv.py": {
@@ -1114,7 +1114,7 @@
         "type/sequence/string/literal": [[4,4],[4,4],[8,8],[8,8],[9,9],[9,9],[10,10],[10,10],[13,13],[13,13],[15,15],[15,15],[15,15],[18,18]],
         "type/sequence/string/literal/empty": [[4,4]],
         "type/sequence/tuple/literal": [[16,16]],
-        "variable/assignment/single": [[5,5],[14,14],[15,15],[17,17]]
+        "var/assignment/single": [[5,5],[14,14],[15,15],[17,17]]
       }
     },
     "18_queens.py": {
@@ -1265,10 +1265,10 @@
         "type/sequence/list/literal": [[11,11],[14,14]],
         "type/sequence/list/literal/empty": [[11,11]],
         "type/sequence/tuple/literal": [[4,4],[5,5],[5,5],[6,6],[14,14]],
-        "variable/assignment/chained": [[3,3]],
-        "variable/assignment/constant": [[1,1]],
-        "variable/assignment/parallel": [[5,5]],
-        "variable/assignment/single": [[1,1],[12,12]]
+        "var/assignment/chained": [[3,3]],
+        "var/assignment/constant": [[1,1]],
+        "var/assignment/parallel": [[5,5]],
+        "var/assignment/single": [[1,1],[12,12]]
       }
     },
     "20_prime_numbers.py": {
@@ -1367,7 +1367,7 @@
         "type/boolean/literal/True": [[4,4]],
         "type/number/integer/literal": [[3,3],[9,9]],
         "type/sequence": [[3,3]],
-        "variable/assignment/single": [[3,3],[5,5],[7,7]]
+        "var/assignment/single": [[3,3],[5,5],[7,7]]
       }
     },
     "21_xml_html_parsing.py": {
@@ -1450,8 +1450,8 @@
         "type/sequence/string": [[14,14]],
         "type/sequence/string/literal": [[7,7],[10,10],[10,10],[11,11],[13,13],[14,14]],
         "type/sequence/tuple/literal": [[12,12]],
-        "variable/assignment/parallel/more_than_two": [[12,12]],
-        "variable/assignment/single": [[1,1],[9,9],[10,10]]
+        "var/assignment/parallel/more_than_two": [[12,12]],
+        "var/assignment/single": [[1,1],[9,9],[10,10]]
       }
     },
     "28_queens.py": {
@@ -1634,10 +1634,10 @@
         "type/sequence/string": [[24,24]],
         "type/sequence/string/literal": [[24,24],[24,24],[24,24],[24,24]],
         "type/sequence/tuple/literal": [[7,7],[7,7],[8,8]],
-        "variable/assignment/chained": [[5,5]],
-        "variable/assignment/constant": [[1,1]],
-        "variable/assignment/parallel": [[7,7]],
-        "variable/assignment/single": [[1,1],[12,12],[22,22]]
+        "var/assignment/chained": [[5,5]],
+        "var/assignment/constant": [[1,1]],
+        "var/assignment/parallel": [[7,7]],
+        "var/assignment/single": [[1,1],[12,12],[22,22]]
       }
     },
     "33_guess_the_number.py": {
@@ -1743,8 +1743,8 @@
         "type/number/integer/literal/zero": [[2,2]],
         "type/sequence/string": [[5,5],[16,16],[18,18]],
         "type/sequence/string/literal": [[3,3],[5,5],[7,7],[10,10],[12,12],[16,16],[18,18]],
-        "variable/assignment/augmented/Add": [[8,8]],
-        "variable/assignment/single": [[2,2],[3,3],[4,4],[7,7]]
+        "var/assignment/augmented/Add": [[8,8]],
+        "var/assignment/single": [[2,2],[3,3],[4,4],[7,7]]
       }
     }
   },
@@ -4714,38 +4714,38 @@
       "21_xml_html_parsing.py",
       "28_queens.py"
     ],
-    "variable/assignment": [
+    "var/assignment": [
       "12_classes.py"
     ],
-    "variable/assignment/augmented/Add": [
+    "var/assignment/augmented/Add": [
       "12_classes.py",
       "33_guess_the_number.py"
     ],
-    "variable/assignment/augmented/Sub": [
+    "var/assignment/augmented/Sub": [
       "11_bottles.py",
       "12_classes.py"
     ],
-    "variable/assignment/chained": [
+    "var/assignment/chained": [
       "18_queens.py",
       "28_queens.py"
     ],
-    "variable/assignment/constant": [
+    "var/assignment/constant": [
       "11_bottles.py",
       "18_queens.py",
       "28_queens.py"
     ],
-    "variable/assignment/parallel": [
+    "var/assignment/parallel": [
       "04_fibonacci.py",
       "18_queens.py",
       "28_queens.py"
     ],
-    "variable/assignment/parallel/more_than_two": [
+    "var/assignment/parallel/more_than_two": [
       "21_xml_html_parsing.py"
     ],
-    "variable/assignment/parallel/slide": [
+    "var/assignment/parallel/slide": [
       "04_fibonacci.py"
     ],
-    "variable/assignment/single": [
+    "var/assignment/single": [
       "02_input_name.py",
       "03_friends.py",
       "07_grocery_bill.py",

@@ -459,7 +459,7 @@
 | 0.9375 | `type/non_sequence/dictionary/literal` | 1 |
 | 0.9375 | `type/number/integer/literal` | 1, 1 |
 | 0.9375 | `type/sequence/string/literal` | 1, 1 |
-| 0.875 | `variable/assignment/single` | 1 |
+| 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
 
@@ -482,7 +482,7 @@
 | 0.9375 | `abstr/method/naming/magic` | 2-5 |
 | 0.75 | `abstr/procedure` | 2-5 |
 | 0.875 | `type/null/literal` | 4, 5 |
-| 0.75 | `variable/assignment` | 3, 4, 5 |
+| 0.75 | `var/assignment` | 3, 4, 5 |
 | 0 | `metadata/program` | 1-5 |
 | 0 | `metadata/sloc/5` | 1-5 |
 
@@ -504,7 +504,7 @@
 | 0.9375 | `abstr/method/flavor/instance` | 2-5 |
 | 0.9375 | `abstr/method/naming/magic` | 2-5 |
 | 0.75 | `abstr/procedure` | 2-5 |
-| 0.75 | `variable/assignment` | 3, 4, 5 |
+| 0.75 | `var/assignment` | 3, 4, 5 |
 | 0 | `metadata/program` | 1-5 |
 | 0 | `metadata/sloc/5` | 1-5 |
 
@@ -694,7 +694,7 @@
 | 0.75 | `abstr/procedure` | 2-4 |
 | 0.96875 | `appli/function/builtin/casting/list` | 4 |
 | 0.875 | `type/sequence/list` | 4 |
-| 0.75 | `variable/assignment` | 3, 4 |
+| 0.75 | `var/assignment` | 3, 4 |
 | 0 | `metadata/program` | 1-4 |
 | 0 | `metadata/sloc/4` | 1-4 |
 
@@ -733,7 +733,7 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.9375 | `appli/function/builtin/reversed` | 1 |
-| 0.875 | `variable/assignment/single` | 1 |
+| 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
 
@@ -749,7 +749,7 @@
 |----|----|----|
 | 0.9375 | `subscript/slice/step/backwards` | 1 |
 | 0.9375 | `type/number/integer/literal` | 1 |
-| 0.875 | `variable/assignment/single` | 1 |
+| 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
 
@@ -808,7 +808,7 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.9375 | `type/sequence/tuple/literal` | 1, 1 |
-| 0.9375 | `variable/assignment/parallel/swap` | 1 |
+| 0.9375 | `var/assignment/parallel/swap` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
 
@@ -824,7 +824,7 @@
 |----|----|----|
 | 0.96875 | `appli/function/builtin/casting/int` | 1 |
 | 0.875 | `type/number/integer` | 1 |
-| 0.875 | `variable/assignment/single` | 1 |
+| 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
 
@@ -841,7 +841,7 @@
 | 0.875 | `appli/method/format` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
-| 0.875 | `variable/assignment/single` | 1 |
+| 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
 
@@ -856,7 +856,7 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.9375 | `type/sequence/string/literal` | 1 |
-| 0.875 | `variable/assignment/single` | 1 |
+| 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
 
@@ -882,8 +882,8 @@
 | 0.875 | `library/third_party/Queue` | 1 |
 | 0.9375 | `type/boolean/literal/True` | 4 |
 | 0.9375 | `type/sequence/string/literal` | 6 |
-| 0.75 | `variable/assignment` | 4 |
-| 0.875 | `variable/assignment/single` | 2, 3 |
+| 0.75 | `var/assignment` | 4 |
+| 0.875 | `var/assignment/single` | 2, 3 |
 | 0 | `metadata/program` | 1-6 |
 | 0 | `metadata/sloc/6` | 1-6 |
 
@@ -899,7 +899,7 @@
 |----|----|----|
 | 0.875 | `appli/function/xrange` | 1, 1 |
 | 0.96875 | `type/number/integer/literal/zero` | 1 |
-| 0.875 | `variable/assignment/single` | 1 |
+| 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
 
@@ -915,7 +915,7 @@
 |----|----|----|
 | 0.875 | `appli/function/xrange` | 1, 1, 1 |
 | 0.96875 | `type/number/integer/literal/zero` | 1 |
-| 0.875 | `variable/assignment/single` | 1 |
+| 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
 
@@ -933,7 +933,7 @@
 | 0.875 | `appli/method/zeros` | 2 |
 | 0.875 | `library/third_party/numpy` | 1 |
 | 0.9375 | `type/sequence/tuple/literal` | 2 |
-| 0.875 | `variable/assignment/single` | 2 |
+| 0.875 | `var/assignment/single` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
 
@@ -950,7 +950,7 @@
 | 0.875 | `abstr/argument/arg` | 1 |
 | 0.875 | `abstr/function/anonymous` | 1 |
 | 0.9375 | `appli/function/builtin/sorted` | 1 |
-| 0.875 | `variable/assignment/single` | 1 |
+| 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
 
@@ -965,7 +965,7 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.75 | `subscript/index` | 1 |
-| 0.75 | `variable/deletion` | 1 |
+| 0.75 | `var/deletion` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
 
@@ -990,7 +990,7 @@
 | 0.9375 | `library/standard/multiprocessing/Pool` | 1 |
 | 0.9375 | `type/number/integer/literal` | 3, 3 |
 | 0.9375 | `type/sequence/list/literal` | 4 |
-| 0.875 | `variable/assignment/single` | 2 |
+| 0.875 | `var/assignment/single` | 2 |
 | 0 | `metadata/program` | 1-4 |
 | 0 | `metadata/sloc/4` | 1-4 |
 
@@ -1062,7 +1062,7 @@
 | 0.875 | `appli/method/acquire` | 3 |
 | 0.875 | `appli/method/release` | 7 |
 | 0.875 | `library/standard/threading` | 1 |
-| 0.875 | `variable/assignment/single` | 2, 5 |
+| 0.875 | `var/assignment/single` | 2, 5 |
 | 0 | `metadata/program` | 1-7 |
 | 0 | `metadata/sloc/7` | 1-7 |
 
@@ -1083,7 +1083,7 @@
 | 0.96875 | `appli/function/builtin/casting/set` | 3 |
 | 0.75 | `flow/null_operation` | 2 |
 | 0.875 | `type/non_sequence/set` | 3 |
-| 0.875 | `variable/assignment/single` | 3 |
+| 0.875 | `var/assignment/single` | 3 |
 | 0 | `metadata/program` | 1-3 |
 | 0 | `metadata/sloc/3` | 1-3 |
 
@@ -1172,7 +1172,7 @@
 |----|----|----|
 | 0.875 | `subscript/slice/start` | 1 |
 | 0.875 | `subscript/slice/stop` | 1 |
-| 0.875 | `variable/assignment/single` | 1 |
+| 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
 
@@ -1188,7 +1188,7 @@
 |----|----|----|
 | 0.75 | `test/belonging` | 1 |
 | 0.75 | `type/boolean` | 1 |
-| 0.875 | `variable/assignment/single` | 1 |
+| 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
 
@@ -1234,9 +1234,9 @@
 | 0.9375 | `type/number/integer/literal` | 10, 13, 13, 13, 13, 13, 13 |
 | 0.96875 | `type/number/integer/literal/zero` | 13 |
 | 0.9375 | `type/sequence/tuple/literal` | 10, 13, 13 |
-| 0.75 | `variable/assignment` | 6 |
-| 0.875 | `variable/assignment/constant` | 13 |
-| 0.875 | `variable/assignment/single` | 13 |
+| 0.75 | `var/assignment` | 6 |
+| 0.875 | `var/assignment/constant` | 13 |
+| 0.875 | `var/assignment/single` | 13 |
 | 0 | `metadata/program` | 1-13 |
 | 0 | `metadata/sloc/13` | 1-13 |
 
@@ -1256,7 +1256,7 @@
 | 0.9375 | `type/number/integer/literal` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1, 1 |
-| 0.875 | `variable/assignment/single` | 1 |
+| 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
 
@@ -1272,7 +1272,7 @@
 |----|----|----|
 | 0.9375 | `subscript/slice/step/backwards` | 1 |
 | 0.9375 | `type/number/integer/literal` | 1 |
-| 0.875 | `variable/assignment/single` | 1 |
+| 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
 
@@ -1367,7 +1367,7 @@
 | 0.75 | `type/boolean` | 7 |
 | 0.875 | `type/null/literal` | 4 |
 | 0.9375 | `type/sequence/tuple/literal` | 8 |
-| 0.875 | `variable/assignment/single` | 4, 8 |
+| 0.875 | `var/assignment/single` | 4, 8 |
 | 0 | `metadata/program` | 1-11 |
 | 0 | `metadata/sloc/11` | 1-11 |
 
@@ -1454,7 +1454,7 @@
 |----|----|----|
 | 0.875 | `subscript/slice/stop` | 1 |
 | 0.9375 | `type/number/integer/literal` | 1 |
-| 0.875 | `variable/assignment/single` | 1 |
+| 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
 
@@ -1470,7 +1470,7 @@
 |----|----|----|
 | 0.875 | `subscript/slice/start` | 1 |
 | 0.9375 | `type/number/integer/literal` | 1 |
-| 0.875 | `variable/assignment/single` | 1 |
+| 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
 
@@ -1487,7 +1487,7 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.9375 | `type/sequence/string/literal` | 3 |
-| 0.875 | `variable/assignment/single` | 1 |
+| 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1-3 |
 | 0 | `metadata/sloc/3` | 1-3 |
 
@@ -1503,7 +1503,7 @@
 |----|----|----|
 | 0.875 | `appli/method/split` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
-| 0.875 | `variable/assignment/single` | 1 |
+| 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
 
@@ -1570,7 +1570,7 @@
 | 0.875 | `appli/method/join` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
-| 0.875 | `variable/assignment/single` | 1 |
+| 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
 
@@ -1589,7 +1589,7 @@
 | 0.875 | `appli/method/join` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
-| 0.875 | `variable/assignment/single` | 1 |
+| 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
 
@@ -1604,7 +1604,7 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.9375 | `appli/function/builtin/sum` | 1 |
-| 0.875 | `variable/assignment/single` | 1 |
+| 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
 
@@ -1621,7 +1621,7 @@
 | 0.96875 | `appli/function/builtin/casting/str` | 1 |
 | 0.9375 | `appli/function/builtin/str` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
-| 0.875 | `variable/assignment/single` | 1 |
+| 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
 
@@ -1665,7 +1665,7 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.9375 | `appli/function/builtin/filter` | 1 |
-| 0.875 | `variable/assignment/single` | 1 |
+| 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
 
@@ -1680,7 +1680,7 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.875 | `appli/function/p` | 1 |
-| 0.875 | `variable/assignment/single` | 1 |
+| 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
 
@@ -1697,7 +1697,7 @@
 | 0.9375 | `appli/function/builtin/open` | 1 |
 | 0.875 | `appli/method/read` | 1 |
 | 0.875 | `io/file/open` | 1 |
-| 0.875 | `variable/assignment/single` | 1 |
+| 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
 
@@ -1733,7 +1733,7 @@
 | 0.875 | `library/standard/sys` | 1 |
 | 0.75 | `subscript/index` | 2 |
 | 0.9375 | `type/number/integer/literal` | 2 |
-| 0.875 | `variable/assignment/single` | 2 |
+| 0.875 | `var/assignment/single` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
 
@@ -1750,7 +1750,7 @@
 |----|----|----|
 | 0.875 | `appli/method/now` | 2 |
 | 0.875 | `library/standard/datetime` | 1 |
-| 0.875 | `variable/assignment/single` | 2 |
+| 0.875 | `var/assignment/single` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
 
@@ -1766,7 +1766,7 @@
 |----|----|----|
 | 0.875 | `appli/method/find` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
-| 0.875 | `variable/assignment/single` | 1 |
+| 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
 
@@ -1782,7 +1782,7 @@
 |----|----|----|
 | 0.875 | `appli/method/replace` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
-| 0.875 | `variable/assignment/single` | 1 |
+| 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
 
@@ -1798,7 +1798,7 @@
 |----|----|----|
 | 0.875 | `operator/arithmetic/power` | 1 |
 | 0.9375 | `type/number/integer/literal` | 1, 1 |
-| 0.875 | `variable/assignment/single` | 1 |
+| 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
 
@@ -1815,7 +1815,7 @@
 | 0.875 | `appli/method/format` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
-| 0.875 | `variable/assignment/single` | 1 |
+| 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
 
@@ -1830,7 +1830,7 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.875 | `operator/arithmetic/power` | 1 |
-| 0.875 | `variable/assignment/single` | 1 |
+| 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
 
@@ -1877,7 +1877,7 @@
 | 0.875 | `operator/arithmetic/division` | 3 |
 | 0.9375 | `type/number/floating_point/literal` | 3 |
 | 0.875 | `type/number/integer` | 3 |
-| 0.875 | `variable/assignment/single` | 3 |
+| 0.875 | `var/assignment/single` | 3 |
 | 0 | `metadata/program` | 1-3 |
 | 0 | `metadata/sloc/3` | 1-3 |
 
@@ -1893,7 +1893,7 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.875 | `library/standard/random` | 1 |
-| 0.875 | `variable/assignment/single` | 2 |
+| 0.875 | `var/assignment/single` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
 
@@ -1909,7 +1909,7 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.875 | `library/standard/random` | 1 |
-| 0.875 | `variable/assignment/single` | 2 |
+| 0.875 | `var/assignment/single` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
 
@@ -1971,7 +1971,7 @@
 |----|----|----|
 | 0.875 | `appli/function/gcd` | 2 |
 | 0.9375 | `library/standard/fractions/gcd` | 1 |
-| 0.875 | `variable/assignment/single` | 2 |
+| 0.875 | `var/assignment/single` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
 
@@ -1990,7 +1990,7 @@
 | 0.9375 | `library/standard/fractions/gcd` | 1 |
 | 0.875 | `operator/arithmetic/integer_division` | 2 |
 | 0.875 | `operator/arithmetic/multiplication` | 2 |
-| 0.875 | `variable/assignment/single` | 2 |
+| 0.875 | `var/assignment/single` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
 
@@ -2007,7 +2007,7 @@
 | 0.875 | `appli/method/format` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
-| 0.875 | `variable/assignment/single` | 1 |
+| 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
 
@@ -2026,7 +2026,7 @@
 | 0.875 | `operator/arithmetic/substraction` | 1 |
 | 0.9375 | `type/number/complex/literal` | 1, 2 |
 | 0.9375 | `type/number/integer/literal` | 1 |
-| 0.875 | `variable/assignment/single` | 1, 2 |
+| 0.875 | `var/assignment/single` | 1, 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
 
@@ -2065,7 +2065,7 @@
 |----|----|----|
 | 0.96875 | `appli/function/builtin/casting/float` | 1 |
 | 0.875 | `type/number/floating_point` | 1 |
-| 0.875 | `variable/assignment/single` | 1 |
+| 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
 
@@ -2081,7 +2081,7 @@
 |----|----|----|
 | 0.96875 | `appli/function/builtin/casting/int` | 1 |
 | 0.875 | `type/number/integer` | 1 |
-| 0.875 | `variable/assignment/single` | 1 |
+| 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
 
@@ -2099,7 +2099,7 @@
 | 0.875 | `operator/arithmetic/addition` | 1 |
 | 0.9375 | `type/number/floating_point/literal` | 1 |
 | 0.875 | `type/number/integer` | 1 |
-| 0.875 | `variable/assignment/single` | 1 |
+| 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
 
@@ -2115,7 +2115,7 @@
 |----|----|----|
 | 0.875 | `appli/method/count` | 1 |
 | 0.75 | `type/sequence` | 1 |
-| 0.875 | `variable/assignment/single` | 1 |
+| 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
 
@@ -2133,7 +2133,7 @@
 | 0.875 | `appli/method/compile` | 2 |
 | 0.875 | `library/standard/re` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 2 |
-| 0.875 | `variable/assignment/single` | 2 |
+| 0.875 | `var/assignment/single` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
 
@@ -2151,7 +2151,7 @@
 | 0.875 | `appli/method/count` | 1 |
 | 0.75 | `type/sequence` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
-| 0.875 | `variable/assignment/single` | 1 |
+| 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
 
@@ -2218,7 +2218,7 @@
 |----|----|----|
 | 0.96875 | `appli/function/builtin/casting/bytearray` | 1 |
 | 0.9375 | `type/number/integer/literal` | 1 |
-| 0.875 | `variable/assignment/single` | 1 |
+| 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
 
@@ -2260,7 +2260,7 @@
 | 0.75 | `abstr/procedure` | 2-3 |
 | 0.875 | `abstr/return/something` | 6 |
 | 0.96875 | `type/number/integer/literal/zero` | 3 |
-| 0.75 | `variable/assignment` | 3 |
+| 0.75 | `var/assignment` | 3 |
 | 0 | `metadata/program` | 1-6 |
 | 0 | `metadata/sloc/6` | 1-6 |
 
@@ -2281,7 +2281,7 @@
 | 0.875 | `io/file/open` | 2 |
 | 0.875 | `library/standard/json` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 2, 2 |
-| 0.875 | `variable/assignment/single` | 3 |
+| 0.875 | `var/assignment/single` | 3 |
 | 0 | `metadata/program` | 1-3 |
 | 0 | `metadata/sloc/3` | 1-3 |
 
@@ -2372,7 +2372,7 @@
 |----|----|----|
 | 0.875 | `appli/method/getsize` | 2 |
 | 0.875 | `library/standard/os` | 1 |
-| 0.875 | `variable/assignment/single` | 2 |
+| 0.875 | `var/assignment/single` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
 
@@ -2388,7 +2388,7 @@
 |----|----|----|
 | 0.875 | `appli/method/startswith` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
-| 0.875 | `variable/assignment/single` | 1 |
+| 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
 
@@ -2404,7 +2404,7 @@
 |----|----|----|
 | 0.875 | `appli/method/endswith` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
-| 0.875 | `variable/assignment/single` | 1 |
+| 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
 
@@ -2421,7 +2421,7 @@
 |----|----|----|
 | 0.875 | `appli/method/fromtimestamp` | 2 |
 | 0.875 | `library/standard/datetime` | 1 |
-| 0.875 | `variable/assignment/single` | 2 |
+| 0.875 | `var/assignment/single` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
 
@@ -2442,7 +2442,7 @@
 | 0.9375 | `library/standard/datetime/date` | 1 |
 | 0.9375 | `type/number/integer/literal` | 2, 2, 2 |
 | 0.9375 | `type/sequence/string/literal` | 3 |
-| 0.875 | `variable/assignment/single` | 2, 3 |
+| 0.875 | `var/assignment/single` | 2, 3 |
 | 0 | `metadata/program` | 1-3 |
 | 0 | `metadata/sloc/3` | 1-3 |
 
@@ -2461,7 +2461,7 @@
 | 0.875 | `appli/method/isoformat` | 3 |
 | 0.875 | `appli/method/today` | 2 |
 | 0.9375 | `library/standard/datetime/date` | 1 |
-| 0.875 | `variable/assignment/single` | 2, 3 |
+| 0.875 | `var/assignment/single` | 2, 3 |
 | 0 | `metadata/program` | 1-3 |
 | 0 | `metadata/sloc/3` | 1-3 |
 
@@ -2495,7 +2495,7 @@
 | 0.875 | `appli/method/read` | 3 |
 | 0.875 | `appli/method/urlopen` | 2 |
 | 0.875 | `library/standard/urllib.request` | 1 |
-| 0.875 | `variable/assignment/single` | 3 |
+| 0.875 | `var/assignment/single` | 3 |
 | 0 | `metadata/program` | 1-3 |
 | 0 | `metadata/sloc/3` | 1-3 |
 
@@ -2514,7 +2514,7 @@
 | 0.875 | `library/standard/urllib` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 2 |
 | 0.9375 | `type/sequence/tuple/literal` | 2 |
-| 0.875 | `variable/assignment/parallel` | 2 |
+| 0.875 | `var/assignment/parallel` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
 
@@ -2532,7 +2532,7 @@
 | 0.875 | `appli/method/parse` | 2 |
 | 0.875 | `library/third_party/lxml.etree` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 2 |
-| 0.875 | `variable/assignment/single` | 2 |
+| 0.875 | `var/assignment/single` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
 
@@ -2568,8 +2568,8 @@
 | 0.875 | `library/third_party/pyxser` | 1 |
 | 0.875 | `type/null/literal` | 3, 4, 5 |
 | 0.9375 | `type/sequence/string/literal` | 10, 10, 10, 11 |
-| 0.75 | `variable/assignment` | 7, 8, 9 |
-| 0.875 | `variable/assignment/single` | 3, 4, 5, 10, 11 |
+| 0.75 | `var/assignment` | 7, 8, 9 |
+| 0.875 | `var/assignment/single` | 3, 4, 5, 10, 11 |
 | 0 | `metadata/program` | 1-12 |
 | 0 | `metadata/sloc/12` | 1-12 |
 
@@ -2587,7 +2587,7 @@
 | 0.875 | `library/standard/sys` | 1 |
 | 0.75 | `subscript/index` | 2 |
 | 0.96875 | `type/number/integer/literal/zero` | 2 |
-| 0.875 | `variable/assignment/single` | 2 |
+| 0.875 | `var/assignment/single` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
 
@@ -2604,7 +2604,7 @@
 |----|----|----|
 | 0.875 | `appli/method/getcwd` | 2 |
 | 0.875 | `library/standard/os` | 1 |
-| 0.875 | `variable/assignment/single` | 2 |
+| 0.875 | `var/assignment/single` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
 
@@ -2623,7 +2623,7 @@
 | 0.875 | `appli/method/abspath` | 2 |
 | 0.875 | `appli/method/dirname` | 2 |
 | 0.875 | `library/standard/os` | 1 |
-| 0.875 | `variable/assignment/single` | 2 |
+| 0.875 | `var/assignment/single` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
 
@@ -2662,7 +2662,7 @@
 |----|----|----|
 | 0.875 | `appli/method/asizeof` | 2 |
 | 0.875 | `library/third_party/pympler.asizeof` | 1 |
-| 0.875 | `variable/assignment/single` | 2 |
+| 0.875 | `var/assignment/single` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
 
@@ -2681,7 +2681,7 @@
 | 0.75 | `type/boolean` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
 | 0.96875 | `type/sequence/string/literal/empty` | 1 |
-| 0.875 | `variable/assignment/single` | 1 |
+| 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
 
@@ -2758,7 +2758,7 @@
 |----|----|----|
 | 0.75 | `test/equality` | 1 |
 | 0.75 | `type/boolean` | 1 |
-| 0.875 | `variable/assignment/single` | 1 |
+| 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
 
@@ -2776,7 +2776,7 @@
 | 0.875 | `library/standard/datetime` | 1 |
 | 0.75 | `test/inequality` | 2 |
 | 0.75 | `type/boolean` | 2 |
-| 0.875 | `variable/assignment/single` | 2 |
+| 0.875 | `var/assignment/single` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
 
@@ -2793,7 +2793,7 @@
 | 0.875 | `appli/method/replace` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
 | 0.96875 | `type/sequence/string/literal/empty` | 1 |
-| 0.875 | `variable/assignment/single` | 1 |
+| 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
 
@@ -2808,7 +2808,7 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.9375 | `appli/function/builtin/len` | 1 |
-| 0.875 | `variable/assignment/single` | 1 |
+| 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
 
@@ -2824,7 +2824,7 @@
 |----|----|----|
 | 0.96875 | `appli/function/builtin/casting/set` | 1 |
 | 0.875 | `type/non_sequence/set` | 1 |
-| 0.875 | `variable/assignment/single` | 1 |
+| 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
 
@@ -2858,7 +2858,7 @@
 | 0.96875 | `appli/function/builtin/casting/set` | 1 |
 | 0.875 | `type/non_sequence/set` | 1 |
 | 0.875 | `type/sequence/list` | 1 |
-| 0.875 | `variable/assignment/single` | 1 |
+| 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
 
@@ -2897,7 +2897,7 @@
 | 0.9375 | `type/sequence/list/literal` | 1 |
 | 0.96875 | `type/sequence/list/literal/empty` | 3 |
 | 0.9375 | `type/sequence/string/literal` | 1, 1, 1, 1 |
-| 0.875 | `variable/assignment/single` | 1, 2, 3 |
+| 0.875 | `var/assignment/single` | 1, 2, 3 |
 | 0 | `metadata/program` | 1-8 |
 | 0 | `metadata/sloc/8` | 1-8 |
 
@@ -2916,7 +2916,7 @@
 | 0.875 | `appli/function/raw_input` | 1 |
 | 0.875 | `type/number/integer` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
-| 0.875 | `variable/assignment/single` | 1 |
+| 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
 
@@ -2948,9 +2948,9 @@
 | 0.9375 | `type/number/integer/literal` | 6 |
 | 0.9375 | `type/sequence/string/literal` | 2, 7 |
 | 0.9375 | `type/sequence/tuple/literal` | 4, 6 |
-| 0.875 | `variable/assignment/constant` | 2 |
-| 0.875 | `variable/assignment/parallel` | 6 |
-| 0.875 | `variable/assignment/single` | 2, 3 |
+| 0.875 | `var/assignment/constant` | 2 |
+| 0.875 | `var/assignment/parallel` | 6 |
+| 0.875 | `var/assignment/single` | 2, 3 |
 | 0 | `metadata/program` | 1-7 |
 | 0 | `metadata/sloc/7` | 1-7 |
 
@@ -2968,8 +2968,8 @@
 | 0.9375 | `appli/function/builtin/range` | 2 |
 | 0.9375 | `type/number/integer/literal` | 2 |
 | 0.9375 | `type/sequence/tuple/literal` | 2 |
-| 0.875 | `variable/assignment/constant` | 2, 2, 2, 2 |
-| 0.9375 | `variable/assignment/parallel/more_than_two` | 2 |
+| 0.875 | `var/assignment/constant` | 2, 2, 2, 2 |
+| 0.9375 | `var/assignment/parallel/more_than_two` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
 
@@ -2990,8 +2990,8 @@
 |----|----|----|
 | 0.9375 | `library/standard/enum/Enum` | 1 |
 | 0.9375 | `type/number/integer/literal` | 3, 4, 5, 6 |
-| 0.875 | `variable/assignment/constant` | 3, 4, 5, 6 |
-| 0.875 | `variable/assignment/single` | 3, 4, 5, 6 |
+| 0.875 | `var/assignment/constant` | 3, 4, 5, 6 |
+| 0.875 | `var/assignment/single` | 3, 4, 5, 6 |
 | 0 | `metadata/program` | 1-6 |
 | 0 | `metadata/sloc/6` | 1-6 |
 
@@ -3035,7 +3035,7 @@
 | 0.875 | `test/equality/not` | 4 |
 | 0.75 | `type/boolean` | 4, 4 |
 | 0.9375 | `type/number/integer/literal` | 4 |
-| 0.875 | `variable/assignment/single` | 3 |
+| 0.875 | `var/assignment/single` | 3 |
 | 0 | `metadata/program` | 1-4 |
 | 0 | `metadata/sloc/4` | 1-4 |
 
@@ -3061,7 +3061,7 @@
 | 0.875 | `library/standard/time` | 1 |
 | 0.875 | `operator/arithmetic/substraction` | 5 |
 | 0.9375 | `type/sequence/string/literal` | 5 |
-| 0.875 | `variable/assignment/single` | 2, 4 |
+| 0.875 | `var/assignment/single` | 2, 4 |
 | 0 | `metadata/program` | 1-5 |
 | 0 | `metadata/sloc/5` | 1-5 |
 
@@ -3099,7 +3099,7 @@
 | 0.875 | `appli/method/load_module` | 2 |
 | 0.875 | `library/standard/imp` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 2, 2 |
-| 0.875 | `variable/assignment/single` | 2 |
+| 0.875 | `var/assignment/single` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
 
@@ -3136,9 +3136,9 @@
 | 0.96875 | `type/number/integer/literal/zero` | 4 |
 | 0.875 | `type/sequence/list` | 9 |
 | 0.9375 | `type/sequence/list/literal` | 2 |
-| 0.75 | `variable/assignment` | 8 |
-| 0.875 | `variable/assignment/constant` | 2 |
-| 0.875 | `variable/assignment/single` | 2, 4 |
+| 0.75 | `var/assignment` | 8 |
+| 0.875 | `var/assignment/constant` | 2 |
+| 0.875 | `var/assignment/single` | 2, 4 |
 | 0 | `metadata/program` | 1-9 |
 | 0 | `metadata/sloc/9` | 1-9 |
 
@@ -3178,7 +3178,7 @@
 | 0.875 | `type/non_sequence/set` | 3, 8 |
 | 0.875 | `type/sequence/list` | 9 |
 | 0.9375 | `type/sequence/list/literal` | 4 |
-| 0.875 | `variable/assignment/single` | 3, 4, 6 |
+| 0.875 | `var/assignment/single` | 3, 4, 6 |
 | 0 | `metadata/program` | 1-9 |
 | 0 | `metadata/sloc/9` | 1-9 |
 
@@ -3215,7 +3215,7 @@
 | 0.875 | `type/non_sequence/set` | 2, 7 |
 | 0.875 | `type/sequence/list` | 8 |
 | 0.9375 | `type/sequence/list/literal` | 3 |
-| 0.875 | `variable/assignment/single` | 2, 3, 5 |
+| 0.875 | `var/assignment/single` | 2, 3, 5 |
 | 0 | `metadata/program` | 1-8 |
 | 0 | `metadata/sloc/8` | 1-8 |
 
@@ -3272,7 +3272,7 @@
 | 0.875 | `appli/method/timeit` | 2 |
 | 0.875 | `library/standard/timeit` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 2, 2 |
-| 0.875 | `variable/assignment/single` | 2 |
+| 0.875 | `var/assignment/single` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
 
@@ -3290,7 +3290,7 @@
 | 0.75 | `test/belonging` | 1 |
 | 0.75 | `type/boolean` | 1 |
 | 0.875 | `type/sequence/string` | 1, 1 |
-| 0.875 | `variable/assignment/single` | 1 |
+| 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
 
@@ -3305,7 +3305,7 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.9375 | `type/sequence/list/literal` | 1 |
-| 0.875 | `variable/assignment/single` | 1 |
+| 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
 
@@ -3335,7 +3335,7 @@
 |----|----|----|
 | 0.875 | `test/equality/not` | 1 |
 | 0.75 | `type/boolean` | 1 |
-| 0.875 | `variable/assignment/single` | 1 |
+| 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
 
@@ -3351,7 +3351,7 @@
 |----|----|----|
 | 0.875 | `appli/method/isdigit` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
-| 0.875 | `variable/assignment/single` | 1 |
+| 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
 
@@ -3367,7 +3367,7 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.875 | `library/standard/tempfile` | 1 |
-| 0.875 | `variable/assignment/single` | 2 |
+| 0.875 | `var/assignment/single` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
 
@@ -3383,7 +3383,7 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.875 | `library/standard/tempfile` | 1 |
-| 0.875 | `variable/assignment/single` | 2 |
+| 0.875 | `var/assignment/single` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
 
@@ -3432,7 +3432,7 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.9375 | `appli/function/builtin/hex` | 1 |
-| 0.875 | `variable/assignment/single` | 1 |
+| 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
 
@@ -3468,7 +3468,7 @@
 |----|----|----|
 | 0.875 | `appli/method/exists` | 2 |
 | 0.875 | `library/standard/os` | 1 |
-| 0.875 | `variable/assignment/single` | 2 |
+| 0.875 | `var/assignment/single` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
 
@@ -3486,7 +3486,7 @@
 | 0.875 | `appli/class_constructor/Path` | 2 |
 | 0.875 | `appli/method/exists` | 2 |
 | 0.9375 | `library/standard/pathlib/Path` | 1 |
-| 0.875 | `variable/assignment/single` | 2 |
+| 0.875 | `var/assignment/single` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
 
@@ -3511,7 +3511,7 @@
 | 0.875 | `library/standard/logging` | 1 |
 | 0.875 | `library/standard/sys` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 3, 5 |
-| 0.875 | `variable/assignment/single` | 5 |
+| 0.875 | `var/assignment/single` | 5 |
 | 0 | `metadata/program` | 1-6 |
 | 0 | `metadata/sloc/6` | 1-6 |
 
@@ -3532,7 +3532,7 @@
 | 0.875 | `appli/method/setlocale` | 3 |
 | 0.875 | `library/standard/locale` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 2, 3 |
-| 0.875 | `variable/assignment/single` | 2, 4 |
+| 0.875 | `var/assignment/single` | 2, 4 |
 | 0 | `metadata/program` | 1-4 |
 | 0 | `metadata/sloc/4` | 1-4 |
 
@@ -3548,7 +3548,7 @@
 |----|----|----|
 | 0.96875 | `appli/function/builtin/casting/float` | 1 |
 | 0.875 | `type/number/floating_point` | 1 |
-| 0.875 | `variable/assignment/single` | 1 |
+| 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
 
@@ -3583,7 +3583,7 @@
 | 0.875 | `library/standard/re` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 2 |
 | 0.96875 | `type/sequence/string/literal/empty` | 2 |
-| 0.875 | `variable/assignment/single` | 2 |
+| 0.875 | `var/assignment/single` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
 
@@ -3622,7 +3622,7 @@
 | 0.875 | `appli/method/rstrip` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
-| 0.875 | `variable/assignment/single` | 1 |
+| 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
 
@@ -3644,7 +3644,7 @@
 | 0.875 | `subscript/slice/stop` | 3 |
 | 0.9375 | `type/number/integer/literal` | 3 |
 | 0.875 | `type/sequence/string` | 2 |
-| 0.875 | `variable/assignment/single` | 3 |
+| 0.875 | `var/assignment/single` | 3 |
 | 0 | `metadata/program` | 1-3 |
 | 0 | `metadata/sloc/3` | 1-3 |
 
@@ -3658,7 +3658,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.875 | `variable/assignment/single` | 1 |
+| 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
 
@@ -3675,7 +3675,7 @@
 | 0.875 | `appli/method/format` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
-| 0.875 | `variable/assignment/single` | 1 |
+| 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
 
@@ -3703,8 +3703,8 @@
 | 0.875 | `type/sequence/string` | 3 |
 | 0.9375 | `type/sequence/string/literal` | 3 |
 | 0.9375 | `type/sequence/tuple/literal` | 1, 2 |
-| 0.9375 | `variable/assignment/parallel/more_than_two` | 1, 2 |
-| 0.875 | `variable/assignment/single` | 3 |
+| 0.9375 | `var/assignment/parallel/more_than_two` | 1, 2 |
+| 0.875 | `var/assignment/single` | 3 |
 | 0 | `metadata/program` | 1-3 |
 | 0 | `metadata/sloc/3` | 1-3 |
 
@@ -3763,7 +3763,7 @@
 | 0.875 | `type/sequence/string` | 10 |
 | 0.9375 | `type/sequence/string/literal` | 10, 10, 11, 13 |
 | 0.96875 | `type/sequence/string/literal/empty` | 10 |
-| 0.875 | `variable/assignment/single` | 9, 11, 13 |
+| 0.875 | `var/assignment/single` | 9, 11, 13 |
 | 0 | `metadata/program` | 1-15 |
 | 0 | `metadata/sloc/15` | 1-15 |
 
@@ -3781,7 +3781,7 @@
 |----|----|----|
 | 0.875 | `appli/method/unlink` | 3 |
 | 0.875 | `library/standard/pathlib` | 1 |
-| 0.875 | `variable/assignment/single` | 2 |
+| 0.875 | `var/assignment/single` | 2 |
 | 0 | `metadata/program` | 1-3 |
 | 0 | `metadata/sloc/3` | 1-3 |
 
@@ -3797,7 +3797,7 @@
 |----|----|----|
 | 0.9375 | `appli/function/builtin/format` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
-| 0.875 | `variable/assignment/single` | 1 |
+| 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
 
@@ -3812,8 +3812,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.9375 | `type/sequence/string/literal` | 1 |
-| 0.875 | `variable/assignment/constant` | 1 |
-| 0.875 | `variable/assignment/single` | 1 |
+| 0.875 | `var/assignment/constant` | 1 |
+| 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
 
@@ -3830,7 +3830,7 @@
 |----|----|----|
 | 0.875 | `appli/method/sample` | 2 |
 | 0.875 | `library/standard/random` | 1 |
-| 0.875 | `variable/assignment/single` | 2 |
+| 0.875 | `var/assignment/single` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
 
@@ -3854,7 +3854,7 @@
 | 0.75 | `abstr/procedure` | 2-5 |
 | 0.875 | `type/null/literal` | 2 |
 | 0.96875 | `type/sequence/list/literal/empty` | 4 |
-| 0.75 | `variable/assignment` | 3, 4, 5 |
+| 0.75 | `var/assignment` | 3, 4, 5 |
 | 0 | `metadata/program` | 1-5 |
 | 0 | `metadata/sloc/5` | 1-5 |
 
@@ -3896,7 +3896,7 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.875 | `operator/arithmetic/multiplication` | 1 |
-| 0.875 | `variable/assignment/single` | 1 |
+| 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
 
@@ -3979,7 +3979,7 @@
 | 0.9375 | `library/standard/itertools/tee` | 1 |
 | 0.875 | `type/null/literal` | 4 |
 | 0.9375 | `type/sequence/tuple/literal` | 3, 6 |
-| 0.875 | `variable/assignment/parallel` | 3 |
+| 0.875 | `var/assignment/parallel` | 3 |
 | 0 | `metadata/program` | 1-7 |
 | 0 | `metadata/sloc/7` | 1-7 |
 
@@ -4012,7 +4012,7 @@
 | 0.75 | `subscript/index` | 1 |
 | 0.9375 | `subscript/index/backwards/last` | 1 |
 | 0.9375 | `type/number/integer/literal` | 1 |
-| 0.875 | `variable/assignment/single` | 1 |
+| 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
 
@@ -4027,7 +4027,7 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.875 | `operator/arithmetic/addition` | 1 |
-| 0.875 | `variable/assignment/single` | 1 |
+| 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
 
@@ -4046,7 +4046,7 @@
 | 0.875 | `operator/boolean/and` | 1 |
 | 0.875 | `subscript/slice/start` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
-| 0.875 | `variable/assignment/single` | 1 |
+| 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
 
@@ -4062,7 +4062,7 @@
 |----|----|----|
 | 0.875 | `appli/method/lstrip` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
-| 0.875 | `variable/assignment/single` | 1 |
+| 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
 
@@ -4081,7 +4081,7 @@
 | 0.9375 | `type/number/integer/literal` | 1 |
 | 0.96875 | `type/number/integer/literal/zero` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
-| 0.875 | `variable/assignment/single` | 1 |
+| 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
 
@@ -4097,7 +4097,7 @@
 |----|----|----|
 | 0.875 | `appli/method/rstrip` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
-| 0.875 | `variable/assignment/single` | 1 |
+| 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
 
@@ -4112,7 +4112,7 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.9375 | `appli/function/builtin/len` | 1 |
-| 0.875 | `variable/assignment/single` | 1 |
+| 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
 
@@ -4127,7 +4127,7 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.9375 | `appli/function/builtin/len` | 1 |
-| 0.875 | `variable/assignment/single` | 1 |
+| 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
 
@@ -4157,7 +4157,7 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.75 | `subscript/index` | 1 |
-| 0.75 | `variable/assignment` | 1 |
+| 0.75 | `var/assignment` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
 
@@ -4230,7 +4230,7 @@
 | 0.9375 | `library/standard/urllib/request` | 1 |
 | 0.875 | `type/sequence/string` | 2 |
 | 0.9375 | `type/sequence/string/literal` | 2, 3 |
-| 0.875 | `variable/assignment/single` | 2, 3, 4 |
+| 0.875 | `var/assignment/single` | 2, 3, 4 |
 | 0 | `metadata/program` | 1-4 |
 | 0 | `metadata/sloc/4` | 1-4 |
 
@@ -4245,7 +4245,7 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.875 | `appli/method/hex` | 1 |
-| 0.875 | `variable/assignment/single` | 1 |
+| 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
 
@@ -4260,7 +4260,7 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.875 | `appli/method/fromhex` | 1 |
-| 0.875 | `variable/assignment/single` | 1 |
+| 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
 
@@ -4285,8 +4285,8 @@
 | 0.9375 | `type/number/integer/literal` | 3 |
 | 0.9375 | `type/sequence/list/literal` | 2 |
 | 0.9375 | `type/sequence/string/literal` | 2, 2, 2 |
-| 0.875 | `variable/assignment/constant` | 3 |
-| 0.875 | `variable/assignment/single` | 2, 3 |
+| 0.875 | `var/assignment/constant` | 3 |
+| 0.875 | `var/assignment/single` | 2, 3 |
 | 0 | `metadata/program` | 1-3 |
 | 0 | `metadata/sloc/3` | 1-3 |
 
@@ -4315,7 +4315,7 @@
 | 0.875 | `type/sequence/string` | 4 |
 | 0.9375 | `type/sequence/string/literal` | 4, 7 |
 | 0.9375 | `type/sequence/tuple/literal` | 5 |
-| 0.875 | `variable/assignment/single` | 3 |
+| 0.875 | `var/assignment/single` | 3 |
 | 0 | `metadata/program` | 1-7 |
 | 0 | `metadata/sloc/7` | 1-7 |
 
@@ -4358,7 +4358,7 @@
 | 0.75 | `test/inequality` | 1, 1, 1, 1 |
 | 0.9375 | `test/inequality/chained/2` | 1, 1 |
 | 0.75 | `type/boolean` | 1, 1 |
-| 0.875 | `variable/assignment/single` | 1 |
+| 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
 
@@ -4376,7 +4376,7 @@
 | 0.875 | `operator/arithmetic/division` | 1, 1 |
 | 0.9375 | `type/number/integer/literal` | 1, 1 |
 | 0.9375 | `type/sequence/tuple/literal` | 1 |
-| 0.875 | `variable/assignment/single` | 1 |
+| 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
 
@@ -4399,7 +4399,7 @@
 | 0.875 | `operator/arithmetic/division` | 3, 3 |
 | 0.9375 | `type/number/integer/literal` | 3, 3 |
 | 0.9375 | `type/sequence/string/literal` | 2, 2 |
-| 0.875 | `variable/assignment/single` | 2, 3 |
+| 0.875 | `var/assignment/single` | 2, 3 |
 | 0 | `metadata/program` | 1-3 |
 | 0 | `metadata/sloc/3` | 1-3 |
 
@@ -4416,7 +4416,7 @@
 |----|----|----|
 | 0.875 | `appli/method/listdir` | 2 |
 | 0.875 | `library/standard/os` | 1 |
-| 0.875 | `variable/assignment/single` | 2 |
+| 0.875 | `var/assignment/single` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
 
@@ -4435,7 +4435,7 @@
 | 0.875 | `io/standard/print` | 2 |
 | 0.875 | `operator/arithmetic/modulo` | 2 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
-| 0.875 | `variable/assignment/single` | 1 |
+| 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
 
@@ -4461,8 +4461,8 @@
 | 0.96875 | `type/non_sequence/dictionary/literal/empty` | 5 |
 | 0.9375 | `type/sequence/string/literal` | 3, 4 |
 | 0.9375 | `type/sequence/tuple/literal` | 7, 7 |
-| 0.875 | `variable/assignment/parallel` | 7 |
-| 0.875 | `variable/assignment/single` | 3, 4, 5, 6 |
+| 0.875 | `var/assignment/parallel` | 7 |
+| 0.875 | `var/assignment/single` | 3, 4, 5, 6 |
 | 0 | `metadata/program` | 1-7 |
 | 0 | `metadata/sloc/7` | 1-7 |
 
@@ -4503,7 +4503,7 @@
 | 0.9375 | `type/number/floating_point/literal` | 2 |
 | 0.9375 | `type/number/integer/literal` | 2 |
 | 0.9375 | `type/sequence/tuple/literal` | 2 |
-| 0.875 | `variable/assignment/single` | 2 |
+| 0.875 | `var/assignment/single` | 2 |
 | 0 | `metadata/program` | 1-3 |
 | 0 | `metadata/sloc/3` | 1-3 |
 
@@ -4569,8 +4569,8 @@
 | 0.96875 | `type/number/integer/literal/zero` | 3 |
 | 0.9375 | `type/sequence/list/literal` | 3 |
 | 0.9375 | `type/sequence/tuple/literal` | 15, 15 |
-| 0.75 | `variable/assignment` | 3, 4, 9 |
-| 0.875 | `variable/assignment/parallel` | 15 |
+| 0.75 | `var/assignment` | 3, 4, 9 |
+| 0.875 | `var/assignment/parallel` | 15 |
 | 0 | `metadata/program` | 1-15 |
 | 0 | `metadata/sloc/15` | 1-15 |
 
@@ -4587,7 +4587,7 @@
 |----|----|----|
 | 0.875 | `library/third_party/numpy` | 1 |
 | 0.875 | `operator/matrix/multiplication` | 2 |
-| 0.875 | `variable/assignment/single` | 2 |
+| 0.875 | `var/assignment/single` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
 
@@ -4604,7 +4604,7 @@
 |----|----|----|
 | 0.875 | `appli/method/matmul` | 2 |
 | 0.875 | `library/third_party/numpy` | 1 |
-| 0.875 | `variable/assignment/single` | 2 |
+| 0.875 | `var/assignment/single` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
 
@@ -4620,7 +4620,7 @@
 |----|----|----|
 | 0.875 | `appli/class_constructor/P` | 1 |
 | 0.875 | `appli/class_constructor/T` | 1 |
-| 0.875 | `variable/assignment/single` | 1 |
+| 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
 
@@ -4658,7 +4658,7 @@
 | 0.9375 | `appli/function/builtin/open` | 1 |
 | 0.875 | `appli/method/readlines` | 2 |
 | 0.875 | `io/file/open` | 1 |
-| 0.875 | `variable/assignment/single` | 2 |
+| 0.875 | `var/assignment/single` | 2 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |
 

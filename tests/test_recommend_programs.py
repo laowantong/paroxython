@@ -192,7 +192,7 @@ def test_recommend_mini_programs():
         {
             "operation": "exclude",
             "data": [
-                "variable/assignment/single",  # featured directly by assignment.py
+                "var/assignment/single",  # featured directly by assignment.py
                 # and collatz.py, which is imported by fizzbuzz.py and is_even.py
             ],
         }
@@ -269,7 +269,7 @@ def test_recommend_mini_programs():
         {
             "operation": "include",
             "data": [
-                "variable/assignment/single",  # featured by assignment.py and collatz.py
+                "var/assignment/single",  # featured by assignment.py and collatz.py
                 # Although the latter is imported by both fizzbuzz.py and is_even.py, they are
                 # not included in the result
             ],
@@ -289,9 +289,7 @@ def test_recommend_mini_programs():
     commands = [
         {
             "operation": "include",
-            "data": [
-                ("variable/assignment", "inside", "flow/loop"),  # featured by collatz.py only
-            ],
+            "data": [("var/assignment", "inside", "flow/loop"),],  # featured by collatz.py only
         }
     ]
     rec = Recommendations(db)
@@ -303,7 +301,7 @@ def test_recommend_mini_programs():
         {
             "operation": "exclude",
             "data": [
-                ("variable/assignment", "inside", "flow/loop"),  # featured by collatz.py,
+                ("var/assignment", "inside", "flow/loop"),  # featured by collatz.py,
                 # and indirectly by fizzbuzz.py and is_even.py
             ],
         }
@@ -317,7 +315,7 @@ def test_recommend_mini_programs():
         {
             "operation": "include",
             "data": [
-                ("variable/assignment", "not inside", "flow/loop"),  # Must read as:
+                ("var/assignment", "not inside", "flow/loop"),  # Must read as:
                 # Include all programs featuring an assignment, except those where this assignment
                 # is inside a loop. Hence, this includes assignment.py, even if it does not feature
                 # a loop.
@@ -333,7 +331,7 @@ def test_recommend_mini_programs():
         {
             "operation": "include",
             "data": [
-                ("variable/assignment", "inside", "metadata/program"),  # This comes down to
+                ("var/assignment", "inside", "metadata/program"),  # This comes down to
                 # including all programs featuring an assignment.
             ],
         }
@@ -348,7 +346,7 @@ def test_recommend_mini_programs():
         {
             "operation": "include",
             "data": [
-                ("variable/assignment", "not inside", "metadata/program"),  # This comes down to
+                ("var/assignment", "not inside", "metadata/program"),  # This comes down to
                 # exclude all programs either featuring or not featuring an assignment!
             ],
         }
@@ -362,7 +360,7 @@ def test_recommend_mini_programs():
     commands = [
         {
             "operation": "impart",  # Imparting triples is currently not supported (ignored).
-            "data": [("variable/assignment", "inside", "flow/loop")],
+            "data": [("var/assignment", "inside", "flow/loop")],
         }
     ]
     rec = Recommendations(db)
@@ -423,7 +421,7 @@ def test_recommend_mini_programs():
         {
             "operation": "exclude",
             "data": [
-                ("variable/assignment/single", "after", "io/standard/print"),
+                ("var/assignment/single", "after", "io/standard/print"),
                 # collatz.py and fizzbuzz.py have an assignment after a print.
                 # is_even.py imports fizzbuzz.py.
                 # Consequently, these three programs are excluded.
@@ -489,8 +487,8 @@ def test_recommend_mini_programs():
         {
             "operation": "include",
             "data": [
-                ("variable/assignment/single", "after", "io/standard/print"),
-                # The taxon "variable/assignment/single" is featured by assignment.py and
+                ("var/assignment/single", "after", "io/standard/print"),
+                # The taxon "var/assignment/single" is featured by assignment.py and
                 # collatz.py. In collatz.py, it appears after a taxon "io/standard/print".
                 # Consequently, it should be included in the results, but not the programs which
                 # import it: fizzbuzz.py and is_even.py.
@@ -707,12 +705,12 @@ def test_recommend_simple_programs_1(expected_programs, commands):
 
 
 holds_abstr = "abstr"
-holds_assignment = "variable/assignment"
-holds_asg_in_sub = ("variable/assignment", "inside", "abstr")
-lacks_assignment = ("metadata/program", "not contains", "variable/assignment")
+holds_assignment = "var/assignment"
+holds_asg_in_sub = ("var/assignment", "inside", "abstr")
+lacks_assignment = ("metadata/program", "not contains", "var/assignment")
 lacks_abstr = ("metadata/program", "not contains", "abstr")
-lacks_asg_or_sub = ("metadata/program", "not contains", "abstr|variable/assignment")
-lacks_asg_in_sub = ("abstr", "not contains", "variable/assignment")
+lacks_asg_or_sub = ("metadata/program", "not contains", "abstr|var/assignment")
+lacks_asg_in_sub = ("abstr", "not contains", "var/assignment")
 p0 = "01_hello_world.py"  # [ ] abstr [ ] assignment [ ] inside *
 p1 = "05_greet.py"  #       [X] abstr [ ] assignment [ ] inside
 p2 = "02_input_name.py"  #  [ ] abstr [X] assignment [ ] inside
@@ -778,9 +776,9 @@ def test_recommend_simple_programs_2(expected_programs, commands):
 
 
 # extract_2 (start)
-holds_parallel_tuple = "variable/assignment/parallel"
-holds_ordinary_tuple = ("type/sequence/tuple", "is not", "variable/assignment/parallel")
-lacks_parallel_tuple = ("metadata/program", "not contains", "variable/assignment/parallel")
+holds_parallel_tuple = "var/assignment/parallel"
+holds_ordinary_tuple = ("type/sequence/tuple", "is not", "var/assignment/parallel")
+lacks_parallel_tuple = ("metadata/program", "not contains", "var/assignment/parallel")
 p0 = "01_hello_world.py"  # [ ] ordinary tuple [ ] parallel tuple
 p1 = "11_bottles.py"  #     [X] ordinary tuple [ ] parallel tuple
 p2 = "04_fibonacci.py"  #   [ ] ordinary tuple [X] parallel tuple
