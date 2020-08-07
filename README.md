@@ -18,7 +18,7 @@
 
 ### Introduction
 
-Paroxython is a set of command line tools which **tag** a collection of Python programs and **filter** them by algorithmic features.
+Paroxython is a set of command line tools which **tag** a collection of Python programming exercises and **filter** them by algorithmic features.
 
 #### Audience
 
@@ -85,7 +85,7 @@ Specifications
 Paroxython starts by building a **tag database** from a given folder of **programs**. Tagging these programs is a two-step process:
 
 - First, all features that meet the provided **specifications** are identified by internal-use free-form **labels** (e.g., `assignment_lhs_identifier:a` or `loop_with_late_exit:while`), and associated with their spanning lines (e.g., 4 or 5-7).
-- These labels are then mapped onto a knowledge **taxonomy** designed with basic hierarchical constraints in mind (e.g., the fact that the introduction of the concept of early exit must come after that of loop, which itself requires that of control flow, is expressed with the following taxon: `flow/loop/exit/early`).
+- These labels are then mapped onto a knowledge **taxonomy** designed with basic hierarchical constraints in mind (e.g., the fact that the introduction of the concept of early exit must come after that of loop, which itself requires that of control flow, is expressed by the _taxon_ `flow/loop/exit/early`).
 
 The tag database can finally be filtered through a **pipeline of commands**, for instance:
 

@@ -110,12 +110,6 @@ def resolve_new_types():
     path = Path("docs/index.html")
     source = path.read_text()
     source = regex.sub(r"(?m)^.+paroxython\.user_types.+\n", "", source)
-    (source, n) = regex.subn(
-        r"""(<section>\n)(</section>\n</article>)""",
-        r"""\1<h3 class="section-title" id="flow">Internal dependencies</h3>\n<p><img alt="" src="resources/flow.png"></p>\n\2""",
-        source,
-    )
-    assert n == 1
     path.write_text(source)
     Path("docs/user_types.html").unlink()
 
@@ -193,6 +187,7 @@ def compute_stats():
 def patch_prose():
     index_path = Path("docs/index.html")
     index_text = index_path.read_text()
+    index_text = index_text.replace("<h1>Index</h1>\n", "")
     for title in ("cli", "User manual", "Developer manual"):
         slug = title if title == "cli" else "docs_" + title.lower().replace(" ", "_")
         path = Path("docs") / slug / "index.html"
@@ -208,11 +203,6 @@ def patch_prose():
             assert n == 1, f"Unable to change the title of {slug} in nav!"
             (text, n) = regex.subn(fr"""(?s)</div>\n<ul id="index">.+</ul>\n""", "", text)
             assert n == 1, f"Unable to suppress the index section in prose {slug}'s nav!"
-            href = title.lower().replace(" ", "-")
-            (index_text, n) = regex.subn(f"#{href}", f"{slug}/index.html", index_text)
-            assert n == 1, f"Unable to patch main url for {slug}!"
-            (index_text, n) = regex.subn(f"""<h1 id="{href}".+\n""", "", index_text)
-            assert n == 1, f"Unable to remove section title for {slug}!"
             (index_text, n) = regex.subn(
                 fr"""<li><code><a title="paroxython.{slug}".+\n""", "", index_text
             )
@@ -286,26 +276,24 @@ def link_manuals():
     index_path = Path("docs/index.html")
     index_text = index_path.read_text()
     (index_text, n) = regex.subn(
-        '(<li><a href="docs_user_manual/index.html">User manual</a></li>)',
-        r"""\1
-        <ul>
-        <li><a href="docs_user_manual/index.html#pipeline-tutorial-getting-recommendations">Pipeline tutorial</a></li>
-        <li><a href="docs_user_manual/index.html#tag-databases">Tag databases</a></li>
-        <li><a href="docs_user_manual/index.html#taxonomy">Taxonomy</a></li>
-        <li><a href="docs_user_manual/index.html#manual-hints">Manual hints</a></li>
-        <li><a href="docs_user_manual/index.html#deep-in-the-pipeline">Deep in the pipeline</a></li>
-        </ul>""",
-        index_text,
-    )
-    assert n == 1
-    (index_text, n) = regex.subn(
-        '(<li><a href="docs_developer_manual/index.html">Developer manual</a></li>)',
-        r"""\1
-        <ul>
-        <li><a href="docs_developer_manual/index.html#bird-view">Bird view</a></li>
-        <li><a href="docs_developer_manual/index.html#helper-programs">Helper programs</a></li>
-        <li><a href="docs_developer_manual/index.html#implementation-notes">Implementation notes</a></li>
-        </ul>""",
+        r'(<li><a href="#about">About</a><ul>)',
+        (
+            '<li><a href="docs_user_manual/index.html">User manual</a></li>'
+            "<ul>"
+            '<li><a href="docs_user_manual/index.html#pipeline-tutorial-getting-recommendations">Pipeline tutorial</a></li>'
+            '<li><a href="docs_user_manual/index.html#tag-databases">Tag databases</a></li>'
+            '<li><a href="docs_user_manual/index.html#taxonomy">Taxonomy</a></li>'
+            '<li><a href="docs_user_manual/index.html#manual-hints">Manual hints</a></li>'
+            '<li><a href="docs_user_manual/index.html#deep-in-the-pipeline">Deep in the pipeline</a></li>'
+            "</ul>"
+            '<li><a href="docs_developer_manual/index.html">Developer manual</a></li>'
+            "<ul>"
+            '<li><a href="docs_developer_manual/index.html#bird-view">Bird view</a></li>'
+            '<li><a href="docs_developer_manual/index.html#helper-programs">Helper programs</a></li>'
+            '<li><a href="docs_developer_manual/index.html#implementation-notes">Implementation notes</a></li>'
+            "</ul>"
+            r"\1"
+        ),
         index_text,
     )
     assert n == 1
