@@ -9,12 +9,12 @@
     - [`003.2372-create-a-procedure.py`](#program-0032372-create-a-procedurepy-learning-cost-2375)
     - [`004.0024-create-a-function-which-returns-the-square-of-an-integer.py`](#program-0040024-create-a-function-which-returns-the-square-of-an-integerpy-learning-cost-3375)
     - [`004.2921-create-a-function-which-returns-the-square-of-an-integer.py`](#program-0042921-create-a-function-which-returns-the-square-of-an-integerpy-learning-cost-43125)
-    - [`005.0663-create-a-2d-point-data-structure.py`](#program-0050663-create-a-2d-point-data-structurepy-learning-cost-09375)
+    - [`005.0663-create-a-2d-point-data-structure.py`](#program-0050663-create-a-2d-point-data-structurepy-learning-cost-16875)
     - [`006.0032-iterate-over-list-values.py`](#program-0060032-iterate-over-list-valuespy-learning-cost-275)
     - [`007.0183-iterate-over-list-indexes-and-values.py`](#program-0070183-iterate-over-list-indexes-and-valuespy-learning-cost-55625)
     - [`008.0039-initialize-a-new-map-associative-array.py`](#program-0080039-initialize-a-new-map-associative-arraypy-learning-cost-36875)
-    - [`009.1410-create-a-binary-tree-data-structure.py`](#program-0091410-create-a-binary-tree-data-structurepy-learning-cost-5125)
-    - [`009.3176-create-a-binary-tree-data-structure.py`](#program-0093176-create-a-binary-tree-data-structurepy-learning-cost-425)
+    - [`009.1410-create-a-binary-tree-data-structure.py`](#program-0091410-create-a-binary-tree-data-structurepy-learning-cost-5875)
+    - [`009.3176-create-a-binary-tree-data-structure.py`](#program-0093176-create-a-binary-tree-data-structurepy-learning-cost-50)
     - [`010.0182-shuffle-a-list.py`](#program-0100182-shuffle-a-listpy-learning-cost-18125)
     - [`010.1478-shuffle-a-list.py`](#program-0101478-shuffle-a-listpy-learning-cost-175)
     - [`011.0047-pick-a-random-element-from-a-list.py`](#program-0110047-pick-a-random-element-from-a-listpy-learning-cost-175)
@@ -24,7 +24,7 @@
     - [`014.3410-pick-uniformly-a-random-floating-point-number-in-ab.py`](#program-0143410-pick-uniformly-a-random-floating-point-number-in-abpy-learning-cost-175)
     - [`015.0184-pick-uniformly-a-random-integer-in-ab.py`](#program-0150184-pick-uniformly-a-random-integer-in-abpy-learning-cost-175)
     - [`016.1530-depth-first-traversing-of-a-binary-tree.py`](#program-0161530-depth-first-traversing-of-a-binary-treepy-learning-cost-9875)
-    - [`017.1103-create-a-tree-data-structure.py`](#program-0171103-create-a-tree-data-structurepy-learning-cost-696875)
+    - [`017.1103-create-a-tree-data-structure.py`](#program-0171103-create-a-tree-data-structurepy-learning-cost-771875)
     - [`018.2084-depth-first-traversing-of-a-tree.py`](#program-0182084-depth-first-traversing-of-a-treepy-learning-cost-675)
     - [`019.0197-reverse-a-list.py`](#program-0190197-reverse-a-listpy-learning-cost-18125)
     - [`019.1983-reverse-a-list.py`](#program-0191983-reverse-a-listpy-learning-cost-275)
@@ -44,18 +44,18 @@
     - [`031.0188-recursive-factorial-simple.py`](#program-0310188-recursive-factorial-simplepy-learning-cost-1090625)
     - [`032.0196-integer-exponentiation-by-squaring.py`](#program-0320196-integer-exponentiation-by-squaringpy-learning-cost-3375)
     - [`033.1420-atomically-read-and-update-variable.py`](#program-0331420-atomically-read-and-update-variablepy-learning-cost-4375)
-    - [`034.0625-create-a-set-of-objects.py`](#program-0340625-create-a-set-of-objectspy-learning-cost-509375)
+    - [`034.0625-create-a-set-of-objects.py`](#program-0340625-create-a-set-of-objectspy-learning-cost-584375)
     - [`035.0667-first-class-function--compose.py`](#program-0350667-first-class-function--composepy-learning-cost-6625)
     - [`036.0670-first-class-function--generic-composition.py`](#program-0360670-first-class-function--generic-compositionpy-learning-cost-6625)
     - [`037.0671-currying.py`](#program-0370671-curryingpy-learning-cost-85625)
     - [`038.0186-extract-a-substring.py`](#program-0380186-extract-a-substringpy-learning-cost-2625)
     - [`039.0571-check-if-string-contains-a-word.py`](#program-0390571-check-if-string-contains-a-wordpy-learning-cost-2375)
-    - [`040.2279-graph-with-adjacency-lists.py`](#program-0402279-graph-with-adjacency-listspy-learning-cost-2021875)
+    - [`040.2279-graph-with-adjacency-lists.py`](#program-0402279-graph-with-adjacency-listspy-learning-cost-2096875)
     - [`041.0187-reverse-a-string.py`](#program-0410187-reverse-a-stringpy-learning-cost-63125)
     - [`041.2714-reverse-a-string.py`](#program-0412714-reverse-a-stringpy-learning-cost-275)
     - [`042.1264-continue-outer-loop.py`](#program-0421264-continue-outer-looppy-learning-cost-9875)
     - [`042.3168-continue-outer-loop.py`](#program-0423168-continue-outer-looppy-learning-cost-703125)
-    - [`043.0676-break-outer-loop.py`](#program-0430676-break-outer-looppy-learning-cost-1225)
+    - [`043.0676-break-outer-loop.py`](#program-0430676-break-outer-looppy-learning-cost-130)
     - [`043.2733-break-outer-loop.py`](#program-0432733-break-outer-looppy-learning-cost-165625)
     - [`044.0190-insert-element-in-list.py`](#program-0440190-insert-element-in-listpy-learning-cost-175)
     - [`045.0570-pause-execution-for-5-seconds.py`](#program-0450570-pause-execution-for-5-secondspy-learning-cost-26875)
@@ -104,7 +104,7 @@
     - [`087.1139-stop-program.py`](#program-0871139-stop-programpy-learning-cost-26875)
     - [`088.2143-allocate-1m-bytes.py`](#program-0882143-allocate-1m-bytespy-learning-cost-278125)
     - [`089.1097-handle-invalid-argument.py`](#program-0891097-handle-invalid-argumentpy-learning-cost-1875)
-    - [`090.1099-read-only-outside.py`](#program-0901099-read-only-outsidepy-learning-cost-759375)
+    - [`090.1099-read-only-outside.py`](#program-0901099-read-only-outsidepy-learning-cost-834375)
     - [`091.1098-load-json-file-into-struct.py`](#program-0911098-load-json-file-into-structpy-learning-cost-45)
     - [`092.1100-save-object-into-json-file.py`](#program-0921100-save-object-into-json-filepy-learning-cost-3625)
     - [`093.1082-pass-a-runnable-procedure-as-parameter.py`](#program-0931082-pass-a-runnable-procedure-as-parameterpy-learning-cost-59375)
@@ -120,7 +120,7 @@
     - [`101.2172-load-from-http-get-request-into-a-string.py`](#program-1012172-load-from-http-get-request-into-a-stringpy-learning-cost-35)
     - [`102.2173-load-from-http-get-request-into-a-file.py`](#program-1022173-load-from-http-get-request-into-a-filepy-learning-cost-45)
     - [`103.2276-load-xml-file-into-struct.py`](#program-1032276-load-xml-file-into-structpy-learning-cost-35625)
-    - [`104.3264-save-object-into-xml-file.py`](#program-1043264-save-object-into-xml-filepy-learning-cost-105)
+    - [`104.3264-save-object-into-xml-file.py`](#program-1043264-save-object-into-xml-filepy-learning-cost-1125)
     - [`105.1804-current-executable-name.py`](#program-1051804-current-executable-namepy-learning-cost-346875)
     - [`106.2039-get-program-working-directory.py`](#program-1062039-get-program-working-directorypy-learning-cost-2625)
     - [`107.2139-get-folder-containing-current-program.py`](#program-1072139-get-folder-containing-current-programpy-learning-cost-425)
@@ -140,8 +140,8 @@
     - [`119.3263-deduplicate-list.py`](#program-1193263-deduplicate-listpy-learning-cost-163125)
     - [`120.1479-read-integer-from-stdin.py`](#program-1201479-read-integer-from-stdinpy-learning-cost-528125)
     - [`121.3029-udp-listen-and-read.py`](#program-1213029-udp-listen-and-readpy-learning-cost-126875)
-    - [`122.1453-declare-enumeration.py`](#program-1221453-declare-enumerationpy-learning-cost-4625)
-    - [`122.1454-declare-enumeration.py`](#program-1221454-declare-enumerationpy-learning-cost-3625)
+    - [`122.1453-declare-enumeration.py`](#program-1221453-declare-enumerationpy-learning-cost-5375)
+    - [`122.1454-declare-enumeration.py`](#program-1221454-declare-enumerationpy-learning-cost-4375)
     - [`123.2146-assert-condition.py`](#program-1232146-assert-conditionpy-learning-cost-075)
     - [`124.2152-binary-search-for-a-value-in-sorted-array.py`](#program-1242152-binary-search-for-a-value-in-sorted-arraypy-learning-cost-1175)
     - [`125.2167-measure-function-call-duration.py`](#program-1252167-measure-function-call-durationpy-learning-cost-7125)
@@ -177,12 +177,12 @@
     - [`152.2153-turn-a-character-into-a-string.py`](#program-1522153-turn-a-character-into-a-stringpy-learning-cost-0875)
     - [`153.1980-concatenate-string-with-integer.py`](#program-1531980-concatenate-string-with-integerpy-learning-cost-35625)
     - [`154.2155-halfway-between-two-hex-color-codes.py`](#program-1542155-halfway-between-two-hex-color-codespy-learning-cost-1265625)
-    - [`154.2292-halfway-between-two-hex-color-codes.py`](#program-1542292-halfway-between-two-hex-color-codespy-learning-cost-275)
+    - [`154.2292-halfway-between-two-hex-color-codes.py`](#program-1542292-halfway-between-two-hex-color-codespy-learning-cost-2825)
     - [`155.2147-delete-file.py`](#program-1552147-delete-filepy-learning-cost-2625)
     - [`156.2148-format-integer-with-zero-padding.py`](#program-1562148-format-integer-with-zero-paddingpy-learning-cost-275)
     - [`157.2150-declare-constant-string.py`](#program-1572150-declare-constant-stringpy-learning-cost-26875)
     - [`158.2163-random-sublist.py`](#program-1582163-random-sublistpy-learning-cost-2625)
-    - [`159.2281-trie.py`](#program-1592281-triepy-learning-cost-609375)
+    - [`159.2281-trie.py`](#program-1592281-triepy-learning-cost-684375)
     - [`160.2165-detect-if-32-bit-or-64-bit-architecture.py`](#program-1602165-detect-if-32-bit-or-64-bit-architecturepy-learning-cost-84375)
     - [`161.2098-multiply-all-the-elements-of-a-list.py`](#program-1612098-multiply-all-the-elements-of-a-listpy-learning-cost-175)
     - [`162.2164-execute-procedures-depending-on-options.py`](#program-1622164-execute-procedures-depending-on-optionspy-learning-cost-8625)
@@ -217,7 +217,7 @@
     - [`184.2701-tomorrow.py`](#program-1842701-tomorrowpy-learning-cost-54375)
     - [`185.2820-execute-function-in-30-seconds.py`](#program-1852820-execute-function-in-30-secondspy-learning-cost-54375)
     - [`186.2699-exit-program-cleanly.py`](#program-1862699-exit-program-cleanlypy-learning-cost-271875)
-    - [`187.3261-disjoint-set.py`](#program-1873261-disjoint-setpy-learning-cost-1965625)
+    - [`187.3261-disjoint-set.py`](#program-1873261-disjoint-setpy-learning-cost-2040625)
     - [`188.3171-matrix-multiplication.py`](#program-1883171-matrix-multiplicationpy-learning-cost-2625)
     - [`188.3284-matrix-multiplication.py`](#program-1883284-matrix-multiplicationpy-learning-cost-2625)
     - [`189.3236-filter-and-transform-list.py`](#program-1893236-filter-and-transform-listpy-learning-cost-2625)
@@ -239,8 +239,8 @@
 | 0.9375 | `appli/function/builtin/print` | 2 |
 | 0.9375 | `library/standard/__future__/print_function` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 2 |
-| 0 | `metadata/program` | 1-2 |
-| 0 | `metadata/sloc/2` | 1-2 |
+| 0 | `meta/program` | 1-2 |
+| 0 | `meta/sloc/2` | 1-2 |
 
 ---
 
@@ -254,8 +254,8 @@
 |----|----|----|
 | 0.9375 | `appli/function/builtin/print` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -274,8 +274,8 @@
 | 0.9375 | `flow/loop/for/arithmetic` | 1-2 |
 | 0.9375 | `type/number/integer/literal` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 2 |
-| 0 | `metadata/program` | 1-2 |
-| 0 | `metadata/sloc/2` | 1-2 |
+| 0 | `meta/program` | 1-2 |
+| 0 | `meta/sloc/2` | 1-2 |
 
 ---
 
@@ -291,8 +291,8 @@
 | 0.875 | `operator/string/replication` | 1 |
 | 0.9375 | `type/number/integer/literal` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -308,8 +308,8 @@
 | 0.875 | `operator/string/replication` | 1 |
 | 0.9375 | `type/number/integer/literal` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -327,8 +327,8 @@
 | 0.9375 | `appli/function/builtin/print` | 2 |
 | 0.875 | `operator/string/concatenation` | 2 |
 | 0.9375 | `type/sequence/string/literal` | 2 |
-| 0 | `metadata/program` | 1-2 |
-| 0 | `metadata/sloc/2` | 1-2 |
+| 0 | `meta/program` | 1-2 |
+| 0 | `meta/sloc/2` | 1-2 |
 
 ---
 
@@ -344,8 +344,8 @@
 | 0.875 | `abstr/argument/no` | 1-2 |
 | 0.75 | `abstr/procedure` | 1-2 |
 | 0.75 | `flow/null_operation` | 2 |
-| 0 | `metadata/program` | 1-2 |
-| 0 | `metadata/sloc/2` | 1-2 |
+| 0 | `meta/program` | 1-2 |
+| 0 | `meta/sloc/2` | 1-2 |
 
 ---
 
@@ -362,8 +362,8 @@
 | 0.75 | `abstr/function` | 1-2 |
 | 0.875 | `abstr/return/something` | 2 |
 | 0.875 | `operator/arithmetic/multiplication` | 2 |
-| 0 | `metadata/program` | 1-2 |
-| 0 | `metadata/sloc/2` | 1-2 |
+| 0 | `meta/program` | 1-2 |
+| 0 | `meta/sloc/2` | 1-2 |
 
 ---
 
@@ -381,12 +381,12 @@
 | 0.875 | `abstr/return/something` | 2 |
 | 0.875 | `operator/arithmetic/power` | 2 |
 | 0.9375 | `type/number/integer/literal` | 2 |
-| 0 | `metadata/program` | 1-2 |
-| 0 | `metadata/sloc/2` | 1-2 |
+| 0 | `meta/program` | 1-2 |
+| 0 | `meta/sloc/2` | 1-2 |
 
 ---
 
-### Program `005.0663-create-a-2d-point-data-structure.py` (learning cost 0.9375)
+### Program `005.0663-create-a-2d-point-data-structure.py` (learning cost 1.6875)
 
 ```python
 1   from dataclasses import dataclass
@@ -398,9 +398,10 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
+| 0.75 | `abstr/class` | 2 |
 | 0.9375 | `library/standard/dataclasses/dataclass` | 1 |
-| 0 | `metadata/program` | 1-2 |
-| 0 | `metadata/sloc/2` | 1-2 |
+| 0 | `meta/program` | 1-2 |
+| 0 | `meta/sloc/2` | 1-2 |
 
 ---
 
@@ -416,8 +417,8 @@
 | 0.875 | `appli/function/doSomething` | 2 |
 | 0.9375 | `flow/loop/exit/late` | 1-2 |
 | 0.9375 | `flow/loop/for/elements` | 1-2 |
-| 0 | `metadata/program` | 1-2 |
-| 0 | `metadata/sloc/2` | 1-2 |
+| 0 | `meta/program` | 1-2 |
+| 0 | `meta/sloc/2` | 1-2 |
 
 ---
 
@@ -436,8 +437,8 @@
 | 0.875 | `flow/loop/for` | 1-2 |
 | 0.9375 | `flow/loop/for/elements_and_indexes` | 1-2 |
 | 0.9375 | `type/sequence/tuple/literal` | 1 |
-| 0 | `metadata/program` | 1-2 |
-| 0 | `metadata/sloc/2` | 1-2 |
+| 0 | `meta/program` | 1-2 |
+| 0 | `meta/sloc/2` | 1-2 |
 
 ---
 
@@ -453,12 +454,12 @@
 | 0.9375 | `type/number/integer/literal` | 1, 1 |
 | 0.9375 | `type/sequence/string/literal` | 1, 1 |
 | 0.875 | `var/assignment/single` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
-### Program `009.1410-create-a-binary-tree-data-structure.py` (learning cost 5.125)
+### Program `009.1410-create-a-binary-tree-data-structure.py` (learning cost 5.875)
 
 ```python
 1   class Node:
@@ -471,17 +472,18 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.875 | `abstr/argument/arg` | 2, 2 |
+| 0.75 | `abstr/class` | 1-5 |
 | 0.9375 | `abstr/method/flavor/instance` | 2-5 |
 | 0.9375 | `abstr/method/naming/magic` | 2-5 |
 | 0.75 | `abstr/procedure` | 2-5 |
 | 0.875 | `type/null/literal` | 4, 5 |
 | 0.75 | `var/assignment` | 3, 4, 5 |
-| 0 | `metadata/program` | 1-5 |
-| 0 | `metadata/sloc/5` | 1-5 |
+| 0 | `meta/program` | 1-5 |
+| 0 | `meta/sloc/5` | 1-5 |
 
 ---
 
-### Program `009.3176-create-a-binary-tree-data-structure.py` (learning cost 4.25)
+### Program `009.3176-create-a-binary-tree-data-structure.py` (learning cost 5.0)
 
 ```python
 1   class Node:
@@ -494,12 +496,13 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.875 | `abstr/argument/arg` | 2, 2, 2, 2 |
+| 0.75 | `abstr/class` | 1-5 |
 | 0.9375 | `abstr/method/flavor/instance` | 2-5 |
 | 0.9375 | `abstr/method/naming/magic` | 2-5 |
 | 0.75 | `abstr/procedure` | 2-5 |
 | 0.75 | `var/assignment` | 3, 4, 5 |
-| 0 | `metadata/program` | 1-5 |
-| 0 | `metadata/sloc/5` | 1-5 |
+| 0 | `meta/program` | 1-5 |
+| 0 | `meta/sloc/5` | 1-5 |
 
 ---
 
@@ -514,8 +517,8 @@
 |----|----|----|
 | 0.875 | `appli/function/shuffle` | 2 |
 | 0.9375 | `library/standard/random/shuffle` | 1 |
-| 0 | `metadata/program` | 1-2 |
-| 0 | `metadata/sloc/2` | 1-2 |
+| 0 | `meta/program` | 1-2 |
+| 0 | `meta/sloc/2` | 1-2 |
 
 ---
 
@@ -530,8 +533,8 @@
 |----|----|----|
 | 0.875 | `appli/method/shuffle` | 2 |
 | 0.875 | `library/standard/random` | 1 |
-| 0 | `metadata/program` | 1-2 |
-| 0 | `metadata/sloc/2` | 1-2 |
+| 0 | `meta/program` | 1-2 |
+| 0 | `meta/sloc/2` | 1-2 |
 
 ---
 
@@ -546,8 +549,8 @@
 |----|----|----|
 | 0.875 | `appli/method/choice` | 2 |
 | 0.875 | `library/standard/random` | 1 |
-| 0 | `metadata/program` | 1-2 |
-| 0 | `metadata/sloc/2` | 1-2 |
+| 0 | `meta/program` | 1-2 |
+| 0 | `meta/sloc/2` | 1-2 |
 
 ---
 
@@ -561,8 +564,8 @@
 |----|----|----|
 | 0.75 | `condition/belonging` | 1 |
 | 0.75 | `type/boolean` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -581,8 +584,8 @@
 | 0.875 | `flow/loop/for` | 1-2 |
 | 0.875 | `type/non_sequence/dictionary` | 1 |
 | 0.9375 | `type/sequence/tuple/literal` | 1 |
-| 0 | `metadata/program` | 1-2 |
-| 0 | `metadata/sloc/2` | 1-2 |
+| 0 | `meta/program` | 1-2 |
+| 0 | `meta/sloc/2` | 1-2 |
 
 ---
 
@@ -601,8 +604,8 @@
 | 0.875 | `abstr/return/something` | 3 |
 | 0.875 | `appli/method/randrange` | 3 |
 | 0.875 | `library/standard/random` | 1 |
-| 0 | `metadata/program` | 1-3 |
-| 0 | `metadata/sloc/3` | 1-3 |
+| 0 | `meta/program` | 1-3 |
+| 0 | `meta/sloc/3` | 1-3 |
 
 ---
 
@@ -617,8 +620,8 @@
 |----|----|----|
 | 0.875 | `appli/method/uniform` | 2 |
 | 0.875 | `library/standard/random` | 1 |
-| 0 | `metadata/program` | 1-2 |
-| 0 | `metadata/sloc/2` | 1-2 |
+| 0 | `meta/program` | 1-2 |
+| 0 | `meta/sloc/2` | 1-2 |
 
 ---
 
@@ -633,8 +636,8 @@
 |----|----|----|
 | 0.875 | `appli/method/randint` | 2 |
 | 0.875 | `library/standard/random` | 1 |
-| 0 | `metadata/program` | 1-2 |
-| 0 | `metadata/sloc/2` | 1-2 |
+| 0 | `meta/program` | 1-2 |
+| 0 | `meta/sloc/2` | 1-2 |
 
 ---
 
@@ -663,12 +666,12 @@
 | 0.875 | `flow/conditional/no_else` | 2-3 |
 | 0.75 | `type/boolean` | 2 |
 | 0.875 | `type/null/literal` | 2 |
-| 0 | `metadata/program` | 1-6 |
-| 0 | `metadata/sloc/6` | 1-6 |
+| 0 | `meta/program` | 1-6 |
+| 0 | `meta/sloc/6` | 1-6 |
 
 ---
 
-### Program `017.1103-create-a-tree-data-structure.py` (learning cost 6.96875)
+### Program `017.1103-create-a-tree-data-structure.py` (learning cost 7.71875)
 
 ```python
 1   class Node(object):
@@ -681,14 +684,15 @@
 |----|----|----|
 | 0.875 | `abstr/argument/arg` | 2, 2 |
 | 0.875 | `abstr/argument/vararg` | 2 |
+| 0.75 | `abstr/class` | 1-4 |
 | 0.9375 | `abstr/method/flavor/instance` | 2-4 |
 | 0.9375 | `abstr/method/naming/magic` | 2-4 |
 | 0.75 | `abstr/procedure` | 2-4 |
 | 0.96875 | `appli/function/builtin/casting/list` | 4 |
 | 0.875 | `type/sequence/list` | 4 |
 | 0.75 | `var/assignment` | 3, 4 |
-| 0 | `metadata/program` | 1-4 |
-| 0 | `metadata/sloc/4` | 1-4 |
+| 0 | `meta/program` | 1-4 |
+| 0 | `meta/sloc/4` | 1-4 |
 
 ---
 
@@ -711,8 +715,8 @@
 | 0.875 | `appli/function/f` | 2 |
 | 0.9375 | `flow/loop/exit/late` | 3-4 |
 | 0.9375 | `flow/loop/for/elements` | 3-4 |
-| 0 | `metadata/program` | 1-4 |
-| 0 | `metadata/sloc/4` | 1-4 |
+| 0 | `meta/program` | 1-4 |
+| 0 | `meta/sloc/4` | 1-4 |
 
 ---
 
@@ -726,8 +730,8 @@
 |----|----|----|
 | 0.9375 | `appli/function/builtin/reversed` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -742,8 +746,8 @@
 | 0.9375 | `subscript/slice/step/backwards` | 1 |
 | 0.9375 | `type/number/integer/literal` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -757,8 +761,8 @@
 |----|----|----|
 | 0.875 | `appli/method/reverse` | 1 |
 | 0.875 | `type/sequence/list` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -786,8 +790,8 @@
 | 0.75 | `type/boolean` | 3 |
 | 0.75 | `type/sequence` | 4 |
 | 0.9375 | `type/sequence/tuple/literal` | 2, 4 |
-| 0 | `metadata/program` | 1-4 |
-| 0 | `metadata/sloc/4` | 1-4 |
+| 0 | `meta/program` | 1-4 |
+| 0 | `meta/sloc/4` | 1-4 |
 
 ---
 
@@ -801,8 +805,8 @@
 |----|----|----|
 | 0.9375 | `type/sequence/tuple/literal` | 1, 1 |
 | 0.9375 | `var/assignment/parallel/swap` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -817,8 +821,8 @@
 | 0.96875 | `appli/function/builtin/casting/int` | 1 |
 | 0.875 | `type/number/integer` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -834,8 +838,8 @@
 | 0.875 | `type/sequence/string` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -849,8 +853,8 @@
 |----|----|----|
 | 0.9375 | `type/sequence/string/literal` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -876,8 +880,8 @@
 | 0.9375 | `type/sequence/string/literal` | 6 |
 | 0.75 | `var/assignment` | 4 |
 | 0.875 | `var/assignment/single` | 2, 3 |
-| 0 | `metadata/program` | 1-6 |
-| 0 | `metadata/sloc/6` | 1-6 |
+| 0 | `meta/program` | 1-6 |
+| 0 | `meta/sloc/6` | 1-6 |
 
 ---
 
@@ -892,8 +896,8 @@
 | 0.875 | `appli/function/xrange` | 1, 1 |
 | 0.96875 | `type/number/integer/literal/zero` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -908,8 +912,8 @@
 | 0.875 | `appli/function/xrange` | 1, 1, 1 |
 | 0.96875 | `type/number/integer/literal/zero` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -926,8 +930,8 @@
 | 0.875 | `library/third_party/numpy` | 1 |
 | 0.9375 | `type/sequence/tuple/literal` | 2 |
 | 0.875 | `var/assignment/single` | 2 |
-| 0 | `metadata/program` | 1-2 |
-| 0 | `metadata/sloc/2` | 1-2 |
+| 0 | `meta/program` | 1-2 |
+| 0 | `meta/sloc/2` | 1-2 |
 
 ---
 
@@ -943,8 +947,8 @@
 | 0.875 | `abstr/function/anonymous` | 1 |
 | 0.9375 | `appli/function/builtin/sorted` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -958,8 +962,8 @@
 |----|----|----|
 | 0.75 | `subscript/index` | 1 |
 | 0.75 | `var/deletion` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -983,8 +987,8 @@
 | 0.9375 | `type/number/integer/literal` | 3, 3 |
 | 0.9375 | `type/sequence/list/literal` | 4 |
 | 0.875 | `var/assignment/single` | 2 |
-| 0 | `metadata/program` | 1-4 |
-| 0 | `metadata/sloc/4` | 1-4 |
+| 0 | `meta/program` | 1-4 |
+| 0 | `meta/sloc/4` | 1-4 |
 
 ---
 
@@ -1013,8 +1017,8 @@
 | 0.75 | `type/boolean` | 2 |
 | 0.9375 | `type/number/integer/literal` | 3, 5 |
 | 0.96875 | `type/number/integer/literal/zero` | 2 |
-| 0 | `metadata/program` | 1-5 |
-| 0 | `metadata/sloc/5` | 1-5 |
+| 0 | `meta/program` | 1-5 |
+| 0 | `meta/sloc/5` | 1-5 |
 
 ---
 
@@ -1031,8 +1035,8 @@
 | 0.75 | `abstr/function` | 1-2 |
 | 0.875 | `abstr/return/something` | 2 |
 | 0.875 | `operator/arithmetic/power` | 2 |
-| 0 | `metadata/program` | 1-2 |
-| 0 | `metadata/sloc/2` | 1-2 |
+| 0 | `meta/program` | 1-2 |
+| 0 | `meta/sloc/2` | 1-2 |
 
 ---
 
@@ -1055,12 +1059,12 @@
 | 0.875 | `appli/method/release` | 7 |
 | 0.875 | `library/standard/threading` | 1 |
 | 0.875 | `var/assignment/single` | 2, 5 |
-| 0 | `metadata/program` | 1-7 |
-| 0 | `metadata/sloc/7` | 1-7 |
+| 0 | `meta/program` | 1-7 |
+| 0 | `meta/sloc/7` | 1-7 |
 
 ---
 
-### Program `034.0625-create-a-set-of-objects.py` (learning cost 5.09375)
+### Program `034.0625-create-a-set-of-objects.py` (learning cost 5.84375)
 
 ```python
 1   class T(object):
@@ -1070,14 +1074,15 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
+| 0.75 | `abstr/class` | 1-2 |
 | 0.875 | `appli/class_constructor/T` | 3 |
 | 0.75 | `appli/composition` | 3 |
 | 0.96875 | `appli/function/builtin/casting/set` | 3 |
 | 0.75 | `flow/null_operation` | 2 |
 | 0.875 | `type/non_sequence/set` | 3 |
 | 0.875 | `var/assignment/single` | 3 |
-| 0 | `metadata/program` | 1-3 |
-| 0 | `metadata/sloc/3` | 1-3 |
+| 0 | `meta/program` | 1-3 |
+| 0 | `meta/sloc/3` | 1-3 |
 
 ---
 
@@ -1098,8 +1103,8 @@
 | 0.75 | `appli/composition` | 2 |
 | 0.875 | `appli/function/f` | 2 |
 | 0.875 | `appli/function/g` | 2 |
-| 0 | `metadata/program` | 1-2 |
-| 0 | `metadata/sloc/2` | 1-2 |
+| 0 | `meta/program` | 1-2 |
+| 0 | `meta/sloc/2` | 1-2 |
 
 ---
 
@@ -1120,8 +1125,8 @@
 | 0.75 | `appli/composition` | 2 |
 | 0.875 | `appli/function/f` | 2 |
 | 0.875 | `appli/function/g` | 2 |
-| 0 | `metadata/program` | 1-2 |
-| 0 | `metadata/sloc/2` | 1-2 |
+| 0 | `meta/program` | 1-2 |
+| 0 | `meta/sloc/2` | 1-2 |
 
 ---
 
@@ -1148,8 +1153,8 @@
 | 0.9375 | `library/standard/functools/partial` | 1 |
 | 0.875 | `operator/arithmetic/addition` | 4 |
 | 0.9375 | `type/number/integer/literal` | 6, 6 |
-| 0 | `metadata/program` | 1-6 |
-| 0 | `metadata/sloc/6` | 1-6 |
+| 0 | `meta/program` | 1-6 |
+| 0 | `meta/sloc/6` | 1-6 |
 
 ---
 
@@ -1164,8 +1169,8 @@
 | 0.875 | `subscript/slice/start` | 1 |
 | 0.875 | `subscript/slice/stop` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -1180,12 +1185,12 @@
 | 0.75 | `condition/belonging` | 1 |
 | 0.75 | `type/boolean` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
-### Program `040.2279-graph-with-adjacency-lists.py` (learning cost 20.21875)
+### Program `040.2279-graph-with-adjacency-lists.py` (learning cost 20.96875)
 
 ```python
 1   from collections import defaultdict
@@ -1207,6 +1212,7 @@
 |----|----|----|
 | 0.875 | `abstr/argument/arg` | 5, 9, 9 |
 | 0.875 | `abstr/argument/vararg` | 5 |
+| 0.75 | `abstr/class` | 2-3, 4-12 |
 | 0.9375 | `abstr/method/flavor/instance` | 5-8, 9-12 |
 | 0.9375 | `abstr/method/naming/magic` | 5-8 |
 | 0.75 | `abstr/procedure` | 5-8, 9-12 |
@@ -1228,8 +1234,8 @@
 | 0.75 | `var/assignment` | 6 |
 | 0.875 | `var/assignment/constant` | 13 |
 | 0.875 | `var/assignment/single` | 13 |
-| 0 | `metadata/program` | 1-13 |
-| 0 | `metadata/sloc/13` | 1-13 |
+| 0 | `meta/program` | 1-13 |
+| 0 | `meta/sloc/13` | 1-13 |
 
 ---
 
@@ -1248,8 +1254,8 @@
 | 0.875 | `type/sequence/string` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1, 1 |
 | 0.875 | `var/assignment/single` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -1264,8 +1270,8 @@
 | 0.9375 | `subscript/slice/step/backwards` | 1 |
 | 0.9375 | `type/number/integer/literal` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -1295,8 +1301,8 @@
 | 0.9375 | `flow/loop/for/elements` | 1-8, 3-5 |
 | 0.96875 | `flow/loop/for/nested/1` | 3-5 |
 | 0.75 | `type/boolean` | 4 |
-| 0 | `metadata/program` | 1-8 |
-| 0 | `metadata/sloc/8` | 1-8 |
+| 0 | `meta/program` | 1-8 |
+| 0 | `meta/sloc/8` | 1-8 |
 
 ---
 
@@ -1320,12 +1326,12 @@
 | 0.9375 | `flow/loop/for/elements` | 1-5, 2-5 |
 | 0.96875 | `flow/loop/for/nested/1` | 2-5 |
 | 0.75 | `type/boolean` | 3 |
-| 0 | `metadata/program` | 1-5 |
-| 0 | `metadata/sloc/5` | 1-5 |
+| 0 | `meta/program` | 1-5 |
+| 0 | `meta/sloc/5` | 1-5 |
 
 ---
 
-### Program `043.0676-break-outer-loop.py` (learning cost 12.25)
+### Program `043.0676-break-outer-loop.py` (learning cost 13.0)
 
 ```python
 1   class BreakOuterLoop(Exception):
@@ -1343,6 +1349,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
+| 0.75 | `abstr/class` | 1-2 |
 | 0.75 | `condition/equality` | 7 |
 | 0.875 | `flow/conditional/no_else` | 7-9 |
 | 0.9375 | `flow/exception/catch/` | 3-11 |
@@ -1357,8 +1364,8 @@
 | 0.875 | `type/null/literal` | 4 |
 | 0.9375 | `type/sequence/tuple/literal` | 8 |
 | 0.875 | `var/assignment/single` | 4, 8 |
-| 0 | `metadata/program` | 1-11 |
-| 0 | `metadata/sloc/11` | 1-11 |
+| 0 | `meta/program` | 1-11 |
+| 0 | `meta/sloc/11` | 1-11 |
 
 ---
 
@@ -1395,8 +1402,8 @@
 | 0.9375 | `type/number/integer/literal` | 7, 7, 7, 7, 7, 7, 7, 7, 7, 7 |
 | 0.9375 | `type/sequence/list/literal` | 7, 7, 7 |
 | 0.9375 | `type/sequence/tuple/literal` | 2, 3, 5, 7 |
-| 0 | `metadata/program` | 1-7 |
-| 0 | `metadata/sloc/7` | 1-7 |
+| 0 | `meta/program` | 1-7 |
+| 0 | `meta/sloc/7` | 1-7 |
 
 ---
 
@@ -1410,8 +1417,8 @@
 |----|----|----|
 | 0.875 | `appli/method/insert` | 1 |
 | 0.875 | `type/sequence/list` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -1427,8 +1434,8 @@
 | 0.875 | `appli/method/sleep` | 2 |
 | 0.875 | `library/standard/time` | 1 |
 | 0.9375 | `type/number/integer/literal` | 2 |
-| 0 | `metadata/program` | 1-2 |
-| 0 | `metadata/sloc/2` | 1-2 |
+| 0 | `meta/program` | 1-2 |
+| 0 | `meta/sloc/2` | 1-2 |
 
 ---
 
@@ -1443,8 +1450,8 @@
 | 0.875 | `subscript/slice/stop` | 1 |
 | 0.9375 | `type/number/integer/literal` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -1459,8 +1466,8 @@
 | 0.875 | `subscript/slice/start` | 1 |
 | 0.9375 | `type/number/integer/literal` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -1476,8 +1483,8 @@
 |----|----|----|
 | 0.9375 | `type/sequence/string/literal` | 3 |
 | 0.875 | `var/assignment/single` | 1 |
-| 0 | `metadata/program` | 1-3 |
-| 0 | `metadata/sloc/3` | 1-3 |
+| 0 | `meta/program` | 1-3 |
+| 0 | `meta/sloc/3` | 1-3 |
 
 ---
 
@@ -1492,8 +1499,8 @@
 | 0.875 | `appli/method/split` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -1510,8 +1517,8 @@
 | 0.9375 | `flow/loop/while/infinite` | 1-2 |
 | 0.75 | `flow/null_operation` | 2 |
 | 0.9375 | `type/boolean/literal/True` | 1 |
-| 0 | `metadata/program` | 1-2 |
-| 0 | `metadata/sloc/2` | 1-2 |
+| 0 | `meta/program` | 1-2 |
+| 0 | `meta/sloc/2` | 1-2 |
 
 ---
 
@@ -1525,8 +1532,8 @@
 |----|----|----|
 | 0.75 | `condition/belonging` | 1 |
 | 0.75 | `type/boolean` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -1542,8 +1549,8 @@
 | 0.75 | `condition/belonging` | 1 |
 | 0.75 | `type/boolean` | 1 |
 | 0.875 | `type/non_sequence/dictionary` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -1559,8 +1566,8 @@
 | 0.875 | `type/sequence/string` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -1578,8 +1585,8 @@
 | 0.875 | `type/sequence/string` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -1593,8 +1600,8 @@
 |----|----|----|
 | 0.9375 | `appli/function/builtin/sum` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -1610,8 +1617,8 @@
 | 0.9375 | `appli/function/builtin/str` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -1638,8 +1645,8 @@
 | 0.875 | `operator/arithmetic/multiplication` | 3 |
 | 0.9375 | `type/number/integer/literal` | 5, 5 |
 | 0.9375 | `type/sequence/string/literal` | 6 |
-| 0 | `metadata/program` | 1-6 |
-| 0 | `metadata/sloc/6` | 1-6 |
+| 0 | `meta/program` | 1-6 |
+| 0 | `meta/sloc/6` | 1-6 |
 
 ---
 
@@ -1653,8 +1660,8 @@
 |----|----|----|
 | 0.9375 | `appli/function/builtin/filter` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -1668,8 +1675,8 @@
 |----|----|----|
 | 0.875 | `appli/function/p` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -1684,8 +1691,8 @@
 | 0.9375 | `appli/function/builtin/open` | 1 |
 | 0.875 | `appli/method/read` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -1701,8 +1708,8 @@
 | 0.9375 | `appli/function/builtin/print` | 2 |
 | 0.875 | `library/standard/sys` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 2 |
-| 0 | `metadata/program` | 1-2 |
-| 0 | `metadata/sloc/2` | 1-2 |
+| 0 | `meta/program` | 1-2 |
+| 0 | `meta/sloc/2` | 1-2 |
 
 ---
 
@@ -1719,8 +1726,8 @@
 | 0.75 | `subscript/index` | 2 |
 | 0.9375 | `type/number/integer/literal` | 2 |
 | 0.875 | `var/assignment/single` | 2 |
-| 0 | `metadata/program` | 1-2 |
-| 0 | `metadata/sloc/2` | 1-2 |
+| 0 | `meta/program` | 1-2 |
+| 0 | `meta/sloc/2` | 1-2 |
 
 ---
 
@@ -1736,8 +1743,8 @@
 | 0.875 | `appli/method/now` | 2 |
 | 0.875 | `library/standard/datetime` | 1 |
 | 0.875 | `var/assignment/single` | 2 |
-| 0 | `metadata/program` | 1-2 |
-| 0 | `metadata/sloc/2` | 1-2 |
+| 0 | `meta/program` | 1-2 |
+| 0 | `meta/sloc/2` | 1-2 |
 
 ---
 
@@ -1752,8 +1759,8 @@
 | 0.875 | `appli/method/find` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -1768,8 +1775,8 @@
 | 0.875 | `appli/method/replace` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -1784,8 +1791,8 @@
 | 0.875 | `operator/arithmetic/power` | 1 |
 | 0.9375 | `type/number/integer/literal` | 1, 1 |
 | 0.875 | `var/assignment/single` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -1801,8 +1808,8 @@
 | 0.875 | `type/sequence/string` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -1816,8 +1823,8 @@
 |----|----|----|
 | 0.875 | `operator/arithmetic/power` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -1838,8 +1845,8 @@
 | 0.875 | `library/standard/math` | 1 |
 | 0.875 | `operator/arithmetic/integer_division` | 3, 3 |
 | 0.875 | `operator/arithmetic/substraction` | 3 |
-| 0 | `metadata/program` | 1-3 |
-| 0 | `metadata/sloc/3` | 1-3 |
+| 0 | `meta/program` | 1-3 |
+| 0 | `meta/sloc/3` | 1-3 |
 
 ---
 
@@ -1863,8 +1870,8 @@
 | 0.9375 | `type/number/floating_point/literal` | 3 |
 | 0.875 | `type/number/integer` | 3 |
 | 0.875 | `var/assignment/single` | 3 |
-| 0 | `metadata/program` | 1-3 |
-| 0 | `metadata/sloc/3` | 1-3 |
+| 0 | `meta/program` | 1-3 |
+| 0 | `meta/sloc/3` | 1-3 |
 
 ---
 
@@ -1879,8 +1886,8 @@
 |----|----|----|
 | 0.875 | `library/standard/random` | 1 |
 | 0.875 | `var/assignment/single` | 2 |
-| 0 | `metadata/program` | 1-2 |
-| 0 | `metadata/sloc/2` | 1-2 |
+| 0 | `meta/program` | 1-2 |
+| 0 | `meta/sloc/2` | 1-2 |
 
 ---
 
@@ -1895,8 +1902,8 @@
 |----|----|----|
 | 0.875 | `library/standard/random` | 1 |
 | 0.875 | `var/assignment/single` | 2 |
-| 0 | `metadata/program` | 1-2 |
-| 0 | `metadata/sloc/2` | 1-2 |
+| 0 | `meta/program` | 1-2 |
+| 0 | `meta/sloc/2` | 1-2 |
 
 ---
 
@@ -1917,8 +1924,8 @@
 | 0.9375 | `type/number/integer/literal` | 2 |
 | 0.875 | `type/sequence/string` | 2 |
 | 0.9375 | `type/sequence/string/literal` | 2 |
-| 0 | `metadata/program` | 1-2 |
-| 0 | `metadata/sloc/2` | 1-2 |
+| 0 | `meta/program` | 1-2 |
+| 0 | `meta/sloc/2` | 1-2 |
 
 ---
 
@@ -1939,8 +1946,8 @@
 | 0.875 | `appli/function/a_class` | 3 |
 | 0.9375 | `appli/function/builtin/issubclass` | 2 |
 | 0.875 | `flow/conditional/no_else` | 2-3 |
-| 0 | `metadata/program` | 1-3 |
-| 0 | `metadata/sloc/3` | 1-3 |
+| 0 | `meta/program` | 1-3 |
+| 0 | `meta/sloc/3` | 1-3 |
 
 ---
 
@@ -1956,8 +1963,8 @@
 | 0.875 | `appli/function/gcd` | 2 |
 | 0.9375 | `library/standard/fractions/gcd` | 1 |
 | 0.875 | `var/assignment/single` | 2 |
-| 0 | `metadata/program` | 1-2 |
-| 0 | `metadata/sloc/2` | 1-2 |
+| 0 | `meta/program` | 1-2 |
+| 0 | `meta/sloc/2` | 1-2 |
 
 ---
 
@@ -1975,8 +1982,8 @@
 | 0.875 | `operator/arithmetic/integer_division` | 2 |
 | 0.875 | `operator/arithmetic/multiplication` | 2 |
 | 0.875 | `var/assignment/single` | 2 |
-| 0 | `metadata/program` | 1-2 |
-| 0 | `metadata/sloc/2` | 1-2 |
+| 0 | `meta/program` | 1-2 |
+| 0 | `meta/sloc/2` | 1-2 |
 
 ---
 
@@ -1992,8 +1999,8 @@
 | 0.875 | `type/sequence/string` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -2011,8 +2018,8 @@
 | 0.9375 | `type/number/complex/literal` | 1, 2 |
 | 0.9375 | `type/number/integer/literal` | 1 |
 | 0.875 | `var/assignment/single` | 1, 2 |
-| 0 | `metadata/program` | 1-2 |
-| 0 | `metadata/sloc/2` | 1-2 |
+| 0 | `meta/program` | 1-2 |
+| 0 | `meta/sloc/2` | 1-2 |
 
 ---
 
@@ -2034,8 +2041,8 @@
 | 0.9375 | `flow/loop/while/infinite` | 1-4 |
 | 0.875 | `operator/boolean/not` | 3 |
 | 0.9375 | `type/boolean/literal/True` | 1 |
-| 0 | `metadata/program` | 1-4 |
-| 0 | `metadata/sloc/4` | 1-4 |
+| 0 | `meta/program` | 1-4 |
+| 0 | `meta/sloc/4` | 1-4 |
 
 ---
 
@@ -2050,8 +2057,8 @@
 | 0.96875 | `appli/function/builtin/casting/float` | 1 |
 | 0.875 | `type/number/floating_point` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -2066,8 +2073,8 @@
 | 0.96875 | `appli/function/builtin/casting/int` | 1 |
 | 0.875 | `type/number/integer` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -2084,8 +2091,8 @@
 | 0.9375 | `type/number/floating_point/literal` | 1 |
 | 0.875 | `type/number/integer` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -2100,8 +2107,8 @@
 | 0.875 | `appli/method/count` | 1 |
 | 0.75 | `type/sequence` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -2118,8 +2125,8 @@
 | 0.875 | `library/standard/re` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 2 |
 | 0.875 | `var/assignment/single` | 2 |
-| 0 | `metadata/program` | 1-2 |
-| 0 | `metadata/sloc/2` | 1-2 |
+| 0 | `meta/program` | 1-2 |
+| 0 | `meta/sloc/2` | 1-2 |
 
 ---
 
@@ -2136,8 +2143,8 @@
 | 0.75 | `type/sequence` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -2153,8 +2160,8 @@
 | 0.875 | `abstr/argument/arg` | 1, 1 |
 | 0.75 | `abstr/function` | 1-2 |
 | 0.9375 | `type/boolean/literal/False` | 2 |
-| 0 | `metadata/program` | 1-2 |
-| 0 | `metadata/sloc/2` | 1-2 |
+| 0 | `meta/program` | 1-2 |
+| 0 | `meta/sloc/2` | 1-2 |
 
 ---
 
@@ -2170,8 +2177,8 @@
 | 0.875 | `abstr/argument/arg` | 1, 1 |
 | 0.75 | `abstr/function` | 1-2 |
 | 0.9375 | `type/boolean/literal/False` | 2 |
-| 0 | `metadata/program` | 1-2 |
-| 0 | `metadata/sloc/2` | 1-2 |
+| 0 | `meta/program` | 1-2 |
+| 0 | `meta/sloc/2` | 1-2 |
 
 ---
 
@@ -2187,8 +2194,8 @@
 | 0.875 | `appli/method/exit` | 2 |
 | 0.875 | `library/standard/sys` | 1 |
 | 0.9375 | `type/number/integer/literal` | 2 |
-| 0 | `metadata/program` | 1-2 |
-| 0 | `metadata/sloc/2` | 1-2 |
+| 0 | `meta/program` | 1-2 |
+| 0 | `meta/sloc/2` | 1-2 |
 
 ---
 
@@ -2203,8 +2210,8 @@
 | 0.96875 | `appli/function/builtin/casting/bytearray` | 1 |
 | 0.9375 | `type/number/integer/literal` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -2218,12 +2225,12 @@
 |----|----|----|
 | 0.9375 | `appli/exception/builtin/ValueError` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
-### Program `090.1099-read-only-outside.py` (learning cost 7.59375)
+### Program `090.1099-read-only-outside.py` (learning cost 8.34375)
 
 ```python
 1   class Foo(object):
@@ -2237,6 +2244,7 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.875 | `abstr/argument/arg` | 2, 5 |
+| 0.75 | `abstr/class` | 1-6 |
 | 0.75 | `abstr/decorated` | 4-6 |
 | 0.75 | `abstr/function` | 4-6 |
 | 0.9375 | `abstr/method/flavor/instance` | 2-3, 4-6 |
@@ -2245,8 +2253,8 @@
 | 0.875 | `abstr/return/something` | 6 |
 | 0.96875 | `type/number/integer/literal/zero` | 3 |
 | 0.75 | `var/assignment` | 3 |
-| 0 | `metadata/program` | 1-6 |
-| 0 | `metadata/sloc/6` | 1-6 |
+| 0 | `meta/program` | 1-6 |
+| 0 | `meta/sloc/6` | 1-6 |
 
 ---
 
@@ -2265,8 +2273,8 @@
 | 0.875 | `library/standard/json` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 2, 2 |
 | 0.875 | `var/assignment/single` | 3 |
-| 0 | `metadata/program` | 1-3 |
-| 0 | `metadata/sloc/3` | 1-3 |
+| 0 | `meta/program` | 1-3 |
+| 0 | `meta/sloc/3` | 1-3 |
 
 ---
 
@@ -2284,8 +2292,8 @@
 | 0.875 | `appli/method/dump` | 3 |
 | 0.875 | `library/standard/json` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 2, 2 |
-| 0 | `metadata/program` | 1-3 |
-| 0 | `metadata/sloc/3` | 1-3 |
+| 0 | `meta/program` | 1-3 |
+| 0 | `meta/sloc/3` | 1-3 |
 
 ---
 
@@ -2306,8 +2314,8 @@
 | 0.875 | `appli/function/f` | 3 |
 | 0.875 | `appli/function/without_arguments` | 3 |
 | 0.9375 | `library/standard/__future__/print_function` | 1 |
-| 0 | `metadata/program` | 1-3 |
-| 0 | `metadata/sloc/3` | 1-3 |
+| 0 | `meta/program` | 1-3 |
+| 0 | `meta/sloc/3` | 1-3 |
 
 ---
 
@@ -2322,8 +2330,8 @@
 | 0.75 | `appli/composition` | 1 |
 | 0.9375 | `appli/function/builtin/print` | 1 |
 | 0.9375 | `appli/function/builtin/type` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -2336,8 +2344,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.9375 | `appli/function/builtin/print` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -2353,8 +2361,8 @@
 | 0.875 | `appli/method/getsize` | 2 |
 | 0.875 | `library/standard/os` | 1 |
 | 0.875 | `var/assignment/single` | 2 |
-| 0 | `metadata/program` | 1-2 |
-| 0 | `metadata/sloc/2` | 1-2 |
+| 0 | `meta/program` | 1-2 |
+| 0 | `meta/sloc/2` | 1-2 |
 
 ---
 
@@ -2369,8 +2377,8 @@
 | 0.875 | `appli/method/startswith` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -2385,8 +2393,8 @@
 | 0.875 | `appli/method/endswith` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -2402,8 +2410,8 @@
 | 0.875 | `appli/method/fromtimestamp` | 2 |
 | 0.875 | `library/standard/datetime` | 1 |
 | 0.875 | `var/assignment/single` | 2 |
-| 0 | `metadata/program` | 1-2 |
-| 0 | `metadata/sloc/2` | 1-2 |
+| 0 | `meta/program` | 1-2 |
+| 0 | `meta/sloc/2` | 1-2 |
 
 ---
 
@@ -2423,8 +2431,8 @@
 | 0.9375 | `type/number/integer/literal` | 2, 2, 2 |
 | 0.9375 | `type/sequence/string/literal` | 3 |
 | 0.875 | `var/assignment/single` | 2, 3 |
-| 0 | `metadata/program` | 1-3 |
-| 0 | `metadata/sloc/3` | 1-3 |
+| 0 | `meta/program` | 1-3 |
+| 0 | `meta/sloc/3` | 1-3 |
 
 ---
 
@@ -2442,8 +2450,8 @@
 | 0.875 | `appli/method/today` | 2 |
 | 0.9375 | `library/standard/datetime/date` | 1 |
 | 0.875 | `var/assignment/single` | 2, 3 |
-| 0 | `metadata/program` | 1-3 |
-| 0 | `metadata/sloc/3` | 1-3 |
+| 0 | `meta/program` | 1-3 |
+| 0 | `meta/sloc/3` | 1-3 |
 
 ---
 
@@ -2457,8 +2465,8 @@
 |----|----|----|
 | 0.875 | `appli/method/sort` | 1 |
 | 0.875 | `type/sequence/list` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -2476,8 +2484,8 @@
 | 0.875 | `appli/method/urlopen` | 2 |
 | 0.875 | `library/standard/urllib.request` | 1 |
 | 0.875 | `var/assignment/single` | 3 |
-| 0 | `metadata/program` | 1-3 |
-| 0 | `metadata/sloc/3` | 1-3 |
+| 0 | `meta/program` | 1-3 |
+| 0 | `meta/sloc/3` | 1-3 |
 
 ---
 
@@ -2495,8 +2503,8 @@
 | 0.9375 | `type/sequence/string/literal` | 2 |
 | 0.9375 | `type/sequence/tuple/literal` | 2 |
 | 0.875 | `var/assignment/parallel` | 2 |
-| 0 | `metadata/program` | 1-2 |
-| 0 | `metadata/sloc/2` | 1-2 |
+| 0 | `meta/program` | 1-2 |
+| 0 | `meta/sloc/2` | 1-2 |
 
 ---
 
@@ -2513,12 +2521,12 @@
 | 0.875 | `library/third_party/lxml.etree` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 2 |
 | 0.875 | `var/assignment/single` | 2 |
-| 0 | `metadata/program` | 1-2 |
-| 0 | `metadata/sloc/2` | 1-2 |
+| 0 | `meta/program` | 1-2 |
+| 0 | `meta/sloc/2` | 1-2 |
 
 ---
 
-### Program `104.3264-save-object-into-xml-file.py` (learning cost 10.5)
+### Program `104.3264-save-object-into-xml-file.py` (learning cost 11.25)
 
 ```python
 1   import pyxser as pyx
@@ -2538,6 +2546,7 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.875 | `abstr/argument/arg` | 6, 6, 6, 6 |
+| 0.75 | `abstr/class` | 2-9 |
 | 0.9375 | `abstr/method/flavor/instance` | 6-9 |
 | 0.9375 | `abstr/method/naming/magic` | 6-9 |
 | 0.75 | `abstr/procedure` | 6-9 |
@@ -2549,8 +2558,8 @@
 | 0.9375 | `type/sequence/string/literal` | 10, 10, 10, 11 |
 | 0.75 | `var/assignment` | 7, 8, 9 |
 | 0.875 | `var/assignment/single` | 3, 4, 5, 10, 11 |
-| 0 | `metadata/program` | 1-12 |
-| 0 | `metadata/sloc/12` | 1-12 |
+| 0 | `meta/program` | 1-12 |
+| 0 | `meta/sloc/12` | 1-12 |
 
 ---
 
@@ -2567,8 +2576,8 @@
 | 0.75 | `subscript/index` | 2 |
 | 0.96875 | `type/number/integer/literal/zero` | 2 |
 | 0.875 | `var/assignment/single` | 2 |
-| 0 | `metadata/program` | 1-2 |
-| 0 | `metadata/sloc/2` | 1-2 |
+| 0 | `meta/program` | 1-2 |
+| 0 | `meta/sloc/2` | 1-2 |
 
 ---
 
@@ -2584,8 +2593,8 @@
 | 0.875 | `appli/method/getcwd` | 2 |
 | 0.875 | `library/standard/os` | 1 |
 | 0.875 | `var/assignment/single` | 2 |
-| 0 | `metadata/program` | 1-2 |
-| 0 | `metadata/sloc/2` | 1-2 |
+| 0 | `meta/program` | 1-2 |
+| 0 | `meta/sloc/2` | 1-2 |
 
 ---
 
@@ -2603,8 +2612,8 @@
 | 0.875 | `appli/method/dirname` | 2 |
 | 0.875 | `library/standard/os` | 1 |
 | 0.875 | `var/assignment/single` | 2 |
-| 0 | `metadata/program` | 1-2 |
-| 0 | `metadata/sloc/2` | 1-2 |
+| 0 | `meta/program` | 1-2 |
+| 0 | `meta/sloc/2` | 1-2 |
 
 ---
 
@@ -2624,8 +2633,8 @@
 | 0.875 | `flow/conditional/no_else` | 1-2 |
 | 0.75 | `type/boolean` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
-| 0 | `metadata/program` | 1-2 |
-| 0 | `metadata/sloc/2` | 1-2 |
+| 0 | `meta/program` | 1-2 |
+| 0 | `meta/sloc/2` | 1-2 |
 
 ---
 
@@ -2641,8 +2650,8 @@
 | 0.875 | `appli/method/asizeof` | 2 |
 | 0.875 | `library/third_party/pympler.asizeof` | 1 |
 | 0.875 | `var/assignment/single` | 2 |
-| 0 | `metadata/program` | 1-2 |
-| 0 | `metadata/sloc/2` | 1-2 |
+| 0 | `meta/program` | 1-2 |
+| 0 | `meta/sloc/2` | 1-2 |
 
 ---
 
@@ -2660,8 +2669,8 @@
 | 0.875 | `type/sequence/string` | 1 |
 | 0.96875 | `type/sequence/string/literal/empty` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -2678,8 +2687,8 @@
 | 0.875 | `library/standard/subprocess` | 1 |
 | 0.9375 | `type/sequence/list/literal` | 2 |
 | 0.9375 | `type/sequence/string/literal` | 2, 2, 2 |
-| 0 | `metadata/program` | 1-2 |
-| 0 | `metadata/sloc/2` | 1-2 |
+| 0 | `meta/program` | 1-2 |
+| 0 | `meta/sloc/2` | 1-2 |
 
 ---
 
@@ -2697,8 +2706,8 @@
 | 0.9375 | `flow/loop/exit/late` | 1-2 |
 | 0.875 | `flow/loop/for` | 1-2 |
 | 0.75 | `subscript/index` | 2 |
-| 0 | `metadata/program` | 1-2 |
-| 0 | `metadata/sloc/2` | 1-2 |
+| 0 | `meta/program` | 1-2 |
+| 0 | `meta/sloc/2` | 1-2 |
 
 ---
 
@@ -2719,8 +2728,8 @@
 | 0.875 | `flow/loop/for` | 1-2 |
 | 0.875 | `type/non_sequence/dictionary` | 1 |
 | 0.9375 | `type/sequence/tuple/literal` | 1, 1, 1 |
-| 0 | `metadata/program` | 1-2 |
-| 0 | `metadata/sloc/2` | 1-2 |
+| 0 | `meta/program` | 1-2 |
+| 0 | `meta/sloc/2` | 1-2 |
 
 ---
 
@@ -2735,8 +2744,8 @@
 | 0.75 | `condition/equality` | 1 |
 | 0.75 | `type/boolean` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -2753,8 +2762,8 @@
 | 0.875 | `library/standard/datetime` | 1 |
 | 0.75 | `type/boolean` | 2 |
 | 0.875 | `var/assignment/single` | 2 |
-| 0 | `metadata/program` | 1-2 |
-| 0 | `metadata/sloc/2` | 1-2 |
+| 0 | `meta/program` | 1-2 |
+| 0 | `meta/sloc/2` | 1-2 |
 
 ---
 
@@ -2770,8 +2779,8 @@
 | 0.875 | `type/sequence/string` | 1 |
 | 0.96875 | `type/sequence/string/literal/empty` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -2785,8 +2794,8 @@
 |----|----|----|
 | 0.9375 | `appli/function/builtin/len` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -2801,8 +2810,8 @@
 | 0.96875 | `appli/function/builtin/casting/set` | 1 |
 | 0.875 | `type/non_sequence/set` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -2816,8 +2825,8 @@
 |----|----|----|
 | 0.96875 | `appli/function/builtin/casting/set` | 1 |
 | 0.875 | `type/non_sequence/set` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -2835,8 +2844,8 @@
 | 0.875 | `type/non_sequence/set` | 1 |
 | 0.875 | `type/sequence/list` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -2873,8 +2882,8 @@
 | 0.96875 | `type/sequence/list/literal/empty` | 3 |
 | 0.9375 | `type/sequence/string/literal` | 1, 1, 1, 1 |
 | 0.875 | `var/assignment/single` | 1, 2, 3 |
-| 0 | `metadata/program` | 1-8 |
-| 0 | `metadata/sloc/8` | 1-8 |
+| 0 | `meta/program` | 1-8 |
+| 0 | `meta/sloc/8` | 1-8 |
 
 ---
 
@@ -2892,8 +2901,8 @@
 | 0.875 | `type/number/integer` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -2925,12 +2934,12 @@
 | 0.875 | `var/assignment/constant` | 2 |
 | 0.875 | `var/assignment/parallel` | 6 |
 | 0.875 | `var/assignment/single` | 2, 3 |
-| 0 | `metadata/program` | 1-7 |
-| 0 | `metadata/sloc/7` | 1-7 |
+| 0 | `meta/program` | 1-7 |
+| 0 | `meta/sloc/7` | 1-7 |
 
 ---
 
-### Program `122.1453-declare-enumeration.py` (learning cost 4.625)
+### Program `122.1453-declare-enumeration.py` (learning cost 5.375)
 
 ```python
 1   class Suit:
@@ -2939,17 +2948,18 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
+| 0.75 | `abstr/class` | 1-2 |
 | 0.9375 | `appli/function/builtin/range` | 2 |
 | 0.9375 | `type/number/integer/literal` | 2 |
 | 0.9375 | `type/sequence/tuple/literal` | 2 |
 | 0.875 | `var/assignment/constant` | 2, 2, 2, 2 |
 | 0.9375 | `var/assignment/parallel/more_than_two` | 2 |
-| 0 | `metadata/program` | 1-2 |
-| 0 | `metadata/sloc/2` | 1-2 |
+| 0 | `meta/program` | 1-2 |
+| 0 | `meta/sloc/2` | 1-2 |
 
 ---
 
-### Program `122.1454-declare-enumeration.py` (learning cost 3.625)
+### Program `122.1454-declare-enumeration.py` (learning cost 4.375)
 
 ```python
 1   from enum import Enum
@@ -2962,12 +2972,13 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
+| 0.75 | `abstr/class` | 2-6 |
 | 0.9375 | `library/standard/enum/Enum` | 1 |
 | 0.9375 | `type/number/integer/literal` | 3, 4, 5, 6 |
 | 0.875 | `var/assignment/constant` | 3, 4, 5, 6 |
 | 0.875 | `var/assignment/single` | 3, 4, 5, 6 |
-| 0 | `metadata/program` | 1-6 |
-| 0 | `metadata/sloc/6` | 1-6 |
+| 0 | `meta/program` | 1-6 |
+| 0 | `meta/sloc/6` | 1-6 |
 
 ---
 
@@ -2980,8 +2991,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.75 | `flow/assertion` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -3010,8 +3021,8 @@
 | 0.75 | `type/boolean` | 4, 4 |
 | 0.9375 | `type/number/integer/literal` | 4 |
 | 0.875 | `var/assignment/single` | 3 |
-| 0 | `metadata/program` | 1-4 |
-| 0 | `metadata/sloc/4` | 1-4 |
+| 0 | `meta/program` | 1-4 |
+| 0 | `meta/sloc/4` | 1-4 |
 
 ---
 
@@ -3035,8 +3046,8 @@
 | 0.875 | `operator/arithmetic/substraction` | 5 |
 | 0.9375 | `type/sequence/string/literal` | 5 |
 | 0.875 | `var/assignment/single` | 2, 4 |
-| 0 | `metadata/program` | 1-5 |
-| 0 | `metadata/sloc/5` | 1-5 |
+| 0 | `meta/program` | 1-5 |
+| 0 | `meta/sloc/5` | 1-5 |
 
 ---
 
@@ -3055,8 +3066,8 @@
 | 0.9375 | `type/boolean/literal/True` | 2 |
 | 0.9375 | `type/sequence/string/literal` | 2 |
 | 0.9375 | `type/sequence/tuple/literal` | 2 |
-| 0 | `metadata/program` | 1-2 |
-| 0 | `metadata/sloc/2` | 1-2 |
+| 0 | `meta/program` | 1-2 |
+| 0 | `meta/sloc/2` | 1-2 |
 
 ---
 
@@ -3073,8 +3084,8 @@
 | 0.875 | `library/standard/imp` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 2, 2 |
 | 0.875 | `var/assignment/single` | 2 |
-| 0 | `metadata/program` | 1-2 |
-| 0 | `metadata/sloc/2` | 1-2 |
+| 0 | `meta/program` | 1-2 |
+| 0 | `meta/sloc/2` | 1-2 |
 
 ---
 
@@ -3112,8 +3123,8 @@
 | 0.75 | `var/assignment` | 8 |
 | 0.875 | `var/assignment/constant` | 2 |
 | 0.875 | `var/assignment/single` | 2, 4 |
-| 0 | `metadata/program` | 1-9 |
-| 0 | `metadata/sloc/9` | 1-9 |
+| 0 | `meta/program` | 1-9 |
+| 0 | `meta/sloc/9` | 1-9 |
 
 ---
 
@@ -3152,8 +3163,8 @@
 | 0.875 | `type/sequence/list` | 9 |
 | 0.9375 | `type/sequence/list/literal` | 4 |
 | 0.875 | `var/assignment/single` | 3, 4, 6 |
-| 0 | `metadata/program` | 1-9 |
-| 0 | `metadata/sloc/9` | 1-9 |
+| 0 | `meta/program` | 1-9 |
+| 0 | `meta/sloc/9` | 1-9 |
 
 ---
 
@@ -3189,8 +3200,8 @@
 | 0.875 | `type/sequence/list` | 8 |
 | 0.9375 | `type/sequence/list/literal` | 3 |
 | 0.875 | `var/assignment/single` | 2, 3, 5 |
-| 0 | `metadata/program` | 1-8 |
-| 0 | `metadata/sloc/8` | 1-8 |
+| 0 | `meta/program` | 1-8 |
+| 0 | `meta/sloc/8` | 1-8 |
 
 ---
 
@@ -3204,8 +3215,8 @@
 |----|----|----|
 | 0.75 | `operator/ternary` | 1, 1, 1 |
 | 0.875 | `type/null/literal` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -3228,8 +3239,8 @@
 | 0.875 | `appli/function/without_arguments` | 2, 4, 6 |
 | 0.75 | `flow/conditional` | 1-6, 3-6, 5-6 |
 | 0.9375 | `flow/conditional/else/if` | 4, 6 |
-| 0 | `metadata/program` | 1-6 |
-| 0 | `metadata/sloc/6` | 1-6 |
+| 0 | `meta/program` | 1-6 |
+| 0 | `meta/sloc/6` | 1-6 |
 
 ---
 
@@ -3246,8 +3257,8 @@
 | 0.875 | `library/standard/timeit` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 2, 2 |
 | 0.875 | `var/assignment/single` | 2 |
-| 0 | `metadata/program` | 1-2 |
-| 0 | `metadata/sloc/2` | 1-2 |
+| 0 | `meta/program` | 1-2 |
+| 0 | `meta/sloc/2` | 1-2 |
 
 ---
 
@@ -3264,8 +3275,8 @@
 | 0.75 | `type/boolean` | 1 |
 | 0.875 | `type/sequence/string` | 1, 1 |
 | 0.875 | `var/assignment/single` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -3279,8 +3290,8 @@
 |----|----|----|
 | 0.9375 | `type/sequence/list/literal` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -3293,8 +3304,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.875 | `appli/method/remove` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -3309,8 +3320,8 @@
 | 0.875 | `condition/equality/not` | 1 |
 | 0.75 | `type/boolean` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -3325,8 +3336,8 @@
 | 0.875 | `appli/method/isdigit` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -3341,8 +3352,8 @@
 |----|----|----|
 | 0.875 | `library/standard/tempfile` | 1 |
 | 0.875 | `var/assignment/single` | 2 |
-| 0 | `metadata/program` | 1-2 |
-| 0 | `metadata/sloc/2` | 1-2 |
+| 0 | `meta/program` | 1-2 |
+| 0 | `meta/sloc/2` | 1-2 |
 
 ---
 
@@ -3357,8 +3368,8 @@
 |----|----|----|
 | 0.875 | `library/standard/tempfile` | 1 |
 | 0.875 | `var/assignment/single` | 2 |
-| 0 | `metadata/program` | 1-2 |
-| 0 | `metadata/sloc/2` | 1-2 |
+| 0 | `meta/program` | 1-2 |
+| 0 | `meta/sloc/2` | 1-2 |
 
 ---
 
@@ -3372,8 +3383,8 @@
 |----|----|----|
 | 0.875 | `appli/method/pop` | 1 |
 | 0.875 | `type/null/literal` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -3390,8 +3401,8 @@
 | 0.9375 | `flow/loop/exit/late` | 1-2 |
 | 0.875 | `flow/loop/for` | 1-2 |
 | 0.875 | `operator/arithmetic/addition` | 1 |
-| 0 | `metadata/program` | 1-2 |
-| 0 | `metadata/sloc/2` | 1-2 |
+| 0 | `meta/program` | 1-2 |
+| 0 | `meta/sloc/2` | 1-2 |
 
 ---
 
@@ -3405,8 +3416,8 @@
 |----|----|----|
 | 0.9375 | `appli/function/builtin/hex` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -3423,8 +3434,8 @@
 | 0.9375 | `appli/function/builtin/zip` | 1 |
 | 0.9375 | `flow/loop/exit/late` | 1-2 |
 | 0.875 | `flow/loop/for` | 1-2 |
-| 0 | `metadata/program` | 1-2 |
-| 0 | `metadata/sloc/2` | 1-2 |
+| 0 | `meta/program` | 1-2 |
+| 0 | `meta/sloc/2` | 1-2 |
 
 ---
 
@@ -3440,8 +3451,8 @@
 | 0.875 | `appli/method/exists` | 2 |
 | 0.875 | `library/standard/os` | 1 |
 | 0.875 | `var/assignment/single` | 2 |
-| 0 | `metadata/program` | 1-2 |
-| 0 | `metadata/sloc/2` | 1-2 |
+| 0 | `meta/program` | 1-2 |
+| 0 | `meta/sloc/2` | 1-2 |
 
 ---
 
@@ -3458,8 +3469,8 @@
 | 0.875 | `appli/method/exists` | 2 |
 | 0.9375 | `library/standard/pathlib/Path` | 1 |
 | 0.875 | `var/assignment/single` | 2 |
-| 0 | `metadata/program` | 1-2 |
-| 0 | `metadata/sloc/2` | 1-2 |
+| 0 | `meta/program` | 1-2 |
+| 0 | `meta/sloc/2` | 1-2 |
 
 ---
 
@@ -3483,8 +3494,8 @@
 | 0.875 | `library/standard/sys` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 3, 5 |
 | 0.875 | `var/assignment/single` | 5 |
-| 0 | `metadata/program` | 1-6 |
-| 0 | `metadata/sloc/6` | 1-6 |
+| 0 | `meta/program` | 1-6 |
+| 0 | `meta/sloc/6` | 1-6 |
 
 ---
 
@@ -3504,8 +3515,8 @@
 | 0.875 | `library/standard/locale` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 2, 3 |
 | 0.875 | `var/assignment/single` | 2, 4 |
-| 0 | `metadata/program` | 1-4 |
-| 0 | `metadata/sloc/4` | 1-4 |
+| 0 | `meta/program` | 1-4 |
+| 0 | `meta/sloc/4` | 1-4 |
 
 ---
 
@@ -3520,8 +3531,8 @@
 | 0.96875 | `appli/function/builtin/casting/float` | 1 |
 | 0.875 | `type/number/floating_point` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -3536,8 +3547,8 @@
 | 0.96875 | `appli/function/builtin/casting/float` | 1 |
 | 0.875 | `type/number/floating_point` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -3555,8 +3566,8 @@
 | 0.9375 | `type/sequence/string/literal` | 2 |
 | 0.96875 | `type/sequence/string/literal/empty` | 2 |
 | 0.875 | `var/assignment/single` | 2 |
-| 0 | `metadata/program` | 1-2 |
-| 0 | `metadata/sloc/2` | 1-2 |
+| 0 | `meta/program` | 1-2 |
+| 0 | `meta/sloc/2` | 1-2 |
 
 ---
 
@@ -3576,8 +3587,8 @@
 | 0.875 | `appli/method/split` | 1 |
 | 0.875 | `type/sequence/list` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -3593,8 +3604,8 @@
 | 0.875 | `type/sequence/string` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -3615,8 +3626,8 @@
 | 0.9375 | `type/number/integer/literal` | 3 |
 | 0.875 | `type/sequence/string` | 2 |
 | 0.875 | `var/assignment/single` | 3 |
-| 0 | `metadata/program` | 1-3 |
-| 0 | `metadata/sloc/3` | 1-3 |
+| 0 | `meta/program` | 1-3 |
+| 0 | `meta/sloc/3` | 1-3 |
 
 ---
 
@@ -3629,8 +3640,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.875 | `var/assignment/single` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -3646,8 +3657,8 @@
 | 0.875 | `type/sequence/string` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -3675,12 +3686,12 @@
 | 0.9375 | `type/sequence/tuple/literal` | 1, 2 |
 | 0.9375 | `var/assignment/parallel/more_than_two` | 1, 2 |
 | 0.875 | `var/assignment/single` | 3 |
-| 0 | `metadata/program` | 1-3 |
-| 0 | `metadata/sloc/3` | 1-3 |
+| 0 | `meta/program` | 1-3 |
+| 0 | `meta/sloc/3` | 1-3 |
 
 ---
 
-### Program `154.2292-halfway-between-two-hex-color-codes.py` (learning cost 27.5)
+### Program `154.2292-halfway-between-two-hex-color-codes.py` (learning cost 28.25)
 
 ```python
 1   import numpy
@@ -3703,6 +3714,7 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.875 | `abstr/argument/arg` | 4, 4, 8 |
+| 0.75 | `abstr/class` | 2-10 |
 | 0.75 | `abstr/decorated` | 3-7 |
 | 0.75 | `abstr/function` | 3-7, 8-10 |
 | 0.9375 | `abstr/method/flavor/class` | 3-7 |
@@ -3733,8 +3745,8 @@
 | 0.9375 | `type/sequence/string/literal` | 10, 10, 11, 13 |
 | 0.96875 | `type/sequence/string/literal/empty` | 10 |
 | 0.875 | `var/assignment/single` | 9, 11, 13 |
-| 0 | `metadata/program` | 1-15 |
-| 0 | `metadata/sloc/15` | 1-15 |
+| 0 | `meta/program` | 1-15 |
+| 0 | `meta/sloc/15` | 1-15 |
 
 ---
 
@@ -3751,8 +3763,8 @@
 | 0.875 | `appli/method/unlink` | 3 |
 | 0.875 | `library/standard/pathlib` | 1 |
 | 0.875 | `var/assignment/single` | 2 |
-| 0 | `metadata/program` | 1-3 |
-| 0 | `metadata/sloc/3` | 1-3 |
+| 0 | `meta/program` | 1-3 |
+| 0 | `meta/sloc/3` | 1-3 |
 
 ---
 
@@ -3767,8 +3779,8 @@
 | 0.9375 | `appli/function/builtin/format` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -3783,8 +3795,8 @@
 | 0.9375 | `type/sequence/string/literal` | 1 |
 | 0.875 | `var/assignment/constant` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -3800,12 +3812,12 @@
 | 0.875 | `appli/method/sample` | 2 |
 | 0.875 | `library/standard/random` | 1 |
 | 0.875 | `var/assignment/single` | 2 |
-| 0 | `metadata/program` | 1-2 |
-| 0 | `metadata/sloc/2` | 1-2 |
+| 0 | `meta/program` | 1-2 |
+| 0 | `meta/sloc/2` | 1-2 |
 
 ---
 
-### Program `159.2281-trie.py` (learning cost 6.09375)
+### Program `159.2281-trie.py` (learning cost 6.84375)
 
 ```python
 1   class Trie:
@@ -3818,14 +3830,15 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.875 | `abstr/argument/arg` | 2, 2, 2 |
+| 0.75 | `abstr/class` | 1-5 |
 | 0.9375 | `abstr/method/flavor/instance` | 2-5 |
 | 0.9375 | `abstr/method/naming/magic` | 2-5 |
 | 0.75 | `abstr/procedure` | 2-5 |
 | 0.875 | `type/null/literal` | 2 |
 | 0.96875 | `type/sequence/list/literal/empty` | 4 |
 | 0.75 | `var/assignment` | 3, 4, 5 |
-| 0 | `metadata/program` | 1-5 |
-| 0 | `metadata/sloc/5` | 1-5 |
+| 0 | `meta/program` | 1-5 |
+| 0 | `meta/sloc/5` | 1-5 |
 
 ---
 
@@ -3851,8 +3864,8 @@
 | 0.875 | `operator/arithmetic/power` | 2 |
 | 0.75 | `type/boolean` | 2 |
 | 0.9375 | `type/number/integer/literal` | 2, 2 |
-| 0 | `metadata/program` | 1-5 |
-| 0 | `metadata/sloc/5` | 1-5 |
+| 0 | `meta/program` | 1-5 |
+| 0 | `meta/sloc/5` | 1-5 |
 
 ---
 
@@ -3866,8 +3879,8 @@
 |----|----|----|
 | 0.875 | `operator/arithmetic/multiplication` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -3893,8 +3906,8 @@
 | 0.75 | `type/boolean` | 2, 4 |
 | 0.9375 | `type/number/integer/literal` | 2, 4 |
 | 0.9375 | `type/sequence/string/literal` | 2, 4 |
-| 0 | `metadata/program` | 1-5 |
-| 0 | `metadata/sloc/5` | 1-5 |
+| 0 | `meta/program` | 1-5 |
+| 0 | `meta/sloc/5` | 1-5 |
 
 ---
 
@@ -3914,8 +3927,8 @@
 | 0.875 | `subscript/slice/start` | 1 |
 | 0.875 | `subscript/slice/step` | 1, 1 |
 | 0.9375 | `type/number/integer/literal` | 1, 1, 1 |
-| 0 | `metadata/program` | 1-2 |
-| 0 | `metadata/sloc/2` | 1-2 |
+| 0 | `meta/program` | 1-2 |
+| 0 | `meta/sloc/2` | 1-2 |
 
 ---
 
@@ -3947,8 +3960,8 @@
 | 0.875 | `type/null/literal` | 4 |
 | 0.9375 | `type/sequence/tuple/literal` | 3, 6 |
 | 0.875 | `var/assignment/parallel` | 3 |
-| 0 | `metadata/program` | 1-7 |
-| 0 | `metadata/sloc/7` | 1-7 |
+| 0 | `meta/program` | 1-7 |
+| 0 | `meta/sloc/7` | 1-7 |
 
 ---
 
@@ -3963,8 +3976,8 @@
 |----|----|----|
 | 0.875 | `appli/method/open` | 2 |
 | 0.875 | `library/standard/webbrowser` | 1 |
-| 0 | `metadata/program` | 1-2 |
-| 0 | `metadata/sloc/2` | 1-2 |
+| 0 | `meta/program` | 1-2 |
+| 0 | `meta/sloc/2` | 1-2 |
 
 ---
 
@@ -3980,8 +3993,8 @@
 | 0.9375 | `subscript/index/backwards/last` | 1 |
 | 0.9375 | `type/number/integer/literal` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -3995,8 +4008,8 @@
 |----|----|----|
 | 0.875 | `operator/arithmetic/addition` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -4014,8 +4027,8 @@
 | 0.875 | `subscript/slice/start` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -4030,8 +4043,8 @@
 | 0.875 | `appli/method/lstrip` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -4049,8 +4062,8 @@
 | 0.96875 | `type/number/integer/literal/zero` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -4065,8 +4078,8 @@
 | 0.875 | `appli/method/rstrip` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -4080,8 +4093,8 @@
 |----|----|----|
 | 0.9375 | `appli/function/builtin/len` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -4095,8 +4108,8 @@
 |----|----|----|
 | 0.9375 | `appli/function/builtin/len` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -4110,8 +4123,8 @@
 |----|----|----|
 | 0.875 | `appli/method/append` | 1 |
 | 0.875 | `type/sequence/list` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -4125,8 +4138,8 @@
 |----|----|----|
 | 0.75 | `subscript/index` | 1 |
 | 0.75 | `var/assignment` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -4140,8 +4153,8 @@
 |----|----|----|
 | 0.9375 | `appli/function/builtin/print` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -4155,8 +4168,8 @@
 |----|----|----|
 | 0.9375 | `appli/function/builtin/print` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -4170,8 +4183,8 @@
 |----|----|----|
 | 0.9375 | `appli/function/builtin/print` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -4195,8 +4208,8 @@
 | 0.875 | `type/sequence/string` | 2 |
 | 0.9375 | `type/sequence/string/literal` | 2, 3 |
 | 0.875 | `var/assignment/single` | 2, 3, 4 |
-| 0 | `metadata/program` | 1-4 |
-| 0 | `metadata/sloc/4` | 1-4 |
+| 0 | `meta/program` | 1-4 |
+| 0 | `meta/sloc/4` | 1-4 |
 
 ---
 
@@ -4210,8 +4223,8 @@
 |----|----|----|
 | 0.875 | `appli/method/hex` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -4225,8 +4238,8 @@
 |----|----|----|
 | 0.875 | `appli/method/fromhex` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -4251,8 +4264,8 @@
 | 0.9375 | `type/sequence/string/literal` | 2, 2, 2 |
 | 0.875 | `var/assignment/constant` | 3 |
 | 0.875 | `var/assignment/single` | 2, 3 |
-| 0 | `metadata/program` | 1-3 |
-| 0 | `metadata/sloc/3` | 1-3 |
+| 0 | `meta/program` | 1-3 |
+| 0 | `meta/sloc/3` | 1-3 |
 
 ---
 
@@ -4280,8 +4293,8 @@
 | 0.9375 | `type/sequence/string/literal` | 4, 7 |
 | 0.9375 | `type/sequence/tuple/literal` | 5 |
 | 0.875 | `var/assignment/single` | 3 |
-| 0 | `metadata/program` | 1-7 |
-| 0 | `metadata/sloc/7` | 1-7 |
+| 0 | `meta/program` | 1-7 |
+| 0 | `meta/sloc/7` | 1-7 |
 
 ---
 
@@ -4305,8 +4318,8 @@
 | 0.875 | `type/sequence/list` | 3 |
 | 0.9375 | `type/sequence/list/literal` | 3 |
 | 0.9375 | `type/sequence/string/literal` | 3, 3, 3, 3 |
-| 0 | `metadata/program` | 1-3 |
-| 0 | `metadata/sloc/3` | 1-3 |
+| 0 | `meta/program` | 1-3 |
+| 0 | `meta/sloc/3` | 1-3 |
 
 ---
 
@@ -4323,8 +4336,8 @@
 | 0.875 | `operator/boolean/and` | 1 |
 | 0.75 | `type/boolean` | 1, 1 |
 | 0.875 | `var/assignment/single` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -4341,8 +4354,8 @@
 | 0.9375 | `type/number/integer/literal` | 1, 1 |
 | 0.9375 | `type/sequence/tuple/literal` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -4364,8 +4377,8 @@
 | 0.9375 | `type/number/integer/literal` | 3, 3 |
 | 0.9375 | `type/sequence/string/literal` | 2, 2 |
 | 0.875 | `var/assignment/single` | 2, 3 |
-| 0 | `metadata/program` | 1-3 |
-| 0 | `metadata/sloc/3` | 1-3 |
+| 0 | `meta/program` | 1-3 |
+| 0 | `meta/sloc/3` | 1-3 |
 
 ---
 
@@ -4381,8 +4394,8 @@
 | 0.875 | `appli/method/listdir` | 2 |
 | 0.875 | `library/standard/os` | 1 |
 | 0.875 | `var/assignment/single` | 2 |
-| 0 | `metadata/program` | 1-2 |
-| 0 | `metadata/sloc/2` | 1-2 |
+| 0 | `meta/program` | 1-2 |
+| 0 | `meta/sloc/2` | 1-2 |
 
 ---
 
@@ -4399,8 +4412,8 @@
 | 0.875 | `operator/arithmetic/modulo` | 2 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
-| 0 | `metadata/program` | 1-2 |
-| 0 | `metadata/sloc/2` | 1-2 |
+| 0 | `meta/program` | 1-2 |
+| 0 | `meta/sloc/2` | 1-2 |
 
 ---
 
@@ -4426,8 +4439,8 @@
 | 0.9375 | `type/sequence/tuple/literal` | 7, 7 |
 | 0.875 | `var/assignment/parallel` | 7 |
 | 0.875 | `var/assignment/single` | 3, 4, 5, 6 |
-| 0 | `metadata/program` | 1-7 |
-| 0 | `metadata/sloc/7` | 1-7 |
+| 0 | `meta/program` | 1-7 |
+| 0 | `meta/sloc/7` | 1-7 |
 
 ---
 
@@ -4446,8 +4459,8 @@
 | 0.9375 | `library/standard/datetime/timedelta` | 1 |
 | 0.875 | `operator/arithmetic/addition` | 2 |
 | 0.9375 | `type/number/integer/literal` | 2 |
-| 0 | `metadata/program` | 1-2 |
-| 0 | `metadata/sloc/2` | 1-2 |
+| 0 | `meta/program` | 1-2 |
+| 0 | `meta/sloc/2` | 1-2 |
 
 ---
 
@@ -4467,8 +4480,8 @@
 | 0.9375 | `type/number/integer/literal` | 2 |
 | 0.9375 | `type/sequence/tuple/literal` | 2 |
 | 0.875 | `var/assignment/single` | 2 |
-| 0 | `metadata/program` | 1-3 |
-| 0 | `metadata/sloc/3` | 1-3 |
+| 0 | `meta/program` | 1-3 |
+| 0 | `meta/sloc/3` | 1-3 |
 
 ---
 
@@ -4484,12 +4497,12 @@
 | 0.875 | `appli/method/exit` | 2 |
 | 0.875 | `library/standard/sys` | 1 |
 | 0.96875 | `type/number/integer/literal/zero` | 2 |
-| 0 | `metadata/program` | 1-2 |
-| 0 | `metadata/sloc/2` | 1-2 |
+| 0 | `meta/program` | 1-2 |
+| 0 | `meta/sloc/2` | 1-2 |
 
 ---
 
-### Program `187.3261-disjoint-set.py` (learning cost 19.65625)
+### Program `187.3261-disjoint-set.py` (learning cost 20.40625)
 
 ```python
 1   class UnionFind:
@@ -4512,6 +4525,7 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.875 | `abstr/argument/arg` | <details><summary>2, 2, 5, 5, 11, 11, 11, 13,</summary>13, 13</details> |
+| 0.75 | `abstr/class` | 1-15 |
 | 0.75 | `abstr/function` | 5-10 |
 | 0.875 | `abstr/function/predicate` | 11-12 |
 | 0.9375 | `abstr/method/flavor/instance` | 2-4, 5-10, 11-12, 13-15 |
@@ -4534,8 +4548,8 @@
 | 0.9375 | `type/sequence/tuple/literal` | 15, 15 |
 | 0.75 | `var/assignment` | 3, 4, 9 |
 | 0.875 | `var/assignment/parallel` | 15 |
-| 0 | `metadata/program` | 1-15 |
-| 0 | `metadata/sloc/15` | 1-15 |
+| 0 | `meta/program` | 1-15 |
+| 0 | `meta/sloc/15` | 1-15 |
 
 ---
 
@@ -4551,8 +4565,8 @@
 | 0.875 | `library/third_party/numpy` | 1 |
 | 0.875 | `operator/matrix/multiplication` | 2 |
 | 0.875 | `var/assignment/single` | 2 |
-| 0 | `metadata/program` | 1-2 |
-| 0 | `metadata/sloc/2` | 1-2 |
+| 0 | `meta/program` | 1-2 |
+| 0 | `meta/sloc/2` | 1-2 |
 
 ---
 
@@ -4568,8 +4582,8 @@
 | 0.875 | `appli/method/matmul` | 2 |
 | 0.875 | `library/third_party/numpy` | 1 |
 | 0.875 | `var/assignment/single` | 2 |
-| 0 | `metadata/program` | 1-2 |
-| 0 | `metadata/sloc/2` | 1-2 |
+| 0 | `meta/program` | 1-2 |
+| 0 | `meta/sloc/2` | 1-2 |
 
 ---
 
@@ -4584,8 +4598,8 @@
 | 0.875 | `appli/class_constructor/P` | 1 |
 | 0.875 | `appli/class_constructor/T` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
-| 0 | `metadata/program` | 1 |
-| 0 | `metadata/sloc/1` | 1 |
+| 0 | `meta/program` | 1 |
+| 0 | `meta/sloc/1` | 1 |
 
 ---
 
@@ -4604,8 +4618,8 @@
 | 0.75 | `condition/inequality` | 1 |
 | 0.875 | `flow/conditional/no_else` | 1-2 |
 | 0.75 | `type/boolean` | 1 |
-| 0 | `metadata/program` | 1-2 |
-| 0 | `metadata/sloc/2` | 1-2 |
+| 0 | `meta/program` | 1-2 |
+| 0 | `meta/sloc/2` | 1-2 |
 
 ---
 
@@ -4621,8 +4635,8 @@
 | 0.9375 | `appli/function/builtin/open` | 1 |
 | 0.875 | `appli/method/readlines` | 2 |
 | 0.875 | `var/assignment/single` | 2 |
-| 0 | `metadata/program` | 1-2 |
-| 0 | `metadata/sloc/2` | 1-2 |
+| 0 | `meta/program` | 1-2 |
+| 0 | `meta/sloc/2` | 1-2 |
 
 ---
 

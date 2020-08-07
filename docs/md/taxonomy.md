@@ -2,7 +2,7 @@
 
 ## Structure
 
-In Paroxython, the default taxonomy is a [forest](https://en.wikipedia.org/wiki/Tree_(graph_theory)#Forest): a dozen of separate trees with `flow`, `operator`, `metadata`, `type`, etc. as their roots. We call **taxon**[^taxon] a path from a root node to a leaf node. Thus:
+In Paroxython, the default taxonomy is a [forest](https://en.wikipedia.org/wiki/Tree_(graph_theory)#Forest): a dozen of separate trees with `flow`, `operator`, `meta`, `type`, etc. as their roots. We call **taxon**[^taxon] a path from a root node to a leaf node. Thus:
 
 [^taxon]:
     This contrasts with the convention in biological classification, where the term [taxon](https://en.wikipedia.org/wiki/Taxon) refers to a taxonomic **unit** (a node of the tree). For instance, [African Elephant ](https://en.wikipedia.org/wiki/African_elephant) is classified under the taxon _Loxodonta_. However, a taxon (implicitely) “encompasses all included taxa of lower rank”, here:
@@ -81,19 +81,62 @@ This is a good example of a label for internal use only. In the conversion step,
 
 ### 1-N mapping
 
-When a source code is, say, 42 lines long, it is tagged with the label `"whole_span:42"`. This is an example of a label which produces two taxa: `"metadata/program"` and `"metadata/sloc/42"`. Both span the whole program and, although it is not obvious, both have their uses:
+When a source code is, say, 42 lines long, it is tagged with the label `"whole_span:42"`. This is an example of a label which produces two taxa: `"meta/program"` and `"meta/sloc/42"`. Both span the whole program and, although it is not obvious, both have their uses:
 
 - The first one is common to all programs, and provides an invariable access key to an all-encompassing span. In a command pipeline, it can be used to [express the absence of a taxon](#expressing-the-absence-of-a-taxon).
-- The second one has a variable part, and can be used to filter programs by [size](https://en.wikipedia.org/wiki/Source_lines_of_code) (for example, in `paroxython.recommend_programs`, the pattern `"metadata/sloc/[1-4]?[0-9]"` will be used to filter out the programs that have 50 lines or more).
+- The second one has a variable part, and can be used to filter programs by [size](https://en.wikipedia.org/wiki/Source_lines_of_code) (for example, in `paroxython.recommend_programs`, the pattern `"meta/sloc/[1-4]?[0-9]"` will be used to filter out the programs that have 50 lines or more).
 
 This conversions are triggered by the following rows in the default taxonomy:
 
 Taxa (replacement patterns)    | Labels (search patterns)
 :------------------------------|:-----------------------
-`metadata/program` | `whole_span:.+`
-`metadata/sloc/\1` | `whole_span:(.+)`
+`meta/program` | `whole_span:.+`
+`meta/sloc/\1` | `whole_span:(.+)`
 
 As you may have guessed, the right colum can contain [regular expressions](https://en.wikipedia.org/wiki/Regular_expression). On the first row, the sequence of _metacharacters_ `".+"` means: “eat all the characters up to the end of the line.” On the second row, the added parentheses also _captures_ these characters: they are restituted in the replacement pattern by `"\1"`, which denotes a [_backreference_](https://docs.python.org/3/library/re.html#re.sub) to the first captured group.
+
+## Back to the roots
+
+### Functional inspirations: `var`, `abstr`, `appli` and `type`
+
+What are the basic concepts on which programming can be built? As you know, [Alonso Church](https://en.wikipedia.org/wiki/Alonzo_Church) answered this question as early as 1936 (years before the computers were even invented!). The three building blocks of his [lambda calculus](https://en.wikipedia.org/wiki/Lambda_calculus), namely the concepts of **variable**, **abstraction** and **application**, provide us our first three taxonomic roots, which we will denote respectively by `var`, `abstr` and `appli`. To these we can naturally add that of [`type`](https://en.wikipedia.org/wiki/Lambda_calculus#Typed_lambda_calculus), already seen above.
+
+All of these could be enough to describe pure functional programs, at least theoretically. However:
+
+1. Python is no Haskell. It is a multi-paradigm language, with a strong emphasis on imperative programming. Moreover, its [zen](https://www.python.org/dev/peps/pep-0020/) famously holds that “practicality beats purity”.
+2. We are not interested in teaching computability theory. Pedagogical considerations take precedence over a crippling respect for mathematical abstractions. We don't need to explain thoroughly the concepts of literal, string, type, built-in function and call for making our young students _feel_ they understand:
+
+```python
+print("hello, world")
+```
+
+For these reasons, choosing to root our taxonomy in the four basic notions of the typed lambda calculus should be seen more as a tribute than a formal commitment. For instance, like it or not, `var` will essentially bring together everything relating to the concept of assignment; `abstr` will accommodate not only lambda functions, but named ones, methods, generators and even classes; `appli` will cover any call to anything with a `__call__()` method, which Python calls a callable (sorry); finally, `type` will welcome all types, without distinction of mutability.
+
+### Imperative needs: `flow`
+
+The imperative nature of Python requires us to introduce the concept of control `flow`, under which we put the loops, the conditionals, and some other animals[^sequence].
+
+[^sequence]
+    The sequence control flow is an exception. As it characterizes the imperative paradigm more than this or that program, it will deliberately be excluded from the features searched by Paroxython.
+
+### For your convenience: `operator`, `condition`, `subscript`
+
+Again, those are mainly practical choices. After all, an `operator` is nothing more than an unassuming function (`abstr`) with a funny name and a funny syntax. And a `condition`[^condition], a combination of function applications (`appli`) which happens to evaluate to a particular `type`. As for the creation of the root `subscript`, it comes from the observation that an awful lot of exciting programs can be written with sequences before venturing out to direct access (e.g., treating the Python lists as [lists](https://en.wikipedia.org/wiki/List_(abstract_data_type)) and not [arrays](https://en.wikipedia.org/wiki/Array_data_structure)). Not that in our default taxonomy, `subscript` includes slicing and dictionary access too.
+
+[^condition]:
+    A _condition_ is a boolean expression, not to be confused with a _conditional_ (control structure).
+
+### Imports: `library`
+
+Everything that's imported goes here. Paroxython can tell the difference between standard, third-party and homemade modules.
+
+### Zooming out: `pattern`
+
+Now this is probably the most interesting feature to tag in a beginner-level program. Under `pattern`, you will find numerous variants of the invaluable [accumulation pattern](https://en.wikipedia.org/wiki/Fold_(higher-order_function)) (counting, summing, filtering, finding the “best” element, etc.), but also some early-exit patterns (testing for an universal or existential property, finding the first “good” element), whether by traversing a sequence or evolving a state. This is an aspect of programming which is rarely taught in a conscious and systematic way, and to which Paroxython intends to draw your attention.
+
+### Going `meta`
+
+
 
 ## Modifying the taxonomy
 
@@ -114,6 +157,4 @@ This way, omitting the option `--taxonomy` like in the command below will use yo
 paroxython collect programming_101/src
 ```
 
-You are encouraged to experiment on this copy according to your taste.
-
-### Root concepts
+You are encouraged to experiment on this copy according to your requirements and your taste.

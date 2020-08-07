@@ -168,7 +168,7 @@ The `"hide all"` variant is not supported, and treated as `"hide"`.
 Being given a program \(p\) of \(n\) lines, a couple \((i_1, i_2) \) of line numbers such that \(1 \leq i_1 \leq i_2 \leq n\) represents a **span** of \(p\). When Paroxython finds a taxon \(t\) in \(p\), it doesn't just say whether \(p\) features \(t\) or not: it returns the list of spans where \(t\) occurs.
 
 ..note::
-    Any taxon starting with `"metadata/"` is considered by convention to span the entire program.
+    Any taxon starting with `"meta/"` is considered by convention to span the entire program.
 
 It is sometimes interesting to know how the spans of two taxa of the same program are located relatively to each other.
 
@@ -244,10 +244,10 @@ A pipeline command can apply not only to patterns of programs and taxa, but also
 The simplest semantic triple is:
 
 ```python
-("metadata/program", "contains", taxon_pattern)
+("meta/program", "contains", taxon_pattern)
 ```
 
-It matches all programs where the span of the taxon `"metadata/program"` includes the span of a given `taxon_pattern`. Since, by definition, every program features one taxon `"metadata/program"`, whose span encompasses the whole program, this is strictly equivalent to:
+It matches all programs where the span of the taxon `"meta/program"` includes the span of a given `taxon_pattern`. Since, by definition, every program features one taxon `"meta/program"`, whose span encompasses the whole program, this is strictly equivalent to:
 
 ```python
 taxon_pattern
@@ -299,7 +299,7 @@ It is possible to negate the predicate of a semantic triple, either by prefixing
 Here again, the simplest _negated_ semantic triple is:
 
 ```python
-("metadata/program", "not contains", taxon_pattern)
+("meta/program", "not contains", taxon_pattern)
 ```
 
 On a set of **independent programs** (i.e., not importing each other), there is a strict equivalence between:
@@ -308,7 +308,7 @@ On a set of **independent programs** (i.e., not importing each other), there is 
   {
     "operation": "include",
     "data": [
-      ("metadata/program", "not contains", taxon_pattern)
+      ("meta/program", "not contains", taxon_pattern)
     ]
   },
 ```
@@ -341,7 +341,7 @@ and:
   {
     "operation": "exclude",
     "data": [
-      ("metadata/program", "not contains", taxon_pattern)
+      ("meta/program", "not contains", taxon_pattern)
     ]
   },
 ```
@@ -366,8 +366,8 @@ For instance, consider the two taxa `"flow/conditional"` and `"flow/loop"`. To k
   {
     "operation": "include",
     "data": [
-      ("metadata/program", "not contains", "flow/conditional"),
-      ("metadata/program", "not contains", "flow/loop"),
+      ("meta/program", "not contains", "flow/conditional"),
+      ("meta/program", "not contains", "flow/loop"),
     ]
   }, # among them, keep only those that feature no conditional or no loop
 ```
@@ -422,7 +422,7 @@ If the predicate is `"taxon_pattern_2 not contains taxon_pattern_1"` (sic), any 
 - `"taxon_1 taxon_2{taxon_1}"` is accepted (there exists a couple (`s_1`, `s_2`) such that `taxon_2` does not contain `taxon_1`);
 - `"taxon_1 taxon_2{taxon_1} taxon_2{}"` is accepted.
 
-Note that, due to the rule explained in the warning above, `"taxon_pattern_1 not inside taxon_pattern_2"` is not equivalent to `"taxon_pattern_2 not contains taxon_pattern_1"` (differences in **bold**). However, if `taxon_pattern_2` is `"metadata/program"`, which is featured by all programs, these two forms become equivalent again.
+Note that, due to the rule explained in the warning above, `"taxon_pattern_1 not inside taxon_pattern_2"` is not equivalent to `"taxon_pattern_2 not contains taxon_pattern_1"` (differences in **bold**). However, if `taxon_pattern_2` is `"meta/program"`, which is featured by all programs, these two forms become equivalent again.
 
 #### A practical example
 

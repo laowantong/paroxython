@@ -84,7 +84,7 @@ class Recommendations:
         Warning:
             `db` is modified by side-effect. After initialization, the taxa of some programs have
             been augmented with the taxa of those they import, associated with an empty list of
-            spans. Exception: the taxa starting with `"metadata/"` are not imported.
+            spans. Exception: the taxa starting with `"meta/"` are not imported.
         """
 
         self.base_path = base_path
@@ -272,7 +272,7 @@ class Recommendations:
                 contents.append("|" + "----|" * 3)
                 items = sorted(
                     program_info["taxa"].items(),
-                    key=lambda x: f"~{x[0]}" if x[0].startswith("metadata/") else x[0],
+                    key=lambda x: f"~{x[0]}" if x[0].startswith("meta/") else x[0],
                 )
                 for (taxon_name, spans) in items:
                     if taxon_name in self.hidden_taxa:

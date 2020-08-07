@@ -101,13 +101,13 @@ class ProgramFilter:
             - The spans of the imported taxa are not copied, but replaced by an empty list (it is
             enough to know that a certain taxon is only featured by an imported program, not on
             which lines of which program).
-            - All imported taxa starting with `"metadata/"` are by convention excluded from the
+            - All imported taxa starting with `"meta/"` are by convention excluded from the
             copy.
         """
         for (exporter, importers) in self.db_exportations.items():
             exported_taxa = list(self.db_programs[exporter]["taxa"])
             for exported_taxon in exported_taxa:
-                if exported_taxon.startswith("metadata/"):
+                if exported_taxon.startswith("meta/"):
                     continue
                 for importer in importers:
                     importer_taxa = self.db_programs[importer]["taxa"]

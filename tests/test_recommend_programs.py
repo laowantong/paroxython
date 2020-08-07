@@ -100,7 +100,7 @@ def test_recommend_mini_programs():
     rec = Recommendations(db)
     original = proper_taxa["fizzbuzz.py"] | proper_taxa["collatz.py"]
     assert all(
-        taxon.startswith("metadata")
+        taxon.startswith("meta")
         for taxon in original.difference(db["programs"]["fizzbuzz.py"]["taxa"])
     )
 
@@ -219,7 +219,7 @@ def test_recommend_mini_programs():
         {
             "operation": "include",
             "data": [
-                ("metadata/program", "not contains", "flow/conditional/else/if"),
+                ("meta/program", "not contains", "flow/conditional/else/if"),
                 # There is a subtle difference with the previous one, since "exclude" follows the
                 # importations, while "include" does not.
             ],
@@ -238,7 +238,7 @@ def test_recommend_mini_programs():
         {
             "operation": "exclude",
             "data": [
-                ("metadata/program", "not contains", "flow/conditional/else/if"),
+                ("meta/program", "not contains", "flow/conditional/else/if"),
                 # "assignment.py", "is_even.py", "collatz.py" are excluded since they don't feature
                 # an `elif`. "fizzbuzz.py" features an `elif`, but is excluded since it imports an
                 # excluded program ("collatz.py").
@@ -331,7 +331,7 @@ def test_recommend_mini_programs():
         {
             "operation": "include",
             "data": [
-                ("var/assignment", "inside", "metadata/program"),  # This comes down to
+                ("var/assignment", "inside", "meta/program"),  # This comes down to
                 # including all programs featuring an assignment.
             ],
         }
@@ -346,7 +346,7 @@ def test_recommend_mini_programs():
         {
             "operation": "include",
             "data": [
-                ("var/assignment", "not inside", "metadata/program"),  # This comes down to
+                ("var/assignment", "not inside", "meta/program"),  # This comes down to
                 # exclude all programs either featuring or not featuring an assignment!
             ],
         }
@@ -662,8 +662,8 @@ db = json.loads(Path("examples/simple/programs_db.json").read_text())
 # extract_1 (start)
 a = "flow/conditional"
 b = "flow/loop"
-_a = ("metadata/program", "not contains", "flow/conditional")
-_b = ("metadata/program", "not contains", "flow/loop")
+_a = ("meta/program", "not contains", "flow/conditional")
+_b = ("meta/program", "not contains", "flow/loop")
 p0 = "01_hello_world.py"  # [ ] loop [ ] conditional
 p1 = "03_friends.py"  #     [X] loop [ ] conditional
 p2 = "14_median.py"  #      [ ] loop [X] conditional
@@ -707,9 +707,9 @@ def test_recommend_simple_programs_1(expected_programs, commands):
 holds_abstr = "abstr"
 holds_assignment = "var/assignment"
 holds_asg_in_sub = ("var/assignment", "inside", "abstr")
-lacks_assignment = ("metadata/program", "not contains", "var/assignment")
-lacks_abstr = ("metadata/program", "not contains", "abstr")
-lacks_asg_or_sub = ("metadata/program", "not contains", "abstr|var/assignment")
+lacks_assignment = ("meta/program", "not contains", "var/assignment")
+lacks_abstr = ("meta/program", "not contains", "abstr")
+lacks_asg_or_sub = ("meta/program", "not contains", "abstr|var/assignment")
 lacks_asg_in_sub = ("abstr", "not contains", "var/assignment")
 p0 = "01_hello_world.py"  # [ ] abstr [ ] assignment [ ] inside *
 p1 = "05_greet.py"  #       [X] abstr [ ] assignment [ ] inside
@@ -778,7 +778,7 @@ def test_recommend_simple_programs_2(expected_programs, commands):
 # extract_2 (start)
 holds_parallel_tuple = "var/assignment/parallel"
 holds_ordinary_tuple = ("type/sequence/tuple", "is not", "var/assignment/parallel")
-lacks_parallel_tuple = ("metadata/program", "not contains", "var/assignment/parallel")
+lacks_parallel_tuple = ("meta/program", "not contains", "var/assignment/parallel")
 p0 = "01_hello_world.py"  # [ ] ordinary tuple [ ] parallel tuple
 p1 = "11_bottles.py"  #     [X] ordinary tuple [ ] parallel tuple
 p2 = "04_fibonacci.py"  #   [ ] ordinary tuple [X] parallel tuple

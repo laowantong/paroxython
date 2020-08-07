@@ -13,8 +13,8 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "var/assignment/single": [[1,1]]
       }
     },
@@ -99,8 +99,8 @@
         "flow/conditional/else": [[7,7]],
         "flow/loop/exit/late": [[2,7]],
         "flow/loop/while": [[2,7]],
-        "metadata/program": [[1,8]],
-        "metadata/sloc/8": [[1,8]],
+        "meta/program": [[1,8]],
+        "meta/sloc/8": [[1,8]],
         "operator/arithmetic/addition": [[7,7]],
         "operator/arithmetic/modulo": [[4,4]],
         "operator/arithmetic/multiplication": [[7,7]],
@@ -176,8 +176,8 @@
         "flow/loop/exit/late": [[2,10]],
         "flow/loop/for/arithmetic/start": [[2,10]],
         "library/personal": [[1,1]],
-        "metadata/program": [[1,10]],
-        "metadata/sloc/10": [[1,10]],
+        "meta/program": [[1,10]],
+        "meta/sloc/10": [[1,10]],
         "operator/arithmetic/modulo": [[3,3],[5,5],[7,7]],
         "type/boolean": [[3,3],[5,5],[7,7]],
         "type/number/integer/literal": [[2,2],[2,2],[3,3],[5,5],[7,7]],
@@ -219,8 +219,8 @@
         "condition/divisibility/parity": [[3,3]],
         "condition/equality": [[3,3]],
         "library/personal": [[1,1]],
-        "metadata/program": [[1,3]],
-        "metadata/sloc/3": [[1,3]],
+        "meta/program": [[1,3]],
+        "meta/sloc/3": [[1,3]],
         "operator/arithmetic/modulo": [[3,3]],
         "type/boolean": [[3,3]],
         "type/number/integer/literal": [[3,3]],
@@ -644,22 +644,22 @@
       "fizzbuzz.py",
       "is_even.py"
     ],
-    "metadata/program": [
+    "meta/program": [
       "assignment.py",
       "collatz.py",
       "fizzbuzz.py",
       "is_even.py"
     ],
-    "metadata/sloc/1": [
+    "meta/sloc/1": [
       "assignment.py"
     ],
-    "metadata/sloc/10": [
+    "meta/sloc/10": [
       "fizzbuzz.py"
     ],
-    "metadata/sloc/3": [
+    "meta/sloc/3": [
       "is_even.py"
     ],
-    "metadata/sloc/8": [
+    "meta/sloc/8": [
       "collatz.py"
     ],
     "operator/arithmetic/addition": [

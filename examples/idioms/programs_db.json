@@ -22,8 +22,8 @@
       "taxa": {
         "appli/function/builtin/print": [[2,2]],
         "library/standard/__future__/print_function": [[1,1]],
-        "metadata/program": [[1,2]],
-        "metadata/sloc/2": [[1,2]],
+        "meta/program": [[1,2]],
+        "meta/sloc/2": [[1,2]],
         "type/sequence/string/literal": [[2,2]]
       }
     },
@@ -44,8 +44,8 @@
       },
       "taxa": {
         "appli/function/builtin/print": [[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "type/sequence/string/literal": [[1,1]]
       }
     },
@@ -80,8 +80,8 @@
         "appli/function/builtin/range": [[1,1]],
         "flow/loop/exit/late": [[1,2]],
         "flow/loop/for/arithmetic": [[1,2]],
-        "metadata/program": [[1,2]],
-        "metadata/sloc/2": [[1,2]],
+        "meta/program": [[1,2]],
+        "meta/sloc/2": [[1,2]],
         "type/number/integer/literal": [[1,1]],
         "type/sequence/string/literal": [[2,2]]
       }
@@ -108,8 +108,8 @@
       },
       "taxa": {
         "appli/function/builtin/print": [[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "operator/string/replication": [[1,1]],
         "type/number/integer/literal": [[1,1]],
         "type/sequence/string/literal": [[1,1]]
@@ -137,8 +137,8 @@
       },
       "taxa": {
         "appli/function/builtin/print": [[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "operator/string/replication": [[1,1]],
         "type/number/integer/literal": [[1,1]],
         "type/sequence/string/literal": [[1,1]]
@@ -172,8 +172,8 @@
         "abstr/argument/arg": [[1,1]],
         "abstr/procedure": [[1,2]],
         "appli/function/builtin/print": [[2,2]],
-        "metadata/program": [[1,2]],
-        "metadata/sloc/2": [[1,2]],
+        "meta/program": [[1,2]],
+        "meta/sloc/2": [[1,2]],
         "operator/string/concatenation": [[2,2]],
         "type/sequence/string/literal": [[2,2]]
       }
@@ -193,8 +193,8 @@
         "abstr/argument/no": [[1,2]],
         "abstr/procedure": [[1,2]],
         "flow/null_operation": [[2,2]],
-        "metadata/program": [[1,2]],
-        "metadata/sloc/2": [[1,2]]
+        "meta/program": [[1,2]],
+        "meta/sloc/2": [[1,2]]
       }
     },
     "004.0024-create-a-function-which-returns-the-square-of-an-integer.py": {
@@ -219,8 +219,8 @@
         "abstr/argument/arg": [[1,1]],
         "abstr/function": [[1,2]],
         "abstr/return/something": [[2,2]],
-        "metadata/program": [[1,2]],
-        "metadata/sloc/2": [[1,2]],
+        "meta/program": [[1,2]],
+        "meta/sloc/2": [[1,2]],
         "operator/arithmetic/multiplication": [[2,2]]
       }
     },
@@ -247,8 +247,8 @@
         "abstr/argument/arg": [[1,1]],
         "abstr/function": [[1,2]],
         "abstr/return/something": [[2,2]],
-        "metadata/program": [[1,2]],
-        "metadata/sloc/2": [[1,2]],
+        "meta/program": [[1,2]],
+        "meta/sloc/2": [[1,2]],
         "operator/arithmetic/power": [[2,2]],
         "type/number/integer/literal": [[2,2]]
       }
@@ -267,9 +267,10 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
+        "abstr/class": [[2,2]],
         "library/standard/dataclasses/dataclass": [[1,1]],
-        "metadata/program": [[1,2]],
-        "metadata/sloc/2": [[1,2]]
+        "meta/program": [[1,2]],
+        "meta/sloc/2": [[1,2]]
       }
     },
     "006.0032-iterate-over-list-values.py": {
@@ -294,8 +295,8 @@
         "appli/function/doSomething": [[2,2]],
         "flow/loop/exit/late": [[1,2]],
         "flow/loop/for/elements": [[1,2]],
-        "metadata/program": [[1,2]],
-        "metadata/sloc/2": [[1,2]]
+        "meta/program": [[1,2]],
+        "meta/sloc/2": [[1,2]]
       }
     },
     "007.0183-iterate-over-list-indexes-and-values.py": {
@@ -329,8 +330,8 @@
         "flow/loop/exit/late": [[1,2]],
         "flow/loop/for": [[1,2]],
         "flow/loop/for/elements_and_indexes": [[1,2]],
-        "metadata/program": [[1,2]],
-        "metadata/sloc/2": [[1,2]],
+        "meta/program": [[1,2]],
+        "meta/sloc/2": [[1,2]],
         "type/sequence/tuple/literal": [[1,1]]
       }
     },
@@ -355,8 +356,8 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "type/non_sequence/dictionary/literal": [[1,1]],
         "type/number/integer/literal": [[1,1],[1,1]],
         "type/sequence/string/literal": [[1,1],[1,1]],
@@ -391,11 +392,12 @@
       },
       "taxa": {
         "abstr/argument/arg": [[2,2],[2,2]],
+        "abstr/class": [[1,5]],
         "abstr/method/flavor/instance": [[2,5]],
         "abstr/method/naming/magic": [[2,5]],
         "abstr/procedure": [[2,5]],
-        "metadata/program": [[1,5]],
-        "metadata/sloc/5": [[1,5]],
+        "meta/program": [[1,5]],
+        "meta/sloc/5": [[1,5]],
         "type/null/literal": [[4,4],[5,5]],
         "var/assignment": [[3,3],[4,4],[5,5]]
       }
@@ -428,11 +430,12 @@
       },
       "taxa": {
         "abstr/argument/arg": [[2,2],[2,2],[2,2],[2,2]],
+        "abstr/class": [[1,5]],
         "abstr/method/flavor/instance": [[2,5]],
         "abstr/method/naming/magic": [[2,5]],
         "abstr/procedure": [[2,5]],
-        "metadata/program": [[1,5]],
-        "metadata/sloc/5": [[1,5]],
+        "meta/program": [[1,5]],
+        "meta/sloc/5": [[1,5]],
         "var/assignment": [[3,3],[4,4],[5,5]]
       }
     },
@@ -456,8 +459,8 @@
       "taxa": {
         "appli/function/shuffle": [[2,2]],
         "library/standard/random/shuffle": [[1,1]],
-        "metadata/program": [[1,2]],
-        "metadata/sloc/2": [[1,2]]
+        "meta/program": [[1,2]],
+        "meta/sloc/2": [[1,2]]
       }
     },
     "010.1478-shuffle-a-list.py": {
@@ -480,8 +483,8 @@
       "taxa": {
         "appli/method/shuffle": [[2,2]],
         "library/standard/random": [[1,1]],
-        "metadata/program": [[1,2]],
-        "metadata/sloc/2": [[1,2]]
+        "meta/program": [[1,2]],
+        "meta/sloc/2": [[1,2]]
       }
     },
     "011.0047-pick-a-random-element-from-a-list.py": {
@@ -504,8 +507,8 @@
       "taxa": {
         "appli/method/choice": [[2,2]],
         "library/standard/random": [[1,1]],
-        "metadata/program": [[1,2]],
-        "metadata/sloc/2": [[1,2]]
+        "meta/program": [[1,2]],
+        "meta/sloc/2": [[1,2]]
       }
     },
     "012.0181-check-if-list-contains-a-value.py": {
@@ -520,8 +523,8 @@
       },
       "taxa": {
         "condition/belonging": [[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "type/boolean": [[1,1]]
       }
     },
@@ -553,8 +556,8 @@
         "appli/method/items": [[1,1]],
         "flow/loop/exit/late": [[1,2]],
         "flow/loop/for": [[1,2]],
-        "metadata/program": [[1,2]],
-        "metadata/sloc/2": [[1,2]],
+        "meta/program": [[1,2]],
+        "meta/sloc/2": [[1,2]],
         "type/non_sequence/dictionary": [[1,1]],
         "type/sequence/tuple/literal": [[1,1]]
       }
@@ -590,8 +593,8 @@
         "abstr/return/something": [[3,3]],
         "appli/method/randrange": [[3,3]],
         "library/standard/random": [[1,1]],
-        "metadata/program": [[1,3]],
-        "metadata/sloc/3": [[1,3]]
+        "meta/program": [[1,3]],
+        "meta/sloc/3": [[1,3]]
       }
     },
     "014.3410-pick-uniformly-a-random-floating-point-number-in-ab.py": {
@@ -615,8 +618,8 @@
       "taxa": {
         "appli/method/uniform": [[2,2]],
         "library/standard/random": [[1,1]],
-        "metadata/program": [[1,2]],
-        "metadata/sloc/2": [[1,2]]
+        "meta/program": [[1,2]],
+        "meta/sloc/2": [[1,2]]
       }
     },
     "015.0184-pick-uniformly-a-random-integer-in-ab.py": {
@@ -640,8 +643,8 @@
       "taxa": {
         "appli/method/randint": [[2,2]],
         "library/standard/random": [[1,1]],
-        "metadata/program": [[1,2]],
-        "metadata/sloc/2": [[1,2]]
+        "meta/program": [[1,2]],
+        "meta/sloc/2": [[1,2]]
       }
     },
     "016.1530-depth-first-traversing-of-a-binary-tree.py": {
@@ -694,8 +697,8 @@
         "condition/identity": [[2,2]],
         "flow/conditional/guard": [[2,3]],
         "flow/conditional/no_else": [[2,3]],
-        "metadata/program": [[1,6]],
-        "metadata/sloc/6": [[1,6]],
+        "meta/program": [[1,6]],
+        "meta/sloc/6": [[1,6]],
         "type/boolean": [[2,2]],
         "type/null/literal": [[2,2]]
       }
@@ -733,12 +736,13 @@
       "taxa": {
         "abstr/argument/arg": [[2,2],[2,2]],
         "abstr/argument/vararg": [[2,2]],
+        "abstr/class": [[1,4]],
         "abstr/method/flavor/instance": [[2,4]],
         "abstr/method/naming/magic": [[2,4]],
         "abstr/procedure": [[2,4]],
         "appli/function/builtin/casting/list": [[4,4]],
-        "metadata/program": [[1,4]],
-        "metadata/sloc/4": [[1,4]],
+        "meta/program": [[1,4]],
+        "meta/sloc/4": [[1,4]],
         "type/sequence/list": [[4,4]],
         "var/assignment": [[3,3],[4,4]]
       }
@@ -785,8 +789,8 @@
         "appli/function/f": [[2,2]],
         "flow/loop/exit/late": [[3,4]],
         "flow/loop/for/elements": [[3,4]],
-        "metadata/program": [[1,4]],
-        "metadata/sloc/4": [[1,4]]
+        "meta/program": [[1,4]],
+        "meta/sloc/4": [[1,4]]
       }
     },
     "019.0197-reverse-a-list.py": {
@@ -807,8 +811,8 @@
       },
       "taxa": {
         "appli/function/builtin/reversed": [[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "var/assignment/single": [[1,1]]
       }
     },
@@ -833,8 +837,8 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "subscript/slice/step/backwards": [[1,1]],
         "type/number/integer/literal": [[1,1]],
         "var/assignment/single": [[1,1]]
@@ -855,8 +859,8 @@
       },
       "taxa": {
         "appli/method/reverse": [[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "type/sequence/list": [[1,1]]
       }
     },
@@ -911,8 +915,8 @@
         "flow/loop/exit/early/return": [[2,4]],
         "flow/loop/for": [[2,4]],
         "flow/loop/for/elements_and_indexes": [[2,4]],
-        "metadata/program": [[1,4]],
-        "metadata/sloc/4": [[1,4]],
+        "meta/program": [[1,4]],
+        "meta/sloc/4": [[1,4]],
         "type/boolean": [[3,3]],
         "type/sequence": [[4,4]],
         "type/sequence/tuple/literal": [[2,2],[4,4]]
@@ -942,8 +946,8 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "type/sequence/tuple/literal": [[1,1],[1,1]],
         "var/assignment/parallel/swap": [[1,1]]
       }
@@ -966,8 +970,8 @@
       },
       "taxa": {
         "appli/function/builtin/casting/int": [[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "type/number/integer": [[1,1]],
         "var/assignment/single": [[1,1]]
       }
@@ -992,8 +996,8 @@
       },
       "taxa": {
         "appli/method/format": [[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "type/sequence/string": [[1,1]],
         "type/sequence/string/literal": [[1,1]],
         "var/assignment/single": [[1,1]]
@@ -1013,8 +1017,8 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "type/sequence/string/literal": [[1,1]],
         "var/assignment/single": [[1,1]]
       }
@@ -1064,8 +1068,8 @@
         "appli/method/put": [[6,6]],
         "appli/method/start": [[5,5]],
         "library/third_party/Queue": [[1,1]],
-        "metadata/program": [[1,6]],
-        "metadata/sloc/6": [[1,6]],
+        "meta/program": [[1,6]],
+        "meta/sloc/6": [[1,6]],
         "type/boolean/literal/True": [[4,4]],
         "type/sequence/string/literal": [[6,6]],
         "var/assignment": [[4,4]],
@@ -1100,8 +1104,8 @@
       },
       "taxa": {
         "appli/function/xrange": [[1,1],[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "type/number/integer/literal/zero": [[1,1]],
         "var/assignment/single": [[1,1]]
       }
@@ -1137,8 +1141,8 @@
       },
       "taxa": {
         "appli/function/xrange": [[1,1],[1,1],[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "type/number/integer/literal/zero": [[1,1]],
         "var/assignment/single": [[1,1]]
       }
@@ -1170,8 +1174,8 @@
       "taxa": {
         "appli/method/zeros": [[2,2]],
         "library/third_party/numpy": [[1,1]],
-        "metadata/program": [[1,2]],
-        "metadata/sloc/2": [[1,2]],
+        "meta/program": [[1,2]],
+        "meta/sloc/2": [[1,2]],
         "type/sequence/tuple/literal": [[2,2]],
         "var/assignment/single": [[2,2]]
       }
@@ -1206,8 +1210,8 @@
         "abstr/argument/arg": [[1,1]],
         "abstr/function/anonymous": [[1,1]],
         "appli/function/builtin/sorted": [[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "var/assignment/single": [[1,1]]
       }
     },
@@ -1222,8 +1226,8 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "subscript/index": [[1,1]],
         "var/deletion": [[1,1]]
       }
@@ -1276,8 +1280,8 @@
         "flow/loop/exit/late": [[3,4]],
         "flow/loop/for/arithmetic/start": [[3,4]],
         "library/standard/multiprocessing/Pool": [[1,1]],
-        "metadata/program": [[1,4]],
-        "metadata/sloc/4": [[1,4]],
+        "meta/program": [[1,4]],
+        "meta/sloc/4": [[1,4]],
         "type/number/integer/literal": [[3,3],[3,3]],
         "type/sequence/list/literal": [[4,4]],
         "var/assignment/single": [[2,2]]
@@ -1329,8 +1333,8 @@
         "condition/equality": [[2,2]],
         "flow/conditional": [[2,5]],
         "flow/conditional/else": [[5,5]],
-        "metadata/program": [[1,5]],
-        "metadata/sloc/5": [[1,5]],
+        "meta/program": [[1,5]],
+        "meta/sloc/5": [[1,5]],
         "operator/arithmetic/multiplication": [[5,5]],
         "operator/arithmetic/substraction": [[5,5]],
         "type/boolean": [[2,2]],
@@ -1360,8 +1364,8 @@
         "abstr/argument/arg": [[1,1],[1,1]],
         "abstr/function": [[1,2]],
         "abstr/return/something": [[2,2]],
-        "metadata/program": [[1,2]],
-        "metadata/sloc/2": [[1,2]],
+        "meta/program": [[1,2]],
+        "meta/sloc/2": [[1,2]],
         "operator/arithmetic/power": [[2,2]]
       }
     },
@@ -1401,8 +1405,8 @@
         "appli/method/acquire": [[3,3]],
         "appli/method/release": [[7,7]],
         "library/standard/threading": [[1,1]],
-        "metadata/program": [[1,7]],
-        "metadata/sloc/7": [[1,7]],
+        "meta/program": [[1,7]],
+        "meta/sloc/7": [[1,7]],
         "var/assignment/single": [[2,2],[5,5]]
       }
     },
@@ -1428,12 +1432,13 @@
         "whole_span:3": [[1,3]]
       },
       "taxa": {
+        "abstr/class": [[1,2]],
         "appli/class_constructor/T": [[3,3]],
         "appli/composition": [[3,3]],
         "appli/function/builtin/casting/set": [[3,3]],
         "flow/null_operation": [[2,2]],
-        "metadata/program": [[1,3]],
-        "metadata/sloc/3": [[1,3]],
+        "meta/program": [[1,3]],
+        "meta/sloc/3": [[1,3]],
         "type/non_sequence/set": [[3,3]],
         "var/assignment/single": [[3,3]]
       }
@@ -1475,8 +1480,8 @@
         "appli/composition": [[2,2]],
         "appli/function/f": [[2,2]],
         "appli/function/g": [[2,2]],
-        "metadata/program": [[1,2]],
-        "metadata/sloc/2": [[1,2]]
+        "meta/program": [[1,2]],
+        "meta/sloc/2": [[1,2]]
       }
     },
     "036.0670-first-class-function--generic-composition.py": {
@@ -1516,8 +1521,8 @@
         "appli/composition": [[2,2]],
         "appli/function/f": [[2,2]],
         "appli/function/g": [[2,2]],
-        "metadata/program": [[1,2]],
-        "metadata/sloc/2": [[1,2]]
+        "meta/program": [[1,2]],
+        "meta/sloc/2": [[1,2]]
       }
     },
     "037.0671-currying.py": {
@@ -1571,8 +1576,8 @@
         "appli/function": [[6,6]],
         "appli/function/builtin/print": [[6,6]],
         "library/standard/functools/partial": [[1,1]],
-        "metadata/program": [[1,6]],
-        "metadata/sloc/6": [[1,6]],
+        "meta/program": [[1,6]],
+        "meta/sloc/6": [[1,6]],
         "operator/arithmetic/addition": [[4,4]],
         "type/number/integer/literal": [[6,6],[6,6]]
       }
@@ -1597,8 +1602,8 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "subscript/slice/start": [[1,1]],
         "subscript/slice/stop": [[1,1]],
         "var/assignment/single": [[1,1]]
@@ -1621,8 +1626,8 @@
       },
       "taxa": {
         "condition/belonging": [[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "type/boolean": [[1,1]],
         "var/assignment/single": [[1,1]]
       }
@@ -1709,6 +1714,7 @@
       "taxa": {
         "abstr/argument/arg": [[5,5],[9,9],[9,9]],
         "abstr/argument/vararg": [[5,5]],
+        "abstr/class": [[2,3],[4,12]],
         "abstr/method/flavor/instance": [[5,8],[9,12]],
         "abstr/method/naming/magic": [[5,8]],
         "abstr/procedure": [[5,8],[9,12]],
@@ -1721,8 +1727,8 @@
         "flow/loop/for/elements": [[7,8]],
         "flow/null_operation": [[3,3]],
         "library/standard/collections/defaultdict": [[1,1]],
-        "metadata/program": [[1,13]],
-        "metadata/sloc/13": [[1,13]],
+        "meta/program": [[1,13]],
+        "meta/sloc/13": [[1,13]],
         "subscript/index": [[11,11],[12,12]],
         "subscript/slice/start": [[10,10]],
         "type/non_sequence/set": [[11,11],[12,12]],
@@ -1765,8 +1771,8 @@
       "taxa": {
         "appli/method/decode": [[1,1]],
         "appli/method/encode": [[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "subscript/slice/step/backwards": [[1,1]],
         "type/number/integer/literal": [[1,1]],
         "type/sequence/string": [[1,1]],
@@ -1795,8 +1801,8 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "subscript/slice/step/backwards": [[1,1]],
         "type/number/integer/literal": [[1,1]],
         "var/assignment/single": [[1,1]]
@@ -1853,8 +1859,8 @@
         "flow/loop/exit/early/raise": [[1,8],[3,5]],
         "flow/loop/for/elements": [[1,8],[3,5]],
         "flow/loop/for/nested/1": [[3,5]],
-        "metadata/program": [[1,8]],
-        "metadata/sloc/8": [[1,8]],
+        "meta/program": [[1,8]],
+        "meta/sloc/8": [[1,8]],
         "type/boolean": [[4,4]]
       }
     },
@@ -1895,8 +1901,8 @@
         "flow/loop/exit/late": [[1,5],[2,5]],
         "flow/loop/for/elements": [[1,5],[2,5]],
         "flow/loop/for/nested/1": [[2,5]],
-        "metadata/program": [[1,5]],
-        "metadata/sloc/5": [[1,5]],
+        "meta/program": [[1,5]],
+        "meta/sloc/5": [[1,5]],
         "type/boolean": [[3,3]]
       }
     },
@@ -1951,6 +1957,7 @@
         "whole_span:11": [[1,11]]
       },
       "taxa": {
+        "abstr/class": [[1,2]],
         "condition/equality": [[7,7]],
         "flow/conditional/no_else": [[7,9]],
         "flow/exception/catch/": [[3,11]],
@@ -1959,8 +1966,8 @@
         "flow/loop/for/elements": [[5,9]],
         "flow/loop/for/nested/1": [[6,9]],
         "flow/null_operation": [[2,2],[11,11]],
-        "metadata/program": [[1,11]],
-        "metadata/sloc/11": [[1,11]],
+        "meta/program": [[1,11]],
+        "meta/sloc/11": [[1,11]],
         "subscript/index": [[6,6],[7,7]],
         "subscript/index/shape/2": [[7,7]],
         "type/boolean": [[7,7]],
@@ -2049,8 +2056,8 @@
         "flow/loop/for": [[2,5]],
         "flow/loop/for/elements_and_indexes": [[2,5],[3,5]],
         "flow/loop/for/nested/1": [[3,5]],
-        "metadata/program": [[1,7]],
-        "metadata/sloc/7": [[1,7]],
+        "meta/program": [[1,7]],
+        "meta/sloc/7": [[1,7]],
         "type/boolean": [[4,4]],
         "type/null/literal": [[6,6]],
         "type/number/integer/literal": [[7,7],[7,7],[7,7],[7,7],[7,7],[7,7],[7,7],[7,7],[7,7],[7,7]],
@@ -2081,8 +2088,8 @@
       },
       "taxa": {
         "appli/method/insert": [[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "type/sequence/list": [[1,1]]
       }
     },
@@ -2108,8 +2115,8 @@
       "taxa": {
         "appli/method/sleep": [[2,2]],
         "library/standard/time": [[1,1]],
-        "metadata/program": [[1,2]],
-        "metadata/sloc/2": [[1,2]],
+        "meta/program": [[1,2]],
+        "meta/sloc/2": [[1,2]],
         "type/number/integer/literal": [[2,2]]
       }
     },
@@ -2134,8 +2141,8 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "subscript/slice/stop": [[1,1]],
         "type/number/integer/literal": [[1,1]],
         "var/assignment/single": [[1,1]]
@@ -2162,8 +2169,8 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "subscript/slice/start": [[1,1]],
         "type/number/integer/literal": [[1,1]],
         "var/assignment/single": [[1,1]]
@@ -2183,8 +2190,8 @@
         "whole_span:3": [[1,3]]
       },
       "taxa": {
-        "metadata/program": [[1,3]],
-        "metadata/sloc/3": [[1,3]],
+        "meta/program": [[1,3]],
+        "meta/sloc/3": [[1,3]],
         "type/sequence/string/literal": [[3,3]],
         "var/assignment/single": [[1,1]]
       }
@@ -2206,8 +2213,8 @@
       },
       "taxa": {
         "appli/method/split": [[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "type/sequence/string": [[1,1]],
         "var/assignment/single": [[1,1]]
       }
@@ -2229,8 +2236,8 @@
         "flow/loop/exit/late": [[1,2]],
         "flow/loop/while/infinite": [[1,2]],
         "flow/null_operation": [[2,2]],
-        "metadata/program": [[1,2]],
-        "metadata/sloc/2": [[1,2]],
+        "meta/program": [[1,2]],
+        "meta/sloc/2": [[1,2]],
         "type/boolean/literal/True": [[1,1]]
       }
     },
@@ -2246,8 +2253,8 @@
       },
       "taxa": {
         "condition/belonging": [[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "type/boolean": [[1,1]]
       }
     },
@@ -2267,8 +2274,8 @@
       "taxa": {
         "appli/method/values": [[1,1]],
         "condition/belonging": [[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "type/boolean": [[1,1]],
         "type/non_sequence/dictionary": [[1,1]]
       }
@@ -2293,8 +2300,8 @@
       },
       "taxa": {
         "appli/method/join": [[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "type/sequence/string": [[1,1]],
         "type/sequence/string/literal": [[1,1]],
         "var/assignment/single": [[1,1]]
@@ -2328,8 +2335,8 @@
         "appli/composition": [[1,1]],
         "appli/function/builtin/map": [[1,1]],
         "appli/method/join": [[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "type/sequence/string": [[1,1]],
         "type/sequence/string/literal": [[1,1]],
         "var/assignment/single": [[1,1]]
@@ -2353,8 +2360,8 @@
       },
       "taxa": {
         "appli/function/builtin/sum": [[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "var/assignment/single": [[1,1]]
       }
     },
@@ -2377,8 +2384,8 @@
       "taxa": {
         "appli/function/builtin/casting/str": [[1,1]],
         "appli/function/builtin/str": [[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "type/sequence/string": [[1,1]],
         "var/assignment/single": [[1,1]]
       }
@@ -2436,8 +2443,8 @@
         "appli/function/builtin/range": [[5,5]],
         "appli/method/map": [[5,5]],
         "library/standard/multiprocessing/Pool": [[1,1]],
-        "metadata/program": [[1,6]],
-        "metadata/sloc/6": [[1,6]],
+        "meta/program": [[1,6]],
+        "meta/sloc/6": [[1,6]],
         "operator/arithmetic/multiplication": [[3,3]],
         "type/number/integer/literal": [[5,5],[5,5]],
         "type/sequence/string/literal": [[6,6]]
@@ -2463,8 +2470,8 @@
       },
       "taxa": {
         "appli/function/builtin/filter": [[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "var/assignment/single": [[1,1]]
       }
     },
@@ -2491,8 +2498,8 @@
       },
       "taxa": {
         "appli/function/p": [[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "var/assignment/single": [[1,1]]
       }
     },
@@ -2517,8 +2524,8 @@
       "taxa": {
         "appli/function/builtin/open": [[1,1]],
         "appli/method/read": [[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "var/assignment/single": [[1,1]]
       }
     },
@@ -2545,8 +2552,8 @@
       "taxa": {
         "appli/function/builtin/print": [[2,2]],
         "library/standard/sys": [[1,1]],
-        "metadata/program": [[1,2]],
-        "metadata/sloc/2": [[1,2]],
+        "meta/program": [[1,2]],
+        "meta/sloc/2": [[1,2]],
         "type/sequence/string/literal": [[2,2]]
       }
     },
@@ -2573,8 +2580,8 @@
       },
       "taxa": {
         "library/standard/sys": [[1,1]],
-        "metadata/program": [[1,2]],
-        "metadata/sloc/2": [[1,2]],
+        "meta/program": [[1,2]],
+        "meta/sloc/2": [[1,2]],
         "subscript/index": [[2,2]],
         "type/number/integer/literal": [[2,2]],
         "var/assignment/single": [[2,2]]
@@ -2601,8 +2608,8 @@
       "taxa": {
         "appli/method/now": [[2,2]],
         "library/standard/datetime": [[1,1]],
-        "metadata/program": [[1,2]],
-        "metadata/sloc/2": [[1,2]],
+        "meta/program": [[1,2]],
+        "meta/sloc/2": [[1,2]],
         "var/assignment/single": [[2,2]]
       }
     },
@@ -2625,8 +2632,8 @@
       },
       "taxa": {
         "appli/method/find": [[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "type/sequence/string": [[1,1]],
         "var/assignment/single": [[1,1]]
       }
@@ -2652,8 +2659,8 @@
       },
       "taxa": {
         "appli/method/replace": [[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "type/sequence/string": [[1,1]],
         "var/assignment/single": [[1,1]]
       }
@@ -2677,8 +2684,8 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "operator/arithmetic/power": [[1,1]],
         "type/number/integer/literal": [[1,1],[1,1]],
         "var/assignment/single": [[1,1]]
@@ -2704,8 +2711,8 @@
       },
       "taxa": {
         "appli/method/format": [[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "type/sequence/string": [[1,1]],
         "type/sequence/string/literal": [[1,1]],
         "var/assignment/single": [[1,1]]
@@ -2727,8 +2734,8 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "operator/arithmetic/power": [[1,1]],
         "var/assignment/single": [[1,1]]
       }
@@ -2767,8 +2774,8 @@
         "abstr/return/something": [[3,3]],
         "appli/method/factorial": [[3,3],[3,3],[3,3]],
         "library/standard/math": [[1,1]],
-        "metadata/program": [[1,3]],
-        "metadata/sloc/3": [[1,3]],
+        "meta/program": [[1,3]],
+        "meta/sloc/3": [[1,3]],
         "operator/arithmetic/integer_division": [[3,3],[3,3]],
         "operator/arithmetic/substraction": [[3,3]]
       }
@@ -2814,8 +2821,8 @@
         "appli/method/ceil": [[3,3]],
         "library/standard/__future__/division": [[1,1]],
         "library/standard/math": [[2,2]],
-        "metadata/program": [[1,3]],
-        "metadata/sloc/3": [[1,3]],
+        "meta/program": [[1,3]],
+        "meta/sloc/3": [[1,3]],
         "operator/arithmetic/division": [[3,3]],
         "type/number/floating_point/literal": [[3,3]],
         "type/number/integer": [[3,3]],
@@ -2844,8 +2851,8 @@
       },
       "taxa": {
         "library/standard/random": [[1,1]],
-        "metadata/program": [[1,2]],
-        "metadata/sloc/2": [[1,2]],
+        "meta/program": [[1,2]],
+        "meta/sloc/2": [[1,2]],
         "var/assignment/single": [[2,2]]
       }
     },
@@ -2869,8 +2876,8 @@
       },
       "taxa": {
         "library/standard/random": [[1,1]],
-        "metadata/program": [[1,2]],
-        "metadata/sloc/2": [[1,2]],
+        "meta/program": [[1,2]],
+        "meta/sloc/2": [[1,2]],
         "var/assignment/single": [[2,2]]
       }
     },
@@ -2907,8 +2914,8 @@
         "appli/function/builtin/print": [[2,2]],
         "appli/method/join": [[2,2]],
         "library/standard/sys": [[1,1]],
-        "metadata/program": [[1,2]],
-        "metadata/sloc/2": [[1,2]],
+        "meta/program": [[1,2]],
+        "meta/sloc/2": [[1,2]],
         "subscript/slice/start": [[2,2]],
         "type/number/integer/literal": [[2,2]],
         "type/sequence/string": [[2,2]],
@@ -2955,8 +2962,8 @@
         "appli/function/a_class": [[3,3]],
         "appli/function/builtin/issubclass": [[2,2]],
         "flow/conditional/no_else": [[2,3]],
-        "metadata/program": [[1,3]],
-        "metadata/sloc/3": [[1,3]]
+        "meta/program": [[1,3]],
+        "meta/sloc/3": [[1,3]]
       }
     },
     "074.0674-compute-gcd.py": {
@@ -2984,8 +2991,8 @@
       "taxa": {
         "appli/function/gcd": [[2,2]],
         "library/standard/fractions/gcd": [[1,1]],
-        "metadata/program": [[1,2]],
-        "metadata/sloc/2": [[1,2]],
+        "meta/program": [[1,2]],
+        "meta/sloc/2": [[1,2]],
         "var/assignment/single": [[2,2]]
       }
     },
@@ -3018,8 +3025,8 @@
       "taxa": {
         "appli/function/gcd": [[2,2]],
         "library/standard/fractions/gcd": [[1,1]],
-        "metadata/program": [[1,2]],
-        "metadata/sloc/2": [[1,2]],
+        "meta/program": [[1,2]],
+        "meta/sloc/2": [[1,2]],
         "operator/arithmetic/integer_division": [[2,2]],
         "operator/arithmetic/multiplication": [[2,2]],
         "var/assignment/single": [[2,2]]
@@ -3045,8 +3052,8 @@
       },
       "taxa": {
         "appli/method/format": [[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "type/sequence/string": [[1,1]],
         "type/sequence/string/literal": [[1,1]],
         "var/assignment/single": [[1,1]]
@@ -3079,8 +3086,8 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "metadata/program": [[1,2]],
-        "metadata/sloc/2": [[1,2]],
+        "meta/program": [[1,2]],
+        "meta/sloc/2": [[1,2]],
         "operator/arithmetic/multiplication": [[2,2]],
         "operator/arithmetic/substraction": [[1,1]],
         "type/number/complex/literal": [[1,1],[2,2]],
@@ -3122,8 +3129,8 @@
         "flow/conditional/no_else": [[3,4]],
         "flow/loop/exit/early/break": [[1,4]],
         "flow/loop/while/infinite": [[1,4]],
-        "metadata/program": [[1,4]],
-        "metadata/sloc/4": [[1,4]],
+        "meta/program": [[1,4]],
+        "meta/sloc/4": [[1,4]],
         "operator/boolean/not": [[3,3]],
         "type/boolean/literal/True": [[1,1]]
       }
@@ -3146,8 +3153,8 @@
       },
       "taxa": {
         "appli/function/builtin/casting/float": [[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "type/number/floating_point": [[1,1]],
         "var/assignment/single": [[1,1]]
       }
@@ -3170,8 +3177,8 @@
       },
       "taxa": {
         "appli/function/builtin/casting/int": [[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "type/number/integer": [[1,1]],
         "var/assignment/single": [[1,1]]
       }
@@ -3200,8 +3207,8 @@
       },
       "taxa": {
         "appli/function/builtin/casting/int": [[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "operator/arithmetic/addition": [[1,1]],
         "type/number/floating_point/literal": [[1,1]],
         "type/number/integer": [[1,1]],
@@ -3227,8 +3234,8 @@
       },
       "taxa": {
         "appli/method/count": [[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "type/sequence": [[1,1]],
         "var/assignment/single": [[1,1]]
       }
@@ -3257,8 +3264,8 @@
       "taxa": {
         "appli/method/compile": [[2,2]],
         "library/standard/re": [[1,1]],
-        "metadata/program": [[1,2]],
-        "metadata/sloc/2": [[1,2]],
+        "meta/program": [[1,2]],
+        "meta/sloc/2": [[1,2]],
         "type/sequence/string/literal": [[2,2]],
         "var/assignment/single": [[2,2]]
       }
@@ -3287,8 +3294,8 @@
       "taxa": {
         "appli/function/builtin/bin": [[1,1]],
         "appli/method/count": [[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "type/sequence": [[1,1]],
         "type/sequence/string/literal": [[1,1]],
         "var/assignment/single": [[1,1]]
@@ -3314,8 +3321,8 @@
       "taxa": {
         "abstr/argument/arg": [[1,1],[1,1]],
         "abstr/function": [[1,2]],
-        "metadata/program": [[1,2]],
-        "metadata/sloc/2": [[1,2]],
+        "meta/program": [[1,2]],
+        "meta/sloc/2": [[1,2]],
         "type/boolean/literal/False": [[2,2]]
       }
     },
@@ -3339,8 +3346,8 @@
       "taxa": {
         "abstr/argument/arg": [[1,1],[1,1]],
         "abstr/function": [[1,2]],
-        "metadata/program": [[1,2]],
-        "metadata/sloc/2": [[1,2]],
+        "meta/program": [[1,2]],
+        "meta/sloc/2": [[1,2]],
         "type/boolean/literal/False": [[2,2]]
       }
     },
@@ -3366,8 +3373,8 @@
       "taxa": {
         "appli/method/exit": [[2,2]],
         "library/standard/sys": [[1,1]],
-        "metadata/program": [[1,2]],
-        "metadata/sloc/2": [[1,2]],
+        "meta/program": [[1,2]],
+        "meta/sloc/2": [[1,2]],
         "type/number/integer/literal": [[2,2]]
       }
     },
@@ -3391,8 +3398,8 @@
       },
       "taxa": {
         "appli/function/builtin/casting/bytearray": [[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "type/number/integer/literal": [[1,1]],
         "var/assignment/single": [[1,1]]
       }
@@ -3414,8 +3421,8 @@
       },
       "taxa": {
         "appli/exception/builtin/ValueError": [[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "type/sequence/string/literal": [[1,1]]
       }
     },
@@ -3452,14 +3459,15 @@
       },
       "taxa": {
         "abstr/argument/arg": [[2,2],[5,5]],
+        "abstr/class": [[1,6]],
         "abstr/decorated": [[4,6]],
         "abstr/function": [[4,6]],
         "abstr/method/flavor/instance": [[2,3],[4,6]],
         "abstr/method/naming/magic": [[2,3]],
         "abstr/procedure": [[2,3]],
         "abstr/return/something": [[6,6]],
-        "metadata/program": [[1,6]],
-        "metadata/sloc/6": [[1,6]],
+        "meta/program": [[1,6]],
+        "meta/sloc/6": [[1,6]],
         "type/number/integer/literal/zero": [[3,3]],
         "var/assignment": [[3,3]]
       }
@@ -3494,8 +3502,8 @@
         "appli/function/builtin/open": [[2,2]],
         "appli/method/load": [[3,3]],
         "library/standard/json": [[1,1]],
-        "metadata/program": [[1,3]],
-        "metadata/sloc/3": [[1,3]],
+        "meta/program": [[1,3]],
+        "meta/sloc/3": [[1,3]],
         "type/sequence/string/literal": [[2,2],[2,2]],
         "var/assignment/single": [[3,3]]
       }
@@ -3528,8 +3536,8 @@
         "appli/function/builtin/open": [[2,2]],
         "appli/method/dump": [[3,3]],
         "library/standard/json": [[1,1]],
-        "metadata/program": [[1,3]],
-        "metadata/sloc/3": [[1,3]],
+        "meta/program": [[1,3]],
+        "meta/sloc/3": [[1,3]],
         "type/sequence/string/literal": [[2,2],[2,2]]
       }
     },
@@ -3566,8 +3574,8 @@
         "appli/function/f": [[3,3]],
         "appli/function/without_arguments": [[3,3]],
         "library/standard/__future__/print_function": [[1,1]],
-        "metadata/program": [[1,3]],
-        "metadata/sloc/3": [[1,3]]
+        "meta/program": [[1,3]],
+        "meta/sloc/3": [[1,3]]
       }
     },
     "094.1101-print-type-of-variable.py": {
@@ -3591,8 +3599,8 @@
         "appli/composition": [[1,1]],
         "appli/function/builtin/print": [[1,1]],
         "appli/function/builtin/type": [[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]]
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]]
       }
     },
     "094.1864-print-type-of-variable.py": {
@@ -3611,8 +3619,8 @@
       },
       "taxa": {
         "appli/function/builtin/print": [[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]]
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]]
       }
     },
     "095.2140-get-file-size.py": {
@@ -3638,8 +3646,8 @@
       "taxa": {
         "appli/method/getsize": [[2,2]],
         "library/standard/os": [[1,1]],
-        "metadata/program": [[1,2]],
-        "metadata/sloc/2": [[1,2]],
+        "meta/program": [[1,2]],
+        "meta/sloc/2": [[1,2]],
         "var/assignment/single": [[2,2]]
       }
     },
@@ -3662,8 +3670,8 @@
       },
       "taxa": {
         "appli/method/startswith": [[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "type/sequence/string": [[1,1]],
         "var/assignment/single": [[1,1]]
       }
@@ -3687,8 +3695,8 @@
       },
       "taxa": {
         "appli/method/endswith": [[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "type/sequence/string": [[1,1]],
         "var/assignment/single": [[1,1]]
       }
@@ -3716,8 +3724,8 @@
       "taxa": {
         "appli/method/fromtimestamp": [[2,2]],
         "library/standard/datetime": [[1,1]],
-        "metadata/program": [[1,2]],
-        "metadata/sloc/2": [[1,2]],
+        "meta/program": [[1,2]],
+        "meta/sloc/2": [[1,2]],
         "var/assignment/single": [[2,2]]
       }
     },
@@ -3762,8 +3770,8 @@
         "appli/function/date": [[2,2]],
         "appli/method/strftime": [[3,3]],
         "library/standard/datetime/date": [[1,1]],
-        "metadata/program": [[1,3]],
-        "metadata/sloc/3": [[1,3]],
+        "meta/program": [[1,3]],
+        "meta/sloc/3": [[1,3]],
         "type/number/integer/literal": [[2,2],[2,2],[2,2]],
         "type/sequence/string/literal": [[3,3]],
         "var/assignment/single": [[2,2],[3,3]]
@@ -3797,8 +3805,8 @@
         "appli/method/isoformat": [[3,3]],
         "appli/method/today": [[2,2]],
         "library/standard/datetime/date": [[1,1]],
-        "metadata/program": [[1,3]],
-        "metadata/sloc/3": [[1,3]],
+        "meta/program": [[1,3]],
+        "meta/sloc/3": [[1,3]],
         "var/assignment/single": [[2,2],[3,3]]
       }
     },
@@ -3818,8 +3826,8 @@
       },
       "taxa": {
         "appli/method/sort": [[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "type/sequence/list": [[1,1]]
       }
     },
@@ -3848,8 +3856,8 @@
         "appli/method/read": [[3,3]],
         "appli/method/urlopen": [[2,2]],
         "library/standard/urllib.request": [[1,1]],
-        "metadata/program": [[1,3]],
-        "metadata/sloc/3": [[1,3]],
+        "meta/program": [[1,3]],
+        "meta/sloc/3": [[1,3]],
         "var/assignment/single": [[3,3]]
       }
     },
@@ -3882,8 +3890,8 @@
       "taxa": {
         "appli/method/urlretrieve": [[2,2]],
         "library/standard/urllib": [[1,1]],
-        "metadata/program": [[1,2]],
-        "metadata/sloc/2": [[1,2]],
+        "meta/program": [[1,2]],
+        "meta/sloc/2": [[1,2]],
         "type/sequence/string/literal": [[2,2]],
         "type/sequence/tuple/literal": [[2,2]],
         "var/assignment/parallel": [[2,2]]
@@ -3913,8 +3921,8 @@
       "taxa": {
         "appli/method/parse": [[2,2]],
         "library/third_party/lxml.etree": [[1,1]],
-        "metadata/program": [[1,2]],
-        "metadata/sloc/2": [[1,2]],
+        "meta/program": [[1,2]],
+        "meta/sloc/2": [[1,2]],
         "type/sequence/string/literal": [[2,2]],
         "var/assignment/single": [[2,2]]
       }
@@ -3980,6 +3988,7 @@
       },
       "taxa": {
         "abstr/argument/arg": [[6,6],[6,6],[6,6],[6,6]],
+        "abstr/class": [[2,9]],
         "abstr/method/flavor/instance": [[6,9]],
         "abstr/method/naming/magic": [[6,9]],
         "abstr/procedure": [[6,9]],
@@ -3987,8 +3996,8 @@
         "appli/function/builtin/print": [[12,12]],
         "appli/method/serialize": [[11,11]],
         "library/third_party/pyxser": [[1,1]],
-        "metadata/program": [[1,12]],
-        "metadata/sloc/12": [[1,12]],
+        "meta/program": [[1,12]],
+        "meta/sloc/12": [[1,12]],
         "type/null/literal": [[3,3],[4,4],[5,5]],
         "type/sequence/string/literal": [[10,10],[10,10],[10,10],[11,11]],
         "var/assignment": [[7,7],[8,8],[9,9]],
@@ -4018,8 +4027,8 @@
       },
       "taxa": {
         "library/standard/sys": [[1,1]],
-        "metadata/program": [[1,2]],
-        "metadata/sloc/2": [[1,2]],
+        "meta/program": [[1,2]],
+        "meta/sloc/2": [[1,2]],
         "subscript/index": [[2,2]],
         "type/number/integer/literal/zero": [[2,2]],
         "var/assignment/single": [[2,2]]
@@ -4046,8 +4055,8 @@
       "taxa": {
         "appli/method/getcwd": [[2,2]],
         "library/standard/os": [[1,1]],
-        "metadata/program": [[1,2]],
-        "metadata/sloc/2": [[1,2]],
+        "meta/program": [[1,2]],
+        "meta/sloc/2": [[1,2]],
         "var/assignment/single": [[2,2]]
       }
     },
@@ -4079,8 +4088,8 @@
         "appli/method/abspath": [[2,2]],
         "appli/method/dirname": [[2,2]],
         "library/standard/os": [[1,1]],
-        "metadata/program": [[1,2]],
-        "metadata/sloc/2": [[1,2]],
+        "meta/program": [[1,2]],
+        "meta/sloc/2": [[1,2]],
         "var/assignment/single": [[2,2]]
       }
     },
@@ -4115,8 +4124,8 @@
         "appli/function/without_arguments": [[1,1]],
         "condition/belonging": [[1,1]],
         "flow/conditional/no_else": [[1,2]],
-        "metadata/program": [[1,2]],
-        "metadata/sloc/2": [[1,2]],
+        "meta/program": [[1,2]],
+        "meta/sloc/2": [[1,2]],
         "type/boolean": [[1,1]],
         "type/sequence/string/literal": [[1,1]]
       }
@@ -4144,8 +4153,8 @@
       "taxa": {
         "appli/method/asizeof": [[2,2]],
         "library/third_party/pympler.asizeof": [[1,1]],
-        "metadata/program": [[1,2]],
-        "metadata/sloc/2": [[1,2]],
+        "meta/program": [[1,2]],
+        "meta/sloc/2": [[1,2]],
         "var/assignment/single": [[2,2]]
       }
     },
@@ -4172,8 +4181,8 @@
       "taxa": {
         "appli/method/strip": [[1,1]],
         "condition/equality": [[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "type/boolean": [[1,1]],
         "type/sequence/string": [[1,1]],
         "type/sequence/string/literal/empty": [[1,1]],
@@ -4204,8 +4213,8 @@
       "taxa": {
         "appli/method/call": [[2,2]],
         "library/standard/subprocess": [[1,1]],
-        "metadata/program": [[1,2]],
-        "metadata/sloc/2": [[1,2]],
+        "meta/program": [[1,2]],
+        "meta/sloc/2": [[1,2]],
         "type/sequence/list/literal": [[2,2]],
         "type/sequence/string/literal": [[2,2],[2,2],[2,2]]
       }
@@ -4237,8 +4246,8 @@
         "appli/function/builtin/sorted": [[1,1]],
         "flow/loop/exit/late": [[1,2]],
         "flow/loop/for": [[1,2]],
-        "metadata/program": [[1,2]],
-        "metadata/sloc/2": [[1,2]],
+        "meta/program": [[1,2]],
+        "meta/sloc/2": [[1,2]],
         "subscript/index": [[2,2]]
       }
     },
@@ -4279,8 +4288,8 @@
         "appli/method/items": [[1,1]],
         "flow/loop/exit/late": [[1,2]],
         "flow/loop/for": [[1,2]],
-        "metadata/program": [[1,2]],
-        "metadata/sloc/2": [[1,2]],
+        "meta/program": [[1,2]],
+        "meta/sloc/2": [[1,2]],
         "type/non_sequence/dictionary": [[1,1]],
         "type/sequence/tuple/literal": [[1,1],[1,1],[1,1]]
       }
@@ -4302,8 +4311,8 @@
       },
       "taxa": {
         "condition/equality": [[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "type/boolean": [[1,1]],
         "var/assignment/single": [[1,1]]
       }
@@ -4329,8 +4338,8 @@
       "taxa": {
         "condition/inequality": [[2,2]],
         "library/standard/datetime": [[1,1]],
-        "metadata/program": [[1,2]],
-        "metadata/sloc/2": [[1,2]],
+        "meta/program": [[1,2]],
+        "meta/sloc/2": [[1,2]],
         "type/boolean": [[2,2]],
         "var/assignment/single": [[2,2]]
       }
@@ -4358,8 +4367,8 @@
       },
       "taxa": {
         "appli/method/replace": [[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "type/sequence/string": [[1,1]],
         "type/sequence/string/literal/empty": [[1,1]],
         "var/assignment/single": [[1,1]]
@@ -4383,8 +4392,8 @@
       },
       "taxa": {
         "appli/function/builtin/len": [[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "var/assignment/single": [[1,1]]
       }
     },
@@ -4406,8 +4415,8 @@
       },
       "taxa": {
         "appli/function/builtin/casting/set": [[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "type/non_sequence/set": [[1,1]],
         "var/assignment/single": [[1,1]]
       }
@@ -4427,8 +4436,8 @@
       },
       "taxa": {
         "appli/function/builtin/casting/set": [[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "type/non_sequence/set": [[1,1]]
       }
     },
@@ -4456,8 +4465,8 @@
         "appli/composition": [[1,1]],
         "appli/function/builtin/casting/list": [[1,1]],
         "appli/function/builtin/casting/set": [[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "type/non_sequence/set": [[1,1]],
         "type/sequence/list": [[1,1]],
         "var/assignment/single": [[1,1]]
@@ -4536,8 +4545,8 @@
         "flow/conditional/no_else": [[5,7]],
         "flow/loop/exit/late": [[4,7]],
         "flow/loop/for/elements": [[4,7]],
-        "metadata/program": [[1,8]],
-        "metadata/sloc/8": [[1,8]],
+        "meta/program": [[1,8]],
+        "meta/sloc/8": [[1,8]],
         "pattern/elements/accumulate/in_list/filtered": [[4,7]],
         "pattern/elements/accumulate/in_set/filtered": [[4,7]],
         "type/boolean": [[5,5]],
@@ -4573,8 +4582,8 @@
         "appli/composition": [[1,1]],
         "appli/function/builtin/casting/int": [[1,1]],
         "appli/function/raw_input": [[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "type/number/integer": [[1,1]],
         "type/sequence/string/literal": [[1,1]],
         "var/assignment/single": [[1,1]]
@@ -4639,8 +4648,8 @@
         "flow/loop/exit/late": [[5,7]],
         "flow/loop/while/infinite": [[5,7]],
         "library/standard/socket": [[1,1]],
-        "metadata/program": [[1,7]],
-        "metadata/sloc/7": [[1,7]],
+        "meta/program": [[1,7]],
+        "meta/sloc/7": [[1,7]],
         "type/boolean/literal/True": [[5,5]],
         "type/number/integer/literal": [[6,6]],
         "type/sequence/string/literal": [[2,2],[7,7]],
@@ -4677,9 +4686,10 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
+        "abstr/class": [[1,2]],
         "appli/function/builtin/range": [[2,2]],
-        "metadata/program": [[1,2]],
-        "metadata/sloc/2": [[1,2]],
+        "meta/program": [[1,2]],
+        "meta/sloc/2": [[1,2]],
         "type/number/integer/literal": [[2,2]],
         "type/sequence/tuple/literal": [[2,2]],
         "var/assignment/constant": [[2,2],[2,2],[2,2],[2,2]],
@@ -4722,9 +4732,10 @@
         "whole_span:6": [[1,6]]
       },
       "taxa": {
+        "abstr/class": [[2,6]],
         "library/standard/enum/Enum": [[1,1]],
-        "metadata/program": [[1,6]],
-        "metadata/sloc/6": [[1,6]],
+        "meta/program": [[1,6]],
+        "meta/sloc/6": [[1,6]],
         "type/number/integer/literal": [[3,3],[4,4],[5,5],[6,6]],
         "var/assignment/constant": [[3,3],[4,4],[5,5],[6,6]],
         "var/assignment/single": [[3,3],[4,4],[5,5],[6,6]]
@@ -4740,8 +4751,8 @@
       },
       "taxa": {
         "flow/assertion": [[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]]
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]]
       }
     },
     "124.2152-binary-search-for-a-value-in-sorted-array.py": {
@@ -4796,8 +4807,8 @@
         "condition/equality": [[4,4]],
         "condition/equality/not": [[4,4]],
         "library/standard/bisect": [[1,1]],
-        "metadata/program": [[1,4]],
-        "metadata/sloc/4": [[1,4]],
+        "meta/program": [[1,4]],
+        "meta/sloc/4": [[1,4]],
         "operator/boolean/and": [[4,4]],
         "operator/ternary": [[4,4]],
         "subscript/index": [[4,4]],
@@ -4845,8 +4856,8 @@
         "appli/function/without_arguments": [[3,3]],
         "appli/method/perf_counter": [[2,2],[4,4]],
         "library/standard/time": [[1,1]],
-        "metadata/program": [[1,5]],
-        "metadata/sloc/5": [[1,5]],
+        "meta/program": [[1,5]],
+        "meta/sloc/5": [[1,5]],
         "operator/arithmetic/substraction": [[5,5]],
         "type/sequence/string/literal": [[5,5]],
         "var/assignment/single": [[2,2],[4,4]]
@@ -4874,8 +4885,8 @@
         "abstr/argument/no": [[1,2]],
         "abstr/function": [[1,2]],
         "abstr/return/something": [[2,2]],
-        "metadata/program": [[1,2]],
-        "metadata/sloc/2": [[1,2]],
+        "meta/program": [[1,2]],
+        "meta/sloc/2": [[1,2]],
         "type/boolean/literal/True": [[2,2]],
         "type/sequence/string/literal": [[2,2]],
         "type/sequence/tuple/literal": [[2,2]]
@@ -4906,8 +4917,8 @@
       "taxa": {
         "appli/method/load_module": [[2,2]],
         "library/standard/imp": [[1,1]],
-        "metadata/program": [[1,2]],
-        "metadata/sloc/2": [[1,2]],
+        "meta/program": [[1,2]],
+        "meta/sloc/2": [[1,2]],
         "type/sequence/string/literal": [[2,2],[2,2]],
         "var/assignment/single": [[2,2]]
       }
@@ -4987,8 +4998,8 @@
         "flow/loop/exit/late": [[3,9],[6,9]],
         "flow/loop/for/elements": [[6,9]],
         "flow/loop/while": [[3,9]],
-        "metadata/program": [[1,9]],
-        "metadata/sloc/9": [[1,9]],
+        "meta/program": [[1,9]],
+        "meta/sloc/9": [[1,9]],
         "operator/boolean/not": [[7,7]],
         "type/boolean/literal/True": [[8,8]],
         "type/number/integer/literal/zero": [[4,4]],
@@ -5080,8 +5091,8 @@
         "flow/loop/exit/late": [[5,9]],
         "flow/loop/while": [[5,9]],
         "library/standard/collections/deque": [[1,1]],
-        "metadata/program": [[1,9]],
-        "metadata/sloc/9": [[1,9]],
+        "meta/program": [[1,9]],
+        "meta/sloc/9": [[1,9]],
         "type/boolean": [[9,9]],
         "type/non_sequence/set": [[3,3],[8,8]],
         "type/sequence/list": [[9,9]],
@@ -5162,8 +5173,8 @@
         "condition/belonging/not": [[8,8]],
         "flow/loop/exit/late": [[4,8]],
         "flow/loop/while": [[4,8]],
-        "metadata/program": [[1,8]],
-        "metadata/sloc/8": [[1,8]],
+        "meta/program": [[1,8]],
+        "meta/sloc/8": [[1,8]],
         "type/boolean": [[8,8]],
         "type/non_sequence/set": [[2,2],[7,7]],
         "type/sequence/list": [[8,8]],
@@ -5183,8 +5194,8 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "operator/ternary": [[1,1],[1,1],[1,1]],
         "type/null/literal": [[1,1]]
       }
@@ -5221,8 +5232,8 @@
         "appli/function/without_arguments": [[2,2],[4,4],[6,6]],
         "flow/conditional": [[1,6],[3,6],[5,6]],
         "flow/conditional/else/if": [[4,4],[6,6]],
-        "metadata/program": [[1,6]],
-        "metadata/sloc/6": [[1,6]]
+        "meta/program": [[1,6]],
+        "meta/sloc/6": [[1,6]]
       }
     },
     "132.2040-measure-duration-of-procedure-execution.py": {
@@ -5249,8 +5260,8 @@
       "taxa": {
         "appli/method/timeit": [[2,2]],
         "library/standard/timeit": [[1,1]],
-        "metadata/program": [[1,2]],
-        "metadata/sloc/2": [[1,2]],
+        "meta/program": [[1,2]],
+        "meta/sloc/2": [[1,2]],
         "type/sequence/string/literal": [[2,2],[2,2]],
         "var/assignment/single": [[2,2]]
       }
@@ -5276,8 +5287,8 @@
       "taxa": {
         "appli/method/lower": [[1,1],[1,1]],
         "condition/belonging": [[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "type/boolean": [[1,1]],
         "type/sequence/string": [[1,1],[1,1]],
         "var/assignment/single": [[1,1]]
@@ -5300,8 +5311,8 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "type/sequence/list/literal": [[1,1]],
         "var/assignment/single": [[1,1]]
       }
@@ -5326,8 +5337,8 @@
       },
       "taxa": {
         "appli/method/remove": [[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]]
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]]
       }
     },
     "136.2141-remove-all-occurrences-of-a-value-from-a-list.py": {
@@ -5352,8 +5363,8 @@
       },
       "taxa": {
         "condition/equality/not": [[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "type/boolean": [[1,1]],
         "var/assignment/single": [[1,1]]
       }
@@ -5375,8 +5386,8 @@
       },
       "taxa": {
         "appli/method/isdigit": [[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "type/sequence/string": [[1,1]],
         "var/assignment/single": [[1,1]]
       }
@@ -5401,8 +5412,8 @@
       },
       "taxa": {
         "library/standard/tempfile": [[1,1]],
-        "metadata/program": [[1,2]],
-        "metadata/sloc/2": [[1,2]],
+        "meta/program": [[1,2]],
+        "meta/sloc/2": [[1,2]],
         "var/assignment/single": [[2,2]]
       }
     },
@@ -5426,8 +5437,8 @@
       },
       "taxa": {
         "library/standard/tempfile": [[1,1]],
-        "metadata/program": [[1,2]],
-        "metadata/sloc/2": [[1,2]],
+        "meta/program": [[1,2]],
+        "meta/sloc/2": [[1,2]],
         "var/assignment/single": [[2,2]]
       }
     },
@@ -5456,8 +5467,8 @@
       },
       "taxa": {
         "appli/method/pop": [[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "type/null/literal": [[1,1]]
       }
     },
@@ -5485,8 +5496,8 @@
         "appli/function/builtin/print": [[2,2]],
         "flow/loop/exit/late": [[1,2]],
         "flow/loop/for": [[1,2]],
-        "metadata/program": [[1,2]],
-        "metadata/sloc/2": [[1,2]],
+        "meta/program": [[1,2]],
+        "meta/sloc/2": [[1,2]],
         "operator/arithmetic/addition": [[1,1]]
       }
     },
@@ -5508,8 +5519,8 @@
       },
       "taxa": {
         "appli/function/builtin/hex": [[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "var/assignment/single": [[1,1]]
       }
     },
@@ -5539,8 +5550,8 @@
         "appli/function/builtin/zip": [[1,1]],
         "flow/loop/exit/late": [[1,2]],
         "flow/loop/for": [[1,2]],
-        "metadata/program": [[1,2]],
-        "metadata/sloc/2": [[1,2]]
+        "meta/program": [[1,2]],
+        "meta/sloc/2": [[1,2]]
       }
     },
     "144.2145-check-if-file-exists.py": {
@@ -5566,8 +5577,8 @@
       "taxa": {
         "appli/method/exists": [[2,2]],
         "library/standard/os": [[1,1]],
-        "metadata/program": [[1,2]],
-        "metadata/sloc/2": [[1,2]],
+        "meta/program": [[1,2]],
+        "meta/sloc/2": [[1,2]],
         "var/assignment/single": [[2,2]]
       }
     },
@@ -5597,8 +5608,8 @@
         "appli/class_constructor/Path": [[2,2]],
         "appli/method/exists": [[2,2]],
         "library/standard/pathlib/Path": [[1,1]],
-        "metadata/program": [[1,2]],
-        "metadata/sloc/2": [[1,2]],
+        "meta/program": [[1,2]],
+        "meta/sloc/2": [[1,2]],
         "var/assignment/single": [[2,2]]
       }
     },
@@ -5639,8 +5650,8 @@
         "appli/method/info": [[6,6]],
         "library/standard/logging": [[1,1]],
         "library/standard/sys": [[1,1]],
-        "metadata/program": [[1,6]],
-        "metadata/sloc/6": [[1,6]],
+        "meta/program": [[1,6]],
+        "meta/sloc/6": [[1,6]],
         "type/sequence/string/literal": [[3,3],[5,5]],
         "var/assignment/single": [[5,5]]
       }
@@ -5679,8 +5690,8 @@
         "appli/method/atof": [[4,4]],
         "appli/method/setlocale": [[3,3]],
         "library/standard/locale": [[1,1]],
-        "metadata/program": [[1,4]],
-        "metadata/sloc/4": [[1,4]],
+        "meta/program": [[1,4]],
+        "meta/sloc/4": [[1,4]],
         "type/sequence/string/literal": [[2,2],[3,3]],
         "var/assignment/single": [[2,2],[4,4]]
       }
@@ -5703,8 +5714,8 @@
       },
       "taxa": {
         "appli/function/builtin/casting/float": [[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "type/number/floating_point": [[1,1]],
         "var/assignment/single": [[1,1]]
       }
@@ -5726,8 +5737,8 @@
       },
       "taxa": {
         "appli/function/builtin/casting/float": [[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "type/number/floating_point": [[1,1]],
         "type/sequence/string/literal": [[1,1]]
       }
@@ -5759,8 +5770,8 @@
       "taxa": {
         "appli/method/sub": [[2,2]],
         "library/standard/re": [[1,1]],
-        "metadata/program": [[1,2]],
-        "metadata/sloc/2": [[1,2]],
+        "meta/program": [[1,2]],
+        "meta/sloc/2": [[1,2]],
         "type/sequence/string/literal": [[2,2]],
         "type/sequence/string/literal/empty": [[2,2]],
         "var/assignment/single": [[2,2]]
@@ -5795,8 +5806,8 @@
         "appli/function/builtin/map": [[1,1]],
         "appli/function/without_arguments": [[1,1]],
         "appli/method/split": [[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "type/sequence/list": [[1,1]],
         "type/sequence/string": [[1,1]]
       }
@@ -5821,8 +5832,8 @@
       },
       "taxa": {
         "appli/method/rstrip": [[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "type/sequence/string": [[1,1]],
         "type/sequence/string/literal": [[1,1]],
         "var/assignment/single": [[1,1]]
@@ -5869,8 +5880,8 @@
         "appli/method/endswith": [[2,2]],
         "flow/conditional/no_else": [[2,3]],
         "library/standard/os": [[1,1]],
-        "metadata/program": [[1,3]],
-        "metadata/sloc/3": [[1,3]],
+        "meta/program": [[1,3]],
+        "meta/sloc/3": [[1,3]],
         "subscript/slice/stop": [[3,3]],
         "type/number/integer/literal": [[3,3]],
         "type/sequence/string": [[2,2]],
@@ -5890,8 +5901,8 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "var/assignment/single": [[1,1]]
       }
     },
@@ -5917,8 +5928,8 @@
       },
       "taxa": {
         "appli/method/format": [[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "type/sequence/string": [[1,1]],
         "type/sequence/string/literal": [[1,1]],
         "var/assignment/single": [[1,1]]
@@ -5994,8 +6005,8 @@
         "appli/function/builtin/casting/int": [[1,1],[2,2]],
         "appli/function/builtin/range": [[1,1],[2,2]],
         "appli/method/format": [[3,3]],
-        "metadata/program": [[1,3]],
-        "metadata/sloc/3": [[1,3]],
+        "meta/program": [[1,3]],
+        "meta/sloc/3": [[1,3]],
         "operator/arithmetic/addition": [[1,1],[2,2],[3,3],[3,3],[3,3]],
         "operator/arithmetic/integer_division": [[3,3],[3,3],[3,3]],
         "subscript/slice/start": [[1,1],[2,2]],
@@ -6111,6 +6122,7 @@
       },
       "taxa": {
         "abstr/argument/arg": [[4,4],[4,4],[8,8]],
+        "abstr/class": [[2,10]],
         "abstr/decorated": [[3,7]],
         "abstr/function": [[3,7],[8,10]],
         "abstr/method/flavor/class": [[3,7]],
@@ -6130,8 +6142,8 @@
         "appli/method/join": [[10,10]],
         "appli/method/view": [[5,5]],
         "library/third_party/numpy": [[1,1]],
-        "metadata/program": [[1,15]],
-        "metadata/sloc/15": [[1,15]],
+        "meta/program": [[1,15]],
+        "meta/sloc/15": [[1,15]],
         "operator/arithmetic/addition": [[6,6],[15,15]],
         "operator/arithmetic/division": [[15,15]],
         "operator/string/concatenation": [[10,10]],
@@ -6172,8 +6184,8 @@
       "taxa": {
         "appli/method/unlink": [[3,3]],
         "library/standard/pathlib": [[1,1]],
-        "metadata/program": [[1,3]],
-        "metadata/sloc/3": [[1,3]],
+        "meta/program": [[1,3]],
+        "meta/sloc/3": [[1,3]],
         "var/assignment/single": [[2,2]]
       }
     },
@@ -6198,8 +6210,8 @@
       },
       "taxa": {
         "appli/function/builtin/format": [[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "type/sequence/string/literal": [[1,1]],
         "var/assignment/single": [[1,1]]
       }
@@ -6218,8 +6230,8 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "type/sequence/string/literal": [[1,1]],
         "var/assignment/constant": [[1,1]],
         "var/assignment/single": [[1,1]]
@@ -6250,8 +6262,8 @@
       "taxa": {
         "appli/method/sample": [[2,2]],
         "library/standard/random": [[1,1]],
-        "metadata/program": [[1,2]],
-        "metadata/sloc/2": [[1,2]],
+        "meta/program": [[1,2]],
+        "meta/sloc/2": [[1,2]],
         "var/assignment/single": [[2,2]]
       }
     },
@@ -6286,11 +6298,12 @@
       },
       "taxa": {
         "abstr/argument/arg": [[2,2],[2,2],[2,2]],
+        "abstr/class": [[1,5]],
         "abstr/method/flavor/instance": [[2,5]],
         "abstr/method/naming/magic": [[2,5]],
         "abstr/procedure": [[2,5]],
-        "metadata/program": [[1,5]],
-        "metadata/sloc/5": [[1,5]],
+        "meta/program": [[1,5]],
+        "meta/sloc/5": [[1,5]],
         "type/null/literal": [[2,2]],
         "type/sequence/list/literal/empty": [[4,4]],
         "var/assignment": [[3,3],[4,4],[5,5]]
@@ -6339,8 +6352,8 @@
         "flow/conditional": [[2,5]],
         "flow/conditional/else": [[5,5]],
         "library/standard/sys": [[1,1]],
-        "metadata/program": [[1,5]],
-        "metadata/sloc/5": [[1,5]],
+        "meta/program": [[1,5]],
+        "meta/sloc/5": [[1,5]],
         "operator/arithmetic/power": [[2,2]],
         "type/boolean": [[2,2]],
         "type/number/integer/literal": [[2,2],[2,2]]
@@ -6373,8 +6386,8 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "operator/arithmetic/multiplication": [[1,1]],
         "var/assignment/single": [[1,1]]
       }
@@ -6425,8 +6438,8 @@
         "condition/belonging": [[2,2],[4,4]],
         "flow/conditional/no_else": [[2,3],[4,5]],
         "library/standard/sys": [[1,1]],
-        "metadata/program": [[1,5]],
-        "metadata/sloc/5": [[1,5]],
+        "meta/program": [[1,5]],
+        "meta/sloc/5": [[1,5]],
         "subscript/slice/start": [[2,2],[4,4]],
         "type/boolean": [[2,2],[4,4]],
         "type/number/integer/literal": [[2,2],[4,4]],
@@ -6468,8 +6481,8 @@
         "appli/function/builtin/zip": [[1,1]],
         "flow/loop/exit/late": [[1,2]],
         "flow/loop/for": [[1,2]],
-        "metadata/program": [[1,2]],
-        "metadata/sloc/2": [[1,2]],
+        "meta/program": [[1,2]],
+        "meta/sloc/2": [[1,2]],
         "subscript/slice/start": [[1,1]],
         "subscript/slice/step": [[1,1],[1,1]],
         "type/number/integer/literal": [[1,1],[1,1],[1,1]]
@@ -6541,8 +6554,8 @@
         "flow/loop/exit/late": [[6,7]],
         "flow/loop/for": [[6,7]],
         "library/standard/itertools/tee": [[1,1]],
-        "metadata/program": [[1,7]],
-        "metadata/sloc/7": [[1,7]],
+        "meta/program": [[1,7]],
+        "meta/sloc/7": [[1,7]],
         "type/null/literal": [[4,4]],
         "type/sequence/tuple/literal": [[3,3],[6,6]],
         "var/assignment/parallel": [[3,3]]
@@ -6568,8 +6581,8 @@
       "taxa": {
         "appli/method/open": [[2,2]],
         "library/standard/webbrowser": [[1,1]],
-        "metadata/program": [[1,2]],
-        "metadata/sloc/2": [[1,2]]
+        "meta/program": [[1,2]],
+        "meta/sloc/2": [[1,2]]
       }
     },
     "165.2149-last-element-of-list.py": {
@@ -6591,8 +6604,8 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "subscript/index": [[1,1]],
         "subscript/index/backwards/last": [[1,1]],
         "type/number/integer/literal": [[1,1]],
@@ -6616,8 +6629,8 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "operator/arithmetic/addition": [[1,1]],
         "var/assignment/single": [[1,1]]
       }
@@ -6651,8 +6664,8 @@
       "taxa": {
         "appli/function/builtin/len": [[1,1]],
         "appli/method/startswith": [[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "operator/boolean/and": [[1,1]],
         "subscript/slice/start": [[1,1]],
         "type/sequence/string": [[1,1]],
@@ -6678,8 +6691,8 @@
       },
       "taxa": {
         "appli/method/lstrip": [[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "type/sequence/string": [[1,1]],
         "var/assignment/single": [[1,1]]
       }
@@ -6712,8 +6725,8 @@
       },
       "taxa": {
         "appli/method/rsplit": [[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "subscript/index": [[1,1]],
         "type/number/integer/literal": [[1,1]],
         "type/number/integer/literal/zero": [[1,1]],
@@ -6740,8 +6753,8 @@
       },
       "taxa": {
         "appli/method/rstrip": [[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "type/sequence/string": [[1,1]],
         "var/assignment/single": [[1,1]]
       }
@@ -6764,8 +6777,8 @@
       },
       "taxa": {
         "appli/function/builtin/len": [[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "var/assignment/single": [[1,1]]
       }
     },
@@ -6787,8 +6800,8 @@
       },
       "taxa": {
         "appli/function/builtin/len": [[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "var/assignment/single": [[1,1]]
       }
     },
@@ -6812,8 +6825,8 @@
       },
       "taxa": {
         "appli/method/append": [[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "type/sequence/list": [[1,1]]
       }
     },
@@ -6831,8 +6844,8 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "subscript/index": [[1,1]],
         "var/assignment": [[1,1]]
       }
@@ -6854,8 +6867,8 @@
       },
       "taxa": {
         "appli/function/builtin/print": [[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "type/sequence/string/literal": [[1,1]]
       }
     },
@@ -6876,8 +6889,8 @@
       },
       "taxa": {
         "appli/function/builtin/print": [[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "type/sequence/string/literal": [[1,1]]
       }
     },
@@ -6898,8 +6911,8 @@
       },
       "taxa": {
         "appli/function/builtin/print": [[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "type/sequence/string/literal": [[1,1]]
       }
     },
@@ -6951,8 +6964,8 @@
         "appli/method/urlopen": [[4,4]],
         "library/standard/urllib/parse": [[1,1]],
         "library/standard/urllib/request": [[1,1]],
-        "metadata/program": [[1,4]],
-        "metadata/sloc/4": [[1,4]],
+        "meta/program": [[1,4]],
+        "meta/sloc/4": [[1,4]],
         "type/sequence/string": [[2,2]],
         "type/sequence/string/literal": [[2,2],[3,3]],
         "var/assignment/single": [[2,2],[3,3],[4,4]]
@@ -6975,8 +6988,8 @@
       },
       "taxa": {
         "appli/method/hex": [[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "var/assignment/single": [[1,1]]
       }
     },
@@ -6999,8 +7012,8 @@
       },
       "taxa": {
         "appli/method/fromhex": [[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "var/assignment/single": [[1,1]]
       }
     },
@@ -7050,8 +7063,8 @@
         "appli/method/splitext": [[3,3]],
         "condition/belonging": [[3,3]],
         "library/standard/os": [[1,1]],
-        "metadata/program": [[1,3]],
-        "metadata/sloc/3": [[1,3]],
+        "meta/program": [[1,3]],
+        "meta/sloc/3": [[1,3]],
         "subscript/index": [[3,3]],
         "type/boolean": [[3,3]],
         "type/number/integer/literal": [[3,3]],
@@ -7107,8 +7120,8 @@
         "appli/method/walk": [[5,5]],
         "library/standard/os": [[2,2]],
         "library/standard/re": [[1,1]],
-        "metadata/program": [[1,7]],
-        "metadata/sloc/7": [[1,7]],
+        "meta/program": [[1,7]],
+        "meta/sloc/7": [[1,7]],
         "type/sequence/string": [[4,4]],
         "type/sequence/string/literal": [[4,4],[7,7]],
         "type/sequence/tuple/literal": [[5,5]],
@@ -7155,8 +7168,8 @@
         "appli/method/glob": [[3,3]],
         "library/standard/glob": [[1,1]],
         "library/standard/itertools": [[2,2]],
-        "metadata/program": [[1,3]],
-        "metadata/sloc/3": [[1,3]],
+        "meta/program": [[1,3]],
+        "meta/sloc/3": [[1,3]],
         "operator/string/format": [[3,3]],
         "type/sequence/list": [[3,3]],
         "type/sequence/list/literal": [[3,3]],
@@ -7189,8 +7202,8 @@
       "taxa": {
         "condition/inequality": [[1,1],[1,1],[1,1],[1,1]],
         "condition/inequality/chained/2": [[1,1],[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "operator/boolean/and": [[1,1]],
         "type/boolean": [[1,1],[1,1]],
         "var/assignment/single": [[1,1]]
@@ -7221,8 +7234,8 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "operator/arithmetic/addition": [[1,1],[1,1]],
         "operator/arithmetic/division": [[1,1],[1,1]],
         "type/number/integer/literal": [[1,1],[1,1]],
@@ -7271,8 +7284,8 @@
         "appli/class_constructor/Point": [[3,3]],
         "appli/function/namedtuple": [[2,2]],
         "library/standard/collections/namedtuple": [[1,1]],
-        "metadata/program": [[1,3]],
-        "metadata/sloc/3": [[1,3]],
+        "meta/program": [[1,3]],
+        "meta/sloc/3": [[1,3]],
         "operator/arithmetic/addition": [[3,3],[3,3]],
         "operator/arithmetic/division": [[3,3],[3,3]],
         "type/number/integer/literal": [[3,3],[3,3]],
@@ -7303,8 +7316,8 @@
       "taxa": {
         "appli/method/listdir": [[2,2]],
         "library/standard/os": [[1,1]],
-        "metadata/program": [[1,2]],
-        "metadata/sloc/2": [[1,2]],
+        "meta/program": [[1,2]],
+        "meta/sloc/2": [[1,2]],
         "var/assignment/single": [[2,2]]
       }
     },
@@ -7332,8 +7345,8 @@
       },
       "taxa": {
         "appli/function/builtin/print": [[2,2]],
-        "metadata/program": [[1,2]],
-        "metadata/sloc/2": [[1,2]],
+        "meta/program": [[1,2]],
+        "meta/sloc/2": [[1,2]],
         "operator/arithmetic/modulo": [[2,2]],
         "type/sequence/string/literal": [[1,1]],
         "var/assignment/single": [[1,1]]
@@ -7384,8 +7397,8 @@
       "taxa": {
         "appli/method/put": [[6,6]],
         "library/third_party/requests": [[2,2]],
-        "metadata/program": [[1,7]],
-        "metadata/sloc/7": [[1,7]],
+        "meta/program": [[1,7]],
+        "meta/sloc/7": [[1,7]],
         "type/non_sequence/dictionary/literal": [[4,4]],
         "type/non_sequence/dictionary/literal/empty": [[5,5]],
         "type/sequence/string/literal": [[3,3],[4,4]],
@@ -7423,8 +7436,8 @@
         "appli/method/today": [[2,2]],
         "library/standard/datetime/date": [[1,1]],
         "library/standard/datetime/timedelta": [[1,1]],
-        "metadata/program": [[1,2]],
-        "metadata/sloc/2": [[1,2]],
+        "meta/program": [[1,2]],
+        "meta/sloc/2": [[1,2]],
         "operator/arithmetic/addition": [[2,2]],
         "type/number/integer/literal": [[2,2]]
       }
@@ -7464,8 +7477,8 @@
       "taxa": {
         "appli/method/start": [[3,3]],
         "library/standard/threading": [[1,1]],
-        "metadata/program": [[1,3]],
-        "metadata/sloc/3": [[1,3]],
+        "meta/program": [[1,3]],
+        "meta/sloc/3": [[1,3]],
         "type/number/floating_point/literal": [[2,2]],
         "type/number/integer/literal": [[2,2]],
         "type/sequence/tuple/literal": [[2,2]],
@@ -7494,8 +7507,8 @@
       "taxa": {
         "appli/method/exit": [[2,2]],
         "library/standard/sys": [[1,1]],
-        "metadata/program": [[1,2]],
-        "metadata/sloc/2": [[1,2]],
+        "meta/program": [[1,2]],
+        "meta/sloc/2": [[1,2]],
         "type/number/integer/literal/zero": [[2,2]]
       }
     },
@@ -7585,6 +7598,7 @@
       },
       "taxa": {
         "abstr/argument/arg": [[2,2],[2,2],[5,5],[5,5],[11,11],[11,11],[11,11],[13,13],[13,13],[13,13]],
+        "abstr/class": [[1,15]],
         "abstr/function": [[5,10]],
         "abstr/function/predicate": [[11,12]],
         "abstr/method/flavor/instance": [[2,4],[5,10],[11,12],[13,15]],
@@ -7598,8 +7612,8 @@
         "flow/conditional": [[6,10]],
         "flow/conditional/else": [[9,10]],
         "flow/conditional/no_else": [[14,15]],
-        "metadata/program": [[1,15]],
-        "metadata/sloc/15": [[1,15]],
+        "meta/program": [[1,15]],
+        "meta/sloc/15": [[1,15]],
         "operator/boolean/not": [[14,14]],
         "operator/list/replication": [[3,3]],
         "subscript/index": [[6,6],[9,9],[9,9],[10,10]],
@@ -7631,8 +7645,8 @@
       },
       "taxa": {
         "library/third_party/numpy": [[1,1]],
-        "metadata/program": [[1,2]],
-        "metadata/sloc/2": [[1,2]],
+        "meta/program": [[1,2]],
+        "meta/sloc/2": [[1,2]],
         "operator/matrix/multiplication": [[2,2]],
         "var/assignment/single": [[2,2]]
       }
@@ -7662,8 +7676,8 @@
       "taxa": {
         "appli/method/matmul": [[2,2]],
         "library/third_party/numpy": [[1,1]],
-        "metadata/program": [[1,2]],
-        "metadata/sloc/2": [[1,2]],
+        "meta/program": [[1,2]],
+        "meta/sloc/2": [[1,2]],
         "var/assignment/single": [[2,2]]
       }
     },
@@ -7693,8 +7707,8 @@
       "taxa": {
         "appli/class_constructor/P": [[1,1]],
         "appli/class_constructor/T": [[1,1]],
-        "metadata/program": [[1,1]],
-        "metadata/sloc/1": [[1,1]],
+        "meta/program": [[1,1]],
+        "meta/sloc/1": [[1,1]],
         "var/assignment/single": [[1,1]]
       }
     },
@@ -7732,8 +7746,8 @@
         "appli/function/without_arguments": [[2,2]],
         "condition/inequality": [[1,1]],
         "flow/conditional/no_else": [[1,2]],
-        "metadata/program": [[1,2]],
-        "metadata/sloc/2": [[1,2]],
+        "meta/program": [[1,2]],
+        "meta/sloc/2": [[1,2]],
         "type/boolean": [[1,1]]
       }
     },
@@ -7759,8 +7773,8 @@
       "taxa": {
         "appli/function/builtin/open": [[1,1]],
         "appli/method/readlines": [[2,2]],
-        "metadata/program": [[1,2]],
-        "metadata/sloc/2": [[1,2]],
+        "meta/program": [[1,2]],
+        "meta/sloc/2": [[1,2]],
         "var/assignment/single": [[2,2]]
       }
     }
@@ -14845,6 +14859,22 @@
       "017.1103-create-a-tree-data-structure.py",
       "040.2279-graph-with-adjacency-lists.py"
     ],
+    "abstr/class": [
+      "005.0663-create-a-2d-point-data-structure.py",
+      "009.1410-create-a-binary-tree-data-structure.py",
+      "009.3176-create-a-binary-tree-data-structure.py",
+      "017.1103-create-a-tree-data-structure.py",
+      "034.0625-create-a-set-of-objects.py",
+      "040.2279-graph-with-adjacency-lists.py",
+      "043.0676-break-outer-loop.py",
+      "090.1099-read-only-outside.py",
+      "104.3264-save-object-into-xml-file.py",
+      "122.1453-declare-enumeration.py",
+      "122.1454-declare-enumeration.py",
+      "154.2292-halfway-between-two-hex-color-codes.py",
+      "159.2281-trie.py",
+      "187.3261-disjoint-set.py"
+    ],
     "abstr/decorated": [
       "090.1099-read-only-outside.py",
       "154.2292-halfway-between-two-hex-color-codes.py"
@@ -15974,7 +16004,7 @@
     "library/third_party/requests": [
       "183.3025-make-http-put-request.py"
     ],
-    "metadata/program": [
+    "meta/program": [
       "001.0003-print-hello-world.py",
       "001.1159-print-hello-world.py",
       "002.0011-print-hello-10-times.py",
@@ -16199,7 +16229,7 @@
       "191.3403-check-if-any-value-in-a-list-is-larger-than-a-limit.py",
       "197.3457-get-a-list-of-lines-from-a-file.py"
     ],
-    "metadata/sloc/1": [
+    "meta/sloc/1": [
       "001.1159-print-hello-world.py",
       "002.1493-print-hello-10-times.py",
       "002.3117-print-hello-10-times.py",
@@ -16296,20 +16326,20 @@
       "179.2688-get-center-of-a-rectangle.py",
       "189.3236-filter-and-transform-list.py"
     ],
-    "metadata/sloc/11": [
+    "meta/sloc/11": [
       "043.0676-break-outer-loop.py"
     ],
-    "metadata/sloc/12": [
+    "meta/sloc/12": [
       "104.3264-save-object-into-xml-file.py"
     ],
-    "metadata/sloc/13": [
+    "meta/sloc/13": [
       "040.2279-graph-with-adjacency-lists.py"
     ],
-    "metadata/sloc/15": [
+    "meta/sloc/15": [
       "154.2292-halfway-between-two-hex-color-codes.py",
       "187.3261-disjoint-set.py"
     ],
-    "metadata/sloc/2": [
+    "meta/sloc/2": [
       "001.0003-print-hello-world.py",
       "002.0011-print-hello-10-times.py",
       "003.0019-create-a-procedure.py",
@@ -16380,7 +16410,7 @@
       "191.3403-check-if-any-value-in-a-list-is-larger-than-a-limit.py",
       "197.3457-get-a-list-of-lines-from-a-file.py"
     ],
-    "metadata/sloc/3": [
+    "meta/sloc/3": [
       "014.0185-pick-uniformly-a-random-floating-point-number-in-ab.py",
       "034.0625-create-a-set-of-objects.py",
       "048.0210-multi-line-string-literal.py",
@@ -16401,7 +16431,7 @@
       "179.2689-get-center-of-a-rectangle.py",
       "185.2820-execute-function-in-30-seconds.py"
     ],
-    "metadata/sloc/4": [
+    "meta/sloc/4": [
       "017.1103-create-a-tree-data-structure.py",
       "018.2084-depth-first-traversing-of-a-tree.py",
       "020.0573-return-two-values.py",
@@ -16411,7 +16441,7 @@
       "146.1825-convert-string-to-floating-point-number.py",
       "174.2687-make-http-post-request.py"
     ],
-    "metadata/sloc/5": [
+    "meta/sloc/5": [
       "009.1410-create-a-binary-tree-data-structure.py",
       "009.3176-create-a-binary-tree-data-structure.py",
       "031.0188-recursive-factorial-simple.py",
@@ -16421,7 +16451,7 @@
       "160.2165-detect-if-32-bit-or-64-bit-architecture.py",
       "162.2164-execute-procedures-depending-on-options.py"
     ],
-    "metadata/sloc/6": [
+    "meta/sloc/6": [
       "016.1530-depth-first-traversing-of-a-binary-tree.py",
       "025.0195-send-a-value-to-another-thread.py",
       "037.0671-currying.py",
@@ -16431,7 +16461,7 @@
       "131.2766-successive-conditions.py",
       "145.1822-print-log-line-with-datetime.py"
     ],
-    "metadata/sloc/7": [
+    "meta/sloc/7": [
       "033.1420-atomically-read-and-update-variable.py",
       "043.2733-break-outer-loop.py",
       "121.3029-udp-listen-and-read.py",
@@ -16439,12 +16469,12 @@
       "177.2725-find-files-with-a-given-list-of-filename-extensions.py",
       "183.3025-make-http-put-request.py"
     ],
-    "metadata/sloc/8": [
+    "meta/sloc/8": [
       "042.1264-continue-outer-loop.py",
       "119.3263-deduplicate-list.py",
       "130.2283-depth-first-traversing-in-a-graph.py"
     ],
-    "metadata/sloc/9": [
+    "meta/sloc/9": [
       "128.2085-breadth-first-traversing-of-a-tree.py",
       "129.2282-breadth-first-traversing-in-a-graph.py"
     ],

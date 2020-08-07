@@ -25,19 +25,19 @@ def test_taxa_of_programs():
     dbf = ProgramFilter(db)
     # collatz is imported by fizzbuzz
     subset_taxa = dbf.taxa_of_programs({"collatz.py"}, follow=False)
-    subset_taxa = set(filter(lambda x: not x.startswith("metadata/"), subset_taxa))
+    subset_taxa = set(filter(lambda x: not x.startswith("meta/"), subset_taxa))
     print(sorted(subset_taxa))
     print()
     # when following the importations...
     superset_taxa = dbf.taxa_of_programs({"fizzbuzz.py"}, follow=True)
-    superset_taxa = set(filter(lambda x: not x.startswith("metadata/"), superset_taxa))
+    superset_taxa = set(filter(lambda x: not x.startswith("meta/"), superset_taxa))
     print(sorted(superset_taxa))
     # in addition to its own taxa, fizzbuzz features all those of collatz...
     assert superset_taxa.issuperset(subset_taxa)
     assert len(superset_taxa - subset_taxa) > 0
     # when not following the importations...
     own_taxa = dbf.taxa_of_programs({"fizzbuzz.py"}, follow=False)
-    own_taxa = set(filter(lambda x: not x.startswith("metadata/"), own_taxa))
+    own_taxa = set(filter(lambda x: not x.startswith("meta/"), own_taxa))
     print(sorted(own_taxa))
     assert superset_taxa.issuperset(own_taxa)
     assert len(superset_taxa - own_taxa) > 0

@@ -7,7 +7,7 @@
 - [`5 programs of learning cost in [4, 8[`](#5-programs-of-learning-cost-in-4-8)
     - [`10_time.py`](#program-10_timepy-learning-cost-45625)
     - [`21_xml_html_parsing.py`](#program-21_xml_html_parsingpy-learning-cost-53125)
-    - [`12_classes.py`](#program-12_classespy-learning-cost-553125)
+    - [`12_classes.py`](#program-12_classespy-learning-cost-578125)
     - [`14_median.py`](#program-14_medianpy-learning-cost-59375)
     - [`33_guess_the_number.py`](#program-33_guess_the_numberpy-learning-cost-603125)
 # Recommended programs
@@ -44,8 +44,8 @@
 | 0 | `type/sequence/string` | 7 |
 | 0 | `type/sequence/string/literal` | 2, 4, 7 |
 | 0 | `var/assignment/single` | 2 |
-| 0 | `metadata/program` | 1-8 |
-| 0 | `metadata/sloc/8` | 1-8 |
+| 0 | `meta/program` | 1-8 |
+| 0 | `meta/sloc/8` | 1-8 |
 
 ---
 
@@ -72,8 +72,8 @@
 | 0.4375 | `type/number/integer/literal` | 3 |
 | 0 | `type/sequence/string/literal` | 4, 6 |
 | 0 | `var/assignment/single` | 3 |
-| 0 | `metadata/program` | 1-6 |
-| 0 | `metadata/sloc/6` | 1-6 |
+| 0 | `meta/program` | 1-6 |
+| 0 | `meta/sloc/6` | 1-6 |
 
 ---
 
@@ -101,8 +101,8 @@
 | 0.1875 | `type/sequence/tuple/literal` | 1, 1, 4, 4 |
 | 0.125 | `var/assignment/parallel` | 1 |
 | 0.1875 | `var/assignment/parallel/slide` | 4 |
-| 0 | `metadata/program` | 1-4 |
-| 0 | `metadata/sloc/4` | 1-4 |
+| 0 | `meta/program` | 1-4 |
+| 0 | `meta/sloc/4` | 1-4 |
 
 ---
 
@@ -142,8 +142,8 @@
 | 0.4375 | `type/number/integer/literal` | 3, 9 |
 | 0 | `type/sequence` | 3 |
 | 0 | `var/assignment/single` | 3, 5, 7 |
-| 0 | `metadata/program` | 1-11 |
-| 0 | `metadata/sloc/11` | 1-11 |
+| 0 | `meta/program` | 1-11 |
+| 0 | `meta/sloc/11` | 1-11 |
 
 ---
 
@@ -190,8 +190,8 @@
 | 0.4375 | `type/number/integer/literal` | 3, 4, 5, 6, 7, 8 |
 | 0 | `type/sequence/string/literal` | 3, 4, 5, 6, 7, 8, 17 |
 | 0 | `var/assignment/single` | 2, 10, 11 |
-| 0 | `metadata/program` | 1-17 |
-| 0 | `metadata/sloc/17` | 1-17 |
+| 0 | `meta/program` | 1-17 |
+| 0 | `meta/sloc/17` | 1-17 |
 
 ---
 
@@ -234,12 +234,12 @@
 | 0.1875 | `type/sequence/tuple/literal` | 12 |
 | 0.1875 | `var/assignment/parallel/more_than_two` | 12 |
 | 0 | `var/assignment/single` | 1, 9, 10 |
-| 0 | `metadata/program` | 1-14 |
-| 0 | `metadata/sloc/14` | 1-14 |
+| 0 | `meta/program` | 1-14 |
+| 0 | `meta/sloc/14` | 1-14 |
 
 ---
 
-### Program `12_classes.py` (learning cost 5.53125)
+### Program `12_classes.py` (learning cost 5.78125)
 
 ```python
 1   class BankAccount(object):
@@ -259,6 +259,7 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.375 | `abstr/argument/arg` | 2, 2, 4, 4, 6, 6, 8 |
+| 0.25 | `abstr/class` | 1-9 |
 | 0.25 | `abstr/function` | 8-9 |
 | 0.4375 | `abstr/method/flavor/instance` | 2-3, 4-5, 6-7, 8-9 |
 | 0.4375 | `abstr/method/naming/magic` | 2-3 |
@@ -276,8 +277,8 @@
 | 0.1875 | `var/assignment/augmented/Add` | 5 |
 | 0.1875 | `var/assignment/augmented/Sub` | 7 |
 | 0 | `var/assignment/single` | 10 |
-| 0 | `metadata/program` | 1-12 |
-| 0 | `metadata/sloc/12` | 1-12 |
+| 0 | `meta/program` | 1-12 |
+| 0 | `meta/sloc/12` | 1-12 |
 
 ---
 
@@ -314,8 +315,8 @@
 | 0.375 | `type/number/integer` | 5, 7, 7 |
 | 0.4375 | `type/number/integer/literal` | 4, 4, 5, 5, 7, 7, 7, 7 |
 | 0 | `var/assignment/single` | 2, 3 |
-| 0 | `metadata/program` | 1-7 |
-| 0 | `metadata/sloc/7` | 1-7 |
+| 0 | `meta/program` | 1-7 |
+| 0 | `meta/sloc/7` | 1-7 |
 
 ---
 
@@ -366,8 +367,8 @@
 | 0 | `type/sequence/string/literal` | 3, 5, 7, 10, 12, 16, 18 |
 | 0.1875 | `var/assignment/augmented/Add` | 8 |
 | 0 | `var/assignment/single` | 2, 3, 4, 7 |
-| 0 | `metadata/program` | 1-18 |
-| 0 | `metadata/sloc/18` | 1-18 |
+| 0 | `meta/program` | 1-18 |
+| 0 | `meta/sloc/18` | 1-18 |
 
 ---
 

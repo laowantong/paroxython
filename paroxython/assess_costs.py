@@ -99,9 +99,9 @@ class LearningCostAssessor:
         assessment function.
 
         .. note::
-          The learning cost of a taxon prefixed by `"metadata/"` is assumed to be zero.
+          The learning cost of a taxon prefixed by `"meta/"` is assumed to be zero.
         """
-        if taxon.startswith("metadata/"):
+        if taxon.startswith("meta/"):
             return 0
         (start, stop) = (0, 0)
         if taxon not in self.imparted_knowledge:
