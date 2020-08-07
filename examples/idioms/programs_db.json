@@ -526,9 +526,9 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
+        "condition/belonging": [[1,1]],
         "metadata/program": [[1,1]],
         "metadata/sloc/1": [[1,1]],
-        "test/belonging": [[1,1]],
         "type/boolean": [[1,1]]
       }
     },
@@ -699,11 +699,11 @@
         "abstr/return/nothing": [[3,3]],
         "appli/function": [[4,4],[6,6]],
         "appli/function/f": [[5,5]],
+        "condition/identity": [[2,2]],
         "flow/conditional/guard": [[2,3]],
         "flow/conditional/no_else": [[2,3]],
         "metadata/program": [[1,6]],
         "metadata/sloc/6": [[1,6]],
-        "test/identity": [[2,2]],
         "type/boolean": [[2,2]],
         "type/null/literal": [[2,2]]
       }
@@ -914,13 +914,13 @@
         "abstr/return/something": [[4,4]],
         "appli/function/builtin/enumerate": [[2,2]],
         "appli/method/index": [[4,4]],
+        "condition/belonging": [[3,3]],
         "flow/conditional/no_else": [[3,4]],
         "flow/loop/exit/early/return": [[2,4]],
         "flow/loop/for": [[2,4]],
         "flow/loop/for/elements_and_indexes": [[2,4]],
         "metadata/program": [[1,4]],
         "metadata/sloc/4": [[1,4]],
-        "test/belonging": [[3,3]],
         "type/boolean": [[3,3]],
         "type/sequence": [[4,4]],
         "type/sequence/tuple/literal": [[2,2],[4,4]]
@@ -1334,13 +1334,13 @@
         "abstr/recursive/body": [[1,5]],
         "abstr/return/something": [[5,5]],
         "appli/function": [[5,5]],
+        "condition/equality": [[2,2]],
         "flow/conditional": [[2,5]],
         "flow/conditional/else": [[5,5]],
         "metadata/program": [[1,5]],
         "metadata/sloc/5": [[1,5]],
         "operator/arithmetic/multiplication": [[5,5]],
         "operator/arithmetic/substraction": [[5,5]],
-        "test/equality": [[2,2]],
         "type/boolean": [[2,2]],
         "type/number/integer/literal": [[3,3],[5,5]],
         "type/number/integer/literal/zero": [[2,2]]
@@ -1629,9 +1629,9 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
+        "condition/belonging": [[1,1]],
         "metadata/program": [[1,1]],
         "metadata/sloc/1": [[1,1]],
-        "test/belonging": [[1,1]],
         "type/boolean": [[1,1]],
         "var/assignment/single": [[1,1]]
       }
@@ -1854,6 +1854,7 @@
       "taxa": {
         "appli/exception/builtin/Exception": [[5,5]],
         "appli/function/builtin/print": [[6,6]],
+        "condition/equality": [[4,4]],
         "flow/conditional/no_else": [[4,5]],
         "flow/exception/catch/Exception": [[2,8]],
         "flow/exception/raise/Exception": [[2,8]],
@@ -1864,7 +1865,6 @@
         "io/standard/print": [[6,6]],
         "metadata/program": [[1,8]],
         "metadata/sloc/8": [[1,8]],
-        "test/equality": [[4,4]],
         "type/boolean": [[4,4]]
       }
     },
@@ -1899,6 +1899,7 @@
       },
       "taxa": {
         "appli/function/builtin/print": [[5,5]],
+        "condition/equality": [[3,3]],
         "flow/conditional/no_else": [[3,4]],
         "flow/loop/continue": [[4,4]],
         "flow/loop/exit/late": [[1,5],[2,5]],
@@ -1907,7 +1908,6 @@
         "io/standard/print": [[5,5]],
         "metadata/program": [[1,5]],
         "metadata/sloc/5": [[1,5]],
-        "test/equality": [[3,3]],
         "type/boolean": [[3,3]]
       }
     },
@@ -1962,6 +1962,7 @@
         "whole_span:11": [[1,11]]
       },
       "taxa": {
+        "condition/equality": [[7,7]],
         "flow/conditional/no_else": [[7,9]],
         "flow/exception/catch/": [[3,11]],
         "flow/exception/raise/": [[3,11]],
@@ -1973,7 +1974,6 @@
         "metadata/sloc/11": [[1,11]],
         "subscript/index": [[6,6],[7,7]],
         "subscript/index/shape/2": [[7,7]],
-        "test/equality": [[7,7]],
         "type/boolean": [[7,7]],
         "type/null/literal": [[4,4]],
         "type/sequence/tuple/literal": [[8,8]],
@@ -2054,6 +2054,7 @@
         "appli/function": [[7,7]],
         "appli/function/builtin/enumerate": [[2,2],[3,3]],
         "appli/function/builtin/print": [[7,7]],
+        "condition/equality": [[4,4]],
         "flow/conditional/no_else": [[4,5]],
         "flow/loop/exit/early/return": [[2,5],[3,5]],
         "flow/loop/for": [[2,5]],
@@ -2062,7 +2063,6 @@
         "io/standard/print": [[7,7]],
         "metadata/program": [[1,7]],
         "metadata/sloc/7": [[1,7]],
-        "test/equality": [[4,4]],
         "type/boolean": [[4,4]],
         "type/null/literal": [[6,6]],
         "type/number/integer/literal": [[7,7],[7,7],[7,7],[7,7],[7,7],[7,7],[7,7],[7,7],[7,7],[7,7]],
@@ -2257,9 +2257,9 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
+        "condition/belonging": [[1,1]],
         "metadata/program": [[1,1]],
         "metadata/sloc/1": [[1,1]],
-        "test/belonging": [[1,1]],
         "type/boolean": [[1,1]]
       }
     },
@@ -2278,9 +2278,9 @@
       },
       "taxa": {
         "appli/method/values": [[1,1]],
+        "condition/belonging": [[1,1]],
         "metadata/program": [[1,1]],
         "metadata/sloc/1": [[1,1]],
-        "test/belonging": [[1,1]],
         "type/boolean": [[1,1]],
         "type/non_sequence/dictionary": [[1,1]]
       }
@@ -4134,11 +4134,11 @@
         "appli/function/builtin/locals": [[1,1]],
         "appli/function/builtin/print": [[2,2]],
         "appli/function/without_arguments": [[1,1]],
+        "condition/belonging": [[1,1]],
         "flow/conditional/no_else": [[1,2]],
         "io/standard/print": [[2,2]],
         "metadata/program": [[1,2]],
         "metadata/sloc/2": [[1,2]],
-        "test/belonging": [[1,1]],
         "type/boolean": [[1,1]],
         "type/sequence/string/literal": [[1,1]]
       }
@@ -4193,9 +4193,9 @@
       },
       "taxa": {
         "appli/method/strip": [[1,1]],
+        "condition/equality": [[1,1]],
         "metadata/program": [[1,1]],
         "metadata/sloc/1": [[1,1]],
-        "test/equality": [[1,1]],
         "type/boolean": [[1,1]],
         "type/sequence/string": [[1,1]],
         "type/sequence/string/literal/empty": [[1,1]],
@@ -4325,9 +4325,9 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
+        "condition/equality": [[1,1]],
         "metadata/program": [[1,1]],
         "metadata/sloc/1": [[1,1]],
-        "test/equality": [[1,1]],
         "type/boolean": [[1,1]],
         "var/assignment/single": [[1,1]]
       }
@@ -4351,10 +4351,10 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
+        "condition/inequality": [[2,2]],
         "library/standard/datetime": [[1,1]],
         "metadata/program": [[1,2]],
         "metadata/sloc/2": [[1,2]],
-        "test/inequality": [[2,2]],
         "type/boolean": [[2,2]],
         "var/assignment/single": [[2,2]]
       }
@@ -4556,6 +4556,7 @@
         "appli/function/without_arguments": [[2,2]],
         "appli/method/add": [[6,6]],
         "appli/method/append": [[7,7]],
+        "condition/belonging/not": [[5,5]],
         "flow/conditional/no_else": [[5,7]],
         "flow/loop/exit/late": [[4,7]],
         "flow/loop/for/elements": [[4,7]],
@@ -4564,7 +4565,6 @@
         "metadata/sloc/8": [[1,8]],
         "pattern/elements/accumulate/in_list/filtered": [[4,7]],
         "pattern/elements/accumulate/in_set/filtered": [[4,7]],
-        "test/belonging/not": [[5,5]],
         "type/boolean": [[5,5]],
         "type/non_sequence/set": [[2,2],[6,6]],
         "type/sequence/list": [[7,7]],
@@ -4819,14 +4819,14 @@
         "abstr/return/something": [[4,4]],
         "appli/function/builtin/len": [[4,4]],
         "appli/method/bisect_left": [[3,3]],
+        "condition/equality": [[4,4]],
+        "condition/equality/not": [[4,4]],
         "library/standard/bisect": [[1,1]],
         "metadata/program": [[1,4]],
         "metadata/sloc/4": [[1,4]],
         "operator/boolean/and": [[4,4]],
         "operator/ternary": [[4,4]],
         "subscript/index": [[4,4]],
-        "test/equality": [[4,4]],
-        "test/equality/not": [[4,4]],
         "type/boolean": [[4,4],[4,4]],
         "type/number/integer/literal": [[4,4]],
         "var/assignment/single": [[3,3]]
@@ -5103,12 +5103,12 @@
         "appli/method/add": [[8,8]],
         "appli/method/extend": [[9,9]],
         "appli/method/popleft": [[6,6]],
+        "condition/belonging/not": [[9,9]],
         "flow/loop/exit/late": [[5,9]],
         "flow/loop/while": [[5,9]],
         "library/standard/collections/deque": [[1,1]],
         "metadata/program": [[1,9]],
         "metadata/sloc/9": [[1,9]],
-        "test/belonging/not": [[9,9]],
         "type/boolean": [[9,9]],
         "type/non_sequence/set": [[3,3],[8,8]],
         "type/sequence/list": [[9,9]],
@@ -5186,11 +5186,11 @@
         "appli/method/add": [[7,7]],
         "appli/method/extend": [[8,8]],
         "appli/method/pop": [[5,5]],
+        "condition/belonging/not": [[8,8]],
         "flow/loop/exit/late": [[4,8]],
         "flow/loop/while": [[4,8]],
         "metadata/program": [[1,8]],
         "metadata/sloc/8": [[1,8]],
-        "test/belonging/not": [[8,8]],
         "type/boolean": [[8,8]],
         "type/non_sequence/set": [[2,2],[7,7]],
         "type/sequence/list": [[8,8]],
@@ -5302,9 +5302,9 @@
       },
       "taxa": {
         "appli/method/lower": [[1,1],[1,1]],
+        "condition/belonging": [[1,1]],
         "metadata/program": [[1,1]],
         "metadata/sloc/1": [[1,1]],
-        "test/belonging": [[1,1]],
         "type/boolean": [[1,1]],
         "type/sequence/string": [[1,1],[1,1]],
         "var/assignment/single": [[1,1]]
@@ -5378,9 +5378,9 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
+        "condition/equality/not": [[1,1]],
         "metadata/program": [[1,1]],
         "metadata/sloc/1": [[1,1]],
-        "test/equality/not": [[1,1]],
         "type/boolean": [[1,1]],
         "var/assignment/single": [[1,1]]
       }
@@ -6366,13 +6366,13 @@
         "appli/function/f32": [[5,5]],
         "appli/function/f64": [[3,3]],
         "appli/function/without_arguments": [[3,3],[5,5]],
+        "condition/inequality": [[2,2]],
         "flow/conditional": [[2,5]],
         "flow/conditional/else": [[5,5]],
         "library/standard/sys": [[1,1]],
         "metadata/program": [[1,5]],
         "metadata/sloc/5": [[1,5]],
         "operator/arithmetic/power": [[2,2]],
-        "test/inequality": [[2,2]],
         "type/boolean": [[2,2]],
         "type/number/integer/literal": [[2,2],[2,2]]
       }
@@ -6453,12 +6453,12 @@
         "appli/function/bat": [[3,3]],
         "appli/function/fox": [[5,5]],
         "appli/function/without_arguments": [[3,3],[5,5]],
+        "condition/belonging": [[2,2],[4,4]],
         "flow/conditional/no_else": [[2,3],[4,5]],
         "library/standard/sys": [[1,1]],
         "metadata/program": [[1,5]],
         "metadata/sloc/5": [[1,5]],
         "subscript/slice/start": [[2,2],[4,4]],
-        "test/belonging": [[2,2],[4,4]],
         "type/boolean": [[2,2],[4,4]],
         "type/number/integer/literal": [[2,2],[4,4]],
         "type/sequence/string/literal": [[2,2],[4,4]]
@@ -7084,11 +7084,11 @@
       "taxa": {
         "appli/method/listdir": [[3,3]],
         "appli/method/splitext": [[3,3]],
+        "condition/belonging": [[3,3]],
         "library/standard/os": [[1,1]],
         "metadata/program": [[1,3]],
         "metadata/sloc/3": [[1,3]],
         "subscript/index": [[3,3]],
-        "test/belonging": [[3,3]],
         "type/boolean": [[3,3]],
         "type/number/integer/literal": [[3,3]],
         "type/sequence/list/literal": [[2,2]],
@@ -7223,11 +7223,11 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
+        "condition/inequality": [[1,1],[1,1],[1,1],[1,1]],
+        "condition/inequality/chained/2": [[1,1],[1,1]],
         "metadata/program": [[1,1]],
         "metadata/sloc/1": [[1,1]],
         "operator/boolean/and": [[1,1]],
-        "test/inequality": [[1,1],[1,1],[1,1],[1,1]],
-        "test/inequality/chained/2": [[1,1],[1,1]],
         "type/boolean": [[1,1],[1,1]],
         "var/assignment/single": [[1,1]]
       }
@@ -7631,6 +7631,7 @@
         "appli/function/builtin/range": [[4,4]],
         "appli/method/find_set": [[9,9],[12,12],[12,12],[15,15],[15,15]],
         "appli/method/is_same_set": [[14,14]],
+        "condition/equality": [[6,6],[12,12]],
         "flow/conditional": [[6,10]],
         "flow/conditional/else": [[9,10]],
         "flow/conditional/no_else": [[14,15]],
@@ -7639,7 +7640,6 @@
         "operator/boolean/not": [[14,14]],
         "operator/list/replication": [[3,3]],
         "subscript/index": [[6,6],[9,9],[9,9],[10,10]],
-        "test/equality": [[6,6],[12,12]],
         "type/boolean": [[6,6],[12,12]],
         "type/number/integer/literal/zero": [[3,3]],
         "type/sequence/list/literal": [[3,3]],
@@ -7767,10 +7767,10 @@
         "appli/function/builtin/any": [[1,1]],
         "appli/function/f": [[2,2]],
         "appli/function/without_arguments": [[2,2]],
+        "condition/inequality": [[1,1]],
         "flow/conditional/no_else": [[1,2]],
         "metadata/program": [[1,2]],
         "metadata/sloc/2": [[1,2]],
-        "test/inequality": [[1,1]],
         "type/boolean": [[1,1]]
       }
     },
@@ -15649,6 +15649,49 @@
     "appli/method/zeros": [
       "027.0193-create-a-3-dimensional-array.py"
     ],
+    "condition/belonging": [
+      "012.0181-check-if-list-contains-a-value.py",
+      "020.0573-return-two-values.py",
+      "039.0571-check-if-string-contains-a-word.py",
+      "051.0230-check-if-map-contains-key.py",
+      "052.0666-check-if-map-contains-value.py",
+      "108.1291-determine-if-variable-name-is-defined.py",
+      "133.2160-case-insensitive-string-contains.py",
+      "162.2164-execute-procedures-depending-on-options.py",
+      "177.2709-find-files-with-a-given-list-of-filename-extensions.py"
+    ],
+    "condition/belonging/not": [
+      "119.3263-deduplicate-list.py",
+      "129.2282-breadth-first-traversing-in-a-graph.py",
+      "130.2283-depth-first-traversing-in-a-graph.py"
+    ],
+    "condition/equality": [
+      "031.0188-recursive-factorial-simple.py",
+      "042.1264-continue-outer-loop.py",
+      "042.3168-continue-outer-loop.py",
+      "043.0676-break-outer-loop.py",
+      "043.2733-break-outer-loop.py",
+      "110.1455-check-if-string-is-blank.py",
+      "114.2273-test-deep-equality.py",
+      "124.2152-binary-search-for-a-value-in-sorted-array.py",
+      "187.3261-disjoint-set.py"
+    ],
+    "condition/equality/not": [
+      "124.2152-binary-search-for-a-value-in-sorted-array.py",
+      "136.2141-remove-all-occurrences-of-a-value-from-a-list.py"
+    ],
+    "condition/identity": [
+      "016.1530-depth-first-traversing-of-a-binary-tree.py"
+    ],
+    "condition/inequality": [
+      "115.2138-compare-dates.py",
+      "160.2165-detect-if-32-bit-or-64-bit-architecture.py",
+      "178.2615-check-if-point-is-inside-rectangle.py",
+      "191.3403-check-if-any-value-in-a-list-is-larger-than-a-limit.py"
+    ],
+    "condition/inequality/chained/2": [
+      "178.2615-check-if-point-is-inside-rectangle.py"
+    ],
     "flow/assertion": [
       "123.2146-assert-condition.py"
     ],
@@ -16615,49 +16658,6 @@
       "151.2166-remove-string-trailing-path-separator.py",
       "154.2155-halfway-between-two-hex-color-codes.py",
       "154.2292-halfway-between-two-hex-color-codes.py"
-    ],
-    "test/belonging": [
-      "012.0181-check-if-list-contains-a-value.py",
-      "020.0573-return-two-values.py",
-      "039.0571-check-if-string-contains-a-word.py",
-      "051.0230-check-if-map-contains-key.py",
-      "052.0666-check-if-map-contains-value.py",
-      "108.1291-determine-if-variable-name-is-defined.py",
-      "133.2160-case-insensitive-string-contains.py",
-      "162.2164-execute-procedures-depending-on-options.py",
-      "177.2709-find-files-with-a-given-list-of-filename-extensions.py"
-    ],
-    "test/belonging/not": [
-      "119.3263-deduplicate-list.py",
-      "129.2282-breadth-first-traversing-in-a-graph.py",
-      "130.2283-depth-first-traversing-in-a-graph.py"
-    ],
-    "test/equality": [
-      "031.0188-recursive-factorial-simple.py",
-      "042.1264-continue-outer-loop.py",
-      "042.3168-continue-outer-loop.py",
-      "043.0676-break-outer-loop.py",
-      "043.2733-break-outer-loop.py",
-      "110.1455-check-if-string-is-blank.py",
-      "114.2273-test-deep-equality.py",
-      "124.2152-binary-search-for-a-value-in-sorted-array.py",
-      "187.3261-disjoint-set.py"
-    ],
-    "test/equality/not": [
-      "124.2152-binary-search-for-a-value-in-sorted-array.py",
-      "136.2141-remove-all-occurrences-of-a-value-from-a-list.py"
-    ],
-    "test/identity": [
-      "016.1530-depth-first-traversing-of-a-binary-tree.py"
-    ],
-    "test/inequality": [
-      "115.2138-compare-dates.py",
-      "160.2165-detect-if-32-bit-or-64-bit-architecture.py",
-      "178.2615-check-if-point-is-inside-rectangle.py",
-      "191.3403-check-if-any-value-in-a-list-is-larger-than-a-limit.py"
-    ],
-    "test/inequality/chained/2": [
-      "178.2615-check-if-point-is-inside-rectangle.py"
     ],
     "type/boolean": [
       "012.0181-check-if-list-contains-a-value.py",

@@ -566,7 +566,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.75 | `test/belonging` | 1 |
+| 0.75 | `condition/belonging` | 1 |
 | 0.75 | `type/boolean` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
@@ -666,9 +666,9 @@
 | 0.875 | `abstr/return/nothing` | 3 |
 | 0.75 | `appli/function` | 4, 6 |
 | 0.875 | `appli/function/f` | 5 |
+| 0.75 | `condition/identity` | 2 |
 | 0.875 | `flow/conditional/guard` | 2-3 |
 | 0.875 | `flow/conditional/no_else` | 2-3 |
-| 0.75 | `test/identity` | 2 |
 | 0.75 | `type/boolean` | 2 |
 | 0.875 | `type/null/literal` | 2 |
 | 0 | `metadata/program` | 1-6 |
@@ -786,11 +786,11 @@
 | 0.875 | `abstr/return/something` | 4 |
 | 0.9375 | `appli/function/builtin/enumerate` | 2 |
 | 0.875 | `appli/method/index` | 4 |
+| 0.75 | `condition/belonging` | 3 |
 | 0.875 | `flow/conditional/no_else` | 3-4 |
 | 0.96875 | `flow/loop/exit/early/return` | 2-4 |
 | 0.875 | `flow/loop/for` | 2-4 |
 | 0.9375 | `flow/loop/for/elements_and_indexes` | 2-4 |
-| 0.75 | `test/belonging` | 3 |
 | 0.75 | `type/boolean` | 3 |
 | 0.75 | `type/sequence` | 4 |
 | 0.9375 | `type/sequence/tuple/literal` | 2, 4 |
@@ -1013,11 +1013,11 @@
 | 0.875 | `abstr/recursive/body` | 1-5 |
 | 0.875 | `abstr/return/something` | 5 |
 | 0.75 | `appli/function` | 5 |
+| 0.75 | `condition/equality` | 2 |
 | 0.75 | `flow/conditional` | 2-5 |
 | 0.875 | `flow/conditional/else` | 5 |
 | 0.875 | `operator/arithmetic/multiplication` | 5 |
 | 0.875 | `operator/arithmetic/substraction` | 5 |
-| 0.75 | `test/equality` | 2 |
 | 0.75 | `type/boolean` | 2 |
 | 0.9375 | `type/number/integer/literal` | 3, 5 |
 | 0.96875 | `type/number/integer/literal/zero` | 2 |
@@ -1186,7 +1186,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.75 | `test/belonging` | 1 |
+| 0.75 | `condition/belonging` | 1 |
 | 0.75 | `type/boolean` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
@@ -1295,6 +1295,7 @@
 |----|----|----|
 | 0.9375 | `appli/exception/builtin/Exception` | 5 |
 | 0.9375 | `appli/function/builtin/print` | 6 |
+| 0.75 | `condition/equality` | 4 |
 | 0.875 | `flow/conditional/no_else` | 4-5 |
 | 0.9375 | `flow/exception/catch/Exception` | 2-8 |
 | 0.9375 | `flow/exception/raise/Exception` | 2-8 |
@@ -1303,7 +1304,6 @@
 | 0.9375 | `flow/loop/for/elements` | 1-8, 3-5 |
 | 0.96875 | `flow/loop/for/nested/1` | 3-5 |
 | 0.875 | `io/standard/print` | 6 |
-| 0.75 | `test/equality` | 4 |
 | 0.75 | `type/boolean` | 4 |
 | 0 | `metadata/program` | 1-8 |
 | 0 | `metadata/sloc/8` | 1-8 |
@@ -1323,13 +1323,13 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.9375 | `appli/function/builtin/print` | 5 |
+| 0.75 | `condition/equality` | 3 |
 | 0.875 | `flow/conditional/no_else` | 3-4 |
 | 0.875 | `flow/loop/continue` | 4 |
 | 0.9375 | `flow/loop/exit/late` | 1-5, 2-5 |
 | 0.9375 | `flow/loop/for/elements` | 1-5, 2-5 |
 | 0.96875 | `flow/loop/for/nested/1` | 2-5 |
 | 0.875 | `io/standard/print` | 5 |
-| 0.75 | `test/equality` | 3 |
 | 0.75 | `type/boolean` | 3 |
 | 0 | `metadata/program` | 1-5 |
 | 0 | `metadata/sloc/5` | 1-5 |
@@ -1354,6 +1354,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
+| 0.75 | `condition/equality` | 7 |
 | 0.875 | `flow/conditional/no_else` | 7-9 |
 | 0.9375 | `flow/exception/catch/` | 3-11 |
 | 0.9375 | `flow/exception/raise/` | 3-11 |
@@ -1363,7 +1364,6 @@
 | 0.75 | `flow/null_operation` | 2, 11 |
 | 0.75 | `subscript/index` | 6, 7 |
 | 0.9375 | `subscript/index/shape/2` | 7 |
-| 0.75 | `test/equality` | 7 |
 | 0.75 | `type/boolean` | 7 |
 | 0.875 | `type/null/literal` | 4 |
 | 0.9375 | `type/sequence/tuple/literal` | 8 |
@@ -1395,13 +1395,13 @@
 | 0.75 | `appli/function` | 7 |
 | 0.9375 | `appli/function/builtin/enumerate` | 2, 3 |
 | 0.9375 | `appli/function/builtin/print` | 7 |
+| 0.75 | `condition/equality` | 4 |
 | 0.875 | `flow/conditional/no_else` | 4-5 |
 | 0.96875 | `flow/loop/exit/early/return` | 2-5, 3-5 |
 | 0.875 | `flow/loop/for` | 2-5 |
 | 0.9375 | `flow/loop/for/elements_and_indexes` | 2-5, 3-5 |
 | 0.96875 | `flow/loop/for/nested/1` | 3-5 |
 | 0.875 | `io/standard/print` | 7 |
-| 0.75 | `test/equality` | 4 |
 | 0.75 | `type/boolean` | 4 |
 | 0.875 | `type/null/literal` | 6 |
 | 0.9375 | `type/number/integer/literal` | 7, 7, 7, 7, 7, 7, 7, 7, 7, 7 |
@@ -1535,7 +1535,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.75 | `test/belonging` | 1 |
+| 0.75 | `condition/belonging` | 1 |
 | 0.75 | `type/boolean` | 1 |
 | 0 | `metadata/program` | 1 |
 | 0 | `metadata/sloc/1` | 1 |
@@ -1551,7 +1551,7 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.875 | `appli/method/values` | 1 |
-| 0.75 | `test/belonging` | 1 |
+| 0.75 | `condition/belonging` | 1 |
 | 0.75 | `type/boolean` | 1 |
 | 0.875 | `type/non_sequence/dictionary` | 1 |
 | 0 | `metadata/program` | 1 |
@@ -2641,9 +2641,9 @@
 | 0.9375 | `appli/function/builtin/locals` | 1 |
 | 0.9375 | `appli/function/builtin/print` | 2 |
 | 0.875 | `appli/function/without_arguments` | 1 |
+| 0.75 | `condition/belonging` | 1 |
 | 0.875 | `flow/conditional/no_else` | 1-2 |
 | 0.875 | `io/standard/print` | 2 |
-| 0.75 | `test/belonging` | 1 |
 | 0.75 | `type/boolean` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
 | 0 | `metadata/program` | 1-2 |
@@ -2677,7 +2677,7 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.875 | `appli/method/strip` | 1 |
-| 0.75 | `test/equality` | 1 |
+| 0.75 | `condition/equality` | 1 |
 | 0.75 | `type/boolean` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
 | 0.96875 | `type/sequence/string/literal/empty` | 1 |
@@ -2756,7 +2756,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.75 | `test/equality` | 1 |
+| 0.75 | `condition/equality` | 1 |
 | 0.75 | `type/boolean` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
@@ -2773,8 +2773,8 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
+| 0.75 | `condition/inequality` | 2 |
 | 0.875 | `library/standard/datetime` | 1 |
-| 0.75 | `test/inequality` | 2 |
 | 0.75 | `type/boolean` | 2 |
 | 0.875 | `var/assignment/single` | 2 |
 | 0 | `metadata/program` | 1-2 |
@@ -2884,13 +2884,13 @@
 | 0.875 | `appli/function/without_arguments` | 2 |
 | 0.875 | `appli/method/add` | 6 |
 | 0.875 | `appli/method/append` | 7 |
+| 0.875 | `condition/belonging/not` | 5 |
 | 0.875 | `flow/conditional/no_else` | 5-7 |
 | 0.9375 | `flow/loop/exit/late` | 4-7 |
 | 0.9375 | `flow/loop/for/elements` | 4-7 |
 | 0.875 | `io/standard/print` | 8 |
 | 0.96875 | `pattern/elements/accumulate/in_list/filtered` | 4-7 |
 | 0.96875 | `pattern/elements/accumulate/in_set/filtered` | 4-7 |
-| 0.875 | `test/belonging/not` | 5 |
 | 0.75 | `type/boolean` | 5 |
 | 0.875 | `type/non_sequence/set` | 2, 6 |
 | 0.875 | `type/sequence/list` | 7 |
@@ -3027,12 +3027,12 @@
 | 0.875 | `abstr/return/something` | 4 |
 | 0.9375 | `appli/function/builtin/len` | 4 |
 | 0.875 | `appli/method/bisect_left` | 3 |
+| 0.75 | `condition/equality` | 4 |
+| 0.875 | `condition/equality/not` | 4 |
 | 0.875 | `library/standard/bisect` | 1 |
 | 0.875 | `operator/boolean/and` | 4 |
 | 0.75 | `operator/ternary` | 4 |
 | 0.75 | `subscript/index` | 4 |
-| 0.75 | `test/equality` | 4 |
-| 0.875 | `test/equality/not` | 4 |
 | 0.75 | `type/boolean` | 4, 4 |
 | 0.9375 | `type/number/integer/literal` | 4 |
 | 0.875 | `var/assignment/single` | 3 |
@@ -3170,10 +3170,10 @@
 | 0.875 | `appli/method/add` | 8 |
 | 0.875 | `appli/method/extend` | 9 |
 | 0.875 | `appli/method/popleft` | 6 |
+| 0.875 | `condition/belonging/not` | 9 |
 | 0.9375 | `flow/loop/exit/late` | 5-9 |
 | 0.875 | `flow/loop/while` | 5-9 |
 | 0.9375 | `library/standard/collections/deque` | 1 |
-| 0.875 | `test/belonging/not` | 9 |
 | 0.75 | `type/boolean` | 9 |
 | 0.875 | `type/non_sequence/set` | 3, 8 |
 | 0.875 | `type/sequence/list` | 9 |
@@ -3208,9 +3208,9 @@
 | 0.875 | `appli/method/add` | 7 |
 | 0.875 | `appli/method/extend` | 8 |
 | 0.875 | `appli/method/pop` | 5 |
+| 0.875 | `condition/belonging/not` | 8 |
 | 0.9375 | `flow/loop/exit/late` | 4-8 |
 | 0.875 | `flow/loop/while` | 4-8 |
-| 0.875 | `test/belonging/not` | 8 |
 | 0.75 | `type/boolean` | 8 |
 | 0.875 | `type/non_sequence/set` | 2, 7 |
 | 0.875 | `type/sequence/list` | 8 |
@@ -3287,7 +3287,7 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.875 | `appli/method/lower` | 1, 1 |
-| 0.75 | `test/belonging` | 1 |
+| 0.75 | `condition/belonging` | 1 |
 | 0.75 | `type/boolean` | 1 |
 | 0.875 | `type/sequence/string` | 1, 1 |
 | 0.875 | `var/assignment/single` | 1 |
@@ -3333,7 +3333,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.875 | `test/equality/not` | 1 |
+| 0.875 | `condition/equality/not` | 1 |
 | 0.75 | `type/boolean` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
@@ -3875,11 +3875,11 @@
 | 0.875 | `appli/function/f32` | 5 |
 | 0.875 | `appli/function/f64` | 3 |
 | 0.875 | `appli/function/without_arguments` | 3, 5 |
+| 0.75 | `condition/inequality` | 2 |
 | 0.75 | `flow/conditional` | 2-5 |
 | 0.875 | `flow/conditional/else` | 5 |
 | 0.875 | `library/standard/sys` | 1 |
 | 0.875 | `operator/arithmetic/power` | 2 |
-| 0.75 | `test/inequality` | 2 |
 | 0.75 | `type/boolean` | 2 |
 | 0.9375 | `type/number/integer/literal` | 2, 2 |
 | 0 | `metadata/program` | 1-5 |
@@ -3917,10 +3917,10 @@
 | 0.875 | `appli/function/bat` | 3 |
 | 0.875 | `appli/function/fox` | 5 |
 | 0.875 | `appli/function/without_arguments` | 3, 5 |
+| 0.75 | `condition/belonging` | 2, 4 |
 | 0.875 | `flow/conditional/no_else` | 2-3, 4-5 |
 | 0.875 | `library/standard/sys` | 1 |
 | 0.875 | `subscript/slice/start` | 2, 4 |
-| 0.75 | `test/belonging` | 2, 4 |
 | 0.75 | `type/boolean` | 2, 4 |
 | 0.9375 | `type/number/integer/literal` | 2, 4 |
 | 0.9375 | `type/sequence/string/literal` | 2, 4 |
@@ -4278,9 +4278,9 @@
 |----|----|----|
 | 0.875 | `appli/method/listdir` | 3 |
 | 0.875 | `appli/method/splitext` | 3 |
+| 0.75 | `condition/belonging` | 3 |
 | 0.875 | `library/standard/os` | 1 |
 | 0.75 | `subscript/index` | 3 |
-| 0.75 | `test/belonging` | 3 |
 | 0.75 | `type/boolean` | 3 |
 | 0.9375 | `type/number/integer/literal` | 3 |
 | 0.9375 | `type/sequence/list/literal` | 2 |
@@ -4354,9 +4354,9 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
+| 0.75 | `condition/inequality` | 1, 1, 1, 1 |
+| 0.9375 | `condition/inequality/chained/2` | 1, 1 |
 | 0.875 | `operator/boolean/and` | 1 |
-| 0.75 | `test/inequality` | 1, 1, 1, 1 |
-| 0.9375 | `test/inequality/chained/2` | 1, 1 |
 | 0.75 | `type/boolean` | 1, 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `metadata/program` | 1 |
@@ -4558,13 +4558,13 @@
 | 0.9375 | `appli/function/builtin/range` | 4 |
 | 0.875 | `appli/method/find_set` | 9, 12, 12, 15, 15 |
 | 0.875 | `appli/method/is_same_set` | 14 |
+| 0.75 | `condition/equality` | 6, 12 |
 | 0.75 | `flow/conditional` | 6-10 |
 | 0.875 | `flow/conditional/else` | 9-10 |
 | 0.875 | `flow/conditional/no_else` | 14-15 |
 | 0.875 | `operator/boolean/not` | 14 |
 | 0.875 | `operator/list/replication` | 3 |
 | 0.75 | `subscript/index` | 6, 9, 9, 10 |
-| 0.75 | `test/equality` | 6, 12 |
 | 0.75 | `type/boolean` | 6, 12 |
 | 0.96875 | `type/number/integer/literal/zero` | 3 |
 | 0.9375 | `type/sequence/list/literal` | 3 |
@@ -4638,8 +4638,8 @@
 | 0.9375 | `appli/function/builtin/any` | 1 |
 | 0.875 | `appli/function/f` | 2 |
 | 0.875 | `appli/function/without_arguments` | 2 |
+| 0.75 | `condition/inequality` | 1 |
 | 0.875 | `flow/conditional/no_else` | 1-2 |
-| 0.75 | `test/inequality` | 1 |
 | 0.75 | `type/boolean` | 1 |
 | 0 | `metadata/program` | 1-2 |
 | 0 | `metadata/sloc/2` | 1-2 |

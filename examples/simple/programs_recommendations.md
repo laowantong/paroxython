@@ -93,10 +93,10 @@
 | 0.25 | `appli/composition` | 3 |
 | 0 | `appli/function/builtin/print` | 3 |
 | 0.375 | `appli/method/format` | 3 |
+| 0.75 | `condition/inequality` | 2 |
 | 0 | `flow/loop/exit/late` | 2-4 |
 | 0 | `flow/loop/while` | 2-4 |
 | 0.375 | `operator/arithmetic/addition` | 4 |
-| 0.75 | `test/inequality` | 2 |
 | 0.25 | `type/boolean` | 2 |
 | 0.4375 | `type/number/integer/literal` | 1, 1, 2 |
 | 0 | `type/sequence/string` | 3 |
@@ -134,13 +134,13 @@
 | 0 | `appli/function/builtin/print` | 11 |
 | 0 | `appli/function/without_arguments` | 8 |
 | 0.375 | `appli/method/count` | 3 |
+| 0.75 | `condition/inequality` | 9 |
 | 0 | `flow/conditional/no_else` | 9-10 |
 | 0 | `flow/loop/exit/early/break` | 8-11 |
 | 0 | `flow/loop/exit/late` | 4-7 |
 | 0 | `flow/loop/for` | 8-11 |
 | 0 | `flow/loop/while/infinite` | 4-7 |
 | 0.875 | `library/standard/itertools` | 1 |
-| 0.75 | `test/inequality` | 9 |
 | 0.25 | `type/boolean` | 9 |
 | 0.4375 | `type/boolean/literal/True` | 4 |
 | 0.4375 | `type/number/integer/literal` | 3, 9 |
@@ -183,12 +183,12 @@
 | 0 | `appli/function/localtime` | 10 |
 | 0 | `appli/function/without_arguments` | 10 |
 | 0.375 | `appli/method/keys` | 12 |
+| 0.75 | `condition/inequality` | 13 |
 | 0 | `flow/conditional/no_else` | 13-15 |
 | 0 | `flow/loop/exit/early/break/else` | 12-17 |
 | 0 | `flow/loop/for` | 12-17 |
 | 0.9375 | `library/standard/time/localtime` | 1 |
 | 0.75 | `subscript/index` | 14 |
-| 0.75 | `test/inequality` | 13 |
 | 0.25 | `type/boolean` | 13 |
 | 0.375 | `type/non_sequence/dictionary` | 12 |
 | 0.4375 | `type/non_sequence/dictionary/literal` | 2 |
@@ -226,13 +226,13 @@
 | 0.375 | `appli/method/format` | 14 |
 | 0.375 | `appli/method/fromstring` | 9 |
 | 0.375 | `appli/method/getiterator` | 11 |
+| 0.875 | `condition/belonging/not` | 13 |
+| 0.75 | `condition/equality` | 13 |
 | 0 | `flow/conditional/no_else` | 13-14 |
 | 0 | `flow/loop/exit/late` | 11-14 |
 | 0 | `flow/loop/for` | 11-14 |
 | 0.875 | `library/standard/xml.etree.ElementTree` | 8 |
 | 0.375 | `operator/boolean/and` | 13 |
-| 0.875 | `test/belonging/not` | 13 |
-| 0.75 | `test/equality` | 13 |
 | 0.25 | `type/boolean` | 13, 13 |
 | 0.4375 | `type/non_sequence/set/literal` | 10 |
 | 0 | `type/sequence/string` | 14 |
@@ -275,7 +275,7 @@
 | 0 | `appli/function/builtin/print` | 12 |
 | 0.375 | `appli/method/overdrawn` | 12 |
 | 0.375 | `appli/method/withdraw` | 11 |
-| 0.75 | `test/inequality` | 9 |
+| 0.75 | `condition/inequality` | 9 |
 | 0.25 | `type/boolean` | 9 |
 | 0.4375 | `type/number/integer/literal` | 10, 11 |
 | 0.46875 | `type/number/integer/literal/zero` | 2, 9 |
@@ -308,6 +308,8 @@
 | 0 | `appli/function/builtin/casting/int` | 5, 7, 7 |
 | 0 | `appli/function/builtin/len` | 3 |
 | 0 | `appli/function/builtin/sorted` | 2 |
+| 0.875 | `condition/divisibility/parity` | 4 |
+| 0.75 | `condition/equality` | 4 |
 | 0 | `flow/conditional` | 4-7 |
 | 0 | `flow/conditional/else` | 7 |
 | 0.375 | `operator/arithmetic/addition` | 7 |
@@ -315,8 +317,6 @@
 | 0.375 | `operator/arithmetic/modulo` | 4 |
 | 0.375 | `operator/arithmetic/substraction` | 5, 7 |
 | 0.75 | `subscript/index` | 5, 7, 7 |
-| 0.875 | `test/divisibility/parity` | 4 |
-| 0.75 | `test/equality` | 4 |
 | 0.25 | `type/boolean` | 4 |
 | 0.375 | `type/number/integer` | 5, 7, 7 |
 | 0.4375 | `type/number/integer/literal` | 4, 4, 5, 5, 7, 7, 7, 7 |
@@ -357,6 +357,8 @@
 | 0 | `appli/function/builtin/print` | 5, 10, 12, 16, 18 |
 | 0.375 | `appli/method/format` | 5, 16, 18 |
 | 0.375 | `appli/method/randint` | 4 |
+| 0.75 | `condition/equality` | 13, 15 |
+| 0.75 | `condition/inequality` | 6, 9, 11 |
 | 0 | `flow/conditional` | 15-18 |
 | 0 | `flow/conditional/else` | 18 |
 | 0 | `flow/conditional/no_else` | 9-10, 11-12, 13-14 |
@@ -364,8 +366,6 @@
 | 0 | `flow/loop/while` | 6-14 |
 | 0.875 | `library/standard/random` | 1 |
 | 0.9375 | `pattern/states/accumulate/count` | 6-14 |
-| 0.75 | `test/equality` | 13, 15 |
-| 0.75 | `test/inequality` | 6, 9, 11 |
 | 0.25 | `type/boolean` | 6, 9, 11, 13, 15 |
 | 0.375 | `type/number/integer` | 7 |
 | 0.4375 | `type/number/integer/literal` | 4, 4, 6, 8 |

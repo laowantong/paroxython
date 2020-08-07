@@ -1,9 +1,9 @@
 Taxa (replacement patterns)	Labels (search patterns)
-appli/function/builtin/casting/set	literal:Set
 appli/function/builtin/casting/\1	free_call:(list|dict)
+appli/function/builtin/casting/set	literal:Set
+condition/inequality	comparison_operator:(Lt|LtE|Gt|GtE)
 flow/conditional	if
 flow/conditional/else	if_else
-test/inequality	comparison_operator:(Lt|LtE|Gt|GtE)
-type/sequence/list	free_call:list
 type/non_sequence/set	literal:Set
 type/non_sequence/set	member_call:difference_update
+type/sequence/list	free_call:list

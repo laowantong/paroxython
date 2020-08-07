@@ -166,12 +166,12 @@ This should print `"paroxython 0.4.4 loaded."`. Run it on a cell of Python code 
 | `abstr/argument/arg` | 2 |
 | `abstr/function` | 2-8 |
 | `appli/method/append` | 6 |
+| `condition/inequality` | 5 |
 | `flow/loop/exit/late` | 5-7 |
 | `flow/loop/while` | 5-7 |
 | `metadata/program` | 2-8 |
 | `metadata/sloc/8` | 2-8 |
 | `operator/arithmetic/addition` | 7 |
-| `test/inequality` | 5 |
 | `type/boolean` | 5 |
 | `type/number/integer/literal` | 4 |
 | `type/number/integer/literal/zero` | 4 |

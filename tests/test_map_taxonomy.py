@@ -27,12 +27,12 @@ def test_initial_values():
     }
     print(t.compiled_labels)
     assert t.compiled_labels[0][1] == "appli/function/builtin/casting/\\1"
-    assert t.compiled_labels[1][1] == "test/inequality"
+    assert t.compiled_labels[1][1] == "condition/inequality"
 
 
 def test_get_taxon_name_list():
     assert t.get_taxon_name_list("if") == ["flow/conditional"]
-    assert t.get_taxon_name_list("comparison_operator:Gt") == ["test/inequality"]
+    assert t.get_taxon_name_list("comparison_operator:Gt") == ["condition/inequality"]
     assert t.get_taxon_name_list("label_with_no_corresponding_taxon") == []
     assert t.get_taxon_name_list("free_call:list") == [
         "type/sequence/list",
@@ -46,8 +46,8 @@ def test_to_taxa():
         Label("comparison_operator:Lt", [S(1, 1), S(3, 3), S(2, 2)]),
     ]
     assert t.to_taxa(labels) == [
+        ("condition/inequality", c({S(2, 2): 1, S(3, 3): 1, S(1, 1): 1})),
         ("flow/conditional", c({S(1, 1): 2, S(2, 5): 1})),
-        ("test/inequality", c({S(2, 2): 1, S(3, 3): 1, S(1, 1): 1})),
     ]
 
 
@@ -56,14 +56,14 @@ def test_deduplicated_taxa():
     taxa = [
         ("flow/conditional", c({S(1, 1): 2, S(2, 5): 1})),
         ("flow/conditional/else", c({S(1, 1): 1, S(2, 5): 1})),
-        ("test/inequality", c({S(2, 2): 1, S(3, 3): 1, S(1, 1): 1})),
+        ("condition/inequality", c({S(2, 2): 1, S(3, 3): 1, S(1, 1): 1})),
     ]
     result = deduplicated_taxa(taxa)
     print(result)
     assert result == [
         ("flow/conditional", c({S(1, 1): 1})),
         ("flow/conditional/else", c({S(1, 1): 1, S(2, 5): 1})),
-        ("test/inequality", c({S(2, 2): 1, S(3, 3): 1, S(1, 1): 1})),
+        ("condition/inequality", c({S(2, 2): 1, S(3, 3): 1, S(1, 1): 1})),
     ]
 
 
@@ -130,9 +130,9 @@ def test_call():
     print(result)
     assert result == {
         "algo1": [
+            ("condition/inequality", c({S(2, 2): 1, S(3, 3): 1, S(1, 1): 1})),
             ("flow/conditional", c({S(1, 1): 1})),
             ("flow/conditional/else", c({S(1, 1): 1, S(2, 5): 1})),
-            ("test/inequality", c({S(2, 2): 1, S(3, 3): 1, S(1, 1): 1})),
         ],
         "algo2": [
             ("appli/function/builtin/casting/set", c({S(1, 1): 1, S(2, 5): 1})),

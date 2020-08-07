@@ -453,8 +453,8 @@ def test_recommend_mini_programs():
         {
             "operation": "exclude",
             "data": [
-                ("test/equality", "inside", "abstr/function"),
-                # "test/equality" is inside "abstr/function" in is_even.py, which is not
+                ("condition/equality", "inside", "abstr/function"),
+                # "condition/equality" is inside "abstr/function" in is_even.py, which is not
                 # imported anywhere.
             ],
         }
@@ -533,8 +533,8 @@ def test_recommend_mini_programs():
         {
             "operation": "include",
             "data": [
-                ("test/equality", "inside", "abstr/function"),
-                # "test/equality" is inside "abstr/function" in is_even.py, which is not
+                ("condition/equality", "inside", "abstr/function"),
+                # "condition/equality" is inside "abstr/function" in is_even.py, which is not
                 # imported anywhere.
             ],
         }
@@ -548,8 +548,8 @@ def test_recommend_mini_programs():
         {
             "operation": "include",
             "data": [
-                ("test/equality$", "inside", "abstr"),
-                # "test/equality" (strictly, note the dollar sign) is inside "abstr/function"
+                ("condition/equality$", "inside", "abstr"),
+                # "condition/equality" (strictly, note the dollar sign) is inside "abstr/function"
                 # in is_even.py and inside "abstr/procedure" in collatz.py. Both will be
                 # included.
             ],

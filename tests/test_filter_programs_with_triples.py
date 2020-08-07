@@ -45,7 +45,7 @@ triple_data = [
     ),
     (
         (
-            "test/equality$",  # featured by all programs except assignment.py
+            "condition/equality$",  # featured by all programs except assignment.py
             compare_spans["inside"],  # but only inside
             "abstr",  # abstr/function or abstr/procedure in two of them
         ),
@@ -112,7 +112,7 @@ negated_triple_data = [
     ),
     (
         (
-            "test/equality$",  # featured by all programs except assignment.py
+            "condition/equality$",  # featured by all programs except assignment.py
             compare_spans["inside"],  # but only inside
             "abstr",  # abstr/function or abstr/procedure in two of them
         ),
