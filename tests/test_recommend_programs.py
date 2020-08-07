@@ -421,7 +421,7 @@ def test_recommend_mini_programs():
         {
             "operation": "exclude",
             "data": [
-                ("var/assignment/single", "after", "io/standard/print"),
+                ("var/assignment/single", "after", "appli/function/builtin/print"),
                 # collatz.py and fizzbuzz.py have an assignment after a print.
                 # is_even.py imports fizzbuzz.py.
                 # Consequently, these three programs are excluded.
@@ -487,9 +487,9 @@ def test_recommend_mini_programs():
         {
             "operation": "include",
             "data": [
-                ("var/assignment/single", "after", "io/standard/print"),
+                ("var/assignment/single", "after", "appli/function/builtin/print"),
                 # The taxon "var/assignment/single" is featured by assignment.py and
-                # collatz.py. In collatz.py, it appears after a taxon "io/standard/print".
+                # collatz.py. In collatz.py, it appears after a taxon "appli/function/builtin/print".
                 # Consequently, it should be included in the results, but not the programs which
                 # import it: fizzbuzz.py and is_even.py.
             ],
@@ -623,12 +623,12 @@ def test_recommend_mini_programs():
         {
             "operation": "include",
             "data": [
-                ("io/standard/print", "not inside", "flow/loop/exit/late"),
+                ("appli/function/builtin/print", "not inside", "flow/loop/exit/late"),
                 # A print statement is featured inside a loop by both collatz.py and fizzbuzz.py.
                 # However, in collatz.py, there exists a print statement which is not inside the
                 # loop. This makes it satisfy the predicate. Note that assignment.py and is_even.py
                 # are not included in the result, since they don't feature (at least directly)
-                # "io/standard/print".
+                # "appli/function/builtin/print".
             ],
         }
     ]
@@ -641,7 +641,7 @@ def test_recommend_mini_programs():
         {
             "operation": "exclude",
             "data": [
-                ("io/standard/print", "not inside", "flow/loop"),
+                ("appli/function/builtin/print", "not inside", "flow/loop"),
                 # Exclude the programs which feature a print statement outside a loop. This does
                 # not exclude assignment.py, which does not feature a print statement. This
                 # excludes collatz, which features a print statement outside a loop, even if it

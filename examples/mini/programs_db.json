@@ -99,7 +99,6 @@
         "flow/conditional/else": [[7,7]],
         "flow/loop/exit/late": [[2,7]],
         "flow/loop/while": [[2,7]],
-        "io/standard/print": [[3,3],[8,8]],
         "metadata/program": [[1,8]],
         "metadata/sloc/8": [[1,8]],
         "operator/arithmetic/addition": [[7,7]],
@@ -176,7 +175,6 @@
         "flow/conditional/else/if": [[6,6],[8,8]],
         "flow/loop/exit/late": [[2,10]],
         "flow/loop/for/arithmetic/start": [[2,10]],
-        "io/standard/print": [[4,4],[6,6],[8,8],[10,10]],
         "library/personal": [[1,1]],
         "metadata/program": [[1,10]],
         "metadata/sloc/10": [[1,10]],
@@ -641,10 +639,6 @@
     ],
     "flow/loop/while": [
       "collatz.py"
-    ],
-    "io/standard/print": [
-      "collatz.py",
-      "fizzbuzz.py"
     ],
     "library/personal": [
       "fizzbuzz.py",

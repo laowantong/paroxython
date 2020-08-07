@@ -15,7 +15,7 @@ triple_data = [
         (
             "var/assignment/single",  # featured by assignment.py and collatz.py
             compare_spans["after"],  # but after
-            "io/standard/print",  # this taxon in collatz.py only.
+            "appli/function/builtin/print",  # this taxon in collatz.py only.
         ),
         {"collatz.py"},
     ),
@@ -74,7 +74,7 @@ negated_triple_data = [
         (
             "var/assignment/single",  # featured by assignment.py and collatz.py
             compare_spans["after"],  # but after
-            "io/standard/print",  # this taxon in collatz.py only.
+            "appli/function/builtin/print",  # this taxon in collatz.py only.
         ),
         {"assignment.py"},
     ),

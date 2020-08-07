@@ -31,7 +31,7 @@
     {
         "operation": "hide",
         "data": [
-            "io",
+            "appli/function/builtin/print",
             r".*test.*\.py",
         ],
     },

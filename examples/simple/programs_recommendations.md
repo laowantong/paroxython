@@ -1,6 +1,6 @@
 # Table of contents
 - [`4 programs of learning cost in [2, 4[`](#4-programs-of-learning-cost-in-2-4)
-    - [`09_indent.py`](#program-09_indentpy-learning-cost-2375)
+    - [`09_indent.py`](#program-09_indentpy-learning-cost-20)
     - [`08_arguments.py`](#program-08_argumentspy-learning-cost-28125)
     - [`04_fibonacci.py`](#program-04_fibonaccipy-learning-cost-29375)
     - [`20_prime_numbers.py`](#program-20_prime_numberspy-learning-cost-375)
@@ -14,7 +14,7 @@
 
 ## 4 programs of learning cost in [2, 4[
 
-### Program `09_indent.py` (learning cost 2.375)
+### Program `09_indent.py` (learning cost 2.0)
 
 ```python
 1   import glob
@@ -31,7 +31,6 @@
 |----|----|----|
 | 0.25 | `appli/composition` | 7 |
 | 0 | `appli/function/builtin/open` | 5 |
-| 0 | `appli/function/builtin/print` | 4, 7, 8 |
 | 0 | `appli/function/builtin/sorted` | 3 |
 | 0 | `appli/function/without_arguments` | 8 |
 | 0.375 | `appli/method/glob` | 2 |
@@ -65,7 +64,6 @@
 |----|----|----|
 | 0.25 | `appli/composition` | 3 |
 | 0 | `appli/function/builtin/casting/int` | 3 |
-| 0 | `appli/function/builtin/print` | 4, 6 |
 | 0 | `appli/function/builtin/sum` | 3 |
 | 0 | `flow/exception/catch/ValueError` | 2-6 |
 | 0.875 | `library/standard/sys` | 1 |
@@ -91,7 +89,6 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.25 | `appli/composition` | 3 |
-| 0 | `appli/function/builtin/print` | 3 |
 | 0.375 | `appli/method/format` | 3 |
 | 0.75 | `condition/inequality` | 2 |
 | 0 | `flow/loop/exit/late` | 2-4 |
@@ -131,7 +128,6 @@
 | 0.25 | `abstr/generator` | 2-7 |
 | 0 | `appli/function/builtin/filter` | 7 |
 | 0 | `appli/function/builtin/next` | 5 |
-| 0 | `appli/function/builtin/print` | 11 |
 | 0 | `appli/function/without_arguments` | 8 |
 | 0.375 | `appli/method/count` | 3 |
 | 0.75 | `condition/inequality` | 9 |
@@ -178,7 +174,6 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.25 | `appli/composition` | 12 |
-| 0 | `appli/function/builtin/print` | 14, 17 |
 | 0 | `appli/function/builtin/sorted` | 12 |
 | 0 | `appli/function/localtime` | 10 |
 | 0 | `appli/function/without_arguments` | 10 |
@@ -222,7 +217,6 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.25 | `appli/composition` | 14 |
-| 0 | `appli/function/builtin/print` | 14 |
 | 0.375 | `appli/method/format` | 14 |
 | 0.375 | `appli/method/fromstring` | 9 |
 | 0.375 | `appli/method/getiterator` | 11 |
@@ -272,7 +266,6 @@
 | 0.375 | `abstr/return/something` | 9 |
 | 0.375 | `appli/class_constructor/BankAccount` | 10 |
 | 0.25 | `appli/composition` | 12 |
-| 0 | `appli/function/builtin/print` | 12 |
 | 0.375 | `appli/method/overdrawn` | 12 |
 | 0.375 | `appli/method/withdraw` | 11 |
 | 0.75 | `condition/inequality` | 9 |
@@ -354,7 +347,6 @@
 | 0.25 | `appli/composition` | 5, 7, 16, 18 |
 | 0 | `appli/function/builtin/casting/int` | 7 |
 | 0 | `appli/function/builtin/input` | 3, 7 |
-| 0 | `appli/function/builtin/print` | 5, 10, 12, 16, 18 |
 | 0.375 | `appli/method/format` | 5, 16, 18 |
 | 0.375 | `appli/method/randint` | 4 |
 | 0.75 | `condition/equality` | 13, 15 |

@@ -21,7 +21,6 @@
       },
       "taxa": {
         "appli/function/builtin/print": [[2,2]],
-        "io/standard/print": [[2,2]],
         "library/standard/__future__/print_function": [[1,1]],
         "metadata/program": [[1,2]],
         "metadata/sloc/2": [[1,2]],
@@ -45,7 +44,6 @@
       },
       "taxa": {
         "appli/function/builtin/print": [[1,1]],
-        "io/standard/print": [[1,1]],
         "metadata/program": [[1,1]],
         "metadata/sloc/1": [[1,1]],
         "type/sequence/string/literal": [[1,1]]
@@ -82,7 +80,6 @@
         "appli/function/builtin/range": [[1,1]],
         "flow/loop/exit/late": [[1,2]],
         "flow/loop/for/arithmetic": [[1,2]],
-        "io/standard/print": [[2,2]],
         "metadata/program": [[1,2]],
         "metadata/sloc/2": [[1,2]],
         "type/number/integer/literal": [[1,1]],
@@ -111,7 +108,6 @@
       },
       "taxa": {
         "appli/function/builtin/print": [[1,1]],
-        "io/standard/print": [[1,1]],
         "metadata/program": [[1,1]],
         "metadata/sloc/1": [[1,1]],
         "operator/string/replication": [[1,1]],
@@ -141,7 +137,6 @@
       },
       "taxa": {
         "appli/function/builtin/print": [[1,1]],
-        "io/standard/print": [[1,1]],
         "metadata/program": [[1,1]],
         "metadata/sloc/1": [[1,1]],
         "operator/string/replication": [[1,1]],
@@ -177,7 +172,6 @@
         "abstr/argument/arg": [[1,1]],
         "abstr/procedure": [[1,2]],
         "appli/function/builtin/print": [[2,2]],
-        "io/standard/print": [[2,2]],
         "metadata/program": [[1,2]],
         "metadata/sloc/2": [[1,2]],
         "operator/string/concatenation": [[2,2]],
@@ -335,7 +329,6 @@
         "flow/loop/exit/late": [[1,2]],
         "flow/loop/for": [[1,2]],
         "flow/loop/for/elements_and_indexes": [[1,2]],
-        "io/standard/print": [[2,2]],
         "metadata/program": [[1,2]],
         "metadata/sloc/2": [[1,2]],
         "type/sequence/tuple/literal": [[1,1]]
@@ -560,7 +553,6 @@
         "appli/method/items": [[1,1]],
         "flow/loop/exit/late": [[1,2]],
         "flow/loop/for": [[1,2]],
-        "io/standard/print": [[2,2]],
         "metadata/program": [[1,2]],
         "metadata/sloc/2": [[1,2]],
         "type/non_sequence/dictionary": [[1,1]],
@@ -1578,7 +1570,6 @@
         "appli/composition": [[6,6]],
         "appli/function": [[6,6]],
         "appli/function/builtin/print": [[6,6]],
-        "io/standard/print": [[6,6]],
         "library/standard/functools/partial": [[1,1]],
         "metadata/program": [[1,6]],
         "metadata/sloc/6": [[1,6]],
@@ -1862,7 +1853,6 @@
         "flow/loop/exit/early/raise": [[1,8],[3,5]],
         "flow/loop/for/elements": [[1,8],[3,5]],
         "flow/loop/for/nested/1": [[3,5]],
-        "io/standard/print": [[6,6]],
         "metadata/program": [[1,8]],
         "metadata/sloc/8": [[1,8]],
         "type/boolean": [[4,4]]
@@ -1905,7 +1895,6 @@
         "flow/loop/exit/late": [[1,5],[2,5]],
         "flow/loop/for/elements": [[1,5],[2,5]],
         "flow/loop/for/nested/1": [[2,5]],
-        "io/standard/print": [[5,5]],
         "metadata/program": [[1,5]],
         "metadata/sloc/5": [[1,5]],
         "type/boolean": [[3,3]]
@@ -2060,7 +2049,6 @@
         "flow/loop/for": [[2,5]],
         "flow/loop/for/elements_and_indexes": [[2,5],[3,5]],
         "flow/loop/for/nested/1": [[3,5]],
-        "io/standard/print": [[7,7]],
         "metadata/program": [[1,7]],
         "metadata/sloc/7": [[1,7]],
         "type/boolean": [[4,4]],
@@ -2447,7 +2435,6 @@
         "appli/function/builtin/print": [[6,6]],
         "appli/function/builtin/range": [[5,5]],
         "appli/method/map": [[5,5]],
-        "io/standard/print": [[6,6]],
         "library/standard/multiprocessing/Pool": [[1,1]],
         "metadata/program": [[1,6]],
         "metadata/sloc/6": [[1,6]],
@@ -2530,7 +2517,6 @@
       "taxa": {
         "appli/function/builtin/open": [[1,1]],
         "appli/method/read": [[1,1]],
-        "io/file/open": [[1,1]],
         "metadata/program": [[1,1]],
         "metadata/sloc/1": [[1,1]],
         "var/assignment/single": [[1,1]]
@@ -2558,7 +2544,6 @@
       },
       "taxa": {
         "appli/function/builtin/print": [[2,2]],
-        "io/standard/print": [[2,2]],
         "library/standard/sys": [[1,1]],
         "metadata/program": [[1,2]],
         "metadata/sloc/2": [[1,2]],
@@ -2921,7 +2906,6 @@
         "appli/composition": [[2,2]],
         "appli/function/builtin/print": [[2,2]],
         "appli/method/join": [[2,2]],
-        "io/standard/print": [[2,2]],
         "library/standard/sys": [[1,1]],
         "metadata/program": [[1,2]],
         "metadata/sloc/2": [[1,2]],
@@ -3509,7 +3493,6 @@
       "taxa": {
         "appli/function/builtin/open": [[2,2]],
         "appli/method/load": [[3,3]],
-        "io/file/open": [[2,2]],
         "library/standard/json": [[1,1]],
         "metadata/program": [[1,3]],
         "metadata/sloc/3": [[1,3]],
@@ -3544,7 +3527,6 @@
       "taxa": {
         "appli/function/builtin/open": [[2,2]],
         "appli/method/dump": [[3,3]],
-        "io/file/open": [[2,2]],
         "library/standard/json": [[1,1]],
         "metadata/program": [[1,3]],
         "metadata/sloc/3": [[1,3]],
@@ -3609,7 +3591,6 @@
         "appli/composition": [[1,1]],
         "appli/function/builtin/print": [[1,1]],
         "appli/function/builtin/type": [[1,1]],
-        "io/standard/print": [[1,1]],
         "metadata/program": [[1,1]],
         "metadata/sloc/1": [[1,1]]
       }
@@ -3630,7 +3611,6 @@
       },
       "taxa": {
         "appli/function/builtin/print": [[1,1]],
-        "io/standard/print": [[1,1]],
         "metadata/program": [[1,1]],
         "metadata/sloc/1": [[1,1]]
       }
@@ -4006,7 +3986,6 @@
         "appli/class_constructor/TestClass": [[10,10]],
         "appli/function/builtin/print": [[12,12]],
         "appli/method/serialize": [[11,11]],
-        "io/standard/print": [[12,12]],
         "library/third_party/pyxser": [[1,1]],
         "metadata/program": [[1,12]],
         "metadata/sloc/12": [[1,12]],
@@ -4136,7 +4115,6 @@
         "appli/function/without_arguments": [[1,1]],
         "condition/belonging": [[1,1]],
         "flow/conditional/no_else": [[1,2]],
-        "io/standard/print": [[2,2]],
         "metadata/program": [[1,2]],
         "metadata/sloc/2": [[1,2]],
         "type/boolean": [[1,1]],
@@ -4259,7 +4237,6 @@
         "appli/function/builtin/sorted": [[1,1]],
         "flow/loop/exit/late": [[1,2]],
         "flow/loop/for": [[1,2]],
-        "io/standard/print": [[2,2]],
         "metadata/program": [[1,2]],
         "metadata/sloc/2": [[1,2]],
         "subscript/index": [[2,2]]
@@ -4302,7 +4279,6 @@
         "appli/method/items": [[1,1]],
         "flow/loop/exit/late": [[1,2]],
         "flow/loop/for": [[1,2]],
-        "io/standard/print": [[2,2]],
         "metadata/program": [[1,2]],
         "metadata/sloc/2": [[1,2]],
         "type/non_sequence/dictionary": [[1,1]],
@@ -4560,7 +4536,6 @@
         "flow/conditional/no_else": [[5,7]],
         "flow/loop/exit/late": [[4,7]],
         "flow/loop/for/elements": [[4,7]],
-        "io/standard/print": [[8,8]],
         "metadata/program": [[1,8]],
         "metadata/sloc/8": [[1,8]],
         "pattern/elements/accumulate/in_list/filtered": [[4,7]],
@@ -4663,7 +4638,6 @@
         "appli/method/socket": [[3,3]],
         "flow/loop/exit/late": [[5,7]],
         "flow/loop/while/infinite": [[5,7]],
-        "io/standard/print": [[7,7]],
         "library/standard/socket": [[1,1]],
         "metadata/program": [[1,7]],
         "metadata/sloc/7": [[1,7]],
@@ -4870,7 +4844,6 @@
         "appli/function/foo": [[3,3]],
         "appli/function/without_arguments": [[3,3]],
         "appli/method/perf_counter": [[2,2],[4,4]],
-        "io/standard/print": [[5,5]],
         "library/standard/time": [[1,1]],
         "metadata/program": [[1,5]],
         "metadata/sloc/5": [[1,5]],
@@ -5512,7 +5485,6 @@
         "appli/function/builtin/print": [[2,2]],
         "flow/loop/exit/late": [[1,2]],
         "flow/loop/for": [[1,2]],
-        "io/standard/print": [[2,2]],
         "metadata/program": [[1,2]],
         "metadata/sloc/2": [[1,2]],
         "operator/arithmetic/addition": [[1,1]]
@@ -5567,7 +5539,6 @@
         "appli/function/builtin/zip": [[1,1]],
         "flow/loop/exit/late": [[1,2]],
         "flow/loop/for": [[1,2]],
-        "io/standard/print": [[2,2]],
         "metadata/program": [[1,2]],
         "metadata/sloc/2": [[1,2]]
       }
@@ -5824,7 +5795,6 @@
         "appli/function/builtin/map": [[1,1]],
         "appli/function/without_arguments": [[1,1]],
         "appli/method/split": [[1,1]],
-        "io/standard/input": [[1,1]],
         "metadata/program": [[1,1]],
         "metadata/sloc/1": [[1,1]],
         "type/sequence/list": [[1,1]],
@@ -6159,7 +6129,6 @@
         "appli/method/from_str": [[11,11],[13,13]],
         "appli/method/join": [[10,10]],
         "appli/method/view": [[5,5]],
-        "io/standard/print": [[12,12],[14,14],[15,15]],
         "library/third_party/numpy": [[1,1]],
         "metadata/program": [[1,15]],
         "metadata/sloc/15": [[1,15]],
@@ -6499,7 +6468,6 @@
         "appli/function/builtin/zip": [[1,1]],
         "flow/loop/exit/late": [[1,2]],
         "flow/loop/for": [[1,2]],
-        "io/standard/print": [[2,2]],
         "metadata/program": [[1,2]],
         "metadata/sloc/2": [[1,2]],
         "subscript/slice/start": [[1,1]],
@@ -6572,7 +6540,6 @@
         "appli/function/tee": [[3,3]],
         "flow/loop/exit/late": [[6,7]],
         "flow/loop/for": [[6,7]],
-        "io/standard/print": [[7,7]],
         "library/standard/itertools/tee": [[1,1]],
         "metadata/program": [[1,7]],
         "metadata/sloc/7": [[1,7]],
@@ -6887,7 +6854,6 @@
       },
       "taxa": {
         "appli/function/builtin/print": [[1,1]],
-        "io/standard/print": [[1,1]],
         "metadata/program": [[1,1]],
         "metadata/sloc/1": [[1,1]],
         "type/sequence/string/literal": [[1,1]]
@@ -6910,7 +6876,6 @@
       },
       "taxa": {
         "appli/function/builtin/print": [[1,1]],
-        "io/standard/print": [[1,1]],
         "metadata/program": [[1,1]],
         "metadata/sloc/1": [[1,1]],
         "type/sequence/string/literal": [[1,1]]
@@ -6933,7 +6898,6 @@
       },
       "taxa": {
         "appli/function/builtin/print": [[1,1]],
-        "io/standard/print": [[1,1]],
         "metadata/program": [[1,1]],
         "metadata/sloc/1": [[1,1]],
         "type/sequence/string/literal": [[1,1]]
@@ -7368,7 +7332,6 @@
       },
       "taxa": {
         "appli/function/builtin/print": [[2,2]],
-        "io/standard/print": [[2,2]],
         "metadata/program": [[1,2]],
         "metadata/sloc/2": [[1,2]],
         "operator/arithmetic/modulo": [[2,2]],
@@ -7796,7 +7759,6 @@
       "taxa": {
         "appli/function/builtin/open": [[1,1]],
         "appli/method/readlines": [[2,2]],
-        "io/file/open": [[1,1]],
         "metadata/program": [[1,2]],
         "metadata/sloc/2": [[1,2]],
         "var/assignment/single": [[2,2]]
@@ -15834,50 +15796,6 @@
       "040.2279-graph-with-adjacency-lists.py",
       "043.0676-break-outer-loop.py",
       "050.0572-make-an-infinite-loop.py"
-    ],
-    "io/file/open": [
-      "058.0665-extract-file-content-to-a-string.py",
-      "091.1098-load-json-file-into-struct.py",
-      "092.1100-save-object-into-json-file.py",
-      "197.3457-get-a-list-of-lines-from-a-file.py"
-    ],
-    "io/standard/input": [
-      "148.1829-read-list-of-integer-numbers-from-stdin.py"
-    ],
-    "io/standard/print": [
-      "001.0003-print-hello-world.py",
-      "001.1159-print-hello-world.py",
-      "002.0011-print-hello-10-times.py",
-      "002.1493-print-hello-10-times.py",
-      "002.3117-print-hello-10-times.py",
-      "003.0019-create-a-procedure.py",
-      "007.0183-iterate-over-list-indexes-and-values.py",
-      "013.0574-iterate-over-map-keys-and-values.py",
-      "037.0671-currying.py",
-      "042.1264-continue-outer-loop.py",
-      "042.3168-continue-outer-loop.py",
-      "043.2733-break-outer-loop.py",
-      "056.1424-launch-1000-parallel-tasks-and-wait-for-completion.py",
-      "059.0668-write-to-standard-error-stream.py",
-      "071.0379-echo-program-implementation.py",
-      "094.1101-print-type-of-variable.py",
-      "094.1864-print-type-of-variable.py",
-      "104.3264-save-object-into-xml-file.py",
-      "108.1291-determine-if-variable-name-is-defined.py",
-      "112.2144-iterate-over-map-entries-ordered-by-keys.py",
-      "113.2157-iterate-over-map-entries-ordered-by-values.py",
-      "119.3263-deduplicate-list.py",
-      "121.3029-udp-listen-and-read.py",
-      "125.2167-measure-function-call-duration.py",
-      "141.2159-iterate-in-sequence-over-two-lists.py",
-      "143.2256-iterate-alternatively-over-two-lists.py",
-      "154.2292-halfway-between-two-hex-color-codes.py",
-      "163.2170-print-list-elements-by-group-of-2.py",
-      "163.3177-print-list-elements-by-group-of-2.py",
-      "173.2427-format-a-number-with-grouped-thousands.py",
-      "173.2428-format-a-number-with-grouped-thousands.py",
-      "173.2429-format-a-number-with-grouped-thousands.py",
-      "182.2658-quine-program.py"
     ],
     "library/standard/__future__/division": [
       "068.2271-create-a-bitset.py"
