@@ -4,7 +4,7 @@
         "data": [
             "01_hello_world.py",
             "02_input_name.py",
-            "subroutine/procedure",
+            "abstr/procedure",
             "appli/function",
             "flow",
         ],

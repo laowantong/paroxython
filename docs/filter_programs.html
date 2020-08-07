@@ -632,8 +632,8 @@ class ProgramFilter:
         &quot;fizzbuzz.py&quot;: {
             ...
             &quot;taxa&quot;: {
-                &quot;application/function/builtin/print&quot;: [[4,4],[6,6],[8,8],[10,10]],
-                &quot;application/function/builtin/range&quot;: [[2,2]],
+                &quot;appli/function/builtin/print&quot;: [[4,4],[6,6],[8,8],[10,10]],
+                &quot;appli/function/builtin/range&quot;: [[2,2]],
                 &quot;flow/conditional&quot;: [[3,10],[5,10],[7,10]],
                 ...
 </code></pre>
@@ -642,8 +642,8 @@ with the taxa which are featured <em>indirectly</em>, namely those featured by t
 programs. For instance, assuming that <code>fizzbuzz.py</code> imports <code>collatz.py</code>, we must
 copy the taxa featured by the latter, but not by the former program, namely:</p>
 <pre><code>                &quot;operator/arithmetic/multiplication&quot;: [],
-                &quot;subroutine/argument/arg&quot;: [],
-                &quot;subroutine/procedure&quot;: [],
+                &quot;abstr/argument/arg&quot;: [],
+                &quot;abstr/procedure&quot;: [],
                 ...
 </code></pre>
 <h2 id="notes">Notes</h2>

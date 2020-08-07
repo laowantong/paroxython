@@ -174,13 +174,13 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
+        "abstr/argument/arg": [[1,1]],
+        "abstr/procedure": [[1,2]],
         "appli/function/builtin/print": [[2,2]],
         "io/standard/print": [[2,2]],
         "metadata/program": [[1,2]],
         "metadata/sloc/2": [[1,2]],
         "operator/string/concatenation": [[2,2]],
-        "subroutine/argument/arg": [[1,1]],
-        "subroutine/procedure": [[1,2]],
         "type/sequence/string/literal": [[2,2]]
       }
     },
@@ -196,11 +196,11 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
+        "abstr/argument/no": [[1,2]],
+        "abstr/procedure": [[1,2]],
         "flow/null_operation": [[2,2]],
         "metadata/program": [[1,2]],
-        "metadata/sloc/2": [[1,2]],
-        "subroutine/argument/no": [[1,2]],
-        "subroutine/procedure": [[1,2]]
+        "metadata/sloc/2": [[1,2]]
       }
     },
     "004.0024-create-a-function-which-returns-the-square-of-an-integer.py": {
@@ -222,12 +222,12 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
+        "abstr/argument/arg": [[1,1]],
+        "abstr/function": [[1,2]],
+        "abstr/return/something": [[2,2]],
         "metadata/program": [[1,2]],
         "metadata/sloc/2": [[1,2]],
-        "operator/arithmetic/multiplication": [[2,2]],
-        "subroutine/argument/arg": [[1,1]],
-        "subroutine/function": [[1,2]],
-        "subroutine/return/something": [[2,2]]
+        "operator/arithmetic/multiplication": [[2,2]]
       }
     },
     "004.2921-create-a-function-which-returns-the-square-of-an-integer.py": {
@@ -250,12 +250,12 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
+        "abstr/argument/arg": [[1,1]],
+        "abstr/function": [[1,2]],
+        "abstr/return/something": [[2,2]],
         "metadata/program": [[1,2]],
         "metadata/sloc/2": [[1,2]],
         "operator/arithmetic/power": [[2,2]],
-        "subroutine/argument/arg": [[1,1]],
-        "subroutine/function": [[1,2]],
-        "subroutine/return/something": [[2,2]],
         "type/number/integer/literal": [[2,2]]
       }
     },
@@ -397,12 +397,12 @@
         "whole_span:5": [[1,5]]
       },
       "taxa": {
+        "abstr/argument/arg": [[2,2],[2,2]],
+        "abstr/method/flavor/instance": [[2,5]],
+        "abstr/method/naming/magic": [[2,5]],
+        "abstr/procedure": [[2,5]],
         "metadata/program": [[1,5]],
         "metadata/sloc/5": [[1,5]],
-        "subroutine/argument/arg": [[2,2],[2,2]],
-        "subroutine/method/flavor/instance": [[2,5]],
-        "subroutine/method/naming/magic": [[2,5]],
-        "subroutine/procedure": [[2,5]],
         "type/null/literal": [[4,4],[5,5]],
         "variable/assignment": [[3,3],[4,4],[5,5]]
       }
@@ -434,12 +434,12 @@
         "whole_span:5": [[1,5]]
       },
       "taxa": {
+        "abstr/argument/arg": [[2,2],[2,2],[2,2],[2,2]],
+        "abstr/method/flavor/instance": [[2,5]],
+        "abstr/method/naming/magic": [[2,5]],
+        "abstr/procedure": [[2,5]],
         "metadata/program": [[1,5]],
         "metadata/sloc/5": [[1,5]],
-        "subroutine/argument/arg": [[2,2],[2,2],[2,2],[2,2]],
-        "subroutine/method/flavor/instance": [[2,5]],
-        "subroutine/method/naming/magic": [[2,5]],
-        "subroutine/procedure": [[2,5]],
         "variable/assignment": [[3,3],[4,4],[5,5]]
       }
     },
@@ -593,13 +593,13 @@
         "whole_span:3": [[1,3]]
       },
       "taxa": {
+        "abstr/argument/arg": [[2,2],[2,2]],
+        "abstr/function": [[2,3]],
+        "abstr/return/something": [[3,3]],
         "appli/method/randrange": [[3,3]],
         "library/standard/random": [[1,1]],
         "metadata/program": [[1,3]],
-        "metadata/sloc/3": [[1,3]],
-        "subroutine/argument/arg": [[2,2],[2,2]],
-        "subroutine/function": [[2,3]],
-        "subroutine/return/something": [[3,3]]
+        "metadata/sloc/3": [[1,3]]
       }
     },
     "014.3410-pick-uniformly-a-random-floating-point-number-in-ab.py": {
@@ -692,17 +692,17 @@
         "whole_span:6": [[1,6]]
       },
       "taxa": {
+        "abstr/argument/arg": [[1,1]],
+        "abstr/procedure": [[1,6]],
+        "abstr/recursive": [[1,6]],
+        "abstr/recursive/body": [[1,6]],
+        "abstr/return/nothing": [[3,3]],
         "appli/function": [[4,4],[6,6]],
         "appli/function/f": [[5,5]],
         "flow/conditional/guard": [[2,3]],
         "flow/conditional/no_else": [[2,3]],
         "metadata/program": [[1,6]],
         "metadata/sloc/6": [[1,6]],
-        "subroutine/argument/arg": [[1,1]],
-        "subroutine/procedure": [[1,6]],
-        "subroutine/recursive": [[1,6]],
-        "subroutine/recursive/body": [[1,6]],
-        "subroutine/return/nothing": [[3,3]],
         "test/identity": [[2,2]],
         "type/boolean": [[2,2]],
         "type/null/literal": [[2,2]]
@@ -739,14 +739,14 @@
         "whole_span:4": [[1,4]]
       },
       "taxa": {
+        "abstr/argument/arg": [[2,2],[2,2]],
+        "abstr/argument/vararg": [[2,2]],
+        "abstr/method/flavor/instance": [[2,4]],
+        "abstr/method/naming/magic": [[2,4]],
+        "abstr/procedure": [[2,4]],
         "appli/function/builtin/casting/list": [[4,4]],
         "metadata/program": [[1,4]],
         "metadata/sloc/4": [[1,4]],
-        "subroutine/argument/arg": [[2,2],[2,2]],
-        "subroutine/argument/vararg": [[2,2]],
-        "subroutine/method/flavor/instance": [[2,4]],
-        "subroutine/method/naming/magic": [[2,4]],
-        "subroutine/procedure": [[2,4]],
         "type/sequence/list": [[4,4]],
         "variable/assignment": [[3,3],[4,4]]
       }
@@ -785,16 +785,16 @@
         "whole_span:4": [[1,4]]
       },
       "taxa": {
+        "abstr/argument/arg": [[1,1],[1,1]],
+        "abstr/higher_order": [[1,4]],
+        "abstr/procedure": [[1,4]],
+        "abstr/recursive/body": [[1,4]],
         "appli/class_constructor": [[4,4]],
         "appli/function/f": [[2,2]],
         "flow/loop/exit/late": [[3,4]],
         "flow/loop/for/elements": [[3,4]],
         "metadata/program": [[1,4]],
-        "metadata/sloc/4": [[1,4]],
-        "subroutine/argument/arg": [[1,1],[1,1]],
-        "subroutine/higher_order": [[1,4]],
-        "subroutine/procedure": [[1,4]],
-        "subroutine/recursive/body": [[1,4]]
+        "metadata/sloc/4": [[1,4]]
       }
     },
     "019.0197-reverse-a-list.py": {
@@ -909,6 +909,9 @@
         "whole_span:4": [[1,4]]
       },
       "taxa": {
+        "abstr/argument/arg": [[1,1],[1,1]],
+        "abstr/function": [[1,4]],
+        "abstr/return/something": [[4,4]],
         "appli/function/builtin/enumerate": [[2,2]],
         "appli/method/index": [[4,4]],
         "flow/conditional/no_else": [[3,4]],
@@ -917,9 +920,6 @@
         "flow/loop/for/elements_and_indexes": [[2,4]],
         "metadata/program": [[1,4]],
         "metadata/sloc/4": [[1,4]],
-        "subroutine/argument/arg": [[1,1],[1,1]],
-        "subroutine/function": [[1,4]],
-        "subroutine/return/something": [[4,4]],
         "test/belonging": [[3,3]],
         "type/boolean": [[3,3]],
         "type/sequence": [[4,4]],
@@ -1211,11 +1211,11 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
+        "abstr/argument/arg": [[1,1]],
+        "abstr/function/anonymous": [[1,1]],
         "appli/function/builtin/sorted": [[1,1]],
         "metadata/program": [[1,1]],
         "metadata/sloc/1": [[1,1]],
-        "subroutine/argument/arg": [[1,1]],
-        "subroutine/function/anonymous": [[1,1]],
         "variable/assignment/single": [[1,1]]
       }
     },
@@ -1329,6 +1329,10 @@
         "whole_span:5": [[1,5]]
       },
       "taxa": {
+        "abstr/argument/arg": [[1,1]],
+        "abstr/function": [[1,5]],
+        "abstr/recursive/body": [[1,5]],
+        "abstr/return/something": [[5,5]],
         "appli/function": [[5,5]],
         "flow/conditional": [[2,5]],
         "flow/conditional/else": [[5,5]],
@@ -1336,10 +1340,6 @@
         "metadata/sloc/5": [[1,5]],
         "operator/arithmetic/multiplication": [[5,5]],
         "operator/arithmetic/substraction": [[5,5]],
-        "subroutine/argument/arg": [[1,1]],
-        "subroutine/function": [[1,5]],
-        "subroutine/recursive/body": [[1,5]],
-        "subroutine/return/something": [[5,5]],
         "test/equality": [[2,2]],
         "type/boolean": [[2,2]],
         "type/number/integer/literal": [[3,3],[5,5]],
@@ -1365,12 +1365,12 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
+        "abstr/argument/arg": [[1,1],[1,1]],
+        "abstr/function": [[1,2]],
+        "abstr/return/something": [[2,2]],
         "metadata/program": [[1,2]],
         "metadata/sloc/2": [[1,2]],
-        "operator/arithmetic/power": [[2,2]],
-        "subroutine/argument/arg": [[1,1],[1,1]],
-        "subroutine/function": [[1,2]],
-        "subroutine/return/something": [[2,2]]
+        "operator/arithmetic/power": [[2,2]]
       }
     },
     "033.1420-atomically-read-and-update-variable.py": {
@@ -1475,16 +1475,16 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
+        "abstr/argument/arg": [[1,1],[1,1],[2,2]],
+        "abstr/function": [[1,2]],
+        "abstr/function/anonymous": [[2,2]],
+        "abstr/higher_order": [[1,2]],
+        "abstr/return/something": [[2,2]],
         "appli/composition": [[2,2]],
         "appli/function/f": [[2,2]],
         "appli/function/g": [[2,2]],
         "metadata/program": [[1,2]],
-        "metadata/sloc/2": [[1,2]],
-        "subroutine/argument/arg": [[1,1],[1,1],[2,2]],
-        "subroutine/function": [[1,2]],
-        "subroutine/function/anonymous": [[2,2]],
-        "subroutine/higher_order": [[1,2]],
-        "subroutine/return/something": [[2,2]]
+        "metadata/sloc/2": [[1,2]]
       }
     },
     "036.0670-first-class-function--generic-composition.py": {
@@ -1516,16 +1516,16 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
+        "abstr/argument/arg": [[1,1],[1,1],[2,2]],
+        "abstr/function": [[1,2]],
+        "abstr/function/anonymous": [[2,2]],
+        "abstr/higher_order": [[1,2]],
+        "abstr/return/something": [[2,2]],
         "appli/composition": [[2,2]],
         "appli/function/f": [[2,2]],
         "appli/function/g": [[2,2]],
         "metadata/program": [[1,2]],
-        "metadata/sloc/2": [[1,2]],
-        "subroutine/argument/arg": [[1,1],[1,1],[2,2]],
-        "subroutine/function": [[1,2]],
-        "subroutine/function/anonymous": [[2,2]],
-        "subroutine/higher_order": [[1,2]],
-        "subroutine/return/something": [[2,2]]
+        "metadata/sloc/2": [[1,2]]
       }
     },
     "037.0671-currying.py": {
@@ -1571,6 +1571,10 @@
         "whole_span:6": [[1,6]]
       },
       "taxa": {
+        "abstr/argument/arg": [[2,2],[3,3]],
+        "abstr/function": [[2,5],[3,4]],
+        "abstr/nested/closure": [[2,5]],
+        "abstr/return/something": [[4,4]],
         "appli/composition": [[6,6]],
         "appli/function": [[6,6]],
         "appli/function/builtin/print": [[6,6]],
@@ -1579,10 +1583,6 @@
         "metadata/program": [[1,6]],
         "metadata/sloc/6": [[1,6]],
         "operator/arithmetic/addition": [[4,4]],
-        "subroutine/argument/arg": [[2,2],[3,3]],
-        "subroutine/function": [[2,5],[3,4]],
-        "subroutine/nested/closure": [[2,5]],
-        "subroutine/return/something": [[4,4]],
         "type/number/integer/literal": [[6,6],[6,6]]
       }
     },
@@ -1716,6 +1716,11 @@
         "whole_span:13": [[1,13]]
       },
       "taxa": {
+        "abstr/argument/arg": [[5,5],[9,9],[9,9]],
+        "abstr/argument/vararg": [[5,5]],
+        "abstr/method/flavor/instance": [[5,8],[9,12]],
+        "abstr/method/naming/magic": [[5,8]],
+        "abstr/procedure": [[5,8],[9,12]],
         "appli/class_constructor/Graph": [[13,13]],
         "appli/function/builtin/zip": [[10,10]],
         "appli/method/add": [[11,11],[12,12]],
@@ -1727,11 +1732,6 @@
         "library/standard/collections/defaultdict": [[1,1]],
         "metadata/program": [[1,13]],
         "metadata/sloc/13": [[1,13]],
-        "subroutine/argument/arg": [[5,5],[9,9],[9,9]],
-        "subroutine/argument/vararg": [[5,5]],
-        "subroutine/method/flavor/instance": [[5,8],[9,12]],
-        "subroutine/method/naming/magic": [[5,8]],
-        "subroutine/procedure": [[5,8],[9,12]],
         "subscript/index": [[11,11],[12,12]],
         "subscript/slice/start": [[10,10]],
         "type/non_sequence/set": [[11,11],[12,12]],
@@ -2046,6 +2046,10 @@
         "whole_span:7": [[1,7]]
       },
       "taxa": {
+        "abstr/argument/arg": [[1,1],[1,1]],
+        "abstr/function": [[1,6]],
+        "abstr/return/nothing": [[6,6]],
+        "abstr/return/something": [[5,5]],
         "appli/composition": [[7,7]],
         "appli/function": [[7,7]],
         "appli/function/builtin/enumerate": [[2,2],[3,3]],
@@ -2058,10 +2062,6 @@
         "io/standard/print": [[7,7]],
         "metadata/program": [[1,7]],
         "metadata/sloc/7": [[1,7]],
-        "subroutine/argument/arg": [[1,1],[1,1]],
-        "subroutine/function": [[1,6]],
-        "subroutine/return/nothing": [[6,6]],
-        "subroutine/return/something": [[5,5]],
         "test/equality": [[4,4]],
         "type/boolean": [[4,4]],
         "type/null/literal": [[6,6]],
@@ -2441,6 +2441,8 @@
         "whole_span:6": [[1,6]]
       },
       "taxa": {
+        "abstr/argument/arg": [[2,2]],
+        "abstr/procedure": [[2,3]],
         "appli/class_constructor/Pool": [[4,4]],
         "appli/function/builtin/print": [[6,6]],
         "appli/function/builtin/range": [[5,5]],
@@ -2450,8 +2452,6 @@
         "metadata/program": [[1,6]],
         "metadata/sloc/6": [[1,6]],
         "operator/arithmetic/multiplication": [[3,3]],
-        "subroutine/argument/arg": [[2,2]],
-        "subroutine/procedure": [[2,3]],
         "type/number/integer/literal": [[5,5],[5,5]],
         "type/sequence/string/literal": [[6,6]]
       }
@@ -2777,15 +2777,15 @@
         "whole_span:3": [[1,3]]
       },
       "taxa": {
+        "abstr/argument/arg": [[2,2],[2,2]],
+        "abstr/function": [[2,3]],
+        "abstr/return/something": [[3,3]],
         "appli/method/factorial": [[3,3],[3,3],[3,3]],
         "library/standard/math": [[1,1]],
         "metadata/program": [[1,3]],
         "metadata/sloc/3": [[1,3]],
         "operator/arithmetic/integer_division": [[3,3],[3,3]],
-        "operator/arithmetic/substraction": [[3,3]],
-        "subroutine/argument/arg": [[2,2],[2,2]],
-        "subroutine/function": [[2,3]],
-        "subroutine/return/something": [[3,3]]
+        "operator/arithmetic/substraction": [[3,3]]
       }
     },
     "068.2271-create-a-bitset.py": {
@@ -2964,15 +2964,15 @@
         "whole_span:3": [[1,3]]
       },
       "taxa": {
+        "abstr/argument/arg": [[1,1],[1,1]],
+        "abstr/function": [[1,3]],
+        "abstr/higher_order": [[1,3]],
+        "abstr/return/something": [[3,3]],
         "appli/function/a_class": [[3,3]],
         "appli/function/builtin/issubclass": [[2,2]],
         "flow/conditional/no_else": [[2,3]],
         "metadata/program": [[1,3]],
-        "metadata/sloc/3": [[1,3]],
-        "subroutine/argument/arg": [[1,1],[1,1]],
-        "subroutine/function": [[1,3]],
-        "subroutine/higher_order": [[1,3]],
-        "subroutine/return/something": [[3,3]]
+        "metadata/sloc/3": [[1,3]]
       }
     },
     "074.0674-compute-gcd.py": {
@@ -3328,10 +3328,10 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
+        "abstr/argument/arg": [[1,1],[1,1]],
+        "abstr/function": [[1,2]],
         "metadata/program": [[1,2]],
         "metadata/sloc/2": [[1,2]],
-        "subroutine/argument/arg": [[1,1],[1,1]],
-        "subroutine/function": [[1,2]],
         "type/boolean/literal/False": [[2,2]]
       }
     },
@@ -3353,10 +3353,10 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
+        "abstr/argument/arg": [[1,1],[1,1]],
+        "abstr/function": [[1,2]],
         "metadata/program": [[1,2]],
         "metadata/sloc/2": [[1,2]],
-        "subroutine/argument/arg": [[1,1],[1,1]],
-        "subroutine/function": [[1,2]],
         "type/boolean/literal/False": [[2,2]]
       }
     },
@@ -3467,15 +3467,15 @@
         "whole_span:6": [[1,6]]
       },
       "taxa": {
+        "abstr/argument/arg": [[2,2],[5,5]],
+        "abstr/decorated": [[4,6]],
+        "abstr/function": [[4,6]],
+        "abstr/method/flavor/instance": [[2,3],[4,6]],
+        "abstr/method/naming/magic": [[2,3]],
+        "abstr/procedure": [[2,3]],
+        "abstr/return/something": [[6,6]],
         "metadata/program": [[1,6]],
         "metadata/sloc/6": [[1,6]],
-        "subroutine/argument/arg": [[2,2],[5,5]],
-        "subroutine/decorated": [[4,6]],
-        "subroutine/function": [[4,6]],
-        "subroutine/method/flavor/instance": [[2,3],[4,6]],
-        "subroutine/method/naming/magic": [[2,3]],
-        "subroutine/procedure": [[2,3]],
-        "subroutine/return/something": [[6,6]],
         "type/number/integer/literal/zero": [[3,3]],
         "variable/assignment": [[3,3]]
       }
@@ -3577,15 +3577,15 @@
         "whole_span:3": [[1,3]]
       },
       "taxa": {
+        "abstr/argument/arg": [[2,2]],
+        "abstr/function": [[2,3]],
+        "abstr/higher_order": [[2,3]],
+        "abstr/return/something": [[3,3]],
         "appli/function/f": [[3,3]],
         "appli/function/without_arguments": [[3,3]],
         "library/standard/__future__/print_function": [[1,1]],
         "metadata/program": [[1,3]],
-        "metadata/sloc/3": [[1,3]],
-        "subroutine/argument/arg": [[2,2]],
-        "subroutine/function": [[2,3]],
-        "subroutine/higher_order": [[2,3]],
-        "subroutine/return/something": [[3,3]]
+        "metadata/sloc/3": [[1,3]]
       }
     },
     "094.1101-print-type-of-variable.py": {
@@ -3999,6 +3999,10 @@
         "whole_span:12": [[1,12]]
       },
       "taxa": {
+        "abstr/argument/arg": [[6,6],[6,6],[6,6],[6,6]],
+        "abstr/method/flavor/instance": [[6,9]],
+        "abstr/method/naming/magic": [[6,9]],
+        "abstr/procedure": [[6,9]],
         "appli/class_constructor/TestClass": [[10,10]],
         "appli/function/builtin/print": [[12,12]],
         "appli/method/serialize": [[11,11]],
@@ -4006,10 +4010,6 @@
         "library/third_party/pyxser": [[1,1]],
         "metadata/program": [[1,12]],
         "metadata/sloc/12": [[1,12]],
-        "subroutine/argument/arg": [[6,6],[6,6],[6,6],[6,6]],
-        "subroutine/method/flavor/instance": [[6,9]],
-        "subroutine/method/naming/magic": [[6,9]],
-        "subroutine/procedure": [[6,9]],
         "type/null/literal": [[3,3],[4,4],[5,5]],
         "type/sequence/string/literal": [[10,10],[10,10],[10,10],[11,11]],
         "variable/assignment": [[7,7],[8,8],[9,9]],
@@ -4814,6 +4814,9 @@
         "whole_span:4": [[1,4]]
       },
       "taxa": {
+        "abstr/argument/arg": [[2,2],[2,2]],
+        "abstr/function": [[2,4]],
+        "abstr/return/something": [[4,4]],
         "appli/function/builtin/len": [[4,4]],
         "appli/method/bisect_left": [[3,3]],
         "library/standard/bisect": [[1,1]],
@@ -4821,9 +4824,6 @@
         "metadata/sloc/4": [[1,4]],
         "operator/boolean/and": [[4,4]],
         "operator/ternary": [[4,4]],
-        "subroutine/argument/arg": [[2,2],[2,2]],
-        "subroutine/function": [[2,4]],
-        "subroutine/return/something": [[4,4]],
         "subscript/index": [[4,4]],
         "test/equality": [[4,4]],
         "test/equality/not": [[4,4]],
@@ -4898,11 +4898,11 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
+        "abstr/argument/no": [[1,2]],
+        "abstr/function": [[1,2]],
+        "abstr/return/something": [[2,2]],
         "metadata/program": [[1,2]],
         "metadata/sloc/2": [[1,2]],
-        "subroutine/argument/no": [[1,2]],
-        "subroutine/function": [[1,2]],
-        "subroutine/return/something": [[2,2]],
         "type/boolean/literal/True": [[2,2]],
         "type/sequence/string/literal": [[2,2]],
         "type/sequence/tuple/literal": [[2,2]]
@@ -5004,6 +5004,9 @@
         "whole_span:9": [[1,9]]
       },
       "taxa": {
+        "abstr/argument/arg": [[1,1],[1,1]],
+        "abstr/higher_order": [[1,9]],
+        "abstr/procedure": [[1,9]],
         "appli/function/f": [[5,5]],
         "appli/method/append": [[9,9]],
         "appli/method/pop": [[4,4]],
@@ -5014,9 +5017,6 @@
         "metadata/program": [[1,9]],
         "metadata/sloc/9": [[1,9]],
         "operator/boolean/not": [[7,7]],
-        "subroutine/argument/arg": [[1,1],[1,1]],
-        "subroutine/higher_order": [[1,9]],
-        "subroutine/procedure": [[1,9]],
         "type/boolean/literal/True": [[8,8]],
         "type/number/integer/literal/zero": [[4,4]],
         "type/sequence/list": [[9,9]],
@@ -5093,6 +5093,9 @@
         "whole_span:9": [[1,9]]
       },
       "taxa": {
+        "abstr/argument/arg": [[2,2],[2,2]],
+        "abstr/higher_order": [[2,9]],
+        "abstr/procedure": [[2,9]],
         "appli/function/builtin/casting/set": [[3,3]],
         "appli/function/deque": [[4,4]],
         "appli/function/f": [[7,7]],
@@ -5105,9 +5108,6 @@
         "library/standard/collections/deque": [[1,1]],
         "metadata/program": [[1,9]],
         "metadata/sloc/9": [[1,9]],
-        "subroutine/argument/arg": [[2,2],[2,2]],
-        "subroutine/higher_order": [[2,9]],
-        "subroutine/procedure": [[2,9]],
         "test/belonging/not": [[9,9]],
         "type/boolean": [[9,9]],
         "type/non_sequence/set": [[3,3],[8,8]],
@@ -5177,6 +5177,9 @@
         "whole_span:8": [[1,8]]
       },
       "taxa": {
+        "abstr/argument/arg": [[1,1],[1,1]],
+        "abstr/higher_order": [[1,8]],
+        "abstr/procedure": [[1,8]],
         "appli/function/builtin/casting/set": [[2,2]],
         "appli/function/f": [[6,6]],
         "appli/function/without_arguments": [[2,2]],
@@ -5187,9 +5190,6 @@
         "flow/loop/while": [[4,8]],
         "metadata/program": [[1,8]],
         "metadata/sloc/8": [[1,8]],
-        "subroutine/argument/arg": [[1,1],[1,1]],
-        "subroutine/higher_order": [[1,8]],
-        "subroutine/procedure": [[1,8]],
         "test/belonging/not": [[8,8]],
         "type/boolean": [[8,8]],
         "type/non_sequence/set": [[2,2],[7,7]],
@@ -6140,6 +6140,13 @@
         "whole_span:15": [[1,15]]
       },
       "taxa": {
+        "abstr/argument/arg": [[4,4],[4,4],[8,8]],
+        "abstr/decorated": [[3,7]],
+        "abstr/function": [[3,7],[8,10]],
+        "abstr/method/flavor/class": [[3,7]],
+        "abstr/method/flavor/instance": [[8,10]],
+        "abstr/method/naming/magic": [[8,10]],
+        "abstr/return/something": [[5,7],[10,10]],
         "appli/composition": [[5,5],[6,6],[10,10]],
         "appli/function/builtin/casting/int": [[6,6]],
         "appli/function/builtin/format": [[10,10]],
@@ -6159,13 +6166,6 @@
         "operator/arithmetic/addition": [[6,6],[15,15]],
         "operator/arithmetic/division": [[15,15]],
         "operator/string/concatenation": [[10,10]],
-        "subroutine/argument/arg": [[4,4],[4,4],[8,8]],
-        "subroutine/decorated": [[3,7]],
-        "subroutine/function": [[3,7],[8,10]],
-        "subroutine/method/flavor/class": [[3,7]],
-        "subroutine/method/flavor/instance": [[8,10]],
-        "subroutine/method/naming/magic": [[8,10]],
-        "subroutine/return/something": [[5,7],[10,10]],
         "subscript/slice/start": [[6,6]],
         "subscript/slice/stop": [[6,6]],
         "type/number/integer": [[6,6]],
@@ -6316,12 +6316,12 @@
         "whole_span:5": [[1,5]]
       },
       "taxa": {
+        "abstr/argument/arg": [[2,2],[2,2],[2,2]],
+        "abstr/method/flavor/instance": [[2,5]],
+        "abstr/method/naming/magic": [[2,5]],
+        "abstr/procedure": [[2,5]],
         "metadata/program": [[1,5]],
         "metadata/sloc/5": [[1,5]],
-        "subroutine/argument/arg": [[2,2],[2,2],[2,2]],
-        "subroutine/method/flavor/instance": [[2,5]],
-        "subroutine/method/naming/magic": [[2,5]],
-        "subroutine/procedure": [[2,5]],
         "type/null/literal": [[2,2]],
         "type/sequence/list/literal/empty": [[4,4]],
         "variable/assignment": [[3,3],[4,4],[5,5]]
@@ -6562,6 +6562,9 @@
         "whole_span:7": [[1,7]]
       },
       "taxa": {
+        "abstr/argument/arg": [[2,2]],
+        "abstr/function": [[2,5]],
+        "abstr/return/something": [[5,5]],
         "appli/function": [[6,6]],
         "appli/function/builtin/next": [[4,4]],
         "appli/function/builtin/print": [[7,7]],
@@ -6573,9 +6576,6 @@
         "library/standard/itertools/tee": [[1,1]],
         "metadata/program": [[1,7]],
         "metadata/sloc/7": [[1,7]],
-        "subroutine/argument/arg": [[2,2]],
-        "subroutine/function": [[2,5]],
-        "subroutine/return/something": [[5,5]],
         "type/null/literal": [[4,4]],
         "type/sequence/tuple/literal": [[3,3],[6,6]],
         "variable/assignment/parallel": [[3,3]]
@@ -7621,6 +7621,13 @@
         "whole_span:15": [[1,15]]
       },
       "taxa": {
+        "abstr/argument/arg": [[2,2],[2,2],[5,5],[5,5],[11,11],[11,11],[11,11],[13,13],[13,13],[13,13]],
+        "abstr/function": [[5,10]],
+        "abstr/function/predicate": [[11,12]],
+        "abstr/method/flavor/instance": [[2,4],[5,10],[11,12],[13,15]],
+        "abstr/method/naming/magic": [[2,4]],
+        "abstr/procedure": [[2,4],[13,15]],
+        "abstr/return/something": [[10,10],[12,12]],
         "appli/function/builtin/range": [[4,4]],
         "appli/method/find_set": [[9,9],[12,12],[12,12],[15,15],[15,15]],
         "appli/method/is_same_set": [[14,14]],
@@ -7631,13 +7638,6 @@
         "metadata/sloc/15": [[1,15]],
         "operator/boolean/not": [[14,14]],
         "operator/list/replication": [[3,3]],
-        "subroutine/argument/arg": [[2,2],[2,2],[5,5],[5,5],[11,11],[11,11],[11,11],[13,13],[13,13],[13,13]],
-        "subroutine/function": [[5,10]],
-        "subroutine/function/predicate": [[11,12]],
-        "subroutine/method/flavor/instance": [[2,4],[5,10],[11,12],[13,15]],
-        "subroutine/method/naming/magic": [[2,4]],
-        "subroutine/procedure": [[2,4],[13,15]],
-        "subroutine/return/something": [[10,10],[12,12]],
         "subscript/index": [[6,6],[9,9],[9,9],[10,10]],
         "test/equality": [[6,6],[12,12]],
         "type/boolean": [[6,6],[12,12]],
@@ -14839,6 +14839,174 @@
     ]
   },
   "taxa": {
+    "abstr/argument/arg": [
+      "003.0019-create-a-procedure.py",
+      "004.0024-create-a-function-which-returns-the-square-of-an-integer.py",
+      "004.2921-create-a-function-which-returns-the-square-of-an-integer.py",
+      "009.1410-create-a-binary-tree-data-structure.py",
+      "009.3176-create-a-binary-tree-data-structure.py",
+      "014.0185-pick-uniformly-a-random-floating-point-number-in-ab.py",
+      "016.1530-depth-first-traversing-of-a-binary-tree.py",
+      "017.1103-create-a-tree-data-structure.py",
+      "018.2084-depth-first-traversing-of-a-tree.py",
+      "020.0573-return-two-values.py",
+      "028.0350-sort-by-a-property.py",
+      "031.0188-recursive-factorial-simple.py",
+      "032.0196-integer-exponentiation-by-squaring.py",
+      "035.0667-first-class-function--compose.py",
+      "036.0670-first-class-function--generic-composition.py",
+      "037.0671-currying.py",
+      "040.2279-graph-with-adjacency-lists.py",
+      "043.2733-break-outer-loop.py",
+      "056.1424-launch-1000-parallel-tasks-and-wait-for-completion.py",
+      "067.1426-binomial-coefficient-n-choose-k.py",
+      "073.0673-create-a-factory.py",
+      "085.1003-check-if-integer-addition-will-overflow.py",
+      "086.1004-check-if-integer-multiplication-will-overflow.py",
+      "090.1099-read-only-outside.py",
+      "093.1082-pass-a-runnable-procedure-as-parameter.py",
+      "104.3264-save-object-into-xml-file.py",
+      "124.2152-binary-search-for-a-value-in-sorted-array.py",
+      "128.2085-breadth-first-traversing-of-a-tree.py",
+      "129.2282-breadth-first-traversing-in-a-graph.py",
+      "130.2283-depth-first-traversing-in-a-graph.py",
+      "154.2292-halfway-between-two-hex-color-codes.py",
+      "159.2281-trie.py",
+      "163.3177-print-list-elements-by-group-of-2.py",
+      "187.3261-disjoint-set.py"
+    ],
+    "abstr/argument/no": [
+      "003.2372-create-a-procedure.py",
+      "126.2137-multiple-return-values.py"
+    ],
+    "abstr/argument/vararg": [
+      "017.1103-create-a-tree-data-structure.py",
+      "040.2279-graph-with-adjacency-lists.py"
+    ],
+    "abstr/decorated": [
+      "090.1099-read-only-outside.py",
+      "154.2292-halfway-between-two-hex-color-codes.py"
+    ],
+    "abstr/function": [
+      "004.0024-create-a-function-which-returns-the-square-of-an-integer.py",
+      "004.2921-create-a-function-which-returns-the-square-of-an-integer.py",
+      "014.0185-pick-uniformly-a-random-floating-point-number-in-ab.py",
+      "020.0573-return-two-values.py",
+      "031.0188-recursive-factorial-simple.py",
+      "032.0196-integer-exponentiation-by-squaring.py",
+      "035.0667-first-class-function--compose.py",
+      "036.0670-first-class-function--generic-composition.py",
+      "037.0671-currying.py",
+      "043.2733-break-outer-loop.py",
+      "067.1426-binomial-coefficient-n-choose-k.py",
+      "073.0673-create-a-factory.py",
+      "085.1003-check-if-integer-addition-will-overflow.py",
+      "086.1004-check-if-integer-multiplication-will-overflow.py",
+      "090.1099-read-only-outside.py",
+      "093.1082-pass-a-runnable-procedure-as-parameter.py",
+      "124.2152-binary-search-for-a-value-in-sorted-array.py",
+      "126.2137-multiple-return-values.py",
+      "154.2292-halfway-between-two-hex-color-codes.py",
+      "163.3177-print-list-elements-by-group-of-2.py",
+      "187.3261-disjoint-set.py"
+    ],
+    "abstr/function/anonymous": [
+      "028.0350-sort-by-a-property.py",
+      "035.0667-first-class-function--compose.py",
+      "036.0670-first-class-function--generic-composition.py"
+    ],
+    "abstr/function/predicate": [
+      "187.3261-disjoint-set.py"
+    ],
+    "abstr/higher_order": [
+      "018.2084-depth-first-traversing-of-a-tree.py",
+      "035.0667-first-class-function--compose.py",
+      "036.0670-first-class-function--generic-composition.py",
+      "073.0673-create-a-factory.py",
+      "093.1082-pass-a-runnable-procedure-as-parameter.py",
+      "128.2085-breadth-first-traversing-of-a-tree.py",
+      "129.2282-breadth-first-traversing-in-a-graph.py",
+      "130.2283-depth-first-traversing-in-a-graph.py"
+    ],
+    "abstr/method/flavor/class": [
+      "154.2292-halfway-between-two-hex-color-codes.py"
+    ],
+    "abstr/method/flavor/instance": [
+      "009.1410-create-a-binary-tree-data-structure.py",
+      "009.3176-create-a-binary-tree-data-structure.py",
+      "017.1103-create-a-tree-data-structure.py",
+      "040.2279-graph-with-adjacency-lists.py",
+      "090.1099-read-only-outside.py",
+      "104.3264-save-object-into-xml-file.py",
+      "154.2292-halfway-between-two-hex-color-codes.py",
+      "159.2281-trie.py",
+      "187.3261-disjoint-set.py"
+    ],
+    "abstr/method/naming/magic": [
+      "009.1410-create-a-binary-tree-data-structure.py",
+      "009.3176-create-a-binary-tree-data-structure.py",
+      "017.1103-create-a-tree-data-structure.py",
+      "040.2279-graph-with-adjacency-lists.py",
+      "090.1099-read-only-outside.py",
+      "104.3264-save-object-into-xml-file.py",
+      "154.2292-halfway-between-two-hex-color-codes.py",
+      "159.2281-trie.py",
+      "187.3261-disjoint-set.py"
+    ],
+    "abstr/nested/closure": [
+      "037.0671-currying.py"
+    ],
+    "abstr/procedure": [
+      "003.0019-create-a-procedure.py",
+      "003.2372-create-a-procedure.py",
+      "009.1410-create-a-binary-tree-data-structure.py",
+      "009.3176-create-a-binary-tree-data-structure.py",
+      "016.1530-depth-first-traversing-of-a-binary-tree.py",
+      "017.1103-create-a-tree-data-structure.py",
+      "018.2084-depth-first-traversing-of-a-tree.py",
+      "040.2279-graph-with-adjacency-lists.py",
+      "056.1424-launch-1000-parallel-tasks-and-wait-for-completion.py",
+      "090.1099-read-only-outside.py",
+      "104.3264-save-object-into-xml-file.py",
+      "128.2085-breadth-first-traversing-of-a-tree.py",
+      "129.2282-breadth-first-traversing-in-a-graph.py",
+      "130.2283-depth-first-traversing-in-a-graph.py",
+      "159.2281-trie.py",
+      "187.3261-disjoint-set.py"
+    ],
+    "abstr/recursive": [
+      "016.1530-depth-first-traversing-of-a-binary-tree.py"
+    ],
+    "abstr/recursive/body": [
+      "016.1530-depth-first-traversing-of-a-binary-tree.py",
+      "018.2084-depth-first-traversing-of-a-tree.py",
+      "031.0188-recursive-factorial-simple.py"
+    ],
+    "abstr/return/nothing": [
+      "016.1530-depth-first-traversing-of-a-binary-tree.py",
+      "043.2733-break-outer-loop.py"
+    ],
+    "abstr/return/something": [
+      "004.0024-create-a-function-which-returns-the-square-of-an-integer.py",
+      "004.2921-create-a-function-which-returns-the-square-of-an-integer.py",
+      "014.0185-pick-uniformly-a-random-floating-point-number-in-ab.py",
+      "020.0573-return-two-values.py",
+      "031.0188-recursive-factorial-simple.py",
+      "032.0196-integer-exponentiation-by-squaring.py",
+      "035.0667-first-class-function--compose.py",
+      "036.0670-first-class-function--generic-composition.py",
+      "037.0671-currying.py",
+      "043.2733-break-outer-loop.py",
+      "067.1426-binomial-coefficient-n-choose-k.py",
+      "073.0673-create-a-factory.py",
+      "090.1099-read-only-outside.py",
+      "093.1082-pass-a-runnable-procedure-as-parameter.py",
+      "124.2152-binary-search-for-a-value-in-sorted-array.py",
+      "126.2137-multiple-return-values.py",
+      "154.2292-halfway-between-two-hex-color-codes.py",
+      "163.3177-print-list-elements-by-group-of-2.py",
+      "187.3261-disjoint-set.py"
+    ],
     "appli/class_constructor": [
       "018.2084-depth-first-traversing-of-a-tree.py"
     ],
@@ -16401,174 +16569,6 @@
     ],
     "pattern/elements/accumulate/in_set/filtered": [
       "119.3263-deduplicate-list.py"
-    ],
-    "subroutine/argument/arg": [
-      "003.0019-create-a-procedure.py",
-      "004.0024-create-a-function-which-returns-the-square-of-an-integer.py",
-      "004.2921-create-a-function-which-returns-the-square-of-an-integer.py",
-      "009.1410-create-a-binary-tree-data-structure.py",
-      "009.3176-create-a-binary-tree-data-structure.py",
-      "014.0185-pick-uniformly-a-random-floating-point-number-in-ab.py",
-      "016.1530-depth-first-traversing-of-a-binary-tree.py",
-      "017.1103-create-a-tree-data-structure.py",
-      "018.2084-depth-first-traversing-of-a-tree.py",
-      "020.0573-return-two-values.py",
-      "028.0350-sort-by-a-property.py",
-      "031.0188-recursive-factorial-simple.py",
-      "032.0196-integer-exponentiation-by-squaring.py",
-      "035.0667-first-class-function--compose.py",
-      "036.0670-first-class-function--generic-composition.py",
-      "037.0671-currying.py",
-      "040.2279-graph-with-adjacency-lists.py",
-      "043.2733-break-outer-loop.py",
-      "056.1424-launch-1000-parallel-tasks-and-wait-for-completion.py",
-      "067.1426-binomial-coefficient-n-choose-k.py",
-      "073.0673-create-a-factory.py",
-      "085.1003-check-if-integer-addition-will-overflow.py",
-      "086.1004-check-if-integer-multiplication-will-overflow.py",
-      "090.1099-read-only-outside.py",
-      "093.1082-pass-a-runnable-procedure-as-parameter.py",
-      "104.3264-save-object-into-xml-file.py",
-      "124.2152-binary-search-for-a-value-in-sorted-array.py",
-      "128.2085-breadth-first-traversing-of-a-tree.py",
-      "129.2282-breadth-first-traversing-in-a-graph.py",
-      "130.2283-depth-first-traversing-in-a-graph.py",
-      "154.2292-halfway-between-two-hex-color-codes.py",
-      "159.2281-trie.py",
-      "163.3177-print-list-elements-by-group-of-2.py",
-      "187.3261-disjoint-set.py"
-    ],
-    "subroutine/argument/no": [
-      "003.2372-create-a-procedure.py",
-      "126.2137-multiple-return-values.py"
-    ],
-    "subroutine/argument/vararg": [
-      "017.1103-create-a-tree-data-structure.py",
-      "040.2279-graph-with-adjacency-lists.py"
-    ],
-    "subroutine/decorated": [
-      "090.1099-read-only-outside.py",
-      "154.2292-halfway-between-two-hex-color-codes.py"
-    ],
-    "subroutine/function": [
-      "004.0024-create-a-function-which-returns-the-square-of-an-integer.py",
-      "004.2921-create-a-function-which-returns-the-square-of-an-integer.py",
-      "014.0185-pick-uniformly-a-random-floating-point-number-in-ab.py",
-      "020.0573-return-two-values.py",
-      "031.0188-recursive-factorial-simple.py",
-      "032.0196-integer-exponentiation-by-squaring.py",
-      "035.0667-first-class-function--compose.py",
-      "036.0670-first-class-function--generic-composition.py",
-      "037.0671-currying.py",
-      "043.2733-break-outer-loop.py",
-      "067.1426-binomial-coefficient-n-choose-k.py",
-      "073.0673-create-a-factory.py",
-      "085.1003-check-if-integer-addition-will-overflow.py",
-      "086.1004-check-if-integer-multiplication-will-overflow.py",
-      "090.1099-read-only-outside.py",
-      "093.1082-pass-a-runnable-procedure-as-parameter.py",
-      "124.2152-binary-search-for-a-value-in-sorted-array.py",
-      "126.2137-multiple-return-values.py",
-      "154.2292-halfway-between-two-hex-color-codes.py",
-      "163.3177-print-list-elements-by-group-of-2.py",
-      "187.3261-disjoint-set.py"
-    ],
-    "subroutine/function/anonymous": [
-      "028.0350-sort-by-a-property.py",
-      "035.0667-first-class-function--compose.py",
-      "036.0670-first-class-function--generic-composition.py"
-    ],
-    "subroutine/function/predicate": [
-      "187.3261-disjoint-set.py"
-    ],
-    "subroutine/higher_order": [
-      "018.2084-depth-first-traversing-of-a-tree.py",
-      "035.0667-first-class-function--compose.py",
-      "036.0670-first-class-function--generic-composition.py",
-      "073.0673-create-a-factory.py",
-      "093.1082-pass-a-runnable-procedure-as-parameter.py",
-      "128.2085-breadth-first-traversing-of-a-tree.py",
-      "129.2282-breadth-first-traversing-in-a-graph.py",
-      "130.2283-depth-first-traversing-in-a-graph.py"
-    ],
-    "subroutine/method/flavor/class": [
-      "154.2292-halfway-between-two-hex-color-codes.py"
-    ],
-    "subroutine/method/flavor/instance": [
-      "009.1410-create-a-binary-tree-data-structure.py",
-      "009.3176-create-a-binary-tree-data-structure.py",
-      "017.1103-create-a-tree-data-structure.py",
-      "040.2279-graph-with-adjacency-lists.py",
-      "090.1099-read-only-outside.py",
-      "104.3264-save-object-into-xml-file.py",
-      "154.2292-halfway-between-two-hex-color-codes.py",
-      "159.2281-trie.py",
-      "187.3261-disjoint-set.py"
-    ],
-    "subroutine/method/naming/magic": [
-      "009.1410-create-a-binary-tree-data-structure.py",
-      "009.3176-create-a-binary-tree-data-structure.py",
-      "017.1103-create-a-tree-data-structure.py",
-      "040.2279-graph-with-adjacency-lists.py",
-      "090.1099-read-only-outside.py",
-      "104.3264-save-object-into-xml-file.py",
-      "154.2292-halfway-between-two-hex-color-codes.py",
-      "159.2281-trie.py",
-      "187.3261-disjoint-set.py"
-    ],
-    "subroutine/nested/closure": [
-      "037.0671-currying.py"
-    ],
-    "subroutine/procedure": [
-      "003.0019-create-a-procedure.py",
-      "003.2372-create-a-procedure.py",
-      "009.1410-create-a-binary-tree-data-structure.py",
-      "009.3176-create-a-binary-tree-data-structure.py",
-      "016.1530-depth-first-traversing-of-a-binary-tree.py",
-      "017.1103-create-a-tree-data-structure.py",
-      "018.2084-depth-first-traversing-of-a-tree.py",
-      "040.2279-graph-with-adjacency-lists.py",
-      "056.1424-launch-1000-parallel-tasks-and-wait-for-completion.py",
-      "090.1099-read-only-outside.py",
-      "104.3264-save-object-into-xml-file.py",
-      "128.2085-breadth-first-traversing-of-a-tree.py",
-      "129.2282-breadth-first-traversing-in-a-graph.py",
-      "130.2283-depth-first-traversing-in-a-graph.py",
-      "159.2281-trie.py",
-      "187.3261-disjoint-set.py"
-    ],
-    "subroutine/recursive": [
-      "016.1530-depth-first-traversing-of-a-binary-tree.py"
-    ],
-    "subroutine/recursive/body": [
-      "016.1530-depth-first-traversing-of-a-binary-tree.py",
-      "018.2084-depth-first-traversing-of-a-tree.py",
-      "031.0188-recursive-factorial-simple.py"
-    ],
-    "subroutine/return/nothing": [
-      "016.1530-depth-first-traversing-of-a-binary-tree.py",
-      "043.2733-break-outer-loop.py"
-    ],
-    "subroutine/return/something": [
-      "004.0024-create-a-function-which-returns-the-square-of-an-integer.py",
-      "004.2921-create-a-function-which-returns-the-square-of-an-integer.py",
-      "014.0185-pick-uniformly-a-random-floating-point-number-in-ab.py",
-      "020.0573-return-two-values.py",
-      "031.0188-recursive-factorial-simple.py",
-      "032.0196-integer-exponentiation-by-squaring.py",
-      "035.0667-first-class-function--compose.py",
-      "036.0670-first-class-function--generic-composition.py",
-      "037.0671-currying.py",
-      "043.2733-break-outer-loop.py",
-      "067.1426-binomial-coefficient-n-choose-k.py",
-      "073.0673-create-a-factory.py",
-      "090.1099-read-only-outside.py",
-      "093.1082-pass-a-runnable-procedure-as-parameter.py",
-      "124.2152-binary-search-for-a-value-in-sorted-array.py",
-      "126.2137-multiple-return-values.py",
-      "154.2292-halfway-between-two-hex-color-codes.py",
-      "163.3177-print-list-elements-by-group-of-2.py",
-      "187.3261-disjoint-set.py"
     ],
     "subscript/index": [
       "029.0199-remove-item-from-list-by-its-index.py",

@@ -47,7 +47,7 @@ triple_data = [
         (
             "test/equality$",  # featured by all programs except assignment.py
             compare_spans["inside"],  # but only inside
-            "subroutine",  # subroutine/function or subroutine/procedure in two of them
+            "abstr",  # abstr/function or abstr/procedure in two of them
         ),
         {"collatz.py", "is_even.py"},
     ),
@@ -114,7 +114,7 @@ negated_triple_data = [
         (
             "test/equality$",  # featured by all programs except assignment.py
             compare_spans["inside"],  # but only inside
-            "subroutine",  # subroutine/function or subroutine/procedure in two of them
+            "abstr",  # abstr/function or abstr/procedure in two of them
         ),
         {"fizzbuzz.py"},
     ),

@@ -89,6 +89,8 @@
         "whole_span:8": [[1,8]]
       },
       "taxa": {
+        "abstr/argument/arg": [[1,1]],
+        "abstr/procedure": [[1,8]],
         "appli/function/builtin/print": [[3,3],[8,8]],
         "flow/conditional": [[4,7]],
         "flow/conditional/else": [[7,7]],
@@ -100,8 +102,6 @@
         "operator/arithmetic/addition": [[7,7]],
         "operator/arithmetic/modulo": [[4,4]],
         "operator/arithmetic/multiplication": [[7,7]],
-        "subroutine/argument/arg": [[1,1]],
-        "subroutine/procedure": [[1,8]],
         "test/divisibility/parity": [[4,4]],
         "test/equality": [[4,4]],
         "test/equality/not": [[2,2]],
@@ -215,13 +215,13 @@
         "whole_span:3": [[1,3]]
       },
       "taxa": {
+        "abstr/argument/arg": [[2,2]],
+        "abstr/function/predicate": [[2,3]],
+        "abstr/return/something": [[3,3]],
         "library/personal": [[1,1]],
         "metadata/program": [[1,3]],
         "metadata/sloc/3": [[1,3]],
         "operator/arithmetic/modulo": [[3,3]],
-        "subroutine/argument/arg": [[2,2]],
-        "subroutine/function/predicate": [[2,3]],
-        "subroutine/return/something": [[3,3]],
         "test/divisibility/parity": [[3,3]],
         "test/equality": [[3,3]],
         "type/boolean": [[3,3]],
@@ -589,6 +589,19 @@
     ]
   },
   "taxa": {
+    "abstr/argument/arg": [
+      "collatz.py",
+      "is_even.py"
+    ],
+    "abstr/function/predicate": [
+      "is_even.py"
+    ],
+    "abstr/procedure": [
+      "collatz.py"
+    ],
+    "abstr/return/something": [
+      "is_even.py"
+    ],
     "appli/function/builtin/print": [
       "collatz.py",
       "fizzbuzz.py"
@@ -653,19 +666,6 @@
     ],
     "operator/arithmetic/multiplication": [
       "collatz.py"
-    ],
-    "subroutine/argument/arg": [
-      "collatz.py",
-      "is_even.py"
-    ],
-    "subroutine/function/predicate": [
-      "is_even.py"
-    ],
-    "subroutine/procedure": [
-      "collatz.py"
-    ],
-    "subroutine/return/something": [
-      "is_even.py"
     ],
     "test/divisibility/parity": [
       "collatz.py",

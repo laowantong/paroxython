@@ -102,12 +102,12 @@
 ]
 </code></pre>
 <h2 id="concepts-to-be-introduced-later-or-never">Concepts to be introduced later (or never)</h2>
-<p>For the time being, you don't want to be recommended any program requiring the concepts of recursivity (<code>subroutine/recursive</code>), dictionary (<code>type/non_sequence/dictionary</code>) or set (<code>type/non_sequence/set</code>).</p>
+<p>For the time being, you don't want to be recommended any program requiring the concepts of recursivity (<code>abstr/recursive</code>), dictionary (<code>type/non_sequence/dictionary</code>) or set (<code>type/non_sequence/set</code>).</p>
 <pre><code class="python">[
   {
     &quot;operation&quot;: &quot;exclude&quot;,
     &quot;data&quot;: [
-      &quot;subroutine/recursive&quot;,
+      &quot;abstr/recursive&quot;,
       &quot;type/non_sequence&quot;,
     ],
   },
@@ -702,11 +702,11 @@ Paroxython tries (cf. <code><a title="paroxython.normalize_predicate.normalize_p
     &quot;operation&quot;: &quot;include&quot;,
     &quot;data&quot;: [
       (&quot;flow/loop&quot;, &quot;contains&quot;, &quot;flow/conditional&quot;),
-      (&quot;flow/conditional&quot;, &quot;finished by&quot;, &quot;subroutine/return&quot;),
+      (&quot;flow/conditional&quot;, &quot;finished by&quot;, &quot;abstr/return&quot;),
     ]
   },
 </code></pre>
-<p>It is currently not possible to chain several operators with shared operands, for example to keep only the programs that feature a conditional inside a loop <strong>and</strong> ended by a <code>return</code> statement: the quintuple <code>("flow/loop", "contains", "flow/conditional", "finished by", "subroutine/return")</code> would raise an error. As it stands, the best we can do is to chain the commands themselves:</p>
+<p>It is currently not possible to chain several operators with shared operands, for example to keep only the programs that feature a conditional inside a loop <strong>and</strong> ended by a <code>return</code> statement: the quintuple <code>("flow/loop", "contains", "flow/conditional", "finished by", "abstr/return")</code> would raise an error. As it stands, the best we can do is to chain the commands themselves:</p>
 <pre><code class="python">  {
     &quot;operation&quot;: &quot;include&quot;,
     &quot;data&quot;: [
@@ -716,13 +716,13 @@ Paroxython tries (cf. <code><a title="paroxython.normalize_predicate.normalize_p
   {
     &quot;operation&quot;: &quot;include&quot;,
     &quot;data&quot;: [
-      (&quot;flow/conditional&quot;, &quot;finished by&quot;, &quot;subroutine/return&quot;),
+      (&quot;flow/conditional&quot;, &quot;finished by&quot;, &quot;abstr/return&quot;),
     ]
   },
   {
     &quot;operation&quot;: &quot;include&quot;,
     &quot;data&quot;: [
-      (&quot;subroutine/return&quot;, &quot;contains&quot;, &quot;flow/loop&quot;),
+      (&quot;abstr/return&quot;, &quot;contains&quot;, &quot;flow/loop&quot;),
     ]
   },
 </code></pre>
@@ -797,7 +797,7 @@ span <code>s_1</code> of such a taxon, there exists no span <code>s_2</code> of 
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Note that the result includes also all programs featuring at least one taxon matching <code>taxon_pattern_1</code>, but no taxon matching <code>taxon_pattern_2</code>. For instance, suppose the original (negative) triple is:</p>
-<p><code>("subroutine", "not contains", "variable/assignment")</code></p>
+<p><code>("abstr", "not contains", "variable/assignment")</code></p>
 <p>The function will return the (disjoint) union of these two sets:</p>
 <ol>
 <li>The programs featuring at least one subroutine, but no assignment at all.</li>

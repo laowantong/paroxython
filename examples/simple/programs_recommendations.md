@@ -127,6 +127,8 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
+| 0.375 | `abstr/argument/no` | 2-7 |
+| 0.25 | `abstr/generator` | 2-7 |
 | 0 | `appli/function/builtin/filter` | 7 |
 | 0 | `appli/function/builtin/next` | 5 |
 | 0 | `appli/function/builtin/print` | 11 |
@@ -138,8 +140,6 @@
 | 0 | `flow/loop/for` | 8-11 |
 | 0 | `flow/loop/while/infinite` | 4-7 |
 | 0.875 | `library/standard/itertools` | 1 |
-| 0.375 | `subroutine/argument/no` | 2-7 |
-| 0.25 | `subroutine/generator` | 2-7 |
 | 0.75 | `test/inequality` | 9 |
 | 0.25 | `type/boolean` | 9 |
 | 0.4375 | `type/boolean/literal/True` | 4 |
@@ -264,17 +264,17 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
+| 0.375 | `abstr/argument/arg` | 2, 2, 4, 4, 6, 6, 8 |
+| 0.25 | `abstr/function` | 8-9 |
+| 0.4375 | `abstr/method/flavor/instance` | 2-3, 4-5, 6-7, 8-9 |
+| 0.4375 | `abstr/method/naming/magic` | 2-3 |
+| 0 | `abstr/procedure` | 2-3, 4-5, 6-7 |
+| 0.375 | `abstr/return/something` | 9 |
 | 0.375 | `appli/class_constructor/BankAccount` | 10 |
 | 0.25 | `appli/composition` | 12 |
 | 0 | `appli/function/builtin/print` | 12 |
 | 0.375 | `appli/method/overdrawn` | 12 |
 | 0.375 | `appli/method/withdraw` | 11 |
-| 0.375 | `subroutine/argument/arg` | 2, 2, 4, 4, 6, 6, 8 |
-| 0.25 | `subroutine/function` | 8-9 |
-| 0.4375 | `subroutine/method/flavor/instance` | 2-3, 4-5, 6-7, 8-9 |
-| 0.4375 | `subroutine/method/naming/magic` | 2-3 |
-| 0 | `subroutine/procedure` | 2-3, 4-5, 6-7 |
-| 0.375 | `subroutine/return/something` | 9 |
 | 0.75 | `test/inequality` | 9 |
 | 0.25 | `type/boolean` | 9 |
 | 0.4375 | `type/number/integer/literal` | 10, 11 |
@@ -302,6 +302,9 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
+| 0.375 | `abstr/argument/arg` | 1 |
+| 0.25 | `abstr/function` | 1-7 |
+| 0.375 | `abstr/return/something` | 5, 7 |
 | 0 | `appli/function/builtin/casting/int` | 5, 7, 7 |
 | 0 | `appli/function/builtin/len` | 3 |
 | 0 | `appli/function/builtin/sorted` | 2 |
@@ -311,9 +314,6 @@
 | 0.375 | `operator/arithmetic/division` | 5, 7, 7, 7 |
 | 0.375 | `operator/arithmetic/modulo` | 4 |
 | 0.375 | `operator/arithmetic/substraction` | 5, 7 |
-| 0.375 | `subroutine/argument/arg` | 1 |
-| 0.25 | `subroutine/function` | 1-7 |
-| 0.375 | `subroutine/return/something` | 5, 7 |
 | 0.75 | `subscript/index` | 5, 7, 7 |
 | 0.875 | `test/divisibility/parity` | 4 |
 | 0.75 | `test/equality` | 4 |

@@ -92,8 +92,8 @@ class ProgramFilter:
 
             ```
                             "operator/arithmetic/multiplication": [],
-                            "subroutine/argument/arg": [],
-                            "subroutine/procedure": [],
+                            "abstr/argument/arg": [],
+                            "abstr/procedure": [],
                             ...
             ```
 

@@ -455,8 +455,8 @@ def test_recommend_mini_programs():
         {
             "operation": "exclude",
             "data": [
-                ("test/equality", "inside", "subroutine/function"),
-                # "test/equality" is inside "subroutine/function" in is_even.py, which is not
+                ("test/equality", "inside", "abstr/function"),
+                # "test/equality" is inside "abstr/function" in is_even.py, which is not
                 # imported anywhere.
             ],
         }
@@ -535,8 +535,8 @@ def test_recommend_mini_programs():
         {
             "operation": "include",
             "data": [
-                ("test/equality", "inside", "subroutine/function"),
-                # "test/equality" is inside "subroutine/function" in is_even.py, which is not
+                ("test/equality", "inside", "abstr/function"),
+                # "test/equality" is inside "abstr/function" in is_even.py, which is not
                 # imported anywhere.
             ],
         }
@@ -550,9 +550,9 @@ def test_recommend_mini_programs():
         {
             "operation": "include",
             "data": [
-                ("test/equality$", "inside", "subroutine"),
-                # "test/equality" (strictly, note the dollar sign) is inside "subroutine/function"
-                # in is_even.py and inside "subroutine/procedure" in collatz.py. Both will be
+                ("test/equality$", "inside", "abstr"),
+                # "test/equality" (strictly, note the dollar sign) is inside "abstr/function"
+                # in is_even.py and inside "abstr/procedure" in collatz.py. Both will be
                 # included.
             ],
         }
@@ -706,60 +706,60 @@ def test_recommend_simple_programs_1(expected_programs, commands):
     assert rec.selected_programs == expected_programs
 
 
-holds_subroutine = "subroutine"
+holds_abstr = "abstr"
 holds_assignment = "variable/assignment"
-holds_asg_in_sub = ("variable/assignment", "inside", "subroutine")
+holds_asg_in_sub = ("variable/assignment", "inside", "abstr")
 lacks_assignment = ("metadata/program", "not contains", "variable/assignment")
-lacks_subroutine = ("metadata/program", "not contains", "subroutine")
-lacks_asg_or_sub = ("metadata/program", "not contains", "subroutine|variable/assignment")
-lacks_asg_in_sub = ("subroutine", "not contains", "variable/assignment")
-p0 = "01_hello_world.py"  # [ ] subroutine [ ] assignment [ ] inside *
-p1 = "05_greet.py"  #       [X] subroutine [ ] assignment [ ] inside
-p2 = "02_input_name.py"  #  [ ] subroutine [X] assignment [ ] inside
-p3 = "16_csv.py"  #         [X] subroutine [X] assignment [ ] inside *
-p4 = "12_classes.py"  #     [X] subroutine [X] assignment [X] inside
+lacks_abstr = ("metadata/program", "not contains", "abstr")
+lacks_asg_or_sub = ("metadata/program", "not contains", "abstr|variable/assignment")
+lacks_asg_in_sub = ("abstr", "not contains", "variable/assignment")
+p0 = "01_hello_world.py"  # [ ] abstr [ ] assignment [ ] inside *
+p1 = "05_greet.py"  #       [X] abstr [ ] assignment [ ] inside
+p2 = "02_input_name.py"  #  [ ] abstr [X] assignment [ ] inside
+p3 = "16_csv.py"  #         [X] abstr [X] assignment [ ] inside *
+p4 = "12_classes.py"  #     [X] abstr [X] assignment [X] inside
 base_2 = [p0, p1, p2, p3, p4]
 
 # fmt: off
 pipelines_2 = [
-    ({    p1, p2, p3, p4}, [("include",     [holds_subroutine, holds_assignment])]),
-    ({p0,               }, [("exclude",     [holds_subroutine, holds_assignment])]),
-    ({    p1,           }, [("include all", [holds_subroutine, lacks_assignment])]),
-    ({p0,     p2, p3, p4}, [("exclude all", [holds_subroutine, lacks_assignment])]),
-    ({p0, p1,     p3, p4}, [("include",     [holds_subroutine, lacks_assignment])]),
-    ({        p2,       }, [("exclude",     [holds_subroutine, lacks_assignment])]),
-    ({p0, p1, p2,     p4}, [("include",     [holds_asg_in_sub, lacks_subroutine, lacks_assignment])]),
-    ({            p3    }, [("exclude",     [holds_asg_in_sub, lacks_subroutine, lacks_assignment])]),
+    ({    p1, p2, p3, p4}, [("include",     [holds_abstr, holds_assignment])]),
+    ({p0,               }, [("exclude",     [holds_abstr, holds_assignment])]),
+    ({    p1,           }, [("include all", [holds_abstr, lacks_assignment])]),
+    ({p0,     p2, p3, p4}, [("exclude all", [holds_abstr, lacks_assignment])]),
+    ({p0, p1,     p3, p4}, [("include",     [holds_abstr, lacks_assignment])]),
+    ({        p2,       }, [("exclude",     [holds_abstr, lacks_assignment])]),
+    ({p0, p1, p2,     p4}, [("include",     [holds_asg_in_sub, lacks_abstr, lacks_assignment])]),
+    ({            p3    }, [("exclude",     [holds_asg_in_sub, lacks_abstr, lacks_assignment])]),
     ({                p4}, [("include",     [holds_asg_in_sub])]),
     ({p0, p1, p2, p3    }, [("exclude",     [holds_asg_in_sub])]),
     ({        p2, p3, p4}, [("include",     [holds_assignment])]),
     ({p0, p1,           }, [("exclude",     [holds_assignment])]),
-    ({    p1,     p3, p4}, [("include",     [holds_subroutine])]),
-    ({p0,     p2,       }, [("exclude",     [holds_subroutine])]),
+    ({    p1,     p3, p4}, [("include",     [holds_abstr])]),
+    ({p0,     p2,       }, [("exclude",     [holds_abstr])]),
     ({p0, p1,         p4}, [("include",     [holds_asg_in_sub, lacks_assignment])]),
     ({        p2, p3    }, [("exclude",     [holds_asg_in_sub, lacks_assignment])]),
-    ({            p3, p4}, [("include all", [holds_subroutine, holds_assignment])]),
-    ({p0, p1, p2,       }, [("exclude all", [holds_subroutine, holds_assignment])]),
+    ({            p3, p4}, [("include all", [holds_abstr, holds_assignment])]),
+    ({p0, p1, p2,       }, [("exclude all", [holds_abstr, holds_assignment])]),
     ({p0,             p4}, [("include",     [lacks_asg_or_sub, holds_asg_in_sub])]),
     ({    p1, p2, p3    }, [("exclude",     [lacks_asg_or_sub, holds_asg_in_sub])]),
-    ({p0,     p2,     p4}, [("include",     [holds_asg_in_sub, lacks_subroutine])]),
-    ({    p1,     p3,   }, [("exclude",     [holds_asg_in_sub, lacks_subroutine])]),
-    ({        p2,     p4}, [("include",     [holds_asg_in_sub, lacks_subroutine]),
+    ({p0,     p2,     p4}, [("include",     [holds_asg_in_sub, lacks_abstr])]),
+    ({    p1,     p3,   }, [("exclude",     [holds_asg_in_sub, lacks_abstr])]),
+    ({        p2,     p4}, [("include",     [holds_asg_in_sub, lacks_abstr]),
                             ("exclude",     [lacks_asg_or_sub])]),
-    ({p0, p1,     p3    }, [("include",     [holds_subroutine, lacks_assignment]),
+    ({p0, p1,     p3    }, [("include",     [holds_abstr, lacks_assignment]),
                             ("exclude",     [holds_asg_in_sub])]),
     ({    p1,         p4}, [("include",     [holds_asg_in_sub, lacks_assignment]),
                             ("exclude",     [lacks_asg_or_sub])]),
-    ({p0,     p2, p3    }, [("include",     [holds_assignment, lacks_subroutine]),
+    ({p0,     p2, p3    }, [("include",     [holds_assignment, lacks_abstr]),
                             ("exclude",     [holds_asg_in_sub])]),
-    ({    p1, p2,       }, [("include",     [holds_subroutine, holds_assignment]),
-                            ("exclude all", [holds_subroutine, holds_assignment])]),
-    ({p0,         p3, p4}, [("include",     [holds_subroutine, lacks_assignment]),
-                            ("exclude all", [holds_subroutine, lacks_assignment])]),
-    ({p0,         p3    }, [("include",     [holds_subroutine, lacks_assignment]),
-                            ("exclude all", [holds_subroutine, lacks_assignment]),
+    ({    p1, p2,       }, [("include",     [holds_abstr, holds_assignment]),
+                            ("exclude all", [holds_abstr, holds_assignment])]),
+    ({p0,         p3, p4}, [("include",     [holds_abstr, lacks_assignment]),
+                            ("exclude all", [holds_abstr, lacks_assignment])]),
+    ({p0,         p3    }, [("include",     [holds_abstr, lacks_assignment]),
+                            ("exclude all", [holds_abstr, lacks_assignment]),
                             ("exclude",     [holds_asg_in_sub])]),
-    ({    p1, p2,     p4}, [("include",     [holds_asg_in_sub, lacks_subroutine, lacks_assignment]),
+    ({    p1, p2,     p4}, [("include",     [holds_asg_in_sub, lacks_abstr, lacks_assignment]),
                             ("exclude",     [lacks_asg_or_sub])]),
     ({p0, p1, p2, p3, p4}, []),
 ]

@@ -205,13 +205,13 @@
         "whole_span:5": [[1,5]]
       },
       "taxa": {
+        "abstr/argument/arg": [[1,1]],
+        "abstr/procedure": [[1,2]],
         "appli/function": [[3,3],[4,4],[5,5]],
         "appli/function/builtin/print": [[2,2]],
         "io/standard/print": [[2,2]],
         "metadata/program": [[1,5]],
         "metadata/sloc/5": [[1,5]],
-        "subroutine/argument/arg": [[1,1]],
-        "subroutine/procedure": [[1,2]],
         "type/sequence/string/literal": [[2,2],[3,3],[4,4],[5,5]]
       }
     },
@@ -692,6 +692,12 @@
         "whole_span:12": [[1,12]]
       },
       "taxa": {
+        "abstr/argument/arg": [[2,2],[2,2],[4,4],[4,4],[6,6],[6,6],[8,8]],
+        "abstr/function": [[8,9]],
+        "abstr/method/flavor/instance": [[2,3],[4,5],[6,7],[8,9]],
+        "abstr/method/naming/magic": [[2,3]],
+        "abstr/procedure": [[2,3],[4,5],[6,7]],
+        "abstr/return/something": [[9,9]],
         "appli/class_constructor/BankAccount": [[10,10]],
         "appli/composition": [[12,12]],
         "appli/function/builtin/print": [[12,12]],
@@ -700,12 +706,6 @@
         "io/standard/print": [[12,12]],
         "metadata/program": [[1,12]],
         "metadata/sloc/12": [[1,12]],
-        "subroutine/argument/arg": [[2,2],[2,2],[4,4],[4,4],[6,6],[6,6],[8,8]],
-        "subroutine/function": [[8,9]],
-        "subroutine/method/flavor/instance": [[2,3],[4,5],[6,7],[8,9]],
-        "subroutine/method/naming/magic": [[2,3]],
-        "subroutine/procedure": [[2,3],[4,5],[6,7]],
-        "subroutine/return/something": [[9,9]],
         "test/inequality": [[9,9]],
         "type/boolean": [[9,9]],
         "type/number/integer/literal": [[10,10],[11,11]],
@@ -799,6 +799,11 @@
         "whole_span:11": [[1,11]]
       },
       "taxa": {
+        "abstr/argument/arg": [[2,2],[10,10]],
+        "abstr/function": [[2,8]],
+        "abstr/method/flavor/instance": [[10,11]],
+        "abstr/procedure": [[10,11]],
+        "abstr/return/something": [[6,6],[8,8]],
         "appli/composition": [[11,11]],
         "appli/function": [[11,11]],
         "appli/function/builtin/casting/int": [[6,6],[8,8],[8,8]],
@@ -814,11 +819,6 @@
         "operator/arithmetic/division": [[6,6],[8,8],[8,8],[8,8]],
         "operator/arithmetic/modulo": [[5,5]],
         "operator/arithmetic/substraction": [[6,6],[8,8]],
-        "subroutine/argument/arg": [[2,2],[10,10]],
-        "subroutine/function": [[2,8]],
-        "subroutine/method/flavor/instance": [[10,11]],
-        "subroutine/procedure": [[10,11]],
-        "subroutine/return/something": [[6,6],[8,8]],
         "subscript/index": [[6,6],[8,8],[8,8]],
         "test/divisibility/parity": [[5,5]],
         "test/equality": [[5,5]],
@@ -886,6 +886,9 @@
         "whole_span:7": [[1,7]]
       },
       "taxa": {
+        "abstr/argument/arg": [[1,1]],
+        "abstr/function": [[1,7]],
+        "abstr/return/something": [[5,5],[7,7]],
         "appli/function/builtin/casting/int": [[5,5],[7,7],[7,7]],
         "appli/function/builtin/len": [[3,3]],
         "appli/function/builtin/sorted": [[2,2]],
@@ -897,9 +900,6 @@
         "operator/arithmetic/division": [[5,5],[7,7],[7,7],[7,7]],
         "operator/arithmetic/modulo": [[4,4]],
         "operator/arithmetic/substraction": [[5,5],[7,7]],
-        "subroutine/argument/arg": [[1,1]],
-        "subroutine/function": [[1,7]],
-        "subroutine/return/something": [[5,5],[7,7]],
         "subscript/index": [[5,5],[7,7],[7,7]],
         "test/divisibility/parity": [[4,4]],
         "test/equality": [[4,4]],
@@ -1080,6 +1080,9 @@
         "whole_span:18": [[1,18]]
       },
       "taxa": {
+        "abstr/argument/arg": [[2,2],[2,2]],
+        "abstr/function": [[2,3]],
+        "abstr/return/something": [[3,3]],
         "appli/composition": [[17,17],[18,18],[18,18]],
         "appli/function": [[17,17]],
         "appli/function/builtin/casting/float": [[17,17],[18,18]],
@@ -1097,9 +1100,6 @@
         "metadata/program": [[1,18]],
         "metadata/sloc/18": [[1,18]],
         "operator/arithmetic/substraction": [[3,3]],
-        "subroutine/argument/arg": [[2,2],[2,2]],
-        "subroutine/function": [[2,3]],
-        "subroutine/return/something": [[3,3]],
         "subscript/index": [[17,17]],
         "test/inequality": [[3,3],[3,3]],
         "type/boolean": [[3,3],[3,3]],
@@ -1234,6 +1234,10 @@
         "whole_span:20": [[1,20]]
       },
       "taxa": {
+        "abstr/argument/arg": [[2,2],[2,2],[9,9]],
+        "abstr/function": [[2,8],[9,17]],
+        "abstr/recursive/body": [[9,17]],
+        "abstr/return/something": [[11,11],[13,17]],
         "appli/function": [[12,12],[17,17],[19,19]],
         "appli/function/builtin/print": [[20,20]],
         "appli/function/builtin/range": [[15,15]],
@@ -1251,10 +1255,6 @@
         "operator/boolean/not": [[17,17]],
         "operator/list/concatenation": [[14,14]],
         "pattern/elements/satisfy/some": [[4,7]],
-        "subroutine/argument/arg": [[2,2],[2,2],[9,9]],
-        "subroutine/function": [[2,8],[9,17]],
-        "subroutine/recursive/body": [[9,17]],
-        "subroutine/return/something": [[11,11],[13,17]],
         "test/belonging": [[6,6]],
         "test/equality": [[10,10]],
         "type/boolean": [[6,6],[10,10]],
@@ -1346,6 +1346,8 @@
         "yield:prime": [[6,6]]
       },
       "taxa": {
+        "abstr/argument/no": [[2,7]],
+        "abstr/generator": [[2,7]],
         "appli/function/builtin/filter": [[7,7]],
         "appli/function/builtin/next": [[5,5]],
         "appli/function/builtin/print": [[11,11]],
@@ -1360,8 +1362,6 @@
         "library/standard/itertools": [[1,1]],
         "metadata/program": [[1,11]],
         "metadata/sloc/11": [[1,11]],
-        "subroutine/argument/no": [[2,7]],
-        "subroutine/generator": [[2,7]],
         "test/inequality": [[9,9]],
         "type/boolean": [[9,9]],
         "type/boolean/literal/True": [[4,4]],
@@ -1593,6 +1593,11 @@
         "whole_span:24": [[1,24]]
       },
       "taxa": {
+        "abstr/argument/arg": [[4,4],[10,10]],
+        "abstr/function": [[10,21]],
+        "abstr/procedure": [[4,9]],
+        "abstr/recursive/tail": [[10,21]],
+        "abstr/return/something": [[18,18]],
         "appli/composition": [[24,24]],
         "appli/function": [[14,14],[18,18],[22,22]],
         "appli/function/builtin/len": [[15,15]],
@@ -1617,11 +1622,6 @@
         "operator/list/concatenation": [[12,12]],
         "operator/string/concatenation": [[24,24]],
         "operator/string/replication": [[24,24],[24,24]],
-        "subroutine/argument/arg": [[4,4],[10,10]],
-        "subroutine/function": [[10,21]],
-        "subroutine/procedure": [[4,9]],
-        "subroutine/recursive/tail": [[10,21]],
-        "subroutine/return/something": [[18,18]],
         "subscript/index": [[5,5]],
         "subscript/index/backwards/last": [[5,5]],
         "subscript/slice/stop": [[6,6]],
@@ -4049,6 +4049,56 @@
     ]
   },
   "taxa": {
+    "abstr/argument/arg": [
+      "05_greet.py",
+      "12_classes.py",
+      "13_unit_testing.py",
+      "14_median.py",
+      "16_csv.py",
+      "18_queens.py",
+      "28_queens.py"
+    ],
+    "abstr/argument/no": [
+      "20_prime_numbers.py"
+    ],
+    "abstr/function": [
+      "12_classes.py",
+      "13_unit_testing.py",
+      "14_median.py",
+      "16_csv.py",
+      "18_queens.py",
+      "28_queens.py"
+    ],
+    "abstr/generator": [
+      "20_prime_numbers.py"
+    ],
+    "abstr/method/flavor/instance": [
+      "12_classes.py",
+      "13_unit_testing.py"
+    ],
+    "abstr/method/naming/magic": [
+      "12_classes.py"
+    ],
+    "abstr/procedure": [
+      "05_greet.py",
+      "12_classes.py",
+      "13_unit_testing.py",
+      "28_queens.py"
+    ],
+    "abstr/recursive/body": [
+      "18_queens.py"
+    ],
+    "abstr/recursive/tail": [
+      "28_queens.py"
+    ],
+    "abstr/return/something": [
+      "12_classes.py",
+      "13_unit_testing.py",
+      "14_median.py",
+      "16_csv.py",
+      "18_queens.py",
+      "28_queens.py"
+    ],
     "appli/class_constructor/BankAccount": [
       "12_classes.py"
     ],
@@ -4493,56 +4543,6 @@
     ],
     "pattern/states/accumulate/count": [
       "33_guess_the_number.py"
-    ],
-    "subroutine/argument/arg": [
-      "05_greet.py",
-      "12_classes.py",
-      "13_unit_testing.py",
-      "14_median.py",
-      "16_csv.py",
-      "18_queens.py",
-      "28_queens.py"
-    ],
-    "subroutine/argument/no": [
-      "20_prime_numbers.py"
-    ],
-    "subroutine/function": [
-      "12_classes.py",
-      "13_unit_testing.py",
-      "14_median.py",
-      "16_csv.py",
-      "18_queens.py",
-      "28_queens.py"
-    ],
-    "subroutine/generator": [
-      "20_prime_numbers.py"
-    ],
-    "subroutine/method/flavor/instance": [
-      "12_classes.py",
-      "13_unit_testing.py"
-    ],
-    "subroutine/method/naming/magic": [
-      "12_classes.py"
-    ],
-    "subroutine/procedure": [
-      "05_greet.py",
-      "12_classes.py",
-      "13_unit_testing.py",
-      "28_queens.py"
-    ],
-    "subroutine/recursive/body": [
-      "18_queens.py"
-    ],
-    "subroutine/recursive/tail": [
-      "28_queens.py"
-    ],
-    "subroutine/return/something": [
-      "12_classes.py",
-      "13_unit_testing.py",
-      "14_median.py",
-      "16_csv.py",
-      "18_queens.py",
-      "28_queens.py"
     ],
     "subscript/index": [
       "07_grocery_bill.py",
