@@ -123,7 +123,6 @@ Dumped: programs_recommendations.md.
 
 Et voilà [your recommendation report](https://github.com/laowantong/paroxython/blob/master/examples/simple/programs_recommendations.md)!
 
-----
 
 ### Installation and test-drive
 

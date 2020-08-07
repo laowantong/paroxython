@@ -1,6 +1,3 @@
-
-----
-
 # Pipeline tutorial: getting recommendations
 
 This tutorial walks you through a series of little “teacher stories” to illustrate how to write the pipeline of commands used by Paroxython's recommendation system.

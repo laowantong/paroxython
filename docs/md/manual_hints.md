@@ -1,5 +1,3 @@
-----
-
 # Manual hints
 
 On a given source code, the labelling algorithm may sometimes produce false positives or false negatives. Moreover, the semantics of some features may be subjective (e.g., `topic:fun`) or beyond the capabilities of Paroxython (e.g., deciding the relevance of the `short_circuit` property of a boolean condition). In any case, the user has the possibility to manually label certain lines of their source code to hint either the presence or absence of a given feature.

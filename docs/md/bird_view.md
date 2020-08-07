@@ -1,6 +1,3 @@
-<br>
-----
-
 # Bird view
 
 This section mainly describes how the different parts of Paroxython (code, data, results) are integrated. For details on the functioning of an individual module, click its name: it refers to the documentation page. The input and output files are linked to real examples.

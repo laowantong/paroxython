@@ -1,6 +1,3 @@
-<br>
-----
-
 # Tag databases
 
 Depending on the extension of `DB_NAME` (either `".json"` or `".sqlite"`), the command:

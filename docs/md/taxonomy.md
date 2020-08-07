@@ -1,5 +1,3 @@
-----
-
 # Taxonomy
 
 ## Structure
@@ -95,44 +93,3 @@ Taxa (replacement patterns)    | Labels (search patterns)
 `metadata/sloc/\1` | `whole_span:(.+)`
 
 As you may have guessed, the right colum can contain [regular expressions](https://en.wikipedia.org/wiki/Regular_expression). On the first row, the sequence of _metacharacters_ `".+"` means: “eat all the characters up to the end of the line.” On the second row, the added parentheses also _captures_ these characters: they are restituted in the replacement pattern by `"\1"`, which denotes a [_backreference_](https://docs.python.org/3/library/re.html#re.sub) to the first captured group.
-
-
-<!-- Why the default taxonomy is no silver bullet, and what you can do about it
-
-Although these rules make sense, they raise several questions.
-
-Pedagogically speaking, should explicit and implicit booleans be given the same weight? After all, it is quite possible to talk about conditionals (which everyone has experience with in the real world) before introducing formally the boolean type (which firmly belongs to the abstract realm of logic). If your students are young adults, you may start with booleans. If they are kids, the conditionals could be a better choice: in that case, you can avoid the noise by removing from your personal taxonomy the line.
-
-We said that the occurrence of a boolean operator implies that of a boolean value, but in Python this is not necessarily the case. For instance, in:
-
-```python
-name = input("Your name? ") or "Anonymous Coward"
-```
-
-... there is indeed a boolean operator, but a boolean value is nowhere to be seen (`name` is assigned to the string entered by the user, or `"Anonymous Coward"` in case of an empty string). We could easily extend `spec.md` to detect some of these situations, but not all of them, if only because Paroxython doesn't support [type inference](https://en.wikipedia.org/wiki/Type_inference#Technical_description)[^no_inference].
-
-[^no_inference]:
-    For instance, replacing `"Anonymous Coward"` with a <s>constant</s> variable `DEFAULT_NAME` previously assigned to `"Anonymous Coward"` would be enough to defeat it.
-
-This is a typical scenario where you, as a dedicated teacher, should annotate your code with a manual hint, asking Paroxython to delete the label it has wrongly generated:
-
-```python
-name = input("Your name? ") or "Anonymous Coward" # paroxython: -boolean_operator:Or
-```
-
-But this issue raises another one. Since the offending line of code is in fact functionally equivalent to:
-
-```python
-name = input("Your name? ")
-if name == "":
-    name = "Anonymous Coward"
-```
-
-... it calls into question another part of the taxonomy:
-
-```python
-operator/boolean/and	boolean_operator:And
-operator/boolean/and/short_circuit	short_circuit:And
-operator/boolean/not	unary_operator:Not
-operator/boolean/or	boolean_operator:Or
-``` -->

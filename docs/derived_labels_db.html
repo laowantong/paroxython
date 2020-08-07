@@ -33,11 +33,11 @@
 distinct occurrence of every label featured by a given program. Initially, <code>t</code> is populated with
 the labels found by the queries specified by a regular expression of
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md"><code>spec.md</code></a>.</p>
-<p>The SQL queries are then executed, and the resulting labels (known as <em>derived</em>) inserted into <code>t</code>
+<p>The <abbr title="Structured Query Language">SQL</abbr> queries are then executed, and the resulting labels (known as <em>derived</em>) inserted into <code>t</code>
 as they are found.</p>
-<p>Note that the results of a given SQL query may themselves be required by a subsequent SQL query.</p>
+<p>Note that the results of a given <abbr title="Structured Query Language">SQL</abbr> query may themselves be required by a subsequent <abbr title="Structured Query Language">SQL</abbr> query.</p>
 <h4 id="example">Example</h4>
-<p>The following simple SQL query of <code>spec.md</code> finds the loops of a program. The resulting label names
+<p>The following simple <abbr title="Structured Query Language">SQL</abbr> query of <code>spec.md</code> finds the loops of a program. The resulting label names
 (e.g., <code>"loop:while"</code>) consist in a fixed prefix <code>"loop"</code> and a suffix denoting the category of
 the loop (either <code>"for"</code> or <code>"while"</code>).</p>
 <pre><code class="sql">SELECT &quot;loop&quot;,
@@ -51,16 +51,16 @@ GROUP BY path
 <p>The execution of this query comes after the evaluation of all regular expressions, in particular
 those collecting the features <code>"for"</code> and <code>"while"</code>. It simply gathers them under the prefix
 <code>"loop"</code>, and qualifies them by their category.</p>
-<p>The resulting labels will later be used by other SQL queries to search for features such as
+<p>The resulting labels will later be used by other <abbr title="Structured Query Language">SQL</abbr> queries to search for features such as
 <code>"loop_with_break"</code>, <code>"loop_with_late_exit"</code>, <code>"loop_with_else"</code>, and so on.</p>
 <h3 id="subtables">Subtables</h3>
 <p>For simplicity and performance reasons, a bunch of subtables are extracted on the fly from <code>t</code>.
 Actually, every time a query relies on a non-existing table named <code>t_PREFIX</code>, this table is
 dynamically created as the set of rows of <code>t</code> whose value on column <code>name_prefix</code> is <code>PREFIX</code>.</p>
 <h4 id="example_1">Example</h4>
-<p>The following SQL query of <code>spec.md</code> relies on the previous one to find the loops featuring a
+<p>The following <abbr title="Structured Query Language">SQL</abbr> query of <code>spec.md</code> relies on the previous one to find the loops featuring a
 <code>break</code> statement. It is more complicated, since it suffixes <code>"loop_with_break"</code> with the span of
-the smallest enclosing loop. Anyway, it relies on the results of both the previous SQL query and a
+the smallest enclosing loop. Anyway, it relies on the results of both the previous <abbr title="Structured Query Language">SQL</abbr> query and a
 trivial regular expression matching the <code>break</code> statements.</p>
 <pre><code class="sql">SELECT &quot;loop_with_break&quot;,
     l.name_suffix,
@@ -349,7 +349,7 @@ class DerivedLabelsDatabase:
 <tr>
 <td align="left"></td>
 <td align="left"></td>
-<td align="left">as its path from the root of the AST, e.g.</td>
+<td align="left">as its path from the root of the <abbr title="Abstract Syntax Tree">AST</abbr>, e.g.</td>
 </tr>
 <tr>
 <td align="left"></td>
@@ -372,9 +372,9 @@ class DerivedLabelsDatabase:
 <dt><strong><code>labels</code></strong> :&ensp;<code>Labels</code></dt>
 <dd>The label names and spans featured by a certain program. Only those
 specified by a regular expression in <code>spec.md</code> are included. It is the very purpose
-of this module to add the remaining ones, specified by a SQL query.</dd>
+of this module to add the remaining ones, specified by a <abbr title="Structured Query Language">SQL</abbr> query.</dd>
 <dt><strong><code>create_main_table</code></strong> :&ensp;<code>str</code>, optional</dt>
-<dd>The SQL query creating the table. Not to be
+<dd>The <abbr title="Structured Query Language">SQL</abbr> query creating the table. Not to be
 explicitly provided. Defaults to <code>f"CREATE TABLE t ({','.join(columns)})"</code>.</dd>
 </dl></div>
 <details class="source">
@@ -396,25 +396,25 @@ explicitly provided. Defaults to <code>f"CREATE TABLE t ({','.join(columns)})"</
 <span>def <span class="ident">read</span></span>(<span>self, <br>query: Query, <br>prerequisites: Callable = &lt;built-in method findall of regex&gt;, <br>create_subtable: str = "CREATE TABLE t_{0} AS SELECT * FROM t WHERE name_prefix = '{0}'"<br>) ‑> List[Label]</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Apply the given SQL query to the currently known labels, and returns the new labels.</p>
+<div class="desc"><p>Apply the given <abbr title="Structured Query Language">SQL</abbr> query to the currently known labels, and returns the new labels.</p>
 <h2 id="args">Args</h2>
 <dl>
 <dt><strong><code>query</code></strong> :&ensp;<code>Query</code></dt>
-<dd>The SQL specification of a certain feature, as defined in <code>spec.md</code>.</dd>
+<dd>The <abbr title="Structured Query Language">SQL</abbr> specification of a certain feature, as defined in <code>spec.md</code>.</dd>
 <dt><strong><code>prerequisites</code></strong> :&ensp;<code>Callable</code>, optional</dt>
-<dd>A function taking an SQL query, and returning the
+<dd>A function taking an <abbr title="Structured Query Language">SQL</abbr> query, and returning the
 table names referred to in the FROM clause.
 <a href="docs_developer_manual/index.html#default-argument-trick">Not to be explicitly provided.</a>
 Defaults to <code>regex.compile(r"(?m)\b(?:FROM|JOIN) t_(\w+)").findall</code>.</dd>
 <dt><strong><code>create_subtable</code></strong> :&ensp;<code>str</code>, optional</dt>
-<dd>The SQL query creating a subtable from a label prefix.
+<dd>The <abbr title="Structured Query Language">SQL</abbr> query creating a subtable from a label prefix.
 Not to be explicitly provided.
 Defaults to <code>"CREATE TABLE t_{0} AS SELECT * FROM t WHERE name_prefix = '{0}'"</code>.</dd>
 </dl>
 <h2 id="returns">Returns</h2>
 <dl>
 <dt><code>Labels</code></dt>
-<dd>The additional labels found by the given SQL query.</dd>
+<dd>The additional labels found by the given <abbr title="Structured Query Language">SQL</abbr> query.</dd>
 </dl>
 <h2 id="note">Note</h2>
 <p>As a side-effect, create in the database any non-existing subtable of <code>t</code> referred to
@@ -455,7 +455,7 @@ as a prerequisite.</p></div>
 <dt><strong><code>labels</code></strong> :&ensp;<code>Labels</code></dt>
 <dd>The labels to be inserted.</dd>
 <dt><strong><code>update_query</code></strong> :&ensp;<code>str</code>, optional</dt>
-<dd>The SQL query inserting a row in <code>t</code>. Not to be
+<dd>The <abbr title="Structured Query Language">SQL</abbr> query inserting a row in <code>t</code>. Not to be
 explicitly provided. Defaults to <code>f"INSERT INTO t VALUES ({','.join('?' *
 len(columns))})"</code>.</dd>
 </dl></div>
@@ -482,7 +482,7 @@ len(columns))})"</code>.</dd>
 <span>def <span class="ident">delete</span></span>(<span>self) ‑> NoneType</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Empty the database after having executed all the SQL queries.</p></div>
+<div class="desc"><p>Empty the database after having executed all the <abbr title="Structured Query Language">SQL</abbr> queries.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>

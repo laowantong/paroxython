@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.8.4" />
 <title>paroxython.docs_user_manual API documentation</title>
-<meta name="description" content="…" />
+<meta name="description" content="Pipeline tutorial: getting recommendations." />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
 <link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/github.min.css" crossorigin>
@@ -47,7 +47,6 @@
 <h1 class="title">User manual</h1>
 </header>
 <section id="section-intro">
-<hr>
 <h1 id="pipeline-tutorial-getting-recommendations">Pipeline tutorial: getting recommendations</h1>
 <p>This tutorial walks you through a series of little “teacher stories” to illustrate how to write the pipeline of commands used by Paroxython's recommendation system.</p>
 <p>You run this pipeline on command line with:</p>
@@ -175,7 +174,6 @@ type, it is enough to exclude all taxa starting with <code>type/non_sequence</co
 </div>
 <p>This is the end of our pipeline tutorial. If you dare, <a href="#deep-in-the-pipeline">read on</a> for more advanced features (regular expressions, span algebra, semantic triples, negations).
 <br></p>
-<hr>
 <h1 id="tag-databases">Tag databases</h1>
 <p>Depending on the extension of <code>DB_NAME</code> (either <code>".json"</code> or <code>".sqlite"</code>), the command:</p>
 <pre><code>paroxython collect -o DB_NAME DIRECTORY
@@ -289,7 +287,7 @@ GROUP BY taxon, program
 <p class="admonition-title">Warning</p>
 <p>Currently, the relational database is better suited for making statistics than recommendations.</p>
 </div>
-<hr>
+<p><br></p>
 <h1 id="taxonomy">Taxonomy</h1>
 <h2 id="structure">Structure</h2>
 <p>In Paroxython, the default taxonomy is a <a href="https://en.wikipedia.org/wiki/Tree_(graph_theory)#Forest">forest</a>: a dozen of separate trees with <code>flow</code>, <code>operator</code>, <code>metadata</code>, <code>type</code>, etc. as their roots. We call <strong>taxon</strong><sup id="fnref:taxon"><a class="footnote-ref" href="#fn:taxon" rel="footnote">1</a></sup> a path from a root node to a leaf node. Thus:</p>
@@ -368,211 +366,409 @@ GROUP BY taxon, program
 </tr>
 </tbody>
 </table>
-<p>As you may have guessed, the right colum can contain <a href="https://en.wikipedia.org/wiki/Regular_expression">regular expressions</a>. On the first row, the sequence of <em>metacharacters</em> <code>".+"</code> means: “eat all the characters up to the end of the line.” On the second row, the added parentheses also <em>captures</em> these characters: they are restituted in the replacement pattern by <code>"\1"</code>, which denotes a <a href="https://docs.python.org/3/library/re.html#re.sub"><em>backreference</em></a> to the first captured group.</p>
-<!-- Why the default taxonomy is no silver bullet, and what you can do about it
-Although these rules make sense, they raise several questions.
-Pedagogically speaking, should explicit and implicit booleans be given the same weight? After all, it is quite possible to talk about conditionals (which everyone has experience with in the real world) before introducing formally the boolean type (which firmly belongs to the abstract realm of logic). If your students are young adults, you may start with booleans. If they are kids, the conditionals could be a better choice: in that case, you can avoid the noise by removing from your personal taxonomy the line.
-We said that the occurrence of a boolean operator implies that of a boolean value, but in Python this is not necessarily the case. For instance, in:
-wzxhzdk:16
-... there is indeed a boolean operator, but a boolean value is nowhere to be seen (<code>name</code> is assigned to the string entered by the user, or `"Anonymous Coward"` in case of an empty string). We could easily extend <code>spec.md</code> to detect some of these situations, but not all of them, if only because Paroxython doesn't support [type inference](https://en.wikipedia.org/wiki/Type_inference#Technical_description)[^no_inference].
-[^no_inference]:
-For instance, replacing `"Anonymous Coward"` with a <s>constant</s> variable <code>DEFAULT\_NAME</code> previously assigned to `"Anonymous Coward"` would be enough to defeat it.
-This is a typical scenario where you, as a dedicated teacher, should annotate your code with a manual hint, asking Paroxython to delete the label it has wrongly generated:
-wzxhzdk:17
-But this issue raises another one. Since the offending line of code is in fact functionally equivalent to:
-wzxhzdk:18
-... it calls into question another part of the taxonomy:
-wzxhzdk:19
-!!! note "Note"
-`short_circuit:And` is a **label** (of the kind defined, but not necessarily included in [spec.md](https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md)), but not a taxon. It will be later converted into one or more taxa (according to the mapping of [taxonomy.tsv](https://github.com/laowantong/paroxython/blob/master/paroxython/resources/taxonomy.tsv)).
-To delete a label, prefix it with a minus symbol. For instance, the following hint requalifies an addition into a string concatenation:
-wzxhzdk:20
-If a label should span over several lines, it is hinted on the first line with a <code>...</code> suffix (meaning “to be continued”), and on the last line with a <code>...</code> prefix (meaning “continuing”). In the following example, a label <code>super\_loop</code> is manually substituted to the calculated label `loop:for`:
-wzxhzdk:21
-Of course, the opening and the closing of a spanning label must be correctly balanced.
-Some tolerances exist for the syntax:
-- `+` can be omitted.
-- <code>...</code> (three dots) can be written `…` (HORIZONTAL ELLIPSIS, U+2026).
-- `# paroxython:` is neither space- nor case-sensitive.
-----
-# Deep in the pipeline
-This part describes in some details how the recommendation system works. It assumes you've already read the [tutorial on recommendations](#pipeline-tutorial-getting-recommendations). First of all, let us recall the example of pipeline we gave at the end.
-wzxhzdk:22
-## Regular expression patterns
-The first thing to clarify is that the strings which constitute the <code>data</code> lists are not simple names, but “descriptions” of names. These descriptions, or **patterns**, are written in the language of regular expressions, and more precisely in the dialect implemented by the third-party module [regex](https://pypi.org/project/regex/)[^regex-credits].
-[^regex-credits]:
-This module appears to be here to stay, since it is proeminently featured in the documentation of the more mundane standard library [re](https://docs.python.org/3/library/re.html).
-Thanks and kudos to the author, Matthew Barnett: without his awesome work, many parts of our code would have been much tougher to write, and much slower to execute.
-!!! tip "Tip"
-If you don't know how to write regular expressions, the good news is that you don't have to worry. Unless they contain certain special characters, they are self-descriptive. That means, for instance, that the string `"type/sequence/list"` happens to be a regular expression which precisely describes (or ”matches”) the string `"type/sequence/list"`. This is the case for all strings that are only made up of so-called _literal_ characters.
-As a matter of fact, all the characters that can appear in a taxon are literal. We advise you to avoid non-literal characters in your program names as well. What are they? Essentially: `.^$*+?{}\[]`. Depending on your operating system, some are already illegal in filenames anyway. To tell the truth, the first one (the dot) is an integral part of most filenames, as an extension separator. However, it turns out that it basically means “any character”, which of course includes the dot itself. So, the regular expression `"hello_world.py"` matches the filename `"hello_world.py"`, and the fact that it matches `"hello_world/py"` and `"hello_worldapy"` shouldn't be a real problem. In any case, you can always prefix (or _escape_) a non-literal character with a backslash `"\"` to make it literal (here, `"hello_world\.py"`): that's all you'll need to know about regular expressions.
-The second thing to clarify is that a given pattern will match any string **starting** with it. Thus, `"type/sequence/list"` will match not only `"type/sequence/list"`, but `"type/sequence/list/empty"` and `"type/sequence/list/supercalifragilisticexpialidocious"` too. The same applies to program names. For example, in our personal database, all programs from [Project Euler](https://projecteuler.net) start with `"euler_"`. The pattern `"euler_"` will then match all of them.
-In terms of regular expressions, it means that, under the hood, Paroxython invokes [`match()` instead of <code>search()</code>](https://docs.python.org/3/library/re.html#search-vs-match). In the rare cases where you want to restrict the whole matching to the pattern itself, simply suffix it with a dollar sign, i.e., `"type/sequence/list$"`.
-## Execution of a pipeline
-A pipeline is a set (or list, but the order is not important) of commands which apply sequentially to a database of program tags. It returns:
-- a list of recommended programs;
-- an estimation of the learning cost of each concept (i.e., taxon) they implement.
-The set of commands constitutes a pipeline that evolves both:
-- a selection of programs (initially all those in the tag database);
-- a body of imparted knowledge (initially empty).
-!!! note "Note"
-During this process, the program selection can never increase, and the imparted knowledge can never decrease.
-A command consists of:
-- an operation among `"include"`, `"exclude"`, `"impart"` and `"hide"`, optionally suffixed by the quantifier (`" all"`);
-- the data to which it applies. This data is (or can be interpreted to produce) a list of criteria, each criterion being:
-- either a program pattern,
-- or a taxon pattern,
-- or a relationship between two taxon patterns (more on this in the [Semantic triples](#semantic-triples) section).
-Combining the operation with a criterion is done in four stages:
-1. An auxiliary set of programs is calculated.
-2. The set of recommended programs (the **selection**) is updated.
-3. A new set of taxa may be “learned”, i.e., added to the body of imparted knowledge.
-4. The set of taxa and programs to hide in the final report may be updated.
-Note that each stage depends on both the operation and the nature of the criterion to which it applies. Let us detail every possible case:
-### `"include"` command
-Its purpose is to keep only those selected programs that satisfy at least one given criterion.
-1. The auxiliary set contains any program such that:
-- either its name matches the given pattern,
-- or its source code:
-- either features at least one taxon matching the given pattern,
-- or satisfies the given relationship.
-2. The selection is then restricted to its **intersection** with the auxiliary set.
-3. The imparted knowledge is unchanged.
-**`"include all"` variant**
-Its purpose is to keep only those selected programs that satisfy all given criteria.
-wzxhzdk:23
-... is equivalent to:
-wzxhzdk:24
-### `"exclude"` command
-Its purpose is to filter out of the selection the programs which satisfy at least one given criterion.
-1. The same auxiliary set of programs as above (`"include"`) is calculated, but further extended to the programs which import them
-(either directly or indirectly). Indeed, when the teacher wants to exclude a certain program, any program that requires it should be excluded as well.
-2. The selection is then restricted to its **difference** with the auxiliary set.
-3. The imparted knowledge is unchanged.
-**`"exclude all"` variant**
-Unlike `"include all"`, this variant actually expands the semantics of the system.
-wzxhzdk:25
-... excludes the programs satisfying **all** the criteria. This cannot be transformed into a sequence of `"exclude"` commands, which would exclude the programs satisfying **any** of the criteria.
-### `"impart"` command
-Its main purpose is to track the acquisition of new knowledge. However, if this knowledge is provided by a given set of programs, there is no more need to keep them in the selection of recommended programs.
-1. The auxiliary set contains all programs whose name matches at least one of the given patterns (relationships are not supported), plus those which import (either directly or indirectly) at least one of them. In other words, it is the same as above (`"exclude"`), but only in the case where the criterion is a program pattern. In all other cases, this auxiliary set will be empty.
-2. The selection is then restricted to its **difference** with the auxiliary set (same as above for `"exclude"`).
-3. There are three cases:
-1. If the criterion is a program pattern, all the taxa featured in a program whose name matches this pattern are added to the body of imparted knowledge.
-2. If the criterion is a taxon pattern, all the taxa matching this pattern are added to the body of imparted knowledge.
-3. Otherwise, the body of imparted knowledge is unchanged.
-The `"impart all"` variant is not supported, and treated as `"impart"`.
-### `"hide"` command
-This is the simplest command of all. It merely accumulates the programs or the taxa matching the given patterns (relationships are not supported), without other effect on the filter. In the final stage, the accumulated programs or taxa will be filtered out of report.
-**Notes.**
-- Excluding a program is equivalent to hiding it _plus_ every program importing it.
-- The learning costs are not affected whatsoever by the hiding of a taxon: its individual cost continues to contribute towards the total cost of a program.
-The `"hide all"` variant is not supported, and treated as `"hide"`.
-## Semantic triples
-### Span algebra
-Being given a program \(p\) of \(n\) lines, a couple \((i_1, i_2) \) of line numbers such that \(1 \leq i_1 \leq i_2 \leq n\) represents a **span** of \(p\). When Paroxython finds a taxon \(t\) in \(p\), it doesn't just say whether \(p\) features \(t\) or not: it returns the list of spans where \(t\) occurs.
-!!! note "Note"
-Any taxon starting with `"metadata/"` is considered by convention to span the entire program.
-It is sometimes interesting to know how the spans of two taxa of the same program are located relatively to each other.
-- For instance, a <code>print()</code> statement whose span is inside the span of a function indicates that this function has a side-effect.
-- A less trivial application stems from the fact that our taxonomy is multi-dimensional: each algorithmic feature can be associated with several taxa at the same time, characterizing it it along several dimensions. For instance, the taxa `flow/loop/for` and `flow/loop/while` describe the category of a loop; whereas the taxa `flow/loop/exit/early` and `flow/loop/exit/late` describe its exit behavior. These dimensions are independent and, although it is entirely possible to do so, our default taxonomy does not list the results of the cross-product (i.e., `flow/loop/for/exit/early`, `flow/loop/for/exit/late`, `flow/loop/while/exit/early` and `flow/loop/while/exit/late`). Querying an hypothetical taxon `flow/loop/for/exit/early` (or `flow/loop/exit/early/for`, by the way) comes down to querying the taxa `flow/loop/for` spanning the same lines as `flow/loop/exit/early`.
-To express a relation \(\mathfrak{R}\) between the spans of two taxa, we start from the algebra devised in 1983 by James F. Allen in his seminal paper ([PDF](http://cse.unl.edu/~choueiry/Documents/Allen-CACM1983.pdf)) about temporal intervals[^Allen1983]. The so-called Allen's interval algebra defines 13 basic operators which capture all possible relations between two intervals \(X=(x_1, x_2)\) and \(Y=(y_1, y_2)\). The table below uses his terminology:
-[^Allen1983]:
-Allen, James F. (26 Nov. 1983). _Maintaining knowledge about temporal intervals_. Communications of the ACM. 26 (11): 832–843. doi:10.1145/182.358434
-| Examples | \(\mathfrak{R}\) on endpoints | \(X \mathbin{\mathfrak{R}} Y\)
-| \(Y \mathbin{\mathfrak{R}} X\)
-| Keys |
-|:----:|:----:|:----:|:----:|:----:|
-| <code>....XXXXX........</code> &nbsp; | | |
-| <code>....YYYYY........</code> &nbsp; | \(x_1 = y_1 \leq x_2 = y_2\)
-&nbsp; | \(X\) <code>equals</code> \(Y\)
-&nbsp; | \(Y\) <code>equals</code> \(X\)
-&nbsp; | `x=y≤x=y`
-| <code>....YYYYYYYYY....</code> &nbsp; | \(x_1 = y_1 \leq x_2 \leq y_2\)
-&nbsp; | \(X\) <code>starts</code> \(Y\)
-&nbsp; | \(Y\) <code>started by</code> \(X\)
-&nbsp; | `x=y≤x≤y`
-| <code>..YYYYYYYYY......</code> &nbsp; | \(y_1 \leq x_1 \leq x_2 \leq y_2\) &nbsp; | \(X\) <code>during</code> \(Y\)
-&nbsp; | \(Y\) <code>contains</code> \(X\)
-&nbsp; | `y≤x≤x≤y`
-| <code>.YYYYYYYY........</code> &nbsp; | \(y_1 \leq x_1 \leq x_2 = y_2\)
-&nbsp; | \(X\) <code>finishes</code> \(Y\)
-&nbsp; | \(Y\) <code>finished by</code> \(X\)
-&nbsp; | `y≤x≤x=y`
-| `....|...|..YYYYY.` &nbsp; | \(x_1 \leq x_2 \leq y_1 \leq y_2\) &nbsp; | \(X\) <code>before</code> \(Y\)
-&nbsp; | \(Y\) <code>after</code> \(X\)
-&nbsp; | `x≤x≤y≤y`
-| `....|...|YYYYY...` &nbsp; | \(x_1 \leq x_2 = y_1 \leq y_2\)
-&nbsp; | \(X\) <code>meets</code> \(Y\)
-&nbsp; | \(Y\) <code>met by</code> \(X\)
-&nbsp; | `x≤x=y≤y`
-| `....|..YYYYY.....` &nbsp; | \(x_1 \leq y_1 \leq x_2 \leq y_2\) &nbsp; | \(X\) <code>overlaps</code> \(Y\)
-&nbsp; | \(Y\) <code>overlapped by</code> \(X\) &nbsp; | `x≤y≤x≤y`
-These well-known operators apply quite nicely to our spans, with the following adjustments:
-**Synonyms.** The 13 operator names, whose some don't make much sense in a non-temporal context, are extended
-with a number of synonyms, such as `"inside"` for `"during"`, and `"equal"` or `"is"` for
-`"equals"`. The current list can be found
-[here](https://github.com/laowantong/paroxython/blob/master/paroxython/compare_spans.py#L195).
-**Non-strict inequalities.** In the above table, contrary to the convention on time intervals, we
+<p>As you may have guessed, the right colum can contain <a href="https://en.wikipedia.org/wiki/Regular_expression">regular expressions</a>. On the first row, the sequence of <em>metacharacters</em> <code>".+"</code> means: “eat all the characters up to the end of the line.” On the second row, the added parentheses also <em>captures</em> these characters: they are restituted in the replacement pattern by <code>"\1"</code>, which denotes a <a href="https://docs.python.org/3/library/re.html#re.sub"><em>backreference</em></a> to the first captured group.
+<br></p>
+<h1 id="manual-hints">Manual hints</h1>
+<p>On a given source code, the labelling algorithm may sometimes produce false positives or false negatives. Moreover, the semantics of some features may be subjective (e.g., <code>topic:fun</code>) or beyond the capabilities of Paroxython (e.g., deciding the relevance of the <code>short_circuit</code> property of a boolean condition). In any case, the user has the possibility to manually label certain lines of their source code to hint either the presence or absence of a given feature.</p>
+<p>The addition of a label is hinted by a comment starting with <code># paroxython:</code>.</p>
+<pre><code class="python">if i &lt; len(s) and s[i] == x: # paroxython: short_circuit:And
+</code></pre>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code>short_circuit:And</code> is a <strong>label</strong> (of the kind defined, but not necessarily included in <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md">spec.md</a>), but not a taxon. It will be later converted into one or more taxa (according to the mapping of <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/taxonomy.tsv">taxonomy.tsv</a>).</p>
+</div>
+<p>To delete a label, prefix it with a minus symbol. For instance, the following hint requalifies an addition into a string concatenation:</p>
+<pre><code class="python">print(a + b) # paroxython: -addition_operator +concatenation_operator
+</code></pre>
+<p>If a label should span over several lines, it is hinted on the first line with a <code>&hellip;</code> suffix (meaning “to be continued”), and on the last line with a <code>&hellip;</code> prefix (meaning “continuing”). In the following example, a label <code>super_loop</code> is manually substituted to the calculated label <code>loop:for</code>:</p>
+<pre><code class="python">for x in s: # paroxython: +super_loop... -loop:for...
+    foo()
+    bar() # paroxython: ...super_loop ...loop:for
+</code></pre>
+<p>Of course, the opening and the closing of a spanning label must be correctly balanced.</p>
+<p>Some tolerances exist for the syntax:</p>
+<ul>
+<li><code>+</code> can be omitted.</li>
+<li><code>&hellip;</code> (three dots) can be written <code>…</code> (HORIZONTAL ELLIPSIS, U+2026).</li>
+<li><code># paroxython:</code> is neither space- nor case-sensitive.
+<br></li>
+</ul>
+<h1 id="deep-in-the-pipeline">Deep in the pipeline</h1>
+<p>This part describes in some details how the recommendation system works. It assumes you've already read the <a href="#pipeline-tutorial-getting-recommendations">tutorial on recommendations</a>. First of all, let us recall the example of pipeline we gave at the end.</p>
+<pre><code class="python">&gt;&gt;&gt; [
+...   {
+...     &quot;operation&quot;: &quot;impart&quot;,
+...     &quot;data&quot;: &quot;python helpers/parse_syllabus.py {base_path}/timeline.txt&quot;,
+...   },
+...   {
+...     &quot;operation&quot;: &quot;exclude&quot;,
+...     &quot;data&quot;: [
+...       &quot;foo.py&quot;,
+...       &quot;bar.py&quot;,
+...       # &quot;buzz.py&quot;,
+...     ],
+...   },
+...   {
+...     &quot;operation&quot;: &quot;include&quot;,
+...     &quot;data&quot;: [
+...       &quot;pattern/elements/accumulate&quot;,
+...       &quot;topic/game&quot;,
+...       &quot;type/sequence/list&quot;,
+...     ],
+...   },
+... ]
+</code></pre>
+<h2 id="regular-expression-patterns">Regular expression patterns</h2>
+<p>The first thing to clarify is that the strings which constitute the <code>data</code> lists are not simple names, but “descriptions” of names. These descriptions, or <strong>patterns</strong>, are written in the language of regular expressions, and more precisely in the dialect implemented by the third-party module <a href="https://pypi.org/project/regex/">regex</a><sup id="fnref:regex-credits"><a class="footnote-ref" href="#fn:regex-credits" rel="footnote">4</a></sup>.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If you don't know how to write regular expressions, the good news is that you don't have to worry. Unless they contain certain special characters, they are self-descriptive. That means, for instance, that the string <code>"type/sequence/list"</code> happens to be a regular expression which precisely describes (or ”matches”) the string <code>"type/sequence/list"</code>. This is the case for all strings that are only made up of so-called <em>literal</em> characters.</p>
+<p>As a matter of fact, all the characters that can appear in a taxon are literal. We advise you to avoid non-literal characters in your program names as well. What are they? Essentially: <code>.^$*+?{}\[]</code>. Depending on your operating system, some are already illegal in filenames anyway. To tell the truth, the first one (the dot) is an integral part of most filenames, as an extension separator. However, it turns out that it basically means “any character”, which of course includes the dot itself. So, the regular expression <code>"hello_world.py"</code> matches the filename <code>"hello_world.py"</code>, and the fact that it matches <code>"hello_world/py"</code> and <code>"hello_worldapy"</code> shouldn't be a real problem. In any case, you can always prefix (or <em>escape</em>) a non-literal character with a backslash <code>"\"</code> to make it literal (here, <code>"hello_world\.py"</code>): that's all you'll need to know about regular expressions.</p>
+</div>
+<p>The second thing to clarify is that a given pattern will match any string <strong>starting</strong> with it. Thus, <code>"type/sequence/list"</code> will match not only <code>"type/sequence/list"</code>, but <code>"type/sequence/list/empty"</code> and <code>"type/sequence/list/supercalifragilisticexpialidocious"</code> too. The same applies to program names. For example, in our personal database, all programs from <a href="https://projecteuler.net">Project Euler</a> start with <code>"euler_"</code>. The pattern <code>"euler_"</code> will then match all of them.</p>
+<p>In terms of regular expressions, it means that, under the hood, Paroxython invokes <a href="https://docs.python.org/3/library/re.html#search-vs-match"><code>match()</code> instead of <code>search()</code></a>. In the rare cases where you want to restrict the whole matching to the pattern itself, simply suffix it with a dollar sign, i.e., <code>"type/sequence/list$"</code>.</p>
+<h2 id="execution-of-a-pipeline">Execution of a pipeline</h2>
+<p>A pipeline is a set (or list, but the order is not important) of commands which apply sequentially to a database of program tags. It returns:</p>
+<ul>
+<li>a list of recommended programs;</li>
+<li>an estimation of the learning cost of each concept (i.e., taxon) they implement.</li>
+</ul>
+<p>The set of commands constitutes a pipeline that evolves both:</p>
+<ul>
+<li>a selection of programs (initially all those in the tag database);</li>
+<li>a body of imparted knowledge (initially empty).</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>During this process, the program selection can never increase, and the imparted knowledge can never decrease.</p>
+</div>
+<p>A command consists of:</p>
+<ul>
+<li>an operation among <code>"include"</code>, <code>"exclude"</code>, <code>"impart"</code> and <code>"hide"</code>, optionally suffixed by the quantifier (<code>" all"</code>);</li>
+<li>the data to which it applies. This data is (or can be interpreted to produce) a list of criteria, each criterion being:<ul>
+<li>either a program pattern,</li>
+<li>or a taxon pattern,</li>
+<li>or a relationship between two taxon patterns (more on this in the <a href="#semantic-triples">Semantic triples</a> section).</li>
+</ul>
+</li>
+</ul>
+<p>Combining the operation with a criterion is done in four stages:</p>
+<ol>
+<li>An auxiliary set of programs is calculated.</li>
+<li>The set of recommended programs (the <strong>selection</strong>) is updated.</li>
+<li>A new set of taxa may be “learned”, i.e., added to the body of imparted knowledge.</li>
+<li>The set of taxa and programs to hide in the final report may be updated.</li>
+</ol>
+<p>Note that each stage depends on both the operation and the nature of the criterion to which it applies. Let us detail every possible case:</p>
+<h3 id="include-command"><code>"include"</code> command</h3>
+<p>Its purpose is to keep only those selected programs that satisfy at least one given criterion.</p>
+<ol>
+<li>The auxiliary set contains any program such that:<ul>
+<li>either its name matches the given pattern,</li>
+<li>or its source code:<ul>
+<li>either features at least one taxon matching the given pattern,</li>
+<li>or satisfies the given relationship.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>The selection is then restricted to its <strong>intersection</strong> with the auxiliary set.</li>
+<li>The imparted knowledge is unchanged.</li>
+</ol>
+<p><strong><code>"include all"</code> variant</strong></p>
+<p>Its purpose is to keep only those selected programs that satisfy all given criteria.</p>
+<pre><code class="python">{
+  &quot;operation&quot;: &quot;include all&quot;,
+  &quot;data&quot;: [
+    criterion_1,
+    criterion_2,
+    ...,
+    criterion_n
+  ]
+}
+</code></pre>
+<p>&hellip; is equivalent to:</p>
+<pre><code class="python">  {&quot;operation&quot;: &quot;include&quot;, &quot;data&quot;: [criterion_1]},
+  {&quot;operation&quot;: &quot;include&quot;, &quot;data&quot;: [criterion_2]},
+  ...,
+  {&quot;operation&quot;: &quot;include&quot;, &quot;data&quot;: [criterion_n]}
+</code></pre>
+<h3 id="exclude-command"><code>"exclude"</code> command</h3>
+<p>Its purpose is to filter out of the selection the programs which satisfy at least one given criterion.</p>
+<ol>
+<li>The same auxiliary set of programs as above (<code>"include"</code>) is calculated, but further extended to the programs which import them
+(either directly or indirectly). Indeed, when the teacher wants to exclude a certain program, any program that requires it should be excluded as well.</li>
+<li>The selection is then restricted to its <strong>difference</strong> with the auxiliary set.</li>
+<li>The imparted knowledge is unchanged.</li>
+</ol>
+<p><strong><code>"exclude all"</code> variant</strong></p>
+<p>Unlike <code>"include all"</code>, this variant actually expands the semantics of the system.</p>
+<pre><code class="python">{
+  &quot;operation&quot;: &quot;exclude all&quot;,
+  &quot;data&quot;: [
+    criterion_1,
+    criterion_2,
+    ...,
+    criterion_n
+  ]
+}
+</code></pre>
+<p>&hellip; excludes the programs satisfying <strong>all</strong> the criteria. This cannot be transformed into a sequence of <code>"exclude"</code> commands, which would exclude the programs satisfying <strong>any</strong> of the criteria.</p>
+<h3 id="impart-command"><code>"impart"</code> command</h3>
+<p>Its main purpose is to track the acquisition of new knowledge. However, if this knowledge is provided by a given set of programs, there is no more need to keep them in the selection of recommended programs.</p>
+<ol>
+<li>The auxiliary set contains all programs whose name matches at least one of the given patterns (relationships are not supported), plus those which import (either directly or indirectly) at least one of them. In other words, it is the same as above (<code>"exclude"</code>), but only in the case where the criterion is a program pattern. In all other cases, this auxiliary set will be empty.</li>
+<li>The selection is then restricted to its <strong>difference</strong> with the auxiliary set (same as above for <code>"exclude"</code>).</li>
+<li>There are three cases:<ol>
+<li>If the criterion is a program pattern, all the taxa featured in a program whose name matches this pattern are added to the body of imparted knowledge.</li>
+<li>If the criterion is a taxon pattern, all the taxa matching this pattern are added to the body of imparted knowledge.</li>
+<li>Otherwise, the body of imparted knowledge is unchanged.</li>
+</ol>
+</li>
+</ol>
+<p>The <code>"impart all"</code> variant is not supported, and treated as <code>"impart"</code>.</p>
+<h3 id="hide-command"><code>"hide"</code> command</h3>
+<p>This is the simplest command of all. It merely accumulates the programs or the taxa matching the given patterns (relationships are not supported), without other effect on the filter. In the final stage, the accumulated programs or taxa will be filtered out of report.</p>
+<p><strong>Notes.</strong></p>
+<ul>
+<li>Excluding a program is equivalent to hiding it <em>plus</em> every program importing it.</li>
+<li>The learning costs are not affected whatsoever by the hiding of a taxon: its individual cost continues to contribute towards the total cost of a program.</li>
+</ul>
+<p>The <code>"hide all"</code> variant is not supported, and treated as <code>"hide"</code>.</p>
+<h2 id="semantic-triples">Semantic triples</h2>
+<h3 id="span-algebra">Span algebra</h3>
+<p>Being given a program <span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span> of <span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span> lines, a couple <span><span class="MathJax_Preview">(i_1, i_2) </span><script type="math/tex">(i_1, i_2) </script></span> of line numbers such that <span><span class="MathJax_Preview">1 \leq i_1 \leq i_2 \leq n</span><script type="math/tex">1 \leq i_1 \leq i_2 \leq n</script></span> represents a <strong>span</strong> of <span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span>. When Paroxython finds a taxon <span><span class="MathJax_Preview">t</span><script type="math/tex">t</script></span> in <span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span>, it doesn't just say whether <span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span> features <span><span class="MathJax_Preview">t</span><script type="math/tex">t</script></span> or not: it returns the list of spans where <span><span class="MathJax_Preview">t</span><script type="math/tex">t</script></span> occurs.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Any taxon starting with <code>"metadata/"</code> is considered by convention to span the entire program.</p>
+</div>
+<p>It is sometimes interesting to know how the spans of two taxa of the same program are located relatively to each other.</p>
+<ul>
+<li>For instance, a <code>print()</code> statement whose span is inside the span of a function indicates that this function has a side-effect.</li>
+<li>A less trivial application stems from the fact that our taxonomy is multi-dimensional: each algorithmic feature can be associated with several taxa at the same time, characterizing it it along several dimensions. For instance, the taxa <code>flow/loop/for</code> and <code>flow/loop/while</code> describe the category of a loop; whereas the taxa <code>flow/loop/exit/early</code> and <code>flow/loop/exit/late</code> describe its exit behavior. These dimensions are independent and, although it is entirely possible to do so, our default taxonomy does not list the results of the cross-product (i.e., <code>flow/loop/for/exit/early</code>, <code>flow/loop/for/exit/late</code>, <code>flow/loop/while/exit/early</code> and <code>flow/loop/while/exit/late</code>). Querying an hypothetical taxon <code>flow/loop/for/exit/early</code> (or <code>flow/loop/exit/early/for</code>, by the way) comes down to querying the taxa <code>flow/loop/for</code> spanning the same lines as <code>flow/loop/exit/early</code>.</li>
+</ul>
+<p>To express a relation <span><span class="MathJax_Preview">\mathfrak{R}</span><script type="math/tex">\mathfrak{R}</script></span> between the spans of two taxa, we start from the algebra devised in 1983 by James F. Allen in his seminal paper (<a href="http://cse.unl.edu/~choueiry/Documents/Allen-CACM1983.pdf">PDF</a>) about temporal intervals<sup id="fnref:Allen1983"><a class="footnote-ref" href="#fn:Allen1983" rel="footnote">5</a></sup>. The so-called Allen's interval algebra defines 13 basic operators which capture all possible relations between two intervals <span><span class="MathJax_Preview">X=(x_1, x_2)</span><script type="math/tex">X=(x_1, x_2)</script></span> and <span><span class="MathJax_Preview">Y=(y_1, y_2)</span><script type="math/tex">Y=(y_1, y_2)</script></span>. The table below uses his terminology:</p>
+<table>
+<thead>
+<tr>
+<th align="center">Examples</th>
+<th align="center"><span><span class="MathJax_Preview">\mathfrak{R}</span><script type="math/tex">\mathfrak{R}</script></span> on endpoints</th>
+<th align="center"><span><span class="MathJax_Preview">X \mathbin{\mathfrak{R}} Y</span><script type="math/tex">X \mathbin{\mathfrak{R}} Y</script></span></th>
+<th align="center"><span><span class="MathJax_Preview">Y \mathbin{\mathfrak{R}} X</span><script type="math/tex">Y \mathbin{\mathfrak{R}} X</script></span></th>
+<th align="center">Keys</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><code>....XXXXX........</code> &nbsp;</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><code>....YYYYY........</code> &nbsp;</td>
+<td align="center"><span><span class="MathJax_Preview">x_1 = y_1 \leq x_2 = y_2</span><script type="math/tex">x_1 = y_1 \leq x_2 = y_2</script></span>
+&nbsp;</td>
+<td align="center"><span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span> <code>equals</code> <span><span class="MathJax_Preview">Y</span><script type="math/tex">Y</script></span>
+&nbsp;</td>
+<td align="center"><span><span class="MathJax_Preview">Y</span><script type="math/tex">Y</script></span> <code>equals</code> <span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span>
+&nbsp;</td>
+<td align="center"><code>x=y≤x=y</code></td>
+</tr>
+<tr>
+<td align="center"><code>....YYYYYYYYY....</code> &nbsp;</td>
+<td align="center"><span><span class="MathJax_Preview">x_1 = y_1 \leq x_2 \leq y_2</span><script type="math/tex">x_1 = y_1 \leq x_2 \leq y_2</script></span>
+&nbsp;</td>
+<td align="center"><span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span> <code>starts</code> <span><span class="MathJax_Preview">Y</span><script type="math/tex">Y</script></span>
+&nbsp;</td>
+<td align="center"><span><span class="MathJax_Preview">Y</span><script type="math/tex">Y</script></span> <code>started by</code> <span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span>
+&nbsp;</td>
+<td align="center"><code>x=y≤x≤y</code></td>
+</tr>
+<tr>
+<td align="center"><code>..YYYYYYYYY......</code> &nbsp;</td>
+<td align="center"><span><span class="MathJax_Preview">y_1 \leq x_1 \leq x_2 \leq y_2</span><script type="math/tex">y_1 \leq x_1 \leq x_2 \leq y_2</script></span> &nbsp;</td>
+<td align="center"><span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span> <code>during</code> <span><span class="MathJax_Preview">Y</span><script type="math/tex">Y</script></span>
+&nbsp;</td>
+<td align="center"><span><span class="MathJax_Preview">Y</span><script type="math/tex">Y</script></span> <code>contains</code> <span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span>
+&nbsp;</td>
+<td align="center"><code>y≤x≤x≤y</code></td>
+</tr>
+<tr>
+<td align="center"><code>.YYYYYYYY........</code> &nbsp;</td>
+<td align="center"><span><span class="MathJax_Preview">y_1 \leq x_1 \leq x_2 = y_2</span><script type="math/tex">y_1 \leq x_1 \leq x_2 = y_2</script></span>
+&nbsp;</td>
+<td align="center"><span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span> <code>finishes</code> <span><span class="MathJax_Preview">Y</span><script type="math/tex">Y</script></span>
+&nbsp;</td>
+<td align="center"><span><span class="MathJax_Preview">Y</span><script type="math/tex">Y</script></span> <code>finished by</code> <span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span>
+&nbsp;</td>
+<td align="center"><code>y≤x≤x=y</code></td>
+</tr>
+<tr>
+<td align="center"><code>....|...|..YYYYY.</code> &nbsp;</td>
+<td align="center"><span><span class="MathJax_Preview">x_1 \leq x_2 \leq y_1 \leq y_2</span><script type="math/tex">x_1 \leq x_2 \leq y_1 \leq y_2</script></span> &nbsp;</td>
+<td align="center"><span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span> <code>before</code> <span><span class="MathJax_Preview">Y</span><script type="math/tex">Y</script></span>
+&nbsp;</td>
+<td align="center"><span><span class="MathJax_Preview">Y</span><script type="math/tex">Y</script></span> <code>after</code> <span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span>
+&nbsp;</td>
+<td align="center"><code>x≤x≤y≤y</code></td>
+</tr>
+<tr>
+<td align="center"><code>....|...|YYYYY...</code> &nbsp;</td>
+<td align="center"><span><span class="MathJax_Preview">x_1 \leq x_2 = y_1 \leq y_2</span><script type="math/tex">x_1 \leq x_2 = y_1 \leq y_2</script></span>
+&nbsp;</td>
+<td align="center"><span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span> <code>meets</code> <span><span class="MathJax_Preview">Y</span><script type="math/tex">Y</script></span>
+&nbsp;</td>
+<td align="center"><span><span class="MathJax_Preview">Y</span><script type="math/tex">Y</script></span> <code>met by</code> <span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span>
+&nbsp;</td>
+<td align="center"><code>x≤x=y≤y</code></td>
+</tr>
+<tr>
+<td align="center"><code>....|..YYYYY.....</code> &nbsp;</td>
+<td align="center"><span><span class="MathJax_Preview">x_1 \leq y_1 \leq x_2 \leq y_2</span><script type="math/tex">x_1 \leq y_1 \leq x_2 \leq y_2</script></span> &nbsp;</td>
+<td align="center"><span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span> <code>overlaps</code> <span><span class="MathJax_Preview">Y</span><script type="math/tex">Y</script></span>
+&nbsp;</td>
+<td align="center"><span><span class="MathJax_Preview">Y</span><script type="math/tex">Y</script></span> <code>overlapped by</code> <span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span> &nbsp;</td>
+<td align="center"><code>x≤y≤x≤y</code></td>
+</tr>
+</tbody>
+</table>
+<p>These well-known operators apply quite nicely to our spans, with the following adjustments:</p>
+<p><strong>Synonyms.</strong> The 13 operator names, whose some don't make much sense in a non-temporal context, are extended
+with a number of synonyms, such as <code>"inside"</code> for <code>"during"</code>, and <code>"equal"</code> or <code>"is"</code> for
+<code>"equals"</code>. The current list can be found
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/compare_spans.py#L195">here</a>.</p>
+<p><strong>Non-strict inequalities.</strong> In the above table, contrary to the convention on time intervals, we
 consider the inequalities to be large. In a program, most features span exactly one (logical) line
-(i.e., \(x_1=x_2\)): this is simply not possible with the original relations on endpoints. Besides,
+(i.e., <span><span class="MathJax_Preview">x_1=x_2</span><script type="math/tex">x_1=x_2</script></span>): this is simply not possible with the original relations on endpoints. Besides,
 when we look for a function which
-**contains** a loop, we are generally not interested in whether
-the loop **finishes** on the last line. Blind adherence to strictness convention would force us to
-express our query as a disjunction of these two relations for the following program to be selected:
-wzxhzdk:26
-**Strict inequalities.** In addition to the existing relations, all combinations of strict and non-strict
-conditions are generated, for instance \(x_1 < x_2 < y_1 \leq y_2\). That adds up to 162 in total[^predicate_count].
-[^predicate_count]:
-\(162 = 6 \times 27\), where \(6\) is the number of distinct permutations of the quadruple \((x, x, y, y)\), and \(27=3^3\) the number of elements of the triple auto-product of \(3\) symbols (`=`, `≤` and `<`).
-**Keys.** As we use many more operators than Allen, giving an English name to every single one is not an option. Paroxython actually identifies them by a unique key (see the last column of the table above) calculated like this:
-1. Start from the chain of equalities and inequalities that defines the relations between the two spans' endpoints: \(y_1 < x_1 = y_2 \leq x_2\).
-2. Drop the indices (since, for a given \(x\) or \(y\), indice \(1\) always comes before indice \(2\), no information is lost): \(y < x = y \leq x\).
-3. Rewrite the formula using only the five characters `"="`, `"<"`, `"≤"`, `"x"` and `"y"`: `y<x=y≤x`.
-**Key normalization.**
-Paroxython tries (cf. <code><a title="paroxython.normalize_predicate.normalize_predicate" href="../normalize_predicate.html#paroxython.normalize_predicate.normalize_predicate">normalize\_predicate()</a></code>) to be tolerant with the user input. The verb `"is"` is ignored, except when it constitutes the whole string (thus, `"is after"` comes down to `"after"`). When an operator is not an Allen's name or a predefined synonym, the following normalization process is applied:
-1. Replace any `<=` by `≤`.
-2. Replace any `==` by `=`.
-3. Strip all characters distinct from `"="`, `"<"`, `"≤"`, `"x"` and `"y"`.
-4. If the string is `"x=y"` or `"y=x"`, replace it by `"x=y≤x=y"`.
-2. If the string contains only one <code>x</code> (resp. <code>y</code>), expand it into `x≤x` (resp. `y≤y`).
-This allows the user to be understood when entering formulas like
-`x == y`, `x <= y` or `y1 < x1 == x2 <= y2`.
-### Positive semantic triples
-A pipeline command can apply not only to patterns of programs and taxa, but also to relationships between the spans of two taxon patterns. Being given an operator \(\mathfrak{R}\) and two taxon patterns \(t_1\) and \(t_2\), the statement \(t_1 \mathbin{\mathfrak{R}} t_2\) will be codified in the form of the _subject–predicate–object_ expression \((t_1, \mathfrak{R}, t_2)\), which can be entered as a mere Python tuple <code>(t1, R, t2)</code>.
-The simplest semantic triple is:
-wzxhzdk:27
-It matches all programs where the span of the taxon `"metadata/program"` includes the span of a given <code>taxon\_pattern</code>. Since, by definition, every program features one taxon `"metadata/program"`, whose span encompasses the whole program, this is strictly equivalent to:
-wzxhzdk:28
-And now for something completely different: the following pipeline command will only keep programs featuring a conditional inside a loop **or** (inclusive) ended by a <code>return</code> statement (the function <code>first\_missing\_non\_negative()</code> given above satisfies these two criteria).
-wzxhzdk:29
-It is currently not possible to chain several operators with shared operands, for example to keep only the programs that feature a conditional inside a loop **and** ended by a <code>return</code> statement: the quintuple `("flow/loop", "contains", "flow/conditional", "finished by", "subroutine/return")` would raise an error. As it stands, the best we can do is to chain the commands themselves:
-wzxhzdk:30
-This keeps only the programs that feature a conditional inside a loop **and** a conditional ended by a <code>return</code> statement **and** a <code>return</code> statement inside a loop. The result is a subset of the previous one, but may still include programs where the two loops, conditionals or <code>return</code> statements are distinct.
-### Negative semantic triples
-It is possible to negate the predicate of a semantic triple, either by prefixing it by an exclamation mark (e.g., `"!x≤y≤y≤x"`, or `"!contains"`), or by adding the word _not_ (_e.g_, `"not x≤y≤y≤x"`, `"not contains"`,
-or `"contains not"`), whether it's grammatically correct or not.
-#### Expressing the absence of a taxon
-Here again, the simplest _negated_ semantic triple is:
-wzxhzdk:31
-On a set of **independent programs** (i.e., not importing each other), there is a strict equivalence between:
-wzxhzdk:32
-and:
-wzxhzdk:33
-And, conversely, between:
-wzxhzdk:34
-and:
-wzxhzdk:35
-This property may be used to select the programs that include any subset of a given set of taxa. This can be done in a systematic way by converting[^to_cnf] the corresponding logical formula in [conjunctive normal form](https://en.wikipedia.org/wiki/Conjunctive_normal_form), and transforming each clause into a separate `"include"` command.
-[^to_cnf]:
-Automate the conversion with the function [`to_cnf()`](https://github.com/sympy/sympy/blob/58e1e9abade7c38c66871fd06bf76ebac8c1df78/sympy/logic/boolalg.py#L1691-L1730) of [SymPy](https://www.sympy.org/en/index.html).
-For instance, consider the two taxa `"flow/conditional"` and `"flow/loop"`. To keep only the programs that feature either a conditional (denoted by the literal \(a\)) or a loop (denoted by the literal \(b\)), but not both of them, express first the formula in CNF: \((a \lor b) \land (\neg a \lor \neg b)\), then translate it into:
-*[CNF]: Conjunctive Normal Form
-wzxhzdk:36
-For two taxa, there are a total of 16 combinations, listed and tested [here](https://github.com/laowantong/paroxython/blob/master/tests/test_recommend_programs.py#L665-L694).
+<strong>contains</strong> a loop, we are generally not interested in whether
+the loop <strong>finishes</strong> on the last line. Blind adherence to strictness convention would force us to
+express our query as a disjunction of these two relations for the following program to be selected:</p>
+<pre><code class="python">def first_missing_non_negative(l):
+    elements = set(l)
+    for natural in range(len(elements) + 1):
+        if natural not in elements:
+            return natural
+</code></pre>
+<p><strong>Strict inequalities.</strong> In addition to the existing relations, all combinations of strict and non-strict
+conditions are generated, for instance <span><span class="MathJax_Preview">x_1 &lt; x_2 &lt; y_1 \leq y_2</span><script type="math/tex">x_1 < x_2 < y_1 \leq y_2</script></span>. That adds up to 162 in total<sup id="fnref:predicate_count"><a class="footnote-ref" href="#fn:predicate_count" rel="footnote">6</a></sup>.</p>
+<p><strong>Keys.</strong> As we use many more operators than Allen, giving an English name to every single one is not an option. Paroxython actually identifies them by a unique key (see the last column of the table above) calculated like this:</p>
+<ol>
+<li>Start from the chain of equalities and inequalities that defines the relations between the two spans' endpoints: <span><span class="MathJax_Preview">y_1 &lt; x_1 = y_2 \leq x_2</span><script type="math/tex">y_1 < x_1 = y_2 \leq x_2</script></span>.</li>
+<li>Drop the indices (since, for a given <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span> or <span><span class="MathJax_Preview">y</span><script type="math/tex">y</script></span>, indice <span><span class="MathJax_Preview">1</span><script type="math/tex">1</script></span> always comes before indice <span><span class="MathJax_Preview">2</span><script type="math/tex">2</script></span>, no information is lost): <span><span class="MathJax_Preview">y &lt; x = y \leq x</span><script type="math/tex">y < x = y \leq x</script></span>.</li>
+<li>Rewrite the formula using only the five characters <code>"="</code>, <code>"&lt;"</code>, <code>"≤"</code>, <code>"x"</code> and <code>"y"</code>: <code>y&lt;x=y≤x</code>.</li>
+</ol>
+<p><strong>Key normalization.</strong>
+Paroxython tries (cf. <code><a title="paroxython.normalize_predicate.normalize_predicate" href="../normalize_predicate.html#paroxython.normalize_predicate.normalize_predicate">normalize_predicate()</a></code>) to be tolerant with the user input. The verb <code>"is"</code> is ignored, except when it constitutes the whole string (thus, <code>"is after"</code> comes down to <code>"after"</code>). When an operator is not an Allen's name or a predefined synonym, the following normalization process is applied:</p>
+<ol>
+<li>Replace any <code>&lt;=</code> by <code>≤</code>.</li>
+<li>Replace any <code>==</code> by <code>=</code>.</li>
+<li>Strip all characters distinct from <code>"="</code>, <code>"&lt;"</code>, <code>"≤"</code>, <code>"x"</code> and <code>"y"</code>.</li>
+<li>If the string is <code>"x=y"</code> or <code>"y=x"</code>, replace it by <code>"x=y≤x=y"</code>.</li>
+<li>If the string contains only one <code>x</code> (resp. <code>y</code>), expand it into <code>x≤x</code> (resp. <code>y≤y</code>).</li>
+</ol>
+<p>This allows the user to be understood when entering formulas like
+<code>x == y</code>, <code>x &lt;= y</code> or <code>y1 &lt; x1 == x2 &lt;= y2</code>.</p>
+<h3 id="positive-semantic-triples">Positive semantic triples</h3>
+<p>A pipeline command can apply not only to patterns of programs and taxa, but also to relationships between the spans of two taxon patterns. Being given an operator <span><span class="MathJax_Preview">\mathfrak{R}</span><script type="math/tex">\mathfrak{R}</script></span> and two taxon patterns <span><span class="MathJax_Preview">t_1</span><script type="math/tex">t_1</script></span> and <span><span class="MathJax_Preview">t_2</span><script type="math/tex">t_2</script></span>, the statement <span><span class="MathJax_Preview">t_1 \mathbin{\mathfrak{R}} t_2</span><script type="math/tex">t_1 \mathbin{\mathfrak{R}} t_2</script></span> will be codified in the form of the <em>subject–predicate–object</em> expression <span><span class="MathJax_Preview">(t_1, \mathfrak{R}, t_2)</span><script type="math/tex">(t_1, \mathfrak{R}, t_2)</script></span>, which can be entered as a mere Python tuple <code>(t1, R, t2)</code>.</p>
+<p>The simplest semantic triple is:</p>
+<pre><code class="python">(&quot;metadata/program&quot;, &quot;contains&quot;, taxon_pattern)
+</code></pre>
+<p>It matches all programs where the span of the taxon <code>"metadata/program"</code> includes the span of a given <code>taxon_pattern</code>. Since, by definition, every program features one taxon <code>"metadata/program"</code>, whose span encompasses the whole program, this is strictly equivalent to:</p>
+<pre><code class="python">taxon_pattern
+</code></pre>
+<p>And now for something completely different: the following pipeline command will only keep programs featuring a conditional inside a loop <strong>or</strong> (inclusive) ended by a <code>return</code> statement (the function <code>first_missing_non_negative()</code> given above satisfies these two criteria).</p>
+<pre><code class="python">  {
+    &quot;operation&quot;: &quot;include&quot;,
+    &quot;data&quot;: [
+      (&quot;flow/loop&quot;, &quot;contains&quot;, &quot;flow/conditional&quot;),
+      (&quot;flow/conditional&quot;, &quot;finished by&quot;, &quot;subroutine/return&quot;),
+    ]
+  },
+</code></pre>
+<p>It is currently not possible to chain several operators with shared operands, for example to keep only the programs that feature a conditional inside a loop <strong>and</strong> ended by a <code>return</code> statement: the quintuple <code>("flow/loop", "contains", "flow/conditional", "finished by", "subroutine/return")</code> would raise an error. As it stands, the best we can do is to chain the commands themselves:</p>
+<pre><code class="python">  {
+    &quot;operation&quot;: &quot;include&quot;,
+    &quot;data&quot;: [
+      (&quot;flow/loop&quot;, &quot;contains&quot;, &quot;flow/conditional&quot;),
+    ]
+  },
+  {
+    &quot;operation&quot;: &quot;include&quot;,
+    &quot;data&quot;: [
+      (&quot;flow/conditional&quot;, &quot;finished by&quot;, &quot;subroutine/return&quot;),
+    ]
+  },
+  {
+    &quot;operation&quot;: &quot;include&quot;,
+    &quot;data&quot;: [
+      (&quot;subroutine/return&quot;, &quot;contains&quot;, &quot;flow/loop&quot;),
+    ]
+  },
+</code></pre>
+<p>This keeps only the programs that feature a conditional inside a loop <strong>and</strong> a conditional ended by a <code>return</code> statement <strong>and</strong> a <code>return</code> statement inside a loop. The result is a subset of the previous one, but may still include programs where the two loops, conditionals or <code>return</code> statements are distinct.</p>
+<h3 id="negative-semantic-triples">Negative semantic triples</h3>
+<p>It is possible to negate the predicate of a semantic triple, either by prefixing it by an exclamation mark (e.g., <code>"!x≤y≤y≤x"</code>, or <code>"!contains"</code>), or by adding the word <em>not</em> (<em>e.g</em>, <code>"not x≤y≤y≤x"</code>, <code>"not contains"</code>,
+or <code>"contains not"</code>), whether it's grammatically correct or not.</p>
+<h4 id="expressing-the-absence-of-a-taxon">Expressing the absence of a taxon</h4>
+<p>Here again, the simplest <em>negated</em> semantic triple is:</p>
+<pre><code class="python">(&quot;metadata/program&quot;, &quot;not contains&quot;, taxon_pattern)
+</code></pre>
+<p>On a set of <strong>independent programs</strong> (i.e., not importing each other), there is a strict equivalence between:</p>
+<pre><code class="python">  {
+    &quot;operation&quot;: &quot;include&quot;,
+    &quot;data&quot;: [
+      (&quot;metadata/program&quot;, &quot;not contains&quot;, taxon_pattern)
+    ]
+  },
+</code></pre>
+<p>and:</p>
+<pre><code class="python">  {
+    &quot;operation&quot;: &quot;exclude&quot;,
+    &quot;data&quot;: [
+      taxon_pattern
+    ]
+  },
+</code></pre>
+<p>And, conversely, between:</p>
+<pre><code class="python">  {
+    &quot;operation&quot;: &quot;include&quot;,
+    &quot;data&quot;: [
+      taxon_pattern
+    ]
+  },
+</code></pre>
+<p>and:</p>
+<pre><code class="python">  {
+    &quot;operation&quot;: &quot;exclude&quot;,
+    &quot;data&quot;: [
+      (&quot;metadata/program&quot;, &quot;not contains&quot;, taxon_pattern)
+    ]
+  },
+</code></pre>
+<p>This property may be used to select the programs that include any subset of a given set of taxa. This can be done in a systematic way by converting<sup id="fnref:to_cnf"><a class="footnote-ref" href="#fn:to_cnf" rel="footnote">7</a></sup> the corresponding logical formula in <a href="https://en.wikipedia.org/wiki/Conjunctive_normal_form">conjunctive normal form</a>, and transforming each clause into a separate <code>"include"</code> command.</p>
+<p>For instance, consider the two taxa <code>"flow/conditional"</code> and <code>"flow/loop"</code>. To keep only the programs that feature either a conditional (denoted by the literal <span><span class="MathJax_Preview">a</span><script type="math/tex">a</script></span>) or a loop (denoted by the literal <span><span class="MathJax_Preview">b</span><script type="math/tex">b</script></span>), but not both of them, express first the formula in <abbr title="Conjunctive Normal Form">CNF</abbr>: <span><span class="MathJax_Preview">(a \lor b) \land (\neg a \lor \neg b)</span><script type="math/tex">(a \lor b) \land (\neg a \lor \neg b)</script></span>, then translate it into:</p>
+<pre><code class="python">  {
+    &quot;operation&quot;: &quot;include&quot;,
+    &quot;data&quot;: [
+      &quot;flow/conditional&quot;,
+      &quot;flow/loop&quot;,
+    ]
+  }, # keep only the programs that feature either a conditional or a loop
+  {
+    &quot;operation&quot;: &quot;include&quot;,
+    &quot;data&quot;: [
+      (&quot;metadata/program&quot;, &quot;not contains&quot;, &quot;flow/conditional&quot;),
+      (&quot;metadata/program&quot;, &quot;not contains&quot;, &quot;flow/loop&quot;),
+    ]
+  }, # among them, keep only those that feature no conditional or no loop
+</code></pre>
+<p>For two taxa, there are a total of 16 combinations, listed and tested <a href="https://github.com/laowantong/paroxython/blob/master/tests/test_recommend_programs.py#L665-L694">here</a>.
 <!---
 The previous link is automatically updated by build_pdoc.py.
--->
+--></p>
 <p>However, on a set on <strong>interdependent programs</strong>, <code>"exclude"</code> is not the opposite of <code>"include"</code> anymore: <a href="#exclude-command">as already explained</a>, excluding a program excludes also the programs which import it. Consequently, <em>including</em> the programs that do not feature a given taxon will filter out those which feature it <em>directly</em>; but <em>excluding</em> the programs that do feature this taxon will filter out those which feature it either directly or <em>indirectly</em> (by importation).</p>
 <h4 id="general-semantics-of-the-negation">General semantics of the negation</h4>
 <p>The semantic triple:</p>
@@ -592,7 +788,7 @@ span <code>s_1</code> of such a taxon, there exists no span <code>s_2</code> of 
 </div>
 <p>For example, if the original (negative) predicate is <code>"taxon_pattern_1 not inside taxon_pattern_2"</code>, any program consisting in:</p>
 <ul>
-<li><code>"taxon_2{taxon_1}"</code><sup id="fnref:braces"><a class="footnote-ref" href="#fn:braces" rel="footnote">4</a></sup> is rejected;</li>
+<li><code>"taxon_2{taxon_1}"</code><sup id="fnref:braces"><a class="footnote-ref" href="#fn:braces" rel="footnote">8</a></sup> is rejected;</li>
 <li><code>"taxon_1"</code> is <strong>accepted</strong> (although there is no <code>taxon_2</code>);</li>
 <li><code>"taxon_2"</code> is <strong>rejected</strong> (no <code>taxon_1</code>);</li>
 <li><code>"taxon_1{taxon_2}"</code> is accepted;</li>
@@ -661,8 +857,21 @@ on the SQLite tag database.&#160;<a class="footnote-backref" href="#fnref:tree_s
 <li id="fn:compare">
 <p>On a side note: in the <abbr title="Abstract Syntax Tree">AST</abbr>, an expression like <code>a &lt; b &lt; c</code> counts for <strong>one</strong> (chained) comparison.&#160;<a class="footnote-backref" href="#fnref:compare" rev="footnote" title="Jump back to footnote 3 in the text">&#8617;</a></p>
 </li>
+<li id="fn:regex-credits">
+<p>This module appears to be here to stay, since it is proeminently featured in the documentation of the more mundane standard library <a href="https://docs.python.org/3/library/re.html">re</a>.
+Thanks and kudos to the author, Matthew Barnett: without his awesome work, many parts of our code would have been much tougher to write, and much slower to execute.&#160;<a class="footnote-backref" href="#fnref:regex-credits" rev="footnote" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+<li id="fn:Allen1983">
+<p>Allen, James F. (26 Nov. 1983). <em>Maintaining knowledge about temporal intervals</em>. Communications of the ACM. 26 (11): 832–843. doi:10.1145/182.358434&#160;<a class="footnote-backref" href="#fnref:Allen1983" rev="footnote" title="Jump back to footnote 5 in the text">&#8617;</a></p>
+</li>
+<li id="fn:predicate_count">
+<p><span><span class="MathJax_Preview">162 = 6 \times 27</span><script type="math/tex">162 = 6 \times 27</script></span>, where <span><span class="MathJax_Preview">6</span><script type="math/tex">6</script></span> is the number of distinct permutations of the quadruple <span><span class="MathJax_Preview">(x, x, y, y)</span><script type="math/tex">(x, x, y, y)</script></span>, and <span><span class="MathJax_Preview">27=3^3</span><script type="math/tex">27=3^3</script></span> the number of elements of the triple auto-product of <span><span class="MathJax_Preview">3</span><script type="math/tex">3</script></span> symbols (<code>=</code>, <code>≤</code> and <code>&lt;</code>).&#160;<a class="footnote-backref" href="#fnref:predicate_count" rev="footnote" title="Jump back to footnote 6 in the text">&#8617;</a></p>
+</li>
+<li id="fn:to_cnf">
+<p>Automate the conversion with the function <a href="https://github.com/sympy/sympy/blob/58e1e9abade7c38c66871fd06bf76ebac8c1df78/sympy/logic/boolalg.py#L1691-L1730"><code>to_cnf()</code></a> of <a href="https://www.sympy.org/en/index.html">SymPy</a>.&#160;<a class="footnote-backref" href="#fnref:to_cnf" rev="footnote" title="Jump back to footnote 7 in the text">&#8617;</a></p>
+</li>
 <li id="fn:braces">
-<p>In these examples, the braces denote the fact that the span of a certain taxon is included in that of another taxon.&#160;<a class="footnote-backref" href="#fnref:braces" rev="footnote" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+<p>In these examples, the braces denote the fact that the span of a certain taxon is included in that of another taxon.&#160;<a class="footnote-backref" href="#fnref:braces" rev="footnote" title="Jump back to footnote 8 in the text">&#8617;</a></p>
 </li>
 </ol>
 </div>
@@ -708,7 +917,26 @@ on the SQLite tag database.&#160;<a class="footnote-backref" href="#fnref:tree_s
 <li><a href="#mapping-the-labels-onto-taxa">Mapping the labels onto taxa</a><ul>
 <li><a href="#1-1-and-n-1-mappings">1-1 and N-1 mappings</a></li>
 <li><a href="#1-0-mapping">1-0 mapping</a></li>
-<li><a href="#1-n-mapping">1-N mapping</a><ul>
+<li><a href="#1-n-mapping">1-N mapping</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#manual-hints">Manual hints</a></li>
+<li><a href="#deep-in-the-pipeline">Deep in the pipeline</a><ul>
+<li><a href="#regular-expression-patterns">Regular expression patterns</a></li>
+<li><a href="#execution-of-a-pipeline">Execution of a pipeline</a><ul>
+<li><a href="#include-command">"include" command</a></li>
+<li><a href="#exclude-command">"exclude" command</a></li>
+<li><a href="#impart-command">"impart" command</a></li>
+<li><a href="#hide-command">"hide" command</a></li>
+</ul>
+</li>
+<li><a href="#semantic-triples">Semantic triples</a><ul>
+<li><a href="#span-algebra">Span algebra</a></li>
+<li><a href="#positive-semantic-triples">Positive semantic triples</a></li>
+<li><a href="#negative-semantic-triples">Negative semantic triples</a><ul>
+<li><a href="#expressing-the-absence-of-a-taxon">Expressing the absence of a taxon</a></li>
 <li><a href="#general-semantics-of-the-negation">General semantics of the negation</a></li>
 <li><a href="#a-practical-example">A practical example</a></li>
 </ul>

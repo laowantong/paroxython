@@ -1,13 +1,11 @@
 r"""
 .. include:: ../../docs/md/bird_view.md
 
+<br>
+
 .. include:: ../../docs/md/helpers.md
 
-.. include:: ../../docs/md/implementation_notes.md
+<br>
 
-*[AST]: Abstract Syntax Tree
-*[SQL]: Structured Query Language
-*[TSV]: Tab Separated Values
-*[JSON]: JavaScript Object Notation
-*[SLOC]: Source Lines Of Code
+.. include:: ../../docs/md/implementation_notes.md
 """

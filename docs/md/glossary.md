@@ -1,3 +1,4 @@
+<br>
 ## Glossary
 
 - (Manual) hint:

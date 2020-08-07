@@ -8,6 +8,12 @@
 <br>
 
 .. include:: ../docs/md/about.md
+
+*[AST]: Abstract Syntax Tree
+*[SQL]: Structured Query Language
+*[TSV]: Tab Separated Values
+*[JSON]: JavaScript Object Notation
+*[SLOC]: Source Lines Of Code
 """
 
 import sys

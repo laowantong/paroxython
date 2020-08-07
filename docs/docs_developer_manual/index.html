@@ -5,8 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.8.4" />
 <title>paroxython.docs_developer_manual API documentation</title>
-<meta name="description" content="&lt;br&gt;
-…" />
+<meta name="description" content="Bird view." />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
 <link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/github.min.css" crossorigin>
@@ -28,7 +27,6 @@
 <h1 class="title">Developer manual</h1>
 </header>
 <section id="section-intro">
-<h2 id="_1"><br></h2>
 <h1 id="bird-view">Bird view</h1>
 <p>This section mainly describes how the different parts of Paroxython (code, data, results) are integrated. For details on the functioning of an individual module, click its name: it refers to the documentation page. The input and output files are linked to real examples.</p>
 <div class="admonition tip">
@@ -230,7 +228,6 @@ directory (unversioned). The flattened version of its <abbr title="Abstract Synt
 <dd>This script is invoked in the first example of the <a href="../docs_user_manual/index.html#deep-in-the-pipeline">pipeline documentation</a>. This is the one that the main author of Paroxython relies on to automatically extract the list of the “imparted” programs from a textual timeline he updates after each lesson. The script starts by dropping all the text following the <code>"# EOF</code> tag. In the remaining part, it matches all the Python programs filenames which are preceded by a <code>"+"</code> symbol and possibly a bracketed string (for instance <code>"+ [mandatory] homework.py"</code>). Of course, if you use other conventions, you will have to come up with your own custom script. It can be written in any other language (e.g., Perl, bash, etc.), as long as it prints a list of program names on <a href="https://en.wikipedia.org/wiki/Standard_streams#Standard_output_(stdout)">stdout</a>.
 <br></dd>
 </dl>
-<hr>
 <h1 id="implementation-notes">Implementation notes</h1>
 <h2 id="user-types">User types</h2>
 <p>Paroxython makes heavy use of Python 3.5+ <a href="https://docs.python.org/3/library/typing.html">type hints</a>. They are documented directly in the source code. Browse <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/user_types.py">user_types.py</a> on GitHub.</p>
@@ -247,9 +244,7 @@ directory (unversioned). The flattened version of its <abbr title="Abstract Synt
 </li>
 <li id="fn:cost_bucket">
 <p>The intervals are predefined as <span><span class="MathJax_Preview">[0, 0], ]0, 0.25[, [2^{i-2}, 2^{i-1}[, \dots</span><script type="math/tex">[0, 0], ]0, 0.25[, [2^{i-2}, 2^{i-1}[, \dots</script></span> for all natural numbers <span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>.
-<br></p>
-<hr>
-<p><a class="footnote-backref" href="#fnref:cost_bucket" rev="footnote" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+<br>&#160;<a class="footnote-backref" href="#fnref:cost_bucket" rev="footnote" title="Jump back to footnote 3 in the text">&#8617;</a></p>
 </li>
 <li id="fn:disclaimer">
 <p>However, in the current state of things, please don't expect the same level of code quality, documentation and testing than in the user-facing parts of the package.&#160;<a class="footnote-backref" href="#fnref:disclaimer" rev="footnote" title="Jump back to footnote 4 in the text">&#8617;</a></p>
@@ -275,7 +270,6 @@ directory (unversioned). The flattened version of its <abbr title="Abstract Synt
 <h1>Developer manual</h1>
 <div class="toc">
 <ul>
-<li><a href="#_1"><br></a></li>
 <li><a href="#bird-view">Bird view</a><ul>
 <li><a href="#first-stage-tagging-a-collection-of-programs">First stage: tagging a collection of programs</a></li>
 <li><a href="#second-stage-getting-recommendations">Second stage: getting recommendations</a></li>

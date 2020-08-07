@@ -1,6 +1,3 @@
-<br>
-----
-
 # Helper programs
 
 During the development process of Paroxython, it proved useful to create a number of additional scripts to make the final program easier to write, test or understand. None of these scripts are meant to be run by the end user: as such they are are not included by `pip install`. But if you have to modify the source code to better meet your personal expectations, or are interested in collaborating on the project, some of them are definitely a must[^disclaimer].

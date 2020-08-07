@@ -1,6 +1,3 @@
-<br>
-----
-
 # Implementation notes
 
 ## User types
