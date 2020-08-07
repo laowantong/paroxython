@@ -73,17 +73,18 @@ The previous table extract represents the simplest case, where both taxon and la
 
 ### 1-0 mapping
 
-At first glance, some of the labels generated during the first step seem redundant. For instance, `"binary_operator:Add"` and `"addition_operator"`. In fact, the former was used to calculate the latter. In [`spec.md`](https://repo/paroxython/resources/spec.md), the definition of `"addition_operator"` is introduced by these words: “An addition operator is a binary operator `Add` which has not be classified as a concatenation operator”.
+At first glance, some of the labels generated during the first step seem redundant, e.g. `"binary_operator:Add"` and `"addition_operator"`. In fact, the former was used to calculate the latter. In [`spec.md`](https://repo/paroxython/resources/spec.md), the definition of `"addition_operator"` is introduced by:
 
-This is a good example of label for internal use only. In the conversion step, it will be simply ignored (i.e., it has no entry in the taxonomy).
+> An addition operator is a binary operator `Add` which has not be classified as a concatenation operator.
+
+This is a good example of a label for internal use only. In the conversion step, it will be simply ignored (i.e., it has no entry in the taxonomy).
 
 ### 1-N mapping
 
-When a source code is, say, 8 lines long, it is tagged with the label `"whole_span:8"`. This is an example of a label which produces two taxa: `"metadata/program"` and `"metadata/sloc/8"`. Both span the whole program and, although it is not obvious, both have their uses.
+When a source code is, say, 42 lines long, it is tagged with the label `"whole_span:42"`. This is an example of a label which produces two taxa: `"metadata/program"` and `"metadata/sloc/42"`. Both span the whole program and, although it is not obvious, both have their uses:
 
-The first one is common to all programs, and provides an invariable access key to an all-encompassing span. In a command pipeline, it can be used to [express the absence of a taxon](#expressing-the-absence-of-a-taxon).
-
-The second one has a variable part, and can be used to filter programs by [size](https://en.wikipedia.org/wiki/Source_lines_of_code) (for example, in `paroxython.recommend_programs`, the pattern `"metadata/sloc/[1-5]"` will be used to filter out the programs that have more than 5 lines).
+- The first one is common to all programs, and provides an invariable access key to an all-encompassing span. In a command pipeline, it can be used to [express the absence of a taxon](#expressing-the-absence-of-a-taxon).
+- The second one has a variable part, and can be used to filter programs by [size](https://en.wikipedia.org/wiki/Source_lines_of_code) (for example, in `paroxython.recommend_programs`, the pattern `"metadata/sloc/[1-4]?[0-9]"` will be used to filter out the programs that have 50 lines or more).
 
 This conversions are triggered by the following rows in the default taxonomy:
 
@@ -93,3 +94,26 @@ Taxa (replacement patterns)    | Labels (search patterns)
 `metadata/sloc/\1` | `whole_span:(.+)`
 
 As you may have guessed, the right colum can contain [regular expressions](https://en.wikipedia.org/wiki/Regular_expression). On the first row, the sequence of _metacharacters_ `".+"` means: “eat all the characters up to the end of the line.” On the second row, the added parentheses also _captures_ these characters: they are restituted in the replacement pattern by `"\1"`, which denotes a [_backreference_](https://docs.python.org/3/library/re.html#re.sub) to the first captured group.
+
+## Modifying the taxonomy
+
+We suggest you start by copying the default [`taxonomy.tsv`](https://repo/paroxython/resources/taxonomy.tsv) at the same level as the `src` folder that contains your Python programs:
+
+```plain
+programming_101/
+├── taxonomy.tsv
+├── src/
+│   ├── hello_world.py
+│   ├── gob's_program.py
+|   ├── ...
+```
+
+This way, omitting the option `--taxonomy` like in the command below will use your copy instead of the original.
+
+```
+paroxython collect programming_101/src
+```
+
+You are encouraged to experiment on this copy according to your taste.
+
+### Root concepts

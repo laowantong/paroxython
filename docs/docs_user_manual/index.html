@@ -341,12 +341,17 @@ GROUP BY taxon, program
 </ul>
 <p>The previous table extract represents the simplest case, where both taxon and label patterns are literal (they don't contain any metacharacter, more on that below).</p>
 <h3 id="1-0-mapping">1-0 mapping</h3>
-<p>At first glance, some of the labels generated during the first step seem redundant. For instance, <code>"binary_operator:Add"</code> and <code>"addition_operator"</code>. In fact, the former was used to calculate the latter. In <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md"><code>spec.md</code></a>, the definition of <code>"addition_operator"</code> is introduced by these words: “An addition operator is a binary operator <code>Add</code> which has not be classified as a concatenation operator”.</p>
-<p>This is a good example of label for internal use only. In the conversion step, it will be simply ignored (i.e., it has no entry in the taxonomy).</p>
+<p>At first glance, some of the labels generated during the first step seem redundant, e.g. <code>"binary_operator:Add"</code> and <code>"addition_operator"</code>. In fact, the former was used to calculate the latter. In <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md"><code>spec.md</code></a>, the definition of <code>"addition_operator"</code> is introduced by: </p>
+<blockquote>
+<p>An addition operator is a binary operator <code>Add</code> which has not be classified as a concatenation operator.</p>
+</blockquote>
+<p>This is a good example of a label for internal use only. In the conversion step, it will be simply ignored (i.e., it has no entry in the taxonomy).</p>
 <h3 id="1-n-mapping">1-N mapping</h3>
-<p>When a source code is, say, 8 lines long, it is tagged with the label <code>"whole_span:8"</code>. This is an example of a label which produces two taxa: <code>"metadata/program"</code> and <code>"metadata/sloc/8"</code>. Both span the whole program and, although it is not obvious, both have their uses.</p>
-<p>The first one is common to all programs, and provides an invariable access key to an all-encompassing span. In a command pipeline, it can be used to <a href="#expressing-the-absence-of-a-taxon">express the absence of a taxon</a>.</p>
-<p>The second one has a variable part, and can be used to filter programs by <a href="https://en.wikipedia.org/wiki/Source_lines_of_code">size</a> (for example, in <code><a title="paroxython.recommend_programs" href="../recommend_programs.html">paroxython.recommend_programs</a></code>, the pattern <code>"metadata/sloc/[1-5]"</code> will be used to filter out the programs that have more than 5 lines).</p>
+<p>When a source code is, say, 42 lines long, it is tagged with the label <code>"whole_span:42"</code>. This is an example of a label which produces two taxa: <code>"metadata/program"</code> and <code>"metadata/sloc/42"</code>. Both span the whole program and, although it is not obvious, both have their uses:</p>
+<ul>
+<li>The first one is common to all programs, and provides an invariable access key to an all-encompassing span. In a command pipeline, it can be used to <a href="#expressing-the-absence-of-a-taxon">express the absence of a taxon</a>.</li>
+<li>The second one has a variable part, and can be used to filter programs by <a href="https://en.wikipedia.org/wiki/Source_lines_of_code">size</a> (for example, in <code><a title="paroxython.recommend_programs" href="../recommend_programs.html">paroxython.recommend_programs</a></code>, the pattern <code>"metadata/sloc/[1-4]?[0-9]"</code> will be used to filter out the programs that have 50 lines or more).</li>
+</ul>
 <p>This conversions are triggered by the following rows in the default taxonomy:</p>
 <table>
 <thead>
@@ -366,10 +371,24 @@ GROUP BY taxon, program
 </tr>
 </tbody>
 </table>
-<p>As you may have guessed, the right colum can contain <a href="https://en.wikipedia.org/wiki/Regular_expression">regular expressions</a>. On the first row, the sequence of <em>metacharacters</em> <code>".+"</code> means: “eat all the characters up to the end of the line.” On the second row, the added parentheses also <em>captures</em> these characters: they are restituted in the replacement pattern by <code>"\1"</code>, which denotes a <a href="https://docs.python.org/3/library/re.html#re.sub"><em>backreference</em></a> to the first captured group.
-<br></p>
+<p>As you may have guessed, the right colum can contain <a href="https://en.wikipedia.org/wiki/Regular_expression">regular expressions</a>. On the first row, the sequence of <em>metacharacters</em> <code>".+"</code> means: “eat all the characters up to the end of the line.” On the second row, the added parentheses also <em>captures</em> these characters: they are restituted in the replacement pattern by <code>"\1"</code>, which denotes a <a href="https://docs.python.org/3/library/re.html#re.sub"><em>backreference</em></a> to the first captured group.</p>
+<h2 id="modifying-the-taxonomy">Modifying the taxonomy</h2>
+<p>We suggest you start by copying the default <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/taxonomy.tsv"><code>taxonomy.tsv</code></a> at the same level as the <code>src</code> folder that contains your Python programs:</p>
+<pre><code class="plain">programming_101/
+├── taxonomy.tsv
+├── src/
+│   ├── hello_world.py
+│   ├── gob's_program.py
+|   ├── ...
+</code></pre>
+<p>This way, omitting the option <code>--taxonomy</code> like in the command below will use your copy instead of the original.</p>
+<pre><code>paroxython collect programming_101/src
+</code></pre>
+<p>You are encouraged to experiment on this copy according to your taste.</p>
+<h3 id="root-concepts">Root concepts</h3>
+<p><br></p>
 <h1 id="manual-hints">Manual hints</h1>
-<p>On a given source code, the labelling algorithm may sometimes produce false positives or false negatives. Moreover, the semantics of some features may be subjective (e.g., <code>topic:fun</code>) or beyond the capabilities of Paroxython (e.g., deciding the relevance of the <code>short_circuit</code> property of a boolean condition). In any case, the user has the possibility to manually label certain lines of their source code to hint either the presence or absence of a given feature.</p>
+<p>On a given source code, the labelling algorithm may sometimes produce false positives or false negatives. Moreover, the semantics of some features may be subjective (e.g., <code>topic:fun</code>) or beyond the capabilities of Paroxython (e.g., deciding the relevance of the <code>short_circuit</code> property of a boolean operator). In any case, the user has the possibility to manually label certain lines of their source code to hint either the presence or absence of a given feature.</p>
 <p>The addition of a label is hinted by a comment starting with <code># paroxython:</code>.</p>
 <pre><code class="python">if i &lt; len(s) and s[i] == x: # paroxython: short_circuit:And
 </code></pre>
@@ -380,16 +399,15 @@ GROUP BY taxon, program
 <p>To delete a label, prefix it with a minus symbol. For instance, the following hint requalifies an addition into a string concatenation:</p>
 <pre><code class="python">print(a + b) # paroxython: -addition_operator +concatenation_operator
 </code></pre>
-<p>If a label should span over several lines, it is hinted on the first line with a <code>&hellip;</code> suffix (meaning “to be continued”), and on the last line with a <code>&hellip;</code> prefix (meaning “continuing”). In the following example, a label <code>super_loop</code> is manually substituted to the calculated label <code>loop:for</code>:</p>
-<pre><code class="python">for x in s: # paroxython: +super_loop... -loop:for...
-    foo()
-    bar() # paroxython: ...super_loop ...loop:for
+<p>If a label should span over several lines, it is hinted on the first line with a <code>.​.​.</code> suffix (meaning “to be continued”), and on the last line with a <code>..​.​</code> prefix (meaning “continuing”). In the following example, a new label is manually substituted to the calculated label <code>loop:for</code>:</p>
+<pre><code class="python">for am in ifera: # paroxython:  -loop:for... +amoeboid_protist...
+    catch()
+    eat() # paroxython: ...loop:for ...amoeboid_protist
 </code></pre>
-<p>Of course, the opening and the closing of a spanning label must be correctly balanced.</p>
 <p>Some tolerances exist for the syntax:</p>
 <ul>
 <li><code>+</code> can be omitted.</li>
-<li><code>&hellip;</code> (three dots) can be written <code>…</code> (HORIZONTAL ELLIPSIS, U+2026).</li>
+<li><code>..​.​</code> can be written <code>…</code> (HORIZONTAL ELLIPSIS, U+2026).</li>
 <li><code># paroxython:</code> is neither space- nor case-sensitive.
 <br></li>
 </ul>
@@ -918,6 +936,10 @@ Thanks and kudos to the author, Matthew Barnett: without his awesome work, many 
 <li><a href="#1-1-and-n-1-mappings">1-1 and N-1 mappings</a></li>
 <li><a href="#1-0-mapping">1-0 mapping</a></li>
 <li><a href="#1-n-mapping">1-N mapping</a></li>
+</ul>
+</li>
+<li><a href="#modifying-the-taxonomy">Modifying the taxonomy</a><ul>
+<li><a href="#root-concepts">Root concepts</a></li>
 </ul>
 </li>
 </ul>
