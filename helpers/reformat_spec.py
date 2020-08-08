@@ -54,12 +54,12 @@ def derivation_map(text):
     find_iter_derivations = regex.compile(
         r"""(?mx)
         name(_prefix)?\s(
-            (=|==|REGEXP)\s"(?P<REQUIRED_LABEL_NAME>.+?)(:.*)?"
+            (=|==|REGEXP)\s"(?P<REQUIRED_LABEL_NAME>.+?\b)(:.*)?"
             |
-            IN\s\(("(?P<REQUIRED_LABEL_NAME>.+?)(:.*)?"(.|\n)*?)+\)
+            IN\s\(("(?P<REQUIRED_LABEL_NAME>.+?\b)(:.*)?"(.|\n)*?)+\)
             )
         |
-        \b(FROM|JOIN)\st_(?P<REQUIRED_LABEL_NAME>\w+)
+        \b(FROM|JOIN)\st_(?P<REQUIRED_LABEL_NAME>\w+\b)
     """
     ).finditer
 
@@ -71,8 +71,10 @@ def derivation_map(text):
                     return label_pattern
             raise ValueError(
                 f"Unable to match '{label_name}' with a known pattern. "
-                "If a section '#### Feature `{label_name}`' do exist in spec.md, "
+                f"If a section '#### Feature `{label_name}`' do exist in spec.md, "
                 "check that the previous section has all the required subsections."
+                "If you have renamed this feature, check that you've thought to"
+                f"rename its form `t_{label_name}` too."
             )
 
         return label_name_to_pattern
