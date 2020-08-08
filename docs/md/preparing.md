@@ -1,4 +1,32 @@
-# Manual hints
+# Preparing your program collection
+
+## Names
+
+Paroxython trusts you to follow the official [PEP 8 naming conventions](https://www.python.org/dev/peps/pep-0008/#naming-conventions). In a nutshell:
+
+`lowercase_with_underscores`
+:   Variables, functions (in the broadest sense, including methods), modules, packages.
+
+`CapitalizedWords`
+:   Classes, exceptions, [type variables](https://www.python.org/dev/peps/pep-0484/).
+
+`ALL_CAPITAL_LETTERS_WITH_UNDERSCORES`
+:   Constants, defined on a module level.
+
+`_single_leading_underscore`
+:   Weak “internal use” indicator.
+
+`__double_leading_underscore`
+:   Mangled non-public class attributes.
+
+`single_trailing_underscore_`
+:   Conflict-averse objects (avoiding a name collision with a keyword).
+
+`__double_leading_and_trailing_underscore__`
+:   "Magic" methods or attributes (never invent such names).
+
+
+## Manual hints
 
 On a given source code, the labelling algorithm may sometimes produce false positives or false negatives. Moreover, the semantics of some features may be subjective (e.g., `topic:fun`) or beyond the capabilities of Paroxython (e.g., deciding the relevance of the `short_circuit` property of a boolean operator). In any case, the user has the possibility to manually label certain lines of their source code to hint either the presence or absence of a given feature.
 
