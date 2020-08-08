@@ -236,7 +236,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.9375 | `appli/function/builtin/print` | 2 |
+| 0.9375 | `call/function/builtin/print` | 2 |
 | 0.9375 | `library/standard/__future__/print_function` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 2 |
 | 0 | `meta/program` | 1-2 |
@@ -252,7 +252,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.9375 | `appli/function/builtin/print` | 1 |
+| 0.9375 | `call/function/builtin/print` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
 | 0 | `meta/program` | 1 |
 | 0 | `meta/sloc/1` | 1 |
@@ -268,8 +268,8 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.9375 | `appli/function/builtin/print` | 2 |
-| 0.9375 | `appli/function/builtin/range` | 1 |
+| 0.9375 | `call/function/builtin/print` | 2 |
+| 0.9375 | `call/function/builtin/range` | 1 |
 | 0.9375 | `flow/loop/exit/late` | 1-2 |
 | 0.9375 | `flow/loop/for/arithmetic` | 1-2 |
 | 0.9375 | `type/number/integer/literal` | 1 |
@@ -287,7 +287,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.9375 | `appli/function/builtin/print` | 1 |
+| 0.9375 | `call/function/builtin/print` | 1 |
 | 0.875 | `operator/string/replication` | 1 |
 | 0.9375 | `type/number/integer/literal` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
@@ -304,7 +304,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.9375 | `appli/function/builtin/print` | 1 |
+| 0.9375 | `call/function/builtin/print` | 1 |
 | 0.875 | `operator/string/replication` | 1 |
 | 0.9375 | `type/number/integer/literal` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
@@ -322,9 +322,9 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.875 | `abstr/argument/arg` | 1 |
-| 0.75 | `abstr/procedure` | 1-2 |
-| 0.9375 | `appli/function/builtin/print` | 2 |
+| 0.875 | `def/argument/arg` | 1 |
+| 0.75 | `def/procedure` | 1-2 |
+| 0.9375 | `call/function/builtin/print` | 2 |
 | 0.875 | `operator/string/concatenation` | 2 |
 | 0.9375 | `type/sequence/string/literal` | 2 |
 | 0 | `meta/program` | 1-2 |
@@ -341,8 +341,8 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.875 | `abstr/argument/no` | 1-2 |
-| 0.75 | `abstr/procedure` | 1-2 |
+| 0.875 | `def/argument/no` | 1-2 |
+| 0.75 | `def/procedure` | 1-2 |
 | 0.75 | `flow/null_operation` | 2 |
 | 0 | `meta/program` | 1-2 |
 | 0 | `meta/sloc/2` | 1-2 |
@@ -358,9 +358,9 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.875 | `abstr/argument/arg` | 1 |
-| 0.75 | `abstr/function` | 1-2 |
-| 0.875 | `abstr/return/something` | 2 |
+| 0.875 | `def/argument/arg` | 1 |
+| 0.75 | `def/function` | 1-2 |
+| 0.875 | `def/return/something` | 2 |
 | 0.875 | `operator/arithmetic/multiplication` | 2 |
 | 0 | `meta/program` | 1-2 |
 | 0 | `meta/sloc/2` | 1-2 |
@@ -376,9 +376,9 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.875 | `abstr/argument/arg` | 1 |
-| 0.75 | `abstr/function` | 1-2 |
-| 0.875 | `abstr/return/something` | 2 |
+| 0.875 | `def/argument/arg` | 1 |
+| 0.75 | `def/function` | 1-2 |
+| 0.875 | `def/return/something` | 2 |
 | 0.875 | `operator/arithmetic/power` | 2 |
 | 0.9375 | `type/number/integer/literal` | 2 |
 | 0 | `meta/program` | 1-2 |
@@ -398,7 +398,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.75 | `abstr/class` | 2 |
+| 0.75 | `def/class` | 2 |
 | 0.9375 | `library/standard/dataclasses/dataclass` | 1 |
 | 0 | `meta/program` | 1-2 |
 | 0 | `meta/sloc/2` | 1-2 |
@@ -430,8 +430,8 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.9375 | `appli/function/builtin/enumerate` | 1 |
-| 0.9375 | `appli/function/builtin/print` | 2 |
+| 0.9375 | `call/function/builtin/enumerate` | 1 |
+| 0.9375 | `call/function/builtin/print` | 2 |
 | 0.9375 | `flow/loop/exit/late` | 1-2 |
 | 0.875 | `flow/loop/for` | 1-2 |
 | 0.9375 | `flow/loop/for/elements_and_indexes` | 1-2 |
@@ -470,11 +470,11 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.875 | `abstr/argument/arg` | 2, 2 |
-| 0.75 | `abstr/class` | 1-5 |
-| 0.9375 | `abstr/method/flavor/instance` | 2-5 |
-| 0.96875 | `abstr/method/naming/magic/__init__` | 2-5 |
-| 0.75 | `abstr/procedure` | 2-5 |
+| 0.875 | `def/argument/arg` | 2, 2 |
+| 0.75 | `def/class` | 1-5 |
+| 0.9375 | `def/method/flavor/instance` | 2-5 |
+| 0.96875 | `def/method/naming/magic/__init__` | 2-5 |
+| 0.75 | `def/procedure` | 2-5 |
 | 0.875 | `type/null/literal` | 4, 5 |
 | 0.75 | `var/assignment` | 3, 4, 5 |
 | 0 | `meta/program` | 1-5 |
@@ -494,11 +494,11 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.875 | `abstr/argument/arg` | 2, 2, 2, 2 |
-| 0.75 | `abstr/class` | 1-5 |
-| 0.9375 | `abstr/method/flavor/instance` | 2-5 |
-| 0.96875 | `abstr/method/naming/magic/__init__` | 2-5 |
-| 0.75 | `abstr/procedure` | 2-5 |
+| 0.875 | `def/argument/arg` | 2, 2, 2, 2 |
+| 0.75 | `def/class` | 1-5 |
+| 0.9375 | `def/method/flavor/instance` | 2-5 |
+| 0.96875 | `def/method/naming/magic/__init__` | 2-5 |
+| 0.75 | `def/procedure` | 2-5 |
 | 0.75 | `var/assignment` | 3, 4, 5 |
 | 0 | `meta/program` | 1-5 |
 | 0 | `meta/sloc/5` | 1-5 |
@@ -529,8 +529,8 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.75 | `appli/method` | 2 |
-| 0.9375 | `appli/method/random/shuffle` | 2 |
+| 0.75 | `call/method` | 2 |
+| 0.9375 | `call/method/random/shuffle` | 2 |
 | 0.875 | `library/standard/random` | 1 |
 | 0 | `meta/program` | 1-2 |
 | 0 | `meta/sloc/2` | 1-2 |
@@ -546,8 +546,8 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.75 | `appli/method` | 2 |
-| 0.9375 | `appli/method/random/choice` | 2 |
+| 0.75 | `call/method` | 2 |
+| 0.9375 | `call/method/random/choice` | 2 |
 | 0.875 | `library/standard/random` | 1 |
 | 0 | `meta/program` | 1-2 |
 | 0 | `meta/sloc/2` | 1-2 |
@@ -578,8 +578,8 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.9375 | `appli/function/builtin/print` | 2 |
-| 0.96875 | `appli/method/non_sequence/dictionary/items` | 1 |
+| 0.9375 | `call/function/builtin/print` | 2 |
+| 0.96875 | `call/method/non_sequence/dictionary/items` | 1 |
 | 0.9375 | `flow/loop/exit/late` | 1-2 |
 | 0.875 | `flow/loop/for` | 1-2 |
 | 0.875 | `type/non_sequence/dictionary` | 1 |
@@ -599,11 +599,11 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.875 | `abstr/argument/arg` | 2, 2 |
-| 0.75 | `abstr/function` | 2-3 |
-| 0.875 | `abstr/return/something` | 3 |
-| 0.75 | `appli/method` | 3 |
-| 0.9375 | `appli/method/random/randrange` | 3 |
+| 0.875 | `def/argument/arg` | 2, 2 |
+| 0.75 | `def/function` | 2-3 |
+| 0.875 | `def/return/something` | 3 |
+| 0.75 | `call/method` | 3 |
+| 0.9375 | `call/method/random/randrange` | 3 |
 | 0.875 | `library/standard/random` | 1 |
 | 0 | `meta/program` | 1-3 |
 | 0 | `meta/sloc/3` | 1-3 |
@@ -619,8 +619,8 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.75 | `appli/method` | 2 |
-| 0.9375 | `appli/method/random/uniform` | 2 |
+| 0.75 | `call/method` | 2 |
+| 0.9375 | `call/method/random/uniform` | 2 |
 | 0.875 | `library/standard/random` | 1 |
 | 0 | `meta/program` | 1-2 |
 | 0 | `meta/sloc/2` | 1-2 |
@@ -636,8 +636,8 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.75 | `appli/method` | 2 |
-| 0.9375 | `appli/method/random/randint` | 2 |
+| 0.75 | `call/method` | 2 |
+| 0.9375 | `call/method/random/randint` | 2 |
 | 0.875 | `library/standard/random` | 1 |
 | 0 | `meta/program` | 1-2 |
 | 0 | `meta/sloc/2` | 1-2 |
@@ -657,12 +657,12 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.875 | `abstr/argument/arg` | 1 |
-| 0.75 | `abstr/procedure` | 1-6 |
-| 0.75 | `abstr/recursive` | 1-6 |
-| 0.875 | `abstr/recursive/body` | 1-6 |
-| 0.875 | `abstr/return/nothing` | 3 |
-| 0.75 | `appli/function` | 4, 6 |
+| 0.875 | `def/argument/arg` | 1 |
+| 0.75 | `def/procedure` | 1-6 |
+| 0.75 | `def/recursive` | 1-6 |
+| 0.875 | `def/recursive/body` | 1-6 |
+| 0.875 | `def/return/nothing` | 3 |
+| 0.75 | `call/function` | 4, 6 |
 | 0.75 | `condition/identity` | 2 |
 | 0.875 | `flow/conditional/guard` | 2-3 |
 | 0.875 | `flow/conditional/no_else` | 2-3 |
@@ -684,13 +684,13 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.875 | `abstr/argument/arg` | 2, 2 |
-| 0.875 | `abstr/argument/vararg` | 2 |
-| 0.75 | `abstr/class` | 1-4 |
-| 0.9375 | `abstr/method/flavor/instance` | 2-4 |
-| 0.96875 | `abstr/method/naming/magic/__init__` | 2-4 |
-| 0.75 | `abstr/procedure` | 2-4 |
-| 0.96875 | `appli/function/builtin/casting/list` | 4 |
+| 0.875 | `def/argument/arg` | 2, 2 |
+| 0.875 | `def/argument/vararg` | 2 |
+| 0.75 | `def/class` | 1-4 |
+| 0.9375 | `def/method/flavor/instance` | 2-4 |
+| 0.96875 | `def/method/naming/magic/__init__` | 2-4 |
+| 0.75 | `def/procedure` | 2-4 |
+| 0.96875 | `call/function/builtin/casting/list` | 4 |
 | 0.875 | `type/sequence/list` | 4 |
 | 0.75 | `var/assignment` | 3, 4 |
 | 0 | `meta/program` | 1-4 |
@@ -709,10 +709,10 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.875 | `abstr/argument/arg` | 1, 1 |
-| 0.75 | `abstr/higher_order` | 1-4 |
-| 0.75 | `abstr/procedure` | 1-4 |
-| 0.875 | `abstr/recursive/body` | 1-4 |
+| 0.875 | `def/argument/arg` | 1, 1 |
+| 0.75 | `def/higher_order` | 1-4 |
+| 0.75 | `def/procedure` | 1-4 |
+| 0.875 | `def/recursive/body` | 1-4 |
 | 0.9375 | `flow/loop/exit/late` | 3-4 |
 | 0.9375 | `flow/loop/for/elements` | 3-4 |
 | 0 | `meta/program` | 1-4 |
@@ -728,7 +728,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.9375 | `appli/function/builtin/reversed` | 1 |
+| 0.9375 | `call/function/builtin/reversed` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
 | 0 | `meta/sloc/1` | 1 |
@@ -759,7 +759,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.96875 | `appli/method/sequence/list/reverse` | 1 |
+| 0.96875 | `call/method/sequence/list/reverse` | 1 |
 | 0.875 | `type/sequence/list` | 1 |
 | 0 | `meta/program` | 1 |
 | 0 | `meta/sloc/1` | 1 |
@@ -777,11 +777,11 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.875 | `abstr/argument/arg` | 1, 1 |
-| 0.75 | `abstr/function` | 1-4 |
-| 0.875 | `abstr/return/something` | 4 |
-| 0.9375 | `appli/function/builtin/enumerate` | 2 |
-| 0.9375 | `appli/method/sequence/index` | 4 |
+| 0.875 | `def/argument/arg` | 1, 1 |
+| 0.75 | `def/function` | 1-4 |
+| 0.875 | `def/return/something` | 4 |
+| 0.9375 | `call/function/builtin/enumerate` | 2 |
+| 0.9375 | `call/method/sequence/index` | 4 |
 | 0.75 | `condition/belonging` | 3 |
 | 0.875 | `flow/conditional/no_else` | 3-4 |
 | 0.96875 | `flow/loop/exit/early/return` | 2-4 |
@@ -818,7 +818,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.96875 | `appli/function/builtin/casting/int` | 1 |
+| 0.96875 | `call/function/builtin/casting/int` | 1 |
 | 0.875 | `type/number/integer` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
@@ -834,7 +834,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.96875 | `appli/method/sequence/string/format` | 1 |
+| 0.96875 | `call/method/sequence/string/format` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
@@ -871,8 +871,8 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.875 | `appli/class/constructor` | 2, 3 |
-| 0.75 | `appli/method` | 5, 6 |
+| 0.875 | `call/class/constructor` | 2, 3 |
+| 0.75 | `call/method` | 5, 6 |
 | 0.875 | `library/third_party/Queue` | 1 |
 | 0.9375 | `type/boolean/literal/True` | 4 |
 | 0.9375 | `type/sequence/string/literal` | 6 |
@@ -922,7 +922,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.75 | `appli/method` | 2 |
+| 0.75 | `call/method` | 2 |
 | 0.875 | `library/third_party/numpy` | 1 |
 | 0.9375 | `type/sequence/tuple/literal` | 2 |
 | 0.875 | `var/assignment/single` | 2 |
@@ -939,9 +939,9 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.875 | `abstr/argument/arg` | 1 |
-| 0.875 | `abstr/function/anonymous` | 1 |
-| 0.9375 | `appli/function/builtin/sorted` | 1 |
+| 0.875 | `def/argument/arg` | 1 |
+| 0.875 | `def/function/anonymous` | 1 |
+| 0.9375 | `call/function/builtin/sorted` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
 | 0 | `meta/sloc/1` | 1 |
@@ -974,9 +974,9 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.875 | `appli/class/constructor` | 2 |
-| 0.9375 | `appli/function/builtin/range` | 3 |
-| 0.75 | `appli/method` | 4 |
+| 0.875 | `call/class/constructor` | 2 |
+| 0.9375 | `call/function/builtin/range` | 3 |
+| 0.75 | `call/method` | 4 |
 | 0.9375 | `flow/loop/exit/late` | 3-4 |
 | 0.96875 | `flow/loop/for/arithmetic/start` | 3-4 |
 | 0.9375 | `library/standard/multiprocessing/Pool` | 1 |
@@ -1000,11 +1000,11 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.875 | `abstr/argument/arg` | 1 |
-| 0.75 | `abstr/function` | 1-5 |
-| 0.875 | `abstr/recursive/body` | 1-5 |
-| 0.875 | `abstr/return/something` | 5 |
-| 0.75 | `appli/function` | 5 |
+| 0.875 | `def/argument/arg` | 1 |
+| 0.75 | `def/function` | 1-5 |
+| 0.875 | `def/recursive/body` | 1-5 |
+| 0.875 | `def/return/something` | 5 |
+| 0.75 | `call/function` | 5 |
 | 0.75 | `condition/equality` | 2 |
 | 0.75 | `flow/conditional` | 2-5 |
 | 0.875 | `flow/conditional/else` | 5 |
@@ -1027,9 +1027,9 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.875 | `abstr/argument/arg` | 1, 1 |
-| 0.75 | `abstr/function` | 1-2 |
-| 0.875 | `abstr/return/something` | 2 |
+| 0.875 | `def/argument/arg` | 1, 1 |
+| 0.75 | `def/function` | 1-2 |
+| 0.875 | `def/return/something` | 2 |
 | 0.875 | `operator/arithmetic/power` | 2 |
 | 0 | `meta/program` | 1-2 |
 | 0 | `meta/sloc/2` | 1-2 |
@@ -1050,7 +1050,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.75 | `appli/method` | 3, 7 |
+| 0.75 | `call/method` | 3, 7 |
 | 0.875 | `library/standard/threading` | 1 |
 | 0.875 | `var/assignment/single` | 2, 5 |
 | 0 | `meta/program` | 1-7 |
@@ -1068,10 +1068,10 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.75 | `abstr/class` | 1-2 |
-| 0.875 | `appli/class/constructor` | 3 |
-| 0.75 | `appli/composition` | 3 |
-| 0.96875 | `appli/function/builtin/casting/set` | 3 |
+| 0.75 | `def/class` | 1-2 |
+| 0.875 | `call/class/constructor` | 3 |
+| 0.75 | `call/composition` | 3 |
+| 0.96875 | `call/function/builtin/casting/set` | 3 |
 | 0.75 | `flow/null_operation` | 2 |
 | 0.875 | `type/non_sequence/set` | 3 |
 | 0.875 | `var/assignment/single` | 3 |
@@ -1089,12 +1089,12 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.875 | `abstr/argument/arg` | 1, 1, 2 |
-| 0.75 | `abstr/function` | 1-2 |
-| 0.875 | `abstr/function/anonymous` | 2 |
-| 0.75 | `abstr/higher_order` | 1-2 |
-| 0.875 | `abstr/return/something` | 2 |
-| 0.75 | `appli/composition` | 2 |
+| 0.875 | `def/argument/arg` | 1, 1, 2 |
+| 0.75 | `def/function` | 1-2 |
+| 0.875 | `def/function/anonymous` | 2 |
+| 0.75 | `def/higher_order` | 1-2 |
+| 0.875 | `def/return/something` | 2 |
+| 0.75 | `call/composition` | 2 |
 | 0 | `meta/program` | 1-2 |
 | 0 | `meta/sloc/2` | 1-2 |
 
@@ -1109,12 +1109,12 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.875 | `abstr/argument/arg` | 1, 1, 2 |
-| 0.75 | `abstr/function` | 1-2 |
-| 0.875 | `abstr/function/anonymous` | 2 |
-| 0.75 | `abstr/higher_order` | 1-2 |
-| 0.875 | `abstr/return/something` | 2 |
-| 0.75 | `appli/composition` | 2 |
+| 0.875 | `def/argument/arg` | 1, 1, 2 |
+| 0.75 | `def/function` | 1-2 |
+| 0.875 | `def/function/anonymous` | 2 |
+| 0.75 | `def/higher_order` | 1-2 |
+| 0.875 | `def/return/something` | 2 |
+| 0.75 | `call/composition` | 2 |
 | 0 | `meta/program` | 1-2 |
 | 0 | `meta/sloc/2` | 1-2 |
 
@@ -1133,13 +1133,13 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.875 | `abstr/argument/arg` | 2, 3 |
-| 0.75 | `abstr/function` | 2-5, 3-4 |
-| 0.875 | `abstr/nested/closure` | 2-5 |
-| 0.875 | `abstr/return/something` | 4 |
-| 0.75 | `appli/composition` | 6 |
-| 0.75 | `appli/function` | 6 |
-| 0.9375 | `appli/function/builtin/print` | 6 |
+| 0.875 | `def/argument/arg` | 2, 3 |
+| 0.75 | `def/function` | 2-5, 3-4 |
+| 0.875 | `def/nested/closure` | 2-5 |
+| 0.875 | `def/return/something` | 4 |
+| 0.75 | `call/composition` | 6 |
+| 0.75 | `call/function` | 6 |
+| 0.9375 | `call/function/builtin/print` | 6 |
 | 0.9375 | `library/standard/functools/partial` | 1 |
 | 0.875 | `operator/arithmetic/addition` | 4 |
 | 0.9375 | `type/number/integer/literal` | 6, 6 |
@@ -1200,16 +1200,16 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.875 | `abstr/argument/arg` | 5, 9, 9 |
-| 0.875 | `abstr/argument/vararg` | 5 |
-| 0.75 | `abstr/class` | 2-3, 4-12 |
-| 0.9375 | `abstr/method/flavor/instance` | 5-8, 9-12 |
-| 0.96875 | `abstr/method/naming/magic/__init__` | 5-8 |
-| 0.75 | `abstr/procedure` | 5-8, 9-12 |
-| 0.875 | `appli/class/constructor` | 13 |
-| 0.9375 | `appli/function/builtin/zip` | 10 |
-| 0.75 | `appli/method` | 8 |
-| 0.96875 | `appli/method/non_sequence/set/add` | 11, 12 |
+| 0.875 | `def/argument/arg` | 5, 9, 9 |
+| 0.875 | `def/argument/vararg` | 5 |
+| 0.75 | `def/class` | 2-3, 4-12 |
+| 0.9375 | `def/method/flavor/instance` | 5-8, 9-12 |
+| 0.96875 | `def/method/naming/magic/__init__` | 5-8 |
+| 0.75 | `def/procedure` | 5-8, 9-12 |
+| 0.875 | `call/class/constructor` | 13 |
+| 0.9375 | `call/function/builtin/zip` | 10 |
+| 0.75 | `call/method` | 8 |
+| 0.96875 | `call/method/non_sequence/set/add` | 11, 12 |
 | 0.9375 | `flow/loop/exit/late` | 7-8, 10-12 |
 | 0.875 | `flow/loop/for` | 10-12 |
 | 0.9375 | `flow/loop/for/elements` | 7-8 |
@@ -1237,8 +1237,8 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.75 | `appli/method` | 1 |
-| 0.96875 | `appli/method/sequence/string/encode` | 1 |
+| 0.75 | `call/method` | 1 |
+| 0.96875 | `call/method/sequence/string/encode` | 1 |
 | 0.9375 | `subscript/slice/step/backwards` | 1 |
 | 0.9375 | `type/number/integer/literal` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
@@ -1280,8 +1280,8 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.9375 | `appli/exception/builtin/Exception` | 5 |
-| 0.9375 | `appli/function/builtin/print` | 6 |
+| 0.9375 | `call/exception/builtin/Exception` | 5 |
+| 0.9375 | `call/function/builtin/print` | 6 |
 | 0.75 | `condition/equality` | 4 |
 | 0.875 | `flow/conditional/no_else` | 4-5 |
 | 0.9375 | `flow/exception/catch/Exception` | 2-8 |
@@ -1308,7 +1308,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.9375 | `appli/function/builtin/print` | 5 |
+| 0.9375 | `call/function/builtin/print` | 5 |
 | 0.75 | `condition/equality` | 3 |
 | 0.875 | `flow/conditional/no_else` | 3-4 |
 | 0.875 | `flow/loop/continue` | 4 |
@@ -1339,7 +1339,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.75 | `abstr/class` | 1-2 |
+| 0.75 | `def/class` | 1-2 |
 | 0.75 | `condition/equality` | 7 |
 | 0.875 | `flow/conditional/no_else` | 7-9 |
 | 0.9375 | `flow/exception/catch/` | 3-11 |
@@ -1373,14 +1373,14 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.875 | `abstr/argument/arg` | 1, 1 |
-| 0.75 | `abstr/function` | 1-6 |
-| 0.875 | `abstr/return/nothing` | 6 |
-| 0.875 | `abstr/return/something` | 5 |
-| 0.75 | `appli/composition` | 7 |
-| 0.75 | `appli/function` | 7 |
-| 0.9375 | `appli/function/builtin/enumerate` | 2, 3 |
-| 0.9375 | `appli/function/builtin/print` | 7 |
+| 0.875 | `def/argument/arg` | 1, 1 |
+| 0.75 | `def/function` | 1-6 |
+| 0.875 | `def/return/nothing` | 6 |
+| 0.875 | `def/return/something` | 5 |
+| 0.75 | `call/composition` | 7 |
+| 0.75 | `call/function` | 7 |
+| 0.9375 | `call/function/builtin/enumerate` | 2, 3 |
+| 0.9375 | `call/function/builtin/print` | 7 |
 | 0.75 | `condition/equality` | 4 |
 | 0.875 | `flow/conditional/no_else` | 4-5 |
 | 0.96875 | `flow/loop/exit/early/return` | 2-5, 3-5 |
@@ -1405,7 +1405,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.96875 | `appli/method/sequence/list/insert` | 1 |
+| 0.96875 | `call/method/sequence/list/insert` | 1 |
 | 0.875 | `type/sequence/list` | 1 |
 | 0 | `meta/program` | 1 |
 | 0 | `meta/sloc/1` | 1 |
@@ -1421,8 +1421,8 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.75 | `appli/method` | 2 |
-| 0.9375 | `appli/method/time/sleep` | 2 |
+| 0.75 | `call/method` | 2 |
+| 0.9375 | `call/method/time/sleep` | 2 |
 | 0.875 | `library/standard/time` | 1 |
 | 0.9375 | `type/number/integer/literal` | 2 |
 | 0 | `meta/program` | 1-2 |
@@ -1487,7 +1487,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.96875 | `appli/method/sequence/string/split` | 1 |
+| 0.96875 | `call/method/sequence/string/split` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
@@ -1536,7 +1536,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.96875 | `appli/method/non_sequence/dictionary/values` | 1 |
+| 0.96875 | `call/method/non_sequence/dictionary/values` | 1 |
 | 0.75 | `condition/belonging` | 1 |
 | 0.75 | `type/boolean` | 1 |
 | 0.875 | `type/non_sequence/dictionary` | 1 |
@@ -1553,7 +1553,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.96875 | `appli/method/sequence/string/join` | 1 |
+| 0.96875 | `call/method/sequence/string/join` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
@@ -1570,9 +1570,9 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.75 | `appli/composition` | 1 |
-| 0.9375 | `appli/function/builtin/map` | 1 |
-| 0.96875 | `appli/method/sequence/string/join` | 1 |
+| 0.75 | `call/composition` | 1 |
+| 0.9375 | `call/function/builtin/map` | 1 |
+| 0.96875 | `call/method/sequence/string/join` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
@@ -1589,7 +1589,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.9375 | `appli/function/builtin/sum` | 1 |
+| 0.9375 | `call/function/builtin/sum` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
 | 0 | `meta/sloc/1` | 1 |
@@ -1604,7 +1604,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.96875 | `appli/function/builtin/casting/str` | 1 |
+| 0.96875 | `call/function/builtin/casting/str` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
@@ -1625,12 +1625,12 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.875 | `abstr/argument/arg` | 2 |
-| 0.75 | `abstr/procedure` | 2-3 |
-| 0.875 | `appli/class/constructor` | 4 |
-| 0.9375 | `appli/function/builtin/print` | 6 |
-| 0.9375 | `appli/function/builtin/range` | 5 |
-| 0.75 | `appli/method` | 5 |
+| 0.875 | `def/argument/arg` | 2 |
+| 0.75 | `def/procedure` | 2-3 |
+| 0.875 | `call/class/constructor` | 4 |
+| 0.9375 | `call/function/builtin/print` | 6 |
+| 0.9375 | `call/function/builtin/range` | 5 |
+| 0.75 | `call/method` | 5 |
 | 0.9375 | `library/standard/multiprocessing/Pool` | 1 |
 | 0.875 | `operator/arithmetic/multiplication` | 3 |
 | 0.9375 | `type/number/integer/literal` | 5, 5 |
@@ -1648,7 +1648,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.9375 | `appli/function/builtin/filter` | 1 |
+| 0.9375 | `call/function/builtin/filter` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
 | 0 | `meta/sloc/1` | 1 |
@@ -1677,8 +1677,8 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.9375 | `appli/function/builtin/open` | 1 |
-| 0.75 | `appli/method` | 1 |
+| 0.9375 | `call/function/builtin/open` | 1 |
+| 0.75 | `call/method` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
 | 0 | `meta/sloc/1` | 1 |
@@ -1694,7 +1694,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.9375 | `appli/function/builtin/print` | 2 |
+| 0.9375 | `call/function/builtin/print` | 2 |
 | 0.875 | `library/standard/sys` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 2 |
 | 0 | `meta/program` | 1-2 |
@@ -1729,7 +1729,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.75 | `appli/method` | 2 |
+| 0.75 | `call/method` | 2 |
 | 0.875 | `library/standard/datetime` | 1 |
 | 0.875 | `var/assignment/single` | 2 |
 | 0 | `meta/program` | 1-2 |
@@ -1745,7 +1745,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.96875 | `appli/method/sequence/string/find` | 1 |
+| 0.96875 | `call/method/sequence/string/find` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
@@ -1761,7 +1761,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.96875 | `appli/method/sequence/string/replace` | 1 |
+| 0.96875 | `call/method/sequence/string/replace` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
@@ -1793,7 +1793,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.96875 | `appli/method/sequence/string/format` | 1 |
+| 0.96875 | `call/method/sequence/string/format` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
@@ -1827,10 +1827,10 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.875 | `abstr/argument/arg` | 2, 2 |
-| 0.75 | `abstr/function` | 2-3 |
-| 0.875 | `abstr/return/something` | 3 |
-| 0.75 | `appli/method` | 3, 3, 3 |
+| 0.875 | `def/argument/arg` | 2, 2 |
+| 0.75 | `def/function` | 2-3 |
+| 0.875 | `def/return/something` | 3 |
+| 0.75 | `call/method` | 3, 3, 3 |
 | 0.875 | `library/standard/math` | 1 |
 | 0.875 | `operator/arithmetic/integer_division` | 3, 3 |
 | 0.875 | `operator/arithmetic/substraction` | 3 |
@@ -1849,10 +1849,10 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.75 | `appli/composition` | 3, 3 |
-| 0.96875 | `appli/function/builtin/casting/bytearray` | 3 |
-| 0.96875 | `appli/function/builtin/casting/int` | 3 |
-| 0.75 | `appli/method` | 3 |
+| 0.75 | `call/composition` | 3, 3 |
+| 0.96875 | `call/function/builtin/casting/bytearray` | 3 |
+| 0.96875 | `call/function/builtin/casting/int` | 3 |
+| 0.75 | `call/method` | 3 |
 | 0.9375 | `library/standard/__future__/division` | 1 |
 | 0.875 | `library/standard/math` | 2 |
 | 0.875 | `operator/arithmetic/division` | 3 |
@@ -1905,9 +1905,9 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.75 | `appli/composition` | 2 |
-| 0.9375 | `appli/function/builtin/print` | 2 |
-| 0.96875 | `appli/method/sequence/string/join` | 2 |
+| 0.75 | `call/composition` | 2 |
+| 0.9375 | `call/function/builtin/print` | 2 |
+| 0.96875 | `call/method/sequence/string/join` | 2 |
 | 0.875 | `library/standard/sys` | 1 |
 | 0.875 | `subscript/slice/start` | 2 |
 | 0.9375 | `type/number/integer/literal` | 2 |
@@ -1928,11 +1928,11 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.875 | `abstr/argument/arg` | 1, 1 |
-| 0.75 | `abstr/function` | 1-3 |
-| 0.75 | `abstr/higher_order` | 1-3 |
-| 0.875 | `abstr/return/something` | 3 |
-| 0.9375 | `appli/function/builtin/issubclass` | 2 |
+| 0.875 | `def/argument/arg` | 1, 1 |
+| 0.75 | `def/function` | 1-3 |
+| 0.75 | `def/higher_order` | 1-3 |
+| 0.875 | `def/return/something` | 3 |
+| 0.9375 | `call/function/builtin/issubclass` | 2 |
 | 0.875 | `flow/conditional/no_else` | 2-3 |
 | 0 | `meta/program` | 1-3 |
 | 0 | `meta/sloc/3` | 1-3 |
@@ -1981,7 +1981,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.96875 | `appli/method/sequence/string/format` | 1 |
+| 0.96875 | `call/method/sequence/string/format` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
@@ -2020,7 +2020,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.875 | `appli/function/without_arguments` | 2 |
+| 0.875 | `call/function/without_arguments` | 2 |
 | 0.875 | `flow/conditional/no_else` | 3-4 |
 | 0.96875 | `flow/loop/exit/early/break` | 1-4 |
 | 0.9375 | `flow/loop/while/infinite` | 1-4 |
@@ -2039,7 +2039,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.96875 | `appli/function/builtin/casting/float` | 1 |
+| 0.96875 | `call/function/builtin/casting/float` | 1 |
 | 0.875 | `type/number/floating_point` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
@@ -2055,7 +2055,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.96875 | `appli/function/builtin/casting/int` | 1 |
+| 0.96875 | `call/function/builtin/casting/int` | 1 |
 | 0.875 | `type/number/integer` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
@@ -2071,7 +2071,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.96875 | `appli/function/builtin/casting/int` | 1 |
+| 0.96875 | `call/function/builtin/casting/int` | 1 |
 | 0.875 | `operator/arithmetic/addition` | 1 |
 | 0.9375 | `type/number/floating_point/literal` | 1 |
 | 0.875 | `type/number/integer` | 1 |
@@ -2089,7 +2089,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.9375 | `appli/method/sequence/count` | 1 |
+| 0.9375 | `call/method/sequence/count` | 1 |
 | 0.75 | `type/sequence` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
@@ -2106,7 +2106,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.75 | `appli/method` | 2 |
+| 0.75 | `call/method` | 2 |
 | 0.875 | `library/standard/re` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 2 |
 | 0.875 | `var/assignment/single` | 2 |
@@ -2123,8 +2123,8 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.9375 | `appli/function/builtin/bin` | 1 |
-| 0.9375 | `appli/method/sequence/count` | 1 |
+| 0.9375 | `call/function/builtin/bin` | 1 |
+| 0.9375 | `call/method/sequence/count` | 1 |
 | 0.75 | `type/sequence` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
@@ -2142,8 +2142,8 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.875 | `abstr/argument/arg` | 1, 1 |
-| 0.75 | `abstr/function` | 1-2 |
+| 0.875 | `def/argument/arg` | 1, 1 |
+| 0.75 | `def/function` | 1-2 |
 | 0.9375 | `type/boolean/literal/False` | 2 |
 | 0 | `meta/program` | 1-2 |
 | 0 | `meta/sloc/2` | 1-2 |
@@ -2159,8 +2159,8 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.875 | `abstr/argument/arg` | 1, 1 |
-| 0.75 | `abstr/function` | 1-2 |
+| 0.875 | `def/argument/arg` | 1, 1 |
+| 0.75 | `def/function` | 1-2 |
 | 0.9375 | `type/boolean/literal/False` | 2 |
 | 0 | `meta/program` | 1-2 |
 | 0 | `meta/sloc/2` | 1-2 |
@@ -2176,8 +2176,8 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.75 | `appli/method` | 2 |
-| 0.9375 | `appli/method/sys/exit` | 2 |
+| 0.75 | `call/method` | 2 |
+| 0.9375 | `call/method/sys/exit` | 2 |
 | 0.875 | `library/standard/sys` | 1 |
 | 0.9375 | `type/number/integer/literal` | 2 |
 | 0 | `meta/program` | 1-2 |
@@ -2193,7 +2193,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.96875 | `appli/function/builtin/casting/bytearray` | 1 |
+| 0.96875 | `call/function/builtin/casting/bytearray` | 1 |
 | 0.9375 | `type/number/integer/literal` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
@@ -2209,7 +2209,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.9375 | `appli/exception/builtin/ValueError` | 1 |
+| 0.9375 | `call/exception/builtin/ValueError` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
 | 0 | `meta/program` | 1 |
 | 0 | `meta/sloc/1` | 1 |
@@ -2229,14 +2229,14 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.875 | `abstr/argument/arg` | 2, 5 |
-| 0.75 | `abstr/class` | 1-6 |
-| 0.75 | `abstr/decorated` | 4-6 |
-| 0.75 | `abstr/function` | 4-6 |
-| 0.9375 | `abstr/method/flavor/instance` | 2-3, 4-6 |
-| 0.96875 | `abstr/method/naming/magic/__init__` | 2-3 |
-| 0.75 | `abstr/procedure` | 2-3 |
-| 0.875 | `abstr/return/something` | 6 |
+| 0.875 | `def/argument/arg` | 2, 5 |
+| 0.75 | `def/class` | 1-6 |
+| 0.75 | `def/decorated` | 4-6 |
+| 0.75 | `def/function` | 4-6 |
+| 0.9375 | `def/method/flavor/instance` | 2-3, 4-6 |
+| 0.96875 | `def/method/naming/magic/__init__` | 2-3 |
+| 0.75 | `def/procedure` | 2-3 |
+| 0.875 | `def/return/something` | 6 |
 | 0.96875 | `type/number/integer/literal/zero` | 3 |
 | 0.75 | `var/assignment` | 3 |
 | 0 | `meta/program` | 1-6 |
@@ -2254,8 +2254,8 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.9375 | `appli/function/builtin/open` | 2 |
-| 0.75 | `appli/method` | 3 |
+| 0.9375 | `call/function/builtin/open` | 2 |
+| 0.75 | `call/method` | 3 |
 | 0.875 | `library/standard/json` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 2, 2 |
 | 0.875 | `var/assignment/single` | 3 |
@@ -2274,9 +2274,9 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.9375 | `appli/function/builtin/open` | 2 |
-| 0.75 | `appli/method` | 3 |
-| 0.9375 | `appli/method/json/dump` | 3 |
+| 0.9375 | `call/function/builtin/open` | 2 |
+| 0.75 | `call/method` | 3 |
+| 0.9375 | `call/method/json/dump` | 3 |
 | 0.875 | `library/standard/json` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 2, 2 |
 | 0 | `meta/program` | 1-3 |
@@ -2294,11 +2294,11 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.875 | `abstr/argument/arg` | 2 |
-| 0.75 | `abstr/function` | 2-3 |
-| 0.75 | `abstr/higher_order` | 2-3 |
-| 0.875 | `abstr/return/something` | 3 |
-| 0.875 | `appli/function/without_arguments` | 3 |
+| 0.875 | `def/argument/arg` | 2 |
+| 0.75 | `def/function` | 2-3 |
+| 0.75 | `def/higher_order` | 2-3 |
+| 0.875 | `def/return/something` | 3 |
+| 0.875 | `call/function/without_arguments` | 3 |
 | 0.9375 | `library/standard/__future__/print_function` | 1 |
 | 0 | `meta/program` | 1-3 |
 | 0 | `meta/sloc/3` | 1-3 |
@@ -2313,9 +2313,9 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.75 | `appli/composition` | 1 |
-| 0.9375 | `appli/function/builtin/print` | 1 |
-| 0.9375 | `appli/function/builtin/type` | 1 |
+| 0.75 | `call/composition` | 1 |
+| 0.9375 | `call/function/builtin/print` | 1 |
+| 0.9375 | `call/function/builtin/type` | 1 |
 | 0 | `meta/program` | 1 |
 | 0 | `meta/sloc/1` | 1 |
 
@@ -2329,7 +2329,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.9375 | `appli/function/builtin/print` | 1 |
+| 0.9375 | `call/function/builtin/print` | 1 |
 | 0 | `meta/program` | 1 |
 | 0 | `meta/sloc/1` | 1 |
 
@@ -2344,7 +2344,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.75 | `appli/method` | 2 |
+| 0.75 | `call/method` | 2 |
 | 0.875 | `library/standard/os` | 1 |
 | 0.875 | `var/assignment/single` | 2 |
 | 0 | `meta/program` | 1-2 |
@@ -2360,7 +2360,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.96875 | `appli/method/sequence/string/startswith` | 1 |
+| 0.96875 | `call/method/sequence/string/startswith` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
@@ -2376,7 +2376,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.96875 | `appli/method/sequence/string/endswith` | 1 |
+| 0.96875 | `call/method/sequence/string/endswith` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
@@ -2393,7 +2393,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.75 | `appli/method` | 2 |
+| 0.75 | `call/method` | 2 |
 | 0.875 | `library/standard/datetime` | 1 |
 | 0.875 | `var/assignment/single` | 2 |
 | 0 | `meta/program` | 1-2 |
@@ -2411,7 +2411,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.75 | `appli/method` | 3 |
+| 0.75 | `call/method` | 3 |
 | 0.9375 | `library/standard/datetime/date` | 1 |
 | 0.9375 | `type/number/integer/literal` | 2, 2, 2 |
 | 0.9375 | `type/sequence/string/literal` | 3 |
@@ -2431,7 +2431,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.75 | `appli/method` | 2, 3 |
+| 0.75 | `call/method` | 2, 3 |
 | 0.9375 | `library/standard/datetime/date` | 1 |
 | 0.875 | `var/assignment/single` | 2, 3 |
 | 0 | `meta/program` | 1-3 |
@@ -2447,7 +2447,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.96875 | `appli/method/sequence/list/sort` | 1 |
+| 0.96875 | `call/method/sequence/list/sort` | 1 |
 | 0.875 | `type/sequence/list` | 1 |
 | 0 | `meta/program` | 1 |
 | 0 | `meta/sloc/1` | 1 |
@@ -2464,7 +2464,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.75 | `appli/method` | 2, 3 |
+| 0.75 | `call/method` | 2, 3 |
 | 0.875 | `library/standard/urllib.request` | 1 |
 | 0.875 | `var/assignment/single` | 3 |
 | 0 | `meta/program` | 1-3 |
@@ -2481,7 +2481,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.75 | `appli/method` | 2 |
+| 0.75 | `call/method` | 2 |
 | 0.875 | `library/standard/urllib` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 2 |
 | 0.9375 | `type/sequence/tuple/literal` | 2 |
@@ -2500,7 +2500,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.75 | `appli/method` | 2 |
+| 0.75 | `call/method` | 2 |
 | 0.875 | `library/third_party/lxml.etree` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 2 |
 | 0.875 | `var/assignment/single` | 2 |
@@ -2528,14 +2528,14 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.875 | `abstr/argument/arg` | 6, 6, 6, 6 |
-| 0.75 | `abstr/class` | 2-9 |
-| 0.9375 | `abstr/method/flavor/instance` | 6-9 |
-| 0.96875 | `abstr/method/naming/magic/__init__` | 6-9 |
-| 0.75 | `abstr/procedure` | 6-9 |
-| 0.875 | `appli/class/constructor` | 10 |
-| 0.9375 | `appli/function/builtin/print` | 12 |
-| 0.75 | `appli/method` | 11 |
+| 0.875 | `def/argument/arg` | 6, 6, 6, 6 |
+| 0.75 | `def/class` | 2-9 |
+| 0.9375 | `def/method/flavor/instance` | 6-9 |
+| 0.96875 | `def/method/naming/magic/__init__` | 6-9 |
+| 0.75 | `def/procedure` | 6-9 |
+| 0.875 | `call/class/constructor` | 10 |
+| 0.9375 | `call/function/builtin/print` | 12 |
+| 0.75 | `call/method` | 11 |
 | 0.875 | `library/third_party/pyxser` | 1 |
 | 0.875 | `type/null/literal` | 3, 4, 5 |
 | 0.9375 | `type/sequence/string/literal` | 10, 10, 10, 11 |
@@ -2573,7 +2573,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.75 | `appli/method` | 2 |
+| 0.75 | `call/method` | 2 |
 | 0.875 | `library/standard/os` | 1 |
 | 0.875 | `var/assignment/single` | 2 |
 | 0 | `meta/program` | 1-2 |
@@ -2590,8 +2590,8 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.75 | `appli/composition` | 2 |
-| 0.75 | `appli/method` | 2, 2 |
+| 0.75 | `call/composition` | 2 |
+| 0.75 | `call/method` | 2, 2 |
 | 0.875 | `library/standard/os` | 1 |
 | 0.875 | `var/assignment/single` | 2 |
 | 0 | `meta/program` | 1-2 |
@@ -2608,9 +2608,9 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.9375 | `appli/function/builtin/locals` | 1 |
-| 0.9375 | `appli/function/builtin/print` | 2 |
-| 0.875 | `appli/function/without_arguments` | 1 |
+| 0.9375 | `call/function/builtin/locals` | 1 |
+| 0.9375 | `call/function/builtin/print` | 2 |
+| 0.875 | `call/function/without_arguments` | 1 |
 | 0.75 | `condition/belonging` | 1 |
 | 0.875 | `flow/conditional/no_else` | 1-2 |
 | 0.75 | `type/boolean` | 1 |
@@ -2629,7 +2629,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.75 | `appli/method` | 2 |
+| 0.75 | `call/method` | 2 |
 | 0.875 | `library/third_party/pympler.asizeof` | 1 |
 | 0.875 | `var/assignment/single` | 2 |
 | 0 | `meta/program` | 1-2 |
@@ -2645,7 +2645,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.96875 | `appli/method/sequence/string/strip` | 1 |
+| 0.96875 | `call/method/sequence/string/strip` | 1 |
 | 0.75 | `condition/equality` | 1 |
 | 0.75 | `type/boolean` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
@@ -2665,8 +2665,8 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.75 | `appli/method` | 2 |
-| 0.9375 | `appli/method/subprocess/call` | 2 |
+| 0.75 | `call/method` | 2 |
+| 0.9375 | `call/method/subprocess/call` | 2 |
 | 0.875 | `library/standard/subprocess` | 1 |
 | 0.9375 | `type/sequence/list/literal` | 2 |
 | 0.9375 | `type/sequence/string/literal` | 2, 2, 2 |
@@ -2684,8 +2684,8 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.9375 | `appli/function/builtin/print` | 2 |
-| 0.9375 | `appli/function/builtin/sorted` | 1 |
+| 0.9375 | `call/function/builtin/print` | 2 |
+| 0.9375 | `call/function/builtin/sorted` | 1 |
 | 0.9375 | `flow/loop/exit/late` | 1-2 |
 | 0.875 | `flow/loop/for` | 1-2 |
 | 0.75 | `subscript/index` | 2 |
@@ -2703,10 +2703,10 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.75 | `appli/composition` | 1 |
-| 0.9375 | `appli/function/builtin/print` | 2 |
-| 0.9375 | `appli/function/builtin/sorted` | 1 |
-| 0.96875 | `appli/method/non_sequence/dictionary/items` | 1 |
+| 0.75 | `call/composition` | 1 |
+| 0.9375 | `call/function/builtin/print` | 2 |
+| 0.9375 | `call/function/builtin/sorted` | 1 |
+| 0.96875 | `call/method/non_sequence/dictionary/items` | 1 |
 | 0.9375 | `flow/loop/exit/late` | 1-2 |
 | 0.875 | `flow/loop/for` | 1-2 |
 | 0.875 | `type/non_sequence/dictionary` | 1 |
@@ -2758,7 +2758,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.96875 | `appli/method/sequence/string/replace` | 1 |
+| 0.96875 | `call/method/sequence/string/replace` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
 | 0.96875 | `type/sequence/string/literal/empty` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
@@ -2775,7 +2775,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.9375 | `appli/function/builtin/len` | 1 |
+| 0.9375 | `call/function/builtin/len` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
 | 0 | `meta/sloc/1` | 1 |
@@ -2790,7 +2790,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.96875 | `appli/function/builtin/casting/set` | 1 |
+| 0.96875 | `call/function/builtin/casting/set` | 1 |
 | 0.875 | `type/non_sequence/set` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
@@ -2806,7 +2806,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.96875 | `appli/function/builtin/casting/set` | 1 |
+| 0.96875 | `call/function/builtin/casting/set` | 1 |
 | 0.875 | `type/non_sequence/set` | 1 |
 | 0 | `meta/program` | 1 |
 | 0 | `meta/sloc/1` | 1 |
@@ -2821,9 +2821,9 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.75 | `appli/composition` | 1 |
-| 0.96875 | `appli/function/builtin/casting/list` | 1 |
-| 0.96875 | `appli/function/builtin/casting/set` | 1 |
+| 0.75 | `call/composition` | 1 |
+| 0.96875 | `call/function/builtin/casting/list` | 1 |
+| 0.96875 | `call/function/builtin/casting/set` | 1 |
 | 0.875 | `type/non_sequence/set` | 1 |
 | 0.875 | `type/sequence/list` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
@@ -2847,11 +2847,11 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.96875 | `appli/function/builtin/casting/set` | 2 |
-| 0.9375 | `appli/function/builtin/print` | 8 |
-| 0.875 | `appli/function/without_arguments` | 2 |
-| 0.96875 | `appli/method/non_sequence/set/add` | 6 |
-| 0.96875 | `appli/method/sequence/list/append` | 7 |
+| 0.96875 | `call/function/builtin/casting/set` | 2 |
+| 0.9375 | `call/function/builtin/print` | 8 |
+| 0.875 | `call/function/without_arguments` | 2 |
+| 0.96875 | `call/method/non_sequence/set/add` | 6 |
+| 0.96875 | `call/method/sequence/list/append` | 7 |
 | 0.875 | `condition/belonging/not` | 5 |
 | 0.875 | `flow/conditional/no_else` | 5-7 |
 | 0.9375 | `flow/loop/exit/late` | 4-7 |
@@ -2878,8 +2878,8 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.75 | `appli/composition` | 1 |
-| 0.96875 | `appli/function/builtin/casting/int` | 1 |
+| 0.75 | `call/composition` | 1 |
+| 0.96875 | `call/function/builtin/casting/int` | 1 |
 | 0.875 | `type/number/integer` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
@@ -2902,8 +2902,8 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.9375 | `appli/function/builtin/print` | 7 |
-| 0.75 | `appli/method` | 3, 4, 6 |
+| 0.9375 | `call/function/builtin/print` | 7 |
+| 0.75 | `call/method` | 3, 4, 6 |
 | 0.9375 | `flow/loop/exit/late` | 5-7 |
 | 0.9375 | `flow/loop/while/infinite` | 5-7 |
 | 0.875 | `library/standard/socket` | 1 |
@@ -2928,8 +2928,8 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.75 | `abstr/class` | 1-2 |
-| 0.9375 | `appli/function/builtin/range` | 2 |
+| 0.75 | `def/class` | 1-2 |
+| 0.9375 | `call/function/builtin/range` | 2 |
 | 0.9375 | `type/number/integer/literal` | 2 |
 | 0.9375 | `type/sequence/tuple/literal` | 2 |
 | 0.875 | `var/assignment/constant` | 2, 2, 2, 2 |
@@ -2952,7 +2952,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.75 | `abstr/class` | 2-6 |
+| 0.75 | `def/class` | 2-6 |
 | 0.9375 | `library/standard/enum/Enum` | 1 |
 | 0.9375 | `type/number/integer/literal` | 3, 4, 5, 6 |
 | 0.875 | `var/assignment/constant` | 3, 4, 5, 6 |
@@ -2987,11 +2987,11 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.875 | `abstr/argument/arg` | 2, 2 |
-| 0.75 | `abstr/function` | 2-4 |
-| 0.875 | `abstr/return/something` | 4 |
-| 0.9375 | `appli/function/builtin/len` | 4 |
-| 0.75 | `appli/method` | 3 |
+| 0.875 | `def/argument/arg` | 2, 2 |
+| 0.75 | `def/function` | 2-4 |
+| 0.875 | `def/return/something` | 4 |
+| 0.9375 | `call/function/builtin/len` | 4 |
+| 0.75 | `call/method` | 3 |
 | 0.75 | `condition/equality` | 4 |
 | 0.875 | `condition/equality/not` | 4 |
 | 0.875 | `library/standard/bisect` | 1 |
@@ -3018,9 +3018,9 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.9375 | `appli/function/builtin/print` | 5 |
-| 0.875 | `appli/function/without_arguments` | 3 |
-| 0.75 | `appli/method` | 2, 4 |
+| 0.9375 | `call/function/builtin/print` | 5 |
+| 0.875 | `call/function/without_arguments` | 3 |
+| 0.75 | `call/method` | 2, 4 |
 | 0.875 | `library/standard/time` | 1 |
 | 0.875 | `operator/arithmetic/substraction` | 5 |
 | 0.9375 | `type/sequence/string/literal` | 5 |
@@ -3039,9 +3039,9 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.875 | `abstr/argument/no` | 1-2 |
-| 0.75 | `abstr/function` | 1-2 |
-| 0.875 | `abstr/return/something` | 2 |
+| 0.875 | `def/argument/no` | 1-2 |
+| 0.75 | `def/function` | 1-2 |
+| 0.875 | `def/return/something` | 2 |
 | 0.9375 | `type/boolean/literal/True` | 2 |
 | 0.9375 | `type/sequence/string/literal` | 2 |
 | 0.9375 | `type/sequence/tuple/literal` | 2 |
@@ -3059,8 +3059,8 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.75 | `appli/method` | 2 |
-| 0.9375 | `appli/method/imp/load_module` | 2 |
+| 0.75 | `call/method` | 2 |
+| 0.9375 | `call/method/imp/load_module` | 2 |
 | 0.875 | `library/standard/imp` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 2, 2 |
 | 0.875 | `var/assignment/single` | 2 |
@@ -3085,11 +3085,11 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.875 | `abstr/argument/arg` | 1, 1 |
-| 0.75 | `abstr/higher_order` | 1-9 |
-| 0.75 | `abstr/procedure` | 1-9 |
-| 0.75 | `appli/method` | 4 |
-| 0.96875 | `appli/method/sequence/list/append` | 9 |
+| 0.875 | `def/argument/arg` | 1, 1 |
+| 0.75 | `def/higher_order` | 1-9 |
+| 0.75 | `def/procedure` | 1-9 |
+| 0.75 | `call/method` | 4 |
+| 0.96875 | `call/method/sequence/list/append` | 9 |
 | 0.875 | `flow/conditional/no_else` | 7-9 |
 | 0.9375 | `flow/loop/exit/late` | 3-9, 6-9 |
 | 0.9375 | `flow/loop/for/elements` | 6-9 |
@@ -3123,14 +3123,14 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.875 | `abstr/argument/arg` | 2, 2 |
-| 0.75 | `abstr/higher_order` | 2-9 |
-| 0.75 | `abstr/procedure` | 2-9 |
-| 0.96875 | `appli/function/builtin/casting/set` | 3 |
-| 0.875 | `appli/function/without_arguments` | 3 |
-| 0.75 | `appli/method` | 6 |
-| 0.96875 | `appli/method/non_sequence/set/add` | 8 |
-| 0.96875 | `appli/method/sequence/list/extend` | 9 |
+| 0.875 | `def/argument/arg` | 2, 2 |
+| 0.75 | `def/higher_order` | 2-9 |
+| 0.75 | `def/procedure` | 2-9 |
+| 0.96875 | `call/function/builtin/casting/set` | 3 |
+| 0.875 | `call/function/without_arguments` | 3 |
+| 0.75 | `call/method` | 6 |
+| 0.96875 | `call/method/non_sequence/set/add` | 8 |
+| 0.96875 | `call/method/sequence/list/extend` | 9 |
 | 0.875 | `condition/belonging/not` | 9 |
 | 0.9375 | `flow/loop/exit/late` | 5-9 |
 | 0.875 | `flow/loop/while` | 5-9 |
@@ -3160,14 +3160,14 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.875 | `abstr/argument/arg` | 1, 1 |
-| 0.75 | `abstr/higher_order` | 1-8 |
-| 0.75 | `abstr/procedure` | 1-8 |
-| 0.96875 | `appli/function/builtin/casting/set` | 2 |
-| 0.875 | `appli/function/without_arguments` | 2 |
-| 0.75 | `appli/method` | 5 |
-| 0.96875 | `appli/method/non_sequence/set/add` | 7 |
-| 0.96875 | `appli/method/sequence/list/extend` | 8 |
+| 0.875 | `def/argument/arg` | 1, 1 |
+| 0.75 | `def/higher_order` | 1-8 |
+| 0.75 | `def/procedure` | 1-8 |
+| 0.96875 | `call/function/builtin/casting/set` | 2 |
+| 0.875 | `call/function/without_arguments` | 2 |
+| 0.75 | `call/method` | 5 |
+| 0.96875 | `call/method/non_sequence/set/add` | 7 |
+| 0.96875 | `call/method/sequence/list/extend` | 8 |
 | 0.875 | `condition/belonging/not` | 8 |
 | 0.9375 | `flow/loop/exit/late` | 4-8 |
 | 0.875 | `flow/loop/while` | 4-8 |
@@ -3209,7 +3209,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.875 | `appli/function/without_arguments` | 2, 4, 6 |
+| 0.875 | `call/function/without_arguments` | 2, 4, 6 |
 | 0.75 | `flow/conditional` | 1-6, 3-6, 5-6 |
 | 0.9375 | `flow/conditional/else/if` | 4, 6 |
 | 0 | `meta/program` | 1-6 |
@@ -3226,7 +3226,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.75 | `appli/method` | 2 |
+| 0.75 | `call/method` | 2 |
 | 0.875 | `library/standard/timeit` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 2, 2 |
 | 0.875 | `var/assignment/single` | 2 |
@@ -3243,7 +3243,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.96875 | `appli/method/sequence/string/lower` | 1, 1 |
+| 0.96875 | `call/method/sequence/string/lower` | 1, 1 |
 | 0.75 | `condition/belonging` | 1 |
 | 0.75 | `type/boolean` | 1 |
 | 0.875 | `type/sequence/string` | 1, 1 |
@@ -3276,7 +3276,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.75 | `appli/method` | 1 |
+| 0.75 | `call/method` | 1 |
 | 0 | `meta/program` | 1 |
 | 0 | `meta/sloc/1` | 1 |
 
@@ -3306,7 +3306,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.96875 | `appli/method/sequence/string/isdigit` | 1 |
+| 0.96875 | `call/method/sequence/string/isdigit` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
@@ -3354,7 +3354,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.75 | `appli/method` | 1 |
+| 0.75 | `call/method` | 1 |
 | 0.875 | `type/null/literal` | 1 |
 | 0 | `meta/program` | 1 |
 | 0 | `meta/sloc/1` | 1 |
@@ -3370,7 +3370,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.9375 | `appli/function/builtin/print` | 2 |
+| 0.9375 | `call/function/builtin/print` | 2 |
 | 0.9375 | `flow/loop/exit/late` | 1-2 |
 | 0.875 | `flow/loop/for` | 1-2 |
 | 0.875 | `operator/arithmetic/addition` | 1 |
@@ -3387,7 +3387,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.9375 | `appli/function/builtin/hex` | 1 |
+| 0.9375 | `call/function/builtin/hex` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
 | 0 | `meta/sloc/1` | 1 |
@@ -3403,8 +3403,8 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.9375 | `appli/function/builtin/print` | 2 |
-| 0.9375 | `appli/function/builtin/zip` | 1 |
+| 0.9375 | `call/function/builtin/print` | 2 |
+| 0.9375 | `call/function/builtin/zip` | 1 |
 | 0.9375 | `flow/loop/exit/late` | 1-2 |
 | 0.875 | `flow/loop/for` | 1-2 |
 | 0 | `meta/program` | 1-2 |
@@ -3421,7 +3421,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.75 | `appli/method` | 2 |
+| 0.75 | `call/method` | 2 |
 | 0.875 | `library/standard/os` | 1 |
 | 0.875 | `var/assignment/single` | 2 |
 | 0 | `meta/program` | 1-2 |
@@ -3438,8 +3438,8 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.875 | `appli/class/constructor` | 2 |
-| 0.75 | `appli/method` | 2 |
+| 0.875 | `call/class/constructor` | 2 |
+| 0.75 | `call/method` | 2 |
 | 0.9375 | `library/standard/pathlib/Path` | 1 |
 | 0.875 | `var/assignment/single` | 2 |
 | 0 | `meta/program` | 1-2 |
@@ -3460,8 +3460,8 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.75 | `appli/method` | 2, 5, 6 |
-| 0.9375 | `appli/method/logging/basicConfig` | 2 |
+| 0.75 | `call/method` | 2, 5, 6 |
+| 0.9375 | `call/method/logging/basicConfig` | 2 |
 | 0.875 | `library/standard/logging` | 1 |
 | 0.875 | `library/standard/sys` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 3, 5 |
@@ -3482,8 +3482,8 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.75 | `appli/method` | 3, 4 |
-| 0.9375 | `appli/method/locale/setlocale` | 3 |
+| 0.75 | `call/method` | 3, 4 |
+| 0.9375 | `call/method/locale/setlocale` | 3 |
 | 0.875 | `library/standard/locale` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 2, 3 |
 | 0.875 | `var/assignment/single` | 2, 4 |
@@ -3500,7 +3500,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.96875 | `appli/function/builtin/casting/float` | 1 |
+| 0.96875 | `call/function/builtin/casting/float` | 1 |
 | 0.875 | `type/number/floating_point` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
@@ -3516,7 +3516,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.96875 | `appli/function/builtin/casting/float` | 1 |
+| 0.96875 | `call/function/builtin/casting/float` | 1 |
 | 0.875 | `type/number/floating_point` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
 | 0 | `meta/program` | 1 |
@@ -3533,7 +3533,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.75 | `appli/method` | 2 |
+| 0.75 | `call/method` | 2 |
 | 0.875 | `library/standard/re` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 2 |
 | 0.96875 | `type/sequence/string/literal/empty` | 2 |
@@ -3551,12 +3551,12 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.75 | `appli/composition` | 1, 1 |
-| 0.96875 | `appli/function/builtin/casting/list` | 1 |
-| 0.9375 | `appli/function/builtin/input` | 1 |
-| 0.9375 | `appli/function/builtin/map` | 1 |
-| 0.875 | `appli/function/without_arguments` | 1 |
-| 0.96875 | `appli/method/sequence/string/split` | 1 |
+| 0.75 | `call/composition` | 1, 1 |
+| 0.96875 | `call/function/builtin/casting/list` | 1 |
+| 0.9375 | `call/function/builtin/input` | 1 |
+| 0.9375 | `call/function/builtin/map` | 1 |
+| 0.875 | `call/function/without_arguments` | 1 |
+| 0.96875 | `call/method/sequence/string/split` | 1 |
 | 0.875 | `type/sequence/list` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
 | 0 | `meta/program` | 1 |
@@ -3572,7 +3572,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.96875 | `appli/method/sequence/string/rstrip` | 1 |
+| 0.96875 | `call/method/sequence/string/rstrip` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
@@ -3591,7 +3591,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.96875 | `appli/method/sequence/string/endswith` | 2 |
+| 0.96875 | `call/method/sequence/string/endswith` | 2 |
 | 0.875 | `flow/conditional/no_else` | 2-3 |
 | 0.875 | `library/standard/os` | 1 |
 | 0.875 | `subscript/slice/stop` | 3 |
@@ -3625,7 +3625,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.96875 | `appli/method/sequence/string/format` | 1 |
+| 0.96875 | `call/method/sequence/string/format` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
@@ -3644,9 +3644,9 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.96875 | `appli/function/builtin/casting/int` | 1, 2 |
-| 0.9375 | `appli/function/builtin/range` | 1, 2 |
-| 0.96875 | `appli/method/sequence/string/format` | 3 |
+| 0.96875 | `call/function/builtin/casting/int` | 1, 2 |
+| 0.9375 | `call/function/builtin/range` | 1, 2 |
+| 0.96875 | `call/method/sequence/string/format` | 3 |
 | 0.875 | `operator/arithmetic/addition` | 1, 2, 3, 3, 3 |
 | 0.875 | `operator/arithmetic/integer_division` | 3, 3, 3 |
 | 0.875 | `subscript/slice/start` | 1, 2 |
@@ -3685,23 +3685,23 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.875 | `abstr/argument/arg` | 4, 4, 8 |
-| 0.75 | `abstr/class` | 2-10 |
-| 0.75 | `abstr/decorated` | 3-7 |
-| 0.75 | `abstr/function` | 3-7, 8-10 |
-| 0.9375 | `abstr/method/flavor/class` | 3-7 |
-| 0.9375 | `abstr/method/flavor/instance` | 8-10 |
-| 0.96875 | `abstr/method/naming/magic/__str__` | 8-10 |
-| 0.875 | `abstr/return/something` | 5-7, 10 |
-| 0.75 | `appli/composition` | 5, 6, 10 |
-| 0.96875 | `appli/function/builtin/casting/int` | 6 |
-| 0.9375 | `appli/function/builtin/format` | 10 |
-| 0.9375 | `appli/function/builtin/len` | 6 |
-| 0.9375 | `appli/function/builtin/print` | 12, 14, 15 |
-| 0.9375 | `appli/function/builtin/range` | 6 |
-| 0.75 | `appli/method` | 5, 9, 11, 13 |
-| 0.875 | `appli/method/chaining` | 5 |
-| 0.96875 | `appli/method/sequence/string/join` | 10 |
+| 0.875 | `def/argument/arg` | 4, 4, 8 |
+| 0.75 | `def/class` | 2-10 |
+| 0.75 | `def/decorated` | 3-7 |
+| 0.75 | `def/function` | 3-7, 8-10 |
+| 0.9375 | `def/method/flavor/class` | 3-7 |
+| 0.9375 | `def/method/flavor/instance` | 8-10 |
+| 0.96875 | `def/method/naming/magic/__str__` | 8-10 |
+| 0.875 | `def/return/something` | 5-7, 10 |
+| 0.75 | `call/composition` | 5, 6, 10 |
+| 0.96875 | `call/function/builtin/casting/int` | 6 |
+| 0.9375 | `call/function/builtin/format` | 10 |
+| 0.9375 | `call/function/builtin/len` | 6 |
+| 0.9375 | `call/function/builtin/print` | 12, 14, 15 |
+| 0.9375 | `call/function/builtin/range` | 6 |
+| 0.75 | `call/method` | 5, 9, 11, 13 |
+| 0.875 | `call/method/chaining` | 5 |
+| 0.96875 | `call/method/sequence/string/join` | 10 |
 | 0.875 | `library/third_party/numpy` | 1 |
 | 0.875 | `operator/arithmetic/addition` | 6, 15 |
 | 0.875 | `operator/arithmetic/division` | 15 |
@@ -3729,7 +3729,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.75 | `appli/method` | 3 |
+| 0.75 | `call/method` | 3 |
 | 0.875 | `library/standard/pathlib` | 1 |
 | 0.875 | `var/assignment/single` | 2 |
 | 0 | `meta/program` | 1-3 |
@@ -3745,7 +3745,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.9375 | `appli/function/builtin/format` | 1 |
+| 0.9375 | `call/function/builtin/format` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
@@ -3778,7 +3778,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.75 | `appli/method` | 2 |
+| 0.75 | `call/method` | 2 |
 | 0.875 | `library/standard/random` | 1 |
 | 0.875 | `var/assignment/single` | 2 |
 | 0 | `meta/program` | 1-2 |
@@ -3798,11 +3798,11 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.875 | `abstr/argument/arg` | 2, 2, 2 |
-| 0.75 | `abstr/class` | 1-5 |
-| 0.9375 | `abstr/method/flavor/instance` | 2-5 |
-| 0.96875 | `abstr/method/naming/magic/__init__` | 2-5 |
-| 0.75 | `abstr/procedure` | 2-5 |
+| 0.875 | `def/argument/arg` | 2, 2, 2 |
+| 0.75 | `def/class` | 1-5 |
+| 0.9375 | `def/method/flavor/instance` | 2-5 |
+| 0.96875 | `def/method/naming/magic/__init__` | 2-5 |
+| 0.75 | `def/procedure` | 2-5 |
 | 0.875 | `type/null/literal` | 2 |
 | 0.96875 | `type/sequence/list/literal/empty` | 4 |
 | 0.75 | `var/assignment` | 3, 4, 5 |
@@ -3823,7 +3823,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.875 | `appli/function/without_arguments` | 3, 5 |
+| 0.875 | `call/function/without_arguments` | 3, 5 |
 | 0.75 | `condition/inequality` | 2 |
 | 0.75 | `flow/conditional` | 2-5 |
 | 0.875 | `flow/conditional/else` | 5 |
@@ -3863,7 +3863,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.875 | `appli/function/without_arguments` | 3, 5 |
+| 0.875 | `call/function/without_arguments` | 3, 5 |
 | 0.75 | `condition/belonging` | 2, 4 |
 | 0.875 | `flow/conditional/no_else` | 2-3, 4-5 |
 | 0.875 | `library/standard/sys` | 1 |
@@ -3885,8 +3885,8 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.9375 | `appli/function/builtin/print` | 2 |
-| 0.9375 | `appli/function/builtin/zip` | 1 |
+| 0.9375 | `call/function/builtin/print` | 2 |
+| 0.9375 | `call/function/builtin/zip` | 1 |
 | 0.9375 | `flow/loop/exit/late` | 1-2 |
 | 0.875 | `flow/loop/for` | 1-2 |
 | 0.875 | `subscript/slice/start` | 1 |
@@ -3911,13 +3911,13 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.875 | `abstr/argument/arg` | 2 |
-| 0.75 | `abstr/function` | 2-5 |
-| 0.875 | `abstr/return/something` | 5 |
-| 0.75 | `appli/function` | 6 |
-| 0.9375 | `appli/function/builtin/next` | 4 |
-| 0.9375 | `appli/function/builtin/print` | 7 |
-| 0.9375 | `appli/function/builtin/zip` | 5 |
+| 0.875 | `def/argument/arg` | 2 |
+| 0.75 | `def/function` | 2-5 |
+| 0.875 | `def/return/something` | 5 |
+| 0.75 | `call/function` | 6 |
+| 0.9375 | `call/function/builtin/next` | 4 |
+| 0.9375 | `call/function/builtin/print` | 7 |
+| 0.9375 | `call/function/builtin/zip` | 5 |
 | 0.9375 | `flow/loop/exit/late` | 6-7 |
 | 0.875 | `flow/loop/for` | 6-7 |
 | 0.9375 | `library/standard/itertools/tee` | 1 |
@@ -3938,8 +3938,8 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.75 | `appli/method` | 2 |
-| 0.9375 | `appli/method/webbrowser/open` | 2 |
+| 0.75 | `call/method` | 2 |
+| 0.9375 | `call/method/webbrowser/open` | 2 |
 | 0.875 | `library/standard/webbrowser` | 1 |
 | 0 | `meta/program` | 1-2 |
 | 0 | `meta/sloc/2` | 1-2 |
@@ -3986,8 +3986,8 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.9375 | `appli/function/builtin/len` | 1 |
-| 0.96875 | `appli/method/sequence/string/startswith` | 1 |
+| 0.9375 | `call/function/builtin/len` | 1 |
+| 0.96875 | `call/method/sequence/string/startswith` | 1 |
 | 0.875 | `operator/boolean/and` | 1 |
 | 0.875 | `subscript/slice/start` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
@@ -4005,7 +4005,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.96875 | `appli/method/sequence/string/lstrip` | 1 |
+| 0.96875 | `call/method/sequence/string/lstrip` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
@@ -4021,7 +4021,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.96875 | `appli/method/sequence/string/rsplit` | 1 |
+| 0.96875 | `call/method/sequence/string/rsplit` | 1 |
 | 0.75 | `subscript/index` | 1 |
 | 0.9375 | `type/number/integer/literal` | 1 |
 | 0.96875 | `type/number/integer/literal/zero` | 1 |
@@ -4040,7 +4040,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.96875 | `appli/method/sequence/string/rstrip` | 1 |
+| 0.96875 | `call/method/sequence/string/rstrip` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
@@ -4056,7 +4056,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.9375 | `appli/function/builtin/len` | 1 |
+| 0.9375 | `call/function/builtin/len` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
 | 0 | `meta/sloc/1` | 1 |
@@ -4071,7 +4071,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.9375 | `appli/function/builtin/len` | 1 |
+| 0.9375 | `call/function/builtin/len` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
 | 0 | `meta/sloc/1` | 1 |
@@ -4086,7 +4086,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.96875 | `appli/method/sequence/list/append` | 1 |
+| 0.96875 | `call/method/sequence/list/append` | 1 |
 | 0.875 | `type/sequence/list` | 1 |
 | 0 | `meta/program` | 1 |
 | 0 | `meta/sloc/1` | 1 |
@@ -4116,7 +4116,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.9375 | `appli/function/builtin/print` | 1 |
+| 0.9375 | `call/function/builtin/print` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
 | 0 | `meta/program` | 1 |
 | 0 | `meta/sloc/1` | 1 |
@@ -4131,7 +4131,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.9375 | `appli/function/builtin/print` | 1 |
+| 0.9375 | `call/function/builtin/print` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
 | 0 | `meta/program` | 1 |
 | 0 | `meta/sloc/1` | 1 |
@@ -4146,7 +4146,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.9375 | `appli/function/builtin/print` | 1 |
+| 0.9375 | `call/function/builtin/print` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
 | 0 | `meta/program` | 1 |
 | 0 | `meta/sloc/1` | 1 |
@@ -4164,9 +4164,9 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.75 | `appli/method` | 2, 4 |
-| 0.875 | `appli/method/chaining` | 2 |
-| 0.96875 | `appli/method/sequence/string/encode` | 2 |
+| 0.75 | `call/method` | 2, 4 |
+| 0.875 | `call/method/chaining` | 2 |
+| 0.96875 | `call/method/sequence/string/encode` | 2 |
 | 0.9375 | `library/standard/urllib/parse` | 1 |
 | 0.9375 | `library/standard/urllib/request` | 1 |
 | 0.875 | `type/sequence/string` | 2 |
@@ -4185,7 +4185,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.75 | `appli/method` | 1 |
+| 0.75 | `call/method` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
 | 0 | `meta/sloc/1` | 1 |
@@ -4200,7 +4200,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.75 | `appli/method` | 1 |
+| 0.75 | `call/method` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
 | 0 | `meta/sloc/1` | 1 |
@@ -4217,7 +4217,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.75 | `appli/method` | 3, 3 |
+| 0.75 | `call/method` | 3, 3 |
 | 0.75 | `condition/belonging` | 3 |
 | 0.875 | `library/standard/os` | 1 |
 | 0.75 | `subscript/index` | 3 |
@@ -4247,8 +4247,8 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.75 | `appli/method` | 5, 7 |
-| 0.96875 | `appli/method/sequence/string/format` | 4 |
+| 0.75 | `call/method` | 5, 7 |
+| 0.96875 | `call/method/sequence/string/format` | 4 |
 | 0.875 | `library/standard/os` | 2 |
 | 0.875 | `library/standard/re` | 1 |
 | 0.875 | `type/sequence/string` | 4 |
@@ -4270,9 +4270,9 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.75 | `appli/composition` | 3, 3 |
-| 0.96875 | `appli/function/builtin/casting/list` | 3 |
-| 0.75 | `appli/method` | 3, 3 |
+| 0.75 | `call/composition` | 3, 3 |
+| 0.96875 | `call/function/builtin/casting/list` | 3 |
+| 0.75 | `call/method` | 3, 3 |
 | 0.875 | `library/standard/glob` | 1 |
 | 0.875 | `library/standard/itertools` | 2 |
 | 0.875 | `operator/string/format` | 3 |
@@ -4330,7 +4330,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.875 | `appli/class/constructor` | 3 |
+| 0.875 | `call/class/constructor` | 3 |
 | 0.9375 | `library/standard/collections/namedtuple` | 1 |
 | 0.875 | `operator/arithmetic/addition` | 3, 3 |
 | 0.875 | `operator/arithmetic/division` | 3, 3 |
@@ -4351,7 +4351,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.75 | `appli/method` | 2 |
+| 0.75 | `call/method` | 2 |
 | 0.875 | `library/standard/os` | 1 |
 | 0.875 | `var/assignment/single` | 2 |
 | 0 | `meta/program` | 1-2 |
@@ -4368,7 +4368,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.9375 | `appli/function/builtin/print` | 2 |
+| 0.9375 | `call/function/builtin/print` | 2 |
 | 0.875 | `operator/arithmetic/modulo` | 2 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
@@ -4391,7 +4391,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.75 | `appli/method` | 6 |
+| 0.75 | `call/method` | 6 |
 | 0.875 | `library/third_party/requests` | 2 |
 | 0.9375 | `type/non_sequence/dictionary/literal` | 4 |
 | 0.96875 | `type/non_sequence/dictionary/literal/empty` | 5 |
@@ -4413,7 +4413,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.75 | `appli/method` | 2 |
+| 0.75 | `call/method` | 2 |
 | 0.9375 | `library/standard/datetime/date` | 1 |
 | 0.9375 | `library/standard/datetime/timedelta` | 1 |
 | 0.875 | `operator/arithmetic/addition` | 2 |
@@ -4433,7 +4433,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.75 | `appli/method` | 3 |
+| 0.75 | `call/method` | 3 |
 | 0.875 | `library/standard/threading` | 1 |
 | 0.9375 | `type/number/floating_point/literal` | 2 |
 | 0.9375 | `type/number/integer/literal` | 2 |
@@ -4453,8 +4453,8 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.75 | `appli/method` | 2 |
-| 0.9375 | `appli/method/sys/exit` | 2 |
+| 0.75 | `call/method` | 2 |
+| 0.9375 | `call/method/sys/exit` | 2 |
 | 0.875 | `library/standard/sys` | 1 |
 | 0.96875 | `type/number/integer/literal/zero` | 2 |
 | 0 | `meta/program` | 1-2 |
@@ -4484,16 +4484,16 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.875 | `abstr/argument/arg` | <details><summary>2, 2, 5, 5, 11, 11, 11, 13,</summary>13, 13</details> |
-| 0.75 | `abstr/class` | 1-15 |
-| 0.75 | `abstr/function` | 5-10 |
-| 0.875 | `abstr/function/predicate` | 11-12 |
-| 0.9375 | `abstr/method/flavor/instance` | 2-4, 5-10, 11-12, 13-15 |
-| 0.96875 | `abstr/method/naming/magic/__init__` | 2-4 |
-| 0.75 | `abstr/procedure` | 2-4, 13-15 |
-| 0.875 | `abstr/return/something` | 10, 12 |
-| 0.9375 | `appli/function/builtin/range` | 4 |
-| 0.75 | `appli/method` | 9, 12, 12, 14, 15, 15 |
+| 0.875 | `def/argument/arg` | <details><summary>2, 2, 5, 5, 11, 11, 11, 13,</summary>13, 13</details> |
+| 0.75 | `def/class` | 1-15 |
+| 0.75 | `def/function` | 5-10 |
+| 0.875 | `def/function/predicate` | 11-12 |
+| 0.9375 | `def/method/flavor/instance` | 2-4, 5-10, 11-12, 13-15 |
+| 0.96875 | `def/method/naming/magic/__init__` | 2-4 |
+| 0.75 | `def/procedure` | 2-4, 13-15 |
+| 0.875 | `def/return/something` | 10, 12 |
+| 0.9375 | `call/function/builtin/range` | 4 |
+| 0.75 | `call/method` | 9, 12, 12, 14, 15, 15 |
 | 0.75 | `condition/equality` | 6, 12 |
 | 0.75 | `flow/conditional` | 6-10 |
 | 0.875 | `flow/conditional/else` | 9-10 |
@@ -4538,7 +4538,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.75 | `appli/method` | 2 |
+| 0.75 | `call/method` | 2 |
 | 0.875 | `library/third_party/numpy` | 1 |
 | 0.875 | `var/assignment/single` | 2 |
 | 0 | `meta/program` | 1-2 |
@@ -4554,7 +4554,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.875 | `appli/class/constructor` | 1, 1 |
+| 0.875 | `call/class/constructor` | 1, 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
 | 0 | `meta/sloc/1` | 1 |
@@ -4570,8 +4570,8 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.9375 | `appli/function/builtin/any` | 1 |
-| 0.875 | `appli/function/without_arguments` | 2 |
+| 0.9375 | `call/function/builtin/any` | 1 |
+| 0.875 | `call/function/without_arguments` | 2 |
 | 0.75 | `condition/inequality` | 1 |
 | 0.875 | `flow/conditional/no_else` | 1-2 |
 | 0.75 | `type/boolean` | 1 |
@@ -4589,8 +4589,8 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.9375 | `appli/function/builtin/open` | 1 |
-| 0.75 | `appli/method` | 2 |
+| 0.9375 | `call/function/builtin/open` | 1 |
+| 0.75 | `call/method` | 2 |
 | 0.875 | `var/assignment/single` | 2 |
 | 0 | `meta/program` | 1-2 |
 | 0 | `meta/sloc/2` | 1-2 |

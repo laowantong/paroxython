@@ -421,7 +421,7 @@ def test_recommend_mini_programs():
         {
             "operation": "exclude",
             "data": [
-                ("var/assignment/single", "after", "appli/function/builtin/print"),
+                ("var/assignment/single", "after", "call/function/builtin/print"),
                 # collatz.py and fizzbuzz.py have an assignment after a print.
                 # is_even.py imports fizzbuzz.py.
                 # Consequently, these three programs are excluded.
@@ -453,8 +453,8 @@ def test_recommend_mini_programs():
         {
             "operation": "exclude",
             "data": [
-                ("condition/equality", "inside", "abstr/function"),
-                # "condition/equality" is inside "abstr/function" in is_even.py, which is not
+                ("condition/equality", "inside", "def/function"),
+                # "condition/equality" is inside "def/function" in is_even.py, which is not
                 # imported anywhere.
             ],
         }
@@ -468,8 +468,8 @@ def test_recommend_mini_programs():
         {
             "operation": "exclude",
             "data": [
-                ("appli/function/builtin/range", "inside", "flow/conditional"),
-                # "appli/function/builtin/range" is not inside "flow/conditional" anywhere.
+                ("call/function/builtin/range", "inside", "flow/conditional"),
+                # "call/function/builtin/range" is not inside "flow/conditional" anywhere.
             ],
         }
     ]
@@ -487,9 +487,9 @@ def test_recommend_mini_programs():
         {
             "operation": "include",
             "data": [
-                ("var/assignment/single", "after", "appli/function/builtin/print"),
+                ("var/assignment/single", "after", "call/function/builtin/print"),
                 # The taxon "var/assignment/single" is featured by assignment.py and
-                # collatz.py. In collatz.py, it appears after a taxon "appli/function/builtin/print".
+                # collatz.py. In collatz.py, it appears after a taxon "call/function/builtin/print".
                 # Consequently, it should be included in the results, but not the programs which
                 # import it: fizzbuzz.py and is_even.py.
             ],
@@ -533,8 +533,8 @@ def test_recommend_mini_programs():
         {
             "operation": "include",
             "data": [
-                ("condition/equality", "inside", "abstr/function"),
-                # "condition/equality" is inside "abstr/function" in is_even.py, which is not
+                ("condition/equality", "inside", "def/function"),
+                # "condition/equality" is inside "def/function" in is_even.py, which is not
                 # imported anywhere.
             ],
         }
@@ -548,9 +548,9 @@ def test_recommend_mini_programs():
         {
             "operation": "include",
             "data": [
-                ("condition/equality$", "inside", "abstr"),
-                # "condition/equality" (strictly, note the dollar sign) is inside "abstr/function"
-                # in is_even.py and inside "abstr/procedure" in collatz.py. Both will be
+                ("condition/equality$", "inside", "def"),
+                # "condition/equality" (strictly, note the dollar sign) is inside "def/function"
+                # in is_even.py and inside "def/procedure" in collatz.py. Both will be
                 # included.
             ],
         }
@@ -564,8 +564,8 @@ def test_recommend_mini_programs():
         {
             "operation": "include",
             "data": [
-                ("appli/function/builtin/range", "inside", "flow/conditional"),
-                # "appli/function/builtin/range" is not inside "flow/conditional" anywhere.
+                ("call/function/builtin/range", "inside", "flow/conditional"),
+                # "call/function/builtin/range" is not inside "flow/conditional" anywhere.
             ],
         }
     ]
@@ -578,8 +578,8 @@ def test_recommend_mini_programs():
         {
             "operation": "include",
             "data": [
-                ("appli/function/builtin/print", "is", "appli/function/builtin/print"),
-                # "appli/function/builtin/print" may appear several times in the same program, but
+                ("call/function/builtin/print", "is", "call/function/builtin/print"),
+                # "call/function/builtin/print" may appear several times in the same program, but
                 # never on the same line.
             ],
         }
@@ -623,12 +623,12 @@ def test_recommend_mini_programs():
         {
             "operation": "include",
             "data": [
-                ("appli/function/builtin/print", "not inside", "flow/loop/exit/late"),
+                ("call/function/builtin/print", "not inside", "flow/loop/exit/late"),
                 # A print statement is featured inside a loop by both collatz.py and fizzbuzz.py.
                 # However, in collatz.py, there exists a print statement which is not inside the
                 # loop. This makes it satisfy the predicate. Note that assignment.py and is_even.py
                 # are not included in the result, since they don't feature (at least directly)
-                # "appli/function/builtin/print".
+                # "call/function/builtin/print".
             ],
         }
     ]
@@ -641,7 +641,7 @@ def test_recommend_mini_programs():
         {
             "operation": "exclude",
             "data": [
-                ("appli/function/builtin/print", "not inside", "flow/loop"),
+                ("call/function/builtin/print", "not inside", "flow/loop"),
                 # Exclude the programs which feature a print statement outside a loop. This does
                 # not exclude assignment.py, which does not feature a print statement. This
                 # excludes collatz, which features a print statement outside a loop, even if it
@@ -704,18 +704,18 @@ def test_recommend_simple_programs_1(expected_programs, commands):
     assert rec.selected_programs == expected_programs
 
 
-holds_abstr = "abstr"
+holds_abstr = "def"
 holds_assignment = "var/assignment"
-holds_asg_in_sub = ("var/assignment", "inside", "abstr")
+holds_asg_in_sub = ("var/assignment", "inside", "def")
 lacks_assignment = ("meta/program", "not contains", "var/assignment")
-lacks_abstr = ("meta/program", "not contains", "abstr")
-lacks_asg_or_sub = ("meta/program", "not contains", "abstr|var/assignment")
-lacks_asg_in_sub = ("abstr", "not contains", "var/assignment")
-p0 = "01_hello_world.py"  # [ ] abstr [ ] assignment [ ] inside *
-p1 = "05_greet.py"  #       [X] abstr [ ] assignment [ ] inside
-p2 = "02_input_name.py"  #  [ ] abstr [X] assignment [ ] inside
-p3 = "16_csv.py"  #         [X] abstr [X] assignment [ ] inside *
-p4 = "12_classes.py"  #     [X] abstr [X] assignment [X] inside
+lacks_abstr = ("meta/program", "not contains", "def")
+lacks_asg_or_sub = ("meta/program", "not contains", "def|var/assignment")
+lacks_asg_in_sub = ("def", "not contains", "var/assignment")
+p0 = "01_hello_world.py"  # [ ] def [ ] assignment [ ] inside *
+p1 = "05_greet.py"  #       [X] def [ ] assignment [ ] inside
+p2 = "02_input_name.py"  #  [ ] def [X] assignment [ ] inside
+p3 = "16_csv.py"  #         [X] def [X] assignment [ ] inside *
+p4 = "12_classes.py"  #     [X] def [X] assignment [X] inside
 base_2 = [p0, p1, p2, p3, p4]
 
 # fmt: off

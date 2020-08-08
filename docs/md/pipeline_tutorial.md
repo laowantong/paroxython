@@ -74,14 +74,14 @@ You want to filter out all programs reserved for an exam, or too complex, or not
 
 ## Concepts to be introduced later (or never)
 
-For the time being, you don't want to be recommended any program requiring the concepts of recursivity (`abstr/recursive`), dictionary (`type/non_sequence/dictionary`) or set (`type/non_sequence/set`).
+For the time being, you don't want to be recommended any program requiring the concepts of recursivity (`def/recursive`), dictionary (`type/non_sequence/dictionary`) or set (`type/non_sequence/set`).
 
 ```python
 [
   {
     "operation": "exclude",
     "data": [
-      "abstr/recursive",
+      "def/recursive",
       "type/non_sequence",
     ],
   },

@@ -5,9 +5,9 @@
     "var/assignment/single": "1"
   },
   "collatz.py": {
-    "abstr/argument/arg": "1",
-    "abstr/procedure": "1-8",
-    "appli/function/builtin/print": "3 8",
+    "def/argument/arg": "1",
+    "def/procedure": "1-8",
+    "call/function/builtin/print": "3 8",
     "condition/divisibility/parity": "4",
     "condition/equality": "4",
     "condition/equality/not": "2",
@@ -27,8 +27,8 @@
     "var/assignment/single": "5 7"
   },
   "fizzbuzz.py": {
-    "appli/function/builtin/print": "4 6 8 10",
-    "appli/function/builtin/range": "2",
+    "call/function/builtin/print": "4 6 8 10",
+    "call/function/builtin/range": "2",
     "condition/equality": "3 5 7",
     "flow/conditional": "3-10 5-10 7-10",
     "flow/conditional/else": "10",
@@ -45,9 +45,9 @@
     "type/sequence/string/literal": "4 6 8"
   },
   "is_even.py": {
-    "abstr/argument/arg": "2",
-    "abstr/function/predicate": "2-3",
-    "abstr/return/something": "3",
+    "def/argument/arg": "2",
+    "def/function/predicate": "2-3",
+    "def/return/something": "3",
     "condition/divisibility/parity": "3",
     "condition/equality": "3",
     "library/personal": "1",

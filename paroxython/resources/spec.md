@@ -42,8 +42,8 @@
       - [Feature `external_free_call` (SQL)](#feature-external_free_call)
     - [Calls of the form `identifier.callable(arguments)`](#calls-of-the-form-identifiercallablearguments)
       - [Feature `member_call_member`](#feature-member_call_member)
-      - [Feature `member_call` (SQL)](#feature-member_call)
       - [Feature `member_call_object`](#feature-member_call_object)
+      - [Feature `member_call` (SQL)](#feature-member_call)
       - [Feature `method_chaining`](#feature-method_chaining)
   - [Iterables](#iterables)
       - [Feature `range` (SQL)](#feature-range)
@@ -1744,6 +1744,39 @@ In Python, `identifier` can be the name of:
 
 --------------------------------------------------------------------------------
 
+#### Feature `member_call_object`
+
+##### Derivations
+
+[⬇️ feature `member_call`](#feature-member_call)  
+[⬇️ feature `update_by_member_call`](#feature-update_by_member_call)  
+
+##### Specification
+
+```re
+           ^(.*)/value/_type=Call
+\n(?:\1.+\n)*?\1/value/func/_type=Attribute
+\n(?:\1.+\n)*?\1/value/func/value/_pos=(?P<POS>.+)
+\n(?:\1.+\n)*?\1/value/func/value/id=(?P<SUFFIX>.+)
+```
+
+##### Example
+
+```python
+1   seq.index(42)
+2   foo(bar)  # no match
+3   seq.index # no match
+4   a.b.c() # no match
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `member_call_object:seq` | 1 |
+
+--------------------------------------------------------------------------------
+
 #### Feature `member_call`
 
 ##### Derivations
@@ -1775,39 +1808,6 @@ JOIN t_member_call_member AS m ON (o.path GLOB m.path || "*-")
 |:--|:--|
 | `member_call:foo:append` | 1 |
 | `member_call:seq:append` | 2 |
-
---------------------------------------------------------------------------------
-
-#### Feature `member_call_object`
-
-##### Derivations
-
-[⬇️ feature `member_call`](#feature-member_call)  
-[⬇️ feature `update_by_member_call`](#feature-update_by_member_call)  
-
-##### Specification
-
-```re
-           ^(.*)/value/_type=Call
-\n(?:\1.+\n)*?\1/value/func/_type=Attribute
-\n(?:\1.+\n)*?\1/value/func/value/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/value/func/value/id=(?P<SUFFIX>.+)
-```
-
-##### Example
-
-```python
-1   seq.index(42)
-2   foo(bar)  # no match
-3   seq.index # no match
-4   a.b.c() # no match
-```
-
-##### Matches
-
-| Label | Lines |
-|:--|:--|
-| `member_call_object:seq` | 1 |
 
 --------------------------------------------------------------------------------
 

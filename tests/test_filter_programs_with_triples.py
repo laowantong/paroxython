@@ -15,7 +15,7 @@ triple_data = [
         (
             "var/assignment/single",  # featured by assignment.py and collatz.py
             compare_spans["after"],  # but after
-            "appli/function/builtin/print",  # this taxon in collatz.py only.
+            "call/function/builtin/print",  # this taxon in collatz.py only.
         ),
         {"collatz.py"},
     ),
@@ -29,7 +29,7 @@ triple_data = [
     ),
     (
         (
-            "appli/function/builtin/range",  # this taxon is featured by fizzbuzz.py only
+            "call/function/builtin/range",  # this taxon is featured by fizzbuzz.py only
             compare_spans["inside"],  # but not inside of
             "flow/conditional",  # that taxon
         ),
@@ -47,13 +47,13 @@ triple_data = [
         (
             "condition/equality$",  # featured by all programs except assignment.py
             compare_spans["inside"],  # but only inside
-            "abstr",  # abstr/function or abstr/procedure in two of them
+            "def",  # def/function or def/procedure in two of them
         ),
         {"collatz.py", "is_even.py"},
     ),
     (
         (
-            "appli",  # featured by collatz.py and fizzbuzz.py
+            "call",  # featured by collatz.py and fizzbuzz.py
             compare_spans["inside"],  # but only inside
             "flow/conditional",  # a conditional in fizzbuzz.py
         ),
@@ -74,7 +74,7 @@ negated_triple_data = [
         (
             "var/assignment/single",  # featured by assignment.py and collatz.py
             compare_spans["after"],  # but after
-            "appli/function/builtin/print",  # this taxon in collatz.py only.
+            "call/function/builtin/print",  # this taxon in collatz.py only.
         ),
         {"assignment.py"},
     ),
@@ -88,7 +88,7 @@ negated_triple_data = [
     ),
     (
         (
-            "appli/function/builtin/range",  # this taxon is featured by fizzbuzz.py only
+            "call/function/builtin/range",  # this taxon is featured by fizzbuzz.py only
             compare_spans["inside"],  # but not inside of
             "flow/conditional",  # that taxon
         ),
@@ -98,7 +98,7 @@ negated_triple_data = [
         (
             "flow/conditional",  # this taxon is featured by collatz.py and fizzbuzz.py
             compare_spans["contains"],  # but it never contains
-            "appli/function/builtin/range",  # that taxon
+            "call/function/builtin/range",  # that taxon
         ),
         {"collatz.py", "fizzbuzz.py"},  # distinct from the previous result!
     ),
@@ -114,13 +114,13 @@ negated_triple_data = [
         (
             "condition/equality$",  # featured by all programs except assignment.py
             compare_spans["inside"],  # but only inside
-            "abstr",  # abstr/function or abstr/procedure in two of them
+            "def",  # def/function or def/procedure in two of them
         ),
         {"fizzbuzz.py"},
     ),
     (
         (
-            "appli",  # featured by collatz.py and fizzbuzz.py
+            "call",  # featured by collatz.py and fizzbuzz.py
             compare_spans["inside"],  # in collatz, the two print() are not inside the conditional
             "flow/conditional",  # in fizzbuzz, although print() is inside, range() is not
         ),

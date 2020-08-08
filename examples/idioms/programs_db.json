@@ -20,7 +20,7 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "appli/function/builtin/print": [[2,2]],
+        "call/function/builtin/print": [[2,2]],
         "library/standard/__future__/print_function": [[1,1]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
@@ -43,7 +43,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/function/builtin/print": [[1,1]],
+        "call/function/builtin/print": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "type/sequence/string/literal": [[1,1]]
@@ -76,8 +76,8 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "appli/function/builtin/print": [[2,2]],
-        "appli/function/builtin/range": [[1,1]],
+        "call/function/builtin/print": [[2,2]],
+        "call/function/builtin/range": [[1,1]],
         "flow/loop/exit/late": [[1,2]],
         "flow/loop/for/arithmetic": [[1,2]],
         "meta/program": [[1,2]],
@@ -107,7 +107,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/function/builtin/print": [[1,1]],
+        "call/function/builtin/print": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "operator/string/replication": [[1,1]],
@@ -136,7 +136,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/function/builtin/print": [[1,1]],
+        "call/function/builtin/print": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "operator/string/replication": [[1,1]],
@@ -169,9 +169,9 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "abstr/argument/arg": [[1,1]],
-        "abstr/procedure": [[1,2]],
-        "appli/function/builtin/print": [[2,2]],
+        "def/argument/arg": [[1,1]],
+        "def/procedure": [[1,2]],
+        "call/function/builtin/print": [[2,2]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
         "operator/string/concatenation": [[2,2]],
@@ -190,8 +190,8 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "abstr/argument/no": [[1,2]],
-        "abstr/procedure": [[1,2]],
+        "def/argument/no": [[1,2]],
+        "def/procedure": [[1,2]],
         "flow/null_operation": [[2,2]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]]
@@ -216,9 +216,9 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "abstr/argument/arg": [[1,1]],
-        "abstr/function": [[1,2]],
-        "abstr/return/something": [[2,2]],
+        "def/argument/arg": [[1,1]],
+        "def/function": [[1,2]],
+        "def/return/something": [[2,2]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
         "operator/arithmetic/multiplication": [[2,2]]
@@ -244,9 +244,9 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "abstr/argument/arg": [[1,1]],
-        "abstr/function": [[1,2]],
-        "abstr/return/something": [[2,2]],
+        "def/argument/arg": [[1,1]],
+        "def/function": [[1,2]],
+        "def/return/something": [[2,2]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
         "operator/arithmetic/power": [[2,2]],
@@ -267,7 +267,7 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "abstr/class": [[2,2]],
+        "def/class": [[2,2]],
         "library/standard/dataclasses/dataclass": [[1,1]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]]
@@ -324,8 +324,8 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "appli/function/builtin/enumerate": [[1,1]],
-        "appli/function/builtin/print": [[2,2]],
+        "call/function/builtin/enumerate": [[1,1]],
+        "call/function/builtin/print": [[2,2]],
         "flow/loop/exit/late": [[1,2]],
         "flow/loop/for": [[1,2]],
         "flow/loop/for/elements_and_indexes": [[1,2]],
@@ -390,11 +390,11 @@
         "whole_span:5": [[1,5]]
       },
       "taxa": {
-        "abstr/argument/arg": [[2,2],[2,2]],
-        "abstr/class": [[1,5]],
-        "abstr/method/flavor/instance": [[2,5]],
-        "abstr/method/naming/magic/__init__": [[2,5]],
-        "abstr/procedure": [[2,5]],
+        "def/argument/arg": [[2,2],[2,2]],
+        "def/class": [[1,5]],
+        "def/method/flavor/instance": [[2,5]],
+        "def/method/naming/magic/__init__": [[2,5]],
+        "def/procedure": [[2,5]],
         "meta/program": [[1,5]],
         "meta/sloc/5": [[1,5]],
         "type/null/literal": [[4,4],[5,5]],
@@ -428,11 +428,11 @@
         "whole_span:5": [[1,5]]
       },
       "taxa": {
-        "abstr/argument/arg": [[2,2],[2,2],[2,2],[2,2]],
-        "abstr/class": [[1,5]],
-        "abstr/method/flavor/instance": [[2,5]],
-        "abstr/method/naming/magic/__init__": [[2,5]],
-        "abstr/procedure": [[2,5]],
+        "def/argument/arg": [[2,2],[2,2],[2,2],[2,2]],
+        "def/class": [[1,5]],
+        "def/method/flavor/instance": [[2,5]],
+        "def/method/naming/magic/__init__": [[2,5]],
+        "def/procedure": [[2,5]],
         "meta/program": [[1,5]],
         "meta/sloc/5": [[1,5]],
         "var/assignment": [[3,3],[4,4],[5,5]]
@@ -479,8 +479,8 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "appli/method": [[2,2]],
-        "appli/method/random/shuffle": [[2,2]],
+        "call/method": [[2,2]],
+        "call/method/random/shuffle": [[2,2]],
         "library/standard/random": [[1,1]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]]
@@ -504,8 +504,8 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "appli/method": [[2,2]],
-        "appli/method/random/choice": [[2,2]],
+        "call/method": [[2,2]],
+        "call/method/random/choice": [[2,2]],
         "library/standard/random": [[1,1]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]]
@@ -552,8 +552,8 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "appli/function/builtin/print": [[2,2]],
-        "appli/method/non_sequence/dictionary/items": [[1,1]],
+        "call/function/builtin/print": [[2,2]],
+        "call/method/non_sequence/dictionary/items": [[1,1]],
         "flow/loop/exit/late": [[1,2]],
         "flow/loop/for": [[1,2]],
         "meta/program": [[1,2]],
@@ -589,11 +589,11 @@
         "whole_span:3": [[1,3]]
       },
       "taxa": {
-        "abstr/argument/arg": [[2,2],[2,2]],
-        "abstr/function": [[2,3]],
-        "abstr/return/something": [[3,3]],
-        "appli/method": [[3,3]],
-        "appli/method/random/randrange": [[3,3]],
+        "def/argument/arg": [[2,2],[2,2]],
+        "def/function": [[2,3]],
+        "def/return/something": [[3,3]],
+        "call/method": [[3,3]],
+        "call/method/random/randrange": [[3,3]],
         "library/standard/random": [[1,1]],
         "meta/program": [[1,3]],
         "meta/sloc/3": [[1,3]]
@@ -618,8 +618,8 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "appli/method": [[2,2]],
-        "appli/method/random/uniform": [[2,2]],
+        "call/method": [[2,2]],
+        "call/method/random/uniform": [[2,2]],
         "library/standard/random": [[1,1]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]]
@@ -644,8 +644,8 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "appli/method": [[2,2]],
-        "appli/method/random/randint": [[2,2]],
+        "call/method": [[2,2]],
+        "call/method/random/randint": [[2,2]],
         "library/standard/random": [[1,1]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]]
@@ -691,12 +691,12 @@
         "whole_span:6": [[1,6]]
       },
       "taxa": {
-        "abstr/argument/arg": [[1,1]],
-        "abstr/procedure": [[1,6]],
-        "abstr/recursive": [[1,6]],
-        "abstr/recursive/body": [[1,6]],
-        "abstr/return/nothing": [[3,3]],
-        "appli/function": [[4,4],[6,6]],
+        "def/argument/arg": [[1,1]],
+        "def/procedure": [[1,6]],
+        "def/recursive": [[1,6]],
+        "def/recursive/body": [[1,6]],
+        "def/return/nothing": [[3,3]],
+        "call/function": [[4,4],[6,6]],
         "condition/identity": [[2,2]],
         "flow/conditional/guard": [[2,3]],
         "flow/conditional/no_else": [[2,3]],
@@ -737,13 +737,13 @@
         "whole_span:4": [[1,4]]
       },
       "taxa": {
-        "abstr/argument/arg": [[2,2],[2,2]],
-        "abstr/argument/vararg": [[2,2]],
-        "abstr/class": [[1,4]],
-        "abstr/method/flavor/instance": [[2,4]],
-        "abstr/method/naming/magic/__init__": [[2,4]],
-        "abstr/procedure": [[2,4]],
-        "appli/function/builtin/casting/list": [[4,4]],
+        "def/argument/arg": [[2,2],[2,2]],
+        "def/argument/vararg": [[2,2]],
+        "def/class": [[1,4]],
+        "def/method/flavor/instance": [[2,4]],
+        "def/method/naming/magic/__init__": [[2,4]],
+        "def/procedure": [[2,4]],
+        "call/function/builtin/casting/list": [[4,4]],
         "meta/program": [[1,4]],
         "meta/sloc/4": [[1,4]],
         "type/sequence/list": [[4,4]],
@@ -784,10 +784,10 @@
         "whole_span:4": [[1,4]]
       },
       "taxa": {
-        "abstr/argument/arg": [[1,1],[1,1]],
-        "abstr/higher_order": [[1,4]],
-        "abstr/procedure": [[1,4]],
-        "abstr/recursive/body": [[1,4]],
+        "def/argument/arg": [[1,1],[1,1]],
+        "def/higher_order": [[1,4]],
+        "def/procedure": [[1,4]],
+        "def/recursive/body": [[1,4]],
         "flow/loop/exit/late": [[3,4]],
         "flow/loop/for/elements": [[3,4]],
         "meta/program": [[1,4]],
@@ -811,7 +811,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/function/builtin/reversed": [[1,1]],
+        "call/function/builtin/reversed": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "var/assignment/single": [[1,1]]
@@ -859,7 +859,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/method/sequence/list/reverse": [[1,1]],
+        "call/method/sequence/list/reverse": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "type/sequence/list": [[1,1]]
@@ -906,11 +906,11 @@
         "whole_span:4": [[1,4]]
       },
       "taxa": {
-        "abstr/argument/arg": [[1,1],[1,1]],
-        "abstr/function": [[1,4]],
-        "abstr/return/something": [[4,4]],
-        "appli/function/builtin/enumerate": [[2,2]],
-        "appli/method/sequence/index": [[4,4]],
+        "def/argument/arg": [[1,1],[1,1]],
+        "def/function": [[1,4]],
+        "def/return/something": [[4,4]],
+        "call/function/builtin/enumerate": [[2,2]],
+        "call/method/sequence/index": [[4,4]],
         "condition/belonging": [[3,3]],
         "flow/conditional/no_else": [[3,4]],
         "flow/loop/exit/early/return": [[2,4]],
@@ -970,7 +970,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/function/builtin/casting/int": [[1,1]],
+        "call/function/builtin/casting/int": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "type/number/integer": [[1,1]],
@@ -996,7 +996,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/method/sequence/string/format": [[1,1]],
+        "call/method/sequence/string/format": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "type/sequence/string": [[1,1]],
@@ -1064,8 +1064,8 @@
         "whole_span:6": [[1,6]]
       },
       "taxa": {
-        "appli/class/constructor": [[2,2],[3,3]],
-        "appli/method": [[5,5],[6,6]],
+        "call/class/constructor": [[2,2],[3,3]],
+        "call/method": [[5,5],[6,6]],
         "library/third_party/Queue": [[1,1]],
         "meta/program": [[1,6]],
         "meta/sloc/6": [[1,6]],
@@ -1169,7 +1169,7 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "appli/method": [[2,2]],
+        "call/method": [[2,2]],
         "library/third_party/numpy": [[1,1]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
@@ -1204,9 +1204,9 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "abstr/argument/arg": [[1,1]],
-        "abstr/function/anonymous": [[1,1]],
-        "appli/function/builtin/sorted": [[1,1]],
+        "def/argument/arg": [[1,1]],
+        "def/function/anonymous": [[1,1]],
+        "call/function/builtin/sorted": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "var/assignment/single": [[1,1]]
@@ -1271,9 +1271,9 @@
         "whole_span:4": [[1,4]]
       },
       "taxa": {
-        "appli/class/constructor": [[2,2]],
-        "appli/function/builtin/range": [[3,3]],
-        "appli/method": [[4,4]],
+        "call/class/constructor": [[2,2]],
+        "call/function/builtin/range": [[3,3]],
+        "call/method": [[4,4]],
         "flow/loop/exit/late": [[3,4]],
         "flow/loop/for/arithmetic/start": [[3,4]],
         "library/standard/multiprocessing/Pool": [[1,1]],
@@ -1322,11 +1322,11 @@
         "whole_span:5": [[1,5]]
       },
       "taxa": {
-        "abstr/argument/arg": [[1,1]],
-        "abstr/function": [[1,5]],
-        "abstr/recursive/body": [[1,5]],
-        "abstr/return/something": [[5,5]],
-        "appli/function": [[5,5]],
+        "def/argument/arg": [[1,1]],
+        "def/function": [[1,5]],
+        "def/recursive/body": [[1,5]],
+        "def/return/something": [[5,5]],
+        "call/function": [[5,5]],
         "condition/equality": [[2,2]],
         "flow/conditional": [[2,5]],
         "flow/conditional/else": [[5,5]],
@@ -1358,9 +1358,9 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "abstr/argument/arg": [[1,1],[1,1]],
-        "abstr/function": [[1,2]],
-        "abstr/return/something": [[2,2]],
+        "def/argument/arg": [[1,1],[1,1]],
+        "def/function": [[1,2]],
+        "def/return/something": [[2,2]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
         "operator/arithmetic/power": [[2,2]]
@@ -1399,7 +1399,7 @@
         "whole_span:7": [[1,7]]
       },
       "taxa": {
-        "appli/method": [[3,3],[7,7]],
+        "call/method": [[3,3],[7,7]],
         "library/standard/threading": [[1,1]],
         "meta/program": [[1,7]],
         "meta/sloc/7": [[1,7]],
@@ -1428,10 +1428,10 @@
         "whole_span:3": [[1,3]]
       },
       "taxa": {
-        "abstr/class": [[1,2]],
-        "appli/class/constructor": [[3,3]],
-        "appli/composition": [[3,3]],
-        "appli/function/builtin/casting/set": [[3,3]],
+        "def/class": [[1,2]],
+        "call/class/constructor": [[3,3]],
+        "call/composition": [[3,3]],
+        "call/function/builtin/casting/set": [[3,3]],
         "flow/null_operation": [[2,2]],
         "meta/program": [[1,3]],
         "meta/sloc/3": [[1,3]],
@@ -1468,12 +1468,12 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "abstr/argument/arg": [[1,1],[1,1],[2,2]],
-        "abstr/function": [[1,2]],
-        "abstr/function/anonymous": [[2,2]],
-        "abstr/higher_order": [[1,2]],
-        "abstr/return/something": [[2,2]],
-        "appli/composition": [[2,2]],
+        "def/argument/arg": [[1,1],[1,1],[2,2]],
+        "def/function": [[1,2]],
+        "def/function/anonymous": [[2,2]],
+        "def/higher_order": [[1,2]],
+        "def/return/something": [[2,2]],
+        "call/composition": [[2,2]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]]
       }
@@ -1507,12 +1507,12 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "abstr/argument/arg": [[1,1],[1,1],[2,2]],
-        "abstr/function": [[1,2]],
-        "abstr/function/anonymous": [[2,2]],
-        "abstr/higher_order": [[1,2]],
-        "abstr/return/something": [[2,2]],
-        "appli/composition": [[2,2]],
+        "def/argument/arg": [[1,1],[1,1],[2,2]],
+        "def/function": [[1,2]],
+        "def/function/anonymous": [[2,2]],
+        "def/higher_order": [[1,2]],
+        "def/return/something": [[2,2]],
+        "call/composition": [[2,2]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]]
       }
@@ -1560,13 +1560,13 @@
         "whole_span:6": [[1,6]]
       },
       "taxa": {
-        "abstr/argument/arg": [[2,2],[3,3]],
-        "abstr/function": [[2,5],[3,4]],
-        "abstr/nested/closure": [[2,5]],
-        "abstr/return/something": [[4,4]],
-        "appli/composition": [[6,6]],
-        "appli/function": [[6,6]],
-        "appli/function/builtin/print": [[6,6]],
+        "def/argument/arg": [[2,2],[3,3]],
+        "def/function": [[2,5],[3,4]],
+        "def/nested/closure": [[2,5]],
+        "def/return/something": [[4,4]],
+        "call/composition": [[6,6]],
+        "call/function": [[6,6]],
+        "call/function/builtin/print": [[6,6]],
         "library/standard/functools/partial": [[1,1]],
         "meta/program": [[1,6]],
         "meta/sloc/6": [[1,6]],
@@ -1703,16 +1703,16 @@
         "whole_span:13": [[1,13]]
       },
       "taxa": {
-        "abstr/argument/arg": [[5,5],[9,9],[9,9]],
-        "abstr/argument/vararg": [[5,5]],
-        "abstr/class": [[2,3],[4,12]],
-        "abstr/method/flavor/instance": [[5,8],[9,12]],
-        "abstr/method/naming/magic/__init__": [[5,8]],
-        "abstr/procedure": [[5,8],[9,12]],
-        "appli/class/constructor": [[13,13]],
-        "appli/function/builtin/zip": [[10,10]],
-        "appli/method": [[8,8]],
-        "appli/method/non_sequence/set/add": [[11,11],[12,12]],
+        "def/argument/arg": [[5,5],[9,9],[9,9]],
+        "def/argument/vararg": [[5,5]],
+        "def/class": [[2,3],[4,12]],
+        "def/method/flavor/instance": [[5,8],[9,12]],
+        "def/method/naming/magic/__init__": [[5,8]],
+        "def/procedure": [[5,8],[9,12]],
+        "call/class/constructor": [[13,13]],
+        "call/function/builtin/zip": [[10,10]],
+        "call/method": [[8,8]],
+        "call/method/non_sequence/set/add": [[11,11],[12,12]],
         "flow/loop/exit/late": [[7,8],[10,12]],
         "flow/loop/for": [[10,12]],
         "flow/loop/for/elements": [[7,8]],
@@ -1762,8 +1762,8 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/method": [[1,1]],
-        "appli/method/sequence/string/encode": [[1,1]],
+        "call/method": [[1,1]],
+        "call/method/sequence/string/encode": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "subscript/slice/step/backwards": [[1,1]],
@@ -1842,8 +1842,8 @@
         "whole_span:8": [[1,8]]
       },
       "taxa": {
-        "appli/exception/builtin/Exception": [[5,5]],
-        "appli/function/builtin/print": [[6,6]],
+        "call/exception/builtin/Exception": [[5,5]],
+        "call/function/builtin/print": [[6,6]],
         "condition/equality": [[4,4]],
         "flow/conditional/no_else": [[4,5]],
         "flow/exception/catch/Exception": [[2,8]],
@@ -1887,7 +1887,7 @@
         "whole_span:5": [[1,5]]
       },
       "taxa": {
-        "appli/function/builtin/print": [[5,5]],
+        "call/function/builtin/print": [[5,5]],
         "condition/equality": [[3,3]],
         "flow/conditional/no_else": [[3,4]],
         "flow/loop/continue": [[4,4]],
@@ -1950,7 +1950,7 @@
         "whole_span:11": [[1,11]]
       },
       "taxa": {
-        "abstr/class": [[1,2]],
+        "def/class": [[1,2]],
         "condition/equality": [[7,7]],
         "flow/conditional/no_else": [[7,9]],
         "flow/exception/catch/": [[3,11]],
@@ -2035,14 +2035,14 @@
         "whole_span:7": [[1,7]]
       },
       "taxa": {
-        "abstr/argument/arg": [[1,1],[1,1]],
-        "abstr/function": [[1,6]],
-        "abstr/return/nothing": [[6,6]],
-        "abstr/return/something": [[5,5]],
-        "appli/composition": [[7,7]],
-        "appli/function": [[7,7]],
-        "appli/function/builtin/enumerate": [[2,2],[3,3]],
-        "appli/function/builtin/print": [[7,7]],
+        "def/argument/arg": [[1,1],[1,1]],
+        "def/function": [[1,6]],
+        "def/return/nothing": [[6,6]],
+        "def/return/something": [[5,5]],
+        "call/composition": [[7,7]],
+        "call/function": [[7,7]],
+        "call/function/builtin/enumerate": [[2,2],[3,3]],
+        "call/function/builtin/print": [[7,7]],
         "condition/equality": [[4,4]],
         "flow/conditional/no_else": [[4,5]],
         "flow/loop/exit/early/return": [[2,5],[3,5]],
@@ -2080,7 +2080,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/method/sequence/list/insert": [[1,1]],
+        "call/method/sequence/list/insert": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "type/sequence/list": [[1,1]]
@@ -2106,8 +2106,8 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "appli/method": [[2,2]],
-        "appli/method/time/sleep": [[2,2]],
+        "call/method": [[2,2]],
+        "call/method/time/sleep": [[2,2]],
         "library/standard/time": [[1,1]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
@@ -2206,7 +2206,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/method/sequence/string/split": [[1,1]],
+        "call/method/sequence/string/split": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "type/sequence/string": [[1,1]],
@@ -2266,7 +2266,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/method/non_sequence/dictionary/values": [[1,1]],
+        "call/method/non_sequence/dictionary/values": [[1,1]],
         "condition/belonging": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
@@ -2293,7 +2293,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/method/sequence/string/join": [[1,1]],
+        "call/method/sequence/string/join": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "type/sequence/string": [[1,1]],
@@ -2326,9 +2326,9 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/composition": [[1,1]],
-        "appli/function/builtin/map": [[1,1]],
-        "appli/method/sequence/string/join": [[1,1]],
+        "call/composition": [[1,1]],
+        "call/function/builtin/map": [[1,1]],
+        "call/method/sequence/string/join": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "type/sequence/string": [[1,1]],
@@ -2353,7 +2353,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/function/builtin/sum": [[1,1]],
+        "call/function/builtin/sum": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "var/assignment/single": [[1,1]]
@@ -2376,7 +2376,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/function/builtin/casting/str": [[1,1]],
+        "call/function/builtin/casting/str": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "type/sequence/string": [[1,1]],
@@ -2429,12 +2429,12 @@
         "whole_span:6": [[1,6]]
       },
       "taxa": {
-        "abstr/argument/arg": [[2,2]],
-        "abstr/procedure": [[2,3]],
-        "appli/class/constructor": [[4,4]],
-        "appli/function/builtin/print": [[6,6]],
-        "appli/function/builtin/range": [[5,5]],
-        "appli/method": [[5,5]],
+        "def/argument/arg": [[2,2]],
+        "def/procedure": [[2,3]],
+        "call/class/constructor": [[4,4]],
+        "call/function/builtin/print": [[6,6]],
+        "call/function/builtin/range": [[5,5]],
+        "call/method": [[5,5]],
         "library/standard/multiprocessing/Pool": [[1,1]],
         "meta/program": [[1,6]],
         "meta/sloc/6": [[1,6]],
@@ -2462,7 +2462,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/function/builtin/filter": [[1,1]],
+        "call/function/builtin/filter": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "var/assignment/single": [[1,1]]
@@ -2514,8 +2514,8 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/function/builtin/open": [[1,1]],
-        "appli/method": [[1,1]],
+        "call/function/builtin/open": [[1,1]],
+        "call/method": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "var/assignment/single": [[1,1]]
@@ -2542,7 +2542,7 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "appli/function/builtin/print": [[2,2]],
+        "call/function/builtin/print": [[2,2]],
         "library/standard/sys": [[1,1]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
@@ -2598,7 +2598,7 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "appli/method": [[2,2]],
+        "call/method": [[2,2]],
         "library/standard/datetime": [[1,1]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
@@ -2623,7 +2623,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/method/sequence/string/find": [[1,1]],
+        "call/method/sequence/string/find": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "type/sequence/string": [[1,1]],
@@ -2650,7 +2650,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/method/sequence/string/replace": [[1,1]],
+        "call/method/sequence/string/replace": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "type/sequence/string": [[1,1]],
@@ -2702,7 +2702,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/method/sequence/string/format": [[1,1]],
+        "call/method/sequence/string/format": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "type/sequence/string": [[1,1]],
@@ -2761,10 +2761,10 @@
         "whole_span:3": [[1,3]]
       },
       "taxa": {
-        "abstr/argument/arg": [[2,2],[2,2]],
-        "abstr/function": [[2,3]],
-        "abstr/return/something": [[3,3]],
-        "appli/method": [[3,3],[3,3],[3,3]],
+        "def/argument/arg": [[2,2],[2,2]],
+        "def/function": [[2,3]],
+        "def/return/something": [[3,3]],
+        "call/method": [[3,3],[3,3],[3,3]],
         "library/standard/math": [[1,1]],
         "meta/program": [[1,3]],
         "meta/sloc/3": [[1,3]],
@@ -2807,10 +2807,10 @@
         "whole_span:3": [[1,3]]
       },
       "taxa": {
-        "appli/composition": [[3,3],[3,3]],
-        "appli/function/builtin/casting/bytearray": [[3,3]],
-        "appli/function/builtin/casting/int": [[3,3]],
-        "appli/method": [[3,3]],
+        "call/composition": [[3,3],[3,3]],
+        "call/function/builtin/casting/bytearray": [[3,3]],
+        "call/function/builtin/casting/int": [[3,3]],
+        "call/method": [[3,3]],
         "library/standard/__future__/division": [[1,1]],
         "library/standard/math": [[2,2]],
         "meta/program": [[1,3]],
@@ -2902,9 +2902,9 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "appli/composition": [[2,2]],
-        "appli/function/builtin/print": [[2,2]],
-        "appli/method/sequence/string/join": [[2,2]],
+        "call/composition": [[2,2]],
+        "call/function/builtin/print": [[2,2]],
+        "call/method/sequence/string/join": [[2,2]],
         "library/standard/sys": [[1,1]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
@@ -2947,11 +2947,11 @@
         "whole_span:3": [[1,3]]
       },
       "taxa": {
-        "abstr/argument/arg": [[1,1],[1,1]],
-        "abstr/function": [[1,3]],
-        "abstr/higher_order": [[1,3]],
-        "abstr/return/something": [[3,3]],
-        "appli/function/builtin/issubclass": [[2,2]],
+        "def/argument/arg": [[1,1],[1,1]],
+        "def/function": [[1,3]],
+        "def/higher_order": [[1,3]],
+        "def/return/something": [[3,3]],
+        "call/function/builtin/issubclass": [[2,2]],
         "flow/conditional/no_else": [[2,3]],
         "meta/program": [[1,3]],
         "meta/sloc/3": [[1,3]]
@@ -3040,7 +3040,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/method/sequence/string/format": [[1,1]],
+        "call/method/sequence/string/format": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "type/sequence/string": [[1,1]],
@@ -3113,7 +3113,7 @@
         "whole_span:4": [[1,4]]
       },
       "taxa": {
-        "appli/function/without_arguments": [[2,2]],
+        "call/function/without_arguments": [[2,2]],
         "flow/conditional/no_else": [[3,4]],
         "flow/loop/exit/early/break": [[1,4]],
         "flow/loop/while/infinite": [[1,4]],
@@ -3140,7 +3140,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/function/builtin/casting/float": [[1,1]],
+        "call/function/builtin/casting/float": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "type/number/floating_point": [[1,1]],
@@ -3164,7 +3164,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/function/builtin/casting/int": [[1,1]],
+        "call/function/builtin/casting/int": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "type/number/integer": [[1,1]],
@@ -3194,7 +3194,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/function/builtin/casting/int": [[1,1]],
+        "call/function/builtin/casting/int": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "operator/arithmetic/addition": [[1,1]],
@@ -3221,7 +3221,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/method/sequence/count": [[1,1]],
+        "call/method/sequence/count": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "type/sequence": [[1,1]],
@@ -3250,7 +3250,7 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "appli/method": [[2,2]],
+        "call/method": [[2,2]],
         "library/standard/re": [[1,1]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
@@ -3280,8 +3280,8 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/function/builtin/bin": [[1,1]],
-        "appli/method/sequence/count": [[1,1]],
+        "call/function/builtin/bin": [[1,1]],
+        "call/method/sequence/count": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "type/sequence": [[1,1]],
@@ -3307,8 +3307,8 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "abstr/argument/arg": [[1,1],[1,1]],
-        "abstr/function": [[1,2]],
+        "def/argument/arg": [[1,1],[1,1]],
+        "def/function": [[1,2]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
         "type/boolean/literal/False": [[2,2]]
@@ -3332,8 +3332,8 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "abstr/argument/arg": [[1,1],[1,1]],
-        "abstr/function": [[1,2]],
+        "def/argument/arg": [[1,1],[1,1]],
+        "def/function": [[1,2]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
         "type/boolean/literal/False": [[2,2]]
@@ -3359,8 +3359,8 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "appli/method": [[2,2]],
-        "appli/method/sys/exit": [[2,2]],
+        "call/method": [[2,2]],
+        "call/method/sys/exit": [[2,2]],
         "library/standard/sys": [[1,1]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
@@ -3386,7 +3386,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/function/builtin/casting/bytearray": [[1,1]],
+        "call/function/builtin/casting/bytearray": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "type/number/integer/literal": [[1,1]],
@@ -3409,7 +3409,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/exception/builtin/ValueError": [[1,1]],
+        "call/exception/builtin/ValueError": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "type/sequence/string/literal": [[1,1]]
@@ -3447,14 +3447,14 @@
         "whole_span:6": [[1,6]]
       },
       "taxa": {
-        "abstr/argument/arg": [[2,2],[5,5]],
-        "abstr/class": [[1,6]],
-        "abstr/decorated": [[4,6]],
-        "abstr/function": [[4,6]],
-        "abstr/method/flavor/instance": [[2,3],[4,6]],
-        "abstr/method/naming/magic/__init__": [[2,3]],
-        "abstr/procedure": [[2,3]],
-        "abstr/return/something": [[6,6]],
+        "def/argument/arg": [[2,2],[5,5]],
+        "def/class": [[1,6]],
+        "def/decorated": [[4,6]],
+        "def/function": [[4,6]],
+        "def/method/flavor/instance": [[2,3],[4,6]],
+        "def/method/naming/magic/__init__": [[2,3]],
+        "def/procedure": [[2,3]],
+        "def/return/something": [[6,6]],
         "meta/program": [[1,6]],
         "meta/sloc/6": [[1,6]],
         "type/number/integer/literal/zero": [[3,3]],
@@ -3488,8 +3488,8 @@
         "whole_span:3": [[1,3]]
       },
       "taxa": {
-        "appli/function/builtin/open": [[2,2]],
-        "appli/method": [[3,3]],
+        "call/function/builtin/open": [[2,2]],
+        "call/method": [[3,3]],
         "library/standard/json": [[1,1]],
         "meta/program": [[1,3]],
         "meta/sloc/3": [[1,3]],
@@ -3522,9 +3522,9 @@
         "whole_span:3": [[1,3]]
       },
       "taxa": {
-        "appli/function/builtin/open": [[2,2]],
-        "appli/method": [[3,3]],
-        "appli/method/json/dump": [[3,3]],
+        "call/function/builtin/open": [[2,2]],
+        "call/method": [[3,3]],
+        "call/method/json/dump": [[3,3]],
         "library/standard/json": [[1,1]],
         "meta/program": [[1,3]],
         "meta/sloc/3": [[1,3]],
@@ -3557,11 +3557,11 @@
         "whole_span:3": [[1,3]]
       },
       "taxa": {
-        "abstr/argument/arg": [[2,2]],
-        "abstr/function": [[2,3]],
-        "abstr/higher_order": [[2,3]],
-        "abstr/return/something": [[3,3]],
-        "appli/function/without_arguments": [[3,3]],
+        "def/argument/arg": [[2,2]],
+        "def/function": [[2,3]],
+        "def/higher_order": [[2,3]],
+        "def/return/something": [[3,3]],
+        "call/function/without_arguments": [[3,3]],
         "library/standard/__future__/print_function": [[1,1]],
         "meta/program": [[1,3]],
         "meta/sloc/3": [[1,3]]
@@ -3585,9 +3585,9 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/composition": [[1,1]],
-        "appli/function/builtin/print": [[1,1]],
-        "appli/function/builtin/type": [[1,1]],
+        "call/composition": [[1,1]],
+        "call/function/builtin/print": [[1,1]],
+        "call/function/builtin/type": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]]
       }
@@ -3607,7 +3607,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/function/builtin/print": [[1,1]],
+        "call/function/builtin/print": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]]
       }
@@ -3633,7 +3633,7 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "appli/method": [[2,2]],
+        "call/method": [[2,2]],
         "library/standard/os": [[1,1]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
@@ -3658,7 +3658,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/method/sequence/string/startswith": [[1,1]],
+        "call/method/sequence/string/startswith": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "type/sequence/string": [[1,1]],
@@ -3683,7 +3683,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/method/sequence/string/endswith": [[1,1]],
+        "call/method/sequence/string/endswith": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "type/sequence/string": [[1,1]],
@@ -3711,7 +3711,7 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "appli/method": [[2,2]],
+        "call/method": [[2,2]],
         "library/standard/datetime": [[1,1]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
@@ -3756,7 +3756,7 @@
         "whole_span:3": [[1,3]]
       },
       "taxa": {
-        "appli/method": [[3,3]],
+        "call/method": [[3,3]],
         "library/standard/datetime/date": [[1,1]],
         "meta/program": [[1,3]],
         "meta/sloc/3": [[1,3]],
@@ -3790,7 +3790,7 @@
         "whole_span:3": [[1,3]]
       },
       "taxa": {
-        "appli/method": [[2,2],[3,3]],
+        "call/method": [[2,2],[3,3]],
         "library/standard/datetime/date": [[1,1]],
         "meta/program": [[1,3]],
         "meta/sloc/3": [[1,3]],
@@ -3812,7 +3812,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/method/sequence/list/sort": [[1,1]],
+        "call/method/sequence/list/sort": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "type/sequence/list": [[1,1]]
@@ -3840,7 +3840,7 @@
         "whole_span:3": [[1,3]]
       },
       "taxa": {
-        "appli/method": [[2,2],[3,3]],
+        "call/method": [[2,2],[3,3]],
         "library/standard/urllib.request": [[1,1]],
         "meta/program": [[1,3]],
         "meta/sloc/3": [[1,3]],
@@ -3874,7 +3874,7 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "appli/method": [[2,2]],
+        "call/method": [[2,2]],
         "library/standard/urllib": [[1,1]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
@@ -3905,7 +3905,7 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "appli/method": [[2,2]],
+        "call/method": [[2,2]],
         "library/third_party/lxml.etree": [[1,1]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
@@ -3973,14 +3973,14 @@
         "whole_span:12": [[1,12]]
       },
       "taxa": {
-        "abstr/argument/arg": [[6,6],[6,6],[6,6],[6,6]],
-        "abstr/class": [[2,9]],
-        "abstr/method/flavor/instance": [[6,9]],
-        "abstr/method/naming/magic/__init__": [[6,9]],
-        "abstr/procedure": [[6,9]],
-        "appli/class/constructor": [[10,10]],
-        "appli/function/builtin/print": [[12,12]],
-        "appli/method": [[11,11]],
+        "def/argument/arg": [[6,6],[6,6],[6,6],[6,6]],
+        "def/class": [[2,9]],
+        "def/method/flavor/instance": [[6,9]],
+        "def/method/naming/magic/__init__": [[6,9]],
+        "def/procedure": [[6,9]],
+        "call/class/constructor": [[10,10]],
+        "call/function/builtin/print": [[12,12]],
+        "call/method": [[11,11]],
         "library/third_party/pyxser": [[1,1]],
         "meta/program": [[1,12]],
         "meta/sloc/12": [[1,12]],
@@ -4039,7 +4039,7 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "appli/method": [[2,2]],
+        "call/method": [[2,2]],
         "library/standard/os": [[1,1]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
@@ -4070,8 +4070,8 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "appli/composition": [[2,2]],
-        "appli/method": [[2,2],[2,2]],
+        "call/composition": [[2,2]],
+        "call/method": [[2,2],[2,2]],
         "library/standard/os": [[1,1]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
@@ -4104,9 +4104,9 @@
         "yoda_comparison:In": [[1,1]]
       },
       "taxa": {
-        "appli/function/builtin/locals": [[1,1]],
-        "appli/function/builtin/print": [[2,2]],
-        "appli/function/without_arguments": [[1,1]],
+        "call/function/builtin/locals": [[1,1]],
+        "call/function/builtin/print": [[2,2]],
+        "call/function/without_arguments": [[1,1]],
         "condition/belonging": [[1,1]],
         "flow/conditional/no_else": [[1,2]],
         "meta/program": [[1,2]],
@@ -4136,7 +4136,7 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "appli/method": [[2,2]],
+        "call/method": [[2,2]],
         "library/third_party/pympler.asizeof": [[1,1]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
@@ -4164,7 +4164,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/method/sequence/string/strip": [[1,1]],
+        "call/method/sequence/string/strip": [[1,1]],
         "condition/equality": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
@@ -4196,8 +4196,8 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "appli/method": [[2,2]],
-        "appli/method/subprocess/call": [[2,2]],
+        "call/method": [[2,2]],
+        "call/method/subprocess/call": [[2,2]],
         "library/standard/subprocess": [[1,1]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
@@ -4228,8 +4228,8 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "appli/function/builtin/print": [[2,2]],
-        "appli/function/builtin/sorted": [[1,1]],
+        "call/function/builtin/print": [[2,2]],
+        "call/function/builtin/sorted": [[1,1]],
         "flow/loop/exit/late": [[1,2]],
         "flow/loop/for": [[1,2]],
         "meta/program": [[1,2]],
@@ -4268,10 +4268,10 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "appli/composition": [[1,1]],
-        "appli/function/builtin/print": [[2,2]],
-        "appli/function/builtin/sorted": [[1,1]],
-        "appli/method/non_sequence/dictionary/items": [[1,1]],
+        "call/composition": [[1,1]],
+        "call/function/builtin/print": [[2,2]],
+        "call/function/builtin/sorted": [[1,1]],
+        "call/method/non_sequence/dictionary/items": [[1,1]],
         "flow/loop/exit/late": [[1,2]],
         "flow/loop/for": [[1,2]],
         "meta/program": [[1,2]],
@@ -4352,7 +4352,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/method/sequence/string/replace": [[1,1]],
+        "call/method/sequence/string/replace": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "type/sequence/string": [[1,1]],
@@ -4377,7 +4377,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/function/builtin/len": [[1,1]],
+        "call/function/builtin/len": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "var/assignment/single": [[1,1]]
@@ -4400,7 +4400,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/function/builtin/casting/set": [[1,1]],
+        "call/function/builtin/casting/set": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "type/non_sequence/set": [[1,1]],
@@ -4421,7 +4421,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/function/builtin/casting/set": [[1,1]],
+        "call/function/builtin/casting/set": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "type/non_sequence/set": [[1,1]]
@@ -4448,9 +4448,9 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/composition": [[1,1]],
-        "appli/function/builtin/casting/list": [[1,1]],
-        "appli/function/builtin/casting/set": [[1,1]],
+        "call/composition": [[1,1]],
+        "call/function/builtin/casting/list": [[1,1]],
+        "call/function/builtin/casting/set": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "type/non_sequence/set": [[1,1]],
@@ -4522,11 +4522,11 @@
         "whole_span:8": [[1,8]]
       },
       "taxa": {
-        "appli/function/builtin/casting/set": [[2,2]],
-        "appli/function/builtin/print": [[8,8]],
-        "appli/function/without_arguments": [[2,2]],
-        "appli/method/non_sequence/set/add": [[6,6]],
-        "appli/method/sequence/list/append": [[7,7]],
+        "call/function/builtin/casting/set": [[2,2]],
+        "call/function/builtin/print": [[8,8]],
+        "call/function/without_arguments": [[2,2]],
+        "call/method/non_sequence/set/add": [[6,6]],
+        "call/method/sequence/list/append": [[7,7]],
         "condition/belonging/not": [[5,5]],
         "flow/conditional/no_else": [[5,7]],
         "flow/loop/exit/late": [[4,7]],
@@ -4565,8 +4565,8 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/composition": [[1,1]],
-        "appli/function/builtin/casting/int": [[1,1]],
+        "call/composition": [[1,1]],
+        "call/function/builtin/casting/int": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "type/number/integer": [[1,1]],
@@ -4626,8 +4626,8 @@
         "whole_span:7": [[1,7]]
       },
       "taxa": {
-        "appli/function/builtin/print": [[7,7]],
-        "appli/method": [[3,3],[4,4],[6,6]],
+        "call/function/builtin/print": [[7,7]],
+        "call/method": [[3,3],[4,4],[6,6]],
         "flow/loop/exit/late": [[5,7]],
         "flow/loop/while/infinite": [[5,7]],
         "library/standard/socket": [[1,1]],
@@ -4669,8 +4669,8 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "abstr/class": [[1,2]],
-        "appli/function/builtin/range": [[2,2]],
+        "def/class": [[1,2]],
+        "call/function/builtin/range": [[2,2]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
         "type/number/integer/literal": [[2,2]],
@@ -4715,7 +4715,7 @@
         "whole_span:6": [[1,6]]
       },
       "taxa": {
-        "abstr/class": [[2,6]],
+        "def/class": [[2,6]],
         "library/standard/enum/Enum": [[1,1]],
         "meta/program": [[1,6]],
         "meta/sloc/6": [[1,6]],
@@ -4782,11 +4782,11 @@
         "whole_span:4": [[1,4]]
       },
       "taxa": {
-        "abstr/argument/arg": [[2,2],[2,2]],
-        "abstr/function": [[2,4]],
-        "abstr/return/something": [[4,4]],
-        "appli/function/builtin/len": [[4,4]],
-        "appli/method": [[3,3]],
+        "def/argument/arg": [[2,2],[2,2]],
+        "def/function": [[2,4]],
+        "def/return/something": [[4,4]],
+        "call/function/builtin/len": [[4,4]],
+        "call/method": [[3,3]],
         "condition/equality": [[4,4]],
         "condition/equality/not": [[4,4]],
         "library/standard/bisect": [[1,1]],
@@ -4834,9 +4834,9 @@
         "whole_span:5": [[1,5]]
       },
       "taxa": {
-        "appli/function/builtin/print": [[5,5]],
-        "appli/function/without_arguments": [[3,3]],
-        "appli/method": [[2,2],[4,4]],
+        "call/function/builtin/print": [[5,5]],
+        "call/function/without_arguments": [[3,3]],
+        "call/method": [[2,2],[4,4]],
         "library/standard/time": [[1,1]],
         "meta/program": [[1,5]],
         "meta/sloc/5": [[1,5]],
@@ -4864,9 +4864,9 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "abstr/argument/no": [[1,2]],
-        "abstr/function": [[1,2]],
-        "abstr/return/something": [[2,2]],
+        "def/argument/no": [[1,2]],
+        "def/function": [[1,2]],
+        "def/return/something": [[2,2]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
         "type/boolean/literal/True": [[2,2]],
@@ -4898,8 +4898,8 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "appli/method": [[2,2]],
-        "appli/method/imp/load_module": [[2,2]],
+        "call/method": [[2,2]],
+        "call/method/imp/load_module": [[2,2]],
         "library/standard/imp": [[1,1]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
@@ -4972,11 +4972,11 @@
         "whole_span:9": [[1,9]]
       },
       "taxa": {
-        "abstr/argument/arg": [[1,1],[1,1]],
-        "abstr/higher_order": [[1,9]],
-        "abstr/procedure": [[1,9]],
-        "appli/method": [[4,4]],
-        "appli/method/sequence/list/append": [[9,9]],
+        "def/argument/arg": [[1,1],[1,1]],
+        "def/higher_order": [[1,9]],
+        "def/procedure": [[1,9]],
+        "call/method": [[4,4]],
+        "call/method/sequence/list/append": [[9,9]],
         "flow/conditional/no_else": [[7,9]],
         "flow/loop/exit/late": [[3,9],[6,9]],
         "flow/loop/for/elements": [[6,9]],
@@ -5060,14 +5060,14 @@
         "whole_span:9": [[1,9]]
       },
       "taxa": {
-        "abstr/argument/arg": [[2,2],[2,2]],
-        "abstr/higher_order": [[2,9]],
-        "abstr/procedure": [[2,9]],
-        "appli/function/builtin/casting/set": [[3,3]],
-        "appli/function/without_arguments": [[3,3]],
-        "appli/method": [[6,6]],
-        "appli/method/non_sequence/set/add": [[8,8]],
-        "appli/method/sequence/list/extend": [[9,9]],
+        "def/argument/arg": [[2,2],[2,2]],
+        "def/higher_order": [[2,9]],
+        "def/procedure": [[2,9]],
+        "call/function/builtin/casting/set": [[3,3]],
+        "call/function/without_arguments": [[3,3]],
+        "call/method": [[6,6]],
+        "call/method/non_sequence/set/add": [[8,8]],
+        "call/method/sequence/list/extend": [[9,9]],
         "condition/belonging/not": [[9,9]],
         "flow/loop/exit/late": [[5,9]],
         "flow/loop/while": [[5,9]],
@@ -5142,14 +5142,14 @@
         "whole_span:8": [[1,8]]
       },
       "taxa": {
-        "abstr/argument/arg": [[1,1],[1,1]],
-        "abstr/higher_order": [[1,8]],
-        "abstr/procedure": [[1,8]],
-        "appli/function/builtin/casting/set": [[2,2]],
-        "appli/function/without_arguments": [[2,2]],
-        "appli/method": [[5,5]],
-        "appli/method/non_sequence/set/add": [[7,7]],
-        "appli/method/sequence/list/extend": [[8,8]],
+        "def/argument/arg": [[1,1],[1,1]],
+        "def/higher_order": [[1,8]],
+        "def/procedure": [[1,8]],
+        "call/function/builtin/casting/set": [[2,2]],
+        "call/function/without_arguments": [[2,2]],
+        "call/method": [[5,5]],
+        "call/method/non_sequence/set/add": [[7,7]],
+        "call/method/sequence/list/extend": [[8,8]],
         "condition/belonging/not": [[8,8]],
         "flow/loop/exit/late": [[4,8]],
         "flow/loop/while": [[4,8]],
@@ -5206,7 +5206,7 @@
         "whole_span:6": [[1,6]]
       },
       "taxa": {
-        "appli/function/without_arguments": [[2,2],[4,4],[6,6]],
+        "call/function/without_arguments": [[2,2],[4,4],[6,6]],
         "flow/conditional": [[1,6],[3,6],[5,6]],
         "flow/conditional/else/if": [[4,4],[6,6]],
         "meta/program": [[1,6]],
@@ -5235,7 +5235,7 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "appli/method": [[2,2]],
+        "call/method": [[2,2]],
         "library/standard/timeit": [[1,1]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
@@ -5262,7 +5262,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/method/sequence/string/lower": [[1,1],[1,1]],
+        "call/method/sequence/string/lower": [[1,1],[1,1]],
         "condition/belonging": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
@@ -5313,7 +5313,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/method": [[1,1]],
+        "call/method": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]]
       }
@@ -5362,7 +5362,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/method/sequence/string/isdigit": [[1,1]],
+        "call/method/sequence/string/isdigit": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "type/sequence/string": [[1,1]],
@@ -5443,7 +5443,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/method": [[1,1]],
+        "call/method": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "type/null/literal": [[1,1]]
@@ -5470,7 +5470,7 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "appli/function/builtin/print": [[2,2]],
+        "call/function/builtin/print": [[2,2]],
         "flow/loop/exit/late": [[1,2]],
         "flow/loop/for": [[1,2]],
         "meta/program": [[1,2]],
@@ -5495,7 +5495,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/function/builtin/hex": [[1,1]],
+        "call/function/builtin/hex": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "var/assignment/single": [[1,1]]
@@ -5523,8 +5523,8 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "appli/function/builtin/print": [[2,2]],
-        "appli/function/builtin/zip": [[1,1]],
+        "call/function/builtin/print": [[2,2]],
+        "call/function/builtin/zip": [[1,1]],
         "flow/loop/exit/late": [[1,2]],
         "flow/loop/for": [[1,2]],
         "meta/program": [[1,2]],
@@ -5552,7 +5552,7 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "appli/method": [[2,2]],
+        "call/method": [[2,2]],
         "library/standard/os": [[1,1]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
@@ -5582,8 +5582,8 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "appli/class/constructor": [[2,2]],
-        "appli/method": [[2,2]],
+        "call/class/constructor": [[2,2]],
+        "call/method": [[2,2]],
         "library/standard/pathlib/Path": [[1,1]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
@@ -5622,8 +5622,8 @@
         "whole_span:6": [[1,6]]
       },
       "taxa": {
-        "appli/method": [[2,2],[5,5],[6,6]],
-        "appli/method/logging/basicConfig": [[2,2]],
+        "call/method": [[2,2],[5,5],[6,6]],
+        "call/method/logging/basicConfig": [[2,2]],
         "library/standard/logging": [[1,1]],
         "library/standard/sys": [[1,1]],
         "meta/program": [[1,6]],
@@ -5663,8 +5663,8 @@
         "whole_span:4": [[1,4]]
       },
       "taxa": {
-        "appli/method": [[3,3],[4,4]],
-        "appli/method/locale/setlocale": [[3,3]],
+        "call/method": [[3,3],[4,4]],
+        "call/method/locale/setlocale": [[3,3]],
         "library/standard/locale": [[1,1]],
         "meta/program": [[1,4]],
         "meta/sloc/4": [[1,4]],
@@ -5689,7 +5689,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/function/builtin/casting/float": [[1,1]],
+        "call/function/builtin/casting/float": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "type/number/floating_point": [[1,1]],
@@ -5712,7 +5712,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/function/builtin/casting/float": [[1,1]],
+        "call/function/builtin/casting/float": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "type/number/floating_point": [[1,1]],
@@ -5744,7 +5744,7 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "appli/method": [[2,2]],
+        "call/method": [[2,2]],
         "library/standard/re": [[1,1]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
@@ -5776,12 +5776,12 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/composition": [[1,1],[1,1]],
-        "appli/function/builtin/casting/list": [[1,1]],
-        "appli/function/builtin/input": [[1,1]],
-        "appli/function/builtin/map": [[1,1]],
-        "appli/function/without_arguments": [[1,1]],
-        "appli/method/sequence/string/split": [[1,1]],
+        "call/composition": [[1,1],[1,1]],
+        "call/function/builtin/casting/list": [[1,1]],
+        "call/function/builtin/input": [[1,1]],
+        "call/function/builtin/map": [[1,1]],
+        "call/function/without_arguments": [[1,1]],
+        "call/method/sequence/string/split": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "type/sequence/list": [[1,1]],
@@ -5807,7 +5807,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/method/sequence/string/rstrip": [[1,1]],
+        "call/method/sequence/string/rstrip": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "type/sequence/string": [[1,1]],
@@ -5853,7 +5853,7 @@
         "whole_span:3": [[1,3]]
       },
       "taxa": {
-        "appli/method/sequence/string/endswith": [[2,2]],
+        "call/method/sequence/string/endswith": [[2,2]],
         "flow/conditional/no_else": [[2,3]],
         "library/standard/os": [[1,1]],
         "meta/program": [[1,3]],
@@ -5903,7 +5903,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/method/sequence/string/format": [[1,1]],
+        "call/method/sequence/string/format": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "type/sequence/string": [[1,1]],
@@ -5978,9 +5978,9 @@
         "whole_span:3": [[1,3]]
       },
       "taxa": {
-        "appli/function/builtin/casting/int": [[1,1],[2,2]],
-        "appli/function/builtin/range": [[1,1],[2,2]],
-        "appli/method/sequence/string/format": [[3,3]],
+        "call/function/builtin/casting/int": [[1,1],[2,2]],
+        "call/function/builtin/range": [[1,1],[2,2]],
+        "call/method/sequence/string/format": [[3,3]],
         "meta/program": [[1,3]],
         "meta/sloc/3": [[1,3]],
         "operator/arithmetic/addition": [[1,1],[2,2],[3,3],[3,3],[3,3]],
@@ -6099,23 +6099,23 @@
         "whole_span:15": [[1,15]]
       },
       "taxa": {
-        "abstr/argument/arg": [[4,4],[4,4],[8,8]],
-        "abstr/class": [[2,10]],
-        "abstr/decorated": [[3,7]],
-        "abstr/function": [[3,7],[8,10]],
-        "abstr/method/flavor/class": [[3,7]],
-        "abstr/method/flavor/instance": [[8,10]],
-        "abstr/method/naming/magic/__str__": [[8,10]],
-        "abstr/return/something": [[5,7],[10,10]],
-        "appli/composition": [[5,5],[6,6],[10,10]],
-        "appli/function/builtin/casting/int": [[6,6]],
-        "appli/function/builtin/format": [[10,10]],
-        "appli/function/builtin/len": [[6,6]],
-        "appli/function/builtin/print": [[12,12],[14,14],[15,15]],
-        "appli/function/builtin/range": [[6,6]],
-        "appli/method": [[5,5],[9,9],[11,11],[13,13]],
-        "appli/method/chaining": [[5,5]],
-        "appli/method/sequence/string/join": [[10,10]],
+        "def/argument/arg": [[4,4],[4,4],[8,8]],
+        "def/class": [[2,10]],
+        "def/decorated": [[3,7]],
+        "def/function": [[3,7],[8,10]],
+        "def/method/flavor/class": [[3,7]],
+        "def/method/flavor/instance": [[8,10]],
+        "def/method/naming/magic/__str__": [[8,10]],
+        "def/return/something": [[5,7],[10,10]],
+        "call/composition": [[5,5],[6,6],[10,10]],
+        "call/function/builtin/casting/int": [[6,6]],
+        "call/function/builtin/format": [[10,10]],
+        "call/function/builtin/len": [[6,6]],
+        "call/function/builtin/print": [[12,12],[14,14],[15,15]],
+        "call/function/builtin/range": [[6,6]],
+        "call/method": [[5,5],[9,9],[11,11],[13,13]],
+        "call/method/chaining": [[5,5]],
+        "call/method/sequence/string/join": [[10,10]],
         "library/third_party/numpy": [[1,1]],
         "meta/program": [[1,15]],
         "meta/sloc/15": [[1,15]],
@@ -6157,7 +6157,7 @@
         "whole_span:3": [[1,3]]
       },
       "taxa": {
-        "appli/method": [[3,3]],
+        "call/method": [[3,3]],
         "library/standard/pathlib": [[1,1]],
         "meta/program": [[1,3]],
         "meta/sloc/3": [[1,3]],
@@ -6184,7 +6184,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/function/builtin/format": [[1,1]],
+        "call/function/builtin/format": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "type/sequence/string/literal": [[1,1]],
@@ -6235,7 +6235,7 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "appli/method": [[2,2]],
+        "call/method": [[2,2]],
         "library/standard/random": [[1,1]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
@@ -6272,11 +6272,11 @@
         "whole_span:5": [[1,5]]
       },
       "taxa": {
-        "abstr/argument/arg": [[2,2],[2,2],[2,2]],
-        "abstr/class": [[1,5]],
-        "abstr/method/flavor/instance": [[2,5]],
-        "abstr/method/naming/magic/__init__": [[2,5]],
-        "abstr/procedure": [[2,5]],
+        "def/argument/arg": [[2,2],[2,2],[2,2]],
+        "def/class": [[1,5]],
+        "def/method/flavor/instance": [[2,5]],
+        "def/method/naming/magic/__init__": [[2,5]],
+        "def/procedure": [[2,5]],
         "meta/program": [[1,5]],
         "meta/sloc/5": [[1,5]],
         "type/null/literal": [[2,2]],
@@ -6320,7 +6320,7 @@
         "whole_span:5": [[1,5]]
       },
       "taxa": {
-        "appli/function/without_arguments": [[3,3],[5,5]],
+        "call/function/without_arguments": [[3,3],[5,5]],
         "condition/inequality": [[2,2]],
         "flow/conditional": [[2,5]],
         "flow/conditional/else": [[5,5]],
@@ -6405,7 +6405,7 @@
         "yoda_comparison:In": [[2,2],[4,4]]
       },
       "taxa": {
-        "appli/function/without_arguments": [[3,3],[5,5]],
+        "call/function/without_arguments": [[3,3],[5,5]],
         "condition/belonging": [[2,2],[4,4]],
         "flow/conditional/no_else": [[2,3],[4,5]],
         "library/standard/sys": [[1,1]],
@@ -6448,8 +6448,8 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "appli/function/builtin/print": [[2,2]],
-        "appli/function/builtin/zip": [[1,1]],
+        "call/function/builtin/print": [[2,2]],
+        "call/function/builtin/zip": [[1,1]],
         "flow/loop/exit/late": [[1,2]],
         "flow/loop/for": [[1,2]],
         "meta/program": [[1,2]],
@@ -6514,13 +6514,13 @@
         "whole_span:7": [[1,7]]
       },
       "taxa": {
-        "abstr/argument/arg": [[2,2]],
-        "abstr/function": [[2,5]],
-        "abstr/return/something": [[5,5]],
-        "appli/function": [[6,6]],
-        "appli/function/builtin/next": [[4,4]],
-        "appli/function/builtin/print": [[7,7]],
-        "appli/function/builtin/zip": [[5,5]],
+        "def/argument/arg": [[2,2]],
+        "def/function": [[2,5]],
+        "def/return/something": [[5,5]],
+        "call/function": [[6,6]],
+        "call/function/builtin/next": [[4,4]],
+        "call/function/builtin/print": [[7,7]],
+        "call/function/builtin/zip": [[5,5]],
         "flow/loop/exit/late": [[6,7]],
         "flow/loop/for": [[6,7]],
         "library/standard/itertools/tee": [[1,1]],
@@ -6549,8 +6549,8 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "appli/method": [[2,2]],
-        "appli/method/webbrowser/open": [[2,2]],
+        "call/method": [[2,2]],
+        "call/method/webbrowser/open": [[2,2]],
         "library/standard/webbrowser": [[1,1]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]]
@@ -6633,8 +6633,8 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/function/builtin/len": [[1,1]],
-        "appli/method/sequence/string/startswith": [[1,1]],
+        "call/function/builtin/len": [[1,1]],
+        "call/method/sequence/string/startswith": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "operator/boolean/and": [[1,1]],
@@ -6661,7 +6661,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/method/sequence/string/lstrip": [[1,1]],
+        "call/method/sequence/string/lstrip": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "type/sequence/string": [[1,1]],
@@ -6696,7 +6696,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/method/sequence/string/rsplit": [[1,1]],
+        "call/method/sequence/string/rsplit": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "subscript/index": [[1,1]],
@@ -6724,7 +6724,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/method/sequence/string/rstrip": [[1,1]],
+        "call/method/sequence/string/rstrip": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "type/sequence/string": [[1,1]],
@@ -6748,7 +6748,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/function/builtin/len": [[1,1]],
+        "call/function/builtin/len": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "var/assignment/single": [[1,1]]
@@ -6771,7 +6771,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/function/builtin/len": [[1,1]],
+        "call/function/builtin/len": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "var/assignment/single": [[1,1]]
@@ -6796,7 +6796,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/method/sequence/list/append": [[1,1]],
+        "call/method/sequence/list/append": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "type/sequence/list": [[1,1]]
@@ -6838,7 +6838,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/function/builtin/print": [[1,1]],
+        "call/function/builtin/print": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "type/sequence/string/literal": [[1,1]]
@@ -6860,7 +6860,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/function/builtin/print": [[1,1]],
+        "call/function/builtin/print": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "type/sequence/string/literal": [[1,1]]
@@ -6882,7 +6882,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/function/builtin/print": [[1,1]],
+        "call/function/builtin/print": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "type/sequence/string/literal": [[1,1]]
@@ -6932,9 +6932,9 @@
         "whole_span:4": [[1,4]]
       },
       "taxa": {
-        "appli/method": [[2,2],[4,4]],
-        "appli/method/chaining": [[2,2]],
-        "appli/method/sequence/string/encode": [[2,2]],
+        "call/method": [[2,2],[4,4]],
+        "call/method/chaining": [[2,2]],
+        "call/method/sequence/string/encode": [[2,2]],
         "library/standard/urllib/parse": [[1,1]],
         "library/standard/urllib/request": [[1,1]],
         "meta/program": [[1,4]],
@@ -6960,7 +6960,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/method": [[1,1]],
+        "call/method": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "var/assignment/single": [[1,1]]
@@ -6984,7 +6984,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/method": [[1,1]],
+        "call/method": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "var/assignment/single": [[1,1]]
@@ -7032,7 +7032,7 @@
         "whole_span:3": [[1,3]]
       },
       "taxa": {
-        "appli/method": [[3,3],[3,3]],
+        "call/method": [[3,3],[3,3]],
         "condition/belonging": [[3,3]],
         "library/standard/os": [[1,1]],
         "meta/program": [[1,3]],
@@ -7087,8 +7087,8 @@
         "whole_span:7": [[1,7]]
       },
       "taxa": {
-        "appli/method": [[5,5],[7,7]],
-        "appli/method/sequence/string/format": [[4,4]],
+        "call/method": [[5,5],[7,7]],
+        "call/method/sequence/string/format": [[4,4]],
         "library/standard/os": [[2,2]],
         "library/standard/re": [[1,1]],
         "meta/program": [[1,7]],
@@ -7133,9 +7133,9 @@
         "whole_span:3": [[1,3]]
       },
       "taxa": {
-        "appli/composition": [[3,3],[3,3]],
-        "appli/function/builtin/casting/list": [[3,3]],
-        "appli/method": [[3,3],[3,3]],
+        "call/composition": [[3,3],[3,3]],
+        "call/function/builtin/casting/list": [[3,3]],
+        "call/method": [[3,3],[3,3]],
         "library/standard/glob": [[1,1]],
         "library/standard/itertools": [[2,2]],
         "meta/program": [[1,3]],
@@ -7251,7 +7251,7 @@
         "whole_span:3": [[1,3]]
       },
       "taxa": {
-        "appli/class/constructor": [[3,3]],
+        "call/class/constructor": [[3,3]],
         "library/standard/collections/namedtuple": [[1,1]],
         "meta/program": [[1,3]],
         "meta/sloc/3": [[1,3]],
@@ -7283,7 +7283,7 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "appli/method": [[2,2]],
+        "call/method": [[2,2]],
         "library/standard/os": [[1,1]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
@@ -7313,7 +7313,7 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "appli/function/builtin/print": [[2,2]],
+        "call/function/builtin/print": [[2,2]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
         "operator/arithmetic/modulo": [[2,2]],
@@ -7364,7 +7364,7 @@
         "whole_span:7": [[1,7]]
       },
       "taxa": {
-        "appli/method": [[6,6]],
+        "call/method": [[6,6]],
         "library/third_party/requests": [[2,2]],
         "meta/program": [[1,7]],
         "meta/sloc/7": [[1,7]],
@@ -7401,7 +7401,7 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "appli/method": [[2,2]],
+        "call/method": [[2,2]],
         "library/standard/datetime/date": [[1,1]],
         "library/standard/datetime/timedelta": [[1,1]],
         "meta/program": [[1,2]],
@@ -7443,7 +7443,7 @@
         "whole_span:3": [[1,3]]
       },
       "taxa": {
-        "appli/method": [[3,3]],
+        "call/method": [[3,3]],
         "library/standard/threading": [[1,1]],
         "meta/program": [[1,3]],
         "meta/sloc/3": [[1,3]],
@@ -7473,8 +7473,8 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "appli/method": [[2,2]],
-        "appli/method/sys/exit": [[2,2]],
+        "call/method": [[2,2]],
+        "call/method/sys/exit": [[2,2]],
         "library/standard/sys": [[1,1]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
@@ -7566,16 +7566,16 @@
         "whole_span:15": [[1,15]]
       },
       "taxa": {
-        "abstr/argument/arg": [[2,2],[2,2],[5,5],[5,5],[11,11],[11,11],[11,11],[13,13],[13,13],[13,13]],
-        "abstr/class": [[1,15]],
-        "abstr/function": [[5,10]],
-        "abstr/function/predicate": [[11,12]],
-        "abstr/method/flavor/instance": [[2,4],[5,10],[11,12],[13,15]],
-        "abstr/method/naming/magic/__init__": [[2,4]],
-        "abstr/procedure": [[2,4],[13,15]],
-        "abstr/return/something": [[10,10],[12,12]],
-        "appli/function/builtin/range": [[4,4]],
-        "appli/method": [[9,9],[12,12],[12,12],[14,14],[15,15],[15,15]],
+        "def/argument/arg": [[2,2],[2,2],[5,5],[5,5],[11,11],[11,11],[11,11],[13,13],[13,13],[13,13]],
+        "def/class": [[1,15]],
+        "def/function": [[5,10]],
+        "def/function/predicate": [[11,12]],
+        "def/method/flavor/instance": [[2,4],[5,10],[11,12],[13,15]],
+        "def/method/naming/magic/__init__": [[2,4]],
+        "def/procedure": [[2,4],[13,15]],
+        "def/return/something": [[10,10],[12,12]],
+        "call/function/builtin/range": [[4,4]],
+        "call/method": [[9,9],[12,12],[12,12],[14,14],[15,15],[15,15]],
         "condition/equality": [[6,6],[12,12]],
         "flow/conditional": [[6,10]],
         "flow/conditional/else": [[9,10]],
@@ -7642,7 +7642,7 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "appli/method": [[2,2]],
+        "call/method": [[2,2]],
         "library/third_party/numpy": [[1,1]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
@@ -7673,7 +7673,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/class/constructor": [[1,1],[1,1]],
+        "call/class/constructor": [[1,1],[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "var/assignment/single": [[1,1]]
@@ -7708,8 +7708,8 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "appli/function/builtin/any": [[1,1]],
-        "appli/function/without_arguments": [[2,2]],
+        "call/function/builtin/any": [[1,1]],
+        "call/function/without_arguments": [[2,2]],
         "condition/inequality": [[1,1]],
         "flow/conditional/no_else": [[1,2]],
         "meta/program": [[1,2]],
@@ -7737,8 +7737,8 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "appli/function/builtin/open": [[1,1]],
-        "appli/method": [[2,2]],
+        "call/function/builtin/open": [[1,1]],
+        "call/method": [[2,2]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
         "var/assignment/single": [[2,2]]
@@ -14820,7 +14820,7 @@
     ]
   },
   "taxa": {
-    "abstr/argument/arg": [
+    "def/argument/arg": [
       "003.0019-create-a-procedure.py",
       "004.0024-create-a-function-which-returns-the-square-of-an-integer.py",
       "004.2921-create-a-function-which-returns-the-square-of-an-integer.py",
@@ -14856,15 +14856,15 @@
       "163.3177-print-list-elements-by-group-of-2.py",
       "187.3261-disjoint-set.py"
     ],
-    "abstr/argument/no": [
+    "def/argument/no": [
       "003.2372-create-a-procedure.py",
       "126.2137-multiple-return-values.py"
     ],
-    "abstr/argument/vararg": [
+    "def/argument/vararg": [
       "017.1103-create-a-tree-data-structure.py",
       "040.2279-graph-with-adjacency-lists.py"
     ],
-    "abstr/class": [
+    "def/class": [
       "005.0663-create-a-2d-point-data-structure.py",
       "009.1410-create-a-binary-tree-data-structure.py",
       "009.3176-create-a-binary-tree-data-structure.py",
@@ -14880,11 +14880,11 @@
       "159.2281-trie.py",
       "187.3261-disjoint-set.py"
     ],
-    "abstr/decorated": [
+    "def/decorated": [
       "090.1099-read-only-outside.py",
       "154.2292-halfway-between-two-hex-color-codes.py"
     ],
-    "abstr/function": [
+    "def/function": [
       "004.0024-create-a-function-which-returns-the-square-of-an-integer.py",
       "004.2921-create-a-function-which-returns-the-square-of-an-integer.py",
       "014.0185-pick-uniformly-a-random-floating-point-number-in-ab.py",
@@ -14907,15 +14907,15 @@
       "163.3177-print-list-elements-by-group-of-2.py",
       "187.3261-disjoint-set.py"
     ],
-    "abstr/function/anonymous": [
+    "def/function/anonymous": [
       "028.0350-sort-by-a-property.py",
       "035.0667-first-class-function--compose.py",
       "036.0670-first-class-function--generic-composition.py"
     ],
-    "abstr/function/predicate": [
+    "def/function/predicate": [
       "187.3261-disjoint-set.py"
     ],
-    "abstr/higher_order": [
+    "def/higher_order": [
       "018.2084-depth-first-traversing-of-a-tree.py",
       "035.0667-first-class-function--compose.py",
       "036.0670-first-class-function--generic-composition.py",
@@ -14925,10 +14925,10 @@
       "129.2282-breadth-first-traversing-in-a-graph.py",
       "130.2283-depth-first-traversing-in-a-graph.py"
     ],
-    "abstr/method/flavor/class": [
+    "def/method/flavor/class": [
       "154.2292-halfway-between-two-hex-color-codes.py"
     ],
-    "abstr/method/flavor/instance": [
+    "def/method/flavor/instance": [
       "009.1410-create-a-binary-tree-data-structure.py",
       "009.3176-create-a-binary-tree-data-structure.py",
       "017.1103-create-a-tree-data-structure.py",
@@ -14939,7 +14939,7 @@
       "159.2281-trie.py",
       "187.3261-disjoint-set.py"
     ],
-    "abstr/method/naming/magic/__init__": [
+    "def/method/naming/magic/__init__": [
       "009.1410-create-a-binary-tree-data-structure.py",
       "009.3176-create-a-binary-tree-data-structure.py",
       "017.1103-create-a-tree-data-structure.py",
@@ -14949,13 +14949,13 @@
       "159.2281-trie.py",
       "187.3261-disjoint-set.py"
     ],
-    "abstr/method/naming/magic/__str__": [
+    "def/method/naming/magic/__str__": [
       "154.2292-halfway-between-two-hex-color-codes.py"
     ],
-    "abstr/nested/closure": [
+    "def/nested/closure": [
       "037.0671-currying.py"
     ],
-    "abstr/procedure": [
+    "def/procedure": [
       "003.0019-create-a-procedure.py",
       "003.2372-create-a-procedure.py",
       "009.1410-create-a-binary-tree-data-structure.py",
@@ -14973,19 +14973,19 @@
       "159.2281-trie.py",
       "187.3261-disjoint-set.py"
     ],
-    "abstr/recursive": [
+    "def/recursive": [
       "016.1530-depth-first-traversing-of-a-binary-tree.py"
     ],
-    "abstr/recursive/body": [
+    "def/recursive/body": [
       "016.1530-depth-first-traversing-of-a-binary-tree.py",
       "018.2084-depth-first-traversing-of-a-tree.py",
       "031.0188-recursive-factorial-simple.py"
     ],
-    "abstr/return/nothing": [
+    "def/return/nothing": [
       "016.1530-depth-first-traversing-of-a-binary-tree.py",
       "043.2733-break-outer-loop.py"
     ],
-    "abstr/return/something": [
+    "def/return/something": [
       "004.0024-create-a-function-which-returns-the-square-of-an-integer.py",
       "004.2921-create-a-function-which-returns-the-square-of-an-integer.py",
       "014.0185-pick-uniformly-a-random-floating-point-number-in-ab.py",
@@ -15006,7 +15006,7 @@
       "163.3177-print-list-elements-by-group-of-2.py",
       "187.3261-disjoint-set.py"
     ],
-    "appli/class/constructor": [
+    "call/class/constructor": [
       "025.0195-send-a-value-to-another-thread.py",
       "030.0189-parallelize-execution-of-1000-independent-tasks.py",
       "034.0625-create-a-set-of-objects.py",
@@ -15017,7 +15017,7 @@
       "179.2689-get-center-of-a-rectangle.py",
       "189.3236-filter-and-transform-list.py"
     ],
-    "appli/composition": [
+    "call/composition": [
       "034.0625-create-a-set-of-objects.py",
       "035.0667-first-class-function--compose.py",
       "036.0670-first-class-function--generic-composition.py",
@@ -15035,35 +15035,35 @@
       "154.2292-halfway-between-two-hex-color-codes.py",
       "177.3241-find-files-with-a-given-list-of-filename-extensions.py"
     ],
-    "appli/exception/builtin/Exception": [
+    "call/exception/builtin/Exception": [
       "042.1264-continue-outer-loop.py"
     ],
-    "appli/exception/builtin/ValueError": [
+    "call/exception/builtin/ValueError": [
       "089.1097-handle-invalid-argument.py"
     ],
-    "appli/function": [
+    "call/function": [
       "016.1530-depth-first-traversing-of-a-binary-tree.py",
       "031.0188-recursive-factorial-simple.py",
       "037.0671-currying.py",
       "043.2733-break-outer-loop.py",
       "163.3177-print-list-elements-by-group-of-2.py"
     ],
-    "appli/function/builtin/any": [
+    "call/function/builtin/any": [
       "191.3403-check-if-any-value-in-a-list-is-larger-than-a-limit.py"
     ],
-    "appli/function/builtin/bin": [
+    "call/function/builtin/bin": [
       "084.1940-count-bits-set-in-integer-binary-representation.py"
     ],
-    "appli/function/builtin/casting/bytearray": [
+    "call/function/builtin/casting/bytearray": [
       "068.2271-create-a-bitset.py",
       "088.2143-allocate-1m-bytes.py"
     ],
-    "appli/function/builtin/casting/float": [
+    "call/function/builtin/casting/float": [
       "079.1090-convert-integer-to-floating-point-number.py",
       "146.1826-convert-string-to-floating-point-number.py",
       "146.2739-convert-string-to-floating-point-number.py"
     ],
-    "appli/function/builtin/casting/int": [
+    "call/function/builtin/casting/int": [
       "022.0243-convert-string-to-integer.py",
       "068.2271-create-a-bitset.py",
       "080.1092-truncate-floating-point-number-to-integer.py",
@@ -15072,13 +15072,13 @@
       "154.2155-halfway-between-two-hex-color-codes.py",
       "154.2292-halfway-between-two-hex-color-codes.py"
     ],
-    "appli/function/builtin/casting/list": [
+    "call/function/builtin/casting/list": [
       "017.1103-create-a-tree-data-structure.py",
       "119.1253-deduplicate-list.py",
       "148.1829-read-list-of-integer-numbers-from-stdin.py",
       "177.3241-find-files-with-a-given-list-of-filename-extensions.py"
     ],
-    "appli/function/builtin/casting/set": [
+    "call/function/builtin/casting/set": [
       "034.0625-create-a-set-of-objects.py",
       "118.1254-list-to-set.py",
       "118.3266-list-to-set.py",
@@ -15087,31 +15087,31 @@
       "129.2282-breadth-first-traversing-in-a-graph.py",
       "130.2283-depth-first-traversing-in-a-graph.py"
     ],
-    "appli/function/builtin/casting/str": [
+    "call/function/builtin/casting/str": [
       "055.0575-convert-integer-to-string.py"
     ],
-    "appli/function/builtin/enumerate": [
+    "call/function/builtin/enumerate": [
       "007.0183-iterate-over-list-indexes-and-values.py",
       "020.0573-return-two-values.py",
       "043.2733-break-outer-loop.py"
     ],
-    "appli/function/builtin/filter": [
+    "call/function/builtin/filter": [
       "057.0260-filter-list.py"
     ],
-    "appli/function/builtin/format": [
+    "call/function/builtin/format": [
       "154.2292-halfway-between-two-hex-color-codes.py",
       "156.2148-format-integer-with-zero-padding.py"
     ],
-    "appli/function/builtin/hex": [
+    "call/function/builtin/hex": [
       "142.2151-hexadecimal-digits-of-an-integer.py"
     ],
-    "appli/function/builtin/input": [
+    "call/function/builtin/input": [
       "148.1829-read-list-of-integer-numbers-from-stdin.py"
     ],
-    "appli/function/builtin/issubclass": [
+    "call/function/builtin/issubclass": [
       "073.0673-create-a-factory.py"
     ],
-    "appli/function/builtin/len": [
+    "call/function/builtin/len": [
       "117.1297-get-list-size.py",
       "124.2152-binary-search-for-a-value-in-sorted-array.py",
       "154.2292-halfway-between-two-hex-color-codes.py",
@@ -15119,23 +15119,23 @@
       "169.2233-string-length.py",
       "170.2275-get-map-size.py"
     ],
-    "appli/function/builtin/locals": [
+    "call/function/builtin/locals": [
       "108.1291-determine-if-variable-name-is-defined.py"
     ],
-    "appli/function/builtin/map": [
+    "call/function/builtin/map": [
       "053.1933-join-a-list-of-strings.py",
       "148.1829-read-list-of-integer-numbers-from-stdin.py"
     ],
-    "appli/function/builtin/next": [
+    "call/function/builtin/next": [
       "163.3177-print-list-elements-by-group-of-2.py"
     ],
-    "appli/function/builtin/open": [
+    "call/function/builtin/open": [
       "058.0665-extract-file-content-to-a-string.py",
       "091.1098-load-json-file-into-struct.py",
       "092.1100-save-object-into-json-file.py",
       "197.3457-get-a-list-of-lines-from-a-file.py"
     ],
-    "appli/function/builtin/print": [
+    "call/function/builtin/print": [
       "001.0003-print-hello-world.py",
       "001.1159-print-hello-world.py",
       "002.0011-print-hello-10-times.py",
@@ -15170,7 +15170,7 @@
       "173.2429-format-a-number-with-grouped-thousands.py",
       "182.2658-quine-program.py"
     ],
-    "appli/function/builtin/range": [
+    "call/function/builtin/range": [
       "002.0011-print-hello-10-times.py",
       "030.0189-parallelize-execution-of-1000-independent-tasks.py",
       "056.1424-launch-1000-parallel-tasks-and-wait-for-completion.py",
@@ -15179,27 +15179,27 @@
       "154.2292-halfway-between-two-hex-color-codes.py",
       "187.3261-disjoint-set.py"
     ],
-    "appli/function/builtin/reversed": [
+    "call/function/builtin/reversed": [
       "019.0197-reverse-a-list.py"
     ],
-    "appli/function/builtin/sorted": [
+    "call/function/builtin/sorted": [
       "028.0350-sort-by-a-property.py",
       "112.2144-iterate-over-map-entries-ordered-by-keys.py",
       "113.2157-iterate-over-map-entries-ordered-by-values.py"
     ],
-    "appli/function/builtin/sum": [
+    "call/function/builtin/sum": [
       "054.0241-compute-sum-of-integers.py"
     ],
-    "appli/function/builtin/type": [
+    "call/function/builtin/type": [
       "094.1101-print-type-of-variable.py"
     ],
-    "appli/function/builtin/zip": [
+    "call/function/builtin/zip": [
       "040.2279-graph-with-adjacency-lists.py",
       "143.2256-iterate-alternatively-over-two-lists.py",
       "163.2170-print-list-elements-by-group-of-2.py",
       "163.3177-print-list-elements-by-group-of-2.py"
     ],
-    "appli/function/without_arguments": [
+    "call/function/without_arguments": [
       "078.1089-do-while-loop.py",
       "093.1082-pass-a-runnable-procedure-as-parameter.py",
       "108.1291-determine-if-variable-name-is-defined.py",
@@ -15213,7 +15213,7 @@
       "162.2164-execute-procedures-depending-on-options.py",
       "191.3403-check-if-any-value-in-a-list-is-larger-than-a-limit.py"
     ],
-    "appli/method": [
+    "call/method": [
       "010.1478-shuffle-a-list.py",
       "011.0047-pick-a-random-element-from-a-list.py",
       "014.0185-pick-uniformly-a-random-floating-point-number-in-ab.py",
@@ -15281,87 +15281,87 @@
       "188.3284-matrix-multiplication.py",
       "197.3457-get-a-list-of-lines-from-a-file.py"
     ],
-    "appli/method/chaining": [
+    "call/method/chaining": [
       "154.2292-halfway-between-two-hex-color-codes.py",
       "174.2687-make-http-post-request.py"
     ],
-    "appli/method/imp/load_module": [
+    "call/method/imp/load_module": [
       "127.2274-source-code-inclusion.py"
     ],
-    "appli/method/json/dump": [
+    "call/method/json/dump": [
       "092.1100-save-object-into-json-file.py"
     ],
-    "appli/method/locale/setlocale": [
+    "call/method/locale/setlocale": [
       "146.1825-convert-string-to-floating-point-number.py"
     ],
-    "appli/method/logging/basicConfig": [
+    "call/method/logging/basicConfig": [
       "145.1822-print-log-line-with-datetime.py"
     ],
-    "appli/method/non_sequence/dictionary/items": [
+    "call/method/non_sequence/dictionary/items": [
       "013.0574-iterate-over-map-keys-and-values.py",
       "113.2157-iterate-over-map-entries-ordered-by-values.py"
     ],
-    "appli/method/non_sequence/dictionary/values": [
+    "call/method/non_sequence/dictionary/values": [
       "052.0666-check-if-map-contains-value.py"
     ],
-    "appli/method/non_sequence/set/add": [
+    "call/method/non_sequence/set/add": [
       "040.2279-graph-with-adjacency-lists.py",
       "119.3263-deduplicate-list.py",
       "129.2282-breadth-first-traversing-in-a-graph.py",
       "130.2283-depth-first-traversing-in-a-graph.py"
     ],
-    "appli/method/random/choice": [
+    "call/method/random/choice": [
       "011.0047-pick-a-random-element-from-a-list.py"
     ],
-    "appli/method/random/randint": [
+    "call/method/random/randint": [
       "015.0184-pick-uniformly-a-random-integer-in-ab.py"
     ],
-    "appli/method/random/randrange": [
+    "call/method/random/randrange": [
       "014.0185-pick-uniformly-a-random-floating-point-number-in-ab.py"
     ],
-    "appli/method/random/shuffle": [
+    "call/method/random/shuffle": [
       "010.1478-shuffle-a-list.py"
     ],
-    "appli/method/random/uniform": [
+    "call/method/random/uniform": [
       "014.3410-pick-uniformly-a-random-floating-point-number-in-ab.py"
     ],
-    "appli/method/sequence/count": [
+    "call/method/sequence/count": [
       "082.1096-count-substring-occurrences.py",
       "084.1940-count-bits-set-in-integer-binary-representation.py"
     ],
-    "appli/method/sequence/index": [
+    "call/method/sequence/index": [
       "020.0573-return-two-values.py"
     ],
-    "appli/method/sequence/list/append": [
+    "call/method/sequence/list/append": [
       "119.3263-deduplicate-list.py",
       "128.2085-breadth-first-traversing-of-a-tree.py",
       "171.2446-add-an-element-at-the-end-of-a-list.py"
     ],
-    "appli/method/sequence/list/extend": [
+    "call/method/sequence/list/extend": [
       "129.2282-breadth-first-traversing-in-a-graph.py",
       "130.2283-depth-first-traversing-in-a-graph.py"
     ],
-    "appli/method/sequence/list/insert": [
+    "call/method/sequence/list/insert": [
       "044.0190-insert-element-in-list.py"
     ],
-    "appli/method/sequence/list/reverse": [
+    "call/method/sequence/list/reverse": [
       "019.3164-reverse-a-list.py"
     ],
-    "appli/method/sequence/list/sort": [
+    "call/method/sequence/list/sort": [
       "100.1142-sort-by-a-comparator.py"
     ],
-    "appli/method/sequence/string/encode": [
+    "call/method/sequence/string/encode": [
       "041.0187-reverse-a-string.py",
       "174.2687-make-http-post-request.py"
     ],
-    "appli/method/sequence/string/endswith": [
+    "call/method/sequence/string/endswith": [
       "097.1095-check-string-suffix.py",
       "151.2166-remove-string-trailing-path-separator.py"
     ],
-    "appli/method/sequence/string/find": [
+    "call/method/sequence/string/find": [
       "062.1091-find-substring-position.py"
     ],
-    "appli/method/sequence/string/format": [
+    "call/method/sequence/string/format": [
       "023.1102-convert-real-number-to-string-with-2-decimal-places.py",
       "065.1085-format-decimal-number.py",
       "076.1083-binary-digits-from-an-integer.py",
@@ -15369,54 +15369,54 @@
       "154.2155-halfway-between-two-hex-color-codes.py",
       "177.2725-find-files-with-a-given-list-of-filename-extensions.py"
     ],
-    "appli/method/sequence/string/isdigit": [
+    "call/method/sequence/string/isdigit": [
       "137.1823-check-if-string-contains-only-digits.py"
     ],
-    "appli/method/sequence/string/join": [
+    "call/method/sequence/string/join": [
       "053.0240-join-a-list-of-strings.py",
       "053.1933-join-a-list-of-strings.py",
       "071.0379-echo-program-implementation.py",
       "154.2292-halfway-between-two-hex-color-codes.py"
     ],
-    "appli/method/sequence/string/lower": [
+    "call/method/sequence/string/lower": [
       "133.2160-case-insensitive-string-contains.py"
     ],
-    "appli/method/sequence/string/lstrip": [
+    "call/method/sequence/string/lstrip": [
       "167.3175-trim-prefix.py"
     ],
-    "appli/method/sequence/string/replace": [
+    "call/method/sequence/string/replace": [
       "063.1088-replace-fragment-of-a-string.py",
       "116.1257-remove-occurrences-of-word-from-string.py"
     ],
-    "appli/method/sequence/string/rsplit": [
+    "call/method/sequence/string/rsplit": [
       "168.2277-trim-suffix.py"
     ],
-    "appli/method/sequence/string/rstrip": [
+    "call/method/sequence/string/rstrip": [
       "150.2154-remove-trailing-slash.py",
       "168.3174-trim-suffix.py"
     ],
-    "appli/method/sequence/string/split": [
+    "call/method/sequence/string/split": [
       "049.0242-split-a-space-separated-string.py",
       "148.1829-read-list-of-integer-numbers-from-stdin.py"
     ],
-    "appli/method/sequence/string/startswith": [
+    "call/method/sequence/string/startswith": [
       "096.1094-check-string-prefix.py",
       "167.2611-trim-prefix.py"
     ],
-    "appli/method/sequence/string/strip": [
+    "call/method/sequence/string/strip": [
       "110.1455-check-if-string-is-blank.py"
     ],
-    "appli/method/subprocess/call": [
+    "call/method/subprocess/call": [
       "111.2168-launch-other-program.py"
     ],
-    "appli/method/sys/exit": [
+    "call/method/sys/exit": [
       "087.1139-stop-program.py",
       "186.2699-exit-program-cleanly.py"
     ],
-    "appli/method/time/sleep": [
+    "call/method/time/sleep": [
       "045.0570-pause-execution-for-5-seconds.py"
     ],
-    "appli/method/webbrowser/open": [
+    "call/method/webbrowser/open": [
       "164.2169-open-url-in-default-browser.py"
     ],
     "condition/belonging": [

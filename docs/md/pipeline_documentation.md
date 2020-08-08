@@ -260,12 +260,12 @@ And now for something completely different: the following pipeline command will 
     "operation": "include",
     "data": [
       ("flow/loop", "contains", "flow/conditional"),
-      ("flow/conditional", "finished by", "abstr/return"),
+      ("flow/conditional", "finished by", "def/return"),
     ]
   },
 ```
 
-It is currently not possible to chain several operators with shared operands, for example to keep only the programs that feature a conditional inside a loop **and** ended by a `return` statement: the quintuple `("flow/loop", "contains", "flow/conditional", "finished by", "abstr/return")` would raise an error. As it stands, the best we can do is to chain the commands themselves:
+It is currently not possible to chain several operators with shared operands, for example to keep only the programs that feature a conditional inside a loop **and** ended by a `return` statement: the quintuple `("flow/loop", "contains", "flow/conditional", "finished by", "def/return")` would raise an error. As it stands, the best we can do is to chain the commands themselves:
 
 ```python
   {
@@ -277,13 +277,13 @@ It is currently not possible to chain several operators with shared operands, fo
   {
     "operation": "include",
     "data": [
-      ("flow/conditional", "finished by", "abstr/return"),
+      ("flow/conditional", "finished by", "def/return"),
     ]
   },
   {
     "operation": "include",
     "data": [
-      ("abstr/return", "contains", "flow/loop"),
+      ("def/return", "contains", "flow/loop"),
     ]
   },
 ```
@@ -393,7 +393,7 @@ The semantic triple:
     Note that the result includes also all programs featuring at least one taxon matching `taxon_pattern_1`, but no taxon matching `taxon_pattern_2`. For instance, suppose the original (negative) triple is:
 
     ```
-    ("abstr", "not contains", "var/assignment")
+    ("def", "not contains", "var/assignment")
     ```
 
     The function will return the (disjoint) union of these two sets:

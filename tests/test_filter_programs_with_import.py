@@ -79,7 +79,7 @@ def test_exclude_taxa():
     # "operator/arithmetic/addition" is featured by collatz.py, and indirectly by fizzbuzz.py
     # and is_even.py. Therefore, excluding this taxon keeps only assignment.py.
     dbf = ProgramFilter(db)
-    dbf.exclude_programs(dbf.programs_of_taxa({"appli/function/builtin/print"}), follow=True)
+    dbf.exclude_programs(dbf.programs_of_taxa({"call/function/builtin/print"}), follow=True)
     print(dbf.selected_programs)
     assert dbf.selected_programs == {"assignment.py"}
 

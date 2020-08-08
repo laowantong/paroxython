@@ -4,8 +4,8 @@
         "data": [
             "01_hello_world.py",
             "02_input_name.py",
-            "abstr/procedure",
-            "appli/function",
+            "def/procedure",
+            "call/function",
             "flow",
         ],
     },
@@ -31,7 +31,7 @@
     {
         "operation": "hide",
         "data": [
-            "appli/function/builtin/print",
+            "call/function/builtin/print",
             r".*test.*\.py",
         ],
     },
