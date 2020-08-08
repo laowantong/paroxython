@@ -1,9 +1,9 @@
 """
-.. include:: ../../docs/md/pipeline_tutorial.md
+.. include:: ../../docs/md/preparing.md
 
 <br>
 
-.. include:: ../../docs/md/databases.md
+.. include:: ../../docs/md/pipeline_tutorial.md
 
 <br>
 
@@ -11,7 +11,7 @@
 
 <br>
 
-.. include:: ../../docs/md/manual_hints.md
+.. include:: ../../docs/md/databases.md
 
 <br>
 

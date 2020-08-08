@@ -23,7 +23,7 @@ def test_initial_values():
         "if": ["flow/conditional"],
         "if_else": ["flow/conditional/else"],
         "free_call:list": ["type/sequence/list"],
-        "member_call:difference_update": ["type/non_sequence/set"],
+        "member_call_member:difference_update": ["type/non_sequence/set"],
     }
     print(t.compiled_labels)
     assert t.compiled_labels[0][1] == "appli/function/builtin/casting/\\1"
@@ -118,7 +118,7 @@ def test_call():
         Program(
             name="algo2",
             labels=[
-                Label("member_call:difference_update", [S(1, 1), S(1, 1), S(2, 5)]),
+                Label("member_call_member:difference_update", [S(1, 1), S(1, 1), S(2, 5)]),
                 Label("literal:Set", [S(1, 1), S(2, 5)]),
             ],
             taxa=[],

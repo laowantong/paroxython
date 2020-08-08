@@ -5,5 +5,5 @@ condition/inequality	comparison_operator:(Lt|LtE|Gt|GtE)
 flow/conditional	if
 flow/conditional/else	if_else
 type/non_sequence/set	literal:Set
-type/non_sequence/set	member_call:difference_update
+type/non_sequence/set	member_call_member:difference_update
 type/sequence/list	free_call:list

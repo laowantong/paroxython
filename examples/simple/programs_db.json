@@ -78,7 +78,7 @@
         "literal:Tuple": [[2,2]],
         "loop:for": [[2,3]],
         "loop_with_late_exit:for": [[2,3]],
-        "member_call:format": [[3,3]],
+        "member_call_member:format": [[3,3]],
         "node:Assign": [[1,1]],
         "node:Attribute": [[3,3]],
         "node:Call": [[2,2],[3,3],[3,3]],
@@ -95,7 +95,7 @@
         "appli/composition": [[3,3]],
         "appli/function/builtin/enumerate": [[2,2]],
         "appli/function/builtin/print": [[3,3]],
-        "appli/method/format": [[3,3]],
+        "appli/method/sequence/string/format": [[3,3]],
         "flow/loop/exit/late": [[2,3]],
         "flow/loop/for": [[2,3]],
         "flow/loop/for/elements_and_indexes": [[2,3]],
@@ -133,7 +133,7 @@
         "literal:Tuple": [[1,1],[1,1],[4,4],[4,4]],
         "loop:while": [[2,4]],
         "loop_with_late_exit:while": [[2,4]],
-        "member_call:format": [[3,3]],
+        "member_call_member:format": [[3,3]],
         "node:Assign": [[1,1],[4,4]],
         "node:Attribute": [[3,3]],
         "node:BinOp": [[4,4]],
@@ -158,7 +158,7 @@
       "taxa": {
         "appli/composition": [[3,3]],
         "appli/function/builtin/print": [[3,3]],
-        "appli/method/format": [[3,3]],
+        "appli/method/sequence/string/format": [[3,3]],
         "condition/inequality": [[2,2]],
         "flow/loop/exit/late": [[2,4]],
         "flow/loop/while": [[2,4]],
@@ -230,7 +230,7 @@
         "literal:Str": [[2,2],[2,2],[3,3],[4,4],[6,6]],
         "loop:for": [[2,6]],
         "loop_with_late_exit:for": [[2,6]],
-        "member_call:match": [[3,3]],
+        "member_call_member:match": [[3,3]],
         "node:Attribute": [[3,3]],
         "node:Call": [[3,3],[4,4],[6,6]],
         "node:Expr": [[4,4],[6,6]],
@@ -244,7 +244,7 @@
       },
       "taxa": {
         "appli/function/builtin/print": [[4,4],[6,6]],
-        "appli/method/match": [[3,3]],
+        "appli/method": [[3,3]],
         "flow/conditional": [[3,6]],
         "flow/conditional/else": [[6,6]],
         "flow/loop/exit/late": [[2,6]],
@@ -413,8 +413,8 @@
         "literal:Str": [[2,2],[4,4],[7,7]],
         "loop:for": [[3,8],[6,7]],
         "loop_with_late_exit:for": [[3,8],[6,7]],
-        "member_call:glob": [[2,2]],
-        "member_call:rstrip": [[7,7]],
+        "member_call_member:glob": [[2,2]],
+        "member_call_member:rstrip": [[7,7]],
         "nested_for:1": [[6,7]],
         "node:Assign": [[2,2]],
         "node:Attribute": [[2,2],[7,7]],
@@ -435,8 +435,8 @@
         "appli/function/builtin/print": [[4,4],[7,7],[8,8]],
         "appli/function/builtin/sorted": [[3,3]],
         "appli/function/without_arguments": [[8,8]],
-        "appli/method/glob": [[2,2]],
-        "appli/method/rstrip": [[7,7]],
+        "appli/method": [[2,2]],
+        "appli/method/sequence/string/rstrip": [[7,7]],
         "flow/loop/exit/late": [[3,8],[6,7]],
         "flow/loop/for": [[3,8]],
         "flow/loop/for/elements": [[6,7]],
@@ -500,7 +500,7 @@
         "loop_with_break:for": [[12,17]],
         "loop_with_early_exit:for:break": [[12,17]],
         "loop_with_else:for": [[12,17]],
-        "member_call:keys": [[12,12]],
+        "member_call_member:keys": [[12,12]],
         "node:Assign": [[2,8],[10,10],[11,11]],
         "node:Attribute": [[11,11],[12,12]],
         "node:Break": [[15,15]],
@@ -524,9 +524,8 @@
         "appli/composition": [[12,12]],
         "appli/function/builtin/print": [[14,14],[17,17]],
         "appli/function/builtin/sorted": [[12,12]],
-        "appli/function/localtime": [[10,10]],
         "appli/function/without_arguments": [[10,10]],
-        "appli/method/keys": [[12,12]],
+        "appli/method/non_sequence/dictionary/keys": [[12,12]],
         "condition/inequality": [[13,13]],
         "flow/conditional/no_else": [[13,15]],
         "flow/loop/exit/early/break/else": [[12,17]],
@@ -648,10 +647,10 @@
         "literal:0": [[2,2],[9,9]],
         "literal:15": [[10,10]],
         "literal:50": [[11,11]],
-        "member_call:overdrawn": [[12,12]],
-        "member_call:withdraw": [[11,11]],
+        "member_call:my_account:withdraw": [[11,11]],
+        "member_call_member:overdrawn": [[12,12]],
+        "member_call_member:withdraw": [[11,11]],
         "member_call_object:my_account": [[11,11]],
-        "member_call_without_result:withdraw": [[11,11]],
         "method:__init__": [[2,3]],
         "method:deposit": [[4,5]],
         "method:overdrawn": [[8,9]],
@@ -683,14 +682,13 @@
         "abstr/class": [[1,9]],
         "abstr/function": [[8,9]],
         "abstr/method/flavor/instance": [[2,3],[4,5],[6,7],[8,9]],
-        "abstr/method/naming/magic": [[2,3]],
+        "abstr/method/naming/magic/__init__": [[2,3]],
         "abstr/procedure": [[2,3],[4,5],[6,7]],
         "abstr/return/something": [[9,9]],
-        "appli/class_constructor/BankAccount": [[10,10]],
+        "appli/class/constructor": [[10,10]],
         "appli/composition": [[12,12]],
         "appli/function/builtin/print": [[12,12]],
-        "appli/method/overdrawn": [[12,12]],
-        "appli/method/withdraw": [[11,11]],
+        "appli/method": [[11,11],[12,12]],
         "condition/inequality": [[9,9]],
         "meta/program": [[1,12]],
         "meta/sloc/12": [[1,12]],
@@ -758,9 +756,9 @@
         "literal:8": [[11,11]],
         "literal:9": [[11,11],[11,11],[11,11]],
         "literal:List": [[11,11]],
-        "member_call:assertEqual": [[11,11]],
+        "member_call:self:assertEqual": [[11,11]],
+        "member_call_member:assertEqual": [[11,11]],
         "member_call_object:self": [[11,11]],
-        "member_call_without_result:assertEqual": [[11,11]],
         "method:testMedian": [[10,11]],
         "modulo_operator": [[5,5]],
         "node:Assign": [[3,3],[4,4]],
@@ -797,7 +795,7 @@
         "appli/function/builtin/casting/int": [[6,6],[8,8],[8,8]],
         "appli/function/builtin/len": [[4,4]],
         "appli/function/builtin/sorted": [[3,3]],
-        "appli/method/assertEqual": [[11,11]],
+        "appli/method": [[11,11]],
         "condition/divisibility/parity": [[5,5]],
         "condition/equality": [[5,5]],
         "flow/conditional": [[5,8]],
@@ -925,8 +923,8 @@
         "literal:Tuple": [[7,7]],
         "loop:for": [[7,9]],
         "loop_with_late_exit:for": [[7,9]],
-        "member_call:join": [[9,9]],
-        "member_call:splitlines": [[6,6]],
+        "member_call_member:join": [[9,9]],
+        "member_call_member:splitlines": [[6,6]],
         "node:Assign": [[2,6]],
         "node:Attribute": [[6,6],[9,9]],
         "node:Call": [[6,6],[7,7],[9,9],[9,9]],
@@ -943,9 +941,8 @@
       "taxa": {
         "appli/composition": [[9,9]],
         "appli/function/builtin/print": [[9,9]],
-        "appli/function/groupby": [[7,7]],
-        "appli/method/join": [[9,9]],
-        "appli/method/splitlines": [[6,6]],
+        "appli/method/sequence/string/join": [[9,9]],
+        "appli/method/sequence/string/splitlines": [[6,6]],
         "flow/conditional/no_else": [[8,9]],
         "flow/loop/exit/late": [[7,9]],
         "flow/loop/for": [[7,9]],
@@ -1033,12 +1030,12 @@
         "literal:Tuple": [[16,16]],
         "loop:for": [[16,18]],
         "loop_with_late_exit:for": [[16,18]],
-        "member_call:format": [[18,18]],
-        "member_call:reader": [[14,14]],
-        "member_call:writer": [[5,5]],
-        "member_call:writerows": [[6,6]],
+        "member_call:writer:writerows": [[6,6]],
+        "member_call_member:format": [[18,18]],
+        "member_call_member:reader": [[14,14]],
+        "member_call_member:writer": [[5,5]],
+        "member_call_member:writerows": [[6,6]],
         "member_call_object:writer": [[6,6]],
-        "member_call_without_result:writerows": [[6,6]],
         "node:Assign": [[5,5],[14,14],[15,15],[17,17]],
         "node:Attribute": [[5,5],[6,6],[14,14],[18,18]],
         "node:BinOp": [[3,3]],
@@ -1075,10 +1072,8 @@
         "appli/function/builtin/casting/float": [[17,17],[18,18]],
         "appli/function/builtin/open": [[4,4],[13,13]],
         "appli/function/builtin/print": [[18,18]],
-        "appli/method/format": [[18,18]],
-        "appli/method/reader": [[14,14]],
-        "appli/method/writer": [[5,5]],
-        "appli/method/writerows": [[6,6]],
+        "appli/method": [[5,5],[6,6],[14,14]],
+        "appli/method/sequence/string/format": [[18,18]],
         "condition/inequality": [[3,3],[3,3]],
         "flow/loop/exit/late": [[16,18]],
         "flow/loop/for/elements": [[16,18]],
@@ -1303,7 +1298,7 @@
         "loop_with_break:for": [[8,11]],
         "loop_with_early_exit:for:break": [[8,11]],
         "loop_with_late_exit:while": [[4,7]],
-        "member_call:count": [[3,3]],
+        "member_call_member:count": [[3,3]],
         "node:Assign": [[3,3],[5,5],[7,7]],
         "node:Attribute": [[3,3],[7,7]],
         "node:Break": [[10,10]],
@@ -1336,7 +1331,7 @@
         "appli/function/builtin/next": [[5,5]],
         "appli/function/builtin/print": [[11,11]],
         "appli/function/without_arguments": [[8,8]],
-        "appli/method/count": [[3,3]],
+        "appli/method/sequence/count": [[3,3]],
         "condition/inequality": [[9,9]],
         "flow/conditional/no_else": [[9,10]],
         "flow/loop/exit/early/break": [[8,11]],
@@ -1390,9 +1385,9 @@
         "literal:Tuple": [[12,12]],
         "loop:for": [[11,14]],
         "loop_with_late_exit:for": [[11,14]],
-        "member_call:format": [[14,14]],
-        "member_call:fromstring": [[9,9]],
-        "member_call:getiterator": [[11,11]],
+        "member_call_member:format": [[14,14]],
+        "member_call_member:fromstring": [[9,9]],
+        "member_call_member:getiterator": [[11,11]],
         "node:Assign": [[1,7],[9,9],[10,10],[12,12]],
         "node:Attribute": [[9,9],[11,11],[13,13],[13,13],[14,14],[14,14],[14,14],[14,14]],
         "node:BoolOp": [[13,13]],
@@ -1415,9 +1410,8 @@
       "taxa": {
         "appli/composition": [[14,14]],
         "appli/function/builtin/print": [[14,14]],
-        "appli/method/format": [[14,14]],
-        "appli/method/fromstring": [[9,9]],
-        "appli/method/getiterator": [[11,11]],
+        "appli/method": [[9,9],[11,11]],
+        "appli/method/sequence/string/format": [[14,14]],
         "condition/belonging/not": [[13,13]],
         "condition/equality": [[13,13]],
         "flow/conditional/no_else": [[13,14]],
@@ -1521,7 +1515,7 @@
         "loop_with_early_exit:for:return": [[11,20]],
         "loop_with_raise:for": [[6,9]],
         "loop_with_return:for": [[11,20]],
-        "member_call:join": [[24,24]],
+        "member_call_member:join": [[24,24]],
         "negative_index:-1": [[5,5]],
         "node:Assign": [[1,1],[5,5],[7,7],[12,12],[22,22]],
         "node:Attribute": [[24,24]],
@@ -1587,7 +1581,7 @@
         "appli/function/builtin/print": [[23,23],[24,24]],
         "appli/function/builtin/range": [[11,11]],
         "appli/function/builtin/reversed": [[6,6]],
-        "appli/method/join": [[24,24]],
+        "appli/method/sequence/string/join": [[24,24]],
         "condition/belonging": [[8,8]],
         "condition/equality": [[15,15]],
         "flow/conditional": [[15,18]],
@@ -1674,8 +1668,8 @@
         "loop:while": [[6,14]],
         "loop_with_break:while": [[6,14]],
         "loop_with_early_exit:while:break": [[6,14]],
-        "member_call:format": [[5,5],[16,16],[18,18]],
-        "member_call:randint": [[4,4]],
+        "member_call_member:format": [[5,5],[16,16],[18,18]],
+        "member_call_member:randint": [[4,4]],
         "node:Assign": [[2,2],[3,3],[4,4],[7,7]],
         "node:Attribute": [[4,4],[5,5],[16,16],[18,18]],
         "node:AugAssign": [[8,8]],
@@ -1704,8 +1698,8 @@
         "appli/function/builtin/casting/int": [[7,7]],
         "appli/function/builtin/input": [[3,3],[7,7]],
         "appli/function/builtin/print": [[5,5],[10,10],[12,12],[16,16],[18,18]],
-        "appli/method/format": [[5,5],[16,16],[18,18]],
-        "appli/method/randint": [[4,4]],
+        "appli/method": [[4,4]],
+        "appli/method/sequence/string/format": [[5,5],[16,16],[18,18]],
         "condition/equality": [[13,13],[15,15]],
         "condition/inequality": [[6,6],[9,9],[11,11]],
         "flow/conditional": [[15,18]],
@@ -3255,60 +3249,69 @@
       "18_queens.py",
       "28_queens.py"
     ],
-    "member_call:assertEqual": [
+    "member_call:my_account:withdraw": [
+      "12_classes.py"
+    ],
+    "member_call:self:assertEqual": [
       "13_unit_testing.py"
     ],
-    "member_call:count": [
+    "member_call:writer:writerows": [
+      "16_csv.py"
+    ],
+    "member_call_member:assertEqual": [
+      "13_unit_testing.py"
+    ],
+    "member_call_member:count": [
       "20_prime_numbers.py"
     ],
-    "member_call:format": [
+    "member_call_member:format": [
       "03_friends.py",
       "04_fibonacci.py",
       "16_csv.py",
       "21_xml_html_parsing.py",
       "33_guess_the_number.py"
     ],
-    "member_call:fromstring": [
+    "member_call_member:fromstring": [
       "21_xml_html_parsing.py"
     ],
-    "member_call:getiterator": [
+    "member_call_member:getiterator": [
       "21_xml_html_parsing.py"
     ],
-    "member_call:glob": [
+    "member_call_member:glob": [
       "09_indent.py"
     ],
-    "member_call:join": [
+    "member_call_member:join": [
       "15_itertools_groupby.py",
       "28_queens.py"
     ],
-    "member_call:keys": [
+    "member_call_member:keys": [
       "10_time.py"
     ],
-    "member_call:match": [
+    "member_call_member:match": [
       "06_regex.py"
     ],
-    "member_call:overdrawn": [
+    "member_call_member:overdrawn": [
       "12_classes.py"
     ],
-    "member_call:randint": [
+    "member_call_member:randint": [
       "33_guess_the_number.py"
     ],
-    "member_call:reader": [
+    "member_call_member:reader": [
       "16_csv.py"
     ],
-    "member_call:rstrip": [
+    "member_call_member:rstrip": [
       "09_indent.py"
     ],
-    "member_call:splitlines": [
+    "member_call_member:splitlines": [
       "15_itertools_groupby.py"
     ],
-    "member_call:withdraw": [
+    "member_call_member:withdraw": [
       "12_classes.py"
     ],
-    "member_call:writer": [
+    "member_call_member:writer": [
       "16_csv.py"
     ],
-    "member_call:writerows": [
+    "member_call_member:writerows": [
       "16_csv.py"
     ],
     "member_call_object:my_account": [
@@ -3318,15 +3321,6 @@
       "13_unit_testing.py"
     ],
     "member_call_object:writer": [
-      "16_csv.py"
-    ],
-    "member_call_without_result:assertEqual": [
-      "13_unit_testing.py"
-    ],
-    "member_call_without_result:withdraw": [
-      "12_classes.py"
-    ],
-    "member_call_without_result:writerows": [
       "16_csv.py"
     ],
     "method:__init__": [
@@ -4061,7 +4055,7 @@
       "12_classes.py",
       "13_unit_testing.py"
     ],
-    "abstr/method/naming/magic": [
+    "abstr/method/naming/magic/__init__": [
       "12_classes.py"
     ],
     "abstr/procedure": [
@@ -4084,7 +4078,7 @@
       "18_queens.py",
       "28_queens.py"
     ],
-    "appli/class_constructor/BankAccount": [
+    "appli/class/constructor": [
       "12_classes.py"
     ],
     "appli/composition": [
@@ -4178,72 +4172,42 @@
       "07_grocery_bill.py",
       "08_arguments.py"
     ],
-    "appli/function/groupby": [
-      "15_itertools_groupby.py"
-    ],
-    "appli/function/localtime": [
-      "10_time.py"
-    ],
     "appli/function/without_arguments": [
       "09_indent.py",
       "10_time.py",
       "20_prime_numbers.py"
     ],
-    "appli/method/assertEqual": [
-      "13_unit_testing.py"
+    "appli/method": [
+      "06_regex.py",
+      "09_indent.py",
+      "12_classes.py",
+      "13_unit_testing.py",
+      "16_csv.py",
+      "21_xml_html_parsing.py",
+      "33_guess_the_number.py"
     ],
-    "appli/method/count": [
+    "appli/method/non_sequence/dictionary/keys": [
+      "10_time.py"
+    ],
+    "appli/method/sequence/count": [
       "20_prime_numbers.py"
     ],
-    "appli/method/format": [
+    "appli/method/sequence/string/format": [
       "03_friends.py",
       "04_fibonacci.py",
       "16_csv.py",
       "21_xml_html_parsing.py",
       "33_guess_the_number.py"
     ],
-    "appli/method/fromstring": [
-      "21_xml_html_parsing.py"
-    ],
-    "appli/method/getiterator": [
-      "21_xml_html_parsing.py"
-    ],
-    "appli/method/glob": [
-      "09_indent.py"
-    ],
-    "appli/method/join": [
+    "appli/method/sequence/string/join": [
       "15_itertools_groupby.py",
       "28_queens.py"
     ],
-    "appli/method/keys": [
-      "10_time.py"
-    ],
-    "appli/method/match": [
-      "06_regex.py"
-    ],
-    "appli/method/overdrawn": [
-      "12_classes.py"
-    ],
-    "appli/method/randint": [
-      "33_guess_the_number.py"
-    ],
-    "appli/method/reader": [
-      "16_csv.py"
-    ],
-    "appli/method/rstrip": [
+    "appli/method/sequence/string/rstrip": [
       "09_indent.py"
     ],
-    "appli/method/splitlines": [
+    "appli/method/sequence/string/splitlines": [
       "15_itertools_groupby.py"
-    ],
-    "appli/method/withdraw": [
-      "12_classes.py"
-    ],
-    "appli/method/writer": [
-      "16_csv.py"
-    ],
-    "appli/method/writerows": [
-      "16_csv.py"
     ],
     "condition/belonging": [
       "18_queens.py",

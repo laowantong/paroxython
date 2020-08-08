@@ -99,12 +99,12 @@ As you may have guessed, the right colum can contain [regular expressions](https
 
 ### Functional inspirations: `var`, `abstr`, `appli` and `type`
 
-What are the basic concepts on which programming can be built? As you know, [Alonso Church](https://en.wikipedia.org/wiki/Alonzo_Church) answered this question as early as 1936 (years before the computers were even invented!). The three building blocks of his [lambda calculus](https://en.wikipedia.org/wiki/Lambda_calculus), namely the concepts of **variable**, **abstraction** and **application**, provide us our first three taxonomic roots, which we will denote respectively by `var`, `abstr` and `appli`. To these we can naturally add that of [`type`](https://en.wikipedia.org/wiki/Lambda_calculus#Typed_lambda_calculus), already seen above.
+What are the basic concepts on which computing can be built? As you know, [Alonso Church](https://en.wikipedia.org/wiki/Alonzo_Church) answered this very question as early as 1936 (years before the computers were even invented!). The three building blocks of his [lambda calculus](https://en.wikipedia.org/wiki/Lambda_calculus), namely the concepts of **variable**, **abstraction** and **application**, provide us our first three taxonomic roots, which we will denote respectively by `var`, `abstr` and `appli`. To these we can naturally add that of `type`, already shown above.
 
 All of these could be enough to describe pure functional programs, at least theoretically. However:
 
-1. Python is no Haskell. It is a multi-paradigm language, with a strong emphasis on imperative programming. Moreover, its [zen](https://www.python.org/dev/peps/pep-0020/) famously holds that “practicality beats purity”.
-2. We are not interested in teaching computability theory. Pedagogical considerations take precedence over a crippling respect for mathematical abstractions. We don't need to explain thoroughly the concepts of literal, string, type, built-in function and call for making our young students _feel_ they understand:
+1. Python is no Haskell. It is a multi-paradigm language, with a strong emphasis on imperative programming. And its [zen](https://www.python.org/dev/peps/pep-0020/) famously holds that “practicality beats purity”.
+2. Here, we are not interested in teaching generalized computability. Pedagogical considerations take precedence over a crippling respect for mathematical abstractions. For instance, we don't need to explain thoroughly the concepts of literal, string, type, built-in function and call for making our young students _feel_ they understand:
 
 ```python
 print("hello, world")
@@ -116,26 +116,35 @@ For these reasons, choosing to root our taxonomy in the four basic notions of th
 
 The imperative nature of Python requires us to introduce the concept of control `flow`, under which we put the loops, the conditionals, and some other animals[^sequence].
 
-[^sequence]
+[^sequence]:
     The sequence control flow is an exception. As it characterizes the imperative paradigm more than this or that program, it will deliberately be excluded from the features searched by Paroxython.
 
 ### For your convenience: `operator`, `condition`, `subscript`
 
-Again, those are mainly practical choices. After all, an `operator` is nothing more than an unassuming function (`abstr`) with a funny name and a funny syntax. And a `condition`[^condition], a combination of function applications (`appli`) which happens to evaluate to a particular `type`. As for the creation of the root `subscript`, it comes from the observation that an awful lot of exciting programs can be written with sequences before venturing out to direct access (e.g., treating the Python lists as [lists](https://en.wikipedia.org/wiki/List_(abstract_data_type)) and not [arrays](https://en.wikipedia.org/wiki/Array_data_structure)). Not that in our default taxonomy, `subscript` includes slicing and dictionary access too.
+Again, those are mainly practical choices. After all, an `operator` is nothing more than an unassuming function (`abstr`) with a funny name and a funny syntax. And a `condition`[^condition], a combination of function applications (`appli`) which happens to evaluate to a particular `type`. As for the creation of the root `subscript`, it comes from the observation that an lot of exciting programs can be written with sequences before venturing out to direct access (that is, as long as we treat Python lists as [lists](https://en.wikipedia.org/wiki/List_(abstract_data_type)) and not [arrays](https://en.wikipedia.org/wiki/Array_data_structure)). Not that in our default taxonomy, `subscript` includes slicing and dictionary access too.
 
 [^condition]:
     A _condition_ is a boolean expression, not to be confused with a _conditional_ (control structure).
 
 ### Imports: `library`
 
-Everything that's imported goes here. Paroxython can tell the difference between standard, third-party and homemade modules.
+Everything that's imported lands here. Paroxython can tell the difference between standard, third-party and homemade modules.
 
 ### Zooming out: `pattern`
 
-Now this is probably the most interesting feature to tag in a beginner-level program. Under `pattern`, you will find numerous variants of the invaluable [accumulation pattern](https://en.wikipedia.org/wiki/Fold_(higher-order_function)) (counting, summing, filtering, finding the “best” element, etc.), but also some early-exit patterns (testing for an universal or existential property, finding the first “good” element), whether by traversing a sequence or evolving a state. This is an aspect of programming which is rarely taught in a conscious and systematic way, and to which Paroxython intends to draw your attention.
+Now this is probably the most interesting feature to tag in a beginner-level program. Under `pattern`, you will find numerous variants of the invaluable [accumulation pattern](https://en.wikipedia.org/wiki/Fold_(higher-order_function)) (counting, summing, filtering, finding the “best” element, etc.), but also some early-exit patterns (testing for an universal or existential property, finding the first “good” element, etc.), whether by traversing a sequence or evolving a state. This is an aspect of programming which is rarely taught in a conscious and systematic way, and to which Paroxython intends to draw your attention.
 
 ### Going `meta`
 
+Paroxython will store inside the `meta` tree some program metadata, such as the number of lines. A child `topic` is provided, which you can fill in by adding a manual hint in the source code of the programs. In general, you can create any `meta` entries in the taxonomy to hold information that does not belong to a particular line, but to the program as a whole.
+
+## Understanding the taxonomy
+
+backref
+
+```plain
+abstr/argument/\1           function_argument_flavor:(.+)
+```
 
 
 ## Modifying the taxonomy

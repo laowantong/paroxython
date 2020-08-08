@@ -292,7 +292,6 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "appli/function/doSomething": [[2,2]],
         "flow/loop/exit/late": [[1,2]],
         "flow/loop/for/elements": [[1,2]],
         "meta/program": [[1,2]],
@@ -394,7 +393,7 @@
         "abstr/argument/arg": [[2,2],[2,2]],
         "abstr/class": [[1,5]],
         "abstr/method/flavor/instance": [[2,5]],
-        "abstr/method/naming/magic": [[2,5]],
+        "abstr/method/naming/magic/__init__": [[2,5]],
         "abstr/procedure": [[2,5]],
         "meta/program": [[1,5]],
         "meta/sloc/5": [[1,5]],
@@ -432,7 +431,7 @@
         "abstr/argument/arg": [[2,2],[2,2],[2,2],[2,2]],
         "abstr/class": [[1,5]],
         "abstr/method/flavor/instance": [[2,5]],
-        "abstr/method/naming/magic": [[2,5]],
+        "abstr/method/naming/magic/__init__": [[2,5]],
         "abstr/procedure": [[2,5]],
         "meta/program": [[1,5]],
         "meta/sloc/5": [[1,5]],
@@ -457,7 +456,6 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "appli/function/shuffle": [[2,2]],
         "library/standard/random/shuffle": [[1,1]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]]
@@ -470,9 +468,9 @@
         "call_argument:list": [[2,2]],
         "import:random": [[1,1]],
         "import_module:random": [[1,1]],
-        "member_call:shuffle": [[2,2]],
+        "member_call:random:shuffle": [[2,2]],
+        "member_call_member:shuffle": [[2,2]],
         "member_call_object:random": [[2,2]],
-        "member_call_without_result:shuffle": [[2,2]],
         "node:Attribute": [[2,2]],
         "node:Call": [[2,2]],
         "node:Expr": [[2,2]],
@@ -481,7 +479,8 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "appli/method/shuffle": [[2,2]],
+        "appli/method": [[2,2]],
+        "appli/method/random/shuffle": [[2,2]],
         "library/standard/random": [[1,1]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]]
@@ -494,9 +493,9 @@
         "call_argument:x": [[2,2]],
         "import:random": [[1,1]],
         "import_module:random": [[1,1]],
-        "member_call:choice": [[2,2]],
+        "member_call:random:choice": [[2,2]],
+        "member_call_member:choice": [[2,2]],
         "member_call_object:random": [[2,2]],
-        "member_call_without_result:choice": [[2,2]],
         "node:Attribute": [[2,2]],
         "node:Call": [[2,2]],
         "node:Expr": [[2,2]],
@@ -505,7 +504,8 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "appli/method/choice": [[2,2]],
+        "appli/method": [[2,2]],
+        "appli/method/random/choice": [[2,2]],
         "library/standard/random": [[1,1]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]]
@@ -542,7 +542,7 @@
         "literal:Tuple": [[1,1]],
         "loop:for": [[1,2]],
         "loop_with_late_exit:for": [[1,2]],
-        "member_call:items": [[1,1]],
+        "member_call_member:items": [[1,1]],
         "node:Attribute": [[1,1]],
         "node:Call": [[1,1],[2,2]],
         "node:Expr": [[2,2]],
@@ -553,7 +553,7 @@
       },
       "taxa": {
         "appli/function/builtin/print": [[2,2]],
-        "appli/method/items": [[1,1]],
+        "appli/method/non_sequence/dictionary/items": [[1,1]],
         "flow/loop/exit/late": [[1,2]],
         "flow/loop/for": [[1,2]],
         "meta/program": [[1,2]],
@@ -575,7 +575,8 @@
         "function_returning_something:pick": [[2,3]],
         "import:random": [[1,1]],
         "import_module:random": [[1,1]],
-        "member_call:randrange": [[3,3]],
+        "member_call:random:randrange": [[3,3]],
+        "member_call_member:randrange": [[3,3]],
         "member_call_object:random": [[3,3]],
         "node:Attribute": [[3,3]],
         "node:Call": [[3,3]],
@@ -591,7 +592,8 @@
         "abstr/argument/arg": [[2,2],[2,2]],
         "abstr/function": [[2,3]],
         "abstr/return/something": [[3,3]],
-        "appli/method/randrange": [[3,3]],
+        "appli/method": [[3,3]],
+        "appli/method/random/randrange": [[3,3]],
         "library/standard/random": [[1,1]],
         "meta/program": [[1,3]],
         "meta/sloc/3": [[1,3]]
@@ -605,9 +607,9 @@
         "call_argument:b": [[2,2]],
         "import:random": [[1,1]],
         "import_module:random": [[1,1]],
-        "member_call:uniform": [[2,2]],
+        "member_call:random:uniform": [[2,2]],
+        "member_call_member:uniform": [[2,2]],
         "member_call_object:random": [[2,2]],
-        "member_call_without_result:uniform": [[2,2]],
         "node:Attribute": [[2,2]],
         "node:Call": [[2,2]],
         "node:Expr": [[2,2]],
@@ -616,7 +618,8 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "appli/method/uniform": [[2,2]],
+        "appli/method": [[2,2]],
+        "appli/method/random/uniform": [[2,2]],
         "library/standard/random": [[1,1]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]]
@@ -630,9 +633,9 @@
         "call_argument:b": [[2,2]],
         "import:random": [[1,1]],
         "import_module:random": [[1,1]],
-        "member_call:randint": [[2,2]],
+        "member_call:random:randint": [[2,2]],
+        "member_call_member:randint": [[2,2]],
         "member_call_object:random": [[2,2]],
-        "member_call_without_result:randint": [[2,2]],
         "node:Attribute": [[2,2]],
         "node:Call": [[2,2]],
         "node:Expr": [[2,2]],
@@ -641,7 +644,8 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "appli/method/randint": [[2,2]],
+        "appli/method": [[2,2]],
+        "appli/method/random/randint": [[2,2]],
         "library/standard/random": [[1,1]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]]
@@ -693,7 +697,6 @@
         "abstr/recursive/body": [[1,6]],
         "abstr/return/nothing": [[3,3]],
         "appli/function": [[4,4],[6,6]],
-        "appli/function/f": [[5,5]],
         "condition/identity": [[2,2]],
         "flow/conditional/guard": [[2,3]],
         "flow/conditional/no_else": [[2,3]],
@@ -738,7 +741,7 @@
         "abstr/argument/vararg": [[2,2]],
         "abstr/class": [[1,4]],
         "abstr/method/flavor/instance": [[2,4]],
-        "abstr/method/naming/magic": [[2,4]],
+        "abstr/method/naming/magic/__init__": [[2,4]],
         "abstr/procedure": [[2,4]],
         "appli/function/builtin/casting/list": [[4,4]],
         "meta/program": [[1,4]],
@@ -785,8 +788,6 @@
         "abstr/higher_order": [[1,4]],
         "abstr/procedure": [[1,4]],
         "abstr/recursive/body": [[1,4]],
-        "appli/class_constructor": [[4,4]],
-        "appli/function/f": [[2,2]],
         "flow/loop/exit/late": [[3,4]],
         "flow/loop/for/elements": [[3,4]],
         "meta/program": [[1,4]],
@@ -848,9 +849,9 @@
       "timestamp": "",
       "source": "x.reverse()",
       "labels": {
-        "member_call:reverse": [[1,1]],
+        "member_call:x:reverse": [[1,1]],
+        "member_call_member:reverse": [[1,1]],
         "member_call_object:x": [[1,1]],
-        "member_call_without_result:reverse": [[1,1]],
         "node:Attribute": [[1,1]],
         "node:Call": [[1,1]],
         "node:Expr": [[1,1]],
@@ -858,7 +859,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/method/reverse": [[1,1]],
+        "appli/method/sequence/list/reverse": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "type/sequence/list": [[1,1]]
@@ -890,7 +891,7 @@
         "loop:for": [[2,4]],
         "loop_with_early_exit:for:return": [[2,4]],
         "loop_with_return:for": [[2,4]],
-        "member_call:index": [[4,4]],
+        "member_call_member:index": [[4,4]],
         "node:Attribute": [[4,4]],
         "node:Call": [[2,2],[4,4]],
         "node:Compare": [[3,3]],
@@ -909,7 +910,7 @@
         "abstr/function": [[1,4]],
         "abstr/return/something": [[4,4]],
         "appli/function/builtin/enumerate": [[2,2]],
-        "appli/method/index": [[4,4]],
+        "appli/method/sequence/index": [[4,4]],
         "condition/belonging": [[3,3]],
         "flow/conditional/no_else": [[3,4]],
         "flow/loop/exit/early/return": [[2,4]],
@@ -985,7 +986,7 @@
         "assignment_rhs_atom:x": [[1,1]],
         "call_argument:x": [[1,1]],
         "literal:Str": [[1,1]],
-        "member_call:format": [[1,1]],
+        "member_call_member:format": [[1,1]],
         "node:Assign": [[1,1]],
         "node:Attribute": [[1,1]],
         "node:Call": [[1,1]],
@@ -995,7 +996,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/method/format": [[1,1]],
+        "appli/method/sequence/string/format": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "type/sequence/string": [[1,1]],
@@ -1044,12 +1045,12 @@
         "import_module:Queue": [[1,1]],
         "literal:Str": [[6,6]],
         "literal:True": [[4,4]],
-        "member_call:put": [[6,6]],
-        "member_call:start": [[5,5]],
+        "member_call:q:put": [[6,6]],
+        "member_call:t:start": [[5,5]],
+        "member_call_member:put": [[6,6]],
+        "member_call_member:start": [[5,5]],
         "member_call_object:q": [[6,6]],
         "member_call_object:t": [[5,5]],
-        "member_call_without_result:put": [[6,6]],
-        "member_call_without_result:start": [[5,5]],
         "node:Assign": [[2,2],[3,3],[4,4]],
         "node:Attribute": [[4,4],[5,5],[6,6]],
         "node:Call": [[2,2],[3,3],[5,5],[6,6]],
@@ -1063,10 +1064,8 @@
         "whole_span:6": [[1,6]]
       },
       "taxa": {
-        "appli/class_constructor/Queue": [[2,2]],
-        "appli/class_constructor/Thread": [[3,3]],
-        "appli/method/put": [[6,6]],
-        "appli/method/start": [[5,5]],
+        "appli/class/constructor": [[2,2],[3,3]],
+        "appli/method": [[5,5],[6,6]],
         "library/third_party/Queue": [[1,1]],
         "meta/program": [[1,6]],
         "meta/sloc/6": [[1,6]],
@@ -1103,7 +1102,6 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/function/xrange": [[1,1],[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "type/number/integer/literal/zero": [[1,1]],
@@ -1140,7 +1138,6 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/function/xrange": [[1,1],[1,1],[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "type/number/integer/literal/zero": [[1,1]],
@@ -1161,7 +1158,7 @@
         "import:numpy": [[1,1]],
         "import_module:numpy": [[1,1]],
         "literal:Tuple": [[2,2]],
-        "member_call:zeros": [[2,2]],
+        "member_call_member:zeros": [[2,2]],
         "node:Assign": [[2,2]],
         "node:Attribute": [[2,2]],
         "node:Call": [[2,2]],
@@ -1172,7 +1169,7 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "appli/method/zeros": [[2,2]],
+        "appli/method": [[2,2]],
         "library/third_party/numpy": [[1,1]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
@@ -1257,9 +1254,9 @@
         "literal:List": [[4,4]],
         "loop:for": [[3,4]],
         "loop_with_late_exit:for": [[3,4]],
-        "member_call:apply_async": [[4,4]],
+        "member_call:pool:apply_async": [[4,4]],
+        "member_call_member:apply_async": [[4,4]],
         "member_call_object:pool": [[4,4]],
-        "member_call_without_result:apply_async": [[4,4]],
         "node:Assign": [[2,2]],
         "node:Attribute": [[4,4]],
         "node:Call": [[2,2],[3,3],[4,4]],
@@ -1274,9 +1271,9 @@
         "whole_span:4": [[1,4]]
       },
       "taxa": {
-        "appli/class_constructor/Pool": [[2,2]],
+        "appli/class/constructor": [[2,2]],
         "appli/function/builtin/range": [[3,3]],
-        "appli/method/apply_async": [[4,4]],
+        "appli/method": [[4,4]],
         "flow/loop/exit/late": [[3,4]],
         "flow/loop/for/arithmetic/start": [[3,4]],
         "library/standard/multiprocessing/Pool": [[1,1]],
@@ -1384,11 +1381,12 @@
         "free_call:f": [[5,5]],
         "import:threading": [[1,1]],
         "import_module:threading": [[1,1]],
-        "member_call:Lock": [[2,2]],
-        "member_call:acquire": [[3,3]],
-        "member_call:release": [[7,7]],
+        "member_call:lock:acquire": [[3,3]],
+        "member_call:lock:release": [[7,7]],
+        "member_call_member:Lock": [[2,2]],
+        "member_call_member:acquire": [[3,3]],
+        "member_call_member:release": [[7,7]],
         "member_call_object:lock": [[3,3],[7,7]],
-        "member_call_without_result:acquire": [[3,3]],
         "node:Assign": [[2,2],[5,5]],
         "node:Attribute": [[2,2],[3,3],[7,7]],
         "node:Call": [[2,2],[3,3],[5,5],[7,7]],
@@ -1401,9 +1399,7 @@
         "whole_span:7": [[1,7]]
       },
       "taxa": {
-        "appli/function/f": [[5,5]],
-        "appli/method/acquire": [[3,3]],
-        "appli/method/release": [[7,7]],
+        "appli/method": [[3,3],[7,7]],
         "library/standard/threading": [[1,1]],
         "meta/program": [[1,7]],
         "meta/sloc/7": [[1,7]],
@@ -1433,7 +1429,7 @@
       },
       "taxa": {
         "abstr/class": [[1,2]],
-        "appli/class_constructor/T": [[3,3]],
+        "appli/class/constructor": [[3,3]],
         "appli/composition": [[3,3]],
         "appli/function/builtin/casting/set": [[3,3]],
         "flow/null_operation": [[2,2]],
@@ -1478,8 +1474,6 @@
         "abstr/higher_order": [[1,2]],
         "abstr/return/something": [[2,2]],
         "appli/composition": [[2,2]],
-        "appli/function/f": [[2,2]],
-        "appli/function/g": [[2,2]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]]
       }
@@ -1519,8 +1513,6 @@
         "abstr/higher_order": [[1,2]],
         "abstr/return/something": [[2,2]],
         "appli/composition": [[2,2]],
-        "appli/function/f": [[2,2]],
-        "appli/function/g": [[2,2]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]]
       }
@@ -1683,11 +1675,10 @@
         "literal:Tuple": [[10,10],[13,13],[13,13]],
         "loop:for": [[7,8],[10,12]],
         "loop_with_late_exit:for": [[7,8],[10,12]],
-        "member_call:add": [[11,11],[12,12]],
-        "member_call:make_path": [[8,8]],
+        "member_call:self:make_path": [[8,8]],
+        "member_call_member:add": [[11,11],[12,12]],
+        "member_call_member:make_path": [[8,8]],
         "member_call_object:self": [[8,8]],
-        "member_call_without_result:add": [[11,11],[12,12]],
-        "member_call_without_result:make_path": [[8,8]],
         "method:__init__": [[5,8]],
         "method:make_path": [[9,12]],
         "node:Assign": [[6,6],[13,13]],
@@ -1716,12 +1707,12 @@
         "abstr/argument/vararg": [[5,5]],
         "abstr/class": [[2,3],[4,12]],
         "abstr/method/flavor/instance": [[5,8],[9,12]],
-        "abstr/method/naming/magic": [[5,8]],
+        "abstr/method/naming/magic/__init__": [[5,8]],
         "abstr/procedure": [[5,8],[9,12]],
-        "appli/class_constructor/Graph": [[13,13]],
+        "appli/class/constructor": [[13,13]],
         "appli/function/builtin/zip": [[10,10]],
-        "appli/method/add": [[11,11],[12,12]],
-        "appli/method/make_path": [[8,8]],
+        "appli/method": [[8,8]],
+        "appli/method/non_sequence/set/add": [[11,11],[12,12]],
         "flow/loop/exit/late": [[7,8],[10,12]],
         "flow/loop/for": [[10,12]],
         "flow/loop/for/elements": [[7,8]],
@@ -1751,8 +1742,10 @@
         "call_argument:": [[1,1],[1,1]],
         "literal:-1": [[1,1]],
         "literal:Str": [[1,1],[1,1]],
-        "member_call:decode": [[1,1]],
-        "member_call:encode": [[1,1]],
+        "member_call:s:decode": [[1,1]],
+        "member_call:s:encode": [[1,1]],
+        "member_call_member:decode": [[1,1]],
+        "member_call_member:encode": [[1,1]],
         "member_call_object:s": [[1,1]],
         "node:Assign": [[1,1]],
         "node:Attribute": [[1,1],[1,1]],
@@ -1769,8 +1762,8 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/method/decode": [[1,1]],
-        "appli/method/encode": [[1,1]],
+        "appli/method": [[1,1]],
+        "appli/method/sequence/string/encode": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "subscript/slice/step/backwards": [[1,1]],
@@ -2071,9 +2064,9 @@
       "labels": {
         "call_argument:i": [[1,1]],
         "call_argument:x": [[1,1]],
-        "member_call:insert": [[1,1]],
+        "member_call:s:insert": [[1,1]],
+        "member_call_member:insert": [[1,1]],
         "member_call_object:s": [[1,1]],
-        "member_call_without_result:insert": [[1,1]],
         "node:Attribute": [[1,1]],
         "node:Call": [[1,1]],
         "node:Expr": [[1,1]],
@@ -2087,7 +2080,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/method/insert": [[1,1]],
+        "appli/method/sequence/list/insert": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "type/sequence/list": [[1,1]]
@@ -2101,9 +2094,9 @@
         "import:time": [[1,1]],
         "import_module:time": [[1,1]],
         "literal:5": [[2,2]],
-        "member_call:sleep": [[2,2]],
+        "member_call:time:sleep": [[2,2]],
+        "member_call_member:sleep": [[2,2]],
         "member_call_object:time": [[2,2]],
-        "member_call_without_result:sleep": [[2,2]],
         "node:Attribute": [[2,2]],
         "node:Call": [[2,2]],
         "node:Expr": [[2,2]],
@@ -2113,7 +2106,8 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "appli/method/sleep": [[2,2]],
+        "appli/method": [[2,2]],
+        "appli/method/time/sleep": [[2,2]],
         "library/standard/time": [[1,1]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
@@ -2203,7 +2197,7 @@
         "assignment:split": [[1,1]],
         "assignment_lhs_identifier:chunks": [[1,1]],
         "assignment_rhs_atom:s": [[1,1]],
-        "member_call:split": [[1,1]],
+        "member_call_member:split": [[1,1]],
         "node:Assign": [[1,1]],
         "node:Attribute": [[1,1]],
         "node:Call": [[1,1]],
@@ -2212,7 +2206,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/method/split": [[1,1]],
+        "appli/method/sequence/string/split": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "type/sequence/string": [[1,1]],
@@ -2263,7 +2257,7 @@
       "source": "v in map.values()",
       "labels": {
         "comparison_operator:In": [[1,1]],
-        "member_call:values": [[1,1]],
+        "member_call_member:values": [[1,1]],
         "node:Attribute": [[1,1]],
         "node:Call": [[1,1]],
         "node:Compare": [[1,1]],
@@ -2272,7 +2266,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/method/values": [[1,1]],
+        "appli/method/non_sequence/dictionary/values": [[1,1]],
         "condition/belonging": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
@@ -2289,7 +2283,7 @@
         "assignment_rhs_atom:x": [[1,1]],
         "call_argument:x": [[1,1]],
         "literal:Str": [[1,1]],
-        "member_call:join": [[1,1]],
+        "member_call_member:join": [[1,1]],
         "node:Assign": [[1,1]],
         "node:Attribute": [[1,1]],
         "node:Call": [[1,1]],
@@ -2299,7 +2293,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/method/join": [[1,1]],
+        "appli/method/sequence/string/join": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "type/sequence/string": [[1,1]],
@@ -2322,7 +2316,7 @@
         "external_free_call:map": [[1,1]],
         "free_call:map": [[1,1]],
         "literal:Str": [[1,1]],
-        "member_call:join": [[1,1]],
+        "member_call_member:join": [[1,1]],
         "node:Assign": [[1,1]],
         "node:Attribute": [[1,1]],
         "node:Call": [[1,1],[1,1]],
@@ -2334,7 +2328,7 @@
       "taxa": {
         "appli/composition": [[1,1]],
         "appli/function/builtin/map": [[1,1]],
-        "appli/method/join": [[1,1]],
+        "appli/method/sequence/string/join": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "type/sequence/string": [[1,1]],
@@ -2383,7 +2377,6 @@
       },
       "taxa": {
         "appli/function/builtin/casting/str": [[1,1]],
-        "appli/function/builtin/str": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "type/sequence/string": [[1,1]],
@@ -2416,9 +2409,9 @@
         "literal:1": [[5,5]],
         "literal:1001": [[5,5]],
         "literal:Str": [[6,6]],
-        "member_call:map": [[5,5]],
+        "member_call:p:map": [[5,5]],
+        "member_call_member:map": [[5,5]],
         "member_call_object:p": [[5,5]],
-        "member_call_without_result:map": [[5,5]],
         "multiplication_operator": [[3,3]],
         "node:Attribute": [[5,5]],
         "node:BinOp": [[3,3]],
@@ -2438,10 +2431,10 @@
       "taxa": {
         "abstr/argument/arg": [[2,2]],
         "abstr/procedure": [[2,3]],
-        "appli/class_constructor/Pool": [[4,4]],
+        "appli/class/constructor": [[4,4]],
         "appli/function/builtin/print": [[6,6]],
         "appli/function/builtin/range": [[5,5]],
-        "appli/method/map": [[5,5]],
+        "appli/method": [[5,5]],
         "library/standard/multiprocessing/Pool": [[1,1]],
         "meta/program": [[1,6]],
         "meta/sloc/6": [[1,6]],
@@ -2497,7 +2490,6 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/function/p": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "var/assignment/single": [[1,1]]
@@ -2513,7 +2505,7 @@
         "call_argument:f": [[1,1]],
         "external_free_call:open": [[1,1]],
         "free_call:open": [[1,1]],
-        "member_call:read": [[1,1]],
+        "member_call_member:read": [[1,1]],
         "node:Assign": [[1,1]],
         "node:Attribute": [[1,1]],
         "node:Call": [[1,1],[1,1]],
@@ -2523,7 +2515,7 @@
       },
       "taxa": {
         "appli/function/builtin/open": [[1,1]],
-        "appli/method/read": [[1,1]],
+        "appli/method": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "var/assignment/single": [[1,1]]
@@ -2596,7 +2588,7 @@
         "assignment_rhs_atom:datetime": [[2,2]],
         "import:datetime": [[1,1]],
         "import_module:datetime": [[1,1]],
-        "member_call:now": [[2,2]],
+        "member_call_member:now": [[2,2]],
         "node:Assign": [[2,2]],
         "node:Attribute": [[2,2],[2,2]],
         "node:Call": [[2,2]],
@@ -2606,7 +2598,7 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "appli/method/now": [[2,2]],
+        "appli/method": [[2,2]],
         "library/standard/datetime": [[1,1]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
@@ -2622,7 +2614,7 @@
         "assignment_rhs_atom:x": [[1,1]],
         "assignment_rhs_atom:y": [[1,1]],
         "call_argument:y": [[1,1]],
-        "member_call:find": [[1,1]],
+        "member_call_member:find": [[1,1]],
         "node:Assign": [[1,1]],
         "node:Attribute": [[1,1]],
         "node:Call": [[1,1]],
@@ -2631,7 +2623,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/method/find": [[1,1]],
+        "appli/method/sequence/string/find": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "type/sequence/string": [[1,1]],
@@ -2649,7 +2641,7 @@
         "assignment_rhs_atom:z": [[1,1]],
         "call_argument:y": [[1,1]],
         "call_argument:z": [[1,1]],
-        "member_call:replace": [[1,1]],
+        "member_call_member:replace": [[1,1]],
         "node:Assign": [[1,1]],
         "node:Attribute": [[1,1]],
         "node:Call": [[1,1]],
@@ -2658,7 +2650,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/method/replace": [[1,1]],
+        "appli/method/sequence/string/replace": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "type/sequence/string": [[1,1]],
@@ -2700,7 +2692,7 @@
         "assignment_rhs_atom:x": [[1,1]],
         "call_argument:x": [[1,1]],
         "literal:Str": [[1,1]],
-        "member_call:format": [[1,1]],
+        "member_call_member:format": [[1,1]],
         "node:Assign": [[1,1]],
         "node:Attribute": [[1,1]],
         "node:Call": [[1,1]],
@@ -2710,7 +2702,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/method/format": [[1,1]],
+        "appli/method/sequence/string/format": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "type/sequence/string": [[1,1]],
@@ -2756,7 +2748,7 @@
         "function_returning_something:binom": [[2,3]],
         "import:math": [[1,1]],
         "import_module:math": [[1,1]],
-        "member_call:factorial": [[3,3],[3,3],[3,3]],
+        "member_call_member:factorial": [[3,3],[3,3],[3,3]],
         "node:Attribute": [[3,3],[3,3],[3,3]],
         "node:BinOp": [[3,3],[3,3],[3,3]],
         "node:Call": [[3,3],[3,3],[3,3]],
@@ -2772,7 +2764,7 @@
         "abstr/argument/arg": [[2,2],[2,2]],
         "abstr/function": [[2,3]],
         "abstr/return/something": [[3,3]],
-        "appli/method/factorial": [[3,3],[3,3],[3,3]],
+        "appli/method": [[3,3],[3,3],[3,3]],
         "library/standard/math": [[1,1]],
         "meta/program": [[1,3]],
         "meta/sloc/3": [[1,3]],
@@ -2802,7 +2794,7 @@
         "import_module:math": [[2,2]],
         "import_name:division": [[1,1]],
         "literal:8.0": [[3,3]],
-        "member_call:ceil": [[3,3]],
+        "member_call_member:ceil": [[3,3]],
         "node:Assign": [[3,3]],
         "node:Attribute": [[3,3]],
         "node:BinOp": [[3,3]],
@@ -2818,7 +2810,7 @@
         "appli/composition": [[3,3],[3,3]],
         "appli/function/builtin/casting/bytearray": [[3,3]],
         "appli/function/builtin/casting/int": [[3,3]],
-        "appli/method/ceil": [[3,3]],
+        "appli/method": [[3,3]],
         "library/standard/__future__/division": [[1,1]],
         "library/standard/math": [[2,2]],
         "meta/program": [[1,3]],
@@ -2840,7 +2832,7 @@
         "call_argument:s": [[2,2]],
         "import:random": [[1,1]],
         "import_module:random": [[1,1]],
-        "member_call:Random": [[2,2]],
+        "member_call_member:Random": [[2,2]],
         "node:Assign": [[2,2]],
         "node:Attribute": [[2,2]],
         "node:Call": [[2,2]],
@@ -2865,7 +2857,7 @@
         "assignment_rhs_atom:random": [[2,2]],
         "import:random": [[1,1]],
         "import_module:random": [[1,1]],
-        "member_call:Random": [[2,2]],
+        "member_call_member:Random": [[2,2]],
         "node:Assign": [[2,2]],
         "node:Attribute": [[2,2]],
         "node:Call": [[2,2]],
@@ -2894,7 +2886,7 @@
         "import_module:sys": [[1,1]],
         "literal:1": [[2,2]],
         "literal:Str": [[2,2]],
-        "member_call:join": [[2,2]],
+        "member_call_member:join": [[2,2]],
         "node:Attribute": [[2,2],[2,2]],
         "node:Call": [[2,2],[2,2]],
         "node:Expr": [[2,2]],
@@ -2912,7 +2904,7 @@
       "taxa": {
         "appli/composition": [[2,2]],
         "appli/function/builtin/print": [[2,2]],
-        "appli/method/join": [[2,2]],
+        "appli/method/sequence/string/join": [[2,2]],
         "library/standard/sys": [[1,1]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
@@ -2959,7 +2951,6 @@
         "abstr/function": [[1,3]],
         "abstr/higher_order": [[1,3]],
         "abstr/return/something": [[3,3]],
-        "appli/function/a_class": [[3,3]],
         "appli/function/builtin/issubclass": [[2,2]],
         "flow/conditional/no_else": [[2,3]],
         "meta/program": [[1,3]],
@@ -2989,7 +2980,6 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "appli/function/gcd": [[2,2]],
         "library/standard/fractions/gcd": [[1,1]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
@@ -3023,7 +3013,6 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "appli/function/gcd": [[2,2]],
         "library/standard/fractions/gcd": [[1,1]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
@@ -3041,7 +3030,7 @@
         "assignment_rhs_atom:x": [[1,1]],
         "call_argument:x": [[1,1]],
         "literal:Str": [[1,1]],
-        "member_call:format": [[1,1]],
+        "member_call_member:format": [[1,1]],
         "node:Assign": [[1,1]],
         "node:Attribute": [[1,1]],
         "node:Call": [[1,1]],
@@ -3051,7 +3040,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/method/format": [[1,1]],
+        "appli/method/sequence/string/format": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "type/sequence/string": [[1,1]],
@@ -3124,7 +3113,6 @@
         "whole_span:4": [[1,4]]
       },
       "taxa": {
-        "appli/function/do_something": [[2,2]],
         "appli/function/without_arguments": [[2,2]],
         "flow/conditional/no_else": [[3,4]],
         "flow/loop/exit/early/break": [[1,4]],
@@ -3224,7 +3212,7 @@
         "assignment_rhs_atom:s": [[1,1]],
         "assignment_rhs_atom:t": [[1,1]],
         "call_argument:t": [[1,1]],
-        "member_call:count": [[1,1]],
+        "member_call_member:count": [[1,1]],
         "node:Assign": [[1,1]],
         "node:Attribute": [[1,1]],
         "node:Call": [[1,1]],
@@ -3233,7 +3221,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/method/count": [[1,1]],
+        "appli/method/sequence/count": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "type/sequence": [[1,1]],
@@ -3251,7 +3239,7 @@
         "import:re": [[1,1]],
         "import_module:re": [[1,1]],
         "literal:Str": [[2,2]],
-        "member_call:compile": [[2,2]],
+        "member_call_member:compile": [[2,2]],
         "node:Assign": [[2,2]],
         "node:Attribute": [[2,2]],
         "node:Call": [[2,2]],
@@ -3262,7 +3250,7 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "appli/method/compile": [[2,2]],
+        "appli/method": [[2,2]],
         "library/standard/re": [[1,1]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
@@ -3282,7 +3270,7 @@
         "external_free_call:bin": [[1,1]],
         "free_call:bin": [[1,1]],
         "literal:Str": [[1,1]],
-        "member_call:count": [[1,1]],
+        "member_call_member:count": [[1,1]],
         "node:Assign": [[1,1]],
         "node:Attribute": [[1,1]],
         "node:Call": [[1,1],[1,1]],
@@ -3293,7 +3281,7 @@
       },
       "taxa": {
         "appli/function/builtin/bin": [[1,1]],
-        "appli/method/count": [[1,1]],
+        "appli/method/sequence/count": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "type/sequence": [[1,1]],
@@ -3359,9 +3347,9 @@
         "import:sys": [[1,1]],
         "import_module:sys": [[1,1]],
         "literal:1": [[2,2]],
-        "member_call:exit": [[2,2]],
+        "member_call:sys:exit": [[2,2]],
+        "member_call_member:exit": [[2,2]],
         "member_call_object:sys": [[2,2]],
-        "member_call_without_result:exit": [[2,2]],
         "node:Attribute": [[2,2]],
         "node:Call": [[2,2]],
         "node:Expr": [[2,2]],
@@ -3371,7 +3359,8 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "appli/method/exit": [[2,2]],
+        "appli/method": [[2,2]],
+        "appli/method/sys/exit": [[2,2]],
         "library/standard/sys": [[1,1]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
@@ -3463,7 +3452,7 @@
         "abstr/decorated": [[4,6]],
         "abstr/function": [[4,6]],
         "abstr/method/flavor/instance": [[2,3],[4,6]],
-        "abstr/method/naming/magic": [[2,3]],
+        "abstr/method/naming/magic/__init__": [[2,3]],
         "abstr/procedure": [[2,3]],
         "abstr/return/something": [[6,6]],
         "meta/program": [[1,6]],
@@ -3487,7 +3476,7 @@
         "import:json": [[1,1]],
         "import_module:json": [[1,1]],
         "literal:Str": [[2,2],[2,2]],
-        "member_call:load": [[3,3]],
+        "member_call_member:load": [[3,3]],
         "node:Assign": [[3,3]],
         "node:Attribute": [[3,3]],
         "node:Call": [[2,2],[3,3]],
@@ -3500,7 +3489,7 @@
       },
       "taxa": {
         "appli/function/builtin/open": [[2,2]],
-        "appli/method/load": [[3,3]],
+        "appli/method": [[3,3]],
         "library/standard/json": [[1,1]],
         "meta/program": [[1,3]],
         "meta/sloc/3": [[1,3]],
@@ -3520,9 +3509,9 @@
         "import:json": [[1,1]],
         "import_module:json": [[1,1]],
         "literal:Str": [[2,2],[2,2]],
-        "member_call:dump": [[3,3]],
+        "member_call:json:dump": [[3,3]],
+        "member_call_member:dump": [[3,3]],
         "member_call_object:json": [[3,3]],
-        "member_call_without_result:dump": [[3,3]],
         "node:Attribute": [[3,3]],
         "node:Call": [[2,2],[3,3]],
         "node:Expr": [[3,3]],
@@ -3534,7 +3523,8 @@
       },
       "taxa": {
         "appli/function/builtin/open": [[2,2]],
-        "appli/method/dump": [[3,3]],
+        "appli/method": [[3,3]],
+        "appli/method/json/dump": [[3,3]],
         "library/standard/json": [[1,1]],
         "meta/program": [[1,3]],
         "meta/sloc/3": [[1,3]],
@@ -3571,7 +3561,6 @@
         "abstr/function": [[2,3]],
         "abstr/higher_order": [[2,3]],
         "abstr/return/something": [[3,3]],
-        "appli/function/f": [[3,3]],
         "appli/function/without_arguments": [[3,3]],
         "library/standard/__future__/print_function": [[1,1]],
         "meta/program": [[1,3]],
@@ -3634,7 +3623,7 @@
         "call_argument:path": [[2,2]],
         "import:os": [[1,1]],
         "import_module:os": [[1,1]],
-        "member_call:getsize": [[2,2]],
+        "member_call_member:getsize": [[2,2]],
         "node:Assign": [[2,2]],
         "node:Attribute": [[2,2],[2,2]],
         "node:Call": [[2,2]],
@@ -3644,7 +3633,7 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "appli/method/getsize": [[2,2]],
+        "appli/method": [[2,2]],
         "library/standard/os": [[1,1]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
@@ -3660,7 +3649,7 @@
         "assignment_rhs_atom:prefix": [[1,1]],
         "assignment_rhs_atom:s": [[1,1]],
         "call_argument:prefix": [[1,1]],
-        "member_call:startswith": [[1,1]],
+        "member_call_member:startswith": [[1,1]],
         "node:Assign": [[1,1]],
         "node:Attribute": [[1,1]],
         "node:Call": [[1,1]],
@@ -3669,7 +3658,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/method/startswith": [[1,1]],
+        "appli/method/sequence/string/startswith": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "type/sequence/string": [[1,1]],
@@ -3685,7 +3674,7 @@
         "assignment_rhs_atom:s": [[1,1]],
         "assignment_rhs_atom:suffix": [[1,1]],
         "call_argument:suffix": [[1,1]],
-        "member_call:endswith": [[1,1]],
+        "member_call_member:endswith": [[1,1]],
         "node:Assign": [[1,1]],
         "node:Attribute": [[1,1]],
         "node:Call": [[1,1]],
@@ -3694,7 +3683,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/method/endswith": [[1,1]],
+        "appli/method/sequence/string/endswith": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "type/sequence/string": [[1,1]],
@@ -3712,7 +3701,7 @@
         "call_argument:ts": [[2,2]],
         "import:datetime": [[1,1]],
         "import_module:datetime": [[1,1]],
-        "member_call:fromtimestamp": [[2,2]],
+        "member_call_member:fromtimestamp": [[2,2]],
         "node:Assign": [[2,2]],
         "node:Attribute": [[2,2],[2,2]],
         "node:Call": [[2,2]],
@@ -3722,7 +3711,7 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "appli/method/fromtimestamp": [[2,2]],
+        "appli/method": [[2,2]],
         "library/standard/datetime": [[1,1]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
@@ -3754,7 +3743,7 @@
         "literal:28": [[2,2]],
         "literal:9": [[2,2]],
         "literal:Str": [[3,3]],
-        "member_call:strftime": [[3,3]],
+        "member_call_member:strftime": [[3,3]],
         "node:Assign": [[2,2],[3,3]],
         "node:Attribute": [[3,3]],
         "node:Call": [[2,2],[3,3]],
@@ -3767,8 +3756,7 @@
         "whole_span:3": [[1,3]]
       },
       "taxa": {
-        "appli/function/date": [[2,2]],
-        "appli/method/strftime": [[3,3]],
+        "appli/method": [[3,3]],
         "library/standard/datetime/date": [[1,1]],
         "meta/program": [[1,3]],
         "meta/sloc/3": [[1,3]],
@@ -3790,8 +3778,8 @@
         "import:datetime:date": [[1,1]],
         "import_module:datetime": [[1,1]],
         "import_name:date": [[1,1]],
-        "member_call:isoformat": [[3,3]],
-        "member_call:today": [[2,2]],
+        "member_call_member:isoformat": [[3,3]],
+        "member_call_member:today": [[2,2]],
         "node:Assign": [[2,2],[3,3]],
         "node:Attribute": [[2,2],[3,3]],
         "node:Call": [[2,2],[3,3]],
@@ -3802,8 +3790,7 @@
         "whole_span:3": [[1,3]]
       },
       "taxa": {
-        "appli/method/isoformat": [[3,3]],
-        "appli/method/today": [[2,2]],
+        "appli/method": [[2,2],[3,3]],
         "library/standard/datetime/date": [[1,1]],
         "meta/program": [[1,3]],
         "meta/sloc/3": [[1,3]],
@@ -3815,9 +3802,9 @@
       "source": "items.sort(c)",
       "labels": {
         "call_argument:c": [[1,1]],
-        "member_call:sort": [[1,1]],
+        "member_call:items:sort": [[1,1]],
+        "member_call_member:sort": [[1,1]],
         "member_call_object:items": [[1,1]],
-        "member_call_without_result:sort": [[1,1]],
         "node:Attribute": [[1,1]],
         "node:Call": [[1,1]],
         "node:Expr": [[1,1]],
@@ -3825,7 +3812,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/method/sort": [[1,1]],
+        "appli/method/sequence/list/sort": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "type/sequence/list": [[1,1]]
@@ -3841,8 +3828,8 @@
         "call_argument:u": [[2,2]],
         "import:urllib.request": [[1,1]],
         "import_module:urllib.request": [[1,1]],
-        "member_call:read": [[3,3]],
-        "member_call:urlopen": [[2,2]],
+        "member_call_member:read": [[3,3]],
+        "member_call_member:urlopen": [[2,2]],
         "node:Assign": [[3,3]],
         "node:Attribute": [[2,2],[2,2],[3,3]],
         "node:Call": [[2,2],[3,3]],
@@ -3853,8 +3840,7 @@
         "whole_span:3": [[1,3]]
       },
       "taxa": {
-        "appli/method/read": [[3,3]],
-        "appli/method/urlopen": [[2,2]],
+        "appli/method": [[2,2],[3,3]],
         "library/standard/urllib.request": [[1,1]],
         "meta/program": [[1,3]],
         "meta/sloc/3": [[1,3]],
@@ -3876,7 +3862,7 @@
         "import_module:urllib": [[1,1]],
         "literal:Str": [[2,2]],
         "literal:Tuple": [[2,2]],
-        "member_call:urlretrieve": [[2,2]],
+        "member_call_member:urlretrieve": [[2,2]],
         "node:Assign": [[2,2]],
         "node:Attribute": [[2,2],[2,2]],
         "node:Call": [[2,2]],
@@ -3888,7 +3874,7 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "appli/method/urlretrieve": [[2,2]],
+        "appli/method": [[2,2]],
         "library/standard/urllib": [[1,1]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
@@ -3908,7 +3894,7 @@
         "import:lxml.etree": [[1,1]],
         "import_module:lxml.etree": [[1,1]],
         "literal:Str": [[2,2]],
-        "member_call:parse": [[2,2]],
+        "member_call_member:parse": [[2,2]],
         "node:Assign": [[2,2]],
         "node:Attribute": [[2,2],[2,2]],
         "node:Call": [[2,2]],
@@ -3919,7 +3905,7 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "appli/method/parse": [[2,2]],
+        "appli/method": [[2,2]],
         "library/third_party/lxml.etree": [[1,1]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
@@ -3966,7 +3952,7 @@
         "instance_method:__init__": [[6,9]],
         "literal:None": [[3,3],[4,4],[5,5]],
         "literal:Str": [[10,10],[10,10],[10,10],[11,11]],
-        "member_call:serialize": [[11,11]],
+        "member_call_member:serialize": [[11,11]],
         "method:__init__": [[6,9]],
         "node:Assign": [[3,3],[4,4],[5,5],[7,7],[8,8],[9,9],[10,10],[11,11]],
         "node:Attribute": [[7,7],[8,8],[9,9],[11,11]],
@@ -3990,11 +3976,11 @@
         "abstr/argument/arg": [[6,6],[6,6],[6,6],[6,6]],
         "abstr/class": [[2,9]],
         "abstr/method/flavor/instance": [[6,9]],
-        "abstr/method/naming/magic": [[6,9]],
+        "abstr/method/naming/magic/__init__": [[6,9]],
         "abstr/procedure": [[6,9]],
-        "appli/class_constructor/TestClass": [[10,10]],
+        "appli/class/constructor": [[10,10]],
         "appli/function/builtin/print": [[12,12]],
-        "appli/method/serialize": [[11,11]],
+        "appli/method": [[11,11]],
         "library/third_party/pyxser": [[1,1]],
         "meta/program": [[1,12]],
         "meta/sloc/12": [[1,12]],
@@ -4043,7 +4029,7 @@
         "assignment_rhs_atom:os": [[2,2]],
         "import:os": [[1,1]],
         "import_module:os": [[1,1]],
-        "member_call:getcwd": [[2,2]],
+        "member_call_member:getcwd": [[2,2]],
         "node:Assign": [[2,2]],
         "node:Attribute": [[2,2]],
         "node:Call": [[2,2]],
@@ -4053,7 +4039,7 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "appli/method/getcwd": [[2,2]],
+        "appli/method": [[2,2]],
         "library/standard/os": [[1,1]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
@@ -4073,8 +4059,8 @@
         "composition": [[2,2]],
         "import:os": [[1,1]],
         "import_module:os": [[1,1]],
-        "member_call:abspath": [[2,2]],
-        "member_call:dirname": [[2,2]],
+        "member_call_member:abspath": [[2,2]],
+        "member_call_member:dirname": [[2,2]],
         "node:Assign": [[2,2]],
         "node:Attribute": [[2,2],[2,2],[2,2],[2,2]],
         "node:Call": [[2,2],[2,2]],
@@ -4085,8 +4071,7 @@
       },
       "taxa": {
         "appli/composition": [[2,2]],
-        "appli/method/abspath": [[2,2]],
-        "appli/method/dirname": [[2,2]],
+        "appli/method": [[2,2],[2,2]],
         "library/standard/os": [[1,1]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
@@ -4141,7 +4126,7 @@
         "call_argument:t": [[2,2]],
         "import:pympler.asizeof": [[1,1]],
         "import_module:pympler.asizeof": [[1,1]],
-        "member_call:asizeof": [[2,2]],
+        "member_call_member:asizeof": [[2,2]],
         "node:Assign": [[2,2]],
         "node:Attribute": [[2,2],[2,2]],
         "node:Call": [[2,2]],
@@ -4151,7 +4136,7 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "appli/method/asizeof": [[2,2]],
+        "appli/method": [[2,2]],
         "library/third_party/pympler.asizeof": [[1,1]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
@@ -4168,7 +4153,7 @@
         "comparison_operator:Eq": [[1,1]],
         "empty_literal:Str": [[1,1]],
         "literal:Str": [[1,1]],
-        "member_call:strip": [[1,1]],
+        "member_call_member:strip": [[1,1]],
         "node:Assign": [[1,1]],
         "node:Attribute": [[1,1]],
         "node:Call": [[1,1]],
@@ -4179,7 +4164,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/method/strip": [[1,1]],
+        "appli/method/sequence/string/strip": [[1,1]],
         "condition/equality": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
@@ -4198,9 +4183,9 @@
         "import_module:subprocess": [[1,1]],
         "literal:List": [[2,2]],
         "literal:Str": [[2,2],[2,2],[2,2]],
-        "member_call:call": [[2,2]],
+        "member_call:subprocess:call": [[2,2]],
+        "member_call_member:call": [[2,2]],
         "member_call_object:subprocess": [[2,2]],
-        "member_call_without_result:call": [[2,2]],
         "node:Attribute": [[2,2]],
         "node:Call": [[2,2]],
         "node:Expr": [[2,2]],
@@ -4211,7 +4196,8 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "appli/method/call": [[2,2]],
+        "appli/method": [[2,2]],
+        "appli/method/subprocess/call": [[2,2]],
         "library/standard/subprocess": [[1,1]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
@@ -4271,7 +4257,7 @@
         "literal:Tuple": [[1,1],[1,1],[1,1]],
         "loop:for": [[1,2]],
         "loop_with_late_exit:for": [[1,2]],
-        "member_call:items": [[1,1]],
+        "member_call_member:items": [[1,1]],
         "node:Attribute": [[1,1]],
         "node:Call": [[1,1],[1,1],[2,2]],
         "node:Expr": [[2,2]],
@@ -4285,7 +4271,7 @@
         "appli/composition": [[1,1]],
         "appli/function/builtin/print": [[2,2]],
         "appli/function/builtin/sorted": [[1,1]],
-        "appli/method/items": [[1,1]],
+        "appli/method/non_sequence/dictionary/items": [[1,1]],
         "flow/loop/exit/late": [[1,2]],
         "flow/loop/for": [[1,2]],
         "meta/program": [[1,2]],
@@ -4356,7 +4342,7 @@
         "call_argument:w": [[1,1]],
         "empty_literal:Str": [[1,1]],
         "literal:Str": [[1,1]],
-        "member_call:replace": [[1,1]],
+        "member_call_member:replace": [[1,1]],
         "node:Assign": [[1,1]],
         "node:Attribute": [[1,1]],
         "node:Call": [[1,1]],
@@ -4366,7 +4352,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/method/replace": [[1,1]],
+        "appli/method/sequence/string/replace": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "type/sequence/string": [[1,1]],
@@ -4506,12 +4492,12 @@
         "literal:Str": [[1,1],[1,1],[1,1],[1,1]],
         "loop:for": [[4,7]],
         "loop_with_late_exit:for": [[4,7]],
-        "member_call:add": [[6,6]],
-        "member_call:append": [[7,7]],
+        "member_call:elements_unique:append": [[7,7]],
+        "member_call:unique_set:add": [[6,6]],
+        "member_call_member:add": [[6,6]],
+        "member_call_member:append": [[7,7]],
         "member_call_object:elements_unique": [[7,7]],
         "member_call_object:unique_set": [[6,6]],
-        "member_call_without_result:add": [[6,6]],
-        "member_call_without_result:append": [[7,7]],
         "node:Assign": [[1,1],[2,2],[3,3]],
         "node:Attribute": [[6,6],[7,7]],
         "node:Call": [[2,2],[6,6],[7,7],[8,8]],
@@ -4539,8 +4525,8 @@
         "appli/function/builtin/casting/set": [[2,2]],
         "appli/function/builtin/print": [[8,8]],
         "appli/function/without_arguments": [[2,2]],
-        "appli/method/add": [[6,6]],
-        "appli/method/append": [[7,7]],
+        "appli/method/non_sequence/set/add": [[6,6]],
+        "appli/method/sequence/list/append": [[7,7]],
         "condition/belonging/not": [[5,5]],
         "flow/conditional/no_else": [[5,7]],
         "flow/loop/exit/late": [[4,7]],
@@ -4581,7 +4567,6 @@
       "taxa": {
         "appli/composition": [[1,1]],
         "appli/function/builtin/casting/int": [[1,1]],
-        "appli/function/raw_input": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "type/number/integer": [[1,1]],
@@ -4618,11 +4603,11 @@
         "literal:Tuple": [[4,4],[6,6]],
         "loop:while": [[5,7]],
         "loop_with_late_exit:while": [[5,7]],
-        "member_call:bind": [[4,4]],
-        "member_call:recvfrom": [[6,6]],
-        "member_call:socket": [[3,3]],
+        "member_call:sock:bind": [[4,4]],
+        "member_call_member:bind": [[4,4]],
+        "member_call_member:recvfrom": [[6,6]],
+        "member_call_member:socket": [[3,3]],
         "member_call_object:sock": [[4,4]],
-        "member_call_without_result:bind": [[4,4]],
         "node:Assign": [[2,2],[3,3],[6,6]],
         "node:Attribute": [[3,3],[3,3],[3,3],[4,4],[6,6]],
         "node:Call": [[3,3],[4,4],[6,6],[7,7]],
@@ -4642,9 +4627,7 @@
       },
       "taxa": {
         "appli/function/builtin/print": [[7,7]],
-        "appli/method/bind": [[4,4]],
-        "appli/method/recvfrom": [[6,6]],
-        "appli/method/socket": [[3,3]],
+        "appli/method": [[3,3],[4,4],[6,6]],
         "flow/loop/exit/late": [[5,7]],
         "flow/loop/while/infinite": [[5,7]],
         "library/standard/socket": [[1,1]],
@@ -4780,7 +4763,7 @@
         "import_module:bisect": [[1,1]],
         "index:i": [[4,4]],
         "literal:-1": [[4,4]],
-        "member_call:bisect_left": [[3,3]],
+        "member_call_member:bisect_left": [[3,3]],
         "node:Assign": [[3,3]],
         "node:Attribute": [[3,3]],
         "node:BoolOp": [[4,4]],
@@ -4803,7 +4786,7 @@
         "abstr/function": [[2,4]],
         "abstr/return/something": [[4,4]],
         "appli/function/builtin/len": [[4,4]],
-        "appli/method/bisect_left": [[3,3]],
+        "appli/method": [[3,3]],
         "condition/equality": [[4,4]],
         "condition/equality/not": [[4,4]],
         "library/standard/bisect": [[1,1]],
@@ -4837,7 +4820,7 @@
         "import:time": [[1,1]],
         "import_module:time": [[1,1]],
         "literal:Str": [[5,5]],
-        "member_call:perf_counter": [[2,2],[4,4]],
+        "member_call_member:perf_counter": [[2,2],[4,4]],
         "node:Assign": [[2,2],[4,4]],
         "node:Attribute": [[2,2],[4,4]],
         "node:BinOp": [[5,5]],
@@ -4852,9 +4835,8 @@
       },
       "taxa": {
         "appli/function/builtin/print": [[5,5]],
-        "appli/function/foo": [[3,3]],
         "appli/function/without_arguments": [[3,3]],
-        "appli/method/perf_counter": [[2,2],[4,4]],
+        "appli/method": [[2,2],[4,4]],
         "library/standard/time": [[1,1]],
         "meta/program": [[1,5]],
         "meta/sloc/5": [[1,5]],
@@ -4903,7 +4885,8 @@
         "import:imp": [[1,1]],
         "import_module:imp": [[1,1]],
         "literal:Str": [[2,2],[2,2]],
-        "member_call:load_module": [[2,2]],
+        "member_call:imp:load_module": [[2,2]],
+        "member_call_member:load_module": [[2,2]],
         "member_call_object:imp": [[2,2]],
         "node:Assign": [[2,2]],
         "node:Attribute": [[2,2],[2,2]],
@@ -4915,7 +4898,8 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "appli/method/load_module": [[2,2]],
+        "appli/method": [[2,2]],
+        "appli/method/imp/load_module": [[2,2]],
         "library/standard/imp": [[1,1]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
@@ -4960,10 +4944,10 @@
         "loop:while": [[3,9]],
         "loop_with_late_exit:for": [[6,9]],
         "loop_with_late_exit:while": [[3,9]],
-        "member_call:append": [[9,9]],
-        "member_call:pop": [[4,4]],
+        "member_call:Q:append": [[9,9]],
+        "member_call_member:append": [[9,9]],
+        "member_call_member:pop": [[4,4]],
         "member_call_object:Q": [[9,9]],
-        "member_call_without_result:append": [[9,9]],
         "node:Assign": [[2,2],[4,4],[8,8]],
         "node:Attribute": [[4,4],[7,7],[8,8],[9,9]],
         "node:Call": [[4,4],[5,5],[9,9]],
@@ -4991,9 +4975,8 @@
         "abstr/argument/arg": [[1,1],[1,1]],
         "abstr/higher_order": [[1,9]],
         "abstr/procedure": [[1,9]],
-        "appli/function/f": [[5,5]],
-        "appli/method/append": [[9,9]],
-        "appli/method/pop": [[4,4]],
+        "appli/method": [[4,4]],
+        "appli/method/sequence/list/append": [[9,9]],
         "flow/conditional/no_else": [[7,9]],
         "flow/loop/exit/late": [[3,9],[6,9]],
         "flow/loop/for/elements": [[6,9]],
@@ -5048,13 +5031,13 @@
         "literal:List": [[4,4]],
         "loop:while": [[5,9]],
         "loop_with_late_exit:while": [[5,9]],
-        "member_call:add": [[8,8]],
-        "member_call:extend": [[9,9]],
-        "member_call:popleft": [[6,6]],
+        "member_call:q:extend": [[9,9]],
+        "member_call:seen:add": [[8,8]],
+        "member_call_member:add": [[8,8]],
+        "member_call_member:extend": [[9,9]],
+        "member_call_member:popleft": [[6,6]],
         "member_call_object:q": [[9,9]],
         "member_call_object:seen": [[8,8]],
-        "member_call_without_result:add": [[8,8]],
-        "member_call_without_result:extend": [[9,9]],
         "node:Assign": [[3,3],[4,4],[6,6]],
         "node:Attribute": [[6,6],[8,8],[9,9],[9,9]],
         "node:Call": [[3,3],[4,4],[6,6],[7,7],[8,8],[9,9]],
@@ -5081,12 +5064,10 @@
         "abstr/higher_order": [[2,9]],
         "abstr/procedure": [[2,9]],
         "appli/function/builtin/casting/set": [[3,3]],
-        "appli/function/deque": [[4,4]],
-        "appli/function/f": [[7,7]],
         "appli/function/without_arguments": [[3,3]],
-        "appli/method/add": [[8,8]],
-        "appli/method/extend": [[9,9]],
-        "appli/method/popleft": [[6,6]],
+        "appli/method": [[6,6]],
+        "appli/method/non_sequence/set/add": [[8,8]],
+        "appli/method/sequence/list/extend": [[9,9]],
         "condition/belonging/not": [[9,9]],
         "flow/loop/exit/late": [[5,9]],
         "flow/loop/while": [[5,9]],
@@ -5133,13 +5114,13 @@
         "literal:List": [[3,3]],
         "loop:while": [[4,8]],
         "loop_with_late_exit:while": [[4,8]],
-        "member_call:add": [[7,7]],
-        "member_call:extend": [[8,8]],
-        "member_call:pop": [[5,5]],
+        "member_call:seen:add": [[7,7]],
+        "member_call:stack:extend": [[8,8]],
+        "member_call_member:add": [[7,7]],
+        "member_call_member:extend": [[8,8]],
+        "member_call_member:pop": [[5,5]],
         "member_call_object:seen": [[7,7]],
         "member_call_object:stack": [[8,8]],
-        "member_call_without_result:add": [[7,7]],
-        "member_call_without_result:extend": [[8,8]],
         "node:Assign": [[2,2],[3,3],[5,5]],
         "node:Attribute": [[5,5],[7,7],[8,8],[8,8]],
         "node:Call": [[2,2],[5,5],[6,6],[7,7],[8,8]],
@@ -5165,11 +5146,10 @@
         "abstr/higher_order": [[1,8]],
         "abstr/procedure": [[1,8]],
         "appli/function/builtin/casting/set": [[2,2]],
-        "appli/function/f": [[6,6]],
         "appli/function/without_arguments": [[2,2]],
-        "appli/method/add": [[7,7]],
-        "appli/method/extend": [[8,8]],
-        "appli/method/pop": [[5,5]],
+        "appli/method": [[5,5]],
+        "appli/method/non_sequence/set/add": [[7,7]],
+        "appli/method/sequence/list/extend": [[8,8]],
         "condition/belonging/not": [[8,8]],
         "flow/loop/exit/late": [[4,8]],
         "flow/loop/while": [[4,8]],
@@ -5226,9 +5206,6 @@
         "whole_span:6": [[1,6]]
       },
       "taxa": {
-        "appli/function/f1": [[2,2]],
-        "appli/function/f2": [[4,4]],
-        "appli/function/f3": [[6,6]],
         "appli/function/without_arguments": [[2,2],[4,4],[6,6]],
         "flow/conditional": [[1,6],[3,6],[5,6]],
         "flow/conditional/else/if": [[4,4],[6,6]],
@@ -5247,7 +5224,7 @@
         "import:timeit": [[1,1]],
         "import_module:timeit": [[1,1]],
         "literal:Str": [[2,2],[2,2]],
-        "member_call:timeit": [[2,2]],
+        "member_call_member:timeit": [[2,2]],
         "node:Assign": [[2,2]],
         "node:Attribute": [[2,2]],
         "node:Call": [[2,2]],
@@ -5258,7 +5235,7 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "appli/method/timeit": [[2,2]],
+        "appli/method": [[2,2]],
         "library/standard/timeit": [[1,1]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
@@ -5275,7 +5252,7 @@
         "assignment_rhs_atom:s": [[1,1]],
         "assignment_rhs_atom:word": [[1,1]],
         "comparison_operator:In": [[1,1]],
-        "member_call:lower": [[1,1],[1,1]],
+        "member_call_member:lower": [[1,1],[1,1]],
         "node:Assign": [[1,1]],
         "node:Attribute": [[1,1],[1,1]],
         "node:Call": [[1,1],[1,1]],
@@ -5285,7 +5262,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/method/lower": [[1,1],[1,1]],
+        "appli/method/sequence/string/lower": [[1,1],[1,1]],
         "condition/belonging": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
@@ -5322,9 +5299,9 @@
       "source": "items.remove(x)",
       "labels": {
         "call_argument:x": [[1,1]],
-        "member_call:remove": [[1,1]],
+        "member_call:items:remove": [[1,1]],
+        "member_call_member:remove": [[1,1]],
         "member_call_object:items": [[1,1]],
-        "member_call_without_result:remove": [[1,1]],
         "node:Attribute": [[1,1]],
         "node:Call": [[1,1]],
         "node:Expr": [[1,1]],
@@ -5336,7 +5313,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/method/remove": [[1,1]],
+        "appli/method": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]]
       }
@@ -5376,7 +5353,7 @@
         "assignment:isdigit": [[1,1]],
         "assignment_lhs_identifier:b": [[1,1]],
         "assignment_rhs_atom:s": [[1,1]],
-        "member_call:isdigit": [[1,1]],
+        "member_call_member:isdigit": [[1,1]],
         "node:Assign": [[1,1]],
         "node:Attribute": [[1,1]],
         "node:Call": [[1,1]],
@@ -5385,7 +5362,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/method/isdigit": [[1,1]],
+        "appli/method/sequence/string/isdigit": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "type/sequence/string": [[1,1]],
@@ -5401,7 +5378,7 @@
         "assignment_rhs_atom:tempfile": [[2,2]],
         "import:tempfile": [[1,1]],
         "import_module:tempfile": [[1,1]],
-        "member_call:TemporaryFile": [[2,2]],
+        "member_call_member:TemporaryFile": [[2,2]],
         "node:Assign": [[2,2]],
         "node:Attribute": [[2,2]],
         "node:Call": [[2,2]],
@@ -5426,7 +5403,7 @@
         "assignment_rhs_atom:tempfile": [[2,2]],
         "import:tempfile": [[1,1]],
         "import_module:tempfile": [[1,1]],
-        "member_call:TemporaryDirectory": [[2,2]],
+        "member_call_member:TemporaryDirectory": [[2,2]],
         "node:Assign": [[2,2]],
         "node:Attribute": [[2,2]],
         "node:Call": [[2,2]],
@@ -5449,9 +5426,9 @@
         "call_argument:None": [[1,1]],
         "call_argument:k": [[1,1]],
         "literal:None": [[1,1]],
-        "member_call:pop": [[1,1]],
+        "member_call:m:pop": [[1,1]],
+        "member_call_member:pop": [[1,1]],
         "member_call_object:m": [[1,1]],
-        "member_call_without_result:pop": [[1,1]],
         "node:Attribute": [[1,1]],
         "node:Call": [[1,1]],
         "node:Expr": [[1,1]],
@@ -5466,7 +5443,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/method/pop": [[1,1]],
+        "appli/method": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "type/null/literal": [[1,1]]
@@ -5565,7 +5542,7 @@
         "call_argument:fp": [[2,2]],
         "import:os": [[1,1]],
         "import_module:os": [[1,1]],
-        "member_call:exists": [[2,2]],
+        "member_call_member:exists": [[2,2]],
         "node:Assign": [[2,2]],
         "node:Attribute": [[2,2],[2,2]],
         "node:Call": [[2,2]],
@@ -5575,7 +5552,7 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "appli/method/exists": [[2,2]],
+        "appli/method": [[2,2]],
         "library/standard/os": [[1,1]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
@@ -5595,7 +5572,7 @@
         "import:pathlib:Path": [[1,1]],
         "import_module:pathlib": [[1,1]],
         "import_name:Path": [[1,1]],
-        "member_call:exists": [[2,2]],
+        "member_call_member:exists": [[2,2]],
         "node:Assign": [[2,2]],
         "node:Attribute": [[2,2]],
         "node:Call": [[2,2],[2,2]],
@@ -5605,8 +5582,8 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "appli/class_constructor/Path": [[2,2]],
-        "appli/method/exists": [[2,2]],
+        "appli/class/constructor": [[2,2]],
+        "appli/method": [[2,2]],
         "library/standard/pathlib/Path": [[1,1]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
@@ -5627,13 +5604,13 @@
         "import_module:logging": [[1,1]],
         "import_module:sys": [[1,1]],
         "literal:Str": [[3,3],[5,5]],
-        "member_call:basicConfig": [[2,2]],
-        "member_call:getLogger": [[5,5]],
-        "member_call:info": [[6,6]],
+        "member_call:logger:info": [[6,6]],
+        "member_call:logging:basicConfig": [[2,2]],
+        "member_call_member:basicConfig": [[2,2]],
+        "member_call_member:getLogger": [[5,5]],
+        "member_call_member:info": [[6,6]],
         "member_call_object:logger": [[6,6]],
         "member_call_object:logging": [[2,2]],
-        "member_call_without_result:basicConfig": [[2,2]],
-        "member_call_without_result:info": [[6,6]],
         "node:Assign": [[5,5]],
         "node:Attribute": [[2,2],[3,3],[3,3],[5,5],[6,6]],
         "node:Call": [[2,3],[5,5],[6,6]],
@@ -5645,9 +5622,8 @@
         "whole_span:6": [[1,6]]
       },
       "taxa": {
-        "appli/method/basicConfig": [[2,2]],
-        "appli/method/getLogger": [[5,5]],
-        "appli/method/info": [[6,6]],
+        "appli/method": [[2,2],[5,5],[6,6]],
+        "appli/method/logging/basicConfig": [[2,2]],
         "library/standard/logging": [[1,1]],
         "library/standard/sys": [[1,1]],
         "meta/program": [[1,6]],
@@ -5671,10 +5647,10 @@
         "import:locale": [[1,1]],
         "import_module:locale": [[1,1]],
         "literal:Str": [[2,2],[3,3]],
-        "member_call:atof": [[4,4]],
-        "member_call:setlocale": [[3,3]],
+        "member_call:locale:setlocale": [[3,3]],
+        "member_call_member:atof": [[4,4]],
+        "member_call_member:setlocale": [[3,3]],
         "member_call_object:locale": [[3,3]],
-        "member_call_without_result:setlocale": [[3,3]],
         "node:Assign": [[2,2],[4,4]],
         "node:Attribute": [[3,3],[3,3],[4,4]],
         "node:Call": [[3,3],[4,4]],
@@ -5687,8 +5663,8 @@
         "whole_span:4": [[1,4]]
       },
       "taxa": {
-        "appli/method/atof": [[4,4]],
-        "appli/method/setlocale": [[3,3]],
+        "appli/method": [[3,3],[4,4]],
+        "appli/method/locale/setlocale": [[3,3]],
         "library/standard/locale": [[1,1]],
         "meta/program": [[1,4]],
         "meta/sloc/4": [[1,4]],
@@ -5757,7 +5733,7 @@
         "import:re": [[1,1]],
         "import_module:re": [[1,1]],
         "literal:Str": [[2,2],[2,2]],
-        "member_call:sub": [[2,2]],
+        "member_call_member:sub": [[2,2]],
         "node:Assign": [[2,2]],
         "node:Attribute": [[2,2]],
         "node:Call": [[2,2]],
@@ -5768,7 +5744,7 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "appli/method/sub": [[2,2]],
+        "appli/method": [[2,2]],
         "library/standard/re": [[1,1]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
@@ -5792,7 +5768,7 @@
         "free_call:map": [[1,1]],
         "free_call_without_arguments:input": [[1,1]],
         "free_call_without_result:list": [[1,1]],
-        "member_call:split": [[1,1]],
+        "member_call_member:split": [[1,1]],
         "node:Attribute": [[1,1]],
         "node:Call": [[1,1],[1,1],[1,1],[1,1]],
         "node:Expr": [[1,1]],
@@ -5805,7 +5781,7 @@
         "appli/function/builtin/input": [[1,1]],
         "appli/function/builtin/map": [[1,1]],
         "appli/function/without_arguments": [[1,1]],
-        "appli/method/split": [[1,1]],
+        "appli/method/sequence/string/split": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "type/sequence/list": [[1,1]],
@@ -5821,7 +5797,7 @@
         "assignment_rhs_atom:p": [[1,1]],
         "call_argument:": [[1,1]],
         "literal:Str": [[1,1]],
-        "member_call:rstrip": [[1,1]],
+        "member_call_member:rstrip": [[1,1]],
         "node:Assign": [[1,1]],
         "node:Attribute": [[1,1]],
         "node:Call": [[1,1]],
@@ -5831,7 +5807,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/method/rstrip": [[1,1]],
+        "appli/method/sequence/string/rstrip": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "type/sequence/string": [[1,1]],
@@ -5856,7 +5832,7 @@
         "import:os": [[1,1]],
         "import_module:os": [[1,1]],
         "literal:-1": [[3,3]],
-        "member_call:endswith": [[2,2]],
+        "member_call_member:endswith": [[2,2]],
         "node:Assign": [[3,3]],
         "node:Attribute": [[2,2],[2,2]],
         "node:Call": [[2,2]],
@@ -5877,7 +5853,7 @@
         "whole_span:3": [[1,3]]
       },
       "taxa": {
-        "appli/method/endswith": [[2,2]],
+        "appli/method/sequence/string/endswith": [[2,2]],
         "flow/conditional/no_else": [[2,3]],
         "library/standard/os": [[1,1]],
         "meta/program": [[1,3]],
@@ -5917,7 +5893,7 @@
         "call_argument:i": [[1,1]],
         "call_argument:s": [[1,1]],
         "literal:Str": [[1,1]],
-        "member_call:format": [[1,1]],
+        "member_call_member:format": [[1,1]],
         "node:Assign": [[1,1]],
         "node:Attribute": [[1,1]],
         "node:Call": [[1,1]],
@@ -5927,7 +5903,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/method/format": [[1,1]],
+        "appli/method/sequence/string/format": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "type/sequence/string": [[1,1]],
@@ -5981,7 +5957,7 @@
         "literal:6": [[1,1],[2,2]],
         "literal:Str": [[3,3]],
         "literal:Tuple": [[1,1],[2,2]],
-        "member_call:format": [[3,3]],
+        "member_call_member:format": [[3,3]],
         "node:Assign": [[1,1],[2,2],[3,3]],
         "node:Attribute": [[3,3]],
         "node:BinOp": [[1,1],[2,2],[3,3],[3,3],[3,3],[3,3],[3,3],[3,3]],
@@ -6004,7 +5980,7 @@
       "taxa": {
         "appli/function/builtin/casting/int": [[1,1],[2,2]],
         "appli/function/builtin/range": [[1,1],[2,2]],
-        "appli/method/format": [[3,3]],
+        "appli/method/sequence/string/format": [[3,3]],
         "meta/program": [[1,3]],
         "meta/sloc/3": [[1,3]],
         "operator/arithmetic/addition": [[1,1],[2,2],[3,3],[3,3],[3,3]],
@@ -6079,11 +6055,13 @@
         "literal:16": [[6,6]],
         "literal:2": [[6,6],[6,6],[15,15]],
         "literal:Str": [[10,10],[10,10],[10,10],[11,11],[13,13]],
-        "member_call:array": [[5,5]],
-        "member_call:astype": [[9,9]],
-        "member_call:from_str": [[11,11],[13,13]],
-        "member_call:join": [[10,10]],
-        "member_call:view": [[5,5]],
+        "member_call:numpy:array": [[5,5]],
+        "member_call:numpy:view": [[5,5]],
+        "member_call_member:array": [[5,5]],
+        "member_call_member:astype": [[9,9]],
+        "member_call_member:from_str": [[11,11],[13,13]],
+        "member_call_member:join": [[10,10]],
+        "member_call_member:view": [[5,5]],
         "member_call_object:numpy": [[5,5]],
         "method:__str__": [[8,10]],
         "method:from_str": [[3,7]],
@@ -6127,7 +6105,7 @@
         "abstr/function": [[3,7],[8,10]],
         "abstr/method/flavor/class": [[3,7]],
         "abstr/method/flavor/instance": [[8,10]],
-        "abstr/method/naming/magic": [[8,10]],
+        "abstr/method/naming/magic/__str__": [[8,10]],
         "abstr/return/something": [[5,7],[10,10]],
         "appli/composition": [[5,5],[6,6],[10,10]],
         "appli/function/builtin/casting/int": [[6,6]],
@@ -6135,12 +6113,9 @@
         "appli/function/builtin/len": [[6,6]],
         "appli/function/builtin/print": [[12,12],[14,14],[15,15]],
         "appli/function/builtin/range": [[6,6]],
-        "appli/method/array": [[5,5]],
-        "appli/method/astype": [[9,9]],
+        "appli/method": [[5,5],[9,9],[11,11],[13,13]],
         "appli/method/chaining": [[5,5]],
-        "appli/method/from_str": [[11,11],[13,13]],
-        "appli/method/join": [[10,10]],
-        "appli/method/view": [[5,5]],
+        "appli/method/sequence/string/join": [[10,10]],
         "library/third_party/numpy": [[1,1]],
         "meta/program": [[1,15]],
         "meta/sloc/15": [[1,15]],
@@ -6168,10 +6143,10 @@
         "call_argument:_filepath": [[2,2]],
         "import:pathlib": [[1,1]],
         "import_module:pathlib": [[1,1]],
-        "member_call:Path": [[2,2]],
-        "member_call:unlink": [[3,3]],
+        "member_call:path:unlink": [[3,3]],
+        "member_call_member:Path": [[2,2]],
+        "member_call_member:unlink": [[3,3]],
         "member_call_object:path": [[3,3]],
-        "member_call_without_result:unlink": [[3,3]],
         "node:Assign": [[2,2]],
         "node:Attribute": [[2,2],[3,3]],
         "node:Call": [[2,2],[3,3]],
@@ -6182,7 +6157,7 @@
         "whole_span:3": [[1,3]]
       },
       "taxa": {
-        "appli/method/unlink": [[3,3]],
+        "appli/method": [[3,3]],
         "library/standard/pathlib": [[1,1]],
         "meta/program": [[1,3]],
         "meta/sloc/3": [[1,3]],
@@ -6250,7 +6225,7 @@
         "call_argument:x": [[2,2]],
         "import:random": [[1,1]],
         "import_module:random": [[1,1]],
-        "member_call:sample": [[2,2]],
+        "member_call_member:sample": [[2,2]],
         "node:Assign": [[2,2]],
         "node:Attribute": [[2,2]],
         "node:Call": [[2,2]],
@@ -6260,7 +6235,7 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "appli/method/sample": [[2,2]],
+        "appli/method": [[2,2]],
         "library/standard/random": [[1,1]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
@@ -6300,7 +6275,7 @@
         "abstr/argument/arg": [[2,2],[2,2],[2,2]],
         "abstr/class": [[1,5]],
         "abstr/method/flavor/instance": [[2,5]],
-        "abstr/method/naming/magic": [[2,5]],
+        "abstr/method/naming/magic/__init__": [[2,5]],
         "abstr/procedure": [[2,5]],
         "meta/program": [[1,5]],
         "meta/sloc/5": [[1,5]],
@@ -6345,8 +6320,6 @@
         "whole_span:5": [[1,5]]
       },
       "taxa": {
-        "appli/function/f32": [[5,5]],
-        "appli/function/f64": [[3,3]],
         "appli/function/without_arguments": [[3,3],[5,5]],
         "condition/inequality": [[2,2]],
         "flow/conditional": [[2,5]],
@@ -6432,8 +6405,6 @@
         "yoda_comparison:In": [[2,2],[4,4]]
       },
       "taxa": {
-        "appli/function/bat": [[3,3]],
-        "appli/function/fox": [[5,5]],
         "appli/function/without_arguments": [[3,3],[5,5]],
         "condition/belonging": [[2,2],[4,4]],
         "flow/conditional/no_else": [[2,3],[4,5]],
@@ -6550,7 +6521,6 @@
         "appli/function/builtin/next": [[4,4]],
         "appli/function/builtin/print": [[7,7]],
         "appli/function/builtin/zip": [[5,5]],
-        "appli/function/tee": [[3,3]],
         "flow/loop/exit/late": [[6,7]],
         "flow/loop/for": [[6,7]],
         "library/standard/itertools/tee": [[1,1]],
@@ -6568,9 +6538,9 @@
         "call_argument:s": [[2,2]],
         "import:webbrowser": [[1,1]],
         "import_module:webbrowser": [[1,1]],
-        "member_call:open": [[2,2]],
+        "member_call:webbrowser:open": [[2,2]],
+        "member_call_member:open": [[2,2]],
         "member_call_object:webbrowser": [[2,2]],
-        "member_call_without_result:open": [[2,2]],
         "node:Attribute": [[2,2]],
         "node:Call": [[2,2]],
         "node:Expr": [[2,2]],
@@ -6579,7 +6549,8 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "appli/method/open": [[2,2]],
+        "appli/method": [[2,2]],
+        "appli/method/webbrowser/open": [[2,2]],
         "library/standard/webbrowser": [[1,1]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]]
@@ -6647,7 +6618,7 @@
         "call_argument:p": [[1,1],[1,1]],
         "external_free_call:len": [[1,1]],
         "free_call:len": [[1,1]],
-        "member_call:startswith": [[1,1]],
+        "member_call_member:startswith": [[1,1]],
         "node:Assign": [[1,1]],
         "node:Attribute": [[1,1]],
         "node:BoolOp": [[1,1]],
@@ -6663,7 +6634,7 @@
       },
       "taxa": {
         "appli/function/builtin/len": [[1,1]],
-        "appli/method/startswith": [[1,1]],
+        "appli/method/sequence/string/startswith": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "operator/boolean/and": [[1,1]],
@@ -6681,7 +6652,7 @@
         "assignment_rhs_atom:p": [[1,1]],
         "assignment_rhs_atom:s": [[1,1]],
         "call_argument:p": [[1,1]],
-        "member_call:lstrip": [[1,1]],
+        "member_call_member:lstrip": [[1,1]],
         "node:Assign": [[1,1]],
         "node:Attribute": [[1,1]],
         "node:Call": [[1,1]],
@@ -6690,7 +6661,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/method/lstrip": [[1,1]],
+        "appli/method/sequence/string/lstrip": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "type/sequence/string": [[1,1]],
@@ -6712,7 +6683,8 @@
         "index:0": [[1,1]],
         "literal:0": [[1,1]],
         "literal:1": [[1,1]],
-        "member_call:rsplit": [[1,1]],
+        "member_call:s:rsplit": [[1,1]],
+        "member_call_member:rsplit": [[1,1]],
         "member_call_object:s": [[1,1]],
         "node:Assign": [[1,1]],
         "node:Attribute": [[1,1]],
@@ -6724,7 +6696,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/method/rsplit": [[1,1]],
+        "appli/method/sequence/string/rsplit": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "subscript/index": [[1,1]],
@@ -6743,7 +6715,7 @@
         "assignment_rhs_atom:s": [[1,1]],
         "assignment_rhs_atom:w": [[1,1]],
         "call_argument:w": [[1,1]],
-        "member_call:rstrip": [[1,1]],
+        "member_call_member:rstrip": [[1,1]],
         "node:Assign": [[1,1]],
         "node:Attribute": [[1,1]],
         "node:Call": [[1,1]],
@@ -6752,7 +6724,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/method/rstrip": [[1,1]],
+        "appli/method/sequence/string/rstrip": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "type/sequence/string": [[1,1]],
@@ -6810,9 +6782,9 @@
       "source": "s.append(x)",
       "labels": {
         "call_argument:x": [[1,1]],
-        "member_call:append": [[1,1]],
+        "member_call:s:append": [[1,1]],
+        "member_call_member:append": [[1,1]],
         "member_call_object:s": [[1,1]],
-        "member_call_without_result:append": [[1,1]],
         "node:Attribute": [[1,1]],
         "node:Call": [[1,1]],
         "node:Expr": [[1,1]],
@@ -6824,7 +6796,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/method/append": [[1,1]],
+        "appli/method/sequence/list/append": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "type/sequence/list": [[1,1]]
@@ -6940,10 +6912,12 @@
         "import_name:parse": [[1,1]],
         "import_name:request": [[1,1]],
         "literal:Str": [[2,2],[3,3]],
-        "member_call:Request": [[3,3]],
-        "member_call:encode": [[2,2]],
-        "member_call:urlencode": [[2,2]],
-        "member_call:urlopen": [[4,4]],
+        "member_call:parse:encode": [[2,2]],
+        "member_call:parse:urlencode": [[2,2]],
+        "member_call_member:Request": [[3,3]],
+        "member_call_member:encode": [[2,2]],
+        "member_call_member:urlencode": [[2,2]],
+        "member_call_member:urlopen": [[4,4]],
         "member_call_object:parse": [[2,2]],
         "method_chaining": [[2,2]],
         "node:Assign": [[2,2],[3,3],[4,4]],
@@ -6958,10 +6932,9 @@
         "whole_span:4": [[1,4]]
       },
       "taxa": {
+        "appli/method": [[2,2],[4,4]],
         "appli/method/chaining": [[2,2]],
-        "appli/method/encode": [[2,2]],
-        "appli/method/urlencode": [[2,2]],
-        "appli/method/urlopen": [[4,4]],
+        "appli/method/sequence/string/encode": [[2,2]],
         "library/standard/urllib/parse": [[1,1]],
         "library/standard/urllib/request": [[1,1]],
         "meta/program": [[1,4]],
@@ -6978,7 +6951,7 @@
         "assignment:hex": [[1,1]],
         "assignment_lhs_identifier:s": [[1,1]],
         "assignment_rhs_atom:a": [[1,1]],
-        "member_call:hex": [[1,1]],
+        "member_call_member:hex": [[1,1]],
         "node:Assign": [[1,1]],
         "node:Attribute": [[1,1]],
         "node:Call": [[1,1]],
@@ -6987,7 +6960,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/method/hex": [[1,1]],
+        "appli/method": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "var/assignment/single": [[1,1]]
@@ -7002,7 +6975,7 @@
         "assignment_rhs_atom:bytearray": [[1,1]],
         "assignment_rhs_atom:s": [[1,1]],
         "call_argument:s": [[1,1]],
-        "member_call:fromhex": [[1,1]],
+        "member_call_member:fromhex": [[1,1]],
         "node:Assign": [[1,1]],
         "node:Attribute": [[1,1]],
         "node:Call": [[1,1]],
@@ -7011,7 +6984,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/method/fromhex": [[1,1]],
+        "appli/method": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "var/assignment/single": [[1,1]]
@@ -7041,8 +7014,8 @@
         "literal:1": [[3,3]],
         "literal:List": [[2,2]],
         "literal:Str": [[2,2],[2,2],[2,2]],
-        "member_call:listdir": [[3,3]],
-        "member_call:splitext": [[3,3]],
+        "member_call_member:listdir": [[3,3]],
+        "member_call_member:splitext": [[3,3]],
         "node:Assign": [[2,2],[3,3]],
         "node:Attribute": [[3,3],[3,3],[3,3]],
         "node:Call": [[3,3],[3,3]],
@@ -7059,8 +7032,7 @@
         "whole_span:3": [[1,3]]
       },
       "taxa": {
-        "appli/method/listdir": [[3,3]],
-        "appli/method/splitext": [[3,3]],
+        "appli/method": [[3,3],[3,3]],
         "condition/belonging": [[3,3]],
         "library/standard/os": [[1,1]],
         "meta/program": [[1,3]],
@@ -7100,9 +7072,9 @@
         "import_module:re": [[1,1]],
         "literal:Str": [[4,4],[7,7]],
         "literal:Tuple": [[5,5]],
-        "member_call:format": [[4,4]],
-        "member_call:match": [[7,7]],
-        "member_call:walk": [[5,5]],
+        "member_call_member:format": [[4,4]],
+        "member_call_member:match": [[7,7]],
+        "member_call_member:walk": [[5,5]],
         "node:Assign": [[3,7]],
         "node:Attribute": [[4,4],[5,5],[7,7]],
         "node:Call": [[4,4],[5,5],[7,7]],
@@ -7115,9 +7087,8 @@
         "whole_span:7": [[1,7]]
       },
       "taxa": {
-        "appli/method/format": [[4,4]],
-        "appli/method/match": [[7,7]],
-        "appli/method/walk": [[5,5]],
+        "appli/method": [[5,5],[7,7]],
+        "appli/method/sequence/string/format": [[4,4]],
         "library/standard/os": [[2,2]],
         "library/standard/re": [[1,1]],
         "meta/program": [[1,7]],
@@ -7146,8 +7117,8 @@
         "import_module:itertools": [[2,2]],
         "literal:List": [[3,3]],
         "literal:Str": [[3,3],[3,3],[3,3],[3,3]],
-        "member_call:chain": [[3,3]],
-        "member_call:glob": [[3,3]],
+        "member_call_member:chain": [[3,3]],
+        "member_call_member:glob": [[3,3]],
         "node:Attribute": [[3,3],[3,3]],
         "node:BinOp": [[3,3]],
         "node:Call": [[3,3],[3,3],[3,3]],
@@ -7164,8 +7135,7 @@
       "taxa": {
         "appli/composition": [[3,3],[3,3]],
         "appli/function/builtin/casting/list": [[3,3]],
-        "appli/method/chain": [[3,3]],
-        "appli/method/glob": [[3,3]],
+        "appli/method": [[3,3],[3,3]],
         "library/standard/glob": [[1,1]],
         "library/standard/itertools": [[2,2]],
         "meta/program": [[1,3]],
@@ -7281,8 +7251,7 @@
         "whole_span:3": [[1,3]]
       },
       "taxa": {
-        "appli/class_constructor/Point": [[3,3]],
-        "appli/function/namedtuple": [[2,2]],
+        "appli/class/constructor": [[3,3]],
         "library/standard/collections/namedtuple": [[1,1]],
         "meta/program": [[1,3]],
         "meta/sloc/3": [[1,3]],
@@ -7304,7 +7273,7 @@
         "call_argument:d": [[2,2]],
         "import:os": [[1,1]],
         "import_module:os": [[1,1]],
-        "member_call:listdir": [[2,2]],
+        "member_call_member:listdir": [[2,2]],
         "node:Assign": [[2,2]],
         "node:Attribute": [[2,2]],
         "node:Call": [[2,2]],
@@ -7314,7 +7283,7 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "appli/method/listdir": [[2,2]],
+        "appli/method": [[2,2]],
         "library/standard/os": [[1,1]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
@@ -7377,7 +7346,7 @@
         "literal:Dict": [[4,4],[5,5]],
         "literal:Str": [[3,3],[4,4]],
         "literal:Tuple": [[7,7],[7,7]],
-        "member_call:put": [[6,6]],
+        "member_call_member:put": [[6,6]],
         "node:Assign": [[3,3],[4,4],[5,5],[6,6],[7,7]],
         "node:Attribute": [[6,6],[7,7],[7,7]],
         "node:Call": [[6,6]],
@@ -7395,7 +7364,7 @@
         "whole_span:7": [[1,7]]
       },
       "taxa": {
-        "appli/method/put": [[6,6]],
+        "appli/method": [[6,6]],
         "library/third_party/requests": [[2,2]],
         "meta/program": [[1,7]],
         "meta/sloc/7": [[1,7]],
@@ -7421,7 +7390,7 @@
         "import_name:date": [[1,1]],
         "import_name:timedelta": [[1,1]],
         "literal:1": [[2,2]],
-        "member_call:today": [[2,2]],
+        "member_call_member:today": [[2,2]],
         "node:Attribute": [[2,2]],
         "node:BinOp": [[2,2]],
         "node:Call": [[2,2],[2,2]],
@@ -7432,8 +7401,7 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "appli/function/timedelta": [[2,2]],
-        "appli/method/today": [[2,2]],
+        "appli/method": [[2,2]],
         "library/standard/datetime/date": [[1,1]],
         "library/standard/datetime/timedelta": [[1,1]],
         "meta/program": [[1,2]],
@@ -7459,10 +7427,10 @@
         "literal:30.0": [[2,2]],
         "literal:42": [[2,2]],
         "literal:Tuple": [[2,2]],
-        "member_call:Timer": [[2,2]],
-        "member_call:start": [[3,3]],
+        "member_call:timer:start": [[3,3]],
+        "member_call_member:Timer": [[2,2]],
+        "member_call_member:start": [[3,3]],
         "member_call_object:timer": [[3,3]],
-        "member_call_without_result:start": [[3,3]],
         "node:Assign": [[2,2]],
         "node:Attribute": [[2,2],[3,3]],
         "node:Call": [[2,2],[3,3]],
@@ -7475,7 +7443,7 @@
         "whole_span:3": [[1,3]]
       },
       "taxa": {
-        "appli/method/start": [[3,3]],
+        "appli/method": [[3,3]],
         "library/standard/threading": [[1,1]],
         "meta/program": [[1,3]],
         "meta/sloc/3": [[1,3]],
@@ -7493,9 +7461,9 @@
         "import:sys": [[1,1]],
         "import_module:sys": [[1,1]],
         "literal:0": [[2,2]],
-        "member_call:exit": [[2,2]],
+        "member_call:sys:exit": [[2,2]],
+        "member_call_member:exit": [[2,2]],
         "member_call_object:sys": [[2,2]],
-        "member_call_without_result:exit": [[2,2]],
         "node:Attribute": [[2,2]],
         "node:Call": [[2,2]],
         "node:Expr": [[2,2]],
@@ -7505,7 +7473,8 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "appli/method/exit": [[2,2]],
+        "appli/method": [[2,2]],
+        "appli/method/sys/exit": [[2,2]],
         "library/standard/sys": [[1,1]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
@@ -7565,8 +7534,8 @@
         "literal:0": [[3,3]],
         "literal:List": [[3,3]],
         "literal:Tuple": [[15,15],[15,15]],
-        "member_call:find_set": [[9,9],[12,12],[12,12],[15,15],[15,15]],
-        "member_call:is_same_set": [[14,14]],
+        "member_call_member:find_set": [[9,9],[12,12],[12,12],[15,15],[15,15]],
+        "member_call_member:is_same_set": [[14,14]],
         "method:__init__": [[2,4]],
         "method:find_set": [[5,10]],
         "method:is_same_set": [[11,12]],
@@ -7602,12 +7571,11 @@
         "abstr/function": [[5,10]],
         "abstr/function/predicate": [[11,12]],
         "abstr/method/flavor/instance": [[2,4],[5,10],[11,12],[13,15]],
-        "abstr/method/naming/magic": [[2,4]],
+        "abstr/method/naming/magic/__init__": [[2,4]],
         "abstr/procedure": [[2,4],[13,15]],
         "abstr/return/something": [[10,10],[12,12]],
         "appli/function/builtin/range": [[4,4]],
-        "appli/method/find_set": [[9,9],[12,12],[12,12],[15,15],[15,15]],
-        "appli/method/is_same_set": [[14,14]],
+        "appli/method": [[9,9],[12,12],[12,12],[14,14],[15,15],[15,15]],
         "condition/equality": [[6,6],[12,12]],
         "flow/conditional": [[6,10]],
         "flow/conditional/else": [[9,10]],
@@ -7664,7 +7632,7 @@
         "call_argument:b": [[2,2]],
         "import:numpy": [[1,1]],
         "import_module:numpy": [[1,1]],
-        "member_call:matmul": [[2,2]],
+        "member_call_member:matmul": [[2,2]],
         "node:Assign": [[2,2]],
         "node:Attribute": [[2,2]],
         "node:Call": [[2,2]],
@@ -7674,7 +7642,7 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "appli/method/matmul": [[2,2]],
+        "appli/method": [[2,2]],
         "library/third_party/numpy": [[1,1]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
@@ -7705,8 +7673,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "appli/class_constructor/P": [[1,1]],
-        "appli/class_constructor/T": [[1,1]],
+        "appli/class/constructor": [[1,1],[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "var/assignment/single": [[1,1]]
@@ -7742,7 +7709,6 @@
       },
       "taxa": {
         "appli/function/builtin/any": [[1,1]],
-        "appli/function/f": [[2,2]],
         "appli/function/without_arguments": [[2,2]],
         "condition/inequality": [[1,1]],
         "flow/conditional/no_else": [[1,2]],
@@ -7761,7 +7727,7 @@
         "call_argument:path": [[1,1]],
         "external_free_call:open": [[1,1]],
         "free_call:open": [[1,1]],
-        "member_call:readlines": [[2,2]],
+        "member_call_member:readlines": [[2,2]],
         "node:Assign": [[2,2]],
         "node:Attribute": [[2,2]],
         "node:Call": [[1,1],[2,2]],
@@ -7772,7 +7738,7 @@
       },
       "taxa": {
         "appli/function/builtin/open": [[1,1]],
-        "appli/method/readlines": [[2,2]],
+        "appli/method": [[2,2]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
         "var/assignment/single": [[2,2]]
@@ -11923,127 +11889,258 @@
       "020.0573-return-two-values.py",
       "043.2733-break-outer-loop.py"
     ],
-    "member_call:Lock": [
+    "member_call:Q:append": [
+      "128.2085-breadth-first-traversing-of-a-tree.py"
+    ],
+    "member_call:elements_unique:append": [
+      "119.3263-deduplicate-list.py"
+    ],
+    "member_call:imp:load_module": [
+      "127.2274-source-code-inclusion.py"
+    ],
+    "member_call:items:remove": [
+      "135.2158-remove-item-from-list-by-its-value.py"
+    ],
+    "member_call:items:sort": [
+      "100.1142-sort-by-a-comparator.py"
+    ],
+    "member_call:json:dump": [
+      "092.1100-save-object-into-json-file.py"
+    ],
+    "member_call:locale:setlocale": [
+      "146.1825-convert-string-to-floating-point-number.py"
+    ],
+    "member_call:lock:acquire": [
       "033.1420-atomically-read-and-update-variable.py"
     ],
-    "member_call:Path": [
+    "member_call:lock:release": [
+      "033.1420-atomically-read-and-update-variable.py"
+    ],
+    "member_call:logger:info": [
+      "145.1822-print-log-line-with-datetime.py"
+    ],
+    "member_call:logging:basicConfig": [
+      "145.1822-print-log-line-with-datetime.py"
+    ],
+    "member_call:m:pop": [
+      "140.2156-delete-map-entry.py"
+    ],
+    "member_call:numpy:array": [
+      "154.2292-halfway-between-two-hex-color-codes.py"
+    ],
+    "member_call:numpy:view": [
+      "154.2292-halfway-between-two-hex-color-codes.py"
+    ],
+    "member_call:p:map": [
+      "056.1424-launch-1000-parallel-tasks-and-wait-for-completion.py"
+    ],
+    "member_call:parse:encode": [
+      "174.2687-make-http-post-request.py"
+    ],
+    "member_call:parse:urlencode": [
+      "174.2687-make-http-post-request.py"
+    ],
+    "member_call:path:unlink": [
       "155.2147-delete-file.py"
     ],
-    "member_call:Random": [
+    "member_call:pool:apply_async": [
+      "030.0189-parallelize-execution-of-1000-independent-tasks.py"
+    ],
+    "member_call:q:extend": [
+      "129.2282-breadth-first-traversing-in-a-graph.py"
+    ],
+    "member_call:q:put": [
+      "025.0195-send-a-value-to-another-thread.py"
+    ],
+    "member_call:random:choice": [
+      "011.0047-pick-a-random-element-from-a-list.py"
+    ],
+    "member_call:random:randint": [
+      "015.0184-pick-uniformly-a-random-integer-in-ab.py"
+    ],
+    "member_call:random:randrange": [
+      "014.0185-pick-uniformly-a-random-floating-point-number-in-ab.py"
+    ],
+    "member_call:random:shuffle": [
+      "010.1478-shuffle-a-list.py"
+    ],
+    "member_call:random:uniform": [
+      "014.3410-pick-uniformly-a-random-floating-point-number-in-ab.py"
+    ],
+    "member_call:s:append": [
+      "171.2446-add-an-element-at-the-end-of-a-list.py"
+    ],
+    "member_call:s:decode": [
+      "041.0187-reverse-a-string.py"
+    ],
+    "member_call:s:encode": [
+      "041.0187-reverse-a-string.py"
+    ],
+    "member_call:s:insert": [
+      "044.0190-insert-element-in-list.py"
+    ],
+    "member_call:s:rsplit": [
+      "168.2277-trim-suffix.py"
+    ],
+    "member_call:seen:add": [
+      "129.2282-breadth-first-traversing-in-a-graph.py",
+      "130.2283-depth-first-traversing-in-a-graph.py"
+    ],
+    "member_call:self:make_path": [
+      "040.2279-graph-with-adjacency-lists.py"
+    ],
+    "member_call:sock:bind": [
+      "121.3029-udp-listen-and-read.py"
+    ],
+    "member_call:stack:extend": [
+      "130.2283-depth-first-traversing-in-a-graph.py"
+    ],
+    "member_call:subprocess:call": [
+      "111.2168-launch-other-program.py"
+    ],
+    "member_call:sys:exit": [
+      "087.1139-stop-program.py",
+      "186.2699-exit-program-cleanly.py"
+    ],
+    "member_call:t:start": [
+      "025.0195-send-a-value-to-another-thread.py"
+    ],
+    "member_call:time:sleep": [
+      "045.0570-pause-execution-for-5-seconds.py"
+    ],
+    "member_call:timer:start": [
+      "185.2820-execute-function-in-30-seconds.py"
+    ],
+    "member_call:unique_set:add": [
+      "119.3263-deduplicate-list.py"
+    ],
+    "member_call:webbrowser:open": [
+      "164.2169-open-url-in-default-browser.py"
+    ],
+    "member_call:x:reverse": [
+      "019.3164-reverse-a-list.py"
+    ],
+    "member_call_member:Lock": [
+      "033.1420-atomically-read-and-update-variable.py"
+    ],
+    "member_call_member:Path": [
+      "155.2147-delete-file.py"
+    ],
+    "member_call_member:Random": [
       "069.1086-seed-random-generator.py",
       "070.1087-use-clock-as-random-generator-seed.py"
     ],
-    "member_call:Request": [
+    "member_call_member:Request": [
       "174.2687-make-http-post-request.py"
     ],
-    "member_call:TemporaryDirectory": [
+    "member_call_member:TemporaryDirectory": [
       "139.2162-create-temp-directory.py"
     ],
-    "member_call:TemporaryFile": [
+    "member_call_member:TemporaryFile": [
       "138.2161-create-temp-file.py"
     ],
-    "member_call:Timer": [
+    "member_call_member:Timer": [
       "185.2820-execute-function-in-30-seconds.py"
     ],
-    "member_call:abspath": [
+    "member_call_member:abspath": [
       "107.2139-get-folder-containing-current-program.py"
     ],
-    "member_call:acquire": [
+    "member_call_member:acquire": [
       "033.1420-atomically-read-and-update-variable.py"
     ],
-    "member_call:add": [
+    "member_call_member:add": [
       "040.2279-graph-with-adjacency-lists.py",
       "119.3263-deduplicate-list.py",
       "129.2282-breadth-first-traversing-in-a-graph.py",
       "130.2283-depth-first-traversing-in-a-graph.py"
     ],
-    "member_call:append": [
+    "member_call_member:append": [
       "119.3263-deduplicate-list.py",
       "128.2085-breadth-first-traversing-of-a-tree.py",
       "171.2446-add-an-element-at-the-end-of-a-list.py"
     ],
-    "member_call:apply_async": [
+    "member_call_member:apply_async": [
       "030.0189-parallelize-execution-of-1000-independent-tasks.py"
     ],
-    "member_call:array": [
+    "member_call_member:array": [
       "154.2292-halfway-between-two-hex-color-codes.py"
     ],
-    "member_call:asizeof": [
+    "member_call_member:asizeof": [
       "109.2280-number-of-bytes-of-a-type.py"
     ],
-    "member_call:astype": [
+    "member_call_member:astype": [
       "154.2292-halfway-between-two-hex-color-codes.py"
     ],
-    "member_call:atof": [
+    "member_call_member:atof": [
       "146.1825-convert-string-to-floating-point-number.py"
     ],
-    "member_call:basicConfig": [
+    "member_call_member:basicConfig": [
       "145.1822-print-log-line-with-datetime.py"
     ],
-    "member_call:bind": [
+    "member_call_member:bind": [
       "121.3029-udp-listen-and-read.py"
     ],
-    "member_call:bisect_left": [
+    "member_call_member:bisect_left": [
       "124.2152-binary-search-for-a-value-in-sorted-array.py"
     ],
-    "member_call:call": [
+    "member_call_member:call": [
       "111.2168-launch-other-program.py"
     ],
-    "member_call:ceil": [
+    "member_call_member:ceil": [
       "068.2271-create-a-bitset.py"
     ],
-    "member_call:chain": [
+    "member_call_member:chain": [
       "177.3241-find-files-with-a-given-list-of-filename-extensions.py"
     ],
-    "member_call:choice": [
+    "member_call_member:choice": [
       "011.0047-pick-a-random-element-from-a-list.py"
     ],
-    "member_call:compile": [
+    "member_call_member:compile": [
       "083.1805-regex-with-character-repetition.py"
     ],
-    "member_call:count": [
+    "member_call_member:count": [
       "082.1096-count-substring-occurrences.py",
       "084.1940-count-bits-set-in-integer-binary-representation.py"
     ],
-    "member_call:decode": [
+    "member_call_member:decode": [
       "041.0187-reverse-a-string.py"
     ],
-    "member_call:dirname": [
+    "member_call_member:dirname": [
       "107.2139-get-folder-containing-current-program.py"
     ],
-    "member_call:dump": [
+    "member_call_member:dump": [
       "092.1100-save-object-into-json-file.py"
     ],
-    "member_call:encode": [
+    "member_call_member:encode": [
       "041.0187-reverse-a-string.py",
       "174.2687-make-http-post-request.py"
     ],
-    "member_call:endswith": [
+    "member_call_member:endswith": [
       "097.1095-check-string-suffix.py",
       "151.2166-remove-string-trailing-path-separator.py"
     ],
-    "member_call:exists": [
+    "member_call_member:exists": [
       "144.2145-check-if-file-exists.py",
       "144.2915-check-if-file-exists.py"
     ],
-    "member_call:exit": [
+    "member_call_member:exit": [
       "087.1139-stop-program.py",
       "186.2699-exit-program-cleanly.py"
     ],
-    "member_call:extend": [
+    "member_call_member:extend": [
       "129.2282-breadth-first-traversing-in-a-graph.py",
       "130.2283-depth-first-traversing-in-a-graph.py"
     ],
-    "member_call:factorial": [
+    "member_call_member:factorial": [
       "067.1426-binomial-coefficient-n-choose-k.py"
     ],
-    "member_call:find": [
+    "member_call_member:find": [
       "062.1091-find-substring-position.py"
     ],
-    "member_call:find_set": [
+    "member_call_member:find_set": [
       "187.3261-disjoint-set.py"
     ],
-    "member_call:format": [
+    "member_call_member:format": [
       "023.1102-convert-real-number-to-string-with-2-decimal-places.py",
       "065.1085-format-decimal-number.py",
       "076.1083-binary-digits-from-an-integer.py",
@@ -12051,224 +12148,224 @@
       "154.2155-halfway-between-two-hex-color-codes.py",
       "177.2725-find-files-with-a-given-list-of-filename-extensions.py"
     ],
-    "member_call:from_str": [
+    "member_call_member:from_str": [
       "154.2292-halfway-between-two-hex-color-codes.py"
     ],
-    "member_call:fromhex": [
+    "member_call_member:fromhex": [
       "176.2614-hex-string-to-byte-array.py"
     ],
-    "member_call:fromtimestamp": [
+    "member_call_member:fromtimestamp": [
       "098.2142-epoch-seconds-to-date-object.py"
     ],
-    "member_call:getLogger": [
+    "member_call_member:getLogger": [
       "145.1822-print-log-line-with-datetime.py"
     ],
-    "member_call:getcwd": [
+    "member_call_member:getcwd": [
       "106.2039-get-program-working-directory.py"
     ],
-    "member_call:getsize": [
+    "member_call_member:getsize": [
       "095.2140-get-file-size.py"
     ],
-    "member_call:glob": [
+    "member_call_member:glob": [
       "177.3241-find-files-with-a-given-list-of-filename-extensions.py"
     ],
-    "member_call:hex": [
+    "member_call_member:hex": [
       "175.2613-bytes-to-hex-string.py"
     ],
-    "member_call:index": [
+    "member_call_member:index": [
       "020.0573-return-two-values.py"
     ],
-    "member_call:info": [
+    "member_call_member:info": [
       "145.1822-print-log-line-with-datetime.py"
     ],
-    "member_call:insert": [
+    "member_call_member:insert": [
       "044.0190-insert-element-in-list.py"
     ],
-    "member_call:is_same_set": [
+    "member_call_member:is_same_set": [
       "187.3261-disjoint-set.py"
     ],
-    "member_call:isdigit": [
+    "member_call_member:isdigit": [
       "137.1823-check-if-string-contains-only-digits.py"
     ],
-    "member_call:isoformat": [
+    "member_call_member:isoformat": [
       "099.2693-format-date-yyyy-mm-dd.py"
     ],
-    "member_call:items": [
+    "member_call_member:items": [
       "013.0574-iterate-over-map-keys-and-values.py",
       "113.2157-iterate-over-map-entries-ordered-by-values.py"
     ],
-    "member_call:join": [
+    "member_call_member:join": [
       "053.0240-join-a-list-of-strings.py",
       "053.1933-join-a-list-of-strings.py",
       "071.0379-echo-program-implementation.py",
       "154.2292-halfway-between-two-hex-color-codes.py"
     ],
-    "member_call:listdir": [
+    "member_call_member:listdir": [
       "177.2709-find-files-with-a-given-list-of-filename-extensions.py",
       "180.2612-list-files-in-directory.py"
     ],
-    "member_call:load": [
+    "member_call_member:load": [
       "091.1098-load-json-file-into-struct.py"
     ],
-    "member_call:load_module": [
+    "member_call_member:load_module": [
       "127.2274-source-code-inclusion.py"
     ],
-    "member_call:lower": [
+    "member_call_member:lower": [
       "133.2160-case-insensitive-string-contains.py"
     ],
-    "member_call:lstrip": [
+    "member_call_member:lstrip": [
       "167.3175-trim-prefix.py"
     ],
-    "member_call:make_path": [
+    "member_call_member:make_path": [
       "040.2279-graph-with-adjacency-lists.py"
     ],
-    "member_call:map": [
+    "member_call_member:map": [
       "056.1424-launch-1000-parallel-tasks-and-wait-for-completion.py"
     ],
-    "member_call:match": [
+    "member_call_member:match": [
       "177.2725-find-files-with-a-given-list-of-filename-extensions.py"
     ],
-    "member_call:matmul": [
+    "member_call_member:matmul": [
       "188.3284-matrix-multiplication.py"
     ],
-    "member_call:now": [
+    "member_call_member:now": [
       "061.0576-get-current-date.py"
     ],
-    "member_call:open": [
+    "member_call_member:open": [
       "164.2169-open-url-in-default-browser.py"
     ],
-    "member_call:parse": [
+    "member_call_member:parse": [
       "103.2276-load-xml-file-into-struct.py"
     ],
-    "member_call:perf_counter": [
+    "member_call_member:perf_counter": [
       "125.2167-measure-function-call-duration.py"
     ],
-    "member_call:pop": [
+    "member_call_member:pop": [
       "128.2085-breadth-first-traversing-of-a-tree.py",
       "130.2283-depth-first-traversing-in-a-graph.py",
       "140.2156-delete-map-entry.py"
     ],
-    "member_call:popleft": [
+    "member_call_member:popleft": [
       "129.2282-breadth-first-traversing-in-a-graph.py"
     ],
-    "member_call:put": [
+    "member_call_member:put": [
       "025.0195-send-a-value-to-another-thread.py",
       "183.3025-make-http-put-request.py"
     ],
-    "member_call:randint": [
+    "member_call_member:randint": [
       "015.0184-pick-uniformly-a-random-integer-in-ab.py"
     ],
-    "member_call:randrange": [
+    "member_call_member:randrange": [
       "014.0185-pick-uniformly-a-random-floating-point-number-in-ab.py"
     ],
-    "member_call:read": [
+    "member_call_member:read": [
       "058.0665-extract-file-content-to-a-string.py",
       "101.2172-load-from-http-get-request-into-a-string.py"
     ],
-    "member_call:readlines": [
+    "member_call_member:readlines": [
       "197.3457-get-a-list-of-lines-from-a-file.py"
     ],
-    "member_call:recvfrom": [
+    "member_call_member:recvfrom": [
       "121.3029-udp-listen-and-read.py"
     ],
-    "member_call:release": [
+    "member_call_member:release": [
       "033.1420-atomically-read-and-update-variable.py"
     ],
-    "member_call:remove": [
+    "member_call_member:remove": [
       "135.2158-remove-item-from-list-by-its-value.py"
     ],
-    "member_call:replace": [
+    "member_call_member:replace": [
       "063.1088-replace-fragment-of-a-string.py",
       "116.1257-remove-occurrences-of-word-from-string.py"
     ],
-    "member_call:reverse": [
+    "member_call_member:reverse": [
       "019.3164-reverse-a-list.py"
     ],
-    "member_call:rsplit": [
+    "member_call_member:rsplit": [
       "168.2277-trim-suffix.py"
     ],
-    "member_call:rstrip": [
+    "member_call_member:rstrip": [
       "150.2154-remove-trailing-slash.py",
       "168.3174-trim-suffix.py"
     ],
-    "member_call:sample": [
+    "member_call_member:sample": [
       "158.2163-random-sublist.py"
     ],
-    "member_call:serialize": [
+    "member_call_member:serialize": [
       "104.3264-save-object-into-xml-file.py"
     ],
-    "member_call:setlocale": [
+    "member_call_member:setlocale": [
       "146.1825-convert-string-to-floating-point-number.py"
     ],
-    "member_call:shuffle": [
+    "member_call_member:shuffle": [
       "010.1478-shuffle-a-list.py"
     ],
-    "member_call:sleep": [
+    "member_call_member:sleep": [
       "045.0570-pause-execution-for-5-seconds.py"
     ],
-    "member_call:socket": [
+    "member_call_member:socket": [
       "121.3029-udp-listen-and-read.py"
     ],
-    "member_call:sort": [
+    "member_call_member:sort": [
       "100.1142-sort-by-a-comparator.py"
     ],
-    "member_call:split": [
+    "member_call_member:split": [
       "049.0242-split-a-space-separated-string.py",
       "148.1829-read-list-of-integer-numbers-from-stdin.py"
     ],
-    "member_call:splitext": [
+    "member_call_member:splitext": [
       "177.2709-find-files-with-a-given-list-of-filename-extensions.py"
     ],
-    "member_call:start": [
+    "member_call_member:start": [
       "025.0195-send-a-value-to-another-thread.py",
       "185.2820-execute-function-in-30-seconds.py"
     ],
-    "member_call:startswith": [
+    "member_call_member:startswith": [
       "096.1094-check-string-prefix.py",
       "167.2611-trim-prefix.py"
     ],
-    "member_call:strftime": [
+    "member_call_member:strftime": [
       "099.1429-format-date-yyyy-mm-dd.py"
     ],
-    "member_call:strip": [
+    "member_call_member:strip": [
       "110.1455-check-if-string-is-blank.py"
     ],
-    "member_call:sub": [
+    "member_call_member:sub": [
       "147.2171-remove-all-non-ascii-characters.py"
     ],
-    "member_call:timeit": [
+    "member_call_member:timeit": [
       "132.2040-measure-duration-of-procedure-execution.py"
     ],
-    "member_call:today": [
+    "member_call_member:today": [
       "099.2693-format-date-yyyy-mm-dd.py",
       "184.2701-tomorrow.py"
     ],
-    "member_call:uniform": [
+    "member_call_member:uniform": [
       "014.3410-pick-uniformly-a-random-floating-point-number-in-ab.py"
     ],
-    "member_call:unlink": [
+    "member_call_member:unlink": [
       "155.2147-delete-file.py"
     ],
-    "member_call:urlencode": [
+    "member_call_member:urlencode": [
       "174.2687-make-http-post-request.py"
     ],
-    "member_call:urlopen": [
+    "member_call_member:urlopen": [
       "101.2172-load-from-http-get-request-into-a-string.py",
       "174.2687-make-http-post-request.py"
     ],
-    "member_call:urlretrieve": [
+    "member_call_member:urlretrieve": [
       "102.2173-load-from-http-get-request-into-a-file.py"
     ],
-    "member_call:values": [
+    "member_call_member:values": [
       "052.0666-check-if-map-contains-value.py"
     ],
-    "member_call:view": [
+    "member_call_member:view": [
       "154.2292-halfway-between-two-hex-color-codes.py"
     ],
-    "member_call:walk": [
+    "member_call_member:walk": [
       "177.2725-find-files-with-a-given-list-of-filename-extensions.py"
     ],
-    "member_call:zeros": [
+    "member_call_member:zeros": [
       "027.0193-create-a-3-dimensional-array.py"
     ],
     "member_call_object:Q": [
@@ -12371,98 +12468,6 @@
     ],
     "member_call_object:x": [
       "019.3164-reverse-a-list.py"
-    ],
-    "member_call_without_result:acquire": [
-      "033.1420-atomically-read-and-update-variable.py"
-    ],
-    "member_call_without_result:add": [
-      "040.2279-graph-with-adjacency-lists.py",
-      "119.3263-deduplicate-list.py",
-      "129.2282-breadth-first-traversing-in-a-graph.py",
-      "130.2283-depth-first-traversing-in-a-graph.py"
-    ],
-    "member_call_without_result:append": [
-      "119.3263-deduplicate-list.py",
-      "128.2085-breadth-first-traversing-of-a-tree.py",
-      "171.2446-add-an-element-at-the-end-of-a-list.py"
-    ],
-    "member_call_without_result:apply_async": [
-      "030.0189-parallelize-execution-of-1000-independent-tasks.py"
-    ],
-    "member_call_without_result:basicConfig": [
-      "145.1822-print-log-line-with-datetime.py"
-    ],
-    "member_call_without_result:bind": [
-      "121.3029-udp-listen-and-read.py"
-    ],
-    "member_call_without_result:call": [
-      "111.2168-launch-other-program.py"
-    ],
-    "member_call_without_result:choice": [
-      "011.0047-pick-a-random-element-from-a-list.py"
-    ],
-    "member_call_without_result:dump": [
-      "092.1100-save-object-into-json-file.py"
-    ],
-    "member_call_without_result:exit": [
-      "087.1139-stop-program.py",
-      "186.2699-exit-program-cleanly.py"
-    ],
-    "member_call_without_result:extend": [
-      "129.2282-breadth-first-traversing-in-a-graph.py",
-      "130.2283-depth-first-traversing-in-a-graph.py"
-    ],
-    "member_call_without_result:info": [
-      "145.1822-print-log-line-with-datetime.py"
-    ],
-    "member_call_without_result:insert": [
-      "044.0190-insert-element-in-list.py"
-    ],
-    "member_call_without_result:make_path": [
-      "040.2279-graph-with-adjacency-lists.py"
-    ],
-    "member_call_without_result:map": [
-      "056.1424-launch-1000-parallel-tasks-and-wait-for-completion.py"
-    ],
-    "member_call_without_result:open": [
-      "164.2169-open-url-in-default-browser.py"
-    ],
-    "member_call_without_result:pop": [
-      "140.2156-delete-map-entry.py"
-    ],
-    "member_call_without_result:put": [
-      "025.0195-send-a-value-to-another-thread.py"
-    ],
-    "member_call_without_result:randint": [
-      "015.0184-pick-uniformly-a-random-integer-in-ab.py"
-    ],
-    "member_call_without_result:remove": [
-      "135.2158-remove-item-from-list-by-its-value.py"
-    ],
-    "member_call_without_result:reverse": [
-      "019.3164-reverse-a-list.py"
-    ],
-    "member_call_without_result:setlocale": [
-      "146.1825-convert-string-to-floating-point-number.py"
-    ],
-    "member_call_without_result:shuffle": [
-      "010.1478-shuffle-a-list.py"
-    ],
-    "member_call_without_result:sleep": [
-      "045.0570-pause-execution-for-5-seconds.py"
-    ],
-    "member_call_without_result:sort": [
-      "100.1142-sort-by-a-comparator.py"
-    ],
-    "member_call_without_result:start": [
-      "025.0195-send-a-value-to-another-thread.py",
-      "185.2820-execute-function-in-30-seconds.py"
-    ],
-    "member_call_without_result:uniform": [
-      "014.3410-pick-uniformly-a-random-floating-point-number-in-ab.py"
-    ],
-    "member_call_without_result:unlink": [
-      "155.2147-delete-file.py"
     ],
     "method:__init__": [
       "009.1410-create-a-binary-tree-data-structure.py",
@@ -14934,16 +14939,18 @@
       "159.2281-trie.py",
       "187.3261-disjoint-set.py"
     ],
-    "abstr/method/naming/magic": [
+    "abstr/method/naming/magic/__init__": [
       "009.1410-create-a-binary-tree-data-structure.py",
       "009.3176-create-a-binary-tree-data-structure.py",
       "017.1103-create-a-tree-data-structure.py",
       "040.2279-graph-with-adjacency-lists.py",
       "090.1099-read-only-outside.py",
       "104.3264-save-object-into-xml-file.py",
-      "154.2292-halfway-between-two-hex-color-codes.py",
       "159.2281-trie.py",
       "187.3261-disjoint-set.py"
+    ],
+    "abstr/method/naming/magic/__str__": [
+      "154.2292-halfway-between-two-hex-color-codes.py"
     ],
     "abstr/nested/closure": [
       "037.0671-currying.py"
@@ -14999,37 +15006,16 @@
       "163.3177-print-list-elements-by-group-of-2.py",
       "187.3261-disjoint-set.py"
     ],
-    "appli/class_constructor": [
-      "018.2084-depth-first-traversing-of-a-tree.py"
-    ],
-    "appli/class_constructor/Graph": [
-      "040.2279-graph-with-adjacency-lists.py"
-    ],
-    "appli/class_constructor/P": [
-      "189.3236-filter-and-transform-list.py"
-    ],
-    "appli/class_constructor/Path": [
-      "144.2915-check-if-file-exists.py"
-    ],
-    "appli/class_constructor/Point": [
-      "179.2689-get-center-of-a-rectangle.py"
-    ],
-    "appli/class_constructor/Pool": [
+    "appli/class/constructor": [
+      "025.0195-send-a-value-to-another-thread.py",
       "030.0189-parallelize-execution-of-1000-independent-tasks.py",
-      "056.1424-launch-1000-parallel-tasks-and-wait-for-completion.py"
-    ],
-    "appli/class_constructor/Queue": [
-      "025.0195-send-a-value-to-another-thread.py"
-    ],
-    "appli/class_constructor/T": [
       "034.0625-create-a-set-of-objects.py",
+      "040.2279-graph-with-adjacency-lists.py",
+      "056.1424-launch-1000-parallel-tasks-and-wait-for-completion.py",
+      "104.3264-save-object-into-xml-file.py",
+      "144.2915-check-if-file-exists.py",
+      "179.2689-get-center-of-a-rectangle.py",
       "189.3236-filter-and-transform-list.py"
-    ],
-    "appli/class_constructor/TestClass": [
-      "104.3264-save-object-into-xml-file.py"
-    ],
-    "appli/class_constructor/Thread": [
-      "025.0195-send-a-value-to-another-thread.py"
     ],
     "appli/composition": [
       "034.0625-create-a-set-of-objects.py",
@@ -15061,12 +15047,6 @@
       "037.0671-currying.py",
       "043.2733-break-outer-loop.py",
       "163.3177-print-list-elements-by-group-of-2.py"
-    ],
-    "appli/function/a_class": [
-      "073.0673-create-a-factory.py"
-    ],
-    "appli/function/bat": [
-      "162.2164-execute-procedures-depending-on-options.py"
     ],
     "appli/function/builtin/any": [
       "191.3403-check-if-any-value-in-a-list-is-larger-than-a-limit.py"
@@ -15207,9 +15187,6 @@
       "112.2144-iterate-over-map-entries-ordered-by-keys.py",
       "113.2157-iterate-over-map-entries-ordered-by-values.py"
     ],
-    "appli/function/builtin/str": [
-      "055.0575-convert-integer-to-string.py"
-    ],
     "appli/function/builtin/sum": [
       "054.0241-compute-sum-of-integers.py"
     ],
@@ -15221,77 +15198,6 @@
       "143.2256-iterate-alternatively-over-two-lists.py",
       "163.2170-print-list-elements-by-group-of-2.py",
       "163.3177-print-list-elements-by-group-of-2.py"
-    ],
-    "appli/function/date": [
-      "099.1429-format-date-yyyy-mm-dd.py"
-    ],
-    "appli/function/deque": [
-      "129.2282-breadth-first-traversing-in-a-graph.py"
-    ],
-    "appli/function/doSomething": [
-      "006.0032-iterate-over-list-values.py"
-    ],
-    "appli/function/do_something": [
-      "078.1089-do-while-loop.py"
-    ],
-    "appli/function/f": [
-      "016.1530-depth-first-traversing-of-a-binary-tree.py",
-      "018.2084-depth-first-traversing-of-a-tree.py",
-      "033.1420-atomically-read-and-update-variable.py",
-      "035.0667-first-class-function--compose.py",
-      "036.0670-first-class-function--generic-composition.py",
-      "093.1082-pass-a-runnable-procedure-as-parameter.py",
-      "128.2085-breadth-first-traversing-of-a-tree.py",
-      "129.2282-breadth-first-traversing-in-a-graph.py",
-      "130.2283-depth-first-traversing-in-a-graph.py",
-      "191.3403-check-if-any-value-in-a-list-is-larger-than-a-limit.py"
-    ],
-    "appli/function/f1": [
-      "131.2766-successive-conditions.py"
-    ],
-    "appli/function/f2": [
-      "131.2766-successive-conditions.py"
-    ],
-    "appli/function/f3": [
-      "131.2766-successive-conditions.py"
-    ],
-    "appli/function/f32": [
-      "160.2165-detect-if-32-bit-or-64-bit-architecture.py"
-    ],
-    "appli/function/f64": [
-      "160.2165-detect-if-32-bit-or-64-bit-architecture.py"
-    ],
-    "appli/function/foo": [
-      "125.2167-measure-function-call-duration.py"
-    ],
-    "appli/function/fox": [
-      "162.2164-execute-procedures-depending-on-options.py"
-    ],
-    "appli/function/g": [
-      "035.0667-first-class-function--compose.py",
-      "036.0670-first-class-function--generic-composition.py"
-    ],
-    "appli/function/gcd": [
-      "074.0674-compute-gcd.py",
-      "075.0675-compute-lcm.py"
-    ],
-    "appli/function/namedtuple": [
-      "179.2689-get-center-of-a-rectangle.py"
-    ],
-    "appli/function/p": [
-      "057.3173-filter-list.py"
-    ],
-    "appli/function/raw_input": [
-      "120.1479-read-integer-from-stdin.py"
-    ],
-    "appli/function/shuffle": [
-      "010.0182-shuffle-a-list.py"
-    ],
-    "appli/function/tee": [
-      "163.3177-print-list-elements-by-group-of-2.py"
-    ],
-    "appli/function/timedelta": [
-      "184.2701-tomorrow.py"
     ],
     "appli/function/without_arguments": [
       "078.1089-do-while-loop.py",
@@ -15307,113 +15213,155 @@
       "162.2164-execute-procedures-depending-on-options.py",
       "191.3403-check-if-any-value-in-a-list-is-larger-than-a-limit.py"
     ],
-    "appli/function/xrange": [
-      "026.0194-create-a-2-dimensional-array.py",
-      "027.0192-create-a-3-dimensional-array.py"
-    ],
-    "appli/method/abspath": [
-      "107.2139-get-folder-containing-current-program.py"
-    ],
-    "appli/method/acquire": [
-      "033.1420-atomically-read-and-update-variable.py"
-    ],
-    "appli/method/add": [
+    "appli/method": [
+      "010.1478-shuffle-a-list.py",
+      "011.0047-pick-a-random-element-from-a-list.py",
+      "014.0185-pick-uniformly-a-random-floating-point-number-in-ab.py",
+      "014.3410-pick-uniformly-a-random-floating-point-number-in-ab.py",
+      "015.0184-pick-uniformly-a-random-integer-in-ab.py",
+      "025.0195-send-a-value-to-another-thread.py",
+      "027.0193-create-a-3-dimensional-array.py",
+      "030.0189-parallelize-execution-of-1000-independent-tasks.py",
+      "033.1420-atomically-read-and-update-variable.py",
       "040.2279-graph-with-adjacency-lists.py",
-      "119.3263-deduplicate-list.py",
-      "129.2282-breadth-first-traversing-in-a-graph.py",
-      "130.2283-depth-first-traversing-in-a-graph.py"
-    ],
-    "appli/method/append": [
-      "119.3263-deduplicate-list.py",
+      "041.0187-reverse-a-string.py",
+      "045.0570-pause-execution-for-5-seconds.py",
+      "056.1424-launch-1000-parallel-tasks-and-wait-for-completion.py",
+      "058.0665-extract-file-content-to-a-string.py",
+      "061.0576-get-current-date.py",
+      "067.1426-binomial-coefficient-n-choose-k.py",
+      "068.2271-create-a-bitset.py",
+      "083.1805-regex-with-character-repetition.py",
+      "087.1139-stop-program.py",
+      "091.1098-load-json-file-into-struct.py",
+      "092.1100-save-object-into-json-file.py",
+      "095.2140-get-file-size.py",
+      "098.2142-epoch-seconds-to-date-object.py",
+      "099.1429-format-date-yyyy-mm-dd.py",
+      "099.2693-format-date-yyyy-mm-dd.py",
+      "101.2172-load-from-http-get-request-into-a-string.py",
+      "102.2173-load-from-http-get-request-into-a-file.py",
+      "103.2276-load-xml-file-into-struct.py",
+      "104.3264-save-object-into-xml-file.py",
+      "106.2039-get-program-working-directory.py",
+      "107.2139-get-folder-containing-current-program.py",
+      "109.2280-number-of-bytes-of-a-type.py",
+      "111.2168-launch-other-program.py",
+      "121.3029-udp-listen-and-read.py",
+      "124.2152-binary-search-for-a-value-in-sorted-array.py",
+      "125.2167-measure-function-call-duration.py",
+      "127.2274-source-code-inclusion.py",
       "128.2085-breadth-first-traversing-of-a-tree.py",
-      "171.2446-add-an-element-at-the-end-of-a-list.py"
-    ],
-    "appli/method/apply_async": [
-      "030.0189-parallelize-execution-of-1000-independent-tasks.py"
-    ],
-    "appli/method/array": [
-      "154.2292-halfway-between-two-hex-color-codes.py"
-    ],
-    "appli/method/asizeof": [
-      "109.2280-number-of-bytes-of-a-type.py"
-    ],
-    "appli/method/astype": [
-      "154.2292-halfway-between-two-hex-color-codes.py"
-    ],
-    "appli/method/atof": [
-      "146.1825-convert-string-to-floating-point-number.py"
-    ],
-    "appli/method/basicConfig": [
-      "145.1822-print-log-line-with-datetime.py"
-    ],
-    "appli/method/bind": [
-      "121.3029-udp-listen-and-read.py"
-    ],
-    "appli/method/bisect_left": [
-      "124.2152-binary-search-for-a-value-in-sorted-array.py"
-    ],
-    "appli/method/call": [
-      "111.2168-launch-other-program.py"
-    ],
-    "appli/method/ceil": [
-      "068.2271-create-a-bitset.py"
-    ],
-    "appli/method/chain": [
-      "177.3241-find-files-with-a-given-list-of-filename-extensions.py"
+      "129.2282-breadth-first-traversing-in-a-graph.py",
+      "130.2283-depth-first-traversing-in-a-graph.py",
+      "132.2040-measure-duration-of-procedure-execution.py",
+      "135.2158-remove-item-from-list-by-its-value.py",
+      "140.2156-delete-map-entry.py",
+      "144.2145-check-if-file-exists.py",
+      "144.2915-check-if-file-exists.py",
+      "145.1822-print-log-line-with-datetime.py",
+      "146.1825-convert-string-to-floating-point-number.py",
+      "147.2171-remove-all-non-ascii-characters.py",
+      "154.2292-halfway-between-two-hex-color-codes.py",
+      "155.2147-delete-file.py",
+      "158.2163-random-sublist.py",
+      "164.2169-open-url-in-default-browser.py",
+      "174.2687-make-http-post-request.py",
+      "175.2613-bytes-to-hex-string.py",
+      "176.2614-hex-string-to-byte-array.py",
+      "177.2709-find-files-with-a-given-list-of-filename-extensions.py",
+      "177.2725-find-files-with-a-given-list-of-filename-extensions.py",
+      "177.3241-find-files-with-a-given-list-of-filename-extensions.py",
+      "180.2612-list-files-in-directory.py",
+      "183.3025-make-http-put-request.py",
+      "184.2701-tomorrow.py",
+      "185.2820-execute-function-in-30-seconds.py",
+      "186.2699-exit-program-cleanly.py",
+      "187.3261-disjoint-set.py",
+      "188.3284-matrix-multiplication.py",
+      "197.3457-get-a-list-of-lines-from-a-file.py"
     ],
     "appli/method/chaining": [
       "154.2292-halfway-between-two-hex-color-codes.py",
       "174.2687-make-http-post-request.py"
     ],
-    "appli/method/choice": [
-      "011.0047-pick-a-random-element-from-a-list.py"
+    "appli/method/imp/load_module": [
+      "127.2274-source-code-inclusion.py"
     ],
-    "appli/method/compile": [
-      "083.1805-regex-with-character-repetition.py"
-    ],
-    "appli/method/count": [
-      "082.1096-count-substring-occurrences.py",
-      "084.1940-count-bits-set-in-integer-binary-representation.py"
-    ],
-    "appli/method/decode": [
-      "041.0187-reverse-a-string.py"
-    ],
-    "appli/method/dirname": [
-      "107.2139-get-folder-containing-current-program.py"
-    ],
-    "appli/method/dump": [
+    "appli/method/json/dump": [
       "092.1100-save-object-into-json-file.py"
     ],
-    "appli/method/encode": [
-      "041.0187-reverse-a-string.py",
-      "174.2687-make-http-post-request.py"
+    "appli/method/locale/setlocale": [
+      "146.1825-convert-string-to-floating-point-number.py"
     ],
-    "appli/method/endswith": [
-      "097.1095-check-string-suffix.py",
-      "151.2166-remove-string-trailing-path-separator.py"
+    "appli/method/logging/basicConfig": [
+      "145.1822-print-log-line-with-datetime.py"
     ],
-    "appli/method/exists": [
-      "144.2145-check-if-file-exists.py",
-      "144.2915-check-if-file-exists.py"
+    "appli/method/non_sequence/dictionary/items": [
+      "013.0574-iterate-over-map-keys-and-values.py",
+      "113.2157-iterate-over-map-entries-ordered-by-values.py"
     ],
-    "appli/method/exit": [
-      "087.1139-stop-program.py",
-      "186.2699-exit-program-cleanly.py"
+    "appli/method/non_sequence/dictionary/values": [
+      "052.0666-check-if-map-contains-value.py"
     ],
-    "appli/method/extend": [
+    "appli/method/non_sequence/set/add": [
+      "040.2279-graph-with-adjacency-lists.py",
+      "119.3263-deduplicate-list.py",
       "129.2282-breadth-first-traversing-in-a-graph.py",
       "130.2283-depth-first-traversing-in-a-graph.py"
     ],
-    "appli/method/factorial": [
-      "067.1426-binomial-coefficient-n-choose-k.py"
+    "appli/method/random/choice": [
+      "011.0047-pick-a-random-element-from-a-list.py"
     ],
-    "appli/method/find": [
+    "appli/method/random/randint": [
+      "015.0184-pick-uniformly-a-random-integer-in-ab.py"
+    ],
+    "appli/method/random/randrange": [
+      "014.0185-pick-uniformly-a-random-floating-point-number-in-ab.py"
+    ],
+    "appli/method/random/shuffle": [
+      "010.1478-shuffle-a-list.py"
+    ],
+    "appli/method/random/uniform": [
+      "014.3410-pick-uniformly-a-random-floating-point-number-in-ab.py"
+    ],
+    "appli/method/sequence/count": [
+      "082.1096-count-substring-occurrences.py",
+      "084.1940-count-bits-set-in-integer-binary-representation.py"
+    ],
+    "appli/method/sequence/index": [
+      "020.0573-return-two-values.py"
+    ],
+    "appli/method/sequence/list/append": [
+      "119.3263-deduplicate-list.py",
+      "128.2085-breadth-first-traversing-of-a-tree.py",
+      "171.2446-add-an-element-at-the-end-of-a-list.py"
+    ],
+    "appli/method/sequence/list/extend": [
+      "129.2282-breadth-first-traversing-in-a-graph.py",
+      "130.2283-depth-first-traversing-in-a-graph.py"
+    ],
+    "appli/method/sequence/list/insert": [
+      "044.0190-insert-element-in-list.py"
+    ],
+    "appli/method/sequence/list/reverse": [
+      "019.3164-reverse-a-list.py"
+    ],
+    "appli/method/sequence/list/sort": [
+      "100.1142-sort-by-a-comparator.py"
+    ],
+    "appli/method/sequence/string/encode": [
+      "041.0187-reverse-a-string.py",
+      "174.2687-make-http-post-request.py"
+    ],
+    "appli/method/sequence/string/endswith": [
+      "097.1095-check-string-suffix.py",
+      "151.2166-remove-string-trailing-path-separator.py"
+    ],
+    "appli/method/sequence/string/find": [
       "062.1091-find-substring-position.py"
     ],
-    "appli/method/find_set": [
-      "187.3261-disjoint-set.py"
-    ],
-    "appli/method/format": [
+    "appli/method/sequence/string/format": [
       "023.1102-convert-real-number-to-string-with-2-decimal-places.py",
       "065.1085-format-decimal-number.py",
       "076.1083-binary-digits-from-an-integer.py",
@@ -15421,225 +15369,55 @@
       "154.2155-halfway-between-two-hex-color-codes.py",
       "177.2725-find-files-with-a-given-list-of-filename-extensions.py"
     ],
-    "appli/method/from_str": [
-      "154.2292-halfway-between-two-hex-color-codes.py"
-    ],
-    "appli/method/fromhex": [
-      "176.2614-hex-string-to-byte-array.py"
-    ],
-    "appli/method/fromtimestamp": [
-      "098.2142-epoch-seconds-to-date-object.py"
-    ],
-    "appli/method/getLogger": [
-      "145.1822-print-log-line-with-datetime.py"
-    ],
-    "appli/method/getcwd": [
-      "106.2039-get-program-working-directory.py"
-    ],
-    "appli/method/getsize": [
-      "095.2140-get-file-size.py"
-    ],
-    "appli/method/glob": [
-      "177.3241-find-files-with-a-given-list-of-filename-extensions.py"
-    ],
-    "appli/method/hex": [
-      "175.2613-bytes-to-hex-string.py"
-    ],
-    "appli/method/index": [
-      "020.0573-return-two-values.py"
-    ],
-    "appli/method/info": [
-      "145.1822-print-log-line-with-datetime.py"
-    ],
-    "appli/method/insert": [
-      "044.0190-insert-element-in-list.py"
-    ],
-    "appli/method/is_same_set": [
-      "187.3261-disjoint-set.py"
-    ],
-    "appli/method/isdigit": [
+    "appli/method/sequence/string/isdigit": [
       "137.1823-check-if-string-contains-only-digits.py"
     ],
-    "appli/method/isoformat": [
-      "099.2693-format-date-yyyy-mm-dd.py"
-    ],
-    "appli/method/items": [
-      "013.0574-iterate-over-map-keys-and-values.py",
-      "113.2157-iterate-over-map-entries-ordered-by-values.py"
-    ],
-    "appli/method/join": [
+    "appli/method/sequence/string/join": [
       "053.0240-join-a-list-of-strings.py",
       "053.1933-join-a-list-of-strings.py",
       "071.0379-echo-program-implementation.py",
       "154.2292-halfway-between-two-hex-color-codes.py"
     ],
-    "appli/method/listdir": [
-      "177.2709-find-files-with-a-given-list-of-filename-extensions.py",
-      "180.2612-list-files-in-directory.py"
-    ],
-    "appli/method/load": [
-      "091.1098-load-json-file-into-struct.py"
-    ],
-    "appli/method/load_module": [
-      "127.2274-source-code-inclusion.py"
-    ],
-    "appli/method/lower": [
+    "appli/method/sequence/string/lower": [
       "133.2160-case-insensitive-string-contains.py"
     ],
-    "appli/method/lstrip": [
+    "appli/method/sequence/string/lstrip": [
       "167.3175-trim-prefix.py"
     ],
-    "appli/method/make_path": [
-      "040.2279-graph-with-adjacency-lists.py"
-    ],
-    "appli/method/map": [
-      "056.1424-launch-1000-parallel-tasks-and-wait-for-completion.py"
-    ],
-    "appli/method/match": [
-      "177.2725-find-files-with-a-given-list-of-filename-extensions.py"
-    ],
-    "appli/method/matmul": [
-      "188.3284-matrix-multiplication.py"
-    ],
-    "appli/method/now": [
-      "061.0576-get-current-date.py"
-    ],
-    "appli/method/open": [
-      "164.2169-open-url-in-default-browser.py"
-    ],
-    "appli/method/parse": [
-      "103.2276-load-xml-file-into-struct.py"
-    ],
-    "appli/method/perf_counter": [
-      "125.2167-measure-function-call-duration.py"
-    ],
-    "appli/method/pop": [
-      "128.2085-breadth-first-traversing-of-a-tree.py",
-      "130.2283-depth-first-traversing-in-a-graph.py",
-      "140.2156-delete-map-entry.py"
-    ],
-    "appli/method/popleft": [
-      "129.2282-breadth-first-traversing-in-a-graph.py"
-    ],
-    "appli/method/put": [
-      "025.0195-send-a-value-to-another-thread.py",
-      "183.3025-make-http-put-request.py"
-    ],
-    "appli/method/randint": [
-      "015.0184-pick-uniformly-a-random-integer-in-ab.py"
-    ],
-    "appli/method/randrange": [
-      "014.0185-pick-uniformly-a-random-floating-point-number-in-ab.py"
-    ],
-    "appli/method/read": [
-      "058.0665-extract-file-content-to-a-string.py",
-      "101.2172-load-from-http-get-request-into-a-string.py"
-    ],
-    "appli/method/readlines": [
-      "197.3457-get-a-list-of-lines-from-a-file.py"
-    ],
-    "appli/method/recvfrom": [
-      "121.3029-udp-listen-and-read.py"
-    ],
-    "appli/method/release": [
-      "033.1420-atomically-read-and-update-variable.py"
-    ],
-    "appli/method/remove": [
-      "135.2158-remove-item-from-list-by-its-value.py"
-    ],
-    "appli/method/replace": [
+    "appli/method/sequence/string/replace": [
       "063.1088-replace-fragment-of-a-string.py",
       "116.1257-remove-occurrences-of-word-from-string.py"
     ],
-    "appli/method/reverse": [
-      "019.3164-reverse-a-list.py"
-    ],
-    "appli/method/rsplit": [
+    "appli/method/sequence/string/rsplit": [
       "168.2277-trim-suffix.py"
     ],
-    "appli/method/rstrip": [
+    "appli/method/sequence/string/rstrip": [
       "150.2154-remove-trailing-slash.py",
       "168.3174-trim-suffix.py"
     ],
-    "appli/method/sample": [
-      "158.2163-random-sublist.py"
-    ],
-    "appli/method/serialize": [
-      "104.3264-save-object-into-xml-file.py"
-    ],
-    "appli/method/setlocale": [
-      "146.1825-convert-string-to-floating-point-number.py"
-    ],
-    "appli/method/shuffle": [
-      "010.1478-shuffle-a-list.py"
-    ],
-    "appli/method/sleep": [
-      "045.0570-pause-execution-for-5-seconds.py"
-    ],
-    "appli/method/socket": [
-      "121.3029-udp-listen-and-read.py"
-    ],
-    "appli/method/sort": [
-      "100.1142-sort-by-a-comparator.py"
-    ],
-    "appli/method/split": [
+    "appli/method/sequence/string/split": [
       "049.0242-split-a-space-separated-string.py",
       "148.1829-read-list-of-integer-numbers-from-stdin.py"
     ],
-    "appli/method/splitext": [
-      "177.2709-find-files-with-a-given-list-of-filename-extensions.py"
-    ],
-    "appli/method/start": [
-      "025.0195-send-a-value-to-another-thread.py",
-      "185.2820-execute-function-in-30-seconds.py"
-    ],
-    "appli/method/startswith": [
+    "appli/method/sequence/string/startswith": [
       "096.1094-check-string-prefix.py",
       "167.2611-trim-prefix.py"
     ],
-    "appli/method/strftime": [
-      "099.1429-format-date-yyyy-mm-dd.py"
-    ],
-    "appli/method/strip": [
+    "appli/method/sequence/string/strip": [
       "110.1455-check-if-string-is-blank.py"
     ],
-    "appli/method/sub": [
-      "147.2171-remove-all-non-ascii-characters.py"
+    "appli/method/subprocess/call": [
+      "111.2168-launch-other-program.py"
     ],
-    "appli/method/timeit": [
-      "132.2040-measure-duration-of-procedure-execution.py"
+    "appli/method/sys/exit": [
+      "087.1139-stop-program.py",
+      "186.2699-exit-program-cleanly.py"
     ],
-    "appli/method/today": [
-      "099.2693-format-date-yyyy-mm-dd.py",
-      "184.2701-tomorrow.py"
+    "appli/method/time/sleep": [
+      "045.0570-pause-execution-for-5-seconds.py"
     ],
-    "appli/method/uniform": [
-      "014.3410-pick-uniformly-a-random-floating-point-number-in-ab.py"
-    ],
-    "appli/method/unlink": [
-      "155.2147-delete-file.py"
-    ],
-    "appli/method/urlencode": [
-      "174.2687-make-http-post-request.py"
-    ],
-    "appli/method/urlopen": [
-      "101.2172-load-from-http-get-request-into-a-string.py",
-      "174.2687-make-http-post-request.py"
-    ],
-    "appli/method/urlretrieve": [
-      "102.2173-load-from-http-get-request-into-a-file.py"
-    ],
-    "appli/method/values": [
-      "052.0666-check-if-map-contains-value.py"
-    ],
-    "appli/method/view": [
-      "154.2292-halfway-between-two-hex-color-codes.py"
-    ],
-    "appli/method/walk": [
-      "177.2725-find-files-with-a-given-list-of-filename-extensions.py"
-    ],
-    "appli/method/zeros": [
-      "027.0193-create-a-3-dimensional-array.py"
+    "appli/method/webbrowser/open": [
+      "164.2169-open-url-in-default-browser.py"
     ],
     "condition/belonging": [
       "012.0181-check-if-list-contains-a-value.py",

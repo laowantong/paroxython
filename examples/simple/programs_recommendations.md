@@ -1,20 +1,21 @@
 # Table of contents
-- [`4 programs of learning cost in [2, 4[`](#4-programs-of-learning-cost-in-2-4)
-    - [`09_indent.py`](#program-09_indentpy-learning-cost-20)
+- [`1 program of learning cost in [1, 2[`](#1-program-of-learning-cost-in-1-2)
+    - [`09_indent.py`](#program-09_indentpy-learning-cost-196875)
+- [`3 programs of learning cost in [2, 4[`](#3-programs-of-learning-cost-in-2-4)
     - [`08_arguments.py`](#program-08_argumentspy-learning-cost-28125)
-    - [`04_fibonacci.py`](#program-04_fibonaccipy-learning-cost-29375)
-    - [`20_prime_numbers.py`](#program-20_prime_numberspy-learning-cost-375)
+    - [`04_fibonacci.py`](#program-04_fibonaccipy-learning-cost-303125)
+    - [`20_prime_numbers.py`](#program-20_prime_numberspy-learning-cost-38125)
 - [`5 programs of learning cost in [4, 8[`](#5-programs-of-learning-cost-in-4-8)
-    - [`10_time.py`](#program-10_timepy-learning-cost-45625)
-    - [`21_xml_html_parsing.py`](#program-21_xml_html_parsingpy-learning-cost-53125)
-    - [`12_classes.py`](#program-12_classespy-learning-cost-578125)
+    - [`10_time.py`](#program-10_timepy-learning-cost-465625)
+    - [`21_xml_html_parsing.py`](#program-21_xml_html_parsingpy-learning-cost-490625)
+    - [`12_classes.py`](#program-12_classespy-learning-cost-53125)
     - [`14_median.py`](#program-14_medianpy-learning-cost-59375)
-    - [`33_guess_the_number.py`](#program-33_guess_the_numberpy-learning-cost-603125)
+    - [`33_guess_the_number.py`](#program-33_guess_the_numberpy-learning-cost-60)
 # Recommended programs
 
-## 4 programs of learning cost in [2, 4[
+## 1 program of learning cost in [1, 2[
 
-### Program `09_indent.py` (learning cost 2.0)
+### Program `09_indent.py` (learning cost 1.96875)
 
 ```python
 1   import glob
@@ -33,8 +34,8 @@
 | 0 | `appli/function/builtin/open` | 5 |
 | 0 | `appli/function/builtin/sorted` | 3 |
 | 0 | `appli/function/without_arguments` | 8 |
-| 0.375 | `appli/method/glob` | 2 |
-| 0.375 | `appli/method/rstrip` | 7 |
+| 0.25 | `appli/method` | 2 |
+| 0.46875 | `appli/method/sequence/string/rstrip` | 7 |
 | 0 | `flow/loop/exit/late` | 3-8, 6-7 |
 | 0 | `flow/loop/for` | 3-8 |
 | 0 | `flow/loop/for/elements` | 6-7 |
@@ -48,6 +49,8 @@
 | 0 | `meta/sloc/8` | 1-8 |
 
 ---
+
+## 3 programs of learning cost in [2, 4[
 
 ### Program `08_arguments.py` (learning cost 2.8125)
 
@@ -77,7 +80,7 @@
 
 ---
 
-### Program `04_fibonacci.py` (learning cost 2.9375)
+### Program `04_fibonacci.py` (learning cost 3.03125)
 
 ```python
 1   parents, babies = (1, 1)
@@ -89,7 +92,7 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.25 | `appli/composition` | 3 |
-| 0.375 | `appli/method/format` | 3 |
+| 0.46875 | `appli/method/sequence/string/format` | 3 |
 | 0.75 | `condition/inequality` | 2 |
 | 0 | `flow/loop/exit/late` | 2-4 |
 | 0 | `flow/loop/while` | 2-4 |
@@ -106,7 +109,7 @@
 
 ---
 
-### Program `20_prime_numbers.py` (learning cost 3.75)
+### Program `20_prime_numbers.py` (learning cost 3.8125)
 
 ```python
 1   import itertools
@@ -129,7 +132,7 @@
 | 0 | `appli/function/builtin/filter` | 7 |
 | 0 | `appli/function/builtin/next` | 5 |
 | 0 | `appli/function/without_arguments` | 8 |
-| 0.375 | `appli/method/count` | 3 |
+| 0.4375 | `appli/method/sequence/count` | 3 |
 | 0.75 | `condition/inequality` | 9 |
 | 0 | `flow/conditional/no_else` | 9-10 |
 | 0 | `flow/loop/exit/early/break` | 8-11 |
@@ -149,7 +152,7 @@
 
 ## 5 programs of learning cost in [4, 8[
 
-### Program `10_time.py` (learning cost 4.5625)
+### Program `10_time.py` (learning cost 4.65625)
 
 ```python
 1   from time import localtime
@@ -175,9 +178,8 @@
 |----|----|----|
 | 0.25 | `appli/composition` | 12 |
 | 0 | `appli/function/builtin/sorted` | 12 |
-| 0 | `appli/function/localtime` | 10 |
 | 0 | `appli/function/without_arguments` | 10 |
-| 0.375 | `appli/method/keys` | 12 |
+| 0.46875 | `appli/method/non_sequence/dictionary/keys` | 12 |
 | 0.75 | `condition/inequality` | 13 |
 | 0 | `flow/conditional/no_else` | 13-15 |
 | 0 | `flow/loop/exit/early/break/else` | 12-17 |
@@ -195,7 +197,7 @@
 
 ---
 
-### Program `21_xml_html_parsing.py` (learning cost 5.3125)
+### Program `21_xml_html_parsing.py` (learning cost 4.90625)
 
 ```python
 1   dinner_recipe = """<html><body><table>
@@ -217,9 +219,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.25 | `appli/composition` | 14 |
-| 0.375 | `appli/method/format` | 14 |
-| 0.375 | `appli/method/fromstring` | 9 |
-| 0.375 | `appli/method/getiterator` | 11 |
+| 0.25 | `appli/method` | 9, 11 |
+| 0.46875 | `appli/method/sequence/string/format` | 14 |
 | 0.875 | `condition/belonging/not` | 13 |
 | 0.75 | `condition/equality` | 13 |
 | 0 | `flow/conditional/no_else` | 13-14 |
@@ -239,7 +240,7 @@
 
 ---
 
-### Program `12_classes.py` (learning cost 5.78125)
+### Program `12_classes.py` (learning cost 5.3125)
 
 ```python
 1   class BankAccount(object):
@@ -262,13 +263,12 @@
 | 0.25 | `abstr/class` | 1-9 |
 | 0.25 | `abstr/function` | 8-9 |
 | 0.4375 | `abstr/method/flavor/instance` | 2-3, 4-5, 6-7, 8-9 |
-| 0.4375 | `abstr/method/naming/magic` | 2-3 |
+| 0.46875 | `abstr/method/naming/magic/__init__` | 2-3 |
 | 0 | `abstr/procedure` | 2-3, 4-5, 6-7 |
 | 0.375 | `abstr/return/something` | 9 |
-| 0.375 | `appli/class_constructor/BankAccount` | 10 |
+| 0.375 | `appli/class/constructor` | 10 |
 | 0.25 | `appli/composition` | 12 |
-| 0.375 | `appli/method/overdrawn` | 12 |
-| 0.375 | `appli/method/withdraw` | 11 |
+| 0.25 | `appli/method` | 11, 12 |
 | 0.75 | `condition/inequality` | 9 |
 | 0.25 | `type/boolean` | 9 |
 | 0.4375 | `type/number/integer/literal` | 10, 11 |
@@ -320,7 +320,7 @@
 
 ---
 
-### Program `33_guess_the_number.py` (learning cost 6.03125)
+### Program `33_guess_the_number.py` (learning cost 6.0)
 
 ```python
 1   import random
@@ -348,8 +348,8 @@
 | 0.25 | `appli/composition` | 5, 7, 16, 18 |
 | 0 | `appli/function/builtin/casting/int` | 7 |
 | 0 | `appli/function/builtin/input` | 3, 7 |
-| 0.375 | `appli/method/format` | 5, 16, 18 |
-| 0.375 | `appli/method/randint` | 4 |
+| 0.25 | `appli/method` | 4 |
+| 0.46875 | `appli/method/sequence/string/format` | 5, 16, 18 |
 | 0.75 | `condition/equality` | 13, 15 |
 | 0.75 | `condition/inequality` | 6, 9, 11 |
 | 0 | `flow/conditional` | 15-18 |

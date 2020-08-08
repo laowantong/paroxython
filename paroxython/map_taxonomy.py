@@ -203,17 +203,17 @@ class Taxonomy:
 
         Description:
             Most of the work was done during the initialization, by constructing the map
-            `self.literal_labels` and the list `self.compiled_labels`. The given label pattern is
+            `self.literal_labels` and the list `self.compiled_labels`. The given label name is
             first looked up in the map, then matched successively against every regular expression
             stored in the list.
 
             The second step may be useful even if the first one has already produced one or several
-            translations. For instance, take a the taxonomy defining the following associations:
+            translations. For instance, take a taxonomy defining the following associations:
 
-            Taxa (replacement patterns)        | Labels (search patterns)
-            :----------------------------------|:-----------------------
+            Taxa (replacement patterns)         | Labels (search patterns)
+            :-----------------------------------|:-----------------------
             `appli/function/builtin/casting/\1` | `free_call:(list|dict)`
-            `type/sequence/list`               | `free_call:list`
+            `type/sequence/list`                | `free_call:list`
 
             Suppose now that we pass the label `"free_call:list"`. The lookup in the map produces
             a first translation: `"type/sequence/list"`. However, the linear search in the list

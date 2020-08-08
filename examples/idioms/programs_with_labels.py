@@ -103,13 +103,13 @@ shuffle(x) # call_argument:x, external_free_call:shuffle, free_call:shuffle, fre
 # 010.1478-shuffle-a-list.py
 # ----------------------------------------------------------------------------------------
 import random # import:random, import_module:random, node:Import, whole_span:2 (-> +1)
-random.shuffle(list) # call_argument:list, member_call:shuffle, member_call_object:random, member_call_without_result:shuffle, node:Attribute, node:Call, node:Expr, node:Name
+random.shuffle(list) # call_argument:list, member_call:random:shuffle, member_call_member:shuffle, member_call_object:random, node:Attribute, node:Call, node:Expr, node:Name
 
 # ----------------------------------------------------------------------------------------
 # 011.0047-pick-a-random-element-from-a-list.py
 # ----------------------------------------------------------------------------------------
 import random # import:random, import_module:random, node:Import, whole_span:2 (-> +1)
-random.choice(x) # call_argument:x, member_call:choice, member_call_object:random, member_call_without_result:choice, node:Attribute, node:Call, node:Expr, node:Name
+random.choice(x) # call_argument:x, member_call:random:choice, member_call_member:choice, member_call_object:random, node:Attribute, node:Call, node:Expr, node:Name
 
 # ----------------------------------------------------------------------------------------
 # 012.0181-check-if-list-contains-a-value.py
@@ -119,7 +119,7 @@ x in list # comparison_operator:In, node:Compare, node:Expr, node:Name, whole_sp
 # ----------------------------------------------------------------------------------------
 # 013.0574-iterate-over-map-keys-and-values.py
 # ----------------------------------------------------------------------------------------
-for k, v in mymap.items(): # for:k (-> +1), for:v (-> +1), literal:Tuple, loop:for (-> +1), loop_with_late_exit:for (-> +1), member_call:items, node:Attribute, node:Call, node:For (-> +1), node:Name, node:Tuple, whole_span:2 (-> +1)
+for k, v in mymap.items(): # for:k (-> +1), for:v (-> +1), literal:Tuple, loop:for (-> +1), loop_with_late_exit:for (-> +1), member_call_member:items, node:Attribute, node:Call, node:For (-> +1), node:Name, node:Tuple, whole_span:2 (-> +1)
     print(k, v) # call_argument:k, call_argument:v, external_free_call:print, free_call:print, free_call_without_result:print, node:Call, node:Expr, node:Name
 
 # ----------------------------------------------------------------------------------------
@@ -127,19 +127,19 @@ for k, v in mymap.items(): # for:k (-> +1), for:v (-> +1), literal:Tuple, loop:f
 # ----------------------------------------------------------------------------------------
 import random # import:random, import_module:random, node:Import, whole_span:3 (-> +2)
 def pick(a, b): # function:pick (-> +1), function_argument:a, function_argument:b, function_argument_flavor:arg, function_returning_something:pick (-> +1), node:FunctionDef (-> +1), node:arg
-    return random.randrange(a, b) # call_argument:a, call_argument:b, member_call:randrange, member_call_object:random, node:Attribute, node:Call, node:Name, node:Return, return
+    return random.randrange(a, b) # call_argument:a, call_argument:b, member_call:random:randrange, member_call_member:randrange, member_call_object:random, node:Attribute, node:Call, node:Name, node:Return, return
 
 # ----------------------------------------------------------------------------------------
 # 014.3410-pick-uniformly-a-random-floating-point-number-in-ab.py
 # ----------------------------------------------------------------------------------------
 import random # import:random, import_module:random, node:Import, whole_span:2 (-> +1)
-random.uniform(a, b) # call_argument:a, call_argument:b, member_call:uniform, member_call_object:random, member_call_without_result:uniform, node:Attribute, node:Call, node:Expr, node:Name
+random.uniform(a, b) # call_argument:a, call_argument:b, member_call:random:uniform, member_call_member:uniform, member_call_object:random, node:Attribute, node:Call, node:Expr, node:Name
 
 # ----------------------------------------------------------------------------------------
 # 015.0184-pick-uniformly-a-random-integer-in-ab.py
 # ----------------------------------------------------------------------------------------
 import random # import:random, import_module:random, node:Import, whole_span:2 (-> +1)
-random.randint(a, b) # call_argument:a, call_argument:b, member_call:randint, member_call_object:random, member_call_without_result:randint, node:Attribute, node:Call, node:Expr, node:Name
+random.randint(a, b) # call_argument:a, call_argument:b, member_call:random:randint, member_call_member:randint, member_call_object:random, node:Attribute, node:Call, node:Expr, node:Name
 
 # ----------------------------------------------------------------------------------------
 # 016.1530-depth-first-traversing-of-a-binary-tree.py
@@ -180,7 +180,7 @@ y = x[::-1] # assignment, assignment_lhs_identifier:y, assignment_rhs_atom:-1, a
 # ----------------------------------------------------------------------------------------
 # 019.3164-reverse-a-list.py
 # ----------------------------------------------------------------------------------------
-x.reverse() # member_call:reverse, member_call_object:x, member_call_without_result:reverse, node:Attribute, node:Call, node:Expr, node:Name, whole_span:1
+x.reverse() # member_call:x:reverse, member_call_member:reverse, member_call_object:x, node:Attribute, node:Call, node:Expr, node:Name, whole_span:1
 
 # ----------------------------------------------------------------------------------------
 # 020.0573-return-two-values.py
@@ -188,7 +188,7 @@ x.reverse() # member_call:reverse, member_call_object:x, member_call_without_res
 def search(m, x): # function:search (-> +3), function_argument:m, function_argument:x, function_argument_flavor:arg, function_returning_something:search (-> +3), node:FunctionDef (-> +3), node:arg, whole_span:4 (-> +3)
     for idx, item in enumerate(m): # call_argument:m, external_free_call:enumerate, for:idx (-> +2), for:item (-> +2), for_indexes_elements (-> +2), free_call:enumerate, literal:Tuple, loop:for (-> +2), loop_with_early_exit:for:return (-> +2), loop_with_return:for (-> +2), node:Call, node:For (-> +2), node:Name, node:Tuple
         if x in item: # comparison_operator:In, if (-> +1), if_test_atom:item, if_test_atom:x, if_without_else (-> +1), node:Compare, node:If (-> +1), node:Name
-            return idx, item.index(x) # call_argument:x, if_then_branch, literal:Tuple, member_call:index, node:Attribute, node:Call, node:Name, node:Return, node:Tuple, return
+            return idx, item.index(x) # call_argument:x, if_then_branch, literal:Tuple, member_call_member:index, node:Attribute, node:Call, node:Name, node:Return, node:Tuple, return
 
 # ----------------------------------------------------------------------------------------
 # 021.0084-swap-values-of-variables-a-and-b.py
@@ -203,7 +203,7 @@ i = int(s) # assignment:int, assignment_lhs_identifier:i, assignment_rhs_atom:s,
 # ----------------------------------------------------------------------------------------
 # 023.1102-convert-real-number-to-string-with-2-decimal-places.py
 # ----------------------------------------------------------------------------------------
-s = "{:.2f}".format(x) # assignment:format, assignment_lhs_identifier:s, assignment_rhs_atom:x, call_argument:x, literal:Str, member_call:format, node:Assign, node:Attribute, node:Call, node:Name, node:Str, single_assignment:s, whole_span:1
+s = "{:.2f}".format(x) # assignment:format, assignment_lhs_identifier:s, assignment_rhs_atom:x, call_argument:x, literal:Str, member_call_member:format, node:Assign, node:Attribute, node:Call, node:Name, node:Str, single_assignment:s, whole_span:1
 
 # ----------------------------------------------------------------------------------------
 # 024.0664-assign-to-string-the-japanese-word-.py
@@ -217,8 +217,8 @@ import Queue # import:Queue, import_module:Queue, node:Import, whole_span:6 (-> 
 q = Queue() # assignment:Queue, assignment_lhs_identifier:q, external_free_call:Queue, free_call:Queue, free_call_without_arguments:Queue, node:Assign, node:Call, node:Name, single_assignment:q
 t = Thread(target=worker) # assignment:Thread, assignment_lhs_identifier:t, assignment_rhs_atom:worker, external_free_call:Thread, free_call:Thread, node:Assign, node:Call, node:Name, single_assignment:t
 t.daemon = True # assignment:True, assignment_lhs_identifier:t, assignment_rhs_atom:True, literal:True, node:Assign, node:Attribute, node:Name, node:NameConstant
-t.start() # member_call:start, member_call_object:t, member_call_without_result:start, node:Attribute, node:Call, node:Expr, node:Name
-q.put("Alan") # call_argument:, literal:Str, member_call:put, member_call_object:q, member_call_without_result:put, node:Attribute, node:Call, node:Expr, node:Name, node:Str
+t.start() # member_call:t:start, member_call_member:start, member_call_object:t, node:Attribute, node:Call, node:Expr, node:Name
+q.put("Alan") # call_argument:, literal:Str, member_call:q:put, member_call_member:put, member_call_object:q, node:Attribute, node:Call, node:Expr, node:Name, node:Str
 
 # ----------------------------------------------------------------------------------------
 # 026.0194-create-a-2-dimensional-array.py
@@ -234,7 +234,7 @@ x = [[[0 for k in xrange(p)] for j in xrange(n)] for i in xrange(m)] # assignmen
 # 027.0193-create-a-3-dimensional-array.py
 # ----------------------------------------------------------------------------------------
 import numpy # import:numpy, import_module:numpy, node:Import, whole_span:2 (-> +1)
-x = numpy.zeros((m, n, p)) # assignment:zeros, assignment_lhs_identifier:x, assignment_rhs_atom:m, assignment_rhs_atom:n, assignment_rhs_atom:numpy, assignment_rhs_atom:p, call_argument:, literal:Tuple, member_call:zeros, node:Assign, node:Attribute, node:Call, node:Name, node:Tuple, single_assignment:x
+x = numpy.zeros((m, n, p)) # assignment:zeros, assignment_lhs_identifier:x, assignment_rhs_atom:m, assignment_rhs_atom:n, assignment_rhs_atom:numpy, assignment_rhs_atom:p, call_argument:, literal:Tuple, member_call_member:zeros, node:Assign, node:Attribute, node:Call, node:Name, node:Tuple, single_assignment:x
 
 # ----------------------------------------------------------------------------------------
 # 028.0350-sort-by-a-property.py
@@ -252,7 +252,7 @@ del items[i] # index:i, node:Delete, node:Name, node:Subscript, whole_span:1
 from multiprocessing import Pool # import:multiprocessing:Pool, import_module:multiprocessing, import_name:Pool, node:ImportFrom, whole_span:4 (-> +3)
 pool = Pool() # assignment:Pool, assignment_lhs_identifier:pool, external_free_call:Pool, free_call:Pool, free_call_without_arguments:Pool, node:Assign, node:Call, node:Name, single_assignment:pool
 for i in range(1, 1001): # call_argument:1, call_argument:1001, external_free_call:range, for:i (-> +1), for_range:1:1001 (-> +1), free_call:range, literal:1, literal:1001, loop:for (-> +1), loop_with_late_exit:for (-> +1), node:Call, node:For (-> +1), node:Name, node:Num, range:1:1001
-    pool.apply_async(f, [i]) # call_argument:, call_argument:f, literal:List, member_call:apply_async, member_call_object:pool, member_call_without_result:apply_async, node:Attribute, node:Call, node:Expr, node:List, node:Name
+    pool.apply_async(f, [i]) # call_argument:, call_argument:f, literal:List, member_call:pool:apply_async, member_call_member:apply_async, member_call_object:pool, node:Attribute, node:Call, node:Expr, node:List, node:Name
 
 # ----------------------------------------------------------------------------------------
 # 031.0188-recursive-factorial-simple.py
@@ -273,12 +273,12 @@ def exp(x, n): # function:exp (-> +1), function_argument:n, function_argument:x,
 # 033.1420-atomically-read-and-update-variable.py
 # ----------------------------------------------------------------------------------------
 import threading # import:threading, import_module:threading, node:Import, whole_span:7 (-> +6)
-lock = threading.Lock() # assignment:Lock, assignment_lhs_identifier:lock, assignment_rhs_atom:threading, member_call:Lock, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:lock
-lock.acquire() # member_call:acquire, member_call_object:lock, member_call_without_result:acquire, node:Attribute, node:Call, node:Expr, node:Name
+lock = threading.Lock() # assignment:Lock, assignment_lhs_identifier:lock, assignment_rhs_atom:threading, member_call_member:Lock, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:lock
+lock.acquire() # member_call:lock:acquire, member_call_member:acquire, member_call_object:lock, node:Attribute, node:Call, node:Expr, node:Name
 try: # node:Try (-> +3)
     x = f(x) # assignment:f, assignment_lhs_identifier:x, assignment_rhs_atom:x, call_argument:x, external_free_call:f, free_call:f, node:Assign, node:Call, node:Name, single_assignment:x
 finally:
-    lock.release() # member_call:release, member_call_object:lock, node:Attribute, node:Call, node:Expr, node:Name
+    lock.release() # member_call:lock:release, member_call_member:release, member_call_object:lock, node:Attribute, node:Call, node:Expr, node:Name
 
 # ----------------------------------------------------------------------------------------
 # 034.0625-create-a-set-of-objects.py
@@ -329,17 +329,17 @@ class Graph(defaultdict): # node:ClassDef (-> +8), node:Name
     def __init__(self, *paths): # function:__init__ (-> +3), function_argument:paths, function_argument:self, function_argument_flavor:arg, function_argument_flavor:vararg, function_returning_nothing:__init__ (-> +3), instance_method:__init__ (-> +3), method:__init__ (-> +3), node:FunctionDef (-> +3), node:arg
         self.default_factory = Vertex # assignment, assignment_lhs_identifier:self, assignment_rhs_atom:Vertex, node:Assign, node:Attribute, node:Name
         for path in paths: # for:path (-> +1), for_each (-> +1), loop:for (-> +1), loop_with_late_exit:for (-> +1), node:For (-> +1), node:Name
-            self.make_path(path) # call_argument:path, member_call:make_path, member_call_object:self, member_call_without_result:make_path, node:Attribute, node:Call, node:Expr, node:Name
+            self.make_path(path) # call_argument:path, member_call:self:make_path, member_call_member:make_path, member_call_object:self, node:Attribute, node:Call, node:Expr, node:Name
     def make_path(self, labels): # function:make_path (-> +3), function_argument:labels, function_argument:self, function_argument_flavor:arg, function_returning_nothing:make_path (-> +3), instance_method:make_path (-> +3), method:make_path (-> +3), node:FunctionDef (-> +3), node:arg
         for l1, l2 in zip(labels, labels[1:]): # call_argument:, call_argument:labels, external_free_call:zip, for:l1 (-> +2), for:l2 (-> +2), free_call:zip, literal:1, literal:Tuple, loop:for (-> +2), loop_with_late_exit:for (-> +2), node:Call, node:For (-> +2), node:Name, node:Num, node:Subscript, node:Tuple, slice:1::, slice_lower:1, slice_step:, slice_upper:
-            self[l1].add(l2) # call_argument:l2, index:l1, member_call:add, member_call_without_result:add, node:Attribute, node:Call, node:Expr, node:Name, node:Subscript
-            self[l2].add(l1) # call_argument:l1, index:l2, member_call:add, member_call_without_result:add, node:Attribute, node:Call, node:Expr, node:Name, node:Subscript
+            self[l1].add(l2) # call_argument:l2, index:l1, member_call_member:add, node:Attribute, node:Call, node:Expr, node:Name, node:Subscript
+            self[l2].add(l1) # call_argument:l1, index:l2, member_call_member:add, node:Attribute, node:Call, node:Expr, node:Name, node:Subscript
 G = Graph((0, 1, 2, 3), (1, 4, 2)) # assignment:Graph, assignment_lhs_identifier:G, assignment_rhs_atom:0, assignment_rhs_atom:1, assignment_rhs_atom:2, assignment_rhs_atom:3, assignment_rhs_atom:4, call_argument:, external_free_call:Graph, free_call:Graph, literal:0, literal:1, literal:2, literal:3, literal:4, literal:Tuple, node:Assign, node:Call, node:Name, node:Num, node:Tuple, single_assignment:G
 
 # ----------------------------------------------------------------------------------------
 # 041.0187-reverse-a-string.py
 # ----------------------------------------------------------------------------------------
-t = s.decode("utf8")[::-1].encode("utf8") # assignment:encode, assignment_lhs_identifier:t, assignment_rhs_atom:-1, assignment_rhs_atom:s, call_argument:, literal:-1, literal:Str, member_call:decode, member_call:encode, member_call_object:s, node:Assign, node:Attribute, node:Call, node:Name, node:Num, node:Str, node:Subscript, single_assignment:t, slice:::-1, slice_lower:, slice_step:-1, slice_upper:, whole_span:1
+t = s.decode("utf8")[::-1].encode("utf8") # assignment:encode, assignment_lhs_identifier:t, assignment_rhs_atom:-1, assignment_rhs_atom:s, call_argument:, literal:-1, literal:Str, member_call:s:decode, member_call:s:encode, member_call_member:decode, member_call_member:encode, member_call_object:s, node:Assign, node:Attribute, node:Call, node:Name, node:Num, node:Str, node:Subscript, single_assignment:t, slice:::-1, slice_lower:, slice_step:-1, slice_upper:, whole_span:1
 
 # ----------------------------------------------------------------------------------------
 # 041.2714-reverse-a-string.py
@@ -396,13 +396,13 @@ print(loop_breaking(([1, 2, 3], [4, 5, 6], [7, 8, 9]), 6)) # call_argument:, cal
 # ----------------------------------------------------------------------------------------
 # 044.0190-insert-element-in-list.py
 # ----------------------------------------------------------------------------------------
-s.insert(i, x) # call_argument:i, call_argument:x, member_call:insert, member_call_object:s, member_call_without_result:insert, node:Attribute, node:Call, node:Expr, node:Name, update:s:i, update:s:x, update_by_member_call:s:i, update_by_member_call:s:x, update_by_member_call_with:insert, update_with:insert, whole_span:1
+s.insert(i, x) # call_argument:i, call_argument:x, member_call:s:insert, member_call_member:insert, member_call_object:s, node:Attribute, node:Call, node:Expr, node:Name, update:s:i, update:s:x, update_by_member_call:s:i, update_by_member_call:s:x, update_by_member_call_with:insert, update_with:insert, whole_span:1
 
 # ----------------------------------------------------------------------------------------
 # 045.0570-pause-execution-for-5-seconds.py
 # ----------------------------------------------------------------------------------------
 import time # import:time, import_module:time, node:Import, whole_span:2 (-> +1)
-time.sleep(5) # call_argument:5, literal:5, member_call:sleep, member_call_object:time, member_call_without_result:sleep, node:Attribute, node:Call, node:Expr, node:Name, node:Num
+time.sleep(5) # call_argument:5, literal:5, member_call:time:sleep, member_call_member:sleep, member_call_object:time, node:Attribute, node:Call, node:Expr, node:Name, node:Num
 
 # ----------------------------------------------------------------------------------------
 # 046.0191-extract-beginning-of-string-prefix.py
@@ -424,7 +424,7 @@ Louie""" # literal:Str, node:Str
 # ----------------------------------------------------------------------------------------
 # 049.0242-split-a-space-separated-string.py
 # ----------------------------------------------------------------------------------------
-chunks = s.split() # assignment:split, assignment_lhs_identifier:chunks, assignment_rhs_atom:s, member_call:split, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:chunks, whole_span:1
+chunks = s.split() # assignment:split, assignment_lhs_identifier:chunks, assignment_rhs_atom:s, member_call_member:split, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:chunks, whole_span:1
 
 # ----------------------------------------------------------------------------------------
 # 050.0572-make-an-infinite-loop.py
@@ -440,17 +440,17 @@ k in m # comparison_operator:In, node:Compare, node:Expr, node:Name, whole_span:
 # ----------------------------------------------------------------------------------------
 # 052.0666-check-if-map-contains-value.py
 # ----------------------------------------------------------------------------------------
-v in map.values() # comparison_operator:In, member_call:values, node:Attribute, node:Call, node:Compare, node:Expr, node:Name, whole_span:1
+v in map.values() # comparison_operator:In, member_call_member:values, node:Attribute, node:Call, node:Compare, node:Expr, node:Name, whole_span:1
 
 # ----------------------------------------------------------------------------------------
 # 053.0240-join-a-list-of-strings.py
 # ----------------------------------------------------------------------------------------
-y = ", ".join(x) # assignment:join, assignment_lhs_identifier:y, assignment_rhs_atom:x, call_argument:x, literal:Str, member_call:join, node:Assign, node:Attribute, node:Call, node:Name, node:Str, single_assignment:y, whole_span:1
+y = ", ".join(x) # assignment:join, assignment_lhs_identifier:y, assignment_rhs_atom:x, call_argument:x, literal:Str, member_call_member:join, node:Assign, node:Attribute, node:Call, node:Name, node:Str, single_assignment:y, whole_span:1
 
 # ----------------------------------------------------------------------------------------
 # 053.1933-join-a-list-of-strings.py
 # ----------------------------------------------------------------------------------------
-y = ", ".join(map(str, x)) # assignment:join, assignment_lhs_identifier:y, assignment_rhs_atom:str, assignment_rhs_atom:x, call_argument:, call_argument:str, call_argument:x, composition, external_free_call:map, free_call:map, literal:Str, member_call:join, node:Assign, node:Attribute, node:Call, node:Name, node:Str, single_assignment:y, whole_span:1
+y = ", ".join(map(str, x)) # assignment:join, assignment_lhs_identifier:y, assignment_rhs_atom:str, assignment_rhs_atom:x, call_argument:, call_argument:str, call_argument:x, composition, external_free_call:map, free_call:map, literal:Str, member_call_member:join, node:Assign, node:Attribute, node:Call, node:Name, node:Str, single_assignment:y, whole_span:1
 
 # ----------------------------------------------------------------------------------------
 # 054.0241-compute-sum-of-integers.py
@@ -469,7 +469,7 @@ from multiprocessing import Pool # import:multiprocessing:Pool, import_module:mu
 def f(i): # function:f (-> +1), function_argument:i, function_argument_flavor:arg, function_returning_nothing:f (-> +1), node:FunctionDef (-> +1), node:arg
     i * i # binary_operator:Mult, multiplication_operator, node:BinOp, node:Expr, node:Name
 with Pool(processes) as p: # call_argument:processes, external_free_call:Pool, free_call:Pool, node:Call, node:Name, node:With (-> +1)
-    p.map(func=f, iterable=range(1, 1001)) # call_argument:1, call_argument:1001, external_free_call:range, free_call:range, literal:1, literal:1001, member_call:map, member_call_object:p, member_call_without_result:map, node:Attribute, node:Call, node:Expr, node:Name, node:Num, range:1:1001, suggest_constant_definition
+    p.map(func=f, iterable=range(1, 1001)) # call_argument:1, call_argument:1001, external_free_call:range, free_call:range, literal:1, literal:1001, member_call:p:map, member_call_member:map, member_call_object:p, node:Attribute, node:Call, node:Expr, node:Name, node:Num, range:1:1001, suggest_constant_definition
 print("Finished") # call_argument:, external_free_call:print, free_call:print, free_call_without_result:print, literal:Str, node:Call, node:Expr, node:Name, node:Str
 
 # ----------------------------------------------------------------------------------------
@@ -485,7 +485,7 @@ y = [element for element in x if p(element)] # assignment, assignment_lhs_identi
 # ----------------------------------------------------------------------------------------
 # 058.0665-extract-file-content-to-a-string.py
 # ----------------------------------------------------------------------------------------
-lines = open(f).read() # assignment:read, assignment_lhs_identifier:lines, assignment_rhs_atom:f, call_argument:f, external_free_call:open, free_call:open, member_call:read, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:lines, whole_span:1
+lines = open(f).read() # assignment:read, assignment_lhs_identifier:lines, assignment_rhs_atom:f, call_argument:f, external_free_call:open, free_call:open, member_call_member:read, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:lines, whole_span:1
 
 # ----------------------------------------------------------------------------------------
 # 059.0668-write-to-standard-error-stream.py
@@ -503,17 +503,17 @@ x = sys.argv[1] # assignment, assignment_lhs_identifier:x, assignment_rhs_atom:1
 # 061.0576-get-current-date.py
 # ----------------------------------------------------------------------------------------
 import datetime # import:datetime, import_module:datetime, node:Import, whole_span:2 (-> +1)
-d = datetime.datetime.now() # assignment:now, assignment_lhs_identifier:d, assignment_rhs_atom:datetime, member_call:now, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:d
+d = datetime.datetime.now() # assignment:now, assignment_lhs_identifier:d, assignment_rhs_atom:datetime, member_call_member:now, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:d
 
 # ----------------------------------------------------------------------------------------
 # 062.1091-find-substring-position.py
 # ----------------------------------------------------------------------------------------
-i = x.find(y) # assignment:find, assignment_lhs_identifier:i, assignment_rhs_atom:x, assignment_rhs_atom:y, call_argument:y, member_call:find, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:i, whole_span:1
+i = x.find(y) # assignment:find, assignment_lhs_identifier:i, assignment_rhs_atom:x, assignment_rhs_atom:y, call_argument:y, member_call_member:find, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:i, whole_span:1
 
 # ----------------------------------------------------------------------------------------
 # 063.1088-replace-fragment-of-a-string.py
 # ----------------------------------------------------------------------------------------
-x2 = x.replace(y, z) # assignment:replace, assignment_lhs_identifier:x2, assignment_rhs_atom:x, assignment_rhs_atom:y, assignment_rhs_atom:z, call_argument:y, call_argument:z, member_call:replace, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:x2, whole_span:1
+x2 = x.replace(y, z) # assignment:replace, assignment_lhs_identifier:x2, assignment_rhs_atom:x, assignment_rhs_atom:y, assignment_rhs_atom:z, call_argument:y, call_argument:z, member_call_member:replace, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:x2, whole_span:1
 
 # ----------------------------------------------------------------------------------------
 # 064.0274-big-integer--value-3-power-247.py
@@ -523,7 +523,7 @@ x = 3 ** 247 # assignment:Pow, assignment_lhs_identifier:x, assignment_rhs_atom:
 # ----------------------------------------------------------------------------------------
 # 065.1085-format-decimal-number.py
 # ----------------------------------------------------------------------------------------
-s = "{:.1%}".format(x) # assignment:format, assignment_lhs_identifier:s, assignment_rhs_atom:x, call_argument:x, literal:Str, member_call:format, node:Assign, node:Attribute, node:Call, node:Name, node:Str, single_assignment:s, whole_span:1
+s = "{:.1%}".format(x) # assignment:format, assignment_lhs_identifier:s, assignment_rhs_atom:x, call_argument:x, literal:Str, member_call_member:format, node:Assign, node:Attribute, node:Call, node:Name, node:Str, single_assignment:s, whole_span:1
 
 # ----------------------------------------------------------------------------------------
 # 066.0672-big-integer-exponentiation.py
@@ -535,32 +535,32 @@ z = x ** n # assignment:Pow, assignment_lhs_identifier:z, assignment_rhs_atom:n,
 # ----------------------------------------------------------------------------------------
 import math # import:math, import_module:math, node:Import, whole_span:3 (-> +2)
 def binom(n, k): # function:binom (-> +1), function_argument:k, function_argument:n, function_argument_flavor:arg, function_returning_something:binom (-> +1), node:FunctionDef (-> +1), node:arg
-    return math.factorial(n) // math.factorial(k) // math.factorial(n - k) # binary_operator:FloorDiv, binary_operator:Sub, call_argument:, call_argument:k, call_argument:n, member_call:factorial, node:Attribute, node:BinOp, node:Call, node:Name, node:Return, return
+    return math.factorial(n) // math.factorial(k) // math.factorial(n - k) # binary_operator:FloorDiv, binary_operator:Sub, call_argument:, call_argument:k, call_argument:n, member_call_member:factorial, node:Attribute, node:BinOp, node:Call, node:Name, node:Return, return
 
 # ----------------------------------------------------------------------------------------
 # 068.2271-create-a-bitset.py
 # ----------------------------------------------------------------------------------------
 from __future__ import division # import:__future__:division, import_module:__future__, import_name:division, node:ImportFrom, whole_span:3 (-> +2)
 import math # import:math, import_module:math, node:Import
-x = bytearray(int(math.ceil(n / 8.0))) # assignment:bytearray, assignment_lhs_identifier:x, assignment_rhs_atom:8.0, assignment_rhs_atom:math, assignment_rhs_atom:n, binary_operator:Div, call_argument:, composition, external_free_call:bytearray, external_free_call:int, free_call:bytearray, free_call:int, literal:8.0, member_call:ceil, node:Assign, node:Attribute, node:BinOp, node:Call, node:Name, node:Num, single_assignment:x
+x = bytearray(int(math.ceil(n / 8.0))) # assignment:bytearray, assignment_lhs_identifier:x, assignment_rhs_atom:8.0, assignment_rhs_atom:math, assignment_rhs_atom:n, binary_operator:Div, call_argument:, composition, external_free_call:bytearray, external_free_call:int, free_call:bytearray, free_call:int, literal:8.0, member_call_member:ceil, node:Assign, node:Attribute, node:BinOp, node:Call, node:Name, node:Num, single_assignment:x
 
 # ----------------------------------------------------------------------------------------
 # 069.1086-seed-random-generator.py
 # ----------------------------------------------------------------------------------------
 import random # import:random, import_module:random, node:Import, whole_span:2 (-> +1)
-rand = random.Random(s) # assignment:Random, assignment_lhs_identifier:rand, assignment_rhs_atom:random, assignment_rhs_atom:s, call_argument:s, member_call:Random, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:rand
+rand = random.Random(s) # assignment:Random, assignment_lhs_identifier:rand, assignment_rhs_atom:random, assignment_rhs_atom:s, call_argument:s, member_call_member:Random, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:rand
 
 # ----------------------------------------------------------------------------------------
 # 070.1087-use-clock-as-random-generator-seed.py
 # ----------------------------------------------------------------------------------------
 import random # import:random, import_module:random, node:Import, whole_span:2 (-> +1)
-rand = random.Random() # assignment:Random, assignment_lhs_identifier:rand, assignment_rhs_atom:random, member_call:Random, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:rand
+rand = random.Random() # assignment:Random, assignment_lhs_identifier:rand, assignment_rhs_atom:random, member_call_member:Random, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:rand
 
 # ----------------------------------------------------------------------------------------
 # 071.0379-echo-program-implementation.py
 # ----------------------------------------------------------------------------------------
 import sys # import:sys, import_module:sys, node:Import, whole_span:2 (-> +1)
-print(" ".join(sys.argv[1:])) # call_argument:, composition, external_free_call:print, free_call:print, free_call_without_result:print, literal:1, literal:Str, member_call:join, node:Attribute, node:Call, node:Expr, node:Name, node:Num, node:Str, node:Subscript, slice:1::, slice_lower:1, slice_step:, slice_upper:
+print(" ".join(sys.argv[1:])) # call_argument:, composition, external_free_call:print, free_call:print, free_call_without_result:print, literal:1, literal:Str, member_call_member:join, node:Attribute, node:Call, node:Expr, node:Name, node:Num, node:Str, node:Subscript, slice:1::, slice_lower:1, slice_step:, slice_upper:
 
 # ----------------------------------------------------------------------------------------
 # 073.0673-create-a-factory.py
@@ -584,7 +584,7 @@ x = (a * b) // gcd(a, b) # assignment:FloorDiv, assignment_lhs_identifier:x, ass
 # ----------------------------------------------------------------------------------------
 # 076.1083-binary-digits-from-an-integer.py
 # ----------------------------------------------------------------------------------------
-s = "{:b}".format(x) # assignment:format, assignment_lhs_identifier:s, assignment_rhs_atom:x, call_argument:x, literal:Str, member_call:format, node:Assign, node:Attribute, node:Call, node:Name, node:Str, single_assignment:s, whole_span:1
+s = "{:b}".format(x) # assignment:format, assignment_lhs_identifier:s, assignment_rhs_atom:x, call_argument:x, literal:Str, member_call_member:format, node:Assign, node:Attribute, node:Call, node:Name, node:Str, single_assignment:s, whole_span:1
 
 # ----------------------------------------------------------------------------------------
 # 077.1093-complex-number.py
@@ -618,18 +618,18 @@ y = int(x + 0.5) # addition_operator, assignment:int, assignment_lhs_identifier:
 # ----------------------------------------------------------------------------------------
 # 082.1096-count-substring-occurrences.py
 # ----------------------------------------------------------------------------------------
-count = s.count(t) # assignment:count, assignment_lhs_identifier:count, assignment_rhs_atom:s, assignment_rhs_atom:t, call_argument:t, member_call:count, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:count, whole_span:1
+count = s.count(t) # assignment:count, assignment_lhs_identifier:count, assignment_rhs_atom:s, assignment_rhs_atom:t, call_argument:t, member_call_member:count, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:count, whole_span:1
 
 # ----------------------------------------------------------------------------------------
 # 083.1805-regex-with-character-repetition.py
 # ----------------------------------------------------------------------------------------
 import re # import:re, import_module:re, node:Import, whole_span:2 (-> +1)
-r = re.compile(r"htt+p") # assignment:compile, assignment_lhs_identifier:r, assignment_rhs_atom:re, call_argument:, literal:Str, member_call:compile, node:Assign, node:Attribute, node:Call, node:Name, node:Str, single_assignment:r
+r = re.compile(r"htt+p") # assignment:compile, assignment_lhs_identifier:r, assignment_rhs_atom:re, call_argument:, literal:Str, member_call_member:compile, node:Assign, node:Attribute, node:Call, node:Name, node:Str, single_assignment:r
 
 # ----------------------------------------------------------------------------------------
 # 084.1940-count-bits-set-in-integer-binary-representation.py
 # ----------------------------------------------------------------------------------------
-c = bin(i).count("1") # assignment:count, assignment_lhs_identifier:c, assignment_rhs_atom:i, call_argument:, call_argument:i, external_free_call:bin, free_call:bin, literal:Str, member_call:count, node:Assign, node:Attribute, node:Call, node:Name, node:Str, single_assignment:c, whole_span:1
+c = bin(i).count("1") # assignment:count, assignment_lhs_identifier:c, assignment_rhs_atom:i, call_argument:, call_argument:i, external_free_call:bin, free_call:bin, literal:Str, member_call_member:count, node:Assign, node:Attribute, node:Call, node:Name, node:Str, single_assignment:c, whole_span:1
 
 # ----------------------------------------------------------------------------------------
 # 085.1003-check-if-integer-addition-will-overflow.py
@@ -647,7 +647,7 @@ def multiplyWillOverflow(x, y): # function:multiplyWillOverflow (-> +1), functio
 # 087.1139-stop-program.py
 # ----------------------------------------------------------------------------------------
 import sys # import:sys, import_module:sys, node:Import, whole_span:2 (-> +1)
-sys.exit(1) # call_argument:1, literal:1, member_call:exit, member_call_object:sys, member_call_without_result:exit, node:Attribute, node:Call, node:Expr, node:Name, node:Num
+sys.exit(1) # call_argument:1, literal:1, member_call:sys:exit, member_call_member:exit, member_call_object:sys, node:Attribute, node:Call, node:Expr, node:Name, node:Num
 
 # ----------------------------------------------------------------------------------------
 # 088.2143-allocate-1m-bytes.py
@@ -674,14 +674,14 @@ class Foo(object): # node:ClassDef (-> +5), node:Name, whole_span:6 (-> +5)
 # ----------------------------------------------------------------------------------------
 import json # import:json, import_module:json, node:Import, whole_span:3 (-> +2)
 with open("data.json", "r") as input: # call_argument:, external_free_call:open, free_call:open, literal:Str, node:Call, node:Name, node:Str, node:With (-> +1)
-    x = json.load(input) # assignment:load, assignment_lhs_identifier:x, assignment_rhs_atom:input, assignment_rhs_atom:json, call_argument:input, member_call:load, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:x
+    x = json.load(input) # assignment:load, assignment_lhs_identifier:x, assignment_rhs_atom:input, assignment_rhs_atom:json, call_argument:input, member_call_member:load, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:x
 
 # ----------------------------------------------------------------------------------------
 # 092.1100-save-object-into-json-file.py
 # ----------------------------------------------------------------------------------------
 import json # import:json, import_module:json, node:Import, whole_span:3 (-> +2)
 with open("data.json", "w") as output: # call_argument:, external_free_call:open, free_call:open, literal:Str, node:Call, node:Name, node:Str, node:With (-> +1)
-    json.dump(x, output) # call_argument:output, call_argument:x, member_call:dump, member_call_object:json, member_call_without_result:dump, node:Attribute, node:Call, node:Expr, node:Name
+    json.dump(x, output) # call_argument:output, call_argument:x, member_call:json:dump, member_call_member:dump, member_call_object:json, node:Attribute, node:Call, node:Expr, node:Name
 
 # ----------------------------------------------------------------------------------------
 # 093.1082-pass-a-runnable-procedure-as-parameter.py
@@ -704,61 +704,61 @@ print(x.__class__) # call_argument:, external_free_call:print, free_call:print, 
 # 095.2140-get-file-size.py
 # ----------------------------------------------------------------------------------------
 import os # import:os, import_module:os, node:Import, whole_span:2 (-> +1)
-x = os.path.getsize(path) # assignment:getsize, assignment_lhs_identifier:x, assignment_rhs_atom:os, assignment_rhs_atom:path, call_argument:path, member_call:getsize, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:x
+x = os.path.getsize(path) # assignment:getsize, assignment_lhs_identifier:x, assignment_rhs_atom:os, assignment_rhs_atom:path, call_argument:path, member_call_member:getsize, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:x
 
 # ----------------------------------------------------------------------------------------
 # 096.1094-check-string-prefix.py
 # ----------------------------------------------------------------------------------------
-b = s.startswith(prefix) # assignment:startswith, assignment_lhs_identifier:b, assignment_rhs_atom:prefix, assignment_rhs_atom:s, call_argument:prefix, member_call:startswith, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:b, whole_span:1
+b = s.startswith(prefix) # assignment:startswith, assignment_lhs_identifier:b, assignment_rhs_atom:prefix, assignment_rhs_atom:s, call_argument:prefix, member_call_member:startswith, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:b, whole_span:1
 
 # ----------------------------------------------------------------------------------------
 # 097.1095-check-string-suffix.py
 # ----------------------------------------------------------------------------------------
-b = s.endswith(suffix) # assignment:endswith, assignment_lhs_identifier:b, assignment_rhs_atom:s, assignment_rhs_atom:suffix, call_argument:suffix, member_call:endswith, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:b, whole_span:1
+b = s.endswith(suffix) # assignment:endswith, assignment_lhs_identifier:b, assignment_rhs_atom:s, assignment_rhs_atom:suffix, call_argument:suffix, member_call_member:endswith, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:b, whole_span:1
 
 # ----------------------------------------------------------------------------------------
 # 098.2142-epoch-seconds-to-date-object.py
 # ----------------------------------------------------------------------------------------
 import datetime # import:datetime, import_module:datetime, node:Import, whole_span:2 (-> +1)
-d = datetime.date.fromtimestamp(ts) # assignment:fromtimestamp, assignment_lhs_identifier:d, assignment_rhs_atom:datetime, assignment_rhs_atom:ts, call_argument:ts, member_call:fromtimestamp, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:d
+d = datetime.date.fromtimestamp(ts) # assignment:fromtimestamp, assignment_lhs_identifier:d, assignment_rhs_atom:datetime, assignment_rhs_atom:ts, call_argument:ts, member_call_member:fromtimestamp, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:d
 
 # ----------------------------------------------------------------------------------------
 # 099.1429-format-date-yyyy-mm-dd.py
 # ----------------------------------------------------------------------------------------
 from datetime import date # import:datetime:date, import_module:datetime, import_name:date, node:ImportFrom, whole_span:3 (-> +2)
 d = date(2016, 9, 28) # assignment:date, assignment_lhs_identifier:d, assignment_rhs_atom:2016, assignment_rhs_atom:28, assignment_rhs_atom:9, call_argument:2016, call_argument:28, call_argument:9, external_free_call:date, free_call:date, literal:2016, literal:28, literal:9, node:Assign, node:Call, node:Name, node:Num, single_assignment:d
-x = d.strftime("%Y-%m-%d") # assignment:strftime, assignment_lhs_identifier:x, assignment_rhs_atom:d, call_argument:, literal:Str, member_call:strftime, node:Assign, node:Attribute, node:Call, node:Name, node:Str, single_assignment:x
+x = d.strftime("%Y-%m-%d") # assignment:strftime, assignment_lhs_identifier:x, assignment_rhs_atom:d, call_argument:, literal:Str, member_call_member:strftime, node:Assign, node:Attribute, node:Call, node:Name, node:Str, single_assignment:x
 
 # ----------------------------------------------------------------------------------------
 # 099.2693-format-date-yyyy-mm-dd.py
 # ----------------------------------------------------------------------------------------
 from datetime import date # import:datetime:date, import_module:datetime, import_name:date, node:ImportFrom, whole_span:3 (-> +2)
-d = date.today() # assignment:today, assignment_lhs_identifier:d, assignment_rhs_atom:date, member_call:today, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:d
-x = d.isoformat() # assignment:isoformat, assignment_lhs_identifier:x, assignment_rhs_atom:d, member_call:isoformat, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:x
+d = date.today() # assignment:today, assignment_lhs_identifier:d, assignment_rhs_atom:date, member_call_member:today, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:d
+x = d.isoformat() # assignment:isoformat, assignment_lhs_identifier:x, assignment_rhs_atom:d, member_call_member:isoformat, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:x
 
 # ----------------------------------------------------------------------------------------
 # 100.1142-sort-by-a-comparator.py
 # ----------------------------------------------------------------------------------------
-items.sort(c) # call_argument:c, member_call:sort, member_call_object:items, member_call_without_result:sort, node:Attribute, node:Call, node:Expr, node:Name, whole_span:1
+items.sort(c) # call_argument:c, member_call:items:sort, member_call_member:sort, member_call_object:items, node:Attribute, node:Call, node:Expr, node:Name, whole_span:1
 
 # ----------------------------------------------------------------------------------------
 # 101.2172-load-from-http-get-request-into-a-string.py
 # ----------------------------------------------------------------------------------------
 import urllib.request # import:urllib.request, import_module:urllib.request, node:Import, whole_span:3 (-> +2)
-with urllib.request.urlopen(u) as f: # call_argument:u, member_call:urlopen, node:Attribute, node:Call, node:Name, node:With (-> +1)
-    s = f.read() # assignment:read, assignment_lhs_identifier:s, assignment_rhs_atom:f, member_call:read, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:s
+with urllib.request.urlopen(u) as f: # call_argument:u, member_call_member:urlopen, node:Attribute, node:Call, node:Name, node:With (-> +1)
+    s = f.read() # assignment:read, assignment_lhs_identifier:s, assignment_rhs_atom:f, member_call_member:read, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:s
 
 # ----------------------------------------------------------------------------------------
 # 102.2173-load-from-http-get-request-into-a-file.py
 # ----------------------------------------------------------------------------------------
 import urllib # import:urllib, import_module:urllib, node:Import, whole_span:2 (-> +1)
-filename, headers = urllib.request.urlretrieve(u, "result.txt") # assignment:urlretrieve, assignment_lhs_identifier:filename, assignment_lhs_identifier:headers, assignment_rhs_atom:u, assignment_rhs_atom:urllib, call_argument:, call_argument:u, literal:Str, literal:Tuple, member_call:urlretrieve, node:Assign, node:Attribute, node:Call, node:Name, node:Str, node:Tuple, parallel_assignment:2
+filename, headers = urllib.request.urlretrieve(u, "result.txt") # assignment:urlretrieve, assignment_lhs_identifier:filename, assignment_lhs_identifier:headers, assignment_rhs_atom:u, assignment_rhs_atom:urllib, call_argument:, call_argument:u, literal:Str, literal:Tuple, member_call_member:urlretrieve, node:Assign, node:Attribute, node:Call, node:Name, node:Str, node:Tuple, parallel_assignment:2
 
 # ----------------------------------------------------------------------------------------
 # 103.2276-load-xml-file-into-struct.py
 # ----------------------------------------------------------------------------------------
 import lxml.etree # import:lxml.etree, import_module:lxml.etree, node:Import, whole_span:2 (-> +1)
-x = lxml.etree.parse("data.xml") # assignment:parse, assignment_lhs_identifier:x, assignment_rhs_atom:lxml, call_argument:, literal:Str, member_call:parse, node:Assign, node:Attribute, node:Call, node:Name, node:Str, single_assignment:x
+x = lxml.etree.parse("data.xml") # assignment:parse, assignment_lhs_identifier:x, assignment_rhs_atom:lxml, call_argument:, literal:Str, member_call_member:parse, node:Assign, node:Attribute, node:Call, node:Name, node:Str, single_assignment:x
 
 # ----------------------------------------------------------------------------------------
 # 104.3264-save-object-into-xml-file.py
@@ -773,7 +773,7 @@ class TestClass(object): # node:ClassDef (-> +7), node:Name
         self.b = b # assignment, assignment_lhs_identifier:self, assignment_rhs_atom:b, node:Assign, node:Attribute, node:Name
         self.c = c # assignment, assignment_lhs_identifier:self, assignment_rhs_atom:c, node:Assign, node:Attribute, node:Name
 tst = TestClass("var_a", "var_b", "var_c") # assignment:TestClass, assignment_lhs_identifier:tst, call_argument:, external_free_call:TestClass, free_call:TestClass, literal:Str, node:Assign, node:Call, node:Name, node:Str, single_assignment:tst
-ser = pyx.serialize(obj=tst, enc="utf-8") # assignment:serialize, assignment_lhs_identifier:ser, assignment_rhs_atom:pyx, assignment_rhs_atom:tst, literal:Str, member_call:serialize, node:Assign, node:Attribute, node:Call, node:Name, node:Str, single_assignment:ser
+ser = pyx.serialize(obj=tst, enc="utf-8") # assignment:serialize, assignment_lhs_identifier:ser, assignment_rhs_atom:pyx, assignment_rhs_atom:tst, literal:Str, member_call_member:serialize, node:Assign, node:Attribute, node:Call, node:Name, node:Str, single_assignment:ser
 print(ser) # call_argument:ser, external_free_call:print, free_call:print, free_call_without_result:print, node:Call, node:Expr, node:Name
 
 # ----------------------------------------------------------------------------------------
@@ -786,13 +786,13 @@ s = sys.argv[0] # assignment, assignment_lhs_identifier:s, assignment_rhs_atom:0
 # 106.2039-get-program-working-directory.py
 # ----------------------------------------------------------------------------------------
 import os # import:os, import_module:os, node:Import, whole_span:2 (-> +1)
-dir = os.getcwd() # assignment:getcwd, assignment_lhs_identifier:dir, assignment_rhs_atom:os, member_call:getcwd, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:dir
+dir = os.getcwd() # assignment:getcwd, assignment_lhs_identifier:dir, assignment_rhs_atom:os, member_call_member:getcwd, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:dir
 
 # ----------------------------------------------------------------------------------------
 # 107.2139-get-folder-containing-current-program.py
 # ----------------------------------------------------------------------------------------
 import os # import:os, import_module:os, node:Import, whole_span:2 (-> +1)
-dir = os.path.dirname(os.path.abspath(__file__)) # assignment:dirname, assignment_lhs_identifier:dir, assignment_rhs_atom:__file__, assignment_rhs_atom:os, call_argument:, call_argument:__file__, composition, member_call:abspath, member_call:dirname, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:dir
+dir = os.path.dirname(os.path.abspath(__file__)) # assignment:dirname, assignment_lhs_identifier:dir, assignment_rhs_atom:__file__, assignment_rhs_atom:os, call_argument:, call_argument:__file__, composition, member_call_member:abspath, member_call_member:dirname, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:dir
 
 # ----------------------------------------------------------------------------------------
 # 108.1291-determine-if-variable-name-is-defined.py
@@ -804,18 +804,18 @@ if "x" in locals(): # comparison_operator:In, external_free_call:locals, free_ca
 # 109.2280-number-of-bytes-of-a-type.py
 # ----------------------------------------------------------------------------------------
 import pympler.asizeof # import:pympler.asizeof, import_module:pympler.asizeof, node:Import, whole_span:2 (-> +1)
-n = pympler.asizeof.asizeof(t) # assignment:asizeof, assignment_lhs_identifier:n, assignment_rhs_atom:pympler, assignment_rhs_atom:t, call_argument:t, member_call:asizeof, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:n
+n = pympler.asizeof.asizeof(t) # assignment:asizeof, assignment_lhs_identifier:n, assignment_rhs_atom:pympler, assignment_rhs_atom:t, call_argument:t, member_call_member:asizeof, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:n
 
 # ----------------------------------------------------------------------------------------
 # 110.1455-check-if-string-is-blank.py
 # ----------------------------------------------------------------------------------------
-blank = s.strip() == "" # assignment, assignment_lhs_identifier:blank, assignment_rhs_atom:s, comparison_operator:Eq, empty_literal:Str, literal:Str, member_call:strip, node:Assign, node:Attribute, node:Call, node:Compare, node:Name, node:Str, single_assignment:blank, whole_span:1
+blank = s.strip() == "" # assignment, assignment_lhs_identifier:blank, assignment_rhs_atom:s, comparison_operator:Eq, empty_literal:Str, literal:Str, member_call_member:strip, node:Assign, node:Attribute, node:Call, node:Compare, node:Name, node:Str, single_assignment:blank, whole_span:1
 
 # ----------------------------------------------------------------------------------------
 # 111.2168-launch-other-program.py
 # ----------------------------------------------------------------------------------------
 import subprocess # import:subprocess, import_module:subprocess, node:Import, whole_span:2 (-> +1)
-subprocess.call(["x", "a", "b"]) # call_argument:, literal:List, literal:Str, member_call:call, member_call_object:subprocess, member_call_without_result:call, node:Attribute, node:Call, node:Expr, node:List, node:Name, node:Str
+subprocess.call(["x", "a", "b"]) # call_argument:, literal:List, literal:Str, member_call:subprocess:call, member_call_member:call, member_call_object:subprocess, node:Attribute, node:Call, node:Expr, node:List, node:Name, node:Str
 
 # ----------------------------------------------------------------------------------------
 # 112.2144-iterate-over-map-entries-ordered-by-keys.py
@@ -826,7 +826,7 @@ for k in sorted(mymap): # call_argument:mymap, external_free_call:sorted, for:k 
 # ----------------------------------------------------------------------------------------
 # 113.2157-iterate-over-map-entries-ordered-by-values.py
 # ----------------------------------------------------------------------------------------
-for x, k in sorted((x, k) for k, x in mymap.items()): # call_argument:, composition, comprehension:Generator, comprehension_for_count:1, external_free_call:sorted, for:k (-> +1), for:x (-> +1), free_call:sorted, literal:Tuple, loop:for (-> +1), loop_with_late_exit:for (-> +1), member_call:items, node:Attribute, node:Call, node:For (-> +1), node:GeneratorExp, node:Name, node:Tuple, whole_span:2 (-> +1)
+for x, k in sorted((x, k) for k, x in mymap.items()): # call_argument:, composition, comprehension:Generator, comprehension_for_count:1, external_free_call:sorted, for:k (-> +1), for:x (-> +1), free_call:sorted, literal:Tuple, loop:for (-> +1), loop_with_late_exit:for (-> +1), member_call_member:items, node:Attribute, node:Call, node:For (-> +1), node:GeneratorExp, node:Name, node:Tuple, whole_span:2 (-> +1)
     print(k, x) # call_argument:k, call_argument:x, external_free_call:print, free_call:print, free_call_without_result:print, node:Call, node:Expr, node:Name
 
 # ----------------------------------------------------------------------------------------
@@ -843,7 +843,7 @@ b = d1 < d2 # assignment, assignment_lhs_identifier:b, assignment_rhs_atom:d1, a
 # ----------------------------------------------------------------------------------------
 # 116.1257-remove-occurrences-of-word-from-string.py
 # ----------------------------------------------------------------------------------------
-s2 = s1.replace(w, "") # assignment:replace, assignment_lhs_identifier:s2, assignment_rhs_atom:s1, assignment_rhs_atom:w, call_argument:, call_argument:w, empty_literal:Str, literal:Str, member_call:replace, node:Assign, node:Attribute, node:Call, node:Name, node:Str, single_assignment:s2, whole_span:1
+s2 = s1.replace(w, "") # assignment:replace, assignment_lhs_identifier:s2, assignment_rhs_atom:s1, assignment_rhs_atom:w, call_argument:, call_argument:w, empty_literal:Str, literal:Str, member_call_member:replace, node:Assign, node:Attribute, node:Call, node:Name, node:Str, single_assignment:s2, whole_span:1
 
 # ----------------------------------------------------------------------------------------
 # 117.1297-get-list-size.py
@@ -873,8 +873,8 @@ unique_set = set() # assignment:set, assignment_lhs_identifier:unique_set, exter
 elements_unique = [] # assignment, assignment_lhs_identifier:elements_unique, empty_literal:List, literal:List, node:Assign, node:List, node:Name, single_assignment:elements_unique
 for i in elements: # accumulate_elements:add (-> +3), accumulate_elements:append (-> +3), accumulate_some_elements:add (-> +3), accumulate_some_elements:append (-> +3), for:i (-> +3), for_each (-> +3), loop:for (-> +3), loop_with_late_exit:for (-> +3), node:For (-> +3), node:Name
     if i not in unique_set: # comparison_operator:NotIn, if (-> +2), if_test_atom:i, if_test_atom:unique_set, if_without_else (-> +2), node:Compare, node:If (-> +2), node:Name
-        unique_set.add(i) # call_argument:i, if_then_branch (-> +1), member_call:add, member_call_object:unique_set, member_call_without_result:add, node:Attribute, node:Call, node:Expr, node:Name, update:unique_set:i, update_by_member_call:unique_set:i, update_by_member_call_with:add, update_with:add
-        elements_unique.append(i) # call_argument:i, member_call:append, member_call_object:elements_unique, member_call_without_result:append, node:Attribute, node:Call, node:Expr, node:Name, update:elements_unique:i, update_by_member_call:elements_unique:i, update_by_member_call_with:append, update_with:append
+        unique_set.add(i) # call_argument:i, if_then_branch (-> +1), member_call:unique_set:add, member_call_member:add, member_call_object:unique_set, node:Attribute, node:Call, node:Expr, node:Name, update:unique_set:i, update_by_member_call:unique_set:i, update_by_member_call_with:add, update_with:add
+        elements_unique.append(i) # call_argument:i, member_call:elements_unique:append, member_call_member:append, member_call_object:elements_unique, node:Attribute, node:Call, node:Expr, node:Name, update:elements_unique:i, update_by_member_call:elements_unique:i, update_by_member_call_with:append, update_with:append
 print(elements_unique) # call_argument:elements_unique, external_free_call:print, free_call:print, free_call_without_result:print, node:Call, node:Expr, node:Name
 
 # ----------------------------------------------------------------------------------------
@@ -887,10 +887,10 @@ input_var = int(raw_input("Input Prompting String: ")) # assignment:int, assignm
 # ----------------------------------------------------------------------------------------
 import socket # import:socket, import_module:socket, node:Import, whole_span:7 (-> +6)
 UDP_IP = "127.0.0.1" # assignment, assignment_lhs_identifier:UDP_IP, literal:Str, node:Assign, node:Name, node:Str, single_assignment:UDP_IP
-sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # assignment:socket, assignment_lhs_identifier:sock, assignment_rhs_atom:socket, call_argument:, member_call:socket, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:sock
-sock.bind((UDP_IP, p)) # call_argument:, literal:Tuple, member_call:bind, member_call_object:sock, member_call_without_result:bind, node:Attribute, node:Call, node:Expr, node:Name, node:Tuple
+sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # assignment:socket, assignment_lhs_identifier:sock, assignment_rhs_atom:socket, call_argument:, member_call_member:socket, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:sock
+sock.bind((UDP_IP, p)) # call_argument:, literal:Tuple, member_call:sock:bind, member_call_member:bind, member_call_object:sock, node:Attribute, node:Call, node:Expr, node:Name, node:Tuple
 while True: # infinite_while (-> +2), literal:True, loop:while (-> +2), loop_with_late_exit:while (-> +2), node:NameConstant, node:While (-> +2)
-    data, addr = sock.recvfrom(1024) # assignment:recvfrom, assignment_lhs_identifier:addr, assignment_lhs_identifier:data, assignment_rhs_atom:1024, assignment_rhs_atom:sock, call_argument:1024, literal:1024, literal:Tuple, member_call:recvfrom, node:Assign, node:Attribute, node:Call, node:Name, node:Num, node:Tuple, parallel_assignment:2, suggest_constant_definition
+    data, addr = sock.recvfrom(1024) # assignment:recvfrom, assignment_lhs_identifier:addr, assignment_lhs_identifier:data, assignment_rhs_atom:1024, assignment_rhs_atom:sock, call_argument:1024, literal:1024, literal:Tuple, member_call_member:recvfrom, node:Assign, node:Attribute, node:Call, node:Name, node:Num, node:Tuple, parallel_assignment:2, suggest_constant_definition
     print("received message:", data) # call_argument:, call_argument:data, external_free_call:print, free_call:print, free_call_without_result:print, literal:Str, node:Call, node:Expr, node:Name, node:Str
 
 # ----------------------------------------------------------------------------------------
@@ -919,16 +919,16 @@ assert isConsistent # node:Assert, node:Name, whole_span:1
 # ----------------------------------------------------------------------------------------
 import bisect # import:bisect, import_module:bisect, node:Import, whole_span:4 (-> +3)
 def binarySearch(a, x): # function:binarySearch (-> +2), function_argument:a, function_argument:x, function_argument_flavor:arg, function_returning_something:binarySearch (-> +2), node:FunctionDef (-> +2), node:arg
-    i = bisect.bisect_left(a, x) # assignment:bisect_left, assignment_lhs_identifier:i, assignment_rhs_atom:a, assignment_rhs_atom:bisect, assignment_rhs_atom:x, call_argument:a, call_argument:x, member_call:bisect_left, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:i
+    i = bisect.bisect_left(a, x) # assignment:bisect_left, assignment_lhs_identifier:i, assignment_rhs_atom:a, assignment_rhs_atom:bisect, assignment_rhs_atom:x, call_argument:a, call_argument:x, member_call_member:bisect_left, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:i
     return i if i != len(a) and a[i] == x else -1 # boolean_operator:And, call_argument:a, comparison_operator:Eq, comparison_operator:NotEq, external_free_call:len, free_call:len, index:i, literal:-1, node:BoolOp, node:Call, node:Compare, node:IfExp, node:Name, node:Num, node:Return, node:Subscript, return
 
 # ----------------------------------------------------------------------------------------
 # 125.2167-measure-function-call-duration.py
 # ----------------------------------------------------------------------------------------
 import time # import:time, import_module:time, node:Import, whole_span:5 (-> +4)
-t1 = time.perf_counter() # assignment:perf_counter, assignment_lhs_identifier:t1, assignment_rhs_atom:time, member_call:perf_counter, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:t1
+t1 = time.perf_counter() # assignment:perf_counter, assignment_lhs_identifier:t1, assignment_rhs_atom:time, member_call_member:perf_counter, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:t1
 foo() # external_free_call:foo, free_call:foo, free_call_without_arguments:foo, free_call_without_result:foo, node:Call, node:Expr, node:Name
-t2 = time.perf_counter() # assignment:perf_counter, assignment_lhs_identifier:t2, assignment_rhs_atom:time, member_call:perf_counter, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:t2
+t2 = time.perf_counter() # assignment:perf_counter, assignment_lhs_identifier:t2, assignment_rhs_atom:time, member_call_member:perf_counter, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:t2
 print("Seconds:", t2 - t1) # binary_operator:Sub, call_argument:, external_free_call:print, free_call:print, free_call_without_result:print, literal:Str, node:BinOp, node:Call, node:Expr, node:Name, node:Str
 
 # ----------------------------------------------------------------------------------------
@@ -941,7 +941,7 @@ def foo(): # function:foo (-> +1), function_returning_something:foo (-> +1), fun
 # 127.2274-source-code-inclusion.py
 # ----------------------------------------------------------------------------------------
 import imp # import:imp, import_module:imp, node:Import, whole_span:2 (-> +1)
-foo = imp.load_module("foobody", "foobody.txt").foo # assignment, assignment_lhs_identifier:foo, assignment_rhs_atom:imp, call_argument:, literal:Str, member_call:load_module, member_call_object:imp, node:Assign, node:Attribute, node:Call, node:Name, node:Str, single_assignment:foo
+foo = imp.load_module("foobody", "foobody.txt").foo # assignment, assignment_lhs_identifier:foo, assignment_rhs_atom:imp, call_argument:, literal:Str, member_call:imp:load_module, member_call_member:load_module, member_call_object:imp, node:Assign, node:Attribute, node:Call, node:Name, node:Str, single_assignment:foo
 
 # ----------------------------------------------------------------------------------------
 # 128.2085-breadth-first-traversing-of-a-tree.py
@@ -949,12 +949,12 @@ foo = imp.load_module("foobody", "foobody.txt").foo # assignment, assignment_lhs
 def BFS(f, root): # function:BFS (-> +8), function_argument:f, function_argument:root, function_argument_flavor:arg, function_returning_nothing:BFS (-> +8), higher_order_function:f (-> +8), node:FunctionDef (-> +8), node:arg, whole_span:9 (-> +8)
     Q = [root] # assignment, assignment_lhs_identifier:Q, assignment_rhs_atom:root, literal:List, node:Assign, node:List, node:Name, single_assignment:Q
     while Q: # loop:while (-> +6), loop_with_late_exit:while (-> +6), node:Name, node:While (-> +6)
-        n = Q.pop(0) # assignment:pop, assignment_lhs_identifier:n, assignment_rhs_atom:0, assignment_rhs_atom:Q, call_argument:0, literal:0, member_call:pop, node:Assign, node:Attribute, node:Call, node:Name, node:Num, single_assignment:n
+        n = Q.pop(0) # assignment:pop, assignment_lhs_identifier:n, assignment_rhs_atom:0, assignment_rhs_atom:Q, call_argument:0, literal:0, member_call_member:pop, node:Assign, node:Attribute, node:Call, node:Name, node:Num, single_assignment:n
         f(n) # call_argument:n, external_free_call:f, free_call:f, free_call_without_result:f, node:Call, node:Expr, node:Name
         for child in n: # for:child (-> +3), for_each (-> +3), loop:for (-> +3), loop_with_late_exit:for (-> +3), node:For (-> +3), node:Name
             if not n.discovered: # if (-> +2), if_test_atom:n, if_without_else (-> +2), node:Attribute, node:If (-> +2), node:Name, node:UnaryOp, unary_operator:Not
                 n.discovered = True # assignment:True, assignment_lhs_identifier:n, assignment_rhs_atom:True, if_then_branch (-> +1), literal:True, node:Assign, node:Attribute, node:Name, node:NameConstant
-                Q.append(n) # call_argument:n, member_call:append, member_call_object:Q, member_call_without_result:append, node:Attribute, node:Call, node:Expr, node:Name, update:Q:n, update_by_member_call:Q:n, update_by_member_call_with:append, update_with:append
+                Q.append(n) # call_argument:n, member_call:Q:append, member_call_member:append, member_call_object:Q, node:Attribute, node:Call, node:Expr, node:Name, update:Q:n, update_by_member_call:Q:n, update_by_member_call_with:append, update_with:append
 
 # ----------------------------------------------------------------------------------------
 # 129.2282-breadth-first-traversing-in-a-graph.py
@@ -964,10 +964,10 @@ def breadth_first(start, f): # function:breadth_first (-> +7), function_argument
     seen = set() # assignment:set, assignment_lhs_identifier:seen, external_free_call:set, free_call:set, free_call_without_arguments:set, node:Assign, node:Call, node:Name, single_assignment:seen
     q = deque([start]) # assignment:deque, assignment_lhs_identifier:q, assignment_rhs_atom:start, call_argument:, external_free_call:deque, free_call:deque, literal:List, node:Assign, node:Call, node:List, node:Name, single_assignment:q
     while q: # loop:while (-> +4), loop_with_late_exit:while (-> +4), node:Name, node:While (-> +4)
-        vertex = q.popleft() # assignment:popleft, assignment_lhs_identifier:vertex, assignment_rhs_atom:q, member_call:popleft, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:vertex
+        vertex = q.popleft() # assignment:popleft, assignment_lhs_identifier:vertex, assignment_rhs_atom:q, member_call_member:popleft, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:vertex
         f(vertex) # call_argument:vertex, external_free_call:f, free_call:f, free_call_without_result:f, node:Call, node:Expr, node:Name
-        seen.add(vertex) # call_argument:vertex, member_call:add, member_call_object:seen, member_call_without_result:add, node:Attribute, node:Call, node:Expr, node:Name, update:seen:vertex, update_by_member_call:seen:vertex, update_by_member_call_with:add, update_with:add
-        q.extend(v for v in vertex.adjacent if v not in seen) # call_argument:, comparison_operator:NotIn, comprehension:Generator, comprehension_for_count:1, filtered_comprehension, member_call:extend, member_call_object:q, member_call_without_result:extend, node:Attribute, node:Call, node:Compare, node:Expr, node:GeneratorExp, node:Name
+        seen.add(vertex) # call_argument:vertex, member_call:seen:add, member_call_member:add, member_call_object:seen, node:Attribute, node:Call, node:Expr, node:Name, update:seen:vertex, update_by_member_call:seen:vertex, update_by_member_call_with:add, update_with:add
+        q.extend(v for v in vertex.adjacent if v not in seen) # call_argument:, comparison_operator:NotIn, comprehension:Generator, comprehension_for_count:1, filtered_comprehension, member_call:q:extend, member_call_member:extend, member_call_object:q, node:Attribute, node:Call, node:Compare, node:Expr, node:GeneratorExp, node:Name
 
 # ----------------------------------------------------------------------------------------
 # 130.2283-depth-first-traversing-in-a-graph.py
@@ -976,10 +976,10 @@ def depth_first(start, f): # function:depth_first (-> +7), function_argument:f, 
     seen = set() # assignment:set, assignment_lhs_identifier:seen, external_free_call:set, free_call:set, free_call_without_arguments:set, node:Assign, node:Call, node:Name, single_assignment:seen
     stack = [start] # assignment, assignment_lhs_identifier:stack, assignment_rhs_atom:start, literal:List, node:Assign, node:List, node:Name, single_assignment:stack
     while stack: # loop:while (-> +4), loop_with_late_exit:while (-> +4), node:Name, node:While (-> +4)
-        vertex = stack.pop() # assignment:pop, assignment_lhs_identifier:vertex, assignment_rhs_atom:stack, member_call:pop, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:vertex
+        vertex = stack.pop() # assignment:pop, assignment_lhs_identifier:vertex, assignment_rhs_atom:stack, member_call_member:pop, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:vertex
         f(vertex) # call_argument:vertex, external_free_call:f, free_call:f, free_call_without_result:f, node:Call, node:Expr, node:Name
-        seen.add(vertex) # call_argument:vertex, member_call:add, member_call_object:seen, member_call_without_result:add, node:Attribute, node:Call, node:Expr, node:Name, update:seen:vertex, update_by_member_call:seen:vertex, update_by_member_call_with:add, update_with:add
-        stack.extend(v for v in vertex.adjacent if v not in seen) # call_argument:, comparison_operator:NotIn, comprehension:Generator, comprehension_for_count:1, filtered_comprehension, member_call:extend, member_call_object:stack, member_call_without_result:extend, node:Attribute, node:Call, node:Compare, node:Expr, node:GeneratorExp, node:Name
+        seen.add(vertex) # call_argument:vertex, member_call:seen:add, member_call_member:add, member_call_object:seen, node:Attribute, node:Call, node:Expr, node:Name, update:seen:vertex, update_by_member_call:seen:vertex, update_by_member_call_with:add, update_with:add
+        stack.extend(v for v in vertex.adjacent if v not in seen) # call_argument:, comparison_operator:NotIn, comprehension:Generator, comprehension_for_count:1, filtered_comprehension, member_call:stack:extend, member_call_member:extend, member_call_object:stack, node:Attribute, node:Call, node:Compare, node:Expr, node:GeneratorExp, node:Name
 
 # ----------------------------------------------------------------------------------------
 # 131.2083-successive-conditions.py
@@ -1000,12 +1000,12 @@ elif c3: # if (-> +1), node:If (-> +1), node:Name
 # 132.2040-measure-duration-of-procedure-execution.py
 # ----------------------------------------------------------------------------------------
 import timeit # import:timeit, import_module:timeit, node:Import, whole_span:2 (-> +1)
-duration = timeit.timeit("f()", setup="from __main__ import f") # assignment:timeit, assignment_lhs_identifier:duration, assignment_rhs_atom:timeit, call_argument:, literal:Str, member_call:timeit, node:Assign, node:Attribute, node:Call, node:Name, node:Str, single_assignment:duration
+duration = timeit.timeit("f()", setup="from __main__ import f") # assignment:timeit, assignment_lhs_identifier:duration, assignment_rhs_atom:timeit, call_argument:, literal:Str, member_call_member:timeit, node:Assign, node:Attribute, node:Call, node:Name, node:Str, single_assignment:duration
 
 # ----------------------------------------------------------------------------------------
 # 133.2160-case-insensitive-string-contains.py
 # ----------------------------------------------------------------------------------------
-ok = word.lower() in s.lower() # assignment, assignment_lhs_identifier:ok, assignment_rhs_atom:s, assignment_rhs_atom:word, comparison_operator:In, member_call:lower, node:Assign, node:Attribute, node:Call, node:Compare, node:Name, single_assignment:ok, whole_span:1
+ok = word.lower() in s.lower() # assignment, assignment_lhs_identifier:ok, assignment_rhs_atom:s, assignment_rhs_atom:word, comparison_operator:In, member_call_member:lower, node:Assign, node:Attribute, node:Call, node:Compare, node:Name, single_assignment:ok, whole_span:1
 
 # ----------------------------------------------------------------------------------------
 # 134.1850-create-a-new-list.py
@@ -1015,7 +1015,7 @@ items = [a, b, c] # assignment, assignment_lhs_identifier:items, assignment_rhs_
 # ----------------------------------------------------------------------------------------
 # 135.2158-remove-item-from-list-by-its-value.py
 # ----------------------------------------------------------------------------------------
-items.remove(x) # call_argument:x, member_call:remove, member_call_object:items, member_call_without_result:remove, node:Attribute, node:Call, node:Expr, node:Name, update:items:x, update_by_member_call:items:x, update_by_member_call_with:remove, update_with:remove, whole_span:1
+items.remove(x) # call_argument:x, member_call:items:remove, member_call_member:remove, member_call_object:items, node:Attribute, node:Call, node:Expr, node:Name, update:items:x, update_by_member_call:items:x, update_by_member_call_with:remove, update_with:remove, whole_span:1
 
 # ----------------------------------------------------------------------------------------
 # 136.2141-remove-all-occurrences-of-a-value-from-a-list.py
@@ -1025,24 +1025,24 @@ newlist = [item for item in items if item != x] # assignment, assignment_lhs_ide
 # ----------------------------------------------------------------------------------------
 # 137.1823-check-if-string-contains-only-digits.py
 # ----------------------------------------------------------------------------------------
-b = s.isdigit() # assignment:isdigit, assignment_lhs_identifier:b, assignment_rhs_atom:s, member_call:isdigit, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:b, whole_span:1
+b = s.isdigit() # assignment:isdigit, assignment_lhs_identifier:b, assignment_rhs_atom:s, member_call_member:isdigit, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:b, whole_span:1
 
 # ----------------------------------------------------------------------------------------
 # 138.2161-create-temp-file.py
 # ----------------------------------------------------------------------------------------
 import tempfile # import:tempfile, import_module:tempfile, node:Import, whole_span:2 (-> +1)
-file = tempfile.TemporaryFile() # assignment:TemporaryFile, assignment_lhs_identifier:file, assignment_rhs_atom:tempfile, member_call:TemporaryFile, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:file
+file = tempfile.TemporaryFile() # assignment:TemporaryFile, assignment_lhs_identifier:file, assignment_rhs_atom:tempfile, member_call_member:TemporaryFile, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:file
 
 # ----------------------------------------------------------------------------------------
 # 139.2162-create-temp-directory.py
 # ----------------------------------------------------------------------------------------
 import tempfile # import:tempfile, import_module:tempfile, node:Import, whole_span:2 (-> +1)
-td = tempfile.TemporaryDirectory() # assignment:TemporaryDirectory, assignment_lhs_identifier:td, assignment_rhs_atom:tempfile, member_call:TemporaryDirectory, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:td
+td = tempfile.TemporaryDirectory() # assignment:TemporaryDirectory, assignment_lhs_identifier:td, assignment_rhs_atom:tempfile, member_call_member:TemporaryDirectory, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:td
 
 # ----------------------------------------------------------------------------------------
 # 140.2156-delete-map-entry.py
 # ----------------------------------------------------------------------------------------
-m.pop(k, None) # call_argument:None, call_argument:k, literal:None, member_call:pop, member_call_object:m, member_call_without_result:pop, node:Attribute, node:Call, node:Expr, node:Name, node:NameConstant, update:m:None, update:m:k, update_by_member_call:m:None, update_by_member_call:m:k, update_by_member_call_with:pop, update_with:pop, whole_span:1
+m.pop(k, None) # call_argument:None, call_argument:k, literal:None, member_call:m:pop, member_call_member:pop, member_call_object:m, node:Attribute, node:Call, node:Expr, node:Name, node:NameConstant, update:m:None, update:m:k, update_by_member_call:m:None, update_by_member_call:m:k, update_by_member_call_with:pop, update_with:pop, whole_span:1
 
 # ----------------------------------------------------------------------------------------
 # 141.2159-iterate-in-sequence-over-two-lists.py
@@ -1065,31 +1065,31 @@ for pair in zip(item1, item2): # call_argument:item1, call_argument:item2, exter
 # 144.2145-check-if-file-exists.py
 # ----------------------------------------------------------------------------------------
 import os # import:os, import_module:os, node:Import, whole_span:2 (-> +1)
-b = os.path.exists(fp) # assignment:exists, assignment_lhs_identifier:b, assignment_rhs_atom:fp, assignment_rhs_atom:os, call_argument:fp, member_call:exists, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:b
+b = os.path.exists(fp) # assignment:exists, assignment_lhs_identifier:b, assignment_rhs_atom:fp, assignment_rhs_atom:os, call_argument:fp, member_call_member:exists, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:b
 
 # ----------------------------------------------------------------------------------------
 # 144.2915-check-if-file-exists.py
 # ----------------------------------------------------------------------------------------
 from pathlib import Path # import:pathlib:Path, import_module:pathlib, import_name:Path, node:ImportFrom, whole_span:2 (-> +1)
-b = Path(fp).exists() # assignment:exists, assignment_lhs_identifier:b, assignment_rhs_atom:fp, call_argument:fp, external_free_call:Path, free_call:Path, member_call:exists, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:b
+b = Path(fp).exists() # assignment:exists, assignment_lhs_identifier:b, assignment_rhs_atom:fp, call_argument:fp, external_free_call:Path, free_call:Path, member_call_member:exists, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:b
 
 # ----------------------------------------------------------------------------------------
 # 145.1822-print-log-line-with-datetime.py
 # ----------------------------------------------------------------------------------------
 import sys, logging # import:logging, import:sys, import_module:logging, import_module:sys, node:Import, whole_span:6 (-> +5)
-logging.basicConfig( # member_call:basicConfig, member_call_object:logging, member_call_without_result:basicConfig, node:Attribute, node:Call (-> +1), node:Expr (-> +1), node:Name
+logging.basicConfig( # member_call:logging:basicConfig, member_call_member:basicConfig, member_call_object:logging, node:Attribute, node:Call (-> +1), node:Expr (-> +1), node:Name
     stream=sys.stdout, level=logging.DEBUG, format="%(asctime)-15s %(message)s" # literal:Str, node:Attribute, node:Name, node:Str
 )
-logger = logging.getLogger("NAME OF LOGGER") # assignment:getLogger, assignment_lhs_identifier:logger, assignment_rhs_atom:logging, call_argument:, literal:Str, member_call:getLogger, node:Assign, node:Attribute, node:Call, node:Name, node:Str, single_assignment:logger
-logger.info(msg) # call_argument:msg, member_call:info, member_call_object:logger, member_call_without_result:info, node:Attribute, node:Call, node:Expr, node:Name
+logger = logging.getLogger("NAME OF LOGGER") # assignment:getLogger, assignment_lhs_identifier:logger, assignment_rhs_atom:logging, call_argument:, literal:Str, member_call_member:getLogger, node:Assign, node:Attribute, node:Call, node:Name, node:Str, single_assignment:logger
+logger.info(msg) # call_argument:msg, member_call:logger:info, member_call_member:info, member_call_object:logger, node:Attribute, node:Call, node:Expr, node:Name
 
 # ----------------------------------------------------------------------------------------
 # 146.1825-convert-string-to-floating-point-number.py
 # ----------------------------------------------------------------------------------------
 import locale # import:locale, import_module:locale, node:Import, whole_span:4 (-> +3)
 s = u"545,2222" # assignment, assignment_lhs_identifier:s, literal:Str, node:Assign, node:Name, node:Str, single_assignment:s
-locale.setlocale(locale.LC_ALL, "de") # call_argument:, literal:Str, member_call:setlocale, member_call_object:locale, member_call_without_result:setlocale, node:Attribute, node:Call, node:Expr, node:Name, node:Str
-f = locale.atof(s) # assignment:atof, assignment_lhs_identifier:f, assignment_rhs_atom:locale, assignment_rhs_atom:s, call_argument:s, member_call:atof, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:f
+locale.setlocale(locale.LC_ALL, "de") # call_argument:, literal:Str, member_call:locale:setlocale, member_call_member:setlocale, member_call_object:locale, node:Attribute, node:Call, node:Expr, node:Name, node:Str
+f = locale.atof(s) # assignment:atof, assignment_lhs_identifier:f, assignment_rhs_atom:locale, assignment_rhs_atom:s, call_argument:s, member_call_member:atof, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:f
 
 # ----------------------------------------------------------------------------------------
 # 146.1826-convert-string-to-floating-point-number.py
@@ -1105,23 +1105,23 @@ float("1.3") # call_argument:, external_free_call:float, free_call:float, free_c
 # 147.2171-remove-all-non-ascii-characters.py
 # ----------------------------------------------------------------------------------------
 import re # import:re, import_module:re, node:Import, whole_span:2 (-> +1)
-t = re.sub("[^\u0000-\u007f]", "", s) # assignment:sub, assignment_lhs_identifier:t, assignment_rhs_atom:re, assignment_rhs_atom:s, call_argument:, call_argument:s, empty_literal:Str, literal:Str, member_call:sub, node:Assign, node:Attribute, node:Call, node:Name, node:Str, single_assignment:t
+t = re.sub("[^\u0000-\u007f]", "", s) # assignment:sub, assignment_lhs_identifier:t, assignment_rhs_atom:re, assignment_rhs_atom:s, call_argument:, call_argument:s, empty_literal:Str, literal:Str, member_call_member:sub, node:Assign, node:Attribute, node:Call, node:Name, node:Str, single_assignment:t
 
 # ----------------------------------------------------------------------------------------
 # 148.1829-read-list-of-integer-numbers-from-stdin.py
 # ----------------------------------------------------------------------------------------
-list(map(int, input().split())) # call_argument:, call_argument:int, composition, external_free_call:input, external_free_call:list, external_free_call:map, free_call:input, free_call:list, free_call:map, free_call_without_arguments:input, free_call_without_result:list, member_call:split, node:Attribute, node:Call, node:Expr, node:Name, whole_span:1
+list(map(int, input().split())) # call_argument:, call_argument:int, composition, external_free_call:input, external_free_call:list, external_free_call:map, free_call:input, free_call:list, free_call:map, free_call_without_arguments:input, free_call_without_result:list, member_call_member:split, node:Attribute, node:Call, node:Expr, node:Name, whole_span:1
 
 # ----------------------------------------------------------------------------------------
 # 150.2154-remove-trailing-slash.py
 # ----------------------------------------------------------------------------------------
-p = p.rstrip("/") # assignment:rstrip, assignment_lhs_identifier:p, assignment_rhs_atom:p, call_argument:, literal:Str, member_call:rstrip, node:Assign, node:Attribute, node:Call, node:Name, node:Str, single_assignment:p, whole_span:1
+p = p.rstrip("/") # assignment:rstrip, assignment_lhs_identifier:p, assignment_rhs_atom:p, call_argument:, literal:Str, member_call_member:rstrip, node:Assign, node:Attribute, node:Call, node:Name, node:Str, single_assignment:p, whole_span:1
 
 # ----------------------------------------------------------------------------------------
 # 151.2166-remove-string-trailing-path-separator.py
 # ----------------------------------------------------------------------------------------
 import os # import:os, import_module:os, node:Import, whole_span:3 (-> +2)
-if p.endswith(os.sep): # call_argument:, if (-> +1), if_test_atom:os, if_test_atom:p, if_without_else (-> +1), member_call:endswith, node:Attribute, node:Call, node:If (-> +1), node:Name
+if p.endswith(os.sep): # call_argument:, if (-> +1), if_test_atom:os, if_test_atom:p, if_without_else (-> +1), member_call_member:endswith, node:Attribute, node:Call, node:If (-> +1), node:Name
     p = p[:-1] # assignment, assignment_lhs_identifier:p, assignment_rhs_atom:-1, assignment_rhs_atom:p, if_then_branch, literal:-1, node:Assign, node:Name, node:Num, node:Subscript, single_assignment:p, slice::-1:, slice_lower:, slice_step:, slice_upper:-1, update:p:-1, update_by_assignment:p:-1, update_by_assignment_with, update_with
 
 # ----------------------------------------------------------------------------------------
@@ -1132,14 +1132,14 @@ s = c # assignment, assignment_lhs_identifier:s, assignment_rhs_atom:c, node:Ass
 # ----------------------------------------------------------------------------------------
 # 153.1980-concatenate-string-with-integer.py
 # ----------------------------------------------------------------------------------------
-t = "{}{}".format(s, i) # assignment:format, assignment_lhs_identifier:t, assignment_rhs_atom:i, assignment_rhs_atom:s, call_argument:i, call_argument:s, literal:Str, member_call:format, node:Assign, node:Attribute, node:Call, node:Name, node:Str, single_assignment:t, whole_span:1
+t = "{}{}".format(s, i) # assignment:format, assignment_lhs_identifier:t, assignment_rhs_atom:i, assignment_rhs_atom:s, call_argument:i, call_argument:s, literal:Str, member_call_member:format, node:Assign, node:Attribute, node:Call, node:Name, node:Str, single_assignment:t, whole_span:1
 
 # ----------------------------------------------------------------------------------------
 # 154.2155-halfway-between-two-hex-color-codes.py
 # ----------------------------------------------------------------------------------------
 r1, g1, b1 = [int(c1[p : p + 2], 16) for p in range(1, 6, 2)] # addition_operator, assignment, assignment_lhs_identifier:b1, assignment_lhs_identifier:g1, assignment_lhs_identifier:r1, assignment_rhs_atom:1, assignment_rhs_atom:16, assignment_rhs_atom:2, assignment_rhs_atom:6, assignment_rhs_atom:c1, assignment_rhs_atom:p, binary_operator:Add, call_argument:, call_argument:1, call_argument:16, call_argument:2, call_argument:6, comprehension:List, comprehension_for_count:1, external_free_call:int, external_free_call:range, free_call:int, free_call:range, literal:1, literal:16, literal:2, literal:6, literal:Tuple, node:Assign, node:BinOp, node:Call, node:ListComp, node:Name, node:Num, node:Subscript, node:Tuple, parallel_assignment:3, range:1:6:2, slice:p:_:, slice_lower:p, slice_step:, slice_upper:_, whole_span:3 (-> +2)
 r2, g2, b2 = [int(c2[p : p + 2], 16) for p in range(1, 6, 2)] # addition_operator, assignment, assignment_lhs_identifier:b2, assignment_lhs_identifier:g2, assignment_lhs_identifier:r2, assignment_rhs_atom:1, assignment_rhs_atom:16, assignment_rhs_atom:2, assignment_rhs_atom:6, assignment_rhs_atom:c2, assignment_rhs_atom:p, binary_operator:Add, call_argument:, call_argument:1, call_argument:16, call_argument:2, call_argument:6, comprehension:List, comprehension_for_count:1, external_free_call:int, external_free_call:range, free_call:int, free_call:range, literal:1, literal:16, literal:2, literal:6, literal:Tuple, node:Assign, node:BinOp, node:Call, node:ListComp, node:Name, node:Num, node:Subscript, node:Tuple, parallel_assignment:3, range:1:6:2, slice:p:_:, slice_lower:p, slice_step:, slice_upper:_
-c = "#{:02x}{:02x}{:02x}".format((r1 + r2) // 2, (g1 + g2) // 2, (b1 + b2) // 2) # addition_operator, assignment:format, assignment_lhs_identifier:c, assignment_rhs_atom:2, assignment_rhs_atom:b1, assignment_rhs_atom:b2, assignment_rhs_atom:g1, assignment_rhs_atom:g2, assignment_rhs_atom:r1, assignment_rhs_atom:r2, binary_operator:Add, binary_operator:FloorDiv, call_argument:, literal:2, literal:Str, member_call:format, node:Assign, node:Attribute, node:BinOp, node:Call, node:Name, node:Num, node:Str, single_assignment:c
+c = "#{:02x}{:02x}{:02x}".format((r1 + r2) // 2, (g1 + g2) // 2, (b1 + b2) // 2) # addition_operator, assignment:format, assignment_lhs_identifier:c, assignment_rhs_atom:2, assignment_rhs_atom:b1, assignment_rhs_atom:b2, assignment_rhs_atom:g1, assignment_rhs_atom:g2, assignment_rhs_atom:r1, assignment_rhs_atom:r2, binary_operator:Add, binary_operator:FloorDiv, call_argument:, literal:2, literal:Str, member_call_member:format, node:Assign, node:Attribute, node:BinOp, node:Call, node:Name, node:Num, node:Str, single_assignment:c
 
 # ----------------------------------------------------------------------------------------
 # 154.2292-halfway-between-two-hex-color-codes.py
@@ -1148,15 +1148,15 @@ import numpy # import:numpy, import_module:numpy, node:Import, whole_span:15 (->
 class RGB(numpy.ndarray): # node:Attribute, node:ClassDef (-> +8), node:Name
     @classmethod # class_method:from_str (-> +4), decorated_function:from_str (-> +4), function:from_str (-> +4), function_decorator:classmethod (-> +4), function_returning_something:from_str (-> +4), method:from_str (-> +4), node:FunctionDef (-> +4), node:Name
     def from_str(cls, rgbstr): # function_argument:cls, function_argument:rgbstr, function_argument_flavor:arg, node:arg
-        return numpy.array( # composition, member_call:array, member_call:view, member_call_object:numpy, method_chaining, node:Attribute, node:Attribute (-> +1), node:Call (-> +1), node:Call (-> +2), node:Name, node:Return (-> +2), return (-> +2)
+        return numpy.array( # composition, member_call:numpy:array, member_call:numpy:view, member_call_member:array, member_call_member:view, member_call_object:numpy, method_chaining, node:Attribute, node:Attribute (-> +1), node:Call (-> +1), node:Call (-> +2), node:Name, node:Return (-> +2), return (-> +2)
             [int(rgbstr[i : i + 2], 16) for i in range(1, len(rgbstr), 2)] # addition_operator, binary_operator:Add, call_argument:, call_argument:1, call_argument:16, call_argument:2, call_argument:rgbstr, composition, comprehension:List, comprehension_for_count:1, external_free_call:int, external_free_call:len, external_free_call:range, free_call:int, free_call:len, free_call:range, literal:1, literal:16, literal:2, node:BinOp, node:Call, node:ListComp, node:Name, node:Num, node:Subscript, range:1:_:2, slice:i:_:, slice_lower:i, slice_step:, slice_upper:_, suggest_constant_definition
         ).view(cls) # call_argument:cls, node:Name
     def __str__(self): # function:__str__ (-> +2), function_argument:self, function_argument_flavor:arg, function_returning_something:__str__ (-> +2), instance_method:__str__ (-> +2), method:__str__ (-> +2), node:FunctionDef (-> +2), node:arg
-        self = self.astype(numpy.uint8) # assignment:astype, assignment_lhs_identifier:self, assignment_rhs_atom:numpy, assignment_rhs_atom:self, call_argument:, member_call:astype, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:self, update:self:numpy, update_by_assignment:self:numpy, update_by_assignment_with:astype, update_with:astype
-        return "#" + "".join(format(n, "x") for n in self) # binary_operator:Add, call_argument:, call_argument:n, composition, comprehension:Generator, comprehension_for_count:1, concatenation_operator:Str, empty_literal:Str, external_free_call:format, free_call:format, literal:Str, member_call:join, node:Attribute, node:BinOp, node:Call, node:GeneratorExp, node:Name, node:Return, node:Str, return
-c1 = RGB.from_str("#a1b1c1") # assignment:from_str, assignment_lhs_identifier:c1, assignment_rhs_atom:RGB, call_argument:, literal:Str, member_call:from_str, node:Assign, node:Attribute, node:Call, node:Name, node:Str, single_assignment:c1
+        self = self.astype(numpy.uint8) # assignment:astype, assignment_lhs_identifier:self, assignment_rhs_atom:numpy, assignment_rhs_atom:self, call_argument:, member_call_member:astype, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:self, update:self:numpy, update_by_assignment:self:numpy, update_by_assignment_with:astype, update_with:astype
+        return "#" + "".join(format(n, "x") for n in self) # binary_operator:Add, call_argument:, call_argument:n, composition, comprehension:Generator, comprehension_for_count:1, concatenation_operator:Str, empty_literal:Str, external_free_call:format, free_call:format, literal:Str, member_call_member:join, node:Attribute, node:BinOp, node:Call, node:GeneratorExp, node:Name, node:Return, node:Str, return
+c1 = RGB.from_str("#a1b1c1") # assignment:from_str, assignment_lhs_identifier:c1, assignment_rhs_atom:RGB, call_argument:, literal:Str, member_call_member:from_str, node:Assign, node:Attribute, node:Call, node:Name, node:Str, single_assignment:c1
 print(c1) # call_argument:c1, external_free_call:print, free_call:print, free_call_without_result:print, node:Call, node:Expr, node:Name
-c2 = RGB.from_str("#1A1B1C") # assignment:from_str, assignment_lhs_identifier:c2, assignment_rhs_atom:RGB, call_argument:, literal:Str, member_call:from_str, node:Assign, node:Attribute, node:Call, node:Name, node:Str, single_assignment:c2
+c2 = RGB.from_str("#1A1B1C") # assignment:from_str, assignment_lhs_identifier:c2, assignment_rhs_atom:RGB, call_argument:, literal:Str, member_call_member:from_str, node:Assign, node:Attribute, node:Call, node:Name, node:Str, single_assignment:c2
 print(c2) # call_argument:c2, external_free_call:print, free_call:print, free_call_without_result:print, node:Call, node:Expr, node:Name
 print((c1 + c2) / 2) # addition_operator, binary_operator:Add, binary_operator:Div, call_argument:, external_free_call:print, free_call:print, free_call_without_result:print, literal:2, node:BinOp, node:Call, node:Expr, node:Name, node:Num
 
@@ -1164,8 +1164,8 @@ print((c1 + c2) / 2) # addition_operator, binary_operator:Add, binary_operator:D
 # 155.2147-delete-file.py
 # ----------------------------------------------------------------------------------------
 import pathlib # import:pathlib, import_module:pathlib, node:Import, whole_span:3 (-> +2)
-path = pathlib.Path(_filepath) # assignment:Path, assignment_lhs_identifier:path, assignment_rhs_atom:_filepath, assignment_rhs_atom:pathlib, call_argument:_filepath, member_call:Path, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:path
-path.unlink() # member_call:unlink, member_call_object:path, member_call_without_result:unlink, node:Attribute, node:Call, node:Expr, node:Name
+path = pathlib.Path(_filepath) # assignment:Path, assignment_lhs_identifier:path, assignment_rhs_atom:_filepath, assignment_rhs_atom:pathlib, call_argument:_filepath, member_call_member:Path, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:path
+path.unlink() # member_call:path:unlink, member_call_member:unlink, member_call_object:path, node:Attribute, node:Call, node:Expr, node:Name
 
 # ----------------------------------------------------------------------------------------
 # 156.2148-format-integer-with-zero-padding.py
@@ -1181,7 +1181,7 @@ PLANET = "Earth" # assignment, assignment_lhs_identifier:PLANET, literal:Str, no
 # 158.2163-random-sublist.py
 # ----------------------------------------------------------------------------------------
 import random # import:random, import_module:random, node:Import, whole_span:2 (-> +1)
-y = random.sample(x, k) # assignment:sample, assignment_lhs_identifier:y, assignment_rhs_atom:k, assignment_rhs_atom:random, assignment_rhs_atom:x, call_argument:k, call_argument:x, member_call:sample, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:y
+y = random.sample(x, k) # assignment:sample, assignment_lhs_identifier:y, assignment_rhs_atom:k, assignment_rhs_atom:random, assignment_rhs_atom:x, call_argument:k, call_argument:x, member_call_member:sample, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:y
 
 # ----------------------------------------------------------------------------------------
 # 159.2281-trie.py
@@ -1236,7 +1236,7 @@ for a, b in pairwise(list): # call_argument:list, for:a (-> +1), for:b (-> +1), 
 # 164.2169-open-url-in-default-browser.py
 # ----------------------------------------------------------------------------------------
 import webbrowser # import:webbrowser, import_module:webbrowser, node:Import, whole_span:2 (-> +1)
-webbrowser.open(s) # call_argument:s, member_call:open, member_call_object:webbrowser, member_call_without_result:open, node:Attribute, node:Call, node:Expr, node:Name
+webbrowser.open(s) # call_argument:s, member_call:webbrowser:open, member_call_member:open, member_call_object:webbrowser, node:Attribute, node:Call, node:Expr, node:Name
 
 # ----------------------------------------------------------------------------------------
 # 165.2149-last-element-of-list.py
@@ -1251,22 +1251,22 @@ ab = a + b # addition_operator, assignment:Add, assignment_lhs_identifier:ab, as
 # ----------------------------------------------------------------------------------------
 # 167.2611-trim-prefix.py
 # ----------------------------------------------------------------------------------------
-t = s[s.startswith(p) and len(p) :] # assignment, assignment_lhs_identifier:t, assignment_rhs_atom:p, assignment_rhs_atom:s, boolean_operator:And, call_argument:p, external_free_call:len, free_call:len, member_call:startswith, node:Assign, node:Attribute, node:BoolOp, node:Call, node:Name, node:Subscript, single_assignment:t, slice:_::, slice_lower:_, slice_step:, slice_upper:, whole_span:1
+t = s[s.startswith(p) and len(p) :] # assignment, assignment_lhs_identifier:t, assignment_rhs_atom:p, assignment_rhs_atom:s, boolean_operator:And, call_argument:p, external_free_call:len, free_call:len, member_call_member:startswith, node:Assign, node:Attribute, node:BoolOp, node:Call, node:Name, node:Subscript, single_assignment:t, slice:_::, slice_lower:_, slice_step:, slice_upper:, whole_span:1
 
 # ----------------------------------------------------------------------------------------
 # 167.3175-trim-prefix.py
 # ----------------------------------------------------------------------------------------
-t = s.lstrip(p) # assignment:lstrip, assignment_lhs_identifier:t, assignment_rhs_atom:p, assignment_rhs_atom:s, call_argument:p, member_call:lstrip, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:t, whole_span:1
+t = s.lstrip(p) # assignment:lstrip, assignment_lhs_identifier:t, assignment_rhs_atom:p, assignment_rhs_atom:s, call_argument:p, member_call_member:lstrip, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:t, whole_span:1
 
 # ----------------------------------------------------------------------------------------
 # 168.2277-trim-suffix.py
 # ----------------------------------------------------------------------------------------
-t = s.rsplit(w, 1)[0] # assignment, assignment_lhs_identifier:t, assignment_rhs_atom:0, assignment_rhs_atom:1, assignment_rhs_atom:s, assignment_rhs_atom:w, call_argument:1, call_argument:w, index:0, literal:0, literal:1, member_call:rsplit, member_call_object:s, node:Assign, node:Attribute, node:Call, node:Name, node:Num, node:Subscript, single_assignment:t, whole_span:1
+t = s.rsplit(w, 1)[0] # assignment, assignment_lhs_identifier:t, assignment_rhs_atom:0, assignment_rhs_atom:1, assignment_rhs_atom:s, assignment_rhs_atom:w, call_argument:1, call_argument:w, index:0, literal:0, literal:1, member_call:s:rsplit, member_call_member:rsplit, member_call_object:s, node:Assign, node:Attribute, node:Call, node:Name, node:Num, node:Subscript, single_assignment:t, whole_span:1
 
 # ----------------------------------------------------------------------------------------
 # 168.3174-trim-suffix.py
 # ----------------------------------------------------------------------------------------
-t = s.rstrip(w) # assignment:rstrip, assignment_lhs_identifier:t, assignment_rhs_atom:s, assignment_rhs_atom:w, call_argument:w, member_call:rstrip, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:t, whole_span:1
+t = s.rstrip(w) # assignment:rstrip, assignment_lhs_identifier:t, assignment_rhs_atom:s, assignment_rhs_atom:w, call_argument:w, member_call_member:rstrip, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:t, whole_span:1
 
 # ----------------------------------------------------------------------------------------
 # 169.2233-string-length.py
@@ -1281,7 +1281,7 @@ n = len(mymap) # assignment:len, assignment_lhs_identifier:n, assignment_rhs_ato
 # ----------------------------------------------------------------------------------------
 # 171.2446-add-an-element-at-the-end-of-a-list.py
 # ----------------------------------------------------------------------------------------
-s.append(x) # call_argument:x, member_call:append, member_call_object:s, member_call_without_result:append, node:Attribute, node:Call, node:Expr, node:Name, update:s:x, update_by_member_call:s:x, update_by_member_call_with:append, update_with:append, whole_span:1
+s.append(x) # call_argument:x, member_call:s:append, member_call_member:append, member_call_object:s, node:Attribute, node:Call, node:Expr, node:Name, update:s:x, update_by_member_call:s:x, update_by_member_call_with:append, update_with:append, whole_span:1
 
 # ----------------------------------------------------------------------------------------
 # 172.2442-insert-entry-in-map.py
@@ -1307,26 +1307,26 @@ print("'{:,}'.format(1000)") # call_argument:, external_free_call:print, free_ca
 # 174.2687-make-http-post-request.py
 # ----------------------------------------------------------------------------------------
 from urllib import request, parse # import:urllib:parse, import:urllib:request, import_module:urllib, import_name:parse, import_name:request, node:ImportFrom, whole_span:4 (-> +3)
-data = parse.urlencode("<your data dict>").encode() # assignment:encode, assignment_lhs_identifier:data, assignment_rhs_atom:parse, call_argument:, literal:Str, member_call:encode, member_call:urlencode, member_call_object:parse, method_chaining, node:Assign, node:Attribute, node:Call, node:Name, node:Str, single_assignment:data
-req = request.Request(u, data=data, method="POST") # assignment:Request, assignment_lhs_identifier:req, assignment_rhs_atom:data, assignment_rhs_atom:request, assignment_rhs_atom:u, call_argument:u, literal:Str, member_call:Request, node:Assign, node:Attribute, node:Call, node:Name, node:Str, single_assignment:req
-resp = request.urlopen(req) # assignment:urlopen, assignment_lhs_identifier:resp, assignment_rhs_atom:req, assignment_rhs_atom:request, call_argument:req, member_call:urlopen, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:resp
+data = parse.urlencode("<your data dict>").encode() # assignment:encode, assignment_lhs_identifier:data, assignment_rhs_atom:parse, call_argument:, literal:Str, member_call:parse:encode, member_call:parse:urlencode, member_call_member:encode, member_call_member:urlencode, member_call_object:parse, method_chaining, node:Assign, node:Attribute, node:Call, node:Name, node:Str, single_assignment:data
+req = request.Request(u, data=data, method="POST") # assignment:Request, assignment_lhs_identifier:req, assignment_rhs_atom:data, assignment_rhs_atom:request, assignment_rhs_atom:u, call_argument:u, literal:Str, member_call_member:Request, node:Assign, node:Attribute, node:Call, node:Name, node:Str, single_assignment:req
+resp = request.urlopen(req) # assignment:urlopen, assignment_lhs_identifier:resp, assignment_rhs_atom:req, assignment_rhs_atom:request, call_argument:req, member_call_member:urlopen, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:resp
 
 # ----------------------------------------------------------------------------------------
 # 175.2613-bytes-to-hex-string.py
 # ----------------------------------------------------------------------------------------
-s = a.hex() # assignment:hex, assignment_lhs_identifier:s, assignment_rhs_atom:a, member_call:hex, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:s, whole_span:1
+s = a.hex() # assignment:hex, assignment_lhs_identifier:s, assignment_rhs_atom:a, member_call_member:hex, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:s, whole_span:1
 
 # ----------------------------------------------------------------------------------------
 # 176.2614-hex-string-to-byte-array.py
 # ----------------------------------------------------------------------------------------
-a = bytearray.fromhex(s) # assignment:fromhex, assignment_lhs_identifier:a, assignment_rhs_atom:bytearray, assignment_rhs_atom:s, call_argument:s, member_call:fromhex, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:a, whole_span:1
+a = bytearray.fromhex(s) # assignment:fromhex, assignment_lhs_identifier:a, assignment_rhs_atom:bytearray, assignment_rhs_atom:s, call_argument:s, member_call_member:fromhex, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:a, whole_span:1
 
 # ----------------------------------------------------------------------------------------
 # 177.2709-find-files-with-a-given-list-of-filename-extensions.py
 # ----------------------------------------------------------------------------------------
 import os # import:os, import_module:os, node:Import, whole_span:3 (-> +2)
 extensions = [".jpg", ".jpeg", ".png"] # assignment, assignment_lhs_identifier:extensions, literal:List, literal:Str, node:Assign, node:List, node:Name, node:Str, single_assignment:extensions
-L = [f for f in os.listdir(D) if os.path.splitext(f)[1] in extensions] # assignment, assignment_lhs_identifier:L, assignment_rhs_atom:1, assignment_rhs_atom:D, assignment_rhs_atom:extensions, assignment_rhs_atom:f, assignment_rhs_atom:os, call_argument:D, call_argument:f, comparison_operator:In, comprehension:List, comprehension_for_count:1, filtered_comprehension, index:1, literal:1, member_call:listdir, member_call:splitext, node:Assign, node:Attribute, node:Call, node:Compare, node:ListComp, node:Name, node:Num, node:Subscript, single_assignment:L
+L = [f for f in os.listdir(D) if os.path.splitext(f)[1] in extensions] # assignment, assignment_lhs_identifier:L, assignment_rhs_atom:1, assignment_rhs_atom:D, assignment_rhs_atom:extensions, assignment_rhs_atom:f, assignment_rhs_atom:os, call_argument:D, call_argument:f, comparison_operator:In, comprehension:List, comprehension_for_count:1, filtered_comprehension, index:1, literal:1, member_call_member:listdir, member_call_member:splitext, node:Assign, node:Attribute, node:Call, node:Compare, node:ListComp, node:Name, node:Num, node:Subscript, single_assignment:L
 
 # ----------------------------------------------------------------------------------------
 # 177.2725-find-files-with-a-given-list-of-filename-extensions.py
@@ -1334,10 +1334,10 @@ L = [f for f in os.listdir(D) if os.path.splitext(f)[1] in extensions] # assignm
 import re # import:re, import_module:re, node:Import, whole_span:7 (-> +6)
 import os # import:os, import_module:os, node:Import
 filtered_files = [ # assignment, assignment_lhs_identifier:filtered_files, node:Assign (-> +4), node:Name, single_assignment:filtered_files
-    "{}/{}".format(dirpath, filename) # assignment_rhs_atom:dirpath, assignment_rhs_atom:filename, call_argument:dirpath, call_argument:filename, comprehension:List, comprehension_for_count:2, literal:Str, member_call:format, node:Attribute, node:Call, node:ListComp (-> +3), node:Name, node:Str
-    for dirpath, _, filenames in os.walk(D) # assignment_rhs_atom:D, assignment_rhs_atom:_, assignment_rhs_atom:dirpath, assignment_rhs_atom:filenames, assignment_rhs_atom:os, call_argument:D, literal:Tuple, member_call:walk, node:Attribute, node:Call, node:Name, node:Tuple
+    "{}/{}".format(dirpath, filename) # assignment_rhs_atom:dirpath, assignment_rhs_atom:filename, call_argument:dirpath, call_argument:filename, comprehension:List, comprehension_for_count:2, literal:Str, member_call_member:format, node:Attribute, node:Call, node:ListComp (-> +3), node:Name, node:Str
+    for dirpath, _, filenames in os.walk(D) # assignment_rhs_atom:D, assignment_rhs_atom:_, assignment_rhs_atom:dirpath, assignment_rhs_atom:filenames, assignment_rhs_atom:os, call_argument:D, literal:Tuple, member_call_member:walk, node:Attribute, node:Call, node:Name, node:Tuple
     for filename in filenames # assignment_rhs_atom:filename, assignment_rhs_atom:filenames, node:Name
-    if re.match(r"^.*\.(?:jpg|jpeg|png)$", filename) # assignment_rhs_atom:filename, assignment_rhs_atom:re, call_argument:, call_argument:filename, filtered_comprehension, literal:Str, member_call:match, node:Attribute, node:Call, node:Name, node:Str
+    if re.match(r"^.*\.(?:jpg|jpeg|png)$", filename) # assignment_rhs_atom:filename, assignment_rhs_atom:re, call_argument:, call_argument:filename, filtered_comprehension, literal:Str, member_call_member:match, node:Attribute, node:Call, node:Name, node:Str
 ]
 
 # ----------------------------------------------------------------------------------------
@@ -1345,7 +1345,7 @@ filtered_files = [ # assignment, assignment_lhs_identifier:filtered_files, node:
 # ----------------------------------------------------------------------------------------
 import glob # import:glob, import_module:glob, node:Import, whole_span:3 (-> +2)
 import itertools # import:itertools, import_module:itertools, node:Import
-list(itertools.chain(*(glob.glob("*/**.%s" % ext) for ext in ["jpg", "jpeg", "png"]))) # binary_operator:Mod, call_argument:, composition, comprehension:Generator, comprehension_for_count:1, external_free_call:list, free_call:list, free_call_without_result:list, literal:List, literal:Str, member_call:chain, member_call:glob, node:Attribute, node:BinOp, node:Call, node:Expr, node:GeneratorExp, node:List, node:Name, node:Starred, node:Str, string_formatting_operator
+list(itertools.chain(*(glob.glob("*/**.%s" % ext) for ext in ["jpg", "jpeg", "png"]))) # binary_operator:Mod, call_argument:, composition, comprehension:Generator, comprehension_for_count:1, external_free_call:list, free_call:list, free_call_without_result:list, literal:List, literal:Str, member_call_member:chain, member_call_member:glob, node:Attribute, node:BinOp, node:Call, node:Expr, node:GeneratorExp, node:List, node:Name, node:Starred, node:Str, string_formatting_operator
 
 # ----------------------------------------------------------------------------------------
 # 178.2615-check-if-point-is-inside-rectangle.py
@@ -1368,7 +1368,7 @@ center = Point((x1 + x2) / 2, (y1 + y2) / 2) # addition_operator, assignment:Poi
 # 180.2612-list-files-in-directory.py
 # ----------------------------------------------------------------------------------------
 import os # import:os, import_module:os, node:Import, whole_span:2 (-> +1)
-x = os.listdir(d) # assignment:listdir, assignment_lhs_identifier:x, assignment_rhs_atom:d, assignment_rhs_atom:os, call_argument:d, member_call:listdir, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:x
+x = os.listdir(d) # assignment:listdir, assignment_lhs_identifier:x, assignment_rhs_atom:d, assignment_rhs_atom:os, call_argument:d, member_call_member:listdir, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:x
 
 # ----------------------------------------------------------------------------------------
 # 182.2658-quine-program.py
@@ -1384,27 +1384,27 @@ import requests # import:requests, import_module:requests, node:Import
 content_type = "text/plain" # assignment, assignment_lhs_identifier:content_type, literal:Str, node:Assign, node:Name, node:Str, single_assignment:content_type
 headers = {"Content-Type": content_type} # assignment, assignment_lhs_identifier:headers, assignment_rhs_atom:content_type, literal:Dict, literal:Str, node:Assign, node:Dict, node:Name, node:Str, single_assignment:headers
 data = {} # assignment, assignment_lhs_identifier:data, empty_literal:Dict, literal:Dict, node:Assign, node:Dict, node:Name, single_assignment:data
-r = requests.put(url, headers=headers, data=data) # assignment:put, assignment_lhs_identifier:r, assignment_rhs_atom:data, assignment_rhs_atom:headers, assignment_rhs_atom:requests, assignment_rhs_atom:url, call_argument:url, member_call:put, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:r
+r = requests.put(url, headers=headers, data=data) # assignment:put, assignment_lhs_identifier:r, assignment_rhs_atom:data, assignment_rhs_atom:headers, assignment_rhs_atom:requests, assignment_rhs_atom:url, call_argument:url, member_call_member:put, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:r
 status_code, content = r.status_code, r.content # assignment, assignment_lhs_identifier:content, assignment_lhs_identifier:status_code, assignment_rhs_atom:r, literal:Tuple, node:Assign, node:Attribute, node:Name, node:Tuple, parallel_assignment:2
 
 # ----------------------------------------------------------------------------------------
 # 184.2701-tomorrow.py
 # ----------------------------------------------------------------------------------------
 from datetime import date, timedelta # import:datetime:date, import:datetime:timedelta, import_module:datetime, import_name:date, import_name:timedelta, node:ImportFrom, whole_span:2 (-> +1)
-date.today() + timedelta(days=1) # addition_operator, binary_operator:Add, external_free_call:timedelta, free_call:timedelta, literal:1, member_call:today, node:Attribute, node:BinOp, node:Call, node:Expr, node:Name, node:Num
+date.today() + timedelta(days=1) # addition_operator, binary_operator:Add, external_free_call:timedelta, free_call:timedelta, literal:1, member_call_member:today, node:Attribute, node:BinOp, node:Call, node:Expr, node:Name, node:Num
 
 # ----------------------------------------------------------------------------------------
 # 185.2820-execute-function-in-30-seconds.py
 # ----------------------------------------------------------------------------------------
 import threading # import:threading, import_module:threading, node:Import, whole_span:3 (-> +2)
-timer = threading.Timer(30.0, f, args=(42,)) # assignment:Timer, assignment_lhs_identifier:timer, assignment_rhs_atom:30.0, assignment_rhs_atom:42, assignment_rhs_atom:f, assignment_rhs_atom:threading, call_argument:30.0, call_argument:f, literal:30.0, literal:42, literal:Tuple, member_call:Timer, node:Assign, node:Attribute, node:Call, node:Name, node:Num, node:Tuple, single_assignment:timer
-timer.start() # member_call:start, member_call_object:timer, member_call_without_result:start, node:Attribute, node:Call, node:Expr, node:Name
+timer = threading.Timer(30.0, f, args=(42,)) # assignment:Timer, assignment_lhs_identifier:timer, assignment_rhs_atom:30.0, assignment_rhs_atom:42, assignment_rhs_atom:f, assignment_rhs_atom:threading, call_argument:30.0, call_argument:f, literal:30.0, literal:42, literal:Tuple, member_call_member:Timer, node:Assign, node:Attribute, node:Call, node:Name, node:Num, node:Tuple, single_assignment:timer
+timer.start() # member_call:timer:start, member_call_member:start, member_call_object:timer, node:Attribute, node:Call, node:Expr, node:Name
 
 # ----------------------------------------------------------------------------------------
 # 186.2699-exit-program-cleanly.py
 # ----------------------------------------------------------------------------------------
 import sys # import:sys, import_module:sys, node:Import, whole_span:2 (-> +1)
-sys.exit(0) # call_argument:0, literal:0, member_call:exit, member_call_object:sys, member_call_without_result:exit, node:Attribute, node:Call, node:Expr, node:Name, node:Num
+sys.exit(0) # call_argument:0, literal:0, member_call:sys:exit, member_call_member:exit, member_call_object:sys, node:Attribute, node:Call, node:Expr, node:Name, node:Num
 
 # ----------------------------------------------------------------------------------------
 # 187.3261-disjoint-set.py
@@ -1417,13 +1417,13 @@ class UnionFind: # node:ClassDef (-> +14), whole_span:15 (-> +14)
         if self.p[i] == i: # comparison_operator:Eq, if (-> +4), if_test_atom:i, if_test_atom:self, index:i, node:Attribute, node:Compare, node:If (-> +4), node:Name, node:Subscript
             return i # if_then_branch, node:Name, node:Return, return:i
         else:
-            self.p[i] = self.find_set(self.p[i]) # assignment:find_set, assignment_rhs_atom:i, assignment_rhs_atom:self, call_argument:, if_else_branch (-> +1), index:i, member_call:find_set, node:Assign, node:Attribute, node:Call, node:Name, node:Subscript
+            self.p[i] = self.find_set(self.p[i]) # assignment:find_set, assignment_rhs_atom:i, assignment_rhs_atom:self, call_argument:, if_else_branch (-> +1), index:i, member_call_member:find_set, node:Assign, node:Attribute, node:Call, node:Name, node:Subscript
             return self.p[i] # index:i, node:Attribute, node:Name, node:Return, node:Subscript, return
     def is_same_set(self, i, j): # function:is_same_set (-> +1), function_argument:i, function_argument:j, function_argument:self, function_argument_flavor:arg, function_returning_something:is_same_set (-> +1), instance_method:is_same_set (-> +1), method:is_same_set (-> +1), node:FunctionDef (-> +1), node:arg
-        return self.find_set(i) == self.find_set(j) # call_argument:i, call_argument:j, comparison_operator:Eq, member_call:find_set, node:Attribute, node:Call, node:Compare, node:Name, node:Return, return
+        return self.find_set(i) == self.find_set(j) # call_argument:i, call_argument:j, comparison_operator:Eq, member_call_member:find_set, node:Attribute, node:Call, node:Compare, node:Name, node:Return, return
     def union_set(self, i, j): # function:union_set (-> +2), function_argument:i, function_argument:j, function_argument:self, function_argument_flavor:arg, function_returning_nothing:union_set (-> +2), instance_method:union_set (-> +2), method:union_set (-> +2), node:FunctionDef (-> +2), node:arg
-        if not self.is_same_set(i, j): # call_argument:i, call_argument:j, if (-> +1), if_test_atom:i, if_test_atom:j, if_test_atom:self, if_without_else (-> +1), member_call:is_same_set, node:Attribute, node:Call, node:If (-> +1), node:Name, node:UnaryOp, unary_operator:Not
-            x, y = self.find_set(i), self.find_set(j) # assignment, assignment_lhs_identifier:x, assignment_lhs_identifier:y, assignment_rhs_atom:i, assignment_rhs_atom:j, assignment_rhs_atom:self, call_argument:i, call_argument:j, if_then_branch, literal:Tuple, member_call:find_set, node:Assign, node:Attribute, node:Call, node:Name, node:Tuple, parallel_assignment:2
+        if not self.is_same_set(i, j): # call_argument:i, call_argument:j, if (-> +1), if_test_atom:i, if_test_atom:j, if_test_atom:self, if_without_else (-> +1), member_call_member:is_same_set, node:Attribute, node:Call, node:If (-> +1), node:Name, node:UnaryOp, unary_operator:Not
+            x, y = self.find_set(i), self.find_set(j) # assignment, assignment_lhs_identifier:x, assignment_lhs_identifier:y, assignment_rhs_atom:i, assignment_rhs_atom:j, assignment_rhs_atom:self, call_argument:i, call_argument:j, if_then_branch, literal:Tuple, member_call_member:find_set, node:Assign, node:Attribute, node:Call, node:Name, node:Tuple, parallel_assignment:2
 
 # ----------------------------------------------------------------------------------------
 # 188.3171-matrix-multiplication.py
@@ -1435,7 +1435,7 @@ c = a @ b # assignment:MatMult, assignment_lhs_identifier:c, assignment_rhs_atom
 # 188.3284-matrix-multiplication.py
 # ----------------------------------------------------------------------------------------
 import numpy as np # import:numpy, import_module:numpy, node:Import, whole_span:2 (-> +1)
-c = np.matmul(a, b) # assignment:matmul, assignment_lhs_identifier:c, assignment_rhs_atom:a, assignment_rhs_atom:b, assignment_rhs_atom:np, call_argument:a, call_argument:b, member_call:matmul, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:c
+c = np.matmul(a, b) # assignment:matmul, assignment_lhs_identifier:c, assignment_rhs_atom:a, assignment_rhs_atom:b, assignment_rhs_atom:np, call_argument:a, call_argument:b, member_call_member:matmul, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:c
 
 # ----------------------------------------------------------------------------------------
 # 189.3236-filter-and-transform-list.py
@@ -1452,4 +1452,4 @@ if any(v > x for v in a): # call_argument:, comparison_operator:Gt, comprehensio
 # 197.3457-get-a-list-of-lines-from-a-file.py
 # ----------------------------------------------------------------------------------------
 with open(path) as f: # call_argument:path, external_free_call:open, free_call:open, node:Call, node:Name, node:With (-> +1), whole_span:2 (-> +1)
-    lines = f.readlines() # assignment:readlines, assignment_lhs_identifier:lines, assignment_rhs_atom:f, member_call:readlines, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:lines
+    lines = f.readlines() # assignment:readlines, assignment_lhs_identifier:lines, assignment_rhs_atom:f, member_call_member:readlines, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:lines

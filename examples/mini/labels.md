@@ -219,8 +219,8 @@
 - loop_with_raise
 - loop_with_return
 - member_call
+- member_call_member
 - member_call_object
-- member_call_without_result
 - method
 - method_chaining
 - negate
