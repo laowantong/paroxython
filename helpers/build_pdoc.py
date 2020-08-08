@@ -315,7 +315,7 @@ def inject_taxonomy():
     index_path = Path("docs/docs_user_manual/index.html")
     text = index_path.read_text()
     data = """
-        type/boolean|1854
+        type/boolean|4
         type/boolean/literal/False|193
         type/boolean/literal/True|241
         type/non_sequence/dictionary|79

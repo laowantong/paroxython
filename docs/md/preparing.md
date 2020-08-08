@@ -1,8 +1,10 @@
 # Preparing your program collection
 
-## Names
+## Naming things
 
-Paroxython trusts you to follow the official [PEP 8 naming conventions](https://www.python.org/dev/peps/pep-0008/#naming-conventions). In a nutshell:
+### Capitalization
+
+Paroxython takes advantage of the official [PEP 8 naming conventions](https://www.python.org/dev/peps/pep-0008/#naming-conventions). In a nutshell:
 
 `lowercase_with_underscores`
 :   Variables, functions (in the broadest sense, including methods), modules, packages.
@@ -12,6 +14,29 @@ Paroxython trusts you to follow the official [PEP 8 naming conventions](https://
 
 `ALL_CAPITAL_LETTERS_WITH_UNDERSCORES`
 :   Constants, defined on a module level.
+
+For example, with a careless style like this:
+
+```python
+def ComputeSquare(x): # bad: CamelCase for a function name
+    return x * x
+
+FOO = 42
+FOO = ComputeSquare(FOO) # bad: redefinition of a constant
+```
+
+... Paroxython will wrongly detect two definitions of constants (`var/assignment/constant`) and the instanciation of a class (`call/class/constructor`). To make these false positives disappear, just write:
+
+
+```python
+def compute_square(x):
+    return x * x
+
+foo = 42
+foo = compute_square(foo)
+```
+
+### Leading and trailing underscores
 
 `_single_leading_underscore`
 :   Weak “internal use” indicator.
@@ -24,6 +49,43 @@ Paroxython trusts you to follow the official [PEP 8 naming conventions](https://
 
 `__double_leading_and_trailing_underscore__`
 :   "Magic" methods or attributes (never invent such names).
+
+### Common sense conventions
+
+When the name of a function returning a value starts with `"is_"`, `"are_"`, `"has_"`, `"have_"`, `"can_"`, `"must_"` or `"needs_"`, it is tagged as predicate (`"def/function/predicate"`):
+
+```python
+def is_even(n):
+    return n % 2
+```
+
+When the name of a function returning nothing starts or ends with `"test"` or `"tests"`, it is tagged as test (`"def/procedure/test"`):
+
+```python
+def test_is_even():
+    assert not is_even(42)
+    assert is_even(5)
+```
+
+### Beware of renaming built-ins
+
+It's never a good idea to reuse a [built-in function](https://docs.python.org/3/library/functions.html) name:
+
+```python
+max = 42 # bad: max() is a built-in function
+```
+
+In the same way, if you write classes, consider the names of the methods of the [built-in types](https://docs.python.org/3/library/stdtypes.html) as taboo. Paroxython relies on them to try guessing the type of objects to which they apply. For instance, in:
+
+```python
+def change_separator(s, old, new):
+    return new.join(s.split(old))
+```
+
+... nothing indicates that `s` is a `type/sequence/string` except from the call of its method `split()`.
+
+## Flow
+
 
 
 ## Manual hints

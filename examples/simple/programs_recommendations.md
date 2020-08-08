@@ -1,16 +1,16 @@
 # Table of contents
 - [`1 program of learning cost in [1, 2[`](#1-program-of-learning-cost-in-1-2)
     - [`09_indent.py`](#program-09_indentpy-learning-cost-153125)
-- [`3 programs of learning cost in [2, 4[`](#3-programs-of-learning-cost-in-2-4)
+- [`4 programs of learning cost in [2, 4[`](#4-programs-of-learning-cost-in-2-4)
     - [`08_arguments.py`](#program-08_argumentspy-learning-cost-2375)
-    - [`04_fibonacci.py`](#program-04_fibonaccipy-learning-cost-303125)
-    - [`20_prime_numbers.py`](#program-20_prime_numberspy-learning-cost-3375)
-- [`5 programs of learning cost in [4, 8[`](#5-programs-of-learning-cost-in-4-8)
-    - [`10_time.py`](#program-10_timepy-learning-cost-41875)
-    - [`21_xml_html_parsing.py`](#program-21_xml_html_parsingpy-learning-cost-446875)
-    - [`12_classes.py`](#program-12_classespy-learning-cost-49375)
-    - [`33_guess_the_number.py`](#program-33_guess_the_numberpy-learning-cost-55625)
-    - [`14_median.py`](#program-14_medianpy-learning-cost-59375)
+    - [`04_fibonacci.py`](#program-04_fibonaccipy-learning-cost-278125)
+    - [`20_prime_numbers.py`](#program-20_prime_numberspy-learning-cost-3125)
+    - [`10_time.py`](#program-10_timepy-learning-cost-39375)
+- [`4 programs of learning cost in [4, 8[`](#4-programs-of-learning-cost-in-4-8)
+    - [`21_xml_html_parsing.py`](#program-21_xml_html_parsingpy-learning-cost-421875)
+    - [`12_classes.py`](#program-12_classespy-learning-cost-50625)
+    - [`33_guess_the_number.py`](#program-33_guess_the_numberpy-learning-cost-53125)
+    - [`14_median.py`](#program-14_medianpy-learning-cost-56875)
 # Recommended programs
 
 ## 1 program of learning cost in [1, 2[
@@ -50,7 +50,7 @@
 
 ---
 
-## 3 programs of learning cost in [2, 4[
+## 4 programs of learning cost in [2, 4[
 
 ### Program `08_arguments.py` (learning cost 2.375)
 
@@ -80,7 +80,7 @@
 
 ---
 
-### Program `04_fibonacci.py` (learning cost 3.03125)
+### Program `04_fibonacci.py` (learning cost 2.78125)
 
 ```python
 1   parents, babies = (1, 1)
@@ -97,7 +97,6 @@
 | 0 | `flow/loop/exit/late` | 2-4 |
 | 0 | `flow/loop/while` | 2-4 |
 | 0.375 | `operator/arithmetic/addition` | 4 |
-| 0.25 | `type/boolean` | 2 |
 | 0.4375 | `type/number/integer/literal` | 1, 1, 2 |
 | 0 | `type/sequence/string` | 3 |
 | 0 | `type/sequence/string/literal` | 3 |
@@ -109,7 +108,7 @@
 
 ---
 
-### Program `20_prime_numbers.py` (learning cost 3.375)
+### Program `20_prime_numbers.py` (learning cost 3.125)
 
 ```python
 1   import itertools
@@ -140,7 +139,6 @@
 | 0 | `flow/loop/exit/late` | 4-7 |
 | 0 | `flow/loop/for` | 8-11 |
 | 0 | `flow/loop/while/infinite` | 4-7 |
-| 0.25 | `type/boolean` | 9 |
 | 0.4375 | `type/boolean/literal/True` | 4 |
 | 0.4375 | `type/number/integer/literal` | 3, 9 |
 | 0 | `type/sequence` | 3 |
@@ -150,9 +148,7 @@
 
 ---
 
-## 5 programs of learning cost in [4, 8[
-
-### Program `10_time.py` (learning cost 4.1875)
+### Program `10_time.py` (learning cost 3.9375)
 
 ```python
 1   from time import localtime
@@ -186,7 +182,6 @@
 | 0 | `flow/loop/exit/early/break/else` | 12-17 |
 | 0 | `flow/loop/for` | 12-17 |
 | 0.75 | `subscript/index` | 14 |
-| 0.25 | `type/boolean` | 13 |
 | 0.375 | `type/non_sequence/dictionary` | 12 |
 | 0.4375 | `type/non_sequence/dictionary/literal` | 2 |
 | 0.4375 | `type/number/integer/literal` | 3, 4, 5, 6, 7, 8 |
@@ -197,7 +192,9 @@
 
 ---
 
-### Program `21_xml_html_parsing.py` (learning cost 4.46875)
+## 4 programs of learning cost in [4, 8[
+
+### Program `21_xml_html_parsing.py` (learning cost 4.21875)
 
 ```python
 1   dinner_recipe = """<html><body><table>
@@ -228,7 +225,6 @@
 | 0 | `flow/loop/exit/late` | 11-14 |
 | 0 | `flow/loop/for` | 11-14 |
 | 0.375 | `operator/boolean/and` | 13 |
-| 0.25 | `type/boolean` | 13, 13 |
 | 0.4375 | `type/non_sequence/set/literal` | 10 |
 | 0 | `type/sequence/string` | 14 |
 | 0 | `type/sequence/string/literal` | 7, 10, 10, 11, 13, 14 |
@@ -240,7 +236,7 @@
 
 ---
 
-### Program `12_classes.py` (learning cost 4.9375)
+### Program `12_classes.py` (learning cost 5.0625)
 
 ```python
 1   class BankAccount(object):
@@ -259,6 +255,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
+| 0.375 | `call/class/constructor` | 10 |
 | 0.25 | `call/composition` | 12 |
 | 0.25 | `call/method` | 11, 12 |
 | 0.75 | `condition/inequality` | 9 |
@@ -269,7 +266,6 @@
 | 0.46875 | `def/method/naming/magic/__init__` | 2-3 |
 | 0 | `def/procedure` | 2-3, 4-5, 6-7 |
 | 0.375 | `def/return/something` | 9 |
-| 0.25 | `type/boolean` | 9 |
 | 0.4375 | `type/number/integer/literal` | 10, 11 |
 | 0.46875 | `type/number/integer/literal/zero` | 2, 9 |
 | 0 | `var/assignment` | 3 |
@@ -281,7 +277,7 @@
 
 ---
 
-### Program `33_guess_the_number.py` (learning cost 5.5625)
+### Program `33_guess_the_number.py` (learning cost 5.3125)
 
 ```python
 1   import random
@@ -320,7 +316,6 @@
 | 0 | `flow/loop/exit/early/break` | 6-14 |
 | 0 | `flow/loop/while` | 6-14 |
 | 0.9375 | `pattern/states/accumulate/count` | 6-14 |
-| 0.25 | `type/boolean` | 6, 9, 11, 13, 15 |
 | 0.375 | `type/number/integer` | 7 |
 | 0.4375 | `type/number/integer/literal` | 4, 4, 6, 8 |
 | 0.46875 | `type/number/integer/literal/zero` | 2 |
@@ -333,7 +328,7 @@
 
 ---
 
-### Program `14_median.py` (learning cost 5.9375)
+### Program `14_median.py` (learning cost 5.6875)
 
 ```python
 1   def median(pool):
@@ -362,7 +357,6 @@
 | 0.375 | `operator/arithmetic/modulo` | 4 |
 | 0.375 | `operator/arithmetic/substraction` | 5, 7 |
 | 0.75 | `subscript/index` | 5, 7, 7 |
-| 0.25 | `type/boolean` | 4 |
 | 0.375 | `type/number/integer` | 5, 7, 7 |
 | 0.4375 | `type/number/integer/literal` | 4, 4, 5, 5, 7, 7, 7, 7 |
 | 0 | `var/assignment/single` | 2, 3 |

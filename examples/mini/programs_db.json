@@ -104,7 +104,6 @@
         "operator/arithmetic/addition": [[7,7]],
         "operator/arithmetic/modulo": [[4,4]],
         "operator/arithmetic/multiplication": [[7,7]],
-        "type/boolean": [[2,2],[4,4]],
         "type/number/integer/literal": [[2,2],[4,4],[5,5],[7,7],[7,7]],
         "type/number/integer/literal/zero": [[4,4]],
         "var/assignment/conditional/verbose": [[4,7]],
@@ -179,7 +178,6 @@
         "meta/program": [[1,10]],
         "meta/sloc/10": [[1,10]],
         "operator/arithmetic/modulo": [[3,3],[5,5],[7,7]],
-        "type/boolean": [[3,3],[5,5],[7,7]],
         "type/number/integer/literal": [[2,2],[2,2],[3,3],[5,5],[7,7]],
         "type/number/integer/literal/zero": [[3,3],[5,5],[7,7]],
         "type/sequence/string/literal": [[4,4],[6,6],[8,8]]
@@ -222,7 +220,6 @@
         "meta/program": [[1,3]],
         "meta/sloc/3": [[1,3]],
         "operator/arithmetic/modulo": [[3,3]],
-        "type/boolean": [[3,3]],
         "type/number/integer/literal": [[3,3]],
         "type/number/integer/literal/zero": [[3,3]]
       }
@@ -672,11 +669,6 @@
     ],
     "operator/arithmetic/multiplication": [
       "collatz.py"
-    ],
-    "type/boolean": [
-      "collatz.py",
-      "fizzbuzz.py",
-      "is_even.py"
     ],
     "type/number/integer/literal": [
       "collatz.py",

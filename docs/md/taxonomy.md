@@ -43,14 +43,13 @@ This comes[^tree_sql] straight from the tagging of the public repository [The Al
 
 Paroxython does not directly produce these taxa. Remember, a program is first tagged with labels (as specified in [`spec.md`](https://repo/paroxython/resources/spec.md)), which are then translated into taxa by a purely morphological operation (search and replace), without any more reference to the original source code.
 
-### 1-1 and N-1 mappings
+### 1-1 mappings
 
 Suppose a program has been tagged with the labels:
 
 - `literal:True` (the constant `True`).
 - `literal:False` (the constant `False`).
 - `external_free_call:bool` (a call to the built-in function `bool()`).
-- `node:Compare` (a comparison[^compare] expression).
 
 [^compare]:
     On a side note: in the AST, an expression like `a < b < c` counts for **one** (chained) comparison.
@@ -62,26 +61,25 @@ Taxa (replacement patterns)    | Labels (search patterns)
 `type/boolean/literal/True`	| `literal:True`
 `type/boolean/literal/False` | `literal:False`
 `type/boolean` | `external_free_call:bool`
-`type/boolean` | `node:Compare`
 
 Note that, somewhat counterintuitively, the conversion goes from right to left. Each line consists of a taxon tab-separated from a label. It is interpreted as “when a program features this label, create that taxon with the same spanning lines”.
 
-- The first two rows are 1-1 mappings: each one translates one label into one taxon.
-- The last two rows constitute an N-1 mapping: they translate two distinct labels into a single taxon.
+All of these rows define 1-1 mappings: each one translates one label into one taxon.
 
-The previous table extract represents the simplest case, where both taxon and label patterns are literal (they don't contain any metacharacter, more on that below).
+### N-1 mappings
 
-### 1-0 mapping
+The previous table extract represents the simplest case, where both taxon and label patterns are literal. Below, the second label pattern is a non-literal [regular expression](https://en.wikipedia.org/wiki/Regular_expression):
 
-At first glance, some of the labels generated during the first step seem redundant, e.g. `"binary_operator:Add"` and `"addition_operator"`. In fact, the former was used to calculate the latter. In [`spec.md`](https://repo/paroxython/resources/spec.md), the definition of `"addition_operator"` is introduced by:
+Taxa (replacement patterns)    | Labels (search patterns)
+:------------------------------|:-----------------------
+`type/sequence/list` | `external_free_call:list`
+`type/sequence/list` | `member_call_member:(append|extend|insert|reverse|sort)`
 
-> An addition operator is a binary operator `Add` which has not be classified as a concatenation operator.
-
-This is a good example of a label for internal use only. In the conversion step, it will be simply ignored (i.e., it has no entry in the taxonomy).
+It defines a 5-1 mapping, which converts five possible labels (`member_call_member:append`, `member_call_member:extend`, and so on) into a single taxon (the metacharacter `"|"` meaning “or”). These two rows thus constitute a 6-1 mapping.
 
 ### 1-N mapping
 
-When a source code is, say, 42 lines long, it is tagged with the label `"whole_span:42"`. This is an example of a label which produces two taxa: `"meta/program"` and `"meta/sloc/42"`. Both span the whole program and, although it is not obvious, both have their uses:
+When a source code is, say, 42 lines long, it is tagged with the label `"whole_span:42"`. This is an example of a single label which produces two taxa: `"meta/program"` and `"meta/sloc/42"`. Both span the whole program and, although it is not obvious, both have their uses:
 
 - The first one is common to all programs, and provides an invariable access key to an all-encompassing span. In a command pipeline, it can be used to [express the absence of a taxon](#expressing-the-absence-of-a-taxon).
 - The second one has a variable part, and can be used to filter programs by [size](https://en.wikipedia.org/wiki/Source_lines_of_code) (for example, in `paroxython.recommend_programs`, the pattern `"meta/sloc/[1-4]?[0-9]"` will be used to filter out the programs that have 50 lines or more).
@@ -93,7 +91,25 @@ Taxa (replacement patterns)    | Labels (search patterns)
 `meta/program` | `whole_span:.+`
 `meta/sloc/\1` | `whole_span:(.+)`
 
-As you may have guessed, the right colum can contain [regular expressions](https://en.wikipedia.org/wiki/Regular_expression). On the first row, the sequence of _metacharacters_ `".+"` means: “eat all the characters up to the end of the line.” On the second row, the added parentheses also _captures_ these characters: they are restituted in the replacement pattern by `"\1"`, which denotes a [_backreference_](https://docs.python.org/3/library/re.html#re.sub) to the first captured group.
+On the first row, the sequence of metacharacters `".+"` means: “eat all you can up to the end of the line.” On the second row, the added parentheses also _captures_ these characters: they are restituted in the replacement pattern by `"\1"`, which denotes a [_backreference_](https://docs.python.org/3/library/re.html#re.sub) to the first captured group.
+
+Another example could be:
+
+Taxa (replacement patterns)    | Labels (search patterns)
+:------------------------------|:-----------------------
+`type/sequence/list` | `member_call_member:(append|extend|insert|reverse|sort)`
+`call/method/sequence/list/\1` | `member_call_member:(append|extend|insert|reverse|sort)`
+
+... which means: when you encounter a label `member_call_member:sort` (for instance), that means the program features a list and a call to the `sort()` method.
+
+### 1-0 mapping
+
+At first glance, some of the labels generated during the first tagging step seem redundant, e.g. `"binary_operator:Add"` and `"addition_operator"`. In fact, the former was used to calculate the latter. In [`spec.md`](https://repo/paroxython/resources/spec.md), the definition of `"addition_operator"` is introduced by:
+
+> An addition operator is a binary operator `Add` which has not be classified as a concatenation operator.
+
+This is a good example of a label for internal use only. In the conversion step, it will be simply ignored (i.e., it has no entry in the taxonomy).
+
 
 ## Back to the roots
 
@@ -110,11 +126,11 @@ All of these could be enough to describe pure functional programs, at least theo
 print("hello, world")
 ```
 
-For these reasons, choosing to root our taxonomy in the four basic notions of the typed lambda calculus should be seen more as a tribute than a formal commitment. For instance, like it or not, `var` will essentially bring together everything relating to the concept of assignment; `def` will accommodate not only lambda functions, but named ones, methods, generators and even classes, defined in place or by importation; `call` will cover any call to anything with a `__call__()` method, which Python calls a callable (sorry); finally, `type` will welcome all types, without distinction of mutability.
+For these reasons, choosing to root our taxonomy in the four basic notions of the typed lambda calculus should be seen more as a tribute than a formal commitment. For instance, like it or not, `var` will essentially bring together everything relating to the concept of assignment; `def` will accommodate not only lambda functions, but named ones, methods, generators and even classes, defined in place or by importation; `call` will cover any call to anything with a `__call__()` method, which Python calls a callable (sorry); finally, `type` will welcome all types, no purity required.
 
 ### Imperative needs: `flow`
 
-The imperative nature of Python requires us to introduce the concept of control `flow`, under which we put the loops, the conditionals, and some other animals[^sequence].
+The imperative nature of Python demands that we introduce the concept of control `flow`, under which we put the loops, the conditionals, and some other animals[^sequence].
 
 [^sequence]:
     The sequence control flow is an exception. As it characterizes the imperative paradigm more than this or that program, it will deliberately be excluded from the features searched by Paroxython.
@@ -136,14 +152,15 @@ Paroxython will store inside the `meta` tree some program metadata, such as the 
 
 ## Understanding the taxonomy
 
-backref
+TODO
 
 ```plain
 def/argument/\1           function_argument_flavor:(.+)
 ```
 
-
 ## Modifying the taxonomy
+
+### Preliminaries
 
 We suggest you start by copying the default [`taxonomy.tsv`](https://repo/paroxython/resources/taxonomy.tsv) at the same level as the `src` folder that contains your Python programs:
 
@@ -163,3 +180,7 @@ paroxython collect programming_101/src
 ```
 
 You are encouraged to experiment on this copy according to your requirements and your taste.
+
+### Workflow
+
+TODO

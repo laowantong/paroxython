@@ -1,8 +1,8 @@
 Taxa (replacement patterns)	Labels (search patterns)
-call/class/constructor	external_free_call:(?!(?:BaseException|SystemExit|KeyboardInterrupt|GeneratorExit|Exception|StopIteration|StopAsyncIteration|ArithmeticError|FloatingPointError|OverflowError|ZeroDivisionError|AssertionError|AttributeError|BufferError|EOFError|ImportError|ModuleNotFoundError|LookupError|IndexError|KeyError|MemoryError|NameError|UnboundLocalError|OSError|BlockingIOError|ChildProcessError|ConnectionError|BrokenPipeError|ConnectionAbortedError|ConnectionRefusedError|ConnectionResetError|FileExistsError|FileNotFoundError|InterruptedError|IsADirectoryError|NotADirectoryError|PermissionError|ProcessLookupError|TimeoutError|ReferenceError|RuntimeError|NotImplementedError|RecursionError|SyntaxError|IndentationError|TabError|SystemError|TypeError|ValueError|UnicodeError|UnicodeDecodeError|UnicodeEncodeError|UnicodeTranslateError|Warning|DeprecationWarning|PendingDeprecationWarning|RuntimeWarning|SyntaxWarning|UserWarning|FutureWarning|ImportWarning|UnicodeWarning|BytesWarning|ResourceWarning))([[:upper:]].*)
+call/class/constructor	(in|ex)ternal_free_call:(?!(?:BaseException|SystemExit|KeyboardInterrupt|GeneratorExit|Exception|StopIteration|StopAsyncIteration|ArithmeticError|FloatingPointError|OverflowError|ZeroDivisionError|AssertionError|AttributeError|BufferError|EOFError|ImportError|ModuleNotFoundError|LookupError|IndexError|KeyError|MemoryError|NameError|UnboundLocalError|OSError|BlockingIOError|ChildProcessError|ConnectionError|BrokenPipeError|ConnectionAbortedError|ConnectionRefusedError|ConnectionResetError|FileExistsError|FileNotFoundError|InterruptedError|IsADirectoryError|NotADirectoryError|PermissionError|ProcessLookupError|TimeoutError|ReferenceError|RuntimeError|NotImplementedError|RecursionError|SyntaxError|IndentationError|TabError|SystemError|TypeError|ValueError|UnicodeError|UnicodeDecodeError|UnicodeEncodeError|UnicodeTranslateError|Warning|DeprecationWarning|PendingDeprecationWarning|RuntimeWarning|SyntaxWarning|UserWarning|FutureWarning|ImportWarning|UnicodeWarning|BytesWarning|ResourceWarning))([[:upper:]].*)
 call/composition	composition
 call/exception/builtin/\1	external_free_call:(BaseException|SystemExit|KeyboardInterrupt|GeneratorExit|Exception|StopIteration|StopAsyncIteration|ArithmeticError|FloatingPointError|OverflowError|ZeroDivisionError|AssertionError|AttributeError|BufferError|EOFError|ImportError|ModuleNotFoundError|LookupError|IndexError|KeyError|MemoryError|NameError|UnboundLocalError|OSError|BlockingIOError|ChildProcessError|ConnectionError|BrokenPipeError|ConnectionAbortedError|ConnectionRefusedError|ConnectionResetError|FileExistsError|FileNotFoundError|InterruptedError|IsADirectoryError|NotADirectoryError|PermissionError|ProcessLookupError|TimeoutError|ReferenceError|RuntimeError|NotImplementedError|RecursionError|SyntaxError|IndentationError|TabError|SystemError|TypeError|ValueError|UnicodeError|UnicodeDecodeError|UnicodeEncodeError|UnicodeTranslateError|Warning|DeprecationWarning|PendingDeprecationWarning|RuntimeWarning|SyntaxWarning|UserWarning|FutureWarning|ImportWarning|UnicodeWarning|BytesWarning|ResourceWarning)
-call/function	internal_free_call:[[:lower:]].*
+call/function	(in|ex)ternal_free_call:[[:lower:]].*
 call/function/builtin/\1	external_free_call:(abs|delattr|hash|memoryview|all|help|min|setattr|any|dir|hex|next|slice|ascii|divmod|id|object|sorted|bin|enumerate|input|oct|staticmethod|eval|open|breakpoint|exec|isinstance|ord|sum|filter|issubclass|pow|super|iter|print|callable|format|len|property|type|chr|range|vars|classmethod|getattr|locals|repr|zip|compile|globals|map|reversed|__import__|hasattr|max|round)
 call/function/builtin/casting/\1	external_free_call:(int|bool|float|complex|str|tuple|bytes|list|bytearray|set|frozenset|dict)
 call/function/without_arguments	free_call_without_arguments:[[:lower:]].*
@@ -12,6 +12,7 @@ call/method/chaining	method_chaining
 call/method/non_sequence/dictionary/\1	member_call_member:(fromkeys|get|items|keys|popitem|setdefault|values)
 call/method/non_sequence/set/\1	member_call_member:(add|difference|difference_update|discard|intersection|intersection_update|isdisjoint|issubset|issuperset|symmetric_difference|symmetric_difference_update|union)
 call/method/number/\1	member_call_member:(as_integer_ratio|bit_length|conjugate|denominator|from_bytes|imag|is_integer|numerator|real|to_bytes)
+call/method/pop	member_call_member:pop
 call/method/sequence/\1	member_call_member:(count|index)
 call/method/sequence/list/\1	member_call_member:(append|extend|insert|reverse|sort)
 call/method/sequence/string/\1	member_call_member:(capitalize|casefold|center|encode|endswith|expandtabs|find|format|format_map|isalnum|isalpha|isascii|isdecimal|isdigit|isidentifier|islower|isnumeric|isprintable|isspace|istitle|isupper|join|ljust|lower|lstrip|maketrans|partition|replace|rfind|rindex|rjust|rpartition|rsplit|rstrip|split|splitlines|startswith|strip|swapcase|title|translate|upper|zfill)
@@ -33,7 +34,7 @@ def/class	node:ClassDef
 def/decorated	decorated_function:.+
 def/function	function_returning_something:.+
 def/function/anonymous	node:Lambda
-def/function/predicate	function:(is|are|has|have|can|must|needs)_.+
+def/function/predicate	function_returning_something:(is|are|has|have|can|must|needs)_.+
 def/generator	generator:.+
 def/higher_order	higher_order_function:.+
 def/import/personal	import_internally:.*
@@ -46,19 +47,18 @@ def/method/flavor/instance	instance_method:.+
 def/method/flavor/static	static_method:.+
 def/method/naming/avoid_conflict	method:.+_(?>!_)
 def/method/naming/internal_use	method:_(?!_).+
-def/method/naming/internal_use/name_mangling	method:__.+(?<!__)
+def/method/naming/internal_use/mangling	method:__.+(?<!__)
 def/method/naming/magic/\1	method:(__.+__)
 def/nested	nested_function:.+
 def/nested/closure	closure:.+
 def/procedure	function_returning_nothing:.+
+def/procedure/test	function_returning_nothing:(.+_tests?|test_.+)
 def/recursive	recursive_function:.+
 def/recursive/body	body_recursive_function:.+
 def/recursive/deep	deeply_recursive_function:.+
 def/recursive/tail	tail_recursive_function:.+
 def/return/nothing	return:None
 def/return/something	return\b(?!:None\b)
-def/test	function:.+_tests?
-def/test	function:test_.+
 flow/assertion	node:Assert
 flow/conditional	if
 flow/conditional/else	if_else_branch
@@ -164,7 +164,6 @@ subscript/slice/step	slice:.*:.*:(?!-).+
 subscript/slice/step/backwards	slice:.*:.*:-.+
 subscript/slice/stop	slice:.*:.+:.*
 type/boolean	external_free_call:bool
-type/boolean	node:Compare
 type/boolean/literal/False	literal:False
 type/boolean/literal/True	literal:True
 type/non_sequence/dictionary	external_free_call:dict
