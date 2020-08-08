@@ -41,8 +41,8 @@
       - [Feature `internal_free_call` (SQL)](#feature-internal_free_call)
       - [Feature `external_free_call` (SQL)](#feature-external_free_call)
     - [Calls of the form `identifier.callable(arguments)`](#calls-of-the-form-identifiercallablearguments)
-      - [Feature `member_call`](#feature-member_call)
-      - [Feature `member_call_without_result`](#feature-member_call_without_result)
+      - [Feature `member_call_member`](#feature-member_call_member)
+      - [Feature `member_call` (SQL)](#feature-member_call)
       - [Feature `member_call_object`](#feature-member_call_object)
       - [Feature `method_chaining`](#feature-method_chaining)
   - [Iterables](#iterables)
@@ -1462,7 +1462,7 @@ We use the term _free call_, as opposed to _member call_ (dot notation).
 2   bar()
 3   buzz(x, 2)
 4   fizz(foobar(x), 2)
-5   baz.qux() # no match, see feature member_call
+5   baz.qux() # no match, see feature member_call_member
 ```
 
 ##### Matches
@@ -1712,10 +1712,11 @@ In Python, `identifier` can be the name of:
 
 --------------------------------------------------------------------------------
 
-#### Feature `member_call`
+#### Feature `member_call_member`
 
 ##### Derivations
 
+[⬇️ feature `member_call`](#feature-member_call)  
 [⬇️ feature `update_by_member_call`](#feature-update_by_member_call)  
 [⬇️ feature `update_by_member_call_with`](#feature-update_by_member_call_with)  
 
@@ -1739,36 +1740,41 @@ In Python, `identifier` can be the name of:
 
 | Label | Lines |
 |:--|:--|
-| `member_call:index` | 1 |
+| `member_call_member:index` | 1 |
 
 --------------------------------------------------------------------------------
 
-#### Feature `member_call_without_result`
+#### Feature `member_call`
+
+##### Derivations
+
+[⬆️ feature `member_call_member`](#feature-member_call_member)  
+[⬆️ feature `member_call_object`](#feature-member_call_object)  
 
 ##### Specification
 
-```re
-^(.*/(?:body|orelse|loopelse)/\d+)/_type=Expr
-\n(?:\1.+\n)*?\1                  /value/_type=Call
-\n(?:\1.+\n)*?\1                  /value/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1                  /value/func/attr=(?P<SUFFIX>.+)
+```sql
+SELECT "member_call",
+       o.name_suffix || ":" || m.name_suffix,
+       o.span,
+       o.path
+FROM t_member_call_object AS o
+JOIN t_member_call_member AS m ON (o.path GLOB m.path || "*-")
 ```
 
 ##### Example
 
 ```python
-1   a = foo(a, b, c) # no match
-2   return bar() # no match
-3   1 + buzz(x, 2) # no match
-4   fizz(foobar(x), 2) # no match
-5   baz.qux() # match
+1   foo.append(a)
+2   seq.append(int(s))
 ```
 
 ##### Matches
 
 | Label | Lines |
 |:--|:--|
-| `member_call_without_result:qux` | 5 |
+| `member_call:foo:append` | 1 |
+| `member_call:seq:append` | 2 |
 
 --------------------------------------------------------------------------------
 
@@ -1776,6 +1782,7 @@ In Python, `identifier` can be the name of:
 
 ##### Derivations
 
+[⬇️ feature `member_call`](#feature-member_call)  
 [⬇️ feature `update_by_member_call`](#feature-update_by_member_call)  
 
 ##### Specification
@@ -1793,6 +1800,7 @@ In Python, `identifier` can be the name of:
 1   seq.index(42)
 2   foo(bar)  # no match
 3   seq.index # no match
+4   a.b.c() # no match
 ```
 
 ##### Matches
@@ -2494,7 +2502,7 @@ The method must mutate the object it is applied on. Obviously, only a handful of
 ##### Derivations
 
 [⬆️ feature `call_argument`](#feature-call_argument)  
-[⬆️ feature `member_call`](#feature-member_call)  
+[⬆️ feature `member_call_member`](#feature-member_call_member)  
 [⬆️ feature `member_call_object`](#feature-member_call_object)  
 [⬇️ feature `update`](#feature-update)  
 [⬇️ feature `update_by_member_call_with`](#feature-update_by_member_call_with)  
@@ -2506,7 +2514,7 @@ SELECT "update_by_member_call",
        lhs_acc.name_suffix || ":" || rhs_var.name_suffix,
        op.span,
        op.path
-FROM t_member_call AS op
+FROM t_member_call_member AS op
 JOIN t_member_call_object AS lhs_acc ON (lhs_acc.path GLOB op.path || "*-")
 JOIN t_call_argument AS rhs_var ON (rhs_var.path GLOB op.path || "*-")
 WHERE rhs_var.name_suffix != ""
@@ -2685,7 +2693,7 @@ GROUP BY path
 
 ##### Derivations
 
-[⬆️ feature `member_call`](#feature-member_call)  
+[⬆️ feature `member_call_member`](#feature-member_call_member)  
 [⬆️ feature `update_by_member_call`](#feature-update_by_member_call)  
 [⬇️ feature `update_with`](#feature-update_with)  
 
@@ -2696,7 +2704,7 @@ SELECT "update_by_member_call_with",
        op.name_suffix,
        op.span,
        op.path
-FROM t_member_call AS op
+FROM t_member_call_member AS op
 JOIN t_update_by_member_call USING (path)
 GROUP BY op.path
 ```
