@@ -90,7 +90,7 @@ class LearningCostAssessor:
 
     @lru_cache(maxsize=None)
     def taxon_cost(self, taxon: TaxonName) -&gt; float:
-        if taxon.startswith(&#34;metadata/&#34;):
+        if taxon.startswith(&#34;meta/&#34;):
             return 0
         (start, stop) = (0, 0)
         if taxon not in self.imparted_knowledge:
@@ -191,7 +191,7 @@ def range_to_cost_zeno(start: int, stop: int) -&gt; float:
 
     @lru_cache(maxsize=None)
     def taxon_cost(self, taxon: TaxonName) -&gt; float:
-        if taxon.startswith(&#34;metadata/&#34;):
+        if taxon.startswith(&#34;meta/&#34;):
             return 0
         (start, stop) = (0, 0)
         if taxon not in self.imparted_knowledge:
@@ -274,7 +274,7 @@ def range_to_cost_zeno(start: int, stop: int) -&gt; float:
 assessment function.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The learning cost of a taxon prefixed by <code>"metadata/"</code> is assumed to be zero.</p>
+<p>The learning cost of a taxon prefixed by <code>"meta/"</code> is assumed to be zero.</p>
 </div></div>
 <details class="source">
 <summary>
@@ -283,7 +283,7 @@ assessment function.</p>
 </summary>
 <pre><code class="python">@lru_cache(maxsize=None)
 def taxon_cost(self, taxon: TaxonName) -&gt; float:
-    if taxon.startswith(&#34;metadata/&#34;):
+    if taxon.startswith(&#34;meta/&#34;):
         return 0
     (start, stop) = (0, 0)
     if taxon not in self.imparted_knowledge:

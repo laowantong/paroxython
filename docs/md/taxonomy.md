@@ -110,7 +110,7 @@ All of these could be enough to describe pure functional programs, at least theo
 print("hello, world")
 ```
 
-For these reasons, choosing to root our taxonomy in the four basic notions of the typed lambda calculus should be seen more as a tribute than a formal commitment. For instance, like it or not, `var` will essentially bring together everything relating to the concept of assignment; `def` will accommodate not only lambda functions, but named ones, methods, generators and even classes; `call` will cover any call to anything with a `__call__()` method, which Python calls a callable (sorry); finally, `type` will welcome all types, without distinction of mutability.
+For these reasons, choosing to root our taxonomy in the four basic notions of the typed lambda calculus should be seen more as a tribute than a formal commitment. For instance, like it or not, `var` will essentially bring together everything relating to the concept of assignment; `def` will accommodate not only lambda functions, but named ones, methods, generators and even classes, defined in place or by importation; `call` will cover any call to anything with a `__call__()` method, which Python calls a callable (sorry); finally, `type` will welcome all types, without distinction of mutability.
 
 ### Imperative needs: `flow`
 
@@ -121,14 +121,10 @@ The imperative nature of Python requires us to introduce the concept of control 
 
 ### For your convenience: `operator`, `condition`, `subscript`
 
-Again, those are mainly practical choices. After all, an `operator` is nothing more than an unassuming function (`def`) with a funny name and a funny syntax. And a `condition`[^condition], a combination of function applications (`call`) which happens to evaluate to a particular `type`. As for the creation of the root `subscript`, it comes from the observation that an lot of exciting programs can be written with sequences before venturing out to direct access (that is, as long as we treat Python lists as [lists](https://en.wikipedia.org/wiki/List_(abstract_data_type)) and not [arrays](https://en.wikipedia.org/wiki/Array_data_structure)). Not that in our default taxonomy, `subscript` includes slicing and dictionary access too.
+Again, those are mainly practical choices. After all, an `operator` is nothing more than an unassuming function call with a funny name and a funny syntax. And a `condition`[^condition], a combination of function calls which happens to evaluate to a particular `type`. As for the creation of the root `subscript`, it comes from the observation that an lot of exciting programs can be written with sequences before venturing out to direct access (that is, as long as we treat Python lists as [lists](https://en.wikipedia.org/wiki/List_(abstract_data_type)) and not [arrays](https://en.wikipedia.org/wiki/Array_data_structure)). Not that in our default taxonomy, `subscript` includes slicing and dictionary access too.
 
 [^condition]:
     A _condition_ is a boolean expression, not to be confused with a _conditional_ (control structure).
-
-### Imports: `library`
-
-Everything that's imported lands here. Paroxython can tell the difference between standard, third-party and homemade modules.
 
 ### Zooming out: `pattern`
 

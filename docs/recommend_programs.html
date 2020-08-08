@@ -228,7 +228,7 @@ class Recommendations:
                 contents.append(&#34;|&#34; + &#34;----|&#34; * 3)
                 items = sorted(
                     program_info[&#34;taxa&#34;].items(),
-                    key=lambda x: f&#34;~{x[0]}&#34; if x[0].startswith(&#34;metadata/&#34;) else x[0],
+                    key=lambda x: f&#34;~{x[0]}&#34; if x[0].startswith(&#34;meta/&#34;) else x[0],
                 )
                 for (taxon_name, spans) in items:
                     if taxon_name in self.hidden_taxa:
@@ -429,7 +429,7 @@ if __name__ == &#34;__main__&#34;:
                 contents.append(&#34;|&#34; + &#34;----|&#34; * 3)
                 items = sorted(
                     program_info[&#34;taxa&#34;].items(),
-                    key=lambda x: f&#34;~{x[0]}&#34; if x[0].startswith(&#34;metadata/&#34;) else x[0],
+                    key=lambda x: f&#34;~{x[0]}&#34; if x[0].startswith(&#34;meta/&#34;) else x[0],
                 )
                 for (taxon_name, spans) in items:
                     if taxon_name in self.hidden_taxa:
@@ -490,7 +490,7 @@ under the name <code>"{base_path}"</code>. Defaults to <code>None</code>.</dd>
 <h2 id="warning">Warning</h2>
 <p><code>db</code> is modified by side-effect. After initialization, the taxa of some programs have
 been augmented with the taxa of those they import, associated with an empty list of
-spans. Exception: the taxa starting with <code>"metadata/"</code> are not imported.</p></div>
+spans. Exception: the taxa starting with <code>"meta/"</code> are not imported.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -717,7 +717,7 @@ be interpreted.</dd>
             contents.append(&#34;|&#34; + &#34;----|&#34; * 3)
             items = sorted(
                 program_info[&#34;taxa&#34;].items(),
-                key=lambda x: f&#34;~{x[0]}&#34; if x[0].startswith(&#34;metadata/&#34;) else x[0],
+                key=lambda x: f&#34;~{x[0]}&#34; if x[0].startswith(&#34;meta/&#34;) else x[0],
             )
             for (taxon_name, spans) in items:
                 if taxon_name in self.hidden_taxa:

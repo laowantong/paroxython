@@ -98,7 +98,7 @@ class ProgramFilter:
         for (exporter, importers) in self.db_exportations.items():
             exported_taxa = list(self.db_programs[exporter][&#34;taxa&#34;])
             for exported_taxon in exported_taxa:
-                if exported_taxon.startswith(&#34;metadata/&#34;):
+                if exported_taxon.startswith(&#34;meta/&#34;):
                     continue
                 for importer in importers:
                     importer_taxa = self.db_programs[importer][&#34;taxa&#34;]
@@ -369,7 +369,7 @@ class ProgramFilter:
         for (exporter, importers) in self.db_exportations.items():
             exported_taxa = list(self.db_programs[exporter][&#34;taxa&#34;])
             for exported_taxon in exported_taxa:
-                if exported_taxon.startswith(&#34;metadata/&#34;):
+                if exported_taxon.startswith(&#34;meta/&#34;):
                     continue
                 for importer in importers:
                     importer_taxa = self.db_programs[importer][&#34;taxa&#34;]
@@ -632,8 +632,8 @@ class ProgramFilter:
         &quot;fizzbuzz.py&quot;: {
             ...
             &quot;taxa&quot;: {
-                &quot;appli/function/builtin/print&quot;: [[4,4],[6,6],[8,8],[10,10]],
-                &quot;appli/function/builtin/range&quot;: [[2,2]],
+                &quot;call/function/builtin/print&quot;: [[4,4],[6,6],[8,8],[10,10]],
+                &quot;call/function/builtin/range&quot;: [[2,2]],
                 &quot;flow/conditional&quot;: [[3,10],[5,10],[7,10]],
                 ...
 </code></pre>
@@ -642,8 +642,8 @@ with the taxa which are featured <em>indirectly</em>, namely those featured by t
 programs. For instance, assuming that <code>fizzbuzz.py</code> imports <code>collatz.py</code>, we must
 copy the taxa featured by the latter, but not by the former program, namely:</p>
 <pre><code>                &quot;operator/arithmetic/multiplication&quot;: [],
-                &quot;abstr/argument/arg&quot;: [],
-                &quot;abstr/procedure&quot;: [],
+                &quot;def/argument/arg&quot;: [],
+                &quot;def/procedure&quot;: [],
                 ...
 </code></pre>
 <h2 id="notes">Notes</h2>
@@ -651,7 +651,7 @@ copy the taxa featured by the latter, but not by the former program, namely:</p>
 <li>The spans of the imported taxa are not copied, but replaced by an empty list (it is
 enough to know that a certain taxon is only featured by an imported program, not on
 which lines of which program).</li>
-<li>All imported taxa starting with <code>"metadata/"</code> are by convention excluded from the
+<li>All imported taxa starting with <code>"meta/"</code> are by convention excluded from the
 copy.</li>
 </ul></div>
 <details class="source">
@@ -663,7 +663,7 @@ copy.</li>
     for (exporter, importers) in self.db_exportations.items():
         exported_taxa = list(self.db_programs[exporter][&#34;taxa&#34;])
         for exported_taxon in exported_taxa:
-            if exported_taxon.startswith(&#34;metadata/&#34;):
+            if exported_taxon.startswith(&#34;meta/&#34;):
                 continue
             for importer in importers:
                 importer_taxa = self.db_programs[importer][&#34;taxa&#34;]

@@ -163,10 +163,10 @@ This should print `"paroxython 0.4.4 loaded."`. Run it on a cell of Python code 
 
 | Taxon | Lines |
 |:--|:--|
+| `call/method/sequence/list/append` | 6 |
+| `condition/inequality` | 5 |
 | `def/argument/arg` | 2 |
 | `def/function` | 2-8 |
-| `call/method/append` | 6 |
-| `condition/inequality` | 5 |
 | `flow/loop/exit/late` | 5-7 |
 | `flow/loop/while` | 5-7 |
 | `meta/program` | 2-8 |

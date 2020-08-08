@@ -526,11 +526,11 @@ As an associative list, it only allows O(n) lookups a given label pattern.</li>
 <div class="desc"><p>Translate a label name into a list of taxon names.</p>
 <h2 id="description">Description</h2>
 <p>Most of the work was done during the initialization, by constructing the map
-<code>self.literal_labels</code> and the list <code>self.compiled_labels</code>. The given label pattern is
+<code>self.literal_labels</code> and the list <code>self.compiled_labels</code>. The given label name is
 first looked up in the map, then matched successively against every regular expression
 stored in the list.</p>
 <p>The second step may be useful even if the first one has already produced one or several
-translations. For instance, take a the taxonomy defining the following associations:</p>
+translations. For instance, take a taxonomy defining the following associations:</p>
 <table>
 <thead>
 <tr>
@@ -540,7 +540,7 @@ translations. For instance, take a the taxonomy defining the following associati
 </thead>
 <tbody>
 <tr>
-<td align="left"><code>appli/function/builtin/casting/\1</code></td>
+<td align="left"><code>call/function/builtin/casting/\1</code></td>
 <td align="left"><code>free_call:(list|dict)</code></td>
 </tr>
 <tr>
@@ -551,11 +551,11 @@ translations. For instance, take a the taxonomy defining the following associati
 </table>
 <p>Suppose now that we pass the label <code>"free_call:list"</code>. The lookup in the map produces
 a first translation: <code>"type/sequence/list"</code>. However, the linear search in the list
-produces a second translation, namely: <code>"appli/function/builtin/casting/list"</code>.</p>
+produces a second translation, namely: <code>"call/function/builtin/casting/list"</code>.</p>
 <pre><code class="python">&gt;&gt;&gt; a_taxonomy_instance.get_taxon_name_list(&quot;free_call:list&quot;)
 [
     &quot;type/sequence/list&quot;,
-    &quot;appli/function/builtin/casting/list&quot;,
+    &quot;call/function/builtin/casting/list&quot;,
 ]
 </code></pre>
 <p>Therefore, the complexity of this function is linear in every case. However, its
