@@ -318,7 +318,10 @@ def collect_hints(
         if not separator:
             continue
         for hint in hints.split():
-            (before, label, after) = match_label(hint).groups()
+            m = match_label(hint)
+            if m is None:
+                raise ValueError(f"Malformed hint '{hint}' on line {i}.")
+            (before, label, after) = m.groups()
             hint_parts = f"{before}/{label}/{after}"
             if before in ("", "+", "-"):
                 buffer = deletion if before == "-" else addition

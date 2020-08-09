@@ -27,7 +27,7 @@ except pkg_resources.DistributionNotFound:
 if "ipykernel" in sys.modules:
     # Declare the magic stuff paroxython iff the module is loaded as an IPython extension.
 
-    from IPython.core.magic import Magics, line_cell_magic, magics_class  # type: ignore
+    from IPython.core.magic import Magics, cell_magic, magics_class  # type: ignore
     from IPython.display import Markdown, display  # type: ignore
 
     from .cli.cli_tag import main
@@ -39,20 +39,23 @@ if "ipykernel" in sys.modules:
     @magics_class
     class ParoxythonMagics(Magics):
         @staticmethod
-        @line_cell_magic
-        def paroxython(line, source=None):
+        @cell_magic
+        def paroxython(line, cell=""):
             """
             Tag a Python code cell and output the table of its taxa or labels.
 
             In cell mode:
                 %%paroxython [labels] [raw]
-                ... Python source code ...
+                ... Python cell code ...
             """
-            if source:
-                args = set(line.lower().split())
-                tags = "Label" if args.intersection(["label", "labels"]) else "Taxon"
-                source = f"# Compensate the offset of the magic command.\n{source}"
-                result = main(source, tags=tags)
+            args = set(line.lower().split())
+            tags = "Label" if args.intersection(["label", "labels"]) else "Taxon"
+            cell = f"# Compensate the offset of the magic command.\n{cell}"
+            try:
+                result = main(cell, tags=tags)
+            except ValueError as e:
+                print(e, file=sys.stderr)
+            else:
                 if "raw" in args:
                     print(result)
                 else:

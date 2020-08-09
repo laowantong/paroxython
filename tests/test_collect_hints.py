@@ -144,6 +144,12 @@ def test_multi_line_nested_addition_and_deletion_hints():
     assert deletion == {"hint": "2-8, 4"}
 
 
+def test_malformed_hint():
+    numbered_hints = [(2, "a/b/c")]
+    with pytest.raises(ValueError, match="Malformed hint 'a/b/c' on line 2."):
+        wrapper(numbered_hints)
+
+
 def test_illegal_suffix():
     numbered_hints = [(2, "hint#")]
     with pytest.raises(ValueError, match="Illegal last part  for hint '/hint/#' on line 2."):
