@@ -42,7 +42,7 @@
       - [Feature `internal_free_call` (SQL)](#feature-internal_free_call)
       - [Feature `external_free_call` (SQL)](#feature-external_free_call)
     - [Calls of the form `identifier.callable(arguments)`](#calls-of-the-form-identifiercallablearguments)
-      - [Feature `member_call_member`](#feature-member_call_member)
+      - [Feature `member_call_method`](#feature-member_call_method)
       - [Feature `member_call_object`](#feature-member_call_object)
       - [Feature `member_call` (SQL)](#feature-member_call)
       - [Feature `method_chaining`](#feature-method_chaining)
@@ -1493,7 +1493,7 @@ We use the term _free call_, as opposed to _member call_ (dot notation).
 2   bar()
 3   buzz(x, 2)
 4   fizz(foobar(x), 2)
-5   baz.qux() # no match, see feature member_call_member
+5   baz.qux() # no match, see feature member_call_method
 ```
 
 ##### Matches
@@ -1743,7 +1743,7 @@ In Python, `identifier` can be the name of:
 
 --------------------------------------------------------------------------------
 
-#### Feature `member_call_member`
+#### Feature `member_call_method`
 
 ##### Derivations
 
@@ -1771,7 +1771,7 @@ In Python, `identifier` can be the name of:
 
 | Label | Lines |
 |:--|:--|
-| `member_call_member:index` | 1 |
+| `member_call_method:index` | 1 |
 
 --------------------------------------------------------------------------------
 
@@ -1812,7 +1812,7 @@ In Python, `identifier` can be the name of:
 
 ##### Derivations
 
-[⬆️ feature `member_call_member`](#feature-member_call_member)  
+[⬆️ feature `member_call_method`](#feature-member_call_method)  
 [⬆️ feature `member_call_object`](#feature-member_call_object)  
 
 ##### Specification
@@ -1823,10 +1823,10 @@ SELECT "member_call",
        o.span,
        o.path
 FROM t_member_call_object AS o
-JOIN t_member_call_member AS m ON (o.span = m.span)
+JOIN t_member_call_method AS m ON (o.span = m.span)
 ```
 
-**Remark.** A first version of this query was joining on the paths. This resulted in false positives when a `member_call_member:(type):(method)` was manually hinted for duck-typing resolution (due to the fact that an added label lacks a path). Testing on the span is less accurate, but seems to work (cf. lines 3-4 below).
+**Remark.** A first version of this query was joining on the paths. This resulted in false positives when a `member_call_method:(type):(method)` was manually hinted for duck-typing resolution (due to the fact that an added label lacks a path). Testing on the span is less accurate, but seems to work (cf. lines 3-4 below).
 
 ##### Example
 
@@ -2537,7 +2537,7 @@ The method must mutate the object it is applied on. Obviously, only a handful of
 ##### Derivations
 
 [⬆️ feature `call_argument`](#feature-call_argument)  
-[⬆️ feature `member_call_member`](#feature-member_call_member)  
+[⬆️ feature `member_call_method`](#feature-member_call_method)  
 [⬆️ feature `member_call_object`](#feature-member_call_object)  
 [⬇️ feature `update`](#feature-update)  
 [⬇️ feature `update_by_member_call_with`](#feature-update_by_member_call_with)  
@@ -2549,7 +2549,7 @@ SELECT "update_by_member_call",
        lhs_acc.name_suffix || ":" || rhs_var.name_suffix,
        op.span,
        op.path
-FROM t_member_call_member AS op
+FROM t_member_call_method AS op
 JOIN t_member_call_object AS lhs_acc ON (lhs_acc.path GLOB op.path || "*-")
 JOIN t_call_argument AS rhs_var ON (rhs_var.path GLOB op.path || "*-")
 WHERE rhs_var.name_suffix != ""
@@ -2728,7 +2728,7 @@ GROUP BY path
 
 ##### Derivations
 
-[⬆️ feature `member_call_member`](#feature-member_call_member)  
+[⬆️ feature `member_call_method`](#feature-member_call_method)  
 [⬆️ feature `update_by_member_call`](#feature-update_by_member_call)  
 [⬇️ feature `update_with`](#feature-update_with)  
 
@@ -2739,7 +2739,7 @@ SELECT "update_by_member_call_with",
        op.name_suffix,
        op.span,
        op.path
-FROM t_member_call_member AS op
+FROM t_member_call_method AS op
 JOIN t_update_by_member_call USING (path)
 GROUP BY op.path
 ```

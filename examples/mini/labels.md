@@ -219,7 +219,7 @@
 - loop_with_raise
 - loop_with_return
 - member_call
-- member_call_member
+- member_call_method
 - member_call_object
 - method
 - method_chaining

@@ -149,7 +149,7 @@
     - [`127.2274-source-code-inclusion.py`](#program-1272274-source-code-inclusionpy-learning-cost-44375)
     - [`128.2085-breadth-first-traversing-of-a-tree.py`](#program-1282085-breadth-first-traversing-of-a-treepy-learning-cost-1575)
     - [`129.2282-breadth-first-traversing-in-a-graph.py`](#program-1292282-breadth-first-traversing-in-a-graphpy-learning-cost-14875)
-    - [`130.2283-depth-first-traversing-in-a-graph.py`](#program-1302283-depth-first-traversing-in-a-graphpy-learning-cost-1409375)
+    - [`130.2283-depth-first-traversing-in-a-graph.py`](#program-1302283-depth-first-traversing-in-a-graphpy-learning-cost-14125)
     - [`131.2083-successive-conditions.py`](#program-1312083-successive-conditionspy-learning-cost-1625)
     - [`131.2766-successive-conditions.py`](#program-1312766-successive-conditionspy-learning-cost-25625)
     - [`132.2040-measure-duration-of-procedure-execution.py`](#program-1322040-measure-duration-of-procedure-executionpy-learning-cost-35)
@@ -3144,7 +3144,7 @@
 
 ---
 
-### Program `130.2283-depth-first-traversing-in-a-graph.py` (learning cost 14.09375)
+### Program `130.2283-depth-first-traversing-in-a-graph.py` (learning cost 14.125)
 
 ```python
 1   def depth_first(start, f):
@@ -3162,9 +3162,9 @@
 | 0.75 | `call/function` | 6 |
 | 0.96875 | `call/function/builtin/casting/set` | 2 |
 | 0.875 | `call/function/without_arguments` | 2 |
-| 0.9375 | `call/method/mutable_duck/pop` | 5 |
 | 0.96875 | `call/method/non_sequence/set/add` | 7 |
 | 0.96875 | `call/method/sequence/list/extend` | 8 |
+| 0.96875 | `call/method/sequence/list/pop` | 5 |
 | 0.875 | `condition/belonging/not` | 8 |
 | 0.875 | `def/argument/arg` | 1, 1 |
 | 0.75 | `def/higher_order` | 1-8 |
@@ -3172,7 +3172,7 @@
 | 0.9375 | `flow/loop/exit/late` | 4-8 |
 | 0.875 | `flow/loop/while` | 4-8 |
 | 0.875 | `type/non_sequence/set` | 2, 7 |
-| 0.875 | `type/sequence/list` | 8 |
+| 0.875 | `type/sequence/list` | 5, 8 |
 | 0.9375 | `type/sequence/list/literal` | 3 |
 | 0.875 | `var/assignment/single` | 2, 3, 5 |
 | 0 | `meta/program` | 1-8 |

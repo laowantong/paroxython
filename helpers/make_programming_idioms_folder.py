@@ -61,6 +61,11 @@ for algo in algos:
             source = format_str(source, mode=FileMode())
         except Exception:
             print(f"Problem during the formatting of {path}.")
+        if program["Id"] == 2283:  # rejected after Black formatting
+            source = source.replace(
+                "vertex = stack.pop()",
+                "vertex = stack.pop()  # paroxython: -member_call_method:pop +member_call_method:list:pop",
+            )
         path.write_text(source)
         count += 1
 print(f"Dumped {count} programs in '{base_path.resolve()}' directory.")

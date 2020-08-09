@@ -78,7 +78,7 @@
         "literal:Tuple": [[2,2]],
         "loop:for": [[2,3]],
         "loop_with_late_exit:for": [[2,3]],
-        "member_call_member:format": [[3,3]],
+        "member_call_method:format": [[3,3]],
         "node:Assign": [[1,1]],
         "node:Attribute": [[3,3]],
         "node:Call": [[2,2],[3,3],[3,3]],
@@ -133,7 +133,7 @@
         "literal:Tuple": [[1,1],[1,1],[4,4],[4,4]],
         "loop:while": [[2,4]],
         "loop_with_late_exit:while": [[2,4]],
-        "member_call_member:format": [[3,3]],
+        "member_call_method:format": [[3,3]],
         "node:Assign": [[1,1],[4,4]],
         "node:Attribute": [[3,3]],
         "node:BinOp": [[4,4]],
@@ -229,7 +229,7 @@
         "literal:Str": [[2,2],[2,2],[3,3],[4,4],[6,6]],
         "loop:for": [[2,6]],
         "loop_with_late_exit:for": [[2,6]],
-        "member_call_member:match": [[3,3]],
+        "member_call_method:match": [[3,3]],
         "node:Attribute": [[3,3]],
         "node:Call": [[3,3],[4,4],[6,6]],
         "node:Expr": [[4,4],[6,6]],
@@ -413,8 +413,8 @@
         "literal:Str": [[2,2],[4,4],[7,7]],
         "loop:for": [[3,8],[6,7]],
         "loop_with_late_exit:for": [[3,8],[6,7]],
-        "member_call_member:glob": [[2,2]],
-        "member_call_member:rstrip": [[7,7]],
+        "member_call_method:glob": [[2,2]],
+        "member_call_method:rstrip": [[7,7]],
         "nested_for:1": [[6,7]],
         "node:Assign": [[2,2]],
         "node:Attribute": [[2,2],[7,7]],
@@ -500,7 +500,7 @@
         "loop_with_break:for": [[12,17]],
         "loop_with_early_exit:for:break": [[12,17]],
         "loop_with_else:for": [[12,17]],
-        "member_call_member:keys": [[12,12]],
+        "member_call_method:keys": [[12,12]],
         "node:Assign": [[2,8],[10,10],[11,11]],
         "node:Attribute": [[11,11],[12,12]],
         "node:Break": [[15,15]],
@@ -646,8 +646,8 @@
         "literal:15": [[10,10]],
         "literal:50": [[11,11]],
         "member_call:my_account:withdraw": [[11,11]],
-        "member_call_member:overdrawn": [[12,12]],
-        "member_call_member:withdraw": [[11,11]],
+        "member_call_method:overdrawn": [[12,12]],
+        "member_call_method:withdraw": [[11,11]],
         "member_call_object:my_account": [[11,11]],
         "method:__init__": [[2,3]],
         "method:deposit": [[4,5]],
@@ -754,7 +754,7 @@
         "literal:9": [[11,11],[11,11],[11,11]],
         "literal:List": [[11,11]],
         "member_call:self:assertEqual": [[11,11]],
-        "member_call_member:assertEqual": [[11,11]],
+        "member_call_method:assertEqual": [[11,11]],
         "member_call_object:self": [[11,11]],
         "method:testMedian": [[10,11]],
         "modulo_operator": [[5,5]],
@@ -918,8 +918,8 @@
         "literal:Tuple": [[7,7]],
         "loop:for": [[7,9]],
         "loop_with_late_exit:for": [[7,9]],
-        "member_call_member:join": [[9,9]],
-        "member_call_member:splitlines": [[6,6]],
+        "member_call_method:join": [[9,9]],
+        "member_call_method:splitlines": [[6,6]],
         "node:Assign": [[2,6]],
         "node:Attribute": [[6,6],[9,9]],
         "node:Call": [[6,6],[7,7],[9,9],[9,9]],
@@ -1027,10 +1027,10 @@
         "loop:for": [[16,18]],
         "loop_with_late_exit:for": [[16,18]],
         "member_call:writer:writerows": [[6,6]],
-        "member_call_member:format": [[18,18]],
-        "member_call_member:reader": [[14,14]],
-        "member_call_member:writer": [[5,5]],
-        "member_call_member:writerows": [[6,6]],
+        "member_call_method:format": [[18,18]],
+        "member_call_method:reader": [[14,14]],
+        "member_call_method:writer": [[5,5]],
+        "member_call_method:writerows": [[6,6]],
         "member_call_object:writer": [[6,6]],
         "node:Assign": [[5,5],[14,14],[15,15],[17,17]],
         "node:Attribute": [[5,5],[6,6],[14,14],[18,18]],
@@ -1292,7 +1292,7 @@
         "loop_with_break:for": [[8,11]],
         "loop_with_early_exit:for:break": [[8,11]],
         "loop_with_late_exit:while": [[4,7]],
-        "member_call_member:count": [[3,3]],
+        "member_call_method:count": [[3,3]],
         "node:Assign": [[3,3],[5,5],[7,7]],
         "node:Attribute": [[3,3],[7,7]],
         "node:Break": [[10,10]],
@@ -1378,9 +1378,9 @@
         "literal:Tuple": [[12,12]],
         "loop:for": [[11,14]],
         "loop_with_late_exit:for": [[11,14]],
-        "member_call_member:format": [[14,14]],
-        "member_call_member:fromstring": [[9,9]],
-        "member_call_member:getiterator": [[11,11]],
+        "member_call_method:format": [[14,14]],
+        "member_call_method:fromstring": [[9,9]],
+        "member_call_method:getiterator": [[11,11]],
         "node:Assign": [[1,7],[9,9],[10,10],[12,12]],
         "node:Attribute": [[9,9],[11,11],[13,13],[13,13],[14,14],[14,14],[14,14],[14,14]],
         "node:BoolOp": [[13,13]],
@@ -1507,7 +1507,7 @@
         "loop_with_early_exit:for:return": [[11,20]],
         "loop_with_raise:for": [[6,9]],
         "loop_with_return:for": [[11,20]],
-        "member_call_member:join": [[24,24]],
+        "member_call_method:join": [[24,24]],
         "negative_index:-1": [[5,5]],
         "node:Assign": [[1,1],[5,5],[7,7],[12,12],[22,22]],
         "node:Attribute": [[24,24]],
@@ -1659,8 +1659,8 @@
         "loop:while": [[6,14]],
         "loop_with_break:while": [[6,14]],
         "loop_with_early_exit:while:break": [[6,14]],
-        "member_call_member:format": [[5,5],[16,16],[18,18]],
-        "member_call_member:randint": [[4,4]],
+        "member_call_method:format": [[5,5],[16,16],[18,18]],
+        "member_call_method:randint": [[4,4]],
         "node:Assign": [[2,2],[3,3],[4,4],[7,7]],
         "node:Attribute": [[4,4],[5,5],[16,16],[18,18]],
         "node:AugAssign": [[8,8]],
@@ -3248,60 +3248,60 @@
     "member_call:writer:writerows": [
       "16_csv.py"
     ],
-    "member_call_member:assertEqual": [
+    "member_call_method:assertEqual": [
       "13_unit_testing.py"
     ],
-    "member_call_member:count": [
+    "member_call_method:count": [
       "20_prime_numbers.py"
     ],
-    "member_call_member:format": [
+    "member_call_method:format": [
       "03_friends.py",
       "04_fibonacci.py",
       "16_csv.py",
       "21_xml_html_parsing.py",
       "33_guess_the_number.py"
     ],
-    "member_call_member:fromstring": [
+    "member_call_method:fromstring": [
       "21_xml_html_parsing.py"
     ],
-    "member_call_member:getiterator": [
+    "member_call_method:getiterator": [
       "21_xml_html_parsing.py"
     ],
-    "member_call_member:glob": [
+    "member_call_method:glob": [
       "09_indent.py"
     ],
-    "member_call_member:join": [
+    "member_call_method:join": [
       "15_itertools_groupby.py",
       "28_queens.py"
     ],
-    "member_call_member:keys": [
+    "member_call_method:keys": [
       "10_time.py"
     ],
-    "member_call_member:match": [
+    "member_call_method:match": [
       "06_regex.py"
     ],
-    "member_call_member:overdrawn": [
+    "member_call_method:overdrawn": [
       "12_classes.py"
     ],
-    "member_call_member:randint": [
+    "member_call_method:randint": [
       "33_guess_the_number.py"
     ],
-    "member_call_member:reader": [
+    "member_call_method:reader": [
       "16_csv.py"
     ],
-    "member_call_member:rstrip": [
+    "member_call_method:rstrip": [
       "09_indent.py"
     ],
-    "member_call_member:splitlines": [
+    "member_call_method:splitlines": [
       "15_itertools_groupby.py"
     ],
-    "member_call_member:withdraw": [
+    "member_call_method:withdraw": [
       "12_classes.py"
     ],
-    "member_call_member:writer": [
+    "member_call_method:writer": [
       "16_csv.py"
     ],
-    "member_call_member:writerows": [
+    "member_call_method:writerows": [
       "16_csv.py"
     ],
     "member_call_object:my_account": [

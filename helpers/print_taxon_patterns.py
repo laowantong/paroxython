@@ -32,7 +32,7 @@ def compute(suffix, names_1, names_2):
     set_1 = reduce(set.union, map(type_methods.get, names_1.split()))
     set_2 = set().union(*map(type_methods.get, names_2.split()))
     label_pattern = "|".join(sorted(set_1 - set_2))
-    print(f"call/method/{suffix}/\\1<tab>member_call_member:({label_pattern})")
+    print(f"call/method/{suffix}/\\1<tab>member_call_method:({label_pattern})")
 
 
 compute("number", "int bool float complex", "str tuple bytes list bytearray set frozenset dict")

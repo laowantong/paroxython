@@ -471,7 +471,7 @@
         "import:random": [[1,1]],
         "import_module:random": [[1,1]],
         "member_call:random:shuffle": [[2,2]],
-        "member_call_member:shuffle": [[2,2]],
+        "member_call_method:shuffle": [[2,2]],
         "member_call_object:random": [[2,2]],
         "node:Attribute": [[2,2]],
         "node:Call": [[2,2]],
@@ -496,7 +496,7 @@
         "import:random": [[1,1]],
         "import_module:random": [[1,1]],
         "member_call:random:choice": [[2,2]],
-        "member_call_member:choice": [[2,2]],
+        "member_call_method:choice": [[2,2]],
         "member_call_object:random": [[2,2]],
         "node:Attribute": [[2,2]],
         "node:Call": [[2,2]],
@@ -543,7 +543,7 @@
         "literal:Tuple": [[1,1]],
         "loop:for": [[1,2]],
         "loop_with_late_exit:for": [[1,2]],
-        "member_call_member:items": [[1,1]],
+        "member_call_method:items": [[1,1]],
         "node:Attribute": [[1,1]],
         "node:Call": [[1,1],[2,2]],
         "node:Expr": [[2,2]],
@@ -577,7 +577,7 @@
         "import:random": [[1,1]],
         "import_module:random": [[1,1]],
         "member_call:random:randrange": [[3,3]],
-        "member_call_member:randrange": [[3,3]],
+        "member_call_method:randrange": [[3,3]],
         "member_call_object:random": [[3,3]],
         "node:Attribute": [[3,3]],
         "node:Call": [[3,3]],
@@ -609,7 +609,7 @@
         "import:random": [[1,1]],
         "import_module:random": [[1,1]],
         "member_call:random:uniform": [[2,2]],
-        "member_call_member:uniform": [[2,2]],
+        "member_call_method:uniform": [[2,2]],
         "member_call_object:random": [[2,2]],
         "node:Attribute": [[2,2]],
         "node:Call": [[2,2]],
@@ -635,7 +635,7 @@
         "import:random": [[1,1]],
         "import_module:random": [[1,1]],
         "member_call:random:randint": [[2,2]],
-        "member_call_member:randint": [[2,2]],
+        "member_call_method:randint": [[2,2]],
         "member_call_object:random": [[2,2]],
         "node:Attribute": [[2,2]],
         "node:Call": [[2,2]],
@@ -852,7 +852,7 @@
       "source": "x.reverse()",
       "labels": {
         "member_call:x:reverse": [[1,1]],
-        "member_call_member:reverse": [[1,1]],
+        "member_call_method:reverse": [[1,1]],
         "member_call_object:x": [[1,1]],
         "node:Attribute": [[1,1]],
         "node:Call": [[1,1]],
@@ -893,7 +893,7 @@
         "loop:for": [[2,4]],
         "loop_with_early_exit:for:return": [[2,4]],
         "loop_with_return:for": [[2,4]],
-        "member_call_member:index": [[4,4]],
+        "member_call_method:index": [[4,4]],
         "node:Attribute": [[4,4]],
         "node:Call": [[2,2],[4,4]],
         "node:Compare": [[3,3]],
@@ -987,7 +987,7 @@
         "assignment_rhs_atom:x": [[1,1]],
         "call_argument:x": [[1,1]],
         "literal:Str": [[1,1]],
-        "member_call_member:format": [[1,1]],
+        "member_call_method:format": [[1,1]],
         "node:Assign": [[1,1]],
         "node:Attribute": [[1,1]],
         "node:Call": [[1,1]],
@@ -1048,8 +1048,8 @@
         "literal:True": [[4,4]],
         "member_call:q:put": [[6,6]],
         "member_call:t:start": [[5,5]],
-        "member_call_member:put": [[6,6]],
-        "member_call_member:start": [[5,5]],
+        "member_call_method:put": [[6,6]],
+        "member_call_method:start": [[5,5]],
         "member_call_object:q": [[6,6]],
         "member_call_object:t": [[5,5]],
         "node:Assign": [[2,2],[3,3],[4,4]],
@@ -1161,7 +1161,7 @@
         "import:numpy": [[1,1]],
         "import_module:numpy": [[1,1]],
         "literal:Tuple": [[2,2]],
-        "member_call_member:zeros": [[2,2]],
+        "member_call_method:zeros": [[2,2]],
         "node:Assign": [[2,2]],
         "node:Attribute": [[2,2]],
         "node:Call": [[2,2]],
@@ -1258,7 +1258,7 @@
         "loop:for": [[3,4]],
         "loop_with_late_exit:for": [[3,4]],
         "member_call:pool:apply_async": [[4,4]],
-        "member_call_member:apply_async": [[4,4]],
+        "member_call_method:apply_async": [[4,4]],
         "member_call_object:pool": [[4,4]],
         "node:Assign": [[2,2]],
         "node:Attribute": [[4,4]],
@@ -1385,9 +1385,9 @@
         "import_module:threading": [[1,1]],
         "member_call:lock:acquire": [[3,3]],
         "member_call:lock:release": [[7,7]],
-        "member_call_member:Lock": [[2,2]],
-        "member_call_member:acquire": [[3,3]],
-        "member_call_member:release": [[7,7]],
+        "member_call_method:Lock": [[2,2]],
+        "member_call_method:acquire": [[3,3]],
+        "member_call_method:release": [[7,7]],
         "member_call_object:lock": [[3,3],[7,7]],
         "node:Assign": [[2,2],[5,5]],
         "node:Attribute": [[2,2],[3,3],[7,7]],
@@ -1680,8 +1680,8 @@
         "loop:for": [[7,8],[10,12]],
         "loop_with_late_exit:for": [[7,8],[10,12]],
         "member_call:self:make_path": [[8,8]],
-        "member_call_member:add": [[11,11],[12,12]],
-        "member_call_member:make_path": [[8,8]],
+        "member_call_method:add": [[11,11],[12,12]],
+        "member_call_method:make_path": [[8,8]],
         "member_call_object:self": [[8,8]],
         "method:__init__": [[5,8]],
         "method:make_path": [[9,12]],
@@ -1748,8 +1748,8 @@
         "literal:Str": [[1,1],[1,1]],
         "member_call:s:decode": [[1,1]],
         "member_call:s:encode": [[1,1]],
-        "member_call_member:decode": [[1,1]],
-        "member_call_member:encode": [[1,1]],
+        "member_call_method:decode": [[1,1]],
+        "member_call_method:encode": [[1,1]],
         "member_call_object:s": [[1,1]],
         "node:Assign": [[1,1]],
         "node:Attribute": [[1,1],[1,1]],
@@ -2065,7 +2065,7 @@
         "call_argument:i": [[1,1]],
         "call_argument:x": [[1,1]],
         "member_call:s:insert": [[1,1]],
-        "member_call_member:insert": [[1,1]],
+        "member_call_method:insert": [[1,1]],
         "member_call_object:s": [[1,1]],
         "node:Attribute": [[1,1]],
         "node:Call": [[1,1]],
@@ -2095,7 +2095,7 @@
         "import_module:time": [[1,1]],
         "literal:5": [[2,2]],
         "member_call:time:sleep": [[2,2]],
-        "member_call_member:sleep": [[2,2]],
+        "member_call_method:sleep": [[2,2]],
         "member_call_object:time": [[2,2]],
         "node:Attribute": [[2,2]],
         "node:Call": [[2,2]],
@@ -2197,7 +2197,7 @@
         "assignment:split": [[1,1]],
         "assignment_lhs_identifier:chunks": [[1,1]],
         "assignment_rhs_atom:s": [[1,1]],
-        "member_call_member:split": [[1,1]],
+        "member_call_method:split": [[1,1]],
         "node:Assign": [[1,1]],
         "node:Attribute": [[1,1]],
         "node:Call": [[1,1]],
@@ -2256,7 +2256,7 @@
       "source": "v in map.values()",
       "labels": {
         "comparison_operator:In": [[1,1]],
-        "member_call_member:values": [[1,1]],
+        "member_call_method:values": [[1,1]],
         "node:Attribute": [[1,1]],
         "node:Call": [[1,1]],
         "node:Compare": [[1,1]],
@@ -2281,7 +2281,7 @@
         "assignment_rhs_atom:x": [[1,1]],
         "call_argument:x": [[1,1]],
         "literal:Str": [[1,1]],
-        "member_call_member:join": [[1,1]],
+        "member_call_method:join": [[1,1]],
         "node:Assign": [[1,1]],
         "node:Attribute": [[1,1]],
         "node:Call": [[1,1]],
@@ -2314,7 +2314,7 @@
         "external_free_call:map": [[1,1]],
         "free_call:map": [[1,1]],
         "literal:Str": [[1,1]],
-        "member_call_member:join": [[1,1]],
+        "member_call_method:join": [[1,1]],
         "node:Assign": [[1,1]],
         "node:Attribute": [[1,1]],
         "node:Call": [[1,1],[1,1]],
@@ -2408,7 +2408,7 @@
         "literal:1001": [[5,5]],
         "literal:Str": [[6,6]],
         "member_call:p:map": [[5,5]],
-        "member_call_member:map": [[5,5]],
+        "member_call_method:map": [[5,5]],
         "member_call_object:p": [[5,5]],
         "multiplication_operator": [[3,3]],
         "node:Attribute": [[5,5]],
@@ -2504,7 +2504,7 @@
         "call_argument:f": [[1,1]],
         "external_free_call:open": [[1,1]],
         "free_call:open": [[1,1]],
-        "member_call_member:read": [[1,1]],
+        "member_call_method:read": [[1,1]],
         "node:Assign": [[1,1]],
         "node:Attribute": [[1,1]],
         "node:Call": [[1,1],[1,1]],
@@ -2589,7 +2589,7 @@
         "assignment_rhs_atom:datetime": [[2,2]],
         "import:datetime": [[1,1]],
         "import_module:datetime": [[1,1]],
-        "member_call_member:now": [[2,2]],
+        "member_call_method:now": [[2,2]],
         "node:Assign": [[2,2]],
         "node:Attribute": [[2,2],[2,2]],
         "node:Call": [[2,2]],
@@ -2616,7 +2616,7 @@
         "assignment_rhs_atom:x": [[1,1]],
         "assignment_rhs_atom:y": [[1,1]],
         "call_argument:y": [[1,1]],
-        "member_call_member:find": [[1,1]],
+        "member_call_method:find": [[1,1]],
         "node:Assign": [[1,1]],
         "node:Attribute": [[1,1]],
         "node:Call": [[1,1]],
@@ -2643,7 +2643,7 @@
         "assignment_rhs_atom:z": [[1,1]],
         "call_argument:y": [[1,1]],
         "call_argument:z": [[1,1]],
-        "member_call_member:replace": [[1,1]],
+        "member_call_method:replace": [[1,1]],
         "node:Assign": [[1,1]],
         "node:Attribute": [[1,1]],
         "node:Call": [[1,1]],
@@ -2694,7 +2694,7 @@
         "assignment_rhs_atom:x": [[1,1]],
         "call_argument:x": [[1,1]],
         "literal:Str": [[1,1]],
-        "member_call_member:format": [[1,1]],
+        "member_call_method:format": [[1,1]],
         "node:Assign": [[1,1]],
         "node:Attribute": [[1,1]],
         "node:Call": [[1,1]],
@@ -2750,7 +2750,7 @@
         "function_returning_something:binom": [[2,3]],
         "import:math": [[1,1]],
         "import_module:math": [[1,1]],
-        "member_call_member:factorial": [[3,3],[3,3],[3,3]],
+        "member_call_method:factorial": [[3,3],[3,3],[3,3]],
         "node:Attribute": [[3,3],[3,3],[3,3]],
         "node:BinOp": [[3,3],[3,3],[3,3]],
         "node:Call": [[3,3],[3,3],[3,3]],
@@ -2796,7 +2796,7 @@
         "import_module:math": [[2,2]],
         "import_name:division": [[1,1]],
         "literal:8.0": [[3,3]],
-        "member_call_member:ceil": [[3,3]],
+        "member_call_method:ceil": [[3,3]],
         "node:Assign": [[3,3]],
         "node:Attribute": [[3,3]],
         "node:BinOp": [[3,3]],
@@ -2834,7 +2834,7 @@
         "call_argument:s": [[2,2]],
         "import:random": [[1,1]],
         "import_module:random": [[1,1]],
-        "member_call_member:Random": [[2,2]],
+        "member_call_method:Random": [[2,2]],
         "node:Assign": [[2,2]],
         "node:Attribute": [[2,2]],
         "node:Call": [[2,2]],
@@ -2859,7 +2859,7 @@
         "assignment_rhs_atom:random": [[2,2]],
         "import:random": [[1,1]],
         "import_module:random": [[1,1]],
-        "member_call_member:Random": [[2,2]],
+        "member_call_method:Random": [[2,2]],
         "node:Assign": [[2,2]],
         "node:Attribute": [[2,2]],
         "node:Call": [[2,2]],
@@ -2888,7 +2888,7 @@
         "import_module:sys": [[1,1]],
         "literal:1": [[2,2]],
         "literal:Str": [[2,2]],
-        "member_call_member:join": [[2,2]],
+        "member_call_method:join": [[2,2]],
         "node:Attribute": [[2,2],[2,2]],
         "node:Call": [[2,2],[2,2]],
         "node:Expr": [[2,2]],
@@ -3036,7 +3036,7 @@
         "assignment_rhs_atom:x": [[1,1]],
         "call_argument:x": [[1,1]],
         "literal:Str": [[1,1]],
-        "member_call_member:format": [[1,1]],
+        "member_call_method:format": [[1,1]],
         "node:Assign": [[1,1]],
         "node:Attribute": [[1,1]],
         "node:Call": [[1,1]],
@@ -3218,7 +3218,7 @@
         "assignment_rhs_atom:s": [[1,1]],
         "assignment_rhs_atom:t": [[1,1]],
         "call_argument:t": [[1,1]],
-        "member_call_member:count": [[1,1]],
+        "member_call_method:count": [[1,1]],
         "node:Assign": [[1,1]],
         "node:Attribute": [[1,1]],
         "node:Call": [[1,1]],
@@ -3245,7 +3245,7 @@
         "import:re": [[1,1]],
         "import_module:re": [[1,1]],
         "literal:Str": [[2,2]],
-        "member_call_member:compile": [[2,2]],
+        "member_call_method:compile": [[2,2]],
         "node:Assign": [[2,2]],
         "node:Attribute": [[2,2]],
         "node:Call": [[2,2]],
@@ -3276,7 +3276,7 @@
         "external_free_call:bin": [[1,1]],
         "free_call:bin": [[1,1]],
         "literal:Str": [[1,1]],
-        "member_call_member:count": [[1,1]],
+        "member_call_method:count": [[1,1]],
         "node:Assign": [[1,1]],
         "node:Attribute": [[1,1]],
         "node:Call": [[1,1],[1,1]],
@@ -3354,7 +3354,7 @@
         "import_module:sys": [[1,1]],
         "literal:1": [[2,2]],
         "member_call:sys:exit": [[2,2]],
-        "member_call_member:exit": [[2,2]],
+        "member_call_method:exit": [[2,2]],
         "member_call_object:sys": [[2,2]],
         "node:Attribute": [[2,2]],
         "node:Call": [[2,2]],
@@ -3483,7 +3483,7 @@
         "import:json": [[1,1]],
         "import_module:json": [[1,1]],
         "literal:Str": [[2,2],[2,2]],
-        "member_call_member:load": [[3,3]],
+        "member_call_method:load": [[3,3]],
         "node:Assign": [[3,3]],
         "node:Attribute": [[3,3]],
         "node:Call": [[2,2],[3,3]],
@@ -3517,7 +3517,7 @@
         "import_module:json": [[1,1]],
         "literal:Str": [[2,2],[2,2]],
         "member_call:json:dump": [[3,3]],
-        "member_call_member:dump": [[3,3]],
+        "member_call_method:dump": [[3,3]],
         "member_call_object:json": [[3,3]],
         "node:Attribute": [[3,3]],
         "node:Call": [[2,2],[3,3]],
@@ -3630,7 +3630,7 @@
         "call_argument:path": [[2,2]],
         "import:os": [[1,1]],
         "import_module:os": [[1,1]],
-        "member_call_member:getsize": [[2,2]],
+        "member_call_method:getsize": [[2,2]],
         "node:Assign": [[2,2]],
         "node:Attribute": [[2,2],[2,2]],
         "node:Call": [[2,2]],
@@ -3657,7 +3657,7 @@
         "assignment_rhs_atom:prefix": [[1,1]],
         "assignment_rhs_atom:s": [[1,1]],
         "call_argument:prefix": [[1,1]],
-        "member_call_member:startswith": [[1,1]],
+        "member_call_method:startswith": [[1,1]],
         "node:Assign": [[1,1]],
         "node:Attribute": [[1,1]],
         "node:Call": [[1,1]],
@@ -3682,7 +3682,7 @@
         "assignment_rhs_atom:s": [[1,1]],
         "assignment_rhs_atom:suffix": [[1,1]],
         "call_argument:suffix": [[1,1]],
-        "member_call_member:endswith": [[1,1]],
+        "member_call_method:endswith": [[1,1]],
         "node:Assign": [[1,1]],
         "node:Attribute": [[1,1]],
         "node:Call": [[1,1]],
@@ -3709,7 +3709,7 @@
         "call_argument:ts": [[2,2]],
         "import:datetime": [[1,1]],
         "import_module:datetime": [[1,1]],
-        "member_call_member:fromtimestamp": [[2,2]],
+        "member_call_method:fromtimestamp": [[2,2]],
         "node:Assign": [[2,2]],
         "node:Attribute": [[2,2],[2,2]],
         "node:Call": [[2,2]],
@@ -3752,7 +3752,7 @@
         "literal:28": [[2,2]],
         "literal:9": [[2,2]],
         "literal:Str": [[3,3]],
-        "member_call_member:strftime": [[3,3]],
+        "member_call_method:strftime": [[3,3]],
         "node:Assign": [[2,2],[3,3]],
         "node:Attribute": [[3,3]],
         "node:Call": [[2,2],[3,3]],
@@ -3788,8 +3788,8 @@
         "import:datetime:date": [[1,1]],
         "import_module:datetime": [[1,1]],
         "import_name:date": [[1,1]],
-        "member_call_member:isoformat": [[3,3]],
-        "member_call_member:today": [[2,2]],
+        "member_call_method:isoformat": [[3,3]],
+        "member_call_method:today": [[2,2]],
         "node:Assign": [[2,2],[3,3]],
         "node:Attribute": [[2,2],[3,3]],
         "node:Call": [[2,2],[3,3]],
@@ -3813,7 +3813,7 @@
       "labels": {
         "call_argument:c": [[1,1]],
         "member_call:items:sort": [[1,1]],
-        "member_call_member:sort": [[1,1]],
+        "member_call_method:sort": [[1,1]],
         "member_call_object:items": [[1,1]],
         "node:Attribute": [[1,1]],
         "node:Call": [[1,1]],
@@ -3838,8 +3838,8 @@
         "call_argument:u": [[2,2]],
         "import:urllib.request": [[1,1]],
         "import_module:urllib.request": [[1,1]],
-        "member_call_member:read": [[3,3]],
-        "member_call_member:urlopen": [[2,2]],
+        "member_call_method:read": [[3,3]],
+        "member_call_method:urlopen": [[2,2]],
         "node:Assign": [[3,3]],
         "node:Attribute": [[2,2],[2,2],[3,3]],
         "node:Call": [[2,2],[3,3]],
@@ -3873,7 +3873,7 @@
         "import_module:urllib": [[1,1]],
         "literal:Str": [[2,2]],
         "literal:Tuple": [[2,2]],
-        "member_call_member:urlretrieve": [[2,2]],
+        "member_call_method:urlretrieve": [[2,2]],
         "node:Assign": [[2,2]],
         "node:Attribute": [[2,2],[2,2]],
         "node:Call": [[2,2]],
@@ -3906,7 +3906,7 @@
         "import:lxml.etree": [[1,1]],
         "import_module:lxml.etree": [[1,1]],
         "literal:Str": [[2,2]],
-        "member_call_member:parse": [[2,2]],
+        "member_call_method:parse": [[2,2]],
         "node:Assign": [[2,2]],
         "node:Attribute": [[2,2],[2,2]],
         "node:Call": [[2,2]],
@@ -3965,7 +3965,7 @@
         "instance_method:__init__": [[6,9]],
         "literal:None": [[3,3],[4,4],[5,5]],
         "literal:Str": [[10,10],[10,10],[10,10],[11,11]],
-        "member_call_member:serialize": [[11,11]],
+        "member_call_method:serialize": [[11,11]],
         "method:__init__": [[6,9]],
         "node:Assign": [[3,3],[4,4],[5,5],[7,7],[8,8],[9,9],[10,10],[11,11]],
         "node:Attribute": [[7,7],[8,8],[9,9],[11,11]],
@@ -4043,7 +4043,7 @@
         "assignment_rhs_atom:os": [[2,2]],
         "import:os": [[1,1]],
         "import_module:os": [[1,1]],
-        "member_call_member:getcwd": [[2,2]],
+        "member_call_method:getcwd": [[2,2]],
         "node:Assign": [[2,2]],
         "node:Attribute": [[2,2]],
         "node:Call": [[2,2]],
@@ -4073,8 +4073,8 @@
         "composition": [[2,2]],
         "import:os": [[1,1]],
         "import_module:os": [[1,1]],
-        "member_call_member:abspath": [[2,2]],
-        "member_call_member:dirname": [[2,2]],
+        "member_call_method:abspath": [[2,2]],
+        "member_call_method:dirname": [[2,2]],
         "node:Assign": [[2,2]],
         "node:Attribute": [[2,2],[2,2],[2,2],[2,2]],
         "node:Call": [[2,2],[2,2]],
@@ -4140,7 +4140,7 @@
         "call_argument:t": [[2,2]],
         "import:pympler.asizeof": [[1,1]],
         "import_module:pympler.asizeof": [[1,1]],
-        "member_call_member:asizeof": [[2,2]],
+        "member_call_method:asizeof": [[2,2]],
         "node:Assign": [[2,2]],
         "node:Attribute": [[2,2],[2,2]],
         "node:Call": [[2,2]],
@@ -4168,7 +4168,7 @@
         "comparison_operator:Eq": [[1,1]],
         "empty_literal:Str": [[1,1]],
         "literal:Str": [[1,1]],
-        "member_call_member:strip": [[1,1]],
+        "member_call_method:strip": [[1,1]],
         "node:Assign": [[1,1]],
         "node:Attribute": [[1,1]],
         "node:Call": [[1,1]],
@@ -4198,7 +4198,7 @@
         "literal:List": [[2,2]],
         "literal:Str": [[2,2],[2,2],[2,2]],
         "member_call:subprocess:call": [[2,2]],
-        "member_call_member:call": [[2,2]],
+        "member_call_method:call": [[2,2]],
         "member_call_object:subprocess": [[2,2]],
         "node:Attribute": [[2,2]],
         "node:Call": [[2,2]],
@@ -4271,7 +4271,7 @@
         "literal:Tuple": [[1,1],[1,1],[1,1]],
         "loop:for": [[1,2]],
         "loop_with_late_exit:for": [[1,2]],
-        "member_call_member:items": [[1,1]],
+        "member_call_method:items": [[1,1]],
         "node:Attribute": [[1,1]],
         "node:Call": [[1,1],[1,1],[2,2]],
         "node:Expr": [[2,2]],
@@ -4354,7 +4354,7 @@
         "call_argument:w": [[1,1]],
         "empty_literal:Str": [[1,1]],
         "literal:Str": [[1,1]],
-        "member_call_member:replace": [[1,1]],
+        "member_call_method:replace": [[1,1]],
         "node:Assign": [[1,1]],
         "node:Attribute": [[1,1]],
         "node:Call": [[1,1]],
@@ -4506,8 +4506,8 @@
         "loop_with_late_exit:for": [[4,7]],
         "member_call:elements_unique:append": [[7,7]],
         "member_call:unique_set:add": [[6,6]],
-        "member_call_member:add": [[6,6]],
-        "member_call_member:append": [[7,7]],
+        "member_call_method:add": [[6,6]],
+        "member_call_method:append": [[7,7]],
         "member_call_object:elements_unique": [[7,7]],
         "member_call_object:unique_set": [[6,6]],
         "node:Assign": [[1,1],[2,2],[3,3]],
@@ -4616,9 +4616,9 @@
         "loop:while": [[5,7]],
         "loop_with_late_exit:while": [[5,7]],
         "member_call:sock:bind": [[4,4]],
-        "member_call_member:bind": [[4,4]],
-        "member_call_member:recvfrom": [[6,6]],
-        "member_call_member:socket": [[3,3]],
+        "member_call_method:bind": [[4,4]],
+        "member_call_method:recvfrom": [[6,6]],
+        "member_call_method:socket": [[3,3]],
         "member_call_object:sock": [[4,4]],
         "node:Assign": [[2,2],[3,3],[6,6]],
         "node:Attribute": [[3,3],[3,3],[3,3],[4,4],[6,6]],
@@ -4775,7 +4775,7 @@
         "import_module:bisect": [[1,1]],
         "index:i": [[4,4]],
         "literal:-1": [[4,4]],
-        "member_call_member:bisect_left": [[3,3]],
+        "member_call_method:bisect_left": [[3,3]],
         "node:Assign": [[3,3]],
         "node:Attribute": [[3,3]],
         "node:BoolOp": [[4,4]],
@@ -4831,7 +4831,7 @@
         "import:time": [[1,1]],
         "import_module:time": [[1,1]],
         "literal:Str": [[5,5]],
-        "member_call_member:perf_counter": [[2,2],[4,4]],
+        "member_call_method:perf_counter": [[2,2],[4,4]],
         "node:Assign": [[2,2],[4,4]],
         "node:Attribute": [[2,2],[4,4]],
         "node:BinOp": [[5,5]],
@@ -4897,7 +4897,7 @@
         "import_module:imp": [[1,1]],
         "literal:Str": [[2,2],[2,2]],
         "member_call:imp:load_module": [[2,2]],
-        "member_call_member:load_module": [[2,2]],
+        "member_call_method:load_module": [[2,2]],
         "member_call_object:imp": [[2,2]],
         "node:Assign": [[2,2]],
         "node:Attribute": [[2,2],[2,2]],
@@ -4956,8 +4956,8 @@
         "loop_with_late_exit:for": [[6,9]],
         "loop_with_late_exit:while": [[3,9]],
         "member_call:Q:append": [[9,9]],
-        "member_call_member:append": [[9,9]],
-        "member_call_member:pop": [[4,4]],
+        "member_call_method:append": [[9,9]],
+        "member_call_method:pop": [[4,4]],
         "member_call_object:Q": [[9,9]],
         "node:Assign": [[2,2],[4,4],[8,8]],
         "node:Attribute": [[4,4],[7,7],[8,8],[9,9]],
@@ -5045,9 +5045,9 @@
         "loop_with_late_exit:while": [[5,9]],
         "member_call:q:extend": [[9,9]],
         "member_call:seen:add": [[8,8]],
-        "member_call_member:add": [[8,8]],
-        "member_call_member:extend": [[9,9]],
-        "member_call_member:popleft": [[6,6]],
+        "member_call_method:add": [[8,8]],
+        "member_call_method:extend": [[9,9]],
+        "member_call_method:popleft": [[6,6]],
         "member_call_object:q": [[9,9]],
         "member_call_object:seen": [[8,8]],
         "node:Assign": [[3,3],[4,4],[6,6]],
@@ -5128,9 +5128,9 @@
         "loop_with_late_exit:while": [[4,8]],
         "member_call:seen:add": [[7,7]],
         "member_call:stack:extend": [[8,8]],
-        "member_call_member:add": [[7,7]],
-        "member_call_member:extend": [[8,8]],
-        "member_call_member:pop": [[5,5]],
+        "member_call_method:add": [[7,7]],
+        "member_call_method:extend": [[8,8]],
+        "member_call_method:list:pop": [[5,5]],
         "member_call_object:seen": [[7,7]],
         "member_call_object:stack": [[8,8]],
         "node:Assign": [[2,2],[3,3],[5,5]],
@@ -5157,9 +5157,9 @@
         "call/function": [[6,6]],
         "call/function/builtin/casting/set": [[2,2]],
         "call/function/without_arguments": [[2,2]],
-        "call/method/mutable_duck/pop": [[5,5]],
         "call/method/non_sequence/set/add": [[7,7]],
         "call/method/sequence/list/extend": [[8,8]],
+        "call/method/sequence/list/pop": [[5,5]],
         "condition/belonging/not": [[8,8]],
         "def/argument/arg": [[1,1],[1,1]],
         "def/higher_order": [[1,8]],
@@ -5169,7 +5169,7 @@
         "meta/program": [[1,8]],
         "meta/sloc/8": [[1,8]],
         "type/non_sequence/set": [[2,2],[7,7]],
-        "type/sequence/list": [[8,8]],
+        "type/sequence/list": [[5,5],[8,8]],
         "type/sequence/list/literal": [[3,3]],
         "var/assignment/single": [[2,2],[3,3],[5,5]]
       }
@@ -5236,7 +5236,7 @@
         "import:timeit": [[1,1]],
         "import_module:timeit": [[1,1]],
         "literal:Str": [[2,2],[2,2]],
-        "member_call_member:timeit": [[2,2]],
+        "member_call_method:timeit": [[2,2]],
         "node:Assign": [[2,2]],
         "node:Attribute": [[2,2]],
         "node:Call": [[2,2]],
@@ -5264,7 +5264,7 @@
         "assignment_rhs_atom:s": [[1,1]],
         "assignment_rhs_atom:word": [[1,1]],
         "comparison_operator:In": [[1,1]],
-        "member_call_member:lower": [[1,1],[1,1]],
+        "member_call_method:lower": [[1,1],[1,1]],
         "node:Assign": [[1,1]],
         "node:Attribute": [[1,1],[1,1]],
         "node:Call": [[1,1],[1,1]],
@@ -5311,7 +5311,7 @@
       "labels": {
         "call_argument:x": [[1,1]],
         "member_call:items:remove": [[1,1]],
-        "member_call_member:remove": [[1,1]],
+        "member_call_method:remove": [[1,1]],
         "member_call_object:items": [[1,1]],
         "node:Attribute": [[1,1]],
         "node:Call": [[1,1]],
@@ -5363,7 +5363,7 @@
         "assignment:isdigit": [[1,1]],
         "assignment_lhs_identifier:b": [[1,1]],
         "assignment_rhs_atom:s": [[1,1]],
-        "member_call_member:isdigit": [[1,1]],
+        "member_call_method:isdigit": [[1,1]],
         "node:Assign": [[1,1]],
         "node:Attribute": [[1,1]],
         "node:Call": [[1,1]],
@@ -5388,7 +5388,7 @@
         "assignment_rhs_atom:tempfile": [[2,2]],
         "import:tempfile": [[1,1]],
         "import_module:tempfile": [[1,1]],
-        "member_call_member:TemporaryFile": [[2,2]],
+        "member_call_method:TemporaryFile": [[2,2]],
         "node:Assign": [[2,2]],
         "node:Attribute": [[2,2]],
         "node:Call": [[2,2]],
@@ -5413,7 +5413,7 @@
         "assignment_rhs_atom:tempfile": [[2,2]],
         "import:tempfile": [[1,1]],
         "import_module:tempfile": [[1,1]],
-        "member_call_member:TemporaryDirectory": [[2,2]],
+        "member_call_method:TemporaryDirectory": [[2,2]],
         "node:Assign": [[2,2]],
         "node:Attribute": [[2,2]],
         "node:Call": [[2,2]],
@@ -5437,7 +5437,7 @@
         "call_argument:k": [[1,1]],
         "literal:None": [[1,1]],
         "member_call:m:pop": [[1,1]],
-        "member_call_member:pop": [[1,1]],
+        "member_call_method:pop": [[1,1]],
         "member_call_object:m": [[1,1]],
         "node:Attribute": [[1,1]],
         "node:Call": [[1,1]],
@@ -5552,7 +5552,7 @@
         "call_argument:fp": [[2,2]],
         "import:os": [[1,1]],
         "import_module:os": [[1,1]],
-        "member_call_member:exists": [[2,2]],
+        "member_call_method:exists": [[2,2]],
         "node:Assign": [[2,2]],
         "node:Attribute": [[2,2],[2,2]],
         "node:Call": [[2,2]],
@@ -5583,7 +5583,7 @@
         "import:pathlib:Path": [[1,1]],
         "import_module:pathlib": [[1,1]],
         "import_name:Path": [[1,1]],
-        "member_call_member:exists": [[2,2]],
+        "member_call_method:exists": [[2,2]],
         "node:Assign": [[2,2]],
         "node:Attribute": [[2,2]],
         "node:Call": [[2,2],[2,2]],
@@ -5617,9 +5617,9 @@
         "literal:Str": [[3,3],[5,5]],
         "member_call:logger:info": [[6,6]],
         "member_call:logging:basicConfig": [[2,2]],
-        "member_call_member:basicConfig": [[2,2]],
-        "member_call_member:getLogger": [[5,5]],
-        "member_call_member:info": [[6,6]],
+        "member_call_method:basicConfig": [[2,2]],
+        "member_call_method:getLogger": [[5,5]],
+        "member_call_method:info": [[6,6]],
         "member_call_object:logger": [[6,6]],
         "member_call_object:logging": [[2,2]],
         "node:Assign": [[5,5]],
@@ -5661,8 +5661,8 @@
         "import_module:locale": [[1,1]],
         "literal:Str": [[2,2],[3,3]],
         "member_call:locale:setlocale": [[3,3]],
-        "member_call_member:atof": [[4,4]],
-        "member_call_member:setlocale": [[3,3]],
+        "member_call_method:atof": [[4,4]],
+        "member_call_method:setlocale": [[3,3]],
         "member_call_object:locale": [[3,3]],
         "node:Assign": [[2,2],[4,4]],
         "node:Attribute": [[3,3],[3,3],[4,4]],
@@ -5746,7 +5746,7 @@
         "import:re": [[1,1]],
         "import_module:re": [[1,1]],
         "literal:Str": [[2,2],[2,2]],
-        "member_call_member:sub": [[2,2]],
+        "member_call_method:sub": [[2,2]],
         "node:Assign": [[2,2]],
         "node:Attribute": [[2,2]],
         "node:Call": [[2,2]],
@@ -5781,7 +5781,7 @@
         "free_call:map": [[1,1]],
         "free_call_without_arguments:input": [[1,1]],
         "free_call_without_result:list": [[1,1]],
-        "member_call_member:split": [[1,1]],
+        "member_call_method:split": [[1,1]],
         "node:Attribute": [[1,1]],
         "node:Call": [[1,1],[1,1],[1,1],[1,1]],
         "node:Expr": [[1,1]],
@@ -5810,7 +5810,7 @@
         "assignment_rhs_atom:p": [[1,1]],
         "call_argument:": [[1,1]],
         "literal:Str": [[1,1]],
-        "member_call_member:rstrip": [[1,1]],
+        "member_call_method:rstrip": [[1,1]],
         "node:Assign": [[1,1]],
         "node:Attribute": [[1,1]],
         "node:Call": [[1,1]],
@@ -5845,7 +5845,7 @@
         "import:os": [[1,1]],
         "import_module:os": [[1,1]],
         "literal:-1": [[3,3]],
-        "member_call_member:endswith": [[2,2]],
+        "member_call_method:endswith": [[2,2]],
         "node:Assign": [[3,3]],
         "node:Attribute": [[2,2],[2,2]],
         "node:Call": [[2,2]],
@@ -5906,7 +5906,7 @@
         "call_argument:i": [[1,1]],
         "call_argument:s": [[1,1]],
         "literal:Str": [[1,1]],
-        "member_call_member:format": [[1,1]],
+        "member_call_method:format": [[1,1]],
         "node:Assign": [[1,1]],
         "node:Attribute": [[1,1]],
         "node:Call": [[1,1]],
@@ -5970,7 +5970,7 @@
         "literal:6": [[1,1],[2,2]],
         "literal:Str": [[3,3]],
         "literal:Tuple": [[1,1],[2,2]],
-        "member_call_member:format": [[3,3]],
+        "member_call_method:format": [[3,3]],
         "node:Assign": [[1,1],[2,2],[3,3]],
         "node:Attribute": [[3,3]],
         "node:BinOp": [[1,1],[2,2],[3,3],[3,3],[3,3],[3,3],[3,3],[3,3]],
@@ -6070,11 +6070,11 @@
         "literal:Str": [[10,10],[10,10],[10,10],[11,11],[13,13]],
         "member_call:numpy:array": [[5,5]],
         "member_call:numpy:view": [[5,5]],
-        "member_call_member:array": [[5,5]],
-        "member_call_member:astype": [[9,9]],
-        "member_call_member:from_str": [[11,11],[13,13]],
-        "member_call_member:join": [[10,10]],
-        "member_call_member:view": [[5,5]],
+        "member_call_method:array": [[5,5]],
+        "member_call_method:astype": [[9,9]],
+        "member_call_method:from_str": [[11,11],[13,13]],
+        "member_call_method:join": [[10,10]],
+        "member_call_method:view": [[5,5]],
         "member_call_object:numpy": [[5,5]],
         "method:__str__": [[8,10]],
         "method:from_str": [[3,7]],
@@ -6157,8 +6157,8 @@
         "import:pathlib": [[1,1]],
         "import_module:pathlib": [[1,1]],
         "member_call:path:unlink": [[3,3]],
-        "member_call_member:Path": [[2,2]],
-        "member_call_member:unlink": [[3,3]],
+        "member_call_method:Path": [[2,2]],
+        "member_call_method:unlink": [[3,3]],
         "member_call_object:path": [[3,3]],
         "node:Assign": [[2,2]],
         "node:Attribute": [[2,2],[3,3]],
@@ -6238,7 +6238,7 @@
         "call_argument:x": [[2,2]],
         "import:random": [[1,1]],
         "import_module:random": [[1,1]],
-        "member_call_member:sample": [[2,2]],
+        "member_call_method:sample": [[2,2]],
         "node:Assign": [[2,2]],
         "node:Attribute": [[2,2]],
         "node:Call": [[2,2]],
@@ -6551,7 +6551,7 @@
         "import:webbrowser": [[1,1]],
         "import_module:webbrowser": [[1,1]],
         "member_call:webbrowser:open": [[2,2]],
-        "member_call_member:open": [[2,2]],
+        "member_call_method:open": [[2,2]],
         "member_call_object:webbrowser": [[2,2]],
         "node:Attribute": [[2,2]],
         "node:Call": [[2,2]],
@@ -6630,7 +6630,7 @@
         "call_argument:p": [[1,1],[1,1]],
         "external_free_call:len": [[1,1]],
         "free_call:len": [[1,1]],
-        "member_call_member:startswith": [[1,1]],
+        "member_call_method:startswith": [[1,1]],
         "node:Assign": [[1,1]],
         "node:Attribute": [[1,1]],
         "node:BoolOp": [[1,1]],
@@ -6664,7 +6664,7 @@
         "assignment_rhs_atom:p": [[1,1]],
         "assignment_rhs_atom:s": [[1,1]],
         "call_argument:p": [[1,1]],
-        "member_call_member:lstrip": [[1,1]],
+        "member_call_method:lstrip": [[1,1]],
         "node:Assign": [[1,1]],
         "node:Attribute": [[1,1]],
         "node:Call": [[1,1]],
@@ -6696,7 +6696,7 @@
         "literal:0": [[1,1]],
         "literal:1": [[1,1]],
         "member_call:s:rsplit": [[1,1]],
-        "member_call_member:rsplit": [[1,1]],
+        "member_call_method:rsplit": [[1,1]],
         "member_call_object:s": [[1,1]],
         "node:Assign": [[1,1]],
         "node:Attribute": [[1,1]],
@@ -6727,7 +6727,7 @@
         "assignment_rhs_atom:s": [[1,1]],
         "assignment_rhs_atom:w": [[1,1]],
         "call_argument:w": [[1,1]],
-        "member_call_member:rstrip": [[1,1]],
+        "member_call_method:rstrip": [[1,1]],
         "node:Assign": [[1,1]],
         "node:Attribute": [[1,1]],
         "node:Call": [[1,1]],
@@ -6795,7 +6795,7 @@
       "labels": {
         "call_argument:x": [[1,1]],
         "member_call:s:append": [[1,1]],
-        "member_call_member:append": [[1,1]],
+        "member_call_method:append": [[1,1]],
         "member_call_object:s": [[1,1]],
         "node:Attribute": [[1,1]],
         "node:Call": [[1,1]],
@@ -6926,10 +6926,10 @@
         "literal:Str": [[2,2],[3,3]],
         "member_call:parse:encode": [[2,2]],
         "member_call:parse:urlencode": [[2,2]],
-        "member_call_member:Request": [[3,3]],
-        "member_call_member:encode": [[2,2]],
-        "member_call_member:urlencode": [[2,2]],
-        "member_call_member:urlopen": [[4,4]],
+        "member_call_method:Request": [[3,3]],
+        "member_call_method:encode": [[2,2]],
+        "member_call_method:urlencode": [[2,2]],
+        "member_call_method:urlopen": [[4,4]],
         "member_call_object:parse": [[2,2]],
         "method_chaining": [[2,2]],
         "node:Assign": [[2,2],[3,3],[4,4]],
@@ -6963,7 +6963,7 @@
         "assignment:hex": [[1,1]],
         "assignment_lhs_identifier:s": [[1,1]],
         "assignment_rhs_atom:a": [[1,1]],
-        "member_call_member:hex": [[1,1]],
+        "member_call_method:hex": [[1,1]],
         "node:Assign": [[1,1]],
         "node:Attribute": [[1,1]],
         "node:Call": [[1,1]],
@@ -6988,7 +6988,7 @@
         "assignment_rhs_atom:bytearray": [[1,1]],
         "assignment_rhs_atom:s": [[1,1]],
         "call_argument:s": [[1,1]],
-        "member_call_member:fromhex": [[1,1]],
+        "member_call_method:fromhex": [[1,1]],
         "node:Assign": [[1,1]],
         "node:Attribute": [[1,1]],
         "node:Call": [[1,1]],
@@ -7028,8 +7028,8 @@
         "literal:1": [[3,3]],
         "literal:List": [[2,2]],
         "literal:Str": [[2,2],[2,2],[2,2]],
-        "member_call_member:listdir": [[3,3]],
-        "member_call_member:splitext": [[3,3]],
+        "member_call_method:listdir": [[3,3]],
+        "member_call_method:splitext": [[3,3]],
         "node:Assign": [[2,2],[3,3]],
         "node:Attribute": [[3,3],[3,3],[3,3]],
         "node:Call": [[3,3],[3,3]],
@@ -7086,9 +7086,9 @@
         "import_module:re": [[1,1]],
         "literal:Str": [[4,4],[7,7]],
         "literal:Tuple": [[5,5]],
-        "member_call_member:format": [[4,4]],
-        "member_call_member:match": [[7,7]],
-        "member_call_member:walk": [[5,5]],
+        "member_call_method:format": [[4,4]],
+        "member_call_method:match": [[7,7]],
+        "member_call_method:walk": [[5,5]],
         "node:Assign": [[3,7]],
         "node:Attribute": [[4,4],[5,5],[7,7]],
         "node:Call": [[4,4],[5,5],[7,7]],
@@ -7131,8 +7131,8 @@
         "import_module:itertools": [[2,2]],
         "literal:List": [[3,3]],
         "literal:Str": [[3,3],[3,3],[3,3],[3,3]],
-        "member_call_member:chain": [[3,3]],
-        "member_call_member:glob": [[3,3]],
+        "member_call_method:chain": [[3,3]],
+        "member_call_method:glob": [[3,3]],
         "node:Attribute": [[3,3],[3,3]],
         "node:BinOp": [[3,3]],
         "node:Call": [[3,3],[3,3],[3,3]],
@@ -7287,7 +7287,7 @@
         "call_argument:d": [[2,2]],
         "import:os": [[1,1]],
         "import_module:os": [[1,1]],
-        "member_call_member:listdir": [[2,2]],
+        "member_call_method:listdir": [[2,2]],
         "node:Assign": [[2,2]],
         "node:Attribute": [[2,2]],
         "node:Call": [[2,2]],
@@ -7360,7 +7360,7 @@
         "literal:Dict": [[4,4],[5,5]],
         "literal:Str": [[3,3],[4,4]],
         "literal:Tuple": [[7,7],[7,7]],
-        "member_call_member:put": [[6,6]],
+        "member_call_method:put": [[6,6]],
         "node:Assign": [[3,3],[4,4],[5,5],[6,6],[7,7]],
         "node:Attribute": [[6,6],[7,7],[7,7]],
         "node:Call": [[6,6]],
@@ -7404,7 +7404,7 @@
         "import_name:date": [[1,1]],
         "import_name:timedelta": [[1,1]],
         "literal:1": [[2,2]],
-        "member_call_member:today": [[2,2]],
+        "member_call_method:today": [[2,2]],
         "node:Attribute": [[2,2]],
         "node:BinOp": [[2,2]],
         "node:Call": [[2,2],[2,2]],
@@ -7443,8 +7443,8 @@
         "literal:42": [[2,2]],
         "literal:Tuple": [[2,2]],
         "member_call:timer:start": [[3,3]],
-        "member_call_member:Timer": [[2,2]],
-        "member_call_member:start": [[3,3]],
+        "member_call_method:Timer": [[2,2]],
+        "member_call_method:start": [[3,3]],
         "member_call_object:timer": [[3,3]],
         "node:Assign": [[2,2]],
         "node:Attribute": [[2,2],[3,3]],
@@ -7477,7 +7477,7 @@
         "import_module:sys": [[1,1]],
         "literal:0": [[2,2]],
         "member_call:sys:exit": [[2,2]],
-        "member_call_member:exit": [[2,2]],
+        "member_call_method:exit": [[2,2]],
         "member_call_object:sys": [[2,2]],
         "node:Attribute": [[2,2]],
         "node:Call": [[2,2]],
@@ -7549,8 +7549,8 @@
         "literal:0": [[3,3]],
         "literal:List": [[3,3]],
         "literal:Tuple": [[15,15],[15,15]],
-        "member_call_member:find_set": [[9,9],[12,12],[12,12],[15,15],[15,15]],
-        "member_call_member:is_same_set": [[14,14]],
+        "member_call_method:find_set": [[9,9],[12,12],[12,12],[15,15],[15,15]],
+        "member_call_method:is_same_set": [[14,14]],
         "method:__init__": [[2,4]],
         "method:find_set": [[5,10]],
         "method:is_same_set": [[11,12]],
@@ -7647,7 +7647,7 @@
         "call_argument:b": [[2,2]],
         "import:numpy": [[1,1]],
         "import_module:numpy": [[1,1]],
-        "member_call_member:matmul": [[2,2]],
+        "member_call_method:matmul": [[2,2]],
         "node:Assign": [[2,2]],
         "node:Attribute": [[2,2]],
         "node:Call": [[2,2]],
@@ -7741,7 +7741,7 @@
         "call_argument:path": [[1,1]],
         "external_free_call:open": [[1,1]],
         "free_call:open": [[1,1]],
-        "member_call_member:readlines": [[2,2]],
+        "member_call_method:readlines": [[2,2]],
         "node:Assign": [[2,2]],
         "node:Attribute": [[2,2]],
         "node:Call": [[1,1],[2,2]],
@@ -12034,127 +12034,127 @@
     "member_call:x:reverse": [
       "019.3164-reverse-a-list.py"
     ],
-    "member_call_member:Lock": [
+    "member_call_method:Lock": [
       "033.1420-atomically-read-and-update-variable.py"
     ],
-    "member_call_member:Path": [
+    "member_call_method:Path": [
       "155.2147-delete-file.py"
     ],
-    "member_call_member:Random": [
+    "member_call_method:Random": [
       "069.1086-seed-random-generator.py",
       "070.1087-use-clock-as-random-generator-seed.py"
     ],
-    "member_call_member:Request": [
+    "member_call_method:Request": [
       "174.2687-make-http-post-request.py"
     ],
-    "member_call_member:TemporaryDirectory": [
+    "member_call_method:TemporaryDirectory": [
       "139.2162-create-temp-directory.py"
     ],
-    "member_call_member:TemporaryFile": [
+    "member_call_method:TemporaryFile": [
       "138.2161-create-temp-file.py"
     ],
-    "member_call_member:Timer": [
+    "member_call_method:Timer": [
       "185.2820-execute-function-in-30-seconds.py"
     ],
-    "member_call_member:abspath": [
+    "member_call_method:abspath": [
       "107.2139-get-folder-containing-current-program.py"
     ],
-    "member_call_member:acquire": [
+    "member_call_method:acquire": [
       "033.1420-atomically-read-and-update-variable.py"
     ],
-    "member_call_member:add": [
+    "member_call_method:add": [
       "040.2279-graph-with-adjacency-lists.py",
       "119.3263-deduplicate-list.py",
       "129.2282-breadth-first-traversing-in-a-graph.py",
       "130.2283-depth-first-traversing-in-a-graph.py"
     ],
-    "member_call_member:append": [
+    "member_call_method:append": [
       "119.3263-deduplicate-list.py",
       "128.2085-breadth-first-traversing-of-a-tree.py",
       "171.2446-add-an-element-at-the-end-of-a-list.py"
     ],
-    "member_call_member:apply_async": [
+    "member_call_method:apply_async": [
       "030.0189-parallelize-execution-of-1000-independent-tasks.py"
     ],
-    "member_call_member:array": [
+    "member_call_method:array": [
       "154.2292-halfway-between-two-hex-color-codes.py"
     ],
-    "member_call_member:asizeof": [
+    "member_call_method:asizeof": [
       "109.2280-number-of-bytes-of-a-type.py"
     ],
-    "member_call_member:astype": [
+    "member_call_method:astype": [
       "154.2292-halfway-between-two-hex-color-codes.py"
     ],
-    "member_call_member:atof": [
+    "member_call_method:atof": [
       "146.1825-convert-string-to-floating-point-number.py"
     ],
-    "member_call_member:basicConfig": [
+    "member_call_method:basicConfig": [
       "145.1822-print-log-line-with-datetime.py"
     ],
-    "member_call_member:bind": [
+    "member_call_method:bind": [
       "121.3029-udp-listen-and-read.py"
     ],
-    "member_call_member:bisect_left": [
+    "member_call_method:bisect_left": [
       "124.2152-binary-search-for-a-value-in-sorted-array.py"
     ],
-    "member_call_member:call": [
+    "member_call_method:call": [
       "111.2168-launch-other-program.py"
     ],
-    "member_call_member:ceil": [
+    "member_call_method:ceil": [
       "068.2271-create-a-bitset.py"
     ],
-    "member_call_member:chain": [
+    "member_call_method:chain": [
       "177.3241-find-files-with-a-given-list-of-filename-extensions.py"
     ],
-    "member_call_member:choice": [
+    "member_call_method:choice": [
       "011.0047-pick-a-random-element-from-a-list.py"
     ],
-    "member_call_member:compile": [
+    "member_call_method:compile": [
       "083.1805-regex-with-character-repetition.py"
     ],
-    "member_call_member:count": [
+    "member_call_method:count": [
       "082.1096-count-substring-occurrences.py",
       "084.1940-count-bits-set-in-integer-binary-representation.py"
     ],
-    "member_call_member:decode": [
+    "member_call_method:decode": [
       "041.0187-reverse-a-string.py"
     ],
-    "member_call_member:dirname": [
+    "member_call_method:dirname": [
       "107.2139-get-folder-containing-current-program.py"
     ],
-    "member_call_member:dump": [
+    "member_call_method:dump": [
       "092.1100-save-object-into-json-file.py"
     ],
-    "member_call_member:encode": [
+    "member_call_method:encode": [
       "041.0187-reverse-a-string.py",
       "174.2687-make-http-post-request.py"
     ],
-    "member_call_member:endswith": [
+    "member_call_method:endswith": [
       "097.1095-check-string-suffix.py",
       "151.2166-remove-string-trailing-path-separator.py"
     ],
-    "member_call_member:exists": [
+    "member_call_method:exists": [
       "144.2145-check-if-file-exists.py",
       "144.2915-check-if-file-exists.py"
     ],
-    "member_call_member:exit": [
+    "member_call_method:exit": [
       "087.1139-stop-program.py",
       "186.2699-exit-program-cleanly.py"
     ],
-    "member_call_member:extend": [
+    "member_call_method:extend": [
       "129.2282-breadth-first-traversing-in-a-graph.py",
       "130.2283-depth-first-traversing-in-a-graph.py"
     ],
-    "member_call_member:factorial": [
+    "member_call_method:factorial": [
       "067.1426-binomial-coefficient-n-choose-k.py"
     ],
-    "member_call_member:find": [
+    "member_call_method:find": [
       "062.1091-find-substring-position.py"
     ],
-    "member_call_member:find_set": [
+    "member_call_method:find_set": [
       "187.3261-disjoint-set.py"
     ],
-    "member_call_member:format": [
+    "member_call_method:format": [
       "023.1102-convert-real-number-to-string-with-2-decimal-places.py",
       "065.1085-format-decimal-number.py",
       "076.1083-binary-digits-from-an-integer.py",
@@ -12162,224 +12162,226 @@
       "154.2155-halfway-between-two-hex-color-codes.py",
       "177.2725-find-files-with-a-given-list-of-filename-extensions.py"
     ],
-    "member_call_member:from_str": [
+    "member_call_method:from_str": [
       "154.2292-halfway-between-two-hex-color-codes.py"
     ],
-    "member_call_member:fromhex": [
+    "member_call_method:fromhex": [
       "176.2614-hex-string-to-byte-array.py"
     ],
-    "member_call_member:fromtimestamp": [
+    "member_call_method:fromtimestamp": [
       "098.2142-epoch-seconds-to-date-object.py"
     ],
-    "member_call_member:getLogger": [
+    "member_call_method:getLogger": [
       "145.1822-print-log-line-with-datetime.py"
     ],
-    "member_call_member:getcwd": [
+    "member_call_method:getcwd": [
       "106.2039-get-program-working-directory.py"
     ],
-    "member_call_member:getsize": [
+    "member_call_method:getsize": [
       "095.2140-get-file-size.py"
     ],
-    "member_call_member:glob": [
+    "member_call_method:glob": [
       "177.3241-find-files-with-a-given-list-of-filename-extensions.py"
     ],
-    "member_call_member:hex": [
+    "member_call_method:hex": [
       "175.2613-bytes-to-hex-string.py"
     ],
-    "member_call_member:index": [
+    "member_call_method:index": [
       "020.0573-return-two-values.py"
     ],
-    "member_call_member:info": [
+    "member_call_method:info": [
       "145.1822-print-log-line-with-datetime.py"
     ],
-    "member_call_member:insert": [
+    "member_call_method:insert": [
       "044.0190-insert-element-in-list.py"
     ],
-    "member_call_member:is_same_set": [
+    "member_call_method:is_same_set": [
       "187.3261-disjoint-set.py"
     ],
-    "member_call_member:isdigit": [
+    "member_call_method:isdigit": [
       "137.1823-check-if-string-contains-only-digits.py"
     ],
-    "member_call_member:isoformat": [
+    "member_call_method:isoformat": [
       "099.2693-format-date-yyyy-mm-dd.py"
     ],
-    "member_call_member:items": [
+    "member_call_method:items": [
       "013.0574-iterate-over-map-keys-and-values.py",
       "113.2157-iterate-over-map-entries-ordered-by-values.py"
     ],
-    "member_call_member:join": [
+    "member_call_method:join": [
       "053.0240-join-a-list-of-strings.py",
       "053.1933-join-a-list-of-strings.py",
       "071.0379-echo-program-implementation.py",
       "154.2292-halfway-between-two-hex-color-codes.py"
     ],
-    "member_call_member:listdir": [
+    "member_call_method:list:pop": [
+      "130.2283-depth-first-traversing-in-a-graph.py"
+    ],
+    "member_call_method:listdir": [
       "177.2709-find-files-with-a-given-list-of-filename-extensions.py",
       "180.2612-list-files-in-directory.py"
     ],
-    "member_call_member:load": [
+    "member_call_method:load": [
       "091.1098-load-json-file-into-struct.py"
     ],
-    "member_call_member:load_module": [
+    "member_call_method:load_module": [
       "127.2274-source-code-inclusion.py"
     ],
-    "member_call_member:lower": [
+    "member_call_method:lower": [
       "133.2160-case-insensitive-string-contains.py"
     ],
-    "member_call_member:lstrip": [
+    "member_call_method:lstrip": [
       "167.3175-trim-prefix.py"
     ],
-    "member_call_member:make_path": [
+    "member_call_method:make_path": [
       "040.2279-graph-with-adjacency-lists.py"
     ],
-    "member_call_member:map": [
+    "member_call_method:map": [
       "056.1424-launch-1000-parallel-tasks-and-wait-for-completion.py"
     ],
-    "member_call_member:match": [
+    "member_call_method:match": [
       "177.2725-find-files-with-a-given-list-of-filename-extensions.py"
     ],
-    "member_call_member:matmul": [
+    "member_call_method:matmul": [
       "188.3284-matrix-multiplication.py"
     ],
-    "member_call_member:now": [
+    "member_call_method:now": [
       "061.0576-get-current-date.py"
     ],
-    "member_call_member:open": [
+    "member_call_method:open": [
       "164.2169-open-url-in-default-browser.py"
     ],
-    "member_call_member:parse": [
+    "member_call_method:parse": [
       "103.2276-load-xml-file-into-struct.py"
     ],
-    "member_call_member:perf_counter": [
+    "member_call_method:perf_counter": [
       "125.2167-measure-function-call-duration.py"
     ],
-    "member_call_member:pop": [
+    "member_call_method:pop": [
       "128.2085-breadth-first-traversing-of-a-tree.py",
-      "130.2283-depth-first-traversing-in-a-graph.py",
       "140.2156-delete-map-entry.py"
     ],
-    "member_call_member:popleft": [
+    "member_call_method:popleft": [
       "129.2282-breadth-first-traversing-in-a-graph.py"
     ],
-    "member_call_member:put": [
+    "member_call_method:put": [
       "025.0195-send-a-value-to-another-thread.py",
       "183.3025-make-http-put-request.py"
     ],
-    "member_call_member:randint": [
+    "member_call_method:randint": [
       "015.0184-pick-uniformly-a-random-integer-in-ab.py"
     ],
-    "member_call_member:randrange": [
+    "member_call_method:randrange": [
       "014.0185-pick-uniformly-a-random-floating-point-number-in-ab.py"
     ],
-    "member_call_member:read": [
+    "member_call_method:read": [
       "058.0665-extract-file-content-to-a-string.py",
       "101.2172-load-from-http-get-request-into-a-string.py"
     ],
-    "member_call_member:readlines": [
+    "member_call_method:readlines": [
       "197.3457-get-a-list-of-lines-from-a-file.py"
     ],
-    "member_call_member:recvfrom": [
+    "member_call_method:recvfrom": [
       "121.3029-udp-listen-and-read.py"
     ],
-    "member_call_member:release": [
+    "member_call_method:release": [
       "033.1420-atomically-read-and-update-variable.py"
     ],
-    "member_call_member:remove": [
+    "member_call_method:remove": [
       "135.2158-remove-item-from-list-by-its-value.py"
     ],
-    "member_call_member:replace": [
+    "member_call_method:replace": [
       "063.1088-replace-fragment-of-a-string.py",
       "116.1257-remove-occurrences-of-word-from-string.py"
     ],
-    "member_call_member:reverse": [
+    "member_call_method:reverse": [
       "019.3164-reverse-a-list.py"
     ],
-    "member_call_member:rsplit": [
+    "member_call_method:rsplit": [
       "168.2277-trim-suffix.py"
     ],
-    "member_call_member:rstrip": [
+    "member_call_method:rstrip": [
       "150.2154-remove-trailing-slash.py",
       "168.3174-trim-suffix.py"
     ],
-    "member_call_member:sample": [
+    "member_call_method:sample": [
       "158.2163-random-sublist.py"
     ],
-    "member_call_member:serialize": [
+    "member_call_method:serialize": [
       "104.3264-save-object-into-xml-file.py"
     ],
-    "member_call_member:setlocale": [
+    "member_call_method:setlocale": [
       "146.1825-convert-string-to-floating-point-number.py"
     ],
-    "member_call_member:shuffle": [
+    "member_call_method:shuffle": [
       "010.1478-shuffle-a-list.py"
     ],
-    "member_call_member:sleep": [
+    "member_call_method:sleep": [
       "045.0570-pause-execution-for-5-seconds.py"
     ],
-    "member_call_member:socket": [
+    "member_call_method:socket": [
       "121.3029-udp-listen-and-read.py"
     ],
-    "member_call_member:sort": [
+    "member_call_method:sort": [
       "100.1142-sort-by-a-comparator.py"
     ],
-    "member_call_member:split": [
+    "member_call_method:split": [
       "049.0242-split-a-space-separated-string.py",
       "148.1829-read-list-of-integer-numbers-from-stdin.py"
     ],
-    "member_call_member:splitext": [
+    "member_call_method:splitext": [
       "177.2709-find-files-with-a-given-list-of-filename-extensions.py"
     ],
-    "member_call_member:start": [
+    "member_call_method:start": [
       "025.0195-send-a-value-to-another-thread.py",
       "185.2820-execute-function-in-30-seconds.py"
     ],
-    "member_call_member:startswith": [
+    "member_call_method:startswith": [
       "096.1094-check-string-prefix.py",
       "167.2611-trim-prefix.py"
     ],
-    "member_call_member:strftime": [
+    "member_call_method:strftime": [
       "099.1429-format-date-yyyy-mm-dd.py"
     ],
-    "member_call_member:strip": [
+    "member_call_method:strip": [
       "110.1455-check-if-string-is-blank.py"
     ],
-    "member_call_member:sub": [
+    "member_call_method:sub": [
       "147.2171-remove-all-non-ascii-characters.py"
     ],
-    "member_call_member:timeit": [
+    "member_call_method:timeit": [
       "132.2040-measure-duration-of-procedure-execution.py"
     ],
-    "member_call_member:today": [
+    "member_call_method:today": [
       "099.2693-format-date-yyyy-mm-dd.py",
       "184.2701-tomorrow.py"
     ],
-    "member_call_member:uniform": [
+    "member_call_method:uniform": [
       "014.3410-pick-uniformly-a-random-floating-point-number-in-ab.py"
     ],
-    "member_call_member:unlink": [
+    "member_call_method:unlink": [
       "155.2147-delete-file.py"
     ],
-    "member_call_member:urlencode": [
+    "member_call_method:urlencode": [
       "174.2687-make-http-post-request.py"
     ],
-    "member_call_member:urlopen": [
+    "member_call_method:urlopen": [
       "101.2172-load-from-http-get-request-into-a-string.py",
       "174.2687-make-http-post-request.py"
     ],
-    "member_call_member:urlretrieve": [
+    "member_call_method:urlretrieve": [
       "102.2173-load-from-http-get-request-into-a-file.py"
     ],
-    "member_call_member:values": [
+    "member_call_method:values": [
       "052.0666-check-if-map-contains-value.py"
     ],
-    "member_call_member:view": [
+    "member_call_method:view": [
       "154.2292-halfway-between-two-hex-color-codes.py"
     ],
-    "member_call_member:walk": [
+    "member_call_method:walk": [
       "177.2725-find-files-with-a-given-list-of-filename-extensions.py"
     ],
-    "member_call_member:zeros": [
+    "member_call_method:zeros": [
       "027.0193-create-a-3-dimensional-array.py"
     ],
     "member_call_object:Q": [
@@ -15184,7 +15186,6 @@
     ],
     "call/method/mutable_duck/pop": [
       "128.2085-breadth-first-traversing-of-a-tree.py",
-      "130.2283-depth-first-traversing-in-a-graph.py",
       "140.2156-delete-map-entry.py"
     ],
     "call/method/mutable_duck/remove": [
@@ -15242,6 +15243,9 @@
     ],
     "call/method/sequence/list/insert": [
       "044.0190-insert-element-in-list.py"
+    ],
+    "call/method/sequence/list/pop": [
+      "130.2283-depth-first-traversing-in-a-graph.py"
     ],
     "call/method/sequence/list/reverse": [
       "019.3164-reverse-a-list.py"

@@ -14,14 +14,14 @@ print("Hi, %s." % name) # binary_operator:Mod, call_argument:, external_free_cal
 # ----------------------------------------------------------------------------------------
 friends = ["john", "pat", "gary", "michael"] # assignment, assignment_lhs_identifier:friends, literal:List, literal:Str, node:Assign, node:List, node:Name, node:Str, single_assignment:friends, whole_span:3 (-> +2)
 for i, name in enumerate(friends): # call_argument:friends, external_free_call:enumerate, for:i (-> +1), for:name (-> +1), for_indexes_elements (-> +1), free_call:enumerate, literal:Tuple, loop:for (-> +1), loop_with_late_exit:for (-> +1), node:Call, node:For (-> +1), node:Name, node:Tuple
-    print("iteration {iteration} is {name}".format(iteration=i, name=name)) # call_argument:, composition, external_free_call:print, free_call:print, free_call_without_result:print, literal:Str, member_call_member:format, node:Attribute, node:Call, node:Expr, node:Name, node:Str
+    print("iteration {iteration} is {name}".format(iteration=i, name=name)) # call_argument:, composition, external_free_call:print, free_call:print, free_call_without_result:print, literal:Str, member_call_method:format, node:Attribute, node:Call, node:Expr, node:Name, node:Str
 
 # ----------------------------------------------------------------------------------------
 # 04_fibonacci.py
 # ----------------------------------------------------------------------------------------
 parents, babies = (1, 1) # assignment, assignment_lhs_identifier:babies, assignment_lhs_identifier:parents, assignment_rhs_atom:1, literal:1, literal:Tuple, node:Assign, node:Name, node:Num, node:Tuple, parallel_assignment:2, whole_span:4 (-> +3)
 while babies < 100: # comparison_operator:Lt, literal:100, loop:while (-> +2), loop_with_late_exit:while (-> +2), node:Compare, node:Name, node:Num, node:While (-> +2)
-    print("This generation has {} babies".format(babies)) # call_argument:, call_argument:babies, composition, external_free_call:print, free_call:print, free_call_without_result:print, literal:Str, member_call_member:format, node:Attribute, node:Call, node:Expr, node:Name, node:Str
+    print("This generation has {} babies".format(babies)) # call_argument:, call_argument:babies, composition, external_free_call:print, free_call:print, free_call_without_result:print, literal:Str, member_call_method:format, node:Attribute, node:Call, node:Expr, node:Name, node:Str
     parents, babies = (babies, parents + babies) # addition_operator, assignment, assignment_lhs_identifier:babies, assignment_lhs_identifier:parents, assignment_rhs_atom:babies, assignment_rhs_atom:parents, binary_operator:Add, literal:Tuple, node:Assign, node:BinOp, node:Name, node:Tuple, parallel_assignment:2, slide, update:babies:parents, update:parents:babies, update_by_assignment:babies:parents, update_by_assignment:parents:babies, update_by_assignment_with, update_with
 
 # ----------------------------------------------------------------------------------------
@@ -38,7 +38,7 @@ greet("Bob") # call_argument:, free_call:greet, free_call_without_result:greet, 
 # ----------------------------------------------------------------------------------------
 import re # import:re, import_module:re, node:Import, whole_span:6 (-> +5)
 for test_string in ["555-1212", "ILL-EGAL"]: # for:test_string (-> +4), literal:List, literal:Str, loop:for (-> +4), loop_with_late_exit:for (-> +4), node:For (-> +4), node:List, node:Name, node:Str
-    if re.match(r"^\d{3}-\d{4}$", test_string): # call_argument:, call_argument:test_string, if (-> +3), if_test_atom:re, if_test_atom:test_string, literal:Str, member_call_member:match, node:Attribute, node:Call, node:If (-> +3), node:Name, node:Str
+    if re.match(r"^\d{3}-\d{4}$", test_string): # call_argument:, call_argument:test_string, if (-> +3), if_test_atom:re, if_test_atom:test_string, literal:Str, member_call_method:match, node:Attribute, node:Call, node:If (-> +3), node:Name, node:Str
         print(test_string, "is a valid US local phone number") # call_argument:, call_argument:test_string, external_free_call:print, free_call:print, free_call_without_result:print, if_then_branch, literal:Str, node:Call, node:Expr, node:Name, node:Str
     else:
         print(test_string, "rejected") # call_argument:, call_argument:test_string, external_free_call:print, free_call:print, free_call_without_result:print, if_else_branch, literal:Str, node:Call, node:Expr, node:Name, node:Str
@@ -65,12 +65,12 @@ except ValueError: # except:ValueError, node:ExceptHandler (-> +1), node:Name
 # 09_indent.py
 # ----------------------------------------------------------------------------------------
 import glob # import:glob, import_module:glob, node:Import, whole_span:8 (-> +7)
-python_files = glob.glob("*.py") # assignment:glob, assignment_lhs_identifier:python_files, assignment_rhs_atom:glob, call_argument:, literal:Str, member_call_member:glob, node:Assign, node:Attribute, node:Call, node:Name, node:Str, single_assignment:python_files
+python_files = glob.glob("*.py") # assignment:glob, assignment_lhs_identifier:python_files, assignment_rhs_atom:glob, call_argument:, literal:Str, member_call_method:glob, node:Assign, node:Attribute, node:Call, node:Name, node:Str, single_assignment:python_files
 for file_name in sorted(python_files): # call_argument:python_files, external_free_call:sorted, for:file_name (-> +5), free_call:sorted, loop:for (-> +5), loop_with_late_exit:for (-> +5), node:Call, node:For (-> +5), node:Name
     print("    ------" + file_name) # binary_operator:Add, call_argument:, concatenation_operator:Str, external_free_call:print, free_call:print, free_call_without_result:print, literal:Str, node:BinOp, node:Call, node:Expr, node:Name, node:Str
     with open(file_name) as f: # call_argument:file_name, external_free_call:open, free_call:open, node:Call, node:Name, node:With (-> +2)
         for line in f: # for:line (-> +1), for_each (-> +1), loop:for (-> +1), loop_with_late_exit:for (-> +1), nested_for:1 (-> +1), node:For (-> +1), node:Name
-            print("    " + line.rstrip()) # binary_operator:Add, call_argument:, composition, concatenation_operator:Str, external_free_call:print, free_call:print, free_call_without_result:print, literal:Str, member_call_member:rstrip, node:Attribute, node:BinOp, node:Call, node:Expr, node:Name, node:Str
+            print("    " + line.rstrip()) # binary_operator:Add, call_argument:, composition, concatenation_operator:Str, external_free_call:print, free_call:print, free_call_without_result:print, literal:Str, member_call_method:rstrip, node:Attribute, node:BinOp, node:Call, node:Expr, node:Name, node:Str
     print() # external_free_call:print, free_call:print, free_call_without_arguments:print, free_call_without_result:print, node:Call, node:Expr, node:Name
 
 # ----------------------------------------------------------------------------------------
@@ -87,7 +87,7 @@ activities = { # assignment, assignment_lhs_identifier:activities, literal:Dict,
 }
 time_now = localtime() # assignment:localtime, assignment_lhs_identifier:time_now, external_free_call:localtime, free_call:localtime, free_call_without_arguments:localtime, node:Assign, node:Call, node:Name, single_assignment:time_now
 hour = time_now.tm_hour # assignment, assignment_lhs_identifier:hour, assignment_rhs_atom:time_now, node:Assign, node:Attribute, node:Name, single_assignment:hour
-for activity_time in sorted(activities.keys()): # call_argument:, composition, external_free_call:sorted, for:activity_time (-> +5), free_call:sorted, loop:for (-> +5), loop_with_break:for (-> +5), loop_with_early_exit:for:break (-> +5), loop_with_else:for (-> +5), member_call_member:keys, node:Attribute, node:Call, node:For (-> +5), node:Name
+for activity_time in sorted(activities.keys()): # call_argument:, composition, external_free_call:sorted, for:activity_time (-> +5), free_call:sorted, loop:for (-> +5), loop_with_break:for (-> +5), loop_with_early_exit:for:break (-> +5), loop_with_else:for (-> +5), member_call_method:keys, node:Attribute, node:Call, node:For (-> +5), node:Name
     if hour < activity_time: # comparison_operator:Lt, if (-> +2), if_test_atom:activity_time, if_test_atom:hour, if_without_else (-> +2), node:Compare, node:If (-> +2), node:Name
         print(activities[activity_time]) # call_argument:, external_free_call:print, free_call:print, free_call_without_result:print, if_then_branch (-> +1), index:activity_time, node:Call, node:Expr, node:Name, node:Subscript
         break # node:Break
@@ -121,8 +121,8 @@ class BankAccount(object): # node:ClassDef (-> +8), node:Name, whole_span:12 (->
     def overdrawn(self): # function:overdrawn (-> +1), function_argument:self, function_argument_flavor:arg, function_returning_something:overdrawn (-> +1), instance_method:overdrawn (-> +1), method:overdrawn (-> +1), node:FunctionDef (-> +1), node:arg
         return self.balance < 0 # comparison_operator:Lt, literal:0, node:Attribute, node:Compare, node:Name, node:Num, node:Return, return
 my_account = BankAccount(15) # assignment:BankAccount, assignment_lhs_identifier:my_account, assignment_rhs_atom:15, call_argument:15, external_free_call:BankAccount, free_call:BankAccount, literal:15, node:Assign, node:Call, node:Name, node:Num, single_assignment:my_account
-my_account.withdraw(50) # call_argument:50, literal:50, member_call:my_account:withdraw, member_call_member:withdraw, member_call_object:my_account, node:Attribute, node:Call, node:Expr, node:Name, node:Num
-print(my_account.balance, my_account.overdrawn()) # call_argument:, composition, external_free_call:print, free_call:print, free_call_without_result:print, member_call_member:overdrawn, node:Attribute, node:Call, node:Expr, node:Name
+my_account.withdraw(50) # call_argument:50, literal:50, member_call:my_account:withdraw, member_call_method:withdraw, member_call_object:my_account, node:Attribute, node:Call, node:Expr, node:Name, node:Num
+print(my_account.balance, my_account.overdrawn()) # call_argument:, composition, external_free_call:print, free_call:print, free_call_without_result:print, member_call_method:overdrawn, node:Attribute, node:Call, node:Expr, node:Name
 
 # ----------------------------------------------------------------------------------------
 # 13_unit_testing.py
@@ -137,7 +137,7 @@ def median(pool): # function:median (-> +6), function_argument:pool, function_ar
         return (copy[int(size / 2 - 1)] + copy[int(size / 2)]) / 2 # addition_operator, binary_operator:Add, binary_operator:Div, binary_operator:Sub, call_argument:, external_free_call:int, free_call:int, if_else_branch, index:_, literal:1, literal:2, node:BinOp, node:Call, node:Name, node:Num, node:Return, node:Subscript, return
 class TestMedian(unittest.TestCase): # node:Attribute, node:ClassDef (-> +2), node:Name
     def testMedian(self): # function:testMedian (-> +1), function_argument:self, function_argument_flavor:arg, function_returning_nothing:testMedian (-> +1), instance_method:testMedian (-> +1), method:testMedian (-> +1), node:FunctionDef (-> +1), node:arg
-        self.assertEqual(median([2, 9, 9, 7, 9, 2, 4, 5, 8]), 7) # call_argument:, call_argument:7, composition, free_call:median, internal_free_call:median, literal:2, literal:4, literal:5, literal:7, literal:8, literal:9, literal:List, member_call:self:assertEqual, member_call_member:assertEqual, member_call_object:self, node:Attribute, node:Call, node:Expr, node:List, node:Name, node:Num, suggest_constant_definition
+        self.assertEqual(median([2, 9, 9, 7, 9, 2, 4, 5, 8]), 7) # call_argument:, call_argument:7, composition, free_call:median, internal_free_call:median, literal:2, literal:4, literal:5, literal:7, literal:8, literal:9, literal:List, member_call:self:assertEqual, member_call_method:assertEqual, member_call_object:self, node:Attribute, node:Call, node:Expr, node:List, node:Name, node:Num, suggest_constant_definition
 
 # ----------------------------------------------------------------------------------------
 # 14_median.py
@@ -158,10 +158,10 @@ lines = """ # assignment:splitlines, assignment_lhs_identifier:lines, node:Assig
 This is the
 first paragraph.
 This is the second.
-""".splitlines() # literal:Str, member_call_member:splitlines, node:Attribute, node:Call, node:Str
+""".splitlines() # literal:Str, member_call_method:splitlines, node:Attribute, node:Call, node:Str
 for has_chars, frags in groupby(lines, bool): # call_argument:bool, call_argument:lines, external_free_call:groupby, for:frags (-> +2), for:has_chars (-> +2), free_call:groupby, literal:Tuple, loop:for (-> +2), loop_with_late_exit:for (-> +2), node:Call, node:For (-> +2), node:Name, node:Tuple
     if has_chars: # if (-> +1), if_without_else (-> +1), node:If (-> +1), node:Name
-        print(" ".join(frags)) # call_argument:, call_argument:frags, composition, external_free_call:print, free_call:print, free_call_without_result:print, if_then_branch, literal:Str, member_call_member:join, node:Attribute, node:Call, node:Expr, node:Name, node:Str
+        print(" ".join(frags)) # call_argument:, call_argument:frags, composition, external_free_call:print, free_call:print, free_call_without_result:print, if_then_branch, literal:Str, member_call_method:join, node:Attribute, node:Call, node:Expr, node:Name, node:Str
 
 # ----------------------------------------------------------------------------------------
 # 16_csv.py
@@ -170,8 +170,8 @@ import csv # import:csv, import_module:csv, node:Import, whole_span:18 (-> +17)
 def cmp(a, b): # function:cmp (-> +1), function_argument:a, function_argument:b, function_argument_flavor:arg, function_returning_something:cmp (-> +1), node:FunctionDef (-> +1), node:arg
     return (a > b) - (a < b) # binary_operator:Sub, comparison_operator:Gt, comparison_operator:Lt, node:BinOp, node:Compare, node:Name, node:Return, return
 with open("stocks.csv", "w", newline="") as stocksFileW: # call_argument:, empty_literal:Str, external_free_call:open, free_call:open, literal:Str, node:Call, node:Name, node:Str, node:With (-> +6)
-    writer = csv.writer(stocksFileW) # assignment:writer, assignment_lhs_identifier:writer, assignment_rhs_atom:csv, assignment_rhs_atom:stocksFileW, call_argument:stocksFileW, member_call_member:writer, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:writer
-    writer.writerows( # member_call:writer:writerows, member_call_member:writerows, member_call_object:writer, node:Attribute, node:Call (-> +4), node:Expr (-> +4), node:Name
+    writer = csv.writer(stocksFileW) # assignment:writer, assignment_lhs_identifier:writer, assignment_rhs_atom:csv, assignment_rhs_atom:stocksFileW, call_argument:stocksFileW, member_call_method:writer, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:writer
+    writer.writerows( # member_call:writer:writerows, member_call_method:writerows, member_call_object:writer, node:Attribute, node:Call (-> +4), node:Expr (-> +4), node:Name
         [ # call_argument:, literal:List, node:List (-> +3)
             ["GOOG", "Google, Inc.", 505.24, 0.47, 0.09], # literal:0.09, literal:0.47, literal:505.24, literal:List, literal:Str, node:List, node:Num, node:Str, suggest_constant_definition
             ["YHOO", "Yahoo! Inc.", 27.38, 0.33, 1.22], # literal:0.33, literal:1.22, literal:27.38, literal:List, literal:Str, node:List, node:Num, node:Str, suggest_constant_definition
@@ -179,11 +179,11 @@ with open("stocks.csv", "w", newline="") as stocksFileW: # call_argument:, empty
         ]
     )
 with open("stocks.csv", "r") as stocksFile: # call_argument:, external_free_call:open, free_call:open, literal:Str, node:Call, node:Name, node:Str, node:With (-> +5)
-    stocks = csv.reader(stocksFile) # assignment:reader, assignment_lhs_identifier:stocks, assignment_rhs_atom:csv, assignment_rhs_atom:stocksFile, call_argument:stocksFile, member_call_member:reader, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:stocks
+    stocks = csv.reader(stocksFile) # assignment:reader, assignment_lhs_identifier:stocks, assignment_rhs_atom:csv, assignment_rhs_atom:stocksFile, call_argument:stocksFile, member_call_method:reader, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:stocks
     status_labels = {-1: "down", 0: "unchanged", 1: "up"} # assignment, assignment_lhs_identifier:status_labels, assignment_rhs_atom:-1, assignment_rhs_atom:0, assignment_rhs_atom:1, literal:-1, literal:0, literal:1, literal:Dict, literal:Str, node:Assign, node:Dict, node:Name, node:Num, node:Str, single_assignment:status_labels
     for ticker, name, price, change, pct in stocks: # for:change (-> +2), for:name (-> +2), for:pct (-> +2), for:price (-> +2), for:ticker (-> +2), for_each (-> +2), literal:Tuple, loop:for (-> +2), loop_with_late_exit:for (-> +2), node:For (-> +2), node:Name, node:Tuple
         status = status_labels[cmp(float(change), 0.0)] # assignment, assignment_lhs_identifier:status, assignment_rhs_atom:0.0, assignment_rhs_atom:change, assignment_rhs_atom:status_labels, call_argument:, call_argument:0.0, call_argument:change, composition, external_free_call:float, free_call:cmp, free_call:float, index:_, internal_free_call:cmp, literal:0.0, node:Assign, node:Call, node:Name, node:Num, node:Subscript, single_assignment:status, suggest_constant_definition
-        print("{} is {} ({:.2f})".format(name, status, float(pct))) # call_argument:, call_argument:name, call_argument:pct, call_argument:status, composition, external_free_call:float, external_free_call:print, free_call:float, free_call:print, free_call_without_result:print, literal:Str, member_call_member:format, node:Attribute, node:Call, node:Expr, node:Name, node:Str
+        print("{} is {} ({:.2f})".format(name, status, float(pct))) # call_argument:, call_argument:name, call_argument:pct, call_argument:status, composition, external_free_call:float, external_free_call:print, free_call:float, free_call:print, free_call_without_result:print, literal:Str, member_call_method:format, node:Attribute, node:Call, node:Expr, node:Name, node:Str
 
 # ----------------------------------------------------------------------------------------
 # 18_queens.py
@@ -214,7 +214,7 @@ for answer in solve(BOARD_SIZE): # call_argument:BOARD_SIZE, for:answer (-> +1),
 # ----------------------------------------------------------------------------------------
 import itertools # import:itertools, import_module:itertools, node:Import, whole_span:11 (-> +10)
 def iter_primes(): # function:iter_primes (-> +5), function_without_arguments:iter_primes (-> +5), generator:iter_primes (-> +5), node:FunctionDef (-> +5)
-    numbers = itertools.count(2) # assignment:count, assignment_lhs_identifier:numbers, assignment_rhs_atom:2, assignment_rhs_atom:itertools, call_argument:2, literal:2, member_call_member:count, node:Assign, node:Attribute, node:Call, node:Name, node:Num, single_assignment:numbers
+    numbers = itertools.count(2) # assignment:count, assignment_lhs_identifier:numbers, assignment_rhs_atom:2, assignment_rhs_atom:itertools, call_argument:2, literal:2, member_call_method:count, node:Assign, node:Attribute, node:Call, node:Name, node:Num, single_assignment:numbers
     while True: # infinite_while (-> +3), literal:True, loop:while (-> +3), loop_with_late_exit:while (-> +3), node:NameConstant, node:While (-> +3)
         prime = next(numbers) # assignment:next, assignment_lhs_identifier:prime, assignment_rhs_atom:numbers, call_argument:numbers, external_free_call:next, free_call:next, node:Assign, node:Call, node:Name, single_assignment:prime
         yield prime # node:Expr, node:Name, node:Yield, yield:prime
@@ -235,12 +235,12 @@ dinner_recipe = """<html><body><table> # assignment, assignment_lhs_identifier:d
 <tr><td>1</td><td>jar</td><td>pesto</td></tr>
 </table></body></html>""" # literal:Str, node:Str
 import xml.etree.ElementTree as etree # import:xml.etree.ElementTree, import_module:xml.etree.ElementTree, node:Import
-tree = etree.fromstring(dinner_recipe) # assignment:fromstring, assignment_lhs_identifier:tree, assignment_rhs_atom:dinner_recipe, assignment_rhs_atom:etree, call_argument:dinner_recipe, member_call_member:fromstring, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:tree
+tree = etree.fromstring(dinner_recipe) # assignment:fromstring, assignment_lhs_identifier:tree, assignment_rhs_atom:dinner_recipe, assignment_rhs_atom:etree, call_argument:dinner_recipe, member_call_method:fromstring, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:tree
 pantry = {"olive oil", "pesto"} # assignment, assignment_lhs_identifier:pantry, literal:Set, literal:Str, node:Assign, node:Name, node:Set, node:Str, single_assignment:pantry
-for ingredient in tree.getiterator("tr"): # call_argument:, for:ingredient (-> +3), literal:Str, loop:for (-> +3), loop_with_late_exit:for (-> +3), member_call_member:getiterator, node:Attribute, node:Call, node:For (-> +3), node:Name, node:Str
+for ingredient in tree.getiterator("tr"): # call_argument:, for:ingredient (-> +3), literal:Str, loop:for (-> +3), loop_with_late_exit:for (-> +3), member_call_method:getiterator, node:Attribute, node:Call, node:For (-> +3), node:Name, node:Str
     amt, unit, item = ingredient # assignment, assignment_lhs_identifier:amt, assignment_lhs_identifier:item, assignment_lhs_identifier:unit, assignment_rhs_atom:ingredient, literal:Tuple, node:Assign, node:Name, node:Tuple, parallel_assignment:3
     if item.tag == "td" and item.text not in pantry: # boolean_operator:And, comparison_operator:Eq, comparison_operator:NotIn, if (-> +1), if_test_atom:item, if_test_atom:pantry, if_without_else (-> +1), literal:Str, node:Attribute, node:BoolOp, node:Compare, node:If (-> +1), node:Name, node:Str
-        print("{}: {} {}".format(item.text, amt.text, unit.text)) # call_argument:, composition, external_free_call:print, free_call:print, free_call_without_result:print, if_then_branch, literal:Str, member_call_member:format, node:Attribute, node:Call, node:Expr, node:Name, node:Str
+        print("{}: {} {}".format(item.text, amt.text, unit.text)) # call_argument:, composition, external_free_call:print, free_call:print, free_call_without_result:print, if_then_branch, literal:Str, member_call_method:format, node:Attribute, node:Call, node:Expr, node:Name, node:Str
 
 # ----------------------------------------------------------------------------------------
 # 28_queens.py
@@ -268,7 +268,7 @@ def add_queen(queens): # function:add_queen (-> +11), function_argument:queens, 
     raise BailOut # node:Name, node:Raise, raise:BailOut
 queens = add_queen([]) # assignment:add_queen, assignment_lhs_identifier:queens, call_argument:, empty_literal:List, free_call:add_queen, internal_free_call:add_queen, literal:List, node:Assign, node:Call, node:List, node:Name, single_assignment:queens
 print(queens) # call_argument:queens, external_free_call:print, free_call:print, free_call_without_result:print, node:Call, node:Expr, node:Name
-print("\n".join(". " * q + "Q " + ". " * (BOARD_SIZE - q - 1) for q in queens)) # binary_operator:Add, binary_operator:Mult, binary_operator:Sub, call_argument:, composition, comprehension:Generator, comprehension_for_count:1, concatenation_operator:Str, external_free_call:print, free_call:print, free_call_without_result:print, literal:1, literal:Str, member_call_member:join, node:Attribute, node:BinOp, node:Call, node:Expr, node:GeneratorExp, node:Name, node:Num, node:Str, replication_operator:Str
+print("\n".join(". " * q + "Q " + ". " * (BOARD_SIZE - q - 1) for q in queens)) # binary_operator:Add, binary_operator:Mult, binary_operator:Sub, call_argument:, composition, comprehension:Generator, comprehension_for_count:1, concatenation_operator:Str, external_free_call:print, free_call:print, free_call_without_result:print, literal:1, literal:Str, member_call_method:join, node:Attribute, node:BinOp, node:Call, node:Expr, node:GeneratorExp, node:Name, node:Num, node:Str, replication_operator:Str
 
 # ----------------------------------------------------------------------------------------
 # 33_guess_the_number.py
@@ -276,8 +276,8 @@ print("\n".join(". " * q + "Q " + ". " * (BOARD_SIZE - q - 1) for q in queens)) 
 import random # import:random, import_module:random, node:Import, whole_span:18 (-> +17)
 guesses_made = 0 # assignment:0, assignment_lhs_identifier:guesses_made, assignment_rhs_atom:0, literal:0, node:Assign, node:Name, node:Num, single_assignment:guesses_made
 name = input("Hello! What is your name?\n") # assignment:input, assignment_lhs_identifier:name, call_argument:, external_free_call:input, free_call:input, literal:Str, node:Assign, node:Call, node:Name, node:Str, single_assignment:name
-number = random.randint(1, 20) # assignment:randint, assignment_lhs_identifier:number, assignment_rhs_atom:1, assignment_rhs_atom:20, assignment_rhs_atom:random, call_argument:1, call_argument:20, literal:1, literal:20, member_call_member:randint, node:Assign, node:Attribute, node:Call, node:Name, node:Num, single_assignment:number
-print("Well, {}, I am thinking of a number between 1 and 20.".format(name)) # call_argument:, call_argument:name, composition, external_free_call:print, free_call:print, free_call_without_result:print, literal:Str, member_call_member:format, node:Attribute, node:Call, node:Expr, node:Name, node:Str
+number = random.randint(1, 20) # assignment:randint, assignment_lhs_identifier:number, assignment_rhs_atom:1, assignment_rhs_atom:20, assignment_rhs_atom:random, call_argument:1, call_argument:20, literal:1, literal:20, member_call_method:randint, node:Assign, node:Attribute, node:Call, node:Name, node:Num, single_assignment:number
+print("Well, {}, I am thinking of a number between 1 and 20.".format(name)) # call_argument:, call_argument:name, composition, external_free_call:print, free_call:print, free_call_without_result:print, literal:Str, member_call_method:format, node:Attribute, node:Call, node:Expr, node:Name, node:Str
 while guesses_made < 6: # comparison_operator:Lt, count_states:guesses_made (-> +8), literal:6, loop:while (-> +8), loop_with_break:while (-> +8), loop_with_early_exit:while:break (-> +8), node:Compare, node:Name, node:Num, node:While (-> +8)
     guess = int(input("Take a guess: ")) # assignment:int, assignment_lhs_identifier:guess, call_argument:, composition, external_free_call:input, external_free_call:int, free_call:input, free_call:int, literal:Str, node:Assign, node:Call, node:Name, node:Str, single_assignment:guess
     guesses_made += 1 # assignment_lhs_identifier:guesses_made, assignment_rhs_atom:1, augmented_assignment:Add, increment:guesses_made, literal:1, node:AugAssign, node:Name, node:Num, update:guesses_made:1, update_by_augmented_assignment:guesses_made:1, update_by_augmented_assignment_with:Add, update_with:Add
@@ -288,6 +288,6 @@ while guesses_made < 6: # comparison_operator:Lt, count_states:guesses_made (-> 
     if guess == number: # comparison_operator:Eq, if (-> +1), if_test_atom:guess, if_test_atom:number, if_without_else (-> +1), node:Compare, node:If (-> +1), node:Name
         break # if_then_branch, node:Break
 if guess == number: # comparison_operator:Eq, if (-> +3), if_test_atom:guess, if_test_atom:number, node:Compare, node:If (-> +3), node:Name
-    print("Good job, {}! You guessed my number in {} guesses!".format(name, guesses_made)) # call_argument:, call_argument:guesses_made, call_argument:name, composition, external_free_call:print, free_call:print, free_call_without_result:print, if_then_branch, literal:Str, member_call_member:format, node:Attribute, node:Call, node:Expr, node:Name, node:Str
+    print("Good job, {}! You guessed my number in {} guesses!".format(name, guesses_made)) # call_argument:, call_argument:guesses_made, call_argument:name, composition, external_free_call:print, free_call:print, free_call_without_result:print, if_then_branch, literal:Str, member_call_method:format, node:Attribute, node:Call, node:Expr, node:Name, node:Str
 else:
-    print("Nope. The number I was thinking of was {}".format(number)) # call_argument:, call_argument:number, composition, external_free_call:print, free_call:print, free_call_without_result:print, if_else_branch, literal:Str, member_call_member:format, node:Attribute, node:Call, node:Expr, node:Name, node:Str
+    print("Nope. The number I was thinking of was {}".format(number)) # call_argument:, call_argument:number, composition, external_free_call:print, free_call:print, free_call_without_result:print, if_else_branch, literal:Str, member_call_method:format, node:Attribute, node:Call, node:Expr, node:Name, node:Str

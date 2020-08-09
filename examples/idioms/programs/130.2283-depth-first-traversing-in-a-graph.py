@@ -17,7 +17,7 @@ def depth_first(start, f):
     seen = set()
     stack = [start]
     while stack:
-        vertex = stack.pop()
+        vertex = stack.pop()  # paroxython: -member_call_method:pop +member_call_method:list:pop
         f(vertex)
         seen.add(vertex)
         stack.extend(v for v in vertex.adjacent if v not in seen)
