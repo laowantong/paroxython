@@ -1823,21 +1823,25 @@ SELECT "member_call",
        o.span,
        o.path
 FROM t_member_call_object AS o
-JOIN t_member_call_member AS m ON (o.path GLOB m.path || "*-")
+JOIN t_member_call_member AS m ON (o.span = m.span)
 ```
+
+**Remark.** A first version of this query was joining on the paths. This resulted in false positives when a `member_call_member:(type):(method)` was manually hinted for duck-typing resolution (due to the fact that an added label lacks a path). Testing on the span is less accurate, but seems to work (cf. lines 3-4 below).
 
 ##### Example
 
 ```python
-1   foo.append(a)
+1   foo.add(a)
 2   seq.append(int(s))
+3   foo\
+4       .add(a)
 ```
 
 ##### Matches
 
 | Label | Lines |
 |:--|:--|
-| `member_call:foo:append` | 1 |
+| `member_call:foo:add` | 1, 3 |
 | `member_call:seq:append` | 2 |
 
 --------------------------------------------------------------------------------
