@@ -259,5 +259,6 @@
 - update_by_member_call
 - update_by_member_call_with
 - update_with
+- value_attr
 - yield
 - yoda_comparison

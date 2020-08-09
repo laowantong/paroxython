@@ -365,6 +365,7 @@
         "slice_step:": [[3,3]],
         "slice_upper:": [[3,3]],
         "try_except:ValueError": [[2,6]],
+        "value_attr:argv": [[3,3]],
         "whole_span:6": [[1,6]]
       },
       "taxa": {
@@ -3951,6 +3952,9 @@
     ],
     "update_with:filter": [
       "20_prime_numbers.py"
+    ],
+    "value_attr:argv": [
+      "08_arguments.py"
     ],
     "whole_span:1": [
       "01_hello_world.py"

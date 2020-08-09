@@ -2538,6 +2538,7 @@
         "node:Import": [[1,1]],
         "node:Name": [[2,2],[2,2],[2,2]],
         "node:Str": [[2,2]],
+        "value_attr:stderr": [[2,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
@@ -2567,6 +2568,7 @@
         "node:Num": [[2,2]],
         "node:Subscript": [[2,2]],
         "single_assignment:x": [[2,2]],
+        "value_attr:argv": [[2,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
@@ -2594,6 +2596,7 @@
         "node:Import": [[1,1]],
         "node:Name": [[2,2],[2,2]],
         "single_assignment:d": [[2,2]],
+        "value_attr:datetime": [[2,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
@@ -2898,6 +2901,7 @@
         "slice_lower:1": [[2,2]],
         "slice_step:": [[2,2]],
         "slice_upper:": [[2,2]],
+        "value_attr:argv": [[2,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
@@ -3446,6 +3450,7 @@
         "node:Return": [[6,6]],
         "node:arg": [[2,2],[5,5]],
         "return": [[6,6]],
+        "value_attr:_x": [[6,6]],
         "whole_span:6": [[1,6]]
       },
       "taxa": {
@@ -3632,6 +3637,7 @@
         "node:Import": [[1,1]],
         "node:Name": [[2,2],[2,2],[2,2]],
         "single_assignment:x": [[2,2]],
+        "value_attr:path": [[2,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
@@ -3710,6 +3716,7 @@
         "node:Import": [[1,1]],
         "node:Name": [[2,2],[2,2],[2,2]],
         "single_assignment:d": [[2,2]],
+        "value_attr:date": [[2,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
@@ -3840,6 +3847,7 @@
         "node:Name": [[2,2],[2,2],[2,2],[3,3],[3,3]],
         "node:With": [[2,3]],
         "single_assignment:s": [[3,3]],
+        "value_attr:request": [[2,2]],
         "whole_span:3": [[1,3]]
       },
       "taxa": {
@@ -3874,6 +3882,7 @@
         "node:Str": [[2,2]],
         "node:Tuple": [[2,2]],
         "parallel_assignment:2": [[2,2]],
+        "value_attr:request": [[2,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
@@ -3905,6 +3914,7 @@
         "node:Name": [[2,2],[2,2]],
         "node:Str": [[2,2]],
         "single_assignment:x": [[2,2]],
+        "value_attr:etree": [[2,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
@@ -4012,6 +4022,7 @@
         "node:Num": [[2,2]],
         "node:Subscript": [[2,2]],
         "single_assignment:s": [[2,2]],
+        "value_attr:argv": [[2,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
@@ -4070,6 +4081,7 @@
         "node:Import": [[1,1]],
         "node:Name": [[2,2],[2,2],[2,2],[2,2]],
         "single_assignment:dir": [[2,2]],
+        "value_attr:path": [[2,2],[2,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
@@ -4135,6 +4147,7 @@
         "node:Import": [[1,1]],
         "node:Name": [[2,2],[2,2],[2,2]],
         "single_assignment:n": [[2,2]],
+        "value_attr:asizeof": [[2,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
@@ -4971,7 +4984,7 @@
       },
       "taxa": {
         "call/function": [[5,5]],
-        "call/method/pop": [[4,4]],
+        "call/method/mutable_duck/pop": [[4,4]],
         "call/method/sequence/list/append": [[9,9]],
         "def/argument/arg": [[1,1],[1,1]],
         "def/higher_order": [[1,9]],
@@ -5144,8 +5157,8 @@
         "call/function": [[6,6]],
         "call/function/builtin/casting/set": [[2,2]],
         "call/function/without_arguments": [[2,2]],
+        "call/method/mutable_duck/pop": [[5,5]],
         "call/method/non_sequence/set/add": [[7,7]],
-        "call/method/pop": [[5,5]],
         "call/method/sequence/list/extend": [[8,8]],
         "condition/belonging/not": [[8,8]],
         "def/argument/arg": [[1,1],[1,1]],
@@ -5311,7 +5324,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "call/method": [[1,1]],
+        "call/method/mutable_duck/remove": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]]
       }
@@ -5440,7 +5453,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "call/method/pop": [[1,1]],
+        "call/method/mutable_duck/pop": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "type/null/literal": [[1,1]]
@@ -5546,6 +5559,7 @@
         "node:Import": [[1,1]],
         "node:Name": [[2,2],[2,2],[2,2]],
         "single_assignment:b": [[2,2]],
+        "value_attr:path": [[2,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
@@ -5616,6 +5630,8 @@
         "node:Name": [[2,2],[3,3],[3,3],[5,5],[5,5],[6,6],[6,6]],
         "node:Str": [[3,3],[5,5]],
         "single_assignment:logger": [[5,5]],
+        "value_attr:DEBUG": [[3,3]],
+        "value_attr:stdout": [[3,3]],
         "whole_span:6": [[1,6]]
       },
       "taxa": {
@@ -6397,6 +6413,7 @@
         "slice_lower:1": [[2,2],[4,4]],
         "slice_step:": [[2,2],[4,4]],
         "slice_upper:": [[2,2],[4,4]],
+        "value_attr:argv": [[2,2],[4,4]],
         "whole_span:5": [[1,5]],
         "yoda_comparison:In": [[2,2],[4,4]]
       },
@@ -6955,9 +6972,10 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "call/method": [[1,1]],
+        "call/method/number/floating_point/hex": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
+        "type/number/floating_point": [[1,1]],
         "var/assignment/single": [[1,1]]
       }
     },
@@ -6979,9 +6997,10 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "call/method": [[1,1]],
+        "call/method/number/floating_point/fromhex": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
+        "type/number/floating_point": [[1,1]],
         "var/assignment/single": [[1,1]]
       }
     },
@@ -7024,6 +7043,7 @@
         "node:Subscript": [[3,3]],
         "single_assignment:L": [[3,3]],
         "single_assignment:extensions": [[2,2]],
+        "value_attr:path": [[3,3]],
         "whole_span:3": [[1,3]]
       },
       "taxa": {
@@ -7558,6 +7578,7 @@
         "return": [[10,10],[12,12]],
         "return:i": [[7,7]],
         "unary_operator:Not": [[14,14]],
+        "value_attr:p": [[6,6],[9,9],[9,9],[10,10]],
         "whole_span:15": [[1,15]]
       },
       "taxa": {
@@ -14558,6 +14579,49 @@
     "update_with:sorted": [
       "028.0350-sort-by-a-property.py"
     ],
+    "value_attr:DEBUG": [
+      "145.1822-print-log-line-with-datetime.py"
+    ],
+    "value_attr:_x": [
+      "090.1099-read-only-outside.py"
+    ],
+    "value_attr:argv": [
+      "060.1084-read-command-line-argument.py",
+      "071.0379-echo-program-implementation.py",
+      "105.1804-current-executable-name.py",
+      "162.2164-execute-procedures-depending-on-options.py"
+    ],
+    "value_attr:asizeof": [
+      "109.2280-number-of-bytes-of-a-type.py"
+    ],
+    "value_attr:date": [
+      "098.2142-epoch-seconds-to-date-object.py"
+    ],
+    "value_attr:datetime": [
+      "061.0576-get-current-date.py"
+    ],
+    "value_attr:etree": [
+      "103.2276-load-xml-file-into-struct.py"
+    ],
+    "value_attr:p": [
+      "187.3261-disjoint-set.py"
+    ],
+    "value_attr:path": [
+      "095.2140-get-file-size.py",
+      "107.2139-get-folder-containing-current-program.py",
+      "144.2145-check-if-file-exists.py",
+      "177.2709-find-files-with-a-given-list-of-filename-extensions.py"
+    ],
+    "value_attr:request": [
+      "101.2172-load-from-http-get-request-into-a-string.py",
+      "102.2173-load-from-http-get-request-into-a-file.py"
+    ],
+    "value_attr:stderr": [
+      "059.0668-write-to-standard-error-stream.py"
+    ],
+    "value_attr:stdout": [
+      "145.1822-print-log-line-with-datetime.py"
+    ],
     "whole_span:1": [
       "001.1159-print-hello-world.py",
       "002.1493-print-hello-10-times.py",
@@ -15080,7 +15144,6 @@
       "127.2274-source-code-inclusion.py",
       "129.2282-breadth-first-traversing-in-a-graph.py",
       "132.2040-measure-duration-of-procedure-execution.py",
-      "135.2158-remove-item-from-list-by-its-value.py",
       "144.2145-check-if-file-exists.py",
       "144.2915-check-if-file-exists.py",
       "145.1822-print-log-line-with-datetime.py",
@@ -15091,8 +15154,6 @@
       "158.2163-random-sublist.py",
       "164.2169-open-url-in-default-browser.py",
       "174.2687-make-http-post-request.py",
-      "175.2613-bytes-to-hex-string.py",
-      "176.2614-hex-string-to-byte-array.py",
       "177.2709-find-files-with-a-given-list-of-filename-extensions.py",
       "177.2725-find-files-with-a-given-list-of-filename-extensions.py",
       "177.3241-find-files-with-a-given-list-of-filename-extensions.py",
@@ -15121,6 +15182,14 @@
     "call/method/logging/basicConfig": [
       "145.1822-print-log-line-with-datetime.py"
     ],
+    "call/method/mutable_duck/pop": [
+      "128.2085-breadth-first-traversing-of-a-tree.py",
+      "130.2283-depth-first-traversing-in-a-graph.py",
+      "140.2156-delete-map-entry.py"
+    ],
+    "call/method/mutable_duck/remove": [
+      "135.2158-remove-item-from-list-by-its-value.py"
+    ],
     "call/method/non_sequence/dictionary/items": [
       "013.0574-iterate-over-map-keys-and-values.py",
       "113.2157-iterate-over-map-entries-ordered-by-values.py"
@@ -15134,10 +15203,11 @@
       "129.2282-breadth-first-traversing-in-a-graph.py",
       "130.2283-depth-first-traversing-in-a-graph.py"
     ],
-    "call/method/pop": [
-      "128.2085-breadth-first-traversing-of-a-tree.py",
-      "130.2283-depth-first-traversing-in-a-graph.py",
-      "140.2156-delete-map-entry.py"
+    "call/method/number/floating_point/fromhex": [
+      "176.2614-hex-string-to-byte-array.py"
+    ],
+    "call/method/number/floating_point/hex": [
+      "175.2613-bytes-to-hex-string.py"
     ],
     "call/method/random/choice": [
       "011.0047-pick-a-random-element-from-a-list.py"
@@ -16451,7 +16521,9 @@
     "type/number/floating_point": [
       "079.1090-convert-integer-to-floating-point-number.py",
       "146.1826-convert-string-to-floating-point-number.py",
-      "146.2739-convert-string-to-floating-point-number.py"
+      "146.2739-convert-string-to-floating-point-number.py",
+      "175.2613-bytes-to-hex-string.py",
+      "176.2614-hex-string-to-byte-array.py"
     ],
     "type/number/floating_point/literal": [
       "068.2271-create-a-bitset.py",

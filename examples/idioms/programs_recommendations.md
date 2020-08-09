@@ -147,20 +147,20 @@
     - [`125.2167-measure-function-call-duration.py`](#program-1252167-measure-function-call-durationpy-learning-cost-61875)
     - [`126.2137-multiple-return-values.py`](#program-1262137-multiple-return-valuespy-learning-cost-53125)
     - [`127.2274-source-code-inclusion.py`](#program-1272274-source-code-inclusionpy-learning-cost-44375)
-    - [`128.2085-breadth-first-traversing-of-a-tree.py`](#program-1282085-breadth-first-traversing-of-a-treepy-learning-cost-156875)
+    - [`128.2085-breadth-first-traversing-of-a-tree.py`](#program-1282085-breadth-first-traversing-of-a-treepy-learning-cost-1575)
     - [`129.2282-breadth-first-traversing-in-a-graph.py`](#program-1292282-breadth-first-traversing-in-a-graphpy-learning-cost-14875)
-    - [`130.2283-depth-first-traversing-in-a-graph.py`](#program-1302283-depth-first-traversing-in-a-graphpy-learning-cost-1403125)
+    - [`130.2283-depth-first-traversing-in-a-graph.py`](#program-1302283-depth-first-traversing-in-a-graphpy-learning-cost-1409375)
     - [`131.2083-successive-conditions.py`](#program-1312083-successive-conditionspy-learning-cost-1625)
     - [`131.2766-successive-conditions.py`](#program-1312766-successive-conditionspy-learning-cost-25625)
     - [`132.2040-measure-duration-of-procedure-execution.py`](#program-1322040-measure-duration-of-procedure-executionpy-learning-cost-35)
     - [`133.2160-case-insensitive-string-contains.py`](#program-1332160-case-insensitive-string-containspy-learning-cost-346875)
     - [`134.1850-create-a-new-list.py`](#program-1341850-create-a-new-listpy-learning-cost-18125)
-    - [`135.2158-remove-item-from-list-by-its-value.py`](#program-1352158-remove-item-from-list-by-its-valuepy-learning-cost-075)
+    - [`135.2158-remove-item-from-list-by-its-value.py`](#program-1352158-remove-item-from-list-by-its-valuepy-learning-cost-09375)
     - [`136.2141-remove-all-occurrences-of-a-value-from-a-list.py`](#program-1362141-remove-all-occurrences-of-a-value-from-a-listpy-learning-cost-175)
     - [`137.1823-check-if-string-contains-only-digits.py`](#program-1371823-check-if-string-contains-only-digitspy-learning-cost-271875)
     - [`138.2161-create-temp-file.py`](#program-1382161-create-temp-filepy-learning-cost-18125)
     - [`139.2162-create-temp-directory.py`](#program-1392162-create-temp-directorypy-learning-cost-18125)
-    - [`140.2156-delete-map-entry.py`](#program-1402156-delete-map-entrypy-learning-cost-175)
+    - [`140.2156-delete-map-entry.py`](#program-1402156-delete-map-entrypy-learning-cost-18125)
     - [`141.2159-iterate-in-sequence-over-two-lists.py`](#program-1412159-iterate-in-sequence-over-two-listspy-learning-cost-3625)
     - [`142.2151-hexadecimal-digits-of-an-integer.py`](#program-1422151-hexadecimal-digits-of-an-integerpy-learning-cost-18125)
     - [`143.2256-iterate-alternatively-over-two-lists.py`](#program-1432256-iterate-alternatively-over-two-listspy-learning-cost-36875)
@@ -203,8 +203,8 @@
     - [`173.2428-format-a-number-with-grouped-thousands.py`](#program-1732428-format-a-number-with-grouped-thousandspy-learning-cost-1875)
     - [`173.2429-format-a-number-with-grouped-thousands.py`](#program-1732429-format-a-number-with-grouped-thousandspy-learning-cost-1875)
     - [`174.2687-make-http-post-request.py`](#program-1742687-make-http-post-requestpy-learning-cost-721875)
-    - [`175.2613-bytes-to-hex-string.py`](#program-1752613-bytes-to-hex-stringpy-learning-cost-1625)
-    - [`176.2614-hex-string-to-byte-array.py`](#program-1762614-hex-string-to-byte-arraypy-learning-cost-1625)
+    - [`175.2613-bytes-to-hex-string.py`](#program-1752613-bytes-to-hex-stringpy-learning-cost-271875)
+    - [`176.2614-hex-string-to-byte-array.py`](#program-1762614-hex-string-to-byte-arraypy-learning-cost-271875)
     - [`177.2709-find-files-with-a-given-list-of-filename-extensions.py`](#program-1772709-find-files-with-a-given-list-of-filename-extensionspy-learning-cost-775)
     - [`177.2725-find-files-with-a-given-list-of-filename-extensions.py`](#program-1772725-find-files-with-a-given-list-of-filename-extensionspy-learning-cost-721875)
     - [`177.3241-find-files-with-a-given-list-of-filename-extensions.py`](#program-1773241-find-files-with-a-given-list-of-filename-extensionspy-learning-cost-796875)
@@ -3067,7 +3067,7 @@
 
 ---
 
-### Program `128.2085-breadth-first-traversing-of-a-tree.py` (learning cost 15.6875)
+### Program `128.2085-breadth-first-traversing-of-a-tree.py` (learning cost 15.75)
 
 ```python
 1   def BFS(f, root):
@@ -3084,7 +3084,7 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.75 | `call/function` | 5 |
-| 0.875 | `call/method/pop` | 4 |
+| 0.9375 | `call/method/mutable_duck/pop` | 4 |
 | 0.96875 | `call/method/sequence/list/append` | 9 |
 | 0.875 | `def/argument/arg` | 1, 1 |
 | 0.75 | `def/higher_order` | 1-9 |
@@ -3144,7 +3144,7 @@
 
 ---
 
-### Program `130.2283-depth-first-traversing-in-a-graph.py` (learning cost 14.03125)
+### Program `130.2283-depth-first-traversing-in-a-graph.py` (learning cost 14.09375)
 
 ```python
 1   def depth_first(start, f):
@@ -3162,8 +3162,8 @@
 | 0.75 | `call/function` | 6 |
 | 0.96875 | `call/function/builtin/casting/set` | 2 |
 | 0.875 | `call/function/without_arguments` | 2 |
+| 0.9375 | `call/method/mutable_duck/pop` | 5 |
 | 0.96875 | `call/method/non_sequence/set/add` | 7 |
-| 0.875 | `call/method/pop` | 5 |
 | 0.96875 | `call/method/sequence/list/extend` | 8 |
 | 0.875 | `condition/belonging/not` | 8 |
 | 0.875 | `def/argument/arg` | 1, 1 |
@@ -3266,7 +3266,7 @@
 
 ---
 
-### Program `135.2158-remove-item-from-list-by-its-value.py` (learning cost 0.75)
+### Program `135.2158-remove-item-from-list-by-its-value.py` (learning cost 0.9375)
 
 ```python
 1   items.remove(x)
@@ -3274,7 +3274,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.75 | `call/method` | 1 |
+| 0.9375 | `call/method/mutable_duck/remove` | 1 |
 | 0 | `meta/program` | 1 |
 | 0 | `meta/sloc/1` | 1 |
 
@@ -3343,7 +3343,7 @@
 
 ---
 
-### Program `140.2156-delete-map-entry.py` (learning cost 1.75)
+### Program `140.2156-delete-map-entry.py` (learning cost 1.8125)
 
 ```python
 1   m.pop(k, None)
@@ -3351,7 +3351,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.875 | `call/method/pop` | 1 |
+| 0.9375 | `call/method/mutable_duck/pop` | 1 |
 | 0.875 | `type/null/literal` | 1 |
 | 0 | `meta/program` | 1 |
 | 0 | `meta/sloc/1` | 1 |
@@ -4172,7 +4172,7 @@
 
 ---
 
-### Program `175.2613-bytes-to-hex-string.py` (learning cost 1.625)
+### Program `175.2613-bytes-to-hex-string.py` (learning cost 2.71875)
 
 ```python
 1   s = a.hex()
@@ -4180,14 +4180,15 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.75 | `call/method` | 1 |
+| 0.96875 | `call/method/number/floating_point/hex` | 1 |
+| 0.875 | `type/number/floating_point` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
 | 0 | `meta/sloc/1` | 1 |
 
 ---
 
-### Program `176.2614-hex-string-to-byte-array.py` (learning cost 1.625)
+### Program `176.2614-hex-string-to-byte-array.py` (learning cost 2.71875)
 
 ```python
 1   a = bytearray.fromhex(s)
@@ -4195,7 +4196,8 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.75 | `call/method` | 1 |
+| 0.96875 | `call/method/number/floating_point/fromhex` | 1 |
+| 0.875 | `type/number/floating_point` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
 | 0 | `meta/sloc/1` | 1 |

@@ -491,19 +491,19 @@ lines = open(f).read() # assignment:read, assignment_lhs_identifier:lines, assig
 # 059.0668-write-to-standard-error-stream.py
 # ----------------------------------------------------------------------------------------
 import sys # import:sys, import_module:sys, node:Import, whole_span:2 (-> +1)
-print(x, "is negative", file=sys.stderr) # call_argument:, call_argument:x, external_free_call:print, free_call:print, free_call_without_result:print, literal:Str, node:Attribute, node:Call, node:Expr, node:Name, node:Str
+print(x, "is negative", file=sys.stderr) # call_argument:, call_argument:x, external_free_call:print, free_call:print, free_call_without_result:print, literal:Str, node:Attribute, node:Call, node:Expr, node:Name, node:Str, value_attr:stderr
 
 # ----------------------------------------------------------------------------------------
 # 060.1084-read-command-line-argument.py
 # ----------------------------------------------------------------------------------------
 import sys # import:sys, import_module:sys, node:Import, whole_span:2 (-> +1)
-x = sys.argv[1] # assignment, assignment_lhs_identifier:x, assignment_rhs_atom:1, assignment_rhs_atom:sys, index:1, literal:1, node:Assign, node:Attribute, node:Name, node:Num, node:Subscript, single_assignment:x
+x = sys.argv[1] # assignment, assignment_lhs_identifier:x, assignment_rhs_atom:1, assignment_rhs_atom:sys, index:1, literal:1, node:Assign, node:Attribute, node:Name, node:Num, node:Subscript, single_assignment:x, value_attr:argv
 
 # ----------------------------------------------------------------------------------------
 # 061.0576-get-current-date.py
 # ----------------------------------------------------------------------------------------
 import datetime # import:datetime, import_module:datetime, node:Import, whole_span:2 (-> +1)
-d = datetime.datetime.now() # assignment:now, assignment_lhs_identifier:d, assignment_rhs_atom:datetime, member_call_member:now, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:d
+d = datetime.datetime.now() # assignment:now, assignment_lhs_identifier:d, assignment_rhs_atom:datetime, member_call_member:now, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:d, value_attr:datetime
 
 # ----------------------------------------------------------------------------------------
 # 062.1091-find-substring-position.py
@@ -560,7 +560,7 @@ rand = random.Random() # assignment:Random, assignment_lhs_identifier:rand, assi
 # 071.0379-echo-program-implementation.py
 # ----------------------------------------------------------------------------------------
 import sys # import:sys, import_module:sys, node:Import, whole_span:2 (-> +1)
-print(" ".join(sys.argv[1:])) # call_argument:, composition, external_free_call:print, free_call:print, free_call_without_result:print, literal:1, literal:Str, member_call_member:join, node:Attribute, node:Call, node:Expr, node:Name, node:Num, node:Str, node:Subscript, slice:1::, slice_lower:1, slice_step:, slice_upper:
+print(" ".join(sys.argv[1:])) # call_argument:, composition, external_free_call:print, free_call:print, free_call_without_result:print, literal:1, literal:Str, member_call_member:join, node:Attribute, node:Call, node:Expr, node:Name, node:Num, node:Str, node:Subscript, slice:1::, slice_lower:1, slice_step:, slice_upper:, value_attr:argv
 
 # ----------------------------------------------------------------------------------------
 # 073.0673-create-a-factory.py
@@ -667,7 +667,7 @@ class Foo(object): # node:ClassDef (-> +5), node:Name, whole_span:6 (-> +5)
         self._x = 0 # assignment:0, assignment_lhs_identifier:self, assignment_rhs_atom:0, literal:0, node:Assign, node:Attribute, node:Name, node:Num
     @property # decorated_function:x (-> +2), function:x (-> +2), function_decorator:property (-> +2), function_returning_something:x (-> +2), instance_method:x (-> +2), method:x (-> +2), node:FunctionDef (-> +2), node:Name
     def x(self): # function_argument:self, function_argument_flavor:arg, node:arg
-        return self._x # node:Attribute, node:Name, node:Return, return
+        return self._x # node:Attribute, node:Name, node:Return, return, value_attr:_x
 
 # ----------------------------------------------------------------------------------------
 # 091.1098-load-json-file-into-struct.py
@@ -704,7 +704,7 @@ print(x.__class__) # call_argument:, external_free_call:print, free_call:print, 
 # 095.2140-get-file-size.py
 # ----------------------------------------------------------------------------------------
 import os # import:os, import_module:os, node:Import, whole_span:2 (-> +1)
-x = os.path.getsize(path) # assignment:getsize, assignment_lhs_identifier:x, assignment_rhs_atom:os, assignment_rhs_atom:path, call_argument:path, member_call_member:getsize, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:x
+x = os.path.getsize(path) # assignment:getsize, assignment_lhs_identifier:x, assignment_rhs_atom:os, assignment_rhs_atom:path, call_argument:path, member_call_member:getsize, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:x, value_attr:path
 
 # ----------------------------------------------------------------------------------------
 # 096.1094-check-string-prefix.py
@@ -720,7 +720,7 @@ b = s.endswith(suffix) # assignment:endswith, assignment_lhs_identifier:b, assig
 # 098.2142-epoch-seconds-to-date-object.py
 # ----------------------------------------------------------------------------------------
 import datetime # import:datetime, import_module:datetime, node:Import, whole_span:2 (-> +1)
-d = datetime.date.fromtimestamp(ts) # assignment:fromtimestamp, assignment_lhs_identifier:d, assignment_rhs_atom:datetime, assignment_rhs_atom:ts, call_argument:ts, member_call_member:fromtimestamp, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:d
+d = datetime.date.fromtimestamp(ts) # assignment:fromtimestamp, assignment_lhs_identifier:d, assignment_rhs_atom:datetime, assignment_rhs_atom:ts, call_argument:ts, member_call_member:fromtimestamp, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:d, value_attr:date
 
 # ----------------------------------------------------------------------------------------
 # 099.1429-format-date-yyyy-mm-dd.py
@@ -745,20 +745,20 @@ items.sort(c) # call_argument:c, member_call:items:sort, member_call_member:sort
 # 101.2172-load-from-http-get-request-into-a-string.py
 # ----------------------------------------------------------------------------------------
 import urllib.request # import:urllib.request, import_module:urllib.request, node:Import, whole_span:3 (-> +2)
-with urllib.request.urlopen(u) as f: # call_argument:u, member_call_member:urlopen, node:Attribute, node:Call, node:Name, node:With (-> +1)
+with urllib.request.urlopen(u) as f: # call_argument:u, member_call_member:urlopen, node:Attribute, node:Call, node:Name, node:With (-> +1), value_attr:request
     s = f.read() # assignment:read, assignment_lhs_identifier:s, assignment_rhs_atom:f, member_call_member:read, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:s
 
 # ----------------------------------------------------------------------------------------
 # 102.2173-load-from-http-get-request-into-a-file.py
 # ----------------------------------------------------------------------------------------
 import urllib # import:urllib, import_module:urllib, node:Import, whole_span:2 (-> +1)
-filename, headers = urllib.request.urlretrieve(u, "result.txt") # assignment:urlretrieve, assignment_lhs_identifier:filename, assignment_lhs_identifier:headers, assignment_rhs_atom:u, assignment_rhs_atom:urllib, call_argument:, call_argument:u, literal:Str, literal:Tuple, member_call_member:urlretrieve, node:Assign, node:Attribute, node:Call, node:Name, node:Str, node:Tuple, parallel_assignment:2
+filename, headers = urllib.request.urlretrieve(u, "result.txt") # assignment:urlretrieve, assignment_lhs_identifier:filename, assignment_lhs_identifier:headers, assignment_rhs_atom:u, assignment_rhs_atom:urllib, call_argument:, call_argument:u, literal:Str, literal:Tuple, member_call_member:urlretrieve, node:Assign, node:Attribute, node:Call, node:Name, node:Str, node:Tuple, parallel_assignment:2, value_attr:request
 
 # ----------------------------------------------------------------------------------------
 # 103.2276-load-xml-file-into-struct.py
 # ----------------------------------------------------------------------------------------
 import lxml.etree # import:lxml.etree, import_module:lxml.etree, node:Import, whole_span:2 (-> +1)
-x = lxml.etree.parse("data.xml") # assignment:parse, assignment_lhs_identifier:x, assignment_rhs_atom:lxml, call_argument:, literal:Str, member_call_member:parse, node:Assign, node:Attribute, node:Call, node:Name, node:Str, single_assignment:x
+x = lxml.etree.parse("data.xml") # assignment:parse, assignment_lhs_identifier:x, assignment_rhs_atom:lxml, call_argument:, literal:Str, member_call_member:parse, node:Assign, node:Attribute, node:Call, node:Name, node:Str, single_assignment:x, value_attr:etree
 
 # ----------------------------------------------------------------------------------------
 # 104.3264-save-object-into-xml-file.py
@@ -780,7 +780,7 @@ print(ser) # call_argument:ser, external_free_call:print, free_call:print, free_
 # 105.1804-current-executable-name.py
 # ----------------------------------------------------------------------------------------
 import sys # import:sys, import_module:sys, node:Import, whole_span:2 (-> +1)
-s = sys.argv[0] # assignment, assignment_lhs_identifier:s, assignment_rhs_atom:0, assignment_rhs_atom:sys, index:0, literal:0, node:Assign, node:Attribute, node:Name, node:Num, node:Subscript, single_assignment:s
+s = sys.argv[0] # assignment, assignment_lhs_identifier:s, assignment_rhs_atom:0, assignment_rhs_atom:sys, index:0, literal:0, node:Assign, node:Attribute, node:Name, node:Num, node:Subscript, single_assignment:s, value_attr:argv
 
 # ----------------------------------------------------------------------------------------
 # 106.2039-get-program-working-directory.py
@@ -792,7 +792,7 @@ dir = os.getcwd() # assignment:getcwd, assignment_lhs_identifier:dir, assignment
 # 107.2139-get-folder-containing-current-program.py
 # ----------------------------------------------------------------------------------------
 import os # import:os, import_module:os, node:Import, whole_span:2 (-> +1)
-dir = os.path.dirname(os.path.abspath(__file__)) # assignment:dirname, assignment_lhs_identifier:dir, assignment_rhs_atom:__file__, assignment_rhs_atom:os, call_argument:, call_argument:__file__, composition, member_call_member:abspath, member_call_member:dirname, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:dir
+dir = os.path.dirname(os.path.abspath(__file__)) # assignment:dirname, assignment_lhs_identifier:dir, assignment_rhs_atom:__file__, assignment_rhs_atom:os, call_argument:, call_argument:__file__, composition, member_call_member:abspath, member_call_member:dirname, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:dir, value_attr:path
 
 # ----------------------------------------------------------------------------------------
 # 108.1291-determine-if-variable-name-is-defined.py
@@ -804,7 +804,7 @@ if "x" in locals(): # comparison_operator:In, external_free_call:locals, free_ca
 # 109.2280-number-of-bytes-of-a-type.py
 # ----------------------------------------------------------------------------------------
 import pympler.asizeof # import:pympler.asizeof, import_module:pympler.asizeof, node:Import, whole_span:2 (-> +1)
-n = pympler.asizeof.asizeof(t) # assignment:asizeof, assignment_lhs_identifier:n, assignment_rhs_atom:pympler, assignment_rhs_atom:t, call_argument:t, member_call_member:asizeof, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:n
+n = pympler.asizeof.asizeof(t) # assignment:asizeof, assignment_lhs_identifier:n, assignment_rhs_atom:pympler, assignment_rhs_atom:t, call_argument:t, member_call_member:asizeof, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:n, value_attr:asizeof
 
 # ----------------------------------------------------------------------------------------
 # 110.1455-check-if-string-is-blank.py
@@ -1065,7 +1065,7 @@ for pair in zip(item1, item2): # call_argument:item1, call_argument:item2, exter
 # 144.2145-check-if-file-exists.py
 # ----------------------------------------------------------------------------------------
 import os # import:os, import_module:os, node:Import, whole_span:2 (-> +1)
-b = os.path.exists(fp) # assignment:exists, assignment_lhs_identifier:b, assignment_rhs_atom:fp, assignment_rhs_atom:os, call_argument:fp, member_call_member:exists, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:b
+b = os.path.exists(fp) # assignment:exists, assignment_lhs_identifier:b, assignment_rhs_atom:fp, assignment_rhs_atom:os, call_argument:fp, member_call_member:exists, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:b, value_attr:path
 
 # ----------------------------------------------------------------------------------------
 # 144.2915-check-if-file-exists.py
@@ -1078,7 +1078,7 @@ b = Path(fp).exists() # assignment:exists, assignment_lhs_identifier:b, assignme
 # ----------------------------------------------------------------------------------------
 import sys, logging # import:logging, import:sys, import_module:logging, import_module:sys, node:Import, whole_span:6 (-> +5)
 logging.basicConfig( # member_call:logging:basicConfig, member_call_member:basicConfig, member_call_object:logging, node:Attribute, node:Call (-> +1), node:Expr (-> +1), node:Name
-    stream=sys.stdout, level=logging.DEBUG, format="%(asctime)-15s %(message)s" # literal:Str, node:Attribute, node:Name, node:Str
+    stream=sys.stdout, level=logging.DEBUG, format="%(asctime)-15s %(message)s" # literal:Str, node:Attribute, node:Name, node:Str, value_attr:DEBUG, value_attr:stdout
 )
 logger = logging.getLogger("NAME OF LOGGER") # assignment:getLogger, assignment_lhs_identifier:logger, assignment_rhs_atom:logging, call_argument:, literal:Str, member_call_member:getLogger, node:Assign, node:Attribute, node:Call, node:Name, node:Str, single_assignment:logger
 logger.info(msg) # call_argument:msg, member_call:logger:info, member_call_member:info, member_call_object:logger, node:Attribute, node:Call, node:Expr, node:Name
@@ -1210,9 +1210,9 @@ elements = [c * x for x in elements] # assignment, assignment_lhs_identifier:ele
 # 162.2164-execute-procedures-depending-on-options.py
 # ----------------------------------------------------------------------------------------
 import sys # import:sys, import_module:sys, node:Import, whole_span:5 (-> +4)
-if "b" in sys.argv[1:]: # comparison_operator:In, if (-> +1), if_test_atom:1, if_test_atom:sys, if_without_else (-> +1), literal:1, literal:Str, node:Attribute, node:Compare, node:If (-> +1), node:Name, node:Num, node:Str, node:Subscript, slice:1::, slice_lower:1, slice_step:, slice_upper:, yoda_comparison:In
+if "b" in sys.argv[1:]: # comparison_operator:In, if (-> +1), if_test_atom:1, if_test_atom:sys, if_without_else (-> +1), literal:1, literal:Str, node:Attribute, node:Compare, node:If (-> +1), node:Name, node:Num, node:Str, node:Subscript, slice:1::, slice_lower:1, slice_step:, slice_upper:, value_attr:argv, yoda_comparison:In
     bat() # external_free_call:bat, free_call:bat, free_call_without_arguments:bat, free_call_without_result:bat, if_then_branch, node:Call, node:Expr, node:Name
-if "f" in sys.argv[1:]: # comparison_operator:In, if (-> +1), if_test_atom:1, if_test_atom:sys, if_without_else (-> +1), literal:1, literal:Str, node:Attribute, node:Compare, node:If (-> +1), node:Name, node:Num, node:Str, node:Subscript, slice:1::, slice_lower:1, slice_step:, slice_upper:, yoda_comparison:In
+if "f" in sys.argv[1:]: # comparison_operator:In, if (-> +1), if_test_atom:1, if_test_atom:sys, if_without_else (-> +1), literal:1, literal:Str, node:Attribute, node:Compare, node:If (-> +1), node:Name, node:Num, node:Str, node:Subscript, slice:1::, slice_lower:1, slice_step:, slice_upper:, value_attr:argv, yoda_comparison:In
     fox() # external_free_call:fox, free_call:fox, free_call_without_arguments:fox, free_call_without_result:fox, if_then_branch, node:Call, node:Expr, node:Name
 
 # ----------------------------------------------------------------------------------------
@@ -1326,7 +1326,7 @@ a = bytearray.fromhex(s) # assignment:fromhex, assignment_lhs_identifier:a, assi
 # ----------------------------------------------------------------------------------------
 import os # import:os, import_module:os, node:Import, whole_span:3 (-> +2)
 extensions = [".jpg", ".jpeg", ".png"] # assignment, assignment_lhs_identifier:extensions, literal:List, literal:Str, node:Assign, node:List, node:Name, node:Str, single_assignment:extensions
-L = [f for f in os.listdir(D) if os.path.splitext(f)[1] in extensions] # assignment, assignment_lhs_identifier:L, assignment_rhs_atom:1, assignment_rhs_atom:D, assignment_rhs_atom:extensions, assignment_rhs_atom:f, assignment_rhs_atom:os, call_argument:D, call_argument:f, comparison_operator:In, comprehension:List, comprehension_for_count:1, filtered_comprehension, index:1, literal:1, member_call_member:listdir, member_call_member:splitext, node:Assign, node:Attribute, node:Call, node:Compare, node:ListComp, node:Name, node:Num, node:Subscript, single_assignment:L
+L = [f for f in os.listdir(D) if os.path.splitext(f)[1] in extensions] # assignment, assignment_lhs_identifier:L, assignment_rhs_atom:1, assignment_rhs_atom:D, assignment_rhs_atom:extensions, assignment_rhs_atom:f, assignment_rhs_atom:os, call_argument:D, call_argument:f, comparison_operator:In, comprehension:List, comprehension_for_count:1, filtered_comprehension, index:1, literal:1, member_call_member:listdir, member_call_member:splitext, node:Assign, node:Attribute, node:Call, node:Compare, node:ListComp, node:Name, node:Num, node:Subscript, single_assignment:L, value_attr:path
 
 # ----------------------------------------------------------------------------------------
 # 177.2725-find-files-with-a-given-list-of-filename-extensions.py
@@ -1414,11 +1414,11 @@ class UnionFind: # node:ClassDef (-> +14), whole_span:15 (-> +14)
         self.rank = [0] * size # assignment:Mult, assignment_lhs_identifier:self, assignment_rhs_atom:0, assignment_rhs_atom:size, binary_operator:Mult, literal:0, literal:List, node:Assign, node:Attribute, node:BinOp, node:List, node:Name, node:Num, replication_operator:List
         self.p = [i for i in range(size)] # assignment, assignment_lhs_identifier:self, assignment_rhs_atom:i, assignment_rhs_atom:size, call_argument:size, comprehension:List, comprehension_for_count:1, external_free_call:range, free_call:range, node:Assign, node:Attribute, node:Call, node:ListComp, node:Name, range:size
     def find_set(self, i): # function:find_set (-> +5), function_argument:i, function_argument:self, function_argument_flavor:arg, function_returning_something:find_set (-> +5), instance_method:find_set (-> +5), method:find_set (-> +5), node:FunctionDef (-> +5), node:arg
-        if self.p[i] == i: # comparison_operator:Eq, if (-> +4), if_test_atom:i, if_test_atom:self, index:i, node:Attribute, node:Compare, node:If (-> +4), node:Name, node:Subscript
+        if self.p[i] == i: # comparison_operator:Eq, if (-> +4), if_test_atom:i, if_test_atom:self, index:i, node:Attribute, node:Compare, node:If (-> +4), node:Name, node:Subscript, value_attr:p
             return i # if_then_branch, node:Name, node:Return, return:i
         else:
-            self.p[i] = self.find_set(self.p[i]) # assignment:find_set, assignment_rhs_atom:i, assignment_rhs_atom:self, call_argument:, if_else_branch (-> +1), index:i, member_call_member:find_set, node:Assign, node:Attribute, node:Call, node:Name, node:Subscript
-            return self.p[i] # index:i, node:Attribute, node:Name, node:Return, node:Subscript, return
+            self.p[i] = self.find_set(self.p[i]) # assignment:find_set, assignment_rhs_atom:i, assignment_rhs_atom:self, call_argument:, if_else_branch (-> +1), index:i, member_call_member:find_set, node:Assign, node:Attribute, node:Call, node:Name, node:Subscript, value_attr:p
+            return self.p[i] # index:i, node:Attribute, node:Name, node:Return, node:Subscript, return, value_attr:p
     def is_same_set(self, i, j): # function:is_same_set (-> +1), function_argument:i, function_argument:j, function_argument:self, function_argument_flavor:arg, function_returning_something:is_same_set (-> +1), instance_method:is_same_set (-> +1), method:is_same_set (-> +1), node:FunctionDef (-> +1), node:arg
         return self.find_set(i) == self.find_set(j) # call_argument:i, call_argument:j, comparison_operator:Eq, member_call_member:find_set, node:Attribute, node:Call, node:Compare, node:Name, node:Return, return
     def union_set(self, i, j): # function:union_set (-> +2), function_argument:i, function_argument:j, function_argument:self, function_argument_flavor:arg, function_returning_nothing:union_set (-> +2), instance_method:union_set (-> +2), method:union_set (-> +2), node:FunctionDef (-> +2), node:arg

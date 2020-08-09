@@ -1,5 +1,6 @@
 - [AST](#ast)
       - [Feature `node`](#feature-node)
+      - [Feature `value_attr`](#feature-value_attr)
 - [Expressions](#expressions)
   - [Literals](#literals)
       - [Feature `literal`](#feature-literal)
@@ -262,6 +263,36 @@ Match the name of every node of the AST. This covers most of the [Python keyword
 | `node:With` | 9-25 |
 | `node:Yield` | 17 |
 | `node:arg` | 2, 25 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `value_attr`
+
+##### Specification
+
+```re
+     ^(.*/value)/_type=Attribute
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
+\n(?:\1.+\n)* \1/attr=(?P<SUFFIX>.+)
+```
+
+##### Example
+
+```python
+1   a.b
+2   c.d.e
+3   (1j).imag
+4   (1j).imag() # no match
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `value_attr:b` | 1 |
+| `value_attr:d` | 2 |
+| `value_attr:e` | 2 |
+| `value_attr:imag` | 3 |
 
 --------------------------------------------------------------------------------
 
