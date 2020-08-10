@@ -132,12 +132,7 @@ __pdoc__ = {
 
 
 class Taxonomy:
-    def __init__(
-        self,
-        taxonomy_path: Optional[Path] = None,
-        is_literal: Callable = regex.compile(r"[\w:.]+").fullmatch,
-        **kwargs,
-    ) -> None:
+    def __init__(self, taxonomy_path: Optional[Path] = None, **kwargs,) -> None:
         r"""Read and pre-process the taxonomy specifications.
 
         Args:
@@ -145,24 +140,8 @@ class Taxonomy:
                 associating label (search) patterns with taxon (replacement) patterns. For better
                 readability, the taxa are listed on the first column, and the corresponding labels
                 (sometimes very long) on the second column. If not specified, the
-                [default taxonomy](https://repo/paroxython/resources/taxonomy.tsv)
-                is used. Defaults to `None`.
-            is_literal (Callable, optional): A predicate telling whether a given regular expression
-                pattern is literal or not. It will be matched successively against every label
-                pattern of the taxonomy TSV file (second column). For instance, the label pattern
-                `"external_free_call:print"` is literal, and then matches only itself. Conversely,
-                the label pattern `"internal_free_call:[[:upper:]].*"` contains some non-literal
-                characters such as `"["` and `"*"`, and then must be compiled into a regular
-                expression. By default, a pattern is considered to be literal if it contains only
-                letters, digits, underscores, hyphens, colons and **dots**.
-
-                ..note::
-                    The latter actually goes against the semantics of regular expressions. In case
-                    that's a problem, it is always possible to force the interpretation of a pattern
-                    as non-literal by enclosing it in parentheses.
-
-                [Not to be explicitly provided.](docs_developer_manual/index.html#default-argument-trick)
-                Defaults to `regex.compile(r"[\w:.]+").fullmatch`.
+                [default taxonomy](https://repo/paroxython/resources/taxonomy.tsv) is used.
+                Defaults to `None`.
 
         Description:
             1. Read the taxonomy, falling back to the provided default
@@ -189,7 +168,7 @@ class Taxonomy:
         self.literal_labels: Dict[LabelName, TaxonNames] = defaultdict(list)
         self.compiled_labels: List[Tuple[RegexPattern, TaxonPattern]] = []
         for line in sorted(tsv.split("\n")[1:]):
-            (taxon_value, label_value) = line.strip().split(maxsplit=1)
+            (taxon_value, label_value, *_) = line.strip().split(maxsplit=2)
             (taxon_pattern, label_pattern) = (TaxonPattern(taxon_value), LabelPattern(label_value))
             if is_literal(label_pattern):
                 self.literal_labels[LabelName(label_pattern)].append(TaxonName(taxon_pattern))
@@ -198,12 +177,16 @@ class Taxonomy:
                 # note: "$" is necessary: regex.fullmatch() has no regex.fullsub() counterpart
 
     @lru_cache(maxsize=None)
-    def get_taxon_name_list(self, label_name: LabelName) -> TaxonNames:
+    def get_taxon_name_list(
+        self, label_name: LabelName, looks_like_a_taxon: Callable = regex.compile(r"^\w+/.+$").match
+    ) -> TaxonNames:
         r"""Translate a label name into a list of taxon names.
 
         Description:
-            Most of the work was done during the initialization, by constructing the map
-            `self.literal_labels` and the list `self.compiled_labels`. The given label name is
+            First of all, when a label looks like a taxon, it is returned without further ado.
+
+            For the rest, most of the work was done during the initialization, by constructing the
+            map `self.literal_labels` and the list `self.compiled_labels`. The given label name is
             first looked up in the map, then matched successively against every regular expression
             stored in the list.
 
@@ -212,7 +195,7 @@ class Taxonomy:
 
             Taxa (replacement patterns)         | Labels (search patterns)
             :-----------------------------------|:-----------------------
-            `call/function/builtin/casting/\1` | `free_call:(list|dict)`
+            `call/function/builtin/casting/\1`  | `free_call:(list|dict)`
             `type/sequence/list`                | `free_call:list`
 
             Suppose now that we pass the label `"free_call:list"`. The lookup in the map produces
@@ -230,6 +213,8 @@ class Taxonomy:
             same label more than one time
             (cf. [lru_cache](https://docs.python.org/3/library/functools.html#functools.lru_cache)).
         """
+        if looks_like_a_taxon(label_name):
+            return [TaxonName(label_name)]
         result: TaxonNames = self.literal_labels.get(label_name, [])
         for (label_regex_pattern, taxon_pattern) in self.compiled_labels:
             if label_regex_pattern.match(label_name):
@@ -257,6 +242,24 @@ class Taxonomy:
                 acc[taxon_name].update(spans)
         taxa = [Taxon(name, spans) for (name, spans) in sorted(acc.items())]
         return deduplicated_taxa(taxa)
+
+
+def is_literal(label_pattern: LabelPattern) -> bool:
+    r"""Tell whether a given regular expression pattern is literal, disregarding the dots.
+
+    Description:
+        All label patterns of the taxonomy TSV file (second column) will be tested successively. For
+        instance, the label pattern `"external_free_call:print"` is literal, and then matches only
+        itself. Conversely, the label pattern `"internal_free_call:[[:upper:]].*"` contains some
+        non-literal characters such as `"["` and `"*"`, and then must be compiled into a regular
+        expression. A pattern is considered to be literal if it is equal to its escaped form, **not
+        taking the dots into account**.
+
+    ..note::
+        In case not considering the dot as a metacharacter is a  problem, it is always possible to
+        force the interpretation of a pattern as non-literal by enclosing it in parentheses.
+    """
+    return label_pattern.replace(".", "\\.") == regex.escape(label_pattern)
 
 
 def deduplicated_taxa(taxa: Taxa) -> Taxa:

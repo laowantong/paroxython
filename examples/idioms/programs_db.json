@@ -909,7 +909,7 @@
       },
       "taxa": {
         "call/function/builtin/enumerate": [[2,2]],
-        "call/method/sequence/index": [[4,4]],
+        "call/method/sequence_duck/index": [[4,4]],
         "condition/belonging": [[3,3]],
         "def/argument/arg": [[1,1],[1,1]],
         "def/function": [[1,4]],
@@ -3227,7 +3227,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "call/method/sequence/count": [[1,1]],
+        "call/method/sequence_duck/count": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "type/sequence": [[1,1]],
@@ -3287,7 +3287,7 @@
       },
       "taxa": {
         "call/function/builtin/bin": [[1,1]],
-        "call/method/sequence/count": [[1,1]],
+        "call/method/sequence_duck/count": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "type/sequence": [[1,1]],
@@ -15225,13 +15225,6 @@
     "call/method/random/uniform": [
       "014.3410-pick-uniformly-a-random-floating-point-number-in-ab.py"
     ],
-    "call/method/sequence/count": [
-      "082.1096-count-substring-occurrences.py",
-      "084.1940-count-bits-set-in-integer-binary-representation.py"
-    ],
-    "call/method/sequence/index": [
-      "020.0573-return-two-values.py"
-    ],
     "call/method/sequence/list/append": [
       "119.3263-deduplicate-list.py",
       "128.2085-breadth-first-traversing-of-a-tree.py",
@@ -15308,6 +15301,13 @@
     ],
     "call/method/sequence/string/strip": [
       "110.1455-check-if-string-is-blank.py"
+    ],
+    "call/method/sequence_duck/count": [
+      "082.1096-count-substring-occurrences.py",
+      "084.1940-count-bits-set-in-integer-binary-representation.py"
+    ],
+    "call/method/sequence_duck/index": [
+      "020.0573-return-two-values.py"
     ],
     "call/method/subprocess/call": [
       "111.2168-launch-other-program.py"

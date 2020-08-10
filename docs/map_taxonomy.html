@@ -164,7 +164,7 @@ given at the start of the section.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L0-L377" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L0-L380" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">from collections import Counter, defaultdict
 from pathlib import Path
@@ -194,18 +194,13 @@ __pdoc__ = {
 
 
 class Taxonomy:
-    def __init__(
-        self,
-        taxonomy_path: Optional[Path] = None,
-        is_literal: Callable = regex.compile(r&#34;[\w:.]+&#34;).fullmatch,
-        **kwargs,
-    ) -&gt; None:
+    def __init__(self, taxonomy_path: Optional[Path] = None, **kwargs,) -&gt; None:
         taxonomy_path = taxonomy_path or Path(dirname(__file__)) / &#34;resources&#34; / &#34;taxonomy.tsv&#34;
         tsv = taxonomy_path.read_text().partition(&#34;-- EOF&#34;)[0].strip()
         self.literal_labels: Dict[LabelName, TaxonNames] = defaultdict(list)
         self.compiled_labels: List[Tuple[RegexPattern, TaxonPattern]] = []
         for line in sorted(tsv.split(&#34;\n&#34;)[1:]):
-            (taxon_value, label_value) = line.strip().split(maxsplit=1)
+            (taxon_value, label_value, *_) = line.strip().split(maxsplit=2)
             (taxon_pattern, label_pattern) = (TaxonPattern(taxon_value), LabelPattern(label_value))
             if is_literal(label_pattern):
                 self.literal_labels[LabelName(label_pattern)].append(TaxonName(taxon_pattern))
@@ -214,7 +209,11 @@ class Taxonomy:
                 # note: &#34;$&#34; is necessary: regex.fullmatch() has no regex.fullsub() counterpart
 
     @lru_cache(maxsize=None)
-    def get_taxon_name_list(self, label_name: LabelName) -&gt; TaxonNames:
+    def get_taxon_name_list(
+        self, label_name: LabelName, looks_like_a_taxon: Callable = regex.compile(r&#34;^\w+/.+$&#34;).match
+    ) -&gt; TaxonNames:
+        if looks_like_a_taxon(label_name):
+            return [TaxonName(label_name)]
         result: TaxonNames = self.literal_labels.get(label_name, [])
         for (label_regex_pattern, taxon_pattern) in self.compiled_labels:
             if label_regex_pattern.match(label_name):
@@ -228,6 +227,10 @@ class Taxonomy:
                 acc[taxon_name].update(spans)
         taxa = [Taxon(name, spans) for (name, spans) in sorted(acc.items())]
         return deduplicated_taxa(taxa)
+
+
+def is_literal(label_pattern: LabelPattern) -&gt; bool:
+    return label_pattern.replace(&#34;.&#34;, &#34;\\.&#34;) == regex.escape(label_pattern)
 
 
 def deduplicated_taxa(taxa: Taxa) -&gt; Taxa:
@@ -274,6 +277,33 @@ if __name__ == &#34;__main__&#34;:
 <section>
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
+<dt id="paroxython.map_taxonomy.is_literal"><code class="name flex">
+<span>def <span class="ident">is_literal</span></span>(<span>label_pattern: LabelPattern) ‑> bool</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Tell whether a given regular expression pattern is literal, disregarding the dots.</p>
+<h2 id="description">Description</h2>
+<p>All label patterns of the taxonomy <abbr title="Tab Separated Values">TSV</abbr> file (second column) will be tested successively. For
+instance, the label pattern <code>"external_free_call:print"</code> is literal, and then matches only
+itself. Conversely, the label pattern <code>"internal_free_call:[[:upper:]].*"</code> contains some
+non-literal characters such as <code>"["</code> and <code>"*"</code>, and then must be compiled into a regular
+expression. A pattern is considered to be literal if it is equal to its escaped form, <strong>not
+taking the dots into account</strong>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In case not considering the dot as a metacharacter is a
+problem, it is always possible to
+force the interpretation of a pattern as non-literal by enclosing it in parentheses.</p>
+</div></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L247-L262" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">def is_literal(label_pattern: LabelPattern) -&gt; bool:
+    return label_pattern.replace(&#34;.&#34;, &#34;\\.&#34;) == regex.escape(label_pattern)</code></pre>
+</details>
+</dd>
 <dt id="paroxython.map_taxonomy.deduplicated_taxa"><code class="name flex">
 <span>def <span class="ident">deduplicated_taxa</span></span>(<span>taxa: List[Taxon]) ‑> List[Taxon]</span>
 </code></dt>
@@ -361,7 +391,7 @@ a bag (multiset) of its spans.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L262-L363" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L265-L366" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def deduplicated_taxa(taxa: Taxa) -&gt; Taxa:
     if len(taxa) &lt; 2:
@@ -398,21 +428,16 @@ a bag (multiset) of its spans.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L134-L259" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L134-L244" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">class Taxonomy:
-    def __init__(
-        self,
-        taxonomy_path: Optional[Path] = None,
-        is_literal: Callable = regex.compile(r&#34;[\w:.]+&#34;).fullmatch,
-        **kwargs,
-    ) -&gt; None:
+    def __init__(self, taxonomy_path: Optional[Path] = None, **kwargs,) -&gt; None:
         taxonomy_path = taxonomy_path or Path(dirname(__file__)) / &#34;resources&#34; / &#34;taxonomy.tsv&#34;
         tsv = taxonomy_path.read_text().partition(&#34;-- EOF&#34;)[0].strip()
         self.literal_labels: Dict[LabelName, TaxonNames] = defaultdict(list)
         self.compiled_labels: List[Tuple[RegexPattern, TaxonPattern]] = []
         for line in sorted(tsv.split(&#34;\n&#34;)[1:]):
-            (taxon_value, label_value) = line.strip().split(maxsplit=1)
+            (taxon_value, label_value, *_) = line.strip().split(maxsplit=2)
             (taxon_pattern, label_pattern) = (TaxonPattern(taxon_value), LabelPattern(label_value))
             if is_literal(label_pattern):
                 self.literal_labels[LabelName(label_pattern)].append(TaxonName(taxon_pattern))
@@ -421,7 +446,11 @@ a bag (multiset) of its spans.</dd>
                 # note: &#34;$&#34; is necessary: regex.fullmatch() has no regex.fullsub() counterpart
 
     @lru_cache(maxsize=None)
-    def get_taxon_name_list(self, label_name: LabelName) -&gt; TaxonNames:
+    def get_taxon_name_list(
+        self, label_name: LabelName, looks_like_a_taxon: Callable = regex.compile(r&#34;^\w+/.+$&#34;).match
+    ) -&gt; TaxonNames:
+        if looks_like_a_taxon(label_name):
+            return [TaxonName(label_name)]
         result: TaxonNames = self.literal_labels.get(label_name, [])
         for (label_regex_pattern, taxon_pattern) in self.compiled_labels:
             if label_regex_pattern.match(label_name):
@@ -439,7 +468,7 @@ a bag (multiset) of its spans.</dd>
 <h3>Methods</h3>
 <dl>
 <dt id="paroxython.map_taxonomy.Taxonomy.__init__"><code class="name flex">
-<span>def <span class="ident">__init__</span></span>(<span>self, <br>taxonomy_path: Union[pathlib.Path, NoneType] = None, <br>is_literal: Callable = &lt;built-in method fullmatch of regex&gt;, <br>**kwargs<br>) ‑> NoneType</span>
+<span>def <span class="ident">__init__</span></span>(<span>self, <br>taxonomy_path: Union[pathlib.Path, NoneType] = None, <br>**kwargs<br>) ‑> NoneType</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Read and pre-process the taxonomy specifications.</p>
@@ -450,27 +479,8 @@ a bag (multiset) of its spans.</dd>
 associating label (search) patterns with taxon (replacement) patterns. For better
 readability, the taxa are listed on the first column, and the corresponding labels
 (sometimes very long) on the second column. If not specified, the
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/taxonomy.tsv">default taxonomy</a>
-is used. Defaults to <code>None</code>.</dd>
-<dt><strong><code>is_literal</code></strong> :&ensp;<code>Callable</code>, optional</dt>
-<dd>
-<p>A predicate telling whether a given regular expression
-pattern is literal or not. It will be matched successively against every label
-pattern of the taxonomy <abbr title="Tab Separated Values">TSV</abbr> file (second column). For instance, the label pattern
-<code>"external_free_call:print"</code> is literal, and then matches only itself. Conversely,
-the label pattern <code>"internal_free_call:[[:upper:]].*"</code> contains some non-literal
-characters such as <code>"["</code> and <code>"*"</code>, and then must be compiled into a regular
-expression. By default, a pattern is considered to be literal if it contains only
-letters, digits, underscores, hyphens, colons and <strong>dots</strong>.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The latter actually goes against the semantics of regular expressions. In case
-that's a problem, it is always possible to force the interpretation of a pattern
-as non-literal by enclosing it in parentheses.</p>
-</div>
-<p><a href="docs_developer_manual/index.html#default-argument-trick">Not to be explicitly provided.</a>
-Defaults to <code>regex.compile(r"[\w:.]+").fullmatch</code>.</p>
-</dd>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/taxonomy.tsv">default taxonomy</a> is used.
+Defaults to <code>None</code>.</dd>
 </dl>
 <h2 id="description">Description</h2>
 <ol>
@@ -498,20 +508,15 @@ As an associative list, it only allows O(n) lookups a given label pattern.</li>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L135-L197" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L135-L176" class="git-link">Browse GitHub</a>
 </summary>
-<pre><code class="python">def __init__(
-    self,
-    taxonomy_path: Optional[Path] = None,
-    is_literal: Callable = regex.compile(r&#34;[\w:.]+&#34;).fullmatch,
-    **kwargs,
-) -&gt; None:
+<pre><code class="python">def __init__(self, taxonomy_path: Optional[Path] = None, **kwargs,) -&gt; None:
     taxonomy_path = taxonomy_path or Path(dirname(__file__)) / &#34;resources&#34; / &#34;taxonomy.tsv&#34;
     tsv = taxonomy_path.read_text().partition(&#34;-- EOF&#34;)[0].strip()
     self.literal_labels: Dict[LabelName, TaxonNames] = defaultdict(list)
     self.compiled_labels: List[Tuple[RegexPattern, TaxonPattern]] = []
     for line in sorted(tsv.split(&#34;\n&#34;)[1:]):
-        (taxon_value, label_value) = line.strip().split(maxsplit=1)
+        (taxon_value, label_value, *_) = line.strip().split(maxsplit=2)
         (taxon_pattern, label_pattern) = (TaxonPattern(taxon_value), LabelPattern(label_value))
         if is_literal(label_pattern):
             self.literal_labels[LabelName(label_pattern)].append(TaxonName(taxon_pattern))
@@ -520,13 +525,14 @@ As an associative list, it only allows O(n) lookups a given label pattern.</li>
 </details>
 </dd>
 <dt id="paroxython.map_taxonomy.Taxonomy.get_taxon_name_list"><code class="name flex">
-<span>def <span class="ident">get_taxon_name_list</span></span>(<span>self, <br>label_name: LabelName<br>) ‑> List[TaxonName]</span>
+<span>def <span class="ident">get_taxon_name_list</span></span>(<span>self, <br>label_name: LabelName, <br>looks_like_a_taxon: Callable = &lt;built-in method match of regex&gt;<br>) ‑> List[TaxonName]</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Translate a label name into a list of taxon names.</p>
 <h2 id="description">Description</h2>
-<p>Most of the work was done during the initialization, by constructing the map
-<code>self.literal_labels</code> and the list <code>self.compiled_labels</code>. The given label name is
+<p>First of all, when a label looks like a taxon, it is returned without further ado.</p>
+<p>For the rest, most of the work was done during the initialization, by constructing the
+map <code>self.literal_labels</code> and the list <code>self.compiled_labels</code>. The given label name is
 first looked up in the map, then matched successively against every regular expression
 stored in the list.</p>
 <p>The second step may be useful even if the first one has already produced one or several
@@ -565,10 +571,14 @@ same label more than one time
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L200-L237" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L179-L222" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">@lru_cache(maxsize=None)
-def get_taxon_name_list(self, label_name: LabelName) -&gt; TaxonNames:
+def get_taxon_name_list(
+    self, label_name: LabelName, looks_like_a_taxon: Callable = regex.compile(r&#34;^\w+/.+$&#34;).match
+) -&gt; TaxonNames:
+    if looks_like_a_taxon(label_name):
+        return [TaxonName(label_name)]
     result: TaxonNames = self.literal_labels.get(label_name, [])
     for (label_regex_pattern, taxon_pattern) in self.compiled_labels:
         if label_regex_pattern.match(label_name):
@@ -599,7 +609,7 @@ returns them deduplicated (cf. <code><a title="paroxython.map_taxonomy.deduplica
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L239-L259" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L224-L244" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def to_taxa(self, labels: Labels) -&gt; Taxa:
     acc: TaxaSpans = defaultdict(Counter)
@@ -639,6 +649,7 @@ returns them deduplicated (cf. <code><a title="paroxython.map_taxonomy.deduplica
 </li>
 <li><h3><a href="#header-functions">Functions</a></h3>
 <ul class="">
+<li><code><a title="paroxython.map_taxonomy.is_literal" href="#paroxython.map_taxonomy.is_literal">is_literal</a></code></li>
 <li><code><a title="paroxython.map_taxonomy.deduplicated_taxa" href="#paroxython.map_taxonomy.deduplicated_taxa">deduplicated_taxa</a></code></li>
 </ul>
 </li>

@@ -77,6 +77,7 @@ def resolve_new_types():
         ("preprocess_source", "label_name", "LabelName"),
         ("derived_labels_db", "query", "Query"),
         ("filter_programs", "operation", "Operation"),
+        ("map_taxonomy", "label_pattern", "LabelPattern"),
     ]
     result = {}
     for (filename, trigger, type_name) in data:

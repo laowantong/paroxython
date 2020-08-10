@@ -1,4 +1,4 @@
-"""
+r"""
 Read and execute a pipeline of commands and report the learning costs.
 
 USAGE:
@@ -13,10 +13,11 @@ DESCRIPTION:
         paroxython collect
 
     ... and a pipeline of commands describing which concepts (taxa) are
-    already known, which ones need to be illustrated or must be avoided. It
-    results in a list of recommended programs, along with their total learning
-    costs and the individual learning cost of each of the concepts they feature.
-    These results are presented in Markdown format.
+    already known, which ones need to be illustrated or must be avoided. By
+    default, it results in a list of recommended programs, along with their
+    total learning costs and the individual learning cost of each of the
+    concepts they feature. These results are presented in Markdown format.
+    With the option `-o stdout` the program list is simply printed to stdout.
     ```
 
 OPTIONS:
@@ -39,6 +40,22 @@ OPTIONS:
                         DB_PATH is of the form PREFIX_db.json, a value of
                         PREFIX_pipe.py is used. If the associated file is
                         missing or malformed, no filter is applied. [default: ]
+    ```
+
+EXAMPLE:
+    ```plain
+    Use `-o stdout` to pipe the results into another shell command. For instance,
+    let's assume that:
+
+    - your program repository is `path/to/programs`;
+    - your tag database is at its default location `path/to/programs_db.json`;
+    - your pipeline is at its default location `path/to/programs_pipe.py`.
+
+    Then, to **copy** (not move) all the recommended programs to an existing
+    directory `dest`, just do:
+
+    paroxython recommend -o stdout path/to/programs_db.json \
+        | xargs  -I {} sh -c "cp path/to/programs/{} dest"
     ```
 """
 

@@ -167,9 +167,6 @@ The `"hide all"` variant is not supported, and treated as `"hide"`.
 
 Being given a program \(p\) of \(n\) lines, a couple \((i_1, i_2) \) of line numbers such that \(1 \leq i_1 \leq i_2 \leq n\) represents a **span** of \(p\). When Paroxython finds a taxon \(t\) in \(p\), it doesn't just say whether \(p\) features \(t\) or not: it returns the list of spans where \(t\) occurs.
 
-..note::
-    Any taxon starting with `"meta/"` is considered by convention to span the entire program.
-
 It is sometimes interesting to know how the spans of two taxa of the same program are located relatively to each other.
 
 - For instance, a `print()` statement whose span is inside the span of a function indicates that this function has a side-effect.

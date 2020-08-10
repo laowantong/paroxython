@@ -780,7 +780,7 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.9375 | `call/function/builtin/enumerate` | 2 |
-| 0.9375 | `call/method/sequence/index` | 4 |
+| 0.9375 | `call/method/sequence_duck/index` | 4 |
 | 0.75 | `condition/belonging` | 3 |
 | 0.875 | `def/argument/arg` | 1, 1 |
 | 0.75 | `def/function` | 1-4 |
@@ -2091,7 +2091,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.9375 | `call/method/sequence/count` | 1 |
+| 0.9375 | `call/method/sequence_duck/count` | 1 |
 | 0.75 | `type/sequence` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
@@ -2126,7 +2126,7 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.9375 | `call/function/builtin/bin` | 1 |
-| 0.9375 | `call/method/sequence/count` | 1 |
+| 0.9375 | `call/method/sequence_duck/count` | 1 |
 | 0.75 | `type/sequence` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
 | 0.875 | `var/assignment/single` | 1 |

@@ -73,9 +73,9 @@ The previous table extract represents the simplest case, where both taxon and la
 Taxa (replacement patterns)    | Labels (search patterns)
 :------------------------------|:-----------------------
 `type/sequence/list` | `external_free_call:list`
-`type/sequence/list` | `member_call_member:(append|extend|insert|reverse|sort)`
+`type/sequence/list` | `member_call_method:(append|extend|insert|reverse|sort)`
 
-It defines a 5-1 mapping, which converts five possible labels (`member_call_member:append`, `member_call_member:extend`, and so on) into a single taxon (the metacharacter `"|"` meaning “or”). These two rows thus constitute a 6-1 mapping.
+It defines a 5-1 mapping, which converts five possible labels (`member_call_method:append`, `member_call_method:extend`, and so on) into a single taxon (the metacharacter `"|"` meaning “or”). These two rows thus constitute a 6-1 mapping.
 
 ### 1-N mapping
 
@@ -97,10 +97,10 @@ Another example could be:
 
 Taxa (replacement patterns)    | Labels (search patterns)
 :------------------------------|:-----------------------
-`type/sequence/list` | `member_call_member:(append|extend|insert|reverse|sort)`
-`call/method/sequence/list/\1` | `member_call_member:(append|extend|insert|reverse|sort)`
+`type/sequence/list` | `member_call_method:(append|extend|insert|reverse|sort)`
+`call/method/sequence/list/\1` | `member_call_method:(append|extend|insert|reverse|sort)`
 
-... which means: when you encounter a label `member_call_member:sort` (for instance), that means the program features a list and a call to the `sort()` method.
+... which means: when you encounter a label `member_call_method:sort` (for instance), that means the program features a list and a call to the `sort()` method.
 
 ### 1-0 mapping
 
@@ -144,11 +144,11 @@ Again, those are mainly practical choices. After all, an `operator` is nothing m
 
 ### Zooming out: `pattern`
 
-Now this is probably the most interesting feature to tag in a beginner-level program. Under `pattern`, you will find numerous variants of the invaluable [accumulation pattern](https://en.wikipedia.org/wiki/Fold_(higher-order_function)) (counting, summing, filtering, finding the “best” element, etc.), but also some early-exit patterns (testing for an universal or existential property, finding the first “good” element, etc.), whether by traversing a sequence or evolving a state. This is an aspect of programming which is rarely taught in a conscious and systematic way, and to which Paroxython intends to draw your attention.
+Now this is arguably the most interesting feature to tag in a beginner-level program. Under `pattern`, you will find numerous variants of the invaluable [accumulation pattern](https://en.wikipedia.org/wiki/Fold_(higher-order_function)) (counting, summing, filtering, finding the “best” element, etc.), but also some early-exit patterns (testing for an universal or existential property, finding the first “good” element, etc.), whether by traversing a sequence or evolving a state. This is an aspect of programming which is rarely taught in a conscious and systematic way, and to which Paroxython intends to draw your attention.
 
 ### Going `meta`
 
-Paroxython will store inside the `meta` tree some program metadata, such as the number of lines. A child `topic` is provided, which you can fill in by adding a manual hint in the source code of the programs. In general, you can create any `meta` entries in the taxonomy to hold information that does not belong to a particular line, but to the program as a whole.
+Paroxython will store inside the `meta` tree some program metadata, such as the number of lines. Some children, such as `topic`, `technique`, `complexity`, are already provided, which you can fill in by adding a manual hint in the source code of the programs.
 
 ## Understanding the taxonomy
 

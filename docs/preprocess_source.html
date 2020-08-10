@@ -49,7 +49,7 @@ information is just stored: <code><a title="paroxython.parse_program.ProgramPars
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L0-L351" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L0-L357" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">from collections import defaultdict
 from token import DEDENT, INDENT, NEWLINE, STRING
@@ -185,7 +185,10 @@ class HintBuffer:
 
 
 def collect_hints(
-    source: Source, match_label: Callable = regex.compile(r&#34;^(\W*)([\w:]+)(\W*)$&#34;).match
+    # fmt: off
+    source: Source,
+    match_label: Callable = regex.compile(r&#34;^((?:-|\+|\.\.\.|…)?)(\w.*?)((?:\.\.\.|…)?)$&#34;).match
+    # fmt: on
 ) -&gt; Tuple[LabelsSpans, LabelsSpans]:
     addition = HintBuffer(&#34;addition&#34;)
     deletion = HintBuffer(&#34;deletion&#34;)
@@ -194,25 +197,23 @@ def collect_hints(
         if not separator:
             continue
         for hint in hints.split():
-            (before, label, after) = match_label(hint).groups()
-            hint_parts = f&#34;{before}/{label}/{after}&#34;
+            m = match_label(hint)
+            if m is None:
+                raise ValueError(f&#34;Malformed hint &#39;{hint}&#39; on line {i}.&#34;)
+            (before, label, after) = m.groups()
             if before in (&#34;&#34;, &#34;+&#34;, &#34;-&#34;):
                 buffer = deletion if before == &#34;-&#34; else addition
-                if after == &#34;&#34;:
-                    buffer.append_hint(label, i)
-                elif after in (&#34;...&#34;, &#34;…&#34;):
+                if after:
                     buffer.open_hint(label, i)
                 else:
-                    raise ValueError(f&#34;Illegal last part  for hint &#39;{hint_parts}&#39; on line {i}.&#34;)
-            elif before in (&#34;...&#34;, &#34;…&#34;):
+                    buffer.append_hint(label, i)
+            else:  # `before` is in (&#34;...&#34;, &#34;…&#34;)
                 if after:
-                    raise ValueError(f&#34;Illegal last part for hint &#39;{hint_parts}&#39; on line {i}.&#34;)
+                    raise ValueError(f&#34;Illegal last part for hint {m.groups()} on line {i}.&#34;)
                 champions = addition.get_champion(label) + deletion.get_champion(label)
                 if not champions:
-                    raise ValueError(f&#34;Unmatched closing hint &#39;{hint_parts}&#39; on line {i}.&#34;)
+                    raise ValueError(f&#34;Unmatched closing hint {m.groups()} on line {i}.&#34;)
                 max(champions)[1].close_hint(label, i)
-            else:
-                raise ValueError(f&#34;Illegal first part for hint &#39;{hint_parts}&#39; on line {i}.&#34;)
     addition.ensure_stack_is_empty()
     deletion.ensure_stack_is_empty()
     return (addition.get_result(), deletion.get_result())
@@ -288,17 +289,24 @@ first line and close on the last line.</p>
 <dd>
 <div class="desc"><p>Schedule for addition or deletion the hints appearing in the comments.</p>
 <h2 id="description">Description</h2>
-<p>On this stage, the source code is scanned for manual hints. They are set aside in two
-separate containers (depending on whether the user intends to add or remove them). They
+<p>On this stage, the source code is scanned for manual hints. This function set them aside in
+two separate containers (depending on whether the user intends to add or remove them). They
 will later be used to tweak the labelling results obtained by static analysis.</p>
 <h2 id="args">Args</h2>
 <dl>
 <dt><strong><code>source</code></strong> :&ensp;<code>Source</code></dt>
 <dd>A source code.</dd>
 <dt><strong><code>match_label</code></strong> :&ensp;<code>Callable</code>, optional</dt>
-<dd>A function matching a label composed of alphanumeric
-characters and colons.
-<a href="docs_developer_manual/index.html#default-argument-trick">Not to be explicitly provided.</a></dd>
+<dd>
+<p>A function matching a string:</p>
+<ul>
+<li>optionally starting with <code>"+"</code>, <code>"-"</code>, <code>"..."</code> or <code>"…"</code>;</li>
+<li>continuing with one alphanumeric character (<code>"[_0-9a-zA-Z]"</code>) and optionally a
+sequence of characters other than a newline (together they constitute the label);</li>
+<li>optionally ending with <code>"..."</code> or <code>"…"</code>.</li>
+</ul>
+<p><a href="docs_developer_manual/index.html#default-argument-trick">Not to be explicitly provided.</a></p>
+</dd>
 </dl>
 <h2 id="raises">Raises</h2>
 <dl>
@@ -336,10 +344,13 @@ has manually added [resp. suppressed].</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L269-L342" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L269-L348" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def collect_hints(
-    source: Source, match_label: Callable = regex.compile(r&#34;^(\W*)([\w:]+)(\W*)$&#34;).match
+    # fmt: off
+    source: Source,
+    match_label: Callable = regex.compile(r&#34;^((?:-|\+|\.\.\.|…)?)(\w.*?)((?:\.\.\.|…)?)$&#34;).match
+    # fmt: on
 ) -&gt; Tuple[LabelsSpans, LabelsSpans]:
     addition = HintBuffer(&#34;addition&#34;)
     deletion = HintBuffer(&#34;deletion&#34;)
@@ -348,25 +359,23 @@ has manually added [resp. suppressed].</dd>
         if not separator:
             continue
         for hint in hints.split():
-            (before, label, after) = match_label(hint).groups()
-            hint_parts = f&#34;{before}/{label}/{after}&#34;
+            m = match_label(hint)
+            if m is None:
+                raise ValueError(f&#34;Malformed hint &#39;{hint}&#39; on line {i}.&#34;)
+            (before, label, after) = m.groups()
             if before in (&#34;&#34;, &#34;+&#34;, &#34;-&#34;):
                 buffer = deletion if before == &#34;-&#34; else addition
-                if after == &#34;&#34;:
-                    buffer.append_hint(label, i)
-                elif after in (&#34;...&#34;, &#34;…&#34;):
+                if after:
                     buffer.open_hint(label, i)
                 else:
-                    raise ValueError(f&#34;Illegal last part  for hint &#39;{hint_parts}&#39; on line {i}.&#34;)
-            elif before in (&#34;...&#34;, &#34;…&#34;):
+                    buffer.append_hint(label, i)
+            else:  # `before` is in (&#34;...&#34;, &#34;…&#34;)
                 if after:
-                    raise ValueError(f&#34;Illegal last part for hint &#39;{hint_parts}&#39; on line {i}.&#34;)
+                    raise ValueError(f&#34;Illegal last part for hint {m.groups()} on line {i}.&#34;)
                 champions = addition.get_champion(label) + deletion.get_champion(label)
                 if not champions:
-                    raise ValueError(f&#34;Unmatched closing hint &#39;{hint_parts}&#39; on line {i}.&#34;)
+                    raise ValueError(f&#34;Unmatched closing hint {m.groups()} on line {i}.&#34;)
                 max(champions)[1].close_hint(label, i)
-            else:
-                raise ValueError(f&#34;Illegal first part for hint &#39;{hint_parts}&#39; on line {i}.&#34;)
     addition.ensure_stack_is_empty()
     deletion.ensure_stack_is_empty()
     return (addition.get_result(), deletion.get_result())</code></pre>
@@ -381,7 +390,7 @@ has manually added [resp. suppressed].</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L345-L352" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L351-L358" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def remove_hints(
     source: Source, sub_hints: Callable = regex.compile(fr&#34;\s*{HINT_COMMENT} .*&#34;).sub,

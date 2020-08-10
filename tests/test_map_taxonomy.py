@@ -9,7 +9,7 @@ from make_snapshot import make_snapshot
 import context
 from paroxython.goodies import couple_to_string
 from paroxython.label_programs import labelled_programs
-from paroxython.map_taxonomy import Taxonomy, deduplicated_taxa
+from paroxython.map_taxonomy import Taxonomy, deduplicated_taxa, is_literal
 from paroxython.user_types import Label, Program, Span
 
 t = Taxonomy(Path("examples/mini/taxonomy.tsv"))
@@ -38,6 +38,15 @@ def test_get_taxon_name_list():
         "type/sequence/list",
         "call/function/builtin/casting/list",
     ]
+    assert t.get_taxon_name_list("looks/like/a/taxon") == ["looks/like/a/taxon"]
+
+
+def test_is_literal():
+    assert is_literal("external_free_call:print")
+    assert is_literal("assignment_rhs_atom:1.5")
+    assert is_literal("looks/like/a/taxon")
+    assert not is_literal("whole_span:.+")
+    assert not is_literal("(assignment_rhs_atom:1.5)")
 
 
 def test_to_taxa():

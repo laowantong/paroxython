@@ -1323,7 +1323,7 @@
         "call/function/builtin/next": [[5,5]],
         "call/function/builtin/print": [[11,11]],
         "call/function/without_arguments": [[8,8]],
-        "call/method/sequence/count": [[3,3]],
+        "call/method/sequence_duck/count": [[3,3]],
         "condition/inequality": [[9,9]],
         "def/argument/no": [[2,7]],
         "def/generator": [[2,7]],
@@ -4128,9 +4128,6 @@
     "call/method/non_sequence/dictionary/keys": [
       "10_time.py"
     ],
-    "call/method/sequence/count": [
-      "20_prime_numbers.py"
-    ],
     "call/method/sequence/string/format": [
       "03_friends.py",
       "04_fibonacci.py",
@@ -4147,6 +4144,9 @@
     ],
     "call/method/sequence/string/splitlines": [
       "15_itertools_groupby.py"
+    ],
+    "call/method/sequence_duck/count": [
+      "20_prime_numbers.py"
     ],
     "condition/belonging": [
       "18_queens.py",

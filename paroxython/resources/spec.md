@@ -161,7 +161,7 @@
       - [Feature `accumulate_inputs` (SQL)](#feature-accumulate_inputs)
 - [Programs](#programs)
       - [Feature `whole_span`](#feature-whole_span)
-      - [Feature `topic`](#feature-topic)
+      - [Feature `topic|technique|complexity`](#feature-topictechniquecomplexity)
 - [Suggestions](#suggestions)
   - [Assignments](#assignments)
       - [Feature `suggest_augmented_assignment`](#feature-suggest_augmented_assignment)
@@ -6290,22 +6290,9 @@ _Remark._ Normally, a source code is stripped from all its comments during its p
 
 --------------------------------------------------------------------------------
 
-#### Feature `topic`
+#### Feature `topic|technique|complexity`
 
-It may be interesting to indicate the category of the program with an all-encompassing hint `# paroxython: topic` placed on its own line. Examples of possible categories are:
-
-- `biology`
-- `combinatorics`
-- `computability`: cellular automata, tag-system, etc.
-- `fractals`
-- `fun`
-- `game`
-- `general`: sorting, searching, algorithmic pattern, etc.
-- `geography`
-- `geometry`
-- `number_theory`: gcd, sieve, most problems of [Project Euler](http://projecteuler.net), etc.
-- `text_processing`
-- ...
+These are just some examples of unspecified labels which can be provided in comments as manual hints. In fact, you can create any label you want; just don't forget to define their conversion in your taxonomy, or you can directly tag them with a final taxon.
 
 ##### Specification
 

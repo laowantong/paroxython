@@ -20,7 +20,7 @@ call/method/number/floating_point/\1	member_call_method:(is_integer|hex|fromhex)
 call/method/number/floating_point/\1	member_call_method:float:(as_integer_ratio)
 call/method/number/integer/\1	member_call_method:(bit_length|to_bytes)
 call/method/number/integer/\1	member_call_method:int:(as_integer_ratio)
-call/method/sequence/\1	member_call_method:(count|index)
+call/method/sequence_duck/\1	member_call_method:(count|index)
 call/method/sequence/list/\1	member_call_method:(append|extend|insert|reverse|sort)
 call/method/sequence/list/\1	member_call_method:list:(count|index|pop|clear|copy|remove)
 call/method/sequence/string/\1	member_call_method:(capitalize|casefold|center|encode|endswith|expandtabs|find|format|format_map|isalnum|isalpha|isascii|isdecimal|isdigit|isidentifier|islower|isnumeric|isprintable|isspace|istitle|isupper|join|ljust|lower|lstrip|maketrans|partition|replace|rfind|rindex|rjust|rpartition|rsplit|rstrip|split|splitlines|startswith|strip|swapcase|title|translate|upper|zfill)
@@ -99,6 +99,8 @@ meta/ast/\1	ast_construction:(.+)
 meta/program	whole_span:.+
 meta/sloc/\1	whole_span:(.+)
 meta/topic/\1	topic:(.+)
+meta/complexity/\1	complexity:(.+)
+meta/technique/\1	technique:(.+)
 operator/arithmetic/addition	addition_operator
 operator/arithmetic/division	binary_operator:Div
 operator/arithmetic/integer_division	binary_operator:FloorDiv

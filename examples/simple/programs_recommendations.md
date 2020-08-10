@@ -129,7 +129,7 @@
 | 0 | `call/function/builtin/filter` | 7 |
 | 0 | `call/function/builtin/next` | 5 |
 | 0 | `call/function/without_arguments` | 8 |
-| 0.4375 | `call/method/sequence/count` | 3 |
+| 0.4375 | `call/method/sequence_duck/count` | 3 |
 | 0.75 | `condition/inequality` | 9 |
 | 0.375 | `def/argument/no` | 2-7 |
 | 0.25 | `def/generator` | 2-7 |

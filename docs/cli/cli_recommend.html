@@ -37,10 +37,11 @@
     paroxython collect
 
 ... and a pipeline of commands describing which concepts (taxa) are
-already known, which ones need to be illustrated or must be avoided. It
-results in a list of recommended programs, along with their total learning
-costs and the individual learning cost of each of the concepts they feature.
-These results are presented in Markdown format.
+already known, which ones need to be illustrated or must be avoided. By
+default, it results in a list of recommended programs, along with their
+total learning costs and the individual learning cost of each of the
+concepts they feature. These results are presented in Markdown format.
+With the option `-o stdout` the program list is simply printed to stdout.
 </code></pre>
 <h2 id="options">Options</h2>
 <pre><code class="plain">-b --base=PATH      Value accessible, with the syntax &quot;{base}&quot;, by any shell
@@ -62,10 +63,24 @@ These results are presented in Markdown format.
                     PREFIX_pipe.py is used. If the associated file is
                     missing or malformed, no filter is applied. [default: ]
 </code></pre>
+<h2 id="example">Example</h2>
+<pre><code class="plain">Use `-o stdout` to pipe the results into another shell command. For instance,
+let's assume that:
+
+- your program repository is `path/to/programs`;
+- your tag database is at its default location `path/to/programs_db.json`;
+- your pipeline is at its default location `path/to/programs_pipe.py`.
+
+Then, to **copy** (not move) all the recommended programs to an existing
+directory &lt;code&gt;dest&lt;/code&gt;, just do:
+
+paroxython recommend -o stdout path/to/programs_db.json \
+    | xargs  -I {} sh -c &quot;cp path/to/programs/{} dest&quot;
+</code></pre>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli_recommend.py#L0-L83" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli_recommend.py#L0-L100" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">import json
 import sys
@@ -124,7 +139,7 @@ def cli_wrapper(args):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli_recommend.py#L55-L84" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli_recommend.py#L72-L101" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def cli_wrapper(args):
     db_path = Path(args[&#34;DB_PATH&#34;])
