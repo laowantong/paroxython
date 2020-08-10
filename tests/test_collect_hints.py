@@ -1,5 +1,7 @@
 import pytest
 
+import regex  # type: ignore
+
 import context
 from paroxython.goodies import couple_to_string
 from paroxython.preprocess_source import collect_hints, HINT_COMMENT
@@ -26,12 +28,18 @@ def test_single_line_addition_hints():
         (3, "hint_on_3"),
         (4, "+hint_twice_on_4"),
         (4, "hint_twice_on_4"),
+        (5, "looks/like/a/taxon"),
+        (6, "_"),
+        (6, "a"),
     ]
     (addition, deletion) = wrapper(numbered_hints)
     assert addition == {
         "hint_on_2_and_3": "2, 3",  # the spans are sorted
         "hint_on_3": "3",
         "hint_twice_on_4": "4, 4",  # duplicates are kept
+        "looks/like/a/taxon": "5",  # taxons are kept
+        "_": "6",
+        "a": "6",
     }
     assert deletion == {}
 
@@ -144,33 +152,28 @@ def test_multi_line_nested_addition_and_deletion_hints():
     assert deletion == {"hint": "2-8, 4"}
 
 
-def test_malformed_hint():
-    numbered_hints = [(2, "a/b/c")]
-    with pytest.raises(ValueError, match="Malformed hint 'a/b/c' on line 2."):
-        wrapper(numbered_hints)
-
-
-def test_illegal_suffix():
-    numbered_hints = [(2, "hint#")]
-    with pytest.raises(ValueError, match="Illegal last part  for hint '/hint/#' on line 2."):
-        wrapper(numbered_hints)
-
-
-def test_illegal_prefix():
-    numbered_hints = [(2, "..hint")]
-    with pytest.raises(ValueError, match="Illegal first part for hint '../hint/' on line 2."):
-        wrapper(numbered_hints)
+def test_malformed_hints():
+    hints = ["...", "..hint", ".hint", "@foobar"]
+    for hint in hints:
+        numbered_hints = [(2, hint)]
+        with pytest.raises(ValueError, match=f"Malformed hint '{hint}' on line 2."):
+            wrapper(numbered_hints)
 
 
 def test_illegal_double_ellipsis():
     numbered_hints = [(2, "...hint...")]
-    with pytest.raises(ValueError, match="Illegal last part for hint '.../hint/...' on line 2."):
+    with pytest.raises(
+        ValueError,
+        match=regex.escape("Illegal last part for hint ('...', 'hint', '...') on line 2."),
+    ):
         wrapper(numbered_hints)
 
 
 def test_closing_without_opening():
     numbered_hints = [(2, "...hint")]
-    with pytest.raises(ValueError, match="Unmatched closing hint '.../hint/' on line 2."):
+    with pytest.raises(
+        ValueError, match=regex.escape("Unmatched closing hint ('...', 'hint', '') on line 2.")
+    ):
         wrapper(numbered_hints)
 
 

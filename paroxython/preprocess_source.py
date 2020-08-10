@@ -267,19 +267,27 @@ class HintBuffer:
 
 
 def collect_hints(
-    source: Source, match_label: Callable = regex.compile(r"^(\W*)([\w:]+)(\W*)$").match
+    # fmt: off
+    source: Source,
+    match_label: Callable = regex.compile(r"^((?:-|\+|\.\.\.|…)?)(\w.*?)((?:\.\.\.|…)?)$").match
+    # fmt: on
 ) -> Tuple[LabelsSpans, LabelsSpans]:
     """Schedule for addition or deletion the hints appearing in the comments.
 
     Description:
-        On this stage, the source code is scanned for manual hints. They are set aside in two
-        separate containers (depending on whether the user intends to add or remove them). They
+        On this stage, the source code is scanned for manual hints. This function set them aside in
+        two separate containers (depending on whether the user intends to add or remove them). They
         will later be used to tweak the labelling results obtained by static analysis.
 
     Args:
         source (Source): A source code.
-        match_label (Callable, optional): A function matching a label composed of alphanumeric
-            characters and colons.
+        match_label (Callable, optional): A function matching a string:
+
+            - optionally starting with `"+"`, `"-"`, `"..."` or `"…"`;
+            - continuing with one alphanumeric character (`"[_0-9a-zA-Z]"`) and optionally a
+              sequence of characters other than a newline (together they constitute the label);
+            - optionally ending with `"..."` or `"…"`.
+
             [Not to be explicitly provided.](docs_developer_manual/index.html#default-argument-trick)
 
     Raises:
@@ -322,24 +330,19 @@ def collect_hints(
             if m is None:
                 raise ValueError(f"Malformed hint '{hint}' on line {i}.")
             (before, label, after) = m.groups()
-            hint_parts = f"{before}/{label}/{after}"
             if before in ("", "+", "-"):
                 buffer = deletion if before == "-" else addition
-                if after == "":
-                    buffer.append_hint(label, i)
-                elif after in ("...", "…"):
+                if after:
                     buffer.open_hint(label, i)
                 else:
-                    raise ValueError(f"Illegal last part  for hint '{hint_parts}' on line {i}.")
-            elif before in ("...", "…"):
+                    buffer.append_hint(label, i)
+            else:  # `before` is in ("...", "…")
                 if after:
-                    raise ValueError(f"Illegal last part for hint '{hint_parts}' on line {i}.")
+                    raise ValueError(f"Illegal last part for hint {m.groups()} on line {i}.")
                 champions = addition.get_champion(label) + deletion.get_champion(label)
                 if not champions:
-                    raise ValueError(f"Unmatched closing hint '{hint_parts}' on line {i}.")
+                    raise ValueError(f"Unmatched closing hint {m.groups()} on line {i}.")
                 max(champions)[1].close_hint(label, i)
-            else:
-                raise ValueError(f"Illegal first part for hint '{hint_parts}' on line {i}.")
     addition.ensure_stack_is_empty()
     deletion.ensure_stack_is_empty()
     return (addition.get_result(), deletion.get_result())
