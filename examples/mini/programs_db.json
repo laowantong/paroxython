@@ -73,7 +73,7 @@
         "node:arg": [[1,1]],
         "single_assignment:n": [[5,5],[7,7]],
         "suggest_augmented_assignment": [[5,5]],
-        "suggest_constant_definition": [[2,2],[7,7]],
+        "suggest_constant_definition": [[2,2]],
         "unknown_label": [[6,6]],
         "update:n:1": [[7,7]],
         "update:n:2": [[5,5]],
@@ -162,7 +162,6 @@
         "node:Num": [[2,2],[2,2],[3,3],[3,3],[5,5],[5,5],[7,7],[7,7]],
         "node:Str": [[4,4],[6,6],[8,8]],
         "range:1:101": [[2,2]],
-        "suggest_constant_definition": [[3,3],[5,5],[7,7]],
         "whole_span:10": [[1,10]]
       },
       "taxa": {
@@ -531,8 +530,7 @@
       "collatz.py"
     ],
     "suggest_constant_definition": [
-      "collatz.py",
-      "fizzbuzz.py"
+      "collatz.py"
     ],
     "unknown_label": [
       "collatz.py"

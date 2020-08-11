@@ -103,7 +103,7 @@ REFRAIN = """ # assignment, assignment_lhs_identifier:REFRAIN, node:Assign (-> +
 take one down, pass it around,
 %d bottles of beer on the wall!
 """ # literal:Str, node:Str
-bottles_of_beer = 9 # assignment:9, assignment_lhs_identifier:bottles_of_beer, assignment_rhs_atom:9, literal:9, node:Assign, node:Name, node:Num, single_assignment:bottles_of_beer, suggest_constant_definition
+bottles_of_beer = 9 # assignment:9, assignment_lhs_identifier:bottles_of_beer, assignment_rhs_atom:9, literal:9, node:Assign, node:Name, node:Num, single_assignment:bottles_of_beer
 while bottles_of_beer > 1: # comparison_operator:Gt, literal:1, loop:while (-> +2), loop_with_late_exit:while (-> +2), node:Compare, node:Name, node:Num, node:While (-> +2)
     print(REFRAIN % (bottles_of_beer, bottles_of_beer, bottles_of_beer - 1)) # binary_operator:Mod, binary_operator:Sub, call_argument:, external_free_call:print, free_call:print, free_call_without_result:print, literal:1, literal:Tuple, modulo_operator, node:BinOp, node:Call, node:Expr, node:Name, node:Num, node:Tuple
     bottles_of_beer -= 1 # assignment_lhs_identifier:bottles_of_beer, assignment_rhs_atom:1, augmented_assignment:Sub, literal:1, node:AugAssign, node:Name, node:Num, update:bottles_of_beer:1, update_by_augmented_assignment:bottles_of_beer:1, update_by_augmented_assignment_with:Sub, update_with:Sub
@@ -137,7 +137,7 @@ def median(pool): # function:median (-> +6), function_argument:pool, function_ar
         return (copy[int(size / 2 - 1)] + copy[int(size / 2)]) / 2 # addition_operator, binary_operator:Add, binary_operator:Div, binary_operator:Sub, call_argument:, external_free_call:int, free_call:int, if_else_branch, index:_, literal:1, literal:2, node:BinOp, node:Call, node:Name, node:Num, node:Return, node:Subscript, return
 class TestMedian(unittest.TestCase): # node:Attribute, node:ClassDef (-> +2), node:Name
     def testMedian(self): # function:testMedian (-> +1), function_argument:self, function_argument_flavor:arg, function_returning_nothing:testMedian (-> +1), instance_method:testMedian (-> +1), method:testMedian (-> +1), node:FunctionDef (-> +1), node:arg
-        self.assertEqual(median([2, 9, 9, 7, 9, 2, 4, 5, 8]), 7) # call_argument:, call_argument:7, composition, free_call:median, internal_free_call:median, literal:2, literal:4, literal:5, literal:7, literal:8, literal:9, literal:List, member_call:self:assertEqual, member_call_method:assertEqual, member_call_object:self, node:Attribute, node:Call, node:Expr, node:List, node:Name, node:Num, suggest_constant_definition
+        self.assertEqual(median([2, 9, 9, 7, 9, 2, 4, 5, 8]), 7) # call_argument:, call_argument:7, composition, free_call:median, internal_free_call:median, literal:2, literal:4, literal:5, literal:7, literal:8, literal:9, literal:List, member_call:self:assertEqual, member_call_method:assertEqual, member_call_object:self, node:Attribute, node:Call, node:Expr, node:List, node:Name, node:Num
 
 # ----------------------------------------------------------------------------------------
 # 14_median.py
@@ -173,16 +173,16 @@ with open("stocks.csv", "w", newline="") as stocksFileW: # call_argument:, empty
     writer = csv.writer(stocksFileW) # assignment:writer, assignment_lhs_identifier:writer, assignment_rhs_atom:csv, assignment_rhs_atom:stocksFileW, call_argument:stocksFileW, member_call_method:writer, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:writer
     writer.writerows( # member_call:writer:writerows, member_call_method:writerows, member_call_object:writer, node:Attribute, node:Call (-> +4), node:Expr (-> +4), node:Name
         [ # call_argument:, literal:List, node:List (-> +3)
-            ["GOOG", "Google, Inc.", 505.24, 0.47, 0.09], # literal:0.09, literal:0.47, literal:505.24, literal:List, literal:Str, node:List, node:Num, node:Str, suggest_constant_definition
-            ["YHOO", "Yahoo! Inc.", 27.38, 0.33, 1.22], # literal:0.33, literal:1.22, literal:27.38, literal:List, literal:Str, node:List, node:Num, node:Str, suggest_constant_definition
-            ["CNET", "CNET Networks, Inc.", 8.62, -0.13, -1.4901], # literal:-0.13, literal:-1.4901, literal:8.62, literal:List, literal:Str, node:List, node:Num, node:Str, suggest_constant_definition
+            ["GOOG", "Google, Inc.", 505.24, 0.47, 0.09], # literal:0.09, literal:0.47, literal:505.24, literal:List, literal:Str, node:List, node:Num, node:Str
+            ["YHOO", "Yahoo! Inc.", 27.38, 0.33, 1.22], # literal:0.33, literal:1.22, literal:27.38, literal:List, literal:Str, node:List, node:Num, node:Str
+            ["CNET", "CNET Networks, Inc.", 8.62, -0.13, -1.4901], # literal:-0.13, literal:-1.4901, literal:8.62, literal:List, literal:Str, node:List, node:Num, node:Str
         ]
     )
 with open("stocks.csv", "r") as stocksFile: # call_argument:, external_free_call:open, free_call:open, literal:Str, node:Call, node:Name, node:Str, node:With (-> +5)
     stocks = csv.reader(stocksFile) # assignment:reader, assignment_lhs_identifier:stocks, assignment_rhs_atom:csv, assignment_rhs_atom:stocksFile, call_argument:stocksFile, member_call_method:reader, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:stocks
     status_labels = {-1: "down", 0: "unchanged", 1: "up"} # assignment, assignment_lhs_identifier:status_labels, assignment_rhs_atom:-1, assignment_rhs_atom:0, assignment_rhs_atom:1, literal:-1, literal:0, literal:1, literal:Dict, literal:Str, node:Assign, node:Dict, node:Name, node:Num, node:Str, single_assignment:status_labels
     for ticker, name, price, change, pct in stocks: # for:change (-> +2), for:name (-> +2), for:pct (-> +2), for:price (-> +2), for:ticker (-> +2), for_each (-> +2), literal:Tuple, loop:for (-> +2), loop_with_late_exit:for (-> +2), node:For (-> +2), node:Name, node:Tuple
-        status = status_labels[cmp(float(change), 0.0)] # assignment, assignment_lhs_identifier:status, assignment_rhs_atom:0.0, assignment_rhs_atom:change, assignment_rhs_atom:status_labels, call_argument:, call_argument:0.0, call_argument:change, composition, external_free_call:float, free_call:cmp, free_call:float, index:_, internal_free_call:cmp, literal:0.0, node:Assign, node:Call, node:Name, node:Num, node:Subscript, single_assignment:status, suggest_constant_definition
+        status = status_labels[cmp(float(change), 0.0)] # assignment, assignment_lhs_identifier:status, assignment_rhs_atom:0.0, assignment_rhs_atom:change, assignment_rhs_atom:status_labels, call_argument:, call_argument:0.0, call_argument:change, composition, external_free_call:float, free_call:cmp, free_call:float, index:_, internal_free_call:cmp, literal:0.0, node:Assign, node:Call, node:Name, node:Num, node:Subscript, single_assignment:status
         print("{} is {} ({:.2f})".format(name, status, float(pct))) # call_argument:, call_argument:name, call_argument:pct, call_argument:status, composition, external_free_call:float, external_free_call:print, free_call:float, free_call:print, free_call_without_result:print, literal:Str, member_call_method:format, node:Attribute, node:Call, node:Expr, node:Name, node:Str
 
 # ----------------------------------------------------------------------------------------
@@ -220,7 +220,7 @@ def iter_primes(): # function:iter_primes (-> +5), function_without_arguments:it
         yield prime # node:Expr, node:Name, node:Yield, yield:prime
         numbers = filter(prime.__rmod__, numbers) # assignment:filter, assignment_lhs_identifier:numbers, assignment_rhs_atom:numbers, assignment_rhs_atom:prime, call_argument:, call_argument:numbers, external_free_call:filter, free_call:filter, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:numbers, update:numbers:prime, update_by_assignment:numbers:prime, update_by_assignment_with:filter, update_with:filter
 for p in iter_primes(): # for:p (-> +3), free_call:iter_primes, free_call_without_arguments:iter_primes, internal_free_call:iter_primes, loop:for (-> +3), loop_with_break:for (-> +3), loop_with_early_exit:for:break (-> +3), node:Call, node:For (-> +3), node:Name
-    if p > 1000: # comparison_operator:Gt, if (-> +1), if_test_atom:1000, if_test_atom:p, if_without_else (-> +1), literal:1000, node:Compare, node:If (-> +1), node:Name, node:Num, suggest_constant_definition
+    if p > 1000: # comparison_operator:Gt, if (-> +1), if_test_atom:1000, if_test_atom:p, if_without_else (-> +1), literal:1000, node:Compare, node:If (-> +1), node:Name, node:Num
         break # if_then_branch, node:Break
     print(p) # call_argument:p, external_free_call:print, free_call:print, free_call_without_result:print, node:Call, node:Expr, node:Name
 

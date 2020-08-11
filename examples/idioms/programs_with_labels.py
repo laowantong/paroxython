@@ -469,7 +469,7 @@ from multiprocessing import Pool # import:multiprocessing:Pool, import_module:mu
 def f(i): # function:f (-> +1), function_argument:i, function_argument_flavor:arg, function_returning_nothing:f (-> +1), node:FunctionDef (-> +1), node:arg
     i * i # binary_operator:Mult, multiplication_operator, node:BinOp, node:Expr, node:Name
 with Pool(processes) as p: # call_argument:processes, external_free_call:Pool, free_call:Pool, node:Call, node:Name, node:With (-> +1)
-    p.map(func=f, iterable=range(1, 1001)) # call_argument:1, call_argument:1001, external_free_call:range, free_call:range, literal:1, literal:1001, member_call:p:map, member_call_method:map, member_call_object:p, node:Attribute, node:Call, node:Expr, node:Name, node:Num, range:1:1001, suggest_constant_definition
+    p.map(func=f, iterable=range(1, 1001)) # call_argument:1, call_argument:1001, external_free_call:range, free_call:range, literal:1, literal:1001, member_call:p:map, member_call_method:map, member_call_object:p, node:Attribute, node:Call, node:Expr, node:Name, node:Num, range:1:1001
 print("Finished") # call_argument:, external_free_call:print, free_call:print, free_call_without_result:print, literal:Str, node:Call, node:Expr, node:Name, node:Str
 
 # ----------------------------------------------------------------------------------------
@@ -890,14 +890,14 @@ UDP_IP = "127.0.0.1" # assignment, assignment_lhs_identifier:UDP_IP, literal:Str
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # assignment:socket, assignment_lhs_identifier:sock, assignment_rhs_atom:socket, call_argument:, member_call_method:socket, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:sock
 sock.bind((UDP_IP, p)) # call_argument:, literal:Tuple, member_call:sock:bind, member_call_method:bind, member_call_object:sock, node:Attribute, node:Call, node:Expr, node:Name, node:Tuple
 while True: # infinite_while (-> +2), literal:True, loop:while (-> +2), loop_with_late_exit:while (-> +2), node:NameConstant, node:While (-> +2)
-    data, addr = sock.recvfrom(1024) # assignment:recvfrom, assignment_lhs_identifier:addr, assignment_lhs_identifier:data, assignment_rhs_atom:1024, assignment_rhs_atom:sock, call_argument:1024, literal:1024, literal:Tuple, member_call_method:recvfrom, node:Assign, node:Attribute, node:Call, node:Name, node:Num, node:Tuple, parallel_assignment:2, suggest_constant_definition
+    data, addr = sock.recvfrom(1024) # assignment:recvfrom, assignment_lhs_identifier:addr, assignment_lhs_identifier:data, assignment_rhs_atom:1024, assignment_rhs_atom:sock, call_argument:1024, literal:1024, literal:Tuple, member_call_method:recvfrom, node:Assign, node:Attribute, node:Call, node:Name, node:Num, node:Tuple, parallel_assignment:2
     print("received message:", data) # call_argument:, call_argument:data, external_free_call:print, free_call:print, free_call_without_result:print, literal:Str, node:Call, node:Expr, node:Name, node:Str
 
 # ----------------------------------------------------------------------------------------
 # 122.1453-declare-enumeration.py
 # ----------------------------------------------------------------------------------------
 class Suit: # node:ClassDef (-> +1), whole_span:2 (-> +1)
-    SPADES, HEARTS, DIAMONDS, CLUBS = range(4) # assignment:range, assignment_lhs_identifier:CLUBS, assignment_lhs_identifier:DIAMONDS, assignment_lhs_identifier:HEARTS, assignment_lhs_identifier:SPADES, assignment_rhs_atom:4, call_argument:4, external_free_call:range, free_call:range, literal:4, literal:Tuple, node:Assign, node:Call, node:Name, node:Num, node:Tuple, parallel_assignment:4, range:4, suggest_constant_definition
+    SPADES, HEARTS, DIAMONDS, CLUBS = range(4) # assignment:range, assignment_lhs_identifier:CLUBS, assignment_lhs_identifier:DIAMONDS, assignment_lhs_identifier:HEARTS, assignment_lhs_identifier:SPADES, assignment_rhs_atom:4, call_argument:4, external_free_call:range, free_call:range, literal:4, literal:Tuple, node:Assign, node:Call, node:Name, node:Num, node:Tuple, parallel_assignment:4, range:4
 
 # ----------------------------------------------------------------------------------------
 # 122.1454-declare-enumeration.py
@@ -906,8 +906,8 @@ from enum import Enum # import:enum:Enum, import_module:enum, import_name:Enum, 
 class Suit(Enum): # node:ClassDef (-> +4), node:Name
     SPADES = 1 # assignment:1, assignment_lhs_identifier:SPADES, assignment_rhs_atom:1, literal:1, node:Assign, node:Name, node:Num, single_assignment:SPADES
     HEARTS = 2 # assignment:2, assignment_lhs_identifier:HEARTS, assignment_rhs_atom:2, literal:2, node:Assign, node:Name, node:Num, single_assignment:HEARTS
-    DIAMONDS = 3 # assignment:3, assignment_lhs_identifier:DIAMONDS, assignment_rhs_atom:3, literal:3, node:Assign, node:Name, node:Num, single_assignment:DIAMONDS, suggest_constant_definition
-    CLUBS = 4 # assignment:4, assignment_lhs_identifier:CLUBS, assignment_rhs_atom:4, literal:4, node:Assign, node:Name, node:Num, single_assignment:CLUBS, suggest_constant_definition
+    DIAMONDS = 3 # assignment:3, assignment_lhs_identifier:DIAMONDS, assignment_rhs_atom:3, literal:3, node:Assign, node:Name, node:Num, single_assignment:DIAMONDS
+    CLUBS = 4 # assignment:4, assignment_lhs_identifier:CLUBS, assignment_rhs_atom:4, literal:4, node:Assign, node:Name, node:Num, single_assignment:CLUBS
 
 # ----------------------------------------------------------------------------------------
 # 123.2146-assert-condition.py
@@ -1149,7 +1149,7 @@ class RGB(numpy.ndarray): # node:Attribute, node:ClassDef (-> +8), node:Name
     @classmethod # class_method:from_str (-> +4), decorated_function:from_str (-> +4), function:from_str (-> +4), function_decorator:classmethod (-> +4), function_returning_something:from_str (-> +4), method:from_str (-> +4), node:FunctionDef (-> +4), node:Name
     def from_str(cls, rgbstr): # function_argument:cls, function_argument:rgbstr, function_argument_flavor:arg, node:arg
         return numpy.array( # composition, member_call:numpy:array, member_call:numpy:view, member_call_method:array, member_call_method:view, member_call_object:numpy, method_chaining, node:Attribute, node:Attribute (-> +1), node:Call (-> +1), node:Call (-> +2), node:Name, node:Return (-> +2), return (-> +2)
-            [int(rgbstr[i : i + 2], 16) for i in range(1, len(rgbstr), 2)] # addition_operator, binary_operator:Add, call_argument:, call_argument:1, call_argument:16, call_argument:2, call_argument:rgbstr, composition, comprehension:List, comprehension_for_count:1, external_free_call:int, external_free_call:len, external_free_call:range, free_call:int, free_call:len, free_call:range, literal:1, literal:16, literal:2, node:BinOp, node:Call, node:ListComp, node:Name, node:Num, node:Subscript, range:1:_:2, slice:i:_:, slice_lower:i, slice_step:, slice_upper:_, suggest_constant_definition
+            [int(rgbstr[i : i + 2], 16) for i in range(1, len(rgbstr), 2)] # addition_operator, binary_operator:Add, call_argument:, call_argument:1, call_argument:16, call_argument:2, call_argument:rgbstr, composition, comprehension:List, comprehension_for_count:1, external_free_call:int, external_free_call:len, external_free_call:range, free_call:int, free_call:len, free_call:range, literal:1, literal:16, literal:2, node:BinOp, node:Call, node:ListComp, node:Name, node:Num, node:Subscript, range:1:_:2, slice:i:_:, slice_lower:i, slice_step:, slice_upper:_
         ).view(cls) # call_argument:cls, node:Name
     def __str__(self): # function:__str__ (-> +2), function_argument:self, function_argument_flavor:arg, function_returning_something:__str__ (-> +2), instance_method:__str__ (-> +2), method:__str__ (-> +2), node:FunctionDef (-> +2), node:arg
         self = self.astype(numpy.uint8) # assignment:astype, assignment_lhs_identifier:self, assignment_rhs_atom:numpy, assignment_rhs_atom:self, call_argument:, member_call_method:astype, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:self, update:self:numpy, update_by_assignment:self:numpy, update_by_assignment_with:astype, update_with:astype

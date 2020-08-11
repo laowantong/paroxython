@@ -125,8 +125,6 @@
 - single_assignment:a / assignment.py / 1
 - single_assignment:n / collatz.py / 5, 7
 - suggest_augmented_assignment / collatz.py / 5
-- suggest_constant_definition / collatz.py / 7
-- suggest_constant_definition / fizzbuzz.py / 3, 5, 7
 - update:n:1 / collatz.py / 7
 - update:n:2 / collatz.py / 5
 - update:n:3 / collatz.py / 7

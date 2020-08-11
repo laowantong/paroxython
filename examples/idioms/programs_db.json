@@ -2423,7 +2423,6 @@
         "node:With": [[4,5]],
         "node:arg": [[2,2]],
         "range:1:1001": [[5,5]],
-        "suggest_constant_definition": [[5,5]],
         "whole_span:6": [[1,6]]
       },
       "taxa": {
@@ -4634,7 +4633,6 @@
         "parallel_assignment:2": [[6,6]],
         "single_assignment:UDP_IP": [[2,2]],
         "single_assignment:sock": [[3,3]],
-        "suggest_constant_definition": [[6,6]],
         "whole_span:7": [[1,7]]
       },
       "taxa": {
@@ -4677,7 +4675,6 @@
         "node:Tuple": [[2,2]],
         "parallel_assignment:4": [[2,2]],
         "range:4": [[2,2]],
-        "suggest_constant_definition": [[2,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
@@ -4723,7 +4720,6 @@
         "single_assignment:DIAMONDS": [[5,5]],
         "single_assignment:HEARTS": [[4,4]],
         "single_assignment:SPADES": [[3,3]],
-        "suggest_constant_definition": [[5,5],[6,6]],
         "whole_span:6": [[1,6]]
       },
       "taxa": {
@@ -6104,7 +6100,6 @@
         "slice_lower:i": [[6,6]],
         "slice_step:": [[6,6]],
         "slice_upper:_": [[6,6]],
-        "suggest_constant_definition": [[6,6]],
         "update:self:numpy": [[9,9]],
         "update_by_assignment:self:numpy": [[9,9]],
         "update_by_assignment_with:astype": [[9,9]],
@@ -14395,13 +14390,6 @@
     ],
     "string_formatting_operator": [
       "177.3241-find-files-with-a-given-list-of-filename-extensions.py"
-    ],
-    "suggest_constant_definition": [
-      "056.1424-launch-1000-parallel-tasks-and-wait-for-completion.py",
-      "121.3029-udp-listen-and-read.py",
-      "122.1453-declare-enumeration.py",
-      "122.1454-declare-enumeration.py",
-      "154.2292-halfway-between-two-hex-color-codes.py"
     ],
     "swap": [
       "021.0084-swap-values-of-variables-a-and-b.py"

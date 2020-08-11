@@ -31,7 +31,7 @@
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L0-L360" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L0-L359" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">from collections import defaultdict
 from os.path import dirname
@@ -114,7 +114,6 @@ class ProgramParser:
                 raise ValueError(f&#34;Unknow language &#39;{language}&#39; for &#39;{label_name}&#39;!&#34;)
         self.derived_labels_database = DerivedLabelsDatabase()
 
-
     def __call__(self, program: Program, yield_failed_matches: bool = False) -&gt; Labels:
         # If the program can be parsed, flatten its AST.
         try:
@@ -137,7 +136,7 @@ class ProgramParser:
                         labels[label_name].append(span)
             elapsed = perf_counter() - start
             self.times[label_prefix] += elapsed
-            self.times[&#34;TOTAL&#34;] += elapsed
+            self.times[LabelName(&#34;TOTAL&#34;)] += elapsed
             if yield_failed_matches and failed_match:
                 labels[label_prefix] = []
 
@@ -155,7 +154,7 @@ class ProgramParser:
             derived_labels = self.derived_labels_database.read(query)
             elapsed = perf_counter() - start
             self.times[label_name] += elapsed
-            self.times[&#34;TOTAL&#34;] += elapsed
+            self.times[LabelName(&#34;TOTAL&#34;)] += elapsed
             if derived_labels:
                 # Bingo! update the DB state and the result with the new labels.
                 self.derived_labels_database.update(derived_labels)
@@ -167,7 +166,7 @@ class ProgramParser:
 
         return sorted(result)
 
-    def print_performances(self):
+    def print_performances(self): # pragma: no cover
         result = sorted(self.times.items(), key=lambda item: item[1], reverse=True)
         print()
         print(&#34;Elapsed times by features (in seconds)&#34;)
@@ -435,7 +434,7 @@ ends of the list, they are ignored by <code><a title="paroxython.parse_program.p
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L214-L339" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L214-L338" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">class ProgramParser:
     def __init__(self, spec_path: Path = DEFAULT_SPEC_PATH) -&gt; None:
@@ -455,7 +454,6 @@ ends of the list, they are ignored by <code><a title="paroxython.parse_program.p
             elif specification.strip() != &#34;&#34;:  # pragma: no cover
                 raise ValueError(f&#34;Unknow language &#39;{language}&#39; for &#39;{label_name}&#39;!&#34;)
         self.derived_labels_database = DerivedLabelsDatabase()
-
 
     def __call__(self, program: Program, yield_failed_matches: bool = False) -&gt; Labels:
         # If the program can be parsed, flatten its AST.
@@ -479,7 +477,7 @@ ends of the list, they are ignored by <code><a title="paroxython.parse_program.p
                         labels[label_name].append(span)
             elapsed = perf_counter() - start
             self.times[label_prefix] += elapsed
-            self.times[&#34;TOTAL&#34;] += elapsed
+            self.times[LabelName(&#34;TOTAL&#34;)] += elapsed
             if yield_failed_matches and failed_match:
                 labels[label_prefix] = []
 
@@ -497,7 +495,7 @@ ends of the list, they are ignored by <code><a title="paroxython.parse_program.p
             derived_labels = self.derived_labels_database.read(query)
             elapsed = perf_counter() - start
             self.times[label_name] += elapsed
-            self.times[&#34;TOTAL&#34;] += elapsed
+            self.times[LabelName(&#34;TOTAL&#34;)] += elapsed
             if derived_labels:
                 # Bingo! update the DB state and the result with the new labels.
                 self.derived_labels_database.update(derived_labels)
@@ -509,7 +507,7 @@ ends of the list, they are ignored by <code><a title="paroxython.parse_program.p
 
         return sorted(result)
 
-    def print_performances(self):
+    def print_performances(self): # pragma: no cover
         result = sorted(self.times.items(), key=lambda item: item[1], reverse=True)
         print()
         print(&#34;Elapsed times by features (in seconds)&#34;)
@@ -605,7 +603,7 @@ which is executed each time the tests are launched.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L249-L329" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L248-L328" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def __call__(self, program: Program, yield_failed_matches: bool = False) -&gt; Labels:
     # If the program can be parsed, flatten its AST.
@@ -629,7 +627,7 @@ which is executed each time the tests are launched.</p></div>
                     labels[label_name].append(span)
         elapsed = perf_counter() - start
         self.times[label_prefix] += elapsed
-        self.times[&#34;TOTAL&#34;] += elapsed
+        self.times[LabelName(&#34;TOTAL&#34;)] += elapsed
         if yield_failed_matches and failed_match:
             labels[label_prefix] = []
 
@@ -647,7 +645,7 @@ which is executed each time the tests are launched.</p></div>
         derived_labels = self.derived_labels_database.read(query)
         elapsed = perf_counter() - start
         self.times[label_name] += elapsed
-        self.times[&#34;TOTAL&#34;] += elapsed
+        self.times[LabelName(&#34;TOTAL&#34;)] += elapsed
         if derived_labels:
             # Bingo! update the DB state and the result with the new labels.
             self.derived_labels_database.update(derived_labels)
@@ -668,9 +666,9 @@ which is executed each time the tests are launched.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L331-L339" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L330-L338" class="git-link">Browse GitHub</a>
 </summary>
-<pre><code class="python">def print_performances(self):
+<pre><code class="python">def print_performances(self): # pragma: no cover
     result = sorted(self.times.items(), key=lambda item: item[1], reverse=True)
     print()
     print(&#34;Elapsed times by features (in seconds)&#34;)

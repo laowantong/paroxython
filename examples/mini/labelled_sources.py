@@ -87,7 +87,6 @@ def print_collatz(n): # added_block_label (-> +7)
                           # node:Name
                           # node:Num
                           # single_assignment:n
-                          # suggest_constant_definition
                           # update:n:1
                           # update:n:3
                           # update_by_assignment:n:1
@@ -139,7 +138,6 @@ for i in range(1, 101): # call_argument:1
                     # node:If (-> +7)
                     # node:Name
                     # node:Num
-                    # suggest_constant_definition
         print("FizzBuzz") # call_argument:
                           # external_free_call:print
                           # free_call:print
@@ -165,7 +163,6 @@ for i in range(1, 101): # call_argument:1
                      # node:If (-> +5)
                      # node:Name
                      # node:Num
-                     # suggest_constant_definition
         print("Fizz") # call_argument:
                       # external_free_call:print
                       # free_call:print
@@ -191,7 +188,6 @@ for i in range(1, 101): # call_argument:1
                      # node:If (-> +3)
                      # node:Name
                      # node:Num
-                     # suggest_constant_definition
         print("Buzz") # call_argument:
                       # external_free_call:print
                       # free_call:print

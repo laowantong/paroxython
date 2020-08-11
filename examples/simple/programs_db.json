@@ -579,7 +579,6 @@
         "node:While": [[8,10]],
         "single_assignment:REFRAIN": [[1,1]],
         "single_assignment:bottles_of_beer": [[7,7]],
-        "suggest_constant_definition": [[7,7]],
         "update:bottles_of_beer:1": [[10,10]],
         "update_by_augmented_assignment:bottles_of_beer:1": [[10,10]],
         "update_by_augmented_assignment_with:Sub": [[10,10]],
@@ -777,7 +776,6 @@
         "return": [[6,6],[8,8]],
         "single_assignment:copy": [[3,3]],
         "single_assignment:size": [[4,4]],
-        "suggest_constant_definition": [[11,11],[11,11],[11,11],[11,11],[11,11],[11,11],[11,11],[11,11]],
         "whole_span:11": [[1,11]]
       },
       "taxa": {
@@ -1056,7 +1054,6 @@
         "single_assignment:status_labels": [[15,15]],
         "single_assignment:stocks": [[14,14]],
         "single_assignment:writer": [[5,5]],
-        "suggest_constant_definition": [[8,8],[8,8],[8,8],[9,9],[9,9],[9,9],[10,10],[10,10],[10,10],[17,17]],
         "whole_span:18": [[1,18]]
       },
       "taxa": {
@@ -1310,7 +1307,6 @@
         "node:Yield": [[6,6]],
         "single_assignment:numbers": [[3,3],[7,7]],
         "single_assignment:prime": [[5,5]],
-        "suggest_constant_definition": [[9,9]],
         "update:numbers:prime": [[7,7]],
         "update_by_assignment:numbers:prime": [[7,7]],
         "update_by_assignment_with:filter": [[7,7]],
@@ -3834,12 +3830,6 @@
     "string_formatting_operator": [
       "02_input_name.py",
       "07_grocery_bill.py"
-    ],
-    "suggest_constant_definition": [
-      "11_bottles.py",
-      "13_unit_testing.py",
-      "16_csv.py",
-      "20_prime_numbers.py"
     ],
     "tail_recursive_function:add_queen": [
       "28_queens.py"

@@ -167,7 +167,6 @@
       - [Feature `suggest_augmented_assignment`](#feature-suggest_augmented_assignment)
   - [Expressions](#expressions-1)
       - [Feature `suggest_comparison_chaining`](#feature-suggest_comparison_chaining)
-      - [Feature `suggest_constant_definition`](#feature-suggest_constant_definition)
   - [Subroutines](#subroutines)
       - [Feature `suggest_condition_return`](#feature-suggest_condition_return)
 
@@ -6418,56 +6417,6 @@ Note that the last simplification is rather confusing and should be avoided.
 | Label | Lines |
 |:--|:--|
 | `suggest_comparison_chaining` | 1, 2, 3, 4 |
-
---------------------------------------------------------------------------------
-
-#### Feature `suggest_constant_definition`
-
-Match magic numbers (unnamed numerical constants) other than -1, 0, 1 and 2. A number in the RHS of an assignment to a constant is of course ignored.
-
-##### Specification
-
-```re
-  ^(/(?:body|orelse)/\d+)
-(   # indented lines
-                /(?P<_1>(?:body|orelse)/.+)/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/(?P=_1)                   /n=(?!(-1|0|1|2)\n)
-|   # unindented lines
-                /_type=Assign
-\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/assigntargets/1/id=.*?[a-z].* # at least one lowercase letter
-\n(?:\1.+\n)*?\1/assignvalue/n=(?!(-1|0|1|2)\b)
-)
-```
-
-##### Example
-
-```python
-1   NUMBER_OF_TEETH_OF_A_DOG = 42 # not a magic number
-2   shoe_size = 42 # magic number
-3   for a in s[::-1]:
-4       if a == 42 and b % 2 == 0: # 42 is a magic number
-5           pass
-6   negative_number = -42
-```
-
-May be rewritten as:
-
-```python
-1   NUMBER_OF_TEETH_OF_A_DOG = 42
-2   ANSWER_TO_THE_ULTIMATE_QUESTION_OF_LIFE_THE_UNIVERSE_AND_EVERYTHING = 42
-3   shoe_size = ANSWER_TO_THE_ULTIMATE_QUESTION_OF_LIFE_THE_UNIVERSE_AND_EVERYTHING
-4   for a in s[::-1]:
-5       if a == ANSWER_TO_THE_ULTIMATE_QUESTION_OF_LIFE_THE_UNIVERSE_AND_EVERYTHING and b % 2 == 0:
-6           pass
-7   NEGATIVE_NUMBER = -42
-```
-
-##### Matches
-
-| Label | Lines |
-|:--|:--|
-| `suggest_constant_definition` | 2, 4, 6 |
 
 --------------------------------------------------------------------------------
 

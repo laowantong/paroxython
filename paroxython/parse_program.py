@@ -297,7 +297,7 @@ class ProgramParser:
                         labels[label_name].append(span)
             elapsed = perf_counter() - start
             self.times[label_prefix] += elapsed
-            self.times["TOTAL"] += elapsed
+            self.times[LabelName("TOTAL")] += elapsed
             if yield_failed_matches and failed_match:
                 labels[label_prefix] = []
 
@@ -315,7 +315,7 @@ class ProgramParser:
             derived_labels = self.derived_labels_database.read(query)
             elapsed = perf_counter() - start
             self.times[label_name] += elapsed
-            self.times["TOTAL"] += elapsed
+            self.times[LabelName("TOTAL")] += elapsed
             if derived_labels:
                 # Bingo! update the DB state and the result with the new labels.
                 self.derived_labels_database.update(derived_labels)
@@ -327,7 +327,7 @@ class ProgramParser:
 
         return sorted(result)
 
-    def print_performances(self):
+    def print_performances(self):  # pragma: no cover
         """Print a TSV report of elapsed times by features, sorted by decreasing time."""
         result = sorted(self.times.items(), key=lambda item: item[1], reverse=True)
         print()
