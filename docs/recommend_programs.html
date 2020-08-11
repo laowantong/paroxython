@@ -56,7 +56,7 @@ increasing total cost and <a href="https://en.wikipedia.org/wiki/Source_lines_of
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L0-L320" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L0-L331" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">import subprocess
 from collections import defaultdict
@@ -96,8 +96,15 @@ class MalformedData(Exception):
 
 
 class Recommendations:
-    def __init__(self, db: JsonDatabase, base_path: Optional[Path] = None, **kwargs,) -&gt; None:
+    def __init__(
+        self,
+        db: JsonDatabase,
+        base_path: Optional[Path] = None,
+        title_format: str = &#34;`{name}`&#34;,
+        **kwargs,
+    ) -&gt; None:
         self.base_path = base_path
+        self.title_format = title_format
 
         # copy locally some attributes and methods of a ProgramFilter instance
         program_filter = ProgramFilter(db)
@@ -220,8 +227,10 @@ class Recommendations:
 
             for (cost, program_name) in costs_and_program_names:
                 program_info = self.db_programs[program_name]
-                title = f&#34;Program `{program_name}` (learning cost {cost})&#34;
-                toc.append(f&#34;    - [`{program_name}`](#{title_to_slug(title)})&#34;)
+                program_title = self.title_format.format(name=program_name)
+                title = f&#34;Program {program_title} (learning cost {cost})&#34;
+                slug = title_to_slug(f&#34;Program {program_name} (learning cost {cost})&#34;)
+                toc.append(f&#34;    - [`{program_name}`](#{slug})&#34;)
                 contents.append(f&#34;\n### {title}&#34;)
                 contents.append(f&#34;\n```python\n{add_line_numbers(program_info[&#39;source&#39;])}\n```&#34;)
                 contents.append(&#34;\n| Cost  | Taxon | Location |&#34;)
@@ -294,11 +303,18 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L68-L308" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L68-L319" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">class Recommendations:
-    def __init__(self, db: JsonDatabase, base_path: Optional[Path] = None, **kwargs,) -&gt; None:
+    def __init__(
+        self,
+        db: JsonDatabase,
+        base_path: Optional[Path] = None,
+        title_format: str = &#34;`{name}`&#34;,
+        **kwargs,
+    ) -&gt; None:
         self.base_path = base_path
+        self.title_format = title_format
 
         # copy locally some attributes and methods of a ProgramFilter instance
         program_filter = ProgramFilter(db)
@@ -421,8 +437,10 @@ if __name__ == &#34;__main__&#34;:
 
             for (cost, program_name) in costs_and_program_names:
                 program_info = self.db_programs[program_name]
-                title = f&#34;Program `{program_name}` (learning cost {cost})&#34;
-                toc.append(f&#34;    - [`{program_name}`](#{title_to_slug(title)})&#34;)
+                program_title = self.title_format.format(name=program_name)
+                title = f&#34;Program {program_title} (learning cost {cost})&#34;
+                slug = title_to_slug(f&#34;Program {program_name} (learning cost {cost})&#34;)
+                toc.append(f&#34;    - [`{program_name}`](#{slug})&#34;)
                 contents.append(f&#34;\n### {title}&#34;)
                 contents.append(f&#34;\n```python\n{add_line_numbers(program_info[&#39;source&#39;])}\n```&#34;)
                 contents.append(&#34;\n| Cost  | Taxon | Location |&#34;)
@@ -467,7 +485,7 @@ if __name__ == &#34;__main__&#34;:
 <h3>Methods</h3>
 <dl>
 <dt id="paroxython.recommend_programs.Recommendations.__init__"><code class="name flex">
-<span>def <span class="ident">__init__</span></span>(<span>self, <br>db: JsonDatabase, <br>base_path: Union[pathlib.Path, NoneType] = None, <br>**kwargs<br>) ‑> NoneType</span>
+<span>def <span class="ident">__init__</span></span>(<span>self, <br>db: JsonDatabase, <br>base_path: Union[pathlib.Path, NoneType] = None, <br>title_format: str = '`{name}`', <br>**kwargs<br>) ‑> NoneType</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Initialize a recommendation system for the given database of programs tagged with taxa.</p>
@@ -483,6 +501,9 @@ The execution relies on the fields <code>programs</code>, <code>taxa</code>, <co
 <dt><strong><code>base_path</code></strong> :&ensp;<code>Optional[Path]</code>, optional</dt>
 <dd>A path, accessible from any optional shell command
 under the name <code>"{base_path}"</code>. Defaults to <code>None</code>.</dd>
+<dt><strong><code>title_format</code></strong> :&ensp;<code>str</code></dt>
+<dd>a string containing a substring <code>{name}</code> to be interpolated in
+the final report with the relevant program's name. Defaults to <code name>"\</code>`"`.</dd>
 <dt><strong><code>**kwargs</code></strong></dt>
 <dd>May include the keyword argument <code>assessment_strategy</code>, transmitted to
 <code><a title="paroxython.assess_costs.LearningCostAssessor" href="assess_costs.html#paroxython.assess_costs.LearningCostAssessor">LearningCostAssessor</a></code>.</dd>
@@ -494,10 +515,17 @@ spans. Exception: the taxa starting with <code>"meta/"</code> are not imported.<
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L69-L102" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L69-L111" class="git-link">Browse GitHub</a>
 </summary>
-<pre><code class="python">def __init__(self, db: JsonDatabase, base_path: Optional[Path] = None, **kwargs,) -&gt; None:
+<pre><code class="python">def __init__(
+    self,
+    db: JsonDatabase,
+    base_path: Optional[Path] = None,
+    title_format: str = &#34;`{name}`&#34;,
+    **kwargs,
+) -&gt; None:
     self.base_path = base_path
+    self.title_format = title_format
 
     # copy locally some attributes and methods of a ProgramFilter instance
     program_filter = ProgramFilter(db)
@@ -548,7 +576,7 @@ semantic triples (of the form subject, predicate, object).</li>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L104-L171" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L113-L180" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def run_pipeline(self, commands: Optional[List[Command]] = None) -&gt; None:
     commands = commands or []
@@ -629,7 +657,7 @@ be interpreted.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L173-L218" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L182-L227" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def parse_data(
     # fmt: off
@@ -662,7 +690,7 @@ be interpreted.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L220-L308" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L229-L319" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def get_markdown(
     self,
@@ -709,8 +737,10 @@ be interpreted.</dd>
 
         for (cost, program_name) in costs_and_program_names:
             program_info = self.db_programs[program_name]
-            title = f&#34;Program `{program_name}` (learning cost {cost})&#34;
-            toc.append(f&#34;    - [`{program_name}`](#{title_to_slug(title)})&#34;)
+            program_title = self.title_format.format(name=program_name)
+            title = f&#34;Program {program_title} (learning cost {cost})&#34;
+            slug = title_to_slug(f&#34;Program {program_name} (learning cost {cost})&#34;)
+            toc.append(f&#34;    - [`{program_name}`](#{slug})&#34;)
             contents.append(f&#34;\n### {title}&#34;)
             contents.append(f&#34;\n```python\n{add_line_numbers(program_info[&#39;source&#39;])}\n```&#34;)
             contents.append(&#34;\n| Cost  | Taxon | Location |&#34;)

@@ -46,7 +46,7 @@ def labelled_programs(
                 tweaked_label_name = LabelName(label.name.replace(":", "_internally:", 1))
                 program.labels[i] = Label(name=tweaked_label_name, spans=label.spans)
     if print_performances:
-        parse.print_performances()
+        parse.print_performances()  # pragma: no cover
     return programs
 
 

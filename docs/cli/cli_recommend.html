@@ -62,6 +62,14 @@ With the option `-o stdout` the program list is simply printed to stdout.
                     DB_PATH is of the form PREFIX_db.json, a value of
                     PREFIX_pipe.py is used. If the associated file is
                     missing or malformed, no filter is applied. [default: ]
+-f --format=STR     The format of program titles in the report. This string
+                    can contains the following identifiers (between braces):
+                    • name: keys of the dictionary &quot;programs&quot; in the DB.
+                    • absolute: absolute path to DB_PATH's parent folder.
+                    • relative: relative path to DB_PATH's parent folder.
+                    Shortcut: if format is &quot;vscode&quot;, makes program names to
+                        be clickable and opening in VS Code.
+                    [default: `{name}`]
 </code></pre>
 <h2 id="example">Example</h2>
 <pre><code class="plain">Use `-o stdout` to pipe the results into another shell command. For instance,
@@ -80,7 +88,7 @@ paroxython recommend -o stdout path/to/programs_db.json \
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli_recommend.py#L0-L100" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli_recommend.py#L0-L115" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">import json
 import sys
@@ -110,10 +118,17 @@ def cli_wrapper(args):
     stdout_backup = sys.stdout
     if args[&#34;--output&#34;].upper() == &#34;STDOUT&#34;:
         sys.stdout = sys.stderr
+    title_format = args[&#34;--format&#34;]
+    if title_format.lower() == &#34;vscode&#34;:
+        title_format = &#34;[`{name}`](vscode://file/{absolute}/programs/{name})&#34;
+    title_format = title_format.format(
+        name=&#34;{name}&#34;, absolute=parent_path.resolve(), relative=parent_path,
+    )
     rec = Recommendations(
         db=json.loads(db_path.read_text()),
         base_path=Path(args[&#34;--base&#34;] or parent_path),
         assessment_strategy=args[&#34;--cost&#34;],
+        title_format=title_format,
     )
     rec.run_pipeline(commands)
     if args[&#34;--output&#34;].upper() == &#34;STDOUT&#34;:
@@ -139,7 +154,7 @@ def cli_wrapper(args):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli_recommend.py#L72-L101" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli_recommend.py#L80-L116" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def cli_wrapper(args):
     db_path = Path(args[&#34;DB_PATH&#34;])
@@ -159,10 +174,17 @@ def cli_wrapper(args):
     stdout_backup = sys.stdout
     if args[&#34;--output&#34;].upper() == &#34;STDOUT&#34;:
         sys.stdout = sys.stderr
+    title_format = args[&#34;--format&#34;]
+    if title_format.lower() == &#34;vscode&#34;:
+        title_format = &#34;[`{name}`](vscode://file/{absolute}/programs/{name})&#34;
+    title_format = title_format.format(
+        name=&#34;{name}&#34;, absolute=parent_path.resolve(), relative=parent_path,
+    )
     rec = Recommendations(
         db=json.loads(db_path.read_text()),
         base_path=Path(args[&#34;--base&#34;] or parent_path),
         assessment_strategy=args[&#34;--cost&#34;],
+        title_format=title_format,
     )
     rec.run_pipeline(commands)
     if args[&#34;--output&#34;].upper() == &#34;STDOUT&#34;:

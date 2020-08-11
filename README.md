@@ -6,7 +6,7 @@
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/paroxython)
 [![GitHub Release](https://img.shields.io/github/release/laowantong/paroxython.svg?style=flat)]()
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/laowantong/paroxython)
-![paroxython SLOC](https://img.shields.io/badge/main%20program-~1650%20SLOC-blue)
+![paroxython SLOC](https://img.shields.io/badge/main%20program-~1700%20SLOC-blue)
 ![tests SLOC](https://img.shields.io/badge/tests-~2700%20SLOC-blue)
 ![helpers SLOC](https://img.shields.io/badge/helpers-~850%20SLOC-blue)
 [![GitHub commit activity](https://img.shields.io/github/commit-activity/y/laowantong/paroxython.svg?style=flat)]()

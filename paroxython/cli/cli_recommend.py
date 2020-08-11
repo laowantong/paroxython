@@ -40,6 +40,14 @@ OPTIONS:
                         DB_PATH is of the form PREFIX_db.json, a value of
                         PREFIX_pipe.py is used. If the associated file is
                         missing or malformed, no filter is applied. [default: ]
+    -f --format=STR     The format of program titles in the report. This string
+                        can contains the following identifiers (between braces):
+                        • name: keys of the dictionary "programs" in the DB.
+                        • absolute: absolute path to DB_PATH's parent folder.
+                        • relative: relative path to DB_PATH's parent folder.
+                        Shortcut: if format is "vscode", makes program names to
+                            be clickable and opening in VS Code.
+                        [default: `{name}`]
     ```
 
 EXAMPLE:
@@ -87,10 +95,17 @@ def cli_wrapper(args):
     stdout_backup = sys.stdout
     if args["--output"].upper() == "STDOUT":
         sys.stdout = sys.stderr
+    title_format = args["--format"]
+    if title_format.lower() == "vscode":
+        title_format = "[`{name}`](vscode://file/{absolute}/programs/{name})"
+    title_format = title_format.format(
+        name="{name}", absolute=parent_path.resolve(), relative=parent_path,
+    )
     rec = Recommendations(
         db=json.loads(db_path.read_text()),
         base_path=Path(args["--base"] or parent_path),
         assessment_strategy=args["--cost"],
+        title_format=title_format,
     )
     rec.run_pipeline(commands)
     if args["--output"].upper() == "STDOUT":

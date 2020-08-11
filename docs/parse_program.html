@@ -166,7 +166,7 @@ class ProgramParser:
 
         return sorted(result)
 
-    def print_performances(self): # pragma: no cover
+    def print_performances(self):  # pragma: no cover
         result = sorted(self.times.items(), key=lambda item: item[1], reverse=True)
         print()
         print(&#34;Elapsed times by features (in seconds)&#34;)
@@ -507,7 +507,7 @@ ends of the list, they are ignored by <code><a title="paroxython.parse_program.p
 
         return sorted(result)
 
-    def print_performances(self): # pragma: no cover
+    def print_performances(self):  # pragma: no cover
         result = sorted(self.times.items(), key=lambda item: item[1], reverse=True)
         print()
         print(&#34;Elapsed times by features (in seconds)&#34;)
@@ -668,7 +668,7 @@ which is executed each time the tests are launched.</p></div>
 <span>Expand source code</span>
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L330-L338" class="git-link">Browse GitHub</a>
 </summary>
-<pre><code class="python">def print_performances(self): # pragma: no cover
+<pre><code class="python">def print_performances(self):  # pragma: no cover
     result = sorted(self.times.items(), key=lambda item: item[1], reverse=True)
     print()
     print(&#34;Elapsed times by features (in seconds)&#34;)

@@ -66,8 +66,14 @@ class MalformedData(Exception):
 
 
 class Recommendations:
-    def __init__(self, db: JsonDatabase, base_path: Optional[Path] = None, **kwargs,) -> None:
-        """Initialize a recommendation system for the given database of programs tagged with taxa.
+    def __init__(
+        self,
+        db: JsonDatabase,
+        base_path: Optional[Path] = None,
+        title_format: str = "`{name}`",
+        **kwargs,
+    ) -> None:
+        r"""Initialize a recommendation system for the given database of programs tagged with taxa.
 
         Args:
             db (JsonDatabase): A Python dictionary containing the JSON structure constructed by
@@ -78,6 +84,8 @@ class Recommendations:
                 `exportations`, but ignores the field `labels`.
             base_path (Optional[Path], optional): A path, accessible from any optional shell command
                 under the name `"{base_path}"`. Defaults to `None`.
+            title_format (str): a string containing a substring `{name}` to be interpolated in
+                the final report with the relevant program's name. Defaults to `"\`{name}\`"`.
             **kwargs: May include the keyword argument `assessment_strategy`, transmitted to
                 `paroxython.assess_costs.LearningCostAssessor`.
 
@@ -88,6 +96,7 @@ class Recommendations:
         """
 
         self.base_path = base_path
+        self.title_format = title_format
 
         # copy locally some attributes and methods of a ProgramFilter instance
         program_filter = ProgramFilter(db)
@@ -264,8 +273,10 @@ class Recommendations:
 
             for (cost, program_name) in costs_and_program_names:
                 program_info = self.db_programs[program_name]
-                title = f"Program `{program_name}` (learning cost {cost})"
-                toc.append(f"    - [`{program_name}`](#{title_to_slug(title)})")
+                program_title = self.title_format.format(name=program_name)
+                title = f"Program {program_title} (learning cost {cost})"
+                slug = title_to_slug(f"Program {program_name} (learning cost {cost})")
+                toc.append(f"    - [`{program_name}`](#{slug})")
                 contents.append(f"\n### {title}")
                 contents.append(f"\n```python\n{add_line_numbers(program_info['source'])}\n```")
                 contents.append("\n| Cost  | Taxon | Location |")
