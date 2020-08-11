@@ -3,24 +3,15 @@ r"""Search a program for the features specified in `spec.md`."""
 from collections import defaultdict
 from os.path import dirname
 from pathlib import Path
-from typed_ast import ast3 as ast
-from typing import Callable, Dict, List, Iterator, Tuple
-
+from time import perf_counter
+from typing import Callable, Dict, Iterator, List, Tuple
 
 import regex  # type: ignore
+from typed_ast import ast3 as ast
 
 from .derived_labels_db import DerivedLabelsDatabase
 from .flatten_ast import flatten_ast
-from .user_types import (
-    Label,
-    LabelName,
-    Labels,
-    LabelsSpans,
-    Program,
-    Query,
-    Source,
-    Span,
-)
+from .user_types import Label, LabelName, Labels, LabelsSpans, Program, Query, Source, Span
 
 __pdoc__ = {
     "ProgramParser": "",
@@ -241,15 +232,17 @@ class ProgramParser:
         text = self.spec_path.read_text()
         self.features: Dict[LabelName, regex.Pattern] = {}
         self.queries: Dict[LabelName, Query] = {}
-        for (label_pattern, language, specification) in find_all_features(text):
-            if label_pattern in self.features:  # pragma: no cover
-                raise ValueError(f"Duplicated name '{label_pattern}'!")
+        self.times: Dict[LabelName, float] = {LabelName("TOTAL"): 0.0}
+        for (label_name, language, specification) in find_all_features(text):
+            if label_name in self.features:  # pragma: no cover
+                raise ValueError(f"Duplicated name '{label_name}'!")
+            self.times[label_name] = 0.0
             if language == "re":
-                self.features[label_pattern] = regex.compile(f"(?mx){specification}").finditer
+                self.features[label_name] = regex.compile(f"(?mx){specification}").finditer
             elif language == "sql":
-                self.queries[label_pattern] = Query(specification)
+                self.queries[label_name] = Query(specification)
             elif specification.strip() != "":  # pragma: no cover
-                raise ValueError(f"Unknow language '{language}' for '{label_pattern}'!")
+                raise ValueError(f"Unknow language '{language}' for '{label_name}'!")
         self.derived_labels_database = DerivedLabelsDatabase()
 
     def __call__(self, program: Program, yield_failed_matches: bool = False) -> Labels:
@@ -293,6 +286,7 @@ class ProgramParser:
         # Search the flat AST for every feature which is specified by a regular expression.
         labels: LabelsSpans = defaultdict(list)
         for (label_prefix, finditer) in self.features.items():
+            start = perf_counter()
             failed_match = True
             for match in finditer(self.flat_ast, overlapped=True):
                 failed_match = False
@@ -301,6 +295,9 @@ class ProgramParser:
                         program.deletion[label_name].remove(Span(span.start, span.end))
                     except (KeyError, ValueError):  # ... actually bind the name with the span.
                         labels[label_name].append(span)
+            elapsed = perf_counter() - start
+            self.times[label_prefix] += elapsed
+            self.times["TOTAL"] += elapsed
             if yield_failed_matches and failed_match:
                 labels[label_prefix] = []
 
@@ -312,19 +309,33 @@ class ProgramParser:
         # Now, use the features found so far to derive all those specified by an SQL query.
         result = [Label(*item) for item in labels.items()]
         self.derived_labels_database.create(result)  # The search is seeded with the know features.
-        for (label_pattern, query) in self.queries.items():
-            # Try to derive, from the DB current state, some label names matching `label_pattern`.
+        for (label_name, query) in self.queries.items():
+            # Try to derive, from the DB current state, some label names matching `label_name`.
+            start = perf_counter()
             derived_labels = self.derived_labels_database.read(query)
+            elapsed = perf_counter() - start
+            self.times[label_name] += elapsed
+            self.times["TOTAL"] += elapsed
             if derived_labels:
                 # Bingo! update the DB state and the result with the new labels.
                 self.derived_labels_database.update(derived_labels)
                 result.extend(derived_labels)
             elif yield_failed_matches:
-                result.append(Label(label_pattern, []))
+                result.append(Label(label_name, []))
         # Empty the DB to make it ready for the next program.
         self.derived_labels_database.delete()
 
         return sorted(result)
+
+    def print_performances(self):
+        """Print a TSV report of elapsed times by features, sorted by decreasing time."""
+        result = sorted(self.times.items(), key=lambda item: item[1], reverse=True)
+        print()
+        print("Elapsed times by features (in seconds)")
+        print("--------------------------------------")
+        for (name, seconds) in result:
+            print(f"{seconds:8.4f}\t {name}")
+        print()
 
 
 if __name__ == "__main__":

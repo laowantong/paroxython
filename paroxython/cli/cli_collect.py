@@ -20,12 +20,13 @@ OPTIONS:
                         like glob pattern (not a regular expression). Special
                         syntax: "**/" prefix means “this directory and all
                         subdirectories, recursively”. [default: **/*.py]
+    --log               Print a detailed report of the labelling times.
+    --no_timestamp      Don't store programs' last modification date.
     -o --output=PATH    The path of the resulting database. If not specified,
                         create a JSON file under the name "DIRECTORY_db.json".
                         Otherwise, use the extension (either ".json", ".sql"
                         or ".sqlite") to decide the format of the tag database.
                         [default: ]
-    --no_timestamp      Don't store programs' last modification date.
     -t --taxonomy=PATH  The path of a TSV file mapping labels onto taxa. If not
                         specified, use the "taxonomy.tsv" present in DIRECTORY's
                         parent. If absent, use the included default taxonomy:
@@ -53,6 +54,7 @@ def cli_wrapper(args):
         cleanup_strategy=args["--cleanup"],  # -> list_programs
         skip_pattern=args["--skip"],  # -> list_programs
         glob_pattern=args["--glob"],  # -> list_programs
+        print_performances=args["--log"],  # -> labelled_programs
         taxonomy_path=taxonomy_path,  # -> Taxonomy
     )
     if not args["--output"]:

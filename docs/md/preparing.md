@@ -282,20 +282,20 @@ deleting the original label and adding a new one with an inserted `":list"`:
 a.count(b)  # paroxython: -member_call_method:count +member_call_method:list:count
 ```
 
-Now, the generated taxa will be: `type/sequence/list` and `call/method/sequence/list/count`[^explicit_duck]. As for the duck, it is no more. It has ceased to be. It's expired and gone to meet its maker. It's run down the curtain and joined the choir invisible. This is an ex-duck.
+Now, the generated taxa will be: `type/sequence/list` and `call/method/sequence/list/count`[^explicit_duck]. As for the duck, it is no more. It has ceased to be. It is expired and gone to meet its maker. It has run down the curtain and joined the choir invisible. This is an ex-duck.
 
 [^explicit_duck]:
     For the similar cases where no translation is provided in the default taxonomy, you can either add it yourself, or directly hint at the desired  taxa, i.e., after `# paroxython:`, replace `+member_call_method:list:count` by `type/sequence/list` and `call/method/sequence/list/count`🦆.
 
-Admittedly, all of this may be overkill, since a program featuring a list would most of the time feature it in several places, most of them without ambiguity. After all, generally speaking, you just want Paroxython to help you find programs in your repository, but don't need it to find features in a given program (you know Python better than it).
+Admittedly, all of this may be overkill, since a program featuring a list would most of the time feature it in several places, most of them without ambiguity. After all, generally speaking, you just want Paroxython to help you find programs in your repository, but don't need it to find features in a given program (you know better).
 
-But if you feel like it, just fire up this one weird old pipeline:
+But if you feel like it, just fire up this 1 weird pipeline:
 
 ```python
 {
     [
         "operation": "include",
-        "data": ["call/method/\w+_duck/"],
+        "data": [".+\bduck\b"],
     ]
 }
 ```

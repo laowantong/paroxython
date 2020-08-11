@@ -262,13 +262,13 @@ call/method/sequence/list/\1    member_call_method:list:(count|index|pop|...)
 deleting the original label and adding a new one with an inserted <code>":list"</code>:</p>
 <pre><code class="python">a.count(b)  # paroxython: -member_call_method:count +member_call_method:list:count
 </code></pre>
-<p>Now, the generated taxa will be: <code>type/sequence/list</code> and <code>call/method/sequence/list/count</code><sup id="fnref:explicit_duck"><a class="footnote-ref" href="#fn:explicit_duck" rel="footnote">2</a></sup>. As for the duck, it is no more. It has ceased to be. It's expired and gone to meet its maker. It's run down the curtain and joined the choir invisible. This is an ex-duck.</p>
-<p>Admittedly, all of this may be overkill, since a program featuring a list would most of the time feature it in several places, most of them without ambiguity. After all, generally speaking, you just want Paroxython to help you find programs in your repository, but don't need it to find features in a given program (you know Python better than it).</p>
-<p>But if you feel like it, just fire up this one weird old pipeline:</p>
+<p>Now, the generated taxa will be: <code>type/sequence/list</code> and <code>call/method/sequence/list/count</code><sup id="fnref:explicit_duck"><a class="footnote-ref" href="#fn:explicit_duck" rel="footnote">2</a></sup>. As for the duck, it is no more. It has ceased to be. It is expired and gone to meet its maker. It has run down the curtain and joined the choir invisible. This is an ex-duck.</p>
+<p>Admittedly, all of this may be overkill, since a program featuring a list would most of the time feature it in several places, most of them without ambiguity. After all, generally speaking, you just want Paroxython to help you find programs in your repository, but don't need it to find features in a given program (you know better).</p>
+<p>But if you feel like it, just fire up this 1 weird pipeline:</p>
 <pre><code class="python">{
     [
         &quot;operation&quot;: &quot;include&quot;,
-        &quot;data&quot;: [&quot;call/method/\w+_duck/&quot;],
+        &quot;data&quot;: [&quot;.+\bduck\b&quot;],
     ]
 }
 </code></pre>

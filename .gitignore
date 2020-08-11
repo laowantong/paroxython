@@ -124,7 +124,7 @@ dmypy.json
 
 # Personal
 draft.*
-sandbox/*.*
+sandbox/
 .DS_Store
 db.sqlite
 *_db.sqlite

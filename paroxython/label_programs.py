@@ -13,6 +13,7 @@ from .user_types import Label, LabelName, Programs, Source
 def labelled_programs(
     directory: Path,
     search_imported_program_name: Callable = regex.compile(r"import(?:_module)?:([^:]+)").search,
+    print_performances: bool = False,
     **kwargs,
 ) -> Programs:
     """Walk a given directory, label all its programs, and return a list of them.
@@ -23,6 +24,8 @@ def labelled_programs(
             the case it starts with `"import:"` or `"import_module:"`, returns a match object
             whose first group is the name of the imported program.
             [Not to be explicitly provided.](docs_developer_manual/index.html#default-argument-trick)
+        print_performances (bool): If `True`, ends with a call to
+            `paroxython.parse_program.ProgramParser.print_performances`. Defaults to `False`.
         **kwargs: May include the keyword arguments `cleanup_strategy`, `skip_pattern`,
             `glob_pattern`, transmitted to `paroxython.list_programs.list_programs`.
     Note:
@@ -42,6 +45,8 @@ def labelled_programs(
             if m and f"{m[1]}.py" in internal_program_names:
                 tweaked_label_name = LabelName(label.name.replace(":", "_internally:", 1))
                 program.labels[i] = Label(name=tweaked_label_name, spans=label.spans)
+    if print_performances:
+        parse.print_performances()
     return programs
 
 

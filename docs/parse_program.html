@@ -31,29 +31,20 @@
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L0-L348" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L0-L360" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">from collections import defaultdict
 from os.path import dirname
 from pathlib import Path
-from typed_ast import ast3 as ast
-from typing import Callable, Dict, List, Iterator, Tuple
-
+from time import perf_counter
+from typing import Callable, Dict, Iterator, List, Tuple
 
 import regex  # type: ignore
+from typed_ast import ast3 as ast
 
 from .derived_labels_db import DerivedLabelsDatabase
 from .flatten_ast import flatten_ast
-from .user_types import (
-    Label,
-    LabelName,
-    Labels,
-    LabelsSpans,
-    Program,
-    Query,
-    Source,
-    Span,
-)
+from .user_types import Label, LabelName, Labels, LabelsSpans, Program, Query, Source, Span
 
 __pdoc__ = {
     &#34;ProgramParser&#34;: &#34;&#34;,
@@ -110,16 +101,19 @@ class ProgramParser:
         text = self.spec_path.read_text()
         self.features: Dict[LabelName, regex.Pattern] = {}
         self.queries: Dict[LabelName, Query] = {}
-        for (label_pattern, language, specification) in find_all_features(text):
-            if label_pattern in self.features:  # pragma: no cover
-                raise ValueError(f&#34;Duplicated name &#39;{label_pattern}&#39;!&#34;)
+        self.times: Dict[LabelName, float] = {LabelName(&#34;TOTAL&#34;): 0.0}
+        for (label_name, language, specification) in find_all_features(text):
+            if label_name in self.features:  # pragma: no cover
+                raise ValueError(f&#34;Duplicated name &#39;{label_name}&#39;!&#34;)
+            self.times[label_name] = 0.0
             if language == &#34;re&#34;:
-                self.features[label_pattern] = regex.compile(f&#34;(?mx){specification}&#34;).finditer
+                self.features[label_name] = regex.compile(f&#34;(?mx){specification}&#34;).finditer
             elif language == &#34;sql&#34;:
-                self.queries[label_pattern] = Query(specification)
+                self.queries[label_name] = Query(specification)
             elif specification.strip() != &#34;&#34;:  # pragma: no cover
-                raise ValueError(f&#34;Unknow language &#39;{language}&#39; for &#39;{label_pattern}&#39;!&#34;)
+                raise ValueError(f&#34;Unknow language &#39;{language}&#39; for &#39;{label_name}&#39;!&#34;)
         self.derived_labels_database = DerivedLabelsDatabase()
+
 
     def __call__(self, program: Program, yield_failed_matches: bool = False) -&gt; Labels:
         # If the program can be parsed, flatten its AST.
@@ -132,6 +126,7 @@ class ProgramParser:
         # Search the flat AST for every feature which is specified by a regular expression.
         labels: LabelsSpans = defaultdict(list)
         for (label_prefix, finditer) in self.features.items():
+            start = perf_counter()
             failed_match = True
             for match in finditer(self.flat_ast, overlapped=True):
                 failed_match = False
@@ -140,6 +135,9 @@ class ProgramParser:
                         program.deletion[label_name].remove(Span(span.start, span.end))
                     except (KeyError, ValueError):  # ... actually bind the name with the span.
                         labels[label_name].append(span)
+            elapsed = perf_counter() - start
+            self.times[label_prefix] += elapsed
+            self.times[&#34;TOTAL&#34;] += elapsed
             if yield_failed_matches and failed_match:
                 labels[label_prefix] = []
 
@@ -151,19 +149,32 @@ class ProgramParser:
         # Now, use the features found so far to derive all those specified by an SQL query.
         result = [Label(*item) for item in labels.items()]
         self.derived_labels_database.create(result)  # The search is seeded with the know features.
-        for (label_pattern, query) in self.queries.items():
-            # Try to derive, from the DB current state, some label names matching `label_pattern`.
+        for (label_name, query) in self.queries.items():
+            # Try to derive, from the DB current state, some label names matching `label_name`.
+            start = perf_counter()
             derived_labels = self.derived_labels_database.read(query)
+            elapsed = perf_counter() - start
+            self.times[label_name] += elapsed
+            self.times[&#34;TOTAL&#34;] += elapsed
             if derived_labels:
                 # Bingo! update the DB state and the result with the new labels.
                 self.derived_labels_database.update(derived_labels)
                 result.extend(derived_labels)
             elif yield_failed_matches:
-                result.append(Label(label_pattern, []))
+                result.append(Label(label_name, []))
         # Empty the DB to make it ready for the next program.
         self.derived_labels_database.delete()
 
         return sorted(result)
+
+    def print_performances(self):
+        result = sorted(self.times.items(), key=lambda item: item[1], reverse=True)
+        print()
+        print(&#34;Elapsed times by features (in seconds)&#34;)
+        print(&#34;--------------------------------------&#34;)
+        for (name, seconds) in result:
+            print(f&#34;{seconds:8.4f}\t {name}&#34;)
+        print()
 
 
 if __name__ == &#34;__main__&#34;:
@@ -224,7 +235,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L33-L57" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L24-L48" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def find_all_features(
     specifications: str,
@@ -273,7 +284,7 @@ Span(1, 4, &quot;path_1&quot;)
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L60-L86" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L51-L77" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def pos_to_span(pos: List[str]) -&gt; Span:
     (start, path) = pos[0].split(&#34;:&#34;)
@@ -389,7 +400,7 @@ ends of the list, they are ignored by <code><a title="paroxython.parse_program.p
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L92-L220" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L83-L211" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def get_bindings(
     label_prefix: LabelName, captures: Dict[str, List[str]]
@@ -424,7 +435,7 @@ ends of the list, they are ignored by <code><a title="paroxython.parse_program.p
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L223-L327" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L214-L339" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">class ProgramParser:
     def __init__(self, spec_path: Path = DEFAULT_SPEC_PATH) -&gt; None:
@@ -432,16 +443,19 @@ ends of the list, they are ignored by <code><a title="paroxython.parse_program.p
         text = self.spec_path.read_text()
         self.features: Dict[LabelName, regex.Pattern] = {}
         self.queries: Dict[LabelName, Query] = {}
-        for (label_pattern, language, specification) in find_all_features(text):
-            if label_pattern in self.features:  # pragma: no cover
-                raise ValueError(f&#34;Duplicated name &#39;{label_pattern}&#39;!&#34;)
+        self.times: Dict[LabelName, float] = {LabelName(&#34;TOTAL&#34;): 0.0}
+        for (label_name, language, specification) in find_all_features(text):
+            if label_name in self.features:  # pragma: no cover
+                raise ValueError(f&#34;Duplicated name &#39;{label_name}&#39;!&#34;)
+            self.times[label_name] = 0.0
             if language == &#34;re&#34;:
-                self.features[label_pattern] = regex.compile(f&#34;(?mx){specification}&#34;).finditer
+                self.features[label_name] = regex.compile(f&#34;(?mx){specification}&#34;).finditer
             elif language == &#34;sql&#34;:
-                self.queries[label_pattern] = Query(specification)
+                self.queries[label_name] = Query(specification)
             elif specification.strip() != &#34;&#34;:  # pragma: no cover
-                raise ValueError(f&#34;Unknow language &#39;{language}&#39; for &#39;{label_pattern}&#39;!&#34;)
+                raise ValueError(f&#34;Unknow language &#39;{language}&#39; for &#39;{label_name}&#39;!&#34;)
         self.derived_labels_database = DerivedLabelsDatabase()
+
 
     def __call__(self, program: Program, yield_failed_matches: bool = False) -&gt; Labels:
         # If the program can be parsed, flatten its AST.
@@ -454,6 +468,7 @@ ends of the list, they are ignored by <code><a title="paroxython.parse_program.p
         # Search the flat AST for every feature which is specified by a regular expression.
         labels: LabelsSpans = defaultdict(list)
         for (label_prefix, finditer) in self.features.items():
+            start = perf_counter()
             failed_match = True
             for match in finditer(self.flat_ast, overlapped=True):
                 failed_match = False
@@ -462,6 +477,9 @@ ends of the list, they are ignored by <code><a title="paroxython.parse_program.p
                         program.deletion[label_name].remove(Span(span.start, span.end))
                     except (KeyError, ValueError):  # ... actually bind the name with the span.
                         labels[label_name].append(span)
+            elapsed = perf_counter() - start
+            self.times[label_prefix] += elapsed
+            self.times[&#34;TOTAL&#34;] += elapsed
             if yield_failed_matches and failed_match:
                 labels[label_prefix] = []
 
@@ -473,19 +491,32 @@ ends of the list, they are ignored by <code><a title="paroxython.parse_program.p
         # Now, use the features found so far to derive all those specified by an SQL query.
         result = [Label(*item) for item in labels.items()]
         self.derived_labels_database.create(result)  # The search is seeded with the know features.
-        for (label_pattern, query) in self.queries.items():
-            # Try to derive, from the DB current state, some label names matching `label_pattern`.
+        for (label_name, query) in self.queries.items():
+            # Try to derive, from the DB current state, some label names matching `label_name`.
+            start = perf_counter()
             derived_labels = self.derived_labels_database.read(query)
+            elapsed = perf_counter() - start
+            self.times[label_name] += elapsed
+            self.times[&#34;TOTAL&#34;] += elapsed
             if derived_labels:
                 # Bingo! update the DB state and the result with the new labels.
                 self.derived_labels_database.update(derived_labels)
                 result.extend(derived_labels)
             elif yield_failed_matches:
-                result.append(Label(label_pattern, []))
+                result.append(Label(label_name, []))
         # Empty the DB to make it ready for the next program.
         self.derived_labels_database.delete()
 
-        return sorted(result)</code></pre>
+        return sorted(result)
+
+    def print_performances(self):
+        result = sorted(self.times.items(), key=lambda item: item[1], reverse=True)
+        print()
+        print(&#34;Elapsed times by features (in seconds)&#34;)
+        print(&#34;--------------------------------------&#34;)
+        for (name, seconds) in result:
+            print(f&#34;{seconds:8.4f}\t {name}&#34;)
+        print()</code></pre>
 </details>
 <h3>Methods</h3>
 <dl>
@@ -513,22 +544,24 @@ pre-bind the appropriate method. Create an instance of the database of derived l
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L224-L253" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L215-L246" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def __init__(self, spec_path: Path = DEFAULT_SPEC_PATH) -&gt; None:
     self.spec_path = spec_path
     text = self.spec_path.read_text()
     self.features: Dict[LabelName, regex.Pattern] = {}
     self.queries: Dict[LabelName, Query] = {}
-    for (label_pattern, language, specification) in find_all_features(text):
-        if label_pattern in self.features:  # pragma: no cover
-            raise ValueError(f&#34;Duplicated name &#39;{label_pattern}&#39;!&#34;)
+    self.times: Dict[LabelName, float] = {LabelName(&#34;TOTAL&#34;): 0.0}
+    for (label_name, language, specification) in find_all_features(text):
+        if label_name in self.features:  # pragma: no cover
+            raise ValueError(f&#34;Duplicated name &#39;{label_name}&#39;!&#34;)
+        self.times[label_name] = 0.0
         if language == &#34;re&#34;:
-            self.features[label_pattern] = regex.compile(f&#34;(?mx){specification}&#34;).finditer
+            self.features[label_name] = regex.compile(f&#34;(?mx){specification}&#34;).finditer
         elif language == &#34;sql&#34;:
-            self.queries[label_pattern] = Query(specification)
+            self.queries[label_name] = Query(specification)
         elif specification.strip() != &#34;&#34;:  # pragma: no cover
-            raise ValueError(f&#34;Unknow language &#39;{language}&#39; for &#39;{label_pattern}&#39;!&#34;)
+            raise ValueError(f&#34;Unknow language &#39;{language}&#39; for &#39;{label_name}&#39;!&#34;)
     self.derived_labels_database = DerivedLabelsDatabase()</code></pre>
 </details>
 </dd>
@@ -572,7 +605,7 @@ which is executed each time the tests are launched.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L255-L327" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L249-L329" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def __call__(self, program: Program, yield_failed_matches: bool = False) -&gt; Labels:
     # If the program can be parsed, flatten its AST.
@@ -585,6 +618,7 @@ which is executed each time the tests are launched.</p></div>
     # Search the flat AST for every feature which is specified by a regular expression.
     labels: LabelsSpans = defaultdict(list)
     for (label_prefix, finditer) in self.features.items():
+        start = perf_counter()
         failed_match = True
         for match in finditer(self.flat_ast, overlapped=True):
             failed_match = False
@@ -593,6 +627,9 @@ which is executed each time the tests are launched.</p></div>
                     program.deletion[label_name].remove(Span(span.start, span.end))
                 except (KeyError, ValueError):  # ... actually bind the name with the span.
                     labels[label_name].append(span)
+        elapsed = perf_counter() - start
+        self.times[label_prefix] += elapsed
+        self.times[&#34;TOTAL&#34;] += elapsed
         if yield_failed_matches and failed_match:
             labels[label_prefix] = []
 
@@ -604,19 +641,43 @@ which is executed each time the tests are launched.</p></div>
     # Now, use the features found so far to derive all those specified by an SQL query.
     result = [Label(*item) for item in labels.items()]
     self.derived_labels_database.create(result)  # The search is seeded with the know features.
-    for (label_pattern, query) in self.queries.items():
-        # Try to derive, from the DB current state, some label names matching `label_pattern`.
+    for (label_name, query) in self.queries.items():
+        # Try to derive, from the DB current state, some label names matching `label_name`.
+        start = perf_counter()
         derived_labels = self.derived_labels_database.read(query)
+        elapsed = perf_counter() - start
+        self.times[label_name] += elapsed
+        self.times[&#34;TOTAL&#34;] += elapsed
         if derived_labels:
             # Bingo! update the DB state and the result with the new labels.
             self.derived_labels_database.update(derived_labels)
             result.extend(derived_labels)
         elif yield_failed_matches:
-            result.append(Label(label_pattern, []))
+            result.append(Label(label_name, []))
     # Empty the DB to make it ready for the next program.
     self.derived_labels_database.delete()
 
     return sorted(result)</code></pre>
+</details>
+</dd>
+<dt id="paroxython.parse_program.ProgramParser.print_performances"><code class="name flex">
+<span>def <span class="ident">print_performances</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Print a <abbr title="Tab Separated Values">TSV</abbr> report of elapsed times by features, sorted by decreasing time.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L331-L339" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">def print_performances(self):
+    result = sorted(self.times.items(), key=lambda item: item[1], reverse=True)
+    print()
+    print(&#34;Elapsed times by features (in seconds)&#34;)
+    print(&#34;--------------------------------------&#34;)
+    for (name, seconds) in result:
+        print(f&#34;{seconds:8.4f}\t {name}&#34;)
+    print()</code></pre>
 </details>
 </dd>
 </dl>
@@ -654,6 +715,7 @@ which is executed each time the tests are launched.</p></div>
 <ul class="">
 <li><code><a title="paroxython.parse_program.ProgramParser.__init__" href="#paroxython.parse_program.ProgramParser.__init__">__init__</a></code></li>
 <li><code><a title="paroxython.parse_program.ProgramParser.__call__" href="#paroxython.parse_program.ProgramParser.__call__">__call__</a></code></li>
+<li><code><a title="paroxython.parse_program.ProgramParser.print_performances" href="#paroxython.parse_program.ProgramParser.print_performances">print_performances</a></code></li>
 </ul>
 </li>
 </ul>

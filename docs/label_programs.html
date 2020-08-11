@@ -31,7 +31,7 @@
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/label_programs.py#L0-L79" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/label_programs.py#L0-L84" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">from pathlib import Path
 from typing import Callable, Iterator, List, Set
@@ -46,6 +46,7 @@ from .user_types import Label, LabelName, Programs, Source
 def labelled_programs(
     directory: Path,
     search_imported_program_name: Callable = regex.compile(r&#34;import(?:_module)?:([^:]+)&#34;).search,
+    print_performances: bool = False,
     **kwargs,
 ) -&gt; Programs:
     programs: Programs = list_programs(directory, **kwargs)
@@ -59,6 +60,8 @@ def labelled_programs(
             if m and f&#34;{m[1]}.py&#34; in internal_program_names:
                 tweaked_label_name = LabelName(label.name.replace(&#34;:&#34;, &#34;_internally:&#34;, 1))
                 program.labels[i] = Label(name=tweaked_label_name, spans=label.spans)
+    if print_performances:
+        parse.print_performances()
     return programs
 
 
@@ -93,7 +96,7 @@ if __name__ == &#34;__main__&#34;:
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
 <dt id="paroxython.label_programs.labelled_programs"><code class="name flex">
-<span>def <span class="ident">labelled_programs</span></span>(<span>directory: pathlib.Path, <br>search_imported_program_name: Callable = &lt;built-in method search of regex&gt;, <br>**kwargs<br>) ‑> List[Program]</span>
+<span>def <span class="ident">labelled_programs</span></span>(<span>directory: pathlib.Path, <br>search_imported_program_name: Callable = &lt;built-in method search of regex&gt;, <br>print_performances: bool = False, <br>**kwargs<br>) ‑> List[Program]</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Walk a given directory, label all its programs, and return a list of them.</p>
@@ -106,6 +109,9 @@ if __name__ == &#34;__main__&#34;:
 the case it starts with <code>"import:"</code> or <code>"import_module:"</code>, returns a match object
 whose first group is the name of the imported program.
 <a href="docs_developer_manual/index.html#default-argument-trick">Not to be explicitly provided.</a></dd>
+<dt><strong><code>print_performances</code></strong> :&ensp;<code>bool</code></dt>
+<dd>If <code>True</code>, ends with a call to
+<code><a title="paroxython.parse_program.ProgramParser.print_performances" href="parse_program.html#paroxython.parse_program.ProgramParser.print_performances">ProgramParser.print_performances()</a></code>. Defaults to <code>False</code>.</dd>
 <dt><strong><code>**kwargs</code></strong></dt>
 <dd>May include the keyword arguments <code>cleanup_strategy</code>, <code>skip_pattern</code>,
 <code>glob_pattern</code>, transmitted to <code><a title="paroxython.list_programs.list_programs" href="list_programs.html#paroxython.list_programs.list_programs">list_programs()</a></code>.</dd>
@@ -118,11 +124,12 @@ this very list. For instance, a label <code>"import:my_program"</code> would be 
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/label_programs.py#L13-L45" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/label_programs.py#L13-L50" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def labelled_programs(
     directory: Path,
     search_imported_program_name: Callable = regex.compile(r&#34;import(?:_module)?:([^:]+)&#34;).search,
+    print_performances: bool = False,
     **kwargs,
 ) -&gt; Programs:
     programs: Programs = list_programs(directory, **kwargs)
@@ -136,6 +143,8 @@ this very list. For instance, a label <code>"import:my_program"</code> would be 
             if m and f&#34;{m[1]}.py&#34; in internal_program_names:
                 tweaked_label_name = LabelName(label.name.replace(&#34;:&#34;, &#34;_internally:&#34;, 1))
                 program.labels[i] = Label(name=tweaked_label_name, spans=label.spans)
+    if print_performances:
+        parse.print_performances()
     return programs</code></pre>
 </details>
 </dd>
@@ -160,7 +169,7 @@ this very list. For instance, a label <code>"import:my_program"</code> would be 
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/label_programs.py#L48-L74" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/label_programs.py#L53-L79" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def generate_labelled_sources(programs: Programs) -&gt; Iterator:
     separator = &#34;-&#34; * 88

@@ -45,12 +45,13 @@
                     like glob pattern (not a regular expression). Special
                     syntax: &quot;**/&quot; prefix means “this directory and all
                     subdirectories, recursively”. [default: **/*.py]
+--log               Print a detailed report of the labelling times.
+--no_timestamp      Don't store programs' last modification date.
 -o --output=PATH    The path of the resulting database. If not specified,
                     create a JSON file under the name &quot;DIRECTORY_db.json&quot;.
                     Otherwise, use the extension (either &quot;.json&quot;, &quot;.sql&quot;
                     or &quot;.sqlite&quot;) to decide the format of the tag database.
                     [default: ]
---no_timestamp      Don't store programs' last modification date.
 -t --taxonomy=PATH  The path of a TSV file mapping labels onto taxa. If not
                     specified, use the &quot;taxonomy.tsv&quot; present in DIRECTORY's
                     parent. If absent, use the included default taxonomy:
@@ -59,7 +60,7 @@
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli_collect.py#L0-L62" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli_collect.py#L0-L64" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">from pathlib import Path
 
@@ -81,6 +82,7 @@ def cli_wrapper(args):
         cleanup_strategy=args[&#34;--cleanup&#34;],  # -&gt; list_programs
         skip_pattern=args[&#34;--skip&#34;],  # -&gt; list_programs
         glob_pattern=args[&#34;--glob&#34;],  # -&gt; list_programs
+        print_performances=args[&#34;--log&#34;],  # -&gt; labelled_programs
         taxonomy_path=taxonomy_path,  # -&gt; Taxonomy
     )
     if not args[&#34;--output&#34;]:
@@ -106,7 +108,7 @@ def cli_wrapper(args):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli_collect.py#L41-L63" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli_collect.py#L42-L65" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def cli_wrapper(args):
     directory = Path(args[&#34;DIRECTORY&#34;])
@@ -123,6 +125,7 @@ def cli_wrapper(args):
         cleanup_strategy=args[&#34;--cleanup&#34;],  # -&gt; list_programs
         skip_pattern=args[&#34;--skip&#34;],  # -&gt; list_programs
         glob_pattern=args[&#34;--glob&#34;],  # -&gt; list_programs
+        print_performances=args[&#34;--log&#34;],  # -&gt; labelled_programs
         taxonomy_path=taxonomy_path,  # -&gt; Taxonomy
     )
     if not args[&#34;--output&#34;]:
