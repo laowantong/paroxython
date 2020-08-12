@@ -86,7 +86,7 @@ Paroxython starts by building a **tag database** from a given folder of **progra
 
 <center>
 <figure class="image">
-  <a href="docs/docs_user_manual/index.html#taxonomy">
+  <a href="https://laowantong.github.io/paroxython/docs/docs_user_manual/index.html#taxonomy">
   <img src="docs/resources/tree.png" alt="A taxonomy.">
   </a>
   <figcaption><em>Taxonomy generated from <a href="https://github.com/TheAlgorithms/Python">The Algorithms - Python</a>.<br>Click to jump to its dynamic version in the user manual.</em></figcaption>
