@@ -2,7 +2,7 @@
 
 ## Structure
 
-In Paroxython, the default taxonomy is a [forest](https://en.wikipedia.org/wiki/Tree_(graph_theory)#Forest): a dozen of separate trees with `flow`, `operator`, `meta`, `type`, etc. as their roots. We call **taxon**[^taxon] a path from a root node to a leaf node. Thus:
+In Paroxython, the default taxonomy is a [forest](https://en.wikipedia.org/wiki/Tree_(graph_theory)#Forest): a handful of separate trees with `flow`, `operator`, `meta`, `type`, etc. as their roots. We call **taxon**[^taxon] a path from a root node to a leaf node. Thus:
 
 [^taxon]:
     This contrasts with the convention in biological classification, where the term [taxon](https://en.wikipedia.org/wiki/Taxon) refers to a taxonomic **unit** (a node of the tree). For instance, [African Elephant ](https://en.wikipedia.org/wiki/African_elephant) is classified under the taxon _Loxodonta_. However, a taxon (implicitely) “encompasses all included taxa of lower rank”, here:
@@ -21,27 +21,29 @@ In Paroxython, the default taxonomy is a [forest](https://en.wikipedia.org/wiki/
 type/number/integer/literal
 ```
 
-... describes this kind of literal which is a kind of integer which is a kind of number which is a kind of type (as an example, think of the answer to the ultimate question of life, the universe, and everything). Such a nesting makes the taxa especially relevant for the teacher, in that it offers a first structuration of an otherwise scattered knowledge.
+... describes, you know... this kind of literal which is a kind of integer which is a kind of number which is a kind of type (as an example, think of the answer to the ultimate question of life, the universe, and everything).
 
-An instance of tree rooted in `type` is shown below:
+In the visualization below, we have introduced the pseudo-root “•” to gather all the trees into one:
 
-<!-- Here comes the tree -->
+<div id="tree" style="width: 100%; height: 800px;"></div>
 
-This comes[^tree_sql] straight from the tagging of the public repository [The Algorithms - Python](https://github.com/TheAlgorithms/Python). The size of a node is relative to the number of times the corresponding taxon's _prefix_ appears in the programs. Hover over the nodes to see these numbers, or click them to navigate the tree.
+This comes[^tree_sql] straight from tagging the public repository [The Algorithms - Python](https://github.com/TheAlgorithms/Python). The size of a node is relative to the number of times the corresponding taxon's _prefix_ appears in these programs.
 
 [^tree_sql]:
-    More precisely, it is the result of
+    More precisely, it is the result of executing
     ```
     SELECT taxon, count(*)
     FROM taxon
-    WHERE taxon LIKE 'type/%'
+    WHERE taxon not LIKE 'meta/sloc/%'
     GROUP BY taxon
     ```
     on the SQLite tag database.
 
+Hover over the nodes to see these numbers, or click them to navigate the tree. By the way, you may click on `type` to better follow the subsequent explanations.
+
 ## Mapping the labels onto taxa
 
-Paroxython does not directly produce these taxa. Remember, a program is first tagged with labels (as specified in [`spec.md`](https://repo/paroxython/resources/spec.md)), which are then translated into taxa by a purely morphological operation (search and replace), without any more reference to the original source code.
+Paroxython does not directly grow these forest of taxa. Remember, a program is first tagged with labels (as specified in [`spec.md`](https://repo/paroxython/resources/spec.md)). Those are then translated into taxa by a purely morphological operation (search and replace), without any more reference to the original source code.
 
 ### 1-1 mappings
 
@@ -152,7 +154,9 @@ Again, those are mainly practical choices. After all, an `operator` is nothing m
 
 ### Zooming out: `pattern`
 
-Now this is arguably the most interesting feature to tag in a beginner-level program. Under `pattern`, you will find numerous variants of the invaluable [accumulation pattern](https://en.wikipedia.org/wiki/Fold_(higher-order_function)) (counting, summing, filtering, finding the “best” element, etc.), but also some early-exit patterns (testing for an universal or existential property, finding the first “good” element, etc.), whether by traversing a sequence or evolving a state. This is an aspect of programming which is rarely taught in a conscious and systematic way, and to which Paroxython intends to draw your attention.
+Now this is arguably the most interesting feature to tag in a beginner-level program. Under `pattern`, you will find numerous variants of the invaluable [accumulation pattern](https://en.wikipedia.org/wiki/Fold_(higher-order_function)) (counting, summing, filtering, finding the “best” element, etc.), but also some early-exit patterns (testing for an universal or existential property, finding the first “good” element, etc.), whether by traversing a sequence or evolving a state. Although the relative size of `pattern` is the smallest of the taxonomy, note that it is almost that of `meta/program` (which has one occurrence per program): in other words, almost all programs feature such a pattern (which spans several lines).
+
+The loop patterns constitute an aspect of programming which is not always taught in a conscious and systematic way, and to which Paroxython intends to draw your attention.
 
 ..warning::
     For priority reasons, Paroxython searches for these patterns in “statement” loops only, not in “comprehension” loops. This may change in a future version.
@@ -160,14 +164,6 @@ Now this is arguably the most interesting feature to tag in a beginner-level pro
 ### Going `meta`
 
 Paroxython will store inside the `meta` tree some program metadata, such as the number of lines. Some children, such as `topic`, `technique`, `complexity`, are already provided, which you can fill in by adding a manual hint in the source code of the programs.
-
-## Understanding the taxonomy
-
-TODO
-
-```plain
-def/argument/\1           function_argument_flavor:(.+)
-```
 
 ## Modifying the taxonomy
 

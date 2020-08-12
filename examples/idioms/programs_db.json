@@ -784,7 +784,7 @@
         "whole_span:4": [[1,4]]
       },
       "taxa": {
-        "call/class/constructor": [[4,4]],
+        "call/class/construct": [[4,4]],
         "call/function": [[2,2]],
         "def/argument/arg": [[1,1],[1,1]],
         "def/higher_order": [[1,4]],
@@ -1065,7 +1065,7 @@
         "whole_span:6": [[1,6]]
       },
       "taxa": {
-        "call/class/constructor": [[2,2],[3,3]],
+        "call/class/construct": [[2,2],[3,3]],
         "call/method": [[5,5],[6,6]],
         "def/import/third_party/Queue": [[1,1]],
         "meta/program": [[1,6]],
@@ -1274,7 +1274,7 @@
         "whole_span:4": [[1,4]]
       },
       "taxa": {
-        "call/class/constructor": [[2,2]],
+        "call/class/construct": [[2,2]],
         "call/function/builtin/range": [[3,3]],
         "call/method": [[4,4]],
         "def/import/standard/multiprocessing/Pool": [[1,1]],
@@ -1431,7 +1431,7 @@
         "whole_span:3": [[1,3]]
       },
       "taxa": {
-        "call/class/constructor": [[3,3]],
+        "call/class/construct": [[3,3]],
         "call/composition": [[3,3]],
         "call/function/builtin/casting/set": [[3,3]],
         "def/class": [[1,2]],
@@ -1707,7 +1707,7 @@
         "whole_span:13": [[1,13]]
       },
       "taxa": {
-        "call/class/constructor": [[13,13]],
+        "call/class/construct": [[13,13]],
         "call/function/builtin/zip": [[10,10]],
         "call/method": [[8,8]],
         "call/method/non_sequence/set/add": [[11,11],[12,12]],
@@ -2426,7 +2426,7 @@
         "whole_span:6": [[1,6]]
       },
       "taxa": {
-        "call/class/constructor": [[4,4]],
+        "call/class/construct": [[4,4]],
         "call/function/builtin/print": [[6,6]],
         "call/function/builtin/range": [[5,5]],
         "call/method": [[5,5]],
@@ -3985,7 +3985,7 @@
         "whole_span:12": [[1,12]]
       },
       "taxa": {
-        "call/class/constructor": [[10,10]],
+        "call/class/construct": [[10,10]],
         "call/function/builtin/print": [[12,12]],
         "call/method": [[11,11]],
         "def/argument/arg": [[6,6],[6,6],[6,6],[6,6]],
@@ -5589,7 +5589,7 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "call/class/constructor": [[2,2]],
+        "call/class/construct": [[2,2]],
         "call/method": [[2,2]],
         "def/import/standard/pathlib/Path": [[1,1]],
         "meta/program": [[1,2]],
@@ -7259,7 +7259,7 @@
         "whole_span:3": [[1,3]]
       },
       "taxa": {
-        "call/class/constructor": [[3,3]],
+        "call/class/construct": [[3,3]],
         "call/function": [[2,2]],
         "def/import/standard/collections/namedtuple": [[1,1]],
         "meta/program": [[1,3]],
@@ -7683,7 +7683,7 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "call/class/constructor": [[1,1],[1,1]],
+        "call/class/construct": [[1,1],[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "var/assignment/single": [[1,1]]
@@ -14867,7 +14867,7 @@
     ]
   },
   "taxa": {
-    "call/class/constructor": [
+    "call/class/construct": [
       "018.2084-depth-first-traversing-of-a-tree.py",
       "025.0195-send-a-value-to-another-thread.py",
       "030.0189-parallelize-execution-of-1000-independent-tasks.py",

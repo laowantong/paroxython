@@ -709,7 +709,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.875 | `call/class/constructor` | 4 |
+| 0.875 | `call/class/construct` | 4 |
 | 0.75 | `call/function` | 2 |
 | 0.875 | `def/argument/arg` | 1, 1 |
 | 0.75 | `def/higher_order` | 1-4 |
@@ -872,7 +872,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.875 | `call/class/constructor` | 2, 3 |
+| 0.875 | `call/class/construct` | 2, 3 |
 | 0.75 | `call/method` | 5, 6 |
 | 0.9375 | `def/import/third_party/Queue` | 1 |
 | 0.9375 | `type/boolean/literal/True` | 4 |
@@ -977,7 +977,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.875 | `call/class/constructor` | 2 |
+| 0.875 | `call/class/construct` | 2 |
 | 0.9375 | `call/function/builtin/range` | 3 |
 | 0.75 | `call/method` | 4 |
 | 0.96875 | `def/import/standard/multiprocessing/Pool` | 1 |
@@ -1071,7 +1071,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.875 | `call/class/constructor` | 3 |
+| 0.875 | `call/class/construct` | 3 |
 | 0.75 | `call/composition` | 3 |
 | 0.96875 | `call/function/builtin/casting/set` | 3 |
 | 0.75 | `def/class` | 1-2 |
@@ -1204,7 +1204,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.875 | `call/class/constructor` | 13 |
+| 0.875 | `call/class/construct` | 13 |
 | 0.9375 | `call/function/builtin/zip` | 10 |
 | 0.75 | `call/method` | 8 |
 | 0.96875 | `call/method/non_sequence/set/add` | 11, 12 |
@@ -1623,7 +1623,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.875 | `call/class/constructor` | 4 |
+| 0.875 | `call/class/construct` | 4 |
 | 0.9375 | `call/function/builtin/print` | 6 |
 | 0.9375 | `call/function/builtin/range` | 5 |
 | 0.75 | `call/method` | 5 |
@@ -2531,7 +2531,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.875 | `call/class/constructor` | 10 |
+| 0.875 | `call/class/construct` | 10 |
 | 0.9375 | `call/function/builtin/print` | 12 |
 | 0.75 | `call/method` | 11 |
 | 0.875 | `def/argument/arg` | 6, 6, 6, 6 |
@@ -3435,7 +3435,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.875 | `call/class/constructor` | 2 |
+| 0.875 | `call/class/construct` | 2 |
 | 0.75 | `call/method` | 2 |
 | 0.96875 | `def/import/standard/pathlib/Path` | 1 |
 | 0.875 | `var/assignment/single` | 2 |
@@ -4325,7 +4325,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.875 | `call/class/constructor` | 3 |
+| 0.875 | `call/class/construct` | 3 |
 | 0.75 | `call/function` | 2 |
 | 0.96875 | `def/import/standard/collections/namedtuple` | 1 |
 | 0.875 | `operator/arithmetic/addition` | 3, 3 |
@@ -4550,7 +4550,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.875 | `call/class/constructor` | 1, 1 |
+| 0.875 | `call/class/construct` | 1, 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
 | 0 | `meta/sloc/1` | 1 |

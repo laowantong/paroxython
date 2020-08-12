@@ -7,7 +7,7 @@ omit =
     helpers/make_compare_spans.py
     helpers/reformat_spec.py
     helpers/make_programming_idioms_folder.py
-    helpers/print_taxon_patterns.py
+    helpers/update_tree.py
     helpers/parse_source.py
     paroxython/__init__.py
     paroxython/make_snapshots.py

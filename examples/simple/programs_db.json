@@ -675,7 +675,7 @@
         "whole_span:12": [[1,12]]
       },
       "taxa": {
-        "call/class/constructor": [[10,10]],
+        "call/class/construct": [[10,10]],
         "call/composition": [[12,12]],
         "call/function/builtin/print": [[12,12]],
         "call/method": [[11,11],[12,12]],
@@ -4006,7 +4006,7 @@
     ]
   },
   "taxa": {
-    "call/class/constructor": [
+    "call/class/construct": [
       "12_classes.py"
     ],
     "call/composition": [

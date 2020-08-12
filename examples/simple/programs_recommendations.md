@@ -255,7 +255,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.375 | `call/class/constructor` | 10 |
+| 0.375 | `call/class/construct` | 10 |
 | 0.25 | `call/composition` | 12 |
 | 0.25 | `call/method` | 11, 12 |
 | 0.75 | `condition/inequality` | 9 |

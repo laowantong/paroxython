@@ -1,4 +1,5 @@
 import shutil
+import sqlite3
 import subprocess
 from os.path import dirname
 from pathlib import Path
@@ -298,83 +299,20 @@ def link_manuals():
         index_text,
     )
     assert n == 1
+    (index_text, n) = regex.subn(r'\b(src|href)="docs/', r'\1="', index_text)
+    assert n == 2
     index_path.write_text(index_text)
 
 
 def inject_taxonomy():
-    """
-    Data from: https://github.com/TheAlgorithms/Python
-    For updating them:
-    > paroxython collect -o db.sqlite Python
-    > sqlite3 db.sqlite
-        SELECT taxon, count(*)
-        FROM taxon
-        WHERE taxon LIKE 'type/%'
-        GROUP BY taxon;
-    Copy-paste the result below
-    """
     index_path = Path("docs/docs_user_manual/index.html")
     text = index_path.read_text()
-    data = """
-        type/boolean|4
-        type/boolean/literal/False|193
-        type/boolean/literal/True|241
-        type/non_sequence/dictionary|79
-        type/non_sequence/dictionary/literal|57
-        type/non_sequence/dictionary/literal/empty|26
-        type/non_sequence/set|57
-        type/non_sequence/set/literal|6
-        type/null/literal|362
-        type/number/complex|1
-        type/number/complex/literal|1
-        type/number/floating_point|48
-        type/number/floating_point/literal|292
-        type/number/floating_point/literal/zero|22
-        type/number/integer|198
-        type/number/integer/literal|5119
-        type/number/integer/literal/zero|1750
-        type/sequence|54
-        type/sequence/list|531
-        type/sequence/list/literal|629
-        type/sequence/list/literal/empty|285
-        type/sequence/string|445
-        type/sequence/string/literal|1938
-        type/sequence/string/literal/empty|128
-        type/sequence/string/literal/formatted|62
-        type/sequence/tuple|7
-        type/sequence/tuple/literal|891
-    """
-    rows = data.strip().split("\n")
-    acc = []
-    for row in rows:
-        (taxon, count) = row.split("|")
-        taxon = taxon.replace("/", " ")
-        acc.append(f"['{taxon}.', {count}],")
+    tree = Path("docs/resources/tree.js").read_text()
     head = f"""
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-      google.charts.load('current', {{packages:['wordtree']}});
-      google.charts.setOnLoadCallback(drawChart);
-
-      function drawChart() {{
-        var data = google.visualization.arrayToDataTable(
-          [ ['node', 'occurrences'], {" ".join(acc)} ]
-        );
-        var options = {{
-          wordtree: {{
-            format: 'implicit',
-            word: 'type'
-          }}
-        }};
-        var chart = new google.visualization.WordTree(document.getElementById('wordtree_basic'));
-        chart.draw(data, options);
-      }}
-    </script>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">{tree}</script>
     """
     (text, n) = regex.subn("</head>", fr"{head}</head>", text)
-    assert n == 1
-    body = """<div id="wordtree_basic" style="width: 100%; height: 500px;"></div>"""
-    (text, n) = regex.subn("<!-- Here comes the tree -->", body, text)
     assert n == 1
     index_path.write_text(text)
 
