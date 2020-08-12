@@ -84,14 +84,14 @@ Paroxython starts by building a **tag database** from a given folder of **progra
 - First, all features that meet the provided **specifications** are identified by internal-use free-form **labels** (e.g., `assignment_lhs_identifier:a` or `loop_with_late_exit:while`), and associated with their spanning lines (e.g., 4 or 5-7).
 - These labels are then mapped onto a knowledge **taxonomy** designed with basic hierarchical constraints in mind (e.g., the fact that the introduction of the concept of early exit must come after that of loop, which itself requires that of control flow, is expressed by the _taxon_ `flow/loop/exit/early`). Such a nesting makes the taxa especially relevant for the teacher, in that it offers a first structuration of an otherwise scattered knowledge.
 
-<center>
+<p align="center">
 <figure class="image">
-  <a href="https://laowantong.github.io/paroxython/docs/docs_user_manual/index.html#taxonomy">
+  <a href="https://laowantong.github.io/paroxython/docs_user_manual/index.html#taxonomy">
   <img src="docs/resources/tree.png" alt="A taxonomy.">
   </a>
   <figcaption><em>Taxonomy generated from <a href="https://github.com/TheAlgorithms/Python">The Algorithms - Python</a>.<br>Click to jump to its dynamic version in the user manual.</em></figcaption>
 </figure>
-</center>
+</p>
 
 The tag database can finally be filtered through a **pipeline of commands**, for instance:
 
