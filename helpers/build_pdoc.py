@@ -300,7 +300,7 @@ def link_manuals():
     )
     assert n == 1
     (index_text, n) = regex.subn(r'\b(src|href)="docs/', r'\1="', index_text)
-    assert n == 2
+    assert n == 1
     index_path.write_text(index_text)
 
 
