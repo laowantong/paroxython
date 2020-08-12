@@ -43,6 +43,7 @@ OPTIONS:
     -f --format=STR     The format of program titles in the report. This string
                         can contains the following identifiers (between braces):
                         • name: keys of the dictionary "programs" in the DB.
+                        • prefix: name of DB_PATH, minus any "_db.json" suffix.
                         • absolute: absolute path to DB_PATH's parent folder.
                         • relative: relative path to DB_PATH's parent folder.
                         Shortcut: if format is "vscode", makes program names to
@@ -80,9 +81,9 @@ from ..recommend_programs import Recommendations
 def cli_wrapper(args):
     db_path = Path(args["DB_PATH"])
     parent_path = db_path.parent
-    m = regex.fullmatch(r"(.+)[_-]db\.json", db_path.name)
-    prefix = m[1] if m else None
-    pipeline_path = Path(args["--pipe"] or parent_path / f"{prefix}_pipe.py")
+    m = regex.fullmatch(r"(.+[_-])db\.json", db_path.name)
+    prefix = m[1] if m else ""
+    pipeline_path = Path(args["--pipe"] or parent_path / f"{prefix}pipe.py")
     if pipeline_path.is_file():
         try:
             commands = literal_eval(pipeline_path.read_text())
@@ -97,9 +98,12 @@ def cli_wrapper(args):
         sys.stdout = sys.stderr
     title_format = args["--format"]
     if title_format.lower() == "vscode":
-        title_format = "[`{name}`](vscode://file/{absolute}/programs/{name})"
+        title_format = "[`{name}`](vscode://file/{absolute}/{prefix}/{name})"
     title_format = title_format.format(
-        name="{name}", absolute=parent_path.resolve(), relative=parent_path,
+        name="{name}",
+        prefix=prefix.rstrip("_-"),
+        absolute=parent_path.resolve(),
+        relative=parent_path,
     )
     rec = Recommendations(
         db=json.loads(db_path.read_text()),
@@ -111,6 +115,6 @@ def cli_wrapper(args):
     if args["--output"].upper() == "STDOUT":
         sys.stdout = stdout_backup
         return print("\n".join(sorted(rec.selected_programs - rec.hidden_programs)))
-    output_path = Path(args["--output"] or parent_path / f"{prefix}_recommendations.md")
+    output_path = Path(args["--output"] or parent_path / f"{prefix}recommendations.md")
     output_path.write_text(rec.get_markdown())
     print(f"Dumped: {output_path.resolve()}.\n")

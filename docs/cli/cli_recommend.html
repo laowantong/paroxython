@@ -65,6 +65,7 @@ With the option `-o stdout` the program list is simply printed to stdout.
 -f --format=STR     The format of program titles in the report. This string
                     can contains the following identifiers (between braces):
                     • name: keys of the dictionary &quot;programs&quot; in the DB.
+                    • prefix: name of DB_PATH, minus any &quot;_db.json&quot; suffix.
                     • absolute: absolute path to DB_PATH's parent folder.
                     • relative: relative path to DB_PATH's parent folder.
                     Shortcut: if format is &quot;vscode&quot;, makes program names to
@@ -88,7 +89,7 @@ paroxython recommend -o stdout path/to/programs_db.json \
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli_recommend.py#L0-L115" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli_recommend.py#L0-L119" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">import json
 import sys
@@ -103,9 +104,9 @@ from ..recommend_programs import Recommendations
 def cli_wrapper(args):
     db_path = Path(args[&#34;DB_PATH&#34;])
     parent_path = db_path.parent
-    m = regex.fullmatch(r&#34;(.+)[_-]db\.json&#34;, db_path.name)
-    prefix = m[1] if m else None
-    pipeline_path = Path(args[&#34;--pipe&#34;] or parent_path / f&#34;{prefix}_pipe.py&#34;)
+    m = regex.fullmatch(r&#34;(.+[_-])db\.json&#34;, db_path.name)
+    prefix = m[1] if m else &#34;&#34;
+    pipeline_path = Path(args[&#34;--pipe&#34;] or parent_path / f&#34;{prefix}pipe.py&#34;)
     if pipeline_path.is_file():
         try:
             commands = literal_eval(pipeline_path.read_text())
@@ -120,9 +121,12 @@ def cli_wrapper(args):
         sys.stdout = sys.stderr
     title_format = args[&#34;--format&#34;]
     if title_format.lower() == &#34;vscode&#34;:
-        title_format = &#34;[`{name}`](vscode://file/{absolute}/programs/{name})&#34;
+        title_format = &#34;[`{name}`](vscode://file/{absolute}/{prefix}/{name})&#34;
     title_format = title_format.format(
-        name=&#34;{name}&#34;, absolute=parent_path.resolve(), relative=parent_path,
+        name=&#34;{name}&#34;,
+        prefix=prefix.rstrip(&#34;_-&#34;),
+        absolute=parent_path.resolve(),
+        relative=parent_path,
     )
     rec = Recommendations(
         db=json.loads(db_path.read_text()),
@@ -134,7 +138,7 @@ def cli_wrapper(args):
     if args[&#34;--output&#34;].upper() == &#34;STDOUT&#34;:
         sys.stdout = stdout_backup
         return print(&#34;\n&#34;.join(sorted(rec.selected_programs - rec.hidden_programs)))
-    output_path = Path(args[&#34;--output&#34;] or parent_path / f&#34;{prefix}_recommendations.md&#34;)
+    output_path = Path(args[&#34;--output&#34;] or parent_path / f&#34;{prefix}recommendations.md&#34;)
     output_path.write_text(rec.get_markdown())
     print(f&#34;Dumped: {output_path.resolve()}.\n&#34;)</code></pre>
 </details>
@@ -154,14 +158,14 @@ def cli_wrapper(args):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli_recommend.py#L80-L116" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli_recommend.py#L81-L120" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def cli_wrapper(args):
     db_path = Path(args[&#34;DB_PATH&#34;])
     parent_path = db_path.parent
-    m = regex.fullmatch(r&#34;(.+)[_-]db\.json&#34;, db_path.name)
-    prefix = m[1] if m else None
-    pipeline_path = Path(args[&#34;--pipe&#34;] or parent_path / f&#34;{prefix}_pipe.py&#34;)
+    m = regex.fullmatch(r&#34;(.+[_-])db\.json&#34;, db_path.name)
+    prefix = m[1] if m else &#34;&#34;
+    pipeline_path = Path(args[&#34;--pipe&#34;] or parent_path / f&#34;{prefix}pipe.py&#34;)
     if pipeline_path.is_file():
         try:
             commands = literal_eval(pipeline_path.read_text())
@@ -176,9 +180,12 @@ def cli_wrapper(args):
         sys.stdout = sys.stderr
     title_format = args[&#34;--format&#34;]
     if title_format.lower() == &#34;vscode&#34;:
-        title_format = &#34;[`{name}`](vscode://file/{absolute}/programs/{name})&#34;
+        title_format = &#34;[`{name}`](vscode://file/{absolute}/{prefix}/{name})&#34;
     title_format = title_format.format(
-        name=&#34;{name}&#34;, absolute=parent_path.resolve(), relative=parent_path,
+        name=&#34;{name}&#34;,
+        prefix=prefix.rstrip(&#34;_-&#34;),
+        absolute=parent_path.resolve(),
+        relative=parent_path,
     )
     rec = Recommendations(
         db=json.loads(db_path.read_text()),
@@ -190,7 +197,7 @@ def cli_wrapper(args):
     if args[&#34;--output&#34;].upper() == &#34;STDOUT&#34;:
         sys.stdout = stdout_backup
         return print(&#34;\n&#34;.join(sorted(rec.selected_programs - rec.hidden_programs)))
-    output_path = Path(args[&#34;--output&#34;] or parent_path / f&#34;{prefix}_recommendations.md&#34;)
+    output_path = Path(args[&#34;--output&#34;] or parent_path / f&#34;{prefix}recommendations.md&#34;)
     output_path.write_text(rec.get_markdown())
     print(f&#34;Dumped: {output_path.resolve()}.\n&#34;)</code></pre>
 </details>

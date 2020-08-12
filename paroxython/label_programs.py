@@ -45,8 +45,8 @@ def labelled_programs(
             if m and f"{m[1]}.py" in internal_program_names:
                 tweaked_label_name = LabelName(label.name.replace(":", "_internally:", 1))
                 program.labels[i] = Label(name=tweaked_label_name, spans=label.spans)
-    if print_performances:
-        parse.print_performances()  # pragma: no cover
+    if print_performances:  # pragma: no cover
+        parse.print_performances()
     return programs
 
 

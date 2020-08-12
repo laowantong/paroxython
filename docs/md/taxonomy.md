@@ -126,7 +126,15 @@ All of these could be enough to describe pure functional programs, at least theo
 print("hello, world")
 ```
 
-For these reasons, choosing to root our taxonomy in the four basic notions of the typed lambda calculus should be seen more as a tribute than a formal commitment. For instance, like it or not, `var` will essentially bring together everything relating to the concept of assignment; `def` will accommodate not only lambda functions, but named ones, methods, generators and even classes, defined in place or by importation; `call` will cover any call to anything with a `__call__()` method, which Python calls a callable (sorry); finally, `type` will welcome all types, no purity required.
+For these reasons, choosing to root our taxonomy in the four basic notions of the typed lambda calculus should be seen more as a tribute than a formal commitment. More specifically:
+
+- `var` will essentially bring together everything relating to the concept of assignment and scoping;
+- `def` will accommodate not only lambda functions, but named ones, methods, generators and even classes, defined in place or by importation. Note that this does _not_ include variable definitions[^import_var].
+- `call` will cover any call to anything with a `__call__()` method, which Python calls a callable (sorry);
+- finally, `type` will welcome all types, no purity required.
+
+[^import_var]:
+    However, imported variables are incorrectly classified under `def`.
 
 ### Imperative needs: `flow`
 
@@ -145,6 +153,9 @@ Again, those are mainly practical choices. After all, an `operator` is nothing m
 ### Zooming out: `pattern`
 
 Now this is arguably the most interesting feature to tag in a beginner-level program. Under `pattern`, you will find numerous variants of the invaluable [accumulation pattern](https://en.wikipedia.org/wiki/Fold_(higher-order_function)) (counting, summing, filtering, finding the “best” element, etc.), but also some early-exit patterns (testing for an universal or existential property, finding the first “good” element, etc.), whether by traversing a sequence or evolving a state. This is an aspect of programming which is rarely taught in a conscious and systematic way, and to which Paroxython intends to draw your attention.
+
+..warning::
+    For priority reasons, Paroxython searches for these patterns in “statement” loops only, not in “comprehension” loops. This may change in a future version.
 
 ### Going `meta`
 

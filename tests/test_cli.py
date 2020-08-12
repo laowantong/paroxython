@@ -123,8 +123,10 @@ def test_recommend_dummy_programs():
     assert "1 program of learning cost in [1, 2[" in result_text
     assert "1 program of learning cost in [4, 8[" in result_text
 
-    result = run(f"recommend -o {result_path} {db_path}")  # implicit empty pipeline
+    result = run(f"recommend -o {result_path} --format=vscode {db_path}")  # implicit empty pipeline
     assert "Processing 0 commands on 9 programs" in result
+    result_text = result_path.read_text()
+    assert ".py`](vscode://file//" in result_text
 
     result_path.unlink()
 
