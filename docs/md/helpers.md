@@ -9,9 +9,6 @@ During the development process of Paroxython, it proved useful to create a numbe
 [`make_compare_spans.py`](https://repo/helpers/make_compare_spans.py)
 :   Generates the source code of the module `paroxython.compare_spans`. Must be launched manually.
 
-[`print_taxon_patterns.py`](https://repo/helpers/print_taxon_patterns.py)
-:   A one-shot script that computes and prints some lines to paste in [`taxonomy.tsv`](https://repo/paroxython/resources/taxonomy.tsv). It uses the [Python type hierarchy](https://python.readthedocs.io/en/stable/reference/datamodel.html) to determine, when possible, the type of an object based on the name of the method applied to it.
-
 [`reformat_spec.py`](https://repo/helpers/reformat_spec.py)
 :   Reads the contents of [`spec.md`](https://repo/paroxython/resources/spec.md), normalizes its formatting and writes it back. The goal is to ensure the consistency of the document and the validity of its numerous internal links, as well as to avoid authors wasting time with formatting details. Launched automatically by [`test_parse_program.py`](https://repo/tests/test_parse_program.py).
 
