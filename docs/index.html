@@ -82,11 +82,9 @@ The programming concepts you plan to teach remain relatively <strong>low level</
 </ul>
 </blockquote>
 <h4 id="how-it-works">How it works</h4>
-<pre><code class="plain">Specifications
-+   Programs = Labels
-    +   Taxonomy = Tag database
-        +   Command pipeline = Recommendations
-</code></pre>
+<p align="center">
+<img src="resources/waterfall.png">
+</p>
 <p>Paroxython starts by building a <strong>tag database</strong> from a given folder of <strong>programs</strong>. Tagging these programs is a two-step process:</p>
 <ul>
 <li>First, all features that meet the provided <strong>specifications</strong> are identified by internal-use free-form <strong>labels</strong> (e.g., <code>assignment_lhs_identifier:a</code> or <code>loop_with_late_exit:while</code>), and associated with their spanning lines (e.g., 4 or 5-7).</li>

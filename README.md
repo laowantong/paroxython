@@ -72,12 +72,10 @@ In an ideal world, Paroxython could even put an end to the deadliest religious w
 
 #### How it works
 
-```plain
-Specifications
-+   Programs = Labels
-    +   Taxonomy = Tag database
-        +   Command pipeline = Recommendations
-```
+
+<p align="center">
+  <img src="docs/resources/waterfall.png">
+</p>
 
 Paroxython starts by building a **tag database** from a given folder of **programs**. Tagging these programs is a two-step process:
 
