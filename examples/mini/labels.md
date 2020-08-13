@@ -243,6 +243,7 @@
 - suggest_comparison_chaining
 - suggest_condition_return
 - swap
+- swap_with_aux
 - tail_recursive_function
 - triangular_nested_for
 - try_raise|try_except

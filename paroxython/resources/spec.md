@@ -72,6 +72,7 @@
       - [Feature `update_by_member_call_with` (SQL)](#feature-update_by_member_call_with)
       - [Feature `update_with` (SQL)](#feature-update_with)
       - [Feature `increment`](#feature-increment)
+      - [Feature `swap_with_aux`](#feature-swap_with_aux)
       - [Feature `swap`](#feature-swap)
       - [Feature `slide`](#feature-slide)
       - [Feature `negate`](#feature-negate)
@@ -2868,6 +2869,48 @@ WHERE name_prefix IN ("update_by_assignment_with",
 
 --------------------------------------------------------------------------------
 
+#### Feature `swap_with_aux`
+
+Swap two variables or two elements of an array with an auxiliary variable (unpythonic, but deserves at least a mention in an algorithmic course).
+
+##### Specification
+
+```re
+          ^(?P<_1>.+)/_type=Assign
+\n(?:(?P=_1).+\n)*?(?P=_1)/_pos=(?P<POS>.+)
+\n(?:(?P=_1).+\n)*?(?P=_1)/assigntargets/1/_hash=(?P<HASH_1>.+) # capture _hash #1
+\n(?:(?P=_1).+\n)*?(?P=_1)/assignvalue/_hash=(?P<HASH_2>.+) # capture _hash #2
+\n(?:(?P=_1).+\n)*?(?P=_1)/.* # ensure the lines are consecutive
+         \n(?P<_2>.+)/_type=Assign
+\n(?:(?P=_2).+\n)*?(?P=_2)/assigntargets/1/_hash=(?P=HASH_2) # match _hash #2
+\n(?:(?P=_2).+\n)*?(?P=_2)/assignvalue/_hash=(?P<HASH_3>.+) # capture _hash #3
+\n(?:(?P=_2).+\n)*?(?P=_2)/.*
+         \n(?P<_3>.+)/_type=Assign
+\n(?:(?P=_3).+\n)*?(?P=_3)/_pos=(?P<POS>.+)
+\n(?:(?P=_3).+\n)*?(?P=_3)/assigntargets/1/_hash=(?P=HASH_3) # match _hash #3
+\n(?:(?P=_3).+\n)*?(?P=_3)/assignvalue/_hash=(?P=HASH_1) # match _hash #1
+```
+
+##### Example
+
+```python
+1   aux = a
+2   a = b
+3   b = aux
+4   
+5   aux = a[i]
+6   a[i] = a[j]
+7   a[j] = aux
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `swap_with_aux` | 1-3, 5-7 |
+
+--------------------------------------------------------------------------------
+
 #### Feature `swap`
 
 Swap two variables or two elements of an array with a 2-element tuple or list.
@@ -2890,10 +2933,6 @@ Swap two variables or two elements of an array with a 2-element tuple or list.
 2   [a, b] = [b, a]
 3   (a[0], a[1]) = (a[1], a[0])
 4   (a[i], a[i + 1]) = (a[i + 1], a[i])
-5
-6   aux = x # LIMITATION: no match for the traditional method with a temporary variable
-7   x = y
-8   y = aux
 ```
 
 ##### Matches

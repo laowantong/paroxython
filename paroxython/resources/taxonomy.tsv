@@ -231,6 +231,7 @@ var/assignment/parallel	parallel_assignment:2
 var/assignment/parallel/more_than_two	parallel_assignment:(?!2$)\d+
 var/assignment/parallel/slide	slide
 var/assignment/parallel/swap	swap
+var/assignment/sequence/swap	swap_with_aux
 var/assignment/single	single_assignment:.+
 var/deletion	node:Delete
 var/deletion/unbinding	unbinding:.+
