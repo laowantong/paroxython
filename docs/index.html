@@ -15,7 +15,7 @@
 <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS_CHTML" integrity="sha256-kZafAc6mZvK3W3v1pHOcUix30OHQN6pU/NO2oFkqZVw=" crossorigin></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js" integrity="sha256-eOgo0OtLL4cdq7RdwRUiGKLX9XsIJ7nGhWEKbohmVAQ=" crossorigin></script>
 <script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
-<a href="https://github.com/laowantong/paroxython"><img style="position: absolute; top: 0; right: 0; border: 0; width: 149px; height: 149px;" src="https://aral.github.com/fork-me-on-github-retina-ribbons/right-cerulean@2x.png" alt="Fork me on GitHub"></a>
+<a href="https://github.com/laowantong/paroxython"><img style="position: absolute; top: 0; right: 0; border: 0; width: 150px; height: 150px" src="https://laowantong.github.io/paroxython/resources/source_on_github.png" alt="Source on GitHub"></a>
 <style>.homelink{display:block}.homelink:hover{color:inherit}.homelink img{margin:auto;margin-bottom:.3em}</style>
 <link rel="canonical" href="https://laowantong.github.io/paroxython/">
 <link rel="icon" href="https://laowantong.github.io/paroxython/resources/logo.png">
@@ -45,9 +45,9 @@ and a lot more from <a href="https://github.com/quobit/awesome-python-in-educati
 <strong>reasonably sized</strong> (anything below 1000 <abbr title="Source Lines Of Code">SLOC</abbr>),
 and <strong>educational</strong> in nature (e.g., snippets, examples, quizzes, exercise solutions, classic algorithms).
 The programming concepts you plan to teach remain relatively <strong>low level</strong> (e.g. assignments, nested loops, accumulation patterns, tail-recursive functions, etc.).</p>
-<p>If all that sounds familiar, keep reading me to see what Paroxython can do for you.</p>
+<p>If all that sounds familiar, keep reading me.</p>
 <h4 id="main-goals">Main goals</h4>
-<p>Paroxython aims to help you select, from your collection, the one program that suits your needs. For instance, it will gladly answer the following questions:</p>
+<p>Paroxython aims to help you select, from your collection, the one program that best suits your needs. For instance, it will gladly answer the following questions:</p>
 <blockquote>
 <ul>
 <li>How can this concept be illustrated?</li>
@@ -82,14 +82,12 @@ The programming concepts you plan to teach remain relatively <strong>low level</
 </ul>
 </blockquote>
 <h4 id="how-it-works">How it works</h4>
+<p>Paroxython starts from a given folder of <strong>programs</strong>.</p>
 <p align="center">
 <img src="resources/waterfall.png">
 </p>
-<p>Paroxython starts by building a <strong>tag database</strong> from a given folder of <strong>programs</strong>. Tagging these programs is a two-step process:</p>
-<ul>
-<li>First, all features that meet the provided <strong>specifications</strong> are identified by internal-use free-form <strong>labels</strong> (e.g., <code>assignment_lhs_identifier:a</code> or <code>loop_with_late_exit:while</code>), and associated with their spanning lines (e.g., 4 or 5-7).</li>
-<li>These labels are then mapped onto a knowledge <strong>taxonomy</strong> designed with basic hierarchical constraints in mind (e.g., the fact that the introduction of the concept of early exit must come after that of loop, which itself requires that of control flow, is expressed by the <em>taxon</em> <code>flow/loop/exit/early</code>). Such a nesting makes the taxa especially relevant for the teacher, in that it offers a first structuration of an otherwise scattered knowledge.</li>
-</ul>
+<p>Its contents is parsed, and all features that meet the provided <strong>specifications</strong> are labelled and associated with their spanning lines (e.g., <code>"assignment_lhs_identifier:a": 4, 6, 18</code> or <code>"loop_with_late_exit:while": 3-7, 20-29</code>).</p>
+<p>These <strong>labels</strong> constitute a scattered knowledge. The next step is to map them onto a <strong>taxonomy</strong> designed with basic hierarchical constraints in mind (e.g., the fact that the introduction of the concept of early exit must come after that of loop, which itself requires that of control flow, is expressed by the <em>taxon</em> <code>"flow/loop/exit/early"</code>).</p>
 <p align="center">
 <a href="https://laowantong.github.io/paroxython/docs_user_manual/index.html#taxonomy">
 <img src="resources/tree.png" alt="A taxonomy.">
@@ -97,14 +95,13 @@ The programming concepts you plan to teach remain relatively <strong>low level</
 <br>
 <em>Taxonomy generated from <a href="https://github.com/TheAlgorithms/Python">The Algorithms - Python</a>.<br>Click to jump to its dynamic version in the user manual.</em>
 </p>
-<p>The tag database can finally be filtered through a <strong>pipeline of commands</strong>, for instance:</p>
+<p>Everything is then persisted in a tag <strong>database</strong>, which can later be filtered through a <strong>pipeline</strong> of commands, for instance:</p>
 <ul>
 <li><em>include</em> only the programs which feature a recursive function;</li>
-<li><em>exclude</em> this or that program which you are reserving for the exam;</li>
+<li><em>exclude</em> this or that program you want to set aside for the exam;</li>
 <li>“<em>impart</em>” all programs studied so far, <em>i.e</em>, consider that all the notions they implement are acquired.</li>
 </ul>
 <p>The result is a list of program <strong>recommendations</strong> ordered by increasing learning cost.</p>
-<p>Note that the label specification file is provided. For converting labels to taxa, a default taxonomy is also provided, but you may feel the need to tailor it to your own vision of the course. Initially, the pipeline can be left empty: the recommendations will then cover all programs, sorted by increasing level of knowledge.</p>
 <h4 id="example">Example</h4>
 <p>Suppose that the <code>programs</code> directory contains <a href="https://wiki.python.org/moin/SimplePrograms">these simple programs</a>. First, build <a href="https://github.com/laowantong/paroxython/blob/master/examples/simple/programs_db.json">this tag database</a>:</p>
 <pre><code class="shell">&gt; paroxython collect programs
@@ -122,7 +119,7 @@ Processing 5 commands on 21 programs.
   10 programs remaining after operation 5 (hide).
 Dumped: programs_recommendations.md.
 </code></pre>
-<p>Et voilà <a href="https://github.com/laowantong/paroxython/blob/master/examples/simple/programs_recommendations.md">your recommendation report</a>!</p>
+<p>Et voilà, <a href="https://github.com/laowantong/paroxython/blob/master/examples/simple/programs_recommendations.md">your recommendation report</a>!</p>
 <h3 id="installation-and-test-drive">Installation and test-drive</h3>
 <h4 id="command-line">Command line</h4>
 <p>Much to no one's surprise:</p>

@@ -14,7 +14,9 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ![Band-aid](https://img.shields.io/badge/not%C2%A0%C2%A0%F0%9F%85%B3%F0%9F%85%B4%F0%9F%85%B0%F0%9F%85%B3-yet-%23F3D9C5?labelColor=%23F3D9C5)
 
-![](docs/resources/logo.png)
+<p align="center">
+  <img src="docs/resources/logo.png">
+</p>
 
 ### Introduction
 
@@ -39,11 +41,11 @@ In any case, the Python source codes you have gathered are typically
 and **educational** in nature (e.g., snippets, examples, quizzes, exercise solutions, classic algorithms).
 The programming concepts you plan to teach remain relatively **low level** (e.g. assignments, nested loops, accumulation patterns, tail-recursive functions, etc.).
 
-If all that sounds familiar, keep reading me to see what Paroxython can do for you.
+If all that sounds familiar, keep reading me.
 
 #### Main goals
 
-Paroxython aims to help you select, from your collection, the one program that suits your needs. For instance, it will gladly answer the following questions:
+Paroxython aims to help you select, from your collection, the one program that best suits your needs. For instance, it will gladly answer the following questions:
 
 > - How can this concept be illustrated?
 > - What problems use the same algorithmic and data structures as this one?
@@ -72,15 +74,15 @@ In an ideal world, Paroxython could even put an end to the deadliest religious w
 
 #### How it works
 
+Paroxython starts from a given folder of **programs**.
 
 <p align="center">
   <img src="docs/resources/waterfall.png">
 </p>
 
-Paroxython starts by building a **tag database** from a given folder of **programs**. Tagging these programs is a two-step process:
+Its contents is parsed, and all features that meet the provided **specifications** are labelled and associated with their spanning lines (e.g., `"assignment_lhs_identifier:a": 4, 6, 18` or `"loop_with_late_exit:while": 3-7, 20-29`).
 
-- First, all features that meet the provided **specifications** are identified by internal-use free-form **labels** (e.g., `assignment_lhs_identifier:a` or `loop_with_late_exit:while`), and associated with their spanning lines (e.g., 4 or 5-7).
-- These labels are then mapped onto a knowledge **taxonomy** designed with basic hierarchical constraints in mind (e.g., the fact that the introduction of the concept of early exit must come after that of loop, which itself requires that of control flow, is expressed by the _taxon_ `flow/loop/exit/early`). Such a nesting makes the taxa especially relevant for the teacher, in that it offers a first structuration of an otherwise scattered knowledge.
+These **labels** constitute a scattered knowledge. The next step is to map them onto a **taxonomy** designed with basic hierarchical constraints in mind (e.g., the fact that the introduction of the concept of early exit must come after that of loop, which itself requires that of control flow, is expressed by the _taxon_ `"flow/loop/exit/early"`).
 
 <p align="center">
   <a href="https://laowantong.github.io/paroxython/docs_user_manual/index.html#taxonomy">
@@ -90,15 +92,13 @@ Paroxython starts by building a **tag database** from a given folder of **progra
   <em>Taxonomy generated from <a href="https://github.com/TheAlgorithms/Python">The Algorithms - Python</a>.<br>Click to jump to its dynamic version in the user manual.</em>
 </p>
 
-The tag database can finally be filtered through a **pipeline of commands**, for instance:
+Everything is then persisted in a tag **database**, which can later be filtered through a **pipeline** of commands, for instance:
 
 - _include_ only the programs which feature a recursive function;
-- _exclude_ this or that program which you are reserving for the exam;
+- _exclude_ this or that program you want to set aside for the exam;
 - “_impart_” all programs studied so far, _i.e_, consider that all the notions they implement are acquired.
 
 The result is a list of program **recommendations** ordered by increasing learning cost.
-
-Note that the label specification file is provided. For converting labels to taxa, a default taxonomy is also provided, but you may feel the need to tailor it to your own vision of the course. Initially, the pipeline can be left empty: the recommendations will then cover all programs, sorted by increasing level of knowledge.
 
 #### Example
 
@@ -124,7 +124,7 @@ Processing 5 commands on 21 programs.
 Dumped: programs_recommendations.md.
 ```
 
-Et voilà [your recommendation report](https://github.com/laowantong/paroxython/blob/master/examples/simple/programs_recommendations.md)!
+Et voilà, [your recommendation report](https://github.com/laowantong/paroxython/blob/master/examples/simple/programs_recommendations.md)!
 
 
 ### Installation and test-drive

@@ -2,7 +2,7 @@
 # Will you ever read me?
 
 .. include:: ../README.md
-   :start-after: logo.png)
+   :start-after: </p>
    :end-before: ## Further reading
 
 <br>
