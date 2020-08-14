@@ -4,7 +4,7 @@ import sqlite3
 import regex  # type: ignore
 
 import context
-from paroxython.make_db import Database
+from paroxython.make_db import TagDatabase
 
 js_template = """// This file is auto-generated. Any changes here will be lost.
 google.charts.load('current', {packages:['wordtree']});
@@ -26,7 +26,7 @@ tree.draw(data, options);
 
 def dump_trees(directory, update_database=True):
     if update_database:
-        db = Database(directory, ignore_timestamps=True)
+        db = TagDatabase(directory, ignore_timestamps=True)
         db.write_sqlite()
 
     db_path = directory.parent / f"{directory.name}_db.sqlite"

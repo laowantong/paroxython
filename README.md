@@ -15,14 +15,16 @@
 ![Band-aid](https://img.shields.io/badge/not%C2%A0%C2%A0%F0%9F%85%B3%F0%9F%85%B4%F0%9F%85%B0%F0%9F%85%B3-yet-%23F3D9C5?labelColor=%23F3D9C5)
 
 <p align="center">
+  <a href="https://laowantong.github.io/paroxython/index.html">
   <img src="docs/resources/logo.png">
+  </a>
 </p>
 
-### Introduction
+## Introduction
 
 Paroxython is a set of command line tools which **tag** a collection of Python programming exercises and **filter** them by algorithmic features.
 
-#### Audience
+### Audience
 
 You are a teacher, in charge of an introductory programming course in an educational institution. Over the years, you have accumulated many—far too many—programs and code snippets that may be of interest to your students.
 
@@ -43,7 +45,7 @@ The programming concepts you plan to teach remain relatively **low level** (e.g.
 
 If all that sounds familiar, keep reading me.
 
-#### Main goals
+### Main goals
 
 Paroxython aims to help you select, from your collection, the one program that best suits your needs. For instance, it will gladly answer the following questions:
 
@@ -72,21 +74,21 @@ In an ideal world, Paroxython could even put an end to the deadliest religious w
 > - Father, is it a sin to exit early?
 > - Should a real byte use a mask?
 
-#### How it works
-
-Paroxython starts from a given folder of **programs**.
+### How it works
 
 <p align="center">
+  <a href="https://laowantong.github.io/paroxython/docs_developer_manual/index.html">
   <img src="docs/resources/waterfall.png">
+  </a>
 </p>
 
-Its contents is parsed, and all features that meet the provided **specifications** are labelled and associated with their spanning lines (e.g., `"assignment_lhs_identifier:a": 4, 6, 18` or `"loop_with_late_exit:while": 3-7, 20-29`).
+Paroxython starts from a given folder of **programs**. Its contents is parsed, and all features that meet the provided **specifications** are labelled and associated with their spanning lines (e.g., `"assignment_lhs_identifier:a": 4, 6, 18` or `"loop_with_late_exit:while": 3-7, 20-29`).
 
-These **labels** constitute a scattered knowledge. The next step is to map them onto a **taxonomy** designed with basic hierarchical constraints in mind (e.g., the fact that the introduction of the concept of early exit must come after that of loop, which itself requires that of control flow, is expressed by the _taxon_ `"flow/loop/exit/early"`).
+These **labels** constitute only a scattered knowledge. The next step is to map them onto a **taxonomy** designed with basic hierarchical constraints in mind (e.g., the fact that the introduction of the concept of early exit must come after that of loop, which itself requires that of control flow, is expressed by the _taxon_ `"flow/loop/exit/early"`).
 
 <p align="center">
   <a href="https://laowantong.github.io/paroxython/docs_user_manual/index.html#taxonomy">
-  <img src="docs/resources/tree.png" alt="A taxonomy.">
+  <img src="docs/resources/tree.png" alt="A taxonomy." width="66%">
   </a>
   <br>
   <em>Taxonomy generated from <a href="https://github.com/TheAlgorithms/Python">The Algorithms - Python</a>.<br>Click to jump to its dynamic version in the user manual.</em>
@@ -100,7 +102,7 @@ Everything is then persisted in a tag **database**, which can later be filtered 
 
 The result is a list of program **recommendations** ordered by increasing learning cost.
 
-#### Example
+### Example
 
 Suppose that the `programs` directory contains [these simple programs](https://wiki.python.org/moin/SimplePrograms). First, build [this tag database](https://github.com/laowantong/paroxython/blob/master/examples/simple/programs_db.json):
 
@@ -127,9 +129,9 @@ Dumped: programs_recommendations.md.
 Et voilà, [your recommendation report](https://github.com/laowantong/paroxython/blob/master/examples/simple/programs_recommendations.md)!
 
 
-### Installation and test-drive
+## Installation and test-drive
 
-#### Command line
+### Command line
 
 Much to no one's surprise:
 
@@ -143,7 +145,7 @@ The following command should print a help message and exit:
 paroxython --help
 ```
 
-#### IPython magic command
+### IPython magic command
 
 If you use Jupyter notebook/lab, you've also just installed a so-called magic command. Load it like this:
 
@@ -184,7 +186,7 @@ This should print `"paroxython 0.4.5 loaded."`. Run it on a cell of Python code 
 | `var/assignment/parallel/slide` | 7 |
 | `var/assignment/single` | 3 |
 
-## Further reading
+# Further reading
 
 - [User manual](https://laowantong.github.io/paroxython/docs_user_manual/index.html)
 - [Developer manual](https://laowantong.github.io/paroxython/docs_developer_manual/index.html)

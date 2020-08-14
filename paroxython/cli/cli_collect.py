@@ -36,7 +36,7 @@ OPTIONS:
 
 from pathlib import Path
 
-from ..make_db import Database
+from ..make_db import TagDatabase
 
 
 def cli_wrapper(args):
@@ -48,7 +48,7 @@ def cli_wrapper(args):
         taxonomy_path = directory.parent / "taxonomy.tsv"
         if not taxonomy_path.is_file():
             taxonomy_path = None
-    db = Database(
+    db = TagDatabase(
         directory=directory,
         ignore_timestamps=args["--no_timestamp"],
         cleanup_strategy=args["--cleanup"],  # -> list_programs

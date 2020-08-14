@@ -54,7 +54,7 @@ from .goodies import print_warning
 from .normalize_predicate import normalize_predicate
 from .user_types import (
     Criterion,
-    JsonDatabase,
+    JsonTagDatabase,
     Operation,
     Predicate,
     ProgramInfos,
@@ -77,12 +77,12 @@ class ProgramFilter:
 
     # Initialization of the filter
 
-    def __init__(self, db: JsonDatabase) -&gt; None:
+    def __init__(self, db: JsonTagDatabase) -&gt; None:
         self.define_shortcuts(db)
         self.init_filter_state()
         self.add_imported_taxa()
 
-    def define_shortcuts(self, db: JsonDatabase) -&gt; None:
+    def define_shortcuts(self, db: JsonTagDatabase) -&gt; None:
         self.db_programs: ProgramInfos = db[&#34;programs&#34;]
         self.db_taxa: TaxonInfos = db[&#34;taxa&#34;]
         self.db_importations: ProgramToPrograms = db[&#34;importations&#34;]
@@ -348,12 +348,12 @@ class ProgramFilter:
 
     # Initialization of the filter
 
-    def __init__(self, db: JsonDatabase) -&gt; None:
+    def __init__(self, db: JsonTagDatabase) -&gt; None:
         self.define_shortcuts(db)
         self.init_filter_state()
         self.add_imported_taxa()
 
-    def define_shortcuts(self, db: JsonDatabase) -&gt; None:
+    def define_shortcuts(self, db: JsonTagDatabase) -&gt; None:
         self.db_programs: ProgramInfos = db[&#34;programs&#34;]
         self.db_taxa: TaxonInfos = db[&#34;taxa&#34;]
         self.db_importations: ProgramToPrograms = db[&#34;importations&#34;]
@@ -568,7 +568,7 @@ class ProgramFilter:
 <h3>Methods</h3>
 <dl>
 <dt id="paroxython.filter_programs.ProgramFilter.__init__"><code class="name flex">
-<span>def <span class="ident">__init__</span></span>(<span>self, <br>db: JsonDatabase<br>) ‑> NoneType</span>
+<span>def <span class="ident">__init__</span></span>(<span>self, <br>db: JsonTagDatabase<br>) ‑> NoneType</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Call <code>define_shortcuts()</code>,
@@ -578,14 +578,14 @@ class ProgramFilter:
 <span>Expand source code</span>
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L49-L53" class="git-link">Browse GitHub</a>
 </summary>
-<pre><code class="python">def __init__(self, db: JsonDatabase) -&gt; None:
+<pre><code class="python">def __init__(self, db: JsonTagDatabase) -&gt; None:
     self.define_shortcuts(db)
     self.init_filter_state()
     self.add_imported_taxa()</code></pre>
 </details>
 </dd>
 <dt id="paroxython.filter_programs.ProgramFilter.define_shortcuts"><code class="name flex">
-<span>def <span class="ident">define_shortcuts</span></span>(<span>self, <br>db: JsonDatabase<br>) ‑> NoneType</span>
+<span>def <span class="ident">define_shortcuts</span></span>(<span>self, <br>db: JsonTagDatabase<br>) ‑> NoneType</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Define some attributes that point directly to the main parts of the tag database.</p></div>
@@ -594,7 +594,7 @@ class ProgramFilter:
 <span>Expand source code</span>
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L55-L60" class="git-link">Browse GitHub</a>
 </summary>
-<pre><code class="python">def define_shortcuts(self, db: JsonDatabase) -&gt; None:
+<pre><code class="python">def define_shortcuts(self, db: JsonTagDatabase) -&gt; None:
     self.db_programs: ProgramInfos = db[&#34;programs&#34;]
     self.db_taxa: TaxonInfos = db[&#34;taxa&#34;]
     self.db_importations: ProgramToPrograms = db[&#34;importations&#34;]
@@ -1059,7 +1059,7 @@ by transitivity) at least one member of the given <code>programs</code>.</dd>
 </details>
 </dd>
 <dt id="paroxython.filter_programs.ProgramFilter.programs_of_triple"><code class="name flex">
-<span>def <span class="ident">programs_of_triple</span></span>(<span>self, <br>taxon_pattern_1: str, <br>predicate: Callable[[int, int], bool], <br>taxon_pattern_2: str<br>) ‑> Set[ProgramName]</span>
+<span>def <span class="ident">programs_of_triple</span></span>(<span>self, <br>taxon_pattern_1: str, <br>predicate: Callable[[Tuple[int, int], Tuple[int, int]], bool], <br>taxon_pattern_2: str<br>) ‑> Set[ProgramName]</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Return the programs where two given taxa satisfy a given predicate.</p>
@@ -1109,7 +1109,7 @@ span <code>s_2</code> of <code>taxon_2</code> for which <code>predicate(s_1, s_2
 </details>
 </dd>
 <dt id="paroxython.filter_programs.ProgramFilter.programs_of_negated_triple"><code class="name flex">
-<span>def <span class="ident">programs_of_negated_triple</span></span>(<span>self, <br>taxon_pattern_1: str, <br>predicate: Callable[[int, int], bool], <br>taxon_pattern_2: str<br>) ‑> Set[ProgramName]</span>
+<span>def <span class="ident">programs_of_negated_triple</span></span>(<span>self, <br>taxon_pattern_1: str, <br>predicate: Callable[[Tuple[int, int], Tuple[int, int]], bool], <br>taxon_pattern_2: str<br>) ‑> Set[ProgramName]</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Return the programs where the given predicate is not satisfied.</p>

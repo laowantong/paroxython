@@ -79,7 +79,7 @@ from .user_types import (
     AssessedPrograms,
     Command,
     Criterion,
-    JsonDatabase,
+    JsonTagDatabase,
     Operation,
     ProgramNames,
 )
@@ -98,7 +98,7 @@ class MalformedData(Exception):
 class Recommendations:
     def __init__(
         self,
-        db: JsonDatabase,
+        db: JsonTagDatabase,
         base_path: Optional[Path] = None,
         title_format: str = &#34;`{name}`&#34;,
         **kwargs,
@@ -308,7 +308,7 @@ if __name__ == &#34;__main__&#34;:
 <pre><code class="python">class Recommendations:
     def __init__(
         self,
-        db: JsonDatabase,
+        db: JsonTagDatabase,
         base_path: Optional[Path] = None,
         title_format: str = &#34;`{name}`&#34;,
         **kwargs,
@@ -485,15 +485,15 @@ if __name__ == &#34;__main__&#34;:
 <h3>Methods</h3>
 <dl>
 <dt id="paroxython.recommend_programs.Recommendations.__init__"><code class="name flex">
-<span>def <span class="ident">__init__</span></span>(<span>self, <br>db: JsonDatabase, <br>base_path: Union[pathlib.Path, NoneType] = None, <br>title_format: str = '`{name}`', <br>**kwargs<br>) ‑> NoneType</span>
+<span>def <span class="ident">__init__</span></span>(<span>self, <br>db: JsonTagDatabase, <br>base_path: Union[pathlib.Path, NoneType] = None, <br>title_format: str = '`{name}`', <br>**kwargs<br>) ‑> NoneType</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Initialize a recommendation system for the given database of programs tagged with taxa.</p>
 <h2 id="args">Args</h2>
 <dl>
-<dt><strong><code>db</code></strong> :&ensp;<code>JsonDatabase</code></dt>
+<dt><strong><code>db</code></strong> :&ensp;<code>JsonTagDatabase</code></dt>
 <dd>A Python dictionary containing the <abbr title="JavaScript Object Notation">JSON</abbr> structure constructed by
-<code><a title="paroxython.make_db.Database" href="make_db.html#paroxython.make_db.Database">Database</a></code>, i.e. the result of the parsing, labelling and
+<code><a title="paroxython.make_db.TagDatabase" href="make_db.html#paroxython.make_db.TagDatabase">TagDatabase</a></code>, i.e. the result of the parsing, labelling and
 taxon-ifying of a set of programs
 (<a href="https://github.com/laowantong/paroxython/blob/master/examples/simple/programs_db.json">example</a>).
 The execution relies on the fields <code>programs</code>, <code>taxa</code>, <code>importations</code> and
@@ -519,7 +519,7 @@ spans. Exception: the taxa starting with <code>"meta/"</code> are not imported.<
 </summary>
 <pre><code class="python">def __init__(
     self,
-    db: JsonDatabase,
+    db: JsonTagDatabase,
     base_path: Optional[Path] = None,
     title_format: str = &#34;`{name}`&#34;,
     **kwargs,

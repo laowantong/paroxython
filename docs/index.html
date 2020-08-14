@@ -28,9 +28,9 @@
 </header>
 <section id="section-intro">
 <h1 id="will-you-ever-read-me">Will you ever read me?</h1>
-<h3 id="introduction">Introduction</h3>
+<h2 id="introduction">Introduction</h2>
 <p>Paroxython is a set of command line tools which <strong>tag</strong> a collection of Python programming exercises and <strong>filter</strong> them by algorithmic features.</p>
-<h4 id="audience">Audience</h4>
+<h3 id="audience">Audience</h3>
 <p>You are a teacher, in charge of an introductory programming course in an educational institution. Over the years, you have accumulated many—far too many—programs and code snippets that may be of interest to your students.</p>
 <p>Or, as a seasoned developer, you would like to share your knowledge by helping a loved one learn how to code. A cursory search for pedagogical material yields an overwhelming amount of websites and repositories stuffed with Python programs of various levels (e.g.,
 <a href="https://github.com/TheAlgorithms/Python">1</a>,
@@ -46,7 +46,7 @@ and a lot more from <a href="https://github.com/quobit/awesome-python-in-educati
 and <strong>educational</strong> in nature (e.g., snippets, examples, quizzes, exercise solutions, classic algorithms).
 The programming concepts you plan to teach remain relatively <strong>low level</strong> (e.g. assignments, nested loops, accumulation patterns, tail-recursive functions, etc.).</p>
 <p>If all that sounds familiar, keep reading me.</p>
-<h4 id="main-goals">Main goals</h4>
+<h3 id="main-goals">Main goals</h3>
 <p>Paroxython aims to help you select, from your collection, the one program that best suits your needs. For instance, it will gladly answer the following questions:</p>
 <blockquote>
 <ul>
@@ -81,16 +81,17 @@ The programming concepts you plan to teach remain relatively <strong>low level</
 <li>Should a real byte use a mask?</li>
 </ul>
 </blockquote>
-<h4 id="how-it-works">How it works</h4>
-<p>Paroxython starts from a given folder of <strong>programs</strong>.</p>
+<h3 id="how-it-works">How it works</h3>
 <p align="center">
+<a href="https://laowantong.github.io/paroxython/docs_developer_manual/index.html">
 <img src="resources/waterfall.png">
+</a>
 </p>
-<p>Its contents is parsed, and all features that meet the provided <strong>specifications</strong> are labelled and associated with their spanning lines (e.g., <code>"assignment_lhs_identifier:a": 4, 6, 18</code> or <code>"loop_with_late_exit:while": 3-7, 20-29</code>).</p>
-<p>These <strong>labels</strong> constitute a scattered knowledge. The next step is to map them onto a <strong>taxonomy</strong> designed with basic hierarchical constraints in mind (e.g., the fact that the introduction of the concept of early exit must come after that of loop, which itself requires that of control flow, is expressed by the <em>taxon</em> <code>"flow/loop/exit/early"</code>).</p>
+<p>Paroxython starts from a given folder of <strong>programs</strong>. Its contents is parsed, and all features that meet the provided <strong>specifications</strong> are labelled and associated with their spanning lines (e.g., <code>"assignment_lhs_identifier:a": 4, 6, 18</code> or <code>"loop_with_late_exit:while": 3-7, 20-29</code>).</p>
+<p>These <strong>labels</strong> constitute only a scattered knowledge. The next step is to map them onto a <strong>taxonomy</strong> designed with basic hierarchical constraints in mind (e.g., the fact that the introduction of the concept of early exit must come after that of loop, which itself requires that of control flow, is expressed by the <em>taxon</em> <code>"flow/loop/exit/early"</code>).</p>
 <p align="center">
 <a href="https://laowantong.github.io/paroxython/docs_user_manual/index.html#taxonomy">
-<img src="resources/tree.png" alt="A taxonomy.">
+<img src="resources/tree.png" alt="A taxonomy." width="66%">
 </a>
 <br>
 <em>Taxonomy generated from <a href="https://github.com/TheAlgorithms/Python">The Algorithms - Python</a>.<br>Click to jump to its dynamic version in the user manual.</em>
@@ -102,7 +103,7 @@ The programming concepts you plan to teach remain relatively <strong>low level</
 <li>“<em>impart</em>” all programs studied so far, <em>i.e</em>, consider that all the notions they implement are acquired.</li>
 </ul>
 <p>The result is a list of program <strong>recommendations</strong> ordered by increasing learning cost.</p>
-<h4 id="example">Example</h4>
+<h3 id="example">Example</h3>
 <p>Suppose that the <code>programs</code> directory contains <a href="https://wiki.python.org/moin/SimplePrograms">these simple programs</a>. First, build <a href="https://github.com/laowantong/paroxython/blob/master/examples/simple/programs_db.json">this tag database</a>:</p>
 <pre><code class="shell">&gt; paroxython collect programs
 Labelling 21 programs.
@@ -120,15 +121,15 @@ Processing 5 commands on 21 programs.
 Dumped: programs_recommendations.md.
 </code></pre>
 <p>Et voilà, <a href="https://github.com/laowantong/paroxython/blob/master/examples/simple/programs_recommendations.md">your recommendation report</a>!</p>
-<h3 id="installation-and-test-drive">Installation and test-drive</h3>
-<h4 id="command-line">Command line</h4>
+<h2 id="installation-and-test-drive">Installation and test-drive</h2>
+<h3 id="command-line">Command line</h3>
 <p>Much to no one's surprise:</p>
 <pre><code>pip install paroxython
 </code></pre>
 <p>The following command should print a help message and exit:</p>
 <pre><code>paroxython --help
 </code></pre>
-<h4 id="ipython-magic-command">IPython magic command</h4>
+<h3 id="ipython-magic-command">IPython magic command</h3>
 <p>If you use Jupyter notebook/lab, you've also just installed a so-called magic command. Load it like this:</p>
 <pre><code class="python">%load_ext paroxython
 </code></pre>
@@ -242,7 +243,7 @@ Dumped: programs_recommendations.md.
 <li>submit your personal changes to <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/taxonomy.tsv"><code>taxonomy.tsv</code></a> for integration in the default taxonomy;</li>
 <li>translate some of this documentation into English.</li>
 </ul>
-<p>If you're a researcher and interested in a scientific collaboration, I would love to hear from you. Drop an email to my dot-separated name at <code>univ-lorraine.fr</code>.</p>
+<p>If you're a researcher and interested in a scientific collaboration, I would love to hear from you. Drop an email to my dot-separated name (cf. previous section) at <code>univ-lorraine.fr</code>.</p>
 <p>If you use Paroxython for your programming course, I am keen to hear your feedback!</p>
 <div class="footnote">
 <hr>

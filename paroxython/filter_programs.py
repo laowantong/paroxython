@@ -23,7 +23,7 @@ from .goodies import print_warning
 from .normalize_predicate import normalize_predicate
 from .user_types import (
     Criterion,
-    JsonDatabase,
+    JsonTagDatabase,
     Operation,
     Predicate,
     ProgramInfos,
@@ -46,13 +46,13 @@ class ProgramFilter:
 
     # Initialization of the filter
 
-    def __init__(self, db: JsonDatabase) -> None:
+    def __init__(self, db: JsonTagDatabase) -> None:
         """Call `define_shortcuts()`,  `init_filter_state()` and `add_imported_taxa()` (below)."""
         self.define_shortcuts(db)
         self.init_filter_state()
         self.add_imported_taxa()
 
-    def define_shortcuts(self, db: JsonDatabase) -> None:
+    def define_shortcuts(self, db: JsonTagDatabase) -> None:
         """Define some attributes that point directly to the main parts of the tag database."""
         self.db_programs: ProgramInfos = db["programs"]
         self.db_taxa: TaxonInfos = db["taxa"]

@@ -29,12 +29,12 @@ from .user_types import (
 )
 
 __pdoc__ = {
-    "Database": "",
-    "Database.__init__": True,
+    "TagDatabase": "",
+    "TagDatabase.__init__": True,
 }
 
 
-class Database:
+class TagDatabase:
     def __init__(self, directory: Path, ignore_timestamps: bool = False, **kwargs) -> None:
         """Construct and populate the complete database of program features.
 
@@ -96,7 +96,7 @@ class Database:
             }
 
     def get_json(self) -> str:
-        r"""Dump the constructed `Database` object as a JSON string.
+        r"""Dump the constructed `TagDatabase` object as a JSON string.
 
         Description:
             Schema and purpose [in the user manual](docs_user_manual/index.html#the-json-database).
@@ -137,7 +137,7 @@ class Database:
         return text
 
     def write_json(self, db_path: Optional[Path] = None) -> None:
-        """Call `Database.get_json` and write the result to a file.
+        """Call `TagDatabase.get_json` and write the result to a file.
 
         Args:
             db_path (Optional[Path], optional): If not provided, and the directory provided to the
@@ -149,7 +149,7 @@ class Database:
         db_path.write_text(self.get_json())
 
     def write_sqlite(self, db_path: Optional[Path] = None) -> None:
-        """Dump the constructed `Database` object as a SQLite database (experimental).
+        """Dump the constructed `TagDatabase` object as a SQLite database (experimental).
 
         Args:
             db_path (Optional[Path], optional): The path of the SQLite database. If not provided,
@@ -448,7 +448,7 @@ if __name__ == "__main__":
     # fmt:on
     print()
     for directory in directories:
-        db = Database(Path(directory), ignore_timestamps=True)
+        db = TagDatabase(Path(directory), ignore_timestamps=True)
         db.write_json()
         db.write_sqlite()
     print()

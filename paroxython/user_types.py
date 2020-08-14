@@ -6,19 +6,24 @@ from typing_extensions import TypedDict, Literal  # Python 3.8: import directly 
 # fmt: off
 
 
+# --------------------------------------------------------------------------------------------------
 # Various types
+# --------------------------------------------------------------------------------------------------
 
-Source = NewType("Source", str)
-Query = NewType("Query", str)
+Source = NewType("Source", str)  # Source code of the user's programs.
+Query = NewType("Query", str)  # SQL specification of a feature, as defined in `spec.md`.
 
-class Span(NamedTuple):
-    start: int
-    end: int
-    path: str = ""
+class Span(NamedTuple):  # Location of a given feature.
+    start: int  # First line of the feature.
+    end: int  # Last line of the feature.
+    path: str = ""  # Identifier of the beginning of the feature in the AST.
 
+
+# --------------------------------------------------------------------------------------------------
 # Labels
+# --------------------------------------------------------------------------------------------------
 
-LabelName = NewType("LabelName", str)
+LabelName = NewType("LabelName", str)  # Name of a feature, as defined in `spec.md`.
 LabelNames = List[LabelName]
 
 class Label(NamedTuple):
@@ -28,49 +33,61 @@ class Label(NamedTuple):
 Labels = List[Label]
 LabelsSpans = Dict[LabelName, List[Span]]
 
-LabelPattern = NewType("LabelPattern", str)
+LabelPattern = NewType("LabelPattern", str)  # Member of the second row of `taxonomy.tsv`.
 
+
+# --------------------------------------------------------------------------------------------------
 # Taxa
+# --------------------------------------------------------------------------------------------------
 
-TaxonName = NewType("TaxonName", str)
+TaxonName = NewType("TaxonName", str) # Path from a root to a node in the taxonomy.
 TaxonNames = List[TaxonName]
 TaxonNameSet = Set[TaxonName]
 
 class Taxon(NamedTuple):
     name: TaxonName
-    spans: Bag[Span]
+    spans: Bag[Span]  # For a given taxon, associate each span to its number of occurrences.
+                      # For instance, if there are three integer literals on line 42, the
+                      # corresponding entry is: (42, 42, '...'): 3.
 
 Taxa = List[Taxon]
 TaxaSpans = Dict[TaxonName, Bag[Span]]
 
-TaxonPattern = NewType("TaxonPattern", str)
+TaxonPattern = NewType("TaxonPattern", str) # Member of the first row of `taxonomy.tsv`.
 TaxonPatterns = List[TaxonPattern]
 
-# Programs
 
-ProgramName = NewType("ProgramName", str)
+# --------------------------------------------------------------------------------------------------
+# Programs
+# --------------------------------------------------------------------------------------------------
+
+ProgramName = NewType("ProgramName", str)  # In fact, relative path of a user's program in the
+                                           # directory to search.
 ProgramNames = List[ProgramName]
 ProgramNameSet = Set[ProgramName]
 
-class Program(NamedTuple):
+class Program(NamedTuple):  # All the information pertaining to a program.
     labels: Labels
     taxa: Taxa
-    addition: LabelsSpans
-    deletion: LabelsSpans
+    addition: LabelsSpans  # Features scheduled for addition.
+    deletion: LabelsSpans  # Features scheduled for deletion.
     name: ProgramName = ProgramName("")
     source: Source = Source("")
 
 Programs = List[Program]
 ProgramTaxa = Dict[ProgramName, Taxa]
 
-# Serialization-ready types used for the JSON tag database
 
-PoorSpan = Tuple[int, int]
+# --------------------------------------------------------------------------------------------------
+# Serialization-ready types used for the JSON tag database
+# --------------------------------------------------------------------------------------------------
+
+PoorSpan = Tuple[int, int]  # A span, deprived from its path.
 LabelsPoorSpans = Dict[LabelName, List[PoorSpan]]
 TaxaPoorSpans = Dict[TaxonName, List[PoorSpan]]
 
 class ProgramRecord(TypedDict):
-    timestamp: str
+    timestamp: str  # Date of last modification: currently unused.
     source: Source
     labels: LabelsPoorSpans
     taxa: TaxaPoorSpans
@@ -78,9 +95,9 @@ class ProgramRecord(TypedDict):
 ProgramInfos = Dict[ProgramName, ProgramRecord]
 LabelInfos = Dict[LabelName, ProgramNames]
 TaxonInfos = Dict[TaxonName, ProgramNames]
-ProgramToPrograms = Dict[ProgramName, ProgramNames]
+ProgramToPrograms = Dict[ProgramName, ProgramNames]  # For import-export stuff.
 
-class JsonDatabase(TypedDict):
+class JsonTagDatabase(TypedDict):  # Schema of the JSON version of a tag database.
     programs: ProgramInfos
     labels: LabelInfos
     taxa: TaxonInfos
@@ -88,31 +105,26 @@ class JsonDatabase(TypedDict):
     exportations: ProgramToPrograms
 
 
+# --------------------------------------------------------------------------------------------------
 # Pipeline dictionary
-#
-# The pipeline file consists in a Python dictionary which, for security purposes, will be
-# evaluated by ast.literal_eval: https://docs.python.org/3/library/ast.html#ast.literal_eval).
-#
-# Main benefits over JSON:
-# - with raw strings r"...", no need to double-escape backslashes in regexes;
-# - trailing commas;
-# - comments!
+# --------------------------------------------------------------------------------------------------
 
-Operation = NewType("Operation", str)
+Operation = NewType("Operation", str) # "exclude", "include", "include all", "include any", etc.
 
-Criterion = Union[str, Tuple[str, str, str]] # either a pattern or a semantic triple
+Criterion = Union[str, Tuple[str, str, str]] # Either a pattern or a semantic triple.
 
 class Command(TypedDict):
     operation: Operation
-    data: Union[str, List[Criterion]]
-    filtered_out: ProgramNames # to be populated by the execution of the command
+    data: Union[str, List[Criterion]]  # Either a shell command or a list of criteria.
 
-Predicate = Callable[[int, int], bool]
+Predicate = Callable[[PoorSpan, PoorSpan], bool] # A value of the dictionary `compare_spans`.
 
+
+# --------------------------------------------------------------------------------------------------
 # Recommendations
+# --------------------------------------------------------------------------------------------------
 
-AssessedPrograms = List[Tuple[float, ProgramName]]
-
+AssessedPrograms = List[Tuple[float, ProgramName]] # Associative array between costs and programs
 AssessmentStrategy = Literal["zeno", "linear"]
 
 # fmt:on

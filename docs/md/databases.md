@@ -125,7 +125,7 @@ On the provided [simple programs](https://repo/examples/simple/programs), the ex
 
 ![](../resources/sql_query_example.png)
 
-Note however that the same list of programs (with learning costs!) could have been obtained by feeding the function `paroxython.recommend_programs.Recommendations.run_pipeline` with an elementary command:
+Note however that the same list of programs (with the nice addition of learning costs) could have been obtained by feeding the function `paroxython.recommend_programs.Recommendations.run_pipeline` with an elementary command:
 
 ```python
     {

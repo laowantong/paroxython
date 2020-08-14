@@ -175,7 +175,7 @@ It is sometimes interesting to know how the spans of two taxa of the same progra
 To express a relation \(\mathfrak{R}\) between the spans of two taxa, we start from the algebra devised in 1983 by James F. Allen in his seminal paper ([PDF](http://cse.unl.edu/~choueiry/Documents/Allen-CACM1983.pdf)) about temporal intervals[^Allen1983]. The so-called Allen's interval algebra defines 13 basic operators which capture all possible relations between two intervals \(X=(x_1, x_2)\) and \(Y=(y_1, y_2)\). The table below uses his terminology:
 
 [^Allen1983]:
-    Allen, James F. (26 Nov. 1983). _Maintaining knowledge about temporal intervals_. Communications of the ACM. 26 (11): 832–843. doi:10.1145/182.358434
+    Allen, James F. (1983). _Maintaining knowledge about temporal intervals_. Communications of the ACM. 26 (11): 832–843. doi:10.1145/182.358434
 
 | Examples | \(\mathfrak{R}\) on endpoints | \(X \mathbin{\mathfrak{R}} Y\)  | \(Y \mathbin{\mathfrak{R}} X\)  | Keys |
 |:----:|:----:|:----:|:----:|:----:|

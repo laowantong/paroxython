@@ -34,6 +34,6 @@ Paroxython is on [GitHub](https://github.com/laowantong/paroxython) and welcomes
 - submit your personal changes to [`taxonomy.tsv`](https://repo/paroxython/resources/taxonomy.tsv) for integration in the default taxonomy;
 - translate some of this documentation into English.
 
-If you're a researcher and interested in a scientific collaboration, I would love to hear from you. Drop an email to my dot-separated name at `univ-lorraine.fr`.
+If you're a researcher and interested in a scientific collaboration, I would love to hear from you. Drop an email to my dot-separated name (cf. previous section) at `univ-lorraine.fr`.
 
 If you use Paroxython for your programming course, I am keen to hear your feedback!

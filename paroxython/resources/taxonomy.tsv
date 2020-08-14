@@ -39,6 +39,7 @@ condition/inequality/chained/\1	chained_inequalities:(\d+)
 condition/yoda	yoda_comparison:(Eq|NotEq|Is|IsNot)
 def/argument/\1	function_argument_flavor:(.+)
 def/argument/no	function_without_arguments:.+
+def/argument/throwaway	function_argument:_
 def/class	node:ClassDef
 def/decorated	decorated_function:.+
 def/function	function_returning_something:.+
@@ -87,6 +88,7 @@ flow/loop/for/arithmetic/start	for_range:[^:]+:[^:]+
 flow/loop/for/arithmetic/start/step	for_range:[^:]+:[^:]+:(?!-)[^:]+
 flow/loop/for/arithmetic/start/step/backwards	for_range:[^:]+:[^:]+:-[^:]+
 flow/loop/for/elements	for_each
+flow/loop/for/elements/throwaway	for:_
 flow/loop/for/elements_and_indexes	for_indexes_elements
 flow/loop/for/indexes	for_indexes
 flow/loop/for/nested/\1	nested_for:(.+)
@@ -235,6 +237,7 @@ var/assignment/sequence/swap	swap_with_aux
 var/assignment/single	single_assignment:.+
 var/deletion	node:Delete
 var/deletion/unbinding	unbinding:.+
+var/assignment/throwaway	assignment_lhs_identifier:_
 -- EOF	EOF
 call/function/builtin/print/multiple	TODO
 call/function/builtin/print/newline	TODO

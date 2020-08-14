@@ -6,18 +6,18 @@ import pytest
 from make_snapshot import make_snapshot
 
 import context
-from paroxython.make_db import Database, prepared_labels, prepared_taxa
+from paroxython.make_db import TagDatabase, prepared_labels, prepared_taxa
 from paroxython.user_types import Span
 
 
 def test_snapshot_mini_db(capsys):
-    db = Database(Path("examples/mini/programs"), ignore_timestamps=True)
+    db = TagDatabase(Path("examples/mini/programs"), ignore_timestamps=True)
     make_snapshot(Path("examples/mini/programs_db.json"), db.get_json(), capsys)
     db.write_sqlite(Path("examples/mini/programs_db.sqlite"))
 
 
 def test_snapshot_programming_idioms_db(capsys):
-    db = Database(Path("examples/idioms/programs"), ignore_timestamps=True)
+    db = TagDatabase(Path("examples/idioms/programs"), ignore_timestamps=True)
     make_snapshot(Path("examples/idioms/programs_db.json"), db.get_json(), capsys)
 
 

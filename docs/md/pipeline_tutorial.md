@@ -152,6 +152,6 @@ Since this is the last filter in our tutorial, let's summarize what we've seen b
 ```
 
 .. tip::
-    This command pipeline is _not_ a JSON file, but a Python program, or more restrictively a Python **expression**. As such, it offers several amenities you surely know and love: comments, trailing commas, r-strings, etc.
+    This command pipeline is _not_ a JSON file, but a Python program, or more restrictively a Python **expression**. As such, it offers several amenities you surely know and love: comments, trailing commas, r-strings (no need to double-escape backslashes in regexes!), etc. For security purposes, this file is not imported, but read as a text and evaluated by [`ast.literal_eval()`](https://docs.python.org/3/library/ast.html#ast.literal_eval).
 
 This is the end of our pipeline tutorial. If you dare, [read on](#deep-in-the-pipeline) for more advanced features (regular expressions, span algebra, semantic triples, negations).

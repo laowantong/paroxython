@@ -85,7 +85,7 @@ def normalize_predicate(
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
 <dt id="paroxython.normalize_predicate.normalize_predicate"><code class="name flex">
-<span>def <span class="ident">normalize_predicate</span></span>(<span>predicate: str, <br>search_not_1: Callable = &lt;built-in method search of regex&gt;, <br>search_not_2: Callable = &lt;built-in method search of regex&gt;, <br>sub_is: Callable = &lt;built-in method sub of regex&gt;, <br>sub_forbidden_chars: Callable = &lt;built-in method sub of regex&gt;, <br>sub_identity: Callable = &lt;built-in method sub of regex&gt;, <br>sub_one_x: Callable = &lt;built-in method sub of regex&gt;, <br>sub_one_y: Callable = &lt;built-in method sub of regex&gt;<br>) ‑> Tuple[Callable[[int, int], bool], bool]</span>
+<span>def <span class="ident">normalize_predicate</span></span>(<span>predicate: str, <br>search_not_1: Callable = &lt;built-in method search of regex&gt;, <br>search_not_2: Callable = &lt;built-in method search of regex&gt;, <br>sub_is: Callable = &lt;built-in method sub of regex&gt;, <br>sub_forbidden_chars: Callable = &lt;built-in method sub of regex&gt;, <br>sub_identity: Callable = &lt;built-in method sub of regex&gt;, <br>sub_one_x: Callable = &lt;built-in method sub of regex&gt;, <br>sub_one_y: Callable = &lt;built-in method sub of regex&gt;<br>) ‑> Tuple[Callable[[Tuple[int, int], Tuple[int, int]], bool], bool]</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Ensure that the given predicate is correct or can be salvaged.</p>

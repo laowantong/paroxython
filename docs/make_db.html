@@ -62,12 +62,12 @@ from .user_types import (
 )
 
 __pdoc__ = {
-    &#34;Database&#34;: &#34;&#34;,
-    &#34;Database.__init__&#34;: True,
+    &#34;TagDatabase&#34;: &#34;&#34;,
+    &#34;TagDatabase.__init__&#34;: True,
 }
 
 
-class Database:
+class TagDatabase:
     def __init__(self, directory: Path, ignore_timestamps: bool = False, **kwargs) -&gt; None:
         self.directory = directory
         programs: Programs = labelled_programs(directory, **kwargs)
@@ -276,7 +276,7 @@ if __name__ == &#34;__main__&#34;:
     # fmt:on
     print()
     for directory in directories:
-        db = Database(Path(directory), ignore_timestamps=True)
+        db = TagDatabase(Path(directory), ignore_timestamps=True)
         db.write_json()
         db.write_sqlite()
     print()</code></pre>
@@ -578,8 +578,8 @@ simple couples of integers.</p>
 <section>
 <h2 class="section-title" id="header-classes">Classes</h2>
 <dl>
-<dt id="paroxython.make_db.Database"><code class="flex name class">
-<span>class <span class="ident">Database</span></span>
+<dt id="paroxython.make_db.TagDatabase"><code class="flex name class">
+<span>class <span class="ident">TagDatabase</span></span>
 </code></dt>
 <dd>
 <div class="desc"></div>
@@ -588,7 +588,7 @@ simple couples of integers.</p>
 <span>Expand source code</span>
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L37-L242" class="git-link">Browse GitHub</a>
 </summary>
-<pre><code class="python">class Database:
+<pre><code class="python">class TagDatabase:
     def __init__(self, directory: Path, ignore_timestamps: bool = False, **kwargs) -&gt; None:
         self.directory = directory
         programs: Programs = labelled_programs(directory, **kwargs)
@@ -714,7 +714,7 @@ simple couples of integers.</p>
 </details>
 <h3>Methods</h3>
 <dl>
-<dt id="paroxython.make_db.Database.__init__"><code class="name flex">
+<dt id="paroxython.make_db.TagDatabase.__init__"><code class="name flex">
 <span>def <span class="ident">__init__</span></span>(<span>self, <br>directory: pathlib.Path, <br>ignore_timestamps: bool = False, <br>**kwargs<br>) ‑> NoneType</span>
 </code></dt>
 <dd>
@@ -790,11 +790,11 @@ a serialization-ready dictionary indexed by program names.</li>
         }</code></pre>
 </details>
 </dd>
-<dt id="paroxython.make_db.Database.get_json"><code class="name flex">
+<dt id="paroxython.make_db.TagDatabase.get_json"><code class="name flex">
 <span>def <span class="ident">get_json</span></span>(<span>self) ‑> str</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Dump the constructed <code><a title="paroxython.make_db.Database" href="#paroxython.make_db.Database">Database</a></code> object as a <abbr title="JavaScript Object Notation">JSON</abbr> string.</p>
+<div class="desc"><p>Dump the constructed <code><a title="paroxython.make_db.TagDatabase" href="#paroxython.make_db.TagDatabase">TagDatabase</a></code> object as a <abbr title="JavaScript Object Notation">JSON</abbr> string.</p>
 <h2 id="description">Description</h2>
 <p>Schema and purpose <a href="docs_user_manual/index.html#the-json-database">in the user manual</a>.</p>
 <h2 id="example">Example</h2>
@@ -835,11 +835,11 @@ list on a single line, e.g.:</p>
     return text</code></pre>
 </details>
 </dd>
-<dt id="paroxython.make_db.Database.write_json"><code class="name flex">
+<dt id="paroxython.make_db.TagDatabase.write_json"><code class="name flex">
 <span>def <span class="ident">write_json</span></span>(<span>self, <br>db_path: Union[pathlib.Path, NoneType] = None<br>) ‑> NoneType</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Call <code><a title="paroxython.make_db.Database.get_json" href="#paroxython.make_db.Database.get_json">Database.get_json()</a></code> and write the result to a file.</p>
+<div class="desc"><p>Call <code><a title="paroxython.make_db.TagDatabase.get_json" href="#paroxython.make_db.TagDatabase.get_json">TagDatabase.get_json()</a></code> and write the result to a file.</p>
 <h2 id="args">Args</h2>
 <dl>
 <dt><strong><code>db_path</code></strong> :&ensp;<code>Optional[Path]</code>, optional</dt>
@@ -858,11 +858,11 @@ directory. Defaults to <code>None</code>.</dd>
     db_path.write_text(self.get_json())</code></pre>
 </details>
 </dd>
-<dt id="paroxython.make_db.Database.write_sqlite"><code class="name flex">
+<dt id="paroxython.make_db.TagDatabase.write_sqlite"><code class="name flex">
 <span>def <span class="ident">write_sqlite</span></span>(<span>self, <br>db_path: Union[pathlib.Path, NoneType] = None<br>) ‑> NoneType</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Dump the constructed <code><a title="paroxython.make_db.Database" href="#paroxython.make_db.Database">Database</a></code> object as a SQLite database (experimental).</p>
+<div class="desc"><p>Dump the constructed <code><a title="paroxython.make_db.TagDatabase" href="#paroxython.make_db.TagDatabase">TagDatabase</a></code> object as a SQLite database (experimental).</p>
 <h2 id="args">Args</h2>
 <dl>
 <dt><strong><code>db_path</code></strong> :&ensp;<code>Optional[Path]</code>, optional</dt>
@@ -997,12 +997,12 @@ and the directory provided to the class constructor is <code>"foobar"</code>, fa
 <li><h3><a href="#header-classes">Classes</a></h3>
 <ul>
 <li>
-<h4><code><a title="paroxython.make_db.Database" href="#paroxython.make_db.Database">Database</a></code></h4>
+<h4><code><a title="paroxython.make_db.TagDatabase" href="#paroxython.make_db.TagDatabase">TagDatabase</a></code></h4>
 <ul class="">
-<li><code><a title="paroxython.make_db.Database.__init__" href="#paroxython.make_db.Database.__init__">__init__</a></code></li>
-<li><code><a title="paroxython.make_db.Database.get_json" href="#paroxython.make_db.Database.get_json">get_json</a></code></li>
-<li><code><a title="paroxython.make_db.Database.write_json" href="#paroxython.make_db.Database.write_json">write_json</a></code></li>
-<li><code><a title="paroxython.make_db.Database.write_sqlite" href="#paroxython.make_db.Database.write_sqlite">write_sqlite</a></code></li>
+<li><code><a title="paroxython.make_db.TagDatabase.__init__" href="#paroxython.make_db.TagDatabase.__init__">__init__</a></code></li>
+<li><code><a title="paroxython.make_db.TagDatabase.get_json" href="#paroxython.make_db.TagDatabase.get_json">get_json</a></code></li>
+<li><code><a title="paroxython.make_db.TagDatabase.write_json" href="#paroxython.make_db.TagDatabase.write_json">write_json</a></code></li>
+<li><code><a title="paroxython.make_db.TagDatabase.write_sqlite" href="#paroxython.make_db.TagDatabase.write_sqlite">write_sqlite</a></code></li>
 </ul>
 </li>
 </ul>

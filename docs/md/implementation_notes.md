@@ -2,7 +2,7 @@
 
 ## User types
 
-Paroxython makes heavy use of Python 3.5+ [type hints](https://docs.python.org/3/library/typing.html). They are documented directly in the source code. Browse [user_types.py](https://repo/paroxython/user_types.py) on GitHub.
+Paroxython makes heavy use of Python 3.5+ [type hints](https://docs.python.org/3/library/typing.html). They are documented directly in the [user_types.py](https://repo/paroxython/user_types.py).
 
 ## Default argument trick
 

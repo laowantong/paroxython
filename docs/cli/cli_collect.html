@@ -64,7 +64,7 @@
 </summary>
 <pre><code class="python">from pathlib import Path
 
-from ..make_db import Database
+from ..make_db import TagDatabase
 
 
 def cli_wrapper(args):
@@ -76,7 +76,7 @@ def cli_wrapper(args):
         taxonomy_path = directory.parent / &#34;taxonomy.tsv&#34;
         if not taxonomy_path.is_file():
             taxonomy_path = None
-    db = Database(
+    db = TagDatabase(
         directory=directory,
         ignore_timestamps=args[&#34;--no_timestamp&#34;],
         cleanup_strategy=args[&#34;--cleanup&#34;],  # -&gt; list_programs
@@ -119,7 +119,7 @@ def cli_wrapper(args):
         taxonomy_path = directory.parent / &#34;taxonomy.tsv&#34;
         if not taxonomy_path.is_file():
             taxonomy_path = None
-    db = Database(
+    db = TagDatabase(
         directory=directory,
         ignore_timestamps=args[&#34;--no_timestamp&#34;],
         cleanup_strategy=args[&#34;--cleanup&#34;],  # -&gt; list_programs

@@ -49,7 +49,7 @@ from .user_types import (
     AssessedPrograms,
     Command,
     Criterion,
-    JsonDatabase,
+    JsonTagDatabase,
     Operation,
     ProgramNames,
 )
@@ -68,7 +68,7 @@ class MalformedData(Exception):
 class Recommendations:
     def __init__(
         self,
-        db: JsonDatabase,
+        db: JsonTagDatabase,
         base_path: Optional[Path] = None,
         title_format: str = "`{name}`",
         **kwargs,
@@ -76,8 +76,8 @@ class Recommendations:
         r"""Initialize a recommendation system for the given database of programs tagged with taxa.
 
         Args:
-            db (JsonDatabase): A Python dictionary containing the JSON structure constructed by
-                `paroxython.make_db.Database`, i.e. the result of the parsing, labelling and
+            db (JsonTagDatabase): A Python dictionary containing the JSON structure constructed by
+                `paroxython.make_db.TagDatabase`, i.e. the result of the parsing, labelling and
                 taxon-ifying of a set of programs
                 ([example](https://repo/examples/simple/programs_db.json)).
                 The execution relies on the fields `programs`, `taxa`, `importations` and

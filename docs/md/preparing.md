@@ -1,5 +1,16 @@
 # Preparing your program collection
 
+**tl;dr.** There is **nothing to prepare** before launching Paroxython. Nevertheless, for best results:
+
+- don't name things like a first year student (follow PEP 8, good practices and common sense);
+- do use an `else` after the `return` statement of a `then` branch which is **not** a guard;
+- don't try to outsmart Paroxython: you're sure to win... a lot of false negatives;
+- give manual hints for:
+    - correcting a false positive or negative;
+    - adding metadata (better than a nested directory structure);
+    - resolving duck typing on built-in types, if needed;
+- be direct.
+
 ## Naming things
 
 ### Capitalization
@@ -87,6 +98,68 @@ def change_separator(s, old, new):
 ## Flow
 
 ## Style
+
+### Be direct
+
+Sometimes, using an intermediate identifier will make Paroxython miss a feature of your program.
+
+### Early exits
+
+It's not the 80's anymore[^Roberts1995]. Don't think you're being rude if you keep things simple by exiting early.
+
+[^Roberts1995]:
+    Roberts, Eric. (1995). _Loop exits and structured programming: reopening the debate_. Proceedings of the 26th SIGCSE Technical Symposium on Computer Science Education, 1995, Nashville, Tennessee, USA, March 2-4, 1995: 268-272. doi:10.1145/199688.199815.
+
+For instance, Paroxython will rightly identify a [universal quantification](https://en.wikipedia.org/wiki/Universal_quantification) (`pattern/elements/satisfy/all`) in:
+
+```python
+def is_prime(n):
+    for candidate in range(2, n):
+        if n % candidate == 0:
+            return False
+    return n > 1
+```
+
+Not so if you try to force the predicate into the single-point-of-exit dogma of [Pascal](https://en.wikipedia.org/wiki/Pascal_(programming_language))[^pascal_exit]:
+
+[^pascal_exit]:
+    There are numerous Pascal dialects, and some of them support a C-like `return` equivalent (procedure `exit`) since [at least 1992](https://retrocomputing.stackexchange.com/questions/3296/when-were-the-analogs-of-the-c-operators-break-and-continue-introduced-in-pa). This extension is not part of the Pascal standard, though.
+
+```python
+# Once upon a time... in academia
+def is_prime(n):
+    candidate = 2
+    divisor_found = False
+    while candidate < n and not divisor_found:
+        if n % candidate == 0:
+            divisor_found = True
+        candidate += 1
+    return n > 1 and not divisor_found
+```
+
+Apart from being twice longer, more error-prone and harder to understand, this style defeats Paroxython, and will always do, sorry.
+
+Likewise, consider solving the loop-and-a-half problem[^Roberts1995] this way:
+
+```python
+def input_number_between(prompt, lower_bound, upper_bound):
+    while True:
+        number = literal_eval(input(prompt))
+        if lower_bound <= number <= upper_bound:
+            return number
+        print(f"Your number should be between {lower_bound} and {upper_bound}!")
+```
+
+... to make it tagged `pattern/inputs/find_first_good`.
+
+..tip::
+    As a general rule, opt for `while True` if (and only if) at least one of the three following conditions holds:
+
+    1. it is possible to never reach a terminal state;
+    2. it is impossible to infer the next state from the states already observed;
+    3. it is possible to observe the same state more than once.
+
+To put things in perspective, with a modern language like Python, you'd better think of [control flags](https://refactoring.guru/remove-control-flag) as code smells. In any case, take a look at our [specifications of iterative patterns](https://repo/paroxython/resources/spec.md#iterative-patterns). Should there be anything you don't agree with, no problem: just delete the corresponding translations from your copy of [taxonomy.tsv](https://repo/paroxython/resources/taxonomy.tsv).
 
 ### Guards
 
@@ -275,8 +348,7 @@ type/sequence/list	            member_call_method:list:(count|index|pop|...)
 call/method/sequence/list/\1	member_call_method:list:(count|index|pop|...)
 ```
 
-This means that you can hint at every ambiguous list method (`count()`, etc.) by
-deleting the original label and adding a new one with an inserted `":list"`:
+This means that you can hint at every ambiguous list method (`count()`, etc.) by deleting the original label and adding a new one with an inserted `":list"`:
 
 ```python
 a.count(b)  # paroxython: -member_call_method:count +member_call_method:list:count
@@ -300,4 +372,7 @@ But if you feel like it, just fire up this 1 weird pipeline:
 }
 ```
 
-... and happy duck hunting!
+... and happy duck hunting[^type_hints]!
+
+[^type_hints]:
+    For now, Paroxython ignores your type hints, but may take them into account in the future.

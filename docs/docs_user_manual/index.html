@@ -46,6 +46,19 @@ tree.draw(data, options);
 </header>
 <section id="section-intro">
 <h1 id="preparing-your-program-collection">Preparing your program collection</h1>
+<p><strong>tl;dr.</strong> There is <strong>nothing to prepare</strong> before launching Paroxython. Nevertheless, for best results:</p>
+<ul>
+<li>don't name things like a first year student (follow PEP 8, good practices and common sense);</li>
+<li>do use an <code>else</code> after the <code>return</code> statement of a <code>then</code> branch which is <strong>not</strong> a guard;</li>
+<li>don't try to outsmart Paroxython: you're sure to win&hellip; a lot of false negatives;</li>
+<li>give manual hints for:<ul>
+<li>correcting a false positive or negative;</li>
+<li>adding metadata (better than a nested directory structure);</li>
+<li>resolving duck typing on built-in types, if needed;</li>
+</ul>
+</li>
+<li>be direct.</li>
+</ul>
 <h2 id="naming-things">Naming things</h2>
 <h3 id="capitalization">Capitalization</h3>
 <p>Paroxython takes advantage of the official <a href="https://www.python.org/dev/peps/pep-0008/#naming-conventions">PEP 8 naming conventions</a>. In a nutshell:</p>
@@ -103,6 +116,48 @@ foo = compute_square(foo)
 <p>&hellip; nothing indicates that <code>s</code> is a <code>type/sequence/string</code> except from the call of its method <code>split()</code>.</p>
 <h2 id="flow">Flow</h2>
 <h2 id="style">Style</h2>
+<h3 id="be-direct">Be direct</h3>
+<p>Sometimes, using an intermediate identifier will make Paroxython miss a feature of your program.</p>
+<h3 id="early-exits">Early exits</h3>
+<p>It's not the 80's anymore<sup id="fnref:Roberts1995"><a class="footnote-ref" href="#fn:Roberts1995" rel="footnote">1</a></sup>. Don't think you're being rude if you keep things simple by exiting early.</p>
+<p>For instance, Paroxython will rightly identify a <a href="https://en.wikipedia.org/wiki/Universal_quantification">universal quantification</a> (<code>pattern/elements/satisfy/all</code>) in:</p>
+<pre><code class="python">def is_prime(n):
+    for candidate in range(2, n):
+        if n % candidate == 0:
+            return False
+    return n &gt; 1
+</code></pre>
+<p>Not so if you try to force the predicate into the single-point-of-exit dogma of <a href="https://en.wikipedia.org/wiki/Pascal_(programming_language)">Pascal</a><sup id="fnref:pascal_exit"><a class="footnote-ref" href="#fn:pascal_exit" rel="footnote">2</a></sup>:</p>
+<pre><code class="python"># Once upon a time... in academia
+def is_prime(n):
+    candidate = 2
+    divisor_found = False
+    while candidate &lt; n and not divisor_found:
+        if n % candidate == 0:
+            divisor_found = True
+        candidate += 1
+    return n &gt; 1 and not divisor_found
+</code></pre>
+<p>Apart from being twice longer, more error-prone and harder to understand, this style defeats Paroxython, and will always do, sorry.</p>
+<p>Likewise, consider solving the loop-and-a-half problem<sup id="fnref2:Roberts1995"><a class="footnote-ref" href="#fn:Roberts1995" rel="footnote">1</a></sup> this way:</p>
+<pre><code class="python">def input_number_between(prompt, lower_bound, upper_bound):
+    while True:
+        number = literal_eval(input(prompt))
+        if lower_bound &lt;= number &lt;= upper_bound:
+            return number
+        print(f&quot;Your number should be between {lower_bound} and {upper_bound}!&quot;)
+</code></pre>
+<p>&hellip; to make it tagged <code>pattern/inputs/find_first_good</code>.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>As a general rule, opt for <code>while True</code> if (and only if) at least one of the three following conditions holds:</p>
+<ol>
+<li>it is possible to never reach a terminal state;</li>
+<li>it is impossible to infer the next state from the states already observed;</li>
+<li>it is possible to observe the same state more than once.</li>
+</ol>
+</div>
+<p>To put things in perspective, with a modern language like Python, you'd better think of <a href="https://refactoring.guru/remove-control-flag">control flags</a> as code smells. In any case, take a look at our <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md#iterative-patterns">specifications of iterative patterns</a>. Should there be anything you don't agree with, no problem: just delete the corresponding translations from your copy of <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/taxonomy.tsv">taxonomy.tsv</a>.</p>
 <h3 id="guards">Guards</h3>
 <p>Some guidelines and linters (e.g.,
 <a href="https://llvm.org/docs/CodingStandards.html#don-t-use-else-after-a-return">LLVM Coding Standards</a>,
@@ -131,7 +186,7 @@ Although this is technically true, our approach is more nuanced. Specifically, w
     else: # removing this branch would hurt readability
         return b
 </code></pre>
-<p>So, both styles have their uses. Consider choosing one as an opportunity to better communicate your intention<sup id="fnref:swift_guard"><a class="footnote-ref" href="#fn:swift_guard" rel="footnote">1</a></sup>. In any case, remember that Paroxython will try to tag every relevant <code>if</code> statement as <code>flow/conditional/guard</code> (see <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md#feature-if_guard">here</a> for details on the heuristic).</p>
+<p>So, both styles have their uses. Consider choosing one as an opportunity to better communicate your intention<sup id="fnref:swift_guard"><a class="footnote-ref" href="#fn:swift_guard" rel="footnote">3</a></sup>. In any case, remember that Paroxython will try to tag every relevant <code>if</code> statement as <code>flow/conditional/guard</code> (see <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md#feature-if_guard">here</a> for details on the heuristic).</p>
 <h2 id="manual-hints">Manual hints</h2>
 <p>On a given source code, the tagging algorithm may sometimes result in false positives or false negatives. Moreover, the semantics of some features may be subjective (e.g., <code>meta/topic/fun</code>) or beyond the capabilities of Paroxython (e.g., deciding the relevance of the <code>short_circuit</code> property of a boolean operator). In any case, the user has the possibility to manually tag certain lines of their source code to hint either the presence or absence of a given feature.</p>
 <h3 id="addition">Addition</h3>
@@ -256,11 +311,10 @@ call/method/sequence_duck/\1    member_call_method:(count|index)
 <pre><code class="plain">type/sequence/list              member_call_method:list:(count|index|pop|...)
 call/method/sequence/list/\1    member_call_method:list:(count|index|pop|...)
 </code></pre>
-<p>This means that you can hint at every ambiguous list method (<code>count()</code>, etc.) by
-deleting the original label and adding a new one with an inserted <code>":list"</code>:</p>
+<p>This means that you can hint at every ambiguous list method (<code>count()</code>, etc.) by deleting the original label and adding a new one with an inserted <code>":list"</code>:</p>
 <pre><code class="python">a.count(b)  # paroxython: -member_call_method:count +member_call_method:list:count
 </code></pre>
-<p>Now, the generated taxa will be: <code>type/sequence/list</code> and <code>call/method/sequence/list/count</code><sup id="fnref:explicit_duck"><a class="footnote-ref" href="#fn:explicit_duck" rel="footnote">2</a></sup>. As for the duck, it is no more. It has ceased to be. It is expired and gone to meet its maker. It has run down the curtain and joined the choir invisible. This is an ex-duck.</p>
+<p>Now, the generated taxa will be: <code>type/sequence/list</code> and <code>call/method/sequence/list/count</code><sup id="fnref:explicit_duck"><a class="footnote-ref" href="#fn:explicit_duck" rel="footnote">4</a></sup>. As for the duck, it is no more. It has ceased to be. It is expired and gone to meet its maker. It has run down the curtain and joined the choir invisible. This is an ex-duck.</p>
 <p>Admittedly, all of this may be overkill, since a program featuring a list would most of the time feature it in several places, most of them without ambiguity. After all, generally speaking, you just want Paroxython to help you find programs in your repository, but don't need it to find features in a given program (you know better).</p>
 <p>But if you feel like it, just fire up this 1 weird pipeline:</p>
 <pre><code class="python">{
@@ -270,8 +324,7 @@ deleting the original label and adding a new one with an inserted <code>":list"<
     ]
 }
 </code></pre>
-<p>&hellip; and happy duck hunting!
-<br></p>
+<p>&hellip; and happy duck hunting<sup id="fnref:type_hints"><a class="footnote-ref" href="#fn:type_hints" rel="footnote">5</a></sup>!</p>
 <h1 id="pipeline-tutorial-getting-recommendations">Pipeline tutorial: getting recommendations</h1>
 <p>This tutorial walks you through a series of little “teacher stories” to illustrate how to write the pipeline of commands used by Paroxython's recommendation system.</p>
 <p>You run this pipeline on command line with:</p>
@@ -395,19 +448,19 @@ type, it is enough to exclude all taxa starting with <code>type/non_sequence</co
 </code></pre>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>This command pipeline is <em>not</em> a <abbr title="JavaScript Object Notation">JSON</abbr> file, but a Python program, or more restrictively a Python <strong>expression</strong>. As such, it offers several amenities you surely know and love: comments, trailing commas, r-strings, etc.</p>
+<p>This command pipeline is <em>not</em> a <abbr title="JavaScript Object Notation">JSON</abbr> file, but a Python program, or more restrictively a Python <strong>expression</strong>. As such, it offers several amenities you surely know and love: comments, trailing commas, r-strings (no need to double-escape backslashes in regexes!), etc. For security purposes, this file is not imported, but read as a text and evaluated by <a href="https://docs.python.org/3/library/ast.html#ast.literal_eval"><code>ast.literal_eval()</code></a>.</p>
 </div>
 <p>This is the end of our pipeline tutorial. If you dare, <a href="#deep-in-the-pipeline">read on</a> for more advanced features (regular expressions, span algebra, semantic triples, negations).
 <br></p>
 <h1 id="taxonomy">Taxonomy</h1>
 <h2 id="structure">Structure</h2>
-<p>In Paroxython, the default taxonomy is a <a href="https://en.wikipedia.org/wiki/Tree_(graph_theory)#Forest">forest</a>: a handful of separate trees with <code>flow</code>, <code>operator</code>, <code>meta</code>, <code>type</code>, etc. as their roots. We call <strong>taxon</strong><sup id="fnref:taxon"><a class="footnote-ref" href="#fn:taxon" rel="footnote">3</a></sup> a path from a root node to a leaf node. Thus:</p>
+<p>In Paroxython, the default taxonomy is a <a href="https://en.wikipedia.org/wiki/Tree_(graph_theory)#Forest">forest</a>: a handful of separate trees with <code>flow</code>, <code>operator</code>, <code>meta</code>, <code>type</code>, etc. as their roots. We call <strong>taxon</strong><sup id="fnref:taxon"><a class="footnote-ref" href="#fn:taxon" rel="footnote">6</a></sup> a path from a root node to a leaf node. Thus:</p>
 <pre><code class="plain">type/number/integer/literal
 </code></pre>
 <p>&hellip; describes, you know&hellip; this kind of literal which is a kind of integer which is a kind of number which is a kind of type (as an example, think of the answer to the ultimate question of life, the universe, and everything).</p>
 <p>In the visualization below, we have introduced the pseudo-root “•” to gather all the trees into one:</p>
 <div id="tree" style="width: 100%; height: 800px;"></div>
-<p>This comes<sup id="fnref:tree_sql"><a class="footnote-ref" href="#fn:tree_sql" rel="footnote">4</a></sup> straight from tagging the public repository <a href="https://github.com/TheAlgorithms/Python">The Algorithms - Python</a>. The size of a node is relative to the number of times the corresponding taxon's <em>prefix</em> appears in these programs.</p>
+<p>This comes<sup id="fnref:tree_sql"><a class="footnote-ref" href="#fn:tree_sql" rel="footnote">7</a></sup> straight from tagging the public repository <a href="https://github.com/TheAlgorithms/Python">The Algorithms - Python</a>. The size of a node is relative to the number of times the corresponding taxon's <em>prefix</em> appears in these programs.</p>
 <p>Hover over the nodes to see these numbers, or click them to navigate the tree. By the way, you may click on <code>type</code> to better follow the subsequent explanations.</p>
 <h2 id="mapping-the-labels-onto-taxa">Mapping the labels onto taxa</h2>
 <p>Paroxython does not directly grow these forest of taxa. Remember, a program is first tagged with labels (as specified in <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md"><code>spec.md</code></a>). Those are then translated into taxa by a purely morphological operation (search and replace), without any more reference to the original source code.</p>
@@ -529,14 +582,14 @@ type, it is enough to exclude all taxa starting with <code>type/non_sequence</co
 <p>For these reasons, choosing to root our taxonomy in the four basic notions of the typed lambda calculus should be seen more as a tribute than a formal commitment. More specifically:</p>
 <ul>
 <li><code>var</code> will essentially bring together everything relating to the concept of assignment and scoping;</li>
-<li><code>def</code> will accommodate not only lambda functions, but named ones, methods, generators and even classes, defined in place or by importation. Note that this does <em>not</em> include variable definitions<sup id="fnref:import_var"><a class="footnote-ref" href="#fn:import_var" rel="footnote">6</a></sup>.</li>
+<li><code>def</code> will accommodate not only lambda functions, but named ones, methods, generators and even classes, defined in place or by importation. Note that this does <em>not</em> include variable definitions<sup id="fnref:import_var"><a class="footnote-ref" href="#fn:import_var" rel="footnote">9</a></sup>.</li>
 <li><code>call</code> will cover any call to anything with a <code>__call__()</code> method, which Python calls a callable (sorry);</li>
 <li>finally, <code>type</code> will welcome all types, no purity required.</li>
 </ul>
 <h3 id="imperative-needs-flow">Imperative needs: <code>flow</code></h3>
-<p>The imperative nature of Python demands that we introduce the concept of control <code>flow</code>, under which we put the loops, the conditionals, and some other animals<sup id="fnref:sequence"><a class="footnote-ref" href="#fn:sequence" rel="footnote">7</a></sup>.</p>
+<p>The imperative nature of Python demands that we introduce the concept of control <code>flow</code>, under which we put the loops, the conditionals, and some other animals<sup id="fnref:sequence"><a class="footnote-ref" href="#fn:sequence" rel="footnote">10</a></sup>.</p>
 <h3 id="for-your-convenience-operator-condition-subscript">For your convenience: <code>operator</code>, <code>condition</code>, <code>subscript</code></h3>
-<p>Again, those are mainly practical choices. After all, an <code>operator</code> is nothing more than an unassuming function call with a funny name and a funny syntax. And a <code>condition</code><sup id="fnref:condition"><a class="footnote-ref" href="#fn:condition" rel="footnote">8</a></sup>, a combination of function calls which happens to evaluate to a particular <code>type</code>. As for the creation of the root <code>subscript</code>, it comes from the observation that an lot of exciting programs can be written with sequences before venturing out to direct access (that is, as long as we treat Python lists as <a href="https://en.wikipedia.org/wiki/List_(abstract_data_type)">lists</a> and not <a href="https://en.wikipedia.org/wiki/Array_data_structure">arrays</a>). Not that in our default taxonomy, <code>subscript</code> includes slicing and dictionary access too.</p>
+<p>Again, those are mainly practical choices. After all, an <code>operator</code> is nothing more than an unassuming function call with a funny name and a funny syntax. And a <code>condition</code><sup id="fnref:condition"><a class="footnote-ref" href="#fn:condition" rel="footnote">11</a></sup>, a combination of function calls which happens to evaluate to a particular <code>type</code>. As for the creation of the root <code>subscript</code>, it comes from the observation that an lot of exciting programs can be written with sequences before venturing out to direct access (that is, as long as we treat Python lists as <a href="https://en.wikipedia.org/wiki/List_(abstract_data_type)">lists</a> and not <a href="https://en.wikipedia.org/wiki/Array_data_structure">arrays</a>). Not that in our default taxonomy, <code>subscript</code> includes slicing and dictionary access too.</p>
 <h3 id="zooming-out-pattern">Zooming out: <code>pattern</code></h3>
 <p>Now this is arguably the most interesting feature to tag in a beginner-level program. Under <code>pattern</code>, you will find numerous variants of the invaluable <a href="https://en.wikipedia.org/wiki/Fold_(higher-order_function)">accumulation pattern</a> (counting, summing, filtering, finding the “best” element, etc.), but also some early-exit patterns (testing for an universal or existential property, finding the first “good” element, etc.), whether by traversing a sequence or evolving a state. Although the relative size of <code>pattern</code> is the smallest of the taxonomy, note that it is almost that of <code>meta/program</code> (which has one occurrence per program): in other words, almost all programs feature such a pattern (which spans several lines).</p>
 <p>The loop patterns constitute an aspect of programming which is not always taught in a conscious and systematic way, and to which Paroxython intends to draw your attention.</p>
@@ -665,7 +718,7 @@ GROUP BY taxon, program
 </code></pre>
 <p>On the provided <a href="https://github.com/laowantong/paroxython/blob/master/examples/simple/programs">simple programs</a>, the execution yields:</p>
 <p><img alt="" src="../resources/sql_query_example.png"></p>
-<p>Note however that the same list of programs (with learning costs!) could have been obtained by feeding the function <code><a title="paroxython.recommend_programs.Recommendations.run_pipeline" href="../recommend_programs.html#paroxython.recommend_programs.Recommendations.run_pipeline">Recommendations.run_pipeline()</a></code> with an elementary command:</p>
+<p>Note however that the same list of programs (with the nice addition of learning costs) could have been obtained by feeding the function <code><a title="paroxython.recommend_programs.Recommendations.run_pipeline" href="../recommend_programs.html#paroxython.recommend_programs.Recommendations.run_pipeline">Recommendations.run_pipeline()</a></code> with an elementary command:</p>
 <pre><code class="python">    {
         &quot;operation&quot;: &quot;include&quot;,
         &quot;data&quot;: [&quot;type/non_sequence/dictionary/&quot;]
@@ -703,7 +756,7 @@ GROUP BY taxon, program
 ... ]
 </code></pre>
 <h2 id="regular-expression-patterns">Regular expression patterns</h2>
-<p>The first thing to clarify is that the strings which constitute the <code>data</code> lists are not simple names, but “descriptions” of names. These descriptions, or <strong>patterns</strong>, are written in the language of regular expressions, and more precisely in the dialect implemented by the third-party module <a href="https://pypi.org/project/regex/">regex</a><sup id="fnref:regex-credits"><a class="footnote-ref" href="#fn:regex-credits" rel="footnote">9</a></sup>.</p>
+<p>The first thing to clarify is that the strings which constitute the <code>data</code> lists are not simple names, but “descriptions” of names. These descriptions, or <strong>patterns</strong>, are written in the language of regular expressions, and more precisely in the dialect implemented by the third-party module <a href="https://pypi.org/project/regex/">regex</a><sup id="fnref:regex-credits"><a class="footnote-ref" href="#fn:regex-credits" rel="footnote">12</a></sup>.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>If you don't know how to write regular expressions, the good news is that you don't have to worry. Unless they contain certain special characters, they are self-descriptive. That means, for instance, that the string <code>"type/sequence/list"</code> happens to be a regular expression which precisely describes (or ”matches”) the string <code>"type/sequence/list"</code>. This is the case for all strings that are only made up of so-called <em>literal</em> characters.</p>
@@ -827,7 +880,7 @@ GROUP BY taxon, program
 <li>For instance, a <code>print()</code> statement whose span is inside the span of a function indicates that this function has a side-effect.</li>
 <li>A less trivial application stems from the fact that our taxonomy is multi-dimensional: each algorithmic feature can be associated with several taxa at the same time, characterizing it it along several dimensions. For instance, the taxa <code>flow/loop/for</code> and <code>flow/loop/while</code> describe the category of a loop; whereas the taxa <code>flow/loop/exit/early</code> and <code>flow/loop/exit/late</code> describe its exit behavior. These dimensions are independent and, although it is entirely possible to do so, our default taxonomy does not list the results of the cross-product (i.e., <code>flow/loop/for/exit/early</code>, <code>flow/loop/for/exit/late</code>, <code>flow/loop/while/exit/early</code> and <code>flow/loop/while/exit/late</code>). Querying an hypothetical taxon <code>flow/loop/for/exit/early</code> (or <code>flow/loop/exit/early/for</code>, by the way) comes down to querying the taxa <code>flow/loop/for</code> spanning the same lines as <code>flow/loop/exit/early</code>.</li>
 </ul>
-<p>To express a relation <span><span class="MathJax_Preview">\mathfrak{R}</span><script type="math/tex">\mathfrak{R}</script></span> between the spans of two taxa, we start from the algebra devised in 1983 by James F. Allen in his seminal paper (<a href="http://cse.unl.edu/~choueiry/Documents/Allen-CACM1983.pdf">PDF</a>) about temporal intervals<sup id="fnref:Allen1983"><a class="footnote-ref" href="#fn:Allen1983" rel="footnote">10</a></sup>. The so-called Allen's interval algebra defines 13 basic operators which capture all possible relations between two intervals <span><span class="MathJax_Preview">X=(x_1, x_2)</span><script type="math/tex">X=(x_1, x_2)</script></span> and <span><span class="MathJax_Preview">Y=(y_1, y_2)</span><script type="math/tex">Y=(y_1, y_2)</script></span>. The table below uses his terminology:</p>
+<p>To express a relation <span><span class="MathJax_Preview">\mathfrak{R}</span><script type="math/tex">\mathfrak{R}</script></span> between the spans of two taxa, we start from the algebra devised in 1983 by James F. Allen in his seminal paper (<a href="http://cse.unl.edu/~choueiry/Documents/Allen-CACM1983.pdf">PDF</a>) about temporal intervals<sup id="fnref:Allen1983"><a class="footnote-ref" href="#fn:Allen1983" rel="footnote">13</a></sup>. The so-called Allen's interval algebra defines 13 basic operators which capture all possible relations between two intervals <span><span class="MathJax_Preview">X=(x_1, x_2)</span><script type="math/tex">X=(x_1, x_2)</script></span> and <span><span class="MathJax_Preview">Y=(y_1, y_2)</span><script type="math/tex">Y=(y_1, y_2)</script></span>. The table below uses his terminology:</p>
 <table>
 <thead>
 <tr>
@@ -933,7 +986,7 @@ express our query as a disjunction of these two relations for the following prog
             return natural
 </code></pre>
 <p><strong>Strict inequalities.</strong> In addition to the existing relations, all combinations of strict and non-strict
-conditions are generated, for instance <span><span class="MathJax_Preview">x_1 &lt; x_2 &lt; y_1 \leq y_2</span><script type="math/tex">x_1 < x_2 < y_1 \leq y_2</script></span>. That adds up to 162 in total<sup id="fnref:predicate_count"><a class="footnote-ref" href="#fn:predicate_count" rel="footnote">11</a></sup>.</p>
+conditions are generated, for instance <span><span class="MathJax_Preview">x_1 &lt; x_2 &lt; y_1 \leq y_2</span><script type="math/tex">x_1 < x_2 < y_1 \leq y_2</script></span>. That adds up to 162 in total<sup id="fnref:predicate_count"><a class="footnote-ref" href="#fn:predicate_count" rel="footnote">14</a></sup>.</p>
 <p><strong>Keys.</strong> As we use many more operators than Allen, giving an English name to every single one is not an option. Paroxython actually identifies them by a unique key (see the last column of the table above) calculated like this:</p>
 <ol>
 <li>Start from the chain of equalities and inequalities that defines the relations between the two spans' endpoints: <span><span class="MathJax_Preview">y_1 &lt; x_1 = y_2 \leq x_2</span><script type="math/tex">y_1 < x_1 = y_2 \leq x_2</script></span>.</li>
@@ -1028,7 +1081,7 @@ or <code>"contains not"</code>), whether it's grammatically correct or not.</p>
     ]
   },
 </code></pre>
-<p>This property may be used to select the programs that include any subset of a given set of taxa. This can be done in a systematic way by converting<sup id="fnref:to_cnf"><a class="footnote-ref" href="#fn:to_cnf" rel="footnote">12</a></sup> the corresponding logical formula in <a href="https://en.wikipedia.org/wiki/Conjunctive_normal_form">conjunctive normal form</a>, and transforming each clause into a separate <code>"include"</code> command.</p>
+<p>This property may be used to select the programs that include any subset of a given set of taxa. This can be done in a systematic way by converting<sup id="fnref:to_cnf"><a class="footnote-ref" href="#fn:to_cnf" rel="footnote">15</a></sup> the corresponding logical formula in <a href="https://en.wikipedia.org/wiki/Conjunctive_normal_form">conjunctive normal form</a>, and transforming each clause into a separate <code>"include"</code> command.</p>
 <p>For instance, consider the two taxa <code>"flow/conditional"</code> and <code>"flow/loop"</code>. To keep only the programs that feature either a conditional (denoted by the literal <span><span class="MathJax_Preview">a</span><script type="math/tex">a</script></span>) or a loop (denoted by the literal <span><span class="MathJax_Preview">b</span><script type="math/tex">b</script></span>), but not both of them, express first the formula in <abbr title="Conjunctive Normal Form">CNF</abbr>: <span><span class="MathJax_Preview">(a \lor b) \land (\neg a \lor \neg b)</span><script type="math/tex">(a \lor b) \land (\neg a \lor \neg b)</script></span>, then translate it into:</p>
 <pre><code class="python">  {
     &quot;operation&quot;: &quot;include&quot;,
@@ -1068,7 +1121,7 @@ span <code>s_1</code> of such a taxon, there exists no span <code>s_2</code> of 
 </div>
 <p>For example, if the original (negative) predicate is <code>"taxon_pattern_1 not inside taxon_pattern_2"</code>, any program consisting in:</p>
 <ul>
-<li><code>"taxon_2{taxon_1}"</code><sup id="fnref:braces"><a class="footnote-ref" href="#fn:braces" rel="footnote">13</a></sup> is rejected;</li>
+<li><code>"taxon_2{taxon_1}"</code><sup id="fnref:braces"><a class="footnote-ref" href="#fn:braces" rel="footnote">16</a></sup> is rejected;</li>
 <li><code>"taxon_1"</code> is <strong>accepted</strong> (although there is no <code>taxon_2</code>);</li>
 <li><code>"taxon_2"</code> is <strong>rejected</strong> (no <code>taxon_1</code>);</li>
 <li><code>"taxon_1{taxon_2}"</code> is accepted;</li>
@@ -1106,12 +1159,22 @@ The previous link is automatically updated by build_pdoc.py.
 <div class="footnote">
 <hr>
 <ol>
+<li id="fn:Roberts1995">
+<p>Roberts, Eric. (1995). <em>Loop exits and structured programming: reopening the debate</em>. Proceedings of the 26th SIGCSE Technical Symposium on Computer Science Education, 1995, Nashville, Tennessee, USA, March 2-4, 1995: 268-272. doi:10.1145/199688.199815.&#160;<a class="footnote-backref" href="#fnref:Roberts1995" rev="footnote" title="Jump back to footnote 1 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:Roberts1995" rev="footnote" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:pascal_exit">
+<p>There are numerous Pascal dialects, and some of them support a C-like <code>return</code> equivalent (procedure <code>exit</code>) since <a href="https://retrocomputing.stackexchange.com/questions/3296/when-were-the-analogs-of-the-c-operators-break-and-continue-introduced-in-pa">at least 1992</a>. This extension is not part of the Pascal standard, though.&#160;<a class="footnote-backref" href="#fnref:pascal_exit" rev="footnote" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
 <li id="fn:swift_guard">
-<p>A modern language like Swift definitely clarifies this intention by making <code>guard</code> a keyword (since <a href="https://www.appcoda.com/swift-2-introduction/">2.0</a>).&#160;<a class="footnote-backref" href="#fnref:swift_guard" rev="footnote" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+<p>A modern language like Swift definitely clarifies this intention by making <code>guard</code> a keyword (since <a href="https://www.appcoda.com/swift-2-introduction/">2.0</a>).&#160;<a class="footnote-backref" href="#fnref:swift_guard" rev="footnote" title="Jump back to footnote 3 in the text">&#8617;</a></p>
 </li>
 <li id="fn:explicit_duck">
 <p>For the similar cases where no translation is provided in the default taxonomy, you can either add it yourself, or directly hint at the desired
-taxa, i.e., after <code># paroxython:</code>, replace <code>+member_call_method:list:count</code> by <code>type/sequence/list</code> and <code>call/method/sequence/list/count</code>🦆.&#160;<a class="footnote-backref" href="#fnref:explicit_duck" rev="footnote" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+taxa, i.e., after <code># paroxython:</code>, replace <code>+member_call_method:list:count</code> by <code>type/sequence/list</code> and <code>call/method/sequence/list/count</code>🦆.&#160;<a class="footnote-backref" href="#fnref:explicit_duck" rev="footnote" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+<li id="fn:type_hints">
+<p>For now, Paroxython ignores your type hints, but may take them into account in the future.
+<br>&#160;<a class="footnote-backref" href="#fnref:type_hints" rev="footnote" title="Jump back to footnote 5 in the text">&#8617;</a></p>
 </li>
 <li id="fn:taxon">
 <p>This contrasts with the convention in biological classification, where the term <a href="https://en.wikipedia.org/wiki/Taxon">taxon</a> refers to a taxonomic <strong>unit</strong> (a node of the tree). For instance, <a href="https://en.wikipedia.org/wiki/African_elephant">African Elephant </a> is classified under the taxon <em>Loxodonta</em>. However, a taxon (implicitely) “encompasses all included taxa of lower rank”, here:</p>
@@ -1131,7 +1194,7 @@ taxa, i.e., after <code># paroxython:</code>, replace <code>+member_call_method:
 <li>Genus:
 <em>Loxodonta</em></li>
 </ul>
-<p>Since our nodes are not uniquely named (e.g., there are several nodes <code>literal</code>), we make all the lower rank nodes explicit by concatenating them (i.e., <code>type/number/integer/literal</code> instead of simply <code>literal</code>, which would be ambiguous)🐘.&#160;<a class="footnote-backref" href="#fnref:taxon" rev="footnote" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+<p>Since our nodes are not uniquely named (e.g., there are several nodes <code>literal</code>), we make all the lower rank nodes explicit by concatenating them (i.e., <code>type/number/integer/literal</code> instead of simply <code>literal</code>, which would be ambiguous)🐘.&#160;<a class="footnote-backref" href="#fnref:taxon" rev="footnote" title="Jump back to footnote 6 in the text">&#8617;</a></p>
 </li>
 <li id="fn:tree_sql">
 <p>More precisely, it is the result of executing
@@ -1139,35 +1202,35 @@ taxa, i.e., after <code># paroxython:</code>, replace <code>+member_call_method:
 FROM taxon
 WHERE taxon not LIKE 'meta/sloc/%'
 GROUP BY taxon</code>
-on the SQLite tag database.&#160;<a class="footnote-backref" href="#fnref:tree_sql" rev="footnote" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+on the SQLite tag database.&#160;<a class="footnote-backref" href="#fnref:tree_sql" rev="footnote" title="Jump back to footnote 7 in the text">&#8617;</a></p>
 </li>
 <li id="fn:compare">
-<p>On a side note: in the <abbr title="Abstract Syntax Tree">AST</abbr>, an expression like <code>a &lt; b &lt; c</code> counts for <strong>one</strong> (chained) comparison.&#160;<a class="footnote-backref" href="#fnref:compare" rev="footnote" title="Jump back to footnote 5 in the text">&#8617;</a></p>
+<p>On a side note: in the <abbr title="Abstract Syntax Tree">AST</abbr>, an expression like <code>a &lt; b &lt; c</code> counts for <strong>one</strong> (chained) comparison.&#160;<a class="footnote-backref" href="#fnref:compare" rev="footnote" title="Jump back to footnote 8 in the text">&#8617;</a></p>
 </li>
 <li id="fn:import_var">
-<p>However, imported variables are incorrectly classified under <code>def</code>.&#160;<a class="footnote-backref" href="#fnref:import_var" rev="footnote" title="Jump back to footnote 6 in the text">&#8617;</a></p>
+<p>However, imported variables are incorrectly classified under <code>def</code>.&#160;<a class="footnote-backref" href="#fnref:import_var" rev="footnote" title="Jump back to footnote 9 in the text">&#8617;</a></p>
 </li>
 <li id="fn:sequence">
-<p>The sequence control flow is an exception. As it characterizes the imperative paradigm more than this or that program, it will deliberately be excluded from the features searched by Paroxython.&#160;<a class="footnote-backref" href="#fnref:sequence" rev="footnote" title="Jump back to footnote 7 in the text">&#8617;</a></p>
+<p>The sequence control flow is an exception. As it characterizes the imperative paradigm more than this or that program, it will deliberately be excluded from the features searched by Paroxython.&#160;<a class="footnote-backref" href="#fnref:sequence" rev="footnote" title="Jump back to footnote 10 in the text">&#8617;</a></p>
 </li>
 <li id="fn:condition">
-<p>A <em>condition</em> is a boolean expression, not to be confused with a <em>conditional</em> (control structure).&#160;<a class="footnote-backref" href="#fnref:condition" rev="footnote" title="Jump back to footnote 8 in the text">&#8617;</a></p>
+<p>A <em>condition</em> is a boolean expression, not to be confused with a <em>conditional</em> (control structure).&#160;<a class="footnote-backref" href="#fnref:condition" rev="footnote" title="Jump back to footnote 11 in the text">&#8617;</a></p>
 </li>
 <li id="fn:regex-credits">
 <p>This module appears to be here to stay, since it is proeminently featured in the documentation of the more mundane standard library <a href="https://docs.python.org/3/library/re.html">re</a>.
-Thanks and kudos to the author, Matthew Barnett: without his awesome work, many parts of our code would have been much tougher to write, and much slower to execute.&#160;<a class="footnote-backref" href="#fnref:regex-credits" rev="footnote" title="Jump back to footnote 9 in the text">&#8617;</a></p>
+Thanks and kudos to the author, Matthew Barnett: without his awesome work, many parts of our code would have been much tougher to write, and much slower to execute.&#160;<a class="footnote-backref" href="#fnref:regex-credits" rev="footnote" title="Jump back to footnote 12 in the text">&#8617;</a></p>
 </li>
 <li id="fn:Allen1983">
-<p>Allen, James F. (26 Nov. 1983). <em>Maintaining knowledge about temporal intervals</em>. Communications of the ACM. 26 (11): 832–843. doi:10.1145/182.358434&#160;<a class="footnote-backref" href="#fnref:Allen1983" rev="footnote" title="Jump back to footnote 10 in the text">&#8617;</a></p>
+<p>Allen, James F. (1983). <em>Maintaining knowledge about temporal intervals</em>. Communications of the ACM. 26 (11): 832–843. doi:10.1145/182.358434&#160;<a class="footnote-backref" href="#fnref:Allen1983" rev="footnote" title="Jump back to footnote 13 in the text">&#8617;</a></p>
 </li>
 <li id="fn:predicate_count">
-<p><span><span class="MathJax_Preview">162 = 6 \times 27</span><script type="math/tex">162 = 6 \times 27</script></span>, where <span><span class="MathJax_Preview">6</span><script type="math/tex">6</script></span> is the number of distinct permutations of the quadruple <span><span class="MathJax_Preview">(x, x, y, y)</span><script type="math/tex">(x, x, y, y)</script></span>, and <span><span class="MathJax_Preview">27=3^3</span><script type="math/tex">27=3^3</script></span> the number of elements of the triple auto-product of <span><span class="MathJax_Preview">3</span><script type="math/tex">3</script></span> symbols (<code>=</code>, <code>≤</code> and <code>&lt;</code>).&#160;<a class="footnote-backref" href="#fnref:predicate_count" rev="footnote" title="Jump back to footnote 11 in the text">&#8617;</a></p>
+<p><span><span class="MathJax_Preview">162 = 6 \times 27</span><script type="math/tex">162 = 6 \times 27</script></span>, where <span><span class="MathJax_Preview">6</span><script type="math/tex">6</script></span> is the number of distinct permutations of the quadruple <span><span class="MathJax_Preview">(x, x, y, y)</span><script type="math/tex">(x, x, y, y)</script></span>, and <span><span class="MathJax_Preview">27=3^3</span><script type="math/tex">27=3^3</script></span> the number of elements of the triple auto-product of <span><span class="MathJax_Preview">3</span><script type="math/tex">3</script></span> symbols (<code>=</code>, <code>≤</code> and <code>&lt;</code>).&#160;<a class="footnote-backref" href="#fnref:predicate_count" rev="footnote" title="Jump back to footnote 14 in the text">&#8617;</a></p>
 </li>
 <li id="fn:to_cnf">
-<p>Automate the conversion with the function <a href="https://github.com/sympy/sympy/blob/58e1e9abade7c38c66871fd06bf76ebac8c1df78/sympy/logic/boolalg.py#L1691-L1730"><code>to_cnf()</code></a> of <a href="https://www.sympy.org/en/index.html">SymPy</a>.&#160;<a class="footnote-backref" href="#fnref:to_cnf" rev="footnote" title="Jump back to footnote 12 in the text">&#8617;</a></p>
+<p>Automate the conversion with the function <a href="https://github.com/sympy/sympy/blob/58e1e9abade7c38c66871fd06bf76ebac8c1df78/sympy/logic/boolalg.py#L1691-L1730"><code>to_cnf()</code></a> of <a href="https://www.sympy.org/en/index.html">SymPy</a>.&#160;<a class="footnote-backref" href="#fnref:to_cnf" rev="footnote" title="Jump back to footnote 15 in the text">&#8617;</a></p>
 </li>
 <li id="fn:braces">
-<p>In these examples, the braces denote the fact that the span of a certain taxon is included in that of another taxon.&#160;<a class="footnote-backref" href="#fnref:braces" rev="footnote" title="Jump back to footnote 13 in the text">&#8617;</a></p>
+<p>In these examples, the braces denote the fact that the span of a certain taxon is included in that of another taxon.&#160;<a class="footnote-backref" href="#fnref:braces" rev="footnote" title="Jump back to footnote 16 in the text">&#8617;</a></p>
 </li>
 </ol>
 </div>
@@ -1200,6 +1263,8 @@ Thanks and kudos to the author, Matthew Barnett: without his awesome work, many 
 </li>
 <li><a href="#flow">Flow</a></li>
 <li><a href="#style">Style</a><ul>
+<li><a href="#be-direct">Be direct</a></li>
+<li><a href="#early-exits">Early exits</a></li>
 <li><a href="#guards">Guards</a></li>
 </ul>
 </li>
