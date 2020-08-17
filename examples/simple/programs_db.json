@@ -1186,6 +1186,7 @@
         "node:arg": [[2,2],[2,2],[9,9]],
         "parallel_assignment:2": [[5,5]],
         "range:BOARD_SIZE": [[15,15]],
+        "recursive_call_count:1": [[9,17]],
         "recursive_function:solve": [[9,17]],
         "return": [[11,11],[13,17]],
         "return:False": [[8,8]],
@@ -1215,6 +1216,7 @@
         "def/argument/arg": [[2,2],[2,2],[9,9]],
         "def/function": [[2,8],[9,17]],
         "def/recursive/body": [[9,17]],
+        "def/recursive/call_count/1": [[9,17]],
         "def/return/something": [[11,11],[13,17]],
         "flow/conditional/guard": [[10,11]],
         "flow/conditional/no_else": [[6,7],[10,11]],
@@ -1531,6 +1533,7 @@
         "parallel_assignment:2": [[7,7]],
         "raise:BailOut": [[9,9],[21,21]],
         "range:BOARD_SIZE": [[11,11]],
+        "recursive_call_count:1": [[10,21]],
         "recursive_function:add_queen": [[10,21]],
         "replication_operator:Str": [[24,24],[24,24]],
         "return": [[18,18]],
@@ -1570,6 +1573,7 @@
         "def/class": [[2,3]],
         "def/function": [[10,21]],
         "def/procedure": [[4,9]],
+        "def/recursive/call_count/1": [[10,21]],
         "def/recursive/tail": [[10,21]],
         "def/return/something": [[18,18]],
         "flow/conditional": [[15,18]],
@@ -3676,6 +3680,10 @@
       "18_queens.py",
       "28_queens.py"
     ],
+    "recursive_call_count:1": [
+      "18_queens.py",
+      "28_queens.py"
+    ],
     "recursive_function:add_queen": [
       "28_queens.py"
     ],
@@ -4239,6 +4247,10 @@
     ],
     "def/recursive/body": [
       "18_queens.py"
+    ],
+    "def/recursive/call_count/1": [
+      "18_queens.py",
+      "28_queens.py"
     ],
     "def/recursive/tail": [
       "28_queens.py"

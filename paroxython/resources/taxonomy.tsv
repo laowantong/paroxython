@@ -65,6 +65,7 @@ def/procedure	function_returning_nothing:.+
 def/procedure/test	function_returning_nothing:(.+_tests?|test_.+)
 def/recursive	recursive_function:.+
 def/recursive/body	body_recursive_function:.+
+def/recursive/call_count/\1	recursive_call_count:(.+)
 def/recursive/deep	deeply_recursive_function:.+
 def/recursive/tail	tail_recursive_function:.+
 def/return/nothing	return:None

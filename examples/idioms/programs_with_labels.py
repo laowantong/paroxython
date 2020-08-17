@@ -144,7 +144,7 @@ random.randint(a, b) # call_argument:a, call_argument:b, member_call:random:rand
 # ----------------------------------------------------------------------------------------
 # 016.1530-depth-first-traversing-of-a-binary-tree.py
 # ----------------------------------------------------------------------------------------
-def dfs(bt): # body_recursive_function:dfs (-> +5), function:dfs (-> +5), function_argument:bt, function_argument_flavor:arg, function_returning_nothing:dfs (-> +5), node:FunctionDef (-> +5), node:arg, recursive_function:dfs (-> +5), whole_span:6 (-> +5)
+def dfs(bt): # body_recursive_function:dfs (-> +5), function:dfs (-> +5), function_argument:bt, function_argument_flavor:arg, function_returning_nothing:dfs (-> +5), node:FunctionDef (-> +5), node:arg, recursive_call_count:2 (-> +5), recursive_function:dfs (-> +5), whole_span:6 (-> +5)
     if bt is None: # comparison_operator:Is, if (-> +1), if_guard (-> +1), if_test_atom:None, if_test_atom:bt, if_without_else (-> +1), literal:None, node:Compare, node:If (-> +1), node:Name, node:NameConstant
         return # if_then_branch, node:Return, return:None
     dfs(bt.left) # call_argument:, free_call:dfs, free_call_without_result:dfs, internal_free_call:dfs, node:Attribute, node:Call, node:Expr, node:Name
@@ -162,7 +162,7 @@ class Node(object): # node:ClassDef (-> +3), node:Name, whole_span:4 (-> +3)
 # ----------------------------------------------------------------------------------------
 # 018.2084-depth-first-traversing-of-a-tree.py
 # ----------------------------------------------------------------------------------------
-def DFS(f, root): # body_recursive_function:DFS (-> +3), function:DFS (-> +3), function_argument:f, function_argument:root, function_argument_flavor:arg, function_returning_nothing:DFS (-> +3), higher_order_function:f (-> +3), node:FunctionDef (-> +3), node:arg, recursive_function:DFS (-> +3), whole_span:4 (-> +3)
+def DFS(f, root): # body_recursive_function:DFS (-> +3), function:DFS (-> +3), function_argument:f, function_argument:root, function_argument_flavor:arg, function_returning_nothing:DFS (-> +3), higher_order_function:f (-> +3), node:FunctionDef (-> +3), node:arg, recursive_call_count:1 (-> +3), recursive_function:DFS (-> +3), whole_span:4 (-> +3)
     f(root) # call_argument:root, external_free_call:f, free_call:f, free_call_without_result:f, node:Call, node:Expr, node:Name
     for child in root: # for:child (-> +1), for_each (-> +1), loop:for (-> +1), loop_with_late_exit:for (-> +1), node:For (-> +1), node:Name
         DFS(f, child) # call_argument:child, call_argument:f, free_call:DFS, free_call_without_result:DFS, internal_free_call:DFS, node:Call, node:Expr, node:Name
@@ -257,7 +257,7 @@ for i in range(1, 1001): # call_argument:1, call_argument:1001, external_free_ca
 # ----------------------------------------------------------------------------------------
 # 031.0188-recursive-factorial-simple.py
 # ----------------------------------------------------------------------------------------
-def f(i): # body_recursive_function:f (-> +4), function:f (-> +4), function_argument:i, function_argument_flavor:arg, function_returning_something:f (-> +4), node:FunctionDef (-> +4), node:arg, recursive_function:f (-> +4), whole_span:5 (-> +4)
+def f(i): # body_recursive_function:f (-> +4), function:f (-> +4), function_argument:i, function_argument_flavor:arg, function_returning_something:f (-> +4), node:FunctionDef (-> +4), node:arg, recursive_call_count:1 (-> +4), recursive_function:f (-> +4), whole_span:5 (-> +4)
     if i == 0: # comparison_operator:Eq, if (-> +3), if_test_atom:0, if_test_atom:i, literal:0, node:Compare, node:If (-> +3), node:Name, node:Num
         return 1 # if_then_branch, literal:1, node:Num, node:Return, return:1
     else:

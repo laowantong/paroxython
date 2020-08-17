@@ -230,6 +230,7 @@
 - parallel_assignment
 - raise
 - range
+- recursive_call_count
 - recursive_function
 - single_assignment
 - slice

@@ -20,11 +20,11 @@ Inside a definition, the terms which have their own entry in the glossary are _i
 **Hint (manual —)**
 :   A comment that you may add in a _source_, either to fix a mislabelling problem, or to specify some metadata. It starts with `"# paroxython:` and can schedule either a _label_ or a _taxon_ for addition (by default) or deletion. Example:
 
-:   `print(a + b) # paroxython: -addition_operator +concatenation_operator`
+        print(a + b) # paroxython: -addition_operator +concatenation_operator
 
 **Label**
 :   Name of a _feature_, as defined in `spec.md`. Examples:
-:
+
 :   - simple: `swap`, `if_else_branch`, `verbose_conditional_assignment`;
 :   - with one variable suffix: `loop_with_return:for`, `import_module:foo`, `member_call_method:append`;
 :   - with several variable suffixes: `member_call:bar:append`, `for_range:start:stop:-1`.
@@ -60,7 +60,7 @@ Inside a definition, the terms which have their own entry in the glossary are _i
 
 **Taxon** (plur. **taxa**)
 :   Name of a _feature_, resulting from the conversion of a given _label_. Examples:
-:
+
 :   - the _label_ `swap` is converted to the _taxon_ `var/assignment/parallel/swap`;
 :   - the _label_ `member_call_method:append` is converted to the _taxa_ `call/method/sequence/list/append` and `type/sequence/list`.
 

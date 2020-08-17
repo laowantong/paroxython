@@ -98,6 +98,7 @@
       - [Feature `higher-order function` (SQL)](#feature-higher-order-function)
     - [Recursion](#recursion)
       - [Feature `recursive_function` (SQL)](#feature-recursive_function)
+      - [Feature `recursive_call_count` (SQL)](#feature-recursive_call_count)
       - [Feature `deeply_recursive_function` (SQL)](#feature-deeply_recursive_function)
       - [Feature `body_recursive_function` (SQL)](#feature-body_recursive_function)
       - [Feature `tail_recursive_function` (SQL)](#feature-tail_recursive_function)
@@ -970,8 +971,8 @@ GROUP BY op.path
 
 ```python
 1   s = "hello, %s" % world
-2   n = n % 10
-3   print(a % b)
+2   n = n % 10 # no match
+3   print(a % b) # no match
 ```
 
 ##### Matches
@@ -1476,6 +1477,7 @@ We use the term _free call_, as opposed to _member call_ (dot notation).
 [⬇️ feature `higher-order function`](#feature-higher-order-function)  
 [⬇️ feature `internal_free_call`](#feature-internal_free_call)  
 [⬇️ feature `range`](#feature-range)  
+[⬇️ feature `recursive_call_count`](#feature-recursive_call_count)  
 [⬇️ feature `recursive_function`](#feature-recursive_function)  
 
 ##### Specification
@@ -1567,7 +1569,7 @@ We use the term _free call_, as opposed to _member call_ (dot notation).
 
 #### Feature `free_tail_call`
 
-A tail-call is a call whose result is immediately returned, without any further calculation. This property is not interesting as such, but will be used below as a basis for the recognition of tail-recursive functions.
+A tail call is a call whose result is immediately returned, without any further calculation. This property is not interesting as such, but will be used below as a basis for the recognition of tail recursive functions.
 
 ##### Derivations
 
@@ -1632,7 +1634,7 @@ A tail-call is a call whose result is immediately returned, without any further 
 28          bar(3) # LIMITATION: no match
 ```
 
-_Remark._ Since the short-circuit expression `c and foo(m)` is equivalent to the conditional expression `if c then foo(m) else False`, `foo(m)` is actually a tail-call.
+_Remark._ Since the short-circuit expression `c and foo(m)` is equivalent to the conditional expression `if c then foo(m) else False`, `foo(m)` is actually a tail call.
 
 ##### Matches
 
@@ -3139,6 +3141,7 @@ In Python, the term "function" encompasses any type of subroutine, be it a metho
 [⬇️ feature `if_guard`](#feature-if_guard)  
 [⬇️ feature `internal_free_call`](#feature-internal_free_call)  
 [⬇️ feature `method`](#feature-method)  
+[⬇️ feature `recursive_call_count`](#feature-recursive_call_count)  
 [⬇️ feature `recursive_function`](#feature-recursive_function)  
 
 ##### Specification
@@ -3795,6 +3798,7 @@ SELECT "recursive_function",
 FROM t_function f
 JOIN t_free_call c ON (c.path GLOB f.path || "*-")
 WHERE c.name_suffix = f.name_suffix
+GROUP BY f.path
 ```
 
 ##### Example
@@ -3810,6 +3814,51 @@ WHERE c.name_suffix = f.name_suffix
 | Label | Lines |
 |:--|:--|
 | `recursive_function:gob_program` | 1-3 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `recursive_call_count`
+
+Count the number of times a function calls itself. Useful to distinguish between [single recursion and multiple recursion](https://en.wikipedia.org/wiki/Recursion_(computer_science)#Single_recursion_and_multiple_recursion).
+
+##### Derivations
+
+[⬆️ feature `free_call`](#feature-free_call)  
+[⬆️ feature `function`](#feature-function)  
+
+##### Specification
+
+```sql
+SELECT "recursive_call_count",
+       count(*) AS call_count,
+       f.span,
+       f.path
+FROM t_function f
+JOIN t_free_call c ON (c.path GLOB f.path || "*-")
+WHERE c.name_suffix = f.name_suffix
+GROUP BY f.path
+```
+
+##### Example
+
+```python
+1   def fibonacci(i):
+2       if i < 2:
+3           return 1
+4       else:
+5           return fibonacci(i - 1) + fibonacci(i - 2)
+6
+7   def gob_program():
+8       print("PENUS")
+9       gob_program()
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `recursive_call_count:2` | 1-5 |
+| `recursive_call_count:1` | 7-9 |
 
 --------------------------------------------------------------------------------
 
@@ -3854,7 +3903,7 @@ WHERE c1.name_suffix = f.name_suffix
 
 #### Feature `body_recursive_function`
 
-A function is body-recursive if and only if at least one of its recursive calls is not a tail call.
+A function is body recursive if and only if at least one of its recursive calls is not a tail call.
 
 **BUG.** Since the procedure tail calls are not recognized by `free_tail_call`, the tail recursive procedures are incorrectly labelled as body recursive.
 
@@ -3894,7 +3943,7 @@ GROUP BY t_recursive_function.span
 7   def gcd(a, b): # no match
 8       return (gcd(b, a % b) if b else a)
 9
-10  def ack(m, n): # body-recursive
+10  def ack(m, n): # body recursive
 11      if m == 0:
 12          return n + 1
 13      elif n == 0:
@@ -3933,7 +3982,7 @@ GROUP BY t_recursive_function.span
 
 #### Feature `tail_recursive_function`
 
-A function is tail-recursive if and only if all its recursive calls are tail calls.
+A function is tail recursive if and only if all its recursive calls are tail calls.
 
 ##### Derivations
 

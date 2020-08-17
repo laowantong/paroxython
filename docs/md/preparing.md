@@ -95,15 +95,53 @@ def change_separator(s, old, new):
 
 ... nothing indicates that `s` is a `type/sequence/string` except from the call of its method `split()`.
 
-## Flow
-
 ## Style
+
+### Be boring
+
+Paroxython is optimized for the most unremarkable style. In the following snippet:
+
+```python
+a += 1
+a = a + 1
+a = 1 + a
+```
+
+... only the first two lines will be labelled as `increment:a`. Paroxython doesn't bother to decipher the so-called Yoda style. Other examples:
+
+```python
+a = -a # labelled as `negate`
+a = -1 * a # false negative
+```
+
+```python
+a[-i] # labelled as `negative_index`
+a[len(a) - i] # false negative
+```
 
 ### Be direct
 
-Sometimes, using an intermediate assignment will make Paroxython miss an important feature of your program.
+Some static analysis tools have inference capabilities. For instance, [Astroid](http://pylint.pycqa.org/projects/astroid/en/latest/inference.html) can analyze:
 
-For instance, the following code is correctly tagged `tail_recursive_function:gcd`. A function is tail-recursive if and only if all its recursive calls return their results immediately, without any further calculation.
+```python
+a = 1
+b = 2
+c = a + b
+```
+
+... and _infer_ the value of `c`.
+
+Paroxython makes no inferences. Sometimes, using an intermediate assignment will be enough to make it miss a feature:
+
+```python
+s = "hello, %s" % world # labelled as `string_formatting_operator`
+template = "hello, %s"
+s = template % world # false negative
+```
+
+A string _literal_ on the right hand side of `%` is needed to recognize the latter as a string formatting operator. Paroxython does not try to guess the type of `template`.
+
+There are more interesting cases. For instance, the following code is correctly tagged `tail_recursive_function:gcd`: a function is tail recursive if and only if all its recursive calls return their results immediately, without any further calculation.
 
 ```python
 def gcd(a, b):
@@ -112,7 +150,7 @@ def gcd(a, b):
     return gcd(b, a % b)
 ```
 
-Now, suppose you want only one exit point, and come up with the following equivalent code:
+Now, suppose you want only one exit point, and come up with the following functionally equivalent code:
 
 ```python
 def gcd(a, b):
@@ -121,14 +159,13 @@ def gcd(a, b):
     return a
 ```
 
-The result of the recursive call is now assigned to variable `a`. There is no further calculation as such, but Paroxython expects that you return directly the result. Its no-inference heuristic is rather fragile, and delaying a key treatment is enough to keep it from being recognized.
+The result of the recursive call is now assigned to variable `a`. There is no further calculation as such, but Paroxython would expect that you return directly the result. Its no-inference heuristic is fragile: delaying a key treatment is enough to defeat recognition[^gcd_one_liner].
 
-Note that, in this case, it is actually possible to write a single-point-of-exit version which is correclty tagged as tail recursive:
+[^gcd_one_liner]:
+    Note that, in this case, it is actually possible to write a single-point-of-exit version which would be correclty tagged as tail recursive:
 
-```python
-def gcd(a, b):
-    return (gcd(b, a % b) if b else a)
-```
+        def gcd(a, b):
+            return (gcd(b, a % b) if b else a)
 
 
 ### Early exits

@@ -23,9 +23,9 @@
     - [`014.0185-pick-uniformly-a-random-floating-point-number-in-ab.py`](#program-0140185-pick-uniformly-a-random-floating-point-number-in-abpy-learning-cost-5125)
     - [`014.3410-pick-uniformly-a-random-floating-point-number-in-ab.py`](#program-0143410-pick-uniformly-a-random-floating-point-number-in-abpy-learning-cost-2625)
     - [`015.0184-pick-uniformly-a-random-integer-in-ab.py`](#program-0150184-pick-uniformly-a-random-integer-in-abpy-learning-cost-2625)
-    - [`016.1530-depth-first-traversing-of-a-binary-tree.py`](#program-0161530-depth-first-traversing-of-a-binary-treepy-learning-cost-825)
+    - [`016.1530-depth-first-traversing-of-a-binary-tree.py`](#program-0161530-depth-first-traversing-of-a-binary-treepy-learning-cost-84375)
     - [`017.1103-create-a-tree-data-structure.py`](#program-0171103-create-a-tree-data-structurepy-learning-cost-775)
-    - [`018.2084-depth-first-traversing-of-a-tree.py`](#program-0182084-depth-first-traversing-of-a-treepy-learning-cost-675)
+    - [`018.2084-depth-first-traversing-of-a-tree.py`](#program-0182084-depth-first-traversing-of-a-treepy-learning-cost-76875)
     - [`019.0197-reverse-a-list.py`](#program-0190197-reverse-a-listpy-learning-cost-18125)
     - [`019.1983-reverse-a-list.py`](#program-0191983-reverse-a-listpy-learning-cost-275)
     - [`019.3164-reverse-a-list.py`](#program-0193164-reverse-a-listpy-learning-cost-184375)
@@ -41,7 +41,7 @@
     - [`028.0350-sort-by-a-property.py`](#program-0280350-sort-by-a-propertypy-learning-cost-35625)
     - [`029.0199-remove-item-from-list-by-its-index.py`](#program-0290199-remove-item-from-list-by-its-indexpy-learning-cost-15)
     - [`030.0189-parallelize-execution-of-1000-independent-tasks.py`](#program-0300189-parallelize-execution-of-1000-independent-taskspy-learning-cost-81875)
-    - [`031.0188-recursive-factorial-simple.py`](#program-0310188-recursive-factorial-simplepy-learning-cost-1015625)
+    - [`031.0188-recursive-factorial-simple.py`](#program-0310188-recursive-factorial-simplepy-learning-cost-1109375)
     - [`032.0196-integer-exponentiation-by-squaring.py`](#program-0320196-integer-exponentiation-by-squaringpy-learning-cost-3375)
     - [`033.1420-atomically-read-and-update-variable.py`](#program-0331420-atomically-read-and-update-variablepy-learning-cost-33125)
     - [`034.0625-create-a-set-of-objects.py`](#program-0340625-create-a-set-of-objectspy-learning-cost-584375)
@@ -645,7 +645,7 @@
 
 ---
 
-### Program `016.1530-depth-first-traversing-of-a-binary-tree.py` (learning cost 8.25)
+### Program `016.1530-depth-first-traversing-of-a-binary-tree.py` (learning cost 8.4375)
 
 ```python
 1   def dfs(bt):
@@ -662,8 +662,8 @@
 | 0.75 | `condition/identity` | 2 |
 | 0.875 | `def/argument/arg` | 1 |
 | 0.75 | `def/procedure` | 1-6 |
-| 0.75 | `def/recursive` | 1-6 |
 | 0.875 | `def/recursive/body` | 1-6 |
+| 0.9375 | `def/recursive/call_count/2` | 1-6 |
 | 0.875 | `def/return/nothing` | 3 |
 | 0.875 | `flow/conditional/guard` | 2-3 |
 | 0.875 | `flow/conditional/no_else` | 2-3 |
@@ -698,7 +698,7 @@
 
 ---
 
-### Program `018.2084-depth-first-traversing-of-a-tree.py` (learning cost 6.75)
+### Program `018.2084-depth-first-traversing-of-a-tree.py` (learning cost 7.6875)
 
 ```python
 1   def DFS(f, root):
@@ -715,6 +715,7 @@
 | 0.75 | `def/higher_order` | 1-4 |
 | 0.75 | `def/procedure` | 1-4 |
 | 0.875 | `def/recursive/body` | 1-4 |
+| 0.9375 | `def/recursive/call_count/1` | 1-4 |
 | 0.9375 | `flow/loop/exit/late` | 3-4 |
 | 0.9375 | `flow/loop/for/elements` | 3-4 |
 | 0 | `meta/program` | 1-4 |
@@ -991,7 +992,7 @@
 
 ---
 
-### Program `031.0188-recursive-factorial-simple.py` (learning cost 10.15625)
+### Program `031.0188-recursive-factorial-simple.py` (learning cost 11.09375)
 
 ```python
 1   def f(i):
@@ -1008,6 +1009,7 @@
 | 0.875 | `def/argument/arg` | 1 |
 | 0.75 | `def/function` | 1-5 |
 | 0.875 | `def/recursive/body` | 1-5 |
+| 0.9375 | `def/recursive/call_count/1` | 1-5 |
 | 0.875 | `def/return/something` | 5 |
 | 0.75 | `flow/conditional` | 2-5 |
 | 0.875 | `flow/conditional/else` | 5 |
