@@ -167,9 +167,11 @@ Paroxython will store inside the `meta` tree some program metadata, such as the 
 
 ## Modifying the taxonomy
 
+The definition of a taxonomy is, at least partly, a matter of pedagogical choices. You are encouraged to duplicate the default taxonomy, and replace or delete those taxa that do not fit your course purpose or logic.
+
 ### Preliminaries
 
-We suggest you start by copying the default [`taxonomy.tsv`](https://repo/paroxython/resources/taxonomy.tsv) at the same level as the `src` folder that contains your Python programs:
+Copy the default [`taxonomy.tsv`](https://repo/paroxython/resources/taxonomy.tsv) at the same level as the `src` folder that contains your Python programs:
 
 ```plain
 programming_101/
@@ -186,7 +188,7 @@ This way, omitting the option `--taxonomy` like in the command below will use yo
 paroxython collect programming_101/src
 ```
 
-You are encouraged to experiment on this copy according to your requirements and your taste.
+You can now experiment on this copy.
 
 ### Workflow
 

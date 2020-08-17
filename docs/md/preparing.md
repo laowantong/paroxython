@@ -7,7 +7,7 @@
 - don't try to outsmart Paroxython: you're sure to win... a lot of false negatives;
 - give manual hints for:
     - correcting a false positive or negative;
-    - adding metadata (better than a nested directory structure);
+    - adding metadata (it's more versatile than a nested directory structure);
     - resolving duck typing on built-in types, if needed;
 - be direct.
 
@@ -80,7 +80,7 @@ def test_is_even():
 
 ### Beware of renaming built-ins
 
-It's never a good idea to reuse a [built-in function](https://docs.python.org/3/library/functions.html) name:
+It's rarely a good idea to reuse a [built-in function](https://docs.python.org/3/library/functions.html) name:
 
 ```python
 max = 42 # bad: max() is a built-in function
@@ -101,7 +101,35 @@ def change_separator(s, old, new):
 
 ### Be direct
 
-Sometimes, using an intermediate identifier will make Paroxython miss a feature of your program.
+Sometimes, using an intermediate assignment will make Paroxython miss an important feature of your program.
+
+For instance, the following code is correctly tagged `tail_recursive_function:gcd`. A function is tail-recursive if and only if all its recursive calls return their results immediately, without any further calculation.
+
+```python
+def gcd(a, b):
+    if b == 0:
+        return a
+    return gcd(b, a % b)
+```
+
+Now, suppose you want only one exit point, and come up with the following equivalent code:
+
+```python
+def gcd(a, b):
+    if b != 0:
+        a = gcd(b, a % b)
+    return a
+```
+
+The result of the recursive call is now assigned to variable `a`. There is no further calculation as such, but Paroxython expects that you return directly the result. Its no-inference heuristic is rather fragile, and delaying a key treatment is enough to keep it from being recognized.
+
+Note that, in this case, it is actually possible to write a single-point-of-exit version which is correclty tagged as tail recursive:
+
+```python
+def gcd(a, b):
+    return (gcd(b, a % b) if b else a)
+```
+
 
 ### Early exits
 
@@ -163,7 +191,7 @@ To put things in perspective, with a modern language like Python, you'd better t
 
 ### Guards
 
-Some guidelines and linters (e.g.,
+Numerous guidelines and linters (e.g.,
 [LLVM Coding Standards](https://llvm.org/docs/CodingStandards.html#don-t-use-else-after-a-return),
 [Pylint](https://pheanex.github.io/pylint/),
 [ESLint](https://eslint.org/docs/rules/no-else-return),
@@ -196,10 +224,13 @@ def max_(a, b):
         return b
 ```
 
-So, both styles have their uses. Consider choosing one as an opportunity to better communicate your intention[^swift_guard]. In any case, remember that Paroxython will try to tag every relevant `if` statement as `flow/conditional/guard` (see [here](https://repo/paroxython/resources/spec.md#feature-if_guard) for details on the heuristic).
+So, both styles have their uses. Consider this as an opportunity to better communicate your intention[^swift_guard]. Remember that when you write an `if` statement ended by a `return` and not followed by an `else` branch, Paroxython will automatically try[^guard_heuristic] to tag it as a guard (`flow/conditional/guard`).
 
 [^swift_guard]:
     A modern language like Swift definitely clarifies this intention by making `guard` a keyword (since [2.0](https://www.appcoda.com/swift-2-introduction/)).
+
+[^guard_heuristic]:
+    See [here](https://repo/paroxython/resources/spec.md#feature-if_guard) for the complete heuristic.
 
 
 ## Manual hints
@@ -323,7 +354,7 @@ This is called [duck typing](https://en.wikipedia.org/wiki/Duck_typing), and the
 </figure>
 </center>
 
-For us, this cute duck typing comes with a challenge. [As already explained](#beware-of-renaming-built-ins), Paroxython relies on the names of the methods and attributes to guess the type of the built-in objects. For instance, the default taxonomy has these two lines:
+For us, this cute duck typing comes with a challenge. Although this may change in the future, for now Paroxython ignores your type hints. [As already explained](#beware-of-renaming-built-ins), it just relies on the names of the methods and attributes to guess the type of the built-in objects. For instance, the default taxonomy has these two lines:
 
 ```plain
 type/sequence/list	          member_call_method:(append|extend|insert|reverse|sort)
@@ -372,7 +403,4 @@ But if you feel like it, just fire up this 1 weird pipeline:
 }
 ```
 
-... and happy duck hunting[^type_hints]!
-
-[^type_hints]:
-    For now, Paroxython ignores your type hints, but may take them into account in the future.
+... and happy duck hunting!

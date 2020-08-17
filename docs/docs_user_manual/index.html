@@ -53,7 +53,7 @@ tree.draw(data, options);
 <li>don't try to outsmart Paroxython: you're sure to win&hellip; a lot of false negatives;</li>
 <li>give manual hints for:<ul>
 <li>correcting a false positive or negative;</li>
-<li>adding metadata (better than a nested directory structure);</li>
+<li>adding metadata (it's more versatile than a nested directory structure);</li>
 <li>resolving duck typing on built-in types, if needed;</li>
 </ul>
 </li>
@@ -106,7 +106,7 @@ foo = compute_square(foo)
     assert is_even(5)
 </code></pre>
 <h3 id="beware-of-renaming-built-ins">Beware of renaming built-ins</h3>
-<p>It's never a good idea to reuse a <a href="https://docs.python.org/3/library/functions.html">built-in function</a> name:</p>
+<p>It's rarely a good idea to reuse a <a href="https://docs.python.org/3/library/functions.html">built-in function</a> name:</p>
 <pre><code class="python">max = 42 # bad: max() is a built-in function
 </code></pre>
 <p>In the same way, if you write classes, consider the names of the methods of the <a href="https://docs.python.org/3/library/stdtypes.html">built-in types</a> as taboo. Paroxython relies on them to try guessing the type of objects to which they apply. For instance, in:</p>
@@ -117,7 +117,24 @@ foo = compute_square(foo)
 <h2 id="flow">Flow</h2>
 <h2 id="style">Style</h2>
 <h3 id="be-direct">Be direct</h3>
-<p>Sometimes, using an intermediate identifier will make Paroxython miss a feature of your program.</p>
+<p>Sometimes, using an intermediate assignment will make Paroxython miss an important feature of your program.</p>
+<p>For instance, the following code is correctly tagged <code>tail_recursive_function:gcd</code>. A function is tail-recursive if and only if all its recursive calls return their results immediately, without any further calculation.</p>
+<pre><code class="python">def gcd(a, b):
+    if b == 0:
+        return a
+    return gcd(b, a % b)
+</code></pre>
+<p>Now, suppose you want only one exit point, and come up with the following equivalent code:</p>
+<pre><code class="python">def gcd(a, b):
+    if b != 0:
+        a = gcd(b, a % b)
+    return a
+</code></pre>
+<p>The result of the recursive call is now assigned to variable <code>a</code>. There is no further calculation as such, but Paroxython expects that you return directly the result. Its no-inference heuristic is rather fragile, and delaying a key treatment is enough to keep it from being recognized.</p>
+<p>Note that, in this case, it is actually possible to write a single-point-of-exit version which is correclty tagged as tail recursive:</p>
+<pre><code class="python">def gcd(a, b):
+    return (gcd(b, a % b) if b else a)
+</code></pre>
 <h3 id="early-exits">Early exits</h3>
 <p>It's not the 80's anymore<sup id="fnref:Roberts1995"><a class="footnote-ref" href="#fn:Roberts1995" rel="footnote">1</a></sup>. Don't think you're being rude if you keep things simple by exiting early.</p>
 <p>For instance, Paroxython will rightly identify a <a href="https://en.wikipedia.org/wiki/Universal_quantification">universal quantification</a> (<code>pattern/elements/satisfy/all</code>) in:</p>
@@ -159,7 +176,7 @@ def is_prime(n):
 </div>
 <p>To put things in perspective, with a modern language like Python, you'd better think of <a href="https://refactoring.guru/remove-control-flag">control flags</a> as code smells. In any case, take a look at our <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md#iterative-patterns">specifications of iterative patterns</a>. Should there be anything you don't agree with, no problem: just delete the corresponding translations from your copy of <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/taxonomy.tsv">taxonomy.tsv</a>.</p>
 <h3 id="guards">Guards</h3>
-<p>Some guidelines and linters (e.g.,
+<p>Numerous guidelines and linters (e.g.,
 <a href="https://llvm.org/docs/CodingStandards.html#don-t-use-else-after-a-return">LLVM Coding Standards</a>,
 <a href="https://pheanex.github.io/pylint/">Pylint</a>,
 <a href="https://eslint.org/docs/rules/no-else-return">ESLint</a>,
@@ -186,7 +203,7 @@ Although this is technically true, our approach is more nuanced. Specifically, w
     else: # removing this branch would hurt readability
         return b
 </code></pre>
-<p>So, both styles have their uses. Consider choosing one as an opportunity to better communicate your intention<sup id="fnref:swift_guard"><a class="footnote-ref" href="#fn:swift_guard" rel="footnote">3</a></sup>. In any case, remember that Paroxython will try to tag every relevant <code>if</code> statement as <code>flow/conditional/guard</code> (see <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md#feature-if_guard">here</a> for details on the heuristic).</p>
+<p>So, both styles have their uses. Consider this as an opportunity to better communicate your intention<sup id="fnref:swift_guard"><a class="footnote-ref" href="#fn:swift_guard" rel="footnote">3</a></sup>. Remember that when you write an <code>if</code> statement ended by a <code>return</code> and not followed by an <code>else</code> branch, Paroxython will automatically try<sup id="fnref:guard_heuristic"><a class="footnote-ref" href="#fn:guard_heuristic" rel="footnote">4</a></sup> to tag it as a guard (<code>flow/conditional/guard</code>).</p>
 <h2 id="manual-hints">Manual hints</h2>
 <p>On a given source code, the tagging algorithm may sometimes result in false positives or false negatives. Moreover, the semantics of some features may be subjective (e.g., <code>meta/topic/fun</code>) or beyond the capabilities of Paroxython (e.g., deciding the relevance of the <code>short_circuit</code> property of a boolean operator). In any case, the user has the possibility to manually tag certain lines of their source code to hint either the presence or absence of a given feature.</p>
 <h3 id="addition">Addition</h3>
@@ -297,7 +314,7 @@ Although this is technically true, our approach is more nuanced. Specifically, w
 <figcaption><em>A duck typing on a typewriter, author<br>unknown, courtesy of <a href="https://stackoverflow.com/questions/289176/how-is-duck-typing-different-from-the-old-variant-type-and-or-interfaces">StackOverflow</a>.</em></figcaption>
 </figure>
 </center></p>
-<p>For us, this cute duck typing comes with a challenge. <a href="#beware-of-renaming-built-ins">As already explained</a>, Paroxython relies on the names of the methods and attributes to guess the type of the built-in objects. For instance, the default taxonomy has these two lines:</p>
+<p>For us, this cute duck typing comes with a challenge. Although this may change in the future, for now Paroxython ignores your type hints. <a href="#beware-of-renaming-built-ins">As already explained</a>, it just relies on the names of the methods and attributes to guess the type of the built-in objects. For instance, the default taxonomy has these two lines:</p>
 <pre><code class="plain">type/sequence/list            member_call_method:(append|extend|insert|reverse|sort)
 call/method/sequence/list/\1  member_call_method:(append|extend|insert|reverse|sort)
 </code></pre>
@@ -314,7 +331,7 @@ call/method/sequence/list/\1    member_call_method:list:(count|index|pop|...)
 <p>This means that you can hint at every ambiguous list method (<code>count()</code>, etc.) by deleting the original label and adding a new one with an inserted <code>":list"</code>:</p>
 <pre><code class="python">a.count(b)  # paroxython: -member_call_method:count +member_call_method:list:count
 </code></pre>
-<p>Now, the generated taxa will be: <code>type/sequence/list</code> and <code>call/method/sequence/list/count</code><sup id="fnref:explicit_duck"><a class="footnote-ref" href="#fn:explicit_duck" rel="footnote">4</a></sup>. As for the duck, it is no more. It has ceased to be. It is expired and gone to meet its maker. It has run down the curtain and joined the choir invisible. This is an ex-duck.</p>
+<p>Now, the generated taxa will be: <code>type/sequence/list</code> and <code>call/method/sequence/list/count</code><sup id="fnref:explicit_duck"><a class="footnote-ref" href="#fn:explicit_duck" rel="footnote">5</a></sup>. As for the duck, it is no more. It has ceased to be. It is expired and gone to meet its maker. It has run down the curtain and joined the choir invisible. This is an ex-duck.</p>
 <p>Admittedly, all of this may be overkill, since a program featuring a list would most of the time feature it in several places, most of them without ambiguity. After all, generally speaking, you just want Paroxython to help you find programs in your repository, but don't need it to find features in a given program (you know better).</p>
 <p>But if you feel like it, just fire up this 1 weird pipeline:</p>
 <pre><code class="python">{
@@ -324,7 +341,8 @@ call/method/sequence/list/\1    member_call_method:list:(count|index|pop|...)
     ]
 }
 </code></pre>
-<p>&hellip; and happy duck hunting<sup id="fnref:type_hints"><a class="footnote-ref" href="#fn:type_hints" rel="footnote">5</a></sup>!</p>
+<p>&hellip; and happy duck hunting!
+<br></p>
 <h1 id="pipeline-tutorial-getting-recommendations">Pipeline tutorial: getting recommendations</h1>
 <p>This tutorial walks you through a series of little “teacher stories” to illustrate how to write the pipeline of commands used by Paroxython's recommendation system.</p>
 <p>You run this pipeline on command line with:</p>
@@ -600,8 +618,9 @@ type, it is enough to exclude all taxa starting with <code>type/non_sequence</co
 <h3 id="going-meta">Going <code>meta</code></h3>
 <p>Paroxython will store inside the <code>meta</code> tree some program metadata, such as the number of lines. Some children, such as <code>topic</code>, <code>technique</code>, <code>complexity</code>, are already provided, which you can fill in by adding a manual hint in the source code of the programs.</p>
 <h2 id="modifying-the-taxonomy">Modifying the taxonomy</h2>
+<p>The definition of a taxonomy is, at least partly, a matter of pedagogical choices. You are encouraged to duplicate the default taxonomy, and replace or delete those taxa that do not fit your course purpose or logic.</p>
 <h3 id="preliminaries">Preliminaries</h3>
-<p>We suggest you start by copying the default <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/taxonomy.tsv"><code>taxonomy.tsv</code></a> at the same level as the <code>src</code> folder that contains your Python programs:</p>
+<p>Copy the default <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/taxonomy.tsv"><code>taxonomy.tsv</code></a> at the same level as the <code>src</code> folder that contains your Python programs:</p>
 <pre><code class="plain">programming_101/
 ├── taxonomy.tsv
 ├── src/
@@ -612,7 +631,7 @@ type, it is enough to exclude all taxa starting with <code>type/non_sequence</co
 <p>This way, omitting the option <code>--taxonomy</code> like in the command below will use your copy instead of the original.</p>
 <pre><code>paroxython collect programming_101/src
 </code></pre>
-<p>You are encouraged to experiment on this copy according to your requirements and your taste.</p>
+<p>You can now experiment on this copy.</p>
 <h3 id="workflow">Workflow</h3>
 <p>TODO
 <br></p>
@@ -1155,7 +1174,92 @@ span <code>s_1</code> of such a taxon, there exists no span <code>s_2</code> of 
 <p>The other combinations are listed and tested <a href="https://github.com/laowantong/paroxython/blob/master/tests/test_recommend_programs.py#L779-L808">here</a>.
 <!---
 The previous link is automatically updated by build_pdoc.py.
---></p>
+-->
+<br></p>
+<h2 id="glossary">Glossary</h2>
+<p>Inside a definition, the terms which have their own entry in the glossary are <em>italicized</em>.</p>
+<dl>
+<dt><strong><abbr title="Abstract Syntax Tree">AST</abbr> (flat —)</strong></dt>
+<dd>The dump of an <a href="https://en.wikipedia.org/wiki/Abstract_syntax_tree">Abstract Syntax Tree</a> as a sequence of text lines, each one consisting of the whole <em>path</em> from the tree root to the current node, with some tweaks.</dd>
+<dt><strong>Command</strong></dt>
+<dd>A <em>pipeline</em> <em>operation</em>, along with its <em>data</em>.</dd>
+<dt><strong>Criterion</strong> (plur. <strong>criteria</strong>)</dt>
+<dd>Either a <em>taxon</em> <em>pattern</em>, a program <em>pattern</em> or a <em>semantic triple</em>.</dd>
+<dt><strong>Data</strong></dt>
+<dd>In a restricted sense, the second member of a <em>command</em>.</dd>
+<dd>
+<ul>
+<li>If it is a string, it is interpreted as a shell command printing a list of program or <em>taxon</em> <em>patterns</em>.</li>
+</ul>
+</dd>
+<dd>
+<ul>
+<li>If it is a list, each element is interpreted as a <em>criterion</em>.</li>
+</ul>
+</dd>
+<dt><strong>Hint (manual —)</strong></dt>
+<dd>A comment that you may add in a <em>source</em>, either to fix a mislabelling problem, or to specify some metadata. It starts with <code>"# paroxython:</code> and can schedule either a <em>label</em> or a <em>taxon</em> for addition (by default) or deletion. Example:</dd>
+<dd><code>print(a + b) # paroxython: -addition_operator +concatenation_operator</code></dd>
+<dt><strong>Label</strong></dt>
+<dd>Name of a <em>feature</em>, as defined in <code>spec.md</code>. Examples:</dd>
+<dd></dd>
+<dd>
+<ul>
+<li>simple: <code>swap</code>, <code>if_else_branch</code>, <code>verbose_conditional_assignment</code>;</li>
+</ul>
+</dd>
+<dd>
+<ul>
+<li>with one variable suffix: <code>loop_with_return:for</code>, <code>import_module:foo</code>, <code>member_call_method:append</code>;</li>
+</ul>
+</dd>
+<dd>
+<ul>
+<li>with several variable suffixes: <code>member_call:bar:append</code>, <code>for_range:start:stop:-1</code>.</li>
+</ul>
+</dd>
+<dd>
+<p>Comparison with <em>taxa</em>: the <em>taxa</em> aims to represent concepts; <em>labels</em>, not so much. For instance, labelling <code>a = b</code> by <code>assignment:42</code> captures, in addition to the concept (assignment), an arbitrary piece of information (a name) which may or may not be internally used later to <em>label</em> more complex <em>features</em>. Moreover, <em>taxa</em> are structured into a <em>taxonomy</em>; <em>labels</em> are free form.</p>
+</dd>
+<dt><strong>Operation</strong></dt>
+<dd>A string among <code>"include"</code>, <code>"exclude"</code>, <code>"impart"</code> and <code>"hide"</code>, with an optional suffix <code>"any"</code> (implicit) or <code>"all"</code>.</dd>
+<dt><strong>Path</strong></dt>
+<dd>A continuous sequence of distinct edges from the root to a given node of a tree. Can be used for the <em>taxonomy</em> or for the <em>flat <abbr title="Abstract Syntax Tree">AST</abbr></em>.</dd>
+<dt><strong>Pattern</strong></dt>
+<dd>A regular expression describing the name of a program, a <em>label</em> or a <em>taxon</em>.</dd>
+<dt><strong>Pipeline</strong></dt>
+<dd>A list of filtering <em>commands</em>, expressed as a Python value and evaluated by <code>ast.literal_eval()</code>.</dd>
+<dt><strong>Predicate</strong></dt>
+<dd>Used in a restricted sense to designate the middle term of a <em>semantic triple</em>. It is a function taking two <em>poor spans</em> <code>x</code> and <code>y</code> and telling whether they satisfy a certain relationship (for instance, “<code>x</code> after <code>y</code>”, or “<code>y</code> not inside <code>x</code>”).</dd>
+<dt><strong>Source</strong></dt>
+<dd>The text of an element of your collection of Python programs.</dd>
+<dt><strong>Span</strong></dt>
+<dd>The location of a given <em>feature</em>, as the couple of its first and last lines. By extension, a third member, the <em>path</em>, identifies the beginning of the <em>feature</em> in the <abbr title="Abstract Syntax Tree">AST</abbr>.</dd>
+<dt><strong>Span (poor —)</strong></dt>
+<dd>A <em>span</em> deprived from its last member.</dd>
+<dt><strong>Tag</strong></dt>
+<dd>Generic term, covering both <em>labels</em> and <em>taxa</em>.</dd>
+<dt><strong>Taxon</strong> (plur. <strong>taxa</strong>)</dt>
+<dd>Name of a <em>feature</em>, resulting from the conversion of a given <em>label</em>. Examples:</dd>
+<dd></dd>
+<dd>
+<ul>
+<li>the <em>label</em> <code>swap</code> is converted to the <em>taxon</em> <code>var/assignment/parallel/swap</code>;</li>
+</ul>
+</dd>
+<dd>
+<ul>
+<li>the <em>label</em> <code>member_call_method:append</code> is converted to the <em>taxa</em> <code>call/method/sequence/list/append</code> and <code>type/sequence/list</code>.</li>
+</ul>
+</dd>
+<dd>
+<p>A <em>taxon</em> is a <em>path</em> from a root to a node in the <em>taxonomy</em>. It represents a learning concept that should be of interest to the teacher.</p>
+</dd>
+<dt><strong>Taxonomy</strong></dt>
+<dd>A forest structuring the learning concepts of the domain. The idea is that the concept represented by a node must be introduced <em>after</em> its parent concept (if any).</dd>
+<dt><strong>Triple (semantic —)</strong></dt>
+<dd>Consists of a <em>taxon</em> <em>pattern</em> (the <em>subject</em>), a <em>predicate</em> and an another <em>taxon</em> <em>pattern</em> (the <em>object</em>). Example: <code>("flow/conditional", "finished by", "def/return")</code>.</dd>
+</dl>
 <div class="footnote">
 <hr>
 <ol>
@@ -1168,13 +1272,12 @@ The previous link is automatically updated by build_pdoc.py.
 <li id="fn:swift_guard">
 <p>A modern language like Swift definitely clarifies this intention by making <code>guard</code> a keyword (since <a href="https://www.appcoda.com/swift-2-introduction/">2.0</a>).&#160;<a class="footnote-backref" href="#fnref:swift_guard" rev="footnote" title="Jump back to footnote 3 in the text">&#8617;</a></p>
 </li>
+<li id="fn:guard_heuristic">
+<p>See <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md#feature-if_guard">here</a> for the complete heuristic.&#160;<a class="footnote-backref" href="#fnref:guard_heuristic" rev="footnote" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
 <li id="fn:explicit_duck">
 <p>For the similar cases where no translation is provided in the default taxonomy, you can either add it yourself, or directly hint at the desired
-taxa, i.e., after <code># paroxython:</code>, replace <code>+member_call_method:list:count</code> by <code>type/sequence/list</code> and <code>call/method/sequence/list/count</code>🦆.&#160;<a class="footnote-backref" href="#fnref:explicit_duck" rev="footnote" title="Jump back to footnote 4 in the text">&#8617;</a></p>
-</li>
-<li id="fn:type_hints">
-<p>For now, Paroxython ignores your type hints, but may take them into account in the future.
-<br>&#160;<a class="footnote-backref" href="#fnref:type_hints" rev="footnote" title="Jump back to footnote 5 in the text">&#8617;</a></p>
+taxa, i.e., after <code># paroxython:</code>, replace <code>+member_call_method:list:count</code> by <code>type/sequence/list</code> and <code>call/method/sequence/list/count</code>🦆.&#160;<a class="footnote-backref" href="#fnref:explicit_duck" rev="footnote" title="Jump back to footnote 5 in the text">&#8617;</a></p>
 </li>
 <li id="fn:taxon">
 <p>This contrasts with the convention in biological classification, where the term <a href="https://en.wikipedia.org/wiki/Taxon">taxon</a> refers to a taxonomic <strong>unit</strong> (a node of the tree). For instance, <a href="https://en.wikipedia.org/wiki/African_elephant">African Elephant </a> is classified under the taxon <em>Loxodonta</em>. However, a taxon (implicitely) “encompasses all included taxa of lower rank”, here:</p>
@@ -1348,6 +1451,7 @@ Thanks and kudos to the author, Matthew Barnett: without his awesome work, many 
 </li>
 </ul>
 </li>
+<li><a href="#glossary">Glossary</a></li>
 </ul>
 </li>
 </ul>

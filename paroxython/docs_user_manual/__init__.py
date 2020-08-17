@@ -16,4 +16,8 @@
 <br>
 
 .. include:: ../../docs/md/pipeline_documentation.md
+
+<br>
+
+.. include:: ../../docs/md/glossary.md
 """
