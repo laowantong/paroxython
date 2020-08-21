@@ -99,11 +99,11 @@ flow/loop/while	loop:while
 flow/loop/while/infinite	infinite_while
 flow/null_operation	node:Pass
 meta/ast/\1	ast_construction:(.+)
+meta/complexity/\1	complexity:(.+)
 meta/program	whole_span:.+
 meta/sloc/\1	whole_span:(.+)
-meta/topic/\1	topic:(.+)
-meta/complexity/\1	complexity:(.+)
 meta/technique/\1	technique:(.+)
+meta/topic/\1	topic:(.+)
 operator/arithmetic/addition	addition_operator
 operator/arithmetic/division	binary_operator:Div
 operator/arithmetic/integer_division	binary_operator:FloorDiv
@@ -163,6 +163,8 @@ pattern/elements/find/best/min/filtered	accumulate_some_elements:min
 pattern/elements/find/first	find_first_element:.+
 pattern/elements/satisfy/all	universal_quantification:.+
 pattern/elements/satisfy/some	existential_quantification:.+
+pattern/expression/clamp/min_max	clamp_min_max
+pattern/expression/clamp/ternary	clamp_ternary
 pattern/inputs/accumulate	accumulate_inputs:.+
 pattern/inputs/accumulate/count	count_inputs:.+
 pattern/inputs/find_first_good	get_valid_input:.+
@@ -236,9 +238,9 @@ var/assignment/parallel/slide	slide
 var/assignment/parallel/swap	swap
 var/assignment/sequence/swap	swap_with_aux
 var/assignment/single	single_assignment:.+
+var/assignment/throwaway	assignment_lhs_identifier:_
 var/deletion	node:Delete
 var/deletion/unbinding	unbinding:.+
-var/assignment/throwaway	assignment_lhs_identifier:_
 -- EOF	EOF
 call/function/builtin/print/multiple	TODO
 call/function/builtin/print/newline	TODO

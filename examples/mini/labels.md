@@ -157,6 +157,8 @@
 - chained_assignment
 - chained_comparison
 - chained_equalities|chained_inequalities
+- clamp_min_max
+- clamp_ternary
 - closure
 - compact_conditional_assignment
 - comparison_operator

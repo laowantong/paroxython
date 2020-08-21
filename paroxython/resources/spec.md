@@ -51,6 +51,9 @@
       - [Feature `comprehension`](#feature-comprehension)
       - [Feature `comprehension_for_count`](#feature-comprehension_for_count)
       - [Feature `filtered_comprehension`](#feature-filtered_comprehension)
+  - [Common expressions](#common-expressions)
+      - [Feature `clamp_min_max`](#feature-clamp_min_max)
+      - [Feature `clamp_ternary`](#feature-clamp_ternary)
 - [Statements](#statements)
   - [Bindings](#bindings)
       - [Feature `assignment`](#feature-assignment)
@@ -2045,6 +2048,80 @@ Match a comprehension with an `if` clause.
 | Label | Lines |
 |:--|:--|
 | `filtered_comprehension` | 1, 2, 2 |
+
+--------------------------------------------------------------------------------
+
+## Common expressions
+
+--------------------------------------------------------------------------------
+
+#### Feature `clamp_min_max`
+
+##### Specification
+
+```re
+           ^(.*)/_type=Call
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
+\n(?:\1.+\n)*?\1/func/id=(?P<FN>(max|min))
+\n(?:\1.+\n)*?\1/args/_length=2
+\n(?:\1.+\n)*?\1/args/[12]/func/id=(?!(?P=FN))(max|min)
+\n(?:\1.+\n)*?\1/args/[12]/args/_length=2
+```
+
+##### Example
+
+```python
+1   max(min(x, upper_bound), lower_bound)
+2   max(lower_bound, min(upper_bound, x))
+3   min(max(x, lower_bound), upper_bound)
+4   min(upper_bound, max(lower_bound, x))
+5   min(upper_bound, min(lower_bound, x)) # no match
+6   x = max(min(x, upper_bound), lower_bound)
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `clamp_min_max` | 1, 2, 3, 4, 6 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `clamp_ternary`
+
+##### Specification
+
+```re
+           ^(.*)/_type=IfExp
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
+\n(?:\1.+\n)*?\1/test/left/_hash=(?P<HASH_1>.+) # capture _hash #1
+\n(?:\1.+\n)*?\1/test/ops/1/_type=(?P<OP>Lt|Gt)E?
+\n(?:\1.+\n)*?\1/test/comparators/1/_hash=(?P<HASH_2>.+) # capture _hash #2
+\n(?:\1.+\n)*?\1/body/_hash=(?P=HASH_2) # match _hash #2
+\n(?:\1.+\n)*?\1/orelse/_type=IfExp
+\n(?:\1.+\n)*?\1/orelse/test/left/_hash=(?P=HASH_1) # match _hash #1
+\n(?:\1.+\n)*?\1/orelse/test/ops/1/_type=(?!(?P=OP))(Lt|Gt)E?
+\n(?:\1.+\n)*?\1/orelse/test/comparators/1/_hash=(?P<HASH_3>.+) # capture _hash #3
+\n(?:\1.+\n)*?\1/orelse/body/_hash=(?P=HASH_3) # match _hash #3
+\n(?:\1.+\n)*?\1/orelse/orelse/_hash=(?P=HASH_1) # match _hash #1
+```
+
+##### Example
+
+```python
+1   a = upper_bound if x > upper_bound else (lower_bound if x < lower_bound else x)
+2   upper_bound if x >= upper_bound else (lower_bound if x <= lower_bound else x)
+3   lower_bound if x < lower_bound else (upper_bound if x >= upper_bound else x)
+4   lower_bound if lower_bound > x else (upper_bound if upper_bound < x else x) # LIMITATION: no match
+```
+
+_Limitation._ The number to be clamped must appear on the left hand side of the comparison.
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `clamp_ternary` | 1, 2, 3 |
 
 --------------------------------------------------------------------------------
 
