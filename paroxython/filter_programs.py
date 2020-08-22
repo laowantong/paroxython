@@ -195,12 +195,10 @@ class ProgramFilter:
     # Update the state of the filter by applying set operations with the given programs or taxa.
 
     def update_filter(
-        # fmt: off
         self,
         criteria: List[Criterion],
         operation: Operation,
-        quantifier: str
-        # fmt: on
+        quantifier: str,
     ) -> None:
         """Update the selected programs and/or impart the associated taxa and/or mark them as hidden.
 
@@ -378,12 +376,10 @@ class ProgramFilter:
     # Deal with semantic triples of the form (taxon_pattern_1, taxon_pattern_2, predicate)
 
     def programs_of_triple(
-        # fmt: off
         self,
         taxon_pattern_1: str,
         predicate: Predicate,
         taxon_pattern_2: str,
-        # fmt: on
     ) -> ProgramNameSet:
         """Return the programs where two given taxa satisfy a given predicate.
 
@@ -413,12 +409,10 @@ class ProgramFilter:
         return result
 
     def programs_of_negated_triple(
-        # fmt: off
         self,
         taxon_pattern_1: str,
         predicate: Predicate,
         taxon_pattern_2: str,
-        # fmt: on
     ) -> ProgramNameSet:
         r"""Return the programs where the given predicate is not satisfied.
 
@@ -451,12 +445,10 @@ class ProgramFilter:
         return result
 
     def iterate_on_spans(
-        # fmt: off
-        self, # declared as an instance method to prevent pdoc3 from misplacing its documentation.
+        self,  # declared as an instance method to prevent pdoc3 from misplacing its documentation.
         spans: TaxaPoorSpans,
         taxa_1: TaxonNameSet,
-        taxa_2: TaxonNameSet
-        # fmt: on
+        taxa_2: TaxonNameSet,
     ) -> Iterator:
         """Generate all relevant couples of spans for the given “subject” and ”object” taxa.
 

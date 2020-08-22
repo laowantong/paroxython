@@ -177,7 +177,8 @@ class Cleanup:
 
     @staticmethod
     def suppress_useless_pass_statements(
-        source: str, sub: Callable = regex.compile(r"(?m)^( *)pass\n\1(?!\s)").sub,
+        source: str,
+        sub: Callable = regex.compile(r"(?m)^( *)pass\n\1(?!\s)").sub,
     ) -> str:
         """Suppress all `pass` statements followed by a line with a same level of indentation.
 
@@ -267,10 +268,8 @@ class HintBuffer:
 
 
 def collect_hints(
-    # fmt: off
     source: Source,
-    match_label: Callable = regex.compile(r"^((?:-|\+|\.\.\.|…)?)(\w.*?)((?:\.\.\.|…)?)$").match
-    # fmt: on
+    match_label: Callable = regex.compile(r"^((?:-|\+|\.\.\.|…)?)(\w.*?)((?:\.\.\.|…)?)$").match,
 ) -> Tuple[LabelsSpans, LabelsSpans]:
     """Schedule for addition or deletion the hints appearing in the comments.
 
@@ -349,7 +348,8 @@ def collect_hints(
 
 
 def remove_hints(
-    source: Source, sub_hints: Callable = regex.compile(fr"\s*{HINT_COMMENT} .*").sub,
+    source: Source,
+    sub_hints: Callable = regex.compile(fr"\s*{HINT_COMMENT} .*").sub,
 ) -> Source:
     """Once they are collected, remove all Paroxython hints from the given source.
 

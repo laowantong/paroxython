@@ -24,21 +24,17 @@ def update_readme_example():
     readme_path = Path("README.md")
     readme_text = readme_path.read_text()
     (readme_text, n) = regex.subn(
-        # fmt: off
         r"(?sm)^1   %%paroxython.+?(?=\n```)",
         add_line_numbers(source),
         readme_text,
         count=1,
-        # fmt: on
     )
     assert n == 1, "Example program not found."
     (readme_text, n) = regex.subn(
-        # fmt: off
         r"(?sm)^\| Taxon \| Lines \|.+?(?=\n\n)",
         tag_program(f"# {source}"),
         readme_text,
         count=1,
-        # fmt: on
     )
     assert n == 1
     (readme_text, n) = regex.subn(r"(?<=paroxython )\S+(?= loaded)", VERSION, readme_text)
@@ -201,7 +197,11 @@ def patch_prose():
                 text,
             )
             assert n == 1, f"Unable to change the title of {slug}!"
-            (text, n) = regex.subn(f"<h1>Index</h1>", f"<h1>{title}</h1>", text,)
+            (text, n) = regex.subn(
+                f"<h1>Index</h1>",
+                f"<h1>{title}</h1>",
+                text,
+            )
             assert n == 1, f"Unable to change the title of {slug} in nav!"
             (text, n) = regex.subn(fr"""(?s)</div>\n<ul id="index">.+</ul>\n""", "", text)
             assert n == 1, f"Unable to suppress the index section in prose {slug}'s nav!"
@@ -217,7 +217,11 @@ def patch_prose():
             assert n == 1, f"Unable to remove module section for {slug}!"
         (text, n) = regex.subn(fr"""(?s)<details class="source">.+</details>\n""", "", text)
         assert n == 1, f"Unable to suppress the source code in prose {slug}!"
-        (text, n) = regex.subn("""href="index.html">""", """href="../index.html">""", text,)
+        (text, n) = regex.subn(
+            """href="index.html">""",
+            """href="../index.html">""",
+            text,
+        )
         assert n == 1, f"Unable to patch the Home url in {slug}!"
         path.write_text(text)
         index_path.write_text(index_text)

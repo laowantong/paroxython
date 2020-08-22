@@ -180,11 +180,9 @@ class Recommendations:
         self.assessed_programs = self.assess(self.selected_programs)
 
     def parse_data(
-        # fmt: off
         self,
         data: Union[str, List[Criterion]],
-        operation: Operation
-        # fmt: on
+        operation: Operation,
     ) -> List[Criterion]:
         """Retrieve the list of criteria to which to apply the given operation.
 
@@ -324,7 +322,8 @@ if __name__ == "__main__":
     json = __import__("json")
     program_path = Path("../algo/programs")
     rec = Recommendations(
-        db=json.loads(Path(f"{program_path}_db.json").read_text()), base_path=program_path.parent,
+        db=json.loads(Path(f"{program_path}_db.json").read_text()),
+        base_path=program_path.parent,
     )
     rec.run_pipeline(ast.literal_eval(Path(f"{program_path}_pipe.py").read_text()))
     output_path = Path(f"{program_path}_recommendations.md")

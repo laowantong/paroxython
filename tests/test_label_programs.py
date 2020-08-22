@@ -51,14 +51,12 @@ def test_generate_labelled_sources(capsys):
 
 
 def test_update_snapshots(capsys):
-    # fmt: off
     directories = [
         "examples/idioms/programs",
         "examples/mini/programs",
         "examples/simple/programs",
         "../algo/programs",
     ]
-    # fmt: on
     for directory in directories:
         path = Path(directory)
         if not path.is_dir():
