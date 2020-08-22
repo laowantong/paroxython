@@ -165,6 +165,8 @@ pattern/elements/satisfy/all	universal_quantification:.+
 pattern/elements/satisfy/some	existential_quantification:.+
 pattern/expression/clamp/min_max	clamp_min_max
 pattern/expression/clamp/ternary	clamp_ternary
+pattern/expression/mid/naive	mid_value_naive
+pattern/expression/mid/recommended	mid_value_recommended
 pattern/inputs/accumulate	accumulate_inputs:.+
 pattern/inputs/accumulate/count	count_inputs:.+
 pattern/inputs/find_first_good	get_valid_input:.+

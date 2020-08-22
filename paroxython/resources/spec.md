@@ -52,6 +52,8 @@
       - [Feature `comprehension_for_count`](#feature-comprehension_for_count)
       - [Feature `filtered_comprehension`](#feature-filtered_comprehension)
   - [Common expressions](#common-expressions)
+      - [Feature `mid_value_naive`](#feature-mid_value_naive)
+      - [Feature `mid_value_recommended`](#feature-mid_value_recommended)
       - [Feature `clamp_min_max`](#feature-clamp_min_max)
       - [Feature `clamp_ternary`](#feature-clamp_ternary)
 - [Statements](#statements)
@@ -2052,6 +2054,72 @@ Match a comprehension with an `if` clause.
 --------------------------------------------------------------------------------
 
 ## Common expressions
+
+--------------------------------------------------------------------------------
+
+#### Feature `mid_value_naive`
+
+Computing the middle value between two bounds is a basic step of both binary search and merge sort. The naive way to do this may overflow, as explained in [this famous blog post](https://ai.googleblog.com/2006/06/extra-extra-read-all-about-it-nearly.html). The recommended approach is given in the next subsection.
+
+##### Specification
+
+```re
+^(.*/(assign)?value)/_type=BinOp
+\n(?:\1.+\n)*?\1    /_pos=(?P<POS>.+)
+\n(?:\1.+\n)*?\1    /left/left/_type=Name
+\n(?:\1.+\n)*?\1    /left/op/_type=Add
+\n(?:\1.+\n)*?\1    /left/right/_type=Name
+\n(?:\1.+\n)*?\1    /op/_type=(Floor)?Div
+\n(?:\1.+\n)*?\1    /right/n=2
+```
+
+##### Example
+
+```python
+1   x = (lo + hi) / 2
+2   (lo + hi) // 2
+3   a + (b + c) / 2 # no match: the expression must be isolated
+4   x = (lo + hi) * 0.5 # LIMITATION: no match
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `mid_value_naive` | 1, 2 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `mid_value_recommended`
+
+##### Specification
+
+```re
+^(.*/(assign)?value)/_type=BinOp
+\n(?:\1.+\n)*?\1    /_pos=(?P<POS>.+)
+\n(?:\1.+\n)*?\1    /left/_type=Name
+\n(?:\1.+\n)*?\1    /left/_hash=(?P<HASH>.+) # capture _hash
+\n(?:\1.+\n)*?\1    /op/_type=Add
+\n(?:\1.+\n)*?\1    /right/left/left/_type=Name
+\n(?:\1.+\n)*?\1    /right/left/op/_type=Sub
+\n(?:\1.+\n)*?\1    /right/left/right/_hash=(?P=HASH) # match _hash
+\n(?:\1.+\n)*?\1    /right/op/_type=(Floor)?Div
+\n(?:\1.+\n)*?\1    /right/right/n=2
+```
+
+##### Example
+
+```python
+1   mid = low + (high - low) / 2
+2   low + (high - low) // 2
+3   (high - low) / 2 + low # LIMITATION: no match
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `mid_value_recommended` | 1, 2 |
 
 --------------------------------------------------------------------------------
 

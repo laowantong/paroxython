@@ -223,6 +223,8 @@
 - member_call_object
 - method
 - method_chaining
+- mid_value_naive
+- mid_value_recommended
 - negate
 - negative_index
 - nested_for
