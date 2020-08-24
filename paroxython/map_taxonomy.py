@@ -37,7 +37,7 @@ These labels are low-level tags, intended for internal use only. They still need
 into the following taxa, which are the only tags of interest to the end user. For instance,
 `"addition_operator"` will be translated into `"operator/arithmetic/addition"` (note that, unlike
 a label, a taxon may feature one or several slashes, which indicate the nesting of notions). More
-examples are given in the dedicated [section](docs_user_manual/index.html#taxonomy) of the user manual.
+examples are given in the dedicated [section](user_manual/index.html#taxonomy) of the user manual.
 
 In fact, both labels and taxa are couples:
 
@@ -132,7 +132,11 @@ __pdoc__ = {
 
 
 class Taxonomy:
-    def __init__(self, taxonomy_path: Optional[Path] = None, **kwargs,) -> None:
+    def __init__(
+        self,
+        taxonomy_path: Optional[Path] = None,
+        **kwargs,
+    ) -> None:
         r"""Read and pre-process the taxonomy specifications.
 
         Args:

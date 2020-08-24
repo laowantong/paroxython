@@ -10,7 +10,7 @@ class documentation below.
 ## Manual hints: preservation, centrifugation and scheduling
 
 Certain comments intentionally survive the cleaning step, the so-called “manual hints”, introduced
-[here](docs_user_manual/index.html#manual-hints).
+[here](user_manual/index.html#manual-hints).
 
 - If they appear at the end of a nonempty line of code, they are preserved as they are.
 - If they extend over an entire line (excluding the initial blanks), they are considered to be
@@ -136,7 +136,7 @@ class Cleanup:
     ) -> str:
         """Replace all comments placed on the first lines of the source code.
 
-        Argument `sub` [not to be explicitly provided.](docs_developer_manual/index.html#default-argument-trick)
+        Argument `sub` [not to be explicitly provided.](developer_manual/index.html#default-argument-trick)
         """
         return sub("", source)
 
@@ -146,7 +146,7 @@ class Cleanup:
     ) -> str:
         """Suppress `if __name__ == '__main__'` part.
 
-        Argument `sub` [not to be explicitly provided.](docs_developer_manual/index.html#default-argument-trick)
+        Argument `sub` [not to be explicitly provided.](developer_manual/index.html#default-argument-trick)
         """
         return sub("", source)
 
@@ -163,7 +163,7 @@ class Cleanup:
         For instance, if `HINT_COMMENT` is `"# paroxython:"` (its default value), the actual search
         pattern will be `r"(?i)#\s*paroxython\s*:\s*"`.
 
-        Argument `subn` [not to be explicitly provided.](docs_developer_manual/index.html#default-argument-trick)
+        Argument `subn` [not to be explicitly provided.](developer_manual/index.html#default-argument-trick)
         """
         return subn(f"{HINT_COMMENT} ", source)
 
@@ -171,7 +171,7 @@ class Cleanup:
     def suppress_blank_lines(source: str, sub: Callable = regex.compile(r"\s*\n").sub) -> str:
         """Suppress all empty or blank lines in the given source.
 
-        Argument `sub` [not to be explicitly provided.](docs_developer_manual/index.html#default-argument-trick)
+        Argument `sub` [not to be explicitly provided.](developer_manual/index.html#default-argument-trick)
         """
         return sub("\n", source)
 
@@ -182,7 +182,7 @@ class Cleanup:
     ) -> str:
         """Suppress all `pass` statements followed by a line with a same level of indentation.
 
-        Argument `sub` [not to be explicitly provided.](docs_developer_manual/index.html#default-argument-trick)
+        Argument `sub` [not to be explicitly provided.](developer_manual/index.html#default-argument-trick)
         """
         return sub(r"\1", source)
 
@@ -208,7 +208,7 @@ def centrifugate_hints(
         All examples above automatically extracted from
         [test_centrifugate_hints.py](https://repo/tests/test_centrifugate_hints.py).
 
-        Argument `match_isolated_hints` [not to be explicitly provided.](docs_developer_manual/index.html#default-argument-trick)
+        Argument `match_isolated_hints` [not to be explicitly provided.](developer_manual/index.html#default-argument-trick)
 
     <center>
     <iframe src='https://gfycat.com/ifr/ExcellentKeyElver' frameborder='0' scrolling='no' width='320' height='266'></iframe>
@@ -287,7 +287,7 @@ def collect_hints(
               sequence of characters other than a newline (together they constitute the label);
             - optionally ending with `"..."` or `"…"`.
 
-            [Not to be explicitly provided.](docs_developer_manual/index.html#default-argument-trick)
+            [Not to be explicitly provided.](developer_manual/index.html#default-argument-trick)
 
     Raises:
         ValueError: Raised in various cases of malformed input.
@@ -353,6 +353,6 @@ def remove_hints(
 ) -> Source:
     """Once they are collected, remove all Paroxython hints from the given source.
 
-    Argument `sub_hints` [not to be explicitly provided.](docs_developer_manual/index.html#default-argument-trick)
+    Argument `sub_hints` [not to be explicitly provided.](developer_manual/index.html#default-argument-trick)
     """
     return Source(sub_hints("", source).strip())

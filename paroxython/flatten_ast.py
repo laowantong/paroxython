@@ -252,7 +252,7 @@ def flatten_node(
         path (str, optional): The path of the current node. Defaults to `""`.
         remove_context (Callable, optional): A function removing the node context encoded in the
             result of `ast3.dump()`.
-            [Not to be explicitly provided.](docs_developer_manual/index.html#default-argument-trick)
+            [Not to be explicitly provided.](developer_manual/index.html#default-argument-trick)
             Defaults to `regex.compile(r", ctx=.+?\(\)").sub`.
 
     Returns:
@@ -302,7 +302,7 @@ def simplify_negative_literals(
 ) -> str:
     """[Simplify the negative literals](#negative-literal-simplification) of a given flat AST.
 
-    Argument `sub` [not to be explicitly provided.](docs_developer_manual/index.html#default-argument-trick)
+    Argument `sub` [not to be explicitly provided.](developer_manual/index.html#default-argument-trick)
     """
     return sub(r"\1/_type=Num\2\1/n=-\3", flat_ast)
 

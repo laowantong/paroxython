@@ -44,7 +44,7 @@ def update_readme_example():
 
 def generate_html():
     temp = {
-        "docs_user_manual": [
+        "user_manual": [
             "preparing.md",
             "pipeline_tutorial.md",
             "taxonomy.md",
@@ -52,7 +52,7 @@ def generate_html():
             "pipeline_documentation.md",
             "glossary.md",
         ],
-        "docs_developer_manual": [
+        "developer_manual": [
             "bird_view.md",
             "helpers.md",
             "implementation_notes.md",
@@ -81,7 +81,7 @@ def generate_html():
 
     base_path = Path("docs")
 
-    directory_names = ("cli", "docs_user_manual", "docs_developer_manual")
+    directory_names = ("cli", "user_manual", "developer_manual")
     for directory_name in directory_names:
         path = base_path / directory_name
         if path.is_dir():
@@ -217,7 +217,7 @@ def patch_prose():
     index_text = index_path.read_text()
     index_text = index_text.replace("<h1>Index</h1>\n", "")
     for title in ("cli", "User manual", "Developer manual"):
-        slug = title if title == "cli" else "docs_" + title.lower().replace(" ", "_")
+        slug = title if title == "cli" else "" + title.lower().replace(" ", "_")
         path = Path("docs") / slug / "index.html"
         text = path.read_text()
         if title != "cli":
@@ -281,7 +281,7 @@ def update_github_links():
 
 
 def inject_flow_diagram_in_nav():
-    path = Path("docs/docs_developer_manual/index.html")
+    path = Path("docs/developer_manual/index.html")
     text = path.read_text()
     (text, n) = regex.subn(r"(</nav>)", r'<p><img alt="" src="../resources/flow.png"></p>\1', text)
     assert n == 1
@@ -314,19 +314,19 @@ def link_manuals():
     (index_text, n) = regex.subn(
         r'(<li><a href="#about">About</a><ul>)',
         (
-            '<li><a href="docs_user_manual/index.html">User manual</a></li>'
+            '<li><a href="user_manual/index.html">User manual</a></li>'
             "<ul>"
-            '<li><a href="docs_user_manual/index.html#pipeline-tutorial-getting-recommendations">Pipeline tutorial</a></li>'
-            '<li><a href="docs_user_manual/index.html#tag-databases">Tag databases</a></li>'
-            '<li><a href="docs_user_manual/index.html#taxonomy">Taxonomy</a></li>'
-            '<li><a href="docs_user_manual/index.html#manual-hints">Manual hints</a></li>'
-            '<li><a href="docs_user_manual/index.html#deep-in-the-pipeline">Deep in the pipeline</a></li>'
+            '<li><a href="user_manual/index.html#pipeline-tutorial-getting-recommendations">Pipeline tutorial</a></li>'
+            '<li><a href="user_manual/index.html#tag-databases">Tag databases</a></li>'
+            '<li><a href="user_manual/index.html#taxonomy">Taxonomy</a></li>'
+            '<li><a href="user_manual/index.html#manual-hints">Manual hints</a></li>'
+            '<li><a href="user_manual/index.html#deep-in-the-pipeline">Deep in the pipeline</a></li>'
             "</ul>"
-            '<li><a href="docs_developer_manual/index.html">Developer manual</a></li>'
+            '<li><a href="developer_manual/index.html">Developer manual</a></li>'
             "<ul>"
-            '<li><a href="docs_developer_manual/index.html#bird-view">Bird view</a></li>'
-            '<li><a href="docs_developer_manual/index.html#helper-programs">Helper programs</a></li>'
-            '<li><a href="docs_developer_manual/index.html#implementation-notes">Implementation notes</a></li>'
+            '<li><a href="developer_manual/index.html#bird-view">Bird view</a></li>'
+            '<li><a href="developer_manual/index.html#helper-programs">Helper programs</a></li>'
+            '<li><a href="developer_manual/index.html#implementation-notes">Implementation notes</a></li>'
             "</ul>"
             r"\1"
         ),
@@ -339,7 +339,7 @@ def link_manuals():
 
 
 def inject_taxonomy():
-    index_path = Path("docs/docs_user_manual/index.html")
+    index_path = Path("docs/user_manual/index.html")
     text = index_path.read_text()
     tree = Path("docs/resources/tree.js").read_text()
     head = f"""

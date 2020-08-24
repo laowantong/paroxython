@@ -132,3 +132,5 @@ helpers/programming-idioms.org.2019-09-28_23-33.json
 .vscode/launch.json
 html/*
 .vscode/settings.json
+paroxython/user_manual/*
+paroxython/developer_manual/*

@@ -121,7 +121,7 @@ a[len(a) - i] # false negative
 
 ### Be direct
 
-Some static analysis tools have inference capabilities. For instance, [Astroid](http://pylint.pycqa.org/projects/astroid/en/latest/inference.html) can analyze:
+Some static analysis tools have inference capabilities. For instance, [Astroid](http://pylint.pycqa.org/projects/astroid/en/latest/inference.html) can parse:
 
 ```python
 a = 1
@@ -131,7 +131,7 @@ c = a + b
 
 ... and _infer_ the value of `c`.
 
-Paroxython makes no inferences. Sometimes, using an intermediate assignment will be enough to make it miss a feature:
+For now, Paroxython makes no inferences. So, using an intermediate assignment will sometimes be enough to make it miss a feature:
 
 ```python
 s = "hello, %s" % world # labelled as `string_formatting_operator`
@@ -159,7 +159,7 @@ def gcd(a, b):
     return a
 ```
 
-The result of the recursive call is now assigned to variable `a`. There is no further calculation as such, but Paroxython would expect that you return directly the result. Its no-inference heuristic is fragile: delaying a key treatment is enough to defeat recognition[^gcd_one_liner].
+The result of the recursive call is now assigned to variable `a`. There is no further calculation as such, but Paroxython expects you to return directly the result. Its no-inference heuristic is fragile: delaying a key treatment is enough to defeat recognition[^gcd_one_liner].
 
 [^gcd_one_liner]:
     Note that, in this case, it is actually possible to write a single-point-of-exit version which would be correclty tagged as tail recursive:
@@ -170,12 +170,7 @@ The result of the recursive call is now assigned to variable `a`. There is no fu
 
 ### Early exits
 
-It's not the 80's anymore[^Roberts1995]. Don't think you're being rude if you keep things simple by exiting early.
-
-[^Roberts1995]:
-    Roberts, Eric. (1995). _Loop exits and structured programming: reopening the debate_. Proceedings of the 26th SIGCSE Technical Symposium on Computer Science Education, 1995, Nashville, Tennessee, USA, March 2-4, 1995: 268-272. doi:10.1145/199688.199815.
-
-For instance, Paroxython will rightly identify a [universal quantification](https://en.wikipedia.org/wiki/Universal_quantification) (`pattern/elements/satisfy/all`) in:
+Paroxython will rightly identify a [universal quantification](https://en.wikipedia.org/wiki/Universal_quantification) (`pattern/elements/satisfy/all`) in:
 
 ```python
 def is_prime(n):
@@ -204,6 +199,16 @@ def is_prime(n):
 
 Apart from being twice longer, more error-prone and harder to understand, this style defeats Paroxython, and will always do, sorry.
 
+..tip::
+    It's not the 80's anymore[^Roberts1995]. Don't think you're being rude if you keep things simple by exiting early.  To put things in perspective, with a modern language like Python, you'd better think of [control flags](https://refactoring.guru/remove-control-flag) as code smells.
+
+In any case, take a look at our [specifications of iterative patterns](https://repo/paroxython/resources/spec.md#iterative-patterns). Should there be anything you don't agree with, no problem: just delete the corresponding translations from your copy of [taxonomy.tsv](https://repo/paroxython/resources/taxonomy.tsv).
+
+[^Roberts1995]:
+    Roberts, Eric. (1995). _Loop exits and structured programming: reopening the debate_. Proceedings of the 26th SIGCSE Technical Symposium on Computer Science Education, 1995, Nashville, Tennessee, USA, March 2-4, 1995: 268-272. doi:10.1145/199688.199815.
+
+### Infinite loops
+
 Likewise, consider solving the loop-and-a-half problem[^Roberts1995] this way:
 
 ```python
@@ -223,8 +228,6 @@ def input_number_between(prompt, lower_bound, upper_bound):
     1. it is possible to never reach a terminal state;
     2. it is impossible to infer the next state from the states already observed;
     3. it is possible to observe the same state more than once.
-
-To put things in perspective, with a modern language like Python, you'd better think of [control flags](https://refactoring.guru/remove-control-flag) as code smells. In any case, take a look at our [specifications of iterative patterns](https://repo/paroxython/resources/spec.md#iterative-patterns). Should there be anything you don't agree with, no problem: just delete the corresponding translations from your copy of [taxonomy.tsv](https://repo/paroxython/resources/taxonomy.tsv).
 
 ### Guards
 

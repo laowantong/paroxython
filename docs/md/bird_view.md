@@ -161,3 +161,5 @@ paroxython recommend -p pipeline_path DB_PATH
 
 [^cost_bucket]:
     The intervals are predefined as \([0, 0], ]0, 0.25[, [2^{i-2}, 2^{i-1}[, \dots\) for all natural numbers \(i\).
+
+<!-- Fake paragraph to avoid the footnote back button to be misplaced -->

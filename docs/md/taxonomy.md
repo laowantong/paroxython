@@ -154,12 +154,14 @@ Again, those are mainly practical choices. After all, an `operator` is nothing m
 
 ### Zooming out: `pattern`
 
-Now this is arguably the most interesting feature to tag in a beginner-level program. Under `pattern`, you will find numerous variants of the invaluable [accumulation pattern](https://en.wikipedia.org/wiki/Fold_(higher-order_function)) (counting, summing, filtering, finding the “best” element, etc.), but also some early-exit patterns (testing for an universal or existential property, finding the first “good” element, etc.), whether by traversing a sequence or evolving a state. Although the relative size of `pattern` is the smallest of the taxonomy, note that it is almost that of `meta/program` (which has one occurrence per program): in other words, almost all programs feature such a pattern (which spans several lines).
+Now this is arguably the most interesting feature to tag in a beginner-level program. Under `pattern`, you will find numerous variants of the invaluable [accumulation pattern](https://en.wikipedia.org/wiki/Fold_(higher-order_function)) (counting, summing, filtering, finding the “best” element, etc.), but also some early-exit patterns (testing for an universal or existential property, finding the first “good” element, etc.), whether by traversing a sequence or evolving a state. A (currently) small number of common expression patterns are also available. However, the common assignment idioms (such as incrementation, swap, slide, conditional  assignment) are classified under `var/assignment`.
+
+Although the relative size of `pattern` is the smallest of the taxonomy, note that it is almost that of `meta/program` (which has one occurrence per program): in other words, almost all programs feature such a pattern (which spans several lines).
 
 The loop patterns constitute an aspect of programming which is not always taught in a conscious and systematic way, and to which Paroxython intends to draw your attention.
 
 ..warning::
-    For priority reasons, Paroxython searches for these patterns in “statement” loops only, not in “comprehension” loops. This may change in a future version.
+    For priority reasons, Paroxython searches for these loop patterns in “statement” loops only, not in “comprehension” loops. This may change in a future version.
 
 ### Going `meta`
 
@@ -168,8 +170,6 @@ Paroxython will store inside the `meta` tree some program metadata, such as the 
 ## Modifying the taxonomy
 
 The definition of a taxonomy is, at least partly, a matter of pedagogical choices. You are encouraged to duplicate the default taxonomy, and replace or delete those taxa that do not fit your course purpose or logic.
-
-### Preliminaries
 
 Copy the default [`taxonomy.tsv`](https://repo/paroxython/resources/taxonomy.tsv) at the same level as the `src` folder that contains your Python programs:
 
@@ -188,8 +188,4 @@ This way, omitting the option `--taxonomy` like in the command below will use yo
 paroxython collect programming_101/src
 ```
 
-You can now experiment on this copy.
-
-### Workflow
-
-TODO
+You can now freely experiment on this copy.

@@ -56,7 +56,7 @@ increasing total cost and <a href="https://en.wikipedia.org/wiki/Source_lines_of
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L0-L331" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L0-L330" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">import subprocess
 from collections import defaultdict
@@ -161,11 +161,9 @@ class Recommendations:
         self.assessed_programs = self.assess(self.selected_programs)
 
     def parse_data(
-        # fmt: off
         self,
         data: Union[str, List[Criterion]],
-        operation: Operation
-        # fmt: on
+        operation: Operation,
     ) -&gt; List[Criterion]:
         if isinstance(data, list):  # The object can either be a list of criteria...
             return data
@@ -278,7 +276,8 @@ if __name__ == &#34;__main__&#34;:
     json = __import__(&#34;json&#34;)
     program_path = Path(&#34;../algo/programs&#34;)
     rec = Recommendations(
-        db=json.loads(Path(f&#34;{program_path}_db.json&#34;).read_text()), base_path=program_path.parent,
+        db=json.loads(Path(f&#34;{program_path}_db.json&#34;).read_text()),
+        base_path=program_path.parent,
     )
     rec.run_pipeline(ast.literal_eval(Path(f&#34;{program_path}_pipe.py&#34;).read_text()))
     output_path = Path(f&#34;{program_path}_recommendations.md&#34;)
@@ -303,7 +302,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L68-L319" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L68-L317" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">class Recommendations:
     def __init__(
@@ -371,11 +370,9 @@ if __name__ == &#34;__main__&#34;:
         self.assessed_programs = self.assess(self.selected_programs)
 
     def parse_data(
-        # fmt: off
         self,
         data: Union[str, List[Criterion]],
-        operation: Operation
-        # fmt: on
+        operation: Operation,
     ) -&gt; List[Criterion]:
         if isinstance(data, list):  # The object can either be a list of criteria...
             return data
@@ -657,14 +654,12 @@ be interpreted.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L182-L227" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L182-L225" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def parse_data(
-    # fmt: off
     self,
     data: Union[str, List[Criterion]],
-    operation: Operation
-    # fmt: on
+    operation: Operation,
 ) -&gt; List[Criterion]:
     if isinstance(data, list):  # The object can either be a list of criteria...
         return data
@@ -690,7 +685,7 @@ be interpreted.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L229-L319" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L227-L317" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def get_markdown(
     self,

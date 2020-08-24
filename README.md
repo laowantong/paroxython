@@ -77,7 +77,7 @@ In an ideal world, Paroxython could even put an end to the deadliest religious w
 ### How it works
 
 <p align="center">
-  <a href="https://laowantong.github.io/paroxython/docs_developer_manual/index.html">
+  <a href="https://laowantong.github.io/paroxython/developer_manual/index.html">
   <img src="docs/resources/waterfall.png">
   </a>
 </p>
@@ -87,7 +87,7 @@ Paroxython starts from a given folder of **programs**. Its contents is parsed, a
 These **labels** constitute only a scattered knowledge. The next step is to map them onto a **taxonomy** designed with basic hierarchical constraints in mind (e.g., the fact that the introduction of the concept of early exit must come after that of loop, which itself requires that of control flow, is expressed by the _taxon_ `"flow/loop/exit/early"`).
 
 <p align="center">
-  <a href="https://laowantong.github.io/paroxython/docs_user_manual/index.html#taxonomy">
+  <a href="https://laowantong.github.io/paroxython/user_manual/index.html#taxonomy">
   <img src="docs/resources/tree.png" alt="A taxonomy." width="66%">
   </a>
   <br>
@@ -188,6 +188,6 @@ This should print `"paroxython 0.4.5 loaded."`. Run it on a cell of Python code 
 
 # Further reading
 
-- [User manual](https://laowantong.github.io/paroxython/docs_user_manual/index.html)
-- [Developer manual](https://laowantong.github.io/paroxython/docs_developer_manual/index.html)
+- [User manual](https://laowantong.github.io/paroxython/user_manual/index.html)
+- [Developer manual](https://laowantong.github.io/paroxython/developer_manual/index.html)
 - [Module reference](https://laowantong.github.io/paroxython/#header-submodules)

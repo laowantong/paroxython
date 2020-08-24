@@ -76,7 +76,7 @@ produces the following output (limited for brevity to its first four rows):</p>
 into the following taxa, which are the only tags of interest to the end user. For instance,
 <code>"addition_operator"</code> will be translated into <code>"operator/arithmetic/addition"</code> (note that, unlike
 a label, a taxon may feature one or several slashes, which indicate the nesting of notions). More
-examples are given in the dedicated <a href="docs_user_manual/index.html#taxonomy">section</a> of the user manual.</p>
+examples are given in the dedicated <a href="user_manual/index.html#taxonomy">section</a> of the user manual.</p>
 <p>In fact, both labels and taxa are couples:</p>
 <ul>
 <li>Label: <code>("addition_operator", [(7, 7, "...")])</code>.</li>
@@ -164,7 +164,7 @@ given at the start of the section.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L0-L380" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L0-L384" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">from collections import Counter, defaultdict
 from pathlib import Path
@@ -194,7 +194,11 @@ __pdoc__ = {
 
 
 class Taxonomy:
-    def __init__(self, taxonomy_path: Optional[Path] = None, **kwargs,) -&gt; None:
+    def __init__(
+        self,
+        taxonomy_path: Optional[Path] = None,
+        **kwargs,
+    ) -&gt; None:
         taxonomy_path = taxonomy_path or Path(dirname(__file__)) / &#34;resources&#34; / &#34;taxonomy.tsv&#34;
         tsv = taxonomy_path.read_text().partition(&#34;-- EOF&#34;)[0].strip()
         self.literal_labels: Dict[LabelName, TaxonNames] = defaultdict(list)
@@ -298,7 +302,7 @@ force the interpretation of a pattern as non-literal by enclosing it in parenthe
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L247-L262" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L251-L266" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def is_literal(label_pattern: LabelPattern) -&gt; bool:
     return label_pattern.replace(&#34;.&#34;, &#34;\\.&#34;) == regex.escape(label_pattern)</code></pre>
@@ -391,7 +395,7 @@ a bag (multiset) of its spans.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L265-L366" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L269-L370" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def deduplicated_taxa(taxa: Taxa) -&gt; Taxa:
     if len(taxa) &lt; 2:
@@ -428,10 +432,14 @@ a bag (multiset) of its spans.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L134-L244" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L134-L248" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">class Taxonomy:
-    def __init__(self, taxonomy_path: Optional[Path] = None, **kwargs,) -&gt; None:
+    def __init__(
+        self,
+        taxonomy_path: Optional[Path] = None,
+        **kwargs,
+    ) -&gt; None:
         taxonomy_path = taxonomy_path or Path(dirname(__file__)) / &#34;resources&#34; / &#34;taxonomy.tsv&#34;
         tsv = taxonomy_path.read_text().partition(&#34;-- EOF&#34;)[0].strip()
         self.literal_labels: Dict[LabelName, TaxonNames] = defaultdict(list)
@@ -508,9 +516,13 @@ As an associative list, it only allows O(n) lookups a given label pattern.</li>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L135-L176" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L135-L180" class="git-link">Browse GitHub</a>
 </summary>
-<pre><code class="python">def __init__(self, taxonomy_path: Optional[Path] = None, **kwargs,) -&gt; None:
+<pre><code class="python">def __init__(
+    self,
+    taxonomy_path: Optional[Path] = None,
+    **kwargs,
+) -&gt; None:
     taxonomy_path = taxonomy_path or Path(dirname(__file__)) / &#34;resources&#34; / &#34;taxonomy.tsv&#34;
     tsv = taxonomy_path.read_text().partition(&#34;-- EOF&#34;)[0].strip()
     self.literal_labels: Dict[LabelName, TaxonNames] = defaultdict(list)
@@ -571,7 +583,7 @@ same label more than one time
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L179-L222" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L183-L226" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">@lru_cache(maxsize=None)
 def get_taxon_name_list(
@@ -609,7 +621,7 @@ returns them deduplicated (cf. <code><a title="paroxython.map_taxonomy.deduplica
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L224-L244" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/map_taxonomy.py#L228-L248" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def to_taxa(self, labels: Labels) -&gt; Taxa:
     acc: TaxaSpans = defaultdict(Counter)

@@ -427,7 +427,7 @@ class ProgramFilter:
                 is verified.
 
         Details:
-            See the [pipeline documentation](docs_user_manual/index.html#general-semantics-of-the-negation).
+            See the [pipeline documentation](user_manual/index.html#general-semantics-of-the-negation).
         """
         taxa_1 = self.taxa_of_pattern(taxon_pattern_1)
         taxa_2 = self.taxa_of_pattern(taxon_pattern_2)

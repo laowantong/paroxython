@@ -41,7 +41,7 @@ the filter evolves, the first set can only shrink, and the other ones only incre
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L0-L579" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L0-L571" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">from collections import Counter as counter
 from collections import defaultdict
@@ -145,12 +145,10 @@ class ProgramFilter:
     # Update the state of the filter by applying set operations with the given programs or taxa.
 
     def update_filter(
-        # fmt: off
         self,
         criteria: List[Criterion],
         operation: Operation,
-        quantifier: str
-        # fmt: on
+        quantifier: str,
     ) -&gt; None:
         if operation in (&#34;impart&#34;, &#34;hide&#34;):
             patterns = [str(criterion) for criterion in criteria]
@@ -236,12 +234,10 @@ class ProgramFilter:
     # Deal with semantic triples of the form (taxon_pattern_1, taxon_pattern_2, predicate)
 
     def programs_of_triple(
-        # fmt: off
         self,
         taxon_pattern_1: str,
         predicate: Predicate,
         taxon_pattern_2: str,
-        # fmt: on
     ) -&gt; ProgramNameSet:
         taxa_1 = self.taxa_of_pattern(taxon_pattern_1)
         taxa_2 = self.taxa_of_pattern(taxon_pattern_2)
@@ -257,12 +253,10 @@ class ProgramFilter:
         return result
 
     def programs_of_negated_triple(
-        # fmt: off
         self,
         taxon_pattern_1: str,
         predicate: Predicate,
         taxon_pattern_2: str,
-        # fmt: on
     ) -&gt; ProgramNameSet:
         taxa_1 = self.taxa_of_pattern(taxon_pattern_1)
         taxa_2 = self.taxa_of_pattern(taxon_pattern_2)
@@ -280,12 +274,10 @@ class ProgramFilter:
         return result
 
     def iterate_on_spans(
-        # fmt: off
-        self, # declared as an instance method to prevent pdoc3 from misplacing its documentation.
+        self,  # declared as an instance method to prevent pdoc3 from misplacing its documentation.
         spans: TaxaPoorSpans,
         taxa_1: TaxonNameSet,
-        taxa_2: TaxonNameSet
-        # fmt: on
+        taxa_2: TaxonNameSet,
     ) -&gt; Iterator:
         for (taxon_1, taxon_2) in product(taxa_1, taxa_2):
             if taxon_1 in spans and taxon_2 in spans:
@@ -342,7 +334,7 @@ class ProgramFilter:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L45-L550" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L45-L542" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">class ProgramFilter:
 
@@ -416,12 +408,10 @@ class ProgramFilter:
     # Update the state of the filter by applying set operations with the given programs or taxa.
 
     def update_filter(
-        # fmt: off
         self,
         criteria: List[Criterion],
         operation: Operation,
-        quantifier: str
-        # fmt: on
+        quantifier: str,
     ) -&gt; None:
         if operation in (&#34;impart&#34;, &#34;hide&#34;):
             patterns = [str(criterion) for criterion in criteria]
@@ -507,12 +497,10 @@ class ProgramFilter:
     # Deal with semantic triples of the form (taxon_pattern_1, taxon_pattern_2, predicate)
 
     def programs_of_triple(
-        # fmt: off
         self,
         taxon_pattern_1: str,
         predicate: Predicate,
         taxon_pattern_2: str,
-        # fmt: on
     ) -&gt; ProgramNameSet:
         taxa_1 = self.taxa_of_pattern(taxon_pattern_1)
         taxa_2 = self.taxa_of_pattern(taxon_pattern_2)
@@ -528,12 +516,10 @@ class ProgramFilter:
         return result
 
     def programs_of_negated_triple(
-        # fmt: off
         self,
         taxon_pattern_1: str,
         predicate: Predicate,
         taxon_pattern_2: str,
-        # fmt: on
     ) -&gt; ProgramNameSet:
         taxa_1 = self.taxa_of_pattern(taxon_pattern_1)
         taxa_2 = self.taxa_of_pattern(taxon_pattern_2)
@@ -551,12 +537,10 @@ class ProgramFilter:
         return result
 
     def iterate_on_spans(
-        # fmt: off
-        self, # declared as an instance method to prevent pdoc3 from misplacing its documentation.
+        self,  # declared as an instance method to prevent pdoc3 from misplacing its documentation.
         spans: TaxaPoorSpans,
         taxa_1: TaxonNameSet,
-        taxa_2: TaxonNameSet
-        # fmt: on
+        taxa_2: TaxonNameSet,
     ) -&gt; Iterator:
         for (taxon_1, taxon_2) in product(taxa_1, taxa_2):
             if taxon_1 in spans and taxon_2 in spans:
@@ -828,15 +812,13 @@ patterns (strings) and/or predicates (triples).</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L197-L248" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L197-L246" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def update_filter(
-    # fmt: off
     self,
     criteria: List[Criterion],
     operation: Operation,
-    quantifier: str
-    # fmt: on
+    quantifier: str,
 ) -&gt; None:
     if operation in (&#34;impart&#34;, &#34;hide&#34;):
         patterns = [str(criterion) for criterion in criteria]
@@ -884,7 +866,7 @@ being the only difference with <code><a title="paroxython.filter_programs.Progra
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L250-L279" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L248-L277" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def programs_and_taxa_of_patterns(
     self, patterns: List[str]
@@ -910,7 +892,7 @@ being the only difference with <code><a title="paroxython.filter_programs.Progra
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L281-L292" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L279-L290" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def programs_or_taxa_of_patterns(
     self, patterns: List[str]
@@ -965,7 +947,7 @@ of criteria it meets.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L294-L338" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L292-L336" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def programs_of_criteria(self, criteria: List[Criterion], follow: bool) -&gt; Counter[ProgramName]:
     resulting_programs: Counter[ProgramName] = counter()
@@ -1002,7 +984,7 @@ instance, imparting a taxon <code>a/b/c</code>, will impart taxa <code>a</code> 
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L340-L353" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L338-L351" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def impart_taxa(self, taxa: TaxonNameSet) -&gt; None:
     for taxon in taxa:
@@ -1027,7 +1009,7 @@ filtered out.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L355-L363" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L353-L361" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def include_programs(self, programs: ProgramNameSet) -&gt; None:
     self.selected_programs.intersection_update(programs)</code></pre>
@@ -1049,7 +1031,7 @@ by transitivity) at least one member of the given <code>programs</code>.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L365-L376" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L363-L374" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def exclude_programs(self, programs: ProgramNameSet, follow: bool) -&gt; None:
     self.selected_programs.difference_update(programs)
@@ -1084,15 +1066,13 @@ span <code>s_2</code> of <code>taxon_2</code> for which <code>predicate(s_1, s_2
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L380-L413" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L378-L409" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def programs_of_triple(
-    # fmt: off
     self,
     taxon_pattern_1: str,
     predicate: Predicate,
     taxon_pattern_2: str,
-    # fmt: on
 ) -&gt; ProgramNameSet:
     taxa_1 = self.taxa_of_pattern(taxon_pattern_1)
     taxa_2 = self.taxa_of_pattern(taxon_pattern_2)
@@ -1126,19 +1106,17 @@ no span <code>s_2</code> of a taxon matching <code>taxon_pattern_2</code> for wh
 is verified.</dd>
 </dl>
 <h2 id="details">Details</h2>
-<p>See the <a href="docs_user_manual/index.html#general-semantics-of-the-negation">pipeline documentation</a>.</p></div>
+<p>See the <a href="user_manual/index.html#general-semantics-of-the-negation">pipeline documentation</a>.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L415-L451" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L411-L445" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def programs_of_negated_triple(
-    # fmt: off
     self,
     taxon_pattern_1: str,
     predicate: Predicate,
     taxon_pattern_2: str,
-    # fmt: on
 ) -&gt; ProgramNameSet:
     taxa_1 = self.taxa_of_pattern(taxon_pattern_1)
     taxa_2 = self.taxa_of_pattern(taxon_pattern_2)
@@ -1247,15 +1225,13 @@ for <code>((1, 1), (1, 1))</code>):</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L453-L550" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/filter_programs.py#L447-L542" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def iterate_on_spans(
-    # fmt: off
-    self, # declared as an instance method to prevent pdoc3 from misplacing its documentation.
+    self,  # declared as an instance method to prevent pdoc3 from misplacing its documentation.
     spans: TaxaPoorSpans,
     taxa_1: TaxonNameSet,
-    taxa_2: TaxonNameSet
-    # fmt: on
+    taxa_2: TaxonNameSet,
 ) -&gt; Iterator:
     for (taxon_1, taxon_2) in product(taxa_1, taxa_2):
         if taxon_1 in spans and taxon_2 in spans:

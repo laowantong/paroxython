@@ -36,7 +36,7 @@ def find_all_features(
         specifications (str): Normally, the contents of
             [`spec.md`](https://repo/paroxython/resources/spec.md).
         find_all (Callable, optional): A function finding all feature-defining triples of the text.
-            [Not to be explicitly provided.](docs_developer_manual/index.html#default-argument-trick)
+            [Not to be explicitly provided.](developer_manual/index.html#default-argument-trick)
 
     Returns:
         Iterator[Tuple[LabelName, str, str]]: An iterator yielding all matching triples of the form:

@@ -99,7 +99,7 @@ class TagDatabase:
         r"""Dump the constructed `TagDatabase` object as a JSON string.
 
         Description:
-            Schema and purpose [in the user manual](docs_user_manual/index.html#the-json-database).
+            Schema and purpose [in the user manual](user_manual/index.html#the-json-database).
 
         Example:
             See the [JSON tag database](https://repo/examples/mini/programs_db.json) constructed from
@@ -158,7 +158,7 @@ class TagDatabase:
 
         Description:
             Schema, purpose and example queries
-            [in the user manual](docs_user_manual/index.html#the-sqlite-database).
+            [in the user manual](user_manual/index.html#the-sqlite-database).
         """
         db_path = db_path or self.directory.parent / f"{self.directory.name}_db.sqlite"
         print(f"Writing {db_path}.")
@@ -303,7 +303,7 @@ def compute_direct_importations(
         match_import (Callable, optional):  A function taking a label name and, in
             the case it starts with `"import_internally:"`, returns a match object whose
             first group is the name of the imported program.
-            [Not to be explicitly provided.](docs_developer_manual/index.html#default-argument-trick)
+            [Not to be explicitly provided.](developer_manual/index.html#default-argument-trick)
 
     Returns:
         ProgramToPrograms: A dictionary mapping every program name to the list of the names of

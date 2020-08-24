@@ -404,7 +404,7 @@ explicitly provided. Defaults to <code>f"CREATE TABLE t ({','.join(columns)})"</
 <dt><strong><code>prerequisites</code></strong> :&ensp;<code>Callable</code>, optional</dt>
 <dd>A function taking an <abbr title="Structured Query Language">SQL</abbr> query, and returning the
 table names referred to in the FROM clause.
-<a href="docs_developer_manual/index.html#default-argument-trick">Not to be explicitly provided.</a>
+<a href="developer_manual/index.html#default-argument-trick">Not to be explicitly provided.</a>
 Defaults to <code>regex.compile(r"(?m)\b(?:FROM|JOIN) t_(\w+)").findall</code>.</dd>
 <dt><strong><code>create_subtable</code></strong> :&ensp;<code>str</code>, optional</dt>
 <dd>The <abbr title="Structured Query Language">SQL</abbr> query creating a subtable from a label prefix.
