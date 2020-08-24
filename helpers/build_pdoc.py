@@ -43,6 +43,31 @@ def update_readme_example():
 
 
 def generate_html():
+    temp = {
+        "docs_user_manual": [
+            "preparing.md",
+            "pipeline_tutorial.md",
+            "taxonomy.md",
+            "databases.md",
+            "pipeline_documentation.md",
+            "glossary.md",
+        ],
+        "docs_developer_manual": [
+            "bird_view.md",
+            "helpers.md",
+            "implementation_notes.md",
+        ],
+    }
+    package_path = Path("paroxython")
+    for (temp_folder, names) in temp.items():
+        path = package_path / temp_folder
+        if path.is_dir():
+            shutil.rmtree(path)
+        path.mkdir()
+        lines = "\n\n<br>\n\n".join(f".. include:: ../../docs/md/{name}" for name in names)
+        path = path / "__init__.py"
+        path.write_text(f'"""\n{lines}\n"""\n')
+
     pdoc_options = " ".join(
         [
             "--force",
@@ -65,6 +90,11 @@ def generate_html():
     subprocess.run(f"pdoc {pdoc_options} paroxython", shell=True)
 
     subprocess.run(f"mv -f docs/paroxython/* docs; rmdir docs/paroxython/", shell=True)
+
+    for temp_folder in temp:
+        path = package_path / temp_folder
+        if path.is_dir():
+            shutil.rmtree(path)
 
 
 def resolve_new_types():
