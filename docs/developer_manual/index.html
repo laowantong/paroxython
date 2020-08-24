@@ -53,10 +53,10 @@
 </ol>
 </dd>
 <dt><code><a title="paroxython.derived_labels_db" href="../derived_labels_db.html">paroxython.derived_labels_db</a></code></dt>
-<dd>As they are found in a given source code, the features described by <code>spec.md</code> are stored in an in-memory database, as labels with a prefix, possibly a suffix, and a span (consisting of their first and last line numbers, as well as a unique identifier to pinpoint their precise location within the <abbr title="Abstract Syntax Tree">AST</abbr>). The storage of these labels is used dynamically to search for so-called derived features, which themselves are necessarily specified by <abbr title="Structured Query Language">SQL</abbr> queries.</dd>
+<dd>As they are found in a given source code, the features described by <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md"><code>spec.md</code></a> are stored in an in-memory database, as labels with a prefix, possibly a suffix, and a span (consisting of their first and last line numbers, as well as a unique identifier to pinpoint their precise location within the <abbr title="Abstract Syntax Tree">AST</abbr>). The storage of these labels is used dynamically to search for so-called derived features, which themselves are necessarily specified by <abbr title="Structured Query Language">SQL</abbr> queries.</dd>
 <dt><code><a title="paroxython.parse_program" href="../parse_program.html">paroxython.parse_program</a></code></dt>
 <dd>
-<p>This module mainly consists of a function which flattens a given (preprocessed) program, parses it along the specifications defined in <code>spec.md</code>, and returns the list of its labels with their spans.</p>
+<p>This module mainly consists of a function which flattens a given (preprocessed) program, parses it along the specifications defined in <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md"><code>spec.md</code></a>, and returns the list of its labels with their spans.</p>
 <p><strong>Warning.</strong> The binding of a regular expression-specified multi-line feature with its spans may reveal somewhat tricky. Make sure to understand the explanations of <code><a title="paroxython.parse_program.get_bindings" href="../parse_program.html#paroxython.parse_program.get_bindings">get_bindings()</a></code> in the case where your home-made regular expression yields unexpected results.</p>
 </dd>
 <dt><code><a title="paroxython.label_programs" href="../label_programs.html">paroxython.label_programs</a></code></dt>
@@ -104,12 +104,12 @@ A taxon is the structured version of one or more labels. For instance, the label
 <dd>
 <p>In addition to applying the transformations defined in <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/taxonomy.tsv"><code>taxonomy.tsv</code></a> to a given list of labels, the main method of this module, <code><a title="paroxython.map_taxonomy.Taxonomy.to_taxa" href="../map_taxonomy.html#paroxython.map_taxonomy.Taxonomy.to_taxa">Taxonomy.to_taxa()</a></code>, operates a deduplication of the resulting taxa.</p>
 <p>Indeed, a same feature is often described by several labels, for instance, the <code>for</code> loop of the following program:</p>
+<pre><code>for x in range(10):
+    print("foo")
+    if bar(x):
+        break
+</code></pre>
 </dd>
-<dt><pre><code class="python">    for x in range(10):
-        print(&quot;foo&quot;)
-        if bar(x):
-           break
-</code></pre></dt>
 <dd>
 <p>&hellip; will be associated with no less than six labels (remember that most of them were only useful during the execution of <code><a title="paroxython.derived_labels_db" href="../derived_labels_db.html">paroxython.derived_labels_db</a></code>):</p>
 <ol>
@@ -129,9 +129,9 @@ A taxon is the structured version of one or more labels. For instance, the label
 <p>The latter is a suffix of (at least) another one: as an overly broad categorization of the feature, it can be discarded. Only the former two will go into the deduplicated result: they indeed categorize the feature along two partially distinct dimensions (the iteration domain and the nature of the exit).</p>
 </dd>
 <dt><code><a title="paroxython.make_db" href="../make_db.html">paroxython.make_db</a></code></dt>
-<dd>This is the main user-facing module of the first stage, invoked on command line by:</dd>
-<dt><pre><code>paroxython collect DIRECTORY
-</code></pre></dt>
+<dd>This is the main user-facing module of the first stage, invoked on command line by:<pre><code>paroxython collect DIRECTORY
+</code></pre>
+</dd>
 <dd>
 <p>It walks through the input directory, labels its programs and maps these labels onto the default taxonomy (or yours). Along this process, the labels <code>"import_internally"</code>, calculated by <code><a title="paroxython.label_programs" href="../label_programs.html">paroxython.label_programs</a></code>, are used to list, for each program, those of the input directory that it imports or by which it is imported (either directly or indirectly).</p>
 <p>Finally, the results are stored as a NoSQL (<abbr title="JavaScript Object Notation">JSON</abbr>) or relational (SQLite) database.</p>
@@ -181,9 +181,9 @@ A taxon is the structured version of one or more labels. For instance, the label
 <dt><code><a title="paroxython.assess_costs" href="../assess_costs.html">paroxython.assess_costs</a></code></dt>
 <dd>The costs in question are the learning costs. The final state of the imparted knowledge calculated by <code><a title="paroxython.filter_programs" href="../filter_programs.html">paroxython.filter_programs</a></code> is used to initialize the constructor after all the pipeline commands have been executed. The main method <code><a title="paroxython.assess_costs.LearningCostAssessor.__call__" href="../assess_costs.html#paroxython.assess_costs.LearningCostAssessor.__call__">LearningCostAssessor.__call__()</a></code> is then invoked with the remaining recommended programs.</dd>
 <dt><code><a title="paroxython.recommend_programs" href="../recommend_programs.html">paroxython.recommend_programs</a></code></dt>
-<dd>The user-facing module of the second stage, called on command line by:</dd>
-<dt><pre><code>paroxython recommend -p pipeline_path DB_PATH
-</code></pre></dt>
+<dd>The user-facing module of the second stage, called on command line by:<pre><code>paroxython recommend -p pipeline_path DB_PATH
+</code></pre>
+</dd>
 <dd>
 <p>A simple wrapper around <code><a title="paroxython.filter_programs.ProgramFilter" href="../filter_programs.html#paroxython.filter_programs.ProgramFilter">ProgramFilter</a></code>, with report capabilities. For each command of the pipeline, it checks the validity of its operation and data, and sends them to <code><a title="paroxython.filter_programs.ProgramFilter.update_filter" href="../filter_programs.html#paroxython.filter_programs.ProgramFilter.update_filter">ProgramFilter.update_filter()</a></code>. When the pipeline is exhausted, it invokes <code><a title="paroxython.assess_costs.LearningCostAssessor.__call__" href="../assess_costs.html#paroxython.assess_costs.LearningCostAssessor.__call__">LearningCostAssessor.__call__()</a></code> to compute the relevant learning costs.</p>
 </dd>

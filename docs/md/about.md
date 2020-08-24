@@ -30,8 +30,8 @@ Far from being an arbitrary label, “Paroxython” has been scientifically form
 Paroxython is on [GitHub](https://github.com/laowantong/paroxython) and welcomes your [issues](https://github.com/laowantong/paroxython/issues) or [pull requests](https://github.com/laowantong/paroxython/pulls). You may:
 
 - contribute to the code;
-- add new features in [`spec.md`](https://repo/paroxython/resources/spec.md);
-- submit your personal changes to [`taxonomy.tsv`](https://repo/paroxython/resources/taxonomy.tsv) for integration in the default taxonomy;
+- add new features in `spec.md`;
+- submit your personal changes to `taxonomy.tsv` for integration in the default taxonomy;
 - translate some of this documentation into English.
 
 If you're a researcher and interested in a scientific collaboration, I would love to hear from you. Drop an email to my dot-separated name (cf. previous section) at `univ-lorraine.fr`.

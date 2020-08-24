@@ -292,6 +292,14 @@ def expand_repo_urls():
     for path in Path("docs/").rglob("*.html"):
         source = path.read_text()
         source = source.replace(
+            "<code>spec.md</code>",
+            '<a href="https://repo/paroxython/resources/spec.md"><code>spec.md</code></a>',
+        )
+        source = source.replace(
+            "<code>taxonomy.tsv</code>",
+            '<a href="https://repo/paroxython/resources/taxonomy.tsv"><code>taxonomy.tsv</code></a>',
+        )
+        source = source.replace(
             "https://repo/", "https://github.com/laowantong/paroxython/blob/master/"
         )
         path.write_text(source)

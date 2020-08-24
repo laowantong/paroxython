@@ -10,10 +10,10 @@ During the development process of Paroxython, it proved useful to create a numbe
 :   Generates the source code of the module `paroxython.compare_spans`. Must be launched manually.
 
 [`reformat_spec.py`](https://repo/helpers/reformat_spec.py)
-:   Reads the contents of [`spec.md`](https://repo/paroxython/resources/spec.md), normalizes its formatting and writes it back. The goal is to ensure the consistency of the document and the validity of its numerous internal links, as well as to avoid authors wasting time with formatting details. Launched automatically by [`test_parse_program.py`](https://repo/tests/test_parse_program.py).
+:   Reads the contents of `spec.md`, normalizes its formatting and writes it back. The goal is to ensure the consistency of the document and the validity of its numerous internal links, as well as to avoid authors wasting time with formatting details. Launched automatically by [`test_parse_program.py`](https://repo/tests/test_parse_program.py).
 
 [`suggest_regex.py`](https://repo/helpers/suggest_regex.py)
-:   The regular expression patterns of [`spec.md`](https://repo/paroxython/resources/spec.md) use a rather limited and repetitive array of techniques. This program aims to partially automate their production. Given the `flat_ast.txt` outputted by [`parse_source.py`](https://repo/helpers/parse_source.py) (cf. testing helper below), extract the lines that characterize the feature to be recognized, and save them in the `sandbox` folder under the name `flat_ast_selection.txt`. The script will then print a regular expression that matches this selection.
+:   The regular expression patterns of `spec.md` use a rather limited and repetitive array of techniques. This program aims to partially automate their production. Given the `flat_ast.txt` outputted by [`parse_source.py`](https://repo/helpers/parse_source.py) (cf. testing helper below), extract the lines that characterize the feature to be recognized, and save them in the `sandbox` folder under the name `flat_ast_selection.txt`. The script will then print a regular expression that matches this selection.
 
 ## Testing
 
@@ -24,7 +24,7 @@ During the development process of Paroxython, it proved useful to create a numbe
 :   Populates the example directory [`idioms/programs`](https://repo/examples/idioms/programs), with the broad variety of code snippets snapshotted from the amazing [Programming Idioms](https://www.programming-idioms.org) website of Valentin Deleplace. More info [`here`](https://repo/examples/idioms/read_me.md).
 
 [`parse_source.py`](https://repo/helpers/parse_source.py)
-:   A wrapper around `paroxython.parse_program` that allows you to quickly test the labelling of a given source code. This one must be placed under the name `source.py` in a `sandbox`  directory (unversioned). The flattened version of its AST is generated as `flat_ast.txt` in the same folder, while its label table is displayed in Markdown format. All of this may streamline the work on [`spec.md`](https://repo/paroxython/resources/spec.md).
+:   A wrapper around `paroxython.parse_program` that allows you to quickly test the labelling of a given source code. This one must be placed under the name `source.py` in a `sandbox`  directory (unversioned). The flattened version of its AST is generated as `flat_ast.txt` in the same folder, while its label table is displayed in Markdown format. All of this may streamline the work on `spec.md`.
 
 ## Documentation builders and examples
 

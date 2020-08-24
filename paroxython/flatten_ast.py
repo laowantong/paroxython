@@ -64,7 +64,7 @@ encoded, requesting it does not require recursion any more. Non-recursive[^regex
 [regular expressions](https://en.wikipedia.org/wiki/Regular_expression) become a natural candidate
 for the request language. The current version of Paroxython explores this option. The regular
 expression patterns are processed in `paroxython.parse_program` on the basis of the definitions
-listed in [`spec.md`](https://repo/paroxython/resources/spec.md).
+listed in `spec.md`.
 
 [^regex-recursion]: Although nowadays, numerous flavours of regex engines support recursion,
 the complexity of writing, reading and maintaining any pattern using it would quickly go through the

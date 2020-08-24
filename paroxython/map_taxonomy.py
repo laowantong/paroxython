@@ -4,9 +4,8 @@ Translate labels into taxa.
 ## Description
 
 This step comes after `paroxython.label_programs` has tagged a program with the **labels** specified
-in [`spec.md`](https://repo/paroxython/resources/spec.md). Its purpose is to convert these labels
-into **taxa** based on the rules defined (by default) in
-[`taxonomy.tsv`](https://repo/paroxython/resources/taxonomy.tsv).
+in `spec.md`. Its purpose is to convert these labels into **taxa** based on the rules defined (by
+default) in `taxonomy.tsv`.
 
 ## Example
 
@@ -148,8 +147,7 @@ class Taxonomy:
                 Defaults to `None`.
 
         Description:
-            1. Read the taxonomy, falling back to the provided default
-            [`taxonomy.tsv`](https://repo/paroxython/resources/taxonomy.tsv).
+            1. Read the taxonomy, falling back to the provided default `taxonomy.tsv`.
             2. Drop the part starting with the string `"-- EOF"`, if any (this pre-processing
             allows you to leave notes or drafts at the end of the file).
             3. Distribute the remaining rows into two different accumulators, depending on the

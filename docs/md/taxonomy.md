@@ -43,7 +43,7 @@ Hover over the nodes to see these numbers, or click them to navigate the tree. B
 
 ## Mapping the labels onto taxa
 
-Paroxython does not directly grow these forest of taxa. Remember, a program is first tagged with labels (as specified in [`spec.md`](https://repo/paroxython/resources/spec.md)). Those are then translated into taxa by a purely morphological operation (search and replace), without any more reference to the original source code.
+Paroxython does not directly grow these forest of taxa. Remember, a program is first tagged with labels (as specified in `spec.md`). Those are then translated into taxa by a purely morphological operation (search and replace), without any more reference to the original source code.
 
 ### 1-1 mappings
 
@@ -56,7 +56,7 @@ Suppose a program has been tagged with the labels:
 [^compare]:
     On a side note: in the AST, an expression like `a < b < c` counts for **one** (chained) comparison.
 
-The following conversion table (extracted from [`taxonomy.tsv`](https://repo/paroxython/resources/taxonomy.tsv)) will then give the taxa seen above in the subtree `type/boolean`:
+The following conversion table (extracted from `taxonomy.tsv`) will then give the taxa seen above in the subtree `type/boolean`:
 
 Taxa (replacement patterns)    | Labels (search patterns)
 :------------------------------|:-----------------------
@@ -106,7 +106,7 @@ Taxa (replacement patterns)    | Labels (search patterns)
 
 ### 1-0 mapping
 
-At first glance, some of the labels generated during the first tagging step seem redundant, e.g. `"binary_operator:Add"` and `"addition_operator"`. In fact, the former was used to calculate the latter. In [`spec.md`](https://repo/paroxython/resources/spec.md), the definition of `"addition_operator"` is introduced by:
+At first glance, some of the labels generated during the first tagging step seem redundant, e.g. `"binary_operator:Add"` and `"addition_operator"`. In fact, the former was used to calculate the latter. In `spec.md`, the definition of `"addition_operator"` is introduced by:
 
 > An addition operator is a binary operator `Add` which has not be classified as a concatenation operator.
 
@@ -171,7 +171,7 @@ Paroxython will store inside the `meta` tree some program metadata, such as the 
 
 The definition of a taxonomy is, at least partly, a matter of pedagogical choices. You are encouraged to duplicate the default taxonomy, and replace or delete those taxa that do not fit your course purpose or logic.
 
-Copy the default [`taxonomy.tsv`](https://repo/paroxython/resources/taxonomy.tsv) at the same level as the `src` folder that contains your Python programs:
+Copy the default `taxonomy.tsv` at the same level as the `src` folder that contains your Python programs:
 
 ```plain
 programming_101/

@@ -19,7 +19,7 @@ This section mainly describes how the different parts of Paroxython (code, data,
 `paroxython.flatten_ast`
 :   The first stage of [static analysis](https://en.wikipedia.org/wiki/Static_program_analysis) often consists in constructing the [Abstract Syntax Tree](https://en.wikipedia.org/wiki/Abstract_syntax_tree) of the code to parse. Here, we go a step further by transforming this AST into a sequence of text lines, each one consisting of the whole path from the tree root to the current node. Some additional transformations are made on the fly, in order to simplify, or even make possible, the writing of regular expressions that match the algorithmic features we are interested in.
 
-[`spec.md`](https://repo/paroxython/resources/spec.md) (click to browse the default specifications on GitHub)
+`spec.md` (click to browse the default specifications on GitHub)
 :   This input file is quite special. It serves three distinct roles:
 
 :    1. As its name suggests, it specifies what features to look for, and how to find them in a given source code. The specifications are expressed either as [regular expressions](https://en.wikipedia.org/wiki/Regular_expression) on the flattened version of the AST, or as [SQL](https://en.wikipedia.org/wiki/SQL) queries on the features found so far (either as a regular expression match or in the table resulting from a previous query).
@@ -37,11 +37,11 @@ This section mainly describes how the different parts of Paroxython (code, data,
 `paroxython.label_programs`
 :   The main function of this module not only maps `paroxython.parse_program` on the list returned by `paroxython.list_programs`, transforming it into a list of _labelled_ programs, but tweaks all the labels which mark an importation of an “internal” module, _i.e_, a program belonging to this very list. For instance, a label `"import:my_program"` would be transformed into `"import_internally:my_program"`, while `"import:itertools"` would be left untouched.
 
-[`taxonomy.tsv`](https://repo/paroxython/resources/taxonomy.tsv) (click to browse the default taxonomy on GitHub)
+`taxonomy.tsv` (click to browse the default taxonomy on GitHub)
 :   The labels produced so far are nothing more than an intermediate result. A number of them have only been useful for deriving other labels, and can now be ignored. Those that remain must be transformed into taxa.
     A taxon is the structured version of one or more labels. For instance, the label `"if_without_else"` will maps onto the taxon `"flow/conditional/no_else"`, which conveniently tells us that a conditional without an else branch is a subcase of a conditional, itself being a subcase of a control flow.
 
-    The file [`taxonomy.tsv`](https://repo/paroxython/resources/taxonomy.tsv) is a simple two-columns associative TSV array which maps label _patterns_ onto taxa. Since some label patterns are rather long regular expressions, the columns are swapped: the _second_ column lists the labels patterns to search; the _first_ columns, the taxa to be substituted. For instance, the row:
+    The file `taxonomy.tsv` is a simple two-columns associative TSV array which maps label _patterns_ onto taxa. Since some label patterns are rather long regular expressions, the columns are swapped: the _second_ column lists the labels patterns to search; the _first_ columns, the taxa to be substituted. For instance, the row:
 
     | Taxa (replacement patterns) | Labels (search patterns) |
     |:--|:--|
@@ -60,16 +60,14 @@ This section mainly describes how the different parts of Paroxython (code, data,
     In the replacement pattern, `"\1"` denotes the 1st captured group (in parentheses) of the search pattern.
 
 `paroxython.map_taxonomy`
-:   In addition to applying the transformations defined in [`taxonomy.tsv`](https://repo/paroxython/resources/taxonomy.tsv) to a given list of labels, the main method of this module, `paroxython.map_taxonomy.Taxonomy.to_taxa`, operates a deduplication of the resulting taxa.
+:   In addition to applying the transformations defined in `taxonomy.tsv` to a given list of labels, the main method of this module, `paroxython.map_taxonomy.Taxonomy.to_taxa`, operates a deduplication of the resulting taxa.
 
     Indeed, a same feature is often described by several labels, for instance, the `for` loop of the following program:
 
-```python
-    for x in range(10):
-        print("foo")
-        if bar(x):
-           break
-```
+        for x in range(10):
+            print("foo")
+            if bar(x):
+                break
 
 :   ... will be associated with no less than six labels (remember that most of them were only useful during the execution of `paroxython.derived_labels_db`):
 
@@ -80,7 +78,7 @@ This section mainly describes how the different parts of Paroxython (code, data,
     1. `"loop_with_break:for"`
     1. `"node:For"`
 
-    The last three of these are ignored, since they do not define any mapping in [`taxonomy.tsv`](https://repo/paroxython/resources/taxonomy.tsv). The remaining three are mapped respectively onto:
+    The last three of these are ignored, since they do not define any mapping in `taxonomy.tsv`. The remaining three are mapped respectively onto:
 
     1. `"flow/loop/for/arithmetic"`
     1. `"flow/loop/exit/early/break"`
@@ -91,9 +89,7 @@ This section mainly describes how the different parts of Paroxython (code, data,
 `paroxython.make_db`
 :   This is the main user-facing module of the first stage, invoked on command line by:
 
-```
-paroxython collect DIRECTORY
-```
+        paroxython collect DIRECTORY
 
 :   It walks through the input directory, labels its programs and maps these labels onto the default taxonomy (or yours). Along this process, the labels `"import_internally"`, calculated by `paroxython.label_programs`, are used to list, for each program, those of the input directory that it imports or by which it is imported (either directly or indirectly).
 
@@ -148,9 +144,7 @@ paroxython collect DIRECTORY
 `paroxython.recommend_programs`
 :   The user-facing module of the second stage, called on command line by:
 
-```
-paroxython recommend -p pipeline_path DB_PATH
-```
+        paroxython recommend -p pipeline_path DB_PATH
 
 :   A simple wrapper around `paroxython.filter_programs.ProgramFilter`, with report capabilities. For each command of the pipeline, it checks the validity of its operation and data, and sends them to `paroxython.filter_programs.ProgramFilter.update_filter`. When the pipeline is exhausted, it invokes `paroxython.assess_costs.LearningCostAssessor.__call__` to compute the relevant learning costs.
 
