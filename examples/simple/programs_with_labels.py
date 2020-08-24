@@ -20,7 +20,7 @@ for i, name in enumerate(friends): # call_argument:friends, external_free_call:e
 # 04_fibonacci.py
 # ----------------------------------------------------------------------------------------
 parents, babies = (1, 1) # assignment, assignment_lhs_identifier:babies, assignment_lhs_identifier:parents, assignment_rhs_atom:1, literal:1, literal:Tuple, n_liner_style:4 (-> +3), node:Assign, node:Name, node:Num, node:Tuple, one_shot_style (-> +3), parallel_assignment:2, whole_span:4 (-> +3)
-while babies < 100: # comparison_operator:Lt, literal:100, loop:while (-> +2), loop_with_late_exit:while (-> +2), node:Compare, node:Name, node:Num, node:While (-> +2)
+while babies < 100: # comparison_operator:Lt, literal:100, loop:while (-> +2), loop_with_late_exit:while (-> +2), magic_number:100, node:Compare, node:Name, node:Num, node:While (-> +2)
     print("This generation has {} babies".format(babies)) # call_argument:, call_argument:babies, composition, external_free_call:print, free_call:print, free_call_without_result:print, literal:Str, member_call_method:format, node:Attribute, node:Call, node:Expr, node:Name, node:Str
     parents, babies = (babies, parents + babies) # addition_operator, assignment, assignment_lhs_identifier:babies, assignment_lhs_identifier:parents, assignment_rhs_atom:babies, assignment_rhs_atom:parents, binary_operator:Add, literal:Tuple, node:Assign, node:BinOp, node:Name, node:Tuple, parallel_assignment:2, slide, update:babies:parents, update:parents:babies, update_by_assignment:babies:parents, update_by_assignment:parents:babies, update_by_assignment_with, update_with
 
@@ -46,8 +46,8 @@ for test_string in ["555-1212", "ILL-EGAL"]: # for:test_string (-> +4), literal:
 # ----------------------------------------------------------------------------------------
 # 07_grocery_bill.py
 # ----------------------------------------------------------------------------------------
-prices = {"apple": 0.40, "banana": 0.50} # assignment, assignment_lhs_identifier:prices, assignment_rhs_atom:0.4, assignment_rhs_atom:0.5, flat_style (-> +3), literal:0.4, literal:0.5, literal:Dict, literal:Str, n_liner_style:4 (-> +3), node:Assign, node:Dict, node:Name, node:Num, node:Str, one_shot_style (-> +3), single_assignment:prices, whole_span:4 (-> +3)
-my_purchase = {"apple": 1, "banana": 6} # assignment, assignment_lhs_identifier:my_purchase, assignment_rhs_atom:1, assignment_rhs_atom:6, literal:1, literal:6, literal:Dict, literal:Str, node:Assign, node:Dict, node:Name, node:Num, node:Str, single_assignment:my_purchase
+prices = {"apple": 0.40, "banana": 0.50} # assignment, assignment_lhs_identifier:prices, assignment_rhs_atom:0.4, assignment_rhs_atom:0.5, flat_style (-> +3), literal:0.4, literal:0.5, literal:Dict, literal:Str, magic_number:0.4, magic_number:0.5, n_liner_style:4 (-> +3), node:Assign, node:Dict, node:Name, node:Num, node:Str, one_shot_style (-> +3), single_assignment:prices, whole_span:4 (-> +3)
+my_purchase = {"apple": 1, "banana": 6} # assignment, assignment_lhs_identifier:my_purchase, assignment_rhs_atom:1, assignment_rhs_atom:6, literal:1, literal:6, literal:Dict, literal:Str, magic_number:6, node:Assign, node:Dict, node:Name, node:Num, node:Str, single_assignment:my_purchase
 grocery_bill = sum(prices[fruit] * my_purchase[fruit] for fruit in my_purchase) # assignment:sum, assignment_lhs_identifier:grocery_bill, assignment_rhs_atom:fruit, assignment_rhs_atom:my_purchase, assignment_rhs_atom:prices, binary_operator:Mult, call_argument:, comprehension:Generator, comprehension_for_count:1, external_free_call:sum, free_call:sum, index:fruit, multiplication_operator, node:Assign, node:BinOp, node:Call, node:GeneratorExp, node:Name, node:Subscript, single_assignment:grocery_bill
 print("I owe the grocer $%.2f" % grocery_bill) # binary_operator:Mod, call_argument:, external_free_call:print, free_call:print, free_call_without_result:print, literal:Str, node:BinOp, node:Call, node:Expr, node:Name, node:Str, string_formatting_operator
 
@@ -78,12 +78,12 @@ for file_name in sorted(python_files): # call_argument:python_files, external_fr
 # ----------------------------------------------------------------------------------------
 from time import localtime # import:time:localtime, import_module:time, import_name:localtime, n_liner_style:16 (-> +16), node:ImportFrom, one_shot_style (-> +16), whole_span:17 (-> +16)
 activities = { # assignment, assignment_lhs_identifier:activities, literal:Dict, node:Assign (-> +6), node:Dict (-> +6), node:Name, single_assignment:activities
-    8: "Sleeping", # assignment_rhs_atom:8, literal:8, literal:Str, node:Num, node:Str
-    9: "Commuting", # assignment_rhs_atom:9, literal:9, literal:Str, node:Num, node:Str
-    17: "Working", # assignment_rhs_atom:17, literal:17, literal:Str, node:Num, node:Str
-    18: "Commuting", # assignment_rhs_atom:18, literal:18, literal:Str, node:Num, node:Str
-    20: "Eating", # assignment_rhs_atom:20, literal:20, literal:Str, node:Num, node:Str
-    22: "Resting", # assignment_rhs_atom:22, literal:22, literal:Str, node:Num, node:Str
+    8: "Sleeping", # assignment_rhs_atom:8, literal:8, literal:Str, magic_number:8, node:Num, node:Str
+    9: "Commuting", # assignment_rhs_atom:9, literal:9, literal:Str, magic_number:9, node:Num, node:Str
+    17: "Working", # assignment_rhs_atom:17, literal:17, literal:Str, magic_number:17, node:Num, node:Str
+    18: "Commuting", # assignment_rhs_atom:18, literal:18, literal:Str, magic_number:18, node:Num, node:Str
+    20: "Eating", # assignment_rhs_atom:20, literal:20, literal:Str, magic_number:20, node:Num, node:Str
+    22: "Resting", # assignment_rhs_atom:22, literal:22, literal:Str, magic_number:22, node:Num, node:Str
 }
 time_now = localtime() # assignment:localtime, assignment_lhs_identifier:time_now, external_free_call:localtime, free_call:localtime, free_call_without_arguments:localtime, node:Assign, node:Call, node:Name, single_assignment:time_now
 hour = time_now.tm_hour # assignment, assignment_lhs_identifier:hour, assignment_rhs_atom:time_now, node:Assign, node:Attribute, node:Name, single_assignment:hour
@@ -103,7 +103,7 @@ REFRAIN = """ # assignment, assignment_lhs_identifier:REFRAIN, n_liner_style:10 
 take one down, pass it around,
 %d bottles of beer on the wall!
 """ # literal:Str, node:Str
-bottles_of_beer = 9 # assignment:9, assignment_lhs_identifier:bottles_of_beer, assignment_rhs_atom:9, literal:9, node:Assign, node:Name, node:Num, single_assignment:bottles_of_beer
+bottles_of_beer = 9 # assignment:9, assignment_lhs_identifier:bottles_of_beer, assignment_rhs_atom:9, literal:9, magic_number:9, node:Assign, node:Name, node:Num, single_assignment:bottles_of_beer
 while bottles_of_beer > 1: # comparison_operator:Gt, literal:1, loop:while (-> +2), loop_with_late_exit:while (-> +2), node:Compare, node:Name, node:Num, node:While (-> +2)
     print(REFRAIN % (bottles_of_beer, bottles_of_beer, bottles_of_beer - 1)) # binary_operator:Mod, binary_operator:Sub, call_argument:, external_free_call:print, free_call:print, free_call_without_result:print, literal:1, literal:Tuple, modulo_operator, node:BinOp, node:Call, node:Expr, node:Name, node:Num, node:Tuple
     bottles_of_beer -= 1 # assignment_lhs_identifier:bottles_of_beer, assignment_rhs_atom:1, augmented_assignment:Sub, literal:1, node:AugAssign, node:Name, node:Num, update:bottles_of_beer:1, update_by_augmented_assignment:bottles_of_beer:1, update_by_augmented_assignment_with:Sub, update_with:Sub
@@ -120,8 +120,8 @@ class BankAccount(object): # n_liner_style:8 (-> +11), node:ClassDef (-> +8), no
         self.balance -= amount # assignment_lhs_identifier:self, assignment_rhs_atom:amount, augmented_assignment:Sub, node:Attribute, node:AugAssign, node:Name, update:self:amount, update_by_augmented_assignment:self:amount, update_by_augmented_assignment_with:Sub, update_with:Sub
     def overdrawn(self): # function:overdrawn (-> +1), function_argument:self, function_argument_flavor:arg, function_returning_something:overdrawn (-> +1), instance_method:overdrawn (-> +1), method:overdrawn (-> +1), node:FunctionDef (-> +1), node:arg
         return self.balance < 0 # comparison_operator:Lt, literal:0, node:Attribute, node:Compare, node:Name, node:Num, node:Return, return
-my_account = BankAccount(15) # assignment:BankAccount, assignment_lhs_identifier:my_account, assignment_rhs_atom:15, call_argument:15, external_free_call:BankAccount, free_call:BankAccount, literal:15, node:Assign, node:Call, node:Name, node:Num, single_assignment:my_account
-my_account.withdraw(50) # call_argument:50, literal:50, member_call:my_account:withdraw, member_call_method:withdraw, member_call_object:my_account, node:Attribute, node:Call, node:Expr, node:Name, node:Num
+my_account = BankAccount(15) # assignment:BankAccount, assignment_lhs_identifier:my_account, assignment_rhs_atom:15, call_argument:15, external_free_call:BankAccount, free_call:BankAccount, literal:15, magic_number:15, node:Assign, node:Call, node:Name, node:Num, single_assignment:my_account
+my_account.withdraw(50) # call_argument:50, literal:50, magic_number:50, member_call:my_account:withdraw, member_call_method:withdraw, member_call_object:my_account, node:Attribute, node:Call, node:Expr, node:Name, node:Num
 print(my_account.balance, my_account.overdrawn()) # call_argument:, composition, external_free_call:print, free_call:print, free_call_without_result:print, member_call_method:overdrawn, node:Attribute, node:Call, node:Expr, node:Name
 
 # ----------------------------------------------------------------------------------------
@@ -137,7 +137,7 @@ def median(pool): # function:median (-> +6), function_argument:pool, function_ar
         return (copy[int(size / 2 - 1)] + copy[int(size / 2)]) / 2 # addition_operator, binary_operator:Add, binary_operator:Div, binary_operator:Sub, call_argument:, external_free_call:int, free_call:int, if_else_branch, index:_, literal:1, literal:2, node:BinOp, node:Call, node:Name, node:Num, node:Return, node:Subscript, return
 class TestMedian(unittest.TestCase): # node:Attribute, node:ClassDef (-> +2), node:Name
     def testMedian(self): # function:testMedian (-> +1), function_argument:self, function_argument_flavor:arg, function_returning_nothing:testMedian (-> +1), instance_method:testMedian (-> +1), method:testMedian (-> +1), node:FunctionDef (-> +1), node:arg
-        self.assertEqual(median([2, 9, 9, 7, 9, 2, 4, 5, 8]), 7) # call_argument:, call_argument:7, composition, free_call:median, internal_free_call:median, literal:2, literal:4, literal:5, literal:7, literal:8, literal:9, literal:List, member_call:self:assertEqual, member_call_method:assertEqual, member_call_object:self, node:Attribute, node:Call, node:Expr, node:List, node:Name, node:Num
+        self.assertEqual(median([2, 9, 9, 7, 9, 2, 4, 5, 8]), 7) # call_argument:, call_argument:7, composition, free_call:median, internal_free_call:median, literal:2, literal:4, literal:5, literal:7, literal:8, literal:9, literal:List, magic_number:4, magic_number:5, magic_number:7, magic_number:8, magic_number:9, member_call:self:assertEqual, member_call_method:assertEqual, member_call_object:self, node:Attribute, node:Call, node:Expr, node:List, node:Name, node:Num
 
 # ----------------------------------------------------------------------------------------
 # 14_median.py
@@ -173,16 +173,16 @@ with open("stocks.csv", "w", newline="") as stocksFileW: # call_argument:, empty
     writer = csv.writer(stocksFileW) # assignment:writer, assignment_lhs_identifier:writer, assignment_rhs_atom:csv, assignment_rhs_atom:stocksFileW, call_argument:stocksFileW, member_call_method:writer, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:writer
     writer.writerows( # member_call:writer:writerows, member_call_method:writerows, member_call_object:writer, node:Attribute, node:Call (-> +4), node:Expr (-> +4), node:Name
         [ # call_argument:, literal:List, node:List (-> +3)
-            ["GOOG", "Google, Inc.", 505.24, 0.47, 0.09], # literal:0.09, literal:0.47, literal:505.24, literal:List, literal:Str, node:List, node:Num, node:Str
-            ["YHOO", "Yahoo! Inc.", 27.38, 0.33, 1.22], # literal:0.33, literal:1.22, literal:27.38, literal:List, literal:Str, node:List, node:Num, node:Str
-            ["CNET", "CNET Networks, Inc.", 8.62, -0.13, -1.4901], # literal:-0.13, literal:-1.4901, literal:8.62, literal:List, literal:Str, node:List, node:Num, node:Str
+            ["GOOG", "Google, Inc.", 505.24, 0.47, 0.09], # literal:0.09, literal:0.47, literal:505.24, literal:List, literal:Str, magic_number:0.09, magic_number:0.47, magic_number:505.24, node:List, node:Num, node:Str
+            ["YHOO", "Yahoo! Inc.", 27.38, 0.33, 1.22], # literal:0.33, literal:1.22, literal:27.38, literal:List, literal:Str, magic_number:0.33, magic_number:1.22, magic_number:27.38, node:List, node:Num, node:Str
+            ["CNET", "CNET Networks, Inc.", 8.62, -0.13, -1.4901], # literal:-0.13, literal:-1.4901, literal:8.62, literal:List, literal:Str, magic_number:-0.13, magic_number:-1.4901, magic_number:8.62, node:List, node:Num, node:Str
         ]
     )
 with open("stocks.csv", "r") as stocksFile: # call_argument:, external_free_call:open, free_call:open, literal:Str, node:Call, node:Name, node:Str, node:With (-> +5)
     stocks = csv.reader(stocksFile) # assignment:reader, assignment_lhs_identifier:stocks, assignment_rhs_atom:csv, assignment_rhs_atom:stocksFile, call_argument:stocksFile, member_call_method:reader, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:stocks
     status_labels = {-1: "down", 0: "unchanged", 1: "up"} # assignment, assignment_lhs_identifier:status_labels, assignment_rhs_atom:-1, assignment_rhs_atom:0, assignment_rhs_atom:1, literal:-1, literal:0, literal:1, literal:Dict, literal:Str, node:Assign, node:Dict, node:Name, node:Num, node:Str, single_assignment:status_labels
     for ticker, name, price, change, pct in stocks: # for:change (-> +2), for:name (-> +2), for:pct (-> +2), for:price (-> +2), for:ticker (-> +2), for_each (-> +2), literal:Tuple, loop:for (-> +2), loop_with_late_exit:for (-> +2), node:For (-> +2), node:Name, node:Tuple
-        status = status_labels[cmp(float(change), 0.0)] # assignment, assignment_lhs_identifier:status, assignment_rhs_atom:0.0, assignment_rhs_atom:change, assignment_rhs_atom:status_labels, call_argument:, call_argument:0.0, call_argument:change, composition, external_free_call:float, free_call:cmp, free_call:float, index:_, internal_free_call:cmp, literal:0.0, node:Assign, node:Call, node:Name, node:Num, node:Subscript, single_assignment:status
+        status = status_labels[cmp(float(change), 0.0)] # assignment, assignment_lhs_identifier:status, assignment_rhs_atom:0.0, assignment_rhs_atom:change, assignment_rhs_atom:status_labels, call_argument:, call_argument:0.0, call_argument:change, composition, external_free_call:float, free_call:cmp, free_call:float, index:_, internal_free_call:cmp, literal:0.0, magic_number:0.0, node:Assign, node:Call, node:Name, node:Num, node:Subscript, single_assignment:status
         print("{} is {} ({:.2f})".format(name, status, float(pct))) # call_argument:, call_argument:name, call_argument:pct, call_argument:status, composition, external_free_call:float, external_free_call:print, free_call:float, free_call:print, free_call_without_result:print, literal:Str, member_call_method:format, node:Attribute, node:Call, node:Expr, node:Name, node:Str
 
 # ----------------------------------------------------------------------------------------
@@ -220,7 +220,7 @@ def iter_primes(): # function:iter_primes (-> +5), function_without_arguments:it
         yield prime # node:Expr, node:Name, node:Yield, yield:prime
         numbers = filter(prime.__rmod__, numbers) # assignment:filter, assignment_lhs_identifier:numbers, assignment_rhs_atom:numbers, assignment_rhs_atom:prime, call_argument:, call_argument:numbers, external_free_call:filter, free_call:filter, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:numbers, update:numbers:prime, update_by_assignment:numbers:prime, update_by_assignment_with:filter, update_with:filter
 for p in iter_primes(): # for:p (-> +3), free_call:iter_primes, free_call_without_arguments:iter_primes, internal_free_call:iter_primes, loop:for (-> +3), loop_with_break:for (-> +3), loop_with_early_exit:for:break (-> +3), node:Call, node:For (-> +3), node:Name
-    if p > 1000: # comparison_operator:Gt, if (-> +1), if_test_atom:1000, if_test_atom:p, if_without_else (-> +1), literal:1000, node:Compare, node:If (-> +1), node:Name, node:Num
+    if p > 1000: # comparison_operator:Gt, if (-> +1), if_test_atom:1000, if_test_atom:p, if_without_else (-> +1), literal:1000, magic_number:1000, node:Compare, node:If (-> +1), node:Name, node:Num
         break # if_then_branch, node:Break
     print(p) # call_argument:p, external_free_call:print, free_call:print, free_call_without_result:print, node:Call, node:Expr, node:Name
 
@@ -276,9 +276,9 @@ print("\n".join(". " * q + "Q " + ". " * (BOARD_SIZE - q - 1) for q in queens)) 
 import random # import:random, import_module:random, n_liner_style:17 (-> +17), node:Import, one_shot_style (-> +17), whole_span:18 (-> +17)
 guesses_made = 0 # assignment:0, assignment_lhs_identifier:guesses_made, assignment_rhs_atom:0, literal:0, node:Assign, node:Name, node:Num, single_assignment:guesses_made
 name = input("Hello! What is your name?\n") # assignment:input, assignment_lhs_identifier:name, call_argument:, external_free_call:input, free_call:input, literal:Str, node:Assign, node:Call, node:Name, node:Str, single_assignment:name
-number = random.randint(1, 20) # assignment:randint, assignment_lhs_identifier:number, assignment_rhs_atom:1, assignment_rhs_atom:20, assignment_rhs_atom:random, call_argument:1, call_argument:20, literal:1, literal:20, member_call_method:randint, node:Assign, node:Attribute, node:Call, node:Name, node:Num, single_assignment:number
+number = random.randint(1, 20) # assignment:randint, assignment_lhs_identifier:number, assignment_rhs_atom:1, assignment_rhs_atom:20, assignment_rhs_atom:random, call_argument:1, call_argument:20, literal:1, literal:20, magic_number:20, member_call_method:randint, node:Assign, node:Attribute, node:Call, node:Name, node:Num, single_assignment:number
 print("Well, {}, I am thinking of a number between 1 and 20.".format(name)) # call_argument:, call_argument:name, composition, external_free_call:print, free_call:print, free_call_without_result:print, literal:Str, member_call_method:format, node:Attribute, node:Call, node:Expr, node:Name, node:Str
-while guesses_made < 6: # comparison_operator:Lt, count_states:guesses_made (-> +8), literal:6, loop:while (-> +8), loop_with_break:while (-> +8), loop_with_early_exit:while:break (-> +8), node:Compare, node:Name, node:Num, node:While (-> +8)
+while guesses_made < 6: # comparison_operator:Lt, count_states:guesses_made (-> +8), literal:6, loop:while (-> +8), loop_with_break:while (-> +8), loop_with_early_exit:while:break (-> +8), magic_number:6, node:Compare, node:Name, node:Num, node:While (-> +8)
     guess = int(input("Take a guess: ")) # assignment:int, assignment_lhs_identifier:guess, call_argument:, composition, external_free_call:input, external_free_call:int, free_call:input, free_call:int, literal:Str, node:Assign, node:Call, node:Name, node:Str, single_assignment:guess
     guesses_made += 1 # assignment_lhs_identifier:guesses_made, assignment_rhs_atom:1, augmented_assignment:Add, increment:guesses_made, literal:1, node:AugAssign, node:Name, node:Num, update:guesses_made:1, update_by_augmented_assignment:guesses_made:1, update_by_augmented_assignment_with:Add, update_with:Add
     if guess < number: # comparison_operator:Lt, if (-> +1), if_test_atom:guess, if_test_atom:number, if_without_else (-> +1), node:Compare, node:If (-> +1), node:Name

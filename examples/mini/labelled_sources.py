@@ -86,6 +86,7 @@ def print_collatz(n): # added_block_label (-> +7)
                           # if_else_branch
                           # literal:1
                           # literal:3
+                          # magic_number:3
                           # multiplication_operator
                           # node:Assign
                           # node:BinOp
@@ -125,6 +126,7 @@ for i in range(1, 101): # call_argument:1
                         # literal:101
                         # loop:for (-> +8)
                         # loop_with_late_exit:for (-> +8)
+                        # magic_number:101
                         # node:Call
                         # node:For (-> +8)
                         # node:Name
@@ -139,6 +141,7 @@ for i in range(1, 101): # call_argument:1
                     # if_test_atom:i
                     # literal:0
                     # literal:15
+                    # magic_number:15
                     # modulo_operator
                     # node:BinOp
                     # node:Compare
@@ -164,6 +167,7 @@ for i in range(1, 101): # call_argument:1
                      # if_test_atom:i
                      # literal:0
                      # literal:3
+                     # magic_number:3
                      # modulo_operator
                      # node:BinOp
                      # node:Compare
@@ -189,6 +193,7 @@ for i in range(1, 101): # call_argument:1
                      # if_test_atom:i
                      # literal:0
                      # literal:5
+                     # magic_number:5
                      # modulo_operator
                      # node:BinOp
                      # node:Compare

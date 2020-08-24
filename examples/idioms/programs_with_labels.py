@@ -12,18 +12,18 @@ print("Hello World") # call_argument:, external_free_call:print, flat_style, fre
 # ----------------------------------------------------------------------------------------
 # 002.0011-print-hello-10-times.py
 # ----------------------------------------------------------------------------------------
-for i in range(10): # call_argument:10, external_free_call:range, for:i (-> +1), for_range:10 (-> +1), free_call:range, literal:10, loop:for (-> +1), loop_with_late_exit:for (-> +1), n_liner_style:2 (-> +1), node:Call, node:For (-> +1), node:Name, node:Num, one_shot_style (-> +1), range:10, whole_span:2 (-> +1)
+for i in range(10): # call_argument:10, external_free_call:range, for:i (-> +1), for_range:10 (-> +1), free_call:range, literal:10, loop:for (-> +1), loop_with_late_exit:for (-> +1), magic_number:10, n_liner_style:2 (-> +1), node:Call, node:For (-> +1), node:Name, node:Num, one_shot_style (-> +1), range:10, whole_span:2 (-> +1)
     print("Hello") # call_argument:, external_free_call:print, free_call:print, free_call_without_result:print, literal:Str, node:Call, node:Expr, node:Name, node:Str
 
 # ----------------------------------------------------------------------------------------
 # 002.1493-print-hello-10-times.py
 # ----------------------------------------------------------------------------------------
-print("Hello\n" * 10) # binary_operator:Mult, call_argument:, external_free_call:print, flat_style, free_call:print, free_call_without_result:print, literal:10, literal:Str, n_liner_style:1, node:BinOp, node:Call, node:Expr, node:Name, node:Num, node:Str, one_shot_style, replication_operator:Str, whole_span:1
+print("Hello\n" * 10) # binary_operator:Mult, call_argument:, external_free_call:print, flat_style, free_call:print, free_call_without_result:print, literal:10, literal:Str, magic_number:10, n_liner_style:1, node:BinOp, node:Call, node:Expr, node:Name, node:Num, node:Str, one_shot_style, replication_operator:Str, whole_span:1
 
 # ----------------------------------------------------------------------------------------
 # 002.3117-print-hello-10-times.py
 # ----------------------------------------------------------------------------------------
-print("Hello\n" * 10) # binary_operator:Mult, call_argument:, external_free_call:print, flat_style, free_call:print, free_call_without_result:print, literal:10, literal:Str, n_liner_style:1, node:BinOp, node:Call, node:Expr, node:Name, node:Num, node:Str, one_shot_style, replication_operator:Str, whole_span:1
+print("Hello\n" * 10) # binary_operator:Mult, call_argument:, external_free_call:print, flat_style, free_call:print, free_call_without_result:print, literal:10, literal:Str, magic_number:10, n_liner_style:1, node:BinOp, node:Call, node:Expr, node:Name, node:Num, node:Str, one_shot_style, replication_operator:Str, whole_span:1
 
 # ----------------------------------------------------------------------------------------
 # 003.0019-create-a-procedure.py
@@ -251,7 +251,7 @@ del items[i] # flat_style, index:i, n_liner_style:1, node:Delete, node:Name, nod
 # ----------------------------------------------------------------------------------------
 from multiprocessing import Pool # import:multiprocessing:Pool, import_module:multiprocessing, import_name:Pool, n_liner_style:3 (-> +3), node:ImportFrom, one_shot_style (-> +3), whole_span:4 (-> +3)
 pool = Pool() # assignment:Pool, assignment_lhs_identifier:pool, external_free_call:Pool, free_call:Pool, free_call_without_arguments:Pool, node:Assign, node:Call, node:Name, single_assignment:pool
-for i in range(1, 1001): # call_argument:1, call_argument:1001, external_free_call:range, for:i (-> +1), for_range:1:1001 (-> +1), free_call:range, literal:1, literal:1001, loop:for (-> +1), loop_with_late_exit:for (-> +1), node:Call, node:For (-> +1), node:Name, node:Num, range:1:1001
+for i in range(1, 1001): # call_argument:1, call_argument:1001, external_free_call:range, for:i (-> +1), for_range:1:1001 (-> +1), free_call:range, literal:1, literal:1001, loop:for (-> +1), loop_with_late_exit:for (-> +1), magic_number:1001, node:Call, node:For (-> +1), node:Name, node:Num, range:1:1001
     pool.apply_async(f, [i]) # call_argument:, call_argument:f, literal:List, member_call:pool:apply_async, member_call_method:apply_async, member_call_object:pool, node:Attribute, node:Call, node:Expr, node:List, node:Name
 
 # ----------------------------------------------------------------------------------------
@@ -391,7 +391,7 @@ def loop_breaking(m, v): # function:loop_breaking (-> +5), function_argument:m, 
             if value == v: # comparison_operator:Eq, if (-> +1), if_test_atom:v, if_test_atom:value, if_without_else (-> +1), node:Compare, node:If (-> +1), node:Name
                 return (i, j) # if_then_branch, literal:Tuple, node:Name, node:Return, node:Tuple, return
     return None # literal:None, node:NameConstant, node:Return, return:None
-print(loop_breaking(([1, 2, 3], [4, 5, 6], [7, 8, 9]), 6)) # call_argument:, call_argument:6, composition, external_free_call:print, free_call:loop_breaking, free_call:print, free_call_without_result:print, internal_free_call:loop_breaking, literal:1, literal:2, literal:3, literal:4, literal:5, literal:6, literal:7, literal:8, literal:9, literal:List, literal:Tuple, node:Call, node:Expr, node:List, node:Name, node:Num, node:Tuple
+print(loop_breaking(([1, 2, 3], [4, 5, 6], [7, 8, 9]), 6)) # call_argument:, call_argument:6, composition, external_free_call:print, free_call:loop_breaking, free_call:print, free_call_without_result:print, internal_free_call:loop_breaking, literal:1, literal:2, literal:3, literal:4, literal:5, literal:6, literal:7, literal:8, literal:9, literal:List, literal:Tuple, magic_number:3, magic_number:4, magic_number:5, magic_number:6, magic_number:7, magic_number:8, magic_number:9, node:Call, node:Expr, node:List, node:Name, node:Num, node:Tuple
 
 # ----------------------------------------------------------------------------------------
 # 044.0190-insert-element-in-list.py
@@ -402,17 +402,17 @@ s.insert(i, x) # call_argument:i, call_argument:x, flat_style, member_call:s:ins
 # 045.0570-pause-execution-for-5-seconds.py
 # ----------------------------------------------------------------------------------------
 import time # flat_style (-> +1), import:time, import_module:time, n_liner_style:1 (-> +1), node:Import, one_shot_style (-> +1), whole_span:2 (-> +1)
-time.sleep(5) # call_argument:5, literal:5, member_call:time:sleep, member_call_method:sleep, member_call_object:time, node:Attribute, node:Call, node:Expr, node:Name, node:Num
+time.sleep(5) # call_argument:5, literal:5, magic_number:5, member_call:time:sleep, member_call_method:sleep, member_call_object:time, node:Attribute, node:Call, node:Expr, node:Name, node:Num
 
 # ----------------------------------------------------------------------------------------
 # 046.0191-extract-beginning-of-string-prefix.py
 # ----------------------------------------------------------------------------------------
-t = s[:5] # assignment, assignment_lhs_identifier:t, assignment_rhs_atom:5, assignment_rhs_atom:s, flat_style, literal:5, n_liner_style:1, node:Assign, node:Name, node:Num, node:Subscript, one_shot_style, single_assignment:t, slice::5:, slice_lower:, slice_step:, slice_upper:5, whole_span:1
+t = s[:5] # assignment, assignment_lhs_identifier:t, assignment_rhs_atom:5, assignment_rhs_atom:s, flat_style, literal:5, magic_number:5, n_liner_style:1, node:Assign, node:Name, node:Num, node:Subscript, one_shot_style, single_assignment:t, slice::5:, slice_lower:, slice_step:, slice_upper:5, whole_span:1
 
 # ----------------------------------------------------------------------------------------
 # 047.0198-extract-string-suffix.py
 # ----------------------------------------------------------------------------------------
-t = s[-5:] # assignment, assignment_lhs_identifier:t, assignment_rhs_atom:-5, assignment_rhs_atom:s, flat_style, literal:-5, n_liner_style:1, node:Assign, node:Name, node:Num, node:Subscript, one_shot_style, single_assignment:t, slice:-5::, slice_lower:-5, slice_step:, slice_upper:, whole_span:1
+t = s[-5:] # assignment, assignment_lhs_identifier:t, assignment_rhs_atom:-5, assignment_rhs_atom:s, flat_style, literal:-5, magic_number:-5, n_liner_style:1, node:Assign, node:Name, node:Num, node:Subscript, one_shot_style, single_assignment:t, slice:-5::, slice_lower:-5, slice_step:, slice_upper:, whole_span:1
 
 # ----------------------------------------------------------------------------------------
 # 048.0210-multi-line-string-literal.py
@@ -469,7 +469,7 @@ from multiprocessing import Pool # import:multiprocessing:Pool, import_module:mu
 def f(i): # function:f (-> +1), function_argument:i, function_argument_flavor:arg, function_returning_nothing:f (-> +1), node:FunctionDef (-> +1), node:arg
     i * i # binary_operator:Mult, multiplication_operator, node:BinOp, node:Expr, node:Name
 with Pool(processes) as p: # call_argument:processes, external_free_call:Pool, free_call:Pool, node:Call, node:Name, node:With (-> +1)
-    p.map(func=f, iterable=range(1, 1001)) # call_argument:1, call_argument:1001, external_free_call:range, free_call:range, literal:1, literal:1001, member_call:p:map, member_call_method:map, member_call_object:p, node:Attribute, node:Call, node:Expr, node:Name, node:Num, range:1:1001
+    p.map(func=f, iterable=range(1, 1001)) # call_argument:1, call_argument:1001, external_free_call:range, free_call:range, literal:1, literal:1001, magic_number:1001, member_call:p:map, member_call_method:map, member_call_object:p, node:Attribute, node:Call, node:Expr, node:Name, node:Num, range:1:1001
 print("Finished") # call_argument:, external_free_call:print, free_call:print, free_call_without_result:print, literal:Str, node:Call, node:Expr, node:Name, node:Str
 
 # ----------------------------------------------------------------------------------------
@@ -518,7 +518,7 @@ x2 = x.replace(y, z) # assignment:replace, assignment_lhs_identifier:x2, assignm
 # ----------------------------------------------------------------------------------------
 # 064.0274-big-integer--value-3-power-247.py
 # ----------------------------------------------------------------------------------------
-x = 3 ** 247 # assignment:Pow, assignment_lhs_identifier:x, assignment_rhs_atom:247, assignment_rhs_atom:3, binary_operator:Pow, flat_style, literal:247, literal:3, n_liner_style:1, node:Assign, node:BinOp, node:Name, node:Num, one_shot_style, single_assignment:x, whole_span:1
+x = 3 ** 247 # assignment:Pow, assignment_lhs_identifier:x, assignment_rhs_atom:247, assignment_rhs_atom:3, binary_operator:Pow, flat_style, literal:247, literal:3, magic_number:247, magic_number:3, n_liner_style:1, node:Assign, node:BinOp, node:Name, node:Num, one_shot_style, single_assignment:x, whole_span:1
 
 # ----------------------------------------------------------------------------------------
 # 065.1085-format-decimal-number.py
@@ -542,7 +542,7 @@ def binom(n, k): # function:binom (-> +1), function_argument:k, function_argumen
 # ----------------------------------------------------------------------------------------
 from __future__ import division # flat_style (-> +2), import:__future__:division, import_module:__future__, import_name:division, n_liner_style:1 (-> +2), node:ImportFrom, one_shot_style (-> +2), whole_span:3 (-> +2)
 import math # import:math, import_module:math, node:Import
-x = bytearray(int(math.ceil(n / 8.0))) # assignment:bytearray, assignment_lhs_identifier:x, assignment_rhs_atom:8.0, assignment_rhs_atom:math, assignment_rhs_atom:n, binary_operator:Div, call_argument:, composition, external_free_call:bytearray, external_free_call:int, free_call:bytearray, free_call:int, literal:8.0, member_call_method:ceil, node:Assign, node:Attribute, node:BinOp, node:Call, node:Name, node:Num, single_assignment:x
+x = bytearray(int(math.ceil(n / 8.0))) # assignment:bytearray, assignment_lhs_identifier:x, assignment_rhs_atom:8.0, assignment_rhs_atom:math, assignment_rhs_atom:n, binary_operator:Div, call_argument:, composition, external_free_call:bytearray, external_free_call:int, free_call:bytearray, free_call:int, literal:8.0, magic_number:8.0, member_call_method:ceil, node:Assign, node:Attribute, node:BinOp, node:Call, node:Name, node:Num, single_assignment:x
 
 # ----------------------------------------------------------------------------------------
 # 069.1086-seed-random-generator.py
@@ -613,7 +613,7 @@ y = int(x) # assignment:int, assignment_lhs_identifier:y, assignment_rhs_atom:x,
 # ----------------------------------------------------------------------------------------
 # 081.2270-round-floating-point-number-to-integer.py
 # ----------------------------------------------------------------------------------------
-y = int(x + 0.5) # addition_operator, assignment:int, assignment_lhs_identifier:y, assignment_rhs_atom:0.5, assignment_rhs_atom:x, binary_operator:Add, call_argument:, external_free_call:int, flat_style, free_call:int, literal:0.5, n_liner_style:1, node:Assign, node:BinOp, node:Call, node:Name, node:Num, one_shot_style, single_assignment:y, whole_span:1
+y = int(x + 0.5) # addition_operator, assignment:int, assignment_lhs_identifier:y, assignment_rhs_atom:0.5, assignment_rhs_atom:x, binary_operator:Add, call_argument:, external_free_call:int, flat_style, free_call:int, literal:0.5, magic_number:0.5, n_liner_style:1, node:Assign, node:BinOp, node:Call, node:Name, node:Num, one_shot_style, single_assignment:y, whole_span:1
 
 # ----------------------------------------------------------------------------------------
 # 082.1096-count-substring-occurrences.py
@@ -652,7 +652,7 @@ sys.exit(1) # call_argument:1, literal:1, member_call:sys:exit, member_call_meth
 # ----------------------------------------------------------------------------------------
 # 088.2143-allocate-1m-bytes.py
 # ----------------------------------------------------------------------------------------
-buf = bytearray(1000000) # assignment:bytearray, assignment_lhs_identifier:buf, assignment_rhs_atom:1000000, call_argument:1000000, external_free_call:bytearray, flat_style, free_call:bytearray, literal:1000000, n_liner_style:1, node:Assign, node:Call, node:Name, node:Num, one_shot_style, single_assignment:buf, whole_span:1
+buf = bytearray(1000000) # assignment:bytearray, assignment_lhs_identifier:buf, assignment_rhs_atom:1000000, call_argument:1000000, external_free_call:bytearray, flat_style, free_call:bytearray, literal:1000000, magic_number:1000000, n_liner_style:1, node:Assign, node:Call, node:Name, node:Num, one_shot_style, single_assignment:buf, whole_span:1
 
 # ----------------------------------------------------------------------------------------
 # 089.1097-handle-invalid-argument.py
@@ -726,7 +726,7 @@ d = datetime.date.fromtimestamp(ts) # assignment:fromtimestamp, assignment_lhs_i
 # 099.1429-format-date-yyyy-mm-dd.py
 # ----------------------------------------------------------------------------------------
 from datetime import date # flat_style (-> +2), import:datetime:date, import_module:datetime, import_name:date, n_liner_style:2 (-> +2), node:ImportFrom, one_shot_style (-> +2), whole_span:3 (-> +2)
-d = date(2016, 9, 28) # assignment:date, assignment_lhs_identifier:d, assignment_rhs_atom:2016, assignment_rhs_atom:28, assignment_rhs_atom:9, call_argument:2016, call_argument:28, call_argument:9, external_free_call:date, free_call:date, literal:2016, literal:28, literal:9, node:Assign, node:Call, node:Name, node:Num, single_assignment:d
+d = date(2016, 9, 28) # assignment:date, assignment_lhs_identifier:d, assignment_rhs_atom:2016, assignment_rhs_atom:28, assignment_rhs_atom:9, call_argument:2016, call_argument:28, call_argument:9, external_free_call:date, free_call:date, literal:2016, literal:28, literal:9, magic_number:2016, magic_number:28, magic_number:9, node:Assign, node:Call, node:Name, node:Num, single_assignment:d
 x = d.strftime("%Y-%m-%d") # assignment:strftime, assignment_lhs_identifier:x, assignment_rhs_atom:d, call_argument:, literal:Str, member_call_method:strftime, node:Assign, node:Attribute, node:Call, node:Name, node:Str, single_assignment:x
 
 # ----------------------------------------------------------------------------------------
@@ -890,14 +890,14 @@ UDP_IP = "127.0.0.1" # assignment, assignment_lhs_identifier:UDP_IP, literal:Str
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # assignment:socket, assignment_lhs_identifier:sock, assignment_rhs_atom:socket, call_argument:, member_call_method:socket, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:sock
 sock.bind((UDP_IP, p)) # call_argument:, literal:Tuple, member_call:sock:bind, member_call_method:bind, member_call_object:sock, node:Attribute, node:Call, node:Expr, node:Name, node:Tuple
 while True: # infinite_while (-> +2), literal:True, loop:while (-> +2), loop_with_late_exit:while (-> +2), node:NameConstant, node:While (-> +2)
-    data, addr = sock.recvfrom(1024) # assignment:recvfrom, assignment_lhs_identifier:addr, assignment_lhs_identifier:data, assignment_rhs_atom:1024, assignment_rhs_atom:sock, call_argument:1024, literal:1024, literal:Tuple, member_call_method:recvfrom, node:Assign, node:Attribute, node:Call, node:Name, node:Num, node:Tuple, parallel_assignment:2
+    data, addr = sock.recvfrom(1024) # assignment:recvfrom, assignment_lhs_identifier:addr, assignment_lhs_identifier:data, assignment_rhs_atom:1024, assignment_rhs_atom:sock, call_argument:1024, literal:1024, literal:Tuple, magic_number:1024, member_call_method:recvfrom, node:Assign, node:Attribute, node:Call, node:Name, node:Num, node:Tuple, parallel_assignment:2
     print("received message:", data) # call_argument:, call_argument:data, external_free_call:print, free_call:print, free_call_without_result:print, literal:Str, node:Call, node:Expr, node:Name, node:Str
 
 # ----------------------------------------------------------------------------------------
 # 122.1453-declare-enumeration.py
 # ----------------------------------------------------------------------------------------
 class Suit: # n_liner_style:2 (-> +1), node:ClassDef (-> +1), object_oriented_style (-> +1), whole_span:2 (-> +1)
-    SPADES, HEARTS, DIAMONDS, CLUBS = range(4) # assignment:range, assignment_lhs_identifier:CLUBS, assignment_lhs_identifier:DIAMONDS, assignment_lhs_identifier:HEARTS, assignment_lhs_identifier:SPADES, assignment_rhs_atom:4, call_argument:4, external_free_call:range, free_call:range, literal:4, literal:Tuple, node:Assign, node:Call, node:Name, node:Num, node:Tuple, parallel_assignment:4, range:4
+    SPADES, HEARTS, DIAMONDS, CLUBS = range(4) # assignment:range, assignment_lhs_identifier:CLUBS, assignment_lhs_identifier:DIAMONDS, assignment_lhs_identifier:HEARTS, assignment_lhs_identifier:SPADES, assignment_rhs_atom:4, call_argument:4, external_free_call:range, free_call:range, literal:4, literal:Tuple, magic_number:4, node:Assign, node:Call, node:Name, node:Num, node:Tuple, parallel_assignment:4, range:4
 
 # ----------------------------------------------------------------------------------------
 # 122.1454-declare-enumeration.py
@@ -1137,8 +1137,8 @@ t = "{}{}".format(s, i) # assignment:format, assignment_lhs_identifier:t, assign
 # ----------------------------------------------------------------------------------------
 # 154.2155-halfway-between-two-hex-color-codes.py
 # ----------------------------------------------------------------------------------------
-r1, g1, b1 = [int(c1[p : p + 2], 16) for p in range(1, 6, 2)] # addition_operator, assignment, assignment_lhs_identifier:b1, assignment_lhs_identifier:g1, assignment_lhs_identifier:r1, assignment_rhs_atom:1, assignment_rhs_atom:16, assignment_rhs_atom:2, assignment_rhs_atom:6, assignment_rhs_atom:c1, assignment_rhs_atom:p, binary_operator:Add, call_argument:, call_argument:1, call_argument:16, call_argument:2, call_argument:6, comprehension:List, comprehension_for_count:1, external_free_call:int, external_free_call:range, flat_style (-> +2), free_call:int, free_call:range, literal:1, literal:16, literal:2, literal:6, literal:Tuple, n_liner_style:3 (-> +2), node:Assign, node:BinOp, node:Call, node:ListComp, node:Name, node:Num, node:Subscript, node:Tuple, one_shot_style (-> +2), parallel_assignment:3, range:1:6:2, slice:p:_:, slice_lower:p, slice_step:, slice_upper:_, whole_span:3 (-> +2)
-r2, g2, b2 = [int(c2[p : p + 2], 16) for p in range(1, 6, 2)] # addition_operator, assignment, assignment_lhs_identifier:b2, assignment_lhs_identifier:g2, assignment_lhs_identifier:r2, assignment_rhs_atom:1, assignment_rhs_atom:16, assignment_rhs_atom:2, assignment_rhs_atom:6, assignment_rhs_atom:c2, assignment_rhs_atom:p, binary_operator:Add, call_argument:, call_argument:1, call_argument:16, call_argument:2, call_argument:6, comprehension:List, comprehension_for_count:1, external_free_call:int, external_free_call:range, free_call:int, free_call:range, literal:1, literal:16, literal:2, literal:6, literal:Tuple, node:Assign, node:BinOp, node:Call, node:ListComp, node:Name, node:Num, node:Subscript, node:Tuple, parallel_assignment:3, range:1:6:2, slice:p:_:, slice_lower:p, slice_step:, slice_upper:_
+r1, g1, b1 = [int(c1[p : p + 2], 16) for p in range(1, 6, 2)] # addition_operator, assignment, assignment_lhs_identifier:b1, assignment_lhs_identifier:g1, assignment_lhs_identifier:r1, assignment_rhs_atom:1, assignment_rhs_atom:16, assignment_rhs_atom:2, assignment_rhs_atom:6, assignment_rhs_atom:c1, assignment_rhs_atom:p, binary_operator:Add, call_argument:, call_argument:1, call_argument:16, call_argument:2, call_argument:6, comprehension:List, comprehension_for_count:1, external_free_call:int, external_free_call:range, flat_style (-> +2), free_call:int, free_call:range, literal:1, literal:16, literal:2, literal:6, literal:Tuple, magic_number:16, magic_number:6, n_liner_style:3 (-> +2), node:Assign, node:BinOp, node:Call, node:ListComp, node:Name, node:Num, node:Subscript, node:Tuple, one_shot_style (-> +2), parallel_assignment:3, range:1:6:2, slice:p:_:, slice_lower:p, slice_step:, slice_upper:_, whole_span:3 (-> +2)
+r2, g2, b2 = [int(c2[p : p + 2], 16) for p in range(1, 6, 2)] # addition_operator, assignment, assignment_lhs_identifier:b2, assignment_lhs_identifier:g2, assignment_lhs_identifier:r2, assignment_rhs_atom:1, assignment_rhs_atom:16, assignment_rhs_atom:2, assignment_rhs_atom:6, assignment_rhs_atom:c2, assignment_rhs_atom:p, binary_operator:Add, call_argument:, call_argument:1, call_argument:16, call_argument:2, call_argument:6, comprehension:List, comprehension_for_count:1, external_free_call:int, external_free_call:range, free_call:int, free_call:range, literal:1, literal:16, literal:2, literal:6, literal:Tuple, magic_number:16, magic_number:6, node:Assign, node:BinOp, node:Call, node:ListComp, node:Name, node:Num, node:Subscript, node:Tuple, parallel_assignment:3, range:1:6:2, slice:p:_:, slice_lower:p, slice_step:, slice_upper:_
 c = "#{:02x}{:02x}{:02x}".format((r1 + r2) // 2, (g1 + g2) // 2, (b1 + b2) // 2) # addition_operator, assignment:format, assignment_lhs_identifier:c, assignment_rhs_atom:2, assignment_rhs_atom:b1, assignment_rhs_atom:b2, assignment_rhs_atom:g1, assignment_rhs_atom:g2, assignment_rhs_atom:r1, assignment_rhs_atom:r2, binary_operator:Add, binary_operator:FloorDiv, call_argument:, literal:2, literal:Str, member_call_method:format, node:Assign, node:Attribute, node:BinOp, node:Call, node:Name, node:Num, node:Str, single_assignment:c
 
 # ----------------------------------------------------------------------------------------
@@ -1149,7 +1149,7 @@ class RGB(numpy.ndarray): # node:Attribute, node:ClassDef (-> +8), node:Name
     @classmethod # class_method:from_str (-> +4), decorated_function:from_str (-> +4), function:from_str (-> +4), function_decorator:classmethod (-> +4), function_returning_something:from_str (-> +4), method:from_str (-> +4), node:FunctionDef (-> +4), node:Name
     def from_str(cls, rgbstr): # function_argument:cls, function_argument:rgbstr, function_argument_flavor:arg, node:arg
         return numpy.array( # composition, member_call:numpy:array, member_call:numpy:view, member_call_method:array, member_call_method:view, member_call_object:numpy, method_chaining, node:Attribute, node:Attribute (-> +1), node:Call (-> +1), node:Call (-> +2), node:Name, node:Return (-> +2), return (-> +2)
-            [int(rgbstr[i : i + 2], 16) for i in range(1, len(rgbstr), 2)] # addition_operator, binary_operator:Add, call_argument:, call_argument:1, call_argument:16, call_argument:2, call_argument:rgbstr, composition, comprehension:List, comprehension_for_count:1, external_free_call:int, external_free_call:len, external_free_call:range, free_call:int, free_call:len, free_call:range, literal:1, literal:16, literal:2, node:BinOp, node:Call, node:ListComp, node:Name, node:Num, node:Subscript, range:1:_:2, slice:i:_:, slice_lower:i, slice_step:, slice_upper:_
+            [int(rgbstr[i : i + 2], 16) for i in range(1, len(rgbstr), 2)] # addition_operator, binary_operator:Add, call_argument:, call_argument:1, call_argument:16, call_argument:2, call_argument:rgbstr, composition, comprehension:List, comprehension_for_count:1, external_free_call:int, external_free_call:len, external_free_call:range, free_call:int, free_call:len, free_call:range, literal:1, literal:16, literal:2, magic_number:16, node:BinOp, node:Call, node:ListComp, node:Name, node:Num, node:Subscript, range:1:_:2, slice:i:_:, slice_lower:i, slice_step:, slice_upper:_
         ).view(cls) # call_argument:cls, node:Name
     def __str__(self): # function:__str__ (-> +2), function_argument:self, function_argument_flavor:arg, function_returning_something:__str__ (-> +2), instance_method:__str__ (-> +2), method:__str__ (-> +2), node:FunctionDef (-> +2), node:arg
         self = self.astype(numpy.uint8) # assignment:astype, assignment_lhs_identifier:self, assignment_rhs_atom:numpy, assignment_rhs_atom:self, call_argument:, member_call_method:astype, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:self, update:self:numpy, update_by_assignment:self:numpy, update_by_assignment_with:astype, update_with:astype
@@ -1196,7 +1196,7 @@ class Trie: # n_liner_style:4 (-> +4), node:ClassDef (-> +4), object_oriented_st
 # 160.2165-detect-if-32-bit-or-64-bit-architecture.py
 # ----------------------------------------------------------------------------------------
 import sys # import:sys, import_module:sys, n_liner_style:4 (-> +4), node:Import, one_shot_style (-> +4), whole_span:5 (-> +4)
-if sys.maxsize > 2 ** 32: # binary_operator:Pow, comparison_operator:Gt, if (-> +3), if_test_atom:2, if_test_atom:32, if_test_atom:sys, literal:2, literal:32, node:Attribute, node:BinOp, node:Compare, node:If (-> +3), node:Name, node:Num
+if sys.maxsize > 2 ** 32: # binary_operator:Pow, comparison_operator:Gt, if (-> +3), if_test_atom:2, if_test_atom:32, if_test_atom:sys, literal:2, literal:32, magic_number:32, node:Attribute, node:BinOp, node:Compare, node:If (-> +3), node:Name, node:Num
     f64() # external_free_call:f64, free_call:f64, free_call_without_arguments:f64, free_call_without_result:f64, if_then_branch, node:Call, node:Expr, node:Name
 else:
     f32() # external_free_call:f32, free_call:f32, free_call_without_arguments:f32, free_call_without_result:f32, if_else_branch, node:Call, node:Expr, node:Name
@@ -1397,7 +1397,7 @@ date.today() + timedelta(days=1) # addition_operator, binary_operator:Add, exter
 # 185.2820-execute-function-in-30-seconds.py
 # ----------------------------------------------------------------------------------------
 import threading # flat_style (-> +2), import:threading, import_module:threading, n_liner_style:2 (-> +2), node:Import, one_shot_style (-> +2), whole_span:3 (-> +2)
-timer = threading.Timer(30.0, f, args=(42,)) # assignment:Timer, assignment_lhs_identifier:timer, assignment_rhs_atom:30.0, assignment_rhs_atom:42, assignment_rhs_atom:f, assignment_rhs_atom:threading, call_argument:30.0, call_argument:f, literal:30.0, literal:42, literal:Tuple, member_call_method:Timer, node:Assign, node:Attribute, node:Call, node:Name, node:Num, node:Tuple, single_assignment:timer
+timer = threading.Timer(30.0, f, args=(42,)) # assignment:Timer, assignment_lhs_identifier:timer, assignment_rhs_atom:30.0, assignment_rhs_atom:42, assignment_rhs_atom:f, assignment_rhs_atom:threading, call_argument:30.0, call_argument:f, literal:30.0, literal:42, literal:Tuple, magic_number:30.0, magic_number:42, member_call_method:Timer, node:Assign, node:Attribute, node:Call, node:Name, node:Num, node:Tuple, single_assignment:timer
 timer.start() # member_call:timer:start, member_call_method:start, member_call_object:timer, node:Attribute, node:Call, node:Expr, node:Name
 
 # ----------------------------------------------------------------------------------------

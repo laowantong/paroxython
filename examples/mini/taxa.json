@@ -26,6 +26,7 @@
     "operator/arithmetic/multiplication": "7",
     "type/number/integer/literal": "2 4 5 7 7",
     "type/number/integer/literal/zero": "4",
+    "type/number/magic": "7",
     "var/assignment/conditional/verbose": "4-7",
     "var/assignment/single": "5 7"
   },
@@ -45,6 +46,7 @@
     "operator/arithmetic/modulo": "3 5 7",
     "type/number/integer/literal": "2 2 3 5 7",
     "type/number/integer/literal/zero": "3 5 7",
+    "type/number/magic": "2 3 5 7",
     "type/sequence/string/literal": "4 6 8"
   },
   "is_even.py": {

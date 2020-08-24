@@ -87,6 +87,11 @@
 - loop:while / collatz.py / 2-7
 - loop_with_late_exit:for / fizzbuzz.py / 2-10
 - loop_with_late_exit:while / collatz.py / 2-7
+- magic_number:101 / fizzbuzz.py / 2
+- magic_number:15 / fizzbuzz.py / 3
+- magic_number:3 / collatz.py / 7
+- magic_number:3 / fizzbuzz.py / 5
+- magic_number:5 / fizzbuzz.py / 7
 - modulo_operator / collatz.py / 4
 - modulo_operator / fizzbuzz.py / 3, 5, 7
 - modulo_operator / is_even.py / 3
@@ -227,6 +232,7 @@
 - loop_with_late_exit
 - loop_with_raise
 - loop_with_return
+- magic_number
 - member_call
 - member_call_method
 - member_call_object

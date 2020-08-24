@@ -212,6 +212,7 @@ type/number/integer	member_call_method:(bit_length|to_bytes)
 type/number/integer	member_call_method:int:(as_integer_ratio)
 type/number/integer/literal	literal:(?!0$)-?\d+
 type/number/integer/literal/zero	literal:0
+type/number/magic	magic_number:.+
 type/sequence	member_call_method:(count|index)
 type/sequence/list	external_free_call:list
 type/sequence/list	member_call_method:(append|extend|insert|reverse|sort)

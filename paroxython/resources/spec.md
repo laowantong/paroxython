@@ -5,6 +5,7 @@
   - [Literals](#literals)
       - [Feature `literal`](#feature-literal)
       - [Feature `empty_literal`](#feature-empty_literal)
+      - [Feature `magic_number` (SQL)](#feature-magic_number)
   - [Subscripts](#subscripts)
       - [Feature `index`](#feature-index)
       - [Feature `nested_index` (SQL)](#feature-nested_index)
@@ -333,6 +334,7 @@ Further categorization of numeric literals does not require to construct a sophi
 ##### Derivations
 
 [⬇️ feature `concatenation_operator|replication_operator`](#feature-concatenation_operatorreplication_operator)  
+[⬇️ feature `magic_number`](#feature-magic_number)  
 [⬇️ feature `string_formatting_operator`](#feature-string_formatting_operator)  
 [⬇️ feature `yoda_comparison`](#feature-yoda_comparison)  
 
@@ -445,6 +447,59 @@ Generally speaking, all _falsey_ constants (i.e., whose [truth value](https://do
 | `empty_literal:Tuple` | 2 |
 | `empty_literal:List` | 3 |
 | `empty_literal:Dict` | 4 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `magic_number`
+
+Match magic numbers (unnamed numerical constants) other than -1, 0, 1 and 2. A number in the RHS of an assignment to a constant is of course ignored.
+
+##### Derivations
+
+[⬆️ feature `literal`](#feature-literal)  
+[⬆️ feature `single_assignment`](#feature-single_assignment)  
+
+##### Specification
+
+```sql
+SELECT "magic_number",
+       n.name_suffix,
+       n.span,
+       n.path
+FROM t_literal n
+LEFT JOIN t_single_assignment a USING(span)
+WHERE (a.rowid IS NULL
+       OR a.name_suffix REGEXP ".*[a-z]")
+  AND n.name_suffix REGEXP "(?!-1$|0$|1$|2$)-?\d+(.\d+)?(e[+-]\d+)?$"
+```
+
+##### Example
+
+```python
+1   NUMBER_OF_TEETH_OF_A_DOG = 42 # not a magic number
+2   shoe_size = 42 # magic number
+3   for a in s[::-1]:
+4       if a == 42 and b % 2 == 0: # 42 is a magic number
+5           pass
+6   negative_number = -42
+7
+8   # May be rewritten as:
+9
+10  NUMBER_OF_TEETH_OF_A_DOG = 42
+11  ANSWER_TO_THE_ULTIMATE_QUESTION_OF_LIFE_THE_UNIVERSE_AND_EVERYTHING = 42
+12  shoe_size = ANSWER_TO_THE_ULTIMATE_QUESTION_OF_LIFE_THE_UNIVERSE_AND_EVERYTHING
+13  for a in s[::-1]:
+14      if a == ANSWER_TO_THE_ULTIMATE_QUESTION_OF_LIFE_THE_UNIVERSE_AND_EVERYTHING and b % 2 == 0:
+15          pass
+16  NEGATIVE_NUMBER = -42
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `magic_number:-42` | 6 |
+| `magic_number:42` | 2, 4 |
 
 --------------------------------------------------------------------------------
 
@@ -2311,6 +2366,7 @@ Deleting a name removes the binding of that name from the local or global namesp
 ##### Derivations
 
 [⬇️ feature `find_best_element`](#feature-find_best_element)  
+[⬇️ feature `magic_number`](#feature-magic_number)  
 
 ##### Specification
 
