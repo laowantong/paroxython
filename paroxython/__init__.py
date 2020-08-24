@@ -3,7 +3,7 @@
 
 .. include:: ../README.md
    :start-after: </p>
-   :end-before: # Further reading
+   :end-before: # Read them
 
 <br>
 

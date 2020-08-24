@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.8.4" />
 <title>paroxython.user_manual API documentation</title>
-<meta name="description" content="Preparing your program collection." />
+<meta name="description" content="How to read this manual." />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
 <link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/github.min.css" crossorigin>
@@ -45,6 +45,17 @@ tree.draw(data, options);
 <h1 class="title">User manual</h1>
 </header>
 <section id="section-intro">
+<h1 id="how-to-read-this-manual">How to read this manual</h1>
+<p>The different sections of this manual are presented in the theoretical order of operations: you start by preparing your collection of programs, these programs are labeled, these labels are translated into taxa, the results are stored in a database; finally, you filter this database through a command pipeline to extract recommendations.</p>
+<p>In practice, your input is only required for the last stage. That's why we suggest you observe the following order:</p>
+<ol>
+<li>Start by reading the <a href="#pipeline-tutorial">pipeline tutorial</a>: it explains, in a user-friendly style, what you can expect from Paroxython and how you may integrate it into your teaching.</li>
+<li>Once you are familiar with this aspect, see if you can improve or enrich the results through some <a href="#preparing-your-program-collection">preparation of the programs in your collection</a>.</li>
+<li>If needed, adapt the default <a href="#taxonomy">taxonomy</a> to your own vision of how to teach programming.</li>
+<li>Harness the <a href="#pipeline-documentation">full power of the pipeline</a> with its most advanced commands.</li>
+</ol>
+<p>Of course, you can consult at any time the <a href="#glossary">glossary</a> of terms specific to Paroxython.
+<br></p>
 <h1 id="preparing-your-program-collection">Preparing your program collection</h1>
 <p><strong>tl;dr.</strong> There is <strong>nothing to prepare</strong> before launching Paroxython. Nevertheless, for best results:</p>
 <ul>
@@ -335,7 +346,8 @@ Although this is technically true, our approach is more nuanced. Specifically, w
 <p><center>
 <figure class="image">
 <img src="https://regmedia.co.uk/2007/05/03/cartoon_duck.jpg" alt="A duck typing.">
-<figcaption><em>A duck typing on a typewriter, author<br>unknown, courtesy of <a href="https://stackoverflow.com/questions/289176/how-is-duck-typing-different-from-the-old-variant-type-and-or-interfaces">StackOverflow</a>.</em></figcaption>
+<figcaption><em>A duck typing on a typewriter.<br>
+Unknown artist, courtesy of <a href="https://stackoverflow.com/questions/289176/how-is-duck-typing-different-from-the-old-variant-type-and-or-interfaces">StackOverflow</a>.</em></figcaption>
 </figure>
 </center></p>
 <p>For us, this cute duck typing comes with a challenge. Although this may change in the future, for now Paroxython ignores your type hints. <a href="#beware-of-renaming-built-ins">As already explained</a>, it just relies on the names of the methods and attributes to guess the type of the built-in objects. For instance, the default taxonomy has these two lines:</p>
@@ -531,120 +543,6 @@ assignment) are classified under <code>var/assignment</code>.</p>
 </code></pre>
 <p>You can now freely experiment on this copy.
 <br></p>
-<h1 id="tag-databases">Tag databases</h1>
-<p>Depending on the extension of <code>DB_NAME</code> (either <code>".json"</code> or <code>".sqlite"</code>), the command:</p>
-<pre><code>paroxython collect -o DB_NAME DIRECTORY
-</code></pre>
-<p>&hellip; will create two kinds of databases, each with their own purpose.</p>
-<h2 id="the-json-tag-database">The <abbr title="JavaScript Object Notation">JSON</abbr> tag database</h2>
-<p>It is this type of so-called NoSQL database that Paroxython draws upon to recommend programs. Its schema is:</p>
-<pre><code class="json">{
-    &quot;programs&quot;: {
-        &quot;program_1.py&quot; : {
-            &quot;timestamp&quot;: &quot;1970-01-01&quot;,
-            &quot;source&quot;: &quot;print('hello')\nprint('world')\n&quot;,
-            &quot;labels&quot;: {
-                &quot;label_1&quot;: [[span_start_1, span_end_1], ...],
-                ...
-            },
-            &quot;taxa: {
-                &quot;taxon_1&quot;: [[span_start_1, span_end_1], ...],
-                ...
-            }
-        },
-        ...
-    }
-    &quot;labels&quot;: {
-        &quot;label_1&quot;: [&quot;program_1.py&quot;, &quot;program_2.py&quot;, ...],
-        ...
-    },
-    &quot;taxa&quot;: {
-        &quot;taxon_1&quot;: [&quot;program_1.py&quot;, &quot;program_2.py&quot;, ...],
-        ...
-    },
-    &quot;importations&quot;: {
-        &quot;program_1.py&quot;: [&quot;program_2.py&quot;, &quot;program_3.py&quot;, ...],
-        ...
-    },
-    &quot;exportations&quot;: {
-        &quot;program_1.py&quot;: [],
-        &quot;program_2.py&quot;: [&quot;program_1.py&quot;, ...],
-        ...
-    }
-}
-</code></pre>
-<p>As an example, take a look on the <a href="https://github.com/laowantong/paroxython/blob/master/examples/simple/programs_db.json"><abbr title="JavaScript Object Notation">JSON</abbr> tag database</a> of the Python Wiki's <a href="https://github.com/laowantong/paroxython/blob/master/examples/simple/programs">21 simple programs</a>.</p>
-<h2 id="the-sqlite-tag-database">The SQLite tag database</h2>
-<p>This kind of database is fundamentally agnostic, but lends itself quite well to statistics. Its schema is:</p>
-<pre><code class="sql">CREATE TABLE program (
-    program TEXT PRIMARY KEY,
-    timestamp TEXT,
-    source TEXT
-);
-CREATE TABLE label (
-    -- use rowid as primary key
-    label TEXT,
-    label_prefix TEXT,
-    label_suffix TEXT,
-    span TEXT,
-    span_start INTEGER,
-    span_end INTEGER,
-    program TEXT,
-    FOREIGN KEY (program) REFERENCES program (program)
-);
-CREATE TABLE taxon (
-    -- use rowid as primary key
-    taxon TEXT,
-    span TEXT,
-    span_start INTEGER,
-    span_end INTEGER,
-    program TEXT,
-    FOREIGN KEY (program) REFERENCES program (program)
-);
-</code></pre>
-<p>Having a relational version of the tag database means that it can be queried with <abbr title="Structured Query Language">SQL</abbr>. Here is an example which returns the 20 most frequent taxa:</p>
-<pre><code class="sql">SELECT taxon, count(*) AS occurrences
-FROM taxon
-GROUP BY taxon
-ORDER BY occurrences DESC
-LIMIT 20
-</code></pre>
-<p>More complex, a query comparing the number of occurrences of the loops <code>for</code> and <code>while</code>:</p>
-<pre><code class="sql">SELECT (CASE SUBSTR(taxon, 11, 3) -- extract either &quot;for&quot; or &quot;whi&quot;
-            WHEN &quot;for&quot; THEN &quot;for&quot; -- and replace it either by... itself
-            ELSE &quot;while&quot; -- or by the complete name of the loop
-        END) AS loop,
-       COUNT(*) AS occurrences
-FROM taxon
-WHERE taxon LIKE &quot;flow/loop/for%&quot;
-   OR taxon LIKE &quot;flow/loop/while%&quot;
-GROUP BY SUBSTR(taxon, 0, 14) -- cut the taxon three characters after &quot;flow/loop/&quot;
-</code></pre>
-<p>In theory, the relational database can also be used to select programs according to certain criteria:</p>
-<pre><code class="sql">SELECT
-    taxon,
-    program,
-    group_concat(span, &quot;, &quot;) AS spans,
-    source
-FROM program
-JOIN taxon USING (program)
-WHERE taxon GLOB &quot;type/non_sequence/dictionary/*&quot;
-GROUP BY taxon, program
-</code></pre>
-<p>On the provided <a href="https://github.com/laowantong/paroxython/blob/master/examples/simple/programs">simple programs</a>, the execution yields:</p>
-<p><img alt="" src="../resources/sql_query_example.png"></p>
-<p>Note however that the same list of programs (with the nice addition of learning costs) could have been obtained by feeding the function <code><a title="paroxython.recommend_programs.Recommendations.run_pipeline" href="../recommend_programs.html#paroxython.recommend_programs.Recommendations.run_pipeline">Recommendations.run_pipeline()</a></code> with an elementary command:</p>
-<pre><code class="python">    {
-        &quot;operation&quot;: &quot;include&quot;,
-        &quot;data&quot;: [&quot;type/non_sequence/dictionary/&quot;]
-    }
-</code></pre>
-<p>So, although <abbr title="Structured Query Language">SQL</abbr> should be familiar to almost everyone in our target audience, and might “make complex things possible”, as far as filtering is concerned, our minimalistic schema arguably does not ”make simple things simple” (to paraphrase Alan Kay). Some denormalization should ease the process, but so far we have prioritized the development of the pipeline system.</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Currently, the relational database is better suited for making statistics than recommendations.</p>
-</div>
-<p><br></p>
 <h1 id="pipeline-tutorial">Pipeline tutorial</h1>
 <p>How to get recommendations? This tutorial walks you through a series of little “teacher stories” to introduce the pipeline of commands used by Paroxython's recommendation system.</p>
 <p>You “execute” this pipeline on command line with:</p>
@@ -1385,6 +1283,7 @@ Thanks and kudos to the author, Matthew Barnett: without his awesome work, many 
 <h1>User manual</h1>
 <div class="toc">
 <ul>
+<li><a href="#how-to-read-this-manual">How to read this manual</a></li>
 <li><a href="#preparing-your-program-collection">Preparing your program collection</a><ul>
 <li><a href="#naming-things">Naming things</a><ul>
 <li><a href="#capitalization">Capitalization</a></li>
@@ -1437,11 +1336,6 @@ Thanks and kudos to the author, Matthew Barnett: without his awesome work, many 
 </ul>
 </li>
 <li><a href="#modifying-the-taxonomy">Modifying the taxonomy</a></li>
-</ul>
-</li>
-<li><a href="#tag-databases">Tag databases</a><ul>
-<li><a href="#the-json-tag-database">The JSON tag database</a></li>
-<li><a href="#the-sqlite-tag-database">The SQLite tag database</a></li>
 </ul>
 </li>
 <li><a href="#pipeline-tutorial">Pipeline tutorial</a><ul>

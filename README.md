@@ -186,8 +186,21 @@ This should print `"paroxython 0.4.5 loaded."`. Run it on a cell of Python code 
 | `var/assignment/parallel/slide` | 7 |
 | `var/assignment/single` | 3 |
 
-# Further reading
+# Read them
 
-- [User manual](https://laowantong.github.io/paroxython/user_manual/index.html)
-- [Developer manual](https://laowantong.github.io/paroxython/developer_manual/index.html)
-- [Module reference](https://laowantong.github.io/paroxython/#header-submodules)
+Although this is still a work-in-progress, Paroxython should already be fairly well [documented](https://laowantong.github.io/paroxython/index.html):
+
+- [User manual](https://laowantong.github.io/paroxython/user_manual/index.html):
+  - [writing a command pipeline to get recommendations](https://laowantong.github.io/paroxython/user_manual/index.html#pipeline-tutorial),
+  - [preparing your program collections for better results](https://laowantong.github.io/paroxython/user_manual/index#preparing-your-program-collection),
+  - [understanding and modifying the taxonomic classification](https://laowantong.github.io/paroxython/user_manual/index#taxonomy),
+  - and more.
+- [Developer manual](https://laowantong.github.io/paroxython/developer_manual/index.html):
+  - [getting a rough idea of the program structure and operations](https://laowantong.github.io/paroxython/developer_manual/index.html#bird-view),
+  - [using the provided helpers to contribute to the code](helper-programs),
+  - and more.
+- [Module reference](https://laowantong.github.io/paroxython/#header-submodules).
+- [Feature specifications](https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md): a document mixing prose, tests, regular expressions and SQL queries to describe which algorithmic features are recognized and how.
+- [User types](https://github.com/laowantong/paroxython/blob/master/paroxython/user_types.py): all objects of interest are precisely typed and checked by [mypy](http://mypy-lang.org).
+
+Finally, a [battery of examples](https://github.com/laowantong/paroxython/tree/master/examples) and [comprehensive test coverage](https://github.com/laowantong/paroxython/tree/master/tests) should help answer any remaining question.

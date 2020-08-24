@@ -390,7 +390,8 @@ This is called [duck typing](https://en.wikipedia.org/wiki/Duck_typing), and the
 <center>
 <figure class="image">
   <img src="https://regmedia.co.uk/2007/05/03/cartoon_duck.jpg" alt="A duck typing.">
-  <figcaption><em>A duck typing on a typewriter, author<br>unknown, courtesy of <a href="https://stackoverflow.com/questions/289176/how-is-duck-typing-different-from-the-old-variant-type-and-or-interfaces">StackOverflow</a>.</em></figcaption>
+  <figcaption><em>A duck typing on a typewriter.<br>
+  Unknown artist, courtesy of <a href="https://stackoverflow.com/questions/289176/how-is-duck-typing-different-from-the-old-variant-type-and-or-interfaces">StackOverflow</a>.</em></figcaption>
 </figure>
 </center>
 

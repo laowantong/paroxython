@@ -45,9 +45,9 @@ def update_readme_example():
 def generate_html():
     temp = {
         "user_manual": [
+            "foreword_user.md",
             "preparing.md",
             "taxonomy.md",
-            "databases.md",
             "pipeline_tutorial.md",
             "pipeline_documentation.md",
             "glossary.md",
@@ -55,6 +55,7 @@ def generate_html():
         "developer_manual": [
             "bird_view.md",
             "helpers.md",
+            "databases.md",
             "implementation_notes.md",
         ],
     }
@@ -324,9 +325,9 @@ def link_manuals():
         (
             '<li><a href="user_manual/index.html">User manual</a></li>'
             "<ul>"
+            '<li><a href="user_manual/index.html#how-to-read-this-manual">How to read this manual</a></li>'
             '<li><a href="user_manual/index.html#preparing-your-program-collection">Preparing your program collection</a></li>'
             '<li><a href="user_manual/index.html#taxonomy">Taxonomy</a></li>'
-            '<li><a href="user_manual/index.html#tag-databases">Tag databases</a></li>'
             '<li><a href="user_manual/index.html#pipeline-tutorial">Pipeline tutorial</a></li>'
             '<li><a href="user_manual/index.html#pipeline-documentation">Pipeline documentation</a></li>'
             '<li><a href="user_manual/index.html#glossary">Glossary</a></li>'
@@ -335,6 +336,7 @@ def link_manuals():
             "<ul>"
             '<li><a href="developer_manual/index.html#bird-view">Bird view</a></li>'
             '<li><a href="developer_manual/index.html#helper-programs">Helper programs</a></li>'
+            '<li><a href="developer_manual/index.html#tag-databases">Tag databases</a></li>'
             '<li><a href="developer_manual/index.html#implementation-notes">Implementation notes</a></li>'
             "</ul>"
             r"\1"
