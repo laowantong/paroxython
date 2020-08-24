@@ -367,133 +367,6 @@ call/method/sequence/list/\1    member_call_method:list:(count|index|pop|...)
 </code></pre>
 <p>&hellip; and happy duck hunting!
 <br></p>
-<h1 id="pipeline-tutorial-getting-recommendations">Pipeline tutorial: getting recommendations</h1>
-<p>This tutorial walks you through a series of little “teacher stories” to illustrate how to write the pipeline of commands used by Paroxython's recommendation system.</p>
-<p>You run this pipeline on command line with:</p>
-<pre><code>paroxython recommend -p 'path/to/your/pipe.py' 'path/to/your/programs/db.json'
-</code></pre>
-<h2 id="covering-your-bases">Covering your base(s)</h2>
-<p>Our simplest pipeline has no command: it just lists the programs of your database, without any filter. This could produce a rather long document, since each source code is printed, along with a list of each and every taxon it implements. Here is the content of your <code>pipe.py</code>:</p>
-<pre><code class="python">[]
-</code></pre>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>The point is that the resulting list is sorted by increasing learning cost. This should give you a rough idea of the pedagogical angle of attack to adopt in your first classes.</p>
-</div>
-<h2 id="imparting-knowledge">Imparting knowledge</h2>
-<h3 id="tracking-the-progress-of-your-course">Tracking the progress of your course</h3>
-<p>Suppose that, in your first session, you have introduced your students to the <code>hello_world.py</code>, <code>wheat_and_chessboard.py</code> and <code>euler_005_smallest_multiple.py</code> programs. Not only Paroxython should no longer recommend these programs, but the cost of learning the associated concepts should be considered as zero when they are encountered again in the future.</p>
-<pre><code class="python">[
-  {
-    &quot;operation&quot;: &quot;impart&quot;,
-    &quot;data&quot;: [
-      &quot;hello_world.py&quot;,
-      &quot;wheat_and_chessboard.py&quot;,
-      &quot;euler_005_smallest_multiple.py&quot;,
-    ],
-  },
-]
-</code></pre>
-<h3 id="coming-after-another-course">Coming after another course</h3>
-<p>Suppose instead that you intervene after an introductory course given by a colleague. She gives you a folder (named <code>"CS_101"</code>), which contains the programs she has studied with her class. Since you are secretly in love, you assume, somewhat foolishly, that the concepts they implement are mastered by your new students.</p>
-<pre><code class="python">[
-  {
-    &quot;operation&quot;: &quot;impart&quot;,
-    &quot;data&quot;: &quot;find CS_101 -path '*.py'&quot;,
-  },
-]
-</code></pre>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>As you can see, rather than maintaining a <strong>list</strong> of programs or concepts in the <code>"data"</code> field, you may provide a <strong>string</strong>. Paroxython will interpret it as a shell command, and expect it to print on <code>stdout</code> the required list of items (programs or taxa), one per line.</p>
-</div>
-<h2 id="blacklisting-programs">Blacklisting programs</h2>
-<p>You want to filter out all programs reserved for an exam, or too complex, or not pedagogically interesting enough, or that could get you kicked out of your college, etc.</p>
-<pre><code class="python">[
-  {
-    &quot;operation&quot;: &quot;exclude&quot;,
-    &quot;data&quot;: [
-      &quot;fizzbuzz.py&quot;,
-      &quot;alpha_go.py&quot;,
-      &quot;hello_world_of_pain.py&quot;,
-      &quot;gob_s_program.py&quot;,
-    ],
-  },
-]
-</code></pre>
-<h2 id="concepts-to-be-introduced-later-or-never">Concepts to be introduced later (or never)</h2>
-<p>For the time being, you don't want to be recommended any program requiring the concepts of recursivity (<code>def/recursive</code>), dictionary (<code>type/non_sequence/dictionary</code>) or set (<code>type/non_sequence/set</code>).</p>
-<pre><code class="python">[
-  {
-    &quot;operation&quot;: &quot;exclude&quot;,
-    &quot;data&quot;: [
-      &quot;def/recursive&quot;,
-      &quot;type/non_sequence&quot;,
-    ],
-  },
-]
-</code></pre>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Paroxython relies on the last three characters of a <code>"data"</code> item to decide whether it is a
-Python program (ending with <code>".py"</code>) or a taxon (like here).</p>
-</div>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>Since the two latter taxa share a common prefix and Python doesn't provide other non-sequence
-type, it is enough to exclude all taxa starting with <code>type/non_sequence</code>.</p>
-</div>
-<h2 id="concepts-to-be-introduced-now">Concepts to be introduced now</h2>
-<p>Your next class will be devoted to conditional constructs. Thus, you need to go through programs featuring taxa prefixed by <code>flow/conditional</code> or even, why not, some conditional expressions (<code>operator/ternary</code>). The suggested programs do not necessarily have to implement both concepts at the same time, but at least one. Any other program will be rejected.</p>
-<pre><code class="python">[
-  {
-    &quot;operation&quot;: &quot;include&quot;,
-    &quot;data&quot;: [
-      &quot;flow/conditional&quot;,
-      &quot;operator/ternary&quot;,
-    ],
-  },
-]
-</code></pre>
-<h2 id="preparing-an-assignment">Preparing an assignment</h2>
-<p>Basically, you provide Paroxython with a list of programs already studied in class, and it suggests new programs that implement only old concepts. This requires the exclusion of all programs featuring at least one concept that has not been seen in any of the programs already seen.</p>
-<p>It may sound a little complicated, because it is. But don't panic. Remember that Paroxython always orders its recommendations by increasing cost. Thus, all you have to do is ask it to list the programs that have not been introduced yet. The programs you want to choose among will appear at the top of the results, under the zero-learning cost section. Moreover, inside each section, they will be sorted by increasing size (<a href="https://en.wikipedia.org/wiki/Source_lines_of_code"><abbr title="Source Lines Of Code">SLOC</abbr></a>), which can be a reasonable proxy for their difficulty.</p>
-<p>But in the end, you, the teacher, are the judge. Paroxython is not going to set up a test for you, let alone grade the answers. It is just here to remind you of some possibilities you might not have thought of at the right time, and to give you some confidence that the exercises require no concept you have not pre-introduced in class, which later on might save you some awkward conversations with your dear students.</p>
-<p>Since this is the last filter in our tutorial, let's summarize what we've seen by chaining several commands together:</p>
-<ol>
-<li><strong>Impart</strong> the previous knowledge by extracting all the programs listed in the <code>"timeline.txt"</code> file that you update after each session. You can adapt the script <a href="https://github.com/laowantong/paroxython/blob/master/helpers/parse_syllabus.py"><code>parse_syllabus.py</code></a> to your own needs. If you wish, you can use the <code>base_path</code> variable, which represents the parent of the directory containing the programs of your personal database.</li>
-<li><strong>Exclude</strong> some irrelevant programs.</li>
-<li><strong>Include</strong> the concepts that you want to test during your exam.</li>
-</ol>
-<pre><code class="python">[
-  {
-    &quot;operation&quot;: &quot;impart&quot;,
-    &quot;data&quot;: &quot;python helpers/parse_syllabus.py {base_path}/timeline.txt&quot;,
-  },
-  {
-    &quot;operation&quot;: &quot;exclude&quot;,
-    &quot;data&quot;: [
-      &quot;foo.py&quot;,
-      &quot;bar.py&quot;,
-      # &quot;buzz.py&quot;,
-    ],
-  },
-  {
-    &quot;operation&quot;: &quot;include&quot;,
-    &quot;data&quot;: [
-      &quot;pattern/elements/accumulate&quot;,
-      &quot;topic/game&quot;,
-      &quot;type/sequence/list&quot;,
-    ],
-  },
-]
-</code></pre>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>This command pipeline is <em>not</em> a <abbr title="JavaScript Object Notation">JSON</abbr> file, but a Python program, or more restrictively a Python <strong>expression</strong>. As such, it offers several amenities you surely know and love: comments, trailing commas, r-strings (no need to double-escape backslashes in regexes!), etc. For security purposes, this file is not imported, but read as a text and evaluated by <a href="https://docs.python.org/3/library/ast.html#ast.literal_eval"><code>ast.literal_eval()</code></a>.</p>
-</div>
-<p>This is the end of our pipeline tutorial. If you dare, <a href="#deep-in-the-pipeline">read on</a> for more advanced features (regular expressions, span algebra, semantic triples, negations).
-<br></p>
 <h1 id="taxonomy">Taxonomy</h1>
 <h2 id="structure">Structure</h2>
 <p>In Paroxython, the default taxonomy is a <a href="https://en.wikipedia.org/wiki/Tree_(graph_theory)#Forest">forest</a>: a handful of separate trees with <code>flow</code>, <code>operator</code>, <code>meta</code>, <code>type</code>, etc. as their roots. We call <strong>taxon</strong><sup id="fnref:taxon"><a class="footnote-ref" href="#fn:taxon" rel="footnote">7</a></sup> a path from a root node to a leaf node. Thus:</p>
@@ -772,8 +645,135 @@ GROUP BY taxon, program
 <p>Currently, the relational database is better suited for making statistics than recommendations.</p>
 </div>
 <p><br></p>
-<h1 id="deep-in-the-pipeline">Deep in the pipeline</h1>
-<p>This part describes in some details how the recommendation system works. It assumes you've already read the <a href="#pipeline-tutorial-getting-recommendations">tutorial on recommendations</a>. First of all, let us recall the example of pipeline we gave at the end.</p>
+<h1 id="pipeline-tutorial">Pipeline tutorial</h1>
+<p>How to get recommendations? This tutorial walks you through a series of little “teacher stories” to introduce the pipeline of commands used by Paroxython's recommendation system.</p>
+<p>You “execute” this pipeline on command line with:</p>
+<pre><code>paroxython recommend -p 'path/to/your/pipe.py' 'path/to/your/programs/db.json'
+</code></pre>
+<h2 id="covering-your-bases">Covering your base(s)</h2>
+<p>The simplest pipeline has no command: it just lists the programs of your database, without any filter. This could produce a rather long document, since each source code is printed, along with a list of each and every taxon it implements. Here is the content of your <code>pipe.py</code>:</p>
+<pre><code class="python">[]
+</code></pre>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>The point is that the resulting list is sorted by increasing learning cost. This should give you a rough idea of the pedagogical angle of attack to adopt in your first classes.</p>
+</div>
+<h2 id="imparting-knowledge">Imparting knowledge</h2>
+<h3 id="tracking-the-progress-of-your-course">Tracking the progress of your course</h3>
+<p>Suppose that, in your first session, you have introduced your students to the <code>hello_world.py</code>, <code>wheat_and_chessboard.py</code> and <code>euler_005_smallest_multiple.py</code> programs. Not only Paroxython should no longer recommend these programs, but the cost of learning the associated concepts should be considered as zero when they are encountered again in the future.</p>
+<pre><code class="python">[
+  {
+    &quot;operation&quot;: &quot;impart&quot;,
+    &quot;data&quot;: [
+      &quot;hello_world.py&quot;,
+      &quot;wheat_and_chessboard.py&quot;,
+      &quot;euler_005_smallest_multiple.py&quot;,
+    ],
+  },
+]
+</code></pre>
+<h3 id="coming-after-another-course">Coming after another course</h3>
+<p>Suppose instead that you intervene after an introductory course given by a colleague. She gives you a folder (named <code>"CS_101"</code>), which contains the programs she has studied with her class. Since you are secretly in love, you assume, somewhat foolishly, that the concepts they implement are mastered by your new students.</p>
+<pre><code class="python">[
+  {
+    &quot;operation&quot;: &quot;impart&quot;,
+    &quot;data&quot;: &quot;find CS_101 -path '*.py'&quot;,
+  },
+]
+</code></pre>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>As you can see, rather than maintaining a <strong>list</strong> of programs or concepts in the <code>"data"</code> field, you may provide a <strong>string</strong>. Paroxython will interpret it as a shell command, and expect it to print on <code>stdout</code> the required list of items (programs or taxa), one per line.</p>
+</div>
+<h2 id="blacklisting-programs">Blacklisting programs</h2>
+<p>You want to filter out all programs reserved for an exam, or too complex, or not pedagogically interesting enough, or that could get you kicked out of your college, etc.</p>
+<pre><code class="python">[
+  {
+    &quot;operation&quot;: &quot;exclude&quot;,
+    &quot;data&quot;: [
+      &quot;fizzbuzz.py&quot;,
+      &quot;alpha_go.py&quot;,
+      &quot;hello_world_of_pain.py&quot;,
+      &quot;gob_s_program.py&quot;,
+    ],
+  },
+]
+</code></pre>
+<h2 id="concepts-to-be-introduced-later-or-never">Concepts to be introduced later (or never)</h2>
+<p>For the time being, you don't want to be recommended any program requiring the concepts of recursivity (<code>def/recursive</code>), dictionary (<code>type/non_sequence/dictionary</code>) or set (<code>type/non_sequence/set</code>).</p>
+<pre><code class="python">[
+  {
+    &quot;operation&quot;: &quot;exclude&quot;,
+    &quot;data&quot;: [
+      &quot;def/recursive&quot;,
+      &quot;type/non_sequence&quot;,
+    ],
+  },
+]
+</code></pre>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Paroxython relies on the last three characters of a <code>"data"</code> item to decide whether it is a
+Python program (ending with <code>".py"</code>) or a taxon (like here).</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Since the two latter taxa share a common prefix and Python doesn't provide other non-sequence
+type, it is enough to exclude all taxa starting with <code>type/non_sequence</code>.</p>
+</div>
+<h2 id="concepts-to-be-introduced-now">Concepts to be introduced now</h2>
+<p>Your next class will be devoted to conditional constructs. Thus, you need to go through programs featuring taxa prefixed by <code>flow/conditional</code> or even, why not, some conditional expressions (<code>operator/ternary</code>). The suggested programs do not necessarily have to implement both concepts at the same time, but at least one. Any other program will be rejected.</p>
+<pre><code class="python">[
+  {
+    &quot;operation&quot;: &quot;include&quot;,
+    &quot;data&quot;: [
+      &quot;flow/conditional&quot;,
+      &quot;operator/ternary&quot;,
+    ],
+  },
+]
+</code></pre>
+<h2 id="preparing-an-assignment">Preparing an assignment</h2>
+<p>Basically, you provide Paroxython with a list of programs already studied in class, and it suggests new programs that implement only old concepts. This requires the exclusion of all programs featuring at least one concept that has not been seen in any of the programs already seen.</p>
+<p>It may sound a little complicated, because it is. But don't panic. Remember that Paroxython always orders its recommendations by increasing cost. Thus, all you have to do is ask it to list the programs that have not been introduced yet. The programs you want to choose among will appear at the top of the results, under the zero-learning cost section. Moreover, inside each section, they will be sorted by increasing size (<a href="https://en.wikipedia.org/wiki/Source_lines_of_code"><abbr title="Source Lines Of Code">SLOC</abbr></a>), which can be a reasonable proxy for their difficulty.</p>
+<p>But in the end, you, the teacher, are the judge. Paroxython is not going to set up a test for you, let alone grade the answers. It is just here to remind you of some possibilities you might not have thought of at the right time, and to give you some confidence that the exercises require no concept you have not pre-introduced in class, which later on might save you some awkward conversations with your dear students.</p>
+<p>Since this is the last filter in our tutorial, let's summarize what we've seen by chaining several commands together:</p>
+<ol>
+<li><strong>Impart</strong> the previous knowledge by extracting all the programs listed in the <code>"timeline.txt"</code> file that you update after each session. You can adapt the script <a href="https://github.com/laowantong/paroxython/blob/master/helpers/parse_syllabus.py"><code>parse_syllabus.py</code></a> to your own needs. If you wish, you can use the <code>base_path</code> variable, which represents the parent of the directory containing the programs of your personal database.</li>
+<li><strong>Exclude</strong> some irrelevant programs.</li>
+<li><strong>Include</strong> the concepts that you want to test during your exam.</li>
+</ol>
+<pre><code class="python">[
+  {
+    &quot;operation&quot;: &quot;impart&quot;,
+    &quot;data&quot;: &quot;python helpers/parse_syllabus.py {base_path}/timeline.txt&quot;,
+  },
+  {
+    &quot;operation&quot;: &quot;exclude&quot;,
+    &quot;data&quot;: [
+      &quot;foo.py&quot;,
+      &quot;bar.py&quot;,
+      # &quot;buzz.py&quot;,
+    ],
+  },
+  {
+    &quot;operation&quot;: &quot;include&quot;,
+    &quot;data&quot;: [
+      &quot;pattern/elements/accumulate&quot;,
+      &quot;topic/game&quot;,
+      &quot;type/sequence/list&quot;,
+    ],
+  },
+]
+</code></pre>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>This command pipeline is <em>not</em> a <abbr title="JavaScript Object Notation">JSON</abbr> file, but a Python program, or more restrictively a Python <strong>expression</strong>. As such, it offers several amenities you surely know and love: comments, trailing commas, r-strings (no need to double-escape backslashes in regexes!), etc. For security purposes, this file is not imported, but read as a text and evaluated by <a href="https://docs.python.org/3/library/ast.html#ast.literal_eval"><code>ast.literal_eval()</code></a>.</p>
+</div>
+<p>This is the end of our pipeline tutorial. If you dare, <a href="#pipeline-documentation">read on</a> for more advanced features (regular expressions, span algebra, semantic triples, negations).
+<br></p>
+<h1 id="pipeline-documentation">Pipeline documentation</h1>
+<p>This part goes deeper into the pipeline by describing in details how the recommendation system works. It assumes you've already read the <a href="#pipeline-tutorial">pipeline tutorial</a>. First of all, let us recall the example of pipeline we gave at the end.</p>
 <pre><code class="python">&gt;&gt;&gt; [
 ...   {
 ...     &quot;operation&quot;: &quot;impart&quot;,
@@ -1199,7 +1199,7 @@ span <code>s_1</code> of such a taxon, there exists no span <code>s_2</code> of 
 The previous link is automatically updated by build_pdoc.py.
 -->
 <br></p>
-<h2 id="glossary">Glossary</h2>
+<h1 id="glossary">Glossary</h1>
 <p>Inside a definition, the terms which have their own entry in the glossary are <em>italicized</em>.</p>
 <dl>
 <dt><strong><abbr title="Abstract Syntax Tree">AST</abbr> (flat —)</strong></dt>
@@ -1419,19 +1419,6 @@ Thanks and kudos to the author, Matthew Barnett: without his awesome work, many 
 </li>
 </ul>
 </li>
-<li><a href="#pipeline-tutorial-getting-recommendations">Pipeline tutorial: getting recommendations</a><ul>
-<li><a href="#covering-your-bases">Covering your base(s)</a></li>
-<li><a href="#imparting-knowledge">Imparting knowledge</a><ul>
-<li><a href="#tracking-the-progress-of-your-course">Tracking the progress of your course</a></li>
-<li><a href="#coming-after-another-course">Coming after another course</a></li>
-</ul>
-</li>
-<li><a href="#blacklisting-programs">Blacklisting programs</a></li>
-<li><a href="#concepts-to-be-introduced-later-or-never">Concepts to be introduced later (or never)</a></li>
-<li><a href="#concepts-to-be-introduced-now">Concepts to be introduced now</a></li>
-<li><a href="#preparing-an-assignment">Preparing an assignment</a></li>
-</ul>
-</li>
 <li><a href="#taxonomy">Taxonomy</a><ul>
 <li><a href="#structure">Structure</a></li>
 <li><a href="#mapping-the-labels-onto-taxa">Mapping the labels onto taxa</a><ul>
@@ -1457,7 +1444,20 @@ Thanks and kudos to the author, Matthew Barnett: without his awesome work, many 
 <li><a href="#the-sqlite-tag-database">The SQLite tag database</a></li>
 </ul>
 </li>
-<li><a href="#deep-in-the-pipeline">Deep in the pipeline</a><ul>
+<li><a href="#pipeline-tutorial">Pipeline tutorial</a><ul>
+<li><a href="#covering-your-bases">Covering your base(s)</a></li>
+<li><a href="#imparting-knowledge">Imparting knowledge</a><ul>
+<li><a href="#tracking-the-progress-of-your-course">Tracking the progress of your course</a></li>
+<li><a href="#coming-after-another-course">Coming after another course</a></li>
+</ul>
+</li>
+<li><a href="#blacklisting-programs">Blacklisting programs</a></li>
+<li><a href="#concepts-to-be-introduced-later-or-never">Concepts to be introduced later (or never)</a></li>
+<li><a href="#concepts-to-be-introduced-now">Concepts to be introduced now</a></li>
+<li><a href="#preparing-an-assignment">Preparing an assignment</a></li>
+</ul>
+</li>
+<li><a href="#pipeline-documentation">Pipeline documentation</a><ul>
 <li><a href="#regular-expression-patterns">Regular expression patterns</a></li>
 <li><a href="#execution-of-a-pipeline">Execution of a pipeline</a><ul>
 <li><a href="#include-command">"include" command</a></li>
@@ -1477,9 +1477,9 @@ Thanks and kudos to the author, Matthew Barnett: without his awesome work, many 
 </li>
 </ul>
 </li>
-<li><a href="#glossary">Glossary</a></li>
 </ul>
 </li>
+<li><a href="#glossary">Glossary</a></li>
 </ul>
 </nav>
 </main>

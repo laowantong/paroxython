@@ -1,8 +1,8 @@
-# Pipeline tutorial: getting recommendations
+# Pipeline tutorial
 
-This tutorial walks you through a series of little “teacher stories” to illustrate how to write the pipeline of commands used by Paroxython's recommendation system.
+How to get recommendations? This tutorial walks you through a series of little “teacher stories” to introduce the pipeline of commands used by Paroxython's recommendation system.
 
-You run this pipeline on command line with:
+You “execute” this pipeline on command line with:
 
 ```
 paroxython recommend -p 'path/to/your/pipe.py' 'path/to/your/programs/db.json'
@@ -10,7 +10,7 @@ paroxython recommend -p 'path/to/your/pipe.py' 'path/to/your/programs/db.json'
 
 ## Covering your base(s)
 
-Our simplest pipeline has no command: it just lists the programs of your database, without any filter. This could produce a rather long document, since each source code is printed, along with a list of each and every taxon it implements. Here is the content of your `pipe.py`:
+The simplest pipeline has no command: it just lists the programs of your database, without any filter. This could produce a rather long document, since each source code is printed, along with a list of each and every taxon it implements. Here is the content of your `pipe.py`:
 
 ```python
 []
@@ -154,4 +154,4 @@ Since this is the last filter in our tutorial, let's summarize what we've seen b
 .. tip::
     This command pipeline is _not_ a JSON file, but a Python program, or more restrictively a Python **expression**. As such, it offers several amenities you surely know and love: comments, trailing commas, r-strings (no need to double-escape backslashes in regexes!), etc. For security purposes, this file is not imported, but read as a text and evaluated by [`ast.literal_eval()`](https://docs.python.org/3/library/ast.html#ast.literal_eval).
 
-This is the end of our pipeline tutorial. If you dare, [read on](#deep-in-the-pipeline) for more advanced features (regular expressions, span algebra, semantic triples, negations).
+This is the end of our pipeline tutorial. If you dare, [read on](#pipeline-documentation) for more advanced features (regular expressions, span algebra, semantic triples, negations).

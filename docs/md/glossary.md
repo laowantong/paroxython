@@ -1,4 +1,4 @@
-## Glossary
+# Glossary
 
 Inside a definition, the terms which have their own entry in the glossary are _italicized_.
 

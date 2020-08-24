@@ -46,9 +46,9 @@ def generate_html():
     temp = {
         "user_manual": [
             "preparing.md",
-            "pipeline_tutorial.md",
             "taxonomy.md",
             "databases.md",
+            "pipeline_tutorial.md",
             "pipeline_documentation.md",
             "glossary.md",
         ],
@@ -324,11 +324,12 @@ def link_manuals():
         (
             '<li><a href="user_manual/index.html">User manual</a></li>'
             "<ul>"
-            '<li><a href="user_manual/index.html#pipeline-tutorial-getting-recommendations">Pipeline tutorial</a></li>'
-            '<li><a href="user_manual/index.html#tag-databases">Tag databases</a></li>'
+            '<li><a href="user_manual/index.html#preparing-your-program-collection">Preparing your program collection</a></li>'
             '<li><a href="user_manual/index.html#taxonomy">Taxonomy</a></li>'
-            '<li><a href="user_manual/index.html#manual-hints">Manual hints</a></li>'
-            '<li><a href="user_manual/index.html#deep-in-the-pipeline">Deep in the pipeline</a></li>'
+            '<li><a href="user_manual/index.html#tag-databases">Tag databases</a></li>'
+            '<li><a href="user_manual/index.html#pipeline-tutorial">Pipeline tutorial</a></li>'
+            '<li><a href="user_manual/index.html#pipeline-documentation">Pipeline documentation</a></li>'
+            '<li><a href="user_manual/index.html#glossary">Glossary</a></li>'
             "</ul>"
             '<li><a href="developer_manual/index.html">Developer manual</a></li>'
             "<ul>"
