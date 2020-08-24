@@ -85,7 +85,7 @@ reason, several queries produce an incorrect result.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/derived_labels_db.py#L0-L221" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/derived_labels_db.py#L0-L226" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">import sqlite3
 from collections import defaultdict
@@ -93,7 +93,7 @@ from typing import Set, Callable
 
 import regex  # type: ignore
 
-from .goodies import couple_to_string
+from .goodies import couple_to_string, print_warning
 from .user_types import Label, LabelName, Labels, LabelsSpans, Query, Span
 
 
@@ -140,7 +140,12 @@ class DerivedLabelsDatabase:
         self.c.commit()
         # Execute the query and return the resulting labels.
         labels_spans: LabelsSpans = defaultdict(list)
-        for (name_prefix, name_suffix, span_string, path) in self.c.execute(query):
+        try:
+            row_iterator = self.c.execute(query)
+        except Exception as exception:
+            print_warning(f&#34;problem in the following query:\n\n{query}\n&#34;)
+            raise exception
+        for (name_prefix, name_suffix, span_string, path) in row_iterator:
             label_name = f&#34;{name_prefix}:{name_suffix}&#34; if name_suffix != &#34;&#34; else name_prefix
             span = span_string.split(&#34;-&#34;)
             labels_spans[label_name].append(Span(int(span[0]), int(span[-1]), path))
@@ -192,7 +197,7 @@ class DerivedLabelsDatabase:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/derived_labels_db.py#L90-L222" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/derived_labels_db.py#L90-L227" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">class DerivedLabelsDatabase:
 
@@ -237,7 +242,12 @@ class DerivedLabelsDatabase:
         self.c.commit()
         # Execute the query and return the resulting labels.
         labels_spans: LabelsSpans = defaultdict(list)
-        for (name_prefix, name_suffix, span_string, path) in self.c.execute(query):
+        try:
+            row_iterator = self.c.execute(query)
+        except Exception as exception:
+            print_warning(f&#34;problem in the following query:\n\n{query}\n&#34;)
+            raise exception
+        for (name_prefix, name_suffix, span_string, path) in row_iterator:
             label_name = f&#34;{name_prefix}:{name_suffix}&#34; if name_suffix != &#34;&#34; else name_prefix
             span = span_string.split(&#34;-&#34;)
             labels_spans[label_name].append(Span(int(span[0]), int(span[-1]), path))
@@ -421,7 +431,7 @@ as a prerequisite.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/derived_labels_db.py#L148-L185" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/derived_labels_db.py#L148-L190" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def read(
     self,
@@ -437,7 +447,12 @@ as a prerequisite.</p></div>
     self.c.commit()
     # Execute the query and return the resulting labels.
     labels_spans: LabelsSpans = defaultdict(list)
-    for (name_prefix, name_suffix, span_string, path) in self.c.execute(query):
+    try:
+        row_iterator = self.c.execute(query)
+    except Exception as exception:
+        print_warning(f&#34;problem in the following query:\n\n{query}\n&#34;)
+        raise exception
+    for (name_prefix, name_suffix, span_string, path) in row_iterator:
         label_name = f&#34;{name_prefix}:{name_suffix}&#34; if name_suffix != &#34;&#34; else name_prefix
         span = span_string.split(&#34;-&#34;)
         labels_spans[label_name].append(Span(int(span[0]), int(span[-1]), path))
@@ -461,7 +476,7 @@ len(columns))})"</code>.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/derived_labels_db.py#L187-L206" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/derived_labels_db.py#L192-L211" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def update(
     self,
@@ -485,7 +500,7 @@ len(columns))})"</code>.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/derived_labels_db.py#L208-L212" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/derived_labels_db.py#L213-L217" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def delete(self) -&gt; None:
     self.c.execute(&#34;DROP TABLE t&#34;)

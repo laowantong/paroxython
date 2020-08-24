@@ -102,6 +102,8 @@ meta/ast/\1	ast_construction:(.+)
 meta/complexity/\1	complexity:(.+)
 meta/program	whole_span:.+
 meta/sloc/\1	whole_span:(.+)
+meta/style/\1	(.+)_style
+meta/style/one_liner	n_liner_style:1
 meta/technique/\1	technique:(.+)
 meta/topic/\1	topic:(.+)
 operator/arithmetic/addition	addition_operator
@@ -250,11 +252,6 @@ call/function/builtin/print/without_newline	TODO
 pattern/elements/accumulate/find_best/index	TODO
 pattern/states/accumulate	TODO
 pattern/states/accumulate/find_best	TODO
-meta/style/functional	TODO
-meta/style/object	TODO
-meta/style/one_liner	TODO
-meta/style/procedural	TODO
-meta/style/for	TODO
 meta/style/test_driven	TODO
 subscript/index/double	TODO
 type/string/newline	TODO

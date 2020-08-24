@@ -72,7 +72,7 @@ def derivation_map(text):
             raise ValueError(
                 f"Unable to match '{label_name}' with a known pattern. "
                 f"If a section '#### Feature `{label_name}`' do exist in spec.md, "
-                "check that the previous section has all the required subsections."
+                "check that the previous section has all the required subsections. "
                 "If you have renamed this feature, check that you've thought to"
                 f"rename its form `t_{label_name}` too."
             )

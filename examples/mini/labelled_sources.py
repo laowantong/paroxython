@@ -4,8 +4,11 @@
 a = b # assignment
       # assignment_lhs_identifier:a
       # assignment_rhs_atom:b
+      # flat_style
+      # n_liner_style:1
       # node:Assign
       # node:Name
+      # one_shot_style
       # single_assignment:a
       # whole_span:1
 
@@ -17,8 +20,10 @@ def print_collatz(n): # added_block_label (-> +7)
                       # function_argument:n
                       # function_argument_flavor:arg
                       # function_returning_nothing:print_collatz (-> +7)
+                      # n_liner_style:7 (-> +7)
                       # node:FunctionDef (-> +7)
                       # node:arg
+                      # procedural_style (-> +7)
                       # whole_span:8 (-> +7)
     while n != 1: # comparison_operator:NotEq
                   # literal:1
@@ -106,7 +111,9 @@ def print_collatz(n): # added_block_label (-> +7)
 # ----------------------------------------------------------------------------------------
 import collatz # import_internally:collatz
                # import_module_internally:collatz
+               # n_liner_style:9 (-> +9)
                # node:Import
+               # one_shot_style (-> +9)
                # whole_span:10 (-> +9)
 for i in range(1, 101): # call_argument:1
                         # call_argument:101
@@ -211,8 +218,10 @@ for i in range(1, 101): # call_argument:1
 # ----------------------------------------------------------------------------------------
 # is_even.py
 # ----------------------------------------------------------------------------------------
-import fizzbuzz # import_internally:fizzbuzz
+import fizzbuzz # functional_style (-> +2)
+                # import_internally:fizzbuzz
                 # import_module_internally:fizzbuzz
+                # n_liner_style:1 (-> +2)
                 # node:Import
                 # whole_span:3 (-> +2)
 def is_even(n): # function:is_even (-> +1)

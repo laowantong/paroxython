@@ -167,7 +167,16 @@
       - [Feature `count_inputs` (SQL)](#feature-count_inputs)
       - [Feature `accumulate_inputs` (SQL)](#feature-accumulate_inputs)
 - [Programs](#programs)
+  - [Spans](#spans)
       - [Feature `whole_span`](#feature-whole_span)
+  - [Style](#style)
+      - [Feature `object_oriented_style` (SQL)](#feature-object_oriented_style)
+      - [Feature `functional_style` (SQL)](#feature-functional_style)
+      - [Feature `procedural_style` (SQL)](#feature-procedural_style)
+      - [Feature `one_shot_style` (SQL)](#feature-one_shot_style)
+      - [Feature `flat_style` (SQL)](#feature-flat_style)
+      - [Feature `n_liner_style` (SQL)](#feature-n_liner_style)
+  - [Others](#others)
       - [Feature `topic|technique|complexity`](#feature-topictechniquecomplexity)
 - [Suggestions](#suggestions)
   - [Assignments](#assignments)
@@ -187,10 +196,14 @@ Match the name of every node of the AST. This covers most of the [Python keyword
 
 ##### Derivations
 
+[⬇️ feature `flat_style`](#feature-flat_style)  
 [⬇️ feature `if`](#feature-if)  
 [⬇️ feature `loop`](#feature-loop)  
 [⬇️ feature `loop_with_break`](#feature-loop_with_break)  
 [⬇️ feature `method`](#feature-method)  
+[⬇️ feature `n_liner_style`](#feature-n_liner_style)  
+[⬇️ feature `object_oriented_style`](#feature-object_oriented_style)  
+[⬇️ feature `one_shot_style`](#feature-one_shot_style)  
 [⬇️ feature `try_raise|try_except`](#feature-try_raisetry_except)  
 
 ##### Specification
@@ -2203,6 +2216,7 @@ _Limitation._ The number to be clamped must appear on the left hand side of the 
 
 ##### Derivations
 
+[⬇️ feature `functional_style`](#feature-functional_style)  
 [⬇️ feature `update_by_assignment`](#feature-update_by_assignment)  
 [⬇️ feature `update_by_assignment_with`](#feature-update_by_assignment_with)  
 
@@ -3500,6 +3514,7 @@ A function returning at least one value distinct from `None` is the smallest `fu
 [⬆️ feature `function`](#feature-function)  
 [⬆️ feature `return`](#feature-return)  
 [⬇️ feature `function_returning_nothing`](#feature-function_returning_nothing)  
+[⬇️ feature `functional_style`](#feature-functional_style)  
 
 ##### Specification
 
@@ -3562,6 +3577,8 @@ A function returning nothing (_aka_ a procedure) is a function which is neither 
 [⬆️ feature `function`](#feature-function)  
 [⬆️ feature `function_returning_something`](#feature-function_returning_something)  
 [⬆️ feature `generator`](#feature-generator)  
+[⬇️ feature `functional_style`](#feature-functional_style)  
+[⬇️ feature `procedural_style`](#feature-procedural_style)  
 
 ##### Specification
 
@@ -4213,6 +4230,7 @@ A synonym of feature `node:If`.
 [⬇️ feature `count_inputs`](#feature-count_inputs)  
 [⬇️ feature `find_best_element`](#feature-find_best_element)  
 [⬇️ feature `find_first_element`](#feature-find_first_element)  
+[⬇️ feature `flat_style`](#feature-flat_style)  
 [⬇️ feature `get_valid_input`](#feature-get_valid_input)  
 [⬇️ feature `if_without_else`](#feature-if_without_else)  
 [⬇️ feature `nested_if`](#feature-nested_if)  
@@ -4736,6 +4754,8 @@ Match sequential loops, along with their iteration variable(s).
 
 [⬆️ feature `node`](#feature-node)  
 [⬇️ feature `count_elements|count_states`](#feature-count_elementscount_states)  
+[⬇️ feature `flat_style`](#feature-flat_style)  
+[⬇️ feature `functional_style`](#feature-functional_style)  
 [⬇️ feature `loop_with_break`](#feature-loop_with_break)  
 [⬇️ feature `loop_with_else`](#feature-loop_with_else)  
 [⬇️ feature `loop_with_late_exit`](#feature-loop_with_late_exit)  
@@ -6483,11 +6503,22 @@ When the update is carried out by a function call, it must be indicated with a m
 
 # Programs
 
+## Spans
+
 --------------------------------------------------------------------------------
 
 #### Feature `whole_span`
 
 Match a whole program, and suffix it by the number of its last line of code.
+
+##### Derivations
+
+[⬇️ feature `flat_style`](#feature-flat_style)  
+[⬇️ feature `functional_style`](#feature-functional_style)  
+[⬇️ feature `n_liner_style`](#feature-n_liner_style)  
+[⬇️ feature `object_oriented_style`](#feature-object_oriented_style)  
+[⬇️ feature `one_shot_style`](#feature-one_shot_style)  
+[⬇️ feature `procedural_style`](#feature-procedural_style)  
 
 ##### Specification
 
@@ -6519,6 +6550,303 @@ _Remark._ Normally, a source code is stripped from all its comments during its p
 | Label | Lines |
 |:--|:--|
 | `whole_span:6` | 1-6 |
+
+--------------------------------------------------------------------------------
+
+## Style
+
+With the exception of `n_liner_style`, the following features are just convenient shortcuts for pipelines combining `"include"` and/or `"exclude"` commands.
+
+--------------------------------------------------------------------------------
+
+#### Feature `object_oriented_style`
+
+A program featuring at least one class definition is considered as object-oriented.
+
+##### Derivations
+
+[⬆️ feature `node`](#feature-node)  
+[⬆️ feature `whole_span`](#feature-whole_span)  
+[⬇️ feature `functional_style`](#feature-functional_style)  
+[⬇️ feature `procedural_style`](#feature-procedural_style)  
+
+##### Specification
+
+```sql
+SELECT "object_oriented_style",
+       "",
+       p.span,
+       p.path
+FROM t_whole_span p
+CROSS JOIN t_node n
+WHERE n.name_suffix = "ClassDef"
+GROUP BY p.path
+```
+
+##### Example
+
+```python
+1   class FooBar(object):
+2       pass
+3   
+4   def foobar():
+5       pass
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `object_oriented_style` | 1-5 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `functional_style`
+
+A program is considered as functional if and only if it features:
+
+- at least one function returning something;
+- no procedure definition;
+- no class definition;
+- no loop;
+- no assignment.
+
+_Limitation._ Potential false negative when the right hand side of the assignment is a lambda function (which is generally considered as an [anti-pattern](https://docs.quantifiedcode.com/python-anti-patterns/correctness/assigning_a_lambda_to_a_variable.html), though).
+
+##### Derivations
+
+[⬆️ feature `assignment`](#feature-assignment)  
+[⬆️ feature `function_returning_nothing`](#feature-function_returning_nothing)  
+[⬆️ feature `function_returning_something`](#feature-function_returning_something)  
+[⬆️ feature `loop`](#feature-loop)  
+[⬆️ feature `object_oriented_style`](#feature-object_oriented_style)  
+[⬆️ feature `whole_span`](#feature-whole_span)  
+
+##### Specification
+
+```sql
+SELECT "functional_style",
+       "",
+       p.span,
+       p.path
+FROM t_whole_span p
+CROSS JOIN t_function_returning_something
+WHERE NOT EXISTS
+    (SELECT *
+     FROM t
+     WHERE t.name_prefix IN ("function_returning_nothing",
+                             "object_oriented_style",
+                             "loop",
+                             "assignment") )
+GROUP BY p.path
+```
+
+##### Example
+
+```python
+1   from math import pi
+2
+3   def square_area(side):
+4       return side * side
+5
+6   def circle_area(radius):
+7       return pi * radius * radius
+8
+9   def difference(length):
+10      return square_area(length) - circle_area(length / 2)
+11
+12  assert 0.2146 <= difference(1) <= 0.2147
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `functional_style` | 1-12 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `procedural_style`
+
+A program is considered as procedural if and only if it features at least one procedure definition but no class definition.
+
+##### Derivations
+
+[⬆️ feature `function_returning_nothing`](#feature-function_returning_nothing)  
+[⬆️ feature `object_oriented_style`](#feature-object_oriented_style)  
+[⬆️ feature `whole_span`](#feature-whole_span)  
+
+##### Specification
+
+```sql
+SELECT "procedural_style",
+       "",
+       p.span,
+       p.path
+FROM t_whole_span p
+CROSS JOIN t_function_returning_nothing
+WHERE NOT EXISTS
+    (SELECT *
+     FROM t
+     WHERE t.name_prefix = "object_oriented_style")
+GROUP BY p.path
+```
+
+##### Example
+
+```python
+1   from bisect import insort
+2   def sort(a):
+3       for i in range(1, len(a)):
+4           insort(a, a.pop(i), hi=i)
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `procedural_style` | 1-4 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `one_shot_style`
+
+A program is considered as one-shot if and only if it features no function or class definition.
+
+##### Derivations
+
+[⬆️ feature `node`](#feature-node)  
+[⬆️ feature `whole_span`](#feature-whole_span)  
+
+##### Specification
+
+```sql
+SELECT "one_shot_style",
+       "",
+       p.span,
+       p.path
+FROM t_whole_span p
+WHERE NOT EXISTS
+    (SELECT *
+     FROM t
+     WHERE t.name IN ("node:FunctionDef",
+                      "node:ClassDef"))
+```
+
+##### Example
+
+```python
+1   for i in range(1, 101):
+2       if i % 15 == 0:
+3           print("FizzBuzz")
+4       elif i % 3 == 0:
+5           print("Fizz")
+6       elif i % 5 == 0:
+7           print("Buzz")
+8       else:
+9           print(i)
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `one_shot_style` | 1-9 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `flat_style`
+
+A program is considered as flat if and only if it features no conditional, no loop and no function or class definition. Note that it is [one-shot](#feature-one_shot_style) too.
+
+##### Derivations
+
+[⬆️ feature `if`](#feature-if)  
+[⬆️ feature `loop`](#feature-loop)  
+[⬆️ feature `node`](#feature-node)  
+[⬆️ feature `whole_span`](#feature-whole_span)  
+
+##### Specification
+
+```sql
+SELECT "flat_style",
+       "",
+       p.span,
+       p.path
+FROM t_whole_span p
+WHERE NOT EXISTS
+    (SELECT *
+     FROM t
+     WHERE t.name IN ("if",
+                      "loop:for",
+                      "loop:while",
+                      "node:FunctionDef",
+                      "node:ClassDef"))
+```
+
+##### Example
+
+```python
+1   import numpy as np
+2   m = np.arange(33)
+3   n = np.arange(33)
+4   a = np.subtract.outer(m ** 2, n ** 2)
+5   b = 2 * np.multiply.outer(m, n)
+6   c = np.add.outer(m ** 2, n ** 2)
+7   i = np.where((a + b + c) == 1000)
+8   print((a[i] * b[i] * c[i])[0])
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `flat_style` | 1-8 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `n_liner_style`
+
+A program is considered as a n-liner if and only if it has only n lines which are not a function definition, an importation or an assertion. Of course, one-liners constitute the main purpose of this feature.
+
+##### Derivations
+
+[⬆️ feature `node`](#feature-node)  
+[⬆️ feature `whole_span`](#feature-whole_span)  
+
+##### Specification
+
+```sql
+SELECT "n_liner_style",
+       cast(p.name_suffix AS INTEGER) -
+  (SELECT count(*)
+   FROM t
+   WHERE t.name IN ("node:FunctionDef",
+                    "node:Assert",
+                    "node:Import",
+                    "node:ImportFrom")),
+       p.span,
+       p.path
+FROM t_whole_span p
+```
+
+##### Example
+
+```python
+1   from sum_proper_divisors_1 import sum_proper_divisors
+2   def abundant_numbers_below(bound):
+3       return [n for n in range(1, bound) if sum_proper_divisors(n) > n]
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `n_liner_style:1` | 1-3 |
+
+--------------------------------------------------------------------------------
+
+## Others
 
 --------------------------------------------------------------------------------
 

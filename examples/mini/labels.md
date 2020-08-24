@@ -34,6 +34,7 @@
 - external_free_call:print / collatz.py / 3, 8
 - external_free_call:print / fizzbuzz.py / 4, 6, 8, 10
 - external_free_call:range / fizzbuzz.py / 2
+- flat_style / assignment.py / 1
 - for:i / fizzbuzz.py / 2-10
 - for_range:1:101 / fizzbuzz.py / 2-10
 - free_call:print / collatz.py / 3, 8
@@ -49,6 +50,7 @@
 - function_argument_flavor:arg / is_even.py / 2
 - function_returning_nothing:print_collatz / collatz.py / 1-8
 - function_returning_something:is_even / is_even.py / 2-3
+- functional_style / is_even.py / 1-3
 - if / collatz.py / 4-7
 - if / fizzbuzz.py / 3-10, 5-10, 7-10
 - if_elif_branch / fizzbuzz.py / 6, 8
@@ -89,6 +91,10 @@
 - modulo_operator / fizzbuzz.py / 3, 5, 7
 - modulo_operator / is_even.py / 3
 - multiplication_operator / collatz.py / 7
+- n_liner_style:1 / assignment.py / 1
+- n_liner_style:1 / is_even.py / 1-3
+- n_liner_style:7 / collatz.py / 1-8
+- n_liner_style:9 / fizzbuzz.py / 1-10
 - node:Assign / assignment.py / 1
 - node:Assign / collatz.py / 5, 7
 - node:BinOp / collatz.py / 4, 5, 7, 7
@@ -120,6 +126,9 @@
 - node:While / collatz.py / 2-7
 - node:arg / collatz.py / 1
 - node:arg / is_even.py / 2
+- one_shot_style / assignment.py / 1
+- one_shot_style / fizzbuzz.py / 1-10
+- procedural_style / collatz.py / 1-8
 - range:1:101 / fizzbuzz.py / 2
 - return / is_even.py / 3
 - single_assignment:a / assignment.py / 1
@@ -231,6 +240,7 @@
 - nested_function
 - nested_if
 - nested_index
+- object_oriented_style
 - parallel_assignment
 - raise
 - range

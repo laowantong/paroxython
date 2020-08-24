@@ -39,7 +39,7 @@ and a lot more from [Awesome Python in Education](https://github.com/quobit/awes
 
 In any case, the Python source codes you have gathered are typically
 **numerous** (hundreds or even thousands),
-**reasonably sized** (anything below 1000 SLOC),
+**reasonably sized** (anything below 1000 lines of code),
 and **educational** in nature (e.g., snippets, examples, quizzes, exercise solutions, classic algorithms).
 The programming concepts you plan to teach remain relatively **low level** (e.g. assignments, nested loops, accumulation patterns, tail recursive functions, etc.).
 

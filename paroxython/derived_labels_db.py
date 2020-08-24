@@ -83,7 +83,7 @@ from typing import Set, Callable
 
 import regex  # type: ignore
 
-from .goodies import couple_to_string
+from .goodies import couple_to_string, print_warning
 from .user_types import Label, LabelName, Labels, LabelsSpans, Query, Span
 
 
@@ -178,7 +178,12 @@ class DerivedLabelsDatabase:
         self.c.commit()
         # Execute the query and return the resulting labels.
         labels_spans: LabelsSpans = defaultdict(list)
-        for (name_prefix, name_suffix, span_string, path) in self.c.execute(query):
+        try:
+            row_iterator = self.c.execute(query)
+        except Exception as exception:
+            print_warning(f"problem in the following query:\n\n{query}\n")
+            raise exception
+        for (name_prefix, name_suffix, span_string, path) in row_iterator:
             label_name = f"{name_prefix}:{name_suffix}" if name_suffix != "" else name_prefix
             span = span_string.split("-")
             labels_spans[label_name].append(Span(int(span[0]), int(span[-1]), path))

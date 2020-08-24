@@ -47,6 +47,7 @@
 | 0 | `var/assignment/single` | 2 |
 | 0 | `meta/program` | 1-8 |
 | 0 | `meta/sloc/8` | 1-8 |
+| 0 | `meta/style/one_shot` | 1-8 |
 
 ---
 
@@ -77,6 +78,8 @@
 | 0 | `var/assignment/single` | 3 |
 | 0 | `meta/program` | 1-6 |
 | 0 | `meta/sloc/6` | 1-6 |
+| 0 | `meta/style/flat` | 1-6 |
+| 0 | `meta/style/one_shot` | 1-6 |
 
 ---
 
@@ -105,6 +108,7 @@
 | 0.1875 | `var/assignment/parallel/slide` | 4 |
 | 0 | `meta/program` | 1-4 |
 | 0 | `meta/sloc/4` | 1-4 |
+| 0 | `meta/style/one_shot` | 1-4 |
 
 ---
 
@@ -189,6 +193,7 @@
 | 0 | `var/assignment/single` | 2, 10, 11 |
 | 0 | `meta/program` | 1-17 |
 | 0 | `meta/sloc/17` | 1-17 |
+| 0 | `meta/style/one_shot` | 1-17 |
 
 ---
 
@@ -233,6 +238,7 @@
 | 0 | `var/assignment/single` | 1, 9, 10 |
 | 0 | `meta/program` | 1-14 |
 | 0 | `meta/sloc/14` | 1-14 |
+| 0 | `meta/style/one_shot` | 1-14 |
 
 ---
 
@@ -274,6 +280,7 @@
 | 0 | `var/assignment/single` | 10 |
 | 0 | `meta/program` | 1-12 |
 | 0 | `meta/sloc/12` | 1-12 |
+| 0 | `meta/style/object_oriented` | 1-12 |
 
 ---
 
@@ -325,6 +332,7 @@
 | 0 | `var/assignment/single` | 2, 3, 4, 7 |
 | 0 | `meta/program` | 1-18 |
 | 0 | `meta/sloc/18` | 1-18 |
+| 0 | `meta/style/one_shot` | 1-18 |
 
 ---
 
