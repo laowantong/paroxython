@@ -25,7 +25,7 @@ type/number/integer/literal
 
 In the visualization below, we have introduced the pseudo-root “•” to gather all the trees into one:
 
-<div id="tree" style="width: 100%; height: 800px;"></div>
+<div id="tree" style="width: 100%; height: 1000px;"></div>
 
 This comes[^tree_sql] straight from tagging the public repository [The Algorithms - Python](https://github.com/TheAlgorithms/Python). The size of a node is relative to the number of times the corresponding taxon's _prefix_ appears in these programs.
 
@@ -162,6 +162,10 @@ The loop patterns constitute an aspect of programming which is not always taught
 
 ..warning::
     For priority reasons, Paroxython searches for these loop patterns in “statement” loops only, not in “comprehension” loops. This may change in a future version.
+
+### Tagging with `style`
+
+Python is a multi paradigm language. Paroxython tags automatically the programs written is the following styles: object-oriented, functional, procedural, one-shot (no function or class definition), flat (no conditional, no loop and no function or class definition) and one-liner.
 
 ### Going `meta`
 

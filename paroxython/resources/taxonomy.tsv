@@ -102,8 +102,6 @@ meta/ast/\1	ast_construction:(.+)
 meta/complexity/\1	complexity:(.+)
 meta/program	whole_span:.+
 meta/sloc/\1	whole_span:(.+)
-meta/style/\1	(.+)_style
-meta/style/one_liner	n_liner_style:1
 meta/technique/\1	technique:(.+)
 meta/topic/\1	topic:(.+)
 operator/arithmetic/addition	addition_operator
@@ -173,6 +171,8 @@ pattern/inputs/accumulate	accumulate_inputs:.+
 pattern/inputs/accumulate/count	count_inputs:.+
 pattern/inputs/find_first_good	get_valid_input:.+
 pattern/states/accumulate/count	count_states:.+
+style/\1	(.+)_style
+style/one_liner	n_liner_style:1
 subscript/index	index:.+
 subscript/index/arithmetic	index_arithmetic
 subscript/index/backwards	negative_index

@@ -45,4 +45,4 @@ def dump_trees(directory, update_database=True):
 
 if __name__ == "__main__":
     # Data from: https://github.com/TheAlgorithms/Python
-    dump_trees(Path("../Python"), update_database=False)
+    dump_trees(Path("../Python"), update_database=True)
