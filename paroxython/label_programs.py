@@ -67,15 +67,16 @@ def generate_labelled_sources(programs: Programs) -> Iterator:
     for program in programs:
         yield Source(f"# {separator}\n# {program.name}\n# {separator}")
         lines = program.source.splitlines()
-        comments: List[Set[str]] = [set() for _ in lines]
-        for label in program.labels:
-            for span in label.spans:
-                span_length = span.end - span.start
-                span_suffix = f" (-> +{span_length})" if span_length else ""
-                comments[span.start - 1].add(f"{label.name}{span_suffix}")
-        for (i, comment) in enumerate(comments):
-            if comment:
-                lines[i] += " # " + ", ".join(sorted(comment))
+        if lines:
+            comments: List[Set[str]] = [set() for _ in lines]
+            for label in program.labels:
+                for span in label.spans:
+                    span_length = span.end - span.start
+                    span_suffix = f" (-> +{span_length})" if span_length else ""
+                    comments[span.start - 1].add(f"{label.name}{span_suffix}")
+            for (i, comment) in enumerate(comments):
+                if comment:
+                    lines[i] += " # " + ", ".join(sorted(comment))
         yield Source("\n".join(lines + [""]))
 
 

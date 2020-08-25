@@ -258,12 +258,11 @@ class ProgramParser:
             Labels: A sorted list of labels, associating each label name with its spans.
 
         Description:
-            1. Parse the given program. If this fails, return a list consisting in a single label,
-              `"ast_construction:"`, followed by the error name. Otherwise, flatten the resulting
-              AST.
-            2. Search the flat AST for every feature which is specified by a regular expression.
-              Take care to avoid adding those features which are scheduled for deletion at the same
-              span.
+            1. Parse the given program. If this fails or the resulting AST is empty, return a list
+              consisting in a single label, `"ast_construction:"`, followed by the error name.
+              Otherwise, flatten the AST.
+            2. Search it for every feature which is specified by a regular expression. Take care to
+              avoid adding those features which are scheduled for deletion at the same span.
             3. Update the matching features with those featured for addition.
             4. Use the features found so far to derive (directly and indirectly) all those specified
               by an SQL query.
@@ -275,11 +274,18 @@ class ProgramParser:
             which is executed each time the tests are launched.
         """
 
-        # If the program can be parsed, flatten its AST.
+        # If the program can be parsed and is nonempty, flatten its AST.
         try:
             tree = ast.parse(program.source)
         except (SyntaxError, ValueError) as exception:
-            return [Label(LabelName(f"ast_construction:{type(exception).__name__}"), [])]
+            return [
+                Label(
+                    LabelName(f"ast_construction:{type(exception).__name__}"),
+                    [Span(1, program.source.count("\n") + 1)],
+                )
+            ]
+        if not tree.body:
+            return [Label(LabelName(f"ast_construction:EmptyProgramError"), [Span(0, 0)])]
         self.flat_ast = flatten_ast(tree)
 
         # Search the flat AST for every feature which is specified by a regular expression.

@@ -49,6 +49,8 @@ def title_to_slug_factory() -> Callable:
 
 def add_line_numbers(source: str) -> str:
     """Return a numbered version of the given source code. Result readable up to 999 lines."""
+    if not source:
+        return ""
     return "\n".join(f"{n: <4}{line}" for (n, line) in enumerate(source.split("\n"), 1))
 
 
