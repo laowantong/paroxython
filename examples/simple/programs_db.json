@@ -10,11 +10,11 @@
         "free_call:print": [[1,1]],
         "free_call_without_result:print": [[1,1]],
         "literal:Str": [[1,1]],
-        "n_liner_style:1": [[1,1]],
         "node:Call": [[1,1]],
         "node:Expr": [[1,1]],
         "node:Name": [[1,1]],
         "node:Str": [[1,1]],
+        "one_liner_style": [[1,1]],
         "one_shot_style": [[1,1]],
         "whole_span:1": [[1,1]]
       },
@@ -22,9 +22,8 @@
         "call/function/builtin/print": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
-        "meta/style/flat": [[1,1]],
-        "meta/style/one_liner": [[1,1]],
-        "meta/style/one_shot": [[1,1]],
+        "style/one_liner": [[1,1]],
+        "style/one_shot/flat": [[1,1]],
         "type/sequence/string/literal": [[1,1]]
       }
     },
@@ -43,7 +42,6 @@
         "free_call:print": [[2,2]],
         "free_call_without_result:print": [[2,2]],
         "literal:Str": [[1,1],[2,2]],
-        "n_liner_style:2": [[1,2]],
         "node:Assign": [[1,1]],
         "node:BinOp": [[2,2]],
         "node:Call": [[1,1],[2,2]],
@@ -60,9 +58,8 @@
         "call/function/builtin/print": [[2,2]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
-        "meta/style/flat": [[1,2]],
-        "meta/style/one_shot": [[1,2]],
         "operator/string/format": [[2,2]],
+        "style/one_shot/flat": [[1,2]],
         "type/sequence/string/literal": [[1,1],[2,2]],
         "var/assignment/single": [[1,1]]
       }
@@ -90,7 +87,6 @@
         "loop:for": [[2,3]],
         "loop_with_late_exit:for": [[2,3]],
         "member_call_method:format": [[3,3]],
-        "n_liner_style:3": [[1,3]],
         "node:Assign": [[1,1]],
         "node:Attribute": [[3,3]],
         "node:Call": [[2,2],[3,3],[3,3]],
@@ -114,7 +110,7 @@
         "flow/loop/for/elements_and_indexes": [[2,3]],
         "meta/program": [[1,3]],
         "meta/sloc/3": [[1,3]],
-        "meta/style/one_shot": [[1,3]],
+        "style/one_shot": [[1,3]],
         "type/sequence/list/literal": [[1,1]],
         "type/sequence/string": [[3,3]],
         "type/sequence/string/literal": [[1,1],[1,1],[1,1],[1,1],[3,3]],
@@ -149,7 +145,6 @@
         "loop_with_late_exit:while": [[2,4]],
         "magic_number:100": [[2,2]],
         "member_call_method:format": [[3,3]],
-        "n_liner_style:4": [[1,4]],
         "node:Assign": [[1,1],[4,4]],
         "node:Attribute": [[3,3]],
         "node:BinOp": [[4,4]],
@@ -181,8 +176,8 @@
         "flow/loop/while": [[2,4]],
         "meta/program": [[1,4]],
         "meta/sloc/4": [[1,4]],
-        "meta/style/one_shot": [[1,4]],
         "operator/arithmetic/addition": [[4,4]],
+        "style/one_shot": [[1,4]],
         "type/number/integer/literal": [[1,1],[1,1],[2,2]],
         "type/number/magic": [[2,2]],
         "type/sequence/string": [[3,3]],
@@ -209,7 +204,6 @@
         "function_returning_nothing:greet": [[1,2]],
         "internal_free_call:greet": [[3,3],[4,4],[5,5]],
         "literal:Str": [[2,2],[3,3],[4,4],[5,5]],
-        "n_liner_style:4": [[1,5]],
         "node:Call": [[2,2],[3,3],[4,4],[5,5]],
         "node:Expr": [[2,2],[3,3],[4,4],[5,5]],
         "node:FunctionDef": [[1,2]],
@@ -226,7 +220,7 @@
         "def/procedure": [[1,2]],
         "meta/program": [[1,5]],
         "meta/sloc/5": [[1,5]],
-        "meta/style/procedural": [[1,5]],
+        "style/procedural": [[1,5]],
         "type/sequence/string/literal": [[2,2],[3,3],[4,4],[5,5]]
       }
     },
@@ -252,7 +246,6 @@
         "loop:for": [[2,6]],
         "loop_with_late_exit:for": [[2,6]],
         "member_call_method:match": [[3,3]],
-        "n_liner_style:5": [[1,6]],
         "node:Attribute": [[3,3]],
         "node:Call": [[3,3],[4,4],[6,6]],
         "node:Expr": [[4,4],[6,6]],
@@ -275,7 +268,7 @@
         "flow/loop/for": [[2,6]],
         "meta/program": [[1,6]],
         "meta/sloc/6": [[1,6]],
-        "meta/style/one_shot": [[1,6]],
+        "style/one_shot": [[1,6]],
         "type/sequence/list/literal": [[2,2]],
         "type/sequence/string/literal": [[2,2],[2,2],[3,3],[4,4],[6,6]]
       }
@@ -318,7 +311,6 @@
         "magic_number:0.5": [[1,1]],
         "magic_number:6": [[2,2]],
         "multiplication_operator": [[3,3]],
-        "n_liner_style:4": [[1,4]],
         "node:Assign": [[1,1],[2,2],[3,3]],
         "node:BinOp": [[3,3],[4,4]],
         "node:Call": [[3,3],[4,4]],
@@ -341,10 +333,9 @@
         "call/function/builtin/sum": [[3,3]],
         "meta/program": [[1,4]],
         "meta/sloc/4": [[1,4]],
-        "meta/style/flat": [[1,4]],
-        "meta/style/one_shot": [[1,4]],
         "operator/arithmetic/multiplication": [[3,3]],
         "operator/string/format": [[4,4]],
+        "style/one_shot/flat": [[1,4]],
         "subscript/index": [[3,3],[3,3]],
         "type/non_sequence/dictionary/literal": [[1,1],[2,2]],
         "type/number/floating_point/literal": [[1,1],[1,1]],
@@ -373,7 +364,6 @@
         "external_free_call:int": [[3,3]],
         "external_free_call:print": [[4,4],[6,6]],
         "external_free_call:sum": [[3,3]],
-        "flat_style": [[1,6]],
         "free_call:int": [[3,3]],
         "free_call:print": [[4,4],[6,6]],
         "free_call:sum": [[3,3]],
@@ -382,7 +372,6 @@
         "import_module:sys": [[1,1]],
         "literal:1": [[3,3]],
         "literal:Str": [[4,4],[6,6]],
-        "n_liner_style:5": [[1,6]],
         "node:Assign": [[3,3]],
         "node:Attribute": [[3,3]],
         "node:Call": [[3,3],[3,3],[4,4],[6,6]],
@@ -414,8 +403,7 @@
         "flow/exception/catch/ValueError": [[2,6]],
         "meta/program": [[1,6]],
         "meta/sloc/6": [[1,6]],
-        "meta/style/flat": [[1,6]],
-        "meta/style/one_shot": [[1,6]],
+        "style/one_shot": [[1,6]],
         "subscript/slice/start": [[3,3]],
         "type/number/integer": [[3,3]],
         "type/number/integer/literal": [[3,3]],
@@ -454,7 +442,6 @@
         "loop_with_late_exit:for": [[3,8],[6,7]],
         "member_call_method:glob": [[2,2]],
         "member_call_method:rstrip": [[7,7]],
-        "n_liner_style:7": [[1,8]],
         "nested_for:1": [[6,7]],
         "node:Assign": [[2,2]],
         "node:Attribute": [[2,2],[7,7]],
@@ -485,8 +472,8 @@
         "flow/loop/for/nested/1": [[6,7]],
         "meta/program": [[1,8]],
         "meta/sloc/8": [[1,8]],
-        "meta/style/one_shot": [[1,8]],
         "operator/string/concatenation": [[4,4],[7,7]],
+        "style/one_shot": [[1,8]],
         "type/sequence/string": [[7,7]],
         "type/sequence/string/literal": [[2,2],[4,4],[7,7]],
         "var/assignment/single": [[2,2]]
@@ -549,7 +536,6 @@
         "magic_number:8": [[3,3]],
         "magic_number:9": [[4,4]],
         "member_call_method:keys": [[12,12]],
-        "n_liner_style:16": [[1,17]],
         "node:Assign": [[2,8],[10,10],[11,11]],
         "node:Attribute": [[11,11],[12,12]],
         "node:Break": [[15,15]],
@@ -583,7 +569,7 @@
         "flow/loop/for": [[12,17]],
         "meta/program": [[1,17]],
         "meta/sloc/17": [[1,17]],
-        "meta/style/one_shot": [[1,17]],
+        "style/one_shot": [[1,17]],
         "subscript/index": [[14,14]],
         "type/non_sequence/dictionary": [[12,12]],
         "type/non_sequence/dictionary/literal": [[2,2]],
@@ -619,7 +605,6 @@
         "loop_with_late_exit:while": [[8,10]],
         "magic_number:9": [[7,7]],
         "modulo_operator": [[9,9]],
-        "n_liner_style:10": [[1,10]],
         "node:Assign": [[1,6],[7,7]],
         "node:AugAssign": [[10,10]],
         "node:BinOp": [[9,9],[9,9]],
@@ -647,9 +632,9 @@
         "flow/loop/while": [[8,10]],
         "meta/program": [[1,10]],
         "meta/sloc/10": [[1,10]],
-        "meta/style/one_shot": [[1,10]],
         "operator/arithmetic/modulo": [[9,9]],
         "operator/arithmetic/substraction": [[9,9]],
+        "style/one_shot": [[1,10]],
         "type/number/integer/literal": [[7,7],[8,8],[9,9],[10,10]],
         "type/number/magic": [[7,7]],
         "type/sequence/string/literal": [[6,6]],
@@ -711,7 +696,6 @@
         "method:deposit": [[4,5]],
         "method:overdrawn": [[8,9]],
         "method:withdraw": [[6,7]],
-        "n_liner_style:8": [[1,12]],
         "node:Assign": [[3,3],[10,10]],
         "node:Attribute": [[3,3],[5,5],[7,7],[9,9],[11,11],[12,12],[12,12]],
         "node:AugAssign": [[5,5],[7,7]],
@@ -750,7 +734,7 @@
         "def/return/something": [[9,9]],
         "meta/program": [[1,12]],
         "meta/sloc/12": [[1,12]],
-        "meta/style/object_oriented": [[1,12]],
+        "style/object_oriented": [[1,12]],
         "type/number/integer/literal": [[10,10],[11,11]],
         "type/number/integer/literal/zero": [[2,2],[9,9]],
         "type/number/magic": [[10,10],[11,11]],
@@ -825,7 +809,6 @@
         "member_call_object:self": [[11,11]],
         "method:testMedian": [[10,11]],
         "modulo_operator": [[5,5]],
-        "n_liner_style:8": [[1,11]],
         "node:Assign": [[3,3],[4,4]],
         "node:Attribute": [[9,9],[11,11]],
         "node:BinOp": [[5,5],[6,6],[6,6],[8,8],[8,8],[8,8],[8,8],[8,8]],
@@ -868,11 +851,11 @@
         "flow/conditional/else": [[8,8]],
         "meta/program": [[1,11]],
         "meta/sloc/11": [[1,11]],
-        "meta/style/object_oriented": [[1,11]],
         "operator/arithmetic/addition": [[8,8]],
         "operator/arithmetic/division": [[6,6],[8,8],[8,8],[8,8]],
         "operator/arithmetic/modulo": [[5,5]],
         "operator/arithmetic/substraction": [[6,6],[8,8]],
+        "style/object_oriented": [[1,11]],
         "subscript/index": [[6,6],[8,8],[8,8]],
         "type/number/integer": [[6,6],[8,8],[8,8]],
         "type/number/integer/literal": [[5,5],[5,5],[6,6],[6,6],[8,8],[8,8],[8,8],[8,8],[11,11],[11,11],[11,11],[11,11],[11,11],[11,11],[11,11],[11,11],[11,11],[11,11]],
@@ -921,7 +904,6 @@
         "literal:1": [[4,4],[5,5],[7,7]],
         "literal:2": [[4,4],[5,5],[7,7],[7,7],[7,7]],
         "modulo_operator": [[4,4]],
-        "n_liner_style:6": [[1,7]],
         "node:Assign": [[2,2],[3,3]],
         "node:BinOp": [[4,4],[5,5],[5,5],[7,7],[7,7],[7,7],[7,7],[7,7]],
         "node:Call": [[2,2],[3,3],[5,5],[7,7],[7,7]],
@@ -933,6 +915,7 @@
         "node:Return": [[5,5],[7,7]],
         "node:Subscript": [[5,5],[7,7],[7,7]],
         "node:arg": [[1,1]],
+        "procedural_style": [[1,7]],
         "return": [[5,5],[7,7]],
         "single_assignment:copy": [[2,2]],
         "single_assignment:size": [[3,3]],
@@ -955,6 +938,7 @@
         "operator/arithmetic/division": [[5,5],[7,7],[7,7],[7,7]],
         "operator/arithmetic/modulo": [[4,4]],
         "operator/arithmetic/substraction": [[5,5],[7,7]],
+        "style/procedural": [[1,7]],
         "subscript/index": [[5,5],[7,7],[7,7]],
         "type/number/integer": [[5,5],[7,7],[7,7]],
         "type/number/integer/literal": [[4,4],[4,4],[5,5],[5,5],[7,7],[7,7],[7,7],[7,7]],
@@ -991,7 +975,6 @@
         "loop_with_late_exit:for": [[7,9]],
         "member_call_method:join": [[9,9]],
         "member_call_method:splitlines": [[6,6]],
-        "n_liner_style:8": [[1,9]],
         "node:Assign": [[2,6]],
         "node:Attribute": [[6,6],[9,9]],
         "node:Call": [[6,6],[7,7],[9,9],[9,9]],
@@ -1018,7 +1001,7 @@
         "flow/loop/for": [[7,9]],
         "meta/program": [[1,9]],
         "meta/sloc/9": [[1,9]],
-        "meta/style/one_shot": [[1,9]],
+        "style/one_shot": [[1,9]],
         "type/sequence/string": [[6,6],[9,9]],
         "type/sequence/string/literal": [[6,6],[9,9]],
         "type/sequence/tuple/literal": [[7,7]],
@@ -1116,7 +1099,6 @@
         "member_call_method:writer": [[5,5]],
         "member_call_method:writerows": [[6,6]],
         "member_call_object:writer": [[6,6]],
-        "n_liner_style:16": [[1,18]],
         "node:Assign": [[5,5],[14,14],[15,15],[17,17]],
         "node:Attribute": [[5,5],[6,6],[14,14],[18,18]],
         "node:BinOp": [[3,3]],
@@ -1136,6 +1118,7 @@
         "node:Tuple": [[16,16]],
         "node:With": [[4,10],[13,18]],
         "node:arg": [[2,2],[2,2]],
+        "procedural_style": [[1,18]],
         "return": [[3,3]],
         "single_assignment:status": [[17,17]],
         "single_assignment:status_labels": [[15,15]],
@@ -1161,6 +1144,7 @@
         "meta/program": [[1,18]],
         "meta/sloc/18": [[1,18]],
         "operator/arithmetic/substraction": [[3,3]],
+        "style/procedural": [[1,18]],
         "subscript/index": [[17,17]],
         "type/non_sequence/dictionary/literal": [[15,15]],
         "type/number/floating_point": [[17,17],[18,18]],
@@ -1255,7 +1239,6 @@
         "loop_with_early_exit:for:return": [[4,7]],
         "loop_with_late_exit:for": [[19,20]],
         "loop_with_return:for": [[4,7]],
-        "n_liner_style:18": [[1,20]],
         "node:Assign": [[1,1],[3,3],[5,5],[12,12]],
         "node:BinOp": [[5,5],[5,5],[12,12],[14,14],[14,14],[17,17]],
         "node:Call": [[4,4],[12,12],[15,15],[17,17],[19,19],[20,20]],
@@ -1274,6 +1257,7 @@
         "node:UnaryOp": [[17,17]],
         "node:arg": [[2,2],[2,2],[9,9]],
         "parallel_assignment:2": [[5,5]],
+        "procedural_style": [[1,20]],
         "range:BOARD_SIZE": [[15,15]],
         "recursive_call_count:1": [[9,17]],
         "recursive_function:solve": [[9,17]],
@@ -1319,6 +1303,7 @@
         "operator/boolean/not": [[17,17]],
         "operator/list/concatenation": [[14,14]],
         "pattern/elements/satisfy/some": [[4,7]],
+        "style/procedural": [[1,20]],
         "type/boolean/literal/False": [[8,8]],
         "type/boolean/literal/True": [[7,7]],
         "type/number/integer/literal": [[1,1],[5,5],[5,5],[12,12],[14,14],[17,17]],
@@ -1382,7 +1367,6 @@
         "loop_with_late_exit:while": [[4,7]],
         "magic_number:1000": [[9,9]],
         "member_call_method:count": [[3,3]],
-        "n_liner_style:9": [[1,11]],
         "node:Assign": [[3,3],[5,5],[7,7]],
         "node:Attribute": [[3,3],[7,7]],
         "node:Break": [[10,10]],
@@ -1398,6 +1382,7 @@
         "node:Num": [[3,3],[9,9]],
         "node:While": [[4,7]],
         "node:Yield": [[6,6]],
+        "procedural_style": [[1,11]],
         "single_assignment:numbers": [[3,3],[7,7]],
         "single_assignment:prime": [[5,5]],
         "update:numbers:prime": [[7,7]],
@@ -1424,6 +1409,7 @@
         "flow/loop/while/infinite": [[4,7]],
         "meta/program": [[1,11]],
         "meta/sloc/11": [[1,11]],
+        "style/procedural": [[1,11]],
         "type/boolean/literal/True": [[4,4]],
         "type/number/integer/literal": [[3,3],[9,9]],
         "type/number/magic": [[9,9]],
@@ -1471,7 +1457,6 @@
         "member_call_method:format": [[14,14]],
         "member_call_method:fromstring": [[9,9]],
         "member_call_method:getiterator": [[11,11]],
-        "n_liner_style:13": [[1,14]],
         "node:Assign": [[1,7],[9,9],[10,10],[12,12]],
         "node:Attribute": [[9,9],[11,11],[13,13],[13,13],[14,14],[14,14],[14,14],[14,14]],
         "node:BoolOp": [[13,13]],
@@ -1505,8 +1490,8 @@
         "flow/loop/for": [[11,14]],
         "meta/program": [[1,14]],
         "meta/sloc/14": [[1,14]],
-        "meta/style/one_shot": [[1,14]],
         "operator/boolean/and": [[13,13]],
+        "style/one_shot": [[1,14]],
         "type/non_sequence/set/literal": [[10,10]],
         "type/sequence/string": [[14,14]],
         "type/sequence/string/literal": [[7,7],[10,10],[10,10],[11,11],[13,13],[14,14]],
@@ -1601,7 +1586,6 @@
         "loop_with_raise:for": [[6,9]],
         "loop_with_return:for": [[11,20]],
         "member_call_method:join": [[24,24]],
-        "n_liner_style:22": [[1,24]],
         "negative_index:-1": [[5,5]],
         "node:Assign": [[1,1],[5,5],[7,7],[12,12],[22,22]],
         "node:Attribute": [[24,24]],
@@ -1684,12 +1668,12 @@
         "flow/null_operation": [[3,3],[20,20]],
         "meta/program": [[1,24]],
         "meta/sloc/24": [[1,24]],
-        "meta/style/object_oriented": [[1,24]],
         "operator/arithmetic/addition": [[7,7]],
         "operator/arithmetic/substraction": [[7,7],[24,24],[24,24]],
         "operator/list/concatenation": [[12,12]],
         "operator/string/concatenation": [[24,24]],
         "operator/string/replication": [[24,24],[24,24]],
+        "style/object_oriented": [[1,24]],
         "subscript/index": [[5,5]],
         "subscript/index/backwards/last": [[5,5]],
         "subscript/slice/stop": [[6,6]],
@@ -1761,7 +1745,6 @@
         "magic_number:6": [[6,6]],
         "member_call_method:format": [[5,5],[16,16],[18,18]],
         "member_call_method:randint": [[4,4]],
-        "n_liner_style:17": [[1,18]],
         "node:Assign": [[2,2],[3,3],[4,4],[7,7]],
         "node:Attribute": [[4,4],[5,5],[16,16],[18,18]],
         "node:AugAssign": [[8,8]],
@@ -1803,8 +1786,8 @@
         "flow/loop/while": [[6,14]],
         "meta/program": [[1,18]],
         "meta/sloc/18": [[1,18]],
-        "meta/style/one_shot": [[1,18]],
         "pattern/states/accumulate/count": [[6,14]],
+        "style/one_shot": [[1,18]],
         "type/number/integer": [[7,7]],
         "type/number/integer/literal": [[4,4],[4,4],[6,6],[8,8]],
         "type/number/integer/literal/zero": [[2,2]],
@@ -2548,8 +2531,7 @@
     "flat_style": [
       "01_hello_world.py",
       "02_input_name.py",
-      "07_grocery_bill.py",
-      "08_arguments.py"
+      "07_grocery_bill.py"
     ],
     "for:activity_time": [
       "10_time.py"
@@ -3529,57 +3511,6 @@
     "multiplication_operator": [
       "07_grocery_bill.py"
     ],
-    "n_liner_style:1": [
-      "01_hello_world.py"
-    ],
-    "n_liner_style:10": [
-      "11_bottles.py"
-    ],
-    "n_liner_style:13": [
-      "21_xml_html_parsing.py"
-    ],
-    "n_liner_style:16": [
-      "10_time.py",
-      "16_csv.py"
-    ],
-    "n_liner_style:17": [
-      "33_guess_the_number.py"
-    ],
-    "n_liner_style:18": [
-      "18_queens.py"
-    ],
-    "n_liner_style:2": [
-      "02_input_name.py"
-    ],
-    "n_liner_style:22": [
-      "28_queens.py"
-    ],
-    "n_liner_style:3": [
-      "03_friends.py"
-    ],
-    "n_liner_style:4": [
-      "04_fibonacci.py",
-      "05_greet.py",
-      "07_grocery_bill.py"
-    ],
-    "n_liner_style:5": [
-      "06_regex.py",
-      "08_arguments.py"
-    ],
-    "n_liner_style:6": [
-      "14_median.py"
-    ],
-    "n_liner_style:7": [
-      "09_indent.py"
-    ],
-    "n_liner_style:8": [
-      "12_classes.py",
-      "13_unit_testing.py",
-      "15_itertools_groupby.py"
-    ],
-    "n_liner_style:9": [
-      "20_prime_numbers.py"
-    ],
     "negative_index:-1": [
       "28_queens.py"
     ],
@@ -3914,6 +3845,9 @@
       "13_unit_testing.py",
       "28_queens.py"
     ],
+    "one_liner_style": [
+      "01_hello_world.py"
+    ],
     "one_shot_style": [
       "01_hello_world.py",
       "02_input_name.py",
@@ -3938,7 +3872,11 @@
       "21_xml_html_parsing.py"
     ],
     "procedural_style": [
-      "05_greet.py"
+      "05_greet.py",
+      "14_median.py",
+      "16_csv.py",
+      "18_queens.py",
+      "20_prime_numbers.py"
     ],
     "raise:BailOut": [
       "28_queens.py"
@@ -4701,38 +4639,6 @@
     "meta/sloc/9": [
       "15_itertools_groupby.py"
     ],
-    "meta/style/flat": [
-      "01_hello_world.py",
-      "02_input_name.py",
-      "07_grocery_bill.py",
-      "08_arguments.py"
-    ],
-    "meta/style/object_oriented": [
-      "12_classes.py",
-      "13_unit_testing.py",
-      "28_queens.py"
-    ],
-    "meta/style/one_liner": [
-      "01_hello_world.py"
-    ],
-    "meta/style/one_shot": [
-      "01_hello_world.py",
-      "02_input_name.py",
-      "03_friends.py",
-      "04_fibonacci.py",
-      "06_regex.py",
-      "07_grocery_bill.py",
-      "08_arguments.py",
-      "09_indent.py",
-      "10_time.py",
-      "11_bottles.py",
-      "15_itertools_groupby.py",
-      "21_xml_html_parsing.py",
-      "33_guess_the_number.py"
-    ],
-    "meta/style/procedural": [
-      "05_greet.py"
-    ],
     "operator/arithmetic/addition": [
       "04_fibonacci.py",
       "13_unit_testing.py",
@@ -4786,6 +4692,38 @@
     ],
     "pattern/states/accumulate/count": [
       "33_guess_the_number.py"
+    ],
+    "style/object_oriented": [
+      "12_classes.py",
+      "13_unit_testing.py",
+      "28_queens.py"
+    ],
+    "style/one_liner": [
+      "01_hello_world.py"
+    ],
+    "style/one_shot": [
+      "03_friends.py",
+      "04_fibonacci.py",
+      "06_regex.py",
+      "08_arguments.py",
+      "09_indent.py",
+      "10_time.py",
+      "11_bottles.py",
+      "15_itertools_groupby.py",
+      "21_xml_html_parsing.py",
+      "33_guess_the_number.py"
+    ],
+    "style/one_shot/flat": [
+      "01_hello_world.py",
+      "02_input_name.py",
+      "07_grocery_bill.py"
+    ],
+    "style/procedural": [
+      "05_greet.py",
+      "14_median.py",
+      "16_csv.py",
+      "18_queens.py",
+      "20_prime_numbers.py"
     ],
     "subscript/index": [
       "07_grocery_bill.py",

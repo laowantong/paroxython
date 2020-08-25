@@ -1,25 +1,25 @@
 # ----------------------------------------------------------------------------------------
 # 01_hello_world.py
 # ----------------------------------------------------------------------------------------
-print("Hello, world!") # call_argument:, external_free_call:print, flat_style, free_call:print, free_call_without_result:print, literal:Str, n_liner_style:1, node:Call, node:Expr, node:Name, node:Str, one_shot_style, whole_span:1
+print("Hello, world!") # call_argument:, external_free_call:print, flat_style, free_call:print, free_call_without_result:print, literal:Str, node:Call, node:Expr, node:Name, node:Str, one_liner_style, one_shot_style, whole_span:1
 
 # ----------------------------------------------------------------------------------------
 # 02_input_name.py
 # ----------------------------------------------------------------------------------------
-name = input("What is your name?\n") # assignment:input, assignment_lhs_identifier:name, call_argument:, external_free_call:input, flat_style (-> +1), free_call:input, literal:Str, n_liner_style:2 (-> +1), node:Assign, node:Call, node:Name, node:Str, one_shot_style (-> +1), single_assignment:name, whole_span:2 (-> +1)
+name = input("What is your name?\n") # assignment:input, assignment_lhs_identifier:name, call_argument:, external_free_call:input, flat_style (-> +1), free_call:input, literal:Str, node:Assign, node:Call, node:Name, node:Str, one_shot_style (-> +1), single_assignment:name, whole_span:2 (-> +1)
 print("Hi, %s." % name) # binary_operator:Mod, call_argument:, external_free_call:print, free_call:print, free_call_without_result:print, literal:Str, node:BinOp, node:Call, node:Expr, node:Name, node:Str, string_formatting_operator
 
 # ----------------------------------------------------------------------------------------
 # 03_friends.py
 # ----------------------------------------------------------------------------------------
-friends = ["john", "pat", "gary", "michael"] # assignment, assignment_lhs_identifier:friends, literal:List, literal:Str, n_liner_style:3 (-> +2), node:Assign, node:List, node:Name, node:Str, one_shot_style (-> +2), single_assignment:friends, whole_span:3 (-> +2)
+friends = ["john", "pat", "gary", "michael"] # assignment, assignment_lhs_identifier:friends, literal:List, literal:Str, node:Assign, node:List, node:Name, node:Str, one_shot_style (-> +2), single_assignment:friends, whole_span:3 (-> +2)
 for i, name in enumerate(friends): # call_argument:friends, external_free_call:enumerate, for:i (-> +1), for:name (-> +1), for_indexes_elements (-> +1), free_call:enumerate, literal:Tuple, loop:for (-> +1), loop_with_late_exit:for (-> +1), node:Call, node:For (-> +1), node:Name, node:Tuple
     print("iteration {iteration} is {name}".format(iteration=i, name=name)) # call_argument:, composition, external_free_call:print, free_call:print, free_call_without_result:print, literal:Str, member_call_method:format, node:Attribute, node:Call, node:Expr, node:Name, node:Str
 
 # ----------------------------------------------------------------------------------------
 # 04_fibonacci.py
 # ----------------------------------------------------------------------------------------
-parents, babies = (1, 1) # assignment, assignment_lhs_identifier:babies, assignment_lhs_identifier:parents, assignment_rhs_atom:1, literal:1, literal:Tuple, n_liner_style:4 (-> +3), node:Assign, node:Name, node:Num, node:Tuple, one_shot_style (-> +3), parallel_assignment:2, whole_span:4 (-> +3)
+parents, babies = (1, 1) # assignment, assignment_lhs_identifier:babies, assignment_lhs_identifier:parents, assignment_rhs_atom:1, literal:1, literal:Tuple, node:Assign, node:Name, node:Num, node:Tuple, one_shot_style (-> +3), parallel_assignment:2, whole_span:4 (-> +3)
 while babies < 100: # comparison_operator:Lt, literal:100, loop:while (-> +2), loop_with_late_exit:while (-> +2), magic_number:100, node:Compare, node:Name, node:Num, node:While (-> +2)
     print("This generation has {} babies".format(babies)) # call_argument:, call_argument:babies, composition, external_free_call:print, free_call:print, free_call_without_result:print, literal:Str, member_call_method:format, node:Attribute, node:Call, node:Expr, node:Name, node:Str
     parents, babies = (babies, parents + babies) # addition_operator, assignment, assignment_lhs_identifier:babies, assignment_lhs_identifier:parents, assignment_rhs_atom:babies, assignment_rhs_atom:parents, binary_operator:Add, literal:Tuple, node:Assign, node:BinOp, node:Name, node:Tuple, parallel_assignment:2, slide, update:babies:parents, update:parents:babies, update_by_assignment:babies:parents, update_by_assignment:parents:babies, update_by_assignment_with, update_with
@@ -27,7 +27,7 @@ while babies < 100: # comparison_operator:Lt, literal:100, loop:while (-> +2), l
 # ----------------------------------------------------------------------------------------
 # 05_greet.py
 # ----------------------------------------------------------------------------------------
-def greet(name): # function:greet (-> +1), function_argument:name, function_argument_flavor:arg, function_returning_nothing:greet (-> +1), n_liner_style:4 (-> +4), node:FunctionDef (-> +1), node:arg, procedural_style (-> +4), whole_span:5 (-> +4)
+def greet(name): # function:greet (-> +1), function_argument:name, function_argument_flavor:arg, function_returning_nothing:greet (-> +1), node:FunctionDef (-> +1), node:arg, procedural_style (-> +4), whole_span:5 (-> +4)
     print("Hello", name) # call_argument:, call_argument:name, external_free_call:print, free_call:print, free_call_without_result:print, literal:Str, node:Call, node:Expr, node:Name, node:Str
 greet("Jack") # call_argument:, free_call:greet, free_call_without_result:greet, internal_free_call:greet, literal:Str, node:Call, node:Expr, node:Name, node:Str
 greet("Jill") # call_argument:, free_call:greet, free_call_without_result:greet, internal_free_call:greet, literal:Str, node:Call, node:Expr, node:Name, node:Str
@@ -36,7 +36,7 @@ greet("Bob") # call_argument:, free_call:greet, free_call_without_result:greet, 
 # ----------------------------------------------------------------------------------------
 # 06_regex.py
 # ----------------------------------------------------------------------------------------
-import re # import:re, import_module:re, n_liner_style:5 (-> +5), node:Import, one_shot_style (-> +5), whole_span:6 (-> +5)
+import re # import:re, import_module:re, node:Import, one_shot_style (-> +5), whole_span:6 (-> +5)
 for test_string in ["555-1212", "ILL-EGAL"]: # for:test_string (-> +4), literal:List, literal:Str, loop:for (-> +4), loop_with_late_exit:for (-> +4), node:For (-> +4), node:List, node:Name, node:Str
     if re.match(r"^\d{3}-\d{4}$", test_string): # call_argument:, call_argument:test_string, if (-> +3), if_test_atom:re, if_test_atom:test_string, literal:Str, member_call_method:match, node:Attribute, node:Call, node:If (-> +3), node:Name, node:Str
         print(test_string, "is a valid US local phone number") # call_argument:, call_argument:test_string, external_free_call:print, free_call:print, free_call_without_result:print, if_then_branch, literal:Str, node:Call, node:Expr, node:Name, node:Str
@@ -46,7 +46,7 @@ for test_string in ["555-1212", "ILL-EGAL"]: # for:test_string (-> +4), literal:
 # ----------------------------------------------------------------------------------------
 # 07_grocery_bill.py
 # ----------------------------------------------------------------------------------------
-prices = {"apple": 0.40, "banana": 0.50} # assignment, assignment_lhs_identifier:prices, assignment_rhs_atom:0.4, assignment_rhs_atom:0.5, flat_style (-> +3), literal:0.4, literal:0.5, literal:Dict, literal:Str, magic_number:0.4, magic_number:0.5, n_liner_style:4 (-> +3), node:Assign, node:Dict, node:Name, node:Num, node:Str, one_shot_style (-> +3), single_assignment:prices, whole_span:4 (-> +3)
+prices = {"apple": 0.40, "banana": 0.50} # assignment, assignment_lhs_identifier:prices, assignment_rhs_atom:0.4, assignment_rhs_atom:0.5, flat_style (-> +3), literal:0.4, literal:0.5, literal:Dict, literal:Str, magic_number:0.4, magic_number:0.5, node:Assign, node:Dict, node:Name, node:Num, node:Str, one_shot_style (-> +3), single_assignment:prices, whole_span:4 (-> +3)
 my_purchase = {"apple": 1, "banana": 6} # assignment, assignment_lhs_identifier:my_purchase, assignment_rhs_atom:1, assignment_rhs_atom:6, literal:1, literal:6, literal:Dict, literal:Str, magic_number:6, node:Assign, node:Dict, node:Name, node:Num, node:Str, single_assignment:my_purchase
 grocery_bill = sum(prices[fruit] * my_purchase[fruit] for fruit in my_purchase) # assignment:sum, assignment_lhs_identifier:grocery_bill, assignment_rhs_atom:fruit, assignment_rhs_atom:my_purchase, assignment_rhs_atom:prices, binary_operator:Mult, call_argument:, comprehension:Generator, comprehension_for_count:1, external_free_call:sum, free_call:sum, index:fruit, multiplication_operator, node:Assign, node:BinOp, node:Call, node:GeneratorExp, node:Name, node:Subscript, single_assignment:grocery_bill
 print("I owe the grocer $%.2f" % grocery_bill) # binary_operator:Mod, call_argument:, external_free_call:print, free_call:print, free_call_without_result:print, literal:Str, node:BinOp, node:Call, node:Expr, node:Name, node:Str, string_formatting_operator
@@ -54,7 +54,7 @@ print("I owe the grocer $%.2f" % grocery_bill) # binary_operator:Mod, call_argum
 # ----------------------------------------------------------------------------------------
 # 08_arguments.py
 # ----------------------------------------------------------------------------------------
-import sys # flat_style (-> +5), import:sys, import_module:sys, n_liner_style:5 (-> +5), node:Import, one_shot_style (-> +5), whole_span:6 (-> +5)
+import sys # import:sys, import_module:sys, node:Import, one_shot_style (-> +5), whole_span:6 (-> +5)
 try: # node:Try (-> +4), try_except:ValueError (-> +4)
     total = sum(int(arg) for arg in sys.argv[1:]) # assignment:sum, assignment_lhs_identifier:total, assignment_rhs_atom:1, assignment_rhs_atom:arg, assignment_rhs_atom:sys, call_argument:, call_argument:arg, composition, comprehension:Generator, comprehension_for_count:1, external_free_call:int, external_free_call:sum, free_call:int, free_call:sum, literal:1, node:Assign, node:Attribute, node:Call, node:GeneratorExp, node:Name, node:Num, node:Subscript, single_assignment:total, slice:1::, slice_lower:1, slice_step:, slice_upper:, value_attr:argv
     print("sum =", total) # call_argument:, call_argument:total, external_free_call:print, free_call:print, free_call_without_result:print, literal:Str, node:Call, node:Expr, node:Name, node:Str
@@ -64,7 +64,7 @@ except ValueError: # except:ValueError, node:ExceptHandler (-> +1), node:Name
 # ----------------------------------------------------------------------------------------
 # 09_indent.py
 # ----------------------------------------------------------------------------------------
-import glob # import:glob, import_module:glob, n_liner_style:7 (-> +7), node:Import, one_shot_style (-> +7), whole_span:8 (-> +7)
+import glob # import:glob, import_module:glob, node:Import, one_shot_style (-> +7), whole_span:8 (-> +7)
 python_files = glob.glob("*.py") # assignment:glob, assignment_lhs_identifier:python_files, assignment_rhs_atom:glob, call_argument:, literal:Str, member_call_method:glob, node:Assign, node:Attribute, node:Call, node:Name, node:Str, single_assignment:python_files
 for file_name in sorted(python_files): # call_argument:python_files, external_free_call:sorted, for:file_name (-> +5), free_call:sorted, loop:for (-> +5), loop_with_late_exit:for (-> +5), node:Call, node:For (-> +5), node:Name
     print("    ------" + file_name) # binary_operator:Add, call_argument:, concatenation_operator:Str, external_free_call:print, free_call:print, free_call_without_result:print, literal:Str, node:BinOp, node:Call, node:Expr, node:Name, node:Str
@@ -76,7 +76,7 @@ for file_name in sorted(python_files): # call_argument:python_files, external_fr
 # ----------------------------------------------------------------------------------------
 # 10_time.py
 # ----------------------------------------------------------------------------------------
-from time import localtime # import:time:localtime, import_module:time, import_name:localtime, n_liner_style:16 (-> +16), node:ImportFrom, one_shot_style (-> +16), whole_span:17 (-> +16)
+from time import localtime # import:time:localtime, import_module:time, import_name:localtime, node:ImportFrom, one_shot_style (-> +16), whole_span:17 (-> +16)
 activities = { # assignment, assignment_lhs_identifier:activities, literal:Dict, node:Assign (-> +6), node:Dict (-> +6), node:Name, single_assignment:activities
     8: "Sleeping", # assignment_rhs_atom:8, literal:8, literal:Str, magic_number:8, node:Num, node:Str
     9: "Commuting", # assignment_rhs_atom:9, literal:9, literal:Str, magic_number:9, node:Num, node:Str
@@ -97,7 +97,7 @@ else:
 # ----------------------------------------------------------------------------------------
 # 11_bottles.py
 # ----------------------------------------------------------------------------------------
-REFRAIN = """ # assignment, assignment_lhs_identifier:REFRAIN, n_liner_style:10 (-> +9), node:Assign (-> +5), node:Name, one_shot_style (-> +9), single_assignment:REFRAIN, whole_span:10 (-> +9)
+REFRAIN = """ # assignment, assignment_lhs_identifier:REFRAIN, node:Assign (-> +5), node:Name, one_shot_style (-> +9), single_assignment:REFRAIN, whole_span:10 (-> +9)
 %d bottles of beer on the wall,
 %d bottles of beer,
 take one down, pass it around,
@@ -111,7 +111,7 @@ while bottles_of_beer > 1: # comparison_operator:Gt, literal:1, loop:while (-> +
 # ----------------------------------------------------------------------------------------
 # 12_classes.py
 # ----------------------------------------------------------------------------------------
-class BankAccount(object): # n_liner_style:8 (-> +11), node:ClassDef (-> +8), node:Name, object_oriented_style (-> +11), whole_span:12 (-> +11)
+class BankAccount(object): # node:ClassDef (-> +8), node:Name, object_oriented_style (-> +11), whole_span:12 (-> +11)
     def __init__(self, initial_balance=0): # function:__init__ (-> +1), function_argument:initial_balance, function_argument:self, function_argument_flavor:arg, function_returning_nothing:__init__ (-> +1), instance_method:__init__ (-> +1), literal:0, method:__init__ (-> +1), node:FunctionDef (-> +1), node:Num, node:arg
         self.balance = initial_balance # assignment, assignment_lhs_identifier:self, assignment_rhs_atom:initial_balance, node:Assign, node:Attribute, node:Name
     def deposit(self, amount): # function:deposit (-> +1), function_argument:amount, function_argument:self, function_argument_flavor:arg, function_returning_nothing:deposit (-> +1), instance_method:deposit (-> +1), method:deposit (-> +1), node:FunctionDef (-> +1), node:arg
@@ -127,7 +127,7 @@ print(my_account.balance, my_account.overdrawn()) # call_argument:, composition,
 # ----------------------------------------------------------------------------------------
 # 13_unit_testing.py
 # ----------------------------------------------------------------------------------------
-import unittest # import:unittest, import_module:unittest, n_liner_style:8 (-> +10), node:Import, object_oriented_style (-> +10), whole_span:11 (-> +10)
+import unittest # import:unittest, import_module:unittest, node:Import, object_oriented_style (-> +10), whole_span:11 (-> +10)
 def median(pool): # function:median (-> +6), function_argument:pool, function_argument_flavor:arg, function_returning_something:median (-> +6), node:FunctionDef (-> +6), node:arg
     copy = sorted(pool) # assignment:sorted, assignment_lhs_identifier:copy, assignment_rhs_atom:pool, call_argument:pool, external_free_call:sorted, free_call:sorted, node:Assign, node:Call, node:Name, single_assignment:copy
     size = len(copy) # assignment:len, assignment_lhs_identifier:size, assignment_rhs_atom:copy, call_argument:copy, external_free_call:len, free_call:len, node:Assign, node:Call, node:Name, single_assignment:size
@@ -142,7 +142,7 @@ class TestMedian(unittest.TestCase): # node:Attribute, node:ClassDef (-> +2), no
 # ----------------------------------------------------------------------------------------
 # 14_median.py
 # ----------------------------------------------------------------------------------------
-def median(pool): # function:median (-> +6), function_argument:pool, function_argument_flavor:arg, function_returning_something:median (-> +6), n_liner_style:6 (-> +6), node:FunctionDef (-> +6), node:arg, whole_span:7 (-> +6)
+def median(pool): # function:median (-> +6), function_argument:pool, function_argument_flavor:arg, function_returning_something:median (-> +6), node:FunctionDef (-> +6), node:arg, procedural_style (-> +6), whole_span:7 (-> +6)
     copy = sorted(pool) # assignment:sorted, assignment_lhs_identifier:copy, assignment_rhs_atom:pool, call_argument:pool, external_free_call:sorted, free_call:sorted, node:Assign, node:Call, node:Name, single_assignment:copy
     size = len(copy) # assignment:len, assignment_lhs_identifier:size, assignment_rhs_atom:copy, call_argument:copy, external_free_call:len, free_call:len, node:Assign, node:Call, node:Name, single_assignment:size
     if size % 2 == 1: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, if (-> +3), if_test_atom:1, if_test_atom:2, if_test_atom:size, literal:1, literal:2, modulo_operator, node:BinOp, node:Compare, node:If (-> +3), node:Name, node:Num
@@ -153,7 +153,7 @@ def median(pool): # function:median (-> +6), function_argument:pool, function_ar
 # ----------------------------------------------------------------------------------------
 # 15_itertools_groupby.py
 # ----------------------------------------------------------------------------------------
-from itertools import groupby # import:itertools:groupby, import_module:itertools, import_name:groupby, n_liner_style:8 (-> +8), node:ImportFrom, one_shot_style (-> +8), whole_span:9 (-> +8)
+from itertools import groupby # import:itertools:groupby, import_module:itertools, import_name:groupby, node:ImportFrom, one_shot_style (-> +8), whole_span:9 (-> +8)
 lines = """ # assignment:splitlines, assignment_lhs_identifier:lines, node:Assign (-> +4), node:Name, single_assignment:lines
 This is the
 first paragraph.
@@ -166,7 +166,7 @@ for has_chars, frags in groupby(lines, bool): # call_argument:bool, call_argumen
 # ----------------------------------------------------------------------------------------
 # 16_csv.py
 # ----------------------------------------------------------------------------------------
-import csv # import:csv, import_module:csv, n_liner_style:16 (-> +17), node:Import, whole_span:18 (-> +17)
+import csv # import:csv, import_module:csv, node:Import, procedural_style (-> +17), whole_span:18 (-> +17)
 def cmp(a, b): # function:cmp (-> +1), function_argument:a, function_argument:b, function_argument_flavor:arg, function_returning_something:cmp (-> +1), node:FunctionDef (-> +1), node:arg
     return (a > b) - (a < b) # binary_operator:Sub, comparison_operator:Gt, comparison_operator:Lt, node:BinOp, node:Compare, node:Name, node:Return, return
 with open("stocks.csv", "w", newline="") as stocksFileW: # call_argument:, empty_literal:Str, external_free_call:open, free_call:open, literal:Str, node:Call, node:Name, node:Str, node:With (-> +6)
@@ -188,7 +188,7 @@ with open("stocks.csv", "r") as stocksFile: # call_argument:, external_free_call
 # ----------------------------------------------------------------------------------------
 # 18_queens.py
 # ----------------------------------------------------------------------------------------
-BOARD_SIZE = 8 # assignment:8, assignment_lhs_identifier:BOARD_SIZE, assignment_rhs_atom:8, literal:8, n_liner_style:18 (-> +19), node:Assign, node:Name, node:Num, single_assignment:BOARD_SIZE, whole_span:20 (-> +19)
+BOARD_SIZE = 8 # assignment:8, assignment_lhs_identifier:BOARD_SIZE, assignment_rhs_atom:8, literal:8, node:Assign, node:Name, node:Num, procedural_style (-> +19), single_assignment:BOARD_SIZE, whole_span:20 (-> +19)
 def under_attack(col, queens): # function:under_attack (-> +6), function_argument:col, function_argument:queens, function_argument_flavor:arg, function_returning_something:under_attack (-> +6), node:FunctionDef (-> +6), node:arg
     left = right = col # assignment, assignment_lhs_identifier:left, assignment_lhs_identifier:right, assignment_rhs_atom:col, chained_assignment, node:Assign, node:Name
     for r, c in reversed(queens): # call_argument:queens, existential_quantification:c (-> +3), external_free_call:reversed, for:c (-> +3), for:r (-> +3), free_call:reversed, literal:Tuple, loop:for (-> +3), loop_with_early_exit:for:return (-> +3), loop_with_return:for (-> +3), node:Call, node:For (-> +3), node:Name, node:Tuple
@@ -212,7 +212,7 @@ for answer in solve(BOARD_SIZE): # call_argument:BOARD_SIZE, for:answer (-> +1),
 # ----------------------------------------------------------------------------------------
 # 20_prime_numbers.py
 # ----------------------------------------------------------------------------------------
-import itertools # import:itertools, import_module:itertools, n_liner_style:9 (-> +10), node:Import, whole_span:11 (-> +10)
+import itertools # import:itertools, import_module:itertools, node:Import, procedural_style (-> +10), whole_span:11 (-> +10)
 def iter_primes(): # function:iter_primes (-> +5), function_without_arguments:iter_primes (-> +5), generator:iter_primes (-> +5), node:FunctionDef (-> +5)
     numbers = itertools.count(2) # assignment:count, assignment_lhs_identifier:numbers, assignment_rhs_atom:2, assignment_rhs_atom:itertools, call_argument:2, literal:2, member_call_method:count, node:Assign, node:Attribute, node:Call, node:Name, node:Num, single_assignment:numbers
     while True: # infinite_while (-> +3), literal:True, loop:while (-> +3), loop_with_late_exit:while (-> +3), node:NameConstant, node:While (-> +3)
@@ -227,7 +227,7 @@ for p in iter_primes(): # for:p (-> +3), free_call:iter_primes, free_call_withou
 # ----------------------------------------------------------------------------------------
 # 21_xml_html_parsing.py
 # ----------------------------------------------------------------------------------------
-dinner_recipe = """<html><body><table> # assignment, assignment_lhs_identifier:dinner_recipe, n_liner_style:13 (-> +13), node:Assign (-> +6), node:Name, one_shot_style (-> +13), single_assignment:dinner_recipe, whole_span:14 (-> +13)
+dinner_recipe = """<html><body><table> # assignment, assignment_lhs_identifier:dinner_recipe, node:Assign (-> +6), node:Name, one_shot_style (-> +13), single_assignment:dinner_recipe, whole_span:14 (-> +13)
 <tr><th>amt</th><th>unit</th><th>item</th></tr>
 <tr><td>24</td><td>slices</td><td>baguette</td></tr>
 <tr><td>2+</td><td>tbsp</td><td>olive oil</td></tr>
@@ -245,7 +245,7 @@ for ingredient in tree.getiterator("tr"): # call_argument:, for:ingredient (-> +
 # ----------------------------------------------------------------------------------------
 # 28_queens.py
 # ----------------------------------------------------------------------------------------
-BOARD_SIZE = 8 # assignment:8, assignment_lhs_identifier:BOARD_SIZE, assignment_rhs_atom:8, literal:8, n_liner_style:22 (-> +23), node:Assign, node:Name, node:Num, object_oriented_style (-> +23), single_assignment:BOARD_SIZE, whole_span:24 (-> +23)
+BOARD_SIZE = 8 # assignment:8, assignment_lhs_identifier:BOARD_SIZE, assignment_rhs_atom:8, literal:8, node:Assign, node:Name, node:Num, object_oriented_style (-> +23), single_assignment:BOARD_SIZE, whole_span:24 (-> +23)
 class BailOut(Exception): # node:ClassDef (-> +1), node:Name
     pass # node:Pass
 def validate(queens): # function:validate (-> +5), function_argument:queens, function_argument_flavor:arg, function_returning_nothing:validate (-> +5), node:FunctionDef (-> +5), node:arg
@@ -273,7 +273,7 @@ print("\n".join(". " * q + "Q " + ". " * (BOARD_SIZE - q - 1) for q in queens)) 
 # ----------------------------------------------------------------------------------------
 # 33_guess_the_number.py
 # ----------------------------------------------------------------------------------------
-import random # import:random, import_module:random, n_liner_style:17 (-> +17), node:Import, one_shot_style (-> +17), whole_span:18 (-> +17)
+import random # import:random, import_module:random, node:Import, one_shot_style (-> +17), whole_span:18 (-> +17)
 guesses_made = 0 # assignment:0, assignment_lhs_identifier:guesses_made, assignment_rhs_atom:0, literal:0, node:Assign, node:Name, node:Num, single_assignment:guesses_made
 name = input("Hello! What is your name?\n") # assignment:input, assignment_lhs_identifier:name, call_argument:, external_free_call:input, free_call:input, literal:Str, node:Assign, node:Call, node:Name, node:Str, single_assignment:name
 number = random.randint(1, 20) # assignment:randint, assignment_lhs_identifier:number, assignment_rhs_atom:1, assignment_rhs_atom:20, assignment_rhs_atom:random, call_argument:1, call_argument:20, literal:1, literal:20, magic_number:20, member_call_method:randint, node:Assign, node:Attribute, node:Call, node:Name, node:Num, single_assignment:number

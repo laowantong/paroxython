@@ -176,7 +176,7 @@
       - [Feature `procedural_style` (SQL)](#feature-procedural_style)
       - [Feature `one_shot_style` (SQL)](#feature-one_shot_style)
       - [Feature `flat_style` (SQL)](#feature-flat_style)
-      - [Feature `n_liner_style` (SQL)](#feature-n_liner_style)
+      - [Feature `one_liner_style` (SQL)](#feature-one_liner_style)
   - [Others](#others)
       - [Feature `topic|technique|complexity`](#feature-topictechniquecomplexity)
 - [Suggestions](#suggestions)
@@ -197,13 +197,12 @@ Match the name of every node of the AST. This covers most of the [Python keyword
 
 ##### Derivations
 
-[⬇️ feature `flat_style`](#feature-flat_style)  
 [⬇️ feature `if`](#feature-if)  
 [⬇️ feature `loop`](#feature-loop)  
 [⬇️ feature `loop_with_break`](#feature-loop_with_break)  
 [⬇️ feature `method`](#feature-method)  
-[⬇️ feature `n_liner_style`](#feature-n_liner_style)  
 [⬇️ feature `object_oriented_style`](#feature-object_oriented_style)  
+[⬇️ feature `one_liner_style`](#feature-one_liner_style)  
 [⬇️ feature `one_shot_style`](#feature-one_shot_style)  
 [⬇️ feature `try_raise|try_except`](#feature-try_raisetry_except)  
 
@@ -3356,6 +3355,7 @@ In Python, the term "function" encompasses any type of subroutine, be it a metho
 [⬇️ feature `if_guard`](#feature-if_guard)  
 [⬇️ feature `internal_free_call`](#feature-internal_free_call)  
 [⬇️ feature `method`](#feature-method)  
+[⬇️ feature `procedural_style`](#feature-procedural_style)  
 [⬇️ feature `recursive_call_count`](#feature-recursive_call_count)  
 [⬇️ feature `recursive_function`](#feature-recursive_function)  
 
@@ -3634,7 +3634,6 @@ A function returning nothing (_aka_ a procedure) is a function which is neither 
 [⬆️ feature `function_returning_something`](#feature-function_returning_something)  
 [⬆️ feature `generator`](#feature-generator)  
 [⬇️ feature `functional_style`](#feature-functional_style)  
-[⬇️ feature `procedural_style`](#feature-procedural_style)  
 
 ##### Specification
 
@@ -5581,6 +5580,7 @@ WHERE l2.span IS NULL
 [⬆️ feature `except`](#feature-except)  
 [⬆️ feature `node`](#feature-node)  
 [⬆️ feature `raise`](#feature-raise)  
+[⬇️ feature `flat_style`](#feature-flat_style)  
 
 ##### Specification
 
@@ -6569,10 +6569,9 @@ Match a whole program, and suffix it by the number of its last line of code.
 
 ##### Derivations
 
-[⬇️ feature `flat_style`](#feature-flat_style)  
 [⬇️ feature `functional_style`](#feature-functional_style)  
-[⬇️ feature `n_liner_style`](#feature-n_liner_style)  
 [⬇️ feature `object_oriented_style`](#feature-object_oriented_style)  
+[⬇️ feature `one_liner_style`](#feature-one_liner_style)  
 [⬇️ feature `one_shot_style`](#feature-one_shot_style)  
 [⬇️ feature `procedural_style`](#feature-procedural_style)  
 
@@ -6636,7 +6635,7 @@ SELECT "object_oriented_style",
 FROM t_whole_span p
 CROSS JOIN t_node n
 WHERE n.name_suffix = "ClassDef"
-GROUP BY p.path
+LIMIT 1
 ```
 
 ##### Example
@@ -6677,6 +6676,7 @@ _Limitation._ Potential false negative when the right hand side of the assignmen
 [⬆️ feature `loop`](#feature-loop)  
 [⬆️ feature `object_oriented_style`](#feature-object_oriented_style)  
 [⬆️ feature `whole_span`](#feature-whole_span)  
+[⬇️ feature `procedural_style`](#feature-procedural_style)  
 
 ##### Specification
 
@@ -6694,7 +6694,7 @@ WHERE NOT EXISTS
                              "object_oriented_style",
                              "loop",
                              "assignment") )
-GROUP BY p.path
+LIMIT 1
 ```
 
 ##### Example
@@ -6724,11 +6724,12 @@ GROUP BY p.path
 
 #### Feature `procedural_style`
 
-A program is considered as procedural if and only if it features at least one procedure definition but no class definition.
+A program is considered as procedural if and only if it is not in object-oriented or functional style, and features at least one function definition.
 
 ##### Derivations
 
-[⬆️ feature `function_returning_nothing`](#feature-function_returning_nothing)  
+[⬆️ feature `function`](#feature-function)  
+[⬆️ feature `functional_style`](#feature-functional_style)  
 [⬆️ feature `object_oriented_style`](#feature-object_oriented_style)  
 [⬆️ feature `whole_span`](#feature-whole_span)  
 
@@ -6740,12 +6741,13 @@ SELECT "procedural_style",
        p.span,
        p.path
 FROM t_whole_span p
-CROSS JOIN t_function_returning_nothing
+CROSS JOIN t_function
 WHERE NOT EXISTS
     (SELECT *
      FROM t
-     WHERE t.name_prefix = "object_oriented_style")
-GROUP BY p.path
+     WHERE t.name IN ("object_oriented_style",
+                      "functional_style"))
+LIMIT 1
 ```
 
 ##### Example
@@ -6755,13 +6757,21 @@ GROUP BY p.path
 2   def sort(a):
 3       for i in range(1, len(a)):
 4           insort(a, a.pop(i), hi=i)
+5
+6   def fibonacci(n):
+7       result = []
+8       (a, b) = (0, 1)
+9       while a < n:
+10          result.append(a)
+11          (a, b) = (b, a + b)
+12      return result
 ```
 
 ##### Matches
 
 | Label | Lines |
 |:--|:--|
-| `procedural_style` | 1-4 |
+| `procedural_style` | 1-12 |
 
 --------------------------------------------------------------------------------
 
@@ -6773,6 +6783,7 @@ A program is considered as one-shot if and only if it features no function or cl
 
 [⬆️ feature `node`](#feature-node)  
 [⬆️ feature `whole_span`](#feature-whole_span)  
+[⬇️ feature `flat_style`](#feature-flat_style)  
 
 ##### Specification
 
@@ -6813,14 +6824,14 @@ WHERE NOT EXISTS
 
 #### Feature `flat_style`
 
-A program is considered as flat if and only if it features no conditional, no loop and no function or class definition. Note that it is [one-shot](#feature-one_shot_style) too.
+A program is considered as flat if and only if it features no conditional, no loop, no exception mechanism, no function definition and no class definition. Note that it is [one-shot](#feature-one_shot_style) too.
 
 ##### Derivations
 
 [⬆️ feature `if`](#feature-if)  
 [⬆️ feature `loop`](#feature-loop)  
-[⬆️ feature `node`](#feature-node)  
-[⬆️ feature `whole_span`](#feature-whole_span)  
+[⬆️ feature `one_shot_style`](#feature-one_shot_style)  
+[⬆️ feature `try_raise|try_except`](#feature-try_raisetry_except)  
 
 ##### Specification
 
@@ -6829,15 +6840,14 @@ SELECT "flat_style",
        "",
        p.span,
        p.path
-FROM t_whole_span p
+FROM t_one_shot_style p
 WHERE NOT EXISTS
     (SELECT *
      FROM t
-     WHERE t.name IN ("if",
-                      "loop:for",
-                      "loop:while",
-                      "node:FunctionDef",
-                      "node:ClassDef"))
+     WHERE t.name_prefix IN ("if",
+                             "loop",
+                             "try_except",
+                             "try_raise"))
 ```
 
 ##### Example
@@ -6861,9 +6871,9 @@ WHERE NOT EXISTS
 
 --------------------------------------------------------------------------------
 
-#### Feature `n_liner_style`
+#### Feature `one_liner_style`
 
-A program is considered as a n-liner if and only if it has only n lines which are not a function definition, an importation or an assertion. Of course, one-liners constitute the main purpose of this feature.
+A program is considered a one-liner if and only if it has only one line which is not a definition header, an importation or an assertion.
 
 ##### Derivations
 
@@ -6873,17 +6883,19 @@ A program is considered as a n-liner if and only if it has only n lines which ar
 ##### Specification
 
 ```sql
-SELECT "n_liner_style",
-       cast(p.name_suffix AS INTEGER) -
-  (SELECT count(*)
-   FROM t
-   WHERE t.name IN ("node:FunctionDef",
-                    "node:Assert",
-                    "node:Import",
-                    "node:ImportFrom")),
+SELECT "one_liner_style",
+       "",
        p.span,
        p.path
 FROM t_whole_span p
+WHERE cast(p.name_suffix AS INTEGER) - 1 =
+    (SELECT count(*)
+     FROM t
+     WHERE t.name IN ("node:FunctionDef",
+                      "node:ClassDef",
+                      "node:Assert",
+                      "node:Import",
+                      "node:ImportFrom"))
 ```
 
 ##### Example
@@ -6898,7 +6910,7 @@ FROM t_whole_span p
 
 | Label | Lines |
 |:--|:--|
-| `n_liner_style:1` | 1-3 |
+| `one_liner_style` | 1-3 |
 
 --------------------------------------------------------------------------------
 

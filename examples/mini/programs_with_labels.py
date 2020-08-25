@@ -1,12 +1,12 @@
 # ----------------------------------------------------------------------------------------
 # assignment.py
 # ----------------------------------------------------------------------------------------
-a = b # assignment, assignment_lhs_identifier:a, assignment_rhs_atom:b, flat_style, n_liner_style:1, node:Assign, node:Name, one_shot_style, single_assignment:a, whole_span:1
+a = b # assignment, assignment_lhs_identifier:a, assignment_rhs_atom:b, flat_style, node:Assign, node:Name, one_liner_style, one_shot_style, single_assignment:a, whole_span:1
 
 # ----------------------------------------------------------------------------------------
 # collatz.py
 # ----------------------------------------------------------------------------------------
-def print_collatz(n): # added_block_label (-> +7), function:print_collatz (-> +7), function_argument:n, function_argument_flavor:arg, function_returning_nothing:print_collatz (-> +7), n_liner_style:7 (-> +7), node:FunctionDef (-> +7), node:arg, procedural_style (-> +7), whole_span:8 (-> +7)
+def print_collatz(n): # added_block_label (-> +7), function:print_collatz (-> +7), function_argument:n, function_argument_flavor:arg, function_returning_nothing:print_collatz (-> +7), node:FunctionDef (-> +7), node:arg, procedural_style (-> +7), whole_span:8 (-> +7)
     while n != 1: # comparison_operator:NotEq, literal:1, loop:while (-> +5), loop_with_late_exit:while (-> +5), node:Compare, node:Name, node:Num, node:While (-> +5), suggest_constant_definition
         print(n) # call_argument:n, external_free_call:print, free_call:print, free_call_without_result:print, node:Call, node:Expr, node:Name
         if n % 2 == 0: # added_label_on_line_4, binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, if (-> +3), if_test_atom:0, if_test_atom:2, if_test_atom:n, literal:0, literal:2, modulo_operator, node:BinOp, node:Compare, node:If (-> +3), node:Name, node:Num, verbose_conditional_assignment (-> +3)
@@ -18,7 +18,7 @@ def print_collatz(n): # added_block_label (-> +7), function:print_collatz (-> +7
 # ----------------------------------------------------------------------------------------
 # fizzbuzz.py
 # ----------------------------------------------------------------------------------------
-import collatz # import_internally:collatz, import_module_internally:collatz, n_liner_style:9 (-> +9), node:Import, one_shot_style (-> +9), whole_span:10 (-> +9)
+import collatz # import_internally:collatz, import_module_internally:collatz, node:Import, one_shot_style (-> +9), whole_span:10 (-> +9)
 for i in range(1, 101): # call_argument:1, call_argument:101, external_free_call:range, for:i (-> +8), for_range:1:101 (-> +8), free_call:range, literal:1, literal:101, loop:for (-> +8), loop_with_late_exit:for (-> +8), magic_number:101, node:Call, node:For (-> +8), node:Name, node:Num, range:1:101
     if i % 15 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:15, if (-> +7), if_test_atom:0, if_test_atom:15, if_test_atom:i, literal:0, literal:15, magic_number:15, modulo_operator, node:BinOp, node:Compare, node:If (-> +7), node:Name, node:Num
         print("FizzBuzz") # call_argument:, external_free_call:print, free_call:print, free_call_without_result:print, if_then_branch, literal:Str, node:Call, node:Expr, node:Name, node:Str
@@ -32,6 +32,6 @@ for i in range(1, 101): # call_argument:1, call_argument:101, external_free_call
 # ----------------------------------------------------------------------------------------
 # is_even.py
 # ----------------------------------------------------------------------------------------
-import fizzbuzz # functional_style (-> +2), import_internally:fizzbuzz, import_module_internally:fizzbuzz, n_liner_style:1 (-> +2), node:Import, whole_span:3 (-> +2)
+import fizzbuzz # functional_style (-> +2), import_internally:fizzbuzz, import_module_internally:fizzbuzz, node:Import, one_liner_style (-> +2), whole_span:3 (-> +2)
 def is_even(n): # function:is_even (-> +1), function_argument:n, function_argument_flavor:arg, function_returning_something:is_even (-> +1), node:FunctionDef (-> +1), node:arg
     return n % 2 == 0 # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, literal:0, literal:2, modulo_operator, node:BinOp, node:Compare, node:Name, node:Num, node:Return, return

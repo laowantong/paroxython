@@ -165,7 +165,25 @@ The loop patterns constitute an aspect of programming which is not always taught
 
 ### Tagging with `style`
 
-Python is a multi paradigm language. Paroxython tags automatically the programs written is the following styles: object-oriented, functional, procedural, one-shot (no function or class definition), flat (no conditional, no loop and no function or class definition) and one-liner.
+Python is a multi paradigm language. For Paroxython, every program belongs to exactly one of the following four styles:
+
+1. `style/object_oriented` if it features at least one class definition;
+2. `style/functional` if it is not object oriented, and features at least one function returning something, but no loop and no assignment;
+3. `style/procedural` if it is neither object oriented or functional, and features at least one subroutine definition;
+4. `style/one_shot` if it features no subroutine or class definition.
+
+Additionally, `style/one_shot/flat` is the _no-indent_ version of the latter (no loop, conditional, etc.).
+
+Independently of the 4-partition, `style/one_liner` denotes any program whose exactly one SLOC is neither a definition header, an importation or an assertion. For instance, the following program is considered a one-liner:
+
+```python
+from sum_proper_divisors_1 import sum_proper_divisors
+
+def abundant_numbers_below(bound):
+    # An abundant number is a number for which the sum of its proper divisors
+    # is greater than the number itself (Wikipedia).
+    return [n for n in range(1, bound) if sum_proper_divisors(n) > n]
+```
 
 ### Going `meta`
 

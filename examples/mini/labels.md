@@ -96,10 +96,6 @@
 - modulo_operator / fizzbuzz.py / 3, 5, 7
 - modulo_operator / is_even.py / 3
 - multiplication_operator / collatz.py / 7
-- n_liner_style:1 / assignment.py / 1
-- n_liner_style:1 / is_even.py / 1-3
-- n_liner_style:7 / collatz.py / 1-8
-- n_liner_style:9 / fizzbuzz.py / 1-10
 - node:Assign / assignment.py / 1
 - node:Assign / collatz.py / 5, 7
 - node:BinOp / collatz.py / 4, 5, 7, 7
@@ -131,6 +127,8 @@
 - node:While / collatz.py / 2-7
 - node:arg / collatz.py / 1
 - node:arg / is_even.py / 2
+- one_liner_style / assignment.py / 1
+- one_liner_style / is_even.py / 1-3
 - one_shot_style / assignment.py / 1
 - one_shot_style / fizzbuzz.py / 1-10
 - procedural_style / collatz.py / 1-8

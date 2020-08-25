@@ -83,7 +83,7 @@ def test_is_even():
 It's rarely a good idea to reuse a [built-in function](https://docs.python.org/3/library/functions.html) name:
 
 ```python
-max = 42 # bad: max() is a built-in function
+max = 42  # mad: max() is a built-in function
 ```
 
 In the same way, if you write classes, consider the names of the methods of the [built-in types](https://docs.python.org/3/library/stdtypes.html) as taboo. Paroxython relies on them to try guessing the type of objects to which they apply. For instance, in:

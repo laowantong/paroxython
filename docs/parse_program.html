@@ -31,7 +31,7 @@
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L0-L358" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L0-L364" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">from collections import defaultdict
 from os.path import dirname
@@ -115,11 +115,18 @@ class ProgramParser:
         self.derived_labels_database = DerivedLabelsDatabase()
 
     def __call__(self, program: Program, yield_failed_matches: bool = False) -&gt; Labels:
-        # If the program can be parsed, flatten its AST.
+        # If the program can be parsed and is nonempty, flatten its AST.
         try:
             tree = ast.parse(program.source)
         except (SyntaxError, ValueError) as exception:
-            return [Label(LabelName(f&#34;ast_construction:{type(exception).__name__}&#34;), [])]
+            return [
+                Label(
+                    LabelName(f&#34;ast_construction:{type(exception).__name__}&#34;),
+                    [Span(1, program.source.count(&#34;\n&#34;) + 1)],
+                )
+            ]
+        if not tree.body:
+            return [Label(LabelName(f&#34;ast_construction:EmptyProgramError&#34;), [Span(0, 0)])]
         self.flat_ast = flatten_ast(tree)
 
         # Search the flat AST for every feature which is specified by a regular expression.
@@ -433,7 +440,7 @@ ends of the list, they are ignored by <code><a title="paroxython.parse_program.p
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L213-L337" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L213-L343" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">class ProgramParser:
     def __init__(self, spec_path: Path = DEFAULT_SPEC_PATH) -&gt; None:
@@ -455,11 +462,18 @@ ends of the list, they are ignored by <code><a title="paroxython.parse_program.p
         self.derived_labels_database = DerivedLabelsDatabase()
 
     def __call__(self, program: Program, yield_failed_matches: bool = False) -&gt; Labels:
-        # If the program can be parsed, flatten its AST.
+        # If the program can be parsed and is nonempty, flatten its AST.
         try:
             tree = ast.parse(program.source)
         except (SyntaxError, ValueError) as exception:
-            return [Label(LabelName(f&#34;ast_construction:{type(exception).__name__}&#34;), [])]
+            return [
+                Label(
+                    LabelName(f&#34;ast_construction:{type(exception).__name__}&#34;),
+                    [Span(1, program.source.count(&#34;\n&#34;) + 1)],
+                )
+            ]
+        if not tree.body:
+            return [Label(LabelName(f&#34;ast_construction:EmptyProgramError&#34;), [Span(0, 0)])]
         self.flat_ast = flatten_ast(tree)
 
         # Search the flat AST for every feature which is specified by a regular expression.
@@ -584,12 +598,11 @@ list of spans. For testing purposes only. Defaults to <code>False</code>.</dd>
 </dl>
 <h2 id="description">Description</h2>
 <ol>
-<li>Parse the given program. If this fails, return a list consisting in a single label,
-<code>"ast_construction:"</code>, followed by the error name. Otherwise, flatten the resulting
-<abbr title="Abstract Syntax Tree">AST</abbr>.</li>
-<li>Search the flat <abbr title="Abstract Syntax Tree">AST</abbr> for every feature which is specified by a regular expression.
-Take care to avoid adding those features which are scheduled for deletion at the same
-span.</li>
+<li>Parse the given program. If this fails or the resulting <abbr title="Abstract Syntax Tree">AST</abbr> is empty, return a list
+consisting in a single label, <code>"ast_construction:"</code>, followed by the error name.
+Otherwise, flatten the <abbr title="Abstract Syntax Tree">AST</abbr>.</li>
+<li>Search it for every feature which is specified by a regular expression. Take care to
+avoid adding those features which are scheduled for deletion at the same span.</li>
 <li>Update the matching features with those featured for addition.</li>
 <li>Use the features found so far to derive (directly and indirectly) all those specified
 by an <abbr title="Structured Query Language">SQL</abbr> query.</li>
@@ -602,14 +615,21 @@ which is executed each time the tests are launched.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L247-L327" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L247-L333" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def __call__(self, program: Program, yield_failed_matches: bool = False) -&gt; Labels:
-    # If the program can be parsed, flatten its AST.
+    # If the program can be parsed and is nonempty, flatten its AST.
     try:
         tree = ast.parse(program.source)
     except (SyntaxError, ValueError) as exception:
-        return [Label(LabelName(f&#34;ast_construction:{type(exception).__name__}&#34;), [])]
+        return [
+            Label(
+                LabelName(f&#34;ast_construction:{type(exception).__name__}&#34;),
+                [Span(1, program.source.count(&#34;\n&#34;) + 1)],
+            )
+        ]
+    if not tree.body:
+        return [Label(LabelName(f&#34;ast_construction:EmptyProgramError&#34;), [Span(0, 0)])]
     self.flat_ast = flatten_ast(tree)
 
     # Search the flat AST for every feature which is specified by a regular expression.
@@ -665,7 +685,7 @@ which is executed each time the tests are launched.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L329-L337" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L335-L343" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def print_performances(self):  # pragma: no cover
     result = sorted(self.times.items(), key=lambda item: item[1], reverse=True)

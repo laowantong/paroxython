@@ -31,7 +31,7 @@
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/label_programs.py#L0-L84" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/label_programs.py#L0-L85" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">from pathlib import Path
 from typing import Callable, Iterator, List, Set
@@ -70,15 +70,16 @@ def generate_labelled_sources(programs: Programs) -&gt; Iterator:
     for program in programs:
         yield Source(f&#34;# {separator}\n# {program.name}\n# {separator}&#34;)
         lines = program.source.splitlines()
-        comments: List[Set[str]] = [set() for _ in lines]
-        for label in program.labels:
-            for span in label.spans:
-                span_length = span.end - span.start
-                span_suffix = f&#34; (-&gt; +{span_length})&#34; if span_length else &#34;&#34;
-                comments[span.start - 1].add(f&#34;{label.name}{span_suffix}&#34;)
-        for (i, comment) in enumerate(comments):
-            if comment:
-                lines[i] += &#34; # &#34; + &#34;, &#34;.join(sorted(comment))
+        if lines:
+            comments: List[Set[str]] = [set() for _ in lines]
+            for label in program.labels:
+                for span in label.spans:
+                    span_length = span.end - span.start
+                    span_suffix = f&#34; (-&gt; +{span_length})&#34; if span_length else &#34;&#34;
+                    comments[span.start - 1].add(f&#34;{label.name}{span_suffix}&#34;)
+            for (i, comment) in enumerate(comments):
+                if comment:
+                    lines[i] += &#34; # &#34; + &#34;, &#34;.join(sorted(comment))
         yield Source(&#34;\n&#34;.join(lines + [&#34;&#34;]))
 
 
@@ -169,22 +170,23 @@ this very list. For instance, a label <code>"import:my_program"</code> would be 
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/label_programs.py#L53-L79" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/label_programs.py#L53-L80" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def generate_labelled_sources(programs: Programs) -&gt; Iterator:
     separator = &#34;-&#34; * 88
     for program in programs:
         yield Source(f&#34;# {separator}\n# {program.name}\n# {separator}&#34;)
         lines = program.source.splitlines()
-        comments: List[Set[str]] = [set() for _ in lines]
-        for label in program.labels:
-            for span in label.spans:
-                span_length = span.end - span.start
-                span_suffix = f&#34; (-&gt; +{span_length})&#34; if span_length else &#34;&#34;
-                comments[span.start - 1].add(f&#34;{label.name}{span_suffix}&#34;)
-        for (i, comment) in enumerate(comments):
-            if comment:
-                lines[i] += &#34; # &#34; + &#34;, &#34;.join(sorted(comment))
+        if lines:
+            comments: List[Set[str]] = [set() for _ in lines]
+            for label in program.labels:
+                for span in label.spans:
+                    span_length = span.end - span.start
+                    span_suffix = f&#34; (-&gt; +{span_length})&#34; if span_length else &#34;&#34;
+                    comments[span.start - 1].add(f&#34;{label.name}{span_suffix}&#34;)
+            for (i, comment) in enumerate(comments):
+                if comment:
+                    lines[i] += &#34; # &#34; + &#34;, &#34;.join(sorted(comment))
         yield Source(&#34;\n&#34;.join(lines + [&#34;&#34;]))</code></pre>
 </details>
 </dd>

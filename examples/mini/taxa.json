@@ -2,9 +2,8 @@
   "assignment.py": {
     "meta/program": "1",
     "meta/sloc/1": "1",
-    "meta/style/flat": "1",
-    "meta/style/one_liner": "1",
-    "meta/style/one_shot": "1",
+    "style/one_liner": "1",
+    "style/one_shot/flat": "1",
     "var/assignment/single": "1"
   },
   "collatz.py": {
@@ -20,10 +19,10 @@
     "flow/loop/while": "2-7",
     "meta/program": "1-8",
     "meta/sloc/8": "1-8",
-    "meta/style/procedural": "1-8",
     "operator/arithmetic/addition": "7",
     "operator/arithmetic/modulo": "4",
     "operator/arithmetic/multiplication": "7",
+    "style/procedural": "1-8",
     "type/number/integer/literal": "2 4 5 7 7",
     "type/number/integer/literal/zero": "4",
     "type/number/magic": "7",
@@ -42,8 +41,8 @@
     "flow/loop/for/arithmetic/start": "2-10",
     "meta/program": "1-10",
     "meta/sloc/10": "1-10",
-    "meta/style/one_shot": "1-10",
     "operator/arithmetic/modulo": "3 5 7",
+    "style/one_shot": "1-10",
     "type/number/integer/literal": "2 2 3 5 7",
     "type/number/integer/literal/zero": "3 5 7",
     "type/number/magic": "2 3 5 7",
@@ -58,9 +57,9 @@
     "def/return/something": "3",
     "meta/program": "1-3",
     "meta/sloc/3": "1-3",
-    "meta/style/functional": "1-3",
-    "meta/style/one_liner": "1-3",
     "operator/arithmetic/modulo": "3",
+    "style/functional": "1-3",
+    "style/one_liner": "1-3",
     "type/number/integer/literal": "3",
     "type/number/integer/literal/zero": "3"
   }
