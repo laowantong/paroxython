@@ -284,8 +284,9 @@ class ProgramParser:
                     [Span(1, program.source.count("\n") + 1)],
                 )
             ]
-        if not tree.body:
-            return [Label(LabelName(f"ast_construction:EmptyProgramError"), [Span(0, 0)])]
+        # The next comment prevents a (wrong?) mypy error: "AST" has no attribute "body"
+        if not tree.body:  # type: ignore
+            return [Label(LabelName("ast_construction:EmptyProgramError"), [Span(0, 0)])]
         self.flat_ast = flatten_ast(tree)
 
         # Search the flat AST for every feature which is specified by a regular expression.

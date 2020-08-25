@@ -77,6 +77,13 @@ def test_malformed_example():
     )
 
 
+def test_empty_example():
+    source = ""
+    result = parse(Program(source=source, labels=[], taxa=[], addition={}, deletion={}))
+    print(result)
+    assert result[0].name == "ast_construction:EmptyProgramError"
+
+
 def test_label_presence(capsys):
     all_names = set()
     present_names = set()

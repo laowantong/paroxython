@@ -31,7 +31,7 @@
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L0-L364" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L0-L365" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">from collections import defaultdict
 from os.path import dirname
@@ -125,8 +125,9 @@ class ProgramParser:
                     [Span(1, program.source.count(&#34;\n&#34;) + 1)],
                 )
             ]
-        if not tree.body:
-            return [Label(LabelName(f&#34;ast_construction:EmptyProgramError&#34;), [Span(0, 0)])]
+        # The next comment prevents a (wrong?) mypy error: &#34;AST&#34; has no attribute &#34;body&#34;
+        if not tree.body: # type: ignore
+            return [Label(LabelName(&#34;ast_construction:EmptyProgramError&#34;), [Span(0, 0)])]
         self.flat_ast = flatten_ast(tree)
 
         # Search the flat AST for every feature which is specified by a regular expression.
@@ -440,7 +441,7 @@ ends of the list, they are ignored by <code><a title="paroxython.parse_program.p
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L213-L343" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L213-L344" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">class ProgramParser:
     def __init__(self, spec_path: Path = DEFAULT_SPEC_PATH) -&gt; None:
@@ -472,8 +473,9 @@ ends of the list, they are ignored by <code><a title="paroxython.parse_program.p
                     [Span(1, program.source.count(&#34;\n&#34;) + 1)],
                 )
             ]
-        if not tree.body:
-            return [Label(LabelName(f&#34;ast_construction:EmptyProgramError&#34;), [Span(0, 0)])]
+        # The next comment prevents a (wrong?) mypy error: &#34;AST&#34; has no attribute &#34;body&#34;
+        if not tree.body: # type: ignore
+            return [Label(LabelName(&#34;ast_construction:EmptyProgramError&#34;), [Span(0, 0)])]
         self.flat_ast = flatten_ast(tree)
 
         # Search the flat AST for every feature which is specified by a regular expression.
@@ -615,7 +617,7 @@ which is executed each time the tests are launched.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L247-L333" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L247-L334" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def __call__(self, program: Program, yield_failed_matches: bool = False) -&gt; Labels:
     # If the program can be parsed and is nonempty, flatten its AST.
@@ -628,8 +630,9 @@ which is executed each time the tests are launched.</p></div>
                 [Span(1, program.source.count(&#34;\n&#34;) + 1)],
             )
         ]
-    if not tree.body:
-        return [Label(LabelName(f&#34;ast_construction:EmptyProgramError&#34;), [Span(0, 0)])]
+    # The next comment prevents a (wrong?) mypy error: &#34;AST&#34; has no attribute &#34;body&#34;
+    if not tree.body: # type: ignore
+        return [Label(LabelName(&#34;ast_construction:EmptyProgramError&#34;), [Span(0, 0)])]
     self.flat_ast = flatten_ast(tree)
 
     # Search the flat AST for every feature which is specified by a regular expression.
@@ -685,7 +688,7 @@ which is executed each time the tests are launched.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L335-L343" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L336-L344" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def print_performances(self):  # pragma: no cover
     result = sorted(self.times.items(), key=lambda item: item[1], reverse=True)
