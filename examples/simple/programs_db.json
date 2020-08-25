@@ -72,6 +72,10 @@
         "assignment_lhs_identifier:friends": [[1,1]],
         "call_argument:": [[3,3]],
         "call_argument:friends": [[2,2]],
+        "call_argument:i": [[3,3]],
+        "call_argument:name": [[3,3]],
+        "call_keyword_argument:iteration": [[3,3]],
+        "call_keyword_argument:name": [[3,3]],
         "composition": [[3,3]],
         "external_free_call:enumerate": [[2,2]],
         "external_free_call:print": [[3,3]],
@@ -1029,7 +1033,7 @@
         "assignment_rhs_atom:stocksFile": [[14,14]],
         "assignment_rhs_atom:stocksFileW": [[5,5]],
         "binary_operator:Sub": [[3,3]],
-        "call_argument:": [[4,4],[4,4],[7,7],[13,13],[13,13],[17,17],[18,18],[18,18]],
+        "call_argument:": [[4,4],[4,4],[4,4],[7,7],[13,13],[13,13],[17,17],[18,18],[18,18]],
         "call_argument:0.0": [[17,17]],
         "call_argument:change": [[17,17]],
         "call_argument:name": [[18,18]],
@@ -1037,6 +1041,7 @@
         "call_argument:status": [[18,18]],
         "call_argument:stocksFile": [[14,14]],
         "call_argument:stocksFileW": [[5,5]],
+        "call_keyword_argument:newline": [[4,4]],
         "comparison_operator:Gt": [[3,3]],
         "comparison_operator:Lt": [[3,3]],
         "composition": [[17,17],[18,18],[18,18]],
@@ -1409,6 +1414,7 @@
         "flow/loop/while/infinite": [[4,7]],
         "meta/program": [[1,11]],
         "meta/sloc/11": [[1,11]],
+        "style/functional/filter": [[7,7]],
         "style/procedural": [[1,11]],
         "type/boolean/literal/True": [[4,4]],
         "type/number/integer/literal": [[3,3],[9,9]],
@@ -2301,10 +2307,14 @@
     "call_argument:guesses_made": [
       "33_guess_the_number.py"
     ],
+    "call_argument:i": [
+      "03_friends.py"
+    ],
     "call_argument:lines": [
       "15_itertools_groupby.py"
     ],
     "call_argument:name": [
+      "03_friends.py",
       "05_greet.py",
       "16_csv.py",
       "33_guess_the_number.py"
@@ -2352,6 +2362,15 @@
     ],
     "call_argument:total": [
       "08_arguments.py"
+    ],
+    "call_keyword_argument:iteration": [
+      "03_friends.py"
+    ],
+    "call_keyword_argument:name": [
+      "03_friends.py"
+    ],
+    "call_keyword_argument:newline": [
+      "16_csv.py"
     ],
     "chained_assignment": [
       "18_queens.py",
@@ -4692,6 +4711,9 @@
     ],
     "pattern/states/accumulate/count": [
       "33_guess_the_number.py"
+    ],
+    "style/functional/filter": [
+      "20_prime_numbers.py"
     ],
     "style/object_oriented": [
       "12_classes.py",

@@ -171,12 +171,15 @@ pattern/inputs/accumulate	accumulate_inputs:.+
 pattern/inputs/accumulate/count	count_inputs:.+
 pattern/inputs/find_first_good	get_valid_input:.+
 pattern/states/accumulate/count	count_states:.+
-style/object_oriented	object_oriented_style
 style/functional	functional_style
-style/procedural	procedural_style
+style/functional/\1	external_free_call:(map|filter|reduce|partial|accumulate)
+style/functional/higher_order	higher_order_function:.+
+style/functional/lambda	function
+style/object_oriented	object_oriented_style
+style/one_liner	one_liner_style
 style/one_shot	one_shot_style
 style/one_shot/flat	flat_style
-style/one_liner	one_liner_style
+style/procedural	procedural_style
 subscript/index	index:.+
 subscript/index/arithmetic	index_arithmetic
 subscript/index/backwards	negative_index
@@ -251,14 +254,10 @@ var/assignment/throwaway	assignment_lhs_identifier:_
 var/deletion	node:Delete
 var/deletion/unbinding	unbinding:.+
 -- EOF	EOF
-call/function/builtin/print/multiple	TODO
-call/function/builtin/print/newline	TODO
-call/function/builtin/print/without_newline	TODO
 pattern/elements/accumulate/find_best/index	TODO
 pattern/states/accumulate	TODO
 pattern/states/accumulate/find_best	TODO
-meta/style/test_driven	TODO
-subscript/index/double	TODO
+style/test_driven	TODO
 type/string/newline	TODO
 var/assignment/argument	TODO
 var/assignment/iteration_variable	TODO

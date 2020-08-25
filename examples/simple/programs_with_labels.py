@@ -14,7 +14,7 @@ print("Hi, %s." % name) # binary_operator:Mod, call_argument:, external_free_cal
 # ----------------------------------------------------------------------------------------
 friends = ["john", "pat", "gary", "michael"] # assignment, assignment_lhs_identifier:friends, literal:List, literal:Str, node:Assign, node:List, node:Name, node:Str, one_shot_style (-> +2), single_assignment:friends, whole_span:3 (-> +2)
 for i, name in enumerate(friends): # call_argument:friends, external_free_call:enumerate, for:i (-> +1), for:name (-> +1), for_indexes_elements (-> +1), free_call:enumerate, literal:Tuple, loop:for (-> +1), loop_with_late_exit:for (-> +1), node:Call, node:For (-> +1), node:Name, node:Tuple
-    print("iteration {iteration} is {name}".format(iteration=i, name=name)) # call_argument:, composition, external_free_call:print, free_call:print, free_call_without_result:print, literal:Str, member_call_method:format, node:Attribute, node:Call, node:Expr, node:Name, node:Str
+    print("iteration {iteration} is {name}".format(iteration=i, name=name)) # call_argument:, call_argument:i, call_argument:name, call_keyword_argument:iteration, call_keyword_argument:name, composition, external_free_call:print, free_call:print, free_call_without_result:print, literal:Str, member_call_method:format, node:Attribute, node:Call, node:Expr, node:Name, node:Str
 
 # ----------------------------------------------------------------------------------------
 # 04_fibonacci.py
@@ -169,7 +169,7 @@ for has_chars, frags in groupby(lines, bool): # call_argument:bool, call_argumen
 import csv # import:csv, import_module:csv, node:Import, procedural_style (-> +17), whole_span:18 (-> +17)
 def cmp(a, b): # function:cmp (-> +1), function_argument:a, function_argument:b, function_argument_flavor:arg, function_returning_something:cmp (-> +1), node:FunctionDef (-> +1), node:arg
     return (a > b) - (a < b) # binary_operator:Sub, comparison_operator:Gt, comparison_operator:Lt, node:BinOp, node:Compare, node:Name, node:Return, return
-with open("stocks.csv", "w", newline="") as stocksFileW: # call_argument:, empty_literal:Str, external_free_call:open, free_call:open, literal:Str, node:Call, node:Name, node:Str, node:With (-> +6)
+with open("stocks.csv", "w", newline="") as stocksFileW: # call_argument:, call_keyword_argument:newline, empty_literal:Str, external_free_call:open, free_call:open, literal:Str, node:Call, node:Name, node:Str, node:With (-> +6)
     writer = csv.writer(stocksFileW) # assignment:writer, assignment_lhs_identifier:writer, assignment_rhs_atom:csv, assignment_rhs_atom:stocksFileW, call_argument:stocksFileW, member_call_method:writer, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:writer
     writer.writerows( # member_call:writer:writerows, member_call_method:writerows, member_call_object:writer, node:Attribute, node:Call (-> +4), node:Expr (-> +4), node:Name
         [ # call_argument:, literal:List, node:List (-> +3)

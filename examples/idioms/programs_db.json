@@ -897,6 +897,7 @@
         "flow/loop/for/elements": [[3,4]],
         "meta/program": [[1,4]],
         "meta/sloc/4": [[1,4]],
+        "style/functional/higher_order": [[1,4]],
         "style/procedural": [[1,4]]
       }
     },
@@ -1178,6 +1179,8 @@
         "assignment_rhs_atom:True": [[4,4]],
         "assignment_rhs_atom:worker": [[3,3]],
         "call_argument:": [[6,6]],
+        "call_argument:worker": [[3,3]],
+        "call_keyword_argument:target": [[3,3]],
         "external_free_call:Queue": [[2,2]],
         "external_free_call:Thread": [[3,3]],
         "flat_style": [[1,6]],
@@ -1347,7 +1350,9 @@
         "assignment_lhs_identifier:items": [[1,1]],
         "assignment_rhs_atom:items": [[1,1]],
         "assignment_rhs_atom:x": [[1,1]],
+        "call_argument:": [[1,1]],
         "call_argument:items": [[1,1]],
+        "call_keyword_argument:key": [[1,1]],
         "external_free_call:sorted": [[1,1]],
         "flat_style": [[1,1]],
         "free_call:sorted": [[1,1]],
@@ -1668,7 +1673,7 @@
         "def/return/something": [[2,2]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
-        "style/functional": [[1,2]],
+        "style/functional/higher_order": [[1,2]],
         "style/one_liner": [[1,2]]
       }
     },
@@ -1712,7 +1717,7 @@
         "def/return/something": [[2,2]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
-        "style/functional": [[1,2]],
+        "style/functional/higher_order": [[1,2]],
         "style/one_liner": [[1,2]]
       }
     },
@@ -2617,6 +2622,7 @@
         "call/method/sequence/string/join": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
+        "style/functional/map": [[1,1]],
         "style/one_liner": [[1,1]],
         "style/one_shot/flat": [[1,1]],
         "type/sequence/string": [[1,1]],
@@ -2686,10 +2692,13 @@
       "source": "from multiprocessing import Pool\ndef f(i):\n    i * i\nwith Pool(processes) as p:\n    p.map(func=f, iterable=range(1, 1001))\nprint(\"Finished\")",
       "labels": {
         "binary_operator:Mult": [[3,3]],
-        "call_argument:": [[6,6]],
+        "call_argument:": [[5,5],[6,6]],
         "call_argument:1": [[5,5]],
         "call_argument:1001": [[5,5]],
+        "call_argument:f": [[5,5]],
         "call_argument:processes": [[4,4]],
+        "call_keyword_argument:func": [[5,5]],
+        "call_keyword_argument:iterable": [[5,5]],
         "external_free_call:Pool": [[4,4]],
         "external_free_call:print": [[6,6]],
         "external_free_call:range": [[5,5]],
@@ -2769,6 +2778,7 @@
         "call/function/builtin/filter": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
+        "style/functional/filter": [[1,1]],
         "style/one_liner": [[1,1]],
         "style/one_shot/flat": [[1,1]],
         "var/assignment/single": [[1,1]]
@@ -2842,8 +2852,9 @@
       "timestamp": "",
       "source": "import sys\nprint(x, \"is negative\", file=sys.stderr)",
       "labels": {
-        "call_argument:": [[2,2]],
+        "call_argument:": [[2,2],[2,2]],
         "call_argument:x": [[2,2]],
+        "call_keyword_argument:file": [[2,2]],
         "external_free_call:print": [[2,2]],
         "flat_style": [[1,2]],
         "free_call:print": [[2,2]],
@@ -3347,7 +3358,7 @@
         "flow/conditional/no_else": [[2,3]],
         "meta/program": [[1,3]],
         "meta/sloc/3": [[1,3]],
-        "style/functional": [[1,3]]
+        "style/functional/higher_order": [[1,3]]
       }
     },
     "074.0674-compute-gcd.py": {
@@ -4049,6 +4060,7 @@
         "meta/program": [[1,3]],
         "meta/sloc/3": [[1,3]],
         "style/functional": [[1,3]],
+        "style/functional/higher_order": [[2,3]],
         "style/one_liner": [[1,3]]
       }
     },
@@ -4482,8 +4494,11 @@
         "assignment_rhs_atom:c": [[9,9]],
         "assignment_rhs_atom:pyx": [[11,11]],
         "assignment_rhs_atom:tst": [[11,11]],
-        "call_argument:": [[10,10],[10,10],[10,10]],
+        "call_argument:": [[10,10],[10,10],[10,10],[11,11]],
         "call_argument:ser": [[12,12]],
+        "call_argument:tst": [[11,11]],
+        "call_keyword_argument:enc": [[11,11]],
+        "call_keyword_argument:obj": [[11,11]],
         "external_free_call:TestClass": [[10,10]],
         "external_free_call:print": [[12,12]],
         "free_call:TestClass": [[10,10]],
@@ -5639,6 +5654,7 @@
         "meta/program": [[1,9]],
         "meta/sloc/9": [[1,9]],
         "operator/boolean/not": [[7,7]],
+        "style/functional/higher_order": [[1,9]],
         "style/procedural": [[1,9]],
         "type/boolean/literal/True": [[8,8]],
         "type/number/integer/literal/zero": [[4,4]],
@@ -5732,6 +5748,7 @@
         "flow/loop/while": [[5,9]],
         "meta/program": [[1,9]],
         "meta/sloc/9": [[1,9]],
+        "style/functional/higher_order": [[2,9]],
         "style/procedural": [[1,9]],
         "type/non_sequence/set": [[3,3],[8,8]],
         "type/sequence/list": [[9,9]],
@@ -5815,6 +5832,7 @@
         "flow/loop/while": [[4,8]],
         "meta/program": [[1,8]],
         "meta/sloc/8": [[1,8]],
+        "style/functional/higher_order": [[1,8]],
         "style/procedural": [[1,8]],
         "type/non_sequence/set": [[2,2],[7,7]],
         "type/sequence/list": [[5,5],[8,8]],
@@ -5887,7 +5905,8 @@
         "assignment:timeit": [[2,2]],
         "assignment_lhs_identifier:duration": [[2,2]],
         "assignment_rhs_atom:timeit": [[2,2]],
-        "call_argument:": [[2,2]],
+        "call_argument:": [[2,2],[2,2]],
+        "call_keyword_argument:setup": [[2,2]],
         "flat_style": [[1,2]],
         "import:timeit": [[1,1]],
         "import_module:timeit": [[1,1]],
@@ -6327,8 +6346,11 @@
         "assignment:getLogger": [[5,5]],
         "assignment_lhs_identifier:logger": [[5,5]],
         "assignment_rhs_atom:logging": [[5,5]],
-        "call_argument:": [[5,5]],
+        "call_argument:": [[3,3],[3,3],[3,3],[5,5]],
         "call_argument:msg": [[6,6]],
+        "call_keyword_argument:format": [[3,3]],
+        "call_keyword_argument:level": [[3,3]],
+        "call_keyword_argument:stream": [[3,3]],
         "flat_style": [[1,6]],
         "import:logging": [[1,1]],
         "import:sys": [[1,1]],
@@ -6540,6 +6562,7 @@
         "call/method/sequence/string/split": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
+        "style/functional/map": [[1,1]],
         "style/one_liner": [[1,1]],
         "style/one_shot/flat": [[1,1]],
         "type/sequence/list": [[1,1]],
@@ -7791,9 +7814,12 @@
         "assignment_rhs_atom:req": [[4,4]],
         "assignment_rhs_atom:request": [[3,3],[4,4]],
         "assignment_rhs_atom:u": [[3,3]],
-        "call_argument:": [[2,2]],
+        "call_argument:": [[2,2],[3,3]],
+        "call_argument:data": [[3,3]],
         "call_argument:req": [[4,4]],
         "call_argument:u": [[3,3]],
+        "call_keyword_argument:data": [[3,3]],
+        "call_keyword_argument:method": [[3,3]],
         "flat_style": [[1,4]],
         "import:urllib:parse": [[1,1]],
         "import:urllib:request": [[1,1]],
@@ -8274,7 +8300,11 @@
         "assignment_rhs_atom:r": [[7,7],[7,7]],
         "assignment_rhs_atom:requests": [[6,6]],
         "assignment_rhs_atom:url": [[6,6]],
+        "call_argument:data": [[6,6]],
+        "call_argument:headers": [[6,6]],
         "call_argument:url": [[6,6]],
+        "call_keyword_argument:data": [[6,6]],
+        "call_keyword_argument:headers": [[6,6]],
         "empty_literal:Dict": [[5,5]],
         "flat_style": [[1,7]],
         "import:requests": [[2,2]],
@@ -8320,6 +8350,8 @@
       "labels": {
         "addition_operator": [[2,2]],
         "binary_operator:Add": [[2,2]],
+        "call_argument:1": [[2,2]],
+        "call_keyword_argument:days": [[2,2]],
         "external_free_call:timedelta": [[2,2]],
         "flat_style": [[1,2]],
         "free_call:timedelta": [[2,2]],
@@ -8364,8 +8396,10 @@
         "assignment_rhs_atom:42": [[2,2]],
         "assignment_rhs_atom:f": [[2,2]],
         "assignment_rhs_atom:threading": [[2,2]],
+        "call_argument:": [[2,2]],
         "call_argument:30.0": [[2,2]],
         "call_argument:f": [[2,2]],
+        "call_keyword_argument:args": [[2,2]],
         "flat_style": [[1,3]],
         "import:threading": [[1,1]],
         "import_module:threading": [[1,1]],
@@ -10121,6 +10155,7 @@
       "016.1530-depth-first-traversing-of-a-binary-tree.py",
       "025.0195-send-a-value-to-another-thread.py",
       "027.0193-create-a-3-dimensional-array.py",
+      "028.0350-sort-by-a-property.py",
       "030.0189-parallelize-execution-of-1000-independent-tasks.py",
       "031.0188-recursive-factorial-simple.py",
       "034.0625-create-a-set-of-objects.py",
@@ -10180,6 +10215,7 @@
       "177.3241-find-files-with-a-given-list-of-filename-extensions.py",
       "179.2689-get-center-of-a-rectangle.py",
       "182.2658-quine-program.py",
+      "185.2820-execute-function-in-30-seconds.py",
       "187.3261-disjoint-set.py",
       "191.3403-check-if-any-value-in-a-list-is-larger-than-a-limit.py"
     ],
@@ -10194,7 +10230,8 @@
       "087.1139-stop-program.py",
       "154.2155-halfway-between-two-hex-color-codes.py",
       "154.2292-halfway-between-two-hex-color-codes.py",
-      "168.2277-trim-suffix.py"
+      "168.2277-trim-suffix.py",
+      "184.2701-tomorrow.py"
     ],
     "call_argument:10": [
       "002.0011-print-hello-10-times.py"
@@ -10305,7 +10342,9 @@
       "180.2612-list-files-in-directory.py"
     ],
     "call_argument:data": [
-      "121.3029-udp-listen-and-read.py"
+      "121.3029-udp-listen-and-read.py",
+      "174.2687-make-http-post-request.py",
+      "183.3025-make-http-put-request.py"
     ],
     "call_argument:dirpath": [
       "177.2725-find-files-with-a-given-list-of-filename-extensions.py"
@@ -10322,6 +10361,7 @@
     "call_argument:f": [
       "018.2084-depth-first-traversing-of-a-tree.py",
       "030.0189-parallelize-execution-of-1000-independent-tasks.py",
+      "056.1424-launch-1000-parallel-tasks-and-wait-for-completion.py",
       "058.0665-extract-file-content-to-a-string.py",
       "177.2709-find-files-with-a-given-list-of-filename-extensions.py",
       "185.2820-execute-function-in-30-seconds.py"
@@ -10332,6 +10372,9 @@
     "call_argument:fp": [
       "144.2145-check-if-file-exists.py",
       "144.2915-check-if-file-exists.py"
+    ],
+    "call_argument:headers": [
+      "183.3025-make-http-put-request.py"
     ],
     "call_argument:i": [
       "007.0183-iterate-over-list-indexes-and-values.py",
@@ -10473,6 +10516,9 @@
     "call_argument:ts": [
       "098.2142-epoch-seconds-to-date-object.py"
     ],
+    "call_argument:tst": [
+      "104.3264-save-object-into-xml-file.py"
+    ],
     "call_argument:u": [
       "101.2172-load-from-http-get-request-into-a-string.py",
       "102.2173-load-from-http-get-request-into-a-file.py",
@@ -10494,6 +10540,9 @@
       "116.1257-remove-occurrences-of-word-from-string.py",
       "168.2277-trim-suffix.py",
       "168.3174-trim-suffix.py"
+    ],
+    "call_argument:worker": [
+      "025.0195-send-a-value-to-another-thread.py"
     ],
     "call_argument:x": [
       "006.0032-iterate-over-list-values.py",
@@ -10537,6 +10586,55 @@
     ],
     "call_argument:z": [
       "063.1088-replace-fragment-of-a-string.py"
+    ],
+    "call_keyword_argument:args": [
+      "185.2820-execute-function-in-30-seconds.py"
+    ],
+    "call_keyword_argument:data": [
+      "174.2687-make-http-post-request.py",
+      "183.3025-make-http-put-request.py"
+    ],
+    "call_keyword_argument:days": [
+      "184.2701-tomorrow.py"
+    ],
+    "call_keyword_argument:enc": [
+      "104.3264-save-object-into-xml-file.py"
+    ],
+    "call_keyword_argument:file": [
+      "059.0668-write-to-standard-error-stream.py"
+    ],
+    "call_keyword_argument:format": [
+      "145.1822-print-log-line-with-datetime.py"
+    ],
+    "call_keyword_argument:func": [
+      "056.1424-launch-1000-parallel-tasks-and-wait-for-completion.py"
+    ],
+    "call_keyword_argument:headers": [
+      "183.3025-make-http-put-request.py"
+    ],
+    "call_keyword_argument:iterable": [
+      "056.1424-launch-1000-parallel-tasks-and-wait-for-completion.py"
+    ],
+    "call_keyword_argument:key": [
+      "028.0350-sort-by-a-property.py"
+    ],
+    "call_keyword_argument:level": [
+      "145.1822-print-log-line-with-datetime.py"
+    ],
+    "call_keyword_argument:method": [
+      "174.2687-make-http-post-request.py"
+    ],
+    "call_keyword_argument:obj": [
+      "104.3264-save-object-into-xml-file.py"
+    ],
+    "call_keyword_argument:setup": [
+      "132.2040-measure-duration-of-procedure-execution.py"
+    ],
+    "call_keyword_argument:stream": [
+      "145.1822-print-log-line-with-datetime.py"
+    ],
+    "call_keyword_argument:target": [
+      "025.0195-send-a-value-to-another-thread.py"
     ],
     "chained_comparison:2": [
       "178.2615-check-if-point-is-inside-rectangle.py"
@@ -18021,15 +18119,29 @@
       "014.0185-pick-uniformly-a-random-floating-point-number-in-ab.py",
       "031.0188-recursive-factorial-simple.py",
       "032.0196-integer-exponentiation-by-squaring.py",
-      "035.0667-first-class-function--compose.py",
-      "036.0670-first-class-function--generic-composition.py",
       "037.0671-currying.py",
       "067.1426-binomial-coefficient-n-choose-k.py",
-      "073.0673-create-a-factory.py",
       "085.1003-check-if-integer-addition-will-overflow.py",
       "086.1004-check-if-integer-multiplication-will-overflow.py",
       "093.1082-pass-a-runnable-procedure-as-parameter.py",
       "126.2137-multiple-return-values.py"
+    ],
+    "style/functional/filter": [
+      "057.0260-filter-list.py"
+    ],
+    "style/functional/higher_order": [
+      "018.2084-depth-first-traversing-of-a-tree.py",
+      "035.0667-first-class-function--compose.py",
+      "036.0670-first-class-function--generic-composition.py",
+      "073.0673-create-a-factory.py",
+      "093.1082-pass-a-runnable-procedure-as-parameter.py",
+      "128.2085-breadth-first-traversing-of-a-tree.py",
+      "129.2282-breadth-first-traversing-in-a-graph.py",
+      "130.2283-depth-first-traversing-in-a-graph.py"
+    ],
+    "style/functional/map": [
+      "053.1933-join-a-list-of-strings.py",
+      "148.1829-read-list-of-integer-numbers-from-stdin.py"
     ],
     "style/object_oriented": [
       "005.0663-create-a-2d-point-data-structure.py",

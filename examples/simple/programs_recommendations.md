@@ -1,11 +1,11 @@
 # Table of contents
 - [`1 program of learning cost in [1, 2[`](#1-program-of-learning-cost-in-1-2)
     - [`09_indent.py`](#program-09_indentpy-learning-cost-153125)
-- [`3 programs of learning cost in [2, 4[`](#3-programs-of-learning-cost-in-2-4)
+- [`2 programs of learning cost in [2, 4[`](#2-programs-of-learning-cost-in-2-4)
     - [`08_arguments.py`](#program-08_argumentspy-learning-cost-2375)
     - [`04_fibonacci.py`](#program-04_fibonaccipy-learning-cost-315625)
-    - [`20_prime_numbers.py`](#program-20_prime_numberspy-learning-cost-375)
-- [`5 programs of learning cost in [4, 8[`](#5-programs-of-learning-cost-in-4-8)
+- [`6 programs of learning cost in [4, 8[`](#6-programs-of-learning-cost-in-4-8)
+    - [`20_prime_numbers.py`](#program-20_prime_numberspy-learning-cost-4125)
     - [`21_xml_html_parsing.py`](#program-21_xml_html_parsingpy-learning-cost-421875)
     - [`10_time.py`](#program-10_timepy-learning-cost-43125)
     - [`12_classes.py`](#program-12_classespy-learning-cost-56875)
@@ -51,7 +51,7 @@
 
 ---
 
-## 3 programs of learning cost in [2, 4[
+## 2 programs of learning cost in [2, 4[
 
 ### Program `08_arguments.py` (learning cost 2.375)
 
@@ -112,7 +112,9 @@
 
 ---
 
-### Program `20_prime_numbers.py` (learning cost 3.75)
+## 6 programs of learning cost in [4, 8[
+
+### Program `20_prime_numbers.py` (learning cost 4.125)
 
 ```python
 1   import itertools
@@ -143,6 +145,7 @@
 | 0 | `flow/loop/exit/late` | 4-7 |
 | 0 | `flow/loop/for` | 8-11 |
 | 0 | `flow/loop/while/infinite` | 4-7 |
+| 0.375 | `style/functional/filter` | 7 |
 | 0.25 | `style/procedural` | 1-11 |
 | 0.4375 | `type/boolean/literal/True` | 4 |
 | 0.4375 | `type/number/integer/literal` | 3, 9 |
@@ -153,8 +156,6 @@
 | 0 | `meta/sloc/11` | 1-11 |
 
 ---
-
-## 5 programs of learning cost in [4, 8[
 
 ### Program `21_xml_html_parsing.py` (learning cost 4.21875)
 

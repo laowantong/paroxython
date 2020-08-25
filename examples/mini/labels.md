@@ -166,6 +166,7 @@
 - body_recursive_function
 - boolean_operator
 - call_argument
+- call_keyword_argument
 - chained_assignment
 - chained_comparison
 - chained_equalities|chained_inequalities

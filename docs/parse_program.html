@@ -126,7 +126,7 @@ class ProgramParser:
                 )
             ]
         # The next comment prevents a (wrong?) mypy error: &#34;AST&#34; has no attribute &#34;body&#34;
-        if not tree.body: # type: ignore
+        if not tree.body:  # type: ignore
             return [Label(LabelName(&#34;ast_construction:EmptyProgramError&#34;), [Span(0, 0)])]
         self.flat_ast = flatten_ast(tree)
 
@@ -474,7 +474,7 @@ ends of the list, they are ignored by <code><a title="paroxython.parse_program.p
                 )
             ]
         # The next comment prevents a (wrong?) mypy error: &#34;AST&#34; has no attribute &#34;body&#34;
-        if not tree.body: # type: ignore
+        if not tree.body:  # type: ignore
             return [Label(LabelName(&#34;ast_construction:EmptyProgramError&#34;), [Span(0, 0)])]
         self.flat_ast = flatten_ast(tree)
 
@@ -631,7 +631,7 @@ which is executed each time the tests are launched.</p></div>
             )
         ]
     # The next comment prevents a (wrong?) mypy error: &#34;AST&#34; has no attribute &#34;body&#34;
-    if not tree.body: # type: ignore
+    if not tree.body:  # type: ignore
         return [Label(LabelName(&#34;ast_construction:EmptyProgramError&#34;), [Span(0, 0)])]
     self.flat_ast = flatten_ast(tree)
 

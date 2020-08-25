@@ -34,6 +34,7 @@
   - [Calls](#calls)
     - [Generalities](#generalities)
       - [Feature `call_argument`](#feature-call_argument)
+      - [Feature `call_keyword_argument`](#feature-call_keyword_argument)
       - [Feature `composition`](#feature-composition)
     - [Calls of the form `callable(arguments)`](#calls-of-the-form-callablearguments)
       - [Feature `free_call`](#feature-free_call)
@@ -1454,7 +1455,7 @@ Otherwise, suffix it with an empty string.
 ```re
            ^(.*)/_type=Call
 (
-\n(?:\1.+\n)*?\1/(?P<_1>args/\d+)/_pos=(?P<POS>.+)
+\n(?:\1.+\n)*?\1/(?P<_1>(args/\d+|keywords/\d+/value))/_pos=(?P<POS>.+)
 \n            \1/(?P=_1)         /(   # the next line denotes either an atomic argument
                                     (value|n|id)?=(?P<SUFFIX>.+) # capture it as suffix
                                     | # or a non-atomic argument
@@ -1471,7 +1472,7 @@ Otherwise, suffix it with an empty string.
 3   foo(None)
 4   foo(True)
 5   foo(42)
-6   buzz(x, 42)
+6   buzz(x, 42, foo=1)
 7   buzz((x, 42))
 8   fizz(foobar(x), 42) # empty suffix for the first argument
 9   foo(a, b, c)
@@ -1487,6 +1488,7 @@ Otherwise, suffix it with an empty string.
 | `call_argument:` | 2, 7, 8 |
 | `call_argument:None` | 3 |
 | `call_argument:True` | 4 |
+| `call_argument:1` | 6 |
 | `call_argument:42` | 5, 6, 8 |
 | `call_argument:x` | 6, 8 |
 | `call_argument:a` | 9 |
@@ -1495,6 +1497,43 @@ Otherwise, suffix it with an empty string.
 | `call_argument:bizz` | 10 |
 | `call_argument:buzz` | 10 |
 | `call_argument:g` | 12 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `call_keyword_argument`
+
+Match any argument of a free call or a member call. Suffix this argument when it is **atomic**, i.e. either:
+- an identifier,
+- a number literal,
+- `True`, `False` or `None`.
+Otherwise, suffix it with an empty string.
+
+##### Specification
+
+```re
+           ^(.*)/_type=Call
+(
+\n(?:\1.+\n)*?\1/(?P<_1>keywords/\d+)/arg=(?P<SUFFIX>.+)
+\n(?:\1.+\n)*?\1/(?P=_1)             /value/_pos=(?P<POS>.+)
+)+ # at least one keyword argument
+```
+
+##### Example
+
+```python
+1   print("hello", "world", sep=" ", end="\n", file=sys.stderr, flush=True)
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `call_argument:` | 1, 1, 1, 1, 1 |
+| `call_argument:True` | 1 |
+| `call_keyword_argument:end` | 1 |
+| `call_keyword_argument:file` | 1 |
+| `call_keyword_argument:flush` | 1 |
+| `call_keyword_argument:sep` | 1 |
 
 --------------------------------------------------------------------------------
 

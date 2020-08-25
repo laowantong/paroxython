@@ -25,7 +25,7 @@
     - [`015.0184-pick-uniformly-a-random-integer-in-ab.py`](#program-0150184-pick-uniformly-a-random-integer-in-abpy-learning-cost-425)
     - [`016.1530-depth-first-traversing-of-a-binary-tree.py`](#program-0161530-depth-first-traversing-of-a-binary-treepy-learning-cost-91875)
     - [`017.1103-create-a-tree-data-structure.py`](#program-0171103-create-a-tree-data-structurepy-learning-cost-85)
-    - [`018.2084-depth-first-traversing-of-a-tree.py`](#program-0182084-depth-first-traversing-of-a-treepy-learning-cost-84375)
+    - [`018.2084-depth-first-traversing-of-a-tree.py`](#program-0182084-depth-first-traversing-of-a-treepy-learning-cost-93125)
     - [`019.0197-reverse-a-list.py`](#program-0190197-reverse-a-listpy-learning-cost-34375)
     - [`019.1983-reverse-a-list.py`](#program-0191983-reverse-a-listpy-learning-cost-4375)
     - [`019.3164-reverse-a-list.py`](#program-0193164-reverse-a-listpy-learning-cost-346875)
@@ -45,8 +45,8 @@
     - [`032.0196-integer-exponentiation-by-squaring.py`](#program-0320196-integer-exponentiation-by-squaringpy-learning-cost-4875)
     - [`033.1420-atomically-read-and-update-variable.py`](#program-0331420-atomically-read-and-update-variablepy-learning-cost-41875)
     - [`034.0625-create-a-set-of-objects.py`](#program-0340625-create-a-set-of-objectspy-learning-cost-659375)
-    - [`035.0667-first-class-function--compose.py`](#program-0350667-first-class-function--composepy-learning-cost-7125)
-    - [`036.0670-first-class-function--generic-composition.py`](#program-0360670-first-class-function--generic-compositionpy-learning-cost-7125)
+    - [`035.0667-first-class-function--compose.py`](#program-0350667-first-class-function--composepy-learning-cost-725)
+    - [`036.0670-first-class-function--generic-composition.py`](#program-0360670-first-class-function--generic-compositionpy-learning-cost-725)
     - [`037.0671-currying.py`](#program-0370671-curryingpy-learning-cost-934375)
     - [`038.0186-extract-a-substring.py`](#program-0380186-extract-a-substringpy-learning-cost-425)
     - [`039.0571-check-if-string-contains-a-word.py`](#program-0390571-check-if-string-contains-a-wordpy-learning-cost-325)
@@ -67,11 +67,11 @@
     - [`051.0230-check-if-map-contains-key.py`](#program-0510230-check-if-map-contains-keypy-learning-cost-2375)
     - [`052.0666-check-if-map-contains-value.py`](#program-0520666-check-if-map-contains-valuepy-learning-cost-421875)
     - [`053.0240-join-a-list-of-strings.py`](#program-0530240-join-a-list-of-stringspy-learning-cost-528125)
-    - [`053.1933-join-a-list-of-strings.py`](#program-0531933-join-a-list-of-stringspy-learning-cost-696875)
+    - [`053.1933-join-a-list-of-strings.py`](#program-0531933-join-a-list-of-stringspy-learning-cost-784375)
     - [`054.0241-compute-sum-of-integers.py`](#program-0540241-compute-sum-of-integerspy-learning-cost-34375)
     - [`055.0575-convert-integer-to-string.py`](#program-0550575-convert-integer-to-stringpy-learning-cost-434375)
     - [`056.1424-launch-1000-parallel-tasks-and-wait-for-completion.py`](#program-0561424-launch-1000-parallel-tasks-and-wait-for-completionpy-learning-cost-1046875)
-    - [`057.0260-filter-list.py`](#program-0570260-filter-listpy-learning-cost-34375)
+    - [`057.0260-filter-list.py`](#program-0570260-filter-listpy-learning-cost-43125)
     - [`057.3173-filter-list.py`](#program-0573173-filter-listpy-learning-cost-325)
     - [`058.0665-extract-file-content-to-a-string.py`](#program-0580665-extract-file-content-to-a-stringpy-learning-cost-41875)
     - [`059.0668-write-to-standard-error-stream.py`](#program-0590668-write-to-standard-error-streampy-learning-cost-44375)
@@ -87,7 +87,7 @@
     - [`069.1086-seed-random-generator.py`](#program-0691086-seed-random-generatorpy-learning-cost-34375)
     - [`070.1087-use-clock-as-random-generator-seed.py`](#program-0701087-use-clock-as-random-generator-seedpy-learning-cost-34375)
     - [`071.0379-echo-program-implementation.py`](#program-0710379-echo-program-implementationpy-learning-cost-884375)
-    - [`073.0673-create-a-factory.py`](#program-0730673-create-a-factorypy-learning-cost-65625)
+    - [`073.0673-create-a-factory.py`](#program-0730673-create-a-factorypy-learning-cost-66875)
     - [`074.0674-compute-gcd.py`](#program-0740674-compute-gcdpy-learning-cost-421875)
     - [`075.0675-compute-lcm.py`](#program-0750675-compute-lcmpy-learning-cost-596875)
     - [`076.1083-binary-digits-from-an-integer.py`](#program-0761083-binary-digits-from-an-integerpy-learning-cost-528125)
@@ -107,7 +107,7 @@
     - [`090.1099-read-only-outside.py`](#program-0901099-read-only-outsidepy-learning-cost-9125)
     - [`091.1098-load-json-file-into-struct.py`](#program-0911098-load-json-file-into-structpy-learning-cost-53125)
     - [`092.1100-save-object-into-json-file.py`](#program-0921100-save-object-into-json-filepy-learning-cost-5375)
-    - [`093.1082-pass-a-runnable-procedure-as-parameter.py`](#program-0931082-pass-a-runnable-procedure-as-parameterpy-learning-cost-659375)
+    - [`093.1082-pass-a-runnable-procedure-as-parameter.py`](#program-0931082-pass-a-runnable-procedure-as-parameterpy-learning-cost-746875)
     - [`094.1101-print-type-of-variable.py`](#program-0941101-print-type-of-variablepy-learning-cost-425)
     - [`094.1864-print-type-of-variable.py`](#program-0941864-print-type-of-variablepy-learning-cost-25625)
     - [`095.2140-get-file-size.py`](#program-0952140-get-file-sizepy-learning-cost-41875)
@@ -147,9 +147,9 @@
     - [`125.2167-measure-function-call-duration.py`](#program-1252167-measure-function-call-durationpy-learning-cost-70625)
     - [`126.2137-multiple-return-values.py`](#program-1262137-multiple-return-valuespy-learning-cost-68125)
     - [`127.2274-source-code-inclusion.py`](#program-1272274-source-code-inclusionpy-learning-cost-60625)
-    - [`128.2085-breadth-first-traversing-of-a-tree.py`](#program-1282085-breadth-first-traversing-of-a-treepy-learning-cost-165)
-    - [`129.2282-breadth-first-traversing-in-a-graph.py`](#program-1292282-breadth-first-traversing-in-a-graphpy-learning-cost-15625)
-    - [`130.2283-depth-first-traversing-in-a-graph.py`](#program-1302283-depth-first-traversing-in-a-graphpy-learning-cost-14875)
+    - [`128.2085-breadth-first-traversing-of-a-tree.py`](#program-1282085-breadth-first-traversing-of-a-treepy-learning-cost-17375)
+    - [`129.2282-breadth-first-traversing-in-a-graph.py`](#program-1292282-breadth-first-traversing-in-a-graphpy-learning-cost-165)
+    - [`130.2283-depth-first-traversing-in-a-graph.py`](#program-1302283-depth-first-traversing-in-a-graphpy-learning-cost-1575)
     - [`131.2083-successive-conditions.py`](#program-1312083-successive-conditionspy-learning-cost-325)
     - [`131.2766-successive-conditions.py`](#program-1312766-successive-conditionspy-learning-cost-33125)
     - [`132.2040-measure-duration-of-procedure-execution.py`](#program-1322040-measure-duration-of-procedure-executionpy-learning-cost-5125)
@@ -171,7 +171,7 @@
     - [`146.1826-convert-string-to-floating-point-number.py`](#program-1461826-convert-string-to-floating-point-numberpy-learning-cost-434375)
     - [`146.2739-convert-string-to-floating-point-number.py`](#program-1462739-convert-string-to-floating-point-numberpy-learning-cost-440625)
     - [`147.2171-remove-all-non-ascii-characters.py`](#program-1472171-remove-all-non-ascii-characterspy-learning-cost-609375)
-    - [`148.1829-read-list-of-integer-numbers-from-stdin.py`](#program-1481829-read-list-of-integer-numbers-from-stdinpy-learning-cost-88125)
+    - [`148.1829-read-list-of-integer-numbers-from-stdin.py`](#program-1481829-read-list-of-integer-numbers-from-stdinpy-learning-cost-96875)
     - [`150.2154-remove-trailing-slash.py`](#program-1502154-remove-trailing-slashpy-learning-cost-528125)
     - [`151.2166-remove-string-trailing-path-separator.py`](#program-1512166-remove-string-trailing-path-separatorpy-learning-cost-709375)
     - [`152.2153-turn-a-character-into-a-string.py`](#program-1522153-turn-a-character-into-a-stringpy-learning-cost-25)
@@ -742,7 +742,7 @@
 
 ---
 
-### Program `018.2084-depth-first-traversing-of-a-tree.py` (learning cost 8.4375)
+### Program `018.2084-depth-first-traversing-of-a-tree.py` (learning cost 9.3125)
 
 ```python
 1   def DFS(f, root):
@@ -762,6 +762,7 @@
 | 0.9375 | `def/recursive/call_count/1` | 1-4 |
 | 0.9375 | `flow/loop/exit/late` | 3-4 |
 | 0.9375 | `flow/loop/for/elements` | 3-4 |
+| 0.875 | `style/functional/higher_order` | 1-4 |
 | 0.75 | `style/procedural` | 1-4 |
 | 0 | `meta/program` | 1-4 |
 | 0 | `meta/sloc/4` | 1-4 |
@@ -1163,7 +1164,7 @@
 
 ---
 
-### Program `035.0667-first-class-function--compose.py` (learning cost 7.125)
+### Program `035.0667-first-class-function--compose.py` (learning cost 7.25)
 
 ```python
 1   def compose(f, g):
@@ -1179,14 +1180,14 @@
 | 0.875 | `def/function/anonymous` | 2 |
 | 0.75 | `def/higher_order` | 1-2 |
 | 0.875 | `def/return/something` | 2 |
-| 0.75 | `style/functional` | 1-2 |
+| 0.875 | `style/functional/higher_order` | 1-2 |
 | 0.75 | `style/one_liner` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 | 0 | `meta/sloc/2` | 1-2 |
 
 ---
 
-### Program `036.0670-first-class-function--generic-composition.py` (learning cost 7.125)
+### Program `036.0670-first-class-function--generic-composition.py` (learning cost 7.25)
 
 ```python
 1   def compose(f, g):
@@ -1202,7 +1203,7 @@
 | 0.875 | `def/function/anonymous` | 2 |
 | 0.75 | `def/higher_order` | 1-2 |
 | 0.875 | `def/return/something` | 2 |
-| 0.75 | `style/functional` | 1-2 |
+| 0.875 | `style/functional/higher_order` | 1-2 |
 | 0.75 | `style/one_liner` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 | 0 | `meta/sloc/2` | 1-2 |
@@ -1680,7 +1681,7 @@
 
 ---
 
-### Program `053.1933-join-a-list-of-strings.py` (learning cost 6.96875)
+### Program `053.1933-join-a-list-of-strings.py` (learning cost 7.84375)
 
 ```python
 1   y = ", ".join(map(str, x))
@@ -1691,6 +1692,7 @@
 | 0.75 | `call/composition` | 1 |
 | 0.9375 | `call/function/builtin/map` | 1 |
 | 0.96875 | `call/method/sequence/string/join` | 1 |
+| 0.875 | `style/functional/map` | 1 |
 | 0.75 | `style/one_liner` | 1 |
 | 0.875 | `style/one_shot/flat` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
@@ -1766,7 +1768,7 @@
 
 ---
 
-### Program `057.0260-filter-list.py` (learning cost 3.4375)
+### Program `057.0260-filter-list.py` (learning cost 4.3125)
 
 ```python
 1   y = filter(p, x)
@@ -1775,6 +1777,7 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.9375 | `call/function/builtin/filter` | 1 |
+| 0.875 | `style/functional/filter` | 1 |
 | 0.75 | `style/one_liner` | 1 |
 | 0.875 | `style/one_shot/flat` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
@@ -2079,7 +2082,7 @@
 
 ---
 
-### Program `073.0673-create-a-factory.py` (learning cost 6.5625)
+### Program `073.0673-create-a-factory.py` (learning cost 6.6875)
 
 ```python
 1   def fact(a_class, str_):
@@ -2096,7 +2099,7 @@
 | 0.75 | `def/higher_order` | 1-3 |
 | 0.875 | `def/return/something` | 3 |
 | 0.875 | `flow/conditional/no_else` | 2-3 |
-| 0.75 | `style/functional` | 1-3 |
+| 0.875 | `style/functional/higher_order` | 1-3 |
 | 0 | `meta/program` | 1-3 |
 | 0 | `meta/sloc/3` | 1-3 |
 
@@ -2484,7 +2487,7 @@
 
 ---
 
-### Program `093.1082-pass-a-runnable-procedure-as-parameter.py` (learning cost 6.59375)
+### Program `093.1082-pass-a-runnable-procedure-as-parameter.py` (learning cost 7.46875)
 
 ```python
 1   from __future__ import print_function
@@ -2501,6 +2504,7 @@
 | 0.96875 | `def/import/standard/__future__/print_function` | 1 |
 | 0.875 | `def/return/something` | 3 |
 | 0.75 | `style/functional` | 1-3 |
+| 0.875 | `style/functional/higher_order` | 2-3 |
 | 0.75 | `style/one_liner` | 1-3 |
 | 0 | `meta/program` | 1-3 |
 | 0 | `meta/sloc/3` | 1-3 |
@@ -3335,7 +3339,7 @@
 
 ---
 
-### Program `128.2085-breadth-first-traversing-of-a-tree.py` (learning cost 16.5)
+### Program `128.2085-breadth-first-traversing-of-a-tree.py` (learning cost 17.375)
 
 ```python
 1   def BFS(f, root):
@@ -3362,6 +3366,7 @@
 | 0.9375 | `flow/loop/for/elements` | 6-9 |
 | 0.875 | `flow/loop/while` | 3-9 |
 | 0.875 | `operator/boolean/not` | 7 |
+| 0.875 | `style/functional/higher_order` | 1-9 |
 | 0.75 | `style/procedural` | 1-9 |
 | 0.9375 | `type/boolean/literal/True` | 8 |
 | 0.96875 | `type/number/integer/literal/zero` | 4 |
@@ -3375,7 +3380,7 @@
 
 ---
 
-### Program `129.2282-breadth-first-traversing-in-a-graph.py` (learning cost 15.625)
+### Program `129.2282-breadth-first-traversing-in-a-graph.py` (learning cost 16.5)
 
 ```python
 1   from collections import deque
@@ -3404,6 +3409,7 @@
 | 0.75 | `def/procedure` | 2-9 |
 | 0.9375 | `flow/loop/exit/late` | 5-9 |
 | 0.875 | `flow/loop/while` | 5-9 |
+| 0.875 | `style/functional/higher_order` | 2-9 |
 | 0.75 | `style/procedural` | 1-9 |
 | 0.875 | `type/non_sequence/set` | 3, 8 |
 | 0.875 | `type/sequence/list` | 9 |
@@ -3414,7 +3420,7 @@
 
 ---
 
-### Program `130.2283-depth-first-traversing-in-a-graph.py` (learning cost 14.875)
+### Program `130.2283-depth-first-traversing-in-a-graph.py` (learning cost 15.75)
 
 ```python
 1   def depth_first(start, f):
@@ -3441,6 +3447,7 @@
 | 0.75 | `def/procedure` | 1-8 |
 | 0.9375 | `flow/loop/exit/late` | 4-8 |
 | 0.875 | `flow/loop/while` | 4-8 |
+| 0.875 | `style/functional/higher_order` | 1-8 |
 | 0.75 | `style/procedural` | 1-8 |
 | 0.875 | `type/non_sequence/set` | 2, 7 |
 | 0.875 | `type/sequence/list` | 5, 8 |
@@ -3848,7 +3855,7 @@
 
 ---
 
-### Program `148.1829-read-list-of-integer-numbers-from-stdin.py` (learning cost 8.8125)
+### Program `148.1829-read-list-of-integer-numbers-from-stdin.py` (learning cost 9.6875)
 
 ```python
 1   list(map(int, input().split()))
@@ -3862,6 +3869,7 @@
 | 0.9375 | `call/function/builtin/map` | 1 |
 | 0.875 | `call/function/without_arguments` | 1 |
 | 0.96875 | `call/method/sequence/string/split` | 1 |
+| 0.875 | `style/functional/map` | 1 |
 | 0.75 | `style/one_liner` | 1 |
 | 0.875 | `style/one_shot/flat` | 1 |
 | 0.875 | `type/sequence/list` | 1 |

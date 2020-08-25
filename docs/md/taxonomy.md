@@ -121,7 +121,7 @@ What are the basic concepts on which computing can be built? As you know, [Alons
 
 All of these could be enough to describe pure functional programs, at least theoretically. However:
 
-1. Python is no Haskell. It is a multi-paradigm language, with a strong emphasis on imperative programming. And its [zen](https://www.python.org/dev/peps/pep-0020/) famously holds that “practicality beats purity”.
+1. Python is no Haskell. It is a multi paradigm language, with a strong emphasis on imperative programming. And its [zen](https://www.python.org/dev/peps/pep-0020/) famously holds that “practicality beats purity”.
 2. Here, we are not interested in teaching generalized computability. Pedagogical considerations take precedence over a crippling respect for mathematical abstractions. For instance, we don't need to explain thoroughly the concepts of literal, string, type, built-in function and call for making our young students _feel_ they understand:
 
 ```python
@@ -165,14 +165,16 @@ The loop patterns constitute an aspect of programming which is not always taught
 
 ### Tagging with `style`
 
-Python is a multi paradigm language. For Paroxython, every program belongs to exactly one of the following four styles:
+Python allows you to mix freely multiple paradigms. However, for Paroxython, every program will fall into exactly one of the following four categories, always associated to the whole span:
 
 1. `style/object_oriented` if it features at least one class definition;
 2. `style/functional` if it is not object oriented, and features at least one function returning something, but no loop and no assignment;
 3. `style/procedural` if it is neither object oriented or functional, and features at least one subroutine definition;
-4. `style/one_shot` if it features no subroutine or class definition.
+4. `style/imperative` if it features no subroutine or class definition.
 
-Additionally, `style/one_shot/flat` is the _no-indent_ version of the latter (no loop, conditional, etc.).
+Additionally, `style/imperative/flat` is the _no-indent_ version of the latter (no loop, conditional, etc.).
+
+Functional _traits_ are also tagged. The corresponding taxa have the form: `style/functional/trait`, where `trait` can be `lambda`, `higher-order`, `map`, `filter`, `reduce`, etc. Unlike `style/functional`, which spans the entire program, these taxa are located on certain lines. They can appear in a program of any (all-encompassing) style.
 
 Independently of the 4-partition, `style/one_liner` denotes any program whose exactly one SLOC is neither a definition header, an importation or an assertion. For instance, the following program is considered a one-liner:
 

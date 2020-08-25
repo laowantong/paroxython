@@ -215,7 +215,7 @@ s = "ネコ" # assignment, assignment_lhs_identifier:s, flat_style, literal:Str,
 # ----------------------------------------------------------------------------------------
 import Queue # flat_style (-> +5), import:Queue, import_module:Queue, node:Import, one_shot_style (-> +5), whole_span:6 (-> +5)
 q = Queue() # assignment:Queue, assignment_lhs_identifier:q, external_free_call:Queue, free_call:Queue, free_call_without_arguments:Queue, node:Assign, node:Call, node:Name, single_assignment:q
-t = Thread(target=worker) # assignment:Thread, assignment_lhs_identifier:t, assignment_rhs_atom:worker, external_free_call:Thread, free_call:Thread, node:Assign, node:Call, node:Name, single_assignment:t
+t = Thread(target=worker) # assignment:Thread, assignment_lhs_identifier:t, assignment_rhs_atom:worker, call_argument:worker, call_keyword_argument:target, external_free_call:Thread, free_call:Thread, node:Assign, node:Call, node:Name, single_assignment:t
 t.daemon = True # assignment:True, assignment_lhs_identifier:t, assignment_rhs_atom:True, literal:True, node:Assign, node:Attribute, node:Name, node:NameConstant
 t.start() # member_call:t:start, member_call_method:start, member_call_object:t, node:Attribute, node:Call, node:Expr, node:Name
 q.put("Alan") # call_argument:, literal:Str, member_call:q:put, member_call_method:put, member_call_object:q, node:Attribute, node:Call, node:Expr, node:Name, node:Str
@@ -239,7 +239,7 @@ x = numpy.zeros((m, n, p)) # assignment:zeros, assignment_lhs_identifier:x, assi
 # ----------------------------------------------------------------------------------------
 # 028.0350-sort-by-a-property.py
 # ----------------------------------------------------------------------------------------
-items = sorted(items, key=lambda x: x.p) # assignment:sorted, assignment_lhs_identifier:items, assignment_rhs_atom:items, assignment_rhs_atom:x, call_argument:items, external_free_call:sorted, flat_style, free_call:sorted, function_argument:x, function_argument_flavor:arg, node:Assign, node:Attribute, node:Call, node:Lambda, node:Name, node:arg, one_liner_style, one_shot_style, single_assignment:items, update:items:x, update_by_assignment:items:x, update_by_assignment_with:sorted, update_with:sorted, whole_span:1
+items = sorted(items, key=lambda x: x.p) # assignment:sorted, assignment_lhs_identifier:items, assignment_rhs_atom:items, assignment_rhs_atom:x, call_argument:, call_argument:items, call_keyword_argument:key, external_free_call:sorted, flat_style, free_call:sorted, function_argument:x, function_argument_flavor:arg, node:Assign, node:Attribute, node:Call, node:Lambda, node:Name, node:arg, one_liner_style, one_shot_style, single_assignment:items, update:items:x, update_by_assignment:items:x, update_by_assignment_with:sorted, update_with:sorted, whole_span:1
 
 # ----------------------------------------------------------------------------------------
 # 029.0199-remove-item-from-list-by-its-index.py
@@ -469,7 +469,7 @@ from multiprocessing import Pool # import:multiprocessing:Pool, import_module:mu
 def f(i): # function:f (-> +1), function_argument:i, function_argument_flavor:arg, function_returning_nothing:f (-> +1), node:FunctionDef (-> +1), node:arg
     i * i # binary_operator:Mult, multiplication_operator, node:BinOp, node:Expr, node:Name
 with Pool(processes) as p: # call_argument:processes, external_free_call:Pool, free_call:Pool, node:Call, node:Name, node:With (-> +1)
-    p.map(func=f, iterable=range(1, 1001)) # call_argument:1, call_argument:1001, external_free_call:range, free_call:range, literal:1, literal:1001, magic_number:1001, member_call:p:map, member_call_method:map, member_call_object:p, node:Attribute, node:Call, node:Expr, node:Name, node:Num, range:1:1001
+    p.map(func=f, iterable=range(1, 1001)) # call_argument:, call_argument:1, call_argument:1001, call_argument:f, call_keyword_argument:func, call_keyword_argument:iterable, external_free_call:range, free_call:range, literal:1, literal:1001, magic_number:1001, member_call:p:map, member_call_method:map, member_call_object:p, node:Attribute, node:Call, node:Expr, node:Name, node:Num, range:1:1001
 print("Finished") # call_argument:, external_free_call:print, free_call:print, free_call_without_result:print, literal:Str, node:Call, node:Expr, node:Name, node:Str
 
 # ----------------------------------------------------------------------------------------
@@ -491,7 +491,7 @@ lines = open(f).read() # assignment:read, assignment_lhs_identifier:lines, assig
 # 059.0668-write-to-standard-error-stream.py
 # ----------------------------------------------------------------------------------------
 import sys # flat_style (-> +1), import:sys, import_module:sys, node:Import, one_liner_style (-> +1), one_shot_style (-> +1), whole_span:2 (-> +1)
-print(x, "is negative", file=sys.stderr) # call_argument:, call_argument:x, external_free_call:print, free_call:print, free_call_without_result:print, literal:Str, node:Attribute, node:Call, node:Expr, node:Name, node:Str, value_attr:stderr
+print(x, "is negative", file=sys.stderr) # call_argument:, call_argument:x, call_keyword_argument:file, external_free_call:print, free_call:print, free_call_without_result:print, literal:Str, node:Attribute, node:Call, node:Expr, node:Name, node:Str, value_attr:stderr
 
 # ----------------------------------------------------------------------------------------
 # 060.1084-read-command-line-argument.py
@@ -773,7 +773,7 @@ class TestClass(object): # node:ClassDef (-> +7), node:Name
         self.b = b # assignment, assignment_lhs_identifier:self, assignment_rhs_atom:b, node:Assign, node:Attribute, node:Name
         self.c = c # assignment, assignment_lhs_identifier:self, assignment_rhs_atom:c, node:Assign, node:Attribute, node:Name
 tst = TestClass("var_a", "var_b", "var_c") # assignment:TestClass, assignment_lhs_identifier:tst, call_argument:, external_free_call:TestClass, free_call:TestClass, literal:Str, node:Assign, node:Call, node:Name, node:Str, single_assignment:tst
-ser = pyx.serialize(obj=tst, enc="utf-8") # assignment:serialize, assignment_lhs_identifier:ser, assignment_rhs_atom:pyx, assignment_rhs_atom:tst, literal:Str, member_call_method:serialize, node:Assign, node:Attribute, node:Call, node:Name, node:Str, single_assignment:ser
+ser = pyx.serialize(obj=tst, enc="utf-8") # assignment:serialize, assignment_lhs_identifier:ser, assignment_rhs_atom:pyx, assignment_rhs_atom:tst, call_argument:, call_argument:tst, call_keyword_argument:enc, call_keyword_argument:obj, literal:Str, member_call_method:serialize, node:Assign, node:Attribute, node:Call, node:Name, node:Str, single_assignment:ser
 print(ser) # call_argument:ser, external_free_call:print, free_call:print, free_call_without_result:print, node:Call, node:Expr, node:Name
 
 # ----------------------------------------------------------------------------------------
@@ -1000,7 +1000,7 @@ elif c3: # if (-> +1), node:If (-> +1), node:Name
 # 132.2040-measure-duration-of-procedure-execution.py
 # ----------------------------------------------------------------------------------------
 import timeit # flat_style (-> +1), import:timeit, import_module:timeit, node:Import, one_liner_style (-> +1), one_shot_style (-> +1), whole_span:2 (-> +1)
-duration = timeit.timeit("f()", setup="from __main__ import f") # assignment:timeit, assignment_lhs_identifier:duration, assignment_rhs_atom:timeit, call_argument:, literal:Str, member_call_method:timeit, node:Assign, node:Attribute, node:Call, node:Name, node:Str, single_assignment:duration
+duration = timeit.timeit("f()", setup="from __main__ import f") # assignment:timeit, assignment_lhs_identifier:duration, assignment_rhs_atom:timeit, call_argument:, call_keyword_argument:setup, literal:Str, member_call_method:timeit, node:Assign, node:Attribute, node:Call, node:Name, node:Str, single_assignment:duration
 
 # ----------------------------------------------------------------------------------------
 # 133.2160-case-insensitive-string-contains.py
@@ -1078,7 +1078,7 @@ b = Path(fp).exists() # assignment:exists, assignment_lhs_identifier:b, assignme
 # ----------------------------------------------------------------------------------------
 import sys, logging # flat_style (-> +5), import:logging, import:sys, import_module:logging, import_module:sys, node:Import, one_shot_style (-> +5), whole_span:6 (-> +5)
 logging.basicConfig( # member_call:logging:basicConfig, member_call_method:basicConfig, member_call_object:logging, node:Attribute, node:Call (-> +1), node:Expr (-> +1), node:Name
-    stream=sys.stdout, level=logging.DEBUG, format="%(asctime)-15s %(message)s" # literal:Str, node:Attribute, node:Name, node:Str, value_attr:DEBUG, value_attr:stdout
+    stream=sys.stdout, level=logging.DEBUG, format="%(asctime)-15s %(message)s" # call_argument:, call_keyword_argument:format, call_keyword_argument:level, call_keyword_argument:stream, literal:Str, node:Attribute, node:Name, node:Str, value_attr:DEBUG, value_attr:stdout
 )
 logger = logging.getLogger("NAME OF LOGGER") # assignment:getLogger, assignment_lhs_identifier:logger, assignment_rhs_atom:logging, call_argument:, literal:Str, member_call_method:getLogger, node:Assign, node:Attribute, node:Call, node:Name, node:Str, single_assignment:logger
 logger.info(msg) # call_argument:msg, member_call:logger:info, member_call_method:info, member_call_object:logger, node:Attribute, node:Call, node:Expr, node:Name
@@ -1308,7 +1308,7 @@ print("'{:,}'.format(1000)") # call_argument:, external_free_call:print, flat_st
 # ----------------------------------------------------------------------------------------
 from urllib import request, parse # flat_style (-> +3), import:urllib:parse, import:urllib:request, import_module:urllib, import_name:parse, import_name:request, node:ImportFrom, one_shot_style (-> +3), whole_span:4 (-> +3)
 data = parse.urlencode("<your data dict>").encode() # assignment:encode, assignment_lhs_identifier:data, assignment_rhs_atom:parse, call_argument:, literal:Str, member_call:parse:encode, member_call:parse:urlencode, member_call_method:encode, member_call_method:urlencode, member_call_object:parse, method_chaining, node:Assign, node:Attribute, node:Call, node:Name, node:Str, single_assignment:data
-req = request.Request(u, data=data, method="POST") # assignment:Request, assignment_lhs_identifier:req, assignment_rhs_atom:data, assignment_rhs_atom:request, assignment_rhs_atom:u, call_argument:u, literal:Str, member_call_method:Request, node:Assign, node:Attribute, node:Call, node:Name, node:Str, single_assignment:req
+req = request.Request(u, data=data, method="POST") # assignment:Request, assignment_lhs_identifier:req, assignment_rhs_atom:data, assignment_rhs_atom:request, assignment_rhs_atom:u, call_argument:, call_argument:data, call_argument:u, call_keyword_argument:data, call_keyword_argument:method, literal:Str, member_call_method:Request, node:Assign, node:Attribute, node:Call, node:Name, node:Str, single_assignment:req
 resp = request.urlopen(req) # assignment:urlopen, assignment_lhs_identifier:resp, assignment_rhs_atom:req, assignment_rhs_atom:request, call_argument:req, member_call_method:urlopen, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:resp
 
 # ----------------------------------------------------------------------------------------
@@ -1384,20 +1384,20 @@ import requests # import:requests, import_module:requests, node:Import
 content_type = "text/plain" # assignment, assignment_lhs_identifier:content_type, literal:Str, node:Assign, node:Name, node:Str, single_assignment:content_type
 headers = {"Content-Type": content_type} # assignment, assignment_lhs_identifier:headers, assignment_rhs_atom:content_type, literal:Dict, literal:Str, node:Assign, node:Dict, node:Name, node:Str, single_assignment:headers
 data = {} # assignment, assignment_lhs_identifier:data, empty_literal:Dict, literal:Dict, node:Assign, node:Dict, node:Name, single_assignment:data
-r = requests.put(url, headers=headers, data=data) # assignment:put, assignment_lhs_identifier:r, assignment_rhs_atom:data, assignment_rhs_atom:headers, assignment_rhs_atom:requests, assignment_rhs_atom:url, call_argument:url, member_call_method:put, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:r
+r = requests.put(url, headers=headers, data=data) # assignment:put, assignment_lhs_identifier:r, assignment_rhs_atom:data, assignment_rhs_atom:headers, assignment_rhs_atom:requests, assignment_rhs_atom:url, call_argument:data, call_argument:headers, call_argument:url, call_keyword_argument:data, call_keyword_argument:headers, member_call_method:put, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:r
 status_code, content = r.status_code, r.content # assignment, assignment_lhs_identifier:content, assignment_lhs_identifier:status_code, assignment_rhs_atom:r, literal:Tuple, node:Assign, node:Attribute, node:Name, node:Tuple, parallel_assignment:2
 
 # ----------------------------------------------------------------------------------------
 # 184.2701-tomorrow.py
 # ----------------------------------------------------------------------------------------
 from datetime import date, timedelta # flat_style (-> +1), import:datetime:date, import:datetime:timedelta, import_module:datetime, import_name:date, import_name:timedelta, node:ImportFrom, one_liner_style (-> +1), one_shot_style (-> +1), whole_span:2 (-> +1)
-date.today() + timedelta(days=1) # addition_operator, binary_operator:Add, external_free_call:timedelta, free_call:timedelta, literal:1, member_call_method:today, node:Attribute, node:BinOp, node:Call, node:Expr, node:Name, node:Num
+date.today() + timedelta(days=1) # addition_operator, binary_operator:Add, call_argument:1, call_keyword_argument:days, external_free_call:timedelta, free_call:timedelta, literal:1, member_call_method:today, node:Attribute, node:BinOp, node:Call, node:Expr, node:Name, node:Num
 
 # ----------------------------------------------------------------------------------------
 # 185.2820-execute-function-in-30-seconds.py
 # ----------------------------------------------------------------------------------------
 import threading # flat_style (-> +2), import:threading, import_module:threading, node:Import, one_shot_style (-> +2), whole_span:3 (-> +2)
-timer = threading.Timer(30.0, f, args=(42,)) # assignment:Timer, assignment_lhs_identifier:timer, assignment_rhs_atom:30.0, assignment_rhs_atom:42, assignment_rhs_atom:f, assignment_rhs_atom:threading, call_argument:30.0, call_argument:f, literal:30.0, literal:42, literal:Tuple, magic_number:30.0, magic_number:42, member_call_method:Timer, node:Assign, node:Attribute, node:Call, node:Name, node:Num, node:Tuple, single_assignment:timer
+timer = threading.Timer(30.0, f, args=(42,)) # assignment:Timer, assignment_lhs_identifier:timer, assignment_rhs_atom:30.0, assignment_rhs_atom:42, assignment_rhs_atom:f, assignment_rhs_atom:threading, call_argument:, call_argument:30.0, call_argument:f, call_keyword_argument:args, literal:30.0, literal:42, literal:Tuple, magic_number:30.0, magic_number:42, member_call_method:Timer, node:Assign, node:Attribute, node:Call, node:Name, node:Num, node:Tuple, single_assignment:timer
 timer.start() # member_call:timer:start, member_call_method:start, member_call_object:timer, node:Attribute, node:Call, node:Expr, node:Name
 
 # ----------------------------------------------------------------------------------------
