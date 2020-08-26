@@ -238,8 +238,8 @@
 |----|----|----|
 | 0.9375 | `call/function/builtin/print` | 2 |
 | 0.96875 | `def/import/standard/__future__/print_function` | 1 |
+| 0.875 | `style/imperative/flat` | 1-2 |
 | 0.75 | `style/one_liner` | 1-2 |
-| 0.875 | `style/one_shot/flat` | 1-2 |
 | 0.9375 | `type/sequence/string/literal` | 2 |
 | 0 | `meta/program` | 1-2 |
 | 0 | `meta/sloc/2` | 1-2 |
@@ -255,8 +255,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.9375 | `call/function/builtin/print` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
 | 0 | `meta/program` | 1 |
 | 0 | `meta/sloc/1` | 1 |
@@ -276,7 +276,7 @@
 | 0.9375 | `call/function/builtin/range` | 1 |
 | 0.9375 | `flow/loop/exit/late` | 1-2 |
 | 0.9375 | `flow/loop/for/arithmetic` | 1-2 |
-| 0.75 | `style/one_shot` | 1-2 |
+| 0.75 | `style/imperative` | 1-2 |
 | 0.9375 | `type/number/integer/literal` | 1 |
 | 0.875 | `type/number/magic` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 2 |
@@ -295,8 +295,8 @@
 |----|----|----|
 | 0.9375 | `call/function/builtin/print` | 1 |
 | 0.875 | `operator/string/replication` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.9375 | `type/number/integer/literal` | 1 |
 | 0.875 | `type/number/magic` | 1 |
 | 0.984375 | `type/sequence/string/literal/special/\n` | 1 |
@@ -315,8 +315,8 @@
 |----|----|----|
 | 0.9375 | `call/function/builtin/print` | 1 |
 | 0.875 | `operator/string/replication` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.9375 | `type/number/integer/literal` | 1 |
 | 0.875 | `type/number/magic` | 1 |
 | 0.984375 | `type/sequence/string/literal/special/\n` | 1 |
@@ -440,7 +440,7 @@
 | 0.75 | `call/function` | 2 |
 | 0.9375 | `flow/loop/exit/late` | 1-2 |
 | 0.9375 | `flow/loop/for/elements` | 1-2 |
-| 0.75 | `style/one_shot` | 1-2 |
+| 0.75 | `style/imperative` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 | 0 | `meta/sloc/2` | 1-2 |
 
@@ -460,7 +460,7 @@
 | 0.9375 | `flow/loop/exit/late` | 1-2 |
 | 0.875 | `flow/loop/for` | 1-2 |
 | 0.9375 | `flow/loop/for/elements_and_indexes` | 1-2 |
-| 0.75 | `style/one_shot` | 1-2 |
+| 0.75 | `style/imperative` | 1-2 |
 | 0.9375 | `type/sequence/tuple/literal` | 1 |
 | 0 | `meta/program` | 1-2 |
 | 0 | `meta/sloc/2` | 1-2 |
@@ -475,8 +475,8 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.9375 | `type/non_sequence/dictionary/literal` | 1 |
 | 0.9375 | `type/number/integer/literal` | 1, 1 |
 | 0.9375 | `type/sequence/string/literal` | 1, 1 |
@@ -546,8 +546,8 @@
 |----|----|----|
 | 0.75 | `call/function` | 2 |
 | 0.96875 | `def/import/standard/random/shuffle` | 1 |
+| 0.875 | `style/imperative/flat` | 1-2 |
 | 0.75 | `style/one_liner` | 1-2 |
-| 0.875 | `style/one_shot/flat` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 | 0 | `meta/sloc/2` | 1-2 |
 
@@ -565,8 +565,8 @@
 | 0.75 | `call/method` | 2 |
 | 0.9375 | `call/method/random/shuffle` | 2 |
 | 0.9375 | `def/import/standard/random` | 1 |
+| 0.875 | `style/imperative/flat` | 1-2 |
 | 0.75 | `style/one_liner` | 1-2 |
-| 0.875 | `style/one_shot/flat` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 | 0 | `meta/sloc/2` | 1-2 |
 
@@ -584,8 +584,8 @@
 | 0.75 | `call/method` | 2 |
 | 0.9375 | `call/method/random/choice` | 2 |
 | 0.9375 | `def/import/standard/random` | 1 |
+| 0.875 | `style/imperative/flat` | 1-2 |
 | 0.75 | `style/one_liner` | 1-2 |
-| 0.875 | `style/one_shot/flat` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 | 0 | `meta/sloc/2` | 1-2 |
 
@@ -600,8 +600,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.75 | `condition/belonging` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0 | `meta/program` | 1 |
 | 0 | `meta/sloc/1` | 1 |
 
@@ -620,7 +620,7 @@
 | 0.96875 | `call/method/non_sequence/dictionary/items` | 1 |
 | 0.9375 | `flow/loop/exit/late` | 1-2 |
 | 0.875 | `flow/loop/for` | 1-2 |
-| 0.75 | `style/one_shot` | 1-2 |
+| 0.75 | `style/imperative` | 1-2 |
 | 0.875 | `type/non_sequence/dictionary` | 1 |
 | 0.9375 | `type/sequence/tuple/literal` | 1 |
 | 0 | `meta/program` | 1-2 |
@@ -664,8 +664,8 @@
 | 0.75 | `call/method` | 2 |
 | 0.9375 | `call/method/random/uniform` | 2 |
 | 0.9375 | `def/import/standard/random` | 1 |
+| 0.875 | `style/imperative/flat` | 1-2 |
 | 0.75 | `style/one_liner` | 1-2 |
-| 0.875 | `style/one_shot/flat` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 | 0 | `meta/sloc/2` | 1-2 |
 
@@ -683,8 +683,8 @@
 | 0.75 | `call/method` | 2 |
 | 0.9375 | `call/method/random/randint` | 2 |
 | 0.9375 | `def/import/standard/random` | 1 |
+| 0.875 | `style/imperative/flat` | 1-2 |
 | 0.75 | `style/one_liner` | 1-2 |
-| 0.875 | `style/one_shot/flat` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 | 0 | `meta/sloc/2` | 1-2 |
 
@@ -781,8 +781,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.9375 | `call/function/builtin/reversed` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
 | 0 | `meta/sloc/1` | 1 |
@@ -797,8 +797,8 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.9375 | `subscript/slice/step/backwards` | 1 |
 | 0.9375 | `type/number/integer/literal` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
@@ -816,8 +816,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.96875 | `call/method/sequence/list/reverse` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.875 | `type/sequence/list` | 1 |
 | 0 | `meta/program` | 1 |
 | 0 | `meta/sloc/1` | 1 |
@@ -861,8 +861,8 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.9375 | `type/sequence/tuple/literal` | 1, 1 |
 | 0.9375 | `var/assignment/parallel/swap` | 1 |
 | 0 | `meta/program` | 1 |
@@ -879,8 +879,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.96875 | `call/function/builtin/casting/int` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.875 | `type/number/integer` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
@@ -897,8 +897,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.96875 | `call/method/sequence/string/format` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
@@ -915,8 +915,8 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
@@ -940,7 +940,7 @@
 | 0.875 | `call/class/construct` | 2, 3 |
 | 0.75 | `call/method` | 5, 6 |
 | 0.9375 | `def/import/third_party/Queue` | 1 |
-| 0.875 | `style/one_shot/flat` | 1-6 |
+| 0.875 | `style/imperative/flat` | 1-6 |
 | 0.9375 | `type/boolean/literal/True` | 4 |
 | 0.9375 | `type/sequence/string/literal` | 6 |
 | 0.75 | `var/assignment` | 4 |
@@ -959,8 +959,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.75 | `call/function` | 1, 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.96875 | `type/number/integer/literal/zero` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
@@ -977,8 +977,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.75 | `call/function` | 1, 1, 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.96875 | `type/number/integer/literal/zero` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
@@ -997,8 +997,8 @@
 |----|----|----|
 | 0.75 | `call/method` | 2 |
 | 0.9375 | `def/import/third_party/numpy` | 1 |
+| 0.875 | `style/imperative/flat` | 1-2 |
 | 0.75 | `style/one_liner` | 1-2 |
-| 0.875 | `style/one_shot/flat` | 1-2 |
 | 0.9375 | `type/sequence/tuple/literal` | 2 |
 | 0.875 | `var/assignment/single` | 2 |
 | 0 | `meta/program` | 1-2 |
@@ -1017,8 +1017,8 @@
 | 0.9375 | `call/function/builtin/sorted` | 1 |
 | 0.875 | `def/argument/arg` | 1 |
 | 0.875 | `def/function/anonymous` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
 | 0 | `meta/sloc/1` | 1 |
@@ -1033,8 +1033,8 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.75 | `subscript/index` | 1 |
 | 0.75 | `var/deletion` | 1 |
 | 0 | `meta/program` | 1 |
@@ -1059,7 +1059,7 @@
 | 0.96875 | `def/import/standard/multiprocessing/Pool` | 1 |
 | 0.9375 | `flow/loop/exit/late` | 3-4 |
 | 0.96875 | `flow/loop/for/arithmetic/start` | 3-4 |
-| 0.75 | `style/one_shot` | 1-4 |
+| 0.75 | `style/imperative` | 1-4 |
 | 0.9375 | `type/number/integer/literal` | 3, 3 |
 | 0.875 | `type/number/magic` | 3 |
 | 0.9375 | `type/sequence/list/literal` | 4 |
@@ -1139,7 +1139,7 @@
 | 0.75 | `call/function` | 5 |
 | 0.75 | `call/method` | 3, 7 |
 | 0.9375 | `def/import/standard/threading` | 1 |
-| 0.875 | `style/one_shot/flat` | 1-7 |
+| 0.875 | `style/imperative/flat` | 1-7 |
 | 0.875 | `var/assignment/single` | 2, 5 |
 | 0 | `meta/program` | 1-7 |
 | 0 | `meta/sloc/7` | 1-7 |
@@ -1257,8 +1257,8 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.875 | `subscript/slice/start` | 1 |
 | 0.875 | `subscript/slice/stop` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
@@ -1276,8 +1276,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.75 | `condition/belonging` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
 | 0 | `meta/sloc/1` | 1 |
@@ -1344,8 +1344,8 @@
 |----|----|----|
 | 0.75 | `call/method` | 1 |
 | 0.96875 | `call/method/sequence/string/encode` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.9375 | `subscript/slice/step/backwards` | 1 |
 | 0.9375 | `type/number/integer/literal` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
@@ -1364,8 +1364,8 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.9375 | `subscript/slice/step/backwards` | 1 |
 | 0.9375 | `type/number/integer/literal` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
@@ -1399,7 +1399,7 @@
 | 0.96875 | `flow/loop/exit/early/raise` | 1-8, 3-5 |
 | 0.9375 | `flow/loop/for/elements` | 1-8, 3-5 |
 | 0.96875 | `flow/loop/for/nested/1` | 3-5 |
-| 0.75 | `style/one_shot` | 1-8 |
+| 0.75 | `style/imperative` | 1-8 |
 | 0 | `meta/program` | 1-8 |
 | 0 | `meta/sloc/8` | 1-8 |
 
@@ -1424,7 +1424,7 @@
 | 0.9375 | `flow/loop/exit/late` | 1-5, 2-5 |
 | 0.9375 | `flow/loop/for/elements` | 1-5, 2-5 |
 | 0.96875 | `flow/loop/for/nested/1` | 2-5 |
-| 0.75 | `style/one_shot` | 1-5 |
+| 0.75 | `style/imperative` | 1-5 |
 | 0 | `meta/program` | 1-5 |
 | 0 | `meta/sloc/5` | 1-5 |
 
@@ -1516,8 +1516,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.96875 | `call/method/sequence/list/insert` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.875 | `type/sequence/list` | 1 |
 | 0 | `meta/program` | 1 |
 | 0 | `meta/sloc/1` | 1 |
@@ -1536,8 +1536,8 @@
 | 0.75 | `call/method` | 2 |
 | 0.9375 | `call/method/time/sleep` | 2 |
 | 0.9375 | `def/import/standard/time` | 1 |
+| 0.875 | `style/imperative/flat` | 1-2 |
 | 0.75 | `style/one_liner` | 1-2 |
-| 0.875 | `style/one_shot/flat` | 1-2 |
 | 0.9375 | `type/number/integer/literal` | 2 |
 | 0.875 | `type/number/magic` | 2 |
 | 0 | `meta/program` | 1-2 |
@@ -1553,8 +1553,8 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.875 | `subscript/slice/stop` | 1 |
 | 0.9375 | `type/number/integer/literal` | 1 |
 | 0.875 | `type/number/magic` | 1 |
@@ -1572,8 +1572,8 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.875 | `subscript/slice/start` | 1 |
 | 0.9375 | `type/number/integer/literal` | 1 |
 | 0.875 | `type/number/magic` | 1 |
@@ -1593,7 +1593,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.875 | `style/one_shot/flat` | 1-3 |
+| 0.875 | `style/imperative/flat` | 1-3 |
 | 0.984375 | `type/sequence/string/literal/special/\n` | 3 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1-3 |
@@ -1610,8 +1610,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.96875 | `call/method/sequence/string/split` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
@@ -1631,7 +1631,7 @@
 | 0.9375 | `flow/loop/exit/late` | 1-2 |
 | 0.9375 | `flow/loop/while/infinite` | 1-2 |
 | 0.75 | `flow/null_operation` | 2 |
-| 0.75 | `style/one_shot` | 1-2 |
+| 0.75 | `style/imperative` | 1-2 |
 | 0.9375 | `type/boolean/literal/True` | 1 |
 | 0 | `meta/program` | 1-2 |
 | 0 | `meta/sloc/2` | 1-2 |
@@ -1647,8 +1647,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.75 | `condition/belonging` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0 | `meta/program` | 1 |
 | 0 | `meta/sloc/1` | 1 |
 
@@ -1664,8 +1664,8 @@
 |----|----|----|
 | 0.96875 | `call/method/non_sequence/dictionary/values` | 1 |
 | 0.75 | `condition/belonging` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.875 | `type/non_sequence/dictionary` | 1 |
 | 0 | `meta/program` | 1 |
 | 0 | `meta/sloc/1` | 1 |
@@ -1681,8 +1681,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.96875 | `call/method/sequence/string/join` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
@@ -1703,8 +1703,8 @@
 | 0.9375 | `call/function/builtin/map` | 1 |
 | 0.96875 | `call/method/sequence/string/join` | 1 |
 | 0.875 | `style/functional_trait/map` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
@@ -1722,8 +1722,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.9375 | `call/function/builtin/sum` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
 | 0 | `meta/sloc/1` | 1 |
@@ -1739,8 +1739,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.96875 | `call/function/builtin/casting/str` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
@@ -1788,8 +1788,8 @@
 |----|----|----|
 | 0.9375 | `call/function/builtin/filter` | 1 |
 | 0.875 | `style/functional_trait/filter` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
 | 0 | `meta/sloc/1` | 1 |
@@ -1805,8 +1805,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.75 | `call/function` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
 | 0 | `meta/sloc/1` | 1 |
@@ -1823,8 +1823,8 @@
 |----|----|----|
 | 0.9375 | `call/function/builtin/open` | 1 |
 | 0.75 | `call/method` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
 | 0 | `meta/sloc/1` | 1 |
@@ -1842,8 +1842,8 @@
 |----|----|----|
 | 0.9375 | `call/function/builtin/print` | 2 |
 | 0.9375 | `def/import/standard/sys` | 1 |
+| 0.875 | `style/imperative/flat` | 1-2 |
 | 0.75 | `style/one_liner` | 1-2 |
-| 0.875 | `style/one_shot/flat` | 1-2 |
 | 0.9375 | `type/sequence/string/literal` | 2 |
 | 0 | `meta/program` | 1-2 |
 | 0 | `meta/sloc/2` | 1-2 |
@@ -1860,8 +1860,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.9375 | `def/import/standard/sys` | 1 |
+| 0.875 | `style/imperative/flat` | 1-2 |
 | 0.75 | `style/one_liner` | 1-2 |
-| 0.875 | `style/one_shot/flat` | 1-2 |
 | 0.75 | `subscript/index` | 2 |
 | 0.9375 | `type/number/integer/literal` | 2 |
 | 0.875 | `var/assignment/single` | 2 |
@@ -1881,8 +1881,8 @@
 |----|----|----|
 | 0.75 | `call/method` | 2 |
 | 0.9375 | `def/import/standard/datetime` | 1 |
+| 0.875 | `style/imperative/flat` | 1-2 |
 | 0.75 | `style/one_liner` | 1-2 |
-| 0.875 | `style/one_shot/flat` | 1-2 |
 | 0.875 | `var/assignment/single` | 2 |
 | 0 | `meta/program` | 1-2 |
 | 0 | `meta/sloc/2` | 1-2 |
@@ -1898,8 +1898,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.96875 | `call/method/sequence/string/find` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
@@ -1916,8 +1916,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.96875 | `call/method/sequence/string/replace` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
@@ -1934,8 +1934,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.875 | `operator/arithmetic/power` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.9375 | `type/number/integer/literal` | 1, 1 |
 | 0.875 | `type/number/magic` | 1, 1 |
 | 0.875 | `var/assignment/single` | 1 |
@@ -1953,8 +1953,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.96875 | `call/method/sequence/string/format` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
@@ -1972,8 +1972,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.875 | `operator/arithmetic/power` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
 | 0 | `meta/sloc/1` | 1 |
@@ -2022,8 +2022,8 @@
 | 0.96875 | `def/import/standard/__future__/division` | 1 |
 | 0.9375 | `def/import/standard/math` | 2 |
 | 0.875 | `operator/arithmetic/division` | 3 |
+| 0.875 | `style/imperative/flat` | 1-3 |
 | 0.75 | `style/one_liner` | 1-3 |
-| 0.875 | `style/one_shot/flat` | 1-3 |
 | 0.9375 | `type/number/floating_point/literal` | 3 |
 | 0.875 | `type/number/integer` | 3 |
 | 0.875 | `type/number/magic` | 3 |
@@ -2043,8 +2043,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.9375 | `def/import/standard/random` | 1 |
+| 0.875 | `style/imperative/flat` | 1-2 |
 | 0.75 | `style/one_liner` | 1-2 |
-| 0.875 | `style/one_shot/flat` | 1-2 |
 | 0.875 | `var/assignment/single` | 2 |
 | 0 | `meta/program` | 1-2 |
 | 0 | `meta/sloc/2` | 1-2 |
@@ -2061,8 +2061,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.9375 | `def/import/standard/random` | 1 |
+| 0.875 | `style/imperative/flat` | 1-2 |
 | 0.75 | `style/one_liner` | 1-2 |
-| 0.875 | `style/one_shot/flat` | 1-2 |
 | 0.875 | `var/assignment/single` | 2 |
 | 0 | `meta/program` | 1-2 |
 | 0 | `meta/sloc/2` | 1-2 |
@@ -2082,8 +2082,8 @@
 | 0.9375 | `call/function/builtin/print` | 2 |
 | 0.96875 | `call/method/sequence/string/join` | 2 |
 | 0.9375 | `def/import/standard/sys` | 1 |
+| 0.875 | `style/imperative/flat` | 1-2 |
 | 0.75 | `style/one_liner` | 1-2 |
-| 0.875 | `style/one_shot/flat` | 1-2 |
 | 0.875 | `subscript/slice/start` | 2 |
 | 0.9375 | `type/number/integer/literal` | 2 |
 | 0.875 | `type/sequence/string` | 2 |
@@ -2129,8 +2129,8 @@
 |----|----|----|
 | 0.75 | `call/function` | 2 |
 | 0.96875 | `def/import/standard/fractions/gcd` | 1 |
+| 0.875 | `style/imperative/flat` | 1-2 |
 | 0.75 | `style/one_liner` | 1-2 |
-| 0.875 | `style/one_shot/flat` | 1-2 |
 | 0.875 | `var/assignment/single` | 2 |
 | 0 | `meta/program` | 1-2 |
 | 0 | `meta/sloc/2` | 1-2 |
@@ -2150,8 +2150,8 @@
 | 0.96875 | `def/import/standard/fractions/gcd` | 1 |
 | 0.875 | `operator/arithmetic/integer_division` | 2 |
 | 0.875 | `operator/arithmetic/multiplication` | 2 |
+| 0.875 | `style/imperative/flat` | 1-2 |
 | 0.75 | `style/one_liner` | 1-2 |
-| 0.875 | `style/one_shot/flat` | 1-2 |
 | 0.875 | `var/assignment/single` | 2 |
 | 0 | `meta/program` | 1-2 |
 | 0 | `meta/sloc/2` | 1-2 |
@@ -2167,8 +2167,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.96875 | `call/method/sequence/string/format` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
@@ -2188,7 +2188,7 @@
 |----|----|----|
 | 0.875 | `operator/arithmetic/multiplication` | 2 |
 | 0.875 | `operator/arithmetic/substraction` | 1 |
-| 0.875 | `style/one_shot/flat` | 1-2 |
+| 0.875 | `style/imperative/flat` | 1-2 |
 | 0.9375 | `type/number/complex/literal` | 1, 2 |
 | 0.9375 | `type/number/integer/literal` | 1 |
 | 0.875 | `var/assignment/single` | 1, 2 |
@@ -2213,7 +2213,7 @@
 | 0.96875 | `flow/loop/exit/early/break` | 1-4 |
 | 0.9375 | `flow/loop/while/infinite` | 1-4 |
 | 0.875 | `operator/boolean/not` | 3 |
-| 0.75 | `style/one_shot` | 1-4 |
+| 0.75 | `style/imperative` | 1-4 |
 | 0.9375 | `type/boolean/literal/True` | 1 |
 | 0 | `meta/program` | 1-4 |
 | 0 | `meta/sloc/4` | 1-4 |
@@ -2229,8 +2229,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.96875 | `call/function/builtin/casting/float` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.875 | `type/number/floating_point` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
@@ -2247,8 +2247,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.96875 | `call/function/builtin/casting/int` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.875 | `type/number/integer` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
@@ -2266,8 +2266,8 @@
 |----|----|----|
 | 0.96875 | `call/function/builtin/casting/int` | 1 |
 | 0.875 | `operator/arithmetic/addition` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.9375 | `type/number/floating_point/literal` | 1 |
 | 0.875 | `type/number/integer` | 1 |
 | 0.875 | `type/number/magic` | 1 |
@@ -2286,8 +2286,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.9375 | `call/method/sequence_duck/count` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.75 | `type/sequence` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
@@ -2306,8 +2306,8 @@
 |----|----|----|
 | 0.75 | `call/method` | 2 |
 | 0.9375 | `def/import/standard/re` | 1 |
+| 0.875 | `style/imperative/flat` | 1-2 |
 | 0.75 | `style/one_liner` | 1-2 |
-| 0.875 | `style/one_shot/flat` | 1-2 |
 | 0.9375 | `type/sequence/string/literal` | 2 |
 | 0.875 | `var/assignment/single` | 2 |
 | 0 | `meta/program` | 1-2 |
@@ -2325,8 +2325,8 @@
 |----|----|----|
 | 0.9375 | `call/function/builtin/bin` | 1 |
 | 0.9375 | `call/method/sequence_duck/count` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.75 | `type/sequence` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
@@ -2387,8 +2387,8 @@
 | 0.75 | `call/method` | 2 |
 | 0.9375 | `call/method/sys/exit` | 2 |
 | 0.9375 | `def/import/standard/sys` | 1 |
+| 0.875 | `style/imperative/flat` | 1-2 |
 | 0.75 | `style/one_liner` | 1-2 |
-| 0.875 | `style/one_shot/flat` | 1-2 |
 | 0.9375 | `type/number/integer/literal` | 2 |
 | 0 | `meta/program` | 1-2 |
 | 0 | `meta/sloc/2` | 1-2 |
@@ -2404,8 +2404,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.96875 | `call/function/builtin/casting/bytearray` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.9375 | `type/number/integer/literal` | 1 |
 | 0.875 | `type/number/magic` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
@@ -2423,8 +2423,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.9375 | `call/exception/builtin/ValueError` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
 | 0 | `meta/program` | 1 |
 | 0 | `meta/sloc/1` | 1 |
@@ -2473,7 +2473,7 @@
 | 0.9375 | `call/function/builtin/open` | 2 |
 | 0.75 | `call/method` | 3 |
 | 0.9375 | `def/import/standard/json` | 1 |
-| 0.875 | `style/one_shot/flat` | 1-3 |
+| 0.875 | `style/imperative/flat` | 1-3 |
 | 0.9375 | `type/sequence/string/literal` | 2, 2 |
 | 0.875 | `var/assignment/single` | 3 |
 | 0 | `meta/program` | 1-3 |
@@ -2495,7 +2495,7 @@
 | 0.75 | `call/method` | 3 |
 | 0.9375 | `call/method/json/dump` | 3 |
 | 0.9375 | `def/import/standard/json` | 1 |
-| 0.875 | `style/one_shot/flat` | 1-3 |
+| 0.875 | `style/imperative/flat` | 1-3 |
 | 0.9375 | `type/sequence/string/literal` | 2, 2 |
 | 0 | `meta/program` | 1-3 |
 | 0 | `meta/sloc/3` | 1-3 |
@@ -2538,8 +2538,8 @@
 | 0.75 | `call/composition` | 1 |
 | 0.9375 | `call/function/builtin/print` | 1 |
 | 0.9375 | `call/function/builtin/type` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0 | `meta/program` | 1 |
 | 0 | `meta/sloc/1` | 1 |
 
@@ -2554,8 +2554,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.9375 | `call/function/builtin/print` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0 | `meta/program` | 1 |
 | 0 | `meta/sloc/1` | 1 |
 
@@ -2572,8 +2572,8 @@
 |----|----|----|
 | 0.75 | `call/method` | 2 |
 | 0.9375 | `def/import/standard/os` | 1 |
+| 0.875 | `style/imperative/flat` | 1-2 |
 | 0.75 | `style/one_liner` | 1-2 |
-| 0.875 | `style/one_shot/flat` | 1-2 |
 | 0.875 | `var/assignment/single` | 2 |
 | 0 | `meta/program` | 1-2 |
 | 0 | `meta/sloc/2` | 1-2 |
@@ -2589,8 +2589,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.96875 | `call/method/sequence/string/startswith` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
@@ -2607,8 +2607,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.96875 | `call/method/sequence/string/endswith` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
@@ -2627,8 +2627,8 @@
 |----|----|----|
 | 0.75 | `call/method` | 2 |
 | 0.9375 | `def/import/standard/datetime` | 1 |
+| 0.875 | `style/imperative/flat` | 1-2 |
 | 0.75 | `style/one_liner` | 1-2 |
-| 0.875 | `style/one_shot/flat` | 1-2 |
 | 0.875 | `var/assignment/single` | 2 |
 | 0 | `meta/program` | 1-2 |
 | 0 | `meta/sloc/2` | 1-2 |
@@ -2648,7 +2648,7 @@
 | 0.75 | `call/function` | 2 |
 | 0.75 | `call/method` | 3 |
 | 0.96875 | `def/import/standard/datetime/date` | 1 |
-| 0.875 | `style/one_shot/flat` | 1-3 |
+| 0.875 | `style/imperative/flat` | 1-3 |
 | 0.9375 | `type/number/integer/literal` | 2, 2, 2 |
 | 0.875 | `type/number/magic` | 2, 2, 2 |
 | 0.9375 | `type/sequence/string/literal` | 3 |
@@ -2670,7 +2670,7 @@
 |----|----|----|
 | 0.75 | `call/method` | 2, 3 |
 | 0.96875 | `def/import/standard/datetime/date` | 1 |
-| 0.875 | `style/one_shot/flat` | 1-3 |
+| 0.875 | `style/imperative/flat` | 1-3 |
 | 0.875 | `var/assignment/single` | 2, 3 |
 | 0 | `meta/program` | 1-3 |
 | 0 | `meta/sloc/3` | 1-3 |
@@ -2686,8 +2686,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.96875 | `call/method/sequence/list/sort` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.875 | `type/sequence/list` | 1 |
 | 0 | `meta/program` | 1 |
 | 0 | `meta/sloc/1` | 1 |
@@ -2706,7 +2706,7 @@
 |----|----|----|
 | 0.75 | `call/method` | 2, 3 |
 | 0.9375 | `def/import/standard/urllib.request` | 1 |
-| 0.875 | `style/one_shot/flat` | 1-3 |
+| 0.875 | `style/imperative/flat` | 1-3 |
 | 0.875 | `var/assignment/single` | 3 |
 | 0 | `meta/program` | 1-3 |
 | 0 | `meta/sloc/3` | 1-3 |
@@ -2724,8 +2724,8 @@
 |----|----|----|
 | 0.75 | `call/method` | 2 |
 | 0.9375 | `def/import/standard/urllib` | 1 |
+| 0.875 | `style/imperative/flat` | 1-2 |
 | 0.75 | `style/one_liner` | 1-2 |
-| 0.875 | `style/one_shot/flat` | 1-2 |
 | 0.9375 | `type/sequence/string/literal` | 2 |
 | 0.9375 | `type/sequence/tuple/literal` | 2 |
 | 0.875 | `var/assignment/parallel` | 2 |
@@ -2745,8 +2745,8 @@
 |----|----|----|
 | 0.75 | `call/method` | 2 |
 | 0.9375 | `def/import/third_party/lxml.etree` | 1 |
+| 0.875 | `style/imperative/flat` | 1-2 |
 | 0.75 | `style/one_liner` | 1-2 |
-| 0.875 | `style/one_shot/flat` | 1-2 |
 | 0.9375 | `type/sequence/string/literal` | 2 |
 | 0.875 | `var/assignment/single` | 2 |
 | 0 | `meta/program` | 1-2 |
@@ -2802,8 +2802,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.9375 | `def/import/standard/sys` | 1 |
+| 0.875 | `style/imperative/flat` | 1-2 |
 | 0.75 | `style/one_liner` | 1-2 |
-| 0.875 | `style/one_shot/flat` | 1-2 |
 | 0.75 | `subscript/index` | 2 |
 | 0.96875 | `type/number/integer/literal/zero` | 2 |
 | 0.875 | `var/assignment/single` | 2 |
@@ -2823,8 +2823,8 @@
 |----|----|----|
 | 0.75 | `call/method` | 2 |
 | 0.9375 | `def/import/standard/os` | 1 |
+| 0.875 | `style/imperative/flat` | 1-2 |
 | 0.75 | `style/one_liner` | 1-2 |
-| 0.875 | `style/one_shot/flat` | 1-2 |
 | 0.875 | `var/assignment/single` | 2 |
 | 0 | `meta/program` | 1-2 |
 | 0 | `meta/sloc/2` | 1-2 |
@@ -2843,8 +2843,8 @@
 | 0.75 | `call/composition` | 2 |
 | 0.75 | `call/method` | 2, 2 |
 | 0.9375 | `def/import/standard/os` | 1 |
+| 0.875 | `style/imperative/flat` | 1-2 |
 | 0.75 | `style/one_liner` | 1-2 |
-| 0.875 | `style/one_shot/flat` | 1-2 |
 | 0.875 | `var/assignment/single` | 2 |
 | 0 | `meta/program` | 1-2 |
 | 0 | `meta/sloc/2` | 1-2 |
@@ -2865,7 +2865,7 @@
 | 0.875 | `call/function/without_arguments` | 1 |
 | 0.75 | `condition/belonging` | 1 |
 | 0.875 | `flow/conditional/no_else` | 1-2 |
-| 0.75 | `style/one_shot` | 1-2 |
+| 0.75 | `style/imperative` | 1-2 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
 | 0 | `meta/program` | 1-2 |
 | 0 | `meta/sloc/2` | 1-2 |
@@ -2883,8 +2883,8 @@
 |----|----|----|
 | 0.75 | `call/method` | 2 |
 | 0.9375 | `def/import/third_party/pympler.asizeof` | 1 |
+| 0.875 | `style/imperative/flat` | 1-2 |
 | 0.75 | `style/one_liner` | 1-2 |
-| 0.875 | `style/one_shot/flat` | 1-2 |
 | 0.875 | `var/assignment/single` | 2 |
 | 0 | `meta/program` | 1-2 |
 | 0 | `meta/sloc/2` | 1-2 |
@@ -2901,8 +2901,8 @@
 |----|----|----|
 | 0.96875 | `call/method/sequence/string/strip` | 1 |
 | 0.75 | `condition/equality` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
 | 0.96875 | `type/sequence/string/literal/empty` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
@@ -2923,8 +2923,8 @@
 | 0.75 | `call/method` | 2 |
 | 0.9375 | `call/method/subprocess/call` | 2 |
 | 0.9375 | `def/import/standard/subprocess` | 1 |
+| 0.875 | `style/imperative/flat` | 1-2 |
 | 0.75 | `style/one_liner` | 1-2 |
-| 0.875 | `style/one_shot/flat` | 1-2 |
 | 0.9375 | `type/sequence/list/literal` | 2 |
 | 0.9375 | `type/sequence/string/literal` | 2, 2, 2 |
 | 0 | `meta/program` | 1-2 |
@@ -2945,7 +2945,7 @@
 | 0.9375 | `call/function/builtin/sorted` | 1 |
 | 0.9375 | `flow/loop/exit/late` | 1-2 |
 | 0.875 | `flow/loop/for` | 1-2 |
-| 0.75 | `style/one_shot` | 1-2 |
+| 0.75 | `style/imperative` | 1-2 |
 | 0.75 | `subscript/index` | 2 |
 | 0 | `meta/program` | 1-2 |
 | 0 | `meta/sloc/2` | 1-2 |
@@ -2967,7 +2967,7 @@
 | 0.96875 | `call/method/non_sequence/dictionary/items` | 1 |
 | 0.9375 | `flow/loop/exit/late` | 1-2 |
 | 0.875 | `flow/loop/for` | 1-2 |
-| 0.75 | `style/one_shot` | 1-2 |
+| 0.75 | `style/imperative` | 1-2 |
 | 0.875 | `type/non_sequence/dictionary` | 1 |
 | 0.9375 | `type/sequence/tuple/literal` | 1, 1, 1 |
 | 0 | `meta/program` | 1-2 |
@@ -2984,8 +2984,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.75 | `condition/equality` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
 | 0 | `meta/sloc/1` | 1 |
@@ -3003,8 +3003,8 @@
 |----|----|----|
 | 0.75 | `condition/inequality` | 2 |
 | 0.9375 | `def/import/standard/datetime` | 1 |
+| 0.875 | `style/imperative/flat` | 1-2 |
 | 0.75 | `style/one_liner` | 1-2 |
-| 0.875 | `style/one_shot/flat` | 1-2 |
 | 0.875 | `var/assignment/single` | 2 |
 | 0 | `meta/program` | 1-2 |
 | 0 | `meta/sloc/2` | 1-2 |
@@ -3020,8 +3020,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.96875 | `call/method/sequence/string/replace` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
 | 0.96875 | `type/sequence/string/literal/empty` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
@@ -3039,8 +3039,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.9375 | `call/function/builtin/len` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
 | 0 | `meta/sloc/1` | 1 |
@@ -3056,8 +3056,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.96875 | `call/function/builtin/casting/set` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.875 | `type/non_sequence/set` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
@@ -3074,8 +3074,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.96875 | `call/function/builtin/casting/set` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.875 | `type/non_sequence/set` | 1 |
 | 0 | `meta/program` | 1 |
 | 0 | `meta/sloc/1` | 1 |
@@ -3093,8 +3093,8 @@
 | 0.75 | `call/composition` | 1 |
 | 0.96875 | `call/function/builtin/casting/list` | 1 |
 | 0.96875 | `call/function/builtin/casting/set` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.875 | `type/non_sequence/set` | 1 |
 | 0.875 | `type/sequence/list` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
@@ -3129,7 +3129,7 @@
 | 0.9375 | `flow/loop/for/elements` | 4-7 |
 | 0.96875 | `pattern/elements/accumulate/in_list/filtered` | 4-7 |
 | 0.96875 | `pattern/elements/accumulate/in_set/filtered` | 4-7 |
-| 0.75 | `style/one_shot` | 1-8 |
+| 0.75 | `style/imperative` | 1-8 |
 | 0.875 | `type/non_sequence/set` | 2, 6 |
 | 0.875 | `type/sequence/list` | 7 |
 | 0.9375 | `type/sequence/list/literal` | 1 |
@@ -3152,8 +3152,8 @@
 | 0.75 | `call/composition` | 1 |
 | 0.75 | `call/function` | 1 |
 | 0.96875 | `call/function/builtin/casting/int` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.875 | `type/number/integer` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
@@ -3181,7 +3181,7 @@
 | 0.9375 | `def/import/standard/socket` | 1 |
 | 0.9375 | `flow/loop/exit/late` | 5-7 |
 | 0.9375 | `flow/loop/while/infinite` | 5-7 |
-| 0.75 | `style/one_shot` | 1-7 |
+| 0.75 | `style/imperative` | 1-7 |
 | 0.9375 | `type/boolean/literal/True` | 5 |
 | 0.9375 | `type/number/integer/literal` | 6 |
 | 0.875 | `type/number/magic` | 6 |
@@ -3251,7 +3251,7 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.75 | `flow/assertion` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0 | `meta/program` | 1 |
 | 0 | `meta/sloc/1` | 1 |
 
@@ -3304,7 +3304,7 @@
 | 0.75 | `call/method` | 2, 4 |
 | 0.9375 | `def/import/standard/time` | 1 |
 | 0.875 | `operator/arithmetic/substraction` | 5 |
-| 0.875 | `style/one_shot/flat` | 1-5 |
+| 0.875 | `style/imperative/flat` | 1-5 |
 | 0.9375 | `type/sequence/string/literal` | 5 |
 | 0.875 | `var/assignment/single` | 2, 4 |
 | 0 | `meta/program` | 1-5 |
@@ -3347,8 +3347,8 @@
 | 0.75 | `call/method` | 2 |
 | 0.9375 | `call/method/imp/load_module` | 2 |
 | 0.9375 | `def/import/standard/imp` | 1 |
+| 0.875 | `style/imperative/flat` | 1-2 |
 | 0.75 | `style/one_liner` | 1-2 |
-| 0.875 | `style/one_shot/flat` | 1-2 |
 | 0.9375 | `type/sequence/string/literal` | 2, 2 |
 | 0.875 | `var/assignment/single` | 2 |
 | 0 | `meta/program` | 1-2 |
@@ -3484,8 +3484,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.75 | `operator/ternary` | 1, 1, 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.875 | `type/null/literal` | 1 |
 | 0 | `meta/program` | 1 |
 | 0 | `meta/sloc/1` | 1 |
@@ -3508,7 +3508,7 @@
 | 0.875 | `call/function/without_arguments` | 2, 4, 6 |
 | 0.75 | `flow/conditional` | 1-6, 3-6, 5-6 |
 | 0.9375 | `flow/conditional/else/if` | 4, 6 |
-| 0.75 | `style/one_shot` | 1-6 |
+| 0.75 | `style/imperative` | 1-6 |
 | 0 | `meta/program` | 1-6 |
 | 0 | `meta/sloc/6` | 1-6 |
 
@@ -3525,8 +3525,8 @@
 |----|----|----|
 | 0.75 | `call/method` | 2 |
 | 0.9375 | `def/import/standard/timeit` | 1 |
+| 0.875 | `style/imperative/flat` | 1-2 |
 | 0.75 | `style/one_liner` | 1-2 |
-| 0.875 | `style/one_shot/flat` | 1-2 |
 | 0.9375 | `type/sequence/string/literal` | 2, 2 |
 | 0.875 | `var/assignment/single` | 2 |
 | 0 | `meta/program` | 1-2 |
@@ -3544,8 +3544,8 @@
 |----|----|----|
 | 0.96875 | `call/method/sequence/string/lower` | 1, 1 |
 | 0.75 | `condition/belonging` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.875 | `type/sequence/string` | 1, 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
@@ -3561,8 +3561,8 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.9375 | `type/sequence/list/literal` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
@@ -3579,8 +3579,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.9375 | `call/method/mutable_duck/remove` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0 | `meta/program` | 1 |
 | 0 | `meta/sloc/1` | 1 |
 
@@ -3595,8 +3595,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.875 | `condition/equality/not` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
 | 0 | `meta/sloc/1` | 1 |
@@ -3612,8 +3612,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.96875 | `call/method/sequence/string/isdigit` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
@@ -3631,8 +3631,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.9375 | `def/import/standard/tempfile` | 1 |
+| 0.875 | `style/imperative/flat` | 1-2 |
 | 0.75 | `style/one_liner` | 1-2 |
-| 0.875 | `style/one_shot/flat` | 1-2 |
 | 0.875 | `var/assignment/single` | 2 |
 | 0 | `meta/program` | 1-2 |
 | 0 | `meta/sloc/2` | 1-2 |
@@ -3649,8 +3649,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.9375 | `def/import/standard/tempfile` | 1 |
+| 0.875 | `style/imperative/flat` | 1-2 |
 | 0.75 | `style/one_liner` | 1-2 |
-| 0.875 | `style/one_shot/flat` | 1-2 |
 | 0.875 | `var/assignment/single` | 2 |
 | 0 | `meta/program` | 1-2 |
 | 0 | `meta/sloc/2` | 1-2 |
@@ -3666,8 +3666,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.9375 | `call/method/mutable_duck/pop` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.875 | `type/null/literal` | 1 |
 | 0 | `meta/program` | 1 |
 | 0 | `meta/sloc/1` | 1 |
@@ -3687,7 +3687,7 @@
 | 0.9375 | `flow/loop/exit/late` | 1-2 |
 | 0.875 | `flow/loop/for` | 1-2 |
 | 0.875 | `operator/arithmetic/addition` | 1 |
-| 0.75 | `style/one_shot` | 1-2 |
+| 0.75 | `style/imperative` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 | 0 | `meta/sloc/2` | 1-2 |
 
@@ -3702,8 +3702,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.9375 | `call/function/builtin/hex` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
 | 0 | `meta/sloc/1` | 1 |
@@ -3723,7 +3723,7 @@
 | 0.9375 | `call/function/builtin/zip` | 1 |
 | 0.9375 | `flow/loop/exit/late` | 1-2 |
 | 0.875 | `flow/loop/for` | 1-2 |
-| 0.75 | `style/one_shot` | 1-2 |
+| 0.75 | `style/imperative` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 | 0 | `meta/sloc/2` | 1-2 |
 
@@ -3740,8 +3740,8 @@
 |----|----|----|
 | 0.75 | `call/method` | 2 |
 | 0.9375 | `def/import/standard/os` | 1 |
+| 0.875 | `style/imperative/flat` | 1-2 |
 | 0.75 | `style/one_liner` | 1-2 |
-| 0.875 | `style/one_shot/flat` | 1-2 |
 | 0.875 | `var/assignment/single` | 2 |
 | 0 | `meta/program` | 1-2 |
 | 0 | `meta/sloc/2` | 1-2 |
@@ -3760,8 +3760,8 @@
 | 0.875 | `call/class/construct` | 2 |
 | 0.75 | `call/method` | 2 |
 | 0.96875 | `def/import/standard/pathlib/Path` | 1 |
+| 0.875 | `style/imperative/flat` | 1-2 |
 | 0.75 | `style/one_liner` | 1-2 |
-| 0.875 | `style/one_shot/flat` | 1-2 |
 | 0.875 | `var/assignment/single` | 2 |
 | 0 | `meta/program` | 1-2 |
 | 0 | `meta/sloc/2` | 1-2 |
@@ -3785,7 +3785,7 @@
 | 0.9375 | `call/method/logging/basicConfig` | 2 |
 | 0.9375 | `def/import/standard/logging` | 1 |
 | 0.9375 | `def/import/standard/sys` | 1 |
-| 0.875 | `style/one_shot/flat` | 1-6 |
+| 0.875 | `style/imperative/flat` | 1-6 |
 | 0.9375 | `type/sequence/string/literal` | 3, 5 |
 | 0.875 | `var/assignment/single` | 5 |
 | 0 | `meta/program` | 1-6 |
@@ -3807,7 +3807,7 @@
 | 0.75 | `call/method` | 3, 4 |
 | 0.9375 | `call/method/locale/setlocale` | 3 |
 | 0.9375 | `def/import/standard/locale` | 1 |
-| 0.875 | `style/one_shot/flat` | 1-4 |
+| 0.875 | `style/imperative/flat` | 1-4 |
 | 0.9375 | `type/sequence/string/literal` | 2, 3 |
 | 0.875 | `var/assignment/single` | 2, 4 |
 | 0 | `meta/program` | 1-4 |
@@ -3824,8 +3824,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.96875 | `call/function/builtin/casting/float` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.875 | `type/number/floating_point` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
@@ -3842,8 +3842,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.96875 | `call/function/builtin/casting/float` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.875 | `type/number/floating_point` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
 | 0 | `meta/program` | 1 |
@@ -3862,8 +3862,8 @@
 |----|----|----|
 | 0.75 | `call/method` | 2 |
 | 0.9375 | `def/import/standard/re` | 1 |
+| 0.875 | `style/imperative/flat` | 1-2 |
 | 0.75 | `style/one_liner` | 1-2 |
-| 0.875 | `style/one_shot/flat` | 1-2 |
 | 0.96875 | `type/sequence/string/literal/empty` | 2 |
 | 0.984375 | `type/sequence/string/literal/special/\x` | 2 |
 | 0.875 | `var/assignment/single` | 2 |
@@ -3887,8 +3887,8 @@
 | 0.875 | `call/function/without_arguments` | 1 |
 | 0.96875 | `call/method/sequence/string/split` | 1 |
 | 0.875 | `style/functional_trait/map` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.875 | `type/sequence/list` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
 | 0 | `meta/program` | 1 |
@@ -3905,8 +3905,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.96875 | `call/method/sequence/string/rstrip` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
@@ -3928,7 +3928,7 @@
 | 0.96875 | `call/method/sequence/string/endswith` | 2 |
 | 0.9375 | `def/import/standard/os` | 1 |
 | 0.875 | `flow/conditional/no_else` | 2-3 |
-| 0.75 | `style/one_shot` | 1-3 |
+| 0.75 | `style/imperative` | 1-3 |
 | 0.875 | `subscript/slice/stop` | 3 |
 | 0.9375 | `type/number/integer/literal` | 3 |
 | 0.875 | `type/sequence/string` | 2 |
@@ -3946,8 +3946,8 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
 | 0 | `meta/sloc/1` | 1 |
@@ -3963,8 +3963,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.96875 | `call/method/sequence/string/format` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
@@ -3988,7 +3988,7 @@
 | 0.96875 | `call/method/sequence/string/format` | 3 |
 | 0.875 | `operator/arithmetic/addition` | 1, 2, 3, 3, 3 |
 | 0.875 | `operator/arithmetic/integer_division` | 3, 3, 3 |
-| 0.875 | `style/one_shot/flat` | 1-3 |
+| 0.875 | `style/imperative/flat` | 1-3 |
 | 0.875 | `subscript/slice/start` | 1, 2 |
 | 0.875 | `subscript/slice/stop` | 1, 2 |
 | 0.875 | `type/number/integer` | 1, 2 |
@@ -4074,7 +4074,7 @@
 |----|----|----|
 | 0.75 | `call/method` | 3 |
 | 0.9375 | `def/import/standard/pathlib` | 1 |
-| 0.875 | `style/one_shot/flat` | 1-3 |
+| 0.875 | `style/imperative/flat` | 1-3 |
 | 0.875 | `var/assignment/single` | 2 |
 | 0 | `meta/program` | 1-3 |
 | 0 | `meta/sloc/3` | 1-3 |
@@ -4090,8 +4090,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.9375 | `call/function/builtin/format` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
@@ -4107,8 +4107,8 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
 | 0.875 | `var/assignment/constant` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
@@ -4128,8 +4128,8 @@
 |----|----|----|
 | 0.75 | `call/method` | 2 |
 | 0.9375 | `def/import/standard/random` | 1 |
+| 0.875 | `style/imperative/flat` | 1-2 |
 | 0.75 | `style/one_liner` | 1-2 |
-| 0.875 | `style/one_shot/flat` | 1-2 |
 | 0.875 | `var/assignment/single` | 2 |
 | 0 | `meta/program` | 1-2 |
 | 0 | `meta/sloc/2` | 1-2 |
@@ -4180,7 +4180,7 @@
 | 0.75 | `flow/conditional` | 2-5 |
 | 0.875 | `flow/conditional/else` | 5 |
 | 0.875 | `operator/arithmetic/power` | 2 |
-| 0.75 | `style/one_shot` | 1-5 |
+| 0.75 | `style/imperative` | 1-5 |
 | 0.9375 | `type/number/integer/literal` | 2, 2 |
 | 0.875 | `type/number/magic` | 2 |
 | 0 | `meta/program` | 1-5 |
@@ -4197,8 +4197,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.875 | `operator/arithmetic/multiplication` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
 | 0 | `meta/sloc/1` | 1 |
@@ -4221,7 +4221,7 @@
 | 0.75 | `condition/belonging` | 2, 4 |
 | 0.9375 | `def/import/standard/sys` | 1 |
 | 0.875 | `flow/conditional/no_else` | 2-3, 4-5 |
-| 0.75 | `style/one_shot` | 1-5 |
+| 0.75 | `style/imperative` | 1-5 |
 | 0.875 | `subscript/slice/start` | 2, 4 |
 | 0.9375 | `type/number/integer/literal` | 2, 4 |
 | 0.9375 | `type/sequence/string/literal` | 2, 4 |
@@ -4243,7 +4243,7 @@
 | 0.9375 | `call/function/builtin/zip` | 1 |
 | 0.9375 | `flow/loop/exit/late` | 1-2 |
 | 0.875 | `flow/loop/for` | 1-2 |
-| 0.75 | `style/one_shot` | 1-2 |
+| 0.75 | `style/imperative` | 1-2 |
 | 0.875 | `subscript/slice/start` | 1 |
 | 0.875 | `subscript/slice/step` | 1, 1 |
 | 0.9375 | `type/number/integer/literal` | 1, 1, 1 |
@@ -4297,8 +4297,8 @@
 | 0.75 | `call/method` | 2 |
 | 0.9375 | `call/method/webbrowser/open` | 2 |
 | 0.9375 | `def/import/standard/webbrowser` | 1 |
+| 0.875 | `style/imperative/flat` | 1-2 |
 | 0.75 | `style/one_liner` | 1-2 |
-| 0.875 | `style/one_shot/flat` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 | 0 | `meta/sloc/2` | 1-2 |
 
@@ -4312,8 +4312,8 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.75 | `subscript/index` | 1 |
 | 0.9375 | `subscript/index/backwards/last` | 1 |
 | 0.9375 | `type/number/integer/literal` | 1 |
@@ -4332,8 +4332,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.875 | `operator/arithmetic/addition` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
 | 0 | `meta/sloc/1` | 1 |
@@ -4351,8 +4351,8 @@
 | 0.9375 | `call/function/builtin/len` | 1 |
 | 0.96875 | `call/method/sequence/string/startswith` | 1 |
 | 0.875 | `operator/boolean/and` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.875 | `subscript/slice/start` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
@@ -4370,8 +4370,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.96875 | `call/method/sequence/string/lstrip` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
@@ -4388,8 +4388,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.96875 | `call/method/sequence/string/rsplit` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.75 | `subscript/index` | 1 |
 | 0.9375 | `type/number/integer/literal` | 1 |
 | 0.96875 | `type/number/integer/literal/zero` | 1 |
@@ -4409,8 +4409,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.96875 | `call/method/sequence/string/rstrip` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
@@ -4427,8 +4427,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.9375 | `call/function/builtin/len` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
 | 0 | `meta/sloc/1` | 1 |
@@ -4444,8 +4444,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.9375 | `call/function/builtin/len` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
 | 0 | `meta/sloc/1` | 1 |
@@ -4461,8 +4461,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.96875 | `call/method/sequence/list/append` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.875 | `type/sequence/list` | 1 |
 | 0 | `meta/program` | 1 |
 | 0 | `meta/sloc/1` | 1 |
@@ -4477,8 +4477,8 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.75 | `subscript/index` | 1 |
 | 0.75 | `var/assignment` | 1 |
 | 0 | `meta/program` | 1 |
@@ -4495,8 +4495,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.9375 | `call/function/builtin/print` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
 | 0 | `meta/program` | 1 |
 | 0 | `meta/sloc/1` | 1 |
@@ -4512,8 +4512,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.9375 | `call/function/builtin/print` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
 | 0 | `meta/program` | 1 |
 | 0 | `meta/sloc/1` | 1 |
@@ -4529,8 +4529,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.9375 | `call/function/builtin/print` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
 | 0 | `meta/program` | 1 |
 | 0 | `meta/sloc/1` | 1 |
@@ -4553,7 +4553,7 @@
 | 0.96875 | `call/method/sequence/string/encode` | 2 |
 | 0.96875 | `def/import/standard/urllib/parse` | 1 |
 | 0.96875 | `def/import/standard/urllib/request` | 1 |
-| 0.875 | `style/one_shot/flat` | 1-4 |
+| 0.875 | `style/imperative/flat` | 1-4 |
 | 0.875 | `type/sequence/string` | 2 |
 | 0.9375 | `type/sequence/string/literal` | 2, 3 |
 | 0.875 | `var/assignment/single` | 2, 3, 4 |
@@ -4571,8 +4571,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.96875 | `call/method/number/floating_point/hex` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.875 | `type/number/floating_point` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
@@ -4589,8 +4589,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.96875 | `call/method/number/floating_point/fromhex` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.875 | `type/number/floating_point` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
@@ -4611,7 +4611,7 @@
 | 0.75 | `call/method` | 3, 3 |
 | 0.75 | `condition/belonging` | 3 |
 | 0.9375 | `def/import/standard/os` | 1 |
-| 0.875 | `style/one_shot/flat` | 1-3 |
+| 0.875 | `style/imperative/flat` | 1-3 |
 | 0.75 | `subscript/index` | 3 |
 | 0.9375 | `type/number/integer/literal` | 3 |
 | 0.9375 | `type/sequence/list/literal` | 2 |
@@ -4642,7 +4642,7 @@
 | 0.96875 | `call/method/sequence/string/format` | 4 |
 | 0.9375 | `def/import/standard/os` | 2 |
 | 0.9375 | `def/import/standard/re` | 1 |
-| 0.875 | `style/one_shot/flat` | 1-7 |
+| 0.875 | `style/imperative/flat` | 1-7 |
 | 0.875 | `type/sequence/string` | 4 |
 | 0.9375 | `type/sequence/string/literal` | 4, 7 |
 | 0.9375 | `type/sequence/tuple/literal` | 5 |
@@ -4668,8 +4668,8 @@
 | 0.9375 | `def/import/standard/glob` | 1 |
 | 0.9375 | `def/import/standard/itertools` | 2 |
 | 0.875 | `operator/string/format` | 3 |
+| 0.875 | `style/imperative/flat` | 1-3 |
 | 0.75 | `style/one_liner` | 1-3 |
-| 0.875 | `style/one_shot/flat` | 1-3 |
 | 0.875 | `type/sequence/list` | 3 |
 | 0.9375 | `type/sequence/list/literal` | 3 |
 | 0.9375 | `type/sequence/string/literal` | 3, 3, 3, 3 |
@@ -4689,8 +4689,8 @@
 | 0.75 | `condition/inequality` | 1, 1, 1, 1 |
 | 0.9375 | `condition/inequality/chained/2` | 1, 1 |
 | 0.875 | `operator/boolean/and` | 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
 | 0 | `meta/sloc/1` | 1 |
@@ -4707,8 +4707,8 @@
 |----|----|----|
 | 0.875 | `operator/arithmetic/addition` | 1, 1 |
 | 0.875 | `operator/arithmetic/division` | 1, 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.9375 | `type/number/integer/literal` | 1, 1 |
 | 0.9375 | `type/sequence/tuple/literal` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
@@ -4732,7 +4732,7 @@
 | 0.96875 | `def/import/standard/collections/namedtuple` | 1 |
 | 0.875 | `operator/arithmetic/addition` | 3, 3 |
 | 0.875 | `operator/arithmetic/division` | 3, 3 |
-| 0.875 | `style/one_shot/flat` | 1-3 |
+| 0.875 | `style/imperative/flat` | 1-3 |
 | 0.9375 | `type/number/integer/literal` | 3, 3 |
 | 0.9375 | `type/sequence/string/literal` | 2, 2 |
 | 0.875 | `var/assignment/single` | 2, 3 |
@@ -4752,8 +4752,8 @@
 |----|----|----|
 | 0.75 | `call/method` | 2 |
 | 0.9375 | `def/import/standard/os` | 1 |
+| 0.875 | `style/imperative/flat` | 1-2 |
 | 0.75 | `style/one_liner` | 1-2 |
-| 0.875 | `style/one_shot/flat` | 1-2 |
 | 0.875 | `var/assignment/single` | 2 |
 | 0 | `meta/program` | 1-2 |
 | 0 | `meta/sloc/2` | 1-2 |
@@ -4771,7 +4771,7 @@
 |----|----|----|
 | 0.9375 | `call/function/builtin/print` | 2 |
 | 0.875 | `operator/arithmetic/modulo` | 2 |
-| 0.875 | `style/one_shot/flat` | 1-2 |
+| 0.875 | `style/imperative/flat` | 1-2 |
 | 0.984375 | `type/sequence/string/literal/special/\n` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1-2 |
@@ -4795,7 +4795,7 @@
 |----|----|----|
 | 0.75 | `call/method` | 6 |
 | 0.9375 | `def/import/third_party/requests` | 2 |
-| 0.875 | `style/one_shot/flat` | 1-7 |
+| 0.875 | `style/imperative/flat` | 1-7 |
 | 0.9375 | `type/non_sequence/dictionary/literal` | 4 |
 | 0.96875 | `type/non_sequence/dictionary/literal/empty` | 5 |
 | 0.9375 | `type/sequence/string/literal` | 3, 4 |
@@ -4821,8 +4821,8 @@
 | 0.96875 | `def/import/standard/datetime/date` | 1 |
 | 0.96875 | `def/import/standard/datetime/timedelta` | 1 |
 | 0.875 | `operator/arithmetic/addition` | 2 |
+| 0.875 | `style/imperative/flat` | 1-2 |
 | 0.75 | `style/one_liner` | 1-2 |
-| 0.875 | `style/one_shot/flat` | 1-2 |
 | 0.9375 | `type/number/integer/literal` | 2 |
 | 0 | `meta/program` | 1-2 |
 | 0 | `meta/sloc/2` | 1-2 |
@@ -4841,7 +4841,7 @@
 |----|----|----|
 | 0.75 | `call/method` | 3 |
 | 0.9375 | `def/import/standard/threading` | 1 |
-| 0.875 | `style/one_shot/flat` | 1-3 |
+| 0.875 | `style/imperative/flat` | 1-3 |
 | 0.9375 | `type/number/floating_point/literal` | 2 |
 | 0.9375 | `type/number/integer/literal` | 2 |
 | 0.875 | `type/number/magic` | 2, 2 |
@@ -4864,8 +4864,8 @@
 | 0.75 | `call/method` | 2 |
 | 0.9375 | `call/method/sys/exit` | 2 |
 | 0.9375 | `def/import/standard/sys` | 1 |
+| 0.875 | `style/imperative/flat` | 1-2 |
 | 0.75 | `style/one_liner` | 1-2 |
-| 0.875 | `style/one_shot/flat` | 1-2 |
 | 0.96875 | `type/number/integer/literal/zero` | 2 |
 | 0 | `meta/program` | 1-2 |
 | 0 | `meta/sloc/2` | 1-2 |
@@ -4933,8 +4933,8 @@
 |----|----|----|
 | 0.9375 | `def/import/third_party/numpy` | 1 |
 | 0.875 | `operator/matrix/multiplication` | 2 |
+| 0.875 | `style/imperative/flat` | 1-2 |
 | 0.75 | `style/one_liner` | 1-2 |
-| 0.875 | `style/one_shot/flat` | 1-2 |
 | 0.875 | `var/assignment/single` | 2 |
 | 0 | `meta/program` | 1-2 |
 | 0 | `meta/sloc/2` | 1-2 |
@@ -4952,8 +4952,8 @@
 |----|----|----|
 | 0.75 | `call/method` | 2 |
 | 0.9375 | `def/import/third_party/numpy` | 1 |
+| 0.875 | `style/imperative/flat` | 1-2 |
 | 0.75 | `style/one_liner` | 1-2 |
-| 0.875 | `style/one_shot/flat` | 1-2 |
 | 0.875 | `var/assignment/single` | 2 |
 | 0 | `meta/program` | 1-2 |
 | 0 | `meta/sloc/2` | 1-2 |
@@ -4969,8 +4969,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.875 | `call/class/construct` | 1, 1 |
+| 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.875 | `style/one_shot/flat` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1 |
 | 0 | `meta/sloc/1` | 1 |
@@ -4990,7 +4990,7 @@
 | 0.875 | `call/function/without_arguments` | 2 |
 | 0.75 | `condition/inequality` | 1 |
 | 0.875 | `flow/conditional/no_else` | 1-2 |
-| 0.75 | `style/one_shot` | 1-2 |
+| 0.75 | `style/imperative` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 | 0 | `meta/sloc/2` | 1-2 |
 
@@ -5007,7 +5007,7 @@
 |----|----|----|
 | 0.9375 | `call/function/builtin/open` | 1 |
 | 0.75 | `call/method` | 2 |
-| 0.875 | `style/one_shot/flat` | 1-2 |
+| 0.875 | `style/imperative/flat` | 1-2 |
 | 0.875 | `var/assignment/single` | 2 |
 | 0 | `meta/program` | 1-2 |
 | 0 | `meta/sloc/2` | 1-2 |

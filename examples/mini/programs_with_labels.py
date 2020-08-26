@@ -1,7 +1,7 @@
 # ----------------------------------------------------------------------------------------
 # assignment.py
 # ----------------------------------------------------------------------------------------
-a = b # assignment, assignment_lhs_identifier:a, assignment_rhs_atom:b, flat_style, node:Assign, node:Name, one_liner_style, one_shot_style, single_assignment:a, whole_span:1
+a = b # assignment, assignment_lhs_identifier:a, assignment_rhs_atom:b, flat_style, imperative_style, node:Assign, node:Name, one_liner_style, single_assignment:a, whole_span:1
 
 # ----------------------------------------------------------------------------------------
 # collatz.py
@@ -18,7 +18,7 @@ def print_collatz(n): # added_block_label (-> +7), function:print_collatz (-> +7
 # ----------------------------------------------------------------------------------------
 # fizzbuzz.py
 # ----------------------------------------------------------------------------------------
-import collatz # import_internally:collatz, import_module_internally:collatz, node:Import, one_shot_style (-> +9), whole_span:10 (-> +9)
+import collatz # imperative_style (-> +9), import_internally:collatz, import_module_internally:collatz, node:Import, whole_span:10 (-> +9)
 for i in range(1, 101): # call_argument:1, call_argument:101, external_free_call:range, for:i (-> +8), for_range:1:101 (-> +8), free_call:range, literal:1, literal:101, loop:for (-> +8), loop_with_late_exit:for (-> +8), magic_number:101, node:Call, node:For (-> +8), node:Name, node:Num, range:1:101
     if i % 15 == 0: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:15, if (-> +7), if_test_atom:0, if_test_atom:15, if_test_atom:i, literal:0, literal:15, magic_number:15, modulo_operator, node:BinOp, node:Compare, node:If (-> +7), node:Name, node:Num
         print("FizzBuzz") # call_argument:, external_free_call:print, free_call:print, free_call_without_result:print, if_then_branch, literal:Str, node:Call, node:Expr, node:Name, node:Str

@@ -8,18 +8,18 @@
         "assignment_lhs_identifier:a": [[1,1]],
         "assignment_rhs_atom:b": [[1,1]],
         "flat_style": [[1,1]],
+        "imperative_style": [[1,1]],
         "node:Assign": [[1,1]],
         "node:Name": [[1,1],[1,1]],
         "one_liner_style": [[1,1]],
-        "one_shot_style": [[1,1]],
         "single_assignment:a": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
+        "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
-        "style/one_shot/flat": [[1,1]],
         "var/assignment/single": [[1,1]]
       }
     },
@@ -148,6 +148,7 @@
         "if_test_atom:5": [[7,7]],
         "if_test_atom:i": [[3,3],[5,5],[7,7]],
         "if_then_branch": [[4,4]],
+        "imperative_style": [[1,10]],
         "import_internally:collatz": [[1,1]],
         "import_module_internally:collatz": [[1,1]],
         "literal:0": [[3,3],[5,5],[7,7]],
@@ -174,7 +175,6 @@
         "node:Name": [[2,2],[2,2],[3,3],[4,4],[5,5],[6,6],[7,7],[8,8],[10,10],[10,10]],
         "node:Num": [[2,2],[2,2],[3,3],[3,3],[5,5],[5,5],[7,7],[7,7]],
         "node:Str": [[4,4],[6,6],[8,8]],
-        "one_shot_style": [[1,10]],
         "range:1:101": [[2,2]],
         "whole_span:10": [[1,10]]
       },
@@ -191,7 +191,7 @@
         "meta/program": [[1,10]],
         "meta/sloc/10": [[1,10]],
         "operator/arithmetic/modulo": [[3,3],[5,5],[7,7]],
-        "style/one_shot": [[1,10]],
+        "style/imperative": [[1,10]],
         "type/number/integer/literal": [[2,2],[2,2],[3,3],[5,5],[7,7]],
         "type/number/integer/literal/zero": [[3,3],[5,5],[7,7]],
         "type/number/magic": [[2,2],[3,3],[5,5],[7,7]],
@@ -421,6 +421,10 @@
       "collatz.py",
       "fizzbuzz.py"
     ],
+    "imperative_style": [
+      "assignment.py",
+      "fizzbuzz.py"
+    ],
     "import_internally:collatz": [
       "fizzbuzz.py"
     ],
@@ -559,10 +563,6 @@
     "one_liner_style": [
       "assignment.py",
       "is_even.py"
-    ],
-    "one_shot_style": [
-      "assignment.py",
-      "fizzbuzz.py"
     ],
     "procedural_style": [
       "collatz.py"
@@ -733,15 +733,15 @@
     "style/functional_trait/pure_function": [
       "is_even.py"
     ],
+    "style/imperative": [
+      "fizzbuzz.py"
+    ],
+    "style/imperative/flat": [
+      "assignment.py"
+    ],
     "style/one_liner": [
       "assignment.py",
       "is_even.py"
-    ],
-    "style/one_shot": [
-      "fizzbuzz.py"
-    ],
-    "style/one_shot/flat": [
-      "assignment.py"
     ],
     "style/procedural": [
       "collatz.py"

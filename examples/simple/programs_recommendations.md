@@ -42,7 +42,7 @@
 | 0 | `flow/loop/for/elements` | 6-7 |
 | 0 | `flow/loop/for/nested/1` | 6-7 |
 | 0.125 | `operator/string/concatenation` | 4, 7 |
-| 0 | `style/one_shot` | 1-8 |
+| 0 | `style/imperative` | 1-8 |
 | 0 | `type/sequence/string` | 7 |
 | 0 | `type/sequence/string/literal` | 2, 4, 7 |
 | 0 | `var/assignment/single` | 2 |
@@ -71,7 +71,7 @@
 | 0 | `call/function/builtin/sum` | 3 |
 | 0.4375 | `def/import/standard/sys` | 1 |
 | 0 | `flow/exception/catch/ValueError` | 2-6 |
-| 0 | `style/one_shot` | 1-6 |
+| 0 | `style/imperative` | 1-6 |
 | 0.875 | `subscript/slice/start` | 3 |
 | 0.375 | `type/number/integer` | 3 |
 | 0.4375 | `type/number/integer/literal` | 3 |
@@ -99,7 +99,7 @@
 | 0 | `flow/loop/exit/late` | 2-4 |
 | 0 | `flow/loop/while` | 2-4 |
 | 0.375 | `operator/arithmetic/addition` | 4 |
-| 0 | `style/one_shot` | 1-4 |
+| 0 | `style/imperative` | 1-4 |
 | 0.4375 | `type/number/integer/literal` | 1, 1, 2 |
 | 0.375 | `type/number/magic` | 2 |
 | 0 | `type/sequence/string` | 3 |
@@ -188,7 +188,7 @@
 | 0 | `flow/loop/exit/late` | 11-14 |
 | 0 | `flow/loop/for` | 11-14 |
 | 0.375 | `operator/boolean/and` | 13 |
-| 0 | `style/one_shot` | 1-14 |
+| 0 | `style/imperative` | 1-14 |
 | 0.4375 | `type/non_sequence/set/literal` | 10 |
 | 0 | `type/sequence/string` | 14 |
 | 0 | `type/sequence/string/literal` | 10, 10, 11, 13, 14 |
@@ -234,7 +234,7 @@
 | 0 | `flow/conditional/no_else` | 13-15 |
 | 0 | `flow/loop/exit/early/break/else` | 12-17 |
 | 0 | `flow/loop/for` | 12-17 |
-| 0 | `style/one_shot` | 1-17 |
+| 0 | `style/imperative` | 1-17 |
 | 0.75 | `subscript/index` | 14 |
 | 0.375 | `type/non_sequence/dictionary` | 12 |
 | 0.4375 | `type/non_sequence/dictionary/literal` | 2 |
@@ -329,7 +329,7 @@
 | 0 | `flow/loop/exit/early/break` | 6-14 |
 | 0 | `flow/loop/while` | 6-14 |
 | 0.9375 | `pattern/states/accumulate/count` | 6-14 |
-| 0 | `style/one_shot` | 1-18 |
+| 0 | `style/imperative` | 1-18 |
 | 0.375 | `type/number/integer` | 7 |
 | 0.4375 | `type/number/integer/literal` | 4, 4, 6, 8 |
 | 0.46875 | `type/number/integer/literal/zero` | 2 |

@@ -177,7 +177,7 @@
       - [Feature `object_oriented_style` (SQL)](#feature-object_oriented_style)
       - [Feature `functional_style` (SQL)](#feature-functional_style)
       - [Feature `procedural_style` (SQL)](#feature-procedural_style)
-      - [Feature `one_shot_style` (SQL)](#feature-one_shot_style)
+      - [Feature `imperative_style` (SQL)](#feature-imperative_style)
       - [Feature `flat_style` (SQL)](#feature-flat_style)
       - [Feature `one_liner_style` (SQL)](#feature-one_liner_style)
   - [Others](#others)
@@ -201,12 +201,12 @@ Match the name of every node of the AST. This covers most of the [Python keyword
 ##### Derivations
 
 [⬇️ feature `if`](#feature-if)  
+[⬇️ feature `imperative_style`](#feature-imperative_style)  
 [⬇️ feature `loop`](#feature-loop)  
 [⬇️ feature `loop_with_break`](#feature-loop_with_break)  
 [⬇️ feature `method`](#feature-method)  
 [⬇️ feature `object_oriented_style`](#feature-object_oriented_style)  
 [⬇️ feature `one_liner_style`](#feature-one_liner_style)  
-[⬇️ feature `one_shot_style`](#feature-one_shot_style)  
 [⬇️ feature `pure_function`](#feature-pure_function)  
 [⬇️ feature `try_raise|try_except`](#feature-try_raisetry_except)  
 
@@ -6818,9 +6818,9 @@ Match a whole program, and suffix it by the number of its last line of code.
 ##### Derivations
 
 [⬇️ feature `functional_style`](#feature-functional_style)  
+[⬇️ feature `imperative_style`](#feature-imperative_style)  
 [⬇️ feature `object_oriented_style`](#feature-object_oriented_style)  
 [⬇️ feature `one_liner_style`](#feature-one_liner_style)  
-[⬇️ feature `one_shot_style`](#feature-one_shot_style)  
 [⬇️ feature `procedural_style`](#feature-procedural_style)  
 
 ##### Specification
@@ -7026,9 +7026,9 @@ LIMIT 1
 
 --------------------------------------------------------------------------------
 
-#### Feature `one_shot_style`
+#### Feature `imperative_style`
 
-A program is considered as one-shot if and only if it features no function or class definition.
+A program is considered as imperative if and only if it features no function or class definition.
 
 ##### Derivations
 
@@ -7039,7 +7039,7 @@ A program is considered as one-shot if and only if it features no function or cl
 ##### Specification
 
 ```sql
-SELECT "one_shot_style",
+SELECT "imperative_style",
        "",
        p.span,
        p.path
@@ -7069,19 +7069,19 @@ WHERE NOT EXISTS
 
 | Label | Lines |
 |:--|:--|
-| `one_shot_style` | 1-9 |
+| `imperative_style` | 1-9 |
 
 --------------------------------------------------------------------------------
 
 #### Feature `flat_style`
 
-A program is considered as flat if and only if it features no conditional, no loop, no exception mechanism, no function definition and no class definition. Note that it is [one-shot](#feature-one_shot_style) too.
+A program is considered as flat if and only if it features no conditional, no loop, no exception mechanism, no function definition and no class definition. Note that it is [imperative](#feature-imperative_style) too.
 
 ##### Derivations
 
 [⬆️ feature `if`](#feature-if)  
+[⬆️ feature `imperative_style`](#feature-imperative_style)  
 [⬆️ feature `loop`](#feature-loop)  
-[⬆️ feature `one_shot_style`](#feature-one_shot_style)  
 [⬆️ feature `try_raise|try_except`](#feature-try_raisetry_except)  
 
 ##### Specification
@@ -7091,7 +7091,7 @@ SELECT "flat_style",
        "",
        p.span,
        p.path
-FROM t_one_shot_style p
+FROM t_imperative_style p
 WHERE NOT EXISTS
     (SELECT *
      FROM t

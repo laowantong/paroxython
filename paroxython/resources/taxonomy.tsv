@@ -180,8 +180,8 @@ style/functional_trait/lambda	function
 style/functional_trait/pure_function	pure_function:.*
 style/object_oriented	object_oriented_style
 style/one_liner	one_liner_style
-style/one_shot	one_shot_style
-style/one_shot/flat	flat_style
+style/imperative	imperative_style
+style/imperative/flat	flat_style
 style/procedural	procedural_style
 subscript/index	index:.+
 subscript/index/arithmetic	index_arithmetic

@@ -28,6 +28,7 @@ def dump_trees(directory, update_database=True):
     if update_database:
         db = TagDatabase(directory, ignore_timestamps=True)
         db.write_sqlite()
+        db.write_json()
 
     db_path = directory.parent / f"{directory.name}_db.sqlite"
     connexion = sqlite3.connect(str(db_path))  # str() for Python 3.6 compatibility
@@ -38,7 +39,8 @@ def dump_trees(directory, update_database=True):
     result = [["node", "occurrences"]]
     for (taxon, count) in table:
         result.append([f"• {taxon.replace('/', ' ')}.", count])
-    Path("docs/resources/tree.js").write_text(js_template % result)
+    result = js_template % result
+    Path("docs/resources/tree.js").write_text(result.replace("], ['", "],\n['"))
 
     c.close()
 

@@ -66,6 +66,8 @@
 - if_test_atom:n / collatz.py / 4
 - if_then_branch / collatz.py / 5
 - if_then_branch / fizzbuzz.py / 4
+- imperative_style / assignment.py / 1
+- imperative_style / fizzbuzz.py / 1-10
 - import:collatz / fizzbuzz.py / 1
 - import:fizzbuzz / is_even.py / 1
 - import_module:collatz / fizzbuzz.py / 1
@@ -129,8 +131,6 @@
 - node:arg / is_even.py / 2
 - one_liner_style / assignment.py / 1
 - one_liner_style / is_even.py / 1-3
-- one_shot_style / assignment.py / 1
-- one_shot_style / fizzbuzz.py / 1-10
 - procedural_style / collatz.py / 1-8
 - pure_function:is_even / is_even.py / 2-3
 - range:1:101 / fizzbuzz.py / 2

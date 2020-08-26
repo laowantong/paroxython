@@ -5,10 +5,10 @@ a = b # assignment
       # assignment_lhs_identifier:a
       # assignment_rhs_atom:b
       # flat_style
+      # imperative_style
       # node:Assign
       # node:Name
       # one_liner_style
-      # one_shot_style
       # single_assignment:a
       # whole_span:1
 
@@ -109,10 +109,10 @@ def print_collatz(n): # added_block_label (-> +7)
 # ----------------------------------------------------------------------------------------
 # fizzbuzz.py
 # ----------------------------------------------------------------------------------------
-import collatz # import_internally:collatz
+import collatz # imperative_style (-> +9)
+               # import_internally:collatz
                # import_module_internally:collatz
                # node:Import
-               # one_shot_style (-> +9)
                # whole_span:10 (-> +9)
 for i in range(1, 101): # call_argument:1
                         # call_argument:101
