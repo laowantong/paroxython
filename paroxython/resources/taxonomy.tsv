@@ -234,6 +234,12 @@ type/sequence/string	member_call_method:(capitalize|casefold|center|encode|endsw
 type/sequence/string	member_call_method:string:(count|index)
 type/sequence/string/literal	literal:Str
 type/sequence/string/literal/empty	empty_literal:Str
+type/sequence/string/literal/special/\\\1	special_literal_string:.*?\\(\w).*
+type/sequence/string/literal/special/box_drawing	special_literal_string:.*?[\u2500-\u257F].*
+type/sequence/string/literal/special/cjk_unified_ideographs	special_literal_string:.*?[\u4E00-\u9FFF].*
+type/sequence/string/literal/special/dingbats	special_literal_string:.*?[\u2700-\u27BF].*
+type/sequence/string/literal/special/emojis	special_literal_string:.*?[\U0001F300-\U0001F6FF].*
+type/sequence/string/literal/special/game_tiles_and_cards	special_literal_string:.*?[\U0001F000-\U0001F0FF].*
 type/sequence/string/literal/formatted	node:JoinedStr
 type/sequence/tuple	external_free_call:tuple
 type/sequence/tuple/literal	literal:Tuple

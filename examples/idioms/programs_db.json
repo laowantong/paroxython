@@ -122,6 +122,7 @@
         "one_liner_style": [[1,1]],
         "one_shot_style": [[1,1]],
         "replication_operator:Str": [[1,1]],
+        "special_literal_string:Hello\\n": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
@@ -133,7 +134,7 @@
         "style/one_shot/flat": [[1,1]],
         "type/number/integer/literal": [[1,1]],
         "type/number/magic": [[1,1]],
-        "type/sequence/string/literal": [[1,1]]
+        "type/sequence/string/literal/special/\\n": [[1,1]]
       }
     },
     "002.3117-print-hello-10-times.py": {
@@ -158,6 +159,7 @@
         "one_liner_style": [[1,1]],
         "one_shot_style": [[1,1]],
         "replication_operator:Str": [[1,1]],
+        "special_literal_string:Hello\\n": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
@@ -169,7 +171,7 @@
         "style/one_shot/flat": [[1,1]],
         "type/number/integer/literal": [[1,1]],
         "type/number/magic": [[1,1]],
-        "type/sequence/string/literal": [[1,1]]
+        "type/sequence/string/literal/special/\\n": [[1,1]]
       }
     },
     "003.0019-create-a-procedure.py": {
@@ -1163,6 +1165,7 @@
         "one_liner_style": [[1,1]],
         "one_shot_style": [[1,1]],
         "single_assignment:s": [[1,1]],
+        "special_literal_string:\u30cd\u30b3": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
@@ -2469,13 +2472,14 @@
         "node:Str": [[3,3]],
         "one_shot_style": [[1,3]],
         "single_assignment:s": [[1,1]],
+        "special_literal_string:Huey\\nDewey\\nLouie": [[3,3]],
         "whole_span:3": [[1,3]]
       },
       "taxa": {
         "meta/program": [[1,3]],
         "meta/sloc/3": [[1,3]],
         "style/one_shot/flat": [[1,3]],
-        "type/sequence/string/literal": [[3,3]],
+        "type/sequence/string/literal/special/\\n": [[3,3]],
         "var/assignment/single": [[1,1]]
       }
     },
@@ -6549,6 +6553,7 @@
         "one_liner_style": [[1,2]],
         "one_shot_style": [[1,2]],
         "single_assignment:t": [[2,2]],
+        "special_literal_string:[^\\x00-\\x7f]": [[2,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
@@ -6558,8 +6563,8 @@
         "meta/sloc/2": [[1,2]],
         "style/one_liner": [[1,2]],
         "style/one_shot/flat": [[1,2]],
-        "type/sequence/string/literal": [[2,2]],
         "type/sequence/string/literal/empty": [[2,2]],
+        "type/sequence/string/literal/special/\\x": [[2,2]],
         "var/assignment/single": [[2,2]]
       }
     },
@@ -8306,6 +8311,7 @@
         "node:Str": [[1,1]],
         "one_shot_style": [[1,2]],
         "single_assignment:s": [[1,1]],
+        "special_literal_string:s = %r\\nprint(s%%s)": [[1,1]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
@@ -8314,7 +8320,7 @@
         "meta/sloc/2": [[1,2]],
         "operator/arithmetic/modulo": [[2,2]],
         "style/one_shot/flat": [[1,2]],
-        "type/sequence/string/literal": [[1,1]],
+        "type/sequence/string/literal/special/\\n": [[1,1]],
         "var/assignment/single": [[1,1]]
       }
     },
@@ -16168,6 +16174,22 @@
     "slice_upper:j": [
       "038.0186-extract-a-substring.py"
     ],
+    "special_literal_string:Hello\\n": [
+      "002.1493-print-hello-10-times.py",
+      "002.3117-print-hello-10-times.py"
+    ],
+    "special_literal_string:Huey\\nDewey\\nLouie": [
+      "048.0210-multi-line-string-literal.py"
+    ],
+    "special_literal_string:[^\\x00-\\x7f]": [
+      "147.2171-remove-all-non-ascii-characters.py"
+    ],
+    "special_literal_string:s = %r\\nprint(s%%s)": [
+      "182.2658-quine-program.py"
+    ],
+    "special_literal_string:\u30cd\u30b3": [
+      "024.0664-assign-to-string-the-japanese-word-.py"
+    ],
     "string_formatting_operator": [
       "177.3241-find-files-with-a-given-list-of-filename-extensions.py"
     ],
@@ -18887,15 +18909,12 @@
       "001.0003-print-hello-world.py",
       "001.1159-print-hello-world.py",
       "002.0011-print-hello-10-times.py",
-      "002.1493-print-hello-10-times.py",
-      "002.3117-print-hello-10-times.py",
       "003.0019-create-a-procedure.py",
       "008.0039-initialize-a-new-map-associative-array.py",
       "023.1102-convert-real-number-to-string-with-2-decimal-places.py",
       "024.0664-assign-to-string-the-japanese-word-.py",
       "025.0195-send-a-value-to-another-thread.py",
       "041.0187-reverse-a-string.py",
-      "048.0210-multi-line-string-literal.py",
       "053.0240-join-a-list-of-strings.py",
       "053.1933-join-a-list-of-strings.py",
       "056.1424-launch-1000-parallel-tasks-and-wait-for-completion.py",
@@ -18924,7 +18943,6 @@
       "145.1822-print-log-line-with-datetime.py",
       "146.1825-convert-string-to-floating-point-number.py",
       "146.2739-convert-string-to-floating-point-number.py",
-      "147.2171-remove-all-non-ascii-characters.py",
       "150.2154-remove-trailing-slash.py",
       "153.1980-concatenate-string-with-integer.py",
       "154.2155-halfway-between-two-hex-color-codes.py",
@@ -18940,7 +18958,6 @@
       "177.2725-find-files-with-a-given-list-of-filename-extensions.py",
       "177.3241-find-files-with-a-given-list-of-filename-extensions.py",
       "179.2689-get-center-of-a-rectangle.py",
-      "182.2658-quine-program.py",
       "183.3025-make-http-put-request.py"
     ],
     "type/sequence/string/literal/empty": [
@@ -18948,6 +18965,15 @@
       "116.1257-remove-occurrences-of-word-from-string.py",
       "147.2171-remove-all-non-ascii-characters.py",
       "154.2292-halfway-between-two-hex-color-codes.py"
+    ],
+    "type/sequence/string/literal/special/\\n": [
+      "002.1493-print-hello-10-times.py",
+      "002.3117-print-hello-10-times.py",
+      "048.0210-multi-line-string-literal.py",
+      "182.2658-quine-program.py"
+    ],
+    "type/sequence/string/literal/special/\\x": [
+      "147.2171-remove-all-non-ascii-characters.py"
     ],
     "type/sequence/tuple/literal": [
       "007.0183-iterate-over-list-indexes-and-values.py",

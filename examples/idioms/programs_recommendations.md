@@ -3,8 +3,8 @@
     - [`001.0003-print-hello-world.py`](#program-0010003-print-hello-worldpy-learning-cost-446875)
     - [`001.1159-print-hello-world.py`](#program-0011159-print-hello-worldpy-learning-cost-35)
     - [`002.0011-print-hello-10-times.py`](#program-0020011-print-hello-10-timespy-learning-cost-725)
-    - [`002.1493-print-hello-10-times.py`](#program-0021493-print-hello-10-timespy-learning-cost-61875)
-    - [`002.3117-print-hello-10-times.py`](#program-0023117-print-hello-10-timespy-learning-cost-61875)
+    - [`002.1493-print-hello-10-times.py`](#program-0021493-print-hello-10-timespy-learning-cost-6234375)
+    - [`002.3117-print-hello-10-times.py`](#program-0023117-print-hello-10-timespy-learning-cost-6234375)
     - [`003.0019-create-a-procedure.py`](#program-0030019-create-a-procedurepy-learning-cost-5875)
     - [`003.2372-create-a-procedure.py`](#program-0032372-create-a-procedurepy-learning-cost-3875)
     - [`004.0024-create-a-function-which-returns-the-square-of-an-integer.py`](#program-0040024-create-a-function-which-returns-the-square-of-an-integerpy-learning-cost-5875)
@@ -61,7 +61,7 @@
     - [`045.0570-pause-execution-for-5-seconds.py`](#program-0450570-pause-execution-for-5-secondspy-learning-cost-60625)
     - [`046.0191-extract-beginning-of-string-prefix.py`](#program-0460191-extract-beginning-of-string-prefixpy-learning-cost-51875)
     - [`047.0198-extract-string-suffix.py`](#program-0470198-extract-string-suffixpy-learning-cost-51875)
-    - [`048.0210-multi-line-string-literal.py`](#program-0480210-multi-line-string-literalpy-learning-cost-26875)
+    - [`048.0210-multi-line-string-literal.py`](#program-0480210-multi-line-string-literalpy-learning-cost-2734375)
     - [`049.0242-split-a-space-separated-string.py`](#program-0490242-split-a-space-separated-stringpy-learning-cost-434375)
     - [`050.0572-make-an-infinite-loop.py`](#program-0500572-make-an-infinite-looppy-learning-cost-43125)
     - [`051.0230-check-if-map-contains-key.py`](#program-0510230-check-if-map-contains-keypy-learning-cost-2375)
@@ -170,7 +170,7 @@
     - [`146.1825-convert-string-to-floating-point-number.py`](#program-1461825-convert-string-to-floating-point-numberpy-learning-cost-53125)
     - [`146.1826-convert-string-to-floating-point-number.py`](#program-1461826-convert-string-to-floating-point-numberpy-learning-cost-434375)
     - [`146.2739-convert-string-to-floating-point-number.py`](#program-1462739-convert-string-to-floating-point-numberpy-learning-cost-440625)
-    - [`147.2171-remove-all-non-ascii-characters.py`](#program-1472171-remove-all-non-ascii-characterspy-learning-cost-609375)
+    - [`147.2171-remove-all-non-ascii-characters.py`](#program-1472171-remove-all-non-ascii-characterspy-learning-cost-6140625)
     - [`148.1829-read-list-of-integer-numbers-from-stdin.py`](#program-1481829-read-list-of-integer-numbers-from-stdinpy-learning-cost-96875)
     - [`150.2154-remove-trailing-slash.py`](#program-1502154-remove-trailing-slashpy-learning-cost-528125)
     - [`151.2166-remove-string-trailing-path-separator.py`](#program-1512166-remove-string-trailing-path-separatorpy-learning-cost-709375)
@@ -212,7 +212,7 @@
     - [`179.2688-get-center-of-a-rectangle.py`](#program-1792688-get-center-of-a-rectanglepy-learning-cost-6125)
     - [`179.2689-get-center-of-a-rectangle.py`](#program-1792689-get-center-of-a-rectanglepy-learning-cost-796875)
     - [`180.2612-list-files-in-directory.py`](#program-1802612-list-files-in-directorypy-learning-cost-41875)
-    - [`182.2658-quine-program.py`](#program-1822658-quine-programpy-learning-cost-45)
+    - [`182.2658-quine-program.py`](#program-1822658-quine-programpy-learning-cost-4546875)
     - [`183.3025-make-http-put-request.py`](#program-1833025-make-http-put-requestpy-learning-cost-809375)
     - [`184.2701-tomorrow.py`](#program-1842701-tomorrowpy-learning-cost-6875)
     - [`185.2820-execute-function-in-30-seconds.py`](#program-1852820-execute-function-in-30-secondspy-learning-cost-7125)
@@ -285,7 +285,7 @@
 
 ---
 
-### Program `002.1493-print-hello-10-times.py` (learning cost 6.1875)
+### Program `002.1493-print-hello-10-times.py` (learning cost 6.234375)
 
 ```python
 1   print("Hello\n" * 10)
@@ -299,13 +299,13 @@
 | 0.875 | `style/one_shot/flat` | 1 |
 | 0.9375 | `type/number/integer/literal` | 1 |
 | 0.875 | `type/number/magic` | 1 |
-| 0.9375 | `type/sequence/string/literal` | 1 |
+| 0.984375 | `type/sequence/string/literal/special/\n` | 1 |
 | 0 | `meta/program` | 1 |
 | 0 | `meta/sloc/1` | 1 |
 
 ---
 
-### Program `002.3117-print-hello-10-times.py` (learning cost 6.1875)
+### Program `002.3117-print-hello-10-times.py` (learning cost 6.234375)
 
 ```python
 1   print("Hello\n" * 10)
@@ -319,7 +319,7 @@
 | 0.875 | `style/one_shot/flat` | 1 |
 | 0.9375 | `type/number/integer/literal` | 1 |
 | 0.875 | `type/number/magic` | 1 |
-| 0.9375 | `type/sequence/string/literal` | 1 |
+| 0.984375 | `type/sequence/string/literal/special/\n` | 1 |
 | 0 | `meta/program` | 1 |
 | 0 | `meta/sloc/1` | 1 |
 
@@ -1583,7 +1583,7 @@
 
 ---
 
-### Program `048.0210-multi-line-string-literal.py` (learning cost 2.6875)
+### Program `048.0210-multi-line-string-literal.py` (learning cost 2.734375)
 
 ```python
 1   s = """Huey
@@ -1594,7 +1594,7 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.875 | `style/one_shot/flat` | 1-3 |
-| 0.9375 | `type/sequence/string/literal` | 3 |
+| 0.984375 | `type/sequence/string/literal/special/\n` | 3 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1-3 |
 | 0 | `meta/sloc/3` | 1-3 |
@@ -3851,7 +3851,7 @@
 
 ---
 
-### Program `147.2171-remove-all-non-ascii-characters.py` (learning cost 6.09375)
+### Program `147.2171-remove-all-non-ascii-characters.py` (learning cost 6.140625)
 
 ```python
 1   import re
@@ -3864,8 +3864,8 @@
 | 0.9375 | `def/import/standard/re` | 1 |
 | 0.75 | `style/one_liner` | 1-2 |
 | 0.875 | `style/one_shot/flat` | 1-2 |
-| 0.9375 | `type/sequence/string/literal` | 2 |
 | 0.96875 | `type/sequence/string/literal/empty` | 2 |
+| 0.984375 | `type/sequence/string/literal/special/\x` | 2 |
 | 0.875 | `var/assignment/single` | 2 |
 | 0 | `meta/program` | 1-2 |
 | 0 | `meta/sloc/2` | 1-2 |
@@ -4760,7 +4760,7 @@
 
 ---
 
-### Program `182.2658-quine-program.py` (learning cost 4.5)
+### Program `182.2658-quine-program.py` (learning cost 4.546875)
 
 ```python
 1   s = "s = %r\nprint(s%%s)"
@@ -4772,7 +4772,7 @@
 | 0.9375 | `call/function/builtin/print` | 2 |
 | 0.875 | `operator/arithmetic/modulo` | 2 |
 | 0.875 | `style/one_shot/flat` | 1-2 |
-| 0.9375 | `type/sequence/string/literal` | 1 |
+| 0.984375 | `type/sequence/string/literal/special/\n` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
 | 0 | `meta/program` | 1-2 |
 | 0 | `meta/sloc/2` | 1-2 |

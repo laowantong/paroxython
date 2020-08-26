@@ -260,6 +260,7 @@
 - slice_step
 - slice_upper
 - slide
+- special_literal_string
 - square_nested_for
 - string_formatting_operator
 - subscript_augmented_assignment

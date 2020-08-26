@@ -18,12 +18,12 @@ for i in range(10): # call_argument:10, external_free_call:range, for:i (-> +1),
 # ----------------------------------------------------------------------------------------
 # 002.1493-print-hello-10-times.py
 # ----------------------------------------------------------------------------------------
-print("Hello\n" * 10) # binary_operator:Mult, call_argument:, external_free_call:print, flat_style, free_call:print, free_call_without_result:print, literal:10, literal:Str, magic_number:10, node:BinOp, node:Call, node:Expr, node:Name, node:Num, node:Str, one_liner_style, one_shot_style, replication_operator:Str, whole_span:1
+print("Hello\n" * 10) # binary_operator:Mult, call_argument:, external_free_call:print, flat_style, free_call:print, free_call_without_result:print, literal:10, literal:Str, magic_number:10, node:BinOp, node:Call, node:Expr, node:Name, node:Num, node:Str, one_liner_style, one_shot_style, replication_operator:Str, special_literal_string:Hello\n, whole_span:1
 
 # ----------------------------------------------------------------------------------------
 # 002.3117-print-hello-10-times.py
 # ----------------------------------------------------------------------------------------
-print("Hello\n" * 10) # binary_operator:Mult, call_argument:, external_free_call:print, flat_style, free_call:print, free_call_without_result:print, literal:10, literal:Str, magic_number:10, node:BinOp, node:Call, node:Expr, node:Name, node:Num, node:Str, one_liner_style, one_shot_style, replication_operator:Str, whole_span:1
+print("Hello\n" * 10) # binary_operator:Mult, call_argument:, external_free_call:print, flat_style, free_call:print, free_call_without_result:print, literal:10, literal:Str, magic_number:10, node:BinOp, node:Call, node:Expr, node:Name, node:Num, node:Str, one_liner_style, one_shot_style, replication_operator:Str, special_literal_string:Hello\n, whole_span:1
 
 # ----------------------------------------------------------------------------------------
 # 003.0019-create-a-procedure.py
@@ -208,7 +208,7 @@ s = "{:.2f}".format(x) # assignment:format, assignment_lhs_identifier:s, assignm
 # ----------------------------------------------------------------------------------------
 # 024.0664-assign-to-string-the-japanese-word-.py
 # ----------------------------------------------------------------------------------------
-s = "ネコ" # assignment, assignment_lhs_identifier:s, flat_style, literal:Str, node:Assign, node:Name, node:Str, one_liner_style, one_shot_style, single_assignment:s, whole_span:1
+s = "ネコ" # assignment, assignment_lhs_identifier:s, flat_style, literal:Str, node:Assign, node:Name, node:Str, one_liner_style, one_shot_style, single_assignment:s, special_literal_string:ネコ, whole_span:1
 
 # ----------------------------------------------------------------------------------------
 # 025.0195-send-a-value-to-another-thread.py
@@ -419,7 +419,7 @@ t = s[-5:] # assignment, assignment_lhs_identifier:t, assignment_rhs_atom:-5, as
 # ----------------------------------------------------------------------------------------
 s = """Huey # assignment, assignment_lhs_identifier:s, flat_style (-> +2), node:Assign (-> +2), node:Name, one_shot_style (-> +2), single_assignment:s, whole_span:3 (-> +2)
 Dewey
-Louie""" # literal:Str, node:Str
+Louie""" # literal:Str, node:Str, special_literal_string:Huey\nDewey\nLouie
 
 # ----------------------------------------------------------------------------------------
 # 049.0242-split-a-space-separated-string.py
@@ -1105,7 +1105,7 @@ float("1.3") # call_argument:, external_free_call:float, flat_style, free_call:f
 # 147.2171-remove-all-non-ascii-characters.py
 # ----------------------------------------------------------------------------------------
 import re # flat_style (-> +1), import:re, import_module:re, node:Import, one_liner_style (-> +1), one_shot_style (-> +1), whole_span:2 (-> +1)
-t = re.sub("[^\u0000-\u007f]", "", s) # assignment:sub, assignment_lhs_identifier:t, assignment_rhs_atom:re, assignment_rhs_atom:s, call_argument:, call_argument:s, empty_literal:Str, literal:Str, member_call_method:sub, node:Assign, node:Attribute, node:Call, node:Name, node:Str, single_assignment:t
+t = re.sub("[^\u0000-\u007f]", "", s) # assignment:sub, assignment_lhs_identifier:t, assignment_rhs_atom:re, assignment_rhs_atom:s, call_argument:, call_argument:s, empty_literal:Str, literal:Str, member_call_method:sub, node:Assign, node:Attribute, node:Call, node:Name, node:Str, single_assignment:t, special_literal_string:[^\x00-\x7f]
 
 # ----------------------------------------------------------------------------------------
 # 148.1829-read-list-of-integer-numbers-from-stdin.py
@@ -1373,7 +1373,7 @@ x = os.listdir(d) # assignment:listdir, assignment_lhs_identifier:x, assignment_
 # ----------------------------------------------------------------------------------------
 # 182.2658-quine-program.py
 # ----------------------------------------------------------------------------------------
-s = "s = %r\nprint(s%%s)" # assignment, assignment_lhs_identifier:s, flat_style (-> +1), literal:Str, node:Assign, node:Name, node:Str, one_shot_style (-> +1), single_assignment:s, whole_span:2 (-> +1)
+s = "s = %r\nprint(s%%s)" # assignment, assignment_lhs_identifier:s, flat_style (-> +1), literal:Str, node:Assign, node:Name, node:Str, one_shot_style (-> +1), single_assignment:s, special_literal_string:s = %r\nprint(s%%s), whole_span:2 (-> +1)
 print(s % s) # binary_operator:Mod, call_argument:, external_free_call:print, free_call:print, free_call_without_result:print, modulo_operator, node:BinOp, node:Call, node:Expr, node:Name
 
 # ----------------------------------------------------------------------------------------

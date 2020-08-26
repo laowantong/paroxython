@@ -6,7 +6,7 @@ print("Hello, world!") # call_argument:, external_free_call:print, flat_style, f
 # ----------------------------------------------------------------------------------------
 # 02_input_name.py
 # ----------------------------------------------------------------------------------------
-name = input("What is your name?\n") # assignment:input, assignment_lhs_identifier:name, call_argument:, external_free_call:input, flat_style (-> +1), free_call:input, literal:Str, node:Assign, node:Call, node:Name, node:Str, one_shot_style (-> +1), single_assignment:name, whole_span:2 (-> +1)
+name = input("What is your name?\n") # assignment:input, assignment_lhs_identifier:name, call_argument:, external_free_call:input, flat_style (-> +1), free_call:input, literal:Str, node:Assign, node:Call, node:Name, node:Str, one_shot_style (-> +1), single_assignment:name, special_literal_string:What is your name?\n, whole_span:2 (-> +1)
 print("Hi, %s." % name) # binary_operator:Mod, call_argument:, external_free_call:print, free_call:print, free_call_without_result:print, literal:Str, node:BinOp, node:Call, node:Expr, node:Name, node:Str, string_formatting_operator
 
 # ----------------------------------------------------------------------------------------
@@ -38,7 +38,7 @@ greet("Bob") # call_argument:, free_call:greet, free_call_without_result:greet, 
 # ----------------------------------------------------------------------------------------
 import re # import:re, import_module:re, node:Import, one_shot_style (-> +5), whole_span:6 (-> +5)
 for test_string in ["555-1212", "ILL-EGAL"]: # for:test_string (-> +4), literal:List, literal:Str, loop:for (-> +4), loop_with_late_exit:for (-> +4), node:For (-> +4), node:List, node:Name, node:Str
-    if re.match(r"^\d{3}-\d{4}$", test_string): # call_argument:, call_argument:test_string, if (-> +3), if_test_atom:re, if_test_atom:test_string, literal:Str, member_call_method:match, node:Attribute, node:Call, node:If (-> +3), node:Name, node:Str
+    if re.match(r"^\d{3}-\d{4}$", test_string): # call_argument:, call_argument:test_string, if (-> +3), if_test_atom:re, if_test_atom:test_string, literal:Str, member_call_method:match, node:Attribute, node:Call, node:If (-> +3), node:Name, node:Str, special_literal_string:^\\d{3}-\\d{4}$
         print(test_string, "is a valid US local phone number") # call_argument:, call_argument:test_string, external_free_call:print, free_call:print, free_call_without_result:print, if_then_branch, literal:Str, node:Call, node:Expr, node:Name, node:Str
     else:
         print(test_string, "rejected") # call_argument:, call_argument:test_string, external_free_call:print, free_call:print, free_call_without_result:print, if_else_branch, literal:Str, node:Call, node:Expr, node:Name, node:Str
@@ -102,7 +102,7 @@ REFRAIN = """ # assignment, assignment_lhs_identifier:REFRAIN, node:Assign (-> +
 %d bottles of beer,
 take one down, pass it around,
 %d bottles of beer on the wall!
-""" # literal:Str, node:Str
+""" # literal:Str, node:Str, special_literal_string:\n%d bottles of beer on the wall,\n%d bottles of beer,\ntake one down, pass it around,\n%d bottles of beer on the wall!\n
 bottles_of_beer = 9 # assignment:9, assignment_lhs_identifier:bottles_of_beer, assignment_rhs_atom:9, literal:9, magic_number:9, node:Assign, node:Name, node:Num, single_assignment:bottles_of_beer
 while bottles_of_beer > 1: # comparison_operator:Gt, literal:1, loop:while (-> +2), loop_with_late_exit:while (-> +2), node:Compare, node:Name, node:Num, node:While (-> +2)
     print(REFRAIN % (bottles_of_beer, bottles_of_beer, bottles_of_beer - 1)) # binary_operator:Mod, binary_operator:Sub, call_argument:, external_free_call:print, free_call:print, free_call_without_result:print, literal:1, literal:Tuple, modulo_operator, node:BinOp, node:Call, node:Expr, node:Name, node:Num, node:Tuple
@@ -158,7 +158,7 @@ lines = """ # assignment:splitlines, assignment_lhs_identifier:lines, node:Assig
 This is the
 first paragraph.
 This is the second.
-""".splitlines() # literal:Str, member_call_method:splitlines, node:Attribute, node:Call, node:Str
+""".splitlines() # literal:Str, member_call_method:splitlines, node:Attribute, node:Call, node:Str, special_literal_string:\nThis is the\nfirst paragraph.\nThis is the second.\n
 for has_chars, frags in groupby(lines, bool): # call_argument:bool, call_argument:lines, external_free_call:groupby, for:frags (-> +2), for:has_chars (-> +2), free_call:groupby, literal:Tuple, loop:for (-> +2), loop_with_late_exit:for (-> +2), node:Call, node:For (-> +2), node:Name, node:Tuple
     if has_chars: # if (-> +1), if_without_else (-> +1), node:If (-> +1), node:Name
         print(" ".join(frags)) # call_argument:, call_argument:frags, composition, external_free_call:print, free_call:print, free_call_without_result:print, if_then_branch, literal:Str, member_call_method:join, node:Attribute, node:Call, node:Expr, node:Name, node:Str
@@ -233,7 +233,7 @@ dinner_recipe = """<html><body><table> # assignment, assignment_lhs_identifier:d
 <tr><td>2+</td><td>tbsp</td><td>olive oil</td></tr>
 <tr><td>1</td><td>cup</td><td>tomatoes</td></tr>
 <tr><td>1</td><td>jar</td><td>pesto</td></tr>
-</table></body></html>""" # literal:Str, node:Str
+</table></body></html>""" # literal:Str, node:Str, special_literal_string:<html><body><table>\n<tr><th>amt</th><th>unit</th><th>item</th></tr>\n<tr><td>24</td><td>slices</td><td>baguette</td></tr>\n<tr><td>2+</td><td>tbsp</td><td>olive oil</td></tr>\n<tr><td>1</td><td>cup</td><td>tomatoes</td></tr>\n<tr><td>1</td><td>jar</td><td>pesto</td></tr>\n</table></body></html>
 import xml.etree.ElementTree as etree # import:xml.etree.ElementTree, import_module:xml.etree.ElementTree, node:Import
 tree = etree.fromstring(dinner_recipe) # assignment:fromstring, assignment_lhs_identifier:tree, assignment_rhs_atom:dinner_recipe, assignment_rhs_atom:etree, call_argument:dinner_recipe, member_call_method:fromstring, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:tree
 pantry = {"olive oil", "pesto"} # assignment, assignment_lhs_identifier:pantry, literal:Set, literal:Str, node:Assign, node:Name, node:Set, node:Str, single_assignment:pantry
@@ -268,14 +268,14 @@ def add_queen(queens): # function:add_queen (-> +11), function_argument:queens, 
     raise BailOut # node:Name, node:Raise, raise:BailOut
 queens = add_queen([]) # assignment:add_queen, assignment_lhs_identifier:queens, call_argument:, empty_literal:List, free_call:add_queen, internal_free_call:add_queen, literal:List, node:Assign, node:Call, node:List, node:Name, single_assignment:queens
 print(queens) # call_argument:queens, external_free_call:print, free_call:print, free_call_without_result:print, node:Call, node:Expr, node:Name
-print("\n".join(". " * q + "Q " + ". " * (BOARD_SIZE - q - 1) for q in queens)) # binary_operator:Add, binary_operator:Mult, binary_operator:Sub, call_argument:, composition, comprehension:Generator, comprehension_for_count:1, concatenation_operator:Str, external_free_call:print, free_call:print, free_call_without_result:print, literal:1, literal:Str, member_call_method:join, node:Attribute, node:BinOp, node:Call, node:Expr, node:GeneratorExp, node:Name, node:Num, node:Str, replication_operator:Str
+print("\n".join(". " * q + "Q " + ". " * (BOARD_SIZE - q - 1) for q in queens)) # binary_operator:Add, binary_operator:Mult, binary_operator:Sub, call_argument:, composition, comprehension:Generator, comprehension_for_count:1, concatenation_operator:Str, external_free_call:print, free_call:print, free_call_without_result:print, literal:1, literal:Str, member_call_method:join, node:Attribute, node:BinOp, node:Call, node:Expr, node:GeneratorExp, node:Name, node:Num, node:Str, replication_operator:Str, special_literal_string:\n
 
 # ----------------------------------------------------------------------------------------
 # 33_guess_the_number.py
 # ----------------------------------------------------------------------------------------
 import random # import:random, import_module:random, node:Import, one_shot_style (-> +17), whole_span:18 (-> +17)
 guesses_made = 0 # assignment:0, assignment_lhs_identifier:guesses_made, assignment_rhs_atom:0, literal:0, node:Assign, node:Name, node:Num, single_assignment:guesses_made
-name = input("Hello! What is your name?\n") # assignment:input, assignment_lhs_identifier:name, call_argument:, external_free_call:input, free_call:input, literal:Str, node:Assign, node:Call, node:Name, node:Str, single_assignment:name
+name = input("Hello! What is your name?\n") # assignment:input, assignment_lhs_identifier:name, call_argument:, external_free_call:input, free_call:input, literal:Str, node:Assign, node:Call, node:Name, node:Str, single_assignment:name, special_literal_string:Hello! What is your name?\n
 number = random.randint(1, 20) # assignment:randint, assignment_lhs_identifier:number, assignment_rhs_atom:1, assignment_rhs_atom:20, assignment_rhs_atom:random, call_argument:1, call_argument:20, literal:1, literal:20, magic_number:20, member_call_method:randint, node:Assign, node:Attribute, node:Call, node:Name, node:Num, single_assignment:number
 print("Well, {}, I am thinking of a number between 1 and 20.".format(name)) # call_argument:, call_argument:name, composition, external_free_call:print, free_call:print, free_call_without_result:print, literal:Str, member_call_method:format, node:Attribute, node:Call, node:Expr, node:Name, node:Str
 while guesses_made < 6: # comparison_operator:Lt, count_states:guesses_made (-> +8), literal:6, loop:while (-> +8), loop_with_break:while (-> +8), loop_with_early_exit:while:break (-> +8), magic_number:6, node:Compare, node:Name, node:Num, node:While (-> +8)

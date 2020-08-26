@@ -190,13 +190,13 @@ This should print `"paroxython 0.4.5 loaded."`. Run it on a cell of Python code 
 As you can see, in this program, Paroxython identifies among others:
 
 - the use of the [procedural paradigm](https://en.wikipedia.org/wiki/Procedural_programming) (`style/procedural`);
-- an [impure](https://en.wikipedia.org/wiki/Pure_function) function;
+- an [impure](https://en.wikipedia.org/wiki/Pure_function) function (`def/function/impure`);
 - a `while` loop (`flow/loop/while`) with a late exit (`flow/loop/exit/late`);
 - a little bit of voodoo on lists (`type/sequence/list/literal/empty` and `call/method/sequence/list/append`);
 - a simple [tuple assignment](https://openbookproject.net/thinkcs/python/english3e/tuples.html#tuple-assignment) (`var/assignment/parallel`);
-- a “sliding” tuple assignment (`var/assignment/parallel/slide`). The denomination seems unique to us, but the pattern itself is found in a number of programs: implementations of [C-finite sequence](https://en.wikipedia.org/wiki/Constant-recursive_sequence) with C greater than 1, [Greatest Common Divisor](https://en.wikipedia.org/wiki/Greatest_common_divisor), [Quicksort](https://en.wikipedia.org/wiki/Quicksort), etc.
+- a “sliding” tuple assignment (`var/assignment/parallel/slide`). If the denomination is unique to us, the pattern itself occurs in a number of programs: implementations of [C-finite sequence](https://en.wikipedia.org/wiki/Constant-recursive_sequence) with C greater than 1, [Greatest Common Divisor](https://en.wikipedia.org/wiki/Greatest_common_divisor), [Quicksort](https://en.wikipedia.org/wiki/Quicksort), etc.
 
-The magic command `%%paroxython` (corresponding to the subcommand [`tag`](https://laowantong.github.io/paroxython/cli/cli_tag.html)) only scratches the surface of the possibilities offered by the system. As demonstrated previously, to estimate the learning cost of the features and get actionable recommendations, you will need to call [`collect`](https://laowantong.github.io/paroxython/cli/cli_collect.html) and [`recommend`](https://laowantong.github.io/paroxython/cli/cli_recommend.html) from the console.
+The magic command `%%paroxython` (corresponding to the subcommand [`tag`](https://laowantong.github.io/paroxython/cli/cli_tag.html)) only scratches the surface of the system. As demonstrated above, to estimate the learning cost of the features and get actionable recommendations, you will need to call [`collect`](https://laowantong.github.io/paroxython/cli/cli_collect.html) and [`recommend`](https://laowantong.github.io/paroxython/cli/cli_recommend.html) from the console.
 
 # Read them
 

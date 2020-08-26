@@ -5,6 +5,7 @@
   - [Literals](#literals)
       - [Feature `literal`](#feature-literal)
       - [Feature `empty_literal`](#feature-empty_literal)
+      - [Feature `special_literal_string`](#feature-special_literal_string)
       - [Feature `magic_number` (SQL)](#feature-magic_number)
   - [Subscripts](#subscripts)
       - [Feature `index`](#feature-index)
@@ -449,6 +450,48 @@ Generally speaking, all _falsey_ constants (i.e., whose [truth value](https://do
 | `empty_literal:Tuple` | 2 |
 | `empty_literal:List` | 3 |
 | `empty_literal:Dict` | 4 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `special_literal_string`
+
+Capture any literal string containing at least one character whose codepoint is not between 32 (space) and 126 (tilde).
+
+_Remark._ To match escape sequences in the pipeline, you must prefix the string with `r` **and** double the backslash. For instance, to keep only the programs featuring a literal `\n` (new line), write:
+
+```python
+    {
+        'operation': 'include',
+        'data': [
+            r"type/sequence/string/literal/special/\\n",
+        ],
+    },
+```
+
+##### Specification
+
+```re
+           ^(.*)/_type=Str
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
+\n(?:\1.+\n)*?\1/s=(?P<SUFFIX>.*?(\\\w|[^ -~\n]).*)
+```
+
+##### Example
+
+```python
+1   emoji = "😍"
+2   header = rf"Date\tStudent\tGrade\n"
+3   pound = "£"
+4   print("nothing special here!")
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `special_literal_string:Date\\tStudent\\tGrade\\n` | 2 |
+| `special_literal_string:£` | 3 |
+| `special_literal_string:😍` | 1 |
 
 --------------------------------------------------------------------------------
 

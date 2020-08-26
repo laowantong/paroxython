@@ -191,7 +191,8 @@
 | 0 | `style/one_shot` | 1-14 |
 | 0.4375 | `type/non_sequence/set/literal` | 10 |
 | 0 | `type/sequence/string` | 14 |
-| 0 | `type/sequence/string/literal` | 7, 10, 10, 11, 13, 14 |
+| 0 | `type/sequence/string/literal` | 10, 10, 11, 13, 14 |
+| 0 | `type/sequence/string/literal/special/\n` | 7 |
 | 0.1875 | `type/sequence/tuple/literal` | 12 |
 | 0.1875 | `var/assignment/parallel/more_than_two` | 12 |
 | 0 | `var/assignment/single` | 1, 9, 10 |
@@ -334,7 +335,8 @@
 | 0.46875 | `type/number/integer/literal/zero` | 2 |
 | 0.375 | `type/number/magic` | 4, 6 |
 | 0 | `type/sequence/string` | 5, 16, 18 |
-| 0 | `type/sequence/string/literal` | 3, 5, 7, 10, 12, 16, 18 |
+| 0 | `type/sequence/string/literal` | 5, 7, 10, 12, 16, 18 |
+| 0 | `type/sequence/string/literal/special/\n` | 3 |
 | 0.1875 | `var/assignment/augmented/Add` | 8 |
 | 0 | `var/assignment/single` | 2, 3, 4, 7 |
 | 0 | `meta/program` | 1-18 |
