@@ -145,7 +145,7 @@
 | 0 | `flow/loop/exit/late` | 4-7 |
 | 0 | `flow/loop/for` | 8-11 |
 | 0 | `flow/loop/while/infinite` | 4-7 |
-| 0.375 | `style/functional/filter` | 7 |
+| 0.375 | `style/functional_trait/filter` | 7 |
 | 0.25 | `style/procedural` | 1-11 |
 | 0.4375 | `type/boolean/literal/True` | 4 |
 | 0.4375 | `type/number/integer/literal` | 3, 9 |

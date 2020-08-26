@@ -27,7 +27,7 @@ while babies < 100: # comparison_operator:Lt, literal:100, loop:while (-> +2), l
 # ----------------------------------------------------------------------------------------
 # 05_greet.py
 # ----------------------------------------------------------------------------------------
-def greet(name): # function:greet (-> +1), function_argument:name, function_argument_flavor:arg, function_returning_nothing:greet (-> +1), node:FunctionDef (-> +1), node:arg, procedural_style (-> +4), whole_span:5 (-> +4)
+def greet(name): # function:greet (-> +1), function_argument:name, function_argument_flavor:arg, function_returning_nothing:greet (-> +1), impure_subroutine:greet (-> +1), node:FunctionDef (-> +1), node:arg, procedural_style (-> +4), whole_span:5 (-> +4)
     print("Hello", name) # call_argument:, call_argument:name, external_free_call:print, free_call:print, free_call_without_result:print, literal:Str, node:Call, node:Expr, node:Name, node:Str
 greet("Jack") # call_argument:, free_call:greet, free_call_without_result:greet, internal_free_call:greet, literal:Str, node:Call, node:Expr, node:Name, node:Str
 greet("Jill") # call_argument:, free_call:greet, free_call_without_result:greet, internal_free_call:greet, literal:Str, node:Call, node:Expr, node:Name, node:Str
@@ -128,7 +128,7 @@ print(my_account.balance, my_account.overdrawn()) # call_argument:, composition,
 # 13_unit_testing.py
 # ----------------------------------------------------------------------------------------
 import unittest # import:unittest, import_module:unittest, node:Import, object_oriented_style (-> +10), whole_span:11 (-> +10)
-def median(pool): # function:median (-> +6), function_argument:pool, function_argument_flavor:arg, function_returning_something:median (-> +6), node:FunctionDef (-> +6), node:arg
+def median(pool): # function:median (-> +6), function_argument:pool, function_argument_flavor:arg, function_returning_something:median (-> +6), impure_subroutine:median (-> +6), node:FunctionDef (-> +6), node:arg
     copy = sorted(pool) # assignment:sorted, assignment_lhs_identifier:copy, assignment_rhs_atom:pool, call_argument:pool, external_free_call:sorted, free_call:sorted, node:Assign, node:Call, node:Name, single_assignment:copy
     size = len(copy) # assignment:len, assignment_lhs_identifier:size, assignment_rhs_atom:copy, call_argument:copy, external_free_call:len, free_call:len, node:Assign, node:Call, node:Name, single_assignment:size
     if size % 2 == 1: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, if (-> +3), if_test_atom:1, if_test_atom:2, if_test_atom:size, literal:1, literal:2, modulo_operator, node:BinOp, node:Compare, node:If (-> +3), node:Name, node:Num
@@ -142,7 +142,7 @@ class TestMedian(unittest.TestCase): # node:Attribute, node:ClassDef (-> +2), no
 # ----------------------------------------------------------------------------------------
 # 14_median.py
 # ----------------------------------------------------------------------------------------
-def median(pool): # function:median (-> +6), function_argument:pool, function_argument_flavor:arg, function_returning_something:median (-> +6), node:FunctionDef (-> +6), node:arg, procedural_style (-> +6), whole_span:7 (-> +6)
+def median(pool): # function:median (-> +6), function_argument:pool, function_argument_flavor:arg, function_returning_something:median (-> +6), impure_subroutine:median (-> +6), node:FunctionDef (-> +6), node:arg, procedural_style (-> +6), whole_span:7 (-> +6)
     copy = sorted(pool) # assignment:sorted, assignment_lhs_identifier:copy, assignment_rhs_atom:pool, call_argument:pool, external_free_call:sorted, free_call:sorted, node:Assign, node:Call, node:Name, single_assignment:copy
     size = len(copy) # assignment:len, assignment_lhs_identifier:size, assignment_rhs_atom:copy, call_argument:copy, external_free_call:len, free_call:len, node:Assign, node:Call, node:Name, single_assignment:size
     if size % 2 == 1: # binary_operator:Mod, comparison_operator:Eq, divisibility_test:2, if (-> +3), if_test_atom:1, if_test_atom:2, if_test_atom:size, literal:1, literal:2, modulo_operator, node:BinOp, node:Compare, node:If (-> +3), node:Name, node:Num
@@ -167,7 +167,7 @@ for has_chars, frags in groupby(lines, bool): # call_argument:bool, call_argumen
 # 16_csv.py
 # ----------------------------------------------------------------------------------------
 import csv # import:csv, import_module:csv, node:Import, procedural_style (-> +17), whole_span:18 (-> +17)
-def cmp(a, b): # function:cmp (-> +1), function_argument:a, function_argument:b, function_argument_flavor:arg, function_returning_something:cmp (-> +1), node:FunctionDef (-> +1), node:arg
+def cmp(a, b): # function:cmp (-> +1), function_argument:a, function_argument:b, function_argument_flavor:arg, function_returning_something:cmp (-> +1), node:FunctionDef (-> +1), node:arg, pure_function:cmp (-> +1)
     return (a > b) - (a < b) # binary_operator:Sub, comparison_operator:Gt, comparison_operator:Lt, node:BinOp, node:Compare, node:Name, node:Return, return
 with open("stocks.csv", "w", newline="") as stocksFileW: # call_argument:, call_keyword_argument:newline, empty_literal:Str, external_free_call:open, free_call:open, literal:Str, node:Call, node:Name, node:Str, node:With (-> +6)
     writer = csv.writer(stocksFileW) # assignment:writer, assignment_lhs_identifier:writer, assignment_rhs_atom:csv, assignment_rhs_atom:stocksFileW, call_argument:stocksFileW, member_call_method:writer, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:writer
@@ -189,14 +189,14 @@ with open("stocks.csv", "r") as stocksFile: # call_argument:, external_free_call
 # 18_queens.py
 # ----------------------------------------------------------------------------------------
 BOARD_SIZE = 8 # assignment:8, assignment_lhs_identifier:BOARD_SIZE, assignment_rhs_atom:8, literal:8, node:Assign, node:Name, node:Num, procedural_style (-> +19), single_assignment:BOARD_SIZE, whole_span:20 (-> +19)
-def under_attack(col, queens): # function:under_attack (-> +6), function_argument:col, function_argument:queens, function_argument_flavor:arg, function_returning_something:under_attack (-> +6), node:FunctionDef (-> +6), node:arg
+def under_attack(col, queens): # function:under_attack (-> +6), function_argument:col, function_argument:queens, function_argument_flavor:arg, function_returning_something:under_attack (-> +6), impure_subroutine:under_attack (-> +6), node:FunctionDef (-> +6), node:arg
     left = right = col # assignment, assignment_lhs_identifier:left, assignment_lhs_identifier:right, assignment_rhs_atom:col, chained_assignment, node:Assign, node:Name
     for r, c in reversed(queens): # call_argument:queens, existential_quantification:c (-> +3), external_free_call:reversed, for:c (-> +3), for:r (-> +3), free_call:reversed, literal:Tuple, loop:for (-> +3), loop_with_early_exit:for:return (-> +3), loop_with_return:for (-> +3), node:Call, node:For (-> +3), node:Name, node:Tuple
         left, right = left - 1, right + 1 # addition_operator, assignment, assignment_lhs_identifier:left, assignment_lhs_identifier:right, assignment_rhs_atom:1, assignment_rhs_atom:left, assignment_rhs_atom:right, binary_operator:Add, binary_operator:Sub, literal:1, literal:Tuple, node:Assign, node:BinOp, node:Name, node:Num, node:Tuple, parallel_assignment:2, update:left:1, update:left:right, update:right:1, update:right:left, update_by_assignment:left:1, update_by_assignment:left:right, update_by_assignment:right:1, update_by_assignment:right:left, update_by_assignment_with, update_with
         if c in (left, col, right): # comparison_operator:In, if (-> +1), if_test_atom:c, if_test_atom:col, if_test_atom:left, if_test_atom:right, if_without_else (-> +1), literal:Tuple, node:Compare, node:If (-> +1), node:Name, node:Tuple
             return True # if_then_branch, literal:True, node:NameConstant, node:Return, return:True
     return False # literal:False, node:NameConstant, node:Return, return:False
-def solve(n): # body_recursive_function:solve (-> +8), function:solve (-> +8), function_argument:n, function_argument_flavor:arg, function_returning_something:solve (-> +8), node:FunctionDef (-> +8), node:arg, recursive_call_count:1 (-> +8), recursive_function:solve (-> +8)
+def solve(n): # body_recursive_function:solve (-> +8), function:solve (-> +8), function_argument:n, function_argument_flavor:arg, function_returning_something:solve (-> +8), impure_subroutine:solve (-> +8), node:FunctionDef (-> +8), node:arg, recursive_call_count:1 (-> +8), recursive_function:solve (-> +8)
     if n == 0: # comparison_operator:Eq, if (-> +1), if_guard (-> +1), if_test_atom:0, if_test_atom:n, if_without_else (-> +1), literal:0, node:Compare, node:If (-> +1), node:Name, node:Num
         return [[]] # empty_literal:List, if_then_branch, literal:List, node:List, node:Return, return
     smaller_solutions = solve(n - 1) # assignment:solve, assignment_lhs_identifier:smaller_solutions, assignment_rhs_atom:1, assignment_rhs_atom:n, binary_operator:Sub, call_argument:, free_call:solve, internal_free_call:solve, literal:1, node:Assign, node:BinOp, node:Call, node:Name, node:Num, single_assignment:smaller_solutions
@@ -213,7 +213,7 @@ for answer in solve(BOARD_SIZE): # call_argument:BOARD_SIZE, for:answer (-> +1),
 # 20_prime_numbers.py
 # ----------------------------------------------------------------------------------------
 import itertools # import:itertools, import_module:itertools, node:Import, procedural_style (-> +10), whole_span:11 (-> +10)
-def iter_primes(): # function:iter_primes (-> +5), function_without_arguments:iter_primes (-> +5), generator:iter_primes (-> +5), node:FunctionDef (-> +5)
+def iter_primes(): # function:iter_primes (-> +5), function_without_arguments:iter_primes (-> +5), generator:iter_primes (-> +5), impure_subroutine:iter_primes (-> +5), node:FunctionDef (-> +5)
     numbers = itertools.count(2) # assignment:count, assignment_lhs_identifier:numbers, assignment_rhs_atom:2, assignment_rhs_atom:itertools, call_argument:2, literal:2, member_call_method:count, node:Assign, node:Attribute, node:Call, node:Name, node:Num, single_assignment:numbers
     while True: # infinite_while (-> +3), literal:True, loop:while (-> +3), loop_with_late_exit:while (-> +3), node:NameConstant, node:While (-> +3)
         prime = next(numbers) # assignment:next, assignment_lhs_identifier:prime, assignment_rhs_atom:numbers, call_argument:numbers, external_free_call:next, free_call:next, node:Assign, node:Call, node:Name, single_assignment:prime
@@ -248,13 +248,13 @@ for ingredient in tree.getiterator("tr"): # call_argument:, for:ingredient (-> +
 BOARD_SIZE = 8 # assignment:8, assignment_lhs_identifier:BOARD_SIZE, assignment_rhs_atom:8, literal:8, node:Assign, node:Name, node:Num, object_oriented_style (-> +23), single_assignment:BOARD_SIZE, whole_span:24 (-> +23)
 class BailOut(Exception): # node:ClassDef (-> +1), node:Name
     pass # node:Pass
-def validate(queens): # function:validate (-> +5), function_argument:queens, function_argument_flavor:arg, function_returning_nothing:validate (-> +5), node:FunctionDef (-> +5), node:arg
+def validate(queens): # function:validate (-> +5), function_argument:queens, function_argument_flavor:arg, function_returning_nothing:validate (-> +5), impure_subroutine:validate (-> +5), node:FunctionDef (-> +5), node:arg
     left = right = col = queens[-1] # assignment, assignment_lhs_identifier:col, assignment_lhs_identifier:left, assignment_lhs_identifier:right, assignment_rhs_atom:-1, assignment_rhs_atom:queens, chained_assignment, index:-1, literal:-1, negative_index:-1, node:Assign, node:Name, node:Num, node:Subscript
     for r in reversed(queens[:-1]): # call_argument:, external_free_call:reversed, for:r (-> +3), free_call:reversed, literal:-1, loop:for (-> +3), loop_with_early_exit:for:raise (-> +3), loop_with_raise:for (-> +3), node:Call, node:For (-> +3), node:Name, node:Num, node:Subscript, slice::-1:, slice_lower:, slice_step:, slice_upper:-1
         left, right = left - 1, right + 1 # addition_operator, assignment, assignment_lhs_identifier:left, assignment_lhs_identifier:right, assignment_rhs_atom:1, assignment_rhs_atom:left, assignment_rhs_atom:right, binary_operator:Add, binary_operator:Sub, literal:1, literal:Tuple, node:Assign, node:BinOp, node:Name, node:Num, node:Tuple, parallel_assignment:2, update:left:1, update:left:right, update:right:1, update:right:left, update_by_assignment:left:1, update_by_assignment:left:right, update_by_assignment:right:1, update_by_assignment:right:left, update_by_assignment_with, update_with
         if r in (left, col, right): # comparison_operator:In, if (-> +1), if_test_atom:col, if_test_atom:left, if_test_atom:r, if_test_atom:right, if_without_else (-> +1), literal:Tuple, node:Compare, node:If (-> +1), node:Name, node:Tuple
             raise BailOut # if_then_branch, node:Name, node:Raise, raise:BailOut
-def add_queen(queens): # function:add_queen (-> +11), function_argument:queens, function_argument_flavor:arg, function_returning_something:add_queen (-> +11), node:FunctionDef (-> +11), node:arg, recursive_call_count:1 (-> +11), recursive_function:add_queen (-> +11), tail_recursive_function:add_queen (-> +11)
+def add_queen(queens): # function:add_queen (-> +11), function_argument:queens, function_argument_flavor:arg, function_returning_something:add_queen (-> +11), impure_subroutine:add_queen (-> +11), node:FunctionDef (-> +11), node:arg, recursive_call_count:1 (-> +11), recursive_function:add_queen (-> +11), tail_recursive_function:add_queen (-> +11)
     for i in range(BOARD_SIZE): # call_argument:BOARD_SIZE, external_free_call:range, for:i (-> +9), for_range:BOARD_SIZE (-> +9), free_call:range, loop:for (-> +9), loop_with_early_exit:for:return (-> +9), loop_with_return:for (-> +9), node:Call, node:For (-> +9), node:Name, range:BOARD_SIZE
         test_queens = queens + [i] # assignment:Add, assignment_lhs_identifier:test_queens, assignment_rhs_atom:i, assignment_rhs_atom:queens, binary_operator:Add, concatenation_operator:List, literal:List, node:Assign, node:BinOp, node:List, node:Name, single_assignment:test_queens
         try: # node:Try (-> +7), try_except:BailOut (-> +7)

@@ -45,6 +45,7 @@ def/decorated	decorated_function:.+
 def/function	function_returning_something:.+
 def/function/anonymous	node:Lambda
 def/function/predicate	function_returning_something:(is|are|has|have|can|must|needs)_.+
+def/function/pure	pure_function:.+
 def/generator	generator:.+
 def/higher_order	higher_order_function:.+
 def/import/personal	import_internally:.*
@@ -172,9 +173,10 @@ pattern/inputs/accumulate/count	count_inputs:.+
 pattern/inputs/find_first_good	get_valid_input:.+
 pattern/states/accumulate/count	count_states:.+
 style/functional	functional_style
-style/functional/\1	external_free_call:(map|filter|reduce|partial|accumulate)
-style/functional/higher_order	higher_order_function:.+
-style/functional/lambda	function
+style/functional_trait/\1	external_free_call:(map|filter|reduce|partial|accumulate)
+style/functional_trait/higher_order	higher_order_function:.+
+style/functional_trait/lambda	function
+style/functional_trait/pure_function	pure_function:.*
 style/object_oriented	object_oriented_style
 style/one_liner	one_liner_style
 style/one_shot	one_shot_style

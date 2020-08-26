@@ -70,6 +70,7 @@
 - import:fizzbuzz / is_even.py / 1
 - import_module:collatz / fizzbuzz.py / 1
 - import_module:fizzbuzz / is_even.py / 1
+- impure_subroutine:print_collatz / collatz.py / 1-8
 - literal:0 / collatz.py / 4
 - literal:0 / fizzbuzz.py / 3, 5, 7
 - literal:0 / is_even.py / 3
@@ -132,6 +133,7 @@
 - one_shot_style / assignment.py / 1
 - one_shot_style / fizzbuzz.py / 1-10
 - procedural_style / collatz.py / 1-8
+- pure_function:is_even / is_even.py / 2-3
 - range:1:101 / fizzbuzz.py / 2
 - return / is_even.py / 3
 - single_assignment:a / assignment.py / 1
@@ -216,6 +218,7 @@
 - import
 - import_module
 - import_name
+- impure_subroutine
 - increment
 - index
 - index_arithmetic
@@ -247,6 +250,7 @@
 - nested_index
 - object_oriented_style
 - parallel_assignment
+- pure_function
 - raise
 - range
 - recursive_call_count

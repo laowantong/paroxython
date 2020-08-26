@@ -186,6 +186,7 @@
         "function_argument:name": [[1,1]],
         "function_argument_flavor:arg": [[1,1]],
         "function_returning_nothing:finish": [[1,2]],
+        "impure_subroutine:finish": [[1,2]],
         "literal:Str": [[2,2]],
         "node:BinOp": [[2,2]],
         "node:Call": [[2,2]],
@@ -217,6 +218,7 @@
         "function:a": [[1,2]],
         "function_returning_nothing:a": [[1,2]],
         "function_without_arguments:a": [[1,2]],
+        "impure_subroutine:a": [[1,2]],
         "node:FunctionDef": [[1,2]],
         "node:Pass": [[2,2]],
         "one_liner_style": [[1,2]],
@@ -250,17 +252,19 @@
         "node:Return": [[2,2]],
         "node:arg": [[1,1]],
         "one_liner_style": [[1,2]],
+        "pure_function:square": [[1,2]],
         "return": [[2,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
         "def/argument/arg": [[1,1]],
-        "def/function": [[1,2]],
+        "def/function/pure": [[1,2]],
         "def/return/something": [[2,2]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
         "operator/arithmetic/multiplication": [[2,2]],
         "style/functional": [[1,2]],
+        "style/functional_trait/pure_function": [[1,2]],
         "style/one_liner": [[1,2]]
       }
     },
@@ -282,17 +286,19 @@
         "node:Return": [[2,2]],
         "node:arg": [[1,1]],
         "one_liner_style": [[1,2]],
+        "pure_function:square": [[1,2]],
         "return": [[2,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
         "def/argument/arg": [[1,1]],
-        "def/function": [[1,2]],
+        "def/function/pure": [[1,2]],
         "def/return/something": [[2,2]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
         "operator/arithmetic/power": [[2,2]],
         "style/functional": [[1,2]],
+        "style/functional_trait/pure_function": [[1,2]],
         "style/one_liner": [[1,2]],
         "type/number/integer/literal": [[2,2]]
       }
@@ -669,6 +675,7 @@
         "node:Return": [[3,3]],
         "node:arg": [[2,2],[2,2]],
         "one_liner_style": [[1,3]],
+        "pure_function:pick": [[2,3]],
         "return": [[3,3]],
         "whole_span:3": [[1,3]]
       },
@@ -676,12 +683,13 @@
         "call/method": [[3,3]],
         "call/method/random/randrange": [[3,3]],
         "def/argument/arg": [[2,2],[2,2]],
-        "def/function": [[2,3]],
+        "def/function/pure": [[2,3]],
         "def/import/standard/random": [[1,1]],
         "def/return/something": [[3,3]],
         "meta/program": [[1,3]],
         "meta/sloc/3": [[1,3]],
         "style/functional": [[1,3]],
+        "style/functional_trait/pure_function": [[2,3]],
         "style/one_liner": [[1,3]]
       }
     },
@@ -770,6 +778,7 @@
         "if_test_atom:bt": [[2,2]],
         "if_then_branch": [[3,3]],
         "if_without_else": [[2,3]],
+        "impure_subroutine:dfs": [[1,6]],
         "internal_free_call:dfs": [[4,4],[6,6]],
         "literal:None": [[2,2]],
         "node:Attribute": [[4,4],[6,6]],
@@ -871,6 +880,7 @@
         "function_argument_flavor:arg": [[1,1],[1,1]],
         "function_returning_nothing:DFS": [[1,4]],
         "higher_order_function:f": [[1,4]],
+        "impure_subroutine:DFS": [[1,4]],
         "internal_free_call:DFS": [[4,4]],
         "loop:for": [[3,4]],
         "loop_with_late_exit:for": [[3,4]],
@@ -897,7 +907,7 @@
         "flow/loop/for/elements": [[3,4]],
         "meta/program": [[1,4]],
         "meta/sloc/4": [[1,4]],
-        "style/functional/higher_order": [[1,4]],
+        "style/functional_trait/higher_order": [[1,4]],
         "style/procedural": [[1,4]]
       }
     },
@@ -1009,6 +1019,7 @@
         "if_test_atom:x": [[3,3]],
         "if_then_branch": [[4,4]],
         "if_without_else": [[3,4]],
+        "impure_subroutine:search": [[1,4]],
         "literal:Tuple": [[2,2],[4,4]],
         "loop:for": [[2,4]],
         "loop_with_early_exit:for:return": [[2,4]],
@@ -1498,6 +1509,7 @@
         "node:Num": [[2,2],[3,3],[5,5]],
         "node:Return": [[3,3],[5,5]],
         "node:arg": [[1,1]],
+        "pure_function:f": [[1,5]],
         "recursive_call_count:1": [[1,5]],
         "recursive_function:f": [[1,5]],
         "return": [[5,5]],
@@ -1508,7 +1520,7 @@
         "call/function": [[5,5]],
         "condition/equality": [[2,2]],
         "def/argument/arg": [[1,1]],
-        "def/function": [[1,5]],
+        "def/function/pure": [[1,5]],
         "def/recursive/body": [[1,5]],
         "def/recursive/call_count/1": [[1,5]],
         "def/return/something": [[5,5]],
@@ -1519,6 +1531,7 @@
         "operator/arithmetic/multiplication": [[5,5]],
         "operator/arithmetic/substraction": [[5,5]],
         "style/functional": [[1,5]],
+        "style/functional_trait/pure_function": [[1,5]],
         "type/number/integer/literal": [[3,3],[5,5]],
         "type/number/integer/literal/zero": [[2,2]]
       }
@@ -1540,17 +1553,19 @@
         "node:Return": [[2,2]],
         "node:arg": [[1,1],[1,1]],
         "one_liner_style": [[1,2]],
+        "pure_function:exp": [[1,2]],
         "return": [[2,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
         "def/argument/arg": [[1,1],[1,1]],
-        "def/function": [[1,2]],
+        "def/function/pure": [[1,2]],
         "def/return/something": [[2,2]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
         "operator/arithmetic/power": [[2,2]],
         "style/functional": [[1,2]],
+        "style/functional_trait/pure_function": [[1,2]],
         "style/one_liner": [[1,2]]
       }
     },
@@ -1660,6 +1675,7 @@
         "node:Return": [[2,2]],
         "node:arg": [[1,1],[1,1],[2,2]],
         "one_liner_style": [[1,2]],
+        "pure_function:compose": [[1,2]],
         "return": [[2,2]],
         "whole_span:2": [[1,2]]
       },
@@ -1667,13 +1683,15 @@
         "call/composition": [[2,2]],
         "call/function": [[2,2],[2,2]],
         "def/argument/arg": [[1,1],[1,1],[2,2]],
-        "def/function": [[1,2]],
         "def/function/anonymous": [[2,2]],
+        "def/function/pure": [[1,2]],
         "def/higher_order": [[1,2]],
         "def/return/something": [[2,2]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
-        "style/functional/higher_order": [[1,2]],
+        "style/functional": [[1,2]],
+        "style/functional_trait/higher_order": [[1,2]],
+        "style/functional_trait/pure_function": [[1,2]],
         "style/one_liner": [[1,2]]
       }
     },
@@ -1704,6 +1722,7 @@
         "node:Return": [[2,2]],
         "node:arg": [[1,1],[1,1],[2,2]],
         "one_liner_style": [[1,2]],
+        "pure_function:compose": [[1,2]],
         "return": [[2,2]],
         "whole_span:2": [[1,2]]
       },
@@ -1711,13 +1730,15 @@
         "call/composition": [[2,2]],
         "call/function": [[2,2],[2,2]],
         "def/argument/arg": [[1,1],[1,1],[2,2]],
-        "def/function": [[1,2]],
         "def/function/anonymous": [[2,2]],
+        "def/function/pure": [[1,2]],
         "def/higher_order": [[1,2]],
         "def/return/something": [[2,2]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
-        "style/functional/higher_order": [[1,2]],
+        "style/functional": [[1,2]],
+        "style/functional_trait/higher_order": [[1,2]],
+        "style/functional_trait/pure_function": [[1,2]],
         "style/one_liner": [[1,2]]
       }
     },
@@ -1760,6 +1781,8 @@
         "node:Num": [[6,6],[6,6]],
         "node:Return": [[4,4],[5,5]],
         "node:arg": [[2,2],[3,3]],
+        "pure_function:add": [[3,4]],
+        "pure_function:f": [[2,5]],
         "return": [[4,4]],
         "return:add": [[5,5]],
         "whole_span:6": [[1,6]]
@@ -1769,7 +1792,7 @@
         "call/function": [[6,6]],
         "call/function/builtin/print": [[6,6]],
         "def/argument/arg": [[2,2],[3,3]],
-        "def/function": [[2,5],[3,4]],
+        "def/function/pure": [[2,5],[3,4]],
         "def/import/standard/functools/partial": [[1,1]],
         "def/nested/closure": [[2,5]],
         "def/return/something": [[4,4]],
@@ -1777,6 +1800,7 @@
         "meta/sloc/6": [[1,6]],
         "operator/arithmetic/addition": [[4,4]],
         "style/functional": [[1,6]],
+        "style/functional_trait/pure_function": [[2,5],[3,4]],
         "type/number/integer/literal": [[6,6],[6,6]]
       }
     },
@@ -2230,6 +2254,7 @@
         "if_test_atom:value": [[4,4]],
         "if_then_branch": [[5,5]],
         "if_without_else": [[4,5]],
+        "impure_subroutine:loop_breaking": [[1,6]],
         "internal_free_call:loop_breaking": [[7,7]],
         "literal:1": [[7,7]],
         "literal:2": [[7,7]],
@@ -2622,7 +2647,7 @@
         "call/method/sequence/string/join": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
-        "style/functional/map": [[1,1]],
+        "style/functional_trait/map": [[1,1]],
         "style/one_liner": [[1,1]],
         "style/one_shot/flat": [[1,1]],
         "type/sequence/string": [[1,1]],
@@ -2713,6 +2738,7 @@
         "import:multiprocessing:Pool": [[1,1]],
         "import_module:multiprocessing": [[1,1]],
         "import_name:Pool": [[1,1]],
+        "impure_subroutine:f": [[2,3]],
         "literal:1": [[5,5]],
         "literal:1001": [[5,5]],
         "literal:Str": [[6,6]],
@@ -2778,7 +2804,7 @@
         "call/function/builtin/filter": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
-        "style/functional/filter": [[1,1]],
+        "style/functional_trait/filter": [[1,1]],
         "style/one_liner": [[1,1]],
         "style/one_shot/flat": [[1,1]],
         "var/assignment/single": [[1,1]]
@@ -3133,13 +3159,14 @@
         "node:Return": [[3,3]],
         "node:arg": [[2,2],[2,2]],
         "one_liner_style": [[1,3]],
+        "pure_function:binom": [[2,3]],
         "return": [[3,3]],
         "whole_span:3": [[1,3]]
       },
       "taxa": {
         "call/method": [[3,3],[3,3],[3,3]],
         "def/argument/arg": [[2,2],[2,2]],
-        "def/function": [[2,3]],
+        "def/function/pure": [[2,3]],
         "def/import/standard/math": [[1,1]],
         "def/return/something": [[3,3]],
         "meta/program": [[1,3]],
@@ -3147,6 +3174,7 @@
         "operator/arithmetic/integer_division": [[3,3],[3,3]],
         "operator/arithmetic/substraction": [[3,3]],
         "style/functional": [[1,3]],
+        "style/functional_trait/pure_function": [[2,3]],
         "style/one_liner": [[1,3]]
       }
     },
@@ -3345,6 +3373,7 @@
         "node:Name": [[2,2],[2,2],[2,2],[3,3],[3,3]],
         "node:Return": [[3,3]],
         "node:arg": [[1,1],[1,1]],
+        "pure_function:fact": [[1,3]],
         "return": [[3,3]],
         "whole_span:3": [[1,3]]
       },
@@ -3352,13 +3381,15 @@
         "call/function": [[3,3]],
         "call/function/builtin/issubclass": [[2,2]],
         "def/argument/arg": [[1,1],[1,1]],
-        "def/function": [[1,3]],
+        "def/function/pure": [[1,3]],
         "def/higher_order": [[1,3]],
         "def/return/something": [[3,3]],
         "flow/conditional/no_else": [[2,3]],
         "meta/program": [[1,3]],
         "meta/sloc/3": [[1,3]],
-        "style/functional/higher_order": [[1,3]]
+        "style/functional": [[1,3]],
+        "style/functional_trait/higher_order": [[1,3]],
+        "style/functional_trait/pure_function": [[1,3]]
       }
     },
     "074.0674-compute-gcd.py": {
@@ -3763,15 +3794,17 @@
         "node:Return": [[2,2]],
         "node:arg": [[1,1],[1,1]],
         "one_liner_style": [[1,2]],
+        "pure_function:adding_will_overflow": [[1,2]],
         "return:False": [[2,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
         "def/argument/arg": [[1,1],[1,1]],
-        "def/function": [[1,2]],
+        "def/function/pure": [[1,2]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
         "style/functional": [[1,2]],
+        "style/functional_trait/pure_function": [[1,2]],
         "style/one_liner": [[1,2]],
         "type/boolean/literal/False": [[2,2]]
       }
@@ -3792,15 +3825,17 @@
         "node:Return": [[2,2]],
         "node:arg": [[1,1],[1,1]],
         "one_liner_style": [[1,2]],
+        "pure_function:multiplyWillOverflow": [[1,2]],
         "return:False": [[2,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
         "def/argument/arg": [[1,1],[1,1]],
-        "def/function": [[1,2]],
+        "def/function/pure": [[1,2]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
         "style/functional": [[1,2]],
+        "style/functional_trait/pure_function": [[1,2]],
         "style/one_liner": [[1,2]],
         "type/boolean/literal/False": [[2,2]]
       }
@@ -4047,20 +4082,22 @@
         "node:Return": [[3,3]],
         "node:arg": [[2,2]],
         "one_liner_style": [[1,3]],
+        "pure_function:control": [[2,3]],
         "return": [[3,3]],
         "whole_span:3": [[1,3]]
       },
       "taxa": {
         "call/function/without_arguments": [[3,3]],
         "def/argument/arg": [[2,2]],
-        "def/function": [[2,3]],
+        "def/function/pure": [[2,3]],
         "def/higher_order": [[2,3]],
         "def/import/standard/__future__/print_function": [[1,1]],
         "def/return/something": [[3,3]],
         "meta/program": [[1,3]],
         "meta/sloc/3": [[1,3]],
         "style/functional": [[1,3]],
-        "style/functional/higher_order": [[2,3]],
+        "style/functional_trait/higher_order": [[2,3]],
+        "style/functional_trait/pure_function": [[2,3]],
         "style/one_liner": [[1,3]]
       }
     },
@@ -5416,6 +5453,7 @@
         "function_returning_something:binarySearch": [[2,4]],
         "import:bisect": [[1,1]],
         "import_module:bisect": [[1,1]],
+        "impure_subroutine:binarySearch": [[2,4]],
         "index:i": [[4,4]],
         "literal:-1": [[4,4]],
         "member_call_method:bisect_left": [[3,3]],
@@ -5521,16 +5559,18 @@
         "node:Str": [[2,2]],
         "node:Tuple": [[2,2]],
         "one_liner_style": [[1,2]],
+        "pure_function:foo": [[1,2]],
         "return": [[2,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
         "def/argument/no": [[1,2]],
-        "def/function": [[1,2]],
+        "def/function/pure": [[1,2]],
         "def/return/something": [[2,2]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
         "style/functional": [[1,2]],
+        "style/functional_trait/pure_function": [[1,2]],
         "style/one_liner": [[1,2]],
         "type/boolean/literal/True": [[2,2]],
         "type/sequence/string/literal": [[2,2]],
@@ -5605,6 +5645,7 @@
         "if_test_atom:n": [[7,7]],
         "if_then_branch": [[8,9]],
         "if_without_else": [[7,9]],
+        "impure_subroutine:BFS": [[1,9]],
         "literal:0": [[4,4]],
         "literal:List": [[2,2]],
         "literal:True": [[8,8]],
@@ -5654,7 +5695,7 @@
         "meta/program": [[1,9]],
         "meta/sloc/9": [[1,9]],
         "operator/boolean/not": [[7,7]],
-        "style/functional/higher_order": [[1,9]],
+        "style/functional_trait/higher_order": [[1,9]],
         "style/procedural": [[1,9]],
         "type/boolean/literal/True": [[8,8]],
         "type/number/integer/literal/zero": [[4,4]],
@@ -5700,6 +5741,7 @@
         "import:collections:deque": [[1,1]],
         "import_module:collections": [[1,1]],
         "import_name:deque": [[1,1]],
+        "impure_subroutine:breadth_first": [[2,9]],
         "literal:List": [[4,4]],
         "loop:while": [[5,9]],
         "loop_with_late_exit:while": [[5,9]],
@@ -5748,7 +5790,7 @@
         "flow/loop/while": [[5,9]],
         "meta/program": [[1,9]],
         "meta/sloc/9": [[1,9]],
-        "style/functional/higher_order": [[2,9]],
+        "style/functional_trait/higher_order": [[2,9]],
         "style/procedural": [[1,9]],
         "type/non_sequence/set": [[3,3],[8,8]],
         "type/sequence/list": [[9,9]],
@@ -5786,6 +5828,7 @@
         "function_argument_flavor:arg": [[1,1],[1,1]],
         "function_returning_nothing:depth_first": [[1,8]],
         "higher_order_function:f": [[1,8]],
+        "impure_subroutine:depth_first": [[1,8]],
         "literal:List": [[3,3]],
         "loop:while": [[4,8]],
         "loop_with_late_exit:while": [[4,8]],
@@ -5832,7 +5875,7 @@
         "flow/loop/while": [[4,8]],
         "meta/program": [[1,8]],
         "meta/sloc/8": [[1,8]],
-        "style/functional/higher_order": [[1,8]],
+        "style/functional_trait/higher_order": [[1,8]],
         "style/procedural": [[1,8]],
         "type/non_sequence/set": [[2,2],[7,7]],
         "type/sequence/list": [[5,5],[8,8]],
@@ -6562,7 +6605,7 @@
         "call/method/sequence/string/split": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
-        "style/functional/map": [[1,1]],
+        "style/functional_trait/map": [[1,1]],
         "style/one_liner": [[1,1]],
         "style/one_shot/flat": [[1,1]],
         "type/sequence/list": [[1,1]],
@@ -7332,6 +7375,7 @@
         "import:itertools:tee": [[1,1]],
         "import_module:itertools": [[1,1]],
         "import_name:tee": [[1,1]],
+        "impure_subroutine:pairwise": [[2,5]],
         "internal_free_call:pairwise": [[6,6]],
         "literal:None": [[4,4]],
         "literal:Tuple": [[3,3],[6,6]],
@@ -12721,6 +12765,42 @@
     "import_name:timedelta": [
       "184.2701-tomorrow.py"
     ],
+    "impure_subroutine:BFS": [
+      "128.2085-breadth-first-traversing-of-a-tree.py"
+    ],
+    "impure_subroutine:DFS": [
+      "018.2084-depth-first-traversing-of-a-tree.py"
+    ],
+    "impure_subroutine:a": [
+      "003.2372-create-a-procedure.py"
+    ],
+    "impure_subroutine:binarySearch": [
+      "124.2152-binary-search-for-a-value-in-sorted-array.py"
+    ],
+    "impure_subroutine:breadth_first": [
+      "129.2282-breadth-first-traversing-in-a-graph.py"
+    ],
+    "impure_subroutine:depth_first": [
+      "130.2283-depth-first-traversing-in-a-graph.py"
+    ],
+    "impure_subroutine:dfs": [
+      "016.1530-depth-first-traversing-of-a-binary-tree.py"
+    ],
+    "impure_subroutine:f": [
+      "056.1424-launch-1000-parallel-tasks-and-wait-for-completion.py"
+    ],
+    "impure_subroutine:finish": [
+      "003.0019-create-a-procedure.py"
+    ],
+    "impure_subroutine:loop_breaking": [
+      "043.2733-break-outer-loop.py"
+    ],
+    "impure_subroutine:pairwise": [
+      "163.3177-print-list-elements-by-group-of-2.py"
+    ],
+    "impure_subroutine:search": [
+      "020.0573-return-two-values.py"
+    ],
     "index:-1": [
       "165.2149-last-element-of-list.py"
     ],
@@ -15579,6 +15659,45 @@
       "130.2283-depth-first-traversing-in-a-graph.py",
       "163.3177-print-list-elements-by-group-of-2.py"
     ],
+    "pure_function:add": [
+      "037.0671-currying.py"
+    ],
+    "pure_function:adding_will_overflow": [
+      "085.1003-check-if-integer-addition-will-overflow.py"
+    ],
+    "pure_function:binom": [
+      "067.1426-binomial-coefficient-n-choose-k.py"
+    ],
+    "pure_function:compose": [
+      "035.0667-first-class-function--compose.py",
+      "036.0670-first-class-function--generic-composition.py"
+    ],
+    "pure_function:control": [
+      "093.1082-pass-a-runnable-procedure-as-parameter.py"
+    ],
+    "pure_function:exp": [
+      "032.0196-integer-exponentiation-by-squaring.py"
+    ],
+    "pure_function:f": [
+      "031.0188-recursive-factorial-simple.py",
+      "037.0671-currying.py"
+    ],
+    "pure_function:fact": [
+      "073.0673-create-a-factory.py"
+    ],
+    "pure_function:foo": [
+      "126.2137-multiple-return-values.py"
+    ],
+    "pure_function:multiplyWillOverflow": [
+      "086.1004-check-if-integer-multiplication-will-overflow.py"
+    ],
+    "pure_function:pick": [
+      "014.0185-pick-uniformly-a-random-floating-point-number-in-ab.py"
+    ],
+    "pure_function:square": [
+      "004.0024-create-a-function-which-returns-the-square-of-an-integer.py",
+      "004.2921-create-a-function-which-returns-the-square-of-an-integer.py"
+    ],
     "raise:BreakOuterLoop": [
       "043.0676-break-outer-loop.py"
     ],
@@ -17111,24 +17230,10 @@
       "154.2292-halfway-between-two-hex-color-codes.py"
     ],
     "def/function": [
-      "004.0024-create-a-function-which-returns-the-square-of-an-integer.py",
-      "004.2921-create-a-function-which-returns-the-square-of-an-integer.py",
-      "014.0185-pick-uniformly-a-random-floating-point-number-in-ab.py",
       "020.0573-return-two-values.py",
-      "031.0188-recursive-factorial-simple.py",
-      "032.0196-integer-exponentiation-by-squaring.py",
-      "035.0667-first-class-function--compose.py",
-      "036.0670-first-class-function--generic-composition.py",
-      "037.0671-currying.py",
       "043.2733-break-outer-loop.py",
-      "067.1426-binomial-coefficient-n-choose-k.py",
-      "073.0673-create-a-factory.py",
-      "085.1003-check-if-integer-addition-will-overflow.py",
-      "086.1004-check-if-integer-multiplication-will-overflow.py",
       "090.1099-read-only-outside.py",
-      "093.1082-pass-a-runnable-procedure-as-parameter.py",
       "124.2152-binary-search-for-a-value-in-sorted-array.py",
-      "126.2137-multiple-return-values.py",
       "154.2292-halfway-between-two-hex-color-codes.py",
       "163.3177-print-list-elements-by-group-of-2.py",
       "187.3261-disjoint-set.py"
@@ -17140,6 +17245,22 @@
     ],
     "def/function/predicate": [
       "187.3261-disjoint-set.py"
+    ],
+    "def/function/pure": [
+      "004.0024-create-a-function-which-returns-the-square-of-an-integer.py",
+      "004.2921-create-a-function-which-returns-the-square-of-an-integer.py",
+      "014.0185-pick-uniformly-a-random-floating-point-number-in-ab.py",
+      "031.0188-recursive-factorial-simple.py",
+      "032.0196-integer-exponentiation-by-squaring.py",
+      "035.0667-first-class-function--compose.py",
+      "036.0670-first-class-function--generic-composition.py",
+      "037.0671-currying.py",
+      "067.1426-binomial-coefficient-n-choose-k.py",
+      "073.0673-create-a-factory.py",
+      "085.1003-check-if-integer-addition-will-overflow.py",
+      "086.1004-check-if-integer-multiplication-will-overflow.py",
+      "093.1082-pass-a-runnable-procedure-as-parameter.py",
+      "126.2137-multiple-return-values.py"
     ],
     "def/higher_order": [
       "018.2084-depth-first-traversing-of-a-tree.py",
@@ -18119,17 +18240,20 @@
       "014.0185-pick-uniformly-a-random-floating-point-number-in-ab.py",
       "031.0188-recursive-factorial-simple.py",
       "032.0196-integer-exponentiation-by-squaring.py",
+      "035.0667-first-class-function--compose.py",
+      "036.0670-first-class-function--generic-composition.py",
       "037.0671-currying.py",
       "067.1426-binomial-coefficient-n-choose-k.py",
+      "073.0673-create-a-factory.py",
       "085.1003-check-if-integer-addition-will-overflow.py",
       "086.1004-check-if-integer-multiplication-will-overflow.py",
       "093.1082-pass-a-runnable-procedure-as-parameter.py",
       "126.2137-multiple-return-values.py"
     ],
-    "style/functional/filter": [
+    "style/functional_trait/filter": [
       "057.0260-filter-list.py"
     ],
-    "style/functional/higher_order": [
+    "style/functional_trait/higher_order": [
       "018.2084-depth-first-traversing-of-a-tree.py",
       "035.0667-first-class-function--compose.py",
       "036.0670-first-class-function--generic-composition.py",
@@ -18139,9 +18263,25 @@
       "129.2282-breadth-first-traversing-in-a-graph.py",
       "130.2283-depth-first-traversing-in-a-graph.py"
     ],
-    "style/functional/map": [
+    "style/functional_trait/map": [
       "053.1933-join-a-list-of-strings.py",
       "148.1829-read-list-of-integer-numbers-from-stdin.py"
+    ],
+    "style/functional_trait/pure_function": [
+      "004.0024-create-a-function-which-returns-the-square-of-an-integer.py",
+      "004.2921-create-a-function-which-returns-the-square-of-an-integer.py",
+      "014.0185-pick-uniformly-a-random-floating-point-number-in-ab.py",
+      "031.0188-recursive-factorial-simple.py",
+      "032.0196-integer-exponentiation-by-squaring.py",
+      "035.0667-first-class-function--compose.py",
+      "036.0670-first-class-function--generic-composition.py",
+      "037.0671-currying.py",
+      "067.1426-binomial-coefficient-n-choose-k.py",
+      "073.0673-create-a-factory.py",
+      "085.1003-check-if-integer-addition-will-overflow.py",
+      "086.1004-check-if-integer-multiplication-will-overflow.py",
+      "093.1082-pass-a-runnable-procedure-as-parameter.py",
+      "126.2137-multiple-return-values.py"
     ],
     "style/object_oriented": [
       "005.0663-create-a-2d-point-data-structure.py",

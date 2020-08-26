@@ -7,8 +7,8 @@
     - [`002.3117-print-hello-10-times.py`](#program-0023117-print-hello-10-timespy-learning-cost-61875)
     - [`003.0019-create-a-procedure.py`](#program-0030019-create-a-procedurepy-learning-cost-5875)
     - [`003.2372-create-a-procedure.py`](#program-0032372-create-a-procedurepy-learning-cost-3875)
-    - [`004.0024-create-a-function-which-returns-the-square-of-an-integer.py`](#program-0040024-create-a-function-which-returns-the-square-of-an-integerpy-learning-cost-4875)
-    - [`004.2921-create-a-function-which-returns-the-square-of-an-integer.py`](#program-0042921-create-a-function-which-returns-the-square-of-an-integerpy-learning-cost-58125)
+    - [`004.0024-create-a-function-which-returns-the-square-of-an-integer.py`](#program-0040024-create-a-function-which-returns-the-square-of-an-integerpy-learning-cost-5875)
+    - [`004.2921-create-a-function-which-returns-the-square-of-an-integer.py`](#program-0042921-create-a-function-which-returns-the-square-of-an-integerpy-learning-cost-68125)
     - [`005.0663-create-a-2d-point-data-structure.py`](#program-0050663-create-a-2d-point-data-structurepy-learning-cost-246875)
     - [`006.0032-iterate-over-list-values.py`](#program-0060032-iterate-over-list-valuespy-learning-cost-3375)
     - [`007.0183-iterate-over-list-indexes-and-values.py`](#program-0070183-iterate-over-list-indexes-and-valuespy-learning-cost-63125)
@@ -20,7 +20,7 @@
     - [`011.0047-pick-a-random-element-from-a-list.py`](#program-0110047-pick-a-random-element-from-a-listpy-learning-cost-425)
     - [`012.0181-check-if-list-contains-a-value.py`](#program-0120181-check-if-list-contains-a-valuepy-learning-cost-2375)
     - [`013.0574-iterate-over-map-keys-and-values.py`](#program-0130574-iterate-over-map-keys-and-valuespy-learning-cost-628125)
-    - [`014.0185-pick-uniformly-a-random-floating-point-number-in-ab.py`](#program-0140185-pick-uniformly-a-random-floating-point-number-in-abpy-learning-cost-6625)
+    - [`014.0185-pick-uniformly-a-random-floating-point-number-in-ab.py`](#program-0140185-pick-uniformly-a-random-floating-point-number-in-abpy-learning-cost-7625)
     - [`014.3410-pick-uniformly-a-random-floating-point-number-in-ab.py`](#program-0143410-pick-uniformly-a-random-floating-point-number-in-abpy-learning-cost-425)
     - [`015.0184-pick-uniformly-a-random-integer-in-ab.py`](#program-0150184-pick-uniformly-a-random-integer-in-abpy-learning-cost-425)
     - [`016.1530-depth-first-traversing-of-a-binary-tree.py`](#program-0161530-depth-first-traversing-of-a-binary-treepy-learning-cost-91875)
@@ -41,13 +41,13 @@
     - [`028.0350-sort-by-a-property.py`](#program-0280350-sort-by-a-propertypy-learning-cost-51875)
     - [`029.0199-remove-item-from-list-by-its-index.py`](#program-0290199-remove-item-from-list-by-its-indexpy-learning-cost-3125)
     - [`030.0189-parallelize-execution-of-1000-independent-tasks.py`](#program-0300189-parallelize-execution-of-1000-independent-taskspy-learning-cost-98125)
-    - [`031.0188-recursive-factorial-simple.py`](#program-0310188-recursive-factorial-simplepy-learning-cost-1184375)
-    - [`032.0196-integer-exponentiation-by-squaring.py`](#program-0320196-integer-exponentiation-by-squaringpy-learning-cost-4875)
+    - [`031.0188-recursive-factorial-simple.py`](#program-0310188-recursive-factorial-simplepy-learning-cost-1284375)
+    - [`032.0196-integer-exponentiation-by-squaring.py`](#program-0320196-integer-exponentiation-by-squaringpy-learning-cost-5875)
     - [`033.1420-atomically-read-and-update-variable.py`](#program-0331420-atomically-read-and-update-variablepy-learning-cost-41875)
     - [`034.0625-create-a-set-of-objects.py`](#program-0340625-create-a-set-of-objectspy-learning-cost-659375)
-    - [`035.0667-first-class-function--compose.py`](#program-0350667-first-class-function--composepy-learning-cost-725)
-    - [`036.0670-first-class-function--generic-composition.py`](#program-0360670-first-class-function--generic-compositionpy-learning-cost-725)
-    - [`037.0671-currying.py`](#program-0370671-curryingpy-learning-cost-934375)
+    - [`035.0667-first-class-function--compose.py`](#program-0350667-first-class-function--composepy-learning-cost-90)
+    - [`036.0670-first-class-function--generic-composition.py`](#program-0360670-first-class-function--generic-compositionpy-learning-cost-90)
+    - [`037.0671-currying.py`](#program-0370671-curryingpy-learning-cost-1034375)
     - [`038.0186-extract-a-substring.py`](#program-0380186-extract-a-substringpy-learning-cost-425)
     - [`039.0571-check-if-string-contains-a-word.py`](#program-0390571-check-if-string-contains-a-wordpy-learning-cost-325)
     - [`040.2279-graph-with-adjacency-lists.py`](#program-0402279-graph-with-adjacency-listspy-learning-cost-2175)
@@ -82,12 +82,12 @@
     - [`064.0274-big-integer--value-3-power-247.py`](#program-0640274-big-integer--value-3-power-247py-learning-cost-51875)
     - [`065.1085-format-decimal-number.py`](#program-0651085-format-decimal-numberpy-learning-cost-528125)
     - [`066.0672-big-integer-exponentiation.py`](#program-0660672-big-integer-exponentiationpy-learning-cost-3375)
-    - [`067.1426-binomial-coefficient-n-choose-k.py`](#program-0671426-binomial-coefficient-n-choose-kpy-learning-cost-74375)
+    - [`067.1426-binomial-coefficient-n-choose-k.py`](#program-0671426-binomial-coefficient-n-choose-kpy-learning-cost-84375)
     - [`068.2271-create-a-bitset.py`](#program-0682271-create-a-bitsetpy-learning-cost-1140625)
     - [`069.1086-seed-random-generator.py`](#program-0691086-seed-random-generatorpy-learning-cost-34375)
     - [`070.1087-use-clock-as-random-generator-seed.py`](#program-0701087-use-clock-as-random-generator-seedpy-learning-cost-34375)
     - [`071.0379-echo-program-implementation.py`](#program-0710379-echo-program-implementationpy-learning-cost-884375)
-    - [`073.0673-create-a-factory.py`](#program-0730673-create-a-factorypy-learning-cost-66875)
+    - [`073.0673-create-a-factory.py`](#program-0730673-create-a-factorypy-learning-cost-84375)
     - [`074.0674-compute-gcd.py`](#program-0740674-compute-gcdpy-learning-cost-421875)
     - [`075.0675-compute-lcm.py`](#program-0750675-compute-lcmpy-learning-cost-596875)
     - [`076.1083-binary-digits-from-an-integer.py`](#program-0761083-binary-digits-from-an-integerpy-learning-cost-528125)
@@ -99,15 +99,15 @@
     - [`082.1096-count-substring-occurrences.py`](#program-0821096-count-substring-occurrencespy-learning-cost-41875)
     - [`083.1805-regex-with-character-repetition.py`](#program-0831805-regex-with-character-repetitionpy-learning-cost-5125)
     - [`084.1940-count-bits-set-in-integer-binary-representation.py`](#program-0841940-count-bits-set-in-integer-binary-representationpy-learning-cost-60625)
-    - [`085.1003-check-if-integer-addition-will-overflow.py`](#program-0851003-check-if-integer-addition-will-overflowpy-learning-cost-40625)
-    - [`086.1004-check-if-integer-multiplication-will-overflow.py`](#program-0861004-check-if-integer-multiplication-will-overflowpy-learning-cost-40625)
+    - [`085.1003-check-if-integer-addition-will-overflow.py`](#program-0851003-check-if-integer-addition-will-overflowpy-learning-cost-50625)
+    - [`086.1004-check-if-integer-multiplication-will-overflow.py`](#program-0861004-check-if-integer-multiplication-will-overflowpy-learning-cost-50625)
     - [`087.1139-stop-program.py`](#program-0871139-stop-programpy-learning-cost-51875)
     - [`088.2143-allocate-1m-bytes.py`](#program-0882143-allocate-1m-bytespy-learning-cost-528125)
     - [`089.1097-handle-invalid-argument.py`](#program-0891097-handle-invalid-argumentpy-learning-cost-35)
     - [`090.1099-read-only-outside.py`](#program-0901099-read-only-outsidepy-learning-cost-9125)
     - [`091.1098-load-json-file-into-struct.py`](#program-0911098-load-json-file-into-structpy-learning-cost-53125)
     - [`092.1100-save-object-into-json-file.py`](#program-0921100-save-object-into-json-filepy-learning-cost-5375)
-    - [`093.1082-pass-a-runnable-procedure-as-parameter.py`](#program-0931082-pass-a-runnable-procedure-as-parameterpy-learning-cost-746875)
+    - [`093.1082-pass-a-runnable-procedure-as-parameter.py`](#program-0931082-pass-a-runnable-procedure-as-parameterpy-learning-cost-846875)
     - [`094.1101-print-type-of-variable.py`](#program-0941101-print-type-of-variablepy-learning-cost-425)
     - [`094.1864-print-type-of-variable.py`](#program-0941864-print-type-of-variablepy-learning-cost-25625)
     - [`095.2140-get-file-size.py`](#program-0952140-get-file-sizepy-learning-cost-41875)
@@ -145,7 +145,7 @@
     - [`123.2146-assert-condition.py`](#program-1232146-assert-conditionpy-learning-cost-1625)
     - [`124.2152-binary-search-for-a-value-in-sorted-array.py`](#program-1242152-binary-search-for-a-value-in-sorted-arraypy-learning-cost-116875)
     - [`125.2167-measure-function-call-duration.py`](#program-1252167-measure-function-call-durationpy-learning-cost-70625)
-    - [`126.2137-multiple-return-values.py`](#program-1262137-multiple-return-valuespy-learning-cost-68125)
+    - [`126.2137-multiple-return-values.py`](#program-1262137-multiple-return-valuespy-learning-cost-78125)
     - [`127.2274-source-code-inclusion.py`](#program-1272274-source-code-inclusionpy-learning-cost-60625)
     - [`128.2085-breadth-first-traversing-of-a-tree.py`](#program-1282085-breadth-first-traversing-of-a-treepy-learning-cost-17375)
     - [`129.2282-breadth-first-traversing-in-a-graph.py`](#program-1292282-breadth-first-traversing-in-a-graphpy-learning-cost-165)
@@ -365,7 +365,7 @@
 
 ---
 
-### Program `004.0024-create-a-function-which-returns-the-square-of-an-integer.py` (learning cost 4.875)
+### Program `004.0024-create-a-function-which-returns-the-square-of-an-integer.py` (learning cost 5.875)
 
 ```python
 1   def square(x):
@@ -375,17 +375,18 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.875 | `def/argument/arg` | 1 |
-| 0.75 | `def/function` | 1-2 |
+| 0.875 | `def/function/pure` | 1-2 |
 | 0.875 | `def/return/something` | 2 |
 | 0.875 | `operator/arithmetic/multiplication` | 2 |
 | 0.75 | `style/functional` | 1-2 |
+| 0.875 | `style/functional_trait/pure_function` | 1-2 |
 | 0.75 | `style/one_liner` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 | 0 | `meta/sloc/2` | 1-2 |
 
 ---
 
-### Program `004.2921-create-a-function-which-returns-the-square-of-an-integer.py` (learning cost 5.8125)
+### Program `004.2921-create-a-function-which-returns-the-square-of-an-integer.py` (learning cost 6.8125)
 
 ```python
 1   def square(x):
@@ -395,10 +396,11 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.875 | `def/argument/arg` | 1 |
-| 0.75 | `def/function` | 1-2 |
+| 0.875 | `def/function/pure` | 1-2 |
 | 0.875 | `def/return/something` | 2 |
 | 0.875 | `operator/arithmetic/power` | 2 |
 | 0.75 | `style/functional` | 1-2 |
+| 0.875 | `style/functional_trait/pure_function` | 1-2 |
 | 0.75 | `style/one_liner` | 1-2 |
 | 0.9375 | `type/number/integer/literal` | 2 |
 | 0 | `meta/program` | 1-2 |
@@ -626,7 +628,7 @@
 
 ---
 
-### Program `014.0185-pick-uniformly-a-random-floating-point-number-in-ab.py` (learning cost 6.625)
+### Program `014.0185-pick-uniformly-a-random-floating-point-number-in-ab.py` (learning cost 7.625)
 
 ```python
 1   import random
@@ -639,10 +641,11 @@
 | 0.75 | `call/method` | 3 |
 | 0.9375 | `call/method/random/randrange` | 3 |
 | 0.875 | `def/argument/arg` | 2, 2 |
-| 0.75 | `def/function` | 2-3 |
+| 0.875 | `def/function/pure` | 2-3 |
 | 0.9375 | `def/import/standard/random` | 1 |
 | 0.875 | `def/return/something` | 3 |
 | 0.75 | `style/functional` | 1-3 |
+| 0.875 | `style/functional_trait/pure_function` | 2-3 |
 | 0.75 | `style/one_liner` | 1-3 |
 | 0 | `meta/program` | 1-3 |
 | 0 | `meta/sloc/3` | 1-3 |
@@ -762,7 +765,7 @@
 | 0.9375 | `def/recursive/call_count/1` | 1-4 |
 | 0.9375 | `flow/loop/exit/late` | 3-4 |
 | 0.9375 | `flow/loop/for/elements` | 3-4 |
-| 0.875 | `style/functional/higher_order` | 1-4 |
+| 0.875 | `style/functional_trait/higher_order` | 1-4 |
 | 0.75 | `style/procedural` | 1-4 |
 | 0 | `meta/program` | 1-4 |
 | 0 | `meta/sloc/4` | 1-4 |
@@ -1066,7 +1069,7 @@
 
 ---
 
-### Program `031.0188-recursive-factorial-simple.py` (learning cost 11.84375)
+### Program `031.0188-recursive-factorial-simple.py` (learning cost 12.84375)
 
 ```python
 1   def f(i):
@@ -1081,7 +1084,7 @@
 | 0.75 | `call/function` | 5 |
 | 0.75 | `condition/equality` | 2 |
 | 0.875 | `def/argument/arg` | 1 |
-| 0.75 | `def/function` | 1-5 |
+| 0.875 | `def/function/pure` | 1-5 |
 | 0.875 | `def/recursive/body` | 1-5 |
 | 0.9375 | `def/recursive/call_count/1` | 1-5 |
 | 0.875 | `def/return/something` | 5 |
@@ -1090,6 +1093,7 @@
 | 0.875 | `operator/arithmetic/multiplication` | 5 |
 | 0.875 | `operator/arithmetic/substraction` | 5 |
 | 0.75 | `style/functional` | 1-5 |
+| 0.875 | `style/functional_trait/pure_function` | 1-5 |
 | 0.9375 | `type/number/integer/literal` | 3, 5 |
 | 0.96875 | `type/number/integer/literal/zero` | 2 |
 | 0 | `meta/program` | 1-5 |
@@ -1097,7 +1101,7 @@
 
 ---
 
-### Program `032.0196-integer-exponentiation-by-squaring.py` (learning cost 4.875)
+### Program `032.0196-integer-exponentiation-by-squaring.py` (learning cost 5.875)
 
 ```python
 1   def exp(x, n):
@@ -1107,10 +1111,11 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.875 | `def/argument/arg` | 1, 1 |
-| 0.75 | `def/function` | 1-2 |
+| 0.875 | `def/function/pure` | 1-2 |
 | 0.875 | `def/return/something` | 2 |
 | 0.875 | `operator/arithmetic/power` | 2 |
 | 0.75 | `style/functional` | 1-2 |
+| 0.875 | `style/functional_trait/pure_function` | 1-2 |
 | 0.75 | `style/one_liner` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 | 0 | `meta/sloc/2` | 1-2 |
@@ -1164,7 +1169,7 @@
 
 ---
 
-### Program `035.0667-first-class-function--compose.py` (learning cost 7.25)
+### Program `035.0667-first-class-function--compose.py` (learning cost 9.0)
 
 ```python
 1   def compose(f, g):
@@ -1176,18 +1181,20 @@
 | 0.75 | `call/composition` | 2 |
 | 0.75 | `call/function` | 2, 2 |
 | 0.875 | `def/argument/arg` | 1, 1, 2 |
-| 0.75 | `def/function` | 1-2 |
 | 0.875 | `def/function/anonymous` | 2 |
+| 0.875 | `def/function/pure` | 1-2 |
 | 0.75 | `def/higher_order` | 1-2 |
 | 0.875 | `def/return/something` | 2 |
-| 0.875 | `style/functional/higher_order` | 1-2 |
+| 0.75 | `style/functional` | 1-2 |
+| 0.875 | `style/functional_trait/higher_order` | 1-2 |
+| 0.875 | `style/functional_trait/pure_function` | 1-2 |
 | 0.75 | `style/one_liner` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 | 0 | `meta/sloc/2` | 1-2 |
 
 ---
 
-### Program `036.0670-first-class-function--generic-composition.py` (learning cost 7.25)
+### Program `036.0670-first-class-function--generic-composition.py` (learning cost 9.0)
 
 ```python
 1   def compose(f, g):
@@ -1199,18 +1206,20 @@
 | 0.75 | `call/composition` | 2 |
 | 0.75 | `call/function` | 2, 2 |
 | 0.875 | `def/argument/arg` | 1, 1, 2 |
-| 0.75 | `def/function` | 1-2 |
 | 0.875 | `def/function/anonymous` | 2 |
+| 0.875 | `def/function/pure` | 1-2 |
 | 0.75 | `def/higher_order` | 1-2 |
 | 0.875 | `def/return/something` | 2 |
-| 0.875 | `style/functional/higher_order` | 1-2 |
+| 0.75 | `style/functional` | 1-2 |
+| 0.875 | `style/functional_trait/higher_order` | 1-2 |
+| 0.875 | `style/functional_trait/pure_function` | 1-2 |
 | 0.75 | `style/one_liner` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 | 0 | `meta/sloc/2` | 1-2 |
 
 ---
 
-### Program `037.0671-currying.py` (learning cost 9.34375)
+### Program `037.0671-currying.py` (learning cost 10.34375)
 
 ```python
 1   from functools import partial
@@ -1227,12 +1236,13 @@
 | 0.75 | `call/function` | 6 |
 | 0.9375 | `call/function/builtin/print` | 6 |
 | 0.875 | `def/argument/arg` | 2, 3 |
-| 0.75 | `def/function` | 2-5, 3-4 |
+| 0.875 | `def/function/pure` | 2-5, 3-4 |
 | 0.96875 | `def/import/standard/functools/partial` | 1 |
 | 0.875 | `def/nested/closure` | 2-5 |
 | 0.875 | `def/return/something` | 4 |
 | 0.875 | `operator/arithmetic/addition` | 4 |
 | 0.75 | `style/functional` | 1-6 |
+| 0.875 | `style/functional_trait/pure_function` | 2-5, 3-4 |
 | 0.9375 | `type/number/integer/literal` | 6, 6 |
 | 0 | `meta/program` | 1-6 |
 | 0 | `meta/sloc/6` | 1-6 |
@@ -1692,7 +1702,7 @@
 | 0.75 | `call/composition` | 1 |
 | 0.9375 | `call/function/builtin/map` | 1 |
 | 0.96875 | `call/method/sequence/string/join` | 1 |
-| 0.875 | `style/functional/map` | 1 |
+| 0.875 | `style/functional_trait/map` | 1 |
 | 0.75 | `style/one_liner` | 1 |
 | 0.875 | `style/one_shot/flat` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
@@ -1777,7 +1787,7 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.9375 | `call/function/builtin/filter` | 1 |
-| 0.875 | `style/functional/filter` | 1 |
+| 0.875 | `style/functional_trait/filter` | 1 |
 | 0.75 | `style/one_liner` | 1 |
 | 0.875 | `style/one_shot/flat` | 1 |
 | 0.875 | `var/assignment/single` | 1 |
@@ -1970,7 +1980,7 @@
 
 ---
 
-### Program `067.1426-binomial-coefficient-n-choose-k.py` (learning cost 7.4375)
+### Program `067.1426-binomial-coefficient-n-choose-k.py` (learning cost 8.4375)
 
 ```python
 1   import math
@@ -1982,12 +1992,13 @@
 |----|----|----|
 | 0.75 | `call/method` | 3, 3, 3 |
 | 0.875 | `def/argument/arg` | 2, 2 |
-| 0.75 | `def/function` | 2-3 |
+| 0.875 | `def/function/pure` | 2-3 |
 | 0.9375 | `def/import/standard/math` | 1 |
 | 0.875 | `def/return/something` | 3 |
 | 0.875 | `operator/arithmetic/integer_division` | 3, 3 |
 | 0.875 | `operator/arithmetic/substraction` | 3 |
 | 0.75 | `style/functional` | 1-3 |
+| 0.875 | `style/functional_trait/pure_function` | 2-3 |
 | 0.75 | `style/one_liner` | 1-3 |
 | 0 | `meta/program` | 1-3 |
 | 0 | `meta/sloc/3` | 1-3 |
@@ -2082,7 +2093,7 @@
 
 ---
 
-### Program `073.0673-create-a-factory.py` (learning cost 6.6875)
+### Program `073.0673-create-a-factory.py` (learning cost 8.4375)
 
 ```python
 1   def fact(a_class, str_):
@@ -2095,11 +2106,13 @@
 | 0.75 | `call/function` | 3 |
 | 0.9375 | `call/function/builtin/issubclass` | 2 |
 | 0.875 | `def/argument/arg` | 1, 1 |
-| 0.75 | `def/function` | 1-3 |
+| 0.875 | `def/function/pure` | 1-3 |
 | 0.75 | `def/higher_order` | 1-3 |
 | 0.875 | `def/return/something` | 3 |
 | 0.875 | `flow/conditional/no_else` | 2-3 |
-| 0.875 | `style/functional/higher_order` | 1-3 |
+| 0.75 | `style/functional` | 1-3 |
+| 0.875 | `style/functional_trait/higher_order` | 1-3 |
+| 0.875 | `style/functional_trait/pure_function` | 1-3 |
 | 0 | `meta/program` | 1-3 |
 | 0 | `meta/sloc/3` | 1-3 |
 
@@ -2322,7 +2335,7 @@
 
 ---
 
-### Program `085.1003-check-if-integer-addition-will-overflow.py` (learning cost 4.0625)
+### Program `085.1003-check-if-integer-addition-will-overflow.py` (learning cost 5.0625)
 
 ```python
 1   def adding_will_overflow(x, y):
@@ -2332,8 +2345,9 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.875 | `def/argument/arg` | 1, 1 |
-| 0.75 | `def/function` | 1-2 |
+| 0.875 | `def/function/pure` | 1-2 |
 | 0.75 | `style/functional` | 1-2 |
+| 0.875 | `style/functional_trait/pure_function` | 1-2 |
 | 0.75 | `style/one_liner` | 1-2 |
 | 0.9375 | `type/boolean/literal/False` | 2 |
 | 0 | `meta/program` | 1-2 |
@@ -2341,7 +2355,7 @@
 
 ---
 
-### Program `086.1004-check-if-integer-multiplication-will-overflow.py` (learning cost 4.0625)
+### Program `086.1004-check-if-integer-multiplication-will-overflow.py` (learning cost 5.0625)
 
 ```python
 1   def multiplyWillOverflow(x, y):
@@ -2351,8 +2365,9 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.875 | `def/argument/arg` | 1, 1 |
-| 0.75 | `def/function` | 1-2 |
+| 0.875 | `def/function/pure` | 1-2 |
 | 0.75 | `style/functional` | 1-2 |
+| 0.875 | `style/functional_trait/pure_function` | 1-2 |
 | 0.75 | `style/one_liner` | 1-2 |
 | 0.9375 | `type/boolean/literal/False` | 2 |
 | 0 | `meta/program` | 1-2 |
@@ -2487,7 +2502,7 @@
 
 ---
 
-### Program `093.1082-pass-a-runnable-procedure-as-parameter.py` (learning cost 7.46875)
+### Program `093.1082-pass-a-runnable-procedure-as-parameter.py` (learning cost 8.46875)
 
 ```python
 1   from __future__ import print_function
@@ -2499,12 +2514,13 @@
 |----|----|----|
 | 0.875 | `call/function/without_arguments` | 3 |
 | 0.875 | `def/argument/arg` | 2 |
-| 0.75 | `def/function` | 2-3 |
+| 0.875 | `def/function/pure` | 2-3 |
 | 0.75 | `def/higher_order` | 2-3 |
 | 0.96875 | `def/import/standard/__future__/print_function` | 1 |
 | 0.875 | `def/return/something` | 3 |
 | 0.75 | `style/functional` | 1-3 |
-| 0.875 | `style/functional/higher_order` | 2-3 |
+| 0.875 | `style/functional_trait/higher_order` | 2-3 |
+| 0.875 | `style/functional_trait/pure_function` | 2-3 |
 | 0.75 | `style/one_liner` | 1-3 |
 | 0 | `meta/program` | 1-3 |
 | 0 | `meta/sloc/3` | 1-3 |
@@ -3296,7 +3312,7 @@
 
 ---
 
-### Program `126.2137-multiple-return-values.py` (learning cost 6.8125)
+### Program `126.2137-multiple-return-values.py` (learning cost 7.8125)
 
 ```python
 1   def foo():
@@ -3306,9 +3322,10 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.875 | `def/argument/no` | 1-2 |
-| 0.75 | `def/function` | 1-2 |
+| 0.875 | `def/function/pure` | 1-2 |
 | 0.875 | `def/return/something` | 2 |
 | 0.75 | `style/functional` | 1-2 |
+| 0.875 | `style/functional_trait/pure_function` | 1-2 |
 | 0.75 | `style/one_liner` | 1-2 |
 | 0.9375 | `type/boolean/literal/True` | 2 |
 | 0.9375 | `type/sequence/string/literal` | 2 |
@@ -3366,7 +3383,7 @@
 | 0.9375 | `flow/loop/for/elements` | 6-9 |
 | 0.875 | `flow/loop/while` | 3-9 |
 | 0.875 | `operator/boolean/not` | 7 |
-| 0.875 | `style/functional/higher_order` | 1-9 |
+| 0.875 | `style/functional_trait/higher_order` | 1-9 |
 | 0.75 | `style/procedural` | 1-9 |
 | 0.9375 | `type/boolean/literal/True` | 8 |
 | 0.96875 | `type/number/integer/literal/zero` | 4 |
@@ -3409,7 +3426,7 @@
 | 0.75 | `def/procedure` | 2-9 |
 | 0.9375 | `flow/loop/exit/late` | 5-9 |
 | 0.875 | `flow/loop/while` | 5-9 |
-| 0.875 | `style/functional/higher_order` | 2-9 |
+| 0.875 | `style/functional_trait/higher_order` | 2-9 |
 | 0.75 | `style/procedural` | 1-9 |
 | 0.875 | `type/non_sequence/set` | 3, 8 |
 | 0.875 | `type/sequence/list` | 9 |
@@ -3447,7 +3464,7 @@
 | 0.75 | `def/procedure` | 1-8 |
 | 0.9375 | `flow/loop/exit/late` | 4-8 |
 | 0.875 | `flow/loop/while` | 4-8 |
-| 0.875 | `style/functional/higher_order` | 1-8 |
+| 0.875 | `style/functional_trait/higher_order` | 1-8 |
 | 0.75 | `style/procedural` | 1-8 |
 | 0.875 | `type/non_sequence/set` | 2, 7 |
 | 0.875 | `type/sequence/list` | 5, 8 |
@@ -3869,7 +3886,7 @@
 | 0.9375 | `call/function/builtin/map` | 1 |
 | 0.875 | `call/function/without_arguments` | 1 |
 | 0.96875 | `call/method/sequence/string/split` | 1 |
-| 0.875 | `style/functional/map` | 1 |
+| 0.875 | `style/functional_trait/map` | 1 |
 | 0.75 | `style/one_liner` | 1 |
 | 0.875 | `style/one_shot/flat` | 1 |
 | 0.875 | `type/sequence/list` | 1 |

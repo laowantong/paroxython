@@ -20,6 +20,7 @@ def print_collatz(n): # added_block_label (-> +7)
                       # function_argument:n
                       # function_argument_flavor:arg
                       # function_returning_nothing:print_collatz (-> +7)
+                      # impure_subroutine:print_collatz (-> +7)
                       # node:FunctionDef (-> +7)
                       # node:arg
                       # procedural_style (-> +7)
@@ -233,6 +234,7 @@ def is_even(n): # function:is_even (-> +1)
                 # function_returning_something:is_even (-> +1)
                 # node:FunctionDef (-> +1)
                 # node:arg
+                # pure_function:is_even (-> +1)
     return n % 2 == 0 # binary_operator:Mod
                       # comparison_operator:Eq
                       # divisibility_test:2

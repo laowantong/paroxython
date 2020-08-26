@@ -206,6 +206,7 @@
         "function_argument:name": [[1,1]],
         "function_argument_flavor:arg": [[1,1]],
         "function_returning_nothing:greet": [[1,2]],
+        "impure_subroutine:greet": [[1,2]],
         "internal_free_call:greet": [[3,3],[4,4],[5,5]],
         "literal:Str": [[2,2],[3,3],[4,4],[5,5]],
         "node:Call": [[2,2],[3,3],[4,4],[5,5]],
@@ -792,6 +793,7 @@
         "if_then_branch": [[6,6]],
         "import:unittest": [[1,1]],
         "import_module:unittest": [[1,1]],
+        "impure_subroutine:median": [[2,8]],
         "index:_": [[6,6],[8,8],[8,8]],
         "instance_method:testMedian": [[10,11]],
         "internal_free_call:median": [[11,11]],
@@ -904,6 +906,7 @@
         "if_test_atom:2": [[4,4]],
         "if_test_atom:size": [[4,4]],
         "if_then_branch": [[5,5]],
+        "impure_subroutine:median": [[1,7]],
         "index:_": [[5,5],[7,7],[7,7]],
         "literal:1": [[4,4],[5,5],[7,7]],
         "literal:2": [[4,4],[5,5],[7,7],[7,7],[7,7]],
@@ -1124,6 +1127,7 @@
         "node:With": [[4,10],[13,18]],
         "node:arg": [[2,2],[2,2]],
         "procedural_style": [[1,18]],
+        "pure_function:cmp": [[2,3]],
         "return": [[3,3]],
         "single_assignment:status": [[17,17]],
         "single_assignment:status_labels": [[15,15]],
@@ -1141,7 +1145,7 @@
         "call/method/sequence/string/format": [[18,18]],
         "condition/inequality": [[3,3],[3,3]],
         "def/argument/arg": [[2,2],[2,2]],
-        "def/function": [[2,3]],
+        "def/function/pure": [[2,3]],
         "def/import/standard/csv": [[1,1]],
         "def/return/something": [[3,3]],
         "flow/loop/exit/late": [[16,18]],
@@ -1149,6 +1153,7 @@
         "meta/program": [[1,18]],
         "meta/sloc/18": [[1,18]],
         "operator/arithmetic/substraction": [[3,3]],
+        "style/functional_trait/pure_function": [[2,3]],
         "style/procedural": [[1,18]],
         "subscript/index": [[17,17]],
         "type/non_sequence/dictionary/literal": [[15,15]],
@@ -1231,6 +1236,8 @@
         "if_test_atom:right": [[6,6]],
         "if_then_branch": [[7,7],[11,11]],
         "if_without_else": [[6,7],[10,11]],
+        "impure_subroutine:solve": [[9,17]],
+        "impure_subroutine:under_attack": [[2,8]],
         "internal_free_call:solve": [[12,12],[19,19]],
         "internal_free_call:under_attack": [[17,17]],
         "literal:0": [[10,10]],
@@ -1360,6 +1367,7 @@
         "if_without_else": [[9,10]],
         "import:itertools": [[1,1]],
         "import_module:itertools": [[1,1]],
+        "impure_subroutine:iter_primes": [[2,7]],
         "infinite_while": [[4,7]],
         "internal_free_call:iter_primes": [[8,8]],
         "literal:1000": [[9,9]],
@@ -1414,7 +1422,7 @@
         "flow/loop/while/infinite": [[4,7]],
         "meta/program": [[1,11]],
         "meta/sloc/11": [[1,11]],
-        "style/functional/filter": [[7,7]],
+        "style/functional_trait/filter": [[7,7]],
         "style/procedural": [[1,11]],
         "type/boolean/literal/True": [[4,4]],
         "type/number/integer/literal": [[3,3],[9,9]],
@@ -1577,6 +1585,8 @@
         "if_test_atom:test_queens": [[15,15]],
         "if_then_branch": [[9,9],[16,16]],
         "if_without_else": [[8,9]],
+        "impure_subroutine:add_queen": [[10,21]],
+        "impure_subroutine:validate": [[4,9]],
         "index:-1": [[5,5]],
         "internal_free_call:add_queen": [[18,18],[22,22]],
         "internal_free_call:validate": [[14,14]],
@@ -3062,6 +3072,28 @@
     "import_name:localtime": [
       "10_time.py"
     ],
+    "impure_subroutine:add_queen": [
+      "28_queens.py"
+    ],
+    "impure_subroutine:greet": [
+      "05_greet.py"
+    ],
+    "impure_subroutine:iter_primes": [
+      "20_prime_numbers.py"
+    ],
+    "impure_subroutine:median": [
+      "13_unit_testing.py",
+      "14_median.py"
+    ],
+    "impure_subroutine:solve": [
+      "18_queens.py"
+    ],
+    "impure_subroutine:under_attack": [
+      "18_queens.py"
+    ],
+    "impure_subroutine:validate": [
+      "28_queens.py"
+    ],
     "increment:guesses_made": [
       "33_guess_the_number.py"
     ],
@@ -3897,6 +3929,9 @@
       "18_queens.py",
       "20_prime_numbers.py"
     ],
+    "pure_function:cmp": [
+      "16_csv.py"
+    ],
     "raise:BailOut": [
       "28_queens.py"
     ],
@@ -4419,9 +4454,11 @@
       "12_classes.py",
       "13_unit_testing.py",
       "14_median.py",
-      "16_csv.py",
       "18_queens.py",
       "28_queens.py"
+    ],
+    "def/function/pure": [
+      "16_csv.py"
     ],
     "def/generator": [
       "20_prime_numbers.py"
@@ -4712,8 +4749,11 @@
     "pattern/states/accumulate/count": [
       "33_guess_the_number.py"
     ],
-    "style/functional/filter": [
+    "style/functional_trait/filter": [
       "20_prime_numbers.py"
+    ],
+    "style/functional_trait/pure_function": [
+      "16_csv.py"
     ],
     "style/object_oriented": [
       "12_classes.py",

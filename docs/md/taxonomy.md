@@ -174,7 +174,7 @@ Python allows you to mix freely multiple paradigms. However, for Paroxython, eve
 
 Additionally, `style/imperative/flat` is the _no-indent_ version of the latter (no loop, conditional, etc.).
 
-Functional _traits_ are also tagged. The corresponding taxa have the form: `style/functional/trait`, where `trait` can be `lambda`, `higher-order`, `map`, `filter`, `reduce`, etc. Unlike `style/functional`, which spans the entire program, these taxa are located on certain lines. They can appear in a program of any (all-encompassing) style.
+Functional _traits_ are also tagged. The corresponding taxa start with: `style/functional_trait/`, and are suffixed by `lambda`, `higher_order`, `pure_function`, `map`, `filter`, `reduce`, etc. Unlike `style/functional`, which spans the entire program, these taxa are located on certain lines. They can appear in a program of any (all-encompassing) style.
 
 Independently of the 4-partition, `style/one_liner` denotes any program whose exactly one SLOC is neither a definition header, an importation or an assertion. For instance, the following program is considered a one-liner:
 

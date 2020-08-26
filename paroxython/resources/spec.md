@@ -90,9 +90,13 @@
     - [Interface](#interface)
       - [Feature `function`](#feature-function)
       - [Feature `return`](#feature-return)
+      - [Feature `method` (SQL)](#feature-method)
+      - [Feature `instance_method|class_method|static_method` (SQL)](#feature-instance_methodclass_methodstatic_method)
       - [Feature `yield`](#feature-yield)
       - [Feature `generator` (SQL)](#feature-generator)
       - [Feature `function_returning_something` (SQL)](#feature-function_returning_something)
+      - [Feature `pure_function` (SQL)](#feature-pure_function)
+      - [Feature `impure_subroutine` (SQL)](#feature-impure_subroutine)
       - [Feature `function_returning_nothing` (SQL)](#feature-function_returning_nothing)
       - [Feature `function_argument`](#feature-function_argument)
       - [Feature `function_argument_flavor`](#feature-function_argument_flavor)
@@ -144,9 +148,6 @@
       - [Feature `raise`](#feature-raise)
       - [Feature `except`](#feature-except)
       - [Feature `try_raise|try_except` (SQL)](#feature-try_raisetry_except)
-  - [Class definitions](#class-definitions)
-      - [Feature `method` (SQL)](#feature-method)
-      - [Feature `instance_method|class_method|static_method` (SQL)](#feature-instance_methodclass_methodstatic_method)
   - [Modules](#modules)
       - [Feature `import_module`](#feature-import_module)
       - [Feature `import_name`](#feature-import_name)
@@ -205,6 +206,7 @@ Match the name of every node of the AST. This covers most of the [Python keyword
 [⬇️ feature `object_oriented_style`](#feature-object_oriented_style)  
 [⬇️ feature `one_liner_style`](#feature-one_liner_style)  
 [⬇️ feature `one_shot_style`](#feature-one_shot_style)  
+[⬇️ feature `pure_function`](#feature-pure_function)  
 [⬇️ feature `try_raise|try_except`](#feature-try_raisetry_except)  
 
 ##### Specification
@@ -1587,6 +1589,7 @@ We use the term _free call_, as opposed to _member call_ (dot notation).
 [⬇️ feature `external_free_call`](#feature-external_free_call)  
 [⬇️ feature `higher-order function`](#feature-higher-order-function)  
 [⬇️ feature `internal_free_call`](#feature-internal_free_call)  
+[⬇️ feature `pure_function`](#feature-pure_function)  
 [⬇️ feature `range`](#feature-range)  
 [⬇️ feature `recursive_call_count`](#feature-recursive_call_count)  
 [⬇️ feature `recursive_function`](#feature-recursive_function)  
@@ -2310,6 +2313,7 @@ _Limitation._ The number to be clamped must appear on the left hand side of the 
 ##### Derivations
 
 [⬇️ feature `functional_style`](#feature-functional_style)  
+[⬇️ feature `pure_function`](#feature-pure_function)  
 [⬇️ feature `update_by_assignment`](#feature-update_by_assignment)  
 [⬇️ feature `update_by_assignment_with`](#feature-update_by_assignment_with)  
 
@@ -2842,6 +2846,8 @@ Match the update of a variable `x` and capture its name in the first part of the
 [⬇️ feature `accumulate_elements`](#feature-accumulate_elements)  
 [⬇️ feature `accumulate_inputs`](#feature-accumulate_inputs)  
 [⬇️ feature `accumulate_some_elements`](#feature-accumulate_some_elements)  
+[⬇️ feature `functional_style`](#feature-functional_style)  
+[⬇️ feature `pure_function`](#feature-pure_function)  
 
 ##### Specification
 
@@ -3392,6 +3398,7 @@ In Python, the term "function" encompasses any type of subroutine, be it a metho
 [⬇️ feature `generator`](#feature-generator)  
 [⬇️ feature `higher-order function`](#feature-higher-order-function)  
 [⬇️ feature `if_guard`](#feature-if_guard)  
+[⬇️ feature `impure_subroutine`](#feature-impure_subroutine)  
 [⬇️ feature `internal_free_call`](#feature-internal_free_call)  
 [⬇️ feature `method`](#feature-method)  
 [⬇️ feature `procedural_style`](#feature-procedural_style)  
@@ -3514,6 +3521,108 @@ Match `return` statements and, when the returned object is an [_atom_](#feature-
 
 --------------------------------------------------------------------------------
 
+#### Feature `method`
+
+##### Derivations
+
+[⬆️ feature `function`](#feature-function)  
+[⬆️ feature `node`](#feature-node)  
+[⬇️ feature `impure_subroutine`](#feature-impure_subroutine)  
+[⬇️ feature `instance_method|class_method|static_method`](#feature-instance_methodclass_methodstatic_method)  
+[⬇️ feature `pure_function`](#feature-pure_function)  
+
+##### Specification
+
+```sql
+SELECT "method",
+       f.name_suffix,
+       f.span,
+       f.path
+FROM t_node c
+JOIN t_function f ON (f.path GLOB c.path || "*-*-")
+WHERE c.name_suffix = "ClassDef"
+```
+
+##### Example
+
+```python
+1   class MyClass:
+2
+3       def an_instance_method(self, a, b, c):
+4           pass
+5
+6       @staticmethod
+7       def a_static_method(f, g):
+8           pass
+9
+10      @classmethod
+11      def a_class_method(cls, d, e):
+12          pass
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `method:an_instance_method` | 3-4 |
+| `method:a_static_method` | 6-8 |
+| `method:a_class_method` | 10-12 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `instance_method|class_method|static_method`
+
+##### Derivations
+
+[⬆️ feature `function_argument`](#feature-function_argument)  
+[⬆️ feature `method`](#feature-method)  
+
+##### Specification
+
+```sql
+SELECT CASE a.name_suffix
+           WHEN "self" THEN "instance_method"
+           WHEN "cls" THEN "class_method"
+           ELSE "static_method"
+       END,
+       m.name_suffix,
+       m.span,
+       m.path
+FROM t_method m
+LEFT JOIN t_function_argument a ON (a.path GLOB m.path || "*-*-"
+                                    AND a.name_suffix IN ("self",
+                                                          "cls"))
+```
+
+_Remark._: the presence of a decorator `classmethod` or `staticmethod` is unchecked, nor is the flavor of the arguments `self` and `cls` (they should be positional arguments). In other words, it is enough that a method has an argument `self` (resp. `cls`) for being categorized as an instance (resp. class) method, or else as a static method.
+
+##### Example
+
+```python
+1   class MyClass:
+2
+3       def an_instance_method(self, a, b, c):
+4           pass
+5
+6       @classmethod
+7       def a_class_method(cls, d, e):
+8           pass
+9
+10      @staticmethod
+11      def a_static_method(f, g):
+12          pass
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `instance_method:an_instance_method` | 3-4 |
+| `class_method:a_class_method` | 6-8 |
+| `static_method:a_static_method` | 10-12 |
+
+--------------------------------------------------------------------------------
+
 #### Feature `yield`
 
 Match `yield` and `yieldfrom` _[expressions](https://docs.python.org/3/reference/expressions.html#yield-expressions)_ (generally used as statements) and, when the yielded object is an [atom](#feature-call_argument), suffix it.
@@ -3610,6 +3719,7 @@ A function returning at least one value distinct from `None` is the smallest `fu
 [⬆️ feature `return`](#feature-return)  
 [⬇️ feature `function_returning_nothing`](#feature-function_returning_nothing)  
 [⬇️ feature `functional_style`](#feature-functional_style)  
+[⬇️ feature `pure_function`](#feature-pure_function)  
 
 ##### Specification
 
@@ -3650,6 +3760,12 @@ GROUP BY r.rowid
 21      def h():
 22          pass
 23      return x
+24
+25  def i(s, a):
+26      if s == []:
+27          return a
+28      else:
+29          return s[0]
 ```
 
 ##### Matches
@@ -3660,6 +3776,158 @@ GROUP BY r.rowid
 | `function_returning_something:c` | 7-10 |
 | `function_returning_something:f` | 16-17 |
 | `function_returning_something:g` | 20-23 |
+| `function_returning_something:i` | 25-29 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `pure_function`
+
+##### Derivations
+
+[⬆️ feature `assignment`](#feature-assignment)  
+[⬆️ feature `free_call`](#feature-free_call)  
+[⬆️ feature `function_returning_something`](#feature-function_returning_something)  
+[⬆️ feature `method`](#feature-method)  
+[⬆️ feature `node`](#feature-node)  
+[⬆️ feature `update`](#feature-update)  
+[⬇️ feature `impure_subroutine`](#feature-impure_subroutine)  
+
+##### Specification
+
+```sql
+SELECT "pure_function",
+       f.name_suffix,
+       max(f.span_start) || "-" || min(f.span_end),
+       max(f.path)
+FROM t_function_returning_something f
+WHERE NOT EXISTS
+    (SELECT *
+     FROM t
+     WHERE ((t.name_prefix IN ("assignment",
+                               "update")
+             OR t.name IN ("node:For",
+                           "node:While",
+                           "free_call:print"))
+            AND t.path GLOB f.path || "*-")
+       OR (t.name_prefix = "method"
+           AND t.path=f.path) )
+GROUP BY f.rowid
+```
+
+##### Example
+
+```python
+1   def triangle_semi_perimeter(a, b, c): # pure
+2       return (a + b + c) / 2
+3   
+4   def test_triangle_semi_perimeter(): # impure (the function returns nothing)
+5       assert triangle_semi_perimeter(3, 4, 5) == 6
+6   
+7   def triangle_area(a, b, c): # impure (because of the assignment)
+8       p = triangle_semi_perimeter(a, b, c)
+9       return (p * (p-a) * (p-b) * (p-c)) ** 0.5
+10  
+11  def check_password(): # impure (because of the side effect)
+12      if PASSWORD == input("Password? "):
+13          print("You have successfully logged in on the NSA main server.")
+14          return AUTHENTICATED
+15      return WRONG_PASSWORD
+16  
+17  def dna_complement(dna): # pure (a comprehension is considered as pure)
+18      return "".join(base_complements[base] for base in dna)
+19  
+20  def suffix_sequences(suffix, sequences): # impure
+21      result = []
+22      for sequence in sequences:
+23          result.append(sequence + [suffix])
+24      return result
+25  
+26  def power_list(sequence, result = [[]]): # pure
+27      if sequence == []:
+28          return result
+29      else:
+30          return power_list(sequence[1:], result + suffix_sequences(sequence[0], result))
+31  
+32  def belongs_to(seq, x): # impure (loop)
+33      for candidate in seq:
+34          if candidate == x:
+35              return True
+36      return False
+37  
+38  def accept(words, word, accumulator): # impure (because of the update)
+39      if word in words:
+40          accumulator.append(word)
+41          return True
+42      else:
+43          return False
+44
+45  class BankAccount(object): # a method cannot be considered as pure
+46      def __init__(self, initial_balance=0):
+47          self.balance = initial_balance
+48      def deposit(self, amount):
+49          self.balance += amount
+50      def withdraw(self, amount):
+51          self.balance -= amount
+52      def overdrawn(self): # ... even if it struggle for purity
+53          return self.balance < 0
+54
+55  def poor_print(bar): # impure (returns nothing)
+56      print(bar)
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `pure_function:triangle_semi_perimeter` | 1-2 |
+| `impure_subroutine:triangle_area` | 7-9 |
+| `impure_subroutine:check_password` | 11-15 |
+| `pure_function:dna_complement` | 17-18 |
+| `impure_subroutine:suffix_sequences` | 20-24 |
+| `pure_function:power_list` | 26-30 |
+| `impure_subroutine:belongs_to` | 32-36 |
+| `impure_subroutine:accept` | 38-43 |
+| `impure_subroutine:poor_print` | 55-56 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `impure_subroutine`
+
+##### Derivations
+
+[⬆️ feature `function`](#feature-function)  
+[⬆️ feature `method`](#feature-method)  
+[⬆️ feature `pure_function`](#feature-pure_function)  
+
+##### Specification
+
+```sql
+SELECT "impure_subroutine",
+       f.name_suffix,
+       f.span,
+       f.path
+FROM t_function f
+WHERE NOT EXISTS
+    (SELECT *
+     FROM t
+     WHERE (t.name_prefix IN ("method",
+                              "pure_function")
+            AND t.path=f.path) )
+GROUP BY f.rowid
+```
+
+##### Example
+
+```python
+1   def foo():
+2       print("see the examples for `pure_function` immediately above")
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `impure_subroutine:foo` | 1-2 |
 
 --------------------------------------------------------------------------------
 
@@ -5664,112 +5932,6 @@ GROUP BY e.rowid
 
 --------------------------------------------------------------------------------
 
-## Class definitions
-
-A class definition is already matched as `node:ClassDef`.
-
---------------------------------------------------------------------------------
-
-#### Feature `method`
-
-##### Derivations
-
-[⬆️ feature `function`](#feature-function)  
-[⬆️ feature `node`](#feature-node)  
-[⬇️ feature `instance_method|class_method|static_method`](#feature-instance_methodclass_methodstatic_method)  
-
-##### Specification
-
-```sql
-SELECT "method",
-       f.name_suffix,
-       f.span,
-       f.path
-FROM t_node c
-JOIN t_function f ON (f.path GLOB c.path || "*-*-")
-WHERE c.name_suffix = "ClassDef"
-```
-
-##### Example
-
-```python
-1   class MyClass:
-2
-3       def an_instance_method(self, a, b, c):
-4           pass
-5
-6       @staticmethod
-7       def a_static_method(f, g):
-8           pass
-9
-10      @classmethod
-11      def a_class_method(cls, d, e):
-12          pass
-```
-
-##### Matches
-
-| Label | Lines |
-|:--|:--|
-| `method:an_instance_method` | 3-4 |
-| `method:a_static_method` | 6-8 |
-| `method:a_class_method` | 10-12 |
-
---------------------------------------------------------------------------------
-
-#### Feature `instance_method|class_method|static_method`
-
-##### Derivations
-
-[⬆️ feature `function_argument`](#feature-function_argument)  
-[⬆️ feature `method`](#feature-method)  
-
-##### Specification
-
-```sql
-SELECT CASE a.name_suffix
-           WHEN "self" THEN "instance_method"
-           WHEN "cls" THEN "class_method"
-           ELSE "static_method"
-       END,
-       m.name_suffix,
-       m.span,
-       m.path
-FROM t_method m
-LEFT JOIN t_function_argument a ON (a.path GLOB m.path || "*-*-"
-                                    AND a.name_suffix IN ("self",
-                                                          "cls"))
-```
-
-_Remark._: the presence of a decorator `classmethod` or `staticmethod` is unchecked, nor is the flavor of the arguments `self` and `cls` (they should be positional arguments). In other words, it is enough that a method has an argument `self` (resp. `cls`) for being categorized as an instance (resp. class) method, or else as a static method.
-
-##### Example
-
-```python
-1   class MyClass:
-2
-3       def an_instance_method(self, a, b, c):
-4           pass
-5
-6       @classmethod
-7       def a_class_method(cls, d, e):
-8           pass
-9
-10      @staticmethod
-11      def a_static_method(f, g):
-12          pass
-```
-
-##### Matches
-
-| Label | Lines |
-|:--|:--|
-| `instance_method:an_instance_method` | 3-4 |
-| `class_method:a_class_method` | 6-8 |
-| `static_method:a_static_method` | 10-12 |
-
---------------------------------------------------------------------------------
-
 ## Modules
 
 --------------------------------------------------------------------------------
@@ -6703,7 +6865,8 @@ A program is considered as functional if and only if it features:
 - no procedure definition;
 - no class definition;
 - no loop;
-- no assignment.
+- no assignment;
+- no variable update.
 
 _Limitation._ Potential false negative when the right hand side of the assignment is a lambda function (which is generally considered as an [anti-pattern](https://docs.quantifiedcode.com/python-anti-patterns/correctness/assigning_a_lambda_to_a_variable.html), though).
 
@@ -6714,6 +6877,7 @@ _Limitation._ Potential false negative when the right hand side of the assignmen
 [⬆️ feature `function_returning_something`](#feature-function_returning_something)  
 [⬆️ feature `loop`](#feature-loop)  
 [⬆️ feature `object_oriented_style`](#feature-object_oriented_style)  
+[⬆️ feature `update`](#feature-update)  
 [⬆️ feature `whole_span`](#feature-whole_span)  
 [⬇️ feature `procedural_style`](#feature-procedural_style)  
 
@@ -6732,7 +6896,8 @@ WHERE NOT EXISTS
      WHERE t.name_prefix IN ("function_returning_nothing",
                              "object_oriented_style",
                              "loop",
-                             "assignment") )
+                             "assignment",
+                             "update") )
 LIMIT 1
 ```
 

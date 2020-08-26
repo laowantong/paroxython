@@ -79,7 +79,7 @@ reason, several queries produce an incorrect result.
 
 import sqlite3
 from collections import defaultdict
-from typing import Set, Callable
+from typing import Any, Set, Callable, Dict
 
 import regex  # type: ignore
 
@@ -176,8 +176,8 @@ class DerivedLabelsDatabase:
                 self.c.execute(create_subtable.format(label_name))
             self.subtables.add(label_name)
         self.c.commit()
-        # Execute the query and return the resulting labels.
-        labels_spans: LabelsSpans = defaultdict(list)
+        # Execute the query and return the resulting labels, deduplicated by (label_name, path).
+        labels_spans: Dict[LabelName, Dict[Span, Any]] = defaultdict(dict)
         try:
             row_iterator = self.c.execute(query)
         except Exception as exception:
@@ -186,8 +186,8 @@ class DerivedLabelsDatabase:
         for (name_prefix, name_suffix, span_string, path) in row_iterator:
             label_name = f"{name_prefix}:{name_suffix}" if name_suffix != "" else name_prefix
             span = span_string.split("-")
-            labels_spans[label_name].append(Span(int(span[0]), int(span[-1]), path))
-        return [Label(*label_spans) for label_spans in labels_spans.items()]
+            labels_spans[label_name][Span(int(span[0]), int(span[-1]), path)] = None
+        return [Label(name, list(spans)) for (name, spans) in labels_spans.items()]
 
     def update(
         self,

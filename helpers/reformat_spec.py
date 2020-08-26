@@ -100,7 +100,7 @@ def derivation_map(text):
             for derived_label_pattern in derived_label_patterns:
                 j = sql_features.get(derived_label_pattern)
                 if j is not None and i < j:
-                    raise ValueError(f"'{label_pattern}' should precede '{derived_label_pattern}'!")
+                    raise ValueError(f"'{derived_label_pattern}' should precede '{label_pattern}'!")
                 derived_into[derived_label_pattern].add(label_pattern)
     keys = set(derived_from).union(derived_into)
     result = {}
