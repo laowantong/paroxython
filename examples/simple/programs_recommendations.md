@@ -10,7 +10,7 @@
     - [`10_time.py`](#program-10_timepy-learning-cost-43125)
     - [`12_classes.py`](#program-12_classespy-learning-cost-56875)
     - [`33_guess_the_number.py`](#program-33_guess_the_numberpy-learning-cost-56875)
-    - [`14_median.py`](#program-14_medianpy-learning-cost-59375)
+    - [`14_median.py`](#program-14_medianpy-learning-cost-60625)
 # Recommended programs
 
 ## 1 program of learning cost in [1, 2[
@@ -342,7 +342,7 @@
 
 ---
 
-### Program `14_median.py` (learning cost 5.9375)
+### Program `14_median.py` (learning cost 6.0625)
 
 ```python
 1   def median(pool):
@@ -362,7 +362,7 @@
 | 0.875 | `condition/divisibility/parity` | 4 |
 | 0.75 | `condition/equality` | 4 |
 | 0.375 | `def/argument/arg` | 1 |
-| 0.25 | `def/function` | 1-7 |
+| 0.375 | `def/function/impure` | 1-7 |
 | 0.375 | `def/return/something` | 5, 7 |
 | 0 | `flow/conditional` | 4-7 |
 | 0 | `flow/conditional/else` | 7 |

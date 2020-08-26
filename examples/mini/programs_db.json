@@ -57,7 +57,6 @@
         "if_test_atom:2": [[4,4]],
         "if_test_atom:n": [[4,4]],
         "if_then_branch": [[5,5]],
-        "impure_subroutine:print_collatz": [[1,8]],
         "literal:0": [[4,4]],
         "literal:1": [[2,2],[7,7]],
         "literal:2": [[4,4],[5,5]],
@@ -433,9 +432,6 @@
     ],
     "import_module_internally:fizzbuzz": [
       "is_even.py"
-    ],
-    "impure_subroutine:print_collatz": [
-      "collatz.py"
     ],
     "literal:0": [
       "collatz.py",

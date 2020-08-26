@@ -20,7 +20,6 @@ def print_collatz(n): # added_block_label (-> +7)
                       # function_argument:n
                       # function_argument_flavor:arg
                       # function_returning_nothing:print_collatz (-> +7)
-                      # impure_subroutine:print_collatz (-> +7)
                       # node:FunctionDef (-> +7)
                       # node:arg
                       # procedural_style (-> +7)

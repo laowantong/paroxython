@@ -29,7 +29,7 @@
     - [`019.0197-reverse-a-list.py`](#program-0190197-reverse-a-listpy-learning-cost-34375)
     - [`019.1983-reverse-a-list.py`](#program-0191983-reverse-a-listpy-learning-cost-4375)
     - [`019.3164-reverse-a-list.py`](#program-0193164-reverse-a-listpy-learning-cost-346875)
-    - [`020.0573-return-two-values.py`](#program-0200573-return-two-valuespy-learning-cost-1121875)
+    - [`020.0573-return-two-values.py`](#program-0200573-return-two-valuespy-learning-cost-1134375)
     - [`021.0084-swap-values-of-variables-a-and-b.py`](#program-0210084-swap-values-of-variables-a-and-bpy-learning-cost-35)
     - [`022.0243-convert-string-to-integer.py`](#program-0220243-convert-string-to-integerpy-learning-cost-434375)
     - [`023.1102-convert-real-number-to-string-with-2-decimal-places.py`](#program-0231102-convert-real-number-to-string-with-2-decimal-placespy-learning-cost-528125)
@@ -56,7 +56,7 @@
     - [`042.1264-continue-outer-loop.py`](#program-0421264-continue-outer-looppy-learning-cost-9875)
     - [`042.3168-continue-outer-loop.py`](#program-0423168-continue-outer-looppy-learning-cost-703125)
     - [`043.0676-break-outer-loop.py`](#program-0430676-break-outer-looppy-learning-cost-130)
-    - [`043.2733-break-outer-loop.py`](#program-0432733-break-outer-looppy-learning-cost-174375)
+    - [`043.2733-break-outer-loop.py`](#program-0432733-break-outer-looppy-learning-cost-175625)
     - [`044.0190-insert-element-in-list.py`](#program-0440190-insert-element-in-listpy-learning-cost-346875)
     - [`045.0570-pause-execution-for-5-seconds.py`](#program-0450570-pause-execution-for-5-secondspy-learning-cost-60625)
     - [`046.0191-extract-beginning-of-string-prefix.py`](#program-0460191-extract-beginning-of-string-prefixpy-learning-cost-51875)
@@ -143,7 +143,7 @@
     - [`122.1453-declare-enumeration.py`](#program-1221453-declare-enumerationpy-learning-cost-775)
     - [`122.1454-declare-enumeration.py`](#program-1221454-declare-enumerationpy-learning-cost-515625)
     - [`123.2146-assert-condition.py`](#program-1232146-assert-conditionpy-learning-cost-1625)
-    - [`124.2152-binary-search-for-a-value-in-sorted-array.py`](#program-1242152-binary-search-for-a-value-in-sorted-arraypy-learning-cost-116875)
+    - [`124.2152-binary-search-for-a-value-in-sorted-array.py`](#program-1242152-binary-search-for-a-value-in-sorted-arraypy-learning-cost-118125)
     - [`125.2167-measure-function-call-duration.py`](#program-1252167-measure-function-call-durationpy-learning-cost-70625)
     - [`126.2137-multiple-return-values.py`](#program-1262137-multiple-return-valuespy-learning-cost-78125)
     - [`127.2274-source-code-inclusion.py`](#program-1272274-source-code-inclusionpy-learning-cost-60625)
@@ -187,7 +187,7 @@
     - [`161.2098-multiply-all-the-elements-of-a-list.py`](#program-1612098-multiply-all-the-elements-of-a-listpy-learning-cost-3375)
     - [`162.2164-execute-procedures-depending-on-options.py`](#program-1622164-execute-procedures-depending-on-optionspy-learning-cost-69375)
     - [`163.2170-print-list-elements-by-group-of-2.py`](#program-1632170-print-list-elements-by-group-of-2py-learning-cost-7125)
-    - [`163.3177-print-list-elements-by-group-of-2.py`](#program-1633177-print-list-elements-by-group-of-2py-learning-cost-1228125)
+    - [`163.3177-print-list-elements-by-group-of-2.py`](#program-1633177-print-list-elements-by-group-of-2py-learning-cost-1240625)
     - [`164.2169-open-url-in-default-browser.py`](#program-1642169-open-url-in-default-browserpy-learning-cost-425)
     - [`165.2149-last-element-of-list.py`](#program-1652149-last-element-of-listpy-learning-cost-5125)
     - [`166.2272-concatenate-two-lists.py`](#program-1662272-concatenate-two-listspy-learning-cost-3375)
@@ -824,7 +824,7 @@
 
 ---
 
-### Program `020.0573-return-two-values.py` (learning cost 11.21875)
+### Program `020.0573-return-two-values.py` (learning cost 11.34375)
 
 ```python
 1   def search(m, x):
@@ -839,7 +839,7 @@
 | 0.9375 | `call/method/sequence_duck/index` | 4 |
 | 0.75 | `condition/belonging` | 3 |
 | 0.875 | `def/argument/arg` | 1, 1 |
-| 0.75 | `def/function` | 1-4 |
+| 0.875 | `def/function/impure` | 1-4 |
 | 0.875 | `def/return/something` | 4 |
 | 0.875 | `flow/conditional/no_else` | 3-4 |
 | 0.96875 | `flow/loop/exit/early/return` | 2-4 |
@@ -1468,7 +1468,7 @@
 
 ---
 
-### Program `043.2733-break-outer-loop.py` (learning cost 17.4375)
+### Program `043.2733-break-outer-loop.py` (learning cost 17.5625)
 
 ```python
 1   def loop_breaking(m, v):
@@ -1488,7 +1488,7 @@
 | 0.9375 | `call/function/builtin/print` | 7 |
 | 0.75 | `condition/equality` | 4 |
 | 0.875 | `def/argument/arg` | 1, 1 |
-| 0.75 | `def/function` | 1-6 |
+| 0.875 | `def/function/impure` | 1-6 |
 | 0.875 | `def/return/nothing` | 6 |
 | 0.875 | `def/return/something` | 5 |
 | 0.875 | `flow/conditional/no_else` | 4-5 |
@@ -3257,7 +3257,7 @@
 
 ---
 
-### Program `124.2152-binary-search-for-a-value-in-sorted-array.py` (learning cost 11.6875)
+### Program `124.2152-binary-search-for-a-value-in-sorted-array.py` (learning cost 11.8125)
 
 ```python
 1   import bisect
@@ -3273,7 +3273,7 @@
 | 0.75 | `condition/equality` | 4 |
 | 0.875 | `condition/equality/not` | 4 |
 | 0.875 | `def/argument/arg` | 2, 2 |
-| 0.75 | `def/function` | 2-4 |
+| 0.875 | `def/function/impure` | 2-4 |
 | 0.9375 | `def/import/standard/bisect` | 1 |
 | 0.875 | `def/return/something` | 4 |
 | 0.875 | `operator/boolean/and` | 4 |
@@ -4252,7 +4252,7 @@
 
 ---
 
-### Program `163.3177-print-list-elements-by-group-of-2.py` (learning cost 12.28125)
+### Program `163.3177-print-list-elements-by-group-of-2.py` (learning cost 12.40625)
 
 ```python
 1   from itertools import tee
@@ -4271,7 +4271,7 @@
 | 0.9375 | `call/function/builtin/print` | 7 |
 | 0.9375 | `call/function/builtin/zip` | 5 |
 | 0.875 | `def/argument/arg` | 2 |
-| 0.75 | `def/function` | 2-5 |
+| 0.875 | `def/function/impure` | 2-5 |
 | 0.96875 | `def/import/standard/itertools/tee` | 1 |
 | 0.875 | `def/return/something` | 5 |
 | 0.9375 | `flow/loop/exit/late` | 6-7 |

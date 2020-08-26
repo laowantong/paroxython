@@ -70,7 +70,6 @@
 - import:fizzbuzz / is_even.py / 1
 - import_module:collatz / fizzbuzz.py / 1
 - import_module:fizzbuzz / is_even.py / 1
-- impure_subroutine:print_collatz / collatz.py / 1-8
 - literal:0 / collatz.py / 4
 - literal:0 / fizzbuzz.py / 3, 5, 7
 - literal:0 / is_even.py / 3
@@ -218,7 +217,7 @@
 - import
 - import_module
 - import_name
-- impure_subroutine
+- impure_function
 - increment
 - index
 - index_arithmetic

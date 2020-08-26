@@ -96,7 +96,7 @@
       - [Feature `generator` (SQL)](#feature-generator)
       - [Feature `function_returning_something` (SQL)](#feature-function_returning_something)
       - [Feature `pure_function` (SQL)](#feature-pure_function)
-      - [Feature `impure_subroutine` (SQL)](#feature-impure_subroutine)
+      - [Feature `impure_function` (SQL)](#feature-impure_function)
       - [Feature `function_returning_nothing` (SQL)](#feature-function_returning_nothing)
       - [Feature `function_argument`](#feature-function_argument)
       - [Feature `function_argument_flavor`](#feature-function_argument_flavor)
@@ -3224,7 +3224,7 @@ Swap two variables or two elements of an array with a 2-element tuple or list.
 ```python
 1   (a, b) = (b, a + b) # cf. Fibonacci
 2   (a, b) = (b, a % b) # cf. Greatest Common Divisor
-3   (array[pivot_index], array[i]) = (array[i], pivot) # cf. Quick Sort
+3   (array[pivot_index], array[i]) = (array[i], pivot) # cf. Quicksort
 4   (a, b) = (b, a) # no match
 ```
 
@@ -3398,7 +3398,6 @@ In Python, the term "function" encompasses any type of subroutine, be it a metho
 [⬇️ feature `generator`](#feature-generator)  
 [⬇️ feature `higher-order function`](#feature-higher-order-function)  
 [⬇️ feature `if_guard`](#feature-if_guard)  
-[⬇️ feature `impure_subroutine`](#feature-impure_subroutine)  
 [⬇️ feature `internal_free_call`](#feature-internal_free_call)  
 [⬇️ feature `method`](#feature-method)  
 [⬇️ feature `procedural_style`](#feature-procedural_style)  
@@ -3527,7 +3526,7 @@ Match `return` statements and, when the returned object is an [_atom_](#feature-
 
 [⬆️ feature `function`](#feature-function)  
 [⬆️ feature `node`](#feature-node)  
-[⬇️ feature `impure_subroutine`](#feature-impure_subroutine)  
+[⬇️ feature `impure_function`](#feature-impure_function)  
 [⬇️ feature `instance_method|class_method|static_method`](#feature-instance_methodclass_methodstatic_method)  
 [⬇️ feature `pure_function`](#feature-pure_function)  
 
@@ -3719,6 +3718,7 @@ A function returning at least one value distinct from `None` is the smallest `fu
 [⬆️ feature `return`](#feature-return)  
 [⬇️ feature `function_returning_nothing`](#feature-function_returning_nothing)  
 [⬇️ feature `functional_style`](#feature-functional_style)  
+[⬇️ feature `impure_function`](#feature-impure_function)  
 [⬇️ feature `pure_function`](#feature-pure_function)  
 
 ##### Specification
@@ -3782,6 +3782,8 @@ GROUP BY r.rowid
 
 #### Feature `pure_function`
 
+A function (not a method) returning something, but featuring no assignment, no variable update, no loop, no printing.
+
 ##### Derivations
 
 [⬆️ feature `assignment`](#feature-assignment)  
@@ -3790,7 +3792,7 @@ GROUP BY r.rowid
 [⬆️ feature `method`](#feature-method)  
 [⬆️ feature `node`](#feature-node)  
 [⬆️ feature `update`](#feature-update)  
-[⬇️ feature `impure_subroutine`](#feature-impure_subroutine)  
+[⬇️ feature `impure_function`](#feature-impure_function)  
 
 ##### Specification
 
@@ -3871,7 +3873,7 @@ GROUP BY f.rowid
 52      def overdrawn(self): # ... even if it struggle for purity
 53          return self.balance < 0
 54
-55  def poor_print(bar): # impure (returns nothing)
+55  def poor_print(bar): # no match (returns nothing)
 56      print(bar)
 ```
 
@@ -3880,33 +3882,34 @@ GROUP BY f.rowid
 | Label | Lines |
 |:--|:--|
 | `pure_function:triangle_semi_perimeter` | 1-2 |
-| `impure_subroutine:triangle_area` | 7-9 |
-| `impure_subroutine:check_password` | 11-15 |
+| `impure_function:triangle_area` | 7-9 |
+| `impure_function:check_password` | 11-15 |
 | `pure_function:dna_complement` | 17-18 |
-| `impure_subroutine:suffix_sequences` | 20-24 |
+| `impure_function:suffix_sequences` | 20-24 |
 | `pure_function:power_list` | 26-30 |
-| `impure_subroutine:belongs_to` | 32-36 |
-| `impure_subroutine:accept` | 38-43 |
-| `impure_subroutine:poor_print` | 55-56 |
+| `impure_function:belongs_to` | 32-36 |
+| `impure_function:accept` | 38-43 |
 
 --------------------------------------------------------------------------------
 
-#### Feature `impure_subroutine`
+#### Feature `impure_function`
+
+A function (not a method) which returns something, but is not pure. Does not cover the procedures.
 
 ##### Derivations
 
-[⬆️ feature `function`](#feature-function)  
+[⬆️ feature `function_returning_something`](#feature-function_returning_something)  
 [⬆️ feature `method`](#feature-method)  
 [⬆️ feature `pure_function`](#feature-pure_function)  
 
 ##### Specification
 
 ```sql
-SELECT "impure_subroutine",
+SELECT "impure_function",
        f.name_suffix,
        f.span,
        f.path
-FROM t_function f
+FROM t_function_returning_something f
 WHERE NOT EXISTS
     (SELECT *
      FROM t
@@ -3920,14 +3923,15 @@ GROUP BY f.rowid
 
 ```python
 1   def foo():
-2       print("see the examples for `pure_function` immediately above")
+2       a = "see the examples for `pure_function` immediately above"
+3       return a
 ```
 
 ##### Matches
 
 | Label | Lines |
 |:--|:--|
-| `impure_subroutine:foo` | 1-2 |
+| `impure_function:foo` | 1-3 |
 
 --------------------------------------------------------------------------------
 

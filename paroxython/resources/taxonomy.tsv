@@ -46,6 +46,7 @@ def/function	function_returning_something:.+
 def/function/anonymous	node:Lambda
 def/function/predicate	function_returning_something:(is|are|has|have|can|must|needs)_.+
 def/function/pure	pure_function:.+
+def/function/impure	impure_function:.+
 def/generator	generator:.+
 def/higher_order	higher_order_function:.+
 def/import/personal	import_internally:.*

@@ -186,7 +186,6 @@
         "function_argument:name": [[1,1]],
         "function_argument_flavor:arg": [[1,1]],
         "function_returning_nothing:finish": [[1,2]],
-        "impure_subroutine:finish": [[1,2]],
         "literal:Str": [[2,2]],
         "node:BinOp": [[2,2]],
         "node:Call": [[2,2]],
@@ -218,7 +217,6 @@
         "function:a": [[1,2]],
         "function_returning_nothing:a": [[1,2]],
         "function_without_arguments:a": [[1,2]],
-        "impure_subroutine:a": [[1,2]],
         "node:FunctionDef": [[1,2]],
         "node:Pass": [[2,2]],
         "one_liner_style": [[1,2]],
@@ -778,7 +776,6 @@
         "if_test_atom:bt": [[2,2]],
         "if_then_branch": [[3,3]],
         "if_without_else": [[2,3]],
-        "impure_subroutine:dfs": [[1,6]],
         "internal_free_call:dfs": [[4,4],[6,6]],
         "literal:None": [[2,2]],
         "node:Attribute": [[4,4],[6,6]],
@@ -880,7 +877,6 @@
         "function_argument_flavor:arg": [[1,1],[1,1]],
         "function_returning_nothing:DFS": [[1,4]],
         "higher_order_function:f": [[1,4]],
-        "impure_subroutine:DFS": [[1,4]],
         "internal_free_call:DFS": [[4,4]],
         "loop:for": [[3,4]],
         "loop_with_late_exit:for": [[3,4]],
@@ -1019,7 +1015,7 @@
         "if_test_atom:x": [[3,3]],
         "if_then_branch": [[4,4]],
         "if_without_else": [[3,4]],
-        "impure_subroutine:search": [[1,4]],
+        "impure_function:search": [[1,4]],
         "literal:Tuple": [[2,2],[4,4]],
         "loop:for": [[2,4]],
         "loop_with_early_exit:for:return": [[2,4]],
@@ -1044,7 +1040,7 @@
         "call/method/sequence_duck/index": [[4,4]],
         "condition/belonging": [[3,3]],
         "def/argument/arg": [[1,1],[1,1]],
-        "def/function": [[1,4]],
+        "def/function/impure": [[1,4]],
         "def/return/something": [[4,4]],
         "flow/conditional/no_else": [[3,4]],
         "flow/loop/exit/early/return": [[2,4]],
@@ -2254,7 +2250,7 @@
         "if_test_atom:value": [[4,4]],
         "if_then_branch": [[5,5]],
         "if_without_else": [[4,5]],
-        "impure_subroutine:loop_breaking": [[1,6]],
+        "impure_function:loop_breaking": [[1,6]],
         "internal_free_call:loop_breaking": [[7,7]],
         "literal:1": [[7,7]],
         "literal:2": [[7,7]],
@@ -2304,7 +2300,7 @@
         "call/function/builtin/print": [[7,7]],
         "condition/equality": [[4,4]],
         "def/argument/arg": [[1,1],[1,1]],
-        "def/function": [[1,6]],
+        "def/function/impure": [[1,6]],
         "def/return/nothing": [[6,6]],
         "def/return/something": [[5,5]],
         "flow/conditional/no_else": [[4,5]],
@@ -2738,7 +2734,6 @@
         "import:multiprocessing:Pool": [[1,1]],
         "import_module:multiprocessing": [[1,1]],
         "import_name:Pool": [[1,1]],
-        "impure_subroutine:f": [[2,3]],
         "literal:1": [[5,5]],
         "literal:1001": [[5,5]],
         "literal:Str": [[6,6]],
@@ -5453,7 +5448,7 @@
         "function_returning_something:binarySearch": [[2,4]],
         "import:bisect": [[1,1]],
         "import_module:bisect": [[1,1]],
-        "impure_subroutine:binarySearch": [[2,4]],
+        "impure_function:binarySearch": [[2,4]],
         "index:i": [[4,4]],
         "literal:-1": [[4,4]],
         "member_call_method:bisect_left": [[3,3]],
@@ -5481,7 +5476,7 @@
         "condition/equality": [[4,4]],
         "condition/equality/not": [[4,4]],
         "def/argument/arg": [[2,2],[2,2]],
-        "def/function": [[2,4]],
+        "def/function/impure": [[2,4]],
         "def/import/standard/bisect": [[1,1]],
         "def/return/something": [[4,4]],
         "meta/program": [[1,4]],
@@ -5645,7 +5640,6 @@
         "if_test_atom:n": [[7,7]],
         "if_then_branch": [[8,9]],
         "if_without_else": [[7,9]],
-        "impure_subroutine:BFS": [[1,9]],
         "literal:0": [[4,4]],
         "literal:List": [[2,2]],
         "literal:True": [[8,8]],
@@ -5741,7 +5735,6 @@
         "import:collections:deque": [[1,1]],
         "import_module:collections": [[1,1]],
         "import_name:deque": [[1,1]],
-        "impure_subroutine:breadth_first": [[2,9]],
         "literal:List": [[4,4]],
         "loop:while": [[5,9]],
         "loop_with_late_exit:while": [[5,9]],
@@ -5828,7 +5821,6 @@
         "function_argument_flavor:arg": [[1,1],[1,1]],
         "function_returning_nothing:depth_first": [[1,8]],
         "higher_order_function:f": [[1,8]],
-        "impure_subroutine:depth_first": [[1,8]],
         "literal:List": [[3,3]],
         "loop:while": [[4,8]],
         "loop_with_late_exit:while": [[4,8]],
@@ -7375,7 +7367,7 @@
         "import:itertools:tee": [[1,1]],
         "import_module:itertools": [[1,1]],
         "import_name:tee": [[1,1]],
-        "impure_subroutine:pairwise": [[2,5]],
+        "impure_function:pairwise": [[2,5]],
         "internal_free_call:pairwise": [[6,6]],
         "literal:None": [[4,4]],
         "literal:Tuple": [[3,3],[6,6]],
@@ -7403,7 +7395,7 @@
         "call/function/builtin/print": [[7,7]],
         "call/function/builtin/zip": [[5,5]],
         "def/argument/arg": [[2,2]],
-        "def/function": [[2,5]],
+        "def/function/impure": [[2,5]],
         "def/import/standard/itertools/tee": [[1,1]],
         "def/return/something": [[5,5]],
         "flow/loop/exit/late": [[6,7]],
@@ -12765,40 +12757,16 @@
     "import_name:timedelta": [
       "184.2701-tomorrow.py"
     ],
-    "impure_subroutine:BFS": [
-      "128.2085-breadth-first-traversing-of-a-tree.py"
-    ],
-    "impure_subroutine:DFS": [
-      "018.2084-depth-first-traversing-of-a-tree.py"
-    ],
-    "impure_subroutine:a": [
-      "003.2372-create-a-procedure.py"
-    ],
-    "impure_subroutine:binarySearch": [
+    "impure_function:binarySearch": [
       "124.2152-binary-search-for-a-value-in-sorted-array.py"
     ],
-    "impure_subroutine:breadth_first": [
-      "129.2282-breadth-first-traversing-in-a-graph.py"
-    ],
-    "impure_subroutine:depth_first": [
-      "130.2283-depth-first-traversing-in-a-graph.py"
-    ],
-    "impure_subroutine:dfs": [
-      "016.1530-depth-first-traversing-of-a-binary-tree.py"
-    ],
-    "impure_subroutine:f": [
-      "056.1424-launch-1000-parallel-tasks-and-wait-for-completion.py"
-    ],
-    "impure_subroutine:finish": [
-      "003.0019-create-a-procedure.py"
-    ],
-    "impure_subroutine:loop_breaking": [
+    "impure_function:loop_breaking": [
       "043.2733-break-outer-loop.py"
     ],
-    "impure_subroutine:pairwise": [
+    "impure_function:pairwise": [
       "163.3177-print-list-elements-by-group-of-2.py"
     ],
-    "impure_subroutine:search": [
+    "impure_function:search": [
       "020.0573-return-two-values.py"
     ],
     "index:-1": [
@@ -17230,18 +17198,20 @@
       "154.2292-halfway-between-two-hex-color-codes.py"
     ],
     "def/function": [
-      "020.0573-return-two-values.py",
-      "043.2733-break-outer-loop.py",
       "090.1099-read-only-outside.py",
-      "124.2152-binary-search-for-a-value-in-sorted-array.py",
       "154.2292-halfway-between-two-hex-color-codes.py",
-      "163.3177-print-list-elements-by-group-of-2.py",
       "187.3261-disjoint-set.py"
     ],
     "def/function/anonymous": [
       "028.0350-sort-by-a-property.py",
       "035.0667-first-class-function--compose.py",
       "036.0670-first-class-function--generic-composition.py"
+    ],
+    "def/function/impure": [
+      "020.0573-return-two-values.py",
+      "043.2733-break-outer-loop.py",
+      "124.2152-binary-search-for-a-value-in-sorted-array.py",
+      "163.3177-print-list-elements-by-group-of-2.py"
     ],
     "def/function/predicate": [
       "187.3261-disjoint-set.py"
