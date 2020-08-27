@@ -23,6 +23,7 @@
     "operator/arithmetic/modulo": "4",
     "operator/arithmetic/multiplication": "7",
     "style/procedural": "1-8",
+    "style/unpythonic/augmented_assignment": "5",
     "type/number/integer/literal": "2 4 5 7 7",
     "type/number/integer/literal/zero": "4",
     "type/number/magic": "7",

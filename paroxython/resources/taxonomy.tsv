@@ -166,7 +166,7 @@ style/functional_trait/\1	external_free_call:(map|filter|reduce|partial|accumula
 style/functional_trait/higher_order	higher_order_function:.+
 style/functional_trait/lambda	function
 style/functional_trait/pure_function	pure_function:.*
-style/non_idiomatic/\1	([^:]+)_non_idiomatic\b.*
+style/unpythonic/\1	([^:]+)_unpythonic\b.*
 style/naive/\1	([^:]+)_naive\b.*
 style/object_oriented	object_oriented_style
 style/one_liner	one_liner_style
@@ -247,7 +247,7 @@ var/assignment/parallel	parallel_assignment:2
 var/assignment/parallel/more_than_two	parallel_assignment:(?!2$)\d+
 var/assignment/parallel/slide	slide
 var/assignment/parallel/swap	swap
-var/assignment/sequence/swap	swap_non_idiomatic
+var/assignment/sequence/swap	swap_unpythonic
 var/assignment/single	single_assignment:.+
 var/assignment/throwaway	assignment_lhs_identifier:_
 var/deletion	node:Delete

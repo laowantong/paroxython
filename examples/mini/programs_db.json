@@ -112,6 +112,7 @@
         "operator/arithmetic/modulo": [[4,4]],
         "operator/arithmetic/multiplication": [[7,7]],
         "style/procedural": [[1,8]],
+        "style/unpythonic/augmented_assignment": [[5,5]],
         "type/number/integer/literal": [[2,2],[4,4],[5,5],[7,7],[7,7]],
         "type/number/integer/literal/zero": [[4,4]],
         "type/number/magic": [[7,7]],
@@ -744,6 +745,9 @@
       "is_even.py"
     ],
     "style/procedural": [
+      "collatz.py"
+    ],
+    "style/unpythonic/augmented_assignment": [
       "collatz.py"
     ],
     "type/number/integer/literal": [
