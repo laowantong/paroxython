@@ -161,7 +161,6 @@ var data = google.visualization.arrayToDataTable([['node', 'occurrences'],
 ['• condition identity not.', 54],
 ['• condition inequality.', 770],
 ['• condition inequality chained 2.', 18],
-['• condition yoda.', 6],
 ['• def argument arg.', 2480],
 ['• def argument kwarg.', 6],
 ['• def argument no.', 143],
@@ -404,14 +403,14 @@ var data = google.visualization.arrayToDataTable([['node', 'occurrences'],
 ['• flow loop exit early raise.', 10],
 ['• flow loop exit early return.', 99],
 ['• flow loop exit late.', 923],
-['• flow loop for.', 110],
+['• flow loop for.', 90],
 ['• flow loop for arithmetic.', 267],
 ['• flow loop for arithmetic start.', 182],
 ['• flow loop for arithmetic start step.', 36],
 ['• flow loop for arithmetic start step backwards.', 30],
 ['• flow loop for elements.', 145],
-['• flow loop for elements_and_indexes.', 25],
-['• flow loop for indexes.', 80],
+['• flow loop for indexes.', 107],
+['• flow loop for indexes_and_elements.', 25],
 ['• flow loop for nested 1.', 157],
 ['• flow loop for nested 2.', 17],
 ['• flow loop for nested 3.', 1],
@@ -448,28 +447,25 @@ var data = google.visualization.arrayToDataTable([['node', 'occurrences'],
 ['• operator string format.', 70],
 ['• operator string replication.', 11],
 ['• operator ternary.', 61],
+['• pattern elements accumulate all.', 147],
 ['• pattern elements accumulate count.', 36],
-['• pattern elements accumulate in_list.', 23],
-['• pattern elements accumulate in_list extension.', 2],
-['• pattern elements accumulate in_list filtered.', 32],
-['• pattern elements accumulate in_set.', 1],
-['• pattern elements accumulate in_set filtered.', 3],
-['• pattern elements accumulate product.', 9],
-['• pattern elements accumulate product filtered.', 3],
-['• pattern elements accumulate substraction.', 2],
-['• pattern elements accumulate substraction filtered.', 1],
-['• pattern elements accumulate summation.', 86],
-['• pattern elements accumulate summation filtered.', 29],
-['• pattern elements find best.', 13],
-['• pattern elements find best max.', 7],
-['• pattern elements find best max filtered.', 1],
-['• pattern elements find best min filtered.', 2],
-['• pattern elements find first.', 5],
+['• pattern elements accumulate find best.', 13],
+['• pattern elements accumulate find best index.', 1],
+['• pattern elements accumulate find best max.', 8],
+['• pattern elements accumulate find best min.', 2],
+['• pattern elements accumulate into_list.', 55],
+['• pattern elements accumulate into_list extension.', 2],
+['• pattern elements accumulate into_set.', 4],
+['• pattern elements accumulate product.', 12],
+['• pattern elements accumulate some.', 76],
+['• pattern elements accumulate substraction.', 3],
+['• pattern elements accumulate summation.', 115],
+['• pattern elements find first_good.', 1],
+['• pattern elements find first_good index.', 1],
 ['• pattern elements satisfy all.', 25],
 ['• pattern elements satisfy some.', 3],
-['• pattern expression mid naive.', 12],
-['• pattern expression mid recommended.', 4],
-['• pattern inputs find_first_good.', 4],
+['• pattern expression mid_value.', 12],
+['• pattern inputs find first_good.', 4],
 ['• pattern states accumulate count.', 81],
 ['• style functional.', 21],
 ['• style functional_trait accumulate.', 1],
@@ -480,6 +476,8 @@ var data = google.visualization.arrayToDataTable([['node', 'occurrences'],
 ['• style functional_trait reduce.', 1],
 ['• style imperative.', 2],
 ['• style imperative flat.', 4],
+['• style naive mid_value.', 12],
+['• style naive return_condition.', 5],
 ['• style object_oriented.', 75],
 ['• style one_liner.', 12],
 ['• style procedural.', 315],
@@ -551,7 +549,6 @@ var data = google.visualization.arrayToDataTable([['node', 'occurrences'],
 ['• var assignment parallel more_than_two.', 35],
 ['• var assignment parallel slide.', 11],
 ['• var assignment parallel swap.', 30],
-['• var assignment sequence swap.', 13],
 ['• var assignment single.', 3458],
 ['• var assignment throwaway.', 5],
 ['• var deletion.', 7],
@@ -1056,6 +1053,7 @@ assignment) are classified under <code>var/assignment</code>.</p>
 <p>For priority reasons, Paroxython searches for these loop patterns in “statement” loops only, not in “comprehension” loops. This may change in a future version.</p>
 </div>
 <h3 id="tagging-with-style">Tagging with <code>style</code></h3>
+<h4 id="paradigms">Paradigms</h4>
 <p>Python allows you to mix freely multiple paradigms. However, for Paroxython, every program will fall into exactly one of the following four categories, always associated to the whole span:</p>
 <ol>
 <li><code>style/object_oriented</code> if it features at least one class definition;</li>
@@ -1073,6 +1071,19 @@ def abundant_numbers_below(bound):
     # is greater than the number itself (Wikipedia).
     return [n for n in range(1, bound) if sum_proper_divisors(n) &gt; n]
 </code></pre>
+<h4 id="flawed-styles">Flawed styles</h4>
+<p>Although Paroxython is no linter, it may tag some unpythonic (i.e., non-idiomatic) or naive patterns, frequent in the beginners' code. For instance:</p>
+<pre><code class="python">aux = a
+a = b
+b = aux
+</code></pre>
+<p>&hellip; is tagged <code>style/unpythonic/swap</code>, and:</p>
+<pre><code class="python">if condition:
+    return False
+else:
+    return True
+</code></pre>
+<p>is tagged <code>style/naive/return_condition</code>. Search <code>_unpythonic</code> and <code>_naive</code> in <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md"><code>spec.md</code></a> for the current list (which could of course be extended <em>ad libitum</em>).</p>
 <h3 id="going-meta">Going <code>meta</code></h3>
 <p>Paroxython will store inside the <code>meta</code> tree some program metadata, such as the number of lines. Some children, such as <code>topic</code>, <code>technique</code>, <code>complexity</code>, are already provided, which you can fill in by adding a manual hint in the source code of the programs.</p>
 <h2 id="modifying-the-taxonomy">Modifying the taxonomy</h2>
@@ -1879,7 +1890,11 @@ Thanks and kudos to the author, Matthew Barnett: without his awesome work, many 
 <li><a href="#imperative-needs-flow">Imperative needs: flow</a></li>
 <li><a href="#for-your-convenience-operator-condition-subscript">For your convenience: operator, condition, subscript</a></li>
 <li><a href="#zooming-out-pattern">Zooming out: pattern</a></li>
-<li><a href="#tagging-with-style">Tagging with style</a></li>
+<li><a href="#tagging-with-style">Tagging with style</a><ul>
+<li><a href="#paradigms">Paradigms</a></li>
+<li><a href="#flawed-styles">Flawed styles</a></li>
+</ul>
+</li>
 <li><a href="#going-meta">Going meta</a></li>
 </ul>
 </li>

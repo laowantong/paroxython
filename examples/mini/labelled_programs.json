@@ -91,6 +91,10 @@
         [[5,5,"1-5-1-1-2-1-1-1-0-"],[7,7,"1-5-1-1-2-2-1-1-0-2-"]]
       ],
       [
+        "augmented_assignment_unpythonic",
+        [[5,5,"1-5-1-1-2-1-1-"]]
+      ],
+      [
         "binary_operator:Add",
         [[7,7,"1-5-1-1-2-2-1-1-"]]
       ],
@@ -257,10 +261,6 @@
       [
         "single_assignment:n",
         [[5,5,"1-5-1-1-2-1-1-"],[7,7,"1-5-1-1-2-2-1-"]]
-      ],
-      [
-        "suggest_augmented_assignment",
-        [[5,5,"1-5-1-1-2-1-1-"]]
       ],
       [
         "suggest_constant_definition",

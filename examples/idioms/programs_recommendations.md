@@ -11,7 +11,7 @@
     - [`004.2921-create-a-function-which-returns-the-square-of-an-integer.py`](#program-0042921-create-a-function-which-returns-the-square-of-an-integerpy-learning-cost-68125)
     - [`005.0663-create-a-2d-point-data-structure.py`](#program-0050663-create-a-2d-point-data-structurepy-learning-cost-246875)
     - [`006.0032-iterate-over-list-values.py`](#program-0060032-iterate-over-list-valuespy-learning-cost-3375)
-    - [`007.0183-iterate-over-list-indexes-and-values.py`](#program-0070183-iterate-over-list-indexes-and-valuespy-learning-cost-63125)
+    - [`007.0183-iterate-over-list-indexes-and-values.py`](#program-0070183-iterate-over-list-indexes-and-valuespy-learning-cost-54375)
     - [`008.0039-initialize-a-new-map-associative-array.py`](#program-0080039-initialize-a-new-map-associative-arraypy-learning-cost-53125)
     - [`009.1410-create-a-binary-tree-data-structure.py`](#program-0091410-create-a-binary-tree-data-structurepy-learning-cost-665625)
     - [`009.3176-create-a-binary-tree-data-structure.py`](#program-0093176-create-a-binary-tree-data-structurepy-learning-cost-578125)
@@ -29,7 +29,7 @@
     - [`019.0197-reverse-a-list.py`](#program-0190197-reverse-a-listpy-learning-cost-34375)
     - [`019.1983-reverse-a-list.py`](#program-0191983-reverse-a-listpy-learning-cost-4375)
     - [`019.3164-reverse-a-list.py`](#program-0193164-reverse-a-listpy-learning-cost-346875)
-    - [`020.0573-return-two-values.py`](#program-0200573-return-two-valuespy-learning-cost-1134375)
+    - [`020.0573-return-two-values.py`](#program-0200573-return-two-valuespy-learning-cost-1046875)
     - [`021.0084-swap-values-of-variables-a-and-b.py`](#program-0210084-swap-values-of-variables-a-and-bpy-learning-cost-35)
     - [`022.0243-convert-string-to-integer.py`](#program-0220243-convert-string-to-integerpy-learning-cost-434375)
     - [`023.1102-convert-real-number-to-string-with-2-decimal-places.py`](#program-0231102-convert-real-number-to-string-with-2-decimal-placespy-learning-cost-528125)
@@ -56,7 +56,7 @@
     - [`042.1264-continue-outer-loop.py`](#program-0421264-continue-outer-looppy-learning-cost-9875)
     - [`042.3168-continue-outer-loop.py`](#program-0423168-continue-outer-looppy-learning-cost-703125)
     - [`043.0676-break-outer-loop.py`](#program-0430676-break-outer-looppy-learning-cost-130)
-    - [`043.2733-break-outer-loop.py`](#program-0432733-break-outer-looppy-learning-cost-175625)
+    - [`043.2733-break-outer-loop.py`](#program-0432733-break-outer-looppy-learning-cost-166875)
     - [`044.0190-insert-element-in-list.py`](#program-0440190-insert-element-in-listpy-learning-cost-346875)
     - [`045.0570-pause-execution-for-5-seconds.py`](#program-0450570-pause-execution-for-5-secondspy-learning-cost-60625)
     - [`046.0191-extract-beginning-of-string-prefix.py`](#program-0460191-extract-beginning-of-string-prefixpy-learning-cost-51875)
@@ -137,7 +137,7 @@
     - [`118.1254-list-to-set.py`](#program-1181254-list-to-setpy-learning-cost-434375)
     - [`118.3266-list-to-set.py`](#program-1183266-list-to-setpy-learning-cost-346875)
     - [`119.1253-deduplicate-list.py`](#program-1191253-deduplicate-listpy-learning-cost-69375)
-    - [`119.3263-deduplicate-list.py`](#program-1193263-deduplicate-listpy-learning-cost-165)
+    - [`119.3263-deduplicate-list.py`](#program-1193263-deduplicate-listpy-learning-cost-17375)
     - [`120.1479-read-integer-from-stdin.py`](#program-1201479-read-integer-from-stdinpy-learning-cost-678125)
     - [`121.3029-udp-listen-and-read.py`](#program-1213029-udp-listen-and-readpy-learning-cost-125)
     - [`122.1453-declare-enumeration.py`](#program-1221453-declare-enumerationpy-learning-cost-775)
@@ -446,7 +446,7 @@
 
 ---
 
-### Program `007.0183-iterate-over-list-indexes-and-values.py` (learning cost 6.3125)
+### Program `007.0183-iterate-over-list-indexes-and-values.py` (learning cost 5.4375)
 
 ```python
 1   for i, x in enumerate(items):
@@ -458,8 +458,7 @@
 | 0.9375 | `call/function/builtin/enumerate` | 1 |
 | 0.9375 | `call/function/builtin/print` | 2 |
 | 0.9375 | `flow/loop/exit/late` | 1-2 |
-| 0.875 | `flow/loop/for` | 1-2 |
-| 0.9375 | `flow/loop/for/elements_and_indexes` | 1-2 |
+| 0.9375 | `flow/loop/for/indexes_and_elements` | 1-2 |
 | 0.75 | `style/imperative` | 1-2 |
 | 0.9375 | `type/sequence/tuple/literal` | 1 |
 | 0 | `meta/program` | 1-2 |
@@ -824,7 +823,7 @@
 
 ---
 
-### Program `020.0573-return-two-values.py` (learning cost 11.34375)
+### Program `020.0573-return-two-values.py` (learning cost 10.46875)
 
 ```python
 1   def search(m, x):
@@ -843,8 +842,7 @@
 | 0.875 | `def/return/something` | 4 |
 | 0.875 | `flow/conditional/no_else` | 3-4 |
 | 0.96875 | `flow/loop/exit/early/return` | 2-4 |
-| 0.875 | `flow/loop/for` | 2-4 |
-| 0.9375 | `flow/loop/for/elements_and_indexes` | 2-4 |
+| 0.9375 | `flow/loop/for/indexes_and_elements` | 2-4 |
 | 0.75 | `style/procedural` | 1-4 |
 | 0.75 | `type/sequence` | 4 |
 | 0.9375 | `type/sequence/tuple/literal` | 2, 4 |
@@ -1468,7 +1466,7 @@
 
 ---
 
-### Program `043.2733-break-outer-loop.py` (learning cost 17.5625)
+### Program `043.2733-break-outer-loop.py` (learning cost 16.6875)
 
 ```python
 1   def loop_breaking(m, v):
@@ -1493,8 +1491,7 @@
 | 0.875 | `def/return/something` | 5 |
 | 0.875 | `flow/conditional/no_else` | 4-5 |
 | 0.96875 | `flow/loop/exit/early/return` | 2-5, 3-5 |
-| 0.875 | `flow/loop/for` | 2-5 |
-| 0.9375 | `flow/loop/for/elements_and_indexes` | 2-5, 3-5 |
+| 0.9375 | `flow/loop/for/indexes_and_elements` | 2-5, 3-5 |
 | 0.96875 | `flow/loop/for/nested/1` | 3-5 |
 | 0.75 | `style/procedural` | 1-7 |
 | 0.875 | `type/null/literal` | 6 |
@@ -3103,7 +3100,7 @@
 
 ---
 
-### Program `119.3263-deduplicate-list.py` (learning cost 16.5)
+### Program `119.3263-deduplicate-list.py` (learning cost 17.375)
 
 ```python
 1   elements = ["b", "a", "b", "c"]
@@ -3127,8 +3124,9 @@
 | 0.875 | `flow/conditional/no_else` | 5-7 |
 | 0.9375 | `flow/loop/exit/late` | 4-7 |
 | 0.9375 | `flow/loop/for/elements` | 4-7 |
-| 0.96875 | `pattern/elements/accumulate/in_list/filtered` | 4-7 |
-| 0.96875 | `pattern/elements/accumulate/in_set/filtered` | 4-7 |
+| 0.9375 | `pattern/elements/accumulate/into_list` | 4-7 |
+| 0.9375 | `pattern/elements/accumulate/into_set` | 4-7 |
+| 0.9375 | `pattern/elements/accumulate/some` | 4-7 |
 | 0.75 | `style/imperative` | 1-8 |
 | 0.875 | `type/non_sequence/set` | 2, 6 |
 | 0.875 | `type/sequence/list` | 7 |

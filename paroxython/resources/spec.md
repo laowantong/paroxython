@@ -27,8 +27,9 @@
   - [Boolean expressions](#boolean-expressions)
       - [Feature `boolean_operator`](#feature-boolean_operator)
       - [Feature `comparison_operator`](#feature-comparison_operator)
-      - [Feature `yoda_comparison` (SQL)](#feature-yoda_comparison)
+      - [Feature `yoda_comparison_unpythonic` (SQL)](#feature-yoda_comparison_unpythonic)
       - [Feature `chained_comparison`](#feature-chained_comparison)
+      - [Feature `chained_comparison_unpythonic`](#feature-chained_comparison_unpythonic)
       - [Feature `chained_equalities|chained_inequalities` (SQL)](#feature-chained_equalitieschained_inequalities)
       - [Feature `divisibility_test`](#feature-divisibility_test)
       - [Feature `short_circuit`](#feature-short_circuit)
@@ -66,6 +67,7 @@
       - [Feature `single_assignment`](#feature-single_assignment)
       - [Feature `parallel_assignment`](#feature-parallel_assignment)
       - [Feature `augmented_assignment`](#feature-augmented_assignment)
+      - [Feature `augmented_assignment_unpythonic`](#feature-augmented_assignment_unpythonic)
       - [Feature `subscript_augmented_assignment`](#feature-subscript_augmented_assignment)
       - [Feature `chained_assignment`](#feature-chained_assignment)
       - [Feature `assignment_lhs_identifier`](#feature-assignment_lhs_identifier)
@@ -80,7 +82,7 @@
       - [Feature `update_by_member_call_with` (SQL)](#feature-update_by_member_call_with)
       - [Feature `update_with` (SQL)](#feature-update_with)
       - [Feature `increment`](#feature-increment)
-      - [Feature `swap_with_aux`](#feature-swap_with_aux)
+      - [Feature `swap_unpythonic`](#feature-swap_unpythonic)
       - [Feature `swap`](#feature-swap)
       - [Feature `slide`](#feature-slide)
       - [Feature `negate`](#feature-negate)
@@ -122,6 +124,7 @@
       - [Feature `if_else_branch`](#feature-if_else_branch)
       - [Feature `if_without_else` (SQL)](#feature-if_without_else)
       - [Feature `if_guard` (SQL)](#feature-if_guard)
+      - [Feature `return_condition_naive`](#feature-return_condition_naive)
       - [Feature `nested_if` (SQL)](#feature-nested_if)
   - [Iterations](#iterations)
     - [Iteration keywords](#iteration-keywords)
@@ -162,9 +165,13 @@
       - [Feature `accumulate_some_elements` (SQL)](#feature-accumulate_some_elements)
       - [Feature `accumulate_all_elements` (SQL)](#feature-accumulate_all_elements)
       - [Feature `find_best_element` (SQL)](#feature-find_best_element)
+      - [Feature `find_best_element_index` (SQL)](#feature-find_best_element_index)
+      - [Feature `find_best_element_index_unpythonic` (SQL)](#feature-find_best_element_index_unpythonic)
     - [Sequential loops with early exit](#sequential-loops-with-early-exit)
       - [Feature `universal_quantification|existential_quantification` (SQL)](#feature-universal_quantificationexistential_quantification)
-      - [Feature `find_first_element` (SQL)](#feature-find_first_element)
+      - [Feature `find_first_good_element` (SQL)](#feature-find_first_good_element)
+      - [Feature `find_first_good_element_index` (SQL)](#feature-find_first_good_element_index)
+      - [Feature `find_first_good_element_index_unpythonic` (SQL)](#feature-find_first_good_element_index_unpythonic)
   - [Non-sequential loops](#non-sequential-loops-1)
     - [Non-sequential infinite loops](#non-sequential-infinite-loops)
       - [Feature `get_valid_input` (SQL)](#feature-get_valid_input)
@@ -182,13 +189,6 @@
       - [Feature `one_liner_style` (SQL)](#feature-one_liner_style)
   - [Others](#others)
       - [Feature `topic|technique|complexity`](#feature-topictechniquecomplexity)
-- [Suggestions](#suggestions)
-  - [Assignments](#assignments)
-      - [Feature `suggest_augmented_assignment`](#feature-suggest_augmented_assignment)
-  - [Expressions](#expressions-1)
-      - [Feature `suggest_comparison_chaining`](#feature-suggest_comparison_chaining)
-  - [Subroutines](#subroutines)
-      - [Feature `suggest_condition_return`](#feature-suggest_condition_return)
 
 # AST
 
@@ -339,7 +339,7 @@ Further categorization of numeric literals does not require to construct a sophi
 [⬇️ feature `concatenation_operator|replication_operator`](#feature-concatenation_operatorreplication_operator)  
 [⬇️ feature `magic_number`](#feature-magic_number)  
 [⬇️ feature `string_formatting_operator`](#feature-string_formatting_operator)  
-[⬇️ feature `yoda_comparison`](#feature-yoda_comparison)  
+[⬇️ feature `yoda_comparison_unpythonic`](#feature-yoda_comparison_unpythonic)  
 
 ##### Specification
 
@@ -482,7 +482,8 @@ _Remark._ To match escape sequences in the pipeline, you must prefix the string 
 1   emoji = "😍"
 2   header = rf"Date\tStudent\tGrade\n"
 3   pound = "£"
-4   print("nothing special here!")
+4   print("nothing special here!") # no match
+5   print("\U0001F60D")
 ```
 
 ##### Matches
@@ -491,7 +492,7 @@ _Remark._ To match escape sequences in the pipeline, you must prefix the string 
 |:--|:--|
 | `special_literal_string:Date\\tStudent\\tGrade\\n` | 2 |
 | `special_literal_string:£` | 3 |
-| `special_literal_string:😍` | 1 |
+| `special_literal_string:😍` | 1, 5 |
 
 --------------------------------------------------------------------------------
 
@@ -558,6 +559,8 @@ Match an index in a sequence type or a key in a dictionary type, and suffix it b
 
 ##### Derivations
 
+[⬇️ feature `find_best_element_index_unpythonic`](#feature-find_best_element_index_unpythonic)  
+[⬇️ feature `find_first_good_element_index_unpythonic`](#feature-find_first_good_element_index_unpythonic)  
 [⬇️ feature `nested_index`](#feature-nested_index)  
 
 ##### Specification
@@ -1254,7 +1257,7 @@ _Remark._ `Not` is not a boolean operator in Python. To match it, use [feature `
 ##### Derivations
 
 [⬇️ feature `chained_equalities|chained_inequalities`](#feature-chained_equalitieschained_inequalities)  
-[⬇️ feature `yoda_comparison`](#feature-yoda_comparison)  
+[⬇️ feature `yoda_comparison_unpythonic`](#feature-yoda_comparison_unpythonic)  
 
 ##### Specification
 
@@ -1282,7 +1285,7 @@ _Remark._ `Not` is not a boolean operator in Python. To match it, use [feature `
 
 --------------------------------------------------------------------------------
 
-#### Feature `yoda_comparison`
+#### Feature `yoda_comparison_unpythonic`
 
 The so-called Yoda style puts the literal operand on the left side of a comparison. Although generally not recommended, this order is sometimes natural or even mandatory for certain non-commutative operators (see examples below).
 
@@ -1294,7 +1297,7 @@ The so-called Yoda style puts the literal operand on the left side of a comparis
 ##### Specification
 
 ```sql
-SELECT "yoda_comparison",
+SELECT "yoda_comparison_unpythonic",
        c.name_suffix,
        c.span,
        c.path
@@ -1302,7 +1305,8 @@ FROM t_comparison_operator c
 JOIN t_literal lit ON (c.span = lit.span
                        AND c.path GLOB "*-2-1-"
                        AND lit.path GLOB "*-0-")
-WHERE substr(c.path, 1, length(c.path)-4) == substr(lit.path, 1, length(lit.path)-2)
+WHERE c.name_suffix NOT REGEXP "In|NotIn|Lt|LtE"
+  AND substr(c.path, 1, length(c.path)-4) == substr(lit.path, 1, length(lit.path)-2)
   AND c.path NOT IN -- ensure that the RHS is not itself a literal
     (SELECT path
      FROM t_literal)
@@ -1313,19 +1317,20 @@ WHERE substr(c.path, 1, length(c.path)-4) == substr(lit.path, 1, length(lit.path
 ```python
 1   assert 0 == x # match
 2   assert x == 0 # no match
-3   if "A" <= symbol <= "Z": # match: filtered out on the taxonomy level
+3   if "A" <= symbol <= "Z": # no match
 4       pass
 5   assert (a, b) == (c, d) # no match, since the RHS is a literal too
-6   assert "needle" not in haystack # match: filtered out on the taxonomy level
+6   assert "needle" not in haystack # no match: this is the only possible order
+7   assert 5 > x # match: x < 5 would be more natural
+8   assert 5 < x # no match
 ```
 
 ##### Matches
 
 | Label | Lines |
 |:--|:--|
-| `yoda_comparison:Eq` | 1 |
-| `yoda_comparison:LtE` | 3 |
-| `yoda_comparison:NotIn` | 6 |
+| `yoda_comparison_unpythonic:Eq` | 1 |
+| `yoda_comparison_unpythonic:Gt` | 7 |
 
 --------------------------------------------------------------------------------
 
@@ -1357,6 +1362,48 @@ WHERE substr(c.path, 1, length(c.path)-4) == substr(lit.path, 1, length(lit.path
 |:--|:--|
 | `chained_comparison:2` | 2 |
 | `chained_comparison:3` | 3 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `chained_comparison_unpythonic`
+
+##### Specification
+
+```re
+           ^(.*)/_type=BoolOp
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
+\n(?:\1.+\n)*?\1/op/_type=And
+\n(?:\1.+\n)*?\1/values/1/_type=Compare
+\n(?:\1.+\n)*?\1/values/1/comparators/1/_hash=(?P<HASH_1>.+) # capture the right operand of the left comparison
+\n(?:\1.+\n)*?\1/values/2/_type=Compare
+\n(?:\1.+\n)*?\1/values/2/left/_hash=(?P=HASH_1) # match the left operand of the right comparison
+```
+
+##### Example
+
+```python
+1   a < b and b < c
+2   a <= b and b < c
+3   a == b and b == c
+4   a != b and b != c
+```
+
+May be rewritten as:
+
+```python
+1   a < b < c
+2   a <= b < c
+3   a == b == c
+4   a != b != c
+```
+
+Note that the last simplification is rather confusing and should be avoided.
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `chained_comparison_unpythonic` | 1, 2, 3, 4 |
 
 --------------------------------------------------------------------------------
 
@@ -2451,6 +2498,8 @@ Deleting a name removes the binding of that name from the local or global namesp
 ##### Derivations
 
 [⬇️ feature `find_best_element`](#feature-find_best_element)  
+[⬇️ feature `find_best_element_index`](#feature-find_best_element_index)  
+[⬇️ feature `find_best_element_index_unpythonic`](#feature-find_best_element_index_unpythonic)  
 [⬇️ feature `magic_number`](#feature-magic_number)  
 
 ##### Specification
@@ -2549,6 +2598,48 @@ Match a tuple unpacking assignment, and suffix it with the tuple size.
 
 --------------------------------------------------------------------------------
 
+#### Feature `augmented_assignment_unpythonic`
+
+When the RHS of an assignment consists in a binary operation whose left operand is the target (`a = a op expr`), the statement can be shortened as `a op= expr`.
+
+##### Specification
+
+```re
+           ^(.*)/_type=Assign
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
+\n(?:\1.+\n)*?\1/assigntargets/_length=1
+\n(?:\1.+\n)*?\1/assigntargets/1/id=(?P<TARGET>.+)
+\n(?:\1.+\n)*?\1/assignvalue/_type=BinOp
+\n(?:\1.+\n)*?\1/assignvalue/left/id=(?P=TARGET)\b
+```
+
+##### Example
+
+```python
+1   a = a + b
+2   a = a + (b + c)
+3   a = b + a # no match
+4   a = a + b + c # LIMITATION: no match
+```
+
+May be rewritten as:
+
+```python
+1   a += b
+2   a += b + c
+```
+
+- Line 3, note that the `+` binary operator is not necessarily commutative, e.g. on strings.
+- Some cases like line 4 should be matched, check the associativity rules.
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `augmented_assignment_unpythonic` | 1, 2 |
+
+--------------------------------------------------------------------------------
+
 #### Feature `subscript_augmented_assignment`
 
 ##### Specification
@@ -2610,6 +2701,8 @@ Capture any identifier appearing on the left hand side of an assignment (possibl
 [⬇️ feature `count_elements|count_states`](#feature-count_elementscount_states)  
 [⬇️ feature `count_inputs`](#feature-count_inputs)  
 [⬇️ feature `find_best_element`](#feature-find_best_element)  
+[⬇️ feature `find_best_element_index`](#feature-find_best_element_index)  
+[⬇️ feature `find_best_element_index_unpythonic`](#feature-find_best_element_index_unpythonic)  
 [⬇️ feature `get_valid_input`](#feature-get_valid_input)  
 [⬇️ feature `update_by_assignment`](#feature-update_by_assignment)  
 [⬇️ feature `update_by_augmented_assignment`](#feature-update_by_augmented_assignment)  
@@ -2674,6 +2767,8 @@ Capture any [_atom_](#feature-call_argument) appearing on the right hand side of
 ##### Derivations
 
 [⬇️ feature `find_best_element`](#feature-find_best_element)  
+[⬇️ feature `find_best_element_index`](#feature-find_best_element_index)  
+[⬇️ feature `find_best_element_index_unpythonic`](#feature-find_best_element_index_unpythonic)  
 [⬇️ feature `update_by_assignment`](#feature-update_by_assignment)  
 [⬇️ feature `update_by_augmented_assignment`](#feature-update_by_augmented_assignment)  
 
@@ -3173,7 +3268,7 @@ WHERE name_prefix IN ("update_by_assignment_with",
 
 --------------------------------------------------------------------------------
 
-#### Feature `swap_with_aux`
+#### Feature `swap_unpythonic`
 
 Swap two variables or two elements of an array with an auxiliary variable (unpythonic, but deserves at least a mention in an algorithmic course).
 
@@ -3211,7 +3306,7 @@ Swap two variables or two elements of an array with an auxiliary variable (unpyt
 
 | Label | Lines |
 |:--|:--|
-| `swap_with_aux` | 1-3, 5-7 |
+| `swap_unpythonic` | 1-3, 5-7 |
 
 --------------------------------------------------------------------------------
 
@@ -3505,7 +3600,9 @@ Match `return` statements and, when the returned object is an [_atom_](#feature-
 [⬇️ feature `accumulate_inputs`](#feature-accumulate_inputs)  
 [⬇️ feature `closure`](#feature-closure)  
 [⬇️ feature `count_inputs`](#feature-count_inputs)  
-[⬇️ feature `find_first_element`](#feature-find_first_element)  
+[⬇️ feature `find_first_good_element`](#feature-find_first_good_element)  
+[⬇️ feature `find_first_good_element_index`](#feature-find_first_good_element_index)  
+[⬇️ feature `find_first_good_element_index_unpythonic`](#feature-find_first_good_element_index_unpythonic)  
 [⬇️ feature `function_returning_something`](#feature-function_returning_something)  
 [⬇️ feature `get_valid_input`](#feature-get_valid_input)  
 [⬇️ feature `if_guard`](#feature-if_guard)  
@@ -4638,7 +4735,11 @@ A synonym of feature `node:If`.
 [⬇️ feature `accumulate_some_elements`](#feature-accumulate_some_elements)  
 [⬇️ feature `count_inputs`](#feature-count_inputs)  
 [⬇️ feature `find_best_element`](#feature-find_best_element)  
-[⬇️ feature `find_first_element`](#feature-find_first_element)  
+[⬇️ feature `find_best_element_index`](#feature-find_best_element_index)  
+[⬇️ feature `find_best_element_index_unpythonic`](#feature-find_best_element_index_unpythonic)  
+[⬇️ feature `find_first_good_element`](#feature-find_first_good_element)  
+[⬇️ feature `find_first_good_element_index`](#feature-find_first_good_element_index)  
+[⬇️ feature `find_first_good_element_index_unpythonic`](#feature-find_first_good_element_index_unpythonic)  
 [⬇️ feature `flat_style`](#feature-flat_style)  
 [⬇️ feature `get_valid_input`](#feature-get_valid_input)  
 [⬇️ feature `if_without_else`](#feature-if_without_else)  
@@ -4707,7 +4808,9 @@ Match and suffix any [atom](#feature-call_argument) present in the condition of 
 [⬇️ feature `accumulate_inputs`](#feature-accumulate_inputs)  
 [⬇️ feature `count_inputs`](#feature-count_inputs)  
 [⬇️ feature `find_best_element`](#feature-find_best_element)  
-[⬇️ feature `find_first_element`](#feature-find_first_element)  
+[⬇️ feature `find_best_element_index`](#feature-find_best_element_index)  
+[⬇️ feature `find_best_element_index_unpythonic`](#feature-find_best_element_index_unpythonic)  
+[⬇️ feature `find_first_good_element`](#feature-find_first_good_element)  
 [⬇️ feature `get_valid_input`](#feature-get_valid_input)  
 [⬇️ feature `universal_quantification|existential_quantification`](#feature-universal_quantificationexistential_quantification)  
 
@@ -5034,6 +5137,56 @@ JOIN t_return ret ON (guard.span_end == ret.span_end)
 
 --------------------------------------------------------------------------------
 
+#### Feature `return_condition_naive`
+
+When a predicate ends with a conditional whose sole purpose is to return `True` or `False`, it is enough to return the condition.
+
+##### Specification
+
+```re
+           ^(.*)/_type=If
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
+\n(?:\1.+\n)*?\1/body/1/_type=Return
+\n(?:\1.+\n)*?\1/body/1/value/value=(?P<BOOL>True|False) # name BOOL the value used here
+\n(?:\1.+\n)*?\1/orelse/1/_type=Return
+\n(?:\1.+\n)*?\1/orelse/1/_pos=(?P<POS>.+)
+\n(?:\1.+\n)*?\1/orelse/1/value/value=(True|False)(?<!(?P=BOOL)) # and check not BOOL is used there
+```
+
+##### Example
+
+```python
+1   def foo():
+2       if condition:
+3           return True
+4       else:
+5           return False
+6
+7   def bar():
+8       if condition:
+9           return False
+10      else:
+11          return True
+```
+
+May be rewritten as:
+
+```python
+1   def foo():
+2       return condition
+3
+4   def bar():
+5       return not condition
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `return_condition_naive` | 2-5, 8-11 |
+
+--------------------------------------------------------------------------------
+
 #### Feature `nested_if`
 
 Match an `if` clause nested in _n_ other `if` clauses, suffixing it by _n_.
@@ -5112,7 +5265,7 @@ Match sequential loops, along with their iteration variable(s).
 [⬇️ feature `accumulate_elements`](#feature-accumulate_elements)  
 [⬇️ feature `accumulate_some_elements`](#feature-accumulate_some_elements)  
 [⬇️ feature `find_best_element`](#feature-find_best_element)  
-[⬇️ feature `find_first_element`](#feature-find_first_element)  
+[⬇️ feature `find_best_element_index`](#feature-find_best_element_index)  
 [⬇️ feature `for_range`](#feature-for_range)  
 [⬇️ feature `nested_for`](#feature-nested_for)  
 [⬇️ feature `universal_quantification|existential_quantification`](#feature-universal_quantificationexistential_quantification)  
@@ -5249,11 +5402,19 @@ GROUP BY path
 
 Iterate over the elements of a (named) collection.
 
+##### Derivations
+
+[⬇️ feature `find_first_good_element`](#feature-find_first_good_element)  
+
 ##### Specification
 
 ```re
            ^(.*)/_type=For
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
+(
+\n(?:\1.+\n)*?\1/(?P<_1>target\b.*)/_pos=(?P<POS>.+) # force len(d["POS"]) != len(d["SUFFIX"])
+\n(?:\1.+\n)*?\1/(?P=_1)           /id=(?P<SUFFIX>.+)
+)+
 \n(?:\1.+\n)*?\1/iter/_type=Name
 \n(?:\1.+\n)* \1/.*/_pos=(?P<POS>.+)
 ```
@@ -5266,13 +5427,23 @@ Iterate over the elements of a (named) collection.
 3           pass
 4       for i in seq_2:
 5           pass
+6
+7   for ticker, name, price, change, pct in stocks:
+8       status = status_labels[cmp(float(change), 0.0)]
+9       print("{} is {} ({:.2f})".format(name, status, float(pct)))
 ```
 
 ##### Matches
 
 | Label | Lines |
 |:--|:--|
-| `for_each` | 1-5, 4-5 |
+| `for_each:x` | 1-5 |
+| `for_each:i` | 4-5 |
+| `for_each:ticker` | 7-9 |
+| `for_each:name` | 7-9 |
+| `for_each:price` | 7-9 |
+| `for_each:change` | 7-9 |
+| `for_each:pct` | 7-9 |
 
 --------------------------------------------------------------------------------
 
@@ -5327,11 +5498,17 @@ JOIN t_range ON (t_range.path GLOB t_for.path || "*-")
 
 Iterate over index numbers and elements of a collection.
 
+##### Derivations
+
+[⬇️ feature `find_best_element_index`](#feature-find_best_element_index)  
+[⬇️ feature `find_first_good_element_index`](#feature-find_first_good_element_index)  
+
 ##### Specification
 
 ```re
            ^(.*)/_type=For
-\n(?:\1.+\n)*?\1/iter/_pos=(?P<POS>.+)
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
+\n(?:\1.+\n)*?\1/target/elts/1/id=(?P<SUFFIX>.+)
 \n(?:\1.+\n)*?\1/iter/func/id=enumerate
 \n(?:\1.+\n)* \1/.*/_pos=(?P<POS>.+)
 ```
@@ -5347,7 +5524,7 @@ Iterate over index numbers and elements of a collection.
 
 | Label | Lines |
 |:--|:--|
-| `for_indexes_elements` | 1-2 |
+| `for_indexes_elements:i` | 1-2 |
 
 --------------------------------------------------------------------------------
 
@@ -5355,17 +5532,19 @@ Iterate over index numbers and elements of a collection.
 
 Iterate over index numbers of a collection.
 
+##### Derivations
+
+[⬇️ feature `find_best_element_index_unpythonic`](#feature-find_best_element_index_unpythonic)  
+[⬇️ feature `find_first_good_element_index_unpythonic`](#feature-find_first_good_element_index_unpythonic)  
+
 ##### Specification
 
 ```re
            ^(.*)/_type=For
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/iter/_type=Call
+\n(?:\1.+\n)*?\1/target/id=(?P<SUFFIX>.+)
 \n(?:\1.+\n)*?\1/iter/func/id=range
-\n(?:\1.+\n)*?\1/iter/args/_length=1
-\n(?:\1.+\n)*?\1/iter/args/1/_type=Call
-\n(?:\1.+\n)*?\1/iter/args/1/func/id=len
-\n(?:\1.+\n)*?\1/iter/keywords/_length=0
+\n(?:\1.+\n)*?\1/iter/args/[12]/func/id=len
 \n(?:\1.+\n)* \1/.*/_pos=(?P<POS>.+)
 ```
 
@@ -5373,14 +5552,16 @@ Iterate over index numbers of a collection.
 
 ```python
 1   for i in range(len(elements)):
-2       pass
+2       for j in range(1, len(elements)):
+3           pass
 ```
 
 ##### Matches
 
 | Label | Lines |
 |:--|:--|
-| `for_indexes` | 1-2 |
+| `for_indexes:i` | 1-3 |
+| `for_indexes:j` | 2-3 |
 
 --------------------------------------------------------------------------------
 
@@ -6345,7 +6526,7 @@ GROUP BY t_update.path
 
 #### Feature `accumulate_all_elements`
 
-Difference between features [`accumulate_elements`](#feature-accumulate_elements) and [`accumulate_some_elements`](#feature-accumulate_some_elements).
+Difference between the set of the features [`accumulate_elements`](#feature-accumulate_elements) and those of [`accumulate_some_elements`](#feature-accumulate_some_elements).
 
 ##### Derivations
 
@@ -6386,7 +6567,7 @@ WHERE NOT EXISTS
 14
 15  for element in elements:
 16      print("foo")
-17      if predicate_1(element):
+17      if predicate_1(element): # not match: the accumulation is conditioned
 18          print("bar")
 19          if predicate_2(element):
 20              acc.append(element)
@@ -6451,7 +6632,7 @@ WHERE NOT EXISTS -- Ensure that there is no...
 6       return candidate
 7
 8   def find_maximum_element(elements):
-9       candidate = element[0]
+9       candidate = elements[0]
 10      for element in elements:
 11          if candidate > element:
 12              candidate = element
@@ -6473,7 +6654,7 @@ WHERE NOT EXISTS -- Ensure that there is no...
 28
 29  greatest = 0
 30  for (i, (a, b)) in enumerate(couples, 1):
-31      if b * log(a) > greatest:
+31      if b * log(a) > greatest: # double match
 32          greatest = b * log(a)
 33
 34  for digit in word:
@@ -6490,9 +6671,173 @@ _LIMITATION._ False negative when the iteration variable does not appear directl
 | Label | Lines |
 |:--|:--|
 | `find_best_element:element:candidate` | 3-5, 10-12 |
+| `find_best_element:element:best` | 19-26 |
 | `find_best_element:a:greatest` | 30-32 |
 | `find_best_element:b:greatest` | 30-32 |
-| `find_best_element:element:best` | 19-26 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `find_best_element_index`
+
+An accumulation pattern that, from a given collection, returns the index of the best element verifying a certain condition. It also necessarily includes the previous pattern.
+
+##### Derivations
+
+[⬆️ feature `assignment_lhs_identifier`](#feature-assignment_lhs_identifier)  
+[⬆️ feature `assignment_rhs_atom`](#feature-assignment_rhs_atom)  
+[⬆️ feature `for`](#feature-for)  
+[⬆️ feature `for_indexes_elements`](#feature-for_indexes_elements)  
+[⬆️ feature `if`](#feature-if)  
+[⬆️ feature `if_test_atom`](#feature-if_test_atom)  
+[⬆️ feature `single_assignment`](#feature-single_assignment)  
+
+##### Specification
+
+```sql
+SELECT "find_best_element_index",
+       elt.name_suffix || ":" || cnd.name_suffix,
+       t_for.span,
+       t_for.path
+FROM t_for -- A foor loop...
+JOIN t_for_indexes_elements idx USING (path)--iterating over index numbers and elements...
+JOIN t_if ON (t_if.path GLOB t_for.path || "*-")-- enclosing a conditional statement...
+JOIN t_if_test_atom elt ON (elt.span_start = t_if.span_start -- (comparing...
+                            AND elt.name_suffix = t_for.name_suffix -- the iteration variable...
+                            AND elt.name_suffix != idx.name_suffix)-- distinct from the index variable...
+JOIN t_if_test_atom cnd ON (cnd.span_start = t_if.span_start
+                            AND elt.rowid != cnd.rowid)-- to a candidate)...
+JOIN t_single_assignment lhs ON (lhs.path GLOB t_if.path || "*-" -- enclosing...
+                                 AND cnd.name_suffix = lhs.name_suffix)--  a single assignment of the candidate...
+JOIN t_assignment_rhs_atom rhs ON (elt.name_suffix = rhs.name_suffix -- to the iteration variable...
+                                   AND rhs.path GLOB lhs.path || "*-")
+JOIN t_assignment_rhs_atom rhs_i ON (idx.name_suffix = rhs_i.name_suffix -- and an assignment of the iteration index.
+                                     AND rhs_i.path GLOB t_if.path || "*-")
+WHERE NOT EXISTS -- Ensure that there is no...
+    (SELECT *
+     FROM t_assignment_lhs_identifier -- other assignment...
+     WHERE name_suffix == lhs.name_suffix -- of the candidate...
+       AND span != lhs.span
+       AND path GLOB t_for.path || "*-" ) -- INSIDE the loop.
+```
+
+##### Example
+
+```python
+1   def find_best_element_index(elements):
+2       candidate = bad_value
+3       candidate_index = None
+4       for (i, element) in enumerate(elements):
+5           if is_better(element, candidate):
+6               candidate = element
+7               candidate_index = i
+8       return candidate_index
+9   
+10  def find_maximum_element_index(elements):
+11      candidate = elements[0]
+12      candidate_index = 0
+13      for (i, element) in enumerate(elements):
+14          if candidate > element:
+15              candidate = element
+16              candidate_index = i
+17      return candidate_index
+18  
+19  greatest = 0
+20  result = None
+21  for (i, (a, b)) in enumerate(couples, 1):
+22      if b * log(a) > greatest: # double match
+23          greatest = b * log(a)
+24          result = i
+25  
+26  candidate = elements[0]
+27  candidate_index = 0
+28  i = 0
+29  for element in elements: # LIMITATION: no match
+30      if candidate > element:
+31          candidate = element
+32          candidate_index = i
+33      i += 1
+34  
+35  candidate = elements[0]
+36  candidate_index = 0
+37  for i in range(1, len(elements)): # LIMITATION: no match, but see the next feature
+38      if candidate > elements[i]:
+39          candidate = elements[i]
+40          candidate_index = i
+```
+
+_LIMITATION._ In addition to the limitations of the feature `find_best_element`, this one does not match the non idiomatic variants of the pattern (cf. the latter two examples).
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `find_best_element:a:greatest` | 21-24 |
+| `find_best_element_index:a:greatest` | 21-24 |
+| `find_best_element:b:greatest` | 21-24 |
+| `find_best_element_index:b:greatest` | 21-24 |
+| `find_best_element:element:candidate` | 4-7, 13-16, 29-33 |
+| `find_best_element_index:element:candidate` | 4-7, 13-16 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `find_best_element_index_unpythonic`
+
+A variant of the previous pattern with direct access.
+
+##### Derivations
+
+[⬆️ feature `assignment_lhs_identifier`](#feature-assignment_lhs_identifier)  
+[⬆️ feature `assignment_rhs_atom`](#feature-assignment_rhs_atom)  
+[⬆️ feature `for_indexes`](#feature-for_indexes)  
+[⬆️ feature `if`](#feature-if)  
+[⬆️ feature `if_test_atom`](#feature-if_test_atom)  
+[⬆️ feature `index`](#feature-index)  
+[⬆️ feature `single_assignment`](#feature-single_assignment)  
+
+##### Specification
+
+```sql
+SELECT "find_best_element_index_unpythonic",
+       "", -- elt.name_suffix || ":" || cnd.name_suffix,
+ idx.span,
+ idx.path
+FROM t_for_indexes idx-- A foor loop iterating over index numbers...
+JOIN t_if ON (t_if.path GLOB idx.path || "*-")-- enclosing a conditional statement...
+JOIN t_index elt ON (elt.span_start = t_if.span_start -- (comparing something indexed...
+                     AND elt.name_suffix = idx.name_suffix)-- by the index variable...
+JOIN t_if_test_atom cnd ON (cnd.span_start = t_if.span_start
+                            AND elt.rowid != cnd.rowid)-- to a candidate)...
+JOIN t_single_assignment lhs ON (lhs.path GLOB t_if.path || "*-" -- enclosing...
+                                 AND cnd.name_suffix = lhs.name_suffix)--  a single assignment of the candidate...
+JOIN t_index rhs ON (elt.name_suffix = rhs.name_suffix -- to something indexed by the index variable...
+                     AND rhs.path GLOB lhs.path || "*-")
+JOIN t_assignment_rhs_atom rhs_i ON (idx.name_suffix = rhs_i.name_suffix -- and an assignment of the iteration variable.
+                                     AND rhs_i.path GLOB t_if.path || "*-")
+WHERE NOT EXISTS -- Ensure that there is no...
+    (SELECT *
+     FROM t_assignment_lhs_identifier -- other assignment...
+     WHERE name_suffix == lhs.name_suffix -- of the candidate...
+       AND span != lhs.span
+       AND path GLOB idx.path || "*-" ) -- INSIDE the loop.
+```
+
+##### Example
+
+```python
+1   candidate = elements[0]
+2   candidate_index = 0
+3   for i in range(1, len(elements)): # LIMITATION: no match
+4       if candidate > elements[i]:
+5           candidate = elements[i]
+6           candidate_index = i
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `find_best_element:i:candidate` | 3-6 |
+| `find_best_element_index_unpythonic` | 3-6 |
 
 --------------------------------------------------------------------------------
 
@@ -6564,13 +6909,13 @@ _Remark._ The `return` statement following the loop is untested, which allows to
 
 --------------------------------------------------------------------------------
 
-#### Feature `find_first_element`
+#### Feature `find_first_good_element`
 
 Linear search. Return the first element of a sequence satisfying a predicate.
 
 ##### Derivations
 
-[⬆️ feature `for`](#feature-for)  
+[⬆️ feature `for_each`](#feature-for_each)  
 [⬆️ feature `if`](#feature-if)  
 [⬆️ feature `if_test_atom`](#feature-if_test_atom)  
 [⬆️ feature `return`](#feature-return)  
@@ -6578,14 +6923,14 @@ Linear search. Return the first element of a sequence satisfying a predicate.
 ##### Specification
 
 ```sql
-SELECT "find_first_element",
-       t_for.name_suffix,
-       t_for.span,
-       t_for.path
-FROM t_for -- A for loop...
-JOIN t_if ON (t_if.path GLOB t_for.path || "*-")-- enclosing an if statement...
+SELECT "find_first_good_element",
+       lp.name_suffix,
+       lp.span,
+       lp.path
+FROM t_for_each lp -- A for each loop...
+JOIN t_if ON (t_if.path GLOB lp.path || "*-")-- enclosing an if statement...
 JOIN t_if_test_atom x ON (x.span_start = t_if.span_start
-                          AND x.name_suffix = t_for.name_suffix)-- which tests the iteration variable...
+                          AND x.name_suffix = lp.name_suffix)-- which tests the iteration variable...
 JOIN t_return ret ON (ret.path GLOB t_if.path || "*-" -- and returns...
                       AND ret.name_suffix = x.name_suffix)-- it.
 ```
@@ -6593,25 +6938,96 @@ JOIN t_return ret ON (ret.path GLOB t_if.path || "*-" -- and returns...
 ##### Example
 
 ```python
-1   def search_index(seq, x):
-2       for i in range(len(seq)):
-3           if seq[i] == x:
-4               return i
-5       return None
-6
-7   def search_element(seq):
-8       for x in seq:
-9           if is_good(x):
-10               return x
-11      return None
+1   def search_element(iterable):
+2       for element in iterable:
+3           if is_good(element):
+4                return element
 ```
 
 ##### Matches
 
 | Label | Lines |
 |:--|:--|
-| `find_first_element:i` | 2-4 |
-| `find_first_element:x` | 8-10 |
+| `find_first_good_element:element` | 2-4 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `find_first_good_element_index`
+
+##### Derivations
+
+[⬆️ feature `for_indexes_elements`](#feature-for_indexes_elements)  
+[⬆️ feature `if`](#feature-if)  
+[⬆️ feature `return`](#feature-return)  
+
+##### Specification
+
+```sql
+SELECT "find_first_good_element_index",
+       lp.name_suffix,
+       lp.span,
+       lp.path
+FROM t_for_indexes_elements lp -- A for loop on enumerate()...
+JOIN t_if ON (t_if.path GLOB lp.path || "*-")-- enclosing an if statement...
+JOIN t_return ret ON (ret.path GLOB t_if.path || "*-" -- which returns...
+                      AND ret.name_suffix = lp.name_suffix)-- the index variable.
+```
+
+##### Example
+
+```python
+1   def search_index(sequence, x):
+2       for (i, element) in enumerate(sequence):
+3           if element == x:
+4               return i
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `find_first_good_element_index:i` | 2-4 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `find_first_good_element_index_unpythonic`
+
+##### Derivations
+
+[⬆️ feature `for_indexes`](#feature-for_indexes)  
+[⬆️ feature `if`](#feature-if)  
+[⬆️ feature `index`](#feature-index)  
+[⬆️ feature `return`](#feature-return)  
+
+##### Specification
+
+```sql
+SELECT "find_first_good_element_index_unpythonic",
+       lp.name_suffix,
+       lp.span,
+       lp.path
+FROM t_for_indexes lp -- A for loop on the indexes of a sequence...
+JOIN t_if ON (t_if.path GLOB lp.path || "*-")-- enclosing an if statement...
+JOIN t_index x ON (x.span_start = t_if.span_start
+                   AND x.name_suffix = lp.name_suffix)-- which access to something with the iteration variable...
+JOIN t_return ret ON (ret.path GLOB t_if.path || "*-" -- and returns...
+                      AND ret.name_suffix = lp.name_suffix)-- the index variable.
+```
+
+##### Example
+
+```python
+1   def search_index(sequence, x):
+2       for i in range(len(sequence)):
+3           if sequence[i] == x:
+4               return i
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `find_first_good_element_index_unpythonic:i` | 2-4 |
 
 --------------------------------------------------------------------------------
 
@@ -7200,154 +7616,3 @@ _Remark._
 |:--|:--|
 | `topic:fun` | 1-5 |
 | `topic:text_processing` | 1-5 |
-
---------------------------------------------------------------------------------
-
-# Suggestions
-
-These patterns match features that can be shortened.
-It's up to you to decide if a rewriting would make the code clearer.
-
-## Assignments
-
---------------------------------------------------------------------------------
-
-#### Feature `suggest_augmented_assignment`
-
-When the RHS of an assignment consists in a binary operation whose left operand is the target (`a = a op expr`), the statement can be shortened as `a op= expr`.
-
-##### Specification
-
-```re
-           ^(.*)/_type=Assign
-\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/assigntargets/_length=1
-\n(?:\1.+\n)*?\1/assigntargets/1/id=(?P<TARGET>.+)
-\n(?:\1.+\n)*?\1/assignvalue/_type=BinOp
-\n(?:\1.+\n)*?\1/assignvalue/left/id=(?P=TARGET)\b
-```
-
-##### Example
-
-```python
-1   a = a + b
-2   a = a + (b + c)
-3   a = b + a
-4   a = a + b + c # FIXME
-```
-
-May be rewritten as:
-
-```python
-1   a += b
-2   a += b + c
-```
-
-- Line 3, note that the `+` binary operator is not necessarily commutative, e.g. on strings.
-- Some cases like line 4 should be matched, check the associativity rules.
-
-##### Matches
-
-| Label | Lines |
-|:--|:--|
-| `suggest_augmented_assignment` | 1, 2 |
-
---------------------------------------------------------------------------------
-
-## Expressions
-
---------------------------------------------------------------------------------
-
-#### Feature `suggest_comparison_chaining`
-
-##### Specification
-
-```re
-           ^(.*)/_type=BoolOp
-\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/op/_type=And
-\n(?:\1.+\n)*?\1/values/1/_type=Compare
-\n(?:\1.+\n)*?\1/values/1/comparators/1/_hash=(?P<HASH_1>.+) # capture the right operand of the left comparison
-\n(?:\1.+\n)*?\1/values/2/_type=Compare
-\n(?:\1.+\n)*?\1/values/2/left/_hash=(?P=HASH_1) # match the left operand of the right comparison
-```
-
-##### Example
-
-```python
-1   a < b and b < c
-2   a <= b and b < c
-3   a == b and b == c
-4   a != b and b != c
-```
-
-May be rewritten as:
-
-```python
-1   a < b < c
-2   a <= b < c
-3   a == b == c
-4   a != b != c
-```
-
-Note that the last simplification is rather confusing and should be avoided.
-
-##### Matches
-
-| Label | Lines |
-|:--|:--|
-| `suggest_comparison_chaining` | 1, 2, 3, 4 |
-
---------------------------------------------------------------------------------
-
-## Subroutines
-
---------------------------------------------------------------------------------
-
-#### Feature `suggest_condition_return`
-
-When a predicate ends with a conditional whose sole purpose is to return `True` or `False`, it is enough to return the condition.
-
-##### Specification
-
-```re
-           ^(.*)/_type=If
-\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/body/1/_type=Return
-\n(?:\1.+\n)*?\1/body/1/value/value=(?P<BOOL>True|False) # name BOOL the value used here
-\n(?:\1.+\n)*?\1/orelse/1/_type=Return
-\n(?:\1.+\n)*?\1/orelse/1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/orelse/1/value/value=(True|False)(?<!(?P=BOOL)) # and check not BOOL is used there
-```
-
-##### Example
-
-```python
-1   def foo():
-2       if condition:
-3           return True
-4       else:
-5           return False
-6
-7   def bar():
-8       if condition:
-9           return False
-10      else:
-11          return True
-```
-
-May be rewritten as:
-
-```python
-1   def foo():
-2       return condition
-3
-4   def bar():
-5       return not condition
-```
-
-##### Matches
-
-| Label | Lines |
-|:--|:--|
-| `suggest_condition_return` | 2-5, 8-11 |

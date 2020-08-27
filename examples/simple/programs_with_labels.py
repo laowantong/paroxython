@@ -13,7 +13,7 @@ print("Hi, %s." % name) # binary_operator:Mod, call_argument:, external_free_cal
 # 03_friends.py
 # ----------------------------------------------------------------------------------------
 friends = ["john", "pat", "gary", "michael"] # assignment, assignment_lhs_identifier:friends, imperative_style (-> +2), literal:List, literal:Str, node:Assign, node:List, node:Name, node:Str, single_assignment:friends, whole_span:3 (-> +2)
-for i, name in enumerate(friends): # call_argument:friends, external_free_call:enumerate, for:i (-> +1), for:name (-> +1), for_indexes_elements (-> +1), free_call:enumerate, literal:Tuple, loop:for (-> +1), loop_with_late_exit:for (-> +1), node:Call, node:For (-> +1), node:Name, node:Tuple
+for i, name in enumerate(friends): # call_argument:friends, external_free_call:enumerate, for:i (-> +1), for:name (-> +1), for_indexes_elements:i (-> +1), free_call:enumerate, literal:Tuple, loop:for (-> +1), loop_with_late_exit:for (-> +1), node:Call, node:For (-> +1), node:Name, node:Tuple
     print("iteration {iteration} is {name}".format(iteration=i, name=name)) # call_argument:, call_argument:i, call_argument:name, call_keyword_argument:iteration, call_keyword_argument:name, composition, external_free_call:print, free_call:print, free_call_without_result:print, literal:Str, member_call_method:format, node:Attribute, node:Call, node:Expr, node:Name, node:Str
 
 # ----------------------------------------------------------------------------------------
@@ -69,7 +69,7 @@ python_files = glob.glob("*.py") # assignment:glob, assignment_lhs_identifier:py
 for file_name in sorted(python_files): # call_argument:python_files, external_free_call:sorted, for:file_name (-> +5), free_call:sorted, loop:for (-> +5), loop_with_late_exit:for (-> +5), node:Call, node:For (-> +5), node:Name
     print("    ------" + file_name) # binary_operator:Add, call_argument:, concatenation_operator:Str, external_free_call:print, free_call:print, free_call_without_result:print, literal:Str, node:BinOp, node:Call, node:Expr, node:Name, node:Str
     with open(file_name) as f: # call_argument:file_name, external_free_call:open, free_call:open, node:Call, node:Name, node:With (-> +2)
-        for line in f: # for:line (-> +1), for_each (-> +1), loop:for (-> +1), loop_with_late_exit:for (-> +1), nested_for:1 (-> +1), node:For (-> +1), node:Name
+        for line in f: # for:line (-> +1), for_each:line (-> +1), loop:for (-> +1), loop_with_late_exit:for (-> +1), nested_for:1 (-> +1), node:For (-> +1), node:Name
             print("    " + line.rstrip()) # binary_operator:Add, call_argument:, composition, concatenation_operator:Str, external_free_call:print, free_call:print, free_call_without_result:print, literal:Str, member_call_method:rstrip, node:Attribute, node:BinOp, node:Call, node:Expr, node:Name, node:Str
     print() # external_free_call:print, free_call:print, free_call_without_arguments:print, free_call_without_result:print, node:Call, node:Expr, node:Name
 
@@ -181,7 +181,7 @@ with open("stocks.csv", "w", newline="") as stocksFileW: # call_argument:, call_
 with open("stocks.csv", "r") as stocksFile: # call_argument:, external_free_call:open, free_call:open, literal:Str, node:Call, node:Name, node:Str, node:With (-> +5)
     stocks = csv.reader(stocksFile) # assignment:reader, assignment_lhs_identifier:stocks, assignment_rhs_atom:csv, assignment_rhs_atom:stocksFile, call_argument:stocksFile, member_call_method:reader, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:stocks
     status_labels = {-1: "down", 0: "unchanged", 1: "up"} # assignment, assignment_lhs_identifier:status_labels, assignment_rhs_atom:-1, assignment_rhs_atom:0, assignment_rhs_atom:1, literal:-1, literal:0, literal:1, literal:Dict, literal:Str, node:Assign, node:Dict, node:Name, node:Num, node:Str, single_assignment:status_labels
-    for ticker, name, price, change, pct in stocks: # for:change (-> +2), for:name (-> +2), for:pct (-> +2), for:price (-> +2), for:ticker (-> +2), for_each (-> +2), literal:Tuple, loop:for (-> +2), loop_with_late_exit:for (-> +2), node:For (-> +2), node:Name, node:Tuple
+    for ticker, name, price, change, pct in stocks: # for:change (-> +2), for:name (-> +2), for:pct (-> +2), for:price (-> +2), for:ticker (-> +2), for_each:change (-> +2), for_each:name (-> +2), for_each:pct (-> +2), for_each:price (-> +2), for_each:ticker (-> +2), literal:Tuple, loop:for (-> +2), loop_with_late_exit:for (-> +2), node:For (-> +2), node:Name, node:Tuple
         status = status_labels[cmp(float(change), 0.0)] # assignment, assignment_lhs_identifier:status, assignment_rhs_atom:0.0, assignment_rhs_atom:change, assignment_rhs_atom:status_labels, call_argument:, call_argument:0.0, call_argument:change, composition, external_free_call:float, free_call:cmp, free_call:float, index:_, internal_free_call:cmp, literal:0.0, magic_number:0.0, node:Assign, node:Call, node:Name, node:Num, node:Subscript, single_assignment:status
         print("{} is {} ({:.2f})".format(name, status, float(pct))) # call_argument:, call_argument:name, call_argument:pct, call_argument:status, composition, external_free_call:float, external_free_call:print, free_call:float, free_call:print, free_call_without_result:print, literal:Str, member_call_method:format, node:Attribute, node:Call, node:Expr, node:Name, node:Str
 

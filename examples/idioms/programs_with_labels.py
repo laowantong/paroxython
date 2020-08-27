@@ -61,13 +61,13 @@ class Point:
 # ----------------------------------------------------------------------------------------
 # 006.0032-iterate-over-list-values.py
 # ----------------------------------------------------------------------------------------
-for x in items: # for:x (-> +1), for_each (-> +1), imperative_style (-> +1), loop:for (-> +1), loop_with_late_exit:for (-> +1), node:For (-> +1), node:Name, whole_span:2 (-> +1)
+for x in items: # for:x (-> +1), for_each:x (-> +1), imperative_style (-> +1), loop:for (-> +1), loop_with_late_exit:for (-> +1), node:For (-> +1), node:Name, whole_span:2 (-> +1)
     doSomething(x) # call_argument:x, external_free_call:doSomething, free_call:doSomething, free_call_without_result:doSomething, node:Call, node:Expr, node:Name
 
 # ----------------------------------------------------------------------------------------
 # 007.0183-iterate-over-list-indexes-and-values.py
 # ----------------------------------------------------------------------------------------
-for i, x in enumerate(items): # call_argument:items, external_free_call:enumerate, for:i (-> +1), for:x (-> +1), for_indexes_elements (-> +1), free_call:enumerate, imperative_style (-> +1), literal:Tuple, loop:for (-> +1), loop_with_late_exit:for (-> +1), node:Call, node:For (-> +1), node:Name, node:Tuple, whole_span:2 (-> +1)
+for i, x in enumerate(items): # call_argument:items, external_free_call:enumerate, for:i (-> +1), for:x (-> +1), for_indexes_elements:i (-> +1), free_call:enumerate, imperative_style (-> +1), literal:Tuple, loop:for (-> +1), loop_with_late_exit:for (-> +1), node:Call, node:For (-> +1), node:Name, node:Tuple, whole_span:2 (-> +1)
     print(i, x) # call_argument:i, call_argument:x, external_free_call:print, free_call:print, free_call_without_result:print, node:Call, node:Expr, node:Name
 
 # ----------------------------------------------------------------------------------------
@@ -164,7 +164,7 @@ class Node(object): # node:ClassDef (-> +3), node:Name, object_oriented_style (-
 # ----------------------------------------------------------------------------------------
 def DFS(f, root): # body_recursive_function:DFS (-> +3), function:DFS (-> +3), function_argument:f, function_argument:root, function_argument_flavor:arg, function_returning_nothing:DFS (-> +3), higher_order_function:f (-> +3), node:FunctionDef (-> +3), node:arg, procedural_style (-> +3), recursive_call_count:1 (-> +3), recursive_function:DFS (-> +3), whole_span:4 (-> +3)
     f(root) # call_argument:root, external_free_call:f, free_call:f, free_call_without_result:f, node:Call, node:Expr, node:Name
-    for child in root: # for:child (-> +1), for_each (-> +1), loop:for (-> +1), loop_with_late_exit:for (-> +1), node:For (-> +1), node:Name
+    for child in root: # for:child (-> +1), for_each:child (-> +1), loop:for (-> +1), loop_with_late_exit:for (-> +1), node:For (-> +1), node:Name
         DFS(f, child) # call_argument:child, call_argument:f, free_call:DFS, free_call_without_result:DFS, internal_free_call:DFS, node:Call, node:Expr, node:Name
 
 # ----------------------------------------------------------------------------------------
@@ -186,7 +186,7 @@ x.reverse() # flat_style, imperative_style, member_call:x:reverse, member_call_m
 # 020.0573-return-two-values.py
 # ----------------------------------------------------------------------------------------
 def search(m, x): # function:search (-> +3), function_argument:m, function_argument:x, function_argument_flavor:arg, function_returning_something:search (-> +3), impure_function:search (-> +3), node:FunctionDef (-> +3), node:arg, procedural_style (-> +3), whole_span:4 (-> +3)
-    for idx, item in enumerate(m): # call_argument:m, external_free_call:enumerate, for:idx (-> +2), for:item (-> +2), for_indexes_elements (-> +2), free_call:enumerate, literal:Tuple, loop:for (-> +2), loop_with_early_exit:for:return (-> +2), loop_with_return:for (-> +2), node:Call, node:For (-> +2), node:Name, node:Tuple
+    for idx, item in enumerate(m): # call_argument:m, external_free_call:enumerate, for:idx (-> +2), for:item (-> +2), for_indexes_elements:idx (-> +2), free_call:enumerate, literal:Tuple, loop:for (-> +2), loop_with_early_exit:for:return (-> +2), loop_with_return:for (-> +2), node:Call, node:For (-> +2), node:Name, node:Tuple
         if x in item: # comparison_operator:In, if (-> +1), if_test_atom:item, if_test_atom:x, if_without_else (-> +1), node:Compare, node:If (-> +1), node:Name
             return idx, item.index(x) # call_argument:x, if_then_branch, literal:Tuple, member_call_method:index, node:Attribute, node:Call, node:Name, node:Return, node:Tuple, return
 
@@ -328,7 +328,7 @@ class Vertex(set): # node:ClassDef (-> +1), node:Name
 class Graph(defaultdict): # node:ClassDef (-> +8), node:Name
     def __init__(self, *paths): # function:__init__ (-> +3), function_argument:paths, function_argument:self, function_argument_flavor:arg, function_argument_flavor:vararg, function_returning_nothing:__init__ (-> +3), instance_method:__init__ (-> +3), method:__init__ (-> +3), node:FunctionDef (-> +3), node:arg
         self.default_factory = Vertex # assignment, assignment_lhs_identifier:self, assignment_rhs_atom:Vertex, node:Assign, node:Attribute, node:Name
-        for path in paths: # for:path (-> +1), for_each (-> +1), loop:for (-> +1), loop_with_late_exit:for (-> +1), node:For (-> +1), node:Name
+        for path in paths: # for:path (-> +1), for_each:path (-> +1), loop:for (-> +1), loop_with_late_exit:for (-> +1), node:For (-> +1), node:Name
             self.make_path(path) # call_argument:path, member_call:self:make_path, member_call_method:make_path, member_call_object:self, node:Attribute, node:Call, node:Expr, node:Name
     def make_path(self, labels): # function:make_path (-> +3), function_argument:labels, function_argument:self, function_argument_flavor:arg, function_returning_nothing:make_path (-> +3), instance_method:make_path (-> +3), method:make_path (-> +3), node:FunctionDef (-> +3), node:arg
         for l1, l2 in zip(labels, labels[1:]): # call_argument:, call_argument:labels, external_free_call:zip, for:l1 (-> +2), for:l2 (-> +2), free_call:zip, literal:1, literal:Tuple, loop:for (-> +2), loop_with_late_exit:for (-> +2), node:Call, node:For (-> +2), node:Name, node:Num, node:Subscript, node:Tuple, slice:1::, slice_lower:1, slice_step:, slice_upper:
@@ -349,9 +349,9 @@ t = s[::-1] # assignment, assignment_lhs_identifier:t, assignment_rhs_atom:-1, a
 # ----------------------------------------------------------------------------------------
 # 042.1264-continue-outer-loop.py
 # ----------------------------------------------------------------------------------------
-for v in a: # for:v (-> +7), for_each (-> +7), imperative_style (-> +7), loop:for (-> +7), loop_with_early_exit:for:raise (-> +7), loop_with_raise:for (-> +7), node:For (-> +7), node:Name, whole_span:8 (-> +7)
+for v in a: # for:v (-> +7), for_each:v (-> +7), imperative_style (-> +7), loop:for (-> +7), loop_with_early_exit:for:raise (-> +7), loop_with_raise:for (-> +7), node:For (-> +7), node:Name, whole_span:8 (-> +7)
     try: # node:Try (-> +6), try_except:Exception (-> +6), try_raise:Exception (-> +6)
-        for u in b: # for:u (-> +2), for_each (-> +2), loop:for (-> +2), loop_with_early_exit:for:raise (-> +2), loop_with_raise:for (-> +2), nested_for:1 (-> +2), node:For (-> +2), node:Name
+        for u in b: # for:u (-> +2), for_each:u (-> +2), loop:for (-> +2), loop_with_early_exit:for:raise (-> +2), loop_with_raise:for (-> +2), nested_for:1 (-> +2), node:For (-> +2), node:Name
             if v == u: # comparison_operator:Eq, if (-> +1), if_test_atom:u, if_test_atom:v, if_without_else (-> +1), node:Compare, node:If (-> +1), node:Name
                 raise Exception() # external_free_call:Exception, free_call:Exception, free_call_without_arguments:Exception, if_then_branch, node:Call, node:Name, node:Raise, raise:Exception
         print(v) # call_argument:v, external_free_call:print, free_call:print, free_call_without_result:print, node:Call, node:Expr, node:Name
@@ -361,8 +361,8 @@ for v in a: # for:v (-> +7), for_each (-> +7), imperative_style (-> +7), loop:fo
 # ----------------------------------------------------------------------------------------
 # 042.3168-continue-outer-loop.py
 # ----------------------------------------------------------------------------------------
-for v in a: # for:v (-> +4), for_each (-> +4), imperative_style (-> +4), loop:for (-> +4), loop_with_late_exit:for (-> +4), node:For (-> +4), node:Name, whole_span:5 (-> +4)
-    for v_ in b: # for:v_ (-> +3), for_each (-> +3), loop:for (-> +3), loop_with_late_exit:for (-> +3), nested_for:1 (-> +3), node:For (-> +3), node:Name
+for v in a: # for:v (-> +4), for_each:v (-> +4), imperative_style (-> +4), loop:for (-> +4), loop_with_late_exit:for (-> +4), node:For (-> +4), node:Name, whole_span:5 (-> +4)
+    for v_ in b: # for:v_ (-> +3), for_each:v_ (-> +3), loop:for (-> +3), loop_with_late_exit:for (-> +3), nested_for:1 (-> +3), node:For (-> +3), node:Name
         if v == v_: # comparison_operator:Eq, if (-> +1), if_test_atom:v, if_test_atom:v_, if_without_else (-> +1), node:Compare, node:If (-> +1), node:Name
             continue # if_then_branch, node:Continue
         print(v) # call_argument:v, external_free_call:print, free_call:print, free_call_without_result:print, node:Call, node:Expr, node:Name
@@ -374,7 +374,7 @@ class BreakOuterLoop(Exception): # node:ClassDef (-> +1), node:Name, object_orie
     pass # node:Pass
 try: # node:Try (-> +8), try_except:BreakOuterLoop (-> +8), try_raise:BreakOuterLoop (-> +8)
     position = None # assignment:None, assignment_lhs_identifier:position, assignment_rhs_atom:None, literal:None, node:Assign, node:Name, node:NameConstant, single_assignment:position
-    for row in m: # for:row (-> +4), for_each (-> +4), loop:for (-> +4), loop_with_early_exit:for:raise (-> +4), loop_with_raise:for (-> +4), node:For (-> +4), node:Name
+    for row in m: # for:row (-> +4), for_each:row (-> +4), loop:for (-> +4), loop_with_early_exit:for:raise (-> +4), loop_with_raise:for (-> +4), node:For (-> +4), node:Name
         for column in m[row]: # for:column (-> +3), index:row, loop:for (-> +3), loop_with_early_exit:for:raise (-> +3), loop_with_raise:for (-> +3), nested_for:1 (-> +3), node:For (-> +3), node:Name, node:Subscript
             if m[row][column] == v: # comparison_operator:Eq, if (-> +2), if_test_atom:column, if_test_atom:m, if_test_atom:row, if_test_atom:v, if_without_else (-> +2), index:column, index:row, nested_index:2, node:Compare, node:If (-> +2), node:Name, node:Subscript
                 position = (row, column) # assignment, assignment_lhs_identifier:position, assignment_rhs_atom:column, assignment_rhs_atom:row, if_then_branch (-> +1), literal:Tuple, node:Assign, node:Name, node:Tuple, single_assignment:position
@@ -386,8 +386,8 @@ except BreakOuterLoop: # except:BreakOuterLoop, node:ExceptHandler (-> +1), node
 # 043.2733-break-outer-loop.py
 # ----------------------------------------------------------------------------------------
 def loop_breaking(m, v): # function:loop_breaking (-> +5), function_argument:m, function_argument:v, function_argument_flavor:arg, function_returning_something:loop_breaking (-> +5), impure_function:loop_breaking (-> +5), node:FunctionDef (-> +5), node:arg, procedural_style (-> +6), whole_span:7 (-> +6)
-    for i, row in enumerate(m): # call_argument:m, external_free_call:enumerate, for:i (-> +3), for:row (-> +3), for_indexes_elements (-> +3), free_call:enumerate, literal:Tuple, loop:for (-> +3), loop_with_early_exit:for:return (-> +3), loop_with_return:for (-> +3), node:Call, node:For (-> +3), node:Name, node:Tuple
-        for j, value in enumerate(row): # call_argument:row, external_free_call:enumerate, for:j (-> +2), for:value (-> +2), for_indexes_elements (-> +2), free_call:enumerate, literal:Tuple, loop:for (-> +2), loop_with_early_exit:for:return (-> +2), loop_with_return:for (-> +2), nested_for:1 (-> +2), node:Call, node:For (-> +2), node:Name, node:Tuple
+    for i, row in enumerate(m): # call_argument:m, external_free_call:enumerate, for:i (-> +3), for:row (-> +3), for_indexes_elements:i (-> +3), free_call:enumerate, literal:Tuple, loop:for (-> +3), loop_with_early_exit:for:return (-> +3), loop_with_return:for (-> +3), node:Call, node:For (-> +3), node:Name, node:Tuple
+        for j, value in enumerate(row): # call_argument:row, external_free_call:enumerate, for:j (-> +2), for:value (-> +2), for_indexes_elements:j (-> +2), free_call:enumerate, literal:Tuple, loop:for (-> +2), loop_with_early_exit:for:return (-> +2), loop_with_return:for (-> +2), nested_for:1 (-> +2), node:Call, node:For (-> +2), node:Name, node:Tuple
             if value == v: # comparison_operator:Eq, if (-> +1), if_test_atom:v, if_test_atom:value, if_without_else (-> +1), node:Compare, node:If (-> +1), node:Name
                 return (i, j) # if_then_branch, literal:Tuple, node:Name, node:Return, node:Tuple, return
     return None # literal:None, node:NameConstant, node:Return, return:None
@@ -797,7 +797,7 @@ dir = os.path.dirname(os.path.abspath(__file__)) # assignment:dirname, assignmen
 # ----------------------------------------------------------------------------------------
 # 108.1291-determine-if-variable-name-is-defined.py
 # ----------------------------------------------------------------------------------------
-if "x" in locals(): # comparison_operator:In, external_free_call:locals, free_call:locals, free_call_without_arguments:locals, if (-> +1), if_without_else (-> +1), imperative_style (-> +1), literal:Str, node:Call, node:Compare, node:If (-> +1), node:Name, node:Str, whole_span:2 (-> +1), yoda_comparison:In
+if "x" in locals(): # comparison_operator:In, external_free_call:locals, free_call:locals, free_call_without_arguments:locals, if (-> +1), if_without_else (-> +1), imperative_style (-> +1), literal:Str, node:Call, node:Compare, node:If (-> +1), node:Name, node:Str, whole_span:2 (-> +1)
     print(x) # call_argument:x, external_free_call:print, free_call:print, free_call_without_result:print, if_then_branch, node:Call, node:Expr, node:Name
 
 # ----------------------------------------------------------------------------------------
@@ -871,7 +871,7 @@ x = list(set(x)) # assignment:list, assignment_lhs_identifier:x, assignment_rhs_
 elements = ["b", "a", "b", "c"] # assignment, assignment_lhs_identifier:elements, imperative_style (-> +7), literal:List, literal:Str, node:Assign, node:List, node:Name, node:Str, single_assignment:elements, whole_span:8 (-> +7)
 unique_set = set() # assignment:set, assignment_lhs_identifier:unique_set, external_free_call:set, free_call:set, free_call_without_arguments:set, node:Assign, node:Call, node:Name, single_assignment:unique_set
 elements_unique = [] # assignment, assignment_lhs_identifier:elements_unique, empty_literal:List, literal:List, node:Assign, node:List, node:Name, single_assignment:elements_unique
-for i in elements: # accumulate_elements:add (-> +3), accumulate_elements:append (-> +3), accumulate_some_elements:add (-> +3), accumulate_some_elements:append (-> +3), for:i (-> +3), for_each (-> +3), loop:for (-> +3), loop_with_late_exit:for (-> +3), node:For (-> +3), node:Name
+for i in elements: # accumulate_elements:add (-> +3), accumulate_elements:append (-> +3), accumulate_some_elements:add (-> +3), accumulate_some_elements:append (-> +3), for:i (-> +3), for_each:i (-> +3), loop:for (-> +3), loop_with_late_exit:for (-> +3), node:For (-> +3), node:Name
     if i not in unique_set: # comparison_operator:NotIn, if (-> +2), if_test_atom:i, if_test_atom:unique_set, if_without_else (-> +2), node:Compare, node:If (-> +2), node:Name
         unique_set.add(i) # call_argument:i, if_then_branch (-> +1), member_call:unique_set:add, member_call_method:add, member_call_object:unique_set, node:Attribute, node:Call, node:Expr, node:Name, update:unique_set:i, update_by_member_call:unique_set:i, update_by_member_call_with:add, update_with:add
         elements_unique.append(i) # call_argument:i, member_call:elements_unique:append, member_call_method:append, member_call_object:elements_unique, node:Attribute, node:Call, node:Expr, node:Name, update:elements_unique:i, update_by_member_call:elements_unique:i, update_by_member_call_with:append, update_with:append
@@ -951,7 +951,7 @@ def BFS(f, root): # function:BFS (-> +8), function_argument:f, function_argument
     while Q: # loop:while (-> +6), loop_with_late_exit:while (-> +6), node:Name, node:While (-> +6)
         n = Q.pop(0) # assignment:pop, assignment_lhs_identifier:n, assignment_rhs_atom:0, assignment_rhs_atom:Q, call_argument:0, literal:0, member_call_method:pop, node:Assign, node:Attribute, node:Call, node:Name, node:Num, single_assignment:n
         f(n) # call_argument:n, external_free_call:f, free_call:f, free_call_without_result:f, node:Call, node:Expr, node:Name
-        for child in n: # for:child (-> +3), for_each (-> +3), loop:for (-> +3), loop_with_late_exit:for (-> +3), node:For (-> +3), node:Name
+        for child in n: # for:child (-> +3), for_each:child (-> +3), loop:for (-> +3), loop_with_late_exit:for (-> +3), node:For (-> +3), node:Name
             if not n.discovered: # if (-> +2), if_test_atom:n, if_without_else (-> +2), node:Attribute, node:If (-> +2), node:Name, node:UnaryOp, unary_operator:Not
                 n.discovered = True # assignment:True, assignment_lhs_identifier:n, assignment_rhs_atom:True, if_then_branch (-> +1), literal:True, node:Assign, node:Attribute, node:Name, node:NameConstant
                 Q.append(n) # call_argument:n, member_call:Q:append, member_call_method:append, member_call_object:Q, node:Attribute, node:Call, node:Expr, node:Name, update:Q:n, update_by_member_call:Q:n, update_by_member_call_with:append, update_with:append
@@ -1210,9 +1210,9 @@ elements = [c * x for x in elements] # assignment, assignment_lhs_identifier:ele
 # 162.2164-execute-procedures-depending-on-options.py
 # ----------------------------------------------------------------------------------------
 import sys # imperative_style (-> +4), import:sys, import_module:sys, node:Import, whole_span:5 (-> +4)
-if "b" in sys.argv[1:]: # comparison_operator:In, if (-> +1), if_test_atom:1, if_test_atom:sys, if_without_else (-> +1), literal:1, literal:Str, node:Attribute, node:Compare, node:If (-> +1), node:Name, node:Num, node:Str, node:Subscript, slice:1::, slice_lower:1, slice_step:, slice_upper:, value_attr:argv, yoda_comparison:In
+if "b" in sys.argv[1:]: # comparison_operator:In, if (-> +1), if_test_atom:1, if_test_atom:sys, if_without_else (-> +1), literal:1, literal:Str, node:Attribute, node:Compare, node:If (-> +1), node:Name, node:Num, node:Str, node:Subscript, slice:1::, slice_lower:1, slice_step:, slice_upper:, value_attr:argv
     bat() # external_free_call:bat, free_call:bat, free_call_without_arguments:bat, free_call_without_result:bat, if_then_branch, node:Call, node:Expr, node:Name
-if "f" in sys.argv[1:]: # comparison_operator:In, if (-> +1), if_test_atom:1, if_test_atom:sys, if_without_else (-> +1), literal:1, literal:Str, node:Attribute, node:Compare, node:If (-> +1), node:Name, node:Num, node:Str, node:Subscript, slice:1::, slice_lower:1, slice_step:, slice_upper:, value_attr:argv, yoda_comparison:In
+if "f" in sys.argv[1:]: # comparison_operator:In, if (-> +1), if_test_atom:1, if_test_atom:sys, if_without_else (-> +1), literal:1, literal:Str, node:Attribute, node:Compare, node:If (-> +1), node:Name, node:Num, node:Str, node:Subscript, slice:1::, slice_lower:1, slice_step:, slice_upper:, value_attr:argv
     fox() # external_free_call:fox, free_call:fox, free_call_without_arguments:fox, free_call_without_result:fox, if_then_branch, node:Call, node:Expr, node:Name
 
 # ----------------------------------------------------------------------------------------

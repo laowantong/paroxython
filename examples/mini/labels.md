@@ -11,6 +11,7 @@
 - assignment_rhs_atom:3 / collatz.py / 7
 - assignment_rhs_atom:b / assignment.py / 1
 - assignment_rhs_atom:n / collatz.py / 5, 7
+- augmented_assignment_unpythonic / collatz.py / 5
 - binary_operator:Add / collatz.py / 7
 - binary_operator:FloorDiv / collatz.py / 5
 - binary_operator:Mod / collatz.py / 4
@@ -137,7 +138,6 @@
 - return / is_even.py / 3
 - single_assignment:a / assignment.py / 1
 - single_assignment:n / collatz.py / 5, 7
-- suggest_augmented_assignment / collatz.py / 5
 - update:n:1 / collatz.py / 7
 - update:n:2 / collatz.py / 5
 - update:n:3 / collatz.py / 7
@@ -170,6 +170,7 @@
 - call_keyword_argument
 - chained_assignment
 - chained_comparison
+- chained_comparison_unpythonic
 - chained_equalities|chained_inequalities
 - clamp_min_max
 - clamp_ternary
@@ -191,7 +192,11 @@
 - external_free_call
 - filtered_comprehension
 - find_best_element
-- find_first_element
+- find_best_element_index
+- find_best_element_index_unpythonic
+- find_first_good_element
+- find_first_good_element_index
+- find_first_good_element_index_unpythonic
 - for
 - for_each
 - for_indexes
@@ -254,6 +259,7 @@
 - range
 - recursive_call_count
 - recursive_function
+- return_condition_naive
 - single_assignment
 - slice
 - slice_lower
@@ -264,10 +270,8 @@
 - square_nested_for
 - string_formatting_operator
 - subscript_augmented_assignment
-- suggest_comparison_chaining
-- suggest_condition_return
 - swap
-- swap_with_aux
+- swap_unpythonic
 - tail_recursive_function
 - triangular_nested_for
 - try_raise|try_except
@@ -284,4 +288,4 @@
 - update_with
 - value_attr
 - yield
-- yoda_comparison
+- yoda_comparison_unpythonic

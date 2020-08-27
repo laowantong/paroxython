@@ -332,7 +332,7 @@
         "call_argument:x": [[2,2]],
         "external_free_call:doSomething": [[2,2]],
         "for:x": [[1,2]],
-        "for_each": [[1,2]],
+        "for_each:x": [[1,2]],
         "free_call:doSomething": [[2,2]],
         "free_call_without_result:doSomething": [[2,2]],
         "imperative_style": [[1,2]],
@@ -364,7 +364,7 @@
         "external_free_call:print": [[2,2]],
         "for:i": [[1,2]],
         "for:x": [[1,2]],
-        "for_indexes_elements": [[1,2]],
+        "for_indexes_elements:i": [[1,2]],
         "free_call:enumerate": [[1,1]],
         "free_call:print": [[2,2]],
         "free_call_without_result:print": [[2,2]],
@@ -383,8 +383,7 @@
         "call/function/builtin/enumerate": [[1,1]],
         "call/function/builtin/print": [[2,2]],
         "flow/loop/exit/late": [[1,2]],
-        "flow/loop/for": [[1,2]],
-        "flow/loop/for/elements_and_indexes": [[1,2]],
+        "flow/loop/for/indexes_and_elements": [[1,2]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
         "style/imperative": [[1,2]],
@@ -868,7 +867,7 @@
         "call_argument:root": [[2,2]],
         "external_free_call:f": [[2,2]],
         "for:child": [[3,4]],
-        "for_each": [[3,4]],
+        "for_each:child": [[3,4]],
         "free_call:DFS": [[4,4]],
         "free_call:f": [[2,2]],
         "free_call_without_result:DFS": [[4,4]],
@@ -1005,7 +1004,7 @@
         "external_free_call:enumerate": [[2,2]],
         "for:idx": [[2,4]],
         "for:item": [[2,4]],
-        "for_indexes_elements": [[2,4]],
+        "for_indexes_elements:idx": [[2,4]],
         "free_call:enumerate": [[2,2]],
         "function:search": [[1,4]],
         "function_argument:m": [[1,1]],
@@ -1046,8 +1045,7 @@
         "def/return/something": [[4,4]],
         "flow/conditional/no_else": [[3,4]],
         "flow/loop/exit/early/return": [[2,4]],
-        "flow/loop/for": [[2,4]],
-        "flow/loop/for/elements_and_indexes": [[2,4]],
+        "flow/loop/for/indexes_and_elements": [[2,4]],
         "meta/program": [[1,4]],
         "meta/sloc/4": [[1,4]],
         "style/procedural": [[1,4]],
@@ -1886,7 +1884,7 @@
         "for:l1": [[10,12]],
         "for:l2": [[10,12]],
         "for:path": [[7,8]],
-        "for_each": [[7,8]],
+        "for_each:path": [[7,8]],
         "free_call:Graph": [[13,13]],
         "free_call:zip": [[10,10]],
         "function:__init__": [[5,8]],
@@ -2062,7 +2060,8 @@
         "external_free_call:print": [[6,6]],
         "for:u": [[3,5]],
         "for:v": [[1,8]],
-        "for_each": [[1,8],[3,5]],
+        "for_each:u": [[3,5]],
+        "for_each:v": [[1,8]],
         "free_call:Exception": [[5,5]],
         "free_call:print": [[6,6]],
         "free_call_without_arguments:Exception": [[5,5]],
@@ -2117,7 +2116,8 @@
         "external_free_call:print": [[5,5]],
         "for:v": [[1,5]],
         "for:v_": [[2,5]],
-        "for_each": [[1,5],[2,5]],
+        "for_each:v": [[1,5]],
+        "for_each:v_": [[2,5]],
         "free_call:print": [[5,5]],
         "free_call_without_result:print": [[5,5]],
         "if": [[3,4]],
@@ -2165,7 +2165,7 @@
         "except:BreakOuterLoop": [[10,10]],
         "for:column": [[6,9]],
         "for:row": [[5,9]],
-        "for_each": [[5,9]],
+        "for_each:row": [[5,9]],
         "if": [[7,9]],
         "if_test_atom:column": [[7,7]],
         "if_test_atom:m": [[7,7]],
@@ -2238,7 +2238,8 @@
         "for:j": [[3,5]],
         "for:row": [[2,5]],
         "for:value": [[3,5]],
-        "for_indexes_elements": [[2,5],[3,5]],
+        "for_indexes_elements:i": [[2,5]],
+        "for_indexes_elements:j": [[3,5]],
         "free_call:enumerate": [[2,2],[3,3]],
         "free_call:loop_breaking": [[7,7]],
         "free_call:print": [[7,7]],
@@ -2308,8 +2309,7 @@
         "def/return/something": [[5,5]],
         "flow/conditional/no_else": [[4,5]],
         "flow/loop/exit/early/return": [[2,5],[3,5]],
-        "flow/loop/for": [[2,5]],
-        "flow/loop/for/elements_and_indexes": [[2,5],[3,5]],
+        "flow/loop/for/indexes_and_elements": [[2,5],[3,5]],
         "flow/loop/for/nested/1": [[3,5]],
         "meta/program": [[1,7]],
         "meta/sloc/7": [[1,7]],
@@ -4720,8 +4720,7 @@
         "node:If": [[1,2]],
         "node:Name": [[1,1],[2,2],[2,2]],
         "node:Str": [[1,1]],
-        "whole_span:2": [[1,2]],
-        "yoda_comparison:In": [[1,1]]
+        "whole_span:2": [[1,2]]
       },
       "taxa": {
         "call/function/builtin/locals": [[1,1]],
@@ -5150,7 +5149,7 @@
         "external_free_call:print": [[8,8]],
         "external_free_call:set": [[2,2]],
         "for:i": [[4,7]],
-        "for_each": [[4,7]],
+        "for_each:i": [[4,7]],
         "free_call:print": [[8,8]],
         "free_call:set": [[2,2]],
         "free_call_without_arguments:set": [[2,2]],
@@ -5206,8 +5205,9 @@
         "flow/loop/for/elements": [[4,7]],
         "meta/program": [[1,8]],
         "meta/sloc/8": [[1,8]],
-        "pattern/elements/accumulate/in_list/filtered": [[4,7]],
-        "pattern/elements/accumulate/in_set/filtered": [[4,7]],
+        "pattern/elements/accumulate/into_list": [[4,7]],
+        "pattern/elements/accumulate/into_set": [[4,7]],
+        "pattern/elements/accumulate/some": [[4,7]],
         "style/imperative": [[1,8]],
         "type/non_sequence/set": [[2,2],[6,6]],
         "type/sequence/list": [[7,7]],
@@ -5631,7 +5631,7 @@
         "call_argument:n": [[5,5],[9,9]],
         "external_free_call:f": [[5,5]],
         "for:child": [[6,9]],
-        "for_each": [[6,9]],
+        "for_each:child": [[6,9]],
         "free_call:f": [[5,5]],
         "free_call_without_result:f": [[5,5]],
         "function:BFS": [[1,9]],
@@ -7278,8 +7278,7 @@
         "slice_step:": [[2,2],[4,4]],
         "slice_upper:": [[2,2],[4,4]],
         "value_attr:argv": [[2,2],[4,4]],
-        "whole_span:5": [[1,5]],
-        "yoda_comparison:In": [[2,2],[4,4]]
+        "whole_span:5": [[1,5]]
       },
       "taxa": {
         "call/function/without_arguments": [[3,3],[5,5]],
@@ -11330,19 +11329,40 @@
       "141.2159-iterate-in-sequence-over-two-lists.py",
       "163.2170-print-list-elements-by-group-of-2.py"
     ],
-    "for_each": [
-      "006.0032-iterate-over-list-values.py",
+    "for_each:child": [
       "018.2084-depth-first-traversing-of-a-tree.py",
-      "040.2279-graph-with-adjacency-lists.py",
-      "042.1264-continue-outer-loop.py",
-      "042.3168-continue-outer-loop.py",
-      "043.0676-break-outer-loop.py",
-      "119.3263-deduplicate-list.py",
       "128.2085-breadth-first-traversing-of-a-tree.py"
     ],
-    "for_indexes_elements": [
+    "for_each:i": [
+      "119.3263-deduplicate-list.py"
+    ],
+    "for_each:path": [
+      "040.2279-graph-with-adjacency-lists.py"
+    ],
+    "for_each:row": [
+      "043.0676-break-outer-loop.py"
+    ],
+    "for_each:u": [
+      "042.1264-continue-outer-loop.py"
+    ],
+    "for_each:v": [
+      "042.1264-continue-outer-loop.py",
+      "042.3168-continue-outer-loop.py"
+    ],
+    "for_each:v_": [
+      "042.3168-continue-outer-loop.py"
+    ],
+    "for_each:x": [
+      "006.0032-iterate-over-list-values.py"
+    ],
+    "for_indexes_elements:i": [
       "007.0183-iterate-over-list-indexes-and-values.py",
-      "020.0573-return-two-values.py",
+      "043.2733-break-outer-loop.py"
+    ],
+    "for_indexes_elements:idx": [
+      "020.0573-return-two-values.py"
+    ],
+    "for_indexes_elements:j": [
       "043.2733-break-outer-loop.py"
     ],
     "for_range:10": [
@@ -16662,10 +16682,6 @@
     "whole_span:9": [
       "128.2085-breadth-first-traversing-of-a-tree.py",
       "129.2282-breadth-first-traversing-in-a-graph.py"
-    ],
-    "yoda_comparison:In": [
-      "108.1291-determine-if-variable-name-is-defined.py",
-      "162.2164-execute-procedures-depending-on-options.py"
     ]
   },
   "taxa": {
@@ -17613,11 +17629,8 @@
       "163.3177-print-list-elements-by-group-of-2.py"
     ],
     "flow/loop/for": [
-      "007.0183-iterate-over-list-indexes-and-values.py",
       "013.0574-iterate-over-map-keys-and-values.py",
-      "020.0573-return-two-values.py",
       "040.2279-graph-with-adjacency-lists.py",
-      "043.2733-break-outer-loop.py",
       "112.2144-iterate-over-map-entries-ordered-by-keys.py",
       "113.2157-iterate-over-map-entries-ordered-by-values.py",
       "141.2159-iterate-in-sequence-over-two-lists.py",
@@ -17641,7 +17654,7 @@
       "119.3263-deduplicate-list.py",
       "128.2085-breadth-first-traversing-of-a-tree.py"
     ],
-    "flow/loop/for/elements_and_indexes": [
+    "flow/loop/for/indexes_and_elements": [
       "007.0183-iterate-over-list-indexes-and-values.py",
       "020.0573-return-two-values.py",
       "043.2733-break-outer-loop.py"
@@ -18220,10 +18233,13 @@
       "124.2152-binary-search-for-a-value-in-sorted-array.py",
       "131.2083-successive-conditions.py"
     ],
-    "pattern/elements/accumulate/in_list/filtered": [
+    "pattern/elements/accumulate/into_list": [
       "119.3263-deduplicate-list.py"
     ],
-    "pattern/elements/accumulate/in_set/filtered": [
+    "pattern/elements/accumulate/into_set": [
+      "119.3263-deduplicate-list.py"
+    ],
+    "pattern/elements/accumulate/some": [
       "119.3263-deduplicate-list.py"
     ],
     "style/functional": [

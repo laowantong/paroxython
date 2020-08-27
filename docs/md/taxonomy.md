@@ -165,6 +165,8 @@ The loop patterns constitute an aspect of programming which is not always taught
 
 ### Tagging with `style`
 
+#### Paradigms
+
 Python allows you to mix freely multiple paradigms. However, for Paroxython, every program will fall into exactly one of the following four categories, always associated to the whole span:
 
 1. `style/object_oriented` if it features at least one class definition;
@@ -186,6 +188,27 @@ def abundant_numbers_below(bound):
     # is greater than the number itself (Wikipedia).
     return [n for n in range(1, bound) if sum_proper_divisors(n) > n]
 ```
+
+#### Flawed styles
+
+Although Paroxython is no linter, it may tag some unpythonic (i.e., non-idiomatic) or naive patterns, frequent in the beginners' code. For instance:
+
+```python
+aux = a
+a = b
+b = aux
+```
+
+... is tagged `style/unpythonic/swap`, and:
+
+```python
+if condition:
+    return False
+else:
+    return True
+```
+
+is tagged `style/naive/return_condition`. Search `_unpythonic` and `_naive` in `spec.md` for the current list (which could of course be extended _ad libitum_).
 
 ### Going `meta`
 

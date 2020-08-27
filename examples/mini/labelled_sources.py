@@ -61,6 +61,7 @@ def print_collatz(n): # added_block_label (-> +7)
                        # assignment_lhs_identifier:n
                        # assignment_rhs_atom:2
                        # assignment_rhs_atom:n
+                       # augmented_assignment_unpythonic
                        # if_then_branch
                        # literal:2
                        # node:Assign
@@ -68,7 +69,6 @@ def print_collatz(n): # added_block_label (-> +7)
                        # node:Name
                        # node:Num
                        # single_assignment:n
-                       # suggest_augmented_assignment
                        # update:n:2
                        # update_by_assignment:n:2
                        # update_by_assignment_with:FloorDiv

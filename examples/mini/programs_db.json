@@ -37,6 +37,7 @@
         "assignment_rhs_atom:2": [[5,5]],
         "assignment_rhs_atom:3": [[7,7]],
         "assignment_rhs_atom:n": [[5,5],[7,7]],
+        "augmented_assignment_unpythonic": [[5,5]],
         "binary_operator:Add": [[7,7]],
         "binary_operator:Mod": [[4,4]],
         "binary_operator:Mult": [[7,7]],
@@ -79,7 +80,6 @@
         "node:arg": [[1,1]],
         "procedural_style": [[1,8]],
         "single_assignment:n": [[5,5],[7,7]],
-        "suggest_augmented_assignment": [[5,5]],
         "suggest_constant_definition": [[2,2]],
         "unknown_label": [[6,6]],
         "update:n:1": [[7,7]],
@@ -285,6 +285,9 @@
       "assignment.py"
     ],
     "assignment_rhs_atom:n": [
+      "collatz.py"
+    ],
+    "augmented_assignment_unpythonic": [
       "collatz.py"
     ],
     "binary_operator:Add": [
@@ -580,9 +583,6 @@
       "assignment.py"
     ],
     "single_assignment:n": [
-      "collatz.py"
-    ],
-    "suggest_augmented_assignment": [
       "collatz.py"
     ],
     "suggest_constant_definition": [

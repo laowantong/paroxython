@@ -83,7 +83,7 @@
         "external_free_call:print": [[3,3]],
         "for:i": [[2,3]],
         "for:name": [[2,3]],
-        "for_indexes_elements": [[2,3]],
+        "for_indexes_elements:i": [[2,3]],
         "free_call:enumerate": [[2,2]],
         "free_call:print": [[3,3]],
         "free_call_without_result:print": [[3,3]],
@@ -112,8 +112,7 @@
         "call/function/builtin/print": [[3,3]],
         "call/method/sequence/string/format": [[3,3]],
         "flow/loop/exit/late": [[2,3]],
-        "flow/loop/for": [[2,3]],
-        "flow/loop/for/elements_and_indexes": [[2,3]],
+        "flow/loop/for/indexes_and_elements": [[2,3]],
         "meta/program": [[1,3]],
         "meta/sloc/3": [[1,3]],
         "style/imperative": [[1,3]],
@@ -437,7 +436,7 @@
         "external_free_call:sorted": [[3,3]],
         "for:file_name": [[3,8]],
         "for:line": [[6,7]],
-        "for_each": [[6,7]],
+        "for_each:line": [[6,7]],
         "free_call:open": [[5,5]],
         "free_call:print": [[4,4],[7,7],[8,8]],
         "free_call:sorted": [[3,3]],
@@ -1063,7 +1062,11 @@
         "for:pct": [[16,18]],
         "for:price": [[16,18]],
         "for:ticker": [[16,18]],
-        "for_each": [[16,18]],
+        "for_each:change": [[16,18]],
+        "for_each:name": [[16,18]],
+        "for_each:pct": [[16,18]],
+        "for_each:price": [[16,18]],
+        "for_each:ticker": [[16,18]],
         "free_call:cmp": [[17,17]],
         "free_call:float": [[17,17],[18,18]],
         "free_call:open": [[4,4],[13,13]],
@@ -2626,11 +2629,25 @@
     "for:ticker": [
       "16_csv.py"
     ],
-    "for_each": [
-      "09_indent.py",
+    "for_each:change": [
       "16_csv.py"
     ],
-    "for_indexes_elements": [
+    "for_each:line": [
+      "09_indent.py"
+    ],
+    "for_each:name": [
+      "16_csv.py"
+    ],
+    "for_each:pct": [
+      "16_csv.py"
+    ],
+    "for_each:price": [
+      "16_csv.py"
+    ],
+    "for_each:ticker": [
+      "16_csv.py"
+    ],
+    "for_indexes_elements:i": [
       "03_friends.py"
     ],
     "for_range:BOARD_SIZE": [
@@ -4607,7 +4624,6 @@
       "21_xml_html_parsing.py"
     ],
     "flow/loop/for": [
-      "03_friends.py",
       "06_regex.py",
       "09_indent.py",
       "10_time.py",
@@ -4624,7 +4640,7 @@
       "09_indent.py",
       "16_csv.py"
     ],
-    "flow/loop/for/elements_and_indexes": [
+    "flow/loop/for/indexes_and_elements": [
       "03_friends.py"
     ],
     "flow/loop/for/nested/1": [
