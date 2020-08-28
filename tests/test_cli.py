@@ -6,7 +6,7 @@ import pytest
 
 
 def run(command_suffix):
-    command = f"python -m paroxython.cli.cli {command_suffix}"
+    command = f"python -m paroxython.cli {command_suffix}"
     print(command)
     result = subprocess.run(
         command,

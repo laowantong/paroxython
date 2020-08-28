@@ -226,7 +226,7 @@ Dumped: programs_recommendations.md.
 <li>a simple <a href="https://openbookproject.net/thinkcs/python/english3e/tuples.html#tuple-assignment">tuple assignment</a> (<code>var/assignment/parallel</code>);</li>
 <li>a “sliding” tuple assignment (<code>var/assignment/parallel/slide</code>). If the denomination is unique to us, the pattern itself occurs in a number of programs: implementations of <a href="https://en.wikipedia.org/wiki/Constant-recursive_sequence">C-finite sequences</a> with C greater than 1, <a href="https://en.wikipedia.org/wiki/Greatest_common_divisor">Greatest Common Divisor</a>, <a href="https://en.wikipedia.org/wiki/Quicksort">Quicksort</a>, etc.</li>
 </ul>
-<p>The magic command <code>%%paroxython</code> (corresponding to the subcommand <a href="https://laowantong.github.io/paroxython/cli/cli_tag.html"><code>tag</code></a>) only scratches the surface of the system. As shown before, to estimate the learning cost of the features and get actionable recommendations, you will need first to construct the tag database with <a href="https://laowantong.github.io/paroxython/cli/cli_collect.html"><code>collect</code></a>, and then call <a href="https://laowantong.github.io/paroxython/cli/cli_recommend.html"><code>recommend</code></a> on a pipeline of yours.
+<p>The magic command <code>%%paroxython</code> (corresponding to the subcommand <a href="https://laowantong.github.io/paroxython/cli_tag.html"><code>tag</code></a>) only scratches the surface of the system. As shown before, to estimate the learning cost of the features and get actionable recommendations, you will need first to construct the tag database with <a href="https://laowantong.github.io/paroxython/cli_collect.html"><code>collect</code></a>, and then call <a href="https://laowantong.github.io/paroxython/cli_recommend.html"><code>recommend</code></a> on a pipeline of yours.
 <br></p>
 <h1 id="about">About</h1>
 <h2 id="whats-in-a-name">What's in a name?</h2>
@@ -271,9 +271,21 @@ Dumped: programs_recommendations.md.
 <dd>
 <div class="desc"><p>Assess the learning cost associated with the introduction of the given programs.</p></div>
 </dd>
-<dt><code class="name"><a title="paroxython.cli" href="cli/index.html">paroxython.cli</a></code></dt>
+<dt><code class="name"><a title="paroxython.cli" href="cli.html">paroxython.cli</a></code></dt>
 <dd>
 <div class="desc"><p>Command line interface for the main functionalities of Paroxython.</p></div>
+</dd>
+<dt><code class="name"><a title="paroxython.cli_collect" href="cli_collect.html">paroxython.cli_collect</a></code></dt>
+<dd>
+<div class="desc"><p>Walk a directory, tag its Python files and make a database of the results.</p></div>
+</dd>
+<dt><code class="name"><a title="paroxython.cli_recommend" href="cli_recommend.html">paroxython.cli_recommend</a></code></dt>
+<dd>
+<div class="desc"><p>Read and execute a pipeline of commands and report the learning costs.</p></div>
+</dd>
+<dt><code class="name"><a title="paroxython.cli_tag" href="cli_tag.html">paroxython.cli_tag</a></code></dt>
+<dd>
+<div class="desc"><p>Tag one Python file and output the table of its taxa or labels.</p></div>
 </dd>
 <dt><code class="name"><a title="paroxython.compare_spans" href="compare_spans.html">paroxython.compare_spans</a></code></dt>
 <dd>
@@ -376,7 +388,10 @@ the learning costs of its final state.</p></div>
 <li><h3><a href="#header-submodules">Sub-modules</a></h3>
 <ul>
 <li><code><a title="paroxython.assess_costs" href="assess_costs.html">paroxython.assess_costs</a></code></li>
-<li><code><a title="paroxython.cli" href="cli/index.html">paroxython.cli</a></code></li>
+<li><code><a title="paroxython.cli" href="cli.html">paroxython.cli</a></code></li>
+<li><code><a title="paroxython.cli_collect" href="cli_collect.html">paroxython.cli_collect</a></code></li>
+<li><code><a title="paroxython.cli_recommend" href="cli_recommend.html">paroxython.cli_recommend</a></code></li>
+<li><code><a title="paroxython.cli_tag" href="cli_tag.html">paroxython.cli_tag</a></code></li>
 <li><code><a title="paroxython.compare_spans" href="compare_spans.html">paroxython.compare_spans</a></code></li>
 <li><code><a title="paroxython.derived_labels_db" href="derived_labels_db.html">paroxython.derived_labels_db</a></code></li>
 <li><code><a title="paroxython.filter_programs" href="filter_programs.html">paroxython.filter_programs</a></code></li>

@@ -53,4 +53,4 @@ build-backend = "poetry.masonry.api"
 issues = "https://github.com/laowantong/paroxython/issues"
 
 [tool.poetry.scripts]
-paroxython = 'paroxython.cli.cli:main'
+paroxython = 'paroxython.cli:main'

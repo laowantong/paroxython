@@ -7,7 +7,7 @@ from pathlib import Path
 import regex  # type: ignore
 
 import context
-from paroxython.cli.cli_tag import main as tag_program
+from paroxython.cli_tag import main as tag_program
 from paroxython.goodies import add_line_numbers
 from paroxython.preprocess_source import Cleanup
 
@@ -233,35 +233,34 @@ def patch_prose():
     index_path = Path("docs/index.html")
     index_text = index_path.read_text()
     index_text = index_text.replace("<h1>Index</h1>\n", "")
-    for title in ("cli", "User manual", "Developer manual"):
-        slug = title if title == "cli" else "" + title.lower().replace(" ", "_")
+    for title in ("User manual", "Developer manual"):
+        slug = title.lower().replace(" ", "_")
         path = Path("docs") / slug / "index.html"
         text = path.read_text()
-        if title != "cli":
-            (text, n) = regex.subn(
-                f"""<h1 class="title">Module <code>paroxython.{slug}</code></h1>""",
-                f"""<h1 class="title">{title}</h1>""",
-                text,
-            )
-            assert n == 1, f"Unable to change the title of {slug}!"
-            (text, n) = regex.subn(
-                f"<h1>Index</h1>",
-                f"<h1>{title}</h1>",
-                text,
-            )
-            assert n == 1, f"Unable to change the title of {slug} in nav!"
-            (text, n) = regex.subn(fr"""(?s)</div>\n<ul id="index">.+</ul>\n""", "", text)
-            assert n == 1, f"Unable to suppress the index section in prose {slug}'s nav!"
-            (index_text, n) = regex.subn(
-                fr"""<li><code><a title="paroxython.{slug}".+\n""", "", index_text
-            )
-            assert n == 1, f"Unable to remove nav url for {slug}!"
-            (index_text, n) = regex.subn(
-                fr"""(?s)<dt><code class="name"><a title="paroxython\.{slug}".+?</dd>\n""",
-                "",
-                index_text,
-            )
-            assert n == 1, f"Unable to remove module section for {slug}!"
+        (text, n) = regex.subn(
+            f"""<h1 class="title">Module <code>paroxython.{slug}</code></h1>""",
+            f"""<h1 class="title">{title}</h1>""",
+            text,
+        )
+        assert n == 1, f"Unable to change the title of {slug}!"
+        (text, n) = regex.subn(
+            f"<h1>Index</h1>",
+            f"<h1>{title}</h1>",
+            text,
+        )
+        assert n == 1, f"Unable to change the title of {slug} in nav!"
+        (text, n) = regex.subn(fr"""(?s)</div>\n<ul id="index">.+</ul>\n""", "", text)
+        assert n == 1, f"Unable to suppress the index section in prose {slug}'s nav!"
+        (index_text, n) = regex.subn(
+            fr"""<li><code><a title="paroxython.{slug}".+\n""", "", index_text
+        )
+        assert n == 1, f"Unable to remove nav url for {slug}!"
+        (index_text, n) = regex.subn(
+            fr"""(?s)<dt><code class="name"><a title="paroxython\.{slug}".+?</dd>\n""",
+            "",
+            index_text,
+        )
+        assert n == 1, f"Unable to remove module section for {slug}!"
         (text, n) = regex.subn(fr"""(?s)<details class="source">.+</details>\n""", "", text)
         assert n == 1, f"Unable to suppress the source code in prose {slug}!"
         (text, n) = regex.subn(
@@ -323,7 +322,7 @@ def expand_repo_urls():
 
 
 def update_version_number():
-    for path in ["paroxython/cli/cli_tag.py", "paroxython/cli/cli_collect.py"]:
+    for path in ["paroxython/cli_tag.py", "paroxython/cli_collect.py"]:
         path = Path(path)
         source = path.read_text()
         (source, n) = regex.subn(

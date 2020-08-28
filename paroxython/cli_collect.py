@@ -36,7 +36,7 @@ OPTIONS:
 
 from pathlib import Path
 
-from ..make_db import TagDatabase
+from .make_db import TagDatabase
 
 
 def cli_wrapper(args):

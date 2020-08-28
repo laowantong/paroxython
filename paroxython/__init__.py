@@ -30,7 +30,7 @@ if "ipykernel" in sys.modules:
     from IPython.core.magic import Magics, cell_magic, magics_class  # type: ignore
     from IPython.display import Markdown, display  # type: ignore
 
-    from .cli.cli_tag import main
+    from .cli_tag import main
 
     def load_ipython_extension(ipython):
         ipython.register_magics(ParoxythonMagics)

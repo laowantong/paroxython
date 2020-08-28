@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.8.4" />
-<title>paroxython.cli.cli_tag API documentation</title>
-<meta name="description" content="Tag one Python file and output the table of its taxa or labels …" />
+<title>paroxython.cli API documentation</title>
+<meta name="description" content="Command line interface for the main functionalities of Paroxython …" />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
 <link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/github.min.css" crossorigin>
@@ -17,84 +17,63 @@
 <script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
 <a href="https://github.com/laowantong/paroxython"><img style="position: absolute; top: 0; right: 0; border: 0; width: 150px; height: 150px" src="https://laowantong.github.io/paroxython/resources/source_on_github.png" alt="Source on GitHub"></a>
 <style>.homelink{display:block}.homelink:hover{color:inherit}.homelink img{margin:auto;margin-bottom:.3em}</style>
-<link rel="canonical" href="https://laowantong.github.io/paroxython/cli/cli_tag.html">
+<link rel="canonical" href="https://laowantong.github.io/paroxython/cli.html">
 <link rel="icon" href="https://laowantong.github.io/paroxython/resources/logo.png">
 </head>
 <body>
 <main>
 <article id="content">
 <header>
-<h1 class="title">Module <code>paroxython.cli.cli_tag</code></h1>
+<h1 class="title">Module <code>paroxython.cli</code></h1>
 </header>
 <section id="section-intro">
-<p>Tag one Python file and output the table of its taxa or labels.</p>
+<p>Command line interface for the main functionalities of Paroxython.</p>
 <h2 id="usage">Usage</h2>
-<pre><code>paroxython tag [options] FILENAME
+<pre><code>paroxython [--version] [--help] COMMAND [ARGS...]
 </code></pre>
-<h2 id="options">Options</h2>
-<pre><code class="plain">-f --format=FORMAT  Format of the output, either &quot;md&quot; (Markdown)
-                    or &quot;tsv&quot; (Tab Separated Values). [default: md]
--l --labels         Output the labels instead of the taxa.
--t --taxonomy=PATH  The path of a TSV file mapping labels onto taxa.
-                    If not specified, use the included default taxonomy:
-                    &lt;https://github.com/laowantong/paroxython/blob/0.4.5/paroxython/resources/taxonomy.tsv&gt;
+<h2 id="commands">Commands</h2>
+<pre><code class="plain">tag         Tag one Python file and output the table of its taxa or
+            labels.
+collect     Walk a directory, tag its Python files and make a JSON
+            database of the results.
+recommend   Read and execute a pipeline of commands and report the learning
+            costs.
 </code></pre>
+<p>Type <code>paroxython COMMAND --help</code> for more information on a specific command.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli_tag.py#L0-L68" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli.py#L0-L47" class="git-link">Browse GitHub</a>
 </summary>
-<pre><code class="python">from pathlib import Path
-from typing import List, Tuple, Optional
-from typing_extensions import Literal
+<pre><code class="python">#! /usr/bin/env python
+import sys
+from importlib import import_module
 
-from ..goodies import couple_to_string
-from ..parse_program import ProgramParser
-from ..list_programs import get_program
-from ..map_taxonomy import Taxonomy
-from ..user_types import Source
+import regex  # type: ignore
+from docopt import docopt  # type: ignore
 
+from . import PAROXYTHON_VERSION
 
-def main(
-    source: Source,
-    tags: Literal[&#34;Taxon&#34;, &#34;Label&#34;] = &#34;Taxon&#34;,
-    relative_path: Path = Path(&#34;.&#34;),
-    output_format: Literal[&#34;md&#34;, &#34;tsv&#34;] = &#34;md&#34;,
-    taxonomy_path: Optional[Path] = None,
-) -&gt; str:
-    program = get_program(source, relative_path)
-    parse = ProgramParser()
-    program.labels[:] = parse(program)
-    couples: List[Tuple[str, str]] = [(tags, &#34;Lines&#34;)]
-    if tags == &#34;Label&#34;:
-        for (label_name, label_spans) in sorted(program.labels):
-            s = &#34;, &#34;.join(map(couple_to_string, sorted(label_spans)))
-            couples.append((label_name, s))
-    else:
-        taxonomy = Taxonomy(taxonomy_path)
-        taxa = taxonomy.to_taxa(program.labels)
-        for (taxon_name, taxon_spans) in sorted(taxa):
-            s = &#34;, &#34;.join(map(couple_to_string, sorted(taxon_spans.elements())))
-            couples.append((taxon_name, s))
-    if output_format == &#34;md&#34;:
-        result = [f&#34;| `{tag}` | {lines} |&#34; for (tag, lines) in couples]
-        result[0] = result[0].replace(&#34;`&#34;, &#34;&#34;)
-        result[1:1] = [&#34;|:--|:--|&#34;]
-    else:
-        result = [f&#34;{tag}\t{lines}&#34; for (tag, lines) in couples]
-    return &#34;\n&#34;.join(result)
+if sys.version &lt; &#34;3.6&#34;:  # pragma: no cover
+    sys.exit(f&#34;Paroxython requires Python 3.6 or later to run.\nThis version is {sys.version}.&#34;)
 
 
-def cli_wrapper(args):
-    path = Path(args[&#34;FILENAME&#34;])
-    result = main(
-        source=Source(path.read_text()),
-        tags=&#34;Label&#34; if args[&#34;--labels&#34;] else &#34;Taxon&#34;,
-        relative_path=path.parent,
-        output_format=args[&#34;--format&#34;],
-        taxonomy_path=Path(args[&#34;--taxonomy&#34;]) if args[&#34;--taxonomy&#34;] else None,
-    )
-    print(result)</code></pre>
+def main():
+    doc = regex.sub(r&#34;(?m)^ *```.*\n&#34;, &#34;&#34;, __doc__)  # suppress Markdown code delimiters
+    args = docopt(doc, version=f&#34;paroxython version {PAROXYTHON_VERSION}&#34;, options_first=True)
+    if not args.get(&#34;COMMAND&#34;):  # pragma: no cover
+        sys.exit(doc)
+    command_name = args[&#34;COMMAND&#34;].lower()
+    command_args = [command_name] + args[&#34;ARGS&#34;]
+    if command_name not in (&#34;tag&#34;, &#34;recommend&#34;, &#34;collect&#34;):
+        sys.exit(f&#34;{command_name} is not a valid command. Type &#39;paroxython --help&#39;.&#34;)
+    command = import_module(f&#34;paroxython.cli_{command_name}&#34;, &#34;cli_wrapper&#34;)
+    command.__doc__ = regex.sub(r&#34;(?m)^ *```.*\n&#34;, &#34;&#34;, command.__doc__)
+    command.cli_wrapper(docopt(command.__doc__, argv=command_args))
+
+
+if __name__ == &#34;__main__&#34;:
+    main()</code></pre>
 </details>
 </section>
 <section>
@@ -104,66 +83,28 @@ def cli_wrapper(args):
 <section>
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
-<dt id="paroxython.cli.cli_tag.main"><code class="name flex">
-<span>def <span class="ident">main</span></span>(<span>source: Source, <br>tags: Literal['Taxon', 'Label'] = 'Taxon', <br>relative_path: pathlib.Path = PosixPath('.'), <br>output_format: Literal['md', 'tsv'] = 'md', <br>taxonomy_path: Union[pathlib.Path, NoneType] = None<br>) ‑> str</span>
+<dt id="paroxython.cli.main"><code class="name flex">
+<span>def <span class="ident">main</span></span>(<span>)</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli_tag.py#L30-L57" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli.py#L33-L44" class="git-link">Browse GitHub</a>
 </summary>
-<pre><code class="python">def main(
-    source: Source,
-    tags: Literal[&#34;Taxon&#34;, &#34;Label&#34;] = &#34;Taxon&#34;,
-    relative_path: Path = Path(&#34;.&#34;),
-    output_format: Literal[&#34;md&#34;, &#34;tsv&#34;] = &#34;md&#34;,
-    taxonomy_path: Optional[Path] = None,
-) -&gt; str:
-    program = get_program(source, relative_path)
-    parse = ProgramParser()
-    program.labels[:] = parse(program)
-    couples: List[Tuple[str, str]] = [(tags, &#34;Lines&#34;)]
-    if tags == &#34;Label&#34;:
-        for (label_name, label_spans) in sorted(program.labels):
-            s = &#34;, &#34;.join(map(couple_to_string, sorted(label_spans)))
-            couples.append((label_name, s))
-    else:
-        taxonomy = Taxonomy(taxonomy_path)
-        taxa = taxonomy.to_taxa(program.labels)
-        for (taxon_name, taxon_spans) in sorted(taxa):
-            s = &#34;, &#34;.join(map(couple_to_string, sorted(taxon_spans.elements())))
-            couples.append((taxon_name, s))
-    if output_format == &#34;md&#34;:
-        result = [f&#34;| `{tag}` | {lines} |&#34; for (tag, lines) in couples]
-        result[0] = result[0].replace(&#34;`&#34;, &#34;&#34;)
-        result[1:1] = [&#34;|:--|:--|&#34;]
-    else:
-        result = [f&#34;{tag}\t{lines}&#34; for (tag, lines) in couples]
-    return &#34;\n&#34;.join(result)</code></pre>
-</details>
-</dd>
-<dt id="paroxython.cli.cli_tag.cli_wrapper"><code class="name flex">
-<span>def <span class="ident">cli_wrapper</span></span>(<span>args)</span>
-</code></dt>
-<dd>
-<div class="desc"></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli_tag.py#L60-L69" class="git-link">Browse GitHub</a>
-</summary>
-<pre><code class="python">def cli_wrapper(args):
-    path = Path(args[&#34;FILENAME&#34;])
-    result = main(
-        source=Source(path.read_text()),
-        tags=&#34;Label&#34; if args[&#34;--labels&#34;] else &#34;Taxon&#34;,
-        relative_path=path.parent,
-        output_format=args[&#34;--format&#34;],
-        taxonomy_path=Path(args[&#34;--taxonomy&#34;]) if args[&#34;--taxonomy&#34;] else None,
-    )
-    print(result)</code></pre>
+<pre><code class="python">def main():
+    doc = regex.sub(r&#34;(?m)^ *```.*\n&#34;, &#34;&#34;, __doc__)  # suppress Markdown code delimiters
+    args = docopt(doc, version=f&#34;paroxython version {PAROXYTHON_VERSION}&#34;, options_first=True)
+    if not args.get(&#34;COMMAND&#34;):  # pragma: no cover
+        sys.exit(doc)
+    command_name = args[&#34;COMMAND&#34;].lower()
+    command_args = [command_name] + args[&#34;ARGS&#34;]
+    if command_name not in (&#34;tag&#34;, &#34;recommend&#34;, &#34;collect&#34;):
+        sys.exit(f&#34;{command_name} is not a valid command. Type &#39;paroxython --help&#39;.&#34;)
+    command = import_module(f&#34;paroxython.cli_{command_name}&#34;, &#34;cli_wrapper&#34;)
+    command.__doc__ = regex.sub(r&#34;(?m)^ *```.*\n&#34;, &#34;&#34;, command.__doc__)
+    command.cli_wrapper(docopt(command.__doc__, argv=command_args))</code></pre>
 </details>
 </dd>
 </dl>
@@ -184,13 +125,12 @@ def cli_wrapper(args):
 <ul id="index">
 <li><h3>Super-module</h3>
 <ul>
-<li><code><a title="paroxython.cli" href="index.html">paroxython.cli</a></code></li>
+<li><code><a title="paroxython" href="index.html">paroxython</a></code></li>
 </ul>
 </li>
 <li><h3><a href="#header-functions">Functions</a></h3>
 <ul class="">
-<li><code><a title="paroxython.cli.cli_tag.main" href="#paroxython.cli.cli_tag.main">main</a></code></li>
-<li><code><a title="paroxython.cli.cli_tag.cli_wrapper" href="#paroxython.cli.cli_tag.cli_wrapper">cli_wrapper</a></code></li>
+<li><code><a title="paroxython.cli.main" href="#paroxython.cli.main">main</a></code></li>
 </ul>
 </li>
 </ul>

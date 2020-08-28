@@ -75,7 +75,7 @@ from pathlib import Path
 import regex  # type: ignore
 from typed_ast.ast3 import literal_eval
 
-from ..recommend_programs import Recommendations
+from .recommend_programs import Recommendations
 
 
 def cli_wrapper(args):

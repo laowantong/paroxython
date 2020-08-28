@@ -20,10 +20,11 @@ Type `paroxython COMMAND --help` for more information on a specific command.
 """
 import sys
 from importlib import import_module
-from .. import PAROXYTHON_VERSION
 
-from docopt import docopt  # type: ignore
 import regex  # type: ignore
+from docopt import docopt  # type: ignore
+
+from . import PAROXYTHON_VERSION
 
 if sys.version < "3.6":  # pragma: no cover
     sys.exit(f"Paroxython requires Python 3.6 or later to run.\nThis version is {sys.version}.")
@@ -38,7 +39,7 @@ def main():
     command_args = [command_name] + args["ARGS"]
     if command_name not in ("tag", "recommend", "collect"):
         sys.exit(f"{command_name} is not a valid command. Type 'paroxython --help'.")
-    command = import_module(f"paroxython.cli.cli_{command_name}", "cli_wrapper")
+    command = import_module(f"paroxython.cli_{command_name}", "cli_wrapper")
     command.__doc__ = regex.sub(r"(?m)^ *```.*\n", "", command.__doc__)
     command.cli_wrapper(docopt(command.__doc__, argv=command_args))
 
