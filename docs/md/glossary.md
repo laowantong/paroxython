@@ -44,7 +44,7 @@ Inside a definition, the terms which have their own entry in the glossary are _i
 :   A list of filtering _commands_, expressed as a Python value and evaluated by `ast.literal_eval()`.
 
 **Predicate**
-:   Used in a restricted sense to designate the middle term of a _semantic triple_. It is a function taking two _poor spans_ `x` and `y` and telling whether they satisfy a certain relationship (for instance, “`x` after `y`”, or “`y` not inside `x`”).
+:   Used in a restricted sense to denote the middle term of a _semantic triple_. It is a function taking two _poor spans_ `x` and `y` and telling whether they satisfy a certain relationship (for instance, “`x` after `y`”, or “`y` not inside `x`”).
 
 **Source**
 :   The text of a Python program of your collection.

@@ -43,7 +43,7 @@ recommend   Read and execute a pipeline of commands and report the learning
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli.py#L0-L48" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli.py#L0-L45" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">#! /usr/bin/env python
 import sys
@@ -54,16 +54,13 @@ from docopt import docopt  # type: ignore
 import regex  # type: ignore
 
 if sys.version &lt; &#34;3.6&#34;:  # pragma: no cover
-    print(f&#34;Paroxython requires Python 3.6 or later to run.\nThis version is {sys.version}.&#34;)
-    sys.exit()
-
+    sys.exit(f&#34;Paroxython requires Python 3.6 or later to run.\nThis version is {sys.version}.&#34;)
 
 def main():
-    global __doc__
-    __doc__ = regex.sub(r&#34;(?m)^ *```.*\n&#34;, &#34;&#34;, __doc__)  # suppress Markdown code delimiters
-    args = docopt(__doc__, version=f&#34;paroxython version {PAROXYTHON_VERSION}&#34;, options_first=True)
+    doc = regex.sub(r&#34;(?m)^ *```.*\n&#34;, &#34;&#34;, __doc__)  # suppress Markdown code delimiters
+    args = docopt(doc, version=f&#34;paroxython version {PAROXYTHON_VERSION}&#34;, options_first=True)
     if not args.get(&#34;COMMAND&#34;):  # pragma: no cover
-        sys.exit(__doc__)
+        sys.exit(doc)
     command_name = args[&#34;COMMAND&#34;].lower()
     command_args = [command_name] + args[&#34;ARGS&#34;]
     if command_name not in (&#34;tag&#34;, &#34;recommend&#34;, &#34;collect&#34;):
@@ -92,14 +89,13 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli.py#L33-L45" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli/cli.py#L31-L42" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def main():
-    global __doc__
-    __doc__ = regex.sub(r&#34;(?m)^ *```.*\n&#34;, &#34;&#34;, __doc__)  # suppress Markdown code delimiters
-    args = docopt(__doc__, version=f&#34;paroxython version {PAROXYTHON_VERSION}&#34;, options_first=True)
+    doc = regex.sub(r&#34;(?m)^ *```.*\n&#34;, &#34;&#34;, __doc__)  # suppress Markdown code delimiters
+    args = docopt(doc, version=f&#34;paroxython version {PAROXYTHON_VERSION}&#34;, options_first=True)
     if not args.get(&#34;COMMAND&#34;):  # pragma: no cover
-        sys.exit(__doc__)
+        sys.exit(doc)
     command_name = args[&#34;COMMAND&#34;].lower()
     command_args = [command_name] + args[&#34;ARGS&#34;]
     if command_name not in (&#34;tag&#34;, &#34;recommend&#34;, &#34;collect&#34;):

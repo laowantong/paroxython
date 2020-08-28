@@ -26,16 +26,14 @@ from docopt import docopt  # type: ignore
 import regex  # type: ignore
 
 if sys.version < "3.6":  # pragma: no cover
-    print(f"Paroxython requires Python 3.6 or later to run.\nThis version is {sys.version}.")
-    sys.exit()
+    sys.exit(f"Paroxython requires Python 3.6 or later to run.\nThis version is {sys.version}.")
 
 
 def main():
-    global __doc__
-    __doc__ = regex.sub(r"(?m)^ *```.*\n", "", __doc__)  # suppress Markdown code delimiters
-    args = docopt(__doc__, version=f"paroxython version {PAROXYTHON_VERSION}", options_first=True)
+    doc = regex.sub(r"(?m)^ *```.*\n", "", __doc__)  # suppress Markdown code delimiters
+    args = docopt(doc, version=f"paroxython version {PAROXYTHON_VERSION}", options_first=True)
     if not args.get("COMMAND"):  # pragma: no cover
-        sys.exit(__doc__)
+        sys.exit(doc)
     command_name = args["COMMAND"].lower()
     command_args = [command_name] + args["ARGS"]
     if command_name not in ("tag", "recommend", "collect"):
