@@ -155,7 +155,7 @@ If you use Jupyter notebook/lab, you've also just installed a so-called magic co
 %load_ext paroxython
 ```
 
-This should print `"paroxython 0.4.5 loaded."`. Run it on a cell of Python code (line numbers added for clarity):
+This should print `"paroxython 0.4.6 loaded."`. Run it on a cell of Python code (line numbers added for clarity):
 
 ```python
 1   %%paroxython

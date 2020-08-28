@@ -60,11 +60,11 @@ EXAMPLE:
     - your tag database is at its default location `path/to/programs_db.json`;
     - your pipeline is at its default location `path/to/programs_pipe.py`.
 
-    Then, to **copy** (not move) all the recommended programs to an existing
-    directory `dest`, just do:
+    Then, to copy (not move) all the recommended programs to an existing
+    directory DEST, just do:
 
     paroxython recommend -o stdout path/to/programs_db.json \
-        | xargs  -I {} sh -c "cp path/to/programs/{} dest"
+        | xargs  -I {} sh -c "cp path/to/programs/{} DEST"
     ```
 """
 
