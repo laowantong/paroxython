@@ -27,7 +27,7 @@ In the visualization below, we have introduced the pseudo-root “•” to gath
 
 <div id="tree" style="width: 100%; height: 1000px;"></div>
 
-This comes[^tree_sql] straight from tagging the public repository [The Algorithms - Python](https://github.com/TheAlgorithms/Python). The size of a node is relative to the number of times the corresponding taxon's _prefix_ appears in these programs.
+This comes[^tree_sql] straight from the tagging of the public repository [The Algorithms - Python](https://github.com/TheAlgorithms/Python). The size of a node is relative to the number of times the corresponding taxon's _prefix_ appears in these programs.
 
 [^tree_sql]:
     More precisely, it is the result of executing

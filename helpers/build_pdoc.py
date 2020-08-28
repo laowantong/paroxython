@@ -207,21 +207,21 @@ def compute_stats():
         print(f"{directory}: {total} SLOC")
         total = 50 * round(total / 50)
         (readme_text, n) = regex.subn(
-            fr"(?m)^(!\[{directory} SLOC\].+?)~\d+(%20SLOC)",
+            fr"(?m)(!\[{directory} SLOC\].+?)~\d+(%20SLOC)",
             fr"\1~{total}\2",
             readme_text,
         )
         assert n > 0, f"Unable to create badge for '{directory}' SLOC."
     total = 50 * round(Path("paroxython/resources/spec.md").read_text().count("\n") / 50)
     (readme_text, n) = regex.subn(
-        fr"(?m)^(!\[specifications lines\].+?)~\d+(%20lines)",
+        fr"(?m)(!\[specifications lines\].+?)~\d+(%20lines)",
         fr"\1~{total}\2",
         readme_text,
     )
     assert n == 1
     total = Path("paroxython/resources/taxonomy.tsv").read_text().partition("-- EOF")[0].count("\n")
     (readme_text, n) = regex.subn(
-        fr"(?m)^(!\[taxonomy lines\].+)-\d+(%20lines)",
+        fr"(?m)(!\[taxonomy mappings\].+)-\d+(%20mappings)",
         fr"\1-{total}\2",
         readme_text,
     )

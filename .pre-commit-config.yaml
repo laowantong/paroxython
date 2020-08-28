@@ -17,7 +17,7 @@ repos:
     hooks:
     -   id: pyupgrade
 -   repo: https://github.com/psf/black
-    rev: cd3a93a14689f046468ece2a5b1f78863c3c4cd2
+    rev: 20.8b1
     hooks:
     -   id: black
         exclude: examples/*|docs/resources/fibonacci.py

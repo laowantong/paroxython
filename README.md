@@ -6,15 +6,15 @@
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/paroxython)
 [![GitHub Release](https://img.shields.io/github/release/laowantong/paroxython.svg?style=flat)]()
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/laowantong/paroxython)
-![paroxython SLOC](https://img.shields.io/badge/main%20program-~1700%20SLOC-blue)
-![tests SLOC](https://img.shields.io/badge/tests-~2700%20SLOC-blue)
-![helpers SLOC](https://img.shields.io/badge/helpers-~850%20SLOC-blue)
-![specifications lines](https://img.shields.io/badge/specifications-~7600%20lines-blue)
-![taxonomy lines](https://img.shields.io/badge/taxonomy-254%20lines-blue)
+[![paroxython SLOC](https://img.shields.io/badge/main%20program-~1700%20SLOC-blue)](https://github.com/laowantong/paroxython/blob/master/paroxython)
+[![tests SLOC](https://img.shields.io/badge/tests-~2700%20SLOC-blue)](https://github.com/laowantong/paroxython/blob/master/tests)
+[![helpers SLOC](https://img.shields.io/badge/helpers-~850%20SLOC-blue)](https://github.com/laowantong/paroxython/blob/master/helpers)
+[![specifications lines](https://img.shields.io/badge/specifications-~7600%20lines-blue)](https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md)
+[![taxonomy mappings](https://img.shields.io/badge/taxonomy-254%20mappings-blue)](https://github.com/laowantong/paroxython/blob/master/paroxython/resources/taxonomy.tsv)
 [![GitHub commit activity](https://img.shields.io/github/commit-activity/y/laowantong/paroxython.svg?style=flat)]()
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-![Band-aid](https://img.shields.io/badge/not%C2%A0%C2%A0%F0%9F%85%B3%F0%9F%85%B4%F0%9F%85%B0%F0%9F%85%B3-yet-%23F3D9C5?labelColor=%23F3D9C5)
+[![Band-aid](https://img.shields.io/badge/not%C2%A0%C2%A0%F0%9F%85%B3%F0%9F%85%B4%F0%9F%85%B0%F0%9F%85%B3-yet-%23F3D9C5?labelColor=%23F3D9C5)](https://youtu.be/QcbR1J_4ICg?t=54)
 
 <p align="center">
   <a href="https://laowantong.github.io/paroxython/index.html">
@@ -24,7 +24,7 @@
 
 ## Introduction
 
-Paroxython is a set of command line tools which **tag** a collection of Python programming exercises and **filter** them by algorithmic features.
+Paroxython is a set of command line tools which **tag** and **filter** by algorithmic features a collection of Python programming exercises.
 
 ### Audience
 

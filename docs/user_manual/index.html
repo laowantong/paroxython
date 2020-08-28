@@ -919,7 +919,7 @@ call/method/sequence/list/\1    member_call_method:list:(count|index|pop|...)
 <p>&hellip; describes, you know&hellip; this kind of literal which is a kind of integer which is a kind of number which is a kind of type (as an example, think of the answer to the ultimate question of life, the universe, and everything).</p>
 <p>In the visualization below, we have introduced the pseudo-root “•” to gather all the trees into one:</p>
 <div id="tree" style="width: 100%; height: 1000px;"></div>
-<p>This comes<sup id="fnref:tree_sql"><a class="footnote-ref" href="#fn:tree_sql" rel="footnote">8</a></sup> straight from tagging the public repository <a href="https://github.com/TheAlgorithms/Python">The Algorithms - Python</a>. The size of a node is relative to the number of times the corresponding taxon's <em>prefix</em> appears in these programs.</p>
+<p>This comes<sup id="fnref:tree_sql"><a class="footnote-ref" href="#fn:tree_sql" rel="footnote">8</a></sup> straight from the tagging of the public repository <a href="https://github.com/TheAlgorithms/Python">The Algorithms - Python</a>. The size of a node is relative to the number of times the corresponding taxon's <em>prefix</em> appears in these programs.</p>
 <p>Hover over the nodes to see these numbers, or click them to navigate the tree. By the way, you may click on <code>type</code> to better follow the subsequent explanations.</p>
 <h2 id="mapping-the-labels-onto-taxa">Mapping the labels onto taxa</h2>
 <p>Paroxython does not directly grow these forest of taxa. Remember, a program is first tagged with labels (as specified in <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md"><code>spec.md</code></a>). Those are then translated into taxa by a purely morphological operation (search and replace), without any more reference to the original source code.</p>
@@ -1611,7 +1611,7 @@ The previous link is automatically updated by build_pdoc.py.
 <p>The semantic triple:</p>
 <pre><code class="python">(taxon_pattern_1, not predicate, taxon_pattern_2)
 </code></pre>
-<p>&hellip; describe the set of programs which feature at least one taxon matching <code>taxon_pattern_1</code>, and such that, for any
+<p>&hellip; describes the set of programs which feature at least one taxon matching <code>taxon_pattern_1</code>, and such that, for any
 span <code>s_1</code> of such a taxon, there exists no span <code>s_2</code> of a taxon matching <code>taxon_pattern_2</code> for which <code>predicate(s_1, s_2)</code> is verified.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
@@ -1704,7 +1704,7 @@ The previous link is automatically updated by build_pdoc.py.
 </ul>
 </dd>
 <dd>
-<p>Comparison with <em>taxa</em>: the <em>taxa</em> aims to represent concepts; <em>labels</em>, not so much. For instance, labelling <code>a = b</code> by <code>assignment:42</code> captures, in addition to the concept (assignment), an arbitrary piece of information (a name) which may or may not be internally used later to <em>label</em> more complex <em>features</em>. Moreover, <em>taxa</em> are structured into a <em>taxonomy</em>; <em>labels</em> are free form.</p>
+<p>Comparison with <em>taxa</em>: the <em>taxa</em> aim to represent concepts; <em>labels</em>, not so much. For instance, labelling <code>a = b</code> by <code>assignment:42</code> captures, in addition to the concept (assignment), an arbitrary piece of information (a name) which may or may not be internally used later to <em>label</em> more complex <em>features</em>. Moreover, <em>taxa</em> are structured into a <em>taxonomy</em>; <em>labels</em> are free form.</p>
 </dd>
 <dt><strong>Operation</strong></dt>
 <dd>A string among <code>"include"</code>, <code>"exclude"</code>, <code>"impart"</code> and <code>"hide"</code>, with an optional suffix <code>"any"</code> (implicit) or <code>"all"</code>.</dd>
@@ -1717,7 +1717,7 @@ The previous link is automatically updated by build_pdoc.py.
 <dt><strong>Predicate</strong></dt>
 <dd>Used in a restricted sense to designate the middle term of a <em>semantic triple</em>. It is a function taking two <em>poor spans</em> <code>x</code> and <code>y</code> and telling whether they satisfy a certain relationship (for instance, “<code>x</code> after <code>y</code>”, or “<code>y</code> not inside <code>x</code>”).</dd>
 <dt><strong>Source</strong></dt>
-<dd>The text of an element of your collection of Python programs.</dd>
+<dd>The text of a Python program of your collection.</dd>
 <dt><strong>Span</strong></dt>
 <dd>The location of a given <em>feature</em>, as the couple of its first and last lines. By extension, a third member, the <em>path</em>, identifies the beginning of the <em>feature</em> in the <abbr title="Abstract Syntax Tree">AST</abbr>.</dd>
 <dt><strong>Span (poor —)</strong></dt>

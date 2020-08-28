@@ -384,7 +384,7 @@ The semantic triple:
 (taxon_pattern_1, not predicate, taxon_pattern_2)
 ```
 
-... describe the set of programs which feature at least one taxon matching `taxon_pattern_1`, and such that, for any  span `s_1` of such a taxon, there exists no span `s_2` of a taxon matching `taxon_pattern_2` for which `predicate(s_1, s_2)` is verified.
+... describes the set of programs which feature at least one taxon matching `taxon_pattern_1`, and such that, for any  span `s_1` of such a taxon, there exists no span `s_2` of a taxon matching `taxon_pattern_2` for which `predicate(s_1, s_2)` is verified.
 
 ..warning::
     Note that the result includes also all programs featuring at least one taxon matching `taxon_pattern_1`, but no taxon matching `taxon_pattern_2`. For instance, suppose the original (negative) triple is:

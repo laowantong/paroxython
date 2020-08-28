@@ -29,7 +29,7 @@ Inside a definition, the terms which have their own entry in the glossary are _i
 :   - with one variable suffix: `loop_with_return:for`, `import_module:foo`, `member_call_method:append`;
 :   - with several variable suffixes: `member_call:bar:append`, `for_range:start:stop:-1`.
 
-:   Comparison with _taxa_: the _taxa_ aims to represent concepts; _labels_, not so much. For instance, labelling `a = b` by `assignment:42` captures, in addition to the concept (assignment), an arbitrary piece of information (a name) which may or may not be internally used later to _label_ more complex _features_. Moreover, _taxa_ are structured into a _taxonomy_; _labels_ are free form.
+:   Comparison with _taxa_: the _taxa_ aim to represent concepts; _labels_, not so much. For instance, labelling `a = b` by `assignment:42` captures, in addition to the concept (assignment), an arbitrary piece of information (a name) which may or may not be internally used later to _label_ more complex _features_. Moreover, _taxa_ are structured into a _taxonomy_; _labels_ are free form.
 
 **Operation**
 :   A string among `"include"`, `"exclude"`, `"impart"` and `"hide"`, with an optional suffix `"any"` (implicit) or `"all"`.
@@ -47,7 +47,7 @@ Inside a definition, the terms which have their own entry in the glossary are _i
 :   Used in a restricted sense to designate the middle term of a _semantic triple_. It is a function taking two _poor spans_ `x` and `y` and telling whether they satisfy a certain relationship (for instance, “`x` after `y`”, or “`y` not inside `x`”).
 
 **Source**
-:   The text of an element of your collection of Python programs.
+:   The text of a Python program of your collection.
 
 **Span**
 :   The location of a given _feature_, as the couple of its first and last lines. By extension, a third member, the _path_, identifies the beginning of the _feature_ in the AST.
