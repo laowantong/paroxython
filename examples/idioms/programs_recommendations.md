@@ -39,7 +39,7 @@
     - [`027.0192-create-a-3-dimensional-array.py`](#program-0270192-create-a-3-dimensional-arraypy-learning-cost-421875)
     - [`027.0193-create-a-3-dimensional-array.py`](#program-0270193-create-a-3-dimensional-arraypy-learning-cost-5125)
     - [`028.0350-sort-by-a-property.py`](#program-0280350-sort-by-a-propertypy-learning-cost-51875)
-    - [`029.0199-remove-item-from-list-by-its-index.py`](#program-0290199-remove-item-from-list-by-its-indexpy-learning-cost-3125)
+    - [`029.0199-remove-item-from-list-by-its-index.py`](#program-0290199-remove-item-from-list-by-its-indexpy-learning-cost-325)
     - [`030.0189-parallelize-execution-of-1000-independent-tasks.py`](#program-0300189-parallelize-execution-of-1000-independent-taskspy-learning-cost-98125)
     - [`031.0188-recursive-factorial-simple.py`](#program-0310188-recursive-factorial-simplepy-learning-cost-1284375)
     - [`032.0196-integer-exponentiation-by-squaring.py`](#program-0320196-integer-exponentiation-by-squaringpy-learning-cost-5875)
@@ -198,7 +198,7 @@
     - [`169.2233-string-length.py`](#program-1692233-string-lengthpy-learning-cost-34375)
     - [`170.2275-get-map-size.py`](#program-1702275-get-map-sizepy-learning-cost-34375)
     - [`171.2446-add-an-element-at-the-end-of-a-list.py`](#program-1712446-add-an-element-at-the-end-of-a-listpy-learning-cost-346875)
-    - [`172.2442-insert-entry-in-map.py`](#program-1722442-insert-entry-in-mappy-learning-cost-3125)
+    - [`172.2442-insert-entry-in-map.py`](#program-1722442-insert-entry-in-mappy-learning-cost-325)
     - [`173.2427-format-a-number-with-grouped-thousands.py`](#program-1732427-format-a-number-with-grouped-thousandspy-learning-cost-35)
     - [`173.2428-format-a-number-with-grouped-thousands.py`](#program-1732428-format-a-number-with-grouped-thousandspy-learning-cost-35)
     - [`173.2429-format-a-number-with-grouped-thousands.py`](#program-1732429-format-a-number-with-grouped-thousandspy-learning-cost-35)
@@ -217,7 +217,7 @@
     - [`184.2701-tomorrow.py`](#program-1842701-tomorrowpy-learning-cost-6875)
     - [`185.2820-execute-function-in-30-seconds.py`](#program-1852820-execute-function-in-30-secondspy-learning-cost-7125)
     - [`186.2699-exit-program-cleanly.py`](#program-1862699-exit-program-cleanlypy-learning-cost-521875)
-    - [`187.3261-disjoint-set.py`](#program-1873261-disjoint-setpy-learning-cost-194375)
+    - [`187.3261-disjoint-set.py`](#program-1873261-disjoint-setpy-learning-cost-203125)
     - [`188.3171-matrix-multiplication.py`](#program-1883171-matrix-multiplicationpy-learning-cost-43125)
     - [`188.3284-matrix-multiplication.py`](#program-1883284-matrix-multiplicationpy-learning-cost-41875)
     - [`189.3236-filter-and-transform-list.py`](#program-1893236-filter-and-transform-listpy-learning-cost-3375)
@@ -1023,7 +1023,7 @@
 
 ---
 
-### Program `029.0199-remove-item-from-list-by-its-index.py` (learning cost 3.125)
+### Program `029.0199-remove-item-from-list-by-its-index.py` (learning cost 3.25)
 
 ```python
 1   del items[i]
@@ -1034,7 +1034,7 @@
 | 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
 | 0.75 | `subscript/index` | 1 |
-| 0.75 | `var/deletion` | 1 |
+| 0.875 | `var/deletion/index` | 1 |
 | 0 | `meta/program` | 1 |
 | 0 | `meta/sloc/1` | 1 |
 
@@ -4467,7 +4467,7 @@
 
 ---
 
-### Program `172.2442-insert-entry-in-map.py` (learning cost 3.125)
+### Program `172.2442-insert-entry-in-map.py` (learning cost 3.25)
 
 ```python
 1   m[k] = v
@@ -4478,7 +4478,7 @@
 | 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
 | 0.75 | `subscript/index` | 1 |
-| 0.75 | `var/assignment` | 1 |
+| 0.875 | `var/assignment/index` | 1 |
 | 0 | `meta/program` | 1 |
 | 0 | `meta/sloc/1` | 1 |
 
@@ -4870,7 +4870,7 @@
 
 ---
 
-### Program `187.3261-disjoint-set.py` (learning cost 19.4375)
+### Program `187.3261-disjoint-set.py` (learning cost 20.3125)
 
 ```python
 1   class UnionFind:
@@ -4913,7 +4913,8 @@
 | 0.96875 | `type/number/integer/literal/zero` | 3 |
 | 0.9375 | `type/sequence/list/literal` | 3 |
 | 0.9375 | `type/sequence/tuple/literal` | 15, 15 |
-| 0.75 | `var/assignment` | 3, 4, 9 |
+| 0.75 | `var/assignment` | 3, 4 |
+| 0.875 | `var/assignment/index` | 9 |
 | 0.875 | `var/assignment/parallel` | 15 |
 | 0 | `meta/program` | 1-15 |
 | 0 | `meta/sloc/15` | 1-15 |

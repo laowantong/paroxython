@@ -9,8 +9,8 @@
 [![paroxython SLOC](https://img.shields.io/badge/main%20program-~1700%20SLOC-blue)](https://github.com/laowantong/paroxython/blob/master/paroxython)
 [![tests SLOC](https://img.shields.io/badge/tests-~2700%20SLOC-blue)](https://github.com/laowantong/paroxython/blob/master/tests)
 [![helpers SLOC](https://img.shields.io/badge/helpers-~850%20SLOC-blue)](https://github.com/laowantong/paroxython/blob/master/helpers)
-[![specifications lines](https://img.shields.io/badge/specifications-~7600%20lines-blue)](https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md)
-[![taxonomy mappings](https://img.shields.io/badge/taxonomy-254%20mappings-blue)](https://github.com/laowantong/paroxython/blob/master/paroxython/resources/taxonomy.tsv)
+[![specifications lines](https://img.shields.io/badge/specifications-~7700%20lines-blue)](https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md)
+[![taxonomy mappings](https://img.shields.io/badge/taxonomy-259%20mappings-blue)](https://github.com/laowantong/paroxython/blob/master/paroxython/resources/taxonomy.tsv)
 [![GitHub commit activity](https://img.shields.io/github/commit-activity/y/laowantong/paroxython.svg?style=flat)]()
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -106,7 +106,9 @@ The result is a list of program **recommendations** ordered by increasing learni
 
 ### Example
 
-Suppose that the `programs` directory contains [these simple programs](https://wiki.python.org/moin/SimplePrograms). First, build [this tag database](https://github.com/laowantong/paroxython/blob/master/examples/simple/programs_db.json):
+Suppose that the `programs` directory contains [these simple programs](https://wiki.python.org/moin/SimplePrograms).
+
+First, build [this tag database](https://github.com/laowantong/paroxython/blob/master/examples/simple/programs_db.json):
 
 ```shell
 > paroxython collect programs

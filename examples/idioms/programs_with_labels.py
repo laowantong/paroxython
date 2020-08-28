@@ -244,7 +244,7 @@ items = sorted(items, key=lambda x: x.p) # assignment:sorted, assignment_lhs_ide
 # ----------------------------------------------------------------------------------------
 # 029.0199-remove-item-from-list-by-its-index.py
 # ----------------------------------------------------------------------------------------
-del items[i] # flat_style, imperative_style, index:i, node:Delete, node:Name, node:Subscript, one_liner_style, whole_span:1
+del items[i] # flat_style, imperative_style, index:i, node:Delete, node:Name, node:Subscript, one_liner_style, subscript_deletion:Index, whole_span:1
 
 # ----------------------------------------------------------------------------------------
 # 030.0189-parallelize-execution-of-1000-independent-tasks.py
@@ -1286,7 +1286,7 @@ s.append(x) # call_argument:x, flat_style, imperative_style, member_call:s:appen
 # ----------------------------------------------------------------------------------------
 # 172.2442-insert-entry-in-map.py
 # ----------------------------------------------------------------------------------------
-m[k] = v # assignment, assignment_lhs_identifier:m, assignment_rhs_atom:v, flat_style, imperative_style, index:k, node:Assign, node:Name, node:Subscript, one_liner_style, whole_span:1
+m[k] = v # assignment, assignment_lhs_identifier:m, assignment_rhs_atom:v, flat_style, imperative_style, index:k, node:Assign, node:Name, node:Subscript, one_liner_style, subscript_assignment:Index, whole_span:1
 
 # ----------------------------------------------------------------------------------------
 # 173.2427-format-a-number-with-grouped-thousands.py
@@ -1417,7 +1417,7 @@ class UnionFind: # node:ClassDef (-> +14), object_oriented_style (-> +14), whole
         if self.p[i] == i: # comparison_operator:Eq, if (-> +4), if_test_atom:i, if_test_atom:self, index:i, node:Attribute, node:Compare, node:If (-> +4), node:Name, node:Subscript, value_attr:p
             return i # if_then_branch, node:Name, node:Return, return:i
         else:
-            self.p[i] = self.find_set(self.p[i]) # assignment:find_set, assignment_rhs_atom:i, assignment_rhs_atom:self, call_argument:, if_else_branch (-> +1), index:i, member_call_method:find_set, node:Assign, node:Attribute, node:Call, node:Name, node:Subscript, value_attr:p
+            self.p[i] = self.find_set(self.p[i]) # assignment:find_set, assignment_rhs_atom:i, assignment_rhs_atom:self, call_argument:, if_else_branch (-> +1), index:i, member_call_method:find_set, node:Assign, node:Attribute, node:Call, node:Name, node:Subscript, subscript_assignment:Index, value_attr:p
             return self.p[i] # index:i, node:Attribute, node:Name, node:Return, node:Subscript, return, value_attr:p
     def is_same_set(self, i, j): # function:is_same_set (-> +1), function_argument:i, function_argument:j, function_argument:self, function_argument_flavor:arg, function_returning_something:is_same_set (-> +1), instance_method:is_same_set (-> +1), method:is_same_set (-> +1), node:FunctionDef (-> +1), node:arg
         return self.find_set(i) == self.find_set(j) # call_argument:i, call_argument:j, comparison_operator:Eq, member_call_method:find_set, node:Attribute, node:Call, node:Compare, node:Name, node:Return, return

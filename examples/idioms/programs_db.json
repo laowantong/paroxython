@@ -1403,6 +1403,7 @@
         "node:Name": [[1,1],[1,1]],
         "node:Subscript": [[1,1]],
         "one_liner_style": [[1,1]],
+        "subscript_deletion:Index": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
@@ -1411,7 +1412,7 @@
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
         "subscript/index": [[1,1]],
-        "var/deletion": [[1,1]]
+        "var/deletion/index": [[1,1]]
       }
     },
     "030.0189-parallelize-execution-of-1000-independent-tasks.py": {
@@ -7747,6 +7748,7 @@
         "node:Name": [[1,1],[1,1],[1,1]],
         "node:Subscript": [[1,1]],
         "one_liner_style": [[1,1]],
+        "subscript_assignment:Index": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
@@ -7755,7 +7757,7 @@
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
         "subscript/index": [[1,1]],
-        "var/assignment": [[1,1]]
+        "var/assignment/index": [[1,1]]
       }
     },
     "173.2427-format-a-number-with-grouped-thousands.py": {
@@ -8593,6 +8595,7 @@
         "replication_operator:List": [[3,3]],
         "return": [[10,10],[12,12]],
         "return:i": [[7,7]],
+        "subscript_assignment:Index": [[9,9]],
         "unary_operator:Not": [[14,14]],
         "value_attr:p": [[6,6],[9,9],[9,9],[10,10]],
         "whole_span:15": [[1,15]]
@@ -8621,7 +8624,8 @@
         "type/number/integer/literal/zero": [[3,3]],
         "type/sequence/list/literal": [[3,3]],
         "type/sequence/tuple/literal": [[15,15],[15,15]],
-        "var/assignment": [[3,3],[4,4],[9,9]],
+        "var/assignment": [[3,3],[4,4]],
+        "var/assignment/index": [[9,9]],
         "var/assignment/parallel": [[15,15]]
       }
     },
@@ -16213,6 +16217,13 @@
     "string_formatting_operator": [
       "177.3241-find-files-with-a-given-list-of-filename-extensions.py"
     ],
+    "subscript_assignment:Index": [
+      "172.2442-insert-entry-in-map.py",
+      "187.3261-disjoint-set.py"
+    ],
+    "subscript_deletion:Index": [
+      "029.0199-remove-item-from-list-by-its-index.py"
+    ],
     "swap": [
       "021.0084-swap-values-of-variables-a-and-b.py"
     ],
@@ -19023,7 +19034,6 @@
       "104.3264-save-object-into-xml-file.py",
       "128.2085-breadth-first-traversing-of-a-tree.py",
       "159.2281-trie.py",
-      "172.2442-insert-entry-in-map.py",
       "187.3261-disjoint-set.py"
     ],
     "var/assignment/constant": [
@@ -19034,6 +19044,10 @@
       "128.2085-breadth-first-traversing-of-a-tree.py",
       "157.2150-declare-constant-string.py",
       "177.2709-find-files-with-a-given-list-of-filename-extensions.py"
+    ],
+    "var/assignment/index": [
+      "172.2442-insert-entry-in-map.py",
+      "187.3261-disjoint-set.py"
     ],
     "var/assignment/parallel": [
       "102.2173-load-from-http-get-request-into-a-file.py",
@@ -19183,7 +19197,7 @@
       "189.3236-filter-and-transform-list.py",
       "197.3457-get-a-list-of-lines-from-a-file.py"
     ],
-    "var/deletion": [
+    "var/deletion/index": [
       "029.0199-remove-item-from-list-by-its-index.py"
     ]
   },

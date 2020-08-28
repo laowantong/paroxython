@@ -63,7 +63,10 @@
 - [Statements](#statements)
   - [Bindings](#bindings)
       - [Feature `assignment`](#feature-assignment)
+      - [Feature `subscript_assignment`](#feature-subscript_assignment)
       - [Feature `unbinding`](#feature-unbinding)
+      - [Feature `subscript_deletion`](#feature-subscript_deletion)
+      - [Feature `attribute_deletion`](#feature-attribute_deletion)
       - [Feature `single_assignment`](#feature-single_assignment)
       - [Feature `parallel_assignment`](#feature-parallel_assignment)
       - [Feature `augmented_assignment`](#feature-augmented_assignment)
@@ -604,8 +607,7 @@ Match an index in a sequence type or a key in a dictionary type, and suffix it b
 
 #### Feature `nested_index`
 
-In pure Python, multidimensionnal arrays are lists of lists. Thus, accessing a cell (_i_, _j_) of a matrix _m_ is done first
-by accessing the _i_-th list of _m_ (`m[i]`), then the _j_-th cell of this list (`m[i][j]`). The length of this index concatenation gives the dimension (or _shape_) of the array.
+In pure Python, multidimensionnal arrays are lists of lists. Thus, accessing a cell (_i_, _j_) of a matrix _m_ is done first by accessing the _i_-th list of _m_ (`m[i]`), then the _j_-th cell of this list (`m[i][j]`). The length of this index concatenation gives the dimension (or _shape_) of the array.
 
 ##### Derivations
 
@@ -2427,7 +2429,6 @@ _Limitation._ The number to be clamped must appear on the left hand side of the 
 \n(?:\1.+\n)*?\1/assignvalue/value=(?P<SUFFIX>.+)
 |
 )
-
 ```
 
 ##### Example
@@ -2453,9 +2454,40 @@ _Limitation._ The number to be clamped must appear on the left hand side of the 
 
 --------------------------------------------------------------------------------
 
+#### Feature `subscript_assignment`
+
+##### Specification
+
+```re
+           ^(.*)/_type=Assign
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
+(
+\n(?:\1.+\n)*?\1/assigntargets/.*/slice/_type=(?P<SUFFIX>.+|Index|Slice)
+)+
+```
+
+##### Example
+
+```python
+1   a[i] = 42
+2   b[i][j] = 42
+3   (c[i], d[i]) = foo
+4   e[i:j] = bar
+5   (f[i:j], h[i:j]) = bizz
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `subscript_assignment:Index` | 1, 2, 2, 3, 3 |
+| `subscript_assignment:Slice` | 4, 5, 5 |
+
+--------------------------------------------------------------------------------
+
 #### Feature `unbinding`
 
-Deleting a name removes the binding of that name from the local or global namespace. Not to be confused with the deletion of attribute references, subscriptions and slicings.
+Deleting a name removes the binding of that name from the local or global namespace. Not to be confused with the deletion of subscriptions (see [`subscript_deletion`](#feature-subscript_deletion)) and attribute references (see [`attribute_deletion`](#feature-attribute_deletion)).
 
 ##### Specification
 
@@ -2490,6 +2522,73 @@ Deleting a name removes the binding of that name from the local or global namesp
 | `unbinding:d` | 2 |
 | `unbinding:e` | 4 |
 | `unbinding:f` | 4 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `subscript_deletion`
+
+##### Specification
+
+```re
+           ^(.*)/_type=Delete
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
+(
+\n(?:\1.+\n)*?\1/(?P<_1>targets/\d+)/_type=Subscript
+\n(?:\1.+\n)*?\1/(?P=_1)            /.*/_type=(?P<SUFFIX>Slice|Index)
+)+
+```
+
+##### Example
+
+```python
+1   del a # no match
+2   del b, c, d # no match
+3   del array[1]
+4   del e, array[2], f
+5   del array[3:4], array[3:4:5], array[:]
+6   del foo.bar # no match
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `node:Delete` | 1, 2, 3, 4, 5, 6 |
+| `subscript_deletion:Index` | 3, 4 |
+| `subscript_deletion:Slice` | 5, 5, 5 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `attribute_deletion`
+
+##### Specification
+
+```re
+           ^(.*)/_type=Delete
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
+(
+\n(?:\1.+\n)*?\1/(?P<_1>targets/\d+)/_type=Attribute
+\n(?:\1.+\n)*?\1/(?P=_1)            /attr=(?P<SUFFIX>.+)
+)+
+```
+
+##### Example
+
+```python
+1   del a # no match
+2   del b, c, d # no match
+3   del array[1]  # no match
+4   del e, array[2], f  # no match
+5   del array[3:4], array[3:4:5], array[:]  # no match
+6   del foo.bar
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `node:Delete` | 1, 2, 3, 4, 5, 6 |
+| `attribute_deletion:bar` | 6 |
 
 --------------------------------------------------------------------------------
 

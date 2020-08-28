@@ -162,6 +162,7 @@
 - accumulate_some_elements
 - assignment_lhs_identifier
 - assignment_rhs_atom
+- attribute_deletion
 - augmented_assignment
 - binary_operator
 - body_recursive_function
@@ -269,7 +270,9 @@
 - special_literal_string
 - square_nested_for
 - string_formatting_operator
+- subscript_assignment
 - subscript_augmented_assignment
+- subscript_deletion
 - swap
 - swap_unpythonic
 - tail_recursive_function
