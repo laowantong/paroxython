@@ -73,6 +73,7 @@
         "free_call:range": [[1,1]],
         "free_call_without_result:print": [[2,2]],
         "imperative_style": [[1,2]],
+        "iteration_variable:i": [[1,1]],
         "literal:10": [[1,1]],
         "literal:Str": [[2,2]],
         "loop:for": [[1,2]],
@@ -97,7 +98,8 @@
         "style/imperative": [[1,2]],
         "type/number/integer/literal": [[1,1]],
         "type/number/magic": [[1,1]],
-        "type/sequence/string/literal": [[2,2]]
+        "type/sequence/string/literal": [[2,2]],
+        "var/assignment/implicit/iteration_variable": [[1,1]]
       }
     },
     "002.1493-print-hello-10-times.py": {
@@ -185,8 +187,8 @@
         "free_call:print": [[2,2]],
         "free_call_without_result:print": [[2,2]],
         "function:finish": [[1,2]],
-        "function_argument:name": [[1,1]],
-        "function_argument_flavor:arg": [[1,1]],
+        "function_parameter:name": [[1,1]],
+        "function_parameter_flavor:arg": [[1,1]],
         "function_returning_nothing:finish": [[1,2]],
         "literal:Str": [[2,2]],
         "node:BinOp": [[2,2]],
@@ -202,14 +204,14 @@
       },
       "taxa": {
         "call/function/builtin/print": [[2,2]],
-        "def/argument/arg": [[1,1]],
         "def/procedure": [[1,2]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
         "operator/string/concatenation": [[2,2]],
         "style/one_liner": [[1,2]],
         "style/procedural": [[1,2]],
-        "type/sequence/string/literal": [[2,2]]
+        "type/sequence/string/literal": [[2,2]],
+        "var/assignment/implicit/parameter": [[1,1]]
       }
     },
     "003.2372-create-a-procedure.py": {
@@ -218,7 +220,7 @@
       "labels": {
         "function:a": [[1,2]],
         "function_returning_nothing:a": [[1,2]],
-        "function_without_arguments:a": [[1,2]],
+        "function_without_parameters:a": [[1,2]],
         "node:FunctionDef": [[1,2]],
         "node:Pass": [[2,2]],
         "one_liner_style": [[1,2]],
@@ -226,7 +228,7 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "def/argument/no": [[1,2]],
+        "def/no_parameter": [[1,2]],
         "def/procedure": [[1,2]],
         "flow/null_operation": [[2,2]],
         "meta/program": [[1,2]],
@@ -241,8 +243,8 @@
       "labels": {
         "binary_operator:Mult": [[2,2]],
         "function:square": [[1,2]],
-        "function_argument:x": [[1,1]],
-        "function_argument_flavor:arg": [[1,1]],
+        "function_parameter:x": [[1,1]],
+        "function_parameter_flavor:arg": [[1,1]],
         "function_returning_something:square": [[1,2]],
         "functional_style": [[1,2]],
         "multiplication_operator": [[2,2]],
@@ -257,7 +259,6 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "def/argument/arg": [[1,1]],
         "def/function/pure": [[1,2]],
         "def/return/something": [[2,2]],
         "meta/program": [[1,2]],
@@ -265,7 +266,8 @@
         "operator/arithmetic/multiplication": [[2,2]],
         "style/functional": [[1,2]],
         "style/functional_trait/pure_function": [[1,2]],
-        "style/one_liner": [[1,2]]
+        "style/one_liner": [[1,2]],
+        "var/assignment/implicit/parameter": [[1,1]]
       }
     },
     "004.2921-create-a-function-which-returns-the-square-of-an-integer.py": {
@@ -274,8 +276,8 @@
       "labels": {
         "binary_operator:Pow": [[2,2]],
         "function:square": [[1,2]],
-        "function_argument:x": [[1,1]],
-        "function_argument_flavor:arg": [[1,1]],
+        "function_parameter:x": [[1,1]],
+        "function_parameter_flavor:arg": [[1,1]],
         "function_returning_something:square": [[1,2]],
         "functional_style": [[1,2]],
         "literal:2": [[2,2]],
@@ -291,7 +293,6 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "def/argument/arg": [[1,1]],
         "def/function/pure": [[1,2]],
         "def/return/something": [[2,2]],
         "meta/program": [[1,2]],
@@ -300,7 +301,8 @@
         "style/functional": [[1,2]],
         "style/functional_trait/pure_function": [[1,2]],
         "style/one_liner": [[1,2]],
-        "type/number/integer/literal": [[2,2]]
+        "type/number/integer/literal": [[2,2]],
+        "var/assignment/implicit/parameter": [[1,1]]
       }
     },
     "005.0663-create-a-2d-point-data-structure.py": {
@@ -336,6 +338,7 @@
         "free_call:doSomething": [[2,2]],
         "free_call_without_result:doSomething": [[2,2]],
         "imperative_style": [[1,2]],
+        "iteration_variable:x": [[1,1]],
         "loop:for": [[1,2]],
         "loop_with_late_exit:for": [[1,2]],
         "node:Call": [[2,2]],
@@ -350,7 +353,8 @@
         "flow/loop/for/elements": [[1,2]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
-        "style/imperative": [[1,2]]
+        "style/imperative": [[1,2]],
+        "var/assignment/implicit/iteration_variable": [[1,1]]
       }
     },
     "007.0183-iterate-over-list-indexes-and-values.py": {
@@ -369,6 +373,8 @@
         "free_call:print": [[2,2]],
         "free_call_without_result:print": [[2,2]],
         "imperative_style": [[1,2]],
+        "iteration_variable:i": [[1,1]],
+        "iteration_variable:x": [[1,1]],
         "literal:Tuple": [[1,1]],
         "loop:for": [[1,2]],
         "loop_with_late_exit:for": [[1,2]],
@@ -387,7 +393,8 @@
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
         "style/imperative": [[1,2]],
-        "type/sequence/tuple/literal": [[1,1]]
+        "type/sequence/tuple/literal": [[1,1]],
+        "var/assignment/implicit/iteration_variable": [[1,1],[1,1]]
       }
     },
     "008.0039-initialize-a-new-map-associative-array.py": {
@@ -421,7 +428,7 @@
         "type/non_sequence/dictionary/literal": [[1,1]],
         "type/number/integer/literal": [[1,1],[1,1]],
         "type/sequence/string/literal": [[1,1],[1,1]],
-        "var/assignment/single": [[1,1]]
+        "var/assignment/explicit/single": [[1,1]]
       }
     },
     "009.1410-create-a-binary-tree-data-structure.py": {
@@ -434,9 +441,9 @@
         "assignment_rhs_atom:None": [[4,4],[5,5]],
         "assignment_rhs_atom:data": [[3,3]],
         "function:__init__": [[2,5]],
-        "function_argument:data": [[2,2]],
-        "function_argument:self": [[2,2]],
-        "function_argument_flavor:arg": [[2,2],[2,2]],
+        "function_parameter:data": [[2,2]],
+        "function_parameter:self": [[2,2]],
+        "function_parameter_flavor:arg": [[2,2],[2,2]],
         "function_returning_nothing:__init__": [[2,5]],
         "instance_method:__init__": [[2,5]],
         "literal:None": [[4,4],[5,5]],
@@ -452,7 +459,6 @@
         "whole_span:5": [[1,5]]
       },
       "taxa": {
-        "def/argument/arg": [[2,2],[2,2]],
         "def/class": [[1,5]],
         "def/method/flavor/instance": [[2,5]],
         "def/method/naming/magic/__init__": [[2,5]],
@@ -461,7 +467,9 @@
         "meta/sloc/5": [[1,5]],
         "style/object_oriented": [[1,5]],
         "type/null/literal": [[4,4],[5,5]],
-        "var/assignment": [[3,3],[4,4],[5,5]]
+        "var/assignment/explicit": [[3,3],[4,4],[5,5]],
+        "var/assignment/implicit/parameter": [[2,2]],
+        "var/assignment/implicit/parameter/self": [[2,2]]
       }
     },
     "009.3176-create-a-binary-tree-data-structure.py": {
@@ -474,11 +482,11 @@
         "assignment_rhs_atom:left_child": [[4,4]],
         "assignment_rhs_atom:right_child": [[5,5]],
         "function:__init__": [[2,5]],
-        "function_argument:data": [[2,2]],
-        "function_argument:left_child": [[2,2]],
-        "function_argument:right_child": [[2,2]],
-        "function_argument:self": [[2,2]],
-        "function_argument_flavor:arg": [[2,2],[2,2],[2,2],[2,2]],
+        "function_parameter:data": [[2,2]],
+        "function_parameter:left_child": [[2,2]],
+        "function_parameter:right_child": [[2,2]],
+        "function_parameter:self": [[2,2]],
+        "function_parameter_flavor:arg": [[2,2],[2,2],[2,2],[2,2]],
         "function_returning_nothing:__init__": [[2,5]],
         "instance_method:__init__": [[2,5]],
         "method:__init__": [[2,5]],
@@ -492,7 +500,6 @@
         "whole_span:5": [[1,5]]
       },
       "taxa": {
-        "def/argument/arg": [[2,2],[2,2],[2,2],[2,2]],
         "def/class": [[1,5]],
         "def/method/flavor/instance": [[2,5]],
         "def/method/naming/magic/__init__": [[2,5]],
@@ -500,7 +507,9 @@
         "meta/program": [[1,5]],
         "meta/sloc/5": [[1,5]],
         "style/object_oriented": [[1,5]],
-        "var/assignment": [[3,3],[4,4],[5,5]]
+        "var/assignment/explicit": [[3,3],[4,4],[5,5]],
+        "var/assignment/implicit/parameter": [[2,2],[2,2],[2,2]],
+        "var/assignment/implicit/parameter/self": [[2,2]]
       }
     },
     "010.0182-shuffle-a-list.py": {
@@ -625,6 +634,8 @@
         "free_call:print": [[2,2]],
         "free_call_without_result:print": [[2,2]],
         "imperative_style": [[1,2]],
+        "iteration_variable:k": [[1,1]],
+        "iteration_variable:v": [[1,1]],
         "literal:Tuple": [[1,1]],
         "loop:for": [[1,2]],
         "loop_with_late_exit:for": [[1,2]],
@@ -646,7 +657,8 @@
         "meta/sloc/2": [[1,2]],
         "style/imperative": [[1,2]],
         "type/non_sequence/dictionary": [[1,1]],
-        "type/sequence/tuple/literal": [[1,1]]
+        "type/sequence/tuple/literal": [[1,1]],
+        "var/assignment/implicit/iteration_variable": [[1,1],[1,1]]
       }
     },
     "014.0185-pick-uniformly-a-random-floating-point-number-in-ab.py": {
@@ -656,9 +668,9 @@
         "call_argument:a": [[3,3]],
         "call_argument:b": [[3,3]],
         "function:pick": [[2,3]],
-        "function_argument:a": [[2,2]],
-        "function_argument:b": [[2,2]],
-        "function_argument_flavor:arg": [[2,2],[2,2]],
+        "function_parameter:a": [[2,2]],
+        "function_parameter:b": [[2,2]],
+        "function_parameter_flavor:arg": [[2,2],[2,2]],
         "function_returning_something:pick": [[2,3]],
         "functional_style": [[1,3]],
         "import:random": [[1,1]],
@@ -681,7 +693,6 @@
       "taxa": {
         "call/method": [[3,3]],
         "call/method/random/randrange": [[3,3]],
-        "def/argument/arg": [[2,2],[2,2]],
         "def/function/pure": [[2,3]],
         "def/import/standard/random": [[1,1]],
         "def/return/something": [[3,3]],
@@ -689,7 +700,8 @@
         "meta/sloc/3": [[1,3]],
         "style/functional": [[1,3]],
         "style/functional_trait/pure_function": [[2,3]],
-        "style/one_liner": [[1,3]]
+        "style/one_liner": [[1,3]],
+        "var/assignment/implicit/parameter": [[2,2],[2,2]]
       }
     },
     "014.3410-pick-uniformly-a-random-floating-point-number-in-ab.py": {
@@ -768,8 +780,8 @@
         "free_call_without_result:dfs": [[4,4],[6,6]],
         "free_call_without_result:f": [[5,5]],
         "function:dfs": [[1,6]],
-        "function_argument:bt": [[1,1]],
-        "function_argument_flavor:arg": [[1,1]],
+        "function_parameter:bt": [[1,1]],
+        "function_parameter_flavor:arg": [[1,1]],
         "function_returning_nothing:dfs": [[1,6]],
         "if": [[2,3]],
         "if_guard": [[2,3]],
@@ -798,7 +810,6 @@
       "taxa": {
         "call/function": [[4,4],[5,5],[6,6]],
         "condition/identity": [[2,2]],
-        "def/argument/arg": [[1,1]],
         "def/procedure": [[1,6]],
         "def/recursive/body": [[1,6]],
         "def/recursive/call_count/2": [[1,6]],
@@ -808,7 +819,8 @@
         "meta/program": [[1,6]],
         "meta/sloc/6": [[1,6]],
         "style/procedural": [[1,6]],
-        "type/null/literal": [[2,2]]
+        "type/null/literal": [[2,2]],
+        "var/assignment/implicit/parameter": [[1,1]]
       }
     },
     "017.1103-create-a-tree-data-structure.py": {
@@ -824,11 +836,11 @@
         "external_free_call:list": [[4,4]],
         "free_call:list": [[4,4]],
         "function:__init__": [[2,4]],
-        "function_argument:children": [[2,2]],
-        "function_argument:self": [[2,2]],
-        "function_argument:value": [[2,2]],
-        "function_argument_flavor:arg": [[2,2],[2,2]],
-        "function_argument_flavor:vararg": [[2,2]],
+        "function_parameter:children": [[2,2]],
+        "function_parameter:self": [[2,2]],
+        "function_parameter:value": [[2,2]],
+        "function_parameter_flavor:arg": [[2,2],[2,2]],
+        "function_parameter_flavor:vararg": [[2,2]],
         "function_returning_nothing:__init__": [[2,4]],
         "instance_method:__init__": [[2,4]],
         "method:__init__": [[2,4]],
@@ -844,8 +856,6 @@
       },
       "taxa": {
         "call/function/builtin/casting/list": [[4,4]],
-        "def/argument/arg": [[2,2],[2,2]],
-        "def/argument/vararg": [[2,2]],
         "def/class": [[1,4]],
         "def/method/flavor/instance": [[2,4]],
         "def/method/naming/magic/__init__": [[2,4]],
@@ -854,7 +864,10 @@
         "meta/sloc/4": [[1,4]],
         "style/object_oriented": [[1,4]],
         "type/sequence/list": [[4,4]],
-        "var/assignment": [[3,3],[4,4]]
+        "var/assignment/explicit": [[3,3],[4,4]],
+        "var/assignment/implicit/parameter": [[2,2]],
+        "var/assignment/implicit/parameter/self": [[2,2]],
+        "var/assignment/implicit/parameter/vararg": [[2,2]]
       }
     },
     "018.2084-depth-first-traversing-of-a-tree.py": {
@@ -873,12 +886,13 @@
         "free_call_without_result:DFS": [[4,4]],
         "free_call_without_result:f": [[2,2]],
         "function:DFS": [[1,4]],
-        "function_argument:f": [[1,1]],
-        "function_argument:root": [[1,1]],
-        "function_argument_flavor:arg": [[1,1],[1,1]],
+        "function_parameter:f": [[1,1]],
+        "function_parameter:root": [[1,1]],
+        "function_parameter_flavor:arg": [[1,1],[1,1]],
         "function_returning_nothing:DFS": [[1,4]],
         "higher_order_function:f": [[1,4]],
         "internal_free_call:DFS": [[4,4]],
+        "iteration_variable:child": [[3,3]],
         "loop:for": [[3,4]],
         "loop_with_late_exit:for": [[3,4]],
         "node:Call": [[2,2],[4,4]],
@@ -895,7 +909,6 @@
       "taxa": {
         "call/class/construct": [[4,4]],
         "call/function": [[2,2]],
-        "def/argument/arg": [[1,1],[1,1]],
         "def/higher_order": [[1,4]],
         "def/procedure": [[1,4]],
         "def/recursive/body": [[1,4]],
@@ -905,7 +918,9 @@
         "meta/program": [[1,4]],
         "meta/sloc/4": [[1,4]],
         "style/functional_trait/higher_order": [[1,4]],
-        "style/procedural": [[1,4]]
+        "style/procedural": [[1,4]],
+        "var/assignment/implicit/iteration_variable": [[3,3]],
+        "var/assignment/implicit/parameter": [[1,1],[1,1]]
       }
     },
     "019.0197-reverse-a-list.py": {
@@ -933,7 +948,7 @@
         "meta/sloc/1": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
-        "var/assignment/single": [[1,1]]
+        "var/assignment/explicit/single": [[1,1]]
       }
     },
     "019.1983-reverse-a-list.py": {
@@ -966,7 +981,7 @@
         "style/one_liner": [[1,1]],
         "subscript/slice/step/backwards": [[1,1]],
         "type/number/integer/literal": [[1,1]],
-        "var/assignment/single": [[1,1]]
+        "var/assignment/explicit/single": [[1,1]]
       }
     },
     "019.3164-reverse-a-list.py": {
@@ -1007,9 +1022,9 @@
         "for_indexes_elements:idx": [[2,4]],
         "free_call:enumerate": [[2,2]],
         "function:search": [[1,4]],
-        "function_argument:m": [[1,1]],
-        "function_argument:x": [[1,1]],
-        "function_argument_flavor:arg": [[1,1],[1,1]],
+        "function_parameter:m": [[1,1]],
+        "function_parameter:x": [[1,1]],
+        "function_parameter_flavor:arg": [[1,1],[1,1]],
         "function_returning_something:search": [[1,4]],
         "if": [[3,4]],
         "if_test_atom:item": [[3,3]],
@@ -1017,6 +1032,8 @@
         "if_then_branch": [[4,4]],
         "if_without_else": [[3,4]],
         "impure_function:search": [[1,4]],
+        "iteration_variable:idx": [[2,2]],
+        "iteration_variable:item": [[2,2]],
         "literal:Tuple": [[2,2],[4,4]],
         "loop:for": [[2,4]],
         "loop_with_early_exit:for:return": [[2,4]],
@@ -1040,7 +1057,6 @@
         "call/function/builtin/enumerate": [[2,2]],
         "call/method/sequence_duck/index": [[4,4]],
         "condition/belonging": [[3,3]],
-        "def/argument/arg": [[1,1],[1,1]],
         "def/function/impure": [[1,4]],
         "def/return/something": [[4,4]],
         "flow/conditional/no_else": [[3,4]],
@@ -1050,7 +1066,9 @@
         "meta/sloc/4": [[1,4]],
         "style/procedural": [[1,4]],
         "type/sequence": [[4,4]],
-        "type/sequence/tuple/literal": [[2,2],[4,4]]
+        "type/sequence/tuple/literal": [[2,2],[4,4]],
+        "var/assignment/implicit/iteration_variable": [[2,2],[2,2]],
+        "var/assignment/implicit/parameter": [[1,1],[1,1]]
       }
     },
     "021.0084-swap-values-of-variables-a-and-b.py": {
@@ -1085,7 +1103,7 @@
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
         "type/sequence/tuple/literal": [[1,1],[1,1]],
-        "var/assignment/parallel/swap": [[1,1]]
+        "var/assignment/explicit/parallel/swap": [[1,1]]
       }
     },
     "022.0243-convert-string-to-integer.py": {
@@ -1114,7 +1132,7 @@
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
         "type/number/integer": [[1,1]],
-        "var/assignment/single": [[1,1]]
+        "var/assignment/explicit/single": [[1,1]]
       }
     },
     "023.1102-convert-real-number-to-string-with-2-decimal-places.py": {
@@ -1146,7 +1164,7 @@
         "style/one_liner": [[1,1]],
         "type/sequence/string": [[1,1]],
         "type/sequence/string/literal": [[1,1]],
-        "var/assignment/single": [[1,1]]
+        "var/assignment/explicit/single": [[1,1]]
       }
     },
     "024.0664-assign-to-string-the-japanese-word-.py": {
@@ -1172,7 +1190,7 @@
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
         "type/sequence/string/literal": [[1,1]],
-        "var/assignment/single": [[1,1]]
+        "var/assignment/explicit/single": [[1,1]]
       }
     },
     "025.0195-send-a-value-to-another-thread.py": {
@@ -1227,8 +1245,8 @@
         "style/imperative/flat": [[1,6]],
         "type/boolean/literal/True": [[4,4]],
         "type/sequence/string/literal": [[6,6]],
-        "var/assignment": [[4,4]],
-        "var/assignment/single": [[2,2],[3,3]]
+        "var/assignment/explicit": [[4,4]],
+        "var/assignment/explicit/single": [[2,2],[3,3]]
       }
     },
     "026.0194-create-a-2-dimensional-array.py": {
@@ -1267,7 +1285,7 @@
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
         "type/number/integer/literal/zero": [[1,1]],
-        "var/assignment/single": [[1,1]]
+        "var/assignment/explicit/single": [[1,1]]
       }
     },
     "027.0192-create-a-3-dimensional-array.py": {
@@ -1309,7 +1327,7 @@
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
         "type/number/integer/literal/zero": [[1,1]],
-        "var/assignment/single": [[1,1]]
+        "var/assignment/explicit/single": [[1,1]]
       }
     },
     "027.0193-create-a-3-dimensional-array.py": {
@@ -1347,7 +1365,7 @@
         "style/imperative/flat": [[1,2]],
         "style/one_liner": [[1,2]],
         "type/sequence/tuple/literal": [[2,2]],
-        "var/assignment/single": [[2,2]]
+        "var/assignment/explicit/single": [[2,2]]
       }
     },
     "028.0350-sort-by-a-property.py": {
@@ -1364,8 +1382,8 @@
         "external_free_call:sorted": [[1,1]],
         "flat_style": [[1,1]],
         "free_call:sorted": [[1,1]],
-        "function_argument:x": [[1,1]],
-        "function_argument_flavor:arg": [[1,1]],
+        "function_parameter:x": [[1,1]],
+        "function_parameter_flavor:arg": [[1,1]],
         "imperative_style": [[1,1]],
         "node:Assign": [[1,1]],
         "node:Attribute": [[1,1]],
@@ -1383,13 +1401,13 @@
       },
       "taxa": {
         "call/function/builtin/sorted": [[1,1]],
-        "def/argument/arg": [[1,1]],
         "def/function/anonymous": [[1,1]],
         "meta/program": [[1,1]],
         "meta/sloc/1": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
-        "var/assignment/single": [[1,1]]
+        "var/assignment/explicit/single": [[1,1]],
+        "var/assignment/implicit/parameter": [[1,1]]
       }
     },
     "029.0199-remove-item-from-list-by-its-index.py": {
@@ -1436,6 +1454,7 @@
         "import:multiprocessing:Pool": [[1,1]],
         "import_module:multiprocessing": [[1,1]],
         "import_name:Pool": [[1,1]],
+        "iteration_variable:i": [[3,3]],
         "literal:1": [[3,3]],
         "literal:1001": [[3,3]],
         "literal:List": [[4,4]],
@@ -1471,7 +1490,8 @@
         "type/number/integer/literal": [[3,3],[3,3]],
         "type/number/magic": [[3,3]],
         "type/sequence/list/literal": [[4,4]],
-        "var/assignment/single": [[2,2]]
+        "var/assignment/explicit/single": [[2,2]],
+        "var/assignment/implicit/iteration_variable": [[3,3]]
       }
     },
     "031.0188-recursive-factorial-simple.py": {
@@ -1485,8 +1505,8 @@
         "comparison_operator:Eq": [[2,2]],
         "free_call:f": [[5,5]],
         "function:f": [[1,5]],
-        "function_argument:i": [[1,1]],
-        "function_argument_flavor:arg": [[1,1]],
+        "function_parameter:i": [[1,1]],
+        "function_parameter_flavor:arg": [[1,1]],
         "function_returning_something:f": [[1,5]],
         "functional_style": [[1,5]],
         "if": [[2,5]],
@@ -1517,7 +1537,6 @@
       "taxa": {
         "call/function": [[5,5]],
         "condition/equality": [[2,2]],
-        "def/argument/arg": [[1,1]],
         "def/function/pure": [[1,5]],
         "def/recursive/body": [[1,5]],
         "def/recursive/call_count/1": [[1,5]],
@@ -1531,7 +1550,8 @@
         "style/functional": [[1,5]],
         "style/functional_trait/pure_function": [[1,5]],
         "type/number/integer/literal": [[3,3],[5,5]],
-        "type/number/integer/literal/zero": [[2,2]]
+        "type/number/integer/literal/zero": [[2,2]],
+        "var/assignment/implicit/parameter": [[1,1]]
       }
     },
     "032.0196-integer-exponentiation-by-squaring.py": {
@@ -1540,9 +1560,9 @@
       "labels": {
         "binary_operator:Pow": [[2,2]],
         "function:exp": [[1,2]],
-        "function_argument:n": [[1,1]],
-        "function_argument:x": [[1,1]],
-        "function_argument_flavor:arg": [[1,1],[1,1]],
+        "function_parameter:n": [[1,1]],
+        "function_parameter:x": [[1,1]],
+        "function_parameter_flavor:arg": [[1,1],[1,1]],
         "function_returning_something:exp": [[1,2]],
         "functional_style": [[1,2]],
         "node:BinOp": [[2,2]],
@@ -1556,7 +1576,6 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "def/argument/arg": [[1,1],[1,1]],
         "def/function/pure": [[1,2]],
         "def/return/something": [[2,2]],
         "meta/program": [[1,2]],
@@ -1564,7 +1583,8 @@
         "operator/arithmetic/power": [[2,2]],
         "style/functional": [[1,2]],
         "style/functional_trait/pure_function": [[1,2]],
-        "style/one_liner": [[1,2]]
+        "style/one_liner": [[1,2]],
+        "var/assignment/implicit/parameter": [[1,1],[1,1]]
       }
     },
     "033.1420-atomically-read-and-update-variable.py": {
@@ -1608,7 +1628,7 @@
         "meta/program": [[1,7]],
         "meta/sloc/7": [[1,7]],
         "style/imperative/flat": [[1,7]],
-        "var/assignment/single": [[2,2],[5,5]]
+        "var/assignment/explicit/single": [[2,2],[5,5]]
       }
     },
     "034.0625-create-a-set-of-objects.py": {
@@ -1643,7 +1663,7 @@
         "meta/sloc/3": [[1,3]],
         "style/object_oriented": [[1,3]],
         "type/non_sequence/set": [[3,3]],
-        "var/assignment/single": [[3,3]]
+        "var/assignment/explicit/single": [[3,3]]
       }
     },
     "035.0667-first-class-function--compose.py": {
@@ -1658,10 +1678,10 @@
         "free_call:f": [[2,2]],
         "free_call:g": [[2,2]],
         "function:compose": [[1,2]],
-        "function_argument:a": [[2,2]],
-        "function_argument:f": [[1,1]],
-        "function_argument:g": [[1,1]],
-        "function_argument_flavor:arg": [[1,1],[1,1],[2,2]],
+        "function_parameter:a": [[2,2]],
+        "function_parameter:f": [[1,1]],
+        "function_parameter:g": [[1,1]],
+        "function_parameter_flavor:arg": [[1,1],[1,1],[2,2]],
         "function_returning_something:compose": [[1,2]],
         "functional_style": [[1,2]],
         "higher_order_function:f": [[1,2]],
@@ -1680,7 +1700,6 @@
       "taxa": {
         "call/composition": [[2,2]],
         "call/function": [[2,2],[2,2]],
-        "def/argument/arg": [[1,1],[1,1],[2,2]],
         "def/function/anonymous": [[2,2]],
         "def/function/pure": [[1,2]],
         "def/higher_order": [[1,2]],
@@ -1690,7 +1709,8 @@
         "style/functional": [[1,2]],
         "style/functional_trait/higher_order": [[1,2]],
         "style/functional_trait/pure_function": [[1,2]],
-        "style/one_liner": [[1,2]]
+        "style/one_liner": [[1,2]],
+        "var/assignment/implicit/parameter": [[1,1],[1,1],[2,2]]
       }
     },
     "036.0670-first-class-function--generic-composition.py": {
@@ -1705,10 +1725,10 @@
         "free_call:f": [[2,2]],
         "free_call:g": [[2,2]],
         "function:compose": [[1,2]],
-        "function_argument:f": [[1,1]],
-        "function_argument:g": [[1,1]],
-        "function_argument:x": [[2,2]],
-        "function_argument_flavor:arg": [[1,1],[1,1],[2,2]],
+        "function_parameter:f": [[1,1]],
+        "function_parameter:g": [[1,1]],
+        "function_parameter:x": [[2,2]],
+        "function_parameter_flavor:arg": [[1,1],[1,1],[2,2]],
         "function_returning_something:compose": [[1,2]],
         "functional_style": [[1,2]],
         "higher_order_function:f": [[1,2]],
@@ -1727,7 +1747,6 @@
       "taxa": {
         "call/composition": [[2,2]],
         "call/function": [[2,2],[2,2]],
-        "def/argument/arg": [[1,1],[1,1],[2,2]],
         "def/function/anonymous": [[2,2]],
         "def/function/pure": [[1,2]],
         "def/higher_order": [[1,2]],
@@ -1737,7 +1756,8 @@
         "style/functional": [[1,2]],
         "style/functional_trait/higher_order": [[1,2]],
         "style/functional_trait/pure_function": [[1,2]],
-        "style/one_liner": [[1,2]]
+        "style/one_liner": [[1,2]],
+        "var/assignment/implicit/parameter": [[1,1],[1,1],[2,2]]
       }
     },
     "037.0671-currying.py": {
@@ -1757,9 +1777,9 @@
         "free_call_without_result:print": [[6,6]],
         "function:add": [[3,4]],
         "function:f": [[2,5]],
-        "function_argument:a": [[2,2]],
-        "function_argument:b": [[3,3]],
-        "function_argument_flavor:arg": [[2,2],[3,3]],
+        "function_parameter:a": [[2,2]],
+        "function_parameter:b": [[3,3]],
+        "function_parameter_flavor:arg": [[2,2],[3,3]],
         "function_returning_something:add": [[3,4]],
         "function_returning_something:f": [[2,5]],
         "functional_style": [[1,6]],
@@ -1789,7 +1809,6 @@
         "call/composition": [[6,6]],
         "call/function": [[6,6]],
         "call/function/builtin/print": [[6,6]],
-        "def/argument/arg": [[2,2],[3,3]],
         "def/function/pure": [[2,5],[3,4]],
         "def/import/standard/functools/partial": [[1,1]],
         "def/nested/closure": [[2,5]],
@@ -1799,7 +1818,8 @@
         "operator/arithmetic/addition": [[4,4]],
         "style/functional": [[1,6]],
         "style/functional_trait/pure_function": [[2,5],[3,4]],
-        "type/number/integer/literal": [[6,6],[6,6]]
+        "type/number/integer/literal": [[6,6],[6,6]],
+        "var/assignment/implicit/parameter": [[2,2],[3,3]]
       }
     },
     "038.0186-extract-a-substring.py": {
@@ -1831,7 +1851,7 @@
         "style/one_liner": [[1,1]],
         "subscript/slice/start": [[1,1]],
         "subscript/slice/stop": [[1,1]],
-        "var/assignment/single": [[1,1]]
+        "var/assignment/explicit/single": [[1,1]]
       }
     },
     "039.0571-check-if-string-contains-a-word.py": {
@@ -1858,7 +1878,7 @@
         "meta/sloc/1": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
-        "var/assignment/single": [[1,1]]
+        "var/assignment/explicit/single": [[1,1]]
       }
     },
     "040.2279-graph-with-adjacency-lists.py": {
@@ -1890,11 +1910,11 @@
         "free_call:zip": [[10,10]],
         "function:__init__": [[5,8]],
         "function:make_path": [[9,12]],
-        "function_argument:labels": [[9,9]],
-        "function_argument:paths": [[5,5]],
-        "function_argument:self": [[5,5],[9,9]],
-        "function_argument_flavor:arg": [[5,5],[9,9],[9,9]],
-        "function_argument_flavor:vararg": [[5,5]],
+        "function_parameter:labels": [[9,9]],
+        "function_parameter:paths": [[5,5]],
+        "function_parameter:self": [[5,5],[9,9]],
+        "function_parameter_flavor:arg": [[5,5],[9,9],[9,9]],
+        "function_parameter_flavor:vararg": [[5,5]],
         "function_returning_nothing:__init__": [[5,8]],
         "function_returning_nothing:make_path": [[9,12]],
         "import:collections:defaultdict": [[1,1]],
@@ -1904,6 +1924,9 @@
         "index:l2": [[12,12]],
         "instance_method:__init__": [[5,8]],
         "instance_method:make_path": [[9,12]],
+        "iteration_variable:l1": [[10,10]],
+        "iteration_variable:l2": [[10,10]],
+        "iteration_variable:path": [[7,7]],
         "literal:0": [[13,13]],
         "literal:1": [[10,10],[13,13],[13,13]],
         "literal:2": [[13,13],[13,13]],
@@ -1945,8 +1968,6 @@
         "call/function/builtin/zip": [[10,10]],
         "call/method": [[8,8]],
         "call/method/non_sequence/set/add": [[11,11],[12,12]],
-        "def/argument/arg": [[5,5],[9,9],[9,9]],
-        "def/argument/vararg": [[5,5]],
         "def/class": [[2,3],[4,12]],
         "def/import/standard/collections/defaultdict": [[1,1]],
         "def/method/flavor/instance": [[5,8],[9,12]],
@@ -1965,9 +1986,13 @@
         "type/number/integer/literal": [[10,10],[13,13],[13,13],[13,13],[13,13],[13,13],[13,13]],
         "type/number/integer/literal/zero": [[13,13]],
         "type/sequence/tuple/literal": [[10,10],[13,13],[13,13]],
-        "var/assignment": [[6,6]],
-        "var/assignment/constant": [[13,13]],
-        "var/assignment/single": [[13,13]]
+        "var/assignment/explicit": [[6,6]],
+        "var/assignment/explicit/constant": [[13,13]],
+        "var/assignment/explicit/single": [[13,13]],
+        "var/assignment/implicit/iteration_variable": [[7,7],[10,10],[10,10]],
+        "var/assignment/implicit/parameter": [[9,9]],
+        "var/assignment/implicit/parameter/self": [[5,5],[9,9]],
+        "var/assignment/implicit/parameter/vararg": [[5,5]]
       }
     },
     "041.0187-reverse-a-string.py": {
@@ -2014,7 +2039,7 @@
         "type/number/integer/literal": [[1,1]],
         "type/sequence/string": [[1,1]],
         "type/sequence/string/literal": [[1,1],[1,1]],
-        "var/assignment/single": [[1,1]]
+        "var/assignment/explicit/single": [[1,1]]
       }
     },
     "041.2714-reverse-a-string.py": {
@@ -2047,7 +2072,7 @@
         "style/one_liner": [[1,1]],
         "subscript/slice/step/backwards": [[1,1]],
         "type/number/integer/literal": [[1,1]],
-        "var/assignment/single": [[1,1]]
+        "var/assignment/explicit/single": [[1,1]]
       }
     },
     "042.1264-continue-outer-loop.py": {
@@ -2073,6 +2098,8 @@
         "if_then_branch": [[5,5]],
         "if_without_else": [[4,5]],
         "imperative_style": [[1,8]],
+        "iteration_variable:u": [[3,3]],
+        "iteration_variable:v": [[1,1]],
         "loop:for": [[1,8],[3,5]],
         "loop_with_early_exit:for:raise": [[1,8],[3,5]],
         "loop_with_raise:for": [[1,8],[3,5]],
@@ -2105,7 +2132,8 @@
         "flow/loop/for/nested/1": [[3,5]],
         "meta/program": [[1,8]],
         "meta/sloc/8": [[1,8]],
-        "style/imperative": [[1,8]]
+        "style/imperative": [[1,8]],
+        "var/assignment/implicit/iteration_variable": [[1,1],[3,3]]
       }
     },
     "042.3168-continue-outer-loop.py": {
@@ -2127,6 +2155,8 @@
         "if_then_branch": [[4,4]],
         "if_without_else": [[3,4]],
         "imperative_style": [[1,5]],
+        "iteration_variable:v": [[1,1]],
+        "iteration_variable:v_": [[2,2]],
         "loop:for": [[1,5],[2,5]],
         "loop_with_late_exit:for": [[1,5],[2,5]],
         "nested_for:1": [[2,5]],
@@ -2149,7 +2179,8 @@
         "flow/loop/for/nested/1": [[2,5]],
         "meta/program": [[1,5]],
         "meta/sloc/5": [[1,5]],
-        "style/imperative": [[1,5]]
+        "style/imperative": [[1,5]],
+        "var/assignment/implicit/iteration_variable": [[1,1],[2,2]]
       }
     },
     "043.0676-break-outer-loop.py": {
@@ -2176,6 +2207,8 @@
         "if_without_else": [[7,9]],
         "index:column": [[7,7]],
         "index:row": [[6,6],[7,7]],
+        "iteration_variable:column": [[6,6]],
+        "iteration_variable:row": [[5,5]],
         "literal:None": [[4,4]],
         "literal:Tuple": [[8,8]],
         "loop:for": [[5,9],[6,9]],
@@ -2220,7 +2253,8 @@
         "subscript/index/shape/2": [[7,7]],
         "type/null/literal": [[4,4]],
         "type/sequence/tuple/literal": [[8,8]],
-        "var/assignment/single": [[4,4],[8,8]]
+        "var/assignment/explicit/single": [[4,4],[8,8]],
+        "var/assignment/implicit/iteration_variable": [[5,5],[6,6]]
       }
     },
     "043.2733-break-outer-loop.py": {
@@ -2246,9 +2280,9 @@
         "free_call:print": [[7,7]],
         "free_call_without_result:print": [[7,7]],
         "function:loop_breaking": [[1,6]],
-        "function_argument:m": [[1,1]],
-        "function_argument:v": [[1,1]],
-        "function_argument_flavor:arg": [[1,1],[1,1]],
+        "function_parameter:m": [[1,1]],
+        "function_parameter:v": [[1,1]],
+        "function_parameter_flavor:arg": [[1,1],[1,1]],
         "function_returning_something:loop_breaking": [[1,6]],
         "if": [[4,5]],
         "if_test_atom:v": [[4,4]],
@@ -2257,6 +2291,10 @@
         "if_without_else": [[4,5]],
         "impure_function:loop_breaking": [[1,6]],
         "internal_free_call:loop_breaking": [[7,7]],
+        "iteration_variable:i": [[2,2]],
+        "iteration_variable:j": [[3,3]],
+        "iteration_variable:row": [[2,2]],
+        "iteration_variable:value": [[3,3]],
         "literal:1": [[7,7]],
         "literal:2": [[7,7]],
         "literal:3": [[7,7]],
@@ -2304,7 +2342,6 @@
         "call/function/builtin/enumerate": [[2,2],[3,3]],
         "call/function/builtin/print": [[7,7]],
         "condition/equality": [[4,4]],
-        "def/argument/arg": [[1,1],[1,1]],
         "def/function/impure": [[1,6]],
         "def/return/nothing": [[6,6]],
         "def/return/something": [[5,5]],
@@ -2319,7 +2356,9 @@
         "type/number/integer/literal": [[7,7],[7,7],[7,7],[7,7],[7,7],[7,7],[7,7],[7,7],[7,7],[7,7]],
         "type/number/magic": [[7,7],[7,7],[7,7],[7,7],[7,7],[7,7],[7,7],[7,7]],
         "type/sequence/list/literal": [[7,7],[7,7],[7,7]],
-        "type/sequence/tuple/literal": [[2,2],[3,3],[5,5],[7,7]]
+        "type/sequence/tuple/literal": [[2,2],[3,3],[5,5],[7,7]],
+        "var/assignment/implicit/iteration_variable": [[2,2],[2,2],[3,3],[3,3]],
+        "var/assignment/implicit/parameter": [[1,1],[1,1]]
       }
     },
     "044.0190-insert-element-in-list.py": {
@@ -2422,7 +2461,7 @@
         "subscript/slice/stop": [[1,1]],
         "type/number/integer/literal": [[1,1]],
         "type/number/magic": [[1,1]],
-        "var/assignment/single": [[1,1]]
+        "var/assignment/explicit/single": [[1,1]]
       }
     },
     "047.0198-extract-string-suffix.py": {
@@ -2457,7 +2496,7 @@
         "subscript/slice/start": [[1,1]],
         "type/number/integer/literal": [[1,1]],
         "type/number/magic": [[1,1]],
-        "var/assignment/single": [[1,1]]
+        "var/assignment/explicit/single": [[1,1]]
       }
     },
     "048.0210-multi-line-string-literal.py": {
@@ -2481,7 +2520,7 @@
         "meta/sloc/3": [[1,3]],
         "style/imperative/flat": [[1,3]],
         "type/sequence/string/literal/special/\\n": [[3,3]],
-        "var/assignment/single": [[1,1]]
+        "var/assignment/explicit/single": [[1,1]]
       }
     },
     "049.0242-split-a-space-separated-string.py": {
@@ -2509,7 +2548,7 @@
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
         "type/sequence/string": [[1,1]],
-        "var/assignment/single": [[1,1]]
+        "var/assignment/explicit/single": [[1,1]]
       }
     },
     "050.0572-make-an-infinite-loop.py": {
@@ -2612,7 +2651,7 @@
         "style/one_liner": [[1,1]],
         "type/sequence/string": [[1,1]],
         "type/sequence/string/literal": [[1,1]],
-        "var/assignment/single": [[1,1]]
+        "var/assignment/explicit/single": [[1,1]]
       }
     },
     "053.1933-join-a-list-of-strings.py": {
@@ -2653,7 +2692,7 @@
         "style/one_liner": [[1,1]],
         "type/sequence/string": [[1,1]],
         "type/sequence/string/literal": [[1,1]],
-        "var/assignment/single": [[1,1]]
+        "var/assignment/explicit/single": [[1,1]]
       }
     },
     "054.0241-compute-sum-of-integers.py": {
@@ -2681,7 +2720,7 @@
         "meta/sloc/1": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
-        "var/assignment/single": [[1,1]]
+        "var/assignment/explicit/single": [[1,1]]
       }
     },
     "055.0575-convert-integer-to-string.py": {
@@ -2710,7 +2749,7 @@
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
         "type/sequence/string": [[1,1]],
-        "var/assignment/single": [[1,1]]
+        "var/assignment/explicit/single": [[1,1]]
       }
     },
     "056.1424-launch-1000-parallel-tasks-and-wait-for-completion.py": {
@@ -2733,8 +2772,8 @@
         "free_call:range": [[5,5]],
         "free_call_without_result:print": [[6,6]],
         "function:f": [[2,3]],
-        "function_argument:i": [[2,2]],
-        "function_argument_flavor:arg": [[2,2]],
+        "function_parameter:i": [[2,2]],
+        "function_parameter_flavor:arg": [[2,2]],
         "function_returning_nothing:f": [[2,3]],
         "import:multiprocessing:Pool": [[1,1]],
         "import_module:multiprocessing": [[1,1]],
@@ -2767,7 +2806,6 @@
         "call/function/builtin/print": [[6,6]],
         "call/function/builtin/range": [[5,5]],
         "call/method": [[5,5]],
-        "def/argument/arg": [[2,2]],
         "def/import/standard/multiprocessing/Pool": [[1,1]],
         "def/procedure": [[2,3]],
         "meta/program": [[1,6]],
@@ -2776,7 +2814,8 @@
         "style/procedural": [[1,6]],
         "type/number/integer/literal": [[5,5],[5,5]],
         "type/number/magic": [[5,5]],
-        "type/sequence/string/literal": [[6,6]]
+        "type/sequence/string/literal": [[6,6]],
+        "var/assignment/implicit/parameter": [[2,2]]
       }
     },
     "057.0260-filter-list.py": {
@@ -2807,7 +2846,7 @@
         "style/functional_trait/filter": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
-        "var/assignment/single": [[1,1]]
+        "var/assignment/explicit/single": [[1,1]]
       }
     },
     "057.3173-filter-list.py": {
@@ -2840,7 +2879,7 @@
         "meta/sloc/1": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
-        "var/assignment/single": [[1,1]]
+        "var/assignment/explicit/single": [[1,1]]
       }
     },
     "058.0665-extract-file-content-to-a-string.py": {
@@ -2871,7 +2910,7 @@
         "meta/sloc/1": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
-        "var/assignment/single": [[1,1]]
+        "var/assignment/explicit/single": [[1,1]]
       }
     },
     "059.0668-write-to-standard-error-stream.py": {
@@ -2942,7 +2981,7 @@
         "style/one_liner": [[1,2]],
         "subscript/index": [[2,2]],
         "type/number/integer/literal": [[2,2]],
-        "var/assignment/single": [[2,2]]
+        "var/assignment/explicit/single": [[2,2]]
       }
     },
     "061.0576-get-current-date.py": {
@@ -2974,7 +3013,7 @@
         "meta/sloc/2": [[1,2]],
         "style/imperative/flat": [[1,2]],
         "style/one_liner": [[1,2]],
-        "var/assignment/single": [[2,2]]
+        "var/assignment/explicit/single": [[2,2]]
       }
     },
     "062.1091-find-substring-position.py": {
@@ -3004,7 +3043,7 @@
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
         "type/sequence/string": [[1,1]],
-        "var/assignment/single": [[1,1]]
+        "var/assignment/explicit/single": [[1,1]]
       }
     },
     "063.1088-replace-fragment-of-a-string.py": {
@@ -3036,7 +3075,7 @@
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
         "type/sequence/string": [[1,1]],
-        "var/assignment/single": [[1,1]]
+        "var/assignment/explicit/single": [[1,1]]
       }
     },
     "064.0274-big-integer--value-3-power-247.py": {
@@ -3070,7 +3109,7 @@
         "style/one_liner": [[1,1]],
         "type/number/integer/literal": [[1,1],[1,1]],
         "type/number/magic": [[1,1],[1,1]],
-        "var/assignment/single": [[1,1]]
+        "var/assignment/explicit/single": [[1,1]]
       }
     },
     "065.1085-format-decimal-number.py": {
@@ -3102,7 +3141,7 @@
         "style/one_liner": [[1,1]],
         "type/sequence/string": [[1,1]],
         "type/sequence/string/literal": [[1,1]],
-        "var/assignment/single": [[1,1]]
+        "var/assignment/explicit/single": [[1,1]]
       }
     },
     "066.0672-big-integer-exponentiation.py": {
@@ -3129,7 +3168,7 @@
         "operator/arithmetic/power": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
-        "var/assignment/single": [[1,1]]
+        "var/assignment/explicit/single": [[1,1]]
       }
     },
     "067.1426-binomial-coefficient-n-choose-k.py": {
@@ -3142,9 +3181,9 @@
         "call_argument:k": [[3,3]],
         "call_argument:n": [[3,3]],
         "function:binom": [[2,3]],
-        "function_argument:k": [[2,2]],
-        "function_argument:n": [[2,2]],
-        "function_argument_flavor:arg": [[2,2],[2,2]],
+        "function_parameter:k": [[2,2]],
+        "function_parameter:n": [[2,2]],
+        "function_parameter_flavor:arg": [[2,2],[2,2]],
         "function_returning_something:binom": [[2,3]],
         "functional_style": [[1,3]],
         "import:math": [[1,1]],
@@ -3165,7 +3204,6 @@
       },
       "taxa": {
         "call/method": [[3,3],[3,3],[3,3]],
-        "def/argument/arg": [[2,2],[2,2]],
         "def/function/pure": [[2,3]],
         "def/import/standard/math": [[1,1]],
         "def/return/something": [[3,3]],
@@ -3175,7 +3213,8 @@
         "operator/arithmetic/substraction": [[3,3]],
         "style/functional": [[1,3]],
         "style/functional_trait/pure_function": [[2,3]],
-        "style/one_liner": [[1,3]]
+        "style/one_liner": [[1,3]],
+        "var/assignment/implicit/parameter": [[2,2],[2,2]]
       }
     },
     "068.2271-create-a-bitset.py": {
@@ -3231,7 +3270,7 @@
         "type/number/floating_point/literal": [[3,3]],
         "type/number/integer": [[3,3]],
         "type/number/magic": [[3,3]],
-        "var/assignment/single": [[3,3]]
+        "var/assignment/explicit/single": [[3,3]]
       }
     },
     "069.1086-seed-random-generator.py": {
@@ -3263,7 +3302,7 @@
         "meta/sloc/2": [[1,2]],
         "style/imperative/flat": [[1,2]],
         "style/one_liner": [[1,2]],
-        "var/assignment/single": [[2,2]]
+        "var/assignment/explicit/single": [[2,2]]
       }
     },
     "070.1087-use-clock-as-random-generator-seed.py": {
@@ -3293,7 +3332,7 @@
         "meta/sloc/2": [[1,2]],
         "style/imperative/flat": [[1,2]],
         "style/one_liner": [[1,2]],
-        "var/assignment/single": [[2,2]]
+        "var/assignment/explicit/single": [[2,2]]
       }
     },
     "071.0379-echo-program-implementation.py": {
@@ -3356,9 +3395,9 @@
         "free_call:issubclass": [[2,2]],
         "free_tail_call:a_class": [[3,3]],
         "function:fact": [[1,3]],
-        "function_argument:a_class": [[1,1]],
-        "function_argument:str_": [[1,1]],
-        "function_argument_flavor:arg": [[1,1],[1,1]],
+        "function_parameter:a_class": [[1,1]],
+        "function_parameter:str_": [[1,1]],
+        "function_parameter_flavor:arg": [[1,1],[1,1]],
         "function_returning_something:fact": [[1,3]],
         "functional_style": [[1,3]],
         "higher_order_function:a_class": [[1,3]],
@@ -3380,7 +3419,6 @@
       "taxa": {
         "call/function": [[3,3]],
         "call/function/builtin/issubclass": [[2,2]],
-        "def/argument/arg": [[1,1],[1,1]],
         "def/function/pure": [[1,3]],
         "def/higher_order": [[1,3]],
         "def/return/something": [[3,3]],
@@ -3389,7 +3427,8 @@
         "meta/sloc/3": [[1,3]],
         "style/functional": [[1,3]],
         "style/functional_trait/higher_order": [[1,3]],
-        "style/functional_trait/pure_function": [[1,3]]
+        "style/functional_trait/pure_function": [[1,3]],
+        "var/assignment/implicit/parameter": [[1,1],[1,1]]
       }
     },
     "074.0674-compute-gcd.py": {
@@ -3424,7 +3463,7 @@
         "meta/sloc/2": [[1,2]],
         "style/imperative/flat": [[1,2]],
         "style/one_liner": [[1,2]],
-        "var/assignment/single": [[2,2]]
+        "var/assignment/explicit/single": [[2,2]]
       }
     },
     "075.0675-compute-lcm.py": {
@@ -3465,7 +3504,7 @@
         "operator/arithmetic/multiplication": [[2,2]],
         "style/imperative/flat": [[1,2]],
         "style/one_liner": [[1,2]],
-        "var/assignment/single": [[2,2]]
+        "var/assignment/explicit/single": [[2,2]]
       }
     },
     "076.1083-binary-digits-from-an-integer.py": {
@@ -3497,7 +3536,7 @@
         "style/one_liner": [[1,1]],
         "type/sequence/string": [[1,1]],
         "type/sequence/string/literal": [[1,1]],
-        "var/assignment/single": [[1,1]]
+        "var/assignment/explicit/single": [[1,1]]
       }
     },
     "077.1093-complex-number.py": {
@@ -3536,7 +3575,7 @@
         "style/imperative/flat": [[1,2]],
         "type/number/complex/literal": [[1,1],[2,2]],
         "type/number/integer/literal": [[1,1]],
-        "var/assignment/single": [[1,1],[2,2]]
+        "var/assignment/explicit/single": [[1,1],[2,2]]
       }
     },
     "078.1089-do-while-loop.py": {
@@ -3606,7 +3645,7 @@
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
         "type/number/floating_point": [[1,1]],
-        "var/assignment/single": [[1,1]]
+        "var/assignment/explicit/single": [[1,1]]
       }
     },
     "080.1092-truncate-floating-point-number-to-integer.py": {
@@ -3635,7 +3674,7 @@
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
         "type/number/integer": [[1,1]],
-        "var/assignment/single": [[1,1]]
+        "var/assignment/explicit/single": [[1,1]]
       }
     },
     "081.2270-round-floating-point-number-to-integer.py": {
@@ -3674,7 +3713,7 @@
         "type/number/floating_point/literal": [[1,1]],
         "type/number/integer": [[1,1]],
         "type/number/magic": [[1,1]],
-        "var/assignment/single": [[1,1]]
+        "var/assignment/explicit/single": [[1,1]]
       }
     },
     "082.1096-count-substring-occurrences.py": {
@@ -3704,7 +3743,7 @@
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
         "type/sequence": [[1,1]],
-        "var/assignment/single": [[1,1]]
+        "var/assignment/explicit/single": [[1,1]]
       }
     },
     "083.1805-regex-with-character-repetition.py": {
@@ -3739,7 +3778,7 @@
         "style/imperative/flat": [[1,2]],
         "style/one_liner": [[1,2]],
         "type/sequence/string/literal": [[2,2]],
-        "var/assignment/single": [[2,2]]
+        "var/assignment/explicit/single": [[2,2]]
       }
     },
     "084.1940-count-bits-set-in-integer-binary-representation.py": {
@@ -3775,7 +3814,7 @@
         "style/one_liner": [[1,1]],
         "type/sequence": [[1,1]],
         "type/sequence/string/literal": [[1,1]],
-        "var/assignment/single": [[1,1]]
+        "var/assignment/explicit/single": [[1,1]]
       }
     },
     "085.1003-check-if-integer-addition-will-overflow.py": {
@@ -3783,9 +3822,9 @@
       "source": "def adding_will_overflow(x, y):\n    return False",
       "labels": {
         "function:adding_will_overflow": [[1,2]],
-        "function_argument:x": [[1,1]],
-        "function_argument:y": [[1,1]],
-        "function_argument_flavor:arg": [[1,1],[1,1]],
+        "function_parameter:x": [[1,1]],
+        "function_parameter:y": [[1,1]],
+        "function_parameter_flavor:arg": [[1,1],[1,1]],
         "function_returning_something:adding_will_overflow": [[1,2]],
         "functional_style": [[1,2]],
         "literal:False": [[2,2]],
@@ -3799,14 +3838,14 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "def/argument/arg": [[1,1],[1,1]],
         "def/function/pure": [[1,2]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
         "style/functional": [[1,2]],
         "style/functional_trait/pure_function": [[1,2]],
         "style/one_liner": [[1,2]],
-        "type/boolean/literal/False": [[2,2]]
+        "type/boolean/literal/False": [[2,2]],
+        "var/assignment/implicit/parameter": [[1,1],[1,1]]
       }
     },
     "086.1004-check-if-integer-multiplication-will-overflow.py": {
@@ -3814,9 +3853,9 @@
       "source": "def multiplyWillOverflow(x, y):\n    return False",
       "labels": {
         "function:multiplyWillOverflow": [[1,2]],
-        "function_argument:x": [[1,1]],
-        "function_argument:y": [[1,1]],
-        "function_argument_flavor:arg": [[1,1],[1,1]],
+        "function_parameter:x": [[1,1]],
+        "function_parameter:y": [[1,1]],
+        "function_parameter_flavor:arg": [[1,1],[1,1]],
         "function_returning_something:multiplyWillOverflow": [[1,2]],
         "functional_style": [[1,2]],
         "literal:False": [[2,2]],
@@ -3830,14 +3869,14 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "def/argument/arg": [[1,1],[1,1]],
         "def/function/pure": [[1,2]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
         "style/functional": [[1,2]],
         "style/functional_trait/pure_function": [[1,2]],
         "style/one_liner": [[1,2]],
-        "type/boolean/literal/False": [[2,2]]
+        "type/boolean/literal/False": [[2,2]],
+        "var/assignment/implicit/parameter": [[1,1],[1,1]]
       }
     },
     "087.1139-stop-program.py": {
@@ -3903,7 +3942,7 @@
         "style/one_liner": [[1,1]],
         "type/number/integer/literal": [[1,1]],
         "type/number/magic": [[1,1]],
-        "var/assignment/single": [[1,1]]
+        "var/assignment/explicit/single": [[1,1]]
       }
     },
     "089.1097-handle-invalid-argument.py": {
@@ -3943,9 +3982,9 @@
         "decorated_function:x": [[4,6]],
         "function:__init__": [[2,3]],
         "function:x": [[4,6]],
-        "function_argument:self": [[2,2],[5,5]],
-        "function_argument_flavor:arg": [[2,2],[5,5]],
         "function_decorator:property": [[4,6]],
+        "function_parameter:self": [[2,2],[5,5]],
+        "function_parameter_flavor:arg": [[2,2],[5,5]],
         "function_returning_nothing:__init__": [[2,3]],
         "function_returning_something:x": [[4,6]],
         "instance_method:__init__": [[2,3]],
@@ -3967,7 +4006,6 @@
         "whole_span:6": [[1,6]]
       },
       "taxa": {
-        "def/argument/arg": [[2,2],[5,5]],
         "def/class": [[1,6]],
         "def/decorated": [[4,6]],
         "def/function": [[4,6]],
@@ -3979,7 +4017,8 @@
         "meta/sloc/6": [[1,6]],
         "style/object_oriented": [[1,6]],
         "type/number/integer/literal/zero": [[3,3]],
-        "var/assignment": [[3,3]]
+        "var/assignment/explicit": [[3,3]],
+        "var/assignment/implicit/parameter/self": [[2,2],[5,5]]
       }
     },
     "091.1098-load-json-file-into-struct.py": {
@@ -4018,7 +4057,7 @@
         "meta/sloc/3": [[1,3]],
         "style/imperative/flat": [[1,3]],
         "type/sequence/string/literal": [[2,2],[2,2]],
-        "var/assignment/single": [[3,3]]
+        "var/assignment/explicit/single": [[3,3]]
       }
     },
     "092.1100-save-object-into-json-file.py": {
@@ -4067,8 +4106,8 @@
         "free_call_without_arguments:f": [[3,3]],
         "free_tail_call:f": [[3,3]],
         "function:control": [[2,3]],
-        "function_argument:f": [[2,2]],
-        "function_argument_flavor:arg": [[2,2]],
+        "function_parameter:f": [[2,2]],
+        "function_parameter_flavor:arg": [[2,2]],
         "function_returning_something:control": [[2,3]],
         "functional_style": [[1,3]],
         "higher_order_function:f": [[2,3]],
@@ -4088,7 +4127,6 @@
       },
       "taxa": {
         "call/function/without_arguments": [[3,3]],
-        "def/argument/arg": [[2,2]],
         "def/function/pure": [[2,3]],
         "def/higher_order": [[2,3]],
         "def/import/standard/__future__/print_function": [[1,1]],
@@ -4098,7 +4136,8 @@
         "style/functional": [[1,3]],
         "style/functional_trait/higher_order": [[2,3]],
         "style/functional_trait/pure_function": [[2,3]],
-        "style/one_liner": [[1,3]]
+        "style/one_liner": [[1,3]],
+        "var/assignment/implicit/parameter": [[2,2]]
       }
     },
     "094.1101-print-type-of-variable.py": {
@@ -4187,7 +4226,7 @@
         "meta/sloc/2": [[1,2]],
         "style/imperative/flat": [[1,2]],
         "style/one_liner": [[1,2]],
-        "var/assignment/single": [[2,2]]
+        "var/assignment/explicit/single": [[2,2]]
       }
     },
     "096.1094-check-string-prefix.py": {
@@ -4217,7 +4256,7 @@
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
         "type/sequence/string": [[1,1]],
-        "var/assignment/single": [[1,1]]
+        "var/assignment/explicit/single": [[1,1]]
       }
     },
     "097.1095-check-string-suffix.py": {
@@ -4247,7 +4286,7 @@
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
         "type/sequence/string": [[1,1]],
-        "var/assignment/single": [[1,1]]
+        "var/assignment/explicit/single": [[1,1]]
       }
     },
     "098.2142-epoch-seconds-to-date-object.py": {
@@ -4281,7 +4320,7 @@
         "meta/sloc/2": [[1,2]],
         "style/imperative/flat": [[1,2]],
         "style/one_liner": [[1,2]],
-        "var/assignment/single": [[2,2]]
+        "var/assignment/explicit/single": [[2,2]]
       }
     },
     "099.1429-format-date-yyyy-mm-dd.py": {
@@ -4336,7 +4375,7 @@
         "type/number/integer/literal": [[2,2],[2,2],[2,2]],
         "type/number/magic": [[2,2],[2,2],[2,2]],
         "type/sequence/string/literal": [[3,3]],
-        "var/assignment/single": [[2,2],[3,3]]
+        "var/assignment/explicit/single": [[2,2],[3,3]]
       }
     },
     "099.2693-format-date-yyyy-mm-dd.py": {
@@ -4371,7 +4410,7 @@
         "meta/program": [[1,3]],
         "meta/sloc/3": [[1,3]],
         "style/imperative/flat": [[1,3]],
-        "var/assignment/single": [[2,2],[3,3]]
+        "var/assignment/explicit/single": [[2,2],[3,3]]
       }
     },
     "100.1142-sort-by-a-comparator.py": {
@@ -4430,7 +4469,7 @@
         "meta/program": [[1,3]],
         "meta/sloc/3": [[1,3]],
         "style/imperative/flat": [[1,3]],
-        "var/assignment/single": [[3,3]]
+        "var/assignment/explicit/single": [[3,3]]
       }
     },
     "102.2173-load-from-http-get-request-into-a-file.py": {
@@ -4472,7 +4511,7 @@
         "style/one_liner": [[1,2]],
         "type/sequence/string/literal": [[2,2]],
         "type/sequence/tuple/literal": [[2,2]],
-        "var/assignment/parallel": [[2,2]]
+        "var/assignment/explicit/parallel": [[2,2]]
       }
     },
     "103.2276-load-xml-file-into-struct.py": {
@@ -4508,7 +4547,7 @@
         "style/imperative/flat": [[1,2]],
         "style/one_liner": [[1,2]],
         "type/sequence/string/literal": [[2,2]],
-        "var/assignment/single": [[2,2]]
+        "var/assignment/explicit/single": [[2,2]]
       }
     },
     "104.3264-save-object-into-xml-file.py": {
@@ -4542,11 +4581,11 @@
         "free_call:print": [[12,12]],
         "free_call_without_result:print": [[12,12]],
         "function:__init__": [[6,9]],
-        "function_argument:a": [[6,6]],
-        "function_argument:b": [[6,6]],
-        "function_argument:c": [[6,6]],
-        "function_argument:self": [[6,6]],
-        "function_argument_flavor:arg": [[6,6],[6,6],[6,6],[6,6]],
+        "function_parameter:a": [[6,6]],
+        "function_parameter:b": [[6,6]],
+        "function_parameter:c": [[6,6]],
+        "function_parameter:self": [[6,6]],
+        "function_parameter_flavor:arg": [[6,6],[6,6],[6,6],[6,6]],
         "function_returning_nothing:__init__": [[6,9]],
         "import:pyxser": [[1,1]],
         "import_module:pyxser": [[1,1]],
@@ -4578,7 +4617,6 @@
         "call/class/construct": [[10,10]],
         "call/function/builtin/print": [[12,12]],
         "call/method": [[11,11]],
-        "def/argument/arg": [[6,6],[6,6],[6,6],[6,6]],
         "def/class": [[2,9]],
         "def/import/third_party/pyxser": [[1,1]],
         "def/method/flavor/instance": [[6,9]],
@@ -4589,8 +4627,10 @@
         "style/object_oriented": [[1,12]],
         "type/null/literal": [[3,3],[4,4],[5,5]],
         "type/sequence/string/literal": [[10,10],[10,10],[10,10],[11,11]],
-        "var/assignment": [[7,7],[8,8],[9,9]],
-        "var/assignment/single": [[3,3],[4,4],[5,5],[10,10],[11,11]]
+        "var/assignment/explicit": [[7,7],[8,8],[9,9]],
+        "var/assignment/explicit/single": [[3,3],[4,4],[5,5],[10,10],[11,11]],
+        "var/assignment/implicit/parameter": [[6,6],[6,6],[6,6]],
+        "var/assignment/implicit/parameter/self": [[6,6]]
       }
     },
     "105.1804-current-executable-name.py": {
@@ -4626,7 +4666,7 @@
         "style/one_liner": [[1,2]],
         "subscript/index": [[2,2]],
         "type/number/integer/literal/zero": [[2,2]],
-        "var/assignment/single": [[2,2]]
+        "var/assignment/explicit/single": [[2,2]]
       }
     },
     "106.2039-get-program-working-directory.py": {
@@ -4657,7 +4697,7 @@
         "meta/sloc/2": [[1,2]],
         "style/imperative/flat": [[1,2]],
         "style/one_liner": [[1,2]],
-        "var/assignment/single": [[2,2]]
+        "var/assignment/explicit/single": [[2,2]]
       }
     },
     "107.2139-get-folder-containing-current-program.py": {
@@ -4695,7 +4735,7 @@
         "meta/sloc/2": [[1,2]],
         "style/imperative/flat": [[1,2]],
         "style/one_liner": [[1,2]],
-        "var/assignment/single": [[2,2]]
+        "var/assignment/explicit/single": [[2,2]]
       }
     },
     "108.1291-determine-if-variable-name-is-defined.py": {
@@ -4766,7 +4806,7 @@
         "meta/sloc/2": [[1,2]],
         "style/imperative/flat": [[1,2]],
         "style/one_liner": [[1,2]],
-        "var/assignment/single": [[2,2]]
+        "var/assignment/explicit/single": [[2,2]]
       }
     },
     "110.1455-check-if-string-is-blank.py": {
@@ -4801,7 +4841,7 @@
         "style/one_liner": [[1,1]],
         "type/sequence/string": [[1,1]],
         "type/sequence/string/literal/empty": [[1,1]],
-        "var/assignment/single": [[1,1]]
+        "var/assignment/explicit/single": [[1,1]]
       }
     },
     "111.2168-launch-other-program.py": {
@@ -4854,6 +4894,7 @@
         "free_call_without_result:print": [[2,2]],
         "imperative_style": [[1,2]],
         "index:k": [[2,2]],
+        "iteration_variable:k": [[1,1]],
         "loop:for": [[1,2]],
         "loop_with_late_exit:for": [[1,2]],
         "node:Call": [[1,1],[2,2]],
@@ -4871,7 +4912,8 @@
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
         "style/imperative": [[1,2]],
-        "subscript/index": [[2,2]]
+        "subscript/index": [[2,2]],
+        "var/assignment/implicit/iteration_variable": [[1,1]]
       }
     },
     "113.2157-iterate-over-map-entries-ordered-by-values.py": {
@@ -4892,6 +4934,8 @@
         "free_call:sorted": [[1,1]],
         "free_call_without_result:print": [[2,2]],
         "imperative_style": [[1,2]],
+        "iteration_variable:k": [[1,1]],
+        "iteration_variable:x": [[1,1]],
         "literal:Tuple": [[1,1],[1,1],[1,1]],
         "loop:for": [[1,2]],
         "loop_with_late_exit:for": [[1,2]],
@@ -4916,7 +4960,8 @@
         "meta/sloc/2": [[1,2]],
         "style/imperative": [[1,2]],
         "type/non_sequence/dictionary": [[1,1]],
-        "type/sequence/tuple/literal": [[1,1],[1,1],[1,1]]
+        "type/sequence/tuple/literal": [[1,1],[1,1],[1,1]],
+        "var/assignment/implicit/iteration_variable": [[1,1],[1,1]]
       }
     },
     "114.2273-test-deep-equality.py": {
@@ -4943,7 +4988,7 @@
         "meta/sloc/1": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
-        "var/assignment/single": [[1,1]]
+        "var/assignment/explicit/single": [[1,1]]
       }
     },
     "115.2138-compare-dates.py": {
@@ -4974,7 +5019,7 @@
         "meta/sloc/2": [[1,2]],
         "style/imperative/flat": [[1,2]],
         "style/one_liner": [[1,2]],
-        "var/assignment/single": [[2,2]]
+        "var/assignment/explicit/single": [[2,2]]
       }
     },
     "116.1257-remove-occurrences-of-word-from-string.py": {
@@ -5009,7 +5054,7 @@
         "style/one_liner": [[1,1]],
         "type/sequence/string": [[1,1]],
         "type/sequence/string/literal/empty": [[1,1]],
-        "var/assignment/single": [[1,1]]
+        "var/assignment/explicit/single": [[1,1]]
       }
     },
     "117.1297-get-list-size.py": {
@@ -5037,7 +5082,7 @@
         "meta/sloc/1": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
-        "var/assignment/single": [[1,1]]
+        "var/assignment/explicit/single": [[1,1]]
       }
     },
     "118.1254-list-to-set.py": {
@@ -5066,7 +5111,7 @@
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
         "type/non_sequence/set": [[1,1]],
-        "var/assignment/single": [[1,1]]
+        "var/assignment/explicit/single": [[1,1]]
       }
     },
     "118.3266-list-to-set.py": {
@@ -5127,7 +5172,7 @@
         "style/one_liner": [[1,1]],
         "type/non_sequence/set": [[1,1]],
         "type/sequence/list": [[1,1]],
-        "var/assignment/single": [[1,1]]
+        "var/assignment/explicit/single": [[1,1]]
       }
     },
     "119.3263-deduplicate-list.py": {
@@ -5161,6 +5206,7 @@
         "if_then_branch": [[6,7]],
         "if_without_else": [[5,7]],
         "imperative_style": [[1,8]],
+        "iteration_variable:i": [[4,4]],
         "literal:List": [[1,1],[3,3]],
         "literal:Str": [[1,1],[1,1],[1,1],[1,1]],
         "loop:for": [[4,7]],
@@ -5215,7 +5261,8 @@
         "type/sequence/list/literal": [[1,1]],
         "type/sequence/list/literal/empty": [[3,3]],
         "type/sequence/string/literal": [[1,1],[1,1],[1,1],[1,1]],
-        "var/assignment/single": [[1,1],[2,2],[3,3]]
+        "var/assignment/explicit/single": [[1,1],[2,2],[3,3]],
+        "var/assignment/implicit/iteration_variable": [[4,4]]
       }
     },
     "120.1479-read-integer-from-stdin.py": {
@@ -5251,7 +5298,7 @@
         "style/one_liner": [[1,1]],
         "type/number/integer": [[1,1]],
         "type/sequence/string/literal": [[1,1]],
-        "var/assignment/single": [[1,1]]
+        "var/assignment/explicit/single": [[1,1]]
       }
     },
     "121.3029-udp-listen-and-read.py": {
@@ -5320,9 +5367,9 @@
         "type/number/magic": [[6,6]],
         "type/sequence/string/literal": [[2,2],[7,7]],
         "type/sequence/tuple/literal": [[4,4],[6,6]],
-        "var/assignment/constant": [[2,2]],
-        "var/assignment/parallel": [[6,6]],
-        "var/assignment/single": [[2,2],[3,3]]
+        "var/assignment/explicit/constant": [[2,2]],
+        "var/assignment/explicit/parallel": [[6,6]],
+        "var/assignment/explicit/single": [[2,2],[3,3]]
       }
     },
     "122.1453-declare-enumeration.py": {
@@ -5363,8 +5410,8 @@
         "type/number/integer/literal": [[2,2]],
         "type/number/magic": [[2,2]],
         "type/sequence/tuple/literal": [[2,2]],
-        "var/assignment/constant": [[2,2],[2,2],[2,2],[2,2]],
-        "var/assignment/parallel/more_than_two": [[2,2]]
+        "var/assignment/explicit/constant": [[2,2],[2,2],[2,2],[2,2]],
+        "var/assignment/explicit/parallel/more_than_two": [[2,2]]
       }
     },
     "122.1454-declare-enumeration.py": {
@@ -5409,8 +5456,8 @@
         "meta/sloc/6": [[1,6]],
         "style/object_oriented": [[1,6]],
         "type/number/integer/literal": [[3,3],[4,4],[5,5],[6,6]],
-        "var/assignment/constant": [[3,3],[4,4],[5,5],[6,6]],
-        "var/assignment/single": [[3,3],[4,4],[5,5],[6,6]]
+        "var/assignment/explicit/constant": [[3,3],[4,4],[5,5],[6,6]],
+        "var/assignment/explicit/single": [[3,3],[4,4],[5,5],[6,6]]
       }
     },
     "123.2146-assert-condition.py": {
@@ -5447,9 +5494,9 @@
         "external_free_call:len": [[4,4]],
         "free_call:len": [[4,4]],
         "function:binarySearch": [[2,4]],
-        "function_argument:a": [[2,2]],
-        "function_argument:x": [[2,2]],
-        "function_argument_flavor:arg": [[2,2],[2,2]],
+        "function_parameter:a": [[2,2]],
+        "function_parameter:x": [[2,2]],
+        "function_parameter_flavor:arg": [[2,2],[2,2]],
         "function_returning_something:binarySearch": [[2,4]],
         "import:bisect": [[1,1]],
         "import_module:bisect": [[1,1]],
@@ -5480,7 +5527,6 @@
         "call/method": [[3,3]],
         "condition/equality": [[4,4]],
         "condition/equality/not": [[4,4]],
-        "def/argument/arg": [[2,2],[2,2]],
         "def/function/impure": [[2,4]],
         "def/import/standard/bisect": [[1,1]],
         "def/return/something": [[4,4]],
@@ -5491,7 +5537,8 @@
         "style/procedural": [[1,4]],
         "subscript/index": [[4,4]],
         "type/number/integer/literal": [[4,4]],
-        "var/assignment/single": [[3,3]]
+        "var/assignment/explicit/single": [[3,3]],
+        "var/assignment/implicit/parameter": [[2,2],[2,2]]
       }
     },
     "125.2167-measure-function-call-duration.py": {
@@ -5539,7 +5586,7 @@
         "operator/arithmetic/substraction": [[5,5]],
         "style/imperative/flat": [[1,5]],
         "type/sequence/string/literal": [[5,5]],
-        "var/assignment/single": [[2,2],[4,4]]
+        "var/assignment/explicit/single": [[2,2],[4,4]]
       }
     },
     "126.2137-multiple-return-values.py": {
@@ -5548,7 +5595,7 @@
       "labels": {
         "function:foo": [[1,2]],
         "function_returning_something:foo": [[1,2]],
-        "function_without_arguments:foo": [[1,2]],
+        "function_without_parameters:foo": [[1,2]],
         "functional_style": [[1,2]],
         "literal:Str": [[2,2]],
         "literal:True": [[2,2]],
@@ -5564,8 +5611,8 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "def/argument/no": [[1,2]],
         "def/function/pure": [[1,2]],
+        "def/no_parameter": [[1,2]],
         "def/return/something": [[2,2]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
@@ -5612,7 +5659,7 @@
         "style/imperative/flat": [[1,2]],
         "style/one_liner": [[1,2]],
         "type/sequence/string/literal": [[2,2],[2,2]],
-        "var/assignment/single": [[2,2]]
+        "var/assignment/explicit/single": [[2,2]]
       }
     },
     "128.2085-breadth-first-traversing-of-a-tree.py": {
@@ -5636,15 +5683,16 @@
         "free_call:f": [[5,5]],
         "free_call_without_result:f": [[5,5]],
         "function:BFS": [[1,9]],
-        "function_argument:f": [[1,1]],
-        "function_argument:root": [[1,1]],
-        "function_argument_flavor:arg": [[1,1],[1,1]],
+        "function_parameter:f": [[1,1]],
+        "function_parameter:root": [[1,1]],
+        "function_parameter_flavor:arg": [[1,1],[1,1]],
         "function_returning_nothing:BFS": [[1,9]],
         "higher_order_function:f": [[1,9]],
         "if": [[7,9]],
         "if_test_atom:n": [[7,7]],
         "if_then_branch": [[8,9]],
         "if_without_else": [[7,9]],
+        "iteration_variable:child": [[6,6]],
         "literal:0": [[4,4]],
         "literal:List": [[2,2]],
         "literal:True": [[8,8]],
@@ -5684,7 +5732,6 @@
         "call/function": [[5,5]],
         "call/method/mutable_duck/pop": [[4,4]],
         "call/method/sequence/list/append": [[9,9]],
-        "def/argument/arg": [[1,1],[1,1]],
         "def/higher_order": [[1,9]],
         "def/procedure": [[1,9]],
         "flow/conditional/no_else": [[7,9]],
@@ -5700,9 +5747,11 @@
         "type/number/integer/literal/zero": [[4,4]],
         "type/sequence/list": [[9,9]],
         "type/sequence/list/literal": [[2,2]],
-        "var/assignment": [[8,8]],
-        "var/assignment/constant": [[2,2]],
-        "var/assignment/single": [[2,2],[4,4]]
+        "var/assignment/explicit": [[8,8]],
+        "var/assignment/explicit/constant": [[2,2]],
+        "var/assignment/explicit/single": [[2,2],[4,4]],
+        "var/assignment/implicit/iteration_variable": [[6,6]],
+        "var/assignment/implicit/parameter": [[1,1],[1,1]]
       }
     },
     "129.2282-breadth-first-traversing-in-a-graph.py": {
@@ -5732,9 +5781,9 @@
         "free_call_without_arguments:set": [[3,3]],
         "free_call_without_result:f": [[7,7]],
         "function:breadth_first": [[2,9]],
-        "function_argument:f": [[2,2]],
-        "function_argument:start": [[2,2]],
-        "function_argument_flavor:arg": [[2,2],[2,2]],
+        "function_parameter:f": [[2,2]],
+        "function_parameter:start": [[2,2]],
+        "function_parameter_flavor:arg": [[2,2],[2,2]],
         "function_returning_nothing:breadth_first": [[2,9]],
         "higher_order_function:f": [[2,9]],
         "import:collections:deque": [[1,1]],
@@ -5780,7 +5829,6 @@
         "call/method/non_sequence/set/add": [[8,8]],
         "call/method/sequence/list/extend": [[9,9]],
         "condition/belonging/not": [[9,9]],
-        "def/argument/arg": [[2,2],[2,2]],
         "def/higher_order": [[2,9]],
         "def/import/standard/collections/deque": [[1,1]],
         "def/procedure": [[2,9]],
@@ -5793,7 +5841,8 @@
         "type/non_sequence/set": [[3,3],[8,8]],
         "type/sequence/list": [[9,9]],
         "type/sequence/list/literal": [[4,4]],
-        "var/assignment/single": [[3,3],[4,4],[6,6]]
+        "var/assignment/explicit/single": [[3,3],[4,4],[6,6]],
+        "var/assignment/implicit/parameter": [[2,2],[2,2]]
       }
     },
     "130.2283-depth-first-traversing-in-a-graph.py": {
@@ -5821,9 +5870,9 @@
         "free_call_without_arguments:set": [[2,2]],
         "free_call_without_result:f": [[6,6]],
         "function:depth_first": [[1,8]],
-        "function_argument:f": [[1,1]],
-        "function_argument:start": [[1,1]],
-        "function_argument_flavor:arg": [[1,1],[1,1]],
+        "function_parameter:f": [[1,1]],
+        "function_parameter:start": [[1,1]],
+        "function_parameter_flavor:arg": [[1,1],[1,1]],
         "function_returning_nothing:depth_first": [[1,8]],
         "higher_order_function:f": [[1,8]],
         "literal:List": [[3,3]],
@@ -5865,7 +5914,6 @@
         "call/method/sequence/list/extend": [[8,8]],
         "call/method/sequence/list/pop": [[5,5]],
         "condition/belonging/not": [[8,8]],
-        "def/argument/arg": [[1,1],[1,1]],
         "def/higher_order": [[1,8]],
         "def/procedure": [[1,8]],
         "flow/loop/exit/late": [[4,8]],
@@ -5877,7 +5925,8 @@
         "type/non_sequence/set": [[2,2],[7,7]],
         "type/sequence/list": [[5,5],[8,8]],
         "type/sequence/list/literal": [[3,3]],
-        "var/assignment/single": [[2,2],[3,3],[5,5]]
+        "var/assignment/explicit/single": [[2,2],[3,3],[5,5]],
+        "var/assignment/implicit/parameter": [[1,1],[1,1]]
       }
     },
     "131.2083-successive-conditions.py": {
@@ -5971,7 +6020,7 @@
         "style/imperative/flat": [[1,2]],
         "style/one_liner": [[1,2]],
         "type/sequence/string/literal": [[2,2],[2,2]],
-        "var/assignment/single": [[2,2]]
+        "var/assignment/explicit/single": [[2,2]]
       }
     },
     "133.2160-case-insensitive-string-contains.py": {
@@ -6003,7 +6052,7 @@
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
         "type/sequence/string": [[1,1],[1,1]],
-        "var/assignment/single": [[1,1]]
+        "var/assignment/explicit/single": [[1,1]]
       }
     },
     "134.1850-create-a-new-list.py": {
@@ -6031,7 +6080,7 @@
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
         "type/sequence/list/literal": [[1,1]],
-        "var/assignment/single": [[1,1]]
+        "var/assignment/explicit/single": [[1,1]]
       }
     },
     "135.2158-remove-item-from-list-by-its-value.py": {
@@ -6092,7 +6141,7 @@
         "meta/sloc/1": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
-        "var/assignment/single": [[1,1]]
+        "var/assignment/explicit/single": [[1,1]]
       }
     },
     "137.1823-check-if-string-contains-only-digits.py": {
@@ -6120,7 +6169,7 @@
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
         "type/sequence/string": [[1,1]],
-        "var/assignment/single": [[1,1]]
+        "var/assignment/explicit/single": [[1,1]]
       }
     },
     "138.2161-create-temp-file.py": {
@@ -6150,7 +6199,7 @@
         "meta/sloc/2": [[1,2]],
         "style/imperative/flat": [[1,2]],
         "style/one_liner": [[1,2]],
-        "var/assignment/single": [[2,2]]
+        "var/assignment/explicit/single": [[2,2]]
       }
     },
     "139.2162-create-temp-directory.py": {
@@ -6180,7 +6229,7 @@
         "meta/sloc/2": [[1,2]],
         "style/imperative/flat": [[1,2]],
         "style/one_liner": [[1,2]],
-        "var/assignment/single": [[2,2]]
+        "var/assignment/explicit/single": [[2,2]]
       }
     },
     "140.2156-delete-map-entry.py": {
@@ -6230,6 +6279,7 @@
         "free_call:print": [[2,2]],
         "free_call_without_result:print": [[2,2]],
         "imperative_style": [[1,2]],
+        "iteration_variable:x": [[1,1]],
         "loop:for": [[1,2]],
         "loop_with_late_exit:for": [[1,2]],
         "node:BinOp": [[1,1]],
@@ -6246,7 +6296,8 @@
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
         "operator/arithmetic/addition": [[1,1]],
-        "style/imperative": [[1,2]]
+        "style/imperative": [[1,2]],
+        "var/assignment/implicit/iteration_variable": [[1,1]]
       }
     },
     "142.2151-hexadecimal-digits-of-an-integer.py": {
@@ -6274,7 +6325,7 @@
         "meta/sloc/1": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
-        "var/assignment/single": [[1,1]]
+        "var/assignment/explicit/single": [[1,1]]
       }
     },
     "143.2256-iterate-alternatively-over-two-lists.py": {
@@ -6291,6 +6342,7 @@
         "free_call:zip": [[1,1]],
         "free_call_without_result:print": [[2,2]],
         "imperative_style": [[1,2]],
+        "iteration_variable:pair": [[1,1]],
         "loop:for": [[1,2]],
         "loop_with_late_exit:for": [[1,2]],
         "node:Call": [[1,1],[2,2]],
@@ -6306,7 +6358,8 @@
         "flow/loop/for": [[1,2]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
-        "style/imperative": [[1,2]]
+        "style/imperative": [[1,2]],
+        "var/assignment/implicit/iteration_variable": [[1,1]]
       }
     },
     "144.2145-check-if-file-exists.py": {
@@ -6340,7 +6393,7 @@
         "meta/sloc/2": [[1,2]],
         "style/imperative/flat": [[1,2]],
         "style/one_liner": [[1,2]],
-        "var/assignment/single": [[2,2]]
+        "var/assignment/explicit/single": [[2,2]]
       }
     },
     "144.2915-check-if-file-exists.py": {
@@ -6376,7 +6429,7 @@
         "meta/sloc/2": [[1,2]],
         "style/imperative/flat": [[1,2]],
         "style/one_liner": [[1,2]],
-        "var/assignment/single": [[2,2]]
+        "var/assignment/explicit/single": [[2,2]]
       }
     },
     "145.1822-print-log-line-with-datetime.py": {
@@ -6426,7 +6479,7 @@
         "meta/sloc/6": [[1,6]],
         "style/imperative/flat": [[1,6]],
         "type/sequence/string/literal": [[3,3],[5,5]],
-        "var/assignment/single": [[5,5]]
+        "var/assignment/explicit/single": [[5,5]]
       }
     },
     "146.1825-convert-string-to-floating-point-number.py": {
@@ -6469,7 +6522,7 @@
         "meta/sloc/4": [[1,4]],
         "style/imperative/flat": [[1,4]],
         "type/sequence/string/literal": [[2,2],[3,3]],
-        "var/assignment/single": [[2,2],[4,4]]
+        "var/assignment/explicit/single": [[2,2],[4,4]]
       }
     },
     "146.1826-convert-string-to-floating-point-number.py": {
@@ -6498,7 +6551,7 @@
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
         "type/number/floating_point": [[1,1]],
-        "var/assignment/single": [[1,1]]
+        "var/assignment/explicit/single": [[1,1]]
       }
     },
     "146.2739-convert-string-to-floating-point-number.py": {
@@ -6566,7 +6619,7 @@
         "style/one_liner": [[1,2]],
         "type/sequence/string/literal/empty": [[2,2]],
         "type/sequence/string/literal/special/\\x": [[2,2]],
-        "var/assignment/single": [[2,2]]
+        "var/assignment/explicit/single": [[2,2]]
       }
     },
     "148.1829-read-list-of-integer-numbers-from-stdin.py": {
@@ -6639,7 +6692,7 @@
         "style/one_liner": [[1,1]],
         "type/sequence/string": [[1,1]],
         "type/sequence/string/literal": [[1,1]],
-        "var/assignment/single": [[1,1]]
+        "var/assignment/explicit/single": [[1,1]]
       }
     },
     "151.2166-remove-string-trailing-path-separator.py": {
@@ -6690,7 +6743,7 @@
         "subscript/slice/stop": [[3,3]],
         "type/number/integer/literal": [[3,3]],
         "type/sequence/string": [[2,2]],
-        "var/assignment/single": [[3,3]]
+        "var/assignment/explicit/single": [[3,3]]
       }
     },
     "152.2153-turn-a-character-into-a-string.py": {
@@ -6713,7 +6766,7 @@
         "meta/sloc/1": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
-        "var/assignment/single": [[1,1]]
+        "var/assignment/explicit/single": [[1,1]]
       }
     },
     "153.1980-concatenate-string-with-integer.py": {
@@ -6747,7 +6800,7 @@
         "style/one_liner": [[1,1]],
         "type/sequence/string": [[1,1]],
         "type/sequence/string/literal": [[1,1]],
-        "var/assignment/single": [[1,1]]
+        "var/assignment/explicit/single": [[1,1]]
       }
     },
     "154.2155-halfway-between-two-hex-color-codes.py": {
@@ -6837,8 +6890,8 @@
         "type/sequence/string": [[3,3]],
         "type/sequence/string/literal": [[3,3]],
         "type/sequence/tuple/literal": [[1,1],[2,2]],
-        "var/assignment/parallel/more_than_two": [[1,1],[2,2]],
-        "var/assignment/single": [[3,3]]
+        "var/assignment/explicit/parallel/more_than_two": [[1,1],[2,2]],
+        "var/assignment/explicit/single": [[3,3]]
       }
     },
     "154.2292-halfway-between-two-hex-color-codes.py": {
@@ -6886,11 +6939,11 @@
         "free_call_without_result:print": [[12,12],[14,14],[15,15]],
         "function:__str__": [[8,10]],
         "function:from_str": [[3,7]],
-        "function_argument:cls": [[4,4]],
-        "function_argument:rgbstr": [[4,4]],
-        "function_argument:self": [[8,8]],
-        "function_argument_flavor:arg": [[4,4],[4,4],[8,8]],
         "function_decorator:classmethod": [[3,7]],
+        "function_parameter:cls": [[4,4]],
+        "function_parameter:rgbstr": [[4,4]],
+        "function_parameter:self": [[8,8]],
+        "function_parameter_flavor:arg": [[4,4],[4,4],[8,8]],
         "function_returning_something:__str__": [[8,10]],
         "function_returning_something:from_str": [[3,7]],
         "import:numpy": [[1,1]],
@@ -6954,7 +7007,6 @@
         "call/method": [[5,5],[9,9],[11,11],[13,13]],
         "call/method/chaining": [[5,5]],
         "call/method/sequence/string/join": [[10,10]],
-        "def/argument/arg": [[4,4],[4,4],[8,8]],
         "def/class": [[2,10]],
         "def/decorated": [[3,7]],
         "def/function": [[3,7],[8,10]],
@@ -6977,7 +7029,9 @@
         "type/sequence/string": [[10,10]],
         "type/sequence/string/literal": [[10,10],[10,10],[11,11],[13,13]],
         "type/sequence/string/literal/empty": [[10,10]],
-        "var/assignment/single": [[9,9],[11,11],[13,13]]
+        "var/assignment/explicit/single": [[9,9],[11,11],[13,13]],
+        "var/assignment/implicit/parameter": [[4,4],[4,4]],
+        "var/assignment/implicit/parameter/self": [[8,8]]
       }
     },
     "155.2147-delete-file.py": {
@@ -7012,7 +7066,7 @@
         "meta/program": [[1,3]],
         "meta/sloc/3": [[1,3]],
         "style/imperative/flat": [[1,3]],
-        "var/assignment/single": [[2,2]]
+        "var/assignment/explicit/single": [[2,2]]
       }
     },
     "156.2148-format-integer-with-zero-padding.py": {
@@ -7044,7 +7098,7 @@
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
         "type/sequence/string/literal": [[1,1]],
-        "var/assignment/single": [[1,1]]
+        "var/assignment/explicit/single": [[1,1]]
       }
     },
     "157.2150-declare-constant-string.py": {
@@ -7069,8 +7123,8 @@
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
         "type/sequence/string/literal": [[1,1]],
-        "var/assignment/constant": [[1,1]],
-        "var/assignment/single": [[1,1]]
+        "var/assignment/explicit/constant": [[1,1]],
+        "var/assignment/explicit/single": [[1,1]]
       }
     },
     "158.2163-random-sublist.py": {
@@ -7105,7 +7159,7 @@
         "meta/sloc/2": [[1,2]],
         "style/imperative/flat": [[1,2]],
         "style/one_liner": [[1,2]],
-        "var/assignment/single": [[2,2]]
+        "var/assignment/explicit/single": [[2,2]]
       }
     },
     "159.2281-trie.py": {
@@ -7118,10 +7172,10 @@
         "assignment_rhs_atom:value": [[5,5]],
         "empty_literal:List": [[4,4]],
         "function:__init__": [[2,5]],
-        "function_argument:prefix": [[2,2]],
-        "function_argument:self": [[2,2]],
-        "function_argument:value": [[2,2]],
-        "function_argument_flavor:arg": [[2,2],[2,2],[2,2]],
+        "function_parameter:prefix": [[2,2]],
+        "function_parameter:self": [[2,2]],
+        "function_parameter:value": [[2,2]],
+        "function_parameter_flavor:arg": [[2,2],[2,2],[2,2]],
         "function_returning_nothing:__init__": [[2,5]],
         "instance_method:__init__": [[2,5]],
         "literal:List": [[4,4]],
@@ -7139,7 +7193,6 @@
         "whole_span:5": [[1,5]]
       },
       "taxa": {
-        "def/argument/arg": [[2,2],[2,2],[2,2]],
         "def/class": [[1,5]],
         "def/method/flavor/instance": [[2,5]],
         "def/method/naming/magic/__init__": [[2,5]],
@@ -7149,7 +7202,9 @@
         "style/object_oriented": [[1,5]],
         "type/null/literal": [[2,2]],
         "type/sequence/list/literal/empty": [[4,4]],
-        "var/assignment": [[3,3],[4,4],[5,5]]
+        "var/assignment/explicit": [[3,3],[4,4],[5,5]],
+        "var/assignment/implicit/parameter": [[2,2],[2,2]],
+        "var/assignment/implicit/parameter/self": [[2,2]]
       }
     },
     "160.2165-detect-if-32-bit-or-64-bit-architecture.py": {
@@ -7238,7 +7293,7 @@
         "operator/arithmetic/multiplication": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
-        "var/assignment/single": [[1,1]]
+        "var/assignment/explicit/single": [[1,1]]
       }
     },
     "162.2164-execute-procedures-depending-on-options.py": {
@@ -7307,6 +7362,7 @@
         "free_call:zip": [[1,1]],
         "free_call_without_result:print": [[2,2]],
         "imperative_style": [[1,2]],
+        "iteration_variable:x": [[1,1]],
         "literal:1": [[1,1]],
         "literal:2": [[1,1],[1,1]],
         "loop:for": [[1,2]],
@@ -7335,7 +7391,8 @@
         "style/imperative": [[1,2]],
         "subscript/slice/start": [[1,1]],
         "subscript/slice/step": [[1,1],[1,1]],
-        "type/number/integer/literal": [[1,1],[1,1],[1,1]]
+        "type/number/integer/literal": [[1,1],[1,1],[1,1]],
+        "var/assignment/implicit/iteration_variable": [[1,1]]
       }
     },
     "163.3177-print-list-elements-by-group-of-2.py": {
@@ -7366,14 +7423,16 @@
         "free_call_without_result:print": [[7,7]],
         "free_tail_call:zip": [[5,5]],
         "function:pairwise": [[2,5]],
-        "function_argument:iterable": [[2,2]],
-        "function_argument_flavor:arg": [[2,2]],
+        "function_parameter:iterable": [[2,2]],
+        "function_parameter_flavor:arg": [[2,2]],
         "function_returning_something:pairwise": [[2,5]],
         "import:itertools:tee": [[1,1]],
         "import_module:itertools": [[1,1]],
         "import_name:tee": [[1,1]],
         "impure_function:pairwise": [[2,5]],
         "internal_free_call:pairwise": [[6,6]],
+        "iteration_variable:a": [[6,6]],
+        "iteration_variable:b": [[6,6]],
         "literal:None": [[4,4]],
         "literal:Tuple": [[3,3],[6,6]],
         "loop:for": [[6,7]],
@@ -7399,7 +7458,6 @@
         "call/function/builtin/next": [[4,4]],
         "call/function/builtin/print": [[7,7]],
         "call/function/builtin/zip": [[5,5]],
-        "def/argument/arg": [[2,2]],
         "def/function/impure": [[2,5]],
         "def/import/standard/itertools/tee": [[1,1]],
         "def/return/something": [[5,5]],
@@ -7410,7 +7468,9 @@
         "style/procedural": [[1,7]],
         "type/null/literal": [[4,4]],
         "type/sequence/tuple/literal": [[3,3],[6,6]],
-        "var/assignment/parallel": [[3,3]]
+        "var/assignment/explicit/parallel": [[3,3]],
+        "var/assignment/implicit/iteration_variable": [[6,6],[6,6]],
+        "var/assignment/implicit/parameter": [[2,2]]
       }
     },
     "164.2169-open-url-in-default-browser.py": {
@@ -7472,7 +7532,7 @@
         "subscript/index": [[1,1]],
         "subscript/index/backwards/last": [[1,1]],
         "type/number/integer/literal": [[1,1]],
-        "var/assignment/single": [[1,1]]
+        "var/assignment/explicit/single": [[1,1]]
       }
     },
     "166.2272-concatenate-two-lists.py": {
@@ -7500,7 +7560,7 @@
         "operator/arithmetic/addition": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
-        "var/assignment/single": [[1,1]]
+        "var/assignment/explicit/single": [[1,1]]
       }
     },
     "167.2611-trim-prefix.py": {
@@ -7542,7 +7602,7 @@
         "style/one_liner": [[1,1]],
         "subscript/slice/start": [[1,1]],
         "type/sequence/string": [[1,1]],
-        "var/assignment/single": [[1,1]]
+        "var/assignment/explicit/single": [[1,1]]
       }
     },
     "167.3175-trim-prefix.py": {
@@ -7572,7 +7632,7 @@
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
         "type/sequence/string": [[1,1]],
-        "var/assignment/single": [[1,1]]
+        "var/assignment/explicit/single": [[1,1]]
       }
     },
     "168.2277-trim-suffix.py": {
@@ -7615,7 +7675,7 @@
         "type/number/integer/literal": [[1,1]],
         "type/number/integer/literal/zero": [[1,1]],
         "type/sequence/string": [[1,1]],
-        "var/assignment/single": [[1,1]]
+        "var/assignment/explicit/single": [[1,1]]
       }
     },
     "168.3174-trim-suffix.py": {
@@ -7645,7 +7705,7 @@
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
         "type/sequence/string": [[1,1]],
-        "var/assignment/single": [[1,1]]
+        "var/assignment/explicit/single": [[1,1]]
       }
     },
     "169.2233-string-length.py": {
@@ -7673,7 +7733,7 @@
         "meta/sloc/1": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
-        "var/assignment/single": [[1,1]]
+        "var/assignment/explicit/single": [[1,1]]
       }
     },
     "170.2275-get-map-size.py": {
@@ -7701,7 +7761,7 @@
         "meta/sloc/1": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
-        "var/assignment/single": [[1,1]]
+        "var/assignment/explicit/single": [[1,1]]
       }
     },
     "171.2446-add-an-element-at-the-end-of-a-list.py": {
@@ -7757,7 +7817,7 @@
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
         "subscript/index": [[1,1]],
-        "var/assignment/index": [[1,1]]
+        "var/assignment/explicit/index": [[1,1]]
       }
     },
     "173.2427-format-a-number-with-grouped-thousands.py": {
@@ -7900,7 +7960,7 @@
         "style/imperative/flat": [[1,4]],
         "type/sequence/string": [[2,2]],
         "type/sequence/string/literal": [[2,2],[3,3]],
-        "var/assignment/single": [[2,2],[3,3],[4,4]]
+        "var/assignment/explicit/single": [[2,2],[3,3],[4,4]]
       }
     },
     "175.2613-bytes-to-hex-string.py": {
@@ -7928,7 +7988,7 @@
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
         "type/number/floating_point": [[1,1]],
-        "var/assignment/single": [[1,1]]
+        "var/assignment/explicit/single": [[1,1]]
       }
     },
     "176.2614-hex-string-to-byte-array.py": {
@@ -7958,7 +8018,7 @@
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
         "type/number/floating_point": [[1,1]],
-        "var/assignment/single": [[1,1]]
+        "var/assignment/explicit/single": [[1,1]]
       }
     },
     "177.2709-find-files-with-a-given-list-of-filename-extensions.py": {
@@ -8016,8 +8076,8 @@
         "type/number/integer/literal": [[3,3]],
         "type/sequence/list/literal": [[2,2]],
         "type/sequence/string/literal": [[2,2],[2,2],[2,2]],
-        "var/assignment/constant": [[3,3]],
-        "var/assignment/single": [[2,2],[3,3]]
+        "var/assignment/explicit/constant": [[3,3]],
+        "var/assignment/explicit/single": [[2,2],[3,3]]
       }
     },
     "177.2725-find-files-with-a-given-list-of-filename-extensions.py": {
@@ -8073,7 +8133,7 @@
         "type/sequence/string": [[4,4]],
         "type/sequence/string/literal": [[4,4],[7,7]],
         "type/sequence/tuple/literal": [[5,5]],
-        "var/assignment/single": [[3,3]]
+        "var/assignment/explicit/single": [[3,3]]
       }
     },
     "177.3241-find-files-with-a-given-list-of-filename-extensions.py": {
@@ -8162,7 +8222,7 @@
         "operator/boolean/and": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
-        "var/assignment/single": [[1,1]]
+        "var/assignment/explicit/single": [[1,1]]
       }
     },
     "179.2688-get-center-of-a-rectangle.py": {
@@ -8201,7 +8261,7 @@
         "style/one_liner": [[1,1]],
         "type/number/integer/literal": [[1,1],[1,1]],
         "type/sequence/tuple/literal": [[1,1]],
-        "var/assignment/single": [[1,1]]
+        "var/assignment/explicit/single": [[1,1]]
       }
     },
     "179.2689-get-center-of-a-rectangle.py": {
@@ -8254,7 +8314,7 @@
         "style/imperative/flat": [[1,3]],
         "type/number/integer/literal": [[3,3],[3,3]],
         "type/sequence/string/literal": [[2,2],[2,2]],
-        "var/assignment/single": [[2,2],[3,3]]
+        "var/assignment/explicit/single": [[2,2],[3,3]]
       }
     },
     "180.2612-list-files-in-directory.py": {
@@ -8287,7 +8347,7 @@
         "meta/sloc/2": [[1,2]],
         "style/imperative/flat": [[1,2]],
         "style/one_liner": [[1,2]],
-        "var/assignment/single": [[2,2]]
+        "var/assignment/explicit/single": [[2,2]]
       }
     },
     "182.2658-quine-program.py": {
@@ -8322,7 +8382,7 @@
         "operator/arithmetic/modulo": [[2,2]],
         "style/imperative/flat": [[1,2]],
         "type/sequence/string/literal/special/\\n": [[1,1]],
-        "var/assignment/single": [[1,1]]
+        "var/assignment/explicit/single": [[1,1]]
       }
     },
     "183.3025-make-http-put-request.py": {
@@ -8383,8 +8443,8 @@
         "type/non_sequence/dictionary/literal/empty": [[5,5]],
         "type/sequence/string/literal": [[3,3],[4,4]],
         "type/sequence/tuple/literal": [[7,7],[7,7]],
-        "var/assignment/parallel": [[7,7]],
-        "var/assignment/single": [[3,3],[4,4],[5,5],[6,6]]
+        "var/assignment/explicit/parallel": [[7,7]],
+        "var/assignment/explicit/single": [[3,3],[4,4],[5,5],[6,6]]
       }
     },
     "184.2701-tomorrow.py": {
@@ -8477,7 +8537,7 @@
         "type/number/integer/literal": [[2,2]],
         "type/number/magic": [[2,2],[2,2]],
         "type/sequence/tuple/literal": [[2,2]],
-        "var/assignment/single": [[2,2]]
+        "var/assignment/explicit/single": [[2,2]]
       }
     },
     "186.2699-exit-program-cleanly.py": {
@@ -8542,11 +8602,11 @@
         "function:find_set": [[5,10]],
         "function:is_same_set": [[11,12]],
         "function:union_set": [[13,15]],
-        "function_argument:i": [[5,5],[11,11],[13,13]],
-        "function_argument:j": [[11,11],[13,13]],
-        "function_argument:self": [[2,2],[5,5],[11,11],[13,13]],
-        "function_argument:size": [[2,2]],
-        "function_argument_flavor:arg": [[2,2],[2,2],[5,5],[5,5],[11,11],[11,11],[11,11],[13,13],[13,13],[13,13]],
+        "function_parameter:i": [[5,5],[11,11],[13,13]],
+        "function_parameter:j": [[11,11],[13,13]],
+        "function_parameter:self": [[2,2],[5,5],[11,11],[13,13]],
+        "function_parameter:size": [[2,2]],
+        "function_parameter_flavor:arg": [[2,2],[2,2],[5,5],[5,5],[11,11],[11,11],[11,11],[13,13],[13,13],[13,13]],
         "function_returning_nothing:__init__": [[2,4]],
         "function_returning_nothing:union_set": [[13,15]],
         "function_returning_something:find_set": [[5,10]],
@@ -8604,7 +8664,6 @@
         "call/function/builtin/range": [[4,4]],
         "call/method": [[9,9],[12,12],[12,12],[14,14],[15,15],[15,15]],
         "condition/equality": [[6,6],[12,12]],
-        "def/argument/arg": [[2,2],[2,2],[5,5],[5,5],[11,11],[11,11],[11,11],[13,13],[13,13],[13,13]],
         "def/class": [[1,15]],
         "def/function": [[5,10]],
         "def/function/predicate": [[11,12]],
@@ -8624,9 +8683,11 @@
         "type/number/integer/literal/zero": [[3,3]],
         "type/sequence/list/literal": [[3,3]],
         "type/sequence/tuple/literal": [[15,15],[15,15]],
-        "var/assignment": [[3,3],[4,4]],
-        "var/assignment/index": [[9,9]],
-        "var/assignment/parallel": [[15,15]]
+        "var/assignment/explicit": [[3,3],[4,4]],
+        "var/assignment/explicit/index": [[9,9]],
+        "var/assignment/explicit/parallel": [[15,15]],
+        "var/assignment/implicit/parameter": [[2,2],[5,5],[11,11],[11,11],[13,13],[13,13]],
+        "var/assignment/implicit/parameter/self": [[2,2],[5,5],[11,11],[13,13]]
       }
     },
     "188.3171-matrix-multiplication.py": {
@@ -8657,7 +8718,7 @@
         "operator/matrix/multiplication": [[2,2]],
         "style/imperative/flat": [[1,2]],
         "style/one_liner": [[1,2]],
-        "var/assignment/single": [[2,2]]
+        "var/assignment/explicit/single": [[2,2]]
       }
     },
     "188.3284-matrix-multiplication.py": {
@@ -8692,7 +8753,7 @@
         "meta/sloc/2": [[1,2]],
         "style/imperative/flat": [[1,2]],
         "style/one_liner": [[1,2]],
-        "var/assignment/single": [[2,2]]
+        "var/assignment/explicit/single": [[2,2]]
       }
     },
     "189.3236-filter-and-transform-list.py": {
@@ -8727,7 +8788,7 @@
         "meta/sloc/1": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
-        "var/assignment/single": [[1,1]]
+        "var/assignment/explicit/single": [[1,1]]
       }
     },
     "191.3403-check-if-any-value-in-a-list-is-larger-than-a-limit.py": {
@@ -8796,7 +8857,7 @@
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
         "style/imperative/flat": [[1,2]],
-        "var/assignment/single": [[2,2]]
+        "var/assignment/explicit/single": [[2,2]]
       }
     }
   },
@@ -11918,38 +11979,44 @@
     "function:x": [
       "090.1099-read-only-outside.py"
     ],
-    "function_argument:a": [
+    "function_decorator:classmethod": [
+      "154.2292-halfway-between-two-hex-color-codes.py"
+    ],
+    "function_decorator:property": [
+      "090.1099-read-only-outside.py"
+    ],
+    "function_parameter:a": [
       "014.0185-pick-uniformly-a-random-floating-point-number-in-ab.py",
       "035.0667-first-class-function--compose.py",
       "037.0671-currying.py",
       "104.3264-save-object-into-xml-file.py",
       "124.2152-binary-search-for-a-value-in-sorted-array.py"
     ],
-    "function_argument:a_class": [
+    "function_parameter:a_class": [
       "073.0673-create-a-factory.py"
     ],
-    "function_argument:b": [
+    "function_parameter:b": [
       "014.0185-pick-uniformly-a-random-floating-point-number-in-ab.py",
       "037.0671-currying.py",
       "104.3264-save-object-into-xml-file.py"
     ],
-    "function_argument:bt": [
+    "function_parameter:bt": [
       "016.1530-depth-first-traversing-of-a-binary-tree.py"
     ],
-    "function_argument:c": [
+    "function_parameter:c": [
       "104.3264-save-object-into-xml-file.py"
     ],
-    "function_argument:children": [
+    "function_parameter:children": [
       "017.1103-create-a-tree-data-structure.py"
     ],
-    "function_argument:cls": [
+    "function_parameter:cls": [
       "154.2292-halfway-between-two-hex-color-codes.py"
     ],
-    "function_argument:data": [
+    "function_parameter:data": [
       "009.1410-create-a-binary-tree-data-structure.py",
       "009.3176-create-a-binary-tree-data-structure.py"
     ],
-    "function_argument:f": [
+    "function_parameter:f": [
       "018.2084-depth-first-traversing-of-a-tree.py",
       "035.0667-first-class-function--compose.py",
       "036.0670-first-class-function--generic-composition.py",
@@ -11958,58 +12025,58 @@
       "129.2282-breadth-first-traversing-in-a-graph.py",
       "130.2283-depth-first-traversing-in-a-graph.py"
     ],
-    "function_argument:g": [
+    "function_parameter:g": [
       "035.0667-first-class-function--compose.py",
       "036.0670-first-class-function--generic-composition.py"
     ],
-    "function_argument:i": [
+    "function_parameter:i": [
       "031.0188-recursive-factorial-simple.py",
       "056.1424-launch-1000-parallel-tasks-and-wait-for-completion.py",
       "187.3261-disjoint-set.py"
     ],
-    "function_argument:iterable": [
+    "function_parameter:iterable": [
       "163.3177-print-list-elements-by-group-of-2.py"
     ],
-    "function_argument:j": [
+    "function_parameter:j": [
       "187.3261-disjoint-set.py"
     ],
-    "function_argument:k": [
+    "function_parameter:k": [
       "067.1426-binomial-coefficient-n-choose-k.py"
     ],
-    "function_argument:labels": [
+    "function_parameter:labels": [
       "040.2279-graph-with-adjacency-lists.py"
     ],
-    "function_argument:left_child": [
+    "function_parameter:left_child": [
       "009.3176-create-a-binary-tree-data-structure.py"
     ],
-    "function_argument:m": [
+    "function_parameter:m": [
       "020.0573-return-two-values.py",
       "043.2733-break-outer-loop.py"
     ],
-    "function_argument:n": [
+    "function_parameter:n": [
       "032.0196-integer-exponentiation-by-squaring.py",
       "067.1426-binomial-coefficient-n-choose-k.py"
     ],
-    "function_argument:name": [
+    "function_parameter:name": [
       "003.0019-create-a-procedure.py"
     ],
-    "function_argument:paths": [
+    "function_parameter:paths": [
       "040.2279-graph-with-adjacency-lists.py"
     ],
-    "function_argument:prefix": [
+    "function_parameter:prefix": [
       "159.2281-trie.py"
     ],
-    "function_argument:rgbstr": [
+    "function_parameter:rgbstr": [
       "154.2292-halfway-between-two-hex-color-codes.py"
     ],
-    "function_argument:right_child": [
+    "function_parameter:right_child": [
       "009.3176-create-a-binary-tree-data-structure.py"
     ],
-    "function_argument:root": [
+    "function_parameter:root": [
       "018.2084-depth-first-traversing-of-a-tree.py",
       "128.2085-breadth-first-traversing-of-a-tree.py"
     ],
-    "function_argument:self": [
+    "function_parameter:self": [
       "009.1410-create-a-binary-tree-data-structure.py",
       "009.3176-create-a-binary-tree-data-structure.py",
       "017.1103-create-a-tree-data-structure.py",
@@ -12020,24 +12087,24 @@
       "159.2281-trie.py",
       "187.3261-disjoint-set.py"
     ],
-    "function_argument:size": [
+    "function_parameter:size": [
       "187.3261-disjoint-set.py"
     ],
-    "function_argument:start": [
+    "function_parameter:start": [
       "129.2282-breadth-first-traversing-in-a-graph.py",
       "130.2283-depth-first-traversing-in-a-graph.py"
     ],
-    "function_argument:str_": [
+    "function_parameter:str_": [
       "073.0673-create-a-factory.py"
     ],
-    "function_argument:v": [
+    "function_parameter:v": [
       "043.2733-break-outer-loop.py"
     ],
-    "function_argument:value": [
+    "function_parameter:value": [
       "017.1103-create-a-tree-data-structure.py",
       "159.2281-trie.py"
     ],
-    "function_argument:x": [
+    "function_parameter:x": [
       "004.0024-create-a-function-which-returns-the-square-of-an-integer.py",
       "004.2921-create-a-function-which-returns-the-square-of-an-integer.py",
       "020.0573-return-two-values.py",
@@ -12048,11 +12115,11 @@
       "086.1004-check-if-integer-multiplication-will-overflow.py",
       "124.2152-binary-search-for-a-value-in-sorted-array.py"
     ],
-    "function_argument:y": [
+    "function_parameter:y": [
       "085.1003-check-if-integer-addition-will-overflow.py",
       "086.1004-check-if-integer-multiplication-will-overflow.py"
     ],
-    "function_argument_flavor:arg": [
+    "function_parameter_flavor:arg": [
       "003.0019-create-a-procedure.py",
       "004.0024-create-a-function-which-returns-the-square-of-an-integer.py",
       "004.2921-create-a-function-which-returns-the-square-of-an-integer.py",
@@ -12088,15 +12155,9 @@
       "163.3177-print-list-elements-by-group-of-2.py",
       "187.3261-disjoint-set.py"
     ],
-    "function_argument_flavor:vararg": [
+    "function_parameter_flavor:vararg": [
       "017.1103-create-a-tree-data-structure.py",
       "040.2279-graph-with-adjacency-lists.py"
-    ],
-    "function_decorator:classmethod": [
-      "154.2292-halfway-between-two-hex-color-codes.py"
-    ],
-    "function_decorator:property": [
-      "090.1099-read-only-outside.py"
     ],
     "function_returning_nothing:BFS": [
       "128.2085-breadth-first-traversing-of-a-tree.py"
@@ -12204,10 +12265,10 @@
     "function_returning_something:x": [
       "090.1099-read-only-outside.py"
     ],
-    "function_without_arguments:a": [
+    "function_without_parameters:a": [
       "003.2372-create-a-procedure.py"
     ],
-    "function_without_arguments:foo": [
+    "function_without_parameters:foo": [
       "126.2137-multiple-return-values.py"
     ],
     "functional_style": [
@@ -13064,6 +13125,77 @@
     ],
     "internal_free_call:pairwise": [
       "163.3177-print-list-elements-by-group-of-2.py"
+    ],
+    "iteration_variable:a": [
+      "163.3177-print-list-elements-by-group-of-2.py"
+    ],
+    "iteration_variable:b": [
+      "163.3177-print-list-elements-by-group-of-2.py"
+    ],
+    "iteration_variable:child": [
+      "018.2084-depth-first-traversing-of-a-tree.py",
+      "128.2085-breadth-first-traversing-of-a-tree.py"
+    ],
+    "iteration_variable:column": [
+      "043.0676-break-outer-loop.py"
+    ],
+    "iteration_variable:i": [
+      "002.0011-print-hello-10-times.py",
+      "007.0183-iterate-over-list-indexes-and-values.py",
+      "030.0189-parallelize-execution-of-1000-independent-tasks.py",
+      "043.2733-break-outer-loop.py",
+      "119.3263-deduplicate-list.py"
+    ],
+    "iteration_variable:idx": [
+      "020.0573-return-two-values.py"
+    ],
+    "iteration_variable:item": [
+      "020.0573-return-two-values.py"
+    ],
+    "iteration_variable:j": [
+      "043.2733-break-outer-loop.py"
+    ],
+    "iteration_variable:k": [
+      "013.0574-iterate-over-map-keys-and-values.py",
+      "112.2144-iterate-over-map-entries-ordered-by-keys.py",
+      "113.2157-iterate-over-map-entries-ordered-by-values.py"
+    ],
+    "iteration_variable:l1": [
+      "040.2279-graph-with-adjacency-lists.py"
+    ],
+    "iteration_variable:l2": [
+      "040.2279-graph-with-adjacency-lists.py"
+    ],
+    "iteration_variable:pair": [
+      "143.2256-iterate-alternatively-over-two-lists.py"
+    ],
+    "iteration_variable:path": [
+      "040.2279-graph-with-adjacency-lists.py"
+    ],
+    "iteration_variable:row": [
+      "043.0676-break-outer-loop.py",
+      "043.2733-break-outer-loop.py"
+    ],
+    "iteration_variable:u": [
+      "042.1264-continue-outer-loop.py"
+    ],
+    "iteration_variable:v": [
+      "013.0574-iterate-over-map-keys-and-values.py",
+      "042.1264-continue-outer-loop.py",
+      "042.3168-continue-outer-loop.py"
+    ],
+    "iteration_variable:v_": [
+      "042.3168-continue-outer-loop.py"
+    ],
+    "iteration_variable:value": [
+      "043.2733-break-outer-loop.py"
+    ],
+    "iteration_variable:x": [
+      "006.0032-iterate-over-list-values.py",
+      "007.0183-iterate-over-list-indexes-and-values.py",
+      "113.2157-iterate-over-map-entries-ordered-by-values.py",
+      "141.2159-iterate-in-sequence-over-two-lists.py",
+      "163.2170-print-list-elements-by-group-of-2.py"
     ],
     "literal:-1": [
       "019.1983-reverse-a-list.py",
@@ -17182,50 +17314,6 @@
     "condition/inequality/chained/2": [
       "178.2615-check-if-point-is-inside-rectangle.py"
     ],
-    "def/argument/arg": [
-      "003.0019-create-a-procedure.py",
-      "004.0024-create-a-function-which-returns-the-square-of-an-integer.py",
-      "004.2921-create-a-function-which-returns-the-square-of-an-integer.py",
-      "009.1410-create-a-binary-tree-data-structure.py",
-      "009.3176-create-a-binary-tree-data-structure.py",
-      "014.0185-pick-uniformly-a-random-floating-point-number-in-ab.py",
-      "016.1530-depth-first-traversing-of-a-binary-tree.py",
-      "017.1103-create-a-tree-data-structure.py",
-      "018.2084-depth-first-traversing-of-a-tree.py",
-      "020.0573-return-two-values.py",
-      "028.0350-sort-by-a-property.py",
-      "031.0188-recursive-factorial-simple.py",
-      "032.0196-integer-exponentiation-by-squaring.py",
-      "035.0667-first-class-function--compose.py",
-      "036.0670-first-class-function--generic-composition.py",
-      "037.0671-currying.py",
-      "040.2279-graph-with-adjacency-lists.py",
-      "043.2733-break-outer-loop.py",
-      "056.1424-launch-1000-parallel-tasks-and-wait-for-completion.py",
-      "067.1426-binomial-coefficient-n-choose-k.py",
-      "073.0673-create-a-factory.py",
-      "085.1003-check-if-integer-addition-will-overflow.py",
-      "086.1004-check-if-integer-multiplication-will-overflow.py",
-      "090.1099-read-only-outside.py",
-      "093.1082-pass-a-runnable-procedure-as-parameter.py",
-      "104.3264-save-object-into-xml-file.py",
-      "124.2152-binary-search-for-a-value-in-sorted-array.py",
-      "128.2085-breadth-first-traversing-of-a-tree.py",
-      "129.2282-breadth-first-traversing-in-a-graph.py",
-      "130.2283-depth-first-traversing-in-a-graph.py",
-      "154.2292-halfway-between-two-hex-color-codes.py",
-      "159.2281-trie.py",
-      "163.3177-print-list-elements-by-group-of-2.py",
-      "187.3261-disjoint-set.py"
-    ],
-    "def/argument/no": [
-      "003.2372-create-a-procedure.py",
-      "126.2137-multiple-return-values.py"
-    ],
-    "def/argument/vararg": [
-      "017.1103-create-a-tree-data-structure.py",
-      "040.2279-graph-with-adjacency-lists.py"
-    ],
     "def/class": [
       "005.0663-create-a-2d-point-data-structure.py",
       "009.1410-create-a-binary-tree-data-structure.py",
@@ -17497,6 +17585,10 @@
     ],
     "def/nested/closure": [
       "037.0671-currying.py"
+    ],
+    "def/no_parameter": [
+      "003.2372-create-a-procedure.py",
+      "126.2137-multiple-return-values.py"
     ],
     "def/procedure": [
       "003.0019-create-a-procedure.py",
@@ -19024,7 +19116,7 @@
       "185.2820-execute-function-in-30-seconds.py",
       "187.3261-disjoint-set.py"
     ],
-    "var/assignment": [
+    "var/assignment/explicit": [
       "009.1410-create-a-binary-tree-data-structure.py",
       "009.3176-create-a-binary-tree-data-structure.py",
       "017.1103-create-a-tree-data-structure.py",
@@ -19036,7 +19128,7 @@
       "159.2281-trie.py",
       "187.3261-disjoint-set.py"
     ],
-    "var/assignment/constant": [
+    "var/assignment/explicit/constant": [
       "040.2279-graph-with-adjacency-lists.py",
       "121.3029-udp-listen-and-read.py",
       "122.1453-declare-enumeration.py",
@@ -19045,25 +19137,25 @@
       "157.2150-declare-constant-string.py",
       "177.2709-find-files-with-a-given-list-of-filename-extensions.py"
     ],
-    "var/assignment/index": [
+    "var/assignment/explicit/index": [
       "172.2442-insert-entry-in-map.py",
       "187.3261-disjoint-set.py"
     ],
-    "var/assignment/parallel": [
+    "var/assignment/explicit/parallel": [
       "102.2173-load-from-http-get-request-into-a-file.py",
       "121.3029-udp-listen-and-read.py",
       "163.3177-print-list-elements-by-group-of-2.py",
       "183.3025-make-http-put-request.py",
       "187.3261-disjoint-set.py"
     ],
-    "var/assignment/parallel/more_than_two": [
+    "var/assignment/explicit/parallel/more_than_two": [
       "122.1453-declare-enumeration.py",
       "154.2155-halfway-between-two-hex-color-codes.py"
     ],
-    "var/assignment/parallel/swap": [
+    "var/assignment/explicit/parallel/swap": [
       "021.0084-swap-values-of-variables-a-and-b.py"
     ],
-    "var/assignment/single": [
+    "var/assignment/explicit/single": [
       "008.0039-initialize-a-new-map-associative-array.py",
       "019.0197-reverse-a-list.py",
       "019.1983-reverse-a-list.py",
@@ -19196,6 +19288,78 @@
       "188.3284-matrix-multiplication.py",
       "189.3236-filter-and-transform-list.py",
       "197.3457-get-a-list-of-lines-from-a-file.py"
+    ],
+    "var/assignment/implicit/iteration_variable": [
+      "002.0011-print-hello-10-times.py",
+      "006.0032-iterate-over-list-values.py",
+      "007.0183-iterate-over-list-indexes-and-values.py",
+      "013.0574-iterate-over-map-keys-and-values.py",
+      "018.2084-depth-first-traversing-of-a-tree.py",
+      "020.0573-return-two-values.py",
+      "030.0189-parallelize-execution-of-1000-independent-tasks.py",
+      "040.2279-graph-with-adjacency-lists.py",
+      "042.1264-continue-outer-loop.py",
+      "042.3168-continue-outer-loop.py",
+      "043.0676-break-outer-loop.py",
+      "043.2733-break-outer-loop.py",
+      "112.2144-iterate-over-map-entries-ordered-by-keys.py",
+      "113.2157-iterate-over-map-entries-ordered-by-values.py",
+      "119.3263-deduplicate-list.py",
+      "128.2085-breadth-first-traversing-of-a-tree.py",
+      "141.2159-iterate-in-sequence-over-two-lists.py",
+      "143.2256-iterate-alternatively-over-two-lists.py",
+      "163.2170-print-list-elements-by-group-of-2.py",
+      "163.3177-print-list-elements-by-group-of-2.py"
+    ],
+    "var/assignment/implicit/parameter": [
+      "003.0019-create-a-procedure.py",
+      "004.0024-create-a-function-which-returns-the-square-of-an-integer.py",
+      "004.2921-create-a-function-which-returns-the-square-of-an-integer.py",
+      "009.1410-create-a-binary-tree-data-structure.py",
+      "009.3176-create-a-binary-tree-data-structure.py",
+      "014.0185-pick-uniformly-a-random-floating-point-number-in-ab.py",
+      "016.1530-depth-first-traversing-of-a-binary-tree.py",
+      "017.1103-create-a-tree-data-structure.py",
+      "018.2084-depth-first-traversing-of-a-tree.py",
+      "020.0573-return-two-values.py",
+      "028.0350-sort-by-a-property.py",
+      "031.0188-recursive-factorial-simple.py",
+      "032.0196-integer-exponentiation-by-squaring.py",
+      "035.0667-first-class-function--compose.py",
+      "036.0670-first-class-function--generic-composition.py",
+      "037.0671-currying.py",
+      "040.2279-graph-with-adjacency-lists.py",
+      "043.2733-break-outer-loop.py",
+      "056.1424-launch-1000-parallel-tasks-and-wait-for-completion.py",
+      "067.1426-binomial-coefficient-n-choose-k.py",
+      "073.0673-create-a-factory.py",
+      "085.1003-check-if-integer-addition-will-overflow.py",
+      "086.1004-check-if-integer-multiplication-will-overflow.py",
+      "093.1082-pass-a-runnable-procedure-as-parameter.py",
+      "104.3264-save-object-into-xml-file.py",
+      "124.2152-binary-search-for-a-value-in-sorted-array.py",
+      "128.2085-breadth-first-traversing-of-a-tree.py",
+      "129.2282-breadth-first-traversing-in-a-graph.py",
+      "130.2283-depth-first-traversing-in-a-graph.py",
+      "154.2292-halfway-between-two-hex-color-codes.py",
+      "159.2281-trie.py",
+      "163.3177-print-list-elements-by-group-of-2.py",
+      "187.3261-disjoint-set.py"
+    ],
+    "var/assignment/implicit/parameter/self": [
+      "009.1410-create-a-binary-tree-data-structure.py",
+      "009.3176-create-a-binary-tree-data-structure.py",
+      "017.1103-create-a-tree-data-structure.py",
+      "040.2279-graph-with-adjacency-lists.py",
+      "090.1099-read-only-outside.py",
+      "104.3264-save-object-into-xml-file.py",
+      "154.2292-halfway-between-two-hex-color-codes.py",
+      "159.2281-trie.py",
+      "187.3261-disjoint-set.py"
+    ],
+    "var/assignment/implicit/parameter/vararg": [
+      "017.1103-create-a-tree-data-structure.py",
+      "040.2279-graph-with-adjacency-lists.py"
     ],
     "var/deletion/index": [
       "029.0199-remove-item-from-list-by-its-index.py"

@@ -104,9 +104,9 @@
       - [Feature `pure_function` (SQL)](#feature-pure_function)
       - [Feature `impure_function` (SQL)](#feature-impure_function)
       - [Feature `function_returning_nothing` (SQL)](#feature-function_returning_nothing)
-      - [Feature `function_argument`](#feature-function_argument)
-      - [Feature `function_argument_flavor`](#feature-function_argument_flavor)
-      - [Feature `function_without_arguments`](#feature-function_without_arguments)
+      - [Feature `function_parameter`](#feature-function_parameter)
+      - [Feature `function_parameter_flavor`](#feature-function_parameter_flavor)
+      - [Feature `function_without_parameters`](#feature-function_without_parameters)
       - [Feature `decorated_function`](#feature-decorated_function)
       - [Feature `function_decorator`](#feature-function_decorator)
     - [Nesting](#nesting)
@@ -132,6 +132,7 @@
   - [Iterations](#iterations)
     - [Iteration keywords](#iteration-keywords)
       - [Feature `for`](#feature-for)
+      - [Feature `iteration_variable`](#feature-iteration_variable)
       - [Feature `loop` (SQL)](#feature-loop)
       - [Feature `loop_else`](#feature-loop_else)
     - [Sequential loops](#sequential-loops)
@@ -3812,7 +3813,7 @@ WHERE c.name_suffix = "ClassDef"
 
 ##### Derivations
 
-[⬆️ feature `function_argument`](#feature-function_argument)  
+[⬆️ feature `function_parameter`](#feature-function_parameter)  
 [⬆️ feature `method`](#feature-method)  
 
 ##### Specification
@@ -3827,12 +3828,12 @@ SELECT CASE a.name_suffix
        m.span,
        m.path
 FROM t_method m
-LEFT JOIN t_function_argument a ON (a.path GLOB m.path || "*-*-"
-                                    AND a.name_suffix IN ("self",
-                                                          "cls"))
+LEFT JOIN t_function_parameter a ON (a.path GLOB m.path || "*-*-"
+                                     AND a.name_suffix IN ("self",
+                                                           "cls"))
 ```
 
-_Remark._: the presence of a decorator `classmethod` or `staticmethod` is unchecked, nor is the flavor of the arguments `self` and `cls` (they should be positional arguments). In other words, it is enough that a method has an argument `self` (resp. `cls`) for being categorized as an instance (resp. class) method, or else as a static method.
+_Remark._: the presence of a decorator `classmethod` or `staticmethod` is unchecked, nor is the flavor of the parameters `self` and `cls` (they should be positional parameters). In other words, it is enough that a method has an parameter `self` (resp. `cls`) for being categorized as an instance (resp. class) method, or else as a static method.
 
 ##### Example
 
@@ -4237,7 +4238,7 @@ WHERE t.span IS NULL
 
 --------------------------------------------------------------------------------
 
-#### Feature `function_argument`
+#### Feature `function_parameter`
 
 ##### Derivations
 
@@ -4257,30 +4258,36 @@ WHERE t.span IS NULL
 ```python
 1   def foobar(a, b, *c, d=42, e=None, **f):
 2       pass
+3   buzz(lambda g: g + 1)
 ```
 
 ##### Matches
 
 | Label | Lines |
 |:--|:--|
-| `function_argument:a` | 1 |
-| `function_argument:b` | 1 |
-| `function_argument:c` | 1 |
-| `function_argument:d` | 1 |
-| `function_argument:e` | 1 |
-| `function_argument:f` | 1 |
+| `function_parameter:a` | 1 |
+| `function_parameter:b` | 1 |
+| `function_parameter:c` | 1 |
+| `function_parameter:d` | 1 |
+| `function_parameter:e` | 1 |
+| `function_parameter:f` | 1 |
+| `function_parameter:g` | 3 |
 
 --------------------------------------------------------------------------------
 
-#### Feature `function_argument_flavor`
+#### Feature `function_parameter_flavor`
 
-Give the category of each function argument among:
-- `arg`: positional argument;
-- `vararg`: list of unnamed arguments;
-- `kwonlyarg`: keyword argument;
-- `kwarg`: dictionary of named arguments.
+Give the category of each function parameter among:
+- `arg`: positional parameter;
+- `vararg`: list of unnamed parameters;
+- `kwonlyarg`: keyword parameter;
+- `kwarg`: dictionary of named parameters.
 
-_Remark._ The actual name of an argument can be retrieved by joining with `function_argument` using its `path`.
+_Remark._ The actual name of an parameter can be retrieved by joining with `function_parameter` using its `path`.
+
+_Terminology._ We follow the official Python FAQ for the [difference between arguments and parameters](https://docs.python.org/3/faq/programming.html#faq-argument-vs-parameter):
+
+> **Parameters** are defined by the names that appear in a function definition, whereas **arguments** are the values actually passed to a function when calling it.
 
 ##### Specification
 
@@ -4301,14 +4308,14 @@ _Remark._ The actual name of an argument can be retrieved by joining with `funct
 
 | Label | Lines |
 |:--|:--|
-| `function_argument_flavor:arg` | 1, 1 |
-| `function_argument_flavor:kwarg` | 1 |
-| `function_argument_flavor:kwonlyarg` | 1, 1 |
-| `function_argument_flavor:vararg` | 1 |
+| `function_parameter_flavor:arg` | 1, 1 |
+| `function_parameter_flavor:kwarg` | 1 |
+| `function_parameter_flavor:kwonlyarg` | 1, 1 |
+| `function_parameter_flavor:vararg` | 1 |
 
 --------------------------------------------------------------------------------
 
-#### Feature `function_without_arguments`
+#### Feature `function_without_parameters`
 
 ##### Specification
 
@@ -4343,7 +4350,7 @@ _Remark._ The actual name of an argument can be retrieved by joining with `funct
 
 | Label | Lines |
 |:--|:--|
-| `function_without_arguments:bizz` | 1-2 |
+| `function_without_parameters:bizz` | 1-2 |
 
 --------------------------------------------------------------------------------
 
@@ -4504,7 +4511,7 @@ Match a function having another function as an argument, at least when the latte
 
 [⬆️ feature `free_call`](#feature-free_call)  
 [⬆️ feature `function`](#feature-function)  
-[⬆️ feature `function_argument`](#feature-function_argument)  
+[⬆️ feature `function_parameter`](#feature-function_parameter)  
 
 ##### Specification
 
@@ -4514,7 +4521,7 @@ SELECT "higher_order_function",
        f.span,
        f.path
 FROM t_function f
-JOIN t_function_argument a ON (a.path GLOB f.path || "*-")
+JOIN t_function_parameter a ON (a.path GLOB f.path || "*-")
 JOIN t_free_call c ON (c.name_suffix = a.name_suffix
                        AND c.path GLOB f.path || "*-")
 GROUP BY f.path,
@@ -5406,6 +5413,48 @@ Match sequential loops, along with their iteration variable(s).
 | `for:c` | 4-7 |
 | `for:i` | 8-9 |
 | `for:j` | 8-9 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `iteration_variable`
+
+The same as above, but spanning the iteration variable instead of the whole loop.
+
+##### Specification
+
+```re
+           ^(.*)/_type=For
+(
+\n(?:\1.+\n)*?\1/(?P<_1>target(/.+)?)/_pos=(?P<POS>.+) # force len(d["POS"]) != len(d["SUFFIX"])
+\n(?:\1.+\n)*?\1/(?P=_1)             /id=(?P<SUFFIX>.+)
+)+
+```
+
+##### Example
+
+```python
+1   for x in seq_1:
+2       for y in range(len(seq_3)):
+3           pass
+4       for (a, (b, c)) in seq_2:
+5           pass
+6       else:
+7           pass
+8   for (i, j) in enumerate(seq):
+9       pass
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `iteration_variable:x` | 1 |
+| `iteration_variable:y` | 2 |
+| `iteration_variable:a` | 4 |
+| `iteration_variable:b` | 4 |
+| `iteration_variable:c` | 4 |
+| `iteration_variable:i` | 8 |
+| `iteration_variable:j` | 8 |
 
 --------------------------------------------------------------------------------
 

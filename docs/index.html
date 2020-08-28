@@ -153,10 +153,6 @@ Dumped: programs_recommendations.md.
 <td align="left">5</td>
 </tr>
 <tr>
-<td align="left"><code>def/argument/arg</code></td>
-<td align="left">2</td>
-</tr>
-<tr>
 <td align="left"><code>def/function/impure</code></td>
 <td align="left">2-8</td>
 </tr>
@@ -205,27 +201,31 @@ Dumped: programs_recommendations.md.
 <td align="left">4, 4, 7, 7</td>
 </tr>
 <tr>
-<td align="left"><code>var/assignment/parallel</code></td>
+<td align="left"><code>var/assignment/explicit/parallel</code></td>
 <td align="left">4</td>
 </tr>
 <tr>
-<td align="left"><code>var/assignment/parallel/slide</code></td>
+<td align="left"><code>var/assignment/explicit/parallel/slide</code></td>
 <td align="left">7</td>
 </tr>
 <tr>
-<td align="left"><code>var/assignment/single</code></td>
+<td align="left"><code>var/assignment/explicit/single</code></td>
 <td align="left">3</td>
+</tr>
+<tr>
+<td align="left"><code>var/assignment/implicit/parameter</code></td>
+<td align="left">2</td>
 </tr>
 </tbody>
 </table>
 <p>As you can see, in this program, Paroxython identifies among others:</p>
 <ul>
 <li>the use of the <a href="https://en.wikipedia.org/wiki/Procedural_programming">procedural paradigm</a> (<code>style/procedural</code>);</li>
-<li>an <a href="https://en.wikipedia.org/wiki/Pure_function">impure</a> function (<code>def/function/impure</code>);</li>
+<li>an im<a href="https://en.wikipedia.org/wiki/Pure_function">pure function</a> (<code>def/function/impure</code>);</li>
 <li>a <code>while</code> loop (<code>flow/loop/while</code>) with a late exit (<code>flow/loop/exit/late</code>);</li>
 <li>a little bit of voodoo on lists (<code>type/sequence/list/literal/empty</code> and <code>call/method/sequence/list/append</code>);</li>
-<li>a simple <a href="https://openbookproject.net/thinkcs/python/english3e/tuples.html#tuple-assignment">tuple assignment</a> (<code>var/assignment/parallel</code>);</li>
-<li>a “sliding” tuple assignment (<code>var/assignment/parallel/slide</code>). If the denomination is unique to us, the pattern itself occurs in a number of programs: implementations of <a href="https://en.wikipedia.org/wiki/Constant-recursive_sequence">C-finite sequences</a> with C greater than 1, <a href="https://en.wikipedia.org/wiki/Greatest_common_divisor">Greatest Common Divisor</a>, <a href="https://en.wikipedia.org/wiki/Quicksort">Quicksort</a>, etc.</li>
+<li>a simple <a href="https://openbookproject.net/thinkcs/python/english3e/tuples.html#tuple-assignment">tuple assignment</a> (<code>var/assignment/explicit/parallel</code>). Note that we distinguish between explicit (with <code>=</code>) and implicit (parameters and iteration variables) assignments;</li>
+<li>a “sliding” tuple assignment (<code>var/assignment/explicit/parallel/slide</code>). If the denomination is unique to us, the pattern itself occurs in a number of programs: implementations of <a href="https://en.wikipedia.org/wiki/Constant-recursive_sequence">C-finite sequences</a> with C greater than 1, <a href="https://en.wikipedia.org/wiki/Greatest_common_divisor">Greatest Common Divisor</a>, <a href="https://en.wikipedia.org/wiki/Quicksort">Quicksort</a>, etc.</li>
 </ul>
 <p>The magic command <code>%%paroxython</code> (corresponding to the subcommand <a href="https://laowantong.github.io/paroxython/cli_tag.html"><code>tag</code></a>) only scratches the surface of the system. As shown before, to estimate the learning cost of the features and get actionable recommendations, you will need first to construct the tag database with <a href="https://laowantong.github.io/paroxython/cli_collect.html"><code>collect</code></a>, and then call <a href="https://laowantong.github.io/paroxython/cli_recommend.html"><code>recommend</code></a> on a pipeline of yours.
 <br></p>

@@ -63,7 +63,7 @@
         "style/imperative/flat": [[1,2]],
         "type/sequence/string/literal": [[2,2]],
         "type/sequence/string/literal/special/\\n": [[1,1]],
-        "var/assignment/single": [[1,1]]
+        "var/assignment/explicit/single": [[1,1]]
       }
     },
     "03_friends.py": {
@@ -88,6 +88,8 @@
         "free_call:print": [[3,3]],
         "free_call_without_result:print": [[3,3]],
         "imperative_style": [[1,3]],
+        "iteration_variable:i": [[2,2]],
+        "iteration_variable:name": [[2,2]],
         "literal:List": [[1,1]],
         "literal:Str": [[1,1],[1,1],[1,1],[1,1],[3,3]],
         "literal:Tuple": [[2,2]],
@@ -120,7 +122,8 @@
         "type/sequence/string": [[3,3]],
         "type/sequence/string/literal": [[1,1],[1,1],[1,1],[1,1],[3,3]],
         "type/sequence/tuple/literal": [[2,2]],
-        "var/assignment/single": [[1,1]]
+        "var/assignment/explicit/single": [[1,1]],
+        "var/assignment/implicit/iteration_variable": [[2,2],[2,2]]
       }
     },
     "04_fibonacci.py": {
@@ -188,8 +191,8 @@
         "type/sequence/string": [[3,3]],
         "type/sequence/string/literal": [[3,3]],
         "type/sequence/tuple/literal": [[1,1],[1,1],[4,4],[4,4]],
-        "var/assignment/parallel": [[1,1]],
-        "var/assignment/parallel/slide": [[4,4]]
+        "var/assignment/explicit/parallel": [[1,1]],
+        "var/assignment/explicit/parallel/slide": [[4,4]]
       }
     },
     "05_greet.py": {
@@ -204,8 +207,8 @@
         "free_call_without_result:greet": [[3,3],[4,4],[5,5]],
         "free_call_without_result:print": [[2,2]],
         "function:greet": [[1,2]],
-        "function_argument:name": [[1,1]],
-        "function_argument_flavor:arg": [[1,1]],
+        "function_parameter:name": [[1,1]],
+        "function_parameter_flavor:arg": [[1,1]],
         "function_returning_nothing:greet": [[1,2]],
         "internal_free_call:greet": [[3,3],[4,4],[5,5]],
         "literal:Str": [[2,2],[3,3],[4,4],[5,5]],
@@ -221,12 +224,12 @@
       "taxa": {
         "call/function": [[3,3],[4,4],[5,5]],
         "call/function/builtin/print": [[2,2]],
-        "def/argument/arg": [[1,1]],
         "def/procedure": [[1,2]],
         "meta/program": [[1,5]],
         "meta/sloc/5": [[1,5]],
         "style/procedural": [[1,5]],
-        "type/sequence/string/literal": [[2,2],[3,3],[4,4],[5,5]]
+        "type/sequence/string/literal": [[2,2],[3,3],[4,4],[5,5]],
+        "var/assignment/implicit/parameter": [[1,1]]
       }
     },
     "06_regex.py": {
@@ -247,6 +250,7 @@
         "imperative_style": [[1,6]],
         "import:re": [[1,1]],
         "import_module:re": [[1,1]],
+        "iteration_variable:test_string": [[2,2]],
         "literal:List": [[2,2]],
         "literal:Str": [[2,2],[2,2],[3,3],[4,4],[6,6]],
         "loop:for": [[2,6]],
@@ -277,7 +281,8 @@
         "style/imperative": [[1,6]],
         "type/sequence/list/literal": [[2,2]],
         "type/sequence/string/literal": [[2,2],[2,2],[4,4],[6,6]],
-        "type/sequence/string/literal/special/\\d": [[3,3]]
+        "type/sequence/string/literal/special/\\d": [[3,3]],
+        "var/assignment/implicit/iteration_variable": [[2,2]]
       }
     },
     "07_grocery_bill.py": {
@@ -349,7 +354,7 @@
         "type/number/integer/literal": [[2,2],[2,2]],
         "type/number/magic": [[1,1],[1,1],[2,2]],
         "type/sequence/string/literal": [[1,1],[1,1],[2,2],[2,2],[4,4]],
-        "var/assignment/single": [[1,1],[2,2],[3,3]]
+        "var/assignment/explicit/single": [[1,1],[2,2],[3,3]]
       }
     },
     "08_arguments.py": {
@@ -415,7 +420,7 @@
         "type/number/integer": [[3,3]],
         "type/number/integer/literal": [[3,3]],
         "type/sequence/string/literal": [[4,4],[6,6]],
-        "var/assignment/single": [[3,3]]
+        "var/assignment/explicit/single": [[3,3]]
       }
     },
     "09_indent.py": {
@@ -445,6 +450,8 @@
         "imperative_style": [[1,8]],
         "import:glob": [[1,1]],
         "import_module:glob": [[1,1]],
+        "iteration_variable:file_name": [[3,3]],
+        "iteration_variable:line": [[6,6]],
         "literal:Str": [[2,2],[4,4],[7,7]],
         "loop:for": [[3,8],[6,7]],
         "loop_with_late_exit:for": [[3,8],[6,7]],
@@ -483,7 +490,8 @@
         "style/imperative": [[1,8]],
         "type/sequence/string": [[7,7]],
         "type/sequence/string/literal": [[2,2],[4,4],[7,7]],
-        "var/assignment/single": [[2,2]]
+        "var/assignment/explicit/single": [[2,2]],
+        "var/assignment/implicit/iteration_variable": [[3,3],[6,6]]
       }
     },
     "10_time.py": {
@@ -524,6 +532,7 @@
         "import_module:time": [[1,1]],
         "import_name:localtime": [[1,1]],
         "index:activity_time": [[14,14]],
+        "iteration_variable:activity_time": [[12,12]],
         "literal:17": [[5,5]],
         "literal:18": [[6,6]],
         "literal:20": [[7,7]],
@@ -583,7 +592,8 @@
         "type/number/integer/literal": [[3,3],[4,4],[5,5],[6,6],[7,7],[8,8]],
         "type/number/magic": [[3,3],[4,4],[5,5],[6,6],[7,7],[8,8]],
         "type/sequence/string/literal": [[3,3],[4,4],[5,5],[6,6],[7,7],[8,8],[17,17]],
-        "var/assignment/single": [[2,2],[10,10],[11,11]]
+        "var/assignment/explicit/single": [[2,2],[10,10],[11,11]],
+        "var/assignment/implicit/iteration_variable": [[12,12]]
       }
     },
     "11_bottles.py": {
@@ -647,9 +657,9 @@
         "type/number/magic": [[7,7]],
         "type/sequence/string/literal/special/\\n": [[6,6]],
         "type/sequence/tuple/literal": [[9,9]],
-        "var/assignment/augmented/Sub": [[10,10]],
-        "var/assignment/constant": [[1,1]],
-        "var/assignment/single": [[1,1],[7,7]]
+        "var/assignment/explicit/augmented/Sub": [[10,10]],
+        "var/assignment/explicit/constant": [[1,1]],
+        "var/assignment/explicit/single": [[1,1],[7,7]]
       }
     },
     "12_classes.py": {
@@ -679,10 +689,10 @@
         "function:deposit": [[4,5]],
         "function:overdrawn": [[8,9]],
         "function:withdraw": [[6,7]],
-        "function_argument:amount": [[4,4],[6,6]],
-        "function_argument:initial_balance": [[2,2]],
-        "function_argument:self": [[2,2],[4,4],[6,6],[8,8]],
-        "function_argument_flavor:arg": [[2,2],[2,2],[4,4],[4,4],[6,6],[6,6],[8,8]],
+        "function_parameter:amount": [[4,4],[6,6]],
+        "function_parameter:initial_balance": [[2,2]],
+        "function_parameter:self": [[2,2],[4,4],[6,6],[8,8]],
+        "function_parameter_flavor:arg": [[2,2],[2,2],[4,4],[4,4],[6,6],[6,6],[8,8]],
         "function_returning_nothing:__init__": [[2,3]],
         "function_returning_nothing:deposit": [[4,5]],
         "function_returning_nothing:withdraw": [[6,7]],
@@ -733,7 +743,6 @@
         "call/function/builtin/print": [[12,12]],
         "call/method": [[11,11],[12,12]],
         "condition/inequality": [[9,9]],
-        "def/argument/arg": [[2,2],[2,2],[4,4],[4,4],[6,6],[6,6],[8,8]],
         "def/class": [[1,9]],
         "def/function": [[8,9]],
         "def/method/flavor/instance": [[2,3],[4,5],[6,7],[8,9]],
@@ -746,10 +755,12 @@
         "type/number/integer/literal": [[10,10],[11,11]],
         "type/number/integer/literal/zero": [[2,2],[9,9]],
         "type/number/magic": [[10,10],[11,11]],
-        "var/assignment": [[3,3]],
-        "var/assignment/augmented/Add": [[5,5]],
-        "var/assignment/augmented/Sub": [[7,7]],
-        "var/assignment/single": [[10,10]]
+        "var/assignment/explicit": [[3,3]],
+        "var/assignment/explicit/augmented/Add": [[5,5]],
+        "var/assignment/explicit/augmented/Sub": [[7,7]],
+        "var/assignment/explicit/single": [[10,10]],
+        "var/assignment/implicit/parameter": [[2,2],[4,4],[6,6]],
+        "var/assignment/implicit/parameter/self": [[2,2],[4,4],[6,6],[8,8]]
       }
     },
     "13_unit_testing.py": {
@@ -783,9 +794,9 @@
         "free_call:sorted": [[3,3]],
         "function:median": [[2,8]],
         "function:testMedian": [[10,11]],
-        "function_argument:pool": [[2,2]],
-        "function_argument:self": [[10,10]],
-        "function_argument_flavor:arg": [[2,2],[10,10]],
+        "function_parameter:pool": [[2,2]],
+        "function_parameter:self": [[10,10]],
+        "function_parameter_flavor:arg": [[2,2],[10,10]],
         "function_returning_nothing:testMedian": [[10,11]],
         "function_returning_something:median": [[2,8]],
         "if": [[5,8]],
@@ -849,7 +860,6 @@
         "call/method": [[11,11]],
         "condition/divisibility/parity": [[5,5]],
         "condition/equality": [[5,5]],
-        "def/argument/arg": [[2,2],[10,10]],
         "def/class": [[9,11]],
         "def/function/impure": [[2,8]],
         "def/import/standard/unittest": [[1,1]],
@@ -870,7 +880,9 @@
         "type/number/integer/literal": [[5,5],[5,5],[6,6],[6,6],[8,8],[8,8],[8,8],[8,8],[11,11],[11,11],[11,11],[11,11],[11,11],[11,11],[11,11],[11,11],[11,11],[11,11]],
         "type/number/magic": [[11,11],[11,11],[11,11],[11,11],[11,11],[11,11],[11,11],[11,11]],
         "type/sequence/list/literal": [[11,11]],
-        "var/assignment/single": [[3,3],[4,4]]
+        "var/assignment/explicit/single": [[3,3],[4,4]],
+        "var/assignment/implicit/parameter": [[2,2]],
+        "var/assignment/implicit/parameter/self": [[10,10]]
       }
     },
     "14_median.py": {
@@ -900,8 +912,8 @@
         "free_call:len": [[3,3]],
         "free_call:sorted": [[2,2]],
         "function:median": [[1,7]],
-        "function_argument:pool": [[1,1]],
-        "function_argument_flavor:arg": [[1,1]],
+        "function_parameter:pool": [[1,1]],
+        "function_parameter_flavor:arg": [[1,1]],
         "function_returning_something:median": [[1,7]],
         "if": [[4,7]],
         "if_else_branch": [[7,7]],
@@ -937,7 +949,6 @@
         "call/function/builtin/sorted": [[2,2]],
         "condition/divisibility/parity": [[4,4]],
         "condition/equality": [[4,4]],
-        "def/argument/arg": [[1,1]],
         "def/function/impure": [[1,7]],
         "def/return/something": [[5,5],[7,7]],
         "flow/conditional": [[4,7]],
@@ -952,7 +963,8 @@
         "subscript/index": [[5,5],[7,7],[7,7]],
         "type/number/integer": [[5,5],[7,7],[7,7]],
         "type/number/integer/literal": [[4,4],[4,4],[5,5],[5,5],[7,7],[7,7],[7,7],[7,7]],
-        "var/assignment/single": [[2,2],[3,3]]
+        "var/assignment/explicit/single": [[2,2],[3,3]],
+        "var/assignment/implicit/parameter": [[1,1]]
       }
     },
     "15_itertools_groupby.py": {
@@ -980,6 +992,8 @@
         "import:itertools:groupby": [[1,1]],
         "import_module:itertools": [[1,1]],
         "import_name:groupby": [[1,1]],
+        "iteration_variable:frags": [[7,7]],
+        "iteration_variable:has_chars": [[7,7]],
         "literal:Str": [[6,6],[9,9]],
         "literal:Tuple": [[7,7]],
         "loop:for": [[7,9]],
@@ -1017,7 +1031,8 @@
         "type/sequence/string/literal": [[9,9]],
         "type/sequence/string/literal/special/\\n": [[6,6]],
         "type/sequence/tuple/literal": [[7,7]],
-        "var/assignment/single": [[2,2]]
+        "var/assignment/explicit/single": [[2,2]],
+        "var/assignment/implicit/iteration_variable": [[7,7],[7,7]]
       }
     },
     "16_csv.py": {
@@ -1073,14 +1088,19 @@
         "free_call:print": [[18,18]],
         "free_call_without_result:print": [[18,18]],
         "function:cmp": [[2,3]],
-        "function_argument:a": [[2,2]],
-        "function_argument:b": [[2,2]],
-        "function_argument_flavor:arg": [[2,2],[2,2]],
+        "function_parameter:a": [[2,2]],
+        "function_parameter:b": [[2,2]],
+        "function_parameter_flavor:arg": [[2,2],[2,2]],
         "function_returning_something:cmp": [[2,3]],
         "import:csv": [[1,1]],
         "import_module:csv": [[1,1]],
         "index:_": [[17,17]],
         "internal_free_call:cmp": [[17,17]],
+        "iteration_variable:change": [[16,16]],
+        "iteration_variable:name": [[16,16]],
+        "iteration_variable:pct": [[16,16]],
+        "iteration_variable:price": [[16,16]],
+        "iteration_variable:ticker": [[16,16]],
         "literal:-0.13": [[10,10]],
         "literal:-1": [[15,15]],
         "literal:-1.4901": [[10,10]],
@@ -1153,7 +1173,6 @@
         "call/method": [[5,5],[6,6],[14,14]],
         "call/method/sequence/string/format": [[18,18]],
         "condition/inequality": [[3,3],[3,3]],
-        "def/argument/arg": [[2,2],[2,2]],
         "def/function/pure": [[2,3]],
         "def/import/standard/csv": [[1,1]],
         "def/return/something": [[3,3]],
@@ -1177,7 +1196,9 @@
         "type/sequence/string/literal": [[4,4],[4,4],[8,8],[8,8],[9,9],[9,9],[10,10],[10,10],[13,13],[13,13],[15,15],[15,15],[15,15],[18,18]],
         "type/sequence/string/literal/empty": [[4,4]],
         "type/sequence/tuple/literal": [[16,16]],
-        "var/assignment/single": [[5,5],[14,14],[15,15],[17,17]]
+        "var/assignment/explicit/single": [[5,5],[14,14],[15,15],[17,17]],
+        "var/assignment/implicit/iteration_variable": [[16,16],[16,16],[16,16],[16,16],[16,16]],
+        "var/assignment/implicit/parameter": [[2,2],[2,2]]
       }
     },
     "18_queens.py": {
@@ -1229,10 +1250,10 @@
         "free_call_without_result:print": [[20,20]],
         "function:solve": [[9,17]],
         "function:under_attack": [[2,8]],
-        "function_argument:col": [[2,2]],
-        "function_argument:n": [[9,9]],
-        "function_argument:queens": [[2,2]],
-        "function_argument_flavor:arg": [[2,2],[2,2],[9,9]],
+        "function_parameter:col": [[2,2]],
+        "function_parameter:n": [[9,9]],
+        "function_parameter:queens": [[2,2]],
+        "function_parameter_flavor:arg": [[2,2],[2,2],[9,9]],
         "function_returning_something:solve": [[9,17]],
         "function_returning_something:under_attack": [[2,8]],
         "if": [[6,7],[10,11]],
@@ -1249,6 +1270,9 @@
         "impure_function:under_attack": [[2,8]],
         "internal_free_call:solve": [[12,12],[19,19]],
         "internal_free_call:under_attack": [[17,17]],
+        "iteration_variable:answer": [[19,19]],
+        "iteration_variable:c": [[4,4]],
+        "iteration_variable:r": [[4,4]],
         "literal:0": [[10,10]],
         "literal:1": [[5,5],[5,5],[12,12],[14,14],[17,17]],
         "literal:8": [[1,1]],
@@ -1307,7 +1331,6 @@
         "call/function/builtin/reversed": [[4,4]],
         "condition/belonging": [[6,6]],
         "condition/equality": [[10,10]],
-        "def/argument/arg": [[2,2],[2,2],[9,9]],
         "def/function/impure": [[2,8],[9,17]],
         "def/recursive/body": [[9,17]],
         "def/recursive/call_count/1": [[9,17]],
@@ -1332,10 +1355,12 @@
         "type/sequence/list/literal": [[11,11],[14,14]],
         "type/sequence/list/literal/empty": [[11,11]],
         "type/sequence/tuple/literal": [[4,4],[5,5],[5,5],[6,6],[14,14]],
-        "var/assignment/chained": [[3,3]],
-        "var/assignment/constant": [[1,1]],
-        "var/assignment/parallel": [[5,5]],
-        "var/assignment/single": [[1,1],[12,12]]
+        "var/assignment/explicit/chained": [[3,3]],
+        "var/assignment/explicit/constant": [[1,1]],
+        "var/assignment/explicit/parallel": [[5,5]],
+        "var/assignment/explicit/single": [[1,1],[12,12]],
+        "var/assignment/implicit/iteration_variable": [[4,4],[4,4],[19,19]],
+        "var/assignment/implicit/parameter": [[2,2],[2,2],[9,9]]
       }
     },
     "20_prime_numbers.py": {
@@ -1367,7 +1392,7 @@
         "free_call_without_arguments:iter_primes": [[8,8]],
         "free_call_without_result:print": [[11,11]],
         "function:iter_primes": [[2,7]],
-        "function_without_arguments:iter_primes": [[2,7]],
+        "function_without_parameters:iter_primes": [[2,7]],
         "generator:iter_primes": [[2,7]],
         "if": [[9,10]],
         "if_test_atom:1000": [[9,9]],
@@ -1378,6 +1403,7 @@
         "import_module:itertools": [[1,1]],
         "infinite_while": [[4,7]],
         "internal_free_call:iter_primes": [[8,8]],
+        "iteration_variable:p": [[8,8]],
         "literal:1000": [[9,9]],
         "literal:2": [[3,3]],
         "literal:True": [[4,4]],
@@ -1420,9 +1446,9 @@
         "call/function/without_arguments": [[8,8]],
         "call/method/sequence_duck/count": [[3,3]],
         "condition/inequality": [[9,9]],
-        "def/argument/no": [[2,7]],
         "def/generator": [[2,7]],
         "def/import/standard/itertools": [[1,1]],
+        "def/no_parameter": [[2,7]],
         "flow/conditional/no_else": [[9,10]],
         "flow/loop/exit/early/break": [[8,11]],
         "flow/loop/exit/late": [[4,7]],
@@ -1436,7 +1462,8 @@
         "type/number/integer/literal": [[3,3],[9,9]],
         "type/number/magic": [[9,9]],
         "type/sequence": [[3,3]],
-        "var/assignment/single": [[3,3],[5,5],[7,7]]
+        "var/assignment/explicit/single": [[3,3],[5,5],[7,7]],
+        "var/assignment/implicit/iteration_variable": [[8,8]]
       }
     },
     "21_xml_html_parsing.py": {
@@ -1472,6 +1499,7 @@
         "imperative_style": [[1,14]],
         "import:xml.etree.ElementTree": [[8,8]],
         "import_module:xml.etree.ElementTree": [[8,8]],
+        "iteration_variable:ingredient": [[11,11]],
         "literal:Set": [[10,10]],
         "literal:Str": [[7,7],[10,10],[10,10],[11,11],[13,13],[14,14]],
         "literal:Tuple": [[12,12]],
@@ -1520,8 +1548,9 @@
         "type/sequence/string/literal": [[10,10],[10,10],[11,11],[13,13],[14,14]],
         "type/sequence/string/literal/special/\\n": [[7,7]],
         "type/sequence/tuple/literal": [[12,12]],
-        "var/assignment/parallel/more_than_two": [[12,12]],
-        "var/assignment/single": [[1,1],[9,9],[10,10]]
+        "var/assignment/explicit/parallel/more_than_two": [[12,12]],
+        "var/assignment/explicit/single": [[1,1],[9,9],[10,10]],
+        "var/assignment/implicit/iteration_variable": [[11,11]]
       }
     },
     "28_queens.py": {
@@ -1581,8 +1610,8 @@
         "free_tail_call:add_queen": [[18,18]],
         "function:add_queen": [[10,21]],
         "function:validate": [[4,9]],
-        "function_argument:queens": [[4,4],[10,10]],
-        "function_argument_flavor:arg": [[4,4],[10,10]],
+        "function_parameter:queens": [[4,4],[10,10]],
+        "function_parameter_flavor:arg": [[4,4],[10,10]],
         "function_returning_nothing:validate": [[4,9]],
         "function_returning_something:add_queen": [[10,21]],
         "if": [[8,9],[15,18]],
@@ -1599,6 +1628,8 @@
         "index:-1": [[5,5]],
         "internal_free_call:add_queen": [[18,18],[22,22]],
         "internal_free_call:validate": [[14,14]],
+        "iteration_variable:i": [[11,11]],
+        "iteration_variable:r": [[6,6]],
         "literal:-1": [[5,5],[6,6]],
         "literal:1": [[7,7],[7,7],[24,24]],
         "literal:8": [[1,1]],
@@ -1676,7 +1707,6 @@
         "call/method/sequence/string/join": [[24,24]],
         "condition/belonging": [[8,8]],
         "condition/equality": [[15,15]],
-        "def/argument/arg": [[4,4],[10,10]],
         "def/class": [[2,3]],
         "def/function/impure": [[10,21]],
         "def/procedure": [[4,9]],
@@ -1710,10 +1740,12 @@
         "type/sequence/string/literal": [[24,24],[24,24],[24,24]],
         "type/sequence/string/literal/special/\\n": [[24,24]],
         "type/sequence/tuple/literal": [[7,7],[7,7],[8,8]],
-        "var/assignment/chained": [[5,5]],
-        "var/assignment/constant": [[1,1]],
-        "var/assignment/parallel": [[7,7]],
-        "var/assignment/single": [[1,1],[12,12],[22,22]]
+        "var/assignment/explicit/chained": [[5,5]],
+        "var/assignment/explicit/constant": [[1,1]],
+        "var/assignment/explicit/parallel": [[7,7]],
+        "var/assignment/explicit/single": [[1,1],[12,12],[22,22]],
+        "var/assignment/implicit/iteration_variable": [[6,6],[11,11]],
+        "var/assignment/implicit/parameter": [[4,4],[10,10]]
       }
     },
     "33_guess_the_number.py": {
@@ -1823,8 +1855,8 @@
         "type/sequence/string": [[5,5],[16,16],[18,18]],
         "type/sequence/string/literal": [[5,5],[7,7],[10,10],[12,12],[16,16],[18,18]],
         "type/sequence/string/literal/special/\\n": [[3,3]],
-        "var/assignment/augmented/Add": [[8,8]],
-        "var/assignment/single": [[2,2],[3,3],[4,4],[7,7]]
+        "var/assignment/explicit/augmented/Add": [[8,8]],
+        "var/assignment/explicit/single": [[2,2],[3,3],[4,4],[7,7]]
       }
     }
   },
@@ -2835,40 +2867,40 @@
     "function:withdraw": [
       "12_classes.py"
     ],
-    "function_argument:a": [
+    "function_parameter:a": [
       "16_csv.py"
     ],
-    "function_argument:amount": [
+    "function_parameter:amount": [
       "12_classes.py"
     ],
-    "function_argument:b": [
+    "function_parameter:b": [
       "16_csv.py"
     ],
-    "function_argument:col": [
+    "function_parameter:col": [
       "18_queens.py"
     ],
-    "function_argument:initial_balance": [
+    "function_parameter:initial_balance": [
       "12_classes.py"
     ],
-    "function_argument:n": [
+    "function_parameter:n": [
       "18_queens.py"
     ],
-    "function_argument:name": [
+    "function_parameter:name": [
       "05_greet.py"
     ],
-    "function_argument:pool": [
+    "function_parameter:pool": [
       "13_unit_testing.py",
       "14_median.py"
     ],
-    "function_argument:queens": [
+    "function_parameter:queens": [
       "18_queens.py",
       "28_queens.py"
     ],
-    "function_argument:self": [
+    "function_parameter:self": [
       "12_classes.py",
       "13_unit_testing.py"
     ],
-    "function_argument_flavor:arg": [
+    "function_parameter_flavor:arg": [
       "05_greet.py",
       "12_classes.py",
       "13_unit_testing.py",
@@ -2914,7 +2946,7 @@
     "function_returning_something:under_attack": [
       "18_queens.py"
     ],
-    "function_without_arguments:iter_primes": [
+    "function_without_parameters:iter_primes": [
       "20_prime_numbers.py"
     ],
     "generator:iter_primes": [
@@ -3185,6 +3217,60 @@
     ],
     "internal_free_call:validate": [
       "28_queens.py"
+    ],
+    "iteration_variable:activity_time": [
+      "10_time.py"
+    ],
+    "iteration_variable:answer": [
+      "18_queens.py"
+    ],
+    "iteration_variable:c": [
+      "18_queens.py"
+    ],
+    "iteration_variable:change": [
+      "16_csv.py"
+    ],
+    "iteration_variable:file_name": [
+      "09_indent.py"
+    ],
+    "iteration_variable:frags": [
+      "15_itertools_groupby.py"
+    ],
+    "iteration_variable:has_chars": [
+      "15_itertools_groupby.py"
+    ],
+    "iteration_variable:i": [
+      "03_friends.py",
+      "28_queens.py"
+    ],
+    "iteration_variable:ingredient": [
+      "21_xml_html_parsing.py"
+    ],
+    "iteration_variable:line": [
+      "09_indent.py"
+    ],
+    "iteration_variable:name": [
+      "03_friends.py",
+      "16_csv.py"
+    ],
+    "iteration_variable:p": [
+      "20_prime_numbers.py"
+    ],
+    "iteration_variable:pct": [
+      "16_csv.py"
+    ],
+    "iteration_variable:price": [
+      "16_csv.py"
+    ],
+    "iteration_variable:r": [
+      "18_queens.py",
+      "28_queens.py"
+    ],
+    "iteration_variable:test_string": [
+      "06_regex.py"
+    ],
+    "iteration_variable:ticker": [
+      "16_csv.py"
     ],
     "literal:-0.13": [
       "16_csv.py"
@@ -4472,18 +4558,6 @@
       "20_prime_numbers.py",
       "33_guess_the_number.py"
     ],
-    "def/argument/arg": [
-      "05_greet.py",
-      "12_classes.py",
-      "13_unit_testing.py",
-      "14_median.py",
-      "16_csv.py",
-      "18_queens.py",
-      "28_queens.py"
-    ],
-    "def/argument/no": [
-      "20_prime_numbers.py"
-    ],
     "def/class": [
       "12_classes.py",
       "13_unit_testing.py",
@@ -4540,6 +4614,9 @@
     ],
     "def/method/naming/magic/__init__": [
       "12_classes.py"
+    ],
+    "def/no_parameter": [
+      "20_prime_numbers.py"
     ],
     "def/procedure": [
       "05_greet.py",
@@ -4976,38 +5053,38 @@
       "21_xml_html_parsing.py",
       "28_queens.py"
     ],
-    "var/assignment": [
+    "var/assignment/explicit": [
       "12_classes.py"
     ],
-    "var/assignment/augmented/Add": [
+    "var/assignment/explicit/augmented/Add": [
       "12_classes.py",
       "33_guess_the_number.py"
     ],
-    "var/assignment/augmented/Sub": [
+    "var/assignment/explicit/augmented/Sub": [
       "11_bottles.py",
       "12_classes.py"
     ],
-    "var/assignment/chained": [
+    "var/assignment/explicit/chained": [
       "18_queens.py",
       "28_queens.py"
     ],
-    "var/assignment/constant": [
+    "var/assignment/explicit/constant": [
       "11_bottles.py",
       "18_queens.py",
       "28_queens.py"
     ],
-    "var/assignment/parallel": [
+    "var/assignment/explicit/parallel": [
       "04_fibonacci.py",
       "18_queens.py",
       "28_queens.py"
     ],
-    "var/assignment/parallel/more_than_two": [
+    "var/assignment/explicit/parallel/more_than_two": [
       "21_xml_html_parsing.py"
     ],
-    "var/assignment/parallel/slide": [
+    "var/assignment/explicit/parallel/slide": [
       "04_fibonacci.py"
     ],
-    "var/assignment/single": [
+    "var/assignment/explicit/single": [
       "02_input_name.py",
       "03_friends.py",
       "07_grocery_bill.py",
@@ -5025,6 +5102,31 @@
       "21_xml_html_parsing.py",
       "28_queens.py",
       "33_guess_the_number.py"
+    ],
+    "var/assignment/implicit/iteration_variable": [
+      "03_friends.py",
+      "06_regex.py",
+      "09_indent.py",
+      "10_time.py",
+      "15_itertools_groupby.py",
+      "16_csv.py",
+      "18_queens.py",
+      "20_prime_numbers.py",
+      "21_xml_html_parsing.py",
+      "28_queens.py"
+    ],
+    "var/assignment/implicit/parameter": [
+      "05_greet.py",
+      "12_classes.py",
+      "13_unit_testing.py",
+      "14_median.py",
+      "16_csv.py",
+      "18_queens.py",
+      "28_queens.py"
+    ],
+    "var/assignment/implicit/parameter/self": [
+      "12_classes.py",
+      "13_unit_testing.py"
     ]
   },
   "importations": {

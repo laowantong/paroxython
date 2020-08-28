@@ -17,8 +17,8 @@ a = b # assignment
 # ----------------------------------------------------------------------------------------
 def print_collatz(n): # added_block_label (-> +7)
                       # function:print_collatz (-> +7)
-                      # function_argument:n
-                      # function_argument_flavor:arg
+                      # function_parameter:n
+                      # function_parameter_flavor:arg
                       # function_returning_nothing:print_collatz (-> +7)
                       # node:FunctionDef (-> +7)
                       # node:arg
@@ -120,6 +120,7 @@ for i in range(1, 101): # call_argument:1
                         # for:i (-> +8)
                         # for_range:1:101 (-> +8)
                         # free_call:range
+                        # iteration_variable:i
                         # literal:1
                         # literal:101
                         # loop:for (-> +8)
@@ -228,8 +229,8 @@ import fizzbuzz # functional_style (-> +2)
                 # one_liner_style (-> +2)
                 # whole_span:3 (-> +2)
 def is_even(n): # function:is_even (-> +1)
-                # function_argument:n
-                # function_argument_flavor:arg
+                # function_parameter:n
+                # function_parameter_flavor:arg
                 # function_returning_something:is_even (-> +1)
                 # node:FunctionDef (-> +1)
                 # node:arg

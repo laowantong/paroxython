@@ -154,7 +154,7 @@ Again, those are mainly practical choices. After all, an `operator` is nothing m
 
 ### Zooming out: `pattern`
 
-Now this is arguably the most interesting feature to tag in a beginner-level program. Under `pattern`, you will find numerous variants of the invaluable [accumulation pattern](https://en.wikipedia.org/wiki/Fold_(higher-order_function)) (counting, summing, filtering, finding the “best” element, etc.), but also some early-exit patterns (testing for an universal or existential property, finding the first “good” element, etc.), whether by traversing a sequence or evolving a state. A (currently) small number of common expression patterns are also available. However, the common assignment idioms (such as incrementation, swap, slide, conditional  assignment) are classified under `var/assignment`.
+Now this is arguably the most interesting feature to tag in a beginner-level program. Under `pattern`, you will find numerous variants of the invaluable [accumulation pattern](https://en.wikipedia.org/wiki/Fold_(higher-order_function)) (counting, summing, filtering, finding the “best” element, etc.), but also some early-exit patterns (testing for an universal or existential property, finding the first “good” element, etc.), whether by traversing a sequence or evolving a state. A (currently) small number of common expression patterns are also available. However, the common assignment idioms (such as incrementation, swap, slide, conditional  assignment) are classified under `var/assignment/explicit`.
 
 Although the relative size of `pattern` is the smallest of the taxonomy, note that it is almost that of `meta/program` (which has one occurrence per program): in other words, almost all programs feature such a pattern (which spans several lines).
 

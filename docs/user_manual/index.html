@@ -161,10 +161,6 @@ var data = google.visualization.arrayToDataTable([['node', 'occurrences'],
 ['• condition identity not.', 54],
 ['• condition inequality.', 770],
 ['• condition inequality chained 2.', 18],
-['• def argument arg.', 2480],
-['• def argument kwarg.', 6],
-['• def argument no.', 143],
-['• def argument vararg.', 5],
 ['• def class.', 104],
 ['• def decorated.', 34],
 ['• def function.', 303],
@@ -367,6 +363,7 @@ var data = google.visualization.arrayToDataTable([['node', 'occurrences'],
 ['• def method naming magic __sub__.', 4],
 ['• def nested.', 14],
 ['• def nested closure.', 2],
+['• def no_parameter.', 143],
 ['• def procedure.', 419],
 ['• def procedure test.', 48],
 ['• def recursive body.', 91],
@@ -531,34 +528,40 @@ var data = google.visualization.arrayToDataTable([['node', 'occurrences'],
 ['• type sequence string literal special emojis.', 2],
 ['• type sequence tuple.', 7],
 ['• type sequence tuple literal.', 891],
-['• var assignment.', 569],
-['• var assignment augmented Add.', 405],
-['• var assignment augmented BitXor.', 6],
-['• var assignment augmented Div.', 3],
-['• var assignment augmented FloorDiv.', 6],
-['• var assignment augmented Mod.', 2],
-['• var assignment augmented Mult.', 26],
-['• var assignment augmented Pow.', 1],
-['• var assignment augmented RShift.', 6],
-['• var assignment augmented Sub.', 50],
-['• var assignment augmented subscript Add.', 29],
-['• var assignment augmented subscript Mult.', 1],
-['• var assignment augmented subscript Sub.', 13],
-['• var assignment chained.', 6],
-['• var assignment conditional compact.', 21],
-['• var assignment conditional corrective.', 14],
-['• var assignment conditional verbose.', 38],
-['• var assignment constant.', 178],
-['• var assignment index.', 381],
-['• var assignment negate.', 1],
-['• var assignment parallel.', 163],
-['• var assignment parallel more_than_two.', 35],
-['• var assignment parallel slide.', 11],
-['• var assignment parallel swap.', 30],
-['• var assignment sequence swap.', 13],
-['• var assignment single.', 3458],
-['• var assignment slice.', 4],
-['• var assignment throwaway.', 5],
+['• var assignment explicit.', 569],
+['• var assignment explicit augmented Add.', 405],
+['• var assignment explicit augmented BitXor.', 6],
+['• var assignment explicit augmented Div.', 3],
+['• var assignment explicit augmented FloorDiv.', 6],
+['• var assignment explicit augmented Mod.', 2],
+['• var assignment explicit augmented Mult.', 26],
+['• var assignment explicit augmented Pow.', 1],
+['• var assignment explicit augmented RShift.', 6],
+['• var assignment explicit augmented Sub.', 50],
+['• var assignment explicit augmented subscript Add.', 29],
+['• var assignment explicit augmented subscript Mult.', 1],
+['• var assignment explicit augmented subscript Sub.', 13],
+['• var assignment explicit chained.', 6],
+['• var assignment explicit conditional compact.', 21],
+['• var assignment explicit conditional corrective.', 14],
+['• var assignment explicit conditional verbose.', 38],
+['• var assignment explicit constant.', 178],
+['• var assignment explicit index.', 381],
+['• var assignment explicit negate.', 1],
+['• var assignment explicit parallel.', 163],
+['• var assignment explicit parallel more_than_two.', 35],
+['• var assignment explicit parallel slide.', 11],
+['• var assignment explicit parallel swap.', 30],
+['• var assignment explicit sequence swap.', 13],
+['• var assignment explicit single.', 3458],
+['• var assignment explicit slice.', 4],
+['• var assignment explicit throwaway.', 5],
+['• var assignment implicit iteration_variable.', 820],
+['• var assignment implicit iteration_variable throwaway.', 11],
+['• var assignment implicit parameter.', 1912],
+['• var assignment implicit parameter kwarg.', 6],
+['• var assignment implicit parameter self.', 568],
+['• var assignment implicit parameter vararg.', 5],
 ['• var deletion index.', 7],
 ['• var deletion unbinding.', 3]]);
 var options = {
@@ -622,7 +625,7 @@ tree.draw(data, options);
 FOO = 42
 FOO = ComputeSquare(FOO) # bad: redefinition of a constant
 </code></pre>
-<p>&hellip; Paroxython will wrongly detect two definitions of constants (<code>var/assignment/constant</code>) and the instanciation of a class (<code>call/class/constructor</code>). To make these false positives disappear, just write:</p>
+<p>&hellip; Paroxython will wrongly detect two definitions of constants (<code>var/assignment/explicit/constant</code>) and the instanciation of a class (<code>call/class/constructor</code>). To make these false positives disappear, just write:</p>
 <pre><code class="python">def compute_square(x):
     return x * x
 
@@ -1053,7 +1056,7 @@ call/method/sequence/list/\1    member_call_method:list:(count|index|pop|...)
 <p>Again, those are mainly practical choices. After all, an <code>operator</code> is nothing more than an unassuming function call with a funny name and a funny syntax. And a <code>condition</code><sup id="fnref:condition"><a class="footnote-ref" href="#fn:condition" rel="footnote">12</a></sup>, a combination of function calls which happens to evaluate to a particular <code>type</code>. As for the creation of the root <code>subscript</code>, it comes from the observation that an lot of exciting programs can be written with sequences before venturing out to direct access (that is, as long as we treat Python lists as <a href="https://en.wikipedia.org/wiki/List_(abstract_data_type)">lists</a> and not <a href="https://en.wikipedia.org/wiki/Array_data_structure">arrays</a>). Not that in our default taxonomy, <code>subscript</code> includes slicing and dictionary access too.</p>
 <h3 id="zooming-out-pattern">Zooming out: <code>pattern</code></h3>
 <p>Now this is arguably the most interesting feature to tag in a beginner-level program. Under <code>pattern</code>, you will find numerous variants of the invaluable <a href="https://en.wikipedia.org/wiki/Fold_(higher-order_function)">accumulation pattern</a> (counting, summing, filtering, finding the “best” element, etc.), but also some early-exit patterns (testing for an universal or existential property, finding the first “good” element, etc.), whether by traversing a sequence or evolving a state. A (currently) small number of common expression patterns are also available. However, the common assignment idioms (such as incrementation, swap, slide, conditional
-assignment) are classified under <code>var/assignment</code>.</p>
+assignment) are classified under <code>var/assignment/explicit</code>.</p>
 <p>Although the relative size of <code>pattern</code> is the smallest of the taxonomy, note that it is almost that of <code>meta/program</code> (which has one occurrence per program): in other words, almost all programs feature such a pattern (which spans several lines).</p>
 <p>The loop patterns constitute an aspect of programming which is not always taught in a conscious and systematic way, and to which Paroxython intends to draw your attention.</p>
 <div class="admonition warning">
@@ -1618,7 +1621,7 @@ span <code>s_1</code> of such a taxon, there exists no span <code>s_2</code> of 
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Note that the result includes also all programs featuring at least one taxon matching <code>taxon_pattern_1</code>, but no taxon matching <code>taxon_pattern_2</code>. For instance, suppose the original (negative) triple is:</p>
-<p><code>("def", "not contains", "var/assignment")</code></p>
+<p><code>("def", "not contains", "var/assignment/explicit")</code></p>
 <p>The function will return the (disjoint) union of these two sets:</p>
 <ol>
 <li>The programs featuring at least one subroutine, but no assignment at all.</li>
@@ -1648,12 +1651,12 @@ span <code>s_1</code> of such a taxon, there exists no span <code>s_2</code> of 
 <p>Suppose you want your course on the assignment statements to include the concept of parallel assignment, for example to introduce swapping without an auxiliary variable:</p>
 <pre><code class="python">(a, b) = (b, a)
 </code></pre>
-<p>In the taxonomy, this concept is listed as a special case of both tuple (<code>"type/sequence/tuple"</code>) and variable assignment (<code>"var/assignment/parallel"</code>).</p>
+<p>In the taxonomy, this concept is listed as a special case of both tuple (<code>"type/sequence/tuple"</code>) and variable assignment (<code>"var/assignment/explicit/parallel"</code>).</p>
 <p>However, you want to introduce officially the abstract data type “tuple” only much later in your course. You therefore wish to exclude from the recommendations any program implementing a tuple, unless it is part of a parallel assignment. The following command will make the trick:</p>
 <pre><code class="python">  {
     &quot;operation&quot;: &quot;exclude&quot;,
     &quot;data&quot;: [
-      (&quot;type/sequence/tuple&quot;, &quot;is not&quot;, &quot;var/assignment/parallel&quot;)
+      (&quot;type/sequence/tuple&quot;, &quot;is not&quot;, &quot;var/assignment/explicit/parallel&quot;)
     ]
   },
 </code></pre>
@@ -1730,7 +1733,7 @@ The previous link is automatically updated by build_pdoc.py.
 <dd>Name of a <em>feature</em>, resulting from the conversion of a given <em>label</em>. Examples:</dd>
 <dd>
 <ul>
-<li>the <em>label</em> <code>swap</code> is converted to the <em>taxon</em> <code>var/assignment/parallel/swap</code>;</li>
+<li>the <em>label</em> <code>swap</code> is converted to the <em>taxon</em> <code>var/assignment/explicit/parallel/swap</code>;</li>
 </ul>
 </dd>
 <dd>

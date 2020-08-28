@@ -43,13 +43,13 @@ def test_cli():
 def test_tag():
     result = run("tag examples/mini/programs/assignment.py")
     assert "| Taxon | Lines |" in result
-    assert "| `var/assignment/single` | 1 |" in result
+    assert "| `var/assignment/explicit/single` | 1 |" in result
 
 
 def test_tag_options():
     result = run("tag --format tsv examples/mini/programs/assignment.py")
     assert "Taxon\tLines" in result
-    assert "var/assignment/single\t1" in result
+    assert "var/assignment/explicit/single\t1" in result
 
     result = run("tag --labels examples/mini/programs/assignment.py")
     assert "| Label | Lines |" in result

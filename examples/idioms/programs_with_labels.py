@@ -12,7 +12,7 @@ print("Hello World") # call_argument:, external_free_call:print, flat_style, fre
 # ----------------------------------------------------------------------------------------
 # 002.0011-print-hello-10-times.py
 # ----------------------------------------------------------------------------------------
-for i in range(10): # call_argument:10, external_free_call:range, for:i (-> +1), for_range:10 (-> +1), free_call:range, imperative_style (-> +1), literal:10, loop:for (-> +1), loop_with_late_exit:for (-> +1), magic_number:10, node:Call, node:For (-> +1), node:Name, node:Num, range:10, whole_span:2 (-> +1)
+for i in range(10): # call_argument:10, external_free_call:range, for:i (-> +1), for_range:10 (-> +1), free_call:range, imperative_style (-> +1), iteration_variable:i, literal:10, loop:for (-> +1), loop_with_late_exit:for (-> +1), magic_number:10, node:Call, node:For (-> +1), node:Name, node:Num, range:10, whole_span:2 (-> +1)
     print("Hello") # call_argument:, external_free_call:print, free_call:print, free_call_without_result:print, literal:Str, node:Call, node:Expr, node:Name, node:Str
 
 # ----------------------------------------------------------------------------------------
@@ -28,25 +28,25 @@ print("Hello\n" * 10) # binary_operator:Mult, call_argument:, external_free_call
 # ----------------------------------------------------------------------------------------
 # 003.0019-create-a-procedure.py
 # ----------------------------------------------------------------------------------------
-def finish(name): # function:finish (-> +1), function_argument:name, function_argument_flavor:arg, function_returning_nothing:finish (-> +1), node:FunctionDef (-> +1), node:arg, one_liner_style (-> +1), procedural_style (-> +1), whole_span:2 (-> +1)
+def finish(name): # function:finish (-> +1), function_parameter:name, function_parameter_flavor:arg, function_returning_nothing:finish (-> +1), node:FunctionDef (-> +1), node:arg, one_liner_style (-> +1), procedural_style (-> +1), whole_span:2 (-> +1)
     print("My job here is done. Goodbye " + name) # binary_operator:Add, call_argument:, concatenation_operator:Str, external_free_call:print, free_call:print, free_call_without_result:print, literal:Str, node:BinOp, node:Call, node:Expr, node:Name, node:Str
 
 # ----------------------------------------------------------------------------------------
 # 003.2372-create-a-procedure.py
 # ----------------------------------------------------------------------------------------
-def a(): # function:a (-> +1), function_returning_nothing:a (-> +1), function_without_arguments:a (-> +1), node:FunctionDef (-> +1), one_liner_style (-> +1), procedural_style (-> +1), whole_span:2 (-> +1)
+def a(): # function:a (-> +1), function_returning_nothing:a (-> +1), function_without_parameters:a (-> +1), node:FunctionDef (-> +1), one_liner_style (-> +1), procedural_style (-> +1), whole_span:2 (-> +1)
     pass # node:Pass
 
 # ----------------------------------------------------------------------------------------
 # 004.0024-create-a-function-which-returns-the-square-of-an-integer.py
 # ----------------------------------------------------------------------------------------
-def square(x): # function:square (-> +1), function_argument:x, function_argument_flavor:arg, function_returning_something:square (-> +1), functional_style (-> +1), node:FunctionDef (-> +1), node:arg, one_liner_style (-> +1), pure_function:square (-> +1), whole_span:2 (-> +1)
+def square(x): # function:square (-> +1), function_parameter:x, function_parameter_flavor:arg, function_returning_something:square (-> +1), functional_style (-> +1), node:FunctionDef (-> +1), node:arg, one_liner_style (-> +1), pure_function:square (-> +1), whole_span:2 (-> +1)
     return x * x # binary_operator:Mult, multiplication_operator, node:BinOp, node:Name, node:Return, return
 
 # ----------------------------------------------------------------------------------------
 # 004.2921-create-a-function-which-returns-the-square-of-an-integer.py
 # ----------------------------------------------------------------------------------------
-def square(x): # function:square (-> +1), function_argument:x, function_argument_flavor:arg, function_returning_something:square (-> +1), functional_style (-> +1), node:FunctionDef (-> +1), node:arg, one_liner_style (-> +1), pure_function:square (-> +1), whole_span:2 (-> +1)
+def square(x): # function:square (-> +1), function_parameter:x, function_parameter_flavor:arg, function_returning_something:square (-> +1), functional_style (-> +1), node:FunctionDef (-> +1), node:arg, one_liner_style (-> +1), pure_function:square (-> +1), whole_span:2 (-> +1)
     return x ** 2 # binary_operator:Pow, literal:2, node:BinOp, node:Name, node:Num, node:Return, return
 
 # ----------------------------------------------------------------------------------------
@@ -61,13 +61,13 @@ class Point:
 # ----------------------------------------------------------------------------------------
 # 006.0032-iterate-over-list-values.py
 # ----------------------------------------------------------------------------------------
-for x in items: # for:x (-> +1), for_each:x (-> +1), imperative_style (-> +1), loop:for (-> +1), loop_with_late_exit:for (-> +1), node:For (-> +1), node:Name, whole_span:2 (-> +1)
+for x in items: # for:x (-> +1), for_each:x (-> +1), imperative_style (-> +1), iteration_variable:x, loop:for (-> +1), loop_with_late_exit:for (-> +1), node:For (-> +1), node:Name, whole_span:2 (-> +1)
     doSomething(x) # call_argument:x, external_free_call:doSomething, free_call:doSomething, free_call_without_result:doSomething, node:Call, node:Expr, node:Name
 
 # ----------------------------------------------------------------------------------------
 # 007.0183-iterate-over-list-indexes-and-values.py
 # ----------------------------------------------------------------------------------------
-for i, x in enumerate(items): # call_argument:items, external_free_call:enumerate, for:i (-> +1), for:x (-> +1), for_indexes_elements:i (-> +1), free_call:enumerate, imperative_style (-> +1), literal:Tuple, loop:for (-> +1), loop_with_late_exit:for (-> +1), node:Call, node:For (-> +1), node:Name, node:Tuple, whole_span:2 (-> +1)
+for i, x in enumerate(items): # call_argument:items, external_free_call:enumerate, for:i (-> +1), for:x (-> +1), for_indexes_elements:i (-> +1), free_call:enumerate, imperative_style (-> +1), iteration_variable:i, iteration_variable:x, literal:Tuple, loop:for (-> +1), loop_with_late_exit:for (-> +1), node:Call, node:For (-> +1), node:Name, node:Tuple, whole_span:2 (-> +1)
     print(i, x) # call_argument:i, call_argument:x, external_free_call:print, free_call:print, free_call_without_result:print, node:Call, node:Expr, node:Name
 
 # ----------------------------------------------------------------------------------------
@@ -79,7 +79,7 @@ x = {"one": 1, "two": 2} # assignment, assignment_lhs_identifier:x, assignment_r
 # 009.1410-create-a-binary-tree-data-structure.py
 # ----------------------------------------------------------------------------------------
 class Node: # node:ClassDef (-> +4), object_oriented_style (-> +4), whole_span:5 (-> +4)
-    def __init__(self, data): # function:__init__ (-> +3), function_argument:data, function_argument:self, function_argument_flavor:arg, function_returning_nothing:__init__ (-> +3), instance_method:__init__ (-> +3), method:__init__ (-> +3), node:FunctionDef (-> +3), node:arg
+    def __init__(self, data): # function:__init__ (-> +3), function_parameter:data, function_parameter:self, function_parameter_flavor:arg, function_returning_nothing:__init__ (-> +3), instance_method:__init__ (-> +3), method:__init__ (-> +3), node:FunctionDef (-> +3), node:arg
         self.data = data # assignment, assignment_lhs_identifier:self, assignment_rhs_atom:data, node:Assign, node:Attribute, node:Name
         self.left = None # assignment:None, assignment_lhs_identifier:self, assignment_rhs_atom:None, literal:None, node:Assign, node:Attribute, node:Name, node:NameConstant
         self.right = None # assignment:None, assignment_lhs_identifier:self, assignment_rhs_atom:None, literal:None, node:Assign, node:Attribute, node:Name, node:NameConstant
@@ -88,7 +88,7 @@ class Node: # node:ClassDef (-> +4), object_oriented_style (-> +4), whole_span:5
 # 009.3176-create-a-binary-tree-data-structure.py
 # ----------------------------------------------------------------------------------------
 class Node: # node:ClassDef (-> +4), object_oriented_style (-> +4), whole_span:5 (-> +4)
-    def __init__(self, data, left_child, right_child): # function:__init__ (-> +3), function_argument:data, function_argument:left_child, function_argument:right_child, function_argument:self, function_argument_flavor:arg, function_returning_nothing:__init__ (-> +3), instance_method:__init__ (-> +3), method:__init__ (-> +3), node:FunctionDef (-> +3), node:arg
+    def __init__(self, data, left_child, right_child): # function:__init__ (-> +3), function_parameter:data, function_parameter:left_child, function_parameter:right_child, function_parameter:self, function_parameter_flavor:arg, function_returning_nothing:__init__ (-> +3), instance_method:__init__ (-> +3), method:__init__ (-> +3), node:FunctionDef (-> +3), node:arg
         self.data = data # assignment, assignment_lhs_identifier:self, assignment_rhs_atom:data, node:Assign, node:Attribute, node:Name
         self._left_child = left_child # assignment, assignment_lhs_identifier:self, assignment_rhs_atom:left_child, node:Assign, node:Attribute, node:Name
         self._right_child = right_child # assignment, assignment_lhs_identifier:self, assignment_rhs_atom:right_child, node:Assign, node:Attribute, node:Name
@@ -119,14 +119,14 @@ x in list # comparison_operator:In, flat_style, imperative_style, node:Compare, 
 # ----------------------------------------------------------------------------------------
 # 013.0574-iterate-over-map-keys-and-values.py
 # ----------------------------------------------------------------------------------------
-for k, v in mymap.items(): # for:k (-> +1), for:v (-> +1), imperative_style (-> +1), literal:Tuple, loop:for (-> +1), loop_with_late_exit:for (-> +1), member_call_method:items, node:Attribute, node:Call, node:For (-> +1), node:Name, node:Tuple, whole_span:2 (-> +1)
+for k, v in mymap.items(): # for:k (-> +1), for:v (-> +1), imperative_style (-> +1), iteration_variable:k, iteration_variable:v, literal:Tuple, loop:for (-> +1), loop_with_late_exit:for (-> +1), member_call_method:items, node:Attribute, node:Call, node:For (-> +1), node:Name, node:Tuple, whole_span:2 (-> +1)
     print(k, v) # call_argument:k, call_argument:v, external_free_call:print, free_call:print, free_call_without_result:print, node:Call, node:Expr, node:Name
 
 # ----------------------------------------------------------------------------------------
 # 014.0185-pick-uniformly-a-random-floating-point-number-in-ab.py
 # ----------------------------------------------------------------------------------------
 import random # functional_style (-> +2), import:random, import_module:random, node:Import, one_liner_style (-> +2), whole_span:3 (-> +2)
-def pick(a, b): # function:pick (-> +1), function_argument:a, function_argument:b, function_argument_flavor:arg, function_returning_something:pick (-> +1), node:FunctionDef (-> +1), node:arg, pure_function:pick (-> +1)
+def pick(a, b): # function:pick (-> +1), function_parameter:a, function_parameter:b, function_parameter_flavor:arg, function_returning_something:pick (-> +1), node:FunctionDef (-> +1), node:arg, pure_function:pick (-> +1)
     return random.randrange(a, b) # call_argument:a, call_argument:b, member_call:random:randrange, member_call_method:randrange, member_call_object:random, node:Attribute, node:Call, node:Name, node:Return, return
 
 # ----------------------------------------------------------------------------------------
@@ -144,7 +144,7 @@ random.randint(a, b) # call_argument:a, call_argument:b, member_call:random:rand
 # ----------------------------------------------------------------------------------------
 # 016.1530-depth-first-traversing-of-a-binary-tree.py
 # ----------------------------------------------------------------------------------------
-def dfs(bt): # body_recursive_function:dfs (-> +5), function:dfs (-> +5), function_argument:bt, function_argument_flavor:arg, function_returning_nothing:dfs (-> +5), node:FunctionDef (-> +5), node:arg, procedural_style (-> +5), recursive_call_count:2 (-> +5), recursive_function:dfs (-> +5), whole_span:6 (-> +5)
+def dfs(bt): # body_recursive_function:dfs (-> +5), function:dfs (-> +5), function_parameter:bt, function_parameter_flavor:arg, function_returning_nothing:dfs (-> +5), node:FunctionDef (-> +5), node:arg, procedural_style (-> +5), recursive_call_count:2 (-> +5), recursive_function:dfs (-> +5), whole_span:6 (-> +5)
     if bt is None: # comparison_operator:Is, if (-> +1), if_guard (-> +1), if_test_atom:None, if_test_atom:bt, if_without_else (-> +1), literal:None, node:Compare, node:If (-> +1), node:Name, node:NameConstant
         return # if_then_branch, node:Return, return:None
     dfs(bt.left) # call_argument:, free_call:dfs, free_call_without_result:dfs, internal_free_call:dfs, node:Attribute, node:Call, node:Expr, node:Name
@@ -155,16 +155,16 @@ def dfs(bt): # body_recursive_function:dfs (-> +5), function:dfs (-> +5), functi
 # 017.1103-create-a-tree-data-structure.py
 # ----------------------------------------------------------------------------------------
 class Node(object): # node:ClassDef (-> +3), node:Name, object_oriented_style (-> +3), whole_span:4 (-> +3)
-    def __init__(self, value, *children): # function:__init__ (-> +2), function_argument:children, function_argument:self, function_argument:value, function_argument_flavor:arg, function_argument_flavor:vararg, function_returning_nothing:__init__ (-> +2), instance_method:__init__ (-> +2), method:__init__ (-> +2), node:FunctionDef (-> +2), node:arg
+    def __init__(self, value, *children): # function:__init__ (-> +2), function_parameter:children, function_parameter:self, function_parameter:value, function_parameter_flavor:arg, function_parameter_flavor:vararg, function_returning_nothing:__init__ (-> +2), instance_method:__init__ (-> +2), method:__init__ (-> +2), node:FunctionDef (-> +2), node:arg
         self.value = value # assignment, assignment_lhs_identifier:self, assignment_rhs_atom:value, node:Assign, node:Attribute, node:Name
         self.children = list(children) # assignment:list, assignment_lhs_identifier:self, assignment_rhs_atom:children, call_argument:children, external_free_call:list, free_call:list, node:Assign, node:Attribute, node:Call, node:Name
 
 # ----------------------------------------------------------------------------------------
 # 018.2084-depth-first-traversing-of-a-tree.py
 # ----------------------------------------------------------------------------------------
-def DFS(f, root): # body_recursive_function:DFS (-> +3), function:DFS (-> +3), function_argument:f, function_argument:root, function_argument_flavor:arg, function_returning_nothing:DFS (-> +3), higher_order_function:f (-> +3), node:FunctionDef (-> +3), node:arg, procedural_style (-> +3), recursive_call_count:1 (-> +3), recursive_function:DFS (-> +3), whole_span:4 (-> +3)
+def DFS(f, root): # body_recursive_function:DFS (-> +3), function:DFS (-> +3), function_parameter:f, function_parameter:root, function_parameter_flavor:arg, function_returning_nothing:DFS (-> +3), higher_order_function:f (-> +3), node:FunctionDef (-> +3), node:arg, procedural_style (-> +3), recursive_call_count:1 (-> +3), recursive_function:DFS (-> +3), whole_span:4 (-> +3)
     f(root) # call_argument:root, external_free_call:f, free_call:f, free_call_without_result:f, node:Call, node:Expr, node:Name
-    for child in root: # for:child (-> +1), for_each:child (-> +1), loop:for (-> +1), loop_with_late_exit:for (-> +1), node:For (-> +1), node:Name
+    for child in root: # for:child (-> +1), for_each:child (-> +1), iteration_variable:child, loop:for (-> +1), loop_with_late_exit:for (-> +1), node:For (-> +1), node:Name
         DFS(f, child) # call_argument:child, call_argument:f, free_call:DFS, free_call_without_result:DFS, internal_free_call:DFS, node:Call, node:Expr, node:Name
 
 # ----------------------------------------------------------------------------------------
@@ -185,8 +185,8 @@ x.reverse() # flat_style, imperative_style, member_call:x:reverse, member_call_m
 # ----------------------------------------------------------------------------------------
 # 020.0573-return-two-values.py
 # ----------------------------------------------------------------------------------------
-def search(m, x): # function:search (-> +3), function_argument:m, function_argument:x, function_argument_flavor:arg, function_returning_something:search (-> +3), impure_function:search (-> +3), node:FunctionDef (-> +3), node:arg, procedural_style (-> +3), whole_span:4 (-> +3)
-    for idx, item in enumerate(m): # call_argument:m, external_free_call:enumerate, for:idx (-> +2), for:item (-> +2), for_indexes_elements:idx (-> +2), free_call:enumerate, literal:Tuple, loop:for (-> +2), loop_with_early_exit:for:return (-> +2), loop_with_return:for (-> +2), node:Call, node:For (-> +2), node:Name, node:Tuple
+def search(m, x): # function:search (-> +3), function_parameter:m, function_parameter:x, function_parameter_flavor:arg, function_returning_something:search (-> +3), impure_function:search (-> +3), node:FunctionDef (-> +3), node:arg, procedural_style (-> +3), whole_span:4 (-> +3)
+    for idx, item in enumerate(m): # call_argument:m, external_free_call:enumerate, for:idx (-> +2), for:item (-> +2), for_indexes_elements:idx (-> +2), free_call:enumerate, iteration_variable:idx, iteration_variable:item, literal:Tuple, loop:for (-> +2), loop_with_early_exit:for:return (-> +2), loop_with_return:for (-> +2), node:Call, node:For (-> +2), node:Name, node:Tuple
         if x in item: # comparison_operator:In, if (-> +1), if_test_atom:item, if_test_atom:x, if_without_else (-> +1), node:Compare, node:If (-> +1), node:Name
             return idx, item.index(x) # call_argument:x, if_then_branch, literal:Tuple, member_call_method:index, node:Attribute, node:Call, node:Name, node:Return, node:Tuple, return
 
@@ -239,7 +239,7 @@ x = numpy.zeros((m, n, p)) # assignment:zeros, assignment_lhs_identifier:x, assi
 # ----------------------------------------------------------------------------------------
 # 028.0350-sort-by-a-property.py
 # ----------------------------------------------------------------------------------------
-items = sorted(items, key=lambda x: x.p) # assignment:sorted, assignment_lhs_identifier:items, assignment_rhs_atom:items, assignment_rhs_atom:x, call_argument:, call_argument:items, call_keyword_argument:key, external_free_call:sorted, flat_style, free_call:sorted, function_argument:x, function_argument_flavor:arg, imperative_style, node:Assign, node:Attribute, node:Call, node:Lambda, node:Name, node:arg, one_liner_style, single_assignment:items, update:items:x, update_by_assignment:items:x, update_by_assignment_with:sorted, update_with:sorted, whole_span:1
+items = sorted(items, key=lambda x: x.p) # assignment:sorted, assignment_lhs_identifier:items, assignment_rhs_atom:items, assignment_rhs_atom:x, call_argument:, call_argument:items, call_keyword_argument:key, external_free_call:sorted, flat_style, free_call:sorted, function_parameter:x, function_parameter_flavor:arg, imperative_style, node:Assign, node:Attribute, node:Call, node:Lambda, node:Name, node:arg, one_liner_style, single_assignment:items, update:items:x, update_by_assignment:items:x, update_by_assignment_with:sorted, update_with:sorted, whole_span:1
 
 # ----------------------------------------------------------------------------------------
 # 029.0199-remove-item-from-list-by-its-index.py
@@ -251,13 +251,13 @@ del items[i] # flat_style, imperative_style, index:i, node:Delete, node:Name, no
 # ----------------------------------------------------------------------------------------
 from multiprocessing import Pool # imperative_style (-> +3), import:multiprocessing:Pool, import_module:multiprocessing, import_name:Pool, node:ImportFrom, whole_span:4 (-> +3)
 pool = Pool() # assignment:Pool, assignment_lhs_identifier:pool, external_free_call:Pool, free_call:Pool, free_call_without_arguments:Pool, node:Assign, node:Call, node:Name, single_assignment:pool
-for i in range(1, 1001): # call_argument:1, call_argument:1001, external_free_call:range, for:i (-> +1), for_range:1:1001 (-> +1), free_call:range, literal:1, literal:1001, loop:for (-> +1), loop_with_late_exit:for (-> +1), magic_number:1001, node:Call, node:For (-> +1), node:Name, node:Num, range:1:1001
+for i in range(1, 1001): # call_argument:1, call_argument:1001, external_free_call:range, for:i (-> +1), for_range:1:1001 (-> +1), free_call:range, iteration_variable:i, literal:1, literal:1001, loop:for (-> +1), loop_with_late_exit:for (-> +1), magic_number:1001, node:Call, node:For (-> +1), node:Name, node:Num, range:1:1001
     pool.apply_async(f, [i]) # call_argument:, call_argument:f, literal:List, member_call:pool:apply_async, member_call_method:apply_async, member_call_object:pool, node:Attribute, node:Call, node:Expr, node:List, node:Name
 
 # ----------------------------------------------------------------------------------------
 # 031.0188-recursive-factorial-simple.py
 # ----------------------------------------------------------------------------------------
-def f(i): # body_recursive_function:f (-> +4), function:f (-> +4), function_argument:i, function_argument_flavor:arg, function_returning_something:f (-> +4), functional_style (-> +4), node:FunctionDef (-> +4), node:arg, pure_function:f (-> +4), recursive_call_count:1 (-> +4), recursive_function:f (-> +4), whole_span:5 (-> +4)
+def f(i): # body_recursive_function:f (-> +4), function:f (-> +4), function_parameter:i, function_parameter_flavor:arg, function_returning_something:f (-> +4), functional_style (-> +4), node:FunctionDef (-> +4), node:arg, pure_function:f (-> +4), recursive_call_count:1 (-> +4), recursive_function:f (-> +4), whole_span:5 (-> +4)
     if i == 0: # comparison_operator:Eq, if (-> +3), if_test_atom:0, if_test_atom:i, literal:0, node:Compare, node:If (-> +3), node:Name, node:Num
         return 1 # if_then_branch, literal:1, node:Num, node:Return, return:1
     else:
@@ -266,7 +266,7 @@ def f(i): # body_recursive_function:f (-> +4), function:f (-> +4), function_argu
 # ----------------------------------------------------------------------------------------
 # 032.0196-integer-exponentiation-by-squaring.py
 # ----------------------------------------------------------------------------------------
-def exp(x, n): # function:exp (-> +1), function_argument:n, function_argument:x, function_argument_flavor:arg, function_returning_something:exp (-> +1), functional_style (-> +1), node:FunctionDef (-> +1), node:arg, one_liner_style (-> +1), pure_function:exp (-> +1), whole_span:2 (-> +1)
+def exp(x, n): # function:exp (-> +1), function_parameter:n, function_parameter:x, function_parameter_flavor:arg, function_returning_something:exp (-> +1), functional_style (-> +1), node:FunctionDef (-> +1), node:arg, one_liner_style (-> +1), pure_function:exp (-> +1), whole_span:2 (-> +1)
     return x ** n # binary_operator:Pow, node:BinOp, node:Name, node:Return, return
 
 # ----------------------------------------------------------------------------------------
@@ -290,21 +290,21 @@ x = set(T()) # assignment:set, assignment_lhs_identifier:x, call_argument:, comp
 # ----------------------------------------------------------------------------------------
 # 035.0667-first-class-function--compose.py
 # ----------------------------------------------------------------------------------------
-def compose(f, g): # function:compose (-> +1), function_argument:f, function_argument:g, function_argument_flavor:arg, function_returning_something:compose (-> +1), functional_style (-> +1), higher_order_function:f (-> +1), higher_order_function:g (-> +1), node:FunctionDef (-> +1), node:arg, one_liner_style (-> +1), pure_function:compose (-> +1), whole_span:2 (-> +1)
-    return lambda a: g(f(a)) # call_argument:, call_argument:a, composition, external_free_call:f, external_free_call:g, free_call:f, free_call:g, function_argument:a, function_argument_flavor:arg, node:Call, node:Lambda, node:Name, node:Return, node:arg, return
+def compose(f, g): # function:compose (-> +1), function_parameter:f, function_parameter:g, function_parameter_flavor:arg, function_returning_something:compose (-> +1), functional_style (-> +1), higher_order_function:f (-> +1), higher_order_function:g (-> +1), node:FunctionDef (-> +1), node:arg, one_liner_style (-> +1), pure_function:compose (-> +1), whole_span:2 (-> +1)
+    return lambda a: g(f(a)) # call_argument:, call_argument:a, composition, external_free_call:f, external_free_call:g, free_call:f, free_call:g, function_parameter:a, function_parameter_flavor:arg, node:Call, node:Lambda, node:Name, node:Return, node:arg, return
 
 # ----------------------------------------------------------------------------------------
 # 036.0670-first-class-function--generic-composition.py
 # ----------------------------------------------------------------------------------------
-def compose(f, g): # function:compose (-> +1), function_argument:f, function_argument:g, function_argument_flavor:arg, function_returning_something:compose (-> +1), functional_style (-> +1), higher_order_function:f (-> +1), higher_order_function:g (-> +1), node:FunctionDef (-> +1), node:arg, one_liner_style (-> +1), pure_function:compose (-> +1), whole_span:2 (-> +1)
-    return lambda x: g(f(x)) # call_argument:, call_argument:x, composition, external_free_call:f, external_free_call:g, free_call:f, free_call:g, function_argument:x, function_argument_flavor:arg, node:Call, node:Lambda, node:Name, node:Return, node:arg, return
+def compose(f, g): # function:compose (-> +1), function_parameter:f, function_parameter:g, function_parameter_flavor:arg, function_returning_something:compose (-> +1), functional_style (-> +1), higher_order_function:f (-> +1), higher_order_function:g (-> +1), node:FunctionDef (-> +1), node:arg, one_liner_style (-> +1), pure_function:compose (-> +1), whole_span:2 (-> +1)
+    return lambda x: g(f(x)) # call_argument:, call_argument:x, composition, external_free_call:f, external_free_call:g, free_call:f, free_call:g, function_parameter:x, function_parameter_flavor:arg, node:Call, node:Lambda, node:Name, node:Return, node:arg, return
 
 # ----------------------------------------------------------------------------------------
 # 037.0671-currying.py
 # ----------------------------------------------------------------------------------------
 from functools import partial # functional_style (-> +5), import:functools:partial, import_module:functools, import_name:partial, node:ImportFrom, whole_span:6 (-> +5)
-def f(a): # closure:f (-> +3), function:f (-> +3), function_argument:a, function_argument_flavor:arg, function_returning_something:f (-> +3), nested_function:f (-> +3), node:FunctionDef (-> +3), node:arg, pure_function:f (-> +3)
-    def add(b): # function:add (-> +1), function_argument:b, function_argument_flavor:arg, function_returning_something:add (-> +1), node:FunctionDef (-> +1), node:arg, pure_function:add (-> +1)
+def f(a): # closure:f (-> +3), function:f (-> +3), function_parameter:a, function_parameter_flavor:arg, function_returning_something:f (-> +3), nested_function:f (-> +3), node:FunctionDef (-> +3), node:arg, pure_function:f (-> +3)
+    def add(b): # function:add (-> +1), function_parameter:b, function_parameter_flavor:arg, function_returning_something:add (-> +1), node:FunctionDef (-> +1), node:arg, pure_function:add (-> +1)
         return a + b # addition_operator, binary_operator:Add, node:BinOp, node:Name, node:Return, return
     return add # node:Name, node:Return, return:add
 print(f(2)(1)) # call_argument:, call_argument:1, call_argument:2, composition, external_free_call:print, free_call:f, free_call:print, free_call_without_result:print, internal_free_call:f, literal:1, literal:2, node:Call, node:Expr, node:Name, node:Num
@@ -326,12 +326,12 @@ from collections import defaultdict # import:collections:defaultdict, import_mod
 class Vertex(set): # node:ClassDef (-> +1), node:Name
     pass # node:Pass
 class Graph(defaultdict): # node:ClassDef (-> +8), node:Name
-    def __init__(self, *paths): # function:__init__ (-> +3), function_argument:paths, function_argument:self, function_argument_flavor:arg, function_argument_flavor:vararg, function_returning_nothing:__init__ (-> +3), instance_method:__init__ (-> +3), method:__init__ (-> +3), node:FunctionDef (-> +3), node:arg
+    def __init__(self, *paths): # function:__init__ (-> +3), function_parameter:paths, function_parameter:self, function_parameter_flavor:arg, function_parameter_flavor:vararg, function_returning_nothing:__init__ (-> +3), instance_method:__init__ (-> +3), method:__init__ (-> +3), node:FunctionDef (-> +3), node:arg
         self.default_factory = Vertex # assignment, assignment_lhs_identifier:self, assignment_rhs_atom:Vertex, node:Assign, node:Attribute, node:Name
-        for path in paths: # for:path (-> +1), for_each:path (-> +1), loop:for (-> +1), loop_with_late_exit:for (-> +1), node:For (-> +1), node:Name
+        for path in paths: # for:path (-> +1), for_each:path (-> +1), iteration_variable:path, loop:for (-> +1), loop_with_late_exit:for (-> +1), node:For (-> +1), node:Name
             self.make_path(path) # call_argument:path, member_call:self:make_path, member_call_method:make_path, member_call_object:self, node:Attribute, node:Call, node:Expr, node:Name
-    def make_path(self, labels): # function:make_path (-> +3), function_argument:labels, function_argument:self, function_argument_flavor:arg, function_returning_nothing:make_path (-> +3), instance_method:make_path (-> +3), method:make_path (-> +3), node:FunctionDef (-> +3), node:arg
-        for l1, l2 in zip(labels, labels[1:]): # call_argument:, call_argument:labels, external_free_call:zip, for:l1 (-> +2), for:l2 (-> +2), free_call:zip, literal:1, literal:Tuple, loop:for (-> +2), loop_with_late_exit:for (-> +2), node:Call, node:For (-> +2), node:Name, node:Num, node:Subscript, node:Tuple, slice:1::, slice_lower:1, slice_step:, slice_upper:
+    def make_path(self, labels): # function:make_path (-> +3), function_parameter:labels, function_parameter:self, function_parameter_flavor:arg, function_returning_nothing:make_path (-> +3), instance_method:make_path (-> +3), method:make_path (-> +3), node:FunctionDef (-> +3), node:arg
+        for l1, l2 in zip(labels, labels[1:]): # call_argument:, call_argument:labels, external_free_call:zip, for:l1 (-> +2), for:l2 (-> +2), free_call:zip, iteration_variable:l1, iteration_variable:l2, literal:1, literal:Tuple, loop:for (-> +2), loop_with_late_exit:for (-> +2), node:Call, node:For (-> +2), node:Name, node:Num, node:Subscript, node:Tuple, slice:1::, slice_lower:1, slice_step:, slice_upper:
             self[l1].add(l2) # call_argument:l2, index:l1, member_call_method:add, node:Attribute, node:Call, node:Expr, node:Name, node:Subscript
             self[l2].add(l1) # call_argument:l1, index:l2, member_call_method:add, node:Attribute, node:Call, node:Expr, node:Name, node:Subscript
 G = Graph((0, 1, 2, 3), (1, 4, 2)) # assignment:Graph, assignment_lhs_identifier:G, assignment_rhs_atom:0, assignment_rhs_atom:1, assignment_rhs_atom:2, assignment_rhs_atom:3, assignment_rhs_atom:4, call_argument:, external_free_call:Graph, free_call:Graph, literal:0, literal:1, literal:2, literal:3, literal:4, literal:Tuple, node:Assign, node:Call, node:Name, node:Num, node:Tuple, single_assignment:G
@@ -349,9 +349,9 @@ t = s[::-1] # assignment, assignment_lhs_identifier:t, assignment_rhs_atom:-1, a
 # ----------------------------------------------------------------------------------------
 # 042.1264-continue-outer-loop.py
 # ----------------------------------------------------------------------------------------
-for v in a: # for:v (-> +7), for_each:v (-> +7), imperative_style (-> +7), loop:for (-> +7), loop_with_early_exit:for:raise (-> +7), loop_with_raise:for (-> +7), node:For (-> +7), node:Name, whole_span:8 (-> +7)
+for v in a: # for:v (-> +7), for_each:v (-> +7), imperative_style (-> +7), iteration_variable:v, loop:for (-> +7), loop_with_early_exit:for:raise (-> +7), loop_with_raise:for (-> +7), node:For (-> +7), node:Name, whole_span:8 (-> +7)
     try: # node:Try (-> +6), try_except:Exception (-> +6), try_raise:Exception (-> +6)
-        for u in b: # for:u (-> +2), for_each:u (-> +2), loop:for (-> +2), loop_with_early_exit:for:raise (-> +2), loop_with_raise:for (-> +2), nested_for:1 (-> +2), node:For (-> +2), node:Name
+        for u in b: # for:u (-> +2), for_each:u (-> +2), iteration_variable:u, loop:for (-> +2), loop_with_early_exit:for:raise (-> +2), loop_with_raise:for (-> +2), nested_for:1 (-> +2), node:For (-> +2), node:Name
             if v == u: # comparison_operator:Eq, if (-> +1), if_test_atom:u, if_test_atom:v, if_without_else (-> +1), node:Compare, node:If (-> +1), node:Name
                 raise Exception() # external_free_call:Exception, free_call:Exception, free_call_without_arguments:Exception, if_then_branch, node:Call, node:Name, node:Raise, raise:Exception
         print(v) # call_argument:v, external_free_call:print, free_call:print, free_call_without_result:print, node:Call, node:Expr, node:Name
@@ -361,8 +361,8 @@ for v in a: # for:v (-> +7), for_each:v (-> +7), imperative_style (-> +7), loop:
 # ----------------------------------------------------------------------------------------
 # 042.3168-continue-outer-loop.py
 # ----------------------------------------------------------------------------------------
-for v in a: # for:v (-> +4), for_each:v (-> +4), imperative_style (-> +4), loop:for (-> +4), loop_with_late_exit:for (-> +4), node:For (-> +4), node:Name, whole_span:5 (-> +4)
-    for v_ in b: # for:v_ (-> +3), for_each:v_ (-> +3), loop:for (-> +3), loop_with_late_exit:for (-> +3), nested_for:1 (-> +3), node:For (-> +3), node:Name
+for v in a: # for:v (-> +4), for_each:v (-> +4), imperative_style (-> +4), iteration_variable:v, loop:for (-> +4), loop_with_late_exit:for (-> +4), node:For (-> +4), node:Name, whole_span:5 (-> +4)
+    for v_ in b: # for:v_ (-> +3), for_each:v_ (-> +3), iteration_variable:v_, loop:for (-> +3), loop_with_late_exit:for (-> +3), nested_for:1 (-> +3), node:For (-> +3), node:Name
         if v == v_: # comparison_operator:Eq, if (-> +1), if_test_atom:v, if_test_atom:v_, if_without_else (-> +1), node:Compare, node:If (-> +1), node:Name
             continue # if_then_branch, node:Continue
         print(v) # call_argument:v, external_free_call:print, free_call:print, free_call_without_result:print, node:Call, node:Expr, node:Name
@@ -374,8 +374,8 @@ class BreakOuterLoop(Exception): # node:ClassDef (-> +1), node:Name, object_orie
     pass # node:Pass
 try: # node:Try (-> +8), try_except:BreakOuterLoop (-> +8), try_raise:BreakOuterLoop (-> +8)
     position = None # assignment:None, assignment_lhs_identifier:position, assignment_rhs_atom:None, literal:None, node:Assign, node:Name, node:NameConstant, single_assignment:position
-    for row in m: # for:row (-> +4), for_each:row (-> +4), loop:for (-> +4), loop_with_early_exit:for:raise (-> +4), loop_with_raise:for (-> +4), node:For (-> +4), node:Name
-        for column in m[row]: # for:column (-> +3), index:row, loop:for (-> +3), loop_with_early_exit:for:raise (-> +3), loop_with_raise:for (-> +3), nested_for:1 (-> +3), node:For (-> +3), node:Name, node:Subscript
+    for row in m: # for:row (-> +4), for_each:row (-> +4), iteration_variable:row, loop:for (-> +4), loop_with_early_exit:for:raise (-> +4), loop_with_raise:for (-> +4), node:For (-> +4), node:Name
+        for column in m[row]: # for:column (-> +3), index:row, iteration_variable:column, loop:for (-> +3), loop_with_early_exit:for:raise (-> +3), loop_with_raise:for (-> +3), nested_for:1 (-> +3), node:For (-> +3), node:Name, node:Subscript
             if m[row][column] == v: # comparison_operator:Eq, if (-> +2), if_test_atom:column, if_test_atom:m, if_test_atom:row, if_test_atom:v, if_without_else (-> +2), index:column, index:row, nested_index:2, node:Compare, node:If (-> +2), node:Name, node:Subscript
                 position = (row, column) # assignment, assignment_lhs_identifier:position, assignment_rhs_atom:column, assignment_rhs_atom:row, if_then_branch (-> +1), literal:Tuple, node:Assign, node:Name, node:Tuple, single_assignment:position
                 raise BreakOuterLoop # node:Name, node:Raise, raise:BreakOuterLoop
@@ -385,9 +385,9 @@ except BreakOuterLoop: # except:BreakOuterLoop, node:ExceptHandler (-> +1), node
 # ----------------------------------------------------------------------------------------
 # 043.2733-break-outer-loop.py
 # ----------------------------------------------------------------------------------------
-def loop_breaking(m, v): # function:loop_breaking (-> +5), function_argument:m, function_argument:v, function_argument_flavor:arg, function_returning_something:loop_breaking (-> +5), impure_function:loop_breaking (-> +5), node:FunctionDef (-> +5), node:arg, procedural_style (-> +6), whole_span:7 (-> +6)
-    for i, row in enumerate(m): # call_argument:m, external_free_call:enumerate, for:i (-> +3), for:row (-> +3), for_indexes_elements:i (-> +3), free_call:enumerate, literal:Tuple, loop:for (-> +3), loop_with_early_exit:for:return (-> +3), loop_with_return:for (-> +3), node:Call, node:For (-> +3), node:Name, node:Tuple
-        for j, value in enumerate(row): # call_argument:row, external_free_call:enumerate, for:j (-> +2), for:value (-> +2), for_indexes_elements:j (-> +2), free_call:enumerate, literal:Tuple, loop:for (-> +2), loop_with_early_exit:for:return (-> +2), loop_with_return:for (-> +2), nested_for:1 (-> +2), node:Call, node:For (-> +2), node:Name, node:Tuple
+def loop_breaking(m, v): # function:loop_breaking (-> +5), function_parameter:m, function_parameter:v, function_parameter_flavor:arg, function_returning_something:loop_breaking (-> +5), impure_function:loop_breaking (-> +5), node:FunctionDef (-> +5), node:arg, procedural_style (-> +6), whole_span:7 (-> +6)
+    for i, row in enumerate(m): # call_argument:m, external_free_call:enumerate, for:i (-> +3), for:row (-> +3), for_indexes_elements:i (-> +3), free_call:enumerate, iteration_variable:i, iteration_variable:row, literal:Tuple, loop:for (-> +3), loop_with_early_exit:for:return (-> +3), loop_with_return:for (-> +3), node:Call, node:For (-> +3), node:Name, node:Tuple
+        for j, value in enumerate(row): # call_argument:row, external_free_call:enumerate, for:j (-> +2), for:value (-> +2), for_indexes_elements:j (-> +2), free_call:enumerate, iteration_variable:j, iteration_variable:value, literal:Tuple, loop:for (-> +2), loop_with_early_exit:for:return (-> +2), loop_with_return:for (-> +2), nested_for:1 (-> +2), node:Call, node:For (-> +2), node:Name, node:Tuple
             if value == v: # comparison_operator:Eq, if (-> +1), if_test_atom:v, if_test_atom:value, if_without_else (-> +1), node:Compare, node:If (-> +1), node:Name
                 return (i, j) # if_then_branch, literal:Tuple, node:Name, node:Return, node:Tuple, return
     return None # literal:None, node:NameConstant, node:Return, return:None
@@ -466,7 +466,7 @@ s = str(i) # assignment:str, assignment_lhs_identifier:s, assignment_rhs_atom:i,
 # 056.1424-launch-1000-parallel-tasks-and-wait-for-completion.py
 # ----------------------------------------------------------------------------------------
 from multiprocessing import Pool # import:multiprocessing:Pool, import_module:multiprocessing, import_name:Pool, node:ImportFrom, procedural_style (-> +5), whole_span:6 (-> +5)
-def f(i): # function:f (-> +1), function_argument:i, function_argument_flavor:arg, function_returning_nothing:f (-> +1), node:FunctionDef (-> +1), node:arg
+def f(i): # function:f (-> +1), function_parameter:i, function_parameter_flavor:arg, function_returning_nothing:f (-> +1), node:FunctionDef (-> +1), node:arg
     i * i # binary_operator:Mult, multiplication_operator, node:BinOp, node:Expr, node:Name
 with Pool(processes) as p: # call_argument:processes, external_free_call:Pool, free_call:Pool, node:Call, node:Name, node:With (-> +1)
     p.map(func=f, iterable=range(1, 1001)) # call_argument:, call_argument:1, call_argument:1001, call_argument:f, call_keyword_argument:func, call_keyword_argument:iterable, external_free_call:range, free_call:range, literal:1, literal:1001, magic_number:1001, member_call:p:map, member_call_method:map, member_call_object:p, node:Attribute, node:Call, node:Expr, node:Name, node:Num, range:1:1001
@@ -534,7 +534,7 @@ z = x ** n # assignment:Pow, assignment_lhs_identifier:z, assignment_rhs_atom:n,
 # 067.1426-binomial-coefficient-n-choose-k.py
 # ----------------------------------------------------------------------------------------
 import math # functional_style (-> +2), import:math, import_module:math, node:Import, one_liner_style (-> +2), whole_span:3 (-> +2)
-def binom(n, k): # function:binom (-> +1), function_argument:k, function_argument:n, function_argument_flavor:arg, function_returning_something:binom (-> +1), node:FunctionDef (-> +1), node:arg, pure_function:binom (-> +1)
+def binom(n, k): # function:binom (-> +1), function_parameter:k, function_parameter:n, function_parameter_flavor:arg, function_returning_something:binom (-> +1), node:FunctionDef (-> +1), node:arg, pure_function:binom (-> +1)
     return math.factorial(n) // math.factorial(k) // math.factorial(n - k) # binary_operator:FloorDiv, binary_operator:Sub, call_argument:, call_argument:k, call_argument:n, member_call_method:factorial, node:Attribute, node:BinOp, node:Call, node:Name, node:Return, return
 
 # ----------------------------------------------------------------------------------------
@@ -565,7 +565,7 @@ print(" ".join(sys.argv[1:])) # call_argument:, composition, external_free_call:
 # ----------------------------------------------------------------------------------------
 # 073.0673-create-a-factory.py
 # ----------------------------------------------------------------------------------------
-def fact(a_class, str_): # function:fact (-> +2), function_argument:a_class, function_argument:str_, function_argument_flavor:arg, function_returning_something:fact (-> +2), functional_style (-> +2), higher_order_function:a_class (-> +2), node:FunctionDef (-> +2), node:arg, pure_function:fact (-> +2), whole_span:3 (-> +2)
+def fact(a_class, str_): # function:fact (-> +2), function_parameter:a_class, function_parameter:str_, function_parameter_flavor:arg, function_returning_something:fact (-> +2), functional_style (-> +2), higher_order_function:a_class (-> +2), node:FunctionDef (-> +2), node:arg, pure_function:fact (-> +2), whole_span:3 (-> +2)
     if issubclass(a_class, Parent): # call_argument:Parent, call_argument:a_class, external_free_call:issubclass, free_call:issubclass, if (-> +1), if_test_atom:Parent, if_test_atom:a_class, if_without_else (-> +1), node:Call, node:If (-> +1), node:Name
         return a_class(str_) # call_argument:str_, external_free_call:a_class, free_call:a_class, free_tail_call:a_class, if_then_branch, node:Call, node:Name, node:Return, return
 
@@ -634,13 +634,13 @@ c = bin(i).count("1") # assignment:count, assignment_lhs_identifier:c, assignmen
 # ----------------------------------------------------------------------------------------
 # 085.1003-check-if-integer-addition-will-overflow.py
 # ----------------------------------------------------------------------------------------
-def adding_will_overflow(x, y): # function:adding_will_overflow (-> +1), function_argument:x, function_argument:y, function_argument_flavor:arg, function_returning_something:adding_will_overflow (-> +1), functional_style (-> +1), node:FunctionDef (-> +1), node:arg, one_liner_style (-> +1), pure_function:adding_will_overflow (-> +1), whole_span:2 (-> +1)
+def adding_will_overflow(x, y): # function:adding_will_overflow (-> +1), function_parameter:x, function_parameter:y, function_parameter_flavor:arg, function_returning_something:adding_will_overflow (-> +1), functional_style (-> +1), node:FunctionDef (-> +1), node:arg, one_liner_style (-> +1), pure_function:adding_will_overflow (-> +1), whole_span:2 (-> +1)
     return False # literal:False, node:NameConstant, node:Return, return:False
 
 # ----------------------------------------------------------------------------------------
 # 086.1004-check-if-integer-multiplication-will-overflow.py
 # ----------------------------------------------------------------------------------------
-def multiplyWillOverflow(x, y): # function:multiplyWillOverflow (-> +1), function_argument:x, function_argument:y, function_argument_flavor:arg, function_returning_something:multiplyWillOverflow (-> +1), functional_style (-> +1), node:FunctionDef (-> +1), node:arg, one_liner_style (-> +1), pure_function:multiplyWillOverflow (-> +1), whole_span:2 (-> +1)
+def multiplyWillOverflow(x, y): # function:multiplyWillOverflow (-> +1), function_parameter:x, function_parameter:y, function_parameter_flavor:arg, function_returning_something:multiplyWillOverflow (-> +1), functional_style (-> +1), node:FunctionDef (-> +1), node:arg, one_liner_style (-> +1), pure_function:multiplyWillOverflow (-> +1), whole_span:2 (-> +1)
     return False # literal:False, node:NameConstant, node:Return, return:False
 
 # ----------------------------------------------------------------------------------------
@@ -663,10 +663,10 @@ raise ValueError("x is invalid") # call_argument:, external_free_call:ValueError
 # 090.1099-read-only-outside.py
 # ----------------------------------------------------------------------------------------
 class Foo(object): # node:ClassDef (-> +5), node:Name, object_oriented_style (-> +5), whole_span:6 (-> +5)
-    def __init__(self): # function:__init__ (-> +1), function_argument:self, function_argument_flavor:arg, function_returning_nothing:__init__ (-> +1), instance_method:__init__ (-> +1), method:__init__ (-> +1), node:FunctionDef (-> +1), node:arg
+    def __init__(self): # function:__init__ (-> +1), function_parameter:self, function_parameter_flavor:arg, function_returning_nothing:__init__ (-> +1), instance_method:__init__ (-> +1), method:__init__ (-> +1), node:FunctionDef (-> +1), node:arg
         self._x = 0 # assignment:0, assignment_lhs_identifier:self, assignment_rhs_atom:0, literal:0, node:Assign, node:Attribute, node:Name, node:Num
     @property # decorated_function:x (-> +2), function:x (-> +2), function_decorator:property (-> +2), function_returning_something:x (-> +2), instance_method:x (-> +2), method:x (-> +2), node:FunctionDef (-> +2), node:Name
-    def x(self): # function_argument:self, function_argument_flavor:arg, node:arg
+    def x(self): # function_parameter:self, function_parameter_flavor:arg, node:arg
         return self._x # node:Attribute, node:Name, node:Return, return, value_attr:_x
 
 # ----------------------------------------------------------------------------------------
@@ -687,7 +687,7 @@ with open("data.json", "w") as output: # call_argument:, external_free_call:open
 # 093.1082-pass-a-runnable-procedure-as-parameter.py
 # ----------------------------------------------------------------------------------------
 from __future__ import print_function # functional_style (-> +2), import:__future__:print_function, import_module:__future__, import_name:print_function, node:ImportFrom, one_liner_style (-> +2), whole_span:3 (-> +2)
-def control(f): # function:control (-> +1), function_argument:f, function_argument_flavor:arg, function_returning_something:control (-> +1), higher_order_function:f (-> +1), node:FunctionDef (-> +1), node:arg, pure_function:control (-> +1)
+def control(f): # function:control (-> +1), function_parameter:f, function_parameter_flavor:arg, function_returning_something:control (-> +1), higher_order_function:f (-> +1), node:FunctionDef (-> +1), node:arg, pure_function:control (-> +1)
     return f() # external_free_call:f, free_call:f, free_call_without_arguments:f, free_tail_call:f, node:Call, node:Name, node:Return, return
 
 # ----------------------------------------------------------------------------------------
@@ -768,7 +768,7 @@ class TestClass(object): # node:ClassDef (-> +7), node:Name
     a = None # assignment:None, assignment_lhs_identifier:a, assignment_rhs_atom:None, literal:None, node:Assign, node:Name, node:NameConstant, single_assignment:a
     b = None # assignment:None, assignment_lhs_identifier:b, assignment_rhs_atom:None, literal:None, node:Assign, node:Name, node:NameConstant, single_assignment:b
     c = None # assignment:None, assignment_lhs_identifier:c, assignment_rhs_atom:None, literal:None, node:Assign, node:Name, node:NameConstant, single_assignment:c
-    def __init__(self, a, b, c): # function:__init__ (-> +3), function_argument:a, function_argument:b, function_argument:c, function_argument:self, function_argument_flavor:arg, function_returning_nothing:__init__ (-> +3), instance_method:__init__ (-> +3), method:__init__ (-> +3), node:FunctionDef (-> +3), node:arg
+    def __init__(self, a, b, c): # function:__init__ (-> +3), function_parameter:a, function_parameter:b, function_parameter:c, function_parameter:self, function_parameter_flavor:arg, function_returning_nothing:__init__ (-> +3), instance_method:__init__ (-> +3), method:__init__ (-> +3), node:FunctionDef (-> +3), node:arg
         self.a = a # assignment, assignment_lhs_identifier:self, assignment_rhs_atom:a, node:Assign, node:Attribute, node:Name
         self.b = b # assignment, assignment_lhs_identifier:self, assignment_rhs_atom:b, node:Assign, node:Attribute, node:Name
         self.c = c # assignment, assignment_lhs_identifier:self, assignment_rhs_atom:c, node:Assign, node:Attribute, node:Name
@@ -820,13 +820,13 @@ subprocess.call(["x", "a", "b"]) # call_argument:, literal:List, literal:Str, me
 # ----------------------------------------------------------------------------------------
 # 112.2144-iterate-over-map-entries-ordered-by-keys.py
 # ----------------------------------------------------------------------------------------
-for k in sorted(mymap): # call_argument:mymap, external_free_call:sorted, for:k (-> +1), free_call:sorted, imperative_style (-> +1), loop:for (-> +1), loop_with_late_exit:for (-> +1), node:Call, node:For (-> +1), node:Name, whole_span:2 (-> +1)
+for k in sorted(mymap): # call_argument:mymap, external_free_call:sorted, for:k (-> +1), free_call:sorted, imperative_style (-> +1), iteration_variable:k, loop:for (-> +1), loop_with_late_exit:for (-> +1), node:Call, node:For (-> +1), node:Name, whole_span:2 (-> +1)
     print(mymap[k]) # call_argument:, external_free_call:print, free_call:print, free_call_without_result:print, index:k, node:Call, node:Expr, node:Name, node:Subscript
 
 # ----------------------------------------------------------------------------------------
 # 113.2157-iterate-over-map-entries-ordered-by-values.py
 # ----------------------------------------------------------------------------------------
-for x, k in sorted((x, k) for k, x in mymap.items()): # call_argument:, composition, comprehension:Generator, comprehension_for_count:1, external_free_call:sorted, for:k (-> +1), for:x (-> +1), free_call:sorted, imperative_style (-> +1), literal:Tuple, loop:for (-> +1), loop_with_late_exit:for (-> +1), member_call_method:items, node:Attribute, node:Call, node:For (-> +1), node:GeneratorExp, node:Name, node:Tuple, whole_span:2 (-> +1)
+for x, k in sorted((x, k) for k, x in mymap.items()): # call_argument:, composition, comprehension:Generator, comprehension_for_count:1, external_free_call:sorted, for:k (-> +1), for:x (-> +1), free_call:sorted, imperative_style (-> +1), iteration_variable:k, iteration_variable:x, literal:Tuple, loop:for (-> +1), loop_with_late_exit:for (-> +1), member_call_method:items, node:Attribute, node:Call, node:For (-> +1), node:GeneratorExp, node:Name, node:Tuple, whole_span:2 (-> +1)
     print(k, x) # call_argument:k, call_argument:x, external_free_call:print, free_call:print, free_call_without_result:print, node:Call, node:Expr, node:Name
 
 # ----------------------------------------------------------------------------------------
@@ -871,7 +871,7 @@ x = list(set(x)) # assignment:list, assignment_lhs_identifier:x, assignment_rhs_
 elements = ["b", "a", "b", "c"] # assignment, assignment_lhs_identifier:elements, imperative_style (-> +7), literal:List, literal:Str, node:Assign, node:List, node:Name, node:Str, single_assignment:elements, whole_span:8 (-> +7)
 unique_set = set() # assignment:set, assignment_lhs_identifier:unique_set, external_free_call:set, free_call:set, free_call_without_arguments:set, node:Assign, node:Call, node:Name, single_assignment:unique_set
 elements_unique = [] # assignment, assignment_lhs_identifier:elements_unique, empty_literal:List, literal:List, node:Assign, node:List, node:Name, single_assignment:elements_unique
-for i in elements: # accumulate_elements:add (-> +3), accumulate_elements:append (-> +3), accumulate_some_elements:add (-> +3), accumulate_some_elements:append (-> +3), for:i (-> +3), for_each:i (-> +3), loop:for (-> +3), loop_with_late_exit:for (-> +3), node:For (-> +3), node:Name
+for i in elements: # accumulate_elements:add (-> +3), accumulate_elements:append (-> +3), accumulate_some_elements:add (-> +3), accumulate_some_elements:append (-> +3), for:i (-> +3), for_each:i (-> +3), iteration_variable:i, loop:for (-> +3), loop_with_late_exit:for (-> +3), node:For (-> +3), node:Name
     if i not in unique_set: # comparison_operator:NotIn, if (-> +2), if_test_atom:i, if_test_atom:unique_set, if_without_else (-> +2), node:Compare, node:If (-> +2), node:Name
         unique_set.add(i) # call_argument:i, if_then_branch (-> +1), member_call:unique_set:add, member_call_method:add, member_call_object:unique_set, node:Attribute, node:Call, node:Expr, node:Name, update:unique_set:i, update_by_member_call:unique_set:i, update_by_member_call_with:add, update_with:add
         elements_unique.append(i) # call_argument:i, member_call:elements_unique:append, member_call_method:append, member_call_object:elements_unique, node:Attribute, node:Call, node:Expr, node:Name, update:elements_unique:i, update_by_member_call:elements_unique:i, update_by_member_call_with:append, update_with:append
@@ -918,7 +918,7 @@ assert isConsistent # flat_style, imperative_style, node:Assert, node:Name, whol
 # 124.2152-binary-search-for-a-value-in-sorted-array.py
 # ----------------------------------------------------------------------------------------
 import bisect # import:bisect, import_module:bisect, node:Import, procedural_style (-> +3), whole_span:4 (-> +3)
-def binarySearch(a, x): # function:binarySearch (-> +2), function_argument:a, function_argument:x, function_argument_flavor:arg, function_returning_something:binarySearch (-> +2), impure_function:binarySearch (-> +2), node:FunctionDef (-> +2), node:arg
+def binarySearch(a, x): # function:binarySearch (-> +2), function_parameter:a, function_parameter:x, function_parameter_flavor:arg, function_returning_something:binarySearch (-> +2), impure_function:binarySearch (-> +2), node:FunctionDef (-> +2), node:arg
     i = bisect.bisect_left(a, x) # assignment:bisect_left, assignment_lhs_identifier:i, assignment_rhs_atom:a, assignment_rhs_atom:bisect, assignment_rhs_atom:x, call_argument:a, call_argument:x, member_call_method:bisect_left, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:i
     return i if i != len(a) and a[i] == x else -1 # boolean_operator:And, call_argument:a, comparison_operator:Eq, comparison_operator:NotEq, external_free_call:len, free_call:len, index:i, literal:-1, node:BoolOp, node:Call, node:Compare, node:IfExp, node:Name, node:Num, node:Return, node:Subscript, return
 
@@ -934,7 +934,7 @@ print("Seconds:", t2 - t1) # binary_operator:Sub, call_argument:, external_free_
 # ----------------------------------------------------------------------------------------
 # 126.2137-multiple-return-values.py
 # ----------------------------------------------------------------------------------------
-def foo(): # function:foo (-> +1), function_returning_something:foo (-> +1), function_without_arguments:foo (-> +1), functional_style (-> +1), node:FunctionDef (-> +1), one_liner_style (-> +1), pure_function:foo (-> +1), whole_span:2 (-> +1)
+def foo(): # function:foo (-> +1), function_returning_something:foo (-> +1), function_without_parameters:foo (-> +1), functional_style (-> +1), node:FunctionDef (-> +1), one_liner_style (-> +1), pure_function:foo (-> +1), whole_span:2 (-> +1)
     return "string", True # literal:Str, literal:True, literal:Tuple, node:NameConstant, node:Return, node:Str, node:Tuple, return
 
 # ----------------------------------------------------------------------------------------
@@ -946,12 +946,12 @@ foo = imp.load_module("foobody", "foobody.txt").foo # assignment, assignment_lhs
 # ----------------------------------------------------------------------------------------
 # 128.2085-breadth-first-traversing-of-a-tree.py
 # ----------------------------------------------------------------------------------------
-def BFS(f, root): # function:BFS (-> +8), function_argument:f, function_argument:root, function_argument_flavor:arg, function_returning_nothing:BFS (-> +8), higher_order_function:f (-> +8), node:FunctionDef (-> +8), node:arg, procedural_style (-> +8), whole_span:9 (-> +8)
+def BFS(f, root): # function:BFS (-> +8), function_parameter:f, function_parameter:root, function_parameter_flavor:arg, function_returning_nothing:BFS (-> +8), higher_order_function:f (-> +8), node:FunctionDef (-> +8), node:arg, procedural_style (-> +8), whole_span:9 (-> +8)
     Q = [root] # assignment, assignment_lhs_identifier:Q, assignment_rhs_atom:root, literal:List, node:Assign, node:List, node:Name, single_assignment:Q
     while Q: # loop:while (-> +6), loop_with_late_exit:while (-> +6), node:Name, node:While (-> +6)
         n = Q.pop(0) # assignment:pop, assignment_lhs_identifier:n, assignment_rhs_atom:0, assignment_rhs_atom:Q, call_argument:0, literal:0, member_call_method:pop, node:Assign, node:Attribute, node:Call, node:Name, node:Num, single_assignment:n
         f(n) # call_argument:n, external_free_call:f, free_call:f, free_call_without_result:f, node:Call, node:Expr, node:Name
-        for child in n: # for:child (-> +3), for_each:child (-> +3), loop:for (-> +3), loop_with_late_exit:for (-> +3), node:For (-> +3), node:Name
+        for child in n: # for:child (-> +3), for_each:child (-> +3), iteration_variable:child, loop:for (-> +3), loop_with_late_exit:for (-> +3), node:For (-> +3), node:Name
             if not n.discovered: # if (-> +2), if_test_atom:n, if_without_else (-> +2), node:Attribute, node:If (-> +2), node:Name, node:UnaryOp, unary_operator:Not
                 n.discovered = True # assignment:True, assignment_lhs_identifier:n, assignment_rhs_atom:True, if_then_branch (-> +1), literal:True, node:Assign, node:Attribute, node:Name, node:NameConstant
                 Q.append(n) # call_argument:n, member_call:Q:append, member_call_method:append, member_call_object:Q, node:Attribute, node:Call, node:Expr, node:Name, update:Q:n, update_by_member_call:Q:n, update_by_member_call_with:append, update_with:append
@@ -960,7 +960,7 @@ def BFS(f, root): # function:BFS (-> +8), function_argument:f, function_argument
 # 129.2282-breadth-first-traversing-in-a-graph.py
 # ----------------------------------------------------------------------------------------
 from collections import deque # import:collections:deque, import_module:collections, import_name:deque, node:ImportFrom, procedural_style (-> +8), whole_span:9 (-> +8)
-def breadth_first(start, f): # function:breadth_first (-> +7), function_argument:f, function_argument:start, function_argument_flavor:arg, function_returning_nothing:breadth_first (-> +7), higher_order_function:f (-> +7), node:FunctionDef (-> +7), node:arg
+def breadth_first(start, f): # function:breadth_first (-> +7), function_parameter:f, function_parameter:start, function_parameter_flavor:arg, function_returning_nothing:breadth_first (-> +7), higher_order_function:f (-> +7), node:FunctionDef (-> +7), node:arg
     seen = set() # assignment:set, assignment_lhs_identifier:seen, external_free_call:set, free_call:set, free_call_without_arguments:set, node:Assign, node:Call, node:Name, single_assignment:seen
     q = deque([start]) # assignment:deque, assignment_lhs_identifier:q, assignment_rhs_atom:start, call_argument:, external_free_call:deque, free_call:deque, literal:List, node:Assign, node:Call, node:List, node:Name, single_assignment:q
     while q: # loop:while (-> +4), loop_with_late_exit:while (-> +4), node:Name, node:While (-> +4)
@@ -972,7 +972,7 @@ def breadth_first(start, f): # function:breadth_first (-> +7), function_argument
 # ----------------------------------------------------------------------------------------
 # 130.2283-depth-first-traversing-in-a-graph.py
 # ----------------------------------------------------------------------------------------
-def depth_first(start, f): # function:depth_first (-> +7), function_argument:f, function_argument:start, function_argument_flavor:arg, function_returning_nothing:depth_first (-> +7), higher_order_function:f (-> +7), node:FunctionDef (-> +7), node:arg, procedural_style (-> +7), whole_span:8 (-> +7)
+def depth_first(start, f): # function:depth_first (-> +7), function_parameter:f, function_parameter:start, function_parameter_flavor:arg, function_returning_nothing:depth_first (-> +7), higher_order_function:f (-> +7), node:FunctionDef (-> +7), node:arg, procedural_style (-> +7), whole_span:8 (-> +7)
     seen = set() # assignment:set, assignment_lhs_identifier:seen, external_free_call:set, free_call:set, free_call_without_arguments:set, node:Assign, node:Call, node:Name, single_assignment:seen
     stack = [start] # assignment, assignment_lhs_identifier:stack, assignment_rhs_atom:start, literal:List, node:Assign, node:List, node:Name, single_assignment:stack
     while stack: # loop:while (-> +4), loop_with_late_exit:while (-> +4), node:Name, node:While (-> +4)
@@ -1047,7 +1047,7 @@ m.pop(k, None) # call_argument:None, call_argument:k, flat_style, imperative_sty
 # ----------------------------------------------------------------------------------------
 # 141.2159-iterate-in-sequence-over-two-lists.py
 # ----------------------------------------------------------------------------------------
-for x in items1 + items2: # addition_operator, binary_operator:Add, for:x (-> +1), imperative_style (-> +1), loop:for (-> +1), loop_with_late_exit:for (-> +1), node:BinOp, node:For (-> +1), node:Name, whole_span:2 (-> +1)
+for x in items1 + items2: # addition_operator, binary_operator:Add, for:x (-> +1), imperative_style (-> +1), iteration_variable:x, loop:for (-> +1), loop_with_late_exit:for (-> +1), node:BinOp, node:For (-> +1), node:Name, whole_span:2 (-> +1)
     print(x) # call_argument:x, external_free_call:print, free_call:print, free_call_without_result:print, node:Call, node:Expr, node:Name
 
 # ----------------------------------------------------------------------------------------
@@ -1058,7 +1058,7 @@ s = hex(x) # assignment:hex, assignment_lhs_identifier:s, assignment_rhs_atom:x,
 # ----------------------------------------------------------------------------------------
 # 143.2256-iterate-alternatively-over-two-lists.py
 # ----------------------------------------------------------------------------------------
-for pair in zip(item1, item2): # call_argument:item1, call_argument:item2, external_free_call:zip, for:pair (-> +1), free_call:zip, imperative_style (-> +1), loop:for (-> +1), loop_with_late_exit:for (-> +1), node:Call, node:For (-> +1), node:Name, whole_span:2 (-> +1)
+for pair in zip(item1, item2): # call_argument:item1, call_argument:item2, external_free_call:zip, for:pair (-> +1), free_call:zip, imperative_style (-> +1), iteration_variable:pair, loop:for (-> +1), loop_with_late_exit:for (-> +1), node:Call, node:For (-> +1), node:Name, whole_span:2 (-> +1)
     print(pair) # call_argument:pair, external_free_call:print, free_call:print, free_call_without_result:print, node:Call, node:Expr, node:Name
 
 # ----------------------------------------------------------------------------------------
@@ -1147,11 +1147,11 @@ c = "#{:02x}{:02x}{:02x}".format((r1 + r2) // 2, (g1 + g2) // 2, (b1 + b2) // 2)
 import numpy # import:numpy, import_module:numpy, node:Import, object_oriented_style (-> +14), whole_span:15 (-> +14)
 class RGB(numpy.ndarray): # node:Attribute, node:ClassDef (-> +8), node:Name
     @classmethod # class_method:from_str (-> +4), decorated_function:from_str (-> +4), function:from_str (-> +4), function_decorator:classmethod (-> +4), function_returning_something:from_str (-> +4), method:from_str (-> +4), node:FunctionDef (-> +4), node:Name
-    def from_str(cls, rgbstr): # function_argument:cls, function_argument:rgbstr, function_argument_flavor:arg, node:arg
+    def from_str(cls, rgbstr): # function_parameter:cls, function_parameter:rgbstr, function_parameter_flavor:arg, node:arg
         return numpy.array( # composition, member_call:numpy:array, member_call:numpy:view, member_call_method:array, member_call_method:view, member_call_object:numpy, method_chaining, node:Attribute, node:Attribute (-> +1), node:Call (-> +1), node:Call (-> +2), node:Name, node:Return (-> +2), return (-> +2)
             [int(rgbstr[i : i + 2], 16) for i in range(1, len(rgbstr), 2)] # addition_operator, binary_operator:Add, call_argument:, call_argument:1, call_argument:16, call_argument:2, call_argument:rgbstr, composition, comprehension:List, comprehension_for_count:1, external_free_call:int, external_free_call:len, external_free_call:range, free_call:int, free_call:len, free_call:range, literal:1, literal:16, literal:2, magic_number:16, node:BinOp, node:Call, node:ListComp, node:Name, node:Num, node:Subscript, range:1:_:2, slice:i:_:, slice_lower:i, slice_step:, slice_upper:_
         ).view(cls) # call_argument:cls, node:Name
-    def __str__(self): # function:__str__ (-> +2), function_argument:self, function_argument_flavor:arg, function_returning_something:__str__ (-> +2), instance_method:__str__ (-> +2), method:__str__ (-> +2), node:FunctionDef (-> +2), node:arg
+    def __str__(self): # function:__str__ (-> +2), function_parameter:self, function_parameter_flavor:arg, function_returning_something:__str__ (-> +2), instance_method:__str__ (-> +2), method:__str__ (-> +2), node:FunctionDef (-> +2), node:arg
         self = self.astype(numpy.uint8) # assignment:astype, assignment_lhs_identifier:self, assignment_rhs_atom:numpy, assignment_rhs_atom:self, call_argument:, member_call_method:astype, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:self, update:self:numpy, update_by_assignment:self:numpy, update_by_assignment_with:astype, update_with:astype
         return "#" + "".join(format(n, "x") for n in self) # binary_operator:Add, call_argument:, call_argument:n, composition, comprehension:Generator, comprehension_for_count:1, concatenation_operator:Str, empty_literal:Str, external_free_call:format, free_call:format, literal:Str, member_call_method:join, node:Attribute, node:BinOp, node:Call, node:GeneratorExp, node:Name, node:Return, node:Str, return
 c1 = RGB.from_str("#a1b1c1") # assignment:from_str, assignment_lhs_identifier:c1, assignment_rhs_atom:RGB, call_argument:, literal:Str, member_call_method:from_str, node:Assign, node:Attribute, node:Call, node:Name, node:Str, single_assignment:c1
@@ -1187,7 +1187,7 @@ y = random.sample(x, k) # assignment:sample, assignment_lhs_identifier:y, assign
 # 159.2281-trie.py
 # ----------------------------------------------------------------------------------------
 class Trie: # node:ClassDef (-> +4), object_oriented_style (-> +4), whole_span:5 (-> +4)
-    def __init__(self, prefix, value=None): # function:__init__ (-> +3), function_argument:prefix, function_argument:self, function_argument:value, function_argument_flavor:arg, function_returning_nothing:__init__ (-> +3), instance_method:__init__ (-> +3), literal:None, method:__init__ (-> +3), node:FunctionDef (-> +3), node:NameConstant, node:arg
+    def __init__(self, prefix, value=None): # function:__init__ (-> +3), function_parameter:prefix, function_parameter:self, function_parameter:value, function_parameter_flavor:arg, function_returning_nothing:__init__ (-> +3), instance_method:__init__ (-> +3), literal:None, method:__init__ (-> +3), node:FunctionDef (-> +3), node:NameConstant, node:arg
         self.prefix = prefix # assignment, assignment_lhs_identifier:self, assignment_rhs_atom:prefix, node:Assign, node:Attribute, node:Name
         self.children = [] # assignment, assignment_lhs_identifier:self, empty_literal:List, literal:List, node:Assign, node:Attribute, node:List, node:Name
         self.value = value # assignment, assignment_lhs_identifier:self, assignment_rhs_atom:value, node:Assign, node:Attribute, node:Name
@@ -1218,18 +1218,18 @@ if "f" in sys.argv[1:]: # comparison_operator:In, if (-> +1), if_test_atom:1, if
 # ----------------------------------------------------------------------------------------
 # 163.2170-print-list-elements-by-group-of-2.py
 # ----------------------------------------------------------------------------------------
-for x in zip(list[::2], list[1::2]): # call_argument:, external_free_call:zip, for:x (-> +1), free_call:zip, imperative_style (-> +1), literal:1, literal:2, loop:for (-> +1), loop_with_late_exit:for (-> +1), node:Call, node:For (-> +1), node:Name, node:Num, node:Subscript, slice:1::2, slice:::2, slice_lower:, slice_lower:1, slice_step:2, slice_upper:, whole_span:2 (-> +1)
+for x in zip(list[::2], list[1::2]): # call_argument:, external_free_call:zip, for:x (-> +1), free_call:zip, imperative_style (-> +1), iteration_variable:x, literal:1, literal:2, loop:for (-> +1), loop_with_late_exit:for (-> +1), node:Call, node:For (-> +1), node:Name, node:Num, node:Subscript, slice:1::2, slice:::2, slice_lower:, slice_lower:1, slice_step:2, slice_upper:, whole_span:2 (-> +1)
     print(x) # call_argument:x, external_free_call:print, free_call:print, free_call_without_result:print, node:Call, node:Expr, node:Name
 
 # ----------------------------------------------------------------------------------------
 # 163.3177-print-list-elements-by-group-of-2.py
 # ----------------------------------------------------------------------------------------
 from itertools import tee # import:itertools:tee, import_module:itertools, import_name:tee, node:ImportFrom, procedural_style (-> +6), whole_span:7 (-> +6)
-def pairwise(iterable): # function:pairwise (-> +3), function_argument:iterable, function_argument_flavor:arg, function_returning_something:pairwise (-> +3), impure_function:pairwise (-> +3), node:FunctionDef (-> +3), node:arg
+def pairwise(iterable): # function:pairwise (-> +3), function_parameter:iterable, function_parameter_flavor:arg, function_returning_something:pairwise (-> +3), impure_function:pairwise (-> +3), node:FunctionDef (-> +3), node:arg
     a, b = tee(iterable) # assignment:tee, assignment_lhs_identifier:a, assignment_lhs_identifier:b, assignment_rhs_atom:iterable, call_argument:iterable, external_free_call:tee, free_call:tee, literal:Tuple, node:Assign, node:Call, node:Name, node:Tuple, parallel_assignment:2
     next(b, None) # call_argument:None, call_argument:b, external_free_call:next, free_call:next, free_call_without_result:next, literal:None, node:Call, node:Expr, node:Name, node:NameConstant
     return zip(a, b) # call_argument:a, call_argument:b, external_free_call:zip, free_call:zip, free_tail_call:zip, node:Call, node:Name, node:Return, return
-for a, b in pairwise(list): # call_argument:list, for:a (-> +1), for:b (-> +1), free_call:pairwise, internal_free_call:pairwise, literal:Tuple, loop:for (-> +1), loop_with_late_exit:for (-> +1), node:Call, node:For (-> +1), node:Name, node:Tuple
+for a, b in pairwise(list): # call_argument:list, for:a (-> +1), for:b (-> +1), free_call:pairwise, internal_free_call:pairwise, iteration_variable:a, iteration_variable:b, literal:Tuple, loop:for (-> +1), loop_with_late_exit:for (-> +1), node:Call, node:For (-> +1), node:Name, node:Tuple
     print(a, b) # call_argument:a, call_argument:b, external_free_call:print, free_call:print, free_call_without_result:print, node:Call, node:Expr, node:Name
 
 # ----------------------------------------------------------------------------------------
@@ -1410,18 +1410,18 @@ sys.exit(0) # call_argument:0, literal:0, member_call:sys:exit, member_call_meth
 # 187.3261-disjoint-set.py
 # ----------------------------------------------------------------------------------------
 class UnionFind: # node:ClassDef (-> +14), object_oriented_style (-> +14), whole_span:15 (-> +14)
-    def __init__(self, size): # function:__init__ (-> +2), function_argument:self, function_argument:size, function_argument_flavor:arg, function_returning_nothing:__init__ (-> +2), instance_method:__init__ (-> +2), method:__init__ (-> +2), node:FunctionDef (-> +2), node:arg
+    def __init__(self, size): # function:__init__ (-> +2), function_parameter:self, function_parameter:size, function_parameter_flavor:arg, function_returning_nothing:__init__ (-> +2), instance_method:__init__ (-> +2), method:__init__ (-> +2), node:FunctionDef (-> +2), node:arg
         self.rank = [0] * size # assignment:Mult, assignment_lhs_identifier:self, assignment_rhs_atom:0, assignment_rhs_atom:size, binary_operator:Mult, literal:0, literal:List, node:Assign, node:Attribute, node:BinOp, node:List, node:Name, node:Num, replication_operator:List
         self.p = [i for i in range(size)] # assignment, assignment_lhs_identifier:self, assignment_rhs_atom:i, assignment_rhs_atom:size, call_argument:size, comprehension:List, comprehension_for_count:1, external_free_call:range, free_call:range, node:Assign, node:Attribute, node:Call, node:ListComp, node:Name, range:size
-    def find_set(self, i): # function:find_set (-> +5), function_argument:i, function_argument:self, function_argument_flavor:arg, function_returning_something:find_set (-> +5), instance_method:find_set (-> +5), method:find_set (-> +5), node:FunctionDef (-> +5), node:arg
+    def find_set(self, i): # function:find_set (-> +5), function_parameter:i, function_parameter:self, function_parameter_flavor:arg, function_returning_something:find_set (-> +5), instance_method:find_set (-> +5), method:find_set (-> +5), node:FunctionDef (-> +5), node:arg
         if self.p[i] == i: # comparison_operator:Eq, if (-> +4), if_test_atom:i, if_test_atom:self, index:i, node:Attribute, node:Compare, node:If (-> +4), node:Name, node:Subscript, value_attr:p
             return i # if_then_branch, node:Name, node:Return, return:i
         else:
             self.p[i] = self.find_set(self.p[i]) # assignment:find_set, assignment_rhs_atom:i, assignment_rhs_atom:self, call_argument:, if_else_branch (-> +1), index:i, member_call_method:find_set, node:Assign, node:Attribute, node:Call, node:Name, node:Subscript, subscript_assignment:Index, value_attr:p
             return self.p[i] # index:i, node:Attribute, node:Name, node:Return, node:Subscript, return, value_attr:p
-    def is_same_set(self, i, j): # function:is_same_set (-> +1), function_argument:i, function_argument:j, function_argument:self, function_argument_flavor:arg, function_returning_something:is_same_set (-> +1), instance_method:is_same_set (-> +1), method:is_same_set (-> +1), node:FunctionDef (-> +1), node:arg
+    def is_same_set(self, i, j): # function:is_same_set (-> +1), function_parameter:i, function_parameter:j, function_parameter:self, function_parameter_flavor:arg, function_returning_something:is_same_set (-> +1), instance_method:is_same_set (-> +1), method:is_same_set (-> +1), node:FunctionDef (-> +1), node:arg
         return self.find_set(i) == self.find_set(j) # call_argument:i, call_argument:j, comparison_operator:Eq, member_call_method:find_set, node:Attribute, node:Call, node:Compare, node:Name, node:Return, return
-    def union_set(self, i, j): # function:union_set (-> +2), function_argument:i, function_argument:j, function_argument:self, function_argument_flavor:arg, function_returning_nothing:union_set (-> +2), instance_method:union_set (-> +2), method:union_set (-> +2), node:FunctionDef (-> +2), node:arg
+    def union_set(self, i, j): # function:union_set (-> +2), function_parameter:i, function_parameter:j, function_parameter:self, function_parameter_flavor:arg, function_returning_nothing:union_set (-> +2), instance_method:union_set (-> +2), method:union_set (-> +2), node:FunctionDef (-> +2), node:arg
         if not self.is_same_set(i, j): # call_argument:i, call_argument:j, if (-> +1), if_test_atom:i, if_test_atom:j, if_test_atom:self, if_without_else (-> +1), member_call_method:is_same_set, node:Attribute, node:Call, node:If (-> +1), node:Name, node:UnaryOp, unary_operator:Not
             x, y = self.find_set(i), self.find_set(j) # assignment, assignment_lhs_identifier:x, assignment_lhs_identifier:y, assignment_rhs_atom:i, assignment_rhs_atom:j, assignment_rhs_atom:self, call_argument:i, call_argument:j, if_then_branch, literal:Tuple, member_call_method:find_set, node:Assign, node:Attribute, node:Call, node:Name, node:Tuple, parallel_assignment:2
 

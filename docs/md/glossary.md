@@ -61,7 +61,7 @@ Inside a definition, the terms which have their own entry in the glossary are _i
 **Taxon** (plur. **taxa**)
 :   Name of a _feature_, resulting from the conversion of a given _label_. Examples:
 
-:   - the _label_ `swap` is converted to the _taxon_ `var/assignment/parallel/swap`;
+:   - the _label_ `swap` is converted to the _taxon_ `var/assignment/explicit/parallel/swap`;
 :   - the _label_ `member_call_method:append` is converted to the _taxa_ `call/method/sequence/list/append` and `type/sequence/list`.
 
 :   A _taxon_ is a _path_ from a root to a node in the _taxonomy_. It represents a learning concept that should be of interest to the teacher.

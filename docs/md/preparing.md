@@ -36,7 +36,7 @@ FOO = 42
 FOO = ComputeSquare(FOO) # bad: redefinition of a constant
 ```
 
-... Paroxython will wrongly detect two definitions of constants (`var/assignment/constant`) and the instanciation of a class (`call/class/constructor`). To make these false positives disappear, just write:
+... Paroxython will wrongly detect two definitions of constants (`var/assignment/explicit/constant`) and the instanciation of a class (`call/class/constructor`). To make these false positives disappear, just write:
 
 
 ```python

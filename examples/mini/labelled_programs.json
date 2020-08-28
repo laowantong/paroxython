@@ -139,11 +139,11 @@
         [[1,8,"1-"]]
       ],
       [
-        "function_argument:n",
+        "function_parameter:n",
         [[1,1,"1-1-0-1-"]]
       ],
       [
-        "function_argument_flavor:arg",
+        "function_parameter_flavor:arg",
         [[1,1,"1-1-0-1-"]]
       ],
       [
@@ -448,6 +448,10 @@
         [[1,1,"1-"]]
       ],
       [
+        "iteration_variable:i",
+        [[2,2,"2-0-"]]
+      ],
+      [
         "literal:0",
         [[3,3,"2-2-1-0-2-1-"],[5,5,"2-2-1-2-1-0-2-1-"],[7,7,"2-2-1-2-1-2-1-0-2-1-"]]
       ],
@@ -577,11 +581,11 @@
         [[2,3,"2-"]]
       ],
       [
-        "function_argument:n",
+        "function_parameter:n",
         [[2,2,"2-1-0-1-"]]
       ],
       [
-        "function_argument_flavor:arg",
+        "function_parameter_flavor:arg",
         [[2,2,"2-1-0-1-"]]
       ],
       [

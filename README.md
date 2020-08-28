@@ -9,8 +9,8 @@
 [![paroxython SLOC](https://img.shields.io/badge/main%20program-~1700%20SLOC-blue)](https://github.com/laowantong/paroxython/blob/master/paroxython)
 [![tests SLOC](https://img.shields.io/badge/tests-~2700%20SLOC-blue)](https://github.com/laowantong/paroxython/blob/master/tests)
 [![helpers SLOC](https://img.shields.io/badge/helpers-~850%20SLOC-blue)](https://github.com/laowantong/paroxython/blob/master/helpers)
-[![specifications lines](https://img.shields.io/badge/specifications-~7700%20lines-blue)](https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md)
-[![taxonomy mappings](https://img.shields.io/badge/taxonomy-259%20mappings-blue)](https://github.com/laowantong/paroxython/blob/master/paroxython/resources/taxonomy.tsv)
+[![specifications lines](https://img.shields.io/badge/specifications-~7750%20lines-blue)](https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md)
+[![taxonomy mappings](https://img.shields.io/badge/taxonomy-263%20mappings-blue)](https://github.com/laowantong/paroxython/blob/master/paroxython/resources/taxonomy.tsv)
 [![GitHub commit activity](https://img.shields.io/github/commit-activity/y/laowantong/paroxython.svg?style=flat)]()
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -174,7 +174,6 @@ This should print `"paroxython 0.4.6 loaded."`. Run it on a cell of Python code 
 |:--|:--|
 | `call/method/sequence/list/append` | 6 |
 | `condition/inequality` | 5 |
-| `def/argument/arg` | 2 |
 | `def/function/impure` | 2-8 |
 | `flow/loop/exit/late` | 5-7 |
 | `flow/loop/while` | 5-7 |
@@ -187,18 +186,19 @@ This should print `"paroxython 0.4.6 loaded."`. Run it on a cell of Python code 
 | `type/sequence/list` | 6 |
 | `type/sequence/list/literal/empty` | 3 |
 | `type/sequence/tuple/literal` | 4, 4, 7, 7 |
-| `var/assignment/parallel` | 4 |
-| `var/assignment/parallel/slide` | 7 |
-| `var/assignment/single` | 3 |
+| `var/assignment/explicit/parallel` | 4 |
+| `var/assignment/explicit/parallel/slide` | 7 |
+| `var/assignment/explicit/single` | 3 |
+| `var/assignment/implicit/parameter` | 2 |
 
 As you can see, in this program, Paroxython identifies among others:
 
 - the use of the [procedural paradigm](https://en.wikipedia.org/wiki/Procedural_programming) (`style/procedural`);
-- an [impure](https://en.wikipedia.org/wiki/Pure_function) function (`def/function/impure`);
+- an im[pure function](https://en.wikipedia.org/wiki/Pure_function) (`def/function/impure`);
 - a `while` loop (`flow/loop/while`) with a late exit (`flow/loop/exit/late`);
 - a little bit of voodoo on lists (`type/sequence/list/literal/empty` and `call/method/sequence/list/append`);
-- a simple [tuple assignment](https://openbookproject.net/thinkcs/python/english3e/tuples.html#tuple-assignment) (`var/assignment/parallel`);
-- a “sliding” tuple assignment (`var/assignment/parallel/slide`). If the denomination is unique to us, the pattern itself occurs in a number of programs: implementations of [C-finite sequences](https://en.wikipedia.org/wiki/Constant-recursive_sequence) with C greater than 1, [Greatest Common Divisor](https://en.wikipedia.org/wiki/Greatest_common_divisor), [Quicksort](https://en.wikipedia.org/wiki/Quicksort), etc.
+- a simple [tuple assignment](https://openbookproject.net/thinkcs/python/english3e/tuples.html#tuple-assignment) (`var/assignment/explicit/parallel`). Note that we distinguish between explicit (with `=`) and implicit (parameters and iteration variables) assignments;
+- a “sliding” tuple assignment (`var/assignment/explicit/parallel/slide`). If the denomination is unique to us, the pattern itself occurs in a number of programs: implementations of [C-finite sequences](https://en.wikipedia.org/wiki/Constant-recursive_sequence) with C greater than 1, [Greatest Common Divisor](https://en.wikipedia.org/wiki/Greatest_common_divisor), [Quicksort](https://en.wikipedia.org/wiki/Quicksort), etc.
 
 The magic command `%%paroxython` (corresponding to the subcommand [`tag`](https://laowantong.github.io/paroxython/cli_tag.html)) only scratches the surface of the system. As shown before, to estimate the learning cost of the features and get actionable recommendations, you will need first to construct the tag database with [`collect`](https://laowantong.github.io/paroxython/cli_collect.html), and then call [`recommend`](https://laowantong.github.io/paroxython/cli_recommend.html) on a pipeline of yours.
 

@@ -45,10 +45,10 @@
 - free_call_without_result:print / fizzbuzz.py / 4, 6, 8, 10
 - function:is_even / is_even.py / 2-3
 - function:print_collatz / collatz.py / 1-8
-- function_argument:n / collatz.py / 1
-- function_argument:n / is_even.py / 2
-- function_argument_flavor:arg / collatz.py / 1
-- function_argument_flavor:arg / is_even.py / 2
+- function_parameter:n / collatz.py / 1
+- function_parameter:n / is_even.py / 2
+- function_parameter_flavor:arg / collatz.py / 1
+- function_parameter_flavor:arg / is_even.py / 2
 - function_returning_nothing:print_collatz / collatz.py / 1-8
 - function_returning_something:is_even / is_even.py / 2-3
 - functional_style / is_even.py / 1-3
@@ -73,6 +73,7 @@
 - import:fizzbuzz / is_even.py / 1
 - import_module:collatz / fizzbuzz.py / 1
 - import_module:fizzbuzz / is_even.py / 1
+- iteration_variable:i / fizzbuzz.py / 2
 - literal:0 / collatz.py / 4
 - literal:0 / fizzbuzz.py / 3, 5, 7
 - literal:0 / is_even.py / 3
@@ -208,12 +209,12 @@
 - free_call_without_result
 - free_tail_call
 - function
-- function_argument
-- function_argument_flavor
 - function_decorator
+- function_parameter
+- function_parameter_flavor
 - function_returning_nothing
 - function_returning_something
-- function_without_arguments
+- function_without_parameters
 - generator
 - get_valid_input
 - higher-order function
@@ -230,6 +231,7 @@
 - infinite_while
 - instance_method|class_method|static_method
 - internal_free_call
+- iteration_variable
 - literal
 - loop
 - loop_else
