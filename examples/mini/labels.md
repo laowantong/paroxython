@@ -199,6 +199,7 @@
 - corrective_conditional_assignment
 - count_elements|count_states
 - count_inputs
+- count_some_elements|count_some_states
 - decorated_function
 - deeply_recursive_function
 - divisibility_test

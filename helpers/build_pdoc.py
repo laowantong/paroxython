@@ -214,7 +214,7 @@ def compute_stats():
         assert n > 0, f"Unable to create badge for '{directory}' SLOC."
     total = 50 * round(Path("paroxython/resources/spec.md").read_text().count("\n") / 50)
     (readme_text, n) = regex.subn(
-        fr"(?m)(!\[specifications lines\].+?)~\d+(%20lines)",
+        fr"(?m)(!\[spec lines\].+?)~\d+(%20lines)",
         fr"\1~{total}\2",
         readme_text,
     )

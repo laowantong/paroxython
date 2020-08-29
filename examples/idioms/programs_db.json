@@ -6401,7 +6401,8 @@
         "style/one_liner": [[1,2]],
         "type/boolean/literal/True": [[2,2]],
         "type/sequence/string/literal": [[2,2]],
-        "type/sequence/tuple/literal": [[2,2]]
+        "type/sequence/tuple/literal": [[2,2]],
+        "var/metasyntactic": [[1,2]]
       }
     },
     "127.2274-source-code-inclusion.py": {
@@ -6443,6 +6444,7 @@
         "style/one_liner": [[1,2]],
         "type/sequence/string/literal": [[2,2],[2,2]],
         "var/assignment/explicit/single": [[2,2]],
+        "var/metasyntactic": [[2,2]],
         "var/scope/global": [[1,2]]
       }
     },
@@ -22653,6 +22655,10 @@
     ],
     "var/deletion/index": [
       "029.0199-remove-item-from-list-by-its-index.py"
+    ],
+    "var/metasyntactic": [
+      "126.2137-multiple-return-values.py",
+      "127.2274-source-code-inclusion.py"
     ],
     "var/scope/global": [
       "002.0011-print-hello-10-times.py",

@@ -136,6 +136,7 @@ operator/tuple/replication	replication_operator:Tuple
 pattern/elements/accumulate	accumulate_elements\b.+
 pattern/elements/accumulate/all	accumulate_all_elements\b.+
 pattern/elements/accumulate/count	count_elements:.+
+pattern/elements/accumulate/count/some	count_some_elements:.+
 pattern/elements/accumulate/find/best	find_best_element:.+
 pattern/elements/accumulate/find/best/\1	accumulate_elements:(max|min)
 pattern/elements/accumulate/find/best/index	find_best_element_index.+
@@ -159,6 +160,7 @@ pattern/inputs/accumulate	accumulate_inputs:.+
 pattern/inputs/accumulate/count	count_inputs:.+
 pattern/inputs/find/first_good	get_valid_input:.+
 pattern/states/accumulate/count	count_states:.+
+pattern/states/accumulate/count/some	count_some_states:.+
 style/functional	functional_style
 style/functional_trait/\1	external_free_call:(map|filter|reduce|partial|accumulate)
 style/functional_trait/higher_order	higher_order_function:.+
@@ -266,6 +268,5 @@ var/deletion/attribute	attribute_deletion:.+
 var/deletion/index	subscript_deletion:Index
 var/deletion/slice	subscript_deletion:Slice
 var/deletion/unbinding	unbinding:.+
+var/metasyntactic	(function|assignment_lhs_identifier|function_parameter|iteration_variable):(foobar|foo|bar)
 -- EOF	EOF
-pattern/states/accumulate	TODO
-pattern/states/accumulate/find_best	TODO

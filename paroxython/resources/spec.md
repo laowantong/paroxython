@@ -164,6 +164,7 @@
 - [Iterative patterns](#iterative-patterns)
   - [Loops](#loops)
       - [Feature `count_elements|count_states` (SQL)](#feature-count_elementscount_states)
+      - [Feature `count_some_elements|count_some_states` (SQL)](#feature-count_some_elementscount_some_states)
   - [Sequential loops](#sequential-loops-1)
     - [Sequential loops with late exit](#sequential-loops-with-late-exit)
       - [Feature `accumulate_elements` (SQL)](#feature-accumulate_elements)
@@ -2862,6 +2863,7 @@ Capture any identifier appearing on the left hand side of an assignment (possibl
 [⬇️ feature `accumulate_inputs`](#feature-accumulate_inputs)  
 [⬇️ feature `count_elements|count_states`](#feature-count_elementscount_states)  
 [⬇️ feature `count_inputs`](#feature-count_inputs)  
+[⬇️ feature `count_some_elements|count_some_states`](#feature-count_some_elementscount_some_states)  
 [⬇️ feature `find_best_element`](#feature-find_best_element)  
 [⬇️ feature `find_best_element_index`](#feature-find_best_element_index)  
 [⬇️ feature `find_best_element_index_unpythonic`](#feature-find_best_element_index_unpythonic)  
@@ -3384,6 +3386,7 @@ WHERE name_prefix IN ("update_by_assignment_with",
 
 [⬇️ feature `count_elements|count_states`](#feature-count_elementscount_states)  
 [⬇️ feature `count_inputs`](#feature-count_inputs)  
+[⬇️ feature `count_some_elements|count_some_states`](#feature-count_some_elementscount_some_states)  
 
 ##### Specification
 
@@ -4908,6 +4911,7 @@ A synonym of feature `node:If`.
 [⬇️ feature `accumulate_inputs`](#feature-accumulate_inputs)  
 [⬇️ feature `accumulate_some_elements`](#feature-accumulate_some_elements)  
 [⬇️ feature `count_inputs`](#feature-count_inputs)  
+[⬇️ feature `count_some_elements|count_some_states`](#feature-count_some_elementscount_some_states)  
 [⬇️ feature `find_best_element`](#feature-find_best_element)  
 [⬇️ feature `find_best_element_index`](#feature-find_best_element_index)  
 [⬇️ feature `find_best_element_index_unpythonic`](#feature-find_best_element_index_unpythonic)  
@@ -5538,6 +5542,7 @@ The same as above, but extended to comprehensions and spanning the iteration var
 
 [⬆️ feature `node`](#feature-node)  
 [⬇️ feature `count_elements|count_states`](#feature-count_elementscount_states)  
+[⬇️ feature `count_some_elements|count_some_states`](#feature-count_some_elementscount_some_states)  
 [⬇️ feature `flat_style`](#feature-flat_style)  
 [⬇️ feature `functional_style`](#feature-functional_style)  
 [⬇️ feature `loop_with_break`](#feature-loop_with_break)  
@@ -6592,6 +6597,69 @@ GROUP BY inc.path
 | `count_states:index` | 11-16 |
 | `count_elements:i` | 15-16 |
 | `count_elements` | 18-19 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `count_some_elements|count_some_states`
+
+Restriction of [feature `count_elements|count_states`](#feature-count_elementscount_states) . This time, the incrementation is enclosed in a conditional statement.
+
+##### Derivations
+
+[⬆️ feature `assignment_lhs_identifier`](#feature-assignment_lhs_identifier)  
+[⬆️ feature `if`](#feature-if)  
+[⬆️ feature `increment`](#feature-increment)  
+[⬆️ feature `loop`](#feature-loop)  
+
+##### Specification
+
+```sql
+SELECT CASE t_loop.name_suffix
+           WHEN "for" THEN "count_some_elements"
+           ELSE "count_some_states"
+       END,
+       inc.name_suffix,
+       min(t_loop.span_start) || "-" || max(t_loop.span_end), -- The biggest loop...
+ t_loop.path
+FROM t_loop
+JOIN t_if ON (t_if.path GLOB t_loop.path || "*-")-- including a conditional statement
+JOIN t_increment inc ON (inc.path GLOB t_if.path || "*-")-- including the incrementation of a variable x...
+WHERE NOT EXISTS -- which is not initialized in this loop.
+    (SELECT * -- In other words, ensure there is no...
+     FROM t_assignment_lhs_identifier x -- assignment...
+     WHERE (x.name_suffix = inc.name_suffix -- to the same x...
+            AND x.span != inc.span -- distinct from its incrementation...
+            AND x.path GLOB t_loop.path || "*-") )-- and enclosed in the loop.
+GROUP BY inc.path
+```
+
+##### Example
+
+```python
+1   for i1 in s1:
+2       c1 = 0
+3       c2 = 1
+4       for i2 in s2:
+5           c2 += 1
+6           c3 = 0
+7           for i3 in s3:
+8               if foo(i2, i3):
+9                   c3 += 1
+10              c1 = c1 + 1
+11  index = 0
+12  while foo(i):
+13      i = 0
+14      f1, f2 = f2, f    
+15      if foobar(i):
+16          index += 1
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `count_some_elements:c3` | 7-10 |
+| `count_some_states:index` | 12-16 |
 
 --------------------------------------------------------------------------------
 

@@ -20,6 +20,6 @@ acc = []
 for (name, spans) in sorted(parse(program, yield_failed_matches=False)):
     spans_as_string = ", ".join(map(couple_to_string, spans))
     acc.append(f"| `{name}` | {spans_as_string} |")
-    acc[-1] += " %s |" % ", ".join(f"{span.path}" for span in spans)
+    # acc[-1] += " %s |" % ", ".join(f"{span.path}" for span in spans)
 print("\n".join(acc))
 Path("sandbox/flat_ast.txt").write_text(parse.flat_ast)

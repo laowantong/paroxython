@@ -145,8 +145,8 @@
     - [`123.2146-assert-condition.py`](#program-1232146-assert-conditionpy-learning-cost-1625)
     - [`124.2152-binary-search-for-a-value-in-sorted-array.py`](#program-1242152-binary-search-for-a-value-in-sorted-arraypy-learning-cost-128125)
     - [`125.2167-measure-function-call-duration.py`](#program-1252167-measure-function-call-durationpy-learning-cost-80)
-    - [`126.2137-multiple-return-values.py`](#program-1262137-multiple-return-valuespy-learning-cost-76875)
-    - [`127.2274-source-code-inclusion.py`](#program-1272274-source-code-inclusionpy-learning-cost-70)
+    - [`126.2137-multiple-return-values.py`](#program-1262137-multiple-return-valuespy-learning-cost-84375)
+    - [`127.2274-source-code-inclusion.py`](#program-1272274-source-code-inclusionpy-learning-cost-775)
     - [`128.2085-breadth-first-traversing-of-a-tree.py`](#program-1282085-breadth-first-traversing-of-a-treepy-learning-cost-195)
     - [`129.2282-breadth-first-traversing-in-a-graph.py`](#program-1292282-breadth-first-traversing-in-a-graphpy-learning-cost-184375)
     - [`130.2283-depth-first-traversing-in-a-graph.py`](#program-1302283-depth-first-traversing-in-a-graphpy-learning-cost-176875)
@@ -3452,7 +3452,7 @@
 
 ---
 
-### Program `126.2137-multiple-return-values.py` (learning cost 7.6875)
+### Program `126.2137-multiple-return-values.py` (learning cost 8.4375)
 
 ```python
 1   def foo():
@@ -3470,12 +3470,13 @@
 | 0.9375 | `type/boolean/literal/True` | 2 |
 | 0.9375 | `type/sequence/string/literal` | 2 |
 | 0.9375 | `type/sequence/tuple/literal` | 2 |
+| 0.75 | `var/metasyntactic` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 | 0 | `meta/sloc/2` | 1-2 |
 
 ---
 
-### Program `127.2274-source-code-inclusion.py` (learning cost 7.0)
+### Program `127.2274-source-code-inclusion.py` (learning cost 7.75)
 
 ```python
 1   import imp
@@ -3491,6 +3492,7 @@
 | 0.75 | `style/one_liner` | 1-2 |
 | 0.9375 | `type/sequence/string/literal` | 2, 2 |
 | 0.9375 | `var/assignment/explicit/single` | 2 |
+| 0.75 | `var/metasyntactic` | 2 |
 | 0.875 | `var/scope/global` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 | 0 | `meta/sloc/2` | 1-2 |
