@@ -269,12 +269,3 @@ var/deletion/unbinding	unbinding:.+
 -- EOF	EOF
 pattern/states/accumulate	TODO
 pattern/states/accumulate/find_best	TODO
-style/test_driven	TODO
-type/string/newline	TODO
-var/assignment/explicit/iteration_variable	TODO
-var/assignment/explicit/iteration_variable/tuple	TODO
-var/scope/global	TODO
-var/scope/local	TODO
-var/scope/local/parameter	TODO
-var/scope/outer	TODO
-var/scope/shadowing	TODO

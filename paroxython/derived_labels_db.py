@@ -84,7 +84,7 @@ from typing import Any, Set, Callable, Dict
 import regex  # type: ignore
 
 from .goodies import couple_to_string, print_warning
-from .user_types import Label, LabelName, Labels, LabelsSpans, Query, Span
+from .user_types import Label, LabelName, Labels, Query, Span
 
 
 class DerivedLabelsDatabase:

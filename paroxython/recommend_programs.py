@@ -244,7 +244,7 @@ class Recommendations:
         elif sorting_strategy == "lexicographic":
             sorting_key = lambda x: x[1]
 
-        grouping_key = lambda x: f"(default: no group)"
+        grouping_key = lambda x: "(default: no group)"
         if grouping_strategy == "by_cost_bucket":
             grouping_key = cost_bucket
 
@@ -261,7 +261,7 @@ class Recommendations:
         # Accumulate simultaneously the TOC and the contents.
 
         toc: List[str] = ["# Table of contents"]
-        contents: List[str] = [f"# Recommended programs"]
+        contents: List[str] = ["# Recommended programs"]
 
         for (bounds, costs_and_program_names) in toc_data.items():
 
@@ -307,7 +307,7 @@ class Recommendations:
             )
 
         n = len(self.db_programs)
-        summary: List[str] = [f"\n# Summary"]
+        summary: List[str] = ["\n# Summary"]
         summary.append(programs_to_html(f"{n} initially", list(self.db_programs)))
         for (i, operation, removed_programs) in self.result:
             n -= len(removed_programs)

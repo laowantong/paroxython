@@ -198,7 +198,7 @@ class Recommendations:
         elif sorting_strategy == &#34;lexicographic&#34;:
             sorting_key = lambda x: x[1]
 
-        grouping_key = lambda x: f&#34;(default: no group)&#34;
+        grouping_key = lambda x: &#34;(default: no group)&#34;
         if grouping_strategy == &#34;by_cost_bucket&#34;:
             grouping_key = cost_bucket
 
@@ -215,7 +215,7 @@ class Recommendations:
         # Accumulate simultaneously the TOC and the contents.
 
         toc: List[str] = [&#34;# Table of contents&#34;]
-        contents: List[str] = [f&#34;# Recommended programs&#34;]
+        contents: List[str] = [&#34;# Recommended programs&#34;]
 
         for (bounds, costs_and_program_names) in toc_data.items():
 
@@ -261,7 +261,7 @@ class Recommendations:
             )
 
         n = len(self.db_programs)
-        summary: List[str] = [f&#34;\n# Summary&#34;]
+        summary: List[str] = [&#34;\n# Summary&#34;]
         summary.append(programs_to_html(f&#34;{n} initially&#34;, list(self.db_programs)))
         for (i, operation, removed_programs) in self.result:
             n -= len(removed_programs)
@@ -407,7 +407,7 @@ if __name__ == &#34;__main__&#34;:
         elif sorting_strategy == &#34;lexicographic&#34;:
             sorting_key = lambda x: x[1]
 
-        grouping_key = lambda x: f&#34;(default: no group)&#34;
+        grouping_key = lambda x: &#34;(default: no group)&#34;
         if grouping_strategy == &#34;by_cost_bucket&#34;:
             grouping_key = cost_bucket
 
@@ -424,7 +424,7 @@ if __name__ == &#34;__main__&#34;:
         # Accumulate simultaneously the TOC and the contents.
 
         toc: List[str] = [&#34;# Table of contents&#34;]
-        contents: List[str] = [f&#34;# Recommended programs&#34;]
+        contents: List[str] = [&#34;# Recommended programs&#34;]
 
         for (bounds, costs_and_program_names) in toc_data.items():
 
@@ -470,7 +470,7 @@ if __name__ == &#34;__main__&#34;:
             )
 
         n = len(self.db_programs)
-        summary: List[str] = [f&#34;\n# Summary&#34;]
+        summary: List[str] = [&#34;\n# Summary&#34;]
         summary.append(programs_to_html(f&#34;{n} initially&#34;, list(self.db_programs)))
         for (i, operation, removed_programs) in self.result:
             n -= len(removed_programs)
@@ -705,7 +705,7 @@ be interpreted.</dd>
     elif sorting_strategy == &#34;lexicographic&#34;:
         sorting_key = lambda x: x[1]
 
-    grouping_key = lambda x: f&#34;(default: no group)&#34;
+    grouping_key = lambda x: &#34;(default: no group)&#34;
     if grouping_strategy == &#34;by_cost_bucket&#34;:
         grouping_key = cost_bucket
 
@@ -722,7 +722,7 @@ be interpreted.</dd>
     # Accumulate simultaneously the TOC and the contents.
 
     toc: List[str] = [&#34;# Table of contents&#34;]
-    contents: List[str] = [f&#34;# Recommended programs&#34;]
+    contents: List[str] = [&#34;# Recommended programs&#34;]
 
     for (bounds, costs_and_program_names) in toc_data.items():
 
@@ -768,7 +768,7 @@ be interpreted.</dd>
         )
 
     n = len(self.db_programs)
-    summary: List[str] = [f&#34;\n# Summary&#34;]
+    summary: List[str] = [&#34;\n# Summary&#34;]
     summary.append(programs_to_html(f&#34;{n} initially&#34;, list(self.db_programs)))
     for (i, operation, removed_programs) in self.result:
         n -= len(removed_programs)
