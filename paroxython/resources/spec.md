@@ -1,6 +1,7 @@
 - [AST](#ast)
       - [Feature `node`](#feature-node)
       - [Feature `value_attr`](#feature-value_attr)
+      - [Feature `loaded_variable`](#feature-loaded_variable)
 - [Expressions](#expressions)
   - [Literals](#literals)
       - [Feature `literal`](#feature-literal)
@@ -184,6 +185,11 @@
 - [Programs](#programs)
   - [Spans](#spans)
       - [Feature `whole_span`](#feature-whole_span)
+      - [Feature `scope` (SQL)](#feature-scope)
+      - [Feature `local_scope` (SQL)](#feature-local_scope)
+      - [Feature `global_scope` (SQL)](#feature-global_scope)
+      - [Feature `shadowing_scope` (SQL)](#feature-shadowing_scope)
+      - [Feature `access_outer_scope` (SQL)](#feature-access_outer_scope)
   - [Style](#style)
       - [Feature `object_oriented_style` (SQL)](#feature-object_oriented_style)
       - [Feature `functional_style` (SQL)](#feature-functional_style)
@@ -320,6 +326,52 @@ Match the name of every node of the AST. This covers most of the [Python keyword
 | `value_attr:d` | 2 |
 | `value_attr:e` | 2 |
 | `value_attr:imag` | 3 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `loaded_variable`
+
+Name of a variable appearing in an expression.
+
+##### Derivations
+
+[⬇️ feature `access_outer_scope`](#feature-access_outer_scope)  
+
+##### Specification
+
+```re
+           ^(.*)(?<!/func)/_type=Name
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
+\n(?:\1.+\n)* \1/id=(?P<SUFFIX>.+)
+\n(?:\1.+\n)* \1/ctx/_type=Load
+```
+
+##### Example
+
+```python
+1   a = b + c # no match for a, which is stored
+2   foo(bar) # no match for foo
+3   bizz.buzz # no match for buzz
+4   def function(): # no match for function
+5       pass
+6   class Class(): # no match for Class
+7       pass
+8   for x in seq: # no match for x
+9       pass
+10  l.sorted(key=len) # LIMITATION: false positive for not called built-in functions
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `loaded_variable:b` | 1 |
+| `loaded_variable:c` | 1 |
+| `loaded_variable:bar` | 2 |
+| `loaded_variable:bizz` | 3 |
+| `loaded_variable:seq` | 8 |
+| `loaded_variable:l` | 10 |
+| `loaded_variable:len` | 10 |
 
 --------------------------------------------------------------------------------
 
@@ -2146,6 +2198,11 @@ GROUP BY rowid -- will be executed before this one.
 
 #### Feature `comprehension`
 
+##### Derivations
+
+[⬇️ feature `local_scope`](#feature-local_scope)  
+[⬇️ feature `scope`](#feature-scope)  
+
 ##### Specification
 
 ```re
@@ -2456,6 +2513,10 @@ _Limitation._ The number to be clamped must appear on the left hand side of the 
 --------------------------------------------------------------------------------
 
 #### Feature `subscript_assignment`
+
+##### Derivations
+
+[⬇️ feature `scope`](#feature-scope)  
 
 ##### Specification
 
@@ -2797,6 +2858,7 @@ Capture any identifier appearing on the left hand side of an assignment (possibl
 
 ##### Derivations
 
+[⬇️ feature `access_outer_scope`](#feature-access_outer_scope)  
 [⬇️ feature `accumulate_inputs`](#feature-accumulate_inputs)  
 [⬇️ feature `count_elements|count_states`](#feature-count_elementscount_states)  
 [⬇️ feature `count_inputs`](#feature-count_inputs)  
@@ -2804,6 +2866,7 @@ Capture any identifier appearing on the left hand side of an assignment (possibl
 [⬇️ feature `find_best_element_index`](#feature-find_best_element_index)  
 [⬇️ feature `find_best_element_index_unpythonic`](#feature-find_best_element_index_unpythonic)  
 [⬇️ feature `get_valid_input`](#feature-get_valid_input)  
+[⬇️ feature `scope`](#feature-scope)  
 [⬇️ feature `update_by_assignment`](#feature-update_by_assignment)  
 [⬇️ feature `update_by_augmented_assignment`](#feature-update_by_augmented_assignment)  
 
@@ -3629,6 +3692,7 @@ In Python, the term "function" encompasses any type of subroutine, be it a metho
 
 ##### Derivations
 
+[⬇️ feature `access_outer_scope`](#feature-access_outer_scope)  
 [⬇️ feature `closure`](#feature-closure)  
 [⬇️ feature `deeply_recursive_function`](#feature-deeply_recursive_function)  
 [⬇️ feature `function_returning_nothing`](#feature-function_returning_nothing)  
@@ -3637,10 +3701,12 @@ In Python, the term "function" encompasses any type of subroutine, be it a metho
 [⬇️ feature `higher-order function`](#feature-higher-order-function)  
 [⬇️ feature `if_guard`](#feature-if_guard)  
 [⬇️ feature `internal_free_call`](#feature-internal_free_call)  
+[⬇️ feature `local_scope`](#feature-local_scope)  
 [⬇️ feature `method`](#feature-method)  
 [⬇️ feature `procedural_style`](#feature-procedural_style)  
 [⬇️ feature `recursive_call_count`](#feature-recursive_call_count)  
 [⬇️ feature `recursive_function`](#feature-recursive_function)  
+[⬇️ feature `scope`](#feature-scope)  
 
 ##### Specification
 
@@ -4242,8 +4308,10 @@ WHERE t.span IS NULL
 
 ##### Derivations
 
+[⬇️ feature `access_outer_scope`](#feature-access_outer_scope)  
 [⬇️ feature `higher-order function`](#feature-higher-order-function)  
 [⬇️ feature `instance_method|class_method|static_method`](#feature-instance_methodclass_methodstatic_method)  
+[⬇️ feature `scope`](#feature-scope)  
 
 ##### Specification
 
@@ -5418,15 +5486,20 @@ Match sequential loops, along with their iteration variable(s).
 
 #### Feature `iteration_variable`
 
-The same as above, but spanning the iteration variable instead of the whole loop.
+The same as above, but extended to comprehensions and spanning the iteration variable instead of the whole loop.
+
+##### Derivations
+
+[⬇️ feature `access_outer_scope`](#feature-access_outer_scope)  
+[⬇️ feature `scope`](#feature-scope)  
 
 ##### Specification
 
 ```re
-           ^(.*)/_type=For
+           ^(.*)/_type=(For|ListComp|DictComp|SetComp|GeneratorExp)
 (
-\n(?:\1.+\n)*?\1/(?P<_1>target(/.+)?)/_pos=(?P<POS>.+) # force len(d["POS"]) != len(d["SUFFIX"])
-\n(?:\1.+\n)*?\1/(?P=_1)             /id=(?P<SUFFIX>.+)
+\n(?:\1.+\n)*?\1/(?P<_1>(generators/\d+/)?target(/.+)?)/_pos=(?P<POS>.+)
+\n(?:\1.+\n)*?\1/(?P=_1)                   /id=(?P<SUFFIX>.+)
 )+
 ```
 
@@ -5441,7 +5514,7 @@ The same as above, but spanning the iteration variable instead of the whole loop
 6       else:
 7           pass
 8   for (i, j) in enumerate(seq):
-9       pass
+9       [z for z in seq]
 ```
 
 ##### Matches
@@ -5455,6 +5528,7 @@ The same as above, but spanning the iteration variable instead of the whole loop
 | `iteration_variable:c` | 4 |
 | `iteration_variable:i` | 8 |
 | `iteration_variable:j` | 8 |
+| `iteration_variable:z` | 9 |
 
 --------------------------------------------------------------------------------
 
@@ -7386,6 +7460,7 @@ Match a whole program, and suffix it by the number of its last line of code.
 [⬇️ feature `object_oriented_style`](#feature-object_oriented_style)  
 [⬇️ feature `one_liner_style`](#feature-one_liner_style)  
 [⬇️ feature `procedural_style`](#feature-procedural_style)  
+[⬇️ feature `scope`](#feature-scope)  
 
 ##### Specification
 
@@ -7393,7 +7468,7 @@ Match a whole program, and suffix it by the number of its last line of code.
 \A
 /_type=Module
 (\n.+?)+?
-_pos=(?P<POS>.+)
+_pos=(?P<POS>.+:).+ # force the path to be empty
 (?:\n.+)+
 _pos=(?P<POS>(?P<SUFFIX>\d+):.+)
 ```
@@ -7417,6 +7492,308 @@ _Remark._ Normally, a source code is stripped from all its comments during its p
 | Label | Lines |
 |:--|:--|
 | `whole_span:6` | 1-6 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `scope`
+
+The span of the smallest function (or, by default, of the whole program) enclosing the explicit or implicit assignment of a variable is defined as the scope of this variable.
+
+_Limitation._ The keywords `global` and `nonlocal` are intentionally not taken into account for this feature and the next ones. Using them is not recommended, especially when learning how to program.
+
+##### Derivations
+
+[⬆️ feature `assignment_lhs_identifier`](#feature-assignment_lhs_identifier)  
+[⬆️ feature `comprehension`](#feature-comprehension)  
+[⬆️ feature `function`](#feature-function)  
+[⬆️ feature `function_parameter`](#feature-function_parameter)  
+[⬆️ feature `iteration_variable`](#feature-iteration_variable)  
+[⬆️ feature `subscript_assignment`](#feature-subscript_assignment)  
+[⬆️ feature `whole_span`](#feature-whole_span)  
+[⬇️ feature `access_outer_scope`](#feature-access_outer_scope)  
+[⬇️ feature `global_scope`](#feature-global_scope)  
+[⬇️ feature `local_scope`](#feature-local_scope)  
+[⬇️ feature `shadowing_scope`](#feature-shadowing_scope)  
+
+##### Specification
+
+```sql
+SELECT "scope",
+       x.name_suffix,
+       max(f.span_start) || "-" || min(f.span_end),
+       max(f.path)
+FROM t f
+JOIN t x ON (x.path GLOB f.path || "*-")
+WHERE f.name_prefix IN ("whole_span",
+                        "function",
+                        "comprehension")
+  AND x.name_prefix IN ("function_parameter",
+                        "assignment_lhs_identifier",
+                        "iteration_variable")
+  AND NOT EXISTS
+    (SELECT *
+     FROM t_subscript_assignment s
+     WHERE x.span = s.span)
+GROUP BY x.rowid
+```
+
+##### Example
+
+```python
+1   def foobar(a):
+2       def buzz(x):
+3           if x % 2:
+4               y = 42 # appears twice in buzz, but is tagged only once
+5           else:
+6               y = 12
+7           return x + y + c # c is defined in an outer scope (two levels)
+8       b = 42 # local to foobar
+9       y = None # local to foobar, shadowed in buzz
+10      for i in seq: # seq is nowhere to be found, and certainly not in this scope
+11          pass
+12      return buzz(a) + b + c # c is defined in an outer scope (one level)
+13  
+14  c = 10 # global
+15  y = 12 # global, shadowed in foobar
+16  for j in range(10): # global
+17      print(foobar(20) + c)
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `scope:a` | 1-12 |
+| `scope:b` | 1-12 |
+| `scope:c` | 1-17 |
+| `scope:i` | 1-12 |
+| `scope:j` | 1-17 |
+| `scope:x` | 2-7 |
+| `scope:y` | 2-7, 1-12, 1-17 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `local_scope`
+
+A scope coinciding with the span of a function or a comprehension.
+
+##### Derivations
+
+[⬆️ feature `comprehension`](#feature-comprehension)  
+[⬆️ feature `function`](#feature-function)  
+[⬆️ feature `scope`](#feature-scope)  
+[⬇️ feature `global_scope`](#feature-global_scope)  
+
+##### Specification
+
+```sql
+SELECT "local_scope",
+       s.name_suffix,
+       s.span,
+       s.path
+FROM t_scope s
+JOIN t USING (span)
+WHERE t.name_prefix IN ("function",
+                        "comprehension")
+```
+
+##### Example
+
+```python
+1   def foobar(a):
+2       def buzz(x):
+3           if x % 2:
+4               y = 42 # appears twice in buzz, but is tagged only once
+5           else:
+6               y = 12
+7           return x + y + c # c is defined in an outer scope (two levels)
+8       b = 42 # local to foobar
+9       y = None # local to foobar, shadowed in buzz
+10      for i in seq: # seq is nowhere to be found, and certainly not in this scope
+11          pass
+12      return buzz(a) + b + c # c is defined in an outer scope (one level)
+13  
+14  c = 10 # global
+15  y = 12 # global, shadowed in foobar
+16  for j in range(10): # global
+17      print(foobar(20) + c)
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `local_scope:a` | 1-12 |
+| `local_scope:b` | 1-12 |
+| `local_scope:i` | 1-12 |
+| `local_scope:x` | 2-7 |
+| `local_scope:y` | 1-12, 2-7 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `global_scope`
+
+A non local scope: either the whole span or nothing.
+
+##### Derivations
+
+[⬆️ feature `local_scope`](#feature-local_scope)  
+[⬆️ feature `scope`](#feature-scope)  
+
+##### Specification
+
+```sql
+SELECT "global_scope",
+       s.name_suffix,
+       s.span,
+       s.path
+FROM t_scope s
+LEFT JOIN t_local_scope l USING (span)
+WHERE l.rowid IS NULL
+```
+
+##### Example
+
+```python
+1   def foobar(a):
+2       def buzz(x):
+3           if x % 2:
+4               y = 42 # appears twice in buzz, but is tagged only once
+5           else:
+6               y = 12
+7           return x + y + c # c is defined in an outer scope (two levels)
+8       b = 42 # local to foobar
+9       y = None # local to foobar, shadowed in buzz
+10      for i in seq: # seq is nowhere to be found, and certainly not in this scope
+11          pass
+12      return buzz(a) + b + c # c is defined in an outer scope (one level)
+13  
+14  c = 10 # global
+15  y = 12 # global, shadowed in foobar
+16  for j in range(10): # global
+17      print(foobar(20) + c)
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `global_scope:c` | 1-17 |
+| `global_scope:j` | 1-17 |
+| `global_scope:y` | 1-17 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `shadowing_scope`
+
+The scope `s` of a variable `x` is said to shadow any scope of `x` which encloses `s`.
+
+##### Derivations
+
+[⬆️ feature `scope`](#feature-scope)  
+
+##### Specification
+
+```sql
+SELECT "shadowing_scope",
+       enclosed.name_suffix,
+       enclosed.span,
+       enclosed.path
+FROM t_scope enclosing
+JOIN t_scope enclosed USING (name_suffix)
+WHERE (enclosed.path GLOB enclosing.path || "*-")
+```
+
+##### Example
+
+```python
+1   def foobar(a):
+2       def buzz(x):
+3           if x % 2:
+4               y = 42 # appears twice in buzz, but is tagged only once
+5           else:
+6               y = 12
+7           return x + y + c # c is defined in an outer scope (two levels)
+8       b = 42 # local to foobar
+9       y = None # local to foobar, shadowed in buzz
+10      for i in seq: # seq is nowhere to be found, and certainly not in this scope
+11          pass
+12      return buzz(a) + b + c # c is defined in an outer scope (one level)
+13  
+14  c = 10 # global
+15  y = 12 # global, shadowed in foobar
+16  for j in range(10): # global
+17      print(foobar(20) + c)
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `shadowing_scope:y` | 2-7, 1-12 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `access_outer_scope`
+
+If a scope encloses a variable `x` without being a scope of `x`, the value of `x` needs to be accessed from an outer scope.
+
+##### Derivations
+
+[⬆️ feature `assignment_lhs_identifier`](#feature-assignment_lhs_identifier)  
+[⬆️ feature `function`](#feature-function)  
+[⬆️ feature `function_parameter`](#feature-function_parameter)  
+[⬆️ feature `iteration_variable`](#feature-iteration_variable)  
+[⬆️ feature `loaded_variable`](#feature-loaded_variable)  
+[⬆️ feature `scope`](#feature-scope)  
+
+##### Specification
+
+```sql
+SELECT "access_outer_scope",
+       x.name_suffix,
+       f.span,
+       f.path
+FROM t_function f
+JOIN t_loaded_variable x ON (x.path GLOB f.path || "*-")
+JOIN t y ON (x.name_suffix = y.name_suffix)
+WHERE y.name_prefix IN ("function_parameter",
+                        "assignment_lhs_identifier",
+                        "iteration_variable")
+  AND NOT EXISTS
+    (SELECT *
+     FROM t_scope s
+     WHERE s.path GLOB f.path || "*" -- equal or inner span
+       AND s.name_suffix = x.name_suffix )
+```
+
+##### Example
+
+```python
+1   def foobar(a):
+2       def buzz(x):
+3           if x % 2:
+4               y = 42 # appears twice in buzz, but is tagged only once
+5           else:
+6               y = 12
+7           return x + y + c # c is defined in an outer scope (two levels)
+8       b = 42 # local to foobar
+9       y = None # local to foobar, shadowed in buzz
+10      for i in seq: # no match: seq is nowhere to be found
+11          pass
+12      return buzz(a) + b + c # c is defined in an outer scope (one level)
+13  
+14  c = 10 # global
+15  y = 12 # global, shadowed in foobar
+16  for j in range(10): # global
+17      print(foobar(20) + c)
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `access_outer_scope:c` | 1-12, 2-7 |
 
 --------------------------------------------------------------------------------
 

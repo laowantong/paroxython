@@ -41,14 +41,17 @@
         "free_call:input": [[1,1]],
         "free_call:print": [[2,2]],
         "free_call_without_result:print": [[2,2]],
+        "global_scope:name": [[1,2]],
         "imperative_style": [[1,2]],
         "literal:Str": [[1,1],[2,2]],
+        "loaded_variable:name": [[2,2]],
         "node:Assign": [[1,1]],
         "node:BinOp": [[2,2]],
         "node:Call": [[1,1],[2,2]],
         "node:Expr": [[2,2]],
         "node:Name": [[1,1],[1,1],[2,2],[2,2]],
         "node:Str": [[1,1],[2,2]],
+        "scope:name": [[1,2]],
         "single_assignment:name": [[1,1]],
         "special_literal_string:What is your name?\\n": [[1,1]],
         "string_formatting_operator": [[2,2]],
@@ -63,7 +66,8 @@
         "style/imperative/flat": [[1,2]],
         "type/sequence/string/literal": [[2,2]],
         "type/sequence/string/literal/special/\\n": [[1,1]],
-        "var/assignment/explicit/single": [[1,1]]
+        "var/assignment/explicit/single": [[1,1]],
+        "var/scope/global": [[1,2]]
       }
     },
     "03_friends.py": {
@@ -87,12 +91,18 @@
         "free_call:enumerate": [[2,2]],
         "free_call:print": [[3,3]],
         "free_call_without_result:print": [[3,3]],
+        "global_scope:friends": [[1,3]],
+        "global_scope:i": [[1,3]],
+        "global_scope:name": [[1,3]],
         "imperative_style": [[1,3]],
         "iteration_variable:i": [[2,2]],
         "iteration_variable:name": [[2,2]],
         "literal:List": [[1,1]],
         "literal:Str": [[1,1],[1,1],[1,1],[1,1],[3,3]],
         "literal:Tuple": [[2,2]],
+        "loaded_variable:friends": [[2,2]],
+        "loaded_variable:i": [[3,3]],
+        "loaded_variable:name": [[3,3]],
         "loop:for": [[2,3]],
         "loop_with_late_exit:for": [[2,3]],
         "member_call_method:format": [[3,3]],
@@ -105,6 +115,9 @@
         "node:Name": [[1,1],[2,2],[2,2],[2,2],[2,2],[3,3],[3,3],[3,3]],
         "node:Str": [[1,1],[1,1],[1,1],[1,1],[3,3]],
         "node:Tuple": [[2,2]],
+        "scope:friends": [[1,3]],
+        "scope:i": [[1,3]],
+        "scope:name": [[1,3]],
         "single_assignment:friends": [[1,1]],
         "whole_span:3": [[1,3]]
       },
@@ -123,7 +136,8 @@
         "type/sequence/string/literal": [[1,1],[1,1],[1,1],[1,1],[3,3]],
         "type/sequence/tuple/literal": [[2,2]],
         "var/assignment/explicit/single": [[1,1]],
-        "var/assignment/implicit/iteration_variable": [[2,2],[2,2]]
+        "var/assignment/implicit/iteration_variable": [[2,2],[2,2]],
+        "var/scope/global": [[1,3]]
       }
     },
     "04_fibonacci.py": {
@@ -145,11 +159,15 @@
         "external_free_call:print": [[3,3]],
         "free_call:print": [[3,3]],
         "free_call_without_result:print": [[3,3]],
+        "global_scope:babies": [[1,4]],
+        "global_scope:parents": [[1,4]],
         "imperative_style": [[1,4]],
         "literal:1": [[1,1],[1,1]],
         "literal:100": [[2,2]],
         "literal:Str": [[3,3]],
         "literal:Tuple": [[1,1],[1,1],[4,4],[4,4]],
+        "loaded_variable:babies": [[2,2],[3,3],[4,4],[4,4]],
+        "loaded_variable:parents": [[4,4]],
         "loop:while": [[2,4]],
         "loop_with_late_exit:while": [[2,4]],
         "magic_number:100": [[2,2]],
@@ -166,6 +184,8 @@
         "node:Tuple": [[1,1],[1,1],[4,4],[4,4]],
         "node:While": [[2,4]],
         "parallel_assignment:2": [[1,1],[4,4]],
+        "scope:babies": [[1,4]],
+        "scope:parents": [[1,4]],
         "slide": [[4,4]],
         "update:babies:parents": [[4,4]],
         "update:parents:babies": [[4,4]],
@@ -192,7 +212,8 @@
         "type/sequence/string/literal": [[3,3]],
         "type/sequence/tuple/literal": [[1,1],[1,1],[4,4],[4,4]],
         "var/assignment/explicit/parallel": [[1,1]],
-        "var/assignment/explicit/parallel/slide": [[4,4]]
+        "var/assignment/explicit/parallel/slide": [[4,4]],
+        "var/scope/global": [[1,4]]
       }
     },
     "05_greet.py": {
@@ -212,6 +233,8 @@
         "function_returning_nothing:greet": [[1,2]],
         "internal_free_call:greet": [[3,3],[4,4],[5,5]],
         "literal:Str": [[2,2],[3,3],[4,4],[5,5]],
+        "loaded_variable:name": [[2,2]],
+        "local_scope:name": [[1,2]],
         "node:Call": [[2,2],[3,3],[4,4],[5,5]],
         "node:Expr": [[2,2],[3,3],[4,4],[5,5]],
         "node:FunctionDef": [[1,2]],
@@ -219,6 +242,7 @@
         "node:Str": [[2,2],[3,3],[4,4],[5,5]],
         "node:arg": [[1,1]],
         "procedural_style": [[1,5]],
+        "scope:name": [[1,2]],
         "whole_span:5": [[1,5]]
       },
       "taxa": {
@@ -229,7 +253,8 @@
         "meta/sloc/5": [[1,5]],
         "style/procedural": [[1,5]],
         "type/sequence/string/literal": [[2,2],[3,3],[4,4],[5,5]],
-        "var/assignment/implicit/parameter": [[1,1]]
+        "var/assignment/implicit/parameter": [[1,1]],
+        "var/scope/local": [[1,2]]
       }
     },
     "06_regex.py": {
@@ -242,6 +267,7 @@
         "for:test_string": [[2,6]],
         "free_call:print": [[4,4],[6,6]],
         "free_call_without_result:print": [[4,4],[6,6]],
+        "global_scope:test_string": [[1,6]],
         "if": [[3,6]],
         "if_else_branch": [[6,6]],
         "if_test_atom:re": [[3,3]],
@@ -253,6 +279,8 @@
         "iteration_variable:test_string": [[2,2]],
         "literal:List": [[2,2]],
         "literal:Str": [[2,2],[2,2],[3,3],[4,4],[6,6]],
+        "loaded_variable:re": [[3,3]],
+        "loaded_variable:test_string": [[3,3],[4,4],[6,6]],
         "loop:for": [[2,6]],
         "loop_with_late_exit:for": [[2,6]],
         "member_call_method:match": [[3,3]],
@@ -265,6 +293,7 @@
         "node:List": [[2,2]],
         "node:Name": [[2,2],[3,3],[3,3],[4,4],[4,4],[6,6],[6,6]],
         "node:Str": [[2,2],[2,2],[3,3],[4,4],[6,6]],
+        "scope:test_string": [[1,6]],
         "special_literal_string:^\\\\d{3}-\\\\d{4}$": [[3,3]],
         "whole_span:6": [[1,6]]
       },
@@ -282,7 +311,8 @@
         "type/sequence/list/literal": [[2,2]],
         "type/sequence/string/literal": [[2,2],[2,2],[4,4],[6,6]],
         "type/sequence/string/literal/special/\\d": [[3,3]],
-        "var/assignment/implicit/iteration_variable": [[2,2]]
+        "var/assignment/implicit/iteration_variable": [[2,2]],
+        "var/scope/global": [[1,6]]
       }
     },
     "07_grocery_bill.py": {
@@ -312,14 +342,23 @@
         "free_call:print": [[4,4]],
         "free_call:sum": [[3,3]],
         "free_call_without_result:print": [[4,4]],
+        "global_scope:grocery_bill": [[1,4]],
+        "global_scope:my_purchase": [[1,4]],
+        "global_scope:prices": [[1,4]],
         "imperative_style": [[1,4]],
         "index:fruit": [[3,3],[3,3]],
+        "iteration_variable:fruit": [[3,3]],
         "literal:0.4": [[1,1]],
         "literal:0.5": [[1,1]],
         "literal:1": [[2,2]],
         "literal:6": [[2,2]],
         "literal:Dict": [[1,1],[2,2]],
         "literal:Str": [[1,1],[1,1],[2,2],[2,2],[4,4]],
+        "loaded_variable:fruit": [[3,3],[3,3]],
+        "loaded_variable:grocery_bill": [[4,4]],
+        "loaded_variable:my_purchase": [[3,3],[3,3]],
+        "loaded_variable:prices": [[3,3]],
+        "local_scope:fruit": [[3,3]],
         "magic_number:0.4": [[1,1]],
         "magic_number:0.5": [[1,1]],
         "magic_number:6": [[2,2]],
@@ -334,6 +373,10 @@
         "node:Num": [[1,1],[1,1],[2,2],[2,2]],
         "node:Str": [[1,1],[1,1],[2,2],[2,2],[4,4]],
         "node:Subscript": [[3,3],[3,3]],
+        "scope:fruit": [[3,3]],
+        "scope:grocery_bill": [[1,4]],
+        "scope:my_purchase": [[1,4]],
+        "scope:prices": [[1,4]],
         "single_assignment:grocery_bill": [[3,3]],
         "single_assignment:my_purchase": [[2,2]],
         "single_assignment:prices": [[1,1]],
@@ -354,7 +397,10 @@
         "type/number/integer/literal": [[2,2],[2,2]],
         "type/number/magic": [[1,1],[1,1],[2,2]],
         "type/sequence/string/literal": [[1,1],[1,1],[2,2],[2,2],[4,4]],
-        "var/assignment/explicit/single": [[1,1],[2,2],[3,3]]
+        "var/assignment/explicit/single": [[1,1],[2,2],[3,3]],
+        "var/assignment/implicit/iteration_variable": [[3,3]],
+        "var/scope/global": [[1,4]],
+        "var/scope/local": [[3,3]]
       }
     },
     "08_arguments.py": {
@@ -380,11 +426,18 @@
         "free_call:print": [[4,4],[6,6]],
         "free_call:sum": [[3,3]],
         "free_call_without_result:print": [[4,4],[6,6]],
+        "global_scope:total": [[1,6]],
         "imperative_style": [[1,6]],
         "import:sys": [[1,1]],
         "import_module:sys": [[1,1]],
+        "iteration_variable:arg": [[3,3]],
         "literal:1": [[3,3]],
         "literal:Str": [[4,4],[6,6]],
+        "loaded_variable:ValueError": [[5,5]],
+        "loaded_variable:arg": [[3,3]],
+        "loaded_variable:sys": [[3,3]],
+        "loaded_variable:total": [[4,4]],
+        "local_scope:arg": [[3,3]],
         "node:Assign": [[3,3]],
         "node:Attribute": [[3,3]],
         "node:Call": [[3,3],[3,3],[4,4],[6,6]],
@@ -397,6 +450,8 @@
         "node:Str": [[4,4],[6,6]],
         "node:Subscript": [[3,3]],
         "node:Try": [[2,6]],
+        "scope:arg": [[3,3]],
+        "scope:total": [[1,6]],
         "single_assignment:total": [[3,3]],
         "slice:1::": [[3,3]],
         "slice_lower:1": [[3,3]],
@@ -420,7 +475,10 @@
         "type/number/integer": [[3,3]],
         "type/number/integer/literal": [[3,3]],
         "type/sequence/string/literal": [[4,4],[6,6]],
-        "var/assignment/explicit/single": [[3,3]]
+        "var/assignment/explicit/single": [[3,3]],
+        "var/assignment/implicit/iteration_variable": [[3,3]],
+        "var/scope/global": [[1,6]],
+        "var/scope/local": [[3,3]]
       }
     },
     "09_indent.py": {
@@ -447,12 +505,20 @@
         "free_call:sorted": [[3,3]],
         "free_call_without_arguments:print": [[8,8]],
         "free_call_without_result:print": [[4,4],[7,7],[8,8]],
+        "global_scope:file_name": [[1,8]],
+        "global_scope:line": [[1,8]],
+        "global_scope:python_files": [[1,8]],
         "imperative_style": [[1,8]],
         "import:glob": [[1,1]],
         "import_module:glob": [[1,1]],
         "iteration_variable:file_name": [[3,3]],
         "iteration_variable:line": [[6,6]],
         "literal:Str": [[2,2],[4,4],[7,7]],
+        "loaded_variable:f": [[6,6]],
+        "loaded_variable:file_name": [[4,4],[5,5]],
+        "loaded_variable:glob": [[2,2]],
+        "loaded_variable:line": [[7,7]],
+        "loaded_variable:python_files": [[3,3]],
         "loop:for": [[3,8],[6,7]],
         "loop_with_late_exit:for": [[3,8],[6,7]],
         "member_call_method:glob": [[2,2]],
@@ -468,6 +534,9 @@
         "node:Name": [[2,2],[2,2],[3,3],[3,3],[3,3],[4,4],[4,4],[5,5],[5,5],[5,5],[6,6],[6,6],[7,7],[7,7],[8,8]],
         "node:Str": [[2,2],[4,4],[7,7]],
         "node:With": [[5,7]],
+        "scope:file_name": [[1,8]],
+        "scope:line": [[1,8]],
+        "scope:python_files": [[1,8]],
         "single_assignment:python_files": [[2,2]],
         "whole_span:8": [[1,8]]
       },
@@ -491,7 +560,8 @@
         "type/sequence/string": [[7,7]],
         "type/sequence/string/literal": [[2,2],[4,4],[7,7]],
         "var/assignment/explicit/single": [[2,2]],
-        "var/assignment/implicit/iteration_variable": [[3,3],[6,6]]
+        "var/assignment/implicit/iteration_variable": [[3,3],[6,6]],
+        "var/scope/global": [[1,8]]
       }
     },
     "10_time.py": {
@@ -522,6 +592,10 @@
         "free_call:sorted": [[12,12]],
         "free_call_without_arguments:localtime": [[10,10]],
         "free_call_without_result:print": [[14,14],[17,17]],
+        "global_scope:activities": [[1,17]],
+        "global_scope:activity_time": [[1,17]],
+        "global_scope:hour": [[1,17]],
+        "global_scope:time_now": [[1,17]],
         "if": [[13,15]],
         "if_test_atom:activity_time": [[13,13]],
         "if_test_atom:hour": [[13,13]],
@@ -541,6 +615,10 @@
         "literal:9": [[4,4]],
         "literal:Dict": [[2,2]],
         "literal:Str": [[3,3],[4,4],[5,5],[6,6],[7,7],[8,8],[17,17]],
+        "loaded_variable:activities": [[12,12],[14,14]],
+        "loaded_variable:activity_time": [[13,13],[14,14]],
+        "loaded_variable:hour": [[13,13]],
+        "loaded_variable:time_now": [[11,11]],
         "loop:for": [[12,17]],
         "loop_else": [[17,17]],
         "loop_with_break:for": [[12,17]],
@@ -567,6 +645,10 @@
         "node:Num": [[3,3],[4,4],[5,5],[6,6],[7,7],[8,8]],
         "node:Str": [[3,3],[4,4],[5,5],[6,6],[7,7],[8,8],[17,17]],
         "node:Subscript": [[14,14]],
+        "scope:activities": [[1,17]],
+        "scope:activity_time": [[1,17]],
+        "scope:hour": [[1,17]],
+        "scope:time_now": [[1,17]],
         "single_assignment:activities": [[2,2]],
         "single_assignment:hour": [[11,11]],
         "single_assignment:time_now": [[10,10]],
@@ -593,7 +675,8 @@
         "type/number/magic": [[3,3],[4,4],[5,5],[6,6],[7,7],[8,8]],
         "type/sequence/string/literal": [[3,3],[4,4],[5,5],[6,6],[7,7],[8,8],[17,17]],
         "var/assignment/explicit/single": [[2,2],[10,10],[11,11]],
-        "var/assignment/implicit/iteration_variable": [[12,12]]
+        "var/assignment/implicit/iteration_variable": [[12,12]],
+        "var/scope/global": [[1,17]]
       }
     },
     "11_bottles.py": {
@@ -614,11 +697,15 @@
         "external_free_call:print": [[9,9]],
         "free_call:print": [[9,9]],
         "free_call_without_result:print": [[9,9]],
+        "global_scope:REFRAIN": [[1,10]],
+        "global_scope:bottles_of_beer": [[1,10]],
         "imperative_style": [[1,10]],
         "literal:1": [[8,8],[9,9],[10,10]],
         "literal:9": [[7,7]],
         "literal:Str": [[6,6]],
         "literal:Tuple": [[9,9]],
+        "loaded_variable:REFRAIN": [[9,9]],
+        "loaded_variable:bottles_of_beer": [[8,8],[9,9],[9,9],[9,9]],
         "loop:while": [[8,10]],
         "loop_with_late_exit:while": [[8,10]],
         "magic_number:9": [[7,7]],
@@ -634,6 +721,8 @@
         "node:Str": [[6,6]],
         "node:Tuple": [[9,9]],
         "node:While": [[8,10]],
+        "scope:REFRAIN": [[1,10]],
+        "scope:bottles_of_beer": [[1,10]],
         "single_assignment:REFRAIN": [[1,1]],
         "single_assignment:bottles_of_beer": [[7,7]],
         "special_literal_string:\\n%d bottles of beer on the wall,\\n%d bottles of beer,\\ntake one down, pass it around,\\n%d bottles of beer on the wall!\\n": [[6,6]],
@@ -659,7 +748,8 @@
         "type/sequence/tuple/literal": [[9,9]],
         "var/assignment/explicit/augmented/Sub": [[10,10]],
         "var/assignment/explicit/constant": [[1,1]],
-        "var/assignment/explicit/single": [[1,1],[7,7]]
+        "var/assignment/explicit/single": [[1,1],[7,7]],
+        "var/scope/global": [[1,10]]
       }
     },
     "12_classes.py": {
@@ -697,6 +787,7 @@
         "function_returning_nothing:deposit": [[4,5]],
         "function_returning_nothing:withdraw": [[6,7]],
         "function_returning_something:overdrawn": [[8,9]],
+        "global_scope:my_account": [[1,12]],
         "instance_method:__init__": [[2,3]],
         "instance_method:deposit": [[4,5]],
         "instance_method:overdrawn": [[8,9]],
@@ -704,6 +795,14 @@
         "literal:0": [[2,2],[9,9]],
         "literal:15": [[10,10]],
         "literal:50": [[11,11]],
+        "loaded_variable:amount": [[5,5],[7,7]],
+        "loaded_variable:initial_balance": [[3,3]],
+        "loaded_variable:my_account": [[11,11],[12,12],[12,12]],
+        "loaded_variable:object": [[1,1]],
+        "loaded_variable:self": [[3,3],[5,5],[7,7],[9,9]],
+        "local_scope:amount": [[4,5],[6,7]],
+        "local_scope:initial_balance": [[2,3]],
+        "local_scope:self": [[2,3],[4,5],[6,7],[8,9]],
         "magic_number:15": [[10,10]],
         "magic_number:50": [[11,11]],
         "member_call:my_account:withdraw": [[11,11]],
@@ -728,6 +827,10 @@
         "node:arg": [[2,2],[2,2],[4,4],[4,4],[6,6],[6,6],[8,8]],
         "object_oriented_style": [[1,12]],
         "return": [[9,9]],
+        "scope:amount": [[4,5],[6,7]],
+        "scope:initial_balance": [[2,3]],
+        "scope:my_account": [[1,12]],
+        "scope:self": [[2,3],[4,5],[6,7],[8,9]],
         "single_assignment:my_account": [[10,10]],
         "update:self:amount": [[5,5],[7,7]],
         "update_by_augmented_assignment:self:amount": [[5,5],[7,7]],
@@ -760,7 +863,9 @@
         "var/assignment/explicit/augmented/Sub": [[7,7]],
         "var/assignment/explicit/single": [[10,10]],
         "var/assignment/implicit/parameter": [[2,2],[4,4],[6,6]],
-        "var/assignment/implicit/parameter/self": [[2,2],[4,4],[6,6],[8,8]]
+        "var/assignment/implicit/parameter/self": [[2,2],[4,4],[6,6],[8,8]],
+        "var/scope/global": [[1,12]],
+        "var/scope/local": [[2,3],[4,5],[6,7],[8,9]]
       }
     },
     "13_unit_testing.py": {
@@ -819,6 +924,15 @@
         "literal:8": [[11,11]],
         "literal:9": [[11,11],[11,11],[11,11]],
         "literal:List": [[11,11]],
+        "loaded_variable:copy": [[4,4],[6,6],[8,8],[8,8]],
+        "loaded_variable:pool": [[3,3]],
+        "loaded_variable:self": [[11,11]],
+        "loaded_variable:size": [[5,5],[6,6],[8,8],[8,8]],
+        "loaded_variable:unittest": [[9,9]],
+        "local_scope:copy": [[2,8]],
+        "local_scope:pool": [[2,8]],
+        "local_scope:self": [[10,11]],
+        "local_scope:size": [[2,8]],
         "magic_number:4": [[11,11]],
         "magic_number:5": [[11,11]],
         "magic_number:7": [[11,11],[11,11]],
@@ -847,6 +961,10 @@
         "node:arg": [[2,2],[10,10]],
         "object_oriented_style": [[1,11]],
         "return": [[6,6],[8,8]],
+        "scope:copy": [[2,8]],
+        "scope:pool": [[2,8]],
+        "scope:self": [[10,11]],
+        "scope:size": [[2,8]],
         "single_assignment:copy": [[3,3]],
         "single_assignment:size": [[4,4]],
         "whole_span:11": [[1,11]]
@@ -882,7 +1000,8 @@
         "type/sequence/list/literal": [[11,11]],
         "var/assignment/explicit/single": [[3,3],[4,4]],
         "var/assignment/implicit/parameter": [[2,2]],
-        "var/assignment/implicit/parameter/self": [[10,10]]
+        "var/assignment/implicit/parameter/self": [[10,10]],
+        "var/scope/local": [[2,8],[10,11]]
       }
     },
     "14_median.py": {
@@ -925,6 +1044,12 @@
         "index:_": [[5,5],[7,7],[7,7]],
         "literal:1": [[4,4],[5,5],[7,7]],
         "literal:2": [[4,4],[5,5],[7,7],[7,7],[7,7]],
+        "loaded_variable:copy": [[3,3],[5,5],[7,7],[7,7]],
+        "loaded_variable:pool": [[2,2]],
+        "loaded_variable:size": [[4,4],[5,5],[7,7],[7,7]],
+        "local_scope:copy": [[1,7]],
+        "local_scope:pool": [[1,7]],
+        "local_scope:size": [[1,7]],
         "modulo_operator": [[4,4]],
         "node:Assign": [[2,2],[3,3]],
         "node:BinOp": [[4,4],[5,5],[5,5],[7,7],[7,7],[7,7],[7,7],[7,7]],
@@ -939,6 +1064,9 @@
         "node:arg": [[1,1]],
         "procedural_style": [[1,7]],
         "return": [[5,5],[7,7]],
+        "scope:copy": [[1,7]],
+        "scope:pool": [[1,7]],
+        "scope:size": [[1,7]],
         "single_assignment:copy": [[2,2]],
         "single_assignment:size": [[3,3]],
         "whole_span:7": [[1,7]]
@@ -964,7 +1092,8 @@
         "type/number/integer": [[5,5],[7,7],[7,7]],
         "type/number/integer/literal": [[4,4],[4,4],[5,5],[5,5],[7,7],[7,7],[7,7],[7,7]],
         "var/assignment/explicit/single": [[2,2],[3,3]],
-        "var/assignment/implicit/parameter": [[1,1]]
+        "var/assignment/implicit/parameter": [[1,1]],
+        "var/scope/local": [[1,7]]
       }
     },
     "15_itertools_groupby.py": {
@@ -985,6 +1114,9 @@
         "free_call:groupby": [[7,7]],
         "free_call:print": [[9,9]],
         "free_call_without_result:print": [[9,9]],
+        "global_scope:frags": [[1,9]],
+        "global_scope:has_chars": [[1,9]],
+        "global_scope:lines": [[1,9]],
         "if": [[8,9]],
         "if_then_branch": [[9,9]],
         "if_without_else": [[8,9]],
@@ -996,6 +1128,10 @@
         "iteration_variable:has_chars": [[7,7]],
         "literal:Str": [[6,6],[9,9]],
         "literal:Tuple": [[7,7]],
+        "loaded_variable:bool": [[7,7]],
+        "loaded_variable:frags": [[9,9]],
+        "loaded_variable:has_chars": [[8,8]],
+        "loaded_variable:lines": [[7,7]],
         "loop:for": [[7,9]],
         "loop_with_late_exit:for": [[7,9]],
         "member_call_method:join": [[9,9]],
@@ -1010,6 +1146,9 @@
         "node:Name": [[2,2],[7,7],[7,7],[7,7],[7,7],[7,7],[8,8],[9,9],[9,9]],
         "node:Str": [[6,6],[9,9]],
         "node:Tuple": [[7,7]],
+        "scope:frags": [[1,9]],
+        "scope:has_chars": [[1,9]],
+        "scope:lines": [[1,9]],
         "single_assignment:lines": [[2,2]],
         "special_literal_string:\\nThis is the\\nfirst paragraph.\\nThis is the second.\\n": [[6,6]],
         "whole_span:9": [[1,9]]
@@ -1032,7 +1171,8 @@
         "type/sequence/string/literal/special/\\n": [[6,6]],
         "type/sequence/tuple/literal": [[7,7]],
         "var/assignment/explicit/single": [[2,2]],
-        "var/assignment/implicit/iteration_variable": [[7,7],[7,7]]
+        "var/assignment/implicit/iteration_variable": [[7,7],[7,7]],
+        "var/scope/global": [[1,9]]
       }
     },
     "16_csv.py": {
@@ -1092,6 +1232,15 @@
         "function_parameter:b": [[2,2]],
         "function_parameter_flavor:arg": [[2,2],[2,2]],
         "function_returning_something:cmp": [[2,3]],
+        "global_scope:change": [[1,18]],
+        "global_scope:name": [[1,18]],
+        "global_scope:pct": [[1,18]],
+        "global_scope:price": [[1,18]],
+        "global_scope:status": [[1,18]],
+        "global_scope:status_labels": [[1,18]],
+        "global_scope:stocks": [[1,18]],
+        "global_scope:ticker": [[1,18]],
+        "global_scope:writer": [[1,18]],
         "import:csv": [[1,1]],
         "import_module:csv": [[1,1]],
         "index:_": [[17,17]],
@@ -1118,6 +1267,20 @@
         "literal:List": [[7,7],[8,8],[9,9],[10,10]],
         "literal:Str": [[4,4],[4,4],[4,4],[8,8],[8,8],[9,9],[9,9],[10,10],[10,10],[13,13],[13,13],[15,15],[15,15],[15,15],[18,18]],
         "literal:Tuple": [[16,16]],
+        "loaded_variable:a": [[3,3],[3,3]],
+        "loaded_variable:b": [[3,3],[3,3]],
+        "loaded_variable:change": [[17,17]],
+        "loaded_variable:csv": [[5,5],[14,14]],
+        "loaded_variable:name": [[18,18]],
+        "loaded_variable:pct": [[18,18]],
+        "loaded_variable:status": [[18,18]],
+        "loaded_variable:status_labels": [[17,17]],
+        "loaded_variable:stocks": [[16,16]],
+        "loaded_variable:stocksFile": [[14,14]],
+        "loaded_variable:stocksFileW": [[5,5]],
+        "loaded_variable:writer": [[6,6]],
+        "local_scope:a": [[2,3]],
+        "local_scope:b": [[2,3]],
         "loop:for": [[16,18]],
         "loop_with_late_exit:for": [[16,18]],
         "magic_number:-0.13": [[10,10]],
@@ -1158,6 +1321,17 @@
         "procedural_style": [[1,18]],
         "pure_function:cmp": [[2,3]],
         "return": [[3,3]],
+        "scope:a": [[2,3]],
+        "scope:b": [[2,3]],
+        "scope:change": [[1,18]],
+        "scope:name": [[1,18]],
+        "scope:pct": [[1,18]],
+        "scope:price": [[1,18]],
+        "scope:status": [[1,18]],
+        "scope:status_labels": [[1,18]],
+        "scope:stocks": [[1,18]],
+        "scope:ticker": [[1,18]],
+        "scope:writer": [[1,18]],
         "single_assignment:status": [[17,17]],
         "single_assignment:status_labels": [[15,15]],
         "single_assignment:stocks": [[14,14]],
@@ -1198,13 +1372,16 @@
         "type/sequence/tuple/literal": [[16,16]],
         "var/assignment/explicit/single": [[5,5],[14,14],[15,15],[17,17]],
         "var/assignment/implicit/iteration_variable": [[16,16],[16,16],[16,16],[16,16],[16,16]],
-        "var/assignment/implicit/parameter": [[2,2],[2,2]]
+        "var/assignment/implicit/parameter": [[2,2],[2,2]],
+        "var/scope/global": [[1,18]],
+        "var/scope/local": [[2,3]]
       }
     },
     "18_queens.py": {
       "timestamp": "",
       "source": "BOARD_SIZE = 8\ndef under_attack(col, queens):\n    left = right = col\n    for r, c in reversed(queens):\n        left, right = left - 1, right + 1\n        if c in (left, col, right):\n            return True\n    return False\ndef solve(n):\n    if n == 0:\n        return [[]]\n    smaller_solutions = solve(n - 1)\n    return [\n        solution + [(n, i + 1)]\n        for i in range(BOARD_SIZE)\n        for solution in smaller_solutions\n        if not under_attack(i + 1, solution)\n    ]\nfor answer in solve(BOARD_SIZE):\n    print(answer)",
       "labels": {
+        "access_outer_scope:BOARD_SIZE": [[9,17]],
         "addition_operator": [[5,5],[17,17]],
         "assignment": [[3,3],[5,5]],
         "assignment:8": [[1,1]],
@@ -1256,6 +1433,8 @@
         "function_parameter_flavor:arg": [[2,2],[2,2],[9,9]],
         "function_returning_something:solve": [[9,17]],
         "function_returning_something:under_attack": [[2,8]],
+        "global_scope:BOARD_SIZE": [[1,20]],
+        "global_scope:answer": [[1,20]],
         "if": [[6,7],[10,11]],
         "if_guard": [[10,11]],
         "if_test_atom:0": [[10,10]],
@@ -1272,7 +1451,9 @@
         "internal_free_call:under_attack": [[17,17]],
         "iteration_variable:answer": [[19,19]],
         "iteration_variable:c": [[4,4]],
+        "iteration_variable:i": [[15,15]],
         "iteration_variable:r": [[4,4]],
+        "iteration_variable:solution": [[16,16]],
         "literal:0": [[10,10]],
         "literal:1": [[5,5],[5,5],[12,12],[14,14],[17,17]],
         "literal:8": [[1,1]],
@@ -1280,6 +1461,27 @@
         "literal:List": [[11,11],[11,11],[14,14]],
         "literal:True": [[7,7]],
         "literal:Tuple": [[4,4],[5,5],[5,5],[6,6],[14,14]],
+        "loaded_variable:BOARD_SIZE": [[15,15],[19,19]],
+        "loaded_variable:answer": [[20,20]],
+        "loaded_variable:c": [[6,6]],
+        "loaded_variable:col": [[3,3],[6,6]],
+        "loaded_variable:i": [[14,14],[17,17]],
+        "loaded_variable:left": [[5,5],[6,6]],
+        "loaded_variable:n": [[10,10],[12,12],[14,14]],
+        "loaded_variable:queens": [[4,4]],
+        "loaded_variable:right": [[5,5],[6,6]],
+        "loaded_variable:smaller_solutions": [[16,16]],
+        "loaded_variable:solution": [[14,14],[17,17]],
+        "local_scope:c": [[2,8]],
+        "local_scope:col": [[2,8]],
+        "local_scope:i": [[14,14]],
+        "local_scope:left": [[2,8]],
+        "local_scope:n": [[9,17]],
+        "local_scope:queens": [[2,8]],
+        "local_scope:r": [[2,8]],
+        "local_scope:right": [[2,8]],
+        "local_scope:smaller_solutions": [[9,17]],
+        "local_scope:solution": [[14,14]],
         "loop:for": [[4,7],[19,20]],
         "loop_with_early_exit:for:return": [[4,7]],
         "loop_with_late_exit:for": [[19,20]],
@@ -1309,6 +1511,18 @@
         "return": [[11,11],[13,17]],
         "return:False": [[8,8]],
         "return:True": [[7,7]],
+        "scope:BOARD_SIZE": [[1,20]],
+        "scope:answer": [[1,20]],
+        "scope:c": [[2,8]],
+        "scope:col": [[2,8]],
+        "scope:i": [[14,14]],
+        "scope:left": [[2,8]],
+        "scope:n": [[9,17]],
+        "scope:queens": [[2,8]],
+        "scope:r": [[2,8]],
+        "scope:right": [[2,8]],
+        "scope:smaller_solutions": [[9,17]],
+        "scope:solution": [[14,14]],
         "single_assignment:BOARD_SIZE": [[1,1]],
         "single_assignment:smaller_solutions": [[12,12]],
         "unary_operator:Not": [[17,17]],
@@ -1359,8 +1573,11 @@
         "var/assignment/explicit/constant": [[1,1]],
         "var/assignment/explicit/parallel": [[5,5]],
         "var/assignment/explicit/single": [[1,1],[12,12]],
-        "var/assignment/implicit/iteration_variable": [[4,4],[4,4],[19,19]],
-        "var/assignment/implicit/parameter": [[2,2],[2,2],[9,9]]
+        "var/assignment/implicit/iteration_variable": [[4,4],[4,4],[15,15],[16,16],[19,19]],
+        "var/assignment/implicit/parameter": [[2,2],[2,2],[9,9]],
+        "var/scope/global": [[1,20]],
+        "var/scope/local": [[2,8],[9,17],[14,14]],
+        "var/scope/outer/constant": [[9,17]]
       }
     },
     "20_prime_numbers.py": {
@@ -1394,6 +1611,7 @@
         "function:iter_primes": [[2,7]],
         "function_without_parameters:iter_primes": [[2,7]],
         "generator:iter_primes": [[2,7]],
+        "global_scope:p": [[1,11]],
         "if": [[9,10]],
         "if_test_atom:1000": [[9,9]],
         "if_test_atom:p": [[9,9]],
@@ -1407,6 +1625,12 @@
         "literal:1000": [[9,9]],
         "literal:2": [[3,3]],
         "literal:True": [[4,4]],
+        "loaded_variable:itertools": [[3,3]],
+        "loaded_variable:numbers": [[5,5],[7,7]],
+        "loaded_variable:p": [[9,9],[11,11]],
+        "loaded_variable:prime": [[6,6],[7,7]],
+        "local_scope:numbers": [[2,7]],
+        "local_scope:prime": [[2,7]],
         "loop:for": [[8,11]],
         "loop:while": [[4,7]],
         "loop_with_break:for": [[8,11]],
@@ -1430,6 +1654,9 @@
         "node:While": [[4,7]],
         "node:Yield": [[6,6]],
         "procedural_style": [[1,11]],
+        "scope:numbers": [[2,7]],
+        "scope:p": [[1,11]],
+        "scope:prime": [[2,7]],
         "single_assignment:numbers": [[3,3],[7,7]],
         "single_assignment:prime": [[5,5]],
         "update:numbers:prime": [[7,7]],
@@ -1463,7 +1690,9 @@
         "type/number/magic": [[9,9]],
         "type/sequence": [[3,3]],
         "var/assignment/explicit/single": [[3,3],[5,5],[7,7]],
-        "var/assignment/implicit/iteration_variable": [[8,8]]
+        "var/assignment/implicit/iteration_variable": [[8,8]],
+        "var/scope/global": [[1,11]],
+        "var/scope/local": [[2,7]]
       }
     },
     "21_xml_html_parsing.py": {
@@ -1491,6 +1720,13 @@
         "for:ingredient": [[11,14]],
         "free_call:print": [[14,14]],
         "free_call_without_result:print": [[14,14]],
+        "global_scope:amt": [[1,14]],
+        "global_scope:dinner_recipe": [[1,14]],
+        "global_scope:ingredient": [[1,14]],
+        "global_scope:item": [[1,14]],
+        "global_scope:pantry": [[1,14]],
+        "global_scope:tree": [[1,14]],
+        "global_scope:unit": [[1,14]],
         "if": [[13,14]],
         "if_test_atom:item": [[13,13],[13,13]],
         "if_test_atom:pantry": [[13,13]],
@@ -1503,6 +1739,14 @@
         "literal:Set": [[10,10]],
         "literal:Str": [[7,7],[10,10],[10,10],[11,11],[13,13],[14,14]],
         "literal:Tuple": [[12,12]],
+        "loaded_variable:amt": [[14,14]],
+        "loaded_variable:dinner_recipe": [[9,9]],
+        "loaded_variable:etree": [[9,9]],
+        "loaded_variable:ingredient": [[12,12]],
+        "loaded_variable:item": [[13,13],[13,13],[14,14]],
+        "loaded_variable:pantry": [[13,13]],
+        "loaded_variable:tree": [[11,11]],
+        "loaded_variable:unit": [[14,14]],
         "loop:for": [[11,14]],
         "loop_with_late_exit:for": [[11,14]],
         "member_call_method:format": [[14,14]],
@@ -1522,6 +1766,13 @@
         "node:Str": [[7,7],[10,10],[10,10],[11,11],[13,13],[14,14]],
         "node:Tuple": [[12,12]],
         "parallel_assignment:3": [[12,12]],
+        "scope:amt": [[1,14]],
+        "scope:dinner_recipe": [[1,14]],
+        "scope:ingredient": [[1,14]],
+        "scope:item": [[1,14]],
+        "scope:pantry": [[1,14]],
+        "scope:tree": [[1,14]],
+        "scope:unit": [[1,14]],
         "single_assignment:dinner_recipe": [[1,1]],
         "single_assignment:pantry": [[10,10]],
         "single_assignment:tree": [[9,9]],
@@ -1550,13 +1801,15 @@
         "type/sequence/tuple/literal": [[12,12]],
         "var/assignment/explicit/parallel/more_than_two": [[12,12]],
         "var/assignment/explicit/single": [[1,1],[9,9],[10,10]],
-        "var/assignment/implicit/iteration_variable": [[11,11]]
+        "var/assignment/implicit/iteration_variable": [[11,11]],
+        "var/scope/global": [[1,14]]
       }
     },
     "28_queens.py": {
       "timestamp": "",
       "source": "BOARD_SIZE = 8\nclass BailOut(Exception):\n    pass\ndef validate(queens):\n    left = right = col = queens[-1]\n    for r in reversed(queens[:-1]):\n        left, right = left - 1, right + 1\n        if r in (left, col, right):\n            raise BailOut\ndef add_queen(queens):\n    for i in range(BOARD_SIZE):\n        test_queens = queens + [i]\n        try:\n            validate(test_queens)\n            if len(test_queens) == BOARD_SIZE:\n                return test_queens\n            else:\n                return add_queen(test_queens)\n        except BailOut:\n            pass\n    raise BailOut\nqueens = add_queen([])\nprint(queens)\nprint(\"\\n\".join(\". \" * q + \"Q \" + \". \" * (BOARD_SIZE - q - 1) for q in queens))",
       "labels": {
+        "access_outer_scope:BOARD_SIZE": [[10,21]],
         "addition_operator": [[7,7]],
         "assignment": [[5,5],[7,7]],
         "assignment:8": [[1,1]],
@@ -1614,6 +1867,8 @@
         "function_parameter_flavor:arg": [[4,4],[10,10]],
         "function_returning_nothing:validate": [[4,9]],
         "function_returning_something:add_queen": [[10,21]],
+        "global_scope:BOARD_SIZE": [[1,24]],
+        "global_scope:queens": [[1,24]],
         "if": [[8,9],[15,18]],
         "if_else_branch": [[18,18]],
         "if_test_atom:BOARD_SIZE": [[15,15]],
@@ -1629,6 +1884,7 @@
         "internal_free_call:add_queen": [[18,18],[22,22]],
         "internal_free_call:validate": [[14,14]],
         "iteration_variable:i": [[11,11]],
+        "iteration_variable:q": [[24,24]],
         "iteration_variable:r": [[6,6]],
         "literal:-1": [[5,5],[6,6]],
         "literal:1": [[7,7],[7,7],[24,24]],
@@ -1636,6 +1892,25 @@
         "literal:List": [[12,12],[22,22]],
         "literal:Str": [[24,24],[24,24],[24,24],[24,24]],
         "literal:Tuple": [[7,7],[7,7],[8,8]],
+        "loaded_variable:BOARD_SIZE": [[11,11],[15,15],[24,24]],
+        "loaded_variable:BailOut": [[9,9],[19,19],[21,21]],
+        "loaded_variable:Exception": [[2,2]],
+        "loaded_variable:col": [[8,8]],
+        "loaded_variable:i": [[12,12]],
+        "loaded_variable:left": [[7,7],[8,8]],
+        "loaded_variable:q": [[24,24],[24,24]],
+        "loaded_variable:queens": [[5,5],[6,6],[12,12],[23,23],[24,24]],
+        "loaded_variable:r": [[8,8]],
+        "loaded_variable:right": [[7,7],[8,8]],
+        "loaded_variable:test_queens": [[14,14],[15,15],[16,16],[18,18]],
+        "local_scope:col": [[4,9]],
+        "local_scope:i": [[10,21]],
+        "local_scope:left": [[4,9]],
+        "local_scope:q": [[24,24]],
+        "local_scope:queens": [[4,9],[10,21]],
+        "local_scope:r": [[4,9]],
+        "local_scope:right": [[4,9]],
+        "local_scope:test_queens": [[10,21]],
         "loop:for": [[6,9],[11,20]],
         "loop_with_early_exit:for:raise": [[6,9]],
         "loop_with_early_exit:for:return": [[11,20]],
@@ -1675,6 +1950,16 @@
         "replication_operator:Str": [[24,24],[24,24]],
         "return": [[18,18]],
         "return:test_queens": [[16,16]],
+        "scope:BOARD_SIZE": [[1,24]],
+        "scope:col": [[4,9]],
+        "scope:i": [[10,21]],
+        "scope:left": [[4,9]],
+        "scope:q": [[24,24]],
+        "scope:queens": [[1,24],[4,9],[10,21]],
+        "scope:r": [[4,9]],
+        "scope:right": [[4,9]],
+        "scope:test_queens": [[10,21]],
+        "shadowing_scope:queens": [[4,9],[10,21]],
         "single_assignment:BOARD_SIZE": [[1,1]],
         "single_assignment:queens": [[22,22]],
         "single_assignment:test_queens": [[12,12]],
@@ -1744,8 +2029,12 @@
         "var/assignment/explicit/constant": [[1,1]],
         "var/assignment/explicit/parallel": [[7,7]],
         "var/assignment/explicit/single": [[1,1],[12,12],[22,22]],
-        "var/assignment/implicit/iteration_variable": [[6,6],[11,11]],
-        "var/assignment/implicit/parameter": [[4,4],[10,10]]
+        "var/assignment/implicit/iteration_variable": [[6,6],[11,11],[24,24]],
+        "var/assignment/implicit/parameter": [[4,4],[10,10]],
+        "var/scope/global": [[1,24]],
+        "var/scope/local": [[4,9],[10,21],[24,24]],
+        "var/scope/outer/constant": [[10,21]],
+        "var/scope/shadowing": [[4,9],[10,21]]
       }
     },
     "33_guess_the_number.py": {
@@ -1783,6 +2072,10 @@
         "free_call:int": [[7,7]],
         "free_call:print": [[5,5],[10,10],[12,12],[16,16],[18,18]],
         "free_call_without_result:print": [[5,5],[10,10],[12,12],[16,16],[18,18]],
+        "global_scope:guess": [[1,18]],
+        "global_scope:guesses_made": [[1,18]],
+        "global_scope:name": [[1,18]],
+        "global_scope:number": [[1,18]],
         "if": [[9,10],[11,12],[13,14],[15,18]],
         "if_else_branch": [[18,18]],
         "if_test_atom:guess": [[9,9],[11,11],[13,13],[15,15]],
@@ -1798,6 +2091,11 @@
         "literal:20": [[4,4]],
         "literal:6": [[6,6]],
         "literal:Str": [[3,3],[5,5],[7,7],[10,10],[12,12],[16,16],[18,18]],
+        "loaded_variable:guess": [[9,9],[11,11],[13,13],[15,15]],
+        "loaded_variable:guesses_made": [[6,6],[16,16]],
+        "loaded_variable:name": [[5,5],[16,16]],
+        "loaded_variable:number": [[9,9],[11,11],[13,13],[15,15],[18,18]],
+        "loaded_variable:random": [[4,4]],
         "loop:while": [[6,14]],
         "loop_with_break:while": [[6,14]],
         "loop_with_early_exit:while:break": [[6,14]],
@@ -1818,6 +2116,10 @@
         "node:Num": [[2,2],[4,4],[4,4],[6,6],[8,8]],
         "node:Str": [[3,3],[5,5],[7,7],[10,10],[12,12],[16,16],[18,18]],
         "node:While": [[6,14]],
+        "scope:guess": [[1,18]],
+        "scope:guesses_made": [[1,18]],
+        "scope:name": [[1,18]],
+        "scope:number": [[1,18]],
         "single_assignment:guess": [[7,7]],
         "single_assignment:guesses_made": [[2,2]],
         "single_assignment:name": [[3,3]],
@@ -1856,11 +2158,16 @@
         "type/sequence/string/literal": [[5,5],[7,7],[10,10],[12,12],[16,16],[18,18]],
         "type/sequence/string/literal/special/\\n": [[3,3]],
         "var/assignment/explicit/augmented/Add": [[8,8]],
-        "var/assignment/explicit/single": [[2,2],[3,3],[4,4],[7,7]]
+        "var/assignment/explicit/single": [[2,2],[3,3],[4,4],[7,7]],
+        "var/scope/global": [[1,18]]
       }
     }
   },
   "labels": {
+    "access_outer_scope:BOARD_SIZE": [
+      "18_queens.py",
+      "28_queens.py"
+    ],
     "addition_operator": [
       "04_fibonacci.py",
       "13_unit_testing.py",
@@ -2952,6 +3259,145 @@
     "generator:iter_primes": [
       "20_prime_numbers.py"
     ],
+    "global_scope:BOARD_SIZE": [
+      "18_queens.py",
+      "28_queens.py"
+    ],
+    "global_scope:REFRAIN": [
+      "11_bottles.py"
+    ],
+    "global_scope:activities": [
+      "10_time.py"
+    ],
+    "global_scope:activity_time": [
+      "10_time.py"
+    ],
+    "global_scope:amt": [
+      "21_xml_html_parsing.py"
+    ],
+    "global_scope:answer": [
+      "18_queens.py"
+    ],
+    "global_scope:babies": [
+      "04_fibonacci.py"
+    ],
+    "global_scope:bottles_of_beer": [
+      "11_bottles.py"
+    ],
+    "global_scope:change": [
+      "16_csv.py"
+    ],
+    "global_scope:dinner_recipe": [
+      "21_xml_html_parsing.py"
+    ],
+    "global_scope:file_name": [
+      "09_indent.py"
+    ],
+    "global_scope:frags": [
+      "15_itertools_groupby.py"
+    ],
+    "global_scope:friends": [
+      "03_friends.py"
+    ],
+    "global_scope:grocery_bill": [
+      "07_grocery_bill.py"
+    ],
+    "global_scope:guess": [
+      "33_guess_the_number.py"
+    ],
+    "global_scope:guesses_made": [
+      "33_guess_the_number.py"
+    ],
+    "global_scope:has_chars": [
+      "15_itertools_groupby.py"
+    ],
+    "global_scope:hour": [
+      "10_time.py"
+    ],
+    "global_scope:i": [
+      "03_friends.py"
+    ],
+    "global_scope:ingredient": [
+      "21_xml_html_parsing.py"
+    ],
+    "global_scope:item": [
+      "21_xml_html_parsing.py"
+    ],
+    "global_scope:line": [
+      "09_indent.py"
+    ],
+    "global_scope:lines": [
+      "15_itertools_groupby.py"
+    ],
+    "global_scope:my_account": [
+      "12_classes.py"
+    ],
+    "global_scope:my_purchase": [
+      "07_grocery_bill.py"
+    ],
+    "global_scope:name": [
+      "02_input_name.py",
+      "03_friends.py",
+      "16_csv.py",
+      "33_guess_the_number.py"
+    ],
+    "global_scope:number": [
+      "33_guess_the_number.py"
+    ],
+    "global_scope:p": [
+      "20_prime_numbers.py"
+    ],
+    "global_scope:pantry": [
+      "21_xml_html_parsing.py"
+    ],
+    "global_scope:parents": [
+      "04_fibonacci.py"
+    ],
+    "global_scope:pct": [
+      "16_csv.py"
+    ],
+    "global_scope:price": [
+      "16_csv.py"
+    ],
+    "global_scope:prices": [
+      "07_grocery_bill.py"
+    ],
+    "global_scope:python_files": [
+      "09_indent.py"
+    ],
+    "global_scope:queens": [
+      "28_queens.py"
+    ],
+    "global_scope:status": [
+      "16_csv.py"
+    ],
+    "global_scope:status_labels": [
+      "16_csv.py"
+    ],
+    "global_scope:stocks": [
+      "16_csv.py"
+    ],
+    "global_scope:test_string": [
+      "06_regex.py"
+    ],
+    "global_scope:ticker": [
+      "16_csv.py"
+    ],
+    "global_scope:time_now": [
+      "10_time.py"
+    ],
+    "global_scope:total": [
+      "08_arguments.py"
+    ],
+    "global_scope:tree": [
+      "21_xml_html_parsing.py"
+    ],
+    "global_scope:unit": [
+      "21_xml_html_parsing.py"
+    ],
+    "global_scope:writer": [
+      "16_csv.py"
+    ],
     "if": [
       "06_regex.py",
       "10_time.py",
@@ -3224,6 +3670,9 @@
     "iteration_variable:answer": [
       "18_queens.py"
     ],
+    "iteration_variable:arg": [
+      "08_arguments.py"
+    ],
     "iteration_variable:c": [
       "18_queens.py"
     ],
@@ -3236,11 +3685,15 @@
     "iteration_variable:frags": [
       "15_itertools_groupby.py"
     ],
+    "iteration_variable:fruit": [
+      "07_grocery_bill.py"
+    ],
     "iteration_variable:has_chars": [
       "15_itertools_groupby.py"
     ],
     "iteration_variable:i": [
       "03_friends.py",
+      "18_queens.py",
       "28_queens.py"
     ],
     "iteration_variable:ingredient": [
@@ -3262,9 +3715,15 @@
     "iteration_variable:price": [
       "16_csv.py"
     ],
+    "iteration_variable:q": [
+      "28_queens.py"
+    ],
     "iteration_variable:r": [
       "18_queens.py",
       "28_queens.py"
+    ],
+    "iteration_variable:solution": [
+      "18_queens.py"
     ],
     "iteration_variable:test_string": [
       "06_regex.py"
@@ -3433,6 +3892,349 @@
       "16_csv.py",
       "18_queens.py",
       "21_xml_html_parsing.py",
+      "28_queens.py"
+    ],
+    "loaded_variable:BOARD_SIZE": [
+      "18_queens.py",
+      "28_queens.py"
+    ],
+    "loaded_variable:BailOut": [
+      "28_queens.py"
+    ],
+    "loaded_variable:Exception": [
+      "28_queens.py"
+    ],
+    "loaded_variable:REFRAIN": [
+      "11_bottles.py"
+    ],
+    "loaded_variable:ValueError": [
+      "08_arguments.py"
+    ],
+    "loaded_variable:a": [
+      "16_csv.py"
+    ],
+    "loaded_variable:activities": [
+      "10_time.py"
+    ],
+    "loaded_variable:activity_time": [
+      "10_time.py"
+    ],
+    "loaded_variable:amount": [
+      "12_classes.py"
+    ],
+    "loaded_variable:amt": [
+      "21_xml_html_parsing.py"
+    ],
+    "loaded_variable:answer": [
+      "18_queens.py"
+    ],
+    "loaded_variable:arg": [
+      "08_arguments.py"
+    ],
+    "loaded_variable:b": [
+      "16_csv.py"
+    ],
+    "loaded_variable:babies": [
+      "04_fibonacci.py"
+    ],
+    "loaded_variable:bool": [
+      "15_itertools_groupby.py"
+    ],
+    "loaded_variable:bottles_of_beer": [
+      "11_bottles.py"
+    ],
+    "loaded_variable:c": [
+      "18_queens.py"
+    ],
+    "loaded_variable:change": [
+      "16_csv.py"
+    ],
+    "loaded_variable:col": [
+      "18_queens.py",
+      "28_queens.py"
+    ],
+    "loaded_variable:copy": [
+      "13_unit_testing.py",
+      "14_median.py"
+    ],
+    "loaded_variable:csv": [
+      "16_csv.py"
+    ],
+    "loaded_variable:dinner_recipe": [
+      "21_xml_html_parsing.py"
+    ],
+    "loaded_variable:etree": [
+      "21_xml_html_parsing.py"
+    ],
+    "loaded_variable:f": [
+      "09_indent.py"
+    ],
+    "loaded_variable:file_name": [
+      "09_indent.py"
+    ],
+    "loaded_variable:frags": [
+      "15_itertools_groupby.py"
+    ],
+    "loaded_variable:friends": [
+      "03_friends.py"
+    ],
+    "loaded_variable:fruit": [
+      "07_grocery_bill.py"
+    ],
+    "loaded_variable:glob": [
+      "09_indent.py"
+    ],
+    "loaded_variable:grocery_bill": [
+      "07_grocery_bill.py"
+    ],
+    "loaded_variable:guess": [
+      "33_guess_the_number.py"
+    ],
+    "loaded_variable:guesses_made": [
+      "33_guess_the_number.py"
+    ],
+    "loaded_variable:has_chars": [
+      "15_itertools_groupby.py"
+    ],
+    "loaded_variable:hour": [
+      "10_time.py"
+    ],
+    "loaded_variable:i": [
+      "03_friends.py",
+      "18_queens.py",
+      "28_queens.py"
+    ],
+    "loaded_variable:ingredient": [
+      "21_xml_html_parsing.py"
+    ],
+    "loaded_variable:initial_balance": [
+      "12_classes.py"
+    ],
+    "loaded_variable:item": [
+      "21_xml_html_parsing.py"
+    ],
+    "loaded_variable:itertools": [
+      "20_prime_numbers.py"
+    ],
+    "loaded_variable:left": [
+      "18_queens.py",
+      "28_queens.py"
+    ],
+    "loaded_variable:line": [
+      "09_indent.py"
+    ],
+    "loaded_variable:lines": [
+      "15_itertools_groupby.py"
+    ],
+    "loaded_variable:my_account": [
+      "12_classes.py"
+    ],
+    "loaded_variable:my_purchase": [
+      "07_grocery_bill.py"
+    ],
+    "loaded_variable:n": [
+      "18_queens.py"
+    ],
+    "loaded_variable:name": [
+      "02_input_name.py",
+      "03_friends.py",
+      "05_greet.py",
+      "16_csv.py",
+      "33_guess_the_number.py"
+    ],
+    "loaded_variable:number": [
+      "33_guess_the_number.py"
+    ],
+    "loaded_variable:numbers": [
+      "20_prime_numbers.py"
+    ],
+    "loaded_variable:object": [
+      "12_classes.py"
+    ],
+    "loaded_variable:p": [
+      "20_prime_numbers.py"
+    ],
+    "loaded_variable:pantry": [
+      "21_xml_html_parsing.py"
+    ],
+    "loaded_variable:parents": [
+      "04_fibonacci.py"
+    ],
+    "loaded_variable:pct": [
+      "16_csv.py"
+    ],
+    "loaded_variable:pool": [
+      "13_unit_testing.py",
+      "14_median.py"
+    ],
+    "loaded_variable:prices": [
+      "07_grocery_bill.py"
+    ],
+    "loaded_variable:prime": [
+      "20_prime_numbers.py"
+    ],
+    "loaded_variable:python_files": [
+      "09_indent.py"
+    ],
+    "loaded_variable:q": [
+      "28_queens.py"
+    ],
+    "loaded_variable:queens": [
+      "18_queens.py",
+      "28_queens.py"
+    ],
+    "loaded_variable:r": [
+      "28_queens.py"
+    ],
+    "loaded_variable:random": [
+      "33_guess_the_number.py"
+    ],
+    "loaded_variable:re": [
+      "06_regex.py"
+    ],
+    "loaded_variable:right": [
+      "18_queens.py",
+      "28_queens.py"
+    ],
+    "loaded_variable:self": [
+      "12_classes.py",
+      "13_unit_testing.py"
+    ],
+    "loaded_variable:size": [
+      "13_unit_testing.py",
+      "14_median.py"
+    ],
+    "loaded_variable:smaller_solutions": [
+      "18_queens.py"
+    ],
+    "loaded_variable:solution": [
+      "18_queens.py"
+    ],
+    "loaded_variable:status": [
+      "16_csv.py"
+    ],
+    "loaded_variable:status_labels": [
+      "16_csv.py"
+    ],
+    "loaded_variable:stocks": [
+      "16_csv.py"
+    ],
+    "loaded_variable:stocksFile": [
+      "16_csv.py"
+    ],
+    "loaded_variable:stocksFileW": [
+      "16_csv.py"
+    ],
+    "loaded_variable:sys": [
+      "08_arguments.py"
+    ],
+    "loaded_variable:test_queens": [
+      "28_queens.py"
+    ],
+    "loaded_variable:test_string": [
+      "06_regex.py"
+    ],
+    "loaded_variable:time_now": [
+      "10_time.py"
+    ],
+    "loaded_variable:total": [
+      "08_arguments.py"
+    ],
+    "loaded_variable:tree": [
+      "21_xml_html_parsing.py"
+    ],
+    "loaded_variable:unit": [
+      "21_xml_html_parsing.py"
+    ],
+    "loaded_variable:unittest": [
+      "13_unit_testing.py"
+    ],
+    "loaded_variable:writer": [
+      "16_csv.py"
+    ],
+    "local_scope:a": [
+      "16_csv.py"
+    ],
+    "local_scope:amount": [
+      "12_classes.py"
+    ],
+    "local_scope:arg": [
+      "08_arguments.py"
+    ],
+    "local_scope:b": [
+      "16_csv.py"
+    ],
+    "local_scope:c": [
+      "18_queens.py"
+    ],
+    "local_scope:col": [
+      "18_queens.py",
+      "28_queens.py"
+    ],
+    "local_scope:copy": [
+      "13_unit_testing.py",
+      "14_median.py"
+    ],
+    "local_scope:fruit": [
+      "07_grocery_bill.py"
+    ],
+    "local_scope:i": [
+      "18_queens.py",
+      "28_queens.py"
+    ],
+    "local_scope:initial_balance": [
+      "12_classes.py"
+    ],
+    "local_scope:left": [
+      "18_queens.py",
+      "28_queens.py"
+    ],
+    "local_scope:n": [
+      "18_queens.py"
+    ],
+    "local_scope:name": [
+      "05_greet.py"
+    ],
+    "local_scope:numbers": [
+      "20_prime_numbers.py"
+    ],
+    "local_scope:pool": [
+      "13_unit_testing.py",
+      "14_median.py"
+    ],
+    "local_scope:prime": [
+      "20_prime_numbers.py"
+    ],
+    "local_scope:q": [
+      "28_queens.py"
+    ],
+    "local_scope:queens": [
+      "18_queens.py",
+      "28_queens.py"
+    ],
+    "local_scope:r": [
+      "18_queens.py",
+      "28_queens.py"
+    ],
+    "local_scope:right": [
+      "18_queens.py",
+      "28_queens.py"
+    ],
+    "local_scope:self": [
+      "12_classes.py",
+      "13_unit_testing.py"
+    ],
+    "local_scope:size": [
+      "13_unit_testing.py",
+      "14_median.py"
+    ],
+    "local_scope:smaller_solutions": [
+      "18_queens.py"
+    ],
+    "local_scope:solution": [
+      "18_queens.py"
+    ],
+    "local_scope:test_queens": [
       "28_queens.py"
     ],
     "loop:for": [
@@ -4071,6 +4873,226 @@
       "18_queens.py"
     ],
     "return:test_queens": [
+      "28_queens.py"
+    ],
+    "scope:BOARD_SIZE": [
+      "18_queens.py",
+      "28_queens.py"
+    ],
+    "scope:REFRAIN": [
+      "11_bottles.py"
+    ],
+    "scope:a": [
+      "16_csv.py"
+    ],
+    "scope:activities": [
+      "10_time.py"
+    ],
+    "scope:activity_time": [
+      "10_time.py"
+    ],
+    "scope:amount": [
+      "12_classes.py"
+    ],
+    "scope:amt": [
+      "21_xml_html_parsing.py"
+    ],
+    "scope:answer": [
+      "18_queens.py"
+    ],
+    "scope:arg": [
+      "08_arguments.py"
+    ],
+    "scope:b": [
+      "16_csv.py"
+    ],
+    "scope:babies": [
+      "04_fibonacci.py"
+    ],
+    "scope:bottles_of_beer": [
+      "11_bottles.py"
+    ],
+    "scope:c": [
+      "18_queens.py"
+    ],
+    "scope:change": [
+      "16_csv.py"
+    ],
+    "scope:col": [
+      "18_queens.py",
+      "28_queens.py"
+    ],
+    "scope:copy": [
+      "13_unit_testing.py",
+      "14_median.py"
+    ],
+    "scope:dinner_recipe": [
+      "21_xml_html_parsing.py"
+    ],
+    "scope:file_name": [
+      "09_indent.py"
+    ],
+    "scope:frags": [
+      "15_itertools_groupby.py"
+    ],
+    "scope:friends": [
+      "03_friends.py"
+    ],
+    "scope:fruit": [
+      "07_grocery_bill.py"
+    ],
+    "scope:grocery_bill": [
+      "07_grocery_bill.py"
+    ],
+    "scope:guess": [
+      "33_guess_the_number.py"
+    ],
+    "scope:guesses_made": [
+      "33_guess_the_number.py"
+    ],
+    "scope:has_chars": [
+      "15_itertools_groupby.py"
+    ],
+    "scope:hour": [
+      "10_time.py"
+    ],
+    "scope:i": [
+      "03_friends.py",
+      "18_queens.py",
+      "28_queens.py"
+    ],
+    "scope:ingredient": [
+      "21_xml_html_parsing.py"
+    ],
+    "scope:initial_balance": [
+      "12_classes.py"
+    ],
+    "scope:item": [
+      "21_xml_html_parsing.py"
+    ],
+    "scope:left": [
+      "18_queens.py",
+      "28_queens.py"
+    ],
+    "scope:line": [
+      "09_indent.py"
+    ],
+    "scope:lines": [
+      "15_itertools_groupby.py"
+    ],
+    "scope:my_account": [
+      "12_classes.py"
+    ],
+    "scope:my_purchase": [
+      "07_grocery_bill.py"
+    ],
+    "scope:n": [
+      "18_queens.py"
+    ],
+    "scope:name": [
+      "02_input_name.py",
+      "03_friends.py",
+      "05_greet.py",
+      "16_csv.py",
+      "33_guess_the_number.py"
+    ],
+    "scope:number": [
+      "33_guess_the_number.py"
+    ],
+    "scope:numbers": [
+      "20_prime_numbers.py"
+    ],
+    "scope:p": [
+      "20_prime_numbers.py"
+    ],
+    "scope:pantry": [
+      "21_xml_html_parsing.py"
+    ],
+    "scope:parents": [
+      "04_fibonacci.py"
+    ],
+    "scope:pct": [
+      "16_csv.py"
+    ],
+    "scope:pool": [
+      "13_unit_testing.py",
+      "14_median.py"
+    ],
+    "scope:price": [
+      "16_csv.py"
+    ],
+    "scope:prices": [
+      "07_grocery_bill.py"
+    ],
+    "scope:prime": [
+      "20_prime_numbers.py"
+    ],
+    "scope:python_files": [
+      "09_indent.py"
+    ],
+    "scope:q": [
+      "28_queens.py"
+    ],
+    "scope:queens": [
+      "18_queens.py",
+      "28_queens.py"
+    ],
+    "scope:r": [
+      "18_queens.py",
+      "28_queens.py"
+    ],
+    "scope:right": [
+      "18_queens.py",
+      "28_queens.py"
+    ],
+    "scope:self": [
+      "12_classes.py",
+      "13_unit_testing.py"
+    ],
+    "scope:size": [
+      "13_unit_testing.py",
+      "14_median.py"
+    ],
+    "scope:smaller_solutions": [
+      "18_queens.py"
+    ],
+    "scope:solution": [
+      "18_queens.py"
+    ],
+    "scope:status": [
+      "16_csv.py"
+    ],
+    "scope:status_labels": [
+      "16_csv.py"
+    ],
+    "scope:stocks": [
+      "16_csv.py"
+    ],
+    "scope:test_queens": [
+      "28_queens.py"
+    ],
+    "scope:test_string": [
+      "06_regex.py"
+    ],
+    "scope:ticker": [
+      "16_csv.py"
+    ],
+    "scope:time_now": [
+      "10_time.py"
+    ],
+    "scope:total": [
+      "08_arguments.py"
+    ],
+    "scope:tree": [
+      "21_xml_html_parsing.py"
+    ],
+    "scope:unit": [
+      "21_xml_html_parsing.py"
+    ],
+    "scope:writer": [
+      "16_csv.py"
+    ],
+    "shadowing_scope:queens": [
       "28_queens.py"
     ],
     "single_assignment:BOARD_SIZE": [
@@ -5106,6 +6128,8 @@
     "var/assignment/implicit/iteration_variable": [
       "03_friends.py",
       "06_regex.py",
+      "07_grocery_bill.py",
+      "08_arguments.py",
       "09_indent.py",
       "10_time.py",
       "15_itertools_groupby.py",
@@ -5127,6 +6151,44 @@
     "var/assignment/implicit/parameter/self": [
       "12_classes.py",
       "13_unit_testing.py"
+    ],
+    "var/scope/global": [
+      "02_input_name.py",
+      "03_friends.py",
+      "04_fibonacci.py",
+      "06_regex.py",
+      "07_grocery_bill.py",
+      "08_arguments.py",
+      "09_indent.py",
+      "10_time.py",
+      "11_bottles.py",
+      "12_classes.py",
+      "15_itertools_groupby.py",
+      "16_csv.py",
+      "18_queens.py",
+      "20_prime_numbers.py",
+      "21_xml_html_parsing.py",
+      "28_queens.py",
+      "33_guess_the_number.py"
+    ],
+    "var/scope/local": [
+      "05_greet.py",
+      "07_grocery_bill.py",
+      "08_arguments.py",
+      "12_classes.py",
+      "13_unit_testing.py",
+      "14_median.py",
+      "16_csv.py",
+      "18_queens.py",
+      "20_prime_numbers.py",
+      "28_queens.py"
+    ],
+    "var/scope/outer/constant": [
+      "18_queens.py",
+      "28_queens.py"
+    ],
+    "var/scope/shadowing": [
+      "28_queens.py"
     ]
   },
   "importations": {

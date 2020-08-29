@@ -533,14 +533,19 @@ var data = google.visualization.arrayToDataTable([['node', 'occurrences'],
 ['• var assignment explicit single.', 3458],
 ['• var assignment explicit slice.', 4],
 ['• var assignment explicit throwaway.', 5],
-['• var assignment implicit iteration_variable.', 820],
-['• var assignment implicit iteration_variable throwaway.', 11],
+['• var assignment implicit iteration_variable.', 1056],
+['• var assignment implicit iteration_variable throwaway.', 48],
 ['• var assignment implicit parameter.', 1912],
 ['• var assignment implicit parameter kwarg.', 6],
 ['• var assignment implicit parameter self.', 568],
 ['• var assignment implicit parameter vararg.', 5],
 ['• var deletion index.', 7],
-['• var deletion unbinding.', 3]]);
+['• var deletion unbinding.', 3],
+['• var scope global.', 98],
+['• var scope local.', 1668],
+['• var scope outer constant.', 43],
+['• var scope outer variable.', 70],
+['• var scope shadowing.', 127]]);
 var options = {
     wordtree: {
     format: 'implicit',

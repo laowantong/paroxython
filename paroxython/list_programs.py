@@ -112,10 +112,10 @@ def iterate_and_print_programs(programs: Programs) -> Iterator[Program]:
     """
     blanks = ""
     for (i, program) in enumerate(programs, 1):
-        print(f"\r{blanks}\r{i: 5} {program.name}", end="", flush=True)
+        print(end=f"\r{blanks}\r{i: 5} {program.name}", flush=True)
         blanks = " " * (len(program.name) + 7)
         if i == len(programs):  # Placed after the loop, the next line would not be executed.
-            print(f"\r{blanks}\r", end="", flush=True)
+            print(end=f"\r{blanks}\r", flush=True)
         yield program
 
 

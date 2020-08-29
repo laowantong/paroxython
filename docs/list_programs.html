@@ -79,10 +79,10 @@ def get_program(source: Source, relative_path: Path = None) -&gt; Program:
 def iterate_and_print_programs(programs: Programs) -&gt; Iterator[Program]:
     blanks = &#34;&#34;
     for (i, program) in enumerate(programs, 1):
-        print(f&#34;\r{blanks}\r{i: 5} {program.name}&#34;, end=&#34;&#34;, flush=True)
+        print(end=f&#34;\r{blanks}\r{i: 5} {program.name}&#34;, flush=True)
         blanks = &#34; &#34; * (len(program.name) + 7)
         if i == len(programs):  # Placed after the loop, the next line would not be executed.
-            print(f&#34;\r{blanks}\r&#34;, end=&#34;&#34;, flush=True)
+            print(end=f&#34;\r{blanks}\r&#34;, flush=True)
         yield program
 
 
@@ -252,10 +252,10 @@ does not support <a href="https://en.wikipedia.org/wiki/ANSI_escape_code">ANSI e
 <pre><code class="python">def iterate_and_print_programs(programs: Programs) -&gt; Iterator[Program]:
     blanks = &#34;&#34;
     for (i, program) in enumerate(programs, 1):
-        print(f&#34;\r{blanks}\r{i: 5} {program.name}&#34;, end=&#34;&#34;, flush=True)
+        print(end=f&#34;\r{blanks}\r{i: 5} {program.name}&#34;, flush=True)
         blanks = &#34; &#34; * (len(program.name) + 7)
         if i == len(programs):  # Placed after the loop, the next line would not be executed.
-            print(f&#34;\r{blanks}\r&#34;, end=&#34;&#34;, flush=True)
+            print(end=f&#34;\r{blanks}\r&#34;, flush=True)
         yield program</code></pre>
 </details>
 </dd>

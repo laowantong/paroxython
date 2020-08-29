@@ -5,10 +5,13 @@ a = b # assignment
       # assignment_lhs_identifier:a
       # assignment_rhs_atom:b
       # flat_style
+      # global_scope:a
       # imperative_style
+      # loaded_variable:b
       # node:Assign
       # node:Name
       # one_liner_style
+      # scope:a
       # single_assignment:a
       # whole_span:1
 
@@ -20,12 +23,15 @@ def print_collatz(n): # added_block_label (-> +7)
                       # function_parameter:n
                       # function_parameter_flavor:arg
                       # function_returning_nothing:print_collatz (-> +7)
+                      # local_scope:n (-> +7)
                       # node:FunctionDef (-> +7)
                       # node:arg
                       # procedural_style (-> +7)
+                      # scope:n (-> +7)
                       # whole_span:8 (-> +7)
     while n != 1: # comparison_operator:NotEq
                   # literal:1
+                  # loaded_variable:n
                   # loop:while (-> +5)
                   # loop_with_late_exit:while (-> +5)
                   # node:Compare
@@ -37,6 +43,7 @@ def print_collatz(n): # added_block_label (-> +7)
                  # external_free_call:print
                  # free_call:print
                  # free_call_without_result:print
+                 # loaded_variable:n
                  # node:Call
                  # node:Expr
                  # node:Name
@@ -50,6 +57,7 @@ def print_collatz(n): # added_block_label (-> +7)
                        # if_test_atom:n
                        # literal:0
                        # literal:2
+                       # loaded_variable:n
                        # modulo_operator
                        # node:BinOp
                        # node:Compare
@@ -64,6 +72,7 @@ def print_collatz(n): # added_block_label (-> +7)
                        # augmented_assignment_unpythonic
                        # if_then_branch
                        # literal:2
+                       # loaded_variable:n
                        # node:Assign
                        # node:BinOp
                        # node:Name
@@ -85,6 +94,7 @@ def print_collatz(n): # added_block_label (-> +7)
                           # if_else_branch
                           # literal:1
                           # literal:3
+                          # loaded_variable:n
                           # magic_number:3
                           # multiplication_operator
                           # node:Assign
@@ -102,6 +112,7 @@ def print_collatz(n): # added_block_label (-> +7)
              # external_free_call:print
              # free_call:print
              # free_call_without_result:print
+             # loaded_variable:n
              # node:Call
              # node:Expr
              # node:Name
@@ -109,10 +120,12 @@ def print_collatz(n): # added_block_label (-> +7)
 # ----------------------------------------------------------------------------------------
 # fizzbuzz.py
 # ----------------------------------------------------------------------------------------
-import collatz # imperative_style (-> +9)
+import collatz # global_scope:i (-> +9)
+               # imperative_style (-> +9)
                # import_internally:collatz
                # import_module_internally:collatz
                # node:Import
+               # scope:i (-> +9)
                # whole_span:10 (-> +9)
 for i in range(1, 101): # call_argument:1
                         # call_argument:101
@@ -140,6 +153,7 @@ for i in range(1, 101): # call_argument:1
                     # if_test_atom:i
                     # literal:0
                     # literal:15
+                    # loaded_variable:i
                     # magic_number:15
                     # modulo_operator
                     # node:BinOp
@@ -166,6 +180,7 @@ for i in range(1, 101): # call_argument:1
                      # if_test_atom:i
                      # literal:0
                      # literal:3
+                     # loaded_variable:i
                      # magic_number:3
                      # modulo_operator
                      # node:BinOp
@@ -192,6 +207,7 @@ for i in range(1, 101): # call_argument:1
                      # if_test_atom:i
                      # literal:0
                      # literal:5
+                     # loaded_variable:i
                      # magic_number:5
                      # modulo_operator
                      # node:BinOp
@@ -215,6 +231,7 @@ for i in range(1, 101): # call_argument:1
                  # free_call:print
                  # free_call_without_result:print
                  # if_else_branch
+                 # loaded_variable:i
                  # node:Call
                  # node:Expr
                  # node:Name
@@ -232,14 +249,17 @@ def is_even(n): # function:is_even (-> +1)
                 # function_parameter:n
                 # function_parameter_flavor:arg
                 # function_returning_something:is_even (-> +1)
+                # local_scope:n (-> +1)
                 # node:FunctionDef (-> +1)
                 # node:arg
                 # pure_function:is_even (-> +1)
+                # scope:n (-> +1)
     return n % 2 == 0 # binary_operator:Mod
                       # comparison_operator:Eq
                       # divisibility_test:2
                       # literal:0
                       # literal:2
+                      # loaded_variable:n
                       # modulo_operator
                       # node:BinOp
                       # node:Compare

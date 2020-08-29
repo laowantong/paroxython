@@ -556,14 +556,19 @@ var data = google.visualization.arrayToDataTable([['node', 'occurrences'],
 ['• var assignment explicit single.', 3458],
 ['• var assignment explicit slice.', 4],
 ['• var assignment explicit throwaway.', 5],
-['• var assignment implicit iteration_variable.', 820],
-['• var assignment implicit iteration_variable throwaway.', 11],
+['• var assignment implicit iteration_variable.', 1056],
+['• var assignment implicit iteration_variable throwaway.', 48],
 ['• var assignment implicit parameter.', 1912],
 ['• var assignment implicit parameter kwarg.', 6],
 ['• var assignment implicit parameter self.', 568],
 ['• var assignment implicit parameter vararg.', 5],
 ['• var deletion index.', 7],
-['• var deletion unbinding.', 3]]);
+['• var deletion unbinding.', 3],
+['• var scope global.', 98],
+['• var scope local.', 1668],
+['• var scope outer constant.', 43],
+['• var scope outer variable.', 70],
+['• var scope shadowing.', 127]]);
 var options = {
     wordtree: {
     format: 'implicit',
@@ -1607,7 +1612,7 @@ or <code>"contains not"</code>), whether it's grammatically correct or not.</p>
     ]
   }, # among them, keep only those that feature no conditional or no loop
 </code></pre>
-<p>For two taxa, there are a total of 16 combinations, listed and tested <a href="https://github.com/laowantong/paroxython/blob/master/tests/test_recommend_programs.py#L663-L692">here</a>.
+<p>For two taxa, there are a total of 16 combinations, listed and tested <a href="https://github.com/laowantong/paroxython/blob/master/tests/test_recommend_programs.py#L672-L701">here</a>.
 <!---
 The previous link is automatically updated by build_pdoc.py.
 --></p>
@@ -1661,7 +1666,7 @@ span <code>s_1</code> of such a taxon, there exists no span <code>s_2</code> of 
   },
 </code></pre>
 <p>The triple describes the set of programs which feature at least one tuple, and such that there is no tuple's span coinciding with a parallel assignment's span. In other words, the set of programs which feature at least one “non parallel” tuple. When we exclude these programs, those which remain either feature no tuple, or only the ones involved in a parallel assignment.</p>
-<p>The other combinations are listed and tested <a href="https://github.com/laowantong/paroxython/blob/master/tests/test_recommend_programs.py#L779-L808">here</a>.
+<p>The other combinations are listed and tested <a href="https://github.com/laowantong/paroxython/blob/master/tests/test_recommend_programs.py#L788-L817">here</a>.
 <!---
 The previous link is automatically updated by build_pdoc.py.
 -->

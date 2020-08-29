@@ -369,7 +369,7 @@ For instance, consider the two taxa `"flow/conditional"` and `"flow/loop"`. To k
   }, # among them, keep only those that feature no conditional or no loop
 ```
 
-For two taxa, there are a total of 16 combinations, listed and tested [here](https://repo/tests/test_recommend_programs.py#L663-L692).
+For two taxa, there are a total of 16 combinations, listed and tested [here](https://repo/tests/test_recommend_programs.py#L672-L701).
 <!---
 The previous link is automatically updated by build_pdoc.py.
 -->
@@ -444,7 +444,7 @@ In the taxonomy, this concept is listed as a special case of both tuple (`"type/
 
 The triple describes the set of programs which feature at least one tuple, and such that there is no tuple's span coinciding with a parallel assignment's span. In other words, the set of programs which feature at least one “non parallel” tuple. When we exclude these programs, those which remain either feature no tuple, or only the ones involved in a parallel assignment.
 
-The other combinations are listed and tested [here](https://repo/tests/test_recommend_programs.py#L779-L808).
+The other combinations are listed and tested [here](https://repo/tests/test_recommend_programs.py#L788-L817).
 <!---
 The previous link is automatically updated by build_pdoc.py.
 -->

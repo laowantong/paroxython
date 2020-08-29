@@ -52,6 +52,8 @@
 - function_returning_nothing:print_collatz / collatz.py / 1-8
 - function_returning_something:is_even / is_even.py / 2-3
 - functional_style / is_even.py / 1-3
+- global_scope:a / assignment.py / 1
+- global_scope:i / fizzbuzz.py / 1-10
 - if / collatz.py / 4-7
 - if / fizzbuzz.py / 3-10, 5-10, 7-10
 - if_elif_branch / fizzbuzz.py / 6, 8
@@ -87,6 +89,12 @@
 - literal:3 / fizzbuzz.py / 5
 - literal:5 / fizzbuzz.py / 7
 - literal:Str / fizzbuzz.py / 4, 6, 8
+- loaded_variable:b / assignment.py / 1
+- loaded_variable:i / fizzbuzz.py / 3, 5, 7, 10
+- loaded_variable:n / collatz.py / 2, 3, 4, 5, 7, 8
+- loaded_variable:n / is_even.py / 3
+- local_scope:n / collatz.py / 1-8
+- local_scope:n / is_even.py / 2-3
 - loop:for / fizzbuzz.py / 2-10
 - loop:while / collatz.py / 2-7
 - loop_with_late_exit:for / fizzbuzz.py / 2-10
@@ -137,6 +145,10 @@
 - pure_function:is_even / is_even.py / 2-3
 - range:1:101 / fizzbuzz.py / 2
 - return / is_even.py / 3
+- scope:a / assignment.py / 1
+- scope:i / fizzbuzz.py / 1-10
+- scope:n / collatz.py / 1-8
+- scope:n / is_even.py / 2-3
 - single_assignment:a / assignment.py / 1
 - single_assignment:n / collatz.py / 5, 7
 - update:n:1 / collatz.py / 7
@@ -157,6 +169,7 @@
 
 # Absent labels
 
+- access_outer_scope
 - accumulate_all_elements
 - accumulate_elements
 - accumulate_inputs
@@ -217,6 +230,7 @@
 - function_without_parameters
 - generator
 - get_valid_input
+- global_scope
 - higher-order function
 - if_guard
 - if_test_atom
@@ -233,6 +247,7 @@
 - internal_free_call
 - iteration_variable
 - literal
+- local_scope
 - loop
 - loop_else
 - loop_with_break
@@ -263,6 +278,7 @@
 - recursive_call_count
 - recursive_function
 - return_condition_naive
+- shadowing_scope
 - single_assignment
 - slice
 - slice_lower
