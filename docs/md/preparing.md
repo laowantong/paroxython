@@ -66,16 +66,16 @@ foo = compute_square(foo)
 When the name of a function returning a value starts with `"is_"`, `"are_"`, `"has_"`, `"have_"`, `"can_"`, `"must_"` or `"needs_"`, it is tagged as predicate (`"def/function/predicate"`):
 
 ```python
-def is_even(n):
+def is_odd(n):
     return n % 2
 ```
 
 When the name of a function returning nothing starts or ends with `"test"` or `"tests"`, it is tagged as test (`"def/procedure/test"`):
 
 ```python
-def test_is_even():
-    assert not is_even(42)
-    assert is_even(5)
+def test_is_odd():
+    assert not is_odd(42)
+    assert is_odd(5)
 ```
 
 ### Beware of renaming built-ins

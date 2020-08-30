@@ -657,13 +657,13 @@ foo = compute_square(foo)
 </dl>
 <h3 id="other-conventions">Other conventions</h3>
 <p>When the name of a function returning a value starts with <code>"is_"</code>, <code>"are_"</code>, <code>"has_"</code>, <code>"have_"</code>, <code>"can_"</code>, <code>"must_"</code> or <code>"needs_"</code>, it is tagged as predicate (<code>"def/function/predicate"</code>):</p>
-<pre><code class="python">def is_even(n):
+<pre><code class="python">def is_odd(n):
     return n % 2
 </code></pre>
 <p>When the name of a function returning nothing starts or ends with <code>"test"</code> or <code>"tests"</code>, it is tagged as test (<code>"def/procedure/test"</code>):</p>
-<pre><code class="python">def test_is_even():
-    assert not is_even(42)
-    assert is_even(5)
+<pre><code class="python">def test_is_odd():
+    assert not is_odd(42)
+    assert is_odd(5)
 </code></pre>
 <h3 id="beware-of-renaming-built-ins">Beware of renaming built-ins</h3>
 <p>It's rarely a good idea to reuse a <a href="https://docs.python.org/3/library/functions.html">built-in function</a> name:</p>
