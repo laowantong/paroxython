@@ -3,13 +3,16 @@
 **tl;dr.** There is **nothing to prepare** before launching Paroxython. Nevertheless, for best results:
 
 - don't name things like a first year student (follow PEP 8, good practices and common sense);
-- do use an `else` after the `return` statement of a `then` branch which is **not** a guard;
-- don't try to outsmart Paroxython: you're sure to win... a lot of false negatives;
+- aim at the simplest style. Don't try to outsmart Paroxython: you're sure to win... a lot of false negatives;
+- the system is not capable of inference: be direct;
+- do use:
+    - early exits when alternative versions are less clear;
+    - infinite loops when you deal with an unpredictable stream of inputs;
+    - `else` after the `return` statement of `then` branches which are **not** guards;
 - give manual hints for:
     - correcting a false positive or negative;
     - adding metadata (it's more versatile than a nested directory structure);
     - resolving duck typing on built-in types, if needed;
-- be direct.
 
 ## Naming things
 
@@ -379,7 +382,7 @@ Wow, this is handy. Let's break these comments down:
 - Tagging the program as suboptimal, or as a counter-example, can be useful: when you are setting up an exam, you don't need to be recommended _bad_ programs, do you? With this kind of metadata, you can easily exclude all of them.
 - Tagging your programs by topic is an alternative to distributing them in different folders, and is arguably better: when a program belongs to several topics, you don't have to bother with symlinks; and you are not stuck when you change your mind about the categorization (when, suddenly, you decide to classify your programs by technique: like _greedy_, _dynamic programming_, _divide and conquer_, etc.). By the way, remember you can always redirect the recommendations to `stdout`, and get a simple list of files. See `paroxython.cli_recommend` for an example of how to copy them in another directory.
 
-#### Duck hunting
+#### Hunting ducks
 
 Python famously thinks that:
 

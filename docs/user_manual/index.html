@@ -609,15 +609,20 @@ tree.draw(data, options);
 <p><strong>tl;dr.</strong> There is <strong>nothing to prepare</strong> before launching Paroxython. Nevertheless, for best results:</p>
 <ul>
 <li>don't name things like a first year student (follow PEP 8, good practices and common sense);</li>
-<li>do use an <code>else</code> after the <code>return</code> statement of a <code>then</code> branch which is <strong>not</strong> a guard;</li>
-<li>don't try to outsmart Paroxython: you're sure to win&hellip; a lot of false negatives;</li>
+<li>aim at the simplest style. Don't try to outsmart Paroxython: you're sure to win&hellip; a lot of false negatives;</li>
+<li>the system is not capable of inference: be direct;</li>
+<li>do use:<ul>
+<li>early exits when alternative versions are less clear;</li>
+<li>infinite loops when you deal with an unpredictable stream of inputs;</li>
+<li><code>else</code> after the <code>return</code> statement of <code>then</code> branches which are <strong>not</strong> guards;</li>
+</ul>
+</li>
 <li>give manual hints for:<ul>
 <li>correcting a false positive or negative;</li>
 <li>adding metadata (it's more versatile than a nested directory structure);</li>
 <li>resolving duck typing on built-in types, if needed;</li>
 </ul>
 </li>
-<li>be direct.</li>
 </ul>
 <h2 id="naming-things">Naming things</h2>
 <h3 id="capitalization">Capitalization</h3>
@@ -886,7 +891,7 @@ Although this is technically true, our approach is more nuanced. Specifically, w
 <li>Tagging the program as suboptimal, or as a counter-example, can be useful: when you are setting up an exam, you don't need to be recommended <em>bad</em> programs, do you? With this kind of metadata, you can easily exclude all of them.</li>
 <li>Tagging your programs by topic is an alternative to distributing them in different folders, and is arguably better: when a program belongs to several topics, you don't have to bother with symlinks; and you are not stuck when you change your mind about the categorization (when, suddenly, you decide to classify your programs by technique: like <em>greedy</em>, <em>dynamic programming</em>, <em>divide and conquer</em>, etc.). By the way, remember you can always redirect the recommendations to <code>stdout</code>, and get a simple list of files. See <code><a title="paroxython.cli_recommend" href="../cli_recommend.html">paroxython.cli_recommend</a></code> for an example of how to copy them in another directory.</li>
 </ul>
-<h4 id="duck-hunting">Duck hunting</h4>
+<h4 id="hunting-ducks">Hunting ducks</h4>
 <p>Python famously thinks that:</p>
 <blockquote>
 <p>If it looks like a duck, swims like a duck, and quacks like a duck, then it is a duck.</p>
@@ -1892,7 +1897,7 @@ Thanks and kudos to the author, Matthew Barnett: without his awesome work, many 
 <li><a href="#formatting-details">Formatting details</a></li>
 <li><a href="#why-would-i-do-that">Why would I do that?</a><ul>
 <li><a href="#adding-metadata">Adding metadata</a></li>
-<li><a href="#duck-hunting">Duck hunting</a></li>
+<li><a href="#hunting-ducks">Hunting ducks</a></li>
 </ul>
 </li>
 </ul>
