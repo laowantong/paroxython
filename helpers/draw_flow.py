@@ -7,7 +7,18 @@ paths = Path("paroxython").glob("*.py")
 paths = list(
     path
     for path in paths
-    if not str(path).endswith(("user_types.py", "goodies.py", "span.py", "analyze_one.py"))
+    if not str(path).endswith(
+        (
+            "user_types.py",
+            "goodies.py",
+            "span.py",
+            "analyze_one.py",
+            "cli_collect.py",
+            "cli_recommend.py",
+            "cli.py",
+            "cli_tag.py",
+        )
+    )
 )
 names = [str(path)[len("paroxython/") : -3] for path in paths]
 base = "docs/resources/flow"

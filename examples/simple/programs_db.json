@@ -4,7 +4,7 @@
       "timestamp": "",
       "source": "print(\"Hello, world!\")",
       "labels": {
-        "call_argument:": [[1,1]],
+        "argument:": [[1,1]],
         "external_free_call:print": [[1,1]],
         "flat_style": [[1,1]],
         "free_call:print": [[1,1]],
@@ -31,10 +31,10 @@
       "timestamp": "",
       "source": "name = input(\"What is your name?\\n\")\nprint(\"Hi, %s.\" % name)",
       "labels": {
+        "argument:": [[1,1],[2,2]],
         "assignment:input": [[1,1]],
         "assignment_lhs_identifier:name": [[1,1]],
         "binary_operator:Mod": [[2,2]],
-        "call_argument:": [[1,1],[2,2]],
         "external_free_call:input": [[1,1]],
         "external_free_call:print": [[2,2]],
         "flat_style": [[1,2]],
@@ -74,14 +74,12 @@
       "timestamp": "",
       "source": "friends = [\"john\", \"pat\", \"gary\", \"michael\"]\nfor i, name in enumerate(friends):\n    print(\"iteration {iteration} is {name}\".format(iteration=i, name=name))",
       "labels": {
+        "argument:": [[3,3]],
+        "argument:friends": [[2,2]],
+        "argument:i": [[3,3]],
+        "argument:name": [[3,3]],
         "assignment": [[1,1]],
         "assignment_lhs_identifier:friends": [[1,1]],
-        "call_argument:": [[3,3]],
-        "call_argument:friends": [[2,2]],
-        "call_argument:i": [[3,3]],
-        "call_argument:name": [[3,3]],
-        "call_keyword_argument:iteration": [[3,3]],
-        "call_keyword_argument:name": [[3,3]],
         "composition": [[3,3]],
         "external_free_call:enumerate": [[2,2]],
         "external_free_call:print": [[3,3]],
@@ -90,6 +88,8 @@
         "for_indexes_elements:i": [[2,3]],
         "free_call:enumerate": [[2,2]],
         "free_call:print": [[3,3]],
+        "free_call_with_keyword_argument:print:iteration": [[3,3]],
+        "free_call_with_keyword_argument:print:name": [[3,3]],
         "free_call_without_result:print": [[3,3]],
         "global_scope:friends": [[1,3]],
         "global_scope:i": [[1,3]],
@@ -97,6 +97,8 @@
         "imperative_style": [[1,3]],
         "iteration_variable:i": [[2,2]],
         "iteration_variable:name": [[2,2]],
+        "keyword_argument:iteration": [[3,3]],
+        "keyword_argument:name": [[3,3]],
         "literal:List": [[1,1]],
         "literal:Str": [[1,1],[1,1],[1,1],[1,1],[3,3]],
         "literal:Tuple": [[2,2]],
@@ -124,7 +126,8 @@
       "taxa": {
         "call/composition": [[3,3]],
         "call/function/builtin/enumerate": [[2,2]],
-        "call/function/builtin/print": [[3,3]],
+        "call/function/builtin/print/iteration": [[3,3]],
+        "call/function/builtin/print/name": [[3,3]],
         "call/method/sequence/string/format": [[3,3]],
         "flow/loop/exit/late": [[2,3]],
         "flow/loop/for/indexes_and_elements": [[2,3]],
@@ -145,6 +148,8 @@
       "source": "parents, babies = (1, 1)\nwhile babies < 100:\n    print(\"This generation has {} babies\".format(babies))\n    parents, babies = (babies, parents + babies)",
       "labels": {
         "addition_operator": [[4,4]],
+        "argument:": [[3,3]],
+        "argument:babies": [[3,3]],
         "assignment": [[1,1],[4,4]],
         "assignment_lhs_identifier:babies": [[1,1],[4,4]],
         "assignment_lhs_identifier:parents": [[1,1],[4,4]],
@@ -152,8 +157,6 @@
         "assignment_rhs_atom:babies": [[4,4],[4,4]],
         "assignment_rhs_atom:parents": [[4,4]],
         "binary_operator:Add": [[4,4]],
-        "call_argument:": [[3,3]],
-        "call_argument:babies": [[3,3]],
         "comparison_operator:Lt": [[2,2]],
         "composition": [[3,3]],
         "external_free_call:print": [[3,3]],
@@ -220,8 +223,8 @@
       "timestamp": "",
       "source": "def greet(name):\n    print(\"Hello\", name)\ngreet(\"Jack\")\ngreet(\"Jill\")\ngreet(\"Bob\")",
       "labels": {
-        "call_argument:": [[2,2],[3,3],[4,4],[5,5]],
-        "call_argument:name": [[2,2]],
+        "argument:": [[2,2],[3,3],[4,4],[5,5]],
+        "argument:name": [[2,2]],
         "external_free_call:print": [[2,2]],
         "free_call:greet": [[3,3],[4,4],[5,5]],
         "free_call:print": [[2,2]],
@@ -261,8 +264,8 @@
       "timestamp": "",
       "source": "import re\nfor test_string in [\"555-1212\", \"ILL-EGAL\"]:\n    if re.match(r\"^\\d{3}-\\d{4}$\", test_string):\n        print(test_string, \"is a valid US local phone number\")\n    else:\n        print(test_string, \"rejected\")",
       "labels": {
-        "call_argument:": [[3,3],[4,4],[6,6]],
-        "call_argument:test_string": [[3,3],[4,4],[6,6]],
+        "argument:": [[3,3],[4,4],[6,6]],
+        "argument:test_string": [[3,3],[4,4],[6,6]],
         "external_free_call:print": [[4,4],[6,6]],
         "for:test_string": [[2,6]],
         "free_call:print": [[4,4],[6,6]],
@@ -319,6 +322,7 @@
       "timestamp": "",
       "source": "prices = {\"apple\": 0.40, \"banana\": 0.50}\nmy_purchase = {\"apple\": 1, \"banana\": 6}\ngrocery_bill = sum(prices[fruit] * my_purchase[fruit] for fruit in my_purchase)\nprint(\"I owe the grocer $%.2f\" % grocery_bill)",
       "labels": {
+        "argument:": [[3,3],[4,4]],
         "assignment": [[1,1],[2,2]],
         "assignment:sum": [[3,3]],
         "assignment_lhs_identifier:grocery_bill": [[3,3]],
@@ -333,7 +337,6 @@
         "assignment_rhs_atom:prices": [[3,3]],
         "binary_operator:Mod": [[4,4]],
         "binary_operator:Mult": [[3,3]],
-        "call_argument:": [[3,3],[4,4]],
         "comprehension:Generator": [[3,3]],
         "comprehension_for_count:1": [[3,3]],
         "external_free_call:print": [[4,4]],
@@ -407,14 +410,14 @@
       "timestamp": "",
       "source": "import sys\ntry:\n    total = sum(int(arg) for arg in sys.argv[1:])\n    print(\"sum =\", total)\nexcept ValueError:\n    print(\"Please supply integer arguments\")",
       "labels": {
+        "argument:": [[3,3],[4,4],[6,6]],
+        "argument:arg": [[3,3]],
+        "argument:total": [[4,4]],
         "assignment:sum": [[3,3]],
         "assignment_lhs_identifier:total": [[3,3]],
         "assignment_rhs_atom:1": [[3,3]],
         "assignment_rhs_atom:arg": [[3,3],[3,3]],
         "assignment_rhs_atom:sys": [[3,3]],
-        "call_argument:": [[3,3],[4,4],[6,6]],
-        "call_argument:arg": [[3,3]],
-        "call_argument:total": [[4,4]],
         "composition": [[3,3]],
         "comprehension:Generator": [[3,3]],
         "comprehension_for_count:1": [[3,3]],
@@ -485,13 +488,13 @@
       "timestamp": "",
       "source": "import glob\npython_files = glob.glob(\"*.py\")\nfor file_name in sorted(python_files):\n    print(\"    ------\" + file_name)\n    with open(file_name) as f:\n        for line in f:\n            print(\"    \" + line.rstrip())\n    print()",
       "labels": {
+        "argument:": [[2,2],[4,4],[7,7]],
+        "argument:file_name": [[5,5]],
+        "argument:python_files": [[3,3]],
         "assignment:glob": [[2,2]],
         "assignment_lhs_identifier:python_files": [[2,2]],
         "assignment_rhs_atom:glob": [[2,2]],
         "binary_operator:Add": [[4,4],[7,7]],
-        "call_argument:": [[2,2],[4,4],[7,7]],
-        "call_argument:file_name": [[5,5]],
-        "call_argument:python_files": [[3,3]],
         "composition": [[7,7]],
         "concatenation_operator:Str": [[4,4],[7,7]],
         "external_free_call:open": [[5,5]],
@@ -568,6 +571,7 @@
       "timestamp": "",
       "source": "from time import localtime\nactivities = {\n    8: \"Sleeping\",\n    9: \"Commuting\",\n    17: \"Working\",\n    18: \"Commuting\",\n    20: \"Eating\",\n    22: \"Resting\",\n}\ntime_now = localtime()\nhour = time_now.tm_hour\nfor activity_time in sorted(activities.keys()):\n    if hour < activity_time:\n        print(activities[activity_time])\n        break\nelse:\n    print(\"Unknown, AFK or sleeping!\")",
       "labels": {
+        "argument:": [[12,12],[14,14],[17,17]],
         "assignment": [[2,2],[11,11]],
         "assignment:localtime": [[10,10]],
         "assignment_lhs_identifier:activities": [[2,2]],
@@ -580,7 +584,6 @@
         "assignment_rhs_atom:8": [[3,3]],
         "assignment_rhs_atom:9": [[4,4]],
         "assignment_rhs_atom:time_now": [[11,11]],
-        "call_argument:": [[12,12],[14,14],[17,17]],
         "comparison_operator:Lt": [[13,13]],
         "composition": [[12,12]],
         "external_free_call:localtime": [[10,10]],
@@ -683,6 +686,7 @@
       "timestamp": "",
       "source": "REFRAIN = \"\"\"\n%d bottles of beer on the wall,\n%d bottles of beer,\ntake one down, pass it around,\n%d bottles of beer on the wall!\n\"\"\"\nbottles_of_beer = 9\nwhile bottles_of_beer > 1:\n    print(REFRAIN % (bottles_of_beer, bottles_of_beer, bottles_of_beer - 1))\n    bottles_of_beer -= 1",
       "labels": {
+        "argument:": [[9,9]],
         "assignment": [[1,1]],
         "assignment:9": [[7,7]],
         "assignment_lhs_identifier:REFRAIN": [[1,1]],
@@ -692,7 +696,6 @@
         "augmented_assignment:Sub": [[10,10]],
         "binary_operator:Mod": [[9,9]],
         "binary_operator:Sub": [[9,9]],
-        "call_argument:": [[9,9]],
         "comparison_operator:Gt": [[8,8]],
         "external_free_call:print": [[9,9]],
         "free_call:print": [[9,9]],
@@ -756,6 +759,9 @@
       "timestamp": "",
       "source": "class BankAccount(object):\n    def __init__(self, initial_balance=0):\n        self.balance = initial_balance\n    def deposit(self, amount):\n        self.balance += amount\n    def withdraw(self, amount):\n        self.balance -= amount\n    def overdrawn(self):\n        return self.balance < 0\nmy_account = BankAccount(15)\nmy_account.withdraw(50)\nprint(my_account.balance, my_account.overdrawn())",
       "labels": {
+        "argument:": [[12,12],[12,12]],
+        "argument:15": [[10,10]],
+        "argument:50": [[11,11]],
         "assignment": [[3,3]],
         "assignment:BankAccount": [[10,10]],
         "assignment_lhs_identifier:my_account": [[10,10]],
@@ -765,9 +771,6 @@
         "assignment_rhs_atom:initial_balance": [[3,3]],
         "augmented_assignment:Add": [[5,5]],
         "augmented_assignment:Sub": [[7,7]],
-        "call_argument:": [[12,12],[12,12]],
-        "call_argument:15": [[10,10]],
-        "call_argument:50": [[11,11]],
         "comparison_operator:Lt": [[9,9]],
         "composition": [[12,12]],
         "external_free_call:BankAccount": [[10,10]],
@@ -873,6 +876,10 @@
       "source": "import unittest\ndef median(pool):\n    copy = sorted(pool)\n    size = len(copy)\n    if size % 2 == 1:\n        return copy[int((size - 1) / 2)]\n    else:\n        return (copy[int(size / 2 - 1)] + copy[int(size / 2)]) / 2\nclass TestMedian(unittest.TestCase):\n    def testMedian(self):\n        self.assertEqual(median([2, 9, 9, 7, 9, 2, 4, 5, 8]), 7)",
       "labels": {
         "addition_operator": [[8,8]],
+        "argument:": [[6,6],[8,8],[8,8],[11,11],[11,11]],
+        "argument:7": [[11,11]],
+        "argument:copy": [[4,4]],
+        "argument:pool": [[3,3]],
         "assignment:len": [[4,4]],
         "assignment:sorted": [[3,3]],
         "assignment_lhs_identifier:copy": [[3,3]],
@@ -883,10 +890,6 @@
         "binary_operator:Div": [[6,6],[8,8],[8,8],[8,8]],
         "binary_operator:Mod": [[5,5]],
         "binary_operator:Sub": [[6,6],[8,8]],
-        "call_argument:": [[6,6],[8,8],[8,8],[11,11],[11,11]],
-        "call_argument:7": [[11,11]],
-        "call_argument:copy": [[4,4]],
-        "call_argument:pool": [[3,3]],
         "comparison_operator:Eq": [[5,5]],
         "composition": [[11,11]],
         "divisibility_test:2": [[5,5]],
@@ -1009,6 +1012,9 @@
       "source": "def median(pool):\n    copy = sorted(pool)\n    size = len(copy)\n    if size % 2 == 1:\n        return copy[int((size - 1) / 2)]\n    else:\n        return (copy[int(size / 2 - 1)] + copy[int(size / 2)]) / 2",
       "labels": {
         "addition_operator": [[7,7]],
+        "argument:": [[5,5],[7,7],[7,7]],
+        "argument:copy": [[3,3]],
+        "argument:pool": [[2,2]],
         "assignment:len": [[3,3]],
         "assignment:sorted": [[2,2]],
         "assignment_lhs_identifier:copy": [[2,2]],
@@ -1019,9 +1025,6 @@
         "binary_operator:Div": [[5,5],[7,7],[7,7],[7,7]],
         "binary_operator:Mod": [[4,4]],
         "binary_operator:Sub": [[5,5],[7,7]],
-        "call_argument:": [[5,5],[7,7],[7,7]],
-        "call_argument:copy": [[3,3]],
-        "call_argument:pool": [[2,2]],
         "comparison_operator:Eq": [[4,4]],
         "divisibility_test:2": [[4,4]],
         "external_free_call:int": [[5,5],[7,7],[7,7]],
@@ -1100,12 +1103,12 @@
       "timestamp": "",
       "source": "from itertools import groupby\nlines = \"\"\"\nThis is the\nfirst paragraph.\nThis is the second.\n\"\"\".splitlines()\nfor has_chars, frags in groupby(lines, bool):\n    if has_chars:\n        print(\" \".join(frags))",
       "labels": {
+        "argument:": [[9,9]],
+        "argument:bool": [[7,7]],
+        "argument:frags": [[9,9]],
+        "argument:lines": [[7,7]],
         "assignment:splitlines": [[2,2]],
         "assignment_lhs_identifier:lines": [[2,2]],
-        "call_argument:": [[9,9]],
-        "call_argument:bool": [[7,7]],
-        "call_argument:frags": [[9,9]],
-        "call_argument:lines": [[7,7]],
         "composition": [[9,9]],
         "external_free_call:groupby": [[7,7]],
         "external_free_call:print": [[9,9]],
@@ -1179,6 +1182,14 @@
       "timestamp": "",
       "source": "import csv\ndef cmp(a, b):\n    return (a > b) - (a < b)\nwith open(\"stocks.csv\", \"w\", newline=\"\") as stocksFileW:\n    writer = csv.writer(stocksFileW)\n    writer.writerows(\n        [\n            [\"GOOG\", \"Google, Inc.\", 505.24, 0.47, 0.09],\n            [\"YHOO\", \"Yahoo! Inc.\", 27.38, 0.33, 1.22],\n            [\"CNET\", \"CNET Networks, Inc.\", 8.62, -0.13, -1.4901],\n        ]\n    )\nwith open(\"stocks.csv\", \"r\") as stocksFile:\n    stocks = csv.reader(stocksFile)\n    status_labels = {-1: \"down\", 0: \"unchanged\", 1: \"up\"}\n    for ticker, name, price, change, pct in stocks:\n        status = status_labels[cmp(float(change), 0.0)]\n        print(\"{} is {} ({:.2f})\".format(name, status, float(pct)))",
       "labels": {
+        "argument:": [[4,4],[4,4],[4,4],[7,7],[13,13],[13,13],[17,17],[18,18],[18,18]],
+        "argument:0.0": [[17,17]],
+        "argument:change": [[17,17]],
+        "argument:name": [[18,18]],
+        "argument:pct": [[18,18]],
+        "argument:status": [[18,18]],
+        "argument:stocksFile": [[14,14]],
+        "argument:stocksFileW": [[5,5]],
         "assignment": [[15,15],[17,17]],
         "assignment:reader": [[14,14]],
         "assignment:writer": [[5,5]],
@@ -1196,15 +1207,6 @@
         "assignment_rhs_atom:stocksFile": [[14,14]],
         "assignment_rhs_atom:stocksFileW": [[5,5]],
         "binary_operator:Sub": [[3,3]],
-        "call_argument:": [[4,4],[4,4],[4,4],[7,7],[13,13],[13,13],[17,17],[18,18],[18,18]],
-        "call_argument:0.0": [[17,17]],
-        "call_argument:change": [[17,17]],
-        "call_argument:name": [[18,18]],
-        "call_argument:pct": [[18,18]],
-        "call_argument:status": [[18,18]],
-        "call_argument:stocksFile": [[14,14]],
-        "call_argument:stocksFileW": [[5,5]],
-        "call_keyword_argument:newline": [[4,4]],
         "comparison_operator:Gt": [[3,3]],
         "comparison_operator:Lt": [[3,3]],
         "composition": [[17,17],[18,18],[18,18]],
@@ -1226,6 +1228,7 @@
         "free_call:float": [[17,17],[18,18]],
         "free_call:open": [[4,4],[13,13]],
         "free_call:print": [[18,18]],
+        "free_call_with_keyword_argument:open:newline": [[4,4]],
         "free_call_without_result:print": [[18,18]],
         "function:cmp": [[2,3]],
         "function_parameter:a": [[2,2]],
@@ -1250,6 +1253,7 @@
         "iteration_variable:pct": [[16,16]],
         "iteration_variable:price": [[16,16]],
         "iteration_variable:ticker": [[16,16]],
+        "keyword_argument:newline": [[4,4]],
         "literal:-0.13": [[10,10]],
         "literal:-1": [[15,15]],
         "literal:-1.4901": [[10,10]],
@@ -1383,6 +1387,11 @@
       "labels": {
         "access_outer_scope:BOARD_SIZE": [[9,17]],
         "addition_operator": [[5,5],[17,17]],
+        "argument:": [[12,12],[17,17]],
+        "argument:BOARD_SIZE": [[15,15],[19,19]],
+        "argument:answer": [[20,20]],
+        "argument:queens": [[4,4]],
+        "argument:solution": [[17,17]],
         "assignment": [[3,3],[5,5]],
         "assignment:8": [[1,1]],
         "assignment:solve": [[12,12]],
@@ -1399,11 +1408,6 @@
         "binary_operator:Add": [[5,5],[14,14],[14,14],[17,17]],
         "binary_operator:Sub": [[5,5],[12,12]],
         "body_recursive_function:solve": [[9,17]],
-        "call_argument:": [[12,12],[17,17]],
-        "call_argument:BOARD_SIZE": [[15,15],[19,19]],
-        "call_argument:answer": [[20,20]],
-        "call_argument:queens": [[4,4]],
-        "call_argument:solution": [[17,17]],
         "chained_assignment": [[3,3]],
         "comparison_operator:Eq": [[10,10]],
         "comparison_operator:In": [[6,6]],
@@ -1584,6 +1588,10 @@
       "timestamp": "",
       "source": "import itertools\ndef iter_primes():\n    numbers = itertools.count(2)\n    while True:\n        prime = next(numbers)\n        yield prime\n        numbers = filter(prime.__rmod__, numbers)\nfor p in iter_primes():\n    if p > 1000:\n        break\n    print(p)",
       "labels": {
+        "argument:": [[7,7]],
+        "argument:2": [[3,3]],
+        "argument:numbers": [[5,5],[7,7]],
+        "argument:p": [[11,11]],
         "assignment:count": [[3,3]],
         "assignment:filter": [[7,7]],
         "assignment:next": [[5,5]],
@@ -1593,10 +1601,6 @@
         "assignment_rhs_atom:itertools": [[3,3]],
         "assignment_rhs_atom:numbers": [[5,5],[7,7]],
         "assignment_rhs_atom:prime": [[7,7]],
-        "call_argument:": [[7,7]],
-        "call_argument:2": [[3,3]],
-        "call_argument:numbers": [[5,5],[7,7]],
-        "call_argument:p": [[11,11]],
         "comparison_operator:Gt": [[9,9]],
         "external_free_call:filter": [[7,7]],
         "external_free_call:next": [[5,5]],
@@ -1699,6 +1703,8 @@
       "timestamp": "",
       "source": "dinner_recipe = \"\"\"<html><body><table>\n<tr><th>amt</th><th>unit</th><th>item</th></tr>\n<tr><td>24</td><td>slices</td><td>baguette</td></tr>\n<tr><td>2+</td><td>tbsp</td><td>olive oil</td></tr>\n<tr><td>1</td><td>cup</td><td>tomatoes</td></tr>\n<tr><td>1</td><td>jar</td><td>pesto</td></tr>\n</table></body></html>\"\"\"\nimport xml.etree.ElementTree as etree\ntree = etree.fromstring(dinner_recipe)\npantry = {\"olive oil\", \"pesto\"}\nfor ingredient in tree.getiterator(\"tr\"):\n    amt, unit, item = ingredient\n    if item.tag == \"td\" and item.text not in pantry:\n        print(\"{}: {} {}\".format(item.text, amt.text, unit.text))",
       "labels": {
+        "argument:": [[11,11],[14,14],[14,14],[14,14],[14,14]],
+        "argument:dinner_recipe": [[9,9]],
         "assignment": [[1,1],[10,10],[12,12]],
         "assignment:fromstring": [[9,9]],
         "assignment_lhs_identifier:amt": [[12,12]],
@@ -1711,8 +1717,6 @@
         "assignment_rhs_atom:etree": [[9,9]],
         "assignment_rhs_atom:ingredient": [[12,12]],
         "boolean_operator:And": [[13,13]],
-        "call_argument:": [[11,11],[14,14],[14,14],[14,14],[14,14]],
-        "call_argument:dinner_recipe": [[9,9]],
         "comparison_operator:Eq": [[13,13]],
         "comparison_operator:NotIn": [[13,13]],
         "composition": [[14,14]],
@@ -1811,6 +1815,10 @@
       "labels": {
         "access_outer_scope:BOARD_SIZE": [[10,21]],
         "addition_operator": [[7,7]],
+        "argument:": [[6,6],[22,22],[24,24],[24,24]],
+        "argument:BOARD_SIZE": [[11,11]],
+        "argument:queens": [[23,23]],
+        "argument:test_queens": [[14,14],[15,15],[18,18]],
         "assignment": [[5,5],[7,7]],
         "assignment:8": [[1,1]],
         "assignment:Add": [[12,12]],
@@ -1831,10 +1839,6 @@
         "binary_operator:Add": [[7,7],[12,12],[24,24],[24,24]],
         "binary_operator:Mult": [[24,24],[24,24]],
         "binary_operator:Sub": [[7,7],[24,24],[24,24]],
-        "call_argument:": [[6,6],[22,22],[24,24],[24,24]],
-        "call_argument:BOARD_SIZE": [[11,11]],
-        "call_argument:queens": [[23,23]],
-        "call_argument:test_queens": [[14,14],[15,15],[18,18]],
         "chained_assignment": [[5,5]],
         "comparison_operator:Eq": [[15,15]],
         "comparison_operator:In": [[8,8]],
@@ -2041,6 +2045,12 @@
       "timestamp": "",
       "source": "import random\nguesses_made = 0\nname = input(\"Hello! What is your name?\\n\")\nnumber = random.randint(1, 20)\nprint(\"Well, {}, I am thinking of a number between 1 and 20.\".format(name))\nwhile guesses_made < 6:\n    guess = int(input(\"Take a guess: \"))\n    guesses_made += 1\n    if guess < number:\n        print(\"Your guess is too low.\")\n    if guess > number:\n        print(\"Your guess is too high.\")\n    if guess == number:\n        break\nif guess == number:\n    print(\"Good job, {}! You guessed my number in {} guesses!\".format(name, guesses_made))\nelse:\n    print(\"Nope. The number I was thinking of was {}\".format(number))",
       "labels": {
+        "argument:": [[3,3],[5,5],[7,7],[7,7],[10,10],[12,12],[16,16],[18,18]],
+        "argument:1": [[4,4]],
+        "argument:20": [[4,4]],
+        "argument:guesses_made": [[16,16]],
+        "argument:name": [[5,5],[16,16]],
+        "argument:number": [[18,18]],
         "assignment:0": [[2,2]],
         "assignment:input": [[3,3]],
         "assignment:int": [[7,7]],
@@ -2054,12 +2064,6 @@
         "assignment_rhs_atom:20": [[4,4]],
         "assignment_rhs_atom:random": [[4,4]],
         "augmented_assignment:Add": [[8,8]],
-        "call_argument:": [[3,3],[5,5],[7,7],[7,7],[10,10],[12,12],[16,16],[18,18]],
-        "call_argument:1": [[4,4]],
-        "call_argument:20": [[4,4]],
-        "call_argument:guesses_made": [[16,16]],
-        "call_argument:name": [[5,5],[16,16]],
-        "call_argument:number": [[18,18]],
         "comparison_operator:Eq": [[13,13],[15,15]],
         "comparison_operator:Gt": [[11,11]],
         "comparison_operator:Lt": [[6,6],[9,9]],
@@ -2174,6 +2178,144 @@
       "14_median.py",
       "18_queens.py",
       "28_queens.py"
+    ],
+    "argument:": [
+      "01_hello_world.py",
+      "02_input_name.py",
+      "03_friends.py",
+      "04_fibonacci.py",
+      "05_greet.py",
+      "06_regex.py",
+      "07_grocery_bill.py",
+      "08_arguments.py",
+      "09_indent.py",
+      "10_time.py",
+      "11_bottles.py",
+      "12_classes.py",
+      "13_unit_testing.py",
+      "14_median.py",
+      "15_itertools_groupby.py",
+      "16_csv.py",
+      "18_queens.py",
+      "20_prime_numbers.py",
+      "21_xml_html_parsing.py",
+      "28_queens.py",
+      "33_guess_the_number.py"
+    ],
+    "argument:0.0": [
+      "16_csv.py"
+    ],
+    "argument:1": [
+      "33_guess_the_number.py"
+    ],
+    "argument:15": [
+      "12_classes.py"
+    ],
+    "argument:2": [
+      "20_prime_numbers.py"
+    ],
+    "argument:20": [
+      "33_guess_the_number.py"
+    ],
+    "argument:50": [
+      "12_classes.py"
+    ],
+    "argument:7": [
+      "13_unit_testing.py"
+    ],
+    "argument:BOARD_SIZE": [
+      "18_queens.py",
+      "28_queens.py"
+    ],
+    "argument:answer": [
+      "18_queens.py"
+    ],
+    "argument:arg": [
+      "08_arguments.py"
+    ],
+    "argument:babies": [
+      "04_fibonacci.py"
+    ],
+    "argument:bool": [
+      "15_itertools_groupby.py"
+    ],
+    "argument:change": [
+      "16_csv.py"
+    ],
+    "argument:copy": [
+      "13_unit_testing.py",
+      "14_median.py"
+    ],
+    "argument:dinner_recipe": [
+      "21_xml_html_parsing.py"
+    ],
+    "argument:file_name": [
+      "09_indent.py"
+    ],
+    "argument:frags": [
+      "15_itertools_groupby.py"
+    ],
+    "argument:friends": [
+      "03_friends.py"
+    ],
+    "argument:guesses_made": [
+      "33_guess_the_number.py"
+    ],
+    "argument:i": [
+      "03_friends.py"
+    ],
+    "argument:lines": [
+      "15_itertools_groupby.py"
+    ],
+    "argument:name": [
+      "03_friends.py",
+      "05_greet.py",
+      "16_csv.py",
+      "33_guess_the_number.py"
+    ],
+    "argument:number": [
+      "33_guess_the_number.py"
+    ],
+    "argument:numbers": [
+      "20_prime_numbers.py"
+    ],
+    "argument:p": [
+      "20_prime_numbers.py"
+    ],
+    "argument:pct": [
+      "16_csv.py"
+    ],
+    "argument:pool": [
+      "13_unit_testing.py",
+      "14_median.py"
+    ],
+    "argument:python_files": [
+      "09_indent.py"
+    ],
+    "argument:queens": [
+      "18_queens.py",
+      "28_queens.py"
+    ],
+    "argument:solution": [
+      "18_queens.py"
+    ],
+    "argument:status": [
+      "16_csv.py"
+    ],
+    "argument:stocksFile": [
+      "16_csv.py"
+    ],
+    "argument:stocksFileW": [
+      "16_csv.py"
+    ],
+    "argument:test_queens": [
+      "28_queens.py"
+    ],
+    "argument:test_string": [
+      "06_regex.py"
+    ],
+    "argument:total": [
+      "08_arguments.py"
     ],
     "assignment": [
       "03_friends.py",
@@ -2587,153 +2729,6 @@
     "boolean_operator:And": [
       "21_xml_html_parsing.py"
     ],
-    "call_argument:": [
-      "01_hello_world.py",
-      "02_input_name.py",
-      "03_friends.py",
-      "04_fibonacci.py",
-      "05_greet.py",
-      "06_regex.py",
-      "07_grocery_bill.py",
-      "08_arguments.py",
-      "09_indent.py",
-      "10_time.py",
-      "11_bottles.py",
-      "12_classes.py",
-      "13_unit_testing.py",
-      "14_median.py",
-      "15_itertools_groupby.py",
-      "16_csv.py",
-      "18_queens.py",
-      "20_prime_numbers.py",
-      "21_xml_html_parsing.py",
-      "28_queens.py",
-      "33_guess_the_number.py"
-    ],
-    "call_argument:0.0": [
-      "16_csv.py"
-    ],
-    "call_argument:1": [
-      "33_guess_the_number.py"
-    ],
-    "call_argument:15": [
-      "12_classes.py"
-    ],
-    "call_argument:2": [
-      "20_prime_numbers.py"
-    ],
-    "call_argument:20": [
-      "33_guess_the_number.py"
-    ],
-    "call_argument:50": [
-      "12_classes.py"
-    ],
-    "call_argument:7": [
-      "13_unit_testing.py"
-    ],
-    "call_argument:BOARD_SIZE": [
-      "18_queens.py",
-      "28_queens.py"
-    ],
-    "call_argument:answer": [
-      "18_queens.py"
-    ],
-    "call_argument:arg": [
-      "08_arguments.py"
-    ],
-    "call_argument:babies": [
-      "04_fibonacci.py"
-    ],
-    "call_argument:bool": [
-      "15_itertools_groupby.py"
-    ],
-    "call_argument:change": [
-      "16_csv.py"
-    ],
-    "call_argument:copy": [
-      "13_unit_testing.py",
-      "14_median.py"
-    ],
-    "call_argument:dinner_recipe": [
-      "21_xml_html_parsing.py"
-    ],
-    "call_argument:file_name": [
-      "09_indent.py"
-    ],
-    "call_argument:frags": [
-      "15_itertools_groupby.py"
-    ],
-    "call_argument:friends": [
-      "03_friends.py"
-    ],
-    "call_argument:guesses_made": [
-      "33_guess_the_number.py"
-    ],
-    "call_argument:i": [
-      "03_friends.py"
-    ],
-    "call_argument:lines": [
-      "15_itertools_groupby.py"
-    ],
-    "call_argument:name": [
-      "03_friends.py",
-      "05_greet.py",
-      "16_csv.py",
-      "33_guess_the_number.py"
-    ],
-    "call_argument:number": [
-      "33_guess_the_number.py"
-    ],
-    "call_argument:numbers": [
-      "20_prime_numbers.py"
-    ],
-    "call_argument:p": [
-      "20_prime_numbers.py"
-    ],
-    "call_argument:pct": [
-      "16_csv.py"
-    ],
-    "call_argument:pool": [
-      "13_unit_testing.py",
-      "14_median.py"
-    ],
-    "call_argument:python_files": [
-      "09_indent.py"
-    ],
-    "call_argument:queens": [
-      "18_queens.py",
-      "28_queens.py"
-    ],
-    "call_argument:solution": [
-      "18_queens.py"
-    ],
-    "call_argument:status": [
-      "16_csv.py"
-    ],
-    "call_argument:stocksFile": [
-      "16_csv.py"
-    ],
-    "call_argument:stocksFileW": [
-      "16_csv.py"
-    ],
-    "call_argument:test_queens": [
-      "28_queens.py"
-    ],
-    "call_argument:test_string": [
-      "06_regex.py"
-    ],
-    "call_argument:total": [
-      "08_arguments.py"
-    ],
-    "call_keyword_argument:iteration": [
-      "03_friends.py"
-    ],
-    "call_keyword_argument:name": [
-      "03_friends.py"
-    ],
-    "call_keyword_argument:newline": [
-      "16_csv.py"
-    ],
     "chained_assignment": [
       "18_queens.py",
       "28_queens.py"
@@ -3094,6 +3089,15 @@
     ],
     "free_call:validate": [
       "28_queens.py"
+    ],
+    "free_call_with_keyword_argument:open:newline": [
+      "16_csv.py"
+    ],
+    "free_call_with_keyword_argument:print:iteration": [
+      "03_friends.py"
+    ],
+    "free_call_with_keyword_argument:print:name": [
+      "03_friends.py"
     ],
     "free_call_without_arguments:iter_primes": [
       "20_prime_numbers.py"
@@ -3729,6 +3733,15 @@
       "06_regex.py"
     ],
     "iteration_variable:ticker": [
+      "16_csv.py"
+    ],
+    "keyword_argument:iteration": [
+      "03_friends.py"
+    ],
+    "keyword_argument:name": [
+      "03_friends.py"
+    ],
+    "keyword_argument:newline": [
       "16_csv.py"
     ],
     "literal:-0.13": [
@@ -5479,7 +5492,6 @@
     "call/function/builtin/print": [
       "01_hello_world.py",
       "02_input_name.py",
-      "03_friends.py",
       "04_fibonacci.py",
       "05_greet.py",
       "06_regex.py",
@@ -5496,6 +5508,12 @@
       "21_xml_html_parsing.py",
       "28_queens.py",
       "33_guess_the_number.py"
+    ],
+    "call/function/builtin/print/iteration": [
+      "03_friends.py"
+    ],
+    "call/function/builtin/print/name": [
+      "03_friends.py"
     ],
     "call/function/builtin/range": [
       "18_queens.py",

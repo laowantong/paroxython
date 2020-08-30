@@ -1,6 +1,11 @@
 # Present labels
 
 - addition_operator / collatz.py / 7
+- argument: / fizzbuzz.py / 4, 6, 8
+- argument:1 / fizzbuzz.py / 2
+- argument:101 / fizzbuzz.py / 2
+- argument:i / fizzbuzz.py / 10
+- argument:n / collatz.py / 3, 8
 - assignment / assignment.py / 1
 - assignment:Add / collatz.py / 7
 - assignment:FloorDiv / collatz.py / 5
@@ -18,11 +23,6 @@
 - binary_operator:Mod / fizzbuzz.py / 3, 5, 7
 - binary_operator:Mod / is_even.py / 3
 - binary_operator:Mult / collatz.py / 7
-- call_argument: / fizzbuzz.py / 4, 6, 8
-- call_argument:1 / fizzbuzz.py / 2
-- call_argument:101 / fizzbuzz.py / 2
-- call_argument:i / fizzbuzz.py / 10
-- call_argument:n / collatz.py / 3, 8
 - comparison_operator:Eq / collatz.py / 4
 - comparison_operator:Eq / fizzbuzz.py / 3, 5, 7
 - comparison_operator:Eq / is_even.py / 3
@@ -174,6 +174,7 @@
 - accumulate_elements
 - accumulate_inputs
 - accumulate_some_elements
+- argument
 - assignment_lhs_identifier
 - assignment_rhs_atom
 - attribute_deletion
@@ -181,8 +182,6 @@
 - binary_operator
 - body_recursive_function
 - boolean_operator
-- call_argument
-- call_keyword_argument
 - chained_assignment
 - chained_comparison
 - chained_comparison_unpythonic
@@ -219,6 +218,7 @@
 - for_indexes_elements
 - for_range
 - free_call
+- free_call_with_keyword_argument
 - free_call_without_arguments
 - free_call_without_result
 - free_tail_call
@@ -247,6 +247,7 @@
 - instance_method|class_method|static_method
 - internal_free_call
 - iteration_variable
+- keyword_argument
 - literal
 - local_scope
 - loop

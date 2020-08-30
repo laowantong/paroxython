@@ -36,11 +36,12 @@
       - [Feature `short_circuit`](#feature-short_circuit)
   - [Calls](#calls)
     - [Generalities](#generalities)
-      - [Feature `call_argument`](#feature-call_argument)
-      - [Feature `call_keyword_argument`](#feature-call_keyword_argument)
+      - [Feature `argument`](#feature-argument)
+      - [Feature `keyword_argument`](#feature-keyword_argument)
       - [Feature `composition`](#feature-composition)
     - [Calls of the form `callable(arguments)`](#calls-of-the-form-callablearguments)
       - [Feature `free_call`](#feature-free_call)
+      - [Feature `free_call_with_keyword_argument` (SQL)](#feature-free_call_with_keyword_argument)
       - [Feature `free_call_without_result`](#feature-free_call_without_result)
       - [Feature `free_call_without_arguments`](#feature-free_call_without_arguments)
       - [Feature `free_tail_call`](#feature-free_tail_call)
@@ -1585,7 +1586,7 @@ When the value of the left operand suffices to determine the value of a boolean 
 
 --------------------------------------------------------------------------------
 
-#### Feature `call_argument`
+#### Feature `argument`
 
 Match any argument of a free call or a member call. Suffix this argument when it is **atomic**, i.e. either:
 - an identifier,
@@ -1633,28 +1634,26 @@ Otherwise, suffix it with an empty string.
 
 | Label | Lines |
 |:--|:--|
-| `call_argument:` | 2, 7, 8 |
-| `call_argument:None` | 3 |
-| `call_argument:True` | 4 |
-| `call_argument:1` | 6 |
-| `call_argument:42` | 5, 6, 8 |
-| `call_argument:x` | 6, 8 |
-| `call_argument:a` | 9 |
-| `call_argument:b` | 9 |
-| `call_argument:c` | 9 |
-| `call_argument:bizz` | 10 |
-| `call_argument:buzz` | 10 |
-| `call_argument:g` | 12 |
+| `argument:` | 2, 7, 8 |
+| `argument:None` | 3 |
+| `argument:True` | 4 |
+| `argument:1` | 6 |
+| `argument:42` | 5, 6, 8 |
+| `argument:x` | 6, 8 |
+| `argument:a` | 9 |
+| `argument:b` | 9 |
+| `argument:c` | 9 |
+| `argument:bizz` | 10 |
+| `argument:buzz` | 10 |
+| `argument:g` | 12 |
 
 --------------------------------------------------------------------------------
 
-#### Feature `call_keyword_argument`
+#### Feature `keyword_argument`
 
-Match any argument of a free call or a member call. Suffix this argument when it is **atomic**, i.e. either:
-- an identifier,
-- a number literal,
-- `True`, `False` or `None`.
-Otherwise, suffix it with an empty string.
+##### Derivations
+
+[⬇️ feature `free_call_with_keyword_argument`](#feature-free_call_with_keyword_argument)  
 
 ##### Specification
 
@@ -1666,6 +1665,14 @@ Otherwise, suffix it with an empty string.
 )+ # at least one keyword argument
 ```
 
+/body/1/value/_type=Call
+/body/1/value/_hash=0x0001
+/body/1/value/_pos=1:1-0-
+/body/1/value/func/_type=Name
+/body/1/value/func/_hash=0x0002
+/body/1/value/func/_pos=1:1-0-0-
+/body/1/value/func/id=print
+
 ##### Example
 
 ```python
@@ -1676,12 +1683,12 @@ Otherwise, suffix it with an empty string.
 
 | Label | Lines |
 |:--|:--|
-| `call_argument:` | 1, 1, 1, 1, 1 |
-| `call_argument:True` | 1 |
-| `call_keyword_argument:end` | 1 |
-| `call_keyword_argument:file` | 1 |
-| `call_keyword_argument:flush` | 1 |
-| `call_keyword_argument:sep` | 1 |
+| `argument:` | 1, 1, 1, 1, 1 |
+| `argument:True` | 1 |
+| `keyword_argument:end` | 1 |
+| `keyword_argument:file` | 1 |
+| `keyword_argument:flush` | 1 |
+| `keyword_argument:sep` | 1 |
 
 --------------------------------------------------------------------------------
 
@@ -1733,6 +1740,7 @@ We use the term _free call_, as opposed to _member call_ (dot notation).
 [⬇️ feature `body_recursive_function`](#feature-body_recursive_function)  
 [⬇️ feature `deeply_recursive_function`](#feature-deeply_recursive_function)  
 [⬇️ feature `external_free_call`](#feature-external_free_call)  
+[⬇️ feature `free_call_with_keyword_argument`](#feature-free_call_with_keyword_argument)  
 [⬇️ feature `higher-order function`](#feature-higher-order-function)  
 [⬇️ feature `internal_free_call`](#feature-internal_free_call)  
 [⬇️ feature `pure_function`](#feature-pure_function)  
@@ -1767,6 +1775,41 @@ We use the term _free call_, as opposed to _member call_ (dot notation).
 | `free_call:buzz` | 3 |
 | `free_call:fizz` | 4 |
 | `free_call:foobar` | 4 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `free_call_with_keyword_argument`
+
+##### Derivations
+
+[⬆️ feature `free_call`](#feature-free_call)  
+[⬆️ feature `keyword_argument`](#feature-keyword_argument)  
+
+##### Specification
+
+```sql
+SELECT "free_call_with_keyword_argument",
+       f.name_suffix || ":" || k.name_suffix,
+       f.span,
+       f.path
+FROM t_free_call f
+JOIN t_keyword_argument k ON (k.path GLOB f.path || "*-")
+```
+
+##### Example
+
+```python
+1   print("hello", "world", sep=" ", end="\n", file=sys.stderr, flush=True)
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `free_call_with_keyword_argument:print:end` | 1 |
+| `free_call_with_keyword_argument:print:file` | 1 |
+| `free_call_with_keyword_argument:print:flush` | 1 |
+| `free_call_with_keyword_argument:print:sep` | 1 |
 
 --------------------------------------------------------------------------------
 
@@ -2140,11 +2183,11 @@ JOIN t_member_call_method AS m ON (o.span = m.span)
 
 #### Feature `range`
 
-Match a call to `range()` and suffix it by its [_atomic_](#feature-call_argument) arguments, separated by a colon. Non-atomic arguments are replaced by `_`.
+Match a call to `range()` and suffix it by its [_atomic_](#feature-argument) arguments, separated by a colon. Non-atomic arguments are replaced by `_`.
 
 ##### Derivations
 
-[⬆️ feature `call_argument`](#feature-call_argument)  
+[⬆️ feature `argument`](#feature-argument)  
 [⬆️ feature `free_call`](#feature-free_call)  
 [⬇️ feature `for_range`](#feature-for_range)  
 
@@ -2164,7 +2207,7 @@ FROM -- Only a subquery permits to sort the arguments before grouping them toget
           f.span AS span,
           f.path AS path
    FROM t_free_call f
-   JOIN t_call_argument arg ON (arg.path GLOB f.path || "*-")
+   JOIN t_argument arg ON (arg.path GLOB f.path || "*-")
    WHERE f.name_suffix = "range"
      AND length(f.path) + 4 = length(arg.path) -- Ensure that arg is a (direct) argument of range().
    ORDER BY arg.path)-- Thanks to the subquery, this clause...
@@ -2927,7 +2970,7 @@ Capture any identifier appearing on the left hand side of an assignment (possibl
 
 #### Feature `assignment_rhs_atom`
 
-Capture any [_atom_](#feature-call_argument) appearing on the right hand side of an assignment (possibly augmented), except the function names.
+Capture any [_atom_](#feature-argument) appearing on the right hand side of an assignment (possibly augmented), except the function names.
 
 ##### Derivations
 
@@ -3098,7 +3141,7 @@ The method must mutate the object it is applied on. Obviously, only a handful of
 
 ##### Derivations
 
-[⬆️ feature `call_argument`](#feature-call_argument)  
+[⬆️ feature `argument`](#feature-argument)  
 [⬆️ feature `member_call_method`](#feature-member_call_method)  
 [⬆️ feature `member_call_object`](#feature-member_call_object)  
 [⬇️ feature `update`](#feature-update)  
@@ -3113,7 +3156,7 @@ SELECT "update_by_member_call",
        op.path
 FROM t_member_call_method AS op
 JOIN t_member_call_object AS lhs_acc ON (lhs_acc.path GLOB op.path || "*-")
-JOIN t_call_argument AS rhs_var ON (rhs_var.path GLOB op.path || "*-")
+JOIN t_argument AS rhs_var ON (rhs_var.path GLOB op.path || "*-")
 WHERE rhs_var.name_suffix != ""
   AND op.name_suffix REGEXP "(append|extend|insert|add|update|remove|pop)$"
 GROUP BY op.span,
@@ -3762,7 +3805,7 @@ In Python, the term "function" encompasses any type of subroutine, be it a metho
 
 #### Feature `return`
 
-Match `return` statements and, when the returned object is an [_atom_](#feature-call_argument), suffix it. Note that a `return` statement returning no value is denoted by `return:None`, not to be confounded with `return` (without suffix), which denotes the return of a non-atomic object.
+Match `return` statements and, when the returned object is an [_atom_](#feature-argument), suffix it. Note that a `return` statement returning no value is denoted by `return:None`, not to be confounded with `return` (without suffix), which denotes the return of a non-atomic object.
 
 ##### Derivations
 
@@ -3933,7 +3976,7 @@ _Remark._: the presence of a decorator `classmethod` or `staticmethod` is unchec
 
 #### Feature `yield`
 
-Match `yield` and `yieldfrom` _[expressions](https://docs.python.org/3/reference/expressions.html#yield-expressions)_ (generally used as statements) and, when the yielded object is an [atom](#feature-call_argument), suffix it.
+Match `yield` and `yieldfrom` _[expressions](https://docs.python.org/3/reference/expressions.html#yield-expressions)_ (generally used as statements) and, when the yielded object is an [atom](#feature-argument), suffix it.
 
 ##### Derivations
 
@@ -4979,7 +5022,7 @@ else:
 
 #### Feature `if_test_atom`
 
-Match and suffix any [atom](#feature-call_argument) present in the condition of an `if` statement.
+Match and suffix any [atom](#feature-argument) present in the condition of an `if` statement.
 
 ##### Derivations
 

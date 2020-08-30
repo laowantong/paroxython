@@ -39,7 +39,7 @@ def print_collatz(n): # added_block_label (-> +7)
                   # node:Num
                   # node:While (-> +5)
                   # suggest_constant_definition
-        print(n) # call_argument:n
+        print(n) # argument:n
                  # external_free_call:print
                  # free_call:print
                  # free_call_without_result:print
@@ -108,7 +108,7 @@ def print_collatz(n): # added_block_label (-> +7)
                           # update_by_assignment:n:3
                           # update_by_assignment_with:Add
                           # update_with:Add
-    print(n) # call_argument:n
+    print(n) # argument:n
              # external_free_call:print
              # free_call:print
              # free_call_without_result:print
@@ -127,8 +127,8 @@ import collatz # global_scope:i (-> +9)
                # node:Import
                # scope:i (-> +9)
                # whole_span:10 (-> +9)
-for i in range(1, 101): # call_argument:1
-                        # call_argument:101
+for i in range(1, 101): # argument:1
+                        # argument:101
                         # external_free_call:range
                         # for:i (-> +8)
                         # for_range:1:101 (-> +8)
@@ -161,7 +161,7 @@ for i in range(1, 101): # call_argument:1
                     # node:If (-> +7)
                     # node:Name
                     # node:Num
-        print("FizzBuzz") # call_argument:
+        print("FizzBuzz") # argument:
                           # external_free_call:print
                           # free_call:print
                           # free_call_without_result:print
@@ -188,7 +188,7 @@ for i in range(1, 101): # call_argument:1
                      # node:If (-> +5)
                      # node:Name
                      # node:Num
-        print("Fizz") # call_argument:
+        print("Fizz") # argument:
                       # external_free_call:print
                       # free_call:print
                       # free_call_without_result:print
@@ -215,7 +215,7 @@ for i in range(1, 101): # call_argument:1
                      # node:If (-> +3)
                      # node:Name
                      # node:Num
-        print("Buzz") # call_argument:
+        print("Buzz") # argument:
                       # external_free_call:print
                       # free_call:print
                       # free_call_without_result:print
@@ -226,7 +226,7 @@ for i in range(1, 101): # call_argument:1
                       # node:Name
                       # node:Str
     else: # 
-        print(i) # call_argument:i
+        print(i) # argument:i
                  # external_free_call:print
                  # free_call:print
                  # free_call_without_result:print

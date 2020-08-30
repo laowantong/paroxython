@@ -4,7 +4,7 @@
       "timestamp": "",
       "source": "from __future__ import print_function\nprint(\"Hello World\")",
       "labels": {
-        "call_argument:": [[2,2]],
+        "argument:": [[2,2]],
         "external_free_call:print": [[2,2]],
         "flat_style": [[1,2]],
         "free_call:print": [[2,2]],
@@ -36,7 +36,7 @@
       "timestamp": "",
       "source": "print(\"Hello World\")",
       "labels": {
-        "call_argument:": [[1,1]],
+        "argument:": [[1,1]],
         "external_free_call:print": [[1,1]],
         "flat_style": [[1,1]],
         "free_call:print": [[1,1]],
@@ -63,8 +63,8 @@
       "timestamp": "",
       "source": "for i in range(10):\n    print(\"Hello\")",
       "labels": {
-        "call_argument:": [[2,2]],
-        "call_argument:10": [[1,1]],
+        "argument:": [[2,2]],
+        "argument:10": [[1,1]],
         "external_free_call:print": [[2,2]],
         "external_free_call:range": [[1,1]],
         "for:i": [[1,2]],
@@ -109,8 +109,8 @@
       "timestamp": "",
       "source": "print(\"Hello\\n\" * 10)",
       "labels": {
+        "argument:": [[1,1]],
         "binary_operator:Mult": [[1,1]],
-        "call_argument:": [[1,1]],
         "external_free_call:print": [[1,1]],
         "flat_style": [[1,1]],
         "free_call:print": [[1,1]],
@@ -146,8 +146,8 @@
       "timestamp": "",
       "source": "print(\"Hello\\n\" * 10)",
       "labels": {
+        "argument:": [[1,1]],
         "binary_operator:Mult": [[1,1]],
-        "call_argument:": [[1,1]],
         "external_free_call:print": [[1,1]],
         "flat_style": [[1,1]],
         "free_call:print": [[1,1]],
@@ -183,8 +183,8 @@
       "timestamp": "",
       "source": "def finish(name):\n    print(\"My job here is done. Goodbye \" + name)",
       "labels": {
+        "argument:": [[2,2]],
         "binary_operator:Add": [[2,2]],
-        "call_argument:": [[2,2]],
         "concatenation_operator:Str": [[2,2]],
         "external_free_call:print": [[2,2]],
         "free_call:print": [[2,2]],
@@ -348,7 +348,7 @@
       "timestamp": "",
       "source": "for x in items:\n    doSomething(x)",
       "labels": {
-        "call_argument:x": [[2,2]],
+        "argument:x": [[2,2]],
         "external_free_call:doSomething": [[2,2]],
         "for:x": [[1,2]],
         "for_each:x": [[1,2]],
@@ -383,9 +383,9 @@
       "timestamp": "",
       "source": "for i, x in enumerate(items):\n    print(i, x)",
       "labels": {
-        "call_argument:i": [[2,2]],
-        "call_argument:items": [[1,1]],
-        "call_argument:x": [[2,2]],
+        "argument:i": [[2,2]],
+        "argument:items": [[1,1]],
+        "argument:x": [[2,2]],
         "external_free_call:enumerate": [[1,1]],
         "external_free_call:print": [[2,2]],
         "for:i": [[1,2]],
@@ -569,7 +569,7 @@
       "timestamp": "",
       "source": "from random import shuffle\nshuffle(x)",
       "labels": {
-        "call_argument:x": [[2,2]],
+        "argument:x": [[2,2]],
         "external_free_call:shuffle": [[2,2]],
         "flat_style": [[1,2]],
         "free_call:shuffle": [[2,2]],
@@ -599,7 +599,7 @@
       "timestamp": "",
       "source": "import random\nrandom.shuffle(list)",
       "labels": {
-        "call_argument:list": [[2,2]],
+        "argument:list": [[2,2]],
         "flat_style": [[1,2]],
         "imperative_style": [[1,2]],
         "import:random": [[1,1]],
@@ -631,7 +631,7 @@
       "timestamp": "",
       "source": "import random\nrandom.choice(x)",
       "labels": {
-        "call_argument:x": [[2,2]],
+        "argument:x": [[2,2]],
         "flat_style": [[1,2]],
         "imperative_style": [[1,2]],
         "import:random": [[1,1]],
@@ -686,8 +686,8 @@
       "timestamp": "",
       "source": "for k, v in mymap.items():\n    print(k, v)",
       "labels": {
-        "call_argument:k": [[2,2]],
-        "call_argument:v": [[2,2]],
+        "argument:k": [[2,2]],
+        "argument:v": [[2,2]],
         "external_free_call:print": [[2,2]],
         "for:k": [[1,2]],
         "for:v": [[1,2]],
@@ -733,8 +733,8 @@
       "timestamp": "",
       "source": "import random\ndef pick(a, b):\n    return random.randrange(a, b)",
       "labels": {
-        "call_argument:a": [[3,3]],
-        "call_argument:b": [[3,3]],
+        "argument:a": [[3,3]],
+        "argument:b": [[3,3]],
         "function:pick": [[2,3]],
         "function_parameter:a": [[2,2]],
         "function_parameter:b": [[2,2]],
@@ -784,8 +784,8 @@
       "timestamp": "",
       "source": "import random\nrandom.uniform(a, b)",
       "labels": {
-        "call_argument:a": [[2,2]],
-        "call_argument:b": [[2,2]],
+        "argument:a": [[2,2]],
+        "argument:b": [[2,2]],
         "flat_style": [[1,2]],
         "imperative_style": [[1,2]],
         "import:random": [[1,1]],
@@ -818,8 +818,8 @@
       "timestamp": "",
       "source": "import random\nrandom.randint(a, b)",
       "labels": {
-        "call_argument:a": [[2,2]],
-        "call_argument:b": [[2,2]],
+        "argument:a": [[2,2]],
+        "argument:b": [[2,2]],
         "flat_style": [[1,2]],
         "imperative_style": [[1,2]],
         "import:random": [[1,1]],
@@ -852,9 +852,9 @@
       "timestamp": "",
       "source": "def dfs(bt):\n    if bt is None:\n        return\n    dfs(bt.left)\n    f(bt)\n    dfs(bt.right)",
       "labels": {
+        "argument:": [[4,4],[6,6]],
+        "argument:bt": [[5,5]],
         "body_recursive_function:dfs": [[1,6]],
-        "call_argument:": [[4,4],[6,6]],
-        "call_argument:bt": [[5,5]],
         "comparison_operator:Is": [[2,2]],
         "external_free_call:f": [[5,5]],
         "free_call:dfs": [[4,4],[6,6]],
@@ -913,12 +913,12 @@
       "timestamp": "",
       "source": "class Node(object):\n    def __init__(self, value, *children):\n        self.value = value\n        self.children = list(children)",
       "labels": {
+        "argument:children": [[4,4]],
         "assignment": [[3,3]],
         "assignment:list": [[4,4]],
         "assignment_lhs_identifier:self": [[3,3],[4,4]],
         "assignment_rhs_atom:children": [[4,4]],
         "assignment_rhs_atom:value": [[3,3]],
-        "call_argument:children": [[4,4]],
         "external_free_call:list": [[4,4]],
         "free_call:list": [[4,4]],
         "function:__init__": [[2,4]],
@@ -971,10 +971,10 @@
       "timestamp": "",
       "source": "def DFS(f, root):\n    f(root)\n    for child in root:\n        DFS(f, child)",
       "labels": {
+        "argument:child": [[4,4]],
+        "argument:f": [[4,4]],
+        "argument:root": [[2,2]],
         "body_recursive_function:DFS": [[1,4]],
-        "call_argument:child": [[4,4]],
-        "call_argument:f": [[4,4]],
-        "call_argument:root": [[2,2]],
         "external_free_call:f": [[2,2]],
         "for:child": [[3,4]],
         "for_each:child": [[3,4]],
@@ -1034,10 +1034,10 @@
       "timestamp": "",
       "source": "x = reversed(x)",
       "labels": {
+        "argument:x": [[1,1]],
         "assignment:reversed": [[1,1]],
         "assignment_lhs_identifier:x": [[1,1]],
         "assignment_rhs_atom:x": [[1,1]],
-        "call_argument:x": [[1,1]],
         "external_free_call:reversed": [[1,1]],
         "flat_style": [[1,1]],
         "free_call:reversed": [[1,1]],
@@ -1129,8 +1129,8 @@
       "timestamp": "",
       "source": "def search(m, x):\n    for idx, item in enumerate(m):\n        if x in item:\n            return idx, item.index(x)",
       "labels": {
-        "call_argument:m": [[2,2]],
-        "call_argument:x": [[4,4]],
+        "argument:m": [[2,2]],
+        "argument:x": [[4,4]],
         "comparison_operator:In": [[3,3]],
         "external_free_call:enumerate": [[2,2]],
         "for:idx": [[2,4]],
@@ -1246,10 +1246,10 @@
       "timestamp": "",
       "source": "i = int(s)",
       "labels": {
+        "argument:s": [[1,1]],
         "assignment:int": [[1,1]],
         "assignment_lhs_identifier:i": [[1,1]],
         "assignment_rhs_atom:s": [[1,1]],
-        "call_argument:s": [[1,1]],
         "external_free_call:int": [[1,1]],
         "flat_style": [[1,1]],
         "free_call:int": [[1,1]],
@@ -1279,10 +1279,10 @@
       "timestamp": "",
       "source": "s = \"{:.2f}\".format(x)",
       "labels": {
+        "argument:x": [[1,1]],
         "assignment:format": [[1,1]],
         "assignment_lhs_identifier:s": [[1,1]],
         "assignment_rhs_atom:x": [[1,1]],
-        "call_argument:x": [[1,1]],
         "flat_style": [[1,1]],
         "global_scope:s": [[1,1]],
         "imperative_style": [[1,1]],
@@ -1344,6 +1344,8 @@
       "timestamp": "",
       "source": "import Queue\nq = Queue()\nt = Thread(target=worker)\nt.daemon = True\nt.start()\nq.put(\"Alan\")",
       "labels": {
+        "argument:": [[6,6]],
+        "argument:worker": [[3,3]],
         "assignment:Queue": [[2,2]],
         "assignment:Thread": [[3,3]],
         "assignment:True": [[4,4]],
@@ -1351,20 +1353,19 @@
         "assignment_lhs_identifier:t": [[3,3],[4,4]],
         "assignment_rhs_atom:True": [[4,4]],
         "assignment_rhs_atom:worker": [[3,3]],
-        "call_argument:": [[6,6]],
-        "call_argument:worker": [[3,3]],
-        "call_keyword_argument:target": [[3,3]],
         "external_free_call:Queue": [[2,2]],
         "external_free_call:Thread": [[3,3]],
         "flat_style": [[1,6]],
         "free_call:Queue": [[2,2]],
         "free_call:Thread": [[3,3]],
+        "free_call_with_keyword_argument:Thread:target": [[3,3]],
         "free_call_without_arguments:Queue": [[2,2]],
         "global_scope:q": [[1,6]],
         "global_scope:t": [[1,6]],
         "imperative_style": [[1,6]],
         "import:Queue": [[1,1]],
         "import_module:Queue": [[1,1]],
+        "keyword_argument:target": [[3,3]],
         "literal:Str": [[6,6]],
         "literal:True": [[4,4]],
         "loaded_variable:q": [[6,6]],
@@ -1408,6 +1409,8 @@
       "timestamp": "",
       "source": "x = [[0 for j in xrange(n)] for i in xrange(m)]",
       "labels": {
+        "argument:m": [[1,1]],
+        "argument:n": [[1,1]],
         "assignment": [[1,1]],
         "assignment_lhs_identifier:x": [[1,1]],
         "assignment_rhs_atom:0": [[1,1]],
@@ -1415,8 +1418,6 @@
         "assignment_rhs_atom:j": [[1,1]],
         "assignment_rhs_atom:m": [[1,1]],
         "assignment_rhs_atom:n": [[1,1]],
-        "call_argument:m": [[1,1]],
-        "call_argument:n": [[1,1]],
         "comprehension:List": [[1,1],[1,1]],
         "comprehension_for_count:1": [[1,1],[1,1]],
         "external_free_call:xrange": [[1,1],[1,1]],
@@ -1459,6 +1460,9 @@
       "timestamp": "",
       "source": "x = [[[0 for k in xrange(p)] for j in xrange(n)] for i in xrange(m)]",
       "labels": {
+        "argument:m": [[1,1]],
+        "argument:n": [[1,1]],
+        "argument:p": [[1,1]],
         "assignment": [[1,1]],
         "assignment_lhs_identifier:x": [[1,1]],
         "assignment_rhs_atom:0": [[1,1]],
@@ -1468,9 +1472,6 @@
         "assignment_rhs_atom:m": [[1,1]],
         "assignment_rhs_atom:n": [[1,1]],
         "assignment_rhs_atom:p": [[1,1]],
-        "call_argument:m": [[1,1]],
-        "call_argument:n": [[1,1]],
-        "call_argument:p": [[1,1]],
         "comprehension:List": [[1,1],[1,1],[1,1]],
         "comprehension_for_count:1": [[1,1],[1,1],[1,1]],
         "external_free_call:xrange": [[1,1],[1,1],[1,1]],
@@ -1517,13 +1518,13 @@
       "timestamp": "",
       "source": "import numpy\nx = numpy.zeros((m, n, p))",
       "labels": {
+        "argument:": [[2,2]],
         "assignment:zeros": [[2,2]],
         "assignment_lhs_identifier:x": [[2,2]],
         "assignment_rhs_atom:m": [[2,2]],
         "assignment_rhs_atom:n": [[2,2]],
         "assignment_rhs_atom:numpy": [[2,2]],
         "assignment_rhs_atom:p": [[2,2]],
-        "call_argument:": [[2,2]],
         "flat_style": [[1,2]],
         "global_scope:x": [[1,2]],
         "imperative_style": [[1,2]],
@@ -1562,21 +1563,22 @@
       "timestamp": "",
       "source": "items = sorted(items, key=lambda x: x.p)",
       "labels": {
+        "argument:": [[1,1]],
+        "argument:items": [[1,1]],
         "assignment:sorted": [[1,1]],
         "assignment_lhs_identifier:items": [[1,1]],
         "assignment_rhs_atom:items": [[1,1]],
         "assignment_rhs_atom:x": [[1,1]],
-        "call_argument:": [[1,1]],
-        "call_argument:items": [[1,1]],
-        "call_keyword_argument:key": [[1,1]],
         "external_free_call:sorted": [[1,1]],
         "flat_style": [[1,1]],
         "free_call:sorted": [[1,1]],
+        "free_call_with_keyword_argument:sorted:key": [[1,1]],
         "function_parameter:x": [[1,1]],
         "function_parameter_flavor:arg": [[1,1]],
         "global_scope:items": [[1,1]],
         "global_scope:x": [[1,1]],
         "imperative_style": [[1,1]],
+        "keyword_argument:key": [[1,1]],
         "loaded_variable:items": [[1,1]],
         "loaded_variable:x": [[1,1]],
         "node:Assign": [[1,1]],
@@ -1636,12 +1638,12 @@
       "timestamp": "",
       "source": "from multiprocessing import Pool\npool = Pool()\nfor i in range(1, 1001):\n    pool.apply_async(f, [i])",
       "labels": {
+        "argument:": [[4,4]],
+        "argument:1": [[3,3]],
+        "argument:1001": [[3,3]],
+        "argument:f": [[4,4]],
         "assignment:Pool": [[2,2]],
         "assignment_lhs_identifier:pool": [[2,2]],
-        "call_argument:": [[4,4]],
-        "call_argument:1": [[3,3]],
-        "call_argument:1001": [[3,3]],
-        "call_argument:f": [[4,4]],
         "external_free_call:Pool": [[2,2]],
         "external_free_call:range": [[3,3]],
         "for:i": [[3,4]],
@@ -1705,10 +1707,10 @@
       "timestamp": "",
       "source": "def f(i):\n    if i == 0:\n        return 1\n    else:\n        return i * f(i - 1)",
       "labels": {
+        "argument:": [[5,5]],
         "binary_operator:Mult": [[5,5]],
         "binary_operator:Sub": [[5,5]],
         "body_recursive_function:f": [[1,5]],
-        "call_argument:": [[5,5]],
         "comparison_operator:Eq": [[2,2]],
         "free_call:f": [[5,5]],
         "function:f": [[1,5]],
@@ -1809,13 +1811,13 @@
       "timestamp": "",
       "source": "import threading\nlock = threading.Lock()\nlock.acquire()\ntry:\n    x = f(x)\nfinally:\n    lock.release()",
       "labels": {
+        "argument:x": [[5,5]],
         "assignment:Lock": [[2,2]],
         "assignment:f": [[5,5]],
         "assignment_lhs_identifier:lock": [[2,2]],
         "assignment_lhs_identifier:x": [[5,5]],
         "assignment_rhs_atom:threading": [[2,2]],
         "assignment_rhs_atom:x": [[5,5]],
-        "call_argument:x": [[5,5]],
         "external_free_call:f": [[5,5]],
         "flat_style": [[1,7]],
         "free_call:f": [[5,5]],
@@ -1861,9 +1863,9 @@
       "timestamp": "",
       "source": "class T(object):\n    pass\nx = set(T())",
       "labels": {
+        "argument:": [[3,3]],
         "assignment:set": [[3,3]],
         "assignment_lhs_identifier:x": [[3,3]],
-        "call_argument:": [[3,3]],
         "composition": [[3,3]],
         "external_free_call:T": [[3,3]],
         "external_free_call:set": [[3,3]],
@@ -1900,8 +1902,8 @@
       "timestamp": "",
       "source": "def compose(f, g):\n    return lambda a: g(f(a))",
       "labels": {
-        "call_argument:": [[2,2]],
-        "call_argument:a": [[2,2]],
+        "argument:": [[2,2]],
+        "argument:a": [[2,2]],
         "composition": [[2,2]],
         "external_free_call:f": [[2,2]],
         "external_free_call:g": [[2,2]],
@@ -1955,8 +1957,8 @@
       "timestamp": "",
       "source": "def compose(f, g):\n    return lambda x: g(f(x))",
       "labels": {
-        "call_argument:": [[2,2]],
-        "call_argument:x": [[2,2]],
+        "argument:": [[2,2]],
+        "argument:x": [[2,2]],
         "composition": [[2,2]],
         "external_free_call:f": [[2,2]],
         "external_free_call:g": [[2,2]],
@@ -2012,10 +2014,10 @@
       "labels": {
         "access_outer_scope:a": [[3,4]],
         "addition_operator": [[4,4]],
+        "argument:": [[6,6]],
+        "argument:1": [[6,6]],
+        "argument:2": [[6,6]],
         "binary_operator:Add": [[4,4]],
-        "call_argument:": [[6,6]],
-        "call_argument:1": [[6,6]],
-        "call_argument:2": [[6,6]],
         "closure:f": [[2,5]],
         "composition": [[6,6]],
         "external_free_call:print": [[6,6]],
@@ -2152,6 +2154,11 @@
       "timestamp": "",
       "source": "from collections import defaultdict\nclass Vertex(set):\n    pass\nclass Graph(defaultdict):\n    def __init__(self, *paths):\n        self.default_factory = Vertex\n        for path in paths:\n            self.make_path(path)\n    def make_path(self, labels):\n        for l1, l2 in zip(labels, labels[1:]):\n            self[l1].add(l2)\n            self[l2].add(l1)\nG = Graph((0, 1, 2, 3), (1, 4, 2))",
       "labels": {
+        "argument:": [[10,10],[13,13],[13,13]],
+        "argument:l1": [[12,12]],
+        "argument:l2": [[11,11]],
+        "argument:labels": [[10,10]],
+        "argument:path": [[8,8]],
         "assignment": [[6,6]],
         "assignment:Graph": [[13,13]],
         "assignment_lhs_identifier:G": [[13,13]],
@@ -2162,11 +2169,6 @@
         "assignment_rhs_atom:3": [[13,13]],
         "assignment_rhs_atom:4": [[13,13]],
         "assignment_rhs_atom:Vertex": [[6,6]],
-        "call_argument:": [[10,10],[13,13],[13,13]],
-        "call_argument:l1": [[12,12]],
-        "call_argument:l2": [[11,11]],
-        "call_argument:labels": [[10,10]],
-        "call_argument:path": [[8,8]],
         "external_free_call:Graph": [[13,13]],
         "external_free_call:zip": [[10,10]],
         "for:l1": [[10,12]],
@@ -2291,11 +2293,11 @@
       "timestamp": "",
       "source": "t = s.decode(\"utf8\")[::-1].encode(\"utf8\")",
       "labels": {
+        "argument:": [[1,1],[1,1]],
         "assignment:encode": [[1,1]],
         "assignment_lhs_identifier:t": [[1,1]],
         "assignment_rhs_atom:-1": [[1,1]],
         "assignment_rhs_atom:s": [[1,1]],
-        "call_argument:": [[1,1],[1,1]],
         "flat_style": [[1,1]],
         "global_scope:t": [[1,1]],
         "imperative_style": [[1,1]],
@@ -2379,7 +2381,7 @@
       "timestamp": "",
       "source": "for v in a:\n    try:\n        for u in b:\n            if v == u:\n                raise Exception()\n        print(v)\n    except Exception:\n        continue",
       "labels": {
-        "call_argument:v": [[6,6]],
+        "argument:v": [[6,6]],
         "comparison_operator:Eq": [[4,4]],
         "except:Exception": [[7,7]],
         "external_free_call:Exception": [[5,5]],
@@ -2450,7 +2452,7 @@
       "timestamp": "",
       "source": "for v in a:\n    for v_ in b:\n        if v == v_:\n            continue\n        print(v)",
       "labels": {
-        "call_argument:v": [[5,5]],
+        "argument:v": [[5,5]],
         "comparison_operator:Eq": [[3,3]],
         "external_free_call:print": [[5,5]],
         "for:v": [[1,5]],
@@ -2593,10 +2595,10 @@
       "timestamp": "",
       "source": "def loop_breaking(m, v):\n    for i, row in enumerate(m):\n        for j, value in enumerate(row):\n            if value == v:\n                return (i, j)\n    return None\nprint(loop_breaking(([1, 2, 3], [4, 5, 6], [7, 8, 9]), 6))",
       "labels": {
-        "call_argument:": [[7,7],[7,7]],
-        "call_argument:6": [[7,7]],
-        "call_argument:m": [[2,2]],
-        "call_argument:row": [[3,3]],
+        "argument:": [[7,7],[7,7]],
+        "argument:6": [[7,7]],
+        "argument:m": [[2,2]],
+        "argument:row": [[3,3]],
         "comparison_operator:Eq": [[4,4]],
         "composition": [[7,7]],
         "external_free_call:enumerate": [[2,2],[3,3]],
@@ -2716,8 +2718,8 @@
       "timestamp": "",
       "source": "s.insert(i, x)",
       "labels": {
-        "call_argument:i": [[1,1]],
-        "call_argument:x": [[1,1]],
+        "argument:i": [[1,1]],
+        "argument:x": [[1,1]],
         "flat_style": [[1,1]],
         "imperative_style": [[1,1]],
         "loaded_variable:i": [[1,1]],
@@ -2752,7 +2754,7 @@
       "timestamp": "",
       "source": "import time\ntime.sleep(5)",
       "labels": {
-        "call_argument:5": [[2,2]],
+        "argument:5": [[2,2]],
         "flat_style": [[1,2]],
         "imperative_style": [[1,2]],
         "import:time": [[1,1]],
@@ -3000,10 +3002,10 @@
       "timestamp": "",
       "source": "y = \", \".join(x)",
       "labels": {
+        "argument:x": [[1,1]],
         "assignment:join": [[1,1]],
         "assignment_lhs_identifier:y": [[1,1]],
         "assignment_rhs_atom:x": [[1,1]],
-        "call_argument:x": [[1,1]],
         "flat_style": [[1,1]],
         "global_scope:y": [[1,1]],
         "imperative_style": [[1,1]],
@@ -3036,13 +3038,13 @@
       "timestamp": "",
       "source": "y = \", \".join(map(str, x))",
       "labels": {
+        "argument:": [[1,1]],
+        "argument:str": [[1,1]],
+        "argument:x": [[1,1]],
         "assignment:join": [[1,1]],
         "assignment_lhs_identifier:y": [[1,1]],
         "assignment_rhs_atom:str": [[1,1]],
         "assignment_rhs_atom:x": [[1,1]],
-        "call_argument:": [[1,1]],
-        "call_argument:str": [[1,1]],
-        "call_argument:x": [[1,1]],
         "composition": [[1,1]],
         "external_free_call:map": [[1,1]],
         "flat_style": [[1,1]],
@@ -3082,10 +3084,10 @@
       "timestamp": "",
       "source": "s = sum(x)",
       "labels": {
+        "argument:x": [[1,1]],
         "assignment:sum": [[1,1]],
         "assignment_lhs_identifier:s": [[1,1]],
         "assignment_rhs_atom:x": [[1,1]],
-        "call_argument:x": [[1,1]],
         "external_free_call:sum": [[1,1]],
         "flat_style": [[1,1]],
         "free_call:sum": [[1,1]],
@@ -3114,10 +3116,10 @@
       "timestamp": "",
       "source": "s = str(i)",
       "labels": {
+        "argument:i": [[1,1]],
         "assignment:str": [[1,1]],
         "assignment_lhs_identifier:s": [[1,1]],
         "assignment_rhs_atom:i": [[1,1]],
-        "call_argument:i": [[1,1]],
         "external_free_call:str": [[1,1]],
         "flat_style": [[1,1]],
         "free_call:str": [[1,1]],
@@ -3147,14 +3149,12 @@
       "timestamp": "",
       "source": "from multiprocessing import Pool\ndef f(i):\n    i * i\nwith Pool(processes) as p:\n    p.map(func=f, iterable=range(1, 1001))\nprint(\"Finished\")",
       "labels": {
+        "argument:": [[5,5],[6,6]],
+        "argument:1": [[5,5]],
+        "argument:1001": [[5,5]],
+        "argument:f": [[5,5]],
+        "argument:processes": [[4,4]],
         "binary_operator:Mult": [[3,3]],
-        "call_argument:": [[5,5],[6,6]],
-        "call_argument:1": [[5,5]],
-        "call_argument:1001": [[5,5]],
-        "call_argument:f": [[5,5]],
-        "call_argument:processes": [[4,4]],
-        "call_keyword_argument:func": [[5,5]],
-        "call_keyword_argument:iterable": [[5,5]],
         "external_free_call:Pool": [[4,4]],
         "external_free_call:print": [[6,6]],
         "external_free_call:range": [[5,5]],
@@ -3169,6 +3169,8 @@
         "import:multiprocessing:Pool": [[1,1]],
         "import_module:multiprocessing": [[1,1]],
         "import_name:Pool": [[1,1]],
+        "keyword_argument:func": [[5,5]],
+        "keyword_argument:iterable": [[5,5]],
         "literal:1": [[5,5]],
         "literal:1001": [[5,5]],
         "literal:Str": [[6,6]],
@@ -3220,12 +3222,12 @@
       "timestamp": "",
       "source": "y = filter(p, x)",
       "labels": {
+        "argument:p": [[1,1]],
+        "argument:x": [[1,1]],
         "assignment:filter": [[1,1]],
         "assignment_lhs_identifier:y": [[1,1]],
         "assignment_rhs_atom:p": [[1,1]],
         "assignment_rhs_atom:x": [[1,1]],
-        "call_argument:p": [[1,1]],
-        "call_argument:x": [[1,1]],
         "external_free_call:filter": [[1,1]],
         "flat_style": [[1,1]],
         "free_call:filter": [[1,1]],
@@ -3256,11 +3258,11 @@
       "timestamp": "",
       "source": "y = [element for element in x if p(element)]",
       "labels": {
+        "argument:element": [[1,1]],
         "assignment": [[1,1]],
         "assignment_lhs_identifier:y": [[1,1]],
         "assignment_rhs_atom:element": [[1,1],[1,1],[1,1]],
         "assignment_rhs_atom:x": [[1,1]],
-        "call_argument:element": [[1,1]],
         "comprehension:List": [[1,1]],
         "comprehension_for_count:1": [[1,1]],
         "external_free_call:p": [[1,1]],
@@ -3298,10 +3300,10 @@
       "timestamp": "",
       "source": "lines = open(f).read()",
       "labels": {
+        "argument:f": [[1,1]],
         "assignment:read": [[1,1]],
         "assignment_lhs_identifier:lines": [[1,1]],
         "assignment_rhs_atom:f": [[1,1]],
-        "call_argument:f": [[1,1]],
         "external_free_call:open": [[1,1]],
         "flat_style": [[1,1]],
         "free_call:open": [[1,1]],
@@ -3333,16 +3335,17 @@
       "timestamp": "",
       "source": "import sys\nprint(x, \"is negative\", file=sys.stderr)",
       "labels": {
-        "call_argument:": [[2,2],[2,2]],
-        "call_argument:x": [[2,2]],
-        "call_keyword_argument:file": [[2,2]],
+        "argument:": [[2,2],[2,2]],
+        "argument:x": [[2,2]],
         "external_free_call:print": [[2,2]],
         "flat_style": [[1,2]],
         "free_call:print": [[2,2]],
+        "free_call_with_keyword_argument:print:file": [[2,2]],
         "free_call_without_result:print": [[2,2]],
         "imperative_style": [[1,2]],
         "import:sys": [[1,1]],
         "import_module:sys": [[1,1]],
+        "keyword_argument:file": [[2,2]],
         "literal:Str": [[2,2]],
         "loaded_variable:sys": [[2,2]],
         "loaded_variable:x": [[2,2]],
@@ -3357,7 +3360,7 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "call/function/builtin/print": [[2,2]],
+        "call/function/builtin/print/file": [[2,2]],
         "def/import/standard/sys": [[1,1]],
         "meta/program": [[1,2]],
         "meta/sloc/2": [[1,2]],
@@ -3446,11 +3449,11 @@
       "timestamp": "",
       "source": "i = x.find(y)",
       "labels": {
+        "argument:y": [[1,1]],
         "assignment:find": [[1,1]],
         "assignment_lhs_identifier:i": [[1,1]],
         "assignment_rhs_atom:x": [[1,1]],
         "assignment_rhs_atom:y": [[1,1]],
-        "call_argument:y": [[1,1]],
         "flat_style": [[1,1]],
         "global_scope:i": [[1,1]],
         "imperative_style": [[1,1]],
@@ -3481,13 +3484,13 @@
       "timestamp": "",
       "source": "x2 = x.replace(y, z)",
       "labels": {
+        "argument:y": [[1,1]],
+        "argument:z": [[1,1]],
         "assignment:replace": [[1,1]],
         "assignment_lhs_identifier:x2": [[1,1]],
         "assignment_rhs_atom:x": [[1,1]],
         "assignment_rhs_atom:y": [[1,1]],
         "assignment_rhs_atom:z": [[1,1]],
-        "call_argument:y": [[1,1]],
-        "call_argument:z": [[1,1]],
         "flat_style": [[1,1]],
         "global_scope:x2": [[1,1]],
         "imperative_style": [[1,1]],
@@ -3556,10 +3559,10 @@
       "timestamp": "",
       "source": "s = \"{:.1%}\".format(x)",
       "labels": {
+        "argument:x": [[1,1]],
         "assignment:format": [[1,1]],
         "assignment_lhs_identifier:s": [[1,1]],
         "assignment_rhs_atom:x": [[1,1]],
-        "call_argument:x": [[1,1]],
         "flat_style": [[1,1]],
         "global_scope:s": [[1,1]],
         "imperative_style": [[1,1]],
@@ -3624,11 +3627,11 @@
       "timestamp": "",
       "source": "import math\ndef binom(n, k):\n    return math.factorial(n) // math.factorial(k) // math.factorial(n - k)",
       "labels": {
+        "argument:": [[3,3]],
+        "argument:k": [[3,3]],
+        "argument:n": [[3,3]],
         "binary_operator:FloorDiv": [[3,3],[3,3]],
         "binary_operator:Sub": [[3,3]],
-        "call_argument:": [[3,3]],
-        "call_argument:k": [[3,3]],
-        "call_argument:n": [[3,3]],
         "function:binom": [[2,3]],
         "function_parameter:k": [[2,2]],
         "function_parameter:n": [[2,2]],
@@ -3678,13 +3681,13 @@
       "timestamp": "",
       "source": "from __future__ import division\nimport math\nx = bytearray(int(math.ceil(n / 8.0)))",
       "labels": {
+        "argument:": [[3,3],[3,3],[3,3]],
         "assignment:bytearray": [[3,3]],
         "assignment_lhs_identifier:x": [[3,3]],
         "assignment_rhs_atom:8.0": [[3,3]],
         "assignment_rhs_atom:math": [[3,3]],
         "assignment_rhs_atom:n": [[3,3]],
         "binary_operator:Div": [[3,3]],
-        "call_argument:": [[3,3],[3,3],[3,3]],
         "composition": [[3,3],[3,3]],
         "external_free_call:bytearray": [[3,3]],
         "external_free_call:int": [[3,3]],
@@ -3739,11 +3742,11 @@
       "timestamp": "",
       "source": "import random\nrand = random.Random(s)",
       "labels": {
+        "argument:s": [[2,2]],
         "assignment:Random": [[2,2]],
         "assignment_lhs_identifier:rand": [[2,2]],
         "assignment_rhs_atom:random": [[2,2]],
         "assignment_rhs_atom:s": [[2,2]],
-        "call_argument:s": [[2,2]],
         "flat_style": [[1,2]],
         "global_scope:rand": [[1,2]],
         "imperative_style": [[1,2]],
@@ -3810,7 +3813,7 @@
       "timestamp": "",
       "source": "import sys\nprint(\" \".join(sys.argv[1:]))",
       "labels": {
-        "call_argument:": [[2,2],[2,2]],
+        "argument:": [[2,2],[2,2]],
         "composition": [[2,2]],
         "external_free_call:print": [[2,2]],
         "flat_style": [[1,2]],
@@ -3858,9 +3861,9 @@
       "timestamp": "",
       "source": "def fact(a_class, str_):\n    if issubclass(a_class, Parent):\n        return a_class(str_)",
       "labels": {
-        "call_argument:Parent": [[2,2]],
-        "call_argument:a_class": [[2,2]],
-        "call_argument:str_": [[3,3]],
+        "argument:Parent": [[2,2]],
+        "argument:a_class": [[2,2]],
+        "argument:str_": [[3,3]],
         "external_free_call:a_class": [[3,3]],
         "external_free_call:issubclass": [[2,2]],
         "free_call:a_class": [[3,3]],
@@ -3915,12 +3918,12 @@
       "timestamp": "",
       "source": "from fractions import gcd\nx = gcd(a, b)",
       "labels": {
+        "argument:a": [[2,2]],
+        "argument:b": [[2,2]],
         "assignment:gcd": [[2,2]],
         "assignment_lhs_identifier:x": [[2,2]],
         "assignment_rhs_atom:a": [[2,2]],
         "assignment_rhs_atom:b": [[2,2]],
-        "call_argument:a": [[2,2]],
-        "call_argument:b": [[2,2]],
         "external_free_call:gcd": [[2,2]],
         "flat_style": [[1,2]],
         "free_call:gcd": [[2,2]],
@@ -3955,14 +3958,14 @@
       "timestamp": "",
       "source": "from fractions import gcd\nx = (a * b) // gcd(a, b)",
       "labels": {
+        "argument:a": [[2,2]],
+        "argument:b": [[2,2]],
         "assignment:FloorDiv": [[2,2]],
         "assignment_lhs_identifier:x": [[2,2]],
         "assignment_rhs_atom:a": [[2,2],[2,2]],
         "assignment_rhs_atom:b": [[2,2],[2,2]],
         "binary_operator:FloorDiv": [[2,2]],
         "binary_operator:Mult": [[2,2]],
-        "call_argument:a": [[2,2]],
-        "call_argument:b": [[2,2]],
         "external_free_call:gcd": [[2,2]],
         "flat_style": [[1,2]],
         "free_call:gcd": [[2,2]],
@@ -4001,10 +4004,10 @@
       "timestamp": "",
       "source": "s = \"{:b}\".format(x)",
       "labels": {
+        "argument:x": [[1,1]],
         "assignment:format": [[1,1]],
         "assignment_lhs_identifier:s": [[1,1]],
         "assignment_rhs_atom:x": [[1,1]],
-        "call_argument:x": [[1,1]],
         "flat_style": [[1,1]],
         "global_scope:s": [[1,1]],
         "imperative_style": [[1,1]],
@@ -4124,10 +4127,10 @@
       "timestamp": "",
       "source": "y = float(x)",
       "labels": {
+        "argument:x": [[1,1]],
         "assignment:float": [[1,1]],
         "assignment_lhs_identifier:y": [[1,1]],
         "assignment_rhs_atom:x": [[1,1]],
-        "call_argument:x": [[1,1]],
         "external_free_call:float": [[1,1]],
         "flat_style": [[1,1]],
         "free_call:float": [[1,1]],
@@ -4157,10 +4160,10 @@
       "timestamp": "",
       "source": "y = int(x)",
       "labels": {
+        "argument:x": [[1,1]],
         "assignment:int": [[1,1]],
         "assignment_lhs_identifier:y": [[1,1]],
         "assignment_rhs_atom:x": [[1,1]],
-        "call_argument:x": [[1,1]],
         "external_free_call:int": [[1,1]],
         "flat_style": [[1,1]],
         "free_call:int": [[1,1]],
@@ -4191,12 +4194,12 @@
       "source": "y = int(x + 0.5)",
       "labels": {
         "addition_operator": [[1,1]],
+        "argument:": [[1,1]],
         "assignment:int": [[1,1]],
         "assignment_lhs_identifier:y": [[1,1]],
         "assignment_rhs_atom:0.5": [[1,1]],
         "assignment_rhs_atom:x": [[1,1]],
         "binary_operator:Add": [[1,1]],
-        "call_argument:": [[1,1]],
         "external_free_call:int": [[1,1]],
         "flat_style": [[1,1]],
         "free_call:int": [[1,1]],
@@ -4233,11 +4236,11 @@
       "timestamp": "",
       "source": "count = s.count(t)",
       "labels": {
+        "argument:t": [[1,1]],
         "assignment:count": [[1,1]],
         "assignment_lhs_identifier:count": [[1,1]],
         "assignment_rhs_atom:s": [[1,1]],
         "assignment_rhs_atom:t": [[1,1]],
-        "call_argument:t": [[1,1]],
         "flat_style": [[1,1]],
         "global_scope:count": [[1,1]],
         "imperative_style": [[1,1]],
@@ -4268,10 +4271,10 @@
       "timestamp": "",
       "source": "import re\nr = re.compile(r\"htt+p\")",
       "labels": {
+        "argument:": [[2,2]],
         "assignment:compile": [[2,2]],
         "assignment_lhs_identifier:r": [[2,2]],
         "assignment_rhs_atom:re": [[2,2]],
-        "call_argument:": [[2,2]],
         "flat_style": [[1,2]],
         "global_scope:r": [[1,2]],
         "imperative_style": [[1,2]],
@@ -4307,11 +4310,11 @@
       "timestamp": "",
       "source": "c = bin(i).count(\"1\")",
       "labels": {
+        "argument:": [[1,1]],
+        "argument:i": [[1,1]],
         "assignment:count": [[1,1]],
         "assignment_lhs_identifier:c": [[1,1]],
         "assignment_rhs_atom:i": [[1,1]],
-        "call_argument:": [[1,1]],
-        "call_argument:i": [[1,1]],
         "external_free_call:bin": [[1,1]],
         "flat_style": [[1,1]],
         "free_call:bin": [[1,1]],
@@ -4419,7 +4422,7 @@
       "timestamp": "",
       "source": "import sys\nsys.exit(1)",
       "labels": {
-        "call_argument:1": [[2,2]],
+        "argument:1": [[2,2]],
         "flat_style": [[1,2]],
         "imperative_style": [[1,2]],
         "import:sys": [[1,1]],
@@ -4453,10 +4456,10 @@
       "timestamp": "",
       "source": "buf = bytearray(1000000)",
       "labels": {
+        "argument:1000000": [[1,1]],
         "assignment:bytearray": [[1,1]],
         "assignment_lhs_identifier:buf": [[1,1]],
         "assignment_rhs_atom:1000000": [[1,1]],
-        "call_argument:1000000": [[1,1]],
         "external_free_call:bytearray": [[1,1]],
         "flat_style": [[1,1]],
         "free_call:bytearray": [[1,1]],
@@ -4489,7 +4492,7 @@
       "timestamp": "",
       "source": "raise ValueError(\"x is invalid\")",
       "labels": {
-        "call_argument:": [[1,1]],
+        "argument:": [[1,1]],
         "external_free_call:ValueError": [[1,1]],
         "flat_style": [[1,1]],
         "free_call:ValueError": [[1,1]],
@@ -4571,12 +4574,12 @@
       "timestamp": "",
       "source": "import json\nwith open(\"data.json\", \"r\") as input:\n    x = json.load(input)",
       "labels": {
+        "argument:": [[2,2],[2,2]],
+        "argument:input": [[3,3]],
         "assignment:load": [[3,3]],
         "assignment_lhs_identifier:x": [[3,3]],
         "assignment_rhs_atom:input": [[3,3]],
         "assignment_rhs_atom:json": [[3,3]],
-        "call_argument:": [[2,2],[2,2]],
-        "call_argument:input": [[3,3]],
         "external_free_call:open": [[2,2]],
         "flat_style": [[1,3]],
         "free_call:open": [[2,2]],
@@ -4615,9 +4618,9 @@
       "timestamp": "",
       "source": "import json\nwith open(\"data.json\", \"w\") as output:\n    json.dump(x, output)",
       "labels": {
-        "call_argument:": [[2,2],[2,2]],
-        "call_argument:output": [[3,3]],
-        "call_argument:x": [[3,3]],
+        "argument:": [[2,2],[2,2]],
+        "argument:output": [[3,3]],
+        "argument:x": [[3,3]],
         "external_free_call:open": [[2,2]],
         "flat_style": [[1,3]],
         "free_call:open": [[2,2]],
@@ -4701,8 +4704,8 @@
       "timestamp": "",
       "source": "print(type(x))",
       "labels": {
-        "call_argument:": [[1,1]],
-        "call_argument:x": [[1,1]],
+        "argument:": [[1,1]],
+        "argument:x": [[1,1]],
         "composition": [[1,1]],
         "external_free_call:print": [[1,1]],
         "external_free_call:type": [[1,1]],
@@ -4732,7 +4735,7 @@
       "timestamp": "",
       "source": "print(x.__class__)",
       "labels": {
-        "call_argument:": [[1,1]],
+        "argument:": [[1,1]],
         "external_free_call:print": [[1,1]],
         "flat_style": [[1,1]],
         "free_call:print": [[1,1]],
@@ -4758,11 +4761,11 @@
       "timestamp": "",
       "source": "import os\nx = os.path.getsize(path)",
       "labels": {
+        "argument:path": [[2,2]],
         "assignment:getsize": [[2,2]],
         "assignment_lhs_identifier:x": [[2,2]],
         "assignment_rhs_atom:os": [[2,2]],
         "assignment_rhs_atom:path": [[2,2]],
-        "call_argument:path": [[2,2]],
         "flat_style": [[1,2]],
         "global_scope:x": [[1,2]],
         "imperative_style": [[1,2]],
@@ -4797,11 +4800,11 @@
       "timestamp": "",
       "source": "b = s.startswith(prefix)",
       "labels": {
+        "argument:prefix": [[1,1]],
         "assignment:startswith": [[1,1]],
         "assignment_lhs_identifier:b": [[1,1]],
         "assignment_rhs_atom:prefix": [[1,1]],
         "assignment_rhs_atom:s": [[1,1]],
-        "call_argument:prefix": [[1,1]],
         "flat_style": [[1,1]],
         "global_scope:b": [[1,1]],
         "imperative_style": [[1,1]],
@@ -4832,11 +4835,11 @@
       "timestamp": "",
       "source": "b = s.endswith(suffix)",
       "labels": {
+        "argument:suffix": [[1,1]],
         "assignment:endswith": [[1,1]],
         "assignment_lhs_identifier:b": [[1,1]],
         "assignment_rhs_atom:s": [[1,1]],
         "assignment_rhs_atom:suffix": [[1,1]],
-        "call_argument:suffix": [[1,1]],
         "flat_style": [[1,1]],
         "global_scope:b": [[1,1]],
         "imperative_style": [[1,1]],
@@ -4867,11 +4870,11 @@
       "timestamp": "",
       "source": "import datetime\nd = datetime.date.fromtimestamp(ts)",
       "labels": {
+        "argument:ts": [[2,2]],
         "assignment:fromtimestamp": [[2,2]],
         "assignment_lhs_identifier:d": [[2,2]],
         "assignment_rhs_atom:datetime": [[2,2]],
         "assignment_rhs_atom:ts": [[2,2]],
-        "call_argument:ts": [[2,2]],
         "flat_style": [[1,2]],
         "global_scope:d": [[1,2]],
         "imperative_style": [[1,2]],
@@ -4906,6 +4909,10 @@
       "timestamp": "",
       "source": "from datetime import date\nd = date(2016, 9, 28)\nx = d.strftime(\"%Y-%m-%d\")",
       "labels": {
+        "argument:": [[3,3]],
+        "argument:2016": [[2,2]],
+        "argument:28": [[2,2]],
+        "argument:9": [[2,2]],
         "assignment:date": [[2,2]],
         "assignment:strftime": [[3,3]],
         "assignment_lhs_identifier:d": [[2,2]],
@@ -4914,10 +4921,6 @@
         "assignment_rhs_atom:28": [[2,2]],
         "assignment_rhs_atom:9": [[2,2]],
         "assignment_rhs_atom:d": [[3,3]],
-        "call_argument:": [[3,3]],
-        "call_argument:2016": [[2,2]],
-        "call_argument:28": [[2,2]],
-        "call_argument:9": [[2,2]],
         "external_free_call:date": [[2,2]],
         "flat_style": [[1,3]],
         "free_call:date": [[2,2]],
@@ -5009,7 +5012,7 @@
       "timestamp": "",
       "source": "items.sort(c)",
       "labels": {
-        "call_argument:c": [[1,1]],
+        "argument:c": [[1,1]],
         "flat_style": [[1,1]],
         "imperative_style": [[1,1]],
         "loaded_variable:c": [[1,1]],
@@ -5037,10 +5040,10 @@
       "timestamp": "",
       "source": "import urllib.request\nwith urllib.request.urlopen(u) as f:\n    s = f.read()",
       "labels": {
+        "argument:u": [[2,2]],
         "assignment:read": [[3,3]],
         "assignment_lhs_identifier:s": [[3,3]],
         "assignment_rhs_atom:f": [[3,3]],
-        "call_argument:u": [[2,2]],
         "flat_style": [[1,3]],
         "global_scope:s": [[1,3]],
         "imperative_style": [[1,3]],
@@ -5076,13 +5079,13 @@
       "timestamp": "",
       "source": "import urllib\nfilename, headers = urllib.request.urlretrieve(u, \"result.txt\")",
       "labels": {
+        "argument:": [[2,2]],
+        "argument:u": [[2,2]],
         "assignment:urlretrieve": [[2,2]],
         "assignment_lhs_identifier:filename": [[2,2]],
         "assignment_lhs_identifier:headers": [[2,2]],
         "assignment_rhs_atom:u": [[2,2]],
         "assignment_rhs_atom:urllib": [[2,2]],
-        "call_argument:": [[2,2]],
-        "call_argument:u": [[2,2]],
         "flat_style": [[1,2]],
         "global_scope:filename": [[1,2]],
         "global_scope:headers": [[1,2]],
@@ -5125,10 +5128,10 @@
       "timestamp": "",
       "source": "import lxml.etree\nx = lxml.etree.parse(\"data.xml\")",
       "labels": {
+        "argument:": [[2,2]],
         "assignment:parse": [[2,2]],
         "assignment_lhs_identifier:x": [[2,2]],
         "assignment_rhs_atom:lxml": [[2,2]],
-        "call_argument:": [[2,2]],
         "flat_style": [[1,2]],
         "global_scope:x": [[1,2]],
         "imperative_style": [[1,2]],
@@ -5165,6 +5168,9 @@
       "timestamp": "",
       "source": "import pyxser as pyx\nclass TestClass(object):\n    a = None\n    b = None\n    c = None\n    def __init__(self, a, b, c):\n        self.a = a\n        self.b = b\n        self.c = c\ntst = TestClass(\"var_a\", \"var_b\", \"var_c\")\nser = pyx.serialize(obj=tst, enc=\"utf-8\")\nprint(ser)",
       "labels": {
+        "argument:": [[10,10],[10,10],[10,10],[11,11]],
+        "argument:ser": [[12,12]],
+        "argument:tst": [[11,11]],
         "assignment": [[7,7],[8,8],[9,9]],
         "assignment:None": [[3,3],[4,4],[5,5]],
         "assignment:TestClass": [[10,10]],
@@ -5181,11 +5187,6 @@
         "assignment_rhs_atom:c": [[9,9]],
         "assignment_rhs_atom:pyx": [[11,11]],
         "assignment_rhs_atom:tst": [[11,11]],
-        "call_argument:": [[10,10],[10,10],[10,10],[11,11]],
-        "call_argument:ser": [[12,12]],
-        "call_argument:tst": [[11,11]],
-        "call_keyword_argument:enc": [[11,11]],
-        "call_keyword_argument:obj": [[11,11]],
         "external_free_call:TestClass": [[10,10]],
         "external_free_call:print": [[12,12]],
         "free_call:TestClass": [[10,10]],
@@ -5206,6 +5207,8 @@
         "import:pyxser": [[1,1]],
         "import_module:pyxser": [[1,1]],
         "instance_method:__init__": [[6,9]],
+        "keyword_argument:enc": [[11,11]],
+        "keyword_argument:obj": [[11,11]],
         "literal:None": [[3,3],[4,4],[5,5]],
         "literal:Str": [[10,10],[10,10],[10,10],[11,11]],
         "loaded_variable:a": [[7,7]],
@@ -5352,12 +5355,12 @@
       "timestamp": "",
       "source": "import os\ndir = os.path.dirname(os.path.abspath(__file__))",
       "labels": {
+        "argument:": [[2,2]],
+        "argument:__file__": [[2,2]],
         "assignment:dirname": [[2,2]],
         "assignment_lhs_identifier:dir": [[2,2]],
         "assignment_rhs_atom:__file__": [[2,2]],
         "assignment_rhs_atom:os": [[2,2],[2,2]],
-        "call_argument:": [[2,2]],
-        "call_argument:__file__": [[2,2]],
         "composition": [[2,2]],
         "flat_style": [[1,2]],
         "global_scope:dir": [[1,2]],
@@ -5395,7 +5398,7 @@
       "timestamp": "",
       "source": "if \"x\" in locals():\n    print(x)",
       "labels": {
-        "call_argument:x": [[2,2]],
+        "argument:x": [[2,2]],
         "comparison_operator:In": [[1,1]],
         "external_free_call:locals": [[1,1]],
         "external_free_call:print": [[2,2]],
@@ -5433,11 +5436,11 @@
       "timestamp": "",
       "source": "import pympler.asizeof\nn = pympler.asizeof.asizeof(t)",
       "labels": {
+        "argument:t": [[2,2]],
         "assignment:asizeof": [[2,2]],
         "assignment_lhs_identifier:n": [[2,2]],
         "assignment_rhs_atom:pympler": [[2,2]],
         "assignment_rhs_atom:t": [[2,2]],
-        "call_argument:t": [[2,2]],
         "flat_style": [[1,2]],
         "global_scope:n": [[1,2]],
         "imperative_style": [[1,2]],
@@ -5511,7 +5514,7 @@
       "timestamp": "",
       "source": "import subprocess\nsubprocess.call([\"x\", \"a\", \"b\"])",
       "labels": {
-        "call_argument:": [[2,2]],
+        "argument:": [[2,2]],
         "flat_style": [[1,2]],
         "imperative_style": [[1,2]],
         "import:subprocess": [[1,1]],
@@ -5548,8 +5551,8 @@
       "timestamp": "",
       "source": "for k in sorted(mymap):\n    print(mymap[k])",
       "labels": {
-        "call_argument:": [[2,2]],
-        "call_argument:mymap": [[1,1]],
+        "argument:": [[2,2]],
+        "argument:mymap": [[1,1]],
         "external_free_call:print": [[2,2]],
         "external_free_call:sorted": [[1,1]],
         "for:k": [[1,2]],
@@ -5589,9 +5592,9 @@
       "timestamp": "",
       "source": "for x, k in sorted((x, k) for k, x in mymap.items()):\n    print(k, x)",
       "labels": {
-        "call_argument:": [[1,1]],
-        "call_argument:k": [[2,2]],
-        "call_argument:x": [[2,2]],
+        "argument:": [[1,1]],
+        "argument:k": [[2,2]],
+        "argument:x": [[2,2]],
         "composition": [[1,1]],
         "comprehension:Generator": [[1,1]],
         "comprehension_for_count:1": [[1,1]],
@@ -5719,12 +5722,12 @@
       "timestamp": "",
       "source": "s2 = s1.replace(w, \"\")",
       "labels": {
+        "argument:": [[1,1]],
+        "argument:w": [[1,1]],
         "assignment:replace": [[1,1]],
         "assignment_lhs_identifier:s2": [[1,1]],
         "assignment_rhs_atom:s1": [[1,1]],
         "assignment_rhs_atom:w": [[1,1]],
-        "call_argument:": [[1,1]],
-        "call_argument:w": [[1,1]],
         "empty_literal:Str": [[1,1]],
         "flat_style": [[1,1]],
         "global_scope:s2": [[1,1]],
@@ -5759,10 +5762,10 @@
       "timestamp": "",
       "source": "n = len(x)",
       "labels": {
+        "argument:x": [[1,1]],
         "assignment:len": [[1,1]],
         "assignment_lhs_identifier:n": [[1,1]],
         "assignment_rhs_atom:x": [[1,1]],
-        "call_argument:x": [[1,1]],
         "external_free_call:len": [[1,1]],
         "flat_style": [[1,1]],
         "free_call:len": [[1,1]],
@@ -5791,10 +5794,10 @@
       "timestamp": "",
       "source": "y = set(x)",
       "labels": {
+        "argument:x": [[1,1]],
         "assignment:set": [[1,1]],
         "assignment_lhs_identifier:y": [[1,1]],
         "assignment_rhs_atom:x": [[1,1]],
-        "call_argument:x": [[1,1]],
         "external_free_call:set": [[1,1]],
         "flat_style": [[1,1]],
         "free_call:set": [[1,1]],
@@ -5824,7 +5827,7 @@
       "timestamp": "",
       "source": "set(x)",
       "labels": {
-        "call_argument:x": [[1,1]],
+        "argument:x": [[1,1]],
         "external_free_call:set": [[1,1]],
         "flat_style": [[1,1]],
         "free_call:set": [[1,1]],
@@ -5850,11 +5853,11 @@
       "timestamp": "",
       "source": "x = list(set(x))",
       "labels": {
+        "argument:": [[1,1]],
+        "argument:x": [[1,1]],
         "assignment:list": [[1,1]],
         "assignment_lhs_identifier:x": [[1,1]],
         "assignment_rhs_atom:x": [[1,1]],
-        "call_argument:": [[1,1]],
-        "call_argument:x": [[1,1]],
         "composition": [[1,1]],
         "external_free_call:list": [[1,1]],
         "external_free_call:set": [[1,1]],
@@ -5894,13 +5897,13 @@
         "accumulate_elements:append": [[4,7]],
         "accumulate_some_elements:add": [[4,7]],
         "accumulate_some_elements:append": [[4,7]],
+        "argument:elements_unique": [[8,8]],
+        "argument:i": [[6,6],[7,7]],
         "assignment": [[1,1],[3,3]],
         "assignment:set": [[2,2]],
         "assignment_lhs_identifier:elements": [[1,1]],
         "assignment_lhs_identifier:elements_unique": [[3,3]],
         "assignment_lhs_identifier:unique_set": [[2,2]],
-        "call_argument:elements_unique": [[8,8]],
-        "call_argument:i": [[6,6],[7,7]],
         "comparison_operator:NotIn": [[5,5]],
         "empty_literal:List": [[3,3]],
         "external_free_call:print": [[8,8]],
@@ -5993,9 +5996,9 @@
       "timestamp": "",
       "source": "input_var = int(raw_input(\"Input Prompting String: \"))",
       "labels": {
+        "argument:": [[1,1],[1,1]],
         "assignment:int": [[1,1]],
         "assignment_lhs_identifier:input_var": [[1,1]],
-        "call_argument:": [[1,1],[1,1]],
         "composition": [[1,1]],
         "external_free_call:int": [[1,1]],
         "external_free_call:raw_input": [[1,1]],
@@ -6032,6 +6035,9 @@
       "timestamp": "",
       "source": "import socket\nUDP_IP = \"127.0.0.1\"\nsock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)\nsock.bind((UDP_IP, p))\nwhile True:\n    data, addr = sock.recvfrom(1024)\n    print(\"received message:\", data)",
       "labels": {
+        "argument:": [[3,3],[3,3],[4,4],[7,7]],
+        "argument:1024": [[6,6]],
+        "argument:data": [[7,7]],
         "assignment": [[2,2]],
         "assignment:recvfrom": [[6,6]],
         "assignment:socket": [[3,3]],
@@ -6042,9 +6048,6 @@
         "assignment_rhs_atom:1024": [[6,6]],
         "assignment_rhs_atom:sock": [[6,6]],
         "assignment_rhs_atom:socket": [[3,3],[3,3],[3,3]],
-        "call_argument:": [[3,3],[3,3],[4,4],[7,7]],
-        "call_argument:1024": [[6,6]],
-        "call_argument:data": [[7,7]],
         "external_free_call:print": [[7,7]],
         "free_call:print": [[7,7]],
         "free_call_without_result:print": [[7,7]],
@@ -6117,13 +6120,13 @@
       "timestamp": "",
       "source": "class Suit:\n    SPADES, HEARTS, DIAMONDS, CLUBS = range(4)",
       "labels": {
+        "argument:4": [[2,2]],
         "assignment:range": [[2,2]],
         "assignment_lhs_identifier:CLUBS": [[2,2]],
         "assignment_lhs_identifier:DIAMONDS": [[2,2]],
         "assignment_lhs_identifier:HEARTS": [[2,2]],
         "assignment_lhs_identifier:SPADES": [[2,2]],
         "assignment_rhs_atom:4": [[2,2]],
-        "call_argument:4": [[2,2]],
         "external_free_call:range": [[2,2]],
         "free_call:range": [[2,2]],
         "global_scope:CLUBS": [[1,2]],
@@ -6242,14 +6245,14 @@
       "timestamp": "",
       "source": "import bisect\ndef binarySearch(a, x):\n    i = bisect.bisect_left(a, x)\n    return i if i != len(a) and a[i] == x else -1",
       "labels": {
+        "argument:a": [[3,3],[4,4]],
+        "argument:x": [[3,3]],
         "assignment:bisect_left": [[3,3]],
         "assignment_lhs_identifier:i": [[3,3]],
         "assignment_rhs_atom:a": [[3,3]],
         "assignment_rhs_atom:bisect": [[3,3]],
         "assignment_rhs_atom:x": [[3,3]],
         "boolean_operator:And": [[4,4]],
-        "call_argument:a": [[3,3],[4,4]],
-        "call_argument:x": [[3,3]],
         "comparison_operator:Eq": [[4,4]],
         "comparison_operator:NotEq": [[4,4]],
         "external_free_call:len": [[4,4]],
@@ -6317,12 +6320,12 @@
       "timestamp": "",
       "source": "import time\nt1 = time.perf_counter()\nfoo()\nt2 = time.perf_counter()\nprint(\"Seconds:\", t2 - t1)",
       "labels": {
+        "argument:": [[5,5],[5,5]],
         "assignment:perf_counter": [[2,2],[4,4]],
         "assignment_lhs_identifier:t1": [[2,2]],
         "assignment_lhs_identifier:t2": [[4,4]],
         "assignment_rhs_atom:time": [[2,2],[4,4]],
         "binary_operator:Sub": [[5,5]],
-        "call_argument:": [[5,5],[5,5]],
         "external_free_call:foo": [[3,3]],
         "external_free_call:print": [[5,5]],
         "flat_style": [[1,5]],
@@ -6409,10 +6412,10 @@
       "timestamp": "",
       "source": "import imp\nfoo = imp.load_module(\"foobody\", \"foobody.txt\").foo",
       "labels": {
+        "argument:": [[2,2],[2,2]],
         "assignment": [[2,2]],
         "assignment_lhs_identifier:foo": [[2,2]],
         "assignment_rhs_atom:imp": [[2,2]],
-        "call_argument:": [[2,2],[2,2]],
         "flat_style": [[1,2]],
         "global_scope:foo": [[1,2]],
         "imperative_style": [[1,2]],
@@ -6452,6 +6455,8 @@
       "timestamp": "",
       "source": "def BFS(f, root):\n    Q = [root]\n    while Q:\n        n = Q.pop(0)\n        f(n)\n        for child in n:\n            if not n.discovered:\n                n.discovered = True\n                Q.append(n)",
       "labels": {
+        "argument:0": [[4,4]],
+        "argument:n": [[5,5],[9,9]],
         "assignment": [[2,2]],
         "assignment:True": [[8,8]],
         "assignment:pop": [[4,4]],
@@ -6461,8 +6466,6 @@
         "assignment_rhs_atom:Q": [[4,4]],
         "assignment_rhs_atom:True": [[8,8]],
         "assignment_rhs_atom:root": [[2,2]],
-        "call_argument:0": [[4,4]],
-        "call_argument:n": [[5,5],[9,9]],
         "external_free_call:f": [[5,5]],
         "for:child": [[6,9]],
         "for_each:child": [[6,9]],
@@ -6558,6 +6561,8 @@
       "timestamp": "",
       "source": "from collections import deque\ndef breadth_first(start, f):\n    seen = set()\n    q = deque([start])\n    while q:\n        vertex = q.popleft()\n        f(vertex)\n        seen.add(vertex)\n        q.extend(v for v in vertex.adjacent if v not in seen)",
       "labels": {
+        "argument:": [[4,4],[9,9]],
+        "argument:vertex": [[7,7],[8,8]],
         "assignment:deque": [[4,4]],
         "assignment:popleft": [[6,6]],
         "assignment:set": [[3,3]],
@@ -6566,8 +6571,6 @@
         "assignment_lhs_identifier:vertex": [[6,6]],
         "assignment_rhs_atom:q": [[6,6]],
         "assignment_rhs_atom:start": [[4,4]],
-        "call_argument:": [[4,4],[9,9]],
-        "call_argument:vertex": [[7,7],[8,8]],
         "comparison_operator:NotIn": [[9,9]],
         "comprehension:Generator": [[9,9]],
         "comprehension_for_count:1": [[9,9]],
@@ -6669,6 +6672,8 @@
       "timestamp": "",
       "source": "def depth_first(start, f):\n    seen = set()\n    stack = [start]\n    while stack:\n        vertex = stack.pop()\n        f(vertex)\n        seen.add(vertex)\n        stack.extend(v for v in vertex.adjacent if v not in seen)",
       "labels": {
+        "argument:": [[8,8]],
+        "argument:vertex": [[6,6],[7,7]],
         "assignment": [[3,3]],
         "assignment:pop": [[5,5]],
         "assignment:set": [[2,2]],
@@ -6677,8 +6682,6 @@
         "assignment_lhs_identifier:vertex": [[5,5]],
         "assignment_rhs_atom:stack": [[5,5]],
         "assignment_rhs_atom:start": [[3,3]],
-        "call_argument:": [[8,8]],
-        "call_argument:vertex": [[6,6],[7,7]],
         "comparison_operator:NotIn": [[8,8]],
         "comprehension:Generator": [[8,8]],
         "comprehension_for_count:1": [[8,8]],
@@ -6840,16 +6843,16 @@
       "timestamp": "",
       "source": "import timeit\nduration = timeit.timeit(\"f()\", setup=\"from __main__ import f\")",
       "labels": {
+        "argument:": [[2,2],[2,2]],
         "assignment:timeit": [[2,2]],
         "assignment_lhs_identifier:duration": [[2,2]],
         "assignment_rhs_atom:timeit": [[2,2]],
-        "call_argument:": [[2,2],[2,2]],
-        "call_keyword_argument:setup": [[2,2]],
         "flat_style": [[1,2]],
         "global_scope:duration": [[1,2]],
         "imperative_style": [[1,2]],
         "import:timeit": [[1,1]],
         "import_module:timeit": [[1,1]],
+        "keyword_argument:setup": [[2,2]],
         "literal:Str": [[2,2],[2,2]],
         "loaded_variable:timeit": [[2,2]],
         "member_call_method:timeit": [[2,2]],
@@ -6951,7 +6954,7 @@
       "timestamp": "",
       "source": "items.remove(x)",
       "labels": {
-        "call_argument:x": [[1,1]],
+        "argument:x": [[1,1]],
         "flat_style": [[1,1]],
         "imperative_style": [[1,1]],
         "loaded_variable:items": [[1,1]],
@@ -7124,8 +7127,8 @@
       "timestamp": "",
       "source": "m.pop(k, None)",
       "labels": {
-        "call_argument:None": [[1,1]],
-        "call_argument:k": [[1,1]],
+        "argument:None": [[1,1]],
+        "argument:k": [[1,1]],
         "flat_style": [[1,1]],
         "imperative_style": [[1,1]],
         "literal:None": [[1,1]],
@@ -7162,8 +7165,8 @@
       "source": "for x in items1 + items2:\n    print(x)",
       "labels": {
         "addition_operator": [[1,1]],
+        "argument:x": [[2,2]],
         "binary_operator:Add": [[1,1]],
-        "call_argument:x": [[2,2]],
         "external_free_call:print": [[2,2]],
         "for:x": [[1,2]],
         "free_call:print": [[2,2]],
@@ -7200,10 +7203,10 @@
       "timestamp": "",
       "source": "s = hex(x)",
       "labels": {
+        "argument:x": [[1,1]],
         "assignment:hex": [[1,1]],
         "assignment_lhs_identifier:s": [[1,1]],
         "assignment_rhs_atom:x": [[1,1]],
-        "call_argument:x": [[1,1]],
         "external_free_call:hex": [[1,1]],
         "flat_style": [[1,1]],
         "free_call:hex": [[1,1]],
@@ -7232,9 +7235,9 @@
       "timestamp": "",
       "source": "for pair in zip(item1, item2):\n    print(pair)",
       "labels": {
-        "call_argument:item1": [[1,1]],
-        "call_argument:item2": [[1,1]],
-        "call_argument:pair": [[2,2]],
+        "argument:item1": [[1,1]],
+        "argument:item2": [[1,1]],
+        "argument:pair": [[2,2]],
         "external_free_call:print": [[2,2]],
         "external_free_call:zip": [[1,1]],
         "for:pair": [[1,2]],
@@ -7272,11 +7275,11 @@
       "timestamp": "",
       "source": "import os\nb = os.path.exists(fp)",
       "labels": {
+        "argument:fp": [[2,2]],
         "assignment:exists": [[2,2]],
         "assignment_lhs_identifier:b": [[2,2]],
         "assignment_rhs_atom:fp": [[2,2]],
         "assignment_rhs_atom:os": [[2,2]],
-        "call_argument:fp": [[2,2]],
         "flat_style": [[1,2]],
         "global_scope:b": [[1,2]],
         "imperative_style": [[1,2]],
@@ -7311,10 +7314,10 @@
       "timestamp": "",
       "source": "from pathlib import Path\nb = Path(fp).exists()",
       "labels": {
+        "argument:fp": [[2,2]],
         "assignment:exists": [[2,2]],
         "assignment_lhs_identifier:b": [[2,2]],
         "assignment_rhs_atom:fp": [[2,2]],
-        "call_argument:fp": [[2,2]],
         "external_free_call:Path": [[2,2]],
         "flat_style": [[1,2]],
         "free_call:Path": [[2,2]],
@@ -7351,14 +7354,11 @@
       "timestamp": "",
       "source": "import sys, logging\nlogging.basicConfig(\n    stream=sys.stdout, level=logging.DEBUG, format=\"%(asctime)-15s %(message)s\"\n)\nlogger = logging.getLogger(\"NAME OF LOGGER\")\nlogger.info(msg)",
       "labels": {
+        "argument:": [[3,3],[3,3],[3,3],[5,5]],
+        "argument:msg": [[6,6]],
         "assignment:getLogger": [[5,5]],
         "assignment_lhs_identifier:logger": [[5,5]],
         "assignment_rhs_atom:logging": [[5,5]],
-        "call_argument:": [[3,3],[3,3],[3,3],[5,5]],
-        "call_argument:msg": [[6,6]],
-        "call_keyword_argument:format": [[3,3]],
-        "call_keyword_argument:level": [[3,3]],
-        "call_keyword_argument:stream": [[3,3]],
         "flat_style": [[1,6]],
         "global_scope:logger": [[1,6]],
         "imperative_style": [[1,6]],
@@ -7366,6 +7366,9 @@
         "import:sys": [[1,1]],
         "import_module:logging": [[1,1]],
         "import_module:sys": [[1,1]],
+        "keyword_argument:format": [[3,3]],
+        "keyword_argument:level": [[3,3]],
+        "keyword_argument:stream": [[3,3]],
         "literal:Str": [[3,3],[5,5]],
         "loaded_variable:logger": [[6,6]],
         "loaded_variable:logging": [[2,2],[3,3],[5,5]],
@@ -7408,14 +7411,14 @@
       "timestamp": "",
       "source": "import locale\ns = u\"545,2222\"\nlocale.setlocale(locale.LC_ALL, \"de\")\nf = locale.atof(s)",
       "labels": {
+        "argument:": [[3,3],[3,3]],
+        "argument:s": [[4,4]],
         "assignment": [[2,2]],
         "assignment:atof": [[4,4]],
         "assignment_lhs_identifier:f": [[4,4]],
         "assignment_lhs_identifier:s": [[2,2]],
         "assignment_rhs_atom:locale": [[4,4]],
         "assignment_rhs_atom:s": [[4,4]],
-        "call_argument:": [[3,3],[3,3]],
-        "call_argument:s": [[4,4]],
         "flat_style": [[1,4]],
         "global_scope:f": [[1,4]],
         "global_scope:s": [[1,4]],
@@ -7458,10 +7461,10 @@
       "timestamp": "",
       "source": "f = float(s)",
       "labels": {
+        "argument:s": [[1,1]],
         "assignment:float": [[1,1]],
         "assignment_lhs_identifier:f": [[1,1]],
         "assignment_rhs_atom:s": [[1,1]],
-        "call_argument:s": [[1,1]],
         "external_free_call:float": [[1,1]],
         "flat_style": [[1,1]],
         "free_call:float": [[1,1]],
@@ -7491,7 +7494,7 @@
       "timestamp": "",
       "source": "float(\"1.3\")",
       "labels": {
-        "call_argument:": [[1,1]],
+        "argument:": [[1,1]],
         "external_free_call:float": [[1,1]],
         "flat_style": [[1,1]],
         "free_call:float": [[1,1]],
@@ -7519,12 +7522,12 @@
       "timestamp": "",
       "source": "import re\nt = re.sub(\"[^\\u0000-\\u007f]\", \"\", s)",
       "labels": {
+        "argument:": [[2,2],[2,2]],
+        "argument:s": [[2,2]],
         "assignment:sub": [[2,2]],
         "assignment_lhs_identifier:t": [[2,2]],
         "assignment_rhs_atom:re": [[2,2]],
         "assignment_rhs_atom:s": [[2,2]],
-        "call_argument:": [[2,2],[2,2]],
-        "call_argument:s": [[2,2]],
         "empty_literal:Str": [[2,2]],
         "flat_style": [[1,2]],
         "global_scope:t": [[1,2]],
@@ -7564,8 +7567,8 @@
       "timestamp": "",
       "source": "list(map(int, input().split()))",
       "labels": {
-        "call_argument:": [[1,1],[1,1]],
-        "call_argument:int": [[1,1]],
+        "argument:": [[1,1],[1,1]],
+        "argument:int": [[1,1]],
         "composition": [[1,1],[1,1]],
         "external_free_call:input": [[1,1]],
         "external_free_call:list": [[1,1]],
@@ -7606,10 +7609,10 @@
       "timestamp": "",
       "source": "p = p.rstrip(\"/\")",
       "labels": {
+        "argument:": [[1,1]],
         "assignment:rstrip": [[1,1]],
         "assignment_lhs_identifier:p": [[1,1]],
         "assignment_rhs_atom:p": [[1,1]],
-        "call_argument:": [[1,1]],
         "flat_style": [[1,1]],
         "global_scope:p": [[1,1]],
         "imperative_style": [[1,1]],
@@ -7642,11 +7645,11 @@
       "timestamp": "",
       "source": "import os\nif p.endswith(os.sep):\n    p = p[:-1]",
       "labels": {
+        "argument:": [[2,2]],
         "assignment": [[3,3]],
         "assignment_lhs_identifier:p": [[3,3]],
         "assignment_rhs_atom:-1": [[3,3]],
         "assignment_rhs_atom:p": [[3,3]],
-        "call_argument:": [[2,2]],
         "global_scope:p": [[1,3]],
         "if": [[2,3]],
         "if_test_atom:os": [[2,2]],
@@ -7725,12 +7728,12 @@
       "timestamp": "",
       "source": "t = \"{}{}\".format(s, i)",
       "labels": {
+        "argument:i": [[1,1]],
+        "argument:s": [[1,1]],
         "assignment:format": [[1,1]],
         "assignment_lhs_identifier:t": [[1,1]],
         "assignment_rhs_atom:i": [[1,1]],
         "assignment_rhs_atom:s": [[1,1]],
-        "call_argument:i": [[1,1]],
-        "call_argument:s": [[1,1]],
         "flat_style": [[1,1]],
         "global_scope:t": [[1,1]],
         "imperative_style": [[1,1]],
@@ -7765,6 +7768,11 @@
       "source": "r1, g1, b1 = [int(c1[p : p + 2], 16) for p in range(1, 6, 2)]\nr2, g2, b2 = [int(c2[p : p + 2], 16) for p in range(1, 6, 2)]\nc = \"#{:02x}{:02x}{:02x}\".format((r1 + r2) // 2, (g1 + g2) // 2, (b1 + b2) // 2)",
       "labels": {
         "addition_operator": [[1,1],[2,2],[3,3],[3,3],[3,3]],
+        "argument:": [[1,1],[2,2],[3,3],[3,3],[3,3]],
+        "argument:1": [[1,1],[2,2]],
+        "argument:16": [[1,1],[2,2]],
+        "argument:2": [[1,1],[2,2]],
+        "argument:6": [[1,1],[2,2]],
         "assignment": [[1,1],[2,2]],
         "assignment:format": [[3,3]],
         "assignment_lhs_identifier:b1": [[1,1]],
@@ -7789,11 +7797,6 @@
         "assignment_rhs_atom:r2": [[3,3]],
         "binary_operator:Add": [[1,1],[2,2],[3,3],[3,3],[3,3]],
         "binary_operator:FloorDiv": [[3,3],[3,3],[3,3]],
-        "call_argument:": [[1,1],[2,2],[3,3],[3,3],[3,3]],
-        "call_argument:1": [[1,1],[2,2]],
-        "call_argument:16": [[1,1],[2,2]],
-        "call_argument:2": [[1,1],[2,2]],
-        "call_argument:6": [[1,1],[2,2]],
         "comprehension:List": [[1,1],[2,2]],
         "comprehension_for_count:1": [[1,1],[2,2]],
         "external_free_call:int": [[1,1],[2,2]],
@@ -7885,6 +7888,15 @@
       "source": "import numpy\nclass RGB(numpy.ndarray):\n    @classmethod\n    def from_str(cls, rgbstr):\n        return numpy.array(\n            [int(rgbstr[i : i + 2], 16) for i in range(1, len(rgbstr), 2)]\n        ).view(cls)\n    def __str__(self):\n        self = self.astype(numpy.uint8)\n        return \"#\" + \"\".join(format(n, \"x\") for n in self)\nc1 = RGB.from_str(\"#a1b1c1\")\nprint(c1)\nc2 = RGB.from_str(\"#1A1B1C\")\nprint(c2)\nprint((c1 + c2) / 2)",
       "labels": {
         "addition_operator": [[6,6],[15,15]],
+        "argument:": [[6,6],[6,6],[6,6],[9,9],[10,10],[10,10],[11,11],[13,13],[15,15]],
+        "argument:1": [[6,6]],
+        "argument:16": [[6,6]],
+        "argument:2": [[6,6]],
+        "argument:c1": [[12,12]],
+        "argument:c2": [[14,14]],
+        "argument:cls": [[7,7]],
+        "argument:n": [[10,10]],
+        "argument:rgbstr": [[6,6]],
         "assignment:astype": [[9,9]],
         "assignment:from_str": [[11,11],[13,13]],
         "assignment_lhs_identifier:c1": [[11,11]],
@@ -7895,15 +7907,6 @@
         "assignment_rhs_atom:self": [[9,9]],
         "binary_operator:Add": [[6,6],[10,10],[15,15]],
         "binary_operator:Div": [[15,15]],
-        "call_argument:": [[6,6],[6,6],[6,6],[9,9],[10,10],[10,10],[11,11],[13,13],[15,15]],
-        "call_argument:1": [[6,6]],
-        "call_argument:16": [[6,6]],
-        "call_argument:2": [[6,6]],
-        "call_argument:c1": [[12,12]],
-        "call_argument:c2": [[14,14]],
-        "call_argument:cls": [[7,7]],
-        "call_argument:n": [[10,10]],
-        "call_argument:rgbstr": [[6,6]],
         "class_method:from_str": [[3,7]],
         "composition": [[5,5],[6,6],[10,10]],
         "comprehension:Generator": [[10,10]],
@@ -8053,11 +8056,11 @@
       "timestamp": "",
       "source": "import pathlib\npath = pathlib.Path(_filepath)\npath.unlink()",
       "labels": {
+        "argument:_filepath": [[2,2]],
         "assignment:Path": [[2,2]],
         "assignment_lhs_identifier:path": [[2,2]],
         "assignment_rhs_atom:_filepath": [[2,2]],
         "assignment_rhs_atom:pathlib": [[2,2]],
-        "call_argument:_filepath": [[2,2]],
         "flat_style": [[1,3]],
         "global_scope:path": [[1,3]],
         "imperative_style": [[1,3]],
@@ -8094,11 +8097,11 @@
       "timestamp": "",
       "source": "s = format(\"03d\", i)",
       "labels": {
+        "argument:": [[1,1]],
+        "argument:i": [[1,1]],
         "assignment:format": [[1,1]],
         "assignment_lhs_identifier:s": [[1,1]],
         "assignment_rhs_atom:i": [[1,1]],
-        "call_argument:": [[1,1]],
-        "call_argument:i": [[1,1]],
         "external_free_call:format": [[1,1]],
         "flat_style": [[1,1]],
         "free_call:format": [[1,1]],
@@ -8159,13 +8162,13 @@
       "timestamp": "",
       "source": "import random\ny = random.sample(x, k)",
       "labels": {
+        "argument:k": [[2,2]],
+        "argument:x": [[2,2]],
         "assignment:sample": [[2,2]],
         "assignment_lhs_identifier:y": [[2,2]],
         "assignment_rhs_atom:k": [[2,2]],
         "assignment_rhs_atom:random": [[2,2]],
         "assignment_rhs_atom:x": [[2,2]],
-        "call_argument:k": [[2,2]],
-        "call_argument:x": [[2,2]],
         "flat_style": [[1,2]],
         "global_scope:y": [[1,2]],
         "imperative_style": [[1,2]],
@@ -8409,8 +8412,8 @@
       "timestamp": "",
       "source": "for x in zip(list[::2], list[1::2]):\n    print(x)",
       "labels": {
-        "call_argument:": [[1,1],[1,1]],
-        "call_argument:x": [[2,2]],
+        "argument:": [[1,1],[1,1]],
+        "argument:x": [[2,2]],
         "external_free_call:print": [[2,2]],
         "external_free_call:zip": [[1,1]],
         "for:x": [[1,2]],
@@ -8460,15 +8463,15 @@
       "timestamp": "",
       "source": "from itertools import tee\ndef pairwise(iterable):\n    a, b = tee(iterable)\n    next(b, None)\n    return zip(a, b)\nfor a, b in pairwise(list):\n    print(a, b)",
       "labels": {
+        "argument:None": [[4,4]],
+        "argument:a": [[5,5],[7,7]],
+        "argument:b": [[4,4],[5,5],[7,7]],
+        "argument:iterable": [[3,3]],
+        "argument:list": [[6,6]],
         "assignment:tee": [[3,3]],
         "assignment_lhs_identifier:a": [[3,3]],
         "assignment_lhs_identifier:b": [[3,3]],
         "assignment_rhs_atom:iterable": [[3,3]],
-        "call_argument:None": [[4,4]],
-        "call_argument:a": [[5,5],[7,7]],
-        "call_argument:b": [[4,4],[5,5],[7,7]],
-        "call_argument:iterable": [[3,3]],
-        "call_argument:list": [[6,6]],
         "external_free_call:next": [[4,4]],
         "external_free_call:print": [[7,7]],
         "external_free_call:tee": [[3,3]],
@@ -8555,7 +8558,7 @@
       "timestamp": "",
       "source": "import webbrowser\nwebbrowser.open(s)",
       "labels": {
-        "call_argument:s": [[2,2]],
+        "argument:s": [[2,2]],
         "flat_style": [[1,2]],
         "imperative_style": [[1,2]],
         "import:webbrowser": [[1,1]],
@@ -8656,12 +8659,12 @@
       "timestamp": "",
       "source": "t = s[s.startswith(p) and len(p) :]",
       "labels": {
+        "argument:p": [[1,1],[1,1]],
         "assignment": [[1,1]],
         "assignment_lhs_identifier:t": [[1,1]],
         "assignment_rhs_atom:p": [[1,1],[1,1]],
         "assignment_rhs_atom:s": [[1,1],[1,1]],
         "boolean_operator:And": [[1,1]],
-        "call_argument:p": [[1,1],[1,1]],
         "external_free_call:len": [[1,1]],
         "flat_style": [[1,1]],
         "free_call:len": [[1,1]],
@@ -8703,11 +8706,11 @@
       "timestamp": "",
       "source": "t = s.lstrip(p)",
       "labels": {
+        "argument:p": [[1,1]],
         "assignment:lstrip": [[1,1]],
         "assignment_lhs_identifier:t": [[1,1]],
         "assignment_rhs_atom:p": [[1,1]],
         "assignment_rhs_atom:s": [[1,1]],
-        "call_argument:p": [[1,1]],
         "flat_style": [[1,1]],
         "global_scope:t": [[1,1]],
         "imperative_style": [[1,1]],
@@ -8738,14 +8741,14 @@
       "timestamp": "",
       "source": "t = s.rsplit(w, 1)[0]",
       "labels": {
+        "argument:1": [[1,1]],
+        "argument:w": [[1,1]],
         "assignment": [[1,1]],
         "assignment_lhs_identifier:t": [[1,1]],
         "assignment_rhs_atom:0": [[1,1]],
         "assignment_rhs_atom:1": [[1,1]],
         "assignment_rhs_atom:s": [[1,1]],
         "assignment_rhs_atom:w": [[1,1]],
-        "call_argument:1": [[1,1]],
-        "call_argument:w": [[1,1]],
         "flat_style": [[1,1]],
         "global_scope:t": [[1,1]],
         "imperative_style": [[1,1]],
@@ -8786,11 +8789,11 @@
       "timestamp": "",
       "source": "t = s.rstrip(w)",
       "labels": {
+        "argument:w": [[1,1]],
         "assignment:rstrip": [[1,1]],
         "assignment_lhs_identifier:t": [[1,1]],
         "assignment_rhs_atom:s": [[1,1]],
         "assignment_rhs_atom:w": [[1,1]],
-        "call_argument:w": [[1,1]],
         "flat_style": [[1,1]],
         "global_scope:t": [[1,1]],
         "imperative_style": [[1,1]],
@@ -8821,10 +8824,10 @@
       "timestamp": "",
       "source": "n = len(s)",
       "labels": {
+        "argument:s": [[1,1]],
         "assignment:len": [[1,1]],
         "assignment_lhs_identifier:n": [[1,1]],
         "assignment_rhs_atom:s": [[1,1]],
-        "call_argument:s": [[1,1]],
         "external_free_call:len": [[1,1]],
         "flat_style": [[1,1]],
         "free_call:len": [[1,1]],
@@ -8853,10 +8856,10 @@
       "timestamp": "",
       "source": "n = len(mymap)",
       "labels": {
+        "argument:mymap": [[1,1]],
         "assignment:len": [[1,1]],
         "assignment_lhs_identifier:n": [[1,1]],
         "assignment_rhs_atom:mymap": [[1,1]],
-        "call_argument:mymap": [[1,1]],
         "external_free_call:len": [[1,1]],
         "flat_style": [[1,1]],
         "free_call:len": [[1,1]],
@@ -8885,7 +8888,7 @@
       "timestamp": "",
       "source": "s.append(x)",
       "labels": {
-        "call_argument:x": [[1,1]],
+        "argument:x": [[1,1]],
         "flat_style": [[1,1]],
         "imperative_style": [[1,1]],
         "loaded_variable:s": [[1,1]],
@@ -8946,7 +8949,7 @@
       "timestamp": "",
       "source": "print(\"f'{1000:,}'\")",
       "labels": {
-        "call_argument:": [[1,1]],
+        "argument:": [[1,1]],
         "external_free_call:print": [[1,1]],
         "flat_style": [[1,1]],
         "free_call:print": [[1,1]],
@@ -8973,7 +8976,7 @@
       "timestamp": "",
       "source": "print(\"format(1000, ',')\")",
       "labels": {
-        "call_argument:": [[1,1]],
+        "argument:": [[1,1]],
         "external_free_call:print": [[1,1]],
         "flat_style": [[1,1]],
         "free_call:print": [[1,1]],
@@ -9000,7 +9003,7 @@
       "timestamp": "",
       "source": "print(\"'{:,}'.format(1000)\")",
       "labels": {
-        "call_argument:": [[1,1]],
+        "argument:": [[1,1]],
         "external_free_call:print": [[1,1]],
         "flat_style": [[1,1]],
         "free_call:print": [[1,1]],
@@ -9027,6 +9030,10 @@
       "timestamp": "",
       "source": "from urllib import request, parse\ndata = parse.urlencode(\"<your data dict>\").encode()\nreq = request.Request(u, data=data, method=\"POST\")\nresp = request.urlopen(req)",
       "labels": {
+        "argument:": [[2,2],[3,3]],
+        "argument:data": [[3,3]],
+        "argument:req": [[4,4]],
+        "argument:u": [[3,3]],
         "assignment:Request": [[3,3]],
         "assignment:encode": [[2,2]],
         "assignment:urlopen": [[4,4]],
@@ -9038,12 +9045,6 @@
         "assignment_rhs_atom:req": [[4,4]],
         "assignment_rhs_atom:request": [[3,3],[4,4]],
         "assignment_rhs_atom:u": [[3,3]],
-        "call_argument:": [[2,2],[3,3]],
-        "call_argument:data": [[3,3]],
-        "call_argument:req": [[4,4]],
-        "call_argument:u": [[3,3]],
-        "call_keyword_argument:data": [[3,3]],
-        "call_keyword_argument:method": [[3,3]],
         "flat_style": [[1,4]],
         "global_scope:data": [[1,4]],
         "global_scope:req": [[1,4]],
@@ -9054,6 +9055,8 @@
         "import_module:urllib": [[1,1]],
         "import_name:parse": [[1,1]],
         "import_name:request": [[1,1]],
+        "keyword_argument:data": [[3,3]],
+        "keyword_argument:method": [[3,3]],
         "literal:Str": [[2,2],[3,3]],
         "loaded_variable:data": [[3,3]],
         "loaded_variable:parse": [[2,2]],
@@ -9133,11 +9136,11 @@
       "timestamp": "",
       "source": "a = bytearray.fromhex(s)",
       "labels": {
+        "argument:s": [[1,1]],
         "assignment:fromhex": [[1,1]],
         "assignment_lhs_identifier:a": [[1,1]],
         "assignment_rhs_atom:bytearray": [[1,1]],
         "assignment_rhs_atom:s": [[1,1]],
-        "call_argument:s": [[1,1]],
         "flat_style": [[1,1]],
         "global_scope:a": [[1,1]],
         "imperative_style": [[1,1]],
@@ -9168,6 +9171,8 @@
       "timestamp": "",
       "source": "import os\nextensions = [\".jpg\", \".jpeg\", \".png\"]\nL = [f for f in os.listdir(D) if os.path.splitext(f)[1] in extensions]",
       "labels": {
+        "argument:D": [[3,3]],
+        "argument:f": [[3,3]],
         "assignment": [[2,2],[3,3]],
         "assignment_lhs_identifier:L": [[3,3]],
         "assignment_lhs_identifier:extensions": [[2,2]],
@@ -9176,8 +9181,6 @@
         "assignment_rhs_atom:extensions": [[3,3]],
         "assignment_rhs_atom:f": [[3,3],[3,3],[3,3]],
         "assignment_rhs_atom:os": [[3,3],[3,3]],
-        "call_argument:D": [[3,3]],
-        "call_argument:f": [[3,3]],
         "comparison_operator:In": [[3,3]],
         "comprehension:List": [[3,3]],
         "comprehension_for_count:1": [[3,3]],
@@ -9241,6 +9244,10 @@
       "timestamp": "",
       "source": "import re\nimport os\nfiltered_files = [\n    \"{}/{}\".format(dirpath, filename)\n    for dirpath, _, filenames in os.walk(D)\n    for filename in filenames\n    if re.match(r\"^.*\\.(?:jpg|jpeg|png)$\", filename)\n]",
       "labels": {
+        "argument:": [[7,7]],
+        "argument:D": [[5,5]],
+        "argument:dirpath": [[4,4]],
+        "argument:filename": [[4,4],[7,7]],
         "assignment": [[3,3]],
         "assignment_lhs_identifier:filtered_files": [[3,3]],
         "assignment_rhs_atom:D": [[5,5]],
@@ -9250,10 +9257,6 @@
         "assignment_rhs_atom:filenames": [[5,5],[6,6]],
         "assignment_rhs_atom:os": [[5,5]],
         "assignment_rhs_atom:re": [[7,7]],
-        "call_argument:": [[7,7]],
-        "call_argument:D": [[5,5]],
-        "call_argument:dirpath": [[4,4]],
-        "call_argument:filename": [[4,4],[7,7]],
         "comprehension:List": [[4,4]],
         "comprehension_for_count:2": [[4,4]],
         "filtered_comprehension": [[7,7]],
@@ -9321,8 +9324,8 @@
       "timestamp": "",
       "source": "import glob\nimport itertools\nlist(itertools.chain(*(glob.glob(\"*/**.%s\" % ext) for ext in [\"jpg\", \"jpeg\", \"png\"])))",
       "labels": {
+        "argument:": [[3,3],[3,3],[3,3]],
         "binary_operator:Mod": [[3,3]],
-        "call_argument:": [[3,3],[3,3],[3,3]],
         "composition": [[3,3],[3,3]],
         "comprehension:Generator": [[3,3]],
         "comprehension_for_count:1": [[3,3]],
@@ -9474,6 +9477,7 @@
       "source": "from collections import namedtuple\nPoint = namedtuple(\"Point\", \"x y\")\ncenter = Point((x1 + x2) / 2, (y1 + y2) / 2)",
       "labels": {
         "addition_operator": [[3,3],[3,3]],
+        "argument:": [[2,2],[2,2],[3,3],[3,3]],
         "assignment:Point": [[3,3]],
         "assignment:namedtuple": [[2,2]],
         "assignment_lhs_identifier:Point": [[2,2]],
@@ -9485,7 +9489,6 @@
         "assignment_rhs_atom:y2": [[3,3]],
         "binary_operator:Add": [[3,3],[3,3]],
         "binary_operator:Div": [[3,3],[3,3]],
-        "call_argument:": [[2,2],[2,2],[3,3],[3,3]],
         "external_free_call:Point": [[3,3]],
         "external_free_call:namedtuple": [[2,2]],
         "flat_style": [[1,3]],
@@ -9535,11 +9538,11 @@
       "timestamp": "",
       "source": "import os\nx = os.listdir(d)",
       "labels": {
+        "argument:d": [[2,2]],
         "assignment:listdir": [[2,2]],
         "assignment_lhs_identifier:x": [[2,2]],
         "assignment_rhs_atom:d": [[2,2]],
         "assignment_rhs_atom:os": [[2,2]],
-        "call_argument:d": [[2,2]],
         "flat_style": [[1,2]],
         "global_scope:x": [[1,2]],
         "imperative_style": [[1,2]],
@@ -9573,10 +9576,10 @@
       "timestamp": "",
       "source": "s = \"s = %r\\nprint(s%%s)\"\nprint(s % s)",
       "labels": {
+        "argument:": [[2,2]],
         "assignment": [[1,1]],
         "assignment_lhs_identifier:s": [[1,1]],
         "binary_operator:Mod": [[2,2]],
-        "call_argument:": [[2,2]],
         "external_free_call:print": [[2,2]],
         "flat_style": [[1,2]],
         "free_call:print": [[2,2]],
@@ -9612,6 +9615,9 @@
       "timestamp": "",
       "source": "requests\nimport requests\ncontent_type = \"text/plain\"\nheaders = {\"Content-Type\": content_type}\ndata = {}\nr = requests.put(url, headers=headers, data=data)\nstatus_code, content = r.status_code, r.content",
       "labels": {
+        "argument:data": [[6,6]],
+        "argument:headers": [[6,6]],
+        "argument:url": [[6,6]],
         "assignment": [[3,3],[4,4],[5,5],[7,7]],
         "assignment:put": [[6,6]],
         "assignment_lhs_identifier:content": [[7,7]],
@@ -9626,11 +9632,6 @@
         "assignment_rhs_atom:r": [[7,7],[7,7]],
         "assignment_rhs_atom:requests": [[6,6]],
         "assignment_rhs_atom:url": [[6,6]],
-        "call_argument:data": [[6,6]],
-        "call_argument:headers": [[6,6]],
-        "call_argument:url": [[6,6]],
-        "call_keyword_argument:data": [[6,6]],
-        "call_keyword_argument:headers": [[6,6]],
         "empty_literal:Dict": [[5,5]],
         "flat_style": [[1,7]],
         "global_scope:content": [[1,7]],
@@ -9642,6 +9643,8 @@
         "imperative_style": [[1,7]],
         "import:requests": [[2,2]],
         "import_module:requests": [[2,2]],
+        "keyword_argument:data": [[6,6]],
+        "keyword_argument:headers": [[6,6]],
         "literal:Dict": [[4,4],[5,5]],
         "literal:Str": [[3,3],[4,4]],
         "literal:Tuple": [[7,7],[7,7]],
@@ -9694,18 +9697,19 @@
       "source": "from datetime import date, timedelta\ndate.today() + timedelta(days=1)",
       "labels": {
         "addition_operator": [[2,2]],
+        "argument:1": [[2,2]],
         "binary_operator:Add": [[2,2]],
-        "call_argument:1": [[2,2]],
-        "call_keyword_argument:days": [[2,2]],
         "external_free_call:timedelta": [[2,2]],
         "flat_style": [[1,2]],
         "free_call:timedelta": [[2,2]],
+        "free_call_with_keyword_argument:timedelta:days": [[2,2]],
         "imperative_style": [[1,2]],
         "import:datetime:date": [[1,1]],
         "import:datetime:timedelta": [[1,1]],
         "import_module:datetime": [[1,1]],
         "import_name:date": [[1,1]],
         "import_name:timedelta": [[1,1]],
+        "keyword_argument:days": [[2,2]],
         "literal:1": [[2,2]],
         "loaded_variable:date": [[2,2]],
         "member_call_method:today": [[2,2]],
@@ -9736,21 +9740,21 @@
       "timestamp": "",
       "source": "import threading\ntimer = threading.Timer(30.0, f, args=(42,))\ntimer.start()",
       "labels": {
+        "argument:": [[2,2]],
+        "argument:30.0": [[2,2]],
+        "argument:f": [[2,2]],
         "assignment:Timer": [[2,2]],
         "assignment_lhs_identifier:timer": [[2,2]],
         "assignment_rhs_atom:30.0": [[2,2]],
         "assignment_rhs_atom:42": [[2,2]],
         "assignment_rhs_atom:f": [[2,2]],
         "assignment_rhs_atom:threading": [[2,2]],
-        "call_argument:": [[2,2]],
-        "call_argument:30.0": [[2,2]],
-        "call_argument:f": [[2,2]],
-        "call_keyword_argument:args": [[2,2]],
         "flat_style": [[1,3]],
         "global_scope:timer": [[1,3]],
         "imperative_style": [[1,3]],
         "import:threading": [[1,1]],
         "import_module:threading": [[1,1]],
+        "keyword_argument:args": [[2,2]],
         "literal:30.0": [[2,2]],
         "literal:42": [[2,2]],
         "literal:Tuple": [[2,2]],
@@ -9793,7 +9797,7 @@
       "timestamp": "",
       "source": "import sys\nsys.exit(0)",
       "labels": {
-        "call_argument:0": [[2,2]],
+        "argument:0": [[2,2]],
         "flat_style": [[1,2]],
         "imperative_style": [[1,2]],
         "import:sys": [[1,1]],
@@ -9827,6 +9831,10 @@
       "timestamp": "",
       "source": "class UnionFind:\n    def __init__(self, size):\n        self.rank = [0] * size\n        self.p = [i for i in range(size)]\n    def find_set(self, i):\n        if self.p[i] == i:\n            return i\n        else:\n            self.p[i] = self.find_set(self.p[i])\n            return self.p[i]\n    def is_same_set(self, i, j):\n        return self.find_set(i) == self.find_set(j)\n    def union_set(self, i, j):\n        if not self.is_same_set(i, j):\n            x, y = self.find_set(i), self.find_set(j)",
       "labels": {
+        "argument:": [[9,9]],
+        "argument:i": [[12,12],[14,14],[15,15]],
+        "argument:j": [[12,12],[14,14],[15,15]],
+        "argument:size": [[4,4]],
         "assignment": [[4,4],[15,15]],
         "assignment:Mult": [[3,3]],
         "assignment:find_set": [[9,9]],
@@ -9839,10 +9847,6 @@
         "assignment_rhs_atom:self": [[9,9],[9,9],[15,15],[15,15]],
         "assignment_rhs_atom:size": [[3,3],[4,4]],
         "binary_operator:Mult": [[3,3]],
-        "call_argument:": [[9,9]],
-        "call_argument:i": [[12,12],[14,14],[15,15]],
-        "call_argument:j": [[12,12],[14,14],[15,15]],
-        "call_argument:size": [[4,4]],
         "comparison_operator:Eq": [[6,6],[12,12]],
         "comprehension:List": [[4,4]],
         "comprehension_for_count:1": [[4,4]],
@@ -9999,13 +10003,13 @@
       "timestamp": "",
       "source": "import numpy as np\nc = np.matmul(a, b)",
       "labels": {
+        "argument:a": [[2,2]],
+        "argument:b": [[2,2]],
         "assignment:matmul": [[2,2]],
         "assignment_lhs_identifier:c": [[2,2]],
         "assignment_rhs_atom:a": [[2,2]],
         "assignment_rhs_atom:b": [[2,2]],
         "assignment_rhs_atom:np": [[2,2]],
-        "call_argument:a": [[2,2]],
-        "call_argument:b": [[2,2]],
         "flat_style": [[1,2]],
         "global_scope:c": [[1,2]],
         "imperative_style": [[1,2]],
@@ -10040,11 +10044,11 @@
       "timestamp": "",
       "source": "y = [T(e) for e in x if P(e)]",
       "labels": {
+        "argument:e": [[1,1],[1,1]],
         "assignment": [[1,1]],
         "assignment_lhs_identifier:y": [[1,1]],
         "assignment_rhs_atom:e": [[1,1],[1,1],[1,1]],
         "assignment_rhs_atom:x": [[1,1]],
-        "call_argument:e": [[1,1],[1,1]],
         "comprehension:List": [[1,1]],
         "comprehension_for_count:1": [[1,1]],
         "external_free_call:P": [[1,1]],
@@ -10084,7 +10088,7 @@
       "timestamp": "",
       "source": "if any(v > x for v in a):\n    f()",
       "labels": {
-        "call_argument:": [[1,1]],
+        "argument:": [[1,1]],
         "comparison_operator:Gt": [[1,1]],
         "comprehension:Generator": [[1,1]],
         "comprehension_for_count:1": [[1,1]],
@@ -10131,10 +10135,10 @@
       "timestamp": "",
       "source": "with open(path) as f:\n    lines = f.readlines()",
       "labels": {
+        "argument:path": [[1,1]],
         "assignment:readlines": [[2,2]],
         "assignment_lhs_identifier:lines": [[2,2]],
         "assignment_rhs_atom:f": [[2,2]],
-        "call_argument:path": [[1,1]],
         "external_free_call:open": [[1,1]],
         "flat_style": [[1,2]],
         "free_call:open": [[1,1]],
@@ -10189,6 +10193,448 @@
       "179.2688-get-center-of-a-rectangle.py",
       "179.2689-get-center-of-a-rectangle.py",
       "184.2701-tomorrow.py"
+    ],
+    "argument:": [
+      "001.0003-print-hello-world.py",
+      "001.1159-print-hello-world.py",
+      "002.0011-print-hello-10-times.py",
+      "002.1493-print-hello-10-times.py",
+      "002.3117-print-hello-10-times.py",
+      "003.0019-create-a-procedure.py",
+      "016.1530-depth-first-traversing-of-a-binary-tree.py",
+      "025.0195-send-a-value-to-another-thread.py",
+      "027.0193-create-a-3-dimensional-array.py",
+      "028.0350-sort-by-a-property.py",
+      "030.0189-parallelize-execution-of-1000-independent-tasks.py",
+      "031.0188-recursive-factorial-simple.py",
+      "034.0625-create-a-set-of-objects.py",
+      "035.0667-first-class-function--compose.py",
+      "036.0670-first-class-function--generic-composition.py",
+      "037.0671-currying.py",
+      "040.2279-graph-with-adjacency-lists.py",
+      "041.0187-reverse-a-string.py",
+      "043.2733-break-outer-loop.py",
+      "053.1933-join-a-list-of-strings.py",
+      "056.1424-launch-1000-parallel-tasks-and-wait-for-completion.py",
+      "059.0668-write-to-standard-error-stream.py",
+      "067.1426-binomial-coefficient-n-choose-k.py",
+      "068.2271-create-a-bitset.py",
+      "071.0379-echo-program-implementation.py",
+      "081.2270-round-floating-point-number-to-integer.py",
+      "083.1805-regex-with-character-repetition.py",
+      "084.1940-count-bits-set-in-integer-binary-representation.py",
+      "089.1097-handle-invalid-argument.py",
+      "091.1098-load-json-file-into-struct.py",
+      "092.1100-save-object-into-json-file.py",
+      "094.1101-print-type-of-variable.py",
+      "094.1864-print-type-of-variable.py",
+      "099.1429-format-date-yyyy-mm-dd.py",
+      "102.2173-load-from-http-get-request-into-a-file.py",
+      "103.2276-load-xml-file-into-struct.py",
+      "104.3264-save-object-into-xml-file.py",
+      "107.2139-get-folder-containing-current-program.py",
+      "111.2168-launch-other-program.py",
+      "112.2144-iterate-over-map-entries-ordered-by-keys.py",
+      "113.2157-iterate-over-map-entries-ordered-by-values.py",
+      "116.1257-remove-occurrences-of-word-from-string.py",
+      "119.1253-deduplicate-list.py",
+      "120.1479-read-integer-from-stdin.py",
+      "121.3029-udp-listen-and-read.py",
+      "125.2167-measure-function-call-duration.py",
+      "127.2274-source-code-inclusion.py",
+      "129.2282-breadth-first-traversing-in-a-graph.py",
+      "130.2283-depth-first-traversing-in-a-graph.py",
+      "132.2040-measure-duration-of-procedure-execution.py",
+      "145.1822-print-log-line-with-datetime.py",
+      "146.1825-convert-string-to-floating-point-number.py",
+      "146.2739-convert-string-to-floating-point-number.py",
+      "147.2171-remove-all-non-ascii-characters.py",
+      "148.1829-read-list-of-integer-numbers-from-stdin.py",
+      "150.2154-remove-trailing-slash.py",
+      "151.2166-remove-string-trailing-path-separator.py",
+      "154.2155-halfway-between-two-hex-color-codes.py",
+      "154.2292-halfway-between-two-hex-color-codes.py",
+      "156.2148-format-integer-with-zero-padding.py",
+      "163.2170-print-list-elements-by-group-of-2.py",
+      "173.2427-format-a-number-with-grouped-thousands.py",
+      "173.2428-format-a-number-with-grouped-thousands.py",
+      "173.2429-format-a-number-with-grouped-thousands.py",
+      "174.2687-make-http-post-request.py",
+      "177.2725-find-files-with-a-given-list-of-filename-extensions.py",
+      "177.3241-find-files-with-a-given-list-of-filename-extensions.py",
+      "179.2689-get-center-of-a-rectangle.py",
+      "182.2658-quine-program.py",
+      "185.2820-execute-function-in-30-seconds.py",
+      "187.3261-disjoint-set.py",
+      "191.3403-check-if-any-value-in-a-list-is-larger-than-a-limit.py"
+    ],
+    "argument:0": [
+      "128.2085-breadth-first-traversing-of-a-tree.py",
+      "186.2699-exit-program-cleanly.py"
+    ],
+    "argument:1": [
+      "030.0189-parallelize-execution-of-1000-independent-tasks.py",
+      "037.0671-currying.py",
+      "056.1424-launch-1000-parallel-tasks-and-wait-for-completion.py",
+      "087.1139-stop-program.py",
+      "154.2155-halfway-between-two-hex-color-codes.py",
+      "154.2292-halfway-between-two-hex-color-codes.py",
+      "168.2277-trim-suffix.py",
+      "184.2701-tomorrow.py"
+    ],
+    "argument:10": [
+      "002.0011-print-hello-10-times.py"
+    ],
+    "argument:1000000": [
+      "088.2143-allocate-1m-bytes.py"
+    ],
+    "argument:1001": [
+      "030.0189-parallelize-execution-of-1000-independent-tasks.py",
+      "056.1424-launch-1000-parallel-tasks-and-wait-for-completion.py"
+    ],
+    "argument:1024": [
+      "121.3029-udp-listen-and-read.py"
+    ],
+    "argument:16": [
+      "154.2155-halfway-between-two-hex-color-codes.py",
+      "154.2292-halfway-between-two-hex-color-codes.py"
+    ],
+    "argument:2": [
+      "037.0671-currying.py",
+      "154.2155-halfway-between-two-hex-color-codes.py",
+      "154.2292-halfway-between-two-hex-color-codes.py"
+    ],
+    "argument:2016": [
+      "099.1429-format-date-yyyy-mm-dd.py"
+    ],
+    "argument:28": [
+      "099.1429-format-date-yyyy-mm-dd.py"
+    ],
+    "argument:30.0": [
+      "185.2820-execute-function-in-30-seconds.py"
+    ],
+    "argument:4": [
+      "122.1453-declare-enumeration.py"
+    ],
+    "argument:5": [
+      "045.0570-pause-execution-for-5-seconds.py"
+    ],
+    "argument:6": [
+      "043.2733-break-outer-loop.py",
+      "154.2155-halfway-between-two-hex-color-codes.py"
+    ],
+    "argument:9": [
+      "099.1429-format-date-yyyy-mm-dd.py"
+    ],
+    "argument:D": [
+      "177.2709-find-files-with-a-given-list-of-filename-extensions.py",
+      "177.2725-find-files-with-a-given-list-of-filename-extensions.py"
+    ],
+    "argument:None": [
+      "140.2156-delete-map-entry.py",
+      "163.3177-print-list-elements-by-group-of-2.py"
+    ],
+    "argument:Parent": [
+      "073.0673-create-a-factory.py"
+    ],
+    "argument:__file__": [
+      "107.2139-get-folder-containing-current-program.py"
+    ],
+    "argument:_filepath": [
+      "155.2147-delete-file.py"
+    ],
+    "argument:a": [
+      "014.0185-pick-uniformly-a-random-floating-point-number-in-ab.py",
+      "014.3410-pick-uniformly-a-random-floating-point-number-in-ab.py",
+      "015.0184-pick-uniformly-a-random-integer-in-ab.py",
+      "035.0667-first-class-function--compose.py",
+      "074.0674-compute-gcd.py",
+      "075.0675-compute-lcm.py",
+      "124.2152-binary-search-for-a-value-in-sorted-array.py",
+      "163.3177-print-list-elements-by-group-of-2.py",
+      "188.3284-matrix-multiplication.py"
+    ],
+    "argument:a_class": [
+      "073.0673-create-a-factory.py"
+    ],
+    "argument:b": [
+      "014.0185-pick-uniformly-a-random-floating-point-number-in-ab.py",
+      "014.3410-pick-uniformly-a-random-floating-point-number-in-ab.py",
+      "015.0184-pick-uniformly-a-random-integer-in-ab.py",
+      "074.0674-compute-gcd.py",
+      "075.0675-compute-lcm.py",
+      "163.3177-print-list-elements-by-group-of-2.py",
+      "188.3284-matrix-multiplication.py"
+    ],
+    "argument:bt": [
+      "016.1530-depth-first-traversing-of-a-binary-tree.py"
+    ],
+    "argument:c": [
+      "100.1142-sort-by-a-comparator.py"
+    ],
+    "argument:c1": [
+      "154.2292-halfway-between-two-hex-color-codes.py"
+    ],
+    "argument:c2": [
+      "154.2292-halfway-between-two-hex-color-codes.py"
+    ],
+    "argument:child": [
+      "018.2084-depth-first-traversing-of-a-tree.py"
+    ],
+    "argument:children": [
+      "017.1103-create-a-tree-data-structure.py"
+    ],
+    "argument:cls": [
+      "154.2292-halfway-between-two-hex-color-codes.py"
+    ],
+    "argument:d": [
+      "180.2612-list-files-in-directory.py"
+    ],
+    "argument:data": [
+      "121.3029-udp-listen-and-read.py",
+      "174.2687-make-http-post-request.py",
+      "183.3025-make-http-put-request.py"
+    ],
+    "argument:dirpath": [
+      "177.2725-find-files-with-a-given-list-of-filename-extensions.py"
+    ],
+    "argument:e": [
+      "189.3236-filter-and-transform-list.py"
+    ],
+    "argument:element": [
+      "057.3173-filter-list.py"
+    ],
+    "argument:elements_unique": [
+      "119.3263-deduplicate-list.py"
+    ],
+    "argument:f": [
+      "018.2084-depth-first-traversing-of-a-tree.py",
+      "030.0189-parallelize-execution-of-1000-independent-tasks.py",
+      "056.1424-launch-1000-parallel-tasks-and-wait-for-completion.py",
+      "058.0665-extract-file-content-to-a-string.py",
+      "177.2709-find-files-with-a-given-list-of-filename-extensions.py",
+      "185.2820-execute-function-in-30-seconds.py"
+    ],
+    "argument:filename": [
+      "177.2725-find-files-with-a-given-list-of-filename-extensions.py"
+    ],
+    "argument:fp": [
+      "144.2145-check-if-file-exists.py",
+      "144.2915-check-if-file-exists.py"
+    ],
+    "argument:headers": [
+      "183.3025-make-http-put-request.py"
+    ],
+    "argument:i": [
+      "007.0183-iterate-over-list-indexes-and-values.py",
+      "044.0190-insert-element-in-list.py",
+      "055.0575-convert-integer-to-string.py",
+      "084.1940-count-bits-set-in-integer-binary-representation.py",
+      "119.3263-deduplicate-list.py",
+      "153.1980-concatenate-string-with-integer.py",
+      "156.2148-format-integer-with-zero-padding.py",
+      "187.3261-disjoint-set.py"
+    ],
+    "argument:input": [
+      "091.1098-load-json-file-into-struct.py"
+    ],
+    "argument:int": [
+      "148.1829-read-list-of-integer-numbers-from-stdin.py"
+    ],
+    "argument:item1": [
+      "143.2256-iterate-alternatively-over-two-lists.py"
+    ],
+    "argument:item2": [
+      "143.2256-iterate-alternatively-over-two-lists.py"
+    ],
+    "argument:items": [
+      "007.0183-iterate-over-list-indexes-and-values.py",
+      "028.0350-sort-by-a-property.py"
+    ],
+    "argument:iterable": [
+      "163.3177-print-list-elements-by-group-of-2.py"
+    ],
+    "argument:j": [
+      "187.3261-disjoint-set.py"
+    ],
+    "argument:k": [
+      "013.0574-iterate-over-map-keys-and-values.py",
+      "067.1426-binomial-coefficient-n-choose-k.py",
+      "113.2157-iterate-over-map-entries-ordered-by-values.py",
+      "140.2156-delete-map-entry.py",
+      "158.2163-random-sublist.py"
+    ],
+    "argument:l1": [
+      "040.2279-graph-with-adjacency-lists.py"
+    ],
+    "argument:l2": [
+      "040.2279-graph-with-adjacency-lists.py"
+    ],
+    "argument:labels": [
+      "040.2279-graph-with-adjacency-lists.py"
+    ],
+    "argument:list": [
+      "010.1478-shuffle-a-list.py",
+      "163.3177-print-list-elements-by-group-of-2.py"
+    ],
+    "argument:m": [
+      "020.0573-return-two-values.py",
+      "026.0194-create-a-2-dimensional-array.py",
+      "027.0192-create-a-3-dimensional-array.py",
+      "043.2733-break-outer-loop.py"
+    ],
+    "argument:msg": [
+      "145.1822-print-log-line-with-datetime.py"
+    ],
+    "argument:mymap": [
+      "112.2144-iterate-over-map-entries-ordered-by-keys.py",
+      "170.2275-get-map-size.py"
+    ],
+    "argument:n": [
+      "026.0194-create-a-2-dimensional-array.py",
+      "027.0192-create-a-3-dimensional-array.py",
+      "067.1426-binomial-coefficient-n-choose-k.py",
+      "128.2085-breadth-first-traversing-of-a-tree.py",
+      "154.2292-halfway-between-two-hex-color-codes.py"
+    ],
+    "argument:output": [
+      "092.1100-save-object-into-json-file.py"
+    ],
+    "argument:p": [
+      "027.0192-create-a-3-dimensional-array.py",
+      "057.0260-filter-list.py",
+      "167.2611-trim-prefix.py",
+      "167.3175-trim-prefix.py"
+    ],
+    "argument:pair": [
+      "143.2256-iterate-alternatively-over-two-lists.py"
+    ],
+    "argument:path": [
+      "040.2279-graph-with-adjacency-lists.py",
+      "095.2140-get-file-size.py",
+      "197.3457-get-a-list-of-lines-from-a-file.py"
+    ],
+    "argument:prefix": [
+      "096.1094-check-string-prefix.py"
+    ],
+    "argument:processes": [
+      "056.1424-launch-1000-parallel-tasks-and-wait-for-completion.py"
+    ],
+    "argument:req": [
+      "174.2687-make-http-post-request.py"
+    ],
+    "argument:rgbstr": [
+      "154.2292-halfway-between-two-hex-color-codes.py"
+    ],
+    "argument:root": [
+      "018.2084-depth-first-traversing-of-a-tree.py"
+    ],
+    "argument:row": [
+      "043.2733-break-outer-loop.py"
+    ],
+    "argument:s": [
+      "022.0243-convert-string-to-integer.py",
+      "069.1086-seed-random-generator.py",
+      "146.1825-convert-string-to-floating-point-number.py",
+      "146.1826-convert-string-to-floating-point-number.py",
+      "147.2171-remove-all-non-ascii-characters.py",
+      "153.1980-concatenate-string-with-integer.py",
+      "164.2169-open-url-in-default-browser.py",
+      "169.2233-string-length.py",
+      "176.2614-hex-string-to-byte-array.py"
+    ],
+    "argument:ser": [
+      "104.3264-save-object-into-xml-file.py"
+    ],
+    "argument:size": [
+      "187.3261-disjoint-set.py"
+    ],
+    "argument:str": [
+      "053.1933-join-a-list-of-strings.py"
+    ],
+    "argument:str_": [
+      "073.0673-create-a-factory.py"
+    ],
+    "argument:suffix": [
+      "097.1095-check-string-suffix.py"
+    ],
+    "argument:t": [
+      "082.1096-count-substring-occurrences.py",
+      "109.2280-number-of-bytes-of-a-type.py"
+    ],
+    "argument:ts": [
+      "098.2142-epoch-seconds-to-date-object.py"
+    ],
+    "argument:tst": [
+      "104.3264-save-object-into-xml-file.py"
+    ],
+    "argument:u": [
+      "101.2172-load-from-http-get-request-into-a-string.py",
+      "102.2173-load-from-http-get-request-into-a-file.py",
+      "174.2687-make-http-post-request.py"
+    ],
+    "argument:url": [
+      "183.3025-make-http-put-request.py"
+    ],
+    "argument:v": [
+      "013.0574-iterate-over-map-keys-and-values.py",
+      "042.1264-continue-outer-loop.py",
+      "042.3168-continue-outer-loop.py"
+    ],
+    "argument:vertex": [
+      "129.2282-breadth-first-traversing-in-a-graph.py",
+      "130.2283-depth-first-traversing-in-a-graph.py"
+    ],
+    "argument:w": [
+      "116.1257-remove-occurrences-of-word-from-string.py",
+      "168.2277-trim-suffix.py",
+      "168.3174-trim-suffix.py"
+    ],
+    "argument:worker": [
+      "025.0195-send-a-value-to-another-thread.py"
+    ],
+    "argument:x": [
+      "006.0032-iterate-over-list-values.py",
+      "007.0183-iterate-over-list-indexes-and-values.py",
+      "010.0182-shuffle-a-list.py",
+      "011.0047-pick-a-random-element-from-a-list.py",
+      "019.0197-reverse-a-list.py",
+      "020.0573-return-two-values.py",
+      "023.1102-convert-real-number-to-string-with-2-decimal-places.py",
+      "033.1420-atomically-read-and-update-variable.py",
+      "036.0670-first-class-function--generic-composition.py",
+      "044.0190-insert-element-in-list.py",
+      "053.0240-join-a-list-of-strings.py",
+      "053.1933-join-a-list-of-strings.py",
+      "054.0241-compute-sum-of-integers.py",
+      "057.0260-filter-list.py",
+      "059.0668-write-to-standard-error-stream.py",
+      "065.1085-format-decimal-number.py",
+      "076.1083-binary-digits-from-an-integer.py",
+      "079.1090-convert-integer-to-floating-point-number.py",
+      "080.1092-truncate-floating-point-number-to-integer.py",
+      "092.1100-save-object-into-json-file.py",
+      "094.1101-print-type-of-variable.py",
+      "108.1291-determine-if-variable-name-is-defined.py",
+      "113.2157-iterate-over-map-entries-ordered-by-values.py",
+      "117.1297-get-list-size.py",
+      "118.1254-list-to-set.py",
+      "118.3266-list-to-set.py",
+      "119.1253-deduplicate-list.py",
+      "124.2152-binary-search-for-a-value-in-sorted-array.py",
+      "135.2158-remove-item-from-list-by-its-value.py",
+      "141.2159-iterate-in-sequence-over-two-lists.py",
+      "142.2151-hexadecimal-digits-of-an-integer.py",
+      "158.2163-random-sublist.py",
+      "163.2170-print-list-elements-by-group-of-2.py",
+      "171.2446-add-an-element-at-the-end-of-a-list.py"
+    ],
+    "argument:y": [
+      "062.1091-find-substring-position.py",
+      "063.1088-replace-fragment-of-a-string.py"
+    ],
+    "argument:z": [
+      "063.1088-replace-fragment-of-a-string.py"
     ],
     "assignment": [
       "008.0039-initialize-a-new-map-associative-array.py",
@@ -11556,497 +12002,6 @@
       "167.2611-trim-prefix.py",
       "178.2615-check-if-point-is-inside-rectangle.py"
     ],
-    "call_argument:": [
-      "001.0003-print-hello-world.py",
-      "001.1159-print-hello-world.py",
-      "002.0011-print-hello-10-times.py",
-      "002.1493-print-hello-10-times.py",
-      "002.3117-print-hello-10-times.py",
-      "003.0019-create-a-procedure.py",
-      "016.1530-depth-first-traversing-of-a-binary-tree.py",
-      "025.0195-send-a-value-to-another-thread.py",
-      "027.0193-create-a-3-dimensional-array.py",
-      "028.0350-sort-by-a-property.py",
-      "030.0189-parallelize-execution-of-1000-independent-tasks.py",
-      "031.0188-recursive-factorial-simple.py",
-      "034.0625-create-a-set-of-objects.py",
-      "035.0667-first-class-function--compose.py",
-      "036.0670-first-class-function--generic-composition.py",
-      "037.0671-currying.py",
-      "040.2279-graph-with-adjacency-lists.py",
-      "041.0187-reverse-a-string.py",
-      "043.2733-break-outer-loop.py",
-      "053.1933-join-a-list-of-strings.py",
-      "056.1424-launch-1000-parallel-tasks-and-wait-for-completion.py",
-      "059.0668-write-to-standard-error-stream.py",
-      "067.1426-binomial-coefficient-n-choose-k.py",
-      "068.2271-create-a-bitset.py",
-      "071.0379-echo-program-implementation.py",
-      "081.2270-round-floating-point-number-to-integer.py",
-      "083.1805-regex-with-character-repetition.py",
-      "084.1940-count-bits-set-in-integer-binary-representation.py",
-      "089.1097-handle-invalid-argument.py",
-      "091.1098-load-json-file-into-struct.py",
-      "092.1100-save-object-into-json-file.py",
-      "094.1101-print-type-of-variable.py",
-      "094.1864-print-type-of-variable.py",
-      "099.1429-format-date-yyyy-mm-dd.py",
-      "102.2173-load-from-http-get-request-into-a-file.py",
-      "103.2276-load-xml-file-into-struct.py",
-      "104.3264-save-object-into-xml-file.py",
-      "107.2139-get-folder-containing-current-program.py",
-      "111.2168-launch-other-program.py",
-      "112.2144-iterate-over-map-entries-ordered-by-keys.py",
-      "113.2157-iterate-over-map-entries-ordered-by-values.py",
-      "116.1257-remove-occurrences-of-word-from-string.py",
-      "119.1253-deduplicate-list.py",
-      "120.1479-read-integer-from-stdin.py",
-      "121.3029-udp-listen-and-read.py",
-      "125.2167-measure-function-call-duration.py",
-      "127.2274-source-code-inclusion.py",
-      "129.2282-breadth-first-traversing-in-a-graph.py",
-      "130.2283-depth-first-traversing-in-a-graph.py",
-      "132.2040-measure-duration-of-procedure-execution.py",
-      "145.1822-print-log-line-with-datetime.py",
-      "146.1825-convert-string-to-floating-point-number.py",
-      "146.2739-convert-string-to-floating-point-number.py",
-      "147.2171-remove-all-non-ascii-characters.py",
-      "148.1829-read-list-of-integer-numbers-from-stdin.py",
-      "150.2154-remove-trailing-slash.py",
-      "151.2166-remove-string-trailing-path-separator.py",
-      "154.2155-halfway-between-two-hex-color-codes.py",
-      "154.2292-halfway-between-two-hex-color-codes.py",
-      "156.2148-format-integer-with-zero-padding.py",
-      "163.2170-print-list-elements-by-group-of-2.py",
-      "173.2427-format-a-number-with-grouped-thousands.py",
-      "173.2428-format-a-number-with-grouped-thousands.py",
-      "173.2429-format-a-number-with-grouped-thousands.py",
-      "174.2687-make-http-post-request.py",
-      "177.2725-find-files-with-a-given-list-of-filename-extensions.py",
-      "177.3241-find-files-with-a-given-list-of-filename-extensions.py",
-      "179.2689-get-center-of-a-rectangle.py",
-      "182.2658-quine-program.py",
-      "185.2820-execute-function-in-30-seconds.py",
-      "187.3261-disjoint-set.py",
-      "191.3403-check-if-any-value-in-a-list-is-larger-than-a-limit.py"
-    ],
-    "call_argument:0": [
-      "128.2085-breadth-first-traversing-of-a-tree.py",
-      "186.2699-exit-program-cleanly.py"
-    ],
-    "call_argument:1": [
-      "030.0189-parallelize-execution-of-1000-independent-tasks.py",
-      "037.0671-currying.py",
-      "056.1424-launch-1000-parallel-tasks-and-wait-for-completion.py",
-      "087.1139-stop-program.py",
-      "154.2155-halfway-between-two-hex-color-codes.py",
-      "154.2292-halfway-between-two-hex-color-codes.py",
-      "168.2277-trim-suffix.py",
-      "184.2701-tomorrow.py"
-    ],
-    "call_argument:10": [
-      "002.0011-print-hello-10-times.py"
-    ],
-    "call_argument:1000000": [
-      "088.2143-allocate-1m-bytes.py"
-    ],
-    "call_argument:1001": [
-      "030.0189-parallelize-execution-of-1000-independent-tasks.py",
-      "056.1424-launch-1000-parallel-tasks-and-wait-for-completion.py"
-    ],
-    "call_argument:1024": [
-      "121.3029-udp-listen-and-read.py"
-    ],
-    "call_argument:16": [
-      "154.2155-halfway-between-two-hex-color-codes.py",
-      "154.2292-halfway-between-two-hex-color-codes.py"
-    ],
-    "call_argument:2": [
-      "037.0671-currying.py",
-      "154.2155-halfway-between-two-hex-color-codes.py",
-      "154.2292-halfway-between-two-hex-color-codes.py"
-    ],
-    "call_argument:2016": [
-      "099.1429-format-date-yyyy-mm-dd.py"
-    ],
-    "call_argument:28": [
-      "099.1429-format-date-yyyy-mm-dd.py"
-    ],
-    "call_argument:30.0": [
-      "185.2820-execute-function-in-30-seconds.py"
-    ],
-    "call_argument:4": [
-      "122.1453-declare-enumeration.py"
-    ],
-    "call_argument:5": [
-      "045.0570-pause-execution-for-5-seconds.py"
-    ],
-    "call_argument:6": [
-      "043.2733-break-outer-loop.py",
-      "154.2155-halfway-between-two-hex-color-codes.py"
-    ],
-    "call_argument:9": [
-      "099.1429-format-date-yyyy-mm-dd.py"
-    ],
-    "call_argument:D": [
-      "177.2709-find-files-with-a-given-list-of-filename-extensions.py",
-      "177.2725-find-files-with-a-given-list-of-filename-extensions.py"
-    ],
-    "call_argument:None": [
-      "140.2156-delete-map-entry.py",
-      "163.3177-print-list-elements-by-group-of-2.py"
-    ],
-    "call_argument:Parent": [
-      "073.0673-create-a-factory.py"
-    ],
-    "call_argument:__file__": [
-      "107.2139-get-folder-containing-current-program.py"
-    ],
-    "call_argument:_filepath": [
-      "155.2147-delete-file.py"
-    ],
-    "call_argument:a": [
-      "014.0185-pick-uniformly-a-random-floating-point-number-in-ab.py",
-      "014.3410-pick-uniformly-a-random-floating-point-number-in-ab.py",
-      "015.0184-pick-uniformly-a-random-integer-in-ab.py",
-      "035.0667-first-class-function--compose.py",
-      "074.0674-compute-gcd.py",
-      "075.0675-compute-lcm.py",
-      "124.2152-binary-search-for-a-value-in-sorted-array.py",
-      "163.3177-print-list-elements-by-group-of-2.py",
-      "188.3284-matrix-multiplication.py"
-    ],
-    "call_argument:a_class": [
-      "073.0673-create-a-factory.py"
-    ],
-    "call_argument:b": [
-      "014.0185-pick-uniformly-a-random-floating-point-number-in-ab.py",
-      "014.3410-pick-uniformly-a-random-floating-point-number-in-ab.py",
-      "015.0184-pick-uniformly-a-random-integer-in-ab.py",
-      "074.0674-compute-gcd.py",
-      "075.0675-compute-lcm.py",
-      "163.3177-print-list-elements-by-group-of-2.py",
-      "188.3284-matrix-multiplication.py"
-    ],
-    "call_argument:bt": [
-      "016.1530-depth-first-traversing-of-a-binary-tree.py"
-    ],
-    "call_argument:c": [
-      "100.1142-sort-by-a-comparator.py"
-    ],
-    "call_argument:c1": [
-      "154.2292-halfway-between-two-hex-color-codes.py"
-    ],
-    "call_argument:c2": [
-      "154.2292-halfway-between-two-hex-color-codes.py"
-    ],
-    "call_argument:child": [
-      "018.2084-depth-first-traversing-of-a-tree.py"
-    ],
-    "call_argument:children": [
-      "017.1103-create-a-tree-data-structure.py"
-    ],
-    "call_argument:cls": [
-      "154.2292-halfway-between-two-hex-color-codes.py"
-    ],
-    "call_argument:d": [
-      "180.2612-list-files-in-directory.py"
-    ],
-    "call_argument:data": [
-      "121.3029-udp-listen-and-read.py",
-      "174.2687-make-http-post-request.py",
-      "183.3025-make-http-put-request.py"
-    ],
-    "call_argument:dirpath": [
-      "177.2725-find-files-with-a-given-list-of-filename-extensions.py"
-    ],
-    "call_argument:e": [
-      "189.3236-filter-and-transform-list.py"
-    ],
-    "call_argument:element": [
-      "057.3173-filter-list.py"
-    ],
-    "call_argument:elements_unique": [
-      "119.3263-deduplicate-list.py"
-    ],
-    "call_argument:f": [
-      "018.2084-depth-first-traversing-of-a-tree.py",
-      "030.0189-parallelize-execution-of-1000-independent-tasks.py",
-      "056.1424-launch-1000-parallel-tasks-and-wait-for-completion.py",
-      "058.0665-extract-file-content-to-a-string.py",
-      "177.2709-find-files-with-a-given-list-of-filename-extensions.py",
-      "185.2820-execute-function-in-30-seconds.py"
-    ],
-    "call_argument:filename": [
-      "177.2725-find-files-with-a-given-list-of-filename-extensions.py"
-    ],
-    "call_argument:fp": [
-      "144.2145-check-if-file-exists.py",
-      "144.2915-check-if-file-exists.py"
-    ],
-    "call_argument:headers": [
-      "183.3025-make-http-put-request.py"
-    ],
-    "call_argument:i": [
-      "007.0183-iterate-over-list-indexes-and-values.py",
-      "044.0190-insert-element-in-list.py",
-      "055.0575-convert-integer-to-string.py",
-      "084.1940-count-bits-set-in-integer-binary-representation.py",
-      "119.3263-deduplicate-list.py",
-      "153.1980-concatenate-string-with-integer.py",
-      "156.2148-format-integer-with-zero-padding.py",
-      "187.3261-disjoint-set.py"
-    ],
-    "call_argument:input": [
-      "091.1098-load-json-file-into-struct.py"
-    ],
-    "call_argument:int": [
-      "148.1829-read-list-of-integer-numbers-from-stdin.py"
-    ],
-    "call_argument:item1": [
-      "143.2256-iterate-alternatively-over-two-lists.py"
-    ],
-    "call_argument:item2": [
-      "143.2256-iterate-alternatively-over-two-lists.py"
-    ],
-    "call_argument:items": [
-      "007.0183-iterate-over-list-indexes-and-values.py",
-      "028.0350-sort-by-a-property.py"
-    ],
-    "call_argument:iterable": [
-      "163.3177-print-list-elements-by-group-of-2.py"
-    ],
-    "call_argument:j": [
-      "187.3261-disjoint-set.py"
-    ],
-    "call_argument:k": [
-      "013.0574-iterate-over-map-keys-and-values.py",
-      "067.1426-binomial-coefficient-n-choose-k.py",
-      "113.2157-iterate-over-map-entries-ordered-by-values.py",
-      "140.2156-delete-map-entry.py",
-      "158.2163-random-sublist.py"
-    ],
-    "call_argument:l1": [
-      "040.2279-graph-with-adjacency-lists.py"
-    ],
-    "call_argument:l2": [
-      "040.2279-graph-with-adjacency-lists.py"
-    ],
-    "call_argument:labels": [
-      "040.2279-graph-with-adjacency-lists.py"
-    ],
-    "call_argument:list": [
-      "010.1478-shuffle-a-list.py",
-      "163.3177-print-list-elements-by-group-of-2.py"
-    ],
-    "call_argument:m": [
-      "020.0573-return-two-values.py",
-      "026.0194-create-a-2-dimensional-array.py",
-      "027.0192-create-a-3-dimensional-array.py",
-      "043.2733-break-outer-loop.py"
-    ],
-    "call_argument:msg": [
-      "145.1822-print-log-line-with-datetime.py"
-    ],
-    "call_argument:mymap": [
-      "112.2144-iterate-over-map-entries-ordered-by-keys.py",
-      "170.2275-get-map-size.py"
-    ],
-    "call_argument:n": [
-      "026.0194-create-a-2-dimensional-array.py",
-      "027.0192-create-a-3-dimensional-array.py",
-      "067.1426-binomial-coefficient-n-choose-k.py",
-      "128.2085-breadth-first-traversing-of-a-tree.py",
-      "154.2292-halfway-between-two-hex-color-codes.py"
-    ],
-    "call_argument:output": [
-      "092.1100-save-object-into-json-file.py"
-    ],
-    "call_argument:p": [
-      "027.0192-create-a-3-dimensional-array.py",
-      "057.0260-filter-list.py",
-      "167.2611-trim-prefix.py",
-      "167.3175-trim-prefix.py"
-    ],
-    "call_argument:pair": [
-      "143.2256-iterate-alternatively-over-two-lists.py"
-    ],
-    "call_argument:path": [
-      "040.2279-graph-with-adjacency-lists.py",
-      "095.2140-get-file-size.py",
-      "197.3457-get-a-list-of-lines-from-a-file.py"
-    ],
-    "call_argument:prefix": [
-      "096.1094-check-string-prefix.py"
-    ],
-    "call_argument:processes": [
-      "056.1424-launch-1000-parallel-tasks-and-wait-for-completion.py"
-    ],
-    "call_argument:req": [
-      "174.2687-make-http-post-request.py"
-    ],
-    "call_argument:rgbstr": [
-      "154.2292-halfway-between-two-hex-color-codes.py"
-    ],
-    "call_argument:root": [
-      "018.2084-depth-first-traversing-of-a-tree.py"
-    ],
-    "call_argument:row": [
-      "043.2733-break-outer-loop.py"
-    ],
-    "call_argument:s": [
-      "022.0243-convert-string-to-integer.py",
-      "069.1086-seed-random-generator.py",
-      "146.1825-convert-string-to-floating-point-number.py",
-      "146.1826-convert-string-to-floating-point-number.py",
-      "147.2171-remove-all-non-ascii-characters.py",
-      "153.1980-concatenate-string-with-integer.py",
-      "164.2169-open-url-in-default-browser.py",
-      "169.2233-string-length.py",
-      "176.2614-hex-string-to-byte-array.py"
-    ],
-    "call_argument:ser": [
-      "104.3264-save-object-into-xml-file.py"
-    ],
-    "call_argument:size": [
-      "187.3261-disjoint-set.py"
-    ],
-    "call_argument:str": [
-      "053.1933-join-a-list-of-strings.py"
-    ],
-    "call_argument:str_": [
-      "073.0673-create-a-factory.py"
-    ],
-    "call_argument:suffix": [
-      "097.1095-check-string-suffix.py"
-    ],
-    "call_argument:t": [
-      "082.1096-count-substring-occurrences.py",
-      "109.2280-number-of-bytes-of-a-type.py"
-    ],
-    "call_argument:ts": [
-      "098.2142-epoch-seconds-to-date-object.py"
-    ],
-    "call_argument:tst": [
-      "104.3264-save-object-into-xml-file.py"
-    ],
-    "call_argument:u": [
-      "101.2172-load-from-http-get-request-into-a-string.py",
-      "102.2173-load-from-http-get-request-into-a-file.py",
-      "174.2687-make-http-post-request.py"
-    ],
-    "call_argument:url": [
-      "183.3025-make-http-put-request.py"
-    ],
-    "call_argument:v": [
-      "013.0574-iterate-over-map-keys-and-values.py",
-      "042.1264-continue-outer-loop.py",
-      "042.3168-continue-outer-loop.py"
-    ],
-    "call_argument:vertex": [
-      "129.2282-breadth-first-traversing-in-a-graph.py",
-      "130.2283-depth-first-traversing-in-a-graph.py"
-    ],
-    "call_argument:w": [
-      "116.1257-remove-occurrences-of-word-from-string.py",
-      "168.2277-trim-suffix.py",
-      "168.3174-trim-suffix.py"
-    ],
-    "call_argument:worker": [
-      "025.0195-send-a-value-to-another-thread.py"
-    ],
-    "call_argument:x": [
-      "006.0032-iterate-over-list-values.py",
-      "007.0183-iterate-over-list-indexes-and-values.py",
-      "010.0182-shuffle-a-list.py",
-      "011.0047-pick-a-random-element-from-a-list.py",
-      "019.0197-reverse-a-list.py",
-      "020.0573-return-two-values.py",
-      "023.1102-convert-real-number-to-string-with-2-decimal-places.py",
-      "033.1420-atomically-read-and-update-variable.py",
-      "036.0670-first-class-function--generic-composition.py",
-      "044.0190-insert-element-in-list.py",
-      "053.0240-join-a-list-of-strings.py",
-      "053.1933-join-a-list-of-strings.py",
-      "054.0241-compute-sum-of-integers.py",
-      "057.0260-filter-list.py",
-      "059.0668-write-to-standard-error-stream.py",
-      "065.1085-format-decimal-number.py",
-      "076.1083-binary-digits-from-an-integer.py",
-      "079.1090-convert-integer-to-floating-point-number.py",
-      "080.1092-truncate-floating-point-number-to-integer.py",
-      "092.1100-save-object-into-json-file.py",
-      "094.1101-print-type-of-variable.py",
-      "108.1291-determine-if-variable-name-is-defined.py",
-      "113.2157-iterate-over-map-entries-ordered-by-values.py",
-      "117.1297-get-list-size.py",
-      "118.1254-list-to-set.py",
-      "118.3266-list-to-set.py",
-      "119.1253-deduplicate-list.py",
-      "124.2152-binary-search-for-a-value-in-sorted-array.py",
-      "135.2158-remove-item-from-list-by-its-value.py",
-      "141.2159-iterate-in-sequence-over-two-lists.py",
-      "142.2151-hexadecimal-digits-of-an-integer.py",
-      "158.2163-random-sublist.py",
-      "163.2170-print-list-elements-by-group-of-2.py",
-      "171.2446-add-an-element-at-the-end-of-a-list.py"
-    ],
-    "call_argument:y": [
-      "062.1091-find-substring-position.py",
-      "063.1088-replace-fragment-of-a-string.py"
-    ],
-    "call_argument:z": [
-      "063.1088-replace-fragment-of-a-string.py"
-    ],
-    "call_keyword_argument:args": [
-      "185.2820-execute-function-in-30-seconds.py"
-    ],
-    "call_keyword_argument:data": [
-      "174.2687-make-http-post-request.py",
-      "183.3025-make-http-put-request.py"
-    ],
-    "call_keyword_argument:days": [
-      "184.2701-tomorrow.py"
-    ],
-    "call_keyword_argument:enc": [
-      "104.3264-save-object-into-xml-file.py"
-    ],
-    "call_keyword_argument:file": [
-      "059.0668-write-to-standard-error-stream.py"
-    ],
-    "call_keyword_argument:format": [
-      "145.1822-print-log-line-with-datetime.py"
-    ],
-    "call_keyword_argument:func": [
-      "056.1424-launch-1000-parallel-tasks-and-wait-for-completion.py"
-    ],
-    "call_keyword_argument:headers": [
-      "183.3025-make-http-put-request.py"
-    ],
-    "call_keyword_argument:iterable": [
-      "056.1424-launch-1000-parallel-tasks-and-wait-for-completion.py"
-    ],
-    "call_keyword_argument:key": [
-      "028.0350-sort-by-a-property.py"
-    ],
-    "call_keyword_argument:level": [
-      "145.1822-print-log-line-with-datetime.py"
-    ],
-    "call_keyword_argument:method": [
-      "174.2687-make-http-post-request.py"
-    ],
-    "call_keyword_argument:obj": [
-      "104.3264-save-object-into-xml-file.py"
-    ],
-    "call_keyword_argument:setup": [
-      "132.2040-measure-duration-of-procedure-execution.py"
-    ],
-    "call_keyword_argument:stream": [
-      "145.1822-print-log-line-with-datetime.py"
-    ],
-    "call_keyword_argument:target": [
-      "025.0195-send-a-value-to-another-thread.py"
-    ],
     "chained_comparison:2": [
       "178.2615-check-if-point-is-inside-rectangle.py"
     ],
@@ -13021,6 +12976,18 @@
       "143.2256-iterate-alternatively-over-two-lists.py",
       "163.2170-print-list-elements-by-group-of-2.py",
       "163.3177-print-list-elements-by-group-of-2.py"
+    ],
+    "free_call_with_keyword_argument:Thread:target": [
+      "025.0195-send-a-value-to-another-thread.py"
+    ],
+    "free_call_with_keyword_argument:print:file": [
+      "059.0668-write-to-standard-error-stream.py"
+    ],
+    "free_call_with_keyword_argument:sorted:key": [
+      "028.0350-sort-by-a-property.py"
+    ],
+    "free_call_with_keyword_argument:timedelta:days": [
+      "184.2701-tomorrow.py"
     ],
     "free_call_without_arguments:Exception": [
       "042.1264-continue-outer-loop.py"
@@ -14895,6 +14862,55 @@
       "141.2159-iterate-in-sequence-over-two-lists.py",
       "161.2098-multiply-all-the-elements-of-a-list.py",
       "163.2170-print-list-elements-by-group-of-2.py"
+    ],
+    "keyword_argument:args": [
+      "185.2820-execute-function-in-30-seconds.py"
+    ],
+    "keyword_argument:data": [
+      "174.2687-make-http-post-request.py",
+      "183.3025-make-http-put-request.py"
+    ],
+    "keyword_argument:days": [
+      "184.2701-tomorrow.py"
+    ],
+    "keyword_argument:enc": [
+      "104.3264-save-object-into-xml-file.py"
+    ],
+    "keyword_argument:file": [
+      "059.0668-write-to-standard-error-stream.py"
+    ],
+    "keyword_argument:format": [
+      "145.1822-print-log-line-with-datetime.py"
+    ],
+    "keyword_argument:func": [
+      "056.1424-launch-1000-parallel-tasks-and-wait-for-completion.py"
+    ],
+    "keyword_argument:headers": [
+      "183.3025-make-http-put-request.py"
+    ],
+    "keyword_argument:iterable": [
+      "056.1424-launch-1000-parallel-tasks-and-wait-for-completion.py"
+    ],
+    "keyword_argument:key": [
+      "028.0350-sort-by-a-property.py"
+    ],
+    "keyword_argument:level": [
+      "145.1822-print-log-line-with-datetime.py"
+    ],
+    "keyword_argument:method": [
+      "174.2687-make-http-post-request.py"
+    ],
+    "keyword_argument:obj": [
+      "104.3264-save-object-into-xml-file.py"
+    ],
+    "keyword_argument:setup": [
+      "132.2040-measure-duration-of-procedure-execution.py"
+    ],
+    "keyword_argument:stream": [
+      "145.1822-print-log-line-with-datetime.py"
+    ],
+    "keyword_argument:target": [
+      "025.0195-send-a-value-to-another-thread.py"
     ],
     "literal:-1": [
       "019.1983-reverse-a-list.py",
@@ -20265,7 +20281,6 @@
       "042.3168-continue-outer-loop.py",
       "043.2733-break-outer-loop.py",
       "056.1424-launch-1000-parallel-tasks-and-wait-for-completion.py",
-      "059.0668-write-to-standard-error-stream.py",
       "071.0379-echo-program-implementation.py",
       "094.1101-print-type-of-variable.py",
       "094.1864-print-type-of-variable.py",
@@ -20285,6 +20300,9 @@
       "173.2428-format-a-number-with-grouped-thousands.py",
       "173.2429-format-a-number-with-grouped-thousands.py",
       "182.2658-quine-program.py"
+    ],
+    "call/function/builtin/print/file": [
+      "059.0668-write-to-standard-error-stream.py"
     ],
     "call/function/builtin/range": [
       "002.0011-print-hello-10-times.py",

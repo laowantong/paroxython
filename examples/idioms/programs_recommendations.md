@@ -74,7 +74,7 @@
     - [`057.0260-filter-list.py`](#program-0570260-filter-listpy-learning-cost-525)
     - [`057.3173-filter-list.py`](#program-0573173-filter-listpy-learning-cost-5125)
     - [`058.0665-extract-file-content-to-a-string.py`](#program-0580665-extract-file-content-to-a-stringpy-learning-cost-5125)
-    - [`059.0668-write-to-standard-error-stream.py`](#program-0590668-write-to-standard-error-streampy-learning-cost-44375)
+    - [`059.0668-write-to-standard-error-stream.py`](#program-0590668-write-to-standard-error-streampy-learning-cost-446875)
     - [`060.1084-read-command-line-argument.py`](#program-0601084-read-command-line-argumentpy-learning-cost-60625)
     - [`061.0576-get-current-date.py`](#program-0610576-get-current-datepy-learning-cost-5125)
     - [`062.1091-find-substring-position.py`](#program-0621091-find-substring-positionpy-learning-cost-528125)
@@ -1904,7 +1904,7 @@
 
 ---
 
-### Program `059.0668-write-to-standard-error-stream.py` (learning cost 4.4375)
+### Program `059.0668-write-to-standard-error-stream.py` (learning cost 4.46875)
 
 ```python
 1   import sys
@@ -1913,7 +1913,7 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.9375 | `call/function/builtin/print` | 2 |
+| 0.96875 | `call/function/builtin/print/file` | 2 |
 | 0.9375 | `def/import/standard/sys` | 1 |
 | 0.875 | `style/imperative/flat` | 1-2 |
 | 0.75 | `style/one_liner` | 1-2 |
