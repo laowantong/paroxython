@@ -242,7 +242,7 @@
 | 0.75 | `style/one_liner` | 1-2 |
 | 0.9375 | `type/sequence/string/literal` | 2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/★` | 1-2 |
+| 0 | `meta/count/variety/*` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -260,7 +260,7 @@
 | 0.75 | `style/one_liner` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -285,7 +285,7 @@
 | 0.9375 | `var/assignment/implicit/iteration_variable` | 1 |
 | 0.875 | `var/scope/global` | 1-2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/★` | 1-2 |
+| 0 | `meta/count/variety/*` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -306,7 +306,7 @@
 | 0.875 | `type/number/magic` | 1 |
 | 0.984375 | `type/sequence/string/literal/special/\n` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -327,7 +327,7 @@
 | 0.875 | `type/number/magic` | 1 |
 | 0.984375 | `type/sequence/string/literal/special/\n` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -351,7 +351,7 @@
 | 0.875 | `var/scope/local` | 1-2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
 | 0 | `meta/count/subroutine/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/★` | 1-2 |
+| 0 | `meta/count/variety/*` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -372,7 +372,7 @@
 | 0.75 | `style/procedural` | 1-2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
 | 0 | `meta/count/subroutine/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/★` | 1-2 |
+| 0 | `meta/count/variety/*` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -396,7 +396,7 @@
 | 0.875 | `var/scope/local` | 1-2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
 | 0 | `meta/count/subroutine/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/★` | 1-2 |
+| 0 | `meta/count/variety/*` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -421,7 +421,7 @@
 | 0.875 | `var/scope/local` | 1-2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
 | 0 | `meta/count/subroutine/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/★` | 1-2 |
+| 0 | `meta/count/variety/*` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -442,7 +442,7 @@
 | 0.96875 | `def/import/standard/dataclasses/dataclass` | 1 |
 | 0.75 | `style/object_oriented` | 1-2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/★★★` | 1-2 |
+| 0 | `meta/count/variety/***` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -463,7 +463,7 @@
 | 0.9375 | `var/assignment/implicit/iteration_variable` | 1 |
 | 0.875 | `var/scope/global` | 1-2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/★` | 1-2 |
+| 0 | `meta/count/variety/*` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -486,7 +486,7 @@
 | 0.9375 | `var/assignment/implicit/iteration_variable` | 1, 1 |
 | 0.875 | `var/scope/global` | 1-2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/★` | 1-2 |
+| 0 | `meta/count/variety/*` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -507,7 +507,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 1 |
 | 0.875 | `var/scope/global` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -537,7 +537,7 @@
 | 0 | `meta/count/class/methods/1` | 1-5 |
 | 0 | `meta/count/program/sloc/5` | 1-5 |
 | 0 | `meta/count/subroutine/sloc/4` | 2-5 |
-| 0 | `meta/count/variety/★★` | 1-5 |
+| 0 | `meta/count/variety/**` | 1-5 |
 | 0 | `meta/program` | 1-5 |
 
 ---
@@ -566,7 +566,7 @@
 | 0 | `meta/count/class/methods/1` | 1-5 |
 | 0 | `meta/count/program/sloc/5` | 1-5 |
 | 0 | `meta/count/subroutine/sloc/4` | 2-5 |
-| 0 | `meta/count/variety/★★` | 1-5 |
+| 0 | `meta/count/variety/**` | 1-5 |
 | 0 | `meta/program` | 1-5 |
 
 ---
@@ -585,7 +585,7 @@
 | 0.875 | `style/imperative/flat` | 1-2 |
 | 0.75 | `style/one_liner` | 1-2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/★` | 1-2 |
+| 0 | `meta/count/variety/*` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -605,7 +605,7 @@
 | 0.875 | `style/imperative/flat` | 1-2 |
 | 0.75 | `style/one_liner` | 1-2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/★` | 1-2 |
+| 0 | `meta/count/variety/*` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -625,7 +625,7 @@
 | 0.875 | `style/imperative/flat` | 1-2 |
 | 0.75 | `style/one_liner` | 1-2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/★` | 1-2 |
+| 0 | `meta/count/variety/*` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -642,7 +642,7 @@
 | 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -666,7 +666,7 @@
 | 0.9375 | `var/assignment/implicit/iteration_variable` | 1, 1 |
 | 0.875 | `var/scope/global` | 1-2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/★` | 1-2 |
+| 0 | `meta/count/variety/*` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -693,7 +693,7 @@
 | 0.875 | `var/scope/local` | 2-3 |
 | 0 | `meta/count/program/sloc/3` | 1-3 |
 | 0 | `meta/count/subroutine/sloc/2` | 2-3 |
-| 0 | `meta/count/variety/★★` | 1-3 |
+| 0 | `meta/count/variety/**` | 1-3 |
 | 0 | `meta/program` | 1-3 |
 
 ---
@@ -713,7 +713,7 @@
 | 0.875 | `style/imperative/flat` | 1-2 |
 | 0.75 | `style/one_liner` | 1-2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/★` | 1-2 |
+| 0 | `meta/count/variety/*` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -733,7 +733,7 @@
 | 0.875 | `style/imperative/flat` | 1-2 |
 | 0.75 | `style/one_liner` | 1-2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/★` | 1-2 |
+| 0 | `meta/count/variety/*` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -765,7 +765,7 @@
 | 0.875 | `var/scope/local` | 1-6 |
 | 0 | `meta/count/program/sloc/6` | 1-6 |
 | 0 | `meta/count/subroutine/sloc/6` | 1-6 |
-| 0 | `meta/count/variety/★★★★` | 1-6 |
+| 0 | `meta/count/variety/****` | 1-6 |
 | 0 | `meta/program` | 1-6 |
 
 ---
@@ -796,7 +796,7 @@
 | 0 | `meta/count/class/methods/1` | 1-4 |
 | 0 | `meta/count/program/sloc/4` | 1-4 |
 | 0 | `meta/count/subroutine/sloc/3` | 2-4 |
-| 0 | `meta/count/variety/★★` | 1-4 |
+| 0 | `meta/count/variety/**` | 1-4 |
 | 0 | `meta/program` | 1-4 |
 
 ---
@@ -827,7 +827,7 @@
 | 0.875 | `var/scope/local` | 1-4 |
 | 0 | `meta/count/program/sloc/4` | 1-4 |
 | 0 | `meta/count/subroutine/sloc/4` | 1-4 |
-| 0 | `meta/count/variety/★★` | 1-4 |
+| 0 | `meta/count/variety/**` | 1-4 |
 | 0 | `meta/program` | 1-4 |
 
 ---
@@ -846,7 +846,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 1 |
 | 0.875 | `var/scope/global` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -866,7 +866,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 1 |
 | 0.875 | `var/scope/global` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -884,7 +884,7 @@
 | 0.75 | `style/one_liner` | 1 |
 | 0.875 | `type/sequence/list` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -916,7 +916,7 @@
 | 0.875 | `var/scope/local` | 1-4 |
 | 0 | `meta/count/program/sloc/4` | 1-4 |
 | 0 | `meta/count/subroutine/sloc/4` | 1-4 |
-| 0 | `meta/count/variety/★★` | 1-4 |
+| 0 | `meta/count/variety/**` | 1-4 |
 | 0 | `meta/program` | 1-4 |
 
 ---
@@ -935,7 +935,7 @@
 | 0.96875 | `var/assignment/explicit/parallel/swap` | 1 |
 | 0.875 | `var/scope/global` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -955,7 +955,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 1 |
 | 0.875 | `var/scope/global` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -976,7 +976,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 1 |
 | 0.875 | `var/scope/global` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -995,7 +995,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 1 |
 | 0.875 | `var/scope/global` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -1023,7 +1023,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 2, 3 |
 | 0.875 | `var/scope/global` | 1-6 |
 | 0 | `meta/count/program/sloc/6` | 1-6 |
-| 0 | `meta/count/variety/★★★` | 1-6 |
+| 0 | `meta/count/variety/***` | 1-6 |
 | 0 | `meta/program` | 1-6 |
 
 ---
@@ -1044,7 +1044,7 @@
 | 0.9375 | `var/assignment/implicit/iteration_variable` | 1, 1 |
 | 0.875 | `var/scope/local` | 1, 1, 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -1065,7 +1065,7 @@
 | 0.9375 | `var/assignment/implicit/iteration_variable` | 1, 1, 1 |
 | 0.875 | `var/scope/local` | 1, 1, 1, 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -1087,7 +1087,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 2 |
 | 0.875 | `var/scope/global` | 1-2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/★` | 1-2 |
+| 0 | `meta/count/variety/*` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -1108,7 +1108,7 @@
 | 0.9375 | `var/assignment/implicit/parameter` | 1 |
 | 0.875 | `var/scope/global` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -1126,7 +1126,7 @@
 | 0.75 | `subscript/index` | 1 |
 | 0.875 | `var/deletion/index` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -1156,7 +1156,7 @@
 | 0.9375 | `var/assignment/implicit/iteration_variable` | 3 |
 | 0.875 | `var/scope/global` | 1-4 |
 | 0 | `meta/count/program/sloc/4` | 1-4 |
-| 0 | `meta/count/variety/★★` | 1-4 |
+| 0 | `meta/count/variety/**` | 1-4 |
 | 0 | `meta/program` | 1-4 |
 
 ---
@@ -1191,7 +1191,7 @@
 | 0.875 | `var/scope/local` | 1-5 |
 | 0 | `meta/count/program/sloc/5` | 1-5 |
 | 0 | `meta/count/subroutine/sloc/5` | 1-5 |
-| 0 | `meta/count/variety/★★★` | 1-5 |
+| 0 | `meta/count/variety/***` | 1-5 |
 | 0 | `meta/program` | 1-5 |
 
 ---
@@ -1215,7 +1215,7 @@
 | 0.875 | `var/scope/local` | 1-2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
 | 0 | `meta/count/subroutine/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/★` | 1-2 |
+| 0 | `meta/count/variety/*` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -1241,7 +1241,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 2, 5 |
 | 0.875 | `var/scope/global` | 1-7 |
 | 0 | `meta/count/program/sloc/7` | 1-7 |
-| 0 | `meta/count/variety/★★` | 1-7 |
+| 0 | `meta/count/variety/**` | 1-7 |
 | 0 | `meta/program` | 1-7 |
 
 ---
@@ -1266,7 +1266,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 3 |
 | 0.875 | `var/scope/global` | 1-3 |
 | 0 | `meta/count/program/sloc/3` | 1-3 |
-| 0 | `meta/count/variety/★` | 1-3 |
+| 0 | `meta/count/variety/*` | 1-3 |
 | 0 | `meta/program` | 1-3 |
 
 ---
@@ -1294,7 +1294,7 @@
 | 0.875 | `var/scope/local` | 1-2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
 | 0 | `meta/count/subroutine/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/★` | 1-2 |
+| 0 | `meta/count/variety/*` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -1322,7 +1322,7 @@
 | 0.875 | `var/scope/local` | 1-2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
 | 0 | `meta/count/subroutine/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/★` | 1-2 |
+| 0 | `meta/count/variety/*` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -1357,7 +1357,7 @@
 | 0 | `meta/count/program/sloc/6` | 1-6 |
 | 0 | `meta/count/subroutine/sloc/2` | 3-4 |
 | 0 | `meta/count/subroutine/sloc/4` | 2-5 |
-| 0 | `meta/count/variety/★★★` | 1-6 |
+| 0 | `meta/count/variety/***` | 1-6 |
 | 0 | `meta/program` | 1-6 |
 
 ---
@@ -1377,7 +1377,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 1 |
 | 0.875 | `var/scope/global` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -1396,7 +1396,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 1 |
 | 0.875 | `var/scope/global` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -1453,7 +1453,7 @@
 | 0 | `meta/count/class/methods/2` | 2-3, 4-12 |
 | 0 | `meta/count/program/sloc/13` | 1-13 |
 | 0 | `meta/count/subroutine/sloc/4` | 5-8, 9-12 |
-| 0 | `meta/count/variety/★★★★` | 1-13 |
+| 0 | `meta/count/variety/****` | 1-13 |
 | 0 | `meta/program` | 1-13 |
 
 ---
@@ -1477,7 +1477,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 1 |
 | 0.875 | `var/scope/global` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -1497,7 +1497,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 1 |
 | 0.875 | `var/scope/global` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -1531,7 +1531,7 @@
 | 0.9375 | `var/assignment/implicit/iteration_variable` | 1, 3 |
 | 0.875 | `var/scope/global` | 1-8 |
 | 0 | `meta/count/program/sloc/8` | 1-8 |
-| 0 | `meta/count/variety/★★★★` | 1-8 |
+| 0 | `meta/count/variety/****` | 1-8 |
 | 0 | `meta/program` | 1-8 |
 
 ---
@@ -1559,7 +1559,7 @@
 | 0.9375 | `var/assignment/implicit/iteration_variable` | 1, 2 |
 | 0.875 | `var/scope/global` | 1-5 |
 | 0 | `meta/count/program/sloc/5` | 1-5 |
-| 0 | `meta/count/variety/★★★` | 1-5 |
+| 0 | `meta/count/variety/***` | 1-5 |
 | 0 | `meta/program` | 1-5 |
 
 ---
@@ -1600,7 +1600,7 @@
 | 0.9375 | `var/assignment/implicit/iteration_variable` | 5, 6 |
 | 0.875 | `var/scope/global` | 1-11 |
 | 0 | `meta/count/program/sloc/11` | 1-11 |
-| 0 | `meta/count/variety/★★★★` | 1-11 |
+| 0 | `meta/count/variety/****` | 1-11 |
 | 0 | `meta/program` | 1-11 |
 
 ---
@@ -1642,7 +1642,7 @@
 | 0.875 | `var/scope/local` | 1-6 |
 | 0 | `meta/count/program/sloc/7` | 1-7 |
 | 0 | `meta/count/subroutine/sloc/6` | 1-6 |
-| 0 | `meta/count/variety/★★` | 1-7 |
+| 0 | `meta/count/variety/**` | 1-7 |
 | 0 | `meta/program` | 1-7 |
 
 ---
@@ -1660,7 +1660,7 @@
 | 0.75 | `style/one_liner` | 1 |
 | 0.875 | `type/sequence/list` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -1682,7 +1682,7 @@
 | 0.9375 | `type/number/integer/literal` | 2 |
 | 0.875 | `type/number/magic` | 2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/★` | 1-2 |
+| 0 | `meta/count/variety/*` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -1703,7 +1703,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 1 |
 | 0.875 | `var/scope/global` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -1724,7 +1724,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 1 |
 | 0.875 | `var/scope/global` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -1744,7 +1744,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 1 |
 | 0.875 | `var/scope/global` | 1-3 |
 | 0 | `meta/count/program/sloc/3` | 1-3 |
-| 0 | `meta/count/variety/★` | 1-3 |
+| 0 | `meta/count/variety/*` | 1-3 |
 | 0 | `meta/program` | 1-3 |
 
 ---
@@ -1764,7 +1764,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 1 |
 | 0.875 | `var/scope/global` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -1784,7 +1784,7 @@
 | 0.75 | `style/imperative` | 1-2 |
 | 0.9375 | `type/boolean/literal/True` | 1 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/★` | 1-2 |
+| 0 | `meta/count/variety/*` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -1801,7 +1801,7 @@
 | 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -1820,7 +1820,7 @@
 | 0.75 | `style/one_liner` | 1 |
 | 0.875 | `type/non_sequence/dictionary` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -1841,7 +1841,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 1 |
 | 0.875 | `var/scope/global` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -1865,7 +1865,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 1 |
 | 0.875 | `var/scope/global` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -1884,7 +1884,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 1 |
 | 0.875 | `var/scope/global` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -1904,7 +1904,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 1 |
 | 0.875 | `var/scope/global` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -1937,7 +1937,7 @@
 | 0.875 | `var/scope/local` | 2-3 |
 | 0 | `meta/count/program/sloc/6` | 1-6 |
 | 0 | `meta/count/subroutine/sloc/2` | 2-3 |
-| 0 | `meta/count/variety/★★★` | 1-6 |
+| 0 | `meta/count/variety/***` | 1-6 |
 | 0 | `meta/program` | 1-6 |
 
 ---
@@ -1957,7 +1957,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 1 |
 | 0.875 | `var/scope/global` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -1977,7 +1977,7 @@
 | 0.9375 | `var/assignment/implicit/iteration_variable` | 1 |
 | 0.875 | `var/scope/local` | 1, 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -1997,7 +1997,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 1 |
 | 0.875 | `var/scope/global` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -2017,7 +2017,7 @@
 | 0.75 | `style/one_liner` | 1-2 |
 | 0.9375 | `type/sequence/string/literal` | 2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/★` | 1-2 |
+| 0 | `meta/count/variety/*` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -2039,7 +2039,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 2 |
 | 0.875 | `var/scope/global` | 1-2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/★` | 1-2 |
+| 0 | `meta/count/variety/*` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -2060,7 +2060,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 2 |
 | 0.875 | `var/scope/global` | 1-2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/★` | 1-2 |
+| 0 | `meta/count/variety/*` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -2080,7 +2080,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 1 |
 | 0.875 | `var/scope/global` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -2100,7 +2100,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 1 |
 | 0.875 | `var/scope/global` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -2121,7 +2121,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 1 |
 | 0.875 | `var/scope/global` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -2142,7 +2142,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 1 |
 | 0.875 | `var/scope/global` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -2161,7 +2161,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 1 |
 | 0.875 | `var/scope/global` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -2189,7 +2189,7 @@
 | 0.875 | `var/scope/local` | 2-3 |
 | 0 | `meta/count/program/sloc/3` | 1-3 |
 | 0 | `meta/count/subroutine/sloc/2` | 2-3 |
-| 0 | `meta/count/variety/★` | 1-3 |
+| 0 | `meta/count/variety/*` | 1-3 |
 | 0 | `meta/program` | 1-3 |
 
 ---
@@ -2219,7 +2219,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 3 |
 | 0.875 | `var/scope/global` | 1-3 |
 | 0 | `meta/count/program/sloc/3` | 1-3 |
-| 0 | `meta/count/variety/★★` | 1-3 |
+| 0 | `meta/count/variety/**` | 1-3 |
 | 0 | `meta/program` | 1-3 |
 
 ---
@@ -2239,7 +2239,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 2 |
 | 0.875 | `var/scope/global` | 1-2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/★` | 1-2 |
+| 0 | `meta/count/variety/*` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -2259,7 +2259,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 2 |
 | 0.875 | `var/scope/global` | 1-2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/★` | 1-2 |
+| 0 | `meta/count/variety/*` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -2284,7 +2284,7 @@
 | 0.875 | `type/sequence/string` | 2 |
 | 0.9375 | `type/sequence/string/literal` | 2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/★` | 1-2 |
+| 0 | `meta/count/variety/*` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -2312,7 +2312,7 @@
 | 0.875 | `var/scope/local` | 1-3 |
 | 0 | `meta/count/program/sloc/3` | 1-3 |
 | 0 | `meta/count/subroutine/sloc/3` | 1-3 |
-| 0 | `meta/count/variety/★` | 1-3 |
+| 0 | `meta/count/variety/*` | 1-3 |
 | 0 | `meta/program` | 1-3 |
 
 ---
@@ -2333,7 +2333,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 2 |
 | 0.875 | `var/scope/global` | 1-2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/★` | 1-2 |
+| 0 | `meta/count/variety/*` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -2356,7 +2356,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 2 |
 | 0.875 | `var/scope/global` | 1-2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/★` | 1-2 |
+| 0 | `meta/count/variety/*` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -2377,7 +2377,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 1 |
 | 0.875 | `var/scope/global` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -2399,7 +2399,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 1, 2 |
 | 0.875 | `var/scope/global` | 1-2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/★` | 1-2 |
+| 0 | `meta/count/variety/*` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -2423,7 +2423,7 @@
 | 0.75 | `style/imperative` | 1-4 |
 | 0.9375 | `type/boolean/literal/True` | 1 |
 | 0 | `meta/count/program/sloc/4` | 1-4 |
-| 0 | `meta/count/variety/★★★` | 1-4 |
+| 0 | `meta/count/variety/***` | 1-4 |
 | 0 | `meta/program` | 1-4 |
 
 ---
@@ -2443,7 +2443,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 1 |
 | 0.875 | `var/scope/global` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -2463,7 +2463,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 1 |
 | 0.875 | `var/scope/global` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -2486,7 +2486,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 1 |
 | 0.875 | `var/scope/global` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -2506,7 +2506,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 1 |
 | 0.875 | `var/scope/global` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -2528,7 +2528,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 2 |
 | 0.875 | `var/scope/global` | 1-2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/★` | 1-2 |
+| 0 | `meta/count/variety/*` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -2550,7 +2550,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 1 |
 | 0.875 | `var/scope/global` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -2573,7 +2573,7 @@
 | 0.875 | `var/scope/local` | 1-2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
 | 0 | `meta/count/subroutine/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/★` | 1-2 |
+| 0 | `meta/count/variety/*` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -2596,7 +2596,7 @@
 | 0.875 | `var/scope/local` | 1-2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
 | 0 | `meta/count/subroutine/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/★` | 1-2 |
+| 0 | `meta/count/variety/*` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -2617,7 +2617,7 @@
 | 0.75 | `style/one_liner` | 1-2 |
 | 0.9375 | `type/number/integer/literal` | 2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/★` | 1-2 |
+| 0 | `meta/count/variety/*` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -2638,7 +2638,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 1 |
 | 0.875 | `var/scope/global` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -2656,7 +2656,7 @@
 | 0.75 | `style/one_liner` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -2690,7 +2690,7 @@
 | 0 | `meta/count/program/sloc/6` | 1-6 |
 | 0 | `meta/count/subroutine/sloc/2` | 2-3 |
 | 0 | `meta/count/subroutine/sloc/3` | 4-6 |
-| 0 | `meta/count/variety/★★★★` | 1-6 |
+| 0 | `meta/count/variety/****` | 1-6 |
 | 0 | `meta/program` | 1-6 |
 
 ---
@@ -2713,7 +2713,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 3 |
 | 0.875 | `var/scope/global` | 1-3 |
 | 0 | `meta/count/program/sloc/3` | 1-3 |
-| 0 | `meta/count/variety/★★` | 1-3 |
+| 0 | `meta/count/variety/**` | 1-3 |
 | 0 | `meta/program` | 1-3 |
 
 ---
@@ -2735,7 +2735,7 @@
 | 0.875 | `style/imperative/flat` | 1-3 |
 | 0.9375 | `type/sequence/string/literal` | 2, 2 |
 | 0 | `meta/count/program/sloc/3` | 1-3 |
-| 0 | `meta/count/variety/★★` | 1-3 |
+| 0 | `meta/count/variety/**` | 1-3 |
 | 0 | `meta/program` | 1-3 |
 
 ---
@@ -2763,7 +2763,7 @@
 | 0.875 | `var/scope/local` | 2-3 |
 | 0 | `meta/count/program/sloc/3` | 1-3 |
 | 0 | `meta/count/subroutine/sloc/2` | 2-3 |
-| 0 | `meta/count/variety/★★` | 1-3 |
+| 0 | `meta/count/variety/**` | 1-3 |
 | 0 | `meta/program` | 1-3 |
 
 ---
@@ -2782,7 +2782,7 @@
 | 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -2799,7 +2799,7 @@
 | 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -2820,7 +2820,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 2 |
 | 0.875 | `var/scope/global` | 1-2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/★` | 1-2 |
+| 0 | `meta/count/variety/*` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -2840,7 +2840,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 1 |
 | 0.875 | `var/scope/global` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -2860,7 +2860,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 1 |
 | 0.875 | `var/scope/global` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -2881,7 +2881,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 2 |
 | 0.875 | `var/scope/global` | 1-2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/★` | 1-2 |
+| 0 | `meta/count/variety/*` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -2906,7 +2906,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 2, 3 |
 | 0.875 | `var/scope/global` | 1-3 |
 | 0 | `meta/count/program/sloc/3` | 1-3 |
-| 0 | `meta/count/variety/★` | 1-3 |
+| 0 | `meta/count/variety/*` | 1-3 |
 | 0 | `meta/program` | 1-3 |
 
 ---
@@ -2927,7 +2927,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 2, 3 |
 | 0.875 | `var/scope/global` | 1-3 |
 | 0 | `meta/count/program/sloc/3` | 1-3 |
-| 0 | `meta/count/variety/★` | 1-3 |
+| 0 | `meta/count/variety/*` | 1-3 |
 | 0 | `meta/program` | 1-3 |
 
 ---
@@ -2945,7 +2945,7 @@
 | 0.75 | `style/one_liner` | 1 |
 | 0.875 | `type/sequence/list` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -2966,7 +2966,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 3 |
 | 0.875 | `var/scope/global` | 1-3 |
 | 0 | `meta/count/program/sloc/3` | 1-3 |
-| 0 | `meta/count/variety/★★` | 1-3 |
+| 0 | `meta/count/variety/**` | 1-3 |
 | 0 | `meta/program` | 1-3 |
 
 ---
@@ -2989,7 +2989,7 @@
 | 0.9375 | `var/assignment/explicit/parallel` | 2 |
 | 0.875 | `var/scope/global` | 1-2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/★` | 1-2 |
+| 0 | `meta/count/variety/*` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -3011,7 +3011,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 2 |
 | 0.875 | `var/scope/global` | 1-2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/★` | 1-2 |
+| 0 | `meta/count/variety/*` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -3056,7 +3056,7 @@
 | 0 | `meta/count/class/methods/1` | 2-9 |
 | 0 | `meta/count/program/sloc/12` | 1-12 |
 | 0 | `meta/count/subroutine/sloc/4` | 6-9 |
-| 0 | `meta/count/variety/★★★` | 1-12 |
+| 0 | `meta/count/variety/***` | 1-12 |
 | 0 | `meta/program` | 1-12 |
 
 ---
@@ -3078,7 +3078,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 2 |
 | 0.875 | `var/scope/global` | 1-2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/★` | 1-2 |
+| 0 | `meta/count/variety/*` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -3099,7 +3099,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 2 |
 | 0.875 | `var/scope/global` | 1-2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/★` | 1-2 |
+| 0 | `meta/count/variety/*` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -3121,7 +3121,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 2 |
 | 0.875 | `var/scope/global` | 1-2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/★` | 1-2 |
+| 0 | `meta/count/variety/*` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -3143,7 +3143,7 @@
 | 0.75 | `style/imperative` | 1-2 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/★` | 1-2 |
+| 0 | `meta/count/variety/*` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -3164,7 +3164,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 2 |
 | 0.875 | `var/scope/global` | 1-2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/★` | 1-2 |
+| 0 | `meta/count/variety/*` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -3186,7 +3186,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 1 |
 | 0.875 | `var/scope/global` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -3208,7 +3208,7 @@
 | 0.9375 | `type/sequence/list/literal` | 2 |
 | 0.9375 | `type/sequence/string/literal` | 2, 2, 2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/★` | 1-2 |
+| 0 | `meta/count/variety/*` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -3231,7 +3231,7 @@
 | 0.9375 | `var/assignment/implicit/iteration_variable` | 1 |
 | 0.875 | `var/scope/global` | 1-2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/★` | 1-2 |
+| 0 | `meta/count/variety/*` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -3259,7 +3259,7 @@
 | 0.875 | `var/scope/local` | 1 |
 | 0.875 | `var/scope/shadowing` | 1 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/★` | 1-2 |
+| 0 | `meta/count/variety/*` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -3278,7 +3278,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 1 |
 | 0.875 | `var/scope/global` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -3299,7 +3299,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 2 |
 | 0.875 | `var/scope/global` | 1-2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/★` | 1-2 |
+| 0 | `meta/count/variety/*` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -3320,7 +3320,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 1 |
 | 0.875 | `var/scope/global` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -3339,7 +3339,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 1 |
 | 0.875 | `var/scope/global` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -3359,7 +3359,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 1 |
 | 0.875 | `var/scope/global` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -3377,7 +3377,7 @@
 | 0.75 | `style/one_liner` | 1 |
 | 0.875 | `type/non_sequence/set` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -3400,7 +3400,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 1 |
 | 0.875 | `var/scope/global` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -3442,7 +3442,7 @@
 | 0.9375 | `var/assignment/implicit/iteration_variable` | 4 |
 | 0.875 | `var/scope/global` | 1-8 |
 | 0 | `meta/count/program/sloc/8` | 1-8 |
-| 0 | `meta/count/variety/★★★` | 1-8 |
+| 0 | `meta/count/variety/***` | 1-8 |
 | 0 | `meta/program` | 1-8 |
 
 ---
@@ -3465,7 +3465,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 1 |
 | 0.875 | `var/scope/global` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -3500,7 +3500,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 2, 3 |
 | 0.875 | `var/scope/global` | 1-7 |
 | 0 | `meta/count/program/sloc/7` | 1-7 |
-| 0 | `meta/count/variety/★★` | 1-7 |
+| 0 | `meta/count/variety/**` | 1-7 |
 | 0 | `meta/program` | 1-7 |
 
 ---
@@ -3525,7 +3525,7 @@
 | 0.96875 | `var/assignment/explicit/parallel/more_than_two` | 2 |
 | 0.875 | `var/scope/global` | 1-2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/★` | 1-2 |
+| 0 | `meta/count/variety/*` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -3551,7 +3551,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 3, 4, 5, 6 |
 | 0.875 | `var/scope/global` | 1-6 |
 | 0 | `meta/count/program/sloc/6` | 1-6 |
-| 0 | `meta/count/variety/★★` | 1-6 |
+| 0 | `meta/count/variety/**` | 1-6 |
 | 0 | `meta/program` | 1-6 |
 
 ---
@@ -3567,7 +3567,7 @@
 | 0.75 | `flow/assertion` | 1 |
 | 0.875 | `style/imperative/flat` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -3600,7 +3600,7 @@
 | 0.875 | `var/scope/local` | 2-4 |
 | 0 | `meta/count/program/sloc/4` | 1-4 |
 | 0 | `meta/count/subroutine/sloc/3` | 2-4 |
-| 0 | `meta/count/variety/★★` | 1-4 |
+| 0 | `meta/count/variety/**` | 1-4 |
 | 0 | `meta/program` | 1-4 |
 
 ---
@@ -3627,7 +3627,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 2, 4 |
 | 0.875 | `var/scope/global` | 1-5 |
 | 0 | `meta/count/program/sloc/5` | 1-5 |
-| 0 | `meta/count/variety/★★` | 1-5 |
+| 0 | `meta/count/variety/**` | 1-5 |
 | 0 | `meta/program` | 1-5 |
 
 ---
@@ -3653,7 +3653,7 @@
 | 0.75 | `var/metasyntactic` | 1-2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
 | 0 | `meta/count/subroutine/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/★` | 1-2 |
+| 0 | `meta/count/variety/*` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -3677,7 +3677,7 @@
 | 0.75 | `var/metasyntactic` | 2 |
 | 0.875 | `var/scope/global` | 1-2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/★` | 1-2 |
+| 0 | `meta/count/variety/*` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -3722,7 +3722,7 @@
 | 0.875 | `var/scope/local` | 1-9 |
 | 0 | `meta/count/program/sloc/9` | 1-9 |
 | 0 | `meta/count/subroutine/sloc/9` | 1-9 |
-| 0 | `meta/count/variety/★★★★` | 1-9 |
+| 0 | `meta/count/variety/****` | 1-9 |
 | 0 | `meta/program` | 1-9 |
 
 ---
@@ -3766,7 +3766,7 @@
 | 0.875 | `var/scope/local` | 2-9, 9 |
 | 0 | `meta/count/program/sloc/9` | 1-9 |
 | 0 | `meta/count/subroutine/sloc/8` | 2-9 |
-| 0 | `meta/count/variety/★★★★` | 1-9 |
+| 0 | `meta/count/variety/****` | 1-9 |
 | 0 | `meta/program` | 1-9 |
 
 ---
@@ -3808,7 +3808,7 @@
 | 0.875 | `var/scope/local` | 1-8, 8 |
 | 0 | `meta/count/program/sloc/8` | 1-8 |
 | 0 | `meta/count/subroutine/sloc/8` | 1-8 |
-| 0 | `meta/count/variety/★★★` | 1-8 |
+| 0 | `meta/count/variety/***` | 1-8 |
 | 0 | `meta/program` | 1-8 |
 
 ---
@@ -3826,7 +3826,7 @@
 | 0.75 | `style/one_liner` | 1 |
 | 0.875 | `type/null/literal` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -3849,7 +3849,7 @@
 | 0.9375 | `flow/conditional/else/if` | 4, 6 |
 | 0.75 | `style/imperative` | 1-6 |
 | 0 | `meta/count/program/sloc/6` | 1-6 |
-| 0 | `meta/count/variety/★★` | 1-6 |
+| 0 | `meta/count/variety/**` | 1-6 |
 | 0 | `meta/program` | 1-6 |
 
 ---
@@ -3871,7 +3871,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 2 |
 | 0.875 | `var/scope/global` | 1-2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/★` | 1-2 |
+| 0 | `meta/count/variety/*` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -3892,7 +3892,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 1 |
 | 0.875 | `var/scope/global` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -3911,7 +3911,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 1 |
 | 0.875 | `var/scope/global` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -3928,7 +3928,7 @@
 | 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -3948,7 +3948,7 @@
 | 0.9375 | `var/assignment/implicit/iteration_variable` | 1 |
 | 0.875 | `var/scope/local` | 1, 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -3968,7 +3968,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 1 |
 | 0.875 | `var/scope/global` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -3988,7 +3988,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 2 |
 | 0.875 | `var/scope/global` | 1-2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/★` | 1-2 |
+| 0 | `meta/count/variety/*` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -4008,7 +4008,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 2 |
 | 0.875 | `var/scope/global` | 1-2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/★` | 1-2 |
+| 0 | `meta/count/variety/*` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -4026,7 +4026,7 @@
 | 0.75 | `style/one_liner` | 1 |
 | 0.875 | `type/null/literal` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -4048,7 +4048,7 @@
 | 0.9375 | `var/assignment/implicit/iteration_variable` | 1 |
 | 0.875 | `var/scope/global` | 1-2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/★` | 1-2 |
+| 0 | `meta/count/variety/*` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -4067,7 +4067,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 1 |
 | 0.875 | `var/scope/global` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -4089,7 +4089,7 @@
 | 0.9375 | `var/assignment/implicit/iteration_variable` | 1 |
 | 0.875 | `var/scope/global` | 1-2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/★` | 1-2 |
+| 0 | `meta/count/variety/*` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -4110,7 +4110,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 2 |
 | 0.875 | `var/scope/global` | 1-2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/★` | 1-2 |
+| 0 | `meta/count/variety/*` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -4132,7 +4132,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 2 |
 | 0.875 | `var/scope/global` | 1-2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/★` | 1-2 |
+| 0 | `meta/count/variety/*` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -4159,7 +4159,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 5 |
 | 0.875 | `var/scope/global` | 1-6 |
 | 0 | `meta/count/program/sloc/6` | 1-6 |
-| 0 | `meta/count/variety/★★` | 1-6 |
+| 0 | `meta/count/variety/**` | 1-6 |
 | 0 | `meta/program` | 1-6 |
 
 ---
@@ -4183,7 +4183,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 2, 4 |
 | 0.875 | `var/scope/global` | 1-4 |
 | 0 | `meta/count/program/sloc/4` | 1-4 |
-| 0 | `meta/count/variety/★★` | 1-4 |
+| 0 | `meta/count/variety/**` | 1-4 |
 | 0 | `meta/program` | 1-4 |
 
 ---
@@ -4203,7 +4203,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 1 |
 | 0.875 | `var/scope/global` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -4222,7 +4222,7 @@
 | 0.875 | `type/number/floating_point` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -4245,7 +4245,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 2 |
 | 0.875 | `var/scope/global` | 1-2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/★` | 1-2 |
+| 0 | `meta/count/variety/*` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -4270,7 +4270,7 @@
 | 0.875 | `type/sequence/list` | 1 |
 | 0.875 | `type/sequence/string` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -4291,7 +4291,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 1 |
 | 0.875 | `var/scope/global` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -4316,7 +4316,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 3 |
 | 0.875 | `var/scope/global` | 1-3 |
 | 0 | `meta/count/program/sloc/3` | 1-3 |
-| 0 | `meta/count/variety/★★` | 1-3 |
+| 0 | `meta/count/variety/**` | 1-3 |
 | 0 | `meta/program` | 1-3 |
 
 ---
@@ -4334,7 +4334,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 1 |
 | 0.875 | `var/scope/global` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -4355,7 +4355,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 1 |
 | 0.875 | `var/scope/global` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -4390,7 +4390,7 @@
 | 0.875 | `var/scope/global` | 1-3 |
 | 0.875 | `var/scope/local` | 1, 2 |
 | 0 | `meta/count/program/sloc/3` | 1-3 |
-| 0 | `meta/count/variety/★` | 1-3 |
+| 0 | `meta/count/variety/*` | 1-3 |
 | 0 | `meta/program` | 1-3 |
 
 ---
@@ -4456,7 +4456,7 @@
 | 0 | `meta/count/program/sloc/15` | 1-15 |
 | 0 | `meta/count/subroutine/sloc/3` | 8-10 |
 | 0 | `meta/count/subroutine/sloc/5` | 3-7 |
-| 0 | `meta/count/variety/★★★★★` | 1-15 |
+| 0 | `meta/count/variety/*****` | 1-15 |
 | 0 | `meta/program` | 1-15 |
 
 ---
@@ -4477,7 +4477,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 2 |
 | 0.875 | `var/scope/global` | 1-3 |
 | 0 | `meta/count/program/sloc/3` | 1-3 |
-| 0 | `meta/count/variety/★★` | 1-3 |
+| 0 | `meta/count/variety/**` | 1-3 |
 | 0 | `meta/program` | 1-3 |
 
 ---
@@ -4497,7 +4497,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 1 |
 | 0.875 | `var/scope/global` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -4517,7 +4517,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 1 |
 | 0.875 | `var/scope/global` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -4538,7 +4538,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 2 |
 | 0.875 | `var/scope/global` | 1-2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/★` | 1-2 |
+| 0 | `meta/count/variety/*` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -4569,7 +4569,7 @@
 | 0 | `meta/count/class/methods/1` | 1-5 |
 | 0 | `meta/count/program/sloc/5` | 1-5 |
 | 0 | `meta/count/subroutine/sloc/4` | 2-5 |
-| 0 | `meta/count/variety/★★` | 1-5 |
+| 0 | `meta/count/variety/**` | 1-5 |
 | 0 | `meta/program` | 1-5 |
 
 ---
@@ -4596,7 +4596,7 @@
 | 0.9375 | `type/number/integer/literal` | 2, 2 |
 | 0.875 | `type/number/magic` | 2 |
 | 0 | `meta/count/program/sloc/5` | 1-5 |
-| 0 | `meta/count/variety/★★` | 1-5 |
+| 0 | `meta/count/variety/**` | 1-5 |
 | 0 | `meta/program` | 1-5 |
 
 ---
@@ -4616,7 +4616,7 @@
 | 0.9375 | `var/assignment/implicit/iteration_variable` | 1 |
 | 0.875 | `var/scope/local` | 1, 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -4642,7 +4642,7 @@
 | 0.9375 | `type/number/integer/literal` | 2, 4 |
 | 0.9375 | `type/sequence/string/literal` | 2, 4 |
 | 0 | `meta/count/program/sloc/5` | 1-5 |
-| 0 | `meta/count/variety/★★` | 1-5 |
+| 0 | `meta/count/variety/**` | 1-5 |
 | 0 | `meta/program` | 1-5 |
 
 ---
@@ -4667,7 +4667,7 @@
 | 0.9375 | `var/assignment/implicit/iteration_variable` | 1 |
 | 0.875 | `var/scope/global` | 1-2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/★` | 1-2 |
+| 0 | `meta/count/variety/*` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -4706,7 +4706,7 @@
 | 0.875 | `var/scope/shadowing` | 2-5 |
 | 0 | `meta/count/program/sloc/7` | 1-7 |
 | 0 | `meta/count/subroutine/sloc/4` | 2-5 |
-| 0 | `meta/count/variety/★★★` | 1-7 |
+| 0 | `meta/count/variety/***` | 1-7 |
 | 0 | `meta/program` | 1-7 |
 
 ---
@@ -4726,7 +4726,7 @@
 | 0.875 | `style/imperative/flat` | 1-2 |
 | 0.75 | `style/one_liner` | 1-2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/★` | 1-2 |
+| 0 | `meta/count/variety/*` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -4747,7 +4747,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 1 |
 | 0.875 | `var/scope/global` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -4766,7 +4766,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 1 |
 | 0.875 | `var/scope/global` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -4789,7 +4789,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 1 |
 | 0.875 | `var/scope/global` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -4809,7 +4809,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 1 |
 | 0.875 | `var/scope/global` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -4832,7 +4832,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 1 |
 | 0.875 | `var/scope/global` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -4852,7 +4852,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 1 |
 | 0.875 | `var/scope/global` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -4871,7 +4871,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 1 |
 | 0.875 | `var/scope/global` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -4890,7 +4890,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 1 |
 | 0.875 | `var/scope/global` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -4908,7 +4908,7 @@
 | 0.75 | `style/one_liner` | 1 |
 | 0.875 | `type/sequence/list` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -4926,7 +4926,7 @@
 | 0.75 | `subscript/index` | 1 |
 | 0.9375 | `var/assignment/explicit/index` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -4944,7 +4944,7 @@
 | 0.75 | `style/one_liner` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -4962,7 +4962,7 @@
 | 0.75 | `style/one_liner` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -4980,7 +4980,7 @@
 | 0.75 | `style/one_liner` | 1 |
 | 0.9375 | `type/sequence/string/literal` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -5007,7 +5007,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 2, 3, 4 |
 | 0.875 | `var/scope/global` | 1-4 |
 | 0 | `meta/count/program/sloc/4` | 1-4 |
-| 0 | `meta/count/variety/★` | 1-4 |
+| 0 | `meta/count/variety/*` | 1-4 |
 | 0 | `meta/program` | 1-4 |
 
 ---
@@ -5027,7 +5027,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 1 |
 | 0.875 | `var/scope/global` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -5047,7 +5047,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 1 |
 | 0.875 | `var/scope/global` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -5076,7 +5076,7 @@
 | 0.875 | `var/scope/global` | 1-3 |
 | 0.875 | `var/scope/local` | 3 |
 | 0 | `meta/count/program/sloc/3` | 1-3 |
-| 0 | `meta/count/variety/★` | 1-3 |
+| 0 | `meta/count/variety/*` | 1-3 |
 | 0 | `meta/program` | 1-3 |
 
 ---
@@ -5110,7 +5110,7 @@
 | 0.875 | `var/scope/global` | 1-7 |
 | 0.875 | `var/scope/local` | 4 |
 | 0 | `meta/count/program/sloc/7` | 1-7 |
-| 0 | `meta/count/variety/★★` | 1-7 |
+| 0 | `meta/count/variety/**` | 1-7 |
 | 0 | `meta/program` | 1-7 |
 
 ---
@@ -5139,7 +5139,7 @@
 | 0.9375 | `var/assignment/implicit/iteration_variable` | 3 |
 | 0.875 | `var/scope/local` | 3 |
 | 0 | `meta/count/program/sloc/3` | 1-3 |
-| 0 | `meta/count/variety/★` | 1-3 |
+| 0 | `meta/count/variety/*` | 1-3 |
 | 0 | `meta/program` | 1-3 |
 
 ---
@@ -5160,7 +5160,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 1 |
 | 0.875 | `var/scope/global` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -5182,7 +5182,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 1 |
 | 0.875 | `var/scope/global` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -5208,7 +5208,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 2, 3 |
 | 0.875 | `var/scope/global` | 1-3 |
 | 0 | `meta/count/program/sloc/3` | 1-3 |
-| 0 | `meta/count/variety/★` | 1-3 |
+| 0 | `meta/count/variety/*` | 1-3 |
 | 0 | `meta/program` | 1-3 |
 
 ---
@@ -5229,7 +5229,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 2 |
 | 0.875 | `var/scope/global` | 1-2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/★` | 1-2 |
+| 0 | `meta/count/variety/*` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -5250,7 +5250,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 1 |
 | 0.875 | `var/scope/global` | 1-2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/★` | 1-2 |
+| 0 | `meta/count/variety/*` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -5280,7 +5280,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 3, 4, 5, 6 |
 | 0.875 | `var/scope/global` | 1-7 |
 | 0 | `meta/count/program/sloc/7` | 1-7 |
-| 0 | `meta/count/variety/★★` | 1-7 |
+| 0 | `meta/count/variety/**` | 1-7 |
 | 0 | `meta/program` | 1-7 |
 
 ---
@@ -5303,7 +5303,7 @@
 | 0.75 | `style/one_liner` | 1-2 |
 | 0.9375 | `type/number/integer/literal` | 2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/★` | 1-2 |
+| 0 | `meta/count/variety/*` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -5328,7 +5328,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 2 |
 | 0.875 | `var/scope/global` | 1-3 |
 | 0 | `meta/count/program/sloc/3` | 1-3 |
-| 0 | `meta/count/variety/★` | 1-3 |
+| 0 | `meta/count/variety/*` | 1-3 |
 | 0 | `meta/program` | 1-3 |
 
 ---
@@ -5349,7 +5349,7 @@
 | 0.75 | `style/one_liner` | 1-2 |
 | 0.96875 | `type/number/integer/literal/zero` | 2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/★` | 1-2 |
+| 0 | `meta/count/variety/*` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -5408,7 +5408,7 @@
 | 0 | `meta/count/subroutine/sloc/2` | 11-12 |
 | 0 | `meta/count/subroutine/sloc/3` | 2-4, 13-15 |
 | 0 | `meta/count/subroutine/sloc/6` | 5-10 |
-| 0 | `meta/count/variety/★★★` | 1-15 |
+| 0 | `meta/count/variety/***` | 1-15 |
 | 0 | `meta/program` | 1-15 |
 
 ---
@@ -5429,7 +5429,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 2 |
 | 0.875 | `var/scope/global` | 1-2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/★` | 1-2 |
+| 0 | `meta/count/variety/*` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -5450,7 +5450,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 2 |
 | 0.875 | `var/scope/global` | 1-2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/★` | 1-2 |
+| 0 | `meta/count/variety/*` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -5470,7 +5470,7 @@
 | 0.9375 | `var/assignment/implicit/iteration_variable` | 1 |
 | 0.875 | `var/scope/local` | 1, 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
-| 0 | `meta/count/variety/★` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
@@ -5492,7 +5492,7 @@
 | 0.9375 | `var/assignment/implicit/iteration_variable` | 1 |
 | 0.875 | `var/scope/local` | 1 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/★` | 1-2 |
+| 0 | `meta/count/variety/*` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -5512,7 +5512,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 2 |
 | 0.875 | `var/scope/global` | 1-2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/★` | 1-2 |
+| 0 | `meta/count/variety/*` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---

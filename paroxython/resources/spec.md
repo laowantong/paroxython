@@ -8376,7 +8376,7 @@ Ratio of the number of distinct features to the number of features, multiplied b
 
 ```sql
 SELECT "variety",
-       printf('%.' || cast(count(DISTINCT t.span_start) * count(DISTINCT t.name_prefix) / (0.001 + count(t.name_prefix)) AS int) ||'c', '★'),
+       printf('%.' || cast(count(DISTINCT t.span_start) * count(DISTINCT t.name_prefix) / (0.001 + count(t.name_prefix)) AS int) ||'c', '*'),
        p.span,
        p.path
 FROM t_whole_span p
@@ -8400,7 +8400,7 @@ WHERE t.name_prefix != "node"
 
 | Label | Lines |
 |:--|:--|
-| `variety:★★★` | 1-7 |
+| `variety:***` | 1-7 |
 
 --------------------------------------------------------------------------------
 

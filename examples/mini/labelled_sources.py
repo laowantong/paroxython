@@ -13,7 +13,7 @@ a = b # assignment
       # one_liner_style
       # scope:a
       # single_assignment:a
-      # variety:★
+      # variety:*
       # whole_span:1
 
 # ----------------------------------------------------------------------------------------
@@ -30,7 +30,7 @@ def print_collatz(n): # added_block_label (-> +7)
                       # node:arg
                       # procedural_style (-> +7)
                       # scope:n (-> +7)
-                      # variety:★★★★ (-> +7)
+                      # variety:**** (-> +7)
                       # whole_span:8 (-> +7)
     while n != 1: # comparison_operator:NotEq
                   # literal:1
@@ -129,7 +129,7 @@ import collatz # global_scope:i (-> +9)
                # import_module_internally:collatz
                # node:Import
                # scope:i (-> +9)
-               # variety:★★★ (-> +9)
+               # variety:*** (-> +9)
                # whole_span:10 (-> +9)
 for i in range(1, 101): # argument:1
                         # argument:101
@@ -248,7 +248,7 @@ import fizzbuzz # functional_style (-> +2)
                 # import_module_internally:fizzbuzz
                 # node:Import
                 # one_liner_style (-> +2)
-                # variety:★★ (-> +2)
+                # variety:** (-> +2)
                 # whole_span:3 (-> +2)
 def is_even(n): # function:is_even (-> +1)
                 # function_line_count:2 (-> +1)
