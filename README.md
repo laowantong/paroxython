@@ -12,6 +12,7 @@
 [![spec features](https://img.shields.io/badge/spec-169%20features-blue)](https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md)
 [![taxonomy mappings](https://img.shields.io/badge/taxonomy-275%20mappings-blue)](https://github.com/laowantong/paroxython/blob/master/paroxython/resources/taxonomy.tsv)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/y/laowantong/paroxython.svg?style=flat)
+[![Downloads](https://pepy.tech/badge/paroxython/week)](https://pepy.tech/project/paroxython/week)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Band-aid](https://img.shields.io/badge/not%C2%A0%C2%A0%F0%9F%85%B3%F0%9F%85%B4%F0%9F%85%B0%F0%9F%85%B3-yet-%23F3D9C5?labelColor=%23F3D9C5)](https://youtu.be/QcbR1J_4ICg?t=54)
@@ -41,7 +42,7 @@ and a lot more from [Awesome Python in Education](https://github.com/quobit/awes
 
 In any case, the Python source codes you have gathered are typically
 **numerous** (hundreds or even thousands),
-**reasonably sized** (anything below 1000 lines of code),
+**reasonably sized** (anything below 100 lines of code),
 and **educational** in nature (e.g., snippets, examples, quizzes, exercise solutions, classic algorithms).
 The programming concepts you plan to teach remain relatively **low level** (e.g. assignments, nested loops, accumulation patterns, tail recursive functions, etc.).
 
