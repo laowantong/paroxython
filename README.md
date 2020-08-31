@@ -8,7 +8,7 @@
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/laowantong/paroxython)
 [![paroxython SLOC](https://img.shields.io/badge/main%20program-~1700%20SLOC-blue)](https://github.com/laowantong/paroxython/blob/master/paroxython)
 [![tests SLOC](https://img.shields.io/badge/tests-~2700%20SLOC-blue)](https://github.com/laowantong/paroxython/blob/master/tests)
-[![helpers SLOC](https://img.shields.io/badge/helpers-~900%20SLOC-blue)](https://github.com/laowantong/paroxython/blob/master/helpers)
+[![helpers SLOC](https://img.shields.io/badge/helpers-~850%20SLOC-blue)](https://github.com/laowantong/paroxython/blob/master/helpers)
 [![spec lines](https://img.shields.io/badge/spec-~8250%20lines-blue)](https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md)
 [![taxonomy mappings](https://img.shields.io/badge/taxonomy-272%20mappings-blue)](https://github.com/laowantong/paroxython/blob/master/paroxython/resources/taxonomy.tsv)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/y/laowantong/paroxython.svg?style=flat)
@@ -157,17 +157,17 @@ If you use Jupyter notebook/lab, you've also just installed a so-called magic co
 %load_ext paroxython
 ```
 
-This should print `"paroxython 0.4.7 loaded."`. Run it on a cell of Python code (line numbers added for clarity):
+This should print `"paroxython 0.4.7 loaded."`. Run it on a cell of Python code:
 
 ```python
-1   %%paroxython
-2   def fibonacci(n):
-3       result = []
-4       (a, b) = (0, 1)
-5       while a < n:
-6           result.append(a)
-7           (a, b) = (b, a + b)
-8       return result
+%%paroxython                          # Lines
+def fibonacci(n):                     # 2
+    result = []                       # 3
+    (a, b) = (0, 1)                   # 4
+    while a < n:                      # 5
+        result.append(a)              # 6
+        (a, b) = (b, a + b)           # 7
+    return result                     # 8
 ```
 
 | Taxon | Lines |

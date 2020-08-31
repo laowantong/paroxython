@@ -12,7 +12,7 @@
 - give manual hints for:
     - correcting a false positive or negative;
     - adding metadata (it's more versatile than a nested directory structure);
-    - resolving duck typing on built-in types, if needed;
+    - resolving duck typing on built-in types, if needed.
 
 ## Naming things
 

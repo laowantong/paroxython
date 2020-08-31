@@ -6,8 +6,6 @@ import context
 from paroxython.preprocess_source import Cleanup
 
 # This test suite is automatically injected into the docstring of `preprocess_source.py`.
-# Modifying the position of the following assignment may require updating the function
-# `test_update_docstring()`.
 
 sources = r'''
 <<< Empty or blank lines are suppressed.
@@ -181,20 +179,15 @@ def test_full_cleaning(title, original, expected):
 
 
 def test_update_docstring():
-    offset = 13
+    indent = "\n            "
     result = []
     for (title, original, expected) in examples:
+        original = original.replace("\n", indent)
+        expected = expected.replace("\n", indent)
         result.append(f"- {title}")
-        i1 = offset
-        i2 = i1 + original.count("\n") + 1
-        j1 = i2 + 1
-        j2 = j1 + expected.count("\n") + 1
-        result.append(
-            f"""<div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice={i1}:{i2}&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice={j1}:{j2}&footer=0"></script></div></div>"""
-        )
-        print(i1, i2, j1, j2)
-        offset = j2 + 3
-    result = "\n            ".join(result)
+        result.append(fr"```python{indent}{original}{indent}```")
+        result.append(fr"```python{indent}{expected}{indent}```")
+    result = indent.join(result)
     path = Path("paroxython/preprocess_source.py")
     source = path.read_text()
     (source, n) = regex.subn(

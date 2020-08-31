@@ -8,7 +8,6 @@ import regex  # type: ignore
 
 import context
 from paroxython.cli_tag import main as tag_program
-from paroxython.goodies import add_line_numbers
 from paroxython.preprocess_source import Cleanup
 
 import draw_flow
@@ -23,13 +22,6 @@ def update_readme_example():
     source = Path("docs/resources/fibonacci.py").read_text().strip()
     readme_path = Path("README.md")
     readme_text = readme_path.read_text()
-    (readme_text, n) = regex.subn(
-        r"(?sm)^1   %%paroxython.+?(?=\n```)",
-        add_line_numbers(source),
-        readme_text,
-        count=1,
-    )
-    assert n == 1, "Example program not found."
     (readme_text, n) = regex.subn(
         r"(?sm)^\| Taxon \| Lines \|.+?(?=\n\n)",
         tag_program(f"# {source}"),
@@ -161,15 +153,6 @@ def strip_docstrings():
         source = sub_code(lambda m: m[1] + sub_docstrings("", m[2]) + m[3], source)
         source = source.replace('"git-link">Browse git</a>', '"git-link">Browse GitHub</a>')
         path.write_text(source)
-
-
-def embed_code_with_line_numbers():
-    path = Path("docs/index.html")
-    source = path.read_text()
-    embed = '<script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Flaowantong%2Fparoxython%2Fblob%2Fmaster%2Fdocs%2Fresources%2Ffibonacci.py&style=github&showBorder=on&showLineNumbers=on"></script>'
-    source = regex.sub(r"(?s) \(line numbers.+?</pre>", fr":</p>\n{embed}", source)
-    source = source.replace("docs/resources/readme_flow.png", "resources/readme_flow.png")
-    path.write_text(source)
 
 
 def cleanup_index():
@@ -386,7 +369,6 @@ def main():
     resolve_new_types()
     remove_blacklisted_sources()
     strip_docstrings()
-    embed_code_with_line_numbers()
     cleanup_index()
     insert_line_breaks()
     patch_prose()

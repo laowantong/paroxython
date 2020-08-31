@@ -259,15 +259,15 @@ var/assignment/implicit/parameter	function_parameter_flavor:arg
 var/assignment/implicit/parameter/\1	function_parameter_flavor:((?!arg$).+)
 var/assignment/implicit/parameter/self	function_parameter:self
 var/assignment/implicit/parameter/throwaway	function_parameter:_
-var/scope/global	global_scope:.+
-var/scope/local	local_scope:.+
-var/scope/outer/constant	access_outer_scope:[[:upper:]0-9_]+
-var/scope/outer/variable	access_outer_scope:(?![[:upper:]0-9_]+$).+
-var/scope/shadowing	shadowing_scope:.+
 var/deletion	node:Delete
 var/deletion/attribute	attribute_deletion:.+
 var/deletion/index	subscript_deletion:Index
 var/deletion/slice	subscript_deletion:Slice
 var/deletion/unbinding	unbinding:.+
 var/metasyntactic	(function|assignment_lhs_identifier|function_parameter|iteration_variable):(foobar|foo|bar)
+var/scope/global	global_scope:.+
+var/scope/local	local_scope:.+
+var/scope/outer/constant	access_outer_scope:[[:upper:]0-9_]+
+var/scope/outer/variable	access_outer_scope:(?![[:upper:]0-9_]+$).+
+var/scope/shadowing	shadowing_scope:.+
 -- EOF	EOF

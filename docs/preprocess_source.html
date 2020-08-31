@@ -49,7 +49,7 @@ information is just stored: <code><a title="paroxython.parse_program.ProgramPars
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L0-L357" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L0-L709" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">from collections import defaultdict
 from token import DEDENT, INDENT, NEWLINE, STRING
@@ -71,6 +71,314 @@ class Cleanup:
 
     @staticmethod
     def full_cleaning(source: Source) -&gt; Source:
+        r&#39;&#39;&#39;Remove as much noise (comments, etc.) as possible in the given source code.
+
+        Description:
+            1. Suppress initial comments.
+            2. Suppress `if __name__ == &#39;__main__&#39;` part.
+            3. Replace tabulations with spaces.
+            4. Normalize Paroxython hint comments.
+            5. Replace docstrings with `pass` statements (most of which being suppressed at the end
+               of the process).
+            6. Suppress empty or blank lines.
+            7. Suppress useless `pass` statements.
+
+        Examples:
+            - Empty or blank lines are suppressed.
+            ```python
+            foo = bar
+
+
+            bar = buzz
+
+            ```
+            ```python
+            foo = bar
+            bar = buzz
+            ```
+            - Normal inline comments are suppressed.
+            ```python
+            foo = bar # lorem ipsum
+            fizz = [
+                &#34;foo&#34;, # lorem
+                &#34;bar&#34;, # ipsum
+            ]
+            ```
+            ```python
+            foo = bar
+            fizz = [
+                &#34;foo&#34;,
+                &#34;bar&#34;,
+            ]
+            ```
+            - Commented lines are suppressed.
+            ```python
+            # lorem ipsum
+            # dolor amet
+            def foo(bar):
+                # lorem
+                # ipsum
+                if foo == bar:
+                    # lorem
+                    return []
+                # lorem
+            # ipsum
+            ```
+            ```python
+            def foo(bar):
+                if foo == bar:
+                    return []
+            ```
+            - Shebang is suppressed.
+            ```python
+            #!/usr/bin/env python
+            foobar()
+            ```
+            ```python
+            foobar()
+            ```
+            - Encoding declaration is suppressed.
+            ```python
+            # coding=utf8
+            foobar()
+            ```
+            ```python
+            foobar()
+            ```
+            - Docstrings of classes and functions are suppressed.
+            ```python
+            class Foo:
+                def foo(self, bar):
+                    return 1
+            def bar():
+                return 2
+            ```
+            ```python
+            class Foo:
+                def foo(self, bar):
+                    return 1
+            def bar():
+                return 2
+            ```
+            - Docstrings of modules are suppressed.
+            ```python
+
+            a = &#34;&#34;&#34;consectetur
+            adipiscing
+            elit.
+            ```
+            - A `pass` statement is added to empty classes if needed.
+            ```python
+            class Foo:
+            ```
+            ```python
+            class Foo:
+                pass
+            ```
+            - Useless `pass` statements are suppressed.
+            ```python
+            foo()
+            pass
+            if bar():
+                pass
+            else:
+                pass
+                foobar()
+                pass
+            ```
+            ```python
+            foo()
+            if bar():
+                pass
+            else:
+                foobar()
+                pass
+            ```
+            - Mixes of comments and docstrings are suppressed.
+            ```python
+            # Lorem
+            # Ipsum
+            foobar()
+            ```
+            ```python
+            foobar()
+            ```
+            - Paroxython&#39;s label hints are **preserved** and **normalized**.
+            ```python
+            foo = bar #   Paroxython   :   hint_1   hint_2
+            #paroxython: hint_3
+            fizz = [
+                &#34;foo&#34;, # lorem
+                &#34;bar&#34;, # paroxython: hint_4
+            ]
+            ```
+            ```python
+            foo = bar # paroxython: hint_1   hint_2
+            # paroxython: hint_3
+            fizz = [
+                &#34;foo&#34;,
+                &#34;bar&#34;, # paroxython: hint_4
+            ]
+            ```
+            - `if __name__ == &#34;__main__&#34;:` part is suppressed.
+            ```python
+            foo = bar
+            if __name__ == &#34;__main__&#34;:
+                bar = foo
+            ```
+            ```python
+            foo = bar
+            ```
+
+
+            bar = buzz
+
+            ```
+            ```python
+            foo = bar
+            bar = buzz
+            ```
+            - Normal inline comments are suppressed.
+            ```python
+            foo = bar # lorem ipsum
+            fizz = [
+                &#34;foo&#34;, # lorem
+                &#34;bar&#34;, # ipsum
+            ]
+            ```
+            ```python
+            foo = bar
+            fizz = [
+                &#34;foo&#34;,
+                &#34;bar&#34;,
+            ]
+            ```
+            - Commented lines are suppressed.
+            ```python
+            # lorem ipsum
+            # dolor amet
+            def foo(bar):
+                # lorem
+                # ipsum
+                if foo == bar:
+                    # lorem
+                    return []
+                # lorem
+            # ipsum
+            ```
+            ```python
+            def foo(bar):
+                if foo == bar:
+                    return []
+            ```
+            - Shebang is suppressed.
+            ```python
+            #!/usr/bin/env python
+            foobar()
+            ```
+            ```python
+            foobar()
+            ```
+            - Encoding declaration is suppressed.
+            ```python
+            # coding=utf8
+            foobar()
+            ```
+            ```python
+            foobar()
+            ```
+            - Docstrings of classes and functions are suppressed.
+            ```python
+            class Foo:
+                def foo(self, bar):
+                    return 1
+            def bar():
+                return 2
+            ```
+            ```python
+            class Foo:
+                def foo(self, bar):
+                    return 1
+            def bar():
+                return 2
+            ```
+            - Docstrings of modules are suppressed.
+            ```python
+
+            a = &#34;&#34;&#34;consectetur
+            adipiscing
+            elit.
+            ```
+            - A `pass` statement is added to empty classes if needed.
+            ```python
+            class Foo:
+            ```
+            ```python
+            class Foo:
+                pass
+            ```
+            - Useless `pass` statements are suppressed.
+            ```python
+            foo()
+            pass
+            if bar():
+                pass
+            else:
+                pass
+                foobar()
+                pass
+            ```
+            ```python
+            foo()
+            if bar():
+                pass
+            else:
+                foobar()
+                pass
+            ```
+            - Mixes of comments and docstrings are suppressed.
+            ```python
+            # Lorem
+            # Ipsum
+            foobar()
+            ```
+            ```python
+            foobar()
+            ```
+            - Paroxython&#39;s label hints are **preserved** and **normalized**.
+            ```python
+            foo = bar #   Paroxython   :   hint_1   hint_2
+            #paroxython: hint_3
+            fizz = [
+                &#34;foo&#34;, # lorem
+                &#34;bar&#34;, # paroxython: hint_4
+            ]
+            ```
+            ```python
+            foo = bar # paroxython: hint_1   hint_2
+            # paroxython: hint_3
+            fizz = [
+                &#34;foo&#34;,
+                &#34;bar&#34;, # paroxython: hint_4
+            ]
+            ```
+            - `if __name__ == &#34;__main__&#34;:` part is suppressed.
+            ```python
+            foo = bar
+            if __name__ == &#34;__main__&#34;:
+                bar = foo
+            ```
+            ```python
+            foo = bar
+            ```
+
+            All examples above automatically extracted from
+            [test_cleanup_source.py](https://github.com/laowantong/paroxython/blob/master/tests/test_cleanup_source.py).
+
+        .. warning::
+            Useless pass statements are preserved when they are not followed by a line with a same
+            indentation level.
+        &#39;&#39;&#39;
         result = []
         previous_token = INDENT
         (previous_end_row, previous_end_col) = (-1, 0)
@@ -243,13 +551,54 @@ These hints are moved to both ends of the source (centrifugated), and made open 
 first line and close on the last line.</p>
 <h2 id="examples">Examples</h2>
 <ul>
-<li>Some isolated hints (<code>hint_3</code> and <code>hint_5</code> are centrifugated).
-<div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_centrifugate_hints.py?slice=10:17&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_centrifugate_hints.py?slice=18:23&footer=0"></script></div></div></li>
-<li>Some trailing isolated hints (<code>hint_5</code> and <code>hint_6</code> are centrifugated).
-<div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_centrifugate_hints.py?slice=26:33&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_centrifugate_hints.py?slice=34:39&footer=0"></script></div></div></li>
-<li>No isolated hints (no centrifugation of the existing hints).
-<div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_centrifugate_hints.py?slice=42:47&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_centrifugate_hints.py?slice=48:53&footer=0"></script></div></div></li>
+<li>Some isolated hints (<code>hint_3</code> and <code>hint_5</code> are centrifugated).</li>
 </ul>
+<pre><code class="python">foo = bar # paroxython: hint_1 hint_2
+# paroxython: hint_3
+fizz = [
+    &quot;foo&quot;,
+    &quot;bar&quot;, # paroxython: hint_4
+    # paroxython: hint_5
+]
+</code></pre>
+<pre><code class="python">foo = bar # paroxython: hint_1 hint_2 hint_3... hint_5...
+fizz = [
+    &quot;foo&quot;,
+    &quot;bar&quot;, # paroxython: hint_4
+] # paroxython: ...hint_3 ...hint_5
+</code></pre>
+<ul>
+<li>Some trailing isolated hints (<code>hint_5</code> and <code>hint_6</code> are centrifugated).</li>
+</ul>
+<pre><code class="python">foo = bar # paroxython: hint_1 hint_2
+fizz = [
+    &quot;foo&quot;,
+    &quot;bar&quot;, # paroxython: hint_3
+] # paroxython: hint_4
+# paroxython: hint_5
+# paroxython: hint_6
+</code></pre>
+<pre><code class="python">foo = bar # paroxython: hint_1 hint_2 hint_5... hint_6...
+fizz = [
+    &quot;foo&quot;,
+    &quot;bar&quot;, # paroxython: hint_3
+] # paroxython: hint_4 ...hint_5 ...hint_6
+</code></pre>
+<ul>
+<li>No isolated hints (no centrifugation of the existing hints).</li>
+</ul>
+<pre><code class="python">foo = bar # paroxython: hint_1 hint_2
+fizz = [
+    &quot;foo&quot;,
+    &quot;bar&quot;, # paroxython: hint_4
+]
+</code></pre>
+<pre><code class="python">foo = bar # paroxython: hint_1 hint_2
+fizz = [
+    &quot;foo&quot;,
+    &quot;bar&quot;, # paroxython: hint_4
+]
+</code></pre>
 <p>All examples above automatically extracted from
 <a href="https://github.com/laowantong/paroxython/blob/master/tests/test_centrifugate_hints.py">test_centrifugate_hints.py</a>.</p>
 <p>Argument <code>match_isolated_hints</code> <a href="developer_manual/index.html#default-argument-trick">not to be explicitly provided.</a></p>
@@ -259,7 +608,7 @@ first line and close on the last line.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L190-L233" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L499-L585" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def centrifugate_hints(
     source: Source, match_isolated_hints: Callable = regex.compile(fr&#34;\s*{HINT_COMMENT} (.+)&#34;).match
@@ -344,7 +693,7 @@ has manually added [resp. suppressed].</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L270-L347" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L622-L699" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def collect_hints(
     source: Source,
@@ -388,7 +737,7 @@ has manually added [resp. suppressed].</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L350-L358" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L702-L710" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def remove_hints(
     source: Source,
@@ -422,7 +771,7 @@ has manually added [resp. suppressed].</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L39-L187" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L39-L496" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">class Cleanup:
     def __init__(self, cleanup_strategy: str):
@@ -432,6 +781,314 @@ has manually added [resp. suppressed].</dd>
 
     @staticmethod
     def full_cleaning(source: Source) -&gt; Source:
+        r&#39;&#39;&#39;Remove as much noise (comments, etc.) as possible in the given source code.
+
+        Description:
+            1. Suppress initial comments.
+            2. Suppress `if __name__ == &#39;__main__&#39;` part.
+            3. Replace tabulations with spaces.
+            4. Normalize Paroxython hint comments.
+            5. Replace docstrings with `pass` statements (most of which being suppressed at the end
+               of the process).
+            6. Suppress empty or blank lines.
+            7. Suppress useless `pass` statements.
+
+        Examples:
+            - Empty or blank lines are suppressed.
+            ```python
+            foo = bar
+
+
+            bar = buzz
+
+            ```
+            ```python
+            foo = bar
+            bar = buzz
+            ```
+            - Normal inline comments are suppressed.
+            ```python
+            foo = bar # lorem ipsum
+            fizz = [
+                &#34;foo&#34;, # lorem
+                &#34;bar&#34;, # ipsum
+            ]
+            ```
+            ```python
+            foo = bar
+            fizz = [
+                &#34;foo&#34;,
+                &#34;bar&#34;,
+            ]
+            ```
+            - Commented lines are suppressed.
+            ```python
+            # lorem ipsum
+            # dolor amet
+            def foo(bar):
+                # lorem
+                # ipsum
+                if foo == bar:
+                    # lorem
+                    return []
+                # lorem
+            # ipsum
+            ```
+            ```python
+            def foo(bar):
+                if foo == bar:
+                    return []
+            ```
+            - Shebang is suppressed.
+            ```python
+            #!/usr/bin/env python
+            foobar()
+            ```
+            ```python
+            foobar()
+            ```
+            - Encoding declaration is suppressed.
+            ```python
+            # coding=utf8
+            foobar()
+            ```
+            ```python
+            foobar()
+            ```
+            - Docstrings of classes and functions are suppressed.
+            ```python
+            class Foo:
+                def foo(self, bar):
+                    return 1
+            def bar():
+                return 2
+            ```
+            ```python
+            class Foo:
+                def foo(self, bar):
+                    return 1
+            def bar():
+                return 2
+            ```
+            - Docstrings of modules are suppressed.
+            ```python
+
+            a = &#34;&#34;&#34;consectetur
+            adipiscing
+            elit.
+            ```
+            - A `pass` statement is added to empty classes if needed.
+            ```python
+            class Foo:
+            ```
+            ```python
+            class Foo:
+                pass
+            ```
+            - Useless `pass` statements are suppressed.
+            ```python
+            foo()
+            pass
+            if bar():
+                pass
+            else:
+                pass
+                foobar()
+                pass
+            ```
+            ```python
+            foo()
+            if bar():
+                pass
+            else:
+                foobar()
+                pass
+            ```
+            - Mixes of comments and docstrings are suppressed.
+            ```python
+            # Lorem
+            # Ipsum
+            foobar()
+            ```
+            ```python
+            foobar()
+            ```
+            - Paroxython&#39;s label hints are **preserved** and **normalized**.
+            ```python
+            foo = bar #   Paroxython   :   hint_1   hint_2
+            #paroxython: hint_3
+            fizz = [
+                &#34;foo&#34;, # lorem
+                &#34;bar&#34;, # paroxython: hint_4
+            ]
+            ```
+            ```python
+            foo = bar # paroxython: hint_1   hint_2
+            # paroxython: hint_3
+            fizz = [
+                &#34;foo&#34;,
+                &#34;bar&#34;, # paroxython: hint_4
+            ]
+            ```
+            - `if __name__ == &#34;__main__&#34;:` part is suppressed.
+            ```python
+            foo = bar
+            if __name__ == &#34;__main__&#34;:
+                bar = foo
+            ```
+            ```python
+            foo = bar
+            ```
+
+
+            bar = buzz
+
+            ```
+            ```python
+            foo = bar
+            bar = buzz
+            ```
+            - Normal inline comments are suppressed.
+            ```python
+            foo = bar # lorem ipsum
+            fizz = [
+                &#34;foo&#34;, # lorem
+                &#34;bar&#34;, # ipsum
+            ]
+            ```
+            ```python
+            foo = bar
+            fizz = [
+                &#34;foo&#34;,
+                &#34;bar&#34;,
+            ]
+            ```
+            - Commented lines are suppressed.
+            ```python
+            # lorem ipsum
+            # dolor amet
+            def foo(bar):
+                # lorem
+                # ipsum
+                if foo == bar:
+                    # lorem
+                    return []
+                # lorem
+            # ipsum
+            ```
+            ```python
+            def foo(bar):
+                if foo == bar:
+                    return []
+            ```
+            - Shebang is suppressed.
+            ```python
+            #!/usr/bin/env python
+            foobar()
+            ```
+            ```python
+            foobar()
+            ```
+            - Encoding declaration is suppressed.
+            ```python
+            # coding=utf8
+            foobar()
+            ```
+            ```python
+            foobar()
+            ```
+            - Docstrings of classes and functions are suppressed.
+            ```python
+            class Foo:
+                def foo(self, bar):
+                    return 1
+            def bar():
+                return 2
+            ```
+            ```python
+            class Foo:
+                def foo(self, bar):
+                    return 1
+            def bar():
+                return 2
+            ```
+            - Docstrings of modules are suppressed.
+            ```python
+
+            a = &#34;&#34;&#34;consectetur
+            adipiscing
+            elit.
+            ```
+            - A `pass` statement is added to empty classes if needed.
+            ```python
+            class Foo:
+            ```
+            ```python
+            class Foo:
+                pass
+            ```
+            - Useless `pass` statements are suppressed.
+            ```python
+            foo()
+            pass
+            if bar():
+                pass
+            else:
+                pass
+                foobar()
+                pass
+            ```
+            ```python
+            foo()
+            if bar():
+                pass
+            else:
+                foobar()
+                pass
+            ```
+            - Mixes of comments and docstrings are suppressed.
+            ```python
+            # Lorem
+            # Ipsum
+            foobar()
+            ```
+            ```python
+            foobar()
+            ```
+            - Paroxython&#39;s label hints are **preserved** and **normalized**.
+            ```python
+            foo = bar #   Paroxython   :   hint_1   hint_2
+            #paroxython: hint_3
+            fizz = [
+                &#34;foo&#34;, # lorem
+                &#34;bar&#34;, # paroxython: hint_4
+            ]
+            ```
+            ```python
+            foo = bar # paroxython: hint_1   hint_2
+            # paroxython: hint_3
+            fizz = [
+                &#34;foo&#34;,
+                &#34;bar&#34;, # paroxython: hint_4
+            ]
+            ```
+            - `if __name__ == &#34;__main__&#34;:` part is suppressed.
+            ```python
+            foo = bar
+            if __name__ == &#34;__main__&#34;:
+                bar = foo
+            ```
+            ```python
+            foo = bar
+            ```
+
+            All examples above automatically extracted from
+            [test_cleanup_source.py](https://github.com/laowantong/paroxython/blob/master/tests/test_cleanup_source.py).
+
+        .. warning::
+            Useless pass statements are preserved when they are not followed by a line with a same
+            indentation level.
+        &#39;&#39;&#39;
         result = []
         previous_token = INDENT
         (previous_end_row, previous_end_col) = (-1, 0)
@@ -517,31 +1174,334 @@ of the process).</li>
 </ol>
 <h2 id="examples">Examples</h2>
 <ul>
-<li>Empty or blank lines are suppressed.
-<div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=13:18&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=19:21&footer=0"></script></div></div></li>
-<li>Normal inline comments are suppressed.
-<div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=24:29&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=30:35&footer=0"></script></div></div></li>
-<li>Commented lines are suppressed.
-<div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=38:48&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=49:52&footer=0"></script></div></div></li>
-<li>Shebang is suppressed.
-<div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=55:57&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=58:59&footer=0"></script></div></div></li>
-<li>Encoding declaration is suppressed.
-<div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=62:64&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=65:66&footer=0"></script></div></div></li>
-<li>Docstrings of classes and functions are suppressed.
-<div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=69:80&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=81:86&footer=0"></script></div></div></li>
-<li>Docstrings of modules are suppressed.
-<div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=89:99&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=100:104&footer=0"></script></div></div></li>
-<li>A <code>pass</code> statement is added to empty classes if needed.
-<div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=107:112&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=113:115&footer=0"></script></div></div></li>
-<li>Useless <code>pass</code> statements are suppressed.
-<div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=118:126&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=127:133&footer=0"></script></div></div></li>
-<li>Mixes of comments and docstrings are suppressed.
-<div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=136:140&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=141:142&footer=0"></script></div></div></li>
-<li>Paroxython's label hints are <strong>preserved</strong> and <strong>normalized</strong>.
-<div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=145:151&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=152:158&footer=0"></script></div></div></li>
-<li><code>if __name__ == "__main__":</code> part is suppressed.
-<div><div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=161:164&footer=0"></script></div> <div style="display: inline-block; width: 49%;; vertical-align: top"><script src="https://gist-it.appspot.com/github.com/laowantong/paroxython/raw/master/tests/test_cleanup_source.py?slice=165:166&footer=0"></script></div></div></li>
+<li>Empty or blank lines are suppressed.</li>
 </ul>
+<pre><code class="python">foo = bar
+
+
+bar = buzz
+
+</code></pre>
+<pre><code class="python">foo = bar
+bar = buzz
+</code></pre>
+<ul>
+<li>Normal inline comments are suppressed.</li>
+</ul>
+<pre><code class="python">foo = bar # lorem ipsum
+fizz = [
+    &quot;foo&quot;, # lorem
+    &quot;bar&quot;, # ipsum
+]
+</code></pre>
+<pre><code class="python">foo = bar
+fizz = [
+    &quot;foo&quot;,
+    &quot;bar&quot;,
+]
+</code></pre>
+<ul>
+<li>Commented lines are suppressed.</li>
+</ul>
+<pre><code class="python"># lorem ipsum
+# dolor amet
+def foo(bar):
+    # lorem
+    # ipsum
+    if foo == bar:
+        # lorem
+        return []
+    # lorem
+# ipsum
+</code></pre>
+<pre><code class="python">def foo(bar):
+    if foo == bar:
+        return []
+</code></pre>
+<ul>
+<li>Shebang is suppressed.</li>
+</ul>
+<pre><code class="python">#!/usr/bin/env python
+foobar()
+</code></pre>
+<pre><code class="python">foobar()
+</code></pre>
+<ul>
+<li>Encoding declaration is suppressed.</li>
+</ul>
+<pre><code class="python"># coding=utf8
+foobar()
+</code></pre>
+<pre><code class="python">foobar()
+</code></pre>
+<ul>
+<li>Docstrings of classes and functions are suppressed.</li>
+</ul>
+<pre><code class="python">class Foo:
+    &quot;&quot;&quot;Lorem.
+
+    Ipsum dolor.
+    &quot;&quot;&quot;
+    def foo(self, bar):
+        &quot;&quot;&quot;Lorem ipsum.&quot;&quot;&quot;
+        return 1
+def bar():
+    &quot;&quot;&quot;Ipsum dolor&quot;&quot;&quot;
+    return 2
+</code></pre>
+<pre><code class="python">class Foo:
+    def foo(self, bar):
+        return 1
+def bar():
+    return 2
+</code></pre>
+<ul>
+<li>Docstrings of modules are suppressed.</li>
+</ul>
+<pre><code class="python">&quot;&quot;&quot;Lorem.
+
+Ipsum Dolor.&quot;&quot;&quot;
+
+&quot;&quot;&quot;Lorem ipsum dolor sic amet.&quot;&quot;&quot;
+
+a = &quot;&quot;&quot;consectetur
+adipiscing
+elit.
+&quot;&quot;&quot;
+</code></pre>
+<pre><code class="python">a = &quot;&quot;&quot;consectetur
+adipiscing
+elit.
+&quot;&quot;&quot;
+</code></pre>
+<ul>
+<li>A <code>pass</code> statement is added to empty classes if needed.</li>
+</ul>
+<pre><code class="python">class Foo:
+    &quot;&quot;&quot;Lorem.
+
+    Ipsum dolor.
+    &quot;&quot;&quot;
+</code></pre>
+<pre><code class="python">class Foo:
+    pass
+</code></pre>
+<ul>
+<li>Useless <code>pass</code> statements are suppressed.</li>
+</ul>
+<pre><code class="python">foo()
+pass
+if bar():
+    pass
+else:
+    pass
+    foobar()
+    pass
+</code></pre>
+<pre><code class="python">foo()
+if bar():
+    pass
+else:
+    foobar()
+    pass
+</code></pre>
+<ul>
+<li>Mixes of comments and docstrings are suppressed.</li>
+</ul>
+<pre><code class="python"># Lorem
+# Ipsum
+&quot;&quot;&quot;Dolor.&quot;&quot;&quot;
+foobar()
+</code></pre>
+<pre><code class="python">foobar()
+</code></pre>
+<ul>
+<li>Paroxython's label hints are <strong>preserved</strong> and <strong>normalized</strong>.</li>
+</ul>
+<pre><code class="python">foo = bar #   Paroxython   :   hint_1   hint_2
+#paroxython: hint_3
+fizz = [
+    &quot;foo&quot;, # lorem
+    &quot;bar&quot;, # paroxython: hint_4
+]
+</code></pre>
+<pre><code class="python">foo = bar # paroxython: hint_1   hint_2
+# paroxython: hint_3
+fizz = [
+    &quot;foo&quot;,
+    &quot;bar&quot;, # paroxython: hint_4
+]
+</code></pre>
+<ul>
+<li><code>if __name__ == "__main__":</code> part is suppressed.</li>
+</ul>
+<pre><code class="python">foo = bar
+if __name__ == &quot;__main__&quot;:
+    bar = foo
+</code></pre>
+<pre><code class="python">foo = bar
+</code></pre>
+<p>bar = buzz</p>
+<pre><code>```python
+foo = bar
+bar = buzz
+</code></pre>
+<ul>
+<li>Normal inline comments are suppressed.</li>
+</ul>
+<pre><code class="python">foo = bar # lorem ipsum
+fizz = [
+    &quot;foo&quot;, # lorem
+    &quot;bar&quot;, # ipsum
+]
+</code></pre>
+<pre><code class="python">foo = bar
+fizz = [
+    &quot;foo&quot;,
+    &quot;bar&quot;,
+]
+</code></pre>
+<ul>
+<li>Commented lines are suppressed.</li>
+</ul>
+<pre><code class="python"># lorem ipsum
+# dolor amet
+def foo(bar):
+    # lorem
+    # ipsum
+    if foo == bar:
+        # lorem
+        return []
+    # lorem
+# ipsum
+</code></pre>
+<pre><code class="python">def foo(bar):
+    if foo == bar:
+        return []
+</code></pre>
+<ul>
+<li>Shebang is suppressed.</li>
+</ul>
+<pre><code class="python">#!/usr/bin/env python
+foobar()
+</code></pre>
+<pre><code class="python">foobar()
+</code></pre>
+<ul>
+<li>Encoding declaration is suppressed.</li>
+</ul>
+<pre><code class="python"># coding=utf8
+foobar()
+</code></pre>
+<pre><code class="python">foobar()
+</code></pre>
+<ul>
+<li>Docstrings of classes and functions are suppressed.</li>
+</ul>
+<pre><code class="python">class Foo:
+    &quot;&quot;&quot;Lorem.
+
+    Ipsum dolor.
+    &quot;&quot;&quot;
+    def foo(self, bar):
+        &quot;&quot;&quot;Lorem ipsum.&quot;&quot;&quot;
+        return 1
+def bar():
+    &quot;&quot;&quot;Ipsum dolor&quot;&quot;&quot;
+    return 2
+</code></pre>
+<pre><code class="python">class Foo:
+    def foo(self, bar):
+        return 1
+def bar():
+    return 2
+</code></pre>
+<ul>
+<li>Docstrings of modules are suppressed.</li>
+</ul>
+<pre><code class="python">&quot;&quot;&quot;Lorem.
+
+Ipsum Dolor.&quot;&quot;&quot;
+
+&quot;&quot;&quot;Lorem ipsum dolor sic amet.&quot;&quot;&quot;
+
+a = &quot;&quot;&quot;consectetur
+adipiscing
+elit.
+&quot;&quot;&quot;
+</code></pre>
+<pre><code class="python">a = &quot;&quot;&quot;consectetur
+adipiscing
+elit.
+&quot;&quot;&quot;
+</code></pre>
+<ul>
+<li>A <code>pass</code> statement is added to empty classes if needed.</li>
+</ul>
+<pre><code class="python">class Foo:
+    &quot;&quot;&quot;Lorem.
+
+    Ipsum dolor.
+    &quot;&quot;&quot;
+</code></pre>
+<pre><code class="python">class Foo:
+    pass
+</code></pre>
+<ul>
+<li>Useless <code>pass</code> statements are suppressed.</li>
+</ul>
+<pre><code class="python">foo()
+pass
+if bar():
+    pass
+else:
+    pass
+    foobar()
+    pass
+</code></pre>
+<pre><code class="python">foo()
+if bar():
+    pass
+else:
+    foobar()
+    pass
+</code></pre>
+<ul>
+<li>Mixes of comments and docstrings are suppressed.</li>
+</ul>
+<pre><code class="python"># Lorem
+# Ipsum
+&quot;&quot;&quot;Dolor.&quot;&quot;&quot;
+foobar()
+</code></pre>
+<pre><code class="python">foobar()
+</code></pre>
+<ul>
+<li>Paroxython's label hints are <strong>preserved</strong> and <strong>normalized</strong>.</li>
+</ul>
+<pre><code class="python">foo = bar #   Paroxython   :   hint_1   hint_2
+#paroxython: hint_3
+fizz = [
+    &quot;foo&quot;, # lorem
+    &quot;bar&quot;, # paroxython: hint_4
+]
+</code></pre>
+<pre><code class="python">foo = bar # paroxython: hint_1   hint_2
+# paroxython: hint_3
+fizz = [
+    &quot;foo&quot;,
+    &quot;bar&quot;, # paroxython: hint_4
+]
+</code></pre>
+<ul>
+<li><code>if __name__ == "__main__":</code> part is suppressed.</li>
+</ul>
+<pre><code class="python">foo = bar
+if __name__ == &quot;__main__&quot;:
+    bar = foo
+</code></pre>
+<pre><code class="python">foo = bar
+</code></pre>
 <p>All examples above automatically extracted from
 <a href="https://github.com/laowantong/paroxython/blob/master/tests/test_cleanup_source.py">test_cleanup_source.py</a>.</p>
 <div class="admonition warning">
@@ -552,10 +1512,318 @@ indentation level.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L54-L131" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L54-L440" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">@staticmethod
 def full_cleaning(source: Source) -&gt; Source:
+    r&#39;&#39;&#39;Remove as much noise (comments, etc.) as possible in the given source code.
+
+    Description:
+        1. Suppress initial comments.
+        2. Suppress `if __name__ == &#39;__main__&#39;` part.
+        3. Replace tabulations with spaces.
+        4. Normalize Paroxython hint comments.
+        5. Replace docstrings with `pass` statements (most of which being suppressed at the end
+           of the process).
+        6. Suppress empty or blank lines.
+        7. Suppress useless `pass` statements.
+
+    Examples:
+        - Empty or blank lines are suppressed.
+        ```python
+        foo = bar
+
+
+        bar = buzz
+
+        ```
+        ```python
+        foo = bar
+        bar = buzz
+        ```
+        - Normal inline comments are suppressed.
+        ```python
+        foo = bar # lorem ipsum
+        fizz = [
+            &#34;foo&#34;, # lorem
+            &#34;bar&#34;, # ipsum
+        ]
+        ```
+        ```python
+        foo = bar
+        fizz = [
+            &#34;foo&#34;,
+            &#34;bar&#34;,
+        ]
+        ```
+        - Commented lines are suppressed.
+        ```python
+        # lorem ipsum
+        # dolor amet
+        def foo(bar):
+            # lorem
+            # ipsum
+            if foo == bar:
+                # lorem
+                return []
+            # lorem
+        # ipsum
+        ```
+        ```python
+        def foo(bar):
+            if foo == bar:
+                return []
+        ```
+        - Shebang is suppressed.
+        ```python
+        #!/usr/bin/env python
+        foobar()
+        ```
+        ```python
+        foobar()
+        ```
+        - Encoding declaration is suppressed.
+        ```python
+        # coding=utf8
+        foobar()
+        ```
+        ```python
+        foobar()
+        ```
+        - Docstrings of classes and functions are suppressed.
+        ```python
+        class Foo:
+            def foo(self, bar):
+                return 1
+        def bar():
+            return 2
+        ```
+        ```python
+        class Foo:
+            def foo(self, bar):
+                return 1
+        def bar():
+            return 2
+        ```
+        - Docstrings of modules are suppressed.
+        ```python
+
+        a = &#34;&#34;&#34;consectetur
+        adipiscing
+        elit.
+        ```
+        - A `pass` statement is added to empty classes if needed.
+        ```python
+        class Foo:
+        ```
+        ```python
+        class Foo:
+            pass
+        ```
+        - Useless `pass` statements are suppressed.
+        ```python
+        foo()
+        pass
+        if bar():
+            pass
+        else:
+            pass
+            foobar()
+            pass
+        ```
+        ```python
+        foo()
+        if bar():
+            pass
+        else:
+            foobar()
+            pass
+        ```
+        - Mixes of comments and docstrings are suppressed.
+        ```python
+        # Lorem
+        # Ipsum
+        foobar()
+        ```
+        ```python
+        foobar()
+        ```
+        - Paroxython&#39;s label hints are **preserved** and **normalized**.
+        ```python
+        foo = bar #   Paroxython   :   hint_1   hint_2
+        #paroxython: hint_3
+        fizz = [
+            &#34;foo&#34;, # lorem
+            &#34;bar&#34;, # paroxython: hint_4
+        ]
+        ```
+        ```python
+        foo = bar # paroxython: hint_1   hint_2
+        # paroxython: hint_3
+        fizz = [
+            &#34;foo&#34;,
+            &#34;bar&#34;, # paroxython: hint_4
+        ]
+        ```
+        - `if __name__ == &#34;__main__&#34;:` part is suppressed.
+        ```python
+        foo = bar
+        if __name__ == &#34;__main__&#34;:
+            bar = foo
+        ```
+        ```python
+        foo = bar
+        ```
+
+
+        bar = buzz
+
+        ```
+        ```python
+        foo = bar
+        bar = buzz
+        ```
+        - Normal inline comments are suppressed.
+        ```python
+        foo = bar # lorem ipsum
+        fizz = [
+            &#34;foo&#34;, # lorem
+            &#34;bar&#34;, # ipsum
+        ]
+        ```
+        ```python
+        foo = bar
+        fizz = [
+            &#34;foo&#34;,
+            &#34;bar&#34;,
+        ]
+        ```
+        - Commented lines are suppressed.
+        ```python
+        # lorem ipsum
+        # dolor amet
+        def foo(bar):
+            # lorem
+            # ipsum
+            if foo == bar:
+                # lorem
+                return []
+            # lorem
+        # ipsum
+        ```
+        ```python
+        def foo(bar):
+            if foo == bar:
+                return []
+        ```
+        - Shebang is suppressed.
+        ```python
+        #!/usr/bin/env python
+        foobar()
+        ```
+        ```python
+        foobar()
+        ```
+        - Encoding declaration is suppressed.
+        ```python
+        # coding=utf8
+        foobar()
+        ```
+        ```python
+        foobar()
+        ```
+        - Docstrings of classes and functions are suppressed.
+        ```python
+        class Foo:
+            def foo(self, bar):
+                return 1
+        def bar():
+            return 2
+        ```
+        ```python
+        class Foo:
+            def foo(self, bar):
+                return 1
+        def bar():
+            return 2
+        ```
+        - Docstrings of modules are suppressed.
+        ```python
+
+        a = &#34;&#34;&#34;consectetur
+        adipiscing
+        elit.
+        ```
+        - A `pass` statement is added to empty classes if needed.
+        ```python
+        class Foo:
+        ```
+        ```python
+        class Foo:
+            pass
+        ```
+        - Useless `pass` statements are suppressed.
+        ```python
+        foo()
+        pass
+        if bar():
+            pass
+        else:
+            pass
+            foobar()
+            pass
+        ```
+        ```python
+        foo()
+        if bar():
+            pass
+        else:
+            foobar()
+            pass
+        ```
+        - Mixes of comments and docstrings are suppressed.
+        ```python
+        # Lorem
+        # Ipsum
+        foobar()
+        ```
+        ```python
+        foobar()
+        ```
+        - Paroxython&#39;s label hints are **preserved** and **normalized**.
+        ```python
+        foo = bar #   Paroxython   :   hint_1   hint_2
+        #paroxython: hint_3
+        fizz = [
+            &#34;foo&#34;, # lorem
+            &#34;bar&#34;, # paroxython: hint_4
+        ]
+        ```
+        ```python
+        foo = bar # paroxython: hint_1   hint_2
+        # paroxython: hint_3
+        fizz = [
+            &#34;foo&#34;,
+            &#34;bar&#34;, # paroxython: hint_4
+        ]
+        ```
+        - `if __name__ == &#34;__main__&#34;:` part is suppressed.
+        ```python
+        foo = bar
+        if __name__ == &#34;__main__&#34;:
+            bar = foo
+        ```
+        ```python
+        foo = bar
+        ```
+
+        All examples above automatically extracted from
+        [test_cleanup_source.py](https://github.com/laowantong/paroxython/blob/master/tests/test_cleanup_source.py).
+
+    .. warning::
+        Useless pass statements are preserved when they are not followed by a line with a same
+        indentation level.
+    &#39;&#39;&#39;
     result = []
     previous_token = INDENT
     (previous_end_row, previous_end_col) = (-1, 0)
@@ -598,7 +1866,7 @@ def full_cleaning(source: Source) -&gt; Source:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L133-L141" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L442-L450" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">@staticmethod
 def suppress_first_comments(
@@ -616,7 +1884,7 @@ def suppress_first_comments(
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L143-L151" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L452-L460" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">@staticmethod
 def suppress_main_guard(
@@ -636,7 +1904,7 @@ pattern will be <code>r"(?i)#\s*paroxython\s*:\s*"</code>.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L153-L168" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L462-L477" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">@staticmethod
 def normalize_paroxython_comments(
@@ -658,7 +1926,7 @@ def normalize_paroxython_comments(
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L170-L176" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L479-L485" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">@staticmethod
 def suppress_blank_lines(source: str, sub: Callable = regex.compile(r&#34;\s*\n&#34;).sub) -&gt; str:
@@ -674,7 +1942,7 @@ def suppress_blank_lines(source: str, sub: Callable = regex.compile(r&#34;\s*\n&
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L178-L187" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L487-L496" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">@staticmethod
 def suppress_useless_pass_statements(
@@ -695,7 +1963,7 @@ def suppress_useless_pass_statements(
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L236-L267" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L588-L619" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">class HintBuffer:
     def __init__(self, description: str) -&gt; None:
@@ -732,7 +2000,7 @@ def suppress_useless_pass_statements(
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L244-L246" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L596-L598" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def append_hint(self, label_name: LabelName, line_number: int) -&gt; None:
     self.result[label_name].append(Span(line_number, line_number))</code></pre>
@@ -746,7 +2014,7 @@ def suppress_useless_pass_statements(
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L248-L250" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L600-L602" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def open_hint(self, label_name: LabelName, line_number: int) -&gt; None:
     self.stack[label_name].append(line_number)</code></pre>
@@ -760,7 +2028,7 @@ def suppress_useless_pass_statements(
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L252-L254" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L604-L606" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def get_champion(self, label_name: LabelName) -&gt; List[Tuple[int, &#34;HintBuffer&#34;]]:
     return [(self.stack[label_name][-1], self)] if self.stack[label_name] else []</code></pre>
@@ -774,7 +2042,7 @@ def suppress_useless_pass_statements(
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L256-L258" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L608-L610" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def close_hint(self, label_name: LabelName, line_number: int) -&gt; None:
     self.result[label_name].append(Span(self.stack[label_name].pop(), line_number))</code></pre>
@@ -788,7 +2056,7 @@ def suppress_useless_pass_statements(
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L260-L263" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L612-L615" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def ensure_stack_is_empty(self) -&gt; None:
     if any(self.stack.values()):
@@ -803,7 +2071,7 @@ def suppress_useless_pass_statements(
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L265-L267" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L617-L619" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def get_result(self) -&gt; LabelsSpans:
     return {k: sorted(v) for (k, v) in self.result.items()}</code></pre>

@@ -135,7 +135,15 @@ Dumped: programs_recommendations.md.
 <pre><code class="python">%load_ext paroxython
 </code></pre>
 <p>This should print <code>"paroxython 0.4.7 loaded."</code>. Run it on a cell of Python code:</p>
-<script src="https://emgithub.com/embed.js?target=https%3A%2F%2Fgithub.com%2Flaowantong%2Fparoxython%2Fblob%2Fmaster%2Fdocs%2Fresources%2Ffibonacci.py&style=github&showBorder=on&showLineNumbers=on"></script>
+<pre><code class="python">%%paroxython                          # Lines
+def fibonacci(n):                     # 2
+    result = []                       # 3
+    (a, b) = (0, 1)                   # 4
+    while a &lt; n:                      # 5
+        result.append(a)              # 6
+        (a, b) = (b, a + b)           # 7
+    return result                     # 8
+</code></pre>
 <table>
 <thead>
 <tr>
